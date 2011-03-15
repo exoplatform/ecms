@@ -61,7 +61,7 @@ import org.exoplatform.webui.event.EventListener;
  * Created by The eXo Platform SARL
  * Author : Dang Van Minh
  *          minh.dang@exoplatform.com
- * Dec 29, 2006  
+ * Dec 29, 2006
  * 11:30:17 AM
  */
 @ComponentConfig(
@@ -74,16 +74,18 @@ public class UILockNodeList extends UIComponentDecorator {
   final static public String[] ACTIONS = {};
   final static public String ST_EDIT = "EditUnLockForm";
   private UIPageIterator uiPageIterator_;
-  
-  private static final String LOCK_QUERY = "select * from nt:base where jcr:mixinTypes = 'mix:lockable' order by exo:dateCreated DESC";
-  
+
+  private static final String  LOCK_QUERY = "select * from nt:base "
+                                              + "where jcr:mixinTypes = 'mix:lockable' "
+                                              + "order by exo:dateCreated DESC";
+
   public UILockNodeList() throws Exception {
     uiPageIterator_ = createUIComponent(UIPageIterator.class, null, "LockNodeListIterator");
     setUIComponent(uiPageIterator_);
   }
 
   public String[] getActions() { return ACTIONS ; }
-  
+
   public void updateLockedNodesGrid(int currentPage) throws Exception {
     PageList pageList = new ObjectPageList(getAllLockedNodes(), 10);
     uiPageIterator_.setPageList(pageList) ;
@@ -92,59 +94,59 @@ public class UILockNodeList extends UIComponentDecorator {
     else
       uiPageIterator_.setCurrentPage(currentPage);
   }
-  
+
   public UIPageIterator getUIPageIterator() { return uiPageIterator_ ; }
-  
-  public List getLockedNodeList() throws Exception { return uiPageIterator_.getCurrentPageData(); } 
-  
+
+  public List getLockedNodeList() throws Exception { return uiPageIterator_.getCurrentPageData(); }
+
   public List<Node> getAllLockedNodes() throws Exception {
     RepositoryService repositoryService = getApplicationComponent(RepositoryService.class);
-    
+
     ManageableRepository manageRepository = repositoryService.getCurrentRepository();
     RepositoryEntry repo = manageRepository.getConfiguration();
-    
+
     List<Node> listLockedNodes = new ArrayList<Node>();
     QueryManager queryManager = null;
     Session session = null;
     String queryStatement = LOCK_QUERY;
     Query query = null;
     QueryResult queryResult = null;
-    
+
     for(WorkspaceEntry ws : repo.getWorkspaceEntries()) {
       session = SessionProviderFactory.createSystemProvider().getSession(ws.getName(), manageRepository);
       queryManager = session.getWorkspace().getQueryManager();
       query = queryManager.createQuery(queryStatement, Query.SQL);
-      queryResult = query.execute();    
-      for(NodeIterator iter = queryResult.getNodes(); iter.hasNext();) {          
+      queryResult = query.execute();
+      for(NodeIterator iter = queryResult.getNodes(); iter.hasNext();) {
         Node itemNode = iter.nextNode();
         if (!itemNode.isNodeType(Utils.EXO_RESTORELOCATION) && itemNode.isLocked()) {
           listLockedNodes.add(itemNode);
         }
       }
     }
-        
+
     return listLockedNodes;
   }
-  
+
   static public class UnLockActionListener extends EventListener<UILockNodeList> {
     private List<String> getGroups(String userId) throws Exception {
       PortalContainer  manager = PortalContainer.getInstance() ;
       OrganizationService organizationService = WCMCoreUtils.getService(OrganizationService.class);
-	  ((ComponentRequestLifecycle) organizationService).startRequest(manager);
-	  List<String> groupList = new ArrayList<String> ();
-	  //Collection<?> groups = organizationService.getGroupHandler().findGroupsOfUser(userId);
-	  Collection<?> gMembership = organizationService.getMembershipHandler().findMembershipsByUser(userId);
-	  Object[] objects = gMembership.toArray();
-	  for(int i = 0; i < objects.length; i ++ ){
-	    Membership member = (Membership)objects[i];	    
-	    groupList.add(member.getMembershipType()+":"+member.getGroupId());
-	  }
-	  return groupList;
-	}
+    ((ComponentRequestLifecycle) organizationService).startRequest(manager);
+    List<String> groupList = new ArrayList<String> ();
+    //Collection<?> groups = organizationService.getGroupHandler().findGroupsOfUser(userId);
+    Collection<?> gMembership = organizationService.getMembershipHandler().findMembershipsByUser(userId);
+    Object[] objects = gMembership.toArray();
+    for(int i = 0; i < objects.length; i ++ ){
+      Membership member = (Membership)objects[i];
+      groupList.add(member.getMembershipType()+":"+member.getGroupId());
+    }
+    return groupList;
+  }
     public void execute(Event<UILockNodeList> event) throws Exception {
       UIUnLockManager uiUnLockManager = event.getSource().getParent();
       UIApplication uiApp = uiUnLockManager.getAncestorOfType(UIApplication.class);
-      String nodePath = event.getRequestContext().getRequestParameter(OBJECTID);      
+      String nodePath = event.getRequestContext().getRequestParameter(OBJECTID);
       RepositoryService repositoryService = uiUnLockManager.getApplicationComponent(RepositoryService.class);
       ManageableRepository manageRepository = repositoryService.getCurrentRepository();
       Session session = null;
@@ -161,10 +163,10 @@ public class UILockNodeList extends UIComponentDecorator {
           continue;
         }
       }
-      
+
       if (lockedNode == null) {
         Object[] args = {nodePath};
-        uiApp.addMessage(new ApplicationMessage("UILockNodeList.msg.access-denied-exception", args, 
+        uiApp.addMessage(new ApplicationMessage("UILockNodeList.msg.access-denied-exception", args,
             ApplicationMessage.WARNING));
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
         uiUnLockManager.refresh();
@@ -177,42 +179,45 @@ public class UILockNodeList extends UIComponentDecorator {
       List<String> memberShips = getGroups(remoteUser);
       boolean isAuthenticated =false;
       for (String group: authenticatedGroups) {
-    	  if (memberShips.contains(group)){
-    		isAuthenticated=true;
-    		break;
-    	  }
+        if (memberShips.contains(group)){
+        isAuthenticated=true;
+        break;
+        }
       }
       UserACL userACLService = WCMCoreUtils.getService(UserACL.class);
       if (isAuthenticated || remoteUser.equals(userACLService.getSuperUser())) {
-    	  session = WCMCoreUtils.getSystemSessionProvider().getSession(lockedNode.getSession().getWorkspace().getName(), (ManageableRepository)lockedNode.getSession().getRepository());
-    	  lockedNode = (Node)session.getItem(lockedNode.getPath());
+        session = WCMCoreUtils.getSystemSessionProvider()
+                              .getSession(lockedNode.getSession().getWorkspace().getName(),
+                                          (ManageableRepository) lockedNode.getSession()
+                                                                           .getRepository());
+        lockedNode = (Node)session.getItem(lockedNode.getPath());
       }
-      
+
       try {
         if(lockedNode.holdsLock()) {
           String lockToken = LockUtil.getLockToken(lockedNode);
           if(lockToken != null) {
             session.addLockToken(lockToken);
           }
-          lockedNode.unlock();   
+          lockedNode.unlock();
           lockedNode.removeMixin(Utils.MIX_LOCKABLE);
           lockedNode.getSession().save();
           LockUtil.removeLock(lockedNode);
         }
       } catch(LockException le) {
         Object[] args = {lockedNode.getName()};
-        uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.can-not-unlock-node", args, 
+        uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.can-not-unlock-node", args,
             ApplicationMessage.WARNING));
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
         event.getRequestContext().addUIComponentToUpdateByAjax(uiUnLockManager);
         return;
       } catch(VersionException versionException) {
         Object[] args = {lockedNode.getName()};
-        uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.can-not-unlock-node-is-checked-in", args, 
+        uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.can-not-unlock-node-is-checked-in", args,
             ApplicationMessage.WARNING));
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
         event.getRequestContext().addUIComponentToUpdateByAjax(uiUnLockManager);
-        return;  
+        return;
       } catch (Exception e) {
         JCRExceptionManager.process(uiApp, e);
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
@@ -221,5 +226,5 @@ public class UILockNodeList extends UIComponentDecorator {
       uiUnLockManager.getChild(UILockNodeList.class).setRendered(true);
       uiUnLockManager.getChild(UILockHolderContainer.class).setRendered(false);
     }
-  }  
+  }
 }

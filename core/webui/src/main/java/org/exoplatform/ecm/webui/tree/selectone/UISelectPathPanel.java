@@ -46,7 +46,7 @@ import org.exoplatform.webui.event.EventListener;
  * Created by The eXo Platform SAS
  * @author : Hoa.Pham
  *          hoa.pham@exoplatform.com
- * Jun 23, 2008  
+ * Jun 23, 2008
  */
 
 @ComponentConfig(
@@ -66,19 +66,19 @@ public class UISelectPathPanel extends UIContainer {
   private PublicationService publicationService_ = null;
   private List<String> templates_ = null;
   private boolean _showTrashHomeNode = true;
-  
-  public UISelectPathPanel() throws Exception { 
+
+  public UISelectPathPanel() throws Exception {
     uiPageIterator_ = addChild(UIPageIterator.class, null, "UISelectPathIterate");
   }
-  
+
   public UIPageIterator getUIPageIterator() { return uiPageIterator_; }
-  
+
   public boolean isAllowPublish() {
     return allowPublish;
   }
-  
+
   public void setShowTrashHomeNode(boolean value) {
-  	_showTrashHomeNode = value;
+    _showTrashHomeNode = value;
   }
 
   public void setAllowPublish(boolean allowPublish, PublicationService publicationService, List<String> templates) {
@@ -86,14 +86,14 @@ public class UISelectPathPanel extends UIContainer {
     publicationService_ = publicationService;
     templates_ = templates;
   }
-  
+
   private void addNodePublish(List<Node> listNode, Node node, PublicationService publicationService) throws Exception {
     if (isAllowPublish()) {
       NodeType nt = node.getPrimaryNodeType();
-      if (templates_.contains(nt.getName())) { 
+      if (templates_.contains(nt.getName())) {
         Node nodecheck = publicationService.getNodePublish(node, null);
         if (nodecheck != null) {
-          listNode.add(nodecheck); 
+          listNode.add(nodecheck);
         }
       } else {
         listNode.add(node);
@@ -102,40 +102,40 @@ public class UISelectPathPanel extends UIContainer {
       listNode.add(node);
     }
   }
-  
+
   public void setParentNode(Node node) { this.parentNode = node; }
-  
+
   public Node getParentNode() { return parentNode; }
 
   public String[] getAcceptedNodeTypes() { return acceptedNodeTypes; }
 
-  public void setAcceptedNodeTypes(String[] acceptedNodeTypes) { 
+  public void setAcceptedNodeTypes(String[] acceptedNodeTypes) {
     this.acceptedNodeTypes = acceptedNodeTypes;
   }
-  
+
   public String[] getExceptedNodeTypes() { return exceptedNodeTypes; }
 
-  public void setExceptedNodeTypes(String[] exceptedNodeTypes) { 
+  public void setExceptedNodeTypes(String[] exceptedNodeTypes) {
     this.exceptedNodeTypes = exceptedNodeTypes;
   }
-  
+
   public String[] getDefaultExceptedNodeTypes() { return defaultExceptedNodeTypes; }
-  
+
   public void setDefaultExceptedNodeTypes(String[] defaultExceptedNodeTypes) {
     this.defaultExceptedNodeTypes = defaultExceptedNodeTypes;
   }
-  
+
 
   public String[] getAcceptedMimeTypes() { return acceptedMimeTypes; }
-  public void setAcceptedMimeTypes(String[] acceptedMimeTypes) { this.acceptedMimeTypes = acceptedMimeTypes; }  
+  public void setAcceptedMimeTypes(String[] acceptedMimeTypes) { this.acceptedMimeTypes = acceptedMimeTypes; }
 
   public List getSelectableNodes() throws Exception { return uiPageIterator_.getCurrentPageData(); }
-  
+
   public void updateGrid() throws Exception {
     ObjectPageList objPageList = new ObjectPageList(getListSelectableNodes(), 10);
     uiPageIterator_.setPageList(objPageList);
   }
-  
+
   public List<Node> getListSelectableNodes() throws Exception {
     List<Node> list = new ArrayList<Node>();
     if (parentNode == null) return list;
@@ -153,7 +153,7 @@ public class UISelectPathPanel extends UIContainer {
       addNodePublish(listNodeCheck, node, publicationService_);
     }
     return listNodeCheck;
-  }      
+  }
 
   protected boolean matchNodeType(Node node) throws Exception {
     if(acceptedNodeTypes == null || acceptedNodeTypes.length == 0) return true;
@@ -162,7 +162,7 @@ public class UISelectPathPanel extends UIContainer {
     }
     return false;
   }
-  
+
   protected boolean isExceptedNodeType(Node node) throws RepositoryException {
     if(defaultExceptedNodeTypes.length > 0) {
       for(String nodeType: defaultExceptedNodeTypes) {
@@ -186,7 +186,7 @@ public class UISelectPathPanel extends UIContainer {
     }
     return false;
   }
-  
+
   public String getPathTaxonomy() throws Exception {
     NodeHierarchyCreator nodeHierarchyCreator = getApplicationComponent(NodeHierarchyCreator.class);
     return nodeHierarchyCreator.getJcrPath(BasePath.TAXONOMIES_TREE_STORAGE_PATH);
@@ -195,10 +195,10 @@ public class UISelectPathPanel extends UIContainer {
   public String getDisplayName(Node node) throws RepositoryException {
     return node.getName();
   }
-  
+
   static public class SelectActionListener extends EventListener<UISelectPathPanel> {
     public void execute(Event<UISelectPathPanel> event) throws Exception {
-      UISelectPathPanel uiSelectPathPanel = event.getSource();      
+      UISelectPathPanel uiSelectPathPanel = event.getSource();
       UIContainer uiTreeSelector = uiSelectPathPanel.getParent();
       UIBreadcumbs uiBreadcumbs = uiTreeSelector.getChild(UIBreadcumbs.class);
       String breadcumbsPaths = "";
@@ -206,16 +206,16 @@ public class UISelectPathPanel extends UIContainer {
         breadcumbsPaths += "/" + iterLocalPath.getId();
       }
       String value = event.getRequestContext().getRequestParameter(OBJECTID);
-      
+
       value = breadcumbsPaths + value.substring(value.lastIndexOf("/"));
       if(uiTreeSelector instanceof UIOneNodePathSelector) {
         if(!((UIOneNodePathSelector)uiTreeSelector).isDisable()) {
           value = ((UIOneNodePathSelector)uiTreeSelector).getWorkspaceName() + ":" + value ;
         }
-      } 
+      }
       String returnField = ((UIBaseNodeTreeSelector)uiTreeSelector).getReturnFieldName();
       ((UISelectable)((UIBaseNodeTreeSelector)uiTreeSelector).getSourceComponent()).doSelect(returnField, value) ;
-      
+
       UIComponent uiOneNodePathSelector = uiSelectPathPanel.getParent();
       if (uiOneNodePathSelector instanceof UIOneNodePathSelector) {
         UIComponent uiComponent = uiOneNodePathSelector.getParent();

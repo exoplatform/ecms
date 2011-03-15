@@ -30,7 +30,7 @@ import org.exoplatform.webui.event.EventListener;
  * Author : Dang Van Minh
  *          minh.dang@exoplatform.com
  * Oct 18, 2006
- * 10:29:16 AM 
+ * 10:29:16 AM
  */
 @ComponentConfig(
     template = "app:/groovy/webui/component/explorer/UITabPaneWithAction.gtmpl",
@@ -39,12 +39,12 @@ import org.exoplatform.webui.event.EventListener;
 public class UIRelationManager extends UIContainer implements UIPopupComponent {
 
   final static public String[] ACTIONS = {"Close"} ;
-  
+
   public UIRelationManager() throws Exception {
     addChild(UIRelationsAddedList.class, null, null) ;
     addChild(UIOneNodePathSelector.class, null, null).setRendered(false) ;
   }
-  
+
   public String[] getActions() { return ACTIONS ; }
 
   static public class CloseActionListener extends EventListener<UIRelationManager> {

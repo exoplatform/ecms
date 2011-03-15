@@ -35,7 +35,7 @@ import org.exoplatform.webui.event.EventListener;
  * Created by The eXo Platform SARL
  * Author : Dang Van Minh
  *          minh.dang@exoplatform.com
- * Oct 29, 2009  
+ * Oct 29, 2009
  * 7:07:27 AM
  */
 @ComponentConfig(
@@ -46,37 +46,37 @@ import org.exoplatform.webui.event.EventListener;
     }
 )
 public class UIAllItems extends UIComponent {
-	
-	public static final String FAVORITE = "Favorites";
-	public static final String OWNED_BY_ME = "OwnedByMe";
-	public static final String HIDDEN = "Hidden";
-	public static final String TRASH = "Trash";
-	
+
+  public static final String FAVORITE = "Favorites";
+  public static final String OWNED_BY_ME = "OwnedByMe";
+  public static final String HIDDEN = "Hidden";
+  public static final String TRASH = "Trash";
+
   public UIAllItems() throws Exception {
   }
-  
-  public static String getFAVORITE() { return FAVORITE; }
-	public static String getOWNED_BY_ME() {	return OWNED_BY_ME;	}
-	public static String getHIDDEN() { return HIDDEN; }
-	public static String getTRASH() {	return TRASH;	}
 
-	public Preference getPreference() {
+  public static String getFAVORITE() { return FAVORITE; }
+  public static String getOWNED_BY_ME() {	return OWNED_BY_ME;	}
+  public static String getHIDDEN() { return HIDDEN; }
+  public static String getTRASH() {	return TRASH;	}
+
+  public Preference getPreference() {
     return getAncestorOfType(UIJCRExplorer.class).getPreference();
   }
-  
+
   static public class ClickFilterActionListener extends EventListener<UIAllItems> {
     public void execute(Event<UIAllItems> event) throws Exception {
       UIAllItems UIAllItems = event.getSource();
       UIJCRExplorer uiExplorer = UIAllItems.getAncestorOfType(UIJCRExplorer.class);
       Set<String> allItemFilterMap = uiExplorer.getAllItemFilterMap();
-      
+
       String filterType = event.getRequestContext().getRequestParameter(OBJECTID);
-			if (allItemFilterMap.contains(filterType)) {
-				allItemFilterMap.remove(filterType);
-			}	else {
-				allItemFilterMap.add(filterType);
-			}
-      
+      if (allItemFilterMap.contains(filterType)) {
+        allItemFilterMap.remove(filterType);
+      }	else {
+        allItemFilterMap.add(filterType);
+      }
+
       // new code
       UIWorkingArea uiWorkingArea = uiExplorer.getChild(UIWorkingArea.class);
       UIDocumentWorkspace uiDocumentWorkspace = uiWorkingArea.getChild(UIDocumentWorkspace.class);
@@ -85,20 +85,20 @@ public class UIAllItems extends UIComponent {
         uiWorkingArea.getChild(UIDocumentWorkspace.class).setRendered(true);
       }
 //     	uiExplorer.record(uiExplorer.getCurrentPath(), uiExplorer.getCurrentWorkspace());
-      
+
       uiExplorer.updateAjax(event);
     }
-  }  
+  }
 
   static public class PreferencesActionListener extends EventListener<UIAllItems> {
     public void execute(Event<UIAllItems> event) throws Exception {
       UIAllItems uiAllItems = event.getSource();
-      UIJCRExplorer uiJCRExplorer = uiAllItems.getAncestorOfType(UIJCRExplorer.class);                                         
+      UIJCRExplorer uiJCRExplorer = uiAllItems.getAncestorOfType(UIJCRExplorer.class);
       UIPopupContainer popupAction = uiJCRExplorer.getChild(UIPopupContainer.class);
       UIAllItemsPreferenceForm uiPrefForm = popupAction.activate(UIAllItemsPreferenceForm.class,350) ;
       uiPrefForm.update(uiJCRExplorer.getPreference()) ;
       event.getRequestContext().addUIComponentToUpdateByAjax(popupAction) ;
     }
-  } 
-  
+  }
+
 }

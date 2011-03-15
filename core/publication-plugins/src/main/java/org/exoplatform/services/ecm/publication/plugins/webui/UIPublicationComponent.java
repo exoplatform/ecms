@@ -35,7 +35,7 @@ import org.exoplatform.webui.core.lifecycle.UIApplicationLifecycle;
  * Created by The eXo Platform SAS
  * Author : Romain Dénarié
  *          romain.denarie@exoplatform.com
- * 29 mai 08  
+ * 29 mai 08
  */
 @ComponentConfig (
     lifecycle = UIApplicationLifecycle.class,
@@ -96,7 +96,7 @@ public class UIPublicationComponent extends UIComponent {
       PublicationService service = getApplicationComponent(PublicationService.class) ;
 
       byte[] bytes=service.getStateImage(node_,locale);
-      InputStream iS = new ByteArrayInputStream(bytes);    
+      InputStream iS = new ByteArrayInputStream(bytes);
       String id = dS.addDownloadResource(new InputStreamDownloadResource(iS, "image/gif"));
       return dS.getDownloadLink(id);
     } catch (Exception e) {

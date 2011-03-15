@@ -68,10 +68,10 @@ public class AuthoringPublicationPlugin extends StageAndVersionPublicationPlugin
     String logItemName = versionName;
     String userId = "";
     try {
-    	userId = Util.getPortalRequestContext().getRemoteUser();
+      userId = Util.getPortalRequestContext().getRemoteUser();
     } catch (Exception e) {
-		userId = node.getSession().getUserID();
-	}
+    userId = node.getSession().getUserID();
+  }
     Node selectedRevision = null;
     if (node.getName().equals(versionName) || versionName == null) {
       selectedRevision = node;
@@ -85,7 +85,7 @@ public class AuthoringPublicationPlugin extends StageAndVersionPublicationPlugin
     ValueFactory valueFactory = node.getSession().getValueFactory();
     String containerName = context.get("containerName");
     try {
-    	if (containerName==null) containerName = PortalContainer.getCurrentPortalContainerName();
+      if (containerName==null) containerName = PortalContainer.getCurrentPortalContainerName();
     } catch (Exception e) {}
     if (PublicationDefaultStates.PENDING.equals(newState)) {
       node.setProperty(StageAndVersionPublicationConstant.CURRENT_STATE, newState);
@@ -158,7 +158,7 @@ public class AuthoringPublicationPlugin extends StageAndVersionPublicationPlugin
       Value value = valueFactory.createValue(selectedRevision);
       Value liveRevision = null;
       if (node.hasProperty(StageAndVersionPublicationConstant.LIVE_REVISION_PROP)) {
-      	liveRevision = node.getProperty(StageAndVersionPublicationConstant.LIVE_REVISION_PROP)
+        liveRevision = node.getProperty(StageAndVersionPublicationConstant.LIVE_REVISION_PROP)
                                .getValue();
       }
       if (liveRevision != null && value.getString().equals(liveRevision.getString())) {
@@ -189,7 +189,7 @@ public class AuthoringPublicationPlugin extends StageAndVersionPublicationPlugin
       Value value = valueFactory.createValue(selectedRevision);
       Value liveRevision = null;
       if (node.hasProperty(StageAndVersionPublicationConstant.LIVE_REVISION_PROP)) {
-      	liveRevision = node.getProperty(StageAndVersionPublicationConstant.LIVE_REVISION_PROP)
+        liveRevision = node.getProperty(StageAndVersionPublicationConstant.LIVE_REVISION_PROP)
                                .getValue();
       }
       if (liveRevision != null && value.getString().equals(liveRevision.getString())) {
@@ -456,7 +456,7 @@ public class AuthoringPublicationPlugin extends StageAndVersionPublicationPlugin
 
   /**
    * Adds the log.
-   * 
+   *
    * @param node the node
    * @param versionLog the version log
    * @throws Exception the exception
@@ -471,7 +471,7 @@ public class AuthoringPublicationPlugin extends StageAndVersionPublicationPlugin
 
   /**
    * Adds the revision data.
-   * 
+   *
    * @param node the node
    * @param list the list
    * @throws Exception the exception
@@ -488,7 +488,7 @@ public class AuthoringPublicationPlugin extends StageAndVersionPublicationPlugin
 
   /**
    * Gets the revision data.
-   * 
+   *
    * @param node the node
    * @return the revision data
    * @throws Exception the exception
@@ -531,7 +531,7 @@ public class AuthoringPublicationPlugin extends StageAndVersionPublicationPlugin
 
   /**
    * Gets the live revision.
-   * 
+   *
    * @param node the node
    * @return the live revision
    */

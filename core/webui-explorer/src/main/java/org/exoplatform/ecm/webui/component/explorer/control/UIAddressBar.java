@@ -81,44 +81,55 @@ import org.exoplatform.webui.form.UIFormStringInput;
 )
 
 public class UIAddressBar extends UIForm {
-  
-  public static final Pattern FILE_EXPLORER_URL_SYNTAX = Pattern.compile("([^:/]+):(.*)");
-  
-  public final static String WS_NAME = "workspaceName";  
-  public final static String FIELD_ADDRESS = "address";
-  public final static String ACTION_TAXONOMY = "exo:taxonomyAction";
-  public final static String EXO_TARGETPATH = "exo:targetPath"; 
-  public final static String EXO_TARGETWORKSPACE = "exo:targetWorkspace";
-  
-  private String selectedViewName_;
-  
-  private String[] arrView_ = {};
-  final static private String FIELD_SIMPLE_SEARCH = "simpleSearch" ;
 
-  final static private  String ROOT_SQL_QUERY  = "select * from nt:base where contains(*, '$1') or lower(exo:name) like '%$2%' order by exo:dateCreated DESC, jcr:primaryType DESC" ;
-  final static private String SQL_QUERY = "select * from nt:base where jcr:path like '$0/%' and ( contains(*, '$1') or lower(exo:name) like '%$2%' ) order by jcr:path DESC, jcr:primaryType DESC";
-     
+  public static final Pattern FILE_EXPLORER_URL_SYNTAX = Pattern.compile("([^:/]+):(.*)");
+
+  public final static String  WS_NAME                  = "workspaceName";
+
+  public final static String  FIELD_ADDRESS            = "address";
+
+  public final static String  ACTION_TAXONOMY          = "exo:taxonomyAction";
+
+  public final static String  EXO_TARGETPATH           = "exo:targetPath";
+
+  public final static String  EXO_TARGETWORKSPACE      = "exo:targetWorkspace";
+
+  private String              selectedViewName_;
+
+  private String[]            arrView_                 = {};
+
+  final static private String FIELD_SIMPLE_SEARCH      = "simpleSearch";
+
+  final static private String ROOT_SQL_QUERY           = "select * from nt:base "
+                                                           + "where contains(*, '$1') or lower(exo:name) like '%$2%' "
+                                                           + "order by exo:dateCreated DESC, jcr:primaryType DESC";
+
+  final static private String SQL_QUERY                = "select * from nt:base "
+                                                           + "where jcr:path like '$0/%' and ( contains(*, '$1') "
+                                                           + "or lower(exo:name) like '%$2%' ) "
+                                                           + "order by jcr:path DESC, jcr:primaryType DESC";
+
   public UIAddressBar() throws Exception {
-    addUIFormInput(new UIFormStringInput(FIELD_ADDRESS, FIELD_ADDRESS, null)) ;
+    addUIFormInput(new UIFormStringInput(FIELD_ADDRESS, FIELD_ADDRESS, null));
     addUIFormInput(new UIFormStringInput(FIELD_SIMPLE_SEARCH, FIELD_SIMPLE_SEARCH, null).addValidator(SearchValidator.class));
   }
 
   public void setViewList(List<String> viewList) {
     Collections.sort(viewList);
-    arrView_ = viewList.toArray(new String[viewList.size()]); 
+    arrView_ = viewList.toArray(new String[viewList.size()]);
   }
-  
-  public String[] getViewList() { return arrView_; } 
-  
+
+  public String[] getViewList() { return arrView_; }
+
   public void setSelectedViewName(String viewName) { selectedViewName_ = viewName; }
-  
-  public boolean isSelectedView(String viewName) { 
+
+  public boolean isSelectedView(String viewName) {
     if(selectedViewName_ != null && selectedViewName_.equals(viewName)) return true;
     return false;
   }
-  
+
   public String getSelectedViewName() { return selectedViewName_; }
-  
+
   @Deprecated
   public Set<String> getHistory() {
     UIJCRExplorer uiJCRExplorer = getAncestorOfType(UIJCRExplorer.class) ;
@@ -129,16 +140,16 @@ public class UIAddressBar extends UIForm {
     UIJCRExplorer uiJCRExplorer = getAncestorOfType(UIJCRExplorer.class) ;
     return uiJCRExplorer.getHistory() ;
   }
-  
+
   static public class BackActionListener extends EventListener<UIAddressBar> {
     public void execute(Event<UIAddressBar> event) throws Exception {
       UIAddressBar uiAddressBar = event.getSource() ;
       UIJCRExplorer uiExplorer = uiAddressBar.getAncestorOfType(UIJCRExplorer.class) ;
       UIApplication uiApp = uiExplorer.getAncestorOfType(UIApplication.class) ;
-      try {        
+      try {
         UIWorkingArea uiWorkingArea = uiExplorer.getChild(UIWorkingArea.class);
         UIDocumentWorkspace uiDocumentWorkspace = uiWorkingArea.getChild(UIDocumentWorkspace.class);
-        
+
         if(!uiDocumentWorkspace.isRendered()) {
           uiWorkingArea.getChild(UIDrivesArea.class).setRendered(false);
           uiWorkingArea.getChild(UIDocumentWorkspace.class).setRendered(true);
@@ -157,7 +168,7 @@ public class UIAddressBar extends UIForm {
         }
         uiExplorer.updateAjax(event) ;
       } catch (AccessDeniedException ade) {
-        uiApp.addMessage(new ApplicationMessage("UIAddressBar.msg.access-denied", null, 
+        uiApp.addMessage(new ApplicationMessage("UIAddressBar.msg.access-denied", null,
                                                 ApplicationMessage.WARNING)) ;
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
         return ;
@@ -169,7 +180,7 @@ public class UIAddressBar extends UIForm {
       }
     }
   }
-  
+
   static public class ChangeNodeActionListener extends EventListener<UIAddressBar> {
     public void execute(Event<UIAddressBar> event) throws Exception {
       UIAddressBar uiAddress = event.getSource() ;
@@ -184,7 +195,7 @@ public class UIAddressBar extends UIForm {
         uiExplorer.setCurrentStatePath(nodePath) ;
       } catch(Exception e) {
         UIApplication uiApp = uiAddress.getAncestorOfType(UIApplication.class) ;
-        uiApp.addMessage(new ApplicationMessage("UIAddressBar.msg.path-not-found", null, 
+        uiApp.addMessage(new ApplicationMessage("UIAddressBar.msg.path-not-found", null,
                                                 ApplicationMessage.WARNING)) ;
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
         return ;
@@ -192,7 +203,7 @@ public class UIAddressBar extends UIForm {
       uiExplorer.updateAjax(event) ;
     }
   }
-  
+
   static public class HistoryActionListener extends EventListener<UIAddressBar> {
     public void execute(Event<UIAddressBar> event) throws Exception {
       UIAddressBar uiAddressBar = event.getSource() ;
@@ -210,14 +221,14 @@ public class UIAddressBar extends UIForm {
         uiExplorer.refreshExplorer() ;
       } catch (AccessDeniedException ade) {
         UIApplication uiApp = uiAddressBar.getAncestorOfType(UIApplication.class) ;
-        uiApp.addMessage(new ApplicationMessage("UIAddressBar.msg.access-denied", null, 
+        uiApp.addMessage(new ApplicationMessage("UIAddressBar.msg.access-denied", null,
                                                 ApplicationMessage.WARNING)) ;
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
         return ;
       }
     }
   }
-  
+
   static public class ChangeViewActionListener extends EventListener<UIAddressBar> {
     public void execute(Event<UIAddressBar> event) throws Exception {
       UIAddressBar uiAddressBar = event.getSource() ;
@@ -236,7 +247,7 @@ public class UIAddressBar extends UIForm {
       uiExplorer.updateAjax(event);
     }
   }
-  
+
   static public class SimpleSearchActionListener extends EventListener<UIAddressBar> {
     public void execute(Event<UIAddressBar> event) throws Exception {
       UIAddressBar uiAddressBar = event.getSource();
@@ -254,10 +265,10 @@ public class UIAddressBar extends UIForm {
             for (Node actionNode : listAction) {
               if (actionNode.isNodeType(ACTION_TAXONOMY)) {
                 String searchPath = actionNode.getProperty(EXO_TARGETPATH).getString();
-                String searchWorkspace = actionNode.getProperty(EXO_TARGETWORKSPACE).getString();                
+                String searchWorkspace = actionNode.getProperty(EXO_TARGETWORKSPACE).getString();
                 String queryStatement = null;
                 if("/".equals(searchPath)) {
-                  queryStatement = ROOT_SQL_QUERY;        
+                  queryStatement = ROOT_SQL_QUERY;
                 }else {
                   queryStatement = StringUtils.replace(SQL_QUERY,"$0", searchPath);
                 }
@@ -265,25 +276,28 @@ public class UIAddressBar extends UIForm {
                 queryStatement = StringUtils.replace(queryStatement,"$2", text.replaceAll("'", "''").toLowerCase());
                 isTaxonomyNode = true;
                 uiExplorer.removeChildById("ViewSearch");
-                UIDocumentWorkspace uiDocumentWorkspace = uiExplorer.getChild(UIWorkingArea.class).getChild(UIDocumentWorkspace.class);
-                
-                RepositoryService repositoryService = 
+                UIDocumentWorkspace uiDocumentWorkspace = uiExplorer.getChild(UIWorkingArea.class)
+                                                                    .getChild(UIDocumentWorkspace.class);
+
+                RepositoryService repositoryService =
                   Util.getUIPortal().getApplicationComponent(RepositoryService.class);
-                SessionProviderService sessionProviderService = 
+                SessionProviderService sessionProviderService =
                   Util.getUIPortal().getApplicationComponent(SessionProviderService.class);
-                SessionProvider sessionProvider = sessionProviderService.getSessionProvider(null);                
-                Session session = sessionProvider.getSession(searchWorkspace, 
-                    repositoryService.getRepository(uiExplorer.getRepositoryName()));      
+                SessionProvider sessionProvider = sessionProviderService.getSessionProvider(null);
+                Session session = sessionProvider.getSession(searchWorkspace,
+                    repositoryService.getRepository(uiExplorer.getRepositoryName()));
                 UISearchResult uiSearchResult = uiDocumentWorkspace.getChildById(UIDocumentWorkspace.SIMPLE_SEARCH_RESULT);
                 QueryManager queryManager =session.getWorkspace().getQueryManager();
-                        
+
                 long startTime = System.currentTimeMillis();
-                Query query = queryManager.createQuery(queryStatement, Query.SQL);        
-                QueryResult queryResult = query.execute();                  
+                Query query = queryManager.createQuery(queryStatement, Query.SQL);
+                QueryResult queryResult = query.execute();
                 uiSearchResult.clearAll();
-                uiSearchResult.setQueryResults(queryResult);            
+                uiSearchResult.setQueryResults(queryResult);
                 uiSearchResult.updateGrid(true);
-                uiSearchResult.setTaxonomyNode(isTaxonomyNode, currentNode.getSession().getWorkspace().getName(), currentNode.getPath());
+                uiSearchResult.setTaxonomyNode(isTaxonomyNode,
+                                               currentNode.getSession().getWorkspace().getName(),
+                                               currentNode.getPath());
                 long time = System.currentTimeMillis() - startTime;
                 uiSearchResult.setSearchTime(time);
                 uiDocumentWorkspace.setRenderedChild(UISearchResult.class);
@@ -297,12 +311,12 @@ public class UIAddressBar extends UIForm {
       }
       String queryStatement = null;
       if("/".equals(currentNode.getPath())) {
-        queryStatement = ROOT_SQL_QUERY;        
+        queryStatement = ROOT_SQL_QUERY;
       }else {
         queryStatement = StringUtils.replace(SQL_QUERY,"$0",currentNode.getPath());
       }
       queryStatement = StringUtils.replace(queryStatement,"$1", text.replaceAll("'", "''"));
-      queryStatement = StringUtils.replace(queryStatement,"$2", text.replaceAll("'", "''").toLowerCase());      
+      queryStatement = StringUtils.replace(queryStatement,"$2", text.replaceAll("'", "''").toLowerCase());
       uiExplorer.removeChildById("ViewSearch");
       UIWorkingArea uiWorkingArea = uiExplorer.getChild(UIWorkingArea.class);
       UIDocumentWorkspace uiDocumentWorkspace = uiWorkingArea.getChild(UIDocumentWorkspace.class);
@@ -311,19 +325,21 @@ public class UIAddressBar extends UIForm {
         uiWorkingArea.getChild(UIDocumentWorkspace.class).setRendered(true);
       }
       SessionProvider sessionProvider = new SessionProvider(ConversationState.getCurrent());
-      Session session = sessionProvider.getSession(currentNode.getSession().getWorkspace().getName(), 
+      Session session = sessionProvider.getSession(currentNode.getSession().getWorkspace().getName(),
           (ManageableRepository)currentNode.getSession().getRepository());
       UISearchResult uiSearchResult = uiDocumentWorkspace.getChildById(UIDocumentWorkspace.SIMPLE_SEARCH_RESULT);
       QueryManager queryManager = session.getWorkspace().getQueryManager();
       long startTime = System.currentTimeMillis();
-      Query query = queryManager.createQuery(queryStatement, Query.SQL);        
-      QueryResult queryResult = query.execute();                  
+      Query query = queryManager.createQuery(queryStatement, Query.SQL);
+      QueryResult queryResult = query.execute();
       uiSearchResult.clearAll();
-      uiSearchResult.setQueryResults(queryResult);  
-      uiSearchResult.setTaxonomyNode(isTaxonomyNode, currentNode.getSession().getWorkspace().getName(), currentNode.getPath());
+      uiSearchResult.setQueryResults(queryResult);
+      uiSearchResult.setTaxonomyNode(isTaxonomyNode, currentNode.getSession()
+                                                                .getWorkspace()
+                                                                .getName(), currentNode.getPath());
       uiSearchResult.updateGrid(true);
       long time = System.currentTimeMillis() - startTime;
-      uiSearchResult.setSearchTime(time);      
+      uiSearchResult.setSearchTime(time);
       uiDocumentWorkspace.setRenderedChild(UISearchResult.class);
       if(!uiDocumentWorkspace.isRendered()) {
         event.getRequestContext().addUIComponentToUpdateByAjax(uiDocumentWorkspace);
@@ -331,7 +347,7 @@ public class UIAddressBar extends UIForm {
       if (session != null) session.logout();
     }
   }
-  
+
   static public class RefreshSessionActionListener extends EventListener<UIAddressBar> {
     public void execute(Event<UIAddressBar> event) throws Exception {
       UIJCRExplorer uiJCRExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class) ;
@@ -345,5 +361,5 @@ public class UIAddressBar extends UIForm {
       uiApp.addMessage(new ApplicationMessage(mess, null, ApplicationMessage.INFO)) ;
     }
   }
-  
+
 }

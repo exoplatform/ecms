@@ -68,7 +68,7 @@ public class UIFolderForm extends UIForm implements UIPopupComponent {
   public UIFolderForm() throws Exception {
   }
 
-  public void activate() throws Exception { 
+  public void activate() throws Exception {
     RequestContext context = RequestContext.getCurrentInstance() ;
     ResourceBundle res = context.getApplicationResourceBundle() ;
     UIJCRExplorer uiExplorer = getAncestorOfType(UIJCRExplorer.class);
@@ -96,7 +96,7 @@ public class UIFolderForm extends UIForm implements UIPopupComponent {
         addValidator(IllegalDMSCharValidator.class));
     setActions(new String[]{"Save", "Cancel"}) ;
     getUIStringInput(FIELD_NAME).setValue(null) ;
-    //TODO: This block code was hardcoded for nt:folder type. Impossible to do like that. 
+    //TODO: This block code was hardcoded for nt:folder type. Impossible to do like that.
     //Because may have a lot of folders type has super type is nt:folder and it must be exist in list options
     if (getUIFormSelectBox(FIELD_TYPE) != null) {
       if (uiExplorer.getCurrentNode().isNodeType(Utils.NT_FOLDER)) {
@@ -117,18 +117,18 @@ public class UIFolderForm extends UIForm implements UIPopupComponent {
       UIJCRExplorer uiExplorer = uiFolderForm.getAncestorOfType(UIJCRExplorer.class) ;
       UIApplication uiApp = uiFolderForm.getAncestorOfType(UIApplication.class);
       String name = uiFolderForm.getUIStringInput(FIELD_NAME).getValue() ;
-      Node node = uiExplorer.getCurrentNode() ;                  
+      Node node = uiExplorer.getCurrentNode() ;
       if (uiExplorer.nodeIsLocked(node)) {
         uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.node-locked", null)) ;
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
         return ;
-      }      
+      }
       if(name == null || name.length() ==0) {
         uiApp.addMessage(new ApplicationMessage("UIFolderForm.msg.name-invalid", null)) ;
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
         return ;
-      }      
-      
+      }
+
       String type = null ;
       if(uiFolderForm.getUIFormSelectBox(FIELD_TYPE) != null) {
         type = uiFolderForm.getUIFormSelectBox(FIELD_TYPE).getValue() ;
@@ -142,12 +142,12 @@ public class UIFolderForm extends UIForm implements UIPopupComponent {
         node.getSession().save();
         if(!uiExplorer.getPreference().isJcrEnable())  { node.getSession().save() ; }
         uiExplorer.updateAjax(event) ;
-      } catch(ConstraintViolationException cve) {  
+      } catch(ConstraintViolationException cve) {
         Object[] arg = { type } ;
         throw new MessageException(new ApplicationMessage("UIFolderForm.msg.constraint-violation",
             arg, ApplicationMessage.WARNING)) ;
       } catch(AccessDeniedException accessDeniedException) {
-        uiApp.addMessage(new ApplicationMessage("UIFolderForm.msg.repository-exception-permission", null, 
+        uiApp.addMessage(new ApplicationMessage("UIFolderForm.msg.repository-exception-permission", null,
             ApplicationMessage.WARNING)) ;
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
         return ;
@@ -171,7 +171,7 @@ public class UIFolderForm extends UIForm implements UIPopupComponent {
         return ;
       } catch (Exception e) {
         JCRExceptionManager.process(uiApp, e);
-      }      
+      }
     }
   }
 

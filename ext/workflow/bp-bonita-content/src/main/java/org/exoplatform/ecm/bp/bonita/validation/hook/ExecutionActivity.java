@@ -8,12 +8,12 @@ import org.ow2.bonita.facade.runtime.TaskInstance;
 
 public class ExecutionActivity implements TxHook {
 
-	public void execute(APIAccessor api, ActivityInstance<ActivityBody> activity)
-			throws Exception {
-		if(TaskInstance.class.isInstance(activity.getBody())){
-			api.getRuntimeAPI().startTask(TaskInstance.class.cast(activity.getBody()).getUUID(), false);
-			api.getRuntimeAPI().finishTask(TaskInstance.class.cast(activity.getBody()).getUUID(), false);
-		}
-	}
+  public void execute(APIAccessor api, ActivityInstance<ActivityBody> activity)
+      throws Exception {
+    if(TaskInstance.class.isInstance(activity.getBody())){
+      api.getRuntimeAPI().startTask(TaskInstance.class.cast(activity.getBody()).getUUID(), false);
+      api.getRuntimeAPI().finishTask(TaskInstance.class.cast(activity.getBody()).getUUID(), false);
+    }
+  }
 
 }

@@ -51,7 +51,7 @@ import org.exoplatform.webui.core.UITree;
  */
 @ComponentConfig(
     events = @EventConfig(listeners = UITree.ChangeNodeActionListener.class)
-)  
+)
 public class UICategoryNavigationTreeBase extends UITree {
 
   /* (non-Javadoc)
@@ -62,12 +62,12 @@ public class UICategoryNavigationTreeBase extends UITree {
     String nodeTypeIcon = Utils.getNodeTypeIcon(node,"16x16Icon");
     String nodeIcon = this.getExpandIcon();
     String iconGroup = this.getIcon();
-    String note = "" ; 
+    String note = "" ;
     if(isSelected(obj)) {
       nodeIcon = getColapseIcon();
       iconGroup = getSelectedIcon();
-      note = " NodeSelected" ;             
-    }    
+      note = " NodeSelected" ;
+    }
     String beanIconField = getBeanIconField();
     if(beanIconField != null && beanIconField.length() > 0) {
       if(getFieldValue(obj, beanIconField) != null)
@@ -76,10 +76,21 @@ public class UICategoryNavigationTreeBase extends UITree {
     renderCategoryLink(node);
     String objId = String.valueOf(getId(obj));
     StringBuilder builder = new StringBuilder();
-    if(nodeIcon.equals(getExpandIcon())) {
-      builder.append(" <a class=\"").append(nodeIcon).append(" ").append(nodeTypeIcon).append("\" href=\"").append(objId).append("\">") ;
+    if (nodeIcon.equals(getExpandIcon())) {
+      builder.append(" <a class=\"")
+             .append(nodeIcon)
+             .append(" ")
+             .append(nodeTypeIcon)
+             .append("\" href=\"")
+             .append(objId)
+             .append("\">");
     } else {
-      builder.append(" <a class=\"").append(nodeIcon).append(" ").append(nodeTypeIcon).append("\" onclick=\"eXo.portal.UIPortalControl.collapseTree(this)").append("\">") ;
+      builder.append(" <a class=\"")
+             .append(nodeIcon)
+             .append(" ")
+             .append(nodeTypeIcon)
+             .append("\" onclick=\"eXo.portal.UIPortalControl.collapseTree(this)")
+             .append("\">");
     }
     UIRightClickPopupMenu popupMenu = getUiPopupMenu();
     String beanLabelField = getBeanLabelField();
@@ -89,26 +100,45 @@ public class UICategoryNavigationTreeBase extends UITree {
       flgSymlink = true;
       className = "NodeIconLink";
     }
-    if(popupMenu == null) {
-      builder.append(" <div class=\"").append(className).append(" ").append(iconGroup).append(" ").append(nodeTypeIcon)
-          .append(note).append("\"").append(" title=\"").append(getFieldValue(obj, beanLabelField))
-          .append("\"").append(">");
+    if (popupMenu == null) {
+      builder.append(" <div class=\"")
+             .append(className)
+             .append(" ")
+             .append(iconGroup)
+             .append(" ")
+             .append(nodeTypeIcon)
+             .append(note)
+             .append("\"")
+             .append(" title=\"")
+             .append(getFieldValue(obj, beanLabelField))
+             .append("\"")
+             .append(">");
       if (flgSymlink) {
         builder.append("  <div class=\"LinkSmall\">")
-          .append(getFieldValue(obj, beanLabelField))
-          .append("</div>");
+               .append(getFieldValue(obj, beanLabelField))
+               .append("</div>");
       } else {
         builder.append(getFieldValue(obj, beanLabelField));
       }
       builder.append("</div>");
     } else {
-      builder.append(" <div class=\"").append(className).append(" ").append(iconGroup).append(" ").append(nodeTypeIcon)
-          .append(note).append("\" ").append(popupMenu.getJSOnclickShowPopup(objId, null)).append(
-              " title=\"").append(getFieldValue(obj, beanLabelField)).append("\"").append(">");
+      builder.append(" <div class=\"")
+             .append(className)
+             .append(" ")
+             .append(iconGroup)
+             .append(" ")
+             .append(nodeTypeIcon)
+             .append(note)
+             .append("\" ")
+             .append(popupMenu.getJSOnclickShowPopup(objId, null))
+             .append(" title=\"")
+             .append(getFieldValue(obj, beanLabelField))
+             .append("\"")
+             .append(">");
       if (flgSymlink) {
         builder.append("  <div class=\"LinkSmall\">")
-          .append(getFieldValue(obj, beanLabelField))
-          .append("</div>");
+               .append(getFieldValue(obj, beanLabelField))
+               .append("</div>");
       } else {
         builder.append(getFieldValue(obj, beanLabelField));
       }
@@ -122,19 +152,26 @@ public class UICategoryNavigationTreeBase extends UITree {
    * @see org.exoplatform.webui.core.UIComponent#getTemplate()
    */
   public String getTemplate() {
-    return UICategoryNavigationUtils.getPortletPreferences().getValue(UICategoryNavigationConstant.PREFERENCE_TEMPLATE_PATH, null);
+    return UICategoryNavigationUtils.getPortletPreferences()
+                                    .getValue(UICategoryNavigationConstant.PREFERENCE_TEMPLATE_PATH,
+                                              null);
   }
-  
-  /* (non-Javadoc)
-   * @see org.exoplatform.webui.core.UIComponent#getTemplateResourceResolver(org.exoplatform.webui.application.WebuiRequestContext, java.lang.String)
+
+  /*
+   * (non-Javadoc)
+   * @see
+   * org.exoplatform.webui.core.UIComponent#getTemplateResourceResolver(org.
+   * exoplatform.webui.application.WebuiRequestContext, java.lang.String)
    */
   public ResourceResolver getTemplateResourceResolver(WebuiRequestContext context, String template) {
-    String repository = UICategoryNavigationUtils.getPortletPreferences().getValue(UICategoryNavigationConstant.PREFERENCE_REPOSITORY, null);
+    String repository = UICategoryNavigationUtils.getPortletPreferences()
+                                                 .getValue(UICategoryNavigationConstant.PREFERENCE_REPOSITORY,
+                                                           null);
     DMSConfiguration dmsConfiguration = getApplicationComponent(DMSConfiguration.class);
     String workspace = dmsConfiguration.getConfig().getSystemWorkspace();
     return new JCRResourceResolver(repository, workspace);
   }
-  
+
   /* (non-Javadoc)
    * @see org.exoplatform.webui.core.UITree#getActionLink()
    */
@@ -146,34 +183,37 @@ public class UICategoryNavigationTreeBase extends UITree {
     String preferenceTreeName = portletPreferences.getValue(UICategoryNavigationConstant.PREFERENCE_TREE_NAME, "");
     String preferenceTargetPage = portletPreferences.getValue(UICategoryNavigationConstant.PREFERENCE_TARGET_PAGE, "");
     String backPath = requestURI.substring(0, requestURI.lastIndexOf("/"));
-    if (backPath.endsWith(preferenceTargetPage) || requestURI.endsWith(Util.getUIPortal().getSelectedNode().getUri())) backPath = "javascript:void(0)";
-    else if (backPath.endsWith(preferenceTreeName)) backPath = backPath.substring(0, backPath.lastIndexOf("/"));
+    if (backPath.endsWith(preferenceTargetPage)
+        || requestURI.endsWith(Util.getUIPortal().getSelectedNode().getUri()))
+      backPath = "javascript:void(0)";
+    else if (backPath.endsWith(preferenceTreeName))
+      backPath = backPath.substring(0, backPath.lastIndexOf("/"));
     return backPath;
   }
-  
+
   /* (non-Javadoc)
    * @see org.exoplatform.webui.core.UITree#isSelected(java.lang.Object)
    */
   public boolean isSelected(Object obj) throws Exception {
     Node selectedNode = this.getSelected();
     Node node = (Node) obj;
-    if(selectedNode == null) return false;    
+    if(selectedNode == null) return false;
     return selectedNode.getPath().equals(node.getPath());
   }
-  
+
   public boolean isMovedTreeToTrash(String rootCategory) throws Exception {
-	Node categoryNode = getCategoryNode(rootCategory);
-	if(categoryNode.isNodeType(Utils.EXO_RESTORELOCATION)) return true;
-	return false;
+  Node categoryNode = getCategoryNode(rootCategory);
+  if(categoryNode.isNodeType(Utils.EXO_RESTORELOCATION)) return true;
+  return false;
   }
 
   /**
    * Gets the subcategories.
-   * 
+   *
    * @param categoryPath the category path
-   * 
+   *
    * @return the subcategories
-   * 
+   *
    * @throws Exception the exception
    */
   public List<Node> getSubcategories(String categoryPath) throws Exception {
@@ -185,51 +225,58 @@ public class UICategoryNavigationTreeBase extends UITree {
       if (subcategory.isNodeType("exo:taxonomy"))
         subcategories.add(subcategory);
     }
-    return subcategories; 
+    return subcategories;
   }
-  
+
   /**
    * Resolve category path by uri.
-   * 
+   *
    * @param context the context
-   * 
+   *
    * @return the string
    */
   public String resolveCategoryPathByUri(WebuiRequestContext context) throws Exception {
     String parameters = null;
     try {
       // parameters: Classic/News/France/Blah/Bom
-      parameters = URLDecoder.decode(StringUtils.substringAfter(Util.getPortalRequestContext().getNodePath(), Util.getUIPortal().getSelectedNode().getUri()),"UTF-8");
-    } catch (UnsupportedEncodingException e) {}
-    
+      parameters = URLDecoder.decode(StringUtils.substringAfter(Util.getPortalRequestContext()
+                                                                    .getNodePath(),
+                                                                Util.getUIPortal()
+                                                                    .getSelectedNode()
+                                                                    .getUri()), "UTF-8");
+    } catch (UnsupportedEncodingException e) {
+    }
+
     // categoryPath: /News/France/Blah/Bom
     String categoryPath = parameters.indexOf("/") >= 0 ? parameters.substring(parameters.indexOf("/")) : "";
-    
-    String gpath  = Util.getPortalRequestContext().getRequestParameter("path");
-	if (gpath!=null) {
-	    PortletPreferences portletPreferences = UICategoryNavigationUtils.getPortletPreferences();
-	    String preferenceTreeName = portletPreferences.getValue(UICategoryNavigationConstant.PREFERENCE_TREE_NAME, "");
-		categoryPath = gpath.substring(gpath.indexOf(preferenceTreeName)+preferenceTreeName.length());
-	}
 
-    
+    String gpath  = Util.getPortalRequestContext().getRequestParameter("path");
+    if (gpath != null) {
+      PortletPreferences portletPreferences = UICategoryNavigationUtils.getPortletPreferences();
+      String preferenceTreeName = portletPreferences.getValue(UICategoryNavigationConstant.PREFERENCE_TREE_NAME,
+                                                              "");
+      categoryPath = gpath.substring(gpath.indexOf(preferenceTreeName)
+          + preferenceTreeName.length());
+    }
+
+
     return categoryPath;
   }
-  
+
   /**
    * Gets the categories by uri.
-   * 
+   *
    * @param categoryUri the category uri
-   * 
+   *
    * @return the categories by uri
-   * 
+   *
    * @throws Exception the exception
    */
   public List<String> getCategoriesByUri(String categoryUri) throws Exception {
     PortletPreferences portletPreferences = UICategoryNavigationUtils.getPortletPreferences();
     String preferenceTreeName = portletPreferences.getValue(UICategoryNavigationConstant.PREFERENCE_TREE_NAME, "");
     if (preferenceTreeName.equals(categoryUri)) categoryUri = "";
-    
+
     // categories: {"/", "News", "News/France", "News/France/Blah", "News/France/Blah/Bom"}
     List<String> categories = new ArrayList<String>();
     String[] tempCategories = categoryUri.split("/");
@@ -245,21 +292,21 @@ public class UICategoryNavigationTreeBase extends UITree {
 
   /**
    * Render category link.
-   * 
+   *
    * @param node the node
-   * 
+   *
    * @return the string
-   * 
+   *
    * @throws Exception the exception
    */
   public String renderCategoryLink(Node node) throws Exception {
     // portalURI: /portal/private/acme/
     String portalURI = Util.getPortalRequestContext().getPortalURI();
-    
+
     // preferenceTargetPage: products/presentation/pclv
     PortletPreferences portletPreferences = UICategoryNavigationUtils.getPortletPreferences();
     String preferenceTargetPage = portletPreferences.getValue(UICategoryNavigationConstant.PREFERENCE_TARGET_PAGE, "");
-    
+
     LivePortalManagerService livePortalManagerService = getApplicationComponent(LivePortalManagerService.class);
     Node portalNode = livePortalManagerService.getLivePortalByChild(node);
     String preferenceTreeName = portletPreferences.getValue(UICategoryNavigationConstant.PREFERENCE_TREE_NAME, "");
@@ -267,41 +314,41 @@ public class UICategoryNavigationTreeBase extends UITree {
 //    categoryPath = categoryPath.substring(categoryPath.indexOf(preferenceTreeName) + preferenceTreeName.length());
     categoryPath = categoryPath.substring(categoryPath.indexOf(preferenceTreeName)-1);
 
-    String link = portalURI + preferenceTargetPage + "?path=" + categoryPath; 
-    
+    String link = portalURI + preferenceTargetPage + "?path=" + categoryPath;
+
     FriendlyService friendlyService = getApplicationComponent(FriendlyService.class);
     link = friendlyService.getFriendlyUri(link);
-    
+
     return link;
   }
-  
+
   /**
    * get content's title if exists (from exo:title property)
-   * 
+   *
    * @param node
    * @return the title
    * @throws Exception
    */
   public String getTitle(Node node) throws Exception {
-	  if (node.hasProperty("exo:title")) 
-		  return node.getProperty("exo:title").getString();
-	  else 
-		  return node.getName();	  
+    if (node.hasProperty("exo:title"))
+      return node.getProperty("exo:title").getString();
+    else
+      return node.getName();
   }
-  
+
   public String getTreeTitle() {
-	  return UICategoryNavigationUtils.getPortletPreferences().getValue(UICategoryNavigationConstant.PREFERENCE_TREE_TITLE, "");
+    return UICategoryNavigationUtils.getPortletPreferences().getValue(UICategoryNavigationConstant.PREFERENCE_TREE_TITLE, "");
   }
-  
+
   private Node getCategoryNode(String categoryPath) throws Exception {
-	TaxonomyService taxonomyService = getApplicationComponent(TaxonomyService.class);
-	PortletPreferences portletPreferences = UICategoryNavigationUtils.getPortletPreferences();
-	String preferenceRepository = portletPreferences.getValue(UICategoryNavigationConstant.PREFERENCE_REPOSITORY, "");
-	String preferenceTreeName = portletPreferences.getValue(UICategoryNavigationConstant.PREFERENCE_TREE_NAME, "");
-	Node treeNode = taxonomyService.getTaxonomyTree(preferenceRepository, preferenceTreeName);
-	Node categoryNode = null;
-	if ("".equals(categoryPath)) categoryNode = treeNode;
-	else categoryNode = treeNode.getNode(categoryPath);
-	return categoryNode;
+  TaxonomyService taxonomyService = getApplicationComponent(TaxonomyService.class);
+  PortletPreferences portletPreferences = UICategoryNavigationUtils.getPortletPreferences();
+  String preferenceRepository = portletPreferences.getValue(UICategoryNavigationConstant.PREFERENCE_REPOSITORY, "");
+  String preferenceTreeName = portletPreferences.getValue(UICategoryNavigationConstant.PREFERENCE_TREE_NAME, "");
+  Node treeNode = taxonomyService.getTaxonomyTree(preferenceRepository, preferenceTreeName);
+  Node categoryNode = null;
+  if ("".equals(categoryPath)) categoryNode = treeNode;
+  else categoryNode = treeNode.getNode(categoryPath);
+  return categoryNode;
   }
 }

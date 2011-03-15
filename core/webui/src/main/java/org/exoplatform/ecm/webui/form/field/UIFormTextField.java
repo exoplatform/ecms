@@ -26,7 +26,7 @@ import org.exoplatform.webui.form.UIFormStringInput;
  * Created by The eXo Platform SAS
  * @author : Hoa.Pham
  *          hoa.pham@exoplatform.com
- * Jun 23, 2008  
+ * Jun 23, 2008
  */
 public class UIFormTextField extends DialogFormField{
 
@@ -38,7 +38,7 @@ public class UIFormTextField extends DialogFormField{
   public <T extends UIFormInputBase> T createUIFormInput() throws Exception {
     UIFormStringInput uiInput = new UIFormStringInput(name, name, defaultValue) ;
     //TODO need use full class name for validate type.
-    if (validateType != null) { 
+    if (validateType != null) {
       DialogFormUtil.addValidators(uiInput, validateType);
     }
     if(label != null && label.length()!=0) {
@@ -47,9 +47,9 @@ public class UIFormTextField extends DialogFormField{
     if("password".equals(type)) uiInput.setType(UIFormStringInput.PASSWORD_TYPE);
     return (T)uiInput;
   }
-  
+
   public boolean isEditIfNull() { return "if-null".equals(editable); }
-  
+
   public JcrInputProperty createJcrInputProperty (){
     JcrInputProperty inputProperty = new JcrInputProperty();
     inputProperty.setJcrPath(jcrPath);

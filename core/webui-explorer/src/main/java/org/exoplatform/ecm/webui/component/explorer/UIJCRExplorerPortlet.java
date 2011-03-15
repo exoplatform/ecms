@@ -105,19 +105,19 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
   final static public String PARAMETERIZE       = "parameterize";
 
   final static public String PARAMETERIZE_PATH  = "nodePath";
-  
+
   final static public String SHOW_TOP_BAR       = "showTopBar";
-   
+
   final static public String SHOW_ACTION_BAR    = "showActionBar";
-  
+
   final static public String SHOW_SIDE_BAR      = "showSideBar";
-  
+
   final static public String SHOW_FILTER_BAR    = "showFilterBar";
-  
+
   final static public String EDIT_IN_NEW_WINDOW = "editInNewWindow";
-  
+
   private boolean flagSelect = false;
-  
+
   public UIJCRExplorerPortlet() throws Exception {
     UIJcrExplorerContainer explorerContainer = addChild(UIJcrExplorerContainer.class, null, null);
     explorerContainer.initExplorer();
@@ -127,32 +127,32 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
   public boolean isFlagSelect() { return flagSelect; }
 
   public void setFlagSelect(boolean flagSelect) { this.flagSelect = flagSelect; }
-  
+
   public boolean isShowTopBar() {
     PortletPreferences portletpref = getPortletPreferences();
     return Boolean.valueOf(portletpref.getValue(UIJCRExplorerPortlet.SHOW_TOP_BAR, "false"));
   }
-   
+
   public boolean isShowActionBar() {
     PortletPreferences portletpref = getPortletPreferences();
     return Boolean.valueOf(portletpref.getValue(UIJCRExplorerPortlet.SHOW_ACTION_BAR, "false")) &&
            !this.findFirstComponentOfType(UIJCRExplorer.class).isAddingDocument();
   }
-   
+
   public boolean isShowSideBar() {
     PortletPreferences portletpref = getPortletPreferences();
     return Boolean.valueOf(portletpref.getValue(UIJCRExplorerPortlet.SHOW_SIDE_BAR, "false"));
   }
-   
+
   public boolean isShowFilterBar() {
     PortletPreferences portletpref = getPortletPreferences();
     return Boolean.valueOf(portletpref.getValue(UIJCRExplorerPortlet.SHOW_FILTER_BAR, "false"));
   }
- 
+
   public void  processRender(WebuiApplication app, WebuiRequestContext context) throws Exception {
     UIJcrExplorerContainer explorerContainer = getChild(UIJcrExplorerContainer.class);
     UIJcrExplorerEditContainer editContainer = getChild(UIJcrExplorerEditContainer.class);
-    PortletRequestContext portletReqContext = (PortletRequestContext) context ;    
+    PortletRequestContext portletReqContext = (PortletRequestContext) context ;
     HashMap<String, String> map = getElementByContext(context);
     PortalRequestContext pcontext = Util.getPortalRequestContext();
     String backToValue = Util.getPortalRequestContext().getRequestParameter(org.exoplatform.ecm.webui.utils.Utils.URL_BACKTO);
@@ -161,8 +161,8 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
     }
     HashMap<String, String> changeDrive = (HashMap<String, String>)pcontext.getAttribute("jcrexplorer-show-document");
     if (changeDrive!=null) {
-    	map = changeDrive;
-    	context.setAttribute("jcrexplorer-show-document", null);
+      map = changeDrive;
+      context.setAttribute("jcrexplorer-show-document", null);
     }
     if (portletReqContext.getApplicationMode() == PortletMode.VIEW) {
       if (map.size() > 0) {
@@ -188,22 +188,22 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
       }
       getChild(UIJcrExplorerEditContainer.class).setRendered(false);
     } else if(portletReqContext.getApplicationMode() == PortletMode.HELP) {
-      if (LOG.isDebugEnabled()) LOG.debug("\n\n>>>>>>>>>>>>>>>>>>> IN HELP  MODE \n");      
+      if (LOG.isDebugEnabled()) LOG.debug("\n\n>>>>>>>>>>>>>>>>>>> IN HELP  MODE \n");
     } else if(portletReqContext.getApplicationMode() == PortletMode.EDIT) {
       explorerContainer.setRendered(false);
       getChild(UIJcrExplorerEditContainer.class).setRendered(true);
     }
-    
+
     RenderResponse response = context.getResponse();
     Element elementS = response.createElement("script");
     elementS.setAttribute("type", "text/javascript");
     elementS.setAttribute("src", "/eXoWCMResources/javascript/eXo/wcm/backoffice/public/Components.js");
-    response.addProperty(MimeResponse.MARKUP_HEAD_ELEMENT,elementS); 
-    
+    response.addProperty(MimeResponse.MARKUP_HEAD_ELEMENT,elementS);
+
     super.processRender(app, context);
   }
 
-  public void initwhenDirect(UIJcrExplorerContainer explorerContainer, 
+  public void initwhenDirect(UIJcrExplorerContainer explorerContainer,
       UIJcrExplorerEditContainer editContainer) throws Exception {
     if (editContainer.getChild(UIJcrExplorerEditForm.class).isFlagSelectRender()) {
       PortletPreferences portletPref = getPortletPreferences();
@@ -216,14 +216,14 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
 //      ManageDriveService driveService = getApplicationComponent(ManageDriveService.class);
 //      DriveData driveData = driveService.getDriveByName(driveName, repository);
 //      String nodePath = portletPref.getValue("nodePath", "").trim();
-//      if (!nodePath.startsWith("/")) nodePath = "/" + nodePath; 
+//      if (!nodePath.startsWith("/")) nodePath = "/" + nodePath;
 //      String homePath = (driveData.getHomePath().concat(nodePath)).replaceAll("/+", "/");
 //      if(!canUseConfigDrive(repository, driveName)) {
 //        homePath = getUserDrive(repository, "private").getHomePath();
 //      }
 //      if (homePath.contains("${userId}")) homePath = homePath.replace("${userId}", userId);
 //      uiJCRExplorer.setSelectNode(driveData.getWorkspace(), homePath);
-//      uiJCRExplorer.refreshExplorer(); 
+//      uiJCRExplorer.refreshExplorer();
     }
   }
 
@@ -245,7 +245,7 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
   public String getPreferenceTrashWorkspace() {
     return getPortletPreferences().getValue(Utils.TRASH_WORKSPACE, "");
   }
-  
+
   public boolean isEditInNewWindow() {
     return Boolean.parseBoolean(getPortletPreferences().getValue(UIJCRExplorerPortlet.EDIT_IN_NEW_WINDOW, "true"));
   }
@@ -257,7 +257,7 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
 
   public DriveData getUserDrive(String repoName, String userType) throws Exception {
     ManageDriveService manageDriveService = getApplicationComponent(ManageDriveService.class);
-    List<String> userRoles = Utils.getMemberships();    
+    List<String> userRoles = Utils.getMemberships();
     String userId = Util.getPortalRequestContext().getRemoteUser();
     for(DriveData userDrive : manageDriveService.getPersonalDrives(repoName, userId, userRoles)) {
       if(userDrive.getName().equalsIgnoreCase(userType)) {
@@ -283,7 +283,7 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
     uiWorkingArea.setRenderedChild(UIDrivesArea.class);
     UIRightClickPopupMenu uiRightClickPopupMenu = uiWorkingArea.getChild(UIRightClickPopupMenu.class);
     if(uiRightClickPopupMenu!=null)
-    	uiRightClickPopupMenu.setRendered(true);
+      uiRightClickPopupMenu.setRendered(true);
   }
 
   private HashMap<String, String> getElementByContext(WebuiRequestContext context) {
@@ -293,19 +293,19 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
     Pattern patternUrl = Pattern.compile("([^/]+)/([^/]+)/([^/]+)/(.*)");
     PortalRequestContext pcontext = Util.getPortalRequestContext();
     Matcher matcher;
-    
+
     String nodePathParam = pcontext.getRequestParameter("path");
     if (nodePathParam!=null) {
-	    patternUrl = Pattern.compile("([^/]+)/([^/]+)/(.*)");
-	    matcher = patternUrl.matcher(nodePathParam);
-	    if (matcher.find()) {
-	      mapParam.put("repository", matcher.group(1));
-	      mapParam.put("drive", matcher.group(2));
-	      mapParam.put("path", matcher.group(3));
-	      return mapParam;
-	    }
+      patternUrl = Pattern.compile("([^/]+)/([^/]+)/(.*)");
+      matcher = patternUrl.matcher(nodePathParam);
+      if (matcher.find()) {
+        mapParam.put("repository", matcher.group(1));
+        mapParam.put("drive", matcher.group(2));
+        mapParam.put("path", matcher.group(3));
+        return mapParam;
+      }
     }
-    
+
     String nodePathUrl = pcontext.getNodePath().substring(1);
     String[] uri = nodePathUrl.split("/");
     if (uri == null || uri.length < 3) return mapParam;
@@ -322,7 +322,7 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
         mapParam.put("repository", matcher.group(2));
         mapParam.put("drive", matcher.group(3));
         mapParam.put("path", "/");
-      }  
+      }
     }
     return mapParam;
   }
@@ -332,17 +332,17 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
     String driveName = String.valueOf(map.get("drive"));
     String path = String.valueOf(map.get("path"));
     if(!path.equals("/")) {
-	    ArrayList<String> encodeNameArr = new ArrayList<String>();
-	    for(String name : path.split("/")) {
-	      if(name.length() > 0) {
-	        encodeNameArr.add(Text.escapeIllegalJcrChars(name));
-	      }
-	    }
-	    StringBuilder encodedPath = new StringBuilder();
-	    for(String encodedName : encodeNameArr) {
-	      encodedPath.append("/").append(encodedName);
-	    }
-	    path = encodedPath.toString();
+      ArrayList<String> encodeNameArr = new ArrayList<String>();
+      for(String name : path.split("/")) {
+        if(name.length() > 0) {
+          encodeNameArr.add(Text.escapeIllegalJcrChars(name));
+        }
+      }
+      StringBuilder encodedPath = new StringBuilder();
+      for(String encodedName : encodeNameArr) {
+        encodedPath.append("/").append(encodedName);
+      }
+      path = encodedPath.toString();
     }
     UIApplication uiApp = findFirstComponentOfType(UIApplication.class);
     ManageDriveService manageDrive = getApplicationComponent(ManageDriveService.class);
@@ -363,7 +363,7 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
     for (String role : Utils.getMemberships()) {
       for (String viewName : driveData.getViews().split(",")) {
         if (!viewList.contains(viewName.trim())) {
-          Node viewNode = 
+          Node viewNode =
             getApplicationComponent(ManageViewService.class).getViewByName(viewName.trim(),
                 repositoryName, SessionProviderFactory.createSystemProvider());
           String permiss = viewNode.getProperty("exo:accessPermissions").getString();
@@ -380,10 +380,10 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
     String viewLabel = null;
     for (String viewName : viewList) {
       try {
-        viewLabel = res.getString("Views.label." + viewName) ; 
+        viewLabel = res.getString("Views.label." + viewName) ;
       } catch (MissingResourceException e) {
         viewLabel = viewName;
-      }        
+      }
       viewOptions.add(new SelectItemOption<String>(viewLabel, viewName));
       if(viewListStr.length() > 0) viewListStr = viewListStr + "," + viewName;
       else viewListStr = viewName;
@@ -396,33 +396,33 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
     UIJCRExplorer uiExplorer = findFirstComponentOfType(UIJCRExplorer.class);
 //    String mode = getPortletPreferences().getValue(UIJCRExplorerPortlet.MODE, "");
 //    setStandardMode(UIJCRExplorerPortlet.STANDARD_MODE.equals(mode));
-    
+
     uiExplorer.setDriveData(driveData);
     uiExplorer.setIsReferenceNode(false);
 
-    SessionProvider provider = SessionProviderFactory.createSessionProvider();                  
+    SessionProvider provider = SessionProviderFactory.createSessionProvider();
     ManageableRepository repository = rservice.getRepository(repositoryName);
     try {
-      Session session = provider.getSession(driveData.getWorkspace(),repository);      
+      Session session = provider.getSession(driveData.getWorkspace(),repository);
       // check if it exists
       // we assume that the path is a real path
-      session.getItem(homePath);        
+      session.getItem(homePath);
     } catch(AccessDeniedException ace) {
       Object[] args = { driveName };
-      uiApp.addMessage(new ApplicationMessage("UIDrivesBrowser.msg.access-denied", args, 
+      uiApp.addMessage(new ApplicationMessage("UIDrivesBrowser.msg.access-denied", args,
           ApplicationMessage.WARNING));
       context.addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
-      return;        
+      return;
     } catch(NoSuchWorkspaceException nosuchWS) {
       Object[] args = { driveName };
-      uiApp.addMessage(new ApplicationMessage("UIDrivesBrowser.msg.workspace-not-exist", args, 
+      uiApp.addMessage(new ApplicationMessage("UIDrivesBrowser.msg.workspace-not-exist", args,
           ApplicationMessage.WARNING));
       context.addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
-      return;        
+      return;
     } catch(Exception e) {
       JCRExceptionManager.process(uiApp, e);
       return;
-    } 
+    }
     uiExplorer.setRepositoryName(repositoryName);
     uiExplorer.setWorkspaceName(driveData.getWorkspace());
     uiExplorer.setRootPath(homePath);
@@ -431,7 +431,7 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
     pref.setShowSideBar(driveData.getViewSideBar());
     pref.setShowNonDocumentType(driveData.getViewNonDocument());
     pref.setShowPreferenceDocuments(driveData.getViewPreferences());
-    pref.setAllowCreateFoder(driveData.getAllowCreateFolders()); 
+    pref.setAllowCreateFoder(driveData.getAllowCreateFolders());
     pref.setShowHiddenNode(driveData.getShowHiddenNode());
     uiExplorer.setIsReferenceNode(false);
     UIControl uiControl = uiExplorer.getChild(UIControl.class);
@@ -441,25 +441,25 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
     uiAddressBar.setSelectedViewName(viewList.get(0));
     uiAddressBar.setRendered(isShowTopBar());
 //    if (viewList.size() == 1) uiAddressBar.setRendered(false);
-    
+
     UIActionBar uiActionbar = uiControl.getChild(UIActionBar.class);
 //  uiActionbar.setTabOptions(viewList.get(0));
     boolean isShowActionBar = isShowActionBar() ;
     uiActionbar.setTabOptions(viewList.get(0));
     uiActionbar.setRendered(isShowActionBar);
     uiExplorer.setSelectNode(driveData.getWorkspace(), path);
-    
+
     UIWorkingArea uiWorkingArea = findFirstComponentOfType(UIWorkingArea.class);
     UISideBar uiSideBar = uiWorkingArea.findFirstComponentOfType(UISideBar.class);
     if (uiSideBar.isRendered()) {
-    	uiSideBar.updateSideBarView();
-    	uiSideBar.getChild(UITreeExplorer.class).buildTree();
+      uiSideBar.updateSideBarView();
+      uiSideBar.getChild(UITreeExplorer.class).buildTree();
     }
 
     UIDocumentWorkspace uiDocWorkspace = uiWorkingArea.getChild(UIDocumentWorkspace.class);
     uiDocWorkspace.setRenderedChild(UIDocumentContainer.class);
     uiDocWorkspace.setRendered(true);
-    
+
     UIDrivesArea uiDrive = uiWorkingArea.getChild(UIDrivesArea.class);
     if (uiDrive != null) uiDrive.setRendered(false);
     context.addUIComponentToUpdateByAjax(uiDocWorkspace);
@@ -468,48 +468,47 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
       popupAction.deActivate();
       context.addUIComponentToUpdateByAjax(popupAction);
     }
-    
+
     Boolean isEdit = Boolean.valueOf(Util.getPortalRequestContext().getRequestParameter("edit"));
     Node selectedNode = uiExplorer.getCurrentNode();
     if (isEdit) {
-	    if (uiExplorer.getCurrentPath().equals(path) && 
-	    		canManageNode(selectedNode, uiApp, uiExplorer, uiActionbar, context, EditDocumentActionComponent.getFilters())) {
-	    	EditDocumentActionComponent.editDocument(null, context, this, uiExplorer, selectedNode, uiApp);
-	    } else {
-	      uiApp.addMessage(new ApplicationMessage("UIJCRExplorerPortlet.msg.file-access-denied", null, ApplicationMessage.WARNING));
-	      context.addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
-	    }
+      if (uiExplorer.getCurrentPath().equals(path) &&
+          canManageNode(selectedNode, uiApp, uiExplorer, uiActionbar, context, EditDocumentActionComponent.getFilters())) {
+        EditDocumentActionComponent.editDocument(null, context, this, uiExplorer, selectedNode, uiApp);
+      } else {
+        uiApp.addMessage(new ApplicationMessage("UIJCRExplorerPortlet.msg.file-access-denied", null, ApplicationMessage.WARNING));
+        context.addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+      }
     }
-    
+
     boolean isAddNew = Boolean.valueOf(Util.getPortalRequestContext().getRequestParameter("addNew"));
     if (!isEdit && isAddNew) {
-	    if (canManageNode(selectedNode, uiApp, uiExplorer, uiActionbar, context, AddDocumentActionComponent.getFilters())) {
-	    	AddDocumentActionComponent.addDocument(null, uiExplorer, uiApp, this, context);
-	    } else {
-	      uiApp.addMessage(new ApplicationMessage("UIJCRExplorerPortlet.msg.file-access-denied", null, ApplicationMessage.WARNING));
-	      context.addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
-	    }
+      if (canManageNode(selectedNode, uiApp, uiExplorer, uiActionbar, context, AddDocumentActionComponent.getFilters())) {
+        AddDocumentActionComponent.addDocument(null, uiExplorer, uiApp, this, context);
+      } else {
+        uiApp.addMessage(new ApplicationMessage("UIJCRExplorerPortlet.msg.file-access-denied", null, ApplicationMessage.WARNING));
+        context.addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+      }
     }
     uiExplorer.refreshExplorer(null, (isAddNew && isEdit) && isEditInNewWindow());
     uiExplorer.setRenderSibling(UIJCRExplorer.class);
   }
-  
+
   private boolean canManageNode(Node selectedNode, UIApplication uiApp, UIJCRExplorer uiExplorer, UIActionBar uiActionBar, Object context,
-  														List<UIExtensionFilter> filters) throws Exception {
-  	Map<String, Object> ctx = new HashMap<String, Object>();
-  	ctx.put(UIActionBar.class.getName(), uiActionBar);
+                              List<UIExtensionFilter> filters) throws Exception {
+    Map<String, Object> ctx = new HashMap<String, Object>();
+    ctx.put(UIActionBar.class.getName(), uiActionBar);
     ctx.put(UIJCRExplorer.class.getName(), uiExplorer);
     ctx.put(UIApplication.class.getName(), uiApp);
     ctx.put(Node.class.getName(), selectedNode);
-    ctx.put(WebuiRequestContext.class.getName(), context);  	
-  	for (UIExtensionFilter filter : filters) 
-  		try {
-  			if (!filter.accept(ctx)) return false;
-  		} catch (Exception e) {
-  			return false;
-  		}
-  	return true;
+    ctx.put(WebuiRequestContext.class.getName(), context);
+    for (UIExtensionFilter filter : filters)
+      try {
+        if (!filter.accept(ctx)) return false;
+      } catch (Exception e) {
+        return false;
+      }
+    return true;
   }
 }
 
-  

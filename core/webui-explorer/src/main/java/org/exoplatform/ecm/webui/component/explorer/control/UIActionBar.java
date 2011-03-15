@@ -99,7 +99,7 @@ public class UIActionBar extends UIForm {
    * Logger.
    */
   private static final Log LOG  = ExoLogger.getLogger(UIActionBar.class);
-  
+
   private Node view_ ;
   private String templateName_ ;
   //private List<SelectItemOption<String>> tabOptions = new ArrayList<SelectItemOption<String>>() ;
@@ -108,19 +108,26 @@ public class UIActionBar extends UIForm {
   private Map<String, String[]> actionInTabs_ = new HashMap<String, String[]>();
 
   private String selectedTabName_;
-  
-  final static private String FIELD_SIMPLE_SEARCH = "simpleSearch" ;
-  final static private String FIELD_ADVANCE_SEARCH = "advanceSearch" ;
-  final static private String FIELD_SEARCH_TYPE = "searchType" ;
-  final static private String FIELD_SQL = "SQL" ;
-  final static private String FIELD_XPATH = "xPath" ;
 
-  final static private String ROOT_SQL_QUERY = "select * from nt:base where contains(*, '$1') order by exo:dateCreated DESC, jcr:primaryType DESC" ;
-  final static private String SQL_QUERY = "select * from nt:base where jcr:path like '$0/%' and contains(*, '$1') order by jcr:path DESC, jcr:primaryType DESC";
-  
+  final static private String   FIELD_SIMPLE_SEARCH  = "simpleSearch";
+
+  final static private String   FIELD_ADVANCE_SEARCH = "advanceSearch";
+
+  final static private String   FIELD_SEARCH_TYPE    = "searchType";
+
+  final static private String   FIELD_SQL            = "SQL";
+
+  final static private String   FIELD_XPATH          = "xPath";
+
+  final static private String   ROOT_SQL_QUERY       = "select * from nt:base where contains(*, '$1') "
+                                                         + "order by exo:dateCreated DESC, jcr:primaryType DESC";
+
+  final static private String   SQL_QUERY            = "select * from nt:base where jcr:path like '$0/%' and contains(*, '$1') "
+                                                         + "order by jcr:path DESC, jcr:primaryType DESC";
+
   private String backLink;
-  
-  public UIActionBar() throws Exception{
+
+  public UIActionBar() throws Exception {
     addChild(new UIFormStringInput(FIELD_SIMPLE_SEARCH, FIELD_SIMPLE_SEARCH, null).addValidator(SearchValidator.class));
     List<SelectItemOption<String>> typeOptions = new ArrayList<SelectItemOption<String>>();
     typeOptions.add(new SelectItemOption<String>(FIELD_SQL, Query.SQL));
@@ -132,8 +139,8 @@ public class UIActionBar extends UIForm {
   public void setTabOptions(String viewName) throws Exception {
     tabList_ = new ArrayList<String>();
     String repository = getAncestorOfType(UIJCRExplorer.class).getRepositoryName();
-    view_ = getApplicationComponent(ManageViewService.class).getViewByName(viewName,repository, 
-        SessionProviderFactory.createSystemProvider()); 
+    view_ = getApplicationComponent(ManageViewService.class).getViewByName(viewName,repository,
+        SessionProviderFactory.createSystemProvider());
     NodeIterator tabs = view_.getNodes();
     while (tabs.hasNext()) {
       Node tab = tabs.nextNode();
@@ -147,15 +154,19 @@ public class UIActionBar extends UIForm {
     uiExplorer.setRenderTemplate(template);
   }
   public boolean hasBackButton() {
-    String newLink = getAncestorOfType(UIJCRExplorerPortlet.class).getPortletPreferences().getValue(org.exoplatform.ecm.webui.utils.Utils.URL_BACKTO, null);
+    String newLink = getAncestorOfType(UIJCRExplorerPortlet.class).getPortletPreferences()
+                                                                  .getValue(org.exoplatform.ecm.webui.utils.Utils.URL_BACKTO,
+                                                                            null);
     if (newLink != null)
       backLink = newLink;
     return backLink != null;
   }
   public String getBackLink() {
-    String newLink = getAncestorOfType(UIJCRExplorerPortlet.class).getPortletPreferences().getValue(org.exoplatform.ecm.webui.utils.Utils.URL_BACKTO, null);
+    String newLink = getAncestorOfType(UIJCRExplorerPortlet.class).getPortletPreferences()
+                                                                  .getValue(org.exoplatform.ecm.webui.utils.Utils.URL_BACKTO,
+                                                                            null);
     if (newLink != null)
-    	backLink = URLDecoder.decode(newLink);
+      backLink = URLDecoder.decode(newLink);
     return backLink;
   }
   public String getTemplateName() { return templateName_;  }
@@ -176,30 +187,30 @@ public class UIActionBar extends UIForm {
   }
 
   public String[] getActionInTab(String tabName) { return actionInTabs_.get(tabName); }
-  
-  public void setSelectedTab(String tabName) { 
-	  selectedTabName_ = tabName; 
+
+  public void setSelectedTab(String tabName) {
+    selectedTabName_ = tabName;
   }
-  
-  public String getSelectedTab() throws Exception { 
+
+  public String getSelectedTab() throws Exception {
     if(selectedTabName_ == null || selectedTabName_.length() == 0) {
       setTabOptions(tabList_.get(0));
       return tabList_.get(0);
     }
-    return selectedTabName_; 
+    return selectedTabName_;
   }
-  
+
   public boolean isShowSaveSession() throws Exception {
     UIJCRExplorer uiExplorer =  getAncestorOfType(UIJCRExplorer.class) ;
-    return uiExplorer.getPreference().isJcrEnable() ;    
+    return uiExplorer.getPreference().isJcrEnable() ;
   }
-  
+
   public List<String> getTabList() { return tabList_; }
-  
+
   public List<Query> getSavedQueries() throws Exception {
     String userName = Util.getPortalRequestContext().getRemoteUser();
     String repository = getAncestorOfType(UIJCRExplorer.class).getRepositoryName();
-    return getApplicationComponent(QueryService.class).getQueries(userName, repository, 
+    return getApplicationComponent(QueryService.class).getQueries(userName, repository,
         SessionProviderFactory.createSystemProvider());
   }
 
@@ -247,7 +258,7 @@ public class UIActionBar extends UIForm {
     }
     return null;
   }
-  
+
   public boolean isActionAvailable(String tabName) {
     List<UIComponent> listActions = new ArrayList<UIComponent>();
     for(String action : getActionInTab(tabName)) {
@@ -257,7 +268,7 @@ public class UIActionBar extends UIForm {
     if(listActions.size() > 0) return true;
     return false;
   }
-  
+
   static public class SearchActionListener extends EventListener<UIActionBar> {
     public void execute(Event<UIActionBar> event) throws Exception {
       UIJCRExplorer uiJCRExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class);
@@ -275,11 +286,11 @@ public class UIActionBar extends UIForm {
       Node currentNode = uiExplorer.getCurrentNode();
       String queryStatement = null;
       if("/".equals(currentNode.getPath())) {
-        queryStatement = ROOT_SQL_QUERY;        
+        queryStatement = ROOT_SQL_QUERY;
       }else {
         queryStatement = StringUtils.replace(SQL_QUERY,"$0",currentNode.getPath());
       }
-      queryStatement = StringUtils.replace(queryStatement,"$1", text.replaceAll("'", "''"));            
+      queryStatement = StringUtils.replace(queryStatement,"$1", text.replaceAll("'", "''"));
       uiExplorer.removeChildById("ViewSearch");
       UIWorkingArea uiWorkingArea = uiExplorer.getChild(UIWorkingArea.class);
       UIDocumentWorkspace uiDocumentWorkspace = uiWorkingArea.getChild(UIDocumentWorkspace.class);
@@ -288,14 +299,14 @@ public class UIActionBar extends UIForm {
         uiWorkingArea.getChild(UIDocumentWorkspace.class).setRendered(true);
         uiDocumentWorkspace.setRenderedChild(UIDocumentContainer.class) ;
       }
-      UISearchResult uiSearchResult = 
-        uiDocumentWorkspace.getChildById(UIDocumentWorkspace.SIMPLE_SEARCH_RESULT);           
+      UISearchResult uiSearchResult =
+        uiDocumentWorkspace.getChildById(UIDocumentWorkspace.SIMPLE_SEARCH_RESULT);
       QueryManager queryManager = currentNode.getSession().getWorkspace().getQueryManager();
       long startTime = System.currentTimeMillis();
-      Query query = queryManager.createQuery(queryStatement, Query.SQL);        
-      QueryResult queryResult = query.execute();                  
+      Query query = queryManager.createQuery(queryStatement, Query.SQL);
+      QueryResult queryResult = query.execute();
       uiSearchResult.clearAll();
-      uiSearchResult.setQueryResults(queryResult);            
+      uiSearchResult.setQueryResults(queryResult);
       uiSearchResult.updateGrid(true);
       long time = System.currentTimeMillis() - startTime;
       uiSearchResult.setSearchTime(time);
@@ -318,23 +329,23 @@ public class UIActionBar extends UIForm {
     }
   }
   static public class BackToActionListener extends EventListener<UIActionBar> {
-	    public void execute(Event<UIActionBar> event) throws Exception {
-	    	UIJCRExplorer uiExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class);
-	        UIWorkingArea uiWorkingArea = uiExplorer.getChild(UIWorkingArea.class);
-	        UIDocumentWorkspace uiDocumentWorkspace = uiWorkingArea.getChild(UIDocumentWorkspace.class);	            	      
-	        UIDocumentFormController uiDocumentFormController =  uiDocumentWorkspace.getChild(UIDocumentFormController.class);
-	        String backLink = event.getSource().getBackLink();
-	        if (uiDocumentFormController != null) {
-	          UIDocumentForm uiDocument = uiDocumentFormController.getChild(UIDocumentForm.class);
-			  if (uiDocument!=null) {
-			    uiDocument.releaseLock();
-			  }
-	          uiDocumentWorkspace.removeChild(UIDocumentFormController.class);
-	        } else    
-	        uiExplorer.cancelAction();
-	        event.getRequestContext().getJavascriptManager().addJavascript("location.href='" + backLink + "';");
-	    }
-	  }
+      public void execute(Event<UIActionBar> event) throws Exception {
+        UIJCRExplorer uiExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class);
+          UIWorkingArea uiWorkingArea = uiExplorer.getChild(UIWorkingArea.class);
+          UIDocumentWorkspace uiDocumentWorkspace = uiWorkingArea.getChild(UIDocumentWorkspace.class);
+          UIDocumentFormController uiDocumentFormController =  uiDocumentWorkspace.getChild(UIDocumentFormController.class);
+          String backLink = event.getSource().getBackLink();
+          if (uiDocumentFormController != null) {
+            UIDocumentForm uiDocument = uiDocumentFormController.getChild(UIDocumentForm.class);
+        if (uiDocument!=null) {
+          uiDocument.releaseLock();
+        }
+            uiDocumentWorkspace.removeChild(UIDocumentFormController.class);
+          } else
+          uiExplorer.cancelAction();
+          event.getRequestContext().getJavascriptManager().addJavascript("location.href='" + backLink + "';");
+      }
+    }
   static public class SavedQueriesActionListener extends EventListener<UIActionBar> {
     public void execute(Event<UIActionBar> event) throws Exception {
       UIJCRExplorer uiJCRExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class);
@@ -356,17 +367,17 @@ public class UIActionBar extends UIForm {
       event.getRequestContext().addUIComponentToUpdateByAjax(uiActionBar);
     }
   }
-  
+
   static public class PreferencesActionListener extends EventListener<UIActionBar> {
     public void execute(Event<UIActionBar> event) throws Exception {
       UIActionBar uiActionBar = event.getSource();
-      UIJCRExplorer uiJCRExplorer = uiActionBar.getAncestorOfType(UIJCRExplorer.class);                                         
+      UIJCRExplorer uiJCRExplorer = uiActionBar.getAncestorOfType(UIJCRExplorer.class);
       UIPopupContainer popupAction = uiJCRExplorer.getChild(UIPopupContainer.class);
       UIPreferencesForm uiPrefForm = popupAction.activate(UIPreferencesForm.class,600) ;
       uiPrefForm.update(uiJCRExplorer.getPreference()) ;
       event.getRequestContext().addUIComponentToUpdateByAjax(popupAction) ;
     }
-  }  
+  }
 
   static public class SaveSessionActionListener extends EventListener<UIActionBar> {
     public void execute(Event<UIActionBar> event) throws Exception {
@@ -378,5 +389,5 @@ public class UIActionBar extends UIForm {
       uiApp.addMessage(new ApplicationMessage(mess, null, ApplicationMessage.INFO)) ;
     }
   }
-  
+
 }

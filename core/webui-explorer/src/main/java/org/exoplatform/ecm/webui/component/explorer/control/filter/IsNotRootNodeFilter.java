@@ -28,18 +28,18 @@ import org.exoplatform.webui.ext.filter.UIExtensionFilterType;
  * Created by The eXo Platform SAS
  * Author : eXoPlatform
  *          nicolas.filotto@exoplatform.com
- * 6 mai 2009  
+ * 6 mai 2009
  */
 public class IsNotRootNodeFilter extends UIExtensionAbstractFilter {
 
   public IsNotRootNodeFilter() {
     this("UIActionBar.msg.cannot-action-in-rootnode");
   }
-  
+
   public IsNotRootNodeFilter(String messageKey) {
     super(messageKey, UIExtensionFilterType.MANDATORY);
   }
-  
+
   public boolean accept(Map<String, Object> context) throws Exception {
     Node currentNode = (Node) context.get(Node.class.getName());
     return !((NodeImpl)currentNode).isRoot();
@@ -47,5 +47,5 @@ public class IsNotRootNodeFilter extends UIExtensionAbstractFilter {
 
   public void onDeny(Map<String, Object> context) throws Exception {
     createUIPopupMessages(context, messageKey);
-  }    
+  }
 }

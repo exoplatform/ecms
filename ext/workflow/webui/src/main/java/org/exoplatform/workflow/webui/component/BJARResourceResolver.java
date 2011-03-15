@@ -33,21 +33,21 @@ import org.exoplatform.services.workflow.WorkflowServiceContainer;
  * Author : Ly Dinh Quang
  *          quang.ly@exoplatform.com
  *          xxx5669@gmail.com
- * Jan 9, 2009  
+ * Jan 9, 2009
  */
 public class BJARResourceResolver extends ResourceResolver {
-  
-	private WorkflowServiceContainer service_;
+
+  private WorkflowServiceContainer service_;
 
   public BJARResourceResolver(WorkflowServiceContainer service) {
     service_ = service;
   }
 
   public URL getResource(String url) throws Exception {
-    throw new Exception("This method is not  supported");  
+    throw new Exception("This method is not  supported");
   }
 
-  public InputStream getInputStream(String fileLocation) throws Exception  {    
+  public InputStream getInputStream(String fileLocation) throws Exception  {
     String[] infos = StringUtils.split(fileLocation, ":/");
     if (infos.length == 2) {
       Task taskInstance = service_.getTask(infos[0]);
@@ -57,7 +57,7 @@ public class BJARResourceResolver extends ResourceResolver {
     }
     throw new Exception("Cannot retrieve data in process "
         + fileLocation
-        + "Make sure you have a valid location");    
+        + "Make sure you have a valid location");
   }
 
   public List<URL> getResources(String url) throws Exception {

@@ -31,18 +31,18 @@ import org.exoplatform.webui.form.UIFormInputInfo;
  * Author : Ly Dinh Quang
  *          quang.ly@exoplatform.com
  *			    xxx5669@yahoo.com
- * Oct 9, 2008  
+ * Oct 9, 2008
  */
 @ComponentConfig(
     lifecycle = UIFormLifecycle.class,
     template = "classpath:groovy/ecm/webui/form/UIFormWithoutAction.gtmpl",
-    events = { 
+    events = {
       @EventConfig(listeners = UIAnyPermission.AddAnyPermissionActionListener.class)
     }
 )
 public class UIAnyPermission extends UIForm {
   static private String ANYPERMISSION = "anyPermission";
-  
+
   public UIAnyPermission() throws Exception {
     UIFormInputSetWithAction rootNodeInfo = new UIFormInputSetWithAction(ANYPERMISSION);
     rootNodeInfo.addUIFormInput(new UIFormInputInfo("any", "any", null));
@@ -51,7 +51,7 @@ public class UIAnyPermission extends UIForm {
     rootNodeInfo.showActionInfo(true);
     addUIComponentInput(rootNodeInfo);
   }
-  
+
   static public class AddAnyPermissionActionListener extends EventListener<UIAnyPermission> {
     public void execute(Event<UIAnyPermission> event) throws Exception {
       UIAnyPermission uiAnyPermission = event.getSource();

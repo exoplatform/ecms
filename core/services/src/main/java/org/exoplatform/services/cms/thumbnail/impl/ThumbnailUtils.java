@@ -26,10 +26,10 @@ import org.exoplatform.services.cms.thumbnail.ThumbnailService;
  * Created by The eXo Platform SAS
  * Author : eXoPlatform
  *          nicolas.filotto@exoplatform.com
- * 8 avr. 2009  
+ * 8 avr. 2009
  */
 public final class ThumbnailUtils {
-  
+
   static Node getThumbnailFolder(Node parentNode) throws RepositoryException {
     if (!parentNode.hasNode(ThumbnailService.EXO_THUMBNAILS_FOLDER)) {
       try {
@@ -47,7 +47,7 @@ public final class ThumbnailUtils {
     }
     return parentNode.getNode(ThumbnailService.EXO_THUMBNAILS_FOLDER);
   }
-  
+
   static Node getThumbnailNode(Node thumbnailFolder, String identifier) throws RepositoryException {
     if (!thumbnailFolder.hasNode(identifier)) {
       try {
@@ -56,8 +56,8 @@ public final class ThumbnailUtils {
         return thumbnailNode;
       } catch (ItemExistsException e) {
         // The folder could already be created due to potential concurrent access
-      }      
+      }
     }
     return thumbnailFolder.getNode(identifier);
-  }  
+  }
 }

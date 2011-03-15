@@ -42,10 +42,10 @@ import org.exoplatform.webui.ext.UIExtensionEventListener;
  * Created by The eXo Platform SAS
  * Author : eXoPlatform
  *          nicolas.filotto@exoplatform.com
- * 6 mai 2009  
+ * 6 mai 2009
  */
 public abstract class UIActionBarActionListener<T extends UIComponent> extends UIExtensionEventListener<T> {
-  
+
   private static final Log LOG  = ExoLogger.getLogger(UIActionBarActionListener.class);
   /**
    * {@inheritDoc}
@@ -71,9 +71,9 @@ public abstract class UIActionBarActionListener<T extends UIComponent> extends U
         // Use the method getNodeByPath because it is link aware
         currentNode = uiExplorer.getNodeByPath(nodePath, session);
       } else {
-        currentNode = uiExplorer.getCurrentNode();   
+        currentNode = uiExplorer.getCurrentNode();
       }
-      
+
       WebuiRequestContext requestContext = event.getRequestContext();
       UIApplication uiApp = requestContext.getUIApplication();
       context.put(UIActionBar.class.getName(), uiActionBar);
@@ -82,14 +82,14 @@ public abstract class UIActionBarActionListener<T extends UIComponent> extends U
       context.put(Node.class.getName(), currentNode);
       context.put(WebuiRequestContext.class.getName(), requestContext);
     } catch(PathNotFoundException pne) {
-      throw new MessageException(new ApplicationMessage("UIPopupMenu.msg.path-not-found", null, 
+      throw new MessageException(new ApplicationMessage("UIPopupMenu.msg.path-not-found", null,
           ApplicationMessage.WARNING)) ;
     } catch(Exception e) {
       LOG.error("Unexpected problem occurs", e);
     }
     return context;
   }
-  
+
   /**
    * {@inheritDoc}
    */

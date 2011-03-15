@@ -37,14 +37,14 @@ import org.exoplatform.webui.event.EventListener;
  * Created by The eXo Platform SAS
  * Author : eXoPlatform
  *          exo@exoplatform.com
- * Nov 3, 2010  
+ * Nov 3, 2010
  */
 @ComponentConfig (
   template = "classpath:templates/viewinfo/UIViewInfoContainer.gtmpl",
   events = {
      @EventConfig(listeners = UIViewInfoContainer.CloseActionListener.class)
   }
-) 
+)
 public class UIViewInfoContainer extends UIContainer {
 
   /**
@@ -76,12 +76,12 @@ public class UIViewInfoContainer extends UIContainer {
   private static final String PUBLICATION_CURRENT_STATE = "publication:currentState";
 
   private static final String EXO_LAST_MODIFIED_DATE    = "exo:lastModifiedDate";
-  
+
   /**
    * checking selected node is a folder or not
    */
   private boolean isFolder = false;
-  
+
   /**
    * constructor
    * @throws RepositoryException
@@ -116,21 +116,21 @@ public class UIViewInfoContainer extends UIContainer {
   }
 
   /**
-   * read node properties, put value in to inforMap 
+   * read node properties, put value in to inforMap
    * @throws Exception
    */
   public void readNodeInformation() throws Exception {
     Node selectedNode = getSelectedNode();
-    
+
     //get name
     inforMap.put(NAME, selectedNode.getName());
-    
+
     //get title
     inforMap.put(TITLE, getTitle(selectedNode));
-    
+
     //get Type
     inforMap.put(TYPE, getType(selectedNode));
-    
+
     //get file size
     if (selectedNode.hasNode(Utils.JCR_CONTENT)) {
       Node contentNode = selectedNode.getNode(Utils.JCR_CONTENT);
@@ -140,33 +140,33 @@ public class UIViewInfoContainer extends UIContainer {
         inforMap.put(SIZE, fileSize);
       }
     }
-    
+
     //get owner
     if (selectedNode.hasProperty(Utils.EXO_OWNER)) {
       inforMap.put(OWNER, selectedNode.getProperty(Utils.EXO_OWNER).getString());
     }
-    
+
     //get last modifier
     if (selectedNode.hasProperty(Utils.EXO_LASTMODIFIER)) {
       inforMap.put(LAST_MODIFIER, selectedNode.getProperty(Utils.EXO_LASTMODIFIER).getString());
     }
-    
+
     //get created date
     if (selectedNode.hasProperty(Utils.EXO_CREATED_DATE)) {
       inforMap.put(CREATED, selectedNode.getProperty(Utils.EXO_CREATED_DATE).getString());
     }
-    
+
     //get last modified date
     if (selectedNode.hasProperty(EXO_LAST_MODIFIED_DATE)) {
       inforMap.put(LAST_MODIFIED, selectedNode.getProperty(EXO_LAST_MODIFIED_DATE).getString());
     }
-    
+
     //get publication state
     if (selectedNode.hasProperty(PUBLICATION_CURRENT_STATE)) {
       inforMap.put(PUBLICATION_STATE, selectedNode.getProperty(PUBLICATION_CURRENT_STATE).getString());
-    }    
+    }
   }
-  
+
   /**
    * get type of node
    * @param node
@@ -197,7 +197,7 @@ public class UIViewInfoContainer extends UIContainer {
     }
     return strType;
   }
-  
+
   /**
    * get title of node
    * @param node
@@ -219,9 +219,9 @@ public class UIViewInfoContainer extends UIContainer {
     if ((title==null) || ((title!=null) && (title.trim().length()==0))) {
       title = node.getName();
     }
-    return Text.unescapeIllegalJcrChars(title);   
+    return Text.unescapeIllegalJcrChars(title);
   }
-  
+
   /**
    * get name of action
    * @return
@@ -238,7 +238,7 @@ public class UIViewInfoContainer extends UIContainer {
     UIViewInfoManager uiManager = getParent();
     return uiManager.getSelectedNode();
   }
-  
+
   /**
    * @author hai_lethanh
    * class used for handling Close event
@@ -247,8 +247,8 @@ public class UIViewInfoContainer extends UIContainer {
 
     @Override
     public void execute(Event<UIViewInfoContainer> event) throws Exception {
-      event.getSource().getAncestorOfType(UIJCRExplorer.class).cancelAction() ;   
+      event.getSource().getAncestorOfType(UIJCRExplorer.class).cancelAction() ;
     }
-  
+
   }
 }

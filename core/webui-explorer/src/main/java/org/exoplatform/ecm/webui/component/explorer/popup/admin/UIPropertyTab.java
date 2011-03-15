@@ -62,29 +62,29 @@ import org.exoplatform.webui.event.EventListener;
 )
 
 public class UIPropertyTab extends UIContainer {
-  
+
   private static String[] PRO_BEAN_FIELD = {"icon", "name", "multiValue", "value", "action"} ;
   private final static String PRO_KEY_BINARYTYPE = "binary" ;
   private final static String PRO_KEY_CANNOTGET = "cannotget" ;
   private static final Log LOG  = ExoLogger.getLogger("explorer.UIPropertyTab");
   private List<String> propertiesName_ = new ArrayList<String>();
-  
+
   public String[] getBeanFields() { return PRO_BEAN_FIELD ;}
-  
+
   public String[] getActions() {return  new String[] {"Close"} ;}
-  
+
   private Node getCurrentNode() throws Exception {
     UIPropertiesManager uiManager = getParent();
     return uiManager.getCurrentNode();
   }
-  
-  public PropertyIterator getProperties() throws Exception { 
-    return getCurrentNode().getProperties() ; 
+
+  public PropertyIterator getProperties() throws Exception {
+    return getCurrentNode().getProperties() ;
   }
-  
+
   private List<String> propertiesName() throws Exception {
     if(propertiesName_.size() == 0) {
-      Node currentNode = getCurrentNode(); 
+      Node currentNode = getCurrentNode();
       NodeType nodetype = currentNode.getPrimaryNodeType() ;
       Collection<NodeType> types = new ArrayList<NodeType>() ;
       types.add(nodetype) ;
@@ -98,12 +98,12 @@ public class UIPropertyTab extends UIContainer {
     }
     return propertiesName_;
   }
-  
+
   public boolean addedByUser(String propertyName) throws Exception {
     if(propertiesName().contains(propertyName)) return false;
     return true;
   }
-  
+
   public boolean isCanbeEdit(Property property) throws Exception {
     if(property.getDefinition().isAutoCreated() || property.getDefinition().isProtected()) {
       return false;
@@ -126,7 +126,7 @@ public class UIPropertyTab extends UIContainer {
               if (i == 0) flag = false;
               continue;
             }
-              
+
           }
           if ((i > 0) && flag)
             sB.append("; ");
@@ -142,7 +142,7 @@ public class UIPropertyTab extends UIContainer {
       return PRO_KEY_CANNOTGET ;
     }
   }
-  
+
   public Node getNodeByUUID(String uuid) {
     Node node = null;
     try {
@@ -159,7 +159,7 @@ public class UIPropertyTab extends UIContainer {
       event.getSource().getAncestorOfType(UIJCRExplorer.class).cancelAction() ;
     }
   }
-  
+
   static public class EditActionListener extends EventListener<UIPropertyTab> {
     public void execute(Event<UIPropertyTab> event) throws Exception {
       UIPropertyTab uiPropertyTab = event.getSource();
@@ -168,7 +168,7 @@ public class UIPropertyTab extends UIContainer {
       UIJCRExplorer uiExplorer = uiManager.getAncestorOfType(UIJCRExplorer.class);
       Node currentNode = uiExplorer.getCurrentNode();
       if(!PermissionUtil.canSetProperty(currentNode)) {
-        uiApp.addMessage(new ApplicationMessage("UIActionBar.msg.access-denied", null, 
+        uiApp.addMessage(new ApplicationMessage("UIActionBar.msg.access-denied", null,
             ApplicationMessage.WARNING));
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
         return;
@@ -183,14 +183,14 @@ public class UIPropertyTab extends UIContainer {
         uiApp.addMessage(new ApplicationMessage("UIActionBar.msg.node-checkedin", null));
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
         return;
-      }    
+      }
       String propertyName = event.getRequestContext().getRequestParameter(OBJECTID);
       UIPropertyForm uiForm = uiManager.getChild(UIPropertyForm.class);
       uiForm.loadForm(propertyName);
       uiManager.setRenderedChild(UIPropertyForm.class);
     }
   }
-  
+
   static public class DeleteActionListener extends EventListener<UIPropertyTab> {
     public void execute(Event<UIPropertyTab> event) throws Exception {
       UIPropertyTab uiPropertyTab = event.getSource();
@@ -203,7 +203,7 @@ public class UIPropertyTab extends UIContainer {
         event.getRequestContext().addUIComponentToUpdateByAjax(uiPropertyTab.getParent());
         return;
       } catch(AccessDeniedException ace) {
-        uiApp.addMessage(new ApplicationMessage("UIActionBar.msg.access-denied", null, 
+        uiApp.addMessage(new ApplicationMessage("UIActionBar.msg.access-denied", null,
             ApplicationMessage.WARNING));
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
         return;

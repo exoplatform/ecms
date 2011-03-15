@@ -28,7 +28,7 @@ import org.exoplatform.webui.core.lifecycle.UIContainerLifecycle;
  */
 @ComponentConfig(lifecycle = UIContainerLifecycle.class)
 public class UIPublicationContainer extends UIContainer {
-  
+
   public UIPublicationContainer() throws Exception {
     addChild(UIStaticDirectVersionList.class, null, null) ;
     addChild(UIPublicationForm.class, null, null) ;

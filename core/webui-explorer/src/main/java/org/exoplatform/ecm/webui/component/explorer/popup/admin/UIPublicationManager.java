@@ -28,18 +28,16 @@ import org.exoplatform.webui.core.UIContainer;
  */
 @ComponentConfig(template = "classpath:groovy/ecm/webui/UITabPane.gtmpl")
 public class UIPublicationManager extends UIContainer implements UIPopupComponent{
-  
+
   public UIPublicationManager() throws Exception {
   }
 
   public void activate() throws Exception {
-    // TODO Auto-generated method stub
-    
+
   }
 
   public void deActivate() throws Exception {
-    // TODO Auto-generated method stub
-    
+
   }
-  
+
 }

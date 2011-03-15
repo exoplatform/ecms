@@ -42,34 +42,34 @@ import org.picocontainer.Startable;
  * Sep 6, 2008
  */
 public class WCMContentInitializerService implements Startable{
-  
+
   /** The list deployment plugin. */
   private List<DeploymentPlugin> listDeploymentPlugin = new ArrayList<DeploymentPlugin>();
-  
+
   /** The repository service. */
   private RepositoryService repositoryService;
-  
+
   /** The log. */
   private Log log = ExoLogger.getLogger(this.getClass());
-  
+
   /**
    * Instantiates a new wCM content initializer service.
-   * 
+   *
    * @param repositoryService the repository service
    */
   public WCMContentInitializerService(UserPortalConfigService userPortalConfigService) {
     this.repositoryService = WCMCoreUtils.getService(RepositoryService.class);
   }
-  
+
   /**
    * Adds the plugin.
-   * 
+   *
    * @param deploymentPlugin the deployment plugin
    */
   public void addPlugin(DeploymentPlugin deploymentPlugin) {
     listDeploymentPlugin.add(deploymentPlugin);
   }
-  
+
   /* (non-Javadoc)
    * @see org.picocontainer.Startable#start()
    */
@@ -85,19 +85,22 @@ public class WCMContentInitializerService implements Startable{
       } else {
         contentInitializerService = serviceFolder.addNode("WCMContentInitializerService", "nt:unstructured");
       }
-      if (!contentInitializerService.hasNode("WCMContentInitializerServiceLog")) {                                              
+      if (!contentInitializerService.hasNode("WCMContentInitializerServiceLog")) {
         Date date = new Date();
-        StringBuffer logData = new StringBuffer();      
+        StringBuffer logData = new StringBuffer();
         for (DeploymentPlugin deploymentPlugin : listDeploymentPlugin) {
           try {
             deploymentPlugin.deploy(sessionProvider);
-            logData.append("deploy " + deploymentPlugin.getName() + " deployment plugin succesfully at " + date.toString() + "\n");
+            logData.append("deploy " + deploymentPlugin.getName()
+                + " deployment plugin succesfully at " + date.toString() + "\n");
           } catch (Exception e) {
-            log.error("deploy " + deploymentPlugin.getName() + " deployment plugin failure at " + date.toString() + " by " + e + "\n");
-            logData.append("deploy " + deploymentPlugin.getName() + " deployment plugin failure at " + date.toString() + " by " + e + "\n");
-          }                            
-        } 
-        
+            log.error("deploy " + deploymentPlugin.getName() + " deployment plugin failure at "
+                + date.toString() + " by " + e + "\n");
+            logData.append("deploy " + deploymentPlugin.getName()
+                + " deployment plugin failure at " + date.toString() + " by " + e + "\n");
+          }
+        }
+
         Node contentInitializerServiceLog = contentInitializerService.addNode("WCMContentInitializerServiceLog", "nt:file");
         Node contentInitializerServiceLogContent = contentInitializerServiceLog.addNode("jcr:content", "nt:resource");
         contentInitializerServiceLogContent.setProperty("jcr:encoding", "UTF-8");
@@ -105,8 +108,8 @@ public class WCMContentInitializerService implements Startable{
         contentInitializerServiceLogContent.setProperty("jcr:data", logData.toString());
         contentInitializerServiceLogContent.setProperty("jcr:lastModified", date.getTime());
         session.save();
-        
-        XJavascriptService jsService = WCMCoreUtils.getService(XJavascriptService.class); 
+
+        XJavascriptService jsService = WCMCoreUtils.getService(XJavascriptService.class);
         XSkinService xSkinService = WCMCoreUtils.getService(XSkinService.class);
         xSkinService.start();
         jsService.start();
@@ -115,7 +118,7 @@ public class WCMContentInitializerService implements Startable{
       log.error("Error when start WCMContentInitializerService: ", e);
     }
   }
-  
+
   /* (non-Javadoc)
    * @see org.picocontainer.Startable#stop()
    */

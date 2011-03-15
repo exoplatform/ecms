@@ -39,16 +39,13 @@ import org.exoplatform.webui.form.ext.UIFormInputSetWithAction;
  * Created by The eXo Platform SAS
  * Author : eXoPlatform
  *          maivanha1610@gmail.com
- * Sep 22, 2009  
+ * Sep 22, 2009
  */
-@ComponentConfig(
-                 lifecycle = UIFormLifecycle.class ,
+@ComponentConfig(lifecycle = UIFormLifecycle.class,
                  template = "app:/groovy/webui/newsletter/NewsletterManager/UIRemoveModerators.gtmpl",
                  events = {
-                   @EventConfig(listeners = UIRemoveModerators.RemoveModeratorsActionListener.class),
-                   @EventConfig(listeners = UIRemoveModerators.CancelActionListener.class)
-                 }
-)
+    @EventConfig(listeners = UIRemoveModerators.RemoveModeratorsActionListener.class),
+    @EventConfig(listeners = UIRemoveModerators.CancelActionListener.class) })
 
 public class UIRemoveModerators extends UIForm {
   private boolean setForCategoryForm = true;
@@ -61,7 +58,7 @@ public class UIRemoveModerators extends UIForm {
       this.addChild(new UIFormCheckBoxInput<Boolean>(str, str, false ));
     }
   }
-  
+
   public void permissionForSubscriptionForm(){
     this.setForCategoryForm = false;
   }
@@ -83,20 +80,22 @@ public class UIRemoveModerators extends UIForm {
           if(result.trim().length() > 0) result += ",";
           result += str;
         } else {
-          isChecked = true;  
+          isChecked = true;
         }
       }
       UIApplication uiApp = removeModerators.getAncestorOfType(UIApplication.class);
-      
-      // if untick any permission then view waring  and stop processing 
-      if(!isChecked){
-        uiApp.addMessage(new ApplicationMessage("UIRemoveModeratorsFormPopupWindow.msg.checkToRemove", null, ApplicationMessage.WARNING));
+
+      // if untick any permission then view waring  and stop processing
+      if (!isChecked) {
+        uiApp.addMessage(new ApplicationMessage("UIRemoveModeratorsFormPopupWindow.msg.checkToRemove",
+                                                null,
+                                                ApplicationMessage.WARNING));
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
         return;
       }
-      
-      // if current user is not admin of newsletterManager portle and in list permision don't have him selt 
-      // then view waring and stop processing 
+
+      // if current user is not admin of newsletterManager portle and in list permision don't have him selt
+      // then view waring and stop processing
 //      if(!removeModerators.isAdmin){
 //        boolean havePermission = false;
 //        List<String> listGrouptMembers = NewsLetterUtil.getAllGroupAndMembershipOfCurrentUser();
@@ -107,26 +106,28 @@ public class UIRemoveModerators extends UIForm {
 //          }
 //        }
 //        if(havePermission == false){
-//          uiApp.addMessage(new ApplicationMessage("UIRemoveModeratorsFormPopupWindow.msg.donotMoveYourSelt", null, ApplicationMessage.WARNING));
+      // uiApp.addMessage(new
+      // ApplicationMessage("UIRemoveModeratorsFormPopupWindow.msg.donotMoveYourSelt",
+      // null, ApplicationMessage.WARNING));
 //          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
 //          return;
 //        }
 //      }
-      
+
       UIPopupContainer popupContainer = (UIPopupContainer)removeModerators.getAncestorOfType(UIPopupContainer.class);
       UIFormInputSetWithAction formInputSetWithAction;
       String inputId;
-      
+
       //If now is modifying for Category then update for category form
-      if(removeModerators.setForCategoryForm) {
+      if (removeModerators.setForCategoryForm) {
         UICategoryForm componentForm = popupContainer.findFirstComponentOfType(UICategoryForm.class);
-        formInputSetWithAction = (UIFormInputSetWithAction)componentForm.getChildById(UICategoryForm.FORM_CATEGORY_MODERATOR);
+        formInputSetWithAction = (UIFormInputSetWithAction) componentForm.getChildById(UICategoryForm.FORM_CATEGORY_MODERATOR);
         inputId = UICategoryForm.INPUT_CATEGORY_MODERATOR;
-        
-      // if now is modifying for subscription then update for subscriptionForm
+
+        // if now is modifying for subscription then update for subscriptionForm
       } else {
         UISubcriptionForm componentForm = popupContainer.findFirstComponentOfType(UISubcriptionForm.class);
-        formInputSetWithAction = (UIFormInputSetWithAction)componentForm.getChildById(UISubcriptionForm.FORM_SUBSCRIPTION_REDACTOR);
+        formInputSetWithAction = (UIFormInputSetWithAction) componentForm.getChildById(UISubcriptionForm.FORM_SUBSCRIPTION_REDACTOR);
         inputId = UISubcriptionForm.SELECT_REDACTOR;
       }
       UIFormStringInput formStringInput = (UIFormStringInput)formInputSetWithAction.getChildById(inputId);
@@ -135,17 +136,18 @@ public class UIRemoveModerators extends UIForm {
       Utils.closePopupWindow(removeModerators, UINewsletterConstant.REMOVE_MODERATORS_FORM_POPUP_WINDOW);
     }
   }
-  
+
   static  public class CancelActionListener extends EventListener<UIRemoveModerators> {
-    
+
     /* (non-Javadoc)
      * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
      */
     public void execute(Event<UIRemoveModerators> event) throws Exception {
       UIRemoveModerators removeModerators = event.getSource();
-      UIPopupContainer popupContainer = (UIPopupContainer)removeModerators.getAncestorOfType(UIPopupContainer.class);
+      UIPopupContainer popupContainer = (UIPopupContainer) removeModerators.getAncestorOfType(UIPopupContainer.class);
       event.getRequestContext().addUIComponentToUpdateByAjax(popupContainer);
-      Utils.closePopupWindow(removeModerators, UINewsletterConstant.REMOVE_MODERATORS_FORM_POPUP_WINDOW);
+      Utils.closePopupWindow(removeModerators,
+                             UINewsletterConstant.REMOVE_MODERATORS_FORM_POPUP_WINDOW);
     }
   }
 }

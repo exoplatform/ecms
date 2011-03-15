@@ -39,7 +39,7 @@ import org.picocontainer.Startable;
 
 /**
  * Created by The eXo Platform SAS.
- * 
+ *
  * @author : Hoa.Pham
  * hoa.pham@exoplatform.com
  * Jun 3, 2008
@@ -48,7 +48,7 @@ public class WebSchemaConfigServiceImpl implements WebSchemaConfigService, Start
 
   /** The web schema handlers. */
   private ConcurrentHashMap<String, WebSchemaHandler> webSchemaHandlers = new ConcurrentHashMap<String, WebSchemaHandler>();
-  
+
   /** The wcm config service. */
   private WCMConfigurationService wcmConfigService;
 
@@ -57,16 +57,19 @@ public class WebSchemaConfigServiceImpl implements WebSchemaConfigService, Start
 
   /**
    * Instantiates a new web schema config service impl.
-   * 
+   *
    * @param configurationService the configuration service
    * @param hierarchyCreator the hierarchy creator
    */
   public WebSchemaConfigServiceImpl(WCMConfigurationService configurationService) {
     this.wcmConfigService = WCMCoreUtils.getService(WCMConfigurationService.class);
-  }     
+  }
 
-  /* (non-Javadoc)
-   * @see org.exoplatform.services.wcm.core.WebSchemaConfigService#addWebSchemaHandler(org.exoplatform.container.component.ComponentPlugin)
+  /*
+   * (non-Javadoc)
+   * @see
+   * org.exoplatform.services.wcm.core.WebSchemaConfigService#addWebSchemaHandler
+   * (org.exoplatform.container.component.ComponentPlugin)
    */
   public void addWebSchemaHandler(ComponentPlugin plugin) throws Exception {
     if (plugin instanceof WebSchemaHandler) {
@@ -79,42 +82,51 @@ public class WebSchemaConfigServiceImpl implements WebSchemaConfigService, Start
    * @see org.exoplatform.services.wcm.core.WebSchemaConfigService#getAllWebSchemaHandler()
    */
   public Collection<WebSchemaHandler> getAllWebSchemaHandler() throws Exception {
-    return webSchemaHandlers.values();    
+    return webSchemaHandlers.values();
   }
 
   /* (non-Javadoc)
    * @see org.exoplatform.services.wcm.core.WebSchemaConfigService#getWebSchemaHandlerByType(java.lang.Class)
    */
-  public <T extends WebSchemaHandler> T getWebSchemaHandlerByType(Class<T> clazz){    
+  public <T extends WebSchemaHandler> T getWebSchemaHandlerByType(Class<T> clazz){
     WebSchemaHandler schemaHandler = webSchemaHandlers.get(clazz.getName());
     if (schemaHandler == null) return null;
-    return clazz.cast(schemaHandler);    
+    return clazz.cast(schemaHandler);
   }
 
-  /* (non-Javadoc)
-   * @see org.exoplatform.services.wcm.core.WebSchemaConfigService#createSchema(javax.jcr.Node, org.exoplatform.services.jcr.ext.common.SessionProvider)
+  /*
+   * (non-Javadoc)
+   * @see
+   * org.exoplatform.services.wcm.core.WebSchemaConfigService#createSchema(javax
+   * .jcr.Node, org.exoplatform.services.jcr.ext.common.SessionProvider)
    */
   public void createSchema(SessionProvider sessionProvider, Node node) throws Exception {
-    for (WebSchemaHandler handler: getAllWebSchemaHandler()) {      
-      if (handler.matchHandler(sessionProvider, node)) {               
-        handler.onCreateNode(sessionProvider, node);        
-      }
-    }    
-  }
-  
-  /* (non-Javadoc)
-   * @see org.exoplatform.services.wcm.core.WebSchemaConfigService#updateSchemaOnModify(javax.jcr.Node, org.exoplatform.services.jcr.ext.common.SessionProvider)
-   */
-  public void updateSchemaOnModify(SessionProvider sessionProvider, Node node) throws Exception {
     for (WebSchemaHandler handler: getAllWebSchemaHandler()) {
       if (handler.matchHandler(sessionProvider, node)) {
-        handler.onModifyNode(sessionProvider, node);        
+        handler.onCreateNode(sessionProvider, node);
       }
     }
   }
 
-  /* (non-Javadoc)
-   * @see org.exoplatform.services.wcm.core.WebSchemaConfigService#updateSchemaOnRemove(javax.jcr.Node, org.exoplatform.services.jcr.ext.common.SessionProvider)
+  /*
+   * (non-Javadoc)
+   * @see
+   * org.exoplatform.services.wcm.core.WebSchemaConfigService#updateSchemaOnModify
+   * (javax.jcr.Node, org.exoplatform.services.jcr.ext.common.SessionProvider)
+   */
+  public void updateSchemaOnModify(SessionProvider sessionProvider, Node node) throws Exception {
+    for (WebSchemaHandler handler: getAllWebSchemaHandler()) {
+      if (handler.matchHandler(sessionProvider, node)) {
+        handler.onModifyNode(sessionProvider, node);
+      }
+    }
+  }
+
+  /*
+   * (non-Javadoc)
+   * @see
+   * org.exoplatform.services.wcm.core.WebSchemaConfigService#updateSchemaOnRemove
+   * (javax.jcr.Node, org.exoplatform.services.jcr.ext.common.SessionProvider)
    */
   public void updateSchemaOnRemove(SessionProvider sessionProvider, Node node) throws Exception {
     for (WebSchemaHandler handler: getAllWebSchemaHandler()) {
@@ -124,36 +136,36 @@ public class WebSchemaConfigServiceImpl implements WebSchemaConfigService, Start
       }
     }
   }
-  
+
   /**
    * Creates the live share portal folders.
    */
   private void createLiveSharePortalFolders() {
     ExoContainer container = ExoContainerContext.getCurrentContainer();
-    RepositoryService repositoryService = 
+    RepositoryService repositoryService =
       (RepositoryService)container.getComponentInstanceOfType(RepositoryService.class);
     SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
     for (NodeLocation locationEntry: wcmConfigService.getAllLivePortalsLocation()) {
       String repoName = locationEntry.getRepository();
       try {
-        ManageableRepository repository = repositoryService.getRepository(repoName);      
+        ManageableRepository repository = repositoryService.getRepository(repoName);
         Session session = sessionProvider.getSession(locationEntry.getWorkspace(), repository);
         Node livePortalsStorage = (Node)session.getItem(locationEntry.getPath());
         String liveSharedPortalName = wcmConfigService.getSharedPortalName(repoName);
         if(!livePortalsStorage.hasNode(liveSharedPortalName)) {
           livePortalsStorage.addNode(liveSharedPortalName, "exo:portalFolder");
-          session.save(); 
-        }        
+          session.save();
+        }
       } catch (Exception e) {
         log.error("Error when try to create share portal folder for repository: "+ repoName, e);
-      }            
+      }
     }
   }
-  
+
   /* (non-Javadoc)
    * @see org.picocontainer.Startable#start()
    */
-  public void start() {    
+  public void start() {
     log.info("Start WebSchemaConfigServiceImpl...");
     createLiveSharePortalFolders();
   }
@@ -161,5 +173,5 @@ public class WebSchemaConfigServiceImpl implements WebSchemaConfigService, Start
   /* (non-Javadoc)
    * @see org.picocontainer.Startable#stop()
    */
-  public void stop() { }   
+  public void stop() { }
 }

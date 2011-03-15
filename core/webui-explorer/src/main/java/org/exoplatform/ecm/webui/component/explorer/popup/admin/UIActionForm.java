@@ -66,51 +66,42 @@ import org.exoplatform.webui.form.UIFormStringInput;
  * Author : Dang Van Minh
  *          minh.dang@exoplatform.com
  * Nov 8, 2006
- * 11:23:50 AM 
+ * 11:23:50 AM
  */
-@ComponentConfigs(
-                  {
-        @ComponentConfig(
-                         type = UIFormMultiValueInputSet.class,
-                         id="WYSIWYGRichTextMultipleInputset",
-                         events = {@EventConfig(listeners = UIDialogForm.AddActionListener.class, phase = Phase.DECODE),
-                                   @EventConfig(listeners = UIFormMultiValueInputSet.RemoveActionListener.class, phase = Phase.DECODE)
-                                  }
-                     ),
-        @ComponentConfig(
-            lifecycle = UIFormLifecycle.class,
-            events = {
-              @EventConfig(listeners = UIActionForm.SaveActionListener.class),
-              @EventConfig(listeners = UIDialogForm.OnchangeActionListener.class, phase=Phase.DECODE),
-              @EventConfig(listeners = UIActionForm.BackActionListener.class, phase = Phase.DECODE),
-              @EventConfig(listeners = UIActionForm.ShowComponentActionListener.class, phase = Phase.DECODE),
-              @EventConfig(listeners = UIActionForm.AddActionListener.class, phase = Phase.DECODE),
-              @EventConfig(listeners = UIActionForm.RemoveActionListener.class, phase = Phase.DECODE),
-              @EventConfig(listeners = UIActionForm.RemoveReferenceActionListener.class, confirm = "DialogFormField.msg.confirm-delete", phase = Phase.DECODE)
-            }
-        )
-})
+@ComponentConfigs( {
+    @ComponentConfig(type = UIFormMultiValueInputSet.class, id = "WYSIWYGRichTextMultipleInputset", events = {
+        @EventConfig(listeners = UIDialogForm.AddActionListener.class, phase = Phase.DECODE),
+        @EventConfig(listeners = UIFormMultiValueInputSet.RemoveActionListener.class, phase = Phase.DECODE) }),
+    @ComponentConfig(lifecycle = UIFormLifecycle.class, events = {
+        @EventConfig(listeners = UIActionForm.SaveActionListener.class),
+        @EventConfig(listeners = UIDialogForm.OnchangeActionListener.class, phase = Phase.DECODE),
+        @EventConfig(listeners = UIActionForm.BackActionListener.class, phase = Phase.DECODE),
+        @EventConfig(listeners = UIActionForm.ShowComponentActionListener.class, phase = Phase.DECODE),
+        @EventConfig(listeners = UIActionForm.AddActionListener.class, phase = Phase.DECODE),
+        @EventConfig(listeners = UIActionForm.RemoveActionListener.class, phase = Phase.DECODE),
+        @EventConfig(listeners = UIActionForm.RemoveReferenceActionListener.class,
+                     confirm = "DialogFormField.msg.confirm-delete", phase = Phase.DECODE) }) })
 public class UIActionForm extends UIDialogForm implements UISelectable {
-  
+
   private String parentPath_;
   private String nodeTypeName_ = null;
   private boolean isAddNew_;
   private String scriptPath_ = null;
   private boolean isEditInList_ = false;
   private String rootPath_ = null;
-  
-  
+
+
   private static final String EXO_ACTIONS = "exo:actions".intern();
-  
+
   public String getDriverName() {
     UIJCRExplorer uiExplorer = getAncestorOfType(UIJCRExplorer.class);
     return uiExplorer.getRepositoryName() + "/" + uiExplorer.getDriveData().getName();
   }
-  
+
   public UIActionForm() throws Exception {
     setActions(new String[]{"Save","Back"});
   }
-  
+
   public void createNewAction(Node parentNode, String actionType, boolean isAddNew) throws Exception {
     reset();
     parentPath_ = parentNode.getPath();
@@ -120,9 +111,9 @@ public class UIActionForm extends UIDialogForm implements UISelectable {
     properties.clear();
     getChildren().clear();
   }
-  
+
   private Node getParentNode() throws Exception{ return (Node) getSession().getItem(parentPath_); }
-  
+
   public void doSelect(String selectField, Object value) throws Exception {
     isUpdateSelect = true;
     UIComponent uicomponent = getChildById(selectField);
@@ -140,11 +131,11 @@ public class UIActionForm extends UIDialogForm implements UISelectable {
       uiActionContainer.removeChildById("PopupComponent");
     }
   }
-  
-  public String getCurrentPath() throws Exception { 
+
+  public String getCurrentPath() throws Exception {
     return getAncestorOfType(UIJCRExplorer.class).getCurrentNode().getPath();
   }
-  
+
   public ResourceResolver getTemplateResourceResolver(WebuiRequestContext context, String template) {
     return getAncestorOfType(UIJCRExplorer.class).getJCRTemplateResourceResolver();
   }
@@ -160,11 +151,11 @@ public class UIActionForm extends UIDialogForm implements UISelectable {
       try {
         dialogPath = templateService.getTemplatePathByUser(true, nodeTypeName_, userName);
       } catch (Exception e){
-      }      
+      }
     }
-    return dialogPath;    
+    return dialogPath;
   }
-  
+
   public String getRepositoryName() { return repositoryName; }
 
   @Deprecated
@@ -177,15 +168,15 @@ public class UIActionForm extends UIDialogForm implements UISelectable {
     if(scriptPath.indexOf(":") < 0) {
       scriptPath = uiExplorer.getCurrentWorkspace() + ":" + scriptPath;
     }
-    scriptPath_ = scriptPath; 
+    scriptPath_ = scriptPath;
   }
-  public String getPath() { return scriptPath_; }  
+  public String getPath() { return scriptPath_; }
   public void setRootPath(String rootPath){
    rootPath_ = rootPath;
   }
   public String getRootPath(){return rootPath_;}
   public void setIsEditInList(boolean isEditInList) { isEditInList_ = isEditInList; }
-  
+
   public void onchange(Event<?> event) throws Exception {
     if(isEditInList_ || !isAddNew_) {
       event.getRequestContext().addUIComponentToUpdateByAjax(getParent());
@@ -195,30 +186,30 @@ public class UIActionForm extends UIDialogForm implements UISelectable {
     uiManager.setRenderedChild(UIActionContainer.class);
     event.getRequestContext().addUIComponentToUpdateByAjax(uiManager);
   }
-  
+
   public void renderField(String name) throws Exception {
     UIComponent uiInput = findComponentById(name);
     if ("homePath".equals(name)) {
       UIJCRExplorer uiExplorer = getAncestorOfType(UIJCRExplorer.class) ;
       Node currentNode = uiExplorer.getCurrentNode() ;
-      String homPath = uiExplorer.getCurrentWorkspace() + ":" + currentNode.getPath();      
+      String homPath = uiExplorer.getCurrentWorkspace() + ":" + currentNode.getPath();
       ((UIFormStringInput) uiInput).setValue(homPath);
     }
-    
+
     super.renderField(name);
   }
-  
+
   static public class SaveActionListener extends EventListener<UIActionForm> {
-    
+
     private void addInputInfo(Map<String, JcrInputProperty> input, UIActionForm actionForm) throws Exception {
-      String rssUrlKey = "/node/exo:url";               
-      if (input.get(rssUrlKey) == null) return;      
+      String rssUrlKey = "/node/exo:url";
+      if (input.get(rssUrlKey) == null) return;
       UIJCRExplorer uiExplorer = actionForm.getAncestorOfType(UIJCRExplorer.class);
-      //drive name      
-      UITreeExplorer treeExplorer = uiExplorer.findFirstComponentOfType(UITreeExplorer.class);      
-      String driveName = treeExplorer.getDriveName();      
+      //drive name
+      UITreeExplorer treeExplorer = uiExplorer.findFirstComponentOfType(UITreeExplorer.class);
+      String driveName = treeExplorer.getDriveName();
        //requestUri
-      PortalRequestContext pContext = Util.getPortalRequestContext();      
+      PortalRequestContext pContext = Util.getPortalRequestContext();
       String requestUri = pContext.getRequestURI();
       String rssUrl = (String)input.get(rssUrlKey).getValue();
       String repository = uiExplorer.getRepositoryName();
@@ -229,17 +220,18 @@ public class UIActionForm extends UIDialogForm implements UISelectable {
           append(driveName);
       input.get(rssUrlKey).setValue(url.toString());
     }
-    
-    public void execute(Event<UIActionForm> event) throws Exception {      
+
+    public void execute(Event<UIActionForm> event) throws Exception {
       UIActionForm actionForm = event.getSource();
       UIApplication uiApp = actionForm.getAncestorOfType(UIApplication.class);
       ActionServiceContainer actionServiceContainer = actionForm.getApplicationComponent(ActionServiceContainer.class);
-      UIJCRExplorer uiExplorer = actionForm.getAncestorOfType(UIJCRExplorer.class);   
+      UIJCRExplorer uiExplorer = actionForm.getAncestorOfType(UIJCRExplorer.class);
       String repository = actionForm.getAncestorOfType(UIJCRExplorer.class).getRepositoryName();
-      Map<String, JcrInputProperty> sortedInputs = DialogFormUtil.prepareMap(actionForm.getChildren(), actionForm.getInputProperties());
-      
+      Map<String, JcrInputProperty> sortedInputs = DialogFormUtil.prepareMap(actionForm.getChildren(),
+                                                                             actionForm.getInputProperties());
+
       addInputInfo(sortedInputs, actionForm);
-      
+
       Node currentNode = uiExplorer.getCurrentNode();
       if(!PermissionUtil.canAddNode(currentNode) || !PermissionUtil.canSetProperty(currentNode)) {
         uiApp.addMessage(new ApplicationMessage("UIActionForm.msg.no-permission-add", null));
@@ -247,7 +239,7 @@ public class UIActionForm extends UIDialogForm implements UISelectable {
         return;
       }
       UIFormStringInput homePathInput = actionForm.getUIStringInput("homePath");
-      if (homePathInput != null) {      
+      if (homePathInput != null) {
         String targetPath = homePathInput.getValue();
         if ((targetPath == null) || (targetPath.length() == 0)) {
           uiApp.addMessage(new ApplicationMessage("UIActionForm.msg.homePath-emty", null,
@@ -257,7 +249,7 @@ public class UIActionForm extends UIDialogForm implements UISelectable {
         }
       }
       UIFormStringInput targetPathInput = actionForm.getUIStringInput("targetPath");
-      if (targetPathInput != null) {      
+      if (targetPathInput != null) {
         String targetPath = targetPathInput.getValue();
         if ((targetPath == null) || (targetPath.length() == 0)) {
           uiApp.addMessage(new ApplicationMessage("UIActionForm.msg.targetPath-emty", null,
@@ -266,11 +258,12 @@ public class UIActionForm extends UIDialogForm implements UISelectable {
           return;
         }
       }
-      String actionName = (String)(sortedInputs.get("/node/exo:name")).getValue();        
-      String[] arrFilterChar = {"&", "$", "@", ":", "]", "[", "*", "%", "!", "+", "(", ")", "'", "#", ";", "}", "{", "/", "|", "\""};
+      String actionName = (String)(sortedInputs.get("/node/exo:name")).getValue();
+      String[] arrFilterChar = { "&", "$", "@", ":", "]", "[", "*", "%", "!", "+", "(", ")", "'",
+          "#", ";", "}", "{", "/", "|", "\"" };
       for(String filterChar : arrFilterChar) {
         if(actionName.indexOf(filterChar) > -1) {
-          uiApp.addMessage(new ApplicationMessage("UIActionForm.msg.name-not-allowed", null, 
+          uiApp.addMessage(new ApplicationMessage("UIActionForm.msg.name-not-allowed", null,
               ApplicationMessage.WARNING));
           event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
           return;
@@ -285,10 +278,13 @@ public class UIActionForm extends UIDialogForm implements UISelectable {
           if (uiExplorer.nodeIsLocked(currentActionNode)) return;
           cmsService.storeNode(actionForm.nodeTypeName_, storedHomeNode, sortedInputs, false);
           Session session = currentActionNode.getSession();
-          if (uiExplorer.nodeIsLocked(currentActionNode)) return; // We add LockToken again because CMSService did logout session cause lost lock information
-          session.move(currentActionNode.getPath(), storedHomeNode.getPath() + "/" + sortedInputs.get("/node/exo:name").getValue().toString());
+          if (uiExplorer.nodeIsLocked(currentActionNode))
+            return; // We add LockToken again because CMSService did logout
+                    // session cause lost lock information
+          session.move(currentActionNode.getPath(), storedHomeNode.getPath() + "/"
+              + sortedInputs.get("/node/exo:name").getValue().toString());
           session.save();
-          
+
           if (!uiExplorer.getPreference().isJcrEnable()) currentNode.getSession().save();
           if (actionForm.isEditInList_) {
             UIActionManager uiManager = actionForm.getAncestorOfType(UIActionManager.class);
@@ -319,22 +315,22 @@ public class UIActionForm extends UIDialogForm implements UISelectable {
         } else {
           rootProp.setValue((sortedInputs.get("/node/exo:name")).getValue());
         }
-        
+
         Node parentNode = actionForm.getParentNode();
         if (actionForm.isAddNew_) {
           if(parentNode.hasNode(EXO_ACTIONS)) {
-            if(parentNode.getNode(EXO_ACTIONS).hasNode(actionName)) { 
+            if(parentNode.getNode(EXO_ACTIONS).hasNode(actionName)) {
               Object[] args = {actionName};
-              uiApp.addMessage(new ApplicationMessage("UIActionForm.msg.existed-action", args, 
+              uiApp.addMessage(new ApplicationMessage("UIActionForm.msg.existed-action", args,
                   ApplicationMessage.WARNING));
               event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
               return;
             }
           }
         }
-        if(parentNode.isNew()) {
-          String[] args = {parentNode.getPath()};
-          uiApp.addMessage(new ApplicationMessage("UIActionForm.msg.unable-add-action",args));
+        if (parentNode.isNew()) {
+          String[] args = { parentNode.getPath() };
+          uiApp.addMessage(new ApplicationMessage("UIActionForm.msg.unable-add-action", args));
           event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
           return;
         }
@@ -343,15 +339,17 @@ public class UIActionForm extends UIDialogForm implements UISelectable {
         if (!uiExplorer.getPreference().isJcrEnable()) parentNode.getSession().save();
         UIActionManager uiActionManager = actionForm.getAncestorOfType(UIActionManager.class);
         actionForm.createNewAction(uiExplorer.getCurrentNode(), actionForm.nodeTypeName_, true);
-        UIActionList uiActionList = uiActionManager.findFirstComponentOfType(UIActionList.class);  
+        UIActionList uiActionList = uiActionManager.findFirstComponentOfType(UIActionList.class);
         uiActionList.updateGrid(parentNode, uiActionList.getChild(UIPageIterator.class).getCurrentPage());
         uiActionManager.setRenderedChild(UIActionListContainer.class);
         actionForm.reset();
       } catch(ConstraintViolationException cex) {
-          uiApp.addMessage(new ApplicationMessage("UIActionForm.msg.constraintviolation-exception", null, ApplicationMessage.WARNING));
+        uiApp.addMessage(new ApplicationMessage("UIActionForm.msg.constraintviolation-exception",
+                                                null,
+                                                ApplicationMessage.WARNING));
           event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
           return;
-      } catch(RepositoryException repo) {      
+      } catch(RepositoryException repo) {
         String key = "UIActionForm.msg.repository-exception";
         uiApp.addMessage(new ApplicationMessage(key, null, ApplicationMessage.WARNING));
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
@@ -365,20 +363,20 @@ public class UIActionForm extends UIDialogForm implements UISelectable {
         uiApp.addMessage(new ApplicationMessage("UIActionForm.msg.unable-add", null, ApplicationMessage.WARNING));
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
         return;
-      } catch (Exception e) {           
+      } catch (Exception e) {
         uiApp.addMessage(new ApplicationMessage("UIActionForm.msg.unable-add", null, ApplicationMessage.WARNING));
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
         return;
       } finally {
         if (actionForm.isEditInList_) {
           actionForm.releaseLock();
-          actionForm.isEditInList_ = false;          
+          actionForm.isEditInList_ = false;
         }
       }
-      
+
     }
   }
-  
+
   @SuppressWarnings("unchecked")
   static public class ShowComponentActionListener extends EventListener<UIActionForm> {
     public void execute(Event<UIActionForm> event) throws Exception {
@@ -401,12 +399,12 @@ public class UIActionForm extends UIDialogForm implements UISelectable {
       if(uiComp instanceof UIOneNodePathSelector) {
         UIJCRExplorer explorer = uiForm.getAncestorOfType(UIJCRExplorer.class);
         String repositoryName = explorer.getRepositoryName();
-        SessionProvider provider = explorer.getSessionProvider();        
+        SessionProvider provider = explorer.getSessionProvider();
         String wsFieldName = (String)fieldPropertiesMap.get("workspaceField");
         String wsName = explorer.getCurrentWorkspace();
         if(wsFieldName != null && wsFieldName.length() > 0) {
-          wsName = (String)uiForm.<UIFormInputBase>getUIInput(wsFieldName).getValue();          
-          ((UIOneNodePathSelector)uiComp).setIsDisable(wsName, true);           
+          wsName = (String)uiForm.<UIFormInputBase>getUIInput(wsFieldName).getValue();
+          ((UIOneNodePathSelector)uiComp).setIsDisable(wsName, true);
         }
         if(selectorParams != null) {
           String[] arrParams = selectorParams.split(",");
@@ -433,11 +431,12 @@ public class UIActionForm extends UIDialogForm implements UISelectable {
         List values = uiFormMultiValueInputSet.getValue();
         ((UINodeTypeSelector)uiComp).init(1, values);
       }
-      
+
       if(uiForm.isEditInList_) ((UIActionListContainer) uiContainer).initPopup(uiComp);
       else ((UIActionContainer)uiContainer).initPopup(uiComp);
       String param = "returnField=" + fieldName;
-      String[] params = selectorParams == null ? new String[]{param} : new String[]{param, "selectorParams=" + selectorParams};
+      String[] params = selectorParams == null ? new String[] { param } : new String[] { param,
+          "selectorParams=" + selectorParams };
       ((ComponentSelector)uiComp).setSourceComponent(uiForm, params);
       if(uiForm.isAddNew_) {
         UIContainer uiParent = uiContainer.getParent();
@@ -461,7 +460,7 @@ public class UIActionForm extends UIDialogForm implements UISelectable {
       event.getRequestContext().addUIComponentToUpdateByAjax(uiForm.getParent());
     }
   }
-  
+
   public static class AddActionListener extends EventListener<UIActionForm> {
     public void execute(Event<UIActionForm> event) throws Exception {
       UIActionForm uiForm = event.getSource();
@@ -476,7 +475,7 @@ public class UIActionForm extends UIDialogForm implements UISelectable {
       event.getRequestContext().addUIComponentToUpdateByAjax(uiForm.getParent());
     }
   }
-  
+
   static public class BackActionListener extends EventListener<UIActionForm> {
     public void execute(Event<UIActionForm> event) throws Exception {
       UIActionForm uiForm = event.getSource();
@@ -501,5 +500,5 @@ public class UIActionForm extends UIDialogForm implements UISelectable {
         }
       }
     }
-  }  
+  }
 }

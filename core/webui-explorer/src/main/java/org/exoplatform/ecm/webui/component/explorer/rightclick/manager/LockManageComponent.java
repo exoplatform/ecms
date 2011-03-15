@@ -62,7 +62,7 @@ import org.exoplatform.webui.ext.manager.UIAbstractManagerComponent;
  * Created by The eXo Platform SARL
  * Author : Hoang Van Hung
  *          hunghvit@gmail.com
- * Aug 6, 2009  
+ * Aug 6, 2009
  */
 
 @ComponentConfig(
@@ -73,23 +73,23 @@ import org.exoplatform.webui.ext.manager.UIAbstractManagerComponent;
 
 public class LockManageComponent extends UIAbstractManagerComponent {
 
-  private static final List<UIExtensionFilter> FILTERS 
-  		= Arrays.asList(new UIExtensionFilter[]{new IsNotInTrashFilter(),
-  																						new IsNotSameNameSiblingFilter(), 
-  																						new IsNotHoldsLockFilter(), 
-  																						new IsNotSimpleLockedFilter(), 
-  																						new CanSetPropertyFilter(), 
-  																						new IsCheckedOutFilter(), 
-  																						new IsNotTrashHomeNodeFilter() });
-  
+  private static final List<UIExtensionFilter> FILTERS
+      = Arrays.asList(new UIExtensionFilter[]{new IsNotInTrashFilter(),
+                                              new IsNotSameNameSiblingFilter(),
+                                              new IsNotHoldsLockFilter(),
+                                              new IsNotSimpleLockedFilter(),
+                                              new CanSetPropertyFilter(),
+                                              new IsCheckedOutFilter(),
+                                              new IsNotTrashHomeNodeFilter() });
+
   private static final Log LOG  = ExoLogger.getLogger(LockManageComponent.class);
 
   @UIExtensionFilters
   public List<UIExtensionFilter> getFilters() {
     return FILTERS;
   }
-  
-  
+
+
   private static void processMultiLock(String[] nodePaths, Event<?> event, UIJCRExplorer uiExplorer) throws Exception {
     for(int i=0; i< nodePaths.length; i++) {
       processLock(nodePaths[i], event, uiExplorer);
@@ -97,7 +97,7 @@ public class LockManageComponent extends UIAbstractManagerComponent {
     if(!uiExplorer.getPreference().isJcrEnable()) uiExplorer.getSession().save();
     uiExplorer.updateAjax(event);
   }
-  
+
   private static void processLock(String nodePath, Event<?> event,  UIJCRExplorer uiExplorer) throws Exception {
     UIApplication uiApp = uiExplorer.getAncestorOfType(UIApplication.class);
     Matcher matcher = UIWorkingArea.FILE_EXPLORER_URL_SYNTAX.matcher(nodePath);
@@ -117,10 +117,10 @@ public class LockManageComponent extends UIAbstractManagerComponent {
       nodePath = node.getPath();
       // Reset the session to manage the links that potentially change of workspace
       session = node.getSession();
-      // Reset the workspace name to manage the links that potentially change of workspace 
+      // Reset the workspace name to manage the links that potentially change of workspace
       wsName = session.getWorkspace().getName();
     } catch(PathNotFoundException path) {
-      uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.path-not-found-exception", 
+      uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.path-not-found-exception",
           null,ApplicationMessage.WARNING));
       event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
       return;
@@ -149,10 +149,10 @@ public class LockManageComponent extends UIAbstractManagerComponent {
           lockTokenString = settingLock.replace("*", membership.getName());
           LockUtil.keepLock(lock, lockTokenString);
         }
-      }      
+      }
       session.save();
     } catch(LockException le) {
-      uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.cant-lock", null, 
+      uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.cant-lock", null,
           ApplicationMessage.WARNING));
       event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
       uiExplorer.updateAjax(event);
@@ -161,10 +161,10 @@ public class LockManageComponent extends UIAbstractManagerComponent {
       LOG.error("an unexpected error occurs while locking the node", e);
       JCRExceptionManager.process(uiApp, e);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
-      uiExplorer.updateAjax(event);        
+      uiExplorer.updateAjax(event);
     }
   }
-  
+
   public static void lockManage(Event<? extends UIComponent> event, UIJCRExplorer uiExplorer) throws Exception {
     String nodePath = event.getRequestContext().getRequestParameter(OBJECTID);
     if(nodePath.indexOf(";") > -1) {
@@ -173,17 +173,16 @@ public class LockManageComponent extends UIAbstractManagerComponent {
       processLock(nodePath, event, uiExplorer);
     }
   }
-  
+
   public static class LockActionListener extends UIWorkingAreaActionListener<LockManageComponent> {
     public void processEvent(Event<LockManageComponent> event) throws Exception {
       UIJCRExplorer uiExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class);
       lockManage(event, uiExplorer);
     }
   }
-  
+
   @Override
   public Class<? extends UIAbstractManager> getUIAbstractManagerClass() {
-    // TODO Auto-generated method stub
     return null;
   }
 

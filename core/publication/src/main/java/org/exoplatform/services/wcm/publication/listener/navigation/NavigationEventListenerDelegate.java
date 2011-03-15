@@ -57,7 +57,7 @@ public class NavigationEventListenerDelegate {
 
   /**
    * Instantiates a new navigation event listener delegate.
-   * 
+   *
    * @param lifecycleName the lifecycle name
    * @param container the container
    */
@@ -67,9 +67,9 @@ public class NavigationEventListenerDelegate {
 
   /**
    * Update lifecyle on create navigation.
-   * 
+   *
    * @param pageNavigation the page navigation
-   * 
+   *
    * @throws Exception the exception
    */
   public void updateLifecyleOnCreateNavigation(PageNavigation pageNavigation) throws Exception {
@@ -77,14 +77,14 @@ public class NavigationEventListenerDelegate {
 
   /**
    * Update lifecycle on change navigation.
-   * 
+   *
    * @param pageNavigation the page navigation
    * @param remoteUser the remote user
    * @param plugin
    * @throws Exception the exception
    */
   public void updateLifecycleOnChangeNavigation(
-  		PageNavigation pageNavigation, String remoteUser, WebpagePublicationPlugin plugin) throws Exception {
+      PageNavigation pageNavigation, String remoteUser, WebpagePublicationPlugin plugin) throws Exception {
     if (pageNavigation.getOwnerType().equals(PortalConfig.PORTAL_TYPE)) {
       updateRemovedPageNode(pageNavigation, remoteUser, plugin);
       updateAddedPageNode(pageNavigation, remoteUser);
@@ -93,9 +93,9 @@ public class NavigationEventListenerDelegate {
 
   /**
    * Update lifecyle on remove navigation.
-   * 
+   *
    * @param pageNavigation the page navigation
-   * 
+   *
    * @throws Exception the exception
    */
   public void updateLifecyleOnRemoveNavigation(PageNavigation pageNavigation) throws Exception {
@@ -103,27 +103,30 @@ public class NavigationEventListenerDelegate {
 
   /**
    * Update added page node.
-   * 
+   *
    * @param pageNavigation the page navigation
    * @param remoteUser remoteUser
-   * 
+   *
    * @throws Exception the exception
    */
   private void updateAddedPageNode(PageNavigation pageNavigation, String remoteUser) throws Exception {
     UserPortalConfigService userPortalConfigService = WCMCoreUtils.getService(UserPortalConfigService.class);
     WCMConfigurationService wcmConfigurationService = WCMCoreUtils.getService(WCMConfigurationService.class);
+    String portletName = wcmConfigurationService.getRuntimeContextParam(WCMConfigurationService.SCV_PORTLET);
     for (PageNode pageNode : PublicationUtil.getAllPageNodeFromPageNavigation(pageNavigation)) {
       Page page = null;
-      if (remoteUser == null) 
+      if (remoteUser == null)
         page = userPortalConfigService.getPage(pageNode.getPageReference());
-      else 
+      else
         page = userPortalConfigService.getPage(pageNode.getPageReference(), remoteUser);
       if (page != null) {
-        for (String applicationId : PublicationUtil.getListApplicationIdByPage(page, wcmConfigurationService.getRuntimeContextParam(WCMConfigurationService.SCV_PORTLET))) {
+        for (String applicationId : PublicationUtil.getListApplicationIdByPage(page, portletName)) {
           Node content = PublicationUtil.getNodeByApplicationId(applicationId);
           if (content != null) {
-            List<String> listExistedApplicationId = PublicationUtil.getValuesAsString(content, "publication:applicationIDs"); 
-            if (!listExistedApplicationId.contains(PublicationUtil.setMixedApplicationId(page.getPageId(), applicationId))) {
+            List<String> listExistedApplicationId = PublicationUtil.getValuesAsString(content,
+                                                                                      "publication:applicationIDs");
+            if (!listExistedApplicationId.contains(PublicationUtil.setMixedApplicationId(page.getPageId(),
+                                                                                         applicationId))) {
               saveAddedPageNode(pageNavigation.getOwnerId(), pageNode, applicationId, content);
             }
           }
@@ -134,14 +137,15 @@ public class NavigationEventListenerDelegate {
 
   /**
    * Update removed page node.
-   * 
+   *
    * @param pageNavigation the page navigation
    * @param remoteUser remoteUser
    * @param plugin
    * @throws Exception the exception
    */
-  private void updateRemovedPageNode(
-  		PageNavigation pageNavigation, String remoteUser, WebpagePublicationPlugin plugin) throws Exception {
+  private void updateRemovedPageNode(PageNavigation pageNavigation,
+                                     String remoteUser,
+                                     WebpagePublicationPlugin plugin) throws Exception {
     String portalName = pageNavigation.getOwnerId();
     List<PageNode> listPortalPageNode = PublicationUtil.getAllPageNodeFromPageNavigation(pageNavigation);
     List<String> listPortalNavigationUri = new ArrayList<String>();
@@ -156,6 +160,7 @@ public class NavigationEventListenerDelegate {
     WCMConfigurationService wcmConfigurationService = WCMCoreUtils.getService(WCMConfigurationService.class);
     ManageableRepository repository = repositoryService.getCurrentRepository();
     NodeLocation nodeLocation = wcmConfigurationService.getLivePortalsLocation(repository.getConfiguration().getName());
+    String portletName = wcmConfigurationService.getRuntimeContextParam(WCMConfigurationService.SCV_PORTLET);
 
     String repositoryName = nodeLocation.getRepository();
     String workspaceName = nodeLocation.getWorkspace();
@@ -164,19 +169,23 @@ public class NavigationEventListenerDelegate {
     Session session = sessionProvider.getSession(workspaceName, repositoryService.getRepository(repositoryName));
 
     QueryManager queryManager = session.getWorkspace().getQueryManager();
-    Query query = queryManager.createQuery("select * from " + plugin.getLifecycleType() + " where publication:lifecycleName='" + lifecycleName + "' and jcr:path like '" + path + "/%' order by jcr:score", Query.SQL);
+    Query query = queryManager.createQuery("select * from " + plugin.getLifecycleType()
+        + " where publication:lifecycleName='" + lifecycleName + "' and jcr:path like '" + path
+        + "/%' order by jcr:score", Query.SQL);
     QueryResult results = query.execute();
     for (NodeIterator nodeIterator = results.getNodes(); nodeIterator.hasNext();) {
       Node content = nodeIterator.nextNode();
       String navigationNodeUri = "";
-      for (String existedNavigationNodeUri : PublicationUtil.getValuesAsString(content, "publication:navigationNodeURIs")) {
-        if (existedNavigationNodeUri.startsWith("/" + portalName)/* && !listPortalNavigationUri.contains(existedNavigationNodeUri)*/) {
+      for (String existedNavigationNodeUri : PublicationUtil.getValuesAsString(content,
+                                                                               "publication:navigationNodeURIs")) {
+        if (existedNavigationNodeUri.startsWith("/" + portalName)) {
           navigationNodeUri = existedNavigationNodeUri;
         }
       }
       String pageId = "";
-      for (String existedPageId : PublicationUtil.getValuesAsString(content, "publication:webPageIDs")) {
-        if (!listPageReference.contains(existedPageId) /*&& !listPortalNavigationUri.contains(navigationNodeUri)*/) {
+      for (String existedPageId : PublicationUtil.getValuesAsString(content,
+                                                                    "publication:webPageIDs")) {
+        if (!listPageReference.contains(existedPageId)) {
           pageId = existedPageId;
         }
       }
@@ -184,13 +193,14 @@ public class NavigationEventListenerDelegate {
         String applicationId = "";
         UserPortalConfigService userPortalConfigService = WCMCoreUtils.getService(UserPortalConfigService.class);
         Page page = null;
-        if (remoteUser == null) 
+        if (remoteUser == null)
           page = userPortalConfigService.getPage(pageId);
-        else 
+        else
           page = userPortalConfigService.getPage(pageId, remoteUser);
-        for (String applicationIdTmp : PublicationUtil.getListApplicationIdByPage(page, wcmConfigurationService.getRuntimeContextParam(WCMConfigurationService.SCV_PORTLET))) {
+        for (String applicationIdTmp : PublicationUtil.getListApplicationIdByPage(page, portletName)) {
           applicationIdTmp = PublicationUtil.setMixedApplicationId(pageId, applicationIdTmp);
-          List<String> listExistedApplicationId = PublicationUtil.getValuesAsString(content, "publication:applicationIDs");
+          List<String> listExistedApplicationId = PublicationUtil.getValuesAsString(content,
+                                                                                    "publication:applicationIDs");
           if (listExistedApplicationId.contains(applicationIdTmp)) {
             applicationId = applicationIdTmp;
           }
@@ -202,16 +212,19 @@ public class NavigationEventListenerDelegate {
 
   /**
    * Save added page node.
-   * 
+   *
    * @param portalName the portal name
    * @param pageNode the page node
    * @param applicationId the application id
    * @param content the content
-   * 
+   *
    * @throws Exception the exception
    */
-  private void saveAddedPageNode(String portalName, PageNode pageNode, String applicationId, Node content) throws Exception {    
-    PublicationService publicationService = WCMCoreUtils.getService(PublicationService.class);                 
+  private void saveAddedPageNode(String portalName,
+                                 PageNode pageNode,
+                                 String applicationId,
+                                 Node content) throws Exception {
+    PublicationService publicationService = WCMCoreUtils.getService(PublicationService.class);
     String nodeLifecycleName = null;
     try {
       nodeLifecycleName = publicationService.getNodeLifecycleName(content);
@@ -223,13 +236,13 @@ public class NavigationEventListenerDelegate {
 
     List<String> listExistedApplicationId = PublicationUtil.getValuesAsString(content, "publication:applicationIDs");
     String mixedApplicationId = PublicationUtil.setMixedApplicationId(pageNode.getPageReference(), applicationId);
-    if(listExistedApplicationId.contains(mixedApplicationId)) return ;        
+    if(listExistedApplicationId.contains(mixedApplicationId)) return ;
     listExistedApplicationId.add(mixedApplicationId);
     content.setProperty("publication:applicationIDs", PublicationUtil.toValues(valueFactory, listExistedApplicationId));
 
-    List<String> listExistedNavigationNodeUri = PublicationUtil.getValuesAsString(content, "publication:navigationNodeURIs");    
+    List<String> listExistedNavigationNodeUri = PublicationUtil.getValuesAsString(content, "publication:navigationNodeURIs");
     String mixedNavigationNodeUri = PublicationUtil.setMixedNavigationUri(portalName, pageNode.getUri());
-    listExistedNavigationNodeUri.add(mixedNavigationNodeUri);    
+    listExistedNavigationNodeUri.add(mixedNavigationNodeUri);
     content.setProperty("publication:navigationNodeURIs", PublicationUtil.toValues(valueFactory, listExistedNavigationNodeUri));
 
     List<String> listExistedWebPageId = PublicationUtil.getValuesAsString(content, "publication:webPageIDs");
@@ -240,24 +253,30 @@ public class NavigationEventListenerDelegate {
 
   /**
    * Save removed page node.
-   * 
+   *
    * @param navigationNodeUri the navigation node uri
    * @param pageId the page id
    * @param applicationId the application id
    * @param content the content
-   * 
+   *
    * @throws Exception the exception
    */
-  private void saveRemovedPageNode(String navigationNodeUri, String pageId, String applicationId, Node content) throws Exception {
+  private void saveRemovedPageNode(String navigationNodeUri,
+                                   String pageId,
+                                   String applicationId,
+                                   Node content) throws Exception {
     Session session = content.getSession();
     ValueFactory valueFactory = session.getValueFactory();
 
-    List<String> listExistedNavigationNodeUri = PublicationUtil.getValuesAsString(content, "publication:navigationNodeURIs");
-    List<String> listExistedNavigationNodeUriTmp = PublicationUtil.getValuesAsString(content, "publication:navigationNodeURIs");    
+    List<String> listExistedNavigationNodeUri = PublicationUtil.getValuesAsString(content,
+                                                                                  "publication:navigationNodeURIs");
+    List<String> listExistedNavigationNodeUriTmp = PublicationUtil.getValuesAsString(content,
+                                                                                     "publication:navigationNodeURIs");
     if (listExistedNavigationNodeUri.contains(navigationNodeUri)) {
-      listExistedNavigationNodeUriTmp.remove(navigationNodeUri);            
+      listExistedNavigationNodeUriTmp.remove(navigationNodeUri);
     }
-    content.setProperty("publication:navigationNodeURIs", PublicationUtil.toValues(valueFactory, listExistedNavigationNodeUriTmp));
+    content.setProperty("publication:navigationNodeURIs",
+                        PublicationUtil.toValues(valueFactory, listExistedNavigationNodeUriTmp));
 
     List<String> listExistedPageId = PublicationUtil.getValuesAsString(content, "publication:webPageIDs");
     List<String> listExistedPageIdTmp = PublicationUtil.getValuesAsString(content, "publication:webPageIDs");

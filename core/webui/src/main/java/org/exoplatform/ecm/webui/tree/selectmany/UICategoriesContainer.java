@@ -25,7 +25,7 @@ import org.exoplatform.webui.core.lifecycle.UIContainerLifecycle;
  * Created by The eXo Platform SAS
  * Author : DANG TAN DUNG
  *          dzungdev@gmail.com
- * Aug 11, 2008  
+ * Aug 11, 2008
  */
 
 @ComponentConfig(lifecycle=UIContainerLifecycle.class)
@@ -35,10 +35,10 @@ public class UICategoriesContainer extends UIContainer implements UIPopupCompone
 //    addChild(UICategoriesSelectPanel.class, null, null);
 //    addChild(UISelectedCategoriesGrid.class, null, null).setRendered(false);
   }
-  
-  public void activate() throws Exception {    
+
+  public void activate() throws Exception {
   }
-  
+
   public void deActivate() throws Exception {
   }
 }

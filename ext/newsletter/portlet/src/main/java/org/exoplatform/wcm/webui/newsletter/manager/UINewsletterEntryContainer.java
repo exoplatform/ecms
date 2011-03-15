@@ -40,54 +40,54 @@ public class UINewsletterEntryContainer extends UIContainer {
 
   /** The category config. */
   private NewsletterCategoryConfig categoryConfig;
-  
+
   /** The newsletter path. */
   private String newsletterPath = null;
-  
+
   /** The is updated. */
   private boolean isUpdated = false;
-  
+
   /**
    * Instantiates a new uI newsletter entry container.
-   * 
+   *
    * @throws Exception the exception
    */
   public UINewsletterEntryContainer() throws Exception {
   }
-  
+
   /**
    * Sets the updated.
-   * 
+   *
    * @param isUpdated the new updated
    */
   public void setUpdated(boolean isUpdated){
     this.isUpdated = isUpdated;
   }
-  
+
   /**
    * Checks if is updated.
-   * 
+   *
    * @return true, if is updated
    */
   public boolean isUpdated(){
     return this.isUpdated;
   }
-  
+
   /**
    * Sets the newsletter infor.
-   * 
+   *
    * @param newsletterPath the new newsletter infor
-   * 
+   *
    * @throws Exception the exception
    */
   public void setNewsletterInfor(String newsletterPath) throws Exception{
     this.newsletterPath = newsletterPath;
     init();
   }
-  
+
   /**
    * Inits the.
-   * 
+   *
    * @throws Exception the exception
    */
   @SuppressWarnings("static-access")
@@ -100,12 +100,18 @@ public class UINewsletterEntryContainer extends UIContainer {
     newsletterEntryForm.setWorkspace(newsletterManagerService.getWorkspaceName());
     if(this.newsletterPath == null){
       NewsletterTemplateHandler newsletterTemplateHandler = newsletterManagerService.getTemplateHandler();
-      this.newsletterPath = newsletterTemplateHandler.getTemplate(Utils.getSessionProvider(), NewsLetterUtil.getPortalName(), categoryConfig, null).getPath();
+      this.newsletterPath = newsletterTemplateHandler.getTemplate(Utils.getSessionProvider(),
+                                                                  NewsLetterUtil.getPortalName(),
+                                                                  categoryConfig,
+                                                                  null).getPath();
       newsletterEntryForm.addNew(true);
     }else{
       UIFormDateTimeInput dateTimeInput = newsletterEntryDialogSelector.getChild(UIFormDateTimeInput.class);
       Calendar calendar = dateTimeInput.getCalendar().getInstance();
-      calendar.setTime(newsletterManagerService.getEntryHandler().getNewsletterEntryByPath(Utils.getSessionProvider(), this.newsletterPath).getNewsletterSentDate());
+      calendar.setTime(newsletterManagerService.getEntryHandler()
+                                               .getNewsletterEntryByPath(Utils.getSessionProvider(),
+                                                                         this.newsletterPath)
+                                               .getNewsletterSentDate());
       dateTimeInput.setCalendar(calendar);
       newsletterEntryForm.addNew(false);
     }
@@ -118,18 +124,18 @@ public class UINewsletterEntryContainer extends UIContainer {
 
   /**
    * Gets the category config.
-   * 
+   *
    * @return the category config
    */
   public NewsletterCategoryConfig getCategoryConfig() {
     return categoryConfig;
   }
-  
+
   /**
    * Sets the category config.
-   * 
+   *
    * @param categoryConfig the new category config
-   * 
+   *
    * @throws Exception the exception
    */
   public void setCategoryConfig(NewsletterCategoryConfig categoryConfig) throws Exception {

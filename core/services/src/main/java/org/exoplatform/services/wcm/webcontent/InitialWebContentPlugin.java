@@ -49,23 +49,26 @@ import org.exoplatform.services.wcm.portal.artifacts.CreatePortalPlugin;
  * Oct 22, 2008
  */
 public class InitialWebContentPlugin extends CreatePortalPlugin {
-  
+
   @SuppressWarnings("unused")
-  private static Log log = ExoLogger.getLogger(CreatePortalPlugin.class);   
-  private InitParams initParams;   
-  private ConfigurationManager configurationManager;  
+  private static Log log = ExoLogger.getLogger(CreatePortalPlugin.class);
+  private InitParams initParams;
+  private ConfigurationManager configurationManager;
   private RepositoryService repositoryService;
-  private ExoCache<String, String> artifactsCache; 
+  private ExoCache<String, String> artifactsCache;
   private LivePortalManagerService livePortalManagerService;
   /**
    * Instantiates a new initial web content plugin.
-   * 
+   *
    * @param initParams the init params
    * @param configurationManager the configuration manager
    * @param repositoryService the repository service
    */
-  public InitialWebContentPlugin(InitParams initParams, ConfigurationManager configurationManager,
-      RepositoryService repositoryService, CacheService cacheService, LivePortalManagerService livePortalManagerService) throws Exception {
+  public InitialWebContentPlugin(InitParams initParams,
+                                 ConfigurationManager configurationManager,
+                                 RepositoryService repositoryService,
+                                 CacheService cacheService,
+                                 LivePortalManagerService livePortalManagerService) throws Exception {
     super(initParams, configurationManager, repositoryService);
     this.initParams = initParams;
     this.configurationManager = configurationManager;
@@ -74,12 +77,16 @@ public class InitialWebContentPlugin extends CreatePortalPlugin {
     this.livePortalManagerService = livePortalManagerService;
   }
 
-  /* (non-Javadoc)
-   * @see org.exoplatform.services.wcm.portal.artifacts.BasePortalArtifactsPlugin#deployToPortal(java.lang.String, org.exoplatform.services.jcr.ext.common.SessionProvider)
+  /*
+   * (non-Javadoc)
+   * @see
+   * org.exoplatform.services.wcm.portal.artifacts.BasePortalArtifactsPlugin
+   * #deployToPortal(java.lang.String,
+   * org.exoplatform.services.jcr.ext.common.SessionProvider)
    */
   @SuppressWarnings("unchecked")
   public void deployToPortal(SessionProvider sessionProvider, String portalName) throws Exception {
-    Iterator iterator = initParams.getObjectParamIterator();    
+    Iterator iterator = initParams.getObjectParamIterator();
     while(iterator.hasNext()) {
       ObjectParameter objectParameter = (ObjectParameter)iterator.next();
       DeploymentDescriptor deploymentDescriptor = (DeploymentDescriptor)objectParameter.getObject();
@@ -90,31 +97,32 @@ public class InitialWebContentPlugin extends CreatePortalPlugin {
         InputStream stream = configurationManager.getInputStream(sourcePath);
         xmlData = IOUtil.getStreamContentAsString(stream);
         artifactsCache.put(sourcePath,xmlData);
-      }           
+      }
       ManageableRepository repository = repositoryService.getRepository(deploymentDescriptor.getTarget().getRepository());
       Session session = sessionProvider.getSession(deploymentDescriptor.getTarget().getWorkspace(), repository);
       String targetPath = deploymentDescriptor.getTarget().getNodePath();
       String realTargetFolder = StringUtils.replace(targetPath,"{portalName}",portalName);
       InputStream inputStream = configurationManager.getInputStream(sourcePath);
       session.importXML(realTargetFolder, inputStream, ImportUUIDBehavior.IMPORT_UUID_CREATE_NEW);
-      session.save();           
+      session.save();
     }
-    Node portalNode = livePortalManagerService.getLivePortal(sessionProvider, portalName);         
+    Node portalNode = livePortalManagerService.getLivePortal(sessionProvider, portalName);
     configure(portalNode,portalName);
-    portalNode.getSession().save();    
+    portalNode.getSession().save();
   }
 
   /**
    * Configure.
-   * 
+   *
    * @param session the session
    * @param folderPath the folder path
    * @param portalName the portal name
-   * 
+   *
    * @throws Exception the exception
    */
   private void configure(Node targetNode, String portalName) throws Exception{
-    String statement = "select * from nt:resource where jcr:path like '" + targetNode.getPath() + "/%' order by jcr:dateModified ASC";
+    String statement = "select * from nt:resource where jcr:path like '" + targetNode.getPath()
+        + "/%' order by jcr:dateModified ASC";
     QueryManager queryManager = targetNode.getSession().getWorkspace().getQueryManager();
     Query query = queryManager.createQuery(statement,Query.SQL);
     NodeIterator iterator = query.execute().getNodes();
@@ -126,6 +134,6 @@ public class InitialWebContentPlugin extends CreatePortalPlugin {
       if(!jcrData.contains("{portalName}")) continue;
       String realData = StringUtils.replace(jcrData, "{portalName}",portalName);
       ntResource.setProperty("jcr:data",realData);
-    }    
+    }
   }
 }

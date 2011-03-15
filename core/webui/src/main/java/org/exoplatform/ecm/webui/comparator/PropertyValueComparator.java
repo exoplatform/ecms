@@ -47,7 +47,7 @@ public class PropertyValueComparator implements Comparator<Node> {
   }
 
   public int compare(Node node0, Node node1) {
-	int flipFlop = ASCENDING_ORDER.equals(orderType) ? 1 : -1;
+  int flipFlop = ASCENDING_ORDER.equals(orderType) ? 1 : -1;
     int requireType = getRequireType(node0);
     int requireType2 = getRequireType(node1);
     if (requireType == -1 && requireType2 == -1) return 0;
@@ -81,7 +81,7 @@ public class PropertyValueComparator implements Comparator<Node> {
       return 0;
     }
   }
-  
+
   private int getRequireType(Node node) {
     try {
       if (node.hasProperty(propertyName)) {
@@ -93,11 +93,15 @@ public class PropertyValueComparator implements Comparator<Node> {
       return -1;
     }
   }
-  
+
   private int compareString(Node node0, Node node1) {
     try {
-      String propertyValue0 = node0.getProperty(propertyName) == null ? "" : String.valueOf(node0.getProperty(propertyName).getString());
-      String propertyValue1 = node1.getProperty(propertyName) == null ? "" : String.valueOf(node1.getProperty(propertyName).getString());
+      String propertyValue0 = node0.getProperty(propertyName) == null ? ""
+                                                                     : String.valueOf(node0.getProperty(propertyName)
+                                                                                           .getString());
+      String propertyValue1 = node1.getProperty(propertyName) == null ? ""
+                                                                     : String.valueOf(node1.getProperty(propertyName)
+                                                                                           .getString());
       if(ASCENDING_ORDER.equals(orderType)) {
         return propertyValue0.compareToIgnoreCase(propertyValue1);
       }
@@ -107,7 +111,7 @@ public class PropertyValueComparator implements Comparator<Node> {
       return 0;
     }
   }
-  
+
   public int compareDate(Node node0, Node node1) {
     try{
         Calendar date0 = node0.getProperty(propertyName).getDate();
@@ -118,7 +122,7 @@ public class PropertyValueComparator implements Comparator<Node> {
         return date1.compareTo(date0) ;
     } catch (Exception e) {
       LOG.error("Unexpected error", e);
-    }    
+    }
     return 0;
   }
 

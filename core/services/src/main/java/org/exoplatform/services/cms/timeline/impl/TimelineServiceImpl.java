@@ -45,7 +45,7 @@ import org.exoplatform.services.log.Log;
  * Created by The eXo Platform SARL
  * Author : Dang Van Minh
  *          minh.dang@exoplatform.com
- * Oct 22, 2009  
+ * Oct 22, 2009
  * 8:19:51 AM
  */
 public class TimelineServiceImpl implements TimelineService {
@@ -62,7 +62,7 @@ public class TimelineServiceImpl implements TimelineService {
   private int itemPerTimeline = 5;
 
   static {
-    formatDateTime.applyPattern("yyyy-MM-dd");	  
+    formatDateTime.applyPattern("yyyy-MM-dd");
   }
 
   public TimelineServiceImpl(RepositoryService repoService, TemplateService templateService,
@@ -75,14 +75,14 @@ public class TimelineServiceImpl implements TimelineService {
   /**
    * {@inheritDoc}
    */
-  public List<Node> getDocumentsOfEarlierThisYear(String nodePath, String repository, String workspace, 
+  public List<Node> getDocumentsOfEarlierThisYear(String nodePath, String repository, String workspace,
       SessionProvider sessionProvider, String userName, boolean byUser) throws Exception {
 
     List<Node> documentsOfYear = new ArrayList<Node>();
     Session session = getSession(sessionProvider, repository, workspace);
     Calendar currentTime = new GregorianCalendar();
     String strBeginningOfThisMonthTime = getStrBeginningOfThisMonthTime(currentTime);
-    String strBeginningOfThisYearTime = getStrBeginningOfThisYearTime(currentTime);	  
+    String strBeginningOfThisYearTime = getStrBeginningOfThisYearTime(currentTime);
     StringBuilder sb = new StringBuilder();
     String pathPattern = buildPathPattern(nodePath);
     sb.append(SELECT_QUERY);
@@ -103,20 +103,20 @@ public class TimelineServiceImpl implements TimelineService {
     while(nodeIter.hasNext()) {
       documentsOfYear.add(nodeIter.nextNode());
     }
-    return documentsOfYear;	  
+    return documentsOfYear;
   }
 
   /**
    * {@inheritDoc}
    */
-  public List<Node> getDocumentsOfEarlierThisMonth(String nodePath, String repository, String workspace, 
+  public List<Node> getDocumentsOfEarlierThisMonth(String nodePath, String repository, String workspace,
       SessionProvider sessionProvider, String userName, boolean byUser) throws Exception {
 
     List<Node> documentsOfMonth = new ArrayList<Node>();
     Session session = getSession(sessionProvider, repository, workspace);
     Calendar currentTime = new GregorianCalendar();
     String strBeginningOfThisWeekTime = getStrBeginningOfThisWeekTime(currentTime);
-    String strBeginningOfThisMonthTime = getStrBeginningOfThisMonthTime(currentTime);	  
+    String strBeginningOfThisMonthTime = getStrBeginningOfThisMonthTime(currentTime);
     StringBuilder sb = new StringBuilder();
     String pathPattern = buildPathPattern(nodePath);
     sb.append(SELECT_QUERY);
@@ -137,20 +137,20 @@ public class TimelineServiceImpl implements TimelineService {
     while(nodeIter.hasNext()) {
       documentsOfMonth.add(nodeIter.nextNode());
     }
-    return documentsOfMonth;	  
+    return documentsOfMonth;
   }
 
   /**
    * {@inheritDoc}
    */
-  public List<Node> getDocumentsOfEarlierThisWeek(String nodePath, String repository, String workspace, 
+  public List<Node> getDocumentsOfEarlierThisWeek(String nodePath, String repository, String workspace,
       SessionProvider sessionProvider, String userName, boolean byUser) throws Exception {
 
     List<Node> documentsOfWeek = new ArrayList<Node>();
     Session session = getSession(sessionProvider, repository, workspace);
     Calendar currentTime = new GregorianCalendar();
     String strYesterdayTime = getStrYesterdayTime(currentTime);
-    String strBeginningOfThisWeekTime = getStrBeginningOfThisWeekTime(currentTime);	  
+    String strBeginningOfThisWeekTime = getStrBeginningOfThisWeekTime(currentTime);
     StringBuilder sb = new StringBuilder();
     String pathPattern = buildPathPattern(nodePath);
     sb.append(SELECT_QUERY);
@@ -171,13 +171,13 @@ public class TimelineServiceImpl implements TimelineService {
     while(nodeIter.hasNext()) {
       documentsOfWeek.add(nodeIter.nextNode());
     }
-    return documentsOfWeek;	  
+    return documentsOfWeek;
   }
 
   /**
    * {@inheritDoc}
    */
-  public List<Node> getDocumentsOfYesterday(String nodePath, String repository, String workspace, 
+  public List<Node> getDocumentsOfYesterday(String nodePath, String repository, String workspace,
       SessionProvider sessionProvider, String userName, boolean byUser) throws Exception {
 
     List<Node> documentsOfYesterday = new ArrayList<Node>();
@@ -211,7 +211,7 @@ public class TimelineServiceImpl implements TimelineService {
   /**
    * {@inheritDoc}
    */
-  public List<Node> getDocumentsOfToday(String nodePath, String repository, String workspace, 
+  public List<Node> getDocumentsOfToday(String nodePath, String repository, String workspace,
       SessionProvider sessionProvider, String userName, boolean byUser) throws Exception {
     List<Node> documentsOfToday = new ArrayList<Node>();
     Session session = getSession(sessionProvider, repository, workspace);
@@ -253,7 +253,7 @@ public class TimelineServiceImpl implements TimelineService {
     } catch(Exception e) {
       LOG.error("Can not execute query", e);
       return null;
-    }          
+    }
   }
 
   private String buildDocumentTypePattern() throws Exception {
@@ -265,7 +265,7 @@ public class TimelineServiceImpl implements TimelineService {
     }
     return sb.toString();
   }
-  
+
   @Deprecated
   /**
    * @deprecated Since WCM 2.1-CLOUD-DEV you should use {@link #buildDocumentTypePattern()} instead.
@@ -275,10 +275,10 @@ public class TimelineServiceImpl implements TimelineService {
   }
 
   private String getStrTodayTime(Calendar time) {
-    String currentDate = formatDateTime.format(time.getTime());	  
+    String currentDate = formatDateTime.format(time.getTime());
     return currentDate + TIME_FORMAT_TAIL;
   }
-  
+
   private String buildPathPattern(String nodePath) {
     if(nodePath.equals("/")) return "";
     return "jcr:path LIKE '" + nodePath + "/%" + "'";
@@ -291,7 +291,7 @@ public class TimelineServiceImpl implements TimelineService {
     return yesterdayDate + TIME_FORMAT_TAIL;
   }
 
-  private String getStrBeginningOfThisWeekTime(Calendar time) { 
+  private String getStrBeginningOfThisWeekTime(Calendar time) {
     Calendar monday = (Calendar)time.clone();
     while (monday.get(Calendar.WEEK_OF_YEAR) == time.get(Calendar.WEEK_OF_YEAR)) {
       monday.add(Calendar.DATE, -1);
@@ -301,14 +301,14 @@ public class TimelineServiceImpl implements TimelineService {
     return mondayDate + TIME_FORMAT_TAIL;
   }
 
-  private String getStrBeginningOfThisMonthTime(Calendar time) { 
+  private String getStrBeginningOfThisMonthTime(Calendar time) {
     Calendar theFirst = (Calendar)time.clone();
     theFirst.set(time.get(Calendar.YEAR), time.get(Calendar.MONTH), 1, 0, 0, 0);
     String theFirstDate = formatDateTime.format(theFirst.getTime());
     return theFirstDate + TIME_FORMAT_TAIL;
   }
 
-  private String getStrBeginningOfThisYearTime(Calendar time) { 
+  private String getStrBeginningOfThisYearTime(Calendar time) {
     Calendar theFirst = (Calendar)time.clone();
     theFirst.set(time.get(Calendar.YEAR), 0, 1, 0, 0, 0);
     String theFirstDate = formatDateTime.format(theFirst.getTime());

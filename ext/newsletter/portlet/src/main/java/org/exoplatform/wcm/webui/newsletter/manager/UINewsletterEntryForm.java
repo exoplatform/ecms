@@ -82,11 +82,11 @@ public class UINewsletterEntryForm extends UIDialogForm {
 
   /**
    * Instantiates a new uI newsletter entry form.
-   * 
+   *
    * @throws Exception the exception
    */
   public UINewsletterEntryForm() throws Exception {
-  	setActions(new String [] {"Save", "Send", "Cancel"});
+    setActions(new String [] {"Save", "Send", "Cancel"});
   }
 
   /* (non-Javadoc)
@@ -104,28 +104,32 @@ public class UINewsletterEntryForm extends UIDialogForm {
   }
 
   /* (non-Javadoc)
-   * @see org.exoplatform.webui.core.UIComponent#getTemplateResourceResolver(org.exoplatform.webui.application.WebuiRequestContext, java.lang.String)
+   * @see org.exoplatform.webui.core.UIComponent#getTemplateResourceResolver(
+   * org.exoplatform.webui.application.WebuiRequestContext, java.lang.String)
    */
   public ResourceResolver getTemplateResourceResolver(WebuiRequestContext context, String template) {
-    try{
+    try {
       if (resourceResolver == null) {
         DMSConfiguration dmsConfiguration = getApplicationComponent(DMSConfiguration.class);
         String workspace = dmsConfiguration.getConfig().getSystemWorkspace();
         resourceResolver = new JCRResourceResolver(this.repositoryName, workspace);
       }
-    }catch(Exception e) {
-      Utils.createPopupMessage(this, "UINewsletterEntryForm.msg.get-template-resource", null, ApplicationMessage.ERROR);
+    } catch (Exception e) {
+      Utils.createPopupMessage(this,
+                               "UINewsletterEntryForm.msg.get-template-resource",
+                               null,
+                               ApplicationMessage.ERROR);
     }
     return resourceResolver;
   }
 
   /**
    * Save content.
-   * 
+   *
    * @param isSend the is send
-   * 
+   *
    * @return the node
-   * 
+   *
    * @throws Exception the exception
    */
   private Node saveContent(boolean isSend) throws Exception {
@@ -133,17 +137,19 @@ public class UINewsletterEntryForm extends UIDialogForm {
     // Prepare node store location
     UINewsletterEntryContainer newsletterEntryContainer = getAncestorOfType(UINewsletterEntryContainer.class);
     UINewsletterEntryDialogSelector newsletterEntryDialogSelector = newsletterEntryContainer.getChild(UINewsletterEntryDialogSelector.class);
-    String selectedCategory = ((UIFormSelectBox)newsletterEntryDialogSelector.getChildById(UINewsletterConstant.ENTRY_CATEGORY_SELECTBOX)).getValue();
-    String selectedSubsctiption = ((UIFormSelectBox)newsletterEntryDialogSelector.getChildById(UINewsletterConstant.ENTRY_SUBSCRIPTION_SELECTBOX)).getValue();
-    setStoredPath(NewsletterConstant.generateSubscriptionPath(NewsLetterUtil.getPortalName(), selectedCategory, selectedSubsctiption));
-    
+    String selectedCategory = ((UIFormSelectBox) newsletterEntryDialogSelector.getChildById(UINewsletterConstant.ENTRY_CATEGORY_SELECTBOX)).getValue();
+    String selectedSubsctiption = ((UIFormSelectBox) newsletterEntryDialogSelector.getChildById(UINewsletterConstant.ENTRY_SUBSCRIPTION_SELECTBOX)).getValue();
+    setStoredPath(NewsletterConstant.generateSubscriptionPath(NewsLetterUtil.getPortalName(),
+                                                              selectedCategory,
+                                                              selectedSubsctiption));
+
     // Prepare node: use title as a node name
     Map<String, JcrInputProperty> inputProperties = DialogFormUtil.prepareMap(getChildren(), getInputProperties());
     if(isAddNew()){
       String nodeName = Utils.cleanString(getUIStringInput("title").getValue());
       inputProperties.get("/node").setValue(nodeName);
     }
-    
+
     // Store node
     String storedPath = getStoredPath().replace(NewsletterConstant.PORTAL_NAME, NewsLetterUtil.getPortalName());
     RepositoryService repositoryService = getApplicationComponent(RepositoryService.class);
@@ -177,17 +183,17 @@ public class UINewsletterEntryForm extends UIDialogForm {
       newsletterNode.setProperty(NewsletterConstant.ENTRY_PROPERTY_STATUS, NewsletterConstant.STATUS_DRAFT);
     }
     session.save();
-    
+
     // Close popup and update UI
     UINewsletterManagerPortlet managerPortlet = getAncestorOfType(UINewsletterManagerPortlet.class);
     UINewsletterEntryManager entryManager = managerPortlet.getChild(UINewsletterEntryManager.class);
     if(entryManager.isRendered()) entryManager.init();
     Utils.closePopupWindow(this, UINewsletterConstant.ENTRY_FORM_POPUP_WINDOW);
-    
+
     if(isNull) return null;
     return newsletterNode;
   }
-  
+
   /**
    * The listener interface for receiving saveAction events.
    * The class that is interested in processing a saveAction
@@ -196,11 +202,11 @@ public class UINewsletterEntryForm extends UIDialogForm {
    * component's <code>addSaveActionListener<code> method. When
    * the saveAction event occurs, that object's appropriate
    * method is invoked.
-   * 
+   *
    * @see SaveActionEvent
    */
   public static class SaveActionListener extends EventListener<UINewsletterEntryForm> {
-    
+
     /* (non-Javadoc)
      * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
      */
@@ -232,11 +238,11 @@ public class UINewsletterEntryForm extends UIDialogForm {
    * component's <code>addSendActionListener<code> method. When
    * the sendAction event occurs, that object's appropriate
    * method is invoked.
-   * 
+   *
    * @see SendActionEvent
    */
   public static class SendActionListener extends EventListener<UINewsletterEntryForm> {
-    
+
     /* (non-Javadoc)
      * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
      */
@@ -276,7 +282,10 @@ public class UINewsletterEntryForm extends UIDialogForm {
             try {
               if(!listEmailBanned.contains(value.getString()))listEmailAddress.add(value.getString());
             } catch (Exception e) {
-              Utils.createPopupMessage(newsletterEntryForm, "UINewsletterEntryForm.msg.add-email-newsletter", null, ApplicationMessage.ERROR);
+              Utils.createPopupMessage(newsletterEntryForm,
+                                       "UINewsletterEntryForm.msg.add-email-newsletter",
+                                       null,
+                                       ApplicationMessage.ERROR);
             }
           }
         }
@@ -287,7 +296,8 @@ public class UINewsletterEntryForm extends UIDialogForm {
             receiver += listEmailAddress.get(i) + ",";
           }
           String content = newsletterManagerService.getEntryHandler().getContent(Utils.getSessionProvider(), newsletterNode);
-          String baseURI = portletRequest.getScheme() + "://" + portletRequest.getServerName() + ":" + String.format("%s", portletRequest.getServerPort());
+          String baseURI = portletRequest.getScheme() + "://" + portletRequest.getServerName()
+              + ":" + String.format("%s", portletRequest.getServerPort());
           String data = newsletterNode.getNode("default.html").getNode("jcr:content").getProperty("jcr:data").getString();
           String url = "";
           int index= 0;
@@ -323,8 +333,11 @@ public class UINewsletterEntryForm extends UIDialogForm {
           message.setMimeType("text/html") ;
           try {
             mailService.sendMessage(message);
-          }catch (Exception e) {
-            Utils.createPopupMessage(newsletterEntryForm, "UINewsletterEntryForm.msg.send-newsletter", null, ApplicationMessage.ERROR);
+          } catch (Exception e) {
+            Utils.createPopupMessage(newsletterEntryForm,
+                                     "UINewsletterEntryForm.msg.send-newsletter",
+                                     null,
+                                     ApplicationMessage.ERROR);
           }
         }
         session.save();
@@ -340,11 +353,11 @@ public class UINewsletterEntryForm extends UIDialogForm {
    * component's <code>addCancelActionListener<code> method. When
    * the cancelAction event occurs, that object's appropriate
    * method is invoked.
-   * 
+   *
    * @see CancelActionEvent
    */
   public static class CancelActionListener extends EventListener<UINewsletterEntryForm> {
-    
+
     /* (non-Javadoc)
      * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
      */

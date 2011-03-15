@@ -47,7 +47,7 @@ public class WorkflowFormsServiceImpl implements WorkflowFormsService {
   private static Map                   allForms = new HashMap();
 
   private WorkflowServiceContainerImpl container;
-  
+
   private static final Log LOG = ExoLogger.getLogger(WorkflowFormsServiceImpl.class);
 
   public WorkflowFormsServiceImpl(WorkflowServiceContainer workflowServiceContainer) {
@@ -95,7 +95,7 @@ public class WorkflowFormsServiceImpl implements WorkflowFormsService {
         }
         allForms.put(new Long(definitionId), stateNameToForms);
       } catch (DocumentException e) {
-    	  LOG.warn(e.getMessage(), e);
+        LOG.warn(e.getMessage(), e);
       }
     }
   }

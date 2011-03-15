@@ -54,7 +54,7 @@ public class RelationsServiceImpl implements RelationsService, Startable {
     repositoryService_ = repositoryService;
     nodeHierarchyCreator_ = nodeHierarchyCreator;
   }
-  
+
   /**
    * {@inheritDoc}
    */
@@ -63,25 +63,25 @@ public class RelationsServiceImpl implements RelationsService, Startable {
     return false;
 
   }
-  
+
   /**
    * Get node by UUID
-   * @param uuid          The specified UUI. 
-   * @param repository    The name of repository 
+   * @param uuid          The specified UUI.
+   * @param repository    The name of repository
    * @param provider      SessionProvider
    * @see                 SessionProvider
-   * @return              Node with specified UUID 
+   * @return              Node with specified UUID
    * @throws Exception
    */
-  private Node getNodeByUUID(String uuid, String repository,SessionProvider provider) throws Exception {   
+  private Node getNodeByUUID(String uuid, String repository,SessionProvider provider) throws Exception {
     ManageableRepository manageRepo = repositoryService_.getCurrentRepository();
     String[] workspaces = manageRepo.getWorkspaceNames() ;
     for(String ws : workspaces) {
       try{
-        return provider.getSession(ws,manageRepo).getNodeByUUID(uuid) ;        
+        return provider.getSession(ws,manageRepo).getNodeByUUID(uuid) ;
       } catch(Exception e) {
         continue ;
-      }      
+      }
     }
     return null;
   }
@@ -100,9 +100,9 @@ public class RelationsServiceImpl implements RelationsService, Startable {
           }
         }
       }
-    } catch(Exception e) {      
+    } catch(Exception e) {
     }
-    return rels ;    
+    return rels ;
   }
 
   /**
@@ -138,15 +138,15 @@ public class RelationsServiceImpl implements RelationsService, Startable {
   public void addRelation(Node node, String relationPath,String workpace,String repository) throws Exception {
     SessionProvider provider = SessionProvider.createSystemProvider() ;
     Session session = getSession(repository,workpace,provider) ;
-    Node catNode = (Node) session.getItem(relationPath); 
+    Node catNode = (Node) session.getItem(relationPath);
     if(!catNode.isNodeType("mix:referenceable")) {
       catNode.addMixin("mix:referenceable") ;
       catNode.save() ;
       session.save() ;
-    }      
+    }
     Value value2add = session.getValueFactory().createValue(catNode);
     if (!node.isNodeType(RELATION_MIXIN)) {
-      node.addMixin(RELATION_MIXIN);    
+      node.addMixin(RELATION_MIXIN);
       node.setProperty(RELATION_PROP, new Value[] {value2add});
       node.save() ;
       session.save() ;
@@ -215,13 +215,13 @@ public class RelationsServiceImpl implements RelationsService, Startable {
     Session session = getSession();
     String relationPath = nodeHierarchyCreator_.getJcrPath(BasePath.CMS_PUBLICATIONS_PATH);
     if (relationPath == null) throw new IllegalArgumentException();
-    try {            
+    try {
       Node relationsHome = (Node) session.getItem(relationPath);
       for (NodeIterator iterator = relationsHome.getNodes(); iterator.hasNext();) {
         Node rel = iterator.nextNode();
         rel.addMixin("mix:referenceable");
       }
-      relationsHome.save(); 
+      relationsHome.save();
     } catch (IllegalArgumentException e) {
       LOG.error("Cannot find path by alias " + BasePath.CMS_PUBLICATIONS_PATH);
     } catch (Exception e) {
@@ -230,10 +230,10 @@ public class RelationsServiceImpl implements RelationsService, Startable {
       if(session != null) session.logout();
     }
   }
-  
+
   /**
    * Get session of respository
-   * @see                 Session 
+   * @see                 Session
    * @return              Session
    * @throws Exception
    */
@@ -242,10 +242,10 @@ public class RelationsServiceImpl implements RelationsService, Startable {
     String workspaceName = manageableRepository.getConfiguration().getSystemWorkspaceName();
     return manageableRepository.getSystemSession(workspaceName);
   }
-  
+
   /**
    * Get session of workspace
-   * @param repository    The name of repository   
+   * @param repository    The name of repository
    * @param workspace     The name of workspace
    * @param provider      SessionProvider
    * @see                 SessionProvider

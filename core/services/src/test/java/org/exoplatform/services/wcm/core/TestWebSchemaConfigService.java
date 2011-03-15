@@ -41,10 +41,10 @@ public class TestWebSchemaConfigService extends BaseWCMTestCase {
 
   /** The web schema config service. */
   private WebSchemaConfigService webSchemaConfigService;
-  
+
   /** The live node. */
   private Node documentNode;
-  
+
   /* (non-Javadoc)
    * @see org.exoplatform.services.wcm.core.BaseWCMTestCase#setUp()
    */
@@ -54,20 +54,20 @@ public class TestWebSchemaConfigService extends BaseWCMTestCase {
     webSchemaConfigService.getAllWebSchemaHandler().clear();
     documentNode = (Node) session.getItem("/sites content/live/classic/documents");
   }
-  
+
   /**
    * Test add css file schema handler.
-   * 
+   *
    * @throws Exception the exception
    */
   public void testAddCSSFileSchemaHandler() throws Exception {
     ComponentPlugin componentPlugin = new CSSFileHandler();
     webSchemaConfigService.addWebSchemaHandler(componentPlugin);
     assertEquals(1, webSchemaConfigService.getAllWebSchemaHandler().size());  }
-  
+
   /**
    * Test add double css file schema handler.
-   * 
+   *
    * @throws Exception the exception
    */
   public void testAddDoubleCSSFileSchemaHandler() throws Exception {
@@ -76,20 +76,20 @@ public class TestWebSchemaConfigService extends BaseWCMTestCase {
     ComponentPlugin componentPlugin2 = new CSSFileHandler();
     webSchemaConfigService.addWebSchemaHandler(componentPlugin2);
     assertEquals(1, webSchemaConfigService.getAllWebSchemaHandler().size());  }
-  
+
   /**
    * Test add js file schema handler.
-   * 
+   *
    * @throws Exception the exception
    */
   public void testAddJSFileSchemaHandler() throws Exception {
     ComponentPlugin componentPlugin = new JSFileHandler();
     webSchemaConfigService.addWebSchemaHandler(componentPlugin);
     assertEquals(1, webSchemaConfigService.getAllWebSchemaHandler().size());  }
-  
+
   /**
    * Test add double js file schema handler.
-   * 
+   *
    * @throws Exception the exception
    */
   public void testAddDoubleJSFileSchemaHandler() throws Exception {
@@ -99,10 +99,10 @@ public class TestWebSchemaConfigService extends BaseWCMTestCase {
     webSchemaConfigService.addWebSchemaHandler(componentPlugin2);
     assertEquals(1, webSchemaConfigService.getAllWebSchemaHandler().size());
   }
-  
+
   /**
    * Test add html file schema handler.
-   * 
+   *
    * @throws Exception the exception
    */
   public void testAddHTMLFileSchemaHandler() throws Exception {
@@ -110,10 +110,10 @@ public class TestWebSchemaConfigService extends BaseWCMTestCase {
     webSchemaConfigService.addWebSchemaHandler(componentPlugin);
     assertEquals(1, webSchemaConfigService.getAllWebSchemaHandler().size());
   }
-  
+
   /**
    * Test add double html file schema handler.
-   * 
+   *
    * @throws Exception the exception
    */
   public void testAddDoubleHTMLFileSchemaHandler() throws Exception {
@@ -121,12 +121,12 @@ public class TestWebSchemaConfigService extends BaseWCMTestCase {
     webSchemaConfigService.addWebSchemaHandler(componentPlugin);
     ComponentPlugin componentPlugin2 = new HTMLFileSchemaHandler();
     webSchemaConfigService.addWebSchemaHandler(componentPlugin2);
-    assertEquals(1, webSchemaConfigService.getAllWebSchemaHandler().size());  
+    assertEquals(1, webSchemaConfigService.getAllWebSchemaHandler().size());
   }
 
   /**
    * Test add portal folder schema handler.
-   * 
+   *
    * @throws Exception the exception
    */
   public void testAddPortalFolderSchemaHandler() throws Exception {
@@ -134,11 +134,11 @@ public class TestWebSchemaConfigService extends BaseWCMTestCase {
     webSchemaConfigService.addWebSchemaHandler(componentPlugin);
     assertEquals(1, webSchemaConfigService.getAllWebSchemaHandler().size());
   }
-  
+
   /**
    * Test add double portal folder schema handler.
    * css
-   * 
+   *
    * @throws Exception the exception
    */
   public void testAddDoublePortalFolderSchemaHandler() throws Exception {
@@ -146,12 +146,12 @@ public class TestWebSchemaConfigService extends BaseWCMTestCase {
     webSchemaConfigService.addWebSchemaHandler(componentPlugin);
     ComponentPlugin componentPlugin2 = new PortalFolderSchemaHandler();
     webSchemaConfigService.addWebSchemaHandler(componentPlugin2);
-    assertEquals(1, webSchemaConfigService.getAllWebSchemaHandler().size());  
+    assertEquals(1, webSchemaConfigService.getAllWebSchemaHandler().size());
   }
-  
+
   /**
    * Test add web content schema handler.
-   * 
+   *
    * @throws Exception the exception
    */
   public void testAddWebcontentSchemaHandler() throws Exception {
@@ -159,10 +159,10 @@ public class TestWebSchemaConfigService extends BaseWCMTestCase {
     webSchemaConfigService.addWebSchemaHandler(componentPlugin);
     assertEquals(1, webSchemaConfigService.getAllWebSchemaHandler().size());
   }
-  
+
   /**
    * Test add double web content schema handler.
-   * 
+   *
    * @throws Exception the exception
    */
   public void testAddDoubleWebcontentSchemaHandler() throws Exception {
@@ -170,12 +170,12 @@ public class TestWebSchemaConfigService extends BaseWCMTestCase {
     webSchemaConfigService.addWebSchemaHandler(componentPlugin);
     ComponentPlugin componentPlugin2 = new WebContentSchemaHandler();
     webSchemaConfigService.addWebSchemaHandler(componentPlugin2);
-    assertEquals(1, webSchemaConfigService.getAllWebSchemaHandler().size());  
+    assertEquals(1, webSchemaConfigService.getAllWebSchemaHandler().size());
   }
-  
+
   /**
    * Test get all web schema handler.
-   * 
+   *
    * @throws Exception the exception
    */
   public void testGetAllWebSchemaHandler() throws Exception {
@@ -186,10 +186,10 @@ public class TestWebSchemaConfigService extends BaseWCMTestCase {
     webSchemaConfigService.addWebSchemaHandler(new WebContentSchemaHandler());
     assertEquals(5, webSchemaConfigService.getAllWebSchemaHandler().size());
   }
-  
+
   /**
    * Test get web schema handler by type.
-   * 
+   *
    * @throws Exception the exception
    */
   public void testGetWebSchemaHandlerByType() throws Exception {
@@ -198,26 +198,26 @@ public class TestWebSchemaConfigService extends BaseWCMTestCase {
     webSchemaConfigService.addWebSchemaHandler(new HTMLFileSchemaHandler());
     webSchemaConfigService.addWebSchemaHandler(new PortalFolderSchemaHandler());
     webSchemaConfigService.addWebSchemaHandler(new WebContentSchemaHandler());
-    
+
     CSSFileHandler cssFileSchemaHandler = webSchemaConfigService.getWebSchemaHandlerByType(CSSFileHandler.class);
     assertTrue(cssFileSchemaHandler instanceof CSSFileHandler);
-    
+
     JSFileHandler jsFileSchemaHandler = webSchemaConfigService.getWebSchemaHandlerByType(JSFileHandler.class);
     assertTrue(jsFileSchemaHandler instanceof JSFileHandler);
-    
+
     HTMLFileSchemaHandler htmlFileSchemaHandler = webSchemaConfigService.getWebSchemaHandlerByType(HTMLFileSchemaHandler.class);
     assertTrue(htmlFileSchemaHandler instanceof HTMLFileSchemaHandler);
-    
+
     PortalFolderSchemaHandler portalFolderSchemaHandler= webSchemaConfigService.getWebSchemaHandlerByType(PortalFolderSchemaHandler.class);
     assertTrue(portalFolderSchemaHandler instanceof PortalFolderSchemaHandler);
-    
+
     WebContentSchemaHandler webContentSchemaHandler = webSchemaConfigService.getWebSchemaHandlerByType(WebContentSchemaHandler.class);
     assertTrue(webContentSchemaHandler instanceof WebContentSchemaHandler);
   }
-  
+
   /**
    * Test create css file schema handler.
-   * 
+   *
    * @throws Exception the exception
    */
   public void testCreateCSSFileSchemaHandler() throws Exception {
@@ -228,7 +228,7 @@ public class TestWebSchemaConfigService extends BaseWCMTestCase {
     cssNode.setProperty(NodetypeConstant.EXO_ACTIVE, true);
     cssNode.setProperty(NodetypeConstant.EXO_PRIORITY, 1);
     cssNode.setProperty(NodetypeConstant.EXO_SHARED_CSS, true);
-    
+
     Node cssContent = cssNode.addNode(NodetypeConstant.JCR_CONTENT, NodetypeConstant.NT_RESOURCE);
     cssContent.setProperty(NodetypeConstant.JCR_ENCODING, "UTF-8");
     cssContent.setProperty(NodetypeConstant.JCR_MIME_TYPE, "text/css");
@@ -236,19 +236,19 @@ public class TestWebSchemaConfigService extends BaseWCMTestCase {
     cssContent.setProperty(NodetypeConstant.JCR_DATA, "This is the default.css file.");
     SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
     webSchemaConfigService.createSchema(sessionProvider, cssNode);
-    
+
     Node result = (Node)session.getItem("/sites content/live/classic/documents/css/default.css");
     assertTrue(result.isNodeType(NodetypeConstant.EXO_CSS_FILE));
     assertTrue(result.isNodeType(NodetypeConstant.EXO_OWNEABLE));
     assertEquals(result.getProperty(NodetypeConstant.EXO_PRESENTATION_TYPE).getString(), NodetypeConstant.EXO_CSS_FILE);
-    
+
     cssFolder.remove();
     session.save();
   }
-  
+
   /**
    * Test create js file schema handler.
-   * 
+   *
    * @throws Exception the exception
    */
   public void testCreateJSFileSchemaHandler() throws Exception {
@@ -259,7 +259,7 @@ public class TestWebSchemaConfigService extends BaseWCMTestCase {
     jsNode.setProperty(NodetypeConstant.EXO_ACTIVE, true);
     jsNode.setProperty(NodetypeConstant.EXO_PRIORITY, 1);
     jsNode.setProperty(NodetypeConstant.EXO_SHARED_JS, true);
-    
+
     Node jsContent = jsNode.addNode(NodetypeConstant.JCR_CONTENT, NodetypeConstant.NT_RESOURCE);
     jsContent.setProperty(NodetypeConstant.JCR_ENCODING, "UTF-8");
     jsContent.setProperty(NodetypeConstant.JCR_MIME_TYPE, "text/javascript");
@@ -267,19 +267,19 @@ public class TestWebSchemaConfigService extends BaseWCMTestCase {
     jsContent.setProperty(NodetypeConstant.JCR_DATA, "This is the default.js file.");
     SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
     webSchemaConfigService.createSchema(sessionProvider, jsNode);
-    
+
     Node result = (Node)session.getItem("/sites content/live/classic/documents/js/default.js");
     assertTrue(result.isNodeType(NodetypeConstant.EXO_JS_FILE));
     assertTrue(result.isNodeType(NodetypeConstant.EXO_OWNEABLE));
     assertEquals(result.getProperty(NodetypeConstant.EXO_PRESENTATION_TYPE).getString(), NodetypeConstant.EXO_JS_FILE);
-    
+
     jsFolder.remove();
     session.save();
   }
-  
+
   /**
    * Test create html file schema handler with no pre-defined folder.
-   * 
+   *
    * @throws Exception the exception
    */
   public void testCreateWebcontentSchemaHandler_01() throws Exception {
@@ -287,7 +287,7 @@ public class TestWebSchemaConfigService extends BaseWCMTestCase {
     Node webcontentNode = documentNode.addNode("webcontent", NodetypeConstant.EXO_WEBCONTENT);
     SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
     webSchemaConfigService.createSchema(sessionProvider, webcontentNode);
-    
+
     Node result = (Node)session.getItem("/sites content/live/classic/documents/webcontent");
     assertEquals("css", result.getNode("css").getName());
     assertEquals(NodetypeConstant.EXO_CSS_FOLDER, result.getNode("css").getPrimaryNodeType().getName());
@@ -304,26 +304,26 @@ public class TestWebSchemaConfigService extends BaseWCMTestCase {
     assertEquals(NodetypeConstant.NT_FOLDER, mediasNode.getNode("videos").getPrimaryNodeType().getName());
     assertEquals("audio", mediasNode.getNode("audio").getName());
     assertEquals(NodetypeConstant.NT_FOLDER, mediasNode.getNode("audio").getPrimaryNodeType().getName());
-    
+
     result.remove();
     session.save();
   }
-  
+
   /**
    * Test create html file schema handler.
    */
   public void testCreateHTMLFileSchemaHandler() throws Exception {
     Node htmlFolder = documentNode.addNode("html", NodetypeConstant.EXO_WEB_FOLDER);
-    
+
     Node htmlFile = htmlFolder.addNode("htmlFile", NodetypeConstant.NT_FILE);
-    
+
     Node htmlContent = htmlFile.addNode(NodetypeConstant.JCR_CONTENT, NodetypeConstant.NT_RESOURCE);
     htmlContent.setProperty(NodetypeConstant.JCR_ENCODING, "UTF-8");
     htmlContent.setProperty(NodetypeConstant.JCR_MIME_TYPE, "text/html");
     htmlContent.setProperty(NodetypeConstant.JCR_LAST_MODIFIED, new Date().getTime());
     htmlContent.setProperty(NodetypeConstant.JCR_DATA, "This is the default.html file.");
     session.save();
-    
+
     SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
     webSchemaConfigService.addWebSchemaHandler(new HTMLFileSchemaHandler());
     webSchemaConfigService.addWebSchemaHandler(new WebContentSchemaHandler());
@@ -333,23 +333,23 @@ public class TestWebSchemaConfigService extends BaseWCMTestCase {
     assertTrue(result.isNodeType(NodetypeConstant.EXO_HTML_FILE));
     assertEquals(result.getProperty(NodetypeConstant.EXO_PRESENTATION_TYPE).getString(), NodetypeConstant.EXO_HTML_FILE);
   }
-  
+
   /**
    * Test modified css file schema handler.
-   * 
+   *
    * @throws Exception the exception
    */
   public void testUpdateCSSFileSchemaHandlerOnModify() throws Exception {
-    
+
   }
-  
+
   /**
    * Test modified js file schema handler.
-   * 
+   *
    * @throws Exception the exception
    */
   public void testUpdateJSFileSchemaHandlerOnModify() throws Exception {}
-  
+
   /**
    * Test modified html file schema handler.
    */
@@ -364,17 +364,17 @@ public class TestWebSchemaConfigService extends BaseWCMTestCase {
       + "<a href=" + "#" + ">Test</a>"
       + "</body>" + "</html>";
     Node htmlFolder = documentNode.addNode("html", NodetypeConstant.EXO_WEB_FOLDER);
-    
+
     Node htmlFile = htmlFolder.addNode("htmlFile", NodetypeConstant.NT_FILE);
-    
+
     Node htmlContent = htmlFile.addNode(NodetypeConstant.JCR_CONTENT, NodetypeConstant.NT_RESOURCE);
     htmlContent.setProperty(NodetypeConstant.JCR_ENCODING, "UTF-8");
     htmlContent.setProperty(NodetypeConstant.JCR_MIME_TYPE, "text/html");
     htmlContent.setProperty(NodetypeConstant.JCR_LAST_MODIFIED, new Date().getTime());
     htmlContent.setProperty(NodetypeConstant.JCR_DATA, htmlData);
-    
+
     session.save();
-    
+
     SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
     webSchemaConfigService.addWebSchemaHandler(new HTMLFileSchemaHandler());
     webSchemaConfigService.addWebSchemaHandler(new WebContentSchemaHandler());
@@ -385,21 +385,21 @@ public class TestWebSchemaConfigService extends BaseWCMTestCase {
     assertTrue(result.isNodeType(NodetypeConstant.EXO_HTML_FILE));
     assertEquals(result.getProperty(NodetypeConstant.EXO_PRESENTATION_TYPE).getString(), NodetypeConstant.EXO_HTML_FILE);
     webSchemaConfigService.updateSchemaOnModify(sessionProvider, htmlFile);
-    
+
     Node webContent = (Node)session.getItem("/sites content/live/classic/documents/html/htmlFile");
     assertTrue(webContent.hasProperty("exo:links"));
   }
-  
+
   /**
    * Test remove css file schema handler.
    */
   public void testUpdateCSSFileSchemaHandlerOnRemove() {
-    
+
   }
-  
+
   /**
    * Test remove js file schema handler.
-   * 
+   *
    * @throws Exception the exception
    */
   public void testUpdateJSFileSchemaHandlerOnRemove() throws Exception {}

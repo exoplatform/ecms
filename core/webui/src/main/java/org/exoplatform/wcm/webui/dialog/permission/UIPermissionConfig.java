@@ -20,37 +20,37 @@ package org.exoplatform.wcm.webui.dialog.permission;
  * Created by The eXo Platform SAS
  * Author : Phan Le Thanh Chuong
  *          chuong.phan@exoplatform.com, phan.le.thanh.chuong@gmail.com
- * Oct 30, 2009  
+ * Oct 30, 2009
  */
 public class UIPermissionConfig {
 
-	private String owner;
-	
-	private boolean accessible;
-	
-	private boolean editable;
-	
-	public String getOwner() {
-		return owner;
-	}
+  private String owner;
 
-	public void setOwner(String usersOrGroups) {
-		this.owner = usersOrGroups;
-	}
+  private boolean accessible;
 
-	public boolean isAccessible() {
-		return accessible;
-	}
+  private boolean editable;
 
-	public void setAccessible(boolean accessible) {
-		this.accessible = accessible;
-	}
+  public String getOwner() {
+    return owner;
+  }
 
-	public boolean isEditable() {
-		return editable;
-	}
+  public void setOwner(String usersOrGroups) {
+    this.owner = usersOrGroups;
+  }
 
-	public void setEditable(boolean editable) {
-		this.editable = editable;
-	}	
+  public boolean isAccessible() {
+    return accessible;
+  }
+
+  public void setAccessible(boolean accessible) {
+    this.accessible = accessible;
+  }
+
+  public boolean isEditable() {
+    return editable;
+  }
+
+  public void setEditable(boolean editable) {
+    this.editable = editable;
+  }
 }

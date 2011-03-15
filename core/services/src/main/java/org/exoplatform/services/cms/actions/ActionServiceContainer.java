@@ -24,32 +24,32 @@ import javax.jcr.Node;
 import javax.jcr.nodetype.NodeType;
 
 /**
- * 
+ *
  * @author exo
  *
  */
-public interface ActionServiceContainer {  
-  
+public interface ActionServiceContainer {
+
   /**
    * Collection of String
    * @return collection of ActionPlugin namess
    */
   public Collection<String> getActionPluginNames();
-  
+
   /**
    * Get ActionPlugin following ActionSeriveName
    * @param actionServiceName name of action service
    * @return ActionPlugin
    */
   public ActionPlugin getActionPlugin(String actionServiceName);
-  
+
   /**
    * Get ActionPlugin following action type name
    * @param actionTypeName  name of action type
    * @return ActionPlugin
    */
   public ActionPlugin getActionPluginForActionType(String actionTypeName);
-  
+
   /**
    * Create NodeTypeValue is in kind of ActionType following action type name
    * @param actionTypeName        name of action type
@@ -60,7 +60,7 @@ public interface ActionServiceContainer {
    * @param repository            repository name
    * @throws Exception
    */
-  public void createActionType(String actionTypeName, String parentActionTypeName, 
+  public void createActionType(String actionTypeName, String parentActionTypeName,
       String executable, List<String> variableNames, boolean isMoveType, String repository) throws Exception;
 
   /**
@@ -70,7 +70,7 @@ public interface ActionServiceContainer {
    * @throws Exception
    */
   public Collection<NodeType> getCreatedActionTypes(String repository) throws Exception;
-    
+
   /**
    * get node by using actionName as relative path with current node
    * @param node        current processing node
@@ -90,7 +90,7 @@ public interface ActionServiceContainer {
   public boolean hasActions(Node node) throws Exception;
 
   /**
-   * Get list of child node with NodeType = exo:action 
+   * Get list of child node with NodeType = exo:action
    * @param node  current node
    * @return list of node
    * @throws Exception
@@ -105,7 +105,7 @@ public interface ActionServiceContainer {
    * @throws Exception
    */
   public List<Node> getCustomActionsNode(Node node, String lifecyclePhase) throws Exception ;
-  
+
   /**
    * Get list of child node with exo:lifecyclePhase = lifecyclePhase
    * @param node            current node
@@ -114,7 +114,7 @@ public interface ActionServiceContainer {
    * @throws Exception
    */
   public List<Node> getActions(Node node, String lifecyclePhase) throws Exception;
-  
+
   /**
    * Remove all action registered in node
    * @param node
@@ -122,11 +122,11 @@ public interface ActionServiceContainer {
    * @throws Exception
    */
   public void removeAction(Node node, String repository) throws Exception;
-  
+
   /**
    * Remove all relative node of current node with node type = exo:actionable
    * @param node        current node
-   * @param actionName  relative path = exo:actionable / actionName 
+   * @param actionName  relative path = exo:actionable / actionName
    * @param repository  repository name
    * @throws Exception
    */
@@ -141,7 +141,7 @@ public interface ActionServiceContainer {
    * @param mappings    value of property for adding to new node
    * @throws Exception
    */
-  public void addAction(Node node, String repository, String type, Map mappings) throws Exception; 
+  public void addAction(Node node, String repository, String type, Map mappings) throws Exception;
 
   /**
    * Add mixintype = exo:actionable to current node
@@ -155,8 +155,8 @@ public interface ActionServiceContainer {
    * @param mappings    value of property for adding to new node
    * @throws Exception
    */
-  public void addAction(Node node, String repository, String type, boolean isDeep, String[] uuid, String[] nodeTypeNames, Map mappings) throws Exception; 
-  
+  public void addAction(Node node, String repository, String type, boolean isDeep, String[] uuid, String[] nodeTypeNames, Map mappings) throws Exception;
+
   /**
    * Execute action following userId, node, variables, repository
    * @param userId      user identify
@@ -167,7 +167,7 @@ public interface ActionServiceContainer {
    * @throws Exception
    */
   public void executeAction(String userId, Node node, String actionName, Map variables, String repository) throws Exception;
-  
+
   /**
    * Execute action following userId, node, repository, initiated variables
    * @param userId user identify
@@ -178,7 +178,7 @@ public interface ActionServiceContainer {
    * @see {@link #executeAction(String, Node, String, Map, String)}
    */
   public void executeAction(String userId, Node node, String actionName, String repository) throws Exception;
-  
+
   /**
    * Add action listener for all action child node of current node in repository
    * @param node        current node
@@ -186,12 +186,12 @@ public interface ActionServiceContainer {
    * @throws Exception
    */
   public void initiateObservation(Node node, String repository) throws Exception ;
-  
+
   /**
    * init service with repository name
    * @param repository   repository name
    * @throws Exception
    */
   public void init(String repository) throws Exception ;
-      
+
 }

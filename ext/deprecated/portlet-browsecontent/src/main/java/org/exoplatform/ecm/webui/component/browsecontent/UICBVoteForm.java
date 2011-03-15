@@ -38,20 +38,20 @@ import org.exoplatform.webui.event.EventListener;
  * Created by The eXo Platform SARL
  * Author : pham tuan
  *          phamtuanchip@gmail.com
- * Jan 31, 2007  
+ * Jan 31, 2007
  */
 @ComponentConfig(
     template = "app:/groovy/webui/component/UIVoteForm.gtmpl",
-    events = {    
+    events = {
         @EventConfig(listeners = UICBVoteForm.VoteActionListener.class),
         @EventConfig(listeners = UICBVoteForm.CancelActionListener.class)
     }
-) 
+)
 
 public class UICBVoteForm extends UIComponent implements UIPopupComponent {
   public UICBVoteForm() {}
 
-  public Node getDocument() throws Exception { 
+  public Node getDocument() throws Exception {
     UIBrowseContentPortlet portlet = getAncestorOfType(UIBrowseContentPortlet.class) ;
     UIBrowseContainer uiBCContainer =  portlet.findFirstComponentOfType(UIBrowseContainer.class) ;
     UIDocumentDetail uiDocumentDetail = uiBCContainer.findFirstComponentOfType(UIDocumentDetail.class) ;
@@ -86,17 +86,17 @@ public class UICBVoteForm extends UIComponent implements UIPopupComponent {
       try {
         votingService.vote(currentDoc, objId, userName, language) ;
       } catch (LockException le) {
-        uiApp.addMessage(new ApplicationMessage("UICBVoteForm.msg.locked-doc", null, 
+        uiApp.addMessage(new ApplicationMessage("UICBVoteForm.msg.locked-doc", null,
             ApplicationMessage.WARNING)) ;
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
         return ;
       } catch (VersionException ve) {
-        uiApp.addMessage(new ApplicationMessage("UICBVoteForm.msg.versioning-doc", null, 
+        uiApp.addMessage(new ApplicationMessage("UICBVoteForm.msg.versioning-doc", null,
             ApplicationMessage.WARNING)) ;
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
         return ;
-      } catch (Exception e) {        
-        uiApp.addMessage(new ApplicationMessage("UICBVoteForm.msg.error-vote", null, 
+      } catch (Exception e) {
+        uiApp.addMessage(new ApplicationMessage("UICBVoteForm.msg.error-vote", null,
             ApplicationMessage.WARNING)) ;
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
         return ;

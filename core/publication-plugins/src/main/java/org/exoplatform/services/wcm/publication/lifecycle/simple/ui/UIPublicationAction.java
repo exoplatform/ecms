@@ -39,14 +39,14 @@ import org.exoplatform.webui.form.UIForm;
     }
 )
 public class UIPublicationAction extends UIForm {
-  
+
   /**
    * Update ui.
-   * 
+   *
    * @throws Exception the exception
    */
   private void updateUI() throws Exception {}
-  
+
   /**
    * The listener interface for receiving addAction events.
    * The class that is interested in processing a addAction
@@ -55,17 +55,17 @@ public class UIPublicationAction extends UIForm {
    * component's <code>addAddActionListener<code> method. When
    * the addAction event occurs, that object's appropriate
    * method is invoked.
-   * 
+   *
    * @see AddActionEvent
    */
   public static class AddActionListener extends EventListener<UIPublicationAction> {
-    
+
     /* (non-Javadoc)
      * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
      */
     public void execute(Event<UIPublicationAction> event) throws Exception {
       UIPublicationAction publicationAction = event.getSource();
-      
+
       publicationAction.updateUI();
     }
   }
@@ -78,17 +78,17 @@ public class UIPublicationAction extends UIForm {
    * component's <code>addRemoveActionListener<code> method. When
    * the removeAction event occurs, that object's appropriate
    * method is invoked.
-   * 
+   *
    * @see RemoveActionEvent
    */
   public static class RemoveActionListener extends EventListener<UIPublicationAction> {
-    
+
     /* (non-Javadoc)
      * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
      */
     public void execute(Event<UIPublicationAction> event) throws Exception {
       UIPublicationAction publicationAction = event.getSource();
-      
+
       publicationAction.updateUI();
     }
   }

@@ -36,7 +36,7 @@ public class TestLiveLinkManagerService extends BaseWCMTestCase {
 
   /** The live link manager service. */
   private LiveLinkManagerService liveLinkManagerService;
-  
+
   /* (non-Javadoc)
    * @see org.exoplatform.services.wcm.BaseWCMTestCase#setUp()
    */
@@ -46,10 +46,10 @@ public class TestLiveLinkManagerService extends BaseWCMTestCase {
     Node folder = (Node) session.getItem("/sites content/live/classic/web contents");
     createWebcontentNode(folder, "webcontent", "This is the live link: <a href='http://www.google.com'>Goolge</a> and this is the broken link: <a href='http://www.thiscannotbeanactivelink.com'>Broken</a>", null, null);
   }
-  
+
   /**
    * Test extract links.
-   * 
+   *
    * @throws Exception the exception
    */
   public void testExtractLinks() throws Exception {
@@ -60,10 +60,10 @@ public class TestLiveLinkManagerService extends BaseWCMTestCase {
     assertEquals("http://www.google.com", links.get(0));
     assertEquals("http://www.thiscannotbeanactivelink.com", links.get(1));
   }
-  
+
   /**
    * Test update link data for node.
-   * 
+   *
    * @throws Exception the exception
    */
   public void testUpdateLinkDataForNode() throws Exception {
@@ -73,11 +73,11 @@ public class TestLiveLinkManagerService extends BaseWCMTestCase {
     links.add("http://www.mozilla.com");
     liveLinkManagerService.updateLinkDataForNode(result, links);
 
-    Value[] values = result.getProperty(NodetypeConstant.EXO_LINKS).getValues(); 
+    Value[] values = result.getProperty(NodetypeConstant.EXO_LINKS).getValues();
     assertEquals(1, values.length);
     assertEquals("status=unchecked@url=http://www.mozilla.com", values[0].getString());
   }
-  
+
   /* (non-Javadoc)
    * @see junit.framework.TestCase#tearDown()
    */

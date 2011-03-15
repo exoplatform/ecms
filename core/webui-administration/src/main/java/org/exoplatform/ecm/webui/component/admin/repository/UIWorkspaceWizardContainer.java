@@ -30,7 +30,7 @@ import org.exoplatform.webui.core.lifecycle.UIContainerLifecycle;
  * Created by The eXo Platform SARL
  * Author : Pham Tuan
  *          tuan.pham@exoplatform.com
- * 25-06-2007  
+ * 25-06-2007
  */
 @ComponentConfig(lifecycle = UIContainerLifecycle.class)
 public class UIWorkspaceWizardContainer extends UIContainer implements UIPopupComponent {
@@ -50,7 +50,7 @@ public class UIWorkspaceWizardContainer extends UIContainer implements UIPopupCo
     if(uiPopup == null) {
       uiPopup = addChild(UIPopupWindow.class, null, id);
       uiPopup.setWindowSize(560, 300);
-      UIPermissionSelector uiECMPermission = 
+      UIPermissionSelector uiECMPermission =
         createUIComponent(UIPermissionSelector.class, null, null);
       uiECMPermission.setSelectedMembership(true);
       if(membership != null && membership.indexOf(":/") > -1) {

@@ -42,7 +42,7 @@ import java.util.List;
 /**
  * Created by The eXo Platform SAS. <br/>
  * Date:
- * 
+ *
  * @author <a href="karpenko.sergiy@gmail.com">Karpenko Sergiy</a>
  * @version $Id$
  */
@@ -75,7 +75,7 @@ public class QueryUsecasesTest extends BaseQueryTest
 
    /**
     * Get query capabilities.
-    * 
+    *
     * @throws Exception
     *            if an unexpected error occurs
     */
@@ -105,7 +105,7 @@ public class QueryUsecasesTest extends BaseQueryTest
     * PROPERTY_COMMANDER is Frank F. Borman, II or James A. Lovell, Jr.
     * <p>
     * Expected result: document2 and document3
-    * 
+    *
     * @throws Exception
     *            if an unexpected error occurs
     */
@@ -144,7 +144,7 @@ public class QueryUsecasesTest extends BaseQueryTest
     * Query : Select all documents that are in folder2.
     * <p>
     * Expected result: all documents that are in folder2.
-    * 
+    *
     * @throws Exception
     *            if an unexpected error occurs
     */
@@ -187,7 +187,7 @@ public class QueryUsecasesTest extends BaseQueryTest
     * Query : Select all folders that are in folder1.
     * <p>
     * Expected result: folder3
-    * 
+    *
     * @throws Exception
     *            if an unexpected error occurs
     */
@@ -230,7 +230,6 @@ public class QueryUsecasesTest extends BaseQueryTest
    //    *
    //    * @throws Exception
    //    */
-   //   // XXX temporary excluded
    //   public void _testAnyInConstraint() throws Exception
    //   {
    //      // create data
@@ -271,7 +270,7 @@ public class QueryUsecasesTest extends BaseQueryTest
     * Query : Select all documents where data contains "moon" word.
     * <p>
     * Expected result: document2 and document3
-    * 
+    *
     * @throws Exception
     *            if an unexpected error occurs
     */
@@ -311,7 +310,7 @@ public class QueryUsecasesTest extends BaseQueryTest
     * 'Frank F. Borman, II', 'Charles Conrad, Jr.'}.
     * <p>
     * Expected result: document2
-    * 
+    *
     * @throws Exception
     *            if an unexpected error occurs
     */
@@ -350,7 +349,6 @@ public class QueryUsecasesTest extends BaseQueryTest
    //    *
    //    * @throws Exception if an unexpected error occurs
    //    */
-   //   // XXX temporary excluded
    //   public void _testJoinWithCondition() throws Exception
    //   {
    //      // create data
@@ -374,7 +372,7 @@ public class QueryUsecasesTest extends BaseQueryTest
    //      ItemsIterator<Result> result = storageA.query(query);
    //
    //      assertEquals(1, result.size());
-   //      // TODO check results - must doc1 and folder1
+   //      // check results - must doc1 and folder1
    //   }
    //
    /**
@@ -391,7 +389,7 @@ public class QueryUsecasesTest extends BaseQueryTest
     * Query : Select all documents where prop begins with "James".
     * <p>
     * Expected result: doc3
-    * 
+    *
     * @throws Exception
     *            if an unexpected error occurs
     */
@@ -424,7 +422,7 @@ public class QueryUsecasesTest extends BaseQueryTest
     * Query : Select all documents where prop like 'ad\\%min%'.
     * <p>
     * Expected result: doc1
-    * 
+    *
     * @throws Exception
     *            if an unexpected error occurs
     */
@@ -473,7 +471,7 @@ public class QueryUsecasesTest extends BaseQueryTest
     * Query : Select all documents that not contains "world" word.
     * <p>
     * Expected result: doc2
-    * 
+    *
     * @throws Exception
     *            if an unexpected error occurs
     */
@@ -513,7 +511,7 @@ public class QueryUsecasesTest extends BaseQueryTest
     * {'Walter M. Schirra', 'James A. Lovell, Jr.'}.
     * <p>
     * Expected result: document2, document4
-    * 
+    *
     * @throws Exception
     *            if an unexpected error occurs
     */
@@ -547,7 +545,7 @@ public class QueryUsecasesTest extends BaseQueryTest
     * set {'James A. Lovell, Jr.'}.
     * <p>
     * Expected result: document3.
-    * 
+    *
     * @throws Exception
     *            if an unexpected error occurs
     */
@@ -580,7 +578,7 @@ public class QueryUsecasesTest extends BaseQueryTest
     * Query : Order by PROPERTY_COMMANDER property value (descending).
     * <p>
     * Expected result: document1, document3, document2, document4.
-    * 
+    *
     * @throws Exception
     *            if an unexpected error occurs
     */
@@ -627,7 +625,7 @@ public class QueryUsecasesTest extends BaseQueryTest
     * Query : Order by PROPERTY_COMMANDER property value (ascending).
     * <p>
     * Expected result: document4, document2, document3, document1.
-    * 
+    *
     * @throws Exception
     *            if an unexpected error occurs
     */
@@ -673,7 +671,7 @@ public class QueryUsecasesTest extends BaseQueryTest
     * Query : Select all documents in default order.
     * <p>
     * Expected result: document3, document4, document1, document2.
-    * 
+    *
     * @throws Exception
     *            if an unexpected error occurs
     */
@@ -713,7 +711,7 @@ public class QueryUsecasesTest extends BaseQueryTest
     * Query : Select all documents which contains word "moon" in ORDER BY SCORE.
     * <p>
     * Expected result: doc2, doc3.
-    * 
+    *
     * @throws Exception
     *            if an unexpected error occurs
     */
@@ -757,7 +755,7 @@ public class QueryUsecasesTest extends BaseQueryTest
     * Query : Select all documents that has "prop" property (IS NOT NULL).
     * <p>
     * Expected result: doc1
-    * 
+    *
     * @throws Exception
     *            if an unexpected error occurs
     */
@@ -793,7 +791,7 @@ public class QueryUsecasesTest extends BaseQueryTest
     * score.
     * <p>
     * Expected result: doc4, doc1 and doc2.
-    * 
+    *
     * @throws Exception
     *            if an unexpected error occurs
     */
@@ -832,7 +830,7 @@ public class QueryUsecasesTest extends BaseQueryTest
     * Query : Select all documents that are in tree of folder1.
     * <p>
     * Expected result: doc1,doc2.
-    * 
+    *
     * @throws Exception
     *            if an unexpected error occurs
     */
@@ -871,7 +869,7 @@ public class QueryUsecasesTest extends BaseQueryTest
     * Query : Select all documents property DecimalProperty not equals to 3.
     * <p>
     * Expected result: doc2.
-    * 
+    *
     * @throws Exception
     *            if an unexpected error occurs
     */
@@ -911,7 +909,7 @@ public class QueryUsecasesTest extends BaseQueryTest
     * Query : Select all documents property DecimalProperty more than 5.
     * <p>
     * Expected result: doc2.
-    * 
+    *
     * @throws Exception
     *            if an unexpected error occurs
     */
@@ -956,7 +954,7 @@ public class QueryUsecasesTest extends BaseQueryTest
     * "test word second".
     * <p>
     * Expected result: doc1.
-    * 
+    *
     * @throws Exception
     *            if an unexpected error occurs
     */
@@ -1000,7 +998,7 @@ public class QueryUsecasesTest extends BaseQueryTest
     * Query : Select all documents that contains "here" word.
     * <p>
     * Expected result: doc2.
-    * 
+    *
     * @throws Exception
     *            if an unexpected error occurs
     */
@@ -1045,7 +1043,7 @@ public class QueryUsecasesTest extends BaseQueryTest
     * contain "check-word" word.
     * <p>
     * Expected result: doc1.
-    * 
+    *
     * @throws Exception
     *            if an unexpected error occurs
     */
@@ -1123,7 +1121,7 @@ public class QueryUsecasesTest extends BaseQueryTest
     * Query : Select all documents where BooleanProperty equals to false.
     * <p>
     * Expected result: doc2.
-    * 
+    *
     * @throws Exception
     *            if an unexpected error occurs
     */
@@ -1163,7 +1161,7 @@ public class QueryUsecasesTest extends BaseQueryTest
     * Query : Select all documents where dateProp more than 2007-01-01.
     * <p>
     * Expected result: doc1, doc2.
-    * 
+    *
     * @throws Exception
     *            if an unexpected error occurs
     */
@@ -1198,7 +1196,7 @@ public class QueryUsecasesTest extends BaseQueryTest
     * Query : Select all NASA_DOCUMENT.
     * <p>
     * Expected result: all documents.
-    * 
+    *
     * @throws Exception
     *            if an unexpected error occurs
     */
@@ -1232,7 +1230,7 @@ public class QueryUsecasesTest extends BaseQueryTest
     * Query : Select all documents where data contains "moon" word.
     * <p>
     * Expected result: doc3
-    * 
+    *
     * @throws Exception
     *            if an unexpected error occurs
     */
@@ -1296,7 +1294,7 @@ public class QueryUsecasesTest extends BaseQueryTest
     * Query : Select all documents where query supertype is cmis:article.
     * <p>
     * Expected result: doc1, doc2.
-    * 
+    *
     * @throws Exception
     *            if an unexpected error occurs
     */

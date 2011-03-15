@@ -36,7 +36,7 @@ import org.exoplatform.webui.event.EventListener;
     events = {
         @EventConfig(listeners = UIConfirmMessage.OKActionListener.class),
         @EventConfig(listeners = UIConfirmMessage.CloseActionListener.class)
-        
+
     }
 )
 public class UIConfirmMessage extends UIComponent implements UIPopupComponent {
@@ -45,26 +45,26 @@ public class UIConfirmMessage extends UIComponent implements UIPopupComponent {
   private String[] args_ = {};
   protected boolean isOK_ = false;
   protected String nodePath_;
-  
+
   public UIConfirmMessage() throws Exception {
   }
-  
+
   public void setMessageKey(String messageKey) { messageKey_ = messageKey; }
 
   public String getMessageKey() { return messageKey_; }
-  
+
   public void setArguments(String[] args) { args_ = args; }
-  
+
   public String[] getArguments() { return args_; }
-  
+
   public boolean isOK() { return isOK_; }
-  
+
   public void setNodePath(String nodePath) { nodePath_ = nodePath; }
-  
+
   public String[] getActions() {
     return new String[] {"OK", "Close"};
   }
-  
+
   static  public class OKActionListener extends EventListener<UIConfirmMessage> {
     public void execute(Event<UIConfirmMessage> event) throws Exception {
       UIConfirmMessage uiConfirm = event.getSource();
@@ -76,7 +76,7 @@ public class UIConfirmMessage extends UIComponent implements UIPopupComponent {
       popupAction.deActivate() ;
     }
   }
-  
+
   static  public class CloseActionListener extends EventListener<UIConfirmMessage> {
     public void execute(Event<UIConfirmMessage> event) throws Exception {
       UIConfirmMessage uiConfirm = event.getSource();
@@ -87,10 +87,10 @@ public class UIConfirmMessage extends UIComponent implements UIPopupComponent {
   }
 
   public void activate() throws Exception {
-    
+
   }
 
   public void deActivate() throws Exception {
-    
+
   }
 }

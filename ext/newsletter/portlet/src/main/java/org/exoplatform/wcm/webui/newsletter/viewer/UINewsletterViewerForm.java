@@ -52,59 +52,57 @@ import org.exoplatform.webui.form.validator.MandatoryValidator;
  * Created by The eXo Platform SAS Author : Tran Nguyen Ngoc
  * ngoc.tran@exoplatform.com May 25, 2009
  */
-@ComponentConfig(
-   lifecycle = UIFormLifecycle.class,
-   template = "app:/groovy/webui/newsletter/NewsletterViewer/UINewsletterListViewer.gtmpl",
-   events = {
-        @EventConfig(listeners = UINewsletterViewerForm.SubcribeActionListener.class),
-        @EventConfig(listeners = UINewsletterViewerForm.ForgetEmailActionListener.class),
-        @EventConfig(listeners = UINewsletterViewerForm.ChangeSubcriptionsActionListener.class) }
-)
+@ComponentConfig(lifecycle = UIFormLifecycle.class,
+                 template = "app:/groovy/webui/newsletter/NewsletterViewer/UINewsletterListViewer.gtmpl",
+                 events = {
+    @EventConfig(listeners = UINewsletterViewerForm.SubcribeActionListener.class),
+    @EventConfig(listeners = UINewsletterViewerForm.ForgetEmailActionListener.class),
+    @EventConfig(listeners = UINewsletterViewerForm.ChangeSubcriptionsActionListener.class) })
 public class UINewsletterViewerForm extends UIForm {
-  
+
   public static String SUBJECT_KEY = "UINewsletterViewerForm.Email.ConfirmUser.Subject";
-  
+
   public static String CONTENT_KEY = "UINewsletterViewerForm.Email.ConfirmUser.Content";
-  
+
   /** The user code. */
   public String userCode;
-  
+
   /** The input email. */
   public UIFormStringInput inputEmail;
-  
+
   /** The user mail. */
   public String userMail = "";
-  
+
   /** The is updated. */
   public boolean isUpdated = false;
-  
+
   /** The subcription handler. */
   public NewsletterSubscriptionHandler subcriptionHandler ;
-  
+
   /** The public user handler. */
   public NewsletterPublicUserHandler publicUserHandler ;
-  
+
   /** The check box input. */
   private UIFormCheckBoxInput<Boolean> checkBoxInput;
-  
+
   /** The category handler. */
   private NewsletterCategoryHandler categoryHandler ;
-  
+
   /** The manager user handler. */
   private NewsletterManageUserHandler managerUserHandler ;
-  
+
   /** The newsletter manager service. */
   private NewsletterManagerService newsletterManagerService;
-  
+
   /** The link to send mail. */
   private String linkToSendMail;
-  
+
   /** The list ids. */
   private List<String> listIds;
 
   /**
    * Instantiates a new uI newsletter viewer form.
-   * 
+   *
    * @throws Exception the exception
    */
   public UINewsletterViewerForm() throws Exception {
@@ -113,66 +111,71 @@ public class UINewsletterViewerForm extends UIForm {
     subcriptionHandler = newsletterManagerService.getSubscriptionHandler();
     publicUserHandler = newsletterManagerService.getPublicUserHandler();
     managerUserHandler = newsletterManagerService.getManageUserHandler();
-    
+
     // get email when user have login
     String username = Util.getPortalRequestContext().getRemoteUser();
-    if(username!=null) {    	    	
-    	OrganizationService service = WCMCoreUtils.getService(OrganizationService.class);
-    	User useraccount = service.getUserHandler().findUserByName(username);
-    	inputEmail = new UIFormStringInput("inputEmail", "Email", useraccount.getEmail());
-    	SessionProvider sessionProvider = WCMCoreUtils.getUserSessionProvider();
-    	List<String> Ids = new ArrayList<String>();
-    	List<NewsletterSubscriptionConfig> listSubscriptions = this.subcriptionHandler.getSubscriptionIdsByPublicUser(sessionProvider, NewsLetterUtil.getPortalName(), useraccount.getEmail());
-        for(NewsletterSubscriptionConfig subscriptionConfig : listSubscriptions){
-        	Ids.add(subscriptionConfig.getCategoryName() + "#" + subscriptionConfig.getName());
-        }        
-        if(Ids.size()>0) {
-        	this.setListIds(Ids);
-        	this.userMail = useraccount.getEmail();
-        	this.inputEmail.setRendered(false);
-        	this.setActionAgain();
-        } else {
-        	this.userMail = useraccount.getEmail();
-        	this.inputEmail.setRendered(false);
-        	boolean isExistedEmail = this.managerUserHandler.checkExistedEmail(WCMCoreUtils.getUserSessionProvider(), NewsLetterUtil.getPortalName(), useraccount.getEmail());
-        	if(isExistedEmail)        		
-        		this.setActionAgain();        
-        	else {
-        		this.setActions(new String[] { "ForgetEmail", "Subcribe" });
-        		this.isUpdated=true;
-        	}
+    if (username != null) {
+      OrganizationService service = WCMCoreUtils.getService(OrganizationService.class);
+      User useraccount = service.getUserHandler().findUserByName(username);
+      inputEmail = new UIFormStringInput("inputEmail", "Email", useraccount.getEmail());
+      SessionProvider sessionProvider = WCMCoreUtils.getUserSessionProvider();
+      List<String> Ids = new ArrayList<String>();
+      List<NewsletterSubscriptionConfig> listSubscriptions = this.subcriptionHandler.
+          getSubscriptionIdsByPublicUser(sessionProvider, NewsLetterUtil.getPortalName(), useraccount.getEmail());
+      for (NewsletterSubscriptionConfig subscriptionConfig : listSubscriptions) {
+        Ids.add(subscriptionConfig.getCategoryName() + "#" + subscriptionConfig.getName());
+      }
+      if (Ids.size() > 0) {
+        this.setListIds(Ids);
+        this.userMail = useraccount.getEmail();
+        this.inputEmail.setRendered(false);
+        this.setActionAgain();
+      } else {
+        this.userMail = useraccount.getEmail();
+        this.inputEmail.setRendered(false);
+        boolean isExistedEmail = this.managerUserHandler.checkExistedEmail(WCMCoreUtils.getUserSessionProvider(),
+                                                                           NewsLetterUtil.getPortalName(),
+                                                                           useraccount.getEmail());
+        if (isExistedEmail)
+          this.setActionAgain();
+        else {
+          this.setActions(new String[] { "ForgetEmail", "Subcribe" });
+          this.isUpdated = true;
         }
-        	
+      }
+
     } else {
-    	this.setActions(new String[] { "Subcribe" });
-    	inputEmail = new UIFormStringInput("inputEmail", "Email", null);
+      this.setActions(new String[] { "Subcribe" });
+      inputEmail = new UIFormStringInput("inputEmail", "Email", null);
     }
-    
+
     inputEmail.addValidator(MandatoryValidator.class).addValidator(UINewsletterViewerEmailAddressValidator.class);
     this.addChild(inputEmail);
-    
+
   }
-  
+
   /**
    * Sets the list ids.
-   * 
+   *
    * @param listIds the new list ids
    */
   public void setListIds(List<String> listIds){
     this.listIds = listIds;
   }
-  
+
   /**
    * Inits the.
-   * 
+   *
    * @param listNewsletterSubcription the list newsletter subcription
    * @param categoryName the category name
-   * 
    * @throws Exception the exception
    */
   public void init(List<NewsletterSubscriptionConfig> listNewsletterSubcription, String categoryName) throws Exception {
-    if((listIds!=null && listIds.size()>0) || (userCode != null && userCode.trim().length() > 0)){ // run when confirm user code
-      String subcriptionPattern;      
+    if ((listIds != null && listIds.size() > 0)
+        || (userCode != null && userCode.trim().length() > 0)) { // run when
+                                                                 // confirm user
+                                                                 // code
+      String subcriptionPattern;
       for (NewsletterSubscriptionConfig newsletterSubcription : listNewsletterSubcription) {
         subcriptionPattern = categoryName + "#" + newsletterSubcription.getName();
         if (this.getChildById(subcriptionPattern) != null) this.removeChildById(subcriptionPattern);
@@ -193,10 +196,10 @@ public class UINewsletterViewerForm extends UIForm {
       }
     }
   }
-  
+
   /**
    * Sets the infor confirm.
-   * 
+   *
    * @param userEmail the user email
    * @param userCode the user code
    */
@@ -204,7 +207,7 @@ public class UINewsletterViewerForm extends UIForm {
     this.userMail = userEmail;
     this.userCode = userCode;
   }
-  
+
   /**
    * Sets the action again.
    */
@@ -212,10 +215,10 @@ public class UINewsletterViewerForm extends UIForm {
     this.setActions(new String[] { "ForgetEmail", "ChangeSubcriptions" });
     this.isUpdated = true;
   }
-  
+
   /**
    * List subscription checked.
-   * 
+   *
    * @return the list< string>
    */
   @SuppressWarnings({ "unchecked" })
@@ -234,7 +237,7 @@ public class UINewsletterViewerForm extends UIForm {
 
   /**
    * Gets the list categories.
-   * 
+   *
    * @return the list categories
    */
   public List<NewsletterCategoryConfig> getListCategories() {
@@ -247,25 +250,25 @@ public class UINewsletterViewerForm extends UIForm {
 
   /**
    * Gets the list subscription.
-   * 
+   *
    * @param categoryName the category name
-   * 
+   *
    * @return the list subscription
    */
   public List<NewsletterSubscriptionConfig> getListSubscription(String categoryName) {
     try {
-      List<NewsletterSubscriptionConfig> listSubscription = 
-                                          subcriptionHandler.getSubscriptionsByCategory(WCMCoreUtils.getUserSessionProvider(), NewsLetterUtil.getPortalName(), categoryName);
+      List<NewsletterSubscriptionConfig> listSubscription = subcriptionHandler.
+          getSubscriptionsByCategory(WCMCoreUtils.getUserSessionProvider(), NewsLetterUtil.getPortalName(), categoryName);
       this.init(listSubscription, categoryName);
       return listSubscription;
     } catch (Exception e) {
       return new ArrayList<NewsletterSubscriptionConfig>();
     }
   }
-  
+
   /**
    * Sets the link.
-   * 
+   *
    * @param url the new link
    */
   public void setLink(String url) throws Exception {
@@ -280,31 +283,34 @@ public class UINewsletterViewerForm extends UIForm {
    * component's <code>addForgetEmailActionListener<code> method. When
    * the forgetEmailAction event occurs, that object's appropriate
    * method is invoked.
-   * 
+   *
    * @see ForgetEmailActionEvent
    */
   public static class ForgetEmailActionListener extends EventListener<UINewsletterViewerForm> {
-    
+
     /* (non-Javadoc)
      * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
      */
     @SuppressWarnings("unchecked")
     public void execute(Event<UINewsletterViewerForm> event) throws Exception {
       UINewsletterViewerForm newsletterForm = event.getSource();
-      newsletterForm.publicUserHandler.forgetEmail(WCMCoreUtils.getUserSessionProvider(), NewsLetterUtil.getPortalName(), newsletterForm.userMail);
-      
+      newsletterForm.publicUserHandler.forgetEmail(WCMCoreUtils.getUserSessionProvider(),
+                                                   NewsLetterUtil.getPortalName(),
+                                                   newsletterForm.userMail);
+
       newsletterForm.isUpdated = true;
       newsletterForm.setListIds(null);
       newsletterForm.inputEmail.setValue("");
       newsletterForm.inputEmail.setRendered(true);
       newsletterForm.userMail = "";
-      for(UIComponent component : newsletterForm.getChildren()){
-        try{
+      for (UIComponent component : newsletterForm.getChildren()) {
+        try {
           UIFormCheckBoxInput<Boolean> uiFormCheckBoxInput = (UIFormCheckBoxInput<Boolean>) component;
-          if(uiFormCheckBoxInput.isChecked())
+          if (uiFormCheckBoxInput.isChecked())
             uiFormCheckBoxInput.setChecked(false);
-        }catch(ClassCastException ex){
-          // You shouldn't throw popup message, because some exception often rise here.
+        } catch (ClassCastException ex) {
+          // You shouldn't throw popup message, because some exception often
+          // rise here.
         }
       }
       newsletterForm.setActions(new String[] {"Subcribe"});
@@ -320,11 +326,11 @@ public class UINewsletterViewerForm extends UIForm {
    * component's <code>addChangeSubcriptionsActionListener<code> method. When
    * the changeSubcriptionsAction event occurs, that object's appropriate
    * method is invoked.
-   * 
+   *
    * @see ChangeSubcriptionsActionEvent
    */
   public static class ChangeSubcriptionsActionListener extends EventListener<UINewsletterViewerForm> {
-    
+
     /* (non-Javadoc)
      * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
      */
@@ -332,17 +338,19 @@ public class UINewsletterViewerForm extends UIForm {
       UINewsletterViewerForm newsletterForm = event.getSource();
       List<String> listSubcriptionPattern = new ArrayList<String>();
       listSubcriptionPattern = newsletterForm.listSubscriptionChecked();
-      newsletterForm.publicUserHandler.updateSubscriptions(WCMCoreUtils.getUserSessionProvider(), NewsLetterUtil.getPortalName(), 
-                                                           newsletterForm.inputEmail.getValue(), listSubcriptionPattern);
+      newsletterForm.publicUserHandler.updateSubscriptions(WCMCoreUtils.getUserSessionProvider(),
+                                                           NewsLetterUtil.getPortalName(),
+                                                           newsletterForm.inputEmail.getValue(),
+                                                           listSubcriptionPattern);
       WebuiRequestContext context = WebuiRequestContext.getCurrentInstance();
       UIApplication uiApp = context.getUIApplication();
       uiApp.addMessage(new ApplicationMessage("UINewsletterViewerForm.msg.updateSuccess", null, ApplicationMessage.INFO));
       newsletterForm.setListIds(listSubcriptionPattern);
-      newsletterForm.isUpdated = true;      
+      newsletterForm.isUpdated = true;
       newsletterForm.userMail = newsletterForm.userMail;
       newsletterForm.inputEmail.setRendered(false);
       newsletterForm.setActions(new String[] {"ForgetEmail", "ChangeSubcriptions" });
-      
+
       event.getRequestContext().addUIComponentToUpdateByAjax(newsletterForm);
     }
   }
@@ -355,11 +363,11 @@ public class UINewsletterViewerForm extends UIForm {
    * component's <code>addSubcribeActionListener<code> method. When
    * the subcribeAction event occurs, that object's appropriate
    * method is invoked.
-   * 
+   *
    * @see SubcribeActionEvent
    */
   public static class SubcribeActionListener extends EventListener<UINewsletterViewerForm> {
-    
+
     /* (non-Javadoc)
      * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
      */
@@ -371,7 +379,7 @@ public class UINewsletterViewerForm extends UIForm {
       String contentOfMessage;
       boolean isExistedEmail = newsletterForm.managerUserHandler
         .checkExistedEmail(WCMCoreUtils.getUserSessionProvider(), portalName, userEmail);
-      
+
       if (!isExistedEmail) {
         if(listCategorySubscription.size() < 1){
           contentOfMessage = "UINewsletterViewerForm.msg.checkSubscriptionToProcess";
@@ -389,9 +397,8 @@ public class UINewsletterViewerForm extends UIForm {
           }
           // get email's content to create mail confirm
           String emailContent[] = new String[]{Subject, Content};
-          try{
-            newsletterForm.publicUserHandler.subscribe(
-                                                       WCMCoreUtils.getUserSessionProvider(),
+          try {
+            newsletterForm.publicUserHandler.subscribe(WCMCoreUtils.getUserSessionProvider(),
                                                        portalName,
                                                        userEmail,
                                                        listCategorySubscription,

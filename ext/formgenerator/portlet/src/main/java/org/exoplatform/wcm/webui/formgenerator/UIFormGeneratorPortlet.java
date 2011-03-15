@@ -33,10 +33,10 @@ public class UIFormGeneratorPortlet extends UIPortletApplication {
 
   /**
    * Instantiates a new uI form generator portlet.
-   * 
+   *
    * @throws Exception the exception
    */
   public UIFormGeneratorPortlet() throws Exception {
-  	addChild(UIFormGeneratorTabPane.class, null, null);
+    addChild(UIFormGeneratorTabPane.class, null, null);
   }
 }

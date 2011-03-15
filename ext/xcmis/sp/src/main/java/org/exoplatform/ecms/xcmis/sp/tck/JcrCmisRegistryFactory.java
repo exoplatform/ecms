@@ -36,7 +36,7 @@ public class JcrCmisRegistryFactory implements CmisRegistryFactory
 {
 
    private CmisRegistry reg;
-   
+
    private static final Log LOG = ExoLogger.getLogger(JcrCmisRegistryFactory.class);
 
    public JcrCmisRegistryFactory()
@@ -50,11 +50,11 @@ public class JcrCmisRegistryFactory implements CmisRegistryFactory
       }
       catch (MalformedURLException e)
       {
-    	  LOG.warn(e.getMessage(), e);
+        LOG.warn(e.getMessage(), e);
       }
       catch (Exception e)
       {
-    	  LOG.warn(e.getMessage(), e);
+        LOG.warn(e.getMessage(), e);
       }
    }
 

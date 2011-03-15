@@ -32,85 +32,96 @@ import org.exoplatform.services.ecm.publication.NotInPublicationLifecycleExcepti
  * 		- added enrollNodeInLifecycle by context
  * 		- added updateLifecyleOnChangeContent by context
  */
-public interface WCMPublicationService {   
+public interface WCMPublicationService {
 
   public static final String UPDATE_EVENT = "WCMPublicationService.event.updateState";
-  
+
  /**
   * Add a Web Publication Plugin to the service.
   * The method caches all added plugins.
-  * 
+  *
   * @param p the plugin to add
   */
- public void addPublicationPlugin(WebpagePublicationPlugin p); 
- 
+ public void addPublicationPlugin(WebpagePublicationPlugin p);
+
  /**
   * Publish content to a portal page when the node is in a publication lifecyle.
-  * 
+  *
   * @param content the content
   * @param page the page
   * @param portalOwnerName
-  * 
+  *
   * @throws NotInPublicationLifecycleException the not in publication lifecycle exception
   * @throws Exception the exception
   */
- public void publishContentSCV(Node content, Page page, String portalOwnerName) throws NotInPublicationLifecycleException, Exception;
- 
+  public void publishContentSCV(Node content,
+                                Page page,
+                                String portalOwnerName) throws NotInPublicationLifecycleException,
+                                                                                Exception;
+
  /**
   * Publish content to a portal page when the node is in a publication lifecyle.
-  * 
+  *
   * @param content the content
   * @param page the page
   * @param clvPortletId the clv portlet id
   * @param portalOwnerName the portal owner name
   * @param remoteUser the remote user
-  * 
+  *
   * @throws Exception the exception
   */
- public void publishContentCLV(Node content, Page page, String clvPortletId, String portalOwnerName, String remoteUser) throws Exception;
- 
+  public void publishContentCLV(Node content,
+                                Page page,
+                                String clvPortletId,
+                                String portalOwnerName,
+                                String remoteUser) throws Exception;
+
  /**
   * Suspend a published content from a portal page.
-  * 
+  *
   * @param content the jcr content node
   * @param page the portal page
   * @param remoteUser
-  * 
+  *
   * @throws NotInPublicationLifecycleException the not in publication lifecycle exception
   * @throws Exception the exception
   */
- public void suspendPublishedContentFromPage(Node content, Page page, String remoteUser) throws NotInPublicationLifecycleException, Exception;
- 
+  public void suspendPublishedContentFromPage(Node content,
+                                              Page page,
+                                              String remoteUser) throws NotInPublicationLifecycleException,
+                                                                                         Exception;
+
  /**
   * Retrieves all added web page publication plugins.
   * This method is notably used to enumerate possible lifecycles.
-  * 
+  *
   * @return the map of web page publication plugin
   */
- public Map<String, WebpagePublicationPlugin> getWebpagePublicationPlugins();
- 
+  public Map<String, WebpagePublicationPlugin> getWebpagePublicationPlugins();
+
  /**
   * Checks if is enrolled in wcm lifecycle.
-  * 
+  *
   * @param node the node
-  * 
+  *
   * @return true, if is enrolled in wcm lifecycle
-  * 
+  *
   * @throws NotInPublicationLifecycleException the not in publication lifecycle exception
   * @throws Exception the exception
   */
- public boolean isEnrolledInWCMLifecycle(Node node) throws NotInPublicationLifecycleException, Exception;
- 
+  public boolean isEnrolledInWCMLifecycle(Node node) throws NotInPublicationLifecycleException,
+                                                    Exception;
+
  /**
   * Enroll in a web page publication lifecycle. The method will be retrieve the
   * web page publication lifecycle by lifecycle name and enroll to lifecycle
-  * 
+  *
   * @param node the node
   * @param lifecycleName the lifecycle name
-  * 
+  *
   * @throws Exception the exception
   */
- public void enrollNodeInLifecycle(Node node, String lifecycleName) throws Exception; 
+  public void enrollNodeInLifecycle(Node node, String lifecycleName) throws Exception;
 
  /**
   * Enroll this node in the default publication lifecycle.
@@ -118,110 +129,113 @@ public interface WCMPublicationService {
   * - lifecycle per site (site provided as a parameter)
   * - lifecycle per author (remoteUser provided as a parameter)
   * - lifecycle per content type (based on the node primary nodetype or its jcr path)
-  * 
+  *
   * @param node
   * @param siteName
   * @param author
   * @throws Exception
   */
- public void enrollNodeInLifecycle(Node node, String siteName, String remoteUser) throws Exception; 
-   
+  public void enrollNodeInLifecycle(Node node, String siteName, String remoteUser) throws Exception;
+
  /**
   * Unsubcribe node from a lifecycle plugin. After unsubcribe, the node can enroll to other publication lifecycle
-  * 
+  *
   * @param node the node
-  * 
+  *
   * @throws NotInPublicationLifecycleException the not in publication lifecycle exception
   * @throws Exception the exception
   */
- public void unsubcribeLifecycle(Node node) throws NotInPublicationLifecycleException, Exception;
- 
- /**
-  * Retrieves all web page lifecycles and update the publication lifecycle when a page is created.
-  * 
-  * @param page the page
-  * @param remoteUser
-  * 
-  * @throws Exception the exception
-  */
- public void updateLifecyleOnCreatePage(Page page, String remoteUser) throws Exception;
- 
- /**
-  * Retrieves all web page lifecycles and update the publication lifecycle when a page is changed.
-  * 
-  * @param page the page
-  * @param remoteUser
-  * 
-  * @throws Exception the exception
-  */
- public void updateLifecyleOnChangePage(Page page, String remoteUser) throws Exception;
- 
- /**
-  * Retrieves all web page lifecycles and update the publication lifecycle when a page is removed.
-  * 
-  * @param page the page
-  * @param remoteUser
-  * 
-  * @throws Exception the exception
-  */
- public void updateLifecycleOnRemovePage(Page page, String remoteUser) throws Exception;
- 
- /**
-  * Retrieves all web page lifecycles and update the publication lifecycle when a navigation is created.
-  * 
-  * @param navigation the navigation
-  * 
-  * @throws Exception the exception
-  */
- public void updateLifecyleOnCreateNavigation(PageNavigation navigation) throws Exception;
- 
- /**
-  * Retrieves all web page lifecycles and update the publication lifecycle when a navigation is changed.
-  * 
-  * @param navigation the navigation
-  * @param remoteUser
-  * 
-  * @throws Exception the exception
-  */
- public void updateLifecycleOnChangeNavigation(PageNavigation navigation, String remoteUser) throws Exception;
- 
- /**
-  * Retrieves all web page lifecycles and update the publication lifecycle when a navigation is removed.
-  * 
-  * @param navigation the navigation
-  * 
-  * @throws Exception the exception
-  */
- public void updateLifecyleOnRemoveNavigation(PageNavigation navigation) throws Exception;
+  public void unsubcribeLifecycle(Node node) throws NotInPublicationLifecycleException, Exception;
 
  /**
-  * Called by create and edit listeners. It allows to update the lifecycle of the content depending of its current state.
-  * 
-  * @see org.exoplatform.services.wcm.publication.listener.post.PostCreateContentEventListener
-  * @see org.exoplatform.services.wcm.publication.listener.post.PostEditContentEventListener
-  * 
-  * @param node
-  * @param currentSite
+  * Retrieves all web page lifecycles and update the publication lifecycle when a page is created.
+  *
+  * @param page the page
   * @param remoteUser
-  * @throws Exception
+  *
+  * @throws Exception the exception
   */
- public void updateLifecyleOnChangeContent(Node node, String siteName, String remoteUser) throws Exception;
- 
+  public void updateLifecyleOnCreatePage(Page page, String remoteUser) throws Exception;
+
+ /**
+  * Retrieves all web page lifecycles and update the publication lifecycle when a page is changed.
+  *
+  * @param page the page
+  * @param remoteUser
+  *
+  * @throws Exception the exception
+  */
+  public void updateLifecyleOnChangePage(Page page, String remoteUser) throws Exception;
+
+ /**
+  * Retrieves all web page lifecycles and update the publication lifecycle when a page is removed.
+  *
+  * @param page the page
+  * @param remoteUser
+  *
+  * @throws Exception the exception
+  */
+  public void updateLifecycleOnRemovePage(Page page, String remoteUser) throws Exception;
+
+ /**
+  * Retrieves all web page lifecycles and update the publication lifecycle when a navigation is created.
+  *
+  * @param navigation the navigation
+  *
+  * @throws Exception the exception
+  */
+  public void updateLifecyleOnCreateNavigation(PageNavigation navigation) throws Exception;
+
+ /**
+  * Retrieves all web page lifecycles and update the publication lifecycle when a navigation is changed.
+  *
+  * @param navigation the navigation
+  * @param remoteUser
+  *
+  * @throws Exception the exception
+  */
+  public void updateLifecycleOnChangeNavigation(PageNavigation navigation, String remoteUser) throws Exception;
+
+ /**
+  * Retrieves all web page lifecycles and update the publication lifecycle when a navigation is removed.
+  *
+  * @param navigation the navigation
+  *
+  * @throws Exception the exception
+  */
+  public void updateLifecyleOnRemoveNavigation(PageNavigation navigation) throws Exception;
+
+  /**
+   * Called by create and edit listeners. It allows to update the lifecycle of
+   * the content depending of its current state.
+   *
+   * @see org.exoplatform.services.wcm.publication.listener.post.PostCreateContentEventListener
+   * @see org.exoplatform.services.wcm.publication.listener.post.PostEditContentEventListener
+   * @param node
+   * @param currentSite
+   * @param remoteUser
+   * @throws Exception
+   */
+  public void updateLifecyleOnChangeContent(Node node, String siteName, String remoteUser) throws Exception;
+
 /**
  * It allows to update the lifecycle of the content with a new state.
- * 
+ *
  * @param node
  * @param currentSite
  * @param remoteUser
  * @param newState
  * @throws Exception
  */
-public void updateLifecyleOnChangeContent(Node node, String siteName, String remoteUser, String newState) throws Exception;
+  public void updateLifecyleOnChangeContent(Node node,
+                                            String siteName,
+                                            String remoteUser,
+                                            String newState) throws Exception;
 
 /**
  * returns the current state of the content.
  * We consider the publication:currentState property mandatory in all lifecycles.
- * 
+ *
  * @param node
  * @return the revision state stored in publication:currentState property
  */

@@ -36,7 +36,7 @@ import org.exoplatform.webui.ext.filter.UIExtensionFilters;
  * Created by The eXo Platform SAS
  * Author : eXoPlatform
  *          nicolas.filotto@exoplatform.com
- * 6 mai 2009  
+ * 6 mai 2009
  */
 @ComponentConfig(
      events = {
@@ -45,17 +45,20 @@ import org.exoplatform.webui.ext.filter.UIExtensionFilters;
  )
 public class OverloadThumbnailActionComponent extends UIComponent {
 
-  private static final List<UIExtensionFilter> FILTERS = Arrays.asList(new UIExtensionFilter[]{new IsNotRootNodeFilter(), new IsNotEditingDocumentFilter()});
+  private static final List<UIExtensionFilter> FILTERS = Arrays.asList(new UIExtensionFilter[] {
+      new IsNotRootNodeFilter(), new IsNotEditingDocumentFilter() });
 
   @UIExtensionFilters
   public List<UIExtensionFilter> getFilters() {
     return FILTERS;
   }
-  
-  public static class OverloadThumbnailActionListener extends UIActionBarActionRealNodeListener<OverloadThumbnailActionComponent> {
+
+  public static class OverloadThumbnailActionListener
+                                                     extends
+                                                     UIActionBarActionRealNodeListener<OverloadThumbnailActionComponent> {
     public void processEvent(Event<OverloadThumbnailActionComponent> event) throws Exception {
       UIJCRExplorer uiExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class);
-      UIThumbnailForm uiThumbnailForm = 
+      UIThumbnailForm uiThumbnailForm =
         uiExplorer.createUIComponent(UIThumbnailForm.class, null, null);
       UIPopupContainer UIPopupContainer = uiExplorer.getChild(UIPopupContainer.class);
       UIPopupContainer.activate(uiThumbnailForm, 500, 0);

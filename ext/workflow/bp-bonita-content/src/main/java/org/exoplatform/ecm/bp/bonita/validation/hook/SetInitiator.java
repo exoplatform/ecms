@@ -10,11 +10,11 @@ public class SetInitiator implements TxHook {
 
 
 
-	public void execute(APIAccessor api, ActivityInstance<ActivityBody> activity)
-			throws Exception {
-		String initiator = api.getQueryRuntimeAPI().getProcessInstance(activity.getProcessInstanceUUID()).getStartedBy();
-		ProcessInstance pi = api.getQueryRuntimeAPI().getProcessInstance(activity.getProcessInstanceUUID());
-		api.getRuntimeAPI().setProcessInstanceVariable(pi.getProcessInstanceUUID(), "initiator", initiator);
-	}
+  public void execute(APIAccessor api, ActivityInstance<ActivityBody> activity)
+      throws Exception {
+    String initiator = api.getQueryRuntimeAPI().getProcessInstance(activity.getProcessInstanceUUID()).getStartedBy();
+    ProcessInstance pi = api.getQueryRuntimeAPI().getProcessInstance(activity.getProcessInstanceUUID());
+    api.getRuntimeAPI().setProcessInstanceVariable(pi.getProcessInstanceUUID(), "initiator", initiator);
+  }
 
 }

@@ -31,19 +31,19 @@ import org.exoplatform.webui.form.UIFormStringInput;
  * Created by The eXo Platform SARL
  * Author : Pham Tuan
  *          tuan.pham@exoplatform.com
- * Aug 8, 2007  
+ * Aug 8, 2007
  */
 @ComponentConfig(template = "classpath:groovy/ecm/webui/form/UIFormInputSetWithAction.gtmpl")
 public class UIWizardStep2 extends UIFormInputSetWithAction {
   final static public String FIELD_CONTAINER = "container" ;
-  final static public String FIELD_SOURCENAME = "sourceName" ;  
+  final static public String FIELD_SOURCENAME = "sourceName" ;
   final static public String FIELD_DBTYPE = "dbType" ;
   final static public String FIELD_ISMULTI = "isMulti" ;
   final static public String FIELD_STORETYPE = "storeType" ;
   final static public String FIELD_MAXBUFFER = "maxBuffer" ;
   final static public String FIELD_SWAPPATH = "swapPath" ;
-  final static public String FIELD_STOREPATH = "storePath" ;  
-  final static public String FIELD_FILTER = "filterType" ;  
+  final static public String FIELD_STOREPATH = "storePath" ;
+  final static public String FIELD_FILTER = "filterType" ;
   final static public String FIELD_EXTERNAL_STORE = "externalStore" ;
 
   public UIWizardStep2(String name) throws Exception {
@@ -80,7 +80,7 @@ public class UIWizardStep2 extends UIFormInputSetWithAction {
     setFieldIsMulti(false) ;
     setFieldDBType(getDbType()) ;
   }
-  protected void fillFields(String containerType, String sourceName, String selectedDBType, boolean isMutil, 
+  protected void fillFields(String containerType, String sourceName, String selectedDBType, boolean isMutil,
       String storeType, String storePath, String filter, String maxBuffer, String swapPath){
     setFieldContainer(containerType) ;
     setFieldSourceName(sourceName) ;

@@ -29,47 +29,47 @@ import org.exoplatform.webui.ext.UIExtensionManager;
  * Created by The eXo Platform SAS
  * Author : Khuong.Van.Dung
  *          dung.khuong@exoplatform.com
- * Jul 22, 2010  
+ * Jul 22, 2010
  */
 
-@ComponentConfig(		
-		template  = "app:/groovy/webui/component/explorer/optionblocks/UIOptionBlockPanel.gtmpl"		
+@ComponentConfig(
+    template  = "app:/groovy/webui/component/explorer/optionblocks/UIOptionBlockPanel.gtmpl"
 )
 public class UIOptionBlockPanel extends UIContainer {
-	
-	private String OPTION_BLOCK_EXTENSION_TYPE = "org.exoplatform.ecm.dms.UIOptionBlocks";
-	private List<UIComponent> listExtenstions = new ArrayList<UIComponent>();
-	
-	public UIOptionBlockPanel() throws Exception {		
-  	  	
-	}
-	/*
+
+  private String OPTION_BLOCK_EXTENSION_TYPE = "org.exoplatform.ecm.dms.UIOptionBlocks";
+  private List<UIComponent> listExtenstions = new ArrayList<UIComponent>();
+
+  public UIOptionBlockPanel() throws Exception {
+
+  }
+  /*
    * This method checks and returns true if there is at least one extension, otherwise it returns false
    * */
-  public boolean isHasOptionBlockExtension() {  	  	  	
-  	UIExtensionManager manager = getApplicationComponent(UIExtensionManager.class);
+  public boolean isHasOptionBlockExtension() {
+    UIExtensionManager manager = getApplicationComponent(UIExtensionManager.class);
      List<UIExtension> extensions = manager.getUIExtensions(OPTION_BLOCK_EXTENSION_TYPE);
      if(extensions != null) {
-    	 return true;
-     }  	
-  	return false;
+       return true;
+     }
+    return false;
   }
   public void addOptionBlockExtension() throws Exception {
-  	UIExtensionManager manager = getApplicationComponent(UIExtensionManager.class);
+    UIExtensionManager manager = getApplicationComponent(UIExtensionManager.class);
     List<UIExtension> extensions = manager.getUIExtensions(OPTION_BLOCK_EXTENSION_TYPE);
 
     if(extensions != null ) {
-   	 for (UIExtension extension : extensions) {
-   		 
-   		 UIComponent uicomp = manager.addUIExtension(extension, null, this);       
-   		 //uicomp.setRendered(false);
-       listExtenstions.add(uicomp);   		 
-    	}     
-    }  
+      for (UIExtension extension : extensions) {
+
+        UIComponent uicomp = manager.addUIExtension(extension, null, this);
+        //uicomp.setRendered(false);
+       listExtenstions.add(uicomp);
+      }
+    }
   }
   public void setDisplayOptionExtensions(boolean display) {
-  	for(UIComponent uicomp : listExtenstions) {
-  		uicomp.setRendered(display);
-  	}
+    for(UIComponent uicomp : listExtenstions) {
+      uicomp.setRendered(display);
+    }
   }
 }

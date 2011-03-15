@@ -31,12 +31,12 @@ import org.exoplatform.webui.ext.manager.UIAbstractManager;
 import org.exoplatform.webui.ext.manager.UIAbstractManagerComponent;
 
 /**
- * Created by The eXo Platform SAS 
- * Author : eXoPlatform 
- *          ha.dangviet@exoplatform.com 
+ * Created by The eXo Platform SAS
+ * Author : eXoPlatform
+ *          ha.dangviet@exoplatform.com
  * Nov 22, 2010
  */
-@ComponentConfig(events = { 
+@ComponentConfig(events = {
     @EventConfig(
                  listeners = ExplorerActionComponent.ExplorerActionListener.class) })
 public class ExplorerActionComponent extends UIAbstractManagerComponent {
@@ -65,7 +65,6 @@ public class ExplorerActionComponent extends UIAbstractManagerComponent {
 
   @Override
   public Class<? extends UIAbstractManager> getUIAbstractManagerClass() {
-    // TODO Auto-generated method stub
     return null;
   }
 

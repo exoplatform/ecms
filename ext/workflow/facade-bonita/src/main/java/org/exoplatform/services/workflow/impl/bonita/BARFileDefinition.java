@@ -62,8 +62,8 @@ import org.xml.sax.InputSource;
 /**
  * This class maps in memory a deployable Business Process Archive.
  * Among others, it stores array of bytes corresponding to the XPDL definition
- * file, the form definition file (ie forms.xml) and the resource bundles. 
- * 
+ * file, the form definition file (ie forms.xml) and the resource bundles.
+ *
  * Created by Bull R&D
  * @author Brice Revenant
  * @author Patrick Silani
@@ -72,25 +72,25 @@ import org.xml.sax.InputSource;
 public class BARFileDefinition implements FileDefinition {
 
   private byte[] barFile;
-	
+
   /** Contains bytes corresponding to the files in the archive */
   protected Hashtable<String, byte[]> entries;
-  
+
   /** Caches the parsed Form definition to spare some CPU */
   private Element formDefinition;
-  
+
   /** URI identifying the XPDL namespace in XML documents */
   private static final String XPDL_NAMESPACE_URI =
     "http://www.wfmc.org/2002/XPDL1.0";
-  
+
   private static final Log LOG = ExoLogger.getLogger(BARFileDefinition.class);
-  
-  
+
+
   /* (non-Javadoc)
    * @see org.exoplatform.services.workflow.impl.bonita.FileDefinition#deploy()
    */
   public void deploy() throws Exception {
-	  //TODO validate that we don't need this method for bonita
+    //TODO validate that we don't need this method for bonita
   }
 
   /* (non-Javadoc)
@@ -107,7 +107,7 @@ public class BARFileDefinition implements FileDefinition {
       namespaceContext.setNamespace("xpdl",
                                     XPDL_NAMESPACE_URI);
       xPath.setNamespaceContext(namespaceContext);
-      
+
       return xPath.evaluate(expression,
                             new InputSource(new ByteArrayInputStream(
                               this.getXPDLDefinition())));
@@ -118,16 +118,16 @@ public class BARFileDefinition implements FileDefinition {
                                  e);
     }
   }
-  
+
   /* (non-Javadoc)
    * @see org.exoplatform.services.workflow.impl.bonita.FileDefinition#getResourceBundle(java.lang.String, java.util.Locale)
    */
   public ResourceBundle getResourceBundle(String stateName, Locale locale) {
     String bundleName    = this.getResourceBundleName(stateName);
-    
+
     ClassLoader cl = this.getClass().getClassLoader();
-    String content = "";    
-    URL url = cl.getResource(bundleName + "_" + locale.getLanguage() +".xml");        
+    String content = "";
+    URL url = cl.getResource(bundleName + "_" + locale.getLanguage() +".xml");
     if (url == null) url = cl.getResource(bundleName + ".xml");
     if (url != null) {
       try {
@@ -144,9 +144,9 @@ public class BARFileDefinition implements FileDefinition {
         throw new RuntimeException("Error while parsing the XML File", e);
       }
     }
-    
+
     // If there isn't any XML file (format XML)
-    if (content.length() == 0) {      
+    if (content.length() == 0) {
       String fileName = bundleName + "_" + locale.getLanguage() + ".properties";
       url = cl.getResource(fileName);
       if (url == null) url = cl.getResource(bundleName + ".properties");
@@ -184,26 +184,26 @@ public class BARFileDefinition implements FileDefinition {
                                  e);
     }
   }
-  
+
   /* (non-Javadoc)
    * @see org.exoplatform.services.workflow.impl.bonita.FileDefinition#getEntry(java.lang.String)
    */
   public byte[] getEntry(String path) throws Exception {
-    
+
     // Retrieve the specified entry
     byte[] entry = entries.get(path);
-    
+
     if(entry == null) {
       throw new Exception("The specified entry is not found");
     }
-    
+
     // Return the retrieved entry
     return entry;
   }
-  
+
   /**
    * Retrieves a Form corresponding to a State as a DOM Element
-   * 
+   *
    * @param  stateName name of the state
    * @return a DOM Element corresponding to the requested Form
    */
@@ -225,10 +225,10 @@ public class BARFileDefinition implements FileDefinition {
                                  e);
     }
   }
-  
+
   /**
    * Retrieves the whole Form definition as a DOM Element
-   * 
+   *
    * @return a DOM Element corresponding to the Form definition file
    */
   public Element getFormsDefinition() {
@@ -251,7 +251,7 @@ public class BARFileDefinition implements FileDefinition {
         DocumentBuilder builder = factory.newDocumentBuilder();
         formDefinition = builder.parse(inputStream).getDocumentElement();
       }
-      
+
       // Return what is contained by the cache
       ret = formDefinition;
     }
@@ -261,10 +261,10 @@ public class BARFileDefinition implements FileDefinition {
 
     return ret;
   }
-  
+
   /**
    * Retrieves the Bundle name of a Form corresponding to a State name
-   * 
+   *
    * @param  stateName identifies the Form
    * @return the requested bundle name
    */
@@ -292,7 +292,7 @@ public class BARFileDefinition implements FileDefinition {
    * @see org.exoplatform.services.workflow.impl.bonita.FileDefinition#getVariables(java.lang.String)
    */
   public List<Map<String, Object>> getVariables(String stateName) {
-    List<Map<String, Object>>  ret = new ArrayList<Map<String, Object>>(); 
+    List<Map<String, Object>>  ret = new ArrayList<Map<String, Object>>();
     XPath xPath                    = XPathFactory.newInstance().newXPath();
     final String expression        = "/forms/form[state-name=\"" +
                                      stateName +
@@ -307,7 +307,7 @@ public class BARFileDefinition implements FileDefinition {
       for(int i = 0 ; i < nodeSet.getLength() ; i ++) {
         Element element = (Element) nodeSet.item(i);
         Map<String, Object> attributes = new HashMap<String, Object>();
-        
+
         // Process the Name attribute
         Attr name      = (Attr) element.getAttributeNode("name");
         if(name != null) {
@@ -319,29 +319,29 @@ public class BARFileDefinition implements FileDefinition {
         if(component != null) {
           attributes.put("component", component.getValue());
         }
-        
+
         // Process the Editable attribute
         Attr editable  = (Attr) element.getAttributeNode("editable");
         if(editable != null) {
           attributes.put("editable", editable.getValue());
         }
-        
+
         // Process the Mandatory attribute
         Attr mandatory = (Attr) element.getAttributeNode("mandatory");
         if(mandatory != null) {
           attributes.put("mandatory", mandatory.getValue());
         }
-        
+
         // Process the Mandatory attribute
         Attr visiable = (Attr) element.getAttributeNode("visiable");
         if(visiable != null) {
           attributes.put("visiable", visiable.getValue());
         }
-        
+
         // Add the attributes to the returned List
         ret.add(attributes);
       }
-      
+
       return ret;
     }
     catch (Exception e)
@@ -351,7 +351,7 @@ public class BARFileDefinition implements FileDefinition {
                                  e);
     }
   }
-  
+
   /**
    * Retrieves the XPDL Process definition
    *
@@ -361,14 +361,14 @@ public class BARFileDefinition implements FileDefinition {
     // Searches for a key that matches the requested item
     for(String key : entries.keySet()) {
       if(key.matches(".*\\.xpdl$|")) {
-    	return entries.get(key);
+      return entries.get(key);
       }
     }
 
     // The requested item is not found
     return null;
   }
-  
+
   /* (non-Javadoc)
    * @see org.exoplatform.services.workflow.impl.bonita.FileDefinition#isDelegatedView(java.lang.String)
    */
@@ -392,14 +392,14 @@ public class BARFileDefinition implements FileDefinition {
                                  e);
     }
   }
-  
+
   /* (non-Javadoc)
    * @see org.exoplatform.services.workflow.impl.bonita.FileDefinition#isFormDefined(java.lang.String)
    */
   public boolean isFormDefined(String stateName) {
     return getForm(stateName) != null;
   }
-  
+
   /**
    * This inner class enables to set the Namespace Context while processing
    * with XPath XML documents leveraging namespaces.
@@ -413,7 +413,7 @@ public class BARFileDefinition implements FileDefinition {
 
     public String getPrefix(String namespaceURI) {
       Set<String> keys = map.keySet();
-      for (Iterator iterator = keys.iterator(); iterator.hasNext();) 
+      for (Iterator iterator = keys.iterator(); iterator.hasNext();)
       {
           String prefix = (String) iterator.next();
           String uri    = (String) map.get(prefix);
@@ -425,7 +425,7 @@ public class BARFileDefinition implements FileDefinition {
     public Iterator getPrefixes(String namespaceURI) {
       List<String> prefixes = new ArrayList<String>();
       Set<String> keys = map.keySet();
-      for (Iterator iterator = keys.iterator(); iterator.hasNext();) 
+      for (Iterator iterator = keys.iterator(); iterator.hasNext();)
       {
           String prefix = (String) iterator.next();
           String uri = (String) map.get(prefix);
@@ -438,16 +438,16 @@ public class BARFileDefinition implements FileDefinition {
       map.put(prefix, namespaceURI);
     }
   }
-  
+
   /* (non-Javadoc)
    * @see org.exoplatform.services.workflow.impl.bonita.FileDefinition#getEntries()
    */
   public Hashtable<String, byte[]> getEntries() {
     return entries;
   }
-  
+
   public BARFileDefinition() {}
-  
+
   /**
    * This constructor builds a file definition based on an Input Stream
    * corresponding to a Business Process Archive. It is typically invoked
@@ -456,9 +456,9 @@ public class BARFileDefinition implements FileDefinition {
    * @param inputStream Input Stream corresponding to the process archive
    */
   public BARFileDefinition(InputStream inputStream) throws IOException {
-	  inputStream.mark(0);
-	  this.barFile = Misc.getAllContentFrom(inputStream);
-	  inputStream.reset();
+    inputStream.mark(0);
+    this.barFile = Misc.getAllContentFrom(inputStream);
+    inputStream.reset();
     // Initialization
     JarInputStream jarInputStream = new JarInputStream(inputStream);
     entries                       = new Hashtable<String, byte[]>();
@@ -493,10 +493,10 @@ public class BARFileDefinition implements FileDefinition {
   }
 
   /**
-   * This constructor builds a file definition from a Node stored in the JCR 
+   * This constructor builds a file definition from a Node stored in the JCR
    * representing a Business Process. It is typically invoked after a restart
    * of eXo.
-   * 
+   *
    * @param node stored in the JCR which represents the process model
    */
   public BARFileDefinition(Node node) {
@@ -510,7 +510,7 @@ public class BARFileDefinition implements FileDefinition {
       String nodePath = node.getPath();
       Query q = qm.createQuery(
         "select * from nt:base where jcr:path like '" + nodePath + "/%'",
-        Query.SQL);      
+        Query.SQL);
       QueryResult result = q.execute();
       NodeIterator it = result.getNodes();
 
@@ -533,18 +533,18 @@ public class BARFileDefinition implements FileDefinition {
           // Retrieve the path. Remove "/jcr:system/exo:ecm/business processes/
           // model name" +1 to remove the last "/"
           String name_ = n.getPath().substring(node.getPath().length() + 1);
-          
+
           // Remove "jcr:content/" at the end of the string
           String name = name_.substring(0,name_.length()
                         - "jcr:content/".length());
-          
+
           // Put the entry in the hashtable
           entries.put(name, out.toByteArray());
         }
       }
     }
     catch (Exception e) {
-    	LOG.warn(e.getMessage(), e);
+      LOG.warn(e.getMessage(), e);
     }
   }
 }

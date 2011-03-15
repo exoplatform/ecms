@@ -24,33 +24,33 @@ import java.util.List;
  * Author : Ly Dinh Quang
  *          quang.ly@exoplatform.com
  *          xxx5669@gmail.com
- * Mar 31, 2009  
+ * Mar 31, 2009
  */
 public class TaxonomyConfig {
   private List<Taxonomy> taxonomies = new ArrayList<Taxonomy>();
-  
-  public List<Taxonomy> getTaxonomies() { return this.taxonomies; }  
+
+  public List<Taxonomy> getTaxonomies() { return this.taxonomies; }
 
   public void setTaxonomies(List<Taxonomy> taxonomies) { this.taxonomies = taxonomies;}
-  
+
   static public class Taxonomy {
     private String path;
     private String name;
     private String description;
     private List<Permission> permissions = new ArrayList<Permission>(4);
-    
+
     public String getPath() { return this.path; }
-    
+
     public void setPath(String path) { this.path = path;}
-    
+
     public String getName() {return this.name; }
-    
+
     public void setName(String name) { this.name = name; }
-    
+
     public String getDescription()  { return this.description; }
-    
+
     public void setDescription(String description) { this.description = description; }
-    
+
     public List<Permission> getPermissions() {
       return this.permissions;
     }
@@ -59,14 +59,14 @@ public class TaxonomyConfig {
       this.permissions = list;
     }
   }
-  
+
   static public class Permission {
     private String identity;
     private String read;
     private String addNode;
     private String setProperty;
     private String remove;
-    
+
     public String getIdentity() {
       return identity;
     }

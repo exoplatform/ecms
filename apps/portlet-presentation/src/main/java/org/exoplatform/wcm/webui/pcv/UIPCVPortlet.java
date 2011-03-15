@@ -35,8 +35,8 @@ import org.exoplatform.webui.core.lifecycle.UIApplicationLifecycle;
 import org.w3c.dom.Element;
 
 /*
- * Created by The eXo Platform SAS 
- * Author : Anh Do Ngoc 
+ * Created by The eXo Platform SAS
+ * Author : Anh Do Ngoc
  * anh.do@exoplatform.com
  * Sep 24, 2008
  */
@@ -63,47 +63,47 @@ public class UIPCVPortlet extends UIPortletApplication {
 
   /** The Constant SHOW_BAR. */
   public final static String SHOW_BAR        		 = "showBar";
-  
+
   private String currentNodePath;
-  
+
   /** The mode_. */
   private PortletMode        mode                    = PortletMode.VIEW;
 
   /**
    * Instantiates a new uI parameterized content viewer portlet.
-   * 
+   *
    * @throws Exception the exception
    */
   public UIPCVPortlet() throws Exception {
-    activateMode(mode) ;    
+    activateMode(mode) ;
   }
-  
+
   /**
    * Activate mode.
-   * 
+   *
    * @param mode the mode
-   * 
+   *
    * @throws Exception the exception
    */
   public void activateMode(PortletMode mode) throws Exception {
-  	getChildren().clear();
-		addChild(UIPopupContainer.class, null, "UIPopupContainer-" + new Date().getTime());
-		if (PortletMode.VIEW.equals(mode)) {
-			addChild(UIPCVContainer.class, null, null);
+    getChildren().clear();
+    addChild(UIPopupContainer.class, null, "UIPopupContainer-" + new Date().getTime());
+    if (PortletMode.VIEW.equals(mode)) {
+      addChild(UIPCVContainer.class, null, null);
     } else if (PortletMode.EDIT.equals(mode)) {
-    	addChild(UIPCVConfig.class, null, null);
+      addChild(UIPCVConfig.class, null, null);
     }
   }
   /* (non-Javadoc)
    * @see org.exoplatform.webui.core.UIPortletApplication#processRender(org.exoplatform.webui.application.WebuiApplication, org.exoplatform.webui.application.WebuiRequestContext)
    */
-  
-  public void processRender(WebuiApplication app, WebuiRequestContext context) throws Exception {	
-	  if(Util.getPortalRequestContext().getRequestParameter("path") != null) {
-		  setCurrentNodePath(Util.getPortalRequestContext().getRequestParameter("path").substring(1));
-	  }
 
-	  PortletRequestContext pContext = (PortletRequestContext) context ;
+  public void processRender(WebuiApplication app, WebuiRequestContext context) throws Exception {
+    if(Util.getPortalRequestContext().getRequestParameter("path") != null) {
+      setCurrentNodePath(Util.getPortalRequestContext().getRequestParameter("path").substring(1));
+    }
+
+    PortletRequestContext pContext = (PortletRequestContext) context ;
     PortletMode newMode = pContext.getApplicationMode() ;
     if(!mode.equals(newMode)) {
       activateMode(newMode) ;
@@ -112,19 +112,19 @@ public class UIPCVPortlet extends UIPortletApplication {
     UIPCVContainer container =  this.getChild(UIPCVContainer.class);
     if (container!=null && container.getNode()!=null) {
         RenderResponse response = context.getResponse();
-    	Element title = response.createElement("title");
-    	title.setTextContent(container.getTitle(container.getNode()));
-    	response.addProperty(MimeResponse.MARKUP_HEAD_ELEMENT, title);
+      Element title = response.createElement("title");
+      title.setTextContent(container.getTitle(container.getNode()));
+      response.addProperty(MimeResponse.MARKUP_HEAD_ELEMENT, title);
     }
-    
+
     super.processRender(app, context) ;
   }
-  
+
   /**
    * Can edit portlet.
-   * 
+   *
    * @return true, if successful
-   * 
+   *
    * @throws Exception the exception
    */
   public boolean canEditPortlet() throws Exception {
@@ -134,11 +134,11 @@ public class UIPCVPortlet extends UIPortletApplication {
   }
 
   public String getCurrentNodePath() {
-	return currentNodePath;
+  return currentNodePath;
   }
 
   public void setCurrentNodePath(String currentNodePath) {
-	this.currentNodePath = currentNodePath;
+  this.currentNodePath = currentNodePath;
   }
-  
+
 }

@@ -77,7 +77,6 @@ public class ExportContentJob implements Job {
   private static String       contentPath          = null;
 
   public void execute(JobExecutionContext context) throws JobExecutionException {
-    // TODO Auto-generated method stub
     Session session = null;
     try {
 

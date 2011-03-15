@@ -29,7 +29,7 @@ import org.exoplatform.webui.event.EventListener;
  * Created by The eXo Platform SARL
  * Author : Hoang Van Hung
  *          hunghvit@gmail.com
- * Sep 17, 2009  
+ * Sep 17, 2009
  */
 public abstract class UIPresentationEventListener<T extends UIComponent> extends EventListener<T> {
 
@@ -50,16 +50,16 @@ public abstract class UIPresentationEventListener<T extends UIComponent> extends
     variables.put(Utils.REQUESTCONTEXT, event.getRequestContext());
     return variables;
   }
-  
+
   /**
    * {@inheritDoc}
    */
   public void execute(Event<T> event) throws Exception {
     executeAction(createVariables(event));
   }
-  
+
   /**
-   * Run action for each event 
+   * Run action for each event
    * @param variables
    * @throws Exception
    */

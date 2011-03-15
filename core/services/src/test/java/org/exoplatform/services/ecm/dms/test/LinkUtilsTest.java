@@ -23,7 +23,7 @@ import org.exoplatform.test.BasicTestCase;
  * Created by The eXo Platform SAS
  * Author : eXoPlatform
  *          nicolas.filotto@exoplatform.com
- * 6 avr. 2009  
+ * 6 avr. 2009
  */
 public class LinkUtilsTest extends BasicTestCase {
 
@@ -47,7 +47,7 @@ public class LinkUtilsTest extends BasicTestCase {
     assertEquals(LinkUtils.evaluatePath("/a//.//b//"), "/a/b");
     assertEquals(LinkUtils.evaluatePath("/a/b/../c/.."), "/a");
     assertEquals(LinkUtils.evaluatePath("/a/b/../c/../.."), "/");
-    assertEquals(LinkUtils.evaluatePath("/a/b/../c/../../.."), "/");   
+    assertEquals(LinkUtils.evaluatePath("/a/b/../c/../../.."), "/");
 
   }
 }

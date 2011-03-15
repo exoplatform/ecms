@@ -32,7 +32,7 @@ public class UICategoryNavigationUtils {
 
   /**
    * Gets the portlet preferences.
-   * 
+   *
    * @return the portlet preferences
    */
   public static PortletPreferences getPortletPreferences() {

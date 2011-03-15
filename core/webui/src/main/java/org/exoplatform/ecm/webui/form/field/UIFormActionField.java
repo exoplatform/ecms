@@ -28,14 +28,14 @@ import org.exoplatform.webui.form.UIFormStringInput;
  * Created by The eXo Platform SAS
  * @author : Hoa.Pham
  *          hoa.pham@exoplatform.com
- * Jun 23, 2008  
+ * Jun 23, 2008
  */
 public class UIFormActionField extends DialogFormField {
 
   public UIFormActionField(String name, String label, String[] arguments) {
     super(name, label, arguments);
   }
-  
+
   @SuppressWarnings("unchecked")
   public <T extends UIFormInputBase> T createUIFormInput() throws Exception {
     UIFormStringInput uiInput = new UIFormStringInput(name, name, defaultValue) ;
@@ -49,7 +49,7 @@ public class UIFormActionField extends DialogFormField {
     uiInput.setEditable(isEditable());
     return (T)uiInput;
   }
-  
+
   public Map<String, String> getSelectorInfo() {
     Map<String, String> map = new HashMap<String, String>() ;
     map.put("selectorClass", selectorClass) ;
@@ -59,6 +59,6 @@ public class UIFormActionField extends DialogFormField {
     if(selectorParams != null) map.put("selectorParams", selectorParams) ;
     return map;
   }
-  
+
   public boolean useSelector() { return selectorClass != null; }
 }

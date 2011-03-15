@@ -40,13 +40,13 @@ import org.exoplatform.webui.form.UIForm;
  * Created by The eXo Platform SAS
  * Author : eXoPlatform
  *          exo@exoplatform.com
- * Feb 2, 2010  
+ * Feb 2, 2010
  */
 @ComponentConfig(
                  lifecycle = UIFormLifecycle.class,
                  template = "app:/groovy/authoring/UIDashboardForm.gtmpl",
                  events = {
-                	 @EventConfig(listeners = UIDashboardForm.ShowDocumentActionListener.class),
+                   @EventConfig(listeners = UIDashboardForm.ShowDocumentActionListener.class),
                    @EventConfig(listeners = UIDashboardForm.RefreshActionListener.class)
 })
 public class UIDashboardForm extends UIForm {
@@ -55,34 +55,34 @@ public class UIDashboardForm extends UIForm {
   }
 
   public List<Node> getContents(String fromstate) {
-	  return getContents(fromstate, null, null);
+    return getContents(fromstate, null, null);
   }
 
   public List<Node> getContents(String fromstate, String tostate) {
-	  return getContents(fromstate, tostate, null);
+    return getContents(fromstate, tostate, null);
   }
-  
+
   public List<Node> getContents(String fromstate, String tostate, String date) {
-	  PublicationManager manager = (PublicationManager)ExoContainerContext.getCurrentContainer().getComponentInstanceOfType(PublicationManager.class);
-	  String user = PortalRequestContext.getCurrentInstance().getRemoteUser();
-	  String lang = Util.getPortalRequestContext().getLocale().getLanguage();
-	  List<Node> nodes = new ArrayList<Node>();
-	  List<Node> temp = new ArrayList<Node>();
-	  try {
-		  nodes = manager.getContents(fromstate, tostate, date, user, lang, "collaboration");
-		  for(Node node : nodes) {
-		  	if(isInTrash(node) != true) {		  				  		
-		  		temp.add(node);
-		  	}
-		  }		  
-	  } catch (Exception e) {
-		  temp = new ArrayList<Node>();
-	  }
-	  return temp;
+    PublicationManager manager = (PublicationManager)ExoContainerContext.getCurrentContainer().getComponentInstanceOfType(PublicationManager.class);
+    String user = PortalRequestContext.getCurrentInstance().getRemoteUser();
+    String lang = Util.getPortalRequestContext().getLocale().getLanguage();
+    List<Node> nodes = new ArrayList<Node>();
+    List<Node> temp = new ArrayList<Node>();
+    try {
+      nodes = manager.getContents(fromstate, tostate, date, user, lang, "collaboration");
+      for(Node node : nodes) {
+        if(isInTrash(node) != true) {
+          temp.add(node);
+        }
+      }
+    } catch (Exception e) {
+      temp = new ArrayList<Node>();
+    }
+    return temp;
   }
-  
+
   private boolean isInTrash(Node node) throws RepositoryException {
-  	return node.isNodeType(org.exoplatform.ecm.webui.utils.Utils.EXO_RESTORELOCATION);
+    return node.isNodeType(org.exoplatform.ecm.webui.utils.Utils.EXO_RESTORELOCATION);
   }
   /**
    * The listener interface for receiving ShowDocumentAction events.
@@ -92,11 +92,11 @@ public class UIDashboardForm extends UIForm {
    * component's <code>addShowDocumentActionListener<code> method. When
    * the ShowDocumentAction event occurs, that object's appropriate
    * method is invoked.
-   * 
+   *
    * @see ShowDocumentActionEvent
    */
   public static class ShowDocumentActionListener extends EventListener<UIDashboardForm> {
-    
+
     /* (non-Javadoc)
      * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
      */
@@ -104,15 +104,15 @@ public class UIDashboardForm extends UIForm {
       PortalRequestContext context = Util.getPortalRequestContext();
       String path = event.getRequestContext().getRequestParameter(OBJECTID);
       HashMap<String, String> map = new HashMap<String, String>();
-	  map.put("repository", "repository");
-	  map.put("drive", "collaboration");
-	  map.put("path", path);
-	  context.setAttribute("jcrexplorer-show-document", map);
+    map.put("repository", "repository");
+    map.put("drive", "collaboration");
+    map.put("path", path);
+    context.setAttribute("jcrexplorer-show-document", map);
       Utils.updatePortal((PortletRequestContext) event.getRequestContext());
-    
+
     }
   }
-  
+
   /**
    * The listener interface for receiving RefreshAction events.
    * The class that is interested in processing a changeRepositoryAction
@@ -121,16 +121,16 @@ public class UIDashboardForm extends UIForm {
    * component's <code>RefreshActionListener<code> method. When
    * the RefreshAction event occurs, that object's appropriate
    * method is invoked.
-   * 
+   *
    * @see RefreshActionEvent
    */
   public static class RefreshActionListener extends EventListener<UIDashboardForm> {
-	    
-	    /* (non-Javadoc)
-	     * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
-	     */
+
+      /* (non-Javadoc)
+       * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
+       */
     public void execute(Event<UIDashboardForm> event) throws Exception {
-    	UIDashboardForm src = event.getSource();
+      UIDashboardForm src = event.getSource();
         Utils.updatePortal((PortletRequestContext) event.getRequestContext());
     }
   }

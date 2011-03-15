@@ -47,7 +47,7 @@ public class UIPublicationContainer
 
   /**
    * Inits the container.
-   * 
+   *
    * @param node the node
    * @throws Exception the exception
    */
@@ -71,7 +71,7 @@ public class UIPublicationContainer
 
   /**
    * Gets the date time formater.
-   * 
+   *
    * @return the date time formater
    */
   public DateFormat getDateTimeFormater() {

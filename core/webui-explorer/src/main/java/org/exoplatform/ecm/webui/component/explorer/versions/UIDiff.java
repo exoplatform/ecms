@@ -39,7 +39,7 @@ import org.exoplatform.webui.core.UIComponent;
  * Created by The eXo Platform SARL
  * Author : Pham Tuan
  *          tuan.pham@exoplatform.com
- * May 3, 2007  
+ * May 3, 2007
  */
 
 @ComponentConfig(template = "app:/groovy/webui/component/explorer/versions/UIDiff.gtmpl")
@@ -60,10 +60,10 @@ public class UIDiff extends UIComponent {
     if(node.hasNode("jcr:content")) {
       Node content = node.getNode("jcr:content");
       if(content.hasProperty("jcr:mimeType")){
-        String mimeType = content.getProperty("jcr:mimeType").getString();         
+        String mimeType = content.getProperty("jcr:mimeType").getString();
         if(content.hasProperty("jcr:data")) {
-          if(mimeType.startsWith("text")) { 
-            return content.getProperty("jcr:data").getString(); 
+          if(mimeType.startsWith("text")) {
+            return content.getProperty("jcr:data").getString();
           }
           DocumentReaderService readerService = getApplicationComponent(DocumentReaderService.class) ;
           try{
@@ -71,7 +71,7 @@ public class UIDiff extends UIComponent {
             getContentAsText(content.getProperty("jcr:data").getStream()) ;
           }catch (Exception e) {
             versionCompareable_ = false ;
-          }         
+          }
         }
       }
     }
@@ -81,8 +81,8 @@ public class UIDiff extends UIComponent {
   public String getBaseVersionNum() throws Exception {return  baseVersion_.getName() ;}
   public String getCurrentVersionNum() throws Exception {return version_.getName() ;}
 
-  public String getBaseVersionDate() throws Exception {    
-    return formatDate(baseVersion_.getCreated()) ; 
+  public String getBaseVersionDate() throws Exception {
+    return formatDate(baseVersion_.getCreated()) ;
   }
 
   public String getCurrentVersionDate() throws Exception {
@@ -97,23 +97,23 @@ public class UIDiff extends UIComponent {
   public boolean isCompareable() { return versionCompareable_ ; }
 
   public List<Delta> getDeltas() throws Exception {
-    List<Delta> deltas = new ArrayList<Delta>();    
+    List<Delta> deltas = new ArrayList<Delta>();
     String previousText = getText(version_.getNode("jcr:frozenNode"));
     String currentText = getText(baseVersion_.getNode("jcr:frozenNode"));
     if((previousText != null)&&(currentText != null)) {
       String lineSeparator = DiffService.NL;
       Object[] orig = StringUtils.split(previousText, lineSeparator);
       Object[] rev = StringUtils.split(currentText, lineSeparator);
-      DiffService diffService = getApplicationComponent(DiffService.class) ;      
-      Revision revision = diffService.diff(orig, rev);      
-      for (int i = 0; i < revision.size(); i++) {        
-        deltas.add(revision.getDelta(i));        
+      DiffService diffService = getApplicationComponent(DiffService.class) ;
+      Revision revision = diffService.diff(orig, rev);
+      for (int i = 0; i < revision.size(); i++) {
+        deltas.add(revision.getDelta(i));
       }
     }
     return deltas;
   }
 
-  public boolean isDeleteDelta(Delta delta) {    
+  public boolean isDeleteDelta(Delta delta) {
     if (delta instanceof DeleteDelta) return true;
     return false;
   }
@@ -126,5 +126,5 @@ public class UIDiff extends UIComponent {
   public boolean isChangeDelta(Delta delta) {
     if (delta instanceof ChangeDelta) return true;
     return false;
-  } 
+  }
 }

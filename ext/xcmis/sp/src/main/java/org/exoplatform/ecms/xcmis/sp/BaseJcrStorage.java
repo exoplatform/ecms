@@ -535,7 +535,7 @@ abstract class BaseJcrStorage implements TypeManager
    {
       if (nodeType.isNodeType(JcrCMIS.NT_FILE))
       {
-         // XXX Mapping not supported for documents at the moment.
+         // Mapping not supported for documents at the moment.
          // Need pluggable mechanism for reading content first.
          // Before this no sense to use any mapping.
          return getDocumentDefinition(nodeType, includePropertyDefinition);

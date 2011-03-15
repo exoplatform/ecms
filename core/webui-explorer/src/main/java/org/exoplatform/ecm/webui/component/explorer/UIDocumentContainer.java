@@ -28,40 +28,40 @@ import org.exoplatform.webui.event.EventListener;
  * Oct 15, 2007 10:05:43 AM
  */
 @ComponentConfig(
-	                template = "app:/groovy/webui/component/explorer/UIDocumentTabPane.gtmpl",
-	    events = {
-	              @EventConfig(listeners = UIDocumentContainer.ChangeTabActionListener.class)
-	            }
+                  template = "app:/groovy/webui/component/explorer/UIDocumentTabPane.gtmpl",
+      events = {
+                @EventConfig(listeners = UIDocumentContainer.ChangeTabActionListener.class)
+              }
 )
 public class UIDocumentContainer extends UIContainer {
-  
+
   public UIDocumentContainer() throws Exception {
     addChild(UIDocumentWithTree.class, null, null) ;
     addChild(UIDocumentInfo.class, null, null) ;
   }
-  
+
   public boolean isShowViewFile() throws Exception {
     return getAncestorOfType(UIJCRExplorer.class).isShowViewFile() ;
   }
-  
+
   public boolean isJcrEnable() {
     return getAncestorOfType(UIJCRExplorer.class).getPreference().isJcrEnable() ;
   }
-  
+
   public static class ChangeTabActionListener  extends EventListener<UIDocumentContainer> {
     public void execute(Event<UIDocumentContainer> event) throws Exception {
       UIDocumentContainer uiDocumentContainer = event.getSource();
       String selectedTabName = event.getRequestContext().getRequestParameter(OBJECTID);
       UIDocumentWithTree uiDocTree = uiDocumentContainer.getChild(UIDocumentWithTree.class);
       uiDocTree.setRendered(uiDocTree.getId().equals(selectedTabName));
-     
+
       UIDocumentInfo uiDocInfo = uiDocumentContainer.getChildById(UIDocumentInfo.class.getSimpleName());
       uiDocInfo.setRendered(uiDocInfo.getId().equals(selectedTabName));
-     
+
       UIJCRExplorer uiExplorer = uiDocumentContainer.getAncestorOfType(UIJCRExplorer.class);
       uiExplorer.setShowDocumentViewForFile(uiDocInfo.getId().equals(selectedTabName));
       event.getRequestContext().addUIComponentToUpdateByAjax(uiDocumentContainer);
       uiExplorer.updateAjax(event);
     }
-  } 
+  }
 }

@@ -38,40 +38,45 @@ public class TaskData implements Task {
   private String processId         = null;
   private String processInstanceId = null;
   private String taskName          = null;
-  private Date   end               = null;  
-  
+  private Date   end               = null;
+
   private static Logger log = Logger.getLogger(TaskData.class.getName());
 
   public TaskData(ActivityInstance<TaskInstance> task) {
-	  if(task.getBody().isTaskAssigned()){
-		  this.actorId = task.getBody().getTaskUser();
-	  } else {
-		  this.actorId = "";
-		  boolean separator = false;
-		  for(String candidat : task.getBody().getTaskCandidates()){
-			  if(separator) this.actorId += " , ";
-			  else separator = true;
-			  this.actorId += candidat;
-		  }
-	  }
-	  try {
-		  this.description = AccessorUtil.getQueryAPIAccessor().getQueryDefinitionAPI().getProcessActivity(task.getProcessDefinitionUUID(),task.getActivityId()).getDescription();
-		  this.id = task.getBody().getUUID().toString();
-		  this.processInstanceId = task.getProcessInstanceUUID().toString();
-		  this.taskName = task.getActivityId();
-		  this.processId = task.getProcessDefinitionUUID().toString();
-		  //TODO delete the IllegalStateException catching
-	  
-		  this.end = task.getBody().getEndedDate();
-	} catch (BonitaException e) {
-		log.log(Level.WARNING, e.getMessage(), e);
-	}
-	if(log.isLoggable(Level.INFO)){
-		log.info("New task created [taskId,taskName,actorId,processId,instanceId,description,end]:" +
-				"["+this.id+","+this.taskName+","+this.actorId+","+this.processId+","+this.processInstanceId+","+this.description+","+this.end);
-	}
+    if(task.getBody().isTaskAssigned()){
+      this.actorId = task.getBody().getTaskUser();
+    } else {
+      this.actorId = "";
+      boolean separator = false;
+      for(String candidat : task.getBody().getTaskCandidates()){
+        if(separator) this.actorId += " , ";
+        else separator = true;
+        this.actorId += candidat;
+      }
+    }
+    try {
+      this.description = AccessorUtil.getQueryAPIAccessor()
+                                     .getQueryDefinitionAPI()
+                                     .getProcessActivity(task.getProcessDefinitionUUID(),
+                                                         task.getActivityId())
+                                     .getDescription();
+      this.id = task.getBody().getUUID().toString();
+      this.processInstanceId = task.getProcessInstanceUUID().toString();
+      this.taskName = task.getActivityId();
+      this.processId = task.getProcessDefinitionUUID().toString();
+      //TODO delete the IllegalStateException catching
+
+      this.end = task.getBody().getEndedDate();
+  } catch (BonitaException e) {
+    log.log(Level.WARNING, e.getMessage(), e);
   }
-  
+  if(log.isLoggable(Level.INFO)){
+      log.info("New task created [taskId,taskName,actorId,processId,instanceId,description,end]:"
+          + "[" + this.id + "," + this.taskName + "," + this.actorId + "," + this.processId + ","
+          + this.processInstanceId + "," + this.description + "," + this.end);
+  }
+  }
+
   public String getActorId() {
     return this.actorId;
   }

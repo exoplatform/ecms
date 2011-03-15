@@ -25,21 +25,21 @@ import org.exoplatform.webui.form.UIFormStringInput;
  * Created by The eXo Platform SAS
  * @author : Hoa.Pham
  *          hoa.pham@exoplatform.com
- * Jun 23, 2008  
+ * Jun 23, 2008
  */
 public class UIMixinField extends DialogFormField{
-  
+
   public UIMixinField(String name, String label, String[] arguments) {
     super(name, label, arguments);
   }
-  
+
   @SuppressWarnings("unchecked")
   public <T extends UIFormInputBase> T createUIFormInput() throws Exception {
     UIFormStringInput uiMixin = new UIFormStringInput(name, name, defaultValue) ;
     if(label != null) uiMixin.setLabel(label) ;
     return (T)uiMixin;
-  }    
-  
+  }
+
   public JcrInputProperty createJcrInputProperty() {
     JcrInputProperty inputProperty = new JcrInputProperty();
     inputProperty.setJcrPath(jcrPath);

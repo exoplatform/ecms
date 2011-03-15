@@ -62,12 +62,12 @@ import org.exoplatform.webui.ext.manager.UIAbstractManager;
     }
 )
 public class UITaxonomyManager extends UIAbstractManager {
-  
+
   static private String TAXONOMIES_ALIAS = "exoTaxonomiesPath" ;
   static private String EXO_ECM_ALIAS = "exoECMSystemPath" ;
-  
+
   public static final String PERMISSION_ID_POPUP = "TaxonomyViewPermissionPopup";
-  
+
   private String selectedPath_ = null ;
 
   public UITaxonomyManager() throws Exception {
@@ -75,70 +75,70 @@ public class UITaxonomyManager extends UIAbstractManager {
     addChild(UITaxonomyTree.class, null, null) ;
     addChild(UITaxonomyWorkingArea.class, null, null) ;
   }
-  
+
   @Override
   public void init() throws Exception {}
-  
+
   public void refresh() throws Exception {
     update();
   }
-  
+
   public void update() throws Exception {
     UITaxonomyTree uiTree = getChild(UITaxonomyTree.class) ;
     uiTree.update() ;
     UITaxonomyWorkingArea uiTaxonomyWorkingArea = getChild(UITaxonomyWorkingArea.class);
     uiTaxonomyWorkingArea.update();
   }
-  
+
   public void update(String parentPath) throws Exception {
     UITaxonomyTree uiTree = getChild(UITaxonomyTree.class) ;
     uiTree.setNodeSelect(parentPath) ;
     UITaxonomyWorkingArea uiWorkingArea = getChild(UITaxonomyWorkingArea.class) ;
     uiWorkingArea.setSelectedPath(parentPath) ;
-    uiWorkingArea.update() ;    
+    uiWorkingArea.update() ;
   }
-  
+
   public Node getRootNode() throws Exception {
     NodeHierarchyCreator nodeHierarchyCreator = getApplicationComponent(NodeHierarchyCreator.class) ;
     return (Node)getSession().getItem(nodeHierarchyCreator.getJcrPath(EXO_ECM_ALIAS)) ;
   }
-  
+
   public Node getTaxonomyNode() throws Exception {
     NodeHierarchyCreator nodeHierarchyCreator = getApplicationComponent(NodeHierarchyCreator.class) ;
     return (Node)getSession().getItem(nodeHierarchyCreator.getJcrPath(TAXONOMIES_ALIAS)) ;
   }
-  
+
   public void setSelectedPath(String selectedPath) { selectedPath_ = selectedPath ; }
   public String getSelectedPath() { return selectedPath_ ; }
-  
+
   public Node getNodeByPath(String path) throws Exception {
     return (Node) getSession().getItem(path) ;
   }
-  
+
   public String getRepository() throws Exception {
     PortletRequestContext pcontext = (PortletRequestContext)WebuiRequestContext.getCurrentInstance() ;
     PortletPreferences pref = pcontext.getRequest().getPreferences() ;
     String repository = pref.getValue(Utils.REPOSITORY, "") ;
     return repository ;
   }
-  
+
   private String getDmsSystemWorkspaceName(String repository) {
     DMSConfiguration dmsConfiguration = getApplicationComponent(DMSConfiguration.class);
     DMSRepositoryConfiguration dmsRepoConfig = dmsConfiguration.getConfig();
     return dmsRepoConfig.getSystemWorkspace();
   }
-  
+
   public Session getSession() throws Exception {
     String repositoryName = getAncestorOfType(UIECMAdminPortlet.class).getPreferenceRepository() ;
     String workspace = getDmsSystemWorkspaceName(repositoryName) ;
     return SessionProviderFactory.createSystemProvider().getSession(workspace, getRepository(repositoryName)) ;
   }
-  
+
   public ManageableRepository getRepository(String repositoryName) throws Exception{
     RepositoryService repositoryService = getApplicationComponent(RepositoryService.class) ;
     return repositoryService.getCurrentRepository();
   }
-  
+
   public void initPopup(String path) throws Exception {
     removeChildById("TaxonomyPopup");
     UIPopupWindow uiPopup = addChild(UIPopupWindow.class, null, "TaxonomyPopup");
@@ -154,7 +154,7 @@ public class UITaxonomyManager extends UIAbstractManager {
     removeChildById(id) ;
     return addChild(UIPopupContainer.class, null, id) ;
   }
-  
+
   public void onChange(Node currentNode) throws Exception {
     UIBreadcumbs uiBreadcumbs = getChild(UIBreadcumbs.class);
     List<LocalPath> listLocalPath = new ArrayList<LocalPath>();
@@ -171,12 +171,12 @@ public class UITaxonomyManager extends UIAbstractManager {
           }
         }
       }
-    } 
+    }
     uiBreadcumbs.setPath(listLocalPath);
   }
-  
-  public void changeGroup(String groupId, Object context) throws Exception {    
-    String stringPath = getTaxonomyNode().getPath() + "/";    
+
+  public void changeGroup(String groupId, Object context) throws Exception {
+    String stringPath = getTaxonomyNode().getPath() + "/";
     UIBreadcumbs uiBreadcumb = getChild(UIBreadcumbs.class);
     if (groupId == null) groupId = "";
     List<LocalPath> listLocalPath = uiBreadcumb.getPath();
@@ -204,13 +204,13 @@ public class UITaxonomyManager extends UIAbstractManager {
       uiTaxonomyTree.setNodeSelect(stringPath);
     }
   }
-  
+
   static  public class SelectPathActionListener extends EventListener<UIBreadcumbs> {
     public void execute(Event<UIBreadcumbs> event) throws Exception {
       UIBreadcumbs uiBreadcumbs = event.getSource() ;
       UITaxonomyManager uiTaxonomyManager = uiBreadcumbs.getParent() ;
       String objectId =  event.getRequestContext().getRequestParameter(OBJECTID) ;
-      uiBreadcumbs.setSelectPath(objectId);    
+      uiBreadcumbs.setSelectPath(objectId);
       String selectGroupId = uiBreadcumbs.getSelectLocalPath().getId() ;
       uiTaxonomyManager.changeGroup(selectGroupId, event.getRequestContext()) ;
       event.getRequestContext().addUIComponentToUpdateByAjax(uiTaxonomyManager) ;

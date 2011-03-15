@@ -28,7 +28,7 @@ import org.exoplatform.webui.ext.filter.UIExtensionFilterType;
  * Created by The eXo Platform SARL
  * Author : Hoang Van Hung
  *          hunghvit@gmail.com
- * Nov 18, 2009  
+ * Nov 18, 2009
  */
 public class CanAddCategoryFilter implements UIExtensionFilter {
 

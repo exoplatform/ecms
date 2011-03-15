@@ -33,29 +33,29 @@ import org.picocontainer.Startable;
 
 /**
  * Created by The eXo Platform SAS
- * Author : Hoa Pham	
+ * Author : Hoa Pham
  *          hoa.pham@exoplatform.com
- * Sep 6, 2008  
+ * Sep 6, 2008
  */
 public class ContentInitializerService implements Startable{
-  
+
   private List<DeploymentPlugin> listDeploymentPlugin = new ArrayList<DeploymentPlugin>();
   private RepositoryService repositoryService;
   private NodeHierarchyCreator nodeHierarchyCreator;
   private Log LOG = ExoLogger.getLogger(this.getClass());
-  
+
   private static String CONTENT_INIT = "ContentInitializerService";
   private static String EXO_SERVICES = "eXoServices";
-  
+
   public ContentInitializerService(RepositoryService repositoryService, NodeHierarchyCreator nodeHierarchyCreator) {
     this.repositoryService = repositoryService;
     this.nodeHierarchyCreator = nodeHierarchyCreator;
   }
-  
+
   public void addPlugin(DeploymentPlugin deploymentPlugin) {
     listDeploymentPlugin.add(deploymentPlugin);
   }
-  
+
   public void start() {
     SessionProvider sessionProvider = SessionProvider.createSystemProvider();
     try {
@@ -68,19 +68,23 @@ public class ContentInitializerService implements Startable{
       } else {
         contentInitializerService = serviceFolder.addNode(CONTENT_INIT, "nt:unstructured");
       }
-      if (!contentInitializerService.hasNode("ContentInitializerServiceLog")) {                                              
+      if (!contentInitializerService.hasNode("ContentInitializerServiceLog")) {
         Date date = new Date();
-        StringBuffer logData = new StringBuffer();      
+        StringBuffer logData = new StringBuffer();
         for (DeploymentPlugin deploymentPlugin : listDeploymentPlugin) {
           try {
             deploymentPlugin.deploy(sessionProvider);
-            logData.append("deploy " + deploymentPlugin.getName() + " deployment plugin succesful at " + date.toString() + "\n");
+            logData.append("deploy " + deploymentPlugin.getName()
+                + " deployment plugin succesful at " + date.toString() + "\n");
           } catch (Exception e) {
-            LOG.error("deploy " + deploymentPlugin.getName() + " deployment plugin failure at " + date.toString() + " by " + e.getMessage() + "\n");
-            logData.append("deploy " + deploymentPlugin.getName() + " deployment plugin failure at " + date.toString() + " by " + e.getMessage() + "\n");
-          }                            
-        } 
-        
+            LOG.error("deploy " + deploymentPlugin.getName() + " deployment plugin failure at "
+                + date.toString() + " by " + e.getMessage() + "\n");
+            logData.append("deploy " + deploymentPlugin.getName()
+                + " deployment plugin failure at " + date.toString() + " by " + e.getMessage()
+                + "\n");
+          }
+        }
+
         Node contentInitializerServiceLog = contentInitializerService.addNode("ContentInitializerServiceLog", "nt:file");
         Node contentInitializerServiceLogContent = contentInitializerServiceLog.addNode("jcr:content", "nt:resource");
         contentInitializerServiceLogContent.setProperty("jcr:encoding", "UTF-8");
@@ -89,12 +93,12 @@ public class ContentInitializerService implements Startable{
         contentInitializerServiceLogContent.setProperty("jcr:lastModified", date.getTime());
         session.save();
       }
-    } catch (Exception e) { 
+    } catch (Exception e) {
       LOG.error("An unexpected problem occurs when deploy contents", e);
     } finally {
       sessionProvider.close();
     }
   }
   public void stop() {}
-  
+
 }

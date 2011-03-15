@@ -17,7 +17,7 @@ import org.exoplatform.webui.event.EventListener;
  * Created by The eXo Platform SARL
  * Author : Hoang Van Hung
  *          hunghvit@gmail.com
- * Nov 18, 2008  
+ * Nov 18, 2008
  */
 
 @ComponentConfig(

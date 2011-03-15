@@ -33,7 +33,7 @@ import org.exoplatform.webui.ext.manager.UIAbstractManagerComponent;
  * Author : Dang Van Minh
  *          minh.dang@exoplatform.com
  * Sep 19, 2006
- * 8:26:51 AM 
+ * 8:26:51 AM
  */
 @ComponentConfig(
     template = "app:/groovy/webui/component/admin/UIECMAdminControlPanel.gtmpl"
@@ -44,14 +44,14 @@ public class UIECMAdminControlPanel extends UIContainer {
    * Logger.
    */
   private static final Log LOG  = ExoLogger.getLogger(UIECMAdminControlPanel.class);
-  
+
   public static final String EXTENSION_TYPE = "org.exoplatform.ecm.dms.UIECMAdminControlPanel";
-  
+
   private List<UIAbstractManagerComponent> managers = new ArrayList<UIAbstractManagerComponent>();
-  
+
   public UIECMAdminControlPanel() throws Exception {}
   public List<?> getEvents() { return getComponentConfig().getEvents() ; }
-  
+
   void initialize() throws Exception {
     UIExtensionManager manager = getApplicationComponent(UIExtensionManager.class);
     List<UIExtension> extensions = manager.getUIExtensions(EXTENSION_TYPE);
@@ -73,11 +73,11 @@ public class UIECMAdminControlPanel extends UIContainer {
       }
     }
   }
-  
+
   List<UIAbstractManagerComponent> getManagers() {
     return managers;
   }
-  
+
   void unregister(UIAbstractManagerComponent component) {
     managers.remove(component);
   }

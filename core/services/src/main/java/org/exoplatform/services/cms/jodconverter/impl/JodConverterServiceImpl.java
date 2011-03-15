@@ -14,32 +14,32 @@ import com.artofsolving.jodconverter.openoffice.connection.SocketOpenOfficeConne
 import com.artofsolving.jodconverter.openoffice.converter.OpenOfficeDocumentConverter;
 
 public class JodConverterServiceImpl implements JodConverterService {
-	
-	private SocketOpenOfficeConnection socketconnection;
-	private OpenOfficeDocumentConverter converter;
-	private DefaultDocumentFormatRegistry format;
-	
-	public JodConverterServiceImpl(InitParams initParams) throws IOException, FileNotFoundException, Exception {
-		String host = initParams.getValueParam("host").getValue();
-		int port = Integer.parseInt(initParams.getValueParam("port").getValue());
-		socketconnection = new SocketOpenOfficeConnection(host, port);
-		format = new DefaultDocumentFormatRegistry();
-		converter = new OpenOfficeDocumentConverter(socketconnection);
-	}
-	
-	/**
-	 * Convert InputStream in with formatInput format to OutputStream out with
-	 * formatOutput
-	 * 
-	 * @param input
-	 * @param formatInput
-	 * @param out
-	 * @param formatOutput
-	 * @throws Exception
-	 */
-	public void convert(InputStream input, String formatInput, OutputStream out,
-			String formatOutput) throws ConnectException, Exception {
-		converter.convert(input, format.getFormatByFileExtension(formatInput), out,
-				format.getFormatByFileExtension(formatOutput));
-	}
+
+  private SocketOpenOfficeConnection socketconnection;
+  private OpenOfficeDocumentConverter converter;
+  private DefaultDocumentFormatRegistry format;
+
+  public JodConverterServiceImpl(InitParams initParams) throws IOException, FileNotFoundException, Exception {
+    String host = initParams.getValueParam("host").getValue();
+    int port = Integer.parseInt(initParams.getValueParam("port").getValue());
+    socketconnection = new SocketOpenOfficeConnection(host, port);
+    format = new DefaultDocumentFormatRegistry();
+    converter = new OpenOfficeDocumentConverter(socketconnection);
+  }
+
+  /**
+   * Convert InputStream in with formatInput format to OutputStream out with
+   * formatOutput
+   *
+   * @param input
+   * @param formatInput
+   * @param out
+   * @param formatOutput
+   * @throws Exception
+   */
+  public void convert(InputStream input, String formatInput, OutputStream out,
+      String formatOutput) throws ConnectException, Exception {
+    converter.convert(input, format.getFormatByFileExtension(formatInput), out,
+        format.getFormatByFileExtension(formatOutput));
+  }
 }

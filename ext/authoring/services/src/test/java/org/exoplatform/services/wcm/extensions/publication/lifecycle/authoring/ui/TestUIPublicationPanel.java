@@ -37,18 +37,18 @@ import static org.mockito.Mockito.*;
  * Created by The eXo Platform SAS
  * Author : eXoPlatform
  *          exo@exoplatform.com
- * Mar 10, 2010  
+ * Mar 10, 2010
  */
 public class TestUIPublicationPanel extends TestCase {
-  
-  
+
+
 
   public void testIsAuthorizedByRole() throws Exception {
     UIPublicationPanel panel = mock(UIPublicationPanel.class);
 
     Identity tom = createIdentity("tom","validator:/org/human-resources");
-    Identity bill = createIdentity("bill","redactor:/org/human-resources","validator:/org/finances");    
-      
+    Identity bill = createIdentity("bill","redactor:/org/human-resources","validator:/org/finances");
+
     // configuring a mock node with the expected ACL
     List<AccessControlEntry> entries = new ArrayList<AccessControlEntry>();
     entries.add(new AccessControlEntry("*:/org/finance", PermissionType.READ));
@@ -56,26 +56,26 @@ public class TestUIPublicationPanel extends TestCase {
     AccessControlList acl = new AccessControlList("foo", entries);
     NodeImpl node = mock(NodeImpl.class);
     when(node.getACL()).thenReturn(acl);
-    
+
     State state = new State();
     state.setRole("validator"); //
-    
+
     // make sure the actual code we test is not mocked!
     when(panel.isAuthorizedByRole(any(State.class), any(Identity.class), any(NodeImpl.class))).thenCallRealMethod();
-    
-    assertTrue("tom should be allowed", panel.isAuthorizedByRole(state, tom, node)); 
+
+    assertTrue("tom should be allowed", panel.isAuthorizedByRole(state, tom, node));
     assertFalse("bill should not be allowed", panel.isAuthorizedByRole(state, bill, node));
 
   }
-  
-  
+
+
   public void testIsAuthorizedByRoles() throws Exception {
     UIPublicationPanel panel = mock(UIPublicationPanel.class);
 
     Identity tom = createIdentity("tom","validator:/org/human-resources");
-    Identity bill = createIdentity("bill","redactor:/org/human-resources","validator:/org/finances");    
-    Identity bart = createIdentity("bart","member:/org/human-resources"); 
-    
+    Identity bill = createIdentity("bill","redactor:/org/human-resources","validator:/org/finances");
+    Identity bart = createIdentity("bart","member:/org/human-resources");
+
     // configuring a mock node with the expected ACL
     List<AccessControlEntry> entries = new ArrayList<AccessControlEntry>();
     entries.add(new AccessControlEntry("*:/org/finance", PermissionType.READ));
@@ -83,67 +83,67 @@ public class TestUIPublicationPanel extends TestCase {
     AccessControlList acl = new AccessControlList("foo", entries);
     NodeImpl node = mock(NodeImpl.class);
     when(node.getACL()).thenReturn(acl);
-    
+
     State state = new State();
     state.setRoles(Arrays.asList(new String[] {"validator", "redactor"})); //
-    
+
     // make sure the actual code we test is not mocked!
     when(panel.isAuthorizedByRole(any(State.class), any(Identity.class), any(NodeImpl.class))).thenCallRealMethod();
-    
-    assertTrue("tom should be allowed", panel.isAuthorizedByRole(state, tom, node)); 
+
+    assertTrue("tom should be allowed", panel.isAuthorizedByRole(state, tom, node));
     assertTrue("bill should be allowed", panel.isAuthorizedByRole(state, bill, node));
     assertFalse("bart should not be allowed", panel.isAuthorizedByRole(state, bart, node));
   }
-  
-  
+
+
   public void testIsAuthorizedByMemberships() throws Exception {
     UIPublicationPanel panel = mock(UIPublicationPanel.class);
 
     Identity tom = createIdentity("tom","validator:/org/human-resources");
     Identity bill = createIdentity("bill","author:/CA/alerteInformatique","validator:/CA/informations");
-    
+
     List<String> memberships = new ArrayList<String>();
     memberships.add("author:/CA/communicationDG");
     memberships.add("author:/CA/alerteSanitaire");
     memberships.add("author:/CA/alerteInformatique");
     memberships.add("author:/CA/informations");
-    
+
     State state = new State();
-    state.setMemberships(memberships); 
-    
+    state.setMemberships(memberships);
+
     // make sure the actual code we test is not mocked!
     when(panel.isAuthorizedByMembership(any(State.class), any(Identity.class))).thenCallRealMethod();
-    
-    assertFalse("tom should not be allowed", panel.isAuthorizedByMembership(state, tom)); 
+
+    assertFalse("tom should not be allowed", panel.isAuthorizedByMembership(state, tom));
     assertTrue("bill should be allowed", panel.isAuthorizedByMembership(state, bill));
   }
-  
+
   public void testIsAuthorizedByMembership() throws Exception {
     UIPublicationPanel panel = mock(UIPublicationPanel.class);
-    
+
     Identity tom = createIdentity("tom","validator:/org/human-resources");
     Identity bill = createIdentity("bill","redactor:/org/human-resources","redactor:/org/finance");
 
     State state = new State();
-    state.setMembership("redactor:/org/finance"); 
-    
+    state.setMembership("redactor:/org/finance");
+
     // make sure the actual code we test is not mocked!
     when(panel.isAuthorizedByMembership(any(State.class), any(Identity.class))).thenCallRealMethod();
-       
-    assertFalse("tom should not be allowed", panel.isAuthorizedByMembership(state, tom)); 
+
+    assertFalse("tom should not be allowed", panel.isAuthorizedByMembership(state, tom));
     assertTrue("bill should be allowed", panel.isAuthorizedByMembership(state, bill));
   }
-  
-  
+
+
   public void testCheckAllowed() throws Exception {
     UIPublicationPanel panel = mock(UIPublicationPanel.class);
-    
+
     // mock the identity registry by our users
     IdentityRegistry registry = new IdentityRegistry(null);
     registerUser(registry, "tom","validator:/org/human-resources");
     registerUser(registry, "bill","redactor:/org/human-resources","validator:/org/finances");
     when(panel.getApplicationComponent(IdentityRegistry.class)).thenReturn(registry);
-    
+
     // configuring a mock node with the expected ACL
     List<AccessControlEntry> entries = new ArrayList<AccessControlEntry>();
     entries.add(new AccessControlEntry("*:/org/finances", PermissionType.READ));
@@ -151,16 +151,16 @@ public class TestUIPublicationPanel extends TestCase {
     AccessControlList acl = new AccessControlList("foo", entries);
     NodeImpl node = mock(NodeImpl.class);
     when(node.getACL()).thenReturn(acl);
-    
+
     State state = new State();
-    state.setMembership("redactor:/org/finances"); 
-    state.setRole("validator"); 
-    
+    state.setMembership("redactor:/org/finances");
+    state.setRole("validator");
+
     // make sure the actual code we test is not mocked!
     when(panel.canReachState(any(State.class), anyString(), any(NodeImpl.class))).thenCallRealMethod();
     when(panel.isAuthorizedByMembership(any(State.class), any(Identity.class))).thenCallRealMethod();
     when(panel.isAuthorizedByRole(any(State.class), any(Identity.class), any(NodeImpl.class))).thenCallRealMethod();
-    
+
     assertTrue("tom should be allowed", panel.canReachState(state, "tom", node));  // not allowed by membership, allowed by role
     assertFalse("bill should be allowed", panel.canReachState(state, "bill", node)); // not allowed by membership, not allowed by role
 
@@ -186,5 +186,5 @@ public class TestUIPublicationPanel extends TestCase {
     Identity identity = new Identity(userId,membershipEntries);
     return identity;
   }
-  
+
 }

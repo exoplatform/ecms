@@ -36,35 +36,35 @@ import org.jbpm.graph.exe.ExecutionContext;
  * Created by The eXo Platform SARL
  * Author : Pham Xuan Hoa
  *          hoa.pham@exoplatform.com
- * Dec 19, 2007  
+ * Dec 19, 2007
  */
 public class InitialActionHandler implements ActionHandler {
-  
-  private static final long serialVersionUID = 1L;      
-  
+
+  private static final long serialVersionUID = 1L;
+
   public void execute(ExecutionContext context) throws Exception {
     initialVariables(context);
     ProcessUtil.requestForValidation(context);
   }
-  
+
   protected void initialVariables(ExecutionContext context) throws Exception {
     String actionName = (String) context.getVariable("actionName");
     String nodePath = (String) context.getVariable("nodePath");
     String srcPath = (String) context.getVariable("srcPath");
-    String srcWorkspace = (String) context.getVariable("srcWorkspace");    
-    String repository = (String) context.getVariable("repository");    
+    String srcWorkspace = (String) context.getVariable("srcWorkspace");
+    String repository = (String) context.getVariable("repository");
     ContextInstance contextInstance = context.getContextInstance();
     contextInstance.setVariable("exocontainer", ((PortalContainer)ExoContainerContext.getCurrentContainer()).getName());
-    ProcessUtil.setCurrentLocation(context,srcWorkspace,nodePath);    
+    ProcessUtil.setCurrentLocation(context,srcWorkspace,nodePath);
     RepositoryService repositoryService = ProcessUtil.getService(context, RepositoryService.class);
     ActionServiceContainer actionServiceContainer = ProcessUtil.getService(context, ActionServiceContainer.class);
     ManageableRepository manageableRepository = repositoryService.getRepository(repository);
-    Session session = manageableRepository.getSystemSession(srcWorkspace);   
+    Session session = manageableRepository.getSystemSession(srcWorkspace);
     Node actionableNode = (Node) session.getItem(srcPath);
     if(!actionableNode.isNodeType("exo:actionable")) {
         actionableNode = (Node) session.getItem(nodePath);
-    } 
-    
+    }
+
     Node actionNode = actionServiceContainer.getAction(actionableNode, actionName);
     /* incase of workflow publication */
     if (actionNode == null) actionNode = actionableNode;
@@ -74,7 +74,7 @@ public class InitialActionHandler implements ActionHandler {
     fillVariables(actionNode,ProcessUtil.EXO_TRASH_LOCATION,context);
     session.logout();
   }
-  
+
   private void fillVariables(Node node,String nodeType,ExecutionContext context) throws Exception {
     NodeTypeManager nodeTypeManager = node.getSession().getWorkspace().getNodeTypeManager();
     NodeType publicationable = nodeTypeManager.getNodeType(nodeType);

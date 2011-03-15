@@ -79,11 +79,11 @@ public class UIImportNode extends UIForm implements UIPopupComponent {
 //  public static final String SYS_VIEW                    = "sysview";
 
   public static final String FILE_UPLOAD                 = "upload";
-  
+
   public static final String IMPORT_BEHAVIOR             = "behavior";
-  
+
   public static final String VERSION_HISTORY_FILE_UPLOAD = "versionHistory";
-  
+
   public static final String MAPPING_FILE                = "mapping.properties";
 
   public UIImportNode() throws Exception {
@@ -94,7 +94,7 @@ public class UIImportNode extends UIForm implements UIPopupComponent {
     addUIFormInput(uiFileUpload);
     addUIFormInput(new UIFormSelectBox(IMPORT_BEHAVIOR, IMPORT_BEHAVIOR, null));
     // Disabling the size limit since it makes no sense in the import case
-    UIFormUploadInput uiHistoryFileUpload = 
+    UIFormUploadInput uiHistoryFileUpload =
       new UIFormUploadInput(VERSION_HISTORY_FILE_UPLOAD, VERSION_HISTORY_FILE_UPLOAD, 0);
     uiHistoryFileUpload.setAutoUpload(true);
     addUIFormInput(uiHistoryFileUpload);
@@ -113,27 +113,27 @@ public class UIImportNode extends UIForm implements UIPopupComponent {
     RequestContext context = RequestContext.getCurrentInstance();
     ResourceBundle res = context.getApplicationResourceBundle();
     importBehavior.add(new SelectItemOption<String>(
-        res.getString("Import.Behavior.type" + 
-            Integer.toString(ImportUUIDBehavior.IMPORT_UUID_CREATE_NEW)), 
+        res.getString("Import.Behavior.type" +
+            Integer.toString(ImportUUIDBehavior.IMPORT_UUID_CREATE_NEW)),
         Integer.toString(ImportUUIDBehavior.IMPORT_UUID_CREATE_NEW)));
     importBehavior.add(new SelectItemOption<String>(
-        res.getString("Import.Behavior.type" + 
-            Integer.toString(ImportUUIDBehavior.IMPORT_UUID_COLLISION_REMOVE_EXISTING)), 
+        res.getString("Import.Behavior.type" +
+            Integer.toString(ImportUUIDBehavior.IMPORT_UUID_COLLISION_REMOVE_EXISTING)),
         Integer.toString(ImportUUIDBehavior.IMPORT_UUID_COLLISION_REMOVE_EXISTING)));
     importBehavior.add(new SelectItemOption<String>(
-        res.getString("Import.Behavior.type" + 
-            Integer.toString(ImportUUIDBehavior.IMPORT_UUID_COLLISION_REPLACE_EXISTING)), 
+        res.getString("Import.Behavior.type" +
+            Integer.toString(ImportUUIDBehavior.IMPORT_UUID_COLLISION_REPLACE_EXISTING)),
         Integer.toString(ImportUUIDBehavior.IMPORT_UUID_COLLISION_REPLACE_EXISTING)));
     importBehavior.add(new SelectItemOption<String>(
-        res.getString("Import.Behavior.type" + 
-            Integer.toString(ImportUUIDBehavior.IMPORT_UUID_COLLISION_THROW)), 
+        res.getString("Import.Behavior.type" +
+            Integer.toString(ImportUUIDBehavior.IMPORT_UUID_COLLISION_THROW)),
         Integer.toString(ImportUUIDBehavior.IMPORT_UUID_COLLISION_THROW)));
     getUIFormSelectBox(IMPORT_BEHAVIOR).setOptions(importBehavior);
   }
 
   public void deActivate() throws Exception {
   }
-  
+
   private boolean validHistoryUploadFile(Event<?> event) throws Exception {
     UIFormUploadInput inputHistory = getUIInput(VERSION_HISTORY_FILE_UPLOAD);
     UIApplication uiApp = getAncestorOfType(UIApplication.class);
@@ -148,35 +148,35 @@ public class UIImportNode extends UIForm implements UIPopupComponent {
       entry = zipInputStream.getNextEntry();
     }
     zipInputStream.close();
-    uiApp.addMessage(new ApplicationMessage("UIImportNode.msg.history-invalid-content", null, 
+    uiApp.addMessage(new ApplicationMessage("UIImportNode.msg.history-invalid-content", null,
         ApplicationMessage.WARNING));
     event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
     return false;
   }
-  
+
   private void importHistory(
-      NodeImpl versionableNode, 
-      InputStream versionHistoryStream, 
-      String baseVersionUuid, 
-      String[] predecessors, 
+      NodeImpl versionableNode,
+      InputStream versionHistoryStream,
+      String baseVersionUuid,
+      String[] predecessors,
       String versionHistory) throws RepositoryException, IOException {
-    VersionHistoryImporter versionHistoryImporter = 
+    VersionHistoryImporter versionHistoryImporter =
       new VersionHistoryImporter(versionableNode, versionHistoryStream, baseVersionUuid, predecessors, versionHistory);
     versionHistoryImporter.doImport();
   }
-  
+
   private Map<String, String> getMapImportHistory() throws Exception  {
     UIFormUploadInput inputHistory = getUIInput(VERSION_HISTORY_FILE_UPLOAD);
     ZipInputStream zipInputStream = new ZipInputStream(inputHistory.getUploadDataAsStream());
     ByteArrayOutputStream out= new ByteArrayOutputStream();
-    byte[] data  = new byte[1024];   
+    byte[] data  = new byte[1024];
     ZipEntry entry = zipInputStream.getNextEntry();
     Map<String, String> mapHistoryValue = new HashMap<String, String>();
     while(entry != null) {
       int available = -1;
       if(entry.getName().equals(MAPPING_FILE)) {
         while ((available = zipInputStream.read(data, 0, 1024)) > -1) {
-          out.write(data, 0, available); 
+          out.write(data, 0, available);
         }
         InputStream inputStream = new ByteArrayInputStream(out.toByteArray());
         BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
@@ -199,12 +199,12 @@ public class UIImportNode extends UIForm implements UIPopupComponent {
     zipInputStream.close();
     return mapHistoryValue;
   }
-  
+
   private String getBaseVersionUUID(String valueHistory) {
     String[] arrHistoryValue = valueHistory.split(";");
     return arrHistoryValue[1];
   }
-  
+
   private String[] getPredecessors(String valueHistory) {
     String[] arrHistoryValue = valueHistory.split(";");
     String strPredecessors = arrHistoryValue[1];
@@ -213,31 +213,31 @@ public class UIImportNode extends UIForm implements UIPopupComponent {
     }
     return new String[] { strPredecessors };
   }
-  
+
   private String getVersionHistory(String valueHistory) {
     String[] arrHistoryValue = valueHistory.split(";");
     return arrHistoryValue[0];
   }
-  
+
   private void processImportHistory(Node currentNode) throws Exception {
     UIFormUploadInput inputHistory = getUIInput(VERSION_HISTORY_FILE_UPLOAD);
     Map<String, String> mapHistoryValue = getMapImportHistory();
     for(String uuid : mapHistoryValue.keySet()) {
       ZipInputStream zipInputStream = new ZipInputStream(new BufferedInputStream(inputHistory.getUploadDataAsStream()));
-      byte[] data  = new byte[1024];   
+      byte[] data  = new byte[1024];
       ByteArrayOutputStream out= new ByteArrayOutputStream();
       ZipEntry entry = zipInputStream.getNextEntry();
       while(entry != null) {
         int available = -1;
         if(entry.getName().equals(uuid + ".xml")) {
           while ((available = zipInputStream.read(data, 0, 1024)) > -1) {
-            out.write(data, 0, available); 
+            out.write(data, 0, available);
           }
           try {
             ByteArrayInputStream inputStream = new ByteArrayInputStream(out.toByteArray());
             String value = mapHistoryValue.get(uuid);
             Node versionableNode = currentNode.getSession().getNodeByUUID(uuid);
-            importHistory((NodeImpl)versionableNode, inputStream, 
+            importHistory((NodeImpl)versionableNode, inputStream,
                 getBaseVersionUUID(value), getPredecessors(value), getVersionHistory(value));
             currentNode.getSession().save();
           } catch(ItemNotFoundException item) {
@@ -258,7 +258,7 @@ public class UIImportNode extends UIForm implements UIPopupComponent {
       zipInputStream.close();
     }
   }
-  
+
   private String getMimeType(String fileName) throws IOException {
     DMSMimeTypeResolver resolver = DMSMimeTypeResolver.getInstance();
     return resolver.getMimeType(fileName);
@@ -275,9 +275,9 @@ public class UIImportNode extends UIForm implements UIPopupComponent {
       Session session = currentNode.getSession() ;
       String nodePath = currentNode.getPath();
       uiExplorer.addLockToken(currentNode);
-      
+
       if (input.getUploadResource() == null) {
-        uiApp.addMessage(new ApplicationMessage("UIImportNode.msg.filename-invalid", null, 
+        uiApp.addMessage(new ApplicationMessage("UIImportNode.msg.filename-invalid", null,
             ApplicationMessage.WARNING));
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
         return;
@@ -285,7 +285,7 @@ public class UIImportNode extends UIForm implements UIPopupComponent {
       if(inputHistory.getUploadResource() != null) {
         String mimeTypeHistory = uiImport.getMimeType(inputHistory.getUploadResource().getFileName());
         if(!mimeTypeHistory.equals("application/zip")) {
-          uiApp.addMessage(new ApplicationMessage("UIImportNode.msg.history-invalid-type", null, 
+          uiApp.addMessage(new ApplicationMessage("UIImportNode.msg.history-invalid-type", null,
               ApplicationMessage.WARNING));
           event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
           return;
@@ -300,13 +300,13 @@ public class UIImportNode extends UIForm implements UIPopupComponent {
         ZipInputStream zipInputStream = new ZipInputStream(new BufferedInputStream(input.getUploadDataAsStream()));
         xmlInputStream = Utils.extractFirstEntryFromZipFile(zipInputStream);
       } else {
-        uiApp.addMessage(new ApplicationMessage("UIImportNode.msg.mimetype-invalid", null, 
+        uiApp.addMessage(new ApplicationMessage("UIImportNode.msg.mimetype-invalid", null,
             ApplicationMessage.WARNING));
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
         return;
       }
       try {
-        int importBehavior = 
+        int importBehavior =
           Integer.parseInt(uiImport.getUIFormSelectBox(IMPORT_BEHAVIOR).getValue());
         //Process import
         session.importXML(nodePath, xmlInputStream, importBehavior);
@@ -321,17 +321,16 @@ public class UIImportNode extends UIForm implements UIPopupComponent {
           event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
           return;
         }
-        
+
         //Process import version history
         if(inputHistory.getUploadResource() != null) {
           uiImport.processImportHistory(currentNode);
         }
-          // TODO
           // if an import fails, it's possible when source xml contains errors,
           // user may fix the fail caused items and save session (JSR-170, 7.3.7 Session Import Methods).
-          // Or user may decide to make a rollback - make Session.refresh(false)  
+          // Or user may decide to make a rollback - make Session.refresh(false)
           // So, we should make rollback in case of error...
-          // see Session.importXML() throws IOException, PathNotFoundException, ItemExistsException, 
+          // see Session.importXML() throws IOException, PathNotFoundException, ItemExistsException,
           // ConstraintViolationException, VersionException, InvalidSerializedDataException, LockException, RepositoryException
           // otherwise ECM FileExplolrer crashes as it assume all items were imported correct.
 
@@ -340,7 +339,7 @@ public class UIImportNode extends UIForm implements UIPopupComponent {
       } catch (AccessDeniedException ace) {
         log.error("XML Import error " + ace, ace);
         session.refresh(false);
-        uiApp.addMessage(new ApplicationMessage("UIImportNode.msg.access-denied", null, 
+        uiApp.addMessage(new ApplicationMessage("UIImportNode.msg.access-denied", null,
             ApplicationMessage.WARNING));
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
         return;
@@ -356,7 +355,7 @@ public class UIImportNode extends UIForm implements UIPopupComponent {
       } catch (Exception ise) {
         log.error("XML Import error " + ise, ise);
         session.refresh(false);
-        uiApp.addMessage(new ApplicationMessage("UIImportNode.msg.filetype-error", null, 
+        uiApp.addMessage(new ApplicationMessage("UIImportNode.msg.filetype-error", null,
             ApplicationMessage.WARNING));
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
         return;

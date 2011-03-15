@@ -54,16 +54,16 @@ public abstract class BaseTest extends BasicTestCase {
 
   protected void deployProcess(String process, String[] files) throws IOException{
     URL url = new URL(PROCESS_PATH + process);
-    InputStream is = url.openStream();    
+    InputStream is = url.openStream();
     ProcessDefinition processDefinition = ProcessDefinition.parseXmlInputStream(is);
-    
+
     if (files != null) {
       for (int i = 0; i < files.length; i++) {
         String file = files[i];
         url = new URL(PROCESS_PATH + file);
-        processDefinition.getFileDefinition().addFile(file, url.openStream());        
+        processDefinition.getFileDefinition().addFile(file, url.openStream());
       }
-    }    
+    }
     ((WorkflowServiceContainerImpl) workflowServiceContainer).openJbpmContext().deployProcessDefinition(processDefinition);
   }
 

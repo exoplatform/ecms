@@ -25,7 +25,7 @@ import org.exoplatform.webui.form.wysiwyg.UIFormWYSIWYGInput;
  * Created by The eXo Platform SAS
  * @author : Hoa.Pham
  *          hoa.pham@exoplatform.com
- * Jun 23, 2008  
+ * Jun 23, 2008
  */
 public class UIFormWYSIWYGField extends DialogFormField {
   private final String TOOBAR = "toolbar".intern();
@@ -43,7 +43,7 @@ public class UIFormWYSIWYGField extends DialogFormField {
   }
 
   @SuppressWarnings("unchecked")
-  public <T extends UIFormInputBase> T createUIFormInput() throws Exception {    		          
+  public <T extends UIFormInputBase> T createUIFormInput() throws Exception {
     UIFormWYSIWYGInput wysiwyg = new UIFormWYSIWYGInput(name, name, defaultValue);
     parseOptions();
     wysiwyg.setToolBarName(toolbarName);
@@ -52,7 +52,7 @@ public class UIFormWYSIWYGField extends DialogFormField {
     wysiwyg.setHeight(height);
     if(validateType != null) {
       DialogFormUtil.addValidators(wysiwyg, validateType);
-    }    
+    }
     return (T)wysiwyg;
   }
 
@@ -61,11 +61,11 @@ public class UIFormWYSIWYGField extends DialogFormField {
       toolbarName = UIFormWYSIWYGInput.BASIC_TOOLBAR;
     }else if("default".equals(options) || options == null) {
       toolbarName = UIFormWYSIWYGInput.DEFAULT_TOOLBAR;
-    }else if(options.indexOf(",")>0){				    
-      for(String s: options.split(",")) {				
+    }else if(options.indexOf(",")>0){
+      for(String s: options.split(",")) {
         setPredefineOptions(s);
       }
-    }else if(options.indexOf(":")>0) {			
+    }else if(options.indexOf(":")>0) {
       setPredefineOptions(options);
     }else {
       toolbarName = UIFormWYSIWYGInput.DEFAULT_TOOLBAR;

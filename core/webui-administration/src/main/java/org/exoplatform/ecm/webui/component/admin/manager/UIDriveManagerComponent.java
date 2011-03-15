@@ -30,7 +30,7 @@ import org.exoplatform.webui.ext.manager.UIAbstractManagerComponent;
  * Created by The eXo Platform SAS
  * Author : eXoPlatform
  *          nicolas.filotto@exoplatform.com
- * 15 mai 2009  
+ * 15 mai 2009
  */
 @ComponentConfig(
      events = {
@@ -47,10 +47,10 @@ public class UIDriveManagerComponent extends UIAbstractManagerComponent {
       uiWorkingArea.setChild(UIDriveManager.class) ;
       event.getRequestContext().addUIComponentToUpdateByAjax(uiWorkingArea) ;
     }
-  }  
+  }
 
   @Override
   public Class<? extends UIAbstractManager> getUIAbstractManagerClass() {
     return UIDriveManager.class;
-  }  
+  }
 }

@@ -44,7 +44,7 @@ public class FCKDynamicSkinPlugin extends FCKConfigPlugin {
     Collection<SkinConfig> collecionSkin = skinService.getPortalSkins(editorContext.getSkinName());
     for (SkinConfig skinConfig : collecionSkin) {
       cssMergedBuffer = cssMergedBuffer.append(skinConfig.getCSSPath()).append(",");
-    }    
+    }
     SkinConfig skinConfig = skinService.getSkin(editorContext.getPortalName(), editorContext.getSkinName());
     if (skinConfig != null) {
       cssMergedBuffer = cssMergedBuffer.append(skinConfig.getCSSPath());
@@ -52,7 +52,7 @@ public class FCKDynamicSkinPlugin extends FCKConfigPlugin {
     String cssMerged = cssMergedBuffer.toString();
     if (cssMerged.endsWith(","))
       cssMerged = cssMerged.substring(0, cssMerged.length() - 1);
-    
+
     editorConfig.put("EditorAreaCSS", cssMerged);
   }
 }

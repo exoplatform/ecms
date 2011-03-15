@@ -34,11 +34,11 @@ import org.exoplatform.webui.form.UIFormInputSet;
  * Jun 28, 2006
  */
 public class UIViewsInputSet extends UIFormInputSet {
-  
+
   public UIViewsInputSet(String name) throws Exception {
     super(name);
   }
-  
+
   public String getViewsSelected() throws Exception {
     StringBuilder selectedView = new StringBuilder() ;
     String repository = getAncestorOfType(UIECMAdminPortlet.class).getPreferenceRepository() ;
@@ -49,7 +49,7 @@ public class UIViewsInputSet extends UIFormInputSet {
       if(checked){
         if(selectedView.length() > 0) selectedView.append(", ") ;
         selectedView.append(viewName) ;
-      } 
+      }
     }
     if(selectedView.length() < 1 ) {
       throw new MessageException(new ApplicationMessage("UIDriveForm.msg.drive-views-invalid",
@@ -57,7 +57,7 @@ public class UIViewsInputSet extends UIFormInputSet {
     }
     return selectedView.toString() ;
   }
-  
+
   private void clear() throws Exception {
     String repository = getAncestorOfType(UIECMAdminPortlet.class).getPreferenceRepository() ;
     List<ViewConfig> views_ = getApplicationComponent(ManageViewService.class).getAllViews(repository);
@@ -68,8 +68,8 @@ public class UIViewsInputSet extends UIFormInputSet {
       }else{
         addUIFormInput(new UIFormCheckBoxInput<Boolean>(viewName, viewName, null)) ;
       }
-      
-    }    
+
+    }
   }
 
   public void update(DriveData drive) throws Exception {

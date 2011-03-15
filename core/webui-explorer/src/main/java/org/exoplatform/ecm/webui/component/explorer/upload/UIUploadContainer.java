@@ -40,7 +40,7 @@ import org.exoplatform.webui.event.EventListener;
  */
 @ComponentConfig(
     template = "app:/groovy/webui/component/explorer/UITabPaneWithAction.gtmpl",
-    events = { 
+    events = {
         @EventConfig(listeners = UIUploadContainer.CloseActionListener.class),
         @EventConfig(listeners = UIUploadContainer.AddMetadataActionListener.class)
     }
@@ -50,20 +50,20 @@ public class UIUploadContainer extends UIContainer {
   private Node uploadedNode_;
   private List<Node> listUploadedNode_ = new ArrayList<Node>();
   private String[] arrayActions = new String[] {"Close"};
-  
+
   public UIUploadContainer() throws Exception {
     addChild(UIUploadContent.class, null, null) ;
   }
-  
+
   public void setActions(String[] arrValueActions) {
-    arrayActions = arrValueActions ; 
+    arrayActions = arrValueActions ;
   }
-  
+
   public String[] getActions() {
     return arrayActions;
   }
-  
-  public Node getEditNode(String nodeType) throws Exception { 
+
+  public Node getEditNode(String nodeType) throws Exception {
     try {
       Item primaryItem = uploadedNode_.getPrimaryItem() ;
       if (primaryItem == null || !primaryItem.isNode()) return uploadedNode_ ;
@@ -74,18 +74,18 @@ public class UIUploadContainer extends UIContainer {
     } catch(Exception e) { }
     return uploadedNode_ ;
   }
-  
+
   public void setUploadedNode(Node node) throws Exception { uploadedNode_ = node ; }
   public Node getUploadedNode() { return uploadedNode_ ; }
-  
-  public void setListUploadedNode(List<Node> listNode) throws Exception { 
-    listUploadedNode_ = listNode ; 
+
+  public void setListUploadedNode(List<Node> listNode) throws Exception {
+    listUploadedNode_ = listNode ;
   }
-  
-  public List<Node> getListUploadedNode() { 
-    return listUploadedNode_; 
+
+  public List<Node> getListUploadedNode() {
+    return listUploadedNode_;
   }
-  
+
   static public class CloseActionListener extends EventListener<UIUploadContainer> {
     public void execute(Event<UIUploadContainer> event) throws Exception {
       UIUploadManager uiUploadManager = event.getSource().getParent() ;
@@ -99,11 +99,11 @@ public class UIUploadContainer extends UIContainer {
         event.getRequestContext().addUIComponentToUpdateByAjax(uiLanguageManager) ;
         return ;
       }
-      UIJCRExplorer uiExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class) ;     
+      UIJCRExplorer uiExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class) ;
       uiExplorer.cancelAction() ;
     }
   }
-  
+
   static public class AddMetadataActionListener extends EventListener<UIUploadContainer> {
     public void execute(Event<UIUploadContainer> event) throws Exception {
       UIUploadManager uiUploadManager = event.getSource().getParent() ;

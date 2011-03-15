@@ -33,12 +33,12 @@ import org.exoplatform.webui.ext.manager.UIAbstractManager;
 public class UINamespaceManager extends UIAbstractManager {
 
   public UINamespaceManager() throws Exception {addChild(UINamespaceList.class, null, null) ;}
-  
+
   public void refresh ()throws Exception {
     UINamespaceList list = getChild(UINamespaceList.class) ;
     list.updateGrid() ;
   }
-  
+
   public void initPopup() throws Exception {
     UIPopupWindow uiPopup = getChild(UIPopupWindow.class) ;
     if(uiPopup == null) {
@@ -49,7 +49,7 @@ public class UINamespaceManager extends UIAbstractManager {
       uiPopup.setShow(true) ;
       uiPopup.setResizable(true) ;
       return ;
-    } 
+    }
     uiPopup.setRendered(true) ;
     uiPopup.setShow(true) ;
   }

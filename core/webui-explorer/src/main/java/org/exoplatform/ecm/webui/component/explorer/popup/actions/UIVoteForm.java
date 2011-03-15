@@ -37,26 +37,26 @@ import org.exoplatform.webui.event.EventListener;
  * Author : Tran The Trong
  *          trongtt@gmail.com
  * Jan 30, 2006
- * 10:45:01 AM 
+ * 10:45:01 AM
  */
 @ComponentConfig(
     template = "app:/groovy/webui/component/UIVoteForm.gtmpl",
-    events = {    
+    events = {
         @EventConfig(listeners = UIVoteForm.VoteActionListener.class),
         @EventConfig(listeners = UIVoteForm.CancelActionListener.class)
     }
 )
 public class UIVoteForm extends UIComponent implements UIPopupComponent {
   public UIVoteForm() throws Exception {}
-  
+
   public void activate() throws Exception {}
   public void deActivate() throws Exception {}
-  
-  public double getRating() throws Exception { 
+
+  public double getRating() throws Exception {
     return getAncestorOfType(UIJCRExplorer.class).getCurrentNode().
                                                   getProperty("exo:votingRate").getDouble() ;
   }
-  
+
   static  public class VoteActionListener extends EventListener<UIVoteForm> {
     public void execute(Event<UIVoteForm> event) throws Exception {
       UIJCRExplorer uiExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class) ;
@@ -68,15 +68,15 @@ public class UIVoteForm extends UIComponent implements UIPopupComponent {
       uiExplorer.addLockToken(currentNode);
       String language = uiDocumentInfo.getLanguage() ;
       double objId = Double.parseDouble(event.getRequestContext().getRequestParameter(OBJECTID)) ;
-            
+
       VotingService votingService = uiExplorer.getApplicationComponent(VotingService.class) ;
       if(votingService.isVoted(uiExplorer.getCurrentNode(), userName, language)) {
-        uiApp.addMessage(new ApplicationMessage("UIVoteForm.msg.vote-restriction", null, 
+        uiApp.addMessage(new ApplicationMessage("UIVoteForm.msg.vote-restriction", null,
             ApplicationMessage.WARNING));
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
         return;
       }
-      
+
       votingService.vote(uiExplorer.getCurrentNode(), objId, userName, language) ;
       event.getSource().getAncestorOfType(UIPopupContainer.class).cancelPopupAction() ;
       uiExplorer.updateAjax(event) ;

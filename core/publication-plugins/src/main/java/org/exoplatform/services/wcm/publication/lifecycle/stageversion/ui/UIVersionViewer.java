@@ -39,47 +39,47 @@ import org.exoplatform.webui.core.lifecycle.Lifecycle;
  * Mar 5, 2009
  */
 @ComponentConfig(
-  lifecycle = Lifecycle.class    
+  lifecycle = Lifecycle.class
 )
 
 public class UIVersionViewer extends UIBaseNodePresentation {
 
   /** The original node. */
   private NodeLocation originalNodeLocation;
-  
+
   /** The node. */
   private NodeLocation nodeLocation;
-  
+
   /** The resource resolver. */
   private JCRResourceResolver resourceResolver ;
-  
+
   /** The Constant log. */
   public static final Log log = ExoLogger.getLogger("wcm:StageAndVersionPubliciation");
-  
+
   /* (non-Javadoc)
    * @see org.exoplatform.ecm.webui.presentation.UIBaseNodePresentation#getNode()
    */
   public Node getNode() throws Exception {
     return NodeLocation.getNodeByLocation(nodeLocation);
   }
-  
+
   /* (non-Javadoc)
    * @see org.exoplatform.ecm.webui.presentation.NodePresentation#setNode(javax.jcr.Node)
    */
   public void setNode(Node node) {
     nodeLocation = NodeLocation.make(node);
   }
-  
+
   /* (non-Javadoc)
    * @see org.exoplatform.ecm.webui.presentation.UIBaseNodePresentation#getOriginalNode()
    */
   public Node getOriginalNode() throws Exception {
     return NodeLocation.getNodeByLocation(originalNodeLocation);
   }
-  
+
   /**
    * Sets the original node.
-   * 
+   *
    * @param originalNode the new original node
    */
   public void setOriginalNode(Node originalNode) {
@@ -101,12 +101,12 @@ public class UIVersionViewer extends UIBaseNodePresentation {
     String userName = Util.getPortalRequestContext().getRemoteUser() ;
     try {
       String nodeType = getOriginalNode().getPrimaryNodeType().getName();
-      if(templateService.isManagedNodeType(nodeType)) 
+      if(templateService.isManagedNodeType(nodeType))
         return templateService.getTemplatePathByUser(false, nodeType, userName) ;
     } catch (Exception e) {}
     return null ;
   }
-  
+
   /* (non-Javadoc)
    * @see org.exoplatform.ecm.webui.presentation.UIBaseNodePresentation#getTemplatePath()
    */
@@ -123,10 +123,10 @@ public class UIVersionViewer extends UIBaseNodePresentation {
         DMSConfiguration dmsConfiguration = getApplicationComponent(DMSConfiguration.class);
         String workspace = dmsConfiguration.getConfig().getSystemWorkspace();
         resourceResolver = new JCRResourceResolver(repository, workspace, "exo:templateFile");
-    }catch (Exception e) {}    
-    return resourceResolver ;   
+    }catch (Exception e) {}
+    return resourceResolver ;
   }
-  
+
   /* (non-Javadoc)
    * @see org.exoplatform.ecm.webui.presentation.NodePresentation#getNodeType()
    */
@@ -142,21 +142,18 @@ public class UIVersionViewer extends UIBaseNodePresentation {
   }
 
   public UIComponent getCommentComponent() {
-  	return null;
+    return null;
   }
 
 public UIComponent getRemoveAttach() throws Exception {
-	// TODO Auto-generated method stub
-	return null;
+  return null;
 }
 
 public UIComponent getRemoveComment() throws Exception {
-	// TODO Auto-generated method stub
-	return null;
+  return null;
 }
 
 public UIComponent getUIComponent(String mimeType) throws Exception {
-	// TODO Auto-generated method stub
-	return null;
+  return null;
 }
 }

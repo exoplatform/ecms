@@ -33,7 +33,7 @@ import org.exoplatform.webui.core.UIContainer;
  * Created by The eXo Platform SARL
  * Author : Pham Tuan
  *          phamtuanchip@yahoo.de
- * Nov 15, 2006 10:08:29 AM 
+ * Nov 15, 2006 10:08:29 AM
  */
 
 @ComponentConfig()
@@ -43,28 +43,28 @@ public class UIActionViewTemplate extends UIContainer {
   private String documentType_ ;
   private Node node_ ;
 
-  public void setTemplateNode(Node node) throws Exception { 
+  public void setTemplateNode(Node node) throws Exception {
     node_ = node ;
     documentType_ = node.getPrimaryNodeType().getName() ;
   }
 
-  public String getViewTemplatePath(){    
+  public String getViewTemplatePath(){
     TemplateService templateService = getApplicationComponent(TemplateService.class) ;
     String userName = Util.getPortalRequestContext().getRemoteUser() ;
     try {
       return templateService.getTemplatePathByUser(false, documentType_, userName) ;
     } catch (Exception e) {
       return null ;
-    }         
+    }
   }
-  
+
   public String getPortalName() {
     ExoContainer container = ExoContainerContext.getCurrentContainer() ;
-    PortalContainerInfo containerInfo = 
-      (PortalContainerInfo)container.getComponentInstanceOfType(PortalContainerInfo.class) ;      
-    return containerInfo.getContainerName() ; 
+    PortalContainerInfo containerInfo =
+      (PortalContainerInfo)container.getComponentInstanceOfType(PortalContainerInfo.class) ;
+    return containerInfo.getContainerName() ;
   }
-  
+
   public String getWorkspaceName() throws Exception {
     return node_.getSession().getWorkspace().getName() ;
   }

@@ -51,37 +51,37 @@ import org.exoplatform.webui.event.EventListener;
     }
 )
 public class UIPublicationHistory extends UIComponentDecorator {
-  
+
   /** The ui page iterator_. */
   private UIPageIterator uiPageIterator_ ;
-  
+
   /** The current node_. */
   private NodeLocation currentNodeLocation ;
-  
+
   /**
    * Instantiates a new uI publication history.
-   * 
+   *
    * @throws Exception the exception
    */
   public UIPublicationHistory() throws Exception {
     uiPageIterator_ = createUIComponent(UIPageIterator.class, null, "PublicationLogListIterator");
     setUIComponent(uiPageIterator_) ;
   }
-  
+
   /**
    * Inits the.
-   * 
+   *
    * @param node the node
    */
   public void init(Node node) {
    currentNodeLocation = NodeLocation.make(node);
-  }  
-  
+  }
+
   /**
    * Gets the log.
-   * 
+   *
    * @return the log
-   * 
+   *
    * @throws NotInPublicationLifecycleException the not in publication lifecycle exception
    * @throws Exception the exception
    */
@@ -93,34 +93,34 @@ public class UIPublicationHistory extends UIComponentDecorator {
     for (Value value : values) {
       String logString = value.getString();
       VersionLog bean = VersionLog.toVersionLog(logString);
-      logs.add(bean); 
+      logs.add(bean);
     }
     return logs;
   }
-  
+
   /**
    * Update grid.
-   * 
+   *
    * @throws Exception the exception
    */
   @SuppressWarnings("unchecked")
-  public void updateGrid() throws Exception {   
+  public void updateGrid() throws Exception {
     ObjectPageList objPageList = new ObjectPageList(getLog(), 10) ;
     uiPageIterator_.setPageList(objPageList) ;
   }
-  
+
   /**
    * Gets the uI page iterator.
-   * 
+   *
    * @return the uI page iterator
    */
   public UIPageIterator getUIPageIterator() { return uiPageIterator_ ; }
-  
+
   /**
    * Gets the log list.
-   * 
+   *
    * @return the log list
-   * 
+   *
    * @throws Exception the exception
    */
   @SuppressWarnings("unchecked")
@@ -128,11 +128,11 @@ public class UIPublicationHistory extends UIComponentDecorator {
 
   /**
    * Gets the actions.
-   * 
+   *
    * @return the actions
    */
   public String[] getActions() {return new String[]{"Close"} ;}
-  
+
   /**
    * The listener interface for receiving closeAction events.
    * The class that is interested in processing a closeAction
@@ -141,117 +141,117 @@ public class UIPublicationHistory extends UIComponentDecorator {
    * component's <code>addCloseActionListener<code> method. When
    * the closeAction event occurs, that object's appropriate
    * method is invoked.
-   * 
+   *
    * @see CloseActionEvent
    */
   static public class CloseActionListener extends EventListener<UIPublicationHistory> {
-    
+
     /* (non-Javadoc)
      * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
      */
-    public void execute(Event<UIPublicationHistory> event) throws Exception {      
+    public void execute(Event<UIPublicationHistory> event) throws Exception {
       UIPublicationHistory uiPublicationLogList = event.getSource() ;
       UIPopupContainer uiPopupContainer = (UIPopupContainer) uiPublicationLogList.getAncestorOfType(UIPopupContainer.class);
       uiPopupContainer.deActivate();
       event.getRequestContext().addUIComponentToUpdateByAjax(uiPopupContainer);
     }
   }
-  
+
   /**
    * The Class HistoryBean.
    */
   public class HistoryBean {
-    
+
     /** The date. */
     private String date;
-    
+
     /** The new state. */
     private String newState;
-    
+
     /** The user. */
     private String user;
-    
+
     /** The description. */
     private String description;
-    
+
     /**
      * Gets the date.
-     * 
+     *
      * @return the date
      */
     public String getDate() { return date; }
-    
+
     /**
      * Sets the date.
-     * 
+     *
      * @param date the new date
      */
     public void setDate(String date) { this.date = date; }
-    
+
     /**
      * Gets the description.
-     * 
+     *
      * @return the description
      */
     public String getDescription() { return description; }
-    
+
     /**
      * Sets the description.
-     * 
+     *
      * @param description the new description
      */
     public void setDescription(String description) { this.description = description; }
-    
+
     /**
      * Gets the new state.
-     * 
+     *
      * @return the new state
      */
     public String getNewState() { return newState; }
-    
+
     /**
      * Sets the new state.
-     * 
+     *
      * @param newState the new new state
      */
     public void setNewState(String newState) { this.newState = newState; }
-    
+
     /**
      * Gets the user.
-     * 
+     *
      * @return the user
      */
     public String getUser() { return user; }
-    
+
     /**
      * Sets the user.
-     * 
+     *
      * @param user the new user
      */
     public void setUser(String user) { this.user = user; }
-    
+
     /**
      * Updated by Nguyen Van Chien.
-     * 
+     *
      * @param stringInput the string input
-     * 
+     *
      * @return the string
      */
-    public String formatStringByDateTime(String stringInput) {      
+    public String formatStringByDateTime(String stringInput) {
       String dateYear = stringInput.substring(0, 4);
       String dateMonth = stringInput.substring(4, 6);
       String dateDay = stringInput.substring(6, 8);
       String dateHour = stringInput.substring(9, 11);
       String dateMinute = stringInput.substring(11, 13);
-      String dateSecond = stringInput.substring(13, 15);      
-      StringBuilder builder = new StringBuilder();      
+      String dateSecond = stringInput.substring(13, 15);
+      StringBuilder builder = new StringBuilder();
       builder.append(dateMonth).append("/")
             .append(dateDay).append("/")
             .append(dateYear).append(" ")
             .append(dateHour).append(":")
             .append(dateMinute).append(":")
             .append(dateSecond);
-      
+
       return builder.toString();
     }
   }

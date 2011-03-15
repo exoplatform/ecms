@@ -22,9 +22,9 @@ import org.exoplatform.services.jcr.ext.common.SessionProvider;
 
 /**
  * Created by The eXo Platform SAS
- * Author : Hoa Pham	
+ * Author : Hoa Pham
  *          hoa.phamvu@exoplatform.com
- * Oct 22, 2008  
+ * Oct 22, 2008
  */
 public class RemovePortalArtifactsServiceImpl implements RemovePortalArtifactsService {
 

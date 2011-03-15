@@ -31,7 +31,7 @@ public interface LinkManager {
 
   /**
    * Creates a new link, add it to the parent node and returns the link
-   * 
+   *
    * @param parent The parent node of the link
    * @param linkType The primary node type of the link must be a sub-type of
    *          exo:symlink, the default value is "exo:symlink"
@@ -43,7 +43,7 @@ public interface LinkManager {
   /**
    * Creates a new node of type exo:symlink, add it to the parent node and
    * returns the link node
-   * 
+   *
    * @param parent The parent node of the link to create
    * @param target The target of the link
    * @throws RepositoryException if the link cannot be created for any reason
@@ -52,7 +52,7 @@ public interface LinkManager {
 
   /**
    * Creates a new link, add it to the parent node and returns the link
-   * 
+   *
    * @param parent The parent node of the link
    * @param linkType The primary node type of the link must be a sub-type of
    *          exo:symlink, the default value is "exo:symlink"
@@ -66,7 +66,7 @@ public interface LinkManager {
 
   /**
    * Updates the target node of the given link
-   * 
+   *
    * @param link The link node to update
    * @param target The new target of the link
    * @throws RepositoryException if the link cannot be updated for any reason
@@ -75,7 +75,7 @@ public interface LinkManager {
 
   /**
    * Gets the target node of the given link
-   * 
+   *
    * @param link The node of type exo:symlink
    * @param system Indicates whether the target node must be retrieved using a
    *          session system or user session in case we cannot use the same
@@ -90,7 +90,7 @@ public interface LinkManager {
 
   /**
    * Gets the target node of the given link using the user session
-   * 
+   *
    * @param link The node of type exo:symlink
    * @throws ItemNotFoundException if the target node cannot be found
    * @throws RepositoryException if an unexpected error occurs while retrieving
@@ -101,25 +101,25 @@ public interface LinkManager {
   /**
    * Checks if the target node of the given link can be reached using the user
    * session
-   * 
+   *
    * @param link The node of type exo:symlink
    * @throws RepositoryException if an unexpected error occurs
    */
   public boolean isTargetReachable(Node link) throws RepositoryException;
-  
+
   /**
    * Checks if the target node of the given link can be reached using the user
    * session
-   * 
+   *
    * @param link The node of type exo:symlink
    * @param system
    * @throws RepositoryException if an unexpected error occurs
    */
-  public boolean isTargetReachable(Node link, boolean system) throws RepositoryException;  
+  public boolean isTargetReachable(Node link, boolean system) throws RepositoryException;
 
   /**
    * Indicates whether the given item is a link
-   * 
+   *
    * @param item the item to test
    * @return <code>true</code> if the node is a link, <code>false</code>
    *         otherwise
@@ -129,16 +129,16 @@ public interface LinkManager {
 
   /**
    * Gives the primary node type of the target
-   * 
+   *
    * @param link The node of type exo:symlink
    * @return the primary node type of the target
    * @throws RepositoryException if an unexpected error occurs
    */
   public String getTargetPrimaryNodeType(Node link) throws RepositoryException;
-  
+
   /**
    * Gives all links of the given node
-   * 
+   *
    * @param targetNode The target node to get links
    * @param linkType The type of link to get
    * @param repoName Name of the repository

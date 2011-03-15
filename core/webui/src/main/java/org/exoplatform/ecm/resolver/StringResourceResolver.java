@@ -28,20 +28,20 @@ import org.exoplatform.resolver.ResourceResolver;
  * Created by The eXo Platform SAS
  * @author : Hoa.Pham
  *          hoa.pham@exoplatform.com
- * May 6, 2008  
+ * May 6, 2008
  */
 public class StringResourceResolver extends ResourceResolver {
-  
+
   private String templateData ;
-  
+
   public StringResourceResolver(String templateData) {
     this.templateData = templateData ;
-  } 
-  
-  public InputStream getInputStream(String template) throws Exception {  
+  }
+
+  public InputStream getInputStream(String template) throws Exception {
     return new ByteArrayInputStream(templateData.getBytes());
   }
-  
+
   public List<InputStream> getInputStreams(String template) throws Exception {
     List<InputStream> list = new ArrayList<InputStream>();
     list.add(getInputStream(template)) ;

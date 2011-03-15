@@ -76,7 +76,7 @@ class SymLinkNodeEntry extends JcrNodeEntry
       try
       {
          Session session = link.getSession();
-         // XXX : NOTE target node is not removed.
+         // NOTE target node is not removed.
          // Since if it was created in JCR in some way (we do nothing about it here)
          // it should be removed via JCR actions, etc.
          link.remove();

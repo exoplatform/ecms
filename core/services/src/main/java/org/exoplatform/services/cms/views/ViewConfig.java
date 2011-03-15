@@ -24,18 +24,18 @@ import org.apache.commons.lang.StringUtils;
  * Created by The eXo Platform SARL
  * Author : Nguyen Quang Hung
  *          nguyenkequanghung@yahoo.com
- * Feb 27, 2006 
+ * Feb 27, 2006
  */
-public class ViewConfig {    
+public class ViewConfig {
   private String name ;
   private String permissions ;
   private String template ;
   private List<Tab> tabList = new ArrayList<Tab>() ;
 
   public  ViewConfig() { }
-  
+
   public String getName() { return this.name ; }
-  public void setName(String name) { this.name = name ; }  
+  public void setName(String name) { this.name = name ; }
 
   public String getPermissions() { return this.permissions ; }
   public void setPermissions(String permission) { this.permissions = permission ; }

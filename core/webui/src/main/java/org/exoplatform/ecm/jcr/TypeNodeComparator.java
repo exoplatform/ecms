@@ -47,11 +47,11 @@ public class TypeNodeComparator implements Comparator<javax.jcr.Node> {
       if(Preference.ASCENDING_ORDER.equals(order_)) return res ;
       return -res ;
     } else if ("file".equals(type1) && "file".equals(type2)) {
-      String mimeType1 = key1.nextToken() ; 
+      String mimeType1 = key1.nextToken() ;
       String mimeType2 = key2.nextToken() ;
       // sort by mime type
       res = mimeType1.compareToIgnoreCase(mimeType2) ;
-      if (res == 0) return key1.nextToken().compareToIgnoreCase(key2.nextToken()) ; 
+      if (res == 0) return key1.nextToken().compareToIgnoreCase(key2.nextToken()) ;
       // same mime type -> sort by name
       else if(Preference.ASCENDING_ORDER.equals(order_)) return res ;
       else return -res ;
@@ -74,14 +74,14 @@ public class TypeNodeComparator implements Comparator<javax.jcr.Node> {
         if(Preference.ASCENDING_ORDER.equals(order_)) {
           return mimeType1.compareToIgnoreCase(mimeType2);
         }
-        return mimeType2.compareToIgnoreCase(mimeType1);        
+        return mimeType2.compareToIgnoreCase(mimeType1);
       }
       if(Preference.ASCENDING_ORDER.equals(order_)) {
         return nodeType1.compareToIgnoreCase(nodeType2) ;
       }
       return nodeType2.compareToIgnoreCase(nodeType1) ;
     }catch (Exception e) {
-    }    
+    }
     return 0;
   }
 }

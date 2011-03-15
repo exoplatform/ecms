@@ -48,23 +48,23 @@ import org.exoplatform.webui.core.lifecycle.Lifecycle;
 /**
  * The Class UICLVFolderMode.
  */
-@ComponentConfig(      
-  lifecycle = Lifecycle.class,                 
+@ComponentConfig(
+  lifecycle = Lifecycle.class,
    template = "app:/groovy/ContentListViewer/UICLVContainer.gtmpl",
-   events = { 
-     @EventConfig(listeners = UICLVFolderMode.PreferencesActionListener.class)    
+   events = {
+     @EventConfig(listeners = UICLVFolderMode.PreferencesActionListener.class)
    }
 )
 public class UICLVFolderMode extends UICLVContainer {
 
-	private UICLVPresentation clvPresentation;
-	
+  private UICLVPresentation clvPresentation;
+
   /* (non-Javadoc)
    * @see org.exoplatform.wcm.webui.clv.UICLVContainer#init()
    */
   public void init() throws Exception {
-    PortletPreferences portletPreferences = Utils.getAllPortletPreferences();    
-    
+    PortletPreferences portletPreferences = Utils.getAllPortletPreferences();
+
     List<Node> nodes = null;
     messageKey = null;
     try {
@@ -78,25 +78,25 @@ public class UICLVFolderMode extends UICLVContainer {
     }
     if (nodes.size() == 0) {
       messageKey = "UICLVContainer.msg.non-contents";
-    }    
+    }
     int itemsPerPage = Integer.parseInt(portletPreferences.getValue(UICLVPortlet.PREFERENCE_ITEMS_PER_PAGE, null));
     PaginatedNodeIterator paginatedNodeIterator = new PaginatedNodeIterator(nodes, itemsPerPage);
     getChildren().clear();
-    clvPresentation = addChild(UICLVPresentation.class, null, null);    
+    clvPresentation = addChild(UICLVPresentation.class, null, null);
     ResourceResolver resourceResolver = getTemplateResourceResolver();
-    clvPresentation.init(resourceResolver, paginatedNodeIterator);    
+    clvPresentation.init(resourceResolver, paginatedNodeIterator);
   }
-  
+
   /**
    * Gets the rendered content nodes.
-   * 
+   *
    * @return the rendered content nodes
-   * 
+   *
    * @throws Exception the exception
    */
   public List<Node> getRenderedContentNodes() throws Exception {
     PortletRequestContext portletRequestContext = WebuiRequestContext.getCurrentInstance();
-    PortletPreferences preferences = portletRequestContext.getRequest().getPreferences();      
+    PortletPreferences preferences = portletRequestContext.getRequest().getPreferences();
     WCMComposer wcmComposer = getApplicationComponent(WCMComposer.class);
     HashMap<String, String> filters = new HashMap<String, String>();
     filters.put(WCMComposer.FILTER_MODE, Utils.getCurrentMode());
@@ -109,27 +109,27 @@ public class UICLVFolderMode extends UICLVContainer {
     filters.put(WCMComposer.FILTER_LANGUAGE, Util.getPortalRequestContext().getLocale().getLanguage());
 
     String folderPath = this.getAncestorOfType(UICLVPortlet.class).getFolderPath();
-    
+
     if(folderPath == null && preferences.getValue(UICLVPortlet.PREFERENCE_ITEM_PATH, null) == null){
         return new ArrayList<Node>();
-    }      
+    }
     NodeLocation nodeLocation = NodeLocation.getNodeLocationByExpression(
-    		(folderPath != null) ? folderPath : preferences.getValue(UICLVPortlet.PREFERENCE_ITEM_PATH, null));
+        (folderPath != null) ? folderPath : preferences.getValue(UICLVPortlet.PREFERENCE_ITEM_PATH, null));
     //encoding
     String nPath  = new String(nodeLocation.getPath().getBytes("ISO-8859-1"), "UTF-8");
-    return wcmComposer.getContents(nodeLocation.getRepository(), Text.escapeIllegalJcrChars(nodeLocation.getWorkspace()), 
+    return wcmComposer.getContents(nodeLocation.getRepository(), Text.escapeIllegalJcrChars(nodeLocation.getWorkspace()),
         Text.escapeIllegalJcrChars(nPath), filters, WCMCoreUtils.getUserSessionProvider());
   }
   /**
-	 * Gets the bar info show.
-	 * 
-	 * @return the value for info bar setting
-	 * 
-	 * @throws Exception the exception
-	 */
-	public boolean isShowInfoBar() throws Exception {		
-		if (UIPortlet.getCurrentUIPortlet().getShowInfoBar())
-			return true;
-		return false;
-	}
+   * Gets the bar info show.
+   *
+   * @return the value for info bar setting
+   *
+   * @throws Exception the exception
+   */
+  public boolean isShowInfoBar() throws Exception {
+    if (UIPortlet.getCurrentUIPortlet().getShowInfoBar())
+      return true;
+    return false;
+  }
 }

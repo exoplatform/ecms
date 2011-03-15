@@ -40,7 +40,7 @@ import org.exoplatform.webui.ext.filter.UIExtensionFilters;
  * Created by The eXo Platform SARL
  * Author : Hoang Van Hung
  *          hunghvit@gmail.com
- * Nov 18, 2009  
+ * Nov 18, 2009
  */
 @ComponentConfig(
     events = {
@@ -70,6 +70,6 @@ public class AddCategoryActionComponent  extends UIComponent {
     protected void processEvent(Event<AddCategoryActionComponent> event) throws Exception {
       UIJCRExplorer uiExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class);
       addFolder(event, uiExplorer);
-    }   
+    }
   }
 }

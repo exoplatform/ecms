@@ -42,7 +42,7 @@ import org.exoplatform.webui.form.UIFormSelectBox;
  * 10:07:15 AM
  */
 
-@ComponentConfig(  
+@ComponentConfig(
     lifecycle = UIFormLifecycle.class,
     template =  "system:/groovy/webui/form/UIFormWithTitle.gtmpl",
     events = {
@@ -56,11 +56,11 @@ public class UIRemoveLabelForm extends UIForm {
   private static  String FIELD_LABEL = "label" ;
 
   public UIRemoveLabelForm() throws Exception {
-    addUIFormInput(new UIFormSelectBox(FIELD_LABEL, FIELD_LABEL, null) ).setRendered(false) ;   
+    addUIFormInput(new UIFormSelectBox(FIELD_LABEL, FIELD_LABEL, null) ).setRendered(false) ;
   }
 
   public void update() throws Exception {
-    List<SelectItemOption<String>> options = new ArrayList<SelectItemOption<String>>()  ;    
+    List<SelectItemOption<String>> options = new ArrayList<SelectItemOption<String>>()  ;
     UIVersionInfo uiVersionInfo = getParent();
     Version version = uiVersionInfo.getCurrentVersionNode().getVersion();
     VersionHistory versionHistory = uiVersionInfo.getCurrentNode().getVersionHistory() ;
@@ -69,18 +69,18 @@ public class UIRemoveLabelForm extends UIForm {
     else {
       for (String temp: strOptions) {
         options.add(new SelectItemOption<String>(temp, temp ));
-      }        
+      }
       getChild(UIFormSelectBox.class).setOptions(options) ;
       setRendered(true);
     }
   }
 
-  
+
   static  public class RemoveActionListener extends EventListener<UIRemoveLabelForm> {
     @SuppressWarnings("unchecked")
-    public void execute(Event<UIRemoveLabelForm> event) throws Exception {      
+    public void execute(Event<UIRemoveLabelForm> event) throws Exception {
       UIRemoveLabelForm uiRemoveLabelForm = event.getSource();
-      String label= uiRemoveLabelForm.getUIFormSelectBox(FIELD_LABEL).getValue() ;      
+      String label= uiRemoveLabelForm.getUIFormSelectBox(FIELD_LABEL).getValue() ;
       UIVersionInfo uiVersionInfo = uiRemoveLabelForm.getParent();
       VersionHistory versionHistory = uiVersionInfo.getCurrentNode().getVersionHistory() ;
       versionHistory.removeVersionLabel(label);

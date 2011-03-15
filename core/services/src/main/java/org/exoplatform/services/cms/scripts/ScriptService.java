@@ -23,130 +23,130 @@ import javax.jcr.Node;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 
 public interface ScriptService {
-  
+
   /**
-   * This method will get node for ECM Explorer Scripts by giving the following params: repository, 
+   * This method will get node for ECM Explorer Scripts by giving the following params: repository,
    * provider
    * @param repository    String
    *                      The name of repository
    * @param provider      SessionProvider
    * @see                 Node
    * @see                 NodeHierarchyCreator
-   * @see                 SessionProvider                     
+   * @see                 SessionProvider
    * @return              Node
    * @throws Exception
    */
-  public Node getECMScriptHome(String repository,SessionProvider provider) throws Exception ;  
-  
+  public Node getECMScriptHome(String repository,SessionProvider provider) throws Exception ;
+
   /**
    * This method will get node for Content Browser Scripts by giving the following params: repository,
    * provider
    * @param repository    String
-   *                      The name of reporsitory        
+   *                      The name of reporsitory
    * @param provider
    * @see                 Node
    * @see                 NodeHierarchyCreator
-   * @see                 SessionProvider                     
+   * @see                 SessionProvider
    * @return              Node
    * @throws Exception
    */
-  public Node getCBScriptHome(String repository,SessionProvider provider) throws Exception ;    
-  
+  public Node getCBScriptHome(String repository,SessionProvider provider) throws Exception ;
+
   /**
    * This method will get all node for ECM Action Scripts by giving the following params: repository,
    * provider
    * @param repository    String
-   *                      The name of reporsitory        
+   *                      The name of reporsitory
    * @param provider
    * @see                 Node
    * @see                 NodeHierarchyCreator
-   * @see                 SessionProvider                     
+   * @see                 SessionProvider
    * @return              Node
    * @throws Exception
    */
   public List<Node> getECMActionScripts(String repository,SessionProvider provider) throws Exception ;
-  
+
   /**
    * This method will get all node for ECM Interceptor Scripts by giving the following params: repository,
    * provider
    * @param repository    String
-   *                      The name of reporsitory        
+   *                      The name of reporsitory
    * @param provider
    * @see                 Node
    * @see                 NodeHierarchyCreator
-   * @see                 SessionProvider                     
+   * @see                 SessionProvider
    * @return              List<Node>
    * @throws Exception
    */
   public List<Node> getECMInterceptorScripts(String repository,SessionProvider provider) throws Exception;
-  
+
   /**
    * This method will get all node for ECM Widget Scripts by giving the following params: repository,
    * provider
    * @param repository    String
-   *                      The name of reporsitory        
+   *                      The name of reporsitory
    * @param provider
    * @see                 Node
    * @see                 NodeHierarchyCreator
-   * @see                 SessionProvider                     
+   * @see                 SessionProvider
    * @return              List<Node>
    * @throws Exception
    */
   public List<Node> getECMWidgetScripts(String repository,SessionProvider provider) throws Exception ;
-  
+
   /**
    * This method will get script by giving the following params: repository, provider
    * @param scriptPath    String
    *                      The path of script
    * @param repository    String
    *                      The name of repository
-   * @see                 CmsScript                     
+   * @see                 CmsScript
    * @return              CmsScript
    * @throws Exception
    */
   public CmsScript getScript(String scriptPath, String repository) throws Exception;
-  
+
   /**
    * This method will get base path of script
-   * @see                 NodeHierarchyCreator  
+   * @see                 NodeHierarchyCreator
    * @return              String
    * @throws Exception
    */
-  public String getBaseScriptPath() throws Exception ;  
-  
+  public String getBaseScriptPath() throws Exception ;
+
   /**
-   * This method will get script by giving the following params: scriptPath, repository  
+   * This method will get script by giving the following params: scriptPath, repository
    * @param scriptPath    String
    *                      The path of script
    * @param repository    String
    *                      The name of repository
    * @deprecated Since WCM 2.1 you should use {@link #getScriptAsStream(String, String)} instead.
-   * @see                 Node                     
+   * @see                 Node
    * @return              String
    * @throws Exception
    */
   @Deprecated
   public String getScriptAsText(String scriptPath, String repository) throws Exception;
-  
+
   /**
-   * This method will get script by giving the following params: scriptPath, repository  
+   * This method will get script by giving the following params: scriptPath, repository
    * @param script        Node
    *                      The script node
    * @deprecated Since WCM 2.1 you should use {@link #getScriptAsStream(String, String)} instead.
-   * @see                 Node                     
+   * @see                 Node
    * @return              String
    * @throws Exception
    */
   @Deprecated
   public String getScriptAsText(Node script) throws Exception;
-  
+
   /**
-   * This method will add script by giving the following params: name, text, repository, provider 
+   * This method will add script by giving the following params: name, text, repository, provider
    * @param name          String
    *                      The name of script
    * @param text          String
    * @param repository    String
-   *                      The name of repository      
+   *                      The name of repository
    * @param provider      SessionProvider
    * @see                 InputStream
    * @see                 Node
@@ -154,41 +154,41 @@ public interface ScriptService {
    * @throws Exception
    */
   public void addScript(String name, String text, String repository,SessionProvider provider) throws Exception;
-  
+
   /**
-   * This method will remove script by giving the following params: name, text, repository, provider 
+   * This method will remove script by giving the following params: name, text, repository, provider
    * @param scriptPath    String
    *                      The path of script
    * @param repository    String
-   *                      The name of repository      
+   *                      The name of repository
    * @param provider      SessionProvider
    * @see                 Node
    * @see                 SessionProvider
    * @throws Exception
    */
   public void removeScript(String scriptPath, String repository, SessionProvider provider) throws Exception;
-  
+
   /**
-   * This method will get script node by giving the following params: scriptName, repository, provider  
+   * This method will get script node by giving the following params: scriptName, repository, provider
    * @param scriptName    String
-   *                      The name of script  
+   *                      The name of script
    * @param repository    String
-   *                      The name of repository 
+   *                      The name of repository
    * @param provider      SessionProvider
    * @see                 Node
    * @see                 SessionProvider
    * @return              Node
    * @throws Exception
    */
-  public Node getScriptNode(String scriptName, String repository,SessionProvider provider) throws Exception; 
-  
+  public Node getScriptNode(String scriptName, String repository,SessionProvider provider) throws Exception;
+
   /**
-   * This method will init repository by giving the following params: repository 
+   * This method will init repository by giving the following params: repository
    * @param repository    String
    *                      The name of repository
    * @see                 ManageableRepository
    * @see                 ObservationManager
-   * @see                 Session                       
+   * @see                 Session
    * @throws Exception
    */
   public void initRepo(String repository) throws Exception ;

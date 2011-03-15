@@ -24,17 +24,17 @@ import org.exoplatform.webui.form.UIFormInput;
  * Created by The eXo Platform SAS
  * Author : Dung Khuong
  *          dung.khuong@exoplatform.com
- * Jul 6, 2010  
+ * Jul 6, 2010
  */
 @SuppressWarnings("serial")
 public class FckMandatoryValidator extends org.exoplatform.webui.form.validator.MandatoryValidator {
-  
+
   @SuppressWarnings("unchecked")
-	public void validate(UIFormInput uiInput) throws Exception {
+  public void validate(UIFormInput uiInput) throws Exception {
     if((uiInput.getValue() != null) && (((String)uiInput.getValue()).trim().length() > 0) &&(!uiInput.getValue().toString().trim().equals("<br />"))) {
       return ;
-    } else {   
-    	throw new MessageException(new ApplicationMessage("EmptyFieldValidator.msg.empty-input", null, ApplicationMessage.WARNING));
+    } else {
+      throw new MessageException(new ApplicationMessage("EmptyFieldValidator.msg.empty-input", null, ApplicationMessage.WARNING));
     }
   }
 }

@@ -7,7 +7,7 @@ import org.exoplatform.webui.core.UITabPane;
 /**
  * Author : TAN DUNG DANG
  *          dzungdev@gmail.com
- * Jan 20, 2009  
+ * Jan 20, 2009
  */
 
 @ComponentConfig(
@@ -18,10 +18,10 @@ public class UIContentSelector extends UITabPane {
 
   /** The Constant FOLDER_PATH_SELECTOR_POPUP_WINDOW. */
   public static final String FOLDER_PATH_SELECTOR_POPUP_WINDOW = "FolderPathSelectorPopupWindow";
-  
+
   /** The Constant CORRECT_CONTENT_SELECTOR_POPUP_WINDOW. */
   public static final String CORRECT_CONTENT_SELECTOR_POPUP_WINDOW = "CorrectContentSelectorPopupWindow";
-  
+
   public void initMetadataPopup() throws Exception {
     UIContentPropertySelector contentPropertySelector = createUIComponent(UIContentPropertySelector.class, null, null);
     contentPropertySelector.setFieldName(UIContentSearchForm.PROPERTY);

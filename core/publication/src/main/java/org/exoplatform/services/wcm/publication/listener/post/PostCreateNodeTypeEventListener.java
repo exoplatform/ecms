@@ -39,17 +39,17 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
  * Mar 5, 2009
  */
 public class PostCreateNodeTypeEventListener extends Listener<CmsService, String>{
-  
+
   /** The publication service. */
   private WCMComposer composer;
-  
+
   private TaxonomyService taxonomyService;
-  
+
   private ActionServiceContainer actionServiceContainer;
-    
+
   /**
    * Instantiates a new post create content event listener.
-   * 
+   *
    * @param publicationService the publication service
    * @param configurationService the configuration service
    * @param schemaConfigService the schema config service
@@ -62,27 +62,27 @@ public class PostCreateNodeTypeEventListener extends Listener<CmsService, String
    * @see org.exoplatform.services.listener.Listener#onEvent(org.exoplatform.services.listener.Event)
    */
   public void onEvent(Event<CmsService, String> event) throws Exception {
-	  composer.cleanTemplates();
-	  
-	  // TODO: Hardcode for now, we need to improve the way to update affectedNodeTypeNames
-	  this.taxonomyService = WCMCoreUtils.getService(TaxonomyService.class);
-	  this.actionServiceContainer = WCMCoreUtils.getService(ActionServiceContainer.class);
-	  String nodetypeName = event.getData();
-	  String repository = WCMCoreUtils.getRepository(null).getConfiguration().getName();
-	  List<Node> taxonomyTrees = taxonomyService.getAllTaxonomyTrees(repository);
-	  for (Node taxonomyTree : taxonomyTrees) {
-		  Node action = actionServiceContainer.getAction(taxonomyTree, "taxonomyAction");
-		  Session session = action.getSession();
-		  ValueFactory valueFactory = session.getValueFactory();
-		  Value[] values = action.getProperty("exo:affectedNodeTypeNames").getValues();
-		  List<Value> tmpValues = new ArrayList<Value>();
-		  for (Value value : values) {
-			  tmpValues.add(value);
-		  }
-		  tmpValues.add(valueFactory.createValue(nodetypeName));
-		  action.setProperty("exo:affectedNodeTypeNames", tmpValues.toArray(new Value[tmpValues.size()]));
-		  session.save();
-		  session.logout();
-	  }
+    composer.cleanTemplates();
+
+    // TODO: Hardcode for now, we need to improve the way to update affectedNodeTypeNames
+    this.taxonomyService = WCMCoreUtils.getService(TaxonomyService.class);
+    this.actionServiceContainer = WCMCoreUtils.getService(ActionServiceContainer.class);
+    String nodetypeName = event.getData();
+    String repository = WCMCoreUtils.getRepository(null).getConfiguration().getName();
+    List<Node> taxonomyTrees = taxonomyService.getAllTaxonomyTrees(repository);
+    for (Node taxonomyTree : taxonomyTrees) {
+      Node action = actionServiceContainer.getAction(taxonomyTree, "taxonomyAction");
+      Session session = action.getSession();
+      ValueFactory valueFactory = session.getValueFactory();
+      Value[] values = action.getProperty("exo:affectedNodeTypeNames").getValues();
+      List<Value> tmpValues = new ArrayList<Value>();
+      for (Value value : values) {
+        tmpValues.add(value);
+      }
+      tmpValues.add(valueFactory.createValue(nodetypeName));
+      action.setProperty("exo:affectedNodeTypeNames", tmpValues.toArray(new Value[tmpValues.size()]));
+      session.save();
+      session.logout();
+    }
   }
 }

@@ -38,18 +38,18 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
  * Created by The eXo Platform SARL Author : Dang Van Minh
  * minh.dang@exoplatform.com May 8, 2008 3:07:02 PM
  */
-public class JCRResourceResolver extends ResourceResolver {      
-  protected String repository ; 
-  protected String workspace ;      
+public class JCRResourceResolver extends ResourceResolver {
+  protected String repository ;
+  protected String workspace ;
   protected String propertyName ;
   /** The log. */
   private static Log LOG = ExoLogger.getLogger("ecm:JCRResourceResolver");
   private TemplateService templateService;
 
   /**
-   * Instantiates a new jCR resource resolver 
+   * Instantiates a new jCR resource resolver
    * to load template that stored as a property of node in jcr
-   * 
+   *
    * @param repository the repository
    * @param workspace the workspace
    * @param propertyName the property name
@@ -59,11 +59,11 @@ public class JCRResourceResolver extends ResourceResolver {
   public JCRResourceResolver(String repository,String workspace,String propertyName) {
     this(repository, workspace);
   }
-  
+
   /**
-   * Instantiates a new jCR resource resolver 
+   * Instantiates a new jCR resource resolver
    * to load template that stored as a property of node in jcr
-   * 
+   *
    * @param repository the repository
    * @param workspace the workspace
    * @param propertyName the property name
@@ -78,11 +78,11 @@ public class JCRResourceResolver extends ResourceResolver {
    * @see org.exoplatform.resolver.ResourceResolver#getResource(java.lang.String)
    */
   public URL getResource(String url) throws Exception {
-    throw new Exception("This method is not  supported") ;  
+    throw new Exception("This method is not  supported") ;
   }
 
-  /** 
-   * @param url URL must be like jcr:path with path is node path 
+  /**
+   * @param url URL must be like jcr:path with path is node path
    * @see org.exoplatform.resolver.ResourceResolver#getInputStream(java.lang.String)
    */
   public InputStream getInputStream(String url) throws Exception  {
@@ -91,7 +91,7 @@ public class JCRResourceResolver extends ResourceResolver {
     ByteArrayInputStream inputStream = null;
     try {
       Node template = (Node)session.getItem(removeScheme(url));
-      inputStream = new ByteArrayInputStream(templateService.getTemplate(template).getBytes()); 
+      inputStream = new ByteArrayInputStream(templateService.getTemplate(template).getBytes());
     } catch(Exception e) {
       LOG.error("Unexpected problem happen when try to process with url");
     } finally {
@@ -130,7 +130,7 @@ public class JCRResourceResolver extends ResourceResolver {
   public ResourceKey createResourceKey(String url) {
     return new ResourceKey(url.hashCode(), url);
   }
-  
+
   /* (non-Javadoc)
    * @see org.exoplatform.resolver.ResourceResolver#getResourceScheme()
    */

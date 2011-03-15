@@ -48,7 +48,7 @@ import org.exoplatform.webui.event.EventListener;
  * Author : Dang Van Minh
  *          minh.dang@exoplatform.com
  * Oct 18, 2006
- * 2:12:26 PM 
+ * 2:12:26 PM
  */
 @ComponentConfigs(
     {
@@ -64,11 +64,11 @@ import org.exoplatform.webui.event.EventListener;
 )
 
 public class UIOneTaxonomySelector extends UIBaseNodeTreeSelector {
-  
-  private String[] acceptedNodeTypesInTree = {};  
+
+  private String[] acceptedNodeTypesInTree = {};
   private String[] acceptedNodeTypesInPathPanel = {};
   private String[] acceptedMimeTypes = {};
-  
+
   private String[] exceptedNodeTypesInPathPanel = {};
 
   private String repositoryName = null;
@@ -76,68 +76,68 @@ public class UIOneTaxonomySelector extends UIBaseNodeTreeSelector {
   private String rootTreePath = null;
   private boolean isDisable = false;
   private boolean allowPublish = false;
-  
+
   private boolean alreadyChangePath = false;
-  
+
   private String rootTaxonomyName = null;
-  
+
   private String[] defaultExceptedNodeTypes = {"exo:symlink"};
-  
+
   public UIOneTaxonomySelector() throws Exception {
     addChild(UIBreadcumbs.class, "BreadcumbOneTaxonomy", "BreadcumbOneTaxonomy");
     addChild(UITreeTaxonomyList.class, null, null);
     addChild(UITreeTaxonomyBuilder.class, null, UITreeTaxonomyBuilder.class.getSimpleName()+hashCode());
     addChild(UISelectTaxonomyPanel.class, null, null);
   }
-  
+
   public String getRootTaxonomyName() { return rootTaxonomyName; }
-  
+
   public void setRootTaxonomyName(String rootTaxonomyName) {
     this.rootTaxonomyName = rootTaxonomyName;
   }
-  
+
   Node getTaxoTreeNode(String taxoTreeName) throws RepositoryException {
     TaxonomyService taxonomyService = getApplicationComponent(TaxonomyService.class);
     return taxonomyService.getTaxonomyTree(repositoryName, taxoTreeName);
   }
-  
+
   public String[] getDefaultExceptedNodeTypes() { return defaultExceptedNodeTypes; }
-  
+
   public void init(SessionProvider sessionProvider) throws Exception {
-		RepositoryService repositoryService = getApplicationComponent(RepositoryService.class);
-		ManageableRepository manageableRepository = repositoryService.getRepository(repositoryName);
-		PublicationService publicationService = getApplicationComponent(PublicationService.class);
-		TemplateService templateService = getApplicationComponent(TemplateService.class);
-		List<String> templates = templateService.getDocumentTemplates();
-		Node rootNode;
-		if (rootTreePath.trim().equals("/")) {
-			rootNode = sessionProvider.getSession(workspaceName, manageableRepository)
-					.getRootNode();
-		} else {
-			NodeFinder nodeFinder = getApplicationComponent(NodeFinder.class);
-			try {
-			  rootNode = (Node) nodeFinder.getItem(repositoryName, workspaceName, rootTreePath);
+    RepositoryService repositoryService = getApplicationComponent(RepositoryService.class);
+    ManageableRepository manageableRepository = repositoryService.getRepository(repositoryName);
+    PublicationService publicationService = getApplicationComponent(PublicationService.class);
+    TemplateService templateService = getApplicationComponent(TemplateService.class);
+    List<String> templates = templateService.getDocumentTemplates();
+    Node rootNode;
+    if (rootTreePath.trim().equals("/")) {
+      rootNode = sessionProvider.getSession(workspaceName, manageableRepository)
+          .getRootNode();
+    } else {
+      NodeFinder nodeFinder = getApplicationComponent(NodeFinder.class);
+      try {
+        rootNode = (Node) nodeFinder.getItem(repositoryName, workspaceName, rootTreePath);
       } catch (PathNotFoundException pathNotFoundException) {
         rootNode = null;
       }
-		}
-	
-		UITreeTaxonomyList uiTreeTaxonomyList = getChild(UITreeTaxonomyList.class);
-		uiTreeTaxonomyList.setTaxonomyTreeList(repositoryName);
-		UITreeTaxonomyBuilder builder = getChild(UITreeTaxonomyBuilder.class);
-		builder.setAllowPublish(allowPublish, publicationService, templates);
-		builder.setAcceptedNodeTypes(acceptedNodeTypesInTree);
-		builder.setDefaultExceptedNodeTypes(defaultExceptedNodeTypes);
-		if (rootNode != null) builder.setRootTreeNode(rootNode);
-		UISelectTaxonomyPanel selectPathPanel = getChild(UISelectTaxonomyPanel.class);
-		selectPathPanel.setAllowPublish(allowPublish, publicationService, templates);
-		selectPathPanel.setAcceptedNodeTypes(acceptedNodeTypesInPathPanel);
-		selectPathPanel.setAcceptedMimeTypes(acceptedMimeTypes);
-		selectPathPanel.setExceptedNodeTypes(exceptedNodeTypesInPathPanel);
-		selectPathPanel.setDefaultExceptedNodeTypes(defaultExceptedNodeTypes);
-		selectPathPanel.updateGrid();
+    }
+
+    UITreeTaxonomyList uiTreeTaxonomyList = getChild(UITreeTaxonomyList.class);
+    uiTreeTaxonomyList.setTaxonomyTreeList(repositoryName);
+    UITreeTaxonomyBuilder builder = getChild(UITreeTaxonomyBuilder.class);
+    builder.setAllowPublish(allowPublish, publicationService, templates);
+    builder.setAcceptedNodeTypes(acceptedNodeTypesInTree);
+    builder.setDefaultExceptedNodeTypes(defaultExceptedNodeTypes);
+    if (rootNode != null) builder.setRootTreeNode(rootNode);
+    UISelectTaxonomyPanel selectPathPanel = getChild(UISelectTaxonomyPanel.class);
+    selectPathPanel.setAllowPublish(allowPublish, publicationService, templates);
+    selectPathPanel.setAcceptedNodeTypes(acceptedNodeTypesInPathPanel);
+    selectPathPanel.setAcceptedMimeTypes(acceptedMimeTypes);
+    selectPathPanel.setExceptedNodeTypes(exceptedNodeTypesInPathPanel);
+    selectPathPanel.setDefaultExceptedNodeTypes(defaultExceptedNodeTypes);
+    selectPathPanel.updateGrid();
   }
-  
+
   public boolean isAllowPublish() {
     return allowPublish;
   }
@@ -145,29 +145,29 @@ public class UIOneTaxonomySelector extends UIBaseNodeTreeSelector {
   public void setAllowPublish(boolean allowPublish) {
     this.allowPublish = allowPublish;
   }
-  
+
   public void setRootNodeLocation(String repository, String workspace, String rootPath) throws Exception {
     this.repositoryName = repository;
     this.workspaceName = workspace;
-    this.rootTreePath = rootPath;    
+    this.rootTreePath = rootPath;
   }
-  
+
   public void setIsDisable(String wsName, boolean isDisable) {
     setWorkspaceName(wsName);
     this.isDisable = isDisable;
   }
-  
+
   public boolean isDisable() { return isDisable; }
-  
+
   public void setIsShowSystem(boolean isShowSystem) {
     getChild(UITreeTaxonomyList.class).setIsShowSystem(isShowSystem);
   }
-  
+
   public void setShowRootPathSelect(boolean isRendered) {
     UITreeTaxonomyList uiTreeTaxonomyList = getChild(UITreeTaxonomyList.class);
     uiTreeTaxonomyList.setShowRootPathSelect(isRendered);
   }
-  
+
   public String[] getAcceptedNodeTypesInTree() {
     return acceptedNodeTypesInTree;
   }
@@ -183,18 +183,18 @@ public class UIOneTaxonomySelector extends UIBaseNodeTreeSelector {
   public void setAcceptedNodeTypesInPathPanel(String[] acceptedNodeTypesInPathPanel) {
     this.acceptedNodeTypesInPathPanel = acceptedNodeTypesInPathPanel;
   }
-  
+
   public String[] getExceptedNodeTypesInPathPanel() {
     return exceptedNodeTypesInPathPanel;
   }
 
   public void setExceptedNodeTypesInPathPanel(String[] exceptedNodeTypesInPathPanel) {
     this.exceptedNodeTypesInPathPanel = exceptedNodeTypesInPathPanel;
-  }  
-  
+  }
+
   public String[] getAcceptedMimeTypes() { return acceptedMimeTypes; }
-  
-  public void setAcceptedMimeTypes(String[] acceptedMimeTypes) { this.acceptedMimeTypes = acceptedMimeTypes; } 
+
+  public void setAcceptedMimeTypes(String[] acceptedMimeTypes) { this.acceptedMimeTypes = acceptedMimeTypes; }
 
   public String getRepositoryName() { return repositoryName; }
   public void setRepositoryName(String repositoryName) {
@@ -202,18 +202,18 @@ public class UIOneTaxonomySelector extends UIBaseNodeTreeSelector {
   }
 
   public String getWorkspaceName() { return workspaceName; }
-  
+
   public void setWorkspaceName(String workspaceName) {
     this.workspaceName = workspaceName;
   }
 
   public String getRootTreePath() { return rootTreePath; }
-  
-  public void setRootTreePath(String rootTreePath) { 
+
+  public void setRootTreePath(String rootTreePath) {
     this.rootTreePath = rootTreePath;
     getChild(UISelectTaxonomyPanel.class).setTaxonomyTreePath(rootTreePath);
-  }      
-  
+  }
+
   public String getTaxonomyLabel(Node node) throws RepositoryException {
     try {
       String display = node.getName();
@@ -224,11 +224,11 @@ public class UIOneTaxonomySelector extends UIBaseNodeTreeSelector {
     }
     return node.getName();
   }
-  
+
   public void onChange(final Node currentNode, Object context) throws Exception {
     UISelectTaxonomyPanel selectPathPanel = getChild(UISelectTaxonomyPanel.class);
     UITreeTaxonomyList uiTreeTaxonomyList = getChild(UITreeTaxonomyList.class);
-    String taxoTreeName = uiTreeTaxonomyList.getUIFormSelectBox(UITreeTaxonomyList.TAXONOMY_TREE).getValue();  
+    String taxoTreeName = uiTreeTaxonomyList.getUIFormSelectBox(UITreeTaxonomyList.TAXONOMY_TREE).getValue();
     Node parentRoot = getTaxoTreeNode(taxoTreeName);
     selectPathPanel.setParentNode(currentNode);
     selectPathPanel.updateGrid();
@@ -259,7 +259,7 @@ public class UIOneTaxonomySelector extends UIBaseNodeTreeSelector {
       String breadcumbPath = rootTreePath + buffer.toString();
       if (!breadcumbPath.equals(path)) {
         if (breadcumbPath.startsWith(path)) {
-          if (listLocalPath != null && listLocalPath.size() > 0) {  
+          if (listLocalPath != null && listLocalPath.size() > 0) {
             listLocalPath.remove(listLocalPath.size() - 1);
           }
         } else {
@@ -272,16 +272,16 @@ public class UIOneTaxonomySelector extends UIBaseNodeTreeSelector {
     alreadyChangePath = false;
     uiBreadcumbs.setPath(listLocalPath);
   }
-  
+
   private void changeNode(String stringPath, Object context) throws Exception {
     UITreeTaxonomyBuilder builder = getChild(UITreeTaxonomyBuilder.class);
     builder.changeNode(stringPath, context);
   }
-  
+
   public void changeGroup(String groupId, Object context) throws Exception {
     String stringPath = rootTreePath;
     if (!rootTreePath.equals("/")) {
-      stringPath += "/";    
+      stringPath += "/";
     }
     UIBreadcumbs uiBreadcumb = getChild(UIBreadcumbs.class);
     if (groupId == null) groupId = "";
@@ -311,13 +311,13 @@ public class UIOneTaxonomySelector extends UIBaseNodeTreeSelector {
       changeNode(stringPath, context);
     }
   }
-  
+
   static  public class SelectPathActionListener extends EventListener<UIBreadcumbs> {
     public void execute(Event<UIBreadcumbs> event) throws Exception {
       UIBreadcumbs uiBreadcumbs = event.getSource();
       UIOneTaxonomySelector uiOneNodePathSelector = uiBreadcumbs.getParent();
       String objectId =  event.getRequestContext().getRequestParameter(OBJECTID);
-      uiBreadcumbs.setSelectPath(objectId);    
+      uiBreadcumbs.setSelectPath(objectId);
       String selectGroupId = uiBreadcumbs.getSelectLocalPath().getId();
       uiOneNodePathSelector.changeGroup(selectGroupId, event.getRequestContext());
       event.getRequestContext().addUIComponentToUpdateByAjax(uiOneNodePathSelector);

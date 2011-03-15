@@ -40,7 +40,7 @@ import org.exoplatform.services.log.Log;
  * Created by The eXo Platform SARL
  * Author : Dang Van Minh
  *          minh.dang@exoplatform.com
- * Jun 1, 2009  
+ * Jun 1, 2009
  * 2:05:18 PM
  */
 public class CompressData {
@@ -61,20 +61,20 @@ public class CompressData {
     setBase(base);
   }
 
-	/**
-	 * @param base_
-	 *            the base_ to set
-	 */
-	public void setBase(String base_) {
-		this.base_ = base_;
-	}
+  /**
+   * @param base_
+   *            the base_ to set
+   */
+  public void setBase(String base_) {
+    this.base_ = base_;
+  }
 
-	/**
-	 * @return the base_
-	 */
-	public String getBase() {
-		return base_;
-	}
+  /**
+   * @return the base_
+   */
+  public String getBase() {
+    return base_;
+  }
 
 public void addFile(String entryName, File file) {
     try {

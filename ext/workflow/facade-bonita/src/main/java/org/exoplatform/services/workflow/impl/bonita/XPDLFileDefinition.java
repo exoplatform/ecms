@@ -27,7 +27,7 @@ public class XPDLFileDefinition extends BARFileDefinition {
             // Store the bytes in the hashtable
             entries.put("process.xpdl", out.toByteArray());
     }
-    
+
     public XPDLFileDefinition(Node node) throws IOException {
         super(node);
     }

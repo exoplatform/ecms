@@ -35,69 +35,100 @@ import org.exoplatform.commons.utils.ISO8601;
  * */
 public class SQLQueryBuilder extends AbstractQueryBuilder {
 
-  /* (non-Javadoc)
-   * @see org.exoplatform.services.wcm.search.AbstractQueryBuilder#isNull(java.lang.String, org.exoplatform.services.wcm.search.AbstractQueryBuilder.LOGICAL)
+  /*
+   * (non-Javadoc)
+   * @see
+   * org.exoplatform.services.wcm.search.AbstractQueryBuilder#isNull(java.lang
+   * .String, org.exoplatform.services.wcm.search.AbstractQueryBuilder.LOGICAL)
    */
-  public void isNull(String propertyName, LOGICAL condition) {          
+  public void isNull(String propertyName, LOGICAL condition) {
     if(condition == LOGICAL.AND)
       propertiesClause.append(" AND").append(propertyName).append("IS NULL ");
     else if(condition == LOGICAL.OR)
       propertiesClause.append(" OR").append(propertyName).append("IS NULL ");
     else
       propertiesClause.append(propertyName).append("IS NULL ");
-  }  
+  }
 
-  /* (non-Javadoc)
-   * @see org.exoplatform.services.wcm.search.AbstractQueryBuilder#isNotNull(java.lang.String, org.exoplatform.services.wcm.search.AbstractQueryBuilder.LOGICAL)
+  /*
+   * (non-Javadoc)
+   * @see
+   * org.exoplatform.services.wcm.search.AbstractQueryBuilder#isNotNull(java
+   * .lang.String,
+   * org.exoplatform.services.wcm.search.AbstractQueryBuilder.LOGICAL)
    */
-  public void isNotNull(String propertyName, LOGICAL condition) {         
+  public void isNotNull(String propertyName, LOGICAL condition) {
     if(condition == LOGICAL.AND)
       propertiesClause.append("AND ").append(propertyName).append(" IS NOT NULL ");
     else if(condition == LOGICAL.OR)
       propertiesClause.append("OR ").append(propertyName).append(" IS NOT NULL ");
     else
       propertiesClause.append(propertyName).append(" IS NOT NULL ");
-  } 
+  }
 
-  /* (non-Javadoc)
-   * @see org.exoplatform.services.wcm.search.AbstractQueryBuilder#lessThan(java.lang.String, java.lang.String, org.exoplatform.services.wcm.search.AbstractQueryBuilder.LOGICAL)
+  /*
+   * (non-Javadoc)
+   * @see
+   * org.exoplatform.services.wcm.search.AbstractQueryBuilder#lessThan(java.
+   * lang.String, java.lang.String,
+   * org.exoplatform.services.wcm.search.AbstractQueryBuilder.LOGICAL)
    */
   public void lessThan(String propertyName, String value, LOGICAL condition) {
     comparison(propertyName,value,condition,"<");
-  } 
+  }
 
-  /* (non-Javadoc)
-   * @see org.exoplatform.services.wcm.search.AbstractQueryBuilder#greaterThan(java.lang.String, java.lang.String, org.exoplatform.services.wcm.search.AbstractQueryBuilder.LOGICAL)
+  /*
+   * (non-Javadoc)
+   * @see
+   * org.exoplatform.services.wcm.search.AbstractQueryBuilder#greaterThan(java
+   * .lang.String, java.lang.String,
+   * org.exoplatform.services.wcm.search.AbstractQueryBuilder.LOGICAL)
    */
   public void greaterThan(String propName, String value, LOGICAL condition) {
     comparison(propName,value,condition,">");
-  }    
+  }
 
-  /* (non-Javadoc)
-   * @see org.exoplatform.services.wcm.search.AbstractQueryBuilder#lessThanOrEqual(java.lang.String, java.lang.String, org.exoplatform.services.wcm.search.AbstractQueryBuilder.LOGICAL)
+  /*
+   * (non-Javadoc)
+   * @see
+   * org.exoplatform.services.wcm.search.AbstractQueryBuilder#lessThanOrEqual
+   * (java.lang.String, java.lang.String,
+   * org.exoplatform.services.wcm.search.AbstractQueryBuilder.LOGICAL)
    */
   public void lessThanOrEqual(String propName, String value, LOGICAL condition) {
     comparison(propName,value,condition,"<=");
   }
 
-  /* (non-Javadoc)
-   * @see org.exoplatform.services.wcm.search.AbstractQueryBuilder#greaterOrEqual(java.lang.String, java.lang.String, org.exoplatform.services.wcm.search.AbstractQueryBuilder.LOGICAL)
+  /*
+   * (non-Javadoc)
+   * @see
+   * org.exoplatform.services.wcm.search.AbstractQueryBuilder#greaterOrEqual
+   * (java.lang.String, java.lang.String,
+   * org.exoplatform.services.wcm.search.AbstractQueryBuilder.LOGICAL)
    */
   public void greaterOrEqual(String propName,String value, LOGICAL condition) {
     comparison(propName,value,condition,">=");
   }
 
-  /* (non-Javadoc)
-   * @see org.exoplatform.services.wcm.search.AbstractQueryBuilder#equal(java.lang.String, java.lang.String, org.exoplatform.services.wcm.search.AbstractQueryBuilder.LOGICAL)
+  /*
+   * (non-Javadoc)
+   * @see
+   * org.exoplatform.services.wcm.search.AbstractQueryBuilder#equal(java.lang
+   * .String, java.lang.String,
+   * org.exoplatform.services.wcm.search.AbstractQueryBuilder.LOGICAL)
    */
   public void equal(String propName, String value , LOGICAL condition) {
     comparison(propName,value,condition,"=");
-  } 
+  }
 
-  /* (non-Javadoc)
-   * @see org.exoplatform.services.wcm.search.AbstractQueryBuilder#notEqual(java.lang.String, java.lang.String, org.exoplatform.services.wcm.search.AbstractQueryBuilder.LOGICAL)
+  /*
+   * (non-Javadoc)
+   * @see
+   * org.exoplatform.services.wcm.search.AbstractQueryBuilder#notEqual(java.
+   * lang.String, java.lang.String,
+   * org.exoplatform.services.wcm.search.AbstractQueryBuilder.LOGICAL)
    */
-  public void notEqual(String propName, String value, LOGICAL condition) {          
+  public void notEqual(String propName, String value, LOGICAL condition) {
     if(condition == LOGICAL.AND)
       propertiesClause.append("AND ").append(propName).append(" <> '").append(value).append("' ");
     else if(condition == LOGICAL.OR)
@@ -108,41 +139,53 @@ public class SQLQueryBuilder extends AbstractQueryBuilder {
 
   /**
    * Comparison.
-   * 
+   *
    * @param propName the prop name
    * @param value the value
    * @param condition the condition
    * @param symbol the symbol
    */
-  private void comparison(String propName, String value, LOGICAL condition, String symbol) {          
+  private void comparison(String propName, String value, LOGICAL condition, String symbol) {
     if(condition == LOGICAL.AND)
       propertiesClause.append("AND ").append(propName).append(" ").append(symbol).append(" '").append(value).append("' ");
     else if(condition == LOGICAL.OR)
       propertiesClause.append("OR ").append(propName).append(" ").append(symbol).append(" '").append(value).append("' ");
-    else      
+    else
       propertiesClause.append(propName).append(" ").append(symbol).append(" '").append(value).append("' ");
   }
 
-  /* (non-Javadoc)
-   * @see org.exoplatform.services.wcm.search.AbstractQueryBuilder#like(java.lang.String, java.lang.String, org.exoplatform.services.wcm.search.AbstractQueryBuilder.LOGICAL)
+  /*
+   * (non-Javadoc)
+   * @see
+   * org.exoplatform.services.wcm.search.AbstractQueryBuilder#like(java.lang
+   * .String, java.lang.String,
+   * org.exoplatform.services.wcm.search.AbstractQueryBuilder.LOGICAL)
    */
-  public void like(String propName, String value, LOGICAL condition) {          
+  public void like(String propName, String value, LOGICAL condition) {
     if(condition == LOGICAL.AND)
       propertiesClause.append("AND ").append(propName).append(" LIKE '").append(value).append("%' ");
     else if(condition == LOGICAL.OR)
       propertiesClause.append("OR ").append(propName).append(" LIKE '").append(value).append("%' ");
     else
       propertiesClause.append(propName).append(" LIKE '").append(value).append("%' ");
-  }           
-
-  /* (non-Javadoc)
-   * @see org.exoplatform.services.wcm.search.AbstractQueryBuilder#reference(java.lang.String, java.lang.String, org.exoplatform.services.wcm.search.AbstractQueryBuilder.LOGICAL)
-   */
-  public void reference(String propName, String value, LOGICAL condition) {    
   }
 
-  /* (non-Javadoc)
-   * @see org.exoplatform.services.wcm.search.AbstractQueryBuilder#beforeDate(java.lang.String, java.lang.String, org.exoplatform.services.wcm.search.AbstractQueryBuilder.LOGICAL)
+  /*
+   * (non-Javadoc)
+   * @see
+   * org.exoplatform.services.wcm.search.AbstractQueryBuilder#reference(java
+   * .lang.String, java.lang.String,
+   * org.exoplatform.services.wcm.search.AbstractQueryBuilder.LOGICAL)
+   */
+  public void reference(String propName, String value, LOGICAL condition) {
+  }
+
+  /*
+   * (non-Javadoc)
+   * @see
+   * org.exoplatform.services.wcm.search.AbstractQueryBuilder#beforeDate(java
+   * .lang.String, java.lang.String,
+   * org.exoplatform.services.wcm.search.AbstractQueryBuilder.LOGICAL)
    */
   public void beforeDate(String propName, String comparedDate, LOGICAL condition) {
     Calendar calendar = ISO8601.parse(comparedDate);
@@ -156,8 +199,12 @@ public class SQLQueryBuilder extends AbstractQueryBuilder {
       propertiesClause.append(propName).append(" <= '").append(time).append("' ");
   }
 
-  /* (non-Javadoc)
-   * @see org.exoplatform.services.wcm.search.AbstractQueryBuilder#afterDate(java.lang.String, java.lang.String, org.exoplatform.services.wcm.search.AbstractQueryBuilder.LOGICAL)
+  /*
+   * (non-Javadoc)
+   * @see
+   * org.exoplatform.services.wcm.search.AbstractQueryBuilder#afterDate(java
+   * .lang.String, java.lang.String,
+   * org.exoplatform.services.wcm.search.AbstractQueryBuilder.LOGICAL)
    */
   public void afterDate(String propName, String comparedDate, LOGICAL condition) {
     Calendar calendar = ISO8601.parse(comparedDate);
@@ -170,29 +217,67 @@ public class SQLQueryBuilder extends AbstractQueryBuilder {
       propertiesClause.append(propName).append(" >= '").append(time).append("' ");
   }
 
-  /* (non-Javadoc)
-   * @see org.exoplatform.services.wcm.search.AbstractQueryBuilder#betweenDates(java.lang.String, java.lang.String, java.lang.String, org.exoplatform.services.wcm.search.AbstractQueryBuilder.LOGICAL)
+  /*
+   * (non-Javadoc)
+   * @see
+   * org.exoplatform.services.wcm.search.AbstractQueryBuilder#betweenDates(java
+   * .lang.String, java.lang.String, java.lang.String,
+   * org.exoplatform.services.wcm.search.AbstractQueryBuilder.LOGICAL)
    */
-  public void betweenDates(String propName, String startDate, String endDate, LOGICAL condition) {    
+  public void betweenDates(String propName, String startDate, String endDate, LOGICAL condition) {
     String startTime = ISO8601.parse(startDate).getTime().toString();
     String endTime = ISO8601.parse(endDate).getTime().toString();
-    if(condition == LOGICAL.AND)
-      propertiesClause.append("AND ").append(propName).append(" between TIMESTAMP '").append(startTime).append("' and TIMESTAMP '").append(endTime).append("' ");
-    else if(condition == LOGICAL.OR)
-      propertiesClause.append("OR ").append(propName).append(" between TIMESTAMP '").append(startTime).append("' and  TIMESTAMP '").append(endTime).append("' ");
+    if (condition == LOGICAL.AND)
+      propertiesClause.append("AND ")
+                      .append(propName)
+                      .append(" between TIMESTAMP '")
+                      .append(startTime)
+                      .append("' and TIMESTAMP '")
+                      .append(endTime)
+                      .append("' ");
+    else if (condition == LOGICAL.OR)
+      propertiesClause.append("OR ")
+                      .append(propName)
+                      .append(" between TIMESTAMP '")
+                      .append(startTime)
+                      .append("' and  TIMESTAMP '")
+                      .append(endTime)
+                      .append("' ");
     else
-      propertiesClause.append(propName).append(" between TIMESTAMP '").append(startTime).append("' and TIMESTAMP '").append(endTime).append("' ");
+      propertiesClause.append(propName)
+                      .append(" between TIMESTAMP '")
+                      .append(startTime)
+                      .append("' and TIMESTAMP '")
+                      .append(endTime)
+                      .append("' ");
   }
-  
-  public void betweenDates(String propName, Calendar startDate, Calendar endDate, LOGICAL condition) {    
+
+  public void betweenDates(String propName, Calendar startDate, Calendar endDate, LOGICAL condition) {
     String startTime = ISO8601.format(startDate);
     String endTime = ISO8601.format(endDate);
-    if(condition == LOGICAL.AND)
-      propertiesClause.append("AND ").append(propName).append(" between TIMESTAMP '").append(startTime).append("' and TIMESTAMP '").append(endTime).append("' ");
-    else if(condition == LOGICAL.OR)
-      propertiesClause.append("OR ").append(propName).append(" between TIMESTAMP '").append(startTime).append("' and TIMESTAMP '").append(endTime).append("' ");
+    if (condition == LOGICAL.AND)
+      propertiesClause.append("AND ")
+                      .append(propName)
+                      .append(" between TIMESTAMP '")
+                      .append(startTime)
+                      .append("' and TIMESTAMP '")
+                      .append(endTime)
+                      .append("' ");
+    else if (condition == LOGICAL.OR)
+      propertiesClause.append("OR ")
+                      .append(propName)
+                      .append(" between TIMESTAMP '")
+                      .append(startTime)
+                      .append("' and TIMESTAMP '")
+                      .append(endTime)
+                      .append("' ");
     else
-      propertiesClause.append(propName).append(" between TIMESTAMP '").append(startTime).append("' and TIMESTAMP '").append(endTime).append("' ");
+      propertiesClause.append(propName)
+                      .append(" between TIMESTAMP '")
+                      .append(startTime)
+                      .append("' and TIMESTAMP '")
+                      .append(endTime)
+                      .append("' ");
   }
   /* (non-Javadoc)
    * @see org.exoplatform.services.wcm.search.AbstractQueryBuilder#setQueryPath(java.lang.String, org.exoplatform.services.wcm.search.AbstractQueryBuilder.PATH_TYPE)
@@ -201,42 +286,50 @@ public class SQLQueryBuilder extends AbstractQueryBuilder {
     if(PATH_TYPE.EXACT == pathtype) {
       if(path.indexOf("[%]")>0)
         pathClause = new StringBuilder().append("jcr:path LIKE '").append(path).append("' ");
-      else 
+      else
         pathClause = new StringBuilder().append("jcr:path = '").append(path).append("' ");
     }else if(PATH_TYPE.CHILDNODES == pathtype) {
-      pathClause = 
+      pathClause =
         new StringBuilder().append("jcr:path LIKE '").append(path).append("/%'")
-        .append("AND NOT jcr:path like '").append(path).append("/%/%' ");                          
+        .append("AND NOT jcr:path like '").append(path).append("/%/%' ");
     }else if(PATH_TYPE.DECENDANTS == pathtype) {
-      pathClause =  new StringBuilder().append("jcr:path LIKE '").append(path).append("/%' ");                          
+      pathClause =  new StringBuilder().append("jcr:path LIKE '").append(path).append("/%' ");
     }else if(PATH_TYPE.DECENDANTS_OR_SELFT == pathtype) {
-      pathClause = 
+      pathClause =
         new StringBuilder().append("jcr:path LIKE '").append(path).append("'")
         .append("OR jcr:path LIKE '").append(path).append("/%' ");
     }
   }
 
-  /* (non-Javadoc)
-   * @see org.exoplatform.services.wcm.search.AbstractQueryBuilder#contains(java.lang.String, java.lang.String, org.exoplatform.services.wcm.search.AbstractQueryBuilder.LOGICAL)
+  /*
+   * (non-Javadoc)
+   * @see
+   * org.exoplatform.services.wcm.search.AbstractQueryBuilder#contains(java.
+   * lang.String, java.lang.String,
+   * org.exoplatform.services.wcm.search.AbstractQueryBuilder.LOGICAL)
    */
   public void contains(String scope, String term, LOGICAL condition) {
-    if(scope == null) 
-      scope = "."; 
-    if(LOGICAL.AND == condition) 
+    if(scope == null)
+      scope = ".";
+    if(LOGICAL.AND == condition)
       containsClause.append("AND CONTAINS(").append(scope).append(",'").append(term).append("') ");
     else if(LOGICAL.OR == condition)
       containsClause.append("OR CONTAINS(").append(scope).append(",'").append(term).append("') ");
     else
       containsClause.append("CONTAINS(").append(scope).append(",'").append(term).append("') ");
-  }  
+  }
 
-  /* (non-Javadoc)
-   * @see org.exoplatform.services.wcm.search.AbstractQueryBuilder#notContains(java.lang.String, java.lang.String, org.exoplatform.services.wcm.search.AbstractQueryBuilder.LOGICAL)
+  /*
+   * (non-Javadoc)
+   * @see
+   * org.exoplatform.services.wcm.search.AbstractQueryBuilder#notContains(java
+   * .lang.String, java.lang.String,
+   * org.exoplatform.services.wcm.search.AbstractQueryBuilder.LOGICAL)
    */
-  public void notContains(String scope, String term, LOGICAL condition) {    
-    if(scope == null) 
-      scope = "."; 
-    if(LOGICAL.AND == condition) 
+  public void notContains(String scope, String term, LOGICAL condition) {
+    if(scope == null)
+      scope = ".";
+    if(LOGICAL.AND == condition)
       containsClause.append("AND NOT CONTAINS(").append(scope).append(",'").append(term).append("') ");
     else if(LOGICAL.OR == condition)
       containsClause.append("OR NOT CONTAINS(").append(scope).append(",'").append(term).append("') ");
@@ -250,12 +343,12 @@ public class SQLQueryBuilder extends AbstractQueryBuilder {
   public void fromNodeTypes(String[] nodetypes) {
     if(nodetypes == null) {
       fromClause = new StringBuilder("FROM nt:base");
-      return; 
-    } 
+      return;
+    }
     fromClause = new StringBuilder("FROM ");
     for(int i = 0; i<nodetypes.length; i++) {
       fromClause.append(nodetypes[i]);
-      if(i<nodetypes.length-1) 
+      if(i<nodetypes.length-1)
         fromClause.append(",");
     }
   }
@@ -266,26 +359,29 @@ public class SQLQueryBuilder extends AbstractQueryBuilder {
   public void selectTypes(String[] returnTypes) {
     if(returnTypes == null) {
       selectClause = new StringBuilder("SELECT * ");
-      return; 
-    } 
+      return;
+    }
     selectClause = new StringBuilder("SELECT ");
     for(int i = 0; i<returnTypes.length; i++) {
       selectClause.append(returnTypes[i]);
-      if(i<returnTypes.length-1) 
+      if(i<returnTypes.length-1)
         selectClause.append(",");
       selectClause.append(" ");
-    }    
-  }      
+    }
+  }
 
-  /* (non-Javadoc)
-   * @see org.exoplatform.services.wcm.search.AbstractQueryBuilder#orderBy(java.lang.String, org.exoplatform.services.wcm.search.AbstractQueryBuilder.ORDERBY)
+  /*
+   * (non-Javadoc)
+   * @see
+   * org.exoplatform.services.wcm.search.AbstractQueryBuilder#orderBy(java.lang
+   * .String, org.exoplatform.services.wcm.search.AbstractQueryBuilder.ORDERBY)
    */
   public void orderBy(String properyName, ORDERBY orderby) {
     if(orderByClause.length()>0)
-      orderByClause = orderByClause.append(", ");    
+      orderByClause = orderByClause.append(", ");
     if(ORDERBY.ASC == orderby)
       orderByClause.append(properyName).append(" ASC");
-    else 
+    else
       orderByClause.append(properyName).append(" DESC");
   }
 
@@ -296,40 +392,43 @@ public class SQLQueryBuilder extends AbstractQueryBuilder {
     if(enable)
       excerptClause = new StringBuilder("excerpt(.)");
   }
-  
+
   /* (non-Javadoc)
    * @see org.exoplatform.services.wcm.search.AbstractQueryBuilder#spellCheck(java.lang.String)
    */
-  public void spellCheck(String value) {   
-  }     
-  
-  /* (non-Javadoc)
-   * @see org.exoplatform.services.wcm.search.AbstractQueryBuilder#openGroup(org.exoplatform.services.wcm.search.AbstractQueryBuilder.LOGICAL)
+  public void spellCheck(String value) {
+  }
+
+  /*
+   * (non-Javadoc)
+   * @see
+   * org.exoplatform.services.wcm.search.AbstractQueryBuilder#openGroup(org.
+   * exoplatform.services.wcm.search.AbstractQueryBuilder.LOGICAL)
    */
   public void openGroup(LOGICAL logical) {
     if(LOGICAL.AND == logical)
     propertiesClause = propertiesClause.append("AND( ");
     else if(LOGICAL.OR == logical)
       propertiesClause = propertiesClause.append("OR( ");
-    else if(LOGICAL.AND_NOT == logical) 
+    else if(LOGICAL.AND_NOT == logical)
       propertiesClause = propertiesClause.append("AND NOT(");
     else if(LOGICAL.OR_NOT == logical)
-      propertiesClause = propertiesClause.append("OR NOT(");    
+      propertiesClause = propertiesClause.append("OR NOT(");
     else
       propertiesClause = propertiesClause.append("( ");
   }
-  
+
   /* (non-Javadoc)
    * @see org.exoplatform.services.wcm.search.AbstractQueryBuilder#closeGroup()
    */
   public void closeGroup() {
     propertiesClause = propertiesClause.append(")");
   }
-  
+
   /* (non-Javadoc)
    * @see org.exoplatform.services.wcm.search.AbstractQueryBuilder#createQueryStatement()
    */
-  public String createQueryStatement() { 
+  public String createQueryStatement() {
     StringBuffer statement = new StringBuffer();
     statement = statement.append(selectClause.toString()).append(fromClause.toString()).append(" WHERE ");
     if(containsClause.length()>0) {
@@ -340,24 +439,27 @@ public class SQLQueryBuilder extends AbstractQueryBuilder {
     }else {
       if(pathClause.length()>0) {
         statement = statement.append(pathClause.toString());
-      } 
-    }    
+      }
+    }
     if(propertiesClause.length()>0) {
       statement = statement.append(propertiesClause.toString());
-    }      
+    }
     if(orderByClause.length()>0) {
       statement = statement.append("ORDER BY ").append(orderByClause.toString());
     }
     return statement.toString();
-  }  
-  
-  /* (non-Javadoc)
-   * @see org.exoplatform.services.wcm.search.AbstractQueryBuilder#merge(org.exoplatform.services.wcm.search.AbstractQueryBuilder)
-   */
-  public void merge(AbstractQueryBuilder other) {    
   }
-  
-  public void queryByNodeName(String rootPath, String nodeName) {    
+
+  /*
+   * (non-Javadoc)
+   * @see
+   * org.exoplatform.services.wcm.search.AbstractQueryBuilder#merge(org.exoplatform
+   * .services.wcm.search.AbstractQueryBuilder)
+   */
+  public void merge(AbstractQueryBuilder other) {
+  }
+
+  public void queryByNodeName(String rootPath, String nodeName) {
     pathClause = new StringBuilder().append(" jcr:path LIKE '")
     .append(rootPath).append("/%/").append(nodeName).append("' ")
     .append(" or jcr:path like '").append(rootPath).append("/").append(nodeName).append("' ");

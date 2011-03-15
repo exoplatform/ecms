@@ -23,7 +23,7 @@ import org.exoplatform.webui.core.UIContainer;
  * Created by The eXo Platform SARL
  * Author : Pham Tuan
  *          tuan.pham@exoplatform.com
- * Aug 13, 2007  
+ * Aug 13, 2007
  */
 @ComponentConfig(template =  "app:/groovy/webui/component/browse/UIBrowseContentHelp.gtmpl")
 public class UIBrowseContentHelp extends UIContainer{

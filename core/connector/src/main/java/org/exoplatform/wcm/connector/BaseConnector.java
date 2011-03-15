@@ -73,26 +73,26 @@ public abstract class BaseConnector {
   private static Log log = ExoLogger.getLogger(BaseConnector.class);
 
   /** The voting service. */
-  protected VotingService votingService;  
-  
+  protected VotingService votingService;
+
   /** The link manager. */
-  protected LinkManager linkManager;  
-  
+  protected LinkManager linkManager;
+
   /** The live portal manager service. */
   protected LivePortalManagerService          livePortalManagerService;
 
   /** The web schema config service. */
   protected WebSchemaConfigService            webSchemaConfigService;
-  
+
   /** The Constant LAST_MODIFIED_PROPERTY. */
   protected static final String LAST_MODIFIED_PROPERTY = "Last-Modified";
-   
+
   /** The Constant IF_MODIFIED_SINCE_DATE_FORMAT. */
   protected static final String IF_MODIFIED_SINCE_DATE_FORMAT = "EEE, dd MMM yyyy HH:mm:ss z";
 
   /**
    * Gets the root content storage.
-   * 
+   *
    * @param node the node
    * @return the root content storage
    * @throws Exception the exception
@@ -101,15 +101,15 @@ public abstract class BaseConnector {
 
   /**
    * Gets the content storage type.
-   * 
+   *
    * @return the content storage type
    * @throws Exception the exception
    */
-  protected abstract String getContentStorageType() throws Exception;  
+  protected abstract String getContentStorageType() throws Exception;
 
   /**
    * Instantiates a new base connector.
-   * 
+   *
    * @param container the container
    */
   public BaseConnector() {
@@ -118,7 +118,7 @@ public abstract class BaseConnector {
     webSchemaConfigService = WCMCoreUtils.getService(WebSchemaConfigService.class);
     votingService = WCMCoreUtils.getService(VotingService.class);
     linkManager = WCMCoreUtils.getService(LinkManager.class);
-    
+
     ExoContainer container = ExoContainerContext.getCurrentContainer();
     folderHandler = new FCKFolderHandler(container);
     fileHandler = new FCKFileHandler(container);
@@ -127,7 +127,7 @@ public abstract class BaseConnector {
 
   /**
    * Builds the xml response on expand.
-   * 
+   *
    * @param currentFolder the current folder
    * @param runningPortal
    * @param workspaceName the workspace name
@@ -174,7 +174,7 @@ public abstract class BaseConnector {
 
   /**
    * Builds the xml response common.
-   * 
+   *
    * @param activePortal the active portal
    * @param webContent the web content
    * @param currentFolder the current folder
@@ -206,7 +206,7 @@ public abstract class BaseConnector {
 
   /**
    * Builds the xml response for root.
-   * 
+   *
    * @param currentPortal the current portal
    * @param sharedPortal the shared portal
    * @param command the command
@@ -245,7 +245,7 @@ public abstract class BaseConnector {
 
   /**
    * Builds the xml response for portal.
-   * 
+   *
    * @param node the node
    * @param webContent the web content
    * @param command the command
@@ -280,7 +280,7 @@ public abstract class BaseConnector {
 
   /**
    * Builds the xml response for content storage.
-   * 
+   *
    * @param node the node
    * @param command the command
    * @return the response
@@ -341,7 +341,7 @@ public abstract class BaseConnector {
 
   /**
    * Gets the response.
-   * 
+   *
    * @param document the document
    * @return the response
    */
@@ -350,32 +350,40 @@ public abstract class BaseConnector {
     cacheControl.setNoCache(true);
     cacheControl.setNoStore(true);
     DateFormat dateFormat = new SimpleDateFormat(IF_MODIFIED_SINCE_DATE_FORMAT);
-    return Response.ok(new DOMSource(document), MediaType.TEXT_XML).cacheControl(cacheControl).header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
+    return Response.ok(new DOMSource(document), MediaType.TEXT_XML)
+                   .cacheControl(cacheControl)
+                   .header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date()))
+                   .build();
   }
 
   /**
    * Gets the jcr content.
-   * 
+   *
    * @param repositoryName the repository name
    * @param workspaceName the workspace name
    * @param jcrPath the jcr path
    * @return the jcr content
    * @throws Exception the exception
    */
-  protected Node getContent(String repositoryName, String workspaceName, String jcrPath, String NodeTypeFilter, boolean isSystemSession) throws Exception {
+  protected Node getContent(String repositoryName,
+                            String workspaceName,
+                            String jcrPath,
+                            String NodeTypeFilter,
+                            boolean isSystemSession) throws Exception {
     if (jcrPath == null || jcrPath.trim().length() == 0)
       return null;
     try {
-      SessionProvider sessionProvider = isSystemSession?WCMCoreUtils.getSystemSessionProvider():WCMCoreUtils.getUserSessionProvider();
+      SessionProvider sessionProvider = isSystemSession ? WCMCoreUtils.getSystemSessionProvider()
+                                                       : WCMCoreUtils.getUserSessionProvider();
       ManageableRepository repository = repositoryService.getRepository(repositoryName);
       Session session = sessionProvider.getSession(workspaceName, repository);
       Node content = (Node) session.getItem(jcrPath);
       if (content.isNodeType("exo:taxonomyLink")) {
-    	  content = linkManager.getTarget(content);
+        content = linkManager.getTarget(content);
       }
-      
-      if (NodeTypeFilter==null || (NodeTypeFilter!=null && content.isNodeType(NodeTypeFilter)) ) 
-    	  return content;
+
+      if (NodeTypeFilter==null || (NodeTypeFilter!=null && content.isNodeType(NodeTypeFilter)) )
+        return content;
     } catch (Exception e) {
       log.error("Error when perform getContent: ", e);
     }
@@ -384,7 +392,7 @@ public abstract class BaseConnector {
 
   /**
    * Gets the jcr content.
-   * 
+   *
    * @param repositoryName the repository name
    * @param workspaceName the workspace name
    * @param jcrPath the jcr path
@@ -392,12 +400,12 @@ public abstract class BaseConnector {
    * @throws Exception the exception
    */
   protected Node getContent(String repositoryName, String workspaceName, String jcrPath) throws Exception {
-	  return getContent(repositoryName, workspaceName, jcrPath, null, true);
+    return getContent(repositoryName, workspaceName, jcrPath, null, true);
   }
-  
+
   /**
    * Gets the web content.
-   * 
+   *
    * @param repositoryName the repository name
    * @param workspaceName the workspace name
    * @param jcrPath the jcr path
@@ -405,9 +413,9 @@ public abstract class BaseConnector {
    * @throws Exception the exception
    */
   protected Node getWebContent(String repositoryName, String workspaceName, String jcrPath) throws Exception {
-	  return getContent(repositoryName, workspaceName, jcrPath, "exo:webContent", true);
+    return getContent(repositoryName, workspaceName, jcrPath, "exo:webContent", true);
   }
-  
+
   protected Node getCurrentPortalNode(String repositoryName,
                                       String jcrPath,
                                       String runningPortal,
@@ -433,5 +441,5 @@ public abstract class BaseConnector {
       return null;
     }
   }
-  
+
 }

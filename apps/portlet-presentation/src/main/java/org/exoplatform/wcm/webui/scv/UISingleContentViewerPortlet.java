@@ -85,15 +85,15 @@ public class UISingleContentViewerPortlet extends UIPortletApplication {
   /** The Page that show the print viewer **/
   public static String PRINT_PAGE     = "PrintPage";
   /** The mode_. */
-  
+
   /** The Constant PREFERENCE_TARGET_PAGE. */
   public final static String  PREFERENCE_TARGET_PAGE                = "basePath";
-  
+
   /** The Constant PREFERENCE_SHOW_SCL_WITH. */
   public final static String PREFERENCE_SHOW_SCV_WITH               = "showScvWith";
 
   public static final String DEFAULT_SHOW_SCV_WITH                  = "content-id";
-  
+
   private PortletMode mode = null;//PortletMode.VIEW ;
 
   public static final String UIPreferencesPopupID = "UIPreferencesPopupWindows";
@@ -149,12 +149,12 @@ public class UISingleContentViewerPortlet extends UIPortletApplication {
     PortletRequestContext pContext = (PortletRequestContext) context ;
     PortletMode newMode = pContext.getApplicationMode() ;
 
-  	if (context.getRemoteUser()==null) {
+    if (context.getRemoteUser()==null) {
       WCMService wcmService = getApplicationComponent(WCMService.class);
-  	  pContext.getResponse().setProperty(MimeResponse.EXPIRATION_CACHE, ""+wcmService.getPortletExpirationCache());
-	    if (log.isTraceEnabled())
-	      log.trace("SCV rendering : cache set to "+wcmService.getPortletExpirationCache());
-  	}
+      pContext.getResponse().setProperty(MimeResponse.EXPIRATION_CACHE, ""+wcmService.getPortletExpirationCache());
+      if (log.isTraceEnabled())
+        log.trace("SCV rendering : cache set to "+wcmService.getPortletExpirationCache());
+    }
 
     if(!newMode.equals(mode)) {
       activateMode(newMode) ;

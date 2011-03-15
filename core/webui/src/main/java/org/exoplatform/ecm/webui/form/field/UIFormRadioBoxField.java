@@ -24,7 +24,7 @@ import org.exoplatform.webui.form.UIFormInputBase;
  * Created by eXo Platform
  * Author : Nguyen Manh Cuong
  *          manhcuongpt@gmail.com
- * Jul 3, 2009  
+ * Jul 3, 2009
  */
 public class UIFormRadioBoxField extends DialogFormField{
 

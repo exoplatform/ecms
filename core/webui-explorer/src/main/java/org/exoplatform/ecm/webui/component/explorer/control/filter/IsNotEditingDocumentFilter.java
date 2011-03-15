@@ -29,14 +29,14 @@ import org.exoplatform.webui.ext.filter.UIExtensionFilterType;
  * Created by The eXo Platform SAS
  * Author : Nguyen Anh Vu
  *          anhvurz90@gmail.com
- * July 26, 2010  
+ * July 26, 2010
  */
 public class IsNotEditingDocumentFilter extends UIExtensionAbstractFilter {
-  
+
   public IsNotEditingDocumentFilter() {
     this(null);
   }
-  
+
   public IsNotEditingDocumentFilter(String messageKey) {
     super(messageKey, UIExtensionFilterType.MANDATORY);
   }
@@ -46,13 +46,12 @@ public class IsNotEditingDocumentFilter extends UIExtensionAbstractFilter {
     UIJCRExplorer uiExplorer = (UIJCRExplorer)context.get(UIJCRExplorer.class.getName());
     if (currentNode == null)
       return !uiExplorer.isEditingDocument();
-    return  !uiExplorer.isEditingDocument() || 
+    return  !uiExplorer.isEditingDocument() ||
             !currentNode.getSession().getWorkspace().getName().equals(uiExplorer.getCurrentDriveWorkspace()) ||
             !currentNode.getPath().equals(uiExplorer.getCurrentNode().getPath());
   }
 
   public void onDeny(Map<String, Object> context) throws Exception {
-    // TODO Auto-generated method stub
-    
+
   }
 }

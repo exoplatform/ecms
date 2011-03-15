@@ -62,12 +62,12 @@ import org.exoplatform.webui.form.UIForm;
  * Created by The eXo Platform SARL
  * Author : Hoang Van Hung
  *          hunghvit@gmail.com
- * Apr 17, 2009  
+ * Apr 17, 2009
  */
 
 @ComponentConfig(
-    lifecycle = UIFormLifecycle.class, 
-    template = "system:/groovy/webui/form/UIFormWithTitle.gtmpl", 
+    lifecycle = UIFormLifecycle.class,
+    template = "system:/groovy/webui/form/UIFormWithTitle.gtmpl",
     events = {
       @EventConfig(listeners = UIPermissionTreeForm.SaveActionListener.class),
       @EventConfig(listeners = UIPermissionTreeForm.NextAddActionActionListener.class),
@@ -79,7 +79,7 @@ import org.exoplatform.webui.form.UIForm;
     }
 )
 public class UIPermissionTreeForm extends UIForm implements UISelectable {
-  
+
   public static final String PERMISSION      = "permission";
 
   public static final String POPUP_SELECT    = "TaxoTreeSelectUserOrGroupPopup";
@@ -89,7 +89,7 @@ public class UIPermissionTreeForm extends UIForm implements UISelectable {
   private Node               currentNode;
 
   private PermissionBean     permBean;
-  
+
   public UIPermissionTreeForm() throws Exception {
     addChild(new UIPermissionInputSet(PERMISSION));
     setActions(new String[] { "Previous", "Save", "Reset", "NextAddAction" });
@@ -110,7 +110,7 @@ public class UIPermissionTreeForm extends UIForm implements UISelectable {
   protected boolean isEditable(Node node) throws Exception {
     return PermissionUtil.canChangePermission(node);
   }
-  
+
   @SuppressWarnings("unchecked")
   public void fillForm(String user, ExtendedNode node) throws Exception {
     UIPermissionInputSet uiInputSet = getChildById(PERMISSION);
@@ -149,7 +149,7 @@ public class UIPermissionTreeForm extends UIForm implements UISelectable {
       }
     }
   }
-  
+
   protected void lockForm(boolean isLock) {
     UIPermissionInputSet uiInputSet = getChildById(PERMISSION);
     if (isLock) {
@@ -168,7 +168,7 @@ public class UIPermissionTreeForm extends UIForm implements UISelectable {
   private String getExoOwner(Node node) throws Exception {
     return Utils.getNodeOwner(node);
   }
-  
+
   public Node getCurrentNode() {
     return currentNode;
   }
@@ -184,7 +184,7 @@ public class UIPermissionTreeForm extends UIForm implements UISelectable {
   public void setPermBean(PermissionBean permBean) {
     this.permBean = permBean;
   }
-  
+
   public void doSelect(String selectField, Object value) {
     try {
       ExtendedNode node = (ExtendedNode) this.getCurrentNode();
@@ -205,7 +205,7 @@ public class UIPermissionTreeForm extends UIForm implements UISelectable {
       event.getRequestContext().addUIComponentToUpdateByAjax(uiForm.getParent());
     }
   }
-  
+
   public static class SaveActionListener extends EventListener<UIPermissionTreeForm> {
     public void execute(Event<UIPermissionTreeForm> event) throws Exception {
       UIPermissionTreeForm uiForm = event.getSource();
@@ -223,7 +223,7 @@ public class UIPermissionTreeForm extends UIForm implements UISelectable {
       permBean.setAddNode(uiForm.getUIFormCheckBoxInput(PermissionType.ADD_NODE).isChecked());
       permBean.setRemove(uiForm.getUIFormCheckBoxInput(PermissionType.REMOVE).isChecked());
       permBean.setSetProperty(uiForm.getUIFormCheckBoxInput(PermissionType.SET_PROPERTY).isChecked());
-      
+
       for (String perm : PermissionType.ALL) {
         if (uiForm.getUIFormCheckBoxInput(perm).isChecked()) {
           permsList.add(perm);
@@ -234,19 +234,19 @@ public class UIPermissionTreeForm extends UIForm implements UISelectable {
       if (uiForm.getUIFormCheckBoxInput(PermissionType.ADD_NODE).isChecked()
           || uiForm.getUIFormCheckBoxInput(PermissionType.REMOVE).isChecked()
           || uiForm.getUIFormCheckBoxInput(PermissionType.SET_PROPERTY).isChecked()) {
-       
+
         if (!permsList.contains(PermissionType.READ))
           permsList.add(PermissionType.READ);
       }
 
       if (Utils.isNameEmpty(userOrGroup)) {
-        uiApp.addMessage(new ApplicationMessage("UIPermissionTreeForm.msg.userOrGroup-required", null, 
+        uiApp.addMessage(new ApplicationMessage("UIPermissionTreeForm.msg.userOrGroup-required", null,
             ApplicationMessage.WARNING));
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
         return;
       }
       if (permsList.size() == 0) {
-        uiApp.addMessage(new ApplicationMessage("UIPermissionTreeForm.msg.checkbox-require", null, 
+        uiApp.addMessage(new ApplicationMessage("UIPermissionTreeForm.msg.checkbox-require", null,
             ApplicationMessage.WARNING));
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
         return;
@@ -264,7 +264,7 @@ public class UIPermissionTreeForm extends UIForm implements UISelectable {
           event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
           return;
         }
-        
+
         ExtendedNode node = (ExtendedNode) currentNode;
         if (PermissionUtil.canChangePermission(node)) {
           if (node.canAddMixin("exo:privilegeable")){
@@ -275,17 +275,17 @@ public class UIPermissionTreeForm extends UIForm implements UISelectable {
             try {
               node.removePermission(userOrGroup, perm);
             } catch (AccessDeniedException ade) {
-              uiApp.addMessage(new ApplicationMessage("UIPermissionTreeForm.msg.access-denied", null, 
+              uiApp.addMessage(new ApplicationMessage("UIPermissionTreeForm.msg.access-denied", null,
                                                       ApplicationMessage.WARNING));
               event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
               return;
             }
-          } 
+          }
           if(PermissionUtil.canChangePermission(node)) node.setPermission(userOrGroup, permsArray);
           uiParent.getChild(UIPermissionTreeInfo.class).updateGrid();
           node.save();
         } else {
-          uiApp.addMessage(new ApplicationMessage("UIPermissionTreeForm.msg.not-change-permission", null, 
+          uiApp.addMessage(new ApplicationMessage("UIPermissionTreeForm.msg.not-change-permission", null,
               ApplicationMessage.WARNING));
           event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
           return;
@@ -307,7 +307,7 @@ public class UIPermissionTreeForm extends UIForm implements UISelectable {
       UIPermissionTreeInfo uiPermInfo = ((UIContainer)uiForm.getParent()).getChild(UIPermissionTreeInfo.class);
       UIApplication uiApp = uiForm.getAncestorOfType(UIApplication.class);
       if (uiPermInfo.getPermBeans().size() < 1) {
-        uiApp.addMessage(new ApplicationMessage("UIPermissionTreeForm.msg.have-not-any-permission", null, 
+        uiApp.addMessage(new ApplicationMessage("UIPermissionTreeForm.msg.have-not-any-permission", null,
             ApplicationMessage.WARNING));
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
         return;
@@ -326,7 +326,7 @@ public class UIPermissionTreeForm extends UIForm implements UISelectable {
       event.getRequestContext().addUIComponentToUpdateByAjax(uiTaxonomyManagerTrees);
     }
   }
-  
+
   public static class SelectUserActionListener extends EventListener<UIPermissionTreeForm> {
     public void execute(Event<UIPermissionTreeForm> event) throws Exception {
       UIPermissionTreeForm uiForm = event.getSource();
@@ -360,7 +360,7 @@ public class UIPermissionTreeForm extends UIForm implements UISelectable {
       event.getRequestContext().addUIComponentToUpdateByAjax(uiForm.getParent());
     }
   }
-  
+
   public static class PreviousActionListener extends EventListener<UIPermissionTreeForm> {
     public void execute(Event<UIPermissionTreeForm> event) throws Exception {
       UITaxonomyTreeContainer uiTaxonomyTreeContainer = event.getSource().getAncestorOfType(UITaxonomyTreeContainer.class);

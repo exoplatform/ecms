@@ -33,7 +33,7 @@ import org.w3c.dom.Element;
 
 /**
  * Created by The eXo Platform SAS
- * 
+ *
  * @author : Hoa.Pham hoa.pham@exoplatform.com Jun 23, 2008
  */
 public class FCKFolderHandler {
@@ -68,7 +68,7 @@ public class FCKFolderHandler {
   /**
    * Creates the folder element for connector response look like <folder name=""
    * url="" folderType="" />
-   * 
+   *
    * @param document the document
    * @param child the child
    * @param folderType the folder type
@@ -96,13 +96,19 @@ public class FCKFolderHandler {
         Object[] args = { currentNode.getPath() };
         document = fckMessage.createMessage(FCKMessage.FOLDER_PERMISSION_CREATING, FCKMessage.ERROR,
             language, args);
-        return Response.ok(document, new MediaType("text", "xml")).cacheControl(cacheControl).header(FCKUtils.LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
+        return Response.ok(document, new MediaType("text", "xml"))
+                       .cacheControl(cacheControl)
+                       .header(FCKUtils.LAST_MODIFIED_PROPERTY, dateFormat.format(new Date()))
+                       .build();
       }
       if (currentNode.hasNode(newFolderName)) {
         Object[] args = { currentNode.getPath(), newFolderName };
         document = fckMessage.createMessage(FCKMessage.FOLDER_EXISTED, FCKMessage.ERROR, language,
             args);
-        return Response.ok(document, new MediaType("text", "xml")).cacheControl(cacheControl).header(FCKUtils.LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
+        return Response.ok(document, new MediaType("text", "xml"))
+                       .cacheControl(cacheControl)
+                       .header(FCKUtils.LAST_MODIFIED_PROPERTY, dateFormat.format(new Date()))
+                       .build();
       }
       currentNode.addNode(newFolderName, FCKUtils.NT_FOLDER);
       currentNode.getSession().save();
@@ -116,10 +122,16 @@ public class FCKFolderHandler {
           language));
       errorElement.setAttribute("type", FCKMessage.ERROR);
       rootElement.appendChild(errorElement);
-      return Response.ok(document, new MediaType("text", "xml")).cacheControl(cacheControl).header(FCKUtils.LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
+      return Response.ok(document, new MediaType("text", "xml"))
+                     .cacheControl(cacheControl)
+                     .header(FCKUtils.LAST_MODIFIED_PROPERTY, dateFormat.format(new Date()))
+                     .build();
     }
-    
+
     document = fckMessage.createMessage(FCKMessage.FOLDER_NOT_CREATED, FCKMessage.ERROR, language, null);
-    return Response.ok(document, new MediaType("text", "xml")).cacheControl(cacheControl).header(FCKUtils.LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();    
+    return Response.ok(document, new MediaType("text", "xml"))
+                   .cacheControl(cacheControl)
+                   .header(FCKUtils.LAST_MODIFIED_PROPERTY, dateFormat.format(new Date()))
+                   .build();
   }
 }

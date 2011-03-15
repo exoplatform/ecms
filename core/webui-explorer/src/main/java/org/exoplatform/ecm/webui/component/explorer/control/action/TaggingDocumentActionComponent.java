@@ -38,7 +38,7 @@ import org.exoplatform.webui.ext.filter.UIExtensionFilters;
  * Created by The eXo Platform SAS
  * Author : eXoPlatform
  *          nicolas.filotto@exoplatform.com
- * 6 mai 2009  
+ * 6 mai 2009
  */
 @ComponentConfig(
      events = {
@@ -48,12 +48,12 @@ import org.exoplatform.webui.ext.filter.UIExtensionFilters;
 public class TaggingDocumentActionComponent extends UIComponent {
 
   private static final List<UIExtensionFilter> FILTERS = Arrays.asList(new UIExtensionFilter[]{new CanSetPropertyFilter(), new IsNotLockedFilter(), new IsDocumentFilter("UIActionBar.msg.unsupported-tagging"), new IsCheckedOutFilter("UIActionBar.msg.tagnode-checkedin")});
-  
+
   @UIExtensionFilters
   public List<UIExtensionFilter> getFilters() {
     return FILTERS;
   }
-  
+
   public static class TaggingDocumentActionListener extends UIActionBarActionListener<TaggingDocumentActionComponent> {
     public void processEvent(Event<TaggingDocumentActionComponent> event) throws Exception {
       UIJCRExplorer uiExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class);

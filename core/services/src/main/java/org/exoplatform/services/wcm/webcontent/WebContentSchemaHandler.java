@@ -26,21 +26,21 @@ import org.exoplatform.services.wcm.core.BaseWebSchemaHandler;
  * Created by The eXo Platform SAS
  * @author : Hoa.Pham
  *          hoa.pham@exoplatform.com
- * May 28, 2008  
+ * May 28, 2008
  */
 public class WebContentSchemaHandler extends BaseWebSchemaHandler {
 
-  protected String getHandlerNodeType() { return "exo:webContent"; }  
+  protected String getHandlerNodeType() { return "exo:webContent"; }
   protected String getParentNodeType() { return "nt:unstructured"; }
 
-  public boolean matchHandler(SessionProvider sessionProvider, Node node) throws Exception {    
-    String handlerNodeType = getHandlerNodeType();    
+  public boolean matchHandler(SessionProvider sessionProvider, Node node) throws Exception {
+    String handlerNodeType = getHandlerNodeType();
     String parentNodeType = getParentNodeType();
-    if(!node.isNodeType(handlerNodeType)) 
+    if(!node.isNodeType(handlerNodeType))
       return false;
-    if(!node.getParent().isNodeType(parentNodeType)) 
-      return false;    
-    return true;    
+    if(!node.getParent().isNodeType(parentNodeType))
+      return false;
+    return true;
   }
 
   public void onCreateNode(SessionProvider sessionProvider, final Node webContent) throws Exception {
@@ -51,7 +51,7 @@ public class WebContentSchemaHandler extends BaseWebSchemaHandler {
 
   public Node getCSSFolder(final Node webContent) throws Exception {
     return webContent.getNode("css");
-  }  
+  }
 
   public Node getJSFolder(final Node webContent) throws Exception {
     return webContent.getNode("js");
@@ -79,30 +79,30 @@ public class WebContentSchemaHandler extends BaseWebSchemaHandler {
     createDefautWebData(webContent);
   }
 
-  protected void createSchema(final Node webContent) throws Exception { 
+  protected void createSchema(final Node webContent) throws Exception {
     if (!webContent.hasNode("js")) {
-      Node js = webContent.addNode("js","exo:jsFolder"); 
+      Node js = webContent.addNode("js","exo:jsFolder");
       addMixin(js,"exo:owneable");
-    }   
+    }
     if (!webContent.hasNode("css")) {
       Node css = webContent.addNode("css","exo:cssFolder");
       addMixin(css,"exo:owneable");
-    }       
+    }
     if (!webContent.hasNode("medias")) {
-      Node multimedia = webContent.addNode("medias","exo:multimediaFolder");      
+      Node multimedia = webContent.addNode("medias","exo:multimediaFolder");
       addMixin(multimedia,"exo:owneable");
       Node images = multimedia.addNode("images",NT_FOLDER);
       addMixin(images, "exo:pictureFolder");
       addMixin(images,"exo:owneable");
-      Node video = multimedia.addNode("videos",NT_FOLDER);        
-      addMixin(video, "exo:videoFolder");    
+      Node video = multimedia.addNode("videos",NT_FOLDER);
+      addMixin(video, "exo:videoFolder");
       addMixin(video,"exo:owneable");
-      Node audio = multimedia.addNode("audio",NT_FOLDER);    
+      Node audio = multimedia.addNode("audio",NT_FOLDER);
       addMixin(audio, "exo:musicFolder");
       addMixin(audio,"exo:owneable");
-    }                
+    }
     if (!webContent.hasNode("documents")) {
-      Node document = webContent.addNode("documents",NT_UNSTRUCTURED);           
+      Node document = webContent.addNode("documents",NT_UNSTRUCTURED);
       addMixin(document, "exo:documentFolder");
       addMixin(document,"exo:owneable");
     }
@@ -111,14 +111,14 @@ public class WebContentSchemaHandler extends BaseWebSchemaHandler {
     webContent.setProperty("exo:title", webContent.getName());
   }
 
-  public boolean isWebcontentChildNode(Node file) throws Exception{    
+  public boolean isWebcontentChildNode(Node file) throws Exception{
     Node parent = file.getParent();
     //for sub nodes of the webcontent node
     if(parent.isNodeType("exo:webContent"))
-      return true;    
+      return true;
     //for subnodes in some folders like css, js, documents, medias
     if(parent.getPath().equals("/"))
-      return false;    
+      return false;
     Node grantParent = parent.getParent();
     if(grantParent.isNodeType("exo:webContent"))
       return true;
@@ -126,7 +126,7 @@ public class WebContentSchemaHandler extends BaseWebSchemaHandler {
     if(grantParent.getPath().equals("/"))
       return false;
     Node ansestor = grantParent.getParent();
-    if(ansestor.isNodeType("exo:webContent")) 
+    if(ansestor.isNodeType("exo:webContent"))
       return true;
     return false;
   }

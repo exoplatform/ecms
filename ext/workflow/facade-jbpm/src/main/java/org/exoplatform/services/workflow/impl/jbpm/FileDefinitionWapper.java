@@ -29,18 +29,18 @@ import org.exoplatform.services.workflow.FileDefinition;
  * Created by The eXo Platform SARL
  * Author : Pham Xuan Hoa
  *          hoa.pham@exoplatform.com
- * Dec 18, 2007  
+ * Dec 18, 2007
  */
 public class FileDefinitionWapper implements FileDefinition {
-  
+
   private org.jbpm.file.def.FileDefinition fileDefinition_ ;
-  
+
   public FileDefinitionWapper(org.jbpm.file.def.FileDefinition fileDef) {
     fileDefinition_ = fileDef;
   }
-  
+
   public void deploy() throws Exception {
-    
+
   }
 
   public String getCustomizedView(String stateName) {

@@ -34,24 +34,24 @@ import org.exoplatform.services.wcm.publication.WCMPublicationService;
  * Sep 24, 2008
  */
 public class UpdateNavigationEventListener extends Listener<DataStorageImpl, PageNavigation>{
-  
+
   /** The log. */
   private static Log log = ExoLogger.getLogger(UpdateNavigationEventListener.class);
-  
+
   /* (non-Javadoc)
    * @see org.exoplatform.services.listener.Listener#onEvent(org.exoplatform.services.listener.Event)
    */
   public void onEvent(Event<DataStorageImpl, PageNavigation> event) throws Exception {
     ExoContainer container = ExoContainerContext.getCurrentContainer();
-    WCMPublicationService publicationService = 
+    WCMPublicationService publicationService =
       (WCMPublicationService)container.getComponentInstanceOfType(WCMPublicationService.class);
     try {
       if (ConversationState.getCurrent() == null)
         publicationService.updateLifecycleOnChangeNavigation(event.getData(), null);
-      else 
+      else
         publicationService.updateLifecycleOnChangeNavigation(event.getData(), ConversationState.getCurrent().getIdentity().getUserId());
     } catch (Exception e) {
       log.error("Exception when update publication lifecyle", e);
-    }    
+    }
   }
 }

@@ -30,13 +30,13 @@ import org.exoplatform.webui.ext.manager.UIAbstractManager;
 import org.exoplatform.webui.ext.manager.UIAbstractManagerComponent;
 
 /**
- * Created by The eXo Platform SAS 
- * Author : eXoPlatform 
- *          ha.dangviet@exoplatform.com 
+ * Created by The eXo Platform SAS
+ * Author : eXoPlatform
+ *          ha.dangviet@exoplatform.com
  * Nov 22, 2010
  */
 @ComponentConfig(
-                 events = { 
+                 events = {
                      @EventConfig(
                                   listeners = ClipboardActionComponent.ClipboardActionListener.class) })
 public class ClipboardActionComponent extends UIAbstractManagerComponent {
@@ -63,7 +63,6 @@ public class ClipboardActionComponent extends UIAbstractManagerComponent {
 
   @Override
   public Class<? extends UIAbstractManager> getUIAbstractManagerClass() {
-    // TODO Auto-generated method stub
     return null;
   }
 

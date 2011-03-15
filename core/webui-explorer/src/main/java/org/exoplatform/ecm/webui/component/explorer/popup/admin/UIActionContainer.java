@@ -28,7 +28,7 @@ import org.exoplatform.webui.core.lifecycle.UIContainerLifecycle;
  * Author : Dang Van Minh
  *          minh.dang@exoplatform.com
  * Nov 8, 2006
- * 11:22:07 AM 
+ * 11:22:07 AM
  */
 @ComponentConfig(
     lifecycle = UIContainerLifecycle.class
@@ -39,10 +39,10 @@ public class UIActionContainer extends UIContainer implements UIPopupComponent {
     addChild(UIActionTypeForm.class, null, null) ;
     addChild(UIActionForm.class, null, null) ;
   }
-  
+
   public void activate() throws Exception { }
   public void deActivate() throws Exception { }
-  
+
   public void initPopup(UIComponent uiComp) throws Exception {
     removeChildById("PopupComponent") ;
     UIPopupWindow uiPopup = addChild(UIPopupWindow.class, null, "PopupComponent") ;

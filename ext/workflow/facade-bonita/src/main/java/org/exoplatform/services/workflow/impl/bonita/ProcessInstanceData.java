@@ -32,9 +32,9 @@ public class ProcessInstanceData implements ProcessInstance {
   private String processName       = null;
   private Date   startDate         = null;
   private Date   endDate           = null;
-  
+
   private static Logger log = Logger.getLogger(ProcessInstanceData.class.getName());
-  
+
   public ProcessInstanceData(org.ow2.bonita.facade.runtime.ProcessInstance processInstance) {
     try {
       this.processInstanceId = processInstance.getUUID().toString();
@@ -43,7 +43,7 @@ public class ProcessInstanceData implements ProcessInstance {
       this.processId         = processInstance.getProcessDefinitionUUID().toString();
       //TODO delete the IllegalStateException catching
       this.endDate           = processInstance.getEndedDate();
-      
+
     } catch (IllegalStateException e) {
       this.endDate = null;
     } catch(Exception e) {

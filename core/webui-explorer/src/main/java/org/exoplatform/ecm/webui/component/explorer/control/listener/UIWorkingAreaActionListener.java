@@ -45,12 +45,12 @@ import org.exoplatform.webui.ext.UIExtensionManager;
  * Created by The eXo Platform SARL
  * Author : Hoang Van Hung
  *          hunghvit@gmail.com
- * Aug 5, 2009  
+ * Aug 5, 2009
  */
 public abstract class UIWorkingAreaActionListener <T extends UIComponent> extends UIExtensionEventListener<T> {
 
   private static final Log LOG  = ExoLogger.getLogger(UIWorkingAreaActionListener.class);
-  
+
   private Node getNodeByPath(String nodePath, UIJCRExplorer uiExplorer, boolean giveTarget) throws Exception {
     nodePath = uiExplorer.getCurrentWorkspace() + ":" + nodePath;
     Matcher matcher = UIWorkingArea.FILE_EXPLORER_URL_SYNTAX.matcher(nodePath);
@@ -62,19 +62,19 @@ public abstract class UIWorkingAreaActionListener <T extends UIComponent> extend
       wsName = uiExplorer.getCurrentWorkspace();
     }
     Session session = uiExplorer.getSessionByWorkspace(wsName);
-    
+
     return uiExplorer.getNodeByPath(nodePath, session, giveTarget);
   }
-  
+
   private Node getNodeByPath(String nodePath, UIJCRExplorer uiExplorer) throws Exception {
-  	return getNodeByPath(nodePath, uiExplorer, true);
+    return getNodeByPath(nodePath, uiExplorer, true);
   }
-  
+
   private boolean inTrash(String nodePath) {
-  	PortletRequestContext pcontext = (PortletRequestContext)WebuiRequestContext.getCurrentInstance();
+    PortletRequestContext pcontext = (PortletRequestContext)WebuiRequestContext.getCurrentInstance();
     PortletPreferences portletPref = pcontext.getRequest().getPreferences();
-  	String trashHomeNodePath = portletPref.getValue(Utils.TRASH_HOME_NODE_PATH, "");
-		if (nodePath.startsWith(trashHomeNodePath)) return true;
+    String trashHomeNodePath = portletPref.getValue(Utils.TRASH_HOME_NODE_PATH, "");
+    if (nodePath.startsWith(trashHomeNodePath)) return true;
     Matcher matcher = UIWorkingArea.FILE_EXPLORER_URL_SYNTAX.matcher(nodePath);
     if (matcher.find()) {
       return matcher.group(2).startsWith(trashHomeNodePath);
@@ -83,7 +83,7 @@ public abstract class UIWorkingAreaActionListener <T extends UIComponent> extend
     }
 
   }
-  
+
   public boolean acceptForMultiNode(Event<T> event, String path) {
     Map<String, Object> context = new HashMap<String, Object>();
     UIWorkingArea uiWorkingArea = event.getSource().getAncestorOfType(UIWorkingArea.class);
@@ -103,7 +103,7 @@ public abstract class UIWorkingAreaActionListener <T extends UIComponent> extend
     }
     return false;
   }
-  
+
   @Override
   protected Map<String, Object> createContext(Event<T> event) throws Exception {
     Map<String, Object> context = new HashMap<String, Object>();
@@ -113,7 +113,7 @@ public abstract class UIWorkingAreaActionListener <T extends UIComponent> extend
     if (nodePath == null || nodePath.length() == 0 || nodePath.contains(";")) return null;
     // Use the method getNodeByPath because it is link aware
     try {
-      Node currentNode = getNodeByPath(nodePath, uiExplorer, !inTrash(nodePath)); 
+      Node currentNode = getNodeByPath(nodePath, uiExplorer, !inTrash(nodePath));
       WebuiRequestContext requestContext = event.getRequestContext();
       UIApplication uiApp = requestContext.getUIApplication();
       context.put(UIWorkingArea.class.getName(), uiWorkingArea);
@@ -122,14 +122,14 @@ public abstract class UIWorkingAreaActionListener <T extends UIComponent> extend
       context.put(Node.class.getName(), currentNode);
       context.put(WebuiRequestContext.class.getName(), requestContext);
     } catch(PathNotFoundException pte) {
-      throw new MessageException(new ApplicationMessage("UIPopupMenu.msg.path-not-found", null, 
+      throw new MessageException(new ApplicationMessage("UIPopupMenu.msg.path-not-found", null,
           ApplicationMessage.WARNING)) ;
     } catch(Exception e) {
       LOG.error("Unexpected problem occurs", e);
     }
     return context;
   }
-  
+
   @Override
   public void execute(Event<T> event) throws Exception {
     String nodePath = event.getRequestContext().getRequestParameter(UIComponent.OBJECTID);

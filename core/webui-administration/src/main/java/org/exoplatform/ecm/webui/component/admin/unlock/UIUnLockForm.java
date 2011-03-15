@@ -36,7 +36,7 @@ import org.exoplatform.webui.form.validator.MandatoryValidator;
  * Created by The eXo Platform SARL
  * Author : Dang Van Minh
  *          minh.dang@exoplatform.com
- * Dec 29, 2006  
+ * Dec 29, 2006
  * 11:30:29 AM
  */
 @ComponentConfig(
@@ -49,10 +49,10 @@ import org.exoplatform.webui.form.validator.MandatoryValidator;
     }
 )
 public class UIUnLockForm extends UIForm implements UISelectable {
-  
+
   final static public String GROUPS_OR_USERS = "groupsOrUsers";
   final static public String[] ACTIONS = {"Save", "Cancel"};
-  
+
   public UIUnLockForm() throws Exception {
     UIFormInputSetWithAction uiInputAct = new UIFormInputSetWithAction("PermissionButton");
     uiInputAct.addUIFormInput( new UIFormStringInput(GROUPS_OR_USERS, GROUPS_OR_USERS, null).setEditable(false).addValidator(MandatoryValidator.class));
@@ -71,9 +71,9 @@ public class UIUnLockForm extends UIForm implements UISelectable {
     uiManager.getChild(UILockNodeList.class).setRendered(false);
     uiManager.getChild(UIUnLockForm.class).setRendered(true);
   }
-  
+
   public void update()throws Exception {
-    getUIStringInput(GROUPS_OR_USERS).setValue("");      
+    getUIStringInput(GROUPS_OR_USERS).setValue("");
   }
 
   static public class CancelActionListener extends EventListener<UIUnLockForm> {
@@ -88,27 +88,27 @@ public class UIUnLockForm extends UIForm implements UISelectable {
   static public class SaveActionListener extends EventListener<UIUnLockForm> {
     public void execute(Event<UIUnLockForm> event) throws Exception {
       UIUnLockForm uiUnLockForm = event.getSource();
-      UIApplication uiApp = uiUnLockForm.getAncestorOfType(UIApplication.class);      
+      UIApplication uiApp = uiUnLockForm.getAncestorOfType(UIApplication.class);
       UIFormInputSetWithAction permField = uiUnLockForm.getChildById("PermissionButton");
       String groupsOrUsers = permField.getUIStringInput(GROUPS_OR_USERS).getValue();
       if((groupsOrUsers == null)||(groupsOrUsers.trim().length() == 0)) {
-        uiApp.addMessage(new ApplicationMessage("UIUnLockForm.msg.permission-require", null, 
+        uiApp.addMessage(new ApplicationMessage("UIUnLockForm.msg.permission-require", null,
                                                 ApplicationMessage.WARNING));
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
         return;
-      }      
-      UIUnLockManager uiManager = uiUnLockForm.getAncestorOfType(UIUnLockManager.class);      
+      }
+      UIUnLockManager uiManager = uiUnLockForm.getAncestorOfType(UIUnLockManager.class);
       LockService lockService = uiUnLockForm.getApplicationComponent(LockService.class);
       lockService.addGroupsOrUsersForLock(groupsOrUsers);
       UILockNodeList uiLockList = uiManager.getChild(UILockNodeList.class);
       uiUnLockForm.update();
       uiLockList.updateLockedNodesGrid(1);
-      uiLockList.setRendered(true);      
+      uiLockList.setRendered(true);
       uiManager.removeChildById("PermissionPopup");
       event.getRequestContext().addUIComponentToUpdateByAjax(uiManager);
     }
   }
-  
+
   static public class AddPermissionActionListener extends EventListener<UIUnLockForm> {
     public void execute(Event<UIUnLockForm> event) throws Exception {
       UIUnLockManager uiManager = event.getSource().getAncestorOfType(UIUnLockManager.class);

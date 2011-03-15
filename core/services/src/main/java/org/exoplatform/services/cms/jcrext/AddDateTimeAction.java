@@ -25,19 +25,19 @@ import org.exoplatform.services.command.action.Action;
 
 /**
  * Created by The eXo Platform SAS
- * Author : Hoa Pham	
+ * Author : Hoa Pham
  *          hoa.pham@exoplatform.com
- * Jul 11, 2007  
+ * Jul 11, 2007
  */
 public class AddDateTimeAction implements Action{
 
-  public boolean execute(Context context) throws Exception {                         
+  public boolean execute(Context context) throws Exception {
     Node node = (Node)context.get("currentItem");
     if(node.canAddMixin("exo:datetime")) {
-      node.addMixin("exo:datetime");            
+      node.addMixin("exo:datetime");
     }
     node.setProperty("exo:dateCreated",new GregorianCalendar());
-    node.setProperty("exo:dateModified",new GregorianCalendar());    
+    node.setProperty("exo:dateModified",new GregorianCalendar());
     return false;
   }
 

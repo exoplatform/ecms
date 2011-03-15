@@ -44,7 +44,7 @@ import org.exoplatform.webui.event.EventListener;
  * Author : pham tuan
  *          phamtuanchip@yahoo.de
  * Oct 03, 2006
- * 9:43:23 AM 
+ * 9:43:23 AM
  */
 @ComponentConfig(
     template = "system:/groovy/ecm/webui/UIGridWithButton.gtmpl",
@@ -56,19 +56,19 @@ import org.exoplatform.webui.event.EventListener;
 )
 
 public class UITemplateList extends UIGrid {
-  
+
   private static String[] NODETYPE_BEAN_FIELD = {"name"} ;
   private static String[] NODETYPE_ACTION = {"Edit", "Delete"} ;
-  
+
   public UITemplateList() throws Exception {
     getUIPageIterator().setId("NodeTypeListIterator") ;
     configure("name", NODETYPE_BEAN_FIELD, NODETYPE_ACTION) ;
   }
-  
+
   public String[] getActions() {
     return new String[] {"AddNew"} ;
   }
-  
+
   @SuppressWarnings("unchecked")
   public void updateGrid(int currentPage) throws Exception {
     TemplateService templateService = getApplicationComponent(TemplateService.class) ;
@@ -90,7 +90,7 @@ public class UITemplateList extends UIGrid {
         }
       }
       Collections.sort(templateData, new TemplateComparator()) ;
-    } 
+    }
     ObjectPageList objPageList = new ObjectPageList(templateData, 10) ;
     getUIPageIterator().setPageList(objPageList) ;
     if(currentPage > getUIPageIterator().getAvailablePage())
@@ -98,7 +98,7 @@ public class UITemplateList extends UIGrid {
     else
       getUIPageIterator().setCurrentPage(currentPage);
   }
-  
+
   static public class TemplateComparator implements Comparator {
     public int compare(Object o1, Object o2) throws ClassCastException {
       String name1 = ((TemplateData) o1).getName() ;
@@ -154,7 +154,7 @@ public class UITemplateList extends UIGrid {
       event.getRequestContext().addUIComponentToUpdateByAjax(nodeTypeList.getParent()) ;
     }
   }
-  
+
   static public class AddNewActionListener extends EventListener<UITemplateList> {
     public void execute(Event<UITemplateList> event) throws Exception {
       UITemplatesManager uiTemplatesManager = event.getSource().getAncestorOfType(UITemplatesManager.class) ;
@@ -171,7 +171,7 @@ public class UITemplateList extends UIGrid {
       event.getRequestContext().addUIComponentToUpdateByAjax(uiTemplatesManager) ;
     }
   }
-  
+
   static public class TemplateData {
     private String name ;
 

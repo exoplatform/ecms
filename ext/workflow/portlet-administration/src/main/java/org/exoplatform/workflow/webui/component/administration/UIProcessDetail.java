@@ -43,51 +43,47 @@ import org.exoplatform.webui.event.EventListener;
  * July 3, 2006
  * 10:07:15 AM
  */
-@ComponentConfigs({
-  @ComponentConfig(
-    type = UIGrid.class, 
-    id = "UIProcessGrid",
-    template = "app:/groovy/webui/component/UIECMGrid.gtmpl"
-  ),
-  @ComponentConfig(    
-    template = "app:/groovy/webui/component/UITabPaneWithAction.gtmpl",
-    events = {
-      @EventConfig(listeners = UIProcessDetail.ViewActionListener.class),
-      @EventConfig(listeners = UIProcessDetail.DeleteActionListener.class, confirm = "UIProcessDetail.msg.confirm-delete-process"),
-      @EventConfig(listeners = UIProcessDetail.FlushAllActionListener.class, confirm = "UIProcessDetail.msg.confirm-delete-completed-process"),
-      @EventConfig(listeners = UIProcessDetail.CancelActionListener.class)
-    }
-  )
-})
+@ComponentConfigs( {
+    @ComponentConfig(type = UIGrid.class, id = "UIProcessGrid",
+                     template = "app:/groovy/webui/component/UIECMGrid.gtmpl"),
+    @ComponentConfig(template = "app:/groovy/webui/component/UITabPaneWithAction.gtmpl", events = {
+        @EventConfig(listeners = UIProcessDetail.ViewActionListener.class),
+        @EventConfig(listeners = UIProcessDetail.DeleteActionListener.class,
+                     confirm = "UIProcessDetail.msg.confirm-delete-process"),
+        @EventConfig(listeners = UIProcessDetail.FlushAllActionListener.class,
+                     confirm = "UIProcessDetail.msg.confirm-delete-completed-process"),
+        @EventConfig(listeners = UIProcessDetail.CancelActionListener.class) }) })
 public class UIProcessDetail extends UIContainer {
-  private static String[] PROCESS_BEAN_FIELD = {"processInstanceId", "processId", "processName", "startDate", "endDate"};
-  
-  private static String[] ACTION = {"View","Delete"};
-  private static String[] ACTIONS = {"FlushAll", "Cancel"};
+  private static String[]       PROCESS_BEAN_FIELD           = { "processInstanceId", "processId",
+      "processName", "startDate", "endDate"                 };
+
+  private static String[]       ACTION                       = { "View", "Delete" };
+
+  private static String[]       ACTIONS                      = { "FlushAll", "Cancel" };
   private String processInstanceId;
   private List<ProcessInstance> completedProcessInstanceList = new ArrayList<ProcessInstance>();
   private List<ProcessInstance> runningProcessInstanceList = new ArrayList<ProcessInstance>();
-  
+
   public UIProcessDetail() throws Exception {
     UIGrid uiRunningProcess = addChild(UIGrid.class, "UIProcessGrid", "UIRunningProcessGrid");
-    UIGrid uiCompletedProcess = addChild(UIGrid.class, "UIProcessGrid", "UICompletedProcessGrid").setRendered(false);    
-    
+    UIGrid uiCompletedProcess = addChild(UIGrid.class, "UIProcessGrid", "UICompletedProcessGrid").setRendered(false);
+
     uiRunningProcess.setLabel("UIRunningProcessGrid");
     uiRunningProcess.getUIPageIterator().setId("UIRunningProcessGrid");
     uiRunningProcess.configure("processInstanceId", PROCESS_BEAN_FIELD, ACTION);
-    
+
     uiCompletedProcess.setLabel("UICompletedProcessGrid");
     uiCompletedProcess.getUIPageIterator().setId("UICompletedProcessGrid");
-    uiCompletedProcess.configure("processInstanceId", PROCESS_BEAN_FIELD, ACTION);        
+    uiCompletedProcess.configure("processInstanceId", PROCESS_BEAN_FIELD, ACTION);
   }
-  
+
   public String[] getActions() { return ACTIONS; }
-  
+
   public void updateProcessGrid(String id) throws Exception {
     completedProcessInstanceList.clear();
     runningProcessInstanceList.clear();
     WorkflowServiceContainer workflowServiceContainer = getApplicationComponent(WorkflowServiceContainer.class);
-    if(id != null) processInstanceId = id;    
+    if(id != null) processInstanceId = id;
     List<ProcessInstance> processInstanceList = workflowServiceContainer.getProcessInstances(processInstanceId);
     for (ProcessInstance processInstance : processInstanceList){
       if(processInstance.getEndDate() != null)
@@ -95,21 +91,21 @@ public class UIProcessDetail extends UIContainer {
       else
         runningProcessInstanceList.add(processInstance);
     }
-    
-    UIGrid uiCompletedProcess = getChildById("UICompletedProcessGrid");    
+
+    UIGrid uiCompletedProcess = getChildById("UICompletedProcessGrid");
     uiCompletedProcess.getUIPageIterator().setPageList(new ObjectPageList(completedProcessInstanceList, 10));
-    
+
     UIGrid uiRunningProcess = getChildById("UIRunningProcessGrid");
     uiRunningProcess.getUIPageIterator().setPageList(new ObjectPageList(runningProcessInstanceList, 10));
   }
-    
+
   @SuppressWarnings("unchecked")
   public void updateTasksGrid(String id) throws Exception {
-    WorkflowServiceContainer workflowServiceContainer = 
+    WorkflowServiceContainer workflowServiceContainer =
       getApplicationComponent(WorkflowServiceContainer.class);
     UIGrid uiGrid = getChildById("UIRunningProcessGrid");
     List<Task> haveEndDateList = new ArrayList<Task>();
-    for(Task task : workflowServiceContainer.getTasks(id)) {      
+    for(Task task : workflowServiceContainer.getTasks(id)) {
       haveEndDateList.add(task);
     }
     Collections.sort(haveEndDateList, new TaskIdComparator());
@@ -125,7 +121,7 @@ public class UIProcessDetail extends UIContainer {
     }
   }
   */
-  
+
   static public class TaskIdComparator implements Comparator {
     public int compare(Object o1, Object o2) throws ClassCastException {
       String id1 = ((Task) o1).getId();
@@ -133,15 +129,20 @@ public class UIProcessDetail extends UIContainer {
       return id1.compareTo(id2);
     }
   }
-  
+
   static  public class ViewActionListener extends EventListener<UIProcessDetail> {
     public void execute(Event<UIProcessDetail> event) throws Exception {
       UIProcessDetail uicomp = event.getSource() ;
-      UIWorkflowAdministrationPortlet uiAdministrationPortlet = uicomp.getAncestorOfType(UIWorkflowAdministrationPortlet.class); 
+      UIWorkflowAdministrationPortlet uiAdministrationPortlet = uicomp.getAncestorOfType(UIWorkflowAdministrationPortlet.class);
       UIPopupWindow uiPopup = uiAdministrationPortlet.getChildById("TaskListOfProcessPopup");
-      if(uiPopup == null) uiPopup = uiAdministrationPortlet.addChild(UIPopupWindow.class, null, "TaskListOfProcessPopup");
+      if (uiPopup == null)
+        uiPopup = uiAdministrationPortlet.addChild(UIPopupWindow.class,
+                                                   null,
+                                                   "TaskListOfProcessPopup");
       uiPopup.setWindowSize(530, 300);
-      UITaskListOfProcess uiTaskListOfProcess = uiAdministrationPortlet.createUIComponent(UITaskListOfProcess.class, null, null);
+      UITaskListOfProcess uiTaskListOfProcess = uiAdministrationPortlet.createUIComponent(UITaskListOfProcess.class,
+                                                                                          null,
+                                                                                          null);
       String instance = event.getRequestContext().getRequestParameter(OBJECTID);
       for (ProcessInstance processInstance : uicomp.completedProcessInstanceList){
         if(processInstance.getProcessInstanceId().equals(instance)){
@@ -162,13 +163,13 @@ public class UIProcessDetail extends UIContainer {
       uiPopup.setWindowSize(650, 0);
     }
   }
-  
+
   static  public class DeleteActionListener extends EventListener<UIProcessDetail> {
     public void execute(Event<UIProcessDetail> event) throws Exception {
       UIProcessDetail uicomp = event.getSource();
       String instance = event.getRequestContext().getRequestParameter(OBJECTID);
-      WorkflowServiceContainer workflowServiceContainer = 
-        uicomp.getApplicationComponent(WorkflowServiceContainer.class);      
+      WorkflowServiceContainer workflowServiceContainer =
+        uicomp.getApplicationComponent(WorkflowServiceContainer.class);
       for (ProcessInstance processInstance : uicomp.completedProcessInstanceList){
         if(processInstance.getProcessInstanceId().equals(instance)){
           uicomp.setRenderedChild("UICompletedProcessGrid");
@@ -181,32 +182,32 @@ public class UIProcessDetail extends UIContainer {
           break;
         }
       }
-      workflowServiceContainer.deleteProcessInstance(instance);      
+      workflowServiceContainer.deleteProcessInstance(instance);
       uicomp.updateProcessGrid(null);
       event.getRequestContext().addUIComponentToUpdateByAjax(uicomp);
     }
   }
-  
+
   static  public class FlushAllActionListener extends EventListener<UIProcessDetail> {
     public void execute(Event<UIProcessDetail> event) throws Exception {
-      UIProcessDetail uicomp = event.getSource();      
-      UIApplication uiApp = uicomp.getAncestorOfType(UIApplication.class) ;      
+      UIProcessDetail uicomp = event.getSource();
+      UIApplication uiApp = uicomp.getAncestorOfType(UIApplication.class) ;
       if(uicomp.completedProcessInstanceList.size() == 0) {
-        uiApp.addMessage(new ApplicationMessage("UIProcessDetail.msg.result-delete-completed-process", null, 
+        uiApp.addMessage(new ApplicationMessage("UIProcessDetail.msg.result-delete-completed-process", null,
             ApplicationMessage.WARNING));
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
         return;
-      }      
+      }
       WorkflowServiceContainer workflowServiceContainer = uicomp.getApplicationComponent(WorkflowServiceContainer.class);
       for (ProcessInstance processInstance : uicomp.completedProcessInstanceList){
         workflowServiceContainer.deleteProcessInstance(processInstance.getProcessInstanceId());
-      }      
+      }
       uicomp.updateProcessGrid(null);
       uicomp.setRenderedChild("UICompletedProcessGrid");
       event.getRequestContext().addUIComponentToUpdateByAjax(uicomp);
     }
   }
-  
+
   static public class CancelActionListener extends EventListener<UIProcessDetail> {
     public void execute(Event<UIProcessDetail> event) throws Exception {
       UIProcessDetail uicomp = event.getSource();
@@ -216,5 +217,5 @@ public class UIProcessDetail extends UIContainer {
         popup.setShow(false);
       }
     }
-  }  
+  }
 }

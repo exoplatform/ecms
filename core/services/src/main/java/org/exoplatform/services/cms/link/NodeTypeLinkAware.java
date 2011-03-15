@@ -30,7 +30,7 @@ import org.exoplatform.services.log.Log;
  * Created by The eXo Platform SAS
  * Author : eXoPlatform
  *          nicolas.filotto@exoplatform.com
- * 8 avr. 2009  
+ * 8 avr. 2009
  */
 public class NodeTypeLinkAware implements NodeType {
 
@@ -38,20 +38,20 @@ public class NodeTypeLinkAware implements NodeType {
    * Logger.
    */
   private static final Log LOG  = ExoLogger.getLogger("services.cms.link.NodeTypeLinkAware");
-  
+
   private final String name;
-  
+
   private NodeLinkAware node;
-  
+
   private volatile NodeType targetNodeType;
-  
+
   NodeTypeLinkAware(NodeLinkAware node) throws RepositoryException {
     this.node = node;
     Node realNode = node.getRealNode();
     LinkManager manager = LinkUtils.getLinkManager();
     this.name = manager.isLink(realNode) ? manager.getTargetPrimaryNodeType(realNode) : realNode.getPrimaryNodeType().getName();
   }
-  
+
   private NodeType getTargetNodeType() throws RepositoryException {
     if (targetNodeType == null) {
       synchronized (this) {
@@ -63,10 +63,10 @@ public class NodeTypeLinkAware implements NodeType {
     }
     return targetNodeType;
   }
-  
+
   /**
    * {@inheritDoc}
-   */  
+   */
   public boolean canAddChildNode(String childNodeName) {
     try {
       return getTargetNodeType().canAddChildNode(childNodeName);
@@ -78,7 +78,7 @@ public class NodeTypeLinkAware implements NodeType {
 
   /**
    * {@inheritDoc}
-   */  
+   */
   public boolean canAddChildNode(String childNodeName, String nodeTypeName) {
     try {
       return getTargetNodeType().canAddChildNode(childNodeName, nodeTypeName);
@@ -90,7 +90,7 @@ public class NodeTypeLinkAware implements NodeType {
 
   /**
    * {@inheritDoc}
-   */  
+   */
   public boolean canRemoveItem(String itemName) {
     try {
       return getTargetNodeType().canRemoveItem(itemName);
@@ -102,7 +102,7 @@ public class NodeTypeLinkAware implements NodeType {
 
   /**
    * {@inheritDoc}
-   */  
+   */
   public boolean canSetProperty(String propertyName, Value value) {
     try {
       return getTargetNodeType().canSetProperty(propertyName, value);
@@ -114,7 +114,7 @@ public class NodeTypeLinkAware implements NodeType {
 
   /**
    * {@inheritDoc}
-   */  
+   */
   public boolean canSetProperty(String propertyName, Value[] values) {
     try {
       return getTargetNodeType().canSetProperty(propertyName, values);
@@ -126,7 +126,7 @@ public class NodeTypeLinkAware implements NodeType {
 
   /**
    * {@inheritDoc}
-   */  
+   */
   public NodeDefinition[] getChildNodeDefinitions() {
     try {
       return getTargetNodeType().getChildNodeDefinitions();
@@ -138,7 +138,7 @@ public class NodeTypeLinkAware implements NodeType {
 
   /**
    * {@inheritDoc}
-   */  
+   */
   public NodeDefinition[] getDeclaredChildNodeDefinitions() {
     try {
       return getTargetNodeType().getDeclaredChildNodeDefinitions();
@@ -150,7 +150,7 @@ public class NodeTypeLinkAware implements NodeType {
 
   /**
    * {@inheritDoc}
-   */  
+   */
   public PropertyDefinition[] getDeclaredPropertyDefinitions() {
     try {
       return getTargetNodeType().getDeclaredPropertyDefinitions();
@@ -162,7 +162,7 @@ public class NodeTypeLinkAware implements NodeType {
 
   /**
    * {@inheritDoc}
-   */  
+   */
   public NodeType[] getDeclaredSupertypes() {
     try {
       return getTargetNodeType().getDeclaredSupertypes();
@@ -174,14 +174,14 @@ public class NodeTypeLinkAware implements NodeType {
 
   /**
    * {@inheritDoc}
-   */  
+   */
   public String getName() {
     return name;
   }
 
   /**
    * {@inheritDoc}
-   */  
+   */
   public String getPrimaryItemName() {
     try {
       return getTargetNodeType().getPrimaryItemName();
@@ -193,7 +193,7 @@ public class NodeTypeLinkAware implements NodeType {
 
   /**
    * {@inheritDoc}
-   */  
+   */
   public PropertyDefinition[] getPropertyDefinitions() {
     try {
       return getTargetNodeType().getPropertyDefinitions();
@@ -205,7 +205,7 @@ public class NodeTypeLinkAware implements NodeType {
 
   /**
    * {@inheritDoc}
-   */  
+   */
   public NodeType[] getSupertypes() {
     try {
       return getTargetNodeType().getSupertypes();
@@ -217,7 +217,7 @@ public class NodeTypeLinkAware implements NodeType {
 
   /**
    * {@inheritDoc}
-   */  
+   */
   public boolean hasOrderableChildNodes() {
     try {
       return getTargetNodeType().hasOrderableChildNodes();
@@ -229,14 +229,14 @@ public class NodeTypeLinkAware implements NodeType {
 
   /**
    * {@inheritDoc}
-   */  
+   */
   public boolean isMixin() {
     return false;
   }
 
   /**
    * {@inheritDoc}
-   */  
+   */
   public boolean isNodeType(String nodeTypeName) {
     try {
       return getTargetNodeType().isNodeType(nodeTypeName);

@@ -52,12 +52,12 @@ public class ManageDrivePlugin extends BaseComponentPlugin {
   private InitParams params_ ;
   private DMSConfiguration dmsConfiguration_;
   private static final Log LOG  = ExoLogger.getLogger(ManageDrivePlugin.class);
-  
-  public ManageDrivePlugin(RepositoryService repositoryService, InitParams params, 
+
+  public ManageDrivePlugin(RepositoryService repositoryService, InitParams params,
       NodeHierarchyCreator nodeHierarchyCreator, DMSConfiguration dmsConfiguration) throws Exception {
     repositoryService_ = repositoryService;
     nodeHierarchyCreator_ = nodeHierarchyCreator ;
-    params_ = params ;  
+    params_ = params ;
     dmsConfiguration_ = dmsConfiguration;
   }
 
@@ -94,21 +94,21 @@ public class ManageDrivePlugin extends BaseComponentPlugin {
     DriveData data = null ;
     Session session = null ;
     while(it.hasNext()){
-      data = (DriveData)it.next().getObject() ;       
+      data = (DriveData)it.next().getObject() ;
       try{
         session = getSession() ;
         addDrive(data, session) ;
         session.logout();
-      }catch(Exception e) {        
-      }      
+      }catch(Exception e) {
+      }
 
-    }     
+    }
   }
 
   /**
    * Register new drive node with specified DriveData
    * @param data Drive data
-   * @param session 
+   * @param session
    * @throws Exception
    */
   private void addDrive(DriveData data, Session session) throws Exception {

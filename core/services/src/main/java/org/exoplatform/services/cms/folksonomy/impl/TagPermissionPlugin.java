@@ -28,22 +28,22 @@ import org.exoplatform.container.xml.ObjectParameter;
  * Created by The eXo Platform SARL
  * Author : Nguyen Anh Vu
  *          anhvurz90@gmail.com
- * Dec 14, 2009  
+ * Dec 14, 2009
  * 3:01:45 PM
  */
 public class TagPermissionPlugin extends BaseComponentPlugin {
-	
-	private InitParams params_;
-	
-	public TagPermissionPlugin(InitParams params) {
-		params_ = params;			
-	}
+
+  private InitParams params_;
+
+  public TagPermissionPlugin(InitParams params) {
+    params_ = params;
+  }
 
   /**
-   * Init tag permission in repository. 
-   */  
+   * Init tag permission in repository.
+   */
   @SuppressWarnings("unchecked")
-  public List<String> initPermission() throws Exception {   
+  public List<String> initPermission() throws Exception {
     Iterator<ObjectParameter> it = params_.getObjectParamIterator() ;
     TagPermissionConfig tagPermissionConfig ;
     while(it.hasNext()) {
@@ -52,5 +52,5 @@ public class TagPermissionPlugin extends BaseComponentPlugin {
     }
     return new ArrayList<String>();
   }
-	
+
 }

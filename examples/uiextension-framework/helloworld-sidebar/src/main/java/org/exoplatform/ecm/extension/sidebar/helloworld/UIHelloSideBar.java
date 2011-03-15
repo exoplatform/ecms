@@ -23,7 +23,7 @@ import org.exoplatform.webui.core.UIContainer;
  * Created by The eXo Platform SAS
  * Author : eXoPlatform
  *          ha.dangviet@exoplatform.com
- * Nov 24, 2010  
+ * Nov 24, 2010
  */
 @ComponentConfig(
                  template = "classpath:templates/sidebar/UIHelloSideBar.gtmpl")

@@ -25,5 +25,5 @@ public interface ProcessInstance {
   public String getProcessName();
   public Date getStartDate();
   public Date getEndDate();
-  
+
 }

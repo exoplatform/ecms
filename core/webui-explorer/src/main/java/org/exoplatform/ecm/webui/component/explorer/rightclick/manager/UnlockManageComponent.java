@@ -59,7 +59,7 @@ import org.exoplatform.webui.ext.manager.UIAbstractManagerComponent;
  * Created by The eXo Platform SARL
  * Author : Hoang Van Hung
  *          hunghvit@gmail.com
- * Aug 6, 2009  
+ * Aug 6, 2009
  */
 
 @ComponentConfig(
@@ -68,23 +68,23 @@ import org.exoplatform.webui.ext.manager.UIAbstractManagerComponent;
     }
 )
 public class UnlockManageComponent extends UIAbstractManagerComponent {
-  
-  private static final List<UIExtensionFilter> FILTERS 
-  		= Arrays.asList(new UIExtensionFilter[]{new IsNotInTrashFilter(),
-  																						new CanSetPropertyFilter(), 
-  																						new IsNotSameNameSiblingFilter(), 
-  																						new IsHoldsLockFilter(), 
-  																						new IsNotLockedFilter(true, true), 
-  																						new IsCheckedOutFilter(),
-  																						new IsNotTrashHomeNodeFilter() });
-  
+
+  private static final List<UIExtensionFilter> FILTERS
+      = Arrays.asList(new UIExtensionFilter[]{new IsNotInTrashFilter(),
+                                              new CanSetPropertyFilter(),
+                                              new IsNotSameNameSiblingFilter(),
+                                              new IsHoldsLockFilter(),
+                                              new IsNotLockedFilter(true, true),
+                                              new IsCheckedOutFilter(),
+                                              new IsNotTrashHomeNodeFilter() });
+
   private static final Log LOG  = ExoLogger.getLogger(UnlockManageComponent.class);
-  
+
   @UIExtensionFilters
   public List<UIExtensionFilter> getFilters() {
     return FILTERS;
   }
-  
+
   private static Node getNodeByPath(String nodePath, UIJCRExplorer uiExplorer) throws Exception {
     Matcher matcher = UIWorkingArea.FILE_EXPLORER_URL_SYNTAX.matcher(nodePath);
     String wsName = null;
@@ -97,8 +97,10 @@ public class UnlockManageComponent extends UIAbstractManagerComponent {
     Session session = uiExplorer.getSessionByWorkspace(wsName);
     return uiExplorer.getNodeByPath(nodePath, session);
   }
-  
-  private static void processUnlock(String nodePath, Event<UnlockManageComponent> event, UIJCRExplorer uiExplorer) throws Exception {
+
+  private static void processUnlock(String nodePath,
+                                    Event<UnlockManageComponent> event,
+                                    UIJCRExplorer uiExplorer) throws Exception {
     UIApplication uiApp = uiExplorer.getAncestorOfType(UIApplication.class);
     Node node;
     Session session;
@@ -108,7 +110,7 @@ public class UnlockManageComponent extends UIAbstractManagerComponent {
       // Reset the session to manage the links that potentially change of workspace
       session = node.getSession();
     } catch(PathNotFoundException path) {
-      uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.path-not-found-exception", 
+      uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.path-not-found-exception",
           null,ApplicationMessage.WARNING));
       event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
       return;
@@ -119,16 +121,18 @@ public class UnlockManageComponent extends UIAbstractManagerComponent {
     String superUser = WCMCoreUtils.getService(UserACL.class).getSuperUser();
     String remoteUser = node.getSession().getUserID();
     if (remoteUser.equalsIgnoreCase(superUser)) {
-    	session = WCMCoreUtils.getSystemSessionProvider().getSession(node.getSession().getWorkspace().getName(), (ManageableRepository)node.getSession().getRepository());
-    	node = (Node)session.getItem(node.getPath());
+      session = WCMCoreUtils.getSystemSessionProvider()
+                            .getSession(node.getSession().getWorkspace().getName(),
+                                        (ManageableRepository) node.getSession().getRepository());
+      node = (Node)session.getItem(node.getPath());
     }
     try {
       if(node.holdsLock()) {
-        String lockToken = LockUtil.getLockToken(node);        
+        String lockToken = LockUtil.getLockToken(node);
         if(lockToken != null) {
           session.addLockToken(lockToken);
         }
-        node.unlock();   
+        node.unlock();
         node.removeMixin(Utils.MIX_LOCKABLE);
         node.getSession().save();
         //remove lock from Cache
@@ -136,26 +140,27 @@ public class UnlockManageComponent extends UIAbstractManagerComponent {
       }
     } catch(LockException le) {
       Object[] args = {node.getName()};
-      uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.can-not-unlock-node", args, 
+      uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.can-not-unlock-node", args,
           ApplicationMessage.WARNING));
       event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
       uiExplorer.updateAjax(event);
       return;
     } catch(VersionException versionException) {
       Object[] args = {node.getName()};
-      uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.can-not-unlock-node-is-checked-in", args, 
-          ApplicationMessage.WARNING));
+      uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.can-not-unlock-node-is-checked-in",
+                                              args,
+                                              ApplicationMessage.WARNING));
       event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
       uiExplorer.updateAjax(event);
-      return;  
+      return;
     } catch (Exception e) {
       LOG.error("an unexpected error occurs while unloking the node", e);
       JCRExceptionManager.process(uiApp, e);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
       uiExplorer.updateAjax(event);
-    }    
+    }
   }
-  
+
   public static class UnlockActionListener extends UIWorkingAreaActionListener<UnlockManageComponent> {
     private void unlockManage(Event<UnlockManageComponent> event, UIJCRExplorer uiExplorer) throws Exception {
       String nodePath = event.getRequestContext().getRequestParameter(OBJECTID);
@@ -165,22 +170,25 @@ public class UnlockManageComponent extends UIAbstractManagerComponent {
         processUnlock(nodePath, event, uiExplorer);
       }
     }
-    
-    private void processMultiUnlock(String[] nodePaths, Event<UnlockManageComponent> event, UIJCRExplorer uiExplorer) throws Exception {
-      for(String nodePath : nodePaths) {
+
+    private void processMultiUnlock(String[] nodePaths,
+                                    Event<UnlockManageComponent> event,
+                                    UIJCRExplorer uiExplorer) throws Exception {
+      for (String nodePath : nodePaths) {
         if (acceptForMultiNode(event, nodePath))
           processUnlock(nodePath, event, uiExplorer);
       }
-      if(!uiExplorer.getPreference().isJcrEnable()) uiExplorer.getSession().save();
+      if (!uiExplorer.getPreference().isJcrEnable())
+        uiExplorer.getSession().save();
       uiExplorer.updateAjax(event);
     }
-    
+
     public void processEvent(Event<UnlockManageComponent> event) throws Exception {
       UIJCRExplorer uiExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class);
       unlockManage(event, uiExplorer);
     }
   }
-  
+
   @Override
   public Class<? extends UIAbstractManager> getUIAbstractManagerClass() {
     return null;

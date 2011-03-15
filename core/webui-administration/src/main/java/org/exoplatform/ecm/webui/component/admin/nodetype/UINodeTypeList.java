@@ -47,7 +47,7 @@ import org.exoplatform.webui.form.UIFormInputInfo;
  * Author : Dang Van Minh
  *          minh.dang@exoplatform.com
  * Sep 20, 2006
- * 3:28:26 PM 
+ * 3:28:26 PM
  */
 @ComponentConfig(
     template = "app:/groovy/webui/component/admin/nodetype/UINodeTypeList.gtmpl",
@@ -69,21 +69,21 @@ public class UINodeTypeList extends UIComponentDecorator {
   final static public String[] TAB_REMOVE = {
     UINodeTypeForm.SUPER_TYPE_TAB, UINodeTypeForm.DEFAULT_PRIMARY_TYPE_TAB,
     UINodeTypeForm.REQUIRED_PRIMARY_TYPE_TAB} ;
-  
+
   public UINodeTypeList() throws Exception {
     uiPageIterator_ = createUIComponent(UIPageIterator.class, null, "UINodeTypeListIterator");
     setUIComponent(uiPageIterator_) ;
   }
-  
+
   @SuppressWarnings("unchecked")
   public List getAllNodeTypes() throws Exception{
-    List nodeList = new ArrayList<NodeType>();     
+    List nodeList = new ArrayList<NodeType>();
     ManageableRepository mRepository = getApplicationComponent(RepositoryService.class).getCurrentRepository() ;
-    NodeTypeManager ntManager = mRepository.getNodeTypeManager() ;    
+    NodeTypeManager ntManager = mRepository.getNodeTypeManager() ;
     NodeTypeIterator nodeTypeIter = ntManager.getAllNodeTypes() ;
     while(nodeTypeIter.hasNext()) {
       nodeList.add(nodeTypeIter.nextNodeType()) ;
-    }    
+    }
     Collections.sort(nodeList, new Utils.NodeTypeNameComparator()) ;
     Session session = mRepository.getSystemSession(mRepository.getConfiguration().getSystemWorkspaceName()) ;
     if(session.getRootNode().hasNode(DRAFTNODETYPE)) {
@@ -96,13 +96,13 @@ public class UINodeTypeList extends UIComponentDecorator {
     session.logout() ;
     return nodeList ;
   }
-  
+
   public UIPageIterator  getUIPageIterator() {  return uiPageIterator_ ; }
-  
+
   public List getNodeTypeList() throws Exception { return uiPageIterator_.getCurrentPageData() ; }
-  
+
   public String[] getActions() { return ACTIONS ; }
-  
+
   public void refresh(String name, int currentPage, List<NodeType> nodeType) throws Exception {
     PageList pageList = new ObjectPageList(nodeType, 10) ;
     uiPageIterator_.setPageList(pageList);
@@ -113,7 +113,7 @@ public class UINodeTypeList extends UIComponentDecorator {
   }
 
   public void refresh(String name, int currentPage) throws Exception {
-    ManageableRepository manaRepository = 
+    ManageableRepository manaRepository =
       getApplicationComponent(RepositoryService.class).getCurrentRepository() ;
     Session session = manaRepository.getSystemSession(manaRepository.getConfiguration().getSystemWorkspaceName()) ;
     if(name != null) {
@@ -121,7 +121,7 @@ public class UINodeTypeList extends UIComponentDecorator {
         Node draftNode = session.getRootNode().getNode(DRAFTNODETYPE) ;
         if(draftNode.hasNode(name)) {
           Node deleteNode = draftNode.getNode(name) ;
-          deleteNode.remove() ;            
+          deleteNode.remove() ;
           draftNode.save() ;
         }
         if(!draftNode.hasNodes())draftNode.remove() ;
@@ -133,7 +133,7 @@ public class UINodeTypeList extends UIComponentDecorator {
     session.logout();
     refresh(name, currentPage, getAllNodeTypes());
   }
-  
+
   static public class AddActionListener extends EventListener<UINodeTypeList> {
     public void execute(Event<UINodeTypeList> event) throws Exception {
       UINodeTypeList uiList = event.getSource() ;
@@ -142,7 +142,7 @@ public class UINodeTypeList extends UIComponentDecorator {
       event.getRequestContext().addUIComponentToUpdateByAjax(uiManager) ;
     }
   }
-  
+
   static public class ImportActionListener extends EventListener<UINodeTypeList> {
     public void execute(Event<UINodeTypeList> event) throws Exception {
       UINodeTypeList uiList = event.getSource() ;
@@ -151,7 +151,7 @@ public class UINodeTypeList extends UIComponentDecorator {
       event.getRequestContext().addUIComponentToUpdateByAjax(uiManager) ;
     }
   }
-  
+
   static public class ExportActionListener extends EventListener<UINodeTypeList> {
     public void execute(Event<UINodeTypeList> event) throws Exception {
       UINodeTypeList uiList = event.getSource() ;
@@ -160,12 +160,12 @@ public class UINodeTypeList extends UIComponentDecorator {
       event.getRequestContext().addUIComponentToUpdateByAjax(uiManager) ;
     }
   }
-  
+
   static public class ViewActionListener extends EventListener<UINodeTypeList> {
     public void execute(Event<UINodeTypeList> event) throws Exception {
       UINodeTypeList uiList = event.getSource() ;
       String ntName = event.getRequestContext().getRequestParameter(OBJECTID) ;
-      ManageableRepository manaRepository = 
+      ManageableRepository manaRepository =
         uiList.getApplicationComponent(RepositoryService.class).getCurrentRepository() ;
       Session session = manaRepository.getSystemSession(manaRepository.getConfiguration().getSystemWorkspaceName()) ;
       NodeTypeManager ntManager = session.getWorkspace().getNodeTypeManager() ;
@@ -191,11 +191,11 @@ public class UINodeTypeList extends UIComponentDecorator {
       event.getRequestContext().addUIComponentToUpdateByAjax(uiManager) ;
     }
   }
-  
+
   static public class EditActionListener extends EventListener<UINodeTypeList> {
     public void execute(Event<UINodeTypeList> event) throws Exception {
       UINodeTypeList uiNodeList = event.getSource() ;
-      ManageableRepository manaRepository = 
+      ManageableRepository manaRepository =
         uiNodeList.getApplicationComponent(RepositoryService.class).getCurrentRepository() ;
       Session session = manaRepository.getSystemSession(manaRepository.getConfiguration().getSystemWorkspaceName()) ;
       String nodeName = event.getRequestContext().getRequestParameter(OBJECTID) ;
@@ -207,8 +207,8 @@ public class UINodeTypeList extends UIComponentDecorator {
       uiForm.removeChildTabs(TAB_REMOVE) ;
       uiForm.updateEdit(draftNodeType, true) ;
       UIFormInputSetWithAction tab = uiForm.getChildById(UINodeTypeForm.NODETYPE_DEFINITION) ;
-      String[] actionNames = {UINodeTypeForm.ACTION_SAVE, UINodeTypeForm.ACTION_SAVEDRAFT, 
-                              UINodeTypeForm.ACTION_CANCEL} ; 
+      String[] actionNames = {UINodeTypeForm.ACTION_SAVE, UINodeTypeForm.ACTION_SAVEDRAFT,
+                              UINodeTypeForm.ACTION_CANCEL} ;
       tab.setActions(actionNames, null) ;
       tab.setIsView(false) ;
       uiForm.setTabRender(UINodeTypeForm.NODETYPE_DEFINITION) ;
@@ -216,14 +216,14 @@ public class UINodeTypeList extends UIComponentDecorator {
       event.getRequestContext().addUIComponentToUpdateByAjax(uiManager) ;
     }
   }
-  
+
   static public class DeleteActionListener extends EventListener<UINodeTypeList> {
     public void execute(Event<UINodeTypeList> event) throws Exception {
       UINodeTypeList uiNodeList = event.getSource() ;
-      ManageableRepository manaRepository = 
+      ManageableRepository manaRepository =
         uiNodeList.getApplicationComponent(RepositoryService.class).getCurrentRepository();
       Session session = manaRepository.getSystemSession(manaRepository.getConfiguration().getSystemWorkspaceName()) ;
-      String nodeName = event.getRequestContext().getRequestParameter(OBJECTID) ;  
+      String nodeName = event.getRequestContext().getRequestParameter(OBJECTID) ;
       if(session.getRootNode().hasNode(DRAFTNODETYPE)) {
         Node draftNode = session.getRootNode().getNode(DRAFTNODETYPE) ;
         Node deleteNode = draftNode.getNode(nodeName) ;

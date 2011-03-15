@@ -37,7 +37,7 @@ import org.exoplatform.webui.form.validator.MandatoryValidator;
  * Author : Tran The Trong
  *          trongtt@gmail.com
  * Sep 29, 2006
- * 11:57:24 AM 
+ * 11:57:24 AM
  */
 @ComponentConfig(
     lifecycle = UIFormLifecycle.class,
@@ -48,29 +48,29 @@ import org.exoplatform.webui.form.validator.MandatoryValidator;
     }
 )
 public class UITaxonomyForm extends UIForm {
-  
+
   final static private String FIELD_PARENT = "parentPath" ;
   final static private String FIELD_NAME = "taxonomyName" ;
-  
+
   public UITaxonomyForm() throws Exception {
     addUIFormInput(new UIFormInputInfo(FIELD_PARENT, FIELD_PARENT, null)) ;
     addUIFormInput(new UIFormStringInput(FIELD_NAME, FIELD_NAME, null).
-    			addValidator(MandatoryValidator.class).addValidator(ECMNameValidator.class)) ;
+          addValidator(MandatoryValidator.class).addValidator(ECMNameValidator.class)) ;
   }
-  
+
   public void setParent(String path) throws Exception {
     String rootPath = getAncestorOfType(UITaxonomyManager.class).getRootNode().getPath();
     path = path.replaceFirst(rootPath, "") ;
     getUIFormInputInfo(FIELD_PARENT).setValue(path) ;
     getUIStringInput(FIELD_NAME).setValue(null) ;
   }
-  
+
   public void addTaxonomy(String parentPath, String name) throws Exception {
     UITaxonomyManager uiManager = getAncestorOfType(UITaxonomyManager.class) ;
-    getApplicationComponent(CategoriesService.class).addTaxonomy(parentPath, name, 
+    getApplicationComponent(CategoriesService.class).addTaxonomy(parentPath, name,
         uiManager.getRepository()) ;
   }
-  
+
   static public class SaveActionListener extends EventListener<UITaxonomyForm> {
     public void execute(Event<UITaxonomyForm> event) throws Exception {
       UITaxonomyForm uiForm = event.getSource() ;
@@ -78,21 +78,21 @@ public class UITaxonomyForm extends UIForm {
       UITaxonomyManager uiManager = uiForm.getAncestorOfType(UITaxonomyManager.class) ;
       String name = uiForm.getUIStringInput(FIELD_NAME).getValue() ;
       if(name == null || name.trim().length() == 0) {
-        uiApp.addMessage(new ApplicationMessage("UITaxonomyForm.msg.name-null", null, 
+        uiApp.addMessage(new ApplicationMessage("UITaxonomyForm.msg.name-null", null,
                                                 ApplicationMessage.WARNING)) ;
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
         return ;
       }
-      
+
       if(!Utils.isNameValid(name, new String[]{"&", "$", "@", ",", ":","]", "[", "*", "%", "!"})) {
-        uiApp.addMessage(new ApplicationMessage("UITaxonomyForm.msg.name-invalid", null, 
+        uiApp.addMessage(new ApplicationMessage("UITaxonomyForm.msg.name-invalid", null,
                                                 ApplicationMessage.WARNING)) ;
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
         return ;
       }
-      
+
       if(name.length() > 30) {
-        uiApp.addMessage(new ApplicationMessage("UITaxonomyForm.msg.name-too-long", null, 
+        uiApp.addMessage(new ApplicationMessage("UITaxonomyForm.msg.name-too-long", null,
                                                 ApplicationMessage.WARNING)) ;
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
         return ;
@@ -104,7 +104,7 @@ public class UITaxonomyForm extends UIForm {
         uiManager.update(parentPath) ;
       } catch(Exception e) {
         Object[] arg = {name} ;
-        uiApp.addMessage(new ApplicationMessage("UITaxonomyForm.msg.exist", arg, 
+        uiApp.addMessage(new ApplicationMessage("UITaxonomyForm.msg.exist", arg,
                                                 ApplicationMessage.WARNING)) ;
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
         return ;

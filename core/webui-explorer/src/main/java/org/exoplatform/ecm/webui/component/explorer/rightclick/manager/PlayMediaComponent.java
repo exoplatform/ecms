@@ -51,7 +51,7 @@ import org.exoplatform.webui.ext.manager.UIAbstractManagerComponent;
  * Created by The eXo Platform SARL
  * Author : Hoang Van Hung
  *          hunghvit@gmail.com
- * Oct 30, 2009  
+ * Oct 30, 2009
  */
 @ComponentConfig(
     events = {
@@ -59,15 +59,15 @@ import org.exoplatform.webui.ext.manager.UIAbstractManagerComponent;
     }
 )
 public class PlayMediaComponent  extends UIAbstractManagerComponent {
-  
-  private static final List<UIExtensionFilter> FILTERS 
-  		= Arrays.asList(new UIExtensionFilter[]{ new IsNotInTrashFilter(),
-  																						 new IsNotTrashHomeNodeFilter() });
+
+  private static final List<UIExtensionFilter> FILTERS
+      = Arrays.asList(new UIExtensionFilter[]{ new IsNotInTrashFilter(),
+                                               new IsNotTrashHomeNodeFilter() });
   @UIExtensionFilters
   public List<UIExtensionFilter> getFilters() {
     return FILTERS;
   }
-  
+
   private boolean accept(Node node) throws Exception {
     if (!node.isNodeType(Utils.NT_FILE)) return false;
     String mimeType = node.getNode(Utils.JCR_CONTENT).getProperty(Utils.JCR_MIMETYPE).getString();
@@ -79,7 +79,7 @@ public class PlayMediaComponent  extends UIAbstractManagerComponent {
     }
     return false;
   }
-  
+
   public static class PlayMediaActionListener extends UIWorkingAreaActionListener<PlayMediaComponent> {
     public void processEvent(Event<PlayMediaComponent> event) throws Exception {
       PlayMediaComponent playMedia = event.getSource();
@@ -106,10 +106,10 @@ public class PlayMediaComponent  extends UIAbstractManagerComponent {
           tempNode = uiExplorer.getNodeByPath(srcPath, uiExplorer.getSessionByWorkspace(wsName));
           if (playMedia.accept(tempNode)) nodes.add(tempNode);
           if (nodes.size() == 0) {
-            uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.unavaiable-supported-media-file", 
+            uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.unavaiable-supported-media-file",
                 null,ApplicationMessage.WARNING));
             event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
-            return;  
+            return;
           }
         }
         VideoAudioViewer uiViewer = uiDocumentWorkspace.addChild(VideoAudioViewer.class, null, "PlayMedia");
@@ -128,21 +128,20 @@ public class PlayMediaComponent  extends UIAbstractManagerComponent {
           // Use the method getNodeByPath because it is link aware
           uiExplorer.setSelectNode(wsName, srcPath);
         } catch(PathNotFoundException path) {
-          uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.path-not-found-exception", 
+          uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.path-not-found-exception",
               null,ApplicationMessage.WARNING));
           event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
           return;
-        } 
+        }
       }
-      
+
       event.getRequestContext().addUIComponentToUpdateByAjax(uiDocumentWorkspace);
     }
   }
-  
-  
+
+
   @Override
   public Class<? extends UIAbstractManager> getUIAbstractManagerClass() {
-    // TODO Auto-generated method stub
     return null;
   }
 

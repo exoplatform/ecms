@@ -29,7 +29,7 @@ import org.exoplatform.webui.event.Event;
  * Created by The eXo Platform SAS
  * Author : eXoPlatform
  *          nicolas.filotto@exoplatform.com
- * 6 mai 2009  
+ * 6 mai 2009
  */
 @ComponentConfig(
      events = {
@@ -37,7 +37,7 @@ import org.exoplatform.webui.event.Event;
      }
  )
 public class ViewNodeTypeActionComponent extends UIComponent {
-  
+
   public static class ViewNodeTypeActionListener extends UIActionBarActionListener<ViewNodeTypeActionComponent> {
     public void processEvent(Event<ViewNodeTypeActionComponent> event) throws Exception {
       UIJCRExplorer uiJCRExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class);

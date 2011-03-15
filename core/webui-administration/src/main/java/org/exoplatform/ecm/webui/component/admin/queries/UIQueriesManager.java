@@ -26,7 +26,7 @@ import org.exoplatform.webui.ext.manager.UIAbstractManager;
  * Created by The eXo Platform SARL
  * Author : Dang Van Minh
  *          minh.dang@exoplatform.com
- * Dec 29, 2006  
+ * Dec 29, 2006
  * 11:27:14 AM
  */
 @ComponentConfig(lifecycle = UIContainerLifecycle.class)
@@ -35,11 +35,11 @@ public class UIQueriesManager extends UIAbstractManager {
   public UIQueriesManager() throws Exception {
     addChild(UIQueriesList.class, null, null) ;
   }
-  
+
   public void refresh() throws Exception {
     update();
   }
-  
+
   public void update() throws Exception {
     getChild(UIQueriesList.class).updateQueriesGrid(1) ;
   }
@@ -54,12 +54,12 @@ public class UIQueriesManager extends UIAbstractManager {
     uiPopup.setShow(true) ;
     uiPopup.setResizable(true) ;
   }
-  
+
   public void initPermissionPopup(String membership) throws Exception {
     removeChildById("PermissionPopup") ;
     UIPopupWindow uiPopup = addChild(UIPopupWindow.class, null, "PermissionPopup");
     uiPopup.setWindowSize(560, 300);
-    UIPermissionSelector uiECMPermission = 
+    UIPermissionSelector uiECMPermission =
       createUIComponent(UIPermissionSelector.class, null, "QueriesPermissionBrowse") ;
     uiECMPermission.setSelectedMembership(true);
     if(membership != null && membership.indexOf(":/") > -1) {

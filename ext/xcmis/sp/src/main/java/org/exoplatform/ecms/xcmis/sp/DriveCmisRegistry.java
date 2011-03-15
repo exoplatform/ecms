@@ -177,7 +177,7 @@ public class DriveCmisRegistry extends JcrCmisRegistry
                {
                   LOG.error("Initializing of storage provider " + driveName + " failed. ", e);
                }
-               // XXX NOTE New storage is not add in registry.
+               // NOTE New storage is not add in registry.
                // At the moment met only private/public user's storage.
                // It can be a lot storage if user's database is large.
                // Probably will need create specific storage provider for this.

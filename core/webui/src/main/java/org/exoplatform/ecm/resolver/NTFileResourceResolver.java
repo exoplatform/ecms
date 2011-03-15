@@ -30,15 +30,15 @@ import org.exoplatform.services.jcr.ext.common.SessionProvider;
 
 /**
  * Created by The eXo Platform SAS.
- * 
+ *
  * @author : Hoa.Pham hoa.pham@exoplatform.com Jun 23, 2008
  */
 public class NTFileResourceResolver extends JCRResourceResolver {
 
   /**
-   * Instantiates a new nT file resource resolver to load 
+   * Instantiates a new nT file resource resolver to load
    * template that stored as nt:file in jcr
-   * 
+   *
    * @param repository the repository
    * @param workspace the workspace
    * @param propertyName the property name
@@ -49,28 +49,28 @@ public class NTFileResourceResolver extends JCRResourceResolver {
 
   /**
    * Instantiates a new nT file resource resolver.
-   * 
+   *
    * @param repository the repository
    * @param workspace the workspace
    */
   public NTFileResourceResolver(String repository, String workspace) {
-    super(repository,workspace,null);       
+    super(repository,workspace,null);
   }
 
   /**
    * @param url URL must be like: jcr:uuid with uuid is node uiid of the file
-   * @see org.exoplatform.resolver.ResourceResolver#getInputStream(java.lang.String) 
+   * @see org.exoplatform.resolver.ResourceResolver#getInputStream(java.lang.String)
    */
   public InputStream getInputStream(String url) throws Exception  {
     ExoContainer container = ExoContainerContext.getCurrentContainer() ;
-    RepositoryService repositoryService = 
+    RepositoryService repositoryService =
       (RepositoryService)container.getComponentInstanceOfType(RepositoryService.class) ;
     ManageableRepository manageableRepository = repositoryService.getRepository(repository) ;
     SessionProvider provider = SessionProviderFactory.createSystemProvider();
     Session session = provider.getSession(workspace,manageableRepository);
     String fileUUID = removeScheme(url);
-    Node node = session.getNodeByUUID(fileUUID);  
-    return node.getNode("jcr:content").getProperty("jcr:data").getStream();    
+    Node node = session.getNodeByUUID(fileUUID);
+    return node.getNode("jcr:content").getProperty("jcr:data").getStream();
   }
 
 }

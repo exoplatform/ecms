@@ -46,11 +46,11 @@ import org.picocontainer.Startable;
  * Created by eXo Platform
  * Author : Pham Xuan Hoa
  *          hoapham@exoplatform.com
- * Nov 30, 2006  
+ * Nov 30, 2006
  */
-public class WatchDocumentServiceImpl implements WatchDocumentService, Startable {      
+public class WatchDocumentServiceImpl implements WatchDocumentService, Startable {
 
-  final public static String EXO_WATCHABLE_MIXIN = "exo:watchable".intern() ;  
+  final public static String EXO_WATCHABLE_MIXIN = "exo:watchable".intern() ;
   final public static String EMAIL_WATCHERS_PROP = "exo:emailWatcher".intern() ;
   final public static String RSS_WATCHERS_PROP = "exo:rssWatcher".intern() ;
   final private String initParamName = "messageConfig".intern();
@@ -62,17 +62,17 @@ public class WatchDocumentServiceImpl implements WatchDocumentService, Startable
   private static final Log LOG  = ExoLogger.getLogger(WatchDocumentServiceImpl.class);
 
   /**
-   * Constructor Method 
+   * Constructor Method
    * @param params
    * @param repoService
    * @param templateService
    */
-  public WatchDocumentServiceImpl(InitParams params, 
-      RepositoryService repoService, TemplateService templateService) {        
+  public WatchDocumentServiceImpl(InitParams params,
+      RepositoryService repoService, TemplateService templateService) {
     repoService_ = repoService ;
     templateService_ = templateService ;
-    messageConfig_ = 
-      (MessageConfig)params.getObjectParam(initParamName).getObject() ;    
+    messageConfig_ =
+      (MessageConfig)params.getObjectParam(initParamName).getObject() ;
   }
 
   /**
@@ -87,7 +87,7 @@ public class WatchDocumentServiceImpl implements WatchDocumentService, Startable
           watchableMixin = nodeType ;
           break ;
         }
-      }      
+      }
     }
     if(watchableMixin == null)  return -1 ;
     boolean notifyByEmail = checkNotifyTypeOfWatcher(documentNode,userName,EMAIL_WATCHERS_PROP) ;
@@ -109,12 +109,12 @@ public class WatchDocumentServiceImpl implements WatchDocumentService, Startable
       if(notifyType == NOTIFICATION_BY_EMAIL) {
         documentNode.setProperty(EMAIL_WATCHERS_PROP,new Value[] {newWatcher}) ;
         documentNode.save() ;
-        session.save() ;                
-        EmailNotifyListener listener = new EmailNotifyListener(documentNode) ;                
-        observeNode(documentNode,listener) ;        
-      }        
+        session.save() ;
+        EmailNotifyListener listener = new EmailNotifyListener(documentNode) ;
+        observeNode(documentNode,listener) ;
+      }
       session.save() ;
-    } else {      
+    } else {
       List<Value>  watcherList = new ArrayList<Value>() ;
       if(notifyType == NOTIFICATION_BY_EMAIL) {
         if(documentNode.hasProperty(EMAIL_WATCHERS_PROP)) {
@@ -123,7 +123,7 @@ public class WatchDocumentServiceImpl implements WatchDocumentService, Startable
           }
           watcherList.add(newWatcher) ;
         }
-        
+
         documentNode.setProperty(EMAIL_WATCHERS_PROP,watcherList.toArray(new Value[watcherList.size()])) ;
         documentNode.save() ;
       }
@@ -148,11 +148,11 @@ public class WatchDocumentServiceImpl implements WatchDocumentService, Startable
       }
       documentNode.setProperty(EMAIL_WATCHERS_PROP,watcherList.toArray(new Value[watcherList.size()])) ;
     }
-    documentNode.save() ;  
+    documentNode.save() ;
     session.save() ;
     session.logout() ;
-  }  
-  
+  }
+
   /**
    * This method will observes the specification node by giving the following param : listener, node
    * Its add an event listener to this node to observes anything that changes to this
@@ -167,7 +167,7 @@ public class WatchDocumentServiceImpl implements WatchDocumentService, Startable
     ManageableRepository manageRepo = (ManageableRepository)node.getSession().getRepository() ;
     String repository = manageRepo.getConfiguration().getName() ;
     Session systemSession = repoService_.getRepository(repository).getSystemSession(workspace) ;
-    List<String> list = getDocumentNodeTypes(node) ;          
+    List<String> list = getDocumentNodeTypes(node) ;
     String[] observedNodeTypeNames = list.toArray(new String[list.size()]) ;
     ObservationManager observationManager = systemSession.getWorkspace().getObservationManager() ;
     observationManager.addEventListener(listener,Event.PROPERTY_CHANGED,
@@ -176,7 +176,7 @@ public class WatchDocumentServiceImpl implements WatchDocumentService, Startable
   }
 
   /**
-   * This method will check notify type of watcher, userName is equal value of property with notification type 
+   * This method will check notify type of watcher, userName is equal value of property with notification type
    * @param documentNode    specify a node to watch
    * @param userName        userName to watch a document
    * @param notification    Notification Type
@@ -191,7 +191,7 @@ public class WatchDocumentServiceImpl implements WatchDocumentService, Startable
       }
     }
     return false ;
-  }  
+  }
 
   /**
    * This method will get all node types of node.
@@ -204,7 +204,7 @@ public class WatchDocumentServiceImpl implements WatchDocumentService, Startable
     NodeType  primaryType = node.getPrimaryNodeType() ;
     if(templateService_.isManagedNodeType(primaryType.getName())) {
       nodeTypeNameList.add(primaryType.getName()) ;
-    }    
+    }
     for(NodeType nodeType: node.getMixinNodeTypes()) {
       if(templateService_.isManagedNodeType(nodeType.getName())) {
         nodeTypeNameList.add(nodeType.getName()) ;
@@ -212,7 +212,7 @@ public class WatchDocumentServiceImpl implements WatchDocumentService, Startable
     }
     return nodeTypeNameList ;
   }
-  
+
   /**
    * This method will re-observer all nodes that have been ever observed with all repositories.
    * @throws Exception
@@ -226,36 +226,36 @@ public class WatchDocumentServiceImpl implements WatchDocumentService, Startable
       QueryManager queryManager = null ;
       try{
         queryManager = session.getWorkspace().getQueryManager() ;
-      } catch (Exception e) { 
+      } catch (Exception e) {
         LOG.error("Unexpected error", e);
       }
-      if(queryManager == null) { 
-        session.logout(); 
+      if(queryManager == null) {
+        session.logout();
         continue ;
       }
-      try {        
+      try {
         Query query = queryManager.createQuery(WATCHABLE_MIXIN_QUERY,Query.XPATH) ;
         QueryResult queryResult = query.execute() ;
-        for(NodeIterator iter = queryResult.getNodes(); iter.hasNext(); ) {          
+        for(NodeIterator iter = queryResult.getNodes(); iter.hasNext(); ) {
           Node observedNode = iter.nextNode() ;
           EmailNotifyListener emailNotifyListener = new EmailNotifyListener(observedNode) ;
           ObservationManager manager = session.getWorkspace().getObservationManager() ;
-          List<String> list = getDocumentNodeTypes(observedNode) ;          
-          String[] observedNodeTypeNames = list.toArray(new String[list.size()]) ;          
+          List<String> list = getDocumentNodeTypes(observedNode) ;
+          String[] observedNodeTypeNames = list.toArray(new String[list.size()]) ;
           manager.addEventListener(emailNotifyListener,Event.PROPERTY_CHANGED,
-              observedNode.getPath(),true,null,observedNodeTypeNames,false) ;          
+              observedNode.getPath(),true,null,observedNodeTypeNames,false) ;
         }
         session.logout();
       } catch (Exception e) {
-        LOG.warn("==>>> Cannot init observer for node: " 
+        LOG.warn("==>>> Cannot init observer for node: "
             +e.getLocalizedMessage() + " in '"+repo.getName()+"' repository");
         LOG.error("Unexpected error", e);
       }
     }
-  }    
+  }
 
   /**
-   * This method will get message configuration when a node is observing and there is some changes 
+   * This method will get message configuration when a node is observing and there is some changes
    * with it's properties.
    * @return MessageCongig
    */

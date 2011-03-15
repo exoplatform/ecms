@@ -33,7 +33,7 @@ import org.exoplatform.webui.event.Event;
  * Created by The eXo Platform SAS
  * Author : eXoPlatform
  *          nicolas.filotto@exoplatform.com
- * 6 mai 2009  
+ * 6 mai 2009
  */
 @ComponentConfig(
      events = {
@@ -41,12 +41,12 @@ import org.exoplatform.webui.event.Event;
      }
  )
 public class ViewPropertiesActionComponent extends UIComponent {
-  
+
   public static class ViewPropertiesActionListener extends UIActionBarActionListener<ViewPropertiesActionComponent> {
     public void processEvent(Event<ViewPropertiesActionComponent> event) throws Exception {
       UIJCRExplorer uiJCRExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class);
       Node node = uiJCRExplorer.getCurrentNode();
-      UIPropertiesManager uiPropertiesManager = 
+      UIPropertiesManager uiPropertiesManager =
         uiJCRExplorer.createUIComponent(UIPropertiesManager.class, null, null);
       UIPropertyForm uiForm = uiPropertiesManager.getChild(UIPropertyForm.class);
       uiForm.setRepositoryName(uiJCRExplorer.getRepositoryName());

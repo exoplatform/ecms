@@ -27,9 +27,9 @@ import org.ow2.bonita.facade.runtime.ActivityInstance;
 /**
  * This Node Hook gets the user name who started the Instance and puts it
  * in "initiator" attribute. It is used to print the initiator name into a
- * Form component. The Hook also puts the "choice" attribute to "enough". 
+ * Form component. The Hook also puts the "choice" attribute to "enough".
  * It is used to force the Workflow to go to the "evaluation" activity.
- * 
+ *
  * Created by Bull R&D
  * @author Rodrigue Le Gall
  */
@@ -40,20 +40,20 @@ public class HolidayEnoughHolidaysLeftHook implements TxHook {
    * have enough holidays left or not
    */
   public static final String CHOICE_PROPERTY_NAME = "choice";
-  
+
   /**
    * Name of the Property that contains the workflow initiator login
    */
   public static final String PROCESS_INITIATOR_USER_NAME = "initiator";
-  
+
 
   public void execute(APIAccessor accessor, ActivityInstance<ActivityBody> activity)
-		throws Exception {
-	 // Retrieve workflow session creator and set the instance property
+    throws Exception {
+   // Retrieve workflow session creator and set the instance property
     // "initiator" with it
-	String user_Name = accessor.getQueryRuntimeAPI().getProcessInstance(activity.getProcessInstanceUUID()).getStartedBy();
+  String user_Name = accessor.getQueryRuntimeAPI().getProcessInstance(activity.getProcessInstanceUUID()).getStartedBy();
     accessor.getRuntimeAPI().setProcessInstanceVariable(activity.getProcessInstanceUUID(), PROCESS_INITIATOR_USER_NAME, user_Name);
     accessor.getRuntimeAPI().setActivityInstanceVariable(activity.getUUID(), CHOICE_PROPERTY_NAME, "enough");
-	
+
   }
 }

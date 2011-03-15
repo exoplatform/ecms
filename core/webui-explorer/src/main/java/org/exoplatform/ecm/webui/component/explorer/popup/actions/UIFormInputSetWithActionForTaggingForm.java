@@ -25,20 +25,20 @@ import org.exoplatform.webui.config.annotation.ComponentConfig;
  * Created by The eXo Platform SARL
  * Author : Nguyen Anh Vu
  *          anhvurz90@gmail.com
- * Dec 24, 2009  
+ * Dec 24, 2009
  * 5:20:02 PM
  */
 @ComponentConfig(
-	   template = "app:/groovy/webui/component/explorer/popup/action/UIFormInputSetWithActionForTaggingForm.gtmpl"
-	)
+     template = "app:/groovy/webui/component/explorer/popup/action/UIFormInputSetWithActionForTaggingForm.gtmpl"
+  )
 public class UIFormInputSetWithActionForTaggingForm extends UIFormInputSetWithAction {
 
-	public UIFormInputSetWithActionForTaggingForm(String name) {
-		super(name);
-	}
-	
-	public List<String> getTagNames() throws Exception {
-		return this.getAncestorOfType(UITaggingForm.class).getAllTagNames();
-	}
+  public UIFormInputSetWithActionForTaggingForm(String name) {
+    super(name);
+  }
+
+  public List<String> getTagNames() throws Exception {
+    return this.getAncestorOfType(UITaggingForm.class).getAllTagNames();
+  }
 
 }

@@ -49,7 +49,7 @@ import org.ow2.bonita.facade.runtime.ActivityInstance;
  * 			Pham Xuan Hoa
  */
 public class ProcessUtil {
-  
+
   public final static String CURRENT_STATE = "exo:currentState".intern();
   public final static String CURRENT_LOCATION = "exo:currentLocation".intern();
   public final static String REQUEST_FOR_VALIDATION = "Request For Validation".intern();
@@ -64,35 +64,35 @@ public class ProcessUtil {
   public final static String LIVE = "Live".intern();
   public final static String BACKUP = "Backup".intern();
   public final static String IN_TRASH = "In Trash".intern();
-  
+
   public final static String EXO_PUBLISH_LOCATION = "exo:publishLocation".intern();
   public final static String EXO_PENDING_LOCATION = "exo:pendingLocation".intern();
   public final static String EXO_BACKUP_LOCATION = "exo:backupLocation".intern();
   public final static String EXO_TRASH_LOCATION = "exo:trashLocation".intern();
-   
+
   public final static String ACTION_REASON = "exo:actionComment".intern();
-  
+
   public final static int REPOSITORY_INDEX = 0;
   public final static int WORKSPACE_INDEX = 1;
   public final static int PATH_INDEX = 2;
-  
+
   public final static String EXO_VALIDATIONREQUEST = "exo:validationRequest".intern();
   public final static String EXO_CONENT_STATE = "exo:publishingState".intern();
   public final static String CURRENT_STATE_PROP = "exo:currentState".intern();
   public final static String CURRENT_WORKSPACE_PROP = "exo:currentWorkspace".intern();
   public final static String CURRENT_REPOSITORY_PROP = "exo:currentRepository".intern();
   public final static String CURRENT_PATH_PROP = "exo:currentPath".intern();
-  
+
   private static Log log = ExoLogger.getLogger(ProcessUtil.class);
-  
+
   public static void requestForValidation(APIAccessor api, ActivityInstance<ActivityBody> activity) {
-	  try {
-		api.getRuntimeAPI().setVariable(activity.getUUID(), CURRENT_STATE,REQUEST_FOR_VALIDATION);
-	  } catch (ActivityNotFoundException e1) {
-		  log.error(e1);
-	  } catch (VariableNotFoundException e1) {
-		  log.error(e1);
-	  }
+    try {
+    api.getRuntimeAPI().setVariable(activity.getUUID(), CURRENT_STATE,REQUEST_FOR_VALIDATION);
+    } catch (ActivityNotFoundException e1) {
+      log.error(e1);
+    } catch (VariableNotFoundException e1) {
+      log.error(e1);
+    }
     String[] location = getCurrentLocation(api,activity);
     String repository = location[REPOSITORY_INDEX];
     String workspace = location[WORKSPACE_INDEX];
@@ -101,31 +101,31 @@ public class ProcessUtil {
     try{
       Node requestNode = getNode(repository,workspace,path,provider);
       if(!requestNode.isNodeType(EXO_CONENT_STATE)) {
-        requestNode.addMixin(EXO_CONENT_STATE) ;   
+        requestNode.addMixin(EXO_CONENT_STATE) ;
         requestNode.save();
-      } 
-      requestNode.setProperty(CURRENT_STATE,REQUEST_FOR_VALIDATION);      
+      }
+      requestNode.setProperty(CURRENT_STATE,REQUEST_FOR_VALIDATION);
       if(!requestNode.isNodeType(EXO_VALIDATIONREQUEST)) {
-        requestNode.addMixin(EXO_VALIDATIONREQUEST) ; 
-      }      
+        requestNode.addMixin(EXO_VALIDATIONREQUEST) ;
+      }
       String requester = ((ExtendedNode)requestNode).getProperty("exo:owner").getString();
       requestNode.setProperty("exo:requester",requester) ;
       requestNode.setProperty("exo:requestDate",new GregorianCalendar());
-      requestNode.getSession().save();      
+      requestNode.getSession().save();
     } catch (Exception e) {
       log.error(e);
-    }    
+    }
     provider.close();
   }
-  
+
   public static void approve(APIAccessor api, ActivityInstance<ActivityBody> activity) {
-	  try {
-		api.getRuntimeAPI().setVariable(activity.getUUID(),CURRENT_STATE,VALIDATED);
-	  } catch (ActivityNotFoundException e1) {
-		  log.error(e1);
-	  } catch (VariableNotFoundException e1) {
-		  log.error(e1);
-	  }
+    try {
+    api.getRuntimeAPI().setVariable(activity.getUUID(),CURRENT_STATE,VALIDATED);
+    } catch (ActivityNotFoundException e1) {
+      log.error(e1);
+    } catch (VariableNotFoundException e1) {
+      log.error(e1);
+    }
     String[] location = getCurrentLocation(api,activity);
     String repository = location[REPOSITORY_INDEX];
     String workspace = location[WORKSPACE_INDEX];
@@ -136,13 +136,15 @@ public class ProcessUtil {
       if(!validatedNode.isNodeType("exo:approved")) {
         validatedNode.addMixin("exo:approved");
         validatedNode.save();
-      }      
+      }
       validatedNode.setProperty("exo:approver",getActorId(api,activity));
       validatedNode.setProperty("exo:approvedDate",new GregorianCalendar());
-      String approveComment = (String) api.getQueryRuntimeAPI().getProcessInstanceVariable(activity.getProcessInstanceUUID(),ACTION_REASON) ;
+      String approveComment = (String) api.getQueryRuntimeAPI()
+                                          .getProcessInstanceVariable(activity.getProcessInstanceUUID(),
+                                                                      ACTION_REASON);
       if(approveComment != null && approveComment.length()!= 0) {
         validatedNode.setProperty("exo:approvedComment",approveComment);
-      } 
+      }
       validatedNode.setProperty(CURRENT_STATE_PROP,"Approved");
       validatedNode.getSession().save();
     } catch (Exception e) {
@@ -150,15 +152,15 @@ public class ProcessUtil {
     }
     provider.close();
   }
-  
+
   public static void disapprove(APIAccessor api, ActivityInstance<ActivityBody> activity) {
-	  try {
-		api.getRuntimeAPI().setVariable(activity.getUUID(),CURRENT_STATE,DISAPPROVED);
-	  } catch (ActivityNotFoundException e1) {
-		  log.error(e1);
-	  } catch (VariableNotFoundException e1) {
-		  log.error(e1);
-	  }
+    try {
+    api.getRuntimeAPI().setVariable(activity.getUUID(),CURRENT_STATE,DISAPPROVED);
+    } catch (ActivityNotFoundException e1) {
+      log.error(e1);
+    } catch (VariableNotFoundException e1) {
+      log.error(e1);
+    }
     String[] location = getCurrentLocation(api,activity);
     String repository = location[REPOSITORY_INDEX];
     String workspace = location[WORKSPACE_INDEX];
@@ -169,29 +171,31 @@ public class ProcessUtil {
       if(!disapprovedNode.isNodeType("exo:disapproved")) {
         disapprovedNode.addMixin("exo:disapproved");
         disapprovedNode.save();
-      }      
+      }
       disapprovedNode.setProperty("exo:contradictor",getActorId(api,activity));
       disapprovedNode.setProperty("exo:disaprovedDate",new GregorianCalendar());
-      String approveComment = (String) api.getQueryRuntimeAPI().getProcessInstanceVariable(activity.getProcessInstanceUUID(),ACTION_REASON) ;
+      String approveComment = (String) api.getQueryRuntimeAPI()
+                                          .getProcessInstanceVariable(activity.getProcessInstanceUUID(),
+                                                                      ACTION_REASON);
       if(approveComment != null && approveComment.length()!= 0) {
         disapprovedNode.setProperty("exo:disapprovedReason",approveComment);
-      } 
+      }
       disapprovedNode.setProperty(CURRENT_STATE_PROP,"Disapproved");
       disapprovedNode.getSession().save();
     } catch (Exception e) {
       log.error(e);
-    }    
+    }
     provider.close();
-  } 
-  
+  }
+
   public static void publish(APIAccessor api, ActivityInstance<ActivityBody> activity) {
-	  try {
-		api.getRuntimeAPI().setVariable(activity.getUUID(),CURRENT_STATE,PUBLISHED);
-	  } catch (ActivityNotFoundException e1) {
-		  log.error(e1);
-	  } catch (VariableNotFoundException e1) {
-		  log.error(e1);
-	  }
+    try {
+    api.getRuntimeAPI().setVariable(activity.getUUID(),CURRENT_STATE,PUBLISHED);
+    } catch (ActivityNotFoundException e1) {
+      log.error(e1);
+    } catch (VariableNotFoundException e1) {
+      log.error(e1);
+    }
     String[] location = getCurrentLocation(api,activity);
     String repository = location[REPOSITORY_INDEX];
     String workspace = location[WORKSPACE_INDEX];
@@ -202,32 +206,32 @@ public class ProcessUtil {
       if(!publishedNode.isNodeType("exo:published")) {
         publishedNode.addMixin("exo:published");
         publishedNode.save();
-      }      
+      }
       Date startDate = (Date)api.getQueryRuntimeAPI().getProcessInstanceVariable(activity.getProcessInstanceUUID(),"startDate");
       Date endDate = (Date)api.getQueryRuntimeAPI().getProcessInstanceVariable(activity.getProcessInstanceUUID(),"endDate");
       Calendar calendar = new GregorianCalendar();
-      calendar.setTime(startDate);      
+      calendar.setTime(startDate);
       publishedNode.setProperty("exo:startPublication",calendar);
       if(endDate != null) {
         calendar.setTime(endDate);
-        publishedNode.setProperty("exo:endPublication",calendar); 
-      }                  
-      publishedNode.setProperty(CURRENT_STATE_PROP,LIVE);      
+        publishedNode.setProperty("exo:endPublication",calendar);
+      }
+      publishedNode.setProperty(CURRENT_STATE_PROP,LIVE);
       publishedNode.getSession().save();
     } catch (Exception e) {
       log.error(e);
     }
     provider.close();
   }
-  
-  public static void waitForPublish(APIAccessor api, ActivityInstance<ActivityBody> activity) {    
+
+  public static void waitForPublish(APIAccessor api, ActivityInstance<ActivityBody> activity) {
     try {
-		api.getRuntimeAPI().setVariable(activity.getUUID(),CURRENT_STATE,PENDING);
-	  } catch (ActivityNotFoundException e1) {
-		  log.error(e1);
-	  } catch (VariableNotFoundException e1) {
-		  log.error(e1);
-	  }
+    api.getRuntimeAPI().setVariable(activity.getUUID(),CURRENT_STATE,PENDING);
+    } catch (ActivityNotFoundException e1) {
+      log.error(e1);
+    } catch (VariableNotFoundException e1) {
+      log.error(e1);
+    }
     String[] location = getCurrentLocation(api,activity);
     String repository = location[REPOSITORY_INDEX];
     String workspace = location[WORKSPACE_INDEX];
@@ -238,29 +242,31 @@ public class ProcessUtil {
       if(!pendingNode.isNodeType("exo:pending")) {
         pendingNode.addMixin("exo:pending");
         pendingNode.save();
-      }      
-      Date startDate = (Date)api.getQueryRuntimeAPI().getProcessInstanceVariable(activity.getProcessInstanceUUID(),"startDate");                  
+      }
+      Date startDate = (Date) api.getQueryRuntimeAPI()
+                                 .getProcessInstanceVariable(activity.getProcessInstanceUUID(),
+                                                             "startDate");
       pendingNode.setProperty("exo:pendingStart",new GregorianCalendar());
       Calendar calendar = new GregorianCalendar();
       calendar.setTime(startDate);
       pendingNode.setProperty("exo:pendingEnd",calendar);
-      pendingNode.setProperty(CURRENT_STATE_PROP,PENDING);      
+      pendingNode.setProperty(CURRENT_STATE_PROP,PENDING);
       pendingNode.getSession().save();
     } catch (Exception e) {
       log.error(e);
     }
     provider.close();
   }
-  
-  public static void delegate(APIAccessor api, ActivityInstance<ActivityBody> activity) {    
+
+  public static void delegate(APIAccessor api, ActivityInstance<ActivityBody> activity) {
     try {
-		api.getRuntimeAPI().setVariable(activity.getUUID(),CURRENT_STATE,DELEGATED);
-		api.getRuntimeAPI().setVariable(activity.getUUID(),"delegate",new Boolean(true));
-	  } catch (ActivityNotFoundException e1) {
-		  log.error(e1);
-	  } catch (VariableNotFoundException e1) {
-		  log.error(e1);
-	  }
+    api.getRuntimeAPI().setVariable(activity.getUUID(),CURRENT_STATE,DELEGATED);
+    api.getRuntimeAPI().setVariable(activity.getUUID(),"delegate",new Boolean(true));
+    } catch (ActivityNotFoundException e1) {
+      log.error(e1);
+    } catch (VariableNotFoundException e1) {
+      log.error(e1);
+    }
     String[] location = getCurrentLocation(api,activity);
     String repository = location[REPOSITORY_INDEX];
     String workspace = location[WORKSPACE_INDEX];
@@ -274,9 +280,13 @@ public class ProcessUtil {
       }
       delegateNode.setProperty("exo:assigner",getActorId(api,activity));
       delegateNode.setProperty("exo:delegatedDate",new GregorianCalendar());
-      String delegator = (String)api.getQueryRuntimeAPI().getProcessInstanceVariable(activity.getProcessInstanceUUID(),"delegator") ;
-      delegateNode.setProperty("exo:delegator",delegator);      
-      String delegatedComment = (String) api.getQueryRuntimeAPI().getProcessInstanceVariable(activity.getProcessInstanceUUID(),ACTION_REASON);
+      String delegator = (String) api.getQueryRuntimeAPI()
+                                     .getProcessInstanceVariable(activity.getProcessInstanceUUID(),
+                                                                 "delegator");
+      delegateNode.setProperty("exo:delegator",delegator);
+      String delegatedComment = (String) api.getQueryRuntimeAPI()
+                                            .getProcessInstanceVariable(activity.getProcessInstanceUUID(),
+                                                                        ACTION_REASON);
       if(delegatedComment != null && delegatedComment.length()!= 0) {
         delegateNode.setProperty("exo:delegatedComment",delegatedComment);
       }
@@ -287,15 +297,15 @@ public class ProcessUtil {
     }
     provider.close();
   }
-  
+
   public static void backup(APIAccessor api, ActivityInstance<ActivityBody> activity) {
     try {
-		api.getRuntimeAPI().setVariable(activity.getUUID(),CURRENT_STATE,BACKUP);
-	  } catch (ActivityNotFoundException e1) {
-		  log.error(e1);
-	  } catch (VariableNotFoundException e1) {
-		  log.error(e1);
-	  }
+    api.getRuntimeAPI().setVariable(activity.getUUID(),CURRENT_STATE,BACKUP);
+    } catch (ActivityNotFoundException e1) {
+      log.error(e1);
+    } catch (VariableNotFoundException e1) {
+      log.error(e1);
+    }
     String[] location = getCurrentLocation(api,activity);
     String repository = location[REPOSITORY_INDEX];
     String workspace = location[WORKSPACE_INDEX];
@@ -306,33 +316,35 @@ public class ProcessUtil {
       if(!backupNode.isNodeType("exo:backup")) {
         backupNode.addMixin("exo:backup");
         backupNode.save();
-      }      
+      }
       backupNode.setProperty("exo:backupDate",new GregorianCalendar());
       backupNode.setProperty("exo:backupReason","DOCUMENT EXPIRED");
       backupNode.setProperty(CURRENT_STATE_PROP,BACKUP);
-      backupNode.getSession().save();      
+      backupNode.getSession().save();
     } catch (Exception e) {
       log.error(e);
     }
-   provider.close(); 
+   provider.close();
   }
-  
+
   public static void moveTrash(APIAccessor api, ActivityInstance<ActivityBody> activity) {
-	  String sourceTransition = "";
+    String sourceTransition = "";
     try {
-    	sourceTransition = (String) api.getQueryRuntimeAPI().getProcessInstanceVariable(activity.getProcessInstanceUUID(),CURRENT_STATE);
-		api.getRuntimeAPI().setVariable(activity.getUUID(),CURRENT_STATE,IN_TRASH);
-	  } catch (ActivityNotFoundException e1) {
-		  log.error(e1);
-	  } catch (VariableNotFoundException e1) {
-		  log.error(e1);
-	  } catch (InstanceNotFoundException e1) {
-		  log.error(e1);
-	}
+      sourceTransition = (String) api.getQueryRuntimeAPI()
+                                     .getProcessInstanceVariable(activity.getProcessInstanceUUID(),
+                                                                 CURRENT_STATE);
+    api.getRuntimeAPI().setVariable(activity.getUUID(),CURRENT_STATE,IN_TRASH);
+    } catch (ActivityNotFoundException e1) {
+      log.error(e1);
+    } catch (VariableNotFoundException e1) {
+      log.error(e1);
+    } catch (InstanceNotFoundException e1) {
+      log.error(e1);
+  }
     String[] location = getCurrentLocation(api,activity);
-    
-    
-    
+
+
+
     String repository = location[REPOSITORY_INDEX];
     String workspace = location[WORKSPACE_INDEX];
     String path = location[PATH_INDEX] ;
@@ -342,7 +354,7 @@ public class ProcessUtil {
       if(!trashNode.isNodeType("exo:trashMovement")) {
         trashNode.addMixin("exo:trashMovement");
         trashNode.save();
-      }      
+      }
       trashNode.setProperty("exo:moveDate",new GregorianCalendar());
       trashNode.setProperty("exo:moveReason",sourceTransition);
       trashNode.setProperty(CURRENT_STATE_PROP,IN_TRASH);
@@ -351,62 +363,75 @@ public class ProcessUtil {
       log.error(e);
     }
     provider.close();
-  } 
-  
+  }
+
   public static Node getNode(String repositoryName, String workspace, String path, SessionProvider provider) throws Exception {
     RepositoryService repositoryService = getService(RepositoryService.class);
     ManageableRepository repository= repositoryService.getRepository(repositoryName);
-    Session session = provider.getSession(workspace,repository);    
+    Session session = provider.getSession(workspace,repository);
     return (Node)session.getItem(path);
   }
-  
+
   public static String getActorId(APIAccessor api, ActivityInstance<ActivityBody> activity) {
     try {
-		return (String)api.getQueryRuntimeAPI().getProcessInstanceVariable(activity.getProcessInstanceUUID(),"initiator");
-	} catch (InstanceNotFoundException e) {
-		log.error(e);
-	} catch (VariableNotFoundException e) {
-		log.error(e);
-	}
-	return "";
+    return (String)api.getQueryRuntimeAPI().getProcessInstanceVariable(activity.getProcessInstanceUUID(),"initiator");
+  } catch (InstanceNotFoundException e) {
+    log.error(e);
+  } catch (VariableNotFoundException e) {
+    log.error(e);
   }
-  
-  public static void setCurrentLocation(APIAccessor api, ActivityInstance<ActivityBody> activity,String currentWorkspace,String currentPath) {
-	    try {
-		String repository = (String) api.getQueryRuntimeAPI().getProcessInstanceVariable(activity.getProcessInstanceUUID(),"repository");
-		StringBuilder locationBuilder = new StringBuilder();
-		locationBuilder.append(repository).append("::").append(currentWorkspace).append("::").append(currentPath);    
-		api.getRuntimeAPI().setVariable(activity.getUUID(),CURRENT_LOCATION,locationBuilder.toString());
-	} catch (ActivityNotFoundException e) {
-		log.error(e);
-	} catch (VariableNotFoundException e) {
-		log.error(e);
-	} catch (InstanceNotFoundException e) {
-		log.error(e);
-	}
+  return "";
   }
-  
+
+  public static void setCurrentLocation(APIAccessor api,
+                                        ActivityInstance<ActivityBody> activity,
+                                        String currentWorkspace,
+                                        String currentPath) {
+    try {
+      String repository = (String) api.getQueryRuntimeAPI()
+                                      .getProcessInstanceVariable(activity.getProcessInstanceUUID(),
+                                                                  "repository");
+      StringBuilder locationBuilder = new StringBuilder();
+      locationBuilder.append(repository)
+                     .append("::")
+                     .append(currentWorkspace)
+                     .append("::")
+                     .append(currentPath);
+      api.getRuntimeAPI().setVariable(activity.getUUID(),
+                                      CURRENT_LOCATION,
+                                      locationBuilder.toString());
+    } catch (ActivityNotFoundException e) {
+      log.error(e);
+    } catch (VariableNotFoundException e) {
+      log.error(e);
+    } catch (InstanceNotFoundException e) {
+      log.error(e);
+    }
+  }
+
   public static String[] getCurrentLocation(APIAccessor api, ActivityInstance<ActivityBody> activity) {
-	try {
-		String currentLocation = (String)api.getQueryRuntimeAPI().getProcessInstanceVariable(activity.getProcessInstanceUUID(), CURRENT_LOCATION);
-		return currentLocation.split("::");
-	} catch (InstanceNotFoundException e) {
-		log.error(e);
-	} catch (VariableNotFoundException e) {
-		log.error(e);
-	}
+  try {
+      String currentLocation = (String) api.getQueryRuntimeAPI()
+                                           .getProcessInstanceVariable(activity.getProcessInstanceUUID(),
+                                                                       CURRENT_LOCATION);
+    return currentLocation.split("::");
+  } catch (InstanceNotFoundException e) {
+    log.error(e);
+  } catch (VariableNotFoundException e) {
+    log.error(e);
+  }
     return new String[3];
   }
-  
+
   public static <T> T getService(Class<T> type) {
-	  ExoContainer container = (ExoContainer)RootContainer.getComponent(ExoContainer.class);
-//    ExoContainer container = ExoContainerContext.getCurrentContainer();   
-    return  type.cast(container.getComponentInstanceOfType(type)) ;       
+    ExoContainer container = (ExoContainer)RootContainer.getComponent(ExoContainer.class);
+//    ExoContainer container = ExoContainerContext.getCurrentContainer();
+    return  type.cast(container.getComponentInstanceOfType(type)) ;
   }
-  
+
   public static String getAuthor(APIAccessor api, ActivityInstance<ActivityBody> activity){
     String[] location = getCurrentLocation(api,activity);
-    SessionProvider provider = SessionProvider.createSystemProvider();    
+    SessionProvider provider = SessionProvider.createSystemProvider();
     try{
       Node node = getNode(location[0],location[1],location[2],provider);
       return node.getProperty("exo:owner").getString();
@@ -416,7 +441,7 @@ public class ProcessUtil {
     }
     return getActorId(api,activity);
   }
-  
+
   public static String computeDestinationPath(String srcPath,String destPath) {
     String realDestPath;
     String datePath = getDateLocation();
@@ -424,29 +449,29 @@ public class ProcessUtil {
     if(destPath.endsWith("/")) {
       realDestPath = destPath.concat(datePath).concat(nodeName);
     }else {
-      realDestPath = destPath.concat("/").concat(datePath).concat(nodeName);      
+      realDestPath = destPath.concat("/").concat(datePath).concat(nodeName);
     }
     return realDestPath;
   }
-  
-  public static String getDateLocation() { 
+
+  public static String getDateLocation() {
     LocaleConfigService configService = getService(LocaleConfigService.class);
     Locale locale = configService.getDefaultLocaleConfig().getLocale();
     Calendar calendar = new GregorianCalendar(locale);
     String[] monthNames = new DateFormatSymbols().getMonths();
-    String currentYear  = Integer.toString(calendar.get(Calendar.YEAR)) ;    
-    String currentMonth = monthNames[calendar.get(Calendar.MONTH)] ;    
-    int weekday = calendar.get(Calendar.DAY_OF_WEEK);        
-    int diff = 2 - weekday ;        
-    calendar.add(Calendar.DATE, diff);    
+    String currentYear  = Integer.toString(calendar.get(Calendar.YEAR)) ;
+    String currentMonth = monthNames[calendar.get(Calendar.MONTH)] ;
+    int weekday = calendar.get(Calendar.DAY_OF_WEEK);
+    int diff = 2 - weekday ;
+    calendar.add(Calendar.DATE, diff);
     SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy") ;
     String startDateOfWeek = dateFormat.format(calendar.getTime());
     String[] arrStartDate = startDateOfWeek.split("/") ;
-    String startWeekDay = arrStartDate[0] ;       
+    String startWeekDay = arrStartDate[0] ;
     calendar.add(Calendar.DATE, 6);
     String endDateOfWeek = dateFormat.format(calendar.getTime());
     String[] arrEndDate = endDateOfWeek.split("/") ;
-    String endWeekDay = arrEndDate[0] ;       
+    String endWeekDay = arrEndDate[0] ;
     StringBuilder builder = new StringBuilder();
     //Year folder
     builder.append(currentYear).append("/")

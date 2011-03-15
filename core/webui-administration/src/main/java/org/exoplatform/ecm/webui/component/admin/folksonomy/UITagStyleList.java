@@ -31,7 +31,7 @@ import org.exoplatform.webui.core.UIGrid;
  * Created by The eXo Platform SARL
  * Author : Dang Van Minh
  *          minh.dang@exoplatform.com
- * Jan 11, 2007  
+ * Jan 11, 2007
  * 2:55:47 PM
  */
 @ComponentConfig(
@@ -41,15 +41,15 @@ public class UITagStyleList extends UIGrid {
 
   final static String RANGE_PROP = "exo:styleRange" ;
   final static String HTML_STYLE_PROP = "exo:htmlStyle" ;
-  
+
   private static String[] BEAN_FIELD = {"name", "documentRange", "tagHTML"} ;
   private static String[] ACTIONS = {"EditStyle", "RemoveStyle"} ;
-  
+
   public UITagStyleList() throws Exception {
     getUIPageIterator().setId("TagStyleIterator") ;
     configure("name", BEAN_FIELD, ACTIONS) ;
   }
-  
+
   public void updateGrid() throws Exception {
     List<TagStyleData> tagStyleList = new ArrayList<TagStyleData>() ;
     NewFolksonomyService newFolksonomyService = getApplicationComponent(NewFolksonomyService.class) ;
@@ -63,28 +63,28 @@ public class UITagStyleList extends UIGrid {
     ObjectPageList objPageList = new ObjectPageList(tagStyleList, 10) ;
     getUIPageIterator().setPageList(objPageList) ;
   }
-  
+
   public String getRangeOfStyle(Node tagStyle) throws Exception {
     return tagStyle.getProperty(RANGE_PROP).getValue().getString() ;
   }
-  
+
   public String getHtmlStyleOfStyle(Node tagStyle) throws Exception {
     return tagStyle.getProperty(HTML_STYLE_PROP).getValue().getString() ;
   }
-  
+
   static public class TagStyleData {
     private String tagName_ ;
     private String documentRange_ ;
     private String tagHTML_ ;
-    
+
     public TagStyleData(String tagName, String documentRange, String tagHTML) {
       tagName_ = tagName ;
       documentRange_ = documentRange ;
       tagHTML_ = tagHTML ;
     }
-    
-    public String getName() { return tagName_ ; } 
-    public String getDocumentRange() { return documentRange_ ; }  
+
+    public String getName() { return tagName_ ; }
+    public String getDocumentRange() { return documentRange_ ; }
     public String getTagHTML() { return tagHTML_ ; }
   }
 }

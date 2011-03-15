@@ -27,42 +27,42 @@ import org.exoplatform.webui.event.EventListener;
 
 /**
  * Created by The eXo Platform SAS.
- * 
+ *
  * @author : Hoa.Pham hoa.pham@exoplatform.com Jun 23, 2008
  */
 
 @ComponentConfig(
   lifecycle = Lifecycle.class,
   events = {
-	@EventConfig(listeners = UIContentBrowsePanel.ChangeContentTypeActionListener.class)
+  @EventConfig(listeners = UIContentBrowsePanel.ChangeContentTypeActionListener.class)
   }
 )
-  
+
 public abstract class UIContentBrowsePanel extends UIBaseNodeTreeSelector {
-  
+
   public static final String WEBCONTENT = "Web Contents";
-  
+
   public static final String DMSDOCUMENT = "DMS Documents";
-  
+
   public static final String MEDIA = "Medias";
-  
+
   private String contentType = WEBCONTENT;
-  
+
   public String getContentType() {
-	return contentType;
+  return contentType;
   }
-  
+
   public void setContentType(String contentType) {
-	this.contentType = contentType;
+  this.contentType = contentType;
   }
-  
+
   public void onChange(Node node, Object context) throws Exception {}
-  
+
   public static class ChangeContentTypeActionListener extends EventListener<UIContentBrowsePanel> {
-	public void execute(Event<UIContentBrowsePanel> event) throws Exception {
-		UIContentBrowsePanel contentBrowsePanel = event.getSource();
-		contentBrowsePanel.contentType = event.getRequestContext().getRequestParameter(OBJECTID);
-		event.getRequestContext().addUIComponentToUpdateByAjax(contentBrowsePanel.getAncestorOfType(UIContentSelector.class).getChild(UIContentSearchForm.class));
-	}
+  public void execute(Event<UIContentBrowsePanel> event) throws Exception {
+    UIContentBrowsePanel contentBrowsePanel = event.getSource();
+    contentBrowsePanel.contentType = event.getRequestContext().getRequestParameter(OBJECTID);
+    event.getRequestContext().addUIComponentToUpdateByAjax(contentBrowsePanel.getAncestorOfType(UIContentSelector.class).getChild(UIContentSearchForm.class));
+  }
   }
 }

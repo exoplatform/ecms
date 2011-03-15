@@ -28,27 +28,27 @@ import org.exoplatform.webui.ext.filter.UIExtensionFilterType;
  * Created by The eXo Platform SARL
  * Author : Hoang Van Hung
  *          hunghvit@gmail.com
- * Aug 6, 2009  
+ * Aug 6, 2009
  */
 public class IsNotSameNameSiblingFilter extends UIExtensionAbstractFilter {
-  
+
   public IsNotSameNameSiblingFilter() {
     this(null);
   }
-  
+
   public IsNotSameNameSiblingFilter(String messageKey) {
     super(messageKey, UIExtensionFilterType.MANDATORY);
   }
-  
+
   public static boolean isNotSameNameSibling(Node node) throws Exception {
     return node.getIndex() <= 1;
   }
-  
+
   public boolean accept(Map<String, Object> context) throws Exception {
     if (context == null) return true;
     Node currentNode = (Node) context.get(Node.class.getName());
     return isNotSameNameSibling(currentNode);
   }
 
-  public void onDeny(Map<String, Object> context) throws Exception {  }    
+  public void onDeny(Map<String, Object> context) throws Exception {  }
 }

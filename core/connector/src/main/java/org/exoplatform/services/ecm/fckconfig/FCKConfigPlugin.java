@@ -21,16 +21,16 @@ import org.exoplatform.webui.form.wysiwyg.FCKEditorConfig;
 
 /**
  * Created by The eXo Platform SAS.
- * 
+ *
  * @author : Hoa.Pham hoa.pham@exoplatform.com Jun 23, 2008
  */
-public abstract class FCKConfigPlugin extends BaseComponentPlugin {  
-  
+public abstract class FCKConfigPlugin extends BaseComponentPlugin {
+
   /**
    * This method is used to add/override some variables in fckconfig.js
-   * 
+   *
    * @param config the config
    * @throws Exception the exception
    */
-  public abstract void addParameters(final FCKEditorConfig config, final FCKEditorContext context) throws Exception; 
+  public abstract void addParameters(final FCKEditorConfig config, final FCKEditorContext context) throws Exception;
 }

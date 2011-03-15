@@ -32,18 +32,18 @@ import org.exoplatform.test.BasicTestCase;
  * Created by The eXo Platform SAS
  * Author : eXoPlatform
  *          chuong.phan@exoplatform.com, phan.le.thanh.chuong@gmail.com
- * Jul 14, 2009  
+ * Jul 14, 2009
  */
 public abstract class BaseWCMTestCase extends BasicTestCase {
 
   protected PortalContainer   container;
-  
+
   protected Session               session;
-  
+
   protected final String          REPO_NAME        = "repository".intern();
 
   protected final String          DMSSYSTEM_WS     = "dms-system".intern();
-  
+
   protected final String          SYSTEM_WS        = "system".intern();
 
   protected final String          COLLABORATION_WS = "collaboration".intern();
@@ -116,7 +116,7 @@ public abstract class BaseWCMTestCase extends BasicTestCase {
     htmlContent.setProperty("jcr:lastModified", new Date().getTime());
     if (htmlData == null) htmlData = "This is the default.html file.";
     htmlContent.setProperty("jcr:data", htmlData);
-    
+
     Node jsFolder;
     try{
       jsFolder = webcontent.getNode("js");
@@ -133,7 +133,7 @@ public abstract class BaseWCMTestCase extends BasicTestCase {
     jsNode.setProperty("exo:active", true);
     jsNode.setProperty("exo:priority", 1);
     jsNode.setProperty("exo:sharedJS", true);
-    
+
     Node jsContent;
     try{
       jsContent = jsNode.getNode("jcr:content");
@@ -145,7 +145,7 @@ public abstract class BaseWCMTestCase extends BasicTestCase {
     jsContent.setProperty("jcr:lastModified", new Date().getTime());
     if (jsData == null) jsData = "This is the default.js file.";
     jsContent.setProperty("jcr:data", jsData);
-    
+
     Node cssFolder;
     try{
       cssFolder = webcontent.getNode("css");
@@ -162,7 +162,7 @@ public abstract class BaseWCMTestCase extends BasicTestCase {
     cssNode.setProperty("exo:active", true);
     cssNode.setProperty("exo:priority", 1);
     cssNode.setProperty("exo:sharedCSS", true);
-    
+
     Node cssContent;
     try{
       cssContent = cssNode.getNode("jcr:content");
@@ -174,7 +174,7 @@ public abstract class BaseWCMTestCase extends BasicTestCase {
     cssContent.setProperty("jcr:lastModified", new Date().getTime());
     if (cssData == null) cssData = "This is the default.css file.";
     cssContent.setProperty("jcr:data", cssData);
-    
+
     Node mediaFolder;
     try{
       mediaFolder= webcontent.getNode("medias");

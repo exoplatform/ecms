@@ -51,7 +51,8 @@ import org.exoplatform.webui.event.EventListener;
     template =  "app:/groovy/webui/component/admin/taxonomy/UITaxonomyWorkingArea.gtmpl",
     events = {
         @EventConfig(listeners = UITaxonomyWorkingArea.AddActionListener.class),
-        @EventConfig(listeners = UITaxonomyWorkingArea.RemoveActionListener.class, confirm = "UITaxonomyManager.msg.confirm-delete"),
+        @EventConfig(listeners = UITaxonomyWorkingArea.RemoveActionListener.class,
+                     confirm = "UITaxonomyManager.msg.confirm-delete"),
         @EventConfig(listeners = UITaxonomyWorkingArea.CopyActionListener.class),
         @EventConfig(listeners = UITaxonomyWorkingArea.PasteActionListener.class),
         @EventConfig(listeners = UITaxonomyWorkingArea.CutActionListener.class),
@@ -68,24 +69,24 @@ public class UITaxonomyWorkingArea extends UIContainer {
   public UITaxonomyWorkingArea() throws Exception {
     uiPageIterator_ = addChild(UIPageIterator.class, null, "UICategoriesSelect");
   }
-  
+
   public UIPageIterator getUIPageIterator() { return uiPageIterator_; }
-  
+
   public void updateGrid() throws Exception {
     ObjectPageList objPageList = new ObjectPageList(getNodeList(), 10);
     uiPageIterator_.setPageList(objPageList);
   }
-  
+
   public List getListNodes() throws Exception { return uiPageIterator_.getCurrentPageData(); }
-  
+
   public void setNodeList(List<Node> nodes) { taxonomyNodes_ = nodes ;  }
   public List<Node> getNodeList() {return taxonomyNodes_; } ;
-  
+
   private String getRepository() throws Exception {
     UITaxonomyManager uiManager = getParent() ;
     return uiManager.getRepository() ;
   }
-  
+
   public boolean isRootNode() throws Exception {
     UITaxonomyManager uiManager = getParent() ;
     String selectedPath = uiManager.getSelectedPath() ;
@@ -93,9 +94,9 @@ public class UITaxonomyWorkingArea extends UIContainer {
     if(selectedPath.equals(uiManager.getRootNode().getPath())) return true ;
     return false ;
   }
-  
+
   public void setSelectedPath(String selectedPath) { selectedPath_ = selectedPath ; }
-  
+
   public void update() throws Exception {
     UITaxonomyManager uiManager = getParent() ;
     if(selectedPath_ != null) {
@@ -107,40 +108,41 @@ public class UITaxonomyWorkingArea extends UIContainer {
         listNodes.add(node) ;
       }
       setNodeList(listNodes) ;
-    } 
+    }
     updateGrid();
   }
-  
+
   static public class AddActionListener extends EventListener<UITaxonomyWorkingArea> {
     public void execute(Event<UITaxonomyWorkingArea> event) throws Exception {
       UITaxonomyWorkingArea uiWorkingArea = event.getSource() ;
-      String path = event.getRequestContext().getRequestParameter(OBJECTID) ; 
+      String path = event.getRequestContext().getRequestParameter(OBJECTID) ;
       UITaxonomyManager uiManager = uiWorkingArea.getParent() ;
       uiManager.initPopup(path) ;
       event.getRequestContext().addUIComponentToUpdateByAjax(uiManager) ;
     }
   }
-  
+
   static public class RemoveActionListener extends EventListener<UITaxonomyWorkingArea> {
     public void execute(Event<UITaxonomyWorkingArea> event) throws Exception {
-      UITaxonomyWorkingArea uiWorkingArea = event.getSource();   
+      UITaxonomyWorkingArea uiWorkingArea = event.getSource();
       UITaxonomyManager uiManager = uiWorkingArea.getParent() ;
       UIApplication uiApp = uiWorkingArea.getAncestorOfType(UIApplication.class) ;
-      String path = event.getRequestContext().getRequestParameter(OBJECTID) ;  
+      String path = event.getRequestContext().getRequestParameter(OBJECTID) ;
       Node selectedNode = uiManager.getNodeByPath(path) ;
       try {
         uiWorkingArea.setSelectedPath(selectedNode.getParent().getPath()) ;
-        uiWorkingArea.getApplicationComponent(CategoriesService.class).removeTaxonomyNode(path, uiWorkingArea.getRepository()) ;        
+        uiWorkingArea.getApplicationComponent(CategoriesService.class)
+                     .removeTaxonomyNode(path, uiWorkingArea.getRepository());
       } catch(ReferentialIntegrityException ref) {
         Object[] arg = { path } ;
-        uiApp.addMessage(new ApplicationMessage("UITaxonomyWorkingArea.msg.reference-exception", arg, 
+        uiApp.addMessage(new ApplicationMessage("UITaxonomyWorkingArea.msg.reference-exception", arg,
                                                 ApplicationMessage.WARNING)) ;
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
-        return ;        
+        return ;
       } catch(Exception e) {
         LOG.error("Unexpected error", e);
         Object[] arg = { path } ;
-        uiApp.addMessage(new ApplicationMessage("UITaxonomyWorkingArea.msg.path-error", arg, 
+        uiApp.addMessage(new ApplicationMessage("UITaxonomyWorkingArea.msg.path-error", arg,
                                                 ApplicationMessage.WARNING)) ;
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
         return ;
@@ -152,11 +154,11 @@ public class UITaxonomyWorkingArea extends UIContainer {
       event.getRequestContext().addUIComponentToUpdateByAjax(uiManager) ;
     }
   }
-  
+
   static public class CopyActionListener extends EventListener<UITaxonomyWorkingArea> {
     public void execute(Event<UITaxonomyWorkingArea> event) throws Exception {
       UITaxonomyWorkingArea uiManager = event.getSource() ;
-      String realPath = event.getRequestContext().getRequestParameter(OBJECTID);            
+      String realPath = event.getRequestContext().getRequestParameter(OBJECTID);
       uiManager.clipboard_ = new ClipboardCommand() ;
       uiManager.clipboard_.setType(ClipboardCommand.COPY) ;
       uiManager.clipboard_.setSrcPath(realPath);
@@ -173,26 +175,26 @@ public class UITaxonomyWorkingArea extends UIContainer {
       String type = uiWorkingArea.clipboard_.getType();
       String srcPath = uiWorkingArea.clipboard_.getSrcPath();
       if(type == null || srcPath == null) {
-        uiApp.addMessage(new ApplicationMessage("UITaxonomyWorkingArea.msg.can-not-paste", null, 
-                                                ApplicationMessage.WARNING)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
-        return ;        
-      }
-      if(type.equals(ClipboardCommand.CUT) && realPath.equals(srcPath)) {
-        Object[] arg = { realPath } ;
-        uiApp.addMessage(new ApplicationMessage("UITaxonomyWorkingArea.msg.node-is-cutting", arg, 
-                                                ApplicationMessage.WARNING)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
-        return ;        
-      }
-      if(srcPath == null){
-        Object[] arg = { realPath } ;
-        uiApp.addMessage(new ApplicationMessage("UITaxonomyWorkingArea.msg.no-taxonomy-selected", arg, 
+        uiApp.addMessage(new ApplicationMessage("UITaxonomyWorkingArea.msg.can-not-paste", null,
                                                 ApplicationMessage.WARNING)) ;
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
         return ;
       }
-      String destPath = realPath + srcPath.substring(srcPath.lastIndexOf("/"));      
+      if(type.equals(ClipboardCommand.CUT) && realPath.equals(srcPath)) {
+        Object[] arg = { realPath } ;
+        uiApp.addMessage(new ApplicationMessage("UITaxonomyWorkingArea.msg.node-is-cutting", arg,
+                                                ApplicationMessage.WARNING)) ;
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+        return ;
+      }
+      if(srcPath == null){
+        Object[] arg = { realPath } ;
+        uiApp.addMessage(new ApplicationMessage("UITaxonomyWorkingArea.msg.no-taxonomy-selected", arg,
+                                                ApplicationMessage.WARNING)) ;
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+        return ;
+      }
+      String destPath = realPath + srcPath.substring(srcPath.lastIndexOf("/"));
       Node realNode = uiManager.getNodeByPath(realPath) ;
       if(realNode.hasNode(srcPath.substring(srcPath.lastIndexOf("/") + 1))) {
         Object[] args = {srcPath.substring(srcPath.lastIndexOf("/") + 1)} ;
@@ -201,13 +203,13 @@ public class UITaxonomyWorkingArea extends UIContainer {
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
         return ;
       }
-      CategoriesService categoriesService = 
+      CategoriesService categoriesService =
         uiWorkingArea.getApplicationComponent(CategoriesService.class) ;
       try {
-        categoriesService.moveTaxonomyNode(srcPath, destPath, type, uiWorkingArea.getRepository()) ;        
+        categoriesService.moveTaxonomyNode(srcPath, destPath, type, uiWorkingArea.getRepository()) ;
         uiManager.update(realPath) ;
       } catch(Exception e) {
-        uiApp.addMessage(new ApplicationMessage("UITaxonomyWorkingArea.msg.referential-integrity", null, 
+        uiApp.addMessage(new ApplicationMessage("UITaxonomyWorkingArea.msg.referential-integrity", null,
                                                 ApplicationMessage.WARNING)) ;
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
         return ;
@@ -215,22 +217,22 @@ public class UITaxonomyWorkingArea extends UIContainer {
       event.getRequestContext().addUIComponentToUpdateByAjax(uiManager) ;
     }
   }
-  
+
   static public class CutActionListener extends EventListener<UITaxonomyWorkingArea> {
     public void execute(Event<UITaxonomyWorkingArea> event) throws Exception {
       UITaxonomyWorkingArea uiManager = event.getSource() ;
-      String realPath = event.getRequestContext().getRequestParameter(OBJECTID);       
+      String realPath = event.getRequestContext().getRequestParameter(OBJECTID);
       uiManager.clipboard_.setType(ClipboardCommand.CUT) ;
       uiManager.clipboard_.setSrcPath(realPath);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiManager) ;
     }
   }
-  
+
   static public class ViewPermissionActionListener extends EventListener<UITaxonomyWorkingArea> {
     public void execute(Event<UITaxonomyWorkingArea> event) throws Exception {
       UITaxonomyWorkingArea uiManager = event.getSource();
       UITaxonomyManager uiTaxoManager = uiManager.getParent();
-      String path = event.getRequestContext().getRequestParameter(OBJECTID) ;  
+      String path = event.getRequestContext().getRequestParameter(OBJECTID) ;
       UIPopupContainer uiPopupContainer = uiTaxoManager.initPopupPermission(UITaxonomyManager.PERMISSION_ID_POPUP);
       UIPermissionManager uiPerMan = uiPopupContainer.createUIComponent(UIPermissionManager.class, null, null);
       uiPerMan.getChild(UIPermissionInfo.class).setCurrentNode(uiTaxoManager.getNodeByPath(path));

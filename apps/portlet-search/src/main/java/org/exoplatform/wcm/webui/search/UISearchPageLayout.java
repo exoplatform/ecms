@@ -36,125 +36,125 @@ import org.exoplatform.webui.event.EventListener;
  * Oct 31, 2008
  */
 @ComponentConfig(
-	lifecycle = Lifecycle.class, 
-	events = { 
-		@EventConfig(listeners = UISearchPageLayout.QuickEditActionListener.class) 
-	}
+  lifecycle = Lifecycle.class,
+  events = {
+    @EventConfig(listeners = UISearchPageLayout.QuickEditActionListener.class)
+  }
 )
 public class UISearchPageLayout extends UIContainer {
 
-	/** The Constant SEARCH_FORM. */
-	public static final String	SEARCH_FORM		= "uiSearchForm".intern();
+  /** The Constant SEARCH_FORM. */
+  public static final String	SEARCH_FORM		= "uiSearchForm".intern();
 
-	/** The Constant SEARCH_RESULT. */
-	public static final String	SEARCH_RESULT	= "uiSearchResult".intern();
+  /** The Constant SEARCH_RESULT. */
+  public static final String	SEARCH_RESULT	= "uiSearchResult".intern();
 
-	/**
-	 * Instantiates a new uI search page layout.
-	 * 
-	 * @throws Exception the exception
-	 */
-	public UISearchPageLayout() throws Exception {
-		WebuiRequestContext context = WebuiRequestContext.getCurrentInstance();
-		UISearchForm uiSearchForm = addChild(UISearchForm.class, null, null);
-		UISearchResult uiSearchResult = addChild(UISearchResult.class, null, null);
-		String searchFormTemplatePath = getTemplatePath(UIWCMSearchPortlet.SEARCH_FORM_TEMPLATE_PATH);
-		uiSearchForm.init(searchFormTemplatePath, getTemplateResourceResolver(context,
-																																					searchFormTemplatePath));
-		String searchResultTemplatePath = getTemplatePath(UIWCMSearchPortlet.SEARCH_RESULT_TEMPLATE_PATH);
-		uiSearchResult.init(searchResultTemplatePath,
-												getTemplateResourceResolver(context, searchResultTemplatePath));
-	}
+  /**
+   * Instantiates a new uI search page layout.
+   *
+   * @throws Exception the exception
+   */
+  public UISearchPageLayout() throws Exception {
+    WebuiRequestContext context = WebuiRequestContext.getCurrentInstance();
+    UISearchForm uiSearchForm = addChild(UISearchForm.class, null, null);
+    UISearchResult uiSearchResult = addChild(UISearchResult.class, null, null);
+    String searchFormTemplatePath = getTemplatePath(UIWCMSearchPortlet.SEARCH_FORM_TEMPLATE_PATH);
+    uiSearchForm.init(searchFormTemplatePath, getTemplateResourceResolver(context,
+                                                                          searchFormTemplatePath));
+    String searchResultTemplatePath = getTemplatePath(UIWCMSearchPortlet.SEARCH_RESULT_TEMPLATE_PATH);
+    uiSearchResult.init(searchResultTemplatePath,
+                        getTemplateResourceResolver(context, searchResultTemplatePath));
+  }
 
-	/**
-	 * Gets the portlet preference.
-	 * 
-	 * @return the portlet preference
-	 */
-	private PortletPreferences getPortletPreference() {
-		PortletRequestContext portletRequestContext = WebuiRequestContext.getCurrentInstance();
-		return portletRequestContext.getRequest().getPreferences();
-	}
+  /**
+   * Gets the portlet preference.
+   *
+   * @return the portlet preference
+   */
+  private PortletPreferences getPortletPreference() {
+    PortletRequestContext portletRequestContext = WebuiRequestContext.getCurrentInstance();
+    return portletRequestContext.getRequest().getPreferences();
+  }
 
-	/**
-	 * Gets the repository.
-	 * 
-	 * @return the repository
-	 */
-	private String getRepository() {
-		return getPortletPreference().getValue(UIWCMSearchPortlet.REPOSITORY, null);
-	}
+  /**
+   * Gets the repository.
+   *
+   * @return the repository
+   */
+  private String getRepository() {
+    return getPortletPreference().getValue(UIWCMSearchPortlet.REPOSITORY, null);
+  }
 
-	/**
-	 * Gets the template path.
-	 * 
-	 * @param templateType the template type
-	 * 
-	 * @return the template path
-	 */
-	private String getTemplatePath(String templateType) {
-		return getPortletPreference().getValue(templateType, null);
-	}
+  /**
+   * Gets the template path.
+   *
+   * @param templateType the template type
+   *
+   * @return the template path
+   */
+  private String getTemplatePath(String templateType) {
+    return getPortletPreference().getValue(templateType, null);
+  }
 
-	/*
-	 * (non-Javadoc)
-	 * @see org.exoplatform.portal.webui.portal.UIPortalComponent#getTemplate()
-	 */
-	public String getTemplate() {
-		String template = getPortletPreference().getValue(UIWCMSearchPortlet.SEARCH_PAGE_LAYOUT_TEMPLATE_PATH,
-																											null);
-		return template;
-	}
+  /*
+   * (non-Javadoc)
+   * @see org.exoplatform.portal.webui.portal.UIPortalComponent#getTemplate()
+   */
+  public String getTemplate() {
+    String template = getPortletPreference().getValue(UIWCMSearchPortlet.SEARCH_PAGE_LAYOUT_TEMPLATE_PATH,
+                                                      null);
+    return template;
+  }
 
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * org.exoplatform.webui.core.UIComponent#getTemplateResourceResolver(org.
-	 * exoplatform.webui.application.WebuiRequestContext, java.lang.String)
-	 */
-	public ResourceResolver getTemplateResourceResolver(WebuiRequestContext context, String template) {
-		try {
-			String repository = getRepository();
-			DMSConfiguration dmsConfiguration = getApplicationComponent(DMSConfiguration.class);
-			String workspace = dmsConfiguration.getConfig().getSystemWorkspace();
-			return new JCRResourceResolver(repository, workspace, "exo:templateFile");
-		} catch (Exception e) {
-			return null;
-		}
-	}
+  /*
+   * (non-Javadoc)
+   * @see
+   * org.exoplatform.webui.core.UIComponent#getTemplateResourceResolver(org.
+   * exoplatform.webui.application.WebuiRequestContext, java.lang.String)
+   */
+  public ResourceResolver getTemplateResourceResolver(WebuiRequestContext context, String template) {
+    try {
+      String repository = getRepository();
+      DMSConfiguration dmsConfiguration = getApplicationComponent(DMSConfiguration.class);
+      String workspace = dmsConfiguration.getConfig().getSystemWorkspace();
+      return new JCRResourceResolver(repository, workspace, "exo:templateFile");
+    } catch (Exception e) {
+      return null;
+    }
+  }
 
-	/**
-	 * Gets the portlet id.
-	 * 
-	 * @return the portlet id
-	 */
-	public String getPortletId() {
-		PortletRequestContext pContext = (PortletRequestContext) WebuiRequestContext.getCurrentInstance();
-		return pContext.getWindowId();
-	}
+  /**
+   * Gets the portlet id.
+   *
+   * @return the portlet id
+   */
+  public String getPortletId() {
+    PortletRequestContext pContext = (PortletRequestContext) WebuiRequestContext.getCurrentInstance();
+    return pContext.getWindowId();
+  }
 
-	/**
-	 * The listener interface for receiving quickEditAction events. The class that
-	 * is interested in processing a quickEditAction event implements this
-	 * interface, and the object created with that class is registered with a
-	 * component using the component's
-	 * <code>addQuickEditActionListener<code> method. When
-	 * the quickEditAction event occurs, that object's appropriate
-	 * method is invoked.
-	 * 
-	 * @see QuickEditActionEvent
-	 */
-	public static class QuickEditActionListener extends EventListener<UISearchPageLayout> {
+  /**
+   * The listener interface for receiving quickEditAction events. The class that
+   * is interested in processing a quickEditAction event implements this
+   * interface, and the object created with that class is registered with a
+   * component using the component's
+   * <code>addQuickEditActionListener<code> method. When
+   * the quickEditAction event occurs, that object's appropriate
+   * method is invoked.
+   *
+   * @see QuickEditActionEvent
+   */
+  public static class QuickEditActionListener extends EventListener<UISearchPageLayout> {
 
-		/*
-		 * (non-Javadoc)
-		 * @see
-		 * org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui
-		 * .event.Event)
-		 */
-		public void execute(Event<UISearchPageLayout> event) throws Exception {
-			PortletRequestContext context = (PortletRequestContext) event.getRequestContext();
-			context.setApplicationMode(PortletMode.EDIT);
-		}
-	}
+    /*
+     * (non-Javadoc)
+     * @see
+     * org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui
+     * .event.Event)
+     */
+    public void execute(Event<UISearchPageLayout> event) throws Exception {
+      PortletRequestContext context = (PortletRequestContext) event.getRequestContext();
+      context.setApplicationMode(PortletMode.EDIT);
+    }
+  }
 }

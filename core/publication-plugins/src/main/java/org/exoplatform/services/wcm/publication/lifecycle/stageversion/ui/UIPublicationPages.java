@@ -46,10 +46,10 @@ public class UIPublicationPages extends UIForm {
 
   /** The current node. */
   private NodeLocation currentNodeLocation;
-  
+
   /**
    * Gets the node.
-   * 
+   *
    * @return the node
    */
   public Node getNode() {
@@ -58,16 +58,16 @@ public class UIPublicationPages extends UIForm {
 
   /**
    * Sets the node.
-   * 
+   *
    * @param node the new node
    */
   public void setNode(Node node) {
-    currentNodeLocation = NodeLocation.make(node); 
-  }  
+    currentNodeLocation = NodeLocation.make(node);
+  }
 
   /**
    * Instantiates a new uI publishing panel.
-   * 
+   *
    * @throws Exception the exception
    */
   public UIPublicationPages() throws Exception {
@@ -79,15 +79,15 @@ public class UIPublicationPages extends UIForm {
 
   /**
    * Inits the panel.
-   * 
+   *
    * @param node the node
    * @param portalName the portal name
    * @param runningPortals the running portals
-   * 
+   *
    * @throws Exception the exception
    */
   public void init(Node node,String portalName,List<String> runningPortals) throws Exception {
-    currentNodeLocation = NodeLocation.make(node);    
+    currentNodeLocation = NodeLocation.make(node);
     UIPortalNavigationExplorer poExplorer = getChild(UIPortalNavigationExplorer.class);
     poExplorer.init(portalName,runningPortals);
     UIPublishedPages publishedPages = getChild(UIPublishedPages.class);
@@ -96,7 +96,7 @@ public class UIPublicationPages extends UIForm {
 
   /**
    * Gets the current portal.
-   * 
+   *
    * @return the current portal
    */
   public String getCurrentPortal() {
@@ -108,7 +108,7 @@ public class UIPublicationPages extends UIForm {
 
   /**
    * Gets the current tree node.
-   * 
+   *
    * @return the current tree node
    */
   public String getCurrentTreeNode() {
@@ -117,7 +117,7 @@ public class UIPublicationPages extends UIForm {
     if (selectedNode != null) return selectedNode.getName();
     return null;
   }
-  
+
   /**
    * The listener interface for receiving closeAction events.
    * The class that is interested in processing a closeAction
@@ -126,11 +126,11 @@ public class UIPublicationPages extends UIForm {
    * component's <code>addCloseActionListener<code> method. When
    * the closeAction event occurs, that object's appropriate
    * method is invoked.
-   * 
+   *
    * @see CloseActionEvent
    */
   public static class CloseActionListener extends EventListener<UIPublicationPages> {
-    
+
     /* (non-Javadoc)
      * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
      */

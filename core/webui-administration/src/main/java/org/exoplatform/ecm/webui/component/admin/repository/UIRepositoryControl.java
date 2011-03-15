@@ -135,7 +135,7 @@ public class UIRepositoryControl extends UIContainer {
               SAXBuilder builder1 = new SAXBuilder();
               Document docConfiguration = builder1.build(configDir + "/configuration.xml");
               Element rootConfiguration = docConfiguration.getRootElement();
-              
+
               List importElements = rootConfiguration.getChildren("import");
               if (importElements.size() > 0) {
                 for (int j = 0; j < importElements.size(); j++) {

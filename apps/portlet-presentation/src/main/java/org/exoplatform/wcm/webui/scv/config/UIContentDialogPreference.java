@@ -23,22 +23,22 @@ import org.exoplatform.webui.config.annotation.EventConfig;
  * Created by The eXo Platform SAS
  * Author : Phan Le Thanh Chuong
  *          chuong.phan@exoplatform.com, phan.le.thanh.chuong@gmail.com
- * Nov 2, 2009  
+ * Nov 2, 2009
  */
 @ComponentConfig (
-	template = "system:/groovy/webui/form/ext/UITabPaneWithAction.gtmpl",
-	events = {
-		@EventConfig(listeners = UIContentDialogPreference.BackActionListener.class)
-	}
+  template = "system:/groovy/webui/form/ext/UITabPaneWithAction.gtmpl",
+  events = {
+    @EventConfig(listeners = UIContentDialogPreference.BackActionListener.class)
+  }
 )
 public class UIContentDialogPreference extends org.exoplatform.wcm.webui.dialog.UIContentDialogPreference {
-	
-	public UIContentDialogPreference() throws Exception {}
-	
 
-	public void init() throws Exception {
-		super.init();
-		addChild(UIContentDialogConfig.class, null, null);
-	}
+  public UIContentDialogPreference() throws Exception {}
+
+
+  public void init() throws Exception {
+    super.init();
+    addChild(UIContentDialogConfig.class, null, null);
+  }
 
 }

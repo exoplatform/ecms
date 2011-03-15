@@ -28,7 +28,7 @@ import org.exoplatform.services.log.Log;
  * Created by The eXo Platform SAS
  * Author : eXoPlatform
  *          nicolas.filotto@exoplatform.com
- * 1 avr. 2009  
+ * 1 avr. 2009
  */
 public class NodeIteratorLinkAware extends RangeIteratorLinkAware implements NodeIterator {
 
@@ -36,11 +36,11 @@ public class NodeIteratorLinkAware extends RangeIteratorLinkAware implements Nod
    * Logger.
    */
   private static final Log LOG  = ExoLogger.getLogger("cms.NodeIteratorLinkAware");
-  
+
   public NodeIteratorLinkAware(Session originalSession, String virtualPath, NodeIterator nodeIterator) {
     super(originalSession, virtualPath, nodeIterator);
-  }  
-  
+  }
+
   /**
    * {@inheritDoc}
    */

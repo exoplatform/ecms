@@ -34,34 +34,34 @@ import org.quartz.JobExecutionException;
  * Created by The eXo Platform SARL
  * Author : Nguyen Anh Vu
  *          anhvurz90@gmail.com
- * Jan 11, 2011  
+ * Jan 11, 2011
  * 10:48:40 AM
  */
 public class ClearOrphanSymlinksJob implements Job {
   private static final Log log                 = ExoLogger.getLogger(ClearOrphanSymlinksJob.class);
 
-  private static final String EXO_RESTORELOCATION = "exo:restoreLocation";  
+  private static final String EXO_RESTORELOCATION = "exo:restoreLocation";
   @Override
   public void execute(JobExecutionContext context) throws JobExecutionException {
     log.debug("Start Executing ClearOrphanSymlinksJob");
 
     String queryString = "SELECT * FROM exo:symlink";
-    
+
     ExoContainer exoContainer = ExoContainerContext.getCurrentContainer();
     RepositoryService repositoryService = (RepositoryService)exoContainer.getComponentInstanceOfType(RepositoryService.class);
     LinkManager linkManager = (LinkManager)exoContainer.getComponentInstanceOfType(LinkManager.class);
     TrashService trashService = (TrashService)exoContainer.getComponentInstanceOfType(TrashService.class);
     NodeHierarchyCreator nodeHierarchyCreator = (NodeHierarchyCreator)exoContainer.getComponentInstanceOfType(NodeHierarchyCreator.class);
-    
-    Session session = null;    
+
+    Session session = null;
     try {
       ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
 
-      String repositoryName = manageableRepository.getConfiguration().getName();    
+      String repositoryName = manageableRepository.getConfiguration().getName();
       String trashPath = nodeHierarchyCreator.getJcrPath(BasePath.TRASH_PATH);
       String trashWorkspace = null;
       ManageDriveService driveService = (ManageDriveService)exoContainer.getComponentInstanceOfType(ManageDriveService.class);
-        for (DriveData driveData : driveService.getAllDrives(repositoryName)) 
+        for (DriveData driveData : driveService.getAllDrives(repositoryName))
           if (driveData.getHomePath().equals(trashPath) ) {
             trashWorkspace = driveData.getWorkspace();
             break;
@@ -69,7 +69,7 @@ public class ClearOrphanSymlinksJob implements Job {
       if (trashWorkspace == null) return;
       SessionProvider sessionProvider = SessionProviderFactory.createSystemProvider();
       String[] workspaces = manageableRepository.getWorkspaceNames();
-      
+
       for (String workspace : workspaces) {
         try {
           session = sessionProvider.getSession(workspace, manageableRepository);
@@ -110,7 +110,7 @@ public class ClearOrphanSymlinksJob implements Job {
       }
     } catch (Exception e) {
       log.error("Error occurs in ClearOrphanSymlinksJob", e);
-    } 
+    }
   }
-  
+
 }

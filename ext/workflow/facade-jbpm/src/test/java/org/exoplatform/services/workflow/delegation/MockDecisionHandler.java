@@ -29,7 +29,7 @@ public class MockDecisionHandler implements DecisionHandler {
 
   public String decide(ExecutionContext executionContext) {
     System.out.println( "Start Date : " + executionContext.getVariable("start.date"));
-    System.out.println("decide in MockDecisionHandler : " + executionContext.getNode().getName());    
+    System.out.println("decide in MockDecisionHandler : " + executionContext.getNode().getName());
     return "enough holidays";
   }
 

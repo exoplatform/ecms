@@ -32,7 +32,7 @@ import org.exoplatform.workflow.webui.component.controller.UITaskManager;
  * Author : Ly Dinh Quang
  *          quang.ly@exoplatform.com
  *          xxx5669@gmail.com
- * Jan 12, 2009  
+ * Jan 12, 2009
  */
 @ComponentConfig(
     lifecycle = UIContainerLifecycle.class,
@@ -40,9 +40,9 @@ import org.exoplatform.workflow.webui.component.controller.UITaskManager;
 )
 
 public class UIUserSelectContainer extends UIContainer{
-  
+
   String fieldname;
-  
+
   public UIUserSelectContainer() throws Exception {
     UIUserSelector uiUserSelector = getChild(UIUserSelector.class);
     if (uiUserSelector == null) {
@@ -66,7 +66,7 @@ public class UIUserSelectContainer extends UIContainer{
       uiPopup.setRendered(false);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiPopup);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiTask);
-    }  
+    }
   }
 
   public String getFieldname() {

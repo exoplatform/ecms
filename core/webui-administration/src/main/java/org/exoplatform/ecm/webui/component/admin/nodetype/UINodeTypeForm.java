@@ -62,10 +62,10 @@ import org.exoplatform.webui.form.validator.MandatoryValidator;
  * Author : Dang Van Minh
  *          minh.dang@exoplatform.com
  * Sep 20, 2006
- * 5:33:13 PM 
+ * 5:33:13 PM
  */
 @ComponentConfigs ({
-	@ComponentConfig(
+  @ComponentConfig(
     lifecycle = UIFormLifecycle.class,
     template = "system:/groovy/webui/form/UIFormTabPane.gtmpl",
     events = {
@@ -82,7 +82,8 @@ import org.exoplatform.webui.form.validator.MandatoryValidator;
       @EventConfig(listeners = UIChildNodeDefinitionForm.AddDefaultTypeActionListener.class, phase = Phase.DECODE),
       @EventConfig(listeners = UIChildNodeDefinitionForm.AddRequiredTypeActionListener.class, phase = Phase.DECODE),
       @EventConfig(listeners = UINodeTypeOptionList.AddTypeActionListener.class, phase = Phase.DECODE),
-      @EventConfig(listeners = UIChildNodeDefinitionForm.RemoveChildNodeActionListener.class, confirm = "UINodeTypeForm.msg.confirm-delete-child"),
+      @EventConfig(listeners = UIChildNodeDefinitionForm.RemoveChildNodeActionListener.class,
+                   confirm = "UINodeTypeForm.msg.confirm-delete-child"),
       @EventConfig(listeners = UIChildNodeDefinitionForm.EditChildNodeActionListener.class),
       @EventConfig(listeners = UIPropertyDefinitionForm.EditPropertyActionListener.class),
       @EventConfig(listeners = UIPropertyDefinitionForm.RemovePropertyActionListener.class),
@@ -95,7 +96,8 @@ import org.exoplatform.webui.form.validator.MandatoryValidator;
       @EventConfig(listeners = UIPropertyDefinitionForm.AddValueActionListener.class),
       @EventConfig(listeners = UIPropertyDefinitionForm.CancelConstraintsActionListener.class),
       @EventConfig(listeners = UIPropertyDefinitionForm.AddActionListener.class),
-      @EventConfig(listeners = UIPropertyDefinitionForm.RemoveActionListener.class, confirm = "UINodeTypeForm.msg.confirm-delete-property")
+      @EventConfig(listeners = UIPropertyDefinitionForm.RemoveActionListener.class,
+                   confirm = "UINodeTypeForm.msg.confirm-delete-property")
     }
 )
 })
@@ -147,37 +149,40 @@ public class UINodeTypeForm extends UIFormTabPane {
 
   public UINodeTypeForm() throws Exception {
     super("UINodeTypeForm");
-    UIFormInputSetWithAction nodeTypeTab = new UIFormInputSetWithAction(NODETYPE_DEFINITION) ;
-    nodeTypeTab.addUIFormInput(new UIFormSelectBox(NAMESPACE,NAMESPACE, null)).
-                addUIFormInput(new UIFormStringInput(NODETYPE_NAME,NODETYPE_NAME, null).addValidator(MandatoryValidator.class)).                                 
-                addUIFormInput(new UIFormSelectBox(MIXIN_TYPE,MIXIN_TYPE, null)).
-                addUIFormInput(new UIFormSelectBox(HAS_ORDERABLE_CHILDNODES,
-                                                   HAS_ORDERABLE_CHILDNODES, null)).
-                addUIFormInput(new UIFormStringInput(PRIMARY_ITEMNAME,PRIMARY_ITEMNAME, null)).
-                addUIFormInput(new UIFormStringInput(SUPER_TYPE,SUPER_TYPE, null).addValidator(MandatoryValidator.class)).
-                addUIFormInput(new UIFormInputInfo(PROPERTY_DEFINITIONS,PROPERTY_DEFINITIONS, null)).
-                addUIFormInput(new UIFormInputInfo(CHILDNODE_DEFINITIONS,CHILDNODE_DEFINITIONS, null)) ; 
-    setActionInTab(nodeTypeTab) ;     
+    UIFormInputSetWithAction nodeTypeTab = new UIFormInputSetWithAction(NODETYPE_DEFINITION);
+    nodeTypeTab.addUIFormInput(new UIFormSelectBox(NAMESPACE, NAMESPACE, null))
+               .addUIFormInput(new UIFormStringInput(NODETYPE_NAME, NODETYPE_NAME, null).addValidator(MandatoryValidator.class))
+               .addUIFormInput(new UIFormSelectBox(MIXIN_TYPE, MIXIN_TYPE, null))
+               .addUIFormInput(new UIFormSelectBox(HAS_ORDERABLE_CHILDNODES,
+                                                   HAS_ORDERABLE_CHILDNODES,
+                                                   null))
+               .addUIFormInput(new UIFormStringInput(PRIMARY_ITEMNAME, PRIMARY_ITEMNAME, null))
+               .addUIFormInput(new UIFormStringInput(SUPER_TYPE, SUPER_TYPE, null).addValidator(MandatoryValidator.class))
+               .addUIFormInput(new UIFormInputInfo(PROPERTY_DEFINITIONS, PROPERTY_DEFINITIONS, null))
+               .addUIFormInput(new UIFormInputInfo(CHILDNODE_DEFINITIONS,
+                                                   CHILDNODE_DEFINITIONS,
+                                                   null));
+    setActionInTab(nodeTypeTab) ;
     addUIComponentInput(nodeTypeTab) ;
-    
+
     UIFormInputSetWithAction propertiesTab = new UIPropertyDefinitionForm(PROPERTY_DEFINITION) ;
     setActionInTab(propertiesTab) ;
     addUIComponentInput(propertiesTab) ;
-    
+
     UIFormInputSetWithAction childTab = new UIChildNodeDefinitionForm(CHILDNODE_DEFINITION) ;
     setActionInTab(childTab) ;
-    addUIComponentInput(childTab) ;   
+    addUIComponentInput(childTab) ;
   }
-  
+
   public void setActionInTab(UIFormInputSetWithAction tab) {
     if(tab.getId().equals(NODETYPE_DEFINITION)) {
       tab.setActionInfo(SUPER_TYPE, new String[] {"AddSuperType"}) ;
       tab.setActions(new String[] {ACTION_SAVE, ACTION_SAVEDRAFT, ACTION_CANCEL}, null) ;
       setSelectedTab(tab.getId()) ;
     } else if(tab.getId().equals(CHILDNODE_DEFINITION)) {
-      tab.setActionInfo(UIChildNodeDefinitionForm.DEFAULT_PRIMARY_TYPE, 
+      tab.setActionInfo(UIChildNodeDefinitionForm.DEFAULT_PRIMARY_TYPE,
                         new String[] {"AddDefaultType"}) ;
-      tab.setActionInfo(UIChildNodeDefinitionForm.REQUIRED_PRIMARY_TYPE, 
+      tab.setActionInfo(UIChildNodeDefinitionForm.REQUIRED_PRIMARY_TYPE,
                         new String[] {"AddRequiredType"}) ;
       tab.setActions(new String[] {ADD_CHILD}, null) ;
     } else if(tab.getId().equals(PROPERTY_DEFINITION)) {
@@ -185,9 +190,9 @@ public class UINodeTypeForm extends UIFormTabPane {
       tab.setActions(new String[] {ADD_PROPERTY}, null) ;
     }
   }
-  
+
   public String[] getActions() { return null ; }
-  
+
   public String getLabel(ResourceBundle res, String id) {
     String label = getId() + ".label." + id ;
     try {
@@ -195,7 +200,7 @@ public class UINodeTypeForm extends UIFormTabPane {
     } catch(Exception e) {
       return id ;
     }
-  }  
+  }
   private String getRepository() {
     PortletRequestContext pcontext = (PortletRequestContext)WebuiRequestContext.getCurrentInstance() ;
     PortletPreferences portletPref = pcontext.getRequest().getPreferences() ;
@@ -208,8 +213,8 @@ public class UINodeTypeForm extends UIFormTabPane {
       for(int i = 0; i < namespaces.length; i ++){
         namespacesOptions_.add(new SelectItemOption<String>(namespaces[i], namespaces[i])) ;
       }
-    }  
-    return namespacesOptions_ ;    
+    }
+    return namespacesOptions_ ;
   }
 
   public void setChildValue(List<NodeDefinitionValue> listChildNode) throws Exception {
@@ -236,7 +241,7 @@ public class UINodeTypeForm extends UIFormTabPane {
     if(listProperty == null) return ;
     for(PropertyDefinitionValue property : listProperty) {
       if(propertyValues.length() > 0) propertyValues.append(",") ;
-      propertyValues.append(property.getName()) ; 
+      propertyValues.append(property.getName()) ;
     }
     UIFormInputSetWithAction nodeTypeTab = getChildById(NODETYPE_DEFINITION) ;
     nodeTypeTab.setInfoField(PROPERTY_DEFINITIONS, propertyValues.toString());
@@ -249,7 +254,7 @@ public class UINodeTypeForm extends UIFormTabPane {
     if(childDef != null) {
       for(int i = 0 ; i < childDef.length ; i++) {
         if(childDefinitions.length() > 0) childDefinitions.append(",") ;
-        childDefinitions.append(childDef[i].getName()) ;  
+        childDefinitions.append(childDef[i].getName()) ;
       }
     }
     UIFormInputSetWithAction nodeTypeTab = getChildById(NODETYPE_DEFINITION) ;
@@ -264,7 +269,7 @@ public class UINodeTypeForm extends UIFormTabPane {
     if(propertyDef != null) {
       for(int i = 0; i < propertyDef.length; i++) {
         if(propertyDefinitions.length() > 0) propertyDefinitions.append(",") ;
-        propertyDefinitions.append(propertyDef[i].getName()) ;  
+        propertyDefinitions.append(propertyDef[i].getName()) ;
       }
     }
     UIFormInputSetWithAction nodeTypeTab = getChildById(NODETYPE_DEFINITION) ;
@@ -285,7 +290,7 @@ public class UINodeTypeForm extends UIFormTabPane {
       setActionInTab((UIFormInputSetWithAction)getChildById(NODETYPE_DEFINITION)) ;
       setActionInTab((UIFormInputSetWithAction)getChildById(CHILDNODE_DEFINITION)) ;
       setActionInTab((UIFormInputSetWithAction)getChildById(PROPERTY_DEFINITION)) ;
-      
+
       return ;
     }
     String fullName = nodeType.getName() ;
@@ -302,14 +307,14 @@ public class UINodeTypeForm extends UIFormTabPane {
     getUIStringInput(PRIMARY_ITEMNAME).setValue(nodeType.getPrimaryItemName()) ;
     getUIFormSelectBox(MIXIN_TYPE).setValue(String.valueOf(nodeType.isMixin())) ;
     String orderableChildNodes = String.valueOf(nodeType.hasOrderableChildNodes()) ;
-    getUIFormSelectBox(HAS_ORDERABLE_CHILDNODES).setValue(orderableChildNodes) ;      
+    getUIFormSelectBox(HAS_ORDERABLE_CHILDNODES).setValue(orderableChildNodes) ;
     NodeType[] superType = nodeType.getSupertypes() ;
-    StringBuilder types = new StringBuilder(); 
+    StringBuilder types = new StringBuilder();
     for(int i = 0; i < superType.length; i++){
       if(types.length() > 0) types.append(", ") ;
       types.append(superType[i].getName()) ;
     }
-    getUIStringInput(SUPER_TYPE).setValue(types.toString()) ;      
+    getUIStringInput(SUPER_TYPE).setValue(types.toString()) ;
     if(isView) {
       getUIFormSelectBox(NAMESPACE).setDisabled(true) ;
       getUIStringInput(NODETYPE_NAME).setEditable(false) ;
@@ -330,21 +335,21 @@ public class UINodeTypeForm extends UIFormTabPane {
     setPropertyDefinitions(propertyDefinitions_) ;
     nodeType_ = nodeType ;
   }
-  
+
   public void setChildDraftNode(Node draftNodeType) throws Exception {
     addedChildDef_ = new ArrayList<NodeDefinitionValue>() ;
     if(!draftNodeType.hasNode(CHILD_NODE_DEFINITIONS)) return ;
-    Node childNodeHome = draftNodeType.getNode(CHILD_NODE_DEFINITIONS) ; 
+    Node childNodeHome = draftNodeType.getNode(CHILD_NODE_DEFINITIONS) ;
     NodeIterator childIter = childNodeHome.getNodes() ;
     while(childIter.hasNext()) {
       Node childDef = childIter.nextNode() ;
       NodeDefinitionValue nodeTypeValue = new NodeDefinitionValue();
       nodeTypeValue.setName(childDef.getName()) ;
-      String defaultPriType = 
+      String defaultPriType =
         childDef.getProperty(UIChildNodeDefinitionForm.DEFAULT_PRIMARY_TYPE).getString() ;
       nodeTypeValue.setDefaultNodeTypeName(defaultPriType) ;
       String sameName = childDef.getProperty(UIChildNodeDefinitionForm.SAME_NAME).getString() ;
-      nodeTypeValue.setSameNameSiblings(Boolean.parseBoolean(sameName)) ;      
+      nodeTypeValue.setSameNameSiblings(Boolean.parseBoolean(sameName)) ;
       String mandatory = childDef.getProperty(UIChildNodeDefinitionForm.MANDATORY).getString() ;
       nodeTypeValue.setMandatory(Boolean.parseBoolean(mandatory)) ;
       String autoCreate = childDef.getProperty(UIChildNodeDefinitionForm.AUTOCREATED).getString() ;
@@ -353,7 +358,7 @@ public class UINodeTypeForm extends UIFormTabPane {
       nodeTypeValue.setReadOnly(Boolean.parseBoolean(isProtected)) ;
       String parentVer = childDef.getProperty(ON_PARENT_VERSION).getString() ;
       nodeTypeValue.setOnVersion(Integer.parseInt(parentVer)) ;
-      String requiredTypes = 
+      String requiredTypes =
         childDef.getProperty(UIChildNodeDefinitionForm.REQUIRED_PRIMARY_TYPE).getString() ;
       List<String> requiredList = new ArrayList<String>() ;
       if(requiredTypes != null && requiredTypes.length() > 0) {
@@ -371,7 +376,7 @@ public class UINodeTypeForm extends UIFormTabPane {
       setChildValue(addedChildDef_) ;
     }
   }
-  
+
   public void setPropertyDraftNode(Node draftNodeType) throws Exception {
     addedPropertiesDef_ = new ArrayList<PropertyDefinitionValue>() ;
     if(!draftNodeType.hasNode(PROPERTY_DEFINITIONS_NODE)) return ;
@@ -380,19 +385,19 @@ public class UINodeTypeForm extends UIFormTabPane {
     while (proIter.hasNext()) {
       Node proDef = proIter.nextNode() ;
       PropertyDefinitionValue propertyInfo = new PropertyDefinitionValue() ;
-      propertyInfo.setName(proDef.getName()) ;          
+      propertyInfo.setName(proDef.getName()) ;
       String requiredType = proDef.getProperty(UIPropertyDefinitionForm.REQUIRED_TYPE).getString() ;
       propertyInfo.setRequiredType(Integer.parseInt(requiredType)) ;
       String multiple = proDef.getProperty(UIPropertyDefinitionForm.MULTIPLE).getString() ;
-      propertyInfo.setMultiple(Boolean.parseBoolean(multiple)) ;    
+      propertyInfo.setMultiple(Boolean.parseBoolean(multiple)) ;
       String mandatory = proDef.getProperty(UIPropertyDefinitionForm.MANDATORY).getString() ;
-      propertyInfo.setMandatory(Boolean.parseBoolean(mandatory)) ;          
+      propertyInfo.setMandatory(Boolean.parseBoolean(mandatory)) ;
       String autoCreate = proDef.getProperty(UIPropertyDefinitionForm.AUTOCREATED).getString() ;
       propertyInfo.setAutoCreate(Boolean.parseBoolean(autoCreate)) ;
       String isProtected = proDef.getProperty(UIPropertyDefinitionForm.PROTECTED).getString() ;
       propertyInfo.setReadOnly(Boolean.parseBoolean(isProtected)) ;
       String onParent = proDef.getProperty(ON_PARENT_VERSION).getString() ;
-      propertyInfo.setOnVersion(Integer.parseInt(onParent)) ; 
+      propertyInfo.setOnVersion(Integer.parseInt(onParent)) ;
       String constraints = proDef.getProperty(UIPropertyDefinitionForm.CONSTRAINTS).getString() ;
       List<String> valueConst = new ArrayList<String>() ;
       if(constraints != null && constraints.length() > 0) {
@@ -411,8 +416,8 @@ public class UINodeTypeForm extends UIFormTabPane {
     }
   }
 
-  public void updateEdit(Node draftNodeType, boolean isDraft) throws Exception{  
-    isDraft_ = isDraft ; 
+  public void updateEdit(Node draftNodeType, boolean isDraft) throws Exception{
+    isDraft_ = isDraft ;
     getUIFormSelectBox(NAMESPACE).setOptions(getNamespaces()) ;
     String name = draftNodeType.getName() ;
     String noteTypeName = name ;
@@ -423,14 +428,14 @@ public class UINodeTypeForm extends UIFormTabPane {
     }
     getUIStringInput(NODETYPE_NAME).setValue(noteTypeName) ;
     getUIFormSelectBox(NAMESPACE).setValue(namespacesPrefix) ;
-    getUIStringInput(NODETYPE_NAME).setEditable(false) ;    
+    getUIStringInput(NODETYPE_NAME).setEditable(false) ;
     if (draftNodeType.hasProperty(PRIMARY_ITEMNAME)) {
       String primaryItem = draftNodeType.getProperty(PRIMARY_ITEMNAME).getString() ;
       getUIStringInput(PRIMARY_ITEMNAME).setValue(primaryItem) ;
     }
     getUIFormSelectBox(MIXIN_TYPE).setValue(draftNodeType.getProperty(IS_MIX_IN).getString()) ;
     String hasOrderable = draftNodeType.getProperty(HAS_ORDERABLE_CHILDNODES).getString() ;
-    getUIFormSelectBox(HAS_ORDERABLE_CHILDNODES).setValue(hasOrderable) ;      
+    getUIFormSelectBox(HAS_ORDERABLE_CHILDNODES).setValue(hasOrderable) ;
     if (draftNodeType.hasProperty(SUPER_TYPE)) {
       getUIStringInput(SUPER_TYPE).setValue(draftNodeType.getProperty(SUPER_TYPE).getString()) ;
     }
@@ -448,7 +453,7 @@ public class UINodeTypeForm extends UIFormTabPane {
     setActionInTab((UIFormInputSetWithAction)getChildById(PROPERTY_DEFINITION)) ;
   }
 
-  public void refresh() throws Exception{    
+  public void refresh() throws Exception{
     UIChildNodeDefinitionForm uiChildNodeTab = getChild(UIChildNodeDefinitionForm.class) ;
     UIPropertyDefinitionForm uiPropertyTab = getChild(UIPropertyDefinitionForm.class) ;
     getUIFormSelectBox(NAMESPACE).setOptions(getNamespaces()).setDisabled(false) ;
@@ -492,7 +497,7 @@ public class UINodeTypeForm extends UIFormTabPane {
       event.getRequestContext().addUIComponentToUpdateByAjax(uiForm.getAncestorOfType(UINodeTypeManager.class)) ;
     }
   }
-  
+
   static public class CloseActionListener extends EventListener<UINodeTypeForm> {
     public void execute(Event<UINodeTypeForm> event) throws Exception {
       UINodeTypeForm uiForm = event.getSource() ;
@@ -538,7 +543,7 @@ public class UINodeTypeForm extends UIFormTabPane {
       String prefix = uiForm.getUIFormSelectBox(NAMESPACE).getValue() ;
       String nodeTypeName = uiForm.getUIStringInput(NODETYPE_NAME).getValue() ;
       if(nodeTypeName == null || nodeTypeName.trim().length() == 0) {
-        uiApp.addMessage(new ApplicationMessage("UINodeTypeForm.msg.nodeType-name", null, 
+        uiApp.addMessage(new ApplicationMessage("UINodeTypeForm.msg.nodeType-name", null,
                                                 ApplicationMessage.WARNING)) ;
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
         uiForm.setTabRender(NODETYPE_DEFINITION) ;
@@ -548,7 +553,7 @@ public class UINodeTypeForm extends UIFormTabPane {
         String[] arrFilterChar = {"&", "$", "@", "'", ":","]", "[", "%", "!"};
         for(String filterChar : arrFilterChar) {
           if(nodeTypeName.indexOf(filterChar) > -1) {
-            uiApp.addMessage(new ApplicationMessage("UINodeTypeForm.msg.fileName-invalid", null, 
+            uiApp.addMessage(new ApplicationMessage("UINodeTypeForm.msg.fileName-invalid", null,
                                                     ApplicationMessage.WARNING)) ;
             event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
             return ;
@@ -558,18 +563,18 @@ public class UINodeTypeForm extends UIFormTabPane {
         String[] arrFilterChar = {"&", "$", "@", "'", ":","]", "[", "*", "%", "!"};
         for(String filterChar : arrFilterChar) {
           if(nodeTypeName.indexOf(filterChar) > -1) {
-            uiApp.addMessage(new ApplicationMessage("UINodeTypeForm.msg.fileName-invalid", null, 
+            uiApp.addMessage(new ApplicationMessage("UINodeTypeForm.msg.fileName-invalid", null,
                                                     ApplicationMessage.WARNING)) ;
             event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
             return ;
           }
         }
-      }      
+      }
       if(prefix != null && prefix.length() > 0 ) nodeTypeName = prefix + ":" + nodeTypeName ;
       String superTypes = uiForm.getUIStringInput(SUPER_TYPE).getValue() ;
       if(uiForm.getUIFormSelectBox(MIXIN_TYPE).getValue().equals("false")) {
         if(superTypes == null || superTypes.trim().length() == 0) {
-          uiApp.addMessage(new ApplicationMessage("UINodeTypeForm.msg.supertype-is-madatory", null, 
+          uiApp.addMessage(new ApplicationMessage("UINodeTypeForm.msg.supertype-is-madatory", null,
                                                   ApplicationMessage.WARNING)) ;
           event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
           uiForm.setTabRender(NODETYPE_DEFINITION) ;
@@ -582,39 +587,39 @@ public class UINodeTypeForm extends UIFormTabPane {
           String[] arrayTypes = superTypes.split(",") ;
           for(String type :arrayTypes ) {
             listTypes.add(type.trim()) ;
-          }  
+          }
         } else {
           listTypes.add(superTypes.trim()) ;
         }
       }
-                       
+
       String primaryItemName = uiForm.getUIStringInput(PRIMARY_ITEMNAME).getValue() ;
-      NodeTypeValue newNodeType = new NodeTypeValue() ;                             
-      newNodeType.setName(nodeTypeName) ;            
-      newNodeType.setPrimaryItemName(primaryItemName) ;      
-      newNodeType.setMixin(Boolean.parseBoolean(uiForm.getUIFormSelectBox(MIXIN_TYPE).getValue())) ;      
+      NodeTypeValue newNodeType = new NodeTypeValue() ;
+      newNodeType.setName(nodeTypeName) ;
+      newNodeType.setPrimaryItemName(primaryItemName) ;
+      newNodeType.setMixin(Boolean.parseBoolean(uiForm.getUIFormSelectBox(MIXIN_TYPE).getValue())) ;
       String orderableChild = uiForm.getUIFormSelectBox(HAS_ORDERABLE_CHILDNODES).getValue() ;
-      newNodeType.setOrderableChild(Boolean.parseBoolean(orderableChild)) ;      
-      newNodeType.setDeclaredSupertypeNames(listTypes) ;      
+      newNodeType.setOrderableChild(Boolean.parseBoolean(orderableChild)) ;
+      newNodeType.setDeclaredSupertypeNames(listTypes) ;
       newNodeType.setDeclaredPropertyDefinitionValues(uiForm.addedPropertiesDef_) ;
       newNodeType.setDeclaredChildNodeDefinitionValues(uiForm.addedChildDef_) ;
       ExtendedNodeTypeManager extNTManager = (ExtendedNodeTypeManager)ntManager ;
-      try {        
+      try {
         extNTManager.registerNodeType(newNodeType, ExtendedNodeTypeManager.FAIL_IF_EXISTS) ;
       } catch(Exception e) {
-        uiApp.addMessage(new ApplicationMessage("UINodeTypeForm.msg.register-failed", null, 
+        uiApp.addMessage(new ApplicationMessage("UINodeTypeForm.msg.register-failed", null,
                                                 ApplicationMessage.WARNING)) ;
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
         uiForm.setTabRender(NODETYPE_DEFINITION) ;
         return ;
-      }      
+      }
       UINodeTypeManager uiManager = uiForm.getAncestorOfType(UINodeTypeManager.class) ;
       UINodeTypeList nodeTypeList = uiManager.getChild(UINodeTypeList.class) ;
       if(uiForm.isDraft_){
         uiForm.isDraft_ = false ;
         nodeTypeList.refresh(nodeTypeName, nodeTypeList.getUIPageIterator().getCurrentPage());
       } else {
-        nodeTypeList.refresh(null, nodeTypeList.getUIPageIterator().getCurrentPage()); 
+        nodeTypeList.refresh(null, nodeTypeList.getUIPageIterator().getCurrentPage());
       }
       uiForm.refresh() ;
       uiForm.setTabRender(NODETYPE_DEFINITION) ;
@@ -631,15 +636,15 @@ public class UINodeTypeForm extends UIFormTabPane {
     public void execute(Event<UINodeTypeForm> event) throws Exception {
       UINodeTypeForm uiForm = event.getSource() ;
       String repository = uiForm.getRepository() ;
-      UIApplication uiApp = uiForm.getAncestorOfType(UIApplication.class) ;      
-      ManageableRepository mRepository = 
+      UIApplication uiApp = uiForm.getAncestorOfType(UIApplication.class) ;
+      ManageableRepository mRepository =
         uiForm.getApplicationComponent(RepositoryService.class).getCurrentRepository() ;
       String systemWorkspace = mRepository.getConfiguration().getDefaultWorkspaceName() ;
-      Session session = mRepository.getSystemSession(systemWorkspace) ;        
+      Session session = mRepository.getSystemSession(systemWorkspace) ;
       String prefix = uiForm.getUIFormSelectBox(NAMESPACE).getValue() ;
       String nodeTypeName = uiForm.getUIStringInput(NODETYPE_NAME).getValue().trim();
       if(nodeTypeName == null || nodeTypeName.trim().length() == 0) {
-        uiApp.addMessage(new ApplicationMessage("UINodeTypeForm.msg.nodeType-name", null, 
+        uiApp.addMessage(new ApplicationMessage("UINodeTypeForm.msg.nodeType-name", null,
                                                 ApplicationMessage.WARNING)) ;
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
         uiForm.setTabRender(NODETYPE_DEFINITION) ;
@@ -650,7 +655,7 @@ public class UINodeTypeForm extends UIFormTabPane {
         String[] arrFilterChar = {"&", "$", "@", "'", ":","]", "[", "%", "!", "\""};
         for(String filterChar : arrFilterChar) {
           if(nodeTypeName.indexOf(filterChar) > -1) {
-            uiApp.addMessage(new ApplicationMessage("UINodeTypeForm.msg.fileName-invalid", null, 
+            uiApp.addMessage(new ApplicationMessage("UINodeTypeForm.msg.fileName-invalid", null,
                                                     ApplicationMessage.WARNING)) ;
             event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
             return ;
@@ -660,7 +665,7 @@ public class UINodeTypeForm extends UIFormTabPane {
         String[] arrFilterChar = {"&", "$", "@", "'", ":","]", "[", "*", "%", "!", "\""};
         for(String filterChar : arrFilterChar) {
           if(nodeTypeName.indexOf(filterChar) > -1) {
-            uiApp.addMessage(new ApplicationMessage("UINodeTypeForm.msg.fileName-invalid", null, 
+            uiApp.addMessage(new ApplicationMessage("UINodeTypeForm.msg.fileName-invalid", null,
                                                     ApplicationMessage.WARNING)) ;
             event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
             return ;
@@ -675,7 +680,7 @@ public class UINodeTypeForm extends UIFormTabPane {
       } else {
         nodeTypeDraft = systemNode.addNode(JCR_NODETYPE_DRAFT, NT_UNSTRUCTURED) ;
       }
-      systemNode.save() ;        
+      systemNode.save() ;
       Node newNode ;
       if(nodeTypeDraft.hasNode(nodeTypeName)) newNode = nodeTypeDraft.getNode(nodeTypeName) ;
       else newNode = nodeTypeDraft.addNode(nodeTypeName, NT_UNSTRUCTURED) ;
@@ -683,15 +688,15 @@ public class UINodeTypeForm extends UIFormTabPane {
       newNode.setProperty(PRIMARY_ITEMNAME, uiForm.getUIStringInput(PRIMARY_ITEMNAME).getValue()) ;
       newNode.setProperty(IS_MIX_IN, uiForm.getUIFormSelectBox(MIXIN_TYPE).getValue()) ;
       String hasOrderable = uiForm.getUIFormSelectBox(HAS_ORDERABLE_CHILDNODES).getValue() ;
-      newNode.setProperty(HAS_ORDERABLE_CHILDNODES, hasOrderable) ;      
+      newNode.setProperty(HAS_ORDERABLE_CHILDNODES, hasOrderable) ;
       String superTypes = uiForm.getUIStringInput(SUPER_TYPE).getValue() ;
       newNode.setProperty(SUPER_TYPE, superTypes) ;
       newNode.save() ;
       nodeTypeDraft.save() ;
       if(uiForm.addedPropertiesDef_ .size() > 0) {
         Node propertyDef ;
-        if(newNode.hasNode(PROPERTY_DEFINITIONS_NODE)) { 
-          propertyDef = newNode.getNode(PROPERTY_DEFINITIONS_NODE) ;          
+        if(newNode.hasNode(PROPERTY_DEFINITIONS_NODE)) {
+          propertyDef = newNode.getNode(PROPERTY_DEFINITIONS_NODE) ;
         } else {
           propertyDef = newNode.addNode(PROPERTY_DEFINITIONS_NODE, NT_UNSTRUCTURED) ;
         }
@@ -701,7 +706,7 @@ public class UINodeTypeForm extends UIFormTabPane {
           PropertyDefinitionValue property = uiForm.addedPropertiesDef_.get(i) ;
           Node propertyNode ;
           if(propertyDef.hasNode(property.getName())) {
-            propertyNode = propertyDef.getNode(property.getName()) ;            
+            propertyNode = propertyDef.getNode(property.getName()) ;
           } else {
             propertyNode = propertyDef.addNode(property.getName(), NT_UNSTRUCTURED) ;
             propertyNode.setProperty(PROPERTY_NAME, property.getName()) ;
@@ -717,21 +722,21 @@ public class UINodeTypeForm extends UIFormTabPane {
           propertyNode.setProperty(ON_PARENT_VERSION, String.valueOf(property.getOnVersion())) ;
           String multiple = String.valueOf(property.isMultiple()) ;
           propertyNode.setProperty(UIPropertyDefinitionForm.MULTIPLE, multiple) ;
-          List valueConstraint = property.getValueConstraints() ; 
+          List valueConstraint = property.getValueConstraints() ;
           StringBuilder values = new StringBuilder() ;
           for(int j = 0; j < valueConstraint.size(); j ++) {
             if(values.length() > 0) values.append(", ") ;
             values.append(valueConstraint.get(j).toString()) ;
           }
-          propertyNode.setProperty(UIPropertyDefinitionForm.CONSTRAINTS, values.toString()) ;          
+          propertyNode.setProperty(UIPropertyDefinitionForm.CONSTRAINTS, values.toString()) ;
           propertyDef.save() ;
           propertyNode.save() ;
         }
       }
       if(uiForm.addedChildDef_.size() > 0) {
-        Node childDef ; 
-        if(newNode.hasNode(CHILD_NODE_DEFINITIONS)) { 
-          childDef = newNode.getNode(CHILD_NODE_DEFINITIONS) ;          
+        Node childDef ;
+        if(newNode.hasNode(CHILD_NODE_DEFINITIONS)) {
+          childDef = newNode.getNode(CHILD_NODE_DEFINITIONS) ;
         } else {
           childDef = newNode.addNode(CHILD_NODE_DEFINITIONS, NT_UNSTRUCTURED) ;
         }
@@ -749,9 +754,9 @@ public class UINodeTypeForm extends UIFormTabPane {
           String defaultPrimaryType = nodeDef.getDefaultNodeTypeName() ;
           childNode.setProperty(UIChildNodeDefinitionForm.DEFAULT_PRIMARY_TYPE, defaultPrimaryType) ;
           String autoCreate = String.valueOf(nodeDef.isAutoCreate()) ;
-          childNode.setProperty(UIChildNodeDefinitionForm.AUTOCREATED, autoCreate) ; 
+          childNode.setProperty(UIChildNodeDefinitionForm.AUTOCREATED, autoCreate) ;
           String isProtected = String.valueOf(nodeDef.isReadOnly()) ;
-          childNode.setProperty(UIChildNodeDefinitionForm.PROTECTED, isProtected) ; 
+          childNode.setProperty(UIChildNodeDefinitionForm.PROTECTED, isProtected) ;
           String mandatory = String.valueOf(nodeDef.isMandatory()) ;
           childNode.setProperty(UIChildNodeDefinitionForm.MANDATORY, mandatory) ;
           childNode.setProperty(ON_PARENT_VERSION, String.valueOf(nodeDef.getOnVersion())) ;
@@ -763,7 +768,7 @@ public class UINodeTypeForm extends UIFormTabPane {
               if( requiredTypes.length() > 0) requiredTypes.append(",") ;
               requiredTypes.append(nodeDef.getRequiredNodeTypeNames().get(j).toString()) ;
             }
-            childNode.setProperty(UIChildNodeDefinitionForm.REQUIRED_PRIMARY_TYPE, 
+            childNode.setProperty(UIChildNodeDefinitionForm.REQUIRED_PRIMARY_TYPE,
                 requiredTypes.toString()) ;
           } else {
             childNode.setProperty(UIChildNodeDefinitionForm.REQUIRED_PRIMARY_TYPE, "") ;

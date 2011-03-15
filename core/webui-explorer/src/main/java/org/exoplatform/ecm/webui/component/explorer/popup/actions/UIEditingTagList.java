@@ -32,58 +32,58 @@ import org.exoplatform.webui.core.UIGrid;
  * Created by The eXo Platform SARL
  * Author : Nguyen Anh Vu
  *          anhvurz90@gmail.com
- * Nov 27, 2009  
+ * Nov 27, 2009
  * 4:18:12 PM
  */
 @ComponentConfig(
     template = "system:/groovy/webui/core/UIGrid.gtmpl"
 )
 public class UIEditingTagList extends UIGrid {
-	
-	public UIEditingTagList() throws Exception {
-		super();
-		getUIPageIterator().setId("TagIterator");
-		configure("name", BEAN_FIELD, ACTIONS);
-	}
 
-	private static String[] BEAN_FIELD = {"name"};
-	private static String[] ACTIONS = {"EditTag", "RemoveTag"};
-	
+  public UIEditingTagList() throws Exception {
+    super();
+    getUIPageIterator().setId("TagIterator");
+    configure("name", BEAN_FIELD, ACTIONS);
+  }
+
+  private static String[] BEAN_FIELD = {"name"};
+  private static String[] ACTIONS = {"EditTag", "RemoveTag"};
+
   final static public String PUBLIC_TAG_NODE_PATH = "exoPublicTagNode";
   final static public String EXO_TOTAL = "exo:total";
-  
-	public void updateGrid() throws Exception {
-		NewFolksonomyService newFolksonomyService = getApplicationComponent(NewFolksonomyService.class);
-		UIJCRExplorer uiExplorer = getAncestorOfType(UIJCRExplorer.class);
+
+  public void updateGrid() throws Exception {
+    NewFolksonomyService newFolksonomyService = getApplicationComponent(NewFolksonomyService.class);
+    UIJCRExplorer uiExplorer = getAncestorOfType(UIJCRExplorer.class);
 //		UITagExplorer uiTagExplorer = getAncestorOfType(UITagExplorer.class);
-    NodeHierarchyCreator nodeHierarchyCreator = uiExplorer.getApplicationComponent(NodeHierarchyCreator.class);		
-		String repository = uiExplorer.getRepositoryName();
-		String workspace = uiExplorer.getRepository().getConfiguration().getDefaultWorkspaceName();
-		int scope = uiExplorer.getTagScope();
-		String publicTagNodePath = nodeHierarchyCreator.getJcrPath(PUBLIC_TAG_NODE_PATH);
-		
-		List<Node> tags = (scope == NewFolksonomyService.PRIVATE) ?
-											newFolksonomyService.getAllPrivateTags(uiExplorer.getSession().getUserID(), repository, workspace) :
-											newFolksonomyService.getAllPublicTags(publicTagNodePath, repository, workspace);
-		List<TagData> tagDataList = new ArrayList<TagData>();		
-		for (Node tag : tags) {
-			tagDataList.add(new TagData(tag.getName()));
-		}
+    NodeHierarchyCreator nodeHierarchyCreator = uiExplorer.getApplicationComponent(NodeHierarchyCreator.class);
+    String repository = uiExplorer.getRepositoryName();
+    String workspace = uiExplorer.getRepository().getConfiguration().getDefaultWorkspaceName();
+    int scope = uiExplorer.getTagScope();
+    String publicTagNodePath = nodeHierarchyCreator.getJcrPath(PUBLIC_TAG_NODE_PATH);
+
+    List<Node> tags = (scope == NewFolksonomyService.PRIVATE) ?
+                      newFolksonomyService.getAllPrivateTags(uiExplorer.getSession().getUserID(), repository, workspace) :
+                      newFolksonomyService.getAllPublicTags(publicTagNodePath, repository, workspace);
+    List<TagData> tagDataList = new ArrayList<TagData>();
+    for (Node tag : tags) {
+      tagDataList.add(new TagData(tag.getName()));
+    }
 
     ObjectPageList objPageList = new ObjectPageList(tagDataList, 10) ;
     getUIPageIterator().setPageList(objPageList) ;
-	}
-  
-	
-	static public class TagData {
-		private String tagName;
-		
-		public TagData(String tagName) {
-			this.tagName = tagName;
-		}
-		
-		public String getName() { return tagName; }
-	}
+  }
+
+
+  static public class TagData {
+    private String tagName;
+
+    public TagData(String tagName) {
+      this.tagName = tagName;
+    }
+
+    public String getName() { return tagName; }
+  }
 
 
 }

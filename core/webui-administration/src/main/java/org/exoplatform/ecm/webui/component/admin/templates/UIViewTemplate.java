@@ -29,32 +29,32 @@ import org.exoplatform.webui.core.UIContainer;
  * Author : pham tuan
  *          phamtuanchip@yahoo.de
  * Oct 03, 2006
- * 9:43:23 AM 
+ * 9:43:23 AM
  */
 @ComponentConfig(template = "system:/groovy/webui/core/UITabPane.gtmpl")
 
 public class UIViewTemplate extends UIContainer {
   private String nodeTypeName_ ;
-  
+
   public UIViewTemplate() throws Exception {
     addChild(UITemplateEditForm.class, null, null) ;
     addChild(UIDialogTab.class, null, null).setRendered(false) ;
     addChild(UIViewTab.class, null, null).setRendered(false) ;
     addChild(UISkinTab.class, null, null).setRendered(false);
   }
-  
+
   private String getRepository() {
     PortletRequestContext pcontext = (PortletRequestContext)WebuiRequestContext.getCurrentInstance() ;
     PortletPreferences portletPref = pcontext.getRequest().getPreferences() ;
     return portletPref.getValue(Utils.REPOSITORY, "") ;
   }
-  
+
   public void refresh() throws Exception {
     getChild(UIDialogTab.class).updateGrid(nodeTypeName_, getRepository()) ;
     getChild(UIViewTab.class).updateGrid(nodeTypeName_) ;
     getChild(UISkinTab.class).updateGrid(nodeTypeName_, getRepository()) ;
   }
   public void setNodeTypeName(String nodeType) { nodeTypeName_ = nodeType ; }
-  
+
   public String getNodeTypeName() { return nodeTypeName_ ; }
 }

@@ -65,11 +65,11 @@ public class LinkManagerImpl implements LinkManager {
   private final static String    UUID         = "exo:uuid";
 
   private final static String    PRIMARY_TYPE = "exo:primaryType";
-  
+
   private final static Log       LOG  = ExoLogger.getLogger(LinkManagerImpl.class);
 
   private final SessionProviderService providerService_;
-  
+
   public LinkManagerImpl(SessionProviderService providerService) throws Exception {
     providerService_ = providerService;
   }
@@ -156,7 +156,7 @@ public class LinkManagerImpl implements LinkManager {
   public boolean isTargetReachable(Node link) throws RepositoryException {
     return isTargetReachable(link, false);
   }
-  
+
   /**
    * {@inheritDoc}
    */
@@ -169,7 +169,7 @@ public class LinkManagerImpl implements LinkManager {
       return false;
     }
     return true;
-  }  
+  }
 
   /**
    * {@inheritDoc}
@@ -193,7 +193,7 @@ public class LinkManagerImpl implements LinkManager {
 
   /**
    * {@inheritDoc}
-   */  
+   */
   public boolean isLink(Item item) throws RepositoryException {
     if (item instanceof Node) {
       Node node = (Node) item;
@@ -204,18 +204,18 @@ public class LinkManagerImpl implements LinkManager {
     }
     return false;
   }
-  
+
   /**
    * {@inheritDoc}
-   */  
+   */
   public String getTargetPrimaryNodeType(Node link) throws RepositoryException {
     return link.getProperty(PRIMARY_TYPE).getString();
   }
-  
+
   /**
-   * Update the permission between two given node  
+   * Update the permission between two given node
    * @param linkNode    The node to update permission
-   * @param targetNode  The target node to get permission 
+   * @param targetNode  The target node to get permission
    * @throws Exception
    */
   private void updateAccessPermissionToLink(Node linkNode, Node targetNode) throws Exception {
@@ -238,7 +238,7 @@ public class LinkManagerImpl implements LinkManager {
       ((ExtendedNode)linkNode).setPermissions(perMap);
     }
   }
-  
+
   /**
    * Remove all identity of the given node
    * @param linkNode  The node to remove all identity
@@ -250,14 +250,14 @@ public class LinkManagerImpl implements LinkManager {
     if (currentUser != null)
       ((ExtendedNode)linkNode).setPermission(currentUser, PermissionType.ALL);
     for(AccessControlEntry accessEntry : ((ExtendedNode)linkNode).getACL().getPermissionEntries()) {
-      if(canRemovePermission(linkNode, accessEntry.getIdentity()) 
+      if(canRemovePermission(linkNode, accessEntry.getIdentity())
           && ((ExtendedNode)linkNode).getACL().getPermissions(accessEntry.getIdentity()).size() > 0
           && !accessEntry.getIdentity().equals(currentUser)) {
         ((ExtendedNode) linkNode).removePermission(accessEntry.getIdentity());
       }
     }
   }
-  
+
   /**
    * Remove the permission from the given node
    * @param node      The node to remove permission
@@ -267,14 +267,14 @@ public class LinkManagerImpl implements LinkManager {
    * @throws PathNotFoundException
    * @throws RepositoryException
    */
-  private boolean canRemovePermission(Node node, String identity) throws ValueFormatException, 
+  private boolean canRemovePermission(Node node, String identity) throws ValueFormatException,
         PathNotFoundException, RepositoryException {
     String owner = getNodeOwner(node);
     if(identity.equals(SystemIdentity.SYSTEM)) return false;
     if(owner != null && owner.equals(identity)) return false;
     return true;
   }
-  
+
   /**
    * Get the owner of the given node
    * @param node      The node to get owner
@@ -289,7 +289,7 @@ public class LinkManagerImpl implements LinkManager {
     }
     return SystemIdentity.SYSTEM;
   }
-  
+
   /**
    * Check permission of the given node
    * @param node      The Node to check permission
@@ -304,14 +304,14 @@ public class LinkManagerImpl implements LinkManager {
       return false;
     }
   }
-  
+
   public List<Node> getAllLinks(Node targetNode, String linkType, String repoName) throws Exception {
     List<Node> result = new ArrayList<Node>();
     ExoContainer myContainer = ExoContainerContext.getCurrentContainer();
     RepositoryService repositoryService =(RepositoryService)myContainer.getComponentInstanceOfType(RepositoryService.class);
     ManageableRepository repository  = repositoryService.getRepository(repoName);
     String[] workspaces = repository.getWorkspaceNames();
-    String systemWS = 
+    String systemWS =
       repository.getConfiguration().getSystemWorkspaceName();
     String queryString = new StringBuilder().append("SELECT * FROM ").
                                              append(linkType).
@@ -320,9 +320,9 @@ public class LinkManagerImpl implements LinkManager {
                                              append(" AND exo:workspace='").
                                              append(targetNode.getSession().getWorkspace().getName()).
                                              append("'").toString();
-    
+
     for (String workspace : workspaces) {
-      SessionProvider sessionProvider = workspace.equals(systemWS) ? SessionProviderFactory.createSystemProvider() 
+      SessionProvider sessionProvider = workspace.equals(systemWS) ? SessionProviderFactory.createSystemProvider()
                                                                    : SessionProviderFactory.createSessionProvider();
       Session session = sessionProvider.getSession(workspace, repository);
       QueryManager queryManager = session.getWorkspace().getQueryManager();
@@ -332,8 +332,8 @@ public class LinkManagerImpl implements LinkManager {
       while (iter.hasNext()) {
         result.add(iter.nextNode());
       }
-    }        
+    }
     return result;
   }
-  
+
 }

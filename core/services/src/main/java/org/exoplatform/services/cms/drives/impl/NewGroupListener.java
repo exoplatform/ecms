@@ -40,7 +40,7 @@ public class NewGroupListener extends GroupEventListener {
   final static private String GROUPS_PATH = "groupsPath";
 
   /**
-   * 
+   *
    * @param jcrService
    * @param driveService
    * @param nodeHierarchyCreatorService
@@ -48,24 +48,24 @@ public class NewGroupListener extends GroupEventListener {
    * @throws Exception
    */
   public NewGroupListener(RepositoryService jcrService,
-      ManageDriveService driveService, 
-      NodeHierarchyCreator nodeHierarchyCreatorService, 
+      ManageDriveService driveService,
+      NodeHierarchyCreator nodeHierarchyCreatorService,
       InitParams params) throws Exception {
     jcrService_ = jcrService ;
     driveService_ = driveService ;
     initParams_ = params ;
-    groupsPath_ = nodeHierarchyCreatorService.getJcrPath(GROUPS_PATH) ; 
+    groupsPath_ = nodeHierarchyCreatorService.getJcrPath(GROUPS_PATH) ;
   }
 
   @SuppressWarnings({"unused", "hiding", "null"})
-  public void preSave(Group group, boolean isNew) throws Exception { 
+  public void preSave(Group group, boolean isNew) throws Exception {
     String  groupId = group.getId() ;
     String name = group.getId().replace("/", ".");
     String workspace = initParams_.getValueParam("workspace").getValue();
     String permissions = "*:".concat(groupId);
     String extpermissions = initParams_.getValueParam("permissions").getValue();
-    if(extpermissions != null || extpermissions.length() >0) { 
-      permissions.concat(",").concat(extpermissions); 
+    if(extpermissions != null || extpermissions.length() >0) {
+      permissions.concat(",").concat(extpermissions);
     }
     String homePath = groupsPath_ + groupId ;
     String views = initParams_.getValueParam("views").getValue();
@@ -79,7 +79,7 @@ public class NewGroupListener extends GroupEventListener {
     driveService_.addDrive(name, workspace, permissions, homePath, views, icon, viewPreferences,
         viewNonDocument, viewSideBar, showHiddenNode, allowCreateFolder, allowNodeTypesOnTree);
   }
-  
+
   public void preDelete(Group group) throws Exception {
     ManageableRepository repository = jcrService_.getCurrentRepository() ;
     driveService_.removeDrive(group.getId().replace("/", "."), repository.getConfiguration().getName()) ;

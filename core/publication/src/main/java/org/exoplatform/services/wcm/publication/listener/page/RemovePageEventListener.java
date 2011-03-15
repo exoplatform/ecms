@@ -34,23 +34,23 @@ import org.exoplatform.services.wcm.publication.WCMPublicationService;
  * Sep 24, 2008
  */
 public class RemovePageEventListener extends Listener<DataStorageImpl, Page>{
-  
+
   /** The log. */
   private static Log log = ExoLogger.getLogger(RemovePageEventListener.class);
-  
+
   /* (non-Javadoc)
    * @see org.exoplatform.services.listener.Listener#onEvent(org.exoplatform.services.listener.Event)
    */
-  public void onEvent(Event<DataStorageImpl, Page> event) throws Exception { 
+  public void onEvent(Event<DataStorageImpl, Page> event) throws Exception {
     ExoContainer container = ExoContainerContext.getCurrentContainer();
     WCMPublicationService publicationService = (WCMPublicationService)container.getComponentInstanceOfType(WCMPublicationService.class);
     try {
       if (ConversationState.getCurrent() == null)
         publicationService.updateLifecycleOnRemovePage(event.getData(), null);
-      else 
+      else
         publicationService.updateLifecycleOnRemovePage(event.getData(), ConversationState.getCurrent().getIdentity().getUserId());
     } catch (Exception e) {
       log.error("Exception when update publication lifecyle", e);
-    }    
+    }
   }
 }

@@ -31,16 +31,16 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
  * Oct 21, 2008
  */
 public class WCMPaginatedQueryResult extends PaginatedQueryResult {
-  
+
   /** The query time. */
   private long queryTime;
-  
+
   /** The spell suggestion. */
   private String spellSuggestion;
 
   /**
    * Instantiates a new wCM paginated query result.
-   * 
+   *
    * @param pageSize the page size
    */
   public WCMPaginatedQueryResult(int pageSize) {
@@ -49,21 +49,24 @@ public class WCMPaginatedQueryResult extends PaginatedQueryResult {
 
   /**
    * Instantiates a new wCM paginated query result.
-   * 
+   *
    * @param queryResult the query result
    * @param pageSize the page size
    * @param queryCriteria the query criteria
-   * 
+   *
    * @throws Exception the exception
    */
-  public WCMPaginatedQueryResult(QueryResult queryResult, QueryCriteria queryCriteria, int pageSize, boolean isSearchContent) throws Exception {
+  public WCMPaginatedQueryResult(QueryResult queryResult,
+                                 QueryCriteria queryCriteria,
+                                 int pageSize,
+                                 boolean isSearchContent) throws Exception {
     super(queryResult, pageSize, isSearchContent);
     this.queryCriteria = queryCriteria;
   }
 
   /**
    * Sets the query time.
-   * 
+   *
    * @param time the new query time
    */
   public void setQueryTime(long time) {
@@ -72,7 +75,7 @@ public class WCMPaginatedQueryResult extends PaginatedQueryResult {
 
   /**
    * Gets the query time in second.
-   * 
+   *
    * @return the query time in second
    */
   public float getQueryTimeInSecond() {
@@ -81,7 +84,7 @@ public class WCMPaginatedQueryResult extends PaginatedQueryResult {
 
   /**
    * Gets the query criteria.
-   * 
+   *
    * @return the query criteria
    */
   public QueryCriteria getQueryCriteria() {
@@ -90,7 +93,7 @@ public class WCMPaginatedQueryResult extends PaginatedQueryResult {
 
   /**
    * Sets the query criteria.
-   * 
+   *
    * @param queryCriteria the new query criteria
    */
   public void setQueryCriteria(QueryCriteria queryCriteria) {
@@ -99,7 +102,7 @@ public class WCMPaginatedQueryResult extends PaginatedQueryResult {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * org.exoplatform.wcm.webui.paginator.PaginatedQueryResult#filterNodeToDisplay
    * (javax.jcr.Node)
@@ -112,9 +115,13 @@ public class WCMPaginatedQueryResult extends PaginatedQueryResult {
     WCMComposer wcmComposer = WCMCoreUtils.getService(WCMComposer.class);
     HashMap<String, String> filters = new HashMap<String, String>();
     filters.put(WCMComposer.FILTER_MODE, WCMComposer.MODE_LIVE);
-    return wcmComposer.getContent(nodeLocation.getRepository(), nodeLocation.getWorkspace(), nodeLocation.getPath(), filters, WCMCoreUtils.getSystemSessionProvider());
+    return wcmComposer.getContent(nodeLocation.getRepository(),
+                                  nodeLocation.getWorkspace(),
+                                  nodeLocation.getPath(),
+                                  filters,
+                                  WCMCoreUtils.getSystemSessionProvider());
   }
-  
+
   protected Node getNodeToCheckState(Node node)throws Exception{
     Node displayNode = node;
     if (node.getPath().contains("web contents/site artifacts")) {
@@ -124,18 +131,18 @@ public class WCMPaginatedQueryResult extends PaginatedQueryResult {
       displayNode = node.getParent();
     }
     if (displayNode.isNodeType("exo:htmlFile")) {
-      Node parent = displayNode.getParent();      
+      Node parent = displayNode.getParent();
       if (queryCriteria.isSearchWebContent()) {
         if (parent.isNodeType("exo:webContent")) return parent;
         return null;
-      } 
+      }
       if (parent.isNodeType("exo:webContent")) return null;
       return displayNode;
-    }    
+    }
     /*
     if(queryCriteria.isSearchWebContent()) {
       if(!queryCriteria.isSearchDocument()) {
-        if(!displayNode.isNodeType("exo:webContent")) 
+        if(!displayNode.isNodeType("exo:webContent"))
           return null;
       }
       if(queryCriteria.isSearchWebpage()) {
@@ -148,7 +155,7 @@ public class WCMPaginatedQueryResult extends PaginatedQueryResult {
         } else if (!displayNode.isNodeType("publication:webpagesPublication"))
           return null;
     }
-    */      
+    */
     String[] contentTypes = queryCriteria.getContentTypes();
     if(contentTypes != null && contentTypes.length>0) {
       String primaryNodeType = displayNode.getPrimaryNodeType().getName();
@@ -160,7 +167,7 @@ public class WCMPaginatedQueryResult extends PaginatedQueryResult {
 
   /**
    * Gets the spell suggestion.
-   * 
+   *
    * @return the spell suggestion
    */
   public String getSpellSuggestion() {
@@ -169,7 +176,7 @@ public class WCMPaginatedQueryResult extends PaginatedQueryResult {
 
   /**
    * Sets the spell suggestion.
-   * 
+   *
    * @param spellSuggestion the new spell suggestion
    */
   public void setSpellSuggestion(String spellSuggestion) {

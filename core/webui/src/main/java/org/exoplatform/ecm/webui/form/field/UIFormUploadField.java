@@ -24,14 +24,14 @@ import org.exoplatform.webui.form.UIFormUploadInput;
  * Created by The eXo Platform SAS
  * @author : Hoa.Pham
  *          hoa.pham@exoplatform.com
- * Jun 23, 2008  
+ * Jun 23, 2008
  */
 public class UIFormUploadField extends DialogFormField{
 
   public UIFormUploadField(String name, String label, String[] arguments) {
     super(name, label, arguments);
   }
-  
+
   @SuppressWarnings("unchecked")
   public <T extends UIFormInputBase> T createUIFormInput() throws Exception {
     UIFormUploadInput uiInputUpload = new UIFormUploadInput(name, name) ;

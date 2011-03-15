@@ -46,8 +46,8 @@ import org.exoplatform.webui.ext.UIExtension;
 import org.exoplatform.webui.ext.UIExtensionManager;
 
 /*
- * Created by The eXo Platform SAS 
- * Author : Anh Do Ngoc 
+ * Created by The eXo Platform SAS
+ * Author : Anh Do Ngoc
  * anh.do@exoplatform.com
  * Sep 24, 2008
  */
@@ -60,10 +60,10 @@ public class UIPCVPresentation extends UIBaseNodePresentation {
 
   /** The content node. */
   private NodeLocation contentNodeLocation;
-  
+
   /** The orginal node. */
   private NodeLocation originalNodeLocation;
-  
+
   /** The resource resolver. */
   private JCRResourceResolver resourceResolver;
 
@@ -81,22 +81,24 @@ public class UIPCVPresentation extends UIBaseNodePresentation {
 
   /** The Constant CONTENT_UNSUPPORT_EXC. */
   public final static String  CONTENT_UNSUPPORT_EXC = "UIMessageBoard.msg.content-unsupport-exc";
-  
+
   /** Content can't be printed. */
   public final static String  CONTENT_NOT_PRINTED = "UIMessageBoard.msg.content-invisible";
-  
+
   /** Content is obsolete. */
   public final static String OBSOLETE_CONTENT = "UIMessageBoard.msg.content-obsolete";
 
   /** The Constant PARAMETER_REGX. */
   public final static String  PARAMETER_REGX        = "(.*)/(.*)";
-  
+
   /* (non-Javadoc)
    * @see org.exoplatform.ecm.webui.presentation.UIBaseNodePresentation#getNode()
    */
   @Override
   public Node getNode() throws Exception {
-	  return Utils.getViewableNodeByComposer(contentNodeLocation.getRepository(), contentNodeLocation.getWorkspace(), contentNodeLocation.getPath());
+    return Utils.getViewableNodeByComposer(contentNodeLocation.getRepository(),
+                                           contentNodeLocation.getWorkspace(),
+                                           contentNodeLocation.getPath());
   }
 
   /* (non-Javadoc)
@@ -104,12 +106,15 @@ public class UIPCVPresentation extends UIBaseNodePresentation {
    */
   @Override
   public Node getOriginalNode() throws Exception {
-	  return Utils.getViewableNodeByComposer(originalNodeLocation.getRepository(), originalNodeLocation.getWorkspace(), originalNodeLocation.getPath(), WCMComposer.BASE_VERSION);
+    return Utils.getViewableNodeByComposer(originalNodeLocation.getRepository(),
+                                           originalNodeLocation.getWorkspace(),
+                                           originalNodeLocation.getPath(),
+                                           WCMComposer.BASE_VERSION);
   }
-  
+
   /**
    * Sets the orginal node.
-   * 
+   *
    * @param orginalNode the new orginal node
    */
   public void setOriginalNode(Node originalNode) {
@@ -130,21 +135,21 @@ public class UIPCVPresentation extends UIBaseNodePresentation {
   public String getWorkspaceName() throws Exception {
     return workspace;
   }
-  
-  public String getDownloadLink(Node node) throws Exception { 	  	 
-	  DownloadService dservice = getApplicationComponent(DownloadService.class) ;    
-	  Node jcrContentNode = node.getNode(org.exoplatform.ecm.webui.utils.Utils.JCR_CONTENT) ;
-	  InputStream input = jcrContentNode.getProperty(org.exoplatform.ecm.webui.utils.Utils.JCR_DATA).getStream() ;
-	  String mimeType = jcrContentNode.getProperty(org.exoplatform.ecm.webui.utils.Utils.JCR_MIMETYPE).getString() ;
-	  InputStreamDownloadResource dresource = new InputStreamDownloadResource(input, mimeType) ;
-	  DMSMimeTypeResolver mimeTypeSolver = DMSMimeTypeResolver.getInstance();
-	  String ext = mimeTypeSolver.getExtension(mimeType) ;
-	  String fileName = node.getName() ;    
-	  if(fileName.lastIndexOf("."+ext)<0){
-	    fileName = fileName + "." +ext ;
-	  } 
-	  dresource.setDownloadName(fileName) ;
-	  return dservice.getDownloadLink(dservice.addDownloadResource(dresource)) ;	 
+
+  public String getDownloadLink(Node node) throws Exception {
+    DownloadService dservice = getApplicationComponent(DownloadService.class) ;
+    Node jcrContentNode = node.getNode(org.exoplatform.ecm.webui.utils.Utils.JCR_CONTENT) ;
+    InputStream input = jcrContentNode.getProperty(org.exoplatform.ecm.webui.utils.Utils.JCR_DATA).getStream() ;
+    String mimeType = jcrContentNode.getProperty(org.exoplatform.ecm.webui.utils.Utils.JCR_MIMETYPE).getString() ;
+    InputStreamDownloadResource dresource = new InputStreamDownloadResource(input, mimeType) ;
+    DMSMimeTypeResolver mimeTypeSolver = DMSMimeTypeResolver.getInstance();
+    String ext = mimeTypeSolver.getExtension(mimeType) ;
+    String fileName = node.getName() ;
+    if(fileName.lastIndexOf("."+ext)<0){
+      fileName = fileName + "." +ext ;
+    }
+    dresource.setDownloadName(fileName) ;
+    return dservice.getDownloadLink(dservice.addDownloadResource(dresource)) ;
   }
 
   /* (non-Javadoc)
@@ -167,8 +172,11 @@ public class UIPCVPresentation extends UIBaseNodePresentation {
     }
   }
 
-  /* (non-Javadoc)
-   * @see org.exoplatform.webui.core.UIComponent#getTemplateResourceResolver(org.exoplatform.webui.application.WebuiRequestContext, java.lang.String)
+  /*
+   * (non-Javadoc)
+   * @see
+   * org.exoplatform.webui.core.UIComponent#getTemplateResourceResolver(org.
+   * exoplatform.webui.application.WebuiRequestContext, java.lang.String)
    */
   public ResourceResolver getTemplateResourceResolver(WebuiRequestContext context, String template) {
     try {
@@ -176,7 +184,10 @@ public class UIPCVPresentation extends UIBaseNodePresentation {
         String workspace = dmsConfiguration.getConfig().getSystemWorkspace();
         resourceResolver = new JCRResourceResolver(repository, workspace, "exo:templateFile");
     } catch (Exception e) {
-      Utils.createPopupMessage(this, "UIMessageBoard.msg.get-template-resource", null, ApplicationMessage.ERROR);
+      Utils.createPopupMessage(this,
+                               "UIMessageBoard.msg.get-template-resource",
+                               null,
+                               ApplicationMessage.ERROR);
     }
     return resourceResolver;
   }
@@ -204,7 +215,7 @@ public class UIPCVPresentation extends UIBaseNodePresentation {
 
   /**
    * Sets the repository.
-   * 
+   *
    * @param repository the new repository
    */
   public void setRepository(String repository) {
@@ -213,7 +224,7 @@ public class UIPCVPresentation extends UIBaseNodePresentation {
 
   /**
    * Sets the workspace.
-   * 
+   *
    * @param workspace the new workspace
    */
   public void setWorkspace(String workspace) {
@@ -224,14 +235,14 @@ public class UIPCVPresentation extends UIBaseNodePresentation {
    * @see org.exoplatform.webui.core.UIComponent#processRender(org.exoplatform.webui.application.WebuiRequestContext)
    */
   public void processRender(WebuiRequestContext context) throws Exception {
-	  super.processRender(context);
+    super.processRender(context);
   }
 
   /* (non-Javadoc)
    * @see org.exoplatform.ecm.webui.presentation.NodePresentation#getCommentComponent()
    */
   public UIComponent getCommentComponent() {
-  	return null;
+    return null;
   }
 
   public UIComponent getRemoveAttach() throws Exception {
@@ -240,16 +251,14 @@ public class UIPCVPresentation extends UIBaseNodePresentation {
     ((AbstractActionComponent)uicomponent).setLstComponentupdate(Arrays.asList(new Class[] {UIPCVContainer.class}));
     return uicomponent;
   }
-  
+
   public UIComponent getRemoveComment() throws Exception {
-  	// TODO Auto-generated method stub
-  	return null;
+    return null;
   }
 
 public UIComponent getUIComponent(String mimeType) throws Exception {
-	// TODO Auto-generated method stub
-	UIExtensionManager manager = getApplicationComponent(UIExtensionManager.class);
-	List<UIExtension> extensions = manager.getUIExtensions(org.exoplatform.ecm.webui.utils.Utils.FILE_VIEWER_EXTENSION_TYPE);
+  UIExtensionManager manager = getApplicationComponent(UIExtensionManager.class);
+  List<UIExtension> extensions = manager.getUIExtensions(org.exoplatform.ecm.webui.utils.Utils.FILE_VIEWER_EXTENSION_TYPE);
     Map<String, Object> context = new HashMap<String, Object>();
     context.put(org.exoplatform.ecm.webui.utils.Utils.MIME_TYPE, mimeType);
     for (UIExtension extension : extensions) {

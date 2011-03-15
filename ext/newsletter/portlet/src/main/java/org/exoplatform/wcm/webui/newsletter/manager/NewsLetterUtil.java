@@ -23,24 +23,24 @@ import org.exoplatform.portal.webui.util.Util;
  * The Class NewsLetterUtil.
  */
 public class NewsLetterUtil {
-	
+
   /**
-	 * Gets the portal name.
-	 * 
-	 * @return the portal name
-	 */
-	public static String getPortalName() {
-	  return Util.getUIPortalApplication().getOwner();
-	}
-	
-	/**
-	 * Generate link.
-	 * 
-	 * @param url the url
-	 * 
-	 * @return the string
-	 */
-	public static String generateLink(String url) throws Exception {
+   * Gets the portal name.
+   *
+   * @return the portal name
+   */
+  public static String getPortalName() {
+    return Util.getUIPortalApplication().getOwner();
+  }
+
+  /**
+   * Generate link.
+   *
+   * @param url the url
+   *
+   * @return the string
+   */
+  public static String generateLink(String url) throws Exception {
     String link = url.replaceFirst("Subcribe", "ConfirmUserCode")
                       .replaceFirst("UINewsletterViewerForm", "UINewsletterViewerPortlet")
                       .replaceAll("&amp;", "&");
@@ -49,23 +49,23 @@ public class NewsLetterUtil {
     if(link.indexOf(portalName) > 0) {
       if(link.indexOf(portalName + "/" + selectedNode) < 0){
         link = link.replaceFirst(portalName, portalName + "/" + selectedNode) ;
-      }                 
-    } 
+      }
+    }
     PortalRequestContext portalContext = Util.getPortalRequestContext();
     url = portalContext.getRequest().getRequestURL().toString();
     url = url.replaceFirst("http://", "") ;
     url = url.substring(0, url.indexOf("/")) ;
     link = "http://" + url + link;
     return link.replaceFirst("private", "public");
-	}
-	
-	/**
-	 * Get current user
-	 * @return
-	 * @throws Exception
-	 */
-	static public String getCurrentUser() throws Exception {
+  }
+
+  /**
+   * Get current user
+   * @return
+   * @throws Exception
+   */
+  static public String getCurrentUser() throws Exception {
     return Util.getPortalRequestContext().getRemoteUser();
   }
-	
+
 }

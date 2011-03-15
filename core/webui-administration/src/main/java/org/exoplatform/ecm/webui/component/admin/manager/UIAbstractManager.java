@@ -22,16 +22,16 @@ import org.exoplatform.webui.core.UIContainer;
  * Created by The eXo Platform SAS
  * Author : eXoPlatform
  *          nicolas.filotto@exoplatform.com
- * 15 mai 2009  
+ * 15 mai 2009
  */
 public abstract class UIAbstractManager extends UIContainer {
 
   /**
-   * This method is used to refresh the content of the UI component related to the manager 
+   * This method is used to refresh the content of the UI component related to the manager
    * @throws Exception if any error occurs
    */
   public abstract void refresh() throws Exception;
-  
+
   /**
    * This method is used to initialize the content of the UI component related to the manager
    * @throws Exception if any error occurs

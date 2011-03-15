@@ -25,34 +25,34 @@ import java.util.List;
  * Jun 23, 2009
  */
 public class UIFormGeneratorInputBean {
-  
+
   /** The inputs. */
   private List<UIFormGeneratorInputBean> inputs;
-  
+
   /** The type. */
   private String type;
-  
+
   /** The name. */
   private String name;
-  
+
   /** The value. */
   private String value;
-  
+
   /** The advanced. */
   private String advanced;
-  
+
   /** The guideline. */
   private String guideline;
-  
+
   /** The width. */
   private int width;
-  
+
   /** The height. */
   private int height;
-  
+
   /**
    * Gets the width.
-   * 
+   *
    * @return the width
    */
   public int getWidth() {
@@ -61,7 +61,7 @@ public class UIFormGeneratorInputBean {
 
   /**
    * Sets the width.
-   * 
+   *
    * @param width the new width
    */
   public void setWidth(int width) {
@@ -70,7 +70,7 @@ public class UIFormGeneratorInputBean {
 
   /**
    * Gets the height.
-   * 
+   *
    * @return the height
    */
   public int getHeight() {
@@ -79,7 +79,7 @@ public class UIFormGeneratorInputBean {
 
   /**
    * Sets the height.
-   * 
+   *
    * @param height the new height
    */
   public void setHeight(int height) {
@@ -88,10 +88,10 @@ public class UIFormGeneratorInputBean {
 
   /** The mandatory. */
   private boolean mandatory;
-  
+
   /**
    * Gets the type.
-   * 
+   *
    * @return the type
    */
   public String getType() {
@@ -100,7 +100,7 @@ public class UIFormGeneratorInputBean {
 
   /**
    * Sets the type.
-   * 
+   *
    * @param type the new type
    */
   public void setType(String type) {
@@ -109,7 +109,7 @@ public class UIFormGeneratorInputBean {
 
   /**
    * Gets the name.
-   * 
+   *
    * @return the name
    */
   public String getName() {
@@ -118,7 +118,7 @@ public class UIFormGeneratorInputBean {
 
   /**
    * Sets the name.
-   * 
+   *
    * @param name the new name
    */
   public void setName(String name) {
@@ -127,7 +127,7 @@ public class UIFormGeneratorInputBean {
 
   /**
    * Gets the value.
-   * 
+   *
    * @return the value
    */
   public String getValue() {
@@ -136,7 +136,7 @@ public class UIFormGeneratorInputBean {
 
   /**
    * Sets the value.
-   * 
+   *
    * @param value the new value
    */
   public void setValue(String value) {
@@ -145,7 +145,7 @@ public class UIFormGeneratorInputBean {
 
   /**
    * Gets the guideline.
-   * 
+   *
    * @return the guideline
    */
   public String getGuideline() {
@@ -154,7 +154,7 @@ public class UIFormGeneratorInputBean {
 
   /**
    * Sets the guideline.
-   * 
+   *
    * @param guideline the new guideline
    */
   public void setGuideline(String guideline) {
@@ -163,7 +163,7 @@ public class UIFormGeneratorInputBean {
 
   /**
    * Checks if is mandatory.
-   * 
+   *
    * @return true, if is mandatory
    */
   public boolean isMandatory() {
@@ -172,7 +172,7 @@ public class UIFormGeneratorInputBean {
 
   /**
    * Sets the mandatory.
-   * 
+   *
    * @param mandatory the new mandatory
    */
   public void setMandatory(boolean mandatory) {
@@ -181,7 +181,7 @@ public class UIFormGeneratorInputBean {
 
   /**
    * Gets the advanced.
-   * 
+   *
    * @return the advanced
    */
   public String getAdvanced() {
@@ -190,7 +190,7 @@ public class UIFormGeneratorInputBean {
 
   /**
    * Sets the advanced.
-   * 
+   *
    * @param advanced the new advanced
    */
   public void setAdvanced(String advanced) {
@@ -199,7 +199,7 @@ public class UIFormGeneratorInputBean {
 
   /**
    * Gets the inputs.
-   * 
+   *
    * @return the inputs
    */
   public List<UIFormGeneratorInputBean> getInputs() {
@@ -208,7 +208,7 @@ public class UIFormGeneratorInputBean {
 
   /**
    * Sets the inputs.
-   * 
+   *
    * @param inputs the new inputs
    */
   public void setInputs(List<UIFormGeneratorInputBean> inputs) {

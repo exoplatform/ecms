@@ -31,15 +31,15 @@ import org.exoplatform.webui.ext.filter.UIExtensionFilterType;
  * Created by The eXo Platform SARL
  * Author : Nguyen Anh Vu
  *          anhvurz90@gmail.com
- * Nov 13, 2009  
+ * Nov 13, 2009
  * 4:42:38 PM
  */
 public class IsNotTrashHomeNodeFilter extends UIExtensionAbstractFilter {
-  
+
   public IsNotTrashHomeNodeFilter() {
     this(null);
   }
-  
+
   public IsNotTrashHomeNodeFilter(String messageKey) {
     super(messageKey, UIExtensionFilterType.MANDATORY);
   }
@@ -47,13 +47,12 @@ public class IsNotTrashHomeNodeFilter extends UIExtensionAbstractFilter {
     if (context == null) return true;
     ExoContainer container = ExoContainerContext.getCurrentContainer();
     LinkManager linkManager = (LinkManager)
-    	container.getComponentInstanceOfType(LinkManager.class);
+      container.getComponentInstanceOfType(LinkManager.class);
     Node currentNode = (Node) context.get(Node.class.getName());
     return linkManager.isLink(currentNode) || !Utils.isTrashHomeNode(currentNode);
   }
 
   public void onDeny(Map<String, Object> context) throws Exception {
-    // TODO Auto-generated method stub
-    
+
   }
 }

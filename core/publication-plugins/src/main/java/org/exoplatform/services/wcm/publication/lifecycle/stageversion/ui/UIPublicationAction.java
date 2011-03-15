@@ -65,26 +65,26 @@ import org.exoplatform.webui.form.UIForm;
     }
 )
 public class UIPublicationAction extends UIForm {
-  
+
   /**
    * Update ui.
-   * 
+   *
    * @throws Exception the exception
    */
   public void updateUI() throws Exception {
     UIPublicationPages publicationPages = getAncestorOfType(UIPublicationPages.class);
     UIPublishedPages publishedPages = publicationPages.getChild(UIPublishedPages.class);
-    
+
     Node node = publicationPages.getNode();
     List<String> listPublishedPage = new ArrayList<String>();
     if (node.hasProperty("publication:navigationNodeURIs")) {
       Value[] navigationNodeURIs = node.getProperty("publication:navigationNodeURIs").getValues();
       for (Value navigationNodeURI : navigationNodeURIs) {
-      	if (PublicationUtil.isNodeContentPublishedToPageNode(node, navigationNodeURI.getString())) {
-      		listPublishedPage.add(navigationNodeURI.getString());
-      	}
+        if (PublicationUtil.isNodeContentPublishedToPageNode(node, navigationNodeURI.getString())) {
+          listPublishedPage.add(navigationNodeURI.getString());
+        }
       }
-      publishedPages.setListNavigationNodeURI(listPublishedPage);    
+      publishedPages.setListNavigationNodeURI(listPublishedPage);
       UIPublicationContainer publicationContainer = getAncestorOfType(UIPublicationContainer.class);
       UIPublicationHistory publicationHistory = publicationContainer.getChild(UIPublicationHistory.class);
       UIPublicationPanel publicationPanel = publicationContainer.getChild(UIPublicationPanel.class);
@@ -92,7 +92,7 @@ public class UIPublicationAction extends UIForm {
       publicationHistory.updateGrid();
     }
   }
-  
+
   /**
    * The listener interface for receiving addAction events.
    * The class that is interested in processing a addAction
@@ -101,11 +101,11 @@ public class UIPublicationAction extends UIForm {
    * component's <code>addAddActionListener<code> method. When
    * the addAction event occurs, that object's appropriate
    * method is invoked.
-   * 
+   *
    * @see AddActionEvent
    */
   public static class AddActionListener extends EventListener<UIPublicationAction> {
-    
+
     /* (non-Javadoc)
      * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
      */
@@ -113,49 +113,55 @@ public class UIPublicationAction extends UIForm {
       UIPublicationAction publicationAction = event.getSource();
       UIPublicationPages publicationPages = publicationAction.getAncestorOfType(UIPublicationPages.class);
       UIApplication application = publicationAction.getAncestorOfType(UIApplication.class);
-      
+
       UIPortalNavigationExplorer portalNavigationExplorer = publicationPages.getChild(UIPortalNavigationExplorer.class);
       TreeNode selectedNode = portalNavigationExplorer.getSelectedNode();
-      
+
       if (selectedNode == null) {
         application.addMessage(new ApplicationMessage("UIPublicationAction.msg.none", null, ApplicationMessage.WARNING));
         event.getRequestContext().addUIComponentToUpdateByAjax(application.getUIPopupMessages());
         return;
       }
-      
+
       String selectedNavigationNodeURI = selectedNode.getUri();
       Node node = publicationPages.getNode();
 
       if (node.hasProperty("publication:navigationNodeURIs")
-      		&& PublicationUtil.isNodeContentPublishedToPageNode(node, selectedNavigationNodeURI)) {
-      	Value[] navigationNodeURIs = node.getProperty("publication:navigationNodeURIs").getValues();
-      	for (Value navigationNodeURI : navigationNodeURIs) {
-      		if (navigationNodeURI.getString().equals(selectedNavigationNodeURI)) {
-      			application.addMessage(new ApplicationMessage("UIPublicationAction.msg.duplicate", null, ApplicationMessage.WARNING));
-      			event.getRequestContext().addUIComponentToUpdateByAjax(application.getUIPopupMessages());
-      			return;
-      		}
-      	}
+          && PublicationUtil.isNodeContentPublishedToPageNode(node, selectedNavigationNodeURI)) {
+        Value[] navigationNodeURIs = node.getProperty("publication:navigationNodeURIs").getValues();
+        for (Value navigationNodeURI : navigationNodeURIs) {
+          if (navigationNodeURI.getString().equals(selectedNavigationNodeURI)) {
+            application.addMessage(new ApplicationMessage("UIPublicationAction.msg.duplicate",
+                                                          null,
+                                                          ApplicationMessage.WARNING));
+            event.getRequestContext().addUIComponentToUpdateByAjax(application.getUIPopupMessages());
+            return;
+          }
+        }
       }
-      
+
       PageNode pageNode = selectedNode.getPageNode();
       if (pageNode == null) {
         application.addMessage(new ApplicationMessage("UIPublicationAction.msg.wrongNode", null, ApplicationMessage.WARNING));
         event.getRequestContext().addUIComponentToUpdateByAjax(application.getUIPopupMessages());
         return;
       }
-      
+
       WCMPublicationService presentationService = publicationAction.getApplicationComponent(WCMPublicationService.class);
-      
-      UIPublicationPagesContainer publicationPagesContainer = publicationPages.getAncestorOfType(UIPublicationPagesContainer.class);
-      UserPortalConfigService userPortalConfigService = publicationAction.getApplicationComponent(UserPortalConfigService.class);
+
+      UIPublicationPagesContainer publicationPagesContainer = publicationPages.
+          getAncestorOfType(UIPublicationPagesContainer.class);
+      UserPortalConfigService userPortalConfigService = publicationAction.
+          getApplicationComponent(UserPortalConfigService.class);
       Page page = userPortalConfigService.getPage(pageNode.getPageReference(), event.getRequestContext().getRemoteUser());
       List<String> clvPortletIds = getManualModeCLVPortletIDs(page);
       if (clvPortletIds.isEmpty()) {
-      	presentationService.publishContentSCV(node, page, Util.getUIPortal().getOwner());
+        presentationService.publishContentSCV(node, page, Util.getUIPortal().getOwner());
       } else {
         if (clvPortletIds.size() > 1) {
-          UIPublishClvChooser clvChooser = publicationAction.createUIComponent(UIPublishClvChooser.class, null, "UIPublishClvChooser");
+          UIPublishClvChooser clvChooser = publicationAction.createUIComponent(UIPublishClvChooser.class,
+                                                                               null,
+                                                                               "UIPublishClvChooser");
           clvChooser.setPage(page);
           clvChooser.setNode(node);
           UIPopupWindow popupWindow = publicationPagesContainer.getChildById("UIClvPopupContainer");
@@ -167,7 +173,11 @@ public class UIPublicationAction extends UIForm {
           event.getRequestContext().addUIComponentToUpdateByAjax(publicationPagesContainer);
         } else {
           String clvPortletId = clvPortletIds.get(0);
-          presentationService.publishContentCLV(node, page, clvPortletId, Util.getUIPortal().getOwner(), event.getRequestContext().getRemoteUser());
+          presentationService.publishContentCLV(node,
+                                                page,
+                                                clvPortletId,
+                                                Util.getUIPortal().getOwner(),
+                                                event.getRequestContext().getRemoteUser());
         }
       }
       publicationAction.updateUI();
@@ -184,23 +194,23 @@ public class UIPublicationAction extends UIForm {
    * component's <code>addRemoveActionListener<code> method. When
    * the removeAction event occurs, that object's appropriate
    * method is invoked.
-   * 
+   *
    * @see RemoveActionEvent
    */
   public static class RemoveActionListener extends EventListener<UIPublicationAction> {
-    
+
     /* (non-Javadoc)
      * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
      */
     public void execute(Event<UIPublicationAction> event) throws Exception {
       UIPublicationAction publicationAction = event.getSource();
       UIPublicationPages publicationPages = publicationAction.getAncestorOfType(UIPublicationPages.class);
-      UserPortalConfigService userPortalConfigService = publicationAction.getApplicationComponent(UserPortalConfigService.class);
-      
+      UserPortalConfigService userPortalConfigService = publicationAction.
+          getApplicationComponent(UserPortalConfigService.class);
       UIPublishedPages publishedPages = publicationPages.getChild(UIPublishedPages.class);
       DataStorage dataStorage = publicationAction.getApplicationComponent(DataStorage.class);
       String selectedNavigationNodeURI = publishedPages.getSelectedNavigationNodeURI();
-      
+
       if (selectedNavigationNodeURI == null) {
         UIApplication application = publicationAction.getAncestorOfType(UIApplication.class);
         application.addMessage(new ApplicationMessage("UIPublicationAction.msg.none", null, ApplicationMessage.WARNING));
@@ -225,20 +235,25 @@ public class UIPublicationAction extends UIForm {
         }
       }
       WCMPublicationService presentationService = publicationAction.getApplicationComponent(WCMPublicationService.class);
-      StageAndVersionPublicationPlugin publicationPlugin = (StageAndVersionPublicationPlugin) presentationService.getWebpagePublicationPlugins().get(StageAndVersionPublicationConstant.LIFECYCLE_NAME);
-      publicationPlugin.suspendPublishedContentFromPage(publicationPages.getNode(), page, event.getRequestContext().getRemoteUser());
+      StageAndVersionPublicationPlugin publicationPlugin
+          = (StageAndVersionPublicationPlugin) presentationService.getWebpagePublicationPlugins()
+              .get(StageAndVersionPublicationConstant.LIFECYCLE_NAME);
+      publicationPlugin.suspendPublishedContentFromPage(publicationPages.getNode(),
+                                                        page,
+                                                        event.getRequestContext().getRemoteUser());
       publicationAction.updateUI();
-      UIPublicationPagesContainer publicationPagesContainer = publicationPages.getAncestorOfType(UIPublicationPagesContainer.class);
+      UIPublicationPagesContainer publicationPagesContainer = publicationPages.
+          getAncestorOfType(UIPublicationPagesContainer.class);
       UIPublicationContainer publicationContainer = publicationAction.getAncestorOfType(UIPublicationContainer.class);
       publicationContainer.setActiveTab(publicationPagesContainer, event.getRequestContext());
     }
-    
+
     /**
      * Gets the page node by uri.
-     * 
+     *
      * @param pageNav the page nav
      * @param uri the uri
-     * 
+     *
      * @return the page node by uri
      */
     private PageNode getPageNodeByUri(PageNavigation pageNav, String uri) {
@@ -249,15 +264,15 @@ public class UIPublicationAction extends UIForm {
         if(returnPageNode == null) continue;
         return returnPageNode;
       }
-      return null; 
-    }  
-    
+      return null;
+    }
+
     /**
      * Gets the page node by uri.
-     * 
+     *
      * @param pageNode the page node
      * @param uri the uri
-     * 
+     *
      * @return the page node by uri
      */
     private PageNode getPageNodeByUri(PageNode pageNode, String uri){
@@ -272,26 +287,27 @@ public class UIPublicationAction extends UIForm {
       return null;
     }
   }
-  
+
   private static List<String> getManualModeCLVPortletIDs(Page page) throws Exception {
     WCMConfigurationService wcmConfigurationService = WCMCoreUtils.getService(WCMConfigurationService.class);
+    String portletName = wcmConfigurationService.getRuntimeContextParam(WCMConfigurationService.CLV_PORTLET);
     DataStorage dataStorage = WCMCoreUtils.getService(DataStorage.class);
-    List<String> clvPortletsId = PublicationUtil.findAppInstancesByName(page, wcmConfigurationService.getRuntimeContextParam(WCMConfigurationService.CLV_PORTLET));
+    List<String> clvPortletsId = PublicationUtil.findAppInstancesByName(page, portletName);
     List<String> applicationIDs = new ArrayList<String>();
     for (String clvPortletId : clvPortletsId) {
-    	boolean isManualViewerMode = false;
+      boolean isManualViewerMode = false;
       PortletPreferences portletPreferences = dataStorage.getPortletPreferences(clvPortletId);
       if (portletPreferences != null) {
         for (Object object : portletPreferences.getPreferences()) {
           Preference preference = (Preference) object;
           if ("mode".equals(preference.getName()) && preference.getValues().size() > 0) {
-          	isManualViewerMode = "ManualViewerMode".equals(preference.getValues().get(0).toString());
+            isManualViewerMode = "ManualViewerMode".equals(preference.getValues().get(0).toString());
           }
         }
       }
-      
+
       if (isManualViewerMode)
-      	applicationIDs.add(clvPortletId);
+        applicationIDs.add(clvPortletId);
     }
     return applicationIDs;
   }

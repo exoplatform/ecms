@@ -57,7 +57,7 @@ public class UINodeTypeInfo extends UIContainer implements UIPopupComponent {
   private Collection nodeTypes ;
 
   public UINodeTypeInfo() throws Exception {}
-  
+
   public void activate() throws Exception {
     UIJCRExplorer uiJCRExplorer = getAncestorOfType(UIJCRExplorer.class) ;
     Node node = uiJCRExplorer.getCurrentNode() ;
@@ -76,10 +76,10 @@ public class UINodeTypeInfo extends UIContainer implements UIPopupComponent {
       JCRExceptionManager.process(uiApp, e);
     }
   }
-  
-  public String getPropertyValue(Value value) throws Exception{    
+
+  public String getPropertyValue(Value value) throws Exception{
     switch(value.getType()) {
-      case PropertyType.BINARY: return Integer.toString(PropertyType.BINARY) ; 
+      case PropertyType.BINARY: return Integer.toString(PropertyType.BINARY) ;
       case PropertyType.BOOLEAN :return Boolean.toString(value.getBoolean()) ;
       case PropertyType.DATE : return value.getDate().getTime().toString() ;
       case PropertyType.DOUBLE : return Double.toString(value.getDouble()) ;
@@ -89,15 +89,15 @@ public class UINodeTypeInfo extends UIContainer implements UIPopupComponent {
     }
     return null ;
   }
-  
+
   public void deActivate() throws Exception {}
-  
+
   public String[] getActions() {return new String[] {"Close"} ;}
-  
+
   public String resolveType(int type) {
     return ExtendedPropertyType.nameFromValue(type) ;
   }
-  
+
   public String resolveOnParentVersion(int opv) {
     return OnParentVersionAction.nameFromValue(opv) ;
   }
@@ -113,9 +113,9 @@ public class UINodeTypeInfo extends UIContainer implements UIPopupComponent {
     }
     return defaultValue.toString() ;
   }
-  
+
   public Collection getNodeTypes() { return nodeTypes ;}
-  
+
   static  public class CloseActionListener extends EventListener<UINodeTypeInfo> {
     public void execute(Event<UINodeTypeInfo> event) throws Exception {
       UIJCRExplorer uiExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class) ;

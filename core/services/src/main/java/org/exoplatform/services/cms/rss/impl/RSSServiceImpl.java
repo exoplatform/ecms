@@ -64,7 +64,7 @@ import com.totsp.xml.syndication.itunes.types.Subcategory;
 
 /**
  * @author Nguyen Quang Hung
- * @mail   nguyenkequanghung@yahoo.com 
+ * @mail   nguyenkequanghung@yahoo.com
  */
 
 public class RSSServiceImpl implements RSSService{
@@ -99,22 +99,22 @@ public class RSSServiceImpl implements RSSService{
   static private String JCR_LASTMODIFIED = "jcr:lastModified".intern() ;
   static private String NT_UNSTRUCTURED = "nt:unstructured".intern() ;
   static private String NT_FILE = "nt:file".intern() ;
-  static private String NT_RESOURCE = "nt:resource".intern() ;  
+  static private String NT_RESOURCE = "nt:resource".intern() ;
   static private String RSS = "/rss".intern() ;
   static private String MIX_VERSIONABLE = "mix:versionable".intern() ;
-  static private String DATE_MODIFIED = "exo:dateModified".intern();  
+  static private String DATE_MODIFIED = "exo:dateModified".intern();
 
   private RepositoryService repositoryService_;
   private static final Log LOG  = ExoLogger.getLogger(RSSServiceImpl.class);
   /**
    * Constructor method
-   * Init repositoryService, nodeHierarchyCreator    
+   * Init repositoryService, nodeHierarchyCreator
    * @param repositoryService       RepositoryService
    * @param nodeHierarchyCreator    NodeHierarchyCreator
    * @see                           RepositoryService
-   * @see                           NodeHierarchyCreator 
+   * @see                           NodeHierarchyCreator
    */
-  public RSSServiceImpl(RepositoryService repositoryService, 
+  public RSSServiceImpl(RepositoryService repositoryService,
       NodeHierarchyCreator nodeHierarchyCreator) {
     repositoryService_ = repositoryService;
   }
@@ -127,73 +127,73 @@ public class RSSServiceImpl implements RSSService{
     if(feedType.equals("rss")) generateRSS(context) ;
     else if(feedType.equals("podcast") || feedType.equals("video podcast")) generatePodcast(context) ;
   }
-  
+
   /**
    *  Create a Feed file with feed type is RSS
    * @param context     Map
-   *                    Consist of among information  
+   *                    Consist of among information
    * @see               Map
    */
-  private void generateRSS(Map context) {  
-                 
+  private void generateRSS(Map context) {
+
     String actionName = (String)context.get("actionName") ;
-    String srcWorkspace = (String)context.get(SRC_WORKSPACE);                   
+    String srcWorkspace = (String)context.get(SRC_WORKSPACE);
     String rssVersion = (String) context.get(RSS_VERSION) ;
-    String feedTitle = (String) context.get(FEED_TITLE) ;    
+    String feedTitle = (String) context.get(FEED_TITLE) ;
     String summary = (String)context.get(SUMMARY);
     String feedType = (String) context.get(FEED_TYPE) ;
     String feedDescription = (String) context.get(DESCRIPTION) ;
     String storePath = (String) context.get(STORE_PATH) ;
-    String feedName = (String) context.get(FEED_NAME) ;      
+    String feedName = (String) context.get(FEED_NAME) ;
     String queryPath = (String) context.get(QUERY_PATH) ;
     String rssUrl = (String) context.get(URL) ;
     String title = (String) context.get(TITLE) ;
     String feedLink = (String) context.get(LINK) ;
     String repository = (String) context.get("repository") ;
-    Date pubDate ; 
+    Date pubDate ;
     try{
       pubDate = ((GregorianCalendar)context.get(PUBDATE)).getTime() ;
     }catch (Exception e) {
       pubDate= new Date() ;
-    }    
+    }
     storePath = storePath + "/" + feedType ;
     if(feedName == null || feedName.length() == 0) feedName = actionName ;
-    if(feedTitle == null || feedTitle.length() == 0) feedTitle = actionName ;        
+    if(feedTitle == null || feedTitle.length() == 0) feedTitle = actionName ;
     Session session = null;
-    try {      
+    try {
       session = repositoryService_.getRepository(repository).getSystemSession(srcWorkspace);
       session.refresh(true) ;
       QueryManager queryManager = session.getWorkspace().getQueryManager();
       Query query = queryManager.createQuery(queryPath, Query.SQL);
-      QueryResult queryResult = query.execute();            
-      SyndFeed feed = new SyndFeedImpl();      
-      feed.setFeedType(rssVersion);      
+      QueryResult queryResult = query.execute();
+      SyndFeed feed = new SyndFeedImpl();
+      feed.setFeedType(rssVersion);
       feed.setTitle(feedTitle.replaceAll("&nbsp;", " "));
-      feed.setPublishedDate(pubDate);      
+      feed.setPublishedDate(pubDate);
       feed.setLink(feedLink);
-      feed.setDescription(feedDescription.replaceAll("&nbsp;", " "));     
+      feed.setDescription(feedDescription.replaceAll("&nbsp;", " "));
       List<SyndEntry> entries = new ArrayList<SyndEntry>();
       SyndEntry entry;
       SyndContent description;
 //      ExoContainer container = ExoContainerContext.getCurrentContainer() ;
-//      PortalContainerInfo containerInfo = 
-//        (PortalContainerInfo)container.getComponentInstanceOfType(PortalContainerInfo.class) ;      
-//      String portalName = containerInfo.getContainerName() ; 
+//      PortalContainerInfo containerInfo =
+//        (PortalContainerInfo)container.getComponentInstanceOfType(PortalContainerInfo.class) ;
+//      String portalName = containerInfo.getContainerName() ;
 //      String wsName = session.getWorkspace().getName() ;
       NodeIterator iter = queryResult.getNodes() ;
-      while (iter.hasNext()) {        
+      while (iter.hasNext()) {
         Node child = iter.nextNode();
         if(child.isNodeType("exo:rss-enable")) {
           String url = rssUrl + child.getPath();
           entry = new SyndEntryImpl();
           try {
-            entry.setTitle(child.getProperty(title).getString());                
+            entry.setTitle(child.getProperty(title).getString());
           } catch(PathNotFoundException path) {
             entry.setTitle("") ;
           }
-          entry.setLink(url);        
+          entry.setLink(url);
           description = new SyndContentImpl();
-          description.setType("text/plain");          
+          description.setType("text/plain");
           try {
             if (child.hasProperty(summary))
               description.setValue(child.getProperty(summary).getString().replaceAll("&nbsp;", " "));
@@ -206,15 +206,15 @@ public class RSSServiceImpl implements RSSService{
             entry.setPublishedDate(udate) ;
           }catch (Exception e) {
             entry.setPublishedDate(new Date());
-          }          
+          }
           entries.add(entry);
           entry.getEnclosures() ;
-        }        
-      }      
-      feed.setEntries(entries);      
-      feed.setEncoding("UTF-8");     
-      SyndFeedOutput output = new SyndFeedOutput();      
-      String feedXML = output.outputString(feed);      
+        }
+      }
+      feed.setEntries(entries);
+      feed.setEncoding("UTF-8");
+      SyndFeedOutput output = new SyndFeedOutput();
+      String feedXML = output.outputString(feed);
       feedXML = StringUtils.replace(feedXML,"&amp;","&");
       storeXML(feedXML, storePath, feedName, repository);
     } catch (Exception e) {
@@ -227,17 +227,17 @@ public class RSSServiceImpl implements RSSService{
   /**
    *  Create a Feed file with feed type is RSS
    * @param context     Map
-   *                    Consist of among information  
+   *                    Consist of among information
    * @see               Map
    */
-  @SuppressWarnings("unchecked")  
+  @SuppressWarnings("unchecked")
   private void generatePodcast(Map context){
     Session session = null;
     try{
-      
+
       String actionName = (String)context.get("actionName") ;
-      String srcWorkspace = (String)context.get(SRC_WORKSPACE);                   
-      String feedTitle = (String) context.get(FEED_TITLE) ;      
+      String srcWorkspace = (String)context.get(SRC_WORKSPACE);
+      String feedTitle = (String) context.get(FEED_TITLE) ;
       String feedLink = (String) context.get(LINK) ;
       String feedType = (String) context.get(FEED_TYPE) ;
       String feedDescription = (String) context.get(DESCRIPTION) ;
@@ -245,7 +245,7 @@ public class RSSServiceImpl implements RSSService{
       String copyright = (String) context.get(COPYRIGHT) ;
       String title = (String) context.get(TITLE);
       String summary = (String) context.get(SUMMARY);
-      Date pubDate ; 
+      Date pubDate ;
       try{
         pubDate = ((GregorianCalendar)context.get(PUBDATE)).getTime() ;
       }catch (Exception e) {
@@ -269,7 +269,7 @@ public class RSSServiceImpl implements RSSService{
       session.refresh(true) ;
       QueryManager queryManager = session.getWorkspace().getQueryManager();
       Query query = queryManager.createQuery(queryPath, Query.SQL);
-      QueryResult queryResult = query.execute();            
+      QueryResult queryResult = query.execute();
       SyndFeed feed = new SyndFeedImpl() ;
       FeedInformation infor = new FeedInformationImpl() ;
       infor.setExplicit(false) ;
@@ -285,14 +285,14 @@ public class RSSServiceImpl implements RSSService{
             cat.setSubcategory(subCat) ;
           }
         }else{
-          cat.setName(categories) ;          
+          cat.setName(categories) ;
         }
         infor.setCategory(cat) ;
-      }      
+      }
       if(imageURL != null){
         try{
           URL url = new URL(imageURL) ;
-          infor.setImage(url) ; 
+          infor.setImage(url) ;
         }catch(Exception e) {}
       }
       if(keywords != null) {
@@ -317,26 +317,26 @@ public class RSSServiceImpl implements RSSService{
       SyndEntry entry;
       SyndContent description;
       ExoContainer container = ExoContainerContext.getCurrentContainer() ;
-      PortalContainerInfo containerInfo = 
-        (PortalContainerInfo)container.getComponentInstanceOfType(PortalContainerInfo.class) ;      
-      String portalName = containerInfo.getContainerName() ;  
+      PortalContainerInfo containerInfo =
+        (PortalContainerInfo)container.getComponentInstanceOfType(PortalContainerInfo.class) ;
+      String portalName = containerInfo.getContainerName() ;
       MimeTypeResolver resolver = new MimeTypeResolver();
       NodeIterator iter = queryResult.getNodes() ;
-      while (iter.hasNext()) {        
-        Node child = iter.nextNode();        
+      while (iter.hasNext()) {
+        Node child = iter.nextNode();
         entry = new SyndEntryImpl();
         try {
           if (child.hasProperty(title)) entry.setTitle(child.getProperty(title).getString().replaceAll("&nbsp;", " "));
         } catch(PathNotFoundException path) {
           entry.setTitle("") ;
-        }       
+        }
         List enclosureList = new ArrayList() ;
         SyndEnclosure enc = new SyndEnclosureImpl() ;
         Node content = child.getNode(JCR_CONTENT) ;
         String mimeType = content.getProperty(JCR_MIMETYPE).getString() ;
         String ext = resolver.getExtension(mimeType);
         enc.setType(mimeType) ;
-        String path = child.getPath().trim() + "." + ext.trim() ; 
+        String path = child.getPath().trim() + "." + ext.trim() ;
         if(child.hasProperty(LENGTH)) enc.setLength(child.getProperty(LENGTH).getLong()) ;
         String encUrl = rssUrl + path;
         enc.setUrl(encUrl) ;
@@ -352,7 +352,7 @@ public class RSSServiceImpl implements RSSService{
             description.setValue(summaryValue);
             entryInfo.setSubtitle(summaryValue);
             entryInfo.setSummary(summaryValue);
-          }          
+          }
         } catch(PathNotFoundException pnf) {
           description.setValue("");
           entryInfo.setSubtitle("") ;
@@ -381,7 +381,7 @@ public class RSSServiceImpl implements RSSService{
                 itemCat.setSubcategory(subCat) ;
               }
             }else{
-              itemCat.setName(itemCategories) ;          
+              itemCat.setName(itemCategories) ;
             }
             entryInfo.setCategory(itemCat) ;
           }
@@ -403,12 +403,12 @@ public class RSSServiceImpl implements RSSService{
         List<EntryInformation> entryList = new ArrayList<EntryInformation>() ;
         entryList.add(entryInfo) ;
         entry.setModules(entryList) ;
-        entries.add(entry);        
-      }      
-      feed.setEntries(entries);      
-      feed.setEncoding("UTF-8") ;      
-      SyndFeedOutput output = new SyndFeedOutput();      
-      String feedXML = output.outputString(feed);      
+        entries.add(entry);
+      }
+      feed.setEntries(entries);
+      feed.setEncoding("UTF-8") ;
+      SyndFeedOutput output = new SyndFeedOutput();
+      String feedXML = output.outputString(feed);
       storeXML(feedXML, storePath, feedName, repository);
     }catch(Exception e) {
       LOG.error("Unexpected error", e);
@@ -416,7 +416,7 @@ public class RSSServiceImpl implements RSSService{
       if(session != null) session.logout();
     }
   }
-  
+
   /**
    * Create a new node that is using in feed creation
    * @param feedXML           String
@@ -427,9 +427,9 @@ public class RSSServiceImpl implements RSSService{
    * @param repository        String
    *                          The name of repository
    */
-  private void storeXML(String feedXML, String rssStoredPath, String rssNodeName, String repository){   
+  private void storeXML(String feedXML, String rssStoredPath, String rssNodeName, String repository){
     Session session = null;
-    try {      
+    try {
       ManageableRepository manageableRepository = repositoryService_.getRepository(repository) ;
       session = manageableRepository.getSystemSession(manageableRepository.getConfiguration().getDefaultWorkspaceName());
       Node rootNode = session.getRootNode();
@@ -465,14 +465,14 @@ public class RSSServiceImpl implements RSSService{
             break ;
           }
         }
-        if(isEnabledVersion)  rss.checkout();           
-        else  rss.addMixin(MIX_VERSIONABLE) ;                
+        if(isEnabledVersion)  rss.checkout();
+        else  rss.addMixin(MIX_VERSIONABLE) ;
         Node contentNode = rss.getNode(JCR_CONTENT);
         contentNode.setProperty(JCR_DATA, new ByteArrayInputStream(feedXML.getBytes()));
         contentNode.setProperty(JCR_MIMETYPE, mimeType);
         contentNode.setProperty(JCR_LASTMODIFIED, new GregorianCalendar());
         rss.save() ;
-        rss.checkin() ;        
+        rss.checkin() ;
       }
     } catch (Exception e) {
       LOG.error("Unexpected error", e);
@@ -480,5 +480,5 @@ public class RSSServiceImpl implements RSSService{
       if(session != null) session.logout();
     }
   }
-  
+
 }

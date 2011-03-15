@@ -47,16 +47,16 @@ import org.exoplatform.webui.core.lifecycle.UIContainerLifecycle;
  */
 @ComponentConfig(lifecycle = UIContainerLifecycle.class)
 public class UIActionListContainer extends UIContainer {
-  
+
   public UIActionListContainer() throws Exception {
     addChild(UIActionList.class, null, null) ;
   }
-  
+
   public void initEditPopup(Node actionNode) throws Exception {
     removeChildById("editActionPopup") ;
     UIPopupWindow uiPopup = addChild(UIPopupWindow.class, null, "editActionPopup") ;
     UIJCRExplorer uiExplorer = getAncestorOfType(UIJCRExplorer.class) ;
-    Node currentNode = uiExplorer.getCurrentNode() ;    
+    Node currentNode = uiExplorer.getCurrentNode() ;
     UIActionForm uiActionForm = createUIComponent(UIActionForm.class, null, "EditFormAction") ;
     uiActionForm.setWorkspace(currentNode.getSession().getWorkspace().getName()) ;
     uiActionForm.createNewAction(currentNode, actionNode.getPrimaryNodeType().getName(), false) ;
@@ -90,14 +90,14 @@ public class UIActionListContainer extends UIContainer {
               lockTokenString = settingLock.replace("*", membership.getName());
               LockUtil.keepLock(lock, lockTokenString);
             }
-          }      
+          }
           actionNode.save();
           uiActionForm.setIsKeepinglock(true);
         }
       }
     }
     // Update data avoid concurrent modification by other session
-    actionNode.refresh(true);      
+    actionNode.refresh(true);
     // Check again after node is locking by current user or another
     if (LockUtil.getLockTokenOfUser(actionNode) == null) {
       Object[] arg = { actionNode.getPath() };
@@ -107,7 +107,7 @@ public class UIActionListContainer extends UIContainer {
       ((WebuiRequestContext)(WebuiRequestContext.getCurrentInstance())).addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
       return;
     }
-    
+
     uiActionForm.setIsEditInList(true) ;
     uiActionForm.setIsKeepinglock(true);
     uiPopup.setWindowSize(650, 450);
@@ -116,7 +116,7 @@ public class UIActionListContainer extends UIContainer {
     uiPopup.setShow(true) ;
     uiPopup.setResizable(true) ;
   }
-  
+
   public void initPopup(UIComponent uiComp) throws Exception {
     removeChildById("PopupComponent") ;
     UIPopupWindow uiPopup = addChild(UIPopupWindow.class, null, "PopupComponent") ;

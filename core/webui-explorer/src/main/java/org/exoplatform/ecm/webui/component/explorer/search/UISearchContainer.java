@@ -36,7 +36,7 @@ import org.exoplatform.webui.core.lifecycle.UIContainerLifecycle;
  * Created by The eXo Platform SARL
  * Author : Dang Van Minh
  *          minh.dang@exoplatform.com
- * Dec 27, 2006  
+ * Dec 27, 2006
  * 2:04:24 PM
  */
 @ComponentConfig(lifecycle = UIContainerLifecycle.class)
@@ -46,14 +46,14 @@ public class UISearchContainer extends UIContainer {
   final static public String NODETYPE_POPUP = "NodeTypePopup" ;
   final static public String SAVEQUERY_POPUP = "SaveQueryPopup" ;
   final static public String CATEGORY_POPUP = "CategoryPopup" ;
-  
+
   public UISearchContainer() throws Exception {
     addChild(UISimpleSearch.class, null, null) ;
     addChild(UIConstraintsForm.class, null, null).setRendered(false) ;
     UIPopupContainer popup = addChild(UIPopupContainer.class, null, METADATA_POPUP) ;
     popup.getChild(UIPopupWindow.class).setId(METADATA_POPUP + "_Popup") ;
   }
-  
+
   public void initMetadataPopup(String fieldName) throws Exception {
     UIPopupContainer uiPopup = getChild(UIPopupContainer.class) ;
     uiPopup.getChild(UIPopupWindow.class).setId(fieldName + METADATA_POPUP) ;
@@ -61,7 +61,7 @@ public class UISearchContainer extends UIContainer {
     uiSelectForm.setFieldName(fieldName) ;
     uiPopup.activate(uiSelectForm, 500, 450) ;
   }
-  
+
   public void initNodeTypePopup() throws Exception {
     UIPopupContainer uiPopup = getChild(UIPopupContainer.class) ;
     uiPopup.getChild(UIPopupWindow.class).setId(NODETYPE_POPUP) ;
@@ -69,7 +69,7 @@ public class UISearchContainer extends UIContainer {
     uiPopup.activate(uiSelectForm, 400, 400) ;
     uiSelectForm.setRenderNodeTypes() ;
   }
-  
+
   public void initCategoryPopup() throws Exception {
     /* Get UIJCRExplorer object*/
     UIJCRExplorer uiExplorer = getAncestorOfType(UIJCRExplorer.class);
@@ -85,7 +85,7 @@ public class UISearchContainer extends UIContainer {
     uiOneTaxonomySelector.setIsDisable(workspaceName, true);
     String rootTreePath = nodeHierarchyCreator.getJcrPath(BasePath.TAXONOMIES_TREE_STORAGE_PATH);
     Session session = uiExplorer.getSessionByWorkspace(workspaceName);
-    Node rootTree = (Node) session.getItem(rootTreePath);      
+    Node rootTree = (Node) session.getItem(rootTreePath);
     NodeIterator childrenIterator = rootTree.getNodes();
     while (childrenIterator.hasNext()) {
       Node childNode = childrenIterator.nextNode();
@@ -101,7 +101,7 @@ public class UISearchContainer extends UIContainer {
     UIPopupContainer.getChild(UIPopupWindow.class).setId(CATEGORY_POPUP) ;
     UIPopupContainer.activate(uiCategoryManagerSearch, 630, 500);
   }
-  
+
   public void initSaveQueryPopup(String statement, boolean isSimpleSearch, String queryType) throws Exception {
     UIPopupContainer uiPopup = getChild(UIPopupContainer.class) ;
     uiPopup.getChild(UIPopupWindow.class).setId(SAVEQUERY_POPUP) ;

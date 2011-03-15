@@ -25,7 +25,7 @@ import org.exoplatform.services.ecm.dms.BaseDMSTestCase;
  * Created by eXo Platform
  * Author : Nguyen Manh Cuong
  *          manhcuongpt@gmail.com
- * Jun 24, 2009  
+ * Jun 24, 2009
  */
 
 /**

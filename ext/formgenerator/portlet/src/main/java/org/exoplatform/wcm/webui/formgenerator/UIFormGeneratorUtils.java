@@ -32,7 +32,7 @@ public class UIFormGeneratorUtils {
 
   /**
    * Gets the preference repository.
-   * 
+   *
    * @return the preference repository
    */
   public static String getPreferenceRepository() {

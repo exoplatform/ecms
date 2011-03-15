@@ -31,22 +31,22 @@ import org.exoplatform.webui.event.EventListener;
  * Created by The eXo Platform SARL
  * Author : Tran The Trong
  *          trongtt@gmail.com
- * Dec 15, 2006  
+ * Dec 15, 2006
  */
 @ComponentConfig(
     lifecycle = UIApplicationLifecycle.class,
     template =  "app:/groovy/webui/component/UIWorkflowPortlet.gtmpl",
-  	events = {
+    events = {
       @EventConfig(listeners = UIWorkflowAdministrationPortlet.RefreshSessionActionListener.class)
     }
 )
-public class UIWorkflowAdministrationPortlet extends UIPortletApplication {  
+public class UIWorkflowAdministrationPortlet extends UIPortletApplication {
   public UIWorkflowAdministrationPortlet() throws Exception {
     addChild(UIAdministrationManager.class, null, null) ;
     UIPopupWindow popup = addChild(UIPopupWindow.class, null, "AdministrationPopup") ;
     popup.setUIComponent(createUIComponent(UIProcessDetail.class, null, null)) ;
   }
-  
+
   public void initUploadPopup() throws Exception {
     UIPopupWindow uiPopup = getChildById("UploadProcessPopup") ;
     if(uiPopup == null) uiPopup = addChild(UIPopupWindow.class, null, "UploadProcessPopup") ;
@@ -56,7 +56,7 @@ public class UIWorkflowAdministrationPortlet extends UIPortletApplication {
     uiPopup.setRendered(true) ;
     uiPopup.setShow(true) ;
   }
-  
+
   public static class RefreshSessionActionListener extends EventListener<UIWorkflowAdministrationPortlet> {
     public void execute(Event<UIWorkflowAdministrationPortlet> event) throws Exception {
       WebuiRequestContext context = WebuiRequestContext.getCurrentInstance();

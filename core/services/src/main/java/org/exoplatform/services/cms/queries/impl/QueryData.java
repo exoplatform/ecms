@@ -22,30 +22,30 @@ import java.util.List;
  * Created by The eXo Platform SARL
  * Author : Nguyen Quang Hung
  *          nguyenkequanghung@yahoo.com
- * mar 02, 2007 
+ * mar 02, 2007
  */
 public class QueryData{
 
-  private String name ;    
+  private String name ;
   private String language ;
   private String statement ;
   private List<String> permissions ;
   private boolean cachedResult ;
-  
+
   public  QueryData(){}
 
   public String getName() { return this.name ; }
-  public void setName(String name) { this.name = name ; }  
-    
+  public void setName(String name) { this.name = name ; }
+
   public String getLanguage() { return this.language ; }
   public void setLanguage(String l) { this.language = l ; }
-  
+
   public List<String> getPermissions() { return this.permissions ; }
   public void setPermissions(List<String> permission) { this.permissions = permission ; }
 
   public String getStatement() { return this.statement ; }
   public void setStatement(String s) { this.statement = s ; }
-  
+
   public boolean getCacheResult() { return this.cachedResult ; }
   public void setCacheResult(boolean r) { this.cachedResult = r ; }
 }

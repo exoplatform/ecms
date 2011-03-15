@@ -40,7 +40,7 @@ import org.exoplatform.webui.ext.filter.UIExtensionFilters;
  * Created by The eXo Platform SAS
  * Author : eXoPlatform
  *          nicolas.filotto@exoplatform.com
- * 6 mai 2009  
+ * 6 mai 2009
  */
 @ComponentConfig(
      events = {
@@ -50,19 +50,19 @@ import org.exoplatform.webui.ext.filter.UIExtensionFilters;
 public class ManageActionsActionComponent extends UIComponent {
 
   private static final List<UIExtensionFilter> FILTERS = Arrays.asList(new UIExtensionFilter[]{new IsNotRootNodeFilter(), new CanSetPropertyFilter(), new CanAddNodeFilter(), new IsNotLockedFilter(), new IsCheckedOutFilter(), new IsNotEditingDocumentFilter()});
-  
+
   @UIExtensionFilters
   public List<UIExtensionFilter> getFilters() {
     return FILTERS;
   }
-  
+
   public static class ManageActionsActionListener extends UIActionBarActionListener<ManageActionsActionComponent> {
     public void processEvent(Event<ManageActionsActionComponent> event) throws Exception {
       UIJCRExplorer uiExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class);
       UIPopupContainer UIPopupContainer = uiExplorer.getChild(UIPopupContainer.class);
       UIPopupContainer.activate(UIActionManager.class, null, 610, 550);
       uiExplorer.setIsHidePopup(true);
-      event.getRequestContext().addUIComponentToUpdateByAjax(UIPopupContainer);      
+      event.getRequestContext().addUIComponentToUpdateByAjax(UIPopupContainer);
     }
   }
 }

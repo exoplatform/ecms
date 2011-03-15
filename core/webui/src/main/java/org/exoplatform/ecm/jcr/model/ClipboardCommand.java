@@ -21,7 +21,7 @@ public class ClipboardCommand {
   public static final String COPY      = "copy";
 
   public static final String CUT       = "cut";
-  
+
   public static final String ADDSYMLINK = "AddSymLink";
 
   private String             type;

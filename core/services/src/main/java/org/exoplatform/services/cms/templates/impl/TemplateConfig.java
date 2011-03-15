@@ -24,74 +24,74 @@ import org.apache.commons.lang.StringUtils;
 /**
  * @author benjaminmestrallet
  */
-public class TemplateConfig {  
-  
+public class TemplateConfig {
+
   private List<NodeType> nodeTypes = new ArrayList<NodeType>();
-  private List<Template> templates = new ArrayList<Template>();  
-  
+  private List<Template> templates = new ArrayList<Template>();
+
   private List<NodeType> excludeRenderTemplateNodeTypes = new ArrayList<NodeType>();
-  
+
   public List<NodeType> getNodeTypes() {   return this.nodeTypes; }
-  public void setNodeTypes(List<NodeType> s) {  this.nodeTypes = s; }    
-  
+  public void setNodeTypes(List<NodeType> s) {  this.nodeTypes = s; }
+
   public List<Template> getTemplates() {   return this.templates; }
   public void setTemplates(List<Template> s) {  this.templates = s; }
 
   public List<NodeType> getExcludeRenderTemplateNodeTypes() {
     return excludeRenderTemplateNodeTypes;
   }
-  
+
   public void setExcludeRenderTemplateNodeTypes(List<NodeType> excludeRenderTemplateNodeTypes) {
     this.excludeRenderTemplateNodeTypes = excludeRenderTemplateNodeTypes;
   }
-  
+
   static public class Template {
-    
+
     private String templateFile;
     private String roles;
-    
+
     public String[] getParsedRoles() { return StringUtils.split(this.roles, ";"); }
-    
+
     public String getRoles() {return roles; }
     public void setRoles(String roles) { this.roles = roles; }
-    
+
     public String getTemplateFile() { return templateFile; }
-    public void setTemplateFile(String templateFile) { this.templateFile = templateFile; }    
+    public void setTemplateFile(String templateFile) { this.templateFile = templateFile; }
   }
-  
+
   static public class NodeType {
-    
+
     private String nodetypeName;
     private String label;
     private boolean documentTemplate ;
     private List referencedDialog;
     private List referencedView;
     private List referencedSkin;
-    
+
     public NodeType(){
       referencedDialog = new ArrayList();
       referencedView = new ArrayList();
       referencedSkin = new ArrayList();
       documentTemplate = false ;
     }
-    
+
     public String getNodetypeName() { return nodetypeName ; }
     public void setNodetypeName(String s) { nodetypeName = s ; }
-    
+
     public String getLabel() { return label ; }
     public void setLabel(String s) { label = s ; }
-    
+
     public List getReferencedDialog() { return referencedDialog; }
     public void setReferencedDialog(List referencedDialog) { this.referencedDialog = referencedDialog; }
-    
+
     public List getReferencedView() { return referencedView; }
     public void setReferencedView(List referencedView) { this.referencedView = referencedView; }
-    
+
     public List getReferencedSkin() { return referencedSkin; }
     public void setReferencedSkin(List referencedSkin) { this.referencedSkin = referencedSkin; }
-    
-    public boolean getDocumentTemplate() { return this.documentTemplate ; }    
+
+    public boolean getDocumentTemplate() { return this.documentTemplate ; }
     public void setDocumentTemplate( boolean b) { this.documentTemplate = b ; }
   }
-  
+
 }

@@ -51,7 +51,7 @@ import org.exoplatform.webui.form.UIFormStringInput;
  * Author : Ly Dinh Quang
             quang.ly@exoplatform.com
  *          xxx5669@gmail.com
- * Dec 18, 2008  
+ * Dec 18, 2008
  */
 @ComponentConfig (
     lifecycle = UIFormLifecycle.class,
@@ -65,7 +65,7 @@ import org.exoplatform.webui.form.UIFormStringInput;
     }
 )
 public class UIWorkflowPublicationActionForm extends UIForm implements UISelectable {
-  
+
   private Node currentNode;
   private boolean isEdit = false;
   private String repositoryName;
@@ -80,18 +80,18 @@ public class UIWorkflowPublicationActionForm extends UIForm implements UISelecta
   private final String WORKFLOW_DESTPATH = "workflow_destpath";
   private final String WORKFLOW_BACUP = "workflow_backuppath";
   private RepositoryService repositoryService;
-  
+
   private final String FIELD_VALIDATOR_EDIT = "fieldValidatorEdit";
   private final String FIELD_DESTPATH_EDIT = "fieldDestPathEdit";
   private final String FIELD_BACKUPWORKSPACE_EDIT = "fieldBackupWorkspaceEdit";
   private final String FIELD_BACKUP_EDIT = "fieldBackupEdit";
   private static final Log LOG  = ExoLogger.getLogger(UIWorkflowPublicationActionForm.class);
-  
+
   public UIWorkflowPublicationActionForm() throws Exception {
     repositoryService = getApplicationComponent(RepositoryService.class);
     repositoryName = repositoryService.getDefaultRepository().getConfiguration().getName();
   }
-  
+
   private void initSelectBox(UIFormSelectBox selectBox) throws Exception {
     String[] wsNames = repositoryService.getRepository(repositoryName).getWorkspaceNames();
     List<SelectItemOption<String>> workspaceList = new ArrayList<SelectItemOption<String>>();
@@ -100,44 +100,44 @@ public class UIWorkflowPublicationActionForm extends UIForm implements UISelecta
     }
     selectBox.setOptions(workspaceList);
   }
-  
+
   public void setWorkspaceName(String workspace) {
     workspaceName = workspace;
   }
-  
+
   public String getWorkspaceName() {
     return workspaceName;
   }
-  
+
   public Node getCurrentNode() {
     return currentNode;
   }
-  
+
   public void setIsEdit(boolean isEdit_) { isEdit = isEdit_; }
-  
+
   public boolean getIsEdit() {
     return isEdit;
   }
-  
+
   public Session getSession() throws Exception {
     return getCurrentNode().getSession();
   }
-  
+
   public String getLifecycle() {
     return lifecycle;
   }
-  
+
   public WorkflowPublicationConfig getConfig() {
     return WorkflowPublicationPlugin.config;
   }
-  
+
   public String getLinkStateImage (Locale locale) {
     try {
       DownloadService dS = getApplicationComponent(DownloadService.class);
       PublicationService service = getApplicationComponent(PublicationService.class);
 
       byte[] bytes = service.getStateImage(getCurrentNode(),locale);
-      InputStream iS = new ByteArrayInputStream(bytes);    
+      InputStream iS = new ByteArrayInputStream(bytes);
       String id = dS.addDownloadResource(new InputStreamDownloadResource(iS, "image/gif"));
       return dS.getDownloadLink(id);
     } catch (Exception e) {
@@ -145,18 +145,18 @@ public class UIWorkflowPublicationActionForm extends UIForm implements UISelecta
       return "Error in getStateImage";
     }
   }
-  
+
   public void createNewAction(Node node, String lifecycle_, boolean isEdit_) throws Exception {
     reset();
     currentNode = node;
     lifecycle = lifecycle_;
     isEdit = isEdit_;
     setActions(new String[]{"Save", "Back"});
-    
+
     if (WorkflowPublicationPlugin.config.isDestPath_currentFolder()) {
       WorkflowPublicationPlugin.config.setDestPath(currentNode.getParent().getPath());
-    } 
-    
+    }
+
     if (WorkflowPublicationPlugin.config.isEditable()) {
       UIFormInputSetWithAction inputSetValidator = new UIFormInputSetWithAction(WORKFLOW_VALIDATOR);
       UIFormStringInput validatorStringInput = new UIFormStringInput(FIELD_VALIDATOR, FIELD_VALIDATOR, null);
@@ -165,12 +165,12 @@ public class UIWorkflowPublicationActionForm extends UIForm implements UISelecta
       inputSetValidator.addUIFormInput(validatorStringInput);
       inputSetValidator.setActionInfo(FIELD_VALIDATOR, new String[] {"AddPermission"});
       addUIComponentInput(inputSetValidator);
-      
+
       UIFormSelectBox selectBoxWorkspace = new UIFormSelectBox(FIELD_WORKSPACE, FIELD_WORKSPACE, null);
       initSelectBox(selectBoxWorkspace);
       selectBoxWorkspace.setValue(WorkflowPublicationPlugin.config.getTo_workspace());
       addUIFormInput(selectBoxWorkspace);
-      
+
       UIFormInputSetWithAction inputSetDestPath = new UIFormInputSetWithAction(WORKFLOW_DESTPATH);
       UIFormStringInput destPathStringInput = new UIFormStringInput(FIELD_DESTPATH, FIELD_DESTPATH, null);
       destPathStringInput.setEditable(false);
@@ -178,12 +178,12 @@ public class UIWorkflowPublicationActionForm extends UIForm implements UISelecta
       inputSetDestPath.addUIFormInput(destPathStringInput);
       inputSetDestPath.setActionInfo(FIELD_DESTPATH, new String[] {"AddDestPath"});
       addUIComponentInput(inputSetDestPath);
-      
+
       UIFormSelectBox selectBoxBackupWorkspace = new UIFormSelectBox(FIELD_BACKUP_WORKSPACE, FIELD_BACKUP_WORKSPACE, null);
       initSelectBox(selectBoxBackupWorkspace);
       selectBoxBackupWorkspace.setValue(WorkflowPublicationPlugin.config.getBackupWorkflow());
       addUIFormInput(selectBoxBackupWorkspace);
-      
+
       UIFormInputSetWithAction inputSetBackup = new UIFormInputSetWithAction(WORKFLOW_BACUP);
       UIFormStringInput backupPathStringInput = new UIFormStringInput(FIELD_BACKUP, FIELD_BACKUP, null);
       backupPathStringInput.setEditable(false);
@@ -196,31 +196,39 @@ public class UIWorkflowPublicationActionForm extends UIForm implements UISelecta
       validatorStringInput.setEditable(false);
       validatorStringInput.setValue(WorkflowPublicationPlugin.config.getValidator());
       addUIFormInput(validatorStringInput);
-      
-      UIFormSelectBox selectBoxWorkspace = new UIFormSelectBox(FIELD_WORKSPACE, FIELD_WORKSPACE, null);
+
+      UIFormSelectBox selectBoxWorkspace = new UIFormSelectBox(FIELD_WORKSPACE,
+                                                               FIELD_WORKSPACE,
+                                                               null);
       initSelectBox(selectBoxWorkspace);
       selectBoxWorkspace.setValue(WorkflowPublicationPlugin.config.getTo_workspace());
       selectBoxWorkspace.setDisabled(true);
       addUIFormInput(selectBoxWorkspace);
-      
-      UIFormStringInput destPathStringInput = new UIFormStringInput(FIELD_DESTPATH_EDIT, FIELD_DESTPATH_EDIT, null);
+
+      UIFormStringInput destPathStringInput = new UIFormStringInput(FIELD_DESTPATH_EDIT,
+                                                                    FIELD_DESTPATH_EDIT,
+                                                                    null);
       destPathStringInput.setEditable(false);
       destPathStringInput.setValue(WorkflowPublicationPlugin.config.getDestPath());
       addUIFormInput(destPathStringInput);
-      
-      UIFormSelectBox selectBoxBackupWorkspace = new UIFormSelectBox(FIELD_BACKUPWORKSPACE_EDIT, FIELD_BACKUPWORKSPACE_EDIT, null);
+
+      UIFormSelectBox selectBoxBackupWorkspace = new UIFormSelectBox(FIELD_BACKUPWORKSPACE_EDIT,
+                                                                     FIELD_BACKUPWORKSPACE_EDIT,
+                                                                     null);
       initSelectBox(selectBoxBackupWorkspace);
       selectBoxBackupWorkspace.setValue(WorkflowPublicationPlugin.config.getBackupWorkflow());
       selectBoxBackupWorkspace.setDisabled(true);
       addUIFormInput(selectBoxBackupWorkspace);
-      
-      UIFormStringInput backupPathStringInput = new UIFormStringInput(FIELD_BACKUP_EDIT, FIELD_BACKUP_EDIT, null);
+
+      UIFormStringInput backupPathStringInput = new UIFormStringInput(FIELD_BACKUP_EDIT,
+                                                                      FIELD_BACKUP_EDIT,
+                                                                      null);
       backupPathStringInput.setEditable(false);
       backupPathStringInput.setValue(WorkflowPublicationPlugin.config.getBackupPath());
       addUIFormInput(backupPathStringInput);
     }
   }
-  
+
   public void doSelect(String selectField, Object value) throws Exception {
     getUIStringInput(selectField).setValue(value.toString());
     UIContainer container = null;
@@ -233,17 +241,17 @@ public class UIWorkflowPublicationActionForm extends UIForm implements UISelecta
       container.removeChildById(WorkflowPublicationPlugin.POPUP_ID);
     }
   }
-  
-  public String getRepositoryName() throws Exception { 
+
+  public String getRepositoryName() throws Exception {
     return repositoryName;
   }
-  
+
   public void initPopupPermission(UIContainer uiContainer, String membership) throws Exception {
-    if (uiContainer.getChildById(WorkflowPublicationPlugin.POPUP_ID) != null) 
+    if (uiContainer.getChildById(WorkflowPublicationPlugin.POPUP_ID) != null)
       uiContainer.removeChildById(WorkflowPublicationPlugin.POPUP_ID);
     UIPopupWindow uiPopup = uiContainer.addChild(UIPopupWindow.class, null, WorkflowPublicationPlugin.POPUP_ID);
     uiPopup.setWindowSize(560, 350);
-    UIPermissionSelector uiECMPermission = 
+    UIPermissionSelector uiECMPermission =
       uiContainer.createUIComponent(UIPermissionSelector.class, null, null);
     uiECMPermission.setSelectedMembership(true);
     if (membership != null && membership.indexOf(":/") > -1) {
@@ -252,7 +260,7 @@ public class UIWorkflowPublicationActionForm extends UIForm implements UISelecta
     }
     uiPopup.setUIComponent(uiECMPermission);
     UIWorkflowPublicationActionForm workflowForm = findFirstComponentOfType(UIWorkflowPublicationActionForm.class);
-    
+
     if (WorkflowPublicationPlugin.config.isEditable()) {
       uiECMPermission.setSourceComponent(workflowForm, new String[] {FIELD_VALIDATOR});
     } else {
@@ -260,15 +268,16 @@ public class UIWorkflowPublicationActionForm extends UIForm implements UISelecta
     }
     uiPopup.setShow(true);
   }
-  
+
   private String getSystemWorkspaceName(String repository) throws RepositoryException, RepositoryConfigurationException {
     ManageableRepository manageableRepository = repositoryService.getRepository(repository);
     return manageableRepository.getConfiguration().getSystemWorkspaceName();
   }
-  
+
   public String getLabel(String fieldName, String type) throws Exception {
     PublicationService publicationService = getApplicationComponent(PublicationService.class);
-    WorkflowPublicationPlugin plugin = (WorkflowPublicationPlugin) publicationService.getPublicationPlugins().get(getLifecycle());
+    WorkflowPublicationPlugin plugin = (WorkflowPublicationPlugin) publicationService.getPublicationPlugins()
+                                                                                     .get(getLifecycle());
     Locale locale = Util.getUIPortal().getAncestorOfType(UIPortalApplication.class).getLocale();
     try {
       return plugin.getLocalizedAndSubstituteMessage(locale, getId() + "." + type + "." + fieldName, null);
@@ -276,14 +285,18 @@ public class UIWorkflowPublicationActionForm extends UIForm implements UISelecta
       return fieldName;
     }
   }
-  
-  public void initPopupJCRBrowser(UIContainer uiContainer, String workspace, boolean isDisable, String sourceComponent) throws Exception {
-    if (uiContainer.getChildById(WorkflowPublicationPlugin.POPUP_ID) != null) 
+
+  public void initPopupJCRBrowser(UIContainer uiContainer,
+                                  String workspace,
+                                  boolean isDisable,
+                                  String sourceComponent) throws Exception {
+
+    if (uiContainer.getChildById(WorkflowPublicationPlugin.POPUP_ID) != null)
       uiContainer.removeChildById(WorkflowPublicationPlugin.POPUP_ID);
     String repository = getRepositoryName();
     UIPopupWindow uiPopup = uiContainer.addChild(UIPopupWindow.class, null, WorkflowPublicationPlugin.POPUP_ID);
     uiPopup.setWindowSize(610, 300);
-    UIOneNodePathSelector uiOneNodePathSelector = 
+    UIOneNodePathSelector uiOneNodePathSelector =
       uiContainer.createUIComponent(UIOneNodePathSelector.class, null, null);
     uiOneNodePathSelector.setIsDisable(workspace, isDisable) ;
     uiOneNodePathSelector.setShowRootPathSelect(true) ;
@@ -300,7 +313,7 @@ public class UIWorkflowPublicationActionForm extends UIForm implements UISelecta
     uiOneNodePathSelector.setSourceComponent(workflowForm, new String[] {sourceComponent}) ;
     uiPopup.setShow(true) ;
   }
-  
+
   static public class SaveActionListener extends EventListener<UIWorkflowPublicationActionForm> {
     public void execute(Event<UIWorkflowPublicationActionForm> event) throws Exception {
       UIWorkflowPublicationActionForm workflowForm = event.getSource();
@@ -309,12 +322,13 @@ public class UIWorkflowPublicationActionForm extends UIForm implements UISelecta
       destWorkspace = workflowForm.getUIFormSelectBox(workflowForm.FIELD_WORKSPACE).getValue();
       if (WorkflowPublicationPlugin.config.isEditable()) {
         validator = workflowForm.getUIStringInput(workflowForm.FIELD_VALIDATOR).getValue();
-        destPath = workflowForm.getUIStringInput(workflowForm.FIELD_DESTPATH).getValue(); 
-        backupPath = workflowForm.getUIStringInput(workflowForm.FIELD_BACKUP).getValue(); 
-        backupWorkspace = workflowForm.getUIStringInput(workflowForm.FIELD_BACKUP_WORKSPACE).getValue(); 
-        if (validator == null || validator.trim().equals("") || destPath == null || destPath.trim().equals("")
-            || backupPath == null || backupPath.trim().equals("")) {
-          WorkflowPublicationPlugin plugin = (WorkflowPublicationPlugin) publicationService.getPublicationPlugins().get(WorkflowPublicationPlugin.WORKFLOW);
+        destPath = workflowForm.getUIStringInput(workflowForm.FIELD_DESTPATH).getValue();
+        backupPath = workflowForm.getUIStringInput(workflowForm.FIELD_BACKUP).getValue();
+        backupWorkspace = workflowForm.getUIStringInput(workflowForm.FIELD_BACKUP_WORKSPACE).getValue();
+        if (validator == null || validator.trim().equals("") || destPath == null
+            || destPath.trim().equals("") || backupPath == null || backupPath.trim().equals("")) {
+          WorkflowPublicationPlugin plugin = (WorkflowPublicationPlugin) publicationService.getPublicationPlugins()
+                                                                                           .get(WorkflowPublicationPlugin.WORKFLOW);
           Locale locale = Util.getUIPortal().getAncestorOfType(UIPortalApplication.class).getLocale();
           String msg = plugin.getLocalizedAndSubstituteMessage(locale, "UIWorkflowPublicationActionForm.msg.fillfield", null);
           UIApplication uiApp = workflowForm.getAncestorOfType(UIApplication.class);
@@ -324,20 +338,23 @@ public class UIWorkflowPublicationActionForm extends UIForm implements UISelecta
         }
       } else {
         validator = workflowForm.getUIStringInput(workflowForm.FIELD_VALIDATOR_EDIT).getValue();
-        destPath = workflowForm.getUIStringInput(workflowForm.FIELD_DESTPATH_EDIT).getValue(); 
-        backupPath = workflowForm.getUIStringInput(workflowForm.FIELD_BACKUP_EDIT).getValue(); 
-        backupWorkspace = workflowForm.getUIStringInput(workflowForm.FIELD_BACKUPWORKSPACE_EDIT).getValue(); 
+        destPath = workflowForm.getUIStringInput(workflowForm.FIELD_DESTPATH_EDIT).getValue();
+        backupPath = workflowForm.getUIStringInput(workflowForm.FIELD_BACKUP_EDIT).getValue();
+        backupWorkspace = workflowForm.getUIStringInput(workflowForm.FIELD_BACKUPWORKSPACE_EDIT).getValue();
       }
-      
+
       HashMap<String, String> contextMap = new HashMap<String, String>();
       contextMap.put(WorkflowPublicationPlugin.VALIDATOR, validator);
       contextMap.put(WorkflowPublicationPlugin.DEST_WORKSPACE, destWorkspace);
       contextMap.put(WorkflowPublicationPlugin.DESTPATH, destPath);
       contextMap.put(WorkflowPublicationPlugin.BACUP_PATH, backupPath);
       contextMap.put(WorkflowPublicationPlugin.BACUP_WORKSPACE, backupWorkspace);
-      
-      publicationService.getPublicationPlugins().get(workflowForm.getLifecycle()).changeState(workflowForm.getCurrentNode(), 
-          WorkflowPublicationPlugin.CONTENT_VALIDATION, contextMap);  
+
+      publicationService.getPublicationPlugins()
+                        .get(workflowForm.getLifecycle())
+                        .changeState(workflowForm.getCurrentNode(),
+                                     WorkflowPublicationPlugin.CONTENT_VALIDATION,
+                                     contextMap);
       if (workflowForm.getIsEdit()) {
         UIPopupWindow popupWindow = workflowForm.getParent();
         UIContainer uicontainer = popupWindow.getParent();
@@ -356,7 +373,7 @@ public class UIWorkflowPublicationActionForm extends UIForm implements UISelecta
       }
     }
   }
-  
+
   @SuppressWarnings("unchecked")
   static public class AddPermissionActionListener extends EventListener<UIWorkflowPublicationActionForm> {
     public void execute(Event<UIWorkflowPublicationActionForm> event) throws Exception {
@@ -368,7 +385,7 @@ public class UIWorkflowPublicationActionForm extends UIForm implements UISelecta
       } else {
         membership = workflowForm.getUIStringInput(workflowForm.FIELD_VALIDATOR_EDIT).getValue();
       }
-      
+
       if (workflowForm.getIsEdit()) {
         UIPopupWindow popupWindow = workflowForm.getParent();
         uiContainer = popupWindow.getParent();
@@ -399,7 +416,7 @@ public class UIWorkflowPublicationActionForm extends UIForm implements UISelecta
       }
     }
   }
-  
+
   static public class AddBackupPathActionListener extends EventListener<UIWorkflowPublicationActionForm> {
     public void execute(Event<UIWorkflowPublicationActionForm> event) throws Exception {
       UIWorkflowPublicationActionForm workflowForm = event.getSource();
@@ -417,7 +434,7 @@ public class UIWorkflowPublicationActionForm extends UIForm implements UISelecta
       }
     }
   }
-  
+
   static public class BackActionListener extends EventListener<UIWorkflowPublicationActionForm> {
     public void execute(Event<UIWorkflowPublicationActionForm> event) throws Exception {
       UIWorkflowPublicationActionForm uiForm = event.getSource();
@@ -436,42 +453,5 @@ public class UIWorkflowPublicationActionForm extends UIForm implements UISelecta
       popupWindow.setRendered(false);
       event.getRequestContext().addUIComponentToUpdateByAjax(popupWindow.getParent());
     }
-  }  
-  
-//  static public class UnsubcriberLifeCycleActionListener extends EventListener<UIWorkflowPublicationActionForm> {
-//    public void execute(Event<UIWorkflowPublicationActionForm> event) throws Exception {
-//      UIWorkflowPublicationActionForm actionForm = event.getSource();
-//      Node selectedNode = actionForm.getCurrentNode();
-//      UIApplication uiApp = actionForm.getAncestorOfType(UIApplication.class);
-//      PublicationService publicationService = actionForm.getApplicationComponent(PublicationService.class);
-//      WorkflowPublicationPlugin plugin = (WorkflowPublicationPlugin) publicationService.getPublicationPlugins().get(WorkflowPublicationPlugin.WORKFLOW);
-//      Locale locale = Util.getUIPortal().getAncestorOfType(UIPortalApplication.class).getLocale();
-//      
-//      if (!selectedNode.isCheckedOut()) {   
-//        String msg = plugin.getLocalizedAndSubstituteMessage(locale, "UIWorkflowPublicationActionForm.msg.node-checkedin", null);
-//        uiApp.addMessage(new ApplicationMessage(msg, null, ApplicationMessage.WARNING));
-//        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
-//        return;
-//      }
-//      
-//      if (publicationService.isUnsubcribeLifecycle(selectedNode)) {
-//        String msg = plugin.getLocalizedAndSubstituteMessage(locale, "UIWorkflowPublicationActionForm.msg.unsubcriber-lifecycle", null);
-//        uiApp.addMessage(new ApplicationMessage(msg, null, ApplicationMessage.WARNING));
-//        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
-//        return;
-//      }
-//      UIContainer container = actionForm.getParent();
-//      UIPopupWindow popupWindow = (UIPopupWindow)container.getParent();
-//      popupWindow.setRendered(false);
-//      event.getRequestContext().addUIComponentToUpdateByAjax(popupWindow.getParent());
-//      /*
-//       * Unsubcribe lifecycle and display message to inform
-//       */
-//      publicationService.unsubcribeLifecycle(selectedNode);
-//      String msg = plugin.getLocalizedAndSubstituteMessage(locale, "UIWorkflowPublicationActionForm.msg.unsubcriber-lifecycle-finish", null);
-//      uiApp.addMessage(new ApplicationMessage(msg, null));
-//      event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
-//      return;
-//    }
-//  }
+  }
 }

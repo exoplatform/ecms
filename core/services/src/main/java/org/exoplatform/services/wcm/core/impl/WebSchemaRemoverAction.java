@@ -30,25 +30,25 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
  * Created by The eXo Platform SAS
- * Author : Hoa Pham	
+ * Author : Hoa Pham
  *          hoa.pham@exoplatform.com
- * Sep 17, 2008  
+ * Sep 17, 2008
  */
 public class WebSchemaRemoverAction implements Action{
 
   private Log log = ExoLogger.getLogger("wcm:WebSchemaRemoverAction");
   public boolean execute(Context context) throws Exception {
-   Node node = (Node)context.get("currentItem");   
+   Node node = (Node)context.get("currentItem");
     ExoContainer container = ExoContainerContext.getCurrentContainer();
-    WebSchemaConfigService schemaConfigService = 
-      (WebSchemaConfigService) container.getComponentInstanceOfType(WebSchemaConfigService.class);    
+    WebSchemaConfigService schemaConfigService =
+      (WebSchemaConfigService) container.getComponentInstanceOfType(WebSchemaConfigService.class);
     SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
-    try {      
+    try {
       schemaConfigService.updateSchemaOnRemove(sessionProvider, node);
-    } catch (Exception e) { 
+    } catch (Exception e) {
       log.error("Error when update web schema before remove node: " + node.getPath() , e);
-    }       
-    return false;    
+    }
+    return false;
   }
 
 }

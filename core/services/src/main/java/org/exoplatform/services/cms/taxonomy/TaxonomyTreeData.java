@@ -44,12 +44,12 @@ public class TaxonomyTreeData implements Comparable<TaxonomyTreeData> {
 
   private String             taxoTreeActionTypeName;
 
-  private boolean            edit               = false; 
+  private boolean            edit               = false;
 
   public static final String ACTION_TAXONOMY_TREE = "exo:taxonomyAction";
-  
+
   public TaxonomyTreeData() {
-    
+
   }
 
   /**
@@ -61,7 +61,7 @@ public class TaxonomyTreeData implements Comparable<TaxonomyTreeData> {
 
   /**
    * Register repository to drive
-   * 
+   *
    * @param rp repository name
    */
   public void setRepository(String rp) {
@@ -118,14 +118,14 @@ public class TaxonomyTreeData implements Comparable<TaxonomyTreeData> {
   public void setTaxoTreeHomePath(String taxoTreeHomePath) {
     this.taxoTreeHomePath = taxoTreeHomePath;
   }
-  
+
   /**
    * get taxonomy tree name
    */
   public String getTaxoTreeName() {
     return taxoTreeName;
   }
-  
+
   /**
    * Register taxonomy tree name
    * @param name the name of taxonomy tree
@@ -167,7 +167,7 @@ public class TaxonomyTreeData implements Comparable<TaxonomyTreeData> {
   public String getTaxoTreeActionName() {
     return taxoTreeActionName;
   }
-  
+
   /**
    * Set action name of Taxonomy tree
    * @param taxoTreeActionName
@@ -175,7 +175,7 @@ public class TaxonomyTreeData implements Comparable<TaxonomyTreeData> {
   public void setTaxoTreeActionName(String taxoTreeActionName) {
     this.taxoTreeActionName = taxoTreeActionName;
   }
-  
+
   public String getTaxoTreeActionTypeName() {
     return taxoTreeActionTypeName;
   }

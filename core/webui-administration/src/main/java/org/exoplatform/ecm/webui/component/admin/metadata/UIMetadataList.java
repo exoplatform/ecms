@@ -41,7 +41,7 @@ import org.exoplatform.webui.event.EventListener;
  * Author : Dang Van Minh
  *          minh.dang@exoplatform.com
  * Sep 19, 2006
- * 11:57:24 AM 
+ * 11:57:24 AM
  */
 @ComponentConfig(
     template = "app:/groovy/webui/component/admin/metadata/UIMetadataList.gtmpl",
@@ -64,7 +64,7 @@ public class UIMetadataList extends UIContainer {
     ObjectPageList pageList = new ObjectPageList(getAllMetadatas(), 10) ;
     uiPageIterator.setPageList(pageList) ;
   }
-  
+
   @SuppressWarnings("unchecked")
 
   public List<Metadata> getAllMetadatas() throws Exception {
@@ -91,13 +91,13 @@ public class UIMetadataList extends UIContainer {
 //      PropertyDefinition def =
 //        ((ExtendedNodeType)nt).getPropertyDefinitions(INTERNAL_USE).getAnyDefinition() ;
     }
-    return metadatas ; 
+    return metadatas ;
   }
-  
+
   public List getListMetadata() throws Exception {
     return getChild(UIPageIterator.class).getCurrentPageData() ;
   }
-  
+
   static public class ViewActionListener extends EventListener<UIMetadataList> {
     public void execute(Event<UIMetadataList> event) throws Exception {
       UIMetadataList uiMetaList = event.getSource() ;
@@ -108,7 +108,7 @@ public class UIMetadataList extends UIContainer {
       event.getRequestContext().addUIComponentToUpdateByAjax(uiManager) ;
     }
   }
-  
+
   static public class EditActionListener extends EventListener<UIMetadataList> {
     public void execute(Event<UIMetadataList> event) throws Exception {
       UIMetadataList uiMetaList = event.getSource() ;
@@ -120,7 +120,7 @@ public class UIMetadataList extends UIContainer {
       event.getRequestContext().addUIComponentToUpdateByAjax(uiManager) ;
     }
   }
-  
+
   static public class DeleteActionListener extends EventListener<UIMetadataList> {
     public void execute(Event<UIMetadataList> event) throws Exception {
       UIMetadataList uiMetaList = event.getSource() ;
@@ -141,15 +141,15 @@ public class UIMetadataList extends UIContainer {
     private String name ;
     private String internalUse ;
     private boolean hasTemplate = false;
-    
+
     public Metadata() {}
-    
+
     public String getName() { return name ;}
     public void setName(String n) { name = n ; }
-    
+
     public String getInternalUse() { return internalUse ;}
     public void setInternalUse(String inter) { internalUse = inter ; }
-    
+
     public boolean hasTemplate() { return hasTemplate ; }
     public void isTemplate(boolean isTemplate) { hasTemplate = isTemplate ; }
   }

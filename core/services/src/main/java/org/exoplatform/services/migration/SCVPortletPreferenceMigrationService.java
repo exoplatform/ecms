@@ -37,20 +37,20 @@ import org.picocontainer.Startable;
  * Created by The eXo Platform SARL
  * Author : Nguyen Anh Vu
  *          vu.nguyen@exoplatform.com
- * Dec 15, 2010  
+ * Dec 15, 2010
  */
 public class SCVPortletPreferenceMigrationService implements Startable {
 
   private static final String BASE_PATH_NAME = "basePath";
   private static final String BASE_PATH_VALUE = "detail";
-  
+
   private static final String SHOW_SCV_WITH_NAME = "showScvWith";
   private static final String SHOW_SCV_WITH_VALUE = "content-id";
   private static final String MOP_PORTLET_PREFERENCE = "mop:portletpreference";
-  
+
   private RepositoryService repoService_;
-  private Log log = ExoLogger.getLogger(this.getClass());  
-  
+  private Log log = ExoLogger.getLogger(this.getClass());
+
   public SCVPortletPreferenceMigrationService(RepositoryService repoService) {
     this.repoService_ = repoService;
   }
@@ -89,9 +89,9 @@ public class SCVPortletPreferenceMigrationService implements Startable {
         sessionProvider.close();
       }
     }
-        
+
   }
-  
+
   private void addNode(Node stateNode, String nodeName, String value) {
     try {
       if (!stateNode.hasNode(nodeName)) {
@@ -108,6 +108,5 @@ public class SCVPortletPreferenceMigrationService implements Startable {
 
   @Override
   public void stop() {
-    // TODO Auto-generated method stub
   }
 }

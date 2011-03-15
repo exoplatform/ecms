@@ -26,14 +26,14 @@ import org.exoplatform.ecm.jcr.model.ExtensiblePageList;
  * Created by The eXo Platform SARL
  * Author : Dang Van Minh
  *          minh.dang@exoplatform.com
- * Jun 11, 2008  
+ * Jun 11, 2008
  */
 public class SearchResultPageList extends ExtensiblePageList {
-  
+
   private QueryResult queryResult_ ;
   private List listNodes_  ;
   private boolean isEndOfIterator_ = false ;
-  
+
   public SearchResultPageList(QueryResult queryResult, List listNodes, int pageSize, boolean isEndOfIterator) {
     super(pageSize) ;
     isEndOfIterator_ = isEndOfIterator ;
@@ -46,12 +46,12 @@ public class SearchResultPageList extends ExtensiblePageList {
       setAvailablePage(0) ;
     }
   }
-  
+
   @SuppressWarnings("unused")
   protected void populateCurrentPage(int page) throws Exception  {
     currentListPage_ = listNodes_.subList(getFrom(), getTo()) ;
   }
-  
+
   public List getAll() throws Exception  { return listNodes_ ; }
 
   @Override
@@ -65,7 +65,7 @@ public class SearchResultPageList extends ExtensiblePageList {
 
   @Override
   public int getRealNumberNodes() {
-    if(isEndOfIterator_) return listNodes_.size() ; 
+    if(isEndOfIterator_) return listNodes_.size() ;
     return 0;
   }
 

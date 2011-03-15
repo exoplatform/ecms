@@ -26,58 +26,58 @@ public class UIFormGeneratorConstant {
 
   /** The Constant PREFERENCE_REPOSITORY. */
   public static final String PREFERENCE_REPOSITORY          = "repository";
-  
+
   /** The Constant LABEL. */
   public static final String LABEL                          = "label";
 
   /** The Constant INPUT. */
   public static final String INPUT                          = "input";
-  
+
   /** The Constant TEXTAREA. */
   public static final String TEXTAREA                       = "textarea";
-  
+
   /** The Constant UPLOAD. */
   public static final String UPLOAD                         = "upload";
-  
+
   /** The Constant RADIO. */
   public static final String RADIO                          = "radio";
-  
+
   /** The Constant CHECKBOX. */
   public static final String CHECKBOX                       = "checkbox";
-  
+
   /** The Constant SELECT. */
   public static final String SELECT                         = "select";
-  
+
   /** The Constant DATE. */
   public static final String DATE                           = "date";
-  
+
   /** The Constant WYSIWYG. */
   public static final String WYSIWYG                        = "wysiwyg";
-  
+
   /** The Constant FORM_GENERATOR_TABPANE. */
   public static final String FORM_GENERATOR_TABPANE         = "UIFormGeneratorTabPane";
-  
+
   /** The Constant FORM_GENERATOR_GENERAL_TAB. */
   public static final String FORM_GENERATOR_GENERAL_TAB     = "UIFormGeneratorGeneralTab";
-  
+
   /** The Constant FORM_GENERATOR_OPTIONS_TAB. */
   public static final String FORM_GENERATOR_OPTIONS_TAB     = "UIFormGeneratorOptionsTab";
-  
+
   /** The Constant NAME_FORM_STRING_INPUT. */
   public static final String NAME_FORM_STRING_INPUT         = "FormGeneratorName";
-  
+
   /** The Constant DESCRIPTION_FORM_WYSIWYG_INPUT. */
   public static final String DESCRIPTION_FORM_WYSIWYG_INPUT = "UIFormGeneratorDescriptionFormWYSIWYGInput";
-  
+
   /** The Constant ICON_FORM_UPLOAD_INPUT. */
   public static final String ICON_FORM_UPLOAD_INPUT         = "UIFormGeneratorIconFormUploadInput";
-  
+
   /** The Constant JSON_OBJECT_FORM_GENERATOR. */
   public static final String JSON_OBJECT_FORM_GENERATOR         = "UIFormGeneratorJsonObjectStringInput";
-  
+
   /** The Constant PRE_CREATE_NODETYPE_EVENT. */
   public static final String PRE_CREATE_NODETYPE_EVENT = "FormGenerator.event.preCreate".intern();
-  
+
   /** The Constant POST_CREATE_NODETYPE_EVENT. */
   public static final String POST_CREATE_NODETYPE_EVENT = "FormGenerator.event.postCreate".intern();
 }

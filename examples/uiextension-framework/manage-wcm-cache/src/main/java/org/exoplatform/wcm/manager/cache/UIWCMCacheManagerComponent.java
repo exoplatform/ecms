@@ -11,7 +11,7 @@ import org.exoplatform.webui.ext.manager.UIAbstractManagerComponent;
 /**
  * Created by The eXo Platform SAS
  * Author : lamptdev@gmail.com
- * 20 july 2010  
+ * 20 july 2010
  */
 @ComponentConfig(
     events = {
@@ -20,9 +20,9 @@ import org.exoplatform.webui.ext.manager.UIAbstractManagerComponent;
 )
 
 public class UIWCMCacheManagerComponent extends UIAbstractManagerComponent{
-	
-	public static class UIWCMCacheManagerActionListener extends UIECMAdminControlPanelActionListener<UIWCMCacheManagerComponent> {
-    public void processEvent(Event<UIWCMCacheManagerComponent> event) throws Exception {    	          	
+
+  public static class UIWCMCacheManagerActionListener extends UIECMAdminControlPanelActionListener<UIWCMCacheManagerComponent> {
+    public void processEvent(Event<UIWCMCacheManagerComponent> event) throws Exception {
       UIECMAdminPortlet portlet = event.getSource().getAncestorOfType(UIECMAdminPortlet.class);
       UIECMAdminWorkingArea uiWorkingArea = portlet.getChild(UIECMAdminWorkingArea.class);
       uiWorkingArea.getChild(UIWCMCacheManagerPanel.class).update() ;
@@ -30,9 +30,9 @@ public class UIWCMCacheManagerComponent extends UIAbstractManagerComponent{
       event.getRequestContext().addUIComponentToUpdateByAjax(uiWorkingArea);
     }
   }
-	
-	@Override
-  public Class<? extends UIAbstractManager> getUIAbstractManagerClass() {    
-		return UIWCMCacheManagerPanel.class;
-  }  
+
+  @Override
+  public Class<? extends UIAbstractManager> getUIAbstractManagerClass() {
+    return UIWCMCacheManagerPanel.class;
+  }
 }

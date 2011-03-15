@@ -26,9 +26,9 @@ import org.exoplatform.services.listener.ListenerService;
 
 /**
  * Created by The eXo Platform SAS
- * Author : Hoa Pham	
+ * Author : Hoa Pham
  *          hoa.phamvu@exoplatform.com
- * Oct 22, 2008  
+ * Oct 22, 2008
  */
 public class CreatePortalArtifactsServiceImpl implements CreatePortalArtifactsService {
 
@@ -38,7 +38,7 @@ public class CreatePortalArtifactsServiceImpl implements CreatePortalArtifactsSe
   private ListenerService listenerService;
 
   @SuppressWarnings("unchecked")
-  public CreatePortalArtifactsServiceImpl(InitParams initParams, ListenerService listenerService) {     
+  public CreatePortalArtifactsServiceImpl(InitParams initParams, ListenerService listenerService) {
     ValuesParam valuesParam = initParams.getValuesParam("ignored.portals");
     if(valuesParam != null) {
       initialPortals = valuesParam.getValues();
@@ -57,7 +57,7 @@ public class CreatePortalArtifactsServiceImpl implements CreatePortalArtifactsSe
     for(CreatePortalPlugin plugin: artifactPlugins.values()) {
       plugin.deployToPortal(sessionProvider, portalName);
     }
-    
+
     listenerService.broadcast(CREATE_PORTAL_EVENT, portalName, sessionProvider);
   }
 

@@ -50,59 +50,59 @@ import org.exoplatform.webui.event.EventListener;
 @ComponentConfig(
     template =  "app:/groovy/webui/component/explorer/sidebar/UITagExplorer.gtmpl",
     events = {	@EventConfig(listeners = UITagExplorer.ViewTagActionListener.class),
-    						@EventConfig(listeners = UITagExplorer.EditTagsActionListener.class)}
+                @EventConfig(listeners = UITagExplorer.EditTagsActionListener.class)}
 )
 public class UITagExplorer extends UIContainer {
-	
+
   public static final String PUBLIC_TAG_NODE_PATH = "exoPublicTagNode";
   private int tagScope;
-  
+
   public UITagExplorer() throws Exception {
   }
-  
+
   public int getTagScope() { return tagScope; }
   public void setTagScope(int scope) { tagScope = scope; }
-  
+
   public List<Node> getPrivateTagLink() throws Exception {
     NewFolksonomyService folksonomyService = getApplicationComponent(NewFolksonomyService.class) ;
     return folksonomyService.getAllPrivateTags(getUserName(), getRepository(), getWorkspace()) ;
   }
-  
+
   public List<Node> getPublicTagLink() throws Exception {
     NewFolksonomyService folksonomyService = getApplicationComponent(NewFolksonomyService.class) ;
     NodeHierarchyCreator nodeHierarchyCreator = getApplicationComponent(NodeHierarchyCreator.class);
-    String publicTagNodePath = nodeHierarchyCreator.getJcrPath(PUBLIC_TAG_NODE_PATH);  
+    String publicTagNodePath = nodeHierarchyCreator.getJcrPath(PUBLIC_TAG_NODE_PATH);
 
-		RepositoryService repositoryService 
-		= getApplicationComponent(RepositoryService.class);
-		ManageableRepository	manageableRepo = repositoryService.getRepository(getRepository());
-		
-		String workspace = manageableRepo.getConfiguration().getDefaultWorkspaceName();
-    
+    RepositoryService repositoryService
+    = getApplicationComponent(RepositoryService.class);
+    ManageableRepository	manageableRepo = repositoryService.getRepository(getRepository());
+
+    String workspace = manageableRepo.getConfiguration().getDefaultWorkspaceName();
+
     return folksonomyService.getAllPublicTags(publicTagNodePath, getRepository(), workspace) ;
   }
-  
+
   public Map<String ,String> getTagStyle() throws Exception {
     NewFolksonomyService folksonomyService = getApplicationComponent(NewFolksonomyService.class) ;
     String workspace = getApplicationComponent(DMSConfiguration.class).getConfig().getSystemWorkspace();
     Map<String , String> tagStyle = new HashMap<String ,String>() ;
     for(Node tag : folksonomyService.getAllTagStyle(getRepository(), workspace)) {
       tagStyle.put(tag.getProperty("exo:styleRange").getValue().getString(),
-      						 tag.getProperty("exo:htmlStyle").getValue().getString());
+                   tag.getProperty("exo:htmlStyle").getValue().getString());
     }
     return tagStyle ;
   }
-  
+
   public String getTagHtmlStyle(Map<String, String> tagStyles, int tagCount) throws Exception {
-  	for (Entry<String, String> entry : tagStyles.entrySet()) {
-  		if (checkTagRate(tagCount, entry.getKey()))
-	  		return entry.getValue();
-  	}
-  	return "";
+    for (Entry<String, String> entry : tagStyles.entrySet()) {
+      if (checkTagRate(tagCount, entry.getKey()))
+        return entry.getValue();
+    }
+    return "";
   }
-  
+
   private boolean checkTagRate(int numOfDocument, String range) throws Exception {
-    String[] vals = StringUtils.split(range ,"..") ;    
+    String[] vals = StringUtils.split(range ,"..") ;
     int minValue = Integer.parseInt(vals[0]) ;
     int maxValue ;
     if(vals[1].equals("*")) {
@@ -110,20 +110,20 @@ public class UITagExplorer extends UIContainer {
     }else {
       maxValue = Integer.parseInt(vals[1]) ;
     }
-    if(minValue <=numOfDocument && numOfDocument <maxValue ) return true ;    
+    if(minValue <=numOfDocument && numOfDocument <maxValue ) return true ;
     return false ;
   }
-  
+
   public String getRepository() { return getAncestorOfType(UIJCRExplorer.class).getRepositoryName();}
   public String getWorkspace() { return getAncestorOfType(UIJCRExplorer.class).getCurrentWorkspace();}
   public String getUserName() {
-  	try {
-  		return getAncestorOfType(UIJCRExplorer.class).getSession().getUserID();
-		} catch (Exception ex) {
-			return "";
-		}
+    try {
+      return getAncestorOfType(UIJCRExplorer.class).getSession().getUserID();
+    } catch (Exception ex) {
+      return "";
+    }
   }
-  
+
   static public class ViewTagActionListener extends EventListener<UITagExplorer> {
     public void execute(Event<UITagExplorer> event) throws Exception {
       UITagExplorer uiTagExplorer = event.getSource() ;
@@ -131,11 +131,11 @@ public class UITagExplorer extends UIContainer {
       UIJCRExplorer uiExplorer = uiTagExplorer.getAncestorOfType(UIJCRExplorer.class) ;
       uiExplorer.setSelectRootNode();
       uiExplorer.setTagPath(tagPath);
-      
-      // Reset status of document flag updated by lampt 
+
+      // Reset status of document flag updated by lampt
       //uiExplorer.setViewDocument(false);
       uiExplorer.setIsViewTag(true);
-      
+
 //      UIWorkingArea uiWorkingArea = uiExplorer.getChild(UIWorkingArea.class);
 //      UIDocumentWorkspace uiDocumentWorkspace = uiWorkingArea.getChild(UIDocumentWorkspace.class);
 //      if(uiDocumentWorkspace.isRendered()) {
@@ -146,31 +146,31 @@ public class UITagExplorer extends UIContainer {
       uiExplorer.updateAjax(event);
     }
   }
-  
+
   static public class EditTagsActionListener extends EventListener<UITagExplorer> {
-  	public void execute(Event<UITagExplorer> event) throws Exception {
-  		UITagExplorer uiTagExplorer = event.getSource();
-			NewFolksonomyService newFolksonomyService = uiTagExplorer.getApplicationComponent(NewFolksonomyService.class);  		
-  		String scope = event.getRequestContext().getRequestParameter(OBJECTID);
-  		int intScope = Utils.PUBLIC.equals(scope) ? NewFolksonomyService.PUBLIC : 
-  																								NewFolksonomyService.PRIVATE;
-  		uiTagExplorer.getAncestorOfType(UIJCRExplorer.class).setTagScope(intScope);
-  		
-			List<String> memberships = Utils.getMemberships();
-  		if (newFolksonomyService.canEditTag(intScope, memberships)) {
-	  		UIJCRExplorer uiExplorer = uiTagExplorer.getAncestorOfType(UIJCRExplorer.class);
-	  		UIPopupContainer uiPopupContainer = uiExplorer.getChild(UIPopupContainer.class);
-	  		uiPopupContainer.activate(UIEditingTagsForm.class, 600);
-	  		event.getRequestContext().addUIComponentToUpdateByAjax(uiPopupContainer);	  		
-  		} else {
-  			UIApplication uiApp = uiTagExplorer.getAncestorOfType(UIApplication.class);
+    public void execute(Event<UITagExplorer> event) throws Exception {
+      UITagExplorer uiTagExplorer = event.getSource();
+      NewFolksonomyService newFolksonomyService = uiTagExplorer.getApplicationComponent(NewFolksonomyService.class);
+      String scope = event.getRequestContext().getRequestParameter(OBJECTID);
+      int intScope = Utils.PUBLIC.equals(scope) ? NewFolksonomyService.PUBLIC :
+                                                  NewFolksonomyService.PRIVATE;
+      uiTagExplorer.getAncestorOfType(UIJCRExplorer.class).setTagScope(intScope);
+
+      List<String> memberships = Utils.getMemberships();
+      if (newFolksonomyService.canEditTag(intScope, memberships)) {
+        UIJCRExplorer uiExplorer = uiTagExplorer.getAncestorOfType(UIJCRExplorer.class);
+        UIPopupContainer uiPopupContainer = uiExplorer.getChild(UIPopupContainer.class);
+        uiPopupContainer.activate(UIEditingTagsForm.class, 600);
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiPopupContainer);
+      } else {
+        UIApplication uiApp = uiTagExplorer.getAncestorOfType(UIApplication.class);
         uiApp
         .addMessage(new ApplicationMessage(
             "UIPopupMenu.msg.editTagAccessDenied", null,
             ApplicationMessage.WARNING));
-		    event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
-		    uiTagExplorer.getAncestorOfType(UIJCRExplorer.class).updateAjax(event);
-  		}
-  	}
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        uiTagExplorer.getAncestorOfType(UIJCRExplorer.class).updateAjax(event);
+      }
+    }
   }
 }

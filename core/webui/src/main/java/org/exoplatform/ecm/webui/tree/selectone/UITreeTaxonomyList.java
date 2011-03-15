@@ -63,7 +63,7 @@ import org.exoplatform.webui.form.UIFormSelectBox;
 @ComponentConfig(
     lifecycle = UIFormLifecycle.class,
     template = "classpath:groovy/ecm/webui/form/UIFormWithoutAction.gtmpl",
-    events = { 
+    events = {
       @EventConfig(listeners = UITreeTaxonomyList.ChangeTaxonomyTreeActionListener.class),
       @EventConfig(listeners = UITreeTaxonomyList.AddRootNodeActionListener.class)
     }
@@ -76,12 +76,12 @@ public class UITreeTaxonomyList extends UIForm {
   private static final Log LOG  = ExoLogger.getLogger("admin.UITreeTaxonomyList");
   private boolean isShowSystem_ = true;
 
-  public UITreeTaxonomyList() throws Exception {    
+  public UITreeTaxonomyList() throws Exception {
     List<SelectItemOption<String>> taxonomyTreeList = new ArrayList<SelectItemOption<String>>();
     UIFormSelectBox uiTaxonomyTreeList = new UIFormSelectBox(TAXONOMY_TREE, TAXONOMY_TREE, taxonomyTreeList);
     uiTaxonomyTreeList.setOnChange("ChangeTaxonomyTree");
     addUIFormInput(uiTaxonomyTreeList);
-    
+
     UIFormInputSetWithAction rootNodeInfo = new UIFormInputSetWithAction(ROOT_NODE_INFO);
     rootNodeInfo.addUIFormInput(new UIFormInputInfo(ROOT_NODE_PATH, ROOT_NODE_PATH, null));
     String[] actionInfor = {"AddRootNode"};
@@ -90,16 +90,16 @@ public class UITreeTaxonomyList extends UIForm {
     rootNodeInfo.setRendered(true);
     addUIComponentInput(rootNodeInfo);
   }
-  
+
   public void setIsShowSystem(boolean isShowSystem) { isShowSystem_ = isShowSystem; }
-  
+
   public boolean isShowSystemWorkspace() { return isShowSystem_; }
-  
-  public void setShowRootPathSelect(boolean isRender) { 
-    UIFormInputSetWithAction uiInputAction = getChildById(ROOT_NODE_INFO); 
-    uiInputAction.setRendered(isRender); 
+
+  public void setShowRootPathSelect(boolean isRender) {
+    UIFormInputSetWithAction uiInputAction = getChildById(ROOT_NODE_INFO);
+    uiInputAction.setRendered(isRender);
   }
-  
+
   private String getTaxonomyLabel(String taxonomyTree) {
     String display = taxonomyTree;
     RequestContext context = Util.getPortalRequestContext();
@@ -110,7 +110,7 @@ public class UITreeTaxonomyList extends UIForm {
     }
     return display;
   }
-  
+
   public void setTaxonomyTreeList(String repository) throws Exception {
     TaxonomyService taxonomyService = getApplicationComponent(TaxonomyService.class);
     List<Node> listNode = taxonomyService.getAllTaxonomyTrees(repository);
@@ -121,20 +121,20 @@ public class UITreeTaxonomyList extends UIForm {
     UIFormSelectBox uiTreeTaxonomyList = getUIFormSelectBox(TAXONOMY_TREE);
     uiTreeTaxonomyList.setOptions(taxonomyTree);
   }
-  
-  private Node getRootNode(String repositoryName, String workspaceName, String pathNode) throws 
+
+  private Node getRootNode(String repositoryName, String workspaceName, String pathNode) throws
     RepositoryException, RepositoryConfigurationException {
       RepositoryService repositoryService = getApplicationComponent(RepositoryService.class);
       ManageableRepository manageableRepository = repositoryService.getRepository(repositoryName);
       SessionProvider sessionProvider =  SessionProviderFactory.createSessionProvider();
-      return (Node) sessionProvider.getSession(workspaceName, manageableRepository).getItem(pathNode); 
+      return (Node) sessionProvider.getSession(workspaceName, manageableRepository).getItem(pathNode);
   }
-  
+
   static public class ChangeTaxonomyTreeActionListener extends EventListener<UITreeTaxonomyList> {
     public void execute(Event<UITreeTaxonomyList> event) throws Exception {
       UITreeTaxonomyList uiTreeTaxonomyList = event.getSource();
       UIOneTaxonomySelector uiOneTaxonomySelector = uiTreeTaxonomyList.getParent();
-      String taxoTreeName = uiTreeTaxonomyList.getUIFormSelectBox(TAXONOMY_TREE).getValue();  
+      String taxoTreeName = uiTreeTaxonomyList.getUIFormSelectBox(TAXONOMY_TREE).getValue();
       Node taxoTreeNode = uiOneTaxonomySelector.getTaxoTreeNode(taxoTreeName);
       String workspaceName = taxoTreeNode.getSession().getWorkspace().getName();
       String pathTaxonomy = taxoTreeNode.getPath();
@@ -155,10 +155,10 @@ public class UITreeTaxonomyList extends UIForm {
           List<SelectItemOption<String>> taxonomyTree = uiTaxonomyTree.getOptions();
           if (taxonomyTree != null && taxonomyTree.size() > 0)
             uiTaxonomyTree.setValue(taxonomyTree.get(0).getValue());
-          
+
           uiApp.addMessage(new ApplicationMessage("UIWorkspaceList.msg.AccessDeniedException", null, ApplicationMessage.WARNING));
           event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiTaxonomyTree.getParent());          
+          event.getRequestContext().addUIComponentToUpdateByAjax(uiTaxonomyTree.getParent());
           return;
         } catch(Exception e) {
           LOG.error("Unexpected error", e);
@@ -176,12 +176,12 @@ public class UITreeTaxonomyList extends UIForm {
       event.getRequestContext().addUIComponentToUpdateByAjax(uiOneTaxonomySelector);
     }
   }
-  
+
   static public class AddRootNodeActionListener extends EventListener<UITreeTaxonomyList> {
     public void execute(Event<UITreeTaxonomyList> event) throws Exception {
-    	UITreeTaxonomyList uiTreeTaxonomyList = event.getSource();
-      String taxoTreeName = uiTreeTaxonomyList.getUIFormSelectBox(TAXONOMY_TREE).getValue();  
-      UIOneTaxonomySelector uiTaxonomySelector = uiTreeTaxonomyList.getParent(); 
+      UITreeTaxonomyList uiTreeTaxonomyList = event.getSource();
+      String taxoTreeName = uiTreeTaxonomyList.getUIFormSelectBox(TAXONOMY_TREE).getValue();
+      UIOneTaxonomySelector uiTaxonomySelector = uiTreeTaxonomyList.getParent();
       String returnField = ((UIBaseNodeTreeSelector) uiTaxonomySelector).getReturnFieldName();
       ((UISelectable)((UIBaseNodeTreeSelector) uiTaxonomySelector).getSourceComponent()).doSelect(returnField, taxoTreeName) ;
       if (uiTaxonomySelector instanceof UIOneTaxonomySelector) {

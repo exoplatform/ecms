@@ -35,7 +35,7 @@ import java.util.List;
  *         Kabashnyuk</a>
  * @version $Id: AvailableQueryOperatorsTest.java 50581 2010-08-10 14:58:47Z
  *          makis $
- * 
+ *
  */
 public class AvailableQueryOperatorsTest extends BaseQueryTest
 {
@@ -93,7 +93,7 @@ public class AvailableQueryOperatorsTest extends BaseQueryTest
 
    /**
     * Check invalid operator's
-    * 
+    *
     * @param column
     * @throws QueryExecutionException
     */
@@ -154,7 +154,7 @@ public class AvailableQueryOperatorsTest extends BaseQueryTest
 
    /**
     * Check valid operator's
-    * 
+    *
     * @param column
     * @throws InvalidQueryException
     * @throws QueryExecutionException
@@ -205,7 +205,7 @@ public class AvailableQueryOperatorsTest extends BaseQueryTest
 
    /**
     * Return the array of unAvailableQueryOperators
-    * 
+    *
     * @param availableQueryOperators
     * @return
     */

@@ -43,43 +43,45 @@ import org.exoplatform.webui.form.UIForm;
  * Author : Ly Dinh Quang
             quang.ly@exoplatform.com
  *          xxx5669@gmail.com
- * Dec 22, 2008  
+ * Dec 22, 2008
  */
-@ComponentConfig (
-    lifecycle = UIFormLifecycle.class,
-    template = "classpath:resources/templates/workflow/workflowPublicationView.gtmpl",
-    events = {
-      @EventConfig(listeners = UIWorkflowPublicationViewForm.CancelActionListener.class, phase = Phase.DECODE),
-      @EventConfig(listeners = UIWorkflowPublicationViewForm.EditActionListener.class),
-      @EventConfig(listeners = UIWorkflowPublicationViewForm.UnpublishActionListener.class),
-      @EventConfig(listeners = UIWorkflowPublicationViewForm.UnsubcriberLifeCycleActionListener.class)
-    }
-)
+@ComponentConfig(lifecycle = UIFormLifecycle.class,
+                 template = "classpath:resources/templates/workflow/workflowPublicationView.gtmpl",
+                 events = {
+    @EventConfig(listeners = UIWorkflowPublicationViewForm.CancelActionListener.class, phase = Phase.DECODE),
+    @EventConfig(listeners = UIWorkflowPublicationViewForm.EditActionListener.class),
+    @EventConfig(listeners = UIWorkflowPublicationViewForm.UnpublishActionListener.class),
+    @EventConfig(listeners = UIWorkflowPublicationViewForm.UnsubcriberLifeCycleActionListener.class) })
 public class UIWorkflowPublicationViewForm extends UIForm {
   private String repositoryName = "";
   private Node currentNode = null;
-  private final String EXO_PUBLISH = "exo:published"; 
+  private final String EXO_PUBLISH = "exo:published";
   private IdentityRegistry identityRegistry;
   private static final Log LOG  = ExoLogger.getLogger(UIWorkflowPublicationViewForm.class);
-  
+
   public UIWorkflowPublicationViewForm() throws Exception {
     identityRegistry = getApplicationComponent(IdentityRegistry.class);
     RepositoryService repositoryService = getApplicationComponent(RepositoryService.class);
     repositoryName = repositoryService.getDefaultRepository().getConfiguration().getName();
     setActions(new String[]{"Cancel"});
   }
-  
+
   public void setCurrentNode(Node node) throws Exception {
     currentNode = node;
     String userId = currentNode.getSession().getUserID();
-    Property rolesProp = currentNode.getProperty(WorkflowPublicationPlugin.VALIDATOR);        
+    Property rolesProp = currentNode.getProperty(WorkflowPublicationPlugin.VALIDATOR);
     Value roles = rolesProp.getValue();
     if (currentNode.isNodeType(EXO_PUBLISH)) {
-      if (currentNode.getProperty(WorkflowPublicationPlugin.CURRENT_STATE).
-          getString().equals(WorkflowPublicationPlugin.CONTENT_VALIDATION) && checkExcetuteable(userId, roles)) {
+      if (currentNode.getProperty(WorkflowPublicationPlugin.CURRENT_STATE)
+                     .getString()
+                     .equals(WorkflowPublicationPlugin.CONTENT_VALIDATION)
+          && checkExcetuteable(userId, roles)) {
         PublicationService publicationService = getApplicationComponent(PublicationService.class);
-        publicationService.getPublicationPlugins().get(WorkflowPublicationPlugin.WORKFLOW).changeState(currentNode, 
-            WorkflowPublicationPlugin.PUBLISHED, new HashMap<String,String>());
+        publicationService.getPublicationPlugins()
+                          .get(WorkflowPublicationPlugin.WORKFLOW)
+                          .changeState(currentNode,
+                                       WorkflowPublicationPlugin.PUBLISHED,
+                                       new HashMap<String, String>());
         setActions(new String[]{"Unpublish", "Cancel"});
       } else if (currentNode.getProperty(WorkflowPublicationPlugin.CURRENT_STATE).
           getString().equals(WorkflowPublicationPlugin.PUBLISHED) && checkExcetuteable(userId, roles)) {
@@ -91,14 +93,14 @@ public class UIWorkflowPublicationViewForm extends UIForm {
       setActions(new String[]{"Cancel"});
     }
   }
-  
+
   public String getLinkStateImage (Locale locale) {
     try {
       DownloadService dS = getApplicationComponent(DownloadService.class);
       PublicationService service = getApplicationComponent(PublicationService.class);
 
       byte[] bytes = service.getStateImage(getCurrentNode(),locale);
-      InputStream iS = new ByteArrayInputStream(bytes);    
+      InputStream iS = new ByteArrayInputStream(bytes);
       String id = dS.addDownloadResource(new InputStreamDownloadResource(iS, "image/gif"));
       return dS.getDownloadLink(id);
     } catch (Exception e) {
@@ -106,23 +108,23 @@ public class UIWorkflowPublicationViewForm extends UIForm {
       return "Error in getStateImage";
     }
   }
-  
+
   public Node getCurrentNode() {
     return currentNode;
   }
-  
+
   public String getRepositoryName() {
     return repositoryName;
   }
-  
-  private boolean checkExcetuteable(String userId, Value roles) throws Exception {        
+
+  private boolean checkExcetuteable(String userId, Value roles) throws Exception {
     if (SystemIdentity.SYSTEM.equalsIgnoreCase(userId)) {
       return true;
     }
     Identity identity = identityRegistry.getIdentity(userId);
     if(identity == null) {
-      return false; 
-    }        
+      return false;
+    }
     if("*".equalsIgnoreCase(roles.getString())) return true;
     MembershipEntry membershipEntry = MembershipEntry.parse(roles.getString());
     if (identity.isMemberOf(membershipEntry)) {
@@ -130,10 +132,11 @@ public class UIWorkflowPublicationViewForm extends UIForm {
     }
     return false;
   }
-  
+
   public String getLabel(String fieldName, String type) throws Exception {
     PublicationService publicationService = getApplicationComponent(PublicationService.class);
-    WorkflowPublicationPlugin plugin = (WorkflowPublicationPlugin) publicationService.getPublicationPlugins().get(WorkflowPublicationPlugin.WORKFLOW);
+    WorkflowPublicationPlugin plugin = (WorkflowPublicationPlugin) publicationService.getPublicationPlugins()
+                                                                                     .get(WorkflowPublicationPlugin.WORKFLOW);
     Locale locale = Util.getUIPortal().getAncestorOfType(UIPortalApplication.class).getLocale();
     try {
       return plugin.getLocalizedAndSubstituteMessage(locale, getId() + "." + type +"." + fieldName, null);
@@ -141,7 +144,7 @@ public class UIWorkflowPublicationViewForm extends UIForm {
       return fieldName;
     }
   }
-  
+
   public void initPopup(UIContainer uiContainer, UIComponent uiComp) throws Exception {
     uiContainer.removeChildById(WorkflowPublicationPlugin.POPUP_EDIT_ID);
     UIPopupWindow uiPopup = uiContainer.addChild(UIPopupWindow.class, null, WorkflowPublicationPlugin.POPUP_EDIT_ID);
@@ -150,23 +153,23 @@ public class UIWorkflowPublicationViewForm extends UIForm {
     uiPopup.setShow(true);
     uiPopup.setResizable(true);
   }
-  
+
   static public class CancelActionListener extends EventListener<UIWorkflowPublicationViewForm> {
     public void execute(Event<UIWorkflowPublicationViewForm> event) throws Exception {
       UIWorkflowPublicationViewForm uiForm = event.getSource();
       UIContainer container = uiForm.getAncestorOfType(UIContainer.class);
-      
+
       UIPopupWindow popupWindow = (UIPopupWindow)container.getParent();
       popupWindow.setRendered(false);
       event.getRequestContext().addUIComponentToUpdateByAjax(popupWindow.getParent());
     }
-  }  
-  
+  }
+
   static public class EditActionListener extends EventListener<UIWorkflowPublicationViewForm> {
     public void execute(Event<UIWorkflowPublicationViewForm> event) throws Exception {
       UIWorkflowPublicationViewForm workflowViewForm = event.getSource();
       UIContainer container = workflowViewForm.getParent();
-      UIWorkflowPublicationActionForm actionForm = 
+      UIWorkflowPublicationActionForm actionForm =
                 container.createUIComponent(UIWorkflowPublicationActionForm.class, null, null);
       actionForm.createNewAction(workflowViewForm.getCurrentNode(), WorkflowPublicationPlugin.WORKFLOW, true);
       actionForm.setWorkspaceName(workflowViewForm.getCurrentNode().getSession().getWorkspace().getName());
@@ -174,18 +177,18 @@ public class UIWorkflowPublicationViewForm extends UIForm {
       event.getRequestContext().addUIComponentToUpdateByAjax(workflowViewForm.getParent());
     }
   }
-  
+
   static public class UnpublishActionListener extends EventListener<UIWorkflowPublicationViewForm> {
     public void execute(Event<UIWorkflowPublicationViewForm> event) throws Exception {
       UIWorkflowPublicationViewForm viewForm = event.getSource();
       RepositoryService repositoryService = viewForm.getApplicationComponent(RepositoryService.class);
       UIContainer container = viewForm.getParent();
       Node currentNode = viewForm.getCurrentNode();
-      
+
       PublicationService publicationService = viewForm.getApplicationComponent(PublicationService.class);
       publicationService.getPublicationPlugins().get(WorkflowPublicationPlugin.WORKFLOW).
-        changeState(currentNode, WorkflowPublicationPlugin.BACKUP, new HashMap<String,String>());  
-      
+        changeState(currentNode, WorkflowPublicationPlugin.BACKUP, new HashMap<String,String>());
+
       String nodePath = currentNode.getPath();
       String srcWorkspace = currentNode.getSession().getWorkspace().getName();
       String destWorkspace = WorkflowPublicationPlugin.BACKUP;
@@ -194,17 +197,20 @@ public class UIWorkflowPublicationViewForm extends UIForm {
         realDestPath += "/";
       }
       realDestPath += currentNode.getName();
-      WorkflowMoveNodeAction.moveNode(repositoryService, nodePath, srcWorkspace, destWorkspace, 
+      WorkflowMoveNodeAction.moveNode(repositoryService, nodePath, srcWorkspace, destWorkspace,
             realDestPath, viewForm.getRepositoryName());
-      
+
       UIApplication uiApp = viewForm.getAncestorOfType(UIApplication.class);
-      
-      WorkflowPublicationPlugin plugin = (WorkflowPublicationPlugin) publicationService.getPublicationPlugins().get(WorkflowPublicationPlugin.WORKFLOW);
+
+      WorkflowPublicationPlugin plugin = (WorkflowPublicationPlugin) publicationService.getPublicationPlugins()
+                                                                                       .get(WorkflowPublicationPlugin.WORKFLOW);
       Locale locale = Util.getUIPortal().getAncestorOfType(UIPortalApplication.class).getLocale();
-      String msg = plugin.getLocalizedAndSubstituteMessage(locale, "UIWorkflowPublicationViewForm.msg.unpublish-success", null);
+      String msg = plugin.getLocalizedAndSubstituteMessage(locale,
+                                                           "UIWorkflowPublicationViewForm.msg.unpublish-success",
+                                                           null);
       uiApp.addMessage(new ApplicationMessage(msg, null, ApplicationMessage.INFO));
       event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
-      
+
       UIPopupWindow popupWindow = (UIPopupWindow)container.getParent();
       popupWindow.setRendered(false);
       UIComponent component = popupWindow.getParent();
@@ -215,40 +221,47 @@ public class UIWorkflowPublicationViewForm extends UIForm {
       }
     }
   }
-  
+
   static public class UnsubcriberLifeCycleActionListener extends EventListener<UIWorkflowPublicationViewForm> {
     public void execute(Event<UIWorkflowPublicationViewForm> event) throws Exception {
       UIWorkflowPublicationViewForm viewForm = event.getSource();
       Node selectedNode = viewForm.getCurrentNode();
       UIApplication uiApp = viewForm.getAncestorOfType(UIApplication.class);
       PublicationService publicationService = viewForm.getApplicationComponent(PublicationService.class);
-      WorkflowPublicationPlugin plugin = (WorkflowPublicationPlugin) publicationService.getPublicationPlugins().get(WorkflowPublicationPlugin.WORKFLOW);
+      WorkflowPublicationPlugin plugin = (WorkflowPublicationPlugin) publicationService.getPublicationPlugins()
+                                                                                       .get(WorkflowPublicationPlugin.WORKFLOW);
       Locale locale = Util.getUIPortal().getAncestorOfType(UIPortalApplication.class).getLocale();
-      
-      if (!selectedNode.isCheckedOut()) {   
-        String msg = plugin.getLocalizedAndSubstituteMessage(locale, "UIWorkflowPublicationActionForm.msg.node-checkedin", null);
+
+      if (!selectedNode.isCheckedOut()) {
+        String msg = plugin.getLocalizedAndSubstituteMessage(locale,
+                                                             "UIWorkflowPublicationActionForm.msg.node-checkedin",
+                                                             null);
         uiApp.addMessage(new ApplicationMessage(msg, null, ApplicationMessage.WARNING));
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
         return;
       }
-      
+
       if (publicationService.isUnsubcribeLifecycle(selectedNode)) {
-        String msg = plugin.getLocalizedAndSubstituteMessage(locale, "UIWorkflowPublicationActionForm.msg.unsubcriber-lifecycle", null);
+        String msg = plugin.getLocalizedAndSubstituteMessage(locale,
+                                                             "UIWorkflowPublicationActionForm.msg.unsubcriber-lifecycle",
+                                                             null);
         uiApp.addMessage(new ApplicationMessage(msg, null, ApplicationMessage.WARNING));
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
         return;
       }
-      
+
       UIContainer container = viewForm.getAncestorOfType(UIContainer.class);
       UIPopupWindow popupWindow = (UIPopupWindow)container.getParent();
       popupWindow.setRendered(false);
       event.getRequestContext().addUIComponentToUpdateByAjax(popupWindow.getParent());
-      
+
       /*
        * Unsubcribe lifecycle and display message to inform
        */
       publicationService.unsubcribeLifecycle(selectedNode);
-      String msg = plugin.getLocalizedAndSubstituteMessage(locale, "UIWorkflowPublicationActionForm.msg.unsubcriber-lifecycle-finish", null);
+      String msg = plugin.getLocalizedAndSubstituteMessage(locale,
+                                                           "UIWorkflowPublicationActionForm.msg.unsubcriber-lifecycle-finish",
+                                                           null);
       uiApp.addMessage(new ApplicationMessage(msg, null));
       event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
       return;

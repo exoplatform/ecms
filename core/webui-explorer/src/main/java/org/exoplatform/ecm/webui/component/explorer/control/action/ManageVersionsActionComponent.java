@@ -43,7 +43,7 @@ import org.exoplatform.webui.ext.filter.UIExtensionFilters;
  * Created by The eXo Platform SAS
  * Author : eXoPlatform
  *          nicolas.filotto@exoplatform.com
- * 6 mai 2009  
+ * 6 mai 2009
  */
 @ComponentConfig(
      events = {
@@ -58,13 +58,13 @@ public class ManageVersionsActionComponent extends UIComponent {
   public List<UIExtensionFilter> getFilters() {
     return FILTERS;
   }
-  
+
   public static class ManageVersionsActionListener extends UIActionBarActionListener<ManageVersionsActionComponent> {
     public void processEvent(Event<ManageVersionsActionComponent> event) throws Exception {
       UIJCRExplorer uiExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class);
       UIPopupContainer UIPopupContainer = uiExplorer.getChild(UIPopupContainer.class);
       Node currentNode = uiExplorer.getCurrentNode();
-      uiExplorer.setIsHidePopup(false);    
+      uiExplorer.setIsHidePopup(false);
       if (currentNode.canAddMixin(Utils.MIX_VERSIONABLE)) {
         UIPopupContainer.activate(UIActivateVersion.class, 400);
         event.getRequestContext().addUIComponentToUpdateByAjax(UIPopupContainer);

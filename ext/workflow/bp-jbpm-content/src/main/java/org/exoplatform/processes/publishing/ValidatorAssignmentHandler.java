@@ -25,7 +25,7 @@ import org.jbpm.taskmgmt.exe.Assignable;
  * Created by The eXo Platform SARL
  * Author : Pham Xuan Hoa
  *          hoa.pham@exoplatform.com
- * Jan 2, 2008  
+ * Jan 2, 2008
  */
 public class ValidatorAssignmentHandler implements AssignmentHandler {
 
@@ -33,8 +33,8 @@ public class ValidatorAssignmentHandler implements AssignmentHandler {
     String validator = (String) executionContext.getVariable("exo:validator");
     String initiator = (String) executionContext.getVariable("initiator");
     String delegate_flg = (String) executionContext.getVariable("delegate_flg");
-    
-    if ((delegate_flg != null) && delegate_flg.equals("true")) {                  /* When execute delegate process */ 
+
+    if ((delegate_flg != null) && delegate_flg.equals("true")) {                  /* When execute delegate process */
       assignable.setActorId(initiator);
     } else
       assignable.setActorId(validator);

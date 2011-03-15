@@ -22,11 +22,11 @@ import org.jbpm.job.Timer;
 
 
 public class TimerData implements org.exoplatform.services.workflow.Timer {
-  
+
   private Timer jbpmTimer_;
 
   public TimerData(Timer jbpmTimer) {
-   jbpmTimer_ = jbpmTimer; 
+   jbpmTimer_ = jbpmTimer;
   }
 
   public String getId() {

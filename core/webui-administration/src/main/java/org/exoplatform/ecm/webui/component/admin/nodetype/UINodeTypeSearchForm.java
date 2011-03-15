@@ -38,11 +38,11 @@ import org.exoplatform.webui.form.UIFormStringInput;
  * Created by The eXo Platform SARL
  * Author : Hoang Van Hung
  *          hunghvit@gmail.com
- * Dec 23, 2009  
+ * Dec 23, 2009
  */
 
 @ComponentConfig (
-  lifecycle = UIFormLifecycle.class, 
+  lifecycle = UIFormLifecycle.class,
   events = {
             @EventConfig(listeners = UINodeTypeSearchForm.SearchNodeTypeActionListener.class)
            }
@@ -52,19 +52,19 @@ public class UINodeTypeSearchForm extends UIForm {
   public UINodeTypeSearchForm() throws Exception {
     addChild(UINodeTypeSearch.class, null, "NodeTypeSearch").init();
   }
-  
+
   @SuppressWarnings("unchecked")
   public static class SearchNodeTypeActionListener extends EventListener<UINodeTypeSearchForm> {
     public void execute(Event<UINodeTypeSearchForm> event) throws Exception {
       UINodeTypeSearchForm uiForm = event.getSource();
       UINodeTypeManager uiNodeTypeManager = uiForm.getAncestorOfType(UINodeTypeManager.class);
       UINodeTypeList uiNodeTypeList = uiNodeTypeManager.getChild(UINodeTypeList.class);
-      try {      
+      try {
         UIFormStringInput uiInputNodeType = (UIFormStringInput)uiForm.findComponentById("NodeTypeText");
         String nodeTypeName = uiInputNodeType.getValue();
         if (nodeTypeName == null || nodeTypeName.length() == 0) return;
         nodeTypeName = (nodeTypeName.contains("*") && !nodeTypeName.contains(".*")) ? nodeTypeName.replace("*", ".*") : nodeTypeName;
-        Pattern p = Pattern.compile(".*".concat(nodeTypeName.trim()).concat(".*"), Pattern.CASE_INSENSITIVE);      
+        Pattern p = Pattern.compile(".*".concat(nodeTypeName.trim()).concat(".*"), Pattern.CASE_INSENSITIVE);
         List lstAllNodetype = uiNodeTypeList.getAllNodeTypes();
         List lstNodetype = new ArrayList<NodeType>();
         for (Object nodeType : lstAllNodetype) {

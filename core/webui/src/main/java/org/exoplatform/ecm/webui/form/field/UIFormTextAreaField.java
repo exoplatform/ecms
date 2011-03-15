@@ -28,17 +28,17 @@ import org.exoplatform.webui.form.UIFormTextAreaInput;
  * Created by The eXo Platform SAS
  * @author : Hoa.Pham
  *          hoa.pham@exoplatform.com
- * Jun 23, 2008  
+ * Jun 23, 2008
  */
 public class UIFormTextAreaField extends DialogFormField {
 
   public final static int DEFAULT_ROW = 10;
   public final static int DEFAULT_COL = 30;
-  
+
   public UIFormTextAreaField(String name, String label, String[] arguments) {
     super(name, label, arguments);
   }
-  
+
   @SuppressWarnings("unchecked")
   public <T extends UIFormInputBase> T createUIFormInput() throws Exception {
     UIFormTextAreaInput uiTextArea = new UIFormTextAreaInput(name, name, defaultValue) ;
@@ -47,8 +47,8 @@ public class UIFormTextAreaField extends DialogFormField {
     }
     if(label != null) uiTextArea.setLabel(label) ;
     return (T)uiTextArea;
-  }    
-  
+  }
+
   public Map<String, String> getSelectorInfo() {
     Map<String, String> map = new HashMap<String, String>() ;
     map.put("selectorClass", selectorClass) ;
@@ -58,6 +58,6 @@ public class UIFormTextAreaField extends DialogFormField {
     if(selectorParams != null) map.put("selectorParams", selectorParams) ;
     return map;
   }
-  
+
   public boolean useSelector() { return selectorClass != null; }
 }

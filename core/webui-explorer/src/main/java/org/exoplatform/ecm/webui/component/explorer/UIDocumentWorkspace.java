@@ -34,7 +34,7 @@ import org.exoplatform.webui.core.lifecycle.UIContainerLifecycle;
  */
 @ComponentConfig(lifecycle = UIContainerLifecycle.class)
 public class UIDocumentWorkspace extends UIContainer {
-  
+
   static public String SIMPLE_SEARCH_RESULT = "SimpleSearchResult" ;
   static public String SHOW_ALL_FAVOURITE_RESULT = "ShowAllFavouriteResult";
   static public String SHOW_ALL_TRASH_RESULT = "ShowAllTrashResult";

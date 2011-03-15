@@ -34,55 +34,55 @@ import org.exoplatform.webui.ext.filter.UIExtensionFilterType;
  * Created by The eXo Platform SAS
  * Author : eXoPlatform
  *          nicolas.filotto@exoplatform.com
- * 2 juillet 2009  
+ * 2 juillet 2009
  */
 public class CanValidateFilter implements UIExtensionFilter {
 
-	private static final Log LOG = ExoLogger.getLogger(CanValidateFilter.class);
-	/**
-	 * This method checks if the current node is of the right type
-	 */
-	public boolean accept(Map<String, Object> context) throws Exception {
-		// Retrieve the current node from the context
-	    Node currentNode = (Node) context.get(Node.class.getName());
-	    if (currentNode.hasProperty("publication:currentState") && currentNode.hasProperty("publication:lifecycle")) {
-	    	String currentState = currentNode.getProperty("publication:currentState").getString();
-	    	
-	    	if ("draft".equals(currentState)) {
-	    		String userId;
-	    		try {
-	    			userId = Util.getPortalRequestContext().getRemoteUser();
-	    		} catch (Exception e) {
-	    			userId = currentNode.getSession().getUserID();
-	    		}
-	    		
-	    		String nodeLifecycle = currentNode.getProperty("publication:lifecycle").getString();
-	    		
-	    		PublicationManager publicationManager = (PublicationManager)ExoContainerContext.getCurrentContainer().getComponentInstanceOfType(PublicationManager.class);
-	    		List<Lifecycle> lifecycles = publicationManager.getLifecyclesFromUser(userId, "pending");
-	    		
-	    		for (Lifecycle lifecycle:lifecycles) {
-	    			if (nodeLifecycle.equals(lifecycle.getName())) {
-	    				return true;
-	    			}
-	    		}
-	    		
-	    	}
-	    }
-		return false;
-	}
+  private static final Log LOG = ExoLogger.getLogger(CanValidateFilter.class);
+  /**
+   * This method checks if the current node is of the right type
+   */
+  public boolean accept(Map<String, Object> context) throws Exception {
+    // Retrieve the current node from the context
+      Node currentNode = (Node) context.get(Node.class.getName());
+      if (currentNode.hasProperty("publication:currentState") && currentNode.hasProperty("publication:lifecycle")) {
+        String currentState = currentNode.getProperty("publication:currentState").getString();
+
+        if ("draft".equals(currentState)) {
+          String userId;
+          try {
+            userId = Util.getPortalRequestContext().getRemoteUser();
+          } catch (Exception e) {
+            userId = currentNode.getSession().getUserID();
+          }
+
+          String nodeLifecycle = currentNode.getProperty("publication:lifecycle").getString();
+
+          PublicationManager publicationManager = (PublicationManager)ExoContainerContext.getCurrentContainer().getComponentInstanceOfType(PublicationManager.class);
+          List<Lifecycle> lifecycles = publicationManager.getLifecyclesFromUser(userId, "pending");
+
+          for (Lifecycle lifecycle:lifecycles) {
+            if (nodeLifecycle.equals(lifecycle.getName())) {
+              return true;
+            }
+          }
+
+        }
+      }
+    return false;
+  }
 
     /**
-	 * This is the type of the filter
-	 */
-	public UIExtensionFilterType getType() {
-		return UIExtensionFilterType.MANDATORY;
-	}
+   * This is the type of the filter
+   */
+  public UIExtensionFilterType getType() {
+    return UIExtensionFilterType.MANDATORY;
+  }
 
-	/**
-	 * This is called when the filter has failed
-	 */
-	public void onDeny(Map<String, Object> context) throws Exception {
-		LOG.warn("You can add a category in a exo:taxonomy node only.");
-	}
+  /**
+   * This is called when the filter has failed
+   */
+  public void onDeny(Map<String, Object> context) throws Exception {
+    LOG.warn("You can add a category in a exo:taxonomy node only.");
+  }
 }

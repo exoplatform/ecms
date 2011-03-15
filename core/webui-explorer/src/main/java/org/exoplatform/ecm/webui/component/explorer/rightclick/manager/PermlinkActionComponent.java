@@ -41,18 +41,18 @@ import org.exoplatform.webui.ext.manager.UIAbstractManagerComponent;
 
 @ComponentConfig(
     lifecycle = UIContainerLifecycle.class
-)      
+)
 public class PermlinkActionComponent extends UIAbstractManagerComponent {
 
-  private static final List<UIExtensionFilter> FILTERS 
-  		= Arrays.asList(new UIExtensionFilter[] { new IsNotInTrashFilter(),
-  																							new IsDocumentFilter() });
-  
+  private static final List<UIExtensionFilter> FILTERS
+      = Arrays.asList(new UIExtensionFilter[] { new IsNotInTrashFilter(),
+                                                new IsDocumentFilter() });
+
   @UIExtensionFilters
   public List<UIExtensionFilter> getFilters() {
     return FILTERS;
   }
-  
+
   public String getPermlink(Node node) throws Exception {
     UIJCRExplorer uiExplorer = getAncestorOfType(UIJCRExplorer.class);
     PortalRequestContext pcontext = Util.getPortalRequestContext();
@@ -68,10 +68,9 @@ public class PermlinkActionComponent extends UIAbstractManagerComponent {
     StringBuffer bf = new StringBuffer(1024);
     return bf.append(portalUrl).append(portletId).append("/").append(repository).append("/").append(drivename).append(nodePath).toString();
   }
-  
+
   @Override
   public Class<? extends UIAbstractManager> getUIAbstractManagerClass() {
-    // TODO Auto-generated method stub
     return null;
   }
 

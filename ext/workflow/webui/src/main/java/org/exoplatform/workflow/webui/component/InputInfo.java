@@ -23,7 +23,7 @@ import org.exoplatform.webui.form.UIFormInput;
  * Author : Ly Dinh Quang
  *          quang.ly@exoplatform.com
  *          xxx5669@gmail.com
- * Jan 9, 2009  
+ * Jan 9, 2009
  */
 public class InputInfo {
   private String label;
@@ -43,6 +43,6 @@ public class InputInfo {
   public UIFormInput getInput() { return input; }
   public String getLabel() { return label; }
   public String getId() { return id; }
-  public String getPath() { return path; }  
+  public String getPath() { return path; }
   public boolean isMandatory(){ return mandatory; }
 }

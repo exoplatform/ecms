@@ -44,7 +44,7 @@ import org.exoplatform.webui.event.EventListener;
  * Created by The eXo Platform SARL
  * Author : Hoang Van Hung
  *          hunghvit@gmail.com
- * Apr 5, 2009  
+ * Apr 5, 2009
  */
 
 @ComponentConfigs(
@@ -59,13 +59,13 @@ import org.exoplatform.webui.event.EventListener;
 )
 
 public class UITaxonomyTreeCreateChild extends UIContainer {
-  
+
   private String workspace;
-  
+
   public static final String PERMISSION_ID_POPUP = "TaxonomyTreeViewPermissionPopup";
-  
+
   private String selectedPath_ = null ;
-  
+
   private Node taxonomyTreeNode = null;
 
   public UITaxonomyTreeCreateChild() throws Exception {
@@ -75,32 +75,32 @@ public class UITaxonomyTreeCreateChild extends UIContainer {
     UITaxonomyTreeWorkingArea uiTaxonomyTreeWorkingArea = addChild(UITaxonomyTreeWorkingArea.class, null, null);
     uiTaxonomyTreeWorkingArea.setAcceptedNodeTypes(new String[] {Utils.EXO_TAXANOMY});
   }
-  
+
   public void update() throws Exception {
     UITaxonomyTreeBrowser uiTree = getChild(UITaxonomyTreeBrowser.class);
     uiTree.update();
     UITaxonomyTreeWorkingArea uiTaxonomyTreeWorkingArea = getChild(UITaxonomyTreeWorkingArea.class);
-    uiTaxonomyTreeWorkingArea.update(); 
+    uiTaxonomyTreeWorkingArea.update();
   }
-  
+
   public void update(String path) throws Exception {
     UITaxonomyTreeBrowser uiTree = getChild(UITaxonomyTreeBrowser.class);
     uiTree.update();
     uiTree.setNodeSelect(path);
     UITaxonomyTreeWorkingArea uiTaxonomyTreeWorkingArea = getChild(UITaxonomyTreeWorkingArea.class);
     uiTaxonomyTreeWorkingArea.setSelectedPath(path);
-    uiTaxonomyTreeWorkingArea.update(); 
+    uiTaxonomyTreeWorkingArea.update();
     setSelectedPath(path);
   }
-  
+
   public Node getRootNode() throws Exception {
     return getTaxonomyTreeNode().getParent();
   }
-  
+
   public Node getTaxonomyTreeNode() {
     return taxonomyTreeNode;
   }
-  
+
   public void setSelectedPath(String selectedPath) {
     selectedPath_ = selectedPath;
   }
@@ -108,26 +108,26 @@ public class UITaxonomyTreeCreateChild extends UIContainer {
   public String getSelectedPath() {
     return selectedPath_;
   }
-  
+
   public Node getNodeByPath(String path) throws Exception {
     return (Node) getSession().getItem(path) ;
   }
-  
+
   String getRepository() throws Exception {
     return getAncestorOfType(UIECMAdminPortlet.class).getPreferenceRepository();
   }
-  
+
   Session getSession() throws Exception {
     String repositoryName = getRepository();
     return SessionProviderFactory.createSystemProvider().getSession(workspace,
         getRepository(repositoryName));
   }
-  
+
   public ManageableRepository getRepository(String repositoryName) throws Exception{
     RepositoryService repositoryService = getApplicationComponent(RepositoryService.class);
     return repositoryService.getCurrentRepository();
   }
-  
+
   public void initPopup(String path) throws Exception {
     removeChildById("TaxonomyPopupCreateChild");
     UIPopupWindow uiPopup = addChild(UIPopupWindow.class, null, "TaxonomyPopupCreateChild");
@@ -143,7 +143,7 @@ public class UITaxonomyTreeCreateChild extends UIContainer {
     removeChildById(id) ;
     return addChild(UIPopupContainer.class, null, id) ;
   }
-  
+
   public void onChange(Node currentNode) throws Exception {
     UIBreadcumbs uiBreadcumbs = getChild(UIBreadcumbs.class);
     List<LocalPath> listLocalPath = new ArrayList<LocalPath>();
@@ -161,12 +161,12 @@ public class UITaxonomyTreeCreateChild extends UIContainer {
           }
         }
       }
-    } 
+    }
     uiBreadcumbs.setPath(listLocalPath);
   }
-  
-  public void changeGroup(String groupId, Object context) throws Exception {    
-    String stringPath = getTaxonomyTreeNode().getPath() + "/";    
+
+  public void changeGroup(String groupId, Object context) throws Exception {
+    String stringPath = getTaxonomyTreeNode().getPath() + "/";
     UIBreadcumbs uiBreadcumb = getChild(UIBreadcumbs.class);
     if (groupId == null) groupId = "";
     List<LocalPath> listLocalPath = uiBreadcumb.getPath();
@@ -194,7 +194,7 @@ public class UITaxonomyTreeCreateChild extends UIContainer {
       uiTaxonomyTree.setNodeSelect(stringPath);
     }
   }
-  
+
   public String getWorkspace() {
     return workspace;
   }
@@ -206,7 +206,7 @@ public class UITaxonomyTreeCreateChild extends UIContainer {
   public void setTaxonomyTreeNode(Node taxonomyTreeNode) {
     this.taxonomyTreeNode = taxonomyTreeNode;
   }
-  
+
   public static class SelectPathActionListener extends EventListener<UIBreadcumbs> {
     public void execute(Event<UIBreadcumbs> event) throws Exception {
       UIBreadcumbs uiBreadcumbs = event.getSource();

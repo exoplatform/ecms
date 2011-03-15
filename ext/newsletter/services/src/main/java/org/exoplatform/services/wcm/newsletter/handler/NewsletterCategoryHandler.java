@@ -47,18 +47,18 @@ public class NewsletterCategoryHandler {
 
   /** The log. */
   private static Log log = ExoLogger.getLogger(NewsletterCategoryHandler.class);
-  
+
   /** The repository service. */
   private RepositoryService repositoryService;
-  
+
   /** The repository. */
   private String repository;
-  
+
   /** The workspace. */
   private String workspace;
-  
+
   private boolean isRemove;
-  
+
   public boolean isRemove() {
     return isRemove;
   }
@@ -69,7 +69,7 @@ public class NewsletterCategoryHandler {
 
   /**
    * Instantiates a new newsletter category handler.
-   * 
+   *
    * @param repository the repository
    * @param workspace the workspace
    */
@@ -81,113 +81,112 @@ public class NewsletterCategoryHandler {
 
   /**
    * Gets the category from node.
-   * 
+   *
    * @param categoryNode the category node
-   * 
+   *
    * @return the category from node
-   * 
+   *
    * @throws Exception the exception
    */
   public NewsletterCategoryConfig getCategoryFromNode(Node categoryNode) throws Exception{
-  	NewsletterCategoryConfig categoryConfig = null;
-  	categoryConfig = new NewsletterCategoryConfig();
-  	categoryConfig.setName(categoryNode.getName());
-  	categoryConfig.setTitle(categoryNode.getProperty(NewsletterConstant.CATEGORY_PROPERTY_TITLE).getString());
-  	if (categoryNode.hasProperty(NewsletterConstant.CATEGORY_PROPERTY_DESCRIPTION)) {
-  	  categoryConfig.setDescription(categoryNode.getProperty(NewsletterConstant.CATEGORY_PROPERTY_DESCRIPTION).getString());
-  	}
-  	// get permission for this category
-  	String permission = "";
-  	for(String per : NewsletterConstant.getAllPermissionOfNode(categoryNode)){
-  	  if(permission.length() > 0) permission += ",";
+    NewsletterCategoryConfig categoryConfig = null;
+    categoryConfig = new NewsletterCategoryConfig();
+    categoryConfig.setName(categoryNode.getName());
+    categoryConfig.setTitle(categoryNode.getProperty(NewsletterConstant.CATEGORY_PROPERTY_TITLE).getString());
+    if (categoryNode.hasProperty(NewsletterConstant.CATEGORY_PROPERTY_DESCRIPTION)) {
+      categoryConfig.setDescription(categoryNode.getProperty(NewsletterConstant.CATEGORY_PROPERTY_DESCRIPTION).getString());
+    }
+    // get permission for this category
+    String permission = "";
+    for(String per : NewsletterConstant.getAllPermissionOfNode(categoryNode)){
+      if(permission.length() > 0) permission += ",";
       permission += per;
-  	}
+    }
     categoryConfig.setModerator(permission);
-  	return categoryConfig;
+    return categoryConfig;
   }
-  
-  
-  
-  
-  
-  
-  
+
+
+
+
+
+
+
   /**
    * Gets the category node from NewsletterCategoryConfig.
-   * 
+   *
    * @param SessionProvider the session provider
    * @param portalName the current portal's name
    * @param NewsletterCategoryConfig the newsletter category object
-   * 
+   *
    * @return the category node
-   * 
+   *
    * @throws Exception the exception
    */
-  public Node getCategoryFromConfig(SessionProvider sessionProvider, String portalName, NewsletterCategoryConfig config) throws Exception{
+  public Node getCategoryFromConfig(SessionProvider sessionProvider,
+                                    String portalName,
+                                    NewsletterCategoryConfig config) throws Exception {
     ManageableRepository manageableRepository = repositoryService.getRepository(repository);
     Session session = sessionProvider.getSession(workspace, manageableRepository);
     String categoryPath = NewsletterConstant.generateCategoryPath(portalName);
     Node categoriesNode = (Node)session.getItem(categoryPath);
     return categoriesNode.getNode(config.getName());
   }
-  
-  
-  
-  
-  
-  
-  
-  
-  
+
   /**
    * Update permission for category node.
-   * 
+   *
    * @param categoryNode    node which is will be updated
    * @param categoryConfig  Category Object
    * @param isAddNew        is <code>True</code> if is add new category node and <code>False</code> if only update
    * @throws Exception      The Exception
    */
-  private List<String> updatePermissionForCategoryNode(Node categoryNode, NewsletterCategoryConfig categoryConfig, boolean isAddNew) {
+  private List<String> updatePermissionForCategoryNode(Node categoryNode,
+                                                       NewsletterCategoryConfig categoryConfig,
+                                                       boolean isAddNew) {
     ExtendedNode extendedCategoryNode = ExtendedNode.class.cast(categoryNode);
     List<String> afterRemovePermisions = new ArrayList<String>();
     try {
       if (extendedCategoryNode.canAddMixin("exo:privilegeable") || extendedCategoryNode.isNodeType("exo:privilegeable")) {
         if(extendedCategoryNode.canAddMixin("exo:privilegeable"))
           extendedCategoryNode.addMixin("exo:privilegeable");
-        
+
         // Set permission is all for moderators
         List<String> newModerators = new ArrayList<String>();
-        newModerators.addAll(Arrays.asList(categoryConfig.getModerator().split(","))); 
+        newModerators.addAll(Arrays.asList(categoryConfig.getModerator().split(",")));
         String[] permissions = new String[]{PermissionType.REMOVE, PermissionType.ADD_NODE, PermissionType.SET_PROPERTY};
-        
+
         //Update permissions for subscriptions of this category node
         NewsletterConstant.addPermissionsFromCateToSubs(categoryNode, newModerators.toArray(new String[]{}), permissions);
-        permissions = new String[]{PermissionType.READ, PermissionType.ADD_NODE, PermissionType.REMOVE, PermissionType.SET_PROPERTY};
+        permissions = new String[] { PermissionType.READ, PermissionType.ADD_NODE,
+            PermissionType.REMOVE, PermissionType.SET_PROPERTY };
         for(String permission : newModerators){
           extendedCategoryNode.setPermission(permission, permissions);
         }
-        
+
         // Set permission is read, addNode, remove and setProperty for administrators
-        if(isAddNew){
+        if (isAddNew) {
           Node categoriesNode = categoryNode.getParent();
-          if(categoriesNode.hasProperty(NewsletterConstant.CATEGORIES_PROPERTY_ADDMINISTRATOR)) {
-            Value[] values = categoriesNode.getProperty(NewsletterConstant.CATEGORIES_PROPERTY_ADDMINISTRATOR).getValues();
-            for(String admin : NewsletterConstant.convertValuesToArray(values)){
-              if(newModerators.contains(admin)) continue;
+          if (categoriesNode.hasProperty(NewsletterConstant.CATEGORIES_PROPERTY_ADDMINISTRATOR)) {
+            Value[] values = categoriesNode.getProperty(NewsletterConstant.CATEGORIES_PROPERTY_ADDMINISTRATOR)
+                                           .getValues();
+            for (String admin : NewsletterConstant.convertValuesToArray(values)) {
+              if (newModerators.contains(admin))
+                continue;
               extendedCategoryNode.setPermission(admin, permissions);
               newModerators.add(admin);
             }
           }
         }
-        
+
         // set only read permission for normal users who are not administrator or moderator.
-        for(String oldPer : NewsletterConstant.getAllPermissionOfNode(categoryNode)){
-          if(!newModerators.contains(oldPer)){
+        for (String oldPer : NewsletterConstant.getAllPermissionOfNode(categoryNode)) {
+          if (!newModerators.contains(oldPer)) {
             extendedCategoryNode.removePermission(oldPer, PermissionType.ADD_NODE);
             extendedCategoryNode.removePermission(oldPer, PermissionType.REMOVE);
             extendedCategoryNode.removePermission(oldPer, PermissionType.SET_PROPERTY);
             extendedCategoryNode.removePermission(oldPer, PermissionType.CHANGE_PERMISSION);
-            extendedCategoryNode.setPermission(oldPer, new String[]{PermissionType.READ});
+            extendedCategoryNode.setPermission(oldPer, new String[] { PermissionType.READ });
             afterRemovePermisions.add(oldPer);
           }
         }
@@ -197,15 +196,17 @@ public class NewsletterCategoryHandler {
     }
     return afterRemovePermisions;
   }
-  
+
   /**
    * Adds the.
-   * 
+   *
    * @param portalName the portal name
    * @param categoryConfig the category config
    * @param sessionProvider the session provider
    */
-  public void add(SessionProvider sessionProvider, String portalName, NewsletterCategoryConfig categoryConfig) {
+  public void add(SessionProvider sessionProvider,
+                  String portalName,
+                  NewsletterCategoryConfig categoryConfig) {
     log.info("Trying to add category " + categoryConfig.getName());
     try {
       ManageableRepository manageableRepository = repositoryService.getRepository(repository);
@@ -213,19 +214,19 @@ public class NewsletterCategoryHandler {
       String categoryPath = NewsletterConstant.generateCategoryPath(portalName);
       Node categoriesNode = (Node)session.getItem(categoryPath);
       Node categoryNode = categoriesNode.addNode(categoryConfig.getName(), NewsletterConstant.CATEGORY_NODETYPE);
-      
+
       // Add template node into this category node and set Read, Add_node permission for "any".
       ExtendedNode extendedTemplateNode = ExtendedNode.class.cast(categoryNode.addNode("Templates", "nt:unstructured"));
       if(extendedTemplateNode.canAddMixin("exo:privilegeable")){
         extendedTemplateNode.addMixin("exo:privilegeable");
         extendedTemplateNode.setPermission("any", new String[]{PermissionType.ADD_NODE, PermissionType.READ});
       }
-      
+
       // Set properties for category node
       ExtendedNode extendedCategoryNode = ExtendedNode.class.cast(categoryNode);
       extendedCategoryNode.setProperty(NewsletterConstant.CATEGORY_PROPERTY_TITLE, categoryConfig.getTitle());
       extendedCategoryNode.setProperty(NewsletterConstant.CATEGORY_PROPERTY_DESCRIPTION, categoryConfig.getDescription());
-      
+
       // add permissions for this category node
       this.updatePermissionForCategoryNode(categoryNode, categoryConfig, true);
       session.save();
@@ -233,10 +234,10 @@ public class NewsletterCategoryHandler {
       log.error("Add category " + categoryConfig.getName() + " failed because of: ", e);
     }
   }
-  
+
   /**
    * Edits the.
-   * 
+   *
    * @param portalName the portal name
    * @param categoryConfig the category config
    * @param sessionProvider the session provider
@@ -251,9 +252,14 @@ public class NewsletterCategoryHandler {
       categoryNode.setProperty(NewsletterConstant.CATEGORY_PROPERTY_DESCRIPTION, categoryConfig.getDescription());
       categoryNode.setProperty(NewsletterConstant.CATEGORY_PROPERTY_TITLE, categoryConfig.getTitle());
       List<String> candicateRemove = this.updatePermissionForCategoryNode(categoryNode, categoryConfig, false);
-      if(isRemove) {
-        List<String> ableToRemove = NewsletterConstant.removePermission(null, categoryNode, candicateRemove, false, portalName, session);
-        String [] removePer = new String [ableToRemove.size()];
+      if (isRemove) {
+        List<String> ableToRemove = NewsletterConstant.removePermission(null,
+                                                                        categoryNode,
+                                                                        candicateRemove,
+                                                                        false,
+                                                                        portalName,
+                                                                        session);
+        String[] removePer = new String[ableToRemove.size()];
         NewsletterConstant.removeAccessPermission(ableToRemove.toArray(removePer));
       }
       session.save();
@@ -264,10 +270,10 @@ public class NewsletterCategoryHandler {
       log.info("Edit category " + categoryConfig.getName() + " failed because of ", e);
     }
   }
-  
+
   /**
    * Delete.
-   * 
+   *
    * @param portalName the portal name
    * @param categoryName the category name
    * @param sessionProvider the session provider
@@ -280,9 +286,14 @@ public class NewsletterCategoryHandler {
       String categoryPath = NewsletterConstant.generateCategoryPath(portalName);
       Node categoryNode = ((Node)session.getItem(categoryPath)).getNode((categoryName));
       List<String> candicateRemove = NewsletterConstant.getAllPermissionOfNode((Node)session.getItem(categoryPath));
-      if(isRemove) {
-        List<String> ableToRemove = NewsletterConstant.removePermission(null, categoryNode, candicateRemove, false, portalName, session);
-        String [] removePer = new String [ableToRemove.size()];
+      if (isRemove) {
+        List<String> ableToRemove = NewsletterConstant.removePermission(null,
+                                                                        categoryNode,
+                                                                        candicateRemove,
+                                                                        false,
+                                                                        portalName,
+                                                                        session);
+        String[] removePer = new String[ableToRemove.size()];
         NewsletterConstant.removeAccessPermission(ableToRemove.toArray(removePer));
       }
       categoryNode.remove();
@@ -291,45 +302,49 @@ public class NewsletterCategoryHandler {
       log.error("Delete category " + categoryName + " failed because of ", e);
     }
   }
-  
+
   /**
    * Gets the category by name.
-   * 
+   *
    * @param portalName the portal name
    * @param categoryName the category name
    * @param sessionProvider the session provider
-   * 
+   *
    * @return the category by name
-   * 
+   *
    * @throws Exception the exception
    */
-  public NewsletterCategoryConfig getCategoryByName(SessionProvider sessionProvider, String portalName, String categoryName) throws Exception{
-  	try{ManageableRepository manageableRepository = repositoryService.getRepository(repository);
+  public NewsletterCategoryConfig getCategoryByName(SessionProvider sessionProvider,
+                                                    String portalName,
+                                                    String categoryName) throws Exception {
+    try {
+      ManageableRepository manageableRepository = repositoryService.getRepository(repository);
       Session session = sessionProvider.getSession(workspace, manageableRepository);
       String categoryPath = NewsletterConstant.generateCategoryPath(portalName);
-      Node categoriesNode = (Node)session.getItem(categoryPath);
+      Node categoriesNode = (Node) session.getItem(categoryPath);
       return getCategoryFromNode(categoriesNode.getNode(categoryName));
-  	} catch(Exception ex){
-  	  log.error("Error when getCategoryByName: " + ex);
-  	}
-  	return null;
+    } catch (Exception ex) {
+      log.error("Error when getCategoryByName: " + ex);
+    }
+    return null;
   }
-  
+
   /**
    * Gets the list categories.
-   * 
+   *
    * @param portalName the portal name
    * @param sessionProvider the session provider
-   * 
+   *
    * @return the list categories
-   * 
+   *
    * @throws Exception the exception
    */
-  public List<NewsletterCategoryConfig> getListCategories(String portalName, SessionProvider sessionProvider) throws Exception{
+  public List<NewsletterCategoryConfig> getListCategories(String portalName,
+                                                          SessionProvider sessionProvider) throws Exception {
     List<NewsletterCategoryConfig> listCategories = new ArrayList<NewsletterCategoryConfig>();
     NodeIterator nodeIterator = null;
     try{
-    	ManageableRepository manageableRepository = repositoryService.getRepository(repository);
+      ManageableRepository manageableRepository = repositoryService.getRepository(repository);
       Session session = sessionProvider.getSession(workspace, manageableRepository);
       String categoryPath = NewsletterConstant.generateCategoryPath(portalName);
       Node categoriesNode = (Node)session.getItem(categoryPath);
@@ -342,20 +357,21 @@ public class NewsletterCategoryHandler {
     }
     return listCategories;
   }
-  
+
   /**
-   * Get list of categories which 
+   * Get list of categories which
    * - Current user has permission in a category
-   * - Current user doesn't have permission but has permissions in one of subscriptions in a category  
-   * 
+   * - Current user doesn't have permission but has permissions in one of subscriptions in a category
+   *
    * @param portalName the current portal's name
    * @param userName the current user's name
    * @param sessionProvider the session provider
-   * 
-   * @return the list of newsletter category object 
+   *
+   * @return the list of newsletter category object
    */
-  
-  public List<NewsletterCategoryConfig> getListCategoriesCanView(String portalName, String userName, 
+
+  public List<NewsletterCategoryConfig> getListCategoriesCanView(String portalName,
+                                                                 String userName,
                                                                  SessionProvider sessionProvider) throws Exception {
     List<NewsletterCategoryConfig> listCategories = new ArrayList<NewsletterCategoryConfig>();
     ManageableRepository manageableRepository = repositoryService.getRepository(repository);
@@ -365,17 +381,18 @@ public class NewsletterCategoryHandler {
     Node categoryNode = null;
     Node subNode = null;
     NodeIterator categoryIterator = categoriesNode.getNodes();
-    while(categoryIterator.hasNext()){
+    while (categoryIterator.hasNext()) {
       categoryNode = categoryIterator.nextNode();
-      if(NewsletterConstant.hasPermission(userName, categoryNode)) { 
+      if (NewsletterConstant.hasPermission(userName, categoryNode)) {
         listCategories.add(getCategoryFromNode(categoryNode));
       } else {
         NodeIterator subscriptionIterator = categoriesNode.getNodes();
-        while(subscriptionIterator.hasNext()){
+        while (subscriptionIterator.hasNext()) {
           subNode = subscriptionIterator.nextNode();
-          if(subNode.isNodeType(NewsletterConstant.SUBSCRIPTION_NODETYPE) && NewsletterConstant.hasPermission(userName, subNode)){
-              listCategories.add(getCategoryFromNode(categoryNode));
-              break;
+          if (subNode.isNodeType(NewsletterConstant.SUBSCRIPTION_NODETYPE)
+              && NewsletterConstant.hasPermission(userName, subNode)) {
+            listCategories.add(getCategoryFromNode(categoryNode));
+            break;
           }
         }
       }

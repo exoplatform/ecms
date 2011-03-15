@@ -30,18 +30,18 @@ import org.exoplatform.webui.ext.filter.UIExtensionFilterType;
  * Created by The eXo Platform SAS
  * Author : eXoPlatform
  *          nicolas.filotto@exoplatform.com
- * 6 mai 2009  
+ * 6 mai 2009
  */
 public class IsDocumentFilter extends UIExtensionAbstractFilter {
 
   public IsDocumentFilter() {
     this("UIActionBar.msg.not-supported");
   }
-  
+
   public IsDocumentFilter(String messageKey) {
     super(messageKey, UIExtensionFilterType.MANDATORY);
   }
-  
+
   public boolean accept(Map<String, Object> context) throws Exception {
     if (context == null) return true;
     Node currentNode = (Node) context.get(Node.class.getName());
@@ -54,5 +54,5 @@ public class IsDocumentFilter extends UIExtensionAbstractFilter {
   public void onDeny(Map<String, Object> context) throws Exception {
     if (context == null) return;
     createUIPopupMessages(context, messageKey);
-  }    
+  }
 }

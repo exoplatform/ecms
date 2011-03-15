@@ -25,7 +25,7 @@ import org.exoplatform.webui.core.lifecycle.UIContainerLifecycle;
  * Author : Dang Van Minh
  *          minh.dang@exoplatform.com
  * Oct 2, 2006
- * 5:35:40 PM 
+ * 5:35:40 PM
  */
 @ComponentConfig (lifecycle = UIContainerLifecycle.class)
 public class UINodeTypeImportPopup extends UIContainer {

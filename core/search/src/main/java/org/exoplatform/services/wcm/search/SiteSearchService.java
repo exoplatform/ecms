@@ -24,15 +24,15 @@ import org.exoplatform.services.jcr.ext.common.SessionProvider;
  * hoa.pham@exoplatform.com
  * Oct 7, 2008
  */
-public interface SiteSearchService {  
-  
+public interface SiteSearchService {
+
   /**
    * Adds the exclude include data type plugin.
-   * 
+   *
    * @param plugin the plugin
    */
-  public void addExcludeIncludeDataTypePlugin(ExcludeIncludeDataTypePlugin plugin);  
-  
+  public void addExcludeIncludeDataTypePlugin(ExcludeIncludeDataTypePlugin plugin);
+
   /**
    * Search site contents.<br/>
    * Fill all child nodes of portal which have node type is document, nt:resource or nt:file and check content of them.
@@ -43,13 +43,13 @@ public interface SiteSearchService {
    * 2. Keyword: key work to search.<br/>
    * 3. SearchDocument and SearchWebContent: two parameter must have save value <code>True</code> or <code>False</code><br/>
    * 4. SearchWebpage: search content of nodes which are added into one or more pages.
-   * 
+   *
    * @param queryCriteria the query criteria
    * @param sessionProvider the session provider
    * @param pageSize the page size
-   * 
+   *
    * @return the wCM paginated query result
-   * 
+   *
    * @throws Exception the exception
    */
   public WCMPaginatedQueryResult searchSiteContents(SessionProvider sessionProvider, QueryCriteria queryCriteria, int pageSize, boolean isSearchContent) throws Exception;

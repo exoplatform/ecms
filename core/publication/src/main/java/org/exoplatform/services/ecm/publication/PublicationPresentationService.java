@@ -25,10 +25,10 @@ import org.exoplatform.webui.form.UIForm;
  * Created by The eXo Platform SAS
  * Author : Romain Dénarié
  *          romain.denarie@exoplatform.com
- * 7 mai 08  
+ * 7 mai 08
  */
 public interface PublicationPresentationService {
- 
+
   /**
    * Retrieves the WebUI form corresponding to the current state of the
    * specified node.
@@ -36,7 +36,7 @@ public interface PublicationPresentationService {
    * a publication mixin, then it throws a NotInPublicationLifecycleException
    * exception. Else, it retrieves the lifecycle name from the mixin,
    * selects the appropriate publication plugin and delegates the call to it.
-   * 
+   *
    * @param node the Node from which the state UI should be retrieved
    * @return a WebUI form corresponding to the current state and node.
    * @throws NotInPublicationLifecycleException in case the Node has not
@@ -44,13 +44,13 @@ public interface PublicationPresentationService {
    * mixin has been found).
    */
   public UIForm getStateUI(Node node, UIComponent component) throws NotInPublicationLifecycleException, Exception;
-  
+
   /**
    * Add a Publication Plugin to the service.
    * The method caches all added plugins.
-   * 
+   *
    * @param p the plugin to add
    */
   public void addPublicationPlugin(PublicationPlugin p);
-  
+
 }

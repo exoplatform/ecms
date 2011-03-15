@@ -67,101 +67,100 @@ public class RssConnector extends BaseConnector implements ResourceContainer {
 
   /** The WORKSPACE. */
   static private String WORKSPACE = "workspace".intern() ;
-  
+
   /** The REPOSITORY. */
   static private String REPOSITORY = "repository".intern() ;
-  
+
   /** The RS s_ version. */
   static private String RSS_VERSION = "rss_2.0".intern() ;
-  
+
   /** The FEE d_ title. */
   static private String FEED_TITLE = "exo:feedTitle".intern() ;
-  
+
   /** The DESCRIPTION. */
   static private String DESCRIPTION = "exo:description".intern() ;
-  
+
   /** The TITLE. */
   static private String TITLE = "exo:title";
-  
+
   /** The LINK. */
   static private String LINK = "exo:link".intern() ;
-  
+
   /** The SUMMARY. */
   static private String SUMMARY = "exo:summary";
 
   /** The detail page */
   static private String DETAIL_PAGE = "detail-page";
-  
+
   /** The detail get param */
   static private String DETAIL_PARAM = "detail-param";
-  
+
   /** The wcm composer service. */
   private WCMComposer wcmComposer;
-  
+
   /** The wcm configuration service. */
   private WCMConfigurationService wcmConfigurationService;
-  
+
   /** The log. */
   private static Log log = ExoLogger.getLogger(RssConnector.class);
-  
+
   /**
    * Instantiates a new rss connector.
-   * 
+   *
    * @param container the container
    */
   public RssConnector() {
-	  wcmConfigurationService = WCMCoreUtils.getService(WCMConfigurationService.class);
-      wcmComposer = WCMCoreUtils.getService(WCMComposer.class);
+    wcmConfigurationService = WCMCoreUtils.getService(WCMConfigurationService.class);
+    wcmComposer = WCMCoreUtils.getService(WCMComposer.class);
   }
 
   /**
    * Generate.
-   * 
+   *
    * @param repositoryName the repository name
    * @param workspaceName the workspace name
    * @param server the server
    * @param siteName the site name
    * @param categoryPath the category path
-   * 
+   *
    * @return the response
-   * 
+   *
    * @throws Exception the exception
    */
   @GET
   @Path("/rss/")
-//  @OutputTransformer(XMLOutputTransformer.class)
-  public Response generate ( 
-      @QueryParam("repository") String repositoryName, 
-      @QueryParam("workspace") String workspaceName,
-      @QueryParam("server") String server,
-      @QueryParam("siteName") String siteName,
-      @QueryParam("title") String title,
-      @QueryParam("desc") String desc,
-      @QueryParam("folderPath") String folderPath,
-      @QueryParam("orderBy") String orderBy,
-      @QueryParam("orderType") String orderType,
-      @QueryParam("lang") String lang,
-      @QueryParam("detailPage") String detailPage,
-      @QueryParam("detailParam") String detailParam,
-	  @QueryParam("recursive") String recursive
-	  ) throws Exception {
-    
+  public Response generate(@QueryParam("repository") String repositoryName,
+                           @QueryParam("workspace") String workspaceName,
+                           @QueryParam("server") String server,
+                           @QueryParam("siteName") String siteName,
+                           @QueryParam("title") String title,
+                           @QueryParam("desc") String desc,
+                           @QueryParam("folderPath") String folderPath,
+                           @QueryParam("orderBy") String orderBy,
+                           @QueryParam("orderType") String orderType,
+                           @QueryParam("lang") String lang,
+                           @QueryParam("detailPage") String detailPage,
+                           @QueryParam("detailParam") String detailParam,
+                           @QueryParam("recursive") String recursive) throws Exception {
+
     Map<String, String> contextRss = new HashMap<String, String>();
     contextRss.put(REPOSITORY, repositoryName);
     contextRss.put(WORKSPACE, workspaceName);
     contextRss.put(RSS_VERSION, "rss_2.0");
     contextRss.put(FEED_TITLE, title);
-    if (desc==null) desc = "Powered by eXo "+ProductVersions.getCurrentVersion();
+    if (desc == null)
+      desc = "Powered by eXo " + ProductVersions.getCurrentVersion();
     contextRss.put(DESCRIPTION, desc);
-    
+
     contextRss.put(LINK, server);
 
-    if (detailPage == null) detailPage  = wcmConfigurationService.getRuntimeContextParam(WCMConfigurationService.PARAMETERIZED_PAGE_URI);
+    if (detailPage == null)
+      detailPage = wcmConfigurationService.getRuntimeContextParam(WCMConfigurationService.PARAMETERIZED_PAGE_URI);
     contextRss.put(DETAIL_PAGE, detailPage);
     if (detailParam == null) detailParam  = "content-id";
     contextRss.put(DETAIL_PARAM, detailParam);
-    
-    
+
+
     HashMap<String, String> filters = new HashMap<String, String>();
     filters.put(WCMComposer.FILTER_MODE, WCMComposer.MODE_LIVE);
     if (orderType == null) orderType = "DESC";
@@ -174,31 +173,39 @@ public class RssConnector extends BaseConnector implements ResourceContainer {
 
     String path=null;
     if (folderPath!=null) {
-    	path = folderPath;
+      path = folderPath;
     }
-    
-    
-    List<Node> nodes = wcmComposer.getContents(repositoryName, workspaceName, path, filters, WCMCoreUtils.getUserSessionProvider());
-    
+
+
+    List<Node> nodes = wcmComposer.getContents(repositoryName,
+                                               workspaceName,
+                                               path,
+                                               filters,
+                                               WCMCoreUtils.getUserSessionProvider());
+
     String feedXML = generateRSS(nodes, contextRss);
-    
-    Document document = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(new ByteArrayInputStream(feedXML.getBytes()));
-    
+
+    Document document = DocumentBuilderFactory.newInstance()
+                                              .newDocumentBuilder()
+                                              .parse(new ByteArrayInputStream(feedXML.getBytes()));
+
     DateFormat dateFormat = new SimpleDateFormat(IF_MODIFIED_SINCE_DATE_FORMAT);
-    Response response = Response.ok(new DOMSource(document), MediaType.TEXT_XML).header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
+    Response response = Response.ok(new DOMSource(document), MediaType.TEXT_XML)
+                                .header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date()))
+                                .build();
     return response;
   }
-  
+
   /**
    * Generate rss.
-   * 
+   *
    * @param context the context
-   * 
+   *
    * @return the string
    */
-  private String generateRSS(List<Node> nodes , Map<String, String> context) {  
+  private String generateRSS(List<Node> nodes , Map<String, String> context) {
     String rssVersion = context.get(RSS_VERSION) ;
-    String feedTitle = context.get(FEED_TITLE) ;    
+    String feedTitle = context.get(FEED_TITLE) ;
     String feedDescription = context.get(DESCRIPTION) ;
     String feedLink = context.get(LINK) ;
     String detailPage = context.get(DETAIL_PAGE) ;
@@ -206,52 +213,57 @@ public class RssConnector extends BaseConnector implements ResourceContainer {
     String repository = context.get(REPOSITORY) ;
     String workspace = context.get(WORKSPACE) ;
     String contentUrl;
-    if (!feedLink.endsWith("/") ) {
-    	contentUrl= feedLink + "/" + detailPage + "?" + detailParam + "=/" + repository + "/" + workspace;
-    }else {
-    	contentUrl= feedLink + detailPage + "?" + detailParam + "=/" + repository + "/" + workspace;
+    if (!feedLink.endsWith("/")) {
+      contentUrl = feedLink + "/" + detailPage + "?" + detailParam + "=/" + repository + "/"
+          + workspace;
+    } else {
+      contentUrl = feedLink + detailPage + "?" + detailParam + "=/" + repository + "/" + workspace;
     }
 
     if(feedTitle == null || feedTitle.length() == 0) feedTitle = "" ;
     try {
-      
-      SyndFeed feed = new SyndFeedImpl();      
-      feed.setFeedType(rssVersion);      
+
+      SyndFeed feed = new SyndFeedImpl();
+      feed.setFeedType(rssVersion);
       feed.setTitle(feedTitle.replaceAll("&nbsp;", " "));
       feed.setLink(feedLink);
       feed.setDescription(feedDescription.replaceAll("&nbsp;", " "));
       feed.setEncoding("UTF-8");
-      
+
       List<SyndEntry> entries = new ArrayList<SyndEntry>();
       Iterator<Node> iter = nodes.iterator();
-      while (iter.hasNext()) {        
+      while (iter.hasNext()) {
         Node node = iter.next();
         String url = contentUrl + node.getPath() ;
         SyndEntry entry = new SyndEntryImpl();
-        
+
         if (node.hasProperty(TITLE)) {
           String nTitle = node.getProperty(TITLE).getString();
           //encoding
           nTitle = new String(nTitle.getBytes("UTF-8"));
-          entry.setTitle(Text.encodeIllegalXMLCharacters(nTitle));                
+          entry.setTitle(Text.encodeIllegalXMLCharacters(nTitle));
         }
         else entry.setTitle("") ;
-        
-        entry.setLink(url);        
+
+        entry.setLink(url);
         SyndContent description = new SyndContentImpl();
         description.setType("text/plain");
-        
-        if (node.hasProperty(SUMMARY)) description.setValue(Text.encodeIllegalXMLCharacters(node.getProperty(SUMMARY).getString()).replaceAll("&nbsp;", " "));
-        else description.setValue("") ;
-        
-        entry.setDescription(description);        
+
+        if (node.hasProperty(SUMMARY))
+          description.setValue(Text.encodeIllegalXMLCharacters(node.getProperty(SUMMARY)
+                                                                   .getString())
+                                   .replaceAll("&nbsp;", " "));
+        else
+          description.setValue("");
+
+        entry.setDescription(description);
         entries.add(entry);
         entry.getEnclosures() ;
-      }      
-      feed.setEntries(entries);      
-           
-      SyndFeedOutput output = new SyndFeedOutput();      
-      String feedXML = output.outputString(feed);      
+      }
+      feed.setEntries(entries);
+
+      SyndFeedOutput output = new SyndFeedOutput();
+      String feedXML = output.outputString(feed);
       feedXML = StringUtils.replace(feedXML,"&amp;","&");
       return feedXML;
     } catch (Exception e) {
@@ -260,15 +272,6 @@ public class RssConnector extends BaseConnector implements ResourceContainer {
     return null;
   }
 
-//  /**
-//   * Gets the entry url.
-//   * 
-//   * @return the entry url
-//   */
-//  private String getEntryUrl(String link, String detailPage, String detailParam, String contentPath) {
-//    return link + "/" + detailPage + "?" + detailParam + "=" +contentPath;
-//  }
-  
   /* (non-Javadoc)
    * @see org.exoplatform.wcm.connector.BaseConnector#getContentStorageType()
    */

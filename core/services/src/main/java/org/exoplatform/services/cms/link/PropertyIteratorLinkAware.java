@@ -28,7 +28,7 @@ import org.exoplatform.services.log.Log;
  * Created by The eXo Platform SAS
  * Author : eXoPlatform
  *          nicolas.filotto@exoplatform.com
- * 1 avr. 2009  
+ * 1 avr. 2009
  */
 public class PropertyIteratorLinkAware extends RangeIteratorLinkAware implements PropertyIterator {
 
@@ -36,7 +36,7 @@ public class PropertyIteratorLinkAware extends RangeIteratorLinkAware implements
    * Logger.
    */
   private static final Log LOG  = ExoLogger.getLogger("cms.PropertyIteratorLinkAware");
-  
+
   public PropertyIteratorLinkAware(Session originalSession,
                                    String virtualPath,
                                    PropertyIterator propertyIterator) {
@@ -55,12 +55,12 @@ public class PropertyIteratorLinkAware extends RangeIteratorLinkAware implements
     }
     return property;
   }
-  
+
 
   /**
    * {@inheritDoc}
    */
   public Object next() {
     return nextProperty();
-  }  
+  }
 }

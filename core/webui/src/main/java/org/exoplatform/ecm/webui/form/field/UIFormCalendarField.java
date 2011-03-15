@@ -29,7 +29,7 @@ import org.exoplatform.webui.form.UIFormInputBase;
  * Created by The eXo Platform SAS
  * @author : Hoa.Pham
  *          hoa.pham@exoplatform.com
- * Jun 23, 2008  
+ * Jun 23, 2008
  */
 public class UIFormCalendarField extends DialogFormField {
 
@@ -52,7 +52,7 @@ public class UIFormCalendarField extends DialogFormField {
       } catch(Exception e) {
         date = null;
       }
-    }     
+    }
     UIFormDateTimeInput uiDateTime = null;
     if(isDisplayTime()) {
       uiDateTime = new UIFormDateTimeInput(name, name, date) ;
@@ -66,12 +66,12 @@ public class UIFormCalendarField extends DialogFormField {
     } else {
       uiDateTime.setCalendar(null);
     }
-    if(label != null) uiDateTime.setLabel(label);       
+    if(label != null) uiDateTime.setLabel(label);
     return (T)uiDateTime;
   }
-  
-  public boolean isVisible() { 
-    if (visible == null) return true; 
+
+  public boolean isVisible() {
+    if (visible == null) return true;
     return "true".equalsIgnoreCase(visible);
   }
   public boolean isDisplayTime() { return "displaytime".equals(options); }

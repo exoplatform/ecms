@@ -39,7 +39,7 @@ public class XScriptJob extends BaseJob {
    * @see org.exoplatform.services.scheduler.BaseJob#execute(org.exoplatform.services.scheduler.JobContext)
    */
   public void execute(JobContext arg0) throws Exception {
-    XJavascriptService jsService = WCMCoreUtils.getService(XJavascriptService.class); 
+    XJavascriptService jsService = WCMCoreUtils.getService(XJavascriptService.class);
     XSkinService skinService = WCMCoreUtils.getService(XSkinService.class);
     if(jsService == null || skinService == null) return;
     try {

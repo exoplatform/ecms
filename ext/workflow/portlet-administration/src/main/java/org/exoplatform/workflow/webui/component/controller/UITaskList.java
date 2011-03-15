@@ -40,28 +40,28 @@ import org.exoplatform.webui.event.EventListener;
  * Author : Ly Dinh Quang
  *          quang.ly@exoplatform.com
  *          xxx5669@gmail.com
- * Jan 13, 2009  
+ * Jan 13, 2009
  */
 @ComponentConfig(
     template =  "app:/groovy/webui/component/UITaskList.gtmpl",
     events = {@EventConfig(listeners = UITaskList.ManageStateActionListener.class)}
 )
 public class UITaskList extends UIContainer {
-  
+
   private WorkflowServiceContainer workflowServiceContainer_;
-  
+
   private WorkflowFormsService workflowFormsService_;
-  
+
   private static final String NODE_VIEW = "nodeview";
-  
+
   private static final String NODE_EDIT = "nodeedit";
-  
+
   private static final String NODE_PATH_VARIABLE = "nodePath";
-  
+
   private static final String WORKSPACE_VARIABLE = "srcWorkspace";
-  
+
   private static final String REPOSITORY_VARIABLE = "repository";
-  
+
   public UITaskList() throws Exception {
     workflowServiceContainer_ = getApplicationComponent(WorkflowServiceContainer.class);
     workflowFormsService_ = getApplicationComponent(WorkflowFormsService.class);
@@ -77,24 +77,24 @@ public class UITaskList extends UIContainer {
 
   public String getIconURL(Task task) {
     try {
-      Locale locale = Util.getUIPortal().getAncestorOfType(UIPortalApplication.class).getLocale() ;    
+      Locale locale = Util.getUIPortal().getAncestorOfType(UIPortalApplication.class).getLocale() ;
       Form form = workflowFormsService_.getForm(task.getProcessId(), task.getTaskName(), locale);
-      return form.getIconURL(); 
+      return form.getIconURL();
     } catch(Exception e) {
       return "" ;
-    }    
+    }
   }
 
   @SuppressWarnings("unchecked")
   public List<Task> getTasks() throws Exception {
     PortletRequestContext pcontext = (PortletRequestContext)WebuiRequestContext.getCurrentInstance() ;
     String remoteUser = pcontext.getRemoteUser();
-    if (remoteUser == null) return selectVisibleTasks(new ArrayList<Task>()) ;      
+    if (remoteUser == null) return selectVisibleTasks(new ArrayList<Task>()) ;
     List<Task> unsortedTasks = workflowServiceContainer_.getAllTasks(remoteUser);
     Collections.sort(unsortedTasks, new DateComparator()) ;
-    return selectVisibleTasks(unsortedTasks) ; 
+    return selectVisibleTasks(unsortedTasks) ;
   }
-  
+
   public class DateComparator implements Comparator {
     public int compare(Object o1, Object o2) throws ClassCastException {
       Date date1 = getProcessInstanceStartDate((Task) o1) ;
@@ -105,19 +105,19 @@ public class UITaskList extends UIContainer {
 
   private List<Task> selectVisibleTasks(List<Task> all) {
     List<Task> filtered = new ArrayList<Task>();
-    Locale locale = Util.getUIPortal().getAncestorOfType(UIPortalApplication.class).getLocale() ;    
+    Locale locale = Util.getUIPortal().getAncestorOfType(UIPortalApplication.class).getLocale() ;
     for (Iterator iter = all.iterator(); iter.hasNext();) {
       Task task = (Task) iter.next();
       Form form = workflowFormsService_.getForm(task.getProcessId(), task.getTaskName(), locale);
       if(!form.isDelegatedView()) {
         if (checkTaskWithNodeExist(task, form)) {
-          filtered.add(task) ; 
+          filtered.add(task) ;
         }
       }
     }
     return filtered;
   }
-  
+
   private boolean checkTaskWithNodeExist(Task task, Form form) {
       String processInstanceId = task.getProcessInstanceId();
       String identification_ = task.getId();
@@ -132,14 +132,14 @@ public class UITaskList extends UIContainer {
         }
         ManageableRepository mRepository = jcrService.getRepository(repository) ;
         SessionProviderService sessionProviderService = Util.getUIPortal().getApplicationComponent(SessionProviderService.class);
-    		SessionProvider sessionProvider = sessionProviderService.getSessionProvider(null);
+        SessionProvider sessionProvider = sessionProviderService.getSessionProvider(null);
         List variables = form.getVariables();
         int i = 0;
         for (Iterator iter = variables.iterator(); iter.hasNext(); i++) {
           Map attributes = (Map) iter.next();
           String component = (String) attributes.get("component");
           if (NODE_EDIT.equals(component) || NODE_VIEW.equals(component)) {
-            String nodePath = (String) variablesForService.get(NODE_PATH_VARIABLE);          
+            String nodePath = (String) variablesForService.get(NODE_PATH_VARIABLE);
             sessionProvider.getSession(workspaceName,mRepository).getItem(nodePath);
           }
         }
@@ -152,7 +152,7 @@ public class UITaskList extends UIContainer {
    * Indicates whether a Task has been processed or not.
    * This method was introduced to avoid bug described in ECM-2374, when two
    * users try to manage the same Task.
-   * 
+   *
    * @param taskId identifies the Task
    * @return true if the Task has been processed
    */
@@ -181,7 +181,7 @@ public class UITaskList extends UIContainer {
         uiTaskManager.setIsStart(false);
         uiTaskList.setRenderSibling(UITaskList.class);
         if (!uiTaskManager.checkBeforeActive()) {
-          uiApp.addMessage(new ApplicationMessage("UITaskList.msg.task-change", null, 
+          uiApp.addMessage(new ApplicationMessage("UITaskList.msg.task-change", null,
               ApplicationMessage.WARNING));
           event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
           event.getRequestContext().addUIComponentToUpdateByAjax(uiTaskList);

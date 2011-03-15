@@ -28,43 +28,43 @@ import org.exoplatform.services.jcr.ext.common.SessionProvider;
  * hoa.phamvu@exoplatform.com
  * Nov 4, 2008
  */
-public interface PageMetadataService {     
-  
+public interface PageMetadataService {
+
   /** The Constant HTTP META TAG KEYWORDS. */
   public final static String KEYWORDS = "keywords".intern();
-  
+
   /** The Constant HTTP META TAG ROBOTS. */
   public final static String ROBOTS = "robots".intern();
-  
+
   /** The Constant HTTP META TAG DESCRIPTION. */
   public final static String DESCRIPTION = "description".intern();
-  
+
   /** The Constant eXo  META TAG SITE_TITLE. */
-  public final static String SITE_TITLE = "siteTitle";  
-  
+  public final static String SITE_TITLE = "siteTitle";
+
   /** The Constant eXO Metatag PAGE_TITLE. */
-  public final static String PAGE_TITLE = "pageTitle";     
-  
+  public final static String PAGE_TITLE = "pageTitle";
+
   /**
    * Extract metadata information from node.
-   * 
+   *
    * @param node the node
-   * 
+   *
    * @return the hash map< string, string>
-   * 
+   *
    * @throws Exception the exception
    */
   public HashMap<String, String> extractMetadata(Node node) throws Exception;
-  
+
   /**
    * Retrieves  the portal metadata information for each request uri.
-   * 
+   *
    * @param uri the uri
    * @param sessionProvider the session provider
-   * 
+   *
    * @return the portal metadata
-   * 
+   *
    * @throws Exception the exception
    */
-  public HashMap<String,String> getPortalMetadata(SessionProvider sessionProvider, String uri) throws Exception;    
+  public HashMap<String,String> getPortalMetadata(SessionProvider sessionProvider, String uri) throws Exception;
 }

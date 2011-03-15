@@ -24,12 +24,12 @@ import org.exoplatform.services.log.Log;
  * Author : Ly Dinh Quang
  *          quang.ly@exoplatform.com
  *          xxx5669@gmail.com
- * Apr 1, 2009  
+ * Apr 1, 2009
  */
 public class TaxonomyAlreadyExistsException extends Throwable {
-	
-	private static final Log LOG = ExoLogger.getLogger(TaxonomyAlreadyExistsException.class);
-	
+
+  private static final Log LOG = ExoLogger.getLogger(TaxonomyAlreadyExistsException.class);
+
   TaxonomyAlreadyExistsException() {
     LOG.info("\nTaxonomy Name is existed");
   }

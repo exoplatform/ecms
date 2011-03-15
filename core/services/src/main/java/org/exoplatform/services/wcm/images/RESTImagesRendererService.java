@@ -56,22 +56,22 @@ public class RESTImagesRendererService implements ResourceContainer{
 
   /** The session provider service. */
   private SessionProviderService sessionProviderService;
-  
+
   /** The repository service. */
   private RepositoryService repositoryService;
-  
+
   /** The log. */
   static Log log = ExoLogger.getLogger(RESTImagesRendererService.class);
-  
+
   /** The Constant LAST_MODIFIED_PROPERTY. */
   private static final String LAST_MODIFIED_PROPERTY = "Last-Modified";
-  
+
   /** The Constant IF_MODIFIED_SINCE_DATE_FORMAT. */
   private static final String IF_MODIFIED_SINCE_DATE_FORMAT = "EEE, dd MMM yyyy HH:mm:ss z";
 
   /**
    * Instantiates a new rEST images renderer service.
-   * 
+   *
    * @param repositoryService the repository service
    * @param sessionProviderService the session provider service
    */
@@ -82,28 +82,28 @@ public class RESTImagesRendererService implements ResourceContainer{
 
   /**
    * Serve image.
-   * 
+   *
    * @param repository the repository
    * @param workspace the workspace
    * @param nodeIdentifier the node identifier
-   * 
+   *
    * @return the response
    */
   @GET
   @Path("/{repositoryName}/{workspaceName}/{nodeIdentifier}")
-  public Response serveImage(@PathParam("repositoryName") String repository, 
+  public Response serveImage(@PathParam("repositoryName") String repository,
                                      @PathParam("workspaceName") String workspace,
                                      @PathParam("nodeIdentifier") String nodeIdentifier,
                                      @QueryParam("param") @DefaultValue("file") String param,
-                                     @HeaderParam("If-Modified-Since") String ifModifiedSince) { 
+                                     @HeaderParam("If-Modified-Since") String ifModifiedSince) {
     try {
       SessionProvider sessionProvider = sessionProviderService.getSessionProvider(null);
       WCMService wcmService = WCMCoreUtils.getService(WCMService.class);
       Node node = wcmService.getReferencedContent(sessionProvider, repository, workspace, nodeIdentifier);
       if (node == null) return Response.status(HTTPStatus.NOT_FOUND).build();
-      
+
       if ("file".equals(param)) {
-        Node dataNode = null; 
+        Node dataNode = null;
         if(node.isNodeType("nt:file")) {
           dataNode = node;
         }else if(node.isNodeType("nt:versionedChild")) {
@@ -112,35 +112,35 @@ public class RESTImagesRendererService implements ResourceContainer{
           dataNode = sessionProvider.getSession(workspace,repositoryService.getRepository(repository)).getNodeByUUID(versionableUUID);
         }else {
           return Response.status(HTTPStatus.NOT_FOUND).build();
-        }   
-        
+        }
+
         if (ifModifiedSince != null && isModified(ifModifiedSince, dataNode) == false) {
           return Response.notModified().build();
         }
-        
+
         DateFormat dateFormat = new SimpleDateFormat(IF_MODIFIED_SINCE_DATE_FORMAT);
         InputStream jcrData = dataNode.getNode("jcr:content").getProperty("jcr:data").getStream();
-        return Response.ok(jcrData, "image").header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();  
-      } 
-        
+        return Response.ok(jcrData, "image").header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
+      }
+
       if (ifModifiedSince != null && isModified(ifModifiedSince, node) == false) {
         return Response.notModified().build();
       }
-      
+
       DateFormat dateFormat = new SimpleDateFormat(IF_MODIFIED_SINCE_DATE_FORMAT);
       InputStream jcrData = node.getProperty(param).getStream();
-      return Response.ok(jcrData, "image").header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();        
-      
+      return Response.ok(jcrData, "image").header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
+
     } catch (PathNotFoundException e) {
       return Response.status(HTTPStatus.NOT_FOUND).build();
     }catch (ItemNotFoundException e) {
       return Response.status(HTTPStatus.NOT_FOUND).build();
     }catch (Exception e) {
       log.error("Error when serveImage: ", e);
-      return Response.serverError().build(); 
+      return Response.serverError().build();
     }
   }
-  
+
   /**
    * get the last modified date of node
   + * @param node
@@ -158,7 +158,7 @@ public class RESTImagesRendererService implements ResourceContainer{
      }
      return lastModifiedDate;
   }
-  
+
   /**
    * check resources were modified or not
    * @param ifModifiedSince
@@ -170,25 +170,25 @@ public class RESTImagesRendererService implements ResourceContainer{
      // get last-modified-since from header
      DateFormat dateFormat = new SimpleDateFormat(IF_MODIFIED_SINCE_DATE_FORMAT);
      Date ifModifiedSinceDate = dateFormat.parse(ifModifiedSince);
-    
+
      // get last modified date of node
      Date lastModifiedDate = getLastModifiedDate(node);
-    
+
      // Check if cached resource has not been modifed, return 304 code
-     if (ifModifiedSinceDate.getTime() >= lastModifiedDate.getTime()) {      
+     if (ifModifiedSinceDate.getTime() >= lastModifiedDate.getTime()) {
        return false;
-     }   
+     }
      return true;
   }
-  
+
   /**
    * Generate uri.
-   * 
+   *
    * @param file the node
    * @param propertyName the image property name, null if file is an image node
-   * 
+   *
    * @return the string
-   * 
+   *
    * @throws Exception the exception
    */
   public String generateImageURI(Node file, String propertyName) throws Exception {
@@ -199,7 +199,7 @@ public class RESTImagesRendererService implements ResourceContainer{
     String nodeIdentifiler = file.isNodeType("mix:referenceable") ? file.getUUID() : file.getPath().replaceFirst("/","");
     String portalName = PortalContainer.getCurrentPortalContainerName();
     String restContextName = PortalContainer.getCurrentRestContextName();
-    
+
     if (propertyName == null) {
       if(!file.isNodeType("nt:file")) throw new UnsupportedOperationException("The node isn't nt:file");
       InputStream stream = file.getNode("jcr:content").getProperty("jcr:data").getStream();
@@ -224,15 +224,15 @@ public class RESTImagesRendererService implements ResourceContainer{
       return builder.toString();
     }
   }
-  
+
   @Deprecated
   public String generateURI(Node file) throws Exception {
-    return generateImageURI(file, null); 
+    return generateImageURI(file, null);
   }
-  
+
   @Deprecated
   public String generateURI(Node file, String propertyName) throws Exception {
-    return generateImageURI(file, propertyName); 
+    return generateImageURI(file, propertyName);
   }
-  
+
 }

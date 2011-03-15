@@ -45,16 +45,16 @@ import org.exoplatform.webui.event.EventListener;
  */
 
 @ComponentConfig(
-    template = "app:/groovy/webui/component/admin/taxonomy/UITaxonomyTreeList.gtmpl", 
+    template = "app:/groovy/webui/component/admin/taxonomy/UITaxonomyTreeList.gtmpl",
     events = {
       @EventConfig(listeners = UITaxonomyTreeList.DeleteActionListener.class, confirm = "UITaxonomyTreeList.msg.confirm-delete"),
       @EventConfig(listeners = UITaxonomyTreeList.EditTaxonomyTreeActionListener.class),
       @EventConfig(listeners = UITaxonomyTreeList.AddTaxonomyTreeActionListener.class)
     }
 )
-    
+
 public class UITaxonomyTreeList extends UIComponentDecorator {
-  
+
   public static final String[] ACTIONS           = { "AddTaxonomyTree" };
 
   public static final String   ST_ADD            = "AddTaxonomyTreePopup";
@@ -69,11 +69,11 @@ public class UITaxonomyTreeList extends UIComponentDecorator {
     uiPageIterator_ = createUIComponent(UIPageIterator.class, null, "UITaxonomyTreeListIterator");
     setUIComponent(uiPageIterator_);
   }
-  
+
   public UIPageIterator getUIPageIterator() {
     return uiPageIterator_;
   }
-  
+
   public String[] getActions() {
     return ACTIONS;
   }
@@ -90,7 +90,7 @@ public class UITaxonomyTreeList extends UIComponentDecorator {
     else
       uiPageIterator_.setCurrentPage(currentPage);
   }
-  
+
   private List<TaxonomyTreeData> getAllTaxonomyTreeList() throws RepositoryException {
     List<TaxonomyTreeData> lstTaxonomyTreeData = new ArrayList<TaxonomyTreeData>();
     String repository = getAncestorOfType(UIECMAdminPortlet.class).getPreferenceRepository();
@@ -103,7 +103,7 @@ public class UITaxonomyTreeList extends UIComponentDecorator {
     }
     return lstTaxonomyTreeData;
   }
-  
+
   private TaxonomyTreeData setData(Node node) {
     TaxonomyTreeData taxonomyTreeData = null ;
     TaxonomyService taxonomyService = getApplicationComponent(TaxonomyService.class);
@@ -132,7 +132,7 @@ public class UITaxonomyTreeList extends UIComponentDecorator {
     }
     return taxonomyTreeData;
   }
-  
+
   public static class DeleteActionListener extends EventListener<UITaxonomyTreeList> {
     public void execute(Event<UITaxonomyTreeList> event) throws Exception {
       UITaxonomyTreeList uiTaxonomyTreeList = event.getSource();

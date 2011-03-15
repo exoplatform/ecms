@@ -81,25 +81,25 @@ public class UIWikiContentForm extends UIForm {
 
   /** The Constant NAME_CONTENT. */
   public static final String NAME_CONTENT = "Name";
-  
+
   /** The Constant CONTENT. */
   public static final String CONTENT = "Content";
-  
+
   /** The Constant TITLE. */
   public static final String TITLE = "Title";
 
   /** The parent uri. */
   private String parentUri;
-  
+
   /** The page uri. */
   private String pageUri;
-  
+
   /** The page navigation. */
   private PageNavigation pageNavigation;
 
   /**
    * Instantiates a new uI wiki content form.
-   * 
+   *
    * @throws Exception the exception
    */
   public UIWikiContentForm() throws Exception {
@@ -114,19 +114,19 @@ public class UIWikiContentForm extends UIForm {
 
   /**
    * Creates the new page.
-   * 
+   *
    * @param pageName the page name
    * @param newNodeUUID the new node uuid
-   * 
+   *
    * @return the string
-   * 
+   *
    * @throws Exception the exception
    */
   @SuppressWarnings("unchecked")
   public String createNewPage(String pageName, String newNodeUUID) throws Exception {
     //Step 1 : create a UIPortlet
-    UIPortal uiPortal = Util.getUIPortal(); 
-    UserPortalConfigService portalCfgService = 
+    UIPortal uiPortal = Util.getUIPortal();
+    UserPortalConfigService portalCfgService =
       uiPortal.getApplicationComponent(UserPortalConfigService.class);
     UIPortlet scvPortlet = createSCVPortlet(uiPortal, newNodeUUID);
     // Step 2: Create a new Page and add the new UIPortlet into new Page
@@ -157,12 +157,12 @@ public class UIWikiContentForm extends UIForm {
 
   /**
    * Creates the new page node.
-   * 
+   *
    * @param parentPageNode the parent page node
    * @param pageId the page id
-   * 
+   *
    * @return the page node
-   * 
+   *
    * @throws Exception the exception
    */
   private PageNode createNewPageNode(PageNode parentPageNode, String pageId) throws Exception {
@@ -174,19 +174,19 @@ public class UIWikiContentForm extends UIForm {
         parentPageNode = newPageNode;
       }
     } else {
-      newPageNode = createNewPageNode(parentPageNode, getPageUri(), pageId); 
+      newPageNode = createNewPageNode(parentPageNode, getPageUri(), pageId);
     }
     return newPageNode;
   }
 
   /**
    * Creates the scv portlet.
-   * 
+   *
    * @param uiPortal the ui portal
    * @param newNodeUUID the new node uuid
-   * 
+   *
    * @return the uI portlet
-   * 
+   *
    * @throws Exception the exception
    */
   @SuppressWarnings("unchecked")
@@ -194,7 +194,7 @@ public class UIWikiContentForm extends UIForm {
     UIPortlet scvPortlet = new UIPortlet();
     scvPortlet.setShowInfoBar(false);
 
-    WCMConfigurationService wcmCfgService = 
+    WCMConfigurationService wcmCfgService =
       uiPortal.getApplicationComponent(WCMConfigurationService.class);
     StringBuilder windowId = new StringBuilder();
     String random = IdGenerator.generate();
@@ -214,7 +214,7 @@ public class UIWikiContentForm extends UIForm {
     ArrayList<Preference> preferenceList = new ArrayList<Preference>();
 
     Preference prefR = new Preference();
-    RepositoryService repoService = 
+    RepositoryService repoService =
       uiPortal.getApplicationComponent(RepositoryService.class);
     String repositoryName = repoService.getCurrentRepository().getConfiguration().getName();
     ArrayList<String> listValue = new ArrayList<String>();
@@ -248,16 +248,16 @@ public class UIWikiContentForm extends UIForm {
 
   /**
    * Adds the scv portlet into page.
-   * 
+   *
    * @param scvPortlet the scv portlet
    * @param uiPage the ui page
    * @param page the page
    * @param userPortalCfgService the user portal cfg service
-   * 
+   *
    * @throws Exception the exception
    */
   @SuppressWarnings("unchecked")
-  private void addSCVPortletIntoPage(UIPortlet scvPortlet, UIPage uiPage, 
+  private void addSCVPortletIntoPage(UIPortlet scvPortlet, UIPage uiPage,
       Page page,
       UserPortalConfigService userPortalCfgService) throws Exception {
 //    ArrayList<Object> listPortlet = page.getChildren();
@@ -270,13 +270,13 @@ public class UIWikiContentForm extends UIForm {
 
   /**
    * Creates the new web content node.
-   * 
+   *
    * @param webContentName the web content name
    * @param title the title
    * @param content the content
-   * 
+   *
    * @return the node
-   * 
+   *
    * @throws Exception the exception
    */
   private Node createNewWebContentNode(String webContentName, String title, String content) throws Exception {
@@ -301,13 +301,13 @@ public class UIWikiContentForm extends UIForm {
 
   /**
    * Creates the new page node.
-   * 
+   *
    * @param parentPageNode the parent page node
    * @param newPageNodeName the new page node name
    * @param pageID the page id
-   * 
+   *
    * @return the page node
-   * 
+   *
    * @throws Exception the exception
    */
   private PageNode createNewPageNode(PageNode parentPageNode, String newPageNodeName, String pageID) throws Exception {
@@ -339,11 +339,11 @@ public class UIWikiContentForm extends UIForm {
    * component's <code>addSaveActionListener<code> method. When
    * the saveAction event occurs, that object's appropriate
    * method is invoked.
-   * 
+   *
    * @see SaveActionEvent
    */
   public static class SaveActionListener extends EventListener<UIWikiContentForm> {
-    
+
     /* (non-Javadoc)
      * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
      */
@@ -367,13 +367,13 @@ public class UIWikiContentForm extends UIForm {
 
   /**
    * Gets the new node url.
-   * 
+   *
    * @param reqWrapper the req wrapper
    * @param newNodeUri the new node uri
-   * 
+   *
    * @return the new node url
    */
-  private String getNewNodeURL(HttpServletRequestWrapper reqWrapper, 
+  private String getNewNodeURL(HttpServletRequestWrapper reqWrapper,
       String newNodeUri) {
     String scheme = reqWrapper.getScheme();
     PortalRequestContext portalReqContext = Util.getPortalRequestContext();
@@ -420,11 +420,11 @@ public class UIWikiContentForm extends UIForm {
    * component's <code>addCancelActionListener<code> method. When
    * the cancelAction event occurs, that object's appropriate
    * method is invoked.
-   * 
+   *
    * @see CancelActionEvent
    */
   public static class CancelActionListener extends EventListener<UIWikiContentForm> {
-    
+
     /* (non-Javadoc)
      * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
      */
@@ -435,7 +435,7 @@ public class UIWikiContentForm extends UIForm {
 
   /**
    * Gets the page navigation.
-   * 
+   *
    * @return the page navigation
    */
   public PageNavigation getPageNavigation() {
@@ -444,7 +444,7 @@ public class UIWikiContentForm extends UIForm {
 
   /**
    * Sets the page navigation.
-   * 
+   *
    * @param pageNavigation the new page navigation
    */
   public void setPageNavigation(PageNavigation pageNavigation) {
@@ -453,7 +453,7 @@ public class UIWikiContentForm extends UIForm {
 
   /**
    * Gets the parent uri.
-   * 
+   *
    * @return the parent uri
    */
   public String getParentUri() {
@@ -462,7 +462,7 @@ public class UIWikiContentForm extends UIForm {
 
   /**
    * Sets the parent uri.
-   * 
+   *
    * @param parentUri the new parent uri
    */
   public void setParentUri(String parentUri) {
@@ -471,7 +471,7 @@ public class UIWikiContentForm extends UIForm {
 
   /**
    * Gets the page uri.
-   * 
+   *
    * @return the page uri
    */
   public String getPageUri() {
@@ -480,7 +480,7 @@ public class UIWikiContentForm extends UIForm {
 
   /**
    * Sets the page uri.
-   * 
+   *
    * @param pageUri the new page uri
    */
   public void setPageUri(String pageUri) {

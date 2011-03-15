@@ -23,17 +23,17 @@ import java.util.Map;
  * Author : Ly Dinh Quang
  *          quang.ly@exoplatform.com
  *          xxx5669@gmail.com
- * Jan 9, 2009  
+ * Jan 9, 2009
  */
-public class VariableMaps {  
+public class VariableMaps {
   private Map workflowVariables;
   private Map jcrVariables;
-  
+
   public VariableMaps(Map workflowVariables, Map jcrVariables) {
     this.workflowVariables = workflowVariables;
     this.jcrVariables = jcrVariables;
   }
-  
+
   public Map getJcrVariables() {
     return jcrVariables;
   }

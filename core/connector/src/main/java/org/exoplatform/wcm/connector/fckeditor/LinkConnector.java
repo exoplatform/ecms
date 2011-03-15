@@ -47,13 +47,13 @@ public class LinkConnector extends BaseConnector implements ResourceContainer {
 
   /** The link file handler. */
   private LinkFileHandler linkFileHandler;
-  
+
   /** The log. */
   private static Log log = ExoLogger.getLogger(LinkFileHandler.class);
 
   /**
    * Instantiates a new link connector.
-   * 
+   *
    * @param container the container
    */
   public LinkConnector() {
@@ -62,7 +62,7 @@ public class LinkConnector extends BaseConnector implements ResourceContainer {
 
   /**
    * Gets the folders and files.
-   * 
+   *
    * @param repositoryName the repository name
    * @param workspaceName the workspace name
    * @param jcrPath the jcr path
@@ -70,9 +70,9 @@ public class LinkConnector extends BaseConnector implements ResourceContainer {
    * @param command the command
    * @param type the type
    * @param currentPortal the current portal
-   * 
+   *
    * @return the folders and files
-   * 
+   *
    * @throws Exception the exception
    */
   @GET
@@ -84,15 +84,15 @@ public class LinkConnector extends BaseConnector implements ResourceContainer {
                                      @QueryParam("currentFolder") String currentFolder,
                                      @QueryParam("currentPortal") String currentPortal,
                                      @QueryParam("command") String command,
-                                     @QueryParam("type") String type) throws Exception {   
+                                     @QueryParam("type") String type) throws Exception {
     try {
       Response response = buildXMLResponseOnExpand(currentFolder, currentPortal, workspaceName,
                                                    repositoryName, jcrPath, command);
-      if (response != null)              
-        return response; 
+      if (response != null)
+        return response;
     } catch (Exception e) {
       log.error("Error when perform getFoldersAndFiles: ", e);
-    }    
+    }
     DateFormat dateFormat = new SimpleDateFormat(IF_MODIFIED_SINCE_DATE_FORMAT);
     return Response.ok().header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
   }
@@ -136,8 +136,10 @@ public class LinkConnector extends BaseConnector implements ResourceContainer {
     }
   }
 
-  /* (non-Javadoc)
-   * @see org.exoplatform.wcm.connector.fckeditor.BaseConnector#buildXMLResponseForContentStorage(javax.jcr.Node, java.lang.String)
+  /*
+   * (non-Javadoc)
+   * @seeorg.exoplatform.wcm.connector.fckeditor.BaseConnector#
+   * buildXMLResponseForContentStorage(javax.jcr.Node, java.lang.String)
    */
   protected Response buildXMLResponseForContentStorage(Node node, String command) throws Exception {
     Element rootElement = FCKUtils.createRootElement(command,
@@ -176,7 +178,8 @@ public class LinkConnector extends BaseConnector implements ResourceContainer {
   @Override
   protected Node getRootContentStorage(Node parentNode) throws Exception {
     try {
-      PortalFolderSchemaHandler folderSchemaHandler = webSchemaConfigService.getWebSchemaHandlerByType(PortalFolderSchemaHandler.class);
+      PortalFolderSchemaHandler folderSchemaHandler = webSchemaConfigService.
+          getWebSchemaHandlerByType(PortalFolderSchemaHandler.class);
       return folderSchemaHandler.getLinkFolder(parentNode);
     } catch (Exception e) {
       if (log.isDebugEnabled()) {

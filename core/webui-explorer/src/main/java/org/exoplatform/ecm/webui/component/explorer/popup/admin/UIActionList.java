@@ -46,7 +46,7 @@ import org.exoplatform.webui.event.EventListener;
  * Author : Dang Van Minh
  *          minh.dang@exoplatform.com
  * Nov 8, 2006
- * 9:41:56 AM 
+ * 9:41:56 AM
  */
 @ComponentConfig(
     template = "app:/groovy/webui/component/explorer/popup/admin/UIActionList.gtmpl",
@@ -58,9 +58,9 @@ import org.exoplatform.webui.event.EventListener;
     }
 )
 public class UIActionList extends UIContainer {
-  
+
   final static public String[] ACTIONS = {"View", "Edit", "Delete"} ;
-  
+
 
   public UIActionList() throws Exception {
     addChild(UIPageIterator.class, null, "ActionListIterator");
@@ -95,17 +95,17 @@ public class UIActionList extends UIContainer {
 
   public List getListActions() throws Exception {
     UIPageIterator uiIterator = getChild(UIPageIterator.class) ;
-    return uiIterator.getCurrentPageData() ; 
+    return uiIterator.getCurrentPageData() ;
   }
-  
+
   static public class ViewActionListener extends EventListener<UIActionList> {
     public void execute(Event<UIActionList> event) throws Exception {
       UIActionList uiActionList = event.getSource() ;
       String actionName = event.getRequestContext().getRequestParameter(OBJECTID) ;
       UIJCRExplorer uiExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class) ;
       UIActionManager uiActionManager = uiExplorer.findFirstComponentOfType(UIActionManager.class) ;
-      ActionServiceContainer actionService = uiActionList.getApplicationComponent(ActionServiceContainer.class);      
-      
+      ActionServiceContainer actionService = uiActionList.getApplicationComponent(ActionServiceContainer.class);
+
       Node node = actionService.getAction(uiExplorer.getCurrentNode(),actionName);
       String nodeTypeName = node.getPrimaryNodeType().getName() ;
       String userName = event.getRequestContext().getRemoteUser() ;
@@ -115,19 +115,19 @@ public class UIActionList extends UIContainer {
         String path = templateService.getTemplatePathByUser(false, nodeTypeName, userName);
         if(path == null) {
           Object[] args = {actionName} ;
-          uiApp.addMessage(new ApplicationMessage("UIActionList.msg.template-null", args, 
+          uiApp.addMessage(new ApplicationMessage("UIActionList.msg.template-null", args,
                                                   ApplicationMessage.WARNING)) ;
           event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
           return ;
         }
       } catch(PathNotFoundException path) {
         Object[] args = {actionName} ;
-        uiApp.addMessage(new ApplicationMessage("UIActionList.msg.template-empty", args, 
+        uiApp.addMessage(new ApplicationMessage("UIActionList.msg.template-empty", args,
                                                 ApplicationMessage.WARNING)) ;
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
         return ;
       } catch(AccessDeniedException ace) {
-        uiApp.addMessage(new ApplicationMessage("UIActionList.msg.access-denied", null, 
+        uiApp.addMessage(new ApplicationMessage("UIActionList.msg.access-denied", null,
             ApplicationMessage.WARNING)) ;
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
         return ;
@@ -139,9 +139,9 @@ public class UIActionList extends UIContainer {
       if(uiActionManager.getChild(UIActionViewContainer.class) != null) {
         uiActionManager.removeChild(UIActionViewContainer.class) ;
       }
-      UIActionViewContainer uiActionViewContainer = 
+      UIActionViewContainer uiActionViewContainer =
         uiActionManager.createUIComponent(UIActionViewContainer.class, null, null) ;
-      UIActionViewTemplate uiViewTemplate = 
+      UIActionViewTemplate uiViewTemplate =
         uiActionViewContainer.createUIComponent(UIActionViewTemplate.class, null, null) ;
       uiViewTemplate.setTemplateNode(node) ;
       uiActionViewContainer.addChild(uiViewTemplate) ;
@@ -158,7 +158,7 @@ public class UIActionList extends UIContainer {
       String actionName = event.getRequestContext().getRequestParameter(OBJECTID) ;
       TemplateService templateService = uiActionList.getApplicationComponent(TemplateService.class) ;
       String userName = event.getRequestContext().getRemoteUser() ;
-      String repository = 
+      String repository =
         uiActionList.getAncestorOfType(UIJCRExplorer.class).getRepositoryName() ;
       Node currentNode = uiExplorer.getCurrentNode() ;
       ActionServiceContainer actionService = uiActionList.getApplicationComponent(ActionServiceContainer.class);
@@ -184,7 +184,7 @@ public class UIActionList extends UIContainer {
         templateService.getTemplatePathByUser(true, nodeTypeName, userName);
       } catch(PathNotFoundException path) {
         Object[] args = {actionName} ;
-        uiApp.addMessage(new ApplicationMessage("UIActionList.msg.template-empty", args, 
+        uiApp.addMessage(new ApplicationMessage("UIActionList.msg.template-empty", args,
                                                 ApplicationMessage.WARNING)) ;
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
         return ;
@@ -197,7 +197,7 @@ public class UIActionList extends UIContainer {
       event.getRequestContext().addUIComponentToUpdateByAjax(uiActionListContainer) ;
     }
   }
-  
+
   static public class CloseActionListener extends EventListener<UIActionList> {
     public void execute(Event<UIActionList> event) throws Exception {
       UIJCRExplorer uiExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class) ;
@@ -216,7 +216,7 @@ public class UIActionList extends UIContainer {
       UIPopupWindow uiPopup = uiActionListContainer.getChildById("editActionPopup") ;
       UIApplication uiApp = uiActionList.getAncestorOfType(UIApplication.class) ;
       if(uiPopup != null && uiPopup.isShow()) {
-        uiApp.addMessage(new ApplicationMessage("UIActionList.msg.remove-popup-first", null, 
+        uiApp.addMessage(new ApplicationMessage("UIActionList.msg.remove-popup-first", null,
                                                 ApplicationMessage.WARNING)) ;
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
         return ;
@@ -225,7 +225,7 @@ public class UIActionList extends UIContainer {
       try {
         actionService.removeAction(uiExplorer.getCurrentNode(), actionName, uiExplorer.getRepositoryName()) ;
       } catch(AccessDeniedException ace) {
-        uiApp.addMessage(new ApplicationMessage("UIActionList.msg.access-denied", null, 
+        uiApp.addMessage(new ApplicationMessage("UIActionList.msg.access-denied", null,
                                                 ApplicationMessage.WARNING)) ;
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
         return ;

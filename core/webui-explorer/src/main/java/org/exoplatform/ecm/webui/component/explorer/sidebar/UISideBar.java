@@ -52,17 +52,17 @@ import org.exoplatform.webui.ext.manager.UIAbstractManagerComponent;
 )
 public class UISideBar extends UIContainer {
   private String currentComp;
-  
+
   private static final Log                 LOG                      = ExoLogger.getLogger("dms.UISideBar");
-  
+
 
   public static final String               EXTENSION_TYPE = "org.exoplatform.ecm.dms.UISideBar";
 
   private List<UIAbstractManagerComponent> managers       = Collections.synchronizedList(new ArrayList<UIAbstractManagerComponent>());
 
   private String selectedComp;
-  
-  
+
+
   public UISideBar() throws Exception {
     addChild(UITreeExplorer.class, null, null).setRendered(false);
     addChild(UIViewRelationList.class, null, null).setRendered(false);
@@ -72,45 +72,45 @@ public class UISideBar extends UIContainer {
     addChild(UIAllItems.class, null, null);
     addChild(UIAllItemsByType.class, null, null);
   }
-  
-  public String getCurrentComp() { 
-    if(currentComp == null || currentComp.length() == 0) 
+
+  public String getCurrentComp() {
+    if(currentComp == null || currentComp.length() == 0)
       currentComp = getChild(UITreeExplorer.class).getId();
-    return currentComp; 
+    return currentComp;
   }
-  
+
   public String getSelectedComp() {
-    if(selectedComp == null || selectedComp.length() == 0) 
+    if(selectedComp == null || selectedComp.length() == 0)
       selectedComp = "Explorer";
     return selectedComp;
   }
-  
+
   public void setSelectedComp(String selectedComp) {
     this.selectedComp = selectedComp;
   }
-  
+
   public void updateSideBarView() throws Exception {
     boolean showFilterBar = getAncestorOfType(UIJCRExplorerPortlet.class).isShowFilterBar();
     getChild(UIAllItems.class).setRendered(showFilterBar);
     getChild(UIAllItemsByType.class).setRendered(showFilterBar);
   }
-     
-  
+
+
   public void setCurrentComp(String currentComp) {
     this.currentComp = currentComp;
   }
-  
+
   public void renderSideBarChild(String[] arrId) throws Exception {
     for(String id : arrId) {
       setRenderedChild(id); // Need to remove this because we've already called updateSideBarView() but need Checking
       renderChild(id);
     }
   }
-  
-  public String getRepository() { 
+
+  public String getRepository() {
     return getAncestorOfType(UIJCRExplorer.class).getRepositoryName();
-  }   
-  
+  }
+
   static public class CloseActionListener extends EventListener<UISideBar> {
     public void execute(Event<UISideBar> event) throws Exception {
       UIWorkingArea uiWorkingArea = event.getSource().getParent();
@@ -118,17 +118,17 @@ public class UISideBar extends UIContainer {
       UIJCRExplorerPortlet explorerPorltet = uiWorkingArea.getAncestorOfType(UIJCRExplorerPortlet.class);
       UIJCRExplorer uiExplorer = explorerPorltet.findFirstComponentOfType(UIJCRExplorer.class);
       UIJcrExplorerContainer uiJcrExplorerContainer= explorerPorltet.getChild(UIJcrExplorerContainer.class);
-      uiExplorer.refreshExplorer();      
-      uiJcrExplorerContainer.setRenderedChild(UIJCRExplorer.class);      
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiExplorer);      
+      uiExplorer.refreshExplorer();
+      uiJcrExplorerContainer.setRenderedChild(UIJCRExplorer.class);
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiExplorer);
     }
-  } 
+  }
 
   private List<UIExtension> getUIExtensionList() {
     UIExtensionManager manager = getApplicationComponent(UIExtensionManager.class);
     return manager.getUIExtensions(EXTENSION_TYPE);
   }
-  
+
   public synchronized void initialize() throws Exception {
     List<UIExtension> extensions = getUIExtensionList();
     if (extensions == null) {
@@ -145,7 +145,7 @@ public class UISideBar extends UIContainer {
       }
     }
   }
-  
+
   private synchronized UIComponent addUIExtension(UIExtension extension, Map<String, Object> context) throws Exception {
     UIExtensionManager manager = getApplicationComponent(UIExtensionManager.class);
     UIComponent component = manager.addUIExtension(extension, context, this);
@@ -163,7 +163,7 @@ public class UISideBar extends UIContainer {
     }
     return null;
   }
-  
+
   public List<UIAbstractManagerComponent> getManagers() {
     List<UIAbstractManagerComponent> managers = new ArrayList<UIAbstractManagerComponent>();
     managers.addAll(this.managers);
@@ -173,5 +173,5 @@ public class UISideBar extends UIContainer {
   public void unregister(UIAbstractManagerComponent component) {
     managers.remove(component);
   }
-  
+
 }

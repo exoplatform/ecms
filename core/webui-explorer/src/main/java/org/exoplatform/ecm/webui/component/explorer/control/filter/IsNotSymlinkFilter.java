@@ -28,18 +28,18 @@ import org.exoplatform.webui.ext.filter.UIExtensionFilterType;
  * Created by The eXo Platform SAS
  * Author : eXoPlatform
  *          nicolas.filotto@exoplatform.com
- * 6 mai 2009  
+ * 6 mai 2009
  */
 public class IsNotSymlinkFilter extends UIExtensionAbstractFilter {
 
   public IsNotSymlinkFilter() {
     this(null);
   }
-  
+
   public IsNotSymlinkFilter(String messageKey) {
     super(messageKey, UIExtensionFilterType.MANDATORY);
   }
-  
+
   public boolean accept(Map<String, Object> context) throws Exception {
     if (context == null) return true;
     Node currentNode = (Node) context.get(Node.class.getName());
@@ -51,5 +51,5 @@ public class IsNotSymlinkFilter extends UIExtensionAbstractFilter {
     Node currentNode = (Node) context.get(Node.class.getName());
     Object[] arg = { currentNode.getPath() };
     createUIPopupMessages(context, "UIWorkingArea.msg.selected-is-link", arg);
-  }    
+  }
 }

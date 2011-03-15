@@ -12,7 +12,7 @@ import org.exoplatform.webui.core.lifecycle.UIContainerLifecycle;
  * Created by The eXo Platform SARL
  * Author : Hoang Van Hung
  *          hunghvit@gmail.com
- * Dec 3, 2008  
+ * Dec 3, 2008
  */
 
 @ComponentConfig(
@@ -20,9 +20,9 @@ import org.exoplatform.webui.core.lifecycle.UIContainerLifecycle;
 )
 
 public class UILockHolderContainer extends UIContainer {
-  
+
   public UILockHolderContainer() throws Exception {
     addChild(UILockHolderList.class, null, null);
     addChild(UIPermissionSelector.class, null, null);
-  }  
+  }
 }

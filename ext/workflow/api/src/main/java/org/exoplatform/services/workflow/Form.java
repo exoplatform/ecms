@@ -31,18 +31,18 @@ public interface Form {
   public List getSubmitButtons();
 
   public String getStateName();
-  
+
 
   public ResourceBundle getResourceBundle();
-  
+
   public boolean isCustomizedView();
-  
+
   public String getCustomizedView();
-  
+
   public boolean isDelegatedView();
-  
+
   public String getIconURL();
-  
+
   public String getStateImageURL();
 
 }

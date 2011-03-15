@@ -28,20 +28,20 @@ import org.exoplatform.services.wcm.publication.WCMPublicationService;
 
 /**
  * Created by The eXo Platform SAS
- * Author : Hoa Pham	
+ * Author : Hoa Pham
  *          hoa.phamvu@exoplatform.com
- * Mar 6, 2009  
+ * Mar 6, 2009
  */
 public class PostEditContentEventListener extends Listener<CmsService,Node> {
 
-	  private static final Log log = ExoLogger.getLogger(PostEditContentEventListener.class);
+    private static final Log log = ExoLogger.getLogger(PostEditContentEventListener.class);
 
-	  /** The pservice. */
+    /** The pservice. */
   private WCMPublicationService publicationService;
 
   /**
    * Instantiates a new post edit content event listener.
-   * 
+   *
    * @param pservice the pservice
    */
   public PostEditContentEventListener(WCMPublicationService publicationService) {
@@ -52,12 +52,12 @@ public class PostEditContentEventListener extends Listener<CmsService,Node> {
    * @see org.exoplatform.services.listener.Listener#onEvent(org.exoplatform.services.listener.Event)
    */
   public void onEvent(Event<CmsService, Node> event) throws Exception {
-  	Node currentNode = event.getData();
-  	if( currentNode.isNodeType("exo:cssFile") || 
-  	    currentNode.isNodeType("exo:template") ||
-        currentNode.isNodeType("exo:jsFile") || 
+    Node currentNode = event.getData();
+    if( currentNode.isNodeType("exo:cssFile") ||
+        currentNode.isNodeType("exo:template") ||
+        currentNode.isNodeType("exo:jsFile") ||
         currentNode.isNodeType("exo:action") ){
-      return;    
+      return;
     }
     String siteName = Util.getPortalRequestContext().getPortalOwner();
     String remoteUser = Util.getPortalRequestContext().getRemoteUser();

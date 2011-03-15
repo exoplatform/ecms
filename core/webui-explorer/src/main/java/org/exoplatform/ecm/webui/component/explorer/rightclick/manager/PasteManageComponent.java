@@ -81,11 +81,11 @@ import org.exoplatform.webui.ext.manager.UIAbstractManagerComponent;
 
 public class PasteManageComponent extends UIAbstractManagerComponent {
 
-  private static final List<UIExtensionFilter> FILTERS 
-  		= Arrays.asList(new UIExtensionFilter[]{new IsNotInTrashFilter(),
-  																						new IsPasteableFilter(),
-  																						new IsNotTrashHomeNodeFilter()});
-  
+  private static final List<UIExtensionFilter> FILTERS
+      = Arrays.asList(new UIExtensionFilter[]{new IsNotInTrashFilter(),
+                                              new IsPasteableFilter(),
+                                              new IsNotTrashHomeNodeFilter()});
+
   private static final String RELATION_PROP = "exo:relation";
 
   private static final Log    LOG           = ExoLogger.getLogger(PasteManageComponent.class);
@@ -94,7 +94,7 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
   public List<UIExtensionFilter> getFilters() {
     return FILTERS;
   }
-  
+
   public static void pasteManage(Event<PasteManageComponent> event, UIJCRExplorer uiExplorer)
       throws Exception {
     UIWorkingArea uiWorkingArea = event.getSource().getParent();
@@ -211,7 +211,7 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
       }
     }
   }
-  
+
   /**
    * Put data from clipboard to Map<Clipboard, Node>. After cutting node, we keep data to update clipboard by respective node
    * @param clipboardCommands
@@ -240,7 +240,7 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
     }
     return mapClipboard;
   }
-  
+
   private static void processPaste(ClipboardCommand currentClipboard, String destPath,
       Event<?> event, boolean isMultiSelect, boolean isLastPaste) throws Exception {
     UIJCRExplorer uiExplorer = ((UIComponent) event.getSource())
@@ -271,7 +271,7 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
 
     // Use the method getNodeByPath because it is link aware
     Node destNode = uiExplorer.getNodeByPath(destPath, destSession);
-    
+
     // Reset the path to manage the links that potentially create virtual path
     destPath = destNode.getPath();
     // Reset the session to manage the links that potentially change of
@@ -285,7 +285,7 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
     }
     // Make destination path without index on final name
     if (!"/".equals(destPath))
-    	destPath = destPath.concat("/");
+      destPath = destPath.concat("/");
     destPath = destPath.concat(srcNode.getName());
     ActionServiceContainer actionContainer = uiExplorer
         .getApplicationComponent(ActionServiceContainer.class);
@@ -402,7 +402,7 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
     List<ClipboardCommand> virtualClipboard = uiWorkingArea.getVirtualClipboards();
     Map<ClipboardCommand, Node> mapAllClipboardNode = parseToMap(allClipboard, uiExplorer);
     Map<ClipboardCommand, Node> mapVirtualClipboardNode = parseToMap(virtualClipboard, uiExplorer);
-    
+
     RelationsService relationsService = uiExplorer.getApplicationComponent(RelationsService.class);
     List<Node> refList = new ArrayList<Node>();
     boolean isReference = false;
@@ -427,7 +427,7 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
         }
       }
     }
-    // Add locked token for the source node    
+    // Add locked token for the source node
     uiExplorer.addLockToken(srcNode);
     if (workspace.getName().equals(srcWorkspace)) {
       try {
@@ -448,12 +448,12 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
         } catch (ItemNotFoundException itemNotFoundException) {
           uiExplorer.setCurrentPath(LinkUtils.getParentPath(uiExplorer.getCurrentPath()));
           desNode = uiExplorer.getCurrentNode();
-        }        
-        
+        }
+
         if (!session.itemExists(uiExplorer.getCurrentPath())) {
           uiExplorer.setCurrentPath(LinkUtils.getParentPath(uiExplorer.getCurrentPath()));
         }
-                
+
         if (!(desNode.getPath().equals(uiExplorer.getCurrentPath())))
           actionContainer.initiateObservation(desNode, repository);
         for (int i = 0; i < refList.size(); i++) {

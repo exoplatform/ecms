@@ -113,13 +113,13 @@ import org.exoplatform.webui.event.EventListener;
       @ComponentConfig(
           type = UIPageIterator.class, id = "UICBPageIterator",
           template = "system:/groovy/webui/core/UIPageIterator.gtmpl",
-          events = @EventConfig(listeners = UIBrowseContainer.ShowPageActionListener.class) 
+          events = @EventConfig(listeners = UIBrowseContainer.ShowPageActionListener.class)
       )
     }
 )
 
 public class UIBrowseContainer extends UIContainer {
-  
+
   final public static String           CATEGORYPATH          = "categoryPath";
 
   final public static String           CURRENTNODE           = "currentNode";
@@ -172,7 +172,7 @@ public class UIBrowseContainer extends UIContainer {
   private String currentPath_;
   private String rootPath_;
   private String selectedTabPath_;
-  
+
   private String detailTemplate_;
 
   private boolean isShowAllDocument_ ;
@@ -180,7 +180,7 @@ public class UIBrowseContainer extends UIContainer {
   private boolean isShowCategoriesTree_ = true;
   private boolean isShowDetailDocument_ = false;
   private boolean isShowDocumentByTag_ = false;
-  private boolean isShowDocumentList_  = false;    
+  private boolean isShowDocumentList_  = false;
 
   private boolean isShowPageAction_;
   private boolean isShowSearchForm_;
@@ -194,18 +194,18 @@ public class UIBrowseContainer extends UIContainer {
   private Map<String, Node>            nodesHistoryMap_      = new HashMap<String, Node>();
 
   private int rowPerBlock_ = 6;
-  private String tagPath_;  
+  private String tagPath_;
   private String keyValue_;
 
-  private String templatePath_;  
-  private BCTreeNode treeRoot_; 
+  private String templatePath_;
+  private BCTreeNode treeRoot_;
   private UIPageIterator uiPageIterator_;
-  
+
   private HashMap<String, WindowState> windowState_ = new HashMap<String, WindowState>();
   private String windowId_;
-  
+
   private List<Node> listHistoryNode = new ArrayList<Node>();
-  
+
   @SuppressWarnings("unused")
   public UIBrowseContainer() throws Exception {
     ManageViewService vservice = getApplicationComponent(ManageViewService.class);
@@ -214,9 +214,9 @@ public class UIBrowseContainer extends UIContainer {
     UICategoryTree uiTree = createUIComponent(UICategoryTree.class, null, null);
     addChild(uiTree);
     addChild(UIToolBar.class, null, null);
-    addChild(UISearchController.class, null, null);    
+    addChild(UISearchController.class, null, null);
     addChild(UIDocumentDetail.class, null, "DocumentDetail");
-  }  
+  }
 
   public void changeNode(Node selectNode) throws Exception {
     setShowAllChildren(false);
@@ -227,23 +227,23 @@ public class UIBrowseContainer extends UIContainer {
       setSelectedTabPath(null);
     } else {
       setSelectedTabPath(selectNode.getPath());
-      setCurrentNodePath(selectNode.getPath());     
+      setCurrentNodePath(selectNode.getPath());
       setPageIterator(getSubDocumentList(getSelectedTab()));
     }
   }
 
-  public String[] getActions() { return new String[] {"back"};}  
+  public String[] getActions() { return new String[] {"back"};}
 
-  public SessionProvider getAnonimProvider() { return SessionProviderFactory.createAnonimProvider(); } 
-  
+  public SessionProvider getAnonimProvider() { return SessionProviderFactory.createAnonimProvider(); }
+
   public String getCategoryPath() { return categoryPath_; }
-  
+
   public List<?> getCurrentList() throws Exception {
     return uiPageIterator_.getCurrentPageData();
   }
   public Node getCurrentNode() throws Exception {
     if(getNodeByPath(currentPath_) == null) return getNodeByPath(rootPath_);
-    return getNodeByPath(currentPath_); 
+    return getNodeByPath(currentPath_);
   }
   public List<Node> getDocumentByTag()throws Exception {
     String repository = getRepository();
@@ -254,23 +254,23 @@ public class UIBrowseContainer extends UIContainer {
     List<Node> documentsOnTag = new ArrayList<Node>();
     WebuiRequestContext ctx = WebuiRequestContext.getCurrentInstance();
     SessionProvider sessionProvider = (ctx.getRemoteUser() == null) ?
-    																	SessionProviderFactory.createAnonimProvider() :
-    																	SessionProviderFactory.createSessionProvider();
+                                      SessionProviderFactory.createAnonimProvider() :
+                                      SessionProviderFactory.createSessionProvider();
 
-		try {  																	
-	    for(Node node : newFolksonomyService.getAllDocumentsByTag(tagPath_, repository, workspace, sessionProvider)) {
-	      if(documentsType.contains(node.getPrimaryNodeType().getName())) {
-	        documentsOnTag.add(node);
-	      }
-	    }
-		} catch (PathNotFoundException ex) {
-			// in case : tagPath_ has changed due to name of current displayed tag changed 
-		}
+    try {
+      for(Node node : newFolksonomyService.getAllDocumentsByTag(tagPath_, repository, workspace, sessionProvider)) {
+        if(documentsType.contains(node.getPrimaryNodeType().getName())) {
+          documentsOnTag.add(node);
+        }
+      }
+    } catch (PathNotFoundException ex) {
+      // in case : tagPath_ has changed due to name of current displayed tag changed
+    }
     return documentsOnTag;
   }
   public String getIcons(Node node, String type) throws Exception {
     try {
-      return Utils.getNodeTypeIcon(node, type); 
+      return Utils.getNodeTypeIcon(node, type);
     } catch(Exception e) {
       return "";
     }
@@ -282,7 +282,7 @@ public class UIBrowseContainer extends UIContainer {
     if(node.hasNode(Utils.EXO_IMAGE)) {
       contentNode = node.getNode(Utils.EXO_IMAGE);
     } else if(node.hasNode(Utils.JCR_CONTENT)) {
-      if(!node.getPrimaryNodeType().getName().equals(Utils.NT_FILE)) return ""; 
+      if(!node.getPrimaryNodeType().getName().equals(Utils.NT_FILE)) return "";
       contentNode = node.getNode(Utils.JCR_CONTENT);
       String mimeType = contentNode.getProperty(Utils.JCR_MIMETYPE).getString();
       if(mimeType.startsWith("text")) return contentNode.getProperty(Utils.JCR_DATA).getString();
@@ -294,7 +294,7 @@ public class UIBrowseContainer extends UIContainer {
     dresource.setDownloadName(node.getName());
     return dservice.getDownloadLink(dservice.addDownloadResource(dresource));
   }
-  
+
   public String getImage(Node node, String nodeTypeName) throws Exception {
     DownloadService dservice = getApplicationComponent(DownloadService.class);
     InputStreamDownloadResource dresource;
@@ -302,7 +302,7 @@ public class UIBrowseContainer extends UIContainer {
     if(node.hasNode(nodeTypeName)) {
       contentNode = node.getNode(nodeTypeName);
     } else if(node.hasNode(Utils.JCR_CONTENT)) {
-      if(!node.getPrimaryNodeType().getName().equals(Utils.NT_FILE)) return ""; 
+      if(!node.getPrimaryNodeType().getName().equals(Utils.NT_FILE)) return "";
       contentNode = node.getNode(Utils.JCR_CONTENT);
       String mimeType = contentNode.getProperty(Utils.JCR_MIMETYPE).getString();
       if(mimeType.startsWith("text")) return contentNode.getProperty(Utils.JCR_DATA).getString();
@@ -313,7 +313,7 @@ public class UIBrowseContainer extends UIContainer {
     dresource = new InputStreamDownloadResource(input, "image");
     dresource.setDownloadName(node.getName());
     return dservice.getDownloadLink(dservice.addDownloadResource(dresource));
-  }  
+  }
 
   public int getItemPerPage() {
     return Integer.parseInt(getPortletPreferences().getValue(Utils.CB_NB_PER_PAGE, ""));
@@ -349,7 +349,7 @@ public class UIBrowseContainer extends UIContainer {
       return null;
     }
   }
-  
+
   public Node getNodeByPath(String nodePath, String workspace) throws Exception {
     NodeFinder nodeFinder = getApplicationComponent(NodeFinder.class);
     try{
@@ -363,7 +363,7 @@ public class UIBrowseContainer extends UIContainer {
       return null;
     }
   }
-  
+
   public String getCapacityOfFile(Node file) throws Exception {
     Node contentNode = file.getNode(Utils.JCR_CONTENT);
     InputStream in = contentNode.getProperty(Utils.JCR_DATA).getStream();
@@ -372,17 +372,17 @@ public class UIBrowseContainer extends UIContainer {
     if(strCapacity.indexOf(".") > -1) return strCapacity.substring(0, strCapacity.lastIndexOf("."));
     return strCapacity;
   }
-  
+
   public boolean isPublishedNode(Node node) throws Exception {
     if (isAllowPublish()) {
       PublicationService publicationService = getApplicationComponent(PublicationService.class);
-      if(publicationService.isNodeEnrolledInLifecycle(node) && 
-          publicationService.getCurrentState(node).equals("published")) 
+      if(publicationService.isNodeEnrolledInLifecycle(node) &&
+          publicationService.getCurrentState(node).equals("published"))
         return true;
     }
     return false;
   }
-  
+
   public Node getViewNode(Node node) throws Exception {
     if(isPublishedNode(node)) {
       PublicationService publicationService = getApplicationComponent(PublicationService.class);
@@ -390,15 +390,15 @@ public class UIBrowseContainer extends UIContainer {
     }
     return node;
   }
-  
+
   private void addNodePublish(List<Node> listNode, Node node) throws Exception {
     if(isPublishedNode(node)) listNode.add(node);
     else listNode.add(node);
   }
-  
+
   /**
    * Return a list of Node in the Query use case
-   * 
+   *
    * @param  recordNumber Number of expected records
    * @return list of Nodes corresponding to the query
    * @throws Exception if there was a problem while issuing the query
@@ -406,10 +406,10 @@ public class UIBrowseContainer extends UIContainer {
   public List<Node> getNodeByQuery(int recordNumber) throws Exception {
     // Returned list of documents
     List<Node> queryDocuments = new ArrayList<Node>();
-    
+
     try {
       QueryResult queryResult = null;
-      
+
       if (Boolean.parseBoolean(getPortletPreferences().getValue(Utils.CB_QUERY_ISNEW,""))) {
         // New query
         queryResult = getQueryResultNew();
@@ -417,10 +417,10 @@ public class UIBrowseContainer extends UIContainer {
         // Stored query
         queryResult = getQueryResultStored();
       }
-      
+
       // Add the required number of items to the returned list
       NodeIterator iter = queryResult.getNodes();
-      int count = 0; 
+      int count = 0;
       while (iter.hasNext() && (count++ != recordNumber)) {
         Node node = iter.nextNode();
         if (isAllowPublish()) {
@@ -432,51 +432,51 @@ public class UIBrowseContainer extends UIContainer {
       // Display the stack trace
       LOG.error("An error occured while loading the result", e);
     }
-    
+
     return queryDocuments;
   }
-  
+
   /**
    * Returns the results of a new query
-   * 
+   *
    * @param  recordNumber Number of expected records
    * @return query results
    */
   public QueryResult getQueryResultNew() throws Exception {
     // Retrieve the query statement
     String queryStatement = getQueryStatement();
-    
+
     // Prepare the query
     QueryManager queryManager = getSession(false).getWorkspace().getQueryManager();
     Query query = queryManager.createQuery(queryStatement, getQueryLanguage());
-    
+
     // Execute the query and return results
     return query.execute();
   }
 
   /**
    * Returns the results of a saved query
-   * 
+   *
    * @param  recordNumber Number of expected records
    * @return query results
    */
   public QueryResult getQueryResultStored() throws Exception {
     QueryService queryService = getApplicationComponent(QueryService.class);
-    
+
     String queryPath = getPortletPreferences().getValue(Utils.CB_QUERY_STORE,"");
     String workspace = getWorkSpace();
     String repository = getRepository();
-    return queryService.execute(queryPath, workspace, repository, getSystemProvider(), 
+    return queryService.execute(queryPath, workspace, repository, getSystemProvider(),
         getSession(true).getUserID());
   }
-  
+
   public boolean nodeIsLocked(Node node) throws Exception {
     if(node.isLocked()) {
-      return !Utils.isLockTokenHolder(node); 
+      return !Utils.isLockTokenHolder(node);
     }
     return false;
   }
-  
+
   public boolean hasAddPermission(Node node) {
     ExtendedNode eNode = (ExtendedNode)node;
     try{
@@ -485,7 +485,7 @@ public class UIBrowseContainer extends UIContainer {
     } catch(Exception ac){}
     return false;
   }
-  
+
   public void setKeyValue(String keyValue) { keyValue_ = keyValue; };
   public String getKeyValue() { return keyValue_; }
 
@@ -500,11 +500,11 @@ public class UIBrowseContainer extends UIContainer {
         return SessionProviderFactory.createSystemProvider().getSession(ws, manageRepo).getNodeByUUID(uuid);
       } catch(Exception e) {
         continue;
-      }      
+      }
     }
     return null;
-  }  
-  
+  }
+
   public  List<Node> getNodeByQuery(int recoderNumber,Session session) throws Exception {
     List<Node> queryDocuments = new ArrayList<Node>();
     QueryManager queryManager = null;
@@ -513,7 +513,7 @@ public class UIBrowseContainer extends UIContainer {
     }catch (Exception e) {
       LOG.error("An error occured while retrieving the query manager", e);
       return queryDocuments;
-    }           
+    }
     String queryStatiement = getQueryStatement();
     if(!Boolean.parseBoolean(getPortletPreferences().getValue(Utils.CB_QUERY_ISNEW,""))) {
       String queryPath = getPortletPreferences().getValue(Utils.CB_QUERY_STORE,"");
@@ -523,14 +523,14 @@ public class UIBrowseContainer extends UIContainer {
     Query query = queryManager.createQuery(queryStatiement, getQueryLanguage());
     QueryResult queryResult = query.execute();
     NodeIterator iter = queryResult.getNodes();
-    int count = 0; 
+    int count = 0;
     while (iter.hasNext() && (count++ != recoderNumber)) {
       Node node = iter.nextNode();
       addNodePublish(queryDocuments, node);
     }
     return queryDocuments;
   }
-  
+
   public List<Node> getNodeByQuery(String queryType, String queryString) throws Exception {
     List<Node> queryDocuments = new ArrayList<Node>();
     try {
@@ -551,11 +551,11 @@ public class UIBrowseContainer extends UIContainer {
     }
     totalRecord_ = queryDocuments.size();
     return queryDocuments;
-  }    
+  }
   public LinkedList<String> getNodesHistory() { return nodesHistory_; }
 
   public int getTotalNodeByQuery() { return totalRecord_;}
-  
+
   public int getNumberOfPage() {
     return uiPageIterator_.getAvailablePage();
   }
@@ -581,7 +581,7 @@ public class UIBrowseContainer extends UIContainer {
     if (selectedTabPath_.equals(currentPath_)) {
       Node currentNode = getCurrentNode();
       LinkManager linkManager = getApplicationComponent(LinkManager.class);
-      if (currentNode.isNodeType(Utils.EXO_SYMLINK)) {        
+      if (currentNode.isNodeType(Utils.EXO_SYMLINK)) {
         currentNode = linkManager.getTarget(currentNode);
       }
       NodeIterator tabIter = currentNode.getNodes();
@@ -589,17 +589,17 @@ public class UIBrowseContainer extends UIContainer {
         Node childNode = tabIter.nextNode();
         if(canRead(childNode) && !childNode.isNodeType(Utils.EXO_HIDDENABLE)) {
           NodeType nt = childNode.getPrimaryNodeType();
-          if (templates.contains(nt.getName())&&(isShowDocument)) { 
+          if (templates.contains(nt.getName())&&(isShowDocument)) {
             subDocumentList.add(childNode);
           }
           if (isShowReferenced) subDocumentList.addAll(getReferences(repositoryService,
-              childNode, isShowAllDocument(), subDocumentList.size(), templates));        
+              childNode, isShowAllDocument(), subDocumentList.size(), templates));
           if (isCategories(childNode) && (!templates.contains(nt.getName()))) {
             Map childOfSubCategory = new HashMap();
             List<Node> subCategoryDoc = new ArrayList<Node>();
             List<String> subCategoryCat = new ArrayList<String>();
-            Node tempChildNode = childNode; 
-            if (childNode.isNodeType(Utils.EXO_SYMLINK)) {              
+            Node tempChildNode = childNode;
+            if (childNode.isNodeType(Utils.EXO_SYMLINK)) {
               try {
                 childNode = linkManager.getTarget(childNode);
               } catch (ItemNotFoundException ie) {
@@ -617,7 +617,7 @@ public class UIBrowseContainer extends UIContainer {
                 if(node.isNodeType(Utils.EXO_SYMLINK)) {
                   typeName = node.getProperty(Utils.EXO_PRIMARYTYPE).getString();
                 }
-                if (templates.contains(typeName)&&(isShowDocument)) { 
+                if (templates.contains(typeName)&&(isShowDocument)) {
                   if (subCategoryDoc.size() < getRowPerBlock()) {
                     if (isAllowPublish()) {
                       PublicationService publicationService = getApplicationComponent(PublicationService.class);
@@ -631,7 +631,7 @@ public class UIBrowseContainer extends UIContainer {
                             subCategoryDoc.remove(node);
                           } catch (Exception e) {
                             subCategoryDoc.remove(node);
-                          }         
+                          }
                         }
                       }
                     } else {
@@ -643,7 +643,7 @@ public class UIBrowseContainer extends UIContainer {
                           subCategoryDoc.remove(node);
                         } catch (Exception e) {
                           subCategoryDoc.remove(node);
-                        }         
+                        }
                       }
                     }
                   }
@@ -670,11 +670,11 @@ public class UIBrowseContainer extends UIContainer {
             String keyPath = path.substring(path.lastIndexOf("/") + 1);
             content.put(keyPath, childOfSubCategory);
             subCategoryList.add(path);
-          } 
+          }
         }
       }
       content.put("tabList", tabList);
-      content.put("subDocumentList", subDocumentList);      
+      content.put("subDocumentList", subDocumentList);
       content.put("subCategoryList", subCategoryList);
       return content;
     }
@@ -721,7 +721,7 @@ public class UIBrowseContainer extends UIContainer {
     } catch(Exception e) {
       currentNode = getRootNode();
     }
-    if(!currentNode.getPath().equals("/") && 
+    if(!currentNode.getPath().equals("/") &&
         currentNode.getSession().getWorkspace().getName().equals(getWorkSpace())) {
       Node parent = currentNode.getParent();
       if(!parent.getPath().equals(getRootNode().getPath())) content.put("previous", parent.getPath());
@@ -737,7 +737,7 @@ public class UIBrowseContainer extends UIContainer {
     PortletPreferences portletPref = prequest.getPreferences();
     return portletPref;
   }
-  
+
   public String getQueryLanguage() {
     return getPortletPreferences().getValue(Utils.CB_QUERY_LANGUAGE, "");
   }
@@ -748,30 +748,30 @@ public class UIBrowseContainer extends UIContainer {
   public String getRepository() {
     return getPortletPreferences().getValue(Utils.REPOSITORY, "");
   }
-  
+
   public String getUserName() {
-  	try {
-  		return getSession(getRepository(), getWorkSpace()).getUserID();
-  	} catch (Exception e) {
-  		return "";
-  	}
+    try {
+      return getSession(getRepository(), getWorkSpace()).getUserID();
+    } catch (Exception e) {
+      return "";
+    }
   }
-  
+
   public String getRootPath() { return rootPath_; }
-  
-  public Node getRootNode() throws Exception { 
-    return getNodeByPath(rootPath_); 
+
+  public Node getRootNode() throws Exception {
+    return getNodeByPath(rootPath_);
   }
-  
+
   public int getRowPerBlock() { return rowPerBlock_; }
-  
-  public void setSelectedTabPath(String selectedTabPath) { 
+
+  public void setSelectedTabPath(String selectedTabPath) {
     if(selectedTabPath == null) selectedTabPath = rootPath_;
-    else selectedTabPath_ = selectedTabPath; 
+    else selectedTabPath_ = selectedTabPath;
   }
-  public Node getSelectedTab() throws Exception { 
+  public Node getSelectedTab() throws Exception {
     if(selectedTabPath_ == null) return getCurrentNode();
-    return getNodeByPath(selectedTabPath_);  
+    return getNodeByPath(selectedTabPath_);
   }
 
   public Session getSession(boolean flag) throws Exception{
@@ -783,7 +783,7 @@ public class UIBrowseContainer extends UIContainer {
       workspace = getWorkSpace();
     }
     ManageableRepository manageableRepository = getRepositoryService().getCurrentRepository();
-    if(categoryPath_ != null && categoryPath_.startsWith("/jcr:system")) { 
+    if(categoryPath_ != null && categoryPath_.startsWith("/jcr:system")) {
       if(!Boolean.parseBoolean(getPortletPreferences().getValue(Utils.CB_FILTER_CATEGORY, ""))){
         session = getSystemProvider().getSession(workspace,manageableRepository);
       } else {
@@ -793,12 +793,12 @@ public class UIBrowseContainer extends UIContainer {
       if(SessionProviderFactory.isAnonim()) {
         session = getAnonimProvider().getSession(workspace,manageableRepository);
       } else {
-        session = getSessionProvider().getSession(workspace,manageableRepository); 
+        session = getSessionProvider().getSession(workspace,manageableRepository);
       }
     }
     return session;
   }
-  
+
   public Session getSession(String repository, String workspace) throws Exception{
     Session session = null;
     ManageableRepository manageableRepository = getRepositoryService().getCurrentRepository();
@@ -812,17 +812,17 @@ public class UIBrowseContainer extends UIContainer {
       if(SessionProviderFactory.isAnonim()) {
         session = getAnonimProvider().getSession(workspace,manageableRepository);
       } else {
-        session = getSessionProvider().getSession(workspace,manageableRepository); 
+        session = getSessionProvider().getSession(workspace,manageableRepository);
       }
     }
     return session;
   }
-  
+
   public SessionProvider getSessionProvider() { return SessionProviderFactory.createSessionProvider(); }
-  
+
   public List<Node> getSubDocumentList(Node selectedNode) throws Exception {
     List<Node> subDocumentList = new ArrayList<Node>();
-    if (selectedNode == null) return subDocumentList; 
+    if (selectedNode == null) return subDocumentList;
     LinkManager linkManager = getApplicationComponent(LinkManager.class);
     if (selectedNode.isNodeType(Utils.EXO_SYMLINK)) {
       selectedNode = linkManager.getTarget(selectedNode);
@@ -863,7 +863,7 @@ public class UIBrowseContainer extends UIContainer {
     }
     if(isEnableRefDocument()) subDocumentList.addAll(getReferences(getRepositoryService(),
         selectedNode, isShowAllDocument(), subDocumentList.size(), templates));
-    
+
     return subDocumentList;
   }
 
@@ -894,7 +894,7 @@ public class UIBrowseContainer extends UIContainer {
     WindowState currentWindowState = portletRequest.getWindowState();
     if(windowState_.containsKey(windowId_)) {
       WindowState keptWindowState = windowState_.get(windowId_);
-      if(isShowDetailDocument_ && currentWindowState.equals(WindowState.NORMAL) && 
+      if(isShowDetailDocument_ && currentWindowState.equals(WindowState.NORMAL) &&
           keptWindowState.equals(WindowState.MAXIMIZED)) {
         setShowDocumentDetail(false);
         windowState_.clear();
@@ -902,13 +902,13 @@ public class UIBrowseContainer extends UIContainer {
       }
     }
     if(isShowDetailDocument_) return detailTemplate_;
-    return templatePath_; 
+    return templatePath_;
   }
-  
+
   public ResourceResolver getTemplateResourceResolver(WebuiRequestContext context, String template) {
     if(jcrTemplateResourceResolver_ == null) newJCRTemplateResourceResolver();
     return jcrTemplateResourceResolver_;
-  } 
+  }
 
   public List<Node> getSortedListNode(Node node, boolean isASC) throws Exception {
     NodeIterator nodeIter = node.getNodes();
@@ -921,7 +921,7 @@ public class UIBrowseContainer extends UIContainer {
     else Collections.sort(nodes, new NodeNameDESCComparator());
     return nodes;
   }
-  
+
   public List<Node> getSortedListFolderNode(Node node, boolean isASC) throws Exception {
     NodeIterator nodeIter = node.getNodes();
     List<Node> nodes = new ArrayList<Node>();
@@ -935,8 +935,8 @@ public class UIBrowseContainer extends UIContainer {
     if(isASC) Collections.sort(nodes, new NodeNameASCComparator());
     else Collections.sort(nodes, new NodeNameDESCComparator());
     return nodes;
-  }  
-  
+  }
+
   public List<Node> getSortedListNodeByDate(Node node, boolean isASC) throws Exception {
     NodeIterator nodeIter = node.getNodes();
     List<Node> nodes = new ArrayList<Node>();
@@ -948,13 +948,13 @@ public class UIBrowseContainer extends UIContainer {
     else Collections.sort(nodes, new DateDESCComparator());
     return nodes;
   }
-  
+
   public boolean isSymLink(String nodePath) throws Exception {
     Node node = (Node)getSession(false).getItem(nodePath);
     if(Utils.isSymLink(node)) return true;
     return false;
   }
-  
+
   static public class NodeNameDESCComparator implements Comparator<Object> {
     public int compare(Object o1, Object o2) throws ClassCastException {
       try {
@@ -966,7 +966,7 @@ public class UIBrowseContainer extends UIContainer {
       }
     }
   }
-  
+
   static public class NodeNameASCComparator implements Comparator<Object> {
     public int compare(Object o1, Object o2) throws ClassCastException {
       try {
@@ -977,8 +977,8 @@ public class UIBrowseContainer extends UIContainer {
         return 0;
       }
     }
-  }  
-  
+  }
+
   static public class DateASCComparator implements Comparator<Object> {
     public int compare(Object o1, Object o2) throws ClassCastException {
       try {
@@ -990,7 +990,7 @@ public class UIBrowseContainer extends UIContainer {
       }
     }
   }
-  
+
   static public class DateDESCComparator implements Comparator<Object> {
     public int compare(Object o1, Object o2) throws ClassCastException {
       try {
@@ -1002,7 +1002,7 @@ public class UIBrowseContainer extends UIContainer {
       }
     }
   }
-  
+
   @SuppressWarnings("unchecked")
   public Map getTreeContent() throws Exception {
     TemplateService templateService  = getApplicationComponent(TemplateService.class);
@@ -1027,7 +1027,7 @@ public class UIBrowseContainer extends UIContainer {
           if(child.isNodeType(Utils.EXO_SYMLINK)) {
             typeName = child.getProperty(Utils.EXO_PRIMARYTYPE).getString();
           }
-          if(templates.contains(typeName)&&(isShowDocument)) {       
+          if(templates.contains(typeName)&&(isShowDocument)) {
             if(canRead(child)) subDocumentList.add(child);
           } else {
             if(isCategories(child)) {
@@ -1040,14 +1040,14 @@ public class UIBrowseContainer extends UIContainer {
           }
         }
       }
-  
+
       if(isShowReferenced) subDocumentList.addAll(getReferences(repositoryService,
           currentNode, isShowAllDocument(), subDocumentList.size(), templates));
       content.put("subCategoryList", subCategoryList);
       content.put("subDocumentList", subDocumentList);
     }
     return content;
-  } 
+  }
   public BCTreeNode getTreeRoot() { return treeRoot_;  }
   public UIPageIterator getUIPageIterator() throws Exception {
     return uiPageIterator_;
@@ -1055,27 +1055,27 @@ public class UIBrowseContainer extends UIContainer {
 
   public String getUseCase() {
     return getPortletPreferences().getValue(Utils.CB_USECASE, "");
-  }    
+  }
 
   public void setWorkspaceName(String wsName) { wsName_ = wsName; }
-  
+
   public String getWorkSpace() {
     return getPortletPreferences().getValue(Utils.WORKSPACE_NAME, "");
   }
-  
+
   public String getDMSSystemWorkspace(String repository) throws Exception {
-  	ExoContainer container = ExoContainerContext.getCurrentContainer();
+    ExoContainer container = ExoContainerContext.getCurrentContainer();
 //  	RepositoryService repoService = (RepositoryService)
 //  			container.getComponentInstanceOfType(RepositoryService.class);
-  	DMSConfiguration dmsConfiguration = (DMSConfiguration)
-  			container.getComponentInstanceOfType(DMSConfiguration.class);
-  	
+    DMSConfiguration dmsConfiguration = (DMSConfiguration)
+        container.getComponentInstanceOfType(DMSConfiguration.class);
+
     //ManageableRepository manageableRepository = repoService.getRepository(repository) ;
     DMSRepositoryConfiguration dmsRepoConfig = dmsConfiguration.getConfig();
     return dmsRepoConfig.getSystemWorkspace();
     //return manageableRepository.getSystemSession(dmsRepoConfig.getSystemWorkspace());
   }
-  
+
   public void initToolBar(boolean showTree, boolean showPath,boolean showSearch) throws Exception {
     UIToolBar toolBar = getChild(UIToolBar.class);
     toolBar.setEnableTree(showTree);
@@ -1089,11 +1089,11 @@ public class UIBrowseContainer extends UIContainer {
   public boolean isEnableChildDocument() {
     return Boolean.parseBoolean(getPortletPreferences().getValue(Utils.CB_CHILD_DOCUMENT, ""));
   }
-  
+
   public boolean isAllowPublish() {
     return Boolean.parseBoolean(getPortletPreferences().getValue(Utils.CB_ALLOW_PUBLISH, ""));
   }
-  
+
   public boolean isEnableRefDocument() {
     return Boolean.parseBoolean(getPortletPreferences().getValue(Utils.CB_REF_DOCUMENT, ""));
   }
@@ -1104,7 +1104,7 @@ public class UIBrowseContainer extends UIContainer {
   public boolean isRootNode() throws Exception {return getCurrentNode().equals(getRootNode());}
   public boolean isShowAllDocument() { return this.isShowAllDocument_; }
 
-  public boolean isShowCategoryTree() { return isShowCategoriesTree_; }  
+  public boolean isShowCategoryTree() { return isShowCategoriesTree_; }
   public boolean isShowCommentForm() {
     return Boolean.parseBoolean(getPortletPreferences().getValue(Utils.CB_VIEW_COMMENT, ""));
   }
@@ -1112,7 +1112,7 @@ public class UIBrowseContainer extends UIContainer {
 
   public boolean isShowDocumentDetail() { return isShowDetailDocument_; }
   public boolean isShowDocumentList() { return this.isShowDocumentList_; }
-  public boolean isShowSearchForm() { return isShowSearchForm_;  }  
+  public boolean isShowSearchForm() { return isShowSearchForm_;  }
 
   public boolean isShowTagmap() {
     return Boolean.parseBoolean(getPortletPreferences().getValue(Utils.CB_VIEW_TAGMAP, ""));
@@ -1129,20 +1129,20 @@ public class UIBrowseContainer extends UIContainer {
     setShowDocumentByTag(false);
     setShowDocumentDetail(false);
     if(getUseCase().equals(Utils.CB_USE_JCR_QUERY)) {
-      setTemplate(viewService.getTemplateHome(BasePath.CB_QUERY_TEMPLATES, 
+      setTemplate(viewService.getTemplateHome(BasePath.CB_QUERY_TEMPLATES,
           repoName,SessionProviderFactory.createSystemProvider()).getNode(tempName).getPath());
       if(isShowCommentForm() || isShowVoteForm()) initToolBar(false, false, false);
       if(!isShowDocumentByTag()) setPageIterator(getNodeByQuery(-1));
       return;
-    } 
-    if(getUseCase().equals(Utils.CB_USE_SCRIPT)) { 
+    }
+    if(getUseCase().equals(Utils.CB_USE_SCRIPT)) {
       setTemplate(viewService.getTemplateHome(BasePath.CB_SCRIPT_TEMPLATES, repoName,
           SessionProviderFactory.createSystemProvider()).getNode(tempName).getPath());
       if (isShowCommentForm() || isShowVoteForm()) initToolBar(false, false, false);
       String scriptName = preferences.getValue(Utils.CB_SCRIPT_NAME, "");
       if (!isShowDocumentByTag()) setPageIterator(getNodeByScript(repoName, scriptName));
       return;
-    }    
+    }
     String categoryPath = preferences.getValue(Utils.JCR_PATH, "");
     NodeFinder nodeFinder_ =  getApplicationComponent(NodeFinder.class);
     LinkManager linkManager_ = getApplicationComponent(LinkManager.class);
@@ -1165,7 +1165,7 @@ public class UIBrowseContainer extends UIContainer {
       }
     }
     if(getUseCase().equals(Utils.CB_USE_FROM_PATH)) {
-      setTemplate(viewService.getTemplateHome(BasePath.CB_PATH_TEMPLATES, 
+      setTemplate(viewService.getTemplateHome(BasePath.CB_PATH_TEMPLATES,
           repoName, SessionProviderFactory.createSystemProvider()).getNode(tempName).getPath());
       initToolBar(false, isEnableToolBar(), isEnableToolBar());
       if(getTemplateName().equals(TREELIST)) {
@@ -1176,16 +1176,16 @@ public class UIBrowseContainer extends UIContainer {
       }
       if(!isShowDocumentByTag()) setPageIterator(getSubDocumentList(getSelectedTab()));
       return;
-    } 
+    }
     if (getUseCase().equals(Utils.CB_USE_DOCUMENT)) {
-      setTemplateDetail(viewService.getTemplateHome(BasePath.CB_DETAIL_VIEW_TEMPLATES, repoName, 
-          SessionProviderFactory.createSystemProvider()).getNode(tempName).getPath());      
+      setTemplateDetail(viewService.getTemplateHome(BasePath.CB_DETAIL_VIEW_TEMPLATES, repoName,
+          SessionProviderFactory.createSystemProvider()).getNode(tempName).getPath());
       String documentPath;
-      if ((categoryPath.equals("/")) && (preferences.getValue(Utils.CB_DOCUMENT_NAME, "").indexOf("/") == 0))        
+      if ((categoryPath.equals("/")) && (preferences.getValue(Utils.CB_DOCUMENT_NAME, "").indexOf("/") == 0))
         documentPath = preferences.getValue(Utils.CB_DOCUMENT_NAME, "");
-      else 
+      else
         documentPath = categoryPath + preferences.getValue(Utils.CB_DOCUMENT_NAME, "");
-      Node documentNode = null;      
+      Node documentNode = null;
       try{
         documentNode = (Node)nodeFinder_.getItem(repoName, getWorkSpace(), documentPath);
         if (linkManager_.isLink(documentNode)) {
@@ -1193,32 +1193,32 @@ public class UIBrowseContainer extends UIContainer {
             documentNode = linkManager_.getTarget(documentNode);
           }
         }
-      }catch (Exception e) { 
+      }catch (Exception e) {
         setRootPath(null);
         setCategoryPath(null);
         setSelectedTabPath(null);
         setCurrentNodePath(null);
         return;
-      }      
+      }
       viewDocument(documentNode, false);
       if(isEnableToolBar()) initToolBar(false, false, false);
       return;
-    }     
+    }
   }
-    
+
   public String getDmsSystemWorkspace() {
     DMSConfiguration dmsConfiguration = getApplicationComponent(DMSConfiguration.class);
     DMSRepositoryConfiguration dmsRepoConfig = dmsConfiguration.getConfig();
     return dmsRepoConfig.getSystemWorkspace();
   }
-  
+
   public void newJCRTemplateResourceResolver() {
-    try{      
+    try{
       jcrTemplateResourceResolver_ = new JCRResourceResolver(getRepository(),
           getDmsSystemWorkspace(), Utils.EXO_TEMPLATEFILE);
     } catch (Exception e) {
       LOG.error("An error occured while creating a new JCR Resource resolver", e);
-    }     
+    }
   }
 
   public void processRender(WebuiRequestContext context) throws Exception {
@@ -1226,7 +1226,7 @@ public class UIBrowseContainer extends UIContainer {
       getApplicationComponent(RepositoryService.class).getCurrentRepository();
       if (getCurrentNode() != null) super.processRender(context);
     } catch (Exception e) {
-      LOG.error("An error occured while displaying the content", e);      
+      LOG.error("An error occured while displaying the content", e);
       getAncestorOfType(UIBrowseContentPortlet.class).setPorletMode(PortletMode.HELP);
       return;
     }
@@ -1235,7 +1235,7 @@ public class UIBrowseContainer extends UIContainer {
   public void record(String str) { getNodesHistory().add(str); }
 
   public void refreshContent() throws Exception{
-    if(!showPageAction()) { 
+    if(!showPageAction()) {
       if(isShowDocumentByTag()) {
         setPageIterator(getDocumentByTag());
       } else {
@@ -1244,7 +1244,7 @@ public class UIBrowseContainer extends UIContainer {
             //UIBrowseContentPortlet uiPorlet = getAncestorOfType(UIBrowseContentPortlet.class);
             //uiPorlet.setPorletMode(PortletMode.HELP);
             //uiPorlet.reload();
-          } else if(getNodeByPath(getSelectedTab().getPath()) == null || 
+          } else if(getNodeByPath(getSelectedTab().getPath()) == null ||
               getNodeByPath(getCurrentNode().getPath()) == null) {
             setSelectedTabPath(null);
             setCurrentNodePath(null);
@@ -1264,17 +1264,17 @@ public class UIBrowseContainer extends UIContainer {
           setPageIterator(getNodeByQuery(-1));
         } else if(getUseCase().equals(Utils.USE_DOCUMENT)) {
           if (getChild(UIDocumentDetail.class).isValidNode()) {
-            getChild(UIDocumentDetail.class).setRendered(true);         
+            getChild(UIDocumentDetail.class).setRendered(true);
           } else {
             getChild(UIDocumentDetail.class).setRendered(false);
             UIBrowseContentPortlet uiPortlet = getAncestorOfType(UIBrowseContentPortlet.class);
             uiPortlet.getChild(UIPopupContainer.class).deActivate();
-          } 
+          }
         }
         if (isShowDocumentDetail()) {
-          UIDocumentDetail uiDocumentDetail = getChild(UIDocumentDetail.class);      
+          UIDocumentDetail uiDocumentDetail = getChild(UIDocumentDetail.class);
           if (getChild(UIDocumentDetail.class).isValidNode()) {
-            getChild(UIDocumentDetail.class).setRendered(true);         
+            getChild(UIDocumentDetail.class).setRendered(true);
           } else {
             if (isShowDocumentByTag() && isShowDocumentDetail()) {
               setShowDocumentDetail(false);
@@ -1290,10 +1290,10 @@ public class UIBrowseContainer extends UIContainer {
               }
               UIBrowseContentPortlet uiPortlet = getAncestorOfType(UIBrowseContentPortlet.class);
               uiPortlet.getChild(UIPopupContainer.class).deActivate();
-            } 
+            }
           }
         }
-      } 
+      }
       setShowPageAction(false);
     }
   }
@@ -1302,25 +1302,25 @@ public class UIBrowseContainer extends UIContainer {
     this.categoryPath_ = path;
   }
 
-  public void setCurrentNodePath(String currentPath) { 
+  public void setCurrentNodePath(String currentPath) {
     if(currentPath == null) currentPath = rootPath_;
-    currentPath_ = currentPath; 
+    currentPath_ = currentPath;
   }
-  
+
   public void setPageIterator(List<Node> data) throws Exception {
     if(!isSetted_) {
       ObjectPageList objPageList = new ObjectPageList(data, getItemPerPage());
       uiPageIterator_.setPageList(objPageList);
     }
   }
-  
+
   public boolean isSetted() { return isSetted_; }
-  
+
   public void setPageStatus(boolean isSetted) { isSetted_ = isSetted; }
-  
+
   public void setRowPerBlock(int number) { this.rowPerBlock_ = number; }
 
-  public void setShowAllChildren(boolean isShowAll) { 
+  public void setShowAllChildren(boolean isShowAll) {
     this.isShowAllDocument_ = isShowAll;
   }
 
@@ -1336,7 +1336,7 @@ public class UIBrowseContainer extends UIContainer {
   }
 
   public void setShowDocumentList(boolean isShowDocumentList){
-    this.isShowDocumentList_ = isShowDocumentList; 
+    this.isShowDocumentList_ = isShowDocumentList;
   }
 
   public void setShowSearchForm(boolean isShowSearch) {
@@ -1352,14 +1352,14 @@ public class UIBrowseContainer extends UIContainer {
   public void storeHistory() throws Exception {
     getHistory().clear();
     getHistory().put(KEY_CURRENT, getCurrentNode());
-    getHistory().put(KEY_SELECTED, getSelectedTab());    
+    getHistory().put(KEY_SELECTED, getSelectedTab());
   }
-  
+
   public List<Node> getListHistoryNode() {
     listHistoryNode.remove(null);
-    return listHistoryNode; 
+    return listHistoryNode;
   }
-  
+
   public List<Node> storeListHistory(Node selectedNode) throws Exception {
     LinkManager linkManager = getApplicationComponent(LinkManager.class);
     Node rootNode = getRootNode();
@@ -1394,7 +1394,7 @@ public class UIBrowseContainer extends UIContainer {
         while(nodeIter.hasNext()) {
           Node child = nodeIter.nextNode();
           Node tempChild = child;
-          if (child.isNodeType(Utils.EXO_SYMLINK)) {            
+          if (child.isNodeType(Utils.EXO_SYMLINK)) {
             try {
               child = linkManager.getTarget(child);
             } catch (ItemNotFoundException ie) {
@@ -1411,7 +1411,7 @@ public class UIBrowseContainer extends UIContainer {
       }
     }
     if (listHistoryNode.size() == 0) {
-      if ((parentNode != null) && (!listHistoryNode.contains(parentNode))) listHistoryNode.add(parentNode);  
+      if ((parentNode != null) && (!listHistoryNode.contains(parentNode))) listHistoryNode.add(parentNode);
       if (!listHistoryNode.contains(selectedNode)) listHistoryNode.add(selectedNode);
     } else {
       if (listHistoryNode.contains(selectedNode)) {
@@ -1419,16 +1419,16 @@ public class UIBrowseContainer extends UIContainer {
         boolean addOk = true;
         countHistoryNode = listHistoryNode.size();
         for (int i=0; i<countHistoryNode; i++) {
-          if (listHistoryNode.get(i).getPath().equals(selectedNode.getPath())) { 
+          if (listHistoryNode.get(i).getPath().equals(selectedNode.getPath())) {
             listHistoryTmp.add(listHistoryNode.get(i));
             addOk = false;
           }
-          if (addOk) listHistoryTmp.add(listHistoryNode.get(i));   
+          if (addOk) listHistoryTmp.add(listHistoryNode.get(i));
         }
         listHistoryNode.clear();
         listHistoryNode.addAll(listHistoryTmp);
       } else {
-        countHistoryNode = listHistoryNode.size();        
+        countHistoryNode = listHistoryNode.size();
         for (int i=0; i<countHistoryNode; i++) {
           if ((parentNode != null) && (listHistoryNode.get(i) != null) && (listHistoryNode.get(i) == parentNode)) {
             if (!listHistoryNode.contains(parentNode)) {
@@ -1436,7 +1436,7 @@ public class UIBrowseContainer extends UIContainer {
               if (!listHistoryNode.contains(selectedNode)) listHistoryNode.add(i+2, selectedNode);
             } else {
               if (!listHistoryNode.contains(selectedNode)) listHistoryNode.add(i+1, selectedNode);
-            }          
+            }
           } else {
             if (!listHistoryNode.contains(parentNode) && (parentNode != null)) {
               if ((parentNode != null) && (countHistoryNode > 1)) {
@@ -1447,7 +1447,7 @@ public class UIBrowseContainer extends UIContainer {
                 }
               }
               if (parentNode != null) listHistoryNode.add(parentNode);
-            } 
+            }
             if (parentNode != null) {
               if(parentNode.hasNodes()) {
                 NodeIterator nodeIter = parentNode.getNodes();
@@ -1469,10 +1469,10 @@ public class UIBrowseContainer extends UIContainer {
       Node targetRootNode = linkManager.getTarget(rootNode);
       if (historyNode1.getPath().equals(targetRootNode.getPath())) listHistoryNode.remove(historyNode1);
     }
-    
+
     return getListHistoryNode();
   }
-  
+
   public void viewDocument(Node docNode ,boolean hasDocList) throws Exception {
     setShowDocumentDetail(true);
     setShowDocumentList(hasDocList);
@@ -1502,7 +1502,7 @@ public class UIBrowseContainer extends UIContainer {
       CmsScript cmsScript = scriptService.getScript(scripts.getName()+ "/" + scriptName , repository);
       cmsScript.execute(data);
     } catch (Exception e) {
-      LOG.error("An error occured while executing the script", e);      
+      LOG.error("An error occured while executing the script", e);
       return new ArrayList<Node>();
     }
     List<Node> listNode = data.getContentList();
@@ -1534,7 +1534,7 @@ public class UIBrowseContainer extends UIContainer {
 
   protected boolean isCategories(Node node) throws RepositoryException {
     NodeType nodeType = node.getPrimaryNodeType();
-    String primaryTypeName = nodeType.getName(); 
+    String primaryTypeName = nodeType.getName();
     if(node.isNodeType(Utils.EXO_SYMLINK)) {
       primaryTypeName = node.getProperty(Utils.EXO_PRIMARYTYPE).getString();
     }
@@ -1543,17 +1543,17 @@ public class UIBrowseContainer extends UIContainer {
     }
     return false;
   }
-  
+
   protected boolean isCategories(NodeType nodeType) {
     for(String type : Utils.CATEGORY_NODE_TYPES) {
       if(nodeType.getName().equals(type)) return true;
     }
     return false;
-  }  
+  }
 //  protected void setRootNode(Node node) { this.rootNode_ = node; }
-  
+
   protected void setRootPath(String rootPath) { rootPath_ = rootPath; }
-  
+
   protected void setShowPageAction(boolean isShowPage) { this.isShowPageAction_ = isShowPage; }
 
   protected void setTemplateDetail(String template) { this.detailTemplate_ = template; }
@@ -1568,7 +1568,7 @@ public class UIBrowseContainer extends UIContainer {
     } catch(Exception ac){}
     return false;
   }
-  
+
   private Map<String, List<? extends Object>> getChildOfSubCategory(RepositoryService repositoryService, Node subCat,
       List<?> documentTemplates) throws Exception {
     LinkManager linkManager = getApplicationComponent(LinkManager.class);
@@ -1605,10 +1605,10 @@ public class UIBrowseContainer extends UIContainer {
               childDocOrReferencedDoc.remove(item);
             } catch (Exception e) {
               childDocOrReferencedDoc.remove(item);
-            }         
+            }
           }
         } else {
-          if (isCategories(item)) subCategories.add(item.getPath());          
+          if (isCategories(item)) subCategories.add(item.getPath());
         }
       }
     }
@@ -1628,10 +1628,10 @@ public class UIBrowseContainer extends UIContainer {
       if(!documentTemplates.contains(nt)) historyList.add(node.getPath());
     }
     return historyList;
-  } 
+  }
   private List<Node> getReferences(RepositoryService repositoryService, Node node, boolean isShowAll,
       int size, List<?> templates) throws Exception {
-    List<Node> refDocuments = new ArrayList<Node>();    
+    List<Node> refDocuments = new ArrayList<Node>();
     String repository = getRepository();
     ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
     SessionProvider provider = null;
@@ -1670,7 +1670,7 @@ public class UIBrowseContainer extends UIContainer {
     return refDocuments;
   }
 
-  private RepositoryService getRepositoryService() { 
+  private RepositoryService getRepositoryService() {
     return getApplicationComponent(RepositoryService.class);
   }
 
@@ -1680,20 +1680,20 @@ public class UIBrowseContainer extends UIContainer {
       if(type.getName().equals(Utils.MIX_REFERENCEABLE)) return true;
     }
     return false;
-  }   
-  
-  public String getWebDAVServerPrefix() throws Exception {    
+  }
+
+  public String getWebDAVServerPrefix() throws Exception {
     PortletRequestContext portletRequestContext = PortletRequestContext.getCurrentInstance();
-    String prefixWebDAV = portletRequestContext.getRequest().getScheme() + "://" + 
+    String prefixWebDAV = portletRequestContext.getRequest().getScheme() + "://" +
                           portletRequestContext.getRequest().getServerName() + ":" +
                           String.format("%s",portletRequestContext.getRequest().getServerPort());
     return prefixWebDAV;
   }
-  
+
   public String getPortalName() {
     ExoContainer container = ExoContainerContext.getCurrentContainer();
-    PortalContainerInfo containerInfo = (PortalContainerInfo)container.getComponentInstanceOfType(PortalContainerInfo.class);      
-    return containerInfo.getContainerName() ; 
+    PortalContainerInfo containerInfo = (PortalContainerInfo)container.getComponentInstanceOfType(PortalContainerInfo.class);
+    return containerInfo.getContainerName() ;
   }
 
   static public class BackActionListener extends EventListener<UIBrowseContainer> {
@@ -1703,15 +1703,15 @@ public class UIBrowseContainer extends UIContainer {
       List<String> templates = templateService.getDocumentTemplates();
       Node historyNode = null;
       historyNode = uiContainer.getHistory().get(UIBrowseContainer.KEY_CURRENT);
-      if (historyNode == null) historyNode = uiContainer.getCurrentNode();      
+      if (historyNode == null) historyNode = uiContainer.getCurrentNode();
       if (uiContainer.listHistoryNode.size() > 0) {
         Node nodeTemp1 = uiContainer.listHistoryNode.get(uiContainer.listHistoryNode.size() - 1);
         if (uiContainer.listHistoryNode.size() > 1) {
           Node nodeTemp2 = uiContainer.listHistoryNode.get(uiContainer.listHistoryNode.size() - 2);
-					try {
-	          Node nodeTemp2Parent = nodeTemp2.getParent();
-	          if (!historyNode.getPath().equals(nodeTemp2.getPath()) && historyNode.getPath().equals(nodeTemp2Parent.getPath())) 
-	            uiContainer.listHistoryNode.remove(nodeTemp2);
+          try {
+            Node nodeTemp2Parent = nodeTemp2.getParent();
+            if (!historyNode.getPath().equals(nodeTemp2.getPath()) && historyNode.getPath().equals(nodeTemp2Parent.getPath()))
+              uiContainer.listHistoryNode.remove(nodeTemp2);
           } catch (ItemNotFoundException ex) {}
         }
         uiContainer.listHistoryNode.remove(nodeTemp1);
@@ -1722,7 +1722,7 @@ public class UIBrowseContainer extends UIContainer {
       }
       ManageViewService vservice = uiContainer.getApplicationComponent(ManageViewService.class);
       if(uiContainer.isShowDocumentByTag() && uiContainer.isShowDocumentDetail()) {
-        UIDocumentDetail uiDocumentDetail = uiContainer.getChild(UIDocumentDetail.class);      
+        UIDocumentDetail uiDocumentDetail = uiContainer.getChild(UIDocumentDetail.class);
         uiContainer.setShowDocumentDetail(false);
         uiDocumentDetail.setRendered(false);
         if(uiContainer.getUseCase().equals(Utils.CB_USE_FROM_PATH)) {
@@ -1732,12 +1732,12 @@ public class UIBrowseContainer extends UIContainer {
       } else if(uiContainer.isShowDocumentDetail() && historyNode != null &&
           templates.contains(historyNode.getPrimaryNodeType().getName())) {
         uiContainer.setShowDocumentByTag(false);
-        UIDocumentDetail uiDocumentDetail = uiContainer.getChild(UIDocumentDetail.class);      
+        UIDocumentDetail uiDocumentDetail = uiContainer.getChild(UIDocumentDetail.class);
         uiContainer.setShowDocumentDetail(true);
-        uiDocumentDetail.setRendered(true);  
+        uiDocumentDetail.setRendered(true);
         String repoName = uiContainer.getPortletPreferences().getValue(Utils.REPOSITORY, "");
         String detailTemplateName = uiContainer.getPortletPreferences().getValue(Utils.CB_BOX_TEMPLATE, "");
-        uiContainer.setTemplateDetail(vservice.getTemplateHome(BasePath.CB_DETAIL_VIEW_TEMPLATES, 
+        uiContainer.setTemplateDetail(vservice.getTemplateHome(BasePath.CB_DETAIL_VIEW_TEMPLATES,
             repoName, SessionProviderFactory.createSystemProvider()).getNode(detailTemplateName).getPath());
         if (uiContainer.getHistory().get(UIBrowseContainer.KEY_CURRENT) == null) {
           uiContainer.changeNode(historyNode.getParent());
@@ -1751,12 +1751,12 @@ public class UIBrowseContainer extends UIContainer {
         uiContainer.getHistory().clear();
       } else if(uiContainer.isShowDocumentDetail() && historyNode == null) {
         uiContainer.setShowDocumentByTag(false);
-        UIDocumentDetail uiDocumentDetail = uiContainer.getChild(UIDocumentDetail.class);      
+        UIDocumentDetail uiDocumentDetail = uiContainer.getChild(UIDocumentDetail.class);
         uiContainer.setShowDocumentDetail(false);
         uiDocumentDetail.setRendered(false);
         if(uiContainer.getUseCase().equals(Utils.CB_USE_JCR_QUERY)) {
           String tempName = uiContainer.getPortletPreferences().getValue(Utils.CB_TEMPLATE, "");
-          uiContainer.setTemplate(vservice.getTemplateHome(BasePath.CB_QUERY_TEMPLATES, 
+          uiContainer.setTemplate(vservice.getTemplateHome(BasePath.CB_QUERY_TEMPLATES,
               uiContainer.getRepository(),SessionProviderFactory.createSystemProvider()).getNode(tempName).getPath());
           if(uiContainer.isShowCommentForm() || uiContainer.isShowVoteForm()) uiContainer.initToolBar(false, false, false);
           if(!uiContainer.isShowDocumentByTag()) uiContainer.setPageIterator(uiContainer.getNodeByQuery(-1));
@@ -1768,7 +1768,7 @@ public class UIBrowseContainer extends UIContainer {
         }
       } else {
         uiContainer.setShowDocumentByTag(false);
-        UIDocumentDetail uiDocumentDetail = uiContainer.getChild(UIDocumentDetail.class);      
+        UIDocumentDetail uiDocumentDetail = uiContainer.getChild(UIDocumentDetail.class);
         uiContainer.setShowDocumentDetail(false);
         uiDocumentDetail.setRendered(false);
         if (uiContainer.getUseCase().equals(Utils.CB_USE_FROM_PATH) && historyNode != null) {
@@ -1798,7 +1798,7 @@ public class UIBrowseContainer extends UIContainer {
       }
       UIBrowseContainer uiContainer = event.getSource();
       if(uiContainer.isShowDocumentDetail()) {
-        UIDocumentDetail uiDocumentDetail = uiContainer.getChild(UIDocumentDetail.class);      
+        UIDocumentDetail uiDocumentDetail = uiContainer.getChild(UIDocumentDetail.class);
         uiContainer.setShowDocumentDetail(false);
         uiDocumentDetail.setRendered(false);
       }
@@ -1876,7 +1876,7 @@ public class UIBrowseContainer extends UIContainer {
           return;
         } catch (Exception e) {
           LOG.error("Unexpected error", e);
-        } 
+        }
       }
       TemplateService templateService = uiContainer.getApplicationComponent(TemplateService.class);
       List<String> templates = templateService.getDocumentTemplates();
@@ -1945,12 +1945,12 @@ public class UIBrowseContainer extends UIContainer {
       UIPortal uiPortal = Util.getUIPortal();
       String uri  = event.getRequestContext().getRequestParameter(OBJECTID);
       PageNodeEvent<UIPortal> pnevent;
-      pnevent = new PageNodeEvent<UIPortal>(uiPortal, PageNodeEvent.CHANGE_PAGE_NODE, uri);      
+      pnevent = new PageNodeEvent<UIPortal>(uiPortal, PageNodeEvent.CHANGE_PAGE_NODE, uri);
       uiPortal.broadcast(pnevent, Event.Phase.PROCESS);
       uiPortal.getSelectedNode().setUri(uri);
     }
   }
-  
+
   static  public class ShowPageActionListener extends EventListener<UIPageIterator> {
     public void execute(Event<UIPageIterator> event) throws Exception {
       UIPageIterator uiPageIterator = event.getSource();

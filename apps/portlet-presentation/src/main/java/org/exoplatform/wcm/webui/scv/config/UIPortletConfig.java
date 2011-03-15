@@ -38,20 +38,20 @@ public class UIPortletConfig extends UIContainer {
 
   /**
    * Inits the.
-   * 
+   *
    * @throws Exception the exception
    */
   public void init() throws Exception {
-  	UISingleContentViewerPortlet scvPortlet = getAncestorOfType(UISingleContentViewerPortlet.class);
-		Node webcontent = scvPortlet.getNodeByPreference();
+    UISingleContentViewerPortlet scvPortlet = getAncestorOfType(UISingleContentViewerPortlet.class);
+    Node webcontent = scvPortlet.getNodeByPreference();
     if (webcontent == null) {
-    	UIWelcomeScreen welcomeScreen = createUIComponent(UIWelcomeScreen.class, null, null);
-    	Utils.updatePopupWindow(this, welcomeScreen, UIContentDialogForm.CONTENT_DIALOG_FORM_POPUP_WINDOW);
+      UIWelcomeScreen welcomeScreen = createUIComponent(UIWelcomeScreen.class, null, null);
+      Utils.updatePopupWindow(this, welcomeScreen, UIContentDialogForm.CONTENT_DIALOG_FORM_POPUP_WINDOW);
     } else {
-    	UIContentDialogForm contentDialogForm = createUIComponent(UIContentDialogForm.class, null, null);
-    	contentDialogForm.setPreferenceComponent(UIContentDialogPreference.class);
-    	contentDialogForm.init(webcontent, false);
-    	Utils.updatePopupWindow(this, contentDialogForm, UIContentDialogForm.CONTENT_DIALOG_FORM_POPUP_WINDOW);
+      UIContentDialogForm contentDialogForm = createUIComponent(UIContentDialogForm.class, null, null);
+      contentDialogForm.setPreferenceComponent(UIContentDialogPreference.class);
+      contentDialogForm.init(webcontent, false);
+      Utils.updatePopupWindow(this, contentDialogForm, UIContentDialogForm.CONTENT_DIALOG_FORM_POPUP_WINDOW);
     }
   }
 }

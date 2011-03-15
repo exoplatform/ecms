@@ -25,7 +25,7 @@ import org.exoplatform.webui.form.UIFormInputBase;
  * Created by The eXo Platform SAS
  * Author : Phan Le Thanh Chuong
  *          chuong.phan@exoplatform.com; phan.le.thanh.chuong@gmail.com
- * May 10, 2010  
+ * May 10, 2010
  */
 public class UIFormRichtextField extends DialogFormField {
 
@@ -40,7 +40,7 @@ public class UIFormRichtextField extends DialogFormField {
   public UIFormRichtextField(String name, String label, String[] arguments) {
     super(name, label, arguments);
   }
-  
+
   @SuppressWarnings("unchecked")
   public <T extends UIFormInputBase> T createUIFormInput() throws Exception {
     UIFormRichtextInput richtext = new UIFormRichtextInput(name, name, defaultValue);
@@ -50,13 +50,13 @@ public class UIFormRichtextField extends DialogFormField {
     richtext.setHeight(height);
     if(validateType != null) {
       DialogFormUtil.addValidators(richtext, validateType);
-    }    
+    }
     return (T)richtext;
   }
 
   private void setPredefineOptions() {
     if (options == null) return;
-    for(String option: options.split(",")) {       
+    for(String option: options.split(",")) {
       String[] entry = option.split(":");
       if(TOOLBAR.equals(entry[0])) {
         toolbar = entry[1];
@@ -67,5 +67,5 @@ public class UIFormRichtextField extends DialogFormField {
       }
     }
   }
-  
+
 }

@@ -52,85 +52,85 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
    * Name of property WORKSPACE
    */
   private static String WORKSPACE = "exo:workspace".intern() ;
-  
+
   private static String ALL_DRIVES_CACHED = "allDrives".intern();
-  
+
   private static String ALL_DRIVES_CACHED_BY_ROLES = "_allDrivesByRoles".intern();
-  
+
   private static String ALL_MAIN_CACHED_DRIVE = "_mainDrives".intern();
-  
+
   private static String ALL_PERSONAL_CACHED_DRIVE = "_personalDrives".intern();
-  
+
   private static String ALL_GROUP_CACHED_DRIVES = "_groupDrives".intern();
   /**
    * Name of property PERMISSIONS
    */
   private static String PERMISSIONS = "exo:accessPermissions".intern() ;
-  
+
   /**
    * Name of property VIEWS
    */
   private static String VIEWS = "exo:views".intern() ;
-  
+
   /**
    * Name of property ICON
    */
   private static String ICON = "exo:icon".intern() ;
-  
+
   /**
    * Name of property PATH
    */
   private static String PATH = "exo:path".intern() ;
-  
+
   /**
    * Name of property VIEW_REFERENCES
    */
   private static String VIEW_REFERENCES = "exo:viewPreferences".intern() ;
-  
+
   /**
    * Name of property VIEW_NON_DOCUMENT
    */
   private static String VIEW_NON_DOCUMENT = "exo:viewNonDocument".intern() ;
-  
+
   /**
    * Name of property VIEW_SIDEBAR
    */
   private static String VIEW_SIDEBAR = "exo:viewSideBar".intern() ;
-  
+
   /**
    * Name of property SHOW_HIDDEN_NODE
    */
   private static String SHOW_HIDDEN_NODE = "exo:showHiddenNode".intern() ;
-  
+
   /**
    *  Name of property ALLOW_CREATE_FOLDER
    */
   private static String ALLOW_CREATE_FOLDER = "exo:allowCreateFolders".intern() ;
-  private static String ALLOW_NODETYPES_ON_TREE = "exo:allowNodeTypesOnTree".intern(); 
+  private static String ALLOW_NODETYPES_ON_TREE = "exo:allowNodeTypesOnTree".intern();
 
   /**
    * List of ManageDrivePlugin
    */
   private List<ManageDrivePlugin> drivePlugins_  = new ArrayList<ManageDrivePlugin> ();
-  
+
   /**
    * RepositoryService object
    */
   private RepositoryService repositoryService_ ;
-  
+
   /**
    * Path to drive home directory
    */
   private String baseDrivePath_ ;
-  
+
   /**
-   * NodeHierarchyCreator object 
+   * NodeHierarchyCreator object
    */
   private NodeHierarchyCreator nodeHierarchyCreator_ ;
-  
+
   private DMSConfiguration dmsConfiguration_;
   private static final Log LOG  = ExoLogger.getLogger(ManageDriveServiceImpl.class);
-  
+
   /**
    * Keep the drives of repository
    */
@@ -143,8 +143,8 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
    * @param nodeHierarchyCreator
    * @throws Exception
    */
-  public ManageDriveServiceImpl(RepositoryService jcrService, 
-      NodeHierarchyCreator nodeHierarchyCreator, DMSConfiguration dmsConfiguration, 
+  public ManageDriveServiceImpl(RepositoryService jcrService,
+      NodeHierarchyCreator nodeHierarchyCreator, DMSConfiguration dmsConfiguration,
       CacheService caService) throws Exception{
     repositoryService_ = jcrService ;
     nodeHierarchyCreator_ = nodeHierarchyCreator ;
@@ -162,8 +162,8 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
       for(ManageDrivePlugin plugin : drivePlugins_) {
         plugin.init() ;
       }
-    }catch(Exception e) {      
-    }    
+    }catch(Exception e) {
+    }
   }
 
   /**
@@ -179,7 +179,7 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
       plugin.init() ;
     }
   }
-  
+
   /**
    * Init drive node with specified repository
    * @deprecated Since WCM 2.1-CLOUD-DEV you should use {@link #buildDocumentTypePattern()} instead.
@@ -194,8 +194,8 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
    */
   public void setManageDrivePlugin(ManageDrivePlugin drivePlugin) {
     drivePlugins_.add(drivePlugin) ;
-  }    
-  
+  }
+
   /**
    * {@inheritDoc}
    */
@@ -203,7 +203,7 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
   public List<DriveData> getAllDrives(String repository) throws Exception {
     List<DriveData> allDrives = (List<DriveData>) drivesCache_.get(getRepoName() + "_" + ALL_DRIVES_CACHED);
     if ((allDrives != null) && (allDrives.size() > 0)) return allDrives;
-    Session session = getSession() ;    
+    Session session = getSession() ;
     Node driveHome = (Node)session.getItem(baseDrivePath_);
     NodeIterator itr = driveHome.getNodes() ;
     List<DriveData> driveList = new ArrayList<DriveData>() ;
@@ -228,14 +228,14 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
     }
     drivesCache_.put(getRepoName() + "_" + ALL_DRIVES_CACHED, driveList);
     session.logout();
-    return driveList ;    
+    return driveList ;
   }
 
   /**
    * {@inheritDoc}
    */
-  public DriveData getDriveByName(String name, String repository) throws Exception{  
-    Session session = getSession() ;    
+  public DriveData getDriveByName(String name, String repository) throws Exception{
+    Session session = getSession() ;
     Node driveHome = (Node)session.getItem(baseDrivePath_);
     if (driveHome.hasNode(name)){
       Node drive = driveHome.getNode(name) ;
@@ -258,38 +258,38 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
       }
       session.logout();
       return data ;
-    }    
+    }
     session.logout();
-    return null ;    
+    return null ;
   }
 
   /**
    * {@inheritDoc}
    */
-  public void addDrive(String name, String workspace, String permissions, String homePath, 
-      String views, String icon, boolean viewReferences, boolean viewNonDocument, 
-      boolean viewSideBar, boolean showHiddenNode, String allowCreateFolder, String allowNodeTypesOnTree) throws Exception {    
+  public void addDrive(String name, String workspace, String permissions, String homePath,
+      String views, String icon, boolean viewReferences, boolean viewNonDocument,
+      boolean viewSideBar, boolean showHiddenNode, String allowCreateFolder, String allowNodeTypesOnTree) throws Exception {
     Session session = getSession();
     Node driveHome = (Node)session.getItem(baseDrivePath_) ;
     if (!driveHome.hasNode(name)){
       Node driveNode = driveHome.addNode(name, "exo:drive");
       driveNode.setProperty(WORKSPACE, workspace) ;
       driveNode.setProperty(PERMISSIONS, permissions) ;
-      driveNode.setProperty(PATH, homePath) ;      
+      driveNode.setProperty(PATH, homePath) ;
       driveNode.setProperty(VIEWS, views) ;
       driveNode.setProperty(ICON, icon) ;
       driveNode.setProperty(VIEW_REFERENCES, Boolean.toString(viewReferences)) ;
       driveNode.setProperty(VIEW_NON_DOCUMENT, Boolean.toString(viewNonDocument)) ;
       driveNode.setProperty(VIEW_SIDEBAR, Boolean.toString(viewSideBar)) ;
       driveNode.setProperty(ALLOW_CREATE_FOLDER, allowCreateFolder) ;
-      driveNode.setProperty(SHOW_HIDDEN_NODE, Boolean.toString(showHiddenNode)) ;      
+      driveNode.setProperty(SHOW_HIDDEN_NODE, Boolean.toString(showHiddenNode)) ;
       driveNode.setProperty(ALLOW_NODETYPES_ON_TREE, allowNodeTypesOnTree);
       driveHome.save() ;
     } else{
       Node driveNode = driveHome.getNode(name);
       driveNode.setProperty(WORKSPACE, workspace) ;
       driveNode.setProperty(PERMISSIONS, permissions) ;
-      driveNode.setProperty(PATH, homePath) ;      
+      driveNode.setProperty(PATH, homePath) ;
       driveNode.setProperty(VIEWS, views) ;
       driveNode.setProperty(ICON, icon) ;
       driveNode.setProperty(VIEW_REFERENCES, Boolean.toString(viewReferences)) ;
@@ -311,18 +311,18 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
   public List<DriveData> getAllDriveByPermission(String permission, String repository) throws Exception {
     List<DriveData> driveByPermission = new ArrayList<DriveData>() ;
     try{
-      List<DriveData> driveList = getAllDrives(repository);    
+      List<DriveData> driveList = getAllDrives(repository);
       for(DriveData drive : driveList) {
         if(drive.hasPermission(drive.getAllPermissions(), permission)){
           driveByPermission.add(drive) ;
-        } 
+        }
       }
       if(getDriveByName("Private", repository) != null) {
         driveByPermission.add(getDriveByName("Private", repository)) ;
       }
     } catch(Exception e) {
       LOG.error("Unexpected error", e);
-    }    
+    }
     return driveByPermission ;
   }
 
@@ -338,19 +338,19 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
     }
     drivesCache_.clearCache();
     session.logout();
-  } 
+  }
 
   /**
    * Get session from repository in SystemWorkspace name
    * @return session
    * @throws Exception
    */
-  private Session getSession() throws Exception {    
+  private Session getSession() throws Exception {
     ManageableRepository manaRepository = repositoryService_.getCurrentRepository();
     DMSRepositoryConfiguration dmsRepoConfig = dmsConfiguration_.getConfig();
-    return manaRepository.getSystemSession(dmsRepoConfig.getSystemWorkspace()) ;          
+    return manaRepository.getSystemSession(dmsRepoConfig.getSystemWorkspace()) ;
   }
-  
+
   /**
    * Get session from repository in SystemWorkspace name
    * @return session
@@ -378,7 +378,7 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
    * {@inheritDoc}
    */
   public boolean isUsedView(String viewName, String repository) throws Exception {
-    Session session = getSession();      
+    Session session = getSession();
     Node driveHome = (Node)session.getItem(baseDrivePath_) ;
     NodeIterator iter = driveHome.getNodes() ;
     while(iter.hasNext()) {
@@ -443,7 +443,7 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
   }
 
   @SuppressWarnings("unchecked")
-  public List<DriveData> getGroupDrives(String repository, String userId, List<String> userRoles, 
+  public List<DriveData> getGroupDrives(String repository, String userId, List<String> userRoles,
       List<String> groups) throws Exception {
     Object drives = drivesCache_.get(getRepoName() + "_" + userId + ALL_GROUP_CACHED_DRIVES);
     if(drives != null) return (List<DriveData>) drives;
@@ -464,7 +464,7 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
             break;
           }
         }
-      } 
+      }
     }
     Collections.sort(groupDrives);
     drivesCache_.put(getRepoName() + "_" + userId + ALL_GROUP_CACHED_DRIVES, groupDrives);
@@ -472,7 +472,7 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
   }
 
   @SuppressWarnings("unchecked")
-  public List<DriveData> getMainDrives(String repository, String userId, 
+  public List<DriveData> getMainDrives(String repository, String userId,
       List<String> userRoles) throws Exception {
     Object drives = drivesCache_.get(getRepoName() + "_" + userId + ALL_MAIN_CACHED_DRIVE);
     if(drives != null) return (List<DriveData>) drives;
@@ -480,7 +480,7 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
     String userPath = nodeHierarchyCreator_.getJcrPath(BasePath.CMS_USERS_PATH);
     String groupPath = nodeHierarchyCreator_.getJcrPath(BasePath.CMS_GROUPS_PATH);
     for(DriveData drive : getDriveByUserRoles(repository, userId, userRoles)) {
-      if((!drive.getHomePath().startsWith(userPath) && !drive.getHomePath().startsWith(groupPath)) 
+      if((!drive.getHomePath().startsWith(userPath) && !drive.getHomePath().startsWith(groupPath))
           || drive.getHomePath().equals(userPath) || drive.getHomePath().equals(groupPath) ) {
         generalDrives.add(drive);
       }
@@ -491,7 +491,7 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
   }
 
   @SuppressWarnings("unchecked")
-  public List<DriveData> getPersonalDrives(String repository, String userId, 
+  public List<DriveData> getPersonalDrives(String repository, String userId,
       List<String> userRoles) throws Exception {
     Object drives = drivesCache_.get(getRepoName() + "_" + userId + ALL_PERSONAL_CACHED_DRIVE);
     if(drives != null) return (List<DriveData>) drives;

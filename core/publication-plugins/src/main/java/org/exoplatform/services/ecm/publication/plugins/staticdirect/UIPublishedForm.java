@@ -6,7 +6,7 @@ import org.exoplatform.services.ecm.publication.plugins.webui.UIPublicationCompo
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.core.lifecycle.UIApplicationLifecycle;
 import org.exoplatform.webui.form.UIForm;
- 
+
 
 @ComponentConfig (
     lifecycle = UIApplicationLifecycle.class,

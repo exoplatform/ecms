@@ -39,7 +39,7 @@ import org.exoplatform.webui.organization.UIGroupMembershipSelector;
  */
 @ComponentConfigs( {
     @ComponentConfig(
-        template = "classpath:groovy/ecm/webui/UIMemberSelector.gtmpl", 
+        template = "classpath:groovy/ecm/webui/UIMemberSelector.gtmpl",
         events = {
           @EventConfig(listeners = UIPermissionSelector.ChangeNodeActionListener.class),
           @EventConfig(listeners = UIPermissionSelector.SelectMembershipActionListener.class),
@@ -47,15 +47,15 @@ import org.exoplatform.webui.organization.UIGroupMembershipSelector;
           @EventConfig(listeners = UIPermissionSelector.AddAnyPermissionActionListener.class)
         }),
     @ComponentConfig(
-        type = UITree.class, 
-        id = "UITreeGroupSelector", 
-        template = "system:/groovy/webui/core/UITree.gtmpl", 
+        type = UITree.class,
+        id = "UITreeGroupSelector",
+        template = "system:/groovy/webui/core/UITree.gtmpl",
         events = @EventConfig(listeners = UITree.ChangeNodeActionListener.class)),
     @ComponentConfig(
-        type = UIBreadcumbs.class, 
-        id = "BreadcumbGroupSelector", 
-        template = "system:/groovy/webui/core/UIBreadcumbs.gtmpl", 
-        events = @EventConfig(listeners = UIBreadcumbs.SelectPathActionListener.class)) 
+        type = UIBreadcumbs.class,
+        id = "BreadcumbGroupSelector",
+        template = "system:/groovy/webui/core/UIBreadcumbs.gtmpl",
+        events = @EventConfig(listeners = UIBreadcumbs.SelectPathActionListener.class))
     }
 )
 
@@ -81,10 +81,10 @@ public class UIPermissionSelector extends UIGroupMembershipSelector implements C
 
   /** Show/hide Add AnyPermission form   */
   private boolean             isShowAnyPermission = true;
-  
+
   /**
    * Instantiates a new uI permission selector.
-   * 
+   *
    * @throws Exception the exception
    */
   public UIPermissionSelector() throws Exception {
@@ -94,9 +94,9 @@ public class UIPermissionSelector extends UIGroupMembershipSelector implements C
 
   /**
    * Sets the current permission.
-   * 
+   *
    * @param per the new current permission
-   * 
+   *
    * @throws Exception the exception
    */
   public void setCurrentPermission(String per) throws Exception {
@@ -105,7 +105,7 @@ public class UIPermissionSelector extends UIGroupMembershipSelector implements C
 
   /**
    * Gets the return component.
-   * 
+   *
    * @return the return component
    */
 
@@ -115,15 +115,15 @@ public class UIPermissionSelector extends UIGroupMembershipSelector implements C
 
   /**
    * Gets the return field.
-   * 
+   *
    * @return the return field
    */
   public String getReturnField() {
     return returnFieldName;
   }
-  
+
   public void setIsUsePopup(boolean isUsePopup) { this.isUsePopup = isUsePopup; }
-  
+
   public boolean isUsePopup() { return isUsePopup; }
 
   /* (non-Javadoc)
@@ -142,7 +142,7 @@ public class UIPermissionSelector extends UIGroupMembershipSelector implements C
       returnFieldName = initParams[0];
     }
   }
-  
+
   /**
    * The listener interface for receiving selectMembershipAction events. The
    * class that is interested in processing a selectMembershipAction event
@@ -151,7 +151,7 @@ public class UIPermissionSelector extends UIGroupMembershipSelector implements C
    * <code>addSelectMembershipActionListener<code> method. When
    * the selectMembershipAction event occurs, that object's appropriate
    * method is invoked.
-   * 
+   *
    * @see SelectMembershipActionEvent
    */
   static public class SelectMembershipActionListener extends EventListener<UIPermissionSelector> {
@@ -195,7 +195,7 @@ public class UIPermissionSelector extends UIGroupMembershipSelector implements C
    * <code>addChangeNodeActionListener<code> method. When
    * the changeNodeAction event occurs, that object's appropriate
    * method is invoked.
-   * 
+   *
    * @see ChangeNodeActionEvent
    */
   static public class ChangeNodeActionListener extends EventListener<UITree> {
@@ -219,7 +219,7 @@ public class UIPermissionSelector extends UIGroupMembershipSelector implements C
    * <code>addSelectPathActionListener<code> method. When
    * the selectPathAction event occurs, that object's appropriate
    * method is invoked.
-   * 
+   *
    * @see SelectPathActionEvent
    */
   static public class SelectPathActionListener extends EventListener<UIBreadcumbs> {
@@ -241,7 +241,7 @@ public class UIPermissionSelector extends UIGroupMembershipSelector implements C
       event.getRequestContext().addUIComponentToUpdateByAjax(uiPermissionSelector);
     }
   }
-  
+
   static public class AddAnyPermissionActionListener extends EventListener<UIAnyPermission> {
     public void execute(Event<UIAnyPermission> event) throws Exception {
       UIAnyPermission uiAnyPermission = event.getSource();
@@ -265,7 +265,7 @@ public class UIPermissionSelector extends UIGroupMembershipSelector implements C
 
   /**
    * Sets the selected user.
-   * 
+   *
    * @param bool the new selected user
    */
   public void setSelectedUser(boolean bool) {
@@ -274,7 +274,7 @@ public class UIPermissionSelector extends UIGroupMembershipSelector implements C
 
   /**
    * Checks if is selected user.
-   * 
+   *
    * @return true, if is selected user
    */
   public boolean isSelectedUser() {
@@ -283,7 +283,7 @@ public class UIPermissionSelector extends UIGroupMembershipSelector implements C
 
   /**
    * Sets the selected membership.
-   * 
+   *
    * @param bool the new selected membership
    */
   public void setSelectedMembership(boolean bool) {
@@ -292,7 +292,7 @@ public class UIPermissionSelector extends UIGroupMembershipSelector implements C
 
   /**
    * Checks if is selected membership.
-   * 
+   *
    * @return true, if is selected membership
    */
   public boolean isSelectedMembership() {
@@ -301,9 +301,9 @@ public class UIPermissionSelector extends UIGroupMembershipSelector implements C
 
   /**
    * Gets the users.
-   * 
+   *
    * @return the users
-   * 
+   *
    * @throws Exception the exception
    */
   public List getUsers() throws Exception {
@@ -316,8 +316,8 @@ public class UIPermissionSelector extends UIGroupMembershipSelector implements C
     }
     return children;
   }
-  
- /** 
+
+ /**
   * Check show/hide form to set any permission
   * @return
   */

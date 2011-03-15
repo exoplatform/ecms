@@ -43,7 +43,7 @@ import org.exoplatform.webui.ext.manager.UIAbstractManagerComponent;
  * Created by The eXo Platform SAS
  * Author : eXoPlatform
  *          nicolas.filotto@exoplatform.com
- * 5 mai 2009  
+ * 5 mai 2009
  */
 @ComponentConfig(
      events = {
@@ -52,15 +52,15 @@ import org.exoplatform.webui.ext.manager.UIAbstractManagerComponent;
  )
 public class AddFolderActionComponent extends UIAbstractManagerComponent {
 
-  private static final List<UIExtensionFilter> FILTERS = 
-  		Arrays.asList(new UIExtensionFilter[]{new CanAddNodeFilter(), 
-  																					new IsNotCategoryFilter(), 
-  																					new IsNotLockedFilter(), 
-  																					new IsCheckedOutFilter(),
-  																					new IsNotTrashHomeNodeFilter(),
-  																					new IsNotInTrashFilter(),
-  																					new IsNotEditingDocumentFilter()});
-  
+  private static final List<UIExtensionFilter> FILTERS =
+      Arrays.asList(new UIExtensionFilter[]{new CanAddNodeFilter(),
+                                            new IsNotCategoryFilter(),
+                                            new IsNotLockedFilter(),
+                                            new IsCheckedOutFilter(),
+                                            new IsNotTrashHomeNodeFilter(),
+                                            new IsNotInTrashFilter(),
+                                            new IsNotEditingDocumentFilter()});
+
   @UIExtensionFilters
   public List<UIExtensionFilter> getFilters() {
     return FILTERS;
@@ -71,7 +71,7 @@ public class AddFolderActionComponent extends UIAbstractManagerComponent {
     UIPopupContainer.activate(UIFolderForm.class, 600);
     event.getRequestContext().addUIComponentToUpdateByAjax(UIPopupContainer);
   }
-  
+
   public static class AddFolderActionListener extends UIActionBarActionListener<AddFolderActionComponent> {
     public void processEvent(Event<AddFolderActionComponent> event) throws Exception {
       UIJCRExplorer uiExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class);

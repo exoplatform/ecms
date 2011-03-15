@@ -51,7 +51,7 @@ import org.exoplatform.webui.application.portlet.PortletRequestContext;
  * Created by The eXo Platform SAS
  * @author : Hoa.Pham
  *          hoa.pham@exoplatform.com
- * Jun 23, 2008  
+ * Jun 23, 2008
  */
 /**
  * The Class UIBaseNodePresentation should implement some common method in
@@ -64,7 +64,7 @@ public abstract class UIBaseNodePresentation extends UIContainer implements Node
   private boolean enableVote;
   private boolean enableComment;
   private static final Log LOG  = ExoLogger.getLogger("admin.UIBaseNodePresentation");
-  
+
   /* (non-Javadoc)
    * @see org.exoplatform.ecm.webui.presentation.NodePresentation#getNode()
    */
@@ -82,9 +82,9 @@ public abstract class UIBaseNodePresentation extends UIContainer implements Node
 
   /**
    * Gets the repository name.
-   * 
+   *
    * @return the repository name
-   * 
+   *
    * @throws Exception the exception
    */
   public abstract String getRepositoryName() throws Exception ;
@@ -104,13 +104,13 @@ public abstract class UIBaseNodePresentation extends UIContainer implements Node
     while (childrenIterator.hasNext()) {
       Node childNode = childrenIterator.nextNode();
       String nodeType = childNode.getPrimaryNodeType().getName();
-      List<String> listCanCreateNodeType = 
+      List<String> listCanCreateNodeType =
         Utils.getListAllowedFileType(getNode(), getRepository(), templateService) ;
       if (listCanCreateNodeType.contains(nodeType)) attachments.add(childNode);
     }
     return attachments;
   }
-  
+
   @Override
   public String getAttachmentURL(Node attNode, Parameter[] params)
       throws Exception {
@@ -136,7 +136,7 @@ public abstract class UIBaseNodePresentation extends UIContainer implements Node
       service = getApplicationComponent(object);
     } catch (ClassNotFoundException ex) {
       LOG.error("Unexpected error", ex);
-    } 
+    }
     return service;
   }
 
@@ -146,7 +146,7 @@ public abstract class UIBaseNodePresentation extends UIContainer implements Node
   public String getDownloadLink(Node node) throws Exception {
     DownloadService dservice = getApplicationComponent(DownloadService.class) ;
     InputStreamDownloadResource dresource ;
-    if(!node.getPrimaryNodeType().getName().equals(Utils.NT_FILE)) return null; 
+    if(!node.getPrimaryNodeType().getName().equals(Utils.NT_FILE)) return null;
     Node jcrContentNode = node.getNode(Utils.JCR_CONTENT) ;
     InputStream input = jcrContentNode.getProperty(Utils.JCR_DATA).getStream() ;
     dresource = new InputStreamDownloadResource(input, "image") ;
@@ -162,7 +162,7 @@ public abstract class UIBaseNodePresentation extends UIContainer implements Node
   /* (non-Javadoc)
    * @see org.exoplatform.ecm.webui.presentation.NodePresentation#getImage(javax.jcr.Node)
    */
-  public String getImage(Node node) throws Exception {    
+  public String getImage(Node node) throws Exception {
     DownloadService dservice = getApplicationComponent(DownloadService.class) ;
     InputStreamDownloadResource dresource ;
     Node imageNode = node.getNode(Utils.EXO_IMAGE) ;
@@ -175,7 +175,7 @@ public abstract class UIBaseNodePresentation extends UIContainer implements Node
   /* (non-Javadoc)
    * @see org.exoplatform.ecm.webui.presentation.NodePresentation#getLanguage()
    */
-  public String getLanguage() { return language_ ; }  
+  public String getLanguage() { return language_ ; }
 
   /* (non-Javadoc)
    * @see org.exoplatform.ecm.webui.presentation.NodePresentation#setLanguage(java.lang.String)
@@ -188,7 +188,7 @@ public abstract class UIBaseNodePresentation extends UIContainer implements Node
   public String getPortalName() {
     ExoContainer container = ExoContainerContext.getCurrentContainer();
     PortalContainerInfo containerInfo = (PortalContainerInfo) container.getComponentInstanceOfType(PortalContainerInfo.class);
-    return containerInfo.getContainerName(); 
+    return containerInfo.getContainerName();
   }
 
   /* (non-Javadoc)
@@ -230,7 +230,7 @@ public abstract class UIBaseNodePresentation extends UIContainer implements Node
   public List getSupportedLocalise() throws Exception {
     MultiLanguageService multiLanguageService = getApplicationComponent(MultiLanguageService.class) ;
     return multiLanguageService.getSupportedLanguages(getNode()) ;
-  }  
+  }
 
   /* (non-Javadoc)
    * @see org.exoplatform.ecm.webui.presentation.NodePresentation#getViewTemplate(java.lang.String, java.lang.String)
@@ -245,7 +245,7 @@ public abstract class UIBaseNodePresentation extends UIContainer implements Node
    */
   public String getWebDAVServerPrefix() throws Exception {
     PortletRequestContext portletRequestContext = PortletRequestContext.getCurrentInstance() ;
-    String prefixWebDAV = portletRequestContext.getRequest().getScheme() + "://" + 
+    String prefixWebDAV = portletRequestContext.getRequest().getScheme() + "://" +
     portletRequestContext.getRequest().getServerName() + ":" +
     String.format("%s",portletRequestContext.getRequest().getServerPort()) ;
     return prefixWebDAV ;
@@ -256,18 +256,18 @@ public abstract class UIBaseNodePresentation extends UIContainer implements Node
    */
   public String getWorkspaceName() throws Exception {
     return getNode().getSession().getWorkspace().getName();
-  }  
+  }
 
   /**
    * Gets the node by uuid.
-   * 
+   *
    * @param uuid the uuid
-   * 
+   *
    * @return the node by uuid
-   * 
+   *
    * @throws Exception the exception
    */
-  public Node getNodeByUUID(String uuid) throws Exception{ 
+  public Node getNodeByUUID(String uuid) throws Exception{
     ManageableRepository manageRepo = getApplicationComponent(RepositoryService.class).getRepository(getRepositoryName()) ;
     String[] workspaces = manageRepo.getWorkspaceNames() ;
     //TODO: SystemProvider or SessionProvider
@@ -275,18 +275,18 @@ public abstract class UIBaseNodePresentation extends UIContainer implements Node
     for(String ws : workspaces) {
       try{
         return provider.getSession(ws,manageRepo).getNodeByUUID(uuid) ;
-      }catch(Exception e) { }      
+      }catch(Exception e) { }
     }
     return null;
   }
 
   /**
    * Retrieve all categories of a node.
-   * 
+   *
    * @param node the node
-   * 
+   *
    * @return the categories
-   * 
+   *
    * @throws Exception the exception
    */
   public List<Node> getCategories(Node node) throws Exception {
@@ -296,28 +296,28 @@ public abstract class UIBaseNodePresentation extends UIContainer implements Node
 
   /**
    * Retrieve all tags of a node.
-   * 
+   *
    * @param node the node
-   * 
+   *
    * @return the tags
-   * 
+   *
    * @throws Exception the exception
    */
   public List<Node> getTags(Node node) throws Exception {
     NewFolksonomyService folksonomyService = getApplicationComponent(NewFolksonomyService.class);
     return folksonomyService.
-    	getLinkedTagsOfDocumentByScope(NewFolksonomyService.PRIVATE, 
-    																 getStrValue(Utils.PRIVATE, node), 
-    																 node,getRepositoryName(), getWorkspaceName());
+      getLinkedTagsOfDocumentByScope(NewFolksonomyService.PRIVATE,
+                                     getStrValue(Utils.PRIVATE, node),
+                                     node,getRepositoryName(), getWorkspaceName());
   }
 
   /**
    * Retrieve the voting rate.
-   * 
+   *
    * @param node the node
-   * 
+   *
    * @return the votes
-   * 
+   *
    * @throws Exception the exception
    */
   public long getVotingRate(Node node) throws Exception {
@@ -327,15 +327,15 @@ public abstract class UIBaseNodePresentation extends UIContainer implements Node
 
   /**
    * Retrieve the image in property value.
-   * 
+   *
    * @param node the node
    * @param propertyName the property name
-   * 
+   *
    * @return the image in property
-   * 
+   *
    * @throws Exception the exception
    */
-  public String getImageURIInProperty(Node node, String propertyName) throws Exception {            
+  public String getImageURIInProperty(Node node, String propertyName) throws Exception {
     try {
       InputStream input = node.getProperty(propertyName).getStream() ;
       InputStreamDownloadResource dresource = new InputStreamDownloadResource(input, "image") ;
@@ -343,58 +343,58 @@ public abstract class UIBaseNodePresentation extends UIContainer implements Node
       DownloadService dservice = getApplicationComponent(DownloadService.class) ;
       return dservice.getDownloadLink(dservice.addDownloadResource(dresource)) ;
     } catch (Exception e) {
-    }    
+    }
     return null;
   }
-  
+
   /**
    * Retrieve the portlet preference value.
-   * 
+   *
    * @param preferenceName the preference name
-   * 
-   * @return the portlet preference value  
+   *
+   * @return the portlet preference value
    */
   public String getPortletPreferenceValue(String preferenceName) {
     WebuiRequestContext requestContext = WebuiRequestContext.getCurrentInstance();
     if(requestContext instanceof PortletRequestContext) {
       PortletRequestContext context = PortletRequestContext.class.cast(requestContext);
-      return context.getRequest().getPreferences().getValue(preferenceName,null); 
-    }    
+      return context.getRequest().getPreferences().getValue(preferenceName,null);
+    }
     return null;
   }
-  
+
   /**
    * Retrieve the portlet preference values.
-   * 
+   *
    * @param preferenceName the preference name
-   * 
+   *
    * @return the portlet preference values
    */
   public String[] getPortletPreferenceValues(String preferenceName) {
     WebuiRequestContext requestContext = WebuiRequestContext.getCurrentInstance();
     if(requestContext instanceof PortletRequestContext) {
       PortletRequestContext context = PortletRequestContext.class.cast(requestContext);
-      return context.getRequest().getPreferences().getValues(preferenceName,null); 
-    }    
+      return context.getRequest().getPreferences().getValues(preferenceName,null);
+    }
     return null;
   }
-  
+
   public String getTemplateSkin(String nodeTypeName, String skinName) throws Exception {
     TemplateService tempServ = getApplicationComponent(TemplateService.class) ;
     return tempServ.getSkinPath(nodeTypeName, skinName, getLanguage()) ;
   }
-  
+
   private String getStrValue(String scope, Node node) throws Exception {
-  	StringBuilder ret = new StringBuilder();
-  	if (Utils.PRIVATE.equals(scope))
-  		ret.append(node.getSession().getUserID());
-  	else if (Utils.GROUP.equals(scope)) {
-  		for (String group : Utils.getGroups())
-  			ret.append(group).append(';');
-  		ret.deleteCharAt(ret.length() - 1);
-  	}
-  	
-  	return ret.toString();
+    StringBuilder ret = new StringBuilder();
+    if (Utils.PRIVATE.equals(scope))
+      ret.append(node.getSession().getUserID());
+    else if (Utils.GROUP.equals(scope)) {
+      for (String group : Utils.getGroups())
+        ret.append(group).append(';');
+      ret.deleteCharAt(ret.length() - 1);
+    }
+
+    return ret.toString();
   }
 
   public boolean isEnableComment() {
@@ -412,5 +412,5 @@ public abstract class UIBaseNodePresentation extends UIContainer implements Node
   public void setEnableVote(boolean value) {
     enableVote = value;
   }
-  
+
 }

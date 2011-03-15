@@ -35,22 +35,22 @@ import org.ow2.bonita.facade.uuid.ProcessInstanceUUID;
  * Instance Properties. As a Role Mapper is invoked prior Instance Properties
  * can be set, this Role Mapper finds them in a Thread Local set by the method
  * that starts the Instance in the Bonita service.
- * 
+ *
  * Created by Bull R&D
  * @author Brice Revenant
  * @author Rodrigue Le Gall
  */
 public class ValidatorRoleMapper implements RoleMapper {
-  
+
   /** Name of the Property that contains the eXo Membership and Group */
   public static final String PROPERTY_NAME = "exo:validator";
-  
+
   public static final String DELEGATOR_NAME = "delegator";
   public static final String DELEGATE_NAME = "delegate";
   private static final Log LOG  = ExoLogger.getLogger(ValidatorRoleMapper.class);
-  
+
   public Set<String> searchMembers(QueryAPIAccessor readonlyapiaccessor, ProcessInstanceUUID instanceId, String roleId) {
-    
+
     String roleName = "";
     String delegator = "";
     Boolean delegate = new Boolean(false);

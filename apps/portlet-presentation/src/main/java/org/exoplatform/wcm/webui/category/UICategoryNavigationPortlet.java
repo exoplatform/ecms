@@ -39,27 +39,27 @@ import org.exoplatform.webui.core.lifecycle.UIApplicationLifecycle;
     lifecycle = UIApplicationLifecycle.class
 )
 public class UICategoryNavigationPortlet extends UIPortletApplication {
-  
+
   /** The Constant MANAGEMENT_PORTLET_POPUP_WINDOW. */
   public static final String CONFIG_POPUP_WINDOW = "UICNConfigPopupWindow";
 
   /** The mode. */
   private PortletMode mode = PortletMode.VIEW;
-  
+
   /**
    * Instantiates a new uI category navigation portlet.
-   * 
+   *
    * @throws Exception the exception
    */
   public UICategoryNavigationPortlet() throws Exception {
     activateMode(mode);
   }
-  
+
   /**
    * Activate mode.
-   * 
+   *
    * @param mode the mode
-   * 
+   *
    * @throws Exception the exception
    */
   public void activateMode(PortletMode mode) throws Exception {
@@ -69,9 +69,9 @@ public class UICategoryNavigationPortlet extends UIPortletApplication {
       addChild(UICategoryNavigationTree.class, null, null);
     } else if (PortletMode.EDIT.equals(mode)) {
       addChild(UICategoryNavigationConfig.class, null, null);
-    } 
+    }
   }
-  
+
   /* (non-Javadoc)
    * @see org.exoplatform.webui.core.UIPortletApplication#processRender(org.exoplatform.webui.application.WebuiApplication, org.exoplatform.webui.application.WebuiRequestContext)
    */
@@ -84,5 +84,5 @@ public class UICategoryNavigationPortlet extends UIPortletApplication {
     }
     super.processRender(app, context);
   }
-  
+
 }

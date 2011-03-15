@@ -89,7 +89,7 @@ public class UITemplateForm extends UIForm {
   private String              templatePath_;
 
   private VersionNode         rootVersionNode;
-  
+
   private org.exoplatform.services.cms.templates.TemplateService     templateService;
 
   public UITemplateForm() throws Exception {

@@ -34,7 +34,7 @@ import org.exoplatform.webui.event.EventListener;
  * Created by The eXo Platform SAS
  * Author : DANG TAN DUNG
  *          dzungdev@gmail.com
- * Aug 11, 2008  
+ * Aug 11, 2008
  */
 
 @ComponentConfig(
@@ -53,16 +53,16 @@ public class UICategoriesSelectPanel extends UIContainer{
   public UICategoriesSelectPanel() throws Exception {
     uiPageIterator_ = addChild(UIPageIterator.class, null, "UICategoriesSelect");
   }
-  
+
   public UIPageIterator getUIPageIterator() { return uiPageIterator_; }
-  
+
   public List getSelectableNodes() throws Exception { return uiPageIterator_.getCurrentPageData(); }
-  
+
   public void updateGrid() throws Exception {
     ObjectPageList objPageList = new ObjectPageList(getListSelectableNodes(), 4);
     uiPageIterator_.setPageList(objPageList);
   }
-  
+
   public List<Node> getListSelectableNodes() throws Exception {
     List<Node> list = new ArrayList<Node>();
     if(parentNode == null) return list;

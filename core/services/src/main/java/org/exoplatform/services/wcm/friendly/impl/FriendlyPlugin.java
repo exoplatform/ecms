@@ -12,25 +12,25 @@ public class FriendlyPlugin extends BaseComponentPlugin {
     private InitParams initParams;
 
     public FriendlyPlugin(InitParams params) {
-    	this.initParams = params;
-    	ObjectParameter param = params.getObjectParam("friendlies.configuration");
+      this.initParams = params;
+      ObjectParameter param = params.getObjectParam("friendlies.configuration");
 
-		if (param != null) {
-			friendlyConfig = (FriendlyConfig) param.getObject();
-		}
+    if (param != null) {
+      friendlyConfig = (FriendlyConfig) param.getObject();
+    }
     }
 
     public FriendlyConfig getFriendlyConfig() {
-	return friendlyConfig;
+  return friendlyConfig;
     }
 
     public void setFriendlyConfig(FriendlyConfig friendlyConfig) {
-	this.friendlyConfig = friendlyConfig;
+  this.friendlyConfig = friendlyConfig;
     }
 
-	public InitParams getInitParams() {
-		return initParams;
-	}
-    
-    
+  public InitParams getInitParams() {
+    return initParams;
+  }
+
+
 }

@@ -38,7 +38,7 @@ import org.exoplatform.webui.form.UIFormCheckBoxInput;
  * Created by The eXo Platform SAS
  * Author : Tran Nguyen Ngoc
  *          ngoc.tran@exoplatform.com
- * Oct 20, 2009  
+ * Oct 20, 2009
  */
 @ComponentConfig(
                  lifecycle = UIFormLifecycle.class,
@@ -58,36 +58,36 @@ public class UIPCVConfig extends UIForm {
 
   /** The Constant SHOW_BAR. */
   public static final String SHOW_BAR = "ShowBar";
-  
+
   @SuppressWarnings("unchecked")
   public UIPCVConfig() {
     PortletRequestContext context = (PortletRequestContext) WebuiRequestContext.getCurrentInstance();
     PortletPreferences portletPreferences = context.getRequest().getPreferences();
-    
+
     UIFormCheckBoxInput titleViewerCheckbox = new UIFormCheckBoxInput(SHOW_TITLE, SHOW_TITLE, null);
     titleViewerCheckbox.setChecked(true);
     String titleShowAble = portletPreferences.getValue(UIPCVPortlet.SHOW_TITLE, null);
     titleViewerCheckbox.setChecked(Boolean.parseBoolean(titleShowAble));
-    
+
     UIFormCheckBoxInput dateCreatedViewerCheckbox = new UIFormCheckBoxInput(SHOW_DATE_CREATED, SHOW_DATE_CREATED, null);
     dateCreatedViewerCheckbox.setChecked(true);
     String dateShowAble = portletPreferences.getValue(UIPCVPortlet.SHOW_DATE_CREATED, null);
     dateCreatedViewerCheckbox.setChecked(Boolean.parseBoolean(dateShowAble));
-    
+
     UIFormCheckBoxInput barViewerCheckbox = new UIFormCheckBoxInput(SHOW_BAR, SHOW_BAR, null);
     barViewerCheckbox.setChecked(true);
     String barShowable = portletPreferences.getValue(UIPCVPortlet.SHOW_BAR, null);
     barViewerCheckbox.setChecked(Boolean.parseBoolean(barShowable));
-    
+
     addChild(titleViewerCheckbox);
     addChild(dateCreatedViewerCheckbox);
     addChild(barViewerCheckbox);
-    
+
     setActions(new String[] { "Save", "Cancel" });
   }
-  
-  
-  
+
+
+
   /**
    * The listener interface for receiving saveAction events.
    * The class that is interested in processing a saveAction
@@ -96,11 +96,11 @@ public class UIPCVConfig extends UIForm {
    * component's <code>addSaveActionListener<code> method. When
    * the saveAction event occurs, that object's appropriate
    * method is invoked.
-   * 
+   *
    * @see SaveActionEvent
    */
   public static class SaveActionListener extends EventListener<UIPCVConfig> {
-    
+
     /* (non-Javadoc)
      * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
      */
@@ -110,10 +110,10 @@ public class UIPCVConfig extends UIForm {
       PortletPreferences portletPreferences = portletRequestContext.getRequest().getPreferences();
       RepositoryService repositoryService = uiPCVConfigForm.getApplicationComponent(RepositoryService.class);
       ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
-      
+
       String repository = manageableRepository.getConfiguration().getName();
       String workspace = manageableRepository.getConfiguration().getDefaultWorkspaceName();
-      
+
       String showTitle = uiPCVConfigForm.getUIFormCheckBoxInput(UIPCVConfig.SHOW_TITLE).isChecked() ? "true" : "false";
       String showDateCreated = uiPCVConfigForm.getUIFormCheckBoxInput(UIPCVConfig.SHOW_DATE_CREATED).isChecked() ? "true" : "false";
       String showBar = uiPCVConfigForm.getUIFormCheckBoxInput(UIPCVConfig.SHOW_BAR).isChecked() ? "true" : "false";
@@ -124,7 +124,7 @@ public class UIPCVConfig extends UIForm {
       portletPreferences.setValue(UIPCVPortlet.SHOW_DATE_CREATED, showDateCreated);
       portletPreferences.setValue(UIPCVPortlet.SHOW_BAR, showBar);
       portletPreferences.store();
-      
+
       if (Utils.isQuickEditMode(uiPCVConfigForm, UIPCVPortlet.PCV_CONFIG_POPUP_WINDOW)) {
         Utils.closePopupWindow(uiPCVConfigForm, UIPCVPortlet.PCV_CONFIG_POPUP_WINDOW);
       } else {
@@ -132,7 +132,7 @@ public class UIPCVConfig extends UIForm {
       }
     }
   }
-  
+
   /**
    * The listener interface for receiving cancelAction events.
    * The class that is interested in processing a cancelAction
@@ -141,11 +141,11 @@ public class UIPCVConfig extends UIForm {
    * component's <code>addCancelActionListener<code> method. When
    * the cancelAction event occurs, that object's appropriate
    * method is invoked.
-   * 
+   *
    * @see CancelActionEvent
    */
   public static class CancelActionListener extends EventListener<UIPCVConfig> {
-    
+
     /* (non-Javadoc)
      * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
      */

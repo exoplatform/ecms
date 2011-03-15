@@ -33,7 +33,7 @@ public interface RecordsService {
 
   /**
    * Set property for filePlan node which is get from record node
-   * 
+   *
    * @param filePlan filePlan Node
    * @param record record Node
    * @throws RepositoryException
@@ -55,7 +55,7 @@ public interface RecordsService {
   public void computeHolds(Node filePlan) throws RepositoryException;
 
   /**
-   * Copy record node in filePlan node to path which value is 
+   * Copy record node in filePlan node to path which value is
    * rma:transferLocation property of filePlan Node
    * @param filePlan
    * @throws RepositoryException

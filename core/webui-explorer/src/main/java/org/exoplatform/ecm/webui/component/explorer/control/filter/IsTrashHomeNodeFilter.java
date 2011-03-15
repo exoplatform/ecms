@@ -28,15 +28,15 @@ import org.exoplatform.webui.ext.filter.UIExtensionFilterType;
  * Created by The eXo Platform SARL
  * Author : Nguyen Anh Vu
  *          anhvurz90@gmail.com
- * Nov 13, 2009  
+ * Nov 13, 2009
  * 5:14:29 PM
  */
 public class IsTrashHomeNodeFilter extends UIExtensionAbstractFilter {
-  
+
   public IsTrashHomeNodeFilter() {
     this(null);
   }
-  
+
   public IsTrashHomeNodeFilter(String messageKey) {
     super(messageKey, UIExtensionFilterType.MANDATORY);
   }
@@ -47,7 +47,6 @@ public class IsTrashHomeNodeFilter extends UIExtensionAbstractFilter {
   }
 
   public void onDeny(Map<String, Object> context) throws Exception {
-    // TODO Auto-generated method stub
-    
+
   }
 }

@@ -48,7 +48,7 @@ public class ImageUtils {
    * @param height Max height of thumbnail will be resized
    * @return InputStream
    * @throws Exception
-   */  
+   */
   public static InputStream scaleImage(BufferedImage image, int maxWidth, int maxHeight) throws Exception {
     // Make sure the aspect ratio is maintained, so the image is not skewed
     int imageWidth = image.getWidth(null);
@@ -66,7 +66,7 @@ public class ImageUtils {
       imageHeight = maxHeight;
     }
     // Draw the scaled image
-    BufferedImage thumbImage = new BufferedImage(imageWidth, 
+    BufferedImage thumbImage = new BufferedImage(imageWidth,
         imageHeight, BufferedImage.TYPE_INT_RGB);
     Graphics2D graphics2D = thumbImage.createGraphics();
     graphics2D.setRenderingHint(RenderingHints.KEY_INTERPOLATION,
@@ -81,12 +81,12 @@ public class ImageUtils {
     quality = Math.max(0, Math.min(quality, 100));
     param.setQuality(quality / 100.0f, false);
     encoder.setJPEGEncodeParam(param);
-    encoder.encode(thumbImage);        
-    ImageIO.write(thumbImage, "JPEG" , out); 
+    encoder.encode(thumbImage);
+    ImageIO.write(thumbImage, "JPEG" , out);
 
     // Read the outputstream into the inputstream for the return value
-    ByteArrayInputStream bis = new ByteArrayInputStream(out.toByteArray());        
-    return bis;       
+    ByteArrayInputStream bis = new ByteArrayInputStream(out.toByteArray());
+    return bis;
   }
 
 }

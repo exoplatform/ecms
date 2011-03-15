@@ -34,7 +34,7 @@ import org.exoplatform.webui.ext.manager.UIAbstractManagerComponent;
  * Created by The eXo Platform SAS
  * Author : eXoPlatform
  *          nicolas.filotto@exoplatform.com
- * 15 mai 2009  
+ * 15 mai 2009
  */
 @ComponentConfig(
      events = {
@@ -52,14 +52,14 @@ public class UITemplatesManagerComponent extends UIAbstractManagerComponent {
         uiWorkingArea.setChild(UITemplatesManager.class) ;
         event.getRequestContext().addUIComponentToUpdateByAjax(uiWorkingArea) ;
       } catch(AccessDeniedException ace) {
-        throw new MessageException(new ApplicationMessage("UIECMAdminControlPanel.msg.access-denied", 
+        throw new MessageException(new ApplicationMessage("UIECMAdminControlPanel.msg.access-denied",
                                                           null, ApplicationMessage.WARNING)) ;
       }
     }
-  }  
+  }
 
   @Override
   public Class<? extends UIAbstractManager> getUIAbstractManagerClass() {
     return UITemplatesManager.class;
-  }    
+  }
 }

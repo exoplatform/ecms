@@ -30,7 +30,7 @@ import org.exoplatform.services.cms.thumbnail.ThumbnailPlugin;
  * Created by The eXo Platform SARL
  * Author : Dang Van Minh
  *          minh.dang@exoplatform.com
- * Oct 22, 2009  
+ * Oct 22, 2009
  * 2:20:20 PM
  */
 public class ImageThumbnailPlugin implements ComponentPlugin, ThumbnailPlugin{

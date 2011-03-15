@@ -50,17 +50,17 @@ import org.exoplatform.webui.event.EventListener;
 public class UIListMetadata extends UIContainer {
   public List<String> externalList_ = new ArrayList<String>() ;
   private boolean isExternalMetadata = false;
-  
+
   public void setIsExternalMetadata(boolean isExternal) {
-    isExternalMetadata = isExternal; 
+    isExternalMetadata = isExternal;
   }
-  
-  public boolean getIsExternalMetadata() { 
-    return isExternalMetadata; 
-  }  
-  
+
+  public boolean getIsExternalMetadata() {
+    return isExternalMetadata;
+  }
+
   public Node getUploadedNode() { return ((UIUploadContainer)getParent()).getUploadedNode() ; }
-  
+
   private boolean isInternalUse(NodeType nodeType) throws Exception{
     for(PropertyDefinition pro : nodeType.getPropertyDefinitions()) {
       if(pro.getName().equals("exo:internalUse")) {
@@ -68,19 +68,21 @@ public class UIListMetadata extends UIContainer {
       }
     }
     return false;
-//    PropertyDefinition def = 
-//      ((ExtendedNodeType)nodeType).getPropertyDefinitions("exo:internalUse").getAnyDefinition() ;    
+//    PropertyDefinition def =
+//      ((ExtendedNodeType)nodeType).getPropertyDefinitions("exo:internalUse").getAnyDefinition() ;
 //    return !def.getDefaultValues()[0].getBoolean() ;
   }
-  
-  public List<String> getExternalList() throws Exception { 
-    NodeType[] mixinTypes = getUploadedNode().getMixinNodeTypes();        
+
+  public List<String> getExternalList() throws Exception {
+    NodeType[] mixinTypes = getUploadedNode().getMixinNodeTypes();
     for(NodeType nodeType : mixinTypes) {
-      if(nodeType.getName().equals(Utils.EXO_METADATA) && !isInternalUse(nodeType) && !externalList_.contains(nodeType.getName())) {
+      if (nodeType.getName().equals(Utils.EXO_METADATA) && !isInternalUse(nodeType)
+          && !externalList_.contains(nodeType.getName())) {
         externalList_.add(nodeType.getName()) ;
       }
       for(NodeType superType : nodeType.getSupertypes()) {
-        if(superType.getName().equals(Utils.EXO_METADATA) && !isInternalUse(nodeType) && !externalList_.contains(nodeType.getName())) {
+        if (superType.getName().equals(Utils.EXO_METADATA) && !isInternalUse(nodeType)
+            && !externalList_.contains(nodeType.getName())) {
           externalList_.add(nodeType.getName()) ;
         }
       }
@@ -92,13 +94,13 @@ public class UIListMetadata extends UIContainer {
         }
       }
     }
-      
-    return externalList_ ; 
+
+    return externalList_ ;
   }
-  
+
   public UIListMetadata() throws Exception {
   }
-  
+
   static public class EditActionListener extends EventListener<UIListMetadata> {
     public void execute(Event<UIListMetadata> event) throws Exception {
       UIListMetadata uiUploadContent = event.getSource() ;
@@ -111,7 +113,7 @@ public class UIListMetadata extends UIContainer {
       if(template == null || template.trim().length() == 0) {
         UIApplication uiApp = uiUploadContent.getAncestorOfType(UIApplication.class) ;
         Object[] args = {nodeType} ;
-        uiApp.addMessage(new ApplicationMessage("UIUploadContent.msg.has-not-template", args, 
+        uiApp.addMessage(new ApplicationMessage("UIUploadContent.msg.has-not-template", args,
                          ApplicationMessage.WARNING)) ;
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
         return ;
@@ -131,5 +133,5 @@ public class UIListMetadata extends UIContainer {
       uiUploadContainer.setRenderedChild(UIAddMetadataForm.class) ;
       event.getRequestContext().addUIComponentToUpdateByAjax(uiUploadContainer) ;
     }
-  }  
+  }
 }

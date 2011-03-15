@@ -25,7 +25,7 @@ import org.jbpm.taskmgmt.exe.Assignable;
  * Created by The eXo Platform SARL
  * Author : Pham Xuan Hoa
  *          hoa.pham@exoplatform.com
- * Jan 2, 2008  
+ * Jan 2, 2008
  */
 public class AuthorAssignmentHandler implements AssignmentHandler {
 

@@ -23,18 +23,18 @@ import org.exoplatform.webui.core.UIContainer;
 
 /**
  * Created by The eXo Platform SARL
- * Author : le bien thuy  
+ * Author : le bien thuy
  *          lebienthuyt@gmail.com
  * Oct 2, 2006
- * 10:08:51 AM 
+ * 10:08:51 AM
  * Editor: pham tuan Oct 27, 2006
  */
 
 @ComponentConfig( template = "system:/groovy/webui/core/UITabPane.gtmpl" )
 public class UIECMSearch extends UIContainer implements UIPopupComponent {
-  
+
   static public String ADVANCED_RESULT = "AdvancedSearchResult" ;
-  
+
   public UIECMSearch() throws Exception {
     addChild(UIContentNameSearch.class,null,null);
     addChild(UISearchContainer.class, null, null).setRendered(false) ;

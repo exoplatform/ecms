@@ -40,7 +40,7 @@ import org.exoplatform.webui.exception.MessageException;
  * Created by The eXo Platform SARL
  * Author : Dang Van Minh
  *          minh.dang@exoplatform.com
- * Jan 25, 2007  
+ * Jan 25, 2007
  * 2:05:40 PM
  */
 @ComponentConfig(
@@ -57,20 +57,20 @@ public class UIViewMetadataTemplate extends UIContainer {
   }
 
   public void setTemplateType(String type) {documentType_ = type ;}
-  
-  public String getViewTemplatePath() {    
+
+  public String getViewTemplatePath() {
     MetadataService metadataService = getApplicationComponent(MetadataService.class) ;
     String repository = getAncestorOfType(UIJCRExplorer.class).getRepositoryName() ;
     try {
       return metadataService.getMetadataPath(documentType_, false, repository) ;
     } catch (Exception e) {
       LOG.error("Unexpected error", e);
-    } 
+    }
     return null ;
   }
-  
+
   public String getTemplate() { return getViewTemplatePath() ; }
-  
+
   @SuppressWarnings("unused")
   public ResourceResolver getTemplateResourceResolver(WebuiRequestContext context, String template) {
     //return getAncestorOfType(UIJCRExplorer.class).getJCRTemplateResourceResolver();
@@ -78,14 +78,14 @@ public class UIViewMetadataTemplate extends UIContainer {
     return getAncestorOfType(UIJCRExplorer.class).getJCRTemplateResourceResolver();
   }
 
-  public Node getViewNode(String nodeType) throws Exception { 
+  public Node getViewNode(String nodeType) throws Exception {
     return getAncestorOfType(UIJCRExplorer.class).getViewNode(nodeType) ;
   }
-  
+
   public List<String> getMultiValues(Node node, String name) throws Exception {
     return getAncestorOfType(UIJCRExplorer.class).getMultiValues(node, name) ;
   }
-  
+
   static public class EditPropertyActionListener extends EventListener<UIViewMetadataTemplate> {
     public void execute(Event<UIViewMetadataTemplate> event) throws Exception {
       UIViewMetadataTemplate uiViewTemplate = event.getSource() ;
@@ -109,7 +109,7 @@ public class UIViewMetadataTemplate extends UIContainer {
       event.getRequestContext().addUIComponentToUpdateByAjax(uiContainer.getParent()) ;
     }
   }
-  
+
   static public class CancelActionListener extends EventListener<UIViewMetadataTemplate> {
     public void execute(Event<UIViewMetadataTemplate> event) throws Exception {
       UIJCRExplorer uiExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class) ;

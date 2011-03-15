@@ -64,8 +64,8 @@ import org.exoplatform.webui.ext.manager.UIAbstractManagerComponent;
 @ComponentConfigs( {
     @ComponentConfig(template = "app:/groovy/webui/component/explorer/UIWorkingArea.gtmpl"),
     @ComponentConfig(
-        type = UIRightClickPopupMenu.class, 
-        id = "ECMContextMenu", 
+        type = UIRightClickPopupMenu.class,
+        id = "ECMContextMenu",
         template = "app:/groovy/webui/component/explorer/UIRightClickPopupMenu.gtmpl"
     )
 })
@@ -90,7 +90,7 @@ public class UIWorkingArea extends UIContainer {
   public static final String               GROUND_CONTEXT_MENU      = "GroundContextMenu";
 
   public static final String               ITEM_GROUND_CONTEXT_MENU = "ItemGroundContextMenu";
-  
+
   public static final String               MOVE_NODE = "MoveNode";
 
   public static final String               CREATE_LINK = "CreateLink";
@@ -116,7 +116,7 @@ public class UIWorkingArea extends UIContainer {
     UIExtensionManager manager = getApplicationComponent(UIExtensionManager.class);
     return manager.getUIExtensions(EXTENSION_TYPE);
   }
-  
+
   public synchronized void initialize() throws Exception {
     List<UIExtension> extensions = getUIExtensionList();
     if (extensions == null) {
@@ -129,7 +129,7 @@ public class UIWorkingArea extends UIContainer {
         managers.add((UIAbstractManagerComponent)component);
     }
   }
-  
+
   private synchronized UIComponent addUIExtension(UIExtension extension, Map<String, Object> context) throws Exception {
     UIExtensionManager manager = getApplicationComponent(UIExtensionManager.class);
     UIComponent component = manager.addUIExtension(extension, context, this);
@@ -147,7 +147,7 @@ public class UIWorkingArea extends UIContainer {
     }
     return null;
   }
-  
+
   public List<UIAbstractManagerComponent> getManagers() {
     List<UIAbstractManagerComponent> managers = new ArrayList<UIAbstractManagerComponent>();
     managers.addAll(this.managers);
@@ -209,7 +209,7 @@ public class UIWorkingArea extends UIContainer {
     context.put(WebuiRequestContext.class.getName(), requestContext);
     return context;
   }
-  
+
   List<UIComponent> getGroundActionsExtensionList() throws Exception {
     List<UIComponent> uiGroundActionList = new ArrayList<UIComponent>();
     List<UIExtension> uiExtensionList = getUIExtensionList();
@@ -243,17 +243,17 @@ public class UIWorkingArea extends UIContainer {
               uiActionList.add(uiAddedActionManage);
           }
         }
-      }  
+      }
     return uiActionList;
   }
-  
+
   public String getActionsExtensionList(Node node) throws Exception {
     StringBuffer actionsList = new StringBuffer(1024);
     List<UIExtension> uiExtensionList = getUIExtensionList();
     UIComponent uiAddedActionManage;
     try {
-    	NodeFinder nodeFinder = getApplicationComponent(NodeFinder.class);
-    	nodeFinder.getItem(getAncestorOfType(UIJCRExplorer.class).getSession(), node.getPath());	          
+      NodeFinder nodeFinder = getApplicationComponent(NodeFinder.class);
+      nodeFinder.getItem(getAncestorOfType(UIJCRExplorer.class).getSession(), node.getPath());
     } catch(PathNotFoundException pne) {
       return "";
     }
@@ -292,7 +292,7 @@ public class UIWorkingArea extends UIContainer {
     }
     return uicomponent;
   }
-  
+
   public synchronized UIComponent getCustomAction() throws Exception {
     UIComponent uicomponent = null;
     List<UIExtension> uiExtensionList = getUIExtensionList();
@@ -350,32 +350,32 @@ public class UIWorkingArea extends UIContainer {
     }
     return safeActions;
   }
-  
+
   /**
    * Gets the title.
-   * 
+   *
    * @param node the node
-   * 
+   *
    * @return the title
-   * 
+   *
    * @throws Exception the exception
    */
   public String getTitle(Node node) throws Exception {
-	  String title = null;
-	  if (node.hasNode("jcr:content")) {
-		  Node content = node.getNode("jcr:content");
-		  if (content.hasProperty("dc:title")) {
-		    try {
-		      title = content.getProperty("dc:title").getValues()[0].getString();
-		    } catch(Exception ex) {}
-		  }
-	  } else if (node.hasProperty("exo:title")) {
-		  title = node.getProperty("exo:title").getValue().getString();
-	  }
-	  if ((title==null) || ((title!=null) && (title.trim().length()==0))) {
-  		title = node.getName();
-	  }
-	  return Text.unescapeIllegalJcrChars(title);	  
+    String title = null;
+    if (node.hasNode("jcr:content")) {
+      Node content = node.getNode("jcr:content");
+      if (content.hasProperty("dc:title")) {
+        try {
+          title = content.getProperty("dc:title").getValues()[0].getString();
+        } catch(Exception ex) {}
+      }
+    } else if (node.hasProperty("exo:title")) {
+      title = node.getProperty("exo:title").getValue().getString();
+    }
+    if ((title==null) || ((title!=null) && (title.trim().length()==0))) {
+      title = node.getName();
+    }
+    return Text.unescapeIllegalJcrChars(title);
   }
 
 }

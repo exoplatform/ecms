@@ -64,13 +64,13 @@ public class UIJcrExplorerContainer extends UIContainer {
   public UIJcrExplorerContainer() throws Exception {
     addChild(UIJCRExplorer.class, null, null);
   }
-  
+
   public String getUserAgent() {
     PortletRequestContext requestContext = PortletRequestContext.getCurrentInstance();
     PortletRequest portletRequest = requestContext.getRequest();
     return portletRequest.getProperty("User-Agent");
-  }  
-  
+  }
+
   public void initExplorer() throws Exception {
     try {
       UIJCRExplorerPortlet uiFEPortlet = getParent();
@@ -91,7 +91,7 @@ public class UIJcrExplorerContainer extends UIContainer {
       for (String role : userRoles) {
         for (String viewName : drive.getViews().split(",")) {
           if (!viewList.contains(viewName.trim())) {
-            Node viewNode = 
+            Node viewNode =
               getApplicationComponent(ManageViewService.class).getViewByName(viewName.trim(),
                   repoName, SessionProviderFactory.createSystemProvider());
             String permiss = viewNode.getProperty("exo:accessPermissions").getString();
@@ -112,10 +112,10 @@ public class UIJcrExplorerContainer extends UIContainer {
       String viewLabel = null;
       for (String viewName : viewList) {
         try {
-          viewLabel = res.getString("Views.label." + viewName) ; 
+          viewLabel = res.getString("Views.label." + viewName) ;
         } catch (MissingResourceException e) {
           viewLabel = viewName;
-        }        
+        }
         viewOptions.add(new SelectItemOption<String>(viewLabel, viewName));
         if(viewListStr.length() > 0) viewListStr = viewListStr + "," + viewName;
         else viewListStr = viewName;
@@ -124,28 +124,28 @@ public class UIJcrExplorerContainer extends UIContainer {
       String homePath = drive.getHomePath();
       if (homePath.contains("${userId}")) homePath = homePath.replace("${userId}", userId);
       UIJCRExplorer uiJCRExplorer = getChild(UIJCRExplorer.class);
-  
+
       uiJCRExplorer.setDriveData(drive);
       uiJCRExplorer.setIsReferenceNode(false);
-      
-      SessionProvider provider = SessionProviderFactory.createSessionProvider();                  
+
+      SessionProvider provider = SessionProviderFactory.createSessionProvider();
       ManageableRepository repository = rservice.getCurrentRepository();
-      Session session = provider.getSession(drive.getWorkspace(),repository);      
+      Session session = provider.getSession(drive.getWorkspace(),repository);
       try {
         // we assume that the path is a real path
-        session.getItem(homePath);        
+        session.getItem(homePath);
       } catch(AccessDeniedException ace) {
         Object[] args = { driveName };
-        uiApp.addMessage(new ApplicationMessage("UIDrivesBrowser.msg.access-denied", args, 
+        uiApp.addMessage(new ApplicationMessage("UIDrivesBrowser.msg.access-denied", args,
             ApplicationMessage.WARNING));
         context.addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
-        return;        
+        return;
       } catch(NoSuchWorkspaceException nosuchWS) {
         Object[] args = { driveName };
-        uiApp.addMessage(new ApplicationMessage("UIDrivesBrowser.msg.workspace-not-exist", args, 
+        uiApp.addMessage(new ApplicationMessage("UIDrivesBrowser.msg.workspace-not-exist", args,
             ApplicationMessage.WARNING));
         context.addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
-        return;        
+        return;
       } catch(Exception e) {
         JCRExceptionManager.process(uiApp, e);
         return;
@@ -161,9 +161,9 @@ public class UIJcrExplorerContainer extends UIContainer {
       pref.setShowSideBar(drive.getViewSideBar());
       pref.setShowNonDocumentType(drive.getViewNonDocument());
       pref.setShowPreferenceDocuments(drive.getViewPreferences());
-      pref.setAllowCreateFoder(drive.getAllowCreateFolders()); 
+      pref.setAllowCreateFoder(drive.getAllowCreateFolders());
       pref.setShowHiddenNode(drive.getShowHiddenNode());
-      uiJCRExplorer.refreshExplorer();      
+      uiJCRExplorer.refreshExplorer();
       UIControl uiControl = uiJCRExplorer.getChild(UIControl.class);
 
       UIAddressBar uiAddressBar = uiControl.getChild(UIAddressBar.class);
@@ -183,8 +183,8 @@ public class UIJcrExplorerContainer extends UIContainer {
         uiJCRExplorer.refreshExplorer();
       }
       UIRightClickPopupMenu uiRightClickPopupMenu = uiWorkingArea.findFirstComponentOfType(UIRightClickPopupMenu.class);
-      if(uiRightClickPopupMenu!=null && !uiRightClickPopupMenu.isRendered())        	
-      	uiRightClickPopupMenu.setRendered(true);  
+      if(uiRightClickPopupMenu!=null && !uiRightClickPopupMenu.isRendered())
+        uiRightClickPopupMenu.setRendered(true);
       UISideBar uiSideBar = uiWorkingArea.findFirstComponentOfType(UISideBar.class);
       uiSideBar.setRendered(true);
       uiSideBar.initialize();
@@ -195,7 +195,7 @@ public class UIJcrExplorerContainer extends UIContainer {
       LOG.error("Unexpected error", e);
     }
   }
-  
+
   private void initExplorerPreference(PortletPreferences portletPref) {
     UIJCRExplorer uiExplorer = getChild(UIJCRExplorer.class);
     if (uiExplorer != null) {
@@ -207,4 +207,4 @@ public class UIJcrExplorerContainer extends UIContainer {
       }
     }
   }
-} 
+}

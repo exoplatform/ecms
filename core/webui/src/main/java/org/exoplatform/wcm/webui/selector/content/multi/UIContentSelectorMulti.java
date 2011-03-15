@@ -30,7 +30,7 @@ public class UIContentSelectorMulti extends UIContentSelector {
 
   /**
    * Instantiates a new uI content selector multi.
-   * 
+   *
    * @throws Exception the exception
    */
   public UIContentSelectorMulti() throws Exception {
@@ -42,7 +42,7 @@ public class UIContentSelectorMulti extends UIContentSelector {
 
   /**
    * Inits the.
-   * 
+   *
    * @throws Exception the exception
    */
   public void init() throws Exception {

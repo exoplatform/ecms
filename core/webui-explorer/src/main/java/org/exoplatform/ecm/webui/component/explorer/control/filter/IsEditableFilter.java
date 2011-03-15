@@ -29,25 +29,25 @@ import org.exoplatform.webui.ext.filter.UIExtensionFilterType;
  * Created by The eXo Platform SARL
  * Author : Hoang Van Hung
  *          hunghvit@gmail.com
- * Aug 6, 2009  
+ * Aug 6, 2009
  */
 public class IsEditableFilter extends UIExtensionAbstractFilter {
-  
+
   public IsEditableFilter() {
     this("UIActionBar.msg.not-support");
   }
-  
+
   public IsEditableFilter(String messageKey) {
     super(messageKey, UIExtensionFilterType.MANDATORY);
   }
-  
+
   public boolean accept(Map<String, Object> context) throws Exception {
     if (context == null) return true;
     Node currentNode = (Node) context.get(Node.class.getName());
     String nodeType = currentNode.getPrimaryNodeType().getName();
     for(String type:Utils.NON_EDITABLE_NODETYPES) {
       if(type.equalsIgnoreCase(nodeType)) return false;
-    }       
+    }
     return true;
   }
 
@@ -56,5 +56,5 @@ public class IsEditableFilter extends UIExtensionAbstractFilter {
     Node currentNode = (Node) context.get(Node.class.getName());
     Object[] arg = { currentNode.getPath() };
     createUIPopupMessages(context, messageKey, arg);
-  }   
+  }
 }

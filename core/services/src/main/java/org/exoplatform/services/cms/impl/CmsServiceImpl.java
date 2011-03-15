@@ -63,12 +63,12 @@ import org.exoplatform.services.listener.ListenerService;
  * @author benjaminmestrallet
  */
 public class CmsServiceImpl implements CmsService {
-  
-  private RepositoryService jcrService;  
-  private IDGeneratorService idGeneratorService;  
+
+  private RepositoryService jcrService;
+  private IDGeneratorService idGeneratorService;
   private static final String MIX_REFERENCEABLE = "mix:referenceable" ;
   private ListenerService listenerService;
-  
+
   /**
    * Method constructor
    * @param jcrService: Manage repository
@@ -80,12 +80,12 @@ public class CmsServiceImpl implements CmsService {
     this.jcrService = jcrService;
     this.listenerService = listenerService;
   }
-  
+
   /**
    * {@inheritDoc}
    */
-  public String storeNode(String workspace, String nodeTypeName, String storePath, 
-      Map mappings) throws Exception {    
+  public String storeNode(String workspace, String nodeTypeName, String storePath,
+      Map mappings) throws Exception {
     Session session = jcrService.getCurrentRepository().login(workspace);
     Node storeHomeNode = (Node) session.getItem(storePath);
     String path = storeNode(nodeTypeName, storeHomeNode, mappings, true);
@@ -98,13 +98,13 @@ public class CmsServiceImpl implements CmsService {
   /**
    * {@inheritDoc}
    */
-  public String storeNode(String nodeTypeName, Node storeHomeNode, Map mappings, 
-      boolean isAddNew) throws Exception {    
+  public String storeNode(String nodeTypeName, Node storeHomeNode, Map mappings,
+      boolean isAddNew) throws Exception {
     Set keys = mappings.keySet();
     String nodePath = extractNodeName(keys);
-    JcrInputProperty relRootProp = (JcrInputProperty) mappings.get(nodePath); 
-    String nodeName = (String)relRootProp.getValue();    
-    if (nodeName == null || nodeName.length() == 0) {      
+    JcrInputProperty relRootProp = (JcrInputProperty) mappings.get(nodePath);
+    String nodeName = (String)relRootProp.getValue();
+    if (nodeName == null || nodeName.length() == 0) {
       nodeName = idGeneratorService.generateStringID(nodeTypeName);
     }
     nodeName = Text.escapeIllegalJcrChars(nodeName);
@@ -114,7 +114,7 @@ public class CmsServiceImpl implements CmsService {
     }
     Session session = storeHomeNode.getSession();
     NodeTypeManager nodetypeManager = session.getWorkspace().getNodeTypeManager();
-    NodeType nodeType = nodetypeManager.getNodeType(primaryType);    
+    NodeType nodeType = nodetypeManager.getNodeType(primaryType);
     Node currentNode = null;
     String[] mixinTypes = null ;
     String mixintypeName = relRootProp.getMixintype();
@@ -135,7 +135,7 @@ public class CmsServiceImpl implements CmsService {
           if(!currentNode.isNodeType(type)) {
             currentNode.addMixin(type);
           }
-          NodeType mixinType = nodetypeManager.getNodeType(type);          
+          NodeType mixinType = nodetypeManager.getNodeType(type);
           for (Iterator<String> iter = keys.iterator(); iter.hasNext();) {
             String keyJCRPath = (String) iter.next();
             JcrInputProperty jcrInputProperty = (JcrInputProperty) mappings.get(keyJCRPath);
@@ -144,7 +144,7 @@ public class CmsServiceImpl implements CmsService {
               String[] inputMixinTypes = null ;
               if(inputMixinTypeName != null && inputMixinTypeName.trim().length() > 0) {
                 if(inputMixinTypeName.indexOf(",") > -1){
-                  inputMixinTypes = inputMixinTypeName.split(",");                  
+                  inputMixinTypes = inputMixinTypeName.split(",");
                 }else {
                   inputMixinTypes = new String[] {inputMixinTypeName};
                 }
@@ -154,7 +154,7 @@ public class CmsServiceImpl implements CmsService {
                   if (inputType.equals(type)) {
                     String childPath = jcrInputProperty.getJcrPath().replaceAll(NODE + "/", "");
                     createNodeRecursively(jcrInputProperty.getJcrPath(), currentNode.getNode(childPath), mixinType, mappings);
-                  }                    
+                  }
                 }
               }
             }
@@ -168,7 +168,7 @@ public class CmsServiceImpl implements CmsService {
       }
     //Broadcast CmsService.event.postCreate event
       listenerService.broadcast(POST_CREATE_CONTENT_EVENT,this,currentNode);
-    } else {          
+    } else {
       currentNode = storeHomeNode.getNode(nodeName);
     //Broadcast CmsService.event.preEdit event
       listenerService.broadcast(PRE_EDIT_CONTENT_EVENT,currentNode,mappings);
@@ -183,15 +183,15 @@ public class CmsServiceImpl implements CmsService {
     session.logout();
     return currentNode.getPath();
   }
-  
+
   /**
    * {@inheritDoc}
    */
-  public String storeEditedNode(String nodeTypeName, Node storeNode, Map mappings, 
-      boolean isAddNew) throws Exception {    
+  public String storeEditedNode(String nodeTypeName, Node storeNode, Map mappings,
+      boolean isAddNew) throws Exception {
     Set keys = mappings.keySet();
     String nodePath = extractNodeName(keys);
-    JcrInputProperty relRootProp = (JcrInputProperty) mappings.get(nodePath); 
+    JcrInputProperty relRootProp = (JcrInputProperty) mappings.get(nodePath);
 
     String primaryType = relRootProp.getNodetype() ;
     if(primaryType == null || primaryType.length() == 0) {
@@ -199,7 +199,7 @@ public class CmsServiceImpl implements CmsService {
     }
     Session session = storeNode.getSession();
     NodeTypeManager nodetypeManager = session.getWorkspace().getNodeTypeManager();
-    NodeType nodeType = nodetypeManager.getNodeType(primaryType);    
+    NodeType nodeType = nodetypeManager.getNodeType(primaryType);
 
   //Broadcast CmsService.event.preEdit event
     listenerService.broadcast(PRE_EDIT_CONTENT_EVENT,storeNode,mappings);
@@ -213,18 +213,18 @@ public class CmsServiceImpl implements CmsService {
     session.logout();
     return storeNode.getPath();
   }
-  
+
 
   /**
    * {@inheritDoc}
    */
-  public String storeNodeByUUID(String nodeTypeName, Node storeHomeNode, Map mappings, 
-      boolean isAddNew) throws Exception {    
+  public String storeNodeByUUID(String nodeTypeName, Node storeHomeNode, Map mappings,
+      boolean isAddNew) throws Exception {
     Set keys = mappings.keySet();
     String nodePath = extractNodeName(keys);
-    JcrInputProperty relRootProp = (JcrInputProperty) mappings.get(nodePath); 
-    String nodeName = (String)relRootProp.getValue();    
-    if (nodeName == null || nodeName.length() == 0) {      
+    JcrInputProperty relRootProp = (JcrInputProperty) mappings.get(nodePath);
+    String nodeName = (String)relRootProp.getValue();
+    if (nodeName == null || nodeName.length() == 0) {
       nodeName = idGeneratorService.generateStringID(nodeTypeName);
     }
     String primaryType = relRootProp.getNodetype() ;
@@ -233,7 +233,7 @@ public class CmsServiceImpl implements CmsService {
     }
     Session session = storeHomeNode.getSession();
     NodeTypeManager nodetypeManager = session.getWorkspace().getNodeTypeManager();
-    NodeType nodeType = nodetypeManager.getNodeType(primaryType);    
+    NodeType nodeType = nodetypeManager.getNodeType(primaryType);
     Node currentNode = null;
     String[] mixinTypes = null ;
     String mixintypeName = relRootProp.getMixintype();
@@ -255,11 +255,11 @@ public class CmsServiceImpl implements CmsService {
           if(!currentNode.isNodeType(type)) {
             currentNode.addMixin(type);
           }
-          NodeType mixinType = nodetypeManager.getNodeType(type);          
+          NodeType mixinType = nodetypeManager.getNodeType(type);
           createNodeRecursively(NODE, currentNode, mixinType, mappings);
         }
-      }        
-      createNodeRecursively(NODE, currentNode, nodeType, mappings);                       
+      }
+      createNodeRecursively(NODE, currentNode, nodeType, mappings);
       if(!currentNode.isNodeType(MIX_REFERENCEABLE)) {
         currentNode.addMixin(MIX_REFERENCEABLE) ;
       }
@@ -286,8 +286,8 @@ public class CmsServiceImpl implements CmsService {
           currentNode = linkManager.getTarget(currentNode, true);
         }
       }
-    }    
-    
+    }
+
     String uuid = currentNode.getUUID();
     session.save();
     return uuid;
@@ -328,20 +328,20 @@ public class CmsServiceImpl implements CmsService {
    * @param jcrVariables Map of properties
    * @return Boolean
    */
-  private boolean isAcceptSetValueForAutoCreated(PropertyDefinition propertyDef, String path, 
+  private boolean isAcceptSetValueForAutoCreated(PropertyDefinition propertyDef, String path,
       Map jcrVariables) {
     if(propertyDef.isAutoCreated()) {
-      String propertyName = propertyDef.getName();     
+      String propertyName = propertyDef.getName();
       String currentPath = path + "/" + propertyName;
       JcrInputProperty inputVariable = (JcrInputProperty) jcrVariables.get(currentPath) ;
       if(inputVariable != null && inputVariable.getValue() != null) {
-        return true;    
+        return true;
       }
       return false;
-    } 
+    }
     return true;
   }
-  
+
   /**
    * Add property for current node when create variable = true
    * Value of property is got in Map jcrVariabes by key = path + / property name
@@ -352,34 +352,30 @@ public class CmsServiceImpl implements CmsService {
    * @throws Exception
    * @see {@link #processProperty(String, Node, int, Object, boolean)}
    */
-  private void processAddEditProperty(boolean create, Node currentNode, String path, 
+  private void processAddEditProperty(boolean create, Node currentNode, String path,
       NodeType currentNodeType, Map jcrVariables) throws Exception {
     if(create) {
       PropertyDefinition[] propertyDefs = currentNodeType.getPropertyDefinitions();
-      for (int i = 0; i < propertyDefs.length; i++) {      
-        PropertyDefinition propertyDef = propertyDefs[i];         
-        if (isAcceptSetValueForAutoCreated(propertyDef, path, jcrVariables) && 
-            !propertyDef.isProtected()) {        
-          String propertyName = propertyDef.getName();     
+      for (int i = 0; i < propertyDefs.length; i++) {
+        PropertyDefinition propertyDef = propertyDefs[i];
+        if (isAcceptSetValueForAutoCreated(propertyDef, path, jcrVariables) &&
+            !propertyDef.isProtected()) {
+          String propertyName = propertyDef.getName();
           int requiredtype = propertyDef.getRequiredType();
           String currentPath = path + "/" + propertyName;
           JcrInputProperty inputVariable = (JcrInputProperty) jcrVariables.get(currentPath) ;
           Object value = null;
           if(inputVariable != null) {
             value = inputVariable.getValue();
-          }          
+          }
           if((value != null) || propertyDef.isMandatory()) {
             processProperty(propertyName, currentNode, requiredtype, value, propertyDef.isMultiple());
           }
-          //TODO: Related to ECM-3491. Need to check.
-          /*if(value != null || (propertyDef.getRequiredType() == PropertyType.DATE && propertyDef.isMandatory())) {
-            processProperty(propertyName, currentNode, requiredtype, value, propertyDef.isMultiple()) ;
-          }*/
         }
       }
     }
   }
-  
+
   /**
    * Process to update or add property for current node and all its property
    * Properties of node is given in current NodeType
@@ -393,7 +389,7 @@ public class CmsServiceImpl implements CmsService {
    * @throws Exception
    */
   @SuppressWarnings("unchecked")
-  private void processNodeRecursively(boolean create, String itemPath, 
+  private void processNodeRecursively(boolean create, String itemPath,
       Node currentNode, NodeType currentNodeType, Map jcrVariables)
   throws Exception {
     if(create) {
@@ -403,14 +399,14 @@ public class CmsServiceImpl implements CmsService {
       for(Object key : jcrVariables.keySet()) {
         keyList.add(key.toString().substring(key.toString().lastIndexOf("/") + 1));
       }
-      List<String> currentListPropertyName = new ArrayList<String>();    
+      List<String> currentListPropertyName = new ArrayList<String>();
       for(PropertyIterator pi = currentNode.getProperties(); pi.hasNext();) {
         Property property = pi.nextProperty();
-        currentListPropertyName.add(property.getName());                        
+        currentListPropertyName.add(property.getName());
       }
       Set keys = jcrVariables.keySet();
       String nodePath = extractNodeName(keys);
-      JcrInputProperty relRootProp = (JcrInputProperty) jcrVariables.get(nodePath); 
+      JcrInputProperty relRootProp = (JcrInputProperty) jcrVariables.get(nodePath);
       String[] mixinTypes = {};
       String mixintypeName = relRootProp.getMixintype();
       if (mixintypeName != null && mixintypeName.trim().length() > 0) {
@@ -427,7 +423,7 @@ public class CmsServiceImpl implements CmsService {
           }
         }
       }
-      
+
       PropertyDefinition[] propertyDefs = currentNodeType.getPropertyDefinitions();
       List<PropertyDefinition> lstPropertyDefinition = Arrays.asList(propertyDefs);
       List<PropertyDefinition> lstPropertyDefinitionAll = new ArrayList<PropertyDefinition>();
@@ -444,7 +440,7 @@ public class CmsServiceImpl implements CmsService {
         if(inputVariable != null) {
           value = inputVariable.getValue();
         }
-        if (currentListPropertyName.contains(propertyName) && currentNode.hasProperty(propertyName)) {                               
+        if (currentListPropertyName.contains(propertyName) && currentNode.hasProperty(propertyName)) {
           Property property = currentNode.getProperty(propertyName);
           int requiredtype = property.getType();
           if(keyList.contains(propertyName)) {
@@ -452,46 +448,40 @@ public class CmsServiceImpl implements CmsService {
               processProperty(property, currentNode, requiredtype, value, propertyDef.isMultiple());
             }
           }
-        } else {                                                                        
+        } else {
           if (!propertyDef.isProtected()) {
             int requiredtype = propertyDef.getRequiredType();
             if(value != null || propertyDef.isMandatory()) {
               processProperty(propertyName, currentNode, requiredtype, value, propertyDef.isMultiple()) ;
             }
-            //TODO: Related to ECM-3491. Need to check.
-            /*
-            if(value != null) {
-              processProperty(propertyName, currentNode, requiredtype, value, propertyDef.isMultiple()) ;
-            }
-             */
           }
         }
       }
     }
-    int itemLevel = StringUtils.countMatches(itemPath, "/") ;            
-    List<JcrInputProperty>childNodeInputs = extractNodeInputs(jcrVariables, itemLevel + 1) ;    
+    int itemLevel = StringUtils.countMatches(itemPath, "/") ;
+    List<JcrInputProperty>childNodeInputs = extractNodeInputs(jcrVariables, itemLevel + 1) ;
     NodeTypeManager nodeTypeManger = currentNode.getSession().getWorkspace().getNodeTypeManager();
     List<Object> childs = new ArrayList<Object>();
-    if (create) {            
-      for (NodeDefinition childNodeDef : currentNodeType.getChildNodeDefinitions()) {        
-        childs.add(childNodeDef);             
+    if (create) {
+      for (NodeDefinition childNodeDef : currentNodeType.getChildNodeDefinitions()) {
+        childs.add(childNodeDef);
       }
     } else {
       for(NodeIterator iterator = currentNode.getNodes(); iterator.hasNext();) {
         childs.add(iterator.nextNode());
-      }      
+      }
     }
-    Set<String> childItemPaths = new HashSet<String>();    
-    for(Object obj : childs){  
-      NodeDefinition nodeDef;      
+    Set<String> childItemPaths = new HashSet<String>();
+    for(Object obj : childs){
+      NodeDefinition nodeDef;
       if (obj instanceof Node) {
-        nodeDef = ((Node) obj).getDefinition();        
+        nodeDef = ((Node) obj).getDefinition();
       } else {
         nodeDef = (NodeDefinition) obj;
-      } 
+      }
       if(nodeDef.isAutoCreated() || nodeDef.isProtected()) {
         continue ;
-      }            
+      }
       if(((ItemDefinitionImpl)nodeDef).isResidualSet()) {
         for(JcrInputProperty input:childNodeInputs) {
           String childItemPath = itemPath + "/"+ input.getValue();
@@ -502,18 +492,18 @@ public class CmsServiceImpl implements CmsService {
           if(!canAddNode(nodeDef, nodeType)) {
             continue ;
           }
-          String[] mixinTypes = null ; 
+          String[] mixinTypes = null ;
           if(input.getMixintype()!= null) {
-            mixinTypes = input.getMixintype().split(",") ; 
-          }                   
+            mixinTypes = input.getMixintype().split(",") ;
+          }
           Node childNode = doAddNode(currentNode, (String)input.getValue(), nodeType.getName(), mixinTypes) ;
           if (!childItemPaths.contains(childItemPath))
             processNodeRecursively(create, childItemPath, childNode, childNode.getPrimaryNodeType(), jcrVariables);
           childItemPaths.add(childItemPath);
         }
-      }else {               
+      }else {
         String childNodeName = null;
-        if (obj instanceof Node) {          
+        if (obj instanceof Node) {
           childNodeName = ((Node) obj).getName();
         } else {
           childNodeName = ((NodeDefinition) obj).getName();
@@ -524,10 +514,10 @@ public class CmsServiceImpl implements CmsService {
           continue ;
         }
         String nodeTypeName = jcrInputVariable.getNodetype();
-        String[] mixinTypes = null ; 
+        String[] mixinTypes = null ;
         if(jcrInputVariable.getMixintype()!= null) {
-          mixinTypes = jcrInputVariable.getMixintype().split(",") ; 
-        }           
+          mixinTypes = jcrInputVariable.getMixintype().split(",") ;
+        }
         NodeType nodeType = null;
         if(obj instanceof Node) {
           nodeType = ((Node) obj).getPrimaryNodeType();
@@ -541,7 +531,7 @@ public class CmsServiceImpl implements CmsService {
           processNodeRecursively(create, newItemPath, childNode, childNode.getPrimaryNodeType(), jcrVariables);
         childItemPaths.add(newItemPath);
       }
-    }    
+    }
   }
 
   /**
@@ -555,7 +545,7 @@ public class CmsServiceImpl implements CmsService {
    * @throws Exception
    */
 
-  private void processProperty(String propertyName, Node node, int requiredtype, Object value, 
+  private void processProperty(String propertyName, Node node, int requiredtype, Object value,
       boolean isMultiple) throws Exception {
 
     switch (requiredtype) {
@@ -572,7 +562,7 @@ public class CmsServiceImpl implements CmsService {
             node.setProperty(propertyName, new String[] { (String)value});
           } else if (value instanceof String[]) {
             node.setProperty(propertyName, (String[]) value);
-          }          
+          }
         } else {
           node.setProperty(propertyName, (String) value);
         }
@@ -584,19 +574,19 @@ public class CmsServiceImpl implements CmsService {
       } else if(value instanceof InputStream) {
         node.setProperty(propertyName, (InputStream)value);
       } else if (value instanceof byte[]) {
-        node.setProperty(propertyName, 
+        node.setProperty(propertyName,
             new ByteArrayInputStream((byte[]) value));
       } else if (value instanceof String) {
         node.setProperty(propertyName, value.toString(), PropertyType.BINARY);
       } else if (value instanceof String[]) {
         node.setProperty(propertyName, (String[]) value, PropertyType.BINARY);
-      }      
+      }
       break;
     case PropertyType.BOOLEAN:
       if (value == null) {
         node.setProperty(propertyName, false);
       } else if (value instanceof String) {
-        node.setProperty(propertyName, 
+        node.setProperty(propertyName,
             new Boolean((String) value).booleanValue());
       } else if (value instanceof String[]) {
         node.setProperty(propertyName, (String[]) value);
@@ -625,12 +615,12 @@ public class CmsServiceImpl implements CmsService {
       } else if (value instanceof Double) {
         node.setProperty(propertyName, ((Double) value).doubleValue());
       }
-      
+
       break;
-    case PropertyType.DATE:      
+    case PropertyType.DATE:
       if (value == null){
         boolean mandatory = false;
-        for (PropertyDefinition propertyDef : node.getPrimaryNodeType().getPropertyDefinitions()) 
+        for (PropertyDefinition propertyDef : node.getPrimaryNodeType().getPropertyDefinitions())
           if (propertyName.equals(propertyDef.getName()) && propertyDef.isMandatory()) {
             mandatory = true;
             break;
@@ -663,7 +653,7 @@ public class CmsServiceImpl implements CmsService {
               convertedCalendarValues[i] = value2add;
               i++;
             }
-            node.setProperty(propertyName, convertedCalendarValues);        
+            node.setProperty(propertyName, convertedCalendarValues);
           }
         } else {
           if (value instanceof String) {
@@ -673,15 +663,15 @@ public class CmsServiceImpl implements CmsService {
           }
 
         }
-      }      
+      }
       break;
-    case PropertyType.REFERENCE:      
+    case PropertyType.REFERENCE:
       if (value == null) {
         if (isMultiple) {
           if (value instanceof String) {
             node.setProperty(propertyName, "");
           } else if (value instanceof String[]) {
-            node.setProperty(propertyName, new String[] {});          
+            node.setProperty(propertyName, new String[] {});
           }
         } else {
           node.setProperty(propertyName, "");
@@ -707,7 +697,7 @@ public class CmsServiceImpl implements CmsService {
               }
               Value value2add = session2.getValueFactory().createValue(referenceNode);
               node.setProperty(propertyName, value2add);
-            }         
+            }
           } else {
             node.setProperty(propertyName, session2.getValueFactory().createValue((String)value));
           }
@@ -733,26 +723,26 @@ public class CmsServiceImpl implements CmsService {
         session.save();
 //        session.logout();
       } else if(value instanceof String[]) {
-        String[] values = (String[]) value;        
+        String[] values = (String[]) value;
         String referenceWorksapce = null;
         String referenceNodeName = null ;
         Session session = node.getSession();
         String repositoty = ((ManageableRepository)session.getRepository()).getConfiguration().getName();
-        List<Value> list = new ArrayList<Value>() ;        
+        List<Value> list = new ArrayList<Value>() ;
         for (String v : values) {
           Value valueObj = null;
           if (v.indexOf(":/") > 0) {
             referenceWorksapce = v.split(":/")[0];
             referenceNodeName = v.split(":/")[1];
-            Session session2 = jcrService.getRepository(repositoty).getSystemSession(referenceWorksapce);            
+            Session session2 = jcrService.getRepository(repositoty).getSystemSession(referenceWorksapce);
             if(session2.getRootNode().hasNode(referenceNodeName)) {
               Node referenceNode = session2.getRootNode().getNode(referenceNodeName);
               valueObj = session2.getValueFactory().createValue(referenceNode);
-            }else {             
+            }else {
               valueObj = session2.getValueFactory().createValue(v);
             }
             session2.logout();
-          }else {            
+          }else {
             if(session.getRootNode().hasNode(v)) {
               Node referenceNode = session.getRootNode().getNode(v);
               valueObj = session.getValueFactory().createValue(referenceNode);
@@ -760,16 +750,16 @@ public class CmsServiceImpl implements CmsService {
               valueObj = session.getValueFactory().createValue(v);
             }
           }
-          list.add(valueObj);          
+          list.add(valueObj);
         }
         node.setProperty(propertyName,list.toArray(new Value[list.size()]));
-      }       
+      }
       break;
     default:
       throw new RepositoryException("unknown type " + requiredtype);
     }
   }
-  
+
   /**
    * Process when update property for node.
    * Base on type of property, needing specific processing
@@ -799,7 +789,7 @@ public class CmsServiceImpl implements CmsService {
             }
           } else if (value instanceof String[]) {
             if(!property.getValues().equals(value)) node.setProperty(propertyName, (String[]) value);
-          }          
+          }
         } else {
           if(!property.getValue().getString().equals(value)) {
             node.setProperty(propertyName, (String) value);
@@ -826,7 +816,7 @@ public class CmsServiceImpl implements CmsService {
         if(!property.getValue().getStream().equals(new ByteArrayInputStream((((String[]) value)).toString().getBytes()))) {
           node.setProperty(propertyName, (String[]) value, PropertyType.BINARY);
         }
-      }      
+      }
       break;
     case PropertyType.BOOLEAN:
       if (value == null) {
@@ -841,7 +831,7 @@ public class CmsServiceImpl implements CmsService {
         if(!property.getValue().getString().equals(value)) {
           node.setProperty(propertyName, (String[]) value);
         }
-      }         
+      }
       break;
     case PropertyType.LONG:
       if (value == null || "".equals(value)) {
@@ -856,7 +846,7 @@ public class CmsServiceImpl implements CmsService {
         }
       } else if (value instanceof Long) {
         node.setProperty(propertyName, ((Long) value).longValue());
-      }  
+      }
       break;
     case PropertyType.DOUBLE:
       if (value == null || "".equals(value)) {
@@ -871,12 +861,12 @@ public class CmsServiceImpl implements CmsService {
         }
       } else if (value instanceof Double) {
         node.setProperty(propertyName, ((Double) value).doubleValue());
-      }       
+      }
       break;
-    case PropertyType.DATE:      
+    case PropertyType.DATE:
       if (value == null){
         boolean mandatory = false;
-        for (PropertyDefinition propertyDef : node.getPrimaryNodeType().getPropertyDefinitions()) 
+        for (PropertyDefinition propertyDef : node.getPrimaryNodeType().getPropertyDefinitions())
           if (propertyName.equals(propertyDef.getName()) && propertyDef.isMandatory()) {
             mandatory = true;
             break;
@@ -929,9 +919,9 @@ public class CmsServiceImpl implements CmsService {
             }
           }
         }
-      }      
+      }
       break;
-    case PropertyType.REFERENCE:      
+    case PropertyType.REFERENCE:
       if (value == null) {
         if (isMultiple) {
           if (value instanceof String) {
@@ -960,7 +950,7 @@ public class CmsServiceImpl implements CmsService {
             Node referenceNode = session2.getRootNode().getNode(referenceNodeName);
             Value value2add = session2.getValueFactory().createValue(referenceNode);
             if(!property.getValue().getString().equals(value2add)) {
-              node.setProperty(propertyName, value2add);          
+              node.setProperty(propertyName, value2add);
             }
           }else {
             if(!property.getValue().getString().equals(session2.getValueFactory().createValue((String)value))) {
@@ -993,26 +983,26 @@ public class CmsServiceImpl implements CmsService {
         session.save();
 //        session.logout();
       } else if(value instanceof String[]) {
-        String[] values = (String[]) value;        
+        String[] values = (String[]) value;
         String referenceWorksapce = null;
         String referenceNodeName = null ;
         Session session = node.getSession();
         String repositoty = ((ManageableRepository)session.getRepository()).getConfiguration().getName();
-        List<Value> list = new ArrayList<Value>() ;        
+        List<Value> list = new ArrayList<Value>() ;
         for (String v : values) {
           Value valueObj = null;
           if (v.indexOf(":/") > 0) {
             referenceWorksapce = v.split(":/")[0];
             referenceNodeName = v.split(":/")[1];
-            Session session2 = jcrService.getRepository(repositoty).getSystemSession(referenceWorksapce);            
+            Session session2 = jcrService.getRepository(repositoty).getSystemSession(referenceWorksapce);
             if(session2.getRootNode().hasNode(referenceNodeName)) {
               Node referenceNode = session2.getRootNode().getNode(referenceNodeName);
-              valueObj = session2.getValueFactory().createValue(referenceNode);              
-            }else {             
+              valueObj = session2.getValueFactory().createValue(referenceNode);
+            }else {
               valueObj = session2.getValueFactory().createValue(v);
             }
             session2.logout();
-          }else {            
+          }else {
             if(session.getRootNode().hasNode(v)) {
               Node referenceNode = session.getRootNode().getNode(v);
               valueObj = session.getValueFactory().createValue(referenceNode);
@@ -1020,19 +1010,19 @@ public class CmsServiceImpl implements CmsService {
               valueObj = session.getValueFactory().createValue(v);
             }
           }
-          list.add(valueObj) ;          
+          list.add(valueObj) ;
         }
         if (!property.getValues().equals(list.toArray(new Value[list.size()]))) {
           node.setProperty(propertyName, list.toArray(new Value[list.size()]));
         }
         session.save();
 //        session.logout();
-      }       
+      }
       break ;
     default:
       throw new RepositoryException("unknown type " + requiredtype);
     }
-  }  
+  }
 
   /**
    * Get node name from set
@@ -1056,16 +1046,16 @@ public class CmsServiceImpl implements CmsService {
   public void moveNode(String nodePath, String srcWorkspace, String destWorkspace, String destPath) {
     Session srcSession = null ;
     Session destSession = null ;
-    if(!srcWorkspace.equals(destWorkspace)){      
-      try {        
+    if(!srcWorkspace.equals(destWorkspace)){
+      try {
         srcSession = jcrService.getCurrentRepository().getSystemSession(srcWorkspace);
         destSession = jcrService.getCurrentRepository().getSystemSession(destWorkspace);
         Workspace workspace = destSession.getWorkspace();
         Node srcNode = (Node) srcSession.getItem(nodePath);
         try {
-          destSession.getItem(destPath);        
+          destSession.getItem(destPath);
         } catch (PathNotFoundException e) {
-          createNode(destSession, destPath);                   
+          createNode(destSession, destPath);
         }
         workspace.clone(srcWorkspace, nodePath, destPath, true);
         //Remove src node
@@ -1085,16 +1075,16 @@ public class CmsServiceImpl implements CmsService {
         session = jcrService.getCurrentRepository().getSystemSession(srcWorkspace);
         Workspace workspace = session.getWorkspace();
         try {
-          session.getItem(destPath);        
+          session.getItem(destPath);
         } catch (PathNotFoundException e) {
           createNode(session, destPath);
           session.refresh(false) ;
-        }        
+        }
         workspace.move(nodePath, destPath);
         session.logout();
       }catch(Exception e){
       } finally {
-        if(session !=null && session.isLive()) session.logout(); 
+        if(session !=null && session.isLive()) session.logout();
       }
     }
   }
@@ -1106,18 +1096,18 @@ public class CmsServiceImpl implements CmsService {
    * @throws RepositoryException
    */
   private void createNode(Session session, String uri) throws RepositoryException {
-    String[] splittedName = StringUtils.split(uri, "/"); 
+    String[] splittedName = StringUtils.split(uri, "/");
     Node rootNode = session.getRootNode();
     for (int i = 0; i < splittedName.length - 1; i++) {
       try {
         rootNode.getNode(splittedName[i]);
-      } catch (PathNotFoundException exc) {        
-        rootNode.addNode(splittedName[i], "nt:unstructured"); 
+      } catch (PathNotFoundException exc) {
+        rootNode.addNode(splittedName[i], "nt:unstructured");
         rootNode.save() ;
       }
       rootNode = rootNode.getNode(splittedName[i]) ;
     }
-    session.save() ;   
+    session.save() ;
     session.logout();
   }
 
@@ -1129,7 +1119,7 @@ public class CmsServiceImpl implements CmsService {
    * @return
    * @see {@link #processNodeRecursively(boolean, String, Node, NodeType, Map)}
    */
-  private List<JcrInputProperty> extractNodeInputs(Map<String, JcrInputProperty> map, int itemLevel) {    
+  private List<JcrInputProperty> extractNodeInputs(Map<String, JcrInputProperty> map, int itemLevel) {
     List<JcrInputProperty> list = new ArrayList<JcrInputProperty>() ;
     for(Iterator<String> iterator = map.keySet().iterator();iterator.hasNext();) {
       String jcrPath = iterator.next();
@@ -1158,7 +1148,7 @@ public class CmsServiceImpl implements CmsService {
     }
     return false ;
   }
-  
+
   /**
    * Add child node for current node
    * @param currentNode current node
@@ -1169,7 +1159,7 @@ public class CmsServiceImpl implements CmsService {
    * @throws Exception
    */
   private Node doAddNode(Node currentNode, String nodeName, String nodeType, String[] mixinTypes) throws Exception {
-    Node childNode = null;    
+    Node childNode = null;
     try {
       childNode = currentNode.getNode(nodeName);
     } catch(PathNotFoundException pe) {
@@ -1181,7 +1171,7 @@ public class CmsServiceImpl implements CmsService {
           childNode.addMixin(mixinName);
         }
       }
-    }          
-    return childNode ;     
+    }
+    return childNode ;
   }
 }

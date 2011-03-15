@@ -26,7 +26,7 @@ import org.exoplatform.web.application.ApplicationMessage;
  * Created by eXo Platform
  * Author : Nguyen Manh Cuong
  *          manhcuongpt@gmail.com
- * Jun 26, 2009  
+ * Jun 26, 2009
  */
 
 /**
@@ -39,11 +39,11 @@ public class DialogFormException extends Exception {
   public DialogFormException(ApplicationMessage app){
     appMsgList.add(app);
   }
-  
+
   public void addApplicationMessage(ApplicationMessage app) {
     appMsgList.add(app);
   }
-  
+
   public List<ApplicationMessage> getMessages() {
     return appMsgList;
   }

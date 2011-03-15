@@ -56,7 +56,7 @@ import org.exoplatform.webui.form.validator.MandatoryValidator;
  * Author : pham tuan
  *          phamtuanchip@yahoo.de
  * Oct 03, 2006
- * 9:43:23 AM 
+ * 9:43:23 AM
  */
 @ComponentConfig(
     lifecycle = UIFormLifecycle.class,
@@ -69,7 +69,7 @@ import org.exoplatform.webui.form.validator.MandatoryValidator;
       @EventConfig(listeners = UITemplateForm.OnChangeActionListener.class, phase = Phase.DECODE)
     }
 )
-public class UITemplateForm extends UIFormTabPane implements UISelectable {  
+public class UITemplateForm extends UIFormTabPane implements UISelectable {
   final static public String FIELD_NAME = "name" ;
   final static public String FIELD_LABEL = "label" ;
   final static public String FIELD_ISTEMPLATE = "isDocumentTemplate" ;
@@ -90,9 +90,12 @@ public class UITemplateForm extends UIFormTabPane implements UISelectable {
     templateTab.addUIFormInput(uiSelectBox);
     templateTab.addUIFormInput(new UIFormStringInput(FIELD_LABEL, FIELD_LABEL, null).
                                addValidator(MandatoryValidator.class)) ;
-    
-    templateTab.addUIFormInput(new UIFormCheckBoxInput<Boolean>(FIELD_ISTEMPLATE, FIELD_ISTEMPLATE, null).setChecked(true));                               
-    templateTab.addUIFormInput(new UIFormStringInput(FIELD_PERMISSION, FIELD_PERMISSION, null).setEditable(false).addValidator(MandatoryValidator.class)) ;
+
+    templateTab.addUIFormInput(new UIFormCheckBoxInput<Boolean>(FIELD_ISTEMPLATE,
+                                                                FIELD_ISTEMPLATE,
+                                                                null).setChecked(true));
+    templateTab.addUIFormInput(new UIFormStringInput(FIELD_PERMISSION, FIELD_PERMISSION,
+                                                     null).setEditable(false).addValidator(MandatoryValidator.class));
     templateTab.setActionInfo(FIELD_PERMISSION, new String[] {"AddPermission"}) ;
     addUIComponentInput(templateTab) ;
     setSelectedTab(templateTab.getId()) ;
@@ -124,7 +127,7 @@ public class UITemplateForm extends UIFormTabPane implements UISelectable {
     getUIFormTextAreaInput(FIELD_DIALOG).setValue(getDefaultDialog(nodeType));
     getUIFormTextAreaInput(FIELD_SKIN).setValue(getDefaultStyleSheet(nodeType));
   }
-  
+
   private String getDefaultStyleSheet(String nodeType) throws Exception {
     TemplateService templateService = getApplicationComponent(TemplateService.class);
     return Utils.encodeHTML(templateService.buildStyleSheet(nodeType));
@@ -139,7 +142,7 @@ public class UITemplateForm extends UIFormTabPane implements UISelectable {
     TemplateService templateService = getApplicationComponent(TemplateService.class);
     return Utils.encodeHTML(templateService.buildDialogForm(nodeType));
   }
-  
+
   static public class TemplateNameComparator implements Comparator {
     public int compare(Object o1, Object o2) throws ClassCastException {
       try {
@@ -151,13 +154,14 @@ public class UITemplateForm extends UIFormTabPane implements UISelectable {
       }
     }
   }
-  
+
   @SuppressWarnings("unchecked")
   public List<SelectItemOption<String>> getOption() throws Exception {
     List<SelectItemOption<String>> options = new ArrayList<SelectItemOption<String>>() ;
-    NodeTypeManager nodeTypeManager = 
-      getApplicationComponent(RepositoryService.class).getCurrentRepository().getNodeTypeManager() ; 
-    Node templatesHome = getApplicationComponent(TemplateService.class).getTemplatesHome(SessionProviderFactory.createSessionProvider()) ;
+    NodeTypeManager nodeTypeManager =
+        getApplicationComponent(RepositoryService.class).getCurrentRepository().getNodeTypeManager() ;
+    Node templatesHome = getApplicationComponent(TemplateService.class).
+        getTemplatesHome(SessionProviderFactory.createSessionProvider());
     if(templatesHome != null) {
       NodeIterator templateIter = templatesHome.getNodes() ;
       List<String> templates = new ArrayList<String>() ;
@@ -169,7 +173,8 @@ public class UITemplateForm extends UIFormTabPane implements UISelectable {
         NodeType nodeType = iter.nextNodeType();
         if (nodeType.isMixin()) continue;
         String nodeTypeName = nodeType.getName();
-        if(!templates.contains(nodeTypeName)) options.add(new SelectItemOption<String>(nodeTypeName,nodeTypeName)) ;
+        if (!templates.contains(nodeTypeName))
+          options.add(new SelectItemOption<String>(nodeTypeName, nodeTypeName));
       }
       Collections.sort(options, new TemplateNameComparator()) ;
     }
@@ -187,26 +192,29 @@ public class UITemplateForm extends UIFormTabPane implements UISelectable {
     public void execute(Event<UITemplateForm> event) throws Exception {
       UITemplateForm uiForm = event.getSource() ;
       String name = uiForm.getUIFormSelectBox(FIELD_NAME).getValue().trim() ;
-      String label = uiForm.getUIStringInput(FIELD_LABEL).getValue().trim() ; 
+      String label = uiForm.getUIStringInput(FIELD_LABEL).getValue().trim() ;
       String dialog = uiForm.getUIFormTextAreaInput(FIELD_DIALOG).getValue() ;
       String view = uiForm.getUIFormTextAreaInput(FIELD_VIEW).getValue();
       String skin = uiForm.getUIFormTextAreaInput(FIELD_SKIN).getValue();
       if(skin == null) skin = "";
       boolean isDocumentTemplate = uiForm.getUIFormCheckBoxInput(FIELD_ISTEMPLATE).isChecked() ;
       UIFormInputSetWithAction permField = uiForm.getChildById(UITemplateForm.FIELD_TAB_TEMPLATE) ;
-      String role = permField.getUIStringInput(FIELD_PERMISSION).getValue() ;
-      if((role == null ) || (role.trim().length() == 0)){
-        UIApplication uiApp = uiForm.getAncestorOfType(UIApplication.class) ;
-        uiApp.addMessage(new ApplicationMessage("UITemplateForm.msg.role-require", null, 
-                                                ApplicationMessage.WARNING)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
-        return ;
+      String role = permField.getUIStringInput(FIELD_PERMISSION).getValue();
+      if ((role == null) || (role.trim().length() == 0)) {
+        UIApplication uiApp = uiForm.getAncestorOfType(UIApplication.class);
+        uiApp.addMessage(new ApplicationMessage("UITemplateForm.msg.role-require",
+                                                null,
+                                                ApplicationMessage.WARNING));
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        return;
       }
       String[] roles = {role} ;
-      if(dialog == null) dialog = "" ;
-      if(view == null) view = "" ;
+      if (dialog == null)
+        dialog = "";
+      if (view == null)
+        view = "";
       TemplateService templateService = uiForm.getApplicationComponent(TemplateService.class) ;
-      templateService.addTemplate(TemplateService.DIALOGS, name, label, isDocumentTemplate, 
+      templateService.addTemplate(TemplateService.DIALOGS, name, label, isDocumentTemplate,
           TemplateService.DEFAULT_DIALOG, roles, new ByteArrayInputStream(dialog.getBytes())) ;
       templateService.addTemplate(TemplateService.VIEWS, name, label, isDocumentTemplate,
           TemplateService.DEFAULT_VIEW, roles, new ByteArrayInputStream(view.getBytes())) ;
@@ -242,13 +250,13 @@ public class UITemplateForm extends UIFormTabPane implements UISelectable {
     public void execute(Event<UITemplateForm> event) throws Exception {
       UITemplateForm uiFormTabPane = event.getSource() ;
       String nodeType = uiFormTabPane.getUIFormSelectBox(FIELD_NAME).getValue();
-      uiFormTabPane.getUIStringInput(FIELD_LABEL).setValue("");      
+      uiFormTabPane.getUIStringInput(FIELD_LABEL).setValue("");
       uiFormTabPane.initTemplate(nodeType);
       uiFormTabPane.getUIStringInput(FIELD_PERMISSION).setValue("");
       event.getRequestContext().addUIComponentToUpdateByAjax(uiFormTabPane.getParent()) ;
     }
   }
-  
+
   static public class AddPermissionActionListener extends EventListener<UITemplateForm> {
     public void execute(Event<UITemplateForm> event) throws Exception {
       UITemplateForm uiTemplateForm = event.getSource() ;

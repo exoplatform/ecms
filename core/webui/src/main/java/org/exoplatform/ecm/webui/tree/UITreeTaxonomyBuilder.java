@@ -42,7 +42,7 @@ import org.exoplatform.webui.event.EventListener;
 
 /**
  * Created by The eXo Platform SAS.
- * 
+ *
  * @author : Hoa.Pham hoa.pham@exoplatform.com Jun 23, 2008
  */
 
@@ -54,14 +54,14 @@ public class UITreeTaxonomyBuilder extends UIContainer {
   private boolean allowPublish = false;
   private PublicationService publicationService_ = null;
   private List<String> templates_ = null;
-  
+
   private String[] acceptedNodeTypes = {};
-  
+
   private String[] defaultExceptedNodeTypes = {};
-  
+
   /** The root tree node. */
   protected Node rootTreeNode;
-  
+
   /** The current node. */
   protected Node currentNode;
 
@@ -73,35 +73,35 @@ public class UITreeTaxonomyBuilder extends UIContainer {
     this.allowPublish = allowPublish;
     publicationService_ = publicationService;
     templates_ = templates;
-  }  
-  
+  }
+
   /**
    * Instantiates a new uI node tree builder.
-   * 
+   *
    * @throws Exception the exception
    */
   public UITreeTaxonomyBuilder() throws Exception {
     UITree tree = addChild(UINodeTree.class, null, "TaxonomyTreeBuilder") ;
     tree.setBeanLabelField("name") ;
-    tree.setBeanIdField("path") ;    
-  }  
+    tree.setBeanIdField("path") ;
+  }
 
   /**
    * Gets the root tree node.
-   * 
+   *
    * @return the root tree node
    */
   public Node getRootTreeNode() { return rootTreeNode; }
-  
+
   /**
    * Sets the root tree node.
-   * 
+   *
    * @param node the new root tree node
    * @throws Exception the exception
    */
   public final void setRootTreeNode(Node node) throws Exception {
     this.rootTreeNode = node;
-    this.currentNode = node; 
+    this.currentNode = node;
     UINodeTree uiNodeTree = getChild(UINodeTree.class);
     uiNodeTree.setRootPath(node.getPath());
     uiNodeTree.setTaxonomyLocalize(true);
@@ -110,50 +110,50 @@ public class UITreeTaxonomyBuilder extends UIContainer {
 
   /**
    * Gets the current node.
-   * 
+   *
    * @return the current node
    */
   public Node getCurrentNode() { return currentNode; }
-  
+
   /**
    * Sets the current node.
-   * 
+   *
    * @param currentNode the new current node
    */
-  public void setCurrentNode(Node currentNode) { this.currentNode = currentNode; }  
+  public void setCurrentNode(Node currentNode) { this.currentNode = currentNode; }
 
   /**
    * Gets the accepted node types.
-   * 
+   *
    * @return the accepted node types
    */
   public String[] getAcceptedNodeTypes() { return acceptedNodeTypes; }
-  
+
   /**
    * Sets the accepted node types.
-   * 
+   *
    * @param acceptedNodeTypes the new accepted node types
    */
   public void setAcceptedNodeTypes(String[] acceptedNodeTypes) {
     this.acceptedNodeTypes = acceptedNodeTypes;
   }
-  
+
   /**
    * Gets the default excepted node types.
-   * 
+   *
    * @return the default excepted node types
    */
   public String[] getDefaultExceptedNodeTypes() { return defaultExceptedNodeTypes; }
-  
+
   /**
    * Sets the default excepted node types.
-   * 
+   *
    * @param defaultExceptedNodeTypes the new excepted node types
    */
   public void setDefaultExceptedNodeTypes(String[] defaultExceptedNodeTypes) {
     this.defaultExceptedNodeTypes = defaultExceptedNodeTypes;
   }
-  
+
   public boolean isExceptedNodeType(Node node) throws RepositoryException {
     if(defaultExceptedNodeTypes.length > 0) {
       for(String nodeType: defaultExceptedNodeTypes) {
@@ -163,16 +163,16 @@ public class UITreeTaxonomyBuilder extends UIContainer {
     return false;
   }
 
-  public void buildTree() throws Exception {  
+  public void buildTree() throws Exception {
     NodeIterator sibbling = null ;
-    NodeIterator children = null ;    
+    NodeIterator children = null ;
     UINodeTree tree = getChild(UINodeTree.class);
     Node selectedNode = getNodeByPathBreadcumbs();
     if ((tree != null) && (selectedNode != null)) {
       tree.setSelected(selectedNode);
       if (Utils.getNodeSymLink(selectedNode).getDepth() > 0) {
-				if (!selectedNode.getPath().equals(rootTreeNode.getPath()))
-					tree.setParentSelected(selectedNode.getParent()) ;
+        if (!selectedNode.getPath().equals(rootTreeNode.getPath()))
+          tree.setParentSelected(selectedNode.getParent()) ;
         sibbling = Utils.getNodeSymLink(selectedNode).getNodes() ;
         children = Utils.getNodeSymLink(selectedNode).getNodes() ;
       } else {
@@ -188,7 +188,7 @@ public class UITreeTaxonomyBuilder extends UIContainer {
       }
     }
   }
-  
+
   private Node getNodeByPathBreadcumbs() throws PathNotFoundException, RepositoryException {
     UIOneTaxonomySelector uiOneTaxonomySelector = (UIOneTaxonomySelector) getParent();
     UIBreadcumbs uiBreadcumbs = uiOneTaxonomySelector.getChildById("BreadcumbOneTaxonomy");
@@ -209,14 +209,14 @@ public class UITreeTaxonomyBuilder extends UIContainer {
     NodeFinder nodeFinder_ = getApplicationComponent(NodeFinder.class);
     return (Node)nodeFinder_.getItem(uiOneTaxonomySelector.getRepositoryName(), uiOneTaxonomySelector.getWorkspaceName(), path);
   }
-  
+
   private void addNodePublish(List<Node> listNode, Node node, PublicationService publicationService) throws Exception {
     if (isAllowPublish()) {
       NodeType nt = node.getPrimaryNodeType();
-      if (templates_.contains(nt.getName())) { 
+      if (templates_.contains(nt.getName())) {
         Node nodecheck = publicationService.getNodePublish(node, null);
         if (nodecheck != null) {
-          listNode.add(nodecheck); 
+          listNode.add(nodecheck);
         }
       } else {
         listNode.add(node);
@@ -225,36 +225,36 @@ public class UITreeTaxonomyBuilder extends UIContainer {
       listNode.add(node);
     }
   }
-  
+
   private List<Node> filfer(final NodeIterator iterator) throws Exception{
     List<Node> list = new ArrayList<Node>();
     if (acceptedNodeTypes.length > 0) {
       for(;iterator.hasNext();) {
         Node sibbling = iterator.nextNode();
-        if(sibbling.isNodeType("exo:hiddenable")) continue;      
+        if(sibbling.isNodeType("exo:hiddenable")) continue;
         for(String nodetype: acceptedNodeTypes) {
           if(sibbling.isNodeType(nodetype)) {
             list.add(sibbling);
             break;
           }
-        }      
+        }
       }
       List<Node> listNodeCheck = new ArrayList<Node>();
       for (Node node : list) {
         addNodePublish(listNodeCheck, node, publicationService_);
       }
       return listNodeCheck;
-    }        
+    }
     for(;iterator.hasNext();) {
       Node sibbling = iterator.nextNode();
-      if(sibbling.isNodeType("exo:hiddenable")  || isExceptedNodeType(sibbling)) continue;            
-      list.add(sibbling);                  
-    }            
+      if(sibbling.isNodeType("exo:hiddenable")  || isExceptedNodeType(sibbling)) continue;
+      list.add(sibbling);
+    }
     List<Node> listNodeCheck = new ArrayList<Node>();
     for (Node node : list) addNodePublish(listNodeCheck, node, publicationService_);
     return listNodeCheck;
   }
-  
+
   /* (non-Javadoc)
    * @see org.exoplatform.webui.core.UIComponent#processRender(org.exoplatform.webui.application.WebuiRequestContext)
    */
@@ -271,15 +271,15 @@ public class UITreeTaxonomyBuilder extends UIContainer {
   }
 
   /**
-   * When a node is change in tree. This method will be rerender the children & sibbling nodes of 
+   * When a node is change in tree. This method will be rerender the children & sibbling nodes of
    * current node and broadcast change node event to other uicomponent
-   * 
+   *
    * @param path the path
    * @param requestContext the request context
    * @throws Exception the exception
    */
   public void changeNode(String path, Object context) throws Exception {
-  	if (path == null) return;
+    if (path == null) return;
     NodeFinder nodeFinder_ = getApplicationComponent(NodeFinder.class);
     String rootPath = rootTreeNode.getPath();
     if(rootPath.equals(path) || !path.startsWith(rootPath)) {
@@ -288,13 +288,13 @@ public class UITreeTaxonomyBuilder extends UIContainer {
       if (path.startsWith(rootPath)) path = path.substring(rootPath.length());
       if (path.startsWith("/")) path = path.substring(1);
       currentNode = nodeFinder_.getNode(rootTreeNode, path);
-    }    
+    }
     broadcastOnChange(currentNode,context);
   }
 
   /**
    * Broadcast on change.
-   * 
+   *
    * @param node the node
    * @param requestContext the request context
    * @throws Exception the exception
@@ -312,11 +312,11 @@ public class UITreeTaxonomyBuilder extends UIContainer {
    * <code>addChangeNodeActionListener<code> method. When
    * the changeNodeAction event occurs, that object's appropriate
    * method is invoked.
-   * 
+   *
    * @see ChangeNodeActionEvent
    */
   static public class ChangeNodeActionListener extends EventListener<UITree> {
-    
+
     /* (non-Javadoc)
      * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
      */
@@ -324,7 +324,7 @@ public class UITreeTaxonomyBuilder extends UIContainer {
       UITreeTaxonomyBuilder builder = event.getSource().getParent();
       String uri = event.getRequestContext().getRequestParameter(OBJECTID);
       builder.changeNode(uri,event.getRequestContext());
-      UIBaseNodeTreeSelector nodeTreeSelector = builder.getAncestorOfType(UIBaseNodeTreeSelector.class);      
+      UIBaseNodeTreeSelector nodeTreeSelector = builder.getAncestorOfType(UIBaseNodeTreeSelector.class);
       event.getRequestContext().addUIComponentToUpdateByAjax(nodeTreeSelector);
     }
   }

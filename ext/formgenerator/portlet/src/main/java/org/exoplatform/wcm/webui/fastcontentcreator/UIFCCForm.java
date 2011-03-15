@@ -76,54 +76,46 @@ import org.exoplatform.webui.form.UIFormUploadInput;
  * chuong.phan@exoplatform.com, phan.le.thanh.chuong@gmail.com
  * Jun 25, 2009
  */
-@ComponentConfigs(
-                  {
-        @ComponentConfig(
-                         type = UIFormMultiValueInputSet.class,
-                         id="WYSIWYGRichTextMultipleInputset",
-                         events = {@EventConfig(listeners = UIDialogForm.AddActionListener.class, phase = Phase.DECODE),
-                                   @EventConfig(listeners = UIFormMultiValueInputSet.RemoveActionListener.class, phase = Phase.DECODE)
-                                  }
-                     ),
-        @ComponentConfig(
-            lifecycle = UIFormLifecycle.class,
-            events = {
-              @EventConfig(listeners = UIFCCForm.SaveActionListener.class),
-              @EventConfig(listeners = UIFCCForm.AddActionListener.class, phase = Phase.DECODE),
-              @EventConfig(listeners = UIFCCForm.RemoveActionListener.class, phase = Phase.DECODE),
-              @EventConfig(listeners = UIFCCForm.ShowComponentActionListener.class, phase = Phase.DECODE),
-              @EventConfig(listeners = UIFCCForm.RemoveReferenceActionListener.class, confirm = "DialogFormField.msg.confirm-delete", phase = Phase.DECODE)
-            }
-        )
-})
+@ComponentConfigs( {
+    @ComponentConfig(type = UIFormMultiValueInputSet.class, id = "WYSIWYGRichTextMultipleInputset", events = {
+        @EventConfig(listeners = UIDialogForm.AddActionListener.class, phase = Phase.DECODE),
+        @EventConfig(listeners = UIFormMultiValueInputSet.RemoveActionListener.class, phase = Phase.DECODE) }),
+    @ComponentConfig(lifecycle = UIFormLifecycle.class, events = {
+        @EventConfig(listeners = UIFCCForm.SaveActionListener.class),
+        @EventConfig(listeners = UIFCCForm.AddActionListener.class, phase = Phase.DECODE),
+        @EventConfig(listeners = UIFCCForm.RemoveActionListener.class, phase = Phase.DECODE),
+        @EventConfig(listeners = UIFCCForm.ShowComponentActionListener.class, phase = Phase.DECODE),
+        @EventConfig(listeners = UIFCCForm.RemoveReferenceActionListener.class,
+                     confirm = "DialogFormField.msg.confirm-delete",
+                     phase = Phase.DECODE) }) })
 public class UIFCCForm extends UIDialogForm implements UISelectable {
 
   /** The Constant FIELD_TAXONOMY. */
   final static public String FIELD_TAXONOMY = "categories";
-  
+
   /** The Constant POPUP_TAXONOMY. */
   final static public String POPUP_TAXONOMY = "UIPopupTaxonomy";
-  
+
   /** The list taxonomy. */
   private List<String> listTaxonomy = new ArrayList<String>();
-  
+
   /** The list taxonomy name. */
   private List<String> listTaxonomyName = new ArrayList<String>();
-  
+
   /** The document type_. */
   private String documentType_ ;
-  
+
   /** The jcr template resource resolver_. */
   private JCRResourceResolver jcrTemplateResourceResolver_ ;
 
   /**
    * Instantiates a new uIFCC form.
-   * 
+   *
    * @throws Exception the exception
    */
   public UIFCCForm() throws Exception {
-	PortletPreferences preferences = UIFCCUtils.getPortletPreferences() ;
-	String custom_save_button = preferences.getValue(UIFCCConstant.PREFERENCE_SAVE_BUTTON, "");  
+  PortletPreferences preferences = UIFCCUtils.getPortletPreferences() ;
+  String custom_save_button = preferences.getValue(UIFCCConstant.PREFERENCE_SAVE_BUTTON, "");
     setActions(new String[]{custom_save_button}) ;
 
   }
@@ -146,40 +138,40 @@ public class UIFCCForm extends UIDialogForm implements UISelectable {
   }
   /**
    * Gets the list taxonomy.
-   * 
+   *
    * @return the list taxonomy
    */
   public List<String> getListTaxonomy() {
     return listTaxonomy;
   }
-  
+
   /**
    * Gets the list taxonomy name.
-   * 
+   *
    * @return the list taxonomy name
    */
   public List<String> getlistTaxonomyName() {
     return listTaxonomyName;
   }
-  
+
   /**
    * Sets the list taxonomy.
-   * 
+   *
    * @param listTaxonomyNew the new list taxonomy
    */
   public void setListTaxonomy(List<String> listTaxonomyNew) {
     listTaxonomy = listTaxonomyNew;
   }
-  
+
   /**
    * Sets the list taxonomy name.
-   * 
+   *
    * @param listTaxonomyNameNew the new list taxonomy name
    */
   public void setListTaxonomyName(List<String> listTaxonomyNameNew) {
     listTaxonomyName = listTaxonomyNameNew;
   }
-  
+
   /* (non-Javadoc)
    * @see org.exoplatform.ecm.webui.form.UIDialogForm#getTemplate()
    */
@@ -198,7 +190,7 @@ public class UIFCCForm extends UIDialogForm implements UISelectable {
       return null ;
     }
   }
-  
+
   /* (non-Javadoc)
    * @see org.exoplatform.ecm.webui.selector.UISelectable#doSelect(java.lang.String, java.lang.Object)
    */
@@ -220,29 +212,29 @@ public class UIFCCForm extends UIDialogForm implements UISelectable {
       inputSet.setValue(taxonomylist);
     }
     UIFCCPortlet uiContainer = getParent();
-    uiContainer.removeChildById("PopupComponent");    
+    uiContainer.removeChildById("PopupComponent");
   }
 
   /**
    * Gets the current node.
-   * 
+   *
    * @return the current node
-   * 
+   *
    * @throws Exception the exception
    */
-  public Node getCurrentNode() throws Exception {  
+  public Node getCurrentNode() throws Exception {
     RepositoryService repositoryService = getApplicationComponent(RepositoryService.class) ;
     PortletPreferences preferences = UIFCCUtils.getPortletPreferences() ;
-    Session session = 
-    	WCMCoreUtils.getUserSessionProvider().getSession(
-        preferences.getValue(UIFCCConstant.PREFERENCE_WORKSPACE, ""), 
+    Session session =
+      WCMCoreUtils.getUserSessionProvider().getSession(
+        preferences.getValue(UIFCCConstant.PREFERENCE_WORKSPACE, ""),
         repositoryService.getRepository(preferences.getValue(UIFCCConstant.PREFERENCE_REPOSITORY, ""))) ;
     return (Node) session.getItem(preferences.getValue("path", ""));
   }
 
   /**
    * Sets the template node.
-   * 
+   *
    * @param type the new template node
    */
   public void setTemplateNode(String type) { documentType_ = type ; }
@@ -252,12 +244,15 @@ public class UIFCCForm extends UIDialogForm implements UISelectable {
    */
   public boolean isEditing() { return false ; }
 
-  /* (non-Javadoc)
-   * @see org.exoplatform.webui.core.UIComponent#getTemplateResourceResolver(org.exoplatform.webui.application.WebuiRequestContext, java.lang.String)
+  /*
+   * (non-Javadoc)
+   * @see
+   * org.exoplatform.webui.core.UIComponent#getTemplateResourceResolver(org.
+   * exoplatform.webui.application.WebuiRequestContext, java.lang.String)
    */
   public ResourceResolver getTemplateResourceResolver(WebuiRequestContext context, String template) {
-    if(jcrTemplateResourceResolver_ == null) newJCRTemplateResourceResolver() ; 
-    return jcrTemplateResourceResolver_; 
+    if(jcrTemplateResourceResolver_ == null) newJCRTemplateResourceResolver() ;
+    return jcrTemplateResourceResolver_;
   }
 
   /**
@@ -270,17 +265,17 @@ public class UIFCCForm extends UIDialogForm implements UISelectable {
       Utils.createPopupMessage(this, "UIFCCForm.msg.new-jcr-template", null, ApplicationMessage.ERROR);
     }
   }
-  
+
   /**
    * Gets the dMS workspace.
-   * 
+   *
    * @return the dMS workspace
    */
   private String getDMSWorkspace() {
     DMSConfiguration dmsConfiguration = getApplicationComponent(DMSConfiguration.class);
-    return dmsConfiguration.getConfig().getSystemWorkspace();   
+    return dmsConfiguration.getConfig().getSystemWorkspace();
   }
-  
+
   /**
    * The listener interface for receiving saveAction events.
    * The class that is interested in processing a saveAction
@@ -289,12 +284,12 @@ public class UIFCCForm extends UIDialogForm implements UISelectable {
    * component's <code>addSaveActionListener<code> method. When
    * the saveAction event occurs, that object's appropriate
    * method is invoked.
-   * 
+   *
    * @see SaveActionEvent
    */
   @SuppressWarnings("unchecked")
   static public class SaveActionListener extends EventListener<UIFCCForm> {
-    
+
     /* (non-Javadoc)
      * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
      */
@@ -306,12 +301,12 @@ public class UIFCCForm extends UIDialogForm implements UISelectable {
       String preferencePath = preferences.getValue(UIFCCConstant.PREFERENCE_PATH, "") ;
       String preferenceType = preferences.getValue(UIFCCConstant.PREFERENCE_TYPE, "") ;
       String preferenceWorkspace = preferences.getValue(UIFCCConstant.PREFERENCE_WORKSPACE, "") ;
-      
+
       RepositoryService repositoryService  = fastContentCreatorForm.getApplicationComponent(RepositoryService.class);
       SessionProvider sessionProvider = WCMCoreUtils.getUserSessionProvider();
       Session session = sessionProvider.getSession(preferenceWorkspace, repositoryService.getRepository(preferenceRepository));
       CmsService cmsService = fastContentCreatorForm.getApplicationComponent(CmsService.class) ;
-      TaxonomyService taxonomyService = fastContentCreatorForm.getApplicationComponent(TaxonomyService.class);      
+      TaxonomyService taxonomyService = fastContentCreatorForm.getApplicationComponent(TaxonomyService.class);
       boolean hasCategories = false;
       String categoriesPath = "";
       String[] categoriesPathList = null;
@@ -319,8 +314,9 @@ public class UIFCCForm extends UIDialogForm implements UISelectable {
       for (int i = 0; i < inputs.size(); i++) {
         UIFormInput input = (UIFormInput) inputs.get(i);
         if((input.getName() != null) && input.getName().equals("name")) {
-          String[] arrFilterChar = {"&", "$", "@", ":", "]", "[", "*", "%", "!", "+", "(", ")", "'", "#", ";", "}", "{", "/", "|", "\""};          
-          String valueName = input.getValue().toString().trim();          
+          String[] arrFilterChar = { "&", "$", "@", ":", "]", "[", "*", "%", "!", "+", "(", ")",
+              "'", "#", ";", "}", "{", "/", "|", "\"" };
+          String valueName = input.getValue().toString().trim();
           if (!org.exoplatform.ecm.webui.utils.Utils.isNameValid(valueName, arrFilterChar)) {
             uiApp.addMessage(new ApplicationMessage("UIFCCForm.msg.name-not-allowed", null, ApplicationMessage.WARNING));
             event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
@@ -332,27 +328,27 @@ public class UIFCCForm extends UIDialogForm implements UISelectable {
         UIFormMultiValueInputSet uiSet = fastContentCreatorForm.getChild(UIFormMultiValueInputSet.class);
         if((uiSet != null) && (uiSet.getName() != null) && uiSet.getName().equals("categories")) {
           hasCategories = true;
-          List<UIComponent> listChildren = uiSet.getChildren();         
+          List<UIComponent> listChildren = uiSet.getChildren();
           for (UIComponent component : listChildren) {
-            UIFormStringInput uiStringInput = (UIFormStringInput)component;          
+            UIFormStringInput uiStringInput = (UIFormStringInput)component;
             if(uiStringInput.getValue() != null) {
-              String value = uiStringInput.getValue().trim();            
+              String value = uiStringInput.getValue().trim();
               categoriesPath += value + ",";
             }
           }
           if (categoriesPath.endsWith(",")) categoriesPath = categoriesPath.substring(0, categoriesPath.length()-1).trim();
           categoriesPathList = categoriesPath.split(",");
           if ((categoriesPathList == null) || (categoriesPathList.length == 0)) {
-            uiApp.addMessage(new ApplicationMessage("UISelectedCategoriesGrid.msg.non-categories", null, 
+            uiApp.addMessage(new ApplicationMessage("UISelectedCategoriesGrid.msg.non-categories", null,
                 ApplicationMessage.WARNING));
             event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
             return;
           }
-          
-          for(String categoryPath : categoriesPathList) {              
+
+          for(String categoryPath : categoriesPathList) {
             if((categoryPath != null) && (categoryPath.trim().length() > 0)){
               if (categoryPath.indexOf("/") == -1) {
-                uiApp.addMessage(new ApplicationMessage("UISelectedCategoriesGrid.msg.non-categories", null, 
+                uiApp.addMessage(new ApplicationMessage("UISelectedCategoriesGrid.msg.non-categories", null,
                     ApplicationMessage.WARNING));
                 event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
                 return;
@@ -361,20 +357,21 @@ public class UIFCCForm extends UIDialogForm implements UISelectable {
           }
         }
       }
-      Map inputProperties = DialogFormUtil.prepareMap(fastContentCreatorForm.getChildren(), fastContentCreatorForm.getInputProperties()) ;
+      Map inputProperties = DialogFormUtil.prepareMap(fastContentCreatorForm.getChildren(),
+                                                      fastContentCreatorForm.getInputProperties());
       Node homeNode = null;
       Node newNode = null ;
       try {
         homeNode = (Node) session.getItem(preferencePath);
       } catch (AccessDeniedException ade){
         Object[] args = { preferencePath } ;
-        uiApp.addMessage(new ApplicationMessage("UIFCCForm.msg.access-denied", args, 
+        uiApp.addMessage(new ApplicationMessage("UIFCCForm.msg.access-denied", args,
             ApplicationMessage.WARNING)) ;
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
         return;
       } catch(PathNotFoundException pnfe) {
         Object[] args = { preferencePath } ;
-        uiApp.addMessage(new ApplicationMessage("UIFCCForm.msg.path-not-found", args, 
+        uiApp.addMessage(new ApplicationMessage("UIFCCForm.msg.path-not-found", args,
             ApplicationMessage.WARNING)) ;
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
         return;
@@ -386,7 +383,7 @@ public class UIFCCForm extends UIDialogForm implements UISelectable {
         if(homeNode.hasNode(addedPath.substring(addedPath.lastIndexOf("/") + 1))) {
           newNode = homeNode.getNode(addedPath.substring(addedPath.lastIndexOf("/") + 1));
           if (hasCategories && (newNode != null) && ((categoriesPath != null) && (categoriesPath.length() > 0))){
-            for(String categoryPath : categoriesPathList) {    
+            for(String categoryPath : categoriesPathList) {
               index = categoryPath.indexOf("/");
               taxonomyService.addCategory(newNode, categoryPath.substring(0, index), categoryPath.substring(index + 1));
             }
@@ -406,14 +403,14 @@ public class UIFCCForm extends UIDialogForm implements UISelectable {
         session.save() ;
         session.refresh(false) ;
         homeNode.getSession().refresh(false) ;
-        
+
         boolean preferenceIsRedirect = Boolean.parseBoolean(preferences.getValue(UIFCCConstant.PREFERENCE_IS_REDIRECT, "")) ;
         String preferenceRedirectPath = preferences.getValue(UIFCCConstant.PREFERENCE_REDIRECT_PATH, "") ;
         if (preferenceIsRedirect && preferenceRedirectPath != null) {
           event.getRequestContext().getJavascriptManager().addJavascript("ajaxRedirect('" + preferenceRedirectPath + "');");
         } else {
           String saveMessage = preferences.getValue(UIFCCConstant.PREFERENCE_SAVE_MESSAGE, "") ;
-          if (saveMessage == null) saveMessage = "saved-successfully"; 
+          if (saveMessage == null) saveMessage = "saved-successfully";
           Object[] args = { saveMessage } ;
           uiApp.addMessage(new ApplicationMessage("UIFCCForm.msg.saved-successfully", args)) ;
           event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
@@ -422,7 +419,7 @@ public class UIFCCForm extends UIDialogForm implements UISelectable {
       } catch (AccessControlException ace) {
         throw new AccessDeniedException(ace.getMessage());
       } catch(VersionException ve) {
-        uiApp.addMessage(new ApplicationMessage("UIFCCForm.msg.in-versioning", null, 
+        uiApp.addMessage(new ApplicationMessage("UIFCCForm.msg.in-versioning", null,
             ApplicationMessage.WARNING)) ;
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
         return;
@@ -445,8 +442,8 @@ public class UIFCCForm extends UIDialogForm implements UISelectable {
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
       }
     }
-  }  
-    
+  }
+
   /**
    * The listener interface for receiving showComponentAction events.
    * The class that is interested in processing a showComponentAction
@@ -455,12 +452,12 @@ public class UIFCCForm extends UIDialogForm implements UISelectable {
    * component's <code>addShowComponentActionListener<code> method. When
    * the showComponentAction event occurs, that object's appropriate
    * method is invoked.
-   * 
+   *
    * @see ShowComponentActionEvent
    */
   @SuppressWarnings("unchecked")
   static public class ShowComponentActionListener extends EventListener<UIFCCForm> {
-    
+
     /* (non-Javadoc)
      * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
      */
@@ -475,7 +472,7 @@ public class UIFCCForm extends UIDialogForm implements UISelectable {
       ClassLoader cl = Thread.currentThread().getContextClassLoader() ;
       Class clazz = Class.forName(classPath, true, cl) ;
       UIComponent component = fastContentCreatorPortlet.createUIComponent(clazz, null, null);
-      NodeHierarchyCreator nodeHierarchyCreator = fastContentCreatorForm.getApplicationComponent(NodeHierarchyCreator.class);  
+      NodeHierarchyCreator nodeHierarchyCreator = fastContentCreatorForm.getApplicationComponent(NodeHierarchyCreator.class);
       SessionProvider sessionProvider = WCMCoreUtils.getUserSessionProvider();
       String selectorParams = (String)fieldPropertiesMap.get("selectorParams") ;
       if(component instanceof UIOneNodePathSelector) {
@@ -484,7 +481,7 @@ public class UIFCCForm extends UIDialogForm implements UISelectable {
         String wsName = "";
         if(wsFieldName != null && wsFieldName.length() > 0) {
           wsName = (String)fastContentCreatorForm.<UIFormInputBase>getUIInput(wsFieldName).getValue() ;
-          ((UIOneNodePathSelector)component).setIsDisable(wsName, true) ;      
+          ((UIOneNodePathSelector)component).setIsDisable(wsName, true) ;
         }
         if(selectorParams != null) {
           String[] arrParams = selectorParams.split(",") ;
@@ -507,28 +504,32 @@ public class UIFCCForm extends UIDialogForm implements UISelectable {
       } else if (component instanceof UIOneTaxonomySelector) {
         String workspaceName = fastContentCreatorForm.getDMSWorkspace();
         ((UIOneTaxonomySelector)component).setIsDisable(workspaceName, false);
-        String rootTreePath = nodeHierarchyCreator.getJcrPath(BasePath.TAXONOMIES_TREE_STORAGE_PATH);      
+        String rootTreePath = nodeHierarchyCreator.getJcrPath(BasePath.TAXONOMIES_TREE_STORAGE_PATH);
         RepositoryService repositoryService  = fastContentCreatorForm.getApplicationComponent(RepositoryService.class);
-        Session session = sessionProvider.getSession(workspaceName, repositoryService.getRepository(fastContentCreatorForm.repositoryName));
-        Node rootTree = (Node) session.getItem(rootTreePath);      
+        Session session = sessionProvider.getSession(workspaceName,
+                                                     repositoryService.getRepository(fastContentCreatorForm.repositoryName));
+        Node rootTree = (Node) session.getItem(rootTreePath);
         NodeIterator childrenIterator = rootTree.getNodes();
         while (childrenIterator.hasNext()) {
           Node childNode = childrenIterator.nextNode();
           rootTreePath = childNode.getPath();
           break;
         }
-        
-        ((UIOneTaxonomySelector)component).setRootNodeLocation(fastContentCreatorForm.repositoryName, workspaceName, rootTreePath);
+
+        ((UIOneTaxonomySelector) component).setRootNodeLocation(fastContentCreatorForm.repositoryName,
+                                                                workspaceName,
+                                                                rootTreePath);
         ((UIOneTaxonomySelector)component).init(sessionProvider);
       }
       Utils.createPopupWindow(fastContentCreatorForm, component, UIFCCConstant.TAXONOMY_POPUP_WINDOW, 640);
       String param = "returnField=" + fieldName ;
-      String[] params = selectorParams == null ? new String[]{param} : new String[]{param, "selectorParams=" + selectorParams};
+      String[] params = selectorParams == null ? new String[] { param } : new String[] { param,
+          "selectorParams=" + selectorParams };
       ((ComponentSelector)component).setSourceComponent(fastContentCreatorForm, params) ;
       event.getRequestContext().addUIComponentToUpdateByAjax(fastContentCreatorPortlet) ;
     }
-  }      
-  
+  }
+
   /**
    * The listener interface for receiving removeReferenceAction events.
    * The class that is interested in processing a removeReferenceAction
@@ -537,11 +538,11 @@ public class UIFCCForm extends UIDialogForm implements UISelectable {
    * component's <code>addRemoveReferenceActionListener<code> method. When
    * the removeReferenceAction event occurs, that object's appropriate
    * method is invoked.
-   * 
+   *
    * @see RemoveReferenceActionEvent
    */
   static public class RemoveReferenceActionListener extends EventListener<UIFCCForm> {
-    
+
     /* (non-Javadoc)
      * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
      */
@@ -552,7 +553,7 @@ public class UIFCCForm extends UIDialogForm implements UISelectable {
       fastContentCreatorForm.getUIStringInput(fieldName).setValue(null) ;
       event.getRequestContext().addUIComponentToUpdateByAjax(fastContentCreatorForm.getParent()) ;
     }
-  }  
+  }
 
   /**
    * The listener interface for receiving addAction events.
@@ -562,11 +563,11 @@ public class UIFCCForm extends UIDialogForm implements UISelectable {
    * component's <code>addAddActionListener<code> method. When
    * the addAction event occurs, that object's appropriate
    * method is invoked.
-   * 
+   *
    * @see AddActionEvent
    */
   static public class AddActionListener extends EventListener<UIFCCForm> {
-    
+
     /* (non-Javadoc)
      * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
      */
@@ -578,16 +579,19 @@ public class UIFCCForm extends UIDialogForm implements UISelectable {
         UIFormMultiValueInputSet uiSet = fastContentCreatorForm.getChildById(FIELD_TAXONOMY);
         if((uiSet != null) && (uiSet.getName() != null) && uiSet.getName().equals(FIELD_TAXONOMY)) {
           if ((clickedField != null) && (clickedField.equals(FIELD_TAXONOMY))){
-            NodeHierarchyCreator nodeHierarchyCreator = fastContentCreatorForm.getApplicationComponent(NodeHierarchyCreator.class);        
+            NodeHierarchyCreator nodeHierarchyCreator = fastContentCreatorForm.getApplicationComponent(NodeHierarchyCreator.class);
             if(uiSet.getValue().size() == 0) uiSet.setValue(new ArrayList<Value>());
             String workspaceName = fastContentCreatorForm.getDMSWorkspace();
-            UIOneTaxonomySelector uiOneTaxonomySelector = fastContentCreatorForm.createUIComponent(UIOneTaxonomySelector.class, null, null);
+            UIOneTaxonomySelector uiOneTaxonomySelector = fastContentCreatorForm.createUIComponent(UIOneTaxonomySelector.class,
+                                                                                                   null,
+                                                                                                   null);
             uiOneTaxonomySelector.setIsDisable(workspaceName, false);
-            String rootTreePath = nodeHierarchyCreator.getJcrPath(BasePath.TAXONOMIES_TREE_STORAGE_PATH);      
+            String rootTreePath = nodeHierarchyCreator.getJcrPath(BasePath.TAXONOMIES_TREE_STORAGE_PATH);
             RepositoryService repositoryService  = fastContentCreatorForm.getApplicationComponent(RepositoryService.class);
             SessionProvider sessionProvider = WCMCoreUtils.getUserSessionProvider();
-            Session session = sessionProvider.getSession(workspaceName, repositoryService.getRepository(fastContentCreatorForm.repositoryName));
-            Node rootTree = (Node) session.getItem(rootTreePath);      
+            Session session = sessionProvider.getSession(workspaceName,
+                                                         repositoryService.getRepository(fastContentCreatorForm.repositoryName));
+            Node rootTree = (Node) session.getItem(rootTreePath);
             NodeIterator childrenIterator = rootTree.getNodes();
             while (childrenIterator.hasNext()) {
               Node childNode = childrenIterator.nextNode();
@@ -596,13 +600,13 @@ public class UIFCCForm extends UIDialogForm implements UISelectable {
             }
             uiOneTaxonomySelector.setRootNodeLocation(fastContentCreatorForm.repositoryName, workspaceName, rootTreePath);
             uiOneTaxonomySelector.init(WCMCoreUtils.getUserSessionProvider());
-            String param = "returnField=" + FIELD_TAXONOMY;        
+            String param = "returnField=" + FIELD_TAXONOMY;
             uiOneTaxonomySelector.setSourceComponent(fastContentCreatorForm, new String[]{param});
             Utils.createPopupWindow(fastContentCreatorForm, uiOneTaxonomySelector, UIFCCConstant.TAXONOMY_POPUP_WINDOW, 640);
           }
         }
         event.getRequestContext().addUIComponentToUpdateByAjax(fastContentCreatorPortlet);
-      } else {        
+      } else {
         event.getRequestContext().addUIComponentToUpdateByAjax(fastContentCreatorForm.getParent());
       }
     }
@@ -616,16 +620,16 @@ public class UIFCCForm extends UIDialogForm implements UISelectable {
    * component's <code>addRemoveActionListener<code> method. When
    * the removeAction event occurs, that object's appropriate
    * method is invoked.
-   * 
+   *
    * @see RemoveActionEvent
    */
   static public class RemoveActionListener extends EventListener<UIFCCForm> {
-    
+
     /* (non-Javadoc)
      * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
      */
     public void execute(Event<UIFCCForm> event) throws Exception {
       event.getRequestContext().addUIComponentToUpdateByAjax(event.getSource().getParent()) ;
     }
-  }  
+  }
 }

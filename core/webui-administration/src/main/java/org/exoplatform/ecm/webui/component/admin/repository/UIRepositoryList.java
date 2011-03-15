@@ -37,7 +37,7 @@ import org.exoplatform.webui.event.EventListener;
  * Created by The eXo Platform SARL
  * Author : Pham Tuan
  *          tuan.pham@exoplatform.com
- * Aug 1, 2007  
+ * Aug 1, 2007
  */
 
 @ComponentConfig(
@@ -74,7 +74,7 @@ public class UIRepositoryList extends UIGrid  implements UIPopupComponent {
     String workspace = sb.toString() ;
     repos.add(new RepoData(name, workspace, isDefault, accessControl, sessionTime)) ;
     ObjectPageList objPageList = new ObjectPageList(repos, 10) ;
-    getUIPageIterator().setPageList(objPageList) ; 
+    getUIPageIterator().setPageList(objPageList) ;
   }
   public void activate() throws Exception {}
   public void deActivate() throws Exception {}
@@ -90,9 +90,9 @@ public class UIRepositoryList extends UIGrid  implements UIPopupComponent {
       Object[] args = new Object[]{repoName}  ;
       if(repoName.equals(repositoryControl.getSelectedRepo()) || !rservice.canRemoveRepository(repoName)) {
         uiApp.addMessage(new ApplicationMessage("UIRepositoryList.msg.cannot-delete", args)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;  
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
         return ;
-      }  
+      }
       rservice.removeRepository(repoName) ;
       if(rservice.getConfig().isRetainable()) {
         rservice.getConfig().retain() ;

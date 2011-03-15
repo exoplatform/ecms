@@ -21,7 +21,7 @@ import org.exoplatform.webui.event.EventListener;
  * Author : Ly Dinh Quang
  *          quang.ly@exoplatform.com
  *          xxx5669@gmail.com
- * Jan 13, 2009  
+ * Jan 13, 2009
  */
 @ComponentConfig(
     lifecycle = UIApplicationLifecycle.class,
@@ -30,9 +30,9 @@ import org.exoplatform.webui.event.EventListener;
       @EventConfig(listeners = UIWorkflowControllerPortlet.RefreshSessionActionListener.class)
     }
 )
-public class UIWorkflowControllerPortlet extends UIPortletApplication {  
+public class UIWorkflowControllerPortlet extends UIPortletApplication {
   private boolean isShowMonitor = false ;
-  
+
   public boolean isShowMonitor() { return isShowMonitor ; }
 
   public UIWorkflowControllerPortlet() throws Exception {
@@ -40,7 +40,7 @@ public class UIWorkflowControllerPortlet extends UIPortletApplication {
     UIPopupContainer uiWorkflowPopup = addChild(UIPopupContainer.class, null, null) ;
     uiWorkflowPopup.getChild(UIPopupWindow.class).setId("ControllerPopup") ;
   }
-  
+
   static public class RefreshSessionActionListener extends EventListener<UIWorkflowControllerPortlet> {
     public void execute(Event<UIWorkflowControllerPortlet> event) throws Exception {
       WebuiRequestContext context = WebuiRequestContext.getCurrentInstance();

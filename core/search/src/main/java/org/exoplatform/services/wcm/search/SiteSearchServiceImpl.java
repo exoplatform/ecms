@@ -79,106 +79,127 @@ public class SiteSearchServiceImpl implements SiteSearchService {
 
   /**
    * Instantiates a new site search service impl.
-   * 
+   *
    * @param portalManagerService the portal manager service
    * @param templateService the template service
    * @param configurationService the configuration service
    * @param repositoryService the repository service
    * @param initParams the init params
-   * 
+   *
    * @throws Exception the exception
    */
-  public SiteSearchServiceImpl(LivePortalManagerService portalManagerService, TemplateService templateService,
-      WCMConfigurationService configurationService, RepositoryService repositoryService, InitParams initParams) throws Exception {
+  public SiteSearchServiceImpl(LivePortalManagerService portalManagerService,
+                               TemplateService templateService,
+                               WCMConfigurationService configurationService,
+                               RepositoryService repositoryService,
+                               InitParams initParams) throws Exception {
     this.livePortalManagerService = portalManagerService;
     this.templateService = templateService;
     this.repositoryService = repositoryService;
-    this.configurationService = configurationService;        
+    this.configurationService = configurationService;
   }
 
-  /* (non-Javadoc)
-   * @see org.exoplatform.services.wcm.search.SiteSearchService#addExcludeIncludeDataTypePlugin(org.exoplatform.services.wcm.search.ExcludeIncludeDataTypePlugin)
+  /*
+   * (non-Javadoc)
+   * @seeorg.exoplatform.services.wcm.search.SiteSearchService#
+   * addExcludeIncludeDataTypePlugin
+   * (org.exoplatform.services.wcm.search.ExcludeIncludeDataTypePlugin)
    */
-  public void addExcludeIncludeDataTypePlugin(ExcludeIncludeDataTypePlugin plugin) {    
+  public void addExcludeIncludeDataTypePlugin(ExcludeIncludeDataTypePlugin plugin) {
     excludeNodeTypes.addAll(plugin.getExcludeNodeTypes());
     excludeMimeTypes.addAll(plugin.getExcludeMimeTypes());
     includeMimeTypes.addAll(plugin.getIncludeMimeTypes());
-    includeNodeTypes.addAll(plugin.getIncludeNodeTypes());    
+    includeNodeTypes.addAll(plugin.getIncludeNodeTypes());
   }
 
-  /* (non-Javadoc)
-   * @see org.exoplatform.services.wcm.search.SiteSearchService#searchSiteContents(org.exoplatform.services.wcm.search.QueryCriteria, org.exoplatform.services.jcr.ext.common.SessionProvider, int)
+  /*
+   * (non-Javadoc)
+   * @see
+   * org.exoplatform.services.wcm.search.SiteSearchService#searchSiteContents
+   * (org.exoplatform.services.wcm.search.QueryCriteria,
+   * org.exoplatform.services.jcr.ext.common.SessionProvider, int)
    */
-  public WCMPaginatedQueryResult searchSiteContents(SessionProvider sessionProvider, QueryCriteria queryCriteria, int pageSize, boolean isSearchContent) throws Exception {
+  public WCMPaginatedQueryResult searchSiteContents(SessionProvider sessionProvider,
+                                                    QueryCriteria queryCriteria,
+                                                    int pageSize,
+                                                    boolean isSearchContent) throws Exception {
     ManageableRepository currentRepository = repositoryService.getCurrentRepository();
-    NodeLocation location = configurationService.getLivePortalsLocation(currentRepository.getConfiguration().getName());    
+    NodeLocation location = configurationService.getLivePortalsLocation(currentRepository.getConfiguration().getName());
     Session session = sessionProvider.getSession(location.getWorkspace(),currentRepository);
     QueryManager queryManager = session.getWorkspace().getQueryManager();
     long startTime = System.currentTimeMillis();
-    QueryResult queryResult = searchSiteContent(queryCriteria, queryManager);  
+    QueryResult queryResult = searchSiteContent(queryCriteria, queryManager);
     String suggestion = getSpellSuggestion(queryCriteria.getKeyword(),currentRepository);
     long queryTime = System.currentTimeMillis() - startTime;
     WCMPaginatedQueryResult paginatedQueryResult = null;
-    if(queryResult.getNodes().getSize()>250) {
-      paginatedQueryResult = new WCMPaginatedQueryResult( queryResult, queryCriteria, pageSize, isSearchContent); 
-    }else {      
-      paginatedQueryResult = new SmallPaginatedQueryResult(queryResult, queryCriteria, pageSize, isSearchContent);
-    }       
-    paginatedQueryResult.setQueryTime(queryTime);    
-    paginatedQueryResult.setSpellSuggestion(suggestion);    
+    if (queryResult.getNodes().getSize() > 250) {
+      paginatedQueryResult = new WCMPaginatedQueryResult(queryResult,
+                                                         queryCriteria,
+                                                         pageSize,
+                                                         isSearchContent);
+    } else {
+      paginatedQueryResult = new SmallPaginatedQueryResult(queryResult,
+                                                           queryCriteria,
+                                                           pageSize,
+                                                           isSearchContent);
+    }
+    paginatedQueryResult.setQueryTime(queryTime);
+    paginatedQueryResult.setSpellSuggestion(suggestion);
     return paginatedQueryResult;
-  }  
+  }
 
   /**
    * Gets the spell suggestion.
-   * 
+   *
    * @param checkingWord the checking word
    * @param manageableRepository the manageable repository
-   * 
+   *
    * @return the spell suggestion
-   * 
+   *
    * @throws Exception the exception
    */
-  private String getSpellSuggestion(String checkingWord, ManageableRepository manageableRepository) throws Exception{
-    //Retrieve spell suggestion in special way to avoid access denied exception  
+  private String getSpellSuggestion(String checkingWord, ManageableRepository manageableRepository) throws Exception {
+    //Retrieve spell suggestion in special way to avoid access denied exception
     String suggestion = null;
     Session session = null;
     try{
       session = manageableRepository.getSystemSession(manageableRepository.getConfiguration().getDefaultWorkspaceName());
       QueryManager queryManager = session.getWorkspace().getQueryManager();
-      Query query = queryManager.createQuery("SELECT rep:spellcheck() FROM nt:base WHERE jcr:path like '/' AND SPELLCHECK('" + checkingWord + "')", Query.SQL);
+      Query query = queryManager.createQuery("SELECT rep:spellcheck() FROM nt:base WHERE jcr:path like '/' AND SPELLCHECK('"
+                                                 + checkingWord + "')",
+                                             Query.SQL);
       RowIterator rows = query.execute().getRows();
-      Value value = rows.nextRow().getValue("rep:spellcheck()");    
+      Value value = rows.nextRow().getValue("rep:spellcheck()");
       if (value != null) {
         suggestion = value.getString();
       }
-    }catch (Exception e) {
-    }finally{
-      if(session != null)
+    } catch (Exception e) {
+    } finally {
+      if (session != null)
         session.logout();
-    }   
+    }
     return suggestion;
   }
 
   /**
    * Search site content.
-   * 
+   *
    * @param queryCriteria the query criteria
    * @param queryManager the query manager
-   * 
+   *
    * @return the query result
-   * 
+   *
    * @throws Exception the exception
    */
   private QueryResult searchSiteContent(QueryCriteria queryCriteria, QueryManager queryManager) throws Exception {
-    SQLQueryBuilder queryBuilder = new SQLQueryBuilder();    
+    SQLQueryBuilder queryBuilder = new SQLQueryBuilder();
     mapQueryTypes(queryCriteria, queryBuilder);
-    if(queryCriteria.isFulltextSearch()) {
+    if (queryCriteria.isFulltextSearch()) {
       mapQueryPath(queryCriteria, queryBuilder);
-      mapFulltextQueryTearm(queryCriteria, queryBuilder); 
-    }else {
-      searchByNodeName(queryCriteria,queryBuilder);
-    }    
+      mapFulltextQueryTearm(queryCriteria, queryBuilder);
+    } else {
+      searchByNodeName(queryCriteria, queryBuilder);
+    }
     mapCategoriesCondition(queryCriteria,queryBuilder);
     mapDatetimeRangeSelected(queryCriteria,queryBuilder);
     mapMetadataProperties(queryCriteria,queryBuilder);
@@ -190,30 +211,30 @@ public class SiteSearchServiceImpl implements SiteSearchService {
 
   /**
    * Map query path.
-   * 
+   *
    * @param queryCriteria the query criteria
    * @param queryBuilder the query builder
-   * 
+   *
    * @throws Exception the exception
    */
-  private void mapQueryPath(final QueryCriteria queryCriteria,final SQLQueryBuilder queryBuilder) throws Exception {
+  private void mapQueryPath(final QueryCriteria queryCriteria, final SQLQueryBuilder queryBuilder) throws Exception {
     queryBuilder.setQueryPath(getSitePath(queryCriteria), PATH_TYPE.DECENDANTS);
   }
 
   /**
    * Gets the site path.
-   * 
+   *
    * @param queryCriteria the query criteria
-   * 
+   *
    * @return the site path
-   * 
+   *
    * @throws Exception the exception
    */
   private String getSitePath(final QueryCriteria queryCriteria) throws Exception {
     String siteName = queryCriteria.getSiteName();
     String sitePath = null;
     if (siteName != null) {
-      sitePath = livePortalManagerService.getPortalPathByName(siteName);      
+      sitePath = livePortalManagerService.getPortalPathByName(siteName);
     } else {
       String repository = repositoryService.getCurrentRepository().getConfiguration().getName();
       sitePath = configurationService.getLivePortalsLocation(repository).getPath();
@@ -223,79 +244,89 @@ public class SiteSearchServiceImpl implements SiteSearchService {
 
   /**
    * Map query term.
-   * 
+   *
    * @param queryCriteria the query criteria
    * @param queryBuilder the query builder
    */
   private void mapFulltextQueryTearm(final QueryCriteria queryCriteria,
-      final SQLQueryBuilder queryBuilder) {    
+                                     final SQLQueryBuilder queryBuilder) {
     String keyword = queryCriteria.getKeyword();
-    if(keyword == null || keyword.length() == 0)
+    if (keyword == null || keyword.length() == 0)
       return;
-    QueryTermHelper queryTermHelper = new QueryTermHelper();    
+    QueryTermHelper queryTermHelper = new QueryTermHelper();
     String queryTerm = null;
-    keyword = keyword.replaceAll("'","''");
+    keyword = keyword.replaceAll("'", "''");
     if (keyword.contains("*") || keyword.contains("?") || keyword.contains("~")) {
       queryTerm = queryTermHelper.contains(keyword).buildTerm();
     } else {
       queryTerm = queryTermHelper.contains(keyword).allowFuzzySearch().buildTerm();
-    }      
+    }
     String scope = queryCriteria.getFulltextSearchProperty();
-    if(QueryCriteria.ALL_PROPERTY_SCOPE.equals(scope) || scope == null) {
+    if (QueryCriteria.ALL_PROPERTY_SCOPE.equals(scope) || scope == null) {
       queryBuilder.contains(null, queryTerm, LOGICAL.NULL);
-    }else {
+    } else {
       queryBuilder.contains(scope, queryTerm, LOGICAL.NULL);
-    }                   
+    }
   }
 
   /**
    * Search by node name.
-   * 
+   *
    * @param queryCriteria the query criteria
    * @param queryBuilder the query builder
-   * 
+   *
    * @throws Exception the exception
    */
-  private void searchByNodeName(final QueryCriteria queryCriteria, final SQLQueryBuilder queryBuilder) throws Exception {    
-    queryBuilder.queryByNodeName(getSitePath(queryCriteria),queryCriteria.getKeyword());
-  }      
+  private void searchByNodeName(final QueryCriteria queryCriteria,
+                                final SQLQueryBuilder queryBuilder) throws Exception {
+    queryBuilder.queryByNodeName(getSitePath(queryCriteria), queryCriteria.getKeyword());
+  }
 
   /**
    * Map datetime range selected.
-   * 
+   *
    * @param queryCriteria the query criteria
    * @param queryBuilder the query builder
    */
-  private void mapDatetimeRangeSelected(final QueryCriteria queryCriteria, final SQLQueryBuilder queryBuilder) {
+  private void mapDatetimeRangeSelected(final QueryCriteria queryCriteria,
+                                        final SQLQueryBuilder queryBuilder) {
     DATE_RANGE_SELECTED selectedDateRange = queryCriteria.getDateRangeSelected();
-    if(selectedDateRange == null) return;
-    if(DATE_RANGE_SELECTED.CREATED == selectedDateRange) {
+    if (selectedDateRange == null)
+      return;
+    if (DATE_RANGE_SELECTED.CREATED == selectedDateRange) {
       DatetimeRange createdDateRange = queryCriteria.getCreatedDateRange();
-      queryBuilder.betweenDates("exo:dateCreated",createdDateRange.getFromDate(),createdDateRange.getToDate(),LOGICAL.AND);
-    }else if(DATE_RANGE_SELECTED.MODIFIDED == selectedDateRange){
+      queryBuilder.betweenDates("exo:dateCreated",
+                                createdDateRange.getFromDate(),
+                                createdDateRange.getToDate(),
+                                LOGICAL.AND);
+    } else if (DATE_RANGE_SELECTED.MODIFIDED == selectedDateRange) {
       DatetimeRange modifiedDateRange = queryCriteria.getLastModifiedDateRange();
-      queryBuilder.betweenDates("exo:dateModified",modifiedDateRange.getFromDate(),modifiedDateRange.getToDate(),LOGICAL.AND);
-    }else if(DATE_RANGE_SELECTED.START_PUBLICATION == selectedDateRange) {
+      queryBuilder.betweenDates("exo:dateModified",
+                                modifiedDateRange.getFromDate(),
+                                modifiedDateRange.getToDate(),
+                                LOGICAL.AND);
+    } else if (DATE_RANGE_SELECTED.START_PUBLICATION == selectedDateRange) {
       throw new UnsupportedOperationException();
-    }else if(DATE_RANGE_SELECTED.END_PUBLICATION == selectedDateRange) {
+    } else if (DATE_RANGE_SELECTED.END_PUBLICATION == selectedDateRange) {
       throw new UnsupportedOperationException();
-    }    
-  }  
+    }
+  }
 
   /**
    * Map categories condition.
-   * 
+   *
    * @param queryCriteria the query criteria
    * @param queryBuilder the query builder
    */
   private void mapCategoriesCondition(QueryCriteria queryCriteria, SQLQueryBuilder queryBuilder) {
     String[] categoryUUIDs = queryCriteria.getCategoryUUIDs();
-    if(categoryUUIDs == null) return;
+    if (categoryUUIDs == null)
+      return;
     queryBuilder.openGroup(LOGICAL.AND);
-    queryBuilder.like("exo:category",categoryUUIDs[0],LOGICAL.NULL);
-    if(categoryUUIDs.length>1) {
-      for(int i=1; i<categoryUUIDs.length; i++) {
-        queryBuilder.like("exo:category",categoryUUIDs[i],LOGICAL.OR);
+    queryBuilder.like("exo:category", categoryUUIDs[0], LOGICAL.NULL);
+    if (categoryUUIDs.length > 1) {
+      for (int i = 1; i < categoryUUIDs.length; i++) {
+        queryBuilder.like("exo:category", categoryUUIDs[i], LOGICAL.OR);
       }
     }
     queryBuilder.closeGroup();
@@ -303,18 +334,19 @@ public class SiteSearchServiceImpl implements SiteSearchService {
 
   /**
    * Map metadata properties.
-   * 
+   *
    * @param queryCriteria the query criteria
    * @param queryBuilder the query builder
    */
   private void mapMetadataProperties(final QueryCriteria queryCriteria, SQLQueryBuilder queryBuilder) {
     QueryProperty[] queryProperty = queryCriteria.getQueryMetadatas();
-    if(queryProperty == null) return;
+    if (queryProperty == null)
+      return;
     queryBuilder.openGroup(LOGICAL.AND);
-    queryBuilder.like(queryProperty[0].getName(),queryProperty[0].getName(),LOGICAL.NULL);
-    if(queryProperty.length>1) {
-      for(int i=1; i<queryProperty.length; i++) {
-        queryBuilder.like(queryProperty[i].getName(),queryProperty[i].getName(),LOGICAL.OR);
+    queryBuilder.like(queryProperty[0].getName(), queryProperty[0].getName(), LOGICAL.NULL);
+    if (queryProperty.length > 1) {
+      for (int i = 1; i < queryProperty.length; i++) {
+        queryBuilder.like(queryProperty[i].getName(), queryProperty[i].getName(), LOGICAL.OR);
       }
     }
     queryBuilder.closeGroup();
@@ -322,16 +354,18 @@ public class SiteSearchServiceImpl implements SiteSearchService {
 
   /**
    * Map query specific node types.
-   * 
+   *
    * @param queryCriteria the query criteria
    * @param queryBuilder the query builder
    * @param nodeTypeManager the node type manager
-   * 
+   *
    * @throws Exception the exception
    */
-  private void mapQuerySpecificNodeTypes( final QueryCriteria queryCriteria, final SQLQueryBuilder queryBuilder, final NodeTypeManager nodeTypeManager) throws Exception {
+  private void mapQuerySpecificNodeTypes(final QueryCriteria queryCriteria,
+                                         final SQLQueryBuilder queryBuilder,
+                                         final NodeTypeManager nodeTypeManager) throws Exception {
     String[] contentTypes = queryCriteria.getContentTypes();
-    NodeType fistType = nodeTypeManager.getNodeType(contentTypes[0]);    
+    NodeType fistType = nodeTypeManager.getNodeType(contentTypes[0]);
     queryBuilder.openGroup(LOGICAL.AND);
     if (fistType.isMixin()) {
       queryBuilder.like("jcr:mixinTypes", contentTypes[0], LOGICAL.NULL);
@@ -347,26 +381,26 @@ public class SiteSearchServiceImpl implements SiteSearchService {
         } else {
           queryBuilder.equal("jcr:primaryType", type, LOGICAL.OR);
         }
-      } 
-    }    
+      }
+    }
     queryBuilder.closeGroup();
-    //Remove some specific mimtype    
+    //Remove some specific mimtype
     queryBuilder.openGroup(LOGICAL.AND_NOT);
     queryBuilder.like("jcr:mixinTypes", "exo:cssFile", LOGICAL.NULL);
     queryBuilder.like("jcr:mixinTypes","exo:jsFile",LOGICAL.OR);
     queryBuilder.closeGroup();
   }
-  
+
   /**
    * Map query types.
-   * 
+   *
    * @param queryCriteria the query criteria
    * @param queryBuilder the query builder
-   * 
+   *
    * @throws Exception the exception
    */
-  private void mapQueryTypes(final QueryCriteria queryCriteria, final SQLQueryBuilder queryBuilder) throws Exception {    
-    queryBuilder.selectTypes(null);    
+  private void mapQueryTypes(final QueryCriteria queryCriteria, final SQLQueryBuilder queryBuilder) throws Exception {
+    queryBuilder.selectTypes(null);
     // Searh on nt:base
     queryBuilder.fromNodeTypes(null);
     ManageableRepository currentRepository = repositoryService.getCurrentRepository();
@@ -376,8 +410,8 @@ public class SiteSearchServiceImpl implements SiteSearchService {
     if(contentTypes != null && contentTypes.length>0 && queryCriteria.getKeyword() == null) {
       mapQuerySpecificNodeTypes(queryCriteria,queryBuilder,manager);
       return;
-    }    
-    List<String> selectedNodeTypes = templateService.getDocumentTemplates();    
+    }
+    List<String> selectedNodeTypes = templateService.getDocumentTemplates();
     queryBuilder.openGroup(LOGICAL.AND);
     queryBuilder.equal("jcr:primaryType", "nt:resource", LOGICAL.NULL);
     // query on exo:rss-enable nodetypes for title, summary field
@@ -407,15 +441,15 @@ public class SiteSearchServiceImpl implements SiteSearchService {
         queryBuilder.equal("jcr:primaryType", type, LOGICAL.OR);
       }
     }
-    queryBuilder.closeGroup();    
+    queryBuilder.closeGroup();
     //unwanted document types: exo:cssFile, exo:jsFile
     if(excludeMimeTypes.size()<1) return;
     queryBuilder.openGroup(LOGICAL.AND_NOT);
-    String[] mimetypes = excludeMimeTypes.toArray(new String[]{});      
+    String[] mimetypes = excludeMimeTypes.toArray(new String[]{});
     queryBuilder.equal("jcr:mimeType",mimetypes[0],LOGICAL.NULL);
     for(int i=1; i<mimetypes.length; i++) {
       queryBuilder.equal("jcr:mimeType",mimetypes[i],LOGICAL.OR);
-    }       
+    }
     queryBuilder.closeGroup();
     //Unwanted document by mixin nodetypes
     queryBuilder.openGroup(LOGICAL.AND_NOT);
@@ -426,11 +460,11 @@ public class SiteSearchServiceImpl implements SiteSearchService {
 
   /**
    * Order by.
-   * 
+   *
    * @param queryCriteria the query criteria
    * @param queryBuilder the query builder
    */
   private void orderBy(final QueryCriteria queryCriteria, final SQLQueryBuilder queryBuilder) {
     queryBuilder.orderBy("jcr:score", ORDERBY.DESC);
-  }  
+  }
 }

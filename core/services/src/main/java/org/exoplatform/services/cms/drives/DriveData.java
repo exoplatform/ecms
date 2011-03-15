@@ -22,7 +22,7 @@ import java.util.List;
  * Created by The eXo Platform SARL
  * Author : Nguyen Quang Hung
  *          nguyenkequanghung@yahoo.com
- * Feb 27, 2006 
+ * Feb 27, 2006
  */
 public class DriveData implements Comparable<DriveData> {
 
@@ -42,22 +42,22 @@ public class DriveData implements Comparable<DriveData> {
   private boolean showHiddenNode ;
   private String allowCreateFolders ;
   private String allowNodeTypesOnTree;
-  
+
   public  DriveData(){}
 
   /**
-   * 
+   *
    * @return the name of drive
    */
   public String getName() { return name ; }
   /**
    * Register drive name
-   * @param name  the name of DriveData 
+   * @param name  the name of DriveData
    */
-  public void setName(String name) { this.name = name ; }  
+  public void setName(String name) { this.name = name ; }
 
   /**
-   * @return the name of repository 
+   * @return the name of repository
    * @deprecated Since WCM 2.1-CLOUD-DEV you should use {@link #buildDocumentTypePattern()} instead.
    */
   public String getRepository() { return repository ; }
@@ -67,9 +67,9 @@ public class DriveData implements Comparable<DriveData> {
    * @deprecated Since WCM 2.1-CLOUD-DEV you should use {@link #buildDocumentTypePattern()} instead.
    */
   public void setRepository(String rp) { repository = rp ; }
-  
+
   /**
-   * 
+   *
    * @return the name of workspace
    */
   public String getWorkspace() { return workspace ; }
@@ -78,9 +78,9 @@ public class DriveData implements Comparable<DriveData> {
    * @param ws the workspace name
    */
   public void setWorkspace(String ws) { workspace = ws ; }
-  
+
   /**
-   * 
+   *
    * @return the permissions of drive
    */
   public String getPermissions() { return this.permissions ; }
@@ -91,7 +91,7 @@ public class DriveData implements Comparable<DriveData> {
   public void setPermissions(String permissions) { this.permissions = permissions ; }
 
   /**
-   * 
+   *
    * @return the home path of drive
    */
   public String getHomePath() { return homePath ; }
@@ -100,10 +100,10 @@ public class DriveData implements Comparable<DriveData> {
    * @param path the home path of drive
    */
   public void setHomePath(String path) { homePath = path ; }
-  
+
   /**
-   * 
-   * @return icon path 
+   *
+   * @return icon path
    */
   public String getIcon() { return icon ; }
   /**
@@ -111,9 +111,9 @@ public class DriveData implements Comparable<DriveData> {
    * @param ico icon path
    */
   public void setIcon(String ico) { icon = ico ; }
-  
+
   /**
-   * 
+   *
    * @return the folder type of drive
    */
   public String getAllowCreateFolders() { return allowCreateFolders ; }
@@ -122,13 +122,13 @@ public class DriveData implements Comparable<DriveData> {
    * @param allowCreateFolder folder type
    */
   public void setAllowCreateFolders(String allowCreateFolders) { this.allowCreateFolders = allowCreateFolders ; }
-  
+
   public String getAllowNodeTypesOnTree() { return allowNodeTypesOnTree ; }
-  
+
   public void setAllowNodeTypesOnTree(String allowNodeTypesOnTree) { this.allowNodeTypesOnTree = allowNodeTypesOnTree ; }
 
   /**
-   * 
+   *
    * @return  the views of drive
    */
   public String getViews() { return views ; }
@@ -137,21 +137,21 @@ public class DriveData implements Comparable<DriveData> {
    * @param v view name
    */
   public void setViews(String v) { views = v ; }
-  
+
   /**
-   * 
+   *
    * @return the state of view preference drive
    */
   public boolean getViewPreferences() { return viewPreferences ; }
-  
+
   /**
    * Register the state of view preference to drive
    * @param b  the state of view preference
    */
   public void setViewPreferences(boolean b) { viewPreferences = b ; }
-  
+
   /**
-   * 
+   *
    * @return the state of view non document node type of drive
    */
   public boolean getViewNonDocument() { return viewNonDocument ; }
@@ -161,7 +161,7 @@ public class DriveData implements Comparable<DriveData> {
    */
   public void setViewNonDocument(boolean b) { viewNonDocument = b ; }
   /**
-   * 
+   *
    * @return the state of view side bar of drive
    */
   public boolean getViewSideBar() { return viewSideBar ; }
@@ -170,9 +170,9 @@ public class DriveData implements Comparable<DriveData> {
    * @param b state of view side bar
    */
   public void setViewSideBar(boolean b) { viewSideBar = b ; }
-  
+
   /**
-   * 
+   *
    * @return the state of show hidden node of drive
    */
   public boolean getShowHiddenNode() { return showHiddenNode ; }
@@ -181,19 +181,19 @@ public class DriveData implements Comparable<DriveData> {
    * @param b state of show hidden node
    */
   public void setShowHiddenNode(boolean b) { showHiddenNode = b ; }
-  
+
   /**
-   * 
+   *
    * @return  the array of permission
    */
-  public String[] getAllPermissions() {    
+  public String[] getAllPermissions() {
     return permissions.split(",") ;
   }
 
   /**
    * Check the state of permission is existing or not
    * @param allPermissions  the string array permission of drive
-   * @param permission  permission name 
+   * @param permission  permission name
    * @return the state of permission is existing or not.
    */
   public boolean hasPermission(String[] allPermissions, String permission) {
@@ -213,7 +213,7 @@ public class DriveData implements Comparable<DriveData> {
           if(arrPer.length == 2 && arrPer[1].equals(array[1])) return true;
         }
       }
-    }    
+    }
     return permissionList.contains(permission) ;
   }
 

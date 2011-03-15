@@ -50,21 +50,21 @@ public class TestSearchService extends BaseWCMTestCase {
   private SiteSearchService siteSearchService;
 
   private WCMPublicationService wcmPublicationService;
-  
+
   private WebpagePublicationPlugin publicationPlugin ;
-  
+
   private UserPortalConfigService userPortalConfigService;
 
   private String searchKeyword = "This is";
 
   private SessionProvider sessionProvider;
-  
+
   private POMSessionManager pomManager;
-  
+
   private POMSession  pomSession;
-  
-  
-  private boolean searchPageChecked = true; 
+
+
+  private boolean searchPageChecked = true;
 
   private boolean searchDocumentChecked = true;
 
@@ -73,7 +73,7 @@ public class TestSearchService extends BaseWCMTestCase {
   private int seachItemsPerPage = 100;
 
   private boolean searchIsLiveMode = false;
-  
+
   public void setUp() throws Exception {
     super.setUp();
     queryCriteria = new QueryCriteria();
@@ -82,13 +82,13 @@ public class TestSearchService extends BaseWCMTestCase {
     pomManager = WCMCoreUtils.getService(POMSessionManager.class);
     sessionProvider = WCMCoreUtils.getSystemSessionProvider();
     wcmPublicationService = WCMCoreUtils.getService(WCMPublicationService.class);
-    
+
     publicationPlugin = new DumpPublicationPlugin();
     publicationPlugin.setName(DumpPublicationPlugin.LIFECYCLE_NAME);
     wcmPublicationService.addPublicationPlugin(publicationPlugin);
-    
+
     addDocuments();
-    
+
     queryCriteria.setSiteName(searchSelectedPortal);
     queryCriteria.setKeyword(searchKeyword);
     if (searchDocumentChecked) {
@@ -104,11 +104,11 @@ public class TestSearchService extends BaseWCMTestCase {
 
   private void addDocuments() throws Exception {
     Node classicPortal = (Node)session.getItem("/sites content/live/classic/web contents");
-    addChildNodes(classicPortal); 
-    
+    addChildNodes(classicPortal);
+
     Node sharedPortal = (Node)session.getItem("/sites content/live/shared/documents");
     addChildNodes(sharedPortal);
-    
+
 //  private void addAnotherNode() throws Exception{
 //  Node parentNode = (Node)session.getItem("/sites content/live");
 //  for(int i = 0; i < 10; i ++){
@@ -117,7 +117,7 @@ public class TestSearchService extends BaseWCMTestCase {
 //  session.save();
 //}
   }
-  
+
   private void addChildNodes(Node parentNode)throws Exception{
     if (pomManager.getSession() == null) pomSession = pomManager.openSession();
     Page page = userPortalConfigService.getPage("portal::classic::testpage");
@@ -129,7 +129,7 @@ public class TestSearchService extends BaseWCMTestCase {
       page.setOwnerId("classic");
       userPortalConfigService.create(page);
     }
-    
+
     Node webContentNode = null;
     HashMap<String, String> context = null;
     // Create 5 nodes which have status is PUBLISHED
@@ -158,7 +158,7 @@ public class TestSearchService extends BaseWCMTestCase {
   }
 
   private WCMPaginatedQueryResult getSearchResult() throws Exception{
-    return siteSearchService.searchSiteContents(WCMCoreUtils.getSystemSessionProvider(), queryCriteria, seachItemsPerPage, false); 
+    return siteSearchService.searchSiteContents(WCMCoreUtils.getSystemSessionProvider(), queryCriteria, seachItemsPerPage, false);
   }
 
   /**
@@ -168,7 +168,7 @@ public class TestSearchService extends BaseWCMTestCase {
    * searchDocumentChecked = true<br>
    * searchSelectedPortal = shared<br>
    * searchIsLiveMode = false<br>
-   * 
+   *
    * @throws Exception the exception
    */
   public void testSearchSharedPortalNotLiveMode() throws Exception {
@@ -183,7 +183,7 @@ public class TestSearchService extends BaseWCMTestCase {
    * searchDocumentChecked = true<br>
    * searchSelectedPortal = shared<br>
    * searchIsLiveMode = true<br>
-   * 
+   *
    * @throws Exception the exception
    */
   public void testSearchSharedPortalLiveMode() throws Exception {
@@ -200,7 +200,7 @@ public class TestSearchService extends BaseWCMTestCase {
    * searchDocumentChecked = true<br>
    * searchSelectedPortal = null<br>
    * searchIsLiveMode = false<br>
-   * 
+   *
    * @throws Exception the exception
    */
   public void testSearchAllPortalNotLiveMode() throws Exception {
@@ -217,7 +217,7 @@ public class TestSearchService extends BaseWCMTestCase {
    * searchDocumentChecked = true<br>
    * searchSelectedPortal = null<br>
    * searchIsLiveMode = true<br>
-   * 
+   *
    * @throws Exception the exception
    */
   public void testSearchAllPortalLiveMode() throws Exception {
@@ -520,8 +520,8 @@ public class TestSearchService extends BaseWCMTestCase {
    * searchSelectedPortal = null<br>
    * searchIsLiveMode = true<br>
    * keyWord = null;
-   * @throws RepositoryException 
-   * @throws PathNotFoundException 
+   * @throws RepositoryException
+   * @throws PathNotFoundException
    */
   public void testSearchPagesDocument_CategoryUUIDS() throws Exception{
     this.searchIsLiveMode = true;
@@ -541,7 +541,7 @@ public class TestSearchService extends BaseWCMTestCase {
     queryCriteria.setFulltextSearchProperty("dc:description");
     assertEquals(0, siteSearchService.searchSiteContents(sessionProvider, queryCriteria, 10, true).getTotalNodes());
   }
-  
+
   public void testSearchByDocumentType()throws Exception{
     String documentType = "exo:webContent";
     this.searchIsLiveMode = true;
@@ -551,7 +551,7 @@ public class TestSearchService extends BaseWCMTestCase {
     queryCriteria.setContentTypes(documentType.split(","));
     assertEquals(10, siteSearchService.searchSiteContents(sessionProvider, queryCriteria, 10, true).getTotalNodes());
   }
-  
+
   public void testSearchByDocumentAuthor()throws Exception{
     String author = "root";
     this.searchIsLiveMode = true;
@@ -561,7 +561,7 @@ public class TestSearchService extends BaseWCMTestCase {
     queryCriteria.setAuthors(new String[]{author});
     assertEquals(10, siteSearchService.searchSiteContents(sessionProvider, queryCriteria, 10, true).getTotalNodes());
   }
-  
+
   public void testSearchByMimeTypes()throws Exception{
     this.searchIsLiveMode = true;
     this.searchKeyword = null;
@@ -570,7 +570,7 @@ public class TestSearchService extends BaseWCMTestCase {
     queryCriteria.setMimeTypes(new String[]{"exo:webContent", " exo:siteBreadcrumb"});
     assertEquals(10, siteSearchService.searchSiteContents(sessionProvider, queryCriteria, 10, true).getTotalNodes());
   }
-  
+
   public void testSearchByTagUUID() throws Exception{
     Node node = (Node)session.getItem("/sites content/live/classic/web contents/webcontent0");
     String uuid = node.getUUID();
@@ -582,23 +582,23 @@ public class TestSearchService extends BaseWCMTestCase {
     queryCriteria.setTagUUIDs(new String[]{uuid});
     assertEquals(10, siteSearchService.searchSiteContents(sessionProvider, queryCriteria, 10, true).getTotalNodes());
   }
-  
+
   protected void tearDown() throws Exception {
     super.tearDown();
-    
-    NodeIterator iterator = null; 
+
+    NodeIterator iterator = null;
     Node classicPortal = (Node)session.getItem("/sites content/live/classic/web contents");
     iterator = classicPortal.getNodes();
     while (iterator.hasNext()) {
       iterator.nextNode().remove();
     }
-    
+
     Node sharedPortal = (Node)session.getItem("/sites content/live/shared/documents");
     iterator = sharedPortal.getNodes();
     while (iterator.hasNext()) {
       iterator.nextNode().remove();
     }
-    
+
     session.save();
   }
 }

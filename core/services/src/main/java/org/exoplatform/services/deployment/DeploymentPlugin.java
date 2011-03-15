@@ -26,36 +26,36 @@ import org.exoplatform.services.jcr.ext.common.SessionProvider;
  * Sep 6, 2008
  */
 public abstract class DeploymentPlugin implements ComponentPlugin {
-  
-  private String name;  
-  private String desc;      
-  
+
+  private String name;
+  private String desc;
+
   /**
-   * This method used to deploy data from sourcePath to target that describe in 
+   * This method used to deploy data from sourcePath to target that describe in
    * <code>DeploymentDescriptor</code>.
-   * 
+   *
    * @throws Exception the exception
    */
   public abstract void deploy(SessionProvider sessionProvider) throws Exception;
-  
+
   /* (non-Javadoc)
    * @see org.exoplatform.container.component.ComponentPlugin#getName()
    */
   public String getName() { return name;  }
-  
+
   /* (non-Javadoc)
    * @see org.exoplatform.container.component.ComponentPlugin#setName(java.lang.String)
    */
   public void setName(String s) { this.name = s; }
-  
+
   /* (non-Javadoc)
    * @see org.exoplatform.container.component.ComponentPlugin#getDescription()
    */
   public String getDescription() { return desc; }
-  
+
   /* (non-Javadoc)
    * @see org.exoplatform.container.component.ComponentPlugin#setDescription(java.lang.String)
    */
-  public void setDescription(String s) { this.desc = s; }  
+  public void setDescription(String s) { this.desc = s; }
 
 }

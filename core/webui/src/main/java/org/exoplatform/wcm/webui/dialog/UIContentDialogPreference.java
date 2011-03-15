@@ -29,34 +29,34 @@ import org.exoplatform.webui.event.EventListener;
  * Created by The eXo Platform SAS
  * Author : Phan Le Thanh Chuong
  *          chuong.phan@exoplatform.com, phan.le.thanh.chuong@gmail.com
- * Oct 29, 2009  
+ * Oct 29, 2009
  */
 @ComponentConfig (
-	template = "system:/groovy/webui/form/ext/UITabPaneWithAction.gtmpl",
-	events = {
-		@EventConfig(listeners = UIContentDialogPreference.BackActionListener.class)
-	}
+  template = "system:/groovy/webui/form/ext/UITabPaneWithAction.gtmpl",
+  events = {
+    @EventConfig(listeners = UIContentDialogPreference.BackActionListener.class)
+  }
 )
 public class UIContentDialogPreference extends UITabPane {
 
-	public String[] getActions() {
-		return new String[] {"Back"};
-	}
-	
-	public void init() throws Exception {
-		UIPermissionManager permissionManager = addChild(UIPermissionManager.class, null, null);
-		permissionManager.updateGrid();
-		setSelectedTab(permissionManager.getId());
-	}
-	
-	public static class BackActionListener extends EventListener<UIContentDialogPreference> {
+  public String[] getActions() {
+    return new String[] {"Back"};
+  }
 
-		public void execute(Event<UIContentDialogPreference> event) throws Exception {
-			UIContentDialogPreference contentDialogPreference = event.getSource();
-			UIPopupContainer popupContainer = contentDialogPreference.getAncestorOfType(UIPopupContainer.class);
-			UIContentDialogForm contentDialogForm = popupContainer.getChild(UIContentDialogForm.class);
-			popupContainer.removeChildById(contentDialogForm.getId());
-			Utils.updatePopupWindow(contentDialogPreference, contentDialogForm, UIContentDialogForm.CONTENT_DIALOG_FORM_POPUP_WINDOW);
-		}
-	}
+  public void init() throws Exception {
+    UIPermissionManager permissionManager = addChild(UIPermissionManager.class, null, null);
+    permissionManager.updateGrid();
+    setSelectedTab(permissionManager.getId());
+  }
+
+  public static class BackActionListener extends EventListener<UIContentDialogPreference> {
+
+    public void execute(Event<UIContentDialogPreference> event) throws Exception {
+      UIContentDialogPreference contentDialogPreference = event.getSource();
+      UIPopupContainer popupContainer = contentDialogPreference.getAncestorOfType(UIPopupContainer.class);
+      UIContentDialogForm contentDialogForm = popupContainer.getChild(UIContentDialogForm.class);
+      popupContainer.removeChildById(contentDialogForm.getId());
+      Utils.updatePopupWindow(contentDialogPreference, contentDialogForm, UIContentDialogForm.CONTENT_DIALOG_FORM_POPUP_WINDOW);
+    }
+  }
 }

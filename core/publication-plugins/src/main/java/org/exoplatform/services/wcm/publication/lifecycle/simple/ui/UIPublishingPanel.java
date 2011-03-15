@@ -43,25 +43,25 @@ public class UIPublishingPanel extends UIForm implements UIPopupComponent {
 
   /**
    * Gets the node.
-   * 
+   *
    * @return the node
    */
   public Node getNode() {
     return NodeLocation.getNodeByLocation(currentNodeLocation);
   }
-  
+
   /**
    * Sets the node.
-   * 
+   *
    * @param node the new node
    */
   public void setNode(Node node) {
     currentNodeLocation = NodeLocation.make(node);
-  }  
+  }
 
   /**
    * Instantiates a new uI publishing panel.
-   * 
+   *
    * @throws Exception the exception
    */
   public UIPublishingPanel() throws Exception {
@@ -71,11 +71,11 @@ public class UIPublishingPanel extends UIForm implements UIPopupComponent {
 
   /**
    * Inits the panel.
-   * 
+   *
    * @param node the node
    * @param portalName the portal name
    * @param runningPortals the running portals
-   * 
+   *
    * @throws Exception the exception
    */
   public void initPanel(Node node,String portalName,List<String> runningPortals) throws Exception {
@@ -84,13 +84,11 @@ public class UIPublishingPanel extends UIForm implements UIPopupComponent {
     publicationComponentStatus.setNode(getNode());
   }
 
-	public void activate() throws Exception {
-	  // TODO Auto-generated method stub
-	  
+  public void activate() throws Exception {
+
   }
 
-	public void deActivate() throws Exception {
-	  // TODO Auto-generated method stub
-	  
+  public void deActivate() throws Exception {
+
   }
 }

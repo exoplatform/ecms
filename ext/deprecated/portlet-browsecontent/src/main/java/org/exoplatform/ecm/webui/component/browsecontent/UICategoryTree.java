@@ -39,7 +39,7 @@ import org.exoplatform.webui.event.EventListener;
  * Created by The eXo Platform SARL
  * Author : Pham Tuan
  *          tuan.pham@exoplatform.com
- * 18-07-2007  
+ * 18-07-2007
  */
 @ComponentConfig(
     template = "app:/groovy/webui/component/browse/UICategoryTree.gtmpl",
@@ -47,20 +47,20 @@ import org.exoplatform.webui.event.EventListener;
         @EventConfig(listeners = UICategoryTree.SelectActionListener.class)
     }
 )
-public class UICategoryTree extends UIComponent {  
-  
-  private BCTreeNode treeRoot_ ; 
-  public UICategoryTree() { }  
-  
+public class UICategoryTree extends UIComponent {
+
+  private BCTreeNode treeRoot_ ;
+  public UICategoryTree() { }
+
   public BCTreeNode getTreeRoot() { return this.treeRoot_ ;}
-  public void setTreeRoot(Node node) throws Exception { 
-    treeRoot_ = new BCTreeNode(node) ;    
+  public void setTreeRoot(Node node) throws Exception {
+    treeRoot_ = new BCTreeNode(node) ;
   }
-  
+
   public Node getRootNode() throws Exception {return getAncestorOfType(UIBrowseContainer.class).getRootNode() ;}
 
   public String getIcons(Node node, String type) throws Exception {
-    return Utils.getNodeTypeIcon(node, type) ; 
+    return Utils.getNodeTypeIcon(node, type) ;
   }
 
   protected boolean isCategories(NodeType nodeType) {
@@ -69,10 +69,10 @@ public class UICategoryTree extends UIComponent {
     }
     return false ;
   }
-  
+
   protected boolean isCategories(Node node) throws RepositoryException {
     NodeType nodeType = node.getPrimaryNodeType();
-    String primaryTypeName = nodeType.getName(); 
+    String primaryTypeName = nodeType.getName();
     if(node.isNodeType(Utils.EXO_SYMLINK)) {
       primaryTypeName = node.getProperty(Utils.EXO_PRIMARYTYPE).getString();
     }
@@ -81,18 +81,18 @@ public class UICategoryTree extends UIComponent {
     }
     return false;
   }
-  
+
   public List<Node> getCategoryList(Node node) throws Exception{
     List<Node> nodes = new ArrayList<Node>() ;
     node = getTargetNode(node);
     NodeIterator item = node.getNodes() ;
     while(item.hasNext()) {
       Node child = item.nextNode() ;
-      if(isCategories(child)) nodes.add(child) ; 
+      if(isCategories(child)) nodes.add(child) ;
     }
     return nodes ;
   }
-  
+
   public void buildTree(String path) throws Exception {
     getTreeRoot().getChildren().clear() ;
     String[] arr = path.replaceFirst(getTreeRoot().getPath(), "").split("/") ;
@@ -105,11 +105,11 @@ public class UICategoryTree extends UIComponent {
     }
     temp.setChildren(getCategoryList(temp.getNode())) ;
   }
-  
+
   public boolean isSymLink(Node node) throws RepositoryException {
     return Utils.isSymLink(node);
   }
-  
+
   public Node getTargetNode(Node node) throws ItemNotFoundException, RepositoryException {
     if(Utils.isSymLink(node)) {
       LinkManager linkManager = getApplicationComponent(LinkManager.class);
@@ -117,7 +117,7 @@ public class UICategoryTree extends UIComponent {
     }
     return node;
   }
-  
+
   static public class SelectActionListener extends EventListener<UICategoryTree> {
     public void execute(Event<UICategoryTree> event) throws Exception {
       UICategoryTree cateTree = event.getSource() ;

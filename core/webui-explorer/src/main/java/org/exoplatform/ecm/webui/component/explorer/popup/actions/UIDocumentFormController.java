@@ -46,32 +46,32 @@ import org.exoplatform.webui.form.UIFormSelectBox;
  * Created by The eXo Platform SARL
  * Author : Pham Tuan
  *          phamtuanchip@yahoo.de
- * Nov 8, 2006 10:16:18 AM 
+ * Nov 8, 2006 10:16:18 AM
  */
 
 @ComponentConfig(
-		template  = "app:/groovy/webui/component/explorer/UIDocumentFormController.gtmpl"		
+    template  = "app:/groovy/webui/component/explorer/UIDocumentFormController.gtmpl"
 )
 
 public class UIDocumentFormController extends UIContainer implements UIPopupComponent {
 
   private static final Log LOG  = ExoLogger.getLogger("UIDocumentFormController");
-  
+
   private String defaultDocument_ ;
   private static String DEFAULT_VALUE = "exo:article" ;
   private Node currentNode_ ;
-  private String repository_ ;  
-  
+  private String repository_ ;
+
   private String OPTION_BLOCK_EXTENSION_TYPE = "org.exoplatform.ecm.dms.UIOptionBlockPanel";
   private List<UIComponent> listExtenstion = new ArrayList<UIComponent>();
-  private boolean isDisplayOptionPanel = false;  
+  private boolean isDisplayOptionPanel = false;
 
   public UIDocumentFormController() throws Exception {
     addChild(UISelectDocumentForm.class, null, null);
     UIDocumentForm uiDocumentForm = createUIComponent(UIDocumentForm.class, null, null) ;
     uiDocumentForm.setContentType(DEFAULT_VALUE);
-    uiDocumentForm.addNew(true);    
-    addChild(uiDocumentForm);           
+    uiDocumentForm.addNew(true);
+    addChild(uiDocumentForm);
   }
 
   public void setCurrentNode(Node node) { currentNode_ = node ; }
@@ -88,7 +88,7 @@ public class UIDocumentFormController extends UIContainer implements UIPopupComp
   }
 
   public List<SelectItemOption<String>> getListFileType() throws Exception {
-    List<SelectItemOption<String>> options = new ArrayList<SelectItemOption<String>>();    
+    List<SelectItemOption<String>> options = new ArrayList<SelectItemOption<String>>();
     TemplateService templateService = getApplicationComponent(TemplateService.class) ;
     List<String> acceptableContentTypes = templateService.getCreationableContentTypes(currentNode_);
     if(acceptableContentTypes.size() == 0) return options;
@@ -101,9 +101,9 @@ public class UIDocumentFormController extends UIContainer implements UIPopupComp
           options.add(new SelectItemOption<String>(label, contentType));
         }
       } catch (AccessControlException e) {
-      } catch (Exception e) {  
+      } catch (Exception e) {
       }
-    }    
+    }
     Collections.sort(options, new ItemOptionNameComparator()) ;
     if(options.size()>0) {
       defaultDocument_ = options.get(0).getValue();
@@ -115,8 +115,8 @@ public class UIDocumentFormController extends UIContainer implements UIPopupComp
       } else {
         this.removeChild(UISelectDocumentForm.class);
       }
-      
-    }        
+
+    }
     return options ;
   }
 
@@ -142,7 +142,7 @@ public class UIDocumentFormController extends UIContainer implements UIPopupComp
   }
 
   @SuppressWarnings("unchecked")
-	@Override
+  @Override
   public <T extends UIComponent> T setRendered(boolean rendered)
   {
      UIComponent res = super.setRendered(rendered);
@@ -156,7 +156,7 @@ public class UIDocumentFormController extends UIContainer implements UIPopupComp
      return (T)res;
   }
 
-  @Override  
+  @Override
   public void processRender(WebuiRequestContext context) throws Exception {
     UIPopupWindow uiPopup = getAncestorOfType(UIPopupWindow.class);
     if (uiPopup != null && !uiPopup.isShow()) {
@@ -164,19 +164,19 @@ public class UIDocumentFormController extends UIContainer implements UIPopupComp
     }
     super.processRender(context);
   }
-   
+
   /*
-   * 
+   *
    * This method get Option Block Panel extenstion and add it into this
-   * 
+   *
    * */
   public void addOptionBlockPanel() throws Exception {
-  	  	
-  	UIExtensionManager manager = getApplicationComponent(UIExtensionManager.class);
+
+    UIExtensionManager manager = getApplicationComponent(UIExtensionManager.class);
      List<UIExtension> extensions = manager.getUIExtensions(OPTION_BLOCK_EXTENSION_TYPE);
-          
+
      for (UIExtension extension : extensions) {
-       UIComponent uicomp = manager.addUIExtension(extension, null, this);       
+       UIComponent uicomp = manager.addUIExtension(extension, null, this);
        uicomp.setRendered(false);
        listExtenstion.add(uicomp);
      }
@@ -184,38 +184,38 @@ public class UIDocumentFormController extends UIContainer implements UIPopupComp
   /*
    * This method checks and returns true if the Option Block Panel is configured to display, else it returns false
    * */
-  public boolean isHasOptionBlockPanel() {  	  	  	
-  	UIExtensionManager manager = getApplicationComponent(UIExtensionManager.class);
+  public boolean isHasOptionBlockPanel() {
+    UIExtensionManager manager = getApplicationComponent(UIExtensionManager.class);
      List<UIExtension> extensions = manager.getUIExtensions(OPTION_BLOCK_EXTENSION_TYPE);
      if(extensions != null) {
-    	 return true;
-     }  	
-  	return false;
+       return true;
+     }
+    return false;
   }
   public void setDisplayOptionBlockPanel(boolean display) {
-  	for(UIComponent uicomp : listExtenstion) {
-  		uicomp.setRendered(display);
-  	}
-  	isDisplayOptionPanel = display;
+    for(UIComponent uicomp : listExtenstion) {
+      uicomp.setRendered(display);
+    }
+    isDisplayOptionPanel = display;
   }
   public boolean isDisplayOptionBlockPanel() {
-  	return isDisplayOptionPanel;
+    return isDisplayOptionPanel;
   }
   public void initOptionBlockPanel() throws Exception {
-  	if(isHasOptionBlockPanel()) {  		
-  		addOptionBlockPanel(); 
-  		UIOptionBlockPanel optionBlockPanel = this.getChild(UIOptionBlockPanel.class);
-  		
-  		if(optionBlockPanel.isHasOptionBlockExtension()) {
-  			optionBlockPanel.addOptionBlockExtension();
-  			setDisplayOptionBlockPanel(true);
-  		}
-    }  
+    if(isHasOptionBlockPanel()) {
+      addOptionBlockPanel();
+      UIOptionBlockPanel optionBlockPanel = this.getChild(UIOptionBlockPanel.class);
+
+      if(optionBlockPanel.isHasOptionBlockExtension()) {
+        optionBlockPanel.addOptionBlockExtension();
+        setDisplayOptionBlockPanel(true);
+      }
+    }
   }
-  
-  public String getClosingConfirmMsg(String key) {	  
-	  RequestContext context = RequestContext.getCurrentInstance();
-	  ResourceBundle res = context.getApplicationResourceBundle();	  
-	  return res.getString(key);
+
+  public String getClosingConfirmMsg(String key) {
+    RequestContext context = RequestContext.getCurrentInstance();
+    ResourceBundle res = context.getApplicationResourceBundle();
+    return res.getString(key);
   }
 }

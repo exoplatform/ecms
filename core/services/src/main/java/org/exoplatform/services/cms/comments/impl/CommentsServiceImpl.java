@@ -41,12 +41,12 @@ import org.exoplatform.services.log.Log;
  * Created by The eXo Platform SAS
  * Author : Pham Xuan Hoa
  *          hoa.pham@exoplatform.com
- * Jan 28, 2007  
+ * Jan 28, 2007
  */
 public class CommentsServiceImpl implements CommentsService {
 
   private static Log LOG = ExoLogger.getLogger("ecm:CommentsService");
-  
+
   private final static String COMMENTS = "comments".intern() ;
   private final static String COMMENTABLE = "mix:commentable".intern() ;
   private final static String EXO_COMMENTS = "exo:comments".intern() ;
@@ -60,17 +60,17 @@ public class CommentsServiceImpl implements CommentsService {
   private static final String ANONYMOUS = "anonymous".intern() ;
 
   private ExoCache commentsCache_ ;
-  private MultiLanguageService multiLangService_ ;  
+  private MultiLanguageService multiLangService_ ;
 
   /**
    * Constructor Method
    * @param cacheService        CacheService Object
    * @param multiLangService    MultiLanguageService Object
    */
-  public CommentsServiceImpl(CacheService cacheService, 
-      MultiLanguageService multiLangService) throws Exception {    
+  public CommentsServiceImpl(CacheService cacheService,
+      MultiLanguageService multiLangService) throws Exception {
     commentsCache_ = cacheService.getCacheInstance(CommentsService.class.getName()) ;
-    multiLangService_ = multiLangService ;    
+    multiLangService_ = multiLangService ;
   }
 
   /**
@@ -85,14 +85,14 @@ public class CommentsServiceImpl implements CommentsService {
       Node document = (Node)systemSession.getItem(node.getPath()) ;
       if(!document.isNodeType(COMMENTABLE)) {
         if(document.canAddMixin(COMMENTABLE)) document.addMixin(COMMENTABLE) ;
-        else throw new Exception("This node does not support comments.") ;  
-      }        
+        else throw new Exception("This node does not support comments.") ;
+      }
       Node multiLanguages =null, languageNode= null, commentNode = null ;
 
       if(!document.hasNode(LANGUAGES) || language.equals(multiLangService_.getDefault(document))) {
         if(document.hasNode(COMMENTS)) commentNode = document.getNode(COMMENTS) ;
-        else { 
-          commentNode = document.addNode(COMMENTS,NT_UNSTRUCTURE) ; 
+        else {
+          commentNode = document.addNode(COMMENTS,NT_UNSTRUCTURE) ;
           commentNode.addMixin("exo:hiddenable");
         }
       } else {
@@ -111,12 +111,12 @@ public class CommentsServiceImpl implements CommentsService {
       }
 
       if(commentor == null || commentor.length() == 0) {
-        commentor = ANONYMOUS ;      
+        commentor = ANONYMOUS ;
       }
 
       Calendar commentDate = new GregorianCalendar() ;
-      String name = Long.toString(commentDate.getTimeInMillis()) ;    
-      Node newComment = commentNode.addNode(name,EXO_COMMENTS) ;     
+      String name = Long.toString(commentDate.getTimeInMillis()) ;
+      Node newComment = commentNode.addNode(name,EXO_COMMENTS) ;
       newComment.setProperty(COMMENTOR,commentor) ;
       newComment.setProperty(CREATED_DATE,commentDate) ;
       newComment.setProperty(MESSAGE,comment) ;
@@ -125,9 +125,9 @@ public class CommentsServiceImpl implements CommentsService {
       }
       if(site !=null && site.length()>0) {
         newComment.setProperty(COMMENTOR_SITE,site) ;
-      }          
+      }
       document.save();
-      systemSession.save();    
+      systemSession.save();
       commentsCache_.remove(commentNode.getPath()) ;
     } catch(Exception e) {
       LOG.error("Unexpected problem happen when try to add comment", e);
@@ -135,7 +135,7 @@ public class CommentsServiceImpl implements CommentsService {
       session.logout();
       systemSession.logout();
     }
-    
+
   }
 
   /**
@@ -147,7 +147,7 @@ public class CommentsServiceImpl implements CommentsService {
     commentNode.setProperty(MESSAGE, newComment);
     commentNode.save();
   }
-  
+
   /**
    * {@inheritDoc}
    */
@@ -156,17 +156,17 @@ public class CommentsServiceImpl implements CommentsService {
     commentNode.remove();
     document.save();
   }
-  
+
   /**
    * {@inheritDoc}
    */
   @SuppressWarnings("unchecked")
-  public List<Node> getComments(Node document,String language) throws Exception {    
+  public List<Node> getComments(Node document,String language) throws Exception {
     Node commentsNode = null ;
     Node languagesNode = null ;
     Node languageNode = null ;
     if(!isSupportedLocalize(document,language)) {
-      if(document.hasProperty("exo:language")) language = document.getProperty("exo:language").getString() ; 
+      if(document.hasProperty("exo:language")) language = document.getProperty("exo:language").getString() ;
     }
     if(document.hasNode(LANGUAGES)) {
       languagesNode = document.getNode(LANGUAGES) ;
@@ -179,7 +179,7 @@ public class CommentsServiceImpl implements CommentsService {
     } else {
       languageNode = document ;
     }
-    if(!languageNode.hasNode(COMMENTS)) return new ArrayList<Node>() ;    
+    if(!languageNode.hasNode(COMMENTS)) return new ArrayList<Node>() ;
     Session session = document.getSession();
     ManageableRepository  repository = (ManageableRepository)session.getRepository();
     //TODO check if really need delegate to system session
@@ -189,12 +189,12 @@ public class CommentsServiceImpl implements CommentsService {
       commentsNode = (Node)systemSession.getItem(languageNode.getPath() + "/" + COMMENTS) ;
       String cacheKey = document.getPath().concat(commentsNode.getPath());
       Object comments = commentsCache_.get(cacheKey) ;
-      if(comments !=null) return (List<Node>)comments ;        
+      if(comments !=null) return (List<Node>)comments ;
       for(NodeIterator iter = commentsNode.getNodes(); iter.hasNext();) {
         list.add(iter.nextNode()) ;
-      }    
+      }
       Collections.sort(list,new DateComparator()) ;
-      commentsCache_.put(commentsNode.getPath(),list) ;  
+      commentsCache_.put(commentsNode.getPath(),list) ;
     } catch(Exception e) {
       LOG.error("Unexpected problem happen when try to get comments", e);
     } finally {
@@ -202,9 +202,9 @@ public class CommentsServiceImpl implements CommentsService {
       systemSession.logout();
     }
     return list;
-  }  
+  }
 
-  
+
   /**
    * This Class implements Comparator<Node> to compare the created date of nodes.
    */
@@ -220,11 +220,11 @@ public class CommentsServiceImpl implements CommentsService {
         Date date1 = node1.getProperty(CREATED_DATE).getDate().getTime() ;
         Date date2 = node2.getProperty(CREATED_DATE).getDate().getTime() ;
         return date2.compareTo(date1) ;
-      }catch (Exception e) {        
-      }            
-     
+      }catch (Exception e) {
+      }
+
       return 0;
-    }        
+    }
   }
 
   /**
@@ -238,5 +238,5 @@ public class CommentsServiceImpl implements CommentsService {
     if(Collections.frequency(locales,language) >0) return true ;
     return false ;
   }
-  
+
 }

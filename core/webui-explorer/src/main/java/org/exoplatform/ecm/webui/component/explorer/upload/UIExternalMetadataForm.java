@@ -52,19 +52,14 @@ import org.exoplatform.webui.form.UIFormCheckBoxInput;
  *          minh.dang@exoplatform.com
  * May 25, 2007 3:58:09 PM
  */
-@ComponentConfig(
-    lifecycle = UIFormLifecycle.class,
-    template =  "system:/groovy/webui/form/UIForm.gtmpl",
-    events = {
-      @EventConfig(listeners = UIExternalMetadataForm.AddActionListener.class),
-      @EventConfig(phase=Phase.DECODE, listeners = UIExternalMetadataForm.CancelActionListener.class)
-    }    
-)
+@ComponentConfig(lifecycle = UIFormLifecycle.class, template = "system:/groovy/webui/form/UIForm.gtmpl", events = {
+    @EventConfig(listeners = UIExternalMetadataForm.AddActionListener.class),
+    @EventConfig(phase = Phase.DECODE, listeners = UIExternalMetadataForm.CancelActionListener.class) })
 public class UIExternalMetadataForm extends UIForm {
-  
+
   public UIExternalMetadataForm() throws Exception {
   }
-  
+
   public void renderExternalList() throws Exception {
     MetadataService metadataService = getApplicationComponent(MetadataService.class) ;
     String repository = getAncestorOfType(UIJCRExplorer.class).getRepositoryName() ;
@@ -83,7 +78,7 @@ public class UIExternalMetadataForm extends UIForm {
       }
     }
   }
-  
+
   private boolean isInternalUse(NodeType nodeType) throws Exception{
     for(PropertyDefinition pro : nodeType.getPropertyDefinitions()) {
       if(pro.getName().equals("exo:internalUse")) {
@@ -91,11 +86,8 @@ public class UIExternalMetadataForm extends UIForm {
       }
     }
     return false;
-//    PropertyDefinition def = 
-//      ((ExtendedNodeType)nodeType).getPropertyDefinitions("exo:internalUse").getAnyDefinition() ;    
-//    return !def.getDefaultValues()[0].getBoolean() ;
   }
-  
+
   private boolean hasExternalMetadata(String name) throws Exception {
     UIUploadManager uiUploadManager = getAncestorOfType(UIUploadManager.class) ;
     UIUploadContainer uiUploadContainer = uiUploadManager.getChild(UIUploadContainer.class) ;
@@ -110,7 +102,7 @@ public class UIExternalMetadataForm extends UIForm {
     }
     return false ;
   }
-  
+
   public String getLabel(ResourceBundle res, String id)  {
     try {
       return res.getString("UIExternalMetadataForm.label." + id) ;
@@ -118,7 +110,7 @@ public class UIExternalMetadataForm extends UIForm {
       return '_' + id ;
     }
   }
-  
+
   static  public class CancelActionListener extends EventListener<UIExternalMetadataForm> {
     public void execute(Event<UIExternalMetadataForm> event) throws Exception {
       UIUploadManager uiUploadManager = event.getSource().getAncestorOfType(UIUploadManager.class) ;
@@ -128,12 +120,12 @@ public class UIExternalMetadataForm extends UIForm {
       event.getRequestContext().addUIComponentToUpdateByAjax(uiUploadManager) ;
     }
   }
-  
+
   static  public class AddActionListener extends EventListener<UIExternalMetadataForm> {
     public void execute(Event<UIExternalMetadataForm> event) throws Exception {
       UIExternalMetadataForm uiExternalMetadataForm = event.getSource() ;
       List<UIFormCheckBoxInput> listCheckbox =  new ArrayList<UIFormCheckBoxInput>();
-      uiExternalMetadataForm.findComponentOfType(listCheckbox, UIFormCheckBoxInput.class); 
+      uiExternalMetadataForm.findComponentOfType(listCheckbox, UIFormCheckBoxInput.class);
       UIUploadManager uiUploadManager = event.getSource().getAncestorOfType(UIUploadManager.class) ;
       UIUploadContainer uiContainer = uiUploadManager.getChild(UIUploadContainer.class) ;
       String metadataName = null ;
@@ -143,7 +135,7 @@ public class UIExternalMetadataForm extends UIForm {
           metadataName = listCheckbox.get(i).getName() ;
           if(!uploadedNode.canAddMixin(metadataName)) {
             UIApplication uiApp = uiExternalMetadataForm.getAncestorOfType(UIApplication.class) ;
-            uiApp.addMessage(new ApplicationMessage("UIExternalMetadataForm.msg.can-not-add", null, 
+            uiApp.addMessage(new ApplicationMessage("UIExternalMetadataForm.msg.can-not-add", null,
                                                     ApplicationMessage.WARNING)) ;
             event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
             return ;
@@ -162,52 +154,75 @@ public class UIExternalMetadataForm extends UIForm {
       uiContainer.setRenderedChild(UIUploadContent.class) ;
       event.getRequestContext().addUIComponentToUpdateByAjax(uiUploadManager) ;
     }
-    
+
     private void createMandatoryPropertyValue(Node node, String nodeTypeName) throws Exception {
       NodeTypeManager nodeTypeManager = node.getSession().getWorkspace().getNodeTypeManager();
       NodeType nodeType = nodeTypeManager.getNodeType(nodeTypeName);
       for (PropertyDefinition propertyDefinition : nodeType.getPropertyDefinitions()) {
-      	if (propertyDefinition.isMandatory() && 
-      			(!propertyDefinition.isAutoCreated() || !node.hasProperty(propertyDefinition.getName()))&& 
-      			!propertyDefinition.isProtected()) {
-      		String propertyName = propertyDefinition.getName();
-      		int requiredType = propertyDefinition.getRequiredType();
-      		if (!propertyDefinition.isMultiple()) {
-      			switch (requiredType) {
-      				case PropertyType.STRING: node.setProperty(propertyName, StringUtils.EMPTY);
-      				break;
-      				case PropertyType.BINARY: node.setProperty(propertyName, "");
-      				break;
-      				case PropertyType.BOOLEAN: node.setProperty(propertyName, false);
-      				break;
-      				case PropertyType.LONG: node.setProperty(propertyName, 0);
-      				break;
-      				case PropertyType.DOUBLE: node.setProperty(propertyName, 0);
-      				break;
-      				case PropertyType.DATE: node.setProperty(propertyName, new GregorianCalendar());
-      				break;
-      				case PropertyType.REFERENCE: node.setProperty(propertyName, "");
-      				break;
-      			}
-      		} else {
-      			switch (requiredType) {
-						case PropertyType.STRING: node.setProperty(propertyName, new String[] {StringUtils.EMPTY});
-    				break;
-    				case PropertyType.BINARY: node.setProperty(propertyName, new String[] {""});
-    				break;
-    				case PropertyType.BOOLEAN: node.setProperty(propertyName, new Value[]{node.getSession().getValueFactory().createValue(false)});
-    				break;
-    				case PropertyType.LONG: node.setProperty(propertyName, new Value[]{node.getSession().getValueFactory().createValue(0L)});
-    				break;
-    				case PropertyType.DOUBLE: node.setProperty(propertyName, new Value[]{node.getSession().getValueFactory().createValue(0)});
-    				break;
-    				case PropertyType.DATE: node.setProperty(propertyName, new Value[]{node.getSession().getValueFactory().createValue(new GregorianCalendar())});
-    				break;
-    				case PropertyType.REFERENCE: node.setProperty(propertyName, new String[] {});
-    				break;
-      			}
-      		}
-      	}
+        if (propertyDefinition.isMandatory() &&
+            (!propertyDefinition.isAutoCreated() || !node.hasProperty(propertyDefinition.getName()))&&
+            !propertyDefinition.isProtected()) {
+          String propertyName = propertyDefinition.getName();
+          int requiredType = propertyDefinition.getRequiredType();
+          if (!propertyDefinition.isMultiple()) {
+            switch (requiredType) {
+            case PropertyType.STRING:
+              node.setProperty(propertyName, StringUtils.EMPTY);
+              break;
+            case PropertyType.BINARY:
+              node.setProperty(propertyName, "");
+              break;
+            case PropertyType.BOOLEAN:
+              node.setProperty(propertyName, false);
+              break;
+            case PropertyType.LONG:
+              node.setProperty(propertyName, 0);
+              break;
+            case PropertyType.DOUBLE:
+              node.setProperty(propertyName, 0);
+              break;
+            case PropertyType.DATE:
+              node.setProperty(propertyName, new GregorianCalendar());
+              break;
+            case PropertyType.REFERENCE:
+              node.setProperty(propertyName, "");
+              break;
+            }
+          } else {
+            switch (requiredType) {
+            case PropertyType.STRING:
+              node.setProperty(propertyName, new String[] { StringUtils.EMPTY });
+              break;
+            case PropertyType.BINARY:
+              node.setProperty(propertyName, new String[] { "" });
+              break;
+            case PropertyType.BOOLEAN:
+              node.setProperty(propertyName, new Value[] { node.getSession()
+                                                               .getValueFactory()
+                                                               .createValue(false) });
+              break;
+            case PropertyType.LONG:
+              node.setProperty(propertyName, new Value[] { node.getSession()
+                                                               .getValueFactory()
+                                                               .createValue(0L) });
+              break;
+            case PropertyType.DOUBLE:
+              node.setProperty(propertyName, new Value[] { node.getSession()
+                                                               .getValueFactory()
+                                                               .createValue(0) });
+              break;
+            case PropertyType.DATE:
+              node.setProperty(propertyName,
+                               new Value[] { node.getSession()
+                                                 .getValueFactory()
+                                                 .createValue(new GregorianCalendar()) });
+              break;
+            case PropertyType.REFERENCE:
+              node.setProperty(propertyName, new String[] {});
+              break;
+            }
+          }
+        }
       }
     }
   }

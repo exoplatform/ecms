@@ -25,7 +25,7 @@ import org.exoplatform.services.workflow.WorkflowFormsService;
 
 /**
  * This service retrieves and caches Forms
- * 
+ *
  * Created by Bull R&D
  * @author Rodrigue Le Gall
  * @author Brice Revenant
@@ -35,10 +35,10 @@ public class WorkflowFormsServiceImpl implements WorkflowFormsService {
 
   /** Caches the Forms that have been created so far */
   private FormCache cache = new FormCache();
-  
+
   /** Reference to a File Definition Service implementation */
   private WorkflowFileDefinitionService fileDefinitionService = null;
-  
+
   /**
    * Retrieves a Form based on a process model, a state and a Locale. As the
    * process instance identifier is not specified as parameter, the attributes
@@ -59,7 +59,7 @@ public class WorkflowFormsServiceImpl implements WorkflowFormsService {
       // The Form is not found. Retrieve it from the persistent storage
       FileDefinition fileDefinition =
         this.fileDefinitionService.retrieve(processId);
-      
+
       if(fileDefinition != null && fileDefinition.isFormDefined(stateName)) {
         // The Form is found in the storage and defined
         form = new SpecifiedFormImpl(processId,fileDefinition, stateName, locale);
@@ -67,28 +67,28 @@ public class WorkflowFormsServiceImpl implements WorkflowFormsService {
         // The Form is not found in the storage and not defined
         form = new AutomaticFormImpl(processId, stateName, locale);
       }
-      
+
       // Cache the Form to speed up subsequent accesses
       cache.setForm(processId, stateName, locale, form);
     }
 
     return form;
   }
-  
+
   /**
    * Remove all Forms corresponding to a Process Model
-   * 
+   *
    * @param processDefinitionId identifies the Process Model
    */
   public void removeForms(String processDefinitionId) {
-    
+
     // Remove the specified Forms from the cache
     this.cache.removeForms(processDefinitionId);
   }
-  
+
   /**
    * Creates a new instance of the service
-   * 
+   *
    * @param fileDefinitionService this injected reference to a File Definition
    *                              service is used to store and retrieved
    *                              definitions of processes, which include

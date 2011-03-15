@@ -24,16 +24,16 @@ import org.exoplatform.container.component.ComponentPlugin;
  * Created by The eXo Platform SAS
  * Author : Hoa.Pham
  *          hoa.pham@exoplatform.com
- * Apr 9, 2008  
+ * Apr 9, 2008
  */
 public abstract class NodeClassifyPlugin implements ComponentPlugin {
-  
+
   private String name;
   private String desc;
-  
-  public String getName() { return name; }  
-  public void setName(String name) { this.name = name; }  
-  public String getDescription() { return desc; } 
-  public void setDescription(String desc) { this.desc = desc; }    
-  public abstract void classifyChildrenNode(Node parent) throws Exception; 
+
+  public String getName() { return name; }
+  public void setName(String name) { this.name = name; }
+  public String getDescription() { return desc; }
+  public void setDescription(String desc) { this.desc = desc; }
+  public abstract void classifyChildrenNode(Node parent) throws Exception;
 }

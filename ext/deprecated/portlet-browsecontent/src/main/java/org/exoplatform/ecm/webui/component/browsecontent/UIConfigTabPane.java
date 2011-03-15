@@ -42,7 +42,7 @@ import org.exoplatform.webui.form.UIForm;
  * Created by The eXo Platform SARL
  * Author : Pham Tuan
  *          phamtuanchip@yahoo.de
- * Dec 19, 2006 9:24:36 AM 
+ * Dec 19, 2006 9:24:36 AM
  */
 @ComponentConfig(lifecycle = UIContainerLifecycle.class)
 
@@ -50,26 +50,26 @@ public class UIConfigTabPane extends UIContainer {
 
   final public static String PATH_SELECTOR = "pathSelector";
   final public static String DOCUMENT_SELECTOR = "documentSelector";
-  final public static String CONFIGTYPE = "configType";  
-  
-  private boolean isNewConfig_ = false; 
+  final public static String CONFIGTYPE = "configType";
+
+  private boolean isNewConfig_ = false;
   private boolean isChanged_ = false;
-  
+
   public UIConfigTabPane() throws Exception {
     addChild(UINewConfigForm.class, null, null).setRendered(false);
     addChild(UIConfigContainer.class, null, null);
   }
-  
+
   protected boolean isNewConfig() { return isNewConfig_; }
   protected void setNewConfig(boolean isNew) { this.isNewConfig_ = isNew; }
-  
+
   public List<SelectItemOption<String>> getWorkSpaceOption() throws Exception {
     List<SelectItemOption<String>> Options = new ArrayList<SelectItemOption<String>>();
     String[] workspaceNames = getApplicationComponent(RepositoryService.class)
     .getCurrentRepository().getWorkspaceNames();
     for(String workspace:workspaceNames) {
       Options.add(new SelectItemOption<String>(workspace,workspace));
-    }   
+    }
     return Options;
   }
 
@@ -84,7 +84,7 @@ public class UIConfigTabPane extends UIContainer {
     Collections.sort(options, new ItemOptionNameComparator());
     return options;
   }
-  
+
   public void setIsChangeValue(boolean isChanged) { isChanged_ = isChanged; }
 
   public void getCurrentConfig() throws Exception {
@@ -99,19 +99,19 @@ public class UIConfigTabPane extends UIContainer {
       UIPathConfig uiPathConfig = uiConfigContainer.getChild(UIPathConfig.class);
       if(uiPathConfig == null) {
         uiPathConfig = uiConfigContainer.addChild(UIPathConfig.class, null, null);
-      }      
+      }
       if(!isChanged_) uiPathConfig.initForm(preference, repository, workspace, false);
       uiConfigContainer.setRenderedChild(UIPathConfig.class);
     } else if (usecase.equals(Utils.CB_USE_JCR_QUERY)) {
       UIQueryConfig uiQueryConfig = uiConfigContainer.getChild(UIQueryConfig.class);
       if(uiQueryConfig == null) {
         uiQueryConfig = uiConfigContainer.addChild(UIQueryConfig.class, null, null);
-      }      
+      }
       uiQueryConfig.initForm(preference, repository, workspace, false);
       uiConfigContainer.setRenderedChild(UIQueryConfig.class);
-    } else if (usecase.equals(Utils.CB_USE_SCRIPT)) { 
+    } else if (usecase.equals(Utils.CB_USE_SCRIPT)) {
       UIScriptConfig uiScriptConfig = uiConfigContainer.getChild(UIScriptConfig.class);
-      if(uiScriptConfig == null) { 
+      if(uiScriptConfig == null) {
         uiScriptConfig = uiConfigContainer.addChild(UIScriptConfig.class, null, null);
 
       }
@@ -145,13 +145,13 @@ public class UIConfigTabPane extends UIContainer {
     uiConfigContainer.setRendered(true);
   }
 
-  public void initPopupPathSelect(UIForm uiForm, String repo, String workSpace, String fieldName, 
+  public void initPopupPathSelect(UIForm uiForm, String repo, String workSpace, String fieldName,
       boolean isDisable) throws Exception {
     removeChildById(PATH_SELECTOR);
     removeChildById(DOCUMENT_SELECTOR);
     UIPopupWindow uiPopup = addChild(UIPopupWindow.class, null, PATH_SELECTOR);
-    uiPopup.setWindowSize(610, 300);    
-    UIOneNodePathSelector uiOneNodePathSelector = 
+    uiPopup.setWindowSize(610, 300);
+    UIOneNodePathSelector uiOneNodePathSelector =
       createUIComponent(UIOneNodePathSelector.class, null, null);
     if(isDisable) uiOneNodePathSelector.setIsDisable(workSpace, true);
     String[] filterType = {Utils.NT_FOLDER, Utils.NT_UNSTRUCTURED, "exo:taxonomy"};
@@ -168,14 +168,14 @@ public class UIConfigTabPane extends UIContainer {
     uiOneNodePathSelector.setSourceComponent(uiForm, new String[] {fieldName});
     uiPopup.setShow(true);
   }
-  
-  public void initPopupPathSelect(UIForm uiForm, String repo, String workSpace, String fieldName, 
+
+  public void initPopupPathSelect(UIForm uiForm, String repo, String workSpace, String fieldName,
       boolean isDisable, boolean isAllowPublish) throws Exception {
     removeChildById(PATH_SELECTOR);
     removeChildById(DOCUMENT_SELECTOR);
     UIPopupWindow uiPopup = addChild(UIPopupWindow.class, null, PATH_SELECTOR);
-    uiPopup.setWindowSize(610, 300);    
-    UIOneNodePathSelector uiOneNodePathSelector = 
+    uiPopup.setWindowSize(610, 300);
+    UIOneNodePathSelector uiOneNodePathSelector =
       createUIComponent(UIOneNodePathSelector.class, null, null);
     if(isDisable) uiOneNodePathSelector.setIsDisable(workSpace, true);
     String[] filterType = {Utils.NT_FOLDER, Utils.NT_UNSTRUCTURED, "exo:taxonomy"};
@@ -199,7 +199,7 @@ public class UIConfigTabPane extends UIContainer {
     removeChildById(DOCUMENT_SELECTOR);
     UIPopupWindow uiPopup = addChild(UIPopupWindow.class, null, DOCUMENT_SELECTOR);
     uiPopup.setWindowSize(610, 300);
-    UIOneNodePathSelector uiOneNodePathSelector = 
+    UIOneNodePathSelector uiOneNodePathSelector =
       createUIComponent(UIOneNodePathSelector.class, null, null);
     uiOneNodePathSelector.setIsDisable(workSpace, true);
     uiOneNodePathSelector.setRootNodeLocation(repo, workSpace, path);

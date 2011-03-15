@@ -36,37 +36,37 @@ import org.w3c.dom.Element;
  * Created by The eXo Platform SAS
  * @author : Hoa.Pham
  *          hoa.pham@exoplatform.com
- * Jun 23, 2008  
+ * Jun 23, 2008
  */
 public class FCKUtils {
-  
+
   /** The Constant LAST_MODIFIED_PROPERTY. */
   public static final String LAST_MODIFIED_PROPERTY = "Last-Modified";
-   
+
   /** The Constant IF_MODIFIED_SINCE_DATE_FORMAT. */
   public static final String IF_MODIFIED_SINCE_DATE_FORMAT = "EEE, dd MMM yyyy HH:mm:ss z";
-  
+
   public static String GET_FOLDERS_AND_FILES="getFoldersAndFiles".intern();
   public static String CREATE_FOLDER = "createFolder".intern();
   public static String UPLOAD_FILE = "upload".intern();
-  
+
   public static final String EXO_HIDDENABLE = "exo:hiddenable".intern();
   public static final String NT_FILE = "nt:file".intern();
   public static final String NT_FOLDER = "nt:folder".intern();
   public static final String NT_UNSTRUCTURED = "nt:unstructured".intern();
-  
+
   public final static String DOCUMENT_TYPE = "file".intern();
-  
+
   /** The Constant IMAGE_TYPE. */
   public final static String IMAGE_TYPE = "image".intern();
   public final static String FLASH_TYPE = "flash".intern();
   public final static String LINK_TYPE = "link".intern();
-  
-  
+
+
   /**
    * Creates the root element for connector response. The full connector response looks like:
    *<Connector command="GetFolders" resourceType="">
-   *  <CurrentFolder folderType="" name="" path="" url=""/>  
+   *  <CurrentFolder folderType="" name="" path="" url=""/>
    *  </CurrentFolder>
    *</Connector>
    *
@@ -85,11 +85,11 @@ public class FCKUtils {
     String currentPath = node.getPath();
     if (!currentPath.endsWith("/")) {
       currentPath = currentPath + "/";
-    }    
+    }
     Element rootElement = doc.createElement("Connector");
     doc.appendChild(rootElement);
     rootElement.setAttribute("command", command);
-    rootElement.setAttribute("resourceType", "Node");    
+    rootElement.setAttribute("resourceType", "Node");
     Element currentFolderElement = doc.createElement("CurrentFolder");
     currentFolderElement.setAttribute("name", node.getName());
     currentFolderElement.setAttribute("folderType", folderType);
@@ -97,8 +97,8 @@ public class FCKUtils {
     currentFolderElement.setAttribute("url", createWebdavURL(node));
     rootElement.appendChild(currentFolderElement);
     return rootElement;
-  }    
-  
+  }
+
   public static boolean hasAddNodePermission(Node node) throws Exception {
     try {
       ((ExtendedNode)node).checkPermission(PermissionType.ADD_NODE) ;
@@ -106,14 +106,14 @@ public class FCKUtils {
     } catch (AccessControlException e) { }
     return false ;
   }
-  
+
   public static String getPortalName() {
     ExoContainer container = ExoContainerContext.getCurrentContainer() ;
-    PortalContainerInfo containerInfo = 
-      (PortalContainerInfo)container.getComponentInstanceOfType(PortalContainerInfo.class) ;      
-    return containerInfo.getContainerName() ; 
+    PortalContainerInfo containerInfo =
+      (PortalContainerInfo)container.getComponentInstanceOfType(PortalContainerInfo.class) ;
+    return containerInfo.getContainerName() ;
   }
-  
+
   public static String createWebdavURL(final Node node) throws Exception {
     String repository = ((ManageableRepository) node.getSession().getRepository()).getConfiguration().getName();
     String workspace = node.getSession().getWorkspace().getName();

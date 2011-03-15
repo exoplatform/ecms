@@ -18,7 +18,7 @@
 package org.exoplatform.ecm.permission;
 
 /**
- * Created by The eXo Platform SARL 
+ * Created by The eXo Platform SARL
  * Author : Hoang Van Hung hunghvit@gmail.com
  * Apr 17, 2009
  */
@@ -73,7 +73,7 @@ public class PermissionBean {
   public void setSetProperty(boolean b) {
     setProperty = b;
   }
-  
+
   public boolean equals(Object arg0) {
     if (arg0 instanceof PermissionBean) {
       PermissionBean permBean = (PermissionBean) arg0;

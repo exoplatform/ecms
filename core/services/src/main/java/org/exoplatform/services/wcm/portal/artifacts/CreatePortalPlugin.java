@@ -28,26 +28,26 @@ import org.exoplatform.services.jcr.ext.common.SessionProvider;
  * hoa.phamvu@exoplatform.com
  * Oct 22, 2008
  */
-public abstract class CreatePortalPlugin extends XMLDeploymentPlugin { 
-  
+public abstract class CreatePortalPlugin extends XMLDeploymentPlugin {
+
   /**
    * Instantiates a new base portal artifacts plugin.
-   * 
+   *
    * @param initParams the init params
    * @param configurationManager the configuration manager
    * @param repositoryService the repository service
    */
   public CreatePortalPlugin(InitParams initParams, ConfigurationManager configurationManager,
       RepositoryService repositoryService) {
-    super(initParams, configurationManager, repositoryService);    
+    super(initParams, configurationManager, repositoryService);
   }
-  
+
   /**
    * Deploy to portal.
-   * 
+   *
    * @param portalName the portal name
    * @param sessionProvider the session provider
-   * 
+   *
    * @throws Exception the exception
    */
   public abstract void deployToPortal(SessionProvider sessionProvider, String portalName) throws Exception;

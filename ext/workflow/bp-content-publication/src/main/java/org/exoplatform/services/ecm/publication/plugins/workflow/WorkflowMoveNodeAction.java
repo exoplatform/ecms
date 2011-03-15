@@ -18,24 +18,24 @@ import org.exoplatform.services.jcr.RepositoryService;
  * Author : Ly Dinh Quang
  *          quang.ly@exoplatform.com
  *					xxx5669@gmail.com
- * Dec 27, 2008  
+ * Dec 27, 2008
  */
 public class WorkflowMoveNodeAction {
-  
+
   public static void moveNode(RepositoryService repositoryService, String nodePath, String srcWorkspace, String destWorkspace, String destPath,
       String repository) {
     Session srcSession = null;
     Session destSession = null;
-    if (!srcWorkspace.equals(destWorkspace)){      
-      try {        
+    if (!srcWorkspace.equals(destWorkspace)){
+      try {
         srcSession = repositoryService.getRepository(repository).getSystemSession(srcWorkspace);
         destSession = repositoryService.getRepository(repository).getSystemSession(destWorkspace);
         Workspace workspace = destSession.getWorkspace();
         Node srcNode = (Node) srcSession.getItem(nodePath);
         try {
-          destSession.getItem(destPath);        
+          destSession.getItem(destPath);
         } catch (PathNotFoundException e) {
-          createNode(destSession, destPath);                   
+          createNode(destSession, destPath);
         }
         workspace.clone(srcWorkspace, nodePath, destPath, true);
         //Remove src node
@@ -58,16 +58,16 @@ public class WorkflowMoveNodeAction {
         session = repositoryService.getRepository(repository).getSystemSession(srcWorkspace);
         Workspace workspace = session.getWorkspace();
         try {
-          session.getItem(destPath);        
+          session.getItem(destPath);
         } catch (PathNotFoundException e) {
           createNode(session, destPath);
           session.refresh(false);
-        }        
+        }
         workspace.move(nodePath, destPath);
         session.logout();
       } catch(Exception e){
         if(session !=null && session.isLive()) {
-          session.logout(); 
+          session.logout();
         }
       }
     }
@@ -80,17 +80,17 @@ public class WorkflowMoveNodeAction {
    * @throws RepositoryException
    */
   private static void createNode(Session session, String uri) throws RepositoryException {
-    String[] splittedName = StringUtils.split(uri, "/"); 
+    String[] splittedName = StringUtils.split(uri, "/");
     Node rootNode = session.getRootNode();
     for (int i = 0; i < splittedName.length - 1; i++) {
       try {
         rootNode.getNode(splittedName[i]);
-      } catch (PathNotFoundException exc) {        
-        rootNode.addNode(splittedName[i], "nt:unstructured"); 
+      } catch (PathNotFoundException exc) {
+        rootNode.addNode(splittedName[i], "nt:unstructured");
         rootNode.save();
       }
       rootNode = rootNode.getNode(splittedName[i]);
     }
-    session.save();    
+    session.save();
   }
 }

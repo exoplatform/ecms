@@ -56,7 +56,7 @@ import org.exoplatform.webui.form.validator.MandatoryValidator;
  * Author : pham tuan
  *          phamtuanchip@yahoo.de
  * Oct 03, 2006
- * 9:43:23 AM 
+ * 9:43:23 AM
  */
 @ComponentConfig(
     lifecycle = UIFormLifecycle.class,
@@ -80,7 +80,7 @@ public class UITemplateContent extends UIForm implements UISelectable {
   final static public String[] REG_EXPRESSION = {"[", "]", ":", "&", "%"} ;
 
   private boolean isAddNew_ = true ;
-  private String nodeTypeName_ ;  
+  private String nodeTypeName_ ;
   private List<String> listVersion_ = new ArrayList<String>() ;
   private String templateType;
 
@@ -88,17 +88,17 @@ public class UITemplateContent extends UIForm implements UISelectable {
 
   public UITemplateContent() throws Exception {
     List<SelectItemOption<String>> options = new ArrayList<SelectItemOption<String>>() ;
-    UIFormSelectBox versions = 
+    UIFormSelectBox versions =
       new UIFormSelectBox(FIELD_SELECT_VERSION, FIELD_SELECT_VERSION, options) ;
     versions.setOnChange("Change") ;
-    versions.setRendered(false) ;    
+    versions.setRendered(false) ;
     addUIFormInput(versions) ;
     addUIFormInput(new UIFormTextAreaInput(FIELD_CONTENT, FIELD_CONTENT, null).addValidator(MandatoryValidator.class)) ;
     addUIFormInput(new UIFormStringInput(FIELD_NAME, FIELD_NAME, null).addValidator(MandatoryValidator.class)) ;
-    UIFormCheckBoxInput isVersion = 
+    UIFormCheckBoxInput isVersion =
       new UIFormCheckBoxInput<Boolean>(FIELD_ENABLE_VERSION , FIELD_ENABLE_VERSION, null) ;
     isVersion.setRendered(false) ;
-    addUIFormInput(isVersion) ;   
+    addUIFormInput(isVersion) ;
     UIFormInputSetWithAction uiActionTab = new UIFormInputSetWithAction("UITemplateContent");
     uiActionTab.addUIFormInput(new UIFormStringInput(FIELD_VIEWPERMISSION, FIELD_VIEWPERMISSION, null).setEditable(false).addValidator(MandatoryValidator.class)) ;
     uiActionTab.setActionInfo(FIELD_VIEWPERMISSION, new String[] {"AddPermission"}) ;
@@ -106,9 +106,9 @@ public class UITemplateContent extends UIForm implements UISelectable {
   }
 
   public void setTemplateType(String templateType) { this.templateType = templateType; }
-  
+
   public String getTemplateType() { return templateType; }
-  
+
   public void setNodeTypeName (String nodeType) {nodeTypeName_ = nodeType ;}
 
   public void update(String templateName) throws Exception {
@@ -116,16 +116,16 @@ public class UITemplateContent extends UIForm implements UISelectable {
       isAddNew_ = false ;
       TemplateService templateService = getApplicationComponent(TemplateService.class) ;
       String templateContent = templateService.getTemplate(templateType, nodeTypeName_, templateName) ;
-      Node template = 
-        templateService.getTemplateNode(templateType, nodeTypeName_, templateName, 
-            SessionProviderFactory.createSystemProvider()) ;      
+      Node template =
+        templateService.getTemplateNode(templateType, nodeTypeName_, templateName,
+            SessionProviderFactory.createSystemProvider()) ;
       getUIFormCheckBoxInput(FIELD_ENABLE_VERSION).setRendered(true) ;
-      String templateRole = 
+      String templateRole =
         templateService.getTemplateRoles(template) ;
       boolean isVersioned = template.isNodeType(Utils.MIX_VERSIONABLE) ;
       if(isVersioned) {
         getUIFormSelectBox(FIELD_SELECT_VERSION).setRendered(true) ;
-        getUIFormSelectBox(FIELD_SELECT_VERSION).setOptions(getVersionValues(template)) ;         
+        getUIFormSelectBox(FIELD_SELECT_VERSION).setOptions(getVersionValues(template)) ;
         getUIFormSelectBox(FIELD_SELECT_VERSION).setValue(template.getBaseVersion().getName()) ;
         getUIFormCheckBoxInput(FIELD_ENABLE_VERSION).setEnable(false) ;
         getUIFormCheckBoxInput(FIELD_ENABLE_VERSION).setChecked(true) ;
@@ -142,7 +142,7 @@ public class UITemplateContent extends UIForm implements UISelectable {
       getUIStringInput(FIELD_NAME).setEditable(false) ;
       getUIStringInput(FIELD_VIEWPERMISSION).setValue(templateRole) ;
       return ;
-    } 
+    }
     isAddNew_ = true ;
     getUIFormSelectBox(FIELD_SELECT_VERSION).setRendered(false) ;
     getUIFormCheckBoxInput(FIELD_ENABLE_VERSION).setRendered(false) ;
@@ -163,26 +163,26 @@ public class UITemplateContent extends UIForm implements UISelectable {
     } else if(parent instanceof UISkinTab) {
       uiViewTemplate.setRenderedChild(UISkinTab.class) ;
     }
-    update(null) ; 
+    update(null) ;
     reset() ;
   }
 
-  private VersionNode getRootVersion(Node node) throws Exception{       
+  private VersionNode getRootVersion(Node node) throws Exception{
     VersionHistory vH = node.getVersionHistory() ;
-    if(vH != null) return new VersionNode(vH.getRootVersion(), node.getSession()) ; 
+    if(vH != null) return new VersionNode(vH.getRootVersion(), node.getSession()) ;
     return null ;
   }
-  private List<String> getNodeVersions(List<VersionNode> children) throws Exception {         
+  private List<String> getNodeVersions(List<VersionNode> children) throws Exception {
     List<VersionNode> child = new ArrayList<VersionNode>() ;
     for(VersionNode version : children) {
       listVersion_.add(version.getName()) ;
       child = version.getChildren() ;
-      if(!child.isEmpty()) getNodeVersions(child) ; 
-    }           
+      if(!child.isEmpty()) getNodeVersions(child) ;
+    }
     return listVersion_ ;
   }
 
-  private List<SelectItemOption<String>> getVersionValues(Node node) throws Exception { 
+  private List<SelectItemOption<String>> getVersionValues(Node node) throws Exception {
     List<SelectItemOption<String>> options = new ArrayList<SelectItemOption<String>>() ;
     List<VersionNode> children = getRootVersion(node).getChildren() ;
     listVersion_.clear() ;
@@ -206,13 +206,13 @@ public class UITemplateContent extends UIForm implements UISelectable {
     if (viewPermission == null) viewPermission = "";
     if ((viewPermission != null) && (viewPermission.length() == 0))
       viewPermission = value.toString();
-    else 
+    else
       viewPermission += "," + value.toString();
     getUIStringInput(FIELD_VIEWPERMISSION).setValue(viewPermission) ;
     UITemplatesManager uiManager = getAncestorOfType(UITemplatesManager.class) ;
     uiManager.removeChildById(getId() + TEMPLATE_PERMISSION) ;
   }
-  
+
   private String getRepository() {
     PortletRequestContext pcontext = (PortletRequestContext)WebuiRequestContext.getCurrentInstance() ;
     PortletPreferences portletPref = pcontext.getRequest().getPreferences() ;
@@ -224,7 +224,7 @@ public class UITemplateContent extends UIForm implements UISelectable {
       UITemplatesManager uiManager = uiForm.getAncestorOfType(UITemplatesManager.class) ;
       String name = uiForm.getUIStringInput(FIELD_NAME).getValue() ;
       TemplateService templateService = uiForm.getApplicationComponent(TemplateService.class) ;
-      Node node = templateService.getTemplateNode(uiForm.getTemplateType(),  uiForm.nodeTypeName_, 
+      Node node = templateService.getTemplateNode(uiForm.getTemplateType(),  uiForm.nodeTypeName_,
           name, SessionProviderFactory.createSystemProvider()) ;
       String vesion = uiForm.getUIFormSelectBox(FIELD_SELECT_VERSION).getValue() ;
       String baseVesion = node.getBaseVersion().getName() ;
@@ -233,7 +233,7 @@ public class UITemplateContent extends UIForm implements UISelectable {
       node.checkout() ;
       node.restore(vesion, true) ;
       Object[] args = {uiForm.getUIStringInput(FIELD_SELECT_VERSION).getValue()} ;
-      app.addMessage(new ApplicationMessage("UITemplateContent.msg.version-restored", args)) ; 
+      app.addMessage(new ApplicationMessage("UITemplateContent.msg.version-restored", args)) ;
       uiForm.refresh() ;
       event.getRequestContext().addUIComponentToUpdateByAjax(uiManager) ;
       event.getRequestContext().addUIComponentToUpdateByAjax(app.getUIPopupMessages()) ;
@@ -249,23 +249,23 @@ public class UITemplateContent extends UIForm implements UISelectable {
       String name = uiForm.getUIStringInput(FIELD_NAME).getValue() ;
       if(name == null || name.trim().length() == 0) {
         Object[] args = { FIELD_NAME } ;
-        uiApp.addMessage(new ApplicationMessage("ECMNameValidator.msg.empty-input", args, 
+        uiApp.addMessage(new ApplicationMessage("ECMNameValidator.msg.empty-input", args,
                                                 ApplicationMessage.WARNING)) ;
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
         return ;
       }
       if(!Utils.isNameValid(name, UITemplateContent.REG_EXPRESSION)){
-        uiApp.addMessage(new ApplicationMessage("UITemplateContent.msg.name-invalid", null, 
+        uiApp.addMessage(new ApplicationMessage("UITemplateContent.msg.name-invalid", null,
                                                 ApplicationMessage.WARNING)) ;
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
         return ;
       }
-      String content = uiForm.getUIFormTextAreaInput(FIELD_CONTENT).getValue() ;      
+      String content = uiForm.getUIFormTextAreaInput(FIELD_CONTENT).getValue() ;
       if(content == null) content = "" ;
       UIFormInputSetWithAction permField = uiForm.getChildById("UITemplateContent") ;
-      String role = permField.getUIStringInput(FIELD_VIEWPERMISSION).getValue() ;      
+      String role = permField.getUIStringInput(FIELD_VIEWPERMISSION).getValue() ;
       if((role == null) || (role.trim().length() == 0)) {
-        uiApp.addMessage(new ApplicationMessage("UITemplateContent.msg.roles-invalid", null, 
+        uiApp.addMessage(new ApplicationMessage("UITemplateContent.msg.roles-invalid", null,
                                                 ApplicationMessage.WARNING)) ;
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
         return ;
@@ -275,7 +275,7 @@ public class UITemplateContent extends UIForm implements UISelectable {
         UIDialogTab uiDialogTab = uiViewTemplate.getChild(UIDialogTab.class) ;
         if(uiDialogTab.getListDialog().contains(name) && uiForm.isAddNew_) {
           Object[] args = { name } ;
-          uiApp.addMessage(new ApplicationMessage("UITemplateContent.msg.name-exist", args, 
+          uiApp.addMessage(new ApplicationMessage("UITemplateContent.msg.name-exist", args,
                                                   ApplicationMessage.WARNING)) ;
           event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
           return ;
@@ -284,7 +284,7 @@ public class UITemplateContent extends UIForm implements UISelectable {
         UIViewTab uiViewTab = uiViewTemplate.getChild(UIViewTab.class) ;
         if(uiViewTab.getListView().contains(name) && uiForm.isAddNew_) {
           Object[] args = { name } ;
-          uiApp.addMessage(new ApplicationMessage("UITemplateContent.msg.name-exist", args, 
+          uiApp.addMessage(new ApplicationMessage("UITemplateContent.msg.name-exist", args,
                                                   ApplicationMessage.WARNING)) ;
           event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
           return ;
@@ -293,26 +293,26 @@ public class UITemplateContent extends UIForm implements UISelectable {
         UISkinTab uiSkinTab = uiViewTemplate.getChild(UISkinTab.class) ;
         if(uiSkinTab.getListSkin().contains(name) && uiForm.isAddNew_) {
           Object[] args = { name } ;
-          uiApp.addMessage(new ApplicationMessage("UITemplateContent.msg.name-exist", args, 
+          uiApp.addMessage(new ApplicationMessage("UITemplateContent.msg.name-exist", args,
                                                   ApplicationMessage.WARNING)) ;
           event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
           return ;
         }
       }
       TemplateService templateService = uiForm.getApplicationComponent(TemplateService.class) ;
-      boolean isEnableVersioning = 
+      boolean isEnableVersioning =
         uiForm.getUIFormCheckBoxInput(FIELD_ENABLE_VERSION).isChecked() ;
       if(uiForm.isAddNew_){
-        templateService.addTemplate(uiForm.getTemplateType(), uiForm.nodeTypeName_, null, false, name, new String[] {role},  
+        templateService.addTemplate(uiForm.getTemplateType(), uiForm.nodeTypeName_, null, false, name, new String[] {role},
             new ByteArrayInputStream(content.getBytes()));
       } else {
-        Node node = 
-          templateService.getTemplateNode(uiForm.getTemplateType(), uiForm.nodeTypeName_, name, 
+        Node node =
+          templateService.getTemplateNode(uiForm.getTemplateType(), uiForm.nodeTypeName_, name,
               SessionProviderFactory.createSystemProvider()) ;
         if(isEnableVersioning && !node.isNodeType(Utils.MIX_VERSIONABLE)) {
           node.addMixin(Utils.MIX_VERSIONABLE) ;
-        } 
-        templateService.addTemplate(uiForm.getTemplateType(), uiForm.nodeTypeName_, null, false, name, new String[] {role},  
+        }
+        templateService.addTemplate(uiForm.getTemplateType(), uiForm.nodeTypeName_, null, false, name, new String[] {role},
             new ByteArrayInputStream(content.getBytes()));
         node.save() ;
         if(isEnableVersioning) {
@@ -332,10 +332,10 @@ public class UITemplateContent extends UIForm implements UISelectable {
       UITemplatesManager uiManager = uiForm.getAncestorOfType(UITemplatesManager.class) ;
       String name = uiForm.getUIStringInput(FIELD_NAME).getValue() ;
       TemplateService templateService = uiForm.getApplicationComponent(TemplateService.class) ;
-      Node node = templateService.getTemplateNode(uiForm.getTemplateType(), uiForm.nodeTypeName_, 
+      Node node = templateService.getTemplateNode(uiForm.getTemplateType(), uiForm.nodeTypeName_,
           name, SessionProviderFactory.createSystemProvider()) ;
-      String version = uiForm.getUIFormSelectBox(FIELD_SELECT_VERSION).getValue() ; 
-      String path = node.getVersionHistory().getVersion(version).getPath() ;           
+      String version = uiForm.getUIFormSelectBox(FIELD_SELECT_VERSION).getValue() ;
+      String path = node.getVersionHistory().getVersion(version).getPath() ;
       VersionNode versionNode = uiForm.getRootVersion(node).findVersionNode(path) ;
       Node frozenNode = versionNode.getVersion().getNode(Utils.JCR_FROZEN) ;
       String content = templateService.getTemplate(frozenNode);
@@ -347,7 +347,7 @@ public class UITemplateContent extends UIForm implements UISelectable {
           rule.append(rules[i].getString());
         }
         uiForm.getUIStringInput(FIELD_VIEWPERMISSION).setValue(rule.toString());
-      }      
+      }
       event.getRequestContext().addUIComponentToUpdateByAjax(uiManager) ;
     }
   }
@@ -356,8 +356,8 @@ public class UITemplateContent extends UIForm implements UISelectable {
     public void execute(Event<UITemplateContent> event) throws Exception {
       UITemplateContent uiTempContent = event.getSource() ;
       UITemplatesManager uiManager = uiTempContent.getAncestorOfType(UITemplatesManager.class) ;
-      UIViewTemplate uiViewTemp = uiTempContent.getAncestorOfType(UIViewTemplate.class) ;      
-      
+      UIViewTemplate uiViewTemp = uiTempContent.getAncestorOfType(UIViewTemplate.class) ;
+
       // The codes are updated by lampt.
       List<UIComponent> uicomponents = uiManager.getChildren();
       List<UIComponent> parentUIComponents = new ArrayList<UIComponent>();
@@ -366,11 +366,11 @@ public class UITemplateContent extends UIForm implements UISelectable {
         if (UIPopupWindow.class.isInstance(uicomponent)) {
           if (!uicomponent.getId().equals(UITemplatesManager.NEW_TEMPLATE) &&
                                 !uicomponent.getId().equals(UITemplatesManager.EDIT_TEMPLATE)) {
-            uiManager.removeChildById(uicomponent.getId());  
+            uiManager.removeChildById(uicomponent.getId());
           }
         }
       }
-                 
+
       String membership = uiTempContent.getUIStringInput(FIELD_VIEWPERMISSION).getValue() ;
       uiManager.initPopupPermission(uiTempContent.getId(), membership) ;
       if(uiTempContent.getId().equals(UIDialogTab.DIALOG_FORM_NAME)) {

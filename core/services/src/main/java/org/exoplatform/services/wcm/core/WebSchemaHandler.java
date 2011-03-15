@@ -22,38 +22,38 @@ import org.exoplatform.services.jcr.ext.common.SessionProvider;
 
 /**
  * Created by The eXo Platform SAS.
- * 
+ *
  * @author : Hoa.Pham hoa.pham@exoplatform.com Jun 3, 2008
  */
-public interface WebSchemaHandler {  
+public interface WebSchemaHandler {
   /**
    * Match handler to process the schema
-   * 
+   *
    * @param node the node
    * @return true, if successful
    * @throws Exception the exception
    */
   public boolean matchHandler(SessionProvider sessionProvider, final Node node) throws Exception;
-  
+
   /**
    * Process schema when crete node
-   * 
+   *
    * @param node the node
    * @throws Exception the exception
    */
   public void onCreateNode(SessionProvider sessionProvider, final Node node) throws Exception;
-  
+
   /**
    * Update schema when modify node
-   * 
+   *
    * @param node the node
    * @throws Exception the exception
    */
   public void onModifyNode(SessionProvider sessionProvider, final Node node) throws Exception;
-  
+
   /**
    * Update schema before a node is removed
-   * 
+   *
    * @param node the node
    * @throws Exception the exception
    */

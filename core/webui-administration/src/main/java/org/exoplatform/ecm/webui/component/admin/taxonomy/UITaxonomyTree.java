@@ -46,21 +46,21 @@ public class UITaxonomyTree extends UIContainer {
   private Node currentNode_;
   private Node rootNode_ = null;
   private String rootPath_;
-  
+
   public UITaxonomyTree() throws Exception {
     UINodeTree tree = addChild(UINodeTree.class, null, "UITaxonomyTree");
     tree.setBeanLabelField("name");
     tree.setBeanIdField("path");
   }
-  
+
   public void update() throws Exception {
     UITaxonomyManager uiManager = getParent();
     rootNode_ = uiManager.getRootNode();
     rootPath_ = rootNode_.getPath();
   }
-  
+
   public Node getRootNode() throws Exception { return rootNode_;  }
-  
+
   public void buildTree() throws Exception {
     Iterator sibbling = null;
     Iterator children = null;
@@ -95,34 +95,34 @@ public class UITaxonomyTree extends UIContainer {
     while(sibbling.hasNext()) {
       Node sibblingNode = (Node)sibbling.next();
       if(PermissionUtil.canRead(sibblingNode) && !sibblingNode.isNodeType("exo:hiddenable")) {
-        sibblingList.add(sibblingNode);      
+        sibblingList.add(sibblingNode);
       }
-    }    
+    }
     if(nodeSelected.getPath().equals(rootPath_) || rootNode_.getParent().getPath().equals(currentNode_.getPath())) {
       taxonomyList.add(uiTaxonomyManager.getTaxonomyNode());
       children = taxonomyList.iterator();
     }
-    
+
     if(children != null) {
       while(children.hasNext()) {
         Node childrenNode = (Node)children.next();
         if(PermissionUtil.canRead(childrenNode) && !childrenNode.isNodeType("exo:hiddenable")) {
-          childrenList.add(childrenNode);        
+          childrenList.add(childrenNode);
         }
       }
     }
-    if(nodeSelected.getPath().equals(rootPath_)) tree.setSibbling(childrenList); 
+    if(nodeSelected.getPath().equals(rootPath_)) tree.setSibbling(childrenList);
     else tree.setSibbling(sibblingList);
     tree.setChildren(childrenList);
   }
-  
+
   public void renderChildren() throws Exception {
     buildTree();
     super.renderChildren();
-  } 
-  
+  }
+
   public String getRootPath() { return rootPath_; }
-  
+
   public void setNodeSelect(String path) throws Exception {
     UITaxonomyManager uiManager = getParent();
     currentNode_ = uiManager.getNodeByPath(path);
@@ -130,7 +130,7 @@ public class UITaxonomyTree extends UIContainer {
     uiManager.setSelectedPath(currentNode_.getPath());
     changeNode(currentNode_);
   }
-  
+
   public void changeNode(Node nodeSelected) throws Exception {
     List<Node> nodes = new ArrayList<Node>();
     NodeIterator nodeIter = nodeSelected.getNodes();
@@ -148,12 +148,12 @@ public class UITaxonomyTree extends UIContainer {
     uiWorkingArea.setNodeList(nodes);
     uiWorkingArea.updateGrid();
   }
-  
+
   public Node getSelectedNode() {
     if(currentNode_ == null) return rootNode_;
-    return currentNode_; 
+    return currentNode_;
   }
-  
+
   static public class ChangeNodeActionListener extends EventListener<UITaxonomyTree> {
     public void execute(Event<UITaxonomyTree> event) throws Exception {
       UITaxonomyTree uiTaxonomyTree = event.getSource();

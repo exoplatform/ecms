@@ -43,7 +43,7 @@ import org.exoplatform.webui.event.EventListener;
  * Author : Tran The Trong
  *          trongtt@exoplatform.com
  * Sep 19, 2006
- * 11:45:11 AM 
+ * 11:45:11 AM
  */
 @ComponentConfig(
     template = "system:/groovy/ecm/webui/UIGridWithButton.gtmpl",
@@ -56,29 +56,29 @@ import org.exoplatform.webui.event.EventListener;
 )
 
 public class UIViewList extends UIGrid {
-  
-  final static public String[] ACTIONS = {"AddView"} ; 
+
+  final static public String[] ACTIONS = {"AddView"} ;
   final static public String ST_VIEW = "ViewPopup" ;
   final static public String ST_EDIT = "EditPopup" ;
   final static public String ST_ADD = "AddPopup" ;
   private static String[] VIEW_BEAN_FIELD = {"name", "permissions", "tabList", "baseVersion"} ;
   private static String[] VIEW_ACTION = {"View","EditInfo","Delete"} ;
-  
+
   public UIViewList() throws Exception {
     getUIPageIterator().setId("UIViewsGrid") ;
     configure("name", VIEW_BEAN_FIELD, VIEW_ACTION) ;
   }
-  
+
   private String getBaseVersion(String name) throws Exception {
-    Node node = getApplicationComponent(ManageViewService.class).getViewByName(name, 
+    Node node = getApplicationComponent(ManageViewService.class).getViewByName(name,
         getRepository(), SessionProviderFactory.createSystemProvider());
     if(node == null) return null ;
     if(!node.isNodeType(Utils.MIX_VERSIONABLE) || node.isNodeType(Utils.NT_FROZEN)) return "";
-    return node.getBaseVersion().getName();    
+    return node.getBaseVersion().getName();
   }
-  
+
   public String[] getActions() { return ACTIONS ; }
-  
+
   @SuppressWarnings("unchecked")
   public void updateViewListGrid(int currentPage) throws Exception {
     Collections.sort(getViewsBean(), new ViewComparator()) ;
@@ -88,12 +88,12 @@ public class UIViewList extends UIGrid {
     else
       getUIPageIterator().setCurrentPage(currentPage);
   }
-  
+
   private List<ViewBean> getViewsBean() throws Exception {
-    List<ViewConfig> views = 
+    List<ViewConfig> views =
       getApplicationComponent(ManageViewService.class).getAllViews(getRepository()) ;
     List<ViewBean> viewBeans = new ArrayList<ViewBean>() ;
-    for(ViewConfig view:views) {      
+    for(ViewConfig view:views) {
       List<String>tabsName = new ArrayList<String>() ;
       for(ViewConfig.Tab tab:view.getTabList()) {
         tabsName.add(tab.getTabName()) ;
@@ -105,7 +105,7 @@ public class UIViewList extends UIGrid {
     }
     return viewBeans ;
   }
-  
+
   static public class ViewComparator implements Comparator {
     public int compare(Object o1, Object o2) throws ClassCastException {
       String name1 = ((ViewBean) o1).getName() ;
@@ -113,7 +113,7 @@ public class UIViewList extends UIGrid {
       return name1.compareToIgnoreCase(name2) ;
     }
   }
-  
+
   public boolean canDelete(List drivers, String viewName) {
     for(Object driver : drivers){
       String views = ((DriveData)driver).getViews() ;
@@ -123,11 +123,11 @@ public class UIViewList extends UIGrid {
     }
     return true ;
   }
-  
+
   public String getRepository() {
     return getAncestorOfType(UIECMAdminPortlet.class).getPreferenceRepository() ;
   }
-  
+
   static  public class AddViewActionListener extends EventListener<UIViewList> {
     public void execute(Event<UIViewList> event) throws Exception {
       UIViewList uiViewList = event.getSource() ;
@@ -139,9 +139,9 @@ public class UIViewList extends UIGrid {
       }
       UIViewContainer uiViewContainer = uiViewList.getParent() ;
       uiViewContainer.removeChildById(UIViewList.ST_VIEW) ;
-      uiViewContainer.removeChildById(UIViewList.ST_EDIT) ;      
+      uiViewContainer.removeChildById(UIViewList.ST_EDIT) ;
       uiViewContainer.initPopup(UIViewList.ST_ADD) ;
-      UIViewFormTabPane uiViewTabPane = 
+      UIViewFormTabPane uiViewTabPane =
         uiViewContainer.findFirstComponentOfType(UIViewFormTabPane.class) ;
       uiViewTabPane.reset() ;
       UIViewManager uiManager = uiViewList.getAncestorOfType(UIViewManager.class) ;
@@ -149,7 +149,7 @@ public class UIViewList extends UIGrid {
       event.getRequestContext().addUIComponentToUpdateByAjax(uiViewContainer) ;
     }
   }
-  
+
   static  public class DeleteActionListener extends EventListener<UIViewList> {
     public void execute(Event<UIViewList> event) throws Exception {
       UIViewList viewList = event.getSource() ;
@@ -161,7 +161,7 @@ public class UIViewList extends UIGrid {
       if(!viewList.canDelete(manageDrive.getAllDrives(repository), viewName)) {
         UIApplication app = viewList.getAncestorOfType(UIApplication.class) ;
         Object[] args = {viewName} ;
-        app.addMessage(new ApplicationMessage("UIViewList.msg.template-in-use", args)) ;        
+        app.addMessage(new ApplicationMessage("UIViewList.msg.template-in-use", args)) ;
         event.getRequestContext().addUIComponentToUpdateByAjax(viewList.getParent()) ;
         return ;
       }
@@ -176,12 +176,12 @@ public class UIViewList extends UIGrid {
       UIViewList uiViewList = event.getSource() ;
       String repository = uiViewList.getAncestorOfType(UIECMAdminPortlet.class).getPreferenceRepository() ;
       uiViewList.setRenderSibling(UIViewList.class) ;
-      String viewName = event.getRequestContext().getRequestParameter(OBJECTID) ;      
+      String viewName = event.getRequestContext().getRequestParameter(OBJECTID) ;
       Node viewNode = uiViewList.getApplicationComponent(ManageViewService.class).
         getViewByName(viewName, repository, SessionProviderFactory.createSystemProvider()) ;
       UIViewContainer uiViewContainer = uiViewList.getParent() ;
       uiViewContainer.removeChildById(UIViewList.ST_VIEW) ;
-      uiViewContainer.removeChildById(UIViewList.ST_ADD) ;      
+      uiViewContainer.removeChildById(UIViewList.ST_ADD) ;
       uiViewContainer.initPopup(UIViewList.ST_EDIT) ;
       UIViewFormTabPane viewTabPane = uiViewContainer.findFirstComponentOfType(UIViewFormTabPane.class) ;
       UIViewForm viewForm = viewTabPane.getChild(UIViewForm.class) ;
@@ -202,7 +202,7 @@ public class UIViewList extends UIGrid {
       event.getRequestContext().addUIComponentToUpdateByAjax(uiViewContainer) ;
     }
   }
-  
+
   static  public class ViewActionListener extends EventListener<UIViewList> {
     public void execute(Event<UIViewList> event) throws Exception {
       UIViewList uiViewList = event.getSource() ;
@@ -213,9 +213,9 @@ public class UIViewList extends UIGrid {
           viewName, repository, SessionProviderFactory.createSystemProvider()) ;
       UIViewContainer uiViewContainer = uiViewList.getParent() ;
       uiViewContainer.removeChildById(UIViewList.ST_EDIT) ;
-      uiViewContainer.removeChildById(UIViewList.ST_ADD) ;      
+      uiViewContainer.removeChildById(UIViewList.ST_ADD) ;
       uiViewContainer.initPopup(UIViewList.ST_VIEW) ;
-      UIViewFormTabPane uiViewTabPane = 
+      UIViewFormTabPane uiViewTabPane =
         uiViewContainer.findFirstComponentOfType(UIViewFormTabPane.class);
       UIViewForm uiViewForm = uiViewTabPane.getChild(UIViewForm.class) ;
       uiViewForm.refresh(false) ;
@@ -227,8 +227,8 @@ public class UIViewList extends UIGrid {
       event.getRequestContext().addUIComponentToUpdateByAjax(uiViewContainer) ;
     }
   }
-  
-  public class ViewBean {    
+
+  public class ViewBean {
     private String name ;
     private String permissions ;
     private String tabList ;
@@ -243,16 +243,16 @@ public class UIViewList extends UIGrid {
       }
       tabList = str.toString() ;
     }
-    
+
     public String getBaseVersion() { return baseVersion; }
     public void setBaseVersion(String s) { baseVersion = s;
     }
     public String getName() { return name; }
     public void setName(String s) { name = s; }
-    
+
     public String getPermissions() { return permissions; }
     public void setPermissions(String s) { permissions = s; }
-    
+
     public String getTabList() { return tabList; }
     public void setTabList(String ls) { tabList = ls; }
   }

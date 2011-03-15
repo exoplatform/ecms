@@ -29,29 +29,29 @@ import org.exoplatform.services.security.ConversationState;
  * Created by The eXo Platform SARL
  * Author : Dang Van Minh
  *          minh.dang@exoplatform.com
- * Nov 2, 2009  
+ * Nov 2, 2009
  * 3:09:32 AM
  */
 /**
  * Store all informations of node's modification
- * 
+ *
  */
 public class ModifyNodeAction implements Action {
 
   public boolean execute(Context context) throws Exception {
-  	Object item = context.get("currentItem");
-  	Node node = (item instanceof Property) ?
-  							((Property)item).getParent() :
-  							(Node)item;	
+    Object item = context.get("currentItem");
+    Node node = (item instanceof Property) ?
+                ((Property)item).getParent() :
+                (Node)item;
     if(node.isNodeType("nt:resource")) node = node.getParent();
-    ConversationState conversationState = ConversationState.getCurrent(); 
+    ConversationState conversationState = ConversationState.getCurrent();
     String userName = (conversationState == null) ? node.getSession().getUserID() :
                                                     conversationState.getIdentity().getUserId();
     if(node.canAddMixin("exo:modify")) {
-      node.addMixin("exo:modify");            
+      node.addMixin("exo:modify");
     }
     node.setProperty("exo:lastModifiedDate", new GregorianCalendar());
-    node.setProperty("exo:lastModifier",userName);    
+    node.setProperty("exo:lastModifier",userName);
     return false;
   }
 

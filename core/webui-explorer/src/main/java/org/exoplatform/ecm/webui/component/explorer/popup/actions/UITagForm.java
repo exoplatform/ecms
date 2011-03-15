@@ -42,10 +42,10 @@ import org.exoplatform.webui.form.validator.MandatoryValidator;
  * Created by The eXo Platform SARL
  * Author : Nguyen Anh Vu
  *          anhvurz90@gmail.com
- * Nov 27, 2009  
+ * Nov 27, 2009
  * 5:03:28 PM
  */
-@ComponentConfig( 
+@ComponentConfig(
     lifecycle = UIFormLifecycle.class,
     template =  "system:/groovy/webui/form/UIForm.gtmpl",
     events = {
@@ -57,41 +57,41 @@ public class UITagForm extends UIForm {
 
   final static public String TAG_NAME = "tagName" ;
   final static public String PUBLIC_TAG_NODE_PATH = "exoPublicTagNode";
-  
+
   private Node selectedTag_ ;
   private String oldTagPath_;
   private String oldName_;
-  
+
   public UITagForm() throws Exception {
     addUIFormInput(new UIFormStringInput(TAG_NAME, TAG_NAME, null).addValidator(MandatoryValidator.class)) ;
   }
-  
+
   public Node getTag() { return selectedTag_; }
-  
-  public void setTag(Node selectedTag) throws Exception { 
+
+  public void setTag(Node selectedTag) throws Exception {
     selectedTag_ = selectedTag;
     if (selectedTag != null) {
-    	oldTagPath_ = selectedTag_.getPath();
-    	oldName_ = selectedTag_.getName();
-	    getUIStringInput(TAG_NAME).setValue(oldName_);
+      oldTagPath_ = selectedTag_.getPath();
+      oldName_ = selectedTag_.getName();
+      getUIStringInput(TAG_NAME).setValue(oldName_);
 //	    getUIStringInput(TAG_NAME).setEditable(false) ;
-    } 
+    }
   }
-  
+
   static public class UpdateTagActionListener extends EventListener<UITagForm> {
     public void execute(Event<UITagForm> event) throws Exception {
       UITagForm uiForm = event.getSource() ;
       UIJCRExplorer uiExplorer = uiForm.getAncestorOfType(UIJCRExplorer.class);
       UIApplication uiApp = uiForm.getAncestorOfType(UIApplication.class) ;
-      
+
       String workspace = uiForm.getAncestorOfType(UIJCRExplorer.class).getRepository().getConfiguration().getDefaultWorkspaceName();
       String userName = uiExplorer.getSession().getUserID();
       int scope = uiExplorer.getTagScope();
-      
+
       NewFolksonomyService newFolksonomyService = uiForm.getApplicationComponent(NewFolksonomyService.class) ;
       String tagName = uiForm.getUIStringInput(TAG_NAME).getValue().trim();
       if(tagName.trim().length() > 20) {
-        uiApp.addMessage(new ApplicationMessage("UITaggingForm.msg.tagName-too-long", null, 
+        uiApp.addMessage(new ApplicationMessage("UITaggingForm.msg.tagName-too-long", null,
                                                 ApplicationMessage.WARNING));
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
         return;
@@ -99,46 +99,46 @@ public class UITagForm extends UIForm {
       String[] arrFilterChar = {"&", "'", "$", "@", ":","]", "[", "*", "%", "!", "/", "\\"};
       for(String filterChar : arrFilterChar) {
         if(tagName.indexOf(filterChar) > -1) {
-          uiApp.addMessage(new ApplicationMessage("UITaggingForm.msg.tagName-invalid", null, 
+          uiApp.addMessage(new ApplicationMessage("UITaggingForm.msg.tagName-invalid", null,
                                                   ApplicationMessage.WARNING));
           event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
           return;
         }
       }
       try {
-      	// add new tag
-      	if (uiForm.getTag() == null) {
-          if (scope == NewFolksonomyService.PRIVATE) { 
-          	newFolksonomyService.addPrivateTag(new String[] { tagName }, 
-          																		 null, 
-          																		 null, 
-          																		 workspace, 
-          																		 userName);	
+        // add new tag
+        if (uiForm.getTag() == null) {
+          if (scope == NewFolksonomyService.PRIVATE) {
+            newFolksonomyService.addPrivateTag(new String[] { tagName },
+                                               null,
+                                               null,
+                                               workspace,
+                                               userName);
           }
           if (scope == NewFolksonomyService.PUBLIC) {
-          	NodeHierarchyCreator nodeHierarchyCreator = uiForm.getApplicationComponent(NodeHierarchyCreator.class);
-          	String publicTagNodePath = nodeHierarchyCreator.getJcrPath(PUBLIC_TAG_NODE_PATH);
-          	newFolksonomyService.addPublicTag(publicTagNodePath, 
-          																		new String[] { tagName },
-          																		null, 
-          																		null, 
-          																		workspace); 
+            NodeHierarchyCreator nodeHierarchyCreator = uiForm.getApplicationComponent(NodeHierarchyCreator.class);
+            String publicTagNodePath = nodeHierarchyCreator.getJcrPath(PUBLIC_TAG_NODE_PATH);
+            newFolksonomyService.addPublicTag(publicTagNodePath,
+                                              new String[] { tagName },
+                                              null,
+                                              null,
+                                              workspace);
           }
-      	}
-      	// rename tag
-      	else {
+        }
+        // rename tag
+        else {
           if (!existTag(tagName, null, workspace, scope, uiForm, userName)) {
-          	newFolksonomyService.modifyTagName(uiForm.oldTagPath_, tagName, null, workspace);
+            newFolksonomyService.modifyTagName(uiForm.oldTagPath_, tagName, null, workspace);
           } else if (!tagName.equals(uiForm.oldName_)) {
-        	 uiApp.addMessage(new ApplicationMessage("UITagForm.msg.NameAlreadyExist", null, 
-          	              ApplicationMessage.WARNING));
+           uiApp.addMessage(new ApplicationMessage("UITagForm.msg.NameAlreadyExist", null,
+                          ApplicationMessage.WARNING));
 //           event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
           }
-      	}
-      	
+        }
+
         UIEditingTagsForm uiEdit = uiForm.getAncestorOfType(UIEditingTagsForm.class) ;
         if (uiEdit != null) {
-	        uiEdit.getChild(UIEditingTagList.class).updateGrid();
+          uiEdit.getChild(UIEditingTagList.class).updateGrid();
         }
       } catch(Exception e) {
         String key = "UITagStyleForm.msg.error-update" ;
@@ -152,25 +152,25 @@ public class UITagForm extends UIForm {
       if (preferences.isShowSideBar()) {
         UISideBar uiSideBar = uiExplorer.findFirstComponentOfType(UISideBar.class);
         event.getRequestContext().addUIComponentToUpdateByAjax(uiSideBar);
-      }      
+      }
       event.getRequestContext().addUIComponentToUpdateByAjax(uiPopup.getParent()) ;
     }
-    
-    private boolean existTag(String tagName, String repo, String workspace, int scope, 
-    												 UITagForm uiForm, String userName) throws Exception {
-    	NewFolksonomyService newFolksonomyService = uiForm.getApplicationComponent(NewFolksonomyService.class) ;
-    	NodeHierarchyCreator nodeHierarchyCreator = uiForm.getApplicationComponent(NodeHierarchyCreator.class);
-    	String publicTagNodePath = nodeHierarchyCreator.getJcrPath(PUBLIC_TAG_NODE_PATH);
-    	List<Node> tagList = (scope == NewFolksonomyService.PUBLIC) ?	
-    												newFolksonomyService.getAllPublicTags(publicTagNodePath, repo, workspace) :
-    												newFolksonomyService.getAllPrivateTags(userName, repo, workspace);
-			for (Node tag : tagList)
-				if (tag.getName().equals(tagName))
-					return true;
-			return false;
+
+    private boolean existTag(String tagName, String repo, String workspace, int scope,
+                             UITagForm uiForm, String userName) throws Exception {
+      NewFolksonomyService newFolksonomyService = uiForm.getApplicationComponent(NewFolksonomyService.class) ;
+      NodeHierarchyCreator nodeHierarchyCreator = uiForm.getApplicationComponent(NodeHierarchyCreator.class);
+      String publicTagNodePath = nodeHierarchyCreator.getJcrPath(PUBLIC_TAG_NODE_PATH);
+      List<Node> tagList = (scope == NewFolksonomyService.PUBLIC) ?
+                            newFolksonomyService.getAllPublicTags(publicTagNodePath, repo, workspace) :
+                            newFolksonomyService.getAllPrivateTags(userName, repo, workspace);
+      for (Node tag : tagList)
+        if (tag.getName().equals(tagName))
+          return true;
+      return false;
     }
   }
-  
+
   static public class CancelActionListener extends EventListener<UITagForm> {
     public void execute(Event<UITagForm> event) throws Exception {
       UITagForm uiForm = event.getSource();
@@ -179,5 +179,5 @@ public class UITagForm extends UIForm {
       event.getRequestContext().addUIComponentToUpdateByAjax(uiPopup.getParent());
     }
   }
-  
+
 }

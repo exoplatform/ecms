@@ -24,11 +24,11 @@ import javax.jcr.Node;
  * Created by The eXo Platform SARL
  * Author : Dang Van Minh
  *          minh.dang@exoplatform.com
- * Nov 16, 2009  
+ * Nov 16, 2009
  * 9:55:29 AM
  */
 public interface FavoriteService {
-  
+
  /**
   * Add favorite to node
   * @param sessionProvider The session provider which will be used to get user node
@@ -37,8 +37,8 @@ public interface FavoriteService {
   * @throws Exception The exception will be raised if the node can not add mixin
   */
  public void addFavorite(Node node, String userName) throws Exception;
- 
- 
+
+
  /**
   * Remove favorite from node
   * @param sessionProvider The session provider which will be used to get user node
@@ -47,7 +47,7 @@ public interface FavoriteService {
   * @throws Exception
   */
  public void removeFavorite(Node node, String userName) throws Exception;
- 
+
  /**
   * Get all favourite nodes by user
   * @param workspace Get all favorite nodes from this workspace
@@ -57,7 +57,7 @@ public interface FavoriteService {
   * @return List<Node> All favorite node added by user
   * @throws Exception
   */
- public List<Node> getAllFavoriteNodesByUser(String workspace, String repository, 
+ public List<Node> getAllFavoriteNodesByUser(String workspace, String repository,
      String userName) throws Exception;
 
  /**
@@ -66,5 +66,5 @@ public interface FavoriteService {
   * @param userName The user to check
   */
  public boolean isFavoriter(String userName, Node node) throws Exception ;
- 
+
 }

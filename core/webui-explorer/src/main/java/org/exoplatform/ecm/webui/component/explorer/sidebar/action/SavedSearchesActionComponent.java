@@ -33,9 +33,9 @@ import org.exoplatform.webui.ext.manager.UIAbstractManagerComponent;
  * Created by The eXo Platform SAS
  * Author : eXoPlatform
  *          ha.dangviet@exoplatform.com
- * Nov 22, 2010  
+ * Nov 22, 2010
  */
-@ComponentConfig(events = { 
+@ComponentConfig(events = {
     @EventConfig(
                  listeners = SavedSearchesActionComponent.SavedSearchesActionListener.class) })
 public class SavedSearchesActionComponent  extends UIAbstractManagerComponent {
@@ -46,7 +46,7 @@ public class SavedSearchesActionComponent  extends UIAbstractManagerComponent {
   public static List<UIExtensionFilter> getFilters() {
     return FILTERS;
   }
-  
+
   public static class SavedSearchesActionListener extends UISideBarActionListener<SavedSearchesActionComponent> {
 
     @Override
@@ -54,13 +54,12 @@ public class SavedSearchesActionComponent  extends UIAbstractManagerComponent {
       UISideBar uiSideBar = event.getSource().getAncestorOfType(UISideBar.class);
       uiSideBar.setCurrentComp(uiSideBar.getChild(UISavedSearches.class).getId());
       uiSideBar.setSelectedComp(event.getSource().getUIExtensionName());
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiSideBar.getParent());      
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiSideBar.getParent());
     }
-    
+
   }
   @Override
   public Class<? extends UIAbstractManager> getUIAbstractManagerClass() {
-    // TODO Auto-generated method stub
     return null;
   }
 

@@ -51,7 +51,7 @@ import org.exoplatform.webui.form.UIFormStringInput;
  * Created by The eXo Platform SARL
  * Author : Dang Van Minh
  *          minh.dang@exoplatform.com
- * May 6, 2007  
+ * May 6, 2007
  * 4:29:08 PM
  */
 @ComponentConfig(
@@ -64,16 +64,16 @@ import org.exoplatform.webui.form.UIFormStringInput;
       @EventConfig(listeners = UIConstraintsForm.AddMetadataTypeActionListener.class),
       @EventConfig(listeners = UIConstraintsForm.AddNodeTypeActionListener.class),
       @EventConfig(listeners = UIConstraintsForm.AddCategoryActionListener.class)
-    }    
+    }
 )
 public class UIConstraintsForm extends UIForm implements UISelectable{
 
   final static public String OPERATOR = "operator" ;
   final static public String TIME_OPTION = "timeOpt" ;
-  final static public String PROPERTY1 = "property1" ; 
-  final static public String PROPERTY2 = "property2" ; 
-  final static public String PROPERTY3 = "property3" ; 
-  final static public String CONTAIN_EXACTLY = "containExactly" ; 
+  final static public String PROPERTY1 = "property1" ;
+  final static public String PROPERTY2 = "property2" ;
+  final static public String PROPERTY3 = "property3" ;
+  final static public String CONTAIN_EXACTLY = "containExactly" ;
   final static public String CONTAIN = "contain" ;
   final static public String NOT_CONTAIN = "notContain" ;
   final static public String START_TIME = "startTime" ;
@@ -91,31 +91,31 @@ public class UIConstraintsForm extends UIForm implements UISelectable{
   final static public String NODETYPE_PROPERTY = "nodetypePro" ;
   final static public String CATEGORY_PROPERTY = "categoryPro" ;
   final static private String SPLIT_REGEX = "/|\\s+|:" ;
-  final static private String DATETIME_REGEX = 
+  final static private String DATETIME_REGEX =
     "^(\\d{1,2}\\/\\d{1,2}\\/\\d{1,4})\\s*(\\s+\\d{1,2}:\\d{1,2}:\\d{1,2})?$" ;
-  
+
   private String virtualDateQuery_ ;
-  
+
   public UIConstraintsForm() throws Exception {
     setActions(new String[] {"Add", "Cancel"}) ;
     List<SelectItemOption<String>> typeOperation = new ArrayList<SelectItemOption<String>>() ;
     typeOperation.add(new SelectItemOption<String>(AND_OPERATION, AND_OPERATION));
     typeOperation.add(new SelectItemOption<String>(OR_OPERATION, OR_OPERATION));
     addUIFormInput(new UIFormSelectBox(OPERATOR, OPERATOR, typeOperation)) ;
-    
+
     addUIFormInput(new UIFormCheckBoxInput<Boolean>(EXACTLY_PROPERTY, EXACTLY_PROPERTY, null)) ;
     addUIFormInput(new UIFormStringInput(PROPERTY1, PROPERTY1, null)) ;
     addUIFormInput(new UIFormStringInput(CONTAIN_EXACTLY, CONTAIN_EXACTLY, null)) ;
-    
+
     addUIFormInput(new UIFormCheckBoxInput<Boolean>(CONTAIN_PROPERTY, CONTAIN_PROPERTY, null)) ;
     addUIFormInput(new UIFormStringInput(PROPERTY2, PROPERTY2, null)) ;
     addUIFormInput(new UIFormStringInput(CONTAIN, CONTAIN, null)) ;
-    
+
     addUIFormInput(new UIFormCheckBoxInput<Boolean>(NOT_CONTAIN_PROPERTY, NOT_CONTAIN_PROPERTY, null)) ;
     addUIFormInput(new UIFormStringInput(PROPERTY3, PROPERTY3, null)) ;
     addUIFormInput(new UIFormStringInput(NOT_CONTAIN, NOT_CONTAIN, null)) ;
-    
-    
+
+
     addUIFormInput(new UIFormCheckBoxInput<Boolean>(DATE_PROPERTY, DATE_PROPERTY, null)) ;
     List<SelectItemOption<String>> dateOperation = new ArrayList<SelectItemOption<String>>() ;
     dateOperation.add(new SelectItemOption<String>(CREATED_DATE, CREATED_DATE));
@@ -142,7 +142,7 @@ public class UIConstraintsForm extends UIForm implements UISelectable{
     }
     return "" ;
   }
-  
+
   private String getContainSQLQueryString(String property, String type, boolean isContain) {
     String value = getUIStringInput(type).getValue();
     if(value == null) return "";
@@ -152,17 +152,21 @@ public class UIConstraintsForm extends UIForm implements UISelectable{
     }
     return "";
   }
-  
+
   private String getDateTimeQueryString(String beforeDate, String afterDate, String type) {
     Calendar bfDate = getUIFormDateTimeInput(START_TIME).getCalendar() ;
-    if(afterDate != null && afterDate.trim().length() > 0) {
-      Calendar afDate = getUIFormDateTimeInput(END_TIME).getCalendar() ;
-      if(type.equals(CREATED_DATE)) {
-        virtualDateQuery_ = "(documents created from '"+beforeDate+"') and (documents created to '"+afterDate+"')" ;
-        return "@exo:dateCreated >= xs:dateTime('"+ISO8601.format(bfDate)+"') and @exo:dateCreated < xs:dateTime('"+ISO8601.format(afDate)+"')" ;
-      } else if(type.equals(MODIFIED_DATE)) {
-        virtualDateQuery_ = "(documents modified from '"+beforeDate+"') and (documents modified to '"+afterDate+"')" ;
-        return "@exo:dateModified >= xs:dateTime('"+ISO8601.format(bfDate)+"') and @exo:dateModified < xs:dateTime('"+ISO8601.format(afDate)+"')" ;
+    if (afterDate != null && afterDate.trim().length() > 0) {
+      Calendar afDate = getUIFormDateTimeInput(END_TIME).getCalendar();
+      if (type.equals(CREATED_DATE)) {
+        virtualDateQuery_ = "(documents created from '" + beforeDate
+            + "') and (documents created to '" + afterDate + "')";
+        return "@exo:dateCreated >= xs:dateTime('" + ISO8601.format(bfDate)
+            + "') and @exo:dateCreated < xs:dateTime('" + ISO8601.format(afDate) + "')";
+      } else if (type.equals(MODIFIED_DATE)) {
+        virtualDateQuery_ = "(documents modified from '" + beforeDate
+            + "') and (documents modified to '" + afterDate + "')";
+        return "@exo:dateModified >= xs:dateTime('" + ISO8601.format(bfDate)
+            + "') and @exo:dateModified < xs:dateTime('" + ISO8601.format(afDate) + "')";
       }
     } else {
       if(type.equals(CREATED_DATE)) {
@@ -175,17 +179,21 @@ public class UIConstraintsForm extends UIForm implements UISelectable{
     }
     return "" ;
   }
-  
+
   private String getDateTimeSQLQueryString(String beforeDate, String afterDate, String type) {
     Calendar bfDate = getUIFormDateTimeInput(START_TIME).getCalendar();
-    if(afterDate != null && afterDate.trim().length() > 0) {
+    if (afterDate != null && afterDate.trim().length() > 0) {
       Calendar afDate = getUIFormDateTimeInput(END_TIME).getCalendar();
-      if(type.equals(CREATED_DATE)) {
-        virtualDateQuery_ = "(documents created from '"+beforeDate+"') and (documents created to '"+afterDate+"')";
-        return "exo:dateCreated >= TIMESTAMP '"+ISO8601.format(bfDate)+"' and exo:dateCreated < TIMESTAMP '"+ISO8601.format(afDate)+"'";
-      } else if(type.equals(MODIFIED_DATE)) {
-        virtualDateQuery_ = "(documents modified from '"+beforeDate+"') and (documents modified to '"+afterDate+"')";
-        return "exo:dateModified >= TIMESTAMP '"+ISO8601.format(bfDate)+"' and exo:dateModified < TIMESTAMP '"+ISO8601.format(afDate)+"'";
+      if (type.equals(CREATED_DATE)) {
+        virtualDateQuery_ = "(documents created from '" + beforeDate
+            + "') and (documents created to '" + afterDate + "')";
+        return "exo:dateCreated >= TIMESTAMP '" + ISO8601.format(bfDate)
+            + "' and exo:dateCreated < TIMESTAMP '" + ISO8601.format(afDate) + "'";
+      } else if (type.equals(MODIFIED_DATE)) {
+        virtualDateQuery_ = "(documents modified from '" + beforeDate
+            + "') and (documents modified to '" + afterDate + "')";
+        return "exo:dateModified >= TIMESTAMP '" + ISO8601.format(bfDate)
+            + "' and exo:dateModified < TIMESTAMP '" + ISO8601.format(afDate) + "'";
       }
     } else {
       if(type.equals(CREATED_DATE)) {
@@ -198,37 +206,45 @@ public class UIConstraintsForm extends UIForm implements UISelectable{
     }
     return "" ;
   }
-  
+
   private String getNodeTypeQueryString(String nodeTypes) {
     String advanceQuery = "" ;
     String[] arrNodeTypes = {} ;
-    if(nodeTypes.indexOf(",") > -1) arrNodeTypes = nodeTypes.split(",") ;
-    if(arrNodeTypes.length > 0) {
-      for(String nodeType : arrNodeTypes) {
-        if(advanceQuery.length() == 0) advanceQuery = "@jcr:primaryType = '" + nodeType + "'" ;
-        else advanceQuery = advanceQuery + " " + OR_OPERATION + " " + "@jcr:primaryType = '" + nodeType + "'" ;
+    if (nodeTypes.indexOf(",") > -1)
+      arrNodeTypes = nodeTypes.split(",");
+    if (arrNodeTypes.length > 0) {
+      for (String nodeType : arrNodeTypes) {
+        if (advanceQuery.length() == 0)
+          advanceQuery = "@jcr:primaryType = '" + nodeType + "'";
+        else
+          advanceQuery = advanceQuery + " " + OR_OPERATION + " " + "@jcr:primaryType = '"
+              + nodeType + "'";
       }
     } else {
       advanceQuery = "@jcr:primaryType = '" + nodeTypes + "'" ;
     }
     return advanceQuery;
   }
-  
+
   private String getNodeTypeSQLQueryString(String nodeTypes) {
     String advanceQuery = "";
     String[] arrNodeTypes = {};
-    if(nodeTypes.indexOf(",") > -1) arrNodeTypes = nodeTypes.split(",");
-    if(arrNodeTypes.length > 0) {
-      for(String nodeType : arrNodeTypes) {
-        if(advanceQuery.length() == 0) advanceQuery = "jcr:primaryType = '" + nodeType + "'";
-        else advanceQuery = advanceQuery + " " + OR_OPERATION + " " + "jcr:primaryType = '" + nodeType + "'";
+    if (nodeTypes.indexOf(",") > -1)
+      arrNodeTypes = nodeTypes.split(",");
+    if (arrNodeTypes.length > 0) {
+      for (String nodeType : arrNodeTypes) {
+        if (advanceQuery.length() == 0)
+          advanceQuery = "jcr:primaryType = '" + nodeType + "'";
+        else
+          advanceQuery = advanceQuery + " " + OR_OPERATION + " " + "jcr:primaryType = '" + nodeType
+              + "'";
       }
     } else {
       advanceQuery = "jcr:primaryType = '" + nodeTypes + "'";
     }
     return advanceQuery;
   }
-  
+
   /**
    * Create query string for category
    * @param category
@@ -238,12 +254,12 @@ public class UIConstraintsForm extends UIForm implements UISelectable{
     if (categoryPath == null || categoryPath.length() == 0) return "";
     return ("@exo:category = '" + categoryPath + "'");
   }
-  
-  private String getCategorySQLQueryString(String categoryPath) {    
+
+  private String getCategorySQLQueryString(String categoryPath) {
     if (categoryPath == null || categoryPath.length() == 0) return "";
     return ("exo:category = '" + categoryPath + "'");
   }
-  
+
   private void addConstraint(int opt) throws Exception {
     String advanceQuery = "" ;
     String property ;
@@ -304,9 +320,11 @@ public class UIConstraintsForm extends UIForm implements UISelectable{
       default:
         break;
     }
-    uiSimpleSearch.updateAdvanceConstraint(advanceQuery, getUIFormSelectBox(OPERATOR).getValue(), virtualDateQuery_) ;
+    uiSimpleSearch.updateAdvanceConstraint(advanceQuery,
+                                           getUIFormSelectBox(OPERATOR).getValue(),
+                                           virtualDateQuery_);
   }
-  
+
   private void resetConstraintForm() {
     reset();
     getUIFormCheckBoxInput(EXACTLY_PROPERTY).setChecked(false);
@@ -316,17 +334,19 @@ public class UIConstraintsForm extends UIForm implements UISelectable{
     getUIFormCheckBoxInput(NODETYPE_PROPERTY).setChecked(false);
     getUIFormCheckBoxInput(CATEGORY_PROPERTY).setChecked(false);
   }
-  
+
   private boolean isValidDateTime(String dateTime) {
     String[] arr = dateTime.split(SPLIT_REGEX, 7) ;
     int valid = Integer.parseInt(arr[0]) ;
     if(valid < 1 || valid > 12) return false;
     Calendar date = new GregorianCalendar(Integer.parseInt(arr[2]), valid - 1, 1) ;
     if(Integer.parseInt(arr[1]) > date.getActualMaximum(Calendar.DAY_OF_MONTH)) return false;
-    if(arr.length > 3 && (Integer.parseInt(arr[3]) > 23 || Integer.parseInt(arr[4]) > 59 || Integer.parseInt(arr[5]) > 59)) return false; 
+    if (arr.length > 3
+        && (Integer.parseInt(arr[3]) > 23 || Integer.parseInt(arr[4]) > 59 || Integer.parseInt(arr[5]) > 59))
+      return false;
     return true;
   }
-  
+
   static public class AddActionListener extends EventListener<UIConstraintsForm> {
     public void execute(Event<UIConstraintsForm> event) throws Exception {
       UIConstraintsForm uiForm = event.getSource();
@@ -337,30 +357,34 @@ public class UIConstraintsForm extends UIForm implements UISelectable{
       boolean isNodeType = uiForm.getUIFormCheckBoxInput(NODETYPE_PROPERTY).isChecked() ;
       boolean isCategory = uiForm.getUIFormCheckBoxInput(CATEGORY_PROPERTY).isChecked() ;
       UIApplication uiApp = uiForm.getAncestorOfType(UIApplication.class) ;
-      if(!isExactly && !isContain && !isNotContain && !isDateTime && !isNodeType && !isCategory) {
-        uiApp.addMessage(new ApplicationMessage("UIConstraintsForm.msg.must-choose-one", null, ApplicationMessage.WARNING)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
-        return ;        
+      if (!isExactly && !isContain && !isNotContain && !isDateTime && !isNodeType && !isCategory) {
+        uiApp.addMessage(new ApplicationMessage("UIConstraintsForm.msg.must-choose-one",
+                                                null,
+                                                ApplicationMessage.WARNING));
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        return;
       }
-      if(isExactly) {
-        String property = uiForm.getUIStringInput(PROPERTY1).getValue() ;
-        if(property == null || property.length() < 1) {
-          uiApp.addMessage(new ApplicationMessage("UIConstraintsForm.msg.properties-required", null, 
-                                                  ApplicationMessage.WARNING)) ;
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
-          return ;
+      if (isExactly) {
+        String property = uiForm.getUIStringInput(PROPERTY1).getValue();
+        if (property == null || property.length() < 1) {
+          uiApp.addMessage(new ApplicationMessage("UIConstraintsForm.msg.properties-required",
+                                                  null,
+                                                  ApplicationMessage.WARNING));
+          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          return;
         }
         String value = uiForm.getUIStringInput(CONTAIN_EXACTLY).getValue() ;
-        if(value == null || value.trim().length() < 0) {
-          uiApp.addMessage(new ApplicationMessage("UIConstraintsForm.msg.exactly-require", null, 
-                                                  ApplicationMessage.WARNING)) ;
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
-          return ;
+        if (value == null || value.trim().length() < 0) {
+          uiApp.addMessage(new ApplicationMessage("UIConstraintsForm.msg.exactly-require",
+                                                  null,
+                                                  ApplicationMessage.WARNING));
+          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          return;
         }
         uiForm.addConstraint(0) ;
       }
       if(isContain) {
-        String property = uiForm.getUIStringInput(PROPERTY2).getValue() ; 
+        String property = uiForm.getUIStringInput(PROPERTY2).getValue() ;
         if(property == null || property.length() < 1) {
           uiApp.addMessage(new ApplicationMessage("UIConstraintsForm.msg.properties-required", null,
                                                   ApplicationMessage.WARNING)) ;
@@ -369,7 +393,7 @@ public class UIConstraintsForm extends UIForm implements UISelectable{
         }
         String value = uiForm.getUIStringInput(CONTAIN).getValue() ;
         if(value == null || value.trim().length() < 0) {
-          uiApp.addMessage(new ApplicationMessage("UIConstraintsForm.msg.value-required", null, 
+          uiApp.addMessage(new ApplicationMessage("UIConstraintsForm.msg.value-required", null,
                                                   ApplicationMessage.WARNING)) ;
           event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
           return ;
@@ -377,7 +401,7 @@ public class UIConstraintsForm extends UIForm implements UISelectable{
         uiForm.addConstraint(1) ;
       }
       if(isNotContain) {
-        String property = uiForm.getUIStringInput(PROPERTY3).getValue() ; 
+        String property = uiForm.getUIStringInput(PROPERTY3).getValue() ;
         if(property == null || property.length() < 1) {
           uiApp.addMessage(new ApplicationMessage("UIConstraintsForm.msg.properties-required", null,
                                                   ApplicationMessage.WARNING)) ;
@@ -386,24 +410,24 @@ public class UIConstraintsForm extends UIForm implements UISelectable{
         }
         String value = uiForm.getUIStringInput(NOT_CONTAIN).getValue() ;
         if(value == null || value.trim().length() < 0) {
-          uiApp.addMessage(new ApplicationMessage("UIConstraintsForm.msg.value-required", null, 
+          uiApp.addMessage(new ApplicationMessage("UIConstraintsForm.msg.value-required", null,
                                                   ApplicationMessage.WARNING)) ;
           event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
           return ;
-        }        
+        }
         uiForm.addConstraint(2) ;
       }
       if(isDateTime) {
         String fromDate = uiForm.getUIFormDateTimeInput(START_TIME).getValue() ;
         String toDate = uiForm.getUIFormDateTimeInput(END_TIME).getValue() ;
         if(fromDate == null || fromDate.trim().length() == 0) {
-          uiApp.addMessage(new ApplicationMessage("UIConstraintsForm.msg.fromDate-required", null, 
+          uiApp.addMessage(new ApplicationMessage("UIConstraintsForm.msg.fromDate-required", null,
                                                   ApplicationMessage.WARNING)) ;
           event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
           return ;
         }
         if(!fromDate.matches(DATETIME_REGEX) || !uiForm.isValidDateTime(fromDate)) {
-          uiApp.addMessage(new ApplicationMessage("UIConstraintsForm.msg.fromDate-invalid", null, 
+          uiApp.addMessage(new ApplicationMessage("UIConstraintsForm.msg.fromDate-invalid", null,
                                                   ApplicationMessage.WARNING)) ;
           event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
           return ;
@@ -412,13 +436,13 @@ public class UIConstraintsForm extends UIForm implements UISelectable{
         if(toDate != null && toDate.trim().length() >0) {
           Calendar afDate = uiForm.getUIFormDateTimeInput(END_TIME).getCalendar() ;
           if(!toDate.matches(DATETIME_REGEX) || !uiForm.isValidDateTime(toDate)) {
-            uiApp.addMessage(new ApplicationMessage("UIConstraintsForm.msg.toDate-invalid", null, 
+            uiApp.addMessage(new ApplicationMessage("UIConstraintsForm.msg.toDate-invalid", null,
                                                     ApplicationMessage.WARNING)) ;
             event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
             return ;
-          }          
+          }
           if(bfDate.compareTo(afDate) == 1) {
-            uiApp.addMessage(new ApplicationMessage("UIConstraintsForm.msg.date-invalid", null, 
+            uiApp.addMessage(new ApplicationMessage("UIConstraintsForm.msg.date-invalid", null,
                                                     ApplicationMessage.WARNING)) ;
             event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
             return ;
@@ -429,13 +453,13 @@ public class UIConstraintsForm extends UIForm implements UISelectable{
       if(isNodeType) {
         String property = uiForm.getUIStringInput(DOC_TYPE).getValue() ;
         if(property == null || property.length() < 1) {
-          uiApp.addMessage(new ApplicationMessage("UIConstraintsForm.msg.properties-required", null, 
+          uiApp.addMessage(new ApplicationMessage("UIConstraintsForm.msg.properties-required", null,
               ApplicationMessage.WARNING)) ;
           event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
           return ;
         }
         uiForm.addConstraint(4) ;
-      }      
+      }
       if (isCategory) {
         String category = uiForm.getUIStringInput(CATEGORY_TYPE).getValue();
         if (category == null || category.length() < 1) {
@@ -446,12 +470,12 @@ public class UIConstraintsForm extends UIForm implements UISelectable{
         }
         uiForm.addConstraint(5);
       }
-      
+
       uiForm.resetConstraintForm() ;
       event.getRequestContext().addUIComponentToUpdateByAjax(uiForm.getParent()) ;
     }
   }
-  
+
   static public class AddMetadataTypeActionListener extends EventListener<UIConstraintsForm> {
     public void execute(Event<UIConstraintsForm> event) throws Exception {
       UISearchContainer uiContainer = event.getSource().getParent() ;
@@ -463,7 +487,7 @@ public class UIConstraintsForm extends UIForm implements UISelectable{
       event.getRequestContext().addUIComponentToUpdateByAjax(uiContainer) ;
     }
   }
-  
+
   static public class AddNodeTypeActionListener extends EventListener<UIConstraintsForm> {
     public void execute(Event<UIConstraintsForm> event) throws Exception {
       UISearchContainer uiContainer = event.getSource().getParent() ;
@@ -471,7 +495,7 @@ public class UIConstraintsForm extends UIForm implements UISelectable{
       event.getRequestContext().addUIComponentToUpdateByAjax(uiContainer) ;
     }
   }
-  
+
   static public class CompareExactlyActionListener extends EventListener<UIConstraintsForm> {
     public void execute(Event<UIConstraintsForm> event) throws Exception {
       UIConstraintsForm uiConstraintForm = event.getSource();
@@ -479,7 +503,7 @@ public class UIConstraintsForm extends UIForm implements UISelectable{
       UIJCRExplorer uiExplorer = uiConstraintForm.getAncestorOfType(UIJCRExplorer.class);
       UIApplication uiApp = uiConstraintForm.getAncestorOfType(UIApplication.class) ;
       if(property == null || property.trim().length() == 0) {
-        uiApp.addMessage(new ApplicationMessage("UIConstraintsForm.msg.properties-null", null, 
+        uiApp.addMessage(new ApplicationMessage("UIConstraintsForm.msg.properties-null", null,
                                                  ApplicationMessage.WARNING)) ;
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
         return ;
@@ -492,12 +516,12 @@ public class UIConstraintsForm extends UIForm implements UISelectable{
       Query query = queryManager.createQuery(statement, Query.SQL) ;
       QueryResult result = query.execute() ;
       if(result == null || result.getNodes().getSize() == 0) {
-        uiApp.addMessage(new ApplicationMessage("UICompareExactlyForm.msg.not-result-found", null)) ; 
+        uiApp.addMessage(new ApplicationMessage("UICompareExactlyForm.msg.not-result-found", null)) ;
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
         return ;
       }
       UISearchContainer uiContainer = uiConstraintForm.getParent() ;
-      UICompareExactlyForm uiCompareExactlyForm = 
+      UICompareExactlyForm uiCompareExactlyForm =
         uiContainer.createUIComponent(UICompareExactlyForm.class, null, null) ;
       UIPopupContainer uiPopup = uiContainer.getChild(UIPopupContainer.class);
       uiPopup.getChild(UIPopupWindow.class).setId("ExactlyFormPopup") ;
@@ -506,7 +530,7 @@ public class UIConstraintsForm extends UIForm implements UISelectable{
       event.getRequestContext().addUIComponentToUpdateByAjax(uiPopup) ;
     }
   }
-  
+
   static public class AddCategoryActionListener extends EventListener<UIConstraintsForm> {
     public void execute(Event<UIConstraintsForm> event) throws Exception {
       UISearchContainer uiSearchContainer = event.getSource().getParent();
@@ -514,7 +538,7 @@ public class UIConstraintsForm extends UIForm implements UISelectable{
       event.getRequestContext().addUIComponentToUpdateByAjax(uiSearchContainer) ;
     }
   }
-  
+
   static  public class CancelActionListener extends EventListener<UIConstraintsForm> {
     public void execute(Event<UIConstraintsForm> event) throws Exception {
       UISearchContainer uiSearchContainer = event.getSource().getParent() ;

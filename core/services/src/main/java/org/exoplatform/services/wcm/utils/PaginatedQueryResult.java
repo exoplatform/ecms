@@ -34,13 +34,13 @@ import org.exoplatform.services.jcr.impl.core.query.lucene.TwoWayRangeIterator;
  * Oct 17, 2008
  */
 public class PaginatedQueryResult extends PaginatedNodeIterator {
-  
+
   /** The row iterator. */
   private RowIterator rowIterator;
-  
+
   /**
    * Instantiates a new paginated query result.
-   * 
+   *
    * @param pageSize the page size
    */
   public PaginatedQueryResult(int pageSize) {
@@ -49,32 +49,32 @@ public class PaginatedQueryResult extends PaginatedNodeIterator {
 
   /**
    * Instantiates a new paginated query result.
-   * 
+   *
    * @param queryResult the query result
    * @param pageSize the page size
-   * 
+   *
    * @throws Exception the exception
    */
   @SuppressWarnings("deprecation")
   public PaginatedQueryResult(QueryResult queryResult,int pageSize) throws Exception{
-    super(pageSize);         
+    super(pageSize);
     this.nodeIterator = queryResult.getNodes();
-    this.setAvailablePage((int)nodeIterator.getSize());  
+    this.setAvailablePage((int)nodeIterator.getSize());
     this.rowIterator = queryResult.getRows();
-  }    
-  
+  }
+
   /* (non-Javadoc)
    * @see org.exoplatform.wcm.webui.paginator.PaginatedNodeIterator#populateCurrentPage(int)
    */
   @SuppressWarnings({ "unchecked", "deprecation" })
-  protected void populateCurrentPage(int page) throws Exception {   
+  protected void populateCurrentPage(int page) throws Exception {
     checkAndSetPosition(page);
     TwoWayRangeIterator twoWayRangeIterator = (TwoWayRangeIterator)nodeIterator;
     currentListPage_ = new ArrayList();
     int count = 0;
     while (nodeIterator.hasNext()) {
       Node node = nodeIterator.nextNode();
-      Node viewNode = filterNodeToDisplay(node);      
+      Node viewNode = filterNodeToDisplay(node);
       if(viewNode != null) {
         //Skip back 1 position to get current row mapping to the node
         twoWayRangeIterator.skipBack(1);
@@ -82,20 +82,20 @@ public class PaginatedQueryResult extends PaginatedNodeIterator {
         ResultNode resultNode = new ResultNode(viewNode,row);
         currentListPage_.add(resultNode);
         count ++;
-        if(count == getPageSize()) 
-          break;        
+        if(count == getPageSize())
+          break;
       }
-    }           
+    }
     currentPage_ = page;
-  }      
-  
+  }
+
   /**
    * Filter node to display.
-   * 
+   *
    * @param node the node
-   * 
+   *
    * @return the node
-   * 
+   *
    * @throws Exception the exception
    */
   protected Node filterNodeToDisplay(Node node) throws Exception {
@@ -105,30 +105,30 @@ public class PaginatedQueryResult extends PaginatedNodeIterator {
     }
     return displayNode;
   }
-  
+
   /**
    * The Class ResultNode.
    */
-  public static class ResultNode { 
-    
+  public static class ResultNode {
+
     /** The node. */
     private Node node;
-    
+
     /** The score. */
     private float score;
-    
+
     /** The excerpt. */
     private String excerpt;
-    
+
     /** The spell suggestion. */
     private String spellSuggestion;
-    
+
     /**
      * Instantiates a new result node.
-     * 
+     *
      * @param node the node
      * @param row the row
-     * 
+     *
      * @throws RepositoryException the repository exception
      */
     public ResultNode(Node node, Row row) throws RepositoryException{
@@ -138,38 +138,38 @@ public class PaginatedQueryResult extends PaginatedNodeIterator {
       this.spellSuggestion = row.getValue("rep:spellcheck()").getString();
       this.score = row.getValue("jcr:score").getLong();
     }
-    
+
     /**
      * Gets the node.
-     * 
+     *
      * @return the node
      */
     public Node getNode() { return node; }
-    
+
     /**
      * Sets the node.
-     * 
+     *
      * @param node the new node
      */
     public void setNode(Node node) { this.node = node; }
-    
+
     /**
      * Gets the score.
-     * 
+     *
      * @return the score
      */
     public float getScore() { return score; }
-    
+
     /**
      * Sets the score.
-     * 
+     *
      * @param score the new score
      */
     public void setScore(float score) { this.score = score; }
 
     /**
      * Gets the excerpt.
-     * 
+     *
      * @return the excerpt
      */
     public String getExcerpt() {
@@ -178,7 +178,7 @@ public class PaginatedQueryResult extends PaginatedNodeIterator {
 
     /**
      * Sets the excerpt.
-     * 
+     *
      * @param excerpt the new excerpt
      */
     public void setExcerpt(String excerpt) {
@@ -187,7 +187,7 @@ public class PaginatedQueryResult extends PaginatedNodeIterator {
 
     /**
      * Gets the spell suggestion.
-     * 
+     *
      * @return the spell suggestion
      */
     public String getSpellSuggestion() {
@@ -196,11 +196,11 @@ public class PaginatedQueryResult extends PaginatedNodeIterator {
 
     /**
      * Sets the spell suggestion.
-     * 
+     *
      * @param spellSuggestion the new spell suggestion
      */
     public void setSpellSuggestion(String spellSuggestion) {
       this.spellSuggestion = spellSuggestion;
-    }    
+    }
   }
 }

@@ -44,20 +44,20 @@ import org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.Lifecy
 
 /**
  * Created by The eXo Platform SAS
- * Author : Benjamin Paillereau	
+ * Author : Benjamin Paillereau
  *          benjamin.paillereau@exoplatform.com
  * May 31, 2010
  */
 public class PostUpdateStateEventListener extends Listener<CmsService,Node> {
 
-	  private static final Log log = ExoLogger.getLogger(PostUpdateStateEventListener.class);
+    private static final Log log = ExoLogger.getLogger(PostUpdateStateEventListener.class);
 
-	  /** The pservice. */
+    /** The pservice. */
   private PublicationManager publicationManager;
 
   /**
    * Instantiates a new post edit content event listener.
-   * 
+   *
    * @param pservice the pservice
    */
   public PostUpdateStateEventListener(PublicationManager publicationManager) {
@@ -68,52 +68,52 @@ public class PostUpdateStateEventListener extends Listener<CmsService,Node> {
    * @see org.exoplatform.services.listener.Listener#onEvent(org.exoplatform.services.listener.Event)
    */
   public void onEvent(Event<CmsService, Node> event) throws Exception {
-  	Node node = event.getData();
-  	
-  	String userId;
+    Node node = event.getData();
+
+    String userId;
     try {
-    	userId = Util.getPortalRequestContext().getRemoteUser();
+      userId = Util.getPortalRequestContext().getRemoteUser();
     } catch (Exception e) {
-		userId = node.getSession().getUserID();
-	}
+    userId = node.getSession().getUserID();
+  }
 
 
-  	String currentState = node.getProperty("publication:currentState").getString();
-  	if (!"enrolled".equals(currentState)) {
-  		String nodeLifecycle = node.getProperty("publication:lifecycle").getString();
+    String currentState = node.getProperty("publication:currentState").getString();
+    if (!"enrolled".equals(currentState)) {
+      String nodeLifecycle = node.getProperty("publication:lifecycle").getString();
 //  	if (log.isInfoEnabled()) log.info(userId+"::"+currentState+"::"+nodeLifecycle);
-  		if (log.isInfoEnabled()) log.info("@@@ "+currentState+" @@@@@@@@@@@@@@@@@@@ "+node.getPath());
-  		
-  		Lifecycle lifecycle = publicationManager.getLifecycle(nodeLifecycle);
-  		Iterator<State> states = lifecycle.getStates().iterator();
-  		State prevState = null;
-  		while (states.hasNext()) {
-  			State state = states.next();
-  			if (state.getState().equals(currentState)) {
-  				sendMail(node, state, userId, false, false);
-  				if ("published".equals(state.getState()) && prevState!=null) {
-  					sendMail(node, prevState, userId, false, true);
-  				}
-  				if (states.hasNext()) {
-	  				State nextState = states.next();
-	  				sendMail(node, nextState, userId, true, false);
-	  				break;
-  				}
-  			}
-  			prevState = state;
-  		}
-  		
-  		try {
-	  	    UIPortalApplication portalApplication = Util.getUIPortalApplication();   
-	  	    PortalRequestContext portalRequestContext = Util.getPortalRequestContext();
-	  	    UIWorkingWorkspace uiWorkingWS = portalApplication.getChildById(UIPortalApplication.UI_WORKING_WS_ID);    
-	  	    portalRequestContext.addUIComponentToUpdateByAjax(uiWorkingWS) ;    
-	  	    portalRequestContext.setFullRender(true);
-  		} catch (Exception e) {
-  			
-  		}
+      if (log.isInfoEnabled()) log.info("@@@ "+currentState+" @@@@@@@@@@@@@@@@@@@ "+node.getPath());
 
-  	}
+      Lifecycle lifecycle = publicationManager.getLifecycle(nodeLifecycle);
+      Iterator<State> states = lifecycle.getStates().iterator();
+      State prevState = null;
+      while (states.hasNext()) {
+        State state = states.next();
+        if (state.getState().equals(currentState)) {
+          sendMail(node, state, userId, false, false);
+          if ("published".equals(state.getState()) && prevState!=null) {
+            sendMail(node, prevState, userId, false, true);
+          }
+          if (states.hasNext()) {
+            State nextState = states.next();
+            sendMail(node, nextState, userId, true, false);
+            break;
+          }
+        }
+        prevState = state;
+      }
+
+      try {
+          UIPortalApplication portalApplication = Util.getUIPortalApplication();
+          PortalRequestContext portalRequestContext = Util.getPortalRequestContext();
+          UIWorkingWorkspace uiWorkingWS = portalApplication.getChildById(UIPortalApplication.UI_WORKING_WS_ID);
+          portalRequestContext.addUIComponentToUpdateByAjax(uiWorkingWS) ;
+          portalRequestContext.setFullRender(true);
+      } catch (Exception e) {
+
+      }
+
+    }
   }
 
   private void sendMail(Node node, State state, String userId, boolean isNextState, boolean isPublished) throws Exception {
@@ -123,58 +123,58 @@ public class PostUpdateStateEventListener extends Listener<CmsService,Node> {
 //  		else
 //  			log.info("### Current State is "+state.getState());
 //  	}
-  	if (state.getMembership().contains(":")) {
-  		String[] membership = state.getMembership().split(":");
-  		String membershipType = membership[0];
-  		String group = membership[1];
+    if (state.getMembership().contains(":")) {
+      String[] membership = state.getMembership().split(":");
+      String membershipType = membership[0];
+      String group = membership[1];
 //  		ExoContainer container = ExoContainerContext.getCurrentContainer();
 //  		ExoContainer container = RootContainer.getInstance();
-  	    ExoContainer container = RootContainer.getInstance().getPortalContainer("ecmdemo");
-  		OrganizationService orgService = (OrganizationService)container.getComponentInstanceOfType(OrganizationService.class);
-  		UserHandler userh = orgService.getUserHandler();
+        ExoContainer container = RootContainer.getInstance().getPortalContainer("ecmdemo");
+      OrganizationService orgService = (OrganizationService)container.getComponentInstanceOfType(OrganizationService.class);
+      UserHandler userh = orgService.getUserHandler();
 //		MailService mailService = (MailService)container.getComponentInstanceOfType(MailService.class);
-  		MembershipHandler msh = orgService.getMembershipHandler();
-  		List<User> users = userh.findUsersByGroup(group).getAll();
-  		User currentUser = null;
-  		try {
-  			currentUser = userh.findUserByName(userId);
-  		} catch (Exception e) { }
-  		String username = userId;
-  		if (currentUser!=null) username = currentUser.getFirstName()+" "+currentUser.getLastName();
-  		for (User user:users) {
-  			Collection<Membership> mss = msh.findMembershipsByUserAndGroup(user.getUserName(), group);
-  			for (Membership ms:mss) {
-  				if (membershipType.equals(ms.getMembershipType())) {
-  					String from = "\""+username+"\" <exocontent@exoplatform.com>";
-  					String to = user.getEmail();
-  					String subject, body;
-  					String editUrl = "http://localhost:8080/ecmdemo/private/classic/siteExplorer/repository/collaboration"+node.getPath();
-  					if (isPublished) {
-  						subject = "[eXo Content] Published : (published) "+node.getName();
-  					} else {
-  						if (isNextState) {
-  							subject = "[eXo Content] Request : ("+state.getState()+") "+node.getName();
-  						} else {
-  							subject = "[eXo Content] Updated : ("+state.getState()+") "+node.getName();
-  						}
-  					}
-  					body = "[ <a href=\""+editUrl+"\">"+editUrl+"</a> ]<br/>" +
-  					"updated by "+username;
+      MembershipHandler msh = orgService.getMembershipHandler();
+      List<User> users = userh.findUsersByGroup(group).getAll();
+      User currentUser = null;
+      try {
+        currentUser = userh.findUserByName(userId);
+      } catch (Exception e) { }
+      String username = userId;
+      if (currentUser!=null) username = currentUser.getFirstName()+" "+currentUser.getLastName();
+      for (User user:users) {
+        Collection<Membership> mss = msh.findMembershipsByUserAndGroup(user.getUserName(), group);
+        for (Membership ms:mss) {
+          if (membershipType.equals(ms.getMembershipType())) {
+            String from = "\""+username+"\" <exocontent@exoplatform.com>";
+            String to = user.getEmail();
+            String subject, body;
+            String editUrl = "http://localhost:8080/ecmdemo/private/classic/siteExplorer/repository/collaboration"+node.getPath();
+            if (isPublished) {
+              subject = "[eXo Content] Published : (published) "+node.getName();
+            } else {
+              if (isNextState) {
+                subject = "[eXo Content] Request : ("+state.getState()+") "+node.getName();
+              } else {
+                subject = "[eXo Content] Updated : ("+state.getState()+") "+node.getName();
+              }
+            }
+            body = "[ <a href=\""+editUrl+"\">"+editUrl+"</a> ]<br/>" +
+            "updated by "+username;
 //  					mailService.sendMessage(from, to, subject, body);
-  					if (log.isInfoEnabled()) {
-  						log.info("\n################ SEND MAIL TO USER :: "+user.getUserName() + 
-  								"\nfrom: "+from +
-  								"\nto: "+to +
-  								"\nsubject: "+subject +
-  								"\nbody: "+body+
-  								"\n######################################################");
-  					}
-  					
-  				}
-  			}
-  		}
-  	}
-    
+            if (log.isInfoEnabled()) {
+              log.info("\n################ SEND MAIL TO USER :: "+user.getUserName() +
+                  "\nfrom: "+from +
+                  "\nto: "+to +
+                  "\nsubject: "+subject +
+                  "\nbody: "+body+
+                  "\n######################################################");
+            }
+
+          }
+        }
+      }
+    }
+
   }
 
 

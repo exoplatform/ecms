@@ -31,7 +31,7 @@ import org.exoplatform.services.log.Log;
  * Created by The eXo Platform SARL
  * Author : Hoang Van Hung
  *          hunghvit@gmail.com
- * May 14, 2009  
+ * May 14, 2009
  */
 public class PropertyValueComparator implements Comparator<Node> {
 
@@ -78,7 +78,7 @@ public class PropertyValueComparator implements Comparator<Node> {
       return 0;
     }
   }
-  
+
   private int getRequireType(Node node) {
     try {
       if (node.hasProperty(propertyName)) {
@@ -90,11 +90,15 @@ public class PropertyValueComparator implements Comparator<Node> {
       return -1;
     }
   }
-  
+
   private int compareString(Node node0, Node node1) {
     try {
-      String propertyValue0 = node0.getProperty(propertyName) == null ? "" : String.valueOf(node0.getProperty(propertyName).getString());
-      String propertyValue1 = node1.getProperty(propertyName) == null ? "" : String.valueOf(node1.getProperty(propertyName).getString());
+      String propertyValue0 = node0.getProperty(propertyName) == null ? ""
+                                                                     : String.valueOf(node0.getProperty(propertyName)
+                                                                                           .getString());
+      String propertyValue1 = node1.getProperty(propertyName) == null ? ""
+                                                                     : String.valueOf(node1.getProperty(propertyName)
+                                                                                           .getString());
       if(ASCENDING_ORDER.equals(orderType)) {
         return propertyValue0.compareToIgnoreCase(propertyValue1);
       }
@@ -104,7 +108,7 @@ public class PropertyValueComparator implements Comparator<Node> {
       return 0;
     }
   }
-  
+
   public int compareDate(Node node0, Node node1) {
     try{
         Calendar date0 = node0.getProperty(propertyName).getDate();
@@ -115,7 +119,7 @@ public class PropertyValueComparator implements Comparator<Node> {
         return date1.compareTo(date0) ;
     } catch (Exception e) {
       LOG.error("Unexpected error", e);
-    }    
+    }
     return 0;
   }
 }

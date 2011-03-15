@@ -10,27 +10,27 @@ import org.exoplatform.webui.core.UIPortletApplication;
 import org.exoplatform.webui.core.lifecycle.UIApplicationLifecycle;
 
 @ComponentConfig(
-		lifecycle = UIApplicationLifecycle.class,
+    lifecycle = UIApplicationLifecycle.class,
         template = "app:/groovy/authoring/UIDashboardPortlet.gtmpl"
-	)
+  )
 public class UIWCMDashboardPortlet extends UIPortletApplication {
 
-	public UIWCMDashboardPortlet() throws Exception {
-	    addChild(UIDashboardForm.class, null, null);
-	}
+  public UIWCMDashboardPortlet() throws Exception {
+      addChild(UIDashboardForm.class, null, null);
+  }
 
-	/*
-	 * (non-Javadoc)
-	 * @see
-	 * org.exoplatform.webui.core.UIPortletApplication#processRender(org.exoplatform
-	 * .webui.application.WebuiApplication,
-	 * org.exoplatform.webui.application.WebuiRequestContext)
-	 */
-	public void processRender(WebuiApplication app, WebuiRequestContext context) throws Exception {
-		PortletRequestContext pContext = (PortletRequestContext) context;
-		PortletMode newMode = pContext.getApplicationMode();
+  /*
+   * (non-Javadoc)
+   * @see
+   * org.exoplatform.webui.core.UIPortletApplication#processRender(org.exoplatform
+   * .webui.application.WebuiApplication,
+   * org.exoplatform.webui.application.WebuiRequestContext)
+   */
+  public void processRender(WebuiApplication app, WebuiRequestContext context) throws Exception {
+    PortletRequestContext pContext = (PortletRequestContext) context;
+    PortletMode newMode = pContext.getApplicationMode();
 
-		super.processRender(app, context);
-	}
-	
+    super.processRender(app, context);
+  }
+
 }

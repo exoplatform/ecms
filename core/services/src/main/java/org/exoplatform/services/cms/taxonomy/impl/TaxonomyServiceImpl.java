@@ -74,11 +74,11 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
   private LinkManager            linkManager_;
 
   private final String           SQL_QUERY       = "Select * from exo:taxonomyLink where jcr:path like '$0/%' and exo:uuid = '$1' order by exo:dateCreated DESC";
-  
+
   List<TaxonomyPlugin>           plugins_        = new ArrayList<TaxonomyPlugin>();
-  
+
   private DMSConfiguration dmsConfiguration_;
-  
+
   private Map<String, String[]> taxonomyTreeDefaultUserPermissions_;
   private static final Log LOG  = ExoLogger.getLogger(TaxonomyServiceImpl.class);
 
@@ -101,8 +101,8 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
     dmsConfiguration_ = dmsConfiguration;
     ObjectParameter objectParam = initParams.getObjectParam("defaultPermission.configuration");
     if (objectParam != null)
-    	taxonomyTreeDefaultUserPermissions_ 
-    		= getPermissions(((TaxonomyTreeDefaultUserPermission)objectParam.getObject()).getPermissions()); 
+      taxonomyTreeDefaultUserPermissions_
+        = getPermissions(((TaxonomyTreeDefaultUserPermission)objectParam.getObject()).getPermissions());
   }
 
   /**
@@ -142,12 +142,12 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
       while (nodeIter.hasNext()) {
         Node node = (Node) nodeIter.next();
         if (node.isNodeType(EXOSYMLINK_LINK)) {
-        	try {
-	          Node target = linkManager_.getTarget(node, system);
-	          if (target != null)
-	            listNode.add(target);
-        	} catch (ItemNotFoundException ex) {}
-        	catch (AccessDeniedException adex) {}
+          try {
+            Node target = linkManager_.getTarget(node, system);
+            if (target != null)
+              listNode.add(target);
+          } catch (ItemNotFoundException ex) {}
+          catch (AccessDeniedException adex) {}
         }
       }
     } catch (RepositoryConfigurationException e) {
@@ -267,9 +267,9 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
           node.addMixin("exo:privilegeable");
           node.setPermission(owner, PermissionType.ALL);
           if (creatorUser != null)
-          	node.setPermission(creatorUser, PermissionType.ALL);
+            node.setPermission(creatorUser, PermissionType.ALL);
           for(Map.Entry<String, String[]> entry : taxonomyTreeDefaultUserPermissions_.entrySet()) {
-            node.setPermission(entry.getKey(), entry.getValue());          	
+            node.setPermission(entry.getKey(), entry.getValue());
           }
         }
         if (!node.isNodeType("exo:privilegeable"))
@@ -284,7 +284,7 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
     } finally {
       if(systemSession != null) systemSession.logout();
     }
-  }  
+  }
 
   private boolean containsUser(List<AccessControlEntry> entries, String userName) {
     if (userName == null) return false;
@@ -293,7 +293,7 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
           return true;
     return false;
   }
-  
+
   /**
    * {@inheritDoc}
    */
@@ -319,10 +319,10 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
   public List<Node> getCategories(Node node, String taxonomyName) throws RepositoryException {
     return getCategories(node, taxonomyName, false);
   }
-  
+
   /**
    * {@inheritDoc}
-   */  
+   */
   public List<Node> getCategories(Node node, String taxonomyName, boolean system) throws RepositoryException {
     List<Node> listCate = new ArrayList<Node>();
     Session session = null;
@@ -331,9 +331,9 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
         Node rootNodeTaxonomy = getTaxonomyTree(taxonomyName, system);
         if (rootNodeTaxonomy != null) {
           String sql = null;
-          sql = StringUtils.replace(SQL_QUERY, "$0", rootNodeTaxonomy.getPath());        
+          sql = StringUtils.replace(SQL_QUERY, "$0", rootNodeTaxonomy.getPath());
           sql = StringUtils.replace(sql, "$1", node.getUUID());
-          session = 
+          session =
             repositoryService_.getCurrentRepository().login(rootNodeTaxonomy.getSession().getWorkspace().getName());
           QueryManager queryManager = session.getWorkspace().getQueryManager();
           Query query = queryManager.createQuery(sql, Query.SQL);
@@ -358,7 +358,7 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
   public List<Node> getAllCategories(Node node) throws RepositoryException {
     return getAllCategories(node, false);
   }
-  
+
   /**
    * {@inheritDoc}
    */
@@ -387,7 +387,7 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
       throws RepositoryException {
     addCategories(node, taxonomyName, new String[] { categoryPath }, system);
   }
-  
+
   /**
    * {@inheritDoc}
    */
@@ -395,7 +395,7 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
       throws RepositoryException {
     addCategories(node, taxonomyName, categoryPaths, false);
   }
-  
+
   /**
    * {@inheritDoc}
    */
@@ -404,14 +404,14 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
     String category = "";
     try {
       Node rootNodeTaxonomy = getTaxonomyTree(taxonomyName, system);
-      for (String categoryPath : categoryPaths) {        
+      for (String categoryPath : categoryPaths) {
         if (rootNodeTaxonomy.getPath().equals("/")) {
           category = categoryPath;
         } else if (categoryPath.length() != 0) {
-        	if (!categoryPath.startsWith("/"))
-						category = rootNodeTaxonomy.getPath() + "/" + categoryPath;
-					else
-						category = rootNodeTaxonomy.getPath() + categoryPath;
+          if (!categoryPath.startsWith("/"))
+            category = rootNodeTaxonomy.getPath() + "/" + categoryPath;
+          else
+            category = rootNodeTaxonomy.getPath() + categoryPath;
         } else {
           category = rootNodeTaxonomy.getPath();
         }
@@ -421,14 +421,14 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
         } else if (categoryPath.equals("")) {
           categoryNode = rootNodeTaxonomy;
         } else {
-        	categoryNode = (Node) rootNodeTaxonomy.getSession().getItem(category);
+          categoryNode = (Node) rootNodeTaxonomy.getSession().getItem(category);
         }
         linkManager_.createLink(categoryNode, TAXONOMY_LINK, node, node.getName());
       }
     } catch (PathNotFoundException e) {
       throw new RepositoryException(e);
     }
-    
+
   }
 
   /**
@@ -437,7 +437,7 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
   public boolean hasCategories(Node node, String taxonomyName) throws RepositoryException {
     return hasCategories(node, taxonomyName, false);
   }
-  
+
   /**
    * {@inheritDoc}
    */
@@ -446,7 +446,7 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
     if (listCate != null && listCate.size() > 0)
       return true;
     return false;
-  }  
+  }
 
   /**
    * {@inheritDoc}
@@ -478,7 +478,7 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
       throws RepositoryException {
     removeCategory(node, taxonomyName, categoryPath, false);
   }
-  
+
   /**
    * {@inheritDoc}
    */
@@ -508,9 +508,9 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
    * {@inheritDoc}
    */
   public Map<String, String[]> getTaxonomyTreeDefaultUserPermission() {
-  	return taxonomyTreeDefaultUserPermissions_;
+    return taxonomyTreeDefaultUserPermissions_;
   }
-  
+
   public Map<String, String[]> getPermissions(List<TaxonomyTreeDefaultUserPermission.Permission> permissions) {
     Map<String, String[]> permissionsMap = new HashMap<String, String[]>();
     for (TaxonomyTreeDefaultUserPermission.Permission permission : permissions) {
@@ -530,7 +530,7 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
 
   /**
    * Get node as root of all taxonomy in the repository that is in TAXONOMIES_TREE_DEFINITION_PATH
-   * @return 
+   * @return
    * @throws RepositoryException
    * @throws RepositoryConfigurationException
    */
@@ -550,8 +550,8 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
    * Get session by workspace and ManageableRepository
    * @param manageRepository
    * @param workspaceName
-   * @param system    
-   * @return          System session if system = true, else return session of current user 
+   * @param system
+   * @return          System session if system = true, else return session of current user
    * @throws RepositoryException
    */
   private Session getSession(ManageableRepository manageRepository, String workspaceName,
@@ -579,6 +579,5 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
    * {@inheritDoc}
    */
   public void stop() {
-    // TODO Auto-generated method stub
   }
 }

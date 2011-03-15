@@ -67,7 +67,7 @@ import org.exoplatform.webui.ext.UIExtensionManager;
 
 /**
  * Created by The eXo Platform SARL
- * Author : lxchiati  
+ * Author : lxchiati
  *          lebienthuy@gmail.com
  * Oct 19, 2006
  * 10:07:15 AM
@@ -89,11 +89,11 @@ public class UIViewVersion extends UIContainer implements NodePresentation {
   private String language_ ;
   private static final Log LOG  = ExoLogger.getLogger("explorer.UIViewVersion");
   final private static String COMMENT_COMPONENT = "Comment".intern();
-  
-  public UIViewVersion() throws Exception {    
+
+  public UIViewVersion() throws Exception {
     addChild(UINodeInfo.class, null, null) ;
     addChild(UINodeProperty.class, null, null).setRendered(false) ;
-  } 
+  }
 
   public String getTemplate() {
     TemplateService templateService = getApplicationComponent(TemplateService.class);
@@ -103,7 +103,7 @@ public class UIViewVersion extends UIContainer implements NodePresentation {
       originalNode_ = node ;
       String nodeType = node.getPrimaryNodeType().getName();
       if(isNodeTypeSupported(node)) return templateService.getTemplatePathByUser(false, nodeType, userName) ;
-    } catch (Exception e) {      
+    } catch (Exception e) {
     }
     return null ;
   }
@@ -114,29 +114,29 @@ public class UIViewVersion extends UIContainer implements NodePresentation {
     UIComponent uicomponent = uiActionBar.getUIAction(COMMENT_COMPONENT);
     return (uicomponent != null ? uicomponent : this);
   }
-  
+
   public UIComponent getRemoveAttach() throws Exception {
     removeChild(RemoveAttachmentComponent.class);
     UIComponent uicomponent = addChild(RemoveAttachmentComponent.class, null, "UIViewVersionRemoveAttach");
     ((AbstractActionComponent) uicomponent).setLstComponentupdate(Arrays.asList(new Class[] {UIPopupWindow.class}));
     return uicomponent;
   }
-  
+
   public UIComponent getRemoveComment() throws Exception {
     removeChild(RemoveCommentComponent.class);
     UIComponent uicomponent = addChild(RemoveCommentComponent.class, null, "UIViewVersionRemoveComment");
     ((AbstractActionComponent) uicomponent).setLstComponentupdate(Arrays.asList(new Class[] {UIPopupWindow.class}));
     return uicomponent;
   }
-  
-  
+
+
   @SuppressWarnings("unused")
   public ResourceResolver getTemplateResourceResolver(WebuiRequestContext context, String template) {
     return getAncestorOfType(UIJCRExplorer.class).getJCRTemplateResourceResolver() ;
   }
 
   public boolean isNodeTypeSupported(Node node) {
-    try {      
+    try {
       TemplateService templateService = getApplicationComponent(TemplateService.class) ;
       String nodeTypeName = node.getPrimaryNodeType().getName();
       return templateService.isManagedNodeType(nodeTypeName);
@@ -160,7 +160,7 @@ public class UIViewVersion extends UIContainer implements NodePresentation {
         return SessionProviderFactory.createSystemProvider().getSession(ws, manageRepo).getNodeByUUID(uuid) ;
       } catch(Exception e) {
         continue;
-      }      
+      }
     }
     return null;
   }
@@ -186,25 +186,25 @@ public class UIViewVersion extends UIContainer implements NodePresentation {
     while(childrenIterator.hasNext()) {
       Node childNode = childrenIterator.nextNode();
       String nodeType = childNode.getPrimaryNodeType().getName();
-      List<String> listCanCreateNodeType = 
-        Utils.getListAllowedFileType(node_, getRepository(), templateService) ;       
+      List<String> listCanCreateNodeType =
+        Utils.getListAllowedFileType(node_, getRepository(), templateService) ;
       if(listCanCreateNodeType.contains(nodeType)) {
-        
+
         // Case of childNode has jcr:data property
         if (childNode.hasProperty(Utils.JCR_DATA)) {
           attachData = childNode.getProperty(Utils.JCR_DATA).getStream().available();
-          
-          // Case of jcr:data has content 
-          if (attachData > 0) 
-            attachments.add(childNode);          
+
+          // Case of jcr:data has content
+          if (attachData > 0)
+            attachments.add(childNode);
         } else {
           attachments.add(childNode);
-        }               
-      } 
+        }
+      }
     }
     return attachments;
   }
-  
+
   @Override
   public String getAttachmentURL(Node attNode, Parameter[] params)
       throws Exception {
@@ -212,14 +212,14 @@ public class UIViewVersion extends UIContainer implements NodePresentation {
   }
 
   public String getIcons(Node node, String type) throws Exception {
-    return Utils.getNodeTypeIcon(node, type) ; 
+    return Utils.getNodeTypeIcon(node, type) ;
   }
   public boolean hasPropertyContent(Node node, String property){
     try {
       String value = node.getProperty(property).getString() ;
       if(value.length() > 0) return true ;
     } catch (Exception e) {
-      LOG.error("Unexpected error", e);      
+      LOG.error("Unexpected error", e);
     }
     return false ;
   }
@@ -227,7 +227,7 @@ public class UIViewVersion extends UIContainer implements NodePresentation {
   public boolean isRssLink() { return false ; }
   public String getRssLink() { return null ; }
 
-  public void update() throws Exception {    
+  public void update() throws Exception {
     getChild(UINodeInfo.class).update();
   }
 
@@ -244,14 +244,14 @@ public class UIViewVersion extends UIContainer implements NodePresentation {
       service = getApplicationComponent(object);
     } catch (ClassNotFoundException ex) {
       LOG.error("Unexpected error", ex);
-    } 
+    }
     return service;
   }
 
   public String getDownloadLink(Node node) throws Exception {
     DownloadService dservice = getApplicationComponent(DownloadService.class) ;
     InputStreamDownloadResource dresource ;
-    if(!node.getPrimaryNodeType().getName().equals(Utils.NT_FILE)) node = originalNode_; 
+    if(!node.getPrimaryNodeType().getName().equals(Utils.NT_FILE)) node = originalNode_;
     Node jcrContentNode = node.getNode(Utils.JCR_CONTENT) ;
     InputStream input = jcrContentNode.getProperty(Utils.JCR_DATA).getStream() ;
     dresource = new InputStreamDownloadResource(input, "image") ;
@@ -279,7 +279,7 @@ public class UIViewVersion extends UIContainer implements NodePresentation {
   public String getPortalName() {
     ExoContainer container = ExoContainerContext.getCurrentContainer();
     PortalContainerInfo containerInfo = (PortalContainerInfo) container.getComponentInstanceOfType(PortalContainerInfo.class);
-    return containerInfo.getContainerName();  
+    return containerInfo.getContainerName();
   }
 
   public List getSupportedLocalise() throws Exception {
@@ -295,15 +295,15 @@ public class UIViewVersion extends UIContainer implements NodePresentation {
     TemplateService tempServ = getApplicationComponent(TemplateService.class) ;
     return tempServ.getTemplatePath(false, nodeTypeName, templateName) ;
   }
-  
+
   public String getTemplateSkin(String nodeTypeName, String skinName) throws Exception {
     TemplateService tempServ = getApplicationComponent(TemplateService.class) ;
     return tempServ.getSkinPath(nodeTypeName, skinName, getLanguage()) ;
-  }  
+  }
 
   public String getWebDAVServerPrefix() throws Exception {
     PortletRequestContext portletRequestContext = PortletRequestContext.getCurrentInstance() ;
-    String prefixWebDAV = portletRequestContext.getRequest().getScheme() + "://" + 
+    String prefixWebDAV = portletRequestContext.getRequest().getScheme() + "://" +
     portletRequestContext.getRequest().getServerName() + ":" +
     String.format("%s",portletRequestContext.getRequest().getServerPort()) ;
     return prefixWebDAV ;
@@ -314,7 +314,7 @@ public class UIViewVersion extends UIContainer implements NodePresentation {
   }
 
   public boolean isNodeTypeSupported() {
-    try {      
+    try {
       TemplateService templateService = getApplicationComponent(TemplateService.class);
       return templateService.isManagedNodeType(getNodeType());
     } catch (Exception e) {
@@ -329,7 +329,7 @@ public class UIViewVersion extends UIContainer implements NodePresentation {
   public String encodeHTML(String text) throws Exception {
     return Utils.encodeHTML(text) ;
   }
-  
+
   private Node getFileLangNode(Node currentNode) throws Exception {
     if(currentNode.getNodes().getSize() > 0) {
       NodeIterator nodeIter = currentNode.getNodes() ;
@@ -342,8 +342,8 @@ public class UIViewVersion extends UIContainer implements NodePresentation {
       return currentNode ;
     }
     return currentNode ;
-  }  
-  
+  }
+
   static public class ChangeLanguageActionListener extends EventListener<UIViewVersion>{
     public void execute(Event<UIViewVersion> event) throws Exception {
       UIViewVersion uiViewVersion = event.getSource() ;
@@ -366,7 +366,7 @@ public class UIViewVersion extends UIContainer implements NodePresentation {
     public void execute(Event<UIViewVersion> event) throws Exception {
       UIViewVersion uiViewVersion =  event.getSource() ;
       UIApplication uiApp = uiViewVersion.getAncestorOfType(UIApplication.class) ;
-      uiApp.addMessage(new ApplicationMessage("UIViewVersion.msg.not-supported", null)) ; 
+      uiApp.addMessage(new ApplicationMessage("UIViewVersion.msg.not-supported", null)) ;
       event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
       return ;
     }
@@ -385,21 +385,17 @@ public class UIViewVersion extends UIContainer implements NodePresentation {
   }
 
   public boolean isEnableComment() {
-    // TODO Auto-generated method stub
     return false;
   }
 
   public boolean isEnableVote() {
-    // TODO Auto-generated method stub
     return false;
   }
 
   public void setEnableComment(boolean value) {
-    // TODO Auto-generated method stub
   }
 
   public void setEnableVote(boolean value) {
-    // TODO Auto-generated method stub
   }
-  
+
 }

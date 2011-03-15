@@ -44,7 +44,7 @@ import org.quartz.JobExecutionException;
  * Created by The eXo Platform SAS
  * Author : Pham Xuan Hoa
  *          hoa.pham@exoplatform.com
- * Dec 21, 2006  
+ * Dec 21, 2006
  */
 public class ScriptActionActivationJob implements Job {
 
@@ -53,35 +53,35 @@ public class ScriptActionActivationJob implements Job {
 
   public void execute(JobExecutionContext context) throws JobExecutionException {
     ExoContainer exoContainer = ExoContainerContext.getCurrentContainer() ;
-    RepositoryService repositoryService = 
-      (RepositoryService) exoContainer.getComponentInstanceOfType(RepositoryService.class);    
-    ActionServiceContainer actionServiceContainer = 
+    RepositoryService repositoryService =
+      (RepositoryService) exoContainer.getComponentInstanceOfType(RepositoryService.class);
+    ActionServiceContainer actionServiceContainer =
       (ActionServiceContainer) exoContainer.getComponentInstanceOfType(ActionServiceContainer.class);
     IdentityRegistry identityRegistry =
-      (IdentityRegistry) exoContainer.getComponentInstanceOfType(IdentityRegistry.class); 
+      (IdentityRegistry) exoContainer.getComponentInstanceOfType(IdentityRegistry.class);
     ActionPlugin scriptActionService = actionServiceContainer.getActionPlugin(ScriptActionPlugin.ACTION_TYPE) ;
 
     Session jcrSession = null;
-    Node actionNode = null ;    
+    Node actionNode = null ;
     JobDataMap jdatamap = context.getJobDetail().getJobDataMap() ;
     String userId = jdatamap.getString("initiator") ;
     String srcWorkspace = jdatamap.getString("srcWorkspace") ;
-    String srcPath = jdatamap.getString("srcPath") ;    
+    String srcPath = jdatamap.getString("srcPath") ;
     String actionName = jdatamap.getString("actionName") ;
     String executable = jdatamap.getString("executable") ;
     String repository = jdatamap.getString("repository") ;
-    Map variables = jdatamap.getWrappedMap() ;        
+    Map variables = jdatamap.getWrappedMap() ;
     try {
-      jcrSession = repositoryService.getRepository(repository).getSystemSession(srcWorkspace);      
+      jcrSession = repositoryService.getRepository(repository).getSystemSession(srcWorkspace);
       Node node = (Node) jcrSession.getItem(srcPath);
       actionNode = actionServiceContainer.getAction(node, actionName);
-      Property rolesProp = actionNode.getProperty("exo:roles");      
+      Property rolesProp = actionNode.getProperty("exo:roles");
       Value[] roles = rolesProp.getValues();
-      boolean hasPermission = checkExcetuteable(userId, roles, identityRegistry);      
+      boolean hasPermission = checkExcetuteable(userId, roles, identityRegistry);
       if (!hasPermission) {
         jcrSession.logout();
-        return; 
-      }        
+        return;
+      }
       scriptActionService.activateAction(userId,executable,variables, repository) ;
       int currentCounter = (int)actionNode.getProperty(COUNTER_PROP).getValue().getLong() ;
       actionNode.setProperty(COUNTER_PROP,currentCounter +1) ;
@@ -93,15 +93,15 @@ public class ScriptActionActivationJob implements Job {
       if(jcrSession != null) jcrSession.logout();
     }
   }
-  
-  private boolean checkExcetuteable(String userId,Value[] roles, IdentityRegistry identityRegistry) throws Exception {        
+
+  private boolean checkExcetuteable(String userId,Value[] roles, IdentityRegistry identityRegistry) throws Exception {
     if(SystemIdentity.SYSTEM.equalsIgnoreCase(userId)) {
       return true ;
     }
     Identity identity = identityRegistry.getIdentity(userId);
     if(identity == null) {
-      return false ; 
-    }        
+      return false ;
+    }
     for (int i = 0; i < roles.length; i++) {
       String role = roles[i].getString();
       if("*".equalsIgnoreCase(role)) return true ;

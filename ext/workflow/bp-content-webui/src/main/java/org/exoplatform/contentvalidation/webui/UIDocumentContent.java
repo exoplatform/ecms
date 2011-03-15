@@ -73,7 +73,7 @@ import org.exoplatform.workflow.webui.component.controller.UITaskManager;
  * Author : Ly Dinh Quang
  *          quang.ly@exoplatform.com
  *          xxx5669@gmail.com
- * Jan 16, 2009  
+ * Jan 16, 2009
  */
 @ComponentConfig(
     template = "classpath:resources/templates/controller/UIDocumentContent.gtmpl",
@@ -89,26 +89,26 @@ public class UIDocumentContent extends UIContainer implements NodePresentation {
   private String language_ = DEFAULT_LANGUAGE ;
   private static final Log LOG  = ExoLogger.getLogger(UIDocumentContent.class);
   public UIDocumentContent() throws Exception {}
-  
-  public void setNode(Node node)  { 
+
+  public void setNode(Node node)  {
     this.node_ = node;
   }
-  
-  public Node getNode() throws Exception { 
+
+  public Node getNode() throws Exception {
     if(node_.hasProperty(Utils.EXO_LANGUAGE)) {
       String defaultLang = node_.getProperty(Utils.EXO_LANGUAGE).getString() ;
       if(!language_.equals(DEFAULT_LANGUAGE) && !language_.equals(defaultLang)) {
         Node curNode = node_.getNode(Utils.LANGUAGES + "/" + language_) ;
         language_ = defaultLang ;
         return curNode ;
-      } 
-    }    
+      }
+    }
     return node_;
   }
   public Node getOriginalNode() throws Exception {return node_;}
-  
+
   public String getNodeType() throws Exception { return node_.getPrimaryNodeType().getName() ; }
-  
+
   public String getTemplate() {
     try {
       if(isNodeTypeSupported()) return getTemplatePath() ;
@@ -118,7 +118,7 @@ public class UIDocumentContent extends UIContainer implements NodePresentation {
     }
     return null ;
   }
-  
+
   public ResourceResolver getTemplateResourceResolver(WebuiRequestContext context, String template) {
     try {
       DMSConfiguration dmsConfiguration = getApplicationComponent(DMSConfiguration.class);
@@ -129,34 +129,34 @@ public class UIDocumentContent extends UIContainer implements NodePresentation {
     }
     return super.getTemplateResourceResolver(context, template);
   }
-  
+
   public boolean isNodeTypeSupported() {
-    try {      
+    try {
       TemplateService templateService = getApplicationComponent(TemplateService.class) ;
       String nodeTypeName = node_.getPrimaryNodeType().getName();
-      
+
       return templateService.isManagedNodeType(nodeTypeName);
     } catch (Exception e) {
       return false;
     }
   }
-  
+
   public String getImage(Node node, String nodeTypeName) throws Exception {
     DownloadService dservice = getApplicationComponent(DownloadService.class) ;
     InputStreamDownloadResource dresource ;
-    Node imageNode = node.getNode(nodeTypeName) ;    
+    Node imageNode = node.getNode(nodeTypeName) ;
     InputStream input = imageNode.getProperty(Utils.JCR_DATA).getStream() ;
     dresource = new InputStreamDownloadResource(input, "image") ;
     dresource.setDownloadName(node.getName()) ;
     return dservice.getDownloadLink(dservice.addDownloadResource(dresource)) ;
   }
-  
+
   public Node getNodeByPath(String nodePath, String workspace) throws Exception {
     ManageableRepository manageRepo = getApplicationComponent(RepositoryService.class).getRepository(getRepository()) ;
     Session session = SessionProviderFactory.createSystemProvider().getSession(workspace, manageRepo) ;
     return (Node) session.getItem(nodePath) ;
   }
-  
+
   public String getCapacityOfFile(Node file) throws Exception {
     Node contentNode = file.getNode(Utils.JCR_CONTENT) ;
     InputStream in = contentNode.getProperty(Utils.JCR_DATA).getStream() ;
@@ -178,8 +178,8 @@ public class UIDocumentContent extends UIContainer implements NodePresentation {
     } catch (Exception e) {}
     return relations;
   }
-  
-  public Node getNodeByUUID(String uuid) throws Exception{ 
+
+  public Node getNodeByUUID(String uuid) throws Exception{
     ManageableRepository manageRepo = (ManageableRepository)node_.getSession().getRepository() ;
     SessionProvider sessionProvider = SessionProviderFactory.createSessionProvider();
     for(String ws : manageRepo.getWorkspaceNames()) {
@@ -187,41 +187,41 @@ public class UIDocumentContent extends UIContainer implements NodePresentation {
         return sessionProvider.getSession(ws,manageRepo).getNodeByUUID(uuid) ;
       }catch(Exception e) {
         continue ;
-      }      
+      }
     }
     return null;
   }
-  
+
   private List<String> getListAllowedFileType(Node currentNode, String repository) throws Exception {
     List<String> nodeTypes = new ArrayList<String>() ;
-    NodeTypeManager ntManager = currentNode.getSession().getWorkspace().getNodeTypeManager() ; 
-    NodeType currentNodeType = currentNode.getPrimaryNodeType() ; 
+    NodeTypeManager ntManager = currentNode.getSession().getWorkspace().getNodeTypeManager() ;
+    NodeType currentNodeType = currentNode.getPrimaryNodeType() ;
     NodeDefinition[] childDefs = currentNodeType.getChildNodeDefinitions() ;
     TemplateService templateService = getApplicationComponent(TemplateService.class) ;
     List templates = templateService.getDocumentTemplates() ;
     try {
       for(int i = 0; i < templates.size(); i ++){
-        String nodeTypeName = templates.get(i).toString() ; 
+        String nodeTypeName = templates.get(i).toString() ;
         NodeType nodeType = ntManager.getNodeType(nodeTypeName) ;
         NodeType[] superTypes = nodeType.getSupertypes() ;
         boolean isCanCreateDocument = false ;
         for(NodeDefinition childDef : childDefs){
           NodeType[] requiredChilds = childDef.getRequiredPrimaryTypes() ;
-          for(NodeType requiredChild : requiredChilds) {          
-            if(nodeTypeName.equals(requiredChild.getName())){            
+          for(NodeType requiredChild : requiredChilds) {
+            if(nodeTypeName.equals(requiredChild.getName())){
               isCanCreateDocument = true ;
               break ;
-            }            
+            }
           }
           if(nodeTypeName.equals(childDef.getName()) || isCanCreateDocument) {
             if(!nodeTypes.contains(nodeTypeName)) nodeTypes.add(nodeTypeName) ;
-            isCanCreateDocument = true ;          
+            isCanCreateDocument = true ;
           }
-        }      
+        }
         if(!isCanCreateDocument){
           for(NodeType superType:superTypes) {
-            for(NodeDefinition childDef : childDefs){          
-              for(NodeType requiredType : childDef.getRequiredPrimaryTypes()) {              
+            for(NodeDefinition childDef : childDefs){
+              for(NodeType requiredType : childDef.getRequiredPrimaryTypes()) {
                 if (superType.getName().equals(requiredType.getName())) {
                   if(!nodeTypes.contains(nodeTypeName)) nodeTypes.add(nodeTypeName) ;
                   isCanCreateDocument = true ;
@@ -232,18 +232,18 @@ public class UIDocumentContent extends UIContainer implements NodePresentation {
             }
             if(isCanCreateDocument) break ;
           }
-        }            
+        }
       }
     } catch(Exception e) {
       LOG.error("Unexpected error", e);
     }
     return nodeTypes ;
   }
-  
+
   public UIComponent getCommentComponent() {
     return this;
   }
-  
+
   public UIComponent getRemoveAttach() throws Exception {
     removeChild(RemoveAttachmentComponent.class);
     UIComponent uicomponent = addChild(RemoveAttachmentComponent.class, null, "DocumentContentRemoveAttach");
@@ -257,7 +257,7 @@ public class UIDocumentContent extends UIContainer implements NodePresentation {
     ((AbstractActionComponent) uicomponent).setLstComponentupdate(Arrays.asList(new Class[] {UIPopupWindow.class}));
     return uicomponent;
   }
-  
+
   public UIComponent getUIComponent(String mimeType) throws Exception {
     UIExtensionManager manager = getApplicationComponent(UIExtensionManager.class);
     List<UIExtension> extensions = manager.getUIExtensions(Utils.FILE_VIEWER_EXTENSION_TYPE);
@@ -269,7 +269,7 @@ public class UIDocumentContent extends UIContainer implements NodePresentation {
     }
     return null;
   }
-  
+
   public List<Node> getAttachments() throws Exception {
     List<Node> attachments = new ArrayList<Node>();
     String nodeType = "";
@@ -284,8 +284,8 @@ public class UIDocumentContent extends UIContainer implements NodePresentation {
       } catch (Exception e) {}
     }
     return attachments;
-  }  
-  
+  }
+
   @Override
   public String getAttachmentURL(Node attNode, Parameter[] params)
       throws Exception {
@@ -303,12 +303,12 @@ public class UIDocumentContent extends UIContainer implements NodePresentation {
       while(iter.hasNext()) {
         local.add(iter.nextNode().getName()) ;
       }
-      local.add(node_.getProperty(Utils.EXO_LANGUAGE).getString()) ;      
-    } 
+      local.add(node_.getProperty(Utils.EXO_LANGUAGE).getString()) ;
+    }
     return local ;
   }
 
-  public String getTemplatePath() throws Exception { 
+  public String getTemplatePath() throws Exception {
     String nodeTypeName = node_.getPrimaryNodeType().getName();
     String userName = Util.getPortalRequestContext().getRemoteUser() ;
     TemplateService templateService = getApplicationComponent(TemplateService.class);
@@ -319,16 +319,16 @@ public class UIDocumentContent extends UIContainer implements NodePresentation {
     TemplateService tempServ = getApplicationComponent(TemplateService.class) ;
     return tempServ.getTemplatePath(false, nodeTypeName, templateName) ;
   }
-  
+
   public String getTemplateSkin(String nodeTypeName, String skinName) throws Exception {
     TemplateService tempServ = getApplicationComponent(TemplateService.class) ;
     return tempServ.getSkinPath(nodeTypeName, skinName, getLanguage()) ;
-  }  
+  }
 
   public List<Node> getComments() throws Exception {
     return getApplicationComponent(CommentsService.class).getComments(node_, "default") ;
   }
-  
+
   public String getIcons(Node node, String appended) throws Exception {
     String nodeType = node.getPrimaryNodeType().getName().replaceAll(":", "_") + appended ;
     StringBuilder str = new StringBuilder(nodeType) ;
@@ -338,7 +338,7 @@ public class UIDocumentContent extends UIContainer implements NodePresentation {
     }
     return str.toString() ;
   }
-  
+
   public String getImage(Node node) throws Exception {
     DownloadService dservice = getApplicationComponent(DownloadService.class) ;
     InputStreamDownloadResource dresource ;
@@ -349,9 +349,9 @@ public class UIDocumentContent extends UIContainer implements NodePresentation {
     return dservice.getDownloadLink(dservice.addDownloadResource(dresource)) ;
   }
 
-  public String getWebDAVServerPrefix() throws Exception {    
+  public String getWebDAVServerPrefix() throws Exception {
     PortletRequestContext portletRequestContext = PortletRequestContext.getCurrentInstance() ;
-    String prefixWebDAV = portletRequestContext.getRequest().getScheme() + "://" + 
+    String prefixWebDAV = portletRequestContext.getRequest().getScheme() + "://" +
     portletRequestContext.getRequest().getServerName() + ":" +
     String.format("%s",portletRequestContext.getRequest().getServerPort()) ;
     return prefixWebDAV ;
@@ -359,7 +359,7 @@ public class UIDocumentContent extends UIContainer implements NodePresentation {
 
   public String getLanguage() { return language_ ; }
   public void setLanguage(String language) { language_ = language ; }
-  
+
   @SuppressWarnings("unchecked")
   public Object getComponentInstanceOfType(String className) {
     Object service = null;
@@ -369,36 +369,36 @@ public class UIDocumentContent extends UIContainer implements NodePresentation {
       service = getApplicationComponent(object);
     } catch (ClassNotFoundException ex) {
       LOG.error("Unexpected error", ex);
-    } 
+    }
     return service;
   }
-  
+
   public String getDownloadLink(Node node) throws Exception {
     DownloadService dservice = getApplicationComponent(DownloadService.class) ;
     InputStreamDownloadResource dresource ;
-    if(!node.getPrimaryNodeType().getName().equals(Utils.NT_FILE)) return null; 
+    if(!node.getPrimaryNodeType().getName().equals(Utils.NT_FILE)) return null;
     Node jcrContentNode = node.getNode(Utils.JCR_CONTENT) ;
     InputStream input = jcrContentNode.getProperty(Utils.JCR_DATA).getStream() ;
     dresource = new InputStreamDownloadResource(input, "image") ;
     dresource.setDownloadName(node.getName()) ;
     return dservice.getDownloadLink(dservice.addDownloadResource(dresource)) ;
   }
-  
+
   public String getPortalName() {
     ExoContainer container = ExoContainerContext.getCurrentContainer();
     PortalContainerInfo containerInfo = (PortalContainerInfo) container.getComponentInstanceOfType(PortalContainerInfo.class);
-    return containerInfo.getContainerName(); 
+    return containerInfo.getContainerName();
   }
-  
+
   public String getWorkspaceName() throws Exception {
     return node_.getSession().getWorkspace().getName();
   }
-  
+
   public String getRepository() throws Exception {
     ManageableRepository manaRepo = (ManageableRepository)node_.getSession().getRepository() ;
     return manaRepo.getConfiguration().getName() ;
   }
-  
+
   static public class ChangeLanguageActionListener extends EventListener<UIDocumentContent> {
     public void execute(Event<UIDocumentContent> event) throws Exception {
       UIDocumentContent uiDocContent = event.getSource() ;
@@ -406,14 +406,14 @@ public class UIDocumentContent extends UIContainer implements NodePresentation {
       String selectedLanguage = event.getRequestContext().getRequestParameter(OBJECTID) ;
       uiDocContent.setRenderSibling(UIDocumentContent.class) ;
       uiDocContent.setLanguage(selectedLanguage) ;
-    }   
+    }
   }
-  
+
   public String encodeHTML(String text) throws Exception {
     return text.replaceAll("&", "&amp;").replaceAll("\"", "&quot;")
     .replaceAll("<", "&lt;").replaceAll(">", "&gt;") ;
   }
-  
+
   private Node getFileLangNode(Node currentNode) throws Exception {
     if(currentNode.getNodes().getSize() > 0) {
       NodeIterator nodeIter = currentNode.getNodes() ;
@@ -426,8 +426,8 @@ public class UIDocumentContent extends UIContainer implements NodePresentation {
       return currentNode ;
     }
     return currentNode ;
-  }   
-  
+  }
+
   static  public class DownloadActionListener extends EventListener<UIDocumentContent> {
     public void execute(Event<UIDocumentContent> event) throws Exception {
       UIDocumentContent uiComp = event.getSource() ;
@@ -451,21 +451,17 @@ public class UIDocumentContent extends UIContainer implements NodePresentation {
   }
 
   public boolean isEnableComment() {
-    // TODO Auto-generated method stub
     return false;
   }
 
   public boolean isEnableVote() {
-    // TODO Auto-generated method stub
     return false;
   }
 
   public void setEnableComment(boolean value) {
-    // TODO Auto-generated method stub
   }
 
   public void setEnableVote(boolean value) {
-    // TODO Auto-generated method stub
   }
-  
+
 }

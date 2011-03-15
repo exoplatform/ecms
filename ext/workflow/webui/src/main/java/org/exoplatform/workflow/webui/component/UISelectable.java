@@ -21,13 +21,13 @@ package org.exoplatform.workflow.webui.component;
  * Author : Ly Dinh Quang
  *          quang.ly@exoplatform.com
  *          xxx5669@gmail.com
- * Jan 12, 2009  
+ * Jan 12, 2009
  */
 public interface UISelectable {
-  
+
   /**
    * Do select.
-   * 
+   *
    * @param selectField the select field
    * @param value the value
    * @throws Exception the exception

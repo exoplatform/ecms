@@ -35,21 +35,22 @@ import org.exoplatform.services.wcm.webcontent.WebContentSchemaHandler;
  * Mar 5, 2009
  */
 public class StageAndVersionPublicationHandler extends BaseWebSchemaHandler {
-  
+
   /** The template service. */
-  private TemplateService templateService;   
-  
+  private TemplateService templateService;
+
   /** The publication service. */
   private WCMPublicationService publicationService;
-  
+
   /**
    * Instantiates a new stage and version publication handler.
-   * 
+   *
    * @param templateService the template service
    * @param publicationService the publication service
    */
-  public StageAndVersionPublicationHandler(TemplateService templateService, WCMPublicationService publicationService) {    
-    this.templateService = templateService;   
+  public StageAndVersionPublicationHandler(TemplateService templateService,
+                                           WCMPublicationService publicationService) {
+    this.templateService = templateService;
     this.publicationService = publicationService;
   }
 
@@ -68,59 +69,70 @@ public class StageAndVersionPublicationHandler extends BaseWebSchemaHandler {
     return null;
   }
 
-  /* (non-Javadoc)
-   * @see org.exoplatform.services.wcm.core.BaseWebSchemaHandler#matchHandler(javax.jcr.Node, org.exoplatform.services.jcr.ext.common.SessionProvider)
+  /*
+   * (non-Javadoc)
+   * @see
+   * org.exoplatform.services.wcm.core.BaseWebSchemaHandler#matchHandler(javax
+   * .jcr.Node, org.exoplatform.services.jcr.ext.common.SessionProvider)
    */
   public boolean matchHandler(Node node, SessionProvider sessionProvider) throws Exception {
     ExoContainer container = ExoContainerContext.getCurrentContainer();
-    WebSchemaConfigService schemaConfigService = (WebSchemaConfigService)container.getComponentInstanceOfType(WebSchemaConfigService.class);
-    WebContentSchemaHandler webContentSchemaHandler = schemaConfigService.getWebSchemaHandlerByType(WebContentSchemaHandler.class);
+    WebSchemaConfigService schemaConfigService = (WebSchemaConfigService) container.
+        getComponentInstanceOfType(WebSchemaConfigService.class);
+    WebContentSchemaHandler webContentSchemaHandler = schemaConfigService.
+        getWebSchemaHandlerByType(WebContentSchemaHandler.class);
     if(webContentSchemaHandler.isWebcontentChildNode(node))
       return false;
     if(node.isNodeType("exo:cssFile") || node.isNodeType("exo:jsFile"))
-      return false;    
+      return false;
     String primaryNodeType = node.getPrimaryNodeType().getName();
-    return templateService.isManagedNodeType(primaryNodeType);    
+    return templateService.isManagedNodeType(primaryNodeType);
   }
 
-  /* (non-Javadoc)
-   * @see org.exoplatform.services.wcm.core.BaseWebSchemaHandler#onCreateNode(javax.jcr.Node, org.exoplatform.services.jcr.ext.common.SessionProvider)
+  /*
+   * (non-Javadoc)
+   * @see
+   * org.exoplatform.services.wcm.core.BaseWebSchemaHandler#onCreateNode(javax
+   * .jcr.Node, org.exoplatform.services.jcr.ext.common.SessionProvider)
    */
-  public void onCreateNode(Node node, SessionProvider sessionProvider) throws Exception {    
+  public void onCreateNode(Node node, SessionProvider sessionProvider) throws Exception {
     Node checkNode = node;
     if(node.isNodeType("nt:file")) {
       if(node.canAddMixin("exo:rss-enable")) {
         node.addMixin("exo:rss-enable");
         if(!node.hasProperty("exo:title")) {
           node.setProperty("exo:title",node.getName());
-        }        
+        }
       }
       Node parentNode = node.getParent();
       if(parentNode.isNodeType("exo:webContent")) {
-        checkNode = parentNode;        
-      }      
+        checkNode = parentNode;
+      }
     }
-    
+
     String siteName = null, remoteUser = null;
     try {
-    	siteName = Util.getPortalRequestContext().getPortalOwner();
-    	remoteUser = Util.getPortalRequestContext().getRemoteUser();    	
+      siteName = Util.getPortalRequestContext().getPortalOwner();
+      remoteUser = Util.getPortalRequestContext().getRemoteUser();
     } catch (Exception e) {}
     publicationService.updateLifecyleOnChangeContent(checkNode, siteName, remoteUser);
-  }   
-  
-  /* (non-Javadoc)
-   * @see org.exoplatform.services.wcm.core.BaseWebSchemaHandler#onModifyNode(javax.jcr.Node, org.exoplatform.services.jcr.ext.common.SessionProvider)
+  }
+
+  /*
+   * (non-Javadoc)
+   * @see
+   * org.exoplatform.services.wcm.core.BaseWebSchemaHandler#onModifyNode(javax
+   * .jcr.Node, org.exoplatform.services.jcr.ext.common.SessionProvider)
    */
   public void onModifyNode(Node node, SessionProvider sessionProvider) throws Exception {
     if(node.isNew())
-      return;   
+      return;
     Node checkNode = node;
-    if(node.isNodeType("nt:file")) {      
+    if(node.isNodeType("nt:file")) {
       Node parentNode = node.getParent();
       if(parentNode.isNodeType("exo:webContent")) {
-        checkNode = parentNode;        
-      }                 
+        checkNode = parentNode;
+      }
     }
     String siteName = Util.getPortalRequestContext().getPortalOwner();
     String remoteUser = Util.getPortalRequestContext().getRemoteUser();

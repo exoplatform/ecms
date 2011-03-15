@@ -24,47 +24,47 @@ import java.util.List;
  * Author : Xuan Hoa Pham
  *          hoapham@exoplatform.com
  * 					phamvuxuanhoa@gmail.com
- * Dec 8, 2006  
+ * Dec 8, 2006
  */
 public class TagStyleConfig {
-  
+
   private List<HtmlTagStyle> tagStyleList = new ArrayList<HtmlTagStyle>() ;
   private boolean autoCreatedInNewRepository ;
   private String repository ;
-  
+
   public List<HtmlTagStyle> getTagStyleList() { return this.tagStyleList ; }
   public void setTagStyleList(List<HtmlTagStyle> list) { this.tagStyleList = list ; }
-  
+
   public boolean getAutoCreatedInNewRepository(){ return autoCreatedInNewRepository ; }
   public void setAutoCreatedInNewRepository(boolean isAuto) { autoCreatedInNewRepository = isAuto ; }
-  
+
   public void setRepository(String repo) { repository = repo ; }
   public String getRepository() { return repository ; }
-  
+
   static public class HtmlTagStyle {
     String name ;
     String tagRate ;
     String htmlStyle ;
     String description ;
-    
+
     public String getDescription() { return description; }
-    public void setDescription(String description) { 
+    public void setDescription(String description) {
       this.description = description;
     }
     public String getHtmlStyle() { return htmlStyle; }
     public void setHtmlStyle(String htmlStyle) {
       this.htmlStyle = htmlStyle;
     }
-    
+
     public String getName() { return name; }
     public void setName(String name) {
       this.name = name;
     }
-    
+
     public String getTagRate() { return tagRate; }
     public void setTagRate(String tagRate) {
       this.tagRate = tagRate;
     }
   }
-  
+
 }

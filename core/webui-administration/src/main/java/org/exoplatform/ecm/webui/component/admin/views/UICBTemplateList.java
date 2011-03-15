@@ -43,7 +43,7 @@ import org.exoplatform.webui.event.EventListener;
  * Author : Tran The Trong
  *          trongtt@exoplatform.com
  * Sep 19, 2006
- * 11:45:11 AM 
+ * 11:45:11 AM
  */
 @ComponentConfig(
     template = "system:/groovy/ecm/webui/UIGridWithButton.gtmpl",
@@ -56,9 +56,9 @@ import org.exoplatform.webui.event.EventListener;
 public class UICBTemplateList extends UIGrid {
   private static String[] VIEW_BEAN_FIELD = {"name", "path", "baseVersion"} ;
   private static String[] VIEW_ACTION = {"EditInfo","Delete"} ;
-  public static String ST_CBTempForm = "CBTempForm" ;  
+  public static String ST_CBTempForm = "CBTempForm" ;
   public static String ST_CBTemp = "CBTemplate" ;
-  
+
   public UICBTemplateList() throws Exception {
     getUIPageIterator().setId("UICBTemplateGrid") ;
     configure("path", VIEW_BEAN_FIELD, VIEW_ACTION) ;
@@ -67,9 +67,9 @@ public class UICBTemplateList extends UIGrid {
   public String[] getActions() { return new String[] {"Add"} ; }
   public String getBaseVersion(Node node) throws Exception {
     if(!node.isNodeType(Utils.MIX_VERSIONABLE) || node.isNodeType(Utils.NT_FROZEN)) return "";
-    return node.getBaseVersion().getName();    
+    return node.getBaseVersion().getName();
   }
-  
+
   public List<Node> getAllTemplates() throws Exception {
     ManageViewService viewService = getApplicationComponent(ManageViewService.class) ;
     List<Node> templateList = new ArrayList<Node>() ;
@@ -81,11 +81,11 @@ public class UICBTemplateList extends UIGrid {
     templateList.addAll(viewService.getAllTemplates(BasePath.CB_SCRIPT_TEMPLATES,repository,provider)) ;
     return templateList ;
   }
-  
+
   public String getRepository() {
     return getAncestorOfType(UIECMAdminPortlet.class).getPreferenceRepository() ;
   }
-  
+
   @SuppressWarnings("unchecked")
   public void updateCBTempListGrid(int currentPage) throws Exception {
     List<Node> nodes = getAllTemplates() ;
@@ -100,7 +100,7 @@ public class UICBTemplateList extends UIGrid {
     else
       getUIPageIterator().setCurrentPage(currentPage);
   }
-  
+
   static public class CBViewComparator implements Comparator {
     public int compare(Object o1, Object o2) throws ClassCastException {
       String name1 = ((TemplateBean) o1).getName() ;
@@ -108,7 +108,7 @@ public class UICBTemplateList extends UIGrid {
       return name1.compareToIgnoreCase(name2) ;
     }
   }
-  
+
   static  public class AddActionListener extends EventListener<UICBTemplateList> {
     public void execute(Event<UICBTemplateList> event) throws Exception {
       UICBTemplateList uiCBTemp = event.getSource() ;
@@ -129,7 +129,7 @@ public class UICBTemplateList extends UIGrid {
       event.getRequestContext().addUIComponentToUpdateByAjax(uiECMTempContainer) ;
     }
   }
-  
+
   static  public class DeleteActionListener extends EventListener<UICBTemplateList> {
     public void execute(Event<UICBTemplateList> event) throws Exception {
       UICBTemplateList uiCBTemp = event.getSource() ;

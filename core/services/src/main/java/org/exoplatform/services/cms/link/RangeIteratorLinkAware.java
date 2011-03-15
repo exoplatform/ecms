@@ -23,23 +23,23 @@ import javax.jcr.Session;
  * Created by The eXo Platform SAS
  * Author : eXoPlatform
  *          nicolas.filotto@exoplatform.com
- * 1 avr. 2009  
+ * 1 avr. 2009
  */
 public abstract class RangeIteratorLinkAware implements RangeIterator {
-  
+
   protected final Session originalSession;
   protected final String virtualPath;
-  protected final RangeIterator iterator; 
+  protected final RangeIterator iterator;
 
   public RangeIteratorLinkAware(Session originalSession, String virtualPath, RangeIterator iterator) {
     this.iterator = iterator;
     this.originalSession = originalSession;
     if (!virtualPath.startsWith("/")) {
       throw new IllegalArgumentException("The path '" + virtualPath +  "' must be an absolute path");
-    }    
+    }
     this.virtualPath = virtualPath;
-  }  
-  
+  }
+
   /**
    * {@inheritDoc}
    */
@@ -67,7 +67,7 @@ public abstract class RangeIteratorLinkAware implements RangeIterator {
   public boolean hasNext() {
     return iterator.hasNext();
   }
-  
+
   /**
    * {@inheritDoc}
    */

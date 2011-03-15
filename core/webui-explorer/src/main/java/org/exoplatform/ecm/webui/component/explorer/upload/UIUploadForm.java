@@ -100,7 +100,7 @@ import org.exoplatform.webui.form.validator.MandatoryValidator;
           lifecycle = UIFormLifecycle.class,
           template = "app:/groovy/webui/component/explorer/upload/UIUploadForm.gtmpl",
           events = {
-            @EventConfig(listeners = UIUploadForm.SaveActionListener.class), 
+            @EventConfig(listeners = UIUploadForm.SaveActionListener.class),
             @EventConfig(listeners = UIUploadForm.CancelActionListener.class, phase = Phase.DECODE),
             @EventConfig(listeners = UIUploadForm.AddUploadActionListener.class, phase = Phase.DECODE),
             @EventConfig(listeners = UIUploadForm.RemoveUploadActionListener.class, phase = Phase.DECODE)
@@ -111,7 +111,7 @@ import org.exoplatform.webui.form.validator.MandatoryValidator;
           id="UploadMultipleInputset",
           events = {
             @EventConfig(listeners = UIUploadForm.RemoveActionListener.class, phase = Phase.DECODE),
-            @EventConfig(listeners = UIUploadForm.AddActionListener.class, phase = Phase.DECODE) 
+            @EventConfig(listeners = UIUploadForm.AddActionListener.class, phase = Phase.DECODE)
           }
       )
     }
@@ -125,27 +125,27 @@ public class UIUploadForm extends UIForm implements UIPopupComponent, UISelectab
   private static final Log LOG  = ExoLogger.getLogger("explorer.upload.UIUploadForm");
 
   final static public String FIELD_NAME =  "name" ;
-  final static public String FIELD_UPLOAD = "upload" ;  
+  final static public String FIELD_UPLOAD = "upload" ;
   final static public String JCRCONTENT = "jcr:content";
   final static public String FIELD_TAXONOMY = "fieldTaxonomy";
   final static public String FIELD_LISTTAXONOMY = "fieldListTaxonomy";
   final static public String POPUP_TAXONOMY = "UIPopupTaxonomy";
-  
+
   private boolean isMultiLanguage_;
   private String language_;
   private boolean isDefault_;
   private List<String> listTaxonomy = new ArrayList<String>();
   private List<String> listTaxonomyName = new ArrayList<String>();
-  
+
   private int numberUploadFile = 1;
   private HashMap<String, List<String>> mapTaxonomies = new HashMap<String, List<String>>();
   private List<Node> listUploadedNodes = new ArrayList<Node>();
   private boolean taxonomyMandatory = false;
-  
+
   public UIUploadForm() throws Exception {
     setMultiPart(true) ;
     addUIFormInput(new UIFormStringInput(FIELD_NAME, FIELD_NAME, null).
-    													addValidator(IllegalDMSCharValidator.class));
+                              addValidator(IllegalDMSCharValidator.class));
     PortletRequestContext pcontext = (PortletRequestContext)WebuiRequestContext.getCurrentInstance();
     PortletPreferences portletPref = pcontext.getRequest().getPreferences();
     String limitPref = portletPref.getValue(Utils.UPLOAD_SIZE_LIMIT_MB, "");
@@ -162,62 +162,64 @@ public class UIUploadForm extends UIForm implements UIPopupComponent, UISelectab
     uiInput.setAutoUpload(true);
     addUIFormInput(uiInput);
   }
-  
+
   public int getNumberUploadFile() {
     return numberUploadFile;
   }
-  
+
   public void setNumberUploadFile(int numberUpload) {
     numberUploadFile = numberUpload;
   }
-  
+
   public HashMap<String, List<String>> getMapTaxonomies() {
     return mapTaxonomies;
   }
-  
+
   public void setMapTaxonomies(HashMap<String, List<String>> mapTaxonomiesAvaiable) {
     mapTaxonomies = mapTaxonomiesAvaiable;
   }
-  
+
   public List<String> getListTaxonomy() {
     return listTaxonomy;
   }
-  
+
   public List<String> getlistTaxonomyName() {
     return listTaxonomyName;
   }
-  
+
   public void setListTaxonomy(List<String> listTaxonomyNew) {
     listTaxonomy = listTaxonomyNew;
   }
-  
+
   public void setListTaxonomyName(List<String> listTaxonomyNameNew) {
     listTaxonomyName = listTaxonomyNameNew;
   }
-  
+
   public boolean getTaxonomyMandatory() {
     return taxonomyMandatory;
   }
-  
+
   public void setTaxonomyMandatory(boolean taxoMandatory) {
     taxonomyMandatory = taxoMandatory;
   }
-  
+
   public String getPathTaxonomy() throws Exception {
     UIJCRExplorer uiExplorer = getAncestorOfType(UIJCRExplorer.class);
     DMSConfiguration dmsConfig = getApplicationComponent(DMSConfiguration.class);
     DMSRepositoryConfiguration dmsRepoConfig = dmsConfig.getConfig();
-    String workspaceName = dmsRepoConfig.getSystemWorkspace();    
+    String workspaceName = dmsRepoConfig.getSystemWorkspace();
     NodeHierarchyCreator nodeHierarchyCreator = getApplicationComponent(NodeHierarchyCreator.class);
     Session session = uiExplorer.getSessionByWorkspace(workspaceName);
     return ((Node)session.getItem(nodeHierarchyCreator.getJcrPath(BasePath.TAXONOMIES_TREE_STORAGE_PATH))).getPath();
   }
-  
-  public void initFieldInput() throws Exception {        
+
+  public void initFieldInput() throws Exception {
     PortletRequestContext pcontext = (PortletRequestContext)WebuiRequestContext.getCurrentInstance();
     PortletPreferences portletPref = pcontext.getRequest().getPreferences();
     String categoryMandatoryWhenFileUpload =  portletPref.getValue(Utils.CATEGORY_MANDATORY, "").trim();
-    UIFormMultiValueInputSet uiFormMultiValue = createUIComponent(UIFormMultiValueInputSet.class, "UploadMultipleInputset", null);
+    UIFormMultiValueInputSet uiFormMultiValue = createUIComponent(UIFormMultiValueInputSet.class,
+                                                                  "UploadMultipleInputset",
+                                                                  null);
     uiFormMultiValue.setId(FIELD_LISTTAXONOMY);
     uiFormMultiValue.setName(FIELD_LISTTAXONOMY);
     uiFormMultiValue.setType(UIFormStringInput.class);
@@ -231,20 +233,20 @@ public class UIUploadForm extends UIForm implements UIPopupComponent, UISelectab
     uiFormMultiValue.setValue(listTaxonomyName);
     addUIFormInput(uiFormMultiValue);
   }
-  
+
   public String[] getActions() {
     return new String[] {"Save", "Cancel"};
   }
 
-  public void setIsMultiLanguage(boolean isMultiLanguage, String language) { 
+  public void setIsMultiLanguage(boolean isMultiLanguage, String language) {
     isMultiLanguage_ = isMultiLanguage ;
     language_ = language ;
   }
-  
+
   public void resetComponent() {
     removeChildById(FIELD_UPLOAD);
     addUIFormInput(new UIFormUploadInput(FIELD_UPLOAD, FIELD_UPLOAD));
-  }  
+  }
 
   public boolean isMultiLanguage() { return isMultiLanguage_ ; }
 
@@ -256,7 +258,7 @@ public class UIUploadForm extends UIForm implements UIPopupComponent, UISelectab
   public void deActivate() throws Exception {}
 
   public void doSelect(String selectField, Object value) throws Exception {
-    String valueTaxonomy = String.valueOf(value).trim();    
+    String valueTaxonomy = String.valueOf(value).trim();
     List<String> indexMapTaxonomy = new ArrayList<String>();
     if (mapTaxonomies.containsKey(selectField)){
       indexMapTaxonomy = mapTaxonomies.get(selectField);
@@ -264,12 +266,12 @@ public class UIUploadForm extends UIForm implements UIPopupComponent, UISelectab
     }
     if (!indexMapTaxonomy.contains(valueTaxonomy)) indexMapTaxonomy.add(valueTaxonomy);
     mapTaxonomies.put(selectField, indexMapTaxonomy);
-    
+
     updateAdvanceTaxonomy(selectField);
     UIUploadManager uiUploadManager = getParent();
     uiUploadManager.removeChildById(POPUP_TAXONOMY);
   }
-  
+
   public List<String> getListSameNames(Event<UIUploadForm> event) throws Exception {
     List<String> sameNameList = new ArrayList<String>();
     Node selectedNode = getAncestorOfType(UIJCRExplorer.class).getCurrentNode();
@@ -279,7 +281,7 @@ public class UIUploadForm extends UIForm implements UIPopupComponent, UISelectab
       if(uiComp instanceof UIFormUploadInput) {
         String[] arrayId = uiComp.getId().split(FIELD_UPLOAD);
         if ((arrayId.length > 0) && (arrayId[0].length() > 0)) index = new Integer(arrayId[0]).intValue();
-        UIFormUploadInput uiFormUploadInput;  
+        UIFormUploadInput uiFormUploadInput;
         if (index == 0){
           uiFormUploadInput = (UIFormUploadInput)getUIInput(FIELD_UPLOAD);
         } else {
@@ -299,20 +301,20 @@ public class UIUploadForm extends UIForm implements UIPopupComponent, UISelectab
         }
         name = Text.escapeIllegalJcrChars(name);
         if (!passNameValidation(name)) {
-					return new ArrayList<String>();
+          return new ArrayList<String>();
         }
         if(selectedNode.hasNode(name)) sameNameList.add(name);
       }
     }
     return sameNameList;
   }
-  
+
   @SuppressWarnings("rawtypes")
   public void doUpload(Event event, boolean isKeepFile) throws Exception {
     UIApplication uiApp = getAncestorOfType(UIApplication.class) ;
     UIJCRExplorer uiExplorer = getAncestorOfType(UIJCRExplorer.class) ;
     String repository = uiExplorer.getRepositoryName();
-    
+
     UIUploadManager uiManager = getParent();
     UIUploadContainer uiUploadContainer = uiManager.getChild(UIUploadContainer.class);
     UploadService uploadService = getApplicationComponent(UploadService.class);
@@ -331,12 +333,12 @@ public class UIUploadForm extends UIForm implements UIPopupComponent, UISelectab
     }
     PortletRequestContext pcontext = (PortletRequestContext)WebuiRequestContext.getCurrentInstance();
     PortletPreferences portletPref = pcontext.getRequest().getPreferences();
-    String categoryMandatoryWhenFileUpload =  portletPref.getValue(Utils.CATEGORY_MANDATORY, "").trim();    
+    String categoryMandatoryWhenFileUpload =  portletPref.getValue(Utils.CATEGORY_MANDATORY, "").trim();
     DMSMimeTypeResolver mimeTypeSolver = DMSMimeTypeResolver.getInstance();
     Node selectedNode = uiExplorer.getCurrentNode();
-    if (categoryMandatoryWhenFileUpload.equalsIgnoreCase("true") && 
+    if (categoryMandatoryWhenFileUpload.equalsIgnoreCase("true") &&
         (getMapTaxonomies().size() == 0) && !uiExplorer.getCurrentNode().hasNode(JCRCONTENT)) {
-      uiApp.addMessage(new ApplicationMessage("UIUploadForm.msg.taxonomyPath-error", null, 
+      uiApp.addMessage(new ApplicationMessage("UIUploadForm.msg.taxonomyPath-error", null,
           ApplicationMessage.WARNING)) ;
       event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
       return ;
@@ -348,22 +350,23 @@ public class UIUploadForm extends UIForm implements UIPopupComponent, UISelectab
       for (UIComponent uiCompValidate : listFormChildren) {
         if(uiCompValidate instanceof UIFormUploadInput) {
           String[] arrayIdValidate = uiCompValidate.getId().split(FIELD_UPLOAD);
-          if ((arrayIdValidate.length > 0) && (arrayIdValidate[0].length() > 0)) indexValidate = new Integer(arrayIdValidate[0]).intValue();
-          UIFormUploadInput uiFormUploadInput;  
+          if ((arrayIdValidate.length > 0) && (arrayIdValidate[0].length() > 0))
+            indexValidate = new Integer(arrayIdValidate[0]).intValue();
+          UIFormUploadInput uiFormUploadInput;
           if (indexValidate == 0){
             uiFormUploadInput = (UIFormUploadInput) getUIInput(FIELD_UPLOAD);
           } else {
             uiFormUploadInput = (UIFormUploadInput) getUIInput(indexValidate + FIELD_UPLOAD);
           }
           if(uiFormUploadInput.getUploadResource() == null) {
-            uiApp.addMessage(new ApplicationMessage("UIUploadForm.msg.fileName-error", null, 
+            uiApp.addMessage(new ApplicationMessage("UIUploadForm.msg.fileName-error", null,
                                                     ApplicationMessage.WARNING)) ;
             event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
             return ;
           }
           String fileName = uiFormUploadInput.getUploadResource().getFileName();
-          if(fileName == null || fileName.length() == 0) {            
-            uiApp.addMessage(new ApplicationMessage("UIUploadForm.msg.fileName-error", null, 
+          if(fileName == null || fileName.length() == 0) {
+            uiApp.addMessage(new ApplicationMessage("UIUploadForm.msg.fileName-error", null,
                                                     ApplicationMessage.WARNING)) ;
             event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
             return;
@@ -374,7 +377,7 @@ public class UIUploadForm extends UIForm implements UIPopupComponent, UISelectab
         if(uiComp instanceof UIFormUploadInput) {
           String[] arrayId = uiComp.getId().split(FIELD_UPLOAD);
           if ((arrayId.length > 0) && (arrayId[0].length() > 0)) index = new Integer(arrayId[0]).intValue();
-          UIFormUploadInput uiFormUploadInput;  
+          UIFormUploadInput uiFormUploadInput;
           if (index == 0){
             uiFormUploadInput = (UIFormUploadInput) getUIInput(FIELD_UPLOAD);
           } else {
@@ -388,14 +391,14 @@ public class UIUploadForm extends UIForm implements UIPopupComponent, UISelectab
               uiExplorer.getCurrentNode().save();
               listUploadedNodes.clear();
             }
-            uiApp.addMessage(new ApplicationMessage("UIUploadForm.msg.fileName-error", null, 
+            uiApp.addMessage(new ApplicationMessage("UIUploadForm.msg.fileName-error", null,
                                                     ApplicationMessage.WARNING)) ;
             event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
             return ;
           }
-          
+
           String fileName = uiFormUploadInput.getUploadResource().getFileName();
-          
+
           if(fileName == null || fileName.length() == 0) {
             if ((listUploadedNodes != null) && (listUploadedNodes.size() > 0)) {
               for (Node uploadedNode : listUploadedNodes) {
@@ -404,28 +407,28 @@ public class UIUploadForm extends UIForm implements UIPopupComponent, UISelectab
               uiExplorer.getCurrentNode().save();
               listUploadedNodes.clear();
             }
-            uiApp.addMessage(new ApplicationMessage("UIUploadForm.msg.fileName-error", null, 
+            uiApp.addMessage(new ApplicationMessage("UIUploadForm.msg.fileName-error", null,
                                                     ApplicationMessage.WARNING)) ;
             event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
             return;
-          }      
+          }
           inputStream = new BufferedInputStream(uiFormUploadInput.getUploadDataAsStream());
           if (index == 0){
             name = getUIStringInput(FIELD_NAME).getValue();
           } else {
             name = getUIStringInput(index + FIELD_NAME).getValue();
           }
-          
+
           if(name == null) name = fileName;
           else name = name.trim();
-          
+
           if (!passNameValidation(name)) {
-            uiApp.addMessage(new ApplicationMessage("UIUploadForm.msg.fileName-invalid-with-name", 
-            		new Object[] {name}, ApplicationMessage.WARNING));
-						event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
-						return;
+            uiApp.addMessage(new ApplicationMessage("UIUploadForm.msg.fileName-invalid-with-name",
+                new Object[] {name}, ApplicationMessage.WARNING));
+            event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+            return;
           }
-          
+
           name = Text.escapeIllegalJcrChars(name);
           List<String> listTaxonomyNameNew = new ArrayList<String>();
           if (index == 0) listTaxonomyNameNew = mapTaxonomies.get(FIELD_LISTTAXONOMY);
@@ -434,32 +437,32 @@ public class UIUploadForm extends UIForm implements UIPopupComponent, UISelectab
           String taxonomyPath = null;
           if (listTaxonomyNameNew != null) {
             for(String categoryPath : listTaxonomyNameNew) {
-              try {           	 
+              try {
                 if (categoryPath.startsWith("/")) categoryPath = categoryPath.substring(1);
                 if(categoryPath.indexOf("/")>0)
                 {
-	                taxonomyTree = categoryPath.substring(0, categoryPath.indexOf("/"));
-	                taxonomyPath = categoryPath.substring(categoryPath.indexOf("/") + 1);
-	                taxonomyService.getTaxonomyTree(repository, taxonomyTree).hasNode(taxonomyPath);
+                  taxonomyTree = categoryPath.substring(0, categoryPath.indexOf("/"));
+                  taxonomyPath = categoryPath.substring(categoryPath.indexOf("/") + 1);
+                  taxonomyService.getTaxonomyTree(repository, taxonomyTree).hasNode(taxonomyPath);
                 }
                 else
                 {
-                	taxonomyTree = categoryPath;   
-                	taxonomyPath = "";
+                  taxonomyTree = categoryPath;
+                  taxonomyPath = "";
                 }
               } catch (ItemNotFoundException e) {
-                uiApp.addMessage(new ApplicationMessage("UISelectedCategoriesGrid.msg.non-categories", null, 
+                uiApp.addMessage(new ApplicationMessage("UISelectedCategoriesGrid.msg.non-categories", null,
                     ApplicationMessage.WARNING)) ;
                 event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
                 return;
               } catch (RepositoryException re) {
-                uiApp.addMessage(new ApplicationMessage("UISelectedCategoriesGrid.msg.non-categories", null, 
+                uiApp.addMessage(new ApplicationMessage("UISelectedCategoriesGrid.msg.non-categories", null,
                     ApplicationMessage.WARNING)) ;
                 event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
                 return;
               } catch(Exception e) {
                 LOG.error("An unexpected error occurs", e);
-                uiApp.addMessage(new ApplicationMessage("UISelectedCategoriesGrid.msg.non-categories", null, 
+                uiApp.addMessage(new ApplicationMessage("UISelectedCategoriesGrid.msg.non-categories", null,
                     ApplicationMessage.WARNING)) ;
                 event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
                 return;
@@ -469,11 +472,11 @@ public class UIUploadForm extends UIForm implements UIPopupComponent, UISelectab
           String mimeType = mimeTypeSolver.getMimeType(fileName) ;
           boolean isExist = selectedNode.hasNode(name) ;
           String newNodeUUID = null;
-          
+
           if(isMultiLanguage()) {
             ValueFactoryImpl valueFactory = (ValueFactoryImpl) uiExplorer.getSession().getValueFactory() ;
             Value contentValue = valueFactory.createValue(inputStream) ;
-            multiLangService.addFileLanguage(selectedNode, name, contentValue, mimeType, 
+            multiLangService.addFileLanguage(selectedNode, name, contentValue, mimeType,
                 getLanguageSelected(), uiExplorer.getRepositoryName(), isDefault_) ;
             uiExplorer.setIsHidePopup(true) ;
             UIMultiLanguageManager uiLanguageManager = getAncestorOfType(UIMultiLanguageManager.class) ;
@@ -482,7 +485,7 @@ public class UIUploadForm extends UIForm implements UIPopupComponent, UISelectab
             event.getRequestContext().addUIComponentToUpdateByAjax(uiLanguageManager);
           } else {
             if(selectedNode.getPrimaryNodeType().isNodeType(Utils.NT_FILE)) {
-              if(!selectedNode.isCheckedOut()) selectedNode.checkout() ; 
+              if(!selectedNode.isCheckedOut()) selectedNode.checkout() ;
               Node contentNode = selectedNode.getNode(Utils.JCR_CONTENT);
               if(contentNode.getProperty(Utils.JCR_MIMETYPE).getString().equals(mimeType)) {
                 contentNode.setProperty(Utils.JCR_DATA, inputStream);
@@ -493,8 +496,8 @@ public class UIUploadForm extends UIForm implements UIPopupComponent, UISelectab
                 return;
               }
             }
-            if(!isExist || isKeepFile) {            
-              newNodeUUID = cmsService.storeNodeByUUID(Utils.NT_FILE, selectedNode, 
+            if(!isExist || isKeepFile) {
+              newNodeUUID = cmsService.storeNodeByUUID(Utils.NT_FILE, selectedNode,
                   getInputProperties(name, inputStream, mimeType), true) ;
               selectedNode.save();
               selectedNode.getSession().save();
@@ -508,16 +511,16 @@ public class UIUploadForm extends UIForm implements UIPopupComponent, UISelectab
                 if (newNode != null) {
                   for (String categoryPath : listTaxonomyNameNew) {
                     try {
-                      if (categoryPath.startsWith("/")) categoryPath = categoryPath.substring(1);                      
+                      if (categoryPath.startsWith("/")) categoryPath = categoryPath.substring(1);
                       if(categoryPath.indexOf("/")>0)
                       {
-      	                taxonomyTree = categoryPath.substring(0, categoryPath.indexOf("/"));
-      	                taxonomyPath = categoryPath.substring(categoryPath.indexOf("/") + 1);      	                
+                        taxonomyTree = categoryPath.substring(0, categoryPath.indexOf("/"));
+                        taxonomyPath = categoryPath.substring(categoryPath.indexOf("/") + 1);
                       }
                       else
                       {
-                      	taxonomyTree = categoryPath;    
-                      	taxonomyPath = "";
+                        taxonomyTree = categoryPath;
+                        taxonomyPath = "";
                       }
                       taxonomyService.addCategory(newNode, taxonomyTree, taxonomyPath);
                     } catch (ItemExistsException e) {
@@ -538,7 +541,7 @@ public class UIUploadForm extends UIForm implements UIPopupComponent, UISelectab
               Node node = selectedNode.getNode(name) ;
               if(!node.getPrimaryNodeType().isNodeType(Utils.NT_FILE)) {
                 Object[] args = { name } ;
-                uiApp.addMessage(new ApplicationMessage("UIUploadForm.msg.name-is-exist", args, 
+                uiApp.addMessage(new ApplicationMessage("UIUploadForm.msg.name-is-exist", args,
                                                         ApplicationMessage.WARNING)) ;
                 event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
                 return ;
@@ -547,7 +550,7 @@ public class UIUploadForm extends UIForm implements UIPopupComponent, UISelectab
                 node.addMixin(Utils.MIX_VERSIONABLE);
               }
               Node contentNode = node.getNode(Utils.JCR_CONTENT);
-              if(!node.isCheckedOut()) node.checkout() ; 
+              if(!node.isCheckedOut()) node.checkout() ;
               contentNode.setProperty(Utils.JCR_DATA, inputStream);
               contentNode.setProperty(Utils.JCR_MIMETYPE, mimeType);
               contentNode.setProperty(Utils.JCR_LASTMODIFIED, new GregorianCalendar());
@@ -559,18 +562,18 @@ public class UIUploadForm extends UIForm implements UIPopupComponent, UISelectab
               listenerService.broadcast(CmsService.POST_EDIT_CONTENT_EVENT, this, node);
               if (listTaxonomyNameNew != null) {
                 for (String categoryPath : listTaxonomyNameNew) {
-                  try {              
+                  try {
                     if (categoryPath.startsWith("/")) categoryPath = categoryPath.substring(1);
                     if(categoryPath.indexOf("/")>0)
                     {
-    	                taxonomyTree = categoryPath.substring(0, categoryPath.indexOf("/"));
-    	                taxonomyPath = categoryPath.substring(categoryPath.indexOf("/") + 1);    	                
+                      taxonomyTree = categoryPath.substring(0, categoryPath.indexOf("/"));
+                      taxonomyPath = categoryPath.substring(categoryPath.indexOf("/") + 1);
                     }
                     else
                     {
-                    	taxonomyTree = categoryPath;   
-                    	taxonomyPath = "";
-                    }                    
+                      taxonomyTree = categoryPath;
+                      taxonomyPath = "";
+                    }
                     taxonomyService.addCategory(node, taxonomyTree, taxonomyPath);
                   } catch (ItemExistsException e) {
                     uiApp.addMessage(new ApplicationMessage("UIUploadForm.msg.ItemExistsException",
@@ -588,7 +591,7 @@ public class UIUploadForm extends UIForm implements UIPopupComponent, UISelectab
             }
           }
           uiExplorer.getSession().save() ;
-          
+
           Node uploadedNode = null;
           if(isMultiLanguage_) {
             uiUploadContainer.setUploadedNode(selectedNode);
@@ -609,7 +612,7 @@ public class UIUploadForm extends UIForm implements UIPopupComponent, UISelectab
               uploadedNode = newNode;
             }
           }
-          
+
           //get file size
           double size = 0;
           if (uploadedNode.hasNode(Utils.JCR_CONTENT)) {
@@ -622,7 +625,7 @@ public class UIUploadForm extends UIForm implements UIPopupComponent, UISelectab
           }
           String fileSize = Utils.calculateFileSize(size);
           String iconUpload = Utils.getNodeTypeIcon(uploadedNode, "16x16Icon").replaceAll("nt_file16x16Icon ", "");
-          String[] arrValues = {iconUpload, Text.unescapeIllegalJcrChars(fileName), 
+          String[] arrValues = {iconUpload, Text.unescapeIllegalJcrChars(fileName),
               Text.unescapeIllegalJcrChars(name), fileSize, mimeType, uploadedNode.getPath()};
           listUploadedNodes.add(uploadedNode);
           listArrValues.add(arrValues);
@@ -636,33 +639,33 @@ public class UIUploadForm extends UIForm implements UIPopupComponent, UISelectab
       event.getRequestContext().addUIComponentToUpdateByAjax(uiManager);
     } catch(ConstraintViolationException con) {
       Object[] args = {name, } ;
-      throw new MessageException(new ApplicationMessage("UIUploadForm.msg.contraint-violation", 
+      throw new MessageException(new ApplicationMessage("UIUploadForm.msg.contraint-violation",
                                                          args, ApplicationMessage.WARNING)) ;
     } catch(LockException lock) {
-      throw new MessageException(new ApplicationMessage("UIUploadForm.msg.lock-exception", 
-          null, ApplicationMessage.WARNING)) ;        
+      throw new MessageException(new ApplicationMessage("UIUploadForm.msg.lock-exception",
+          null, ApplicationMessage.WARNING)) ;
     } catch(AccessDeniedException ade) {
-      throw new MessageException(new ApplicationMessage("UIActionBar.msg.access-add-denied", 
-          null, ApplicationMessage.WARNING)); 
+      throw new MessageException(new ApplicationMessage("UIActionBar.msg.access-add-denied",
+          null, ApplicationMessage.WARNING));
     } catch(AccessControlException ace) {
-      throw new MessageException(new ApplicationMessage("UIActionBar.msg.access-add-denied", 
-          null, ApplicationMessage.WARNING)); 
+      throw new MessageException(new ApplicationMessage("UIActionBar.msg.access-add-denied",
+          null, ApplicationMessage.WARNING));
     } catch(Exception e) {
       LOG.error("An unexpected error occurs", e);
       JCRExceptionManager.process(uiApp, e);
       return ;
     }
   }
-  
+
   private Map<String, JcrInputProperty> getInputProperties(String name, InputStream inputStream, String mimeType) {
-    Map<String,JcrInputProperty> inputProperties = new HashMap<String,JcrInputProperty>() ;            
+    Map<String,JcrInputProperty> inputProperties = new HashMap<String,JcrInputProperty>() ;
     JcrInputProperty nodeInput = new JcrInputProperty() ;
     nodeInput.setJcrPath("/node") ;
     nodeInput.setValue(name) ;
     nodeInput.setMixintype("mix:i18n,mix:votable,mix:commentable") ;
     nodeInput.setType(JcrInputProperty.NODE) ;
     inputProperties.put("/node",nodeInput) ;
-    
+
     JcrInputProperty jcrContent = new JcrInputProperty() ;
     jcrContent.setJcrPath("/node/jcr:content") ;
     jcrContent.setValue("") ;
@@ -670,39 +673,40 @@ public class UIUploadForm extends UIForm implements UIPopupComponent, UISelectab
     jcrContent.setNodetype(Utils.NT_RESOURCE) ;
     jcrContent.setType(JcrInputProperty.NODE) ;
     inputProperties.put("/node/jcr:content",jcrContent) ;
-    
+
     JcrInputProperty jcrData = new JcrInputProperty() ;
-    jcrData.setJcrPath("/node/jcr:content/jcr:data") ;            
-    jcrData.setValue(inputStream) ;          
-    inputProperties.put("/node/jcr:content/jcr:data",jcrData) ; 
-    
+    jcrData.setJcrPath("/node/jcr:content/jcr:data") ;
+    jcrData.setValue(inputStream) ;
+    inputProperties.put("/node/jcr:content/jcr:data",jcrData) ;
+
     JcrInputProperty jcrMimeType = new JcrInputProperty() ;
     jcrMimeType.setJcrPath("/node/jcr:content/jcr:mimeType") ;
-    jcrMimeType.setValue(mimeType) ;          
+    jcrMimeType.setValue(mimeType) ;
     inputProperties.put("/node/jcr:content/jcr:mimeType",jcrMimeType) ;
-    
+
     JcrInputProperty jcrLastModified = new JcrInputProperty() ;
     jcrLastModified.setJcrPath("/node/jcr:content/jcr:lastModified") ;
     jcrLastModified.setValue(new GregorianCalendar()) ;
     inputProperties.put("/node/jcr:content/jcr:lastModified",jcrLastModified) ;
-    
+
     JcrInputProperty jcrEncoding = new JcrInputProperty() ;
     jcrEncoding.setJcrPath("/node/jcr:content/jcr:encoding") ;
     jcrEncoding.setValue("UTF-8") ;
-    inputProperties.put("/node/jcr:content/jcr:encoding",jcrEncoding) ;  
+    inputProperties.put("/node/jcr:content/jcr:encoding",jcrEncoding) ;
     return inputProperties;
-  }  
-  
-  private void updateAdvanceTaxonomy(String selectField) throws Exception {    
+  }
+
+  private void updateAdvanceTaxonomy(String selectField) throws Exception {
     List<UIComponent> listChildren = getChildren();
     for (UIComponent uiComp : listChildren) {
       if (uiComp.getId().equals(selectField)) {
         UIFormMultiValueInputSet uiFormMultiValueInputSet = getChildById(selectField);
-        if (mapTaxonomies.containsKey(selectField)) uiFormMultiValueInputSet.setValue(getTaxonomyLabel(mapTaxonomies.get(selectField)));
+        if (mapTaxonomies.containsKey(selectField))
+          uiFormMultiValueInputSet.setValue(getTaxonomyLabel(mapTaxonomies.get(selectField)));
       }
     }
   }
-  
+
   private List<String> getTaxonomyLabel(List<String> taxonomyPaths) {
     List<String> taxonomyLabels = new ArrayList<String>();
     String[] taxonomyPathSplit = null;
@@ -724,38 +728,38 @@ public class UIUploadForm extends UIForm implements UIPopupComponent, UISelectab
         } catch (MissingResourceException me) {
           buildPathlabel.append(taxonomyPathSplit[i]).append("/");
         }
-       
+
       }
 
       taxonomyLabels.add(buildPathlabel.substring(0, buildPathlabel.length() - 1));
     }
     return taxonomyLabels;
   }
-  
+
   private boolean passNameValidation(String name) throws Exception {
-  	if (name == null || name.contains("[") || name.contains("]") || 
-  			name.contains("\"") || name.contains("/")) 
-  		return false;
-  	
-  	int count = 0;
-  	for (char c : name.toCharArray()) {
-  		if (c == ':') count ++;
-  		if (count > 1) return false;
-  	}
-  	
-  	if (count == 1) {
-			if (name.split(":").length < 2) return false;  		
-  		String namespace = name.split(":")[0];
+    if (name == null || name.contains("[") || name.contains("]") ||
+        name.contains("\"") || name.contains("/"))
+      return false;
+
+    int count = 0;
+    for (char c : name.toCharArray()) {
+      if (c == ':') count ++;
+      if (count > 1) return false;
+    }
+
+    if (count == 1) {
+      if (name.split(":").length < 2) return false;
+      String namespace = name.split(":")[0];
       NamespaceRegistry namespaceRegistry = getApplicationComponent(RepositoryService.class)
       .getRepository(getAncestorOfType(UIJCRExplorer.class).getRepositoryName()).getNamespaceRegistry() ;
       String[] prefixs = namespaceRegistry.getPrefixes();
       for (String prefix : prefixs)
-      	if (namespace.equals(prefix))
-      		return true;
+        if (namespace.equals(prefix))
+          return true;
       return false;
-      
-  	}
-  	return true;
+
+    }
+    return true;
   }
 
   static  public class SaveActionListener extends EventListener<UIUploadForm> {
@@ -764,7 +768,7 @@ public class UIUploadForm extends UIForm implements UIPopupComponent, UISelectab
       UIUploadManager uiManager = uiForm.getParent();
       if(uiForm.getListSameNames(event).size() > 0) {
         UIPopupWindow uiPopupWindow = uiManager.initPopupWhenHaveSameName();
-        UIUploadBehaviorWithSameName uiUploadBehavior = 
+        UIUploadBehaviorWithSameName uiUploadBehavior =
           uiManager.createUIComponent(UIUploadBehaviorWithSameName.class, null, null);
         uiUploadBehavior.setMessageKey("UIUploadForm.msg.confirm-behavior");
         uiUploadBehavior.setArguments(
@@ -775,7 +779,7 @@ public class UIUploadForm extends UIForm implements UIPopupComponent, UISelectab
         event.getRequestContext().addUIComponentToUpdateByAjax(uiManager);
         return;
       }
-      uiForm.doUpload(event, false);    
+      uiForm.doUpload(event, false);
     }
   }
 
@@ -785,7 +789,7 @@ public class UIUploadForm extends UIForm implements UIPopupComponent, UISelectab
       uiExplorer.cancelAction() ;
     }
   }
-      
+
   static  public class RemoveActionListener extends EventListener<UIFormMultiValueInputSet> {
     public void execute(Event<UIFormMultiValueInputSet> event) throws Exception {
       UIFormMultiValueInputSet uiSet = event.getSource();
@@ -796,10 +800,15 @@ public class UIUploadForm extends UIForm implements UIPopupComponent, UISelectab
         String[] arrayId = id.split(FIELD_LISTTAXONOMY);
         int index = 0;
         int indexRemove = 0;
-        if ((arrayId.length > 0) && (arrayId[0].length() > 0)) index = new Integer(arrayId[0]).intValue();
-        if ((arrayId.length > 0) && (arrayId[1].length() > 0)) indexRemove = new Integer(arrayId[1]).intValue();
+        if ((arrayId.length > 0) && (arrayId[0].length() > 0))
+          index = new Integer(arrayId[0]).intValue();
+        if ((arrayId.length > 0) && (arrayId[1].length() > 0))
+          indexRemove = new Integer(arrayId[1]).intValue();
         String idFieldListTaxonomy;
-        if (index == 0) idFieldListTaxonomy = FIELD_LISTTAXONOMY; else idFieldListTaxonomy = index + FIELD_LISTTAXONOMY; 
+        if (index == 0)
+          idFieldListTaxonomy = FIELD_LISTTAXONOMY;
+        else
+          idFieldListTaxonomy = index + FIELD_LISTTAXONOMY;
         if (uiUploadForm.mapTaxonomies.containsKey(idFieldListTaxonomy)) {
           List<String> indexMapTaxonomy = new ArrayList<String>();
           indexMapTaxonomy = uiUploadForm.mapTaxonomies.get(idFieldListTaxonomy);
@@ -810,9 +819,9 @@ public class UIUploadForm extends UIForm implements UIPopupComponent, UISelectab
         uiSet.removeChildById(id);
         event.getRequestContext().addUIComponentToUpdateByAjax(uiUploadForm);
       }
-    } 
+    }
   }
-  
+
   static  public class AddActionListener extends EventListener<UIFormMultiValueInputSet> {
     public void execute(Event<UIFormMultiValueInputSet> event) throws Exception {
       UIFormMultiValueInputSet uiSet = event.getSource();
@@ -836,10 +845,10 @@ public class UIUploadForm extends UIForm implements UIPopupComponent, UISelectab
         UIUploadManager uiUploadManager = uiUploadForm.getParent();
         UIJCRExplorer uiExplorer = uiUploadForm.getAncestorOfType(UIJCRExplorer.class);
         String repository = uiExplorer.getRepositoryName();
-        
-        
+
+
         UIPopupWindow uiPopupWindow = uiUploadManager.initPopupTaxonomy(POPUP_TAXONOMY);
-        UIOneTaxonomySelector uiOneTaxonomySelector = 
+        UIOneTaxonomySelector uiOneTaxonomySelector =
           uiUploadManager.createUIComponent(UIOneTaxonomySelector.class, null, null);
         uiPopupWindow.setUIComponent(uiOneTaxonomySelector);
         TaxonomyService taxonomyService = uiUploadForm.getApplicationComponent(TaxonomyService.class);
@@ -856,20 +865,20 @@ public class UIUploadForm extends UIForm implements UIPopupComponent, UISelectab
         uiPopupWindow.setShow(true);
         event.getRequestContext().addUIComponentToUpdateByAjax(uiUploadManager);
       } catch (AccessDeniedException accessDeniedException) {
-        uiApp.addMessage(new ApplicationMessage("Taxonomy.msg.AccessDeniedException", null, 
+        uiApp.addMessage(new ApplicationMessage("Taxonomy.msg.AccessDeniedException", null,
             ApplicationMessage.WARNING));
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
         return;
       } catch (Exception e) {
-      	JCRExceptionManager.process(uiApp, e);
+        JCRExceptionManager.process(uiApp, e);
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
         return;
       }
     }
   }
-  
+
   static  public class AddUploadActionListener extends EventListener<UIUploadForm> {
-    public void execute(Event<UIUploadForm> event) throws Exception {      
+    public void execute(Event<UIUploadForm> event) throws Exception {
       UIUploadForm uiUploadForm = event.getSource();
       List<UIComponent> listChildren = uiUploadForm.getChildren();
       int index = 0;
@@ -885,15 +894,17 @@ public class UIUploadForm extends UIForm implements UIPopupComponent, UISelectab
         String[] arrayId = fieldFieldUpload.split(FIELD_UPLOAD);
         if ((arrayId.length > 0) && (arrayId[0].length() > 0)) index = new Integer(arrayId[0]).intValue();
       }
-      index++; 
+      index++;
       uiUploadForm.addUIFormInput(new UIFormStringInput(index + FIELD_NAME, index + FIELD_NAME, null));
       PortletRequestContext pcontext = (PortletRequestContext)WebuiRequestContext.getCurrentInstance();
       PortletPreferences portletPref = pcontext.getRequest().getPreferences();
       String limitPref = portletPref.getValue(Utils.UPLOAD_SIZE_LIMIT_MB, "");
-      UIFormUploadInput uiInput = null;      
+      UIFormUploadInput uiInput = null;
       if (limitPref != null) {
         try {
-          uiInput = new UIFormUploadInput(index + FIELD_UPLOAD, index + FIELD_UPLOAD, Integer.parseInt(limitPref.trim()));
+          uiInput = new UIFormUploadInput(index + FIELD_UPLOAD,
+                                          index + FIELD_UPLOAD,
+                                          Integer.parseInt(limitPref.trim()));
         } catch (NumberFormatException e) {
           uiInput = new UIFormUploadInput(index + FIELD_UPLOAD, index + FIELD_UPLOAD);
         }
@@ -901,19 +912,21 @@ public class UIUploadForm extends UIForm implements UIPopupComponent, UISelectab
         uiInput = new UIFormUploadInput(index + FIELD_UPLOAD, index + FIELD_UPLOAD);
       }
       uiInput.setAutoUpload(true);
-      uiUploadForm.addUIFormInput(uiInput);      
-      UIFormMultiValueInputSet uiFormMultiValue = uiUploadForm.createUIComponent(UIFormMultiValueInputSet.class, "UploadMultipleInputset", null);
+      uiUploadForm.addUIFormInput(uiInput);
+      UIFormMultiValueInputSet uiFormMultiValue = uiUploadForm.createUIComponent(UIFormMultiValueInputSet.class,
+                                                                                 "UploadMultipleInputset",
+                                                                                 null);
       uiFormMultiValue.setId(index + FIELD_LISTTAXONOMY);
       uiFormMultiValue.setName(index + FIELD_LISTTAXONOMY);
       uiFormMultiValue.setType(UIFormStringInput.class);
       uiFormMultiValue.setEditable(false);
       uiUploadForm.addUIFormInput(uiFormMultiValue);
       uiUploadForm.setNumberUploadFile(numberUploadFile + 1);
-      uiUploadForm.setRendered(true);      
+      uiUploadForm.setRendered(true);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiUploadForm.getParent());
     }
   }
-  
+
   static  public class RemoveUploadActionListener extends EventListener<UIUploadForm> {
     public void execute(Event<UIUploadForm> event) throws Exception {
       String id = event.getRequestContext().getRequestParameter(OBJECTID);
@@ -925,18 +938,19 @@ public class UIUploadForm extends UIForm implements UIPopupComponent, UISelectab
       }
       String[] arrayId = id.split(FIELD_NAME);
       int indexRemove = 0;
-      if ((arrayId.length > 0) && (arrayId[0].length() > 0)) indexRemove = new Integer(arrayId[0]).intValue();
+      if ((arrayId.length > 0) && (arrayId[0].length() > 0))
+        indexRemove = new Integer(arrayId[0]).intValue();
       if (indexRemove == 0) {
         uiUploadForm.removeChildById(FIELD_NAME);
         uiUploadForm.removeChildById(FIELD_UPLOAD);
         uiUploadForm.removeChildById(FIELD_LISTTAXONOMY);
-        if (uiUploadForm.mapTaxonomies.containsKey(FIELD_LISTTAXONOMY)) 
+        if (uiUploadForm.mapTaxonomies.containsKey(FIELD_LISTTAXONOMY))
           uiUploadForm.mapTaxonomies.remove(FIELD_LISTTAXONOMY);
       } else {
         uiUploadForm.removeChildById(indexRemove + FIELD_NAME);
         uiUploadForm.removeChildById(indexRemove + FIELD_UPLOAD);
         uiUploadForm.removeChildById(indexRemove + FIELD_LISTTAXONOMY);
-        if (uiUploadForm.mapTaxonomies.containsKey(indexRemove + FIELD_LISTTAXONOMY)) 
+        if (uiUploadForm.mapTaxonomies.containsKey(indexRemove + FIELD_LISTTAXONOMY))
           uiUploadForm.mapTaxonomies.remove(indexRemove + FIELD_LISTTAXONOMY);
       }
       uiUploadForm.setNumberUploadFile(index - 1);

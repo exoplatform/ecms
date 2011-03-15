@@ -6,17 +6,17 @@ import org.exoplatform.webui.ext.manager.UIAbstractManager;
 
 @ComponentConfig(lifecycle = UIContainerLifecycle.class)
 public class UIWCMCachePanel extends UIAbstractManager {
-	public UIWCMCachePanel() throws Exception {		
-		addChild(UIWCMCacheForm.class, null, null);
-		
+  public UIWCMCachePanel() throws Exception {
+    addChild(UIWCMCacheForm.class, null, null);
+
   }
-	
-	public void refresh() throws Exception {
+
+  public void refresh() throws Exception {
     update();
   }
-  
-  public void update() throws Exception { 
-  	getChild(UIWCMCacheForm.class).update();
+
+  public void update() throws Exception {
+    getChild(UIWCMCacheForm.class).update();
   }
 
 }

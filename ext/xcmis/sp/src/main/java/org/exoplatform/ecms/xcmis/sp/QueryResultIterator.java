@@ -105,7 +105,6 @@ class QueryResultIterator implements ItemsIterator<Result>
             Score score = null;
             for (Column column : qom.getColumns())
             {
-               //TODO check
                if (column.isFunction())
                {
                   score = new Score(column.getColumnName(), BigDecimal.valueOf(row.getScore()));

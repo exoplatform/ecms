@@ -33,21 +33,21 @@ import org.exoplatform.services.security.IdentityRegistry;
 
 /**
  * Created by The eXo Platform SARL .
- * 
+ *
  * @author <a href="mailto:uy7c@yahoo.com">Max Shaposhnik</a>
  * @version $Id$
  */
 
 public class IdentifyFilter implements Filter {
-  
+
 //  private AuthenticationService authenticationService;
 
  protected SessionProvider         sessionProvide;
-  
+
   public void init(FilterConfig config) {
   }
   public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-    
+
     ExoContainer container = ExoContainerContext.getCurrentContainer();
 
 //    authenticationService = (AuthenticationService) container.getComponentInstanceOfType(AuthenticationService.class);

@@ -26,7 +26,7 @@ import org.exoplatform.webui.ext.filter.UIExtensionFilterType;
  * Created by The eXo Platform SAS
  * Author : eXoPlatform
  *          ha.dangviet@exoplatform.com
- * Nov 22, 2010  
+ * Nov 22, 2010
  */
 public class IsNotSystemWorkspaceFilter  extends UIExtensionAbstractFilter {
 
@@ -41,14 +41,14 @@ public class IsNotSystemWorkspaceFilter  extends UIExtensionAbstractFilter {
 
   @Override
   public void onDeny(Map<String, Object> context) throws Exception {
-    
+
   }
-  
+
   /**
    * This is the type of the filter
    */
   public UIExtensionFilterType getType() {
     return UIExtensionFilterType.MANDATORY;
-  }  
+  }
 
 }

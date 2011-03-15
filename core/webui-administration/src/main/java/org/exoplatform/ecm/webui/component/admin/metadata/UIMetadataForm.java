@@ -39,7 +39,7 @@ import org.exoplatform.webui.form.validator.MandatoryValidator;
  * Author : Dang Van Minh
  *          minh.dang@exoplatform.com
  * Sep 19, 2006
- * 5:31:04 PM 
+ * 5:31:04 PM
  */
 @ComponentConfig(
     lifecycle = UIFormLifecycle.class,
@@ -65,7 +65,7 @@ public class UIMetadataForm extends UIFormTabPane implements UISelectable {
   final static public String METADATA_TAB = "metadataTypeTab" ;
   final static public String DIALOG_TAB = "dialogTab" ;
   final static public String VIEW_TAB = "viewTab" ;
-  
+
   private boolean isAddNew_ = false ;
   private String metadataName_ ;
   private String repository_ ;
@@ -94,7 +94,7 @@ public class UIMetadataForm extends UIFormTabPane implements UISelectable {
     UIMetadataManager uiManager = getAncestorOfType(UIMetadataManager.class) ;
     uiManager.removeChildById(UIMetadataManager.PERMISSION_POPUP) ;
   }
-  
+
   public void update(String metadata)throws Exception{
     metadataName_ = metadata ;
     MetadataService metadataService = getApplicationComponent(MetadataService.class) ;
@@ -109,10 +109,10 @@ public class UIMetadataForm extends UIFormTabPane implements UISelectable {
     getUIFormTextAreaInput(DIALOG_TEMPLATE).setValue(dialogTemplate) ;
     getUIFormTextAreaInput(VIEW_TEMPLATE).setValue(viewTemplate) ;
   }
-  
+
   static public class SaveActionListener extends EventListener<UIMetadataForm> {
     public void execute(Event<UIMetadataForm> event) throws Exception {
-      UIMetadataForm uiForm = event.getSource();      
+      UIMetadataForm uiForm = event.getSource();
       UIMetadataManager uiMetaManager = uiForm.getAncestorOfType(UIMetadataManager.class) ;
       MetadataService metadataService = uiForm.getApplicationComponent(MetadataService.class) ;
       String roles = uiForm.getUIStringInput(VIEW_PERMISSION).getValue() ;
@@ -122,7 +122,7 @@ public class UIMetadataForm extends UIFormTabPane implements UISelectable {
       if(viewTemplate == null) viewTemplate = "" ;
       if(!metadataService.hasMetadata(uiForm.metadataName_, uiForm.repository_)) uiForm.isAddNew_ = true ;
       else uiForm.isAddNew_ = false ;
-      JCRResourceResolver resourceResolver = 
+      JCRResourceResolver resourceResolver =
         new JCRResourceResolver(uiForm.repository_, uiForm.workspaceName_, "exo:templateFile") ;
       TemplateService templateService = uiForm.getApplicationComponent(TemplateService.class) ;
       String path = metadataService.addMetadata(uiForm.metadataName_, true, roles, dialogTemplate, uiForm.isAddNew_, uiForm.repository_) ;
@@ -135,7 +135,7 @@ public class UIMetadataForm extends UIFormTabPane implements UISelectable {
       event.getRequestContext().addUIComponentToUpdateByAjax(uiMetaManager) ;
     }
   }
-  
+
   static public class AddPermissionActionListener extends EventListener<UIMetadataForm> {
     public void execute(Event<UIMetadataForm> event) throws Exception {
       UIMetadataForm uiView = event.getSource() ;
@@ -145,7 +145,7 @@ public class UIMetadataForm extends UIFormTabPane implements UISelectable {
       event.getRequestContext().addUIComponentToUpdateByAjax(uiManager) ;
     }
   }
-  
+
   static public class CancelActionListener extends EventListener<UIMetadataForm> {
     public void execute(Event<UIMetadataForm> event) throws Exception {
       UIMetadataForm uiView = event.getSource() ;
@@ -154,7 +154,7 @@ public class UIMetadataForm extends UIFormTabPane implements UISelectable {
       event.getRequestContext().addUIComponentToUpdateByAjax(uiMetaManager) ;
     }
   }
-  
+
   static public class SelectTabActionListener extends EventListener<UIMetadataForm> {
      public void execute(Event<UIMetadataForm> event) throws Exception {
        UIMetadataForm uiView = event.getSource() ;

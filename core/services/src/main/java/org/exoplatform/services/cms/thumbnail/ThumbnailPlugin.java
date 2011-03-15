@@ -25,12 +25,12 @@ import javax.jcr.Node;
  * Created by The eXo Platform SARL
  * Author : Dang Van Minh
  *          minh.dang@exoplatform.com
- * Oct 22, 2009  
+ * Oct 22, 2009
  * 7:09:36 AM
  */
 public interface ThumbnailPlugin {
-  
+
   public BufferedImage getBufferedImage(Node contentNode, String nodePath) throws Exception;
-  
+
   public List<String> getMimeTypes();
 }

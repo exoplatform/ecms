@@ -40,7 +40,7 @@ import org.exoplatform.webui.event.EventListener;
  * Created by The eXo Platform SARL
  * Author : Pham Tuan
  *          tuan.pham@exoplatform.com
- * 18-07-2007  
+ * 18-07-2007
  */
 @ComponentConfig(
     template = "app:/groovy/webui/component/browse/UITagList.gtmpl",
@@ -51,41 +51,41 @@ import org.exoplatform.webui.event.EventListener;
 public class UITagList extends UIComponent {
 
   final static public String PUBLIC_TAG_NODE_PATH = "exoPublicTagNode";
-  
-  private String tagPath_ ;   
+
+  private String tagPath_ ;
   public UITagList() throws Exception {
   }
 
   public List<Node> getPrivateTagLink() throws Exception {
     String repository = getRepository();
-  	ExoContainer container = ExoContainerContext.getCurrentContainer();
-		RepositoryService repositoryService 
-		= (RepositoryService) container.getComponentInstanceOfType(RepositoryService.class);
-		ManageableRepository	manageableRepo = repositoryService.getCurrentRepository();
-		
-		String workspace = manageableRepo.getConfiguration().getDefaultWorkspaceName();
+    ExoContainer container = ExoContainerContext.getCurrentContainer();
+    RepositoryService repositoryService
+    = (RepositoryService) container.getComponentInstanceOfType(RepositoryService.class);
+    ManageableRepository	manageableRepo = repositoryService.getCurrentRepository();
+
+    String workspace = manageableRepo.getConfiguration().getDefaultWorkspaceName();
     String userName = getUserName();
     NewFolksonomyService newFolksonomyService = getApplicationComponent(NewFolksonomyService.class) ;
     return newFolksonomyService.getAllPrivateTags(userName, repository, workspace);
   }
-  
+
   public List<Node> getPublicTagLink() throws Exception {
     String repository = getRepository();
-  	ExoContainer container = ExoContainerContext.getCurrentContainer();
-		RepositoryService repositoryService = 
-		(RepositoryService) container.getComponentInstanceOfType(RepositoryService.class);
-		ManageableRepository	manageableRepo = repositoryService.getCurrentRepository();
-		NodeHierarchyCreator nodeHierarchyCreator =
-		(NodeHierarchyCreator) container.getComponentInstanceOfType(NodeHierarchyCreator.class);
-		
-		String workspace = manageableRepo.getConfiguration().getDefaultWorkspaceName();
-		
-		String publicTagNodePath = nodeHierarchyCreator.getJcrPath(PUBLIC_TAG_NODE_PATH);
+    ExoContainer container = ExoContainerContext.getCurrentContainer();
+    RepositoryService repositoryService =
+    (RepositoryService) container.getComponentInstanceOfType(RepositoryService.class);
+    ManageableRepository	manageableRepo = repositoryService.getCurrentRepository();
+    NodeHierarchyCreator nodeHierarchyCreator =
+    (NodeHierarchyCreator) container.getComponentInstanceOfType(NodeHierarchyCreator.class);
+
+    String workspace = manageableRepo.getConfiguration().getDefaultWorkspaceName();
+
+    String publicTagNodePath = nodeHierarchyCreator.getJcrPath(PUBLIC_TAG_NODE_PATH);
     NewFolksonomyService newFolksonomyService = getApplicationComponent(NewFolksonomyService.class) ;
-    
+
     return newFolksonomyService.getAllPublicTags(publicTagNodePath, repository, workspace);
   }
-  
+
   public Map<String ,String> getTagStyle() throws Exception {
     String repository = getRepository() ;
     String workspace = getAncestorOfType(UIBrowseContainer.class).getDMSSystemWorkspace(repository);
@@ -93,22 +93,22 @@ public class UITagList extends UIComponent {
     Map<String , String> tagStyle = new HashMap<String ,String>() ;
     for(Node tag : newFolksonomyService.getAllTagStyle(repository, workspace)) {
       tagStyle.put(tag.getProperty("exo:styleRange").getValue().getString(),
-					 				 tag.getProperty("exo:htmlStyle").getValue().getString());
+                    tag.getProperty("exo:htmlStyle").getValue().getString());
 
     }
     return tagStyle ;
   }
-  
+
   public String getTagHtmlStyle(Map<String, String> tagStyles, int tagCount) throws Exception {
-  	for (Entry<String, String> entry : tagStyles.entrySet()) {
-  		if (checkTagRate(tagCount, entry.getKey()))
-	  		return entry.getValue();
-  	}
-  	return "";
+    for (Entry<String, String> entry : tagStyles.entrySet()) {
+      if (checkTagRate(tagCount, entry.getKey()))
+        return entry.getValue();
+    }
+    return "";
   }
-  
+
   private boolean checkTagRate(int numOfDocument, String range) throws Exception {
-    String[] vals = StringUtils.split(range ,"..") ;    
+    String[] vals = StringUtils.split(range ,"..") ;
     int minValue = Integer.parseInt(vals[0]) ;
     int maxValue ;
     if(vals[1].equals("*")) {
@@ -116,15 +116,15 @@ public class UITagList extends UIComponent {
     }else {
       maxValue = Integer.parseInt(vals[1]) ;
     }
-    if(minValue <=numOfDocument && numOfDocument <maxValue ) return true ;    
+    if(minValue <=numOfDocument && numOfDocument <maxValue ) return true ;
     return false ;
-  }  
-  
+  }
+
   public String getRepository() { return getAncestorOfType(UIBrowseContainer.class).getRepository();}
   public String getWorkspace() { return getAncestorOfType(UIBrowseContainer.class).getWorkSpace(); }
   public String getUserName() { return getAncestorOfType(UIBrowseContainer.class).getUserName(); }
-  
-  public String getTagPath() { return this.tagPath_ ; }  
+
+  public String getTagPath() { return this.tagPath_ ; }
   public void setTagPath(String tagName) { this.tagPath_ = tagName ; }
 
   static public class ViewByTagActionListener extends EventListener<UITagList> {

@@ -24,7 +24,7 @@ import org.exoplatform.webui.ext.manager.UIAbstractManager;
  * Author : Tran The Trong
  *          trongtt@exoplatform.com
  * Sep 25, 2006
- * 11:45:11 AM 
+ * 11:45:11 AM
  */
 
 @ComponentConfig(template = "system:/groovy/webui/core/UITabPane.gtmpl")
@@ -38,11 +38,11 @@ public class UIViewManager extends UIAbstractManager {
     uiCBTemp.addChild(UICBTemplateList.class, null, null) ;
     uiCBTemp.setRendered(false) ;
   }
-  
+
   public void refresh() throws Exception {
     update();
   }
-  
+
   public void update() throws Exception {
     getChild(UIViewContainer.class).update() ;
     UIECMTemplateList uiECMTemplateList = ((UITemplateContainer)getChildById("ECMTemplate")).getChild(UIECMTemplateList.class);

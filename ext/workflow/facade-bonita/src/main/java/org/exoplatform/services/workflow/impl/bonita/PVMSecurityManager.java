@@ -30,21 +30,21 @@ import org.ow2.bonita.identity.auth.BonitaPrincipal;
 public class PVMSecurityManager {
 
   private static Logger log = Logger.getLogger(PVMSecurityManager.class.getName());
-	
+
   public void commit(){
     Subject subject = null;
 
     // Change for the trunk version
-    //Subject subject = (Subject) ConversationState.getCurrent().getAttribute(ConversationState.SUBJECT); 
+    //Subject subject = (Subject) ConversationState.getCurrent().getAttribute(ConversationState.SUBJECT);
     /**
 //		  ExoContainer container = ExoContainerContext.getCurrentContainer();
 //        AuthenticationService authenticationService = (AuthenticationService) container
 //        .getComponentInstanceOfType(AuthenticationService.class);
 //        if(authenticationService.getCurrentIdentity()!=null){
 //            Subject subject = authenticationService.getCurrentIdentity().getSubject();
-     * 
+     *
      * THESE LINES ARE FOR 2.0 versions
-     * 
+     *
      */
     if(subject!=null){
       String uid="";
@@ -60,14 +60,14 @@ public class PVMSecurityManager {
       try {
         lc = new LoginContext("Bonita", s);
       } catch (LoginException le) {
-    	  log.log(Level.WARNING, le.getMessage(), le);
-      } 
+        log.log(Level.WARNING, le.getMessage(), le);
+      }
 
       try {
         lc.login();
         // if we return with no exception, authentication succeeded
       } catch (Exception e) {
-    	  log.log(Level.WARNING, "Login failed: ", e);
+        log.log(Level.WARNING, "Login failed: ", e);
       }
     }
   }

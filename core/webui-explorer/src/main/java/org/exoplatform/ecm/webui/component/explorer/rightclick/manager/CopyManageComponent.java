@@ -50,7 +50,7 @@ import org.exoplatform.webui.ext.manager.UIAbstractManagerComponent;
  * Created by The eXo Platform SARL
  * Author : Hoang Van Hung
  *          hunghvit@gmail.com
- * Aug 5, 2009  
+ * Aug 5, 2009
  */
 
 @ComponentConfig(
@@ -61,23 +61,23 @@ import org.exoplatform.webui.ext.manager.UIAbstractManagerComponent;
 
 public class CopyManageComponent extends UIAbstractManagerComponent {
 
-  private static final List<UIExtensionFilter> FILTERS 
-  		= Arrays.asList(new UIExtensionFilter[]{new IsNotInTrashFilter(),
-  																						new IsNotTrashHomeNodeFilter()});
-  
+  private static final List<UIExtensionFilter> FILTERS
+      = Arrays.asList(new UIExtensionFilter[]{new IsNotInTrashFilter(),
+                                              new IsNotTrashHomeNodeFilter()});
+
   private final static Log       LOG  = ExoLogger.getLogger(CopyManageComponent.class);
-  
+
   @UIExtensionFilters
   public List<UIExtensionFilter> getFilters() {
     return FILTERS;
   }
-  
+
   public static void multipleCopy(String[] srcPaths, Event<UIComponent> event) throws Exception {
     for(int i=0; i< srcPaths.length; i++) {
       processCopy(srcPaths[i], event, true);
     }
   }
-  
+
   public static void processCopy(String srcPath, Event<?> event, boolean isMultiSelect) throws Exception {
     UIWorkingArea uiWorkingArea = ((UIComponent)event.getSource()).getParent();
     UIJCRExplorer uiExplorer = uiWorkingArea.getAncestorOfType(UIJCRExplorer.class);
@@ -98,14 +98,14 @@ public class CopyManageComponent extends UIAbstractManagerComponent {
       srcPath = node.getPath();
       // Reset the session to manage the links that potentially change of workspace
       session = node.getSession();
-      // Reset the workspace name to manage the links that potentially change of workspace 
+      // Reset the workspace name to manage the links that potentially change of workspace
       wsName = session.getWorkspace().getName();
     } catch(PathNotFoundException path) {
-      uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.path-not-found-exception", 
+      uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.path-not-found-exception",
           null,ApplicationMessage.WARNING));
       event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
       return;
-    } 
+    }
     try {
       List<ClipboardCommand> clipboards = uiExplorer.getAllClipBoard();
       for(ClipboardCommand command:clipboards) {
@@ -125,11 +125,11 @@ public class CopyManageComponent extends UIAbstractManagerComponent {
     } catch(ConstraintViolationException cons) {
       uiExplorer.getSession().refresh(false);
       uiExplorer.refreshExplorer();
-      uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.constraintviolation-exception", 
+      uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.constraintviolation-exception",
           null,ApplicationMessage.WARNING));
       event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
       uiExplorer.updateAjax(event);
-      return;              
+      return;
     } catch(Exception e) {
       LOG.error("an unexpected error occurs", e);
       JCRExceptionManager.process(uiApp, e);
@@ -137,7 +137,7 @@ public class CopyManageComponent extends UIAbstractManagerComponent {
       uiExplorer.updateAjax(event);
     }
   }
-  
+
   public static void copyManage(Event<UIComponent> event) throws Exception {
     UIWorkingArea uiWorkingArea = event.getSource().getParent();
     String srcPath = event.getRequestContext().getRequestParameter(OBJECTID);
@@ -148,7 +148,7 @@ public class CopyManageComponent extends UIAbstractManagerComponent {
       processCopy(srcPath, event, false);
     }
   }
-  
+
   public static class CopyActionListener extends UIWorkingAreaActionListener<CopyManageComponent> {
     public void processEvent(Event<CopyManageComponent> event) throws Exception {
       Event<UIComponent> event_ = new Event<UIComponent>( event.getSource(), event.getName(),event.getRequestContext());
@@ -158,7 +158,6 @@ public class CopyManageComponent extends UIAbstractManagerComponent {
 
   @Override
   public Class<? extends UIAbstractManager> getUIAbstractManagerClass() {
-    // TODO Auto-generated method stub
     return null;
   }
 

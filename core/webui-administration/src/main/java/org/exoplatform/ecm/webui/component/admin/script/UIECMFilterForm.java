@@ -29,7 +29,7 @@ import org.exoplatform.webui.form.UIForm;
 import org.exoplatform.webui.form.UIFormSelectBox;
 
 /**
- * Created by The eXo Platform SARL 
+ * Created by The eXo Platform SARL
  * Author : pham tuan
  * phamtuanchip@yahoo.de September 27, 2006 10:27:15 AM
  */
@@ -43,13 +43,13 @@ import org.exoplatform.webui.form.UIFormSelectBox;
 public class UIECMFilterForm extends UIForm {
   final static public String FIELD_SELECT_SCRIPT = "selectScript" ;
 
-  public UIECMFilterForm() throws Exception { 
-    UIFormSelectBox scriptSelect = 
+  public UIECMFilterForm() throws Exception {
+    UIFormSelectBox scriptSelect =
       new UIFormSelectBox(FIELD_SELECT_SCRIPT, FIELD_SELECT_SCRIPT, new ArrayList <SelectItemOption<String>>()) ;
     scriptSelect.setOnChange("Change") ;
     addUIFormInput(scriptSelect) ;
   }
-  
+
   public void setOptions(List <SelectItemOption<String>> options) {
     getUIFormSelectBox(FIELD_SELECT_SCRIPT).setOptions(options) ;
   }

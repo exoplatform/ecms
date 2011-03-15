@@ -41,11 +41,11 @@ import org.exoplatform.webui.ext.manager.UIAbstractManagerComponent;
  * Created by The eXo Platform SAS
  * Author : eXoPlatform
  *          exo@exoplatform.com
- * Oct 29, 2010  
+ * Oct 29, 2010
  */
 @ComponentConfig(events = { @EventConfig(listeners = ViewInfoActionComponent.ViewInfoActionListener.class) })
 public class ViewInfoActionComponent extends UIAbstractManagerComponent{
-  
+
   /**
    * @author hai_lethanh
    * class used to handle event raised on ViewFileInfoActionComponent
@@ -57,7 +57,7 @@ public class ViewInfoActionComponent extends UIAbstractManagerComponent{
       ViewInfoActionComponent uicomp = event.getSource();
       UIJCRExplorer uiExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class);
       UIPopupContainer objUIPopupContainer = uiExplorer.getChild(UIPopupContainer.class);
-      
+
       String nodePath = event.getRequestContext().getRequestParameter(OBJECTID);
       Node selectedNode = null;
       if (nodePath != null && nodePath.length() != 0) {
@@ -70,13 +70,13 @@ public class ViewInfoActionComponent extends UIAbstractManagerComponent{
         } else {
           throw new IllegalArgumentException("The ObjectId is invalid '" + nodePath + "'");
         }
-        
+
         //get session
         Session session = uiExplorer.getSessionByWorkspace(wsName);
-        
+
         //get UIApplication
         UIApplication uiApp = uicomp.getAncestorOfType(UIApplication.class);
-        
+
         //get selected node
         try {
           // Use the method getNodeByPath because it is link aware
@@ -96,17 +96,17 @@ public class ViewInfoActionComponent extends UIAbstractManagerComponent{
           return;
         }
       }
-      
+
       if (selectedNode == null)  selectedNode = uiExplorer.getCurrentNode();
-    
+
       //show popup
       UIViewInfoManager uiViewInfoManager = uiExplorer.createUIComponent(UIViewInfoManager.class, null, null);
       uiViewInfoManager.setSelectedNode(selectedNode);
       objUIPopupContainer.activate(uiViewInfoManager, 600, 360);
       event.getRequestContext().addUIComponentToUpdateByAjax(objUIPopupContainer);
-    }    
+    }
   }
-  
+
   @Override
   public Class<? extends UIAbstractManager> getUIAbstractManagerClass() {
     return null;

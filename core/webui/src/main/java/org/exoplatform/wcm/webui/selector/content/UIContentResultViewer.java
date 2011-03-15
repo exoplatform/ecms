@@ -18,7 +18,7 @@ import org.exoplatform.webui.event.EventListener;
 /**
  * Author : TAN DUNG DANG
  *          dzungdev@gmail.com
- * Feb 12, 2009  
+ * Feb 12, 2009
  */
 
 @ComponentConfig (
@@ -58,8 +58,8 @@ public class UIContentResultViewer extends UIContainer {
         wcmPublicationService.isEnrolledInWCMLifecycle(webContent);
       } catch (NotInWCMPublicationException e){
         wcmPublicationService.unsubcribeLifecycle(webContent);
-        wcmPublicationService.enrollNodeInLifecycle(webContent, currentSite, remoteUser);          
+        wcmPublicationService.enrollNodeInLifecycle(webContent, currentSite, remoteUser);
       }
-    }    
+    }
   }
 }

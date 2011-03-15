@@ -38,7 +38,7 @@ import org.exoplatform.webui.ext.filter.UIExtensionFilters;
  * Created by The eXo Platform SAS
  * Author : eXoPlatform
  *          nicolas.filotto@exoplatform.com
- * 7 mai 2009  
+ * 7 mai 2009
  */
 @ComponentConfig(
      events = {
@@ -53,7 +53,7 @@ public class VoteActionComponent extends UIComponent {
   public List<UIExtensionFilter> getFilters() {
     return FILTERS;
   }
-  
+
   public static class VoteActionListener extends UIActionBarActionListener<VoteActionComponent> {
     public void processEvent(Event<VoteActionComponent> event) throws Exception {
       UIJCRExplorer uiExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class);

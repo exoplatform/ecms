@@ -44,7 +44,7 @@ import org.exoplatform.webui.event.EventListener;
  * Created by The eXo Platform SARL
  * Author : Pham Tuan
  *          phamtuanchip@yahoo.de
- * Dec 26, 2006 11:39:54 AM 
+ * Dec 26, 2006 11:39:54 AM
  */
 @ComponentConfig(
     template = "app:/groovy/webui/component/browse/UICBSearchResults.gtmpl",
@@ -58,16 +58,16 @@ public class UICBSearchResults extends UIContainer {
   protected Map<String, Node> resultMap_ = new HashMap<String, Node>();
   private UIPageIterator uiPageIterator_;
 
-  public UICBSearchResults() throws Exception { 
+  public UICBSearchResults() throws Exception {
     uiPageIterator_ = addChild(UIPageIterator.class, null, null);
   }
-  
-  public List getCurrentList() throws Exception { 
-    return uiPageIterator_.getCurrentPageData();    
+
+  public List getCurrentList() throws Exception {
+    return uiPageIterator_.getCurrentPageData();
   }
-  
+
   public UIPageIterator getUIPageIterator() { return uiPageIterator_; }
-  
+
   private boolean isDocumentTemplate(String nodeType)throws Exception {
     TemplateService templateService = getApplicationComponent(TemplateService.class);
     return templateService.getDocumentTemplates().contains(nodeType);
@@ -82,8 +82,8 @@ public class UICBSearchResults extends UIContainer {
   protected void getResultData() throws Exception {
     List<ResultData> results = new ArrayList<ResultData>();
     for(String nodeName : resultMap_.keySet()) {
-      results.add(new ResultData(Utils.formatNodeName(nodeName), 
-          Utils.formatNodeName(resultMap_.get(nodeName).getPath()), 
+      results.add(new ResultData(Utils.formatNodeName(nodeName),
+          Utils.formatNodeName(resultMap_.get(nodeName).getPath()),
           resultMap_.get(nodeName).getSession().getWorkspace().getName()));
     }
   }
@@ -110,7 +110,8 @@ public class UICBSearchResults extends UIContainer {
       if(uiResults.isDocumentTemplate(nodeType.getName())) {
         UIBrowseContentPortlet cbPortlet = uiResults.getAncestorOfType(UIBrowseContentPortlet.class);
         UIPopupContainer uiPopupAction = cbPortlet.getChildById("UICBPopupAction");
-        UIDocumentDetail uiDocument =  uiPopupAction.activate(UIDocumentDetail.class, 600);// cbPortlet.createUIComponent(UIDocumentDetail.class, null, null);
+        UIDocumentDetail uiDocument =  uiPopupAction.activate(UIDocumentDetail.class, 600);
+        // cbPortlet.createUIComponent(UIDocumentDetail.class, null, null);
         uiDocument.setOriginalNode(node);
         uiDocument.setNode(node);
         UIPopupWindow uiPopup  = uiPopupAction.getChildById("UICBPopupWindow");
@@ -129,7 +130,7 @@ public class UICBSearchResults extends UIContainer {
       }
     }
   }
-  
+
   static public class GotoActionListener extends EventListener<UICBSearchResults> {
     public void execute(Event<UICBSearchResults> event) throws Exception {
       UICBSearchResults uiResults = event.getSource();
@@ -160,17 +161,18 @@ public class UICBSearchResults extends UIContainer {
           }
           container.changeNode(parentNode);
           List<Node> listGoToNode = new ArrayList<Node>();
-          if (!container.getListHistoryNode().contains(parentNode)) {            
+          if (!container.getListHistoryNode().contains(parentNode)) {
             while (!parentNode.getPath().equals(container.getRootPath())) {
               listGoToNode.add(parentNode);
               parentNode = parentNode.getParent();
             }
             if (listGoToNode.size() > 0) {
               for (int i = listGoToNode.size() - 1; i >= 0; i--) {
-                if (!container.getListHistoryNode().contains(listGoToNode.get(i))) container.getListHistoryNode().add(listGoToNode.get(i)); 
+                if (!container.getListHistoryNode().contains(listGoToNode.get(i)))
+                  container.getListHistoryNode().add(listGoToNode.get(i));
               }
             }
-          }            
+          }
           return;
         }
       } catch (AccessDeniedException e) {
@@ -181,7 +183,7 @@ public class UICBSearchResults extends UIContainer {
       } catch (Exception e) {
         JCRExceptionManager.process(uiApp, e);
         return;
-      }      
+      }
       if (uiResults.isDocumentTemplate(parentNode.getPrimaryNodeType().getName())) {
         UIBrowseContentPortlet cbPortlet = uiResults
             .getAncestorOfType(UIBrowseContentPortlet.class);
@@ -195,13 +197,13 @@ public class UICBSearchResults extends UIContainer {
       }
     }
   }
-  
+
   public String[] getActions() { return new String[] {"Close"};}
 
   public void updateGrid(List<ResultData> result) throws Exception {
     ObjectPageList objPageList = new ObjectPageList(result, 10);
     uiPageIterator_.setPageList(objPageList);
-  } 
+  }
 
   public static class ResultData {
     private String name;

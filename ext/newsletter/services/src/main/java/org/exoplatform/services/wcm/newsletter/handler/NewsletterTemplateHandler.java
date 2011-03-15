@@ -42,22 +42,22 @@ public class NewsletterTemplateHandler {
 
   /** The log. */
   private static Log log = ExoLogger.getLogger(NewsletterTemplateHandler.class);
-  
+
   /** The repository service. */
   private RepositoryService repositoryService;
-  
+
   /** The repository. */
   private String repository;
-  
+
   /** The workspace. */
   private String workspace;
-  
+
   /** The templates. */
   private List<Node> templates;
-  
+
   /**
    * Instantiates a new newsletter template handler.
-   * 
+   *
    * @param repository the repository
    * @param workspace the workspace
    */
@@ -66,13 +66,13 @@ public class NewsletterTemplateHandler {
     this.repository = repository;
     this.workspace = workspace;
   }
-  
+
   /**
    * Gets the templates.
-   * 
+   *
    * @param portalName the portal name
    * @param categoryConfig the category config
-   * 
+   *
    * @return the templates
    */
   public List<Node> getTemplates(
@@ -84,14 +84,16 @@ public class NewsletterTemplateHandler {
       List<Node> templates = new ArrayList<Node>();
       ManageableRepository manageableRepository = repositoryService.getRepository(repository);
       Session session = sessionProvider.getSession(workspace, manageableRepository);
-      
+
       Node defaultTemplateFolder = (Node)session.getItem(NewsletterConstant.generateDefaultTemplatePath(portalName));
       NodeIterator defaultTemplates = defaultTemplateFolder.getNodes();
       while(defaultTemplates.hasNext()) {
         templates.add(defaultTemplates.nextNode());
       }
       if (categoryConfig != null) {
-        Node categoryTemplateFolder = (Node)session.getItem(NewsletterConstant.generateCategoryTemplateBasePath(portalName, categoryConfig.getName()));
+        Node categoryTemplateFolder = (Node) session.getItem(NewsletterConstant.
+                                                             generateCategoryTemplateBasePath(portalName,
+                                                                                              categoryConfig.getName()));
         NodeIterator categoryTemplates = categoryTemplateFolder.getNodes();
         while(categoryTemplates.hasNext()) {
           templates.add(categoryTemplates.nextNode());
@@ -104,14 +106,14 @@ public class NewsletterTemplateHandler {
     }
     return null;
   }
-  
+
   /**
    * Gets the template.
-   * 
+   *
    * @param portalName the portal name
    * @param categoryConfig the category config
    * @param templateName the template name
-   * 
+   *
    * @return the template
    */
   public Node getTemplate(
@@ -133,16 +135,16 @@ public class NewsletterTemplateHandler {
     }
     return null;
   }
-  
+
   /**
    * Convert as template.
-   * 
+   *
    * @param webcontentPath the webcontent path
    * @param portalName the portal name
    * @param categoryName the category name
-   * 
+   *
    * @return true, if successful
-   * @throws Exception 
+   * @throws Exception
    */
   public void convertAsTemplate(
                                 SessionProvider sessionProvider,
@@ -153,7 +155,8 @@ public class NewsletterTemplateHandler {
     try {
       ManageableRepository manageableRepository = repositoryService.getRepository(repository);
       Session session = sessionProvider.getSession(workspace, manageableRepository);
-      Node categoryTemplateFolder = (Node)session.getItem(NewsletterConstant.generateCategoryTemplateBasePath(portalName, categoryName));
+      Node categoryTemplateFolder = (Node) session.getItem(NewsletterConstant.generateCategoryTemplateBasePath(portalName,
+                                                                                                               categoryName));
       String templateName = webcontentPath.substring(webcontentPath.lastIndexOf("/") + 1);
       if(!categoryTemplateFolder.hasNode(templateName)){
         session.getWorkspace().copy(webcontentPath, categoryTemplateFolder.getPath() + "/" + templateName);

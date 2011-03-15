@@ -37,7 +37,7 @@ import org.exoplatform.webui.event.EventListener;
  */
 @ComponentConfig(
     template = "app:/groovy/webui/component/explorer/UITabPaneWithAction.gtmpl",
-    events = { 
+    events = {
         @EventConfig(listeners = UISingleUploadContainer.CloseActionListener.class),
         @EventConfig(listeners = UISingleUploadContainer.AddMetadataActionListener.class)
     }
@@ -45,14 +45,14 @@ import org.exoplatform.webui.event.EventListener;
 public class UISingleUploadContainer extends UIContainer {
 
   private Node uploadedNode_ ;
-  
+
   public UISingleUploadContainer() throws Exception {
     addChild(UISingleUploadContent.class, null, null) ;
   }
 
   public String[] getActions() {return new String[] {"AddMetadata","Close"} ;}
-  
-  public Node getEditNode(String nodeType) throws Exception { 
+
+  public Node getEditNode(String nodeType) throws Exception {
     try {
       Item primaryItem = uploadedNode_.getPrimaryItem() ;
       if (primaryItem == null || !primaryItem.isNode()) return uploadedNode_ ;
@@ -63,10 +63,10 @@ public class UISingleUploadContainer extends UIContainer {
     } catch(Exception e) { }
     return uploadedNode_ ;
   }
-  
+
   public void setUploadedNode(Node node) throws Exception { uploadedNode_ = node ; }
   public Node getUploadedNode() { return uploadedNode_ ; }
-  
+
   static public class CloseActionListener extends EventListener<UISingleUploadContainer> {
     public void execute(Event<UISingleUploadContainer> event) throws Exception {
       UISingleUploadManager uiUploadManager = event.getSource().getParent() ;
@@ -80,11 +80,11 @@ public class UISingleUploadContainer extends UIContainer {
         event.getRequestContext().addUIComponentToUpdateByAjax(uiLanguageManager) ;
         return ;
       }
-      UIJCRExplorer uiExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class) ;     
+      UIJCRExplorer uiExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class) ;
       uiExplorer.cancelAction() ;
     }
   }
-  
+
   static public class AddMetadataActionListener extends EventListener<UISingleUploadContainer> {
     public void execute(Event<UISingleUploadContainer> event) throws Exception {
       UISingleUploadManager uiUploadManager = event.getSource().getParent() ;

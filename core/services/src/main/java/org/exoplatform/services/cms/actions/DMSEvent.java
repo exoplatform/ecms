@@ -23,7 +23,7 @@ import javax.jcr.observation.Event;
  * Created by The eXo Platform SARL
  * Author : Hoang Van Hung
  *          hunghvit@gmail.com
- * Jan 4, 2010  
+ * Jan 4, 2010
  */
 
 /**

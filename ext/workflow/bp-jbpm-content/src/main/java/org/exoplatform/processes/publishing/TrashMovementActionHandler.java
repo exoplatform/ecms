@@ -27,16 +27,16 @@ import org.jbpm.graph.exe.ExecutionContext;
  * Created by The eXo Platform SARL
  * Author : Pham Xuan Hoa
  *          hoa.pham@exoplatform.com
- * Dec 24, 2007  
+ * Dec 24, 2007
  */
 public class TrashMovementActionHandler implements ActionHandler {
-  
+
   private static final long serialVersionUID = 1L;
 
   private boolean executed = false;
   private static final Log LOG  = ExoLogger.getLogger(TrashMovementActionHandler.class);
 
-  public void execute(ExecutionContext context) {    
+  public void execute(ExecutionContext context) {
     try {
       if (executed)
         return;
@@ -48,17 +48,17 @@ public class TrashMovementActionHandler implements ActionHandler {
       context.getToken().signal("move-done");
     }
   }
-  
+
   private void moveTrash(ExecutionContext context) {
     String[] location = ProcessUtil.getCurrentLocation(context);
     String currentWorkspace = location[1];
     String currentPath = location[2];
     String trashWorkspace = (String)context.getVariable("exo:trashWorkspace");
     String trashPath = (String)context.getVariable("exo:trashPath");
-    String destPath = ProcessUtil.computeDestinationPath(context, currentPath,trashPath);          
+    String destPath = ProcessUtil.computeDestinationPath(context, currentPath,trashPath);
     CmsService cmsService = ProcessUtil.getService(context, CmsService.class);
     cmsService.moveNode(currentPath, currentWorkspace, trashWorkspace, destPath);
-    ProcessUtil.setCurrentLocation(context,trashWorkspace,destPath);    
-    ProcessUtil.moveTrash(context);    
+    ProcessUtil.setCurrentLocation(context,trashWorkspace,destPath);
+    ProcessUtil.moveTrash(context);
   }
 }

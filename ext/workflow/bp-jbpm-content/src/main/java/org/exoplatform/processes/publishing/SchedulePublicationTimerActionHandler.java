@@ -29,21 +29,21 @@ import org.jbpm.instantiation.Delegation;
  * Created by The eXo Platform SAS
  * Author : Pham Xuan Hoa
  *          hoa.pham@exoplatform.com
- * Dec 13, 2007  
+ * Dec 13, 2007
  */
 public class SchedulePublicationTimerActionHandler extends ManagePublicationActionHandler {
 
   private static final long serialVersionUID = 1L;
-  
+
   private Log log = ExoLogger.getLogger(this.getClass());
 
   public void execute(ExecutionContext context) {
     ProcessUtil.approve(context);
     Date startDate = (Date) context.getVariable("startDate");
-    Date currentDate = new Date();    
+    Date currentDate = new Date();
     if (startDate.before(currentDate)) {
       try {
-        publishContent(context);                
+        publishContent(context);
       } catch (Exception e) {
         log.error(e);
       }
@@ -51,52 +51,52 @@ public class SchedulePublicationTimerActionHandler extends ManagePublicationActi
       context.getProcessInstance().getRootToken().signal("publication-done");
     } else {
       try{
-        moveToPending(context);        
+        moveToPending(context);
       }catch (Exception e) {
         log.error(e);
-      }        
-      //Create and save the Action object 
+      }
+      //Create and save the Action object
       Delegation delegation = new Delegation();
       delegation.setClassName("org.exoplatform.processes.publishing.ManagePublicationActionHandler");
       delegation.setProcessDefinition(context.getProcessDefinition());
-      
+
       Action publicationAction = new Action();
       publicationAction.setName("publicationAction");
-      publicationAction.setActionDelegation(delegation);      
-      context.getProcessDefinition().addAction(publicationAction);      
-          
-      //create the timer      
+      publicationAction.setActionDelegation(delegation);
+      context.getProcessDefinition().addAction(publicationAction);
+
+      //create the timer
       org.jbpm.job.Timer jobTimer = new org.jbpm.job.Timer();
-      
-      jobTimer.setName("publicationTimer");            
+
+      jobTimer.setName("publicationTimer");
       jobTimer.setDueDate(startDate);
       jobTimer.setGraphElement(context.getEventSource());
       jobTimer.setTaskInstance(context.getTaskInstance());
       jobTimer.setAction(publicationAction);
-      jobTimer.setTransitionName("manage-backup");  
+      jobTimer.setTransitionName("manage-backup");
       ProcessUtil.createTimer(context, jobTimer);
-      
+
       /*Timer timer = new Timer(context.getToken());
-      timer.setName("publicationTimer");            
+      timer.setName("publicationTimer");
       timer.setDueDate(startDate);
       timer.setGraphElement(context.getEventSource());
       timer.setTaskInstance(context.getTaskInstance());
       timer.setAction(publicationAction);
-      timer.setTransitionName("manage-backup");      
+      timer.setTransitionName("manage-backup");
       context.getSchedulerInstance().schedule(timer);*/
     }
   }
-  
+
   private void moveToPending(ExecutionContext context) throws Exception {
     String[] currentLocation = ProcessUtil.getCurrentLocation(context);
     String currentWorkspace = currentLocation[1];
-    String currentPath = currentLocation[2];   
+    String currentPath = currentLocation[2];
     String pendingWorksapce = (String)context.getVariable("exo:pendingWorkspace");
     String pendingPath = (String)context.getVariable("exo:pendingPath");
     String destPath = ProcessUtil.computeDestinationPath(context, currentPath,pendingPath);
-    CmsService cmsService = ProcessUtil.getService(context, CmsService.class);           
-    cmsService.moveNode(currentPath, currentWorkspace, pendingWorksapce, destPath);    
+    CmsService cmsService = ProcessUtil.getService(context, CmsService.class);
+    cmsService.moveNode(currentPath, currentWorkspace, pendingWorksapce, destPath);
     ProcessUtil.setCurrentLocation(context,pendingWorksapce,destPath);
     ProcessUtil.waitForPublish(context);
-  }  
+  }
 }

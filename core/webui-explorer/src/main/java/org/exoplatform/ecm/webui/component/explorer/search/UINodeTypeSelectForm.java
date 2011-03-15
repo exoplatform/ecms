@@ -45,13 +45,13 @@ import org.exoplatform.webui.form.UIFormCheckBoxInput;
     events = {
       @EventConfig(listeners = UINodeTypeSelectForm.SaveActionListener.class),
       @EventConfig(listeners = UINodeTypeSelectForm.CancelActionListener.class, phase=Phase.DECODE)
-    }    
+    }
 )
 public class UINodeTypeSelectForm extends UIForm implements UIPopupComponent {
 
   public UINodeTypeSelectForm() throws Exception {
   }
-  
+
   public String getLabel(ResourceBundle res, String id)  {
     try {
       return res.getString("UINodeTypeSelectForm.label." + id) ;
@@ -59,7 +59,7 @@ public class UINodeTypeSelectForm extends UIForm implements UIPopupComponent {
       return id + " "; // Need for changed in gatein !fieldName.equals(field.getName())
     }
   }
-  
+
   @SuppressWarnings("unchecked")
   public void setRenderNodeTypes() throws Exception {
     getChildren().clear() ;
@@ -73,10 +73,10 @@ public class UINodeTypeSelectForm extends UIForm implements UIPopupComponent {
       addUIFormInput(uiCheckBox) ;
     }
   }
-  
+
   private boolean propertiesSelected(String name) {
     UISearchContainer uiSearchContainer = getAncestorOfType(UISearchContainer.class) ;
-    UIConstraintsForm uiConstraintsForm = 
+    UIConstraintsForm uiConstraintsForm =
       uiSearchContainer.findFirstComponentOfType(UIConstraintsForm.class) ;
     String typeValues = uiConstraintsForm.getUIStringInput(UIConstraintsForm.DOC_TYPE).getValue() ;
     if(typeValues == null) return false ;
@@ -87,10 +87,10 @@ public class UINodeTypeSelectForm extends UIForm implements UIPopupComponent {
       }
     } else if(typeValues.equals(name)) {
       return true ;
-    } 
+    }
     return false ;
   }
-  
+
   public void setNodeTypes(List<String> selectedNodeTypes) {
     String strNodeTypes = null ;
     UISearchContainer uiContainer = getAncestorOfType(UISearchContainer.class) ;
@@ -105,17 +105,17 @@ public class UINodeTypeSelectForm extends UIForm implements UIPopupComponent {
   public void activate() throws Exception {}
 
   public void deActivate() throws Exception {}
-  
+
   static public class SaveActionListener extends EventListener<UINodeTypeSelectForm> {
     public void execute(Event<UINodeTypeSelectForm> event) throws Exception {
       UINodeTypeSelectForm uiForm = event.getSource() ;
       UISearchContainer uiSearchContainer = uiForm.getAncestorOfType(UISearchContainer.class) ;
-      UIConstraintsForm uiConstraintsForm = 
+      UIConstraintsForm uiConstraintsForm =
         uiSearchContainer.findFirstComponentOfType(UIConstraintsForm.class) ;
       List<String> selectedNodeTypes = new ArrayList<String>() ;
       List<UIFormCheckBoxInput> listCheckbox =  new ArrayList<UIFormCheckBoxInput>();
       uiForm.findComponentOfType(listCheckbox, UIFormCheckBoxInput.class);
-      String nodeTypesValue = 
+      String nodeTypesValue =
         uiConstraintsForm.getUIStringInput(UIConstraintsForm.DOC_TYPE).getValue() ;
       if(nodeTypesValue != null && nodeTypesValue.length() > 0) {
         String[] array = nodeTypesValue.split(",") ;

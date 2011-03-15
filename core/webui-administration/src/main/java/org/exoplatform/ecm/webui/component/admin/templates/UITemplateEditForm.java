@@ -35,7 +35,7 @@ import org.exoplatform.webui.form.UIFormStringInput;
  * Created by The eXo Platform SARL
  * Author : Pham Tuan
  *          phamtuanchip@yahoo.de
- * Dec 4, 2006 9:50:06 AM 
+ * Dec 4, 2006 9:50:06 AM
  */
 @ComponentConfig(
     lifecycle = UIFormLifecycle.class,
@@ -50,7 +50,7 @@ public class UITemplateEditForm extends UIForm {
 
   final static public String FIELD_NAME = "name" ;
   final static public String FIELD_LABEL = "label" ;
-  final static public String FIELD_ISTEMPLATE = "isDocumentTemplate" ; 
+  final static public String FIELD_ISTEMPLATE = "isDocumentTemplate" ;
 
   private static String nodeType_ ;
 
@@ -79,7 +79,7 @@ public class UITemplateEditForm extends UIForm {
     getUIStringInput(FIELD_NAME).setEditable(false) ;
     nodeType_ = nodeType ;
   }
-  
+
   static public class SaveActionListener extends EventListener<UITemplateEditForm> {
     public void execute(Event<UITemplateEditForm> event) throws Exception {
       UITemplateEditForm uiForm = event.getSource() ;

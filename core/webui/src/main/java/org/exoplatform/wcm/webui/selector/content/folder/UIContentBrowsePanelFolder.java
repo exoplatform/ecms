@@ -26,7 +26,7 @@ import org.exoplatform.webui.event.EventListener;
 
 /**
  * Created by The eXo Platform SAS.
- * 
+ *
  * @author : Hoa.Pham hoa.pham@exoplatform.com Jun 23, 2008
  */
 
@@ -40,15 +40,15 @@ import org.exoplatform.webui.event.EventListener;
 )
 
 public class UIContentBrowsePanelFolder extends UIContentBrowsePanel{
-  
+
   private String _initPath = "";
   private String _initDrive = "";
-  
+
   public void setInitPath(String initDrive, String initPath) {
     this._initPath = initPath;
     this._initDrive = initDrive;
   }
-  
+
   public String getInitDrive() { return this._initDrive; }
   public String getInitPath() { return this._initPath; }
 

@@ -33,7 +33,7 @@ public class RemoveNodeAction implements Action {
 
   public boolean execute(Context context) throws Exception {
     ExoContainer container = (ExoContainer)context.get("exocontainer");
-    ThumbnailService thumbnailService = 
+    ThumbnailService thumbnailService =
       (ThumbnailService)container.getComponentInstanceOfType(ThumbnailService.class);
     if(thumbnailService.isEnableThumbnail()) {
       Node node = (Node)context.get("currentItem");

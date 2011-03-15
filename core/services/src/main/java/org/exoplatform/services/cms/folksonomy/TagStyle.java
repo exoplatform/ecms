@@ -21,7 +21,7 @@ package org.exoplatform.services.cms.folksonomy;
  * Author : Xuan Hoa Pham
  *          hoapham@exoplatform.com
  * 					phamvuxuanhoa@gmail.com
- * Dec 8, 2006  
+ * Dec 8, 2006
  */
 public interface TagStyle {
   final  public static String NOMAL = "nomal" ;

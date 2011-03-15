@@ -59,19 +59,19 @@ import org.exoplatform.services.rest.resource.ResourceContainer;
  * Created by The eXo Platform SARL
  * Author : Hoang Van Hung
  *          hunghvit@gmail.com
- * May 17, 2009  
+ * May 17, 2009
  */
 
 
 @Path("/presentation/document/edit/")
 public class GetEditedDocumentRESTService implements ResourceContainer {
-  
+
   /** The Constant LAST_MODIFIED_PROPERTY. */
   private static final String LAST_MODIFIED_PROPERTY = "Last-Modified";
-   
+
   /** The Constant IF_MODIFIED_SINCE_DATE_FORMAT. */
   private static final String IF_MODIFIED_SINCE_DATE_FORMAT = "EEE, dd MMM yyyy HH:mm:ss z";
-  
+
   private RepositoryService   repositoryService;
 
   private TemplateService     templateService;
@@ -89,7 +89,7 @@ public class GetEditedDocumentRESTService implements ResourceContainer {
   private static final String EXO_OWNER       = "exo:owner";
 
   private static final int    NO_PER_PAGE     = 5;
-  
+
   private static final String QUERY_STATEMENT = "SELECT * FROM $0 WHERE $1 ORDER BY $2 DESC";
 
   private static final String GADGET          = "gadgets";
@@ -98,7 +98,7 @@ public class GetEditedDocumentRESTService implements ResourceContainer {
 
   private Log LOG = ExoLogger.getLogger("cms.GetEditedDocumentRESTService");
 
-  
+
   public GetEditedDocumentRESTService(RepositoryService repositoryService,
       TemplateService templateService, NewFolksonomyService newFolksonomyService, ManageDriveService manageDriveService) {
     this.repositoryService = repositoryService;
@@ -106,7 +106,7 @@ public class GetEditedDocumentRESTService implements ResourceContainer {
     this.newFolksonomyService = newFolksonomyService;
     this.manageDriveService = manageDriveService;
   }
-  
+
   @Path("/{repository}/")
   @GET
 //  @OutputTransformer(Bean2JsonOutputTransformer.class)
@@ -116,7 +116,7 @@ public class GetEditedDocumentRESTService implements ResourceContainer {
     List<DocumentNode> lstDocNode = getDocumentData(repository, lstLastEditedNode);
     ListEditDocumentNode listEditDocumentNode = new ListEditDocumentNode();
     listEditDocumentNode.setLstDocNode(lstDocNode);
-    
+
     DateFormat dateFormat = new SimpleDateFormat(IF_MODIFIED_SINCE_DATE_FORMAT);
     return Response.ok(listEditDocumentNode, new MediaType("application", "json")).header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
   }
@@ -134,7 +134,7 @@ public class GetEditedDocumentRESTService implements ResourceContainer {
             .append(")").append(" OR ");
       }
     }
-    
+
     if (bf.length() == 1) return null;
     bf.delete(bf.lastIndexOf("OR") - 1, bf.length());
     if (noOfItem == null || noOfItem.trim().length() == 0) noOfItem = String.valueOf(NO_PER_PAGE);
@@ -170,7 +170,7 @@ public class GetEditedDocumentRESTService implements ResourceContainer {
     }
     return lstNode;
   }
-  
+
   private void puttoList(List<Node> lstNode, NodeIterator nodeIter) {
     if (nodeIter != null) {
       while (nodeIter.hasNext()) {
@@ -178,21 +178,21 @@ public class GetEditedDocumentRESTService implements ResourceContainer {
       }
     }
   }
-  
+
   private List<DocumentNode> getDocumentData(String repository, List<Node> lstNode) throws Exception {
     return getDocumentData(repository, lstNode, String.valueOf(NO_PER_PAGE));
   }
-  
+
   private String getDateFormat(Calendar date) {
     return String.valueOf(date.getTimeInMillis());
   }
-  
+
   private List<DocumentNode> getDocumentData(String repository, List<Node> lstNode, String noOfItem) throws Exception {
     if (lstNode == null || lstNode.size() == 0) return null;
     List<DocumentNode> lstDocNode = new ArrayList<DocumentNode>();
     DocumentNode docNode = null;
     StringBuilder tags = null;
-    
+
     Collections.sort(lstNode, new PropertyValueComparator(DATE_MODIFIED, PropertyValueComparator.DESCENDING_ORDER));
     ManageableRepository manageableRepository = repositoryService.getRepository(repository);
     List<DriveData> lstDrive = manageDriveService.getAllDrives(repository);
@@ -206,23 +206,23 @@ public class GetEditedDocumentRESTService implements ResourceContainer {
       tags = new StringBuilder(1024);
 
       List<Node> tagList = newFolksonomyService.
-      		getLinkedTagsOfDocumentByScope(NewFolksonomyService.PUBLIC, "", node, 
-      											repository, manageableRepository.getConfiguration().getDefaultWorkspaceName());
+          getLinkedTagsOfDocumentByScope(NewFolksonomyService.PUBLIC, "", node,
+                            repository, manageableRepository.getConfiguration().getDefaultWorkspaceName());
       for(Node tag : tagList) {
-				tags.append(tag.getName()).append(", ");
+        tags.append(tag.getName()).append(", ");
       }
-      
+
       if (tags.lastIndexOf(",") > 0) {
         tags.delete(tags.lastIndexOf(","), tags.length());
       }
-      
+
       docNode.setTags(tags.toString());
       docNode.setDriveName(getDriveName(lstDrive, node));
       if (lstDocNode.size() < Integer.parseInt(noOfItem))  lstDocNode.add(docNode);
     }
     return lstDocNode;
   }
-  
+
   private String getDriveName(List<DriveData> lstDrive, Node node) throws RepositoryException{
     String driveName = "";
     for (DriveData drive : lstDrive) {
@@ -234,9 +234,9 @@ public class GetEditedDocumentRESTService implements ResourceContainer {
     }
     return driveName;
   }
-  
+
   public class DocumentNode {
-    
+
     private String nodeName_;
 
     private String nodePath_;
@@ -250,27 +250,27 @@ public class GetEditedDocumentRESTService implements ResourceContainer {
     private String   lastAuthor;
 
     private String lstAuthor;
-    
+
     public String getTags() {
       return tags;
     }
-    
+
     public void setTags(String tags) {
       this.tags = tags;
     }
-    
+
     public String getLastAuthor() {
       return lastAuthor;
     }
-    
+
     public void setLastAuthor(String lastAuthor) {
       this.lastAuthor = lastAuthor;
     }
-    
+
     public String getLstAuthor() {
       return lstAuthor;
     }
-    
+
     public void setLstAuthor(String lstAuthor) {
       this.lstAuthor = lstAuthor;
     }
@@ -298,11 +298,11 @@ public class GetEditedDocumentRESTService implements ResourceContainer {
     public String getDriveName() {
       return driveName_;
     }
-    
+
     public String getDateEdited() {
       return dateEdited_;
     }
-    
+
     public void setDateEdited(String dateEdited_) {
       this.dateEdited_ = dateEdited_;
     }
@@ -311,7 +311,7 @@ public class GetEditedDocumentRESTService implements ResourceContainer {
   public class ListEditDocumentNode {
 
     private List<DocumentNode> lstDocNode;
-    
+
     public List<DocumentNode> getLstDocNode() {
       return lstDocNode;
     }
@@ -320,5 +320,5 @@ public class GetEditedDocumentRESTService implements ResourceContainer {
       this.lstDocNode = lstDocNode;
     }
   }
-  
+
 }

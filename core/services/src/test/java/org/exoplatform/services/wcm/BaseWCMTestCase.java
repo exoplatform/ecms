@@ -37,16 +37,16 @@ public abstract class BaseWCMTestCase extends BasicTestCase {
 
   /** The container. */
   protected PortalContainer   container;
-  
+
   /** The session. */
   protected Session               session;
-  
+
   /** The REP o_ name. */
   protected final String          REPO_NAME        = "repository".intern();
 
   /** The DMSSYSTE m_ ws. */
   protected final String          DMSSYSTEM_WS     = "dms-system".intern();
-  
+
   /** The SYSTE m_ ws. */
   protected final String          SYSTEM_WS        = "system".intern();
 
@@ -61,13 +61,13 @@ public abstract class BaseWCMTestCase extends BasicTestCase {
     RepositoryService repositoryService = getService(RepositoryService.class);
     repositoryService.setCurrentRepositoryName(REPO_NAME);
     session = repositoryService.getCurrentRepository().getSystemSession(COLLABORATION_WS);
-    
-    
+
+
   }
 
   /**
    * Check mixins.
-   * 
+   *
    * @param mixins the mixins
    * @param node the node
    */
@@ -84,7 +84,7 @@ public abstract class BaseWCMTestCase extends BasicTestCase {
 
   /**
    * Compare mixins.
-   * 
+   *
    * @param mixins the mixins
    * @param nodeMixins the node mixins
    */
@@ -100,7 +100,7 @@ public abstract class BaseWCMTestCase extends BasicTestCase {
 
   /**
    * Memory info.
-   * 
+   *
    * @return the string
    */
   protected String memoryInfo() {
@@ -114,9 +114,9 @@ public abstract class BaseWCMTestCase extends BasicTestCase {
   // bytes to Mbytes
   /**
    * Mb.
-   * 
+   *
    * @param mem the mem
-   * 
+   *
    * @return the string
    */
   protected String mb(long mem) {
@@ -125,9 +125,9 @@ public abstract class BaseWCMTestCase extends BasicTestCase {
 
   /**
    * Exec time.
-   * 
+   *
    * @param from the from
-   * 
+   *
    * @return the string
    */
   protected String execTime(long from) {
@@ -137,9 +137,9 @@ public abstract class BaseWCMTestCase extends BasicTestCase {
 
   /**
    * Gets the service.
-   * 
+   *
    * @param clazz the clazz
-   * 
+   *
    * @return the service
    */
   protected <T> T getService(Class<T> clazz) {
@@ -148,15 +148,15 @@ public abstract class BaseWCMTestCase extends BasicTestCase {
 
   /**
    * Creates the webcontent node.
-   * 
+   *
    * @param parentNode the parent node
    * @param nodeName the node name
    * @param htmlData the html data
    * @param cssData the css data
    * @param jsData the js data
-   * 
+   *
    * @return the node
-   * 
+   *
    * @throws Exception the exception
    */
   protected Node createWebcontentNode(Node parentNode,

@@ -8,9 +8,9 @@ import org.ow2.bonita.facade.runtime.ActivityInstance;
 
 public class Delegate implements TxHook {
 
-	public void execute(APIAccessor api, ActivityInstance<ActivityBody> activity)
-			throws Exception {
-		ProcessUtil.delegate(api,activity);
-	}
+  public void execute(APIAccessor api, ActivityInstance<ActivityBody> activity)
+      throws Exception {
+    ProcessUtil.delegate(api,activity);
+  }
 
 }

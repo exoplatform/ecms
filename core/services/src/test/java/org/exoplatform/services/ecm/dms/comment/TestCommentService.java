@@ -37,7 +37,7 @@ import org.exoplatform.services.ecm.dms.BaseDMSTestCase;
 /**
  * Created by eXo Platform
  * Author : Nguyen Manh Cuong
- *          manhcuongpt@gmail.com 
+ *          manhcuongpt@gmail.com
  * Jun 9, 2009
  */
 
@@ -48,17 +48,17 @@ import org.exoplatform.services.ecm.dms.BaseDMSTestCase;
  * 2. getComment() method
  */
 public class TestCommentService extends BaseDMSTestCase {
-  
+
   private final static String I18NMixin = "mix:i18n";
-  
+
   private final static String ARTICLE = "exo:article";
-  
+
   private final static String TITLE = "exo:title";
 
   private final static String SUMMARY = "exo:summary";
 
   private final static String TEXT = "exo:text";
-  
+
   private final static String COMMENT            = "comments".intern();
 
   private final static String COMMENTOR          = "exo:commentor".intern();
@@ -66,13 +66,13 @@ public class TestCommentService extends BaseDMSTestCase {
   private final static String COMMENTOR_EMAIL    = "exo:commentorEmail".intern();
 
   private final static String COMMENTOR_MESSAGES = "exo:commentContent".intern();
-  
+
   private final static String ANONYMOUS = "anonymous".intern() ;
 
   private CommentsService     commentsService    = null;
-  
+
   private MultiLanguageService multiLangService  = null;
-  
+
   @Override
   public void setUp() throws Exception {
     super.setUp();
@@ -80,7 +80,7 @@ public class TestCommentService extends BaseDMSTestCase {
     multiLangService = (MultiLanguageService) container.getComponentInstanceOfType(MultiLanguageService.class);
     initNode();
   }
-  
+
   /**
    * Test Method: addComment()
    * Input:
@@ -145,12 +145,12 @@ public class TestCommentService extends BaseDMSTestCase {
       check(i++, iter.nextNode());
     }
   }
-  
+
   /**
    * Test Method: addComment()
    * Input:
-   *      Test Node: has multiple languages, NodeType of test node is "nt:file" 
-   *                 doesn't have comment node, NodeType of COMMENTS node is "nt:unstructured" 
+   *      Test Node: has multiple languages, NodeType of test node is "nt:file"
+   *                 doesn't have comment node, NodeType of COMMENTS node is "nt:unstructured"
    * Expected Result: throws Exception
    */
   public void testAddComment4() throws Exception {
@@ -164,11 +164,11 @@ public class TestCommentService extends BaseDMSTestCase {
     } catch (Exception e) {
     }
   }
-  
+
   /**
    * Case 5:
    * Test Method: addComment()
-   * Input: 
+   * Input:
    *      Test Node: has multiple languages which contains language of comment (en)
    *                 en node: doesn't have comment node.
    * Expected:
@@ -184,7 +184,7 @@ public class TestCommentService extends BaseDMSTestCase {
       check(i++, iter.nextNode());
     }
   }
-  
+
   /**
    * Test Method: addComment()
    * Input:
@@ -203,7 +203,7 @@ public class TestCommentService extends BaseDMSTestCase {
       check(i++, iter.nextNode());
     }
   }
-  
+
   /**
    * Test Method: addComment()
    * Input:
@@ -223,11 +223,11 @@ public class TestCommentService extends BaseDMSTestCase {
     }
     assertEquals("jp", multiLangService.getLanguage(test, "jp").getName());
   }
-  
+
   /**
    * Test Method: addComment()
    * Input:
-   *      Test node doesn't have multiple languages, 
+   *      Test node doesn't have multiple languages,
    *      language of comment = null;
    * Expected: throws NullPointerException
    */
@@ -243,7 +243,7 @@ public class TestCommentService extends BaseDMSTestCase {
     } catch (NullPointerException e) {
     }
   }
-  
+
   /**
    * Test Method: addComment()
    * Input:
@@ -266,7 +266,7 @@ public class TestCommentService extends BaseDMSTestCase {
       assertEquals(ANONYMOUS, iter.next().getProperty(COMMENTOR).getString());
     }
   }
-  
+
   /**
    * Test Method: addComment()
    * Input:
@@ -288,7 +288,7 @@ public class TestCommentService extends BaseDMSTestCase {
       assertFalse(iter.next().hasProperty(COMMENTOR_EMAIL));
     }
   }
-  
+
   /**
    * Test Method: updateComment()
    * Input:
@@ -305,7 +305,7 @@ public class TestCommentService extends BaseDMSTestCase {
     nodes = commentsService.getComments(test, multiLangService.getDefault(test));
     assertEquals("Ciao", nodes.get(0).getProperty(COMMENTOR_MESSAGES).getString());
   }
-  
+
   /**
    * Test Method: deleteComment()
    * Input:
@@ -324,8 +324,8 @@ public class TestCommentService extends BaseDMSTestCase {
   }
   /**
    * Test Method: getComments()
-   * Input: Test node doesn't have languages node, so adding comment nodes will be set default 
-   *        language. 
+   * Input: Test node doesn't have languages node, so adding comment nodes will be set default
+   *        language.
    * Expected Result:
    *        Get all comment nodes with default language.
    */
@@ -361,7 +361,7 @@ public class TestCommentService extends BaseDMSTestCase {
     multiLangService.addLanguage(test, createMapInput(), "jp", false);
     commentsService.addComment(test, "root", "root@explatform.com", null, "Hello", "jp");
     commentsService.addComment(test, "marry", "marry@explatform.com", null, "Thanks", "jp");
-    
+
     List<Node> listCommentNode = commentsService.getComments(test, "jp");
     Collections.sort(listCommentNode, new NameComparator());
     Iterator<Node> iter = listCommentNode.iterator();
@@ -401,11 +401,11 @@ public class TestCommentService extends BaseDMSTestCase {
     inputProperty.setValue("this is article content");
     map.put(textPath, inputProperty);
     return map;
-  }  
-  
+  }
+
   /**
    * This method will create a node which is added MultiLanguage
-   */  
+   */
   private Node initNode() throws Exception{
     Node test = session.getRootNode().addNode("test", ARTICLE);
     if (test.canAddMixin(I18NMixin)) {
@@ -418,11 +418,11 @@ public class TestCommentService extends BaseDMSTestCase {
     multiLangService.addLanguage(test, createMapInput(), "en", false);
     multiLangService.addLanguage(test, createMapInput(), "vi", false);
     return test;
-  }  
-  
+  }
+
   /**
    * This method is used to check case test.
-   * @param i          
+   * @param i
    * @param node       node is tested
    * @throws Exception
    */
@@ -441,8 +441,8 @@ public class TestCommentService extends BaseDMSTestCase {
     default:
       break;
     }
-  }  
-  
+  }
+
   /**
    * Clean data test
    */
@@ -454,7 +454,7 @@ public class TestCommentService extends BaseDMSTestCase {
     }
     super.tearDown();
   }
-  
+
   class NameComparator implements Comparator<Node>{
     public int compare(Node node1, Node node2){
         try {

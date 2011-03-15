@@ -28,73 +28,73 @@ import org.exoplatform.services.jcr.core.ExtendedNode;
 /**
  * The Class PermissionUtil use to check permission for a node
  */
-public class PermissionUtil {    
-  
+public class PermissionUtil {
+
   /**
    * Can read node
-   * 
+   *
    * @param node the node
    * @return true, if successful
    * @throws RepositoryException the repository exception
    */
   public static boolean canRead(Node node) throws RepositoryException {
-    return checkPermission(node,PermissionType.READ);        
+    return checkPermission(node,PermissionType.READ);
   }
-  
+
   /**
    * Can add node.
-   * 
+   *
    * @param node the node
    * @return true, if successful
    * @throws RepositoryException the repository exception
    */
   public static boolean canAddNode(Node node) throws RepositoryException {
-    return checkPermission(node,PermissionType.ADD_NODE);        
+    return checkPermission(node,PermissionType.ADD_NODE);
   }
-  
+
   /**
    * Can change permission.
-   * 
+   *
    * @param node the node
    * @return true, if successful
    * @throws RepositoryException the repository exception
    */
   public static boolean canChangePermission(Node node) throws RepositoryException {
-    return checkPermission(node,PermissionType.CHANGE_PERMISSION);        
+    return checkPermission(node,PermissionType.CHANGE_PERMISSION);
   }
 
   /**
    * Checks if is any role.
-   * 
+   *
    * @param node the node
    * @return true, if is any role
    * @throws RepositoryException the repository exception
    */
   public static boolean isAnyRole(Node node)throws RepositoryException {
-    return checkPermission(node,SystemIdentity.ANY);        
+    return checkPermission(node,SystemIdentity.ANY);
   }
 
   /**
    * Can set property.
-   * 
+   *
    * @param node the node
    * @return true, if successful
    * @throws RepositoryException the repository exception
    */
   public static boolean canSetProperty(Node node) throws RepositoryException {
-    return checkPermission(node,PermissionType.SET_PROPERTY);    
+    return checkPermission(node,PermissionType.SET_PROPERTY);
   }
 
   /**
    * Can remove node.
-   * 
+   *
    * @param node the node
    * @return true, if successful
    * @throws RepositoryException the repository exception
    */
   public static boolean canRemoveNode(Node node) throws RepositoryException {
     return checkPermission(node,PermissionType.REMOVE);
-  }         
+  }
 
   private static boolean checkPermission(Node node,String permissionType) throws RepositoryException {
     try {

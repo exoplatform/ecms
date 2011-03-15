@@ -50,47 +50,47 @@ import org.exoplatform.webui.form.UIFormStringInput;
  * Oct 31, 2008
  */
 @ComponentConfig(
-	lifecycle = UIFormLifecycle.class, 
-	template = "app:/groovy/webui/search/config/UISearchPageLayoutManager.gtmpl", 
-	events = {
-		@EventConfig(listeners = UISearchPageLayoutManager.SaveActionListener.class),
-		@EventConfig(listeners = UISearchPageLayoutManager.SelectBasePathActionListener.class),
-		@EventConfig(listeners = UISearchPageLayoutManager.CancelActionListener.class)
-	}
+  lifecycle = UIFormLifecycle.class,
+  template = "app:/groovy/webui/search/config/UISearchPageLayoutManager.gtmpl",
+  events = {
+    @EventConfig(listeners = UISearchPageLayoutManager.SaveActionListener.class),
+    @EventConfig(listeners = UISearchPageLayoutManager.SelectBasePathActionListener.class),
+    @EventConfig(listeners = UISearchPageLayoutManager.CancelActionListener.class)
+  }
 )
 public class UISearchPageLayoutManager extends UIForm  implements UISelectable {
 
-	/** The Constant PORTLET_NAME. */
-	public static final String	PORTLET_NAME												= "WCM Advance Search".intern();
+  /** The Constant PORTLET_NAME. */
+  public static final String	PORTLET_NAME												= "WCM Advance Search".intern();
 
-	/** The Constant SEARCH_PAGE_LAYOUT_CATEGORY. */
-	public static final String	SEARCH_PAGE_LAYOUT_CATEGORY					= "search-page-layout".intern();
+  /** The Constant SEARCH_PAGE_LAYOUT_CATEGORY. */
+  public static final String	SEARCH_PAGE_LAYOUT_CATEGORY					= "search-page-layout".intern();
 
-	/** The Constant SEARCH_PAGE_LAYOUT_SELECTOR. */
-	public static final String	SEARCH_PAGE_LAYOUT_SELECTOR					= "searchPageLayoutSelector".intern();
+  /** The Constant SEARCH_PAGE_LAYOUT_SELECTOR. */
+  public static final String	SEARCH_PAGE_LAYOUT_SELECTOR					= "searchPageLayoutSelector".intern();
 
-	/** The Constant SEARCH_FORM_TEMPLATE_CATEGORY. */
-	public static final String	SEARCH_FORM_TEMPLATE_CATEGORY				= "search-form".intern();
+  /** The Constant SEARCH_FORM_TEMPLATE_CATEGORY. */
+  public static final String	SEARCH_FORM_TEMPLATE_CATEGORY				= "search-form".intern();
 
-	/** The Constant SEARCH_PAGINATOR_TEMPLATE_CATEGORY. */
-	public static final String	SEARCH_PAGINATOR_TEMPLATE_CATEGORY	= "search-paginator";
+  /** The Constant SEARCH_PAGINATOR_TEMPLATE_CATEGORY. */
+  public static final String	SEARCH_PAGINATOR_TEMPLATE_CATEGORY	= "search-paginator";
 
-	/** The Constant SEARCH_RESULT_TEMPLATE_CATEGORY. */
-	public static final String	SEARCH_RESULT_TEMPLATE_CATEGORY			= "search-result";
+  /** The Constant SEARCH_RESULT_TEMPLATE_CATEGORY. */
+  public static final String	SEARCH_RESULT_TEMPLATE_CATEGORY			= "search-result";
 
-	/** The Constant SEARCH_FORM_TEMPLATE_SELECTOR. */
-	public static final String	SEARCH_FORM_TEMPLATE_SELECTOR				= "searchFormSelector";
+  /** The Constant SEARCH_FORM_TEMPLATE_SELECTOR. */
+  public static final String	SEARCH_FORM_TEMPLATE_SELECTOR				= "searchFormSelector";
 
-	/** The Constant SEARCH_PAGINATOR_TEMPLATE_SELECTOR. */
-	public static final String	SEARCH_PAGINATOR_TEMPLATE_SELECTOR	= "searchPaginatorSelector";
+  /** The Constant SEARCH_PAGINATOR_TEMPLATE_SELECTOR. */
+  public static final String	SEARCH_PAGINATOR_TEMPLATE_SELECTOR	= "searchPaginatorSelector";
 
-	/** The Constant SEARCH_RESULT_TEMPLATE_SELECTOR. */
-	public static final String	SEARCH_RESULT_TEMPLATE_SELECTOR			= "searchResultSelector";
+  /** The Constant SEARCH_RESULT_TEMPLATE_SELECTOR. */
+  public static final String	SEARCH_RESULT_TEMPLATE_SELECTOR			= "searchResultSelector";
 
-	/** The Constant ITEMS_PER_PAGE_SELECTOR. */
-	public final static String	ITEMS_PER_PAGE_SELECTOR							= "itemsPerPageSelector";
+  /** The Constant ITEMS_PER_PAGE_SELECTOR. */
+  public final static String	ITEMS_PER_PAGE_SELECTOR							= "itemsPerPageSelector";
 
-	/** The Constant BASE_PATH_INPUT. */
+  /** The Constant BASE_PATH_INPUT. */
   public final static String BASE_PATH_INPUT                 = "searchResultBasePathInput";
 
   /** The Constant BASE_PATH_SELECTOR_POPUP_WINDOW. */
@@ -98,10 +98,10 @@ public class UISearchPageLayoutManager extends UIForm  implements UISelectable {
 
   /** The Constant BASE_PATH_INPUT_SET_ACTION. */
   public final static String BASE_PATH_INPUT_SET_ACTION      = "searchResultBasePathInputSetAction";
-  
+
   /** The popup id. */
   private String popupId;
-	/**
+  /**
    * @return the popupId
    */
   public String getPopupId() {
@@ -116,194 +116,197 @@ public class UISearchPageLayoutManager extends UIForm  implements UISelectable {
   }
 
   /**
-	 * Instantiates a new uI search page layout manager.
-	 * 
-	 * @throws Exception the exception
-	 */
-	public UISearchPageLayoutManager() throws Exception {
-		PortletRequestContext portletRequestContext = WebuiRequestContext.getCurrentInstance();
-		PortletPreferences portletPreferences = portletRequestContext.getRequest().getPreferences();
+   * Instantiates a new uI search page layout manager.
+   *
+   * @throws Exception the exception
+   */
+  public UISearchPageLayoutManager() throws Exception {
+    PortletRequestContext portletRequestContext = WebuiRequestContext.getCurrentInstance();
+    PortletPreferences portletPreferences = portletRequestContext.getRequest().getPreferences();
 
-		String itemsPerpage = portletPreferences.getValue(UIWCMSearchPortlet.ITEMS_PER_PAGE, null);
-		String searchFormTemplate = portletPreferences.getValue(UIWCMSearchPortlet.SEARCH_FORM_TEMPLATE_PATH,
-																														null);
-		String searchResultTemplate = portletPreferences.getValue(UIWCMSearchPortlet.SEARCH_RESULT_TEMPLATE_PATH,
-																															null);
-		String searchPaginatorTemplate = portletPreferences.getValue(	UIWCMSearchPortlet.SEARCH_PAGINATOR_TEMPLATE_PATH,
-																																	null);
-		String searchPageLayoutTemplate = portletPreferences.getValue(UIWCMSearchPortlet.SEARCH_PAGE_LAYOUT_TEMPLATE_PATH,
-																																	null);		
-		List<SelectItemOption<String>> searchFormTemplateList = createTemplateList(	PORTLET_NAME,
-																																								SEARCH_FORM_TEMPLATE_CATEGORY);
-		List<SelectItemOption<String>> searchResultTemplateList = createTemplateList(	PORTLET_NAME,
-																																									SEARCH_RESULT_TEMPLATE_CATEGORY);
-		List<SelectItemOption<String>> searchPaginatorTemplateList = createTemplateList(PORTLET_NAME,
-																																										SEARCH_PAGINATOR_TEMPLATE_CATEGORY);
-		List<SelectItemOption<String>> searchPageLayoutTemplateList = createTemplateList(	PORTLET_NAME,
-																																											SEARCH_PAGE_LAYOUT_CATEGORY);
-		List<SelectItemOption<String>> itemsPerPageList = new ArrayList<SelectItemOption<String>>();
-		itemsPerPageList.add(new SelectItemOption<String>("5", "5"));
-		itemsPerPageList.add(new SelectItemOption<String>("10", "10"));
-		itemsPerPageList.add(new SelectItemOption<String>("20", "20"));
+    String itemsPerpage = portletPreferences.getValue(UIWCMSearchPortlet.ITEMS_PER_PAGE, null);
+    String searchFormTemplate = portletPreferences.getValue(UIWCMSearchPortlet.SEARCH_FORM_TEMPLATE_PATH,
+                                                            null);
+    String searchResultTemplate = portletPreferences.getValue(UIWCMSearchPortlet.SEARCH_RESULT_TEMPLATE_PATH,
+                                                              null);
+    String searchPaginatorTemplate = portletPreferences.getValue(	UIWCMSearchPortlet.SEARCH_PAGINATOR_TEMPLATE_PATH,
+                                                                  null);
+    String searchPageLayoutTemplate = portletPreferences.getValue(UIWCMSearchPortlet.SEARCH_PAGE_LAYOUT_TEMPLATE_PATH,
+                                                                  null);
+    List<SelectItemOption<String>> searchFormTemplateList = createTemplateList(	PORTLET_NAME,
+                                                                                SEARCH_FORM_TEMPLATE_CATEGORY);
+    List<SelectItemOption<String>> searchResultTemplateList = createTemplateList(	PORTLET_NAME,
+                                                                                  SEARCH_RESULT_TEMPLATE_CATEGORY);
+    List<SelectItemOption<String>> searchPaginatorTemplateList = createTemplateList(PORTLET_NAME,
+                                                                                    SEARCH_PAGINATOR_TEMPLATE_CATEGORY);
+    List<SelectItemOption<String>> searchPageLayoutTemplateList = createTemplateList(	PORTLET_NAME,
+                                                                                      SEARCH_PAGE_LAYOUT_CATEGORY);
+    List<SelectItemOption<String>> itemsPerPageList = new ArrayList<SelectItemOption<String>>();
+    itemsPerPageList.add(new SelectItemOption<String>("5", "5"));
+    itemsPerPageList.add(new SelectItemOption<String>("10", "10"));
+    itemsPerPageList.add(new SelectItemOption<String>("20", "20"));
 
-		UIFormSelectBox itemsPerPageSelector = new UIFormSelectBox(	ITEMS_PER_PAGE_SELECTOR,
-																																ITEMS_PER_PAGE_SELECTOR,
-																																itemsPerPageList);
-		UIFormSelectBox searchFormTemplateSelector = new UIFormSelectBox(	SEARCH_FORM_TEMPLATE_SELECTOR,
-																																			SEARCH_FORM_TEMPLATE_SELECTOR,
-																																			searchFormTemplateList);
-		UIFormSelectBox searchResultTemplateSelector = new UIFormSelectBox(	SEARCH_RESULT_TEMPLATE_SELECTOR,
-																																				SEARCH_RESULT_TEMPLATE_SELECTOR,
-																																				searchResultTemplateList);
-		UIFormSelectBox searchPaginatorTemplateSelector = new UIFormSelectBox(SEARCH_PAGINATOR_TEMPLATE_SELECTOR,
-																																					SEARCH_PAGINATOR_TEMPLATE_SELECTOR,
-																																					searchPaginatorTemplateList);
-		UIFormSelectBox searchPageLayoutTemplateSelector = new UIFormSelectBox(	SEARCH_PAGE_LAYOUT_SELECTOR,
-																																						SEARCH_PAGE_LAYOUT_SELECTOR,
-																																						searchPageLayoutTemplateList);		
+    UIFormSelectBox itemsPerPageSelector = new UIFormSelectBox(	ITEMS_PER_PAGE_SELECTOR,
+                                                                ITEMS_PER_PAGE_SELECTOR,
+                                                                itemsPerPageList);
+    UIFormSelectBox searchFormTemplateSelector = new UIFormSelectBox(	SEARCH_FORM_TEMPLATE_SELECTOR,
+                                                                      SEARCH_FORM_TEMPLATE_SELECTOR,
+                                                                      searchFormTemplateList);
+    UIFormSelectBox searchResultTemplateSelector = new UIFormSelectBox(	SEARCH_RESULT_TEMPLATE_SELECTOR,
+                                                                        SEARCH_RESULT_TEMPLATE_SELECTOR,
+                                                                        searchResultTemplateList);
+    UIFormSelectBox searchPaginatorTemplateSelector = new UIFormSelectBox(SEARCH_PAGINATOR_TEMPLATE_SELECTOR,
+                                                                          SEARCH_PAGINATOR_TEMPLATE_SELECTOR,
+                                                                          searchPaginatorTemplateList);
+    UIFormSelectBox searchPageLayoutTemplateSelector = new UIFormSelectBox(	SEARCH_PAGE_LAYOUT_SELECTOR,
+                                                                            SEARCH_PAGE_LAYOUT_SELECTOR,
+                                                                            searchPageLayoutTemplateList);
 
-		String preferenceBasePath = portletPreferences.getValue(UIWCMSearchPortlet.BASE_PATH, null);
+    String preferenceBasePath = portletPreferences.getValue(UIWCMSearchPortlet.BASE_PATH, null);
     UIFormInputSetWithAction targetPathFormInputSet = new UIFormInputSetWithAction(BASE_PATH_INPUT_SET_ACTION);
     UIFormStringInput targetPathFormStringInput = new UIFormStringInput(BASE_PATH_INPUT, BASE_PATH_INPUT, preferenceBasePath);
     targetPathFormStringInput.setValue(preferenceBasePath);
     targetPathFormStringInput.setEditable(false);
     targetPathFormInputSet.setActionInfo(BASE_PATH_INPUT, new String[] {"SelectBasePath"}) ;
     targetPathFormInputSet.addUIFormInput(targetPathFormStringInput);
-		
-		itemsPerPageSelector.setValue(itemsPerpage);
-		searchFormTemplateSelector.setValue(searchFormTemplate);
-		searchResultTemplateSelector.setValue(searchResultTemplate);
-		searchPaginatorTemplateSelector.setValue(searchPaginatorTemplate);
-		searchPageLayoutTemplateSelector.setValue(searchPageLayoutTemplate);
 
-		addChild(itemsPerPageSelector);		
-		addChild(searchFormTemplateSelector);
-		addChild(searchResultTemplateSelector);
-		addChild(searchPaginatorTemplateSelector);
-		addChild(searchPageLayoutTemplateSelector);
-		addChild(targetPathFormInputSet);
+    itemsPerPageSelector.setValue(itemsPerpage);
+    searchFormTemplateSelector.setValue(searchFormTemplate);
+    searchResultTemplateSelector.setValue(searchResultTemplate);
+    searchPaginatorTemplateSelector.setValue(searchPaginatorTemplate);
+    searchPageLayoutTemplateSelector.setValue(searchPageLayoutTemplate);
 
-		setActions(new String[] { "Save", "Cancel" });
-	}
+    addChild(itemsPerPageSelector);
+    addChild(searchFormTemplateSelector);
+    addChild(searchResultTemplateSelector);
+    addChild(searchPaginatorTemplateSelector);
+    addChild(searchPageLayoutTemplateSelector);
+    addChild(targetPathFormInputSet);
 
-	/**
-	 * Creates the template list.
-	 * 
-	 * @param portletName the portlet name
-	 * @param category the category
-	 * 
-	 * @return the list< select item option< string>>
-	 * 
-	 * @throws Exception the exception
-	 */
-	private List<SelectItemOption<String>> createTemplateList(String portletName, String category) throws Exception {
-		List<SelectItemOption<String>> templateList = new ArrayList<SelectItemOption<String>>();
-		ApplicationTemplateManagerService templateManagerService = getApplicationComponent(ApplicationTemplateManagerService.class);
-		RepositoryService repositoryService = getApplicationComponent(RepositoryService.class);
-		ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
-		String repository = manageableRepository.getConfiguration().getName();
-		List<Node> templateNodeList = templateManagerService.getTemplatesByCategory(repository,
-																																								portletName,
-																																								category,
-																																								Utils.getSessionProvider());
-		for (Node templateNode : templateNodeList) {
-			String templateName = templateNode.getName();
-			String templatePath = templateNode.getPath();
-			templateList.add(new SelectItemOption<String>(templateName, templatePath));
-		}
-		return templateList;
-	}
+    setActions(new String[] { "Save", "Cancel" });
+  }
 
-	/**
-	 * The listener interface for receiving saveAction events. The class that is
-	 * interested in processing a saveAction event implements this interface, and
-	 * the object created with that class is registered with a component using the
-	 * component's <code>addSaveActionListener<code> method. When
-	 * the saveAction event occurs, that object's appropriate
-	 * method is invoked.
-	 * 
-	 * @see SaveActionEvent
-	 */
-	public static class SaveActionListener extends EventListener<UISearchPageLayoutManager> {
+  /**
+   * Creates the template list.
+   *
+   * @param portletName the portlet name
+   * @param category the category
+   *
+   * @return the list< select item option< string>>
+   *
+   * @throws Exception the exception
+   */
+  private List<SelectItemOption<String>> createTemplateList(String portletName, String category) throws Exception {
+    List<SelectItemOption<String>> templateList = new ArrayList<SelectItemOption<String>>();
+    ApplicationTemplateManagerService templateManagerService = getApplicationComponent(ApplicationTemplateManagerService.class);
+    RepositoryService repositoryService = getApplicationComponent(RepositoryService.class);
+    ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
+    String repository = manageableRepository.getConfiguration().getName();
+    List<Node> templateNodeList = templateManagerService.getTemplatesByCategory(repository,
+                                                                                portletName,
+                                                                                category,
+                                                                                Utils.getSessionProvider());
+    for (Node templateNode : templateNodeList) {
+      String templateName = templateNode.getName();
+      String templatePath = templateNode.getPath();
+      templateList.add(new SelectItemOption<String>(templateName, templatePath));
+    }
+    return templateList;
+  }
 
-		/*
-		 * (non-Javadoc)
-		 * @see
-		 * org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui
-		 * .event.Event)
-		 */
-		public void execute(Event<UISearchPageLayoutManager> event) throws Exception {
-			UISearchPageLayoutManager uiSearchLayoutManager = event.getSource();
-			UIApplication uiApp = uiSearchLayoutManager.getAncestorOfType(UIApplication.class);
-			RepositoryService repositoryService = uiSearchLayoutManager.getApplicationComponent(RepositoryService.class);
-			ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
-			String repository = manageableRepository.getConfiguration().getName();
-			String workspace = manageableRepository.getConfiguration().getDefaultWorkspaceName();
-			PortletRequestContext portletRequestContext = (PortletRequestContext) event.getRequestContext();
-			PortletPreferences portletPreferences = portletRequestContext.getRequest().getPreferences();
+  /**
+   * The listener interface for receiving saveAction events. The class that is
+   * interested in processing a saveAction event implements this interface, and
+   * the object created with that class is registered with a component using the
+   * component's <code>addSaveActionListener<code> method. When
+   * the saveAction event occurs, that object's appropriate
+   * method is invoked.
+   *
+   * @see SaveActionEvent
+   */
+  public static class SaveActionListener extends EventListener<UISearchPageLayoutManager> {
 
-			String searchResultTemplatePath = uiSearchLayoutManager	.getUIFormSelectBox(UISearchPageLayoutManager.SEARCH_RESULT_TEMPLATE_SELECTOR)
-																															.getValue();
-			String searchFormTemplatePath = uiSearchLayoutManager	.getUIFormSelectBox(UISearchPageLayoutManager.SEARCH_FORM_TEMPLATE_SELECTOR)
-																														.getValue();
-			String searchPaginatorTemplatePath = uiSearchLayoutManager.getUIFormSelectBox(UISearchPageLayoutManager.SEARCH_PAGINATOR_TEMPLATE_SELECTOR)
-																																.getValue();
-			String searchPageLayoutTemplatePath = uiSearchLayoutManager	.getUIFormSelectBox(UISearchPageLayoutManager.SEARCH_PAGE_LAYOUT_SELECTOR)
-																																	.getValue();
-			String itemsPerPage = uiSearchLayoutManager	.getUIFormSelectBox(UISearchPageLayoutManager.ITEMS_PER_PAGE_SELECTOR)
-																									.getValue();
-			
-			String basePath = uiSearchLayoutManager.getUIStringInput(UISearchPageLayoutManager.BASE_PATH_INPUT).getValue();
+    /*
+     * (non-Javadoc)
+     * @see
+     * org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui
+     * .event.Event)
+     */
+    public void execute(Event<UISearchPageLayoutManager> event) throws Exception {
+      UISearchPageLayoutManager uiSearchLayoutManager = event.getSource();
+      UIApplication uiApp = uiSearchLayoutManager.getAncestorOfType(UIApplication.class);
+      RepositoryService repositoryService = uiSearchLayoutManager.getApplicationComponent(RepositoryService.class);
+      ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
+      String repository = manageableRepository.getConfiguration().getName();
+      String workspace = manageableRepository.getConfiguration().getDefaultWorkspaceName();
+      PortletRequestContext portletRequestContext = (PortletRequestContext) event.getRequestContext();
+      PortletPreferences portletPreferences = portletRequestContext.getRequest().getPreferences();
 
-			portletPreferences.setValue(UIWCMSearchPortlet.REPOSITORY, repository);
-			portletPreferences.setValue(UIWCMSearchPortlet.WORKSPACE, workspace);			
-			portletPreferences.setValue(UIWCMSearchPortlet.SEARCH_RESULT_TEMPLATE_PATH,
-																	searchResultTemplatePath);
-			portletPreferences.setValue(UIWCMSearchPortlet.SEARCH_FORM_TEMPLATE_PATH,
-																	searchFormTemplatePath);
-			portletPreferences.setValue(UIWCMSearchPortlet.SEARCH_PAGINATOR_TEMPLATE_PATH,
-																	searchPaginatorTemplatePath);
-			portletPreferences.setValue(UIWCMSearchPortlet.SEARCH_PAGE_LAYOUT_TEMPLATE_PATH,
-																	searchPageLayoutTemplatePath);
-			portletPreferences.setValue(UIWCMSearchPortlet.ITEMS_PER_PAGE, itemsPerPage);
-			portletPreferences.setValue(UIWCMSearchPortlet.BASE_PATH, basePath);
-			portletPreferences.store();
-			
-			if (Utils.isEditPortletInCreatePageWizard()) {
-				uiApp.addMessage(new ApplicationMessage("UISearchConfig.msg.saving-success", null,ApplicationMessage.INFO));
-			} else {
-				portletRequestContext.setApplicationMode(PortletMode.VIEW);
-			}
-		}
-	}
+      String searchResultTemplatePath = uiSearchLayoutManager.
+          getUIFormSelectBox(UISearchPageLayoutManager.SEARCH_RESULT_TEMPLATE_SELECTOR).getValue();
+      String searchFormTemplatePath = uiSearchLayoutManager.
+          getUIFormSelectBox(UISearchPageLayoutManager.SEARCH_FORM_TEMPLATE_SELECTOR).getValue();
+      String searchPaginatorTemplatePath = uiSearchLayoutManager.
+          getUIFormSelectBox(UISearchPageLayoutManager.SEARCH_PAGINATOR_TEMPLATE_SELECTOR).getValue();
+      String searchPageLayoutTemplatePath = uiSearchLayoutManager.
+          getUIFormSelectBox(UISearchPageLayoutManager.SEARCH_PAGE_LAYOUT_SELECTOR).getValue();
+      String itemsPerPage = uiSearchLayoutManager.
+          getUIFormSelectBox(UISearchPageLayoutManager.ITEMS_PER_PAGE_SELECTOR).getValue();
 
-	/**
-	 * The listener interface for receiving cancelAction events. The class that is
-	 * interested in processing a cancelAction event implements this interface,
-	 * and the object created with that class is registered with a component using
-	 * the component's <code>addCancelActionListener<code> method. When
-	 * the cancelAction event occurs, that object's appropriate
-	 * method is invoked.
-	 * 
-	 * @see CancelActionEvent
-	 */
-	public static class CancelActionListener extends EventListener<UISearchPageLayoutManager> {
+      String basePath = uiSearchLayoutManager.getUIStringInput(UISearchPageLayoutManager.BASE_PATH_INPUT)
+                                             .getValue();
 
-		/*
-		 * (non-Javadoc)
-		 * @see
-		 * org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui
-		 * .event.Event)
-		 */
-		public void execute(Event<UISearchPageLayoutManager> event) throws Exception {
-			PortletRequestContext context = (PortletRequestContext) event.getRequestContext();
-			context.setApplicationMode(PortletMode.VIEW);
-		}
-	}
+      portletPreferences.setValue(UIWCMSearchPortlet.REPOSITORY, repository);
+      portletPreferences.setValue(UIWCMSearchPortlet.WORKSPACE, workspace);
+      portletPreferences.setValue(UIWCMSearchPortlet.SEARCH_RESULT_TEMPLATE_PATH,
+                                  searchResultTemplatePath);
+      portletPreferences.setValue(UIWCMSearchPortlet.SEARCH_FORM_TEMPLATE_PATH,
+                                  searchFormTemplatePath);
+      portletPreferences.setValue(UIWCMSearchPortlet.SEARCH_PAGINATOR_TEMPLATE_PATH,
+                                  searchPaginatorTemplatePath);
+      portletPreferences.setValue(UIWCMSearchPortlet.SEARCH_PAGE_LAYOUT_TEMPLATE_PATH,
+                                  searchPageLayoutTemplatePath);
+      portletPreferences.setValue(UIWCMSearchPortlet.ITEMS_PER_PAGE, itemsPerPage);
+      portletPreferences.setValue(UIWCMSearchPortlet.BASE_PATH, basePath);
+      portletPreferences.store();
 
-	/*
+      if (Utils.isEditPortletInCreatePageWizard()) {
+        uiApp.addMessage(new ApplicationMessage("UISearchConfig.msg.saving-success",
+                                                null,
+                                                ApplicationMessage.INFO));
+      } else {
+        portletRequestContext.setApplicationMode(PortletMode.VIEW);
+      }
+    }
+  }
+
+  /**
+   * The listener interface for receiving cancelAction events. The class that is
+   * interested in processing a cancelAction event implements this interface,
+   * and the object created with that class is registered with a component using
+   * the component's <code>addCancelActionListener<code> method. When
+   * the cancelAction event occurs, that object's appropriate
+   * method is invoked.
+   *
+   * @see CancelActionEvent
+   */
+  public static class CancelActionListener extends EventListener<UISearchPageLayoutManager> {
+
+    /*
+     * (non-Javadoc)
+     * @see
+     * org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui
+     * .event.Event)
+     */
+    public void execute(Event<UISearchPageLayoutManager> event) throws Exception {
+      PortletRequestContext context = (PortletRequestContext) event.getRequestContext();
+      context.setApplicationMode(PortletMode.VIEW);
+    }
+  }
+
+  /*
    * (non-Javadoc)
-   * 
+   *
    * @see org.exoplatform.ecm.webui.selector.UISelectable#doSelect(java.lang.String,
    *      java.lang.Object)
    */
@@ -311,7 +314,7 @@ public class UISearchPageLayoutManager extends UIForm  implements UISelectable {
     getUIStringInput(selectField).setValue((String) value);
     Utils.closePopupWindow(this, popupId);
   }
-  
+
   /**
    * The listener interface for receiving selectTargetPageAction events.
    * The class that is interested in processing a selectTargetPageAction
@@ -320,11 +323,11 @@ public class UISearchPageLayoutManager extends UIForm  implements UISelectable {
    * component's <code>addSelectTargetPageActionListener<code> method. When
    * the selectTargetPageAction event occurs, that object's appropriate
    * method is invoked.
-   * 
+   *
    * @see SelectTargetPageActionEvent
    */
   public static class SelectBasePathActionListener extends EventListener<UISearchPageLayoutManager> {
-    
+
     /* (non-Javadoc)
      * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
      */

@@ -49,7 +49,7 @@ import org.exoplatform.webui.form.UIFormStringInput;
  * Created by The eXo Platform SARL
  * Author : Dang Van Minh
  *          minh.dang@exoplatform.com
- * Jan 25, 2007  
+ * Jan 25, 2007
  * 1:47:55 PM
  */
 @ComponentConfigs(
@@ -81,21 +81,21 @@ public class UIViewMetadataForm extends UIDialogForm {
   }
 
   public void setNodeType(String nodeType) { nodeType_ = nodeType; }
-  public String getNodeType() { return nodeType_; } 
-  
-  public String getDialogTemplatePath() { 
+  public String getNodeType() { return nodeType_; }
+
+  public String getDialogTemplatePath() {
     repositoryName = getAncestorOfType(UIJCRExplorer.class).getRepositoryName();
     MetadataService metadataService = getApplicationComponent(MetadataService.class);
     try {
       return metadataService.getMetadataPath(nodeType_, true, repositoryName);
     } catch (Exception e) {
       LOG.error("Unexpected error", e);
-    } 
+    }
     return null;
   }
-  
+
   public String getTemplate() { return getDialogTemplatePath(); }
-  
+
   public ResourceResolver getTemplateResourceResolver(WebuiRequestContext context, String template) {
     return getAncestorOfType(UIJCRExplorer.class).getJCRTemplateResourceResolver();
   }
@@ -124,7 +124,7 @@ public class UIViewMetadataForm extends UIDialogForm {
               UIFormInput uiInput = uiForm.getUIInput(inputName);
               if(uiInput instanceof UIFormSelectBox) {
                 String[] valuesReal = ((UIFormSelectBox)uiInput).getSelectedValues();
-                node.setProperty(name, valuesReal);                
+                node.setProperty(name, valuesReal);
               } else {
                 List<String> values = (List<String>) ((UIFormMultiValueInputSet)uiInput).getValue();
                 node.setProperty(name, values.toArray(new String[values.size()]));
@@ -156,7 +156,7 @@ public class UIViewMetadataForm extends UIDialogForm {
       uiPopup.setShow(false);
     }
   }
-  
+
   static public class CancelActionListener extends EventListener<UIViewMetadataForm> {
     public void execute(Event<UIViewMetadataForm> event) throws Exception {
       UIViewMetadataForm uiForm = event.getSource();
@@ -177,5 +177,5 @@ public class UIViewMetadataForm extends UIDialogForm {
     public void execute(Event<UIViewMetadataForm> event) throws Exception {
       event.getRequestContext().addUIComponentToUpdateByAjax(event.getSource().getParent());
     }
-  }  
+  }
 }

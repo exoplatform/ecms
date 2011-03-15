@@ -26,7 +26,7 @@ import org.exoplatform.services.workflow.Timer;
  * Jun 12, 2006
  */
 public class TimerData implements Timer {
-  
+
   private Date dueDate = null;
   private String id    = null;
   private String name  = null;
@@ -37,7 +37,7 @@ public class TimerData implements Timer {
   public Date getDueDate() {
     return this.dueDate;
   }
-  
+
   /* (non-Javadoc)
    * @see org.exoplatform.services.workflow.Timer#getId()
    */
@@ -51,17 +51,17 @@ public class TimerData implements Timer {
   public String getName() {
     return this.name;
   }
-  
+
   /**
    * Constructs a new Timer Data instance based on the specified Bonita object
-   * 
+   *
    * @param timerData contains Timer information
    */
 //  public TimerData(hero.util.TimerData timerData) {
-//    
+//
 //    // The pattern is "task:process_instance_id:date"
-//    String[] type  = timerData.getType().split(":"); 
-//    
+//    String[] type  = timerData.getType().split(":");
+//
 //    // Set the class attributes
 //    this.dueDate = new Date(timerData.getMs());
 //    this.id      = type[0];

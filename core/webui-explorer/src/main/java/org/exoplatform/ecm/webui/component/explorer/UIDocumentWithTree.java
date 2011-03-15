@@ -43,9 +43,9 @@ public class UIDocumentWithTree extends UIDocumentInfo {
   public UIDocumentWithTree() throws Exception {
     getChild(UIPageIterator.class).setId("PageIteratorWithTreeView") ;
   }
-  
+
   public String getTemplate() {
     UIJCRExplorer uiExplorer = getAncestorOfType(UIJCRExplorer.class) ;
-    return uiExplorer.getDocumentInfoTemplate(); 
+    return uiExplorer.getDocumentInfoTemplate();
   }
 }

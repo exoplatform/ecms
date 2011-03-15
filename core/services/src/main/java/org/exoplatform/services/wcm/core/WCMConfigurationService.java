@@ -32,37 +32,37 @@ import org.exoplatform.services.log.Log;
  * Created by The eXo Platform SAS
  * @author : Hoa.Pham
  *          hoa.pham@exoplatform.com
- * Jun 20, 2008  
+ * Jun 20, 2008
  */
 public class WCMConfigurationService {
 
   private static Log log = ExoLogger.getLogger("wcm:WCMConfiguarationService");
   private HashMap<String, NodeLocation> livePortalsLocations = new HashMap<String, NodeLocation>();
   private HashMap<String, String> sharedPortals = new HashMap<String, String>();
-  private ExoProperties runtimeContextParams;  
+  private ExoProperties runtimeContextParams;
   private DriveData siteDriveConfig;
-  
+
   public static final String SITE_PATH_EXP = "\\{sitePath\\}";
   public static final String SITE_NAME_EXP = "\\{siteName\\}";
-  
+
   public static final String NEWSLETTER_MANAGE_MEMBERSHIP   = "newsletterManageMembership";
-  
+
   public static final String PARAMETERIZED_PAGE_URI         = "parameterizedPageURI";
-  
+
   public static final String PRINT_PAGE_URI                 = "printPageURI";
-  
+
   public static final String PRINT_VIEWER_PAGE              = "printViewerPage";
-  
+
   public static final String EDITOR_PAGE_URI                = "editorPageURI";
-  
+
   public static final String CREATE_WIKI_PAGE_URI           = "createWikiPageURI";
-  
+
   public static final String CLV_PORTLET                    = "CLVPortlet";
-  
+
   public static final String SCV_PORTLET                    = "SCVPortlet";
-  
+
   public static final String FORM_VIEW_TEMPLATE_PATH        = "formViewTemplatePath";
-  
+
   public static final String PAGINATOR_TEMPLAET_PATH        = "paginatorTemplatePath";
 
   @SuppressWarnings("unchecked")
@@ -85,7 +85,7 @@ public class WCMConfigurationService {
       if ("live.portals.location.config".equals(objectParameter.getName())) {
         NodeLocation objectParam = (NodeLocation)objectParameter.getObject();
         livePortalsLocations.put(objectParam.getRepository(), objectParam);
-        log.info("Location that resources for all live portal is stored in repository:" + objectParam.getRepository() 
+        log.info("Location that resources for all live portal is stored in repository:" + objectParam.getRepository()
             + " is in workspace: "+ objectParam.getWorkspace() + " and with path: "+objectParam.getPath());
 
       }
@@ -118,5 +118,5 @@ public class WCMConfigurationService {
 
   public Collection<NodeLocation> getAllLivePortalsLocation() {
     return livePortalsLocations.values();
-  }  
+  }
 }

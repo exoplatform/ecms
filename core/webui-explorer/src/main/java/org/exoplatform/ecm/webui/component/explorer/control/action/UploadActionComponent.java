@@ -41,7 +41,7 @@ import org.exoplatform.webui.ext.manager.UIAbstractManagerComponent;
  * Created by The eXo Platform SAS
  * Author : eXoPlatform
  *          nicolas.filotto@exoplatform.com
- * 6 mai 2009  
+ * 6 mai 2009
  */
 @ComponentConfig(
      events = {
@@ -50,13 +50,13 @@ import org.exoplatform.webui.ext.manager.UIAbstractManagerComponent;
  )
 public class UploadActionComponent extends UIAbstractManagerComponent {
 
-  private static final List<UIExtensionFilter> FILTERS 
-  				= Arrays.asList(new UIExtensionFilter[]{new CanAddNodeFilter(), 
-  																								new IsNotLockedFilter(), 
-  																								new IsCheckedOutFilter(),
-  																								new IsNotTrashHomeNodeFilter(),
-  																								new IsNotInTrashFilter()});
-  
+  private static final List<UIExtensionFilter> FILTERS
+          = Arrays.asList(new UIExtensionFilter[]{new CanAddNodeFilter(),
+                                                  new IsNotLockedFilter(),
+                                                  new IsCheckedOutFilter(),
+                                                  new IsNotTrashHomeNodeFilter(),
+                                                  new IsNotInTrashFilter()});
+
   @UIExtensionFilters
   public List<UIExtensionFilter> getFilters() {
     return FILTERS;
@@ -68,7 +68,7 @@ public class UploadActionComponent extends UIAbstractManagerComponent {
     UIPopupContainer.activate(uiUploadManager, 600, 500);
     event.getRequestContext().addUIComponentToUpdateByAjax(UIPopupContainer);
   }
-  
+
   public static class UploadActionListener extends UIActionBarActionListener<UploadActionComponent> {
     public void processEvent(Event<UploadActionComponent> event) throws Exception {
       UIJCRExplorer uiExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class);
@@ -78,7 +78,6 @@ public class UploadActionComponent extends UIAbstractManagerComponent {
 
   @Override
   public Class<? extends UIAbstractManager> getUIAbstractManagerClass() {
-    // TODO Auto-generated method stub
     return null;
   }
 }

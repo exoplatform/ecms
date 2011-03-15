@@ -26,10 +26,10 @@ public interface PublicationManager {
 
   public List<Lifecycle> getLifecyclesFromUser(String remoteUser, String state);
 
-  public List<Node> getContents(String fromstate, 
-		  String tostate, 
-		  String date,
-		  String user,
-		  String lang,
-		  String workspace) throws Exception;
+  public List<Node> getContents(String fromstate,
+      String tostate,
+      String date,
+      String user,
+      String lang,
+      String workspace) throws Exception;
 }

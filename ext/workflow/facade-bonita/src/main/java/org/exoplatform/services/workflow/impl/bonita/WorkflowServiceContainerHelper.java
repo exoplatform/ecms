@@ -26,40 +26,40 @@ import org.ow2.bonita.util.AccessorUtil;
 
 /**
  * Contains helper methods for the Bonita Workflow Service implementation
- * 
+ *
  * Created by Bull R&D
  * @author Brice Revenant
  * Mar 2, 2006
  */
 public class WorkflowServiceContainerHelper {
-  
+
   public static final String getProcessName(String processId) throws Exception{
-	  ProcessDefinitionUUID uuid = UUIDFactory.getProcessDefinitionUUID(processId);
-	  return AccessorUtil.getQueryAPIAccessor().getQueryDefinitionAPI().getProcess(uuid).getName();
+    ProcessDefinitionUUID uuid = UUIDFactory.getProcessDefinitionUUID(processId);
+    return AccessorUtil.getQueryAPIAccessor().getQueryDefinitionAPI().getProcess(uuid).getName();
   }
-  
+
   /**
    * Retrieves the Process Model name from a Process Instance name.
    * In the past there was a convenient method in BnProject that enabled to
    * retrieve the Model. But it was removed from Bonita for performance
    * reasons. As a consequence, it was decided to retrieve the Project Model
    * in this dedicated helper method.
-   * 
+   *
    * @param  instanceName name of the instance whose model is to be retrieved
    * @return a String corresponding to the Process Model name
    */
   public static final String getModelName(String instanceName) {
-    
+
 //    ProjectSessionLocal projectSession = null;
 //    String modelName = null;
-//    
+//
 //    try {
 //      // Initialize Project Session
 //      ProjectSessionLocalHome projectSessionHome =
 //        ProjectSessionUtil.getLocalHome();
 //      projectSession = projectSessionHome.create();
 //      projectSession.initProject(instanceName);
-//      
+//
 //      // Retrieve the Model name
 //      modelName = projectSession.getProjectNameOfInstance(instanceName);
 //    }
@@ -73,9 +73,9 @@ public class WorkflowServiceContainerHelper {
 //      catch(Exception ignore) {
 //      }
 //    }
-//    
+//
 //    return modelName;
-	  return "";
+    return "";
   }
 
   /**
@@ -86,7 +86,7 @@ public class WorkflowServiceContainerHelper {
    * However this class is currently bundled in a portlet and not in a jar file
    * which prevents from importing it in Eclipse. As a consequence, those
    * constants cannot be referenced and their value is used instead.
-   * 
+   *
    * @param value the String to be converted
    * @param type  identifies the component in which the value is displayed.
    *              It indicates the type of the object to produce. For
@@ -94,13 +94,13 @@ public class WorkflowServiceContainerHelper {
    *              should be of type Date. It should be one of the constants
    *              defined in
    *              {@link org.exoplatform.portlets.workflow.component.UITask
-   *              UITask}. 
+   *              UITask}.
    * @return      an <tt>Object</tt> representing the specified value
    */
   public static final Object stringToObject(String value, String component) {
-    
+
     Object ret = null;
-    
+
     if("date".equals(component) || "datetime".equals(component)) {
       if(value == null || "".equals(value)) {
         // The value is unset, use the current date
@@ -121,7 +121,7 @@ public class WorkflowServiceContainerHelper {
         ret = value;
       }
     }
-    
+
     return ret;
   }
 
@@ -133,20 +133,20 @@ public class WorkflowServiceContainerHelper {
    * However this class is currently bundled in a portlet and not in a jar file
    * which prevents from importing it in Eclipse. As a consequence, those
    * constants cannot be referenced and their value is used instead.
-   * 
+   *
    * @param value the Object to be converted
    * @param type  identifies the component in which the value is displayed.
    *              It indicates the expected type of the specified value. For
    *              instance, UITask.DATE indicates that the value is an Object
    *              of type Date. It should be one of the constants defined in
    *              {@link org.exoplatform.portlets.workflow.component.UITask
-   *              UITask}. 
+   *              UITask}.
    * @return      a <tt>String</tt> representing the specified value
    */
   public static final String objectToString(Object value, String component) {
 
     String ret = null;
-    
+
     if(value == null) {
       // Increase robustness
       ret = "";
@@ -164,7 +164,7 @@ public class WorkflowServiceContainerHelper {
       // Delegate to the default Java conversion method
       ret = value.toString();
     }
-    
+
     return ret;
   }
 }

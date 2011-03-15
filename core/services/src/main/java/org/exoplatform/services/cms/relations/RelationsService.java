@@ -64,8 +64,8 @@ public interface RelationsService {
    * @see                     Node
    * @throws Exception
    */
-  public void addRelation(Node node, String relationPath, String workspaceName, String repository) throws Exception; 
-  
+  public void addRelation(Node node, String relationPath, String workspaceName, String repository) throws Exception;
+
   /**
    * Initial the root of relation node and its sub node
    * @param repository        The name of repository

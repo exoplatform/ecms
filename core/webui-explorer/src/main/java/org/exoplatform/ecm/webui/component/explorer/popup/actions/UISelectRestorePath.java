@@ -55,7 +55,7 @@ import org.exoplatform.webui.form.UIFormStringInput;
  * Created by The eXo Platform SARL
  * Author : Nguyen Anh Vu
  *          anhvurz90@gmail.com
- * Mar 4, 2010  
+ * Mar 4, 2010
  * 3:33:41 PM
  */
 
@@ -63,7 +63,7 @@ import org.exoplatform.webui.form.UIFormStringInput;
     lifecycle = UIFormLifecycle.class,
     template =  "system:/groovy/webui/form/UIForm.gtmpl",
     events = {
-      @EventConfig(listeners = UISelectRestorePath.SaveActionListener.class), 
+      @EventConfig(listeners = UISelectRestorePath.SaveActionListener.class),
       @EventConfig(listeners = UISelectRestorePath.AddActionListener.class, phase = Phase.DECODE),
       @EventConfig(listeners = UISelectRestorePath.CancelActionListener.class, phase = Phase.DECODE)
     }
@@ -74,59 +74,58 @@ public class UISelectRestorePath extends UIForm implements UIPopupComponent, UIS
   final static public String FORM_INPUT = "formInput";
   final static public String POPUP_PATH = "UIPopupPathFoRestore";
   final static public String FORM_MESSAGE = "UIFormMessage";
-  
+
   final static public String CHOOSE_PATH_TO_RESTORE_NODE =
-  															"ChooseTagToRestoreNode";
-  
-	private final static Log 	LOG = ExoLogger.getLogger(UISelectRestorePath.class);  
+                                "ChooseTagToRestoreNode";
 
-	private Node trashHomeNode;
-	private String repository;
-	private String srcPath;
-	
-	public Node getTrashHomeNode() { return trashHomeNode;}
-	public void setTrashHomeNode(Node trashHomeNode) {
-		this.trashHomeNode = trashHomeNode;
-	}
+  private final static Log 	LOG = ExoLogger.getLogger(UISelectRestorePath.class);
 
-	public String getRepository() { return repository; }
-	public void setRepository(String repository) {
-		this.repository = repository;
-	}
+  private Node trashHomeNode;
+  private String repository;
+  private String srcPath;
 
-	public String getSrcPath() { return srcPath; }
-	public void setSrcPath(String srcPath) {
-		this.srcPath = srcPath;
-	}
+  public Node getTrashHomeNode() { return trashHomeNode;}
+  public void setTrashHomeNode(Node trashHomeNode) {
+    this.trashHomeNode = trashHomeNode;
+  }
 
-	public void activate() throws Exception {
-		//this.addChild(new UIFormMessage(CHOOSE_PATH_TO_RESTORE_NODE));
+  public String getRepository() { return repository; }
+  public void setRepository(String repository) {
+    this.repository = repository;
+  }
+
+  public String getSrcPath() { return srcPath; }
+  public void setSrcPath(String srcPath) {
+    this.srcPath = srcPath;
+  }
+
+  public void activate() throws Exception {
+    //this.addChild(new UIFormMessage(CHOOSE_PATH_TO_RESTORE_NODE));
     UIFormInputSet uiFormInputAction = new UIFormInputSetWithAction("UIFormInputSetWithAction");
-    
+
     UIFormStringInput homePathField = new UIFormStringInput(FORM_INPUT, FORM_INPUT, null);
     homePathField.setValue("");
     homePathField.setEditable(false);
-    
+
     uiFormInputAction.addUIFormInput(homePathField);
     uiFormInputAction.setId(FIELD_PATH);
     ((UIFormInputSetWithAction)uiFormInputAction).setActionInfo(FORM_INPUT, new String[]{"Add"});
-    
+
     this.addUIFormInput(uiFormInputAction);
     setActions(new String[] {"Save", "Cancel"});
-	}
+  }
 
-	public void deActivate() throws Exception {
-		// TODO Auto-generated method stub
-	}
+  public void deActivate() throws Exception {
+  }
 
-	public void doSelect(String selectField, Object value) throws Exception {
+  public void doSelect(String selectField, Object value) throws Exception {
     String valueNodeName = String.valueOf(value).trim();
     UIFormInputSetWithAction uiFormInputAction = getChild(UIFormInputSetWithAction.class);
     uiFormInputAction.getChild(UIFormStringInput.class).setValue(valueNodeName);
     this.getAncestorOfType(UIPopupContainer.class).removeChildById(POPUP_PATH);
-	}
-	
-	
+  }
+
+
   static  public class CancelActionListener extends EventListener<UISelectRestorePath> {
     public void execute(Event<UISelectRestorePath> event) throws Exception {
       UIJCRExplorer uiExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class);
@@ -147,7 +146,7 @@ public class UISelectRestorePath extends UIForm implements UIPopupComponent, UIS
 //      }
 //    }
 //  }
-  
+
   static  public class AddActionListener extends EventListener<UISelectRestorePath> {
     public void execute(Event<UISelectRestorePath> event) throws Exception {
       UISelectRestorePath uiSelectRestorePath =  event.getSource();
@@ -155,10 +154,10 @@ public class UISelectRestorePath extends UIForm implements UIPopupComponent, UIS
       UIJCRExplorer uiExplorer = uiSelectRestorePath.getAncestorOfType(UIJCRExplorer.class);
       String workspaceName = uiExplorer.getCurrentWorkspace();
       String repository = uiExplorer.getRepositoryName();
-      
+
       UIPopupWindow uiPopupWindow = initPopup(uiPopupContainer, POPUP_PATH);
       UIOneNodePathSelector uiNodePathSelector = uiPopupContainer.createUIComponent(UIOneNodePathSelector.class, null, null);
-      
+
       uiNodePathSelector.setIsDisable(workspaceName, false);
       uiNodePathSelector.setShowRootPathSelect(true);
       uiNodePathSelector.setRootNodeLocation(uiExplorer.getRepositoryName(), workspaceName, "/");
@@ -181,13 +180,13 @@ public class UISelectRestorePath extends UIForm implements UIPopupComponent, UIS
       uiPopupWindow.setShow(true);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiPopupContainer);
     }
-    
+
     private String getSystemWorkspaceName(String repository, UIJCRExplorer uiExplorer) throws RepositoryException, RepositoryConfigurationException {
       RepositoryService repositoryService = uiExplorer.getApplicationComponent(RepositoryService.class);
       ManageableRepository manageableRepository = repositoryService.getRepository(repository);
       return manageableRepository.getConfiguration().getSystemWorkspaceName();
     }
-    
+
     private UIPopupWindow initPopup(UIPopupContainer uiPopupContainer, String id) throws Exception {
       UIPopupWindow uiPopup = uiPopupContainer.getChildById(id);
       if (uiPopup == null) {
@@ -202,55 +201,55 @@ public class UISelectRestorePath extends UIForm implements UIPopupComponent, UIS
 
   static  public class SaveActionListener extends EventListener<UISelectRestorePath> {
     public void execute(Event<UISelectRestorePath> event) throws Exception {
-    	UISelectRestorePath uiSelectRestorePath = event.getSource();
-    	UIJCRExplorer uiExplorer = uiSelectRestorePath.getAncestorOfType(UIJCRExplorer.class);
-    	UIApplication uiApp = uiSelectRestorePath.getAncestorOfType(UIApplication.class);
-    	String fullRestorePath = uiSelectRestorePath.
-    														getChild(UIFormInputSetWithAction.class).
-    														getChild(UIFormStringInput.class).getValue();
-    	int colonIndex = fullRestorePath.indexOf(':');
-    	if (colonIndex == -1) return;
-			String restoreWorkspace = fullRestorePath.substring(0, colonIndex);
-			String restorePath = fullRestorePath.substring(colonIndex + 1);
-    	Node trashNode = (Node)uiSelectRestorePath.getTrashHomeNode().getSession().getItem(uiSelectRestorePath.getSrcPath());
-    	trashNode.setProperty(TrashService.RESTORE_WORKSPACE, restoreWorkspace);
-    	trashNode.setProperty(TrashService.RESTORE_PATH, restorePath + 
-    																									 (restorePath.endsWith("/") ? "" : '/') + 
-    																									 trashNode.getName());
-			TrashService trashService = uiSelectRestorePath.getApplicationComponent(TrashService.class);
-			try {
-				trashService.restoreFromTrash(uiSelectRestorePath.getTrashHomeNode(), 
-																			uiSelectRestorePath.getSrcPath(), 
-																			uiSelectRestorePath.getRepository(), 
-																			uiExplorer.getSessionProvider());
-    		UIPopupContainer uiPopupContainer = uiExplorer.getChild(UIPopupContainer.class);
-    		uiPopupContainer.removeChild(UISelectRestorePath.class);
-	    	uiExplorer.updateAjax(event);    		
-	    } catch (PathNotFoundException e) {
-	    	LOG.error("Path not found! Maybe, it was removed or path changed, can't restore node :" + trashNode.getPath());
-	    	JCRExceptionManager.process(uiApp, e);
-	    	event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
-	    } catch (LockException e) {
-	    	LOG.error("node is locked, can't restore node :" + trashNode.getPath());
-	    	JCRExceptionManager.process(uiApp, e);
-	    	event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
-	    } catch (VersionException e) {
-	    	LOG.error("node is checked in, can't restore node:" + trashNode.getPath());
-	    	JCRExceptionManager.process(uiApp, e);
-	    	event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
-	    } catch (AccessDeniedException e) {
-	    	LOG.error("access denied, can't restore of node:" + trashNode.getPath());
-	    	JCRExceptionManager.process(uiApp, e);
-	    	event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
-			} catch (ConstraintViolationException e) {
-	    	LOG.error("access denied, can't restore of node:" + trashNode.getPath());
-	    	JCRExceptionManager.process(uiApp, e);
-	    	event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
-	    } catch (Exception e) {
-	    	LOG.error("an unexpected error occurs", e);
-	    	JCRExceptionManager.process(uiApp, e);
-	    	event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
-	    }
+      UISelectRestorePath uiSelectRestorePath = event.getSource();
+      UIJCRExplorer uiExplorer = uiSelectRestorePath.getAncestorOfType(UIJCRExplorer.class);
+      UIApplication uiApp = uiSelectRestorePath.getAncestorOfType(UIApplication.class);
+      String fullRestorePath = uiSelectRestorePath.
+                                getChild(UIFormInputSetWithAction.class).
+                                getChild(UIFormStringInput.class).getValue();
+      int colonIndex = fullRestorePath.indexOf(':');
+      if (colonIndex == -1) return;
+      String restoreWorkspace = fullRestorePath.substring(0, colonIndex);
+      String restorePath = fullRestorePath.substring(colonIndex + 1);
+      Node trashNode = (Node)uiSelectRestorePath.getTrashHomeNode().getSession().getItem(uiSelectRestorePath.getSrcPath());
+      trashNode.setProperty(TrashService.RESTORE_WORKSPACE, restoreWorkspace);
+      trashNode.setProperty(TrashService.RESTORE_PATH, restorePath +
+                                                       (restorePath.endsWith("/") ? "" : '/') +
+                                                       trashNode.getName());
+      TrashService trashService = uiSelectRestorePath.getApplicationComponent(TrashService.class);
+      try {
+        trashService.restoreFromTrash(uiSelectRestorePath.getTrashHomeNode(),
+                                      uiSelectRestorePath.getSrcPath(),
+                                      uiSelectRestorePath.getRepository(),
+                                      uiExplorer.getSessionProvider());
+        UIPopupContainer uiPopupContainer = uiExplorer.getChild(UIPopupContainer.class);
+        uiPopupContainer.removeChild(UISelectRestorePath.class);
+        uiExplorer.updateAjax(event);
+      } catch (PathNotFoundException e) {
+        LOG.error("Path not found! Maybe, it was removed or path changed, can't restore node :" + trashNode.getPath());
+        JCRExceptionManager.process(uiApp, e);
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+      } catch (LockException e) {
+        LOG.error("node is locked, can't restore node :" + trashNode.getPath());
+        JCRExceptionManager.process(uiApp, e);
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+      } catch (VersionException e) {
+        LOG.error("node is checked in, can't restore node:" + trashNode.getPath());
+        JCRExceptionManager.process(uiApp, e);
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+      } catch (AccessDeniedException e) {
+        LOG.error("access denied, can't restore of node:" + trashNode.getPath());
+        JCRExceptionManager.process(uiApp, e);
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+      } catch (ConstraintViolationException e) {
+        LOG.error("access denied, can't restore of node:" + trashNode.getPath());
+        JCRExceptionManager.process(uiApp, e);
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+      } catch (Exception e) {
+        LOG.error("an unexpected error occurs", e);
+        JCRExceptionManager.process(uiApp, e);
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+      }
     }
   }
 

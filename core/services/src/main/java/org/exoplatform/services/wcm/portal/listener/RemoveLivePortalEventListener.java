@@ -33,7 +33,7 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
  * Created by The eXo Platform SAS
- * 
+ *
  * @author : Hoa.Pham hoa.pham@exoplatform.com Jun 23, 2008
  */
 public class RemoveLivePortalEventListener extends Listener<DataStorageImpl, PortalConfig> {
@@ -41,38 +41,38 @@ public class RemoveLivePortalEventListener extends Listener<DataStorageImpl, Por
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see org.exoplatform.services.listener.Listener#onEvent(org.exoplatform.services.listener.Event)
    */
   public void onEvent(Event<DataStorageImpl, PortalConfig> event) throws Exception {
-  	PortalConfig portalConfig = event.getData();
-  	if (!PortalConfig.PORTAL_TYPE.equals(portalConfig.getType())) return;
-  	String portalName = portalConfig.getName();
-  	LivePortalManagerService livePortalManagerService = WCMCoreUtils.getService(LivePortalManagerService.class);
-  	SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();    
-  	Node portal = livePortalManagerService.getLivePortal(sessionProvider, portalName);
-  	
-  	// Remove drive for the site content storage
-  	ManageDriveService manageDriveService = WCMCoreUtils.getService(ManageDriveService.class);    
-  	String repository = NodeLocation.make(portal).getRepository();
-  	try {
-  		manageDriveService.removeDrive(portalName, repository);
-  		log.info("Removed drive for portal: " + portalName);
-		} catch (Exception e) {
-			log.error("Error when remove drive for portal: " + portalName, e);
-		}
-  	
-  	// Remove initial artifacts for this portal
-  	RemovePortalArtifactsService removePortalArtifactsService = WCMCoreUtils.getService(RemovePortalArtifactsService.class);
-  	removePortalArtifactsService.invalidateArtifactsFromPortal(sessionProvider, portalName);
-		
-  	// Remove site content storage for the portal
-  	try {
-  		livePortalManagerService.removeLivePortal(sessionProvider, portalConfig);
-  		log.info("Removed resource storage for portal: " + portalName);
-		} catch (Exception e) {
-			log.error("Error when remove resource storage: " + portalName, e);
-		}
+    PortalConfig portalConfig = event.getData();
+    if (!PortalConfig.PORTAL_TYPE.equals(portalConfig.getType())) return;
+    String portalName = portalConfig.getName();
+    LivePortalManagerService livePortalManagerService = WCMCoreUtils.getService(LivePortalManagerService.class);
+    SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
+    Node portal = livePortalManagerService.getLivePortal(sessionProvider, portalName);
+
+    // Remove drive for the site content storage
+    ManageDriveService manageDriveService = WCMCoreUtils.getService(ManageDriveService.class);
+    String repository = NodeLocation.make(portal).getRepository();
+    try {
+      manageDriveService.removeDrive(portalName, repository);
+      log.info("Removed drive for portal: " + portalName);
+    } catch (Exception e) {
+      log.error("Error when remove drive for portal: " + portalName, e);
+    }
+
+    // Remove initial artifacts for this portal
+    RemovePortalArtifactsService removePortalArtifactsService = WCMCoreUtils.getService(RemovePortalArtifactsService.class);
+    removePortalArtifactsService.invalidateArtifactsFromPortal(sessionProvider, portalName);
+
+    // Remove site content storage for the portal
+    try {
+      livePortalManagerService.removeLivePortal(sessionProvider, portalConfig);
+      log.info("Removed resource storage for portal: " + portalName);
+    } catch (Exception e) {
+      log.error("Error when remove resource storage: " + portalName, e);
+    }
   }
 
 }

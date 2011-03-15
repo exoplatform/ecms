@@ -25,28 +25,28 @@ import java.util.Date;
  * Jun 9, 2009
  */
 public class NewsletterManagerConfig {
-  
+
   /** The newsletter name. */
   private String newsletterName;
-  
+
   /** The newsletter title. */
   private String newsletterTitle;
-  
+
   /** The newsletter sent date. */
   private Date newsletterSentDate;
-  
+
   /** The status. */
   private String status;
-  
+
   /** The subcription name. */
   private String subcriptionName;
-  
+
   /** The category name. */
   private String categoryName;
-  
+
   /**
    * Gets the category name.
-   * 
+   *
    * @return the category name
    */
   public String getCategoryName() {
@@ -55,7 +55,7 @@ public class NewsletterManagerConfig {
 
   /**
    * Sets the category name.
-   * 
+   *
    * @param categoryName the new category name
    */
   public void setCategoryName(String categoryName) {
@@ -64,7 +64,7 @@ public class NewsletterManagerConfig {
 
   /**
    * Gets the subcription name.
-   * 
+   *
    * @return the subcription name
    */
   public String getSubcriptionName() {
@@ -73,7 +73,7 @@ public class NewsletterManagerConfig {
 
   /**
    * Sets the subcription name.
-   * 
+   *
    * @param subcriptionName the new subcription name
    */
   public void setSubcriptionName(String subcriptionName) {
@@ -82,7 +82,7 @@ public class NewsletterManagerConfig {
 
   /**
    * Gets the newsletter name.
-   * 
+   *
    * @return the newsletter name
    */
   public String getNewsletterName() {
@@ -91,7 +91,7 @@ public class NewsletterManagerConfig {
 
   /**
    * Gets the newsletter sent date.
-   * 
+   *
    * @return the newsletter sent date
    */
   public Date getNewsletterSentDate() {
@@ -100,7 +100,7 @@ public class NewsletterManagerConfig {
 
   /**
    * Sets the newsletter sent date.
-   * 
+   *
    * @param newsletterSentDate the new newsletter sent date
    */
   public void setNewsletterSentDate(Date newsletterSentDate) {
@@ -109,7 +109,7 @@ public class NewsletterManagerConfig {
 
   /**
    * Sets the newsletter name.
-   * 
+   *
    * @param newsletterName the new newsletter name
    */
   public void setNewsletterName(String newsletterName) {
@@ -118,7 +118,7 @@ public class NewsletterManagerConfig {
 
   /**
    * Gets the newsletter title.
-   * 
+   *
    * @return the newsletter title
    */
   public String getNewsletterTitle() {
@@ -127,7 +127,7 @@ public class NewsletterManagerConfig {
 
   /**
    * Sets the newsletter title.
-   * 
+   *
    * @param newsletterTitle the new newsletter title
    */
   public void setNewsletterTitle(String newsletterTitle) {
@@ -136,7 +136,7 @@ public class NewsletterManagerConfig {
 
   /**
    * Gets the status.
-   * 
+   *
    * @return the status
    */
   public String getStatus() {
@@ -145,7 +145,7 @@ public class NewsletterManagerConfig {
 
   /**
    * Sets the status.
-   * 
+   *
    * @param status the new status
    */
   public void setStatus(String status) {

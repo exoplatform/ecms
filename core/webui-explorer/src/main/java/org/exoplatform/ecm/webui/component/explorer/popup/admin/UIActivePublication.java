@@ -76,17 +76,17 @@ import org.exoplatform.webui.form.UIForm;
   private static final Log LOG  = ExoLogger.getLogger("explorer.UIActivePublication");
   /**
    * Instantiates a new uI active publication.
-   * 
+   *
    * @throws Exception the exception
    */
   public UIActivePublication() throws Exception {
     configure(LIFECYCLE_NAME, LIFECYCLE_FIELDS, LIFECYCLE_ACTION);
-    getUIPageIterator().setId("LifecyclesIterator");    
+    getUIPageIterator().setId("LifecyclesIterator");
   }
 
   /**
    * Gets the actions.
-   * 
+   *
    * @return the actions
    */
   public String[] getActions() {
@@ -95,7 +95,7 @@ import org.exoplatform.webui.form.UIForm;
 
   /**
    * Update lifecycles grid.
-   * 
+   *
    * @throws Exception the exception
    */
   public void updateLifecyclesGrid() throws Exception {
@@ -103,7 +103,7 @@ import org.exoplatform.webui.form.UIForm;
     PublicationService publicationService = getApplicationComponent(PublicationService.class);
     Collection<PublicationPlugin> publicationPlugins = publicationService.getPublicationPlugins().values();
     if (publicationPlugins.size() != 0) {
-      for (PublicationPlugin publicationPlugin: publicationPlugins) {        
+      for (PublicationPlugin publicationPlugin: publicationPlugins) {
         PublicationLifecycleBean lifecycleBean = new PublicationLifecycleBean();
         lifecycleBean.setLifecycleName(publicationPlugin.getLifecycleName());
         lifecycleBean.setLifecycleDesc(publicationPlugin.getDescription());
@@ -112,25 +112,25 @@ import org.exoplatform.webui.form.UIForm;
     }
     ObjectPageList objectPageList = new ObjectPageList(publicationLifecycleBeans, 5);
     getUIPageIterator().setPageList(objectPageList);
-  } 
+  }
 
   public void enrolNodeInLifecycle(Node currentNode, String lifecycleName, WebuiRequestContext requestContext) throws Exception {
-    UIJCRExplorer uiJCRExplorer = getAncestorOfType(UIJCRExplorer.class);    
+    UIJCRExplorer uiJCRExplorer = getAncestorOfType(UIJCRExplorer.class);
     UIApplication uiApp = getAncestorOfType(UIApplication.class);
     UIPublicationManager uiPublicationManager = uiJCRExplorer.createUIComponent(
-        UIPublicationManager.class, null, null);       
+        UIPublicationManager.class, null, null);
     uiJCRExplorer.addLockToken(currentNode);
     Node parentNode = currentNode.getParent();
     uiJCRExplorer.addLockToken(parentNode);
     WCMPublicationService wcmPublicationService = getApplicationComponent(WCMPublicationService.class);
     PublicationPresentationService publicationPresentationService = getApplicationComponent(PublicationPresentationService.class);
-    try {            
-      if(!currentNode.isCheckedOut()) {        
-        uiApp.addMessage(new ApplicationMessage("UIActionBar.msg.node-checkedin", null, 
+    try {
+      if(!currentNode.isCheckedOut()) {
+        uiApp.addMessage(new ApplicationMessage("UIActionBar.msg.node-checkedin", null,
             ApplicationMessage.WARNING));
         requestContext.addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
         return;
-      }      
+      }
       String siteName = Util.getPortalRequestContext().getPortalOwner();
       String remoteUser = Util.getPortalRequestContext().getRemoteUser();
       wcmPublicationService.enrollNodeInLifecycle(currentNode, siteName, remoteUser);
@@ -154,20 +154,20 @@ import org.exoplatform.webui.form.UIForm;
     if(uiFormPublicationManager instanceof UIPopupComponent) {
       //TODO for future version, we need remove this code
       //This is special case for wcm which wants to more than 2 tabs in PublicationManager
-      //The uiForm in this case should be a UITabPane or UIFormTabPane and need be an UIPopupComponent      
+      //The uiForm in this case should be a UITabPane or UIFormTabPane and need be an UIPopupComponent
       UIPopupContainer.activate(uiFormPublicationManager,700,500);
     }else {
       uiPublicationManager.addChild(uiFormPublicationManager);
       uiPublicationManager.addChild(UIPublicationLogList.class, null, null).setRendered(false);
-      UIPublicationLogList uiPublicationLogList = uiPublicationManager.getChild(UIPublicationLogList.class);    
+      UIPublicationLogList uiPublicationLogList = uiPublicationManager.getChild(UIPublicationLogList.class);
       UIPopupContainer.activate(uiPublicationManager, 700, 500);
       uiPublicationLogList.setNode(currentNode);
-      uiPublicationLogList.updateGrid(); 
-    }    
+      uiPublicationLogList.updateGrid();
+    }
   }
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see org.exoplatform.ecm.webui.popup.UIPopupComponent#activate()
    */
   public void activate() throws Exception {
@@ -175,7 +175,7 @@ import org.exoplatform.webui.form.UIForm;
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see org.exoplatform.ecm.webui.popup.UIPopupComponent#deActivate()
    */
   public void deActivate() throws Exception {
@@ -184,13 +184,13 @@ import org.exoplatform.webui.form.UIForm;
   /**
    * The Class PublicationLifecycleBean.
    */
-  public class PublicationLifecycleBean {    
+  public class PublicationLifecycleBean {
     private String lifecycleName;
     private String lifecycleDesc;
 
     /**
      * Gets the lifecycle name.
-     * 
+     *
      * @return the lifecycle name
      */
     public String getLifecycleName() {
@@ -199,7 +199,7 @@ import org.exoplatform.webui.form.UIForm;
 
     /**
      * Sets the lifecycle name.
-     * 
+     *
      * @param lifecycleName the new lifecycle name
      */
     public void setLifecycleName(String lifecycleName) {
@@ -208,7 +208,7 @@ import org.exoplatform.webui.form.UIForm;
 
     /**
      * Gets the lifecycle desc.
-     * 
+     *
      * @return the lifecycle desc
      */
     public String getLifecycleDesc() {
@@ -217,7 +217,7 @@ import org.exoplatform.webui.form.UIForm;
 
     /**
      * Sets the lifecycle desc.
-     * 
+     *
      * @param lifecycleDesc the new lifecycle desc
      */
     public void setLifecycleDesc(String lifecycleDesc) {
@@ -232,14 +232,14 @@ import org.exoplatform.webui.form.UIForm;
    * the component's <code>addCancelActionListener<code> method. When
    * the cancelAction event occurs, that object's appropriate
    * method is invoked.
-   * 
+   *
    * @see CancelActionEvent
    */
   public static class CancelActionListener extends EventListener<UIActivePublication> {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
      */
     public void execute(Event<UIActivePublication> event) throws Exception {
@@ -255,14 +255,14 @@ import org.exoplatform.webui.form.UIForm;
    * component's <code>addEnrolActionListener<code> method. When
    * the enrolAction event occurs, that object's appropriate
    * method is invoked.
-   * 
+   *
    * @see EnrolActionEvent
    */
   public static class EnrolActionListener extends EventListener<UIActivePublication> {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
      */
     public void execute(Event<UIActivePublication> event) throws Exception {

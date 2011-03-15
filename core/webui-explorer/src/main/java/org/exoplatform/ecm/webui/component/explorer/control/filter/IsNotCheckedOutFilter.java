@@ -28,18 +28,18 @@ import org.exoplatform.webui.ext.filter.UIExtensionFilterType;
  * Created by The eXo Platform SARL
  * Author : Hoang Van Hung
  *          hunghvit@gmail.com
- * Aug 6, 2009  
+ * Aug 6, 2009
  */
 public class IsNotCheckedOutFilter extends UIExtensionAbstractFilter {
 
   public IsNotCheckedOutFilter() {
     this("UIActionBar.msg.node-checkedin");
   }
-  
+
   public IsNotCheckedOutFilter(String messageKey) {
     super(messageKey, UIExtensionFilterType.MANDATORY);
   }
-  
+
   public boolean accept(Map<String, Object> context) throws Exception {
     if (context == null) return true;
     Node currentNode = (Node) context.get(Node.class.getName());
@@ -47,5 +47,5 @@ public class IsNotCheckedOutFilter extends UIExtensionAbstractFilter {
   }
 
   public void onDeny(Map<String, Object> context) throws Exception {}
-  
+
 }

@@ -25,66 +25,66 @@ import org.exoplatform.services.jcr.ext.common.SessionProvider;
 
 /**
  * Created by The eXo Platform SAS.
- * 
+ *
  * @author : Hoa.Pham
  * hoa.pham@exoplatform.com
  * May 28, 2008
  */
 public interface WebSchemaConfigService {
-  
+
   /**
    * Adds the web schema handler.
-   * 
+   *
    * @param plugin the plugin
-   * 
+   *
    * @throws Exception the exception
    */
-  public void addWebSchemaHandler(ComponentPlugin plugin) throws Exception;  
-  
+  public void addWebSchemaHandler(ComponentPlugin plugin) throws Exception;
+
   /**
    * Gets the all web schema handler.
-   * 
+   *
    * @return the all web schema handler
-   * 
+   *
    * @throws Exception the exception
    */
-  public Collection<WebSchemaHandler> getAllWebSchemaHandler() throws Exception;  
-  
+  public Collection<WebSchemaHandler> getAllWebSchemaHandler() throws Exception;
+
   /**
    * Gets the web schema handler by type.
-   * 
+   *
    * @param clazz the clazz
-   * 
+   *
    * @return the web schema handler by type
    */
-  public <T extends WebSchemaHandler> T getWebSchemaHandlerByType(Class<T> clazz);  
-  
+  public <T extends WebSchemaHandler> T getWebSchemaHandlerByType(Class<T> clazz);
+
   /**
    * Call this method when a node is created in observed tree.
-   * 
+   *
    * @param node the node
    * @param sessionProvider the session provider
-   * 
+   *
    * @throws Exception the exception
    */
   public void createSchema(SessionProvider sessionProvider, final Node node) throws Exception;
-  
+
   /**
    * Update schema when a node is modified.
-   * 
+   *
    * @param node the node
    * @param sessionProvider the session provider
-   * 
+   *
    * @throws Exception the exception
    */
   public void updateSchemaOnModify(SessionProvider sessionProvider, final Node node) throws Exception;
-  
+
   /**
    * Update schema on when a node is removed.
-   * 
+   *
    * @param node the node
    * @param sessionProvider the session provider
-   * 
+   *
    * @throws Exception the exception
    */
   public void updateSchemaOnRemove(SessionProvider sessionProvider, final Node node) throws Exception;

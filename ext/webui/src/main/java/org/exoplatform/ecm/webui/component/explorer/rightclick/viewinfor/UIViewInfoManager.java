@@ -33,10 +33,10 @@ import org.exoplatform.webui.core.lifecycle.UIContainerLifecycle;
 public class UIViewInfoManager extends UIContainer implements UIPopupComponent {
 
   /**
-   * the node that is selected by right clicking 
+   * the node that is selected by right clicking
    */
   private Node selectedNode;
-  
+
   /**
    * the constructor
    * @throws Exception
@@ -44,7 +44,7 @@ public class UIViewInfoManager extends UIContainer implements UIPopupComponent {
   public UIViewInfoManager() throws Exception {
     addChild(UIViewInfoContainer.class, null, null);
   }
-  
+
   /**
    * get selected node
    * @return selected node
@@ -60,8 +60,8 @@ public class UIViewInfoManager extends UIContainer implements UIPopupComponent {
   public void setSelectedNode(Node selectedNode) {
     this.selectedNode = selectedNode;
   }
-  
-  public void activate() throws Exception { 
+
+  public void activate() throws Exception {
     getChild(UIViewInfoContainer.class).readNodeInformation();
   }
 

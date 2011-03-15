@@ -39,130 +39,130 @@ import org.exoplatform.services.wcm.friendly.impl.FriendlyConfig.Friendly;
 @ManagedDescription("Friendly service")
 @RESTEndpoint(path = "friendlyservice")
 public class FriendlyServiceImpl implements FriendlyService {
-	
-	private String servletName = "content";
-	
-	private boolean isEnabled = false;
-	
-	private Map<String, String> friendlies;
-	private Map<String, String> unfriendlies;
+
+  private String servletName = "content";
+
+  private boolean isEnabled = false;
+
+  private Map<String, String> friendlies;
+  private Map<String, String> unfriendlies;
 
     private static final Log log  = ExoLogger.getLogger(FriendlyServiceImpl.class);
 
-	public FriendlyServiceImpl(InitParams initParams) {
-		friendlies = new LinkedHashMap<String, String>(5);
-		unfriendlies = new LinkedHashMap<String, String>(5);
-		if (initParams!=null) init(initParams);
-	}
-	
-	private void init(InitParams initParams) {
-		
-	    ValueParam enabled = initParams.getValueParam("enabled");
-	    ValueParam servletName = initParams.getValueParam("servletName");
-		
-	    if (enabled!=null) {
-	    	if ("true".equals(enabled.getValue())) {
-	    		isEnabled = true;
-	    	}
-	    }
-	    if (log.isInfoEnabled()) log.info("isEnabled:"+isEnabled);
-	    if (servletName!=null) {
-	    	this.servletName = servletName.getValue();
-	    }
-	    if (log.isInfoEnabled()) log.info("servletName:"+this.servletName);
-	    
-	    ObjectParameter objectParam = initParams.getObjectParam("friendlies.configuration");
-	    if (objectParam != null) {
-	    	FriendlyConfig config = (FriendlyConfig)objectParam.getObject();
-	    	for (Friendly friendly:config.getFriendlies()) {
-	    		this.addFriendly(friendly.getFriendlyUri(), friendly.getUnfriendlyUri());
-	    	}
-	    }
-	}
+  public FriendlyServiceImpl(InitParams initParams) {
+    friendlies = new LinkedHashMap<String, String>(5);
+    unfriendlies = new LinkedHashMap<String, String>(5);
+    if (initParams!=null) init(initParams);
+  }
 
-	public void addConfiguration(FriendlyPlugin plugin) {
-		this.init(plugin.getInitParams());
-	}
+  private void init(InitParams initParams) {
 
-	
+      ValueParam enabled = initParams.getValueParam("enabled");
+      ValueParam servletName = initParams.getValueParam("servletName");
+
+      if (enabled!=null) {
+        if ("true".equals(enabled.getValue())) {
+          isEnabled = true;
+        }
+      }
+      if (log.isInfoEnabled()) log.info("isEnabled:"+isEnabled);
+      if (servletName!=null) {
+        this.servletName = servletName.getValue();
+      }
+      if (log.isInfoEnabled()) log.info("servletName:"+this.servletName);
+
+      ObjectParameter objectParam = initParams.getObjectParam("friendlies.configuration");
+      if (objectParam != null) {
+        FriendlyConfig config = (FriendlyConfig)objectParam.getObject();
+        for (Friendly friendly:config.getFriendlies()) {
+          this.addFriendly(friendly.getFriendlyUri(), friendly.getUnfriendlyUri());
+        }
+      }
+  }
+
+  public void addConfiguration(FriendlyPlugin plugin) {
+    this.init(plugin.getInitParams());
+  }
+
+
     @Managed
     @ManagedDescription("Is the service enabled ?")
-	public boolean isEnabled() {
-		return isEnabled;
-	}
-	
+  public boolean isEnabled() {
+    return isEnabled;
+  }
+
     @Managed
     @ManagedDescription("Is the service enabled ?")
-	public void setEnabled(@ManagedDescription("Enable/Disable this service ?") @ManagedName("isEnabled") boolean isEnabled) {
-		this.isEnabled = isEnabled;
-	}
-	
+  public void setEnabled(@ManagedDescription("Enable/Disable this service ?") @ManagedName("isEnabled") boolean isEnabled) {
+    this.isEnabled = isEnabled;
+  }
+
     @Managed
     @ManagedDescription("The servlet name referenced in this service")
-	public String getServletName() {
-		return servletName;
-	}
+  public String getServletName() {
+    return servletName;
+  }
 
-	public void setServletName(String servletName) {
-		this.servletName = servletName;
-	}
+  public void setServletName(String servletName) {
+    this.servletName = servletName;
+  }
 
     @Managed
     @ManagedDescription("Add a new friendly in the list")
-	public void addFriendly(@ManagedDescription("The friendly Uri") @ManagedName("friendlyUri") String friendlyUri, 
-			@ManagedDescription("The unfriendly Uri") @ManagedName("unfriendlyUri") String unfriendlyUri) {
-		if (!friendlies.containsKey(friendlyUri)) {
-		  if (log.isInfoEnabled()) log.info("addFriendly::"+friendlyUri+"::"+unfriendlyUri+ "::");
-		  this.friendlies.put(friendlyUri, unfriendlyUri);
-		  this.unfriendlies.put(unfriendlyUri, friendlyUri);
-		}
-	}
+  public void addFriendly(@ManagedDescription("The friendly Uri") @ManagedName("friendlyUri") String friendlyUri,
+      @ManagedDescription("The unfriendly Uri") @ManagedName("unfriendlyUri") String unfriendlyUri) {
+    if (!friendlies.containsKey(friendlyUri)) {
+      if (log.isInfoEnabled()) log.info("addFriendly::"+friendlyUri+"::"+unfriendlyUri+ "::");
+      this.friendlies.put(friendlyUri, unfriendlyUri);
+      this.unfriendlies.put(unfriendlyUri, friendlyUri);
+    }
+  }
 
-	public String getFriendlyUri(String unfriendlyUri) {
+  public String getFriendlyUri(String unfriendlyUri) {
 
-		if (!isEnabled) return unfriendlyUri;
-		
-		for (String unf : unfriendlies.keySet()) {
-			if (unfriendlyUri.contains(unf)) {
-				String fr = unfriendlies.get(unf);
+    if (!isEnabled) return unfriendlyUri;
+
+    for (String unf : unfriendlies.keySet()) {
+      if (unfriendlyUri.contains(unf)) {
+        String fr = unfriendlies.get(unf);
 //				String target = unfriendlyUri.substring(unfriendlyUri.indexOf(unf));
-				return unfriendlyUri.replace(unf, "/"+getServletName()+"/"+fr);
-			}
-		}
+        return unfriendlyUri.replace(unf, "/"+getServletName()+"/"+fr);
+      }
+    }
 
-		return unfriendlyUri;
-	}
+    return unfriendlyUri;
+  }
 
-	public String getUnfriendlyUri(String friendlyUri) {
-		if (!isEnabled) return friendlyUri;
+  public String getUnfriendlyUri(String friendlyUri) {
+    if (!isEnabled) return friendlyUri;
 
-		String friendly = "/"+getServletName()+"/";
-		int start = friendlyUri.indexOf(friendly) + friendly.length();
-		int end = friendlyUri.substring(start).indexOf("/");
-		String furi = friendlyUri.substring(start, start+end);
-		if (friendlies.containsKey(furi)) {
-			String unf = friendlies.get(furi);
-			String target = unf+friendlyUri.substring(start+end);
-			return target;
-		}
-		
-		return friendlyUri;
-	}
+    String friendly = "/"+getServletName()+"/";
+    int start = friendlyUri.indexOf(friendly) + friendly.length();
+    int end = friendlyUri.substring(start).indexOf("/");
+    String furi = friendlyUri.substring(start, start+end);
+    if (friendlies.containsKey(furi)) {
+      String unf = friendlies.get(furi);
+      String target = unf+friendlyUri.substring(start+end);
+      return target;
+    }
+
+    return friendlyUri;
+  }
 
     @Managed
     @ManagedDescription("Remove a friendly in the list")
-	public void removeFriendly(@ManagedDescription("The friendly Uri") @ManagedName("friendlyUri") String friendlyUri) {
-		if (friendlies.containsKey(friendlyUri)) {
-			String unf = this.friendlies.get(friendlyUri);
-			friendlies.remove(friendlyUri);
-			unfriendlies.remove(unf);
-		}
-	}
+  public void removeFriendly(@ManagedDescription("The friendly Uri") @ManagedName("friendlyUri") String friendlyUri) {
+    if (friendlies.containsKey(friendlyUri)) {
+      String unf = this.friendlies.get(friendlyUri);
+      friendlies.remove(friendlyUri);
+      unfriendlies.remove(unf);
+    }
+  }
 
     @Managed
     @ManagedDescription("The list of registered friendlies")
-	public Map<String, String> getFriendlies() {
-		return friendlies;
-	}
+  public Map<String, String> getFriendlies() {
+    return friendlies;
+  }
 
 }

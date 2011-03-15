@@ -40,65 +40,65 @@ import org.exoplatform.services.log.Log;
  */
 public class LinkDeploymentPlugin extends DeploymentPlugin {
 
-	/** The init params. */
-	private InitParams initParams;
+  /** The init params. */
+  private InitParams initParams;
 
-	/** The repository service. */
-	private RepositoryService repositoryService;
+  /** The repository service. */
+  private RepositoryService repositoryService;
 
-	/** The link manager service. */
-	private LinkManager linkManager;
+  /** The link manager service. */
+  private LinkManager linkManager;
 
-	/** The log. */
-	private Log log = ExoLogger.getLogger(this.getClass());
+  /** The log. */
+  private Log log = ExoLogger.getLogger(this.getClass());
 
-	/**
-	 * Instantiates a new xML deployment plugin.
-	 * 
-	 * @param initParams the init params
-	 * @param configurationManager the configuration manager
-	 * @param repositoryService the repository service
-	 * @param publicationService the publication service
-	 */
-	public LinkDeploymentPlugin(InitParams initParams, RepositoryService repositoryService, LinkManager linkManager, TaxonomyService taxonomyService) {
-		this.initParams = initParams;
-		this.repositoryService = repositoryService;
-		this.linkManager = linkManager;
-	}
+  /**
+   * Instantiates a new xML deployment plugin.
+   *
+   * @param initParams the init params
+   * @param configurationManager the configuration manager
+   * @param repositoryService the repository service
+   * @param publicationService the publication service
+   */
+  public LinkDeploymentPlugin(InitParams initParams, RepositoryService repositoryService, LinkManager linkManager, TaxonomyService taxonomyService) {
+    this.initParams = initParams;
+    this.repositoryService = repositoryService;
+    this.linkManager = linkManager;
+  }
 
-	/* (non-Javadoc)
-	 * @see org.exoplatform.services.deployment.DeploymentPlugin#deploy(org.exoplatform.services.jcr.ext.common.SessionProvider)
-	 */
-	@SuppressWarnings("unchecked")
-	public void deploy(SessionProvider sessionProvider) throws Exception {
-		Iterator iterator = initParams.getObjectParamIterator();    
-		while(iterator.hasNext()) {
-			ObjectParameter objectParameter = (ObjectParameter)iterator.next();
-			LinkDeploymentDescriptor deploymentDescriptor = (LinkDeploymentDescriptor)objectParameter.getObject();
-			String sourcePath = deploymentDescriptor.getSourcePath();
-			String targetPath = deploymentDescriptor.getTargetPath();
-			// sourcePath should looks like : repository:collaboration:/sites content/live/acme
+  /* (non-Javadoc)
+   * @see org.exoplatform.services.deployment.DeploymentPlugin#deploy(org.exoplatform.services.jcr.ext.common.SessionProvider)
+   */
+  @SuppressWarnings("unchecked")
+  public void deploy(SessionProvider sessionProvider) throws Exception {
+    Iterator iterator = initParams.getObjectParamIterator();
+    while(iterator.hasNext()) {
+      ObjectParameter objectParameter = (ObjectParameter)iterator.next();
+      LinkDeploymentDescriptor deploymentDescriptor = (LinkDeploymentDescriptor)objectParameter.getObject();
+      String sourcePath = deploymentDescriptor.getSourcePath();
+      String targetPath = deploymentDescriptor.getTargetPath();
+      // sourcePath should looks like : repository:collaboration:/sites content/live/acme
 
-			String[] src = sourcePath.split(":");
-			String[] tgt = targetPath.split(":");
+      String[] src = sourcePath.split(":");
+      String[] tgt = targetPath.split(":");
 
-			if (src.length==3 && tgt.length==3) {
-				ManageableRepository repository = repositoryService.getRepository(src[0]);
-				Session session = sessionProvider.getSession(src[1], repository);
-				ManageableRepository repository2 = repositoryService.getRepository(tgt[0]);
-				Session session2 = sessionProvider.getSession(tgt[1], repository2);
-				try {
-					Node nodeSrc = session.getRootNode().getNode(src[2].substring(1));
-					Node nodeTgt = session2.getRootNode().getNode(tgt[2].substring(1));
-					linkManager.createLink(nodeTgt, "exo:taxonomyLink", nodeSrc);
-				} finally {
-					session.logout();
-					session2.logout();
-				}
-			}
-			if(log.isInfoEnabled()) {
-				log.info(sourcePath + " has a link into "+targetPath);
-			}
-		}   
-	}
+      if (src.length==3 && tgt.length==3) {
+        ManageableRepository repository = repositoryService.getRepository(src[0]);
+        Session session = sessionProvider.getSession(src[1], repository);
+        ManageableRepository repository2 = repositoryService.getRepository(tgt[0]);
+        Session session2 = sessionProvider.getSession(tgt[1], repository2);
+        try {
+          Node nodeSrc = session.getRootNode().getNode(src[2].substring(1));
+          Node nodeTgt = session2.getRootNode().getNode(tgt[2].substring(1));
+          linkManager.createLink(nodeTgt, "exo:taxonomyLink", nodeSrc);
+        } finally {
+          session.logout();
+          session2.logout();
+        }
+      }
+      if(log.isInfoEnabled()) {
+        log.info(sourcePath + " has a link into "+targetPath);
+      }
+    }
+  }
 }

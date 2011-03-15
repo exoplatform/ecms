@@ -22,17 +22,17 @@ import org.exoplatform.commons.utils.PageList;
  * Created by The eXo Platform SARL
  * Author : Dang Van Minh
  *          minh.dang@exoplatform.com
- * Jun 13, 2008  
+ * Jun 13, 2008
  */
 abstract public class ExtensiblePageList extends PageList {
-  
+
   public ExtensiblePageList(int arg0) {
     super(arg0);
   }
 
   abstract public long getPageNumberEstimate() ;
-  
+
   abstract public int getRealNumberNodes() ;
-  
+
   abstract public boolean isEndOfIterator() ;
 }

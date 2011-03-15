@@ -25,7 +25,7 @@ import org.exoplatform.webui.core.lifecycle.UIContainerLifecycle;
  * Created by The eXo Platform SARL
  * Author : Hoang Van Hung
  *          hunghvit@gmail.com
- * Apr 5, 2009  
+ * Apr 5, 2009
  */
 
 @ComponentConfig(

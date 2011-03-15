@@ -25,7 +25,7 @@ import org.exoplatform.webui.form.UIFormStringInput;
  * Created by The eXo Platform SARL
  * Author : Pham Tuan
  *          tuan.pham@exoplatform.com
- * Aug 8, 2007  
+ * Aug 8, 2007
  */
 @ComponentConfig(template = "classpath:groovy/ecm/webui/form/UIFormInputSetWithAction.gtmpl")
 public class UIWizardStep3 extends UIFormInputSetWithAction {
@@ -43,7 +43,7 @@ public class UIWizardStep3 extends UIFormInputSetWithAction {
     addChild(new UIFormStringInput(FIELD_INDEXPATH, FIELD_INDEXPATH, null)) ;
     addChild(new UIFormCheckBoxInput<Boolean>(FIELD_ISCACHE, FIELD_ISCACHE, null)) ;
     addChild(new UIFormStringInput(FIELD_MAXSIZE, FIELD_MAXSIZE, null)) ;
-    addChild(new UIFormStringInput(FIELD_LIVETIME, FIELD_LIVETIME, null)) ;     
+    addChild(new UIFormStringInput(FIELD_LIVETIME, FIELD_LIVETIME, null)) ;
   }
   protected void setFieldQueryHandler(String queryHandler) {
     getUIStringInput(FIELD_QUERYHANDLER).setValue(queryHandler) ;

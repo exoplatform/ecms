@@ -26,7 +26,7 @@ import org.exoplatform.webui.form.validator.Validator;
  * Author : Ly Dinh Quang
  *          quang.ly@exoplatform.com
  *			    xxx5669@yahoo.com
- * Jul 9, 2008  
+ * Jul 9, 2008
  */
 public class SearchValidator implements Validator {
   public void validate(UIFormInput uiInput) throws Exception {
@@ -38,7 +38,7 @@ public class SearchValidator implements Validator {
     switch (inputValue.length()) {
       case 1:
         checkOneChar(inputValue, uiInput);
-        break;      
+        break;
       case 2:
         checkTwoChars(inputValue, uiInput);
         break;
@@ -47,69 +47,69 @@ public class SearchValidator implements Validator {
         break;
     }
   }
-  
+
   private void checkOneChar(String s, UIFormInput uiInput) throws MessageException {
-    String[] arrFilterChars = {"+", "-", "&", "|", "!", "(", ")", "{", "}", "[", "]", "^", "\"", 
-        "~", "*", "?", ":", "\\"};                                
+    String[] arrFilterChars = {"+", "-", "&", "|", "!", "(", ")", "{", "}", "[", "]", "^", "\"",
+        "~", "*", "?", ":", "\\"};
     if (checkArr(s, arrFilterChars)) {
-      throwException("SearchValidator.msg.Invalid-char", uiInput);     
+      throwException("SearchValidator.msg.Invalid-char", uiInput);
     }
   }
-  
+
   private void checkTwoChars(String s, UIFormInput uiInput) throws MessageException {
     String s2 = "";
     if (s.startsWith("+") || s.startsWith("-") || s.startsWith("!")) {
       s2 = s.substring(1, 2);
-      checkOneChar(s2, uiInput);   
-    } else if (s.endsWith("~") || s.endsWith("?") || s.endsWith("*")) {      
+      checkOneChar(s2, uiInput);
+    } else if (s.endsWith("~") || s.endsWith("?") || s.endsWith("*")) {
       s2 = s.substring(0, 1);
-      String[] arrFilterChars1 = {"+", "-", "&", "|", "!", "(", ")", "{", "}", "[", "]", "^", "\"", 
+      String[] arrFilterChars1 = {"+", "-", "&", "|", "!", "(", ")", "{", "}", "[", "]", "^", "\"",
           ":", "\\"};
-      if (checkArr(s2, arrFilterChars1)) { 
+      if (checkArr(s2, arrFilterChars1)) {
         throwException("SearchValidator.msg.Invalid-char", uiInput);
       }
-    } else {     
+    } else {
       String s3 = s.substring(0, 1);
       String s4 = s.substring(1, 2);
-      
-      String[] arrFilterChars2 = {"+", "-", "&", "|", "!", "(", ")", "{", "}", "[", "]", "^", "\"", 
-          "~", "*", "?", ":", "\\"};     
+
+      String[] arrFilterChars2 = {"+", "-", "&", "|", "!", "(", ")", "{", "}", "[", "]", "^", "\"",
+          "~", "*", "?", ":", "\\"};
       if (checkArr(s3, arrFilterChars2)) {
-        throwException("SearchValidator.msg.Invalid-char", uiInput);       
-      }      
+        throwException("SearchValidator.msg.Invalid-char", uiInput);
+      }
       if (checkArr(s4, arrFilterChars2)) {
-        throwException("SearchValidator.msg.Invalid-char", uiInput);         
-      }      
-    }    
+        throwException("SearchValidator.msg.Invalid-char", uiInput);
+      }
+    }
   }
-  
+
   private void checkMoreChars(String s, UIFormInput uiInput) throws MessageException {
     String[] arrFilterChars = {"-", "&&", "||", "!", "(", ")", "}", "]", "^", ":", "&", "|"};
     for (String filter : arrFilterChars) {
       if (s.startsWith(filter)) { throwException("SearchValidator.msg.Invalid-char", uiInput); }
-    }    
-    String[] arrFilterChars2 = {"+", "-", "&&", "||", "!", "(", ")", "{", "}", "[", "]", "^", "\"", 
+    }
+    String[] arrFilterChars2 = {"+", "-", "&&", "||", "!", "(", ")", "{", "}", "[", "]", "^", "\"",
         "~", "*", "?", ":", "\\", "&", "|"};
     for (String filter : arrFilterChars2) {
-      int index = s.indexOf(filter);      
-      if (index > -1 && !checkBackSlash(s, index)) {        
+      int index = s.indexOf(filter);
+      if (index > -1 && !checkBackSlash(s, index)) {
         //Check FuzzySearch
-        if (filter.equals("~")) {          
+        if (filter.equals("~")) {
           if (index == 0) {
             String regex = "~\\w+";
             if (!s.matches(regex)) { throwException("SearchValidator.msg.Invalid-char", uiInput); }
           } else {
-            if (checkChar(s, index, -1, " ") || checkChar(s, index, +1, " ")) { 
+            if (checkChar(s, index, -1, " ") || checkChar(s, index, +1, " ")) {
               throwException("SearchValidator.msg.Invalid-char4", uiInput);
             } else if (checkChar(s, index, -1, "\"")) {
               int x = s.indexOf("\"");
               if (x > -1 && x != index - 1) {
                 try {
-                  String subString = concatSpace(s.substring(index + 1, s.length()));                
-                  Double.parseDouble(subString);                
+                  String subString = concatSpace(s.substring(index + 1, s.length()));
+                  Double.parseDouble(subString);
                 } catch (Exception e) {
                   throwException("SearchValidator.msg.Invalid-char2", uiInput);
-                }              
+                }
               } else {
                 throwException("SearchValidator.msg.Invalid-char", uiInput);
               }
@@ -127,18 +127,18 @@ public class SearchValidator implements Validator {
             }
           }
         } else if (filter.equals("^")) {
-          if (checkChar(s, index, -1, " ") || checkChar(s, index, +1, " ")) { 
+          if (checkChar(s, index, -1, " ") || checkChar(s, index, +1, " ")) {
             throwException("SearchValidator.msg.Invalid-char5", uiInput);
           } else {
-            String subString = concatSpace(s.substring(index + 1, s.length()));            
+            String subString = concatSpace(s.substring(index + 1, s.length()));
             try {
-              Double.parseDouble(subString);              
+              Double.parseDouble(subString);
             } catch (NumberFormatException e) {
               throwException("SearchValidator.msg.Invalid-char3", uiInput);
             }
           }
         } else {
-          if (filter.equals("*") || filter.equals("?")) { return; }          
+          if (filter.equals("*") || filter.equals("?")) { return; }
           throwException("SearchValidator.msg.Invalid-char", uiInput);
 //        } else if (filter.equals("[") || filter.equals("]")) {
 //          String regex = "\\w*\\[\\w+ [Tt][Oo] \\w+\\]\\w*";
@@ -148,22 +148,22 @@ public class SearchValidator implements Validator {
         }
       }
     }
-  } 
-    
+  }
+
   private boolean checkChar(String s, int index, int forward, String c) {
     if (index == 0 || (index + forward == s.length())) { return false; }
     String charToString = String.valueOf(s.charAt(index + forward));
     if (charToString.equals(c)) { return true; }
     return false;
   }
-  
-  private boolean checkBackSlash(String s, int index) {    
+
+  private boolean checkBackSlash(String s, int index) {
     if (index == 0) { return false; }
     String charToString = String.valueOf(s.charAt(index - 1));
     if (charToString.equalsIgnoreCase("\\")) { return true; }
     return false;
   }
-  
+
   private boolean checkArr(String s, String[] arrFilterChars) {
     for (String filter : arrFilterChars) {
       if (s.equals(filter)) {
@@ -172,7 +172,7 @@ public class SearchValidator implements Validator {
     }
     return false;
   }
-  
+
   private String concatSpace(String s) {
     char[] arrayChar = s.toCharArray();
     int index = 0;
@@ -185,7 +185,7 @@ public class SearchValidator implements Validator {
     if (index != 0) { return s.substring(0, index); }
     return s;
   }
-  
+
   private void throwException(String s, UIFormInput uiInput) throws MessageException {
     Object[] args = { uiInput.getName() };
     throw new MessageException(new ApplicationMessage(s, args, ApplicationMessage.WARNING));

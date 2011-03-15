@@ -36,7 +36,7 @@ import org.exoplatform.webui.form.UIFormSelectBox;
  * Created by The eXo Platform SAS
  * Author : eXoPlatform
  *          exo@exoplatform.com
- * Feb 2, 2010  
+ * Feb 2, 2010
  */
 @ComponentConfig(
                  lifecycle = UIFormLifecycle.class,
@@ -48,23 +48,23 @@ public class UIEditingForm extends UIForm {
 
   /** The Constant PUBLISHED. */
   public static final String PUBLISHED = "Published";
-  
+
   /** The Constant DRAFT. */
   public static final String DRAFT = "Draft";
-  
+
   /** The Constant EDITING_OPTIONS. */
   public static final String EDITING_OPTIONS = "EditingOptions";
-  
+
   public UIEditingForm() {
     List<SelectItemOption<String>> editingOptions = new ArrayList<SelectItemOption<String>>();
     editingOptions.add(new SelectItemOption<String>(PUBLISHED, PUBLISHED));
     editingOptions.add(new SelectItemOption<String>(DRAFT, DRAFT));
-    
+
     UIFormSelectBox orderBySelectBox = new UIFormSelectBox(EDITING_OPTIONS, EDITING_OPTIONS, editingOptions);
     orderBySelectBox.setOnChange("ChangeEditing");
     addChild(orderBySelectBox);
   }
-  
+
   /**
    * The listener interface for receiving changeRepositoryAction events.
    * The class that is interested in processing a changeRepositoryAction
@@ -73,11 +73,11 @@ public class UIEditingForm extends UIForm {
    * component's <code>addChangeRepositoryActionListener<code> method. When
    * the changeRepositoryAction event occurs, that object's appropriate
    * method is invoked.
-   * 
+   *
    * @see ChangeRepositoryActionEvent
    */
   public static class ChangeEditingActionListener extends EventListener<UIEditingForm> {
-    
+
     /* (non-Javadoc)
      * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
      */

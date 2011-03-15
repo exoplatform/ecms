@@ -20,11 +20,11 @@ package org.exoplatform.services.ecm.publication;
  * Created by The eXo Platform SAS
  * Author : Romain Dénarié
  *          romain.denarie@exoplatform.com
- * 7 mai 08  
+ * 7 mai 08
  */
 @SuppressWarnings("serial")
 public class AlreadyInPublicationLifecycleException extends Exception {
-  
+
   /**
    * Constructs an Exception without a message.
    */
@@ -40,7 +40,7 @@ public class AlreadyInPublicationLifecycleException extends Exception {
   public AlreadyInPublicationLifecycleException(String message) {
     super(message);
   }
-  
+
   public AlreadyInPublicationLifecycleException(String message, Throwable cause) {
     super(message, cause);
   }

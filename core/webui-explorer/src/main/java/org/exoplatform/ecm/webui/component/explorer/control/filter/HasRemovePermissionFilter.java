@@ -28,32 +28,32 @@ import org.exoplatform.webui.ext.filter.UIExtensionFilterType;
  * Created by The eXo Platform SARL
  * Author : Nguyen Anh Vu
  *          anhvurz90@gmail.com
- * Nov 2, 2009  
+ * Nov 2, 2009
  * 2:06:49 PM
  */
 public class HasRemovePermissionFilter extends UIExtensionAbstractFilter {
-	
-	public HasRemovePermissionFilter() {
-		this(null);
-	}
-	
-	public HasRemovePermissionFilter(String messageKey) {
-		super(messageKey, UIExtensionFilterType.MANDATORY);
-	}
-	
-	public static boolean hasRemovePermission(Node node) throws Exception {
-		try {
-			return PermissionUtil.canRemoveNode(node);
-		} catch (Exception ex) {
-			return true;
-		}
-	}
-	
-	public boolean accept(Map<String, Object> context) throws Exception {
-	    if (context == null) return true;
-	    Node currentNode = (Node) context.get(Node.class.getName());
-	    return hasRemovePermission(currentNode);
-	}
-	
-	public void onDeny(Map<String, Object> context) throws Exception {  }	
+
+  public HasRemovePermissionFilter() {
+    this(null);
+  }
+
+  public HasRemovePermissionFilter(String messageKey) {
+    super(messageKey, UIExtensionFilterType.MANDATORY);
+  }
+
+  public static boolean hasRemovePermission(Node node) throws Exception {
+    try {
+      return PermissionUtil.canRemoveNode(node);
+    } catch (Exception ex) {
+      return true;
+    }
+  }
+
+  public boolean accept(Map<String, Object> context) throws Exception {
+      if (context == null) return true;
+      Node currentNode = (Node) context.get(Node.class.getName());
+      return hasRemovePermission(currentNode);
+  }
+
+  public void onDeny(Map<String, Object> context) throws Exception {  }
 }

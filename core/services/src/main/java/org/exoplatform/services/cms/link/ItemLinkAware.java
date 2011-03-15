@@ -36,41 +36,41 @@ import javax.jcr.version.VersionException;
  * Created by The eXo Platform SAS
  * Author : eXoPlatform
  *          nicolas.filotto@exoplatform.com
- * 1 avr. 2009  
+ * 1 avr. 2009
  */
 public abstract class ItemLinkAware implements Item {
 
   protected final Item item;
   protected final String virtualPath;
   protected final Session originalSession;
-  
+
   protected ItemLinkAware(Session originalSession, String virtualPath, Item item) {
     this.originalSession = originalSession;
     this.item = item;
     if (!virtualPath.startsWith("/")) {
       throw new IllegalArgumentException("The path '" + virtualPath +  "' must be an absolute path");
-    }    
+    }
     this.virtualPath = virtualPath;
   }
-  
+
   public static ItemLinkAware newInstance(Session originalSession, String originalAbsPath, Item item) {
     if (item instanceof Node) {
       return new NodeLinkAware(originalSession, originalAbsPath, (Node) item);
     } else {
       return new PropertyLinkAware(originalSession, originalAbsPath, (Property) item);
-    }    
+    }
   }
-  
+
   /**
    * {@inheritDoc}
-   */  
+   */
   public void accept(ItemVisitor visitor) throws RepositoryException {
     item.accept(visitor);
   }
 
   /**
    * {@inheritDoc}
-   */  
+   */
   public Item getAncestor(int depth) throws ItemNotFoundException,
                                    AccessDeniedException,
                                    RepositoryException {
@@ -79,77 +79,77 @@ public abstract class ItemLinkAware implements Item {
 
   /**
    * {@inheritDoc}
-   */  
+   */
   public int getDepth() throws RepositoryException {
     return LinkUtils.getDepth(virtualPath);
   }
 
   /**
    * {@inheritDoc}
-   */  
+   */
   public String getName() throws RepositoryException {
     return item.getName();
   }
 
   /**
    * {@inheritDoc}
-   */  
+   */
   public Node getParent() throws ItemNotFoundException, AccessDeniedException, RepositoryException {
     return (Node) LinkUtils.getNodeFinder().getItem(originalSession, LinkUtils.getParentPath(virtualPath));
   }
 
   /**
    * {@inheritDoc}
-   */  
+   */
   public String getPath() throws RepositoryException {
     return virtualPath;
   }
 
   /**
    * {@inheritDoc}
-   */  
+   */
   public Session getSession() throws RepositoryException {
     return new SessionLinkAware(this);
   }
 
   /**
    * {@inheritDoc}
-   */  
+   */
   public boolean isModified() {
     return item.isModified();
   }
 
   /**
    * {@inheritDoc}
-   */  
+   */
   public boolean isNew() {
     return item.isNew();
   }
 
   /**
    * {@inheritDoc}
-   */  
+   */
   public boolean isNode() {
     return item.isNode();
   }
 
   /**
    * {@inheritDoc}
-   */  
+   */
   public boolean isSame(Item otherItem) throws RepositoryException {
     return item.isSame(otherItem);
   }
 
   /**
    * {@inheritDoc}
-   */  
+   */
   public void refresh(boolean keepChanges) throws InvalidItemStateException, RepositoryException {
     item.refresh(keepChanges);
   }
 
   /**
    * {@inheritDoc}
-   */  
+   */
   public void remove() throws VersionException,
                       LockException,
                       ConstraintViolationException,
@@ -159,7 +159,7 @@ public abstract class ItemLinkAware implements Item {
 
   /**
    * {@inheritDoc}
-   */  
+   */
   public void save() throws AccessDeniedException,
                     ItemExistsException,
                     ConstraintViolationException,

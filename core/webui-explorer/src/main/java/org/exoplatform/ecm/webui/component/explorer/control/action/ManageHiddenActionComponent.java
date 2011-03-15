@@ -42,7 +42,7 @@ import org.exoplatform.webui.ext.filter.UIExtensionFilters;
  * Created by The eXo Platform SAS
  * Author : eXoPlatform
  *          nicolas.filotto@exoplatform.com
- * 6 mai 2009  
+ * 6 mai 2009
  */
 @ComponentConfig(
      events = {
@@ -51,14 +51,14 @@ import org.exoplatform.webui.ext.filter.UIExtensionFilters;
  )
 public class ManageHiddenActionComponent extends UIComponent {
 
-  private static final List<UIExtensionFilter> FILTERS = Arrays.asList(new UIExtensionFilter[]{new IsNotRootNodeFilter(), 
+  private static final List<UIExtensionFilter> FILTERS = Arrays.asList(new UIExtensionFilter[]{new IsNotRootNodeFilter(),
       new CanSetPropertyFilter(), new IsNotLockedFilter(), new IsCheckedOutFilter()});
-  
+
   @UIExtensionFilters
   public List<UIExtensionFilter> getFilters() {
     return FILTERS;
   }
-  
+
   public static class ManageHiddenActionListener extends UIActionBarActionRealNodeListener<ManageHiddenActionComponent> {
     public void processEvent(Event<ManageHiddenActionComponent> event) throws Exception {
       UIActionBar uiActionBar = event.getSource().getAncestorOfType(UIActionBar.class);
@@ -77,7 +77,7 @@ public class ManageHiddenActionComponent extends UIComponent {
         uiApp.addMessage(new ApplicationMessage("UIActionBar.msg.added-hidden-mixin", null));
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
         uiExplorer.updateAjax(event);
-      } 
+      }
     }
   }
 }

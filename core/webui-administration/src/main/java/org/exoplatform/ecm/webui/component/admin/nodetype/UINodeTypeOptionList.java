@@ -46,7 +46,7 @@ import org.exoplatform.webui.form.UIFormTableInputSet;
  * Author : Dang Van Minh
  *          minh.dang@exoplatform.com
  * Sep 22, 2006
- * 2:20:31 PM 
+ * 2:20:31 PM
  */
 @ComponentConfig(
     lifecycle = UIFormLifecycle.class,
@@ -57,18 +57,18 @@ import org.exoplatform.webui.form.UIFormTableInputSet;
 )
 public class UINodeTypeOptionList extends UIFormInputSetWithAction {
 
-  final static String TABLE_NAME =  "UINodeTypeOptionList"; 
+  final static String TABLE_NAME =  "UINodeTypeOptionList";
   final static String[] TABLE_COLUMNS = {"label", "input"};
-  
+
   public UINodeTypeOptionList(String name) throws Exception {
     super(name) ;
     setComponentConfig(getClass(), null) ;
-  }  
-  
+  }
+
   public void processRender(WebuiRequestContext context) throws Exception {
     super.processRender(context) ;
   }
-  
+
   private boolean getCheckedValue(String values, String name) {
     String[] selectNodes = values.split(",") ;
     for(int i = 0 ; i < selectNodes.length ; i ++ ) {
@@ -76,7 +76,7 @@ public class UINodeTypeOptionList extends UIFormInputSetWithAction {
     }
     return false ;
   }
-  
+
   @SuppressWarnings("unchecked")
   public void update(String values) throws Exception {
     UIFormTableInputSet uiTableInputSet = createUIComponent(UIFormTableInputSet.class, null, null) ;
@@ -101,17 +101,17 @@ public class UINodeTypeOptionList extends UIFormInputSetWithAction {
       if(values != null) {
         if(getCheckedValue(values, ntName)) uiCheckbox.setChecked(true) ;
       } else {
-        uiCheckbox.setChecked(false); 
+        uiCheckbox.setChecked(false);
       }
       uiCheckbox.setValue(ntName);
       uiInputSet.addChild(uiCheckbox);
-      uiTableInputSet.addChild(uiInputSet);      
+      uiTableInputSet.addChild(uiInputSet);
     }
     addUIFormInput(uiTableInputSet) ;
   }
-  
-  
-  
+
+
+
   private void setFieldValues(String fieldName, List<String> selectedNodes) throws Exception {
     String strNodeList = null ;
     UINodeTypeForm uiNodeTypeForm = getParent() ;
@@ -126,7 +126,7 @@ public class UINodeTypeOptionList extends UIFormInputSetWithAction {
         if(tab.getId().equals(UINodeTypeForm.NODETYPE_DEFINITION)) uiNodeTypeForm.setSelectedTab(tab.getId()) ;
       }
       uiNodeTypeForm.removeChildById(UINodeTypeForm.SUPER_TYPE_TAB) ;
-    } else if(fieldName.equals(UIChildNodeDefinitionForm.REQUIRED_PRIMARY_TYPE)) { 
+    } else if(fieldName.equals(UIChildNodeDefinitionForm.REQUIRED_PRIMARY_TYPE)) {
       for(UIComponent uiComp : uiNodeTypeForm.getChildren()) {
         UIFormInputSetWithAction tab = uiNodeTypeForm.getChildById(uiComp.getId()) ;
         if(tab.getId().equals(UINodeTypeForm.CHILDNODE_DEFINITION)) {
@@ -166,13 +166,13 @@ public class UINodeTypeOptionList extends UIFormInputSetWithAction {
         uiApp.addMessage(new ApplicationMessage("UINodeTypeForm.msg.values-error", null)) ;
         uiForm.setTabRender(UINodeTypeForm.DEFAULT_PRIMARY_TYPE_TAB) ;
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
-        return ;        
+        return ;
       }
       uiOptionList.setFieldValues(fieldName, selectedNodes) ;
       event.getRequestContext().addUIComponentToUpdateByAjax(uiManager) ;
     }
   }
-  
+
   static public class CancelTabActionListener extends EventListener<UINodeTypeForm> {
     public void execute(Event<UINodeTypeForm> event) throws Exception {
       UINodeTypeForm uiForm= event.getSource() ;

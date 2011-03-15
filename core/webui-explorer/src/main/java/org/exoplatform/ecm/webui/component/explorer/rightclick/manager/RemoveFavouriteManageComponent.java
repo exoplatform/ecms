@@ -59,136 +59,135 @@ import org.exoplatform.webui.ext.manager.UIAbstractManagerComponent;
  * Created by The eXo Platform SARL
  * Author : Nguyen Anh Vu
  *          anhvurz90@gmail.com
- * Oct 14, 2009  
+ * Oct 14, 2009
  * 5:23:00 PM
  */
 
 @ComponentConfig(
-	    events = {
-	      @EventConfig(listeners = RemoveFavouriteManageComponent.RemoveFromFavouriteActionListener.class)
-	    }
-	)
+      events = {
+        @EventConfig(listeners = RemoveFavouriteManageComponent.RemoveFromFavouriteActionListener.class)
+      }
+  )
 
 public class RemoveFavouriteManageComponent extends UIAbstractManagerComponent {
 
-	private static final List<UIExtensionFilter> FILTERS 
-			= Arrays.asList(new UIExtensionFilter[] { new IsNotInTrashFilter(),
-																								new IsFavouriteFilter(),
-																						 		new IsNotLockedFilter(),
-																						 		new IsCheckedOutFilter(),
-																						 		new HasRemovePermissionFilter(),
-																						 		new IsNotTrashHomeNodeFilter() });
-	
-	private final static Log       LOG  = ExoLogger.getLogger(RemoveFavouriteManageComponent.class);
-	  
-	@UIExtensionFilters
-	public List<UIExtensionFilter> getFilters() {
-		return FILTERS;
-	}
-	
-	private static void multiRemoveFromFavourite(String[] paths, Event<UIComponent> event) throws Exception {
-		for (String path : paths) {
-			removeFromFavourite(path, event);
-		}
-	}
-	
-	private static void removeFromFavourite(String srcPath, Event<UIComponent> event) throws Exception {
-	    UIWorkingArea uiWorkingArea = ((UIComponent)event.getSource()).getParent();
-	    UIJCRExplorer uiExplorer = uiWorkingArea.getAncestorOfType(UIJCRExplorer.class);
-	    
-	    ExoContainer myContainer = ExoContainerContext.getCurrentContainer();
-	    FavoriteService favoriteService = (FavoriteService)myContainer.getComponentInstanceOfType(FavoriteService.class);
-	    
-	    UIApplication uiApp = uiWorkingArea.getAncestorOfType(UIApplication.class);
-	    Matcher matcher = UIWorkingArea.FILE_EXPLORER_URL_SYNTAX.matcher(srcPath);
-	    String wsName = null;
-	    Node node = null;
-	    if (matcher.find()) {
-	      wsName = matcher.group(1);
-	      srcPath = matcher.group(2);
-	    } else {
-	      throw new IllegalArgumentException("The ObjectId is invalid '"+ srcPath + "'");
-	    }
-	    Session session = uiExplorer.getSessionByWorkspace(wsName);
-	    try {
-	      // Use the method getNodeByPath because it is link aware
-	      node = uiExplorer.getNodeByPath(srcPath, session, false);
-	      //check if node is link
-	      LinkManager lnkManager = uiExplorer.getApplicationComponent(LinkManager.class);
-	      if (lnkManager.isLink(node) && lnkManager.isTargetReachable(node)) {
-	      	node = lnkManager.getTarget(node);
-	      }
-	      // Reset the path to manage the links that potentially create virtual path
-	      //srcPath = node.getPath();
-	      // Reset the session to manage the links that potentially change of workspace
-	      session = node.getSession();
-	      // Reset the workspace name to manage the links that potentially change of workspace 
-	      // wsName = session.getWorkspace().getName();
-	    } catch(PathNotFoundException path) {
-	      uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.path-not-found-exception", 
-	          null,ApplicationMessage.WARNING));
-	      event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
-	      return;
-	    }
+  private static final List<UIExtensionFilter> FILTERS
+      = Arrays.asList(new UIExtensionFilter[] { new IsNotInTrashFilter(),
+                                                new IsFavouriteFilter(),
+                                                 new IsNotLockedFilter(),
+                                                 new IsCheckedOutFilter(),
+                                                 new HasRemovePermissionFilter(),
+                                                 new IsNotTrashHomeNodeFilter() });
 
-	    try {
-	      uiExplorer.addLockToken(node);
-	    } catch (Exception e) {
-	      JCRExceptionManager.process(uiApp, e);
-	      return;
-	    }
-	    
-	    try {
-	    	if (!node.isCheckedOut())
-	    		throw new VersionException("node is locked, can't remove favourite of node :" + node.getPath());
-				if (!PermissionUtil.canRemoveNode(node))
-					throw new AccessDeniedException("access denied, can't remove favourite of node:" + node.getPath());
-	    	favoriteService.removeFavorite(node, session.getUserID());
-        uiExplorer.updateAjax(event);	    	
-	    } catch (LockException e) {
-	    	LOG.error("node is locked, can't remove favourite of node :" + node.getPath());
-	    	JCRExceptionManager.process(uiApp, e);
-	    	event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
-	    	uiExplorer.updateAjax(event);
-	    } catch (VersionException e) {
-	    	LOG.error("node is checked in, can't remove favourite of node:" + node.getPath());
-	    	JCRExceptionManager.process(uiApp, e);
-	    	event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
-	    	uiExplorer.updateAjax(event);	    	
-	    } catch (AccessDeniedException e) {
-	    	LOG.error("access denied, can't remove favourite of node:" + node.getPath());
-	    	JCRExceptionManager.process(uiApp, e);
-	    	event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
-	    	uiExplorer.updateAjax(event);
-	    } catch (Exception e) {
-	        LOG.error("an unexpected error occurs", e);
-	        JCRExceptionManager.process(uiApp, e);
-	        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
-	        uiExplorer.updateAjax(event);
-	    }
-	}
-			
-	public static void removeFavouriteManage(Event<UIComponent> event) throws Exception {
-		String srcPath = event.getRequestContext().getRequestParameter(OBJECTID);
-		if (srcPath.indexOf(';') > -1) {
-			multiRemoveFromFavourite(srcPath.split(";"), event);
-		} else {
-			removeFromFavourite(srcPath, event);
-		}
-	}
+  private final static Log       LOG  = ExoLogger.getLogger(RemoveFavouriteManageComponent.class);
 
-	public static class RemoveFromFavouriteActionListener extends UIWorkingAreaActionListener<RemoveFavouriteManageComponent> {
-	    public void processEvent(Event<RemoveFavouriteManageComponent> event) throws Exception {
-	        Event<UIComponent> event_ = new Event<UIComponent>( event.getSource(), event.getName(),event.getRequestContext());
-	        removeFavouriteManage(event_);
-	      }
-	}
-	
-	@Override
-	public Class<? extends UIAbstractManager> getUIAbstractManagerClass() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+  @UIExtensionFilters
+  public List<UIExtensionFilter> getFilters() {
+    return FILTERS;
+  }
+
+  private static void multiRemoveFromFavourite(String[] paths, Event<UIComponent> event) throws Exception {
+    for (String path : paths) {
+      removeFromFavourite(path, event);
+    }
+  }
+
+  private static void removeFromFavourite(String srcPath, Event<UIComponent> event) throws Exception {
+      UIWorkingArea uiWorkingArea = ((UIComponent)event.getSource()).getParent();
+      UIJCRExplorer uiExplorer = uiWorkingArea.getAncestorOfType(UIJCRExplorer.class);
+
+      ExoContainer myContainer = ExoContainerContext.getCurrentContainer();
+      FavoriteService favoriteService = (FavoriteService)myContainer.getComponentInstanceOfType(FavoriteService.class);
+
+      UIApplication uiApp = uiWorkingArea.getAncestorOfType(UIApplication.class);
+      Matcher matcher = UIWorkingArea.FILE_EXPLORER_URL_SYNTAX.matcher(srcPath);
+      String wsName = null;
+      Node node = null;
+      if (matcher.find()) {
+        wsName = matcher.group(1);
+        srcPath = matcher.group(2);
+      } else {
+        throw new IllegalArgumentException("The ObjectId is invalid '"+ srcPath + "'");
+      }
+      Session session = uiExplorer.getSessionByWorkspace(wsName);
+      try {
+        // Use the method getNodeByPath because it is link aware
+        node = uiExplorer.getNodeByPath(srcPath, session, false);
+        //check if node is link
+        LinkManager lnkManager = uiExplorer.getApplicationComponent(LinkManager.class);
+        if (lnkManager.isLink(node) && lnkManager.isTargetReachable(node)) {
+          node = lnkManager.getTarget(node);
+        }
+        // Reset the path to manage the links that potentially create virtual path
+        //srcPath = node.getPath();
+        // Reset the session to manage the links that potentially change of workspace
+        session = node.getSession();
+        // Reset the workspace name to manage the links that potentially change of workspace
+        // wsName = session.getWorkspace().getName();
+      } catch(PathNotFoundException path) {
+        uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.path-not-found-exception",
+            null,ApplicationMessage.WARNING));
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        return;
+      }
+
+      try {
+        uiExplorer.addLockToken(node);
+      } catch (Exception e) {
+        JCRExceptionManager.process(uiApp, e);
+        return;
+      }
+
+      try {
+        if (!node.isCheckedOut())
+          throw new VersionException("node is locked, can't remove favourite of node :" + node.getPath());
+        if (!PermissionUtil.canRemoveNode(node))
+          throw new AccessDeniedException("access denied, can't remove favourite of node:" + node.getPath());
+        favoriteService.removeFavorite(node, session.getUserID());
+        uiExplorer.updateAjax(event);
+      } catch (LockException e) {
+        LOG.error("node is locked, can't remove favourite of node :" + node.getPath());
+        JCRExceptionManager.process(uiApp, e);
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        uiExplorer.updateAjax(event);
+      } catch (VersionException e) {
+        LOG.error("node is checked in, can't remove favourite of node:" + node.getPath());
+        JCRExceptionManager.process(uiApp, e);
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        uiExplorer.updateAjax(event);
+      } catch (AccessDeniedException e) {
+        LOG.error("access denied, can't remove favourite of node:" + node.getPath());
+        JCRExceptionManager.process(uiApp, e);
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        uiExplorer.updateAjax(event);
+      } catch (Exception e) {
+          LOG.error("an unexpected error occurs", e);
+          JCRExceptionManager.process(uiApp, e);
+          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          uiExplorer.updateAjax(event);
+      }
+  }
+
+  public static void removeFavouriteManage(Event<UIComponent> event) throws Exception {
+    String srcPath = event.getRequestContext().getRequestParameter(OBJECTID);
+    if (srcPath.indexOf(';') > -1) {
+      multiRemoveFromFavourite(srcPath.split(";"), event);
+    } else {
+      removeFromFavourite(srcPath, event);
+    }
+  }
+
+  public static class RemoveFromFavouriteActionListener extends UIWorkingAreaActionListener<RemoveFavouriteManageComponent> {
+      public void processEvent(Event<RemoveFavouriteManageComponent> event) throws Exception {
+          Event<UIComponent> event_ = new Event<UIComponent>( event.getSource(), event.getName(),event.getRequestContext());
+          removeFavouriteManage(event_);
+        }
+  }
+
+  @Override
+  public Class<? extends UIAbstractManager> getUIAbstractManagerClass() {
+    return null;
+  }
 
 }
 

@@ -58,7 +58,7 @@ public class FormImpl implements Form{
   private byte[] stateImageBytes;
 
   private static Log log = ExoLogger.getLogger(FormImpl.class.getName());
-  
+
   public FormImpl(FileDefinition fileDefinition, Element element, Locale locale) {
     Element childElement = element.element("resource-bundle");
     String formFileName = "";
@@ -67,8 +67,8 @@ public class FormImpl implements Form{
     ClassLoader cl = this.getClass().getClassLoader();
 
     // Manage properties
-    String localisedFileName = getLocalisedString(formFileName, locale);    
-    String content = "";    
+    String localisedFileName = getLocalisedString(formFileName, locale);
+    String content = "";
     URL url = cl.getResource(localisedFileName);
     if (url == null) url = cl.getResource(formFileName + ".xml");
     if (url != null) {
@@ -86,9 +86,9 @@ public class FormImpl implements Form{
         log.debug("resource bundle not found");
       }
     }
-    
+
     // If there isn't any XML file (format XML)
-    if (content.length() == 0) {      
+    if (content.length() == 0) {
       String fileName = formFileName + "_" + locale.getLanguage() + ".properties";
       url = cl.getResource(fileName);
       if (url == null) url = cl.getResource(formFileName + ".properties");
@@ -102,39 +102,39 @@ public class FormImpl implements Form{
           log.debug("resource bundle not found");
         }
       }
-    }    
-    
-    log.debug("Try to find localised resource : " + localisedFileName);                 
-    if (content.length() > 0) {         
+    }
+
+    log.debug("Try to find localised resource : " + localisedFileName);
+    if (content.length() > 0) {
       log.debug("resource bundle found true");
-      resourceBundle = new ExoResourceBundle(content);         
+      resourceBundle = new ExoResourceBundle(content);
     } else{
       log.debug("resource bundle not found");
     }
-    
+
     childElement = element.element("state-name");
     if(childElement != null)
       this.stateName = childElement.getText();
-    
+
     initializeVariables(element);
     initializeSubmitButtons(element);
-    
-    childElement = element.element("customized-view");    
+
+    childElement = element.element("customized-view");
     if(childElement != null)
       this.customizedViewString = childElement.getText();
     if(customizedViewString != null && !"".equals(customizedViewString)){
       customizedView = true;
     }
-    
+
     childElement = element.element("delegated-view");
     String delegatedViewString = "";
     if(childElement != null)
       delegatedViewString = childElement.getText();
     if("true".equals(delegatedViewString)){
       delegatedView = true;
-    }    
-    
-    
+    }
+
+
     //manages bound images
     this.iconBytes = getBytes(fileDefinition, stateName + "-icon.gif");
     this.stateImageBytes = getBytes(fileDefinition, stateName + "-state.gif");
@@ -148,7 +148,7 @@ public class FormImpl implements Form{
   private void initializeVariables(Element element) {
     this.variables = new ArrayList();
     Map attributes = null;
-    Iterator iter = element.elements("variable").iterator();    
+    Iterator iter = element.elements("variable").iterator();
     while (iter.hasNext()) {
       Element variableElement = (Element) iter.next();
       attributes = new HashMap();
@@ -159,13 +159,13 @@ public class FormImpl implements Form{
       String editable = variableElement.attributeValue("editable");
       attributes.put("editable", editable);
       String mandatory = variableElement.attributeValue("mandatory");
-      attributes.put("mandatory", mandatory); 
+      attributes.put("mandatory", mandatory);
       String visiable = variableElement.attributeValue("visiable");
-      attributes.put("visiable", visiable);      
-      this.variables.add(attributes);      
+      attributes.put("visiable", visiable);
+      this.variables.add(attributes);
     }
   }
-  
+
   @SuppressWarnings("unchecked")
   private void initializeSubmitButtons(Element element) {
     this.submitButtons = new ArrayList();
@@ -201,7 +201,7 @@ public class FormImpl implements Form{
   public boolean isCustomizedView() {
     return customizedView;
   }
-  
+
   public String getCustomizedView() {
     return customizedViewString;
   }
@@ -213,7 +213,7 @@ public class FormImpl implements Form{
   public String getIconURL() {
     return getURL(iconBytes);
   }
-  
+
   public String getStateImageURL() {
     return getURL(stateImageBytes);
   }
@@ -223,13 +223,13 @@ public class FormImpl implements Form{
       return fileDefinition.getBytes(file);
     } catch (Throwable t) {
       return null;
-    }    
+    }
   }
-  
+
   public String getURL(byte[] bytes) {
     DownloadService dS = (DownloadService)ExoContainerContext.getCurrentContainer().getComponentInstanceOfType(
         DownloadService.class);
-    InputStream iS = new ByteArrayInputStream(bytes);    
+    InputStream iS = new ByteArrayInputStream(bytes);
     String id = dS.addDownloadResource(new InputStreamDownloadResource(iS, "image/gif"));
     return dS.getDownloadLink(id);
   }

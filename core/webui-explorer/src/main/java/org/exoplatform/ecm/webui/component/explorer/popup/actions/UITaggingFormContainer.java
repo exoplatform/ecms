@@ -39,7 +39,7 @@ import org.exoplatform.webui.event.EventListener;
  * Created by The eXo Platform SARL
  * Author : Nguyen Anh Vu
  *          anhvurz90@gmail.com
- * Dec 10, 2009  
+ * Dec 10, 2009
  * 4:56:12 PM
  */
 
@@ -52,20 +52,20 @@ import org.exoplatform.webui.event.EventListener;
 )
 public class UITaggingFormContainer extends UIContainer implements UIPopupComponent {
 
-	public void activate() throws Exception {
-		UITaggingForm uiForm = addChild(UITaggingForm.class, null, null);
-		uiForm.activate();
-	}
-	
+  public void activate() throws Exception {
+    UITaggingForm uiForm = addChild(UITaggingForm.class, null, null);
+    uiForm.activate();
+  }
+
   @Override
   public void processRender(WebuiRequestContext context) throws Exception {
-  	getChild(UITaggingForm.class).activate();
-  	super.processRender(context);
-  }	
+    getChild(UITaggingForm.class).activate();
+    super.processRender(context);
+  }
 
-	public void deActivate() throws Exception {
-	}
-	
+  public void deActivate() throws Exception {
+  }
+
   private void initTaggingFormPopup(Node selectedTag) throws Exception {
     removeChildById("TagPopup") ;
     UIPopupWindow uiPopup = addChild(UIPopupWindow.class, null, "TagPopup") ;
@@ -76,63 +76,63 @@ public class UITaggingFormContainer extends UIContainer implements UIPopupCompon
     uiPopup.setRendered(true) ;
     uiPopup.setShow(true) ;
     uiPopup.setResizable(true) ;
-  }  
-  
+  }
+
   public Node getSelectedTag(String tagName) throws Exception {
     NewFolksonomyService newFolksonomyService = getApplicationComponent(NewFolksonomyService.class) ;
     NodeHierarchyCreator nodeHierarchyCreator = getApplicationComponent(NodeHierarchyCreator.class);
     UIJCRExplorer uiExplorer = getAncestorOfType(UIJCRExplorer.class);
     UITaggingForm uiTaggingForm = getChild(UITaggingForm.class);
-    
+
     String repository = uiExplorer.getRepositoryName();
     String workspace = uiExplorer.getRepository().getConfiguration().getDefaultWorkspaceName();
     String userName = uiExplorer.getSession().getUserID();
-    String tagScope = uiTaggingForm.getUIFormSelectBox(uiTaggingForm.TAG_SCOPES).getValue();    
+    String tagScope = uiTaggingForm.getUIFormSelectBox(uiTaggingForm.TAG_SCOPES).getValue();
     int scope = uiTaggingForm.getIntValue(tagScope);
-    
-		String publicTagNodePath = nodeHierarchyCreator.getJcrPath(uiTaggingForm.PUBLIC_TAG_NODE_PATH);			
-    
+
+    String publicTagNodePath = nodeHierarchyCreator.getJcrPath(uiTaggingForm.PUBLIC_TAG_NODE_PATH);
+
     List<Node> tagList = (scope == NewFolksonomyService.PUBLIC) ?
-    				newFolksonomyService.getAllPublicTags(publicTagNodePath, repository, workspace) :
-    				newFolksonomyService.getAllPrivateTags(userName, repository, workspace);
-    
+            newFolksonomyService.getAllPublicTags(publicTagNodePath, repository, workspace) :
+            newFolksonomyService.getAllPrivateTags(userName, repository, workspace);
+
     for (Node tag : tagList)
-    	if (tag.getName().equals(tagName)) return tag;
+      if (tag.getName().equals(tagName)) return tag;
     return null;
   }
-  
+
   public void edit(Event<? extends UIComponent> event) throws Exception {
 //  	UITaggingFormContainer uiTaggingFormContainer = event.getSource();
-  	UITaggingFormContainer uiTaggingFormContainer = this;
-  	String selectedName = event.getRequestContext().getRequestParameter(OBJECTID);
-  	Node selectedTag = uiTaggingFormContainer.getSelectedTag(selectedName);
-  	uiTaggingFormContainer.initTaggingFormPopup(selectedTag);
-  	
-  	UIJCRExplorer uiExplorer = uiTaggingFormContainer.getAncestorOfType(UIJCRExplorer.class);
-  	Preference preferences = uiExplorer.getPreference();
+    UITaggingFormContainer uiTaggingFormContainer = this;
+    String selectedName = event.getRequestContext().getRequestParameter(OBJECTID);
+    Node selectedTag = uiTaggingFormContainer.getSelectedTag(selectedName);
+    uiTaggingFormContainer.initTaggingFormPopup(selectedTag);
+
+    UIJCRExplorer uiExplorer = uiTaggingFormContainer.getAncestorOfType(UIJCRExplorer.class);
+    Preference preferences = uiExplorer.getPreference();
     if (preferences.isShowSideBar()) {
       UISideBar uiSideBar = uiExplorer.findFirstComponentOfType(UISideBar.class);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiSideBar);
-    }      
-    event.getRequestContext().addUIComponentToUpdateByAjax(uiTaggingFormContainer);    	
+    }
+    event.getRequestContext().addUIComponentToUpdateByAjax(uiTaggingFormContainer);
   }
-  
+
   static public class EditActionListener extends EventListener<UITaggingFormContainer> {
     public void execute(Event<UITaggingFormContainer> event) throws Exception {
-    	UITaggingFormContainer uiTaggingFormContainer = event.getSource();
-    	String selectedName = event.getRequestContext().getRequestParameter(OBJECTID);
-    	Node selectedTag = uiTaggingFormContainer.getSelectedTag(selectedName);
-    	uiTaggingFormContainer.initTaggingFormPopup(selectedTag);
-    	
-    	UIJCRExplorer uiExplorer = uiTaggingFormContainer.getAncestorOfType(UIJCRExplorer.class);
-    	Preference preferences = uiExplorer.getPreference();
+      UITaggingFormContainer uiTaggingFormContainer = event.getSource();
+      String selectedName = event.getRequestContext().getRequestParameter(OBJECTID);
+      Node selectedTag = uiTaggingFormContainer.getSelectedTag(selectedName);
+      uiTaggingFormContainer.initTaggingFormPopup(selectedTag);
+
+      UIJCRExplorer uiExplorer = uiTaggingFormContainer.getAncestorOfType(UIJCRExplorer.class);
+      Preference preferences = uiExplorer.getPreference();
       if (preferences.isShowSideBar()) {
         UISideBar uiSideBar = uiExplorer.findFirstComponentOfType(UISideBar.class);
         event.getRequestContext().addUIComponentToUpdateByAjax(uiSideBar);
-      }      
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiTaggingFormContainer);    	
+      }
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiTaggingFormContainer);
     }
   }
-	
+
 
 }

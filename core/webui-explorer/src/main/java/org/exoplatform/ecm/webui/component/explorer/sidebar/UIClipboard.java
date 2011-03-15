@@ -50,26 +50,26 @@ import org.exoplatform.webui.event.EventListener;
 public class UIClipboard extends UIComponent {
   final static public String[] CLIPBOARD_BEAN_FIELD = {"path", "command"} ;
   final static public String[]  CLIPBOARD_ACTIONS = {"Paste", "Delete"} ;
-  
+
   private LinkedList<ClipboardCommand> clipboard_ ;
-  
+
   public UIClipboard() throws Exception {
   }
-  
+
   public String[] getBeanFields() {
     return CLIPBOARD_BEAN_FIELD ;
-  } 
-  
+  }
+
   public String[] getBeanActions() {
     return  CLIPBOARD_ACTIONS ;
   }
-  
+
   public LinkedList<ClipboardCommand> getClipboardData() throws Exception {
     UIJCRExplorer uiExplorer = getAncestorOfType(UIJCRExplorer.class) ;
     clipboard_ = uiExplorer.getAllClipBoard() ;
     return clipboard_ ;
   }
-  
+
   static public class PasteActionListener extends EventListener<UIClipboard> {
     public void execute(Event<UIClipboard> event) throws Exception {
       UIClipboard uiClipboard = event.getSource() ;
@@ -77,7 +77,7 @@ public class UIClipboard extends UIComponent {
       UIWorkingArea uiWorkingArea = uiExplorer.findFirstComponentOfType(UIWorkingArea.class);
       String id = event.getRequestContext().getRequestParameter(OBJECTID) ;
       int index = Integer.parseInt(id) ;
-      ClipboardCommand selectedClipboard = uiClipboard.clipboard_.get(index-1);      
+      ClipboardCommand selectedClipboard = uiClipboard.clipboard_.get(index-1);
       Node node = uiExplorer.getCurrentNode() ;
       String nodePath = node.getPath();
       String wsName = node.getSession().getWorkspace().getName();
@@ -89,7 +89,7 @@ public class UIClipboard extends UIComponent {
       } catch(PathNotFoundException path) {
         app.addMessage(new ApplicationMessage("PathNotFoundException.msg", null, ApplicationMessage.WARNING)) ;
         event.getRequestContext().addUIComponentToUpdateByAjax(app.getUIPopupMessages()) ;
-        return ;    
+        return ;
       } catch (Exception e) {
         app.addMessage(new ApplicationMessage("UIClipboard.msg.unable-pasted", null, ApplicationMessage.WARNING)) ;
         event.getRequestContext().addUIComponentToUpdateByAjax(app.getUIPopupMessages()) ;
@@ -97,7 +97,7 @@ public class UIClipboard extends UIComponent {
       }
     }
   }
-  
+
   static public class DeleteActionListener extends EventListener<UIClipboard> {
     public void execute(Event<UIClipboard> event) throws Exception{
       UIClipboard uiClipboard = event.getSource() ;
@@ -105,7 +105,7 @@ public class UIClipboard extends UIComponent {
       uiClipboard.clipboard_.remove(Integer.parseInt(itemIndex)-1) ;
     }
   }
-  
+
   static public class ClearAllActionListener extends EventListener<UIClipboard> {
     public void execute(Event<UIClipboard> event) {
       UIClipboard uiClipboard = event.getSource() ;

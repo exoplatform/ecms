@@ -22,15 +22,15 @@ import javax.jcr.Node;
 
 
 public class NodeNameComparator implements Comparator<Node> {
- 
+
   public static final String ASCENDING_ORDER = "Ascending" ;
   public static final String DESCENDING_ORDER = "Descending" ;
   private String order_ ;
-  
+
   public NodeNameComparator(String pOrder) {
     order_ = pOrder ;
   }
-  
+
   public int compare(Node node1, Node node2) {
     try{
       String nodeName1 = node1.getName();
@@ -40,7 +40,7 @@ public class NodeNameComparator implements Comparator<Node> {
       }
       return nodeName2.compareToIgnoreCase(nodeName1) ;
     }catch (Exception e) {
-    }    
+    }
     return 0;
   }
 }

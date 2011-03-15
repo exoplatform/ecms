@@ -26,7 +26,7 @@ import org.exoplatform.services.jcr.ext.common.SessionProvider;
  * Created by The eXo Platform SARL
  * Author : Dang Van Minh
  *          minh.dang@exoplatform.com
- * Oct 6, 2009  
+ * Oct 6, 2009
  * 3:38:36 AM
  */
 /**
@@ -37,14 +37,14 @@ public interface FavouriteService {
 
   final static public String EXO_FAVOURITE_NODE = "exo:favourite";
   final static public String EXO_FAVOURITER_PROPERTY = "exo:favouriter";
-  
+
   /**
    * Check if user is in favourite list of node
    * @param node Node to check
    * @param userName The user to check
    */
   public boolean isFavouriter(String userName, Node node);
-  
+
   /**
    * Add favourite to node
    * @param node Add favourite to this node
@@ -52,8 +52,8 @@ public interface FavouriteService {
    * @throws Exception The exception will be raised if the node can not add mixin
    */
   public void addFavourite(Node node, String userName) throws Exception;
-  
-  
+
+
   /**
    * Remove favourite from node
    * @param node Remove favourite out of this node
@@ -61,18 +61,18 @@ public interface FavouriteService {
    * @throws Exception
    */
   public void removeFavourite(Node node, String userName) throws Exception;
-  
+
   /**
-   * Get all favourite nodes 
+   * Get all favourite nodes
    * @param workspace Get all favourite nodes from this workspace
    * @param repository Get all favourite nodes from this repository
    * @param sessionProvider The session provider which will be used to get session
    * @return List<Node> Get all favourite nodes
    * @throws Exception
    */
-  public List<Node> getAllFavouriteNodes(String workspace, String repository, 
+  public List<Node> getAllFavouriteNodes(String workspace, String repository,
       SessionProvider sessionProvider) throws Exception;
-  
+
   /**
    * Get all favourite nodes by user
    * @param workspace Get all favourite nodes from this workspace
@@ -82,6 +82,6 @@ public interface FavouriteService {
    * @return List<Node> All favourite node added by user
    * @throws Exception
    */
-  public List<Node> getAllFavouriteNodesByUser(String workspace, String repository, 
+  public List<Node> getAllFavouriteNodesByUser(String workspace, String repository,
       SessionProvider sessionProvider, String userName) throws Exception;
 }

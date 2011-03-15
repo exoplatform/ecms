@@ -62,7 +62,7 @@ public class UIViewRelationList extends UIContainer{
     List<Node> relations = new ArrayList<Node>() ;
     Value[] vals = null ;
     try {
-      vals = uiExplorer.getCurrentNode().getProperty("exo:relation").getValues() ;    
+      vals = uiExplorer.getCurrentNode().getProperty("exo:relation").getValues() ;
     }catch (Exception e) { return relations ;}
     RepositoryService repositoryService = getApplicationComponent(RepositoryService.class) ;
     ManageableRepository repository = repositoryService.getRepository(uiExplorer.getRepositoryName()) ;
@@ -74,7 +74,7 @@ public class UIViewRelationList extends UIContainer{
         try {
           Node node = session.getNodeByUUID(uuid) ;
           if (!node.isNodeType(Utils.EXO_RESTORELOCATION))
-          	relations.add(node) ;
+            relations.add(node) ;
         } catch(Exception e) {
           continue ;
         }
@@ -82,53 +82,53 @@ public class UIViewRelationList extends UIContainer{
     }
     return relations ;
   }
-  
+
   public List<Node> getReferences() throws Exception {
-	    List<Node> refNodes = new ArrayList<Node>() ; 
-	    RepositoryService repositoryService = getApplicationComponent(RepositoryService.class) ;
-	    UIJCRExplorer uiJCRExplorer = getAncestorOfType(UIJCRExplorer.class) ;
-	    Node currentNode = uiJCRExplorer.getCurrentNode() ;
-	    try {
-		    String uuid = currentNode.getUUID() ;        
-		    String repositoryName = uiJCRExplorer.getRepositoryName() ;
-		    ManageableRepository repository = repositoryService.getRepository(repositoryName) ;
-		    Session session = null ;
-		    for(String workspace : repository.getWorkspaceNames()) {
-		      session = repository.getSystemSession(workspace) ;
-		      try{
-		        Node lookupNode = session.getNodeByUUID(uuid) ;
-		        PropertyIterator iter = lookupNode.getReferences() ;
-		        if(iter != null) {
-		          while(iter.hasNext()) {
-		            Node refNode = iter.nextProperty().getParent() ;
-		            if (!refNode.isNodeType(Utils.EXO_RESTORELOCATION) && !refNode.isNodeType("exo:auditHistory")) 
-		              refNodes.add(refNode) ;
-		          }
-		        }
-		      } catch(Exception e) { }
-		     session.logout() ; 
-		    }
-	    } catch (UnsupportedRepositoryOperationException e) { 
-	    	// currentNode is not referenceable
-	    }
-	    return refNodes ;
-	  }
-  
+      List<Node> refNodes = new ArrayList<Node>() ;
+      RepositoryService repositoryService = getApplicationComponent(RepositoryService.class) ;
+      UIJCRExplorer uiJCRExplorer = getAncestorOfType(UIJCRExplorer.class) ;
+      Node currentNode = uiJCRExplorer.getCurrentNode() ;
+      try {
+        String uuid = currentNode.getUUID() ;
+        String repositoryName = uiJCRExplorer.getRepositoryName() ;
+        ManageableRepository repository = repositoryService.getRepository(repositoryName) ;
+        Session session = null ;
+        for(String workspace : repository.getWorkspaceNames()) {
+          session = repository.getSystemSession(workspace) ;
+          try{
+            Node lookupNode = session.getNodeByUUID(uuid) ;
+            PropertyIterator iter = lookupNode.getReferences() ;
+            if(iter != null) {
+              while(iter.hasNext()) {
+                Node refNode = iter.nextProperty().getParent() ;
+                if (!refNode.isNodeType(Utils.EXO_RESTORELOCATION) && !refNode.isNodeType("exo:auditHistory"))
+                  refNodes.add(refNode) ;
+              }
+            }
+          } catch(Exception e) { }
+         session.logout() ;
+        }
+      } catch (UnsupportedRepositoryOperationException e) {
+        // currentNode is not referenceable
+      }
+      return refNodes ;
+    }
+
   public List<Node> getLanguages() throws Exception {
-	  UIJCRExplorer uiExplorer = getAncestorOfType(UIJCRExplorer.class) ;
-	  Node node = uiExplorer.getCurrentNode();
-	  List<Node> relations = new ArrayList<Node>() ;
-	  MultiLanguageService langService = getApplicationComponent(MultiLanguageService.class) ;
-	  List<String> langs = langService.getSupportedLanguages(node);
-	  for(String lang: langs) {
-		  Node lnode = langService.getLanguage(node, lang);
-		  if (lnode!=null && lnode.hasProperty("exo:language")) {
-			  relations.add(lnode) ;
-		  }
-	  }
-	  return relations ;
+    UIJCRExplorer uiExplorer = getAncestorOfType(UIJCRExplorer.class) ;
+    Node node = uiExplorer.getCurrentNode();
+    List<Node> relations = new ArrayList<Node>() ;
+    MultiLanguageService langService = getApplicationComponent(MultiLanguageService.class) ;
+    List<String> langs = langService.getSupportedLanguages(node);
+    for(String lang: langs) {
+      Node lnode = langService.getLanguage(node, lang);
+      if (lnode!=null && lnode.hasProperty("exo:language")) {
+        relations.add(lnode) ;
+      }
+    }
+    return relations ;
   }
-  
+
   public boolean isPreferenceNode(Node node) {
     return getAncestorOfType(UIJCRExplorer.class).isPreferenceNode(node) ;
   }
@@ -136,7 +136,7 @@ public class UIViewRelationList extends UIContainer{
   static public class ChangeNodeActionListener extends EventListener<UIViewRelationList> {
     public void execute(Event<UIViewRelationList> event) throws Exception {
       UIViewRelationList uicomp =  event.getSource() ;
-      UIJCRExplorer uiExplorer = uicomp.getAncestorOfType(UIJCRExplorer.class) ; 
+      UIJCRExplorer uiExplorer = uicomp.getAncestorOfType(UIJCRExplorer.class) ;
       String uri = event.getRequestContext().getRequestParameter(OBJECTID) ;
       String workspaceName = event.getRequestContext().getRequestParameter("workspaceName") ;
       Session session = uiExplorer.getSessionByWorkspace(workspaceName);
@@ -150,8 +150,8 @@ public class UIViewRelationList extends UIContainer{
       } catch(AccessDeniedException ace) {
         uiApp.addMessage(new ApplicationMessage("UIDocumentInfo.msg.null-exception", null, ApplicationMessage.WARNING)) ;
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
-        return ;          
-      } catch(Exception e) {    
+        return ;
+      } catch(Exception e) {
         JCRExceptionManager.process(uiApp, e);
         return ;
       }

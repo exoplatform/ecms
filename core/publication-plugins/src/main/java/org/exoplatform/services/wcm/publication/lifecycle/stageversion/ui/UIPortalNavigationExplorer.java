@@ -45,7 +45,9 @@ import org.exoplatform.webui.event.EventListener;
  * Created by The eXo Platform SAS Author : Hoa Pham hoa.pham@exoplatform.com
  * Sep 9, 2008
  */
-@ComponentConfig(lifecycle = Lifecycle.class, template = "classpath:groovy/wcm/webui/publication/lifecycle/stageversion/ui/UIPortalNavigationExplorer.gtmpl", events = { @EventConfig(listeners = UIPortalNavigationExplorer.ChangeNodeActionListener.class) })
+@ComponentConfig(lifecycle = Lifecycle.class,
+                 template = "classpath:groovy/wcm/webui/publication/lifecycle/stageversion/ui/UIPortalNavigationExplorer.gtmpl",
+                 events = { @EventConfig(listeners = UIPortalNavigationExplorer.ChangeNodeActionListener.class) })
 public class UIPortalNavigationExplorer extends UIContainer {
 
   /** The portal name. */
@@ -60,7 +62,7 @@ public class UIPortalNavigationExplorer extends UIContainer {
 
   /**
    * Instantiates a new uI portal navigation explorer.
-   * 
+   *
    * @throws Exception the exception
    */
   public UIPortalNavigationExplorer() throws Exception {
@@ -68,57 +70,60 @@ public class UIPortalNavigationExplorer extends UIContainer {
 
   /**
    * Inits the.
-   * 
+   *
    * @param portalName the portal name
    * @param runningPortals the running portals
-   * 
+   *
    * @throws Exception the exception
    */
-  public void init(String portalName, List<String> runningPortals) throws Exception {    
+  public void init(String portalName, List<String> runningPortals) throws Exception {
     this.portalName = portalName;
     this.runningPortals = runningPortals;
     List<TreeNode> list = new ArrayList<TreeNode>();
     UIPortalApplication portalApplication = Util.getUIPortalApplication();
-    LocaleConfig localeConfig = getApplicationComponent(LocaleConfigService.class).getLocaleConfig(portalApplication.getLocale().getLanguage());
+    LocaleConfig localeConfig = getApplicationComponent(LocaleConfigService.class).
+        getLocaleConfig(portalApplication.getLocale().getLanguage());
     WCMService wcmService = getApplicationComponent(WCMService.class);
     SessionProvider sessionProvider =WCMCoreUtils.getSystemSessionProvider();
-    if(wcmService.isSharedPortal(sessionProvider, portalName)) {
-      UIPublicationTree tree = addChild(UIPublicationTree.class, null, "UIPortalTree");      
-      for(String portal : this.runningPortals) {
+    if (wcmService.isSharedPortal(sessionProvider, portalName)) {
+      UIPublicationTree tree = addChild(UIPublicationTree.class, null, "UIPortalTree");
+      for (String portal : this.runningPortals) {
         PageNavigation pageNavigation = getPortalNavigation(portal);
-        ResourceBundle res = localeConfig.getNavigationResourceBundle(pageNavigation.getOwnerType(), pageNavigation.getOwnerId()) ;
-        TreeNode treeNode = new TreeNode(portal,pageNavigation, res, false);
-        if(pageNavigation.getNodes()!= null) 
+        ResourceBundle res = localeConfig.getNavigationResourceBundle(pageNavigation.getOwnerType(),
+                                                                      pageNavigation.getOwnerId());
+        TreeNode treeNode = new TreeNode(portal, pageNavigation, res, false);
+        if (pageNavigation.getNodes() != null)
           treeNode.setChildrenByPageNodes(pageNavigation.getNodes());
         list.add(treeNode);
       }
       tree.setSibbling(list);
       tree.setBeanIdField("uri");
       tree.setBeanLabelField("resolvedLabel");
-      tree.setIcon("DefaultPageIcon");    
+      tree.setIcon("DefaultPageIcon");
       tree.setSelectedIcon("DefaultPageIcon");
     } else {
       UIPublicationTree tree = addChild(UIPublicationTree.class, null, "UIPageNodeTree");
       PageNavigation navigation = getPortalNavigation(portalName);
-      ResourceBundle res = localeConfig.getNavigationResourceBundle(navigation.getOwnerType(), navigation.getOwnerId()) ;
+      ResourceBundle res = localeConfig.getNavigationResourceBundle(navigation.getOwnerType(),
+                                                                    navigation.getOwnerId());
       TreeNode treeNode = new TreeNode(portalName, navigation, res, true);
       if(navigation.getNodes()!= null)
         treeNode.setChildrenByPageNodes(navigation.getNodes());
       tree.setSibbling(treeNode.getTreeNodeChildren());
       tree.setBeanIdField("uri");
       tree.setBeanLabelField("resolvedLabel");
-      tree.setIcon("DefaultPageIcon");    
+      tree.setIcon("DefaultPageIcon");
       tree.setSelectedIcon("DefaultPageIcon");
     }
   }
 
   /**
    * Gets the portal navigation.
-   * 
+   *
    * @param portalName the portal name
-   * 
+   *
    * @return the portal navigation
-   * 
+   *
    * @throws Exception the exception
    */
   private PageNavigation getPortalNavigation(String portalName) throws Exception {
@@ -136,9 +141,9 @@ public class UIPortalNavigationExplorer extends UIContainer {
 
   /**
    * Select tree node by uri.
-   * 
+   *
    * @param uri the uri
-   * 
+   *
    * @throws Exception the exception
    */
   @SuppressWarnings("unchecked")
@@ -187,8 +192,8 @@ public class UIPortalNavigationExplorer extends UIContainer {
       for (String portal : this.runningPortals) {
         PageNavigation pageNavigation = getPortalNavigation(portal);
         UIPortalApplication portalApplication = Util.getUIPortalApplication();
-        LocaleConfig localeConfig = getApplicationComponent(LocaleConfigService.class).getLocaleConfig(portalApplication.getLocale()
-                                                                                                                        .getLanguage());
+        LocaleConfig localeConfig = getApplicationComponent(LocaleConfigService.class).
+            getLocaleConfig(portalApplication.getLocale().getLanguage());
         ResourceBundle res = localeConfig.getNavigationResourceBundle(pageNavigation.getOwnerType(),
                                                                       pageNavigation.getOwnerId());
         TreeNode treeNode = new TreeNode(portal, pageNavigation, res, false);
@@ -233,7 +238,7 @@ public class UIPortalNavigationExplorer extends UIContainer {
    * <code>addChangeNodeActionListener<code> method. When
    * the changeNodeAction event occurs, that object's appropriate
    * method is invoked.
-   * 
+   *
    * @see ChangeNodeActionEvent
    */
   public static class ChangeNodeActionListener extends EventListener<UIPortalNavigationExplorer> {
@@ -249,15 +254,17 @@ public class UIPortalNavigationExplorer extends UIContainer {
       UIPortalNavigationExplorer portalNavigationExplorer = event.getSource();
       portalNavigationExplorer.selectTreeNodeByUri(uri);
 
-      UIPublicationContainer publicationContainer = portalNavigationExplorer.getAncestorOfType(UIPublicationContainer.class);
-      UIPublicationPagesContainer publicationPagesContainer = portalNavigationExplorer.getAncestorOfType(UIPublicationPagesContainer.class);
+      UIPublicationContainer publicationContainer = portalNavigationExplorer.
+          getAncestorOfType(UIPublicationContainer.class);
+      UIPublicationPagesContainer publicationPagesContainer = portalNavigationExplorer.
+          getAncestorOfType(UIPublicationPagesContainer.class);
       publicationContainer.setActiveTab(publicationPagesContainer, event.getRequestContext());
     }
   }
 
   /**
    * Gets the selected node.
-   * 
+   *
    * @return the selected node
    */
   public TreeNode getSelectedNode() {
@@ -266,7 +273,7 @@ public class UIPortalNavigationExplorer extends UIContainer {
 
   /**
    * Sets the selected node.
-   * 
+   *
    * @param selectedNode the new selected node
    */
   public void setSelectedNode(TreeNode selectedNode) {

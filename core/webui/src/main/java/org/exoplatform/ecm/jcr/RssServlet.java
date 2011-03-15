@@ -45,8 +45,8 @@ import org.exoplatform.services.log.ExoLogger;
 @SuppressWarnings({"serial","unused"})
 public class RssServlet extends HttpServlet {
   private static final Log LOG  = ExoLogger.getLogger(RssServlet.class);
-  public void init(ServletConfig config) throws ServletException {}  
-	public void service(HttpServletRequest request, HttpServletResponse response) 
+  public void init(ServletConfig config) throws ServletException {}
+  public void service(HttpServletRequest request, HttpServletResponse response)
           throws ServletException, IOException {
     response.setHeader("Cache-Control", "private max-age=600, s-maxage=120");
     String wsName = null ;
@@ -55,12 +55,12 @@ public class RssServlet extends HttpServlet {
     String pathInfo = request.getPathInfo() ;
     portalName = pathInfo.substring(1, pathInfo.indexOf("/", 1)) ;
     wsName = pathInfo.substring(portalName.length() + 2, pathInfo.indexOf("/", portalName.length() + 2)) ;
-    path = pathInfo.substring(pathInfo.indexOf(wsName)+ wsName.length() + 1);    
+    path = pathInfo.substring(pathInfo.indexOf(wsName)+ wsName.length() + 1);
     PortalContainer pcontainer =  RootContainer.getInstance().getPortalContainer(portalName);
     PortalContainer.setInstance(pcontainer) ;
-    RepositoryService repositoryService = 
+    RepositoryService repositoryService =
       (RepositoryService)pcontainer.getComponentInstanceOfType(RepositoryService.class);
-    TemplateService tservice = 
+    TemplateService tservice =
       (TemplateService)pcontainer.getComponentInstanceOfType(TemplateService.class);
     Session session = null ;
     try{
@@ -110,6 +110,6 @@ public class RssServlet extends HttpServlet {
       if(session != null) {
         session.logout() ;
       }
-    }    		
-	}  
+    }
+  }
 }

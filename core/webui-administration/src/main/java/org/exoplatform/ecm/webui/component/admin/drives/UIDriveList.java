@@ -45,7 +45,7 @@ import org.exoplatform.webui.event.EventListener;
  * Author : Dang Van Minh
  *          minh.dang@exoplatform.com
  * Nov 23, 2006
- * 11:39:49 AM 
+ * 11:39:49 AM
  */
 @ComponentConfig(
     template = "app:/groovy/webui/component/admin/drives/UIDriveList.gtmpl",
@@ -61,7 +61,7 @@ public class UIDriveList extends UIComponentDecorator {
   final  static public String ST_ADD = "AddDriveManagerPopup" ;
   final  static public String ST_EDIT = "EditDriveManagerPopup" ;
   private UIPageIterator uiPageIterator_ ;
-  
+
   public UIDriveList() throws Exception {
     uiPageIterator_ = createUIComponent(UIPageIterator.class, null, "UIDriveListIterator");
     setUIComponent(uiPageIterator_) ;
@@ -79,16 +79,16 @@ public class UIDriveList extends UIComponentDecorator {
     else
       uiPageIterator_.setCurrentPage(currentPage);
   }
-  
+
   public UIPageIterator  getUIPageIterator() {  return uiPageIterator_ ; }
-  
+
   public List getDriveList() throws Exception { return uiPageIterator_.getCurrentPageData() ; }
 
   @SuppressWarnings("unchecked")
   public List<DriveData> getDrives(String repoName) throws Exception {
     RepositoryService rservice = getApplicationComponent(RepositoryService.class) ;
     ManageDriveService driveService = getApplicationComponent(ManageDriveService.class) ;
-    ManageableRepository repository = rservice.getCurrentRepository() ;  
+    ManageableRepository repository = rservice.getCurrentRepository() ;
     List<DriveData> driveList = new ArrayList<DriveData>() ;
     Session session = null ;
     List<DriveData> drives = driveService.getAllDrives(repoName) ;
@@ -96,7 +96,7 @@ public class UIDriveList extends UIComponentDecorator {
       for(DriveData drive : drives) {
         if(drive.getIcon() != null && drive.getIcon().length() > 0) {
           try {
-            String[] iconPath = drive.getIcon().split(":/") ;   
+            String[] iconPath = drive.getIcon().split(":/") ;
             session = repository.getSystemSession(iconPath[0]) ;
             session.getItem("/" + iconPath[1]) ;
             session.logout() ;
@@ -108,16 +108,16 @@ public class UIDriveList extends UIComponentDecorator {
       }
     }
     Collections.sort(driveList) ;
-    return driveList ; 
+    return driveList ;
   }
-  
+
   public String getPortalName() {
     ExoContainer container = ExoContainerContext.getCurrentContainer();
     PortalContainerInfo containerInfo = (PortalContainerInfo) container
         .getComponentInstanceOfType(PortalContainerInfo.class);
-    return containerInfo.getContainerName(); 
+    return containerInfo.getContainerName();
   }
-  
+
   public String getRepository() throws Exception {
     return getAncestorOfType(UIECMAdminPortlet.class).getPreferenceRepository() ;
   }

@@ -58,21 +58,21 @@ public class UIReferencesList extends UIGrid implements UIPopupComponent{
   public void activate() throws Exception {
     configure("workspace", REFERENCES_BEAN_FIELD, null) ;
     updateGrid() ;
-  }  
+  }
 
   public void deActivate() {}
 
   public void updateGrid() throws Exception {
     ObjectPageList objPageList = new ObjectPageList(getReferences(), 10) ;
-    getUIPageIterator().setPageList(objPageList) ; 
+    getUIPageIterator().setPageList(objPageList) ;
   }
 
   private List<ReferenceBean> getReferences() throws Exception {
-    List<ReferenceBean> referBeans = new ArrayList<ReferenceBean>() ; 
+    List<ReferenceBean> referBeans = new ArrayList<ReferenceBean>() ;
     RepositoryService repositoryService = getApplicationComponent(RepositoryService.class) ;
     UIJCRExplorer uiJCRExplorer = getAncestorOfType(UIJCRExplorer.class) ;
     Node currentNode = uiJCRExplorer.getCurrentNode() ;
-    String uuid = currentNode.getUUID() ;        
+    String uuid = currentNode.getUUID() ;
     String repositoryName = uiJCRExplorer.getRepositoryName() ;
     ManageableRepository repository = repositoryService.getRepository(repositoryName) ;
     Session session = null ;
@@ -88,7 +88,7 @@ public class UIReferencesList extends UIGrid implements UIPopupComponent{
           }
         }
       } catch(Exception e) { }
-     session.logout() ; 
+     session.logout() ;
     }
     return referBeans ;
   }
@@ -100,7 +100,7 @@ public class UIReferencesList extends UIGrid implements UIPopupComponent{
     }
   }
 
-  public class ReferenceBean {    
+  public class ReferenceBean {
     private String workspace_ ;
     private String path_ ;
 

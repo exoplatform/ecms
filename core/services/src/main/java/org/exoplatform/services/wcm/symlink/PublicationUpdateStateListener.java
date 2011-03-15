@@ -39,18 +39,18 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
  * Created by The eXo Platform SAS
  * Author : Phan Le Thanh Chuong
  *          chuong.phan@exoplatform.com, phan.le.thanh.chuong@gmail.com
- * Jun 11, 2010  
+ * Jun 11, 2010
  */
 public class PublicationUpdateStateListener extends Listener<CmsService, Node> {
 
   private static Log log = ExoLogger.getLogger("wcm:PublicationUpdateStateListener");
-  
+
   private RepositoryService repositoryService;
-  
+
   public PublicationUpdateStateListener() {
     repositoryService = WCMCoreUtils.getService(RepositoryService.class);
   }
-  
+
   public void onEvent(Event<CmsService, Node> event) throws Exception {
     if ("WCMPublicationService.event.updateState".equals(event.getEventName())) {
       Node targetNode = event.getData();
@@ -82,10 +82,10 @@ public class PublicationUpdateStateListener extends Listener<CmsService, Node> {
         } catch (PathNotFoundException e) {
           log.info("No such of property publication:liveDate for this node:");
         }
-      }		
+      }
 
       try {
-        String nodeVersionUUID = targetNode.getProperty("publication:liveRevision").getString(); 
+        String nodeVersionUUID = targetNode.getProperty("publication:liveRevision").getString();
         Node revNode = targetNode.getVersionHistory().getSession().getNodeByUUID(nodeVersionUUID);
         if (revNode!=null)
           liveNode = revNode.getNode("jcr:frozenNode");
@@ -140,7 +140,7 @@ public class PublicationUpdateStateListener extends Listener<CmsService, Node> {
                 needSessionSave = true;
               }
             } catch (PathNotFoundException e) {}
-            
+
             try {
               Long currentIndex = linkNode.hasProperty("exo:index")?linkNode.getProperty("exo:index").getLong():null;
               if (index != null && !index.equals(currentIndex)) {
@@ -148,7 +148,7 @@ public class PublicationUpdateStateListener extends Listener<CmsService, Node> {
                 needSessionSave = true;
               }
             } catch (PathNotFoundException e) {}
-            
+
             try {
               String currentTitle = linkNode.hasProperty("exo:title")?linkNode.getProperty("exo:title").getString():null;
               if (title != null && !title.equals(currentTitle)) {
@@ -156,7 +156,7 @@ public class PublicationUpdateStateListener extends Listener<CmsService, Node> {
                 needSessionSave = true;
               }
             } catch (PathNotFoundException e) {}
-            
+
             try {
               String currentTitlePublished = linkNode.hasProperty("exo:titlePublished")?linkNode.getProperty("exo:titlePublished").getString():null;
               if (titlePublished != null && !titlePublished.equals(currentTitlePublished)) {
@@ -171,15 +171,15 @@ public class PublicationUpdateStateListener extends Listener<CmsService, Node> {
                 needSessionSave = true;
               }
             } catch (PathNotFoundException e) {}
-            
+
             try {
               Calendar currentDateModified = linkNode.getProperty("exo:dateModified").getDate();
               if (dateModified != null && !dateModified.equals(currentDateModified)) {
-                linkNode.setProperty("exo:dateModified", dateModified);  
+                linkNode.setProperty("exo:dateModified", dateModified);
                 needSessionSave = true;
               }
             } catch (PathNotFoundException e) {}
-            
+
             if (log.isInfoEnabled()) {
               String currentState = targetNode.hasProperty("publication:currentState")?targetNode.getProperty("publication:currentState").getString():"";
               String currentName = linkNode.hasProperty("exo:name")?linkNode.getProperty("exo:name").getString():"";
@@ -188,7 +188,7 @@ public class PublicationUpdateStateListener extends Listener<CmsService, Node> {
               String currentTitlePub = linkNode.hasProperty("exo:titlePublished")?linkNode.getProperty("exo:titlePublished").getString():"";
               String currentLiveDate = linkNode.hasProperty("publication:liveDate")?linkNode.getProperty("publication:liveDate").getDate().getTime().toString():"";
               String currentDateModified = linkNode.hasProperty("exo:dateModified")?linkNode.getProperty("exo:dateModified").getDate().getTime().toString():"";
-              
+
               log.info("@@@@ "+needSessionSave+" @state@"+currentState+" @Name@"+currentName+" @Index@"+currentIndex+" @Title@"+currentTitle+" @TitlePub@"+currentTitlePub+" @DateLive@"+currentLiveDate+" @DateMod@"+currentDateModified);
             }
           }
@@ -203,5 +203,5 @@ public class PublicationUpdateStateListener extends Listener<CmsService, Node> {
     }
     return;
   }
-  
+
 }

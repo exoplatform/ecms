@@ -21,18 +21,18 @@ package org.exoplatform.ecm.webui.popup;
  * minh.dang@exoplatform.com Jun 13, 2007 4:26:57 PM
  */
 @Deprecated
-public interface UIPopupComponent {  
-  
+public interface UIPopupComponent {
+
   /**
    * Activate.
-   * 
+   *
    * @throws Exception the exception
    */
   public void  activate()  throws Exception;
-  
+
   /**
    * De activate.
-   * 
+   *
    * @throws Exception the exception
    */
   public void  deActivate()  throws Exception;

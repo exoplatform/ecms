@@ -29,49 +29,49 @@ import org.exoplatform.webui.form.UIFormInputBase;
  * Created by The eXo Platform SAS
  * Author : Phan Le Thanh Chuong
  *          chuong.phan@exoplatform.com; phan.le.thanh.chuong@gmail.com
- * May 10, 2010  
+ * May 10, 2010
  */
 public class UIFormRichtextInput extends UIFormInputBase<String> {
 
   public static final String FULL_TOOLBAR = "Full";
-  
+
   public static final String BASIC_TOOLBAR = "Basic";
-  
+
   private String width;
-  
+
   private String height;
-  
+
   private String toolbar;
-  
+
   public UIFormRichtextInput(String name, String bindingField, String value) {
     super(name, bindingField, String.class);
     this.value_ = value;
  }
-  
+
   public String getWidth() {
     return width;
   }
-  
+
   public void setWidth(String width) {
     this.width = width;
   }
-  
+
   public String getHeight() {
     return height;
   }
-  
+
   public void setHeight(String height) {
     this.height = height;
   }
-  
+
   public String getToolbar() {
     return toolbar;
   }
-  
+
   public void setToolbar(String toolbar) {
     this.toolbar = toolbar;
   }
-  
+
   public void processRender(WebuiRequestContext context) throws Exception {
 
     if (toolbar == null) toolbar = BASIC_TOOLBAR;
@@ -83,35 +83,39 @@ public class UIFormRichtextInput extends UIFormInputBase<String> {
     String skin = Util.getUIPortalApplication().getUserPortalConfig().getPortalConfig().getSkin();
     String portal = Util.getUIPortal().getName();
     Collection<SkinConfig> portalSkins = skinService.getPortalSkins(skin);
-    SkinConfig customSkin = skinService.getSkin(portal, Util.getUIPortalApplication().getUserPortalConfig().getPortalConfig().getSkin());
+    SkinConfig customSkin = skinService.getSkin(portal, Util.getUIPortalApplication()
+                                                            .getUserPortalConfig()
+                                                            .getPortalConfig()
+                                                            .getSkin());
     if (customSkin != null) portalSkins.add(customSkin);
     for (SkinConfig portalSkin : portalSkins) {
       contentsCss.append("'").append(portalSkin.createURL()).append("',");
     }
     contentsCss.delete(contentsCss.length() - 1, contentsCss.length());
     contentsCss.append("]");
-    
+
     StringBuffer buffer = new StringBuffer();
     if (value_!=null) {
-    	buffer.append("<textarea id='" + name + "' name='" + name + "'>" + value_ + "</textarea>\n");
+      buffer.append("<textarea id='" + name + "' name='" + name + "'>" + value_ + "</textarea>\n");
     }else {
-    	buffer.append("<textarea id='" + name + "' name='" + name + "'></textarea>\n");
+      buffer.append("<textarea id='" + name + "' name='" + name + "'></textarea>\n");
     }
     buffer.append("<script type='text/javascript'>\n");
     buffer.append("  //<![CDATA[\n");
     buffer.append("    var instances = CKEDITOR.instances['" + name + "']; if (instances) instances.destroy(true);\n");
-    buffer.append("    CKEDITOR.replace('" + name + "', {toolbar:'" + toolbar + "', width:" + width + ", height:" + height + ", contentsCss:" + contentsCss + "});\n");
+    buffer.append("    CKEDITOR.replace('" + name + "', {toolbar:'" + toolbar + "', width:" + width
+        + ", height:" + height + ", contentsCss:" + contentsCss + "});\n");
     buffer.append("  //]]>\n");
     buffer.append("</script>\n");
     if (isMandatory())
       buffer.append(" *");
     context.getWriter().write(buffer.toString());
   }
-  
+
   public void decode(Object input, WebuiRequestContext context) throws Exception {
     value_ = (String)input;
     if (value_ != null && value_.length() == 0)
        value_ = null;
   }
-  
+
 }

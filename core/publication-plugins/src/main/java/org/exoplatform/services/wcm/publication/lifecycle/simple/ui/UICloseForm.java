@@ -38,7 +38,7 @@ import org.exoplatform.webui.form.UIForm;
     }
 )
 public class UICloseForm extends UIForm {
-  
+
   /**
    * Instantiates a new uI close form.
    */
@@ -52,11 +52,11 @@ public class UICloseForm extends UIForm {
    * component's <code>addCloseActionListener<code> method. When
    * the closeAction event occurs, that object's appropriate
    * method is invoked.
-   * 
+   *
    * @see CloseActionEvent
    */
   public static class CloseActionListener extends EventListener<UICloseForm> {
-    
+
     /* (non-Javadoc)
      * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
      */

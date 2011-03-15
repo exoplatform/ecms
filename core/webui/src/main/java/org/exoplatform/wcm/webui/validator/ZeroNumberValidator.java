@@ -27,15 +27,15 @@ import org.exoplatform.webui.form.validator.Validator;
  * Created by The eXo Platform SAS
  * Author : Phan Le Thanh Chuong
  *          chuong_phan@exoplatform.com, phan.le.thanh.chuong@gmail.com
- * Oct 15, 2009  
+ * Oct 15, 2009
  */
 public class ZeroNumberValidator implements Validator {
 
-	@SuppressWarnings("unchecked")
-	public void validate(UIFormInput uiInput) throws Exception {
-	  if (uiInput.getValue()==null || ((String)uiInput.getValue()).length()==0) return;
+  @SuppressWarnings("unchecked")
+  public void validate(UIFormInput uiInput) throws Exception {
+    if (uiInput.getValue()==null || ((String)uiInput.getValue()).length()==0) return;
     UIComponent uiComponent = (UIComponent) uiInput ;
-    UIForm uiForm = uiComponent.getAncestorOfType(UIForm.class) ;    
+    UIForm uiForm = uiComponent.getAncestorOfType(UIForm.class) ;
     String label;
     try{
       label = uiForm.getLabel(uiInput.getName());
@@ -45,9 +45,9 @@ public class ZeroNumberValidator implements Validator {
     label = label.trim();
     if(label.charAt(label.length() - 1) == ':') label = label.substring(0, label.length() - 1);
     if (((String)uiInput.getValue()).charAt(0) == '0') {
-    	Object[] args = { label, uiInput.getBindingField() };
+      Object[] args = { label, uiInput.getBindingField() };
       throw new MessageException(new ApplicationMessage("ZeroValidator.msg.Invalid-number", args)) ;
     }
   }
-	
+
 }

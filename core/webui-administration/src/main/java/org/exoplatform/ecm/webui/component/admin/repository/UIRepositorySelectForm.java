@@ -44,7 +44,7 @@ import org.exoplatform.webui.form.UIFormSelectBox;
  * Created by The eXo Platform SARL
  * Author : Pham Tuan
  *          tuan.pham@exoplatform.com
- * Jun 2, 2007  
+ * Jun 2, 2007
  */
 @ComponentConfig(
     lifecycle = UIFormLifecycle.class,
@@ -60,20 +60,20 @@ public class UIRepositorySelectForm extends UIForm {
   }
 
   protected void setOptionValue(List<SelectItemOption<String>> list){
-    getUIFormSelectBox(FIELD_SELECTREPO).setOptions(list) ; 
+    getUIFormSelectBox(FIELD_SELECTREPO).setOptions(list) ;
   }
 
   protected void setActionEvent(){
     getUIFormSelectBox(FIELD_SELECTREPO).setOnChange("Onchange") ;
   }
 
-  protected String getSelectedValue() {    
+  protected String getSelectedValue() {
     return getUIFormSelectBox(FIELD_SELECTREPO).getValue() ;
   }
 
-  protected void setSelectedValue(String value) {    
+  protected void setSelectedValue(String value) {
     getUIFormSelectBox(FIELD_SELECTREPO).setValue(value) ;
-  }  
+  }
 
   public static class OnchangeActionListener extends EventListener<UIRepositorySelectForm>{
     public void execute(Event<UIRepositorySelectForm> event) throws Exception {
@@ -83,7 +83,7 @@ public class UIRepositorySelectForm extends UIForm {
       PortletRequestContext requestContext = (PortletRequestContext)event.getRequestContext() ;
       PortletRequest portletRequest = requestContext.getRequest() ;
       PortletPreferences portletPref = portletRequest.getPreferences() ;
-      String oldRepository = portletPref.getValue(Utils.REPOSITORY, "") ; 
+      String oldRepository = portletPref.getValue(Utils.REPOSITORY, "") ;
       String selectRepo = uiForm.getSelectedValue() ;
       portletPref.setValue(Utils.REPOSITORY, selectRepo) ;
       portletPref.store() ;

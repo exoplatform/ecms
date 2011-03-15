@@ -23,40 +23,40 @@ package org.exoplatform.wcm.webui.newsletter;
  * Jun 10, 2009
  */
 public class UINewsletterConstant {
-  
+
   /** The Constant MANAGER_USERS_POPUP_WINDOW. */
   public static final String MANAGER_USERS_POPUP_WINDOW = "UIManagerUsersFormPopupWindow";
-  
+
   /** The Constant CATEGORY_FORM_POPUP_WINDOW. */
   public static final String CATEGORY_FORM_POPUP_WINDOW = "UICategoryFormPopupWindow";
-  
+
   /** The Constant CATEGORY_FORM_POPUP_WINDOW. */
   public static final String REMOVE_MODERATORS_FORM_POPUP_WINDOW = "UIRemoveModeratorsFormPopupWindow";
-  
+
   /** The Constant SUBSCRIPTION_FORM_POPUP_WINDOW. */
   public static final String SUBSCRIPTION_FORM_POPUP_WINDOW = "UISubscriptionFormPopupWindow";
-  
+
   /** The Constant ENTRY_FORM_POPUP_WINDOW. */
   public static final String ENTRY_FORM_POPUP_WINDOW = "UINewsletterEntryFormPopupWindow";
-  
+
   /** The Constant USER_SELECTOR_POPUP_WINDOW. */
   public static final String USER_SELECTOR_POPUP_WINDOW    = "UIUserMemberSelectorPopupWindow";
-  
+
   /** The Constant GROUP_SELECTOR_POPUP_WINDOW. */
   public static final String GROUP_SELECTOR_POPUP_WINDOW   = "UIGroupMemberSelectorPopupWindow";
 
   /** The Constant WEBCONTENT_SELECTOR_POPUP_WINDOW. */
   public static final String WEBCONTENT_SELECTOR_POPUP_WINDOW   = "UIWebcontentSelectorPopupWindow";
- 
+
   /** The Constant WEBCONTENT_SELECTOR_FORM_POPUP_WINDOW. */
   public static final String WEBCONTENT_SELECTOR_FORM_POPUP_WINDOW = "UIWebcontentSelectorFormPopupWindow";
- 
+
   /** The Constant ENTRY_CATEGORY_SELECTBOX. */
   public static final String ENTRY_CATEGORY_SELECTBOX = "UINewsletterEntryCategorySelectBox";
 
   /** The Constant ENTRY_SUBSCRIPTION_SELECTBOX. */
   public static final String ENTRY_SUBSCRIPTION_SELECTBOX = "UINewsletterEntrySubscriptionSelectBox";
-  
+
   /** The Constant UIVIEW_ENTRY_PUPUP_WINDOW. */
   public static final String UIVIEW_ENTRY_PUPUP_WINDOW = "UINewsletterEntryViewForm";
 }

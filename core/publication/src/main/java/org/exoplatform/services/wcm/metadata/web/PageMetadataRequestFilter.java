@@ -50,7 +50,7 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
  * hoa.phamvu@exoplatform.com
  * Nov 3, 2008
  */
-public class PageMetadataRequestFilter implements Filter {  
+public class PageMetadataRequestFilter implements Filter {
 
   /** The log. */
   private Log log = ExoLogger.getLogger(this.getClass());
@@ -60,17 +60,17 @@ public class PageMetadataRequestFilter implements Filter {
   /* (non-Javadoc)
    * @see javax.servlet.Filter#init(javax.servlet.FilterConfig)
    */
-  public void init(FilterConfig config) throws ServletException {    
+  public void init(FilterConfig config) throws ServletException {
   }
 
   /**
    * This method will filter a request to a portal page in wcm context to set page title, page metadata for the page
    * These information is very important for search engine can indexing the page in Internet environment.
-   * 
+   *
    * @param servletRequest request
    * @param servletResponse response
    * @param chain the filter chain
-   * 
+   *
    * @throws IOException, ServletException
    * @throws IOException Signals that an I/O exception has occurred.
    * @throws ServletException the servlet exception
@@ -80,20 +80,20 @@ public class PageMetadataRequestFilter implements Filter {
   throws IOException, ServletException {
     HttpServletRequest req = (HttpServletRequest) servletRequest;
     try {
-      boolean check = checkAndSetMetadataIfRequestToPCVPortlet(req);      
+      boolean check = checkAndSetMetadataIfRequestToPCVPortlet(req);
       if(!check)
         setPortalMetadata(req);
     } catch (Exception e) {
       log.error("Error when doFilter: ", e);
-    } 
+    }
     chain.doFilter(servletRequest,servletResponse);
-  }  
+  }
 
   /**
    * Sets the portal metadata.
-   * 
+   *
    * @param req the new portal metadata
-   * 
+   *
    * @throws Exception the exception
    */
   private void setPortalMetadata(HttpServletRequest req) throws Exception {
@@ -101,40 +101,40 @@ public class PageMetadataRequestFilter implements Filter {
     PageMetadataService metadataRegistry = getService(PageMetadataService.class);
     SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
     HashMap<String,String> metadata = metadataRegistry.getPortalMetadata(sessionProvider, pathInfo);
-    if(metadata != null) 
+    if(metadata != null)
       req.setAttribute(PortalRequestContext.REQUEST_METADATA, metadata);
-  }    
-  
+  }
+
   /**
    * Check and set metadata if request to pcv portlet.
-   * 
+   *
    * @param req the req
-   * 
+   *
    * @return true, if successful
-   * 
+   *
    * @throws Exception the exception
    */
-  private boolean checkAndSetMetadataIfRequestToPCVPortlet(HttpServletRequest req) throws Exception {    
+  private boolean checkAndSetMetadataIfRequestToPCVPortlet(HttpServletRequest req) throws Exception {
     String pathInfo = req.getPathInfo();
-    if(pathInfo == null) return false;    
+    if(pathInfo == null) return false;
     WCMConfigurationService configurationService = getService(WCMConfigurationService.class);
     String parameterizedPageURI = configurationService.getRuntimeContextParam(WCMConfigurationService.PARAMETERIZED_PAGE_URI);
-    String printPreviewPageURI = configurationService.getRuntimeContextParam(WCMConfigurationService.PRINT_VIEWER_PAGE);    
-    int index = pathInfo.indexOf(parameterizedPageURI);    
+    String printPreviewPageURI = configurationService.getRuntimeContextParam(WCMConfigurationService.PRINT_VIEWER_PAGE);
+    int index = pathInfo.indexOf(parameterizedPageURI);
     String parameter = null;
-    if(index<1 && printPreviewPageURI != null) {      
+    if(index<1 && printPreviewPageURI != null) {
       index = pathInfo.indexOf(printPreviewPageURI);
       if(index<1) return false;
       parameter = pathInfo.substring(index + printPreviewPageURI.length() + 1);
     }else {
       parameter = pathInfo.substring(index + parameterizedPageURI.length() + 1);
-    }  
+    }
     if(parameter == null )
       return false;
     if(!parameter.matches(PCV_PARAMETER_REGX)) return false;
     int firstSlash = parameter.indexOf("/");
     String repository = parameter.substring(0,firstSlash);
-    int secondSlash = parameter.indexOf("/",firstSlash +1);    
+    int secondSlash = parameter.indexOf("/",firstSlash +1);
     String workspace = parameter.substring(firstSlash + 1, secondSlash);
     String nodeIdentifier = parameter.substring(secondSlash + 1);
     RepositoryService repositoryService = getService(RepositoryService.class);
@@ -144,24 +144,24 @@ public class PageMetadataRequestFilter implements Filter {
       Session session = sessionProvider.getSession(workspace,repositoryService.getRepository(repository));
       if(nodeIdentifier.indexOf("/")<0) {
         node = session.getNodeByUUID(nodeIdentifier);
-      }else {         
+      }else {
         node = (Node)session.getItem("/" + nodeIdentifier);
-      }                 
-    } catch (ItemNotFoundException e) {            
+      }
+    } catch (ItemNotFoundException e) {
     }catch (PathNotFoundException e) {
-      req.setAttribute("ParameterizedContentViewerPortlet.data.object",new ItemNotFoundException());      
+      req.setAttribute("ParameterizedContentViewerPortlet.data.object",new ItemNotFoundException());
     }catch (AccessControlException e) {
-      req.setAttribute("ParameterizedContentViewerPortlet.data.object",e);     
+      req.setAttribute("ParameterizedContentViewerPortlet.data.object",e);
     }catch (Exception e) {
       req.setAttribute("ParameterizedContentViewerPortlet.data.object",new ItemNotFoundException());
     }
-    if(node != null) {      
+    if(node != null) {
       req.setAttribute("ParameterizedContentViewerPortlet.data.object",node);
-      PageMetadataService pageMetadataService = getService(PageMetadataService.class);      
+      PageMetadataService pageMetadataService = getService(PageMetadataService.class);
       Map<String,String> pageMetadata = pageMetadataService.extractMetadata(node);
-      String title = pageMetadata.get(PageMetadataService.PAGE_TITLE);      
-      if(title != null) {        
-        req.setAttribute(PortalRequestContext.REQUEST_TITLE,title);        
+      String title = pageMetadata.get(PageMetadataService.PAGE_TITLE);
+      if(title != null) {
+        req.setAttribute(PortalRequestContext.REQUEST_TITLE,title);
       }
       req.setAttribute(PortalRequestContext.REQUEST_METADATA,pageMetadata);
       if (node.hasProperty("exo:title")) {
@@ -169,15 +169,15 @@ public class PageMetadataRequestFilter implements Filter {
       }
       req.setAttribute("WCM.Content.Title", node.getName());
       return true;
-    }      
+    }
     return false;
-  }   
+  }
 
   /**
    * Gets the service.
-   * 
+   *
    * @param clazz the clazz
-   * 
+   *
    * @return the service
    */
   private <T> T getService(Class<T> clazz) {
@@ -188,6 +188,6 @@ public class PageMetadataRequestFilter implements Filter {
   /* (non-Javadoc)
    * @see javax.servlet.Filter#destroy()
    */
-  public void destroy() {    
+  public void destroy() {
   }
 }

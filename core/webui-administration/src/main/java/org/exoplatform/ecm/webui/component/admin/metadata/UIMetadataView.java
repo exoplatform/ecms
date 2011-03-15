@@ -30,7 +30,7 @@ import org.exoplatform.webui.event.EventListener;
  * Author : Dang Van Minh
  *          minh.dang@exoplatform.com
  * Sep 20, 2006
- * 8:59:13 AM 
+ * 8:59:13 AM
  */
 @ComponentConfig(
     template = "app:/groovy/webui/component/admin/metadata/UIMetadataView.gtmpl",

@@ -26,11 +26,11 @@ import org.exoplatform.portal.resource.SkinService;
 
 /**
  * Created by The eXo Platform SAS
- * Author : Hoa Pham	
+ * Author : Hoa Pham
  *          hoa.phamvu@exoplatform.com
- * Nov 25, 2008  
+ * Nov 25, 2008
  */
-public class WCMSkinResourceResolver implements ResourceResolver {  
+public class WCMSkinResourceResolver implements ResourceResolver {
   private SkinService skinService;
 
   public WCMSkinResourceResolver(SkinService skinService) {
@@ -43,27 +43,27 @@ public class WCMSkinResourceResolver implements ResourceResolver {
     String portalName = elements[4];
     String skinName = elements[5];
     String skinModule = portalName;
-    String cssPath = null;    
+    String cssPath = null;
     SkinConfig portalSkinConfig = skinService.getSkin(portalName,skinName);
     if(portalSkinConfig != null) {
       cssPath = portalSkinConfig.getCSSPath();
-    }    
+    }
     //get css for shared portal if the portalName is shared Portal
     if(cssPath == null) {
       for(SkinConfig skinConfig: skinService.getPortalSkins(skinName)) {
         if(skinConfig.getModule().equals(skinModule)) {
           cssPath = skinConfig.getCSSPath();
-          break;        
+          break;
         }
-      }  
+      }
     }
     final String cssData = skinService.getMergedCSS(cssPath);
-    if(cssData == null) 
-      return null;     
+    if(cssData == null)
+      return null;
     return new Resource(cssPath) {
       public Reader read() {
         return new StringReader(cssData);
       }
-    };            
+    };
   }
 }

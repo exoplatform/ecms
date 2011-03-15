@@ -37,6 +37,6 @@ public class RepeatIntervalValidator implements Validator {
     } catch(Exception e) {
       throw new MessageException(
           new ApplicationMessage("RepeatIntervalValidator.msg.invalid-value", null, ApplicationMessage.WARNING)) ;
-    }    
+    }
   }
 }

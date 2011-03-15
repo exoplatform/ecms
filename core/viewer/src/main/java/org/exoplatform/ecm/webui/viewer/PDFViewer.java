@@ -57,7 +57,7 @@ import org.icepdf.core.pobjects.PInfo;
  * Created by The eXo Platform SARL
  * Author : Dang Van Minh
  *          minh.dang@exoplatform.com
- * Aug 18, 2009  
+ * Aug 18, 2009
  * 3:49:41 AM
  */
 @ComponentConfig(
@@ -82,15 +82,15 @@ public class PDFViewer extends UIForm {
 
   final static private String PAGE_NUMBER = "pageNumber";
   final static private String SCALE_PAGE = "scalePage";
-  
+
   final private String localeFile = "locale.portlet.viewer.PDFViewer";
-  
+
   private int currentPageNumber_ = 1;
   private int maximumOfPage_ = 0;
   private float currentRotation_ = 0.0f;
   private float currentScale_ = 1.0f;
   private Map<String, String> metadatas = new HashMap<String, String>();
-  
+
   public PDFViewer() throws Exception {
     addUIFormInput(new UIFormStringInput(PAGE_NUMBER, PAGE_NUMBER, "1"));
     UIFormSelectBox uiScaleBox = new UIFormSelectBox(SCALE_PAGE, SCALE_PAGE, initScaleOptions());
@@ -98,17 +98,17 @@ public class PDFViewer extends UIForm {
     addUIFormInput(uiScaleBox);
     uiScaleBox.setValue("1.0f");
   }
-  
+
   public Method getMethod(UIComponent uiComponent, String name) throws NoSuchMethodException {
     return uiComponent.getClass().getMethod(name, new Class[0]);
   }
-  
+
   public void initDatas() throws Exception {
     UIComponent uiParent = getParent();
     Method method = getMethod(uiParent, "getOriginalNode");
     Node originalNode = null;
     if(method != null) originalNode = (Node) method.invoke(uiParent, (Object[]) null);
-    
+
     if(originalNode != null) {
       Document document = getDocument(originalNode);
       if(document != null) maximumOfPage_ = document.getNumberOfPages();
@@ -116,28 +116,28 @@ public class PDFViewer extends UIForm {
       putDocumentInfo(document.getInfo());
       document.dispose();
     }
-    
+
   }
-  
+
   public Map getMetadataExtraction() { return metadatas; }
-  
-  public int getMaximumOfPage() throws Exception { 
+
+  public int getMaximumOfPage() throws Exception {
     if(maximumOfPage_ == 0) initDatas();
-    return maximumOfPage_; 
+    return maximumOfPage_;
   }
-  
+
   public float getCurrentRotation() { return currentRotation_; }
-  
+
   public void setRotation(float rotation) { currentRotation_ = rotation; }
-  
+
   public float getCurrentScale() { return currentScale_; }
-  
+
   public void setScale(float scale) { currentScale_ = scale; }
-  
+
   public int getPageNumber() { return currentPageNumber_; }
-  
+
   public void setPageNumber(int pageNum) { currentPageNumber_ = pageNum; };
-  
+
   public String getResourceBundle(String key) {
     ExoContainer container = ExoContainerContext.getCurrentContainer();
     Locale locale = Util.getUIPortal().getAncestorOfType(UIPortalApplication.class).getLocale() ;
@@ -151,7 +151,7 @@ public class PDFViewer extends UIForm {
     String repository = (String) getMethod(this.getParent(), "getRepository").invoke(this.getParent(), (Object[]) null);
     return pdfViewerService.initDocument(node, repository);
   }
-  
+
   private void putDocumentInfo(PInfo documentInfo) {
     if (documentInfo != null) {
       if(documentInfo.getTitle() != null && documentInfo.getTitle().length() > 0) {
@@ -177,10 +177,10 @@ public class PDFViewer extends UIForm {
       }
       if(documentInfo.getModDate() != null) {
         metadatas.put("modDate", documentInfo.getModDate().toString());
-      }      
+      }
     }
   }
-  
+
   private List<SelectItemOption<String>> initScaleOptions() {
     List<SelectItemOption<String>> scaleOptions = new ArrayList<SelectItemOption<String>>();
     scaleOptions.add(new SelectItemOption<String>("5%",  "0.05f"));
@@ -195,9 +195,9 @@ public class PDFViewer extends UIForm {
     scaleOptions.add(new SelectItemOption<String>("300%",  "3.0f"));
     return scaleOptions;
   }
-  
+
   static public class PreviousPageActionListener extends EventListener<PDFViewer> {
-    public void execute(Event<PDFViewer> event) throws Exception {     
+    public void execute(Event<PDFViewer> event) throws Exception {
       PDFViewer pdfViewer = event.getSource();
       if(pdfViewer.currentPageNumber_ == 1) {
         pdfViewer.getUIStringInput(PAGE_NUMBER).setValue(
@@ -210,9 +210,9 @@ public class PDFViewer extends UIForm {
       event.getRequestContext().addUIComponentToUpdateByAjax(pdfViewer);
     }
   }
-  
+
   static public class NextPageActionListener extends EventListener<PDFViewer> {
-    public void execute(Event<PDFViewer> event) throws Exception {     
+    public void execute(Event<PDFViewer> event) throws Exception {
       PDFViewer pdfViewer = event.getSource();
       if(pdfViewer.currentPageNumber_ == pdfViewer.maximumOfPage_) {
         pdfViewer.getUIStringInput(PAGE_NUMBER).setValue(
@@ -227,7 +227,7 @@ public class PDFViewer extends UIForm {
   }
 
   static public class GotoPageActionListener extends EventListener<PDFViewer> {
-    public void execute(Event<PDFViewer> event) throws Exception {     
+    public void execute(Event<PDFViewer> event) throws Exception {
       PDFViewer pdfViewer = event.getSource();
       String pageStr = pdfViewer.getUIStringInput(PAGE_NUMBER).getValue();
       int pageNumber = 1;
@@ -245,23 +245,23 @@ public class PDFViewer extends UIForm {
   }
 
   static public class RotateRightPageActionListener extends EventListener<PDFViewer> {
-    public void execute(Event<PDFViewer> event) throws Exception {     
+    public void execute(Event<PDFViewer> event) throws Exception {
       PDFViewer pdfViewer = event.getSource();
       pdfViewer.setRotation(pdfViewer.currentRotation_ + 270.0f);
       event.getRequestContext().addUIComponentToUpdateByAjax(pdfViewer);
     }
   }
- 
+
   static public class RotateLeftPageActionListener extends EventListener<PDFViewer> {
-    public void execute(Event<PDFViewer> event) throws Exception {     
+    public void execute(Event<PDFViewer> event) throws Exception {
       PDFViewer pdfViewer = event.getSource();
       pdfViewer.setRotation(pdfViewer.currentRotation_ + 90.0f);
       event.getRequestContext().addUIComponentToUpdateByAjax(pdfViewer);
     }
   }
-  
+
   static public class ScalePageActionListener extends EventListener<PDFViewer> {
-    public void execute(Event<PDFViewer> event) throws Exception {     
+    public void execute(Event<PDFViewer> event) throws Exception {
       PDFViewer pdfViewer = event.getSource();
       String scale = pdfViewer.getUIFormSelectBox(SCALE_PAGE).getValue();
       pdfViewer.setScale(Float.parseFloat(scale));
@@ -270,7 +270,7 @@ public class PDFViewer extends UIForm {
   }
 
   static public class DownloadFileActionListener extends EventListener<PDFViewer> {
-    public void execute(Event<PDFViewer> event) throws Exception {     
+    public void execute(Event<PDFViewer> event) throws Exception {
       PDFViewer pdfViewer = event.getSource();
       UIComponent uiParent = pdfViewer.getParent();
       Method methodGetNode = pdfViewer.getMethod(uiParent, "getNode");
@@ -278,13 +278,13 @@ public class PDFViewer extends UIForm {
       String repository = (String) pdfViewer.getMethod(uiParent, "getRepository").invoke(uiParent, (Object[]) null);
       PDFViewerRESTService pdfViewerService = pdfViewer.getApplicationComponent(PDFViewerRESTService.class);
       File file = pdfViewerService.getPDFDocumentFile(node, repository);
-      String fileName = node.getName();    
+      String fileName = node.getName();
       String mimeType = node.getNode("jcr:content").getProperty("jcr:mimeType").getString();
       String extension = DMSMimeTypeResolver.getInstance().getExtension(mimeType);
       fileName = fileName.replace(extension, "pdf");
-      DownloadService dservice = pdfViewer.getApplicationComponent(DownloadService.class) ;    
+      DownloadService dservice = pdfViewer.getApplicationComponent(DownloadService.class) ;
       InputStreamDownloadResource dresource = new InputStreamDownloadResource(
-					new BufferedInputStream(new FileInputStream(file)), DMSMimeTypeResolver.getInstance().getMimeType(".pdf"));
+          new BufferedInputStream(new FileInputStream(file)), DMSMimeTypeResolver.getInstance().getMimeType(".pdf"));
       dresource.setDownloadName(fileName) ;
       String downloadLink = dservice.getDownloadLink(dservice.addDownloadResource(dresource)) ;
         event.getRequestContext().getJavascriptManager().addCustomizedOnLoadScript(
@@ -294,9 +294,9 @@ public class PDFViewer extends UIForm {
   }
 
   static public class ZoomInPageActionListener extends EventListener<PDFViewer> {
-    public void execute(Event<PDFViewer> event) throws Exception {     
+    public void execute(Event<PDFViewer> event) throws Exception {
       PDFViewer pdfViewer = event.getSource();
-      String[] arrValue = {"0.05f", "0.1f", "0.25f", "0.5f", "0.75f", "1.0f", 
+      String[] arrValue = {"0.05f", "0.1f", "0.25f", "0.5f", "0.75f", "1.0f",
           "1.25f", "1.5f", "2.0f", "3.0f"};
       String scale = pdfViewer.getUIFormSelectBox(SCALE_PAGE).getValue();
       if(scale.equals(arrValue[arrValue.length - 1])) return;
@@ -310,12 +310,12 @@ public class PDFViewer extends UIForm {
       event.getRequestContext().addUIComponentToUpdateByAjax(pdfViewer);
     }
   }
-  
+
   static public class ZoomOutPageActionListener extends EventListener<PDFViewer> {
-    public void execute(Event<PDFViewer> event) throws Exception {     
+    public void execute(Event<PDFViewer> event) throws Exception {
       PDFViewer pdfViewer = event.getSource();
       String scale = pdfViewer.getUIFormSelectBox(SCALE_PAGE).getValue();
-      String[] arrValue = {"0.05f", "0.1f", "0.25f", "0.5f", "0.75f", "1.0f", 
+      String[] arrValue = {"0.05f", "0.1f", "0.25f", "0.5f", "0.75f", "1.0f",
           "1.25f", "1.5f", "2.0f", "3.0f"};
       if(scale.equals(arrValue[0])) return;
       for(int i = 0; i < arrValue.length - 1; i++) {
@@ -327,5 +327,5 @@ public class PDFViewer extends UIForm {
       }
       event.getRequestContext().addUIComponentToUpdateByAjax(pdfViewer);
     }
-  }  
+  }
 }

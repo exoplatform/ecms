@@ -28,21 +28,21 @@ import org.jbpm.graph.exe.ProcessInstance;
 public class ProcessInstanceData implements org.exoplatform.services.workflow.ProcessInstance{
 
   public static final String STARTED = "started";
-  public static final String FINISHED = "finished";  
-  
+  public static final String FINISHED = "finished";
+
   private String state = STARTED;
-  private ProcessInstance processInstance;  
-  
+  private ProcessInstance processInstance;
+
   public ProcessInstanceData(ProcessInstance processInstance) {
-    this.processInstance = processInstance;         
+    this.processInstance = processInstance;
   }
   public Date getEndDate() {
     return processInstance.getEnd();
-  }  
+  }
 
   public String getProcessId() {
     return ""+processInstance.getProcessDefinition().getId();
-  }  
+  }
 
   public String getProcessInstanceId() {
     return ""+processInstance.getId();
@@ -51,9 +51,9 @@ public class ProcessInstanceData implements org.exoplatform.services.workflow.Pr
   public Date getStartDate() {
     return processInstance.getStart();
   }
-  
+
   public String getProcessName() {
     return processInstance.getProcessDefinition().getName();
-  }  
-  
+  }
+
 }

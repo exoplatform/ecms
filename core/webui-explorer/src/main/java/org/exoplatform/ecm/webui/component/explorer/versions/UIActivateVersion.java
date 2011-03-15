@@ -36,20 +36,20 @@ import org.exoplatform.webui.event.EventListener;
  * Author : trongtt
  *          trongtt@gmail.com
  * Oct 16, 2006
- * 14:07:15 
+ * 14:07:15
  */
 
 @ComponentConfig(
     type = UIActivateVersion.class,
     template = "app:/groovy/webui/component/explorer/versions/UIActivateVersion.gtmpl",
-    events = {                
+    events = {
         @EventConfig(listeners = UIActivateVersion.EnableVersionActionListener.class),
         @EventConfig(listeners = UIActivateVersion.CancelActionListener.class)
     }
 )
 
 public class UIActivateVersion extends UIContainer implements UIPopupComponent {
-  
+
   public UIActivateVersion() throws Exception {}
 
   public void activate() throws Exception {}
@@ -75,14 +75,14 @@ public class UIActivateVersion extends UIContainer implements UIPopupComponent {
       }
       currentNode.addMixin(Utils.MIX_VERSIONABLE);
       currentNode.save() ;
-      currentNode.getSession().save();   
-      currentNode.getSession().refresh(true) ;      
+      currentNode.getSession().save();
+      currentNode.getSession().refresh(true) ;
       uiExplorer.updateAjax(event) ;
     }
   }
 
   static  public class CancelActionListener extends EventListener<UIActivateVersion> {
-    public void execute(Event<UIActivateVersion> event) throws Exception {      
+    public void execute(Event<UIActivateVersion> event) throws Exception {
       UIJCRExplorer uiExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class) ;
       uiExplorer.cancelAction() ;
     }

@@ -40,7 +40,7 @@ import org.exoplatform.webui.core.UIApplication;
  * Created by The eXo Platform SARL
  * Author : Hoang Van Hung
  *          hunghvit@gmail.com
- * Sep 17, 2009  
+ * Sep 17, 2009
  */
 
 @ComponentConfig(
@@ -51,20 +51,20 @@ import org.exoplatform.webui.core.UIApplication;
 public class RemoveCommentComponent extends AbstractActionComponent {
 
   private static final Log LOG = ExoLogger.getLogger(RemoveCommentComponent.class);
-  
+
   /**
    * Overide method UIComponent.loadConfirmMesssage() to get resource bundle in jar file
    */
   protected String loadConfirmMesssage(org.exoplatform.webui.config.Event event, WebuiRequestContext context, String beanId) {
     String confirmKey  = event.getConfirm();
-    if(confirmKey.length() < 1) return confirmKey;  
+    if(confirmKey.length() < 1) return confirmKey;
     try {
       String confirm = Utils.getResourceBundle(Utils.LOCALE_WEBUI_DMS, confirmKey, getClass().getClassLoader());
       return confirm.replaceAll("\\{0\\}", beanId);
     }catch (Exception e) {}
     return confirmKey;
   }
-  
+
   public static void doDelete(Map<String, Object> variables) throws Exception {
     AbstractActionComponent uicomponent = (AbstractActionComponent)variables.get(UICOMPONENT);
     UIApplication uiApp = uicomponent.getAncestorOfType(UIApplication.class);
@@ -76,13 +76,13 @@ public class RemoveCommentComponent extends AbstractActionComponent {
     try {
       Node commentNode = (Node) nodefinder.getItem(repository, wsname, nodepath);
       CommentsService commentService = uicomponent.getApplicationComponent(CommentsService.class);
-      commentService.deleteComment(commentNode);        
-      uicomponent.updateAjax(requestcontext);    
+      commentService.deleteComment(commentNode);
+      uicomponent.updateAjax(requestcontext);
     } catch(VersionException e) {
       LOG.error("Version exception");
       Object[] args = { nodepath } ;
-      uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.can-not-delete-version", args, 
-          ApplicationMessage.WARNING));      
+      uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.can-not-delete-version", args,
+          ApplicationMessage.WARNING));
       requestcontext.addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
     } catch (Exception e) {
       LOG.error("an unexpected error occurs while removing the node", e);
@@ -96,6 +96,6 @@ public class RemoveCommentComponent extends AbstractActionComponent {
       RemoveCommentComponent.doDelete(variables);
     }
   }
-  
-  
+
+
 }

@@ -36,7 +36,7 @@ import org.exoplatform.services.security.MembershipEntry;
  * Author : Ly Dinh Quang
  *          quang.ly@exoplatform.com
  *          xxx5669@gmail.com
- * Jan 6, 2009  
+ * Jan 6, 2009
  */
 public abstract class WorkflowActionLauncherListener implements ECMEventListener {
   protected String actionName_;
@@ -55,7 +55,7 @@ public abstract class WorkflowActionLauncherListener implements ECMEventListener
   private static final String BACUP_PATH = "publication:backupPath".intern();
   private static final String DOCUMENT_BACUPUP = "documentsBackupPath";
   private static final Log LOG  = ExoLogger.getLogger(WorkflowActionLauncherListener.class);
-  
+
   public WorkflowActionLauncherListener(String actionName, String executable,
       String repository, String srcWorkspace, String srcPath, Map actionVariables)
   throws Exception {
@@ -67,36 +67,36 @@ public abstract class WorkflowActionLauncherListener implements ECMEventListener
     actionVariables_ = actionVariables;
   }
 
-  public String getSrcWorkspace() { return srcWorkspace_; }  
+  public String getSrcWorkspace() { return srcWorkspace_; }
   public String getRepository() { return repository_; }
 
   @SuppressWarnings("unchecked")
   public void onEvent(EventIterator events) {
     ExoContainer exoContainer = ExoContainerContext.getCurrentContainer() ;
-    RepositoryService repositoryService = 
-      (RepositoryService) exoContainer.getComponentInstanceOfType(RepositoryService.class);    
-    ActionServiceContainer actionServiceContainer = 
+    RepositoryService repositoryService =
+      (RepositoryService) exoContainer.getComponentInstanceOfType(RepositoryService.class);
+    ActionServiceContainer actionServiceContainer =
       (ActionServiceContainer) exoContainer.getComponentInstanceOfType(ActionServiceContainer.class);
     IdentityRegistry identityRegistry = (IdentityRegistry) exoContainer.getComponentInstanceOfType(IdentityRegistry.class);
-    
-    TemplateService templateService = 
-      (TemplateService) exoContainer.getComponentInstanceOfType(TemplateService.class);       
+
+    TemplateService templateService =
+      (TemplateService) exoContainer.getComponentInstanceOfType(TemplateService.class);
     if (events.hasNext()) {
-      Event event = events.nextEvent();  
-      Node node = null;      
+      Event event = events.nextEvent();
+      Node node = null;
       Session jcrSession = null;
       try {
         jcrSession = repositoryService.getRepository(repository_).getSystemSession(srcWorkspace_);
         node = (Node) jcrSession.getItem(srcPath_);
         String userId = event.getUserID();
         Node actionNode = actionServiceContainer.getAction(node, actionName_);
-        Property rolesProp = actionNode.getProperty("exo:roles");        
-        Value[] roles = rolesProp.getValues();        
+        Property rolesProp = actionNode.getProperty("exo:roles");
+        Value[] roles = rolesProp.getValues();
         boolean hasPermission = checkExcetuteable(userId, roles, identityRegistry) ;
         if (!hasPermission) {
           jcrSession.logout();
           return;
-        }          
+        }
         String path = event.getPath();
         Map<String, String> variables = new HashMap<String, String>();
         variables.put("initiator", userId);
@@ -106,41 +106,44 @@ public abstract class WorkflowActionLauncherListener implements ECMEventListener
         variables.put("srcWorkspace", srcWorkspace_);
         variables.put("srcPath", srcPath_);
         variables.putAll(actionVariables_);
-        if(event.getType() == Event.NODE_ADDED) {          
-          node = (Node) jcrSession.getItem(path);        
+        if(event.getType() == Event.NODE_ADDED) {
+          node = (Node) jcrSession.getItem(path);
           String nodeType = node.getPrimaryNodeType().getName();
-          if (templateService.getDocumentTemplates().contains(nodeType)) {                    
+          if (templateService.getDocumentTemplates().contains(nodeType)) {
             variables.put("document-type", nodeType);
             triggerAction(userId, variables, repository_);
-          }          
+          }
         } else {
           triggerAction(userId, variables, repository_);
         }
         jcrSession.logout();
-        
+
         if (node.canAddMixin(MIXIN_MOVE)) {
           node.addMixin(MIXIN_MOVE);
           node.getSession().save();
         }
-        
-        ExoContainer container = ExoContainerContext.getCurrentContainer();   
-        PublicationService publicationService = (PublicationService) container.getComponentInstanceOfType(PublicationService.class);
+
+        ExoContainer container = ExoContainerContext.getCurrentContainer();
+        PublicationService publicationService = (PublicationService) container.
+            getComponentInstanceOfType(PublicationService.class);
         publicationService.enrollNodeInLifecycle(node, WORKFLOW);
         node.getSession().save();
-        
+
         node.setProperty(CURRENT_STATE, VALIDATION_REQUEST);
         String date =  new SimpleDateFormat("yyyy-MM-dd HH:mm:ss:SSS").format(new Date());
-        String[] logs = {date, VALIDATION_REQUEST, node.getSession().getUserID(), "PublicationService.WorkflowPublicationPlugin.nodeValidationRequest"};
+        String[] logs = { date, VALIDATION_REQUEST, node.getSession().getUserID(),
+            "PublicationService.WorkflowPublicationPlugin.nodeValidationRequest" };
         publicationService.addLog(node, logs);
-        
-        NodeHierarchyCreator hierarchyCreator = (NodeHierarchyCreator)container.getComponentInstanceOfType(NodeHierarchyCreator.class);
+
+        NodeHierarchyCreator hierarchyCreator = (NodeHierarchyCreator) container.
+            getComponentInstanceOfType(NodeHierarchyCreator.class);
         String documentBackup = hierarchyCreator.getJcrPath(DOCUMENT_BACUPUP);
         node.setProperty(DEST_WORKSPACE, actionNode.getProperty
             (DEST_WORKSPACE).getString());
         node.setProperty(DESTPATH, actionNode.getProperty
             (DESTPATH).getString());
         node.setProperty(BACUP_PATH, documentBackup);
-        
+
         node.getSession().save();
       } catch (Exception e) {
         if(jcrSession != null) jcrSession.logout();
@@ -154,14 +157,14 @@ public abstract class WorkflowActionLauncherListener implements ECMEventListener
 
   }
 
-  private boolean checkExcetuteable(String userId,Value[] roles, IdentityRegistry identityRegistry) throws Exception {        
+  private boolean checkExcetuteable(String userId, Value[] roles, IdentityRegistry identityRegistry) throws Exception {
     if(SystemIdentity.SYSTEM.equalsIgnoreCase(userId)) {
       return true ;
     }
     Identity identity = identityRegistry.getIdentity(userId);
     if(identity == null) {
-      return false ; 
-    }        
+      return false ;
+    }
     for (int i = 0; i < roles.length; i++) {
       String role = roles[i].getString();
       if("*".equalsIgnoreCase(role)) return true ;

@@ -37,28 +37,28 @@ import org.exoplatform.services.jcr.config.RepositoryEntry;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 
-public class TagStylePlugin extends BaseComponentPlugin{		  
-  
+public class TagStylePlugin extends BaseComponentPlugin{
+
   final private static String EXO_TAG_STYLE = "exo:tagStyle".intern() ;
   final private static String TAG_RATE_PROP = "exo:styleRange".intern() ;
   final private static String HTML_STYLE_PROP = "exo:htmlStyle".intern() ;
-	private InitParams params_ ;
+  private InitParams params_ ;
   private RepositoryService repositoryService_ ;
   private NodeHierarchyCreator nodeHierarchyCreator_ ;
-  
-  
-	public TagStylePlugin(InitParams params, RepositoryService repoService,
+
+
+  public TagStylePlugin(InitParams params, RepositoryService repoService,
       NodeHierarchyCreator nodeHierarchyCreator) throws Exception {
     params_ = params ;
     repositoryService_ = repoService ;
     nodeHierarchyCreator_ = nodeHierarchyCreator ;
-	}	 
-  
+  }
+
   /**
-   * Init tag style nodes in repository. 
-   */  
+   * Init tag style nodes in repository.
+   */
   @SuppressWarnings("unchecked")
-  public void init() throws Exception {   
+  public void init() throws Exception {
     Iterator<ObjectParameter> it = params_.getObjectParamIterator() ;
     TagStyleConfig tagConfig ;
     Session session = null;
@@ -73,12 +73,12 @@ public class TagStylePlugin extends BaseComponentPlugin{
         session = getSession(tagConfig.getRepository());
         addTag(session, tagConfig) ;
         session.logout();
-      }      
+      }
     }
   }
-  
+
   /**
-   * Init tag style nodes in specific repository. 
+   * Init tag style nodes in specific repository.
    */
   @SuppressWarnings("unchecked")
   public void init(String repository) throws Exception {
@@ -88,13 +88,13 @@ public class TagStylePlugin extends BaseComponentPlugin{
     while(it.hasNext()) {
       tagConfig = (TagStyleConfig)it.next().getObject() ;
       if(tagConfig.getAutoCreatedInNewRepository() || repository.equals(tagConfig.getRepository())) {
-        session = getSession(tagConfig.getRepository()); 
+        session = getSession(tagConfig.getRepository());
         addTag(session, tagConfig) ;
         session.logout();
       }
     }
   }
-  
+
   /**
    * Method addTag will set value of HTML_STYLE_PROP property and value of TAG_RATE_PROP property
    * for tag style node.
@@ -109,21 +109,21 @@ public class TagStylePlugin extends BaseComponentPlugin{
       tagStyleNode.setProperty(HTML_STYLE_PROP,style.getHtmlStyle()) ;
     }
     exoTagStyleHomeNode.save() ;
-    session.save() ;    
+    session.save() ;
   }
-  
+
   /**
   * Get session in system workspace from given repository name
   * @param repository        repository name
   * @return                  Session
   * @throws Exception
   */
- private Session getSession(String repository) throws Exception{ 
+ private Session getSession(String repository) throws Exception{
    ManageableRepository manageableRepository = repositoryService_.getRepository(repository);
    ExoContainer myContainer = ExoContainerContext.getCurrentContainer();
    DMSConfiguration dmsConfiguration = (DMSConfiguration)
    myContainer.getComponentInstanceOfType(DMSConfiguration.class);
-   DMSRepositoryConfiguration dmsRepoConfig = dmsConfiguration.getConfig();   
+   DMSRepositoryConfiguration dmsRepoConfig = dmsConfiguration.getConfig();
    return manageableRepository.getSystemSession(dmsRepoConfig.getSystemWorkspace());
  }
 }

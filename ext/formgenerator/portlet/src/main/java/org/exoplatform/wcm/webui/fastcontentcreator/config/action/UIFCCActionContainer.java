@@ -33,7 +33,7 @@ public class UIFCCActionContainer extends UIContainer {
 
   /**
    * Instantiates a new uIFCC action container.
-   * 
+   *
    * @throws Exception the exception
    */
   public UIFCCActionContainer() throws Exception {

@@ -21,15 +21,15 @@ package org.exoplatform.services.cms.views;
  * Author : Nguyen Quang Hung
  *          nguyenkequanghung@yahoo.com
  * Feb 27, 2006
- * 
+ *
  */
-public class TemplateConfig {  
+public class TemplateConfig {
   private String name ;
   private String warPath ;
-  private String type ;   
+  private String type ;
 
-  public TemplateConfig(){} 
-  
+  public TemplateConfig(){}
+
   public String getName() { return this.name ; }
   public void setName(String name) { this.name = name ; }
 

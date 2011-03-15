@@ -67,28 +67,28 @@ import org.w3c.dom.Element;
  */
 @Path("/wcmGadget/")
 public class GadgetConnector extends ExoDefaultSecurityTokenGenerator implements ResourceContainer {
-  
+
   /** The Constant FCK_RESOURCE_BUNDLE_FILE. */
-  public static final String FCK_RESOURCE_BUNDLE_FILE   = "locale.services.fckeditor.FCKConnector".intern();
-  
+  public static final String         FCK_RESOURCE_BUNDLE_FILE      = "locale.services.fckeditor.FCKConnector".intern();
+
   /** The application registry service. */
   private ApplicationRegistryService applicationRegistryService;
-  
+
   /** The gadget registry service. */
   private GadgetRegistryService gadgetRegistryService;
-  
+
   /** The Constant LAST_MODIFIED_PROPERTY. */
   private static final String LAST_MODIFIED_PROPERTY = "Last-Modified";
-   
+
   /** The Constant IF_MODIFIED_SINCE_DATE_FORMAT. */
   private static final String IF_MODIFIED_SINCE_DATE_FORMAT = "EEE, dd MMM yyyy HH:mm:ss z";
-  
+
   /** The log. */
   private static Log log = ExoLogger.getLogger(GadgetConnector.class);
-  
+
   /**
    * Instantiates a new gadget connector.
-   * 
+   *
    * @param container the container
    * @param initParams the init params
    */
@@ -96,39 +96,41 @@ public class GadgetConnector extends ExoDefaultSecurityTokenGenerator implements
     applicationRegistryService = WCMCoreUtils.getService(ApplicationRegistryService.class);
     gadgetRegistryService = WCMCoreUtils.getService(GadgetRegistryService.class);
   }
-  
+
   /**
    * Gets the folders and files.
-   * 
+   *
    * @param currentFolder the current folder
    * @param language the language
-   * 
+   *
    * @return the folders and files
-   * 
+   *
    * @throws Exception the exception
    */
   @GET
   @Path("/getFoldersAndFiles/")
-  public Response getFoldersAndFiles(@QueryParam("currentFolder") String currentFolder, @QueryParam("lang") String language, @QueryParam("host") String host) throws Exception {
+  public Response getFoldersAndFiles(@QueryParam("currentFolder") String currentFolder,
+                                     @QueryParam("lang") String language,
+                                     @QueryParam("host") String host) throws Exception {
     try {
       Response response = buildXMLResponse(currentFolder, language, host);
       if (response != null)
-        return response; 
+        return response;
     } catch (Exception e) {
       log.error("Error when perform getFoldersAndFiles: ", e);
-    }    
+    }
     DateFormat dateFormat = new SimpleDateFormat(IF_MODIFIED_SINCE_DATE_FORMAT);
     return Response.ok().header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
   }
-  
+
   /**
    * Builds the xml response.
-   * 
+   *
    * @param currentFolder the current folder
    * @param language the language
-   * 
+   *
    * @return the response
-   * 
+   *
    * @throws Exception the exception
    */
   public Response buildXMLResponse(String currentFolder, String language, String host) throws Exception {
@@ -139,21 +141,27 @@ public class GadgetConnector extends ExoDefaultSecurityTokenGenerator implements
     cacheControl.setNoCache(true);
     cacheControl.setNoStore(true);
     DateFormat dateFormat = new SimpleDateFormat(IF_MODIFIED_SINCE_DATE_FORMAT);
-    return Response.ok(new DOMSource(document), MediaType.TEXT_XML).cacheControl(cacheControl).header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
+    return Response.ok(new DOMSource(document), MediaType.TEXT_XML)
+                   .cacheControl(cacheControl)
+                   .header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date()))
+                   .build();
   }
-  
+
   /**
    * Creates the root element.
-   * 
+   *
    * @param currentFolder the current folder
    * @param applicationCategories the application categories
    * @param language the language
-   * 
+   *
    * @return the element
-   * 
+   *
    * @throws Exception the exception
    */
-  private Element createRootElement(String currentFolder, List<ApplicationCategory> applicationCategories, String language, String host) throws Exception {
+  private Element createRootElement(String currentFolder,
+                                    List<ApplicationCategory> applicationCategories,
+                                    String language,
+                                    String host) throws Exception {
     Document document = null;
     DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
     DocumentBuilder builder = factory.newDocumentBuilder();
@@ -168,20 +176,20 @@ public class GadgetConnector extends ExoDefaultSecurityTokenGenerator implements
       ResourceBundle resourceBundle = ResourceBundle.getBundle(FCK_RESOURCE_BUNDLE_FILE, locale);
       String message = "";
       try {
-				message = resourceBundle.getString("fckeditor.no-gadget");
-			} catch (MissingResourceException e) {
-				message = "fckeditor.no-gadget";
-			}
+        message = resourceBundle.getString("fckeditor.no-gadget");
+      } catch (MissingResourceException e) {
+        message = "fckeditor.no-gadget";
+      }
       Element rootElement = document.createElement("Message");
       document.appendChild(rootElement);
       rootElement.setAttribute("number", "555");
       rootElement.setAttribute("text", message);
       rootElement.setAttribute("type", "Error");
       return rootElement;
-    } 
+    }
     Element rootElement = document.createElement("Connector");
     document.appendChild(rootElement);
-    rootElement.setAttribute("resourceType", "Gadget");    
+    rootElement.setAttribute("resourceType", "Gadget");
     Element currentFolderElement = document.createElement("CurrentFolder");
     if (currentFolder == null || currentFolder.equals("/")){
       currentFolderElement.setAttribute("name", applicationCategories.get(0).getName());
@@ -191,7 +199,8 @@ public class GadgetConnector extends ExoDefaultSecurityTokenGenerator implements
       PortalContainer container = PortalContainer.getInstance();
       RequestLifeCycle.begin(container);
       try {
-        ApplicationCategory applicationCategory = applicationRegistryService.getApplicationCategory(currentFolder.substring(1, currentFolder.length() - 1));
+        ApplicationCategory applicationCategory = applicationRegistryService
+            .getApplicationCategory(currentFolder.substring(1, currentFolder.length() - 1));
         currentFolderElement.setAttribute("name", applicationCategory.getDisplayName());
         Element filesElement = createFileElement(document, applicationCategory, host);
         rootElement.appendChild(filesElement);
@@ -202,40 +211,44 @@ public class GadgetConnector extends ExoDefaultSecurityTokenGenerator implements
     rootElement.appendChild(currentFolderElement);
     return rootElement;
   }
-  
+
   /**
    * Creates the folder element.
-   * 
+   *
    * @param document the document
    * @param applicationCategories the application categories
-   * 
+   *
    * @return the element
-   * 
+   *
    * @throws Exception the exception
    */
-  private Element createFolderElement(Document document, List<ApplicationCategory> applicationCategories) throws Exception {
+  private Element createFolderElement(Document document,
+                                      List<ApplicationCategory> applicationCategories) throws Exception {
     Element folders = document.createElement("Folders");
     for (ApplicationCategory applicationCategory : applicationCategories) {
       Element folder = document.createElement("Folder");
       folder.setAttribute("name", applicationCategory.getDisplayName());
-      folders.appendChild(folder);  
+      folders.appendChild(folder);
     }
     return folders;
   }
-  
+
   /**
    * Creates the file element.
-   * 
+   *
    * @param document the document
    * @param applicationCategory the application category
-   * 
+   *
    * @return the element
-   * 
+   *
    * @throws Exception the exception
    */
-  private Element createFileElement(Document document, ApplicationCategory applicationCategory, String host) throws Exception {
+  private Element createFileElement(Document document,
+                                    ApplicationCategory applicationCategory,
+                                    String host) throws Exception {
     Element files = document.createElement("Files");
-    List<Application> listApplication = applicationRegistryService.getApplications(applicationCategory, ApplicationType.GADGET);
+    List<Application> listApplication = applicationRegistryService.getApplications(applicationCategory,
+                                                                                   ApplicationType.GADGET);
     for (Application application : listApplication) {
       Gadget gadget = gadgetRegistryService.getGadget(application.getApplicationName());
       Element file = document.createElement("File");
@@ -244,7 +257,7 @@ public class GadgetConnector extends ExoDefaultSecurityTokenGenerator implements
       file.setAttribute("size", "0");
       file.setAttribute("thumbnail", gadget.getThumbnail());
       file.setAttribute("description", gadget.getDescription());
-      
+
       String fullurl = "";
       if (gadget.isLocal()) {
         fullurl = "/" + PortalContainer.getCurrentRestContextName() + "/" + gadget.getUrl();
@@ -252,8 +265,9 @@ public class GadgetConnector extends ExoDefaultSecurityTokenGenerator implements
         fullurl = gadget.getUrl();
       }
       file.setAttribute("url", fullurl);
-      
-      String data = "{\"context\":{\"country\":\"US\",\"language\":\"en\"},\"gadgets\":[{\"moduleId\":0,\"url\":\"" + fullurl + "\",\"prefs\":[]}]}";
+
+      String data = "{\"context\":{\"country\":\"US\",\"language\":\"en\"},\"gadgets\":[{\"moduleId\":0,\"url\":\""
+          + fullurl + "\",\"prefs\":[]}]}";
       URL url = new URL(host + "/eXoGadgetServer/gadgets/metadata");
       URLConnection conn = url.openConnection();
       conn.setDoOutput(true);
@@ -263,39 +277,40 @@ public class GadgetConnector extends ExoDefaultSecurityTokenGenerator implements
       String strMetadata = IOUtils.toString(conn.getInputStream(), "UTF-8");
       wr.close();
       JSONObject metadata = new JSONObject(strMetadata.toString());
-      
+
       ConversationState conversationState = ConversationState.getCurrent();
       String userId = conversationState.getIdentity().getUserId();
       String token = createToken(gadget.getUrl(), userId, userId, new Random().nextLong(), "default");
       JSONObject obj = metadata.getJSONArray("gadgets").getJSONObject(0);
       obj.put("secureToken", token);
-      
+
       file.setAttribute("metadata", metadata.toString());
       files.appendChild(file);
     }
     return files;
   }
-  
+
   /**
    * Gets the gadget categories.
-   * 
+   *
    * @return the gadget categories
-   * 
+   *
    * @throws Exception the exception
    */
   private List<ApplicationCategory> getGadgetCategories() throws Exception {
-	List<ApplicationCategory> gadgetCategories = new ArrayList<ApplicationCategory>();
+    List<ApplicationCategory> gadgetCategories = new ArrayList<ApplicationCategory>();
     PortalContainer container = PortalContainer.getInstance();
     RequestLifeCycle.begin(container);
     try {
       List<ApplicationCategory> applicationCategories = applicationRegistryService.getApplicationCategories();
       for (ApplicationCategory applicationCategory : applicationCategories) {
-        if (!applicationRegistryService.getApplications(applicationCategory, ApplicationType.GADGET).isEmpty()) {
+        if (!applicationRegistryService.getApplications(applicationCategory, ApplicationType.GADGET)
+                                       .isEmpty()) {
           gadgetCategories.add(applicationCategory);
         }
       }
     } finally {
-    	RequestLifeCycle.end();
+      RequestLifeCycle.end();
     }
     return gadgetCategories;
   }

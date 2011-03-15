@@ -83,7 +83,7 @@ import org.exoplatform.workflow.webui.utils.Utils;
  * Author : Ly Dinh Quang
  *          quang.ly@exoplatform.com
  *          xxx5669@gmail.com
- * Jan 9, 2009  
+ * Jan 9, 2009
  */
 @ComponentConfig(
     lifecycle = UIFormLifecycle.class,
@@ -94,7 +94,7 @@ import org.exoplatform.workflow.webui.utils.Utils;
         @EventConfig(listeners = UITask.EndOfStateActionListener.class),
         @EventConfig(listeners = UITask.TransitionActionListener.class),
         @EventConfig(listeners = UITask.SelectUserActionListener.class, phase = Phase.DECODE)
-        
+
     }
 )
 public class UITask extends UIForm implements UISelectable {
@@ -116,7 +116,7 @@ public class UITask extends UIForm implements UISelectable {
   private static final String WORKSPACE_VARIABLE = "srcWorkspace";
   private static final String REPOSITORY_VARIABLE = "repository";
   private static final String DEST_PATH = "exo:destPath";
-  private static final String DEST_WORKSPACE = "exo:destWorkspace";  
+  private static final String DEST_WORKSPACE = "exo:destWorkspace";
 
   private static final String DELEGATE_FIELD = "delegator";
   private Form form;
@@ -126,28 +126,28 @@ public class UITask extends UIForm implements UISelectable {
   private WorkflowFormsService formsService;
   private RepositoryService jcrService;
   private List<InputInfo> inputInfo_;
-  
+
   private static final Log LOG = ExoLogger.getExoLogger(UITask.class);
-  
+
   public UITask() {
     serviceContainer = getApplicationComponent(WorkflowServiceContainer.class);
     formsService = getApplicationComponent(WorkflowFormsService.class);
     jcrService = getApplicationComponent(RepositoryService.class);
     inputInfo_ = new ArrayList<InputInfo>();
   }
-  
+
   public String getTemplate() {
     if(isCustomizedView()) {
-    		return getIdentification() + ":/" + getCustomizedView();
+        return getIdentification() + ":/" + getCustomizedView();
     }
     return getComponentConfig().getTemplate();
   }
-  
+
   public ResourceResolver getTemplateResourceResolver(WebuiRequestContext context, String template) {
     if(isCustomizedView()) return new BJARResourceResolver(serviceContainer);
     return super.getTemplateResourceResolver(context, getComponentConfig().getTemplate());
   }
-  
+
   public String getManageTransition() { return MANAGE_TRANSITION; }
 
   public String getStateImageURL() {
@@ -188,7 +188,7 @@ public class UITask extends UIForm implements UISelectable {
     }
     ManageableRepository mRepository = jcrService.getRepository(repository);
     SessionProviderService sessionProviderService = Util.getUIPortal().getApplicationComponent(SessionProviderService.class);
-		SessionProvider sessionProvider = sessionProviderService.getSessionProvider(null);
+    SessionProvider sessionProvider = sessionProviderService.getSessionProvider(null);
     List variables = form.getVariables();
     UIFormInput input = null;
     int i = 0;
@@ -212,12 +212,12 @@ public class UITask extends UIForm implements UISelectable {
         visiable = new Boolean(visiableString).booleanValue();
       }
       Object value = variablesForService.get(name);
-      
+
       if (NODE_EDIT.equals(component)) {
-        String nodePath = (String)variablesForService.get(NODE_PATH_VARIABLE);          
+        String nodePath = (String)variablesForService.get(NODE_PATH_VARIABLE);
         Node dialogNode = (Node)sessionProvider.getSession(workspaceName,mRepository).getItem(nodePath);
         String nodetype = dialogNode.getPrimaryNodeType().getName();
-        
+
         try {
           Class clazz = Class.forName("org.exoplatform.contentvalidation.webui.UIDocumentForm");
           UIComponent uiComponent = createUIComponent(clazz, null, null);
@@ -239,14 +239,14 @@ public class UITask extends UIForm implements UISelectable {
             }
             if (count == 4) break;
           }
-          
+
           Task task = serviceContainer.getTask(identification_);
           form = formsService.getForm(task.getProcessId(), task.getTaskName(), locale);
           uiTaskManager.addChild(uiComponent);
           uiComponent.setRendered(false);
         } catch (ClassNotFoundException e) {
         }
-        
+
       } else if (NODE_VIEW.equals(component)) {
         String nodePath = (String) variablesForService.get(NODE_PATH_VARIABLE);
         Node viewNode = (Node) sessionProvider.getSession(workspaceName, mRepository).getItem(nodePath);
@@ -276,7 +276,7 @@ public class UITask extends UIForm implements UISelectable {
           ((UIFormWYSIWYGInput)input).setToolBarName(UIFormWYSIWYGInput.DEFAULT_TOOLBAR);
           ((UIFormWYSIWYGInput)input).setEditable(editable);
         } else if (DATE.equals(component) || DATE_TIME.equals(component)) {
-          input = (value == null ? new UIFormDateTimeInput(name, null, new Date(), DATE_TIME.equals(component)) : 
+          input = (value == null ? new UIFormDateTimeInput(name, null, new Date(), DATE_TIME.equals(component)) :
                                    new UIFormDateTimeInput(name, null, (Date)value, DATE_TIME.equals(component)));
           if (!visiable) {
             input.setValue("");
@@ -389,7 +389,7 @@ public class UITask extends UIForm implements UISelectable {
     VariableMaps maps = prepareWorkflowVariables(getChildren(), decision);
     return maps;
   }
-  
+
   @SuppressWarnings("unchecked")
   public VariableMaps prepareWorkflowVariables(Collection inputs, String decision) throws Exception {
     Map<String, Object> workflowVariables = new HashMap<String, Object>();
@@ -433,7 +433,7 @@ public class UITask extends UIForm implements UISelectable {
     return new VariableMaps(workflowVariables, jcrVariables);
   }
 
-  public void clean() { 
+  public void clean() {
     UITaskManager uiTaskManager = getParent();
     try {
       Class clazz1 = Class.forName("org.exoplatform.contentvalidation.webui.UIDocumentForm");
@@ -442,7 +442,7 @@ public class UITask extends UIForm implements UISelectable {
       uiTaskManager.removeChild(clazz1);
     } catch (ClassNotFoundException e) {
     }
-    inputInfo_.clear(); 
+    inputInfo_.clear();
   }
 
   public static class StartProcessActionListener extends EventListener<UITask> {
@@ -468,19 +468,19 @@ public class UITask extends UIForm implements UISelectable {
         Map variables = maps.getWorkflowVariables();
         uiTask.serviceContainer.endTask(uiTask.identification_, variables);
       } catch (Exception ex) {
-    	  LOG.warn(ex.getMessage(), ex);
+        LOG.warn(ex.getMessage(), ex);
       }
       uiTask.getAncestorOfType(UIPopupContainer.class).deActivate();
     }
   }
-  
+
   private Node getAction(Node node, String actionName) throws Exception {
     if (node.hasNode(Utils.EXO_ACTIONS + "/"+ actionName)) {
       return node.getNode(Utils.EXO_ACTIONS + "/"+ actionName);
-    } 
+    }
     return null;
   }
-  
+
   static  public class CancelActionListener extends EventListener<UITask> {
     public void execute(Event<UITask> event) throws Exception {
       UIPopupContainer uiPopup = event.getSource().getAncestorOfType(UIPopupContainer.class);
@@ -506,14 +506,14 @@ public class UITask extends UIForm implements UISelectable {
         String delegate = (String)maps.getWorkflowVariables().get(UITask.DELEGATE_FIELD);
         if (delegate.length() == 0) {
             UIApplication uiApp = event.getSource().getAncestorOfType(UIApplication.class);
-            uiApp.addMessage(new ApplicationMessage("UITask.msg.has-not-got-delegate", null, 
+            uiApp.addMessage(new ApplicationMessage("UITask.msg.has-not-got-delegate", null,
                 ApplicationMessage.WARNING));
             event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
             return;
         }
       }
       SessionProviderService sessionProviderService = Util.getUIPortal().getApplicationComponent(SessionProviderService.class);
-  		SessionProvider sessionProvider = sessionProviderService.getSessionProvider(null);
+      SessionProvider sessionProvider = sessionProviderService.getSessionProvider(null);
       for (Iterator iterator = submitButtons.iterator(); iterator.hasNext();) {
         Map attributes = (Map) iterator.next();
         String name = (String) attributes.get("name");
@@ -539,13 +539,13 @@ public class UITask extends UIForm implements UISelectable {
             uiTask.getAncestorOfType(UIPopupContainer.class).deActivate();
             return;
           } catch (Exception e) {
-        	LOG.warn(e.getMessage(), e);
+          LOG.warn(e.getMessage(), e);
           }
         }
       }
     }
   }
-  
+
   static  public class SelectUserActionListener extends EventListener<UITask> {
     public void execute(Event<UITask> event) throws Exception {
       UITask uiTask = event.getSource();
@@ -562,5 +562,5 @@ public class UITask extends UIForm implements UISelectable {
       }
     }
   }
-  
+
 }

@@ -40,7 +40,7 @@ public class SmallPaginatedQueryResult extends WCMPaginatedQueryResult{
 
   /**
    * Instantiates a new small paginated query result.
-   * 
+   *
    * @param pageSize the page size
    */
   public SmallPaginatedQueryResult(int pageSize) {
@@ -49,34 +49,34 @@ public class SmallPaginatedQueryResult extends WCMPaginatedQueryResult{
 
   /**
    * Instantiates a new small paginated query result.
-   * 
+   *
    * @param queryResult the query result
    * @param queryCriteria the query criteria
    * @param pageSize the page size
-   * @throws Exception 
-   * 
+   * @throws Exception
+   *
    * @throws Exception the exception
    */
   @SuppressWarnings("deprecation")
   public SmallPaginatedQueryResult(QueryResult queryResult, QueryCriteria queryCriteria, int pageSize, boolean isSearchContent) throws Exception {
-    super(queryResult, queryCriteria, pageSize, isSearchContent);   
+    super(queryResult, queryCriteria, pageSize, isSearchContent);
       RowIterator rowIterator = queryResult.getRows();
       NodeIterator nodeIterator = queryResult.getNodes();
       while(nodeIterator.hasNext()) {
         Node node = nodeIterator.nextNode();
         Node viewNode = filterNodeToDisplay(node, isSearchContent);
-        if(viewNode == null) continue;  
+        if(viewNode == null) continue;
         //Skip back 1 position to get current row mapping to the node
         long position = nodeIterator.getPosition();
-        long rowPosition = rowIterator.getPosition();        
+        long rowPosition = rowIterator.getPosition();
         long skipNum = position - rowPosition;
-        rowIterator.skip(skipNum -1);        
+        rowIterator.skip(skipNum -1);
         Row row = rowIterator.nextRow();
         ResultNode resultNode = new ResultNode(viewNode,row);
         arrayList.add(resultNode);
       }
       setPageSize(pageSize);
-      setAvailablePage(arrayList.size());    
+      setAvailablePage(arrayList.size());
       getAvailablePage();
   }
 
@@ -94,7 +94,7 @@ public class SmallPaginatedQueryResult extends WCMPaginatedQueryResult{
    * @see org.exoplatform.services.wcm.search.PaginatedQueryResult#populateCurrentPage(int)
    */
   @SuppressWarnings({ "deprecation", "unchecked" })
-  protected void populateCurrentPage(int page) throws Exception {    
+  protected void populateCurrentPage(int page) throws Exception {
     currentListPage_ = arrayList.subList(getFrom(), getTo());
   }
 

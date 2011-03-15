@@ -32,16 +32,16 @@ import org.exoplatform.webui.event.EventListener;
  * Created by The eXo Platform SARL
  * Author : Nguyen Anh Vu
  *          anhvurz90@gmail.com
- * Dec 11, 2009  
+ * Dec 11, 2009
  * 4:31:33 PM
  */
-@ComponentConfig( 
+@ComponentConfig(
     lifecycle = UIContainerLifecycle.class,
 //    template = "app:/groovy/webui/component/admin/folksonomy/UIFolksonomyManager.gtmpl",
     events = {	@EventConfig(listeners = UITagManager.EditStyleActionListener.class),
-    						@EventConfig(listeners = UITagManager.AddStyleActionListener.class),
-    				 		@EventConfig(listeners = UITagManager.RemoveStyleActionListener.class, confirm = "UIFolksonomyManager.msg.confirm-delete") 
-  				 	 }							
+                @EventConfig(listeners = UITagManager.AddStyleActionListener.class),
+                 @EventConfig(listeners = UITagManager.RemoveStyleActionListener.class, confirm = "UIFolksonomyManager.msg.confirm-delete")
+              }
 )
 public class UITagManager extends UIContainer {
 
@@ -49,15 +49,15 @@ public class UITagManager extends UIContainer {
     addChild(UITagStyleList.class, null, null);
     addChild(UITagStyleAddAction.class, null, null);
   }
-  
+
   public void refresh() throws Exception {
     update();
   }
-  
+
   public void update() throws Exception {
     getChild(UITagStyleList.class).updateGrid() ;
   }
-  
+
   public void initTaggingFormPopup(Node selectedTagStyle) throws Exception {
     removeChildById("FolksonomyPopup") ;
     UIPopupWindow uiPopup = addChild(UIPopupWindow.class, null, "FolksonomyPopup") ;
@@ -69,7 +69,7 @@ public class UITagManager extends UIContainer {
     uiPopup.setShow(true) ;
     uiPopup.setResizable(true) ;
   }
-  
+
   public Node getSelectedTagStyle(String tagStyleName) throws Exception {
     NewFolksonomyService newFolksonomyService = getApplicationComponent(NewFolksonomyService.class) ;
     String repository = getAncestorOfType(UIECMAdminPortlet.class).getPreferenceRepository() ;
@@ -79,7 +79,7 @@ public class UITagManager extends UIContainer {
     }
     return null ;
   }
-  
+
   static public class EditStyleActionListener extends EventListener<UITagManager> {
     public void execute(Event<UITagManager> event) throws Exception {
       UITagManager uiManager = event.getSource() ;
@@ -89,29 +89,29 @@ public class UITagManager extends UIContainer {
       event.getRequestContext().addUIComponentToUpdateByAjax(uiManager) ;
     }
   }
-  
+
   static public class RemoveStyleActionListener extends EventListener<UITagManager> {
-  	public void execute(Event<UITagManager> event) throws Exception {
-  		UITagManager uiManager = event.getSource();
-  		String selectedName = event.getRequestContext().getRequestParameter(OBJECTID);
-  		Node selectedTagStyle = uiManager.getSelectedTagStyle(selectedName);
+    public void execute(Event<UITagManager> event) throws Exception {
+      UITagManager uiManager = event.getSource();
+      String selectedName = event.getRequestContext().getRequestParameter(OBJECTID);
+      Node selectedTagStyle = uiManager.getSelectedTagStyle(selectedName);
 //      NewFolksonomyService newFolksonomyService = uiManager.getApplicationComponent(NewFolksonomyService.class) ;
       Node parentNode = selectedTagStyle.getParent();
       selectedTagStyle.remove();
       parentNode.getSession().save();
       uiManager.getChild(UITagStyleList.class).updateGrid();
-  		event.getRequestContext().addUIComponentToUpdateByAjax(uiManager);
-  	}
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiManager);
+    }
   }
-  
+
   static public class AddStyleActionListener extends EventListener<UITagManager> {
-  	public void execute(Event<UITagManager> event) throws Exception {
+    public void execute(Event<UITagManager> event) throws Exception {
       UITagManager uiManager = event.getSource() ;
       String selectedName = event.getRequestContext().getRequestParameter(OBJECTID) ;
 //      Node selectedTagStyle = uiManager.getSelectedTagStyle(selectedName) ;
       uiManager.initTaggingFormPopup(null) ;
       event.getRequestContext().addUIComponentToUpdateByAjax(uiManager) ;
-  	}
+    }
   }
 
 }

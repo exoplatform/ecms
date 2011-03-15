@@ -33,23 +33,23 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
  * Created by The eXo Platform SAS
  * Author : Phan Le Thanh Chuong
  *          chuong.phan@exoplatform.com, phan.le.thanh.chuong@gmail.com
- * Jun 8, 2010  
+ * Jun 8, 2010
  */
 public class CreateLinkAction implements Action{
 
   public static final String UPDATE_EVENT = "WCMPublicationService.event.updateState";
   public static  final String  EXO_SORTABLE = "exo:sortable";
-  
+
   public boolean execute(Context context) throws Exception {
     Property property = (Property)context.get("currentItem");
     if (!"exo:uuid".equals(property.getName())) return false;
-    
+
     Node linkNode = property.getParent();
-    if (!linkNode.isNodeType(EXO_SORTABLE) && !linkNode.canAddMixin(EXO_SORTABLE)) 
+    if (!linkNode.isNodeType(EXO_SORTABLE) && !linkNode.canAddMixin(EXO_SORTABLE))
       return false;
-    
+
     ExoContainer container = ExoContainerContext.getCurrentContainer();
-    PortalContainerInfo containerInfo = (PortalContainerInfo)container.getComponentInstanceOfType(PortalContainerInfo.class);      
+    PortalContainerInfo containerInfo = (PortalContainerInfo)container.getComponentInstanceOfType(PortalContainerInfo.class);
     String containerName = containerInfo.getContainerName();
     LinkManager linkManager = WCMCoreUtils.getService(LinkManager.class, containerName);
     Node targetNode = linkManager.getTarget(linkNode);
@@ -58,8 +58,8 @@ public class CreateLinkAction implements Action{
     CmsService cmsService = WCMCoreUtils.getService(CmsService.class, containerName);
 
     listenerService.broadcast(UPDATE_EVENT, cmsService, targetNode);
-    
+
     return true;
   }
-  
+
 }

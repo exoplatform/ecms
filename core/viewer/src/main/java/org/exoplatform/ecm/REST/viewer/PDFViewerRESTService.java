@@ -63,7 +63,7 @@ import com.artofsolving.jodconverter.openoffice.connection.OpenOfficeException;
  * Created by The eXo Platform SARL
  * Author : Dang Van Minh
  *          minh.dang@exoplatform.com
- * Sep 3, 2009  
+ * Sep 3, 2009
  * 7:33:30 AM
  */
 /**
@@ -73,7 +73,7 @@ import com.artofsolving.jodconverter.openoffice.connection.OpenOfficeException;
  * {nodePath} Node path
  * {pageNumber} Page number
  * {rotation} Page rotation, values are valid: 0.0f, 90.0f, 180.0f, 270.0f
- * {scale} Zoom factor to be applied to the rendered page 
+ * {scale} Zoom factor to be applied to the rendered page
  * Example: <img src="/portal/rest/pdfviewer/repository/collaboration/test.pdf/1/0.0f/1.0f">
  */
 @Path("/pdfviewer/{repoName}/{workspaceName}/{pageNumber}/{rotation}/{scale}/{uuid}/")
@@ -85,15 +85,16 @@ public class PDFViewerRESTService implements ResourceContainer {
   private JodConverterService jodConverter_;
   private static final Log LOG  = ExoLogger.getLogger(PDFViewerRESTService.class.getName());
 
-  public PDFViewerRESTService(RepositoryService repositoryService, CacheService caService, JodConverterService jodConverter) throws Exception {
+  public PDFViewerRESTService(RepositoryService repositoryService,
+                              CacheService caService,
+                              JodConverterService jodConverter) throws Exception {
     repositoryService_ = repositoryService;
     jodConverter_ = jodConverter;
     pdfCache = caService.getCacheInstance(PDFViewerRESTService.class.getName());
-    //System.setProperty("org.icepdf.core.awtFontLoading", "true");
   }
 
   @GET
-  public Response getCoverImage(@PathParam("repoName") String repoName, 
+  public Response getCoverImage(@PathParam("repoName") String repoName,
       @PathParam("workspaceName") String wsName,
       @PathParam("uuid") String uuid,
       @PathParam("pageNumber") String pageNumber,
@@ -102,75 +103,81 @@ public class PDFViewerRESTService implements ResourceContainer {
     return getImageByPageNumber(repoName, wsName, uuid, pageNumber, rotation, scale);
   }
 
-  private Response getImageByPageNumber(String repoName, String wsName, String uuid, 
+  private Response getImageByPageNumber(String repoName, String wsName, String uuid,
       String pageNumber, String strRotation, String strScale) throws Exception {
-	  StringBuilder bd = new StringBuilder();
-	  StringBuilder bd1 = new StringBuilder();
-		bd.append(repoName).append("/").append(wsName).append("/").append(uuid);
-		Session session = null;
-	  try {
-	  	File content = new File((String) pdfCache.get(new ObjectKey(bd.toString())));
-	  	if (!content.exists()) {
-				ManageableRepository repository = repositoryService_.getRepository(repoName);
-				session = getSystemProvider().getSession(wsName, repository);
-				Node currentNode = session.getNodeByUUID(uuid);
-	  		initDocument(currentNode, repoName);
-	  	}
+    StringBuilder bd = new StringBuilder();
+    StringBuilder bd1 = new StringBuilder();
+    bd.append(repoName).append("/").append(wsName).append("/").append(uuid);
+    Session session = null;
+    try {
+      File content = new File((String) pdfCache.get(new ObjectKey(bd.toString())));
+      if (!content.exists()) {
+        ManageableRepository repository = repositoryService_.getRepository(repoName);
+        session = getSystemProvider().getSession(wsName, repository);
+        Node currentNode = session.getNodeByUUID(uuid);
+        initDocument(currentNode, repoName);
+      }
       // capture the page image to file
-			String lastModified = (String) pdfCache.get(new ObjectKey(bd1.append(bd.toString()).append("/jcr:lastModified").toString()));
-      InputStream is = pushToCache(new File((String) pdfCache.get(new ObjectKey(bd.toString()))), repoName, wsName, uuid, pageNumber, strRotation, strScale);
+      String lastModified = (String) pdfCache.get(new ObjectKey(bd1.append(bd.toString())
+                                                                   .append("/jcr:lastModified")
+                                                                   .toString()));
+      InputStream is = pushToCache(new File((String) pdfCache.get(new ObjectKey(bd.toString()))),
+                                   repoName,
+                                   wsName,
+                                   uuid,
+                                   pageNumber,
+                                   strRotation,
+                                   strScale);
       return Response.ok(is, "image").header(LASTMODIFIED, lastModified).build();
     } catch (Exception e) {
       LOG.error(e);
     } finally {
-  			if (session != null)
-  				session.logout();
-  	}
+        if (session != null)
+          session.logout();
+    }
     return Response.ok().build();
   }
 
   private SessionProvider getSystemProvider() {
     ExoContainer container = ExoContainerContext.getCurrentContainer();
-    SessionProviderService service = 
+    SessionProviderService service =
       (SessionProviderService) container.getComponentInstanceOfType(SessionProviderService.class);
-    return service.getSystemSessionProvider(null) ;  
-  }  
-  
-  private InputStream pushToCache(File content, String repoName, String wsName, String uuid, 
-      String pageNumber, String strRotation, String strScale) throws FileNotFoundException {
-  	StringBuilder bd = new StringBuilder();
-		bd.append(repoName).append("/").append(wsName).append("/").append(uuid).append("/").append(
-				pageNumber).append("/").append(strRotation).append("/").append(strScale);
-		String filePath = (String) pdfCache.get(new ObjectKey(bd.toString()));
-		if (filePath == null || !(new File(filePath).exists())) {
-	    File file = buildFileImage(content, uuid, pageNumber, strRotation, strScale);
-	    filePath = file.getPath();
-			pdfCache.put(new ObjectKey(bd.toString()), filePath);
-		}
-		return new BufferedInputStream(new FileInputStream(new File(filePath)));
+    return service.getSystemSessionProvider(null) ;
   }
-  
+
+  private InputStream pushToCache(File content, String repoName, String wsName, String uuid,
+      String pageNumber, String strRotation, String strScale) throws FileNotFoundException {
+    StringBuilder bd = new StringBuilder();
+    bd.append(repoName).append("/").append(wsName).append("/").append(uuid).append("/").append(
+        pageNumber).append("/").append(strRotation).append("/").append(strScale);
+    String filePath = (String) pdfCache.get(new ObjectKey(bd.toString()));
+    if (filePath == null || !(new File(filePath).exists())) {
+      File file = buildFileImage(content, uuid, pageNumber, strRotation, strScale);
+      filePath = file.getPath();
+      pdfCache.put(new ObjectKey(bd.toString()), filePath);
+    }
+    return new BufferedInputStream(new FileInputStream(new File(filePath)));
+  }
+
   private Document buildDocumentImage(File input, String name) {
- 	  Document document = new Document();
- 	  // capture the page image to file
+     Document document = new Document();
+     // capture the page image to file
     try {
       document.setInputStream(new BufferedInputStream(new FileInputStream(input)), name);
     } catch (PDFException ex) {
-   	 LOG.error("Error parsing PDF document " + ex);
+      LOG.error("Error parsing PDF document " + ex);
     } catch (PDFSecurityException ex) {
-   	 LOG.error("Error encryption not supported " + ex);
+      LOG.error("Error encryption not supported " + ex);
     } catch (FileNotFoundException ex) {
-   	 LOG.error("Error file not found " + ex);
+      LOG.error("Error file not found " + ex);
     } catch (IOException ex) {
-   	 LOG.error("Error handling PDF document " + ex);
+      LOG.error("Error handling PDF document " + ex);
     }
     return document;
   }
-    
+
   private File buildFileImage(File input, String path, String pageNumber, String strRotation, String strScale) {
-  	 //System.setProperty("org.icepdf.core.awtFontLoading", "true");
-  	 //FontManager.getInstance().readSystemFonts(new String[] {"/usr/share/fonts/truetype/", "/usr/share/fonts/truetype/fonts1/", "/usr/share/fonts/truetype/fonts2"});
-  	 Document document = buildDocumentImage(input, path);
+     Document document = buildDocumentImage(input, path);
      // save page capture to file.
      float scale = Float.parseFloat(strScale);
      float rotation = Float.parseFloat(strRotation);
@@ -193,7 +200,7 @@ public class PDFViewerRESTService implements ResourceContainer {
        file.deleteOnExit();
        ImageIO.write(rendImage, "png", file);
      } catch (IOException e) {
-    	 LOG.error(e);
+       LOG.error(e);
      } finally {
        image.flush();
        // clean up resources
@@ -201,18 +208,18 @@ public class PDFViewerRESTService implements ResourceContainer {
      }
      return file;
   }
-  
+
   /**
-   * Init pdf document from InputStream in nt:file node 
+   * Init pdf document from InputStream in nt:file node
    * @param currentNode
    * @param repoName
    * @return
    * @throws Exception
    */
   public Document initDocument(Node currentNode, String repoName) throws Exception {
-	  return buildDocumentImage(getPDFDocumentFile(currentNode, repoName), currentNode.getName());
+    return buildDocumentImage(getPDFDocumentFile(currentNode, repoName), currentNode.getName());
   }
-  
+
   /**
    * Write PDF data to file
    * @param currentNode
@@ -221,109 +228,109 @@ public class PDFViewerRESTService implements ResourceContainer {
    * @throws Exception
    */
   public File getPDFDocumentFile(Node currentNode, String repoName) throws Exception {
-  	String wsName = currentNode.getSession().getWorkspace().getName();
-  	String uuid = currentNode.getUUID();
-  	StringBuilder bd = new StringBuilder();
-  	StringBuilder bd1 = new StringBuilder();
-  	bd.append(repoName).append("/").append(wsName).append("/").append(uuid);
-  	String path = (String) pdfCache.get(new ObjectKey(bd.toString()));
-  	File content = null;
-  	String name = currentNode.getName();
-  	if (path == null || !(content = new File(path)).exists()) {
-  		Node contentNode = currentNode.getNode("jcr:content");
-  		String mimeType = contentNode.getProperty("jcr:mimeType").getString();
-  		InputStream input = new BufferedInputStream(contentNode.getProperty("jcr:data").getStream()); 
-  		// Create temp file to store data of nt:file node 
-  		if (name.indexOf(".") > 0) name = name.substring(0, name.indexOf("."));
-  		content = File.createTempFile(name, ".pdf");
-  		content.deleteOnExit();
-  		// Convert to pdf if need
-  		String extension = DMSMimeTypeResolver.getInstance().getExtension(mimeType);
-  		if ("pdf".equals(extension)) {
-  			read(input, new BufferedOutputStream(new FileOutputStream(content)));
-  		} else {
-  			OutputStream out = new BufferedOutputStream((new FileOutputStream(content)));
-  			try {
-	  			jodConverter_.convert(input, extension, out, "pdf");
-  			} catch(ConnectException connection) {
-  				content.delete();
-  				LOG.error("Cannot open connection to OpenOffice Service");
-  			} catch(OpenOfficeException connection) {
-  				content.delete();
-  				LOG.error("Exception when using OpenOffice Service");
-  			} finally {
-  				out.flush();
-	  			out.close();
-  			}
-  		}
-  		if (content.exists()) {
+    String wsName = currentNode.getSession().getWorkspace().getName();
+    String uuid = currentNode.getUUID();
+    StringBuilder bd = new StringBuilder();
+    StringBuilder bd1 = new StringBuilder();
+    bd.append(repoName).append("/").append(wsName).append("/").append(uuid);
+    String path = (String) pdfCache.get(new ObjectKey(bd.toString()));
+    File content = null;
+    String name = currentNode.getName();
+    if (path == null || !(content = new File(path)).exists()) {
+      Node contentNode = currentNode.getNode("jcr:content");
+      String mimeType = contentNode.getProperty("jcr:mimeType").getString();
+      InputStream input = new BufferedInputStream(contentNode.getProperty("jcr:data").getStream());
+      // Create temp file to store data of nt:file node
+      if (name.indexOf(".") > 0) name = name.substring(0, name.indexOf("."));
+      content = File.createTempFile(name, ".pdf");
+      content.deleteOnExit();
+      // Convert to pdf if need
+      String extension = DMSMimeTypeResolver.getInstance().getExtension(mimeType);
+      if ("pdf".equals(extension)) {
+        read(input, new BufferedOutputStream(new FileOutputStream(content)));
+      } else {
+        OutputStream out = new BufferedOutputStream((new FileOutputStream(content)));
+        try {
+          jodConverter_.convert(input, extension, out, "pdf");
+        } catch(ConnectException connection) {
+          content.delete();
+          LOG.error("Cannot open connection to OpenOffice Service");
+        } catch(OpenOfficeException connection) {
+          content.delete();
+          LOG.error("Exception when using OpenOffice Service");
+        } finally {
+          out.flush();
+          out.close();
+        }
+      }
+      if (content.exists()) {
           if (contentNode.hasProperty("jcr:lastModified")) {
             String lastModified = contentNode.getProperty("jcr:lastModified").getString();
             pdfCache.put(new ObjectKey(bd.toString()), content.getPath());
             pdfCache.put(new ObjectKey(bd1.append(bd.toString()).append("/jcr:lastModified").toString()), lastModified);
-          }   
-  		}
-  	}
-  	return content;
+          }
+      }
+    }
+    return content;
   }
- 
-	private void read(InputStream is, OutputStream os) throws Exception {
-		int bufferLength = 1024; // TODO: Better to compute bufferLength in term of
-		// -Xms, -Xmx properties
-		int readLength = 0;
-		while (readLength > -1) {
-			byte[] chunk = new byte[bufferLength];
-			readLength = is.read(chunk);
-			if (readLength > 0) {
-				os.write(chunk, 0, readLength);
-			}
-		}
-		os.flush();
-		os.close();
-	}
-	
-	/**
-	 * Create key for cache. When key object is collected by GC, value (if is file) will be delete.
-	 * @param key
-	 * @return
-	 * @throws IOException
-	 */
-	private class ObjectKey implements Serializable {
-		String key;
-		private ObjectKey(String key) {
-			this.key = key;
-		}
-		@Override
-		public String toString() {
-			return key;
-		}
 
-		@Override
-		public void finalize() {
-			String path = (String) pdfCache.get(new ObjectKey(key));
-			File f = new File(path);
-			if (f.exists()) {
-				f.delete();
-			}
-		}
-		
-		public String getKey() {
-			return key;
-		}
-		
-		@Override
-		public int hashCode() {
-			return key == null ? -1 : key.length();
-		}
-		
-		@Override
-		public boolean equals(Object otherKey) {
-			if (otherKey != null && ObjectKey.class.isInstance(otherKey)
-					&& (key != null) && (key.equals(((ObjectKey) (otherKey)).getKey()))) {
-				return true;
-			}
-			return false;
-		}
-	}
-	
+  private void read(InputStream is, OutputStream os) throws Exception {
+    int bufferLength = 1024; // TODO: Better to compute bufferLength in term of
+    // -Xms, -Xmx properties
+    int readLength = 0;
+    while (readLength > -1) {
+      byte[] chunk = new byte[bufferLength];
+      readLength = is.read(chunk);
+      if (readLength > 0) {
+        os.write(chunk, 0, readLength);
+      }
+    }
+    os.flush();
+    os.close();
+  }
+
+  /**
+   * Create key for cache. When key object is collected by GC, value (if is file) will be delete.
+   * @param key
+   * @return
+   * @throws IOException
+   */
+  private class ObjectKey implements Serializable {
+    String key;
+    private ObjectKey(String key) {
+      this.key = key;
+    }
+    @Override
+    public String toString() {
+      return key;
+    }
+
+    @Override
+    public void finalize() {
+      String path = (String) pdfCache.get(new ObjectKey(key));
+      File f = new File(path);
+      if (f.exists()) {
+        f.delete();
+      }
+    }
+
+    public String getKey() {
+      return key;
+    }
+
+    @Override
+    public int hashCode() {
+      return key == null ? -1 : key.length();
+    }
+
+    @Override
+    public boolean equals(Object otherKey) {
+      if (otherKey != null && ObjectKey.class.isInstance(otherKey)
+          && (key != null) && (key.equals(((ObjectKey) (otherKey)).getKey()))) {
+        return true;
+      }
+      return false;
+    }
+  }
+
 }

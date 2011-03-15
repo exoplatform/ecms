@@ -28,55 +28,55 @@ import org.exoplatform.webui.core.lifecycle.UIApplicationLifecycle;
  * May 22, 2009
  */
 @ComponentConfig (
-		lifecycle = UIApplicationLifecycle.class
+    lifecycle = UIApplicationLifecycle.class
 )
 public class UINewsletterManagerPortlet extends UIPortletApplication {
-	/** The is render ui categories. */
-	private boolean isRenderUICategories = true;
-	
-	/** The is render ui subscription. */
-	@SuppressWarnings("unused")
+  /** The is render ui categories. */
+  private boolean isRenderUICategories = true;
+
+  /** The is render ui subscription. */
+  @SuppressWarnings("unused")
   private boolean isRenderUISubscription = false;
-	
-	/** The is render ui news letters. */
-	private boolean isRenderUINewsLetters = false;
-	
-	/**
-	 * Sets the render u icategories.
-	 */
-	public void setRenderUIcategories(){
-	  isRenderUICategories = true;
-	  isRenderUISubscription = false;
-	  isRenderUINewsLetters = false;
-	}
-	
-	/**
-	 * Sets the render u isubscriptions.
-	 */
-	public void setRenderUIsubscriptions(){
-	  isRenderUICategories = false;
-	  isRenderUISubscription = true;
-	  isRenderUINewsLetters = false;
-	}
-	
-	/**
-	 * Sets the render u inews letter.
-	 */
-	public void setRenderUInewsLetter(){
-	  isRenderUICategories = false;
-	  isRenderUISubscription = false;
-	  isRenderUINewsLetters = true;
-	}
-	
-	/**
-	 * Instantiates a new uI newsletter manager portlet.
-	 * 
-	 * @throws Exception the exception
-	 */
-	public UINewsletterManagerPortlet() throws Exception {
-	  addChild(UICategories.class, null, null).setRendered(isRenderUICategories);
-	  addChild(UISubscriptions.class, null, null).setRendered(isRenderUICategories);
-		addChild(UINewsletterEntryManager.class, null, null).setRendered(isRenderUINewsLetters);
-		addChild(UIPopupContainer.class, null, null);
-	}
+
+  /** The is render ui news letters. */
+  private boolean isRenderUINewsLetters = false;
+
+  /**
+   * Sets the render u icategories.
+   */
+  public void setRenderUIcategories(){
+    isRenderUICategories = true;
+    isRenderUISubscription = false;
+    isRenderUINewsLetters = false;
+  }
+
+  /**
+   * Sets the render u isubscriptions.
+   */
+  public void setRenderUIsubscriptions(){
+    isRenderUICategories = false;
+    isRenderUISubscription = true;
+    isRenderUINewsLetters = false;
+  }
+
+  /**
+   * Sets the render u inews letter.
+   */
+  public void setRenderUInewsLetter(){
+    isRenderUICategories = false;
+    isRenderUISubscription = false;
+    isRenderUINewsLetters = true;
+  }
+
+  /**
+   * Instantiates a new uI newsletter manager portlet.
+   *
+   * @throws Exception the exception
+   */
+  public UINewsletterManagerPortlet() throws Exception {
+    addChild(UICategories.class, null, null).setRendered(isRenderUICategories);
+    addChild(UISubscriptions.class, null, null).setRendered(isRenderUICategories);
+    addChild(UINewsletterEntryManager.class, null, null).setRendered(isRenderUINewsLetters);
+    addChild(UIPopupContainer.class, null, null);
+  }
 }

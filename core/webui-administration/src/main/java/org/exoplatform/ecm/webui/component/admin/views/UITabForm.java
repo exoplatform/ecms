@@ -40,10 +40,10 @@ import org.exoplatform.webui.form.UIFormStringInput;
 
 @ComponentConfig(template = "classpath:groovy/ecm/webui/form/UIFormInputSetWithAction.gtmpl")
 public class UITabForm extends UIFormInputSetWithAction {
-  
+
   final static public String FIELD_NAME = "tabName" ;
   private List<?> buttons_ ;
-  
+
   public UITabForm(String name) throws Exception {
     super(name) ;
     setComponentConfig(getClass(), null) ;
@@ -55,16 +55,16 @@ public class UITabForm extends UIFormInputSetWithAction {
     }
     setActions(new String[]{"AddTab", "Reset", "BackViewForm"}, null) ;
   }
-  
+
   private String getButtonName(Object bt) {
     String button = (String) bt;
     return button.substring(0, 1).toLowerCase() + button.substring(1);
   }
-  
+
   public void processRender(WebuiRequestContext context) throws Exception {
     super.processRender(context) ;
   }
-  
+
   public void refresh(boolean isEditable) throws Exception {
     getUIStringInput(FIELD_NAME).setEditable(isEditable).setValue(null) ;
     for(Object bt : buttons_){
@@ -74,7 +74,7 @@ public class UITabForm extends UIFormInputSetWithAction {
   }
 
   public void update(Tab tab, boolean isView) throws Exception{
-    refresh(!isView) ;    
+    refresh(!isView) ;
     if(tab == null) return ;
     getUIStringInput(FIELD_NAME).setEditable(false).setValue(tab.getTabName()) ;
     String buttonsProperty = tab.getButtons() ;
@@ -84,7 +84,7 @@ public class UITabForm extends UIFormInputSetWithAction {
       if(cbInput != null) cbInput.setChecked(true) ;
     }
   }
-  
+
   static public class AddTabActionListener extends EventListener<UIViewFormTabPane> {
     public void execute(Event<UIViewFormTabPane> event) throws Exception {
       UIViewFormTabPane viewFormTabPane = event.getSource();

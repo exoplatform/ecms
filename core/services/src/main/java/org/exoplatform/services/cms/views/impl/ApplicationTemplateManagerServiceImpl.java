@@ -54,27 +54,27 @@ import org.picocontainer.Startable;
  * Oct 15, 2008
  */
 public class ApplicationTemplateManagerServiceImpl implements ApplicationTemplateManagerService, Startable {
-  
+
   private static Log log = ExoLogger.getLogger(ApplicationTemplateManagerService.class);
-  private RepositoryService repositoryService;    
-  
-  private List<PortletTemplatePlugin> portletTemplatePlugins = new ArrayList<PortletTemplatePlugin>(); 
-  Map<String,List<String>> managedApplicationNames = new HashMap<String,List<String>>();   
+  private RepositoryService repositoryService;
+
+  private List<PortletTemplatePlugin> portletTemplatePlugins = new ArrayList<PortletTemplatePlugin>();
+  Map<String,List<String>> managedApplicationNames = new HashMap<String,List<String>>();
   private Map<String, String> storedWorkspaces = new HashMap<String,String>();
-  
+
   private String basedApplicationTemplatesPath;
-  
+
   private DMSConfiguration dmsConfiguration_;
-  
+
   private NodeHierarchyCreator hierarchyCreator;
-  
+
   private InitParams params;
-  
+
   private TemplateService templateService;
 
   /**
    * Instantiates a new application template manager service impl.
-   * 
+   *
    * @param repositoryService       RepositoryService
    * @param hierarchyCreator        NodeHierarchyCreator
    * @param params                  InitParams
@@ -82,11 +82,11 @@ public class ApplicationTemplateManagerServiceImpl implements ApplicationTemplat
    * @see RepositoryService
    * @see NodeHierarchyCreator
    * @see DMSConfiguration
-   * 
+   *
    * @throws Exception the exception
    */
   public ApplicationTemplateManagerServiceImpl(RepositoryService repositoryService,
-      NodeHierarchyCreator hierarchyCreator, InitParams params, 
+      NodeHierarchyCreator hierarchyCreator, InitParams params,
       DMSConfiguration dmsConfiguration) throws Exception{
     this.repositoryService = repositoryService;
     dmsConfiguration_ = dmsConfiguration;
@@ -101,27 +101,30 @@ public class ApplicationTemplateManagerServiceImpl implements ApplicationTemplat
   public void addPlugin(PortletTemplatePlugin portletTemplatePlugin) throws Exception {
     portletTemplatePlugins.add(portletTemplatePlugin);
   }
-  
+
   /**
    * {@inheritDoc}
    */
   public List<Node> getTemplatesByApplication(String repository, String portletName,
-      SessionProvider provider) throws Exception {  
+      SessionProvider provider) throws Exception {
     return null;
   }
-  
+
   /**
    * {@inheritDoc}
    */
   public void addTemplate(Node portletTemplateHome, PortletTemplateConfig config) throws Exception {
     Node category = null;
     try {
-      category = portletTemplateHome.getNode(config.getCategory());      
+      category = portletTemplateHome.getNode(config.getCategory());
     } catch (Exception e) {
       category = portletTemplateHome.addNode(config.getCategory(),"nt:unstructured");
       portletTemplateHome.save();
     }
-    templateService.createTemplate(category, config.getTemplateName(), new ByteArrayInputStream(config.getTemplateData().getBytes()), new String[] {"*"});
+    templateService.createTemplate(category,
+                                   config.getTemplateName(),
+                                   new ByteArrayInputStream(config.getTemplateData().getBytes()),
+                                   new String[] { "*" });
   }
 
   /**
@@ -132,13 +135,13 @@ public class ApplicationTemplateManagerServiceImpl implements ApplicationTemplat
    *                          The name of portlet
    * @param provider          SessionProvider
    * @see SessionProvider
-   * @return the application template home 
+   * @return the application template home
    * @throws Exception the exception
    */
   public Node getApplicationTemplateHome(String repository, String portletName,
-      SessionProvider provider) throws Exception {        
+      SessionProvider provider) throws Exception {
     Node basedApplicationTemplateHome = getBasedApplicationTemplatesHome(provider,repository);
-    return basedApplicationTemplateHome.getNode(portletName);    
+    return basedApplicationTemplateHome.getNode(portletName);
   }
 
   /**
@@ -154,8 +157,8 @@ public class ApplicationTemplateManagerServiceImpl implements ApplicationTemplat
   public Node getTemplateByName(String repository, String portletName, String category,
       String templateName, SessionProvider sessionProvider) throws Exception {
     Node basedApplicationTemplateHome = getBasedApplicationTemplatesHome(sessionProvider,repository);
-    return basedApplicationTemplateHome.getNode(portletName + "/" + category + "/" + templateName);    
-  }  
+    return basedApplicationTemplateHome.getNode(portletName + "/" + category + "/" + templateName);
+  }
 
   /**
    * {@inheritDoc}
@@ -165,13 +168,13 @@ public class ApplicationTemplateManagerServiceImpl implements ApplicationTemplat
     Node basedApplicationTemplateHome = getBasedApplicationTemplatesHome(sessionProvider,repository);
     Node applicationHome = basedApplicationTemplateHome.getNode(portletName);
     Node categoryNode = applicationHome.getNode(category);
-    List<Node> templateNodes = new ArrayList<Node>();   
+    List<Node> templateNodes = new ArrayList<Node>();
     for(NodeIterator iterator = categoryNode.getNodes();iterator.hasNext();) {
       templateNodes.add(iterator.nextNode());
     }
     return templateNodes;
-  } 
-  
+  }
+
   /**
    * {@inheritDoc}
    */
@@ -179,13 +182,13 @@ public class ApplicationTemplateManagerServiceImpl implements ApplicationTemplat
    Node basedTemplateNode = getBasedApplicationTemplatesHome(sessionProvider,repository);
    return (Node)basedTemplateNode.getSession().getItem(templatePath);
   }
-  
+
   /**
    * {@inheritDoc}
    */
   public void removeTemplate(String repository, String portletName, String catgory,
       String templateName, SessionProvider sessionProvider) throws Exception {
-    Node templateNode = getTemplateByName(repository,portletName,catgory,templateName, sessionProvider );    
+    Node templateNode = getTemplateByName(repository,portletName,catgory,templateName, sessionProvider );
     Session session = templateNode.getSession();
     templateNode.remove();
     session.save();
@@ -194,7 +197,7 @@ public class ApplicationTemplateManagerServiceImpl implements ApplicationTemplat
 
   /**
    * Gets the based application templates home.
-   * 
+   *
    * @param sessionProvider       SessionProvider
    * @param repository            String
    *                              The name of repository
@@ -205,7 +208,7 @@ public class ApplicationTemplateManagerServiceImpl implements ApplicationTemplat
   private Node getBasedApplicationTemplatesHome(SessionProvider sessionProvider, String repository) throws Exception {
     DMSRepositoryConfiguration dmsRepoConfig = dmsConfiguration_.getConfig();
     ManageableRepository manageableRepository = repositoryService.getRepository(repository);
-    Session session = 
+    Session session =
       sessionProvider.getSession(dmsRepoConfig.getSystemWorkspace(),manageableRepository);
     Node basedTemplateHome = (Node)session.getItem(basedApplicationTemplatesPath);
     session.logout();
@@ -215,14 +218,15 @@ public class ApplicationTemplateManagerServiceImpl implements ApplicationTemplat
 
   /**
    * Import predefined template to db.
-   * 
+   *
    * @param storedTemplateHomeNode the stored template home node
    * @see   Node
    * @throws Exception the exception
    */
-  private void importPredefinedTemplateToDB(Node storedTemplateHomeNode) throws Exception{    
+  private void importPredefinedTemplateToDB(Node storedTemplateHomeNode) throws Exception{
     HashMap<String, List<PortletTemplateConfig>>  map = new HashMap<String,List<PortletTemplateConfig>>();
-    String repository = ((ManageableRepository)storedTemplateHomeNode.getSession().getRepository()).getConfiguration().getName();   
+    String repository = ((ManageableRepository) storedTemplateHomeNode.getSession().getRepository()).getConfiguration()
+                                                                                                    .getName();
     List<String> managedApplicationsPerRepo = managedApplicationNames.get(repository);
     if(managedApplicationsPerRepo == null) {
       managedApplicationsPerRepo = new ArrayList<String>();
@@ -240,7 +244,7 @@ public class ApplicationTemplateManagerServiceImpl implements ApplicationTemplat
       map.put(portletName,list);
     }
     for(String portletName: managedApplicationsPerRepo) {
-      if(storedTemplateHomeNode.hasNode(portletName)) 
+      if(storedTemplateHomeNode.hasNode(portletName))
         continue;
       Node templateNode = storedTemplateHomeNode.addNode(portletName,"nt:unstructured");
       storedTemplateHomeNode.save();
@@ -251,7 +255,7 @@ public class ApplicationTemplateManagerServiceImpl implements ApplicationTemplat
     managedApplicationNames.put(repository,managedApplicationsPerRepo);
     storedTemplateHomeNode.getSession().save();
   }
-  
+
   /**
    * {@inheritDoc}
    */
@@ -263,26 +267,26 @@ public class ApplicationTemplateManagerServiceImpl implements ApplicationTemplat
     } catch (RepositoryException e) {
       log.error(e.getMessage(), e);
     }
-    
+
     String repoName = repositoryEntry.getName();
     String workspaceName = propertiesParam.getProperty(repoName);
     if(workspaceName != null) {
-      workspaceName = repositoryEntry.getSystemWorkspaceName();        
+      workspaceName = repositoryEntry.getSystemWorkspaceName();
     }
     storedWorkspaces.put(repoName,workspaceName);
     basedApplicationTemplatesPath = hierarchyCreator.getJcrPath(BasePath.CMS_VIEWTEMPLATES_PATH);
-    
+
     SessionProvider sessionProvider = SessionProvider.createSystemProvider();
     for(Iterator<String> repositories = storedWorkspaces.keySet().iterator(); repositories.hasNext();) {
-      String repository = repositories.next();         
-      try {        
+      String repository = repositories.next();
+      try {
         Node storedTemplateHome = getBasedApplicationTemplatesHome(sessionProvider,repository);
         importPredefinedTemplateToDB(storedTemplateHome);
       } catch (Exception e) {
         log.error("Exception when import predefine application template into repository: " + repository, e);
-      } 
-    }     
-    sessionProvider.close();    
+      }
+    }
+    sessionProvider.close();
     //clear all template plugin to optimize memomry
     portletTemplatePlugins.clear();
     portletTemplatePlugins = null;

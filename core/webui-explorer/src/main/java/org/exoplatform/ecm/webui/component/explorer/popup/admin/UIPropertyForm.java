@@ -56,14 +56,14 @@ import org.exoplatform.webui.form.UIFormUploadInput;
 import org.exoplatform.webui.form.validator.MandatoryValidator;
 
 /**
- * Created by The eXo Platform SARL 
+ * Created by The eXo Platform SARL
  * Author : phamtuan
  * phamtuanchip@yahoo.de September 13, 2006 10:07:15 AM
  */
 
 @ComponentConfig(
     lifecycle = UIFormLifecycle.class,
-    template = "system:/groovy/webui/form/UIForm.gtmpl", 
+    template = "system:/groovy/webui/form/UIForm.gtmpl",
     events = {
       @EventConfig(listeners = UIPropertyForm.SaveActionListener.class),
       @EventConfig(phase = Phase.DECODE, listeners = UIPropertyForm.ChangeTypeActionListener.class),
@@ -87,32 +87,32 @@ public class UIPropertyForm extends UIForm {
   private String propertyName_;
   private boolean isAddNew_ = true;
   private boolean isMultiple_ = false;
-  
+
   public UIPropertyForm() throws Exception {
     setMultiPart(true);
     List<SelectItemOption<String>> options = new ArrayList<SelectItemOption<String>>();
-    options.add(new SelectItemOption<String>(PropertyType.TYPENAME_STRING, 
+    options.add(new SelectItemOption<String>(PropertyType.TYPENAME_STRING,
         Integer.toString(PropertyType.STRING)));
-    options.add(new SelectItemOption<String>(PropertyType.TYPENAME_BINARY, 
+    options.add(new SelectItemOption<String>(PropertyType.TYPENAME_BINARY,
         Integer.toString(PropertyType.BINARY)));
-    options.add(new SelectItemOption<String>(PropertyType.TYPENAME_BOOLEAN, 
+    options.add(new SelectItemOption<String>(PropertyType.TYPENAME_BOOLEAN,
         Integer.toString(PropertyType.BOOLEAN)));
-    options.add(new SelectItemOption<String>(PropertyType.TYPENAME_DATE, 
+    options.add(new SelectItemOption<String>(PropertyType.TYPENAME_DATE,
         Integer.toString(PropertyType.DATE)));
-    options.add(new SelectItemOption<String>(PropertyType.TYPENAME_DOUBLE, 
+    options.add(new SelectItemOption<String>(PropertyType.TYPENAME_DOUBLE,
         Integer.toString(PropertyType.DOUBLE)));
-    options.add(new SelectItemOption<String>(PropertyType.TYPENAME_LONG, 
+    options.add(new SelectItemOption<String>(PropertyType.TYPENAME_LONG,
         Integer.toString(PropertyType.LONG)));
-    options.add(new SelectItemOption<String>(PropertyType.TYPENAME_NAME, 
+    options.add(new SelectItemOption<String>(PropertyType.TYPENAME_NAME,
         Integer.toString(PropertyType.NAME)));
-    options.add(new SelectItemOption<String>(PropertyType.TYPENAME_PATH, 
+    options.add(new SelectItemOption<String>(PropertyType.TYPENAME_PATH,
         Integer.toString(PropertyType.PATH)));
-    options.add(new SelectItemOption<String>(PropertyType.TYPENAME_REFERENCE, 
+    options.add(new SelectItemOption<String>(PropertyType.TYPENAME_REFERENCE,
         Integer.toString(PropertyType.REFERENCE)));
     List<SelectItemOption<String>> nsOptions = new ArrayList<SelectItemOption<String>>();
     addUIFormInput(new UIFormSelectBox(FIELD_NAMESPACE,FIELD_NAMESPACE, nsOptions));
     addUIFormInput(new UIFormStringInput(FIELD_PROPERTY, FIELD_PROPERTY, null).addValidator(MandatoryValidator.class).addValidator(ECMNameValidator.class));
-    UIFormSelectBox uiSelectBox = new UIFormSelectBox(FIELD_TYPE, FIELD_TYPE, options); 
+    UIFormSelectBox uiSelectBox = new UIFormSelectBox(FIELD_TYPE, FIELD_TYPE, options);
     uiSelectBox.setOnChange("ChangeType");
     addUIFormInput(uiSelectBox);
     List<SelectItemOption<String>> multipleOpt = new ArrayList<SelectItemOption<String>>();
@@ -121,18 +121,18 @@ public class UIPropertyForm extends UIForm {
     UIFormSelectBox uiMultiSelectBox = new UIFormSelectBox(FIELD_MULTIPLE,FIELD_MULTIPLE, multipleOpt);
     uiMultiSelectBox.setOnChange("ChangeType");
     addUIFormInput(uiMultiSelectBox);
-    initValueField();    
+    initValueField();
     setActions(new String[]{"Save", "Reset", "Cancel"});
   }
 
   public List<SelectItemOption<String>> getNamespaces() throws Exception {
-    List<SelectItemOption<String>> namespaceOptions = new ArrayList<SelectItemOption<String>>(); 
-    String[] namespaces = 
+    List<SelectItemOption<String>> namespaceOptions = new ArrayList<SelectItemOption<String>>();
+    String[] namespaces =
       getApplicationComponent(RepositoryService.class).getRepository(repositoryName_).getNamespaceRegistry().getPrefixes();
     for(String namespace : namespaces){
       namespaceOptions.add(new SelectItemOption<String>(namespace, namespace));
     }
-    return namespaceOptions;    
+    return namespaceOptions;
   }
 
   public void refresh() throws Exception {
@@ -142,15 +142,15 @@ public class UIPropertyForm extends UIForm {
     removeChildById(FIELD_VALUE);
     getUIStringInput(FIELD_PROPERTY).setEditable(isAddNew_);
     getUIFormSelectBox(FIELD_TYPE).setEnable(isAddNew_);
-    getUIFormSelectBox(FIELD_MULTIPLE).setEnable(isAddNew_);    
+    getUIFormSelectBox(FIELD_MULTIPLE).setEnable(isAddNew_);
     getUIFormSelectBox(FIELD_NAMESPACE).setEnable(isAddNew_);
     initValueField();
   }
 
   public void setRepositoryName(String repositoryName) { repositoryName_ = repositoryName; }
-  
+
   private void initValueField() throws Exception {
-    UIFormMultiValueInputSet uiFormMValue = 
+    UIFormMultiValueInputSet uiFormMValue =
       createUIComponent(UIFormMultiValueInputSet.class, null, null);
     uiFormMValue.addValidator(MandatoryValidator.class);
     uiFormMValue.setId(FIELD_VALUE);
@@ -166,14 +166,14 @@ public class UIPropertyForm extends UIForm {
     case 4:  return valueFactory.createValue(Double.parseDouble(value.toString()));
     case 5:  return valueFactory.createValue((GregorianCalendar)value);
     case 6:  return valueFactory.createValue(Boolean.parseBoolean(value.toString()));
-    default: return valueFactory.createValue(value.toString(), type); 
+    default: return valueFactory.createValue(value.toString(), type);
     }
   }
 
   private Value[] createValues(List valueList, int type, ValueFactory valueFactory) throws Exception {
     Value[] values = new Value[valueList.size()];
     for(int i = 0; i < valueList.size(); i++) {
-      values[i] = createValue(valueList.get(i), type, valueFactory);     
+      values[i] = createValue(valueList.get(i), type, valueFactory);
     }
     return values;
   }
@@ -185,12 +185,12 @@ public class UIPropertyForm extends UIForm {
     getUIFormSelectBox(FIELD_TYPE).setEnable(!isLock);
     getUIFormSelectBox(FIELD_NAMESPACE).setEnable(!isLock);
   }
-  
+
   private Node getCurrentNode() throws Exception {
     UIPropertiesManager uiManager = getParent();
     return uiManager.getCurrentNode();
   }
-  
+
   @SuppressWarnings("unchecked")
   public void loadForm(String propertyName) throws Exception {
     Node currentNode = getCurrentNode();
@@ -206,7 +206,7 @@ public class UIPropertyForm extends UIForm {
     }
     Property property = currentNode.getProperty(propertyName);
     isMultiple_ = property.getDefinition().isMultiple();
-    if (property.getType() == 0){ 
+    if (property.getType() == 0){
       getUIFormSelectBox(FIELD_TYPE).setDisabled(true).setValue("1");
     } else {
       getUIFormSelectBox(FIELD_TYPE).setDisabled(true).setValue(Integer.toString(property.getType()));
@@ -236,7 +236,7 @@ public class UIPropertyForm extends UIForm {
             break;
           }
           default: {
-            listValue.add(value.getString()); 
+            listValue.add(value.getString());
             break;
           }
         }
@@ -271,13 +271,13 @@ public class UIPropertyForm extends UIForm {
         }
         default: {
           UIFormStringInput uiForm = getUIStringInput(FIELD_VALUE);
-          uiForm.setValue(value.getString()); 
+          uiForm.setValue(value.getString());
           break;
         }
       }
     }
   }
-  
+
   @SuppressWarnings("unchecked")
   private Object processValue(int type) throws Exception {
     Object value = null;
@@ -291,7 +291,7 @@ public class UIPropertyForm extends UIForm {
     } else if(type == 2) {
         UIFormUploadInput binaryInput = (UIFormUploadInput)uiChild;
         if(binaryInput.getUploadDataAsStream() != null) {
-          value = binaryInput.getUploadDataAsStream();    
+          value = binaryInput.getUploadDataAsStream();
         }
     } else {
       UIFormStringInput uiStringInput = (UIFormStringInput)uiChild;
@@ -299,7 +299,7 @@ public class UIPropertyForm extends UIForm {
     }
     return value;
   }
-  
+
   @SuppressWarnings("unchecked")
   private List processValues(int type) throws Exception {
     UIFormMultiValueInputSet multiValueInputSet = getUIInput(FIELD_VALUE);
@@ -318,7 +318,7 @@ public class UIPropertyForm extends UIForm {
       for(UIComponent child : multiValueInputSet.getChildren()) {
         UIFormUploadInput binaryInput = (UIFormUploadInput)child;
         if(binaryInput.getUploadDataAsStream() != null) {
-          InputStream content = binaryInput.getUploadDataAsStream();    
+          InputStream content = binaryInput.getUploadDataAsStream();
           valueList.add(content);
         }
       }
@@ -327,10 +327,10 @@ public class UIPropertyForm extends UIForm {
     }
     return valueList;
   }
-  
+
   private void changeMultipleType(UIFormMultiValueInputSet uiFormMultiValue, int type) {
-    if(PropertyType.BINARY == type) {        
-      uiFormMultiValue.setType(UIFormUploadInput.class);  
+    if(PropertyType.BINARY == type) {
+      uiFormMultiValue.setType(UIFormUploadInput.class);
     } else if(PropertyType.BOOLEAN == type) {
       uiFormMultiValue.setType(UIFormCheckBoxInput.class);
     } else if(PropertyType.DATE == type) {
@@ -339,7 +339,7 @@ public class UIPropertyForm extends UIForm {
       uiFormMultiValue.setType(UIFormStringInput.class);
     }
   }
-  
+
   @SuppressWarnings("unchecked")
   private void changeSingleType(int type) {
     removeChildById(FIELD_VALUE);
@@ -363,7 +363,7 @@ public class UIPropertyForm extends UIForm {
       uiForm.removeChildById(FIELD_VALUE);
       boolean isMultiple = Boolean.parseBoolean(uiForm.getUIFormSelectBox(FIELD_MULTIPLE).getValue());
       if(isMultiple) {
-        UIFormMultiValueInputSet uiFormMultiValue = 
+        UIFormMultiValueInputSet uiFormMultiValue =
           uiForm.createUIComponent(UIFormMultiValueInputSet.class, null, null);
         uiFormMultiValue.setId(FIELD_VALUE);
         uiFormMultiValue.setName(FIELD_VALUE);
@@ -377,7 +377,7 @@ public class UIPropertyForm extends UIForm {
       event.getRequestContext().addUIComponentToUpdateByAjax(uiForm.getParent());
     }
   }
-  
+
   @SuppressWarnings("unchecked")
   static public class SaveActionListener extends EventListener<UIPropertyForm> {
     public void execute(Event<UIPropertyForm> event) throws Exception {
@@ -399,7 +399,7 @@ public class UIPropertyForm extends UIForm {
       int type;
       if(uiForm.isAddNew_) {
         if(!nodeType.isNodeType(Utils.NT_UNSTRUCTURED)) {
-          uiApp.addMessage(new ApplicationMessage("UIPropertyForm.msg.can-not-add", null, 
+          uiApp.addMessage(new ApplicationMessage("UIPropertyForm.msg.can-not-add", null,
               ApplicationMessage.WARNING));
           event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
           UIPropertiesManager uiPropertiesManager = uiForm.getAncestorOfType(UIPropertiesManager.class);
@@ -410,14 +410,14 @@ public class UIPropertyForm extends UIForm {
         name = namespace + ":" + uiForm.getUIStringInput(FIELD_PROPERTY).getValue();
         if(currentNode.hasProperty(name)) {
           Object[] args = { name };
-          uiApp.addMessage(new ApplicationMessage("UIPropertyForm.msg.propertyName-exist", args, 
+          uiApp.addMessage(new ApplicationMessage("UIPropertyForm.msg.propertyName-exist", args,
               ApplicationMessage.WARNING));
           event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
           UIPropertiesManager uiPropertiesManager = uiForm.getAncestorOfType(UIPropertiesManager.class);
           uiPropertiesManager.setRenderedChild(UIPropertyForm.class);
           return;
         }
-        type = Integer.parseInt(uiForm.getUIFormSelectBox(FIELD_TYPE).getValue());        
+        type = Integer.parseInt(uiForm.getUIFormSelectBox(FIELD_TYPE).getValue());
         isMultiple = Boolean.parseBoolean(uiForm.getUIFormSelectBox(FIELD_MULTIPLE).getValue());
       } else {
         name = uiForm.propertyName_;
@@ -445,12 +445,12 @@ public class UIPropertyForm extends UIForm {
         currentNode.getSession().save();
       } catch(NullPointerException ne) {
         LOG.error("Unexpected error", ne);
-        uiApp.addMessage(new ApplicationMessage("UIPropertyForm.msg.propertyValu-null", null, 
+        uiApp.addMessage(new ApplicationMessage("UIPropertyForm.msg.propertyValu-null", null,
             ApplicationMessage.WARNING));
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
         return;
       } catch(NumberFormatException nume) {
-        uiApp.addMessage(new ApplicationMessage("UIPropertyForm.msg.number-format-exception", null, 
+        uiApp.addMessage(new ApplicationMessage("UIPropertyForm.msg.number-format-exception", null,
             ApplicationMessage.WARNING));
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
         return;
@@ -465,7 +465,7 @@ public class UIPropertyForm extends UIForm {
       return;
     }
   }
-  
+
   static public class ResetActionListener extends EventListener<UIPropertyForm> {
     public void execute(Event<UIPropertyForm> event) throws Exception {
       UIPropertyForm uiForm = event.getSource();
@@ -476,7 +476,7 @@ public class UIPropertyForm extends UIForm {
       event.getRequestContext().addUIComponentToUpdateByAjax(uiForm.getParent());
     }
   }
-  
+
   static public class CancelActionListener extends EventListener<UIPropertyForm> {
     public void execute(Event<UIPropertyForm> event) throws Exception {
       UIPropertyForm uiForm = event.getSource();

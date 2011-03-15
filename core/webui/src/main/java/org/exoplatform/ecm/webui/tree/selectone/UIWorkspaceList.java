@@ -56,7 +56,7 @@ import org.exoplatform.webui.form.UIFormSelectBox;
 @ComponentConfig(
     lifecycle = UIFormLifecycle.class,
     template = "classpath:groovy/ecm/webui/form/UIFormWithoutAction.gtmpl",
-    events = { 
+    events = {
       @EventConfig(listeners = UIWorkspaceList.ChangeWorkspaceActionListener.class),
       @EventConfig(listeners = UIWorkspaceList.AddRootNodeActionListener.class)
     }
@@ -66,12 +66,12 @@ public class UIWorkspaceList extends UIForm {
   static private String WORKSPACE_NAME = "workspaceName";
   static private String ROOT_NODE_INFO = "rootNodeInfo";
   static private String ROOT_NODE_PATH = "rootNodePath";
-  
+
   private List<String> wsList_;
   private boolean isShowSystem_ = true;
 
   private static final Log LOG = ExoLogger.getLogger(UIWorkspaceList.class);
-  
+
   public UIWorkspaceList() throws Exception {
     List<SelectItemOption<String>> wsList = new ArrayList<SelectItemOption<String>>();
     UIFormSelectBox uiWorkspaceList = new UIFormSelectBox(WORKSPACE_NAME, WORKSPACE_NAME, wsList);
@@ -85,21 +85,21 @@ public class UIWorkspaceList extends UIForm {
     rootNodeInfo.setRendered(false);
     addUIComponentInput(rootNodeInfo);
   }
-  
+
   public void setIsShowSystem(boolean isShowSystem) { isShowSystem_ = isShowSystem; }
-  
+
   public boolean isShowSystemWorkspace() { return isShowSystem_; }
-  
-  public void setShowRootPathSelect(boolean isRender) { 
-    UIFormInputSetWithAction uiInputAction = getChildById(ROOT_NODE_INFO); 
-    uiInputAction.setRendered(isRender); 
+
+  public void setShowRootPathSelect(boolean isRender) {
+    UIFormInputSetWithAction uiInputAction = getChildById(ROOT_NODE_INFO);
+    uiInputAction.setRendered(isRender);
   }
-  
+
   public void setWorkspaceList(String repository) throws Exception {
     wsList_ = new ArrayList<String>();
     RepositoryService repositoryService = getApplicationComponent(RepositoryService.class);
     String[] wsNames = repositoryService.getCurrentRepository().getWorkspaceNames();
-    String systemWsName = 
+    String systemWsName =
       repositoryService.getCurrentRepository().getConfiguration().getSystemWorkspaceName();
     List<SelectItemOption<String>> workspace = new ArrayList<SelectItemOption<String>>();
     for(String wsName : wsNames) {
@@ -118,23 +118,23 @@ public class UIWorkspaceList extends UIForm {
     UIOneNodePathSelector uiBrowser = getParent();
     if(uiBrowser.getWorkspaceName() != null) {
       if(wsList_.contains(uiBrowser.getWorkspaceName())) {
-        uiWorkspaceList.setValue(uiBrowser.getWorkspaceName()); 
+        uiWorkspaceList.setValue(uiBrowser.getWorkspaceName());
       }
     }
   }
-  
+
   public void setIsDisable(String wsName, boolean isDisable) {
-    if(wsList_.contains(wsName)) getUIFormSelectBox(WORKSPACE_NAME).setValue(wsName); 
+    if(wsList_.contains(wsName)) getUIFormSelectBox(WORKSPACE_NAME).setValue(wsName);
     getUIFormSelectBox(WORKSPACE_NAME).setDisabled(isDisable);
   }
-  
+
   private Node getRootNode(String repositoryName, String workspaceName) throws RepositoryException, RepositoryConfigurationException {
     RepositoryService repositoryService = getApplicationComponent(RepositoryService.class);
     ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
     SessionProvider sessionProvider =  SessionProviderFactory.createSessionProvider();
-    return sessionProvider.getSession(workspaceName, manageableRepository).getRootNode(); 
+    return sessionProvider.getSession(workspaceName, manageableRepository).getRootNode();
   }
-  
+
   static public class ChangeWorkspaceActionListener extends EventListener<UIWorkspaceList> {
     public void execute(Event<UIWorkspaceList> event) throws Exception {
       UIWorkspaceList uiWorkspaceList = event.getSource();
@@ -147,7 +147,7 @@ public class UIWorkspaceList extends UIForm {
       UIApplication uiApp = uiWorkspaceList.getAncestorOfType(UIApplication.class);
       try {
         uiTreeBuilder.setRootTreeNode(uiWorkspaceList.getRootNode(uiJBrowser.getRepositoryName(), wsName));
-      } catch (AccessDeniedException ade) {        
+      } catch (AccessDeniedException ade) {
         uiWorkspaceList.getUIFormSelectBox(WORKSPACE_NAME).setValue("collaboration");
         uiApp.addMessage(new ApplicationMessage("UIWorkspaceList.msg.AccessDeniedException", null, ApplicationMessage.WARNING));
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
@@ -156,12 +156,12 @@ public class UIWorkspaceList extends UIForm {
         LOG.error("An unexpected error occurs", e);
         return;
       }
-      
+
       uiTreeBuilder.buildTree();
       event.getRequestContext().addUIComponentToUpdateByAjax(uiJBrowser);
     }
   }
-  
+
   static public class AddRootNodeActionListener extends EventListener<UIWorkspaceList> {
     public void execute(Event<UIWorkspaceList> event) throws Exception {
       UIWorkspaceList uiWorkspaceList = event.getSource();

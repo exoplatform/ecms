@@ -21,13 +21,13 @@ import org.ow2.bonita.util.Base64;
  * @author Le Gall Rodrigue <rodrigue.le-gall@bull.net>
  */
 public class ObjectSerializer {
-    
+
     static int options = Base64.URL_SAFE | Base64.DONT_BREAK_LINES;
-    
+
     public static String encode(java.io.Serializable serializableObject) {
         return Base64.encodeObject(serializableObject,options);
     }
-    
+
     public static Object decode(String encodedObject) {
         return Base64.decodeToObject(encodedObject, options);
     }

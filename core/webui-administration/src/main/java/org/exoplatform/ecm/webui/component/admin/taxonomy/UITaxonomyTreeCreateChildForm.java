@@ -43,7 +43,7 @@ import org.exoplatform.webui.form.validator.MandatoryValidator;
  * Created by The eXo Platform SARL
  * Author : Hoang Van Hung
  *          hunghvit@gmail.com
- * Apr 15, 2009  
+ * Apr 15, 2009
  */
 
 @ComponentConfig(
@@ -56,22 +56,22 @@ import org.exoplatform.webui.form.validator.MandatoryValidator;
 )
 
 public class UITaxonomyTreeCreateChildForm extends UIForm {
-  
+
   final static private String FIELD_PARENT = "parentPath";
 
   final static private String FIELD_NAME   = "taxonomyName";
-  
+
   public UITaxonomyTreeCreateChildForm() throws Exception {
     addUIFormInput(new UIFormInputInfo(FIELD_PARENT, FIELD_PARENT, null));
     addUIFormInput(new UIFormStringInput(FIELD_NAME, FIELD_NAME, null).addValidator(
         MandatoryValidator.class).addValidator(ECMNameValidator.class));
   }
-  
+
   public void setParent(String path) {
     getUIFormInputInfo(FIELD_PARENT).setValue(path);
     getUIStringInput(FIELD_NAME).setValue(null);
   }
-  
+
   public static class SaveActionListener extends EventListener<UITaxonomyTreeCreateChildForm> {
     public void execute(Event<UITaxonomyTreeCreateChildForm> event) throws Exception {
       UITaxonomyTreeCreateChildForm uiForm = event.getSource();
@@ -88,7 +88,7 @@ public class UITaxonomyTreeCreateChildForm extends UIForm {
         return;
       }
       else
-    	  name = name.trim();
+        name = name.trim();
 
       if (!Utils.isNameValid(name, new String[] { "&", "$", "@", ",", ":", "]", "[", "*", "%", "!" })) {
         uiApp.addMessage(new ApplicationMessage("UITaxonomyTreeCreateChildForm.msg.name-invalid",
@@ -103,7 +103,7 @@ public class UITaxonomyTreeCreateChildForm extends UIForm {
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
         return;
       }
-      
+
       try {
         TaxonomyService taxonomyService = uiForm.getApplicationComponent(TaxonomyService.class);
         String parentPath = uiForm.getUIFormInputInfo(FIELD_PARENT).getValue();

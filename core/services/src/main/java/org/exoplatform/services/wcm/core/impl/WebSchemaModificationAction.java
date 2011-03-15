@@ -30,9 +30,9 @@ import org.exoplatform.services.wcm.core.WebSchemaConfigService;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 /**
  * Created by The eXo Platform SAS
- * Author : Hoa Pham	
+ * Author : Hoa Pham
  *          hoa.pham@exoplatform.com
- * Sep 17, 2008  
+ * Sep 17, 2008
  */
 public class WebSchemaModificationAction implements Action{
   private Log log = ExoLogger.getLogger("wcm:WebSchemaModificationAction");
@@ -42,18 +42,18 @@ public class WebSchemaModificationAction implements Action{
     if(!propertyName.equals("jcr:data"))
       return propertyName.equalsIgnoreCase("exo:active");//use exo:active in case of exo:cssFile or exo:jsFile
     Node grandParent = property.getParent().getParent();
-    if(!grandParent.getPrimaryNodeType().getName().equals("nt:file")) 
-      return false;        
+    if(!grandParent.getPrimaryNodeType().getName().equals("nt:file"))
+      return false;
     ExoContainer container = ExoContainerContext.getCurrentContainer();
-    WebSchemaConfigService schemaConfigService = 
+    WebSchemaConfigService schemaConfigService =
       (WebSchemaConfigService) container.getComponentInstanceOfType(WebSchemaConfigService.class);
     SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
-    try {            
+    try {
       schemaConfigService.updateSchemaOnModify(sessionProvider, grandParent);
-    } catch (Exception e) { 
+    } catch (Exception e) {
       log.error("Error when update schema when modify node: "+grandParent.getPath(), e);
-    }       
-    return true;    
+    }
+    return true;
   }
 
 }

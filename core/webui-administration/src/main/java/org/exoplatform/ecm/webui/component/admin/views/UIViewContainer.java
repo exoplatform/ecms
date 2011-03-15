@@ -27,7 +27,7 @@ import org.exoplatform.webui.core.lifecycle.UIContainerLifecycle;
  * Author : Dang Van Minh
  *          minh.dang@exoplatform.com
  * Nov 23, 2006
- * 2:09:18 PM 
+ * 2:09:18 PM
  */
 @ComponentConfig(lifecycle = UIContainerLifecycle.class)
 public class UIViewContainer extends UIContainer {
@@ -45,17 +45,17 @@ public class UIViewContainer extends UIContainer {
     uiPopup.setShow(true) ;
     uiPopup.setResizable(true) ;
   }
-  
+
   public void update() throws Exception {
     UIViewList uiViewList = getChild(UIViewList.class);
     uiViewList.updateViewListGrid(uiViewList.getUIPageIterator().getCurrentPage());
   }
-  
+
   public void initPopupPermission(String membership) throws Exception {
     removeChildById(UIViewFormTabPane.POPUP_PERMISSION) ;
     UIPopupWindow uiPopup = addChild(UIPopupWindow.class, null, UIViewFormTabPane.POPUP_PERMISSION);
     uiPopup.setWindowSize(600, 300);
-    UIPermissionSelector uiECMPermission = 
+    UIPermissionSelector uiECMPermission =
       createUIComponent(UIPermissionSelector.class, null, null) ;
     uiECMPermission.setSelectedMembership(true);
     uiPopup.setUIComponent(uiECMPermission);

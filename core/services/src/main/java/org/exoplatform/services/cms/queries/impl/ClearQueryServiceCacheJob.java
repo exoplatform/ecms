@@ -29,12 +29,12 @@ import org.exoplatform.services.scheduler.JobContext;
  *          tuan08@users.sourceforge.net
  * 06-Oct-2005
  */
-public class ClearQueryServiceCacheJob extends BaseJob {  
+public class ClearQueryServiceCacheJob extends BaseJob {
   public  void  execute(JobContext context) throws Exception {
     ExoContainer container = ExoContainerContext.getCurrentContainer();
-    CacheService cacheService = 
+    CacheService cacheService =
       (CacheService)container.getComponentInstanceOfType(CacheService.class) ;
     ExoCache queryCache = cacheService.getCacheInstance(QueryServiceImpl.class.getName()) ;
-    queryCache.clearCache() ;    
+    queryCache.clearCache() ;
   }
 }

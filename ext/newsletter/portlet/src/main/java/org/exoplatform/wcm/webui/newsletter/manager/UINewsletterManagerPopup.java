@@ -43,18 +43,18 @@ import org.exoplatform.webui.form.UIForm;
    }
  )
 public class UINewsletterManagerPopup extends UIForm implements UIPopupComponent {
-  
+
   /** The newsletter entry content_. */
   @SuppressWarnings("unused")
   private String newsletterEntryContent_;
-  
+
   /**
    * Instantiates a new uI newsletter manager popup.
    */
   public UINewsletterManagerPopup () {
     this.setActions(new String[]{"Close"});
   }
-  
+
   /* (non-Javadoc)
    * @see org.exoplatform.webui.core.UIPopupComponent#activate()
    */
@@ -66,26 +66,26 @@ public class UINewsletterManagerPopup extends UIForm implements UIPopupComponent
    */
   public void deActivate() throws Exception {
   }
-  
+
   /**
    * Sets the newsletter infor.
-   * 
+   *
    * @param categoryName the category name
    * @param subscriptoinName the subscriptoin name
    * @param newsletterName the newsletter name
-   * 
+   *
    * @throws Exception the exception
    */
   public void setNewsletterInfor(String categoryName, String subscriptoinName, String newsletterName) throws Exception{
     NewsletterManagerService newsletterManagerService = getApplicationComponent(NewsletterManagerService.class);
     NewsletterEntryHandler newsletterEntryHandler = newsletterManagerService.getEntryHandler();
-    newsletterEntryContent_ = 
+    newsletterEntryContent_ =
                       newsletterEntryHandler.getContent(Utils.getSessionProvider(),
                                                         NewsLetterUtil.getPortalName(),
                                                         categoryName, subscriptoinName,
                                                         newsletterName);
   }
-  
+
 
   /**
    * The listener interface for receiving closeAction events.
@@ -95,11 +95,11 @@ public class UINewsletterManagerPopup extends UIForm implements UIPopupComponent
    * component's <code>addCloseActionListener<code> method. When
    * the closeAction event occurs, that object's appropriate
    * method is invoked.
-   * 
+   *
    * @see CloseActionEvent
    */
   static  public class CloseActionListener extends EventListener<UINewsletterManagerPopup> {
-    
+
     /* (non-Javadoc)
      * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
      */

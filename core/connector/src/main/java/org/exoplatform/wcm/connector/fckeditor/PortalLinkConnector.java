@@ -80,30 +80,33 @@ public class PortalLinkConnector implements ResourceContainer {
 
   /** The portal user acl. */
   private UserACL      portalUserACL;
-  
+
   /** The servlet context. */
   private ServletContext servletContext;
 
   /** The log. */
   private static Log log = ExoLogger.getLogger(PortalLinkConnector.class);
-  
+
   /** The Constant LAST_MODIFIED_PROPERTY. */
   private static final String LAST_MODIFIED_PROPERTY = "Last-Modified";
-   
+
   /** The Constant IF_MODIFIED_SINCE_DATE_FORMAT. */
   private static final String IF_MODIFIED_SINCE_DATE_FORMAT = "EEE, dd MMM yyyy HH:mm:ss z";
-  
+
   /**
    * Instantiates a new portal link connector.
-   * 
+   *
    * @param params the params
    * @param dataStorage the data storage
    * @param userACL the user acl
    * @param servletContext the servlet context
-   * 
+   *
    * @throws Exception the exception
    */
-  public PortalLinkConnector(InitParams params, DataStorage dataStorage, UserACL userACL, ServletContext servletContext) throws Exception {
+  public PortalLinkConnector(InitParams params,
+                             DataStorage dataStorage,
+                             UserACL userACL,
+                             ServletContext servletContext) throws Exception {
     this.portalDataStorage = dataStorage;
     this.portalUserACL = userACL;
     this.servletContext = servletContext;
@@ -111,13 +114,13 @@ public class PortalLinkConnector implements ResourceContainer {
 
   /**
    * Gets the page uri.
-   * 
+   *
    * @param currentFolder the current folder
    * @param command the command
    * @param type the type
-   * 
+   *
    * @return the page uri
-   * 
+   *
    * @throws Exception the exception
    */
   @GET
@@ -128,17 +131,17 @@ public class PortalLinkConnector implements ResourceContainer {
                              @QueryParam("type") String type) throws Exception {
     try {
       String userId = getCurrentUser();
-      return buildReponse(currentFolder, command, userId); 
+      return buildReponse(currentFolder, command, userId);
     } catch (Exception e) {
       log.error("Error when perform getPageURI: ", e);
-    }    
+    }
     DateFormat dateFormat = new SimpleDateFormat(IF_MODIFIED_SINCE_DATE_FORMAT);
     return Response.ok().header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
   }
 
   /**
    * Gets the current user.
-   * 
+   *
    * @return the current user
    */
   private String getCurrentUser() {
@@ -153,13 +156,13 @@ public class PortalLinkConnector implements ResourceContainer {
 
   /**
    * Builds the reponse.
-   * 
+   *
    * @param currentFolder the current folder
    * @param command the command
    * @param userId the user id
-   * 
+   *
    * @return the response
-   * 
+   *
    * @throws Exception the exception
    */
   private Response buildReponse(String currentFolder, String command, String userId) throws Exception {
@@ -173,18 +176,21 @@ public class PortalLinkConnector implements ResourceContainer {
     cacheControl.setNoCache(true);
     cacheControl.setNoStore(true);
     DateFormat dateFormat = new SimpleDateFormat(IF_MODIFIED_SINCE_DATE_FORMAT);
-    return Response.ok(new DOMSource(document), MediaType.TEXT_XML).cacheControl(cacheControl).header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
+    return Response.ok(new DOMSource(document), MediaType.TEXT_XML)
+                   .cacheControl(cacheControl)
+                   .header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date()))
+                   .build();
   }
 
   /**
    * Builds the portal xml response.
-   * 
+   *
    * @param currentFolder the current folder
    * @param command the command
    * @param userId the user id
-   * 
+   *
    * @return the document
-   * 
+   *
    * @throws Exception the exception
    */
   @SuppressWarnings("unchecked")
@@ -216,13 +222,13 @@ public class PortalLinkConnector implements ResourceContainer {
 
   /**
    * Builds the navigation xml response.
-   * 
+   *
    * @param currentFolder the current folder
    * @param command the command
    * @param userId the user id
-   * 
+   *
    * @return the document
-   * 
+   *
    * @throws Exception the exception
    */
   private Document buildNavigationXMLResponse(String currentFolder, String command, String userId) throws Exception {
@@ -257,12 +263,12 @@ public class PortalLinkConnector implements ResourceContainer {
 
   /**
    * Inits the root element.
-   * 
+   *
    * @param commandStr the command str
    * @param currentPath the current path
-   * 
+   *
    * @return the element
-   * 
+   *
    * @throws ParserConfigurationException the parser configuration exception
    */
   private Element initRootElement(String commandStr, String currentPath) throws ParserConfigurationException {
@@ -283,14 +289,14 @@ public class PortalLinkConnector implements ResourceContainer {
 
   /**
    * Process page node.
-   * 
+   *
    * @param portalName the portal name
    * @param pageNode the page node
    * @param foldersElement the root element
    * @param filesElement
    * @param userId the user id
    * @param portalConfigService the portal config service
-   * 
+   *
    * @throws Exception the exception
    */
   private void processPageNode(String portalName,
@@ -302,51 +308,51 @@ public class PortalLinkConnector implements ResourceContainer {
     if (!pageNode.isDisplay()) {
       return;
     }
-    
+
     String pageId = pageNode.getPageReference();
     Page page = portalConfigService.getPage(pageId, userId);
     String pageUri = "";
     if (page == null) {
-		pageUri = "/";
-		Element folderElement = foldersElement.getOwnerDocument().createElement("Folder");
-    	folderElement.setAttribute("name", pageNode.getName());
-    	folderElement.setAttribute("folderType", "");
-    	folderElement.setAttribute("url", pageUri);
-    	foldersElement.appendChild(folderElement);
+    pageUri = "/";
+    Element folderElement = foldersElement.getOwnerDocument().createElement("Folder");
+      folderElement.setAttribute("name", pageNode.getName());
+      folderElement.setAttribute("folderType", "");
+      folderElement.setAttribute("url", pageUri);
+      foldersElement.appendChild(folderElement);
     } else {
-    	String accessMode = PRIVATE_ACCESS;
-    	for (String role : page.getAccessPermissions()) {
-    		if (EVERYONE_PERMISSION.equalsIgnoreCase(role)) {
-    			accessMode = PUBLIC_ACCESS;
-    			break;
-    		}
-    	}
-    	pageUri = "/" + servletContext.getServletContextName() + "/" + accessMode + "/" + portalName + "/" + pageNode.getUri();
-    	
-    	Element folderElement = foldersElement.getOwnerDocument().createElement("Folder");
-    	folderElement.setAttribute("name", pageNode.getName());
-    	folderElement.setAttribute("folderType", "");
-    	folderElement.setAttribute("url", pageUri);
-    	foldersElement.appendChild(folderElement);
-    	
-    	SimpleDateFormat formatter = new SimpleDateFormat(ISO8601.SIMPLE_DATETIME_FORMAT);    
-    	String datetime = formatter.format(new Date());
-    	Element fileElement = filesElement.getOwnerDocument().createElement("File");
-    	fileElement.setAttribute("name", pageNode.getName());
-    	fileElement.setAttribute("dateCreated", datetime);
-    	fileElement.setAttribute("fileType", "page node");
-    	fileElement.setAttribute("url", pageUri);
-    	fileElement.setAttribute("size", "");
-    	filesElement.appendChild(fileElement);
+      String accessMode = PRIVATE_ACCESS;
+      for (String role : page.getAccessPermissions()) {
+        if (EVERYONE_PERMISSION.equalsIgnoreCase(role)) {
+          accessMode = PUBLIC_ACCESS;
+          break;
+        }
+      }
+      pageUri = "/" + servletContext.getServletContextName() + "/" + accessMode + "/" + portalName + "/" + pageNode.getUri();
+
+      Element folderElement = foldersElement.getOwnerDocument().createElement("Folder");
+      folderElement.setAttribute("name", pageNode.getName());
+      folderElement.setAttribute("folderType", "");
+      folderElement.setAttribute("url", pageUri);
+      foldersElement.appendChild(folderElement);
+
+      SimpleDateFormat formatter = new SimpleDateFormat(ISO8601.SIMPLE_DATETIME_FORMAT);
+      String datetime = formatter.format(new Date());
+      Element fileElement = filesElement.getOwnerDocument().createElement("File");
+      fileElement.setAttribute("name", pageNode.getName());
+      fileElement.setAttribute("dateCreated", datetime);
+      fileElement.setAttribute("fileType", "page node");
+      fileElement.setAttribute("url", pageUri);
+      fileElement.setAttribute("size", "");
+      filesElement.appendChild(fileElement);
     }
-  }  
+  }
 
   /**
    * Gets the page node.
-   * 
+   *
    * @param root the root
    * @param uri the uri
-   * 
+   *
    * @return the page node
    */
   private PageNode getPageNode(PageNode root, String uri) {

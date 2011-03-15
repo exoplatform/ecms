@@ -23,7 +23,7 @@ import org.exoplatform.container.xml.InitParams;
  * Created by The eXo Platform SARL
  * Author : Dang Van Minh
  *          minh.dang@exoplatform.com
- * Apr 27, 2009  
+ * Apr 27, 2009
  * 9:15:20 AM
  */
 public class DMSRepositoryConfiguration extends BaseComponentPlugin {

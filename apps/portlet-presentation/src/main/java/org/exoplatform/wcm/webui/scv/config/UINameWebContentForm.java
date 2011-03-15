@@ -71,8 +71,8 @@ import org.exoplatform.webui.form.validator.MandatoryValidator;
  * 8, 2008
  */
 @ComponentConfig(
-    lifecycle = UIFormLifecycle.class, 
-    template = "app:/groovy/SingleContentViewer/config/UINameWebContentForm.gtmpl", 
+    lifecycle = UIFormLifecycle.class,
+    template = "app:/groovy/SingleContentViewer/config/UINameWebContentForm.gtmpl",
     events = {
       @EventConfig(listeners = UINameWebContentForm.SaveActionListener.class),
       @EventConfig(listeners = UINameWebContentForm.AbortActionListener.class, phase = Phase.DECODE),
@@ -95,23 +95,23 @@ public class UINameWebContentForm extends UIForm {
 
   /**
    * Instantiates a new uI name web content form.
-   * 
+   *
    * @throws Exception the exception
    */
   public UINameWebContentForm() throws Exception {
     addUIFormInput(new UIFormStringInput(NAME_WEBCONTENT, NAME_WEBCONTENT, null).addValidator(MandatoryValidator.class)
-                   																															.addValidator(ECMNameValidator.class));
+                                                                                .addValidator(ECMNameValidator.class));
     UIFormSelectBox templateSelect = new UIFormSelectBox(FIELD_SELECT, FIELD_SELECT, getListFileType()) ;
     templateSelect.setSelectedValues(new String[] {"exo:webContent"});
     templateSelect.setOnChange("ChangeTemplateType");
-    templateSelect.setDefaultValue("exo:webContent");    
+    templateSelect.setDefaultValue("exo:webContent");
     setPictureDescribe("exo_webContent");
     addUIFormInput(templateSelect) ;
     setActions(new String[] {"Save", "Abort"});
   }
 
   private List<SelectItemOption<String>> getListFileType() throws Exception {
-    List<SelectItemOption<String>> options = new ArrayList<SelectItemOption<String>>();    
+    List<SelectItemOption<String>> options = new ArrayList<SelectItemOption<String>>();
     TemplateService templateService = getApplicationComponent(TemplateService.class) ;
     RepositoryService repositoryService = getApplicationComponent(RepositoryService.class);
     NodeTypeManager nodeTypeManager = repositoryService.getCurrentRepository().getNodeTypeManager();
@@ -121,18 +121,18 @@ public class UINameWebContentForm extends UIForm {
     for(String contentType: acceptableContentTypes) {
       NodeType nodeType = nodeTypeManager.getNodeType(contentType);
       if (nodeType.isNodeType("exo:webContent")) {
-      	String label = templateService.getTemplateLabel(contentType);
-    		try{
-    		  String templatePath = templateService.getTemplatePathByUser(true, contentType, userName);
-    		  if ((templatePath != null) && (templatePath.length() > 0)) {
-    		    options.add(new SelectItemOption<String>(label, contentType));
-    		  }
-    		}catch(Exception ex){continue;}
+        String label = templateService.getTemplateLabel(contentType);
+        try{
+          String templatePath = templateService.getTemplatePathByUser(true, contentType, userName);
+          if ((templatePath != null) && (templatePath.length() > 0)) {
+            options.add(new SelectItemOption<String>(label, contentType));
+          }
+        }catch(Exception ex){continue;}
       }
-    }    
+    }
     Collections.sort(options, new ItemOptionNameComparator()) ;
     return options ;
-	}
+  }
 
   /**
    * The listener interface for receiving saveAction events.
@@ -142,7 +142,7 @@ public class UINameWebContentForm extends UIForm {
    * component's <code>addSaveActionListener<code> method. When
    * the saveAction event occurs, that object's appropriate
    * method is invoked.
-   * 
+   *
    * @see SaveActionEvent
    */
   public static class SaveActionListener extends EventListener<UINameWebContentForm> {
@@ -154,10 +154,13 @@ public class UINameWebContentForm extends UIForm {
       UINameWebContentForm uiNameWebContentForm = event.getSource();
       UIApplication uiApplication = uiNameWebContentForm.getAncestorOfType(UIApplication.class);
       String portalName = Util.getUIPortalApplication().getOwner();
-      LivePortalManagerService livePortalManagerService = uiNameWebContentForm.getApplicationComponent(LivePortalManagerService.class);
+      LivePortalManagerService livePortalManagerService = uiNameWebContentForm.
+          getApplicationComponent(LivePortalManagerService.class);
       Node portalNode = livePortalManagerService.getLivePortal(Utils.getSessionProvider(), portalName);
-      WebSchemaConfigService webSchemaConfigService = uiNameWebContentForm.getApplicationComponent(WebSchemaConfigService.class);
-      PortalFolderSchemaHandler handler = webSchemaConfigService.getWebSchemaHandlerByType(PortalFolderSchemaHandler.class);
+      WebSchemaConfigService webSchemaConfigService = uiNameWebContentForm.
+          getApplicationComponent(WebSchemaConfigService.class);
+      PortalFolderSchemaHandler handler = webSchemaConfigService.
+          getWebSchemaHandlerByType(PortalFolderSchemaHandler.class);
       Node webContentStorage = handler.getWebContentStorage(portalNode);
       String webContentTitle = ((UIFormStringInput) uiNameWebContentForm.getChildById(NAME_WEBCONTENT)).getValue();
       String webContentName = Utils.cleanString(webContentTitle);
@@ -165,16 +168,19 @@ public class UINameWebContentForm extends UIForm {
       Node webContentNode = null;
       String contentType = uiNameWebContentForm.getUIFormSelectBox(FIELD_SELECT).getValue();
       try {
-        webContentNode = webContentStorage.addNode(webContentName, contentType);          
+        webContentNode = webContentStorage.addNode(webContentName, contentType);
       } catch (RepositoryException e) {
-        uiApplication.addMessage(new ApplicationMessage("UINameWebContentForm.msg.non-firstwhiteletter", null, ApplicationMessage.WARNING));
+        uiApplication.addMessage(new ApplicationMessage("UINameWebContentForm.msg.non-firstwhiteletter",
+                                                        null,
+                                                        ApplicationMessage.WARNING));
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApplication.getUIPopupMessages());
         return;
       }
-      WebContentSchemaHandler webContentSchemaHandler = webSchemaConfigService.getWebSchemaHandlerByType(WebContentSchemaHandler.class);
+      WebContentSchemaHandler webContentSchemaHandler = webSchemaConfigService.
+          getWebSchemaHandlerByType(WebContentSchemaHandler.class);
       webContentSchemaHandler.createDefaultSchema(webContentNode);
       if (webContentNode.hasProperty("exo:title")) {
-    	  webContentNode.setProperty("exo:title", webContentTitle);
+        webContentNode.setProperty("exo:title", webContentTitle);
       }
       if (webContentNode.canAddMixin("mix:votable"))
         webContentNode.addMixin("mix:votable");
@@ -189,9 +195,14 @@ public class UINameWebContentForm extends UIForm {
       prefs.setValue(UISingleContentViewerPortlet.WORKSPACE, webcontentNodeLocation.getWorkspace());
       prefs.setValue(UISingleContentViewerPortlet.IDENTIFIER, webContentNode.getUUID());
       prefs.store();
-      
+
       WCMPublicationService wcmPublicationService = uiNameWebContentForm.getApplicationComponent(WCMPublicationService.class);
-      wcmPublicationService.updateLifecyleOnChangeContent(webContentNode, Util.getPortalRequestContext().getPortalOwner(), Util.getPortalRequestContext().getRemoteUser(), null);
+      wcmPublicationService.updateLifecyleOnChangeContent(webContentNode,
+                                                          Util.getPortalRequestContext()
+                                                              .getPortalOwner(),
+                                                          Util.getPortalRequestContext()
+                                                              .getRemoteUser(),
+                                                          null);
       if (!Utils.isEditPortletInCreatePageWizard()) {
         String pageId = Util.getUIPortal().getSelectedNode().getPageReference();
         UserPortalConfigService upcService = uiNameWebContentForm.getApplicationComponent(UserPortalConfigService.class);
@@ -212,7 +223,7 @@ public class UINameWebContentForm extends UIForm {
    * component's <code>addAbortActionListener<code> method. When
    * the abortAction event occurs, that object's appropriate
    * method is invoked.
-   * 
+   *
    * @see AbortActionEvent
    */
   public static class AbortActionListener extends EventListener<UINameWebContentForm> {
@@ -226,49 +237,50 @@ public class UINameWebContentForm extends UIForm {
       Page currentPage = dataStorage.getPage(currentPageNode.getPageReference());
       ArrayList<Object> applications = new ArrayList<Object>();
       applications.addAll(currentPage.getChildren());
-      ArrayList<ModelObject> applicationsTmp = currentPage.getChildren(); 
+      ArrayList<ModelObject> applicationsTmp = currentPage.getChildren();
       Collections.reverse(applicationsTmp);
       for (Object applicationObject : applicationsTmp) {
         if (applicationObject instanceof Container) {
-        	continue;
+          continue;
         }
         Application application = Application.class.cast(applicationObject);
-        if(application.getId() == null) {
-        	continue;
+        if (application.getId() == null) {
+          continue;
         }
         String applicationId = application.getId();
-        org.exoplatform.portal.application.PortletPreferences portletPreferences = dataStorage.getPortletPreferences(applicationId);
+        org.exoplatform.portal.application.PortletPreferences portletPreferences =
+            dataStorage.getPortletPreferences(applicationId);
         if (portletPreferences == null) {
-        	continue;
+          continue;
         }
-        
+
         boolean isQuickCreate = false;
         String nodeIdentifier = null;
-        
+
         for (Object preferenceObject : portletPreferences.getPreferences()) {
-        	Preference preference = Preference.class.cast(preferenceObject);
+          Preference preference = Preference.class.cast(preferenceObject);
 
-        	if ("isQuickCreate".equals(preference.getName())) {
-        		isQuickCreate = Boolean.valueOf(preference.getValues().get(0).toString());
-        		if (!isQuickCreate) break;
-        	}
+          if ("isQuickCreate".equals(preference.getName())) {
+            isQuickCreate = Boolean.valueOf(preference.getValues().get(0).toString());
+            if (!isQuickCreate) break;
+          }
 
-        	if ("nodeIdentifier".equals(preference.getName())) {
-        		nodeIdentifier = preference.getValues().get(0).toString();
-        		if (nodeIdentifier == null || nodeIdentifier.length() == 0) break;
-        	}
+          if ("nodeIdentifier".equals(preference.getName())) {
+            nodeIdentifier = preference.getValues().get(0).toString();
+            if (nodeIdentifier == null || nodeIdentifier.length() == 0) break;
+          }
         }
-        
+
         if (isQuickCreate && (nodeIdentifier == null || nodeIdentifier.length() == 0)) {
-        	applications.remove(applicationObject);
+          applications.remove(applicationObject);
         }
       }
 //      currentPage.setChildren(applications);
       dataStorage.save(currentPage);
       UIPage uiPage = uiPortal.findFirstComponentOfType(UIPage.class);
       if (uiPage != null) {
-      	uiPage.setChildren(null);
-      	PortalDataMapper.toUIPage(uiPage, currentPage);
+        uiPage.setChildren(null);
+        PortalDataMapper.toUIPage(uiPage, currentPage);
       }
       Utils.closePopupWindow(nameWebcontentForm, UIContentDialogForm.CONTENT_DIALOG_FORM_POPUP_WINDOW);
       Utils.updatePortal((PortletRequestContext)event.getRequestContext());
@@ -283,7 +295,7 @@ public class UINameWebContentForm extends UIForm {
    * component's <code>addChangeTemplateTypeActionListener<code> method. When
    * the changeTemplateTypeAction event occurs, that object's appropriate
    * method is invoked.
-   * 
+   *
    * @see ChangeTemplateTypeActionEvent
    */
   public static class ChangeTemplateTypeActionListener extends EventListener<UINameWebContentForm> {
@@ -300,7 +312,7 @@ public class UINameWebContentForm extends UIForm {
 
   /**
    * Gets the picture describe.
-   * 
+   *
    * @return the picture describe
    */
   public String getPictureDescribe() {
@@ -309,7 +321,7 @@ public class UINameWebContentForm extends UIForm {
 
   /**
    * Sets the picture describe.
-   * 
+   *
    * @param pictureDescribe the new picture describe
    */
   public void setPictureDescribe(String pictureDescribe) {

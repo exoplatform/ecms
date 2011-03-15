@@ -39,17 +39,14 @@ import org.exoplatform.webui.event.EventListener;
  * Created by The eXo Platform SAS
  * Author : DANG TAN DUNG
  *          dzungdev@gmail.com
- * Aug 11, 2008  
+ * Aug 11, 2008
  */
 
-@ComponentConfig(
-    template = "classpath:groovy/ecm/webui/UIGridWithButton.gtmpl",
-    events = {
-        @EventConfig(listeners = UISelectedCategoriesGrid.DeleteActionListener.class, confirm="UISelectedCategoriesGrid.msg.confirm-delete"),
-        @EventConfig(listeners = UISelectedCategoriesGrid.SaveCategoriesActionListener.class),
-        @EventConfig(listeners = UISelectedCategoriesGrid.CancelActionListener.class)
-    }
-)
+@ComponentConfig(template = "classpath:groovy/ecm/webui/UIGridWithButton.gtmpl", events = {
+    @EventConfig(listeners = UISelectedCategoriesGrid.DeleteActionListener.class,
+                 confirm = "UISelectedCategoriesGrid.msg.confirm-delete"),
+    @EventConfig(listeners = UISelectedCategoriesGrid.SaveCategoriesActionListener.class),
+    @EventConfig(listeners = UISelectedCategoriesGrid.CancelActionListener.class) })
 public class UISelectedCategoriesGrid extends UIGrid {
 
   public final static String[] BEAN_FIELD = {"categoryName"} ;
@@ -74,7 +71,7 @@ public class UISelectedCategoriesGrid extends UIGrid {
       String value = "";
       if (array.length > 4) {
         for (int i = 4; i < array.length; i++) {
-          value += array[i]; 
+          value += array[i];
           if (i < array.length - 1) value += "/";
         }
       } else value = categoryPath;
@@ -140,13 +137,14 @@ public class UISelectedCategoriesGrid extends UIGrid {
   public void setDeleteAllCategory(boolean isDeleteAllCategory) {
     this.isDeleteAllCategory = isDeleteAllCategory;
   }
-  
+
   public static class DeleteActionListener extends EventListener<UISelectedCategoriesGrid> {
     public void execute(Event<UISelectedCategoriesGrid> event) throws Exception {
       UISelectedCategoriesGrid uiSelectedCategoriesGrid = event.getSource();
       String value = event.getRequestContext().getRequestParameter(OBJECTID);
       uiSelectedCategoriesGrid.removeCategory(value);
-      if (uiSelectedCategoriesGrid.getSelectedCategories().size() == 0) uiSelectedCategoriesGrid.setDeleteAllCategory(true);
+      if (uiSelectedCategoriesGrid.getSelectedCategories().size() == 0)
+        uiSelectedCategoriesGrid.setDeleteAllCategory(true);
       uiSelectedCategoriesGrid.updateGrid(uiSelectedCategoriesGrid.getUIPageIterator().getCurrentPage());
       if (uiSelectedCategoriesGrid.getSelectedCategories().size() == 0) {
         uiSelectedCategoriesGrid.setRendered(false);
@@ -164,10 +162,12 @@ public class UISelectedCategoriesGrid extends UIGrid {
       List<String> selectedCategoriesName = new ArrayList<String>();
       for(String item :selectedCategories){
         selectedCategoriesName.add(item.replaceAll("/jcr:system/exo:ecm/exo:taxonomies/", ""));
-      }      
+      }
       UIApplication uiApplication = uiSelectedCategoriesGrid.getAncestorOfType(UIApplication.class);
       if(selectedCategories.size() == 0 && !uiSelectedCategoriesGrid.isDeleteAllCategory()) {
-        uiApplication.addMessage(new ApplicationMessage("UISelectedCategoriesGrid.msg.non-categories", null, ApplicationMessage.INFO));
+        uiApplication.addMessage(new ApplicationMessage("UISelectedCategoriesGrid.msg.non-categories",
+                                                        null,
+                                                        ApplicationMessage.INFO));
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApplication.getUIPopupMessages());
         return;
       }
@@ -175,7 +175,9 @@ public class UISelectedCategoriesGrid extends UIGrid {
         ((UISelectable)uiCategoriesSelector.getSourceComponent()).doSelect(returnField, selectedCategoriesName);
       } catch(Exception e) {
         LOG.error("Unexpected error", e);
-        uiApplication.addMessage(new ApplicationMessage("UISelectedCategoriesGrid.msg.cannot-save", null, ApplicationMessage.WARNING));
+        uiApplication.addMessage(new ApplicationMessage("UISelectedCategoriesGrid.msg.cannot-save",
+                                                        null,
+                                                        ApplicationMessage.WARNING));
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApplication.getUIPopupMessages());
       }
       uiCategoriesSelector.deActivate();
@@ -183,7 +185,7 @@ public class UISelectedCategoriesGrid extends UIGrid {
   }
 
   static public class CancelActionListener extends EventListener<UISelectedCategoriesGrid> {
-    public void execute(Event<UISelectedCategoriesGrid> event) throws Exception { 
+    public void execute(Event<UISelectedCategoriesGrid> event) throws Exception {
       UISelectedCategoriesGrid uiSelectedCategoriesGrid = event.getSource();
       UIComponent uiComponent = uiSelectedCategoriesGrid.getParent();
       if (uiComponent != null) {
@@ -192,9 +194,9 @@ public class UISelectedCategoriesGrid extends UIGrid {
           ((UIPopupWindow)uiComponent).setRendered(false);
           event.getRequestContext().addUIComponentToUpdateByAjax(((UIPopupWindow)uiComponent).getParent());
           return;
-        } 
+        }
         uiSelectedCategoriesGrid.<UIComponent>getParent().broadcast(event, event.getExecutionPhase()) ;
-      } 
+      }
     }
   }
 }

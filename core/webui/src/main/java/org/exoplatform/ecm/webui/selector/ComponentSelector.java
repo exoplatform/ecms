@@ -23,19 +23,19 @@ import org.exoplatform.webui.core.UIComponent;
  * minh.dang@exoplatform.com Nov 16, 2006
  */
 public interface ComponentSelector {
-  
+
   /**
    * Gets the source component of a selector
-   * 
+   *
    * @return the source component
    */
   public UIComponent getSourceComponent();
-  
+
   /**
    * Sets the source component of a selector
-   * 
+   *
    * @param uicomponent the uicomponent
    * @param initParams the init params
    */
-  public void setSourceComponent(UIComponent uicomponent, String[] initParams) ;    
+  public void setSourceComponent(UIComponent uicomponent, String[] initParams) ;
 }

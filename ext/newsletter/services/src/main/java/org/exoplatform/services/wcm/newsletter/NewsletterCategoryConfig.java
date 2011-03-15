@@ -29,90 +29,90 @@ public class NewsletterCategoryConfig {
 
   /** The name. */
   private String name;
-  
+
   /** The title. */
   private String title;
-  
+
   /** The description. */
   private String description;
-  
+
   /** The moderator. */
   private String moderator;
-  
+
   /** The subscriptions. */
   private List<NewsletterSubscriptionConfig> subscriptions = new ArrayList<NewsletterSubscriptionConfig>();
-  
+
   /**
    * Gets the title.
-   * 
+   *
    * @return the title
    */
   public String getTitle() {
-		return title;
-	}
-	
-	/**
-	 * Sets the title.
-	 * 
-	 * @param title the new title
-	 */
-	public void setTitle(String title) {
-		this.title = title;
-	}
-	
-	/**
-	 * Gets the name.
-	 * 
-	 * @return the name
-	 */
-	public String getName() { return name; }
-  
+    return title;
+  }
+
+  /**
+   * Sets the title.
+   *
+   * @param title the new title
+   */
+  public void setTitle(String title) {
+    this.title = title;
+  }
+
+  /**
+   * Gets the name.
+   *
+   * @return the name
+   */
+  public String getName() { return name; }
+
   /**
    * Sets the name.
-   * 
+   *
    * @param name the new name
    */
   public void setName(String name) { this.name = name; }
-  
+
   /**
    * Gets the description.
-   * 
+   *
    * @return the description
    */
   public String getDescription() { return description; }
-  
+
   /**
    * Sets the description.
-   * 
+   *
    * @param description the new description
    */
   public void setDescription(String description) { this.description = description; }
-  
+
   /**
    * Gets the moderator.
-   * 
+   *
    * @return the moderator
    */
   public String getModerator() { return moderator; }
-  
+
   /**
    * Sets the moderator.
-   * 
+   *
    * @param moderator the new moderator
    */
   public void setModerator(String moderator) { this.moderator = moderator; }
-  
+
   /**
    * Gets the subscriptions.
-   * 
+   *
    * @return the subscriptions
    */
   public List<NewsletterSubscriptionConfig> getSubscriptions() { return subscriptions; }
-  
+
   /**
    * Sets the subscriptions.
-   * 
+   *
    * @param subscriptions the new subscriptions
    */
-  public void setSubscriptions(List<NewsletterSubscriptionConfig> subscriptions) { this.subscriptions = subscriptions; }    
+  public void setSubscriptions(List<NewsletterSubscriptionConfig> subscriptions) { this.subscriptions = subscriptions; }
 }

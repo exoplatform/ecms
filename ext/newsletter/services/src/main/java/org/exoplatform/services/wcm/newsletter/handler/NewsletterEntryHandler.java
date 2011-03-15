@@ -46,21 +46,21 @@ public class NewsletterEntryHandler {
 
   /** The log. */
   private static Log log = ExoLogger.getLogger(NewsletterEntryHandler.class);
-  
+
   /** The repository service. */
   private RepositoryService repositoryService;
-  
+
   private XSkinService xSkinService;
-  
+
   /** The repository. */
   private String repository;
-  
+
   /** The workspace. */
   private String workspace;
-  
+
   /**
    * Instantiates a new newsletter entry handler.
-   * 
+   *
    * @param repository the repository
    * @param workspace the workspace
    */
@@ -70,37 +70,39 @@ public class NewsletterEntryHandler {
     this.repository = repository;
     this.workspace = workspace;
   }
-  
+
   /**
    * Gets the entry from node.
-   * 
+   *
    * @param entryNode the entry node
-   * 
+   *
    * @return the entry from node
-   * 
+   *
    * @throws Exception the exception
    */
   private NewsletterManagerConfig getEntryFromNode(Node entryNode) throws Exception{
     NewsletterManagerConfig newsletterEntryConfig = new NewsletterManagerConfig();
     newsletterEntryConfig.setNewsletterName(entryNode.getName());
-    if(entryNode.hasProperty("exo:title"))newsletterEntryConfig.setNewsletterTitle(entryNode.getProperty("exo:title").getString());
-    newsletterEntryConfig.setNewsletterSentDate(entryNode.getProperty(NewsletterConstant.ENTRY_PROPERTY_DATE).getDate().getTime());
+    if (entryNode.hasProperty("exo:title"))
+      newsletterEntryConfig.setNewsletterTitle(entryNode.getProperty("exo:title").getString());
+    newsletterEntryConfig.setNewsletterSentDate(entryNode.getProperty(NewsletterConstant.ENTRY_PROPERTY_DATE)
+                                                         .getDate()
+                                                         .getTime());
     newsletterEntryConfig.setStatus(entryNode.getProperty(NewsletterConstant.ENTRY_PROPERTY_STATUS).getString());
     newsletterEntryConfig.setSubcriptionName(entryNode.getParent().getName());
     newsletterEntryConfig.setCategoryName(entryNode.getParent().getParent().getName());
     return newsletterEntryConfig;
   }
-  
+
   /**
    * Delete.
-   * 
+   *
    * @param portalName the portal name
    * @param categoryName the category name
    * @param subscriptionName the subscription name
    * @param listIds the list ids
    */
-  public void delete(
-                     SessionProvider sessionProvider,
+  public void delete(SessionProvider sessionProvider,
                      String portalName,
                      String categoryName,
                      String subscriptionName,
@@ -111,7 +113,7 @@ public class NewsletterEntryHandler {
       String path = NewsletterConstant.generateCategoryPath(portalName) + "/" + categoryName + "/" + subscriptionName;
       Node subscriptionNode = (Node)session.getItem(path);
       Node newsletterNode = null;
-      for(String id : listIds){
+      for (String id : listIds) {
         newsletterNode = subscriptionNode.getNode(id);
         newsletterNode.remove();
       }
@@ -120,20 +122,19 @@ public class NewsletterEntryHandler {
       log.error("Delete newsletter entry failed because of ", e);
     }
   }
-  
+
   /**
    * Gets the newsletter entries by subscription.
-   * 
+   *
    * @param portalName the portal name
    * @param categoryName the category name
    * @param subscriptionName the subscription name
-   * 
+   *
    * @return the newsletter entries by subscription
-   * 
+   *
    * @throws Exception the exception
    */
-  public List<NewsletterManagerConfig> getNewsletterEntriesBySubscription(
-                                                                          SessionProvider sessionProvider,
+  public List<NewsletterManagerConfig> getNewsletterEntriesBySubscription(SessionProvider sessionProvider,
                                                                           String portalName,
                                                                           String categoryName,
                                                                           String subscriptionName)
@@ -142,7 +143,8 @@ public class NewsletterEntryHandler {
     Session session = sessionProvider.getSession(workspace, manageableRepository);
     String path = NewsletterConstant.generateCategoryPath(portalName) + "/" + categoryName + "/" + subscriptionName;
     QueryManager queryManager = session.getWorkspace().getQueryManager();
-    String sqlQuery = "select * from " + NewsletterConstant.ENTRY_NODETYPE + " where jcr:path LIKE '" + path + "[%]/%'";
+    String sqlQuery = "select * from " + NewsletterConstant.ENTRY_NODETYPE
+        + " where jcr:path LIKE '" + path + "[%]/%'";
     Query query = queryManager.createQuery(sqlQuery, Query.SQL);
     QueryResult queryResult = query.execute();
     NodeIterator nodeIterator = queryResult.getNodes();
@@ -157,123 +159,131 @@ public class NewsletterEntryHandler {
     }
     return listNewsletterEntry;
   }
-  
+
   /**
    * Gets the newsletter entry.
-   * 
+   *
    * @param portalName the portal name
    * @param categoryName the category name
    * @param subscriptionName the subscription name
    * @param newsletterName the newsletter name
-   * 
+   *
    * @return the newsletter entry
-   * 
+   *
    * @throws Exception the exception
    */
-  public NewsletterManagerConfig getNewsletterEntry(
-                                                    SessionProvider sessionProvider,
+  public NewsletterManagerConfig getNewsletterEntry(SessionProvider sessionProvider,
                                                     String portalName,
                                                     String categoryName,
                                                     String subscriptionName,
-                                                    String newsletterName) throws Exception{
+                                                    String newsletterName) throws Exception {
     ManageableRepository manageableRepository = repositoryService.getRepository(repository);
     Session session = sessionProvider.getSession(workspace, manageableRepository);
-    String path = NewsletterConstant.generateCategoryPath(portalName) + "/" + categoryName + "/" + subscriptionName + "/" + newsletterName;
+    String path = NewsletterConstant.generateCategoryPath(portalName) + "/" + categoryName + "/"
+        + subscriptionName + "/" + newsletterName;
     NewsletterManagerConfig newsletterManagerConfig = getEntryFromNode((Node)session.getItem(path));
     return newsletterManagerConfig;
   }
-  
+
   /**
    * Gets the newsletter entry by path.
-   * 
+   *
    * @param path the path
-   * 
+   *
    * @return the newsletter entry by path
-   * 
+   *
    * @throws Exception the exception
    */
-  public NewsletterManagerConfig getNewsletterEntryByPath(SessionProvider sessionProvider, String path) throws Exception{
+  public NewsletterManagerConfig getNewsletterEntryByPath(SessionProvider sessionProvider,
+                                                          String path) throws Exception {
     ManageableRepository manageableRepository = repositoryService.getRepository(repository);
     Session session = sessionProvider.getSession(workspace, manageableRepository);
     NewsletterManagerConfig newsletterManagerConfig = getEntryFromNode((Node)session.getItem(path));
     return newsletterManagerConfig;
   }
-  
+
   /**
    * Gets the content.
-   * 
+   *
    * @param portalName the portal name
    * @param categoryName the category name
    * @param subscriptionName the subscription name
    * @param newsletterName the newsletter name
-   * 
+   *
    * @return the content
-   * 
+   *
    * @throws Exception the exception
    */
-  public String getContent(
-                           SessionProvider sessionProvider,
+  public String getContent(SessionProvider sessionProvider,
                            String portalName,
                            String categoryName,
                            String subscriptionName,
                            String newsletterName) throws Exception {
     ManageableRepository manageableRepository = repositoryService.getRepository(repository);
     Session session = sessionProvider.getSession(workspace, manageableRepository);
-    String path = NewsletterConstant.generateCategoryPath(portalName) + "/" + categoryName + "/" + subscriptionName + "/" + newsletterName;
+    String path = NewsletterConstant.generateCategoryPath(portalName) + "/" + categoryName + "/"
+        + subscriptionName + "/" + newsletterName;
     Node newsletterNode = (Node)session.getItem(path);
     try {
       StringBuilder sb = new StringBuilder();
       sb.append("<style type=\"text/css\">");
       sb.append(removeEncodedCharacter(xSkinService.getActiveStylesheet(newsletterNode)));
       sb.append("</style>");
-      sb.append(newsletterNode.getNode("default.html").getNode("jcr:content").getProperty("jcr:data").getString());
+      sb.append(newsletterNode.getNode("default.html")
+                              .getNode("jcr:content")
+                              .getProperty("jcr:data")
+                              .getString());
       return sb.toString();
     } catch (Exception e) {
       log.error("Error when get content: ", e);
     }
     return null;
   }
-  
+
   /**
    * Gets the content.
-   * 
+   *
    * @param webContent the web content
-   * 
+   *
    * @return the content
-   * 
+   *
    * @throws Exception the exception
    */
   public String getContent(SessionProvider sessionProvider, Node webContent) throws Exception{
-		try {
-		  StringBuilder sb = new StringBuilder();
-		  sb.append("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\"  \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">");
-		  sb.append("<html xmlns=\"http://www.w3.org/1999/xhtml\" xml:lang=\"en\" lang=\"en\" dir=\"ltr\">");
-		  sb.append("<head>");
-		  sb.append("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />");
-		  sb.append("<style type=\"text/css\">");
-		  sb.append(removeEncodedCharacter(xSkinService.getActiveStylesheet(webContent)));
-		  sb.append("</style>");
-		  sb.append("</head>");
-		  sb.append("<body>");
-		  sb.append(webContent.getNode("default.html").getNode("jcr:content").getProperty("jcr:data").getString());
-		  sb.append("</body>");
-		  sb.append("</html>");
-		  
-		  return sb.toString();
-		} catch (Exception e) {
-		  log.error("Error when get content: ", e);
-		}
-		return null;
+    try {
+      StringBuilder sb = new StringBuilder();
+      sb.append("<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Strict//EN\"  ");
+      sb.append("\"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">");
+      sb.append("<html xmlns=\"http://www.w3.org/1999/xhtml\" xml:lang=\"en\" lang=\"en\" dir=\"ltr\">");
+      sb.append("<head>");
+      sb.append("<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />");
+      sb.append("<style type=\"text/css\">");
+      sb.append(removeEncodedCharacter(xSkinService.getActiveStylesheet(webContent)));
+      sb.append("</style>");
+      sb.append("</head>");
+      sb.append("<body>");
+      sb.append(webContent.getNode("default.html")
+                          .getNode("jcr:content")
+                          .getProperty("jcr:data")
+                          .getString());
+      sb.append("</body>");
+      sb.append("</html>");
+
+      return sb.toString();
+    } catch (Exception e) {
+      log.error("Error when get content: ", e);
+    }
+    return null;
   }
-	  
+
   /**
    * Removes the encoded character.
-   * 
+   *
    * @param rawString the raw string
-   * 
+   *
    * @return the string
    */
   private String removeEncodedCharacter(String rawString){
-	  return  rawString.replaceAll("\t", " ").replaceAll("\n", " ");
+    return  rawString.replaceAll("\t", " ").replaceAll("\n", " ");
   }
 }

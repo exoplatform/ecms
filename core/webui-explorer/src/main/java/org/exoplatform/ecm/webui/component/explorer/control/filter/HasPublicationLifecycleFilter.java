@@ -26,7 +26,7 @@ import org.exoplatform.webui.ext.filter.UIExtensionAbstractFilter;
  * Created by The eXo Platform SAS
  * Author : eXoPlatform
  *          nicolas.filotto@exoplatform.com
- * 6 mai 2009  
+ * 6 mai 2009
  */
 public class HasPublicationLifecycleFilter extends UIExtensionAbstractFilter {
 
@@ -38,5 +38,5 @@ public class HasPublicationLifecycleFilter extends UIExtensionAbstractFilter {
 
   public void onDeny(Map<String, Object> context) throws Exception {
     createUIPopupMessages(context, "UIActionBar.msg.manage-publication.no-publication-lifecycle");
-  }    
+  }
 }

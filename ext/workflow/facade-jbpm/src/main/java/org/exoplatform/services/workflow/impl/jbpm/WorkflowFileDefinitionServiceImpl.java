@@ -29,34 +29,34 @@ import org.jbpm.graph.def.ProcessDefinition;
  * Created by The eXo Platform SARL
  * Author : Pham Xuan Hoa
  *          hoa.pham@exoplatform.com
- * Dec 18, 2007  
+ * Dec 18, 2007
  */
-public class WorkflowFileDefinitionServiceImpl implements WorkflowFileDefinitionService{    
-  
-  public WorkflowFileDefinitionServiceImpl() {    
+public class WorkflowFileDefinitionServiceImpl implements WorkflowFileDefinitionService{
+
+  public WorkflowFileDefinitionServiceImpl() {
   }
 
-  public void remove(String processId) {    
+  public void remove(String processId) {
   }
 
-  public void removeFromCache(String processId) {    
+  public void removeFromCache(String processId) {
   }
 
   public FileDefinition retrieve(String processId) {
     try{
       ExoContainer container = ExoContainerContext.getCurrentContainer();
-      WorkflowServiceContainerImpl containerImpl = (WorkflowServiceContainerImpl)container.getComponentInstanceOfType(WorkflowServiceContainer.class);      
+      WorkflowServiceContainerImpl containerImpl = (WorkflowServiceContainerImpl)container.getComponentInstanceOfType(WorkflowServiceContainer.class);
       // JbpmSession jbpmSession = containerImpl.openSession();
       JbpmContext jbpmContext = containerImpl.openJbpmContext();
-      ProcessDefinition processDefinition = 
+      ProcessDefinition processDefinition =
         jbpmContext.getGraphSession().loadProcessDefinition(Long.parseLong(processId));
       FileDefinitionWapper fileDefinitionWapper = new FileDefinitionWapper(processDefinition.getFileDefinition());
       return fileDefinitionWapper;
     }catch (Exception e) {
-    }    
+    }
     return null;
   }
 
-  public void store(FileDefinition fileDefinition, String processId) {    
+  public void store(FileDefinition fileDefinition, String processId) {
   }
 }

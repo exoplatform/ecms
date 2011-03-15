@@ -33,13 +33,13 @@ import org.exoplatform.webui.ext.manager.UIAbstractManagerComponent;
  * Created by The eXo Platform SAS
  * Author : eXoPlatform
  *          ha.dangviet@exoplatform.com
- * Nov 24, 2010  
+ * Nov 24, 2010
  */
 @ComponentConfig(
-                 events = { 
+                 events = {
                      @EventConfig(listeners = HelloSideBarActionComponent.HelloSideBarActionListener.class) })
 public class HelloSideBarActionComponent extends UIAbstractManagerComponent {
-  private static final List<UIExtensionFilter> FILTERS = 
+  private static final List<UIExtensionFilter> FILTERS =
     Arrays.asList(new UIExtensionFilter[] {});
 
   @UIExtensionFilters
@@ -48,19 +48,18 @@ public class HelloSideBarActionComponent extends UIAbstractManagerComponent {
   }
 
   public static class HelloSideBarActionListener extends UISideBarActionListener<HelloSideBarActionComponent> {
-    
+
     protected void processEvent(Event<HelloSideBarActionComponent> event) throws Exception {
       UISideBar uiSideBar = event.getSource().getAncestorOfType(UISideBar.class);
       uiSideBar.addChild(UIHelloSideBar.class, null, null).setRendered(false);
       uiSideBar.setCurrentComp(uiSideBar.getChild(UIHelloSideBar.class).getId());
       uiSideBar.setSelectedComp(event.getSource().getUIExtensionName());
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiSideBar.getParent()); 
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiSideBar.getParent());
     }
   }
 
   @Override
   public Class<? extends UIAbstractManager> getUIAbstractManagerClass() {
-    // TODO Auto-generated method stub
     return null;
   }
 }

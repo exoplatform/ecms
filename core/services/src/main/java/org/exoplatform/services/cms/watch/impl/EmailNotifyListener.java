@@ -39,18 +39,18 @@ import org.exoplatform.services.organization.User;
  * Author : Xuan Hoa Pham
  *          hoapham@exoplatform.com
  * 					phamvuxuanhoa@gmail.com
- * Dec 6, 2006  
+ * Dec 6, 2006
  */
-public class EmailNotifyListener implements EventListener {  
-  
+public class EmailNotifyListener implements EventListener {
+
   private Node observedNode_ ;
   final public static String EMAIL_WATCHERS_PROP = "exo:emailWatcher".intern() ;
   private static final Log LOG  = ExoLogger.getLogger(EmailNotifyListener.class);
-  
+
   public EmailNotifyListener(Node oNode) {
     observedNode_ = oNode ;
   }
-  
+
   /**
    * This method is used for listening to all changes of property of a node, when there is a change,
    * message is sent to list of email
@@ -58,23 +58,23 @@ public class EmailNotifyListener implements EventListener {
   @SuppressWarnings("unused")
   public void onEvent(EventIterator arg0) {
     ExoContainer container = ExoContainerContext.getCurrentContainer() ;
-    MailService mailService = 
+    MailService mailService =
       (MailService)container.getComponentInstanceOfType(MailService.class) ;
-    WatchDocumentServiceImpl watchService= 
+    WatchDocumentServiceImpl watchService=
       (WatchDocumentServiceImpl)container.getComponentInstanceOfType(WatchDocumentService.class) ;
     MessageConfig messageConfig = watchService.getMessageConfig() ;
     List<String> emailList = getEmailList(observedNode_) ;
-    for(String receiver: emailList) {      
+    for(String receiver: emailList) {
       Message message = createMessage(receiver,messageConfig) ;
       try {
-        mailService.sendMessage(message) ; 
+        mailService.sendMessage(message) ;
       }catch (Exception e) {
         LOG.warn("===> Exeption when send message to: " + message.getTo());
-        LOG.error("Unexpected error", e);        
-      }      
+        LOG.error("Unexpected error", e);
+      }
     }
   }
-  
+
   /**
    * Create message when there is any changes of property of a node.
    * @param receiver
@@ -90,33 +90,33 @@ public class EmailNotifyListener implements EventListener {
     message.setMimeType(messageConfig.getMimeType()) ;
     return message ;
   }
-  
+
   /**
-   * This Method will get email of watchers when they watch a document 
+   * This Method will get email of watchers when they watch a document
    * @param observedNode
    * @return
    */
   private List<String> getEmailList(Node observedNode) {
     List<String> emailList = new ArrayList<String>() ;
     ExoContainer container = ExoContainerContext.getCurrentContainer() ;
-    OrganizationService orgService = 
+    OrganizationService orgService =
       (OrganizationService)container.getComponentInstanceOfType(OrganizationService.class) ;
-    
+
     try{
       if(observedNode.hasProperty(EMAIL_WATCHERS_PROP)) {
         Value[] watcherNames = observedNode.getProperty(EMAIL_WATCHERS_PROP).getValues() ;
-        for(Value value: watcherNames) {  
+        for(Value value: watcherNames) {
           String userName = value.getString() ;
           User user = orgService.getUserHandler().findUserByName(userName) ;
           if(user != null) {
             emailList.add(user.getEmail()) ;
           }
         }
-      } 
+      }
     } catch (Exception e) {
       LOG.error("Unexpected error", e);
     }
     return emailList ;
   }
 }
-  
+

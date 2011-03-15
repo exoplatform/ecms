@@ -47,10 +47,10 @@ public class UIFormInputSetWithAction extends UIFormInputSet implements UIFormIn
   private HashMap<String, String[]> fieldActions_ = new HashMap<String, String[]>() ;
   private boolean isShowActionInfo_ = false ;
   private HashMap<String, String> msgKey_ = new HashMap<String, String>();
-  
-  public UIFormInputSetWithAction(String name) {  
+
+  public UIFormInputSetWithAction(String name) {
     setId(name) ;
-    setComponentConfig(getClass(), null) ;  
+    setComponentConfig(getClass(), null) ;
   }
   public boolean isShowActionInfo() {return isShowActionInfo_ ;}
   public void showActionInfo(boolean isShow) {isShowActionInfo_ = isShow ;}
@@ -58,43 +58,43 @@ public class UIFormInputSetWithAction extends UIFormInputSet implements UIFormIn
     super.processRender(context) ;
   }
 
-  public void setActions(String[] actionList, String[] values){ 
-    actions_ = actionList ; 
-    values_ = values ;    
+  public void setActions(String[] actionList, String[] values){
+    actions_ = actionList ;
+    values_ = values ;
   }
-  
+
   public String[] getInputSetActions() { return actions_ ; }
   public String[] getActionValues() { return values_ ; }
-  
-  public String getFormName() { 
+
+  public String getFormName() {
     UIForm uiForm = getAncestorOfType(UIForm.class);
-    return uiForm.getId() ; 
+    return uiForm.getId() ;
   }
-  
+
   public boolean isShowOnly() { return isShowOnly_ ; }
   public void setIsShowOnly(boolean isShowOnly) { isShowOnly_ = isShowOnly ; }
 
   public boolean isDeleteOnly() { return isDeleteOnly_ ; }
   public void setIsDeleteOnly(boolean isDeleteOnly) { isDeleteOnly_ = isDeleteOnly ; }
-  
+
   public void setListInfoField(String fieldName, List<String> listInfor) {
     listInfor_.put(fieldName, listInfor) ;
   }
-  
+
   public List<String> getListInfoField(String fieldName) {
     if(listInfor_.containsKey(fieldName)) return listInfor_.get(fieldName) ;
     return null ;
   }
-  
+
   public void setInfoField(String fieldName, String fieldInfo) {
     infor_.put(fieldName, fieldInfo) ;
   }
-  
+
   public String getInfoField(String fieldName) {
     if(infor_.containsKey(fieldName)) return infor_.get(fieldName) ;
     return null ;
   }
-  
+
   public void setActionInfo(String fieldName, String[] actionNames) {
     actionInfo_.put(fieldName, actionNames) ;
   }
@@ -105,35 +105,35 @@ public class UIFormInputSetWithAction extends UIFormInputSet implements UIFormIn
   public void setFieldActions(String fieldName, String[] actionNames) {
     fieldActions_.put(fieldName, actionNames) ;
   }
-  
+
   public String[] getFieldActions(String fieldName) {
    return fieldActions_.get(fieldName) ;
   }
-  
+
   public void setIsView(boolean isView) { isView_ = isView; }
   public boolean isView() { return isView_ ; }
 
   public String getBindingField() { return null; }
 
   public List getValidators() { return null; }
-  
+
   @SuppressWarnings("unused")
   public UIFormInput addValidator(Class clazz, Object...params) throws Exception { return this; }
-  
+
   public Object getValue() throws Exception { return null; }
 
   @SuppressWarnings("unused")
   public UIFormInput setValue(Object value) throws Exception { return null; }
 
   public Class getTypeValue() { return null ; }
-  
+
   public void setIntroduction(String fieldName, String msgKey) { msgKey_.put(fieldName, msgKey) ; }
   public String getMsgKey(String fieldName) { return msgKey_.get(fieldName) ; }
-  
+
   public String getLabel() {
     return getId();
   }
-  
+
   @SuppressWarnings("unused")
   public UIFormInput addValidator(Class arg0) throws Exception {
     return null;

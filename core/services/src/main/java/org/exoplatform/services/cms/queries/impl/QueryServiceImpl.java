@@ -55,19 +55,19 @@ import org.exoplatform.services.organization.OrganizationService;
 import org.picocontainer.Startable;
 
 public class QueryServiceImpl implements QueryService, Startable{
-  private static final String[] perms = {PermissionType.READ, PermissionType.ADD_NODE, 
+  private static final String[] perms = {PermissionType.READ, PermissionType.ADD_NODE,
     PermissionType.SET_PROPERTY, PermissionType.REMOVE };
-  private String relativePath_;  
+  private String relativePath_;
   private List<QueryPlugin> queryPlugins_ = new ArrayList<QueryPlugin> ();
   private RepositoryService repositoryService_;
-  private CacheService cacheService_;  
+  private CacheService cacheService_;
   private PortalContainerInfo containerInfo_;
   private OrganizationService organizationService_;
   private String baseUserPath_;
   private String baseQueriesPath_;
   private String group_;
   private DMSConfiguration dmsConfiguration_;
-  
+
   private static final Log LOG = ExoLogger.getLogger(QueryServiceImpl.class);
 
   /**
@@ -81,10 +81,10 @@ public class QueryServiceImpl implements QueryService, Startable{
    * @param dmsConfiguration
    * @throws Exception
    */
-  public QueryServiceImpl(RepositoryService repositoryService, NodeHierarchyCreator nodeHierarchyCreator, 
-      InitParams params, PortalContainerInfo containerInfo, CacheService cacheService, 
+  public QueryServiceImpl(RepositoryService repositoryService, NodeHierarchyCreator nodeHierarchyCreator,
+      InitParams params, PortalContainerInfo containerInfo, CacheService cacheService,
       OrganizationService organizationService, DMSConfiguration dmsConfiguration) throws Exception {
-    relativePath_ = params.getValueParam("relativePath").getValue();    
+    relativePath_ = params.getValueParam("relativePath").getValue();
     group_ = params.getValueParam("group").getValue();
     repositoryService_ = repositoryService;
     containerInfo_ = containerInfo;
@@ -94,7 +94,7 @@ public class QueryServiceImpl implements QueryService, Startable{
     baseQueriesPath_ = nodeHierarchyCreator.getJcrPath(BasePath.QUERIES_PATH);
     dmsConfiguration_ = dmsConfiguration;
   }
-  
+
   /**
    * Implemented method from Startable class
    * init all ManageDrivePlugin
@@ -114,7 +114,6 @@ public class QueryServiceImpl implements QueryService, Startable{
    * Implemented method from Startable class
    */
   public void stop() {
-    // TODO Auto-generated method stub    
   }
 
   /**
@@ -124,12 +123,12 @@ public class QueryServiceImpl implements QueryService, Startable{
     for(QueryPlugin queryPlugin : queryPlugins_){
       try{
         queryPlugin.init(repository,baseQueriesPath_);
-      }catch (Exception e) { 
+      }catch (Exception e) {
         LOG.error("Can not init query plugin '" + queryPlugin.getName() + "'", e);
       }
-    } 
+    }
   }
-  
+
   /**
    * Add new QueryPlugin to queryPlugins_
    * @see                   QueryPlugin
@@ -138,7 +137,7 @@ public class QueryServiceImpl implements QueryService, Startable{
   public void setQueryPlugin(QueryPlugin queryPlugin) {
     queryPlugins_.add(queryPlugin);
   }
-  
+
   /**
    * {@inheritDoc}
    */
@@ -148,8 +147,8 @@ public class QueryServiceImpl implements QueryService, Startable{
    * {@inheritDoc}
    */
   public List<Query> getQueries(String userName, String repository, SessionProvider provider) throws Exception {
-    List<Query> queries = new ArrayList<Query>();        
-    if (userName == null) return queries;    
+    List<Query> queries = new ArrayList<Query>();
+    if (userName == null) return queries;
     Session session = getSession(repository, provider, true);
     QueryManager manager = session.getWorkspace().getQueryManager();
     Node usersHome;
@@ -189,13 +188,13 @@ public class QueryServiceImpl implements QueryService, Startable{
     while (iter.hasNext()) {
       Node node = iter.nextNode();
       if("nt:query".equals(node.getPrimaryNodeType().getName())) queries.add(manager.getQuery(node));
-    }    
+    }
     session.logout();
     return queries;
   }
-  
+
   /**
-   * Get node by giving the node user and the relative path to its 
+   * Get node by giving the node user and the relative path to its
    * @param userHome      Node user
    * @param relativePath  The relative path to its
    * @return
@@ -220,20 +219,20 @@ public class QueryServiceImpl implements QueryService, Startable{
    */
   private Map<String,String[]> getPermissions(String owner) {
     Map<String, String[]> permissions = new HashMap<String, String[]>();
-    permissions.put(owner, perms);         
+    permissions.put(owner, perms);
     permissions.put(group_, perms);
     return permissions;
-  } 
+  }
 
   /**
    * {@inheritDoc}
    */
-  public void addQuery(String queryName, String statement, String language, 
+  public void addQuery(String queryName, String statement, String language,
       String userName, String repository) throws Exception {
     if (userName == null) return;
     Session session = getSession(repository);
-    QueryManager manager = session.getWorkspace().getQueryManager();    
-    Query query = manager.createQuery(statement, language);    
+    QueryManager manager = session.getWorkspace().getQueryManager();
+    Query query = manager.createQuery(statement, language);
     Node usersNode = (Node) session.getItem(baseUserPath_);
     if (!usersNode.hasNode(userName)) {
       usersNode.addNode(userName);
@@ -257,9 +256,9 @@ public class QueryServiceImpl implements QueryService, Startable{
    * {@inheritDoc}
    */
   public void removeQuery(String queryPath, String userName, String repository) throws Exception {
-    if(userName == null) return;    
+    if(userName == null) return;
     Session session = getSession(repository);
-    
+
     Node queryNode = null;
     try {
       queryNode = (Node) session.getItem(queryPath);
@@ -277,18 +276,18 @@ public class QueryServiceImpl implements QueryService, Startable{
   /**
    * {@inheritDoc}
    */
-  public void addSharedQuery(String queryName, String statement, String language, 
+  public void addSharedQuery(String queryName, String statement, String language,
       String[] permissions, boolean cachedResult, String repository) throws Exception {
-    addSharedQuery(queryName, statement, language, 
+    addSharedQuery(queryName, statement, language,
         permissions, cachedResult, repository, SessionProviderFactory.createSessionProvider());
   }
-  
-  public void addSharedQuery(String queryName, String statement, String language, 
+
+  public void addSharedQuery(String queryName, String statement, String language,
       String[] permissions, boolean cachedResult, String repository, SessionProvider provider) throws Exception {
     Session session = getSession(repository, provider, true);
     ValueFactory vt = session.getValueFactory();
     String queryPath;
-    List<Value> perm = new ArrayList<Value>();                 
+    List<Value> perm = new ArrayList<Value>();
     for (String permission : permissions) {
       Value vl = vt.createValue(permission);
       perm.add(vl);
@@ -309,8 +308,8 @@ public class QueryServiceImpl implements QueryService, Startable{
       session.save();
       queryPath = query.getPath();
     } else {
-      QueryManager manager = session.getWorkspace().getQueryManager();    
-      Query query = manager.createQuery(statement, language);      
+      QueryManager manager = session.getWorkspace().getQueryManager();
+      Query query = manager.createQuery(statement, language);
       Node newQuery = query.storeAsNode(baseQueriesPath_ + "/" + queryName);
       newQuery.addMixin("mix:sharedQuery");
       newQuery.setProperty("exo:accessPermissions", vls);
@@ -320,18 +319,18 @@ public class QueryServiceImpl implements QueryService, Startable{
     }
     session.logout();
     removeFromCache(queryPath);
-  }  
+  }
 
   /**
    * {@inheritDoc}
    */
   public Node getSharedQuery(String queryName, String repository, SessionProvider provider) throws Exception {
-    Session session = getSession(repository, provider, true);    
-    Node sharedQueryNode = (Node)session.getItem(baseQueriesPath_ + "/" + queryName); 
+    Session session = getSession(repository, provider, true);
+    Node sharedQueryNode = (Node)session.getItem(baseQueriesPath_ + "/" + queryName);
     session.logout();
     return sharedQueryNode;
   }
-  
+
   /**
    * {@inheritDoc}
    */
@@ -347,7 +346,7 @@ public class QueryServiceImpl implements QueryService, Startable{
     }
     return queries;
   }
-  
+
   /**
    * {@inheritDoc}
    */
@@ -359,14 +358,17 @@ public class QueryServiceImpl implements QueryService, Startable{
       }
     }
     return sharedQueries;
-  }  
-  
+  }
+
   /**
    * {@inheritDoc}
    */
-  public List<Node> getSharedQueries(String queryType, String userId, String repository, SessionProvider provider) throws Exception {
+  public List<Node> getSharedQueries(String queryType,
+                                     String userId,
+                                     String repository,
+                                     SessionProvider provider) throws Exception {
     List<Node> resultList = new ArrayList<Node>();
-    String language = null;    
+    String language = null;
     for (Node queryNode: getSharedQueries(repository,provider)) {
       language = queryNode.getProperty("jcr:language").getString();
       if (!queryType.equalsIgnoreCase(language)) continue;
@@ -392,17 +394,21 @@ public class QueryServiceImpl implements QueryService, Startable{
    * {@inheritDoc}
    */
   public void removeSharedQuery(String queryName, String repository) throws Exception {
-    Session session = getSession(repository);    
+    Session session = getSession(repository);
     session.getItem(baseQueriesPath_ + "/" + queryName).remove();
     session.save();
     session.logout();
   }
-  
+
   /**
    * {@inheritDoc}
    */
-  public QueryResult execute(String queryPath, String workspace, String repository, SessionProvider provider, String userId) throws Exception {
-    Session session = getSession(repository, provider, true);    
+  public QueryResult execute(String queryPath,
+                             String workspace,
+                             String repository,
+                             SessionProvider provider,
+                             String userId) throws Exception {
+    Session session = getSession(repository, provider, true);
     Session querySession = getSession(repository, workspace, provider);
     Node queryNode = null;
     try {
@@ -427,13 +433,13 @@ public class QueryServiceImpl implements QueryService, Startable{
     querySession.logout();
     return queryResult;
   }
-  
+
   /**
    * Execute the query by giving the session, query node and userid
    * @param session     The Session
    * @param queryNode   The node of query
    * @param userId      The userid
-   * @return  
+   * @return
    * @throws Exception
    */
   private QueryResult execute(Session session, Node queryNode, String userId) throws Exception {
@@ -441,8 +447,8 @@ public class QueryServiceImpl implements QueryService, Startable{
     String language = queryNode.getProperty("jcr:language").getString();
     Query query = session.getWorkspace().getQueryManager().createQuery(statement,language);
     return query.execute();
-  }    
-  
+  }
+
   /**
    * This method replaces tokens in the statement by their actual values
    * Current supported tokens are :
@@ -451,7 +457,7 @@ public class QueryServiceImpl implements QueryService, Startable{
    * That way, predefined queries can be equipped with dynamic values. This is
    * useful when querying for documents made by the current user, or documents
    * in publication state.
-   * 
+   *
    * @param session reference to the JCR Session
    * @return the processed String, with replaced tokens
    */
@@ -459,17 +465,17 @@ public class QueryServiceImpl implements QueryService, Startable{
 
     // The returned computed statement
     String ret = statement;
-      
+
     // Replace ${UserId}$
     ret = ret.replace("${UserId}$",userId);
-    
+
     // Replace ${Date}$
     String currentDate = ISO8601.format(new GregorianCalendar());
     ret = ret.replace("${Date}$",currentDate);
-    
+
     return ret;
   }
-  
+
   /**
    * Remove query from cache by giving the query path
    * @param queryPath   The path to query
@@ -492,7 +498,7 @@ public class QueryServiceImpl implements QueryService, Startable{
   private Session getSession(String repository) throws Exception {
     ManageableRepository manageableRepository = repositoryService_.getCurrentRepository();
     return manageableRepository.getSystemSession(manageableRepository.getConfiguration().getDefaultWorkspaceName());
-        
+
   }
 
   /**
@@ -525,7 +531,7 @@ public class QueryServiceImpl implements QueryService, Startable{
     ManageableRepository manageableRepository = repositoryService_.getCurrentRepository();
     return provider.getSession(workspace,manageableRepository);
   }
-  
+
   /**
    * Check the given user can use this query
    * @param userId      The user id
@@ -533,7 +539,7 @@ public class QueryServiceImpl implements QueryService, Startable{
    * @return
    * @throws Exception
    */
-  private boolean canUseQuery(String userId, Node queryNode) throws Exception{    
+  private boolean canUseQuery(String userId, Node queryNode) throws Exception{
     Value[] values = queryNode.getProperty("exo:accessPermissions").getValues();
     for(Value value : values) {
       String accessPermission = value.getString();
@@ -560,12 +566,12 @@ public class QueryServiceImpl implements QueryService, Startable{
       if ("*".equals(membershipType)) {
         // Determine if there exists at least one membership
         return !membershipHandler.findMembershipsByUserAndGroup( userId,groupName).isEmpty();
-      } 
+      }
       // Determine if there exists the membership of specified type
-      return membershipHandler.findMembershipByUserGroupAndType(userId,groupName,membershipType) != null;      
+      return membershipHandler.findMembershipByUserGroupAndType(userId,groupName,membershipType) != null;
     }
-    catch(Exception e) {            
-    }  
+    catch(Exception e) {
+    }
     return false;
-  }   
+  }
 }

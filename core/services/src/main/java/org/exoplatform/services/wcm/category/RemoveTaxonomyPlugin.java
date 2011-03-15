@@ -36,14 +36,14 @@ public class RemoveTaxonomyPlugin extends RemovePortalPlugin {
 
   /** The taxonomy service_. */
   private TaxonomyService         taxonomyService;
-  
+
   private ActionServiceContainer actionServiceContainer;
-  
+
   private RepositoryService repositoryService;
-  
+
   /**
    * Instantiates a new initial taxonomy plugin.
-   * 
+   *
    * @param params the params
    * @param configurationManager the configuration manager
    * @param repositoryService the repository service
@@ -51,12 +51,12 @@ public class RemoveTaxonomyPlugin extends RemovePortalPlugin {
    * @param taxonomyService the taxonomy service
    * @param actionServiceContainer the action service container
    * @param dmsConfiguration the dms configuration
-   * 
+   *
    * @throws Exception the exception
    */
-  public RemoveTaxonomyPlugin(InitParams params, 
+  public RemoveTaxonomyPlugin(InitParams params,
                                ConfigurationManager configurationManager,
-                               RepositoryService repositoryService, 
+                               RepositoryService repositoryService,
                                TaxonomyService taxonomyService,
                                ActionServiceContainer actionServiceContainer) throws Exception {
     super(params, configurationManager, repositoryService);
@@ -69,9 +69,9 @@ public class RemoveTaxonomyPlugin extends RemovePortalPlugin {
    * @see org.exoplatform.services.wcm.portal.artifacts.BasePortalArtifactsPlugin#deployToPortal(java.lang.String, org.exoplatform.services.jcr.ext.common.SessionProvider)
    */
   public void invalidateFromPortal(SessionProvider sessionProvider, String portalName) throws Exception {
-  	String repository = repositoryService.getCurrentRepository().getConfiguration().getName();
-  	Node taxonomyTreeNode = taxonomyService.getTaxonomyTree(portalName, true);
-  	actionServiceContainer.removeAction(taxonomyTreeNode, repository);
+    String repository = repositoryService.getCurrentRepository().getConfiguration().getName();
+    Node taxonomyTreeNode = taxonomyService.getTaxonomyTree(portalName, true);
+    actionServiceContainer.removeAction(taxonomyTreeNode, repository);
     taxonomyService.removeTaxonomyTree(portalName);
   }
 }

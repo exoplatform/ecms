@@ -31,14 +31,14 @@ import org.exoplatform.webui.form.validator.MandatoryValidator;
  */
 @ComponentConfig(template = "classpath:groovy/ecm/webui/form/UIFormInputSetWithAction.gtmpl")
 public class UIPermissionInputSet extends UIFormInputSetWithAction {
-  
+
   final static public String FIELD_USERORGROUP = "userOrGroup";
-  
+
   public UIPermissionInputSet(String name) throws Exception {
     super(name);
     setComponentConfig(getClass(), null) ;
     UIFormStringInput userGroup = new UIFormStringInput(FIELD_USERORGROUP, FIELD_USERORGROUP, null) ;
-    userGroup.addValidator(MandatoryValidator.class) ;   
+    userGroup.addValidator(MandatoryValidator.class) ;
     userGroup.setEditable(false) ;
     addUIFormInput(userGroup) ;
     for (String perm : PermissionType.ALL) {

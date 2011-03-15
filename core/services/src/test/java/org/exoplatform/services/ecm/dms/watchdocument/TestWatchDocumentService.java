@@ -34,7 +34,7 @@ import org.exoplatform.services.ecm.dms.BaseDMSTestCase;
  * Created by eXo Platform
  * Author : Nguyen Manh Cuong
  *          manhcuongpt@gmail.com
- * Jun 16, 2009  
+ * Jun 16, 2009
  */
 
 /**
@@ -45,7 +45,7 @@ import org.exoplatform.services.ecm.dms.BaseDMSTestCase;
  * 3. unWatchDocument() method
  */
 public class TestWatchDocumentService extends BaseDMSTestCase{
-  
+
   private final static String  EXO_WATCHABLE_MIXIN  = "exo:watchable".intern();
 
   private final static String  EMAIL_WATCHERS_PROP  = "exo:emailWatcher".intern();
@@ -53,9 +53,9 @@ public class TestWatchDocumentService extends BaseDMSTestCase{
   private final static String  RSS_WATCHERS_PROP    = "exo:rssWatcher".intern();
 
   private WatchDocumentService watchDocumentService = null;
-  
+
   private Node test;
-  
+
   @Override
   public void setUp() throws Exception {
     super.setUp();
@@ -63,7 +63,7 @@ public class TestWatchDocumentService extends BaseDMSTestCase{
     test = session.getRootNode().addNode("Test");
     session.save();
   }
-  
+
   /**
    * Test Method: getNotification()
    * Input: test node is not exo:watchable document
@@ -73,13 +73,13 @@ public class TestWatchDocumentService extends BaseDMSTestCase{
   public void testGetNotificationType() throws Exception{
     int notification = watchDocumentService.getNotificationType(test, "root");
     assertEquals(-1, notification);
-  }    
-  
+  }
+
   /**
    * Test Method: getNotification()
    * Input: type of notification for test node is email and rss.
    * Expected:
-   *       Value of notification is 0.  
+   *       Value of notification is 0.
    */
   public void testGetNotificationType1() throws Exception{
     test.addMixin(EXO_WATCHABLE_MIXIN);
@@ -93,22 +93,22 @@ public class TestWatchDocumentService extends BaseDMSTestCase{
    * Test Method: getNotification()
    * Input: type of notification for test node is email
    * Expected:
-   *       Value of notification is 1.  
-   */  
+   *       Value of notification is 1.
+   */
   public void testGetNotificationType2() throws Exception{
     test.addMixin(EXO_WATCHABLE_MIXIN);
     session.save();
     createMultipleProperty(test, "root", "marry");
     int notification = watchDocumentService.getNotificationType(test, "root");
     assertEquals(1, notification);
-  }  
-  
+  }
+
   /**
    * Test Method: getNotification()
    * Input: type of notification for test node is rss
    * Expected:
-   *       Value of notification is 2.  
-   */  
+   *       Value of notification is 2.
+   */
   public void testGetNotificationType3() throws Exception{
     test.addMixin(EXO_WATCHABLE_MIXIN);
     session.save();
@@ -116,7 +116,7 @@ public class TestWatchDocumentService extends BaseDMSTestCase{
     int notification = watchDocumentService.getNotificationType(test, "root");
     assertEquals(2, notification);
   }
-  
+
   /**
    * Test Method: watchDocument()
    * Input: document node is not added exo:watchable mixinType, user: root will watch this document
@@ -133,7 +133,7 @@ public class TestWatchDocumentService extends BaseDMSTestCase{
       assertEquals("root", val.getString());
     }
   }
-  
+
   /**
    * Test Method: watchDocument()
    * Input: document node is not added exo:watchable mixinType,
@@ -147,16 +147,16 @@ public class TestWatchDocumentService extends BaseDMSTestCase{
     watchDocumentService.watchDocument(test, "root", 2);
     assertTrue(test.isNodeType(EXO_WATCHABLE_MIXIN));
     assertFalse(test.hasProperty(EMAIL_WATCHERS_PROP));
-  }  
-  
+  }
+
   /**
    * Test Method: watchDocument()
-   * Input: document node follows exo:watchable mixinType, 
+   * Input: document node follows exo:watchable mixinType,
    *        user: root and marry will watch this document
    * Expected:
    *        document is added exo:watchable mixinType
    *        exo:emailWatch property of document node has value: root and marry.
-   */  
+   */
   @SuppressWarnings("unchecked")
   public void testWatchDocument2() throws Exception{
     watchDocumentService.watchDocument(test, "root", 1);
@@ -168,7 +168,7 @@ public class TestWatchDocumentService extends BaseDMSTestCase{
     assertTrue(watcher.contains(val.getString()));
     }
   }
-  
+
   /**
    * Test Method: unwatchDocument()
    * Input: Document is watched by two user(root, marry)
@@ -188,7 +188,7 @@ public class TestWatchDocumentService extends BaseDMSTestCase{
     assertTrue(watcher.contains(value[0].getString()));
     assertFalse(value[0].equals("root"));
   }
-  
+
   /**
    * Test Method: unwatchDocument()
    * Input: Document is watch by two user(root, marry)
@@ -234,7 +234,7 @@ public class TestWatchDocumentService extends BaseDMSTestCase{
     }
     session.save();
   }
-  
+
   /**
    * Clean data test
    */
@@ -245,5 +245,5 @@ public class TestWatchDocumentService extends BaseDMSTestCase{
       session.save();
     }
     super.tearDown();
-  }  
+  }
 }

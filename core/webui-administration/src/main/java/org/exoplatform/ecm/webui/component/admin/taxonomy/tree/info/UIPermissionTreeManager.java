@@ -37,19 +37,19 @@ import org.exoplatform.webui.organization.account.UIUserSelector;
  * Created by The eXo Platform SARL
  * Author : Hoang Van Hung
  *          hunghvit@gmail.com
- * Apr 17, 2009  
+ * Apr 17, 2009
  */
 
 @ComponentConfig(lifecycle = UIContainerLifecycle.class)
 public class UIPermissionTreeManager extends UIContainer {
-  
+
   public static final String POPUP_TAXONOMY_SELECT_USER = "TaxoPopupUserSelector";
-  
+
   public UIPermissionTreeManager() throws Exception {
-    addChild(UIPermissionTreeInfo.class, null, null);    
-    addChild(UIPermissionTreeForm.class, null, null);    
+    addChild(UIPermissionTreeInfo.class, null, null);
+    addChild(UIPermissionTreeForm.class, null, null);
   }
-  
+
   public void initPopupPermission(UIComponent uiSelector) throws Exception {
     removeChildById(UIPermissionTreeForm.POPUP_SELECT);
     UIPopupWindow uiPopup = addChild(UIPopupWindow.class, null, UIPermissionTreeForm.POPUP_SELECT);
@@ -59,7 +59,7 @@ public class UIPermissionTreeManager extends UIContainer {
     uiPopup.setShow(true);
     uiPopup.setResizable(true);
   }
-  
+
   public void initUserSelector() throws Exception {
     UIPopupWindow uiPopup = getChildById(POPUP_TAXONOMY_SELECT_USER);
     if (uiPopup == null) {
@@ -71,11 +71,11 @@ public class UIPermissionTreeManager extends UIContainer {
     uiPopup.setShow(true);
     uiPopup.setResizable(true);
   }
-  
+
   public void update() throws Exception {
     getChild(UIPermissionTreeInfo.class).updateGrid();
   }
-  
+
   public void checkPermissonInfo(Node node) throws Exception {
     if (node.isLocked()) {
       String lockToken = LockUtil.getLockToken(node);
@@ -94,7 +94,7 @@ public class UIPermissionTreeManager extends UIContainer {
       }
     }
   }
-  
+
   public static class AddUserActionListener extends EventListener<UIUserSelector> {
     public void execute(Event<UIUserSelector> event) throws Exception {
       UIUserSelector uiForm = event.getSource();
@@ -105,6 +105,6 @@ public class UIPermissionTreeManager extends UIContainer {
       uiPopup.setUIComponent(null);
       uiPopup.setShow(false);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiParent);
-    }  
+    }
   }
 }

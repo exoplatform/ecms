@@ -54,23 +54,26 @@ import org.exoplatform.webui.ext.UIExtensionManager;
  * Jun 9, 2008
  */
 @ComponentConfig(
-    lifecycle = Lifecycle.class    
+    lifecycle = Lifecycle.class
 )
 
 public class UIPresentation extends UIBaseNodePresentation {
 
   private NodeLocation originalNodeLocation;
-  
+
   private NodeLocation viewNodeLocation;
 
   String templatePath = null;
-  
+
   /* (non-Javadoc)
    * @see org.exoplatform.ecm.webui.presentation.UIBaseNodePresentation#getOriginalNode()
    */
   public Node getOriginalNode() throws Exception {
-	  return Utils.getViewableNodeByComposer(originalNodeLocation.getRepository(), originalNodeLocation.getWorkspace(), originalNodeLocation.getPath(), WCMComposer.BASE_VERSION);
-  }  
+    return Utils.getViewableNodeByComposer(originalNodeLocation.getRepository(),
+                                           originalNodeLocation.getWorkspace(),
+                                           originalNodeLocation.getPath(),
+                                           WCMComposer.BASE_VERSION);
+  }
 
   /* (non-Javadoc)
    * @see org.exoplatform.ecm.webui.presentation.UIBaseNodePresentation#getNode()
@@ -78,14 +81,16 @@ public class UIPresentation extends UIBaseNodePresentation {
   public void setOriginalNode(Node node) throws Exception{
     originalNodeLocation = NodeLocation.make(node);
   }
-  
+
   /* (non-Javadoc)
    * @see org.exoplatform.ecm.webui.presentation.UIBaseNodePresentation#getNode()
    */
   public Node getNode() throws Exception {
-  	return Utils.getViewableNodeByComposer(viewNodeLocation.getRepository(), viewNodeLocation.getWorkspace(), viewNodeLocation.getPath());
+    return Utils.getViewableNodeByComposer(viewNodeLocation.getRepository(),
+                                           viewNodeLocation.getWorkspace(),
+                                           viewNodeLocation.getPath());
   }
-  
+
   /* (non-Javadoc)
    * @see org.exoplatform.ecm.webui.presentation.NodePresentation#setNode(javax.jcr.Node)
    */
@@ -97,11 +102,13 @@ public class UIPresentation extends UIBaseNodePresentation {
    * @see org.exoplatform.ecm.webui.presentation.UIBaseNodePresentation#getRepositoryName()
    */
   public String getRepositoryName() {
-  	PortletRequestContext portletRequestContext = WebuiRequestContext.getCurrentInstance();
+    PortletRequestContext portletRequestContext = WebuiRequestContext.getCurrentInstance();
     PortletPreferences portletPreferences = portletRequestContext.getRequest().getPreferences();
-    return originalNodeLocation!=null?originalNodeLocation.getRepository():portletPreferences.getValue(UISingleContentViewerPortlet.REPOSITORY, "repository");
+    return originalNodeLocation != null ? originalNodeLocation.getRepository()
+                                       : portletPreferences.getValue(UISingleContentViewerPortlet.REPOSITORY,
+                                                                     "repository");
   }
-  
+
   /* (non-Javadoc)
    * @see org.exoplatform.portal.webui.portal.UIPortalComponent#getTemplate()
    */
@@ -120,10 +127,13 @@ public class UIPresentation extends UIBaseNodePresentation {
     this.templatePath = templatePath;
   }
 
-  
-    
-  /* (non-Javadoc)
-   * @see org.exoplatform.webui.core.UIComponent#getTemplateResourceResolver(org.exoplatform.webui.application.WebuiRequestContext, java.lang.String)
+
+
+  /*
+   * (non-Javadoc)
+   * @see
+   * org.exoplatform.webui.core.UIComponent#getTemplateResourceResolver(org.
+   * exoplatform.webui.application.WebuiRequestContext, java.lang.String)
    */
   public ResourceResolver getTemplateResourceResolver(WebuiRequestContext context, String template) {
     String repository = getRepositoryName();
@@ -135,7 +145,7 @@ public class UIPresentation extends UIBaseNodePresentation {
   /* (non-Javadoc)
    * @see org.exoplatform.ecm.webui.presentation.NodePresentation#getNodeType()
    */
-  public String getNodeType() throws Exception {   
+  public String getNodeType() throws Exception {
     return null;
   }
 
@@ -150,7 +160,7 @@ public class UIPresentation extends UIBaseNodePresentation {
    * @see org.exoplatform.ecm.webui.presentation.NodePresentation#getCommentComponent()
    */
   public UIComponent getCommentComponent() {
-  	return null;
+    return null;
   }
 
   /* (non-Javadoc)
@@ -159,10 +169,10 @@ public class UIPresentation extends UIBaseNodePresentation {
   public UIComponent getRemoveAttach() throws Exception {
     removeChild(RemoveAttachmentComponent.class);
     UIComponent uicomponent = addChild(RemoveAttachmentComponent.class, null, "PresentationRemoveAttach");
-    ((AbstractActionComponent)uicomponent).setLstComponentupdate(Arrays.asList(new Class[] {UIPresentationContainer.class}));
+    ((AbstractActionComponent) uicomponent).setLstComponentupdate(Arrays.asList(new Class[] { UIPresentationContainer.class }));
     return uicomponent;
   }
-  
+
   /* (non-Javadoc)
    * @see org.exoplatform.ecm.webui.presentation.NodePresentation#getCommentComponent()
    */
@@ -174,9 +184,8 @@ public class UIPresentation extends UIBaseNodePresentation {
   }
 
   public UIComponent getUIComponent(String mimeType) throws Exception {
-  	// TODO Auto-generated method stub
-  	UIExtensionManager manager = getApplicationComponent(UIExtensionManager.class);
-  	List<UIExtension> extensions = manager.getUIExtensions(org.exoplatform.ecm.webui.utils.Utils.FILE_VIEWER_EXTENSION_TYPE);
+    UIExtensionManager manager = getApplicationComponent(UIExtensionManager.class);
+    List<UIExtension> extensions = manager.getUIExtensions(org.exoplatform.ecm.webui.utils.Utils.FILE_VIEWER_EXTENSION_TYPE);
       Map<String, Object> context = new HashMap<String, Object>();
       context.put(org.exoplatform.ecm.webui.utils.Utils.MIME_TYPE, mimeType);
       for (UIExtension extension : extensions) {
@@ -185,10 +194,10 @@ public class UIPresentation extends UIBaseNodePresentation {
       }
       return null;
   }
-  
+
   /**
    * Gets the attachment URL.
-   * 
+   *
    * @param node the node
    * @return the attachment URL
    * @throws Exception the exception
@@ -200,21 +209,24 @@ public class UIPresentation extends UIBaseNodePresentation {
     PortletRequest portletRequest = portletRequestContext.getRequest();
     String portalURI = portalRequestContext.getPortalURI();
     NodeLocation nodeLocation = NodeLocation.getNodeLocationByNode(node);
-    String baseURI = portletRequest.getScheme() + "://" + portletRequest.getServerName() + ":" + String.format("%s", portletRequest.getServerPort());
+    String baseURI = portletRequest.getScheme() + "://" + portletRequest.getServerName() + ":"
+        + String.format("%s", portletRequest.getServerPort());
     String basePath = Utils.getPortletPreference(UISingleContentViewerPortlet.PREFERENCE_TARGET_PAGE);
     String scvWith = Utils.getPortletPreference(UISingleContentViewerPortlet.PREFERENCE_SHOW_SCV_WITH);
     if (scvWith == null || scvWith.length() == 0)
         scvWith = UISingleContentViewerPortlet.DEFAULT_SHOW_SCV_WITH;
-    if (node.isNodeType("nt:frozenNode")){
+    if (node.isNodeType("nt:frozenNode")) {
       String uuid = node.getProperty("jcr:frozenUuid").getString();
       Node originalNode = node.getSession().getNodeByUUID(uuid);
-      link = baseURI + portalURI + basePath + "?" + scvWith + "=/" + nodeLocation.getRepository() + "/" + nodeLocation.getWorkspace() + originalNode.getPath();
+      link = baseURI + portalURI + basePath + "?" + scvWith + "=/" + nodeLocation.getRepository()
+          + "/" + nodeLocation.getWorkspace() + originalNode.getPath();
     } else {
-      link = baseURI + portalURI + basePath + "?" + scvWith + "=/" + nodeLocation.getRepository() + "/" + nodeLocation.getWorkspace() + node.getPath();
+      link = baseURI + portalURI + basePath + "?" + scvWith + "=/" + nodeLocation.getRepository()
+          + "/" + nodeLocation.getWorkspace() + node.getPath();
     }
     FriendlyService friendlyService = getApplicationComponent(FriendlyService.class);
     link = friendlyService.getFriendlyUri(link);
-    
+
     return link;
   }
 

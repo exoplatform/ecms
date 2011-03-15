@@ -5,25 +5,25 @@ import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.container.xml.ObjectParameter;
 import org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.LifecyclesConfig;
 /**
- * Created by The eXo Platform MEA Author : 
+ * Created by The eXo Platform MEA Author :
  * haikel.thamri@exoplatform.com
  */
 public class StatesLifecyclePlugin extends BaseComponentPlugin {
     private LifecyclesConfig lifecyclesConfig;
 
     public StatesLifecyclePlugin(InitParams params) {
-	ObjectParameter param = params.getObjectParam("lifecycles");
+  ObjectParameter param = params.getObjectParam("lifecycles");
 
-	if (param != null) {
-	    lifecyclesConfig = (LifecyclesConfig) param.getObject();
-	}
+  if (param != null) {
+      lifecyclesConfig = (LifecyclesConfig) param.getObject();
+  }
     }
 
     public LifecyclesConfig getLifecyclesConfig() {
-	return lifecyclesConfig;
+  return lifecyclesConfig;
     }
 
     public void setLifecyclesConfig(LifecyclesConfig lifecyclesConfig) {
-	this.lifecyclesConfig = lifecyclesConfig;
+  this.lifecyclesConfig = lifecyclesConfig;
     }
 }

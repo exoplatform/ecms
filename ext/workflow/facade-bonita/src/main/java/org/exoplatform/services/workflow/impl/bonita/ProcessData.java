@@ -32,19 +32,19 @@ public class ProcessData implements Process {
   String name           = null;
   int    version        = 0;
   String startStateName = null;
-  
+
   /**
    * By convention an empty String represents the start state name. This does
    * not match any state in Bonita but is local to the service implementation.
    */
   public static final String START_STATE_NAME = new String();
-  
+
   public ProcessData(ProcessDefinition projectValue) {
     this.id      = projectValue.getUUID().toString();
     this.name    = projectValue.getName();
     this.version = 1;
   }
-  
+
   public String getId() {
     return this.id;
   }

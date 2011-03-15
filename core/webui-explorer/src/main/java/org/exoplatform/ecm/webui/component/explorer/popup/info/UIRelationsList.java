@@ -32,28 +32,28 @@ import org.exoplatform.webui.event.EventListener;
 
 @ComponentConfig(
   events = {
-    @EventConfig(listeners = UIRelationsList.AddRelationActionListener.class), 
+    @EventConfig(listeners = UIRelationsList.AddRelationActionListener.class),
     @EventConfig(listeners = UIRelationsList.CancelActionListener.class)
   }
 )
 
 public class UIRelationsList extends UIContainer {
-  
+
   public UIRelationsList() throws Exception {
-   
+
   }
-  
+
   @SuppressWarnings("unused")
   static  public class AddRelationActionListener extends EventListener<UIRelationsList> {
     public void execute(Event<UIRelationsList> event) throws Exception {
-      
+
     }
   }
-  
+
   @SuppressWarnings("unused")
   static  public class CancelActionListener extends EventListener<UIRelationsList> {
     public void execute(Event<UIRelationsList> event) throws Exception {
-      
+
     }
   }
 }

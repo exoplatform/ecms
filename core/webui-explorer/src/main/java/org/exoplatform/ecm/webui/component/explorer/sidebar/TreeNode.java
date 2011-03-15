@@ -27,30 +27,30 @@ import javax.jcr.RepositoryException;
  * Author : Tran The Trong
  *          trongtt@gmail.com
  * Sep 29, 2006
- * 5:37:31 PM 
+ * 5:37:31 PM
  */
 public class TreeNode {
   //TODO Need use this class for BC TreeNode
   private boolean isExpanded_ ;
   private String path_;
-  private Node node_ ; 
-  private List<TreeNode> children_ = new ArrayList<TreeNode>() ; 
+  private Node node_ ;
+  private List<TreeNode> children_ = new ArrayList<TreeNode>() ;
 
   public TreeNode(Node node) throws RepositoryException {
     this(node, node.getPath());
   }
-  
+
   private TreeNode(Node node, String path) {
     node_ = node ;
     isExpanded_ = false ;
     path_ = path;
   }
 
-  public boolean isExpanded() { return isExpanded_; } 
+  public boolean isExpanded() { return isExpanded_; }
   public void setExpanded(boolean isExpanded) { isExpanded_ = isExpanded; }
 
   public String getName() throws RepositoryException {
-    return getName(node_); 
+    return getName(node_);
   }
 
   private String getName(Node node) throws RepositoryException {
@@ -62,18 +62,18 @@ public class TreeNode {
       buffer.append(index);
       buffer.append(']');
     }
-    return buffer.toString(); 	  
+    return buffer.toString();
   }
-  
+
   public String getPath() { return path_; }
   public String getNodePath() throws RepositoryException { return node_.getPath(); }
 
-  public Node getNode() { return node_ ; }  
+  public Node getNode() { return node_ ; }
   public void setNode(Node node) { node_ = node ; }
 
   public List<TreeNode> getChildren() { return children_ ; }
-  public int getChildrenSize() { return children_.size() ; }    
-  
+  public int getChildrenSize() { return children_.size() ; }
+
   public TreeNode getChildByName(String name) throws RepositoryException {
     for(TreeNode child : children_) {
       if(child.getName().equals(name)) return child ;
@@ -86,7 +86,7 @@ public class TreeNode {
     String prefix = path_.equals("/") ? "" : path_;
     for(Node child : children) {
       children_.add(new TreeNode(child, prefix  + "/" + getName(child))) ;
-    } 
+    }
   }
-  
+
 }

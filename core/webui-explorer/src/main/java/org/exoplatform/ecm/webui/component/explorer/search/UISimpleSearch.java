@@ -48,7 +48,7 @@ import org.exoplatform.webui.form.UIFormStringInput;
  * Created by The eXo Platform SARL
  * Author : Dang Van Minh
  *          minh.dang@exoplatform.com
- * Dec 26, 2006  
+ * Dec 26, 2006
  * 4:29:08 PM
  */
 @ComponentConfig(
@@ -60,7 +60,7 @@ import org.exoplatform.webui.form.UIFormStringInput;
       @EventConfig(listeners = UISimpleSearch.SaveActionListener.class),
       @EventConfig(listeners = UISimpleSearch.MoreConstraintsActionListener.class, phase=Phase.DECODE),
       @EventConfig(listeners = UISimpleSearch.RemoveConstraintActionListener.class, phase=Phase.DECODE)
-    }    
+    }
 )
 public class UISimpleSearch extends UIForm {
 
@@ -74,17 +74,17 @@ public class UISimpleSearch extends UIForm {
   private List<String> constraints_ = new ArrayList<String>();
   private List<String> virtualConstraints_ = new ArrayList<String>();
   private List<String> categoryPathList = new ArrayList<String>();
-  
+
   public List<String> getCategoryPathList() { return categoryPathList; }
   public void setCategoryPathList(List<String> categoryPathListItem) {
-    categoryPathList = categoryPathListItem; 
+    categoryPathList = categoryPathListItem;
   }
-  
+
   private static final String ROOT_XPATH_QUERY = "//*";
   private static final String XPATH_QUERY = "/jcr:root$0//*";
   private static final String ROOT_SQL_QUERY = "SELECT * FROM nt:base WHERE jcr:path LIKE '/%' ";
   private static final String SQL_QUERY = "SELECT * FROM nt:base WHERE jcr:path LIKE '$0/%' ";
-  
+
   public UISimpleSearch() throws Exception {
     addUIFormInput(new UIFormInputInfo(NODE_PATH, NODE_PATH, null));
     addUIFormInput(new UIFormStringInput(INPUT_SEARCH, INPUT_SEARCH, null));
@@ -97,19 +97,23 @@ public class UISimpleSearch extends UIForm {
     addUIComponentInput(uiInputAct);
     setActions(new String[] {"MoreConstraints", "Search", "Save", "Cancel"});
   }
-  
+
   public List<String> getConstraints() { return constraints_; }
-  
-  public void updateAdvanceConstraint(String constraint, String operator, String virtualDateQuery) { 
-    if(constraint.length() > 0) {
-      if(constraints_.size() == 0) {
+
+  public void updateAdvanceConstraint(String constraint, String operator, String virtualDateQuery) {
+    if (constraint.length() > 0) {
+      if (constraints_.size() == 0) {
         constraints_.add("(" + constraint + " )");
-        if(virtualDateQuery != null) virtualConstraints_.add("(" + virtualDateQuery + " )");
-        else virtualConstraints_.add("(" + constraint + " )");
+        if (virtualDateQuery != null)
+          virtualConstraints_.add("(" + virtualDateQuery + " )");
+        else
+          virtualConstraints_.add("(" + constraint + " )");
       } else {
-        constraints_.add(" "+operator.toLowerCase()+" (" + constraint + " ) ");
-        if(virtualDateQuery != null) virtualConstraints_.add(" "+operator.toLowerCase()+" (" + virtualDateQuery + " ) ");
-        else virtualConstraints_.add(" "+operator.toLowerCase()+" (" + constraint + " ) ");
+        constraints_.add(" " + operator.toLowerCase() + " (" + constraint + " ) ");
+        if (virtualDateQuery != null)
+          virtualConstraints_.add(" " + operator.toLowerCase() + " (" + virtualDateQuery + " ) ");
+        else
+          virtualConstraints_.add(" " + operator.toLowerCase() + " (" + constraint + " ) ");
       }
     }
     UIFormInputSetWithAction inputInfor = getChildById("moreConstraints");
@@ -118,7 +122,7 @@ public class UISimpleSearch extends UIForm {
     String[] actionInfor = {"RemoveConstraint"};
     inputInfor.setActionInfo(CONSTRAINTS, actionInfor);
   }
-  
+
   private String getQueryStatement() throws Exception {
     Node currentNode = getAncestorOfType(UIJCRExplorer.class).getCurrentNode();
     StringBuilder statement = new StringBuilder(1024);
@@ -136,15 +140,19 @@ public class UISimpleSearch extends UIForm {
           statement.append(ROOT_XPATH_QUERY).append("[(");
         } else {
           statement.append(StringUtils.replace(XPATH_QUERY, "$0", currentNode.getPath())).append("[(");
-        } 
+        }
       } else {
         String operator = getUIFormSelectBox(FIRST_OPERATOR).getValue();
         if ("/".equals(currentNode.getPath())) {
           statement.append(ROOT_XPATH_QUERY);
         } else {
           statement.append(StringUtils.replace(XPATH_QUERY, "$0", currentNode.getPath()));
-        } 
-        statement.append("[(jcr:contains(.,'").append(text.replaceAll("'", "''")).append("')) ").append(operator).append(" (");
+        }
+        statement.append("[(jcr:contains(.,'")
+                 .append(text.replaceAll("'", "''"))
+                 .append("')) ")
+                 .append(operator)
+                 .append(" (");
       }
       for(String constraint : constraints_) {
         statement.append(constraint);
@@ -153,7 +161,7 @@ public class UISimpleSearch extends UIForm {
     }
     return statement.toString();
   }
-  
+
   private String getSQLStatement() throws Exception {
     Node currentNode = getAncestorOfType(UIJCRExplorer.class).getCurrentNode();
     StringBuilder statement = new StringBuilder(1024);
@@ -171,13 +179,13 @@ public class UISimpleSearch extends UIForm {
           statement.append(ROOT_SQL_QUERY);
         } else {
           statement.append(StringUtils.replace(SQL_QUERY, "$0", currentNode.getPath()));
-        } 
-      } else {        
+        }
+      } else {
         if ("/".equals(currentNode.getPath())) {
           statement.append(ROOT_SQL_QUERY);
         } else {
           statement.append(StringUtils.replace(SQL_QUERY, "$0", currentNode.getPath()));
-        } 
+        }
         statement.append("AND CONTAINS(*,'").append(text.replaceAll("'", "''")).append("') ");
       }
       String operator = getUIFormSelectBox(FIRST_OPERATOR).getValue();
@@ -188,7 +196,7 @@ public class UISimpleSearch extends UIForm {
     }
     return statement.toString();
   }
-  
+
   static  public class SaveActionListener extends EventListener<UISimpleSearch> {
     public void execute(Event<UISimpleSearch> event) throws Exception {
       UISimpleSearch uiSimpleSearch = event.getSource();
@@ -204,13 +212,13 @@ public class UISimpleSearch extends UIForm {
       event.getRequestContext().addUIComponentToUpdateByAjax(uiSearchContainer);
     }
   }
-  
+
   static  public class CancelActionListener extends EventListener<UISimpleSearch> {
     public void execute(Event<UISimpleSearch> event) throws Exception {
       event.getSource().getAncestorOfType(UIJCRExplorer.class).cancelAction();
     }
   }
-  
+
   static  public class RemoveConstraintActionListener extends EventListener<UISimpleSearch> {
     public void execute(Event<UISimpleSearch> event) throws Exception {
       UISimpleSearch uiSimpleSearch = event.getSource();
@@ -223,12 +231,18 @@ public class UISimpleSearch extends UIForm {
         String newFirstVirtualConstraint = null;
         if(uiSimpleSearch.constraints_.get(0).trim().startsWith(OR)) {
           newFirstConstraint = uiSimpleSearch.constraints_.get(0).substring(3, uiSimpleSearch.constraints_.get(0).length());
-          newFirstVirtualConstraint = uiSimpleSearch.virtualConstraints_.get(0).substring(3, uiSimpleSearch.virtualConstraints_.get(0).length());
+          newFirstVirtualConstraint = uiSimpleSearch.virtualConstraints_.get(0)
+                                                                        .substring(3,
+                                                                                   uiSimpleSearch.virtualConstraints_.get(0)
+                                                                                                                     .length());
           uiSimpleSearch.constraints_.set(0, newFirstConstraint);
           uiSimpleSearch.virtualConstraints_.set(0, newFirstVirtualConstraint);
         } else if(uiSimpleSearch.constraints_.get(0).trim().startsWith(AND)) {
           newFirstConstraint = uiSimpleSearch.constraints_.get(0).substring(4, uiSimpleSearch.constraints_.get(0).length());
-          newFirstVirtualConstraint = uiSimpleSearch.virtualConstraints_.get(0).substring(4, uiSimpleSearch.virtualConstraints_.get(0).length());
+          newFirstVirtualConstraint = uiSimpleSearch.virtualConstraints_.get(0)
+                                                                        .substring(4,
+                                                                                   uiSimpleSearch.virtualConstraints_.get(0)
+                                                                                                                     .length());
           uiSimpleSearch.constraints_.set(0, newFirstConstraint);
           uiSimpleSearch.virtualConstraints_.set(0, newFirstVirtualConstraint);
         }
@@ -236,7 +250,7 @@ public class UISimpleSearch extends UIForm {
       event.getRequestContext().addUIComponentToUpdateByAjax(uiSimpleSearch.getParent());
     }
   }
-  
+
   static public class SearchActionListener extends EventListener<UISimpleSearch> {
     public void execute(Event<UISimpleSearch> event) throws Exception {
       UISimpleSearch uiSimpleSearch = event.getSource();
@@ -244,7 +258,7 @@ public class UISimpleSearch extends UIForm {
       UIJCRExplorer uiExplorer = uiSimpleSearch.getAncestorOfType(UIJCRExplorer.class);
       Node currentNode = uiExplorer.getCurrentNode();
       QueryManager queryManager = currentNode.getSession().getWorkspace().getQueryManager();
-      UIECMSearch uiECMSearch = uiSimpleSearch.getAncestorOfType(UIECMSearch.class); 
+      UIECMSearch uiECMSearch = uiSimpleSearch.getAncestorOfType(UIECMSearch.class);
       UISearchResult uiSearchResult = uiECMSearch.getChild(UISearchResult.class);
       UIApplication uiApp = uiSimpleSearch.getAncestorOfType(UIApplication.class);
       if(text == null && uiSimpleSearch.constraints_.size() == 0) {
@@ -253,13 +267,13 @@ public class UISimpleSearch extends UIForm {
         return;
       }
       uiSearchResult.setCategoryPathList(uiSimpleSearch.getCategoryPathList());
-      
+
       //TODO need review this code. should use validator for text field
       String[] arrFilterChar = {"&", "$", "@", ":","]", "[", "*", "%", "!"};
       if(text != null) {
         for(String filterChar : arrFilterChar) {
           if(text.indexOf(filterChar) > -1) {
-            uiApp.addMessage(new ApplicationMessage("UISimpleSearch.msg.inputSearch-invalid", null, 
+            uiApp.addMessage(new ApplicationMessage("UISimpleSearch.msg.inputSearch-invalid", null,
                 ApplicationMessage.WARNING));
             event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
             return;
@@ -274,7 +288,7 @@ public class UISimpleSearch extends UIForm {
         statement = uiSimpleSearch.getQueryStatement() + " order by @exo:dateCreated descending";
         if ((searchCategoryPathList != null) && (searchCategoryPathList.size() > 0)) {
           for (String searchCategoryPath : searchCategoryPathList) {
-            String statementReplace = statement.replaceAll("@exo:category = '" + searchCategoryPath + "'", 
+            String statementReplace = statement.replaceAll("@exo:category = '" + searchCategoryPath + "'",
                 "@jcr:mixinTypes = 'mix:referenceable'");
             statement = statementReplace;
           }
@@ -283,12 +297,12 @@ public class UISimpleSearch extends UIForm {
         statement = uiSimpleSearch.getSQLStatement() + " order by exo:dateCreated DESC";
         if ((searchCategoryPathList != null) && (searchCategoryPathList.size() > 0)) {
           for (String searchCategoryPath : searchCategoryPathList) {
-            String statementReplace = statement.replaceAll("exo:category = '" + searchCategoryPath + "'", 
+            String statementReplace = statement.replaceAll("exo:category = '" + searchCategoryPath + "'",
                 "jcr:mixinTypes = 'mix:referenceable'");
             statement = statementReplace;
           }
         }
-      }        
+      }
       long startTime = System.currentTimeMillis();
       try {
         Query query;
@@ -302,7 +316,7 @@ public class UISimpleSearch extends UIForm {
         uiSearchResult.updateGrid(true);
       } catch(Exception e) {
         LOG.error("Unexpected error", e);
-        uiApp.addMessage(new ApplicationMessage("UISimpleSearch.msg.query-invalid", null, 
+        uiApp.addMessage(new ApplicationMessage("UISimpleSearch.msg.query-invalid", null,
                                                 ApplicationMessage.WARNING));
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
         return;
@@ -313,7 +327,7 @@ public class UISimpleSearch extends UIForm {
       uiSimpleSearch.getUIFormInputInfo(UISimpleSearch.NODE_PATH).setValue(currentNode.getPath());
     }
   }
-  
+
   static  public class MoreConstraintsActionListener extends EventListener<UISimpleSearch> {
     public void execute(Event<UISimpleSearch> event) throws Exception {
       UISearchContainer uiSearchContainer = event.getSource().getParent();

@@ -10,11 +10,11 @@ import org.ow2.bonita.facade.runtime.ActivityInstance;
 
 public class SetPublicationTimer implements TxHook {
 
-	public void execute(APIAccessor api, ActivityInstance<ActivityBody> activity)
-			throws Exception {
-		// Get the publication date
-		Date startDate = (Date) api.getQueryRuntimeAPI().getProcessInstanceVariable(activity.getProcessInstanceUUID(), "startDate");
-		CommandTimer cTimer = new CommandTimer(activity.getProcessInstanceUUID(),activity.getActivityId(),startDate);
-		api.getCommandAPI().execute(cTimer);
-	}
+  public void execute(APIAccessor api, ActivityInstance<ActivityBody> activity)
+      throws Exception {
+    // Get the publication date
+    Date startDate = (Date) api.getQueryRuntimeAPI().getProcessInstanceVariable(activity.getProcessInstanceUUID(), "startDate");
+    CommandTimer cTimer = new CommandTimer(activity.getProcessInstanceUUID(),activity.getActivityId(),startDate);
+    api.getCommandAPI().execute(cTimer);
+  }
 }

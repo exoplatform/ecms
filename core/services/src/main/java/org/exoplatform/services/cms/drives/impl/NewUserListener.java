@@ -32,18 +32,18 @@ import org.exoplatform.services.organization.UserEventListener;
  * Nov 23, 2007 3:09:21 PM
  */
 public class NewUserListener extends UserEventListener {
-  
+
   private ManageDriveService driveService_ ;
   private RepositoryService jcrService_;
   private InitParams initParams_ ;
   private NodeHierarchyCreator nodeHierarchyCreator_ ;
   private String userPath_ ;
-  
+
   final static String PRIVATE_ALIAS = "userPrivate" ;
   final static String PUBLIC_ALIAS = "userPublic" ;
-  
+
   /**
-   * 
+   *
    * @param jcrService
    * @param driveService
    * @param nodeHierarchyCreatorService
@@ -51,21 +51,21 @@ public class NewUserListener extends UserEventListener {
    * @throws Exception
    */
   public NewUserListener(RepositoryService jcrService,
-      ManageDriveService driveService, 
-      NodeHierarchyCreator nodeHierarchyCreatorService, 
+      ManageDriveService driveService,
+      NodeHierarchyCreator nodeHierarchyCreatorService,
       InitParams params) throws Exception {
     nodeHierarchyCreator_ = nodeHierarchyCreatorService ;
     jcrService_ = jcrService ;
     driveService_ = driveService ;
     initParams_ = params ;
-    userPath_ = nodeHierarchyCreatorService.getJcrPath(BasePath.CMS_USERS_PATH) ; 
+    userPath_ = nodeHierarchyCreatorService.getJcrPath(BasePath.CMS_USERS_PATH) ;
   }
-  
+
   /**
-   * 
+   *
    */
   @SuppressWarnings({"unused", "hiding"})
-  public void preSave(User user, boolean isNew) throws Exception { 
+  public void preSave(User user, boolean isNew) throws Exception {
     String workspace = initParams_.getValueParam("workspace").getValue();
     String permissions = initParams_.getValueParam("permissions").getValue();
     permissions = permissions.concat(","+ user.getUserName());
@@ -81,19 +81,41 @@ public class NewUserListener extends UserEventListener {
     //Only user can access private drive
     String publicPath = nodeHierarchyCreator_.getJcrPath(PUBLIC_ALIAS) ;
     String privatePath = nodeHierarchyCreator_.getJcrPath(PRIVATE_ALIAS) ;
-    driveService_.addDrive(user.getUserName() + "|" + privatePath, workspace, user.getUserName(), homePath + "/" + privatePath, views, icon, 
-        viewPreferences, viewNonDocument, viewSideBar, showHiddenNode, allowCreateFolder, allowNodeTypesOnTree);
+    driveService_.addDrive(user.getUserName() + "|" + privatePath,
+                           workspace,
+                           user.getUserName(),
+                           homePath + "/" + privatePath,
+                           views,
+                           icon,
+                           viewPreferences,
+                           viewNonDocument,
+                           viewSideBar,
+                           showHiddenNode,
+                           allowCreateFolder,
+                           allowNodeTypesOnTree);
     //User and everyone can see public drive for user
-    driveService_.addDrive(user.getUserName() + "|" + publicPath, workspace, permissions, homePath + "/" + publicPath, views, icon, 
-        viewPreferences, viewNonDocument, viewSideBar, showHiddenNode, allowCreateFolder, allowNodeTypesOnTree);
+    driveService_.addDrive(user.getUserName() + "|" + publicPath,
+                           workspace,
+                           permissions,
+                           homePath + "/" + publicPath,
+                           views,
+                           icon,
+                           viewPreferences,
+                           viewNonDocument,
+                           viewSideBar,
+                           showHiddenNode,
+                           allowCreateFolder,
+                           allowNodeTypesOnTree);
   }
-  
+
   /**
-   * 
+   *
    */
   public void preDelete(User user) throws Exception {
     ManageableRepository repository = jcrService_.getCurrentRepository() ;
-    driveService_.removeDrive(user.getUserName() + "|" + nodeHierarchyCreator_.getJcrPath(PRIVATE_ALIAS), repository.getConfiguration().getName()) ;
-    driveService_.removeDrive(user.getUserName() + "|" + nodeHierarchyCreator_.getJcrPath(PUBLIC_ALIAS), repository.getConfiguration().getName()) ;
+    driveService_.removeDrive(user.getUserName() + "|"
+        + nodeHierarchyCreator_.getJcrPath(PRIVATE_ALIAS), repository.getConfiguration().getName());
+    driveService_.removeDrive(user.getUserName() + "|"
+        + nodeHierarchyCreator_.getJcrPath(PUBLIC_ALIAS), repository.getConfiguration().getName());
   }
 }

@@ -26,7 +26,7 @@ import org.exoplatform.webui.core.lifecycle.UIContainerLifecycle;
  * Author : Dang Van Minh
  *          minh.dang@exoplatform.com
  * Nov 23, 2006
- * 3:47:44 PM 
+ * 3:47:44 PM
  */
 @ComponentConfig(lifecycle = UIContainerLifecycle.class)
 public class UITemplateContainer extends UIContainer {

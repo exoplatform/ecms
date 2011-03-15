@@ -19,7 +19,7 @@ import org.exoplatform.webui.organization.account.UIUserSelector;
  * Created by The eXo Platform SARL
  * Author : Hoang Van Hung
  *          hunghvit@gmail.com
- * Dec 3, 2008  
+ * Dec 3, 2008
  */
 
 @ComponentConfig(
@@ -28,7 +28,7 @@ import org.exoplatform.webui.organization.account.UIUserSelector;
 )
 
 public class UIUserContainer extends UIContainer implements UIPopupComponent  {
-  
+
   public UIUserContainer() throws Exception {
     UIUserSelector uiUserSelector = getChild(UIUserSelector.class);
     if (uiUserSelector == null) {
@@ -41,15 +41,13 @@ public class UIUserContainer extends UIContainer implements UIPopupComponent  {
   }
 
   public void activate() throws Exception {
-    // TODO Auto-generated method stub
-    
+
   }
 
   public void deActivate() throws Exception {
-    // TODO Auto-generated method stub
-    
+
   }
-  
+
   static  public class AddUserActionListener extends EventListener<UIUserContainer> {
     public void execute(Event<UIUserContainer> event) throws Exception {
       UIUserContainer uiUserContainer = event.getSource();
@@ -60,6 +58,6 @@ public class UIUserContainer extends UIContainer implements UIPopupComponent  {
       UIPopupWindow uiPopup = uiParent.findComponentById("PopupUserSelector");
       uiPopup.setShow(false);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiParent);
-    }  
+    }
   }
 }

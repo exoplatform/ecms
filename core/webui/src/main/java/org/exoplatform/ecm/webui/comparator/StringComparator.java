@@ -33,10 +33,10 @@ import org.exoplatform.services.log.Log;
  * Author : Ly Dinh Quang
  *          quang.ly@exoplatform.com
  *          xxx5669@gmail.com
- * Jan 20, 2009  
+ * Jan 20, 2009
  */
 public class StringComparator implements Comparator<Node> {
-  
+
   public static final String ASCENDING_ORDER = "Ascending" ;
   public static final String DESCENDING_ORDER = "Descending" ;
   private String order_;
@@ -46,11 +46,11 @@ public class StringComparator implements Comparator<Node> {
     this.order_ = order ;
     this.type_ = type;
   }
-  
+
   private String getVersionName(Node node) throws Exception {
     return node.getBaseVersion().getName() ;
   }
-  
+
   private String versionName(Node node) throws Exception {
     String returnString = "";
     returnString = String.valueOf(Utils.isVersionable(node));
@@ -59,13 +59,13 @@ public class StringComparator implements Comparator<Node> {
     }
     return returnString;
   }
-  
+
   private boolean hasAuditHistory(Node node) throws Exception{
     ExoContainer container = ExoContainerContext.getCurrentContainer();
     AuditService auServ = (AuditService)container.getComponentInstanceOfType(AuditService.class);
     return auServ.hasHistory(node);
   }
-  
+
   private int getNumAuditHistory(Node node) throws Exception{
     ExoContainer container = ExoContainerContext.getCurrentContainer();
     AuditService auServ = (AuditService)container.getComponentInstanceOfType(AuditService.class);
@@ -75,7 +75,7 @@ public class StringComparator implements Comparator<Node> {
     }
     return 0;
   }
-  
+
   private String getAuditing(Node node) throws Exception {
     String returnString = "";
     returnString = String.valueOf(Utils.isAuditable(node));
@@ -84,14 +84,14 @@ public class StringComparator implements Comparator<Node> {
     }
     return returnString;
   }
-  
+
   private int compare(String s1, String s2) {
     if (ASCENDING_ORDER.equals(order_)) {
       return s1.compareTo(s2) ;
     }
     return s2.compareTo(s1) ;
   }
-  
+
   public int compare(Node node1, Node node2) {
     int returnCompare = 0;
     try {
@@ -112,7 +112,7 @@ public class StringComparator implements Comparator<Node> {
       }
     } catch (Exception e) {
       LOG.error("Unexpected error", e);
-    }    
+    }
     return returnCompare;
   }
 }

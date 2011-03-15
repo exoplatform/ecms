@@ -49,7 +49,7 @@ import org.exoplatform.webui.form.UIForm;
  * May 26, 2008
  */
 @ComponentConfig(
-    lifecycle = UIFormLifecycle.class, 
+    lifecycle = UIFormLifecycle.class,
     template = "app:/groovy/SingleContentViewer/config/UIWelcomeScreen.gtmpl",
     events = {
       @EventConfig(listeners = UIWelcomeScreen.SelectContentActionListener.class),
@@ -61,7 +61,7 @@ public class UIWelcomeScreen extends UIForm {
 
   /**
    * Instantiates a new uI welcome screen.
-   * 
+   *
    * @throws Exception the exception
    */
   public UIWelcomeScreen() throws Exception {
@@ -76,7 +76,7 @@ public class UIWelcomeScreen extends UIForm {
    * component's <code>addSelectContentActionListener<code> method. When
    * the selectContentAction event occurs, that object's appropriate
    * method is invoked.
-   * 
+   *
    * @see SelectContentActionEvent
    */
   public static class SelectContentActionListener extends EventListener<UIWelcomeScreen> {
@@ -91,7 +91,7 @@ public class UIWelcomeScreen extends UIForm {
       Utils.updatePopupWindow(uiWelcomeScreen, contentSelector, UIContentDialogForm.CONTENT_DIALOG_FORM_POPUP_WINDOW);
     }
   }
-  
+
   /**
    * The listener interface for receiving createNewContentAction events.
    * The class that is interested in processing a createNewContentAction
@@ -100,11 +100,11 @@ public class UIWelcomeScreen extends UIForm {
    * component's <code>addCreateNewContentActionListener<code> method. When
    * the createNewContentAction event occurs, that object's appropriate
    * method is invoked.
-   * 
+   *
    * @see CreateNewContentActionEvent
    */
   public static class CreateNewContentActionListener extends EventListener<UIWelcomeScreen> {
-    
+
     /* (non-Javadoc)
      * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
      */
@@ -123,11 +123,11 @@ public class UIWelcomeScreen extends UIForm {
    * component's <code>addAbortActionListener<code> method. When
    * the abortAction event occurs, that object's appropriate
    * method is invoked.
-   * 
+   *
    * @see AbortActionEvent
    */
   public static class AbortActionListener extends EventListener<UIWelcomeScreen> {
-    
+
     /* (non-Javadoc)
      * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
      */
@@ -140,45 +140,45 @@ public class UIWelcomeScreen extends UIForm {
       Page currentPage = dataStorage.getPage(currentPageNode.getPageReference());
       ArrayList<Object> applications = new ArrayList<Object>();
       applications.addAll(currentPage.getChildren());
-      ArrayList<ModelObject> applicationsTmp = currentPage.getChildren(); 
+      ArrayList<ModelObject> applicationsTmp = currentPage.getChildren();
       Collections.reverse(applicationsTmp);
       for (Object applicationObject : applicationsTmp) {
         if (applicationObject instanceof Container) continue;
         Application application = Application.class.cast(applicationObject);
         String applicationId = application.getId();
         if(applicationId == null) {
-        	continue;
+          continue;
         }
         PortletPreferences portletPreferences = dataStorage.getPortletPreferences(applicationId);
         if (portletPreferences == null) continue;
-        
+
         boolean isQuickCreate = false;
         String nodeIdentifier = null;
-        
+
         for (Object preferenceObject : portletPreferences.getPreferences()) {
-        	Preference preference = Preference.class.cast(preferenceObject);
+          Preference preference = Preference.class.cast(preferenceObject);
 
-        	if ("isQuickCreate".equals(preference.getName())) {
-        		isQuickCreate = Boolean.valueOf(preference.getValues().get(0).toString());
-        		if (!isQuickCreate) break;
-        	}
+          if ("isQuickCreate".equals(preference.getName())) {
+            isQuickCreate = Boolean.valueOf(preference.getValues().get(0).toString());
+            if (!isQuickCreate) break;
+          }
 
-        	if ("nodeIdentifier".equals(preference.getName())) {
-        		nodeIdentifier = preference.getValues().get(0).toString();
-        		if (nodeIdentifier == null || "".equals(nodeIdentifier)) break;
-        	}
+          if ("nodeIdentifier".equals(preference.getName())) {
+            nodeIdentifier = preference.getValues().get(0).toString();
+            if (nodeIdentifier == null || "".equals(nodeIdentifier)) break;
+          }
         }
 
         if (isQuickCreate && (nodeIdentifier == null || "".equals(nodeIdentifier))) {
-        	applications.remove(applicationObject);
+          applications.remove(applicationObject);
         }
       }
 //      currentPage.setChildren(applications);
       dataStorage.save(currentPage);
       UIPage uiPage = portal.findFirstComponentOfType(UIPage.class);
       if (uiPage != null) {
-      	uiPage.setChildren(null);
-      	PortalDataMapper.toUIPage(uiPage, currentPage);
+        uiPage.setChildren(null);
+        PortalDataMapper.toUIPage(uiPage, currentPage);
       }
       Utils.closePopupWindow(welcomeScreen, UIContentDialogForm.CONTENT_DIALOG_FORM_POPUP_WINDOW);
       Utils.updatePortal((PortletRequestContext)event.getRequestContext());

@@ -53,8 +53,8 @@ import org.exoplatform.webui.form.UIFormStringInput;
  */
 
 @ComponentConfig(
-    lifecycle = UIFormLifecycle.class, 
-    template = "classpath:groovy/ecm/webui/nodetype/selector/UINodeTypeSelector.gtmpl", 
+    lifecycle = UIFormLifecycle.class,
+    template = "classpath:groovy/ecm/webui/nodetype/selector/UINodeTypeSelector.gtmpl",
     events = {
               @EventConfig(listeners = UINodeTypeSelector.SearchNodeTypeActionListener.class),
               @EventConfig(listeners = UINodeTypeSelector.SaveActionListener.class, phase = Phase.DECODE),
@@ -73,21 +73,21 @@ public class UINodeTypeSelector extends UIForm implements ComponentSelector {
   private String         returnFieldName = null;
 
   private String         repositoryName  = null;
-  
+
   private List<String> selectedNodetypes = new ArrayList<String>();
 
   private List<String> documentNodetypes = new ArrayList<String>();
 
   private static final String ALL_DOCUMENT_TYPES = "ALL_DOCUMENT_TYPES";
-  
+
   private List<NodeType> lstNodetype;
 
   private String[] actions_ = {"Save", "Refresh", "Close"};
-  
+
   public String[] getActions() {
     return actions_;
   }
-  
+
   public String getRepositoryName() {
     return repositoryName;
   }
@@ -97,13 +97,13 @@ public class UINodeTypeSelector extends UIForm implements ComponentSelector {
   }
 
   public String getResource(String key) {
-    try { 
+    try {
       return Utils.getResourceBundle(Utils.LOCALE_WEBUI_DMS, key, getClass().getClassLoader());
     } catch (Exception e) {
       return key;
     }
   }
-  
+
   public List<NodeType> getLSTNodetype() {
     return lstNodetype;
   }
@@ -119,7 +119,7 @@ public class UINodeTypeSelector extends UIForm implements ComponentSelector {
   public void setDocumentNodetypes(List<String> documentNodetypes) {
     this.documentNodetypes = documentNodetypes;
   }
-  
+
   public UINodeTypeSelector() throws Exception {
     addChild(UINodeTypeSearch.class, null, "SearchNodeType");
     uiPageIterator_ = addChild(UIPageIterator.class, null, "UINodeTypeSelectorIterator");
@@ -160,23 +160,23 @@ public class UINodeTypeSelector extends UIForm implements ComponentSelector {
   }
 
   public List<NodeType> getAllNodeTypes() throws Exception{
-    List<NodeType> nodeList = new ArrayList<NodeType>();     
+    List<NodeType> nodeList = new ArrayList<NodeType>();
     ManageableRepository mRepository = getApplicationComponent(RepositoryService.class).getCurrentRepository() ;
-    NodeTypeManager ntManager = mRepository.getNodeTypeManager() ;    
+    NodeTypeManager ntManager = mRepository.getNodeTypeManager() ;
     NodeTypeIterator nodeTypeIter = ntManager.getAllNodeTypes() ;
     while(nodeTypeIter.hasNext()) {
       nodeList.add(nodeTypeIter.nextNodeType()) ;
-    }    
+    }
     Collections.sort(nodeList, new Utils.NodeTypeNameComparator()) ;
     return nodeList ;
   }
-  
+
   protected boolean getCheckedValue(List<String> values, String name) {
     if (values.contains(name))
       return true;
     return false;
   }
-  
+
   public void init(int currentPage, List<String> values) throws Exception {
     lstNodetype = getAllNodeTypes();
     TemplateService templateService = getApplicationComponent(TemplateService.class);
@@ -196,17 +196,17 @@ public class UINodeTypeSelector extends UIForm implements ComponentSelector {
 
     UIFormCheckBoxInput<String> uiCheckbox = new UIFormCheckBoxInput<String>(ALL_DOCUMENT_TYPES, null, ALL_DOCUMENT_TYPES);
     uiCheckbox.setOnChange("OnChange");
-    
+
     if (values != null) {
-      if (values.containsAll(getDocumentNodetypes()) && !values.contains(ALL_DOCUMENT_TYPES)) 
-        values.add(ALL_DOCUMENT_TYPES);   
+      if (values.containsAll(getDocumentNodetypes()) && !values.contains(ALL_DOCUMENT_TYPES))
+        values.add(ALL_DOCUMENT_TYPES);
       if (values.contains(uiCheckbox.getValue())) {
         uiCheckbox.setChecked(true);
         if (!getSelectedNodetypes().contains(uiCheckbox.getValue())) getSelectedNodetypes().add(uiCheckbox.getValue());
        }
     }
-     
-    addChild(uiCheckbox);  
+
+    addChild(uiCheckbox);
     for(NodeType nt : lstNodetype) {
       String ntName = nt.getName();
       uiCheckbox = new UIFormCheckBoxInput<String>(ntName, ntName, ntName);
@@ -218,7 +218,7 @@ public class UINodeTypeSelector extends UIForm implements ComponentSelector {
         }
       }
       removeChildById(ntName);
-      addChild(uiCheckbox);  
+      addChild(uiCheckbox);
     }
     if (values == null) getSelectedNodetypes().clear();
   }
@@ -252,7 +252,7 @@ public class UINodeTypeSelector extends UIForm implements ComponentSelector {
       event.getRequestContext().addUIComponentToUpdateByAjax(uiPopup);
     }
   }
-  
+
   public static class SaveActionListener extends EventListener<UINodeTypeSelector> {
     public void execute(Event<UINodeTypeSelector> event) throws Exception {
       UINodeTypeSelector uiNodeTypeSelect = event.getSource();
@@ -267,13 +267,13 @@ public class UINodeTypeSelector extends UIForm implements ComponentSelector {
         }
       }
       ((UISelectable)(uiNodeTypeSelect).getSourceComponent()).doSelect(returnField, selectedNodetypes);
-      selectedNodetypes.clear();      
+      selectedNodetypes.clear();
       UIPopupWindow uiPopup = event.getSource().getAncestorOfType(UIPopupWindow.class);
       if (uiPopup != null) {
         uiPopup.setShow(false);
         uiPopup.setRendered(false);
-        //UIPopupContainer uiPopupContainer = uiPopup.getParent();    	
-    	event.getRequestContext().addUIComponentToUpdateByAjax(uiPopup);
+        //UIPopupContainer uiPopupContainer = uiPopup.getParent();
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiPopup);
       }
       UIComponent component = event.getSource().getSourceComponent().getParent();
       if (component != null) {
@@ -299,7 +299,7 @@ public class UINodeTypeSelector extends UIForm implements ComponentSelector {
   }
 
   public static class OnChangeActionListener extends EventListener<UINodeTypeSelector> {
-    
+
     private void updateCheckBox(List<String> selectedNodetypes, UIFormCheckBoxInput uiCheckBox) {
       if (uiCheckBox.isChecked()) {
         if (!selectedNodetypes.contains(uiCheckBox.getValue().toString()))
@@ -308,7 +308,7 @@ public class UINodeTypeSelector extends UIForm implements ComponentSelector {
         selectedNodetypes.remove(uiCheckBox.getValue().toString());
       }
     }
-    
+
     public void execute(Event<UINodeTypeSelector> event) throws Exception {
       UINodeTypeSelector uiNodeTypeSelect = event.getSource();
       List<String> selectedNodetypes = uiNodeTypeSelect.getSelectedNodetypes();
@@ -339,7 +339,7 @@ public class UINodeTypeSelector extends UIForm implements ComponentSelector {
       event.getRequestContext().addUIComponentToUpdateByAjax(uiPopup);
     }
   }
-  
+
   public static class CloseActionListener extends EventListener<UINodeTypeSelector> {
     public void execute(Event<UINodeTypeSelector> event) throws Exception {
       UIPopupWindow uiPopup = event.getSource().getAncestorOfType(UIPopupWindow.class);
@@ -347,8 +347,8 @@ public class UINodeTypeSelector extends UIForm implements ComponentSelector {
       uiPopup.setRendered(false);
       UIComponent component = event.getSource().getSourceComponent().getParent();
       if (component != null) {
-    	//UIPopupContainer uiPopupContainer = uiPopup.getParent();    	
-    	event.getRequestContext().addUIComponentToUpdateByAjax(uiPopup);
+      //UIPopupContainer uiPopupContainer = uiPopup.getParent();
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiPopup);
         event.getRequestContext().addUIComponentToUpdateByAjax(component);
       }
     }

@@ -60,7 +60,7 @@ import org.exoplatform.webui.form.UIFormStringInput;
  * Created by The eXo Platform SARL
  * Author : Pham Tuan
  *          phamtuanchip@yahoo.de
- * Dec 19, 2006 9:05:58 AM 
+ * Dec 19, 2006 9:05:58 AM
  */
 @ComponentConfig(
     lifecycle = UIFormLifecycle.class,
@@ -85,23 +85,23 @@ public class UIPathConfig extends UIForm implements UISelectable{
   protected boolean isEdit_ = false;
   private List<String> repoNames_ = new ArrayList<String>();
   private List<String> wsNames_ = new ArrayList<String>();
-  
+
   public UIPathConfig()throws Exception {
     List<SelectItemOption<String>> Options = new ArrayList<SelectItemOption<String>>();
     List<SelectItemOption<String>> repositories = new ArrayList<SelectItemOption<String>>();
     List<SelectItemOption<String>> workspaces = new ArrayList<SelectItemOption<String>>();
-    UIFormSelectBox repository = 
+    UIFormSelectBox repository =
       new UIFormSelectBox(UINewConfigForm.FIELD_REPOSITORY, UINewConfigForm.FIELD_REPOSITORY, repositories);
     repository.setOnChange("ChangeRepo");
     addChild(repository);
-    UIFormSelectBox workspace = 
+    UIFormSelectBox workspace =
       new UIFormSelectBox(UINewConfigForm.FIELD_WORKSPACE, UINewConfigForm.FIELD_WORKSPACE, workspaces);
     workspace.setOnChange("ChangeWorkspace");
     addChild(workspace);
     UIFormInputSetWithAction categoryPathSelect = new UIFormInputSetWithAction(FIELD_PATHSELECT);
     categoryPathSelect.addUIFormInput(new UIFormStringInput(UINewConfigForm.FIELD_CATEGORYPATH, null, null));
     addUIComponentInput(categoryPathSelect);
-    UIFormCheckBoxInput uiEnableSearch = 
+    UIFormCheckBoxInput uiEnableSearch =
       new UIFormCheckBoxInput<Boolean>(UINewConfigForm.FIELD_SEARCH_PATH_ENABLE, null, null);
     uiEnableSearch.setOnChange("EnableSearch");
     addChild(uiEnableSearch);
@@ -109,9 +109,9 @@ public class UIPathConfig extends UIForm implements UISelectable{
     ResourceBundle res = context.getApplicationResourceBundle();
     String explainMsg = res.getString("UIPathConfig.msg.explain");
     UIFormInputSetWithAction uiSearchPathSelect = new UIFormInputSetWithAction(FIELD_SEARCH_PATHSELECT);
-    uiSearchPathSelect.addUIFormInput(new UIFormInputInfo(FIELD_SEARCH_EXPLAIN, 
+    uiSearchPathSelect.addUIFormInput(new UIFormInputInfo(FIELD_SEARCH_EXPLAIN,
         null, explainMsg));
-    uiSearchPathSelect.addUIFormInput(new UIFormStringInput(UINewConfigForm.FIELD_SEARCH_LOCATION, 
+    uiSearchPathSelect.addUIFormInput(new UIFormStringInput(UINewConfigForm.FIELD_SEARCH_LOCATION,
         null, null).setEditable(false));
     addUIComponentInput(uiSearchPathSelect);
     addChild(new UIFormCheckBoxInput<Boolean>(UINewConfigForm.FIELD_FILTER_CATEGORY, null, null));
@@ -132,11 +132,11 @@ public class UIPathConfig extends UIForm implements UISelectable{
     UIConfigTabPane uiTabPane = getAncestorOfType(UIConfigTabPane.class);
     return uiTabPane.getWorkSpaceOption();
   }
-  
-  public PortletPreferences getPortletPreferences() {    
+
+  public PortletPreferences getPortletPreferences() {
     return getAncestorOfType(UIBrowseContentPortlet.class).getPortletPreferences();
   }
-  
+
   private List<SelectItemOption<String>> getRepoOption() throws Exception {
     List<SelectItemOption<String>> options = new ArrayList<SelectItemOption<String>>();
     RepositoryService repositoryService = getApplicationComponent(RepositoryService.class);
@@ -146,12 +146,12 @@ public class UIPathConfig extends UIForm implements UISelectable{
     options.add(new SelectItemOption<String>(repo.getName(), repo.getName()));
     return options;
   }
-  
+
   private ManageableRepository getRepository(String repositoryName) throws Exception{
     RepositoryService repositoryService = getApplicationComponent(RepositoryService.class);
     return repositoryService.getCurrentRepository();
-  } 
-  
+  }
+
   private List<SelectItemOption<String>> getWorkSpaceOption(String repository) throws Exception {
     List<SelectItemOption<String>> options = new ArrayList<SelectItemOption<String>>();
     Session session;
@@ -167,11 +167,11 @@ public class UIPathConfig extends UIForm implements UISelectable{
       } catch(AccessDeniedException ace) {
         continue;
       }
-    }   
+    }
     return options;
   }
-  
-  public void initForm(PortletPreferences preference, String repository, 
+
+  public void initForm(PortletPreferences preference, String repository,
       String workSpace, boolean isAddNew) throws Exception {
     String path = preference.getValue(Utils.JCR_PATH, "");
     boolean isAllowPublish = Boolean.parseBoolean(preference.getValue(Utils.CB_ALLOW_PUBLISH, ""));
@@ -179,7 +179,7 @@ public class UIPathConfig extends UIForm implements UISelectable{
     if (hasSearchLocation == null || hasSearchLocation.length() < 1) hasSearchLocation = "false";
     String hasToolBar = "true";
     String filterCategory = "true";
-    String hasRefDoc ="true"; 
+    String hasRefDoc ="true";
     String hasChildDoc = "true";
     String hasTagMap = "true";
     String hasComment = "true";
@@ -208,7 +208,7 @@ public class UIPathConfig extends UIForm implements UISelectable{
     }
     workSpaceField.setValue(workSpace);
     UIFormInputSetWithAction categoryPathSelect = getChildById(FIELD_PATHSELECT);
-    UIFormStringInput categoryPathField = 
+    UIFormStringInput categoryPathField =
       categoryPathSelect.getChildById(UINewConfigForm.FIELD_CATEGORYPATH);
     categoryPathField.setEditable(false);
 
@@ -245,7 +245,7 @@ public class UIPathConfig extends UIForm implements UISelectable{
         enableVoteField.setChecked(Boolean.parseBoolean(hasVote));
         enableSearchLocation.setChecked(Boolean.parseBoolean(hasSearchLocation));
         numbPerPageField.setValue(itemPerPage);
-        setActions(UINewConfigForm.ADD_NEW_ACTION);        
+        setActions(UINewConfigForm.ADD_NEW_ACTION);
       } else {
         setActions(UINewConfigForm.NORMAL_ACTION);
       }
@@ -306,9 +306,9 @@ public class UIPathConfig extends UIForm implements UISelectable{
   @SuppressWarnings("unchecked")
   public List<SelectItemOption<String>> getTemplateOption(String repository) throws Exception {
     List<SelectItemOption<String>> options = new ArrayList<SelectItemOption<String>>();
-    ManageViewService viewService = 
+    ManageViewService viewService =
       (ManageViewService)PortalContainer.getComponent(ManageViewService.class);
-    List<Node> scriptTemplates = viewService.getAllTemplates(BasePath.CB_PATH_TEMPLATES, repository, 
+    List<Node> scriptTemplates = viewService.getAllTemplates(BasePath.CB_PATH_TEMPLATES, repository,
           SessionProviderFactory.createSystemProvider());
     for(Node template:scriptTemplates) {
       options.add(new SelectItemOption<String>(template.getName(),template.getName()));
@@ -316,7 +316,7 @@ public class UIPathConfig extends UIForm implements UISelectable{
     Collections.sort(options, new ItemOptionNameComparator());
     return options;
   }
-  
+
   @SuppressWarnings("unused")
   public void doSelect(String selectField, Object value) {
     UIFormStringInput uiPath = findComponentById(selectField);
@@ -333,7 +333,7 @@ public class UIPathConfig extends UIForm implements UISelectable{
     public void execute(Event<UIPathConfig> event) throws Exception {
       UIPathConfig uiForm = event.getSource();
       UIBrowseContentPortlet uiBrowseContentPortlet = uiForm.getAncestorOfType(UIBrowseContentPortlet.class);
-      UIBrowseContainer uiBCContainer = 
+      UIBrowseContainer uiBCContainer =
         uiBrowseContentPortlet.findFirstComponentOfType(UIBrowseContainer.class);
       PortletPreferences prefs = uiBCContainer.getPortletPreferences();
       UIFormSelectBox workSpaceField = uiForm.getChildById(UINewConfigForm.FIELD_WORKSPACE);
@@ -344,21 +344,21 @@ public class UIPathConfig extends UIForm implements UISelectable{
       String jcrPath = categoryPathField.getValue();
       UIApplication uiApp = uiForm.getAncestorOfType(UIApplication.class);
       if((jcrPath == null) || (jcrPath.trim().length() == 0)) {
-        uiApp.addMessage(new ApplicationMessage("UIPathConfig.msg.require-path", null, 
+        uiApp.addMessage(new ApplicationMessage("UIPathConfig.msg.require-path", null,
                                               ApplicationMessage.WARNING));
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
         return;
-      } 
+      }
       try {
-        NodeFinder nodeFinder = uiForm.getApplicationComponent(NodeFinder.class);        
+        NodeFinder nodeFinder = uiForm.getApplicationComponent(NodeFinder.class);
         Node nodePath = (Node) nodeFinder.getItem(repository, workSpace, jcrPath);
       } catch(PathNotFoundException path) {
-        uiApp.addMessage(new ApplicationMessage("UIPathConfig.msg.invalid-path", null, 
+        uiApp.addMessage(new ApplicationMessage("UIPathConfig.msg.invalid-path", null,
                                               ApplicationMessage.WARNING));
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
         return;
       } catch(AccessDeniedException ace) {
-        uiApp.addMessage(new ApplicationMessage("UIPathConfig.msg.access-denied", null, 
+        uiApp.addMessage(new ApplicationMessage("UIPathConfig.msg.access-denied", null,
                                                 ApplicationMessage.WARNING));
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
         return;
@@ -386,14 +386,14 @@ public class UIPathConfig extends UIForm implements UISelectable{
       boolean hasTagMap = uiForm.getUIFormCheckBoxInput(UINewConfigForm.FIELD_ENABLETAGMAP).isChecked();
       boolean hasComment = uiForm.getUIFormCheckBoxInput(UINewConfigForm.FIELD_ENABLECOMMENT).isChecked();
       boolean hasVote = uiForm.getUIFormCheckBoxInput(UINewConfigForm.FIELD_ENABLEVOTE).isChecked();
-      boolean hasEnableSearch = 
+      boolean hasEnableSearch =
         uiForm.getUIFormCheckBoxInput(UINewConfigForm.FIELD_SEARCH_PATH_ENABLE).isChecked();
       String searchLocation = null;
       if(hasEnableSearch) {
-        searchLocation = 
+        searchLocation =
           ((UIFormStringInput)uiForm.findComponentById(UINewConfigForm.FIELD_SEARCH_LOCATION)).getValue();
         if(searchLocation == null || searchLocation.length() < 1) {
-          uiApp.addMessage(new ApplicationMessage("UIPathConfig.msg.enter-search-location", null, 
+          uiApp.addMessage(new ApplicationMessage("UIPathConfig.msg.enter-search-location", null,
               ApplicationMessage.WARNING));
           event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
           return;
@@ -406,14 +406,14 @@ public class UIPathConfig extends UIForm implements UISelectable{
       prefs.setValue(Utils.CB_FILTER_CATEGORY, String.valueOf(filterCategory));
       prefs.setValue(Utils.CB_NB_PER_PAGE, itemPerPage);
       prefs.setValue(Utils.CB_TEMPLATE, template);
-      prefs.setValue(Utils.CB_BOX_TEMPLATE, boxTemplate);   
+      prefs.setValue(Utils.CB_BOX_TEMPLATE, boxTemplate);
       prefs.setValue(Utils.CB_ALLOW_PUBLISH, String.valueOf(isAllowPublish));
       prefs.setValue(Utils.CB_REF_DOCUMENT, String.valueOf(hasRefDoc));
-      prefs.setValue(Utils.CB_CHILD_DOCUMENT, String.valueOf(hasChildDoc));    
-      prefs.setValue(Utils.CB_VIEW_TOOLBAR, String.valueOf(hasToolBar));    
-      prefs.setValue(Utils.CB_VIEW_TAGMAP, String.valueOf(hasTagMap)); 
-      prefs.setValue(Utils.CB_VIEW_COMMENT, String.valueOf(hasComment)); 
-      prefs.setValue(Utils.CB_VIEW_VOTE, String.valueOf(hasVote)); 
+      prefs.setValue(Utils.CB_CHILD_DOCUMENT, String.valueOf(hasChildDoc));
+      prefs.setValue(Utils.CB_VIEW_TOOLBAR, String.valueOf(hasToolBar));
+      prefs.setValue(Utils.CB_VIEW_TAGMAP, String.valueOf(hasTagMap));
+      prefs.setValue(Utils.CB_VIEW_COMMENT, String.valueOf(hasComment));
+      prefs.setValue(Utils.CB_VIEW_VOTE, String.valueOf(hasVote));
       prefs.setValue(Utils.CB_ENABLE_SEARCH_LOCATION, String.valueOf(hasEnableSearch));
       if (hasEnableSearch) {
         prefs.setValue(Utils.CB_SEARCH_LOCATION, searchLocation);
@@ -428,7 +428,7 @@ public class UIPathConfig extends UIForm implements UISelectable{
       uiConfigTabPane.setNewConfig(false);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiConfigTabPane);
     }
-  }  
+  }
 
   public static class AddActionListener extends EventListener<UIPathConfig>{
     public void execute(Event<UIPathConfig> event) throws Exception {
@@ -455,7 +455,7 @@ public class UIPathConfig extends UIForm implements UISelectable{
       UIPathConfig uiForm = event.getSource();
       UIConfigTabPane uiConfigTabPane = uiForm.getAncestorOfType(UIConfigTabPane.class);
       uiForm.isEdit_ =  false;
-      uiConfigTabPane.setIsChangeValue(false);      
+      uiConfigTabPane.setIsChangeValue(false);
       uiConfigTabPane.setNewConfig(true);
       uiConfigTabPane.showNewConfigForm(false);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiConfigTabPane);
@@ -482,7 +482,7 @@ public class UIPathConfig extends UIForm implements UISelectable{
       event.getRequestContext().addUIComponentToUpdateByAjax(uiConfig);
     }
   }
-  
+
   public static class ChangeRepoActionListener extends EventListener<UIPathConfig>{
     public void execute(Event<UIPathConfig> event) throws Exception {
       UIPathConfig uiForm = event.getSource();
@@ -498,29 +498,29 @@ public class UIPathConfig extends UIForm implements UISelectable{
       event.getRequestContext().addUIComponentToUpdateByAjax(uiForm);
     }
   }
-  
+
   public static class ChangeWorkspaceActionListener extends EventListener<UIPathConfig>{
     public void execute(Event<UIPathConfig> event) throws Exception {
       UIPathConfig uiForm = event.getSource();
       UIConfigTabPane uiConfigTabPane = uiForm.getAncestorOfType(UIConfigTabPane.class);
       uiConfigTabPane.setIsChangeValue(true);
       UIFormInputSetWithAction categoryPathSelect = uiForm.getChildById(FIELD_PATHSELECT);
-      UIFormStringInput categoryPathField = 
+      UIFormStringInput categoryPathField =
         categoryPathSelect.getChildById(UINewConfigForm.FIELD_CATEGORYPATH);
-      categoryPathField.setValue("/");      
+      categoryPathField.setValue("/");
       event.getRequestContext().addUIComponentToUpdateByAjax(uiForm);
     }
   }
-  
+
   public static class EnableSearchActionListener extends EventListener<UIPathConfig>{
     public void execute(Event<UIPathConfig> event) throws Exception {
       UIPathConfig uiForm = event.getSource();
-      UIFormCheckBoxInput uiEnableSearch = 
+      UIFormCheckBoxInput uiEnableSearch =
         uiForm.getUIFormCheckBoxInput(UINewConfigForm.FIELD_SEARCH_PATH_ENABLE);
       UIFormInputSetWithAction uiSearchLocation = uiForm.getChildById(FIELD_SEARCH_PATHSELECT);
       uiSearchLocation.setRendered(uiEnableSearch.isChecked());
       if(uiEnableSearch.isChecked()) {
-        uiSearchLocation.setActionInfo(UINewConfigForm.FIELD_SEARCH_LOCATION, 
+        uiSearchLocation.setActionInfo(UINewConfigForm.FIELD_SEARCH_LOCATION,
             new String[] {"AddSearchLocation"});
       } else {
         uiSearchLocation.setActionInfo(UINewConfigForm.FIELD_SEARCH_LOCATION, null);
@@ -528,14 +528,14 @@ public class UIPathConfig extends UIForm implements UISelectable{
       event.getRequestContext().addUIComponentToUpdateByAjax(uiForm);
     }
   }
-  
+
   static public class AddSearchLocationActionListener extends EventListener<UIPathConfig> {
     public void execute(Event<UIPathConfig> event) throws Exception {
       UIPathConfig uiForm  = event.getSource();
       UIConfigTabPane uiConfig = uiForm.getAncestorOfType(UIConfigTabPane.class);
       RepositoryService repositoryService = uiForm.getApplicationComponent(RepositoryService.class);
       String repo = repositoryService.getCurrentRepository().getConfiguration().getName();
-      String workSpace = 
+      String workSpace =
         repositoryService.getCurrentRepository().getConfiguration().getDefaultWorkspaceName();
       uiConfig.initPopupPathSelect(uiForm, repo, workSpace, UINewConfigForm.FIELD_SEARCH_LOCATION, false);
       uiForm.isEdit_ = true;

@@ -66,7 +66,7 @@ public class RecordsJob extends BaseJob {
           String workspaceName = workspaces[i];
           if (LOG.isDebugEnabled())
             LOG.debug("Search File plans in workspace : " + workspaceName);
-          
+
           session = repository.getSystemSession(workspaceName);
           QueryManager queryManager = session.getWorkspace().getQueryManager();
           Query query = queryManager.createQuery(QUERY, Query.SQL);

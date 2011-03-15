@@ -41,21 +41,21 @@ import org.exoplatform.services.wcm.webcontent.WebContentSchemaHandler;
  * Mar 5, 2009
  */
 public class PostCreateContentEventListener extends Listener<CmsService, Node>{
-  
+
   private static final Log log = ExoLogger.getLogger(PostCreateContentEventListener.class);
 
   /** The publication service. */
   private WCMPublicationService publicationService;
-  
+
   /** The publication service. */
   private WCMConfigurationService configurationService;
-  
+
   /** The web content schema handler. */
   private WebContentSchemaHandler webContentSchemaHandler;
-  
+
   /**
    * Instantiates a new post create content event listener.
-   * 
+   *
    * @param publicationService the publication service
    * @param configurationService the configuration service
    * @param schemaConfigService the schema config service
@@ -74,18 +74,18 @@ public class PostCreateContentEventListener extends Listener<CmsService, Node>{
     if(currentNode.canAddMixin("exo:rss-enable")) {
       currentNode.addMixin("exo:rss-enable");
       if(!currentNode.hasProperty("exo:title")) {
-        currentNode.setProperty("exo:title",currentNode.getName()); 
-      }      
+        currentNode.setProperty("exo:title",currentNode.getName());
+      }
     }
-    if(currentNode.isNodeType("exo:cssFile") || 
+    if(currentNode.isNodeType("exo:cssFile") ||
         currentNode.isNodeType("exo:jsFile") || currentNode.getParent().isNodeType("exo:actionStorage")){
-      return;    
+      return;
     }
-    
+
     Session session = currentNode.getSession();
     String nodePath = currentNode.getPath();
     currentNode.getSession().save();
-    
+
     if (currentNode instanceof NodeImpl && !((NodeImpl)currentNode).isValid()) {
       currentNode = (Node)session.getItem(nodePath);
       ExoContainer container = ExoContainerContext.getCurrentContainer();
@@ -97,10 +97,10 @@ public class PostCreateContentEventListener extends Listener<CmsService, Node>{
           currentNode = linkManager.getTarget(currentNode, true);
         }
       }
-    }    
+    }
 
     String siteName = Util.getPortalRequestContext().getPortalOwner();
-    String remoteUser = Util.getPortalRequestContext().getRemoteUser();    	
+    String remoteUser = Util.getPortalRequestContext().getRemoteUser();
     if (log.isInfoEnabled()) log.info(currentNode.getPath() + "::" + siteName + "::"+remoteUser);
     if (remoteUser != null) publicationService.updateLifecyleOnChangeContent(currentNode, siteName, remoteUser);
   }

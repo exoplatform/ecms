@@ -21,5 +21,5 @@ public interface CmsScript {
   public void execute(Object context) throws Exception;
 
   public void setParams(String[] params);
-  
+
 }

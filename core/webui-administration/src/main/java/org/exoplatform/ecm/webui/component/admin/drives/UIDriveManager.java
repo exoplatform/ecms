@@ -40,21 +40,21 @@ import org.exoplatform.webui.ext.manager.UIAbstractManager;
  * Author : Tran The Trong
  *          trongtt@exoplatform.com
  * Sep 19, 2006
- * 11:45:11 AM 
+ * 11:45:11 AM
  */
 @ComponentConfig(lifecycle = UIContainerLifecycle.class)
 public class UIDriveManager extends UIAbstractManager {
-  
+
   public UIDriveManager() throws Exception {
     addChild(UIDriveList.class, null, null) ;
   }
-  
+
   public void refresh() throws Exception  {
     update();
   }
-  
+
   public void update() throws Exception  {
-    UIDriveList uiDriveList = getChild(UIDriveList.class); 
+    UIDriveList uiDriveList = getChild(UIDriveList.class);
     uiDriveList.updateDriveListGrid(1);
   }
   public void initPopup(String id) throws Exception {
@@ -62,7 +62,7 @@ public class UIDriveManager extends UIAbstractManager {
     UIPopupWindow uiPopup = getChildById(id) ;
     if(uiPopup == null) {
       uiPopup = addChild(UIPopupWindow.class, null, id) ;
-      uiPopup.setWindowSize(580,420) ;      
+      uiPopup.setWindowSize(580,420) ;
       uiDriveForm = createUIComponent(UIDriveForm.class, null, null) ;
     } else {
       uiDriveForm = uiPopup.findFirstComponentOfType(UIDriveForm.class) ;
@@ -72,12 +72,12 @@ public class UIDriveManager extends UIAbstractManager {
     uiPopup.setShow(true) ;
     uiPopup.setResizable(true) ;
   }
-  
+
   public void initPopupPermission(String membership) throws Exception {
     removeChildById(UIDriveForm.POPUP_DRIVEPERMISSION) ;
     UIPopupWindow uiPopup = addChild(UIPopupWindow.class, null, UIDriveForm.POPUP_DRIVEPERMISSION);
     uiPopup.setWindowSize(580, 300);
-    UIPermissionSelector uiECMPermission = 
+    UIPermissionSelector uiECMPermission =
       createUIComponent(UIPermissionSelector.class, null, null) ;
     uiECMPermission.setSelectedMembership(true);
     if(membership != null && membership.indexOf(":/") > -1) {
@@ -89,12 +89,12 @@ public class UIDriveManager extends UIAbstractManager {
     uiECMPermission.setSourceComponent(uiDriveForm, new String[] {UIDriveInputSet.FIELD_PERMISSION}) ;
     uiPopup.setShow(true) ;
   }
-  
+
   public void initPopupNodeTypeSelector(String nodeTypes) throws Exception {
     removeChildById(UIDriveForm.POPUP_NODETYPE_SELECTOR) ;
     UIPopupWindow uiPopup = addChild(UIPopupWindow.class, null, UIDriveForm.POPUP_NODETYPE_SELECTOR);
     uiPopup.setWindowSize(580, 300);
-    UINodeTypeSelector uiNodeTypeSelector = 
+    UINodeTypeSelector uiNodeTypeSelector =
       createUIComponent(UINodeTypeSelector.class, null, null) ;
     uiNodeTypeSelector.setRepositoryName(getAncestorOfType(UIECMAdminPortlet.class).getPreferenceRepository());
     List<String> nodeList = new ArrayList<String>();
@@ -106,21 +106,21 @@ public class UIDriveManager extends UIAbstractManager {
     UIDriveForm uiDriveForm = findFirstComponentOfType(UIDriveForm.class) ;
     uiNodeTypeSelector.setSourceComponent(uiDriveForm, new String[] {UIDriveInputSet.FIELD_ALLOW_NODETYPES_ON_TREE}) ;
     uiPopup.setShow(true) ;
-  }  
-  
+  }
+
   private String getSystemWorkspaceName(String repository) throws RepositoryException, RepositoryConfigurationException {
     RepositoryService repositoryService = getApplicationComponent(RepositoryService.class);
     ManageableRepository manageableRepository = repositoryService.getRepository(repository);
     return manageableRepository.getConfiguration().getSystemWorkspaceName();
   }
-  
+
   public void initPopupJCRBrowser(String workspace, boolean isDisable) throws Exception {
     removeChildById("JCRBrowser") ;
     removeChildById("JCRBrowserAssets") ;
     String repository = getAncestorOfType(UIECMAdminPortlet.class).getPreferenceRepository() ;
     UIPopupWindow uiPopup = addChild(UIPopupWindow.class, null, "JCRBrowser");
     uiPopup.setWindowSize(610, 300);
-    UIOneNodePathSelector uiOneNodePathSelector = 
+    UIOneNodePathSelector uiOneNodePathSelector =
       createUIComponent(UIOneNodePathSelector.class, null, null);
     uiOneNodePathSelector.setIsDisable(workspace, isDisable) ;
     uiOneNodePathSelector.setShowRootPathSelect(true) ;
@@ -137,13 +137,13 @@ public class UIDriveManager extends UIAbstractManager {
     uiOneNodePathSelector.setSourceComponent(uiDriveForm, new String[] {UIDriveInputSet.FIELD_HOMEPATH}) ;
     uiPopup.setShow(true) ;
   }
-  
+
   public void initPopupJCRBrowserAssets(String workspace) throws Exception {
     removeChildById("JCRBrowserAssets") ;
     removeChildById("JCRBrowser") ;
     UIPopupWindow uiPopup = addChild(UIPopupWindow.class, null, "JCRBrowserAssets");
     uiPopup.setWindowSize(610, 300);
-    UIOneNodePathSelector uiOneNodePathSelector = 
+    UIOneNodePathSelector uiOneNodePathSelector =
       createUIComponent(UIOneNodePathSelector.class, null, null);
     UIDriveForm uiDriveForm = findFirstComponentOfType(UIDriveForm.class) ;
     String repository = getAncestorOfType(UIECMAdminPortlet.class).getPreferenceRepository() ;

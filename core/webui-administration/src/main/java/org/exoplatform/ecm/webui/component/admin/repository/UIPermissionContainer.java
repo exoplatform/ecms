@@ -28,14 +28,14 @@ import org.exoplatform.webui.form.UIFormStringInput;
  * Created by The eXo Platform SARL
  * Author : Pham Tuan
  *          tuan.pham@exoplatform.com
- * 02-07-2007  
+ * 02-07-2007
  */
 @ComponentConfig(lifecycle = UIContainerLifecycle.class)
 
 public class UIPermissionContainer  extends UIContainer implements UIPopupComponent {
 
   public UIPermissionContainer() throws Exception {
-    UIPermissionSelector uiECMPermission = 
+    UIPermissionSelector uiECMPermission =
       addChild(UIPermissionSelector.class, null, "PermissionPopupSelect") ;
     UIWorkspacePermissionForm uiWsPermissionForm = addChild(UIWorkspacePermissionForm.class, null, null) ;
     uiECMPermission.setSelectedMembership(true);
@@ -43,7 +43,7 @@ public class UIPermissionContainer  extends UIContainer implements UIPopupCompon
     uiECMPermission.setSourceComponent(uiWsPermissionForm, null) ;
   }
 
-  protected void setValues(String user, String permission) {    
+  protected void setValues(String user, String permission) {
     UIWorkspacePermissionForm uiWsPremForm = getChild(UIWorkspacePermissionForm.class) ;
     uiWsPremForm.reset() ;
     UIFormStringInput permissionField =  uiWsPremForm.getUIStringInput(UIWorkspacePermissionForm.FIELD_PERMISSION) ;

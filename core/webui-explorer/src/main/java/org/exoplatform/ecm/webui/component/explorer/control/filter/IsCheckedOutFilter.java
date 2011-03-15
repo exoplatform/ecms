@@ -27,22 +27,22 @@ import org.exoplatform.webui.ext.filter.UIExtensionFilterType;
  * Created by The eXo Platform SAS
  * Author : eXoPlatform
  *          nicolas.filotto@exoplatform.com
- * 5 mai 2009  
+ * 5 mai 2009
  */
 public class IsCheckedOutFilter extends UIExtensionAbstractFilter {
 
   public IsCheckedOutFilter() {
     this("UIActionBar.msg.node-checkedin");
   }
-  
+
   public IsCheckedOutFilter(String messageKey) {
     super(messageKey, UIExtensionFilterType.MANDATORY);
   }
-  
+
   public static boolean isCheckedOut(Node node) throws Exception {
     return node.isCheckedOut();
   }
-  
+
   public boolean accept(Map<String, Object> context) throws Exception {
     if (context == null) return true;
     Node currentNode = (Node) context.get(Node.class.getName());

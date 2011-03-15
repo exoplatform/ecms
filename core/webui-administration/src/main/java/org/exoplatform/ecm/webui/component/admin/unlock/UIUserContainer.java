@@ -17,7 +17,7 @@ import org.exoplatform.webui.organization.account.UIUserSelector;
  * Created by The eXo Platform SARL
  * Author : Hoang Van Hung
  *          hunghvit@gmail.com
- * Dec 3, 2008  
+ * Dec 3, 2008
  */
 
 @ComponentConfig(
@@ -26,7 +26,7 @@ import org.exoplatform.webui.organization.account.UIUserSelector;
 )
 
 public class UIUserContainer extends UIContainer {
-  
+
   public UIUserContainer() throws Exception {
     UIUserSelector uiUserSelector = getChild(UIUserSelector.class);
     if (uiUserSelector == null) {
@@ -37,7 +37,7 @@ public class UIUserContainer extends UIContainer {
     uiUserSelector.setShowSearchUser(true);
     uiUserSelector.setShowSearch(true);
   }
-  
+
   static  public class AddUserActionListener extends EventListener<UIUserContainer> {
     public void execute(Event<UIUserContainer> event) throws Exception {
       UIUserContainer uiUserContainer = event.getSource();
@@ -46,6 +46,6 @@ public class UIUserContainer extends UIContainer {
       lockService.addGroupsOrUsersForLock(uiUserSelector.getSelectedUsers());
       UIUnLockManager uiUnLockManager = uiUserContainer.getParent();
       uiUnLockManager.refresh();
-    }  
+    }
   }
 }

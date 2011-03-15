@@ -59,7 +59,7 @@ import org.xml.sax.SAXException;
  * Created by The eXo Platform SAS
  * Author : eXoPlatform
  *          nicolas.filotto@exoplatform.com
- * 4 avr. 2009  
+ * 4 avr. 2009
  */
 public class SessionLinkAware implements ExtendedSession, NamespaceAccessor {
 
@@ -67,21 +67,21 @@ public class SessionLinkAware implements ExtendedSession, NamespaceAccessor {
    * Logger.
    */
   private static final Log LOG  = ExoLogger.getLogger("services.cms.link.SessionLinkAware");
-  
+
   private ItemLinkAware itemLA;
-  
+
   private final ExtendedSession originalSession;
   private final ExtendedSession currentNodeSession;
-  
-  private volatile ExtendedSession targetNodeSession;  
+
+  private volatile ExtendedSession targetNodeSession;
   private volatile ExtendedSession[] sessions;
-  
+
   SessionLinkAware (ItemLinkAware itemLA) throws RepositoryException {
     this.itemLA = itemLA;
     this.originalSession = (ExtendedSession) itemLA.originalSession;
     this.currentNodeSession = (ExtendedSession) itemLA.item.getSession();
   }
-  
+
   private ExtendedSession[] getSessions() throws RepositoryException {
     if (sessions == null) {
       synchronized (this) {
@@ -96,7 +96,7 @@ public class SessionLinkAware implements ExtendedSession, NamespaceAccessor {
     }
     return sessions;
   }
-  
+
   private ExtendedSession getTargetSession() throws RepositoryException {
     if (targetNodeSession == null) {
       synchronized (this) {
@@ -108,11 +108,11 @@ public class SessionLinkAware implements ExtendedSession, NamespaceAccessor {
     }
     return targetNodeSession;
   }
-  
+
   private ExtendedSession getTargetSession(String absPath, Item item) throws RepositoryException {
     return getTargetSession(ItemLinkAware.newInstance(originalSession, absPath, item));
   }
-  
+
   private ExtendedSession getTargetSession(ItemLinkAware itemLA) throws RepositoryException {
     if (itemLA instanceof NodeLinkAware) {
       return (ExtendedSession) ((NodeLinkAware) itemLA).getTargetNode().getRealNode().getSession();
@@ -120,15 +120,15 @@ public class SessionLinkAware implements ExtendedSession, NamespaceAccessor {
       return (ExtendedSession) itemLA.item.getSession();
     }
   }
-  
+
   private ExtendedSession getTargetSession(String absPath) throws RepositoryException {
-    Item item = getItem(absPath);    
+    Item item = getItem(absPath);
     return getTargetSession(absPath, item);
   }
-  
+
   /**
    * {@inheritDoc}
-   */  
+   */
   public void addLockToken(String lt) {
     try {
       getTargetSession().addLockToken(lt);
@@ -139,7 +139,7 @@ public class SessionLinkAware implements ExtendedSession, NamespaceAccessor {
 
   /**
    * {@inheritDoc}
-   */  
+   */
   public void checkPermission(String absPath, String actions) throws AccessControlException,
                                                        RepositoryException {
     getTargetSession(absPath).checkPermission(absPath, actions);
@@ -147,43 +147,55 @@ public class SessionLinkAware implements ExtendedSession, NamespaceAccessor {
 
   /**
    * {@inheritDoc}
-   */  
-  public void exportDocumentView(String absPath, ContentHandler contentHandler, boolean skipBinary, boolean noRecurse) throws PathNotFoundException,
-                                                                                              SAXException,
-                                                                                              RepositoryException {
+   */
+  public void exportDocumentView(String absPath,
+                                 ContentHandler contentHandler,
+                                 boolean skipBinary,
+                                 boolean noRecurse) throws PathNotFoundException,
+                                                   SAXException,
+                                                   RepositoryException {
     getTargetSession(absPath).exportDocumentView(absPath, contentHandler, skipBinary, noRecurse);
   }
 
   /**
    * {@inheritDoc}
-   */  
-  public void exportDocumentView(String absPath, OutputStream out, boolean skipBinary, boolean noRecurse) throws IOException,
-                                                                                            PathNotFoundException,
-                                                                                            RepositoryException {
+   */
+  public void exportDocumentView(String absPath,
+                                 OutputStream out,
+                                 boolean skipBinary,
+                                 boolean noRecurse) throws IOException,
+                                                   PathNotFoundException,
+                                                   RepositoryException {
     getTargetSession(absPath).exportDocumentView(absPath, out, skipBinary, noRecurse);
   }
 
   /**
    * {@inheritDoc}
-   */  
-  public void exportSystemView(String absPath, ContentHandler contentHandler, boolean skipBinary, boolean noRecurse) throws PathNotFoundException,
-                                                                                            SAXException,
-                                                                                            RepositoryException {
+   */
+  public void exportSystemView(String absPath,
+                               ContentHandler contentHandler,
+                               boolean skipBinary,
+                               boolean noRecurse) throws PathNotFoundException,
+                                                 SAXException,
+                                                 RepositoryException {
     getTargetSession(absPath).exportSystemView(absPath, contentHandler, skipBinary, noRecurse);
   }
 
   /**
    * {@inheritDoc}
-   */  
-  public void exportSystemView(String absPath, OutputStream out, boolean skipBinary, boolean noRecurse) throws IOException,
-                                                                                          PathNotFoundException,
-                                                                                          RepositoryException {
+   */
+  public void exportSystemView(String absPath,
+                               OutputStream out,
+                               boolean skipBinary,
+                               boolean noRecurse) throws IOException,
+                                                 PathNotFoundException,
+                                                 RepositoryException {
     getTargetSession(absPath).exportSystemView(absPath, out, skipBinary, noRecurse);
   }
 
   /**
    * {@inheritDoc}
-   */  
+   */
   public Object getAttribute(String name) {
     try {
       return getTargetSession().getAttribute(name);
@@ -195,7 +207,7 @@ public class SessionLinkAware implements ExtendedSession, NamespaceAccessor {
 
   /**
    * {@inheritDoc}
-   */  
+   */
   public String[] getAttributeNames() {
     try {
       return getTargetSession().getAttributeNames();
@@ -207,18 +219,18 @@ public class SessionLinkAware implements ExtendedSession, NamespaceAccessor {
 
   /**
    * {@inheritDoc}
-   */  
+   */
   public ContentHandler getImportContentHandler(String parentAbsPath, int uuidBehavior) throws PathNotFoundException,
-                                                                      ConstraintViolationException,
-                                                                      VersionException,
-                                                                      LockException,
-                                                                      RepositoryException {
+                                                                                       ConstraintViolationException,
+                                                                                       VersionException,
+                                                                                       LockException,
+                                                                                       RepositoryException {
     return getTargetSession(parentAbsPath).getImportContentHandler(parentAbsPath, uuidBehavior);
   }
 
   /**
    * {@inheritDoc}
-   */  
+   */
   public Item getItem(String absPath) throws PathNotFoundException, RepositoryException {
     NodeFinder nodeFinder = LinkUtils.getNodeFinder();
     return nodeFinder.getItem(originalSession, absPath);
@@ -226,7 +238,7 @@ public class SessionLinkAware implements ExtendedSession, NamespaceAccessor {
 
   /**
    * {@inheritDoc}
-   */  
+   */
   public String[] getLockTokens() {
     try {
       return getTargetSession().getLockTokens();
@@ -238,28 +250,28 @@ public class SessionLinkAware implements ExtendedSession, NamespaceAccessor {
 
   /**
    * {@inheritDoc}
-   */  
+   */
   public String getNamespacePrefix(String uri) throws NamespaceException, RepositoryException {
     return getTargetSession().getNamespacePrefix(uri);
   }
 
   /**
    * {@inheritDoc}
-   */  
+   */
   public String[] getNamespacePrefixes() throws RepositoryException {
     return getTargetSession().getNamespacePrefixes();
   }
 
   /**
    * {@inheritDoc}
-   */  
+   */
   public String getNamespaceURI(String prefix) throws NamespaceException, RepositoryException {
     return getTargetSession().getNamespaceURI(prefix);
   }
 
   /**
    * {@inheritDoc}
-   */  
+   */
   public Node getNodeByUUID(String uuid) throws ItemNotFoundException, RepositoryException {
     ExtendedSession[] sessions = getSessions();
     for (int i = 0, length = sessions.length; i < length; i++) {
@@ -267,7 +279,7 @@ public class SessionLinkAware implements ExtendedSession, NamespaceAccessor {
       try {
         return session.getNodeByUUID(uuid);
       } catch (ItemNotFoundException e) {
-        // do nothing      
+        // do nothing
       }
     }
     throw new ItemNotFoundException("No node with uuid ='" + uuid + "' can be found");
@@ -275,28 +287,28 @@ public class SessionLinkAware implements ExtendedSession, NamespaceAccessor {
 
   /**
    * {@inheritDoc}
-   */  
+   */
   public Repository getRepository() {
     return originalSession.getRepository();
   }
 
   /**
    * {@inheritDoc}
-   */  
+   */
   public Node getRootNode() throws RepositoryException {
     return originalSession.getRootNode();
   }
 
   /**
    * {@inheritDoc}
-   */  
+   */
   public String getUserID() {
     return originalSession.getUserID();
   }
 
   /**
    * {@inheritDoc}
-   */  
+   */
   public ValueFactory getValueFactory() throws UnsupportedRepositoryOperationException,
                                        RepositoryException {
     return originalSession.getValueFactory();
@@ -304,14 +316,14 @@ public class SessionLinkAware implements ExtendedSession, NamespaceAccessor {
 
   /**
    * {@inheritDoc}
-   */  
+   */
   public Workspace getWorkspace() {
     return originalSession.getWorkspace();
   }
 
   /**
    * {@inheritDoc}
-   */  
+   */
   public boolean hasPendingChanges() throws RepositoryException {
     ExtendedSession[] sessions = getSessions();
     for (int i = 0, length = sessions.length; i < length; i++) {
@@ -325,28 +337,28 @@ public class SessionLinkAware implements ExtendedSession, NamespaceAccessor {
 
   /**
    * {@inheritDoc}
-   */  
+   */
   public Session impersonate(Credentials credentials) throws LoginException, RepositoryException {
     return originalSession.impersonate(credentials);
   }
 
   /**
    * {@inheritDoc}
-   */  
+   */
   public void importXML(String parentAbsPath, InputStream in, int uuidBehavior) throws IOException,
-                                                                PathNotFoundException,
-                                                                ItemExistsException,
-                                                                ConstraintViolationException,
-                                                                VersionException,
-                                                                InvalidSerializedDataException,
-                                                                LockException,
-                                                                RepositoryException {
+                                                                               PathNotFoundException,
+                                                                               ItemExistsException,
+                                                                               ConstraintViolationException,
+                                                                               VersionException,
+                                                                               InvalidSerializedDataException,
+                                                                               LockException,
+                                                                               RepositoryException {
     getTargetSession(parentAbsPath).importXML(parentAbsPath, in, uuidBehavior);
   }
 
   /**
    * {@inheritDoc}
-   */  
+   */
   public boolean isLive() {
     ExtendedSession[] sessions;
     try {
@@ -366,7 +378,7 @@ public class SessionLinkAware implements ExtendedSession, NamespaceAccessor {
 
   /**
    * {@inheritDoc}
-   */  
+   */
   public boolean itemExists(String absPath) throws RepositoryException {
     NodeFinder nodeFinder = LinkUtils.getNodeFinder();
     return nodeFinder.itemExists(originalSession, absPath);
@@ -374,7 +386,7 @@ public class SessionLinkAware implements ExtendedSession, NamespaceAccessor {
 
   /**
    * {@inheritDoc}
-   */  
+   */
   public void logout() {
     ExtendedSession[] sessions;
     try {
@@ -391,26 +403,29 @@ public class SessionLinkAware implements ExtendedSession, NamespaceAccessor {
 
   /**
    * {@inheritDoc}
-   */  
+   */
   public void move(String srcAbsPath, String destAbsPath) throws ItemExistsException,
-                                            PathNotFoundException,
-                                            VersionException,
-                                            ConstraintViolationException,
-                                            LockException,
-                                            RepositoryException {
+                                                         PathNotFoundException,
+                                                         VersionException,
+                                                         ConstraintViolationException,
+                                                         LockException,
+                                                         RepositoryException {
     Item srcItem = getItem(srcAbsPath);
     Session srcSession = getTargetSession(srcAbsPath, srcItem);
     Session destParentSession = getTargetSession(LinkUtils.getParentPath(destAbsPath));
     if (srcSession.getWorkspace().equals(destParentSession.getWorkspace())) {
       srcSession.move(srcAbsPath, srcAbsPath);
     } else {
-      destParentSession.getWorkspace().clone(srcSession.getWorkspace().getName(), srcAbsPath, destAbsPath, false);
+      destParentSession.getWorkspace().clone(srcSession.getWorkspace().getName(),
+                                             srcAbsPath,
+                                             destAbsPath,
+                                             false);
     }
   }
 
   /**
    * {@inheritDoc}
-   */  
+   */
   public void refresh(boolean keepChanges) throws RepositoryException {
     ExtendedSession[] sessions = getSessions();
     for (int i = 0, length = sessions.length; i < length; i++) {
@@ -421,18 +436,18 @@ public class SessionLinkAware implements ExtendedSession, NamespaceAccessor {
 
   /**
    * {@inheritDoc}
-   */  
+   */
   public void removeLockToken(String lt) {
     try {
       getTargetSession().removeLockToken(lt);
     } catch (RepositoryException e) {
       LOG.error(e);
-    }    
+    }
   }
 
   /**
    * {@inheritDoc}
-   */  
+   */
   public void save() throws AccessDeniedException,
                     ItemExistsException,
                     ConstraintViolationException,
@@ -450,7 +465,7 @@ public class SessionLinkAware implements ExtendedSession, NamespaceAccessor {
 
   /**
    * {@inheritDoc}
-   */  
+   */
   public void setNamespacePrefix(String prefix, String uri) throws NamespaceException,
                                                           RepositoryException {
     getTargetSession().setNamespacePrefix(prefix, uri);
@@ -458,31 +473,31 @@ public class SessionLinkAware implements ExtendedSession, NamespaceAccessor {
 
   /**
    * {@inheritDoc}
-   */  
+   */
   public String getId() {
     try {
       return getTargetSession().getId();
     } catch (RepositoryException e) {
       LOG.error(e);
     }
-    return null;    
+    return null;
   }
 
   /**
    * {@inheritDoc}
-   */  
+   */
   public LocationFactory getLocationFactory() {
     try {
       return getTargetSession().getLocationFactory();
     } catch (RepositoryException e) {
       LOG.error(e);
     }
-    return null;    
+    return null;
   }
 
   /**
    * {@inheritDoc}
-   */  
+   */
   public void importXML(String parentAbsPath,
                         InputStream in,
                         int uuidBehavior,
@@ -497,7 +512,7 @@ public class SessionLinkAware implements ExtendedSession, NamespaceAccessor {
 
   /**
    * {@inheritDoc}
-   */  
+   */
   public void registerLifecycleListener(SessionLifecycleListener listener) {
     try {
       getTargetSession().registerLifecycleListener(listener);
@@ -508,29 +523,28 @@ public class SessionLinkAware implements ExtendedSession, NamespaceAccessor {
 
   /**
    * {@inheritDoc}
-   */  
+   */
   public String[] getAllNamespacePrefixes() throws RepositoryException {
     return ((NamespaceAccessor) getTargetSession()).getAllNamespacePrefixes();
   }
 
   /**
    * {@inheritDoc}
-   */  
+   */
   public String getNamespacePrefixByURI(String uri) throws NamespaceException, RepositoryException {
     return ((NamespaceAccessor) getTargetSession()).getNamespacePrefixByURI(uri);
   }
 
   /**
    * {@inheritDoc}
-   */  
+   */
   public String getNamespaceURIByPrefix(String prefix) throws NamespaceException,
                                                       RepositoryException {
     return ((NamespaceAccessor) getTargetSession()).getNamespaceURIByPrefix(prefix);
   }
 
 public Node getNodeByIdentifier(String identifier)
-		throws ItemNotFoundException, RepositoryException {
-	// TODO Auto-generated method stub
-	return null;
+    throws ItemNotFoundException, RepositoryException {
+  return null;
 }
 }

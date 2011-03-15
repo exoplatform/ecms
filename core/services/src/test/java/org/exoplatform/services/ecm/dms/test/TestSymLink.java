@@ -29,29 +29,29 @@ import org.exoplatform.services.ecm.dms.BaseDMSTestCase;
  * Created by The eXo Platform SARL
  * Author : Hoang Van Hung
  *          hunghvit@gmail.com
- * Mar 15, 2009  
+ * Mar 15, 2009
  */
 public class TestSymLink extends BaseDMSTestCase {
-  
+
   MockNodeFinderImpl nodeFinder;
-  
+
   /**
    * Set up for testing
-   * 
+   *
    * In Collaboration workspace
-   * 
+   *
    *  /---TestTreeNode
    *        |
    *        |_____A1
    *        |     |___C1___C1_1___C1_2___C1_3(exo:symlink -->C2)
-   *        |     |___C2___C2_2___D(exo:symlink -->C3) 
+   *        |     |___C2___C2_2___D(exo:symlink -->C3)
    *        |     |___C3___C4
-   *        | 
+   *        |
    *        |_____A2
    *        |     |___B2(exo:symlink --> C1)
-   *        | 
-   *        |_____A3(exo:symlink --> C2) 
-   * 
+   *        |
+   *        |_____A3(exo:symlink --> C2)
+   *
    * In System workspace
    *        /------TestTreeNode2
    *                    |
@@ -62,7 +62,7 @@ public class TestSymLink extends BaseDMSTestCase {
    *                    |_____O1(exo:symlink --> no node)
    *                    |
    *                    |_____P1
-   *                    
+   *
    */
   public void setUp() throws Exception {
     System.out.println("========== Create root node  ========");
@@ -74,7 +74,7 @@ public class TestSymLink extends BaseDMSTestCase {
 
   /**
    * Create tree in System workspace
-   * 
+   *
    * @throws Exception
    */
   public void createTreeInSystem() throws Exception {
@@ -93,11 +93,11 @@ public class TestSymLink extends BaseDMSTestCase {
     Node nodeO1 = testNode.addNode("O1","exo:symlink");
     nodeO1.setProperty("exo:workspace",COLLABORATION_WS);
     nodeO1.setProperty("exo:uuid", "12");
-    nodeO1.setProperty("exo:primaryType", "nt:folder");        
+    nodeO1.setProperty("exo:primaryType", "nt:folder");
     /* Set node and properties for Node B1 */
     session.save();
   }
-  
+
   public void addSymlink(String name, Node src, Node target) throws Exception {
     Node node = src.addNode(name,"exo:symlink");
     if (target.hasProperty("jcr:uuid")) {
@@ -107,8 +107,8 @@ public class TestSymLink extends BaseDMSTestCase {
     }
     node.setProperty("exo:workspace",COLLABORATION_WS);
     node.setProperty("exo:uuid",target.getProperty("jcr:uuid").getString());
-    node.setProperty("exo:primaryType",target.getPrimaryNodeType().getName());    
-    
+    node.setProperty("exo:primaryType",target.getPrimaryNodeType().getName());
+
   }
   public void createTreeInCollaboration() throws Exception {
     Node rootNode = session.getRootNode();
@@ -116,7 +116,7 @@ public class TestSymLink extends BaseDMSTestCase {
     Node nodeA1 = testNode.addNode("A1");
     Node nodeA2 = testNode.addNode("A2");
     Node nodeB2 = nodeA2.addNode("B2","exo:symlink");
-    
+
     Node nodeC1 = nodeA1.addNode("C1");
     Node nodeC1_1 = nodeC1.addNode("C1_1");
     Node nodeC1_2 = nodeC1_1.addNode("C1_2");
@@ -135,31 +135,31 @@ public class TestSymLink extends BaseDMSTestCase {
     }
     nodeB2.setProperty("exo:workspace",COLLABORATION_WS);
     nodeB2.setProperty("exo:uuid",nodeC1.getProperty("jcr:uuid").getString());
-    nodeB2.setProperty("exo:primaryType",nodeC1.getPrimaryNodeType().getName());    
+    nodeB2.setProperty("exo:primaryType",nodeC1.getPrimaryNodeType().getName());
     nodeD.setProperty("exo:workspace",COLLABORATION_WS);
     nodeD.setProperty("exo:uuid",nodeC3.getProperty("jcr:uuid").getString());
-    nodeD.setProperty("exo:primaryType",nodeC3.getPrimaryNodeType().getName());    
-    
+    nodeD.setProperty("exo:primaryType",nodeC3.getPrimaryNodeType().getName());
+
     Node nodeA3 = testNode.addNode("A3","exo:symlink");
     nodeA3.setProperty("exo:workspace", COLLABORATION_WS);
     nodeA3.setProperty("exo:uuid", nodeC2.getProperty("jcr:uuid").getString());
     nodeA3.setProperty("exo:primaryType",nodeC2.getPrimaryNodeType().getName());
-    
+
     nodeC1_3.setProperty("exo:workspace", COLLABORATION_WS);
     nodeC1_3.setProperty("exo:uuid", nodeC2.getProperty("jcr:uuid").getString());
     nodeC1_3.setProperty("exo:primaryType",nodeC2.getPrimaryNodeType().getName());
     System.out.println("Get path = " + nodeA3.getPath());
-    
+
     /* Set node and properties for Node B1 */
     session.save();
   }
 
   /**
    * Browser tree of one node
-   * 
+   *
    * @param node
    */
-  
+
   public void browserTree(Node node, int iLevel) throws RepositoryException {
     if (iLevel != 0) {
       for (int j = 0; j < iLevel; j++) {
@@ -207,7 +207,7 @@ public class TestSymLink extends BaseDMSTestCase {
       this.browserTree(tempNode, iLevel + 1);
     }
   }
-  
+
   public void testGetPath() throws Exception {
     String path = "/";
     String expectedPath = "/";
@@ -217,7 +217,7 @@ public class TestSymLink extends BaseDMSTestCase {
     System.out.println("Path out put: "+ node.getPath());
     assertEquals(expectedPath,node.getPath());
   }
-  
+
   public void testGetPath1() throws Exception {
     String path = "/TestTreeNode";
     String expectedPath = "/TestTreeNode";
@@ -227,7 +227,7 @@ public class TestSymLink extends BaseDMSTestCase {
     System.out.println("Path out put: "+ node.getPath());
     assertEquals(expectedPath,node.getPath());
   }
-  
+
   public void testGetPath2() throws Exception {
     String path = "/TestTreeNode/A2/B2";
     String expectedPath = "/TestTreeNode/A2/B2";
@@ -237,7 +237,7 @@ public class TestSymLink extends BaseDMSTestCase {
     System.out.println("Path output: "+ item.getPath());
     assertEquals(expectedPath,item.getPath());
   }
-  
+
   public void testGetPath3() throws Exception {
     String path = "/TestTreeNode/A3/C2_2/D/C4";
     String expectedPath = "/TestTreeNode/A1/C3/C4";
@@ -247,7 +247,7 @@ public class TestSymLink extends BaseDMSTestCase {
     System.out.println("Path output: "+ node.getPath());
     assertEquals(expectedPath,node.getPath());
   }
-  
+
   public void testGetPath4() throws Exception {
     String path = "/TestTreeNode/A2/B2/C1_1/C1_2/C1_3/C2_2/D";
     String expectedPath = "/TestTreeNode/A1/C2/C2_2/D";
@@ -257,7 +257,7 @@ public class TestSymLink extends BaseDMSTestCase {
     System.out.println("Path output: "+ node.getPath());
     assertEquals(expectedPath,node.getPath());
   }
- 
+
   public void testGetPath5() throws Exception {
     String path = "/TestTreeNode/A1/C1/C1_1/C1_2/C1_3/C2_2/D/C4";
     String expectedPath = "/TestTreeNode/A1/C3/C4";
@@ -267,8 +267,8 @@ public class TestSymLink extends BaseDMSTestCase {
     System.out.println("Path output: "+ node.getPath());
     assertEquals(expectedPath,node.getPath());
   }
-  
-  
+
+
 //  public void testGetPathInOtherWorkspace1() throws Exception {
 //      String path = "/TestTreeNode2/M1/M2/jcr:uuid";
 //      String expectedPath = "/TestTreeNode/A1/C1/jcr:uuid";
@@ -278,7 +278,7 @@ public class TestSymLink extends BaseDMSTestCase {
 //      System.out.println("Path output: "+ item.getPath());
 //      assertEquals(expectedPath, item.getPath());
 //  }
-//  
+//
 //  public void testGetPathInOtherWorkspace2() throws Exception {
 //      String path = "/TestTreeNode2/N1/N2/C2_2/D/C4";
 //      String expectedPath = "/TestTreeNode/A1/C3/C4";
@@ -288,12 +288,12 @@ public class TestSymLink extends BaseDMSTestCase {
 //      System.out.println("Path output: "+ node.getPath());
 //      assertEquals(expectedPath,node.getPath());
 //  }
-//  
+//
 //  /**
 //   * Test get path with target node is in other workspace
 //   *
 //   */
-//  
+//
 //  public void testGetPathInOtherWorkspace3() throws Exception {
 //      String path = "/TestTreeNode2/M1/M2/C1_1/C1_2/C1_3/C2_2/D/C4";
 //      String expectedPath = "/TestTreeNode/A1/C3/C4";
@@ -303,17 +303,17 @@ public class TestSymLink extends BaseDMSTestCase {
 //      System.out.println("Path output: "+ node.getPath());
 //      assertEquals(expectedPath,node.getPath());
 //  }
-  
+
   public void testGetInvalidPath1() throws Exception {
     String path = "/TestTreeNode/A2/D";
     System.out.println("\n\n Path input : " + path);
     try {
         Node node = (Node)nodeFinder.getItem(REPO_NAME, COLLABORATION_WS, path);
-        System.out.println("Path output: "+ node.getPath());    	
+        System.out.println("Path output: "+ node.getPath());
     } catch (PathNotFoundException e) {}
   }
-  
-  
+
+
   public void testGetInvalidPath2() throws Exception {
     String path = "/TestTreeNode/A2/B2/C2";
     System.out.println("\n\n Path input : " + path);
@@ -322,11 +322,11 @@ public class TestSymLink extends BaseDMSTestCase {
         System.out.println("Path output: "+ node.getPath());
     } catch (PathNotFoundException e) {}
   }
-  
+
   /**
    * Test with target Node is remove: Throws PathNotFoundException
    */
-  
+
   public void testGetInvalidPath3() throws Exception {
     String path = "/TestTreeNode2/O1";
     System.out.println("\n\n Path input : " + path);
@@ -337,28 +337,28 @@ public class TestSymLink extends BaseDMSTestCase {
   }
 
   public void testGetInvalidPath4() throws Exception {
-	String path = "/TestTreeNode2/O1/C2_2";
-	System.out.println("\n\n Path input : " + path);
+  String path = "/TestTreeNode2/O1/C2_2";
+  System.out.println("\n\n Path input : " + path);
     try {
-    	Node node = (Node) nodeFinder.getItemSys(REPO_NAME, SYSTEM_WS, path, true);
-    	System.out.println("Path output: " + node.getPath());
+      Node node = (Node) nodeFinder.getItemSys(REPO_NAME, SYSTEM_WS, path, true);
+      System.out.println("Path output: " + node.getPath());
     } catch (PathNotFoundException e) {}
   }
-  
+
   public void testGetInvalidWorkspace() throws Exception {
     try {
-    	Node node = (Node) nodeFinder.getItem(REPO_NAME, SYSTEM_WS + "12", "/");
-    	System.out.println("Path output: " + node.getPath());
+      Node node = (Node) nodeFinder.getItem(REPO_NAME, SYSTEM_WS + "12", "/");
+      System.out.println("Path output: " + node.getPath());
     } catch (RepositoryException e) {}
   }
-  
+
   public void testGetInvalidRepository() throws Exception {
     try {
-    	Node node = (Node) nodeFinder.getItem(REPO_NAME + "12", SYSTEM_WS, "/");
-    	System.out.println("Path output: " + node.getPath());
+      Node node = (Node) nodeFinder.getItem(REPO_NAME + "12", SYSTEM_WS, "/");
+      System.out.println("Path output: " + node.getPath());
     } catch (RepositoryException e) {}
   }
-	  
+
   public void tearDown() throws Exception {
     Node root;
     try {

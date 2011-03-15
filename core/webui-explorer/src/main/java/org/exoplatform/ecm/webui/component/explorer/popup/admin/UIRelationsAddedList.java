@@ -45,7 +45,7 @@ import org.exoplatform.webui.exception.MessageException;
  * Author : Dang Van Minh
  *          minh.dang@exoplatform.com
  * Oct 18, 2006
- * 2:28:18 PM 
+ * 2:28:18 PM
  */
 @ComponentConfig(
     lifecycle = UIContainerLifecycle.class,
@@ -64,9 +64,9 @@ public class UIRelationsAddedList extends UIContainer implements UISelectable {
     uiGrid.getUIPageIterator().setId("RelateListIterator");
     uiGrid.configure("path", RELATE_BEAN_FIELD, ACTION) ;
   }
-  
+
   public void updateGrid (List<Node> nodes, int currentPage) throws Exception {
-    UIGrid uiGrid = getChildById("RelateAddedList") ;   
+    UIGrid uiGrid = getChildById("RelateAddedList") ;
     if(nodes == null) nodes = new ArrayList<Node>() ;
     ObjectPageList objPageList = new ObjectPageList(nodes, 10);
     uiGrid.getUIPageIterator().setPageList(objPageList);
@@ -75,7 +75,7 @@ public class UIRelationsAddedList extends UIContainer implements UISelectable {
     else
       uiGrid.getUIPageIterator().setCurrentPage(currentPage);
   }
-  
+
   @SuppressWarnings("unused")
   public void doSelect(String selectField, Object value) throws Exception {
     UIJCRExplorer uiJCRExplorer = getAncestorOfType(UIJCRExplorer.class) ;
@@ -88,12 +88,12 @@ public class UIRelationsAddedList extends UIContainer implements UISelectable {
     try {
       String repository = getAncestorOfType(UIJCRExplorer.class).getRepositoryName() ;
       String wsName = value.toString().substring(0, value.toString().indexOf(":")) ;
-      String path = value.toString().substring(value.toString().indexOf(":") + 1) ;           
+      String path = value.toString().substring(value.toString().indexOf(":") + 1) ;
       Node currentNode = uiJCRExplorer.getCurrentNode();
       uiJCRExplorer.addLockToken(currentNode);
       relateService.addRelation(currentNode, path, wsName,repository) ;
-      updateGrid(relateService.getRelations(currentNode, 
-          uiJCRExplorer.getRepositoryName(), SessionProviderFactory.createSessionProvider()), 1);      
+      updateGrid(relateService.getRelations(currentNode,
+          uiJCRExplorer.getRepositoryName(), SessionProviderFactory.createSessionProvider()), 1);
       setRenderSibling(UIRelationsAddedList.class) ;
     } catch(Exception e) {
       LOG.error("Unexpected error", e);
@@ -106,7 +106,7 @@ public class UIRelationsAddedList extends UIContainer implements UISelectable {
       UIRelationManager uiManager = uiAddedList.getParent() ;
       UIApplication uiApp = uiAddedList.getAncestorOfType(UIApplication.class) ;
       String nodePath = event.getRequestContext().getRequestParameter(OBJECTID) ;
-      RelationsService relationService = 
+      RelationsService relationService =
         uiAddedList.getApplicationComponent(RelationsService.class) ;
       UIJCRExplorer uiExplorer = uiAddedList.getAncestorOfType(UIJCRExplorer.class) ;
       Node currentNode = uiExplorer.getCurrentNode();
@@ -122,5 +122,5 @@ public class UIRelationsAddedList extends UIContainer implements UISelectable {
       }
       uiManager.setRenderedChild("UIRelationsAddedList") ;
     }
-  }  
+  }
 }

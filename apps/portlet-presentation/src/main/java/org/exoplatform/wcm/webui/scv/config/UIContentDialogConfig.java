@@ -34,7 +34,7 @@ import org.exoplatform.webui.form.UIFormCheckBoxInput;
  * Created by The eXo Platform SAS
  * Author : Phan Le Thanh Chuong
  *          chuong.phan@exoplatform.com, phan.le.thanh.chuong@gmail.com
- * Oct 29, 2009  
+ * Oct 29, 2009
  */
 
 @ComponentConfig(
@@ -48,7 +48,7 @@ public class UIContentDialogConfig extends UIForm {
 
   /**
    * Instantiates a new uI miscellaneous info.
-   * 
+   *
    * @throws Exception the exception
    */
   @SuppressWarnings("unchecked")
@@ -69,7 +69,7 @@ public class UIContentDialogConfig extends UIForm {
    * component's <code>addSaveToPortletPreferenceActionListener<code> method. When
    * the saveToPortletPreferenceAction event occurs, that object's appropriate
    * method is invoked.
-   * 
+   *
    * @see SaveToPortletPreferenceActionEvent
    */
   static public class SaveToPortletPreferenceActionListener extends EventListener<UIContentDialogConfig> {
@@ -89,6 +89,6 @@ public class UIContentDialogConfig extends UIForm {
       UIApplication uiApplication = uiMiscellaneousInfo.getAncestorOfType(UIApplication.class);
       uiApplication.addMessage(new ApplicationMessage("UIContentDialogConfig.msg.saved-successfully", null, ApplicationMessage.INFO));
       event.getRequestContext().addUIComponentToUpdateByAjax(uiApplication.getUIPopupMessages());
-    }     
+    }
   }
 }

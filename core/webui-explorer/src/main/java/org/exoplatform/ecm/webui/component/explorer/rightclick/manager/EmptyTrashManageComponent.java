@@ -56,62 +56,63 @@ import org.exoplatform.webui.ext.manager.UIAbstractManagerComponent;
  * Created by The eXo Platform SARL
  * Author : Nguyen Anh Vu
  *          anhvurz90@gmail.com
- * Nov 13, 2009  
+ * Nov 13, 2009
  * 5:19:23 PM
  */
 @ComponentConfig(
-		events = {
-			@EventConfig(listeners = EmptyTrashManageComponent.EmptyTrashActionListener.class, confirm = "EmptyTrashManageComponent.msg.confirm-delete")				
-		}
-)
+                 events = {
+                     @EventConfig(listeners = EmptyTrashManageComponent.EmptyTrashActionListener.class,
+                                         confirm = "EmptyTrashManageComponent.msg.confirm-delete") })
 public class EmptyTrashManageComponent extends UIAbstractManagerComponent {
-	
-	private static final Log LOG = ExoLogger.getLogger(EmptyTrashManageComponent.class);
-	
-	private static final List<UIExtensionFilter> FILTERS
-			= Arrays.asList(new UIExtensionFilter[] { new IsNotInTrashFilter(),
-																								new IsTrashHomeNodeFilter() } );
-	
+
+  private static final Log LOG = ExoLogger.getLogger(EmptyTrashManageComponent.class);
+
+  private static final List<UIExtensionFilter> FILTERS
+      = Arrays.asList(new UIExtensionFilter[] { new IsNotInTrashFilter(),
+                                                new IsTrashHomeNodeFilter() } );
+
   @UIExtensionFilters
   public List<UIExtensionFilter> getFilters() {
     return FILTERS;
-	}
-  
-  public static void emptyTrashManage(Event<? extends UIComponent> event, UIJCRExplorer uiExplorer) throws Exception {
-		Node trashHomeNode = getTrashHomeNode(uiExplorer);
-		NodeIterator nodeIter = trashHomeNode.getNodes();
-		UIApplication uiApp = uiExplorer.getAncestorOfType(UIApplication.class);
-		if (nodeIter.getSize() == 0) {
-			return;
-		}
+  }
 
-		String currentUser = uiExplorer.getSession().getUserID();
-		boolean error = false;
-		while (nodeIter.hasNext()) {
-			try {
-				Node node = nodeIter.nextNode();
-				if (node.hasProperty(Utils.EXO_LASTMODIFIER))
-					if (currentUser.equals(node.getProperty(Utils.EXO_LASTMODIFIER).getString())) {
-						deleteNode(node, uiExplorer, event);
-					}
-			} catch (Exception ex) {
-				error = true;	
-			}
-		}
-		if (error) {
+  public static void emptyTrashManage(Event<? extends UIComponent> event, UIJCRExplorer uiExplorer) throws Exception {
+    Node trashHomeNode = getTrashHomeNode(uiExplorer);
+    NodeIterator nodeIter = trashHomeNode.getNodes();
+    UIApplication uiApp = uiExplorer.getAncestorOfType(UIApplication.class);
+    if (nodeIter.getSize() == 0) {
+      return;
+    }
+
+    String currentUser = uiExplorer.getSession().getUserID();
+    boolean error = false;
+    while (nodeIter.hasNext()) {
+      try {
+        Node node = nodeIter.nextNode();
+        if (node.hasProperty(Utils.EXO_LASTMODIFIER))
+          if (currentUser.equals(node.getProperty(Utils.EXO_LASTMODIFIER).getString())) {
+            deleteNode(node, uiExplorer, event);
+          }
+      } catch (Exception ex) {
+        error = true;
+      }
+    }
+    if (error) {
       uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.error-when-emptying-trash", null,
           ApplicationMessage.WARNING));
       event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
-		}
+    }
   }
-  
-  private static void deleteNode(Node nodeToDelete, UIJCRExplorer uiExplorer, Event<? extends UIComponent> event) throws Exception {
-  	PortletRequestContext pcontext = (PortletRequestContext)WebuiRequestContext.getCurrentInstance();
+
+  private static void deleteNode(Node nodeToDelete,
+                                 UIJCRExplorer uiExplorer,
+                                 Event<? extends UIComponent> event) throws Exception {
+    PortletRequestContext pcontext = (PortletRequestContext)WebuiRequestContext.getCurrentInstance();
     PortletPreferences portletPref = pcontext.getRequest().getPreferences();
-		String trashWorkspace = portletPref.getValue(Utils.TRASH_WORKSPACE, "");
-  	
+    String trashWorkspace = portletPref.getValue(Utils.TRASH_WORKSPACE, "");
+
     String nodePath = nodeToDelete.getPath();
-    
+
     // Use the method getNodeByPath because it is link aware
     Session session = uiExplorer.getSessionByWorkspace(trashWorkspace);
     // Use the method getNodeByPath because it is link aware
@@ -131,13 +132,13 @@ public class EmptyTrashManageComponent extends UIAbstractManagerComponent {
     for (Node existedTaxonomy : listExistedTaxonomy) {
       for (Node taxonomyTrees : listTaxonomyTrees) {
         if(existedTaxonomy.getPath().contains(taxonomyTrees.getPath())) {
-          taxonomyService.removeCategory(node, taxonomyTrees.getName(), 
+          taxonomyService.removeCategory(node, taxonomyTrees.getName(),
               existedTaxonomy.getPath().substring(taxonomyTrees.getPath().length()));
           break;
         }
       }
     }
-    
+
     uiExplorer.addLockToken(node);
     Node parentNode = node.getParent();
     uiExplorer.addLockToken(parentNode);
@@ -148,43 +149,43 @@ public class EmptyTrashManageComponent extends UIAbstractManagerComponent {
     ThumbnailService thumbnailService = uiExplorer.getApplicationComponent(ThumbnailService.class);
     thumbnailService.processRemoveThumbnail(node);
     TrashService trashService = uiExplorer.getApplicationComponent(TrashService.class);
-    trashService.removeRelations(node, uiExplorer.getSystemProvider(), uiExplorer.getRepositoryName());    
+    trashService.removeRelations(node, uiExplorer.getSystemProvider(), uiExplorer.getRepositoryName());
     node.remove();
     session.save();
     uiExplorer.updateAjax(event);
   }
-  
+
   private static void removeMixins(Node node) throws Exception {
     NodeType[] mixins = node.getMixinNodeTypes();
     for (NodeType nodeType : mixins) {
       node.removeMixin(nodeType.getName());
     }
   }
-  
+
 
   private static Node getTrashHomeNode(UIJCRExplorer uiExplorer) throws Exception {
-  	PortletRequestContext pcontext = (PortletRequestContext)WebuiRequestContext.getCurrentInstance();
+    PortletRequestContext pcontext = (PortletRequestContext)WebuiRequestContext.getCurrentInstance();
     PortletPreferences portletPref = pcontext.getRequest().getPreferences();
-		String trashHomeNodePath = portletPref.getValue(Utils.TRASH_HOME_NODE_PATH, "");
-		String trashWorkspace = portletPref.getValue(Utils.TRASH_WORKSPACE, "");
-		String trashRepository = portletPref.getValue(Utils.TRASH_REPOSITORY, "");
+    String trashHomeNodePath = portletPref.getValue(Utils.TRASH_HOME_NODE_PATH, "");
+    String trashWorkspace = portletPref.getValue(Utils.TRASH_WORKSPACE, "");
+    String trashRepository = portletPref.getValue(Utils.TRASH_REPOSITORY, "");
 
-		ExoContainer myContainer = ExoContainerContext.getCurrentContainer();
-		RepositoryService repositoryService
-				= (RepositoryService) myContainer.getComponentInstanceOfType(RepositoryService.class);
-		ManageableRepository manageableRepository
-				= repositoryService.getRepository(trashRepository);
-  	Session trashSession = uiExplorer.getSessionProvider().getSession(trashWorkspace, manageableRepository); 
-  	return (Node)trashSession.getItem(trashHomeNodePath);
+    ExoContainer myContainer = ExoContainerContext.getCurrentContainer();
+    RepositoryService repositoryService
+        = (RepositoryService) myContainer.getComponentInstanceOfType(RepositoryService.class);
+    ManageableRepository manageableRepository
+        = repositoryService.getRepository(trashRepository);
+    Session trashSession = uiExplorer.getSessionProvider().getSession(trashWorkspace, manageableRepository);
+    return (Node)trashSession.getItem(trashHomeNodePath);
   }
-  
+
   public static class EmptyTrashActionListener extends UIWorkingAreaActionListener<EmptyTrashManageComponent> {
-  	public void processEvent(Event<EmptyTrashManageComponent> event) throws Exception {
-  		UIJCRExplorer uiExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class);
-  		emptyTrashManage(event, uiExplorer);
-  	}
+    public void processEvent(Event<EmptyTrashManageComponent> event) throws Exception {
+      UIJCRExplorer uiExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class);
+      emptyTrashManage(event, uiExplorer);
+    }
   }
-  
+
   @Override
   public Class<? extends UIAbstractManager> getUIAbstractManagerClass() {
     return null;

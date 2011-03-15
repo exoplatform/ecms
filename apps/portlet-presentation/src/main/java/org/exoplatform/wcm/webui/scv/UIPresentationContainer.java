@@ -49,11 +49,11 @@ import org.exoplatform.webui.event.EventListener;
  * May 14, 2008
  */
 @ComponentConfig(
-		lifecycle=Lifecycle.class,
-		template="app:/groovy/SingleContentViewer/UIPresentationContainer.gtmpl",
-		events = {
-		    @EventConfig(listeners=UIPresentationContainer.PreferencesActionListener.class)
-		}
+    lifecycle=Lifecycle.class,
+    template="app:/groovy/SingleContentViewer/UIPresentationContainer.gtmpl",
+    events = {
+        @EventConfig(listeners=UIPresentationContainer.PreferencesActionListener.class)
+    }
 )
 public class UIPresentationContainer extends UIContainer{
   public final static String  PARAMETER_REGX        = "(.*)/(.*)";
@@ -61,125 +61,125 @@ public class UIPresentationContainer extends UIContainer{
   private boolean isPrint = false;
   private PortletPreferences portletPreferences;
   private String contentParameter = null;
-	/**
-	 * Instantiates a new uI presentation container.
-	 * 
-	 * @throws Exception the exception
-	 */
-	public UIPresentationContainer() throws Exception{   	  
-		addChild(UIPresentation.class, null, null);
-		PortletRequestContext portletRequestContext = WebuiRequestContext.getCurrentInstance();
-    portletPreferences = portletRequestContext.getRequest().getPreferences();    
-	}
-	
-	/**
-	 * Gets the bar info show.
-	 * 
-	 * @return the value for info bar setting
-	 * 
-	 * @throws Exception the exception
-	 */
-	public boolean isShowInfoBar() throws Exception {		
-		if (UIPortlet.getCurrentUIPortlet().getShowInfoBar())
-			return true;
-		return false;
-	}
-	
-	/**
-	 * Gets the title.
-	 * 
-	 * @param node the node
-	 * 
-	 * @return the title
-	 * 
-	 * @throws Exception the exception
-	 */
-	public String getTitle(Node node) throws Exception {				
-		
-		String title = null;
-		if (node.hasProperty("exo:title")) {
-			title = node.getProperty("exo:title").getValue().getString();
-		}
-		if (node.hasNode("jcr:content")) {
-			Node content = node.getNode("jcr:content");
-			if (content.hasProperty("dc:title")) {
-				try {
-					title = content.getProperty("dc:title").getValues()[0].getString();
-				} catch (Exception e) {
-					title = null;
-				}
-			}
-		}
-		if (title==null) title = node.getName();
+  /**
+   * Instantiates a new uI presentation container.
+   *
+   * @throws Exception the exception
+   */
+  public UIPresentationContainer() throws Exception{
+    addChild(UIPresentation.class, null, null);
+    PortletRequestContext portletRequestContext = WebuiRequestContext.getCurrentInstance();
+    portletPreferences = portletRequestContext.getRequest().getPreferences();
+  }
 
-		return Text.unescapeIllegalJcrChars(title);
-	}
-	public boolean isPrinting() {
-	  return this.isPrint;
-	}
-	
-	public boolean isShowTitle() {
-	  return Boolean.parseBoolean(portletPreferences.getValue(UISingleContentViewerPortlet.SHOW_TITLE, "false"));
-	}
-	public boolean isShowDate() {
+  /**
+   * Gets the bar info show.
+   *
+   * @return the value for info bar setting
+   *
+   * @throws Exception the exception
+   */
+  public boolean isShowInfoBar() throws Exception {
+    if (UIPortlet.getCurrentUIPortlet().getShowInfoBar())
+      return true;
+    return false;
+  }
+
+  /**
+   * Gets the title.
+   *
+   * @param node the node
+   *
+   * @return the title
+   *
+   * @throws Exception the exception
+   */
+  public String getTitle(Node node) throws Exception {
+
+    String title = null;
+    if (node.hasProperty("exo:title")) {
+      title = node.getProperty("exo:title").getValue().getString();
+    }
+    if (node.hasNode("jcr:content")) {
+      Node content = node.getNode("jcr:content");
+      if (content.hasProperty("dc:title")) {
+        try {
+          title = content.getProperty("dc:title").getValues()[0].getString();
+        } catch (Exception e) {
+          title = null;
+        }
+      }
+    }
+    if (title==null) title = node.getName();
+
+    return Text.unescapeIllegalJcrChars(title);
+  }
+  public boolean isPrinting() {
+    return this.isPrint;
+  }
+
+  public boolean isShowTitle() {
+    return Boolean.parseBoolean(portletPreferences.getValue(UISingleContentViewerPortlet.SHOW_TITLE, "false"));
+  }
+  public boolean isShowDate() {
     return Boolean.parseBoolean(portletPreferences.getValue(UISingleContentViewerPortlet.SHOW_DATE, "false"));
   }
-	public boolean isShowOptionBar() {
+  public boolean isShowOptionBar() {
     return Boolean.parseBoolean(portletPreferences.getValue(UISingleContentViewerPortlet.SHOW_OPTIONBAR, "false"));
   }
 
-	public boolean isContextual() {
-		return Boolean.parseBoolean(portletPreferences.getValue(UISingleContentViewerPortlet.CONTEXTUAL_MODE, "false"));
-	}
-	
-	public String getCurrentState() throws Exception {
-	  UIPresentation presentation = getChild(UIPresentation.class);
-	  Node node = presentation.getOriginalNode();
-	  if (node!=null) {
-	    if (node.hasProperty("publication:currentState")) {
-	      PortletRequestContext portletRequestContext = WebuiRequestContext.getCurrentInstance();
-	      String state = node.getProperty("publication:currentState").getValue().getString(); 
-	      try {
-	        state = portletRequestContext.getApplicationResourceBundle().getString("PublicationStates."+state);
-	      } catch (MissingResourceException e) { }
-	      return state;
-	    }
-	  }
-	  return "";
-	}
+  public boolean isContextual() {
+    return Boolean.parseBoolean(portletPreferences.getValue(UISingleContentViewerPortlet.CONTEXTUAL_MODE, "false"));
+  }
 
-	/**
-	 * Gets the created date.
-	 * 
-	 * @param node the node
-	 * 
-	 * @return the created date
-	 * 
-	 * @throws Exception the exception
-	 */
-	public String getCreatedDate(Node node) throws Exception {
-		if (node.hasProperty("exo:dateCreated")) {
-			Calendar calendar = node.getProperty("exo:dateCreated").getValue().getDate();
-			return new SimpleDateFormat("dd.MM.yyyy '|' hh'h'mm").format(calendar.getTime());
-		}
-		return null;
-	}
+  public String getCurrentState() throws Exception {
+    UIPresentation presentation = getChild(UIPresentation.class);
+    Node node = presentation.getOriginalNode();
+    if (node!=null) {
+      if (node.hasProperty("publication:currentState")) {
+        PortletRequestContext portletRequestContext = WebuiRequestContext.getCurrentInstance();
+        String state = node.getProperty("publication:currentState").getValue().getString();
+        try {
+          state = portletRequestContext.getApplicationResourceBundle().getString("PublicationStates."+state);
+        } catch (MissingResourceException e) { }
+        return state;
+      }
+    }
+    return "";
+  }
 
-	/**
-	 * Gets the node.
-	 * 
-	 * @return the node
-	 * 
-	 * @throws Exception the exception
-	 */
-	public Node getNodeView() {
-	  UIPresentation presentation = getChild(UIPresentation.class);
-	  try {
-	    Node viewNode;
-		//Check for the saved parameter
-		viewNode = getParameterizedNode();
-		if (viewNode!= null) {
-		  if (viewNode.isNodeType("nt:frozenNode")) {
+  /**
+   * Gets the created date.
+   *
+   * @param node the node
+   *
+   * @return the created date
+   *
+   * @throws Exception the exception
+   */
+  public String getCreatedDate(Node node) throws Exception {
+    if (node.hasProperty("exo:dateCreated")) {
+      Calendar calendar = node.getProperty("exo:dateCreated").getValue().getDate();
+      return new SimpleDateFormat("dd.MM.yyyy '|' hh'h'mm").format(calendar.getTime());
+    }
+    return null;
+  }
+
+  /**
+   * Gets the node.
+   *
+   * @return the node
+   *
+   * @throws Exception the exception
+   */
+  public Node getNodeView() {
+    UIPresentation presentation = getChild(UIPresentation.class);
+    try {
+      Node viewNode;
+    //Check for the saved parameter
+    viewNode = getParameterizedNode();
+    if (viewNode!= null) {
+      if (viewNode.isNodeType("nt:frozenNode")) {
             try {
               String nodeUUID = viewNode.getProperty("jcr:frozenUuid").getString();
               presentation.setOriginalNode(viewNode.getSession().getNodeByUUID(nodeUUID));
@@ -188,47 +188,47 @@ public class UIPresentationContainer extends UIContainer{
             } catch (Exception ex) {
               return viewNode;
             }
-		  }
-		  return viewNode;
-		}		  
-		PortletRequestContext portletRequestContext = WebuiRequestContext.getCurrentInstance();
-		portletPreferences = portletRequestContext.getRequest().getPreferences();
-		String repository = portletPreferences.getValue(UISingleContentViewerPortlet.REPOSITORY, null);    
-		String workspace = portletPreferences.getValue(UISingleContentViewerPortlet.WORKSPACE, null);
-		String nodeIdentifier = portletPreferences.getValue(UISingleContentViewerPortlet.IDENTIFIER, null);
-		viewNode = Utils.getRealNode(repository, workspace, nodeIdentifier, false);
-		if (viewNode!=null) {
-	      boolean isDocumentType = false;
-	      if (viewNode.isNodeType("nt:frozenNode")) isDocumentType = true; 
-	      // check node is a document node
-	      TemplateService templateService = getApplicationComponent(TemplateService.class);
-	      List<String> documentTypes = templateService.getDocumentTemplates();
-	      for (String documentType : documentTypes) {
-	        if (viewNode.isNodeType(documentType)) {
-	          isDocumentType = true;
-	          break;
-	        }
-	      }
-	      if (!isDocumentType) return null;
-	      if (viewNode != null && viewNode.isNodeType("nt:frozenNode")) {
-	        String nodeUUID = viewNode.getProperty("jcr:frozenUuid").getString();
-	        presentation.setOriginalNode(viewNode.getSession().getNodeByUUID(nodeUUID));
-	        presentation.setNode(viewNode);	      
-	      } else {
-	        presentation.setOriginalNode(viewNode);
-	        presentation.setNode(viewNode);
-	      }
-		}
-		  return viewNode;
-		} catch (Exception e) {
-			return null;
-		}
-	} 
-	/**
+      }
+      return viewNode;
+    }
+    PortletRequestContext portletRequestContext = WebuiRequestContext.getCurrentInstance();
+    portletPreferences = portletRequestContext.getRequest().getPreferences();
+    String repository = portletPreferences.getValue(UISingleContentViewerPortlet.REPOSITORY, null);
+    String workspace = portletPreferences.getValue(UISingleContentViewerPortlet.WORKSPACE, null);
+    String nodeIdentifier = portletPreferences.getValue(UISingleContentViewerPortlet.IDENTIFIER, null);
+    viewNode = Utils.getRealNode(repository, workspace, nodeIdentifier, false);
+    if (viewNode!=null) {
+        boolean isDocumentType = false;
+        if (viewNode.isNodeType("nt:frozenNode")) isDocumentType = true;
+        // check node is a document node
+        TemplateService templateService = getApplicationComponent(TemplateService.class);
+        List<String> documentTypes = templateService.getDocumentTemplates();
+        for (String documentType : documentTypes) {
+          if (viewNode.isNodeType(documentType)) {
+            isDocumentType = true;
+            break;
+          }
+        }
+        if (!isDocumentType) return null;
+        if (viewNode != null && viewNode.isNodeType("nt:frozenNode")) {
+          String nodeUUID = viewNode.getProperty("jcr:frozenUuid").getString();
+          presentation.setOriginalNode(viewNode.getSession().getNodeByUUID(nodeUUID));
+          presentation.setNode(viewNode);
+        } else {
+          presentation.setOriginalNode(viewNode);
+          presentation.setNode(viewNode);
+        }
+    }
+      return viewNode;
+    } catch (Exception e) {
+      return null;
+    }
+  }
+  /**
    * Gets the node.
-   * 
+   *
    * @return the node
-   * 
+   *
    * @throws Exception the exception
    */
   public Node getParameterizedNode() throws Exception {
@@ -237,13 +237,13 @@ public class UIPresentationContainer extends UIContainer{
     if (!preq.useAjax()) {
       contentParameter = getRequestParameters();
     }
-     
+
     if (contentParameter == null) return null;
     UIPresentation presentation = getChild(UIPresentation.class);
     Node nodeView = Utils.getViewableNodeByComposer(null, null, contentParameter);
     if (nodeView!=null) {
       boolean isDocumentType = false;
-      if (nodeView.isNodeType("nt:frozenNode")) isDocumentType = true; 
+      if (nodeView.isNodeType("nt:frozenNode")) isDocumentType = true;
       // check node is a document node
       if (!isDocumentType) {
         TemplateService templateService = getApplicationComponent(TemplateService.class);
@@ -270,10 +270,10 @@ public class UIPresentationContainer extends UIContainer{
     }
     return nodeView;
   }
-  
+
   /**
    * Gets the request parameters.
-   * 
+   *
    * @return the request parameters
    */
   private String getRequestParameters() throws Exception {
@@ -281,8 +281,13 @@ public class UIPresentationContainer extends UIContainer{
     if (!Boolean.parseBoolean(portletPreferences.getValue(UISingleContentViewerPortlet.CONTEXTUAL_MODE, "false"))) {
       return null;
     }
-    try {     
-      parameters = URLDecoder.decode(StringUtils.substringAfter(Util.getPortalRequestContext().getNodePath(), Util.getUIPortal().getSelectedNode().getUri() + "/"), "UTF-8");     
+    try {
+      parameters = URLDecoder.decode(StringUtils.substringAfter(Util.getPortalRequestContext()
+                                                                    .getNodePath(),
+                                                                Util.getUIPortal()
+                                                                    .getSelectedNode()
+                                                                    .getUri()
+                                                                    + "/"), "UTF-8");
     } catch (UnsupportedEncodingException e) {
       return null;
     }
@@ -291,7 +296,7 @@ public class UIPresentationContainer extends UIContainer{
       String path = Util.getPortalRequestContext().getRequestParameter(parameterName);
       if (path == null){
         return null;
-      }        
+      }
       parameters = Util.getPortalRequestContext().getRequestParameter(parameterName).substring(1);
       return parameters;
     }
@@ -309,26 +314,27 @@ public class UIPresentationContainer extends UIContainer{
     return getPrintUrl(null);
   }
 
-	/**
-	 * Get the print's page URL
-	 * 
-	 * @return <code>true</code> if the Quick Print is shown. Otherwise, <code>false</code>
-	 */
-	public String getPrintUrl(Node node) throws RepositoryException{
-	  String printParameterName;
+  /**
+   * Get the print's page URL
+   *
+   * @return <code>true</code> if the Quick Print is shown. Otherwise, <code>false</code>
+   */
+  public String getPrintUrl(Node node) throws RepositoryException{
+    String printParameterName;
     Node tempNode = node;
     if (tempNode==null) {
-	    tempNode = getNodeView();
+      tempNode = getNodeView();
     }
     String strPath = tempNode.getPath();
-		String repository = ((ManageableRepository)tempNode.getSession().getRepository()).getConfiguration().getName();
-		String workspace = tempNode.getSession().getWorkspace().getName();
-		String portalURI = Util.getPortalRequestContext().getPortalURI();
-		String printPageUrl = portletPreferences.getValue(UISingleContentViewerPortlet.PRINT_PAGE, "");
-		printParameterName = portletPreferences.getValue(UISingleContentViewerPortlet.PRINT_PARAMETER, "");
-		String printUrl = portalURI + printPageUrl + "?" + printParameterName +  "=/" + repository + "/" + workspace + strPath + "&isPrint=true";
-		return printUrl;
-	}
+    String repository = ((ManageableRepository)tempNode.getSession().getRepository()).getConfiguration().getName();
+    String workspace = tempNode.getSession().getWorkspace().getName();
+    String portalURI = Util.getPortalRequestContext().getPortalURI();
+    String printPageUrl = portletPreferences.getValue(UISingleContentViewerPortlet.PRINT_PAGE, "");
+    printParameterName = portletPreferences.getValue(UISingleContentViewerPortlet.PRINT_PARAMETER, "");
+    String printUrl = portalURI + printPageUrl + "?" + printParameterName + "=/" + repository + "/"
+        + workspace + strPath + "&isPrint=true";
+    return printUrl;
+  }
 
   @Deprecated
   public String getQuickEditLink(){
@@ -341,15 +347,15 @@ public class UIPresentationContainer extends UIContainer{
    * @param node
    * @return
    */
-	public String getQuickEditLink(Node node){
+  public String getQuickEditLink(Node node){
     Node tempNode = node;
     if (tempNode==null) {
-	    tempNode = getNodeView();
+      tempNode = getNodeView();
     }
-	  return Utils.getEditLink(tempNode, true, false);
-	}
-	
-	/**
+    return Utils.getEditLink(tempNode, true, false);
+  }
+
+  /**
    * The listener interface for receiving preferencesAction events.
    * The class that is interested in processing a preferencesAction
    * event implements this interface, and the object created
@@ -357,12 +363,12 @@ public class UIPresentationContainer extends UIContainer{
    * component's <code>addPreferencesActionListener<code> method. When
    * the preferencesAction event occurs, that object's appropriate
    * method is invoked.
-   */ 
-	public static class PreferencesActionListener extends EventListener<UIPresentationContainer>{   
+   */
+  public static class PreferencesActionListener extends EventListener<UIPresentationContainer>{
     /* (non-Javadoc)
      * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
      */
-    public void execute(Event<UIPresentationContainer> event) throws Exception {      
+    public void execute(Event<UIPresentationContainer> event) throws Exception {
       UIPresentationContainer presentationContainer = event.getSource();
       UISCVPreferences pcvConfigForm = presentationContainer.createUIComponent(UISCVPreferences.class, null, null);
       Utils.createPopupWindow(presentationContainer, pcvConfigForm, UISingleContentViewerPortlet.UIPreferencesPopupID, 600);

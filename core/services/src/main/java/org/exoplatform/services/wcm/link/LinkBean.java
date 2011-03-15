@@ -20,7 +20,7 @@ package org.exoplatform.services.wcm.link;
  * Created by The eXo Platform SAS
  * Author : Phan Le Thanh Chuong
  *          chuong_phan@exoplatform.com
- * Sep 4, 2008  
+ * Sep 4, 2008
  */
 public class LinkBean {
 
@@ -33,7 +33,7 @@ public class LinkBean {
   static final public String STATUS_BROKEN = "broken";
 
   private String url;
-  private String status;         
+  private String status;
 
   public LinkBean(String url, String status) {
     this.url = url;
@@ -50,7 +50,7 @@ public class LinkBean {
 
   public String getUrl() {
     return url;
-  }   
+  }
 
   public void setUrl(String url) {
     this.url = url;
@@ -63,12 +63,12 @@ public class LinkBean {
   public boolean isBroken() {
     return STATUS_BROKEN.equalsIgnoreCase(status);
   }
-  
+
   public boolean isUnchecked() {
     return STATUS_UNCHECKED.equalsIgnoreCase(status);
   }
-  
-  public boolean isActive() { 
+
+  public boolean isActive() {
     return STATUS_ACTIVE.equalsIgnoreCase(status);
   }
 

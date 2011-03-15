@@ -28,7 +28,7 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
  * Created by The eXo Platform SAS
  * @author : Hoa.Pham
  *          hoa.pham@exoplatform.com
- * Jun 23, 2008  
+ * Jun 23, 2008
  */
 /**
  * The listener interface for receiving updateLivePortalEvent events.
@@ -38,7 +38,7 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
  * component's <code>addUpdateLivePortalEventListener<code> method. When
  * the updateLivePortalEvent event occurs, that object's appropriate
  * method is invoked.
- * 
+ *
  * @see UpdateLivePortalEventEvent
  */
 public class UpdateLivePortalEventListener extends Listener<DataStorageImpl,PortalConfig>{
@@ -48,11 +48,11 @@ public class UpdateLivePortalEventListener extends Listener<DataStorageImpl,Port
    */
   public void onEvent(Event<DataStorageImpl, PortalConfig> event) throws Exception {
 
-    XJavascriptService jsService = WCMCoreUtils.getService(XJavascriptService.class); 
+    XJavascriptService jsService = WCMCoreUtils.getService(XJavascriptService.class);
     XSkinService xSkinService = WCMCoreUtils.getService(XSkinService.class);
     xSkinService.start();
     jsService.start();
-    
+
   }
 
 }

@@ -38,7 +38,7 @@ import org.exoplatform.webui.ext.manager.UIAbstractManagerComponent;
  * Author : Tran The Trong
  *          trongtt@gmail.com
  * Sep 19, 2006
- * 8:30:33 AM 
+ * 8:30:33 AM
  */
 @ComponentConfig(
     template = "app:/groovy/webui/component/admin/UIECMAdminWorkingArea.gtmpl"
@@ -50,7 +50,7 @@ public class UIECMAdminWorkingArea extends UIContainer {
    */
   private static final Log LOG  = ExoLogger.getLogger(UIECMAdminWorkingArea.class);
   private String renderedCompId_ ;
-  
+
   public String getRenderedCompId() { return renderedCompId_ ; }
   public void setRenderedCompId(String renderedId) { this.renderedCompId_ = renderedId ; }
 
@@ -60,15 +60,15 @@ public class UIECMAdminWorkingArea extends UIContainer {
   }
 
   public UIECMAdminWorkingArea() throws Exception {}
-  
-  public void init() throws Exception { 
+
+  public void init() throws Exception {
     UIECMAdminPortlet portlet = getAncestorOfType(UIECMAdminPortlet.class);
     UIECMAdminControlPanel controlPanel = portlet.getChild(UIECMAdminControlPanel.class);
     List<UIAbstractManagerComponent> managers = controlPanel.getManagers();
     List<UIAbstractManagerComponent> rejectedManagers = null;
     if (managers == null) {
       return;
-    }    
+    }
     for (UIAbstractManagerComponent manager : managers) {
       UIAbstractManager uiManager = getChild(manager.getUIAbstractManagerClass());
       if (uiManager == null) {
@@ -94,11 +94,11 @@ public class UIECMAdminWorkingArea extends UIContainer {
     }
     if (rejectedManagers != null) {
       for (UIAbstractManagerComponent manager : rejectedManagers) {
-        controlPanel.unregister(manager);      
-      }      
+        controlPanel.unregister(manager);
+      }
     }
   }
-  
+
   public void checkRepository() throws Exception{
     PortletRequestContext pcontext = (PortletRequestContext) WebuiRequestContext
         .getCurrentInstance();
@@ -112,5 +112,5 @@ public class UIECMAdminWorkingArea extends UIContainer {
       pref.store();
     }
   }
-  
+
 }

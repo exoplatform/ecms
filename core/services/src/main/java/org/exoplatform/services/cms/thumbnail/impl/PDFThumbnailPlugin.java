@@ -39,7 +39,7 @@ import org.icepdf.core.util.GraphicsRenderingHints;
  * Created by The eXo Platform SARL
  * Author : Dang Van Minh
  *          minh.dang@exoplatform.com
- * OCt 22, 2009  
+ * OCt 22, 2009
  * 2:20:33 PM
  */
 public class PDFThumbnailPlugin implements ComponentPlugin, ThumbnailPlugin {
@@ -72,7 +72,7 @@ public class PDFThumbnailPlugin implements ComponentPlugin, ThumbnailPlugin {
   public BufferedImage getBufferedImage(Node contentNode, String nodePath) throws Exception {
     Document document = new Document();
     try {
-      InputStream input = contentNode.getProperty("jcr:data").getStream() ;      
+      InputStream input = contentNode.getProperty("jcr:data").getStream() ;
       document.setInputStream(input, nodePath);
     } catch (PDFException ex) {
       LOG.warn("Error parsing PDF document " + ex);
@@ -84,7 +84,7 @@ public class PDFThumbnailPlugin implements ComponentPlugin, ThumbnailPlugin {
       LOG.warn("Error handling PDF document " + ex);
     }
     // Paint each pages content to an image and write the image to file
-    BufferedImage image = (BufferedImage) document.getPageImage(0, GraphicsRenderingHints.SCREEN, 
+    BufferedImage image = (BufferedImage) document.getPageImage(0, GraphicsRenderingHints.SCREEN,
         Page.BOUNDARY_CROPBOX, 0.0f, 1.0f);
     document.dispose();
     return image;

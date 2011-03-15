@@ -37,95 +37,101 @@ import org.ow2.bonita.facade.uuid.ProcessInstanceUUID;
 
 /**
  * ExoOrganizationMapper maps eXo users
+ *
  * @author Le Gall Rodrigue <rodrigue.le-gall@bull.net>
  */
 public class ExoOrganizationMapper implements RoleMapper {
 
-   private static Log log = ExoLogger.getLogger(ExoOrganizationMapper.class.getName());
+  private static Log log = ExoLogger.getLogger(ExoOrganizationMapper.class.getName());
 
-   public Set<String> searchMembers(QueryAPIAccessor readonlyapiaccessor, ProcessInstanceUUID instanceId, String roleId) {
-       
-       ParticipantDefinition participantDef;
-       ProcessDefinitionUUID processId;
-       try {
-           QueryRuntimeAPI queryAPI = readonlyapiaccessor.getQueryRuntimeAPI();
-           processId = queryAPI.getProcessInstance(instanceId).getProcessDefinitionUUID();
-        
-           QueryDefinitionAPI definitionAPI = readonlyapiaccessor.getQueryDefinitionAPI();
-           
-           participantDef = definitionAPI.getProcessParticipant(processId, roleId);
-           return ExoOrganizationMapper.GetUsersFromMembershipAndGroup(participantDef.getName());
-		} catch (InstanceNotFoundException e) {
-          log.warn(e.getMessage(), e);
-		} catch (ProcessNotFoundException e) {
-          log.warn(e.getMessage(), e);
-		} catch (ParticipantNotFoundException e) {
-          log.warn(e.getMessage(), e);
-		}
-       return null;
-   }
+  public Set<String> searchMembers(QueryAPIAccessor readonlyapiaccessor,
+                                   ProcessInstanceUUID instanceId,
+                                   String roleId) {
 
-   /**
-    * Gets the list of eXo users who belong to the specified Membership and
-    * Group
-    *
-    * @param membershipAndGroup
-    *            specifies the Membership and Group
-    */
-   public static Set<String> GetUsersFromMembershipAndGroup(String membershipAndGroup) {
+    ParticipantDefinition participantDef;
+    ProcessDefinitionUUID processId;
+    try {
+      QueryRuntimeAPI queryAPI = readonlyapiaccessor.getQueryRuntimeAPI();
+      processId = queryAPI.getProcessInstance(instanceId).getProcessDefinitionUUID();
 
-       // The returned list
-       Set<String> users = new HashSet<String>();
+      QueryDefinitionAPI definitionAPI = readonlyapiaccessor.getQueryDefinitionAPI();
 
-       try {
-           // Lookup the eXo Organization service
-           PortalContainer container = PortalContainer.getInstance();
-           OrganizationService organization = (OrganizationService) container.getComponentInstanceOfType(OrganizationService.class);
+      participantDef = definitionAPI.getProcessParticipant(processId, roleId);
+      return ExoOrganizationMapper.GetUsersFromMembershipAndGroup(participantDef.getName());
+    } catch (InstanceNotFoundException e) {
+      log.warn(e.getMessage(), e);
+    } catch (ProcessNotFoundException e) {
+      log.warn(e.getMessage(), e);
+    } catch (ParticipantNotFoundException e) {
+      log.warn(e.getMessage(), e);
+    }
+    return null;
+  }
 
-           // Determine the Membership and Group
-           String[] tokens = membershipAndGroup.split(":");
-           String membership = null;
-           String group = null;
+  /**
+   * Gets the list of eXo users who belong to the specified Membership and Group
+   *
+   * @param membershipAndGroup specifies the Membership and Group
+   */
+  public static Set<String> GetUsersFromMembershipAndGroup(String membershipAndGroup) {
 
-           if (tokens.length == 2) {
-               // There is a single colon character
-               membership = tokens[0];
-               group = tokens[1];
-           } else {
-               // There is not is single colon character
-               membership = "*";
-               group = membershipAndGroup;
+    // The returned list
+    Set<String> users = new HashSet<String>();
 
-               log.error("Warning : The specified Bonita role does not " + "conform to the syntax membership:group.");
-           }
-           if (log.isInfoEnabled()) {
-               log.info("Starting role mapping for [group,membership] : [" + group + "," + membership + "]");
-           }
+    try {
+      // Lookup the eXo Organization service
+      PortalContainer container = PortalContainer.getInstance();
+      OrganizationService organization = (OrganizationService) container.getComponentInstanceOfType(OrganizationService.class);
 
-           // Retrieve all the users contained by the specified group
-           UserHandler userHandler = organization.getUserHandler();
-           PageList pageList = userHandler.findUsersByGroup(group);
-           Collection<User> usersInGroup = pageList.getAll();
+      // Determine the Membership and Group
+      String[] tokens = membershipAndGroup.split(":");
+      String membership = null;
+      String group = null;
 
-           // Process each user in the group
-           for (User user : usersInGroup) {
-               // Retrieve the name of the current user
-               String userName = user.getUserName();
+      if (tokens.length == 2) {
+        // There is a single colon character
+        membership = tokens[0];
+        group = tokens[1];
+      } else {
+        // There is not is single colon character
+        membership = "*";
+        group = membershipAndGroup;
 
-               if ("*".equals(membership) || organization.getMembershipHandler().findMembershipByUserGroupAndType(userName, group, membership) != null) {
-                   // The user has the specified membership
-                   users.add(userName);
-                   if (log.isInfoEnabled()) {
-                       log.info("Add user : " + userName);
-                   }
+        log.error("Warning : The specified Bonita role does not "
+            + "conform to the syntax membership:group.");
+      }
+      if (log.isInfoEnabled()) {
+        log.info("Starting role mapping for [group,membership] : [" + group + "," + membership
+            + "]");
+      }
 
-               }
-           }
-       } catch (Exception e) {
-    	   log.warn(e.getMessage(), e);
-       }
+      // Retrieve all the users contained by the specified group
+      UserHandler userHandler = organization.getUserHandler();
+      PageList pageList = userHandler.findUsersByGroup(group);
+      Collection<User> usersInGroup = pageList.getAll();
 
-       return users;
-   }
+      // Process each user in the group
+      for (User user : usersInGroup) {
+        // Retrieve the name of the current user
+        String userName = user.getUserName();
+
+        if ("*".equals(membership)
+            || organization.getMembershipHandler().findMembershipByUserGroupAndType(userName,
+                                                                                    group,
+                                                                                    membership) != null) {
+          // The user has the specified membership
+          users.add(userName);
+          if (log.isInfoEnabled()) {
+            log.info("Add user : " + userName);
+          }
+
+        }
+      }
+    } catch (Exception e) {
+      log.warn(e.getMessage(), e);
+    }
+
+    return users;
+  }
 
 }

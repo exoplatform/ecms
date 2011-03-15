@@ -67,7 +67,7 @@ public class FCKMessage {
 
   /** The Constant FILE_UPLOAD_RESTRICTION. */
   public static final int    FILE_UPLOAD_RESTRICTION    = 203;
-  
+
   /** The Constant FILE_NOT_UPLOADED. */
   public static final int FILE_NOT_UPLOADED = 204;
 
@@ -77,7 +77,7 @@ public class FCKMessage {
 
   /**
    * Instantiates a new fCK message.
-   * 
+   *
    * @param bundleService the bundle service
    */
   public FCKMessage() {
@@ -103,7 +103,7 @@ public class FCKMessage {
 
   /**
    * Gets the message.
-   * 
+   *
    * @param messageNum the message num
    * @param args the args
    * @param language the language
@@ -117,7 +117,7 @@ public class FCKMessage {
 
   /**
    * Gets the message.
-   * 
+   *
    * @param messageKey the message key
    * @param args the args
    * @param language the language
@@ -130,8 +130,8 @@ public class FCKMessage {
       locale = Locale.ENGLISH;
     } else {
       locale = new Locale(language);
-    }                    
-    ResourceBundle resourceBundle = ResourceBundle.getBundle(FCK_RESOURCE_BUNDLE_FILE, locale);    
+    }
+    ResourceBundle resourceBundle = ResourceBundle.getBundle(FCK_RESOURCE_BUNDLE_FILE, locale);
     String message = resourceBundle.getString(messageKey);
     if (args == null) {
       return message;

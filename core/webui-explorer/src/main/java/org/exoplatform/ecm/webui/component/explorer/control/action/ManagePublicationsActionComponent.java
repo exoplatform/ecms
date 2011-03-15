@@ -50,7 +50,7 @@ import org.exoplatform.webui.form.UIForm;
  * Created by The eXo Platform SAS
  * Author : eXoPlatform
  *          nicolas.filotto@exoplatform.com
- * 6 mai 2009  
+ * 6 mai 2009
  */
 @ComponentConfig(
      events = {
@@ -59,13 +59,18 @@ import org.exoplatform.webui.form.UIForm;
  )
 public class ManagePublicationsActionComponent extends UIComponent {
 
-  private static final List<UIExtensionFilter> FILTERS = Arrays.asList(new UIExtensionFilter[]{new HasPublicationLifecycleFilter(), new IsDocumentFilter("UIActionBar.msg.manage-publication.not-supported-nodetype"), new IsNotRootNodeFilter("UIActionBar.msg.cannot-enable-publication-rootnode"), new CanSetPropertyFilter("UIActionBar.msg.access-denied"), new CanRemoveNodeFilter(), new IsNotLockedFilter()});
-  
+  private static final List<UIExtensionFilter> FILTERS = Arrays.asList(new UIExtensionFilter[] {
+      new HasPublicationLifecycleFilter(),
+      new IsDocumentFilter("UIActionBar.msg.manage-publication.not-supported-nodetype"),
+      new IsNotRootNodeFilter("UIActionBar.msg.cannot-enable-publication-rootnode"),
+      new CanSetPropertyFilter("UIActionBar.msg.access-denied"), new CanRemoveNodeFilter(),
+      new IsNotLockedFilter()                         });
+
   @UIExtensionFilters
   public List<UIExtensionFilter> getFilters() {
     return FILTERS;
   }
-  
+
   public static class ManagePublicationsActionListener extends UIActionBarActionListener<ManagePublicationsActionComponent> {
     public void processEvent(Event<ManagePublicationsActionComponent> event) throws Exception {
       UIActionBar uiActionBar = event.getSource().getAncestorOfType(UIActionBar.class);
@@ -74,39 +79,40 @@ public class ManagePublicationsActionComponent extends UIComponent {
       Node currentNode = uiExplorer.getCurrentNode();
       uiExplorer.setIsHidePopup(false);
       PublicationService publicationService = uiActionBar.getApplicationComponent(PublicationService.class);
-      PublicationPresentationService publicationPresentationService = uiActionBar.getApplicationComponent(PublicationPresentationService.class);
-      if (!publicationService.isNodeEnrolledInLifecycle(currentNode)) {                  
+      PublicationPresentationService publicationPresentationService = uiActionBar.
+          getApplicationComponent(PublicationPresentationService.class);
+      if (!publicationService.isNodeEnrolledInLifecycle(currentNode)) {
         UIActivePublication activePublication = uiActionBar.createUIComponent(UIActivePublication.class,null,null);
         if(publicationService.getPublicationPlugins().size() == 1) {
           activePublication.setRendered(false);
           uiExplorer.addChild(activePublication);
           String lifecycleName = publicationService.getPublicationPlugins().keySet().iterator().next();
-          activePublication.enrolNodeInLifecycle(currentNode,lifecycleName,event.getRequestContext());                    
+          activePublication.enrolNodeInLifecycle(currentNode,lifecycleName,event.getRequestContext());
           return;
         }
         activePublication.setRendered(true);
         activePublication.updateLifecyclesGrid();
         UIPopupContainer.activate(activePublication, 600, 300);
         event.getRequestContext().addUIComponentToUpdateByAjax(UIPopupContainer);
-        return;         
+        return;
       }
       UIContainer cont = uiActionBar.createUIComponent(UIContainer.class, null, null);
       UIForm uiForm = publicationPresentationService.getStateUI(currentNode, cont);
       if (uiForm instanceof UIPopupComponent) {
         //This is special case for wcm want to more than 2 tabs in PublicationManager
-        //The uiForm in this case should be a UITabPane or UIFormTabPane and need be a UIPopupComponent        
+        //The uiForm in this case should be a UITabPane or UIFormTabPane and need be a UIPopupComponent
         UIPopupContainer.activate(uiForm, 700, 500);
       } else {
-        UIPublicationManager uiPublicationManager = 
+        UIPublicationManager uiPublicationManager =
           uiExplorer.createUIComponent(UIPublicationManager.class, null, null);
         uiPublicationManager.addChild(uiForm);
         uiPublicationManager.addChild(UIPublicationLogList.class, null, null).setRendered(false);
-        UIPublicationLogList uiPublicationLogList = 
-          uiPublicationManager.getChild(UIPublicationLogList.class);      
+        UIPublicationLogList uiPublicationLogList =
+          uiPublicationManager.getChild(UIPublicationLogList.class);
         UIPopupContainer.activate(uiPublicationManager, 700, 500);
         uiPublicationLogList.setNode(currentNode);
-        uiPublicationLogList.updateGrid(); 
-      }            
+        uiPublicationLogList.updateGrid();
+      }
       event.getRequestContext().addUIComponentToUpdateByAjax(UIPopupContainer);
    }
   }

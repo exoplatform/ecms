@@ -72,7 +72,7 @@ public class UINewsletterEntryDialogSelector extends UIForm {
 
   /**
    * Gets the dialog.
-   * 
+   *
    * @return the dialog
    */
   public String getDialog() {
@@ -81,7 +81,7 @@ public class UINewsletterEntryDialogSelector extends UIForm {
 
   /**
    * Sets the dialog.
-   * 
+   *
    * @param dialog the new dialog
    */
   public void setDialog(String dialog) {
@@ -90,7 +90,7 @@ public class UINewsletterEntryDialogSelector extends UIForm {
 
   /**
    * Instantiates a new uI newsletter entry dialog selector.
-   * 
+   *
    * @throws Exception the exception
    */
   public UINewsletterEntryDialogSelector() throws Exception {
@@ -103,10 +103,10 @@ public class UINewsletterEntryDialogSelector extends UIForm {
 
   /**
    * Inits the.
-   * 
+   *
    * @param CategoryName the category name
    * @param subScriptionName the sub scription name
-   * 
+   *
    * @throws Exception the exception
    */
   public void init(String CategoryName, String subScriptionName) throws Exception{
@@ -114,36 +114,36 @@ public class UINewsletterEntryDialogSelector extends UIForm {
     NewsletterCategoryHandler newsletterCategoryHandler = newsletterManagerService.getCategoryHandler();
     SessionProvider sessionProvider = Utils.getSessionProvider();
     String portalName = NewsLetterUtil.getPortalName();
-    List<NewsletterCategoryConfig> newsletterCategoryConfigs = newsletterCategoryHandler.getListCategories(portalName, 
+    List<NewsletterCategoryConfig> newsletterCategoryConfigs = newsletterCategoryHandler.getListCategories(portalName,
                                                                                                            sessionProvider);
     List<SelectItemOption<String>> categories = new ArrayList<SelectItemOption<String>>();
     for (NewsletterCategoryConfig newsletterCategoryConfig : newsletterCategoryConfigs) {
       categories.add(new SelectItemOption<String>(newsletterCategoryConfig.getTitle(), newsletterCategoryConfig.getName()));
     }
-    UIFormSelectBox categorySelectBox = new UIFormSelectBox(UINewsletterConstant.ENTRY_CATEGORY_SELECTBOX, 
+    UIFormSelectBox categorySelectBox = new UIFormSelectBox(UINewsletterConstant.ENTRY_CATEGORY_SELECTBOX,
                                                             UINewsletterConstant.ENTRY_CATEGORY_SELECTBOX, categories);
     categorySelectBox.setOnChange("ChangeCategory");
     if(CategoryName != null && CategoryName.trim().length() > 0){
       categorySelectBox.setValue(CategoryName);
       categorySelectBox.setDisabled(true);
     }
-    
+
     if(CategoryName == null) CategoryName = categories.get(0).getValue();
     NewsletterSubscriptionHandler newsletterSubscriptionHandler = newsletterManagerService.getSubscriptionHandler();
-    List<NewsletterSubscriptionConfig> listSubscriptions = 
-                                              newsletterSubscriptionHandler.getSubscriptionsByCategory(sessionProvider, portalName, 
+    List<NewsletterSubscriptionConfig> listSubscriptions =
+                                              newsletterSubscriptionHandler.getSubscriptionsByCategory(sessionProvider, portalName,
                                                                                                        CategoryName);
     List<SelectItemOption<String>> subscriptions = new ArrayList<SelectItemOption<String>>();
     for (NewsletterSubscriptionConfig newsletterSubscriptionConfig : listSubscriptions) {
       subscriptions.add(new SelectItemOption<String>(newsletterSubscriptionConfig.getTitle(), newsletterSubscriptionConfig.getName()));
     }
-    UIFormSelectBox subscriptionSelectBox = new UIFormSelectBox(UINewsletterConstant.ENTRY_SUBSCRIPTION_SELECTBOX, 
+    UIFormSelectBox subscriptionSelectBox = new UIFormSelectBox(UINewsletterConstant.ENTRY_SUBSCRIPTION_SELECTBOX,
                                                                 UINewsletterConstant.ENTRY_SUBSCRIPTION_SELECTBOX, subscriptions);
     if(subScriptionName != null && subScriptionName.trim().length() > 0){
       subscriptionSelectBox.setValue(subScriptionName);
       subscriptionSelectBox.setDisabled(true);
     }
-    
+
     addChild(categorySelectBox);
     addChild(subscriptionSelectBox);
     NewsletterCategoryConfig categoryConfig = getAncestorOfType(UINewsletterEntryContainer.class).getCategoryConfig();
@@ -154,9 +154,9 @@ public class UINewsletterEntryDialogSelector extends UIForm {
 
   /**
    * Update template select box.
-   * 
+   *
    * @param categoryConfig the category config
-   * 
+   *
    * @throws Exception the exception
    */
   public void updateTemplateSelectBox(NewsletterCategoryConfig categoryConfig) throws Exception {
@@ -165,7 +165,7 @@ public class UINewsletterEntryDialogSelector extends UIForm {
     NewsletterTemplateHandler newsletterTemplateHandler = newsletterManagerService.getTemplateHandler();
     List<Node> templateNodes = newsletterTemplateHandler.getTemplates(
                                                                       Utils.getSessionProvider(),
-                                                                      NewsLetterUtil.getPortalName(), 
+                                                                      NewsLetterUtil.getPortalName(),
                                                                       categoryConfig);
     for (Node template : templateNodes) {
       templates.add(new SelectItemOption<String>(template.getProperty("exo:title").getString(), template.getName()));
@@ -181,11 +181,11 @@ public class UINewsletterEntryDialogSelector extends UIForm {
    * component's <code>addChangeTemplateActionListener<code> method. When
    * the changeTemplateAction event occurs, that object's appropriate
    * method is invoked.
-   * 
+   *
    * @see ChangeTemplateActionEvent
    */
   public static class ChangeTemplateActionListener extends EventListener<UINewsletterEntryDialogSelector> {
-    
+
     /* (non-Javadoc)
      * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
      */
@@ -200,8 +200,8 @@ public class UINewsletterEntryDialogSelector extends UIForm {
       UINewsletterEntryForm newsletterEntryForm = newsletterEntryContainer.getChild(UINewsletterEntryForm.class) ;
       newsletterEntryForm.setNodePath(newsletterTemplateHandler.getTemplate(
                                                                             Utils.getSessionProvider(),
-                                                                            NewsLetterUtil.getPortalName(), 
-                                                                            newsletterEntryContainer.getCategoryConfig(), 
+                                                                            NewsLetterUtil.getPortalName(),
+                                                                            newsletterEntryContainer.getCategoryConfig(),
                                                                             templateName).getPath());
       newsletterEntryForm.getChildren().clear();
       newsletterEntryForm.resetProperties();
@@ -218,11 +218,11 @@ public class UINewsletterEntryDialogSelector extends UIForm {
    * component's <code>addOpenWebcontentSelectorFormActionListener<code> method. When
    * the openWebcontentSelectorFormAction event occurs, that object's appropriate
    * method is invoked.
-   * 
+   *
    * @see OpenWebcontentSelectorFormActionEvent
    */
   public static class OpenWebcontentSelectorFormActionListener extends EventListener<UINewsletterEntryDialogSelector> {
-    
+
     /* (non-Javadoc)
      * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
      */
@@ -241,11 +241,11 @@ public class UINewsletterEntryDialogSelector extends UIForm {
    * component's <code>addChangeCategoryActionListener<code> method. When
    * the changeCategoryAction event occurs, that object's appropriate
    * method is invoked.
-   * 
+   *
    * @see ChangeCategoryActionEvent
    */
   public static class ChangeCategoryActionListener extends EventListener<UINewsletterEntryDialogSelector> {
-    
+
     /* (non-Javadoc)
      * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
      */
@@ -260,9 +260,9 @@ public class UINewsletterEntryDialogSelector extends UIForm {
       NewsletterSubscriptionHandler newsletterSubscriptionHandler = newsletterManagerService.getSubscriptionHandler();
       String portalName = NewsLetterUtil.getPortalName();
       SessionProvider sessionProvider = Utils.getSessionProvider();
-      NewsletterCategoryConfig categoryConfig = newsletterManagerService.getCategoryHandler().getCategoryByName(sessionProvider, portalName, 
+      NewsletterCategoryConfig categoryConfig = newsletterManagerService.getCategoryHandler().getCategoryByName(sessionProvider, portalName,
                                                                                                                 categorySelectBox.getValue());
-      List<NewsletterSubscriptionConfig> newsletterSubscriptionConfigs = 
+      List<NewsletterSubscriptionConfig> newsletterSubscriptionConfigs =
               newsletterSubscriptionHandler.getSubscriptionsByCategory(sessionProvider, portalName, categorySelectBox.getValue());
       for (NewsletterSubscriptionConfig newsletterSubscriptionConfig : newsletterSubscriptionConfigs) {
         subscriptions.add(new SelectItemOption<String>(newsletterSubscriptionConfig.getTitle(), newsletterSubscriptionConfig.getName()));
@@ -283,11 +283,11 @@ public class UINewsletterEntryDialogSelector extends UIForm {
    * component's <code>addUpdateNewsletterActionListener<code> method. When
    * the updateNewsletterAction event occurs, that object's appropriate
    * method is invoked.
-   * 
+   *
    * @see UpdateNewsletterActionEvent
    */
   public static class UpdateNewsletterActionListener extends EventListener<UINewsletterEntryDialogSelector> {
-    
+
     /* (non-Javadoc)
      * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
      */
@@ -297,10 +297,10 @@ public class UINewsletterEntryDialogSelector extends UIForm {
       String templateName = newsletterEntryTemplate.getValue();
       UIFormDateTimeInput formDateTimeInput = newsletterEntryDialogSelector.getChild(UIFormDateTimeInput.class);
       Calendar calendar = formDateTimeInput.getCalendar();
-      
+
       UIFormSelectBox categorySelectBox = newsletterEntryDialogSelector.getChildById("UINewsletterEntryCategorySelectBox");
       UIFormSelectBox subcriptionSelectBox = newsletterEntryDialogSelector.getChildById("UINewsletterEntrySubscriptionSelectBox");
-     
+
       UINewsletterEntryContainer entryContainer = newsletterEntryDialogSelector.getAncestorOfType(UINewsletterEntryContainer.class);
       UIApplication uiApp = entryContainer.getAncestorOfType(UIApplication.class);
       if(calendar == null || formDateTimeInput.getValue().trim().length() < 1){
@@ -313,12 +313,12 @@ public class UINewsletterEntryDialogSelector extends UIForm {
         return;
       }
       if (categorySelectBox.getValue() == null || subcriptionSelectBox.getValue() == null
-      		|| categorySelectBox.getValue().length() == 0 || subcriptionSelectBox.getValue().length() == 0)
+          || categorySelectBox.getValue().length() == 0 || subcriptionSelectBox.getValue().length() == 0)
       {
-      	Utils.createPopupMessage(newsletterEntryDialogSelector, "UINewsletterEntryDialogSelector.msg.subcriptionIsNotEmpty", null, ApplicationMessage.WARNING);
-      	return;
+        Utils.createPopupMessage(newsletterEntryDialogSelector, "UINewsletterEntryDialogSelector.msg.subcriptionIsNotEmpty", null, ApplicationMessage.WARNING);
+        return;
       }
-      
+
       entryContainer.setUpdated(true);
       formDateTimeInput.setCalendar(calendar);
       uiApp.addMessage(new ApplicationMessage("UINewsletterEntryForm.msg.UpdateInformationSuccessful", null, ApplicationMessage.INFO));

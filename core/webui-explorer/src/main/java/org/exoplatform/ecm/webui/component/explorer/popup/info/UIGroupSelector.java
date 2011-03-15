@@ -46,16 +46,16 @@ import org.exoplatform.webui.organization.UIGroupMembershipSelector;
  * Created by The eXo Platform SARL
  * Author : Pham Tuan
  *          phamtuanchip@yahoo.de
- * Dec 7, 2006 8:31:56 AM 
+ * Dec 7, 2006 8:31:56 AM
  */
-@ComponentConfigs({ 
+@ComponentConfigs({
   @ComponentConfig(
       template = "app:/groovy/webui/component/explorer/popup/info/UIGroupSelector.gtmpl",
       events = {
           @EventConfig(listeners = UIGroupSelector.ChangeNodeActionListener.class),
           @EventConfig(listeners = UIGroupSelector.SelectMembershipActionListener.class),
-          @EventConfig(listeners = UIGroupSelector.SelectPathActionListener.class)  
-      }  
+          @EventConfig(listeners = UIGroupSelector.SelectPathActionListener.class)
+      }
   ),
   @ComponentConfig(
       type = UITree.class, id = "UITreeGroupSelector",
@@ -111,7 +111,7 @@ public class UIGroupSelector extends UIGroupMembershipSelector implements Compon
 
   @SuppressWarnings({ "unchecked", "cast" })
   public List getChildGroup() throws Exception {
-    List children = new ArrayList() ;    
+    List children = new ArrayList() ;
     OrganizationService service = getApplicationComponent(OrganizationService.class) ;
     for (Object child : service.getGroupHandler().findGroups(this.getCurrentGroup())) {
       children.add((Group)child) ;
@@ -121,16 +121,16 @@ public class UIGroupSelector extends UIGroupMembershipSelector implements Compon
 
   @SuppressWarnings({ "unchecked", "cast" })
   public List getUsers() throws Exception {
-    List children = new ArrayList() ; 
+    List children = new ArrayList() ;
     OrganizationService service = getApplicationComponent(OrganizationService.class) ;
-    PageList userPageList = service.getUserHandler().findUsersByGroup(this.getCurrentGroup().getId()) ;    
+    PageList userPageList = service.getUserHandler().findUsersByGroup(this.getCurrentGroup().getId()) ;
     for(Object child : userPageList.getAll()){
       children.add((User)child) ;
     }
     return children ;
   }
 
-  static  public class SelectMembershipActionListener extends EventListener<UIGroupSelector> {   
+  static  public class SelectMembershipActionListener extends EventListener<UIGroupSelector> {
     public void execute(Event<UIGroupSelector> event) throws Exception {
       UIGroupSelector uiGroupSelector = event.getSource();
       String user = event.getRequestContext().getRequestParameter(OBJECTID) ;
@@ -152,7 +152,7 @@ public class UIGroupSelector extends UIGroupMembershipSelector implements Compon
     }
   }
 
-  static  public class ChangeNodeActionListener extends EventListener<UITree> {   
+  static  public class ChangeNodeActionListener extends EventListener<UITree> {
     public void execute(Event<UITree> event) throws Exception {
       UIGroupSelector uiGroupSelector = event.getSource().getAncestorOfType(UIGroupSelector.class) ;
       String groupId = event.getRequestContext().getRequestParameter(OBJECTID)  ;
@@ -166,7 +166,7 @@ public class UIGroupSelector extends UIGroupMembershipSelector implements Compon
       UIBreadcumbs uiBreadcumbs = event.getSource() ;
       UIGroupSelector uiGroupSelector = uiBreadcumbs.getParent() ;
       String objectId =  event.getRequestContext().getRequestParameter(OBJECTID) ;
-      uiBreadcumbs.setSelectPath(objectId);     
+      uiBreadcumbs.setSelectPath(objectId);
       String selectGroupId = uiBreadcumbs.getSelectLocalPath().getId() ;
       uiGroupSelector.changeGroup(selectGroupId) ;
       event.getRequestContext().addUIComponentToUpdateByAjax(uiGroupSelector) ;

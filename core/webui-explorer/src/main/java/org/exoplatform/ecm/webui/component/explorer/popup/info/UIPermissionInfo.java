@@ -56,28 +56,28 @@ import org.exoplatform.webui.event.EventListener;
  * 10:07:15 AM
  * Editor : TuanP
  *        phamtuanchip@yahoo.de
- * Oct 13, 20006  
+ * Oct 13, 20006
  */
 
 @ComponentConfig(
     lifecycle = UIContainerLifecycle.class,
     events = {
       @EventConfig (listeners = UIPermissionInfo.DeleteActionListener.class, confirm = "UIPermissionInfo.msg.confirm-delete-permission"),
-      @EventConfig (listeners = UIPermissionInfo.EditActionListener.class) 
+      @EventConfig (listeners = UIPermissionInfo.EditActionListener.class)
     }
 )
 
 public class UIPermissionInfo extends UIContainer {
 
-  public static String[] PERMISSION_BEAN_FIELD = {"usersOrGroups", "read", "addNode", 
+  public static String[] PERMISSION_BEAN_FIELD = {"usersOrGroups", "read", "addNode",
     "setProperty", "remove"} ;
-  
+
   private static String[] PERMISSION_ACTION = {"Edit", "Delete"} ;
 
   private int sizeOfListPermission = 0;
-  
+
   private Node currentNode;
-  
+
   public UIPermissionInfo() throws Exception {
     UIGrid uiGrid = createUIComponent(UIGrid.class, null, "PermissionInfo") ;
     addChild(uiGrid) ;
@@ -88,10 +88,10 @@ public class UIPermissionInfo extends UIContainer {
   private String  getExoOwner(Node node) throws Exception {
     return Utils.getNodeOwner(node) ;
   }
-  
+
   public void updateGrid(int currentPage) throws Exception {
     UIJCRExplorer uiJCRExplorer = getAncestorOfType(UIJCRExplorer.class);
-    List<PermissionBean> permBeans = new ArrayList<PermissionBean>(); 
+    List<PermissionBean> permBeans = new ArrayList<PermissionBean>();
     ExtendedNode node = (ExtendedNode) uiJCRExplorer.getCurrentNode();
 
     List<AccessControlEntry> permsList = node.getACL().getPermissionEntries() ;
@@ -111,7 +111,7 @@ public class UIPermissionInfo extends UIContainer {
       }
       permsMap.put(currentIdentity, currentPermissionsList) ;
     }
-    Set<String> keys = permsMap.keySet(); 
+    Set<String> keys = permsMap.keySet();
     Iterator<String> keysIter = keys.iterator() ;
     int iSystemOwner = 0;
     //TODO Utils.getExoOwner(node) has exception return SystemIdentity.SYSTEM
@@ -129,8 +129,8 @@ public class UIPermissionInfo extends UIContainer {
     }
 
     while(keysIter.hasNext()) {
-      String userOrGroup = keysIter.next();            
-      List<String> permissions = permsMap.get(userOrGroup);      
+      String userOrGroup = keysIter.next();
+      List<String> permissions = permsMap.get(userOrGroup);
       PermissionBean permBean = new PermissionBean();
       permBean.setUsersOrGroups(userOrGroup);
       for(String perm : permissions) {
@@ -142,7 +142,7 @@ public class UIPermissionInfo extends UIContainer {
       permBeans.add(permBean);
       sizeOfListPermission = permBeans.size() + iSystemOwner;
     }
-    UIGrid uiGrid = findFirstComponentOfType(UIGrid.class) ; 
+    UIGrid uiGrid = findFirstComponentOfType(UIGrid.class) ;
     ObjectPageList objPageList = new ObjectPageList(permBeans, 10) ;
     uiGrid.getUIPageIterator().setPageList(objPageList);
     if(currentPage > uiGrid.getUIPageIterator().getAvailablePage())
@@ -155,7 +155,7 @@ public class UIPermissionInfo extends UIContainer {
       UIPermissionInfo uicomp = event.getSource() ;
       String name = event.getRequestContext().getRequestParameter(OBJECTID) ;
       UIJCRExplorer uiJCRExplorer = uicomp.getAncestorOfType(UIJCRExplorer.class) ;
-      ExtendedNode node = (ExtendedNode)uiJCRExplorer.getCurrentNode() ; 
+      ExtendedNode node = (ExtendedNode)uiJCRExplorer.getCurrentNode() ;
       UIPermissionForm uiForm = uicomp.getAncestorOfType(UIPermissionManager.class).getChild(UIPermissionForm.class) ;
       uiForm.fillForm(name, node) ;
       uiForm.lockForm(name.equals(uicomp.getExoOwner(node)));
@@ -169,7 +169,7 @@ public class UIPermissionInfo extends UIContainer {
       Node currentNode = uiJCRExplorer.getCurrentNode() ;
       uiJCRExplorer.addLockToken(currentNode);
       ExtendedNode node = (ExtendedNode)currentNode;
-      String owner = SystemIdentity.SYSTEM ;      
+      String owner = SystemIdentity.SYSTEM ;
       int iSystemOwner = 0;
       if (uicomp.getExoOwner(node) != null) owner = uicomp.getExoOwner(node);
       if (owner.equals(SystemIdentity.SYSTEM)) iSystemOwner = -1;
@@ -182,14 +182,14 @@ public class UIPermissionInfo extends UIContainer {
       }
       String name = event.getRequestContext().getRequestParameter(OBJECTID) ;
       if(!currentNode.isCheckedOut()) {
-        uiApp.addMessage(new ApplicationMessage("UIActionBar.msg.node-checkedin", null, 
+        uiApp.addMessage(new ApplicationMessage("UIActionBar.msg.node-checkedin", null,
             ApplicationMessage.WARNING)) ;
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
-        return ;        
+        return ;
       }
       String nodeOwner = Utils.getNodeOwner(node);
       if(name.equals(nodeOwner)) {
-        uiApp.addMessage(new ApplicationMessage("UIPermissionInfo.msg.no-permission-remove", null, 
+        uiApp.addMessage(new ApplicationMessage("UIPermissionInfo.msg.no-permission-remove", null,
                                                 ApplicationMessage.WARNING)) ;
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
         return ;
@@ -204,10 +204,10 @@ public class UIPermissionInfo extends UIContainer {
           node.save() ;
         } catch(AccessDeniedException ace) {
           node.getSession().refresh(false) ;
-          uiApp.addMessage(new ApplicationMessage("UIPermissionInfo.msg.access-denied", null, 
+          uiApp.addMessage(new ApplicationMessage("UIPermissionInfo.msg.access-denied", null,
                                                   ApplicationMessage.WARNING)) ;
           event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
-          return ;          
+          return ;
         }
         if(uiJCRExplorer.getRootNode().equals(node)) {
           if(!PermissionUtil.canRead(currentNode)) {
@@ -220,7 +220,7 @@ public class UIPermissionInfo extends UIContainer {
           node.getSession().refresh(false) ;
         }
       } else {
-        uiApp.addMessage(new ApplicationMessage("UIPermissionInfo.msg.no-permission-tochange", null, 
+        uiApp.addMessage(new ApplicationMessage("UIPermissionInfo.msg.no-permission-tochange", null,
             ApplicationMessage.WARNING)) ;
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
         return ;
@@ -239,20 +239,20 @@ public class UIPermissionInfo extends UIContainer {
         // Reset the permissions
         linkManager.updateLink(realNode, currentNode);
       }
-      
+
       uiJCRExplorer.setIsHidePopup(true) ;
       event.getRequestContext().addUIComponentToUpdateByAjax(uiPopup) ;
       uiJCRExplorer.updateAjax(event) ;
     }
   }
 
-  public class PermissionBean {    
+  public class PermissionBean {
 
     private String usersOrGroups ;
     private boolean read ;
     private boolean addNode ;
     private boolean setProperty ;
-    private boolean remove ;    
+    private boolean remove ;
 
     public String getUsersOrGroups() { return usersOrGroups ; }
     public void setUsersOrGroups(String s) { usersOrGroups = s ; }

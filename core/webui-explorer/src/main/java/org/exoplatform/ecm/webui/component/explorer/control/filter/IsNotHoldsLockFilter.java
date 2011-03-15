@@ -28,18 +28,18 @@ import org.exoplatform.webui.ext.filter.UIExtensionFilterType;
  * Created by The eXo Platform SARL
  * Author : Hoang Van Hung
  *          hunghvit@gmail.com
- * Aug 10, 2009  
+ * Aug 10, 2009
  */
 public class IsNotHoldsLockFilter extends UIExtensionAbstractFilter {
 
   public IsNotHoldsLockFilter() {
     this(null);
   }
-  
+
   public IsNotHoldsLockFilter(String messageKey) {
     super(messageKey, UIExtensionFilterType.MANDATORY);
   }
-  
+
   public boolean accept(Map<String, Object> context) throws Exception {
     if (context == null) return true;
     Node currentNode = (Node) context.get(Node.class.getName());
@@ -47,6 +47,6 @@ public class IsNotHoldsLockFilter extends UIExtensionAbstractFilter {
   }
 
   public void onDeny(Map<String, Object> context) throws Exception {
-    
+
   }
 }

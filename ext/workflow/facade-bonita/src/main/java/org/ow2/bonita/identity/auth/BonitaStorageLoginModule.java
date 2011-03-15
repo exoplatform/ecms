@@ -27,7 +27,7 @@ import javax.security.auth.spi.LoginModule;
  * Created by The eXo Platform SARL
  * Author : Dang Van Minh
  *          minh.dang@exoplatform.com
- * Jun 12, 2009  
+ * Jun 12, 2009
  * 9:23:58 AM
  */
 public final class BonitaStorageLoginModule implements LoginModule {
@@ -56,13 +56,13 @@ public final class BonitaStorageLoginModule implements LoginModule {
 
   public boolean logout() throws LoginException {
     try {
-		if (SecurityContext.getSubject() != null) {
-			SecurityContext.clearSubject();
-		}
-	} catch (Exception e) {
-		// Ignore exception
-	}
-	return true;
+    if (SecurityContext.getSubject() != null) {
+      SecurityContext.clearSubject();
+    }
+  } catch (Exception e) {
+    // Ignore exception
   }
-  
+  return true;
+  }
+
 }

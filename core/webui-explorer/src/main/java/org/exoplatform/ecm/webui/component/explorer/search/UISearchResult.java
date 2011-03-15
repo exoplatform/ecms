@@ -71,18 +71,18 @@ import org.exoplatform.webui.event.EventListener;
  * Author : Tran The Trong
  *          trongtt@gmail.com
  * Oct 2, 2006
- * 16:37:15 
- * 
+ * 16:37:15
+ *
  * Edited by : Dang Van Minh
  *             minh.dang@exoplatform.com
  * Jan 5, 2007
  */
 @ComponentConfig(
     template = "app:/groovy/webui/component/explorer/search/UISearchResult.gtmpl",
-    events = { 
+    events = {
         @EventConfig(listeners = UISearchResult.ViewActionListener.class),
         @EventConfig(listeners = UISearchResult.OpenFolderActionListener.class),
-        @EventConfig(listeners = UISearchResult.SortASCActionListener.class),        
+        @EventConfig(listeners = UISearchResult.SortASCActionListener.class),
         @EventConfig(listeners = UISearchResult.SortDESCActionListener.class)
     }
 )
@@ -92,9 +92,9 @@ public class UISearchResult extends UIContainer {
    * Logger.
    */
   private static final Log LOG  = ExoLogger.getLogger("explorer.search.UISearchResult");
-  
+
   private QueryResult queryResult_;
-  private long searchTime_ = 0; 
+  private long searchTime_ = 0;
   private boolean flag_ = false;
   private UIQueryResultPageIterator uiPageIterator_;
   private List<Node> currentListNodes_ = new ArrayList<Node>();
@@ -106,44 +106,44 @@ public class UISearchResult extends UIContainer {
   static private int PAGE_SIZE = 10;
   private List<String> categoryPathList = new ArrayList<String>();
   private String constraintsCondition;
-  private static final String EXO_RESTORE_LOCATION = "exo:restoreLocation";  
+  private static final String EXO_RESTORE_LOCATION = "exo:restoreLocation";
   private boolean isTaxonomyNode = false;
   private String workspaceName = null;
   private String currentPath = null;
-  
+
   public List<String> getCategoryPathList() { return categoryPathList; }
   public void setCategoryPathList(List<String> categoryPathListItem) {
-    categoryPathList = categoryPathListItem; 
+    categoryPathList = categoryPathListItem;
   }
-  
+
   public String getConstraintsCondition() { return constraintsCondition; }
   public void setConstraintsCondition(String constraintsConditionItem) {
-    constraintsCondition = constraintsConditionItem; 
+    constraintsCondition = constraintsConditionItem;
   }
-  
+
   public UISearchResult() throws Exception {
     uiPageIterator_ = addChild(UIQueryResultPageIterator.class, null, null);
   }
 
   public void setQueryResults(QueryResult queryResult) throws Exception {
-    queryResult_ = queryResult;         
-  }  
-  
+    queryResult_ = queryResult;
+  }
+
   public long getSearchTime() { return searchTime_; }
-  public void setSearchTime(long time) { this.searchTime_ = time; }  
-  
-  public List getCurrentList() throws Exception { 
-    return uiPageIterator_.getCurrentPageData();    
+  public void setSearchTime(long time) { this.searchTime_ = time; }
+
+  public List getCurrentList() throws Exception {
+    return uiPageIterator_.getCurrentPageData();
   }
 
   public DateFormat getSimpleDateFormat() {
     Locale locale = Util.getUIPortal().getAncestorOfType(UIPortalApplication.class).getLocale();
     return SimpleDateFormat.getDateTimeInstance(SimpleDateFormat.SHORT, SimpleDateFormat.SHORT, locale);
   }
-  
+
   private void addNode(List<Node> listNodes, Node node, List<Row> listRows, Row r) throws Exception {
     List<Node> checkList = new ArrayList<Node>();
-    if (flag_) checkList = currentListNodes_; 
+    if (flag_) checkList = currentListNodes_;
     else checkList = listNodes;
     if (node.getName().equals(Utils.JCR_CONTENT)) {
       if (!checkList.contains(node.getParent())) {
@@ -155,27 +155,27 @@ public class UISearchResult extends UIContainer {
       listRows.add(r);
     }
   }
-  
+
   public Session getSession() throws Exception {
     return getAncestorOfType(UIJCRExplorer.class).getTargetSession();
   }
-    
+
   public Date getDateCreated(Node node) throws Exception{
     if (node.hasProperty("exo:dateCreated")) {
       return node.getProperty("exo:dateCreated").getDate().getTime();
     }
     return new GregorianCalendar().getTime();
   }
-  
+
   public Node getNodeByPath(String path) throws Exception {
-    try {        
+    try {
       JCRPath nodePath = ((SessionImpl)getSession()).getLocationFactory().parseJCRPath(path);
       return (Node)getSession().getItem(nodePath.getAsString(false));
     } catch (Exception e) {
       return null;
     }
   }
-  
+
   public List<Row> getResultList() throws Exception {
     TaxonomyService taxonomyService = getApplicationComponent(TaxonomyService.class);
     NodeHierarchyCreator nodeHierarchyCreator = getApplicationComponent(NodeHierarchyCreator.class);
@@ -185,7 +185,7 @@ public class UISearchResult extends UIContainer {
     Node resultNode = null;
     if (queryResult_ == null) return new ArrayList<Row>();
     long resultListSize = queryResult_.getNodes().getSize();
-    if (!queryResult_.getRows().hasNext()) return currentListRows_;    
+    if (!queryResult_.getRows().hasNext()) return currentListRows_;
     if (resultListSize > 100) {
       for (RowIterator iter = queryResult_.getRows(); iter.hasNext();) {
         Row r = iter.nextRow();
@@ -198,7 +198,7 @@ public class UISearchResult extends UIContainer {
         }
         if (resultNode != null) {
           if ((categoryPathList != null) && (categoryPathList.size() > 0)){
-            for (String categoryPath : categoryPathList) {            
+            for (String categoryPath : categoryPathList) {
               int index = categoryPath.indexOf("/");
               List<String> pathCategoriesList = new ArrayList<String>();
               String searchCategory = rootTreePath + "/" + categoryPath;
@@ -215,7 +215,7 @@ public class UISearchResult extends UIContainer {
         if (!iter.hasNext()) isEndOfIterator_ = true;
         if (listNodes.size() == 100) {
           currentListNodes_.addAll(listNodes);
-          currentListRows_.addAll(listRows); 
+          currentListRows_.addAll(listRows);
           break;
         }
         if (listNodes.size() < 100 && iter.hasNext()) {
@@ -257,28 +257,28 @@ public class UISearchResult extends UIContainer {
     }
     return currentListRows_;
   }
-  
+
   public void clearAll() {
     flag_ = false;
     isEndOfIterator_ = false;
     currentListNodes_.clear();
   }
-  
+
   public UIQueryResultPageIterator getUIPageIterator() { return uiPageIterator_; }
-  
+
   public void setTaxonomyNode(boolean isTaxonomyNode, String workspaceName, String currentPath) {
     this.isTaxonomyNode = isTaxonomyNode;
     this.workspaceName = workspaceName;
     this.currentPath = currentPath;
   }
-   
-  public boolean isTaxonomyNode() { return isTaxonomyNode; }  
-  
+
+  public boolean isTaxonomyNode() { return isTaxonomyNode; }
+
   public Node getSymlinkNode(Node targetNode) throws Exception {
     RepositoryService repositoryService = getApplicationComponent(RepositoryService.class);
-    Session session = 
+    Session session =
       SessionProviderFactory.createSessionProvider().getSession(workspaceName, repositoryService.getCurrentRepository());
-    String queryStatement = 
+    String queryStatement =
       "select * from exo:taxonomyLink where jcr:path like '" + currentPath + "/%' " +
           "and exo:uuid='"+targetNode.getUUID()+"' " +
           "and exo:workspace='"+targetNode.getSession().getWorkspace().getName()+"' order by exo:primaryType DESC";
@@ -286,7 +286,7 @@ public class UISearchResult extends UIContainer {
     Query query = queryManager.createQuery(queryStatement, Query.SQL);
     if(query.execute().getNodes().getSize() > 0) return query.execute().getNodes().nextNode();
     return null;
-  } 
+  }
 
   public void updateGrid(boolean flagCheck) throws Exception {
     SearchResultPageList pageList;
@@ -299,79 +299,79 @@ public class UISearchResult extends UIContainer {
     uiPageIterator_.setSearchResultPageList(pageList);
     uiPageIterator_.setPageList(pageList);
   }
-  
+
   public int getCurrentAvaiablePage() { return currentAvailablePage_; }
-  
+
   private static class SearchComparator implements Comparator<Row> {
     public int compare(Row row1, Row row2) {
       try {
         if (iconType.equals("BlueUpArrow") || iconType.equals("BlueDownArrow")) {
           String s1 = row1.getValue("jcr:primaryType").getString();
           String s2 = row2.getValue("jcr:primaryType").getString();
-          if (iconType.trim().equals("BlueUpArrow")) { return s2.compareTo(s1); }        
+          if (iconType.trim().equals("BlueUpArrow")) { return s2.compareTo(s1); }
           return s1.compareTo(s2);
         } else if (iconScore.equals("BlueUpArrow") || iconScore.equals("BlueDownArrow")) {
           Long l1 = row1.getValue("jcr:score").getLong();
           Long l2 = row2.getValue("jcr:score").getLong();
-          if (iconScore.trim().equals("BlueUpArrow")) { return l2.compareTo(l1); }        
+          if (iconScore.trim().equals("BlueUpArrow")) { return l2.compareTo(l1); }
           return l1.compareTo(l2);
         }
       } catch (Exception e) {
         LOG.error("Cannot compare rows", e);
-      }            
+      }
       return 0;
-    }        
+    }
   }
-  
+
   public String StriptHTML(String s) {
     String[] targets = {"<div>", "</div>", "<span>", "</span>"};
     for (String target : targets) {
       s = s.replace(target, "");
     }
-    return s; 
+    return s;
   }
-  
+
   static  public class ViewActionListener extends EventListener<UISearchResult> {
     public void execute(Event<UISearchResult> event) throws Exception {
-      UISearchResult uiSearchResult = event.getSource();            
+      UISearchResult uiSearchResult = event.getSource();
       UIJCRExplorer uiExplorer = uiSearchResult.getAncestorOfType(UIJCRExplorer.class);
       String path = event.getRequestContext().getRequestParameter(OBJECTID);
       UIApplication uiApp = uiSearchResult.getAncestorOfType(UIApplication.class);
       String workspaceName = event.getRequestContext().getRequestParameter("workspaceName");
-      Item item = null;      
-      try {      
-	      Session session = uiExplorer.getSessionByWorkspace(workspaceName);
-    		// Check if the path exists
+      Item item = null;
+      try {
+        Session session = uiExplorer.getSessionByWorkspace(workspaceName);
+        // Check if the path exists
         NodeFinder nodeFinder = uiSearchResult.getApplicationComponent(NodeFinder.class);
         item = nodeFinder.getItem(session, path);
       } catch(PathNotFoundException pa) {
-        uiApp.addMessage(new ApplicationMessage("UITreeExplorer.msg.path-not-found", null, 
+        uiApp.addMessage(new ApplicationMessage("UITreeExplorer.msg.path-not-found", null,
             ApplicationMessage.WARNING)) ;
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
         return ;
       } catch(ItemNotFoundException inf) {
-          uiApp.addMessage(new ApplicationMessage("UITreeExplorer.msg.path-not-found", null, 
+          uiApp.addMessage(new ApplicationMessage("UITreeExplorer.msg.path-not-found", null,
               ApplicationMessage.WARNING)) ;
           event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
           return ;
       } catch(AccessDeniedException ace) {
-          uiApp.addMessage(new ApplicationMessage("UIDocumentInfo.msg.access-denied", null, 
+          uiApp.addMessage(new ApplicationMessage("UIDocumentInfo.msg.access-denied", null,
                   ApplicationMessage.WARNING)) ;
-	      event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
-	      return ;    	  
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+        return ;
       } catch(RepositoryException e) {
-    		LOG.error("Repository cannot be found");      	
-        uiApp.addMessage(new ApplicationMessage("UITreeExplorer.msg.repository-error", null, 
+        LOG.error("Repository cannot be found");
+        uiApp.addMessage(new ApplicationMessage("UITreeExplorer.msg.repository-error", null,
             ApplicationMessage.WARNING)) ;
-			  event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
-			  return ;    	  
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+        return ;
       } catch (Exception e) {
         JCRExceptionManager.process(uiApp, e);
         return;
       }
-      if (isInTrash(item)) 
-      	return;
-      
+      if (isInTrash(item))
+        return;
+
       UIWorkingArea uiWorkingArea = uiExplorer.getChild(UIWorkingArea.class);
       UIDocumentWorkspace uiDocumentWorkspace = uiWorkingArea.getChild(UIDocumentWorkspace.class);
       if(!uiDocumentWorkspace.isRendered()) {
@@ -379,17 +379,17 @@ public class UISearchResult extends UIContainer {
         uiWorkingArea.getChild(UIDocumentWorkspace.class).setRendered(true);
       }
       uiExplorer.setSelectNode(workspaceName, path) ;
-      
-      uiExplorer.updateAjax(event) ;      
+
+      uiExplorer.updateAjax(event) ;
     }
-    
+
     private boolean isInTrash(Item item) throws RepositoryException {
-    	return (item instanceof Node) &&
-      			 ((Node) item).isNodeType(EXO_RESTORE_LOCATION);
+      return (item instanceof Node) &&
+             ((Node) item).isNodeType(EXO_RESTORE_LOCATION);
     }
   }
 
-  
+
   static public class OpenFolderActionListener extends EventListener<UISearchResult> {
     public void execute(Event<UISearchResult> event) throws Exception {
       UISearchResult uiSearchResult = event.getSource();
@@ -401,22 +401,22 @@ public class UISearchResult extends UIContainer {
         node = uiExplorer.getNodeByPath(folderPath, uiExplorer.getTargetSession());
       } catch(AccessDeniedException ace) {
         UIApplication uiApp = uiSearchResult.getAncestorOfType(UIApplication.class);
-        uiApp.addMessage(new ApplicationMessage("UISearchResult.msg.access-denied", null, 
+        uiApp.addMessage(new ApplicationMessage("UISearchResult.msg.access-denied", null,
             ApplicationMessage.WARNING));
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
         return;
       } catch(Exception e) {
-        LOG.error("Cannot access the node at " + folderPath, e);        
+        LOG.error("Cannot access the node at " + folderPath, e);
       }
 
-    	uiExplorer.setSelectNode(node.getSession().getWorkspace().getName(), folderPath);
+      uiExplorer.setSelectNode(node.getSession().getWorkspace().getName(), folderPath);
       uiExplorer.updateAjax(event);
     }
   }
-  
+
   static public class SortASCActionListener extends EventListener<UISearchResult> {
     public void execute(Event<UISearchResult> event) throws Exception {
-      UISearchResult uiSearchResult = event.getSource();     
+      UISearchResult uiSearchResult = event.getSource();
       String objectId = event.getRequestContext().getRequestParameter(OBJECTID);
       if (objectId.equals("type")) {
         iconType = "BlueDownArrow";
@@ -426,18 +426,18 @@ public class UISearchResult extends UIContainer {
         iconType = "";
       }
       Collections.sort(uiSearchResult.currentListRows_, new SearchComparator());
-      SearchResultPageList pageList = new SearchResultPageList(uiSearchResult.queryResult_, 
+      SearchResultPageList pageList = new SearchResultPageList(uiSearchResult.queryResult_,
           uiSearchResult.currentListRows_, PAGE_SIZE, uiSearchResult.isEndOfIterator_);
       uiSearchResult.currentAvailablePage_ = uiSearchResult.currentListNodes_.size()/PAGE_SIZE;
       uiSearchResult.uiPageIterator_.setSearchResultPageList(pageList);
-      uiSearchResult.uiPageIterator_.setPageList(pageList);      
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiSearchResult.getParent());      
+      uiSearchResult.uiPageIterator_.setPageList(pageList);
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiSearchResult.getParent());
     }
-  } 
-  
+  }
+
   static public class SortDESCActionListener extends EventListener<UISearchResult> {
     public void execute(Event<UISearchResult> event) throws Exception {
-      UISearchResult uiSearchResult = event.getSource() ;     
+      UISearchResult uiSearchResult = event.getSource() ;
       String objectId = event.getRequestContext().getRequestParameter(OBJECTID);
       if (objectId.equals("type")) {
         iconType = "BlueUpArrow";
@@ -447,12 +447,12 @@ public class UISearchResult extends UIContainer {
         iconType = "";
       }
       Collections.sort(uiSearchResult.currentListRows_, new SearchComparator());
-      SearchResultPageList pageList = new SearchResultPageList(uiSearchResult.queryResult_, 
+      SearchResultPageList pageList = new SearchResultPageList(uiSearchResult.queryResult_,
           uiSearchResult.currentListRows_, PAGE_SIZE, uiSearchResult.isEndOfIterator_);
       uiSearchResult.currentAvailablePage_ = uiSearchResult.currentListNodes_.size()/PAGE_SIZE;
       uiSearchResult.uiPageIterator_.setSearchResultPageList(pageList);
-      uiSearchResult.uiPageIterator_.setPageList(pageList);      
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiSearchResult.getParent());      
+      uiSearchResult.uiPageIterator_.setPageList(pageList);
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiSearchResult.getParent());
     }
-  } 
+  }
 }

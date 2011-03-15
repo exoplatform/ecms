@@ -36,7 +36,7 @@ import org.exoplatform.webui.form.UIFormSelectBox;
  * Created by The eXo Platform SARL
  * Author : Pham Tuan
  *          phamtuanchip@yahoo.de
- * Oct 25, 2006 3:23:00 PM 
+ * Oct 25, 2006 3:23:00 PM
  */
 @ComponentConfig(
     lifecycle = UIFormLifecycle.class,
@@ -106,11 +106,11 @@ public class UINewConfigForm extends UIForm {
 
   private List<SelectItemOption<String>> getWorkSpaceOption(String repository) throws Exception {
     List<SelectItemOption<String>> options = new ArrayList<SelectItemOption<String>>();
-    String[] workspaceNames = 
+    String[] workspaceNames =
       getApplicationComponent(RepositoryService.class).getRepository(repository).getWorkspaceNames();
     for(String workspace:workspaceNames) {
       options.add(new SelectItemOption<String>(workspace,workspace));
-    }   
+    }
     return options;
   }
 
@@ -141,7 +141,7 @@ public class UINewConfigForm extends UIForm {
       uiConfigTabPane.setNewConfig(false);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiConfigTabPane);
     }
-  }  
+  }
 
   public static class NextActionListener extends EventListener<UINewConfigForm>{
     public void execute(Event<UINewConfigForm> event) throws Exception {
@@ -154,6 +154,6 @@ public class UINewConfigForm extends UIForm {
       uiConfigTabPane.initNewConfig(browseType, repository, workSpace);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiConfigTabPane);
     }
-  }  
+  }
 }
 

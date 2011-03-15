@@ -60,11 +60,11 @@ public class UIECMAdminPortlet extends UIPortletApplication {
    * Logger.
    */
   private static final Log LOG  = ExoLogger.getLogger(UIECMAdminPortlet.class);
-  
+
   private boolean isShowSideBar = true ;
   private boolean isSelectedRepo_ = true ;
   private String repoName_ = "" ;
-  
+
   public UIECMAdminPortlet() throws Exception {
 //    addChild(UIRepositoryControl.class, null, null) ;
     UIPopupContainer uiPopupAction = addChild(UIPopupContainer.class, null, "UIECMAdminUIPopupAction");
@@ -77,21 +77,21 @@ public class UIECMAdminPortlet extends UIPortletApplication {
       workingArea.init();
     } catch(Exception e) {
       LOG.error("An expected error occured while initializing the portlet", e);
-    }        
+    }
   }
-  
+
   public void initChilds() throws Exception{
     UIECMAdminControlPanel controlPanel = getChild(UIECMAdminControlPanel.class);
     if(controlPanel == null) {
       controlPanel = addChild(UIECMAdminControlPanel.class, null, null) ;
       controlPanel.initialize();
     }
-    
+
     UIECMAdminWorkingArea workingArea = getChild(UIECMAdminWorkingArea.class) ;
     if(workingArea == null){
       workingArea = addChild(UIECMAdminWorkingArea.class, null, null) ;
     }
-    workingArea.init() ;      
+    workingArea.init() ;
   }
   public void renderPopupMessages() throws Exception {
     UIPopupMessages popupMess = getUIPopupMessages();
@@ -99,34 +99,34 @@ public class UIECMAdminPortlet extends UIPortletApplication {
     WebuiRequestContext  context =  WebuiRequestContext.getCurrentInstance() ;
     popupMess.processRender(context);
   }
-  
+
   public String getUserAgent() {
     PortletRequestContext requestContext = PortletRequestContext.getCurrentInstance();
     PortletRequest portletRequest = requestContext.getRequest();
     return portletRequest.getProperty("User-Agent");
   }
-  
+
   public ManageableRepository getRepository() throws Exception {
     RepositoryService rservice = getApplicationComponent(RepositoryService.class) ;
     return rservice.getRepository(repoName_) ;
   }
-  
+
   public boolean isShowSideBar() { return isShowSideBar ; }
   public void setShowSideBar(boolean bl) { this.isShowSideBar = bl ; }
-  
+
   public boolean isSelectedRepo() { return isSelectedRepo_ ; }
   public void setSelectedRepo(boolean bl) { this.isSelectedRepo_ = bl ; }
-  
+
   public String getRepoName() {return repoName_ ;}
   public void setRepoName(String name){repoName_ = name ;}
-  
+
   static public class ShowHideActionListener extends EventListener<UIECMAdminPortlet> {
     public void execute(Event<UIECMAdminPortlet> event) throws Exception {
       UIECMAdminPortlet uiECMAdminPortlet = event.getSource() ;
       uiECMAdminPortlet.setShowSideBar(!uiECMAdminPortlet.isShowSideBar) ;
     }
   }
-  
+
   public String getPreferenceRepository() {
     try {
       return getApplicationComponent(RepositoryService.class).getCurrentRepository().getConfiguration().getName();
@@ -134,38 +134,38 @@ public class UIECMAdminPortlet extends UIPortletApplication {
       return null;
     }
   }
-  
+
   public String getPreferenceWorkspace() {
     PortletPreferences portletPref = getPortletPreferences() ;
     String workspace = portletPref.getValue(Utils.WORKSPACE_NAME, "") ;
     return workspace ;
   }
-  
+
   public PortletPreferences getPortletPreferences() {
     PortletRequestContext pcontext = (PortletRequestContext)WebuiRequestContext.getCurrentInstance() ;
     PortletRequest prequest = pcontext.getRequest() ;
     PortletPreferences portletPref = prequest.getPreferences() ;
     return portletPref ;
   }
-  
+
   public void  processRender(WebuiApplication app, WebuiRequestContext context) throws Exception {
-    UIECMAdminWorkingArea uiecmAdminWorkingArea = getChild(UIECMAdminWorkingArea.class); 
+    UIECMAdminWorkingArea uiecmAdminWorkingArea = getChild(UIECMAdminWorkingArea.class);
     UIUnLockManager uiUnLockManager = uiecmAdminWorkingArea.getChild(UIUnLockManager.class);
     if (uiUnLockManager != null) uiUnLockManager.update();
     super.processRender(app, context);
   }
-  
+
   public String getDMSSystemWorkspace(String repository) throws Exception {
-  	ExoContainer container = ExoContainerContext.getCurrentContainer();
+    ExoContainer container = ExoContainerContext.getCurrentContainer();
 //  	RepositoryService repoService = (RepositoryService)
 //  			container.getComponentInstanceOfType(RepositoryService.class);
-  	DMSConfiguration dmsConfiguration = (DMSConfiguration)
-  			container.getComponentInstanceOfType(DMSConfiguration.class);
-  	
+    DMSConfiguration dmsConfiguration = (DMSConfiguration)
+        container.getComponentInstanceOfType(DMSConfiguration.class);
+
     //ManageableRepository manageableRepository = repoService.getRepository(repository) ;
     DMSRepositoryConfiguration dmsRepoConfig = dmsConfiguration.getConfig();
     return dmsRepoConfig.getSystemWorkspace();
     //return manageableRepository.getSystemSession(dmsRepoConfig.getSystemWorkspace());
   }
-  
+
 }

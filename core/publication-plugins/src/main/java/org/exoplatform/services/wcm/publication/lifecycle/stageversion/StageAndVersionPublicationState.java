@@ -28,30 +28,30 @@ import org.exoplatform.services.log.Log;
  * Apr 1, 2009
  */
 public class StageAndVersionPublicationState {
-  
+
   /** The Constant ENROLLED. */
-  public static final String ENROLLED = "enrolled".intern(); 
-  
+  public static final String ENROLLED = "enrolled".intern();
+
   /** The Constant DRAFT. */
   public static final String DRAFT = "draft".intern();
-  
+
   /** The Constant AWAITING. */
   public static final String AWAITING = "awaiting".intern();
-  
+
   /** The Constant LIVE. */
   public static final String PUBLISHED = "published".intern();
-  
+
   /** The Constant OBSOLETE. */
   public static final String OBSOLETE = "obsolete".intern();
 
   /** The log. */
   private static Log log = ExoLogger.getLogger(StageAndVersionPublicationState.class);
-  
+
   /**
    * Gets the revision state.
-   * 
+   *
    * @param currentNode the current node
-   * 
+   *
    * @return the revision state
    */
   public static String getRevisionState(Node currentNode) {

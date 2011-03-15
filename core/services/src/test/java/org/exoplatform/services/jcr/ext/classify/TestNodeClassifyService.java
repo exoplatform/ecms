@@ -38,14 +38,14 @@ public class TestNodeClassifyService extends BaseWCMTestCase {
   public void setUp() throws Exception {
     super.setUp();
   }
-  
+
   /**
    * Test classify plugin manager.
-   * 
+   *
    * @throws Exception the exception
    */
   public void testClassifyPluginManager() throws Exception {
-    NodeClassifyService classifyService = 
+    NodeClassifyService classifyService =
       (NodeClassifyService)container.getComponentInstanceOfType(NodeClassifyService.class);
     String strAlphabetClassify = "org.exoplatform.services.jcr.ext.classify.impl.AlphabetClassifyPlugin";
     NodeClassifyPlugin classifyPlugin = classifyService.getNodeClassifyPlugin(strAlphabetClassify);
@@ -54,15 +54,15 @@ public class TestNodeClassifyService extends BaseWCMTestCase {
 
   /**
    * Test alphabet classify.
-   * 
+   *
    * @throws Exception the exception
    */
-  public void testAlphabetClassify() throws Exception {    
-    NodeClassifyService classifyService = 
+  public void testAlphabetClassify() throws Exception {
+    NodeClassifyService classifyService =
       (NodeClassifyService)container.getComponentInstanceOfType(NodeClassifyService.class);
-    AlphabetClassifyPlugin alphabetClassifyPlugin = 
+    AlphabetClassifyPlugin alphabetClassifyPlugin =
       (AlphabetClassifyPlugin)classifyService.getNodeClassifyPlugin(AlphabetClassifyPlugin.class.getName());
-    Node root = session.getRootNode();    
+    Node root = session.getRootNode();
     Node test = root.addNode("test", NodetypeConstant.NT_UNSTRUCTURED);
     test.addNode("ebook", NodetypeConstant.NT_UNSTRUCTURED);
     test.addNode("economy", NodetypeConstant.NT_UNSTRUCTURED);
@@ -74,10 +74,10 @@ public class TestNodeClassifyService extends BaseWCMTestCase {
 
     assertEquals(6, test.getNodes().getSize());
 
-    alphabetClassifyPlugin.classifyChildrenNode(test);    
+    alphabetClassifyPlugin.classifyChildrenNode(test);
 
     try{
-//    -> classified nodes: E_Node, D_Node and T_Node (sub nodes of test node)      
+//    -> classified nodes: E_Node, D_Node and T_Node (sub nodes of test node)
       Node E_node = test.getNode("E_Node");
       Node D_node = test.getNode("D_Node");
       Node T_node = test.getNode("T_Node");
@@ -87,7 +87,7 @@ public class TestNodeClassifyService extends BaseWCMTestCase {
       assertNotNull(D_node);
       assertNotNull(T_node);
 
-//    sub nodes of E_node: ebook, emule, economy  
+//    sub nodes of E_node: ebook, emule, economy
       assertEquals(3, E_node.getNodes().getSize());
       assertNotNull(E_node.getNode("ebook"));
       assertNotNull(E_node.getNode("emule"));
@@ -98,10 +98,10 @@ public class TestNodeClassifyService extends BaseWCMTestCase {
       assertNotNull(D_node.getNode("document"));
       assertNotNull(D_node.getNode("dot"));
 
-//    sub nodes of T_node: temp      
+//    sub nodes of T_node: temp
       assertEquals(1, T_node.getNodes().getSize());
-      assertNotNull(T_node.getNode("temp"));             
-    }catch(PathNotFoundException ex){}    
+      assertNotNull(T_node.getNode("temp"));
+    }catch(PathNotFoundException ex){}
 
     test.remove();
     session.save();
@@ -109,15 +109,15 @@ public class TestNodeClassifyService extends BaseWCMTestCase {
 
   /**
    * Test date time classify.
-   * 
+   *
    * @throws Exception the exception
    */
 //  public void testDateTimeClassify() throws Exception{
-//    NodeClassifyService classifyService = 
+//    NodeClassifyService classifyService =
 //      (NodeClassifyService)container.getComponentInstanceOfType(NodeClassifyService.class) ;
-//    DateTimeClassifyPlugin dateClassifyPlugin = 
+//    DateTimeClassifyPlugin dateClassifyPlugin =
 //      (DateTimeClassifyPlugin)classifyService.getNodeClassifyPlugin(DateTimeClassifyPlugin.class.getName()) ;
-//    Node root = session.getRootNode();    
+//    Node root = session.getRootNode();
 //    Node test = root.addNode("test", NodetypeConstant.NT_UNSTRUCTURED);
 //
 //    Calendar c1 = new GregorianCalendar();
@@ -165,15 +165,15 @@ public class TestNodeClassifyService extends BaseWCMTestCase {
 //    assertNotNull(n_2012);
 //    assertNotNull(n_2017);
 //
-//    //n_2012 node has 3 child nodes: "11" , "5" and "9" 
+//    //n_2012 node has 3 child nodes: "11" , "5" and "9"
 //    assertEquals(3, n_2012.getNodes().getSize());
 //    Node n_2012_11 = n_2012.getNode("11");
 //    Node n_2012_9 = n_2012.getNode("9");
 //    Node n_2012_5 = n_2012.getNode("5");
 //    assertNotNull(n_2012_11);
 //    assertNotNull(n_2012_9);
-//    assertNotNull(n_2012_5);        
-//    /*    
+//    assertNotNull(n_2012_5);
+//    /*
 //    n_2012_11 has one child node is "node1" - and it is leaft node
 //    n_2012_5 has one child node is "node2" - and it is leaft node
 //    n_2012_9 has one child node is "node3" - and it is leaft node
@@ -208,20 +208,20 @@ public class TestNodeClassifyService extends BaseWCMTestCase {
 //    assertEquals(0, leaft5.getNodes().getSize());
 //
 //    test.remove();
-//    session.save();    
+//    session.save();
 //  }
 
   /**
    * Test type classify.
-   * 
+   *
    * @throws Exception the exception
    */
-  public void testTypeClassify() throws Exception{    
-    NodeClassifyService classifyService = 
+  public void testTypeClassify() throws Exception{
+    NodeClassifyService classifyService =
       (NodeClassifyService)container.getComponentInstanceOfType(NodeClassifyService.class) ;
-    TypeClassifyPlugin typeClassifyPlugin = 
+    TypeClassifyPlugin typeClassifyPlugin =
       (TypeClassifyPlugin)classifyService.getNodeClassifyPlugin(TypeClassifyPlugin.class.getName()) ;
-    Node root = session.getRootNode();    
+    Node root = session.getRootNode();
     Node test = root.addNode("test", NodetypeConstant.NT_UNSTRUCTURED);
     test.addNode("chicken", NodetypeConstant.NT_FOLDER);
     test.addNode("dog", NodetypeConstant.NT_FOLDER);
@@ -254,6 +254,6 @@ public class TestNodeClassifyService extends BaseWCMTestCase {
       assertNotNull(unstructured_node.getNode("ball"));
       assertNotNull(unstructured_node.getNode("hat"));
 
-    }catch(PathNotFoundException ex){} 
+    }catch(PathNotFoundException ex){}
   }
 }

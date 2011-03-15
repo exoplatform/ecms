@@ -39,7 +39,7 @@ import org.exoplatform.webui.core.UIApplication;
  * Created by The eXo Platform SARL
  * Author : Hoang Van Hung
  *          hunghvit@gmail.com
- * Sep 16, 2009  
+ * Sep 16, 2009
  */
 
 @ComponentConfig(
@@ -49,22 +49,22 @@ import org.exoplatform.webui.core.UIApplication;
 )
 
 public class RemoveAttachmentComponent extends AbstractActionComponent {
-  
+
   private static final Log LOG = ExoLogger.getLogger(RemoveAttachmentComponent.class);
-  
+
   /**
    * Overide method UIComponent.loadConfirmMesssage() to get resource bundle in jar file
    */
   protected String loadConfirmMesssage(org.exoplatform.webui.config.Event event, WebuiRequestContext context, String beanId) {
     String confirmKey  = event.getConfirm();
-    if(confirmKey.length() < 1) return confirmKey;  
+    if(confirmKey.length() < 1) return confirmKey;
     try {
       String confirm = Utils.getResourceBundle(Utils.LOCALE_WEBUI_DMS, confirmKey, getClass().getClassLoader());
       return confirm.replaceAll("\\{0\\}", beanId);
     }catch (Exception e) {}
     return confirmKey;
   }
-  
+
   public static void doDelete(Map<String, Object> variables) throws Exception {
     AbstractActionComponent uicomponent = (AbstractActionComponent)variables.get(UICOMPONENT);
     UIApplication uiApp = uicomponent.getAncestorOfType(UIApplication.class);
@@ -74,12 +74,12 @@ public class RemoveAttachmentComponent extends AbstractActionComponent {
     String nodepath = String.valueOf(variables.get(OBJECTID));
     WebuiRequestContext requestcontext = (WebuiRequestContext)variables.get(Utils.REQUESTCONTEXT);
     try {
-        Node node = (Node) nodefinder.getItem(repository, wsname, nodepath);  
-        
+        Node node = (Node) nodefinder.getItem(repository, wsname, nodepath);
+
         // begin of lampt's modification.
-        Session session = node.getSession();   
+        Session session = node.getSession();
         Node parentNode = null;
-        
+
         // In case of node path begin with slash sign.
         if (nodepath.startsWith("/")) {
           if (node.hasProperty(Utils.JCR_DATA)) {
@@ -91,12 +91,12 @@ public class RemoveAttachmentComponent extends AbstractActionComponent {
             parentNode.save();
           }
         } else {
-          if (node.hasProperty(nodepath)) { 
+          if (node.hasProperty(nodepath)) {
             node.setProperty(nodepath, Utils.EMPTY);
             node.save();
           }
-        } // end of modification.        
-                
+        } // end of modification.
+
         session.save();
         session.logout();
         uicomponent.updateAjax(requestcontext);
@@ -108,11 +108,11 @@ public class RemoveAttachmentComponent extends AbstractActionComponent {
         return;
       }
   }
-  
+
   public static class RemoveAttachActionListener extends UIPresentationEventListener<RemoveAttachmentComponent> {
     @Override
     protected void executeAction(Map<String, Object> variables) throws Exception {
       RemoveAttachmentComponent.doDelete(variables);
     }
-  }    
+  }
 }

@@ -38,25 +38,25 @@ public class TOCGeneratorService {
 
   /** The Max heading numbers. */
   private final int MaxHeadingNumbers = 6;
-  
+
   /** The Constant TAG_NAME. */
   private static final String TAG_NAME =  "tagName=".intern();
-  
+
   /** The Constant HEADING_LEVEL. */
   private static final String HEADING_LEVEL = "headingLevel=".intern();
-  
+
   /** The Constant HEADING_NUMBER_TEXT. */
-  private static final String HEADING_NUMBER_TEXT = "headingNumberText=".intern();  
+  private static final String HEADING_NUMBER_TEXT = "headingNumberText=".intern();
 
   /**
    * Update toc.
-   * 
+   *
    * @param htmlFile the html file
    * @param headingList the heading list
-   * 
+   *
    * @throws Exception the exception
    */
-  public void updateTOC(Node htmlFile, List<Heading> headingList) throws Exception {                         
+  public void updateTOC(Node htmlFile, List<Heading> headingList) throws Exception {
     String[] multiValues = new String[headingList.size()];
     List<String> stringValues = new ArrayList<String>();
     for(Heading heading: headingList) {
@@ -66,24 +66,24 @@ public class TOCGeneratorService {
       .append(HEADING_NUMBER_TEXT).append(heading.headingNumberText);
       stringValues.add(strBuf.toString());
     }
-    htmlFile.setProperty("exo:htmlTOC", stringValues.toArray(multiValues));      
+    htmlFile.setProperty("exo:htmlTOC", stringValues.toArray(multiValues));
   }
 
   /**
    * Gets the tOC.
-   * 
+   *
    * @param htmlNode the html node
-   * 
+   *
    * @return the tOC
-   * 
+   *
    * @throws Exception the exception
    */
-  public String getTOC(Node htmlNode) throws Exception {       
+  public String getTOC(Node htmlNode) throws Exception {
     if(!htmlNode.hasProperty("exo:htmlTOC"))
       return null ;
 
     Value[] values = htmlNode.getProperty("exo:htmlTOC").getValues();
-    StringBuffer heading = new StringBuffer(); 
+    StringBuffer heading = new StringBuffer();
     for(Value value: values) {
       String[] contents = value.getString().split("\\|");
       String tagName = contents[0].substring(TAG_NAME.length());
@@ -95,18 +95,18 @@ public class TOCGeneratorService {
       heading.append(tagName);
     }
     String result = heading.toString().replaceAll("\n", "");
-    return result;    
+    return result;
   }
 
   /**
    * Checks if is heading tag.
-   * 
+   *
    * @param nodeName the node name
-   * 
+   *
    * @return true, if is heading tag
    */
   private boolean isHeadingTag(String nodeName) {
-    if((nodeName.charAt(0) == 'h' || nodeName.charAt(0) == 'H') && 
+    if((nodeName.charAt(0) == 'h' || nodeName.charAt(0) == 'H') &&
         (nodeName.charAt(1) >= '1' && nodeName.charAt(1) <= '6')) {
       return true;
     }
@@ -115,9 +115,9 @@ public class TOCGeneratorService {
 
   /**
    * Gets the heading level.
-   * 
+   *
    * @param node the node
-   * 
+   *
    * @return the heading level
    */
   private int getHeadingLevel(HTMLNode node) {
@@ -127,21 +127,21 @@ public class TOCGeneratorService {
 
   /**
    * Extract headings.
-   * 
+   *
    * @param document the document
-   * 
+   *
    * @return the list< heading>
-   * 
+   *
    * @throws Exception the exception
    */
-  public List<Heading> extractHeadings( HTMLDocument document) throws Exception {    
+  public List<Heading> extractHeadings( HTMLDocument document) throws Exception {
     String bodyPath = "html.body".intern();
     NodePath path = NodePathParser.toPath(bodyPath);
     HTMLNode node = NodePathUtil.lookFor(document.getRoot(),path);
     int firstLevel = 0;
     if(node == null) {
       return null;
-    }    
+    }
     for(HTMLNode htmlNode: node.getChildrenNode()) {
       if(isHeadingTag(htmlNode.getName().name())) {
         firstLevel = getHeadingLevel(htmlNode);
@@ -151,7 +151,7 @@ public class TOCGeneratorService {
     if(firstLevel == 0) return null;
     List<Heading> headingList = new ArrayList<Heading>();
     for(HTMLNode htmlNode: node.getChildrenNode()) {
-      if(isHeadingTag(htmlNode.getName().name()) 
+      if(isHeadingTag(htmlNode.getName().name())
           && (getHeadingLevel(htmlNode) >= firstLevel)) {
         headingList.add(new Heading(htmlNode));
       }
@@ -172,14 +172,14 @@ public class TOCGeneratorService {
       }
       heading.setHeadingLabel(headingNumbers, firstLevel);
     }
-    return headingList;    
+    return headingList;
   }
 
   /**
    * To lower case text value.
-   * 
+   *
    * @param node the node
-   * 
+   *
    * @return the string
    */
   private String toLowerCaseTextValue(HTMLNode node) {
@@ -193,19 +193,19 @@ public class TOCGeneratorService {
    * The Class Heading.
    */
   public class Heading {
-    
+
     /** The node. */
     HTMLNode node;
-    
+
     /** The heading level. */
     int headingLevel;
-    
+
     /** The heading number text. */
     String headingNumberText;
 
     /**
      * Instantiates a new heading.
-     * 
+     *
      * @param node the node
      */
     Heading(HTMLNode node) {
@@ -216,7 +216,7 @@ public class TOCGeneratorService {
 
     /**
      * Sets the heading label.
-     * 
+     *
      * @param headingNumbers the heading numbers
      * @param firstLevel the first level
      */

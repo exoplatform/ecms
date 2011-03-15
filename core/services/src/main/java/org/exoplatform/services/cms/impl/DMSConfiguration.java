@@ -23,7 +23,7 @@ import org.picocontainer.Startable;
  * Created by The eXo Platform SARL
  * Author : Dang Van Minh
  *          minh.dang@exoplatform.com
- * Apr 27, 2009  
+ * Apr 27, 2009
  * 9:14:45 AM
  */
 public class DMSConfiguration implements Startable {
@@ -31,7 +31,7 @@ public class DMSConfiguration implements Startable {
   private DMSRepositoryConfiguration dmsConfig;
 
   /**
-   * Get DMS configuration with specific repository. 
+   * Get DMS configuration with specific repository.
    * @return
    */
   public DMSRepositoryConfiguration getConfig() {
@@ -50,7 +50,7 @@ public class DMSConfiguration implements Startable {
   }
 
   /**
-   * This method will create new repository 
+   * This method will create new repository
    * @param plugin              plugin name
    */
   public void initNewRepo(DMSRepositoryConfiguration plugin) {
@@ -58,11 +58,9 @@ public class DMSConfiguration implements Startable {
   }
 
   public void start() {
-    // TODO Auto-generated method stub
   }
 
   public void stop() {
-    // TODO Auto-generated method stub
   }
 
 }

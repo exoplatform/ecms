@@ -25,32 +25,32 @@ import javax.jcr.Node;
  * @author benjaminmestrallet
  */
 public interface CmsService {
-  
-  
+
+
   public final static String POST_CREATE_CONTENT_EVENT = "CmsService.event.postCreate".intern();
   public final static String POST_EDIT_CONTENT_EVENT = "CmsService.event.postEdit".intern();
   public final static String PRE_CREATE_CONTENT_EVENT = "CmsService.event.preCreate".intern();
   public final static String PRE_EDIT_CONTENT_EVENT = "CmsService.event.preEdit".intern();
-  
+
   /**
    * Constant string to refer property of node in Map
-   * For getting properties of specific node in Map, 
-   * use key = NODE + propertyName 
+   * For getting properties of specific node in Map,
+   * use key = NODE + propertyName
    */
-  public static final String NODE = "/node";  
-  
+  public static final String NODE = "/node";
+
   /**
    * Store node in given workspace and repository with given properties
    * @param workspace       name of workspace
    * @param nodetypeName    NodeType's name
    * @param storePath       Path to store node
    * @param inputProperties Map of node's property including (property name, value)
-   * @throws Exception      Throwing exception 
+   * @throws Exception      Throwing exception
    * @return path to saved node
    * @see #storeNode(String nodetypeName, Node storeNode, Map inputProperties, boolean isAddNew) throws Exception
    */
   public String storeNode(String workspace, String nodetypeName, String storePath, Map inputProperties) throws Exception;
-  
+
   /**
    * Store node in given repository with given properties
    * @param nodetypeName    NodeType's name
@@ -61,7 +61,7 @@ public interface CmsService {
    * @throws Exception
    */
   public String storeNode(String nodetypeName, Node storeHomeNode, Map inputProperties, boolean isAddNew) throws Exception;
-  
+
   /**
    * Store edited node in given repository with given properties
    * used in case that user only has permission to access storeNode but
@@ -74,7 +74,7 @@ public interface CmsService {
    * @throws Exception
    */
   public String storeEditedNode(String nodetypeName, Node storeNode, Map inputProperties, boolean isAddNew) throws Exception;
-  
+
   /**
    * Store node in given repository with given properties and return UUID of saved node
    * @param nodetypeName    NodeType's name
@@ -87,7 +87,7 @@ public interface CmsService {
    * @see #storeNode(String workspace, String nodetypeName, String storePath, Map inputProperties) throws Exception
    */
   public String storeNodeByUUID(String nodetypeName, Node storeNode, Map inputProperties, boolean isAddNew) throws Exception;
-  
+
   /**
    * Move node from one workspace to the other, with the same repository
    * @param nodePath      Path to node in source workspace
@@ -95,5 +95,5 @@ public interface CmsService {
    * @param destWorkspace Destination of workspace name
    * @param destPath      Destination of node path
    */
-  public void moveNode(String nodePath, String srcWorkspace, String destWorkspace, String destPath);  
+  public void moveNode(String nodePath, String srcWorkspace, String destWorkspace, String destPath);
 }

@@ -44,7 +44,7 @@ public class MigrationUtil {
   private static Log log = ExoLogger.getLogger(MigrationUtil.class);
 
   static public String checkAndUpdateViewerTemplate(String strTemplatePath) {
-    
+
     if (strTemplatePath.contains(OLD_TEMPLATE_PORLET_NAME)) {
 
       SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();//UserSessionProvider();
@@ -63,7 +63,7 @@ public class MigrationUtil {
           if (log.isInfoEnabled()) log.info("Cannot locate in new location : "+strTemplatePath);
         }
         session.logout();
-        
+
 
       } catch (LoginException le) {
       } catch (NoSuchWorkspaceException nswe) {
@@ -72,7 +72,7 @@ public class MigrationUtil {
 
     }
 
-	  return strTemplatePath;
+    return strTemplatePath;
   }
 
 

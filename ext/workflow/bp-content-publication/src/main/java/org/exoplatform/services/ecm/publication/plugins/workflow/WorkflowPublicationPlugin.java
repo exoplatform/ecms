@@ -49,7 +49,7 @@ import org.exoplatform.webui.form.UIForm;
  * Author : Ly Dinh Quang
             quang.ly@exoplatform.com
  *          xxx5669@gmail.com
- * Dec 17, 2008  
+ * Dec 17, 2008
  */
 public class WorkflowPublicationPlugin extends PublicationPlugin {
   public static final String ENROLLED = "enrolled".intern();
@@ -57,7 +57,7 @@ public class WorkflowPublicationPlugin extends PublicationPlugin {
   public static final String CONTENT_VALIDATION = "content publishing";
   public static final String BACKUP = "backup";
   private static final Log LOG  = ExoLogger.getLogger(WorkflowPublicationPlugin.class);
-  
+
   public static final String PUBLICATION = "publication:publication".intern();
   public static final String LIFECYCLE_NAME = "publication:lifecycleName".intern();
   public static final String CURRENT_STATE = "publication:currentState".intern();
@@ -71,32 +71,32 @@ public class WorkflowPublicationPlugin extends PublicationPlugin {
   public static final String PENDING_MIXIN_TYPE = "exo:pendingLocation".intern();
 
   public static final String BACKUP_MIXIN_TYPE = "exo:backupLocation".intern();
-  
+
   public static final String VALIDATOR_PUBLISHING = "exo:validator".intern();
-  
+
   public static final String DEST_WORKSPACE = "exo:publishWorkspace".intern();
-  
+
   public static final String DESTPATH = "exo:publishPath".intern();
-  
+
   public static final String PENDING_WORKSPACE = "exo:pendingWorkspace".intern();
-  
+
   public static final String PENDING_PATH = "exo:pendingPath".intern();
-  
+
   public static final String BACUP_PATH = "exo:backupPath".intern();
-  
+
   public static final String BACUP_WORKSPACE = "exo:backupWorkspace".intern();
-  
+
   public static final String BUSINESS_PROCESS = "publication:businessProcess".intern();
-  
+
   public static final String POPUP_ID = "PopupComponent";
   public static final String POPUP_EDIT_ID = "PopupEditWorkflow";
-  
+
   public static final String MIXIN_TYPE = "publication:workflowPublication".intern();
   public static final String MIXIN_MOVE = "exo:move";
   public static final String IMG_PATH = "resources/images/".intern();
   public static final String WORKFLOW = "Workflow";
-  protected static Log log; 
-  
+  protected static Log log;
+
   private final String localeFile = "locale.portlet.workflowPublication.WorkflowPublication";
   public static final String DOCUMENT_BACUPUP = "documentsBackupPath";
 
@@ -106,17 +106,18 @@ public class WorkflowPublicationPlugin extends PublicationPlugin {
   public final String PARAMS_DESTPATH_CURRENTFOLDER = "destPath_currentFolder";
   public final String PARAMS_BACKUPWORKSPACE = "backupWorkspace";
   public final String PARAMS_IS_EDITABLE = "isEditable";
-  
+
   public static WorkflowPublicationConfig config = new WorkflowPublicationConfig();
-  
+
   public WorkflowPublicationPlugin(InitParams initParams) {
-    ExoContainer container = ExoContainerContext.getCurrentContainer();   
-    NodeHierarchyCreator hierarchyCreator = (NodeHierarchyCreator)container.getComponentInstanceOfType(NodeHierarchyCreator.class);
+    ExoContainer container = ExoContainerContext.getCurrentContainer();
+    NodeHierarchyCreator hierarchyCreator = (NodeHierarchyCreator) container.
+        getComponentInstanceOfType(NodeHierarchyCreator.class);
     String documentBackup = hierarchyCreator.getJcrPath(DOCUMENT_BACUPUP);
     log = ExoLogger.getLogger("portal:WorkflowPublicationPlugin");
     insertDefaultValue(initParams, documentBackup);
   }
-  
+
   private void insertDefaultValue(InitParams initParams, String documentBackup) {
     config.setEditable(returnTrueFalse(initParams.getValueParam(PARAMS_IS_EDITABLE).getValue()));
     config.setDestPath_currentFolder(returnTrueFalse(initParams.getValueParam(PARAMS_DESTPATH_CURRENTFOLDER).getValue()));
@@ -137,12 +138,12 @@ public class WorkflowPublicationPlugin extends PublicationPlugin {
       config.setBackupPath(documentBackup);
     }
   }
-  
+
   private boolean returnTrueFalse(String stringCheck) {
     if (stringCheck.equalsIgnoreCase("true")) return true;
     return false;
   }
-  
+
   @Override
   public void addMixin(Node node) throws Exception {
     node.addMixin(MIXIN_TYPE) ;
@@ -159,21 +160,25 @@ public class WorkflowPublicationPlugin extends PublicationPlugin {
     log.info("Change node state to " + newState);
     if (newState.equals(ENROLLED)) {
       node.save();
-      
+
       log.info("###########################");
       log.info("#  Add log                #");
       log.info("###########################\n");
-      ExoContainer container = ExoContainerContext.getCurrentContainer();   
-      PublicationService publicationService = (PublicationService) container.getComponentInstanceOfType(PublicationService.class);
-      String date =  new SimpleDateFormat("yyyyMMdd.HHmmss.SSS").format(new Date());
-      String[] logs = {date, ENROLLED, node.getSession().getUserID(), "PublicationService.WorkflowPublicationPlugin.nodeCreated"};
+      ExoContainer container = ExoContainerContext.getCurrentContainer();
+      PublicationService publicationService = (PublicationService) container.
+          getComponentInstanceOfType(PublicationService.class);
+      String date = new SimpleDateFormat("yyyyMMdd.HHmmss.SSS").format(new Date());
+      String[] logs = { date, ENROLLED, node.getSession().getUserID(),
+          "PublicationService.WorkflowPublicationPlugin.nodeCreated" };
       publicationService.addLog(node, logs);
     } else if (newState.equals(CONTENT_VALIDATION)) {
       try {
-        ExoContainer container = ExoContainerContext.getCurrentContainer();   
+        ExoContainer container = ExoContainerContext.getCurrentContainer();
         RepositoryService repositoryService = (RepositoryService)container.getComponentInstanceOfType(RepositoryService.class);
-        IdentityRegistry identityRegistry = (IdentityRegistry)container.getComponentInstanceOfType(IdentityRegistry.class);
-        String repositoryName = repositoryService.getDefaultRepository().getConfiguration().getName();
+        IdentityRegistry identityRegistry = (IdentityRegistry) container.getComponentInstanceOfType(IdentityRegistry.class);
+        String repositoryName = repositoryService.getDefaultRepository()
+                                                 .getConfiguration()
+                                                 .getName();
         String workspaceName = node.getSession().getWorkspace().getName();
         if (node.canAddMixin(MIXIN_MOVE)) {
           node.addMixin(MIXIN_MOVE);
@@ -193,7 +198,7 @@ public class WorkflowPublicationPlugin extends PublicationPlugin {
         }
         String validator = context.get(VALIDATOR);
         String destWorkspace = context.get(DEST_WORKSPACE);
-        String destPath = context.get(DESTPATH); 
+        String destPath = context.get(DESTPATH);
         String backupPath = context.get(BACUP_PATH);
         String backupWorkspace = context.get(BACUP_WORKSPACE);
         node.setProperty(VALIDATOR, validator);
@@ -206,27 +211,29 @@ public class WorkflowPublicationPlugin extends PublicationPlugin {
         log.info("###########################");
         log.info("#  Add log                #");
         log.info("###########################\n");
-        PublicationService publicationService = (PublicationService)container.getComponentInstanceOfType(PublicationService.class);
+        PublicationService publicationService = (PublicationService) container.
+            getComponentInstanceOfType(PublicationService.class);
         String date =  new SimpleDateFormat("yyyyMMdd.HHmmss.SSS").format(new Date());
-        String[] logs = {date, CONTENT_VALIDATION, node.getSession().getUserID(), "PublicationService.WorkflowPublicationPlugin.nodeValidationRequest"};
+        String[] logs = { date, CONTENT_VALIDATION, node.getSession().getUserID(),
+            "PublicationService.WorkflowPublicationPlugin.nodeValidationRequest" };
         publicationService.addLog(node, logs);
-        
+
         node.getSession().save();
-        
+
         if (node.isLocked()) {
           node.getSession().addLockToken(LockUtil.getLockToken(node));
         }
-        
+
         Session jcrSession = null;
         jcrSession = repositoryService.getRepository(repositoryName).getSystemSession(workspaceName);
         String userId = node.getSession().getUserID();
-        Property rolesProp = node.getProperty(WorkflowPublicationPlugin.VALIDATOR);        
-        Value roles = rolesProp.getValue();    
+        Property rolesProp = node.getProperty(WorkflowPublicationPlugin.VALIDATOR);
+        Value roles = rolesProp.getValue();
         boolean hasPermission = checkExcetuteable(userId, roles, identityRegistry);
         if (!hasPermission) {
           jcrSession.logout();
           return;
-        }          
+        }
         Map<String, String> variables = new HashMap<String, String>();
         variables.put("initiator", userId);
         variables.put("exo:validator", node.getProperty(WorkflowPublicationPlugin.VALIDATOR).getString());
@@ -234,57 +241,62 @@ public class WorkflowPublicationPlugin extends PublicationPlugin {
         variables.put("repository", repositoryName);
         variables.put("srcWorkspace", workspaceName);
         variables.put("srcPath", node.getParent().getPath());
-        node = (Node) jcrSession.getItem(node.getPath());        
+        node = (Node) jcrSession.getItem(node.getPath());
         String nodeType = node.getPrimaryNodeType().getName();
         variables.put("document-type", nodeType);
         executeAction(userId, node.getProperty(WorkflowPublicationPlugin.BUSINESS_PROCESS).getString(), variables);
         jcrSession.logout();
-        
+
       } catch (Exception e) {
         LOG.error("Unexpected error", e);
       }
     } else if (newState.equals(BACKUP)) {
       node.setProperty(WorkflowPublicationPlugin.CURRENT_STATE, WorkflowPublicationPlugin.BACKUP);
       node.getSession().save();
-      
+
       log.info("###########################");
       log.info("#  Add log                #");
       log.info("###########################\n");
-      ExoContainer container = ExoContainerContext.getCurrentContainer();   
-      PublicationService publicationService = (PublicationService)container.getComponentInstanceOfType(PublicationService.class);
+      ExoContainer container = ExoContainerContext.getCurrentContainer();
+      PublicationService publicationService = (PublicationService) container.
+          getComponentInstanceOfType(PublicationService.class);
       String date =  new SimpleDateFormat("yyyyMMdd.HHmmss.SSS").format(new Date());
-      String[] logs = {date, BACKUP, node.getSession().getUserID(), "PublicationService.WorkflowPublicationPlugin.nodeBackup"};
+      String[] logs = { date, BACKUP, node.getSession().getUserID(),
+          "PublicationService.WorkflowPublicationPlugin.nodeBackup" };
       publicationService.addLog(node, logs);
       node.getSession().save();
     } else if (newState.equals(PUBLISHED)) {
       node.setProperty(WorkflowPublicationPlugin.CURRENT_STATE, WorkflowPublicationPlugin.PUBLISHED);
-      
+
       log.info("###########################");
       log.info("#  Add log                #");
       log.info("###########################\n");
-      ExoContainer container = ExoContainerContext.getCurrentContainer();   
-      PublicationService publicationService = (PublicationService)container.getComponentInstanceOfType(PublicationService.class);
+      ExoContainer container = ExoContainerContext.getCurrentContainer();
+      PublicationService publicationService = (PublicationService) container.
+          getComponentInstanceOfType(PublicationService.class);
       String date =  new SimpleDateFormat("yyyyMMdd.HHmmss.SSS").format(new Date());
-      String[] logs = {date, PUBLISHED, node.getSession().getUserID(), "PublicationService.WorkflowPublicationPlugin.nodePublished"};
+      String[] logs = { date, PUBLISHED, node.getSession().getUserID(),
+          "PublicationService.WorkflowPublicationPlugin.nodePublished" };
       publicationService.addLog(node, logs);
       node.getSession().save();
     }
   }
-  
+
   private void executeAction(String userId, String executable, Map variables) throws Exception {
     ExoContainer container = ExoContainerContext.getCurrentContainer();
-    WorkflowServiceContainer workflowSContainer = (WorkflowServiceContainer)container.getComponentInstanceOfType(WorkflowServiceContainer.class);
-    workflowSContainer.startProcessFromName(userId, executable, variables);    
-  } 
-  
-  private boolean checkExcetuteable(String userId, Value roles, IdentityRegistry identityRegistry) throws Exception {        
+    WorkflowServiceContainer workflowSContainer = (WorkflowServiceContainer) container.
+        getComponentInstanceOfType(WorkflowServiceContainer.class);
+    workflowSContainer.startProcessFromName(userId, executable, variables);
+  }
+
+  private boolean checkExcetuteable(String userId, Value roles, IdentityRegistry identityRegistry) throws Exception {
     if (SystemIdentity.SYSTEM.equalsIgnoreCase(userId)) {
       return true;
     }
     Identity identity = identityRegistry.getIdentity(userId);
     if(identity == null) {
-      return false; 
-    }        
+      return false;
+    }
     if("*".equalsIgnoreCase(roles.getString())) return true;
     MembershipEntry membershipEntry = MembershipEntry.parse(roles.getString());
     if (identity.isMemberOf(membershipEntry)) {
@@ -292,17 +304,18 @@ public class WorkflowPublicationPlugin extends PublicationPlugin {
     }
     return false;
   }
-  
+
   @Override
-  public String getLocalizedAndSubstituteMessage(Locale locale, String key, String[] values) throws Exception{
+  public String getLocalizedAndSubstituteMessage(Locale locale, String key, String[] values) throws Exception {
     ExoContainer container = ExoContainerContext.getCurrentContainer();
-    ResourceBundleService resourceBundleService = (ResourceBundleService) container.getComponentInstanceOfType(ResourceBundleService.class);
+    ResourceBundleService resourceBundleService = (ResourceBundleService) container.
+        getComponentInstanceOfType(ResourceBundleService.class);
     ClassLoader cl=this.getClass().getClassLoader();
     ResourceBundle resourceBundle = resourceBundleService.getResourceBundle(localeFile, locale, cl);
     String result = resourceBundle.getString(key);
-    
-    String content = "";    
-    URL url = cl.getResource(localeFile + "_" + locale.getLanguage() +".xml");        
+
+    String content = "";
+    URL url = cl.getResource(localeFile + "_" + locale.getLanguage() +".xml");
     if (url == null) url = cl.getResource(localeFile + ".xml");
     if (url != null) {
       try {
@@ -333,13 +346,15 @@ public class WorkflowPublicationPlugin extends PublicationPlugin {
   }
 
   @Override
-  public byte[] getStateImage(Node node, Locale locale) throws IOException, FileNotFoundException, Exception {
+  public byte[] getStateImage(Node node, Locale locale) throws IOException,
+                                                       FileNotFoundException,
+                                                       Exception {
     byte[] bytes = null;
     String fileName= "workflowPublication.gif";
-    
+
     String completeFileName=IMG_PATH + fileName;
     log.trace("\nLoading file '" + name + "' from file system '" + completeFileName + "'");
-    
+
     InputStream in = this.getClass().getClassLoader().getResourceAsStream(completeFileName);
     ByteArrayOutputStream out = new ByteArrayOutputStream();
     transfer(in, out);
@@ -359,17 +374,21 @@ public class WorkflowPublicationPlugin extends PublicationPlugin {
     }
     return total;
   }
-  
+
   @Override
   public UIForm getStateUI(Node node, UIComponent component) throws Exception {
     UIForm uiform = null;
     if (node.getProperty(CURRENT_STATE).getString().equals(ENROLLED)) {
-      UIWorkflowPublicationActionForm form = component.createUIComponent(UIWorkflowPublicationActionForm.class, null, null);
+      UIWorkflowPublicationActionForm form = component.createUIComponent(UIWorkflowPublicationActionForm.class,
+                                                                         null,
+                                                                         null);
       form.createNewAction(node, WORKFLOW, false);
       form.setWorkspaceName(node.getSession().getWorkspace().getName());
       uiform = form;
     } else {
-      UIWorkflowPublicationViewForm form = component.createUIComponent(UIWorkflowPublicationViewForm.class, null, null);
+      UIWorkflowPublicationViewForm form = component.createUIComponent(UIWorkflowPublicationViewForm.class,
+                                                                       null,
+                                                                       null);
       form.setCurrentNode(node);
       uiform = form;
     }

@@ -37,22 +37,22 @@ import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
  * Created by The eXo Platform SARL
  * Author : Hoang Van Hung
  *          hunghvit@gmail.com
- * Jun 18, 2009  
+ * Jun 18, 2009
  */
 public class TestManageViewService extends BaseDMSTestCase {
-  
+
   ManageViewService manageViewService;
-  
+
   NodeHierarchyCreator nodeHierarchyCreator;
-  
+
   Session sessionDMS;
-  
+
   private static final String VIEW_NODETYPE = "exo:view";
 
   private static final String TAB_NODETYPE = "exo:tab";
-  
+
   protected final static String TEMPLATE_NODETYPE = "exo:template";
-  
+
   private String                      viewsPath;
 
   private String                      templatesPathEx;
@@ -64,7 +64,7 @@ public class TestManageViewService extends BaseDMSTestCase {
   private String                      templatesScripts;
 
   private String                      templatesDetail;
-  
+
   public void setUp() throws Exception {
     super.setUp();
     manageViewService = (ManageViewService)container.getComponentInstanceOfType(ManageViewService.class);
@@ -73,12 +73,12 @@ public class TestManageViewService extends BaseDMSTestCase {
     viewsPath = nodeHierarchyCreator.getJcrPath(BasePath.CMS_VIEWS_PATH);
     templatesPathEx = nodeHierarchyCreator.getJcrPath(BasePath.ECM_EXPLORER_TEMPLATES);
     templatesPathCb = nodeHierarchyCreator.getJcrPath(BasePath.CB_PATH_TEMPLATES);
-    System.out.println("templatesPathCb: " + templatesPathCb);    
+    System.out.println("templatesPathCb: " + templatesPathCb);
     templatesQuery = nodeHierarchyCreator.getJcrPath(BasePath.CB_QUERY_TEMPLATES);
     templatesScripts = nodeHierarchyCreator.getJcrPath(BasePath.CB_SCRIPT_TEMPLATES);
     templatesDetail = nodeHierarchyCreator.getJcrPath(BasePath.CB_DETAIL_VIEW_TEMPLATES);
   }
-  
+
   /**
    * Check data that is defined from test-taxonomies-configuration.xml file
    * Expect: All data is registered
@@ -97,48 +97,48 @@ public class TestManageViewService extends BaseDMSTestCase {
     assertTrue(sessionDMS.itemExists(templatesQuery));
     assertTrue(sessionDMS.itemExists(viewsPath + "/system-view"));
     assertTrue(sessionDMS.itemExists(viewsPath + "/system-view/Info"));
-    
+
     assertTrue(sessionDMS.itemExists(viewsPath + "/admin-view"));
     assertTrue(sessionDMS.itemExists(viewsPath + "/admin-view/Admin"));
     assertTrue(sessionDMS.itemExists(viewsPath + "/admin-view/Info"));
     assertTrue(sessionDMS.itemExists(viewsPath + "/admin-view/Actions"));
     assertTrue(sessionDMS.itemExists(viewsPath + "/admin-view/Collaboration"));
-    
+
     assertTrue(sessionDMS.itemExists(viewsPath + "/icon-view"));
     assertTrue(sessionDMS.itemExists(viewsPath + "/icon-view/Actions"));
     assertTrue(sessionDMS.itemExists(viewsPath + "/icon-view/Collaboration"));
-    
+
     assertTrue(sessionDMS.itemExists(viewsPath + "/cover-flow"));
     assertTrue(sessionDMS.itemExists(viewsPath + "/cover-flow/Actions"));
     assertTrue(sessionDMS.itemExists(viewsPath + "/cover-flow/Collaboration"));
-    
+
     assertTrue(sessionDMS.itemExists(viewsPath + "/anonymous-view"));
     assertTrue(sessionDMS.itemExists(viewsPath + "/anonymous-view/Actions"));
-    
+
     assertTrue(sessionDMS.itemExists(viewsPath + "/taxonomy-list"));
     assertTrue(sessionDMS.itemExists(viewsPath + "/taxonomy-list/Info"));
     assertTrue(sessionDMS.itemExists(viewsPath + "/taxonomy-list/Actions"));
-    
+
     assertTrue(sessionDMS.itemExists(viewsPath + "/taxonomy-icons"));
     assertTrue(sessionDMS.itemExists(viewsPath + "/taxonomy-icons/Actions"));
     assertTrue(sessionDMS.itemExists(viewsPath + "/simple-view"));
-    
+
     assertTrue(sessionDMS.itemExists(viewsPath + "/simple-view/Actions"));
     assertTrue(sessionDMS.itemExists(viewsPath + "/simple-view/Collaboration"));
-    
+
     assertTrue(sessionDMS.itemExists(templatesPathEx + "/SystemView"));
     assertTrue(sessionDMS.itemExists(templatesPathEx + "/ListView"));
     assertTrue(sessionDMS.itemExists(templatesPathEx + "/CoverFlow"));
     assertTrue(sessionDMS.itemExists(templatesPathEx + "/IconView"));
     assertTrue(sessionDMS.itemExists(templatesPathEx + "/ThumbnailsView"));
-    
+
     assertTrue(sessionDMS.itemExists(templatesPathCb + "/PathList"));
     assertTrue(sessionDMS.itemExists(templatesPathCb + "/TreeList"));
     assertTrue(sessionDMS.itemExists(templatesQuery + "/QueryList"));
     assertTrue(sessionDMS.itemExists(templatesScripts + "/ScriptList"));
     assertTrue(sessionDMS.itemExists(templatesDetail + "/DocumentView"));
   }
-  
+
   /**
    * Test ManageViewServiceImpl.start()
    * Check all data initiated
@@ -147,7 +147,7 @@ public class TestManageViewService extends BaseDMSTestCase {
   public void testStart() throws Exception {
     checkInitData();
   }
-  
+
   /**
    * Test ManageViewServiceImpl.init()
    * Check all data initiated from repository
@@ -157,12 +157,12 @@ public class TestManageViewService extends BaseDMSTestCase {
     manageViewService.init(REPO_NAME);
     checkInitData();
   }
-  
+
   /**
    * Test ManageViewServiceImpl.addView()
-   * Input: Add one view with tab to system: 
-   *        name = templateTest, 
-   *        permission = *:/platform/administrators, 
+   * Input: Add one view with tab to system:
+   *        name = templateTest,
+   *        permission = *:/platform/administrators,
    *        path to template = /exo:ecm/views/templates/ecm-explorer/ListView
    *        2 tab: detail tab with 2 buttons: ViewNodeType,ViewContent; glide tab with one button: ViewNodeType
    * Output: Node view is registered with all component and properties defined above
@@ -187,15 +187,15 @@ public class TestManageViewService extends BaseDMSTestCase {
     assertEquals(VIEW_NODETYPE, templateTest.getPrimaryNodeType().getName());
     assertEquals(permission, templateTest.getProperty("exo:accessPermissions").getString());
     assertEquals(template, templateTest.getProperty("exo:template").getString());
-    
+
     Node templateTestTab1 = templateTest.getNode("detail");
     assertEquals(TAB_NODETYPE, templateTestTab1.getPrimaryNodeType().getName());
     assertEquals("ViewNodeType;ViewContent", templateTestTab1.getProperty("exo:buttons").getString());
     Node templateTestTab2 = templateTest.getNode("glide");
     assertEquals(TAB_NODETYPE, templateTestTab2.getPrimaryNodeType().getName());
-    
+
   }
-  
+
   /**
    * Test ManageViewServiceImpl.getViewByName()
    * Input: name of view: admin-view
@@ -213,10 +213,10 @@ public class TestManageViewService extends BaseDMSTestCase {
   public void testGetButtons() {
     //refer to testStart() method
   }
-  
+
   /**
    * Test ManageViewServiceImpl.removeView()
-   * Input: Remove one view anonymous-view 
+   * Input: Remove one view anonymous-view
    * Expect: anonymous-view in viewsPath does not exist
    * @throws Exception
    */
@@ -224,7 +224,7 @@ public class TestManageViewService extends BaseDMSTestCase {
     manageViewService.removeView("anonymous-view", REPO_NAME);
     assertFalse(sessionDMS.itemExists(viewsPath + "/anonymous-view"));
   }
-  
+
 
   /**
    * Test ManageViewServiceImpl.getAllViews()
@@ -236,7 +236,7 @@ public class TestManageViewService extends BaseDMSTestCase {
     List<ViewConfig> viewList = manageViewService.getAllViews(REPO_NAME);
     assertNotNull(viewList.size());
   }
-  
+
   /**
    * Test ManageViewServiceImpl.hasView()
    * Input: admin-view, admin_view
@@ -248,7 +248,7 @@ public class TestManageViewService extends BaseDMSTestCase {
     assertTrue(manageViewService.hasView("admin-view", REPO_NAME));
     assertFalse(manageViewService.hasView("admin_view", REPO_NAME));
   }
-  
+
   /**
    * Test ManageViewServiceImpl.getTemplateHome()
    * Input: Path alias to template
@@ -259,7 +259,7 @@ public class TestManageViewService extends BaseDMSTestCase {
     Node homeNode = manageViewService.getTemplateHome(BasePath.CMS_VIEWS_PATH, REPO_NAME, SessionProviderFactory.createSystemProvider());
     assertEquals("/exo:ecm/views/userviews", homeNode.getPath());
   }
-  
+
   /**
    * Test ManageViewServiceImpl.getAllTemplates()
    * Input: Get all template in alias path = ecmExplorerTemplates
@@ -268,15 +268,15 @@ public class TestManageViewService extends BaseDMSTestCase {
    */
   public void testGetAllTemplates() throws Exception {
     List<Node> lstNode = manageViewService.getAllTemplates(BasePath.ECM_EXPLORER_TEMPLATES, REPO_NAME, SessionProviderFactory.createSystemProvider());
-    assertEquals(5, lstNode.size()); 
+    assertEquals(5, lstNode.size());
     List<String> templates = Arrays.asList(new String[]{lstNode.get(0).getName(), lstNode.get(1).getName(), lstNode.get(2).getName(), lstNode.get(3).getName(), lstNode.get(4).getName()});
     assertTrue(templates.contains("SystemView"));
     assertTrue(templates.contains("CoverFlow"));
     assertTrue(templates.contains("IconView"));
     assertTrue(templates.contains("ListView"));
-    assertTrue(templates.contains("ThumbnailsView")); 
+    assertTrue(templates.contains("ThumbnailsView"));
   }
-  
+
   /**
    * Test ManageViewServiceImpl.getTemplate()
    * Input: path = "/exo:ecm/views/templates/content-browser/detail-document/DocumentView"
@@ -299,10 +299,10 @@ public class TestManageViewService extends BaseDMSTestCase {
     } catch (PathNotFoundException e) {
     }
   }
-  
+
   /**
    * Test ManageViewServiceImpl.addTemplate()
-   * Input: Add new template SimpleView, SystemView with data content is defined in variable 
+   * Input: Add new template SimpleView, SystemView with data content is defined in variable
    *        templateFile = "<%import org.exoplatform.ecm.webui.utils.Utils; " +
                             "import org.exoplatform.web.application.Parameter;" +
                             "import org.exoplatform.webui.core.UIRightClickPopupMenu;%>" +
@@ -312,18 +312,18 @@ public class TestManageViewService extends BaseDMSTestCase {
    */
   public void testAddTemplate() throws Exception {
     String templateFile = "<%import org.exoplatform.ecm.webui.utils.Utils; " +
-    		"import org.exoplatform.web.application.Parameter;" +
-    		"import org.exoplatform.webui.core.UIRightClickPopupMenu;%>" +
-    		"<div id=$componentId></div>";
-    
+        "import org.exoplatform.web.application.Parameter;" +
+        "import org.exoplatform.webui.core.UIRightClickPopupMenu;%>" +
+        "<div id=$componentId></div>";
+
     manageViewService.addTemplate("SimpleView", templateFile, templatesPathEx, REPO_NAME);
     Node simpleViewNode = (Node)sessionDMS.getItem(templatesPathEx + "/SimpleView");
     assertEquals("nt:file", simpleViewNode.getPrimaryNodeType().getName());
     assertEquals(templateFile, simpleViewNode.getNode("jcr:content").getProperty("jcr:data").getString());
-    
+
     manageViewService.removeTemplate(templatesPathEx + "/SimpleView", REPO_NAME);
   }
-  
+
   /**
    * Test ManageViewServiceImpl.removeTemplate()
    * Input: Remove template with name = /PathList in path templatesPathCb
@@ -332,15 +332,15 @@ public class TestManageViewService extends BaseDMSTestCase {
    */
   public void testRemoveTemplate() throws Exception {
     String templateFile = "<%import org.exoplatform.ecm.webui.utils.Utils; " +
-		"import org.exoplatform.web.application.Parameter;" +
-		"import org.exoplatform.webui.core.UIRightClickPopupMenu;%>" +
-		"<div id=$componentId></div>";
-    manageViewService.addTemplate("SimpleView", templateFile, templatesPathEx, REPO_NAME);  	
-  	
+    "import org.exoplatform.web.application.Parameter;" +
+    "import org.exoplatform.webui.core.UIRightClickPopupMenu;%>" +
+    "<div id=$componentId></div>";
+    manageViewService.addTemplate("SimpleView", templateFile, templatesPathEx, REPO_NAME);
+
     manageViewService.removeTemplate(templatesPathEx + "/SimpleView", REPO_NAME);
     assertFalse(sessionDMS.itemExists(templatesPathEx + "/SimpleView"));
   }
-  
+
   /**
    * Test ManageViewServiceImpl.addTab()
    * Input: Add more tab in icon-view: tab = My View, buttons = Zoom Out; Zoom In
@@ -354,19 +354,19 @@ public class TestManageViewService extends BaseDMSTestCase {
     Node tab = (Node)sessionDMS.getItem(viewsPath + "/icon-view/My View");
     assertEquals(TAB_NODETYPE, tab.getPrimaryNodeType().getName());
     assertEquals(buttons, tab.getProperty("exo:buttons").getString());
-    
+
     tab = (Node)sessionDMS.getItem(viewsPath + "/icon-view/Actions");
     assertEquals(TAB_NODETYPE, tab.getPrimaryNodeType().getName());
     assertEquals("addFolder; addDocument; editDocument; upload; addSymLink", tab.getProperty("exo:buttons").getString().trim());
-    
+
     manageViewService.addTab(nodeHome, "Actions", buttons);
     tab = (Node)sessionDMS.getItem(viewsPath + "/icon-view/Actions");
     assertEquals(TAB_NODETYPE, tab.getPrimaryNodeType().getName());
     assertEquals(buttons, tab.getProperty("exo:buttons").getString());
   }
-   
+
   /**
-   * Clean templateTest node 
+   * Clean templateTest node
    */
   public void tearDown() throws Exception {
     if (sessionDMS.itemExists(viewsPath + "/templateTest")) {
@@ -377,5 +377,5 @@ public class TestManageViewService extends BaseDMSTestCase {
     }
     super.tearDown();
   }
- 
+
 }

@@ -28,22 +28,22 @@ import org.exoplatform.services.ecm.dms.BaseDMSTestCase;
  * Author : Ly Dinh Quang
  *          quang.ly@exoplatform.com
  *          xxx5669@gmail.com
- * Jun 9, 2009  
+ * Jun 9, 2009
  */
 public class TestLinkManager extends BaseDMSTestCase {
   private LinkManager linkManager;
   private Session session;
   private Node rootNode;
-  
+
   private final static String WORKSPACE = "exo:workspace";
   private final static String UUID = "exo:uuid";
   private final static String PRIMARY_TYPE = "exo:primaryType";
-  
+
   /**
    * Set up for testing
-   * 
+   *
    * In Collaboration workspace
-   * 
+   *
    *  /---TestTreeNode
    *        |
    *        |_____A1
@@ -52,17 +52,17 @@ public class TestLinkManager extends BaseDMSTestCase {
    *        |     |___A1_2
    *        |     |___A1_3
    *        |     |___A1_4
-   *        | 
+   *        |
    *        |_____B1
    *              |___B1_1
-   *                    
+   *
    */
   public void setUp() throws Exception {
     super.setUp();
     linkManager = (LinkManager) container.getComponentInstanceOfType(LinkManager.class);
     createTree();
   }
-  
+
   public void createTree() throws Exception {
     session = sessionProviderService_.getSystemSessionProvider(null).getSession(COLLABORATION_WS, repository);
     rootNode = session.getRootNode();
@@ -72,12 +72,12 @@ public class TestLinkManager extends BaseDMSTestCase {
     nodeA1.addNode("A1_2");
     nodeA1.addNode("A1_3");
     nodeA1.addNode("A1_4");
-    
+
     testNode.addNode("B1").addNode("B1_1");
     session.save();
     assertNotNull(nodeA1);
   }
-  
+
   /**
    * Creates a new link
    * Input:
@@ -85,43 +85,43 @@ public class TestLinkManager extends BaseDMSTestCase {
    * Expect:
    *    node: name = B1_1, primaryNodeType = "exo:symlink", parent = nodeA1,
    *    value property of this node
-   *        exo:workspace = COLLABORATION_WS, exo:uuid = uuid of nodeB1_1, 
-   *        exo:primaryType = primaryType of node B1_1 
-   * 
+   *        exo:workspace = COLLABORATION_WS, exo:uuid = uuid of nodeB1_1,
+   *        exo:primaryType = primaryType of node B1_1
+   *
    * Input:
-   *    parent = nodeA1_1(TestTreeNode/A1/A1_1), linkType = exo:taxonomyLink, 
+   *    parent = nodeA1_1(TestTreeNode/A1/A1_1), linkType = exo:taxonomyLink,
    *    target = nodeB1_1(TestTreeNode/B1/B1_1)
    * Expect:
    *    node: name = "B1_1", primaryNodeType = "exo:taxonomyLink", parent = nodeA1_1,
    *    value property of this node
-   *        exo:workspace = COLLABORATION_WS, exo:uuid = uuid of nodeB1_1, 
+   *        exo:workspace = COLLABORATION_WS, exo:uuid = uuid of nodeB1_1,
    *        exo:primaryType = primaryType of node B1_1
-   *        
+   *
    * Input:
-   *    parent = nodeA1_2(TestTreeNode/A1/A1_2), linkType = null, 
+   *    parent = nodeA1_2(TestTreeNode/A1/A1_2), linkType = null,
    *    target = nodeB1_1(TestTreeNode/B1/B1_1)
    * Expect:
    *    node: name = "B1_1", primaryNodeType = "exo:symlink", parent = nodeA1_1,
    *    value property of this node
-   *        exo:workspace = COLLABORATION_WS, exo:uuid = uuid of nodeB1_1, 
+   *        exo:workspace = COLLABORATION_WS, exo:uuid = uuid of nodeB1_1,
    *        exo:primaryType = primaryType of node B1_1
-   *        
+   *
    * Input:
    *    parent = nodeA1_3(TestTreeNode/A1/A1_3), linkType = "exo:taxonomyLink", linkName = null,
    *    target = nodeB1_1(TestTreeNode/B1/B1_1)
    * Expect:
    *    node: name = "B1_1", primaryNodeType = "exo:taxonomyLink", parent = nodeA1_1,
    *    value property of this node
-   *        exo:workspace = COLLABORATION_WS, exo:uuid = uuid of nodeB1_1, 
+   *        exo:workspace = COLLABORATION_WS, exo:uuid = uuid of nodeB1_1,
    *        exo:primaryType = primaryType of node B1_1
-   * 
+   *
    * Input:
-   *    parent = nodeA1_4(TestTreeNode/A1/A1_4), linkType = "exo:taxonomyLink", 
+   *    parent = nodeA1_4(TestTreeNode/A1/A1_4), linkType = "exo:taxonomyLink",
    *    linkName = "A1_3_To_B1_1", target = nodeB1_1(TestTreeNode/B1/B1_1)
    * Expect:
    *    node: name = "A1_3_To_B1_1", primaryNodeType = "exo:taxonomyLink", parent = nodeA1_1,
    *    value property of this node
-   *        exo:workspace = COLLABORATION_WS, exo:uuid = uuid of nodeB1_1, 
+   *        exo:workspace = COLLABORATION_WS, exo:uuid = uuid of nodeB1_1,
    *        exo:primaryType = primaryType of node B1_1
    * @throws Exception
    */
@@ -137,7 +137,7 @@ public class TestLinkManager extends BaseDMSTestCase {
     assertEquals(symlinkNodeA1.getProperty(UUID).getString(), nodeB1_1.getUUID());
     assertEquals(symlinkNodeA1.getProperty(PRIMARY_TYPE).getString(), nodeB1_1.getPrimaryNodeType().getName());
     assertEquals(symlinkNodeA1.getPrimaryNodeType().getName(), "exo:symlink");
-    
+
 //    Test method createLink(Node parent, String linkType, Node target)
 //    linkType = "exo:taxonomyLink"
     Node nodeA1_1 = rootNode.getNode("TestTreeNode/A1/A1_1");
@@ -148,7 +148,7 @@ public class TestLinkManager extends BaseDMSTestCase {
     assertEquals(symlinkNodeA1_1.getProperty(UUID).getString(), nodeB1_1.getUUID());
     assertEquals(symlinkNodeA1_1.getProperty(PRIMARY_TYPE).getString(), nodeB1_1.getPrimaryNodeType().getName());
     assertEquals(symlinkNodeA1_1.getPrimaryNodeType().getName(), "exo:taxonomyLink");
-    
+
 //    Test method createLink(Node parent, String linkType, Node target)
 //    linkType = null
     Node nodeA1_2 = rootNode.getNode("TestTreeNode/A1/A1_2");
@@ -159,7 +159,7 @@ public class TestLinkManager extends BaseDMSTestCase {
     assertEquals(symlinkNodeA1_2.getProperty(UUID).getString(), nodeB1_1.getUUID());
     assertEquals(symlinkNodeA1_2.getProperty(PRIMARY_TYPE).getString(), nodeB1_1.getPrimaryNodeType().getName());
     assertEquals(symlinkNodeA1_2.getPrimaryNodeType().getName(), "exo:symlink");
-    
+
 //    Test method createLink(Node parent, String linkType, Node target, String linkName)
 //    linkType = "exo:taxonomyLink"; linkName = null
     Node nodeA1_3 = rootNode.getNode("TestTreeNode/A1/A1_3");
@@ -170,7 +170,7 @@ public class TestLinkManager extends BaseDMSTestCase {
     assertEquals(symlinkNodeA1_3.getProperty(UUID).getString(), nodeB1_1.getUUID());
     assertEquals(symlinkNodeA1_3.getProperty(PRIMARY_TYPE).getString(), nodeB1_1.getPrimaryNodeType().getName());
     assertEquals(symlinkNodeA1_3.getPrimaryNodeType().getName(), "exo:taxonomyLink");
-    
+
 //    Test method createLink(Node parent, String linkType, Node target, String linkName)
 //    linkType = "exo:taxonomyLink"; linkName = "A1_3_To_B1_1"
     Node nodeA1_4 = rootNode.getNode("TestTreeNode/A1/A1_4");
@@ -182,7 +182,7 @@ public class TestLinkManager extends BaseDMSTestCase {
     assertEquals(symlinkNodeA1_4.getProperty(PRIMARY_TYPE).getString(), nodeB1_1.getPrimaryNodeType().getName());
     assertEquals(symlinkNodeA1_4.getPrimaryNodeType().getName(), "exo:taxonomyLink");
   }
-  
+
   /**
    * Indicates whether the given item is a link
    * Input: Create a new link
@@ -206,21 +206,21 @@ public class TestLinkManager extends BaseDMSTestCase {
     assertTrue(linkManager.isLink(symlinkNodeA1));
     assertFalse(linkManager.isLink(nodeA1));
   }
-  
+
   /**
    * Gets the target node of the given link
    * Input: Create a new link (symlinkNodeA1)
    *    parent = nodeA1(TestTreeNode/A1), nodeB1_1(TestTreeNode/B1/B1_1)
-   * Input: 
+   * Input:
    *    link = nodeA1
    * Expect:
    *    exception: NodeA1 is not a symlink
-   *    
+   *
    * Input:
    *    link = symlinkNodeA1
    * Expect:
-   *    node target: name = "B1_1" is not null, 
-   *    
+   *    node target: name = "B1_1" is not null,
+   *
    * Input:
    *    link = symlinkNodeA1, system = true
    * Expect:
@@ -233,7 +233,7 @@ public class TestLinkManager extends BaseDMSTestCase {
     Node nodeB1_1 = rootNode.getNode("TestTreeNode/B1/B1_1");
     Node symlinkNodeA1 = linkManager.createLink(nodeA1, nodeB1_1);
     assertNotNull(symlinkNodeA1);
-    
+
     try {
       linkManager.getTarget(nodeA1);
       fail("\nNode: " + nodeA1.getName() + " is not a symlink");
@@ -241,11 +241,11 @@ public class TestLinkManager extends BaseDMSTestCase {
     }
     assertNotNull(linkManager.getTarget(symlinkNodeA1));
     assertEquals(linkManager.getTarget(symlinkNodeA1).getName(), nodeB1_1.getName());
-    
+
     assertNotNull(linkManager.getTarget(symlinkNodeA1, true));
     assertEquals(linkManager.getTarget(symlinkNodeA1, true).getName(), nodeB1_1.getName());
   }
-  
+
   /**
    * Checks if the target node of the given link can be reached using the user session
    * Input: Create a new link (symlinkNodeA1)
@@ -253,8 +253,8 @@ public class TestLinkManager extends BaseDMSTestCase {
    * Input:
    *    link = nodeA1
    * Expect:
-   *    exception: NodeA1 is not a symlink node   
-   * 
+   *    exception: NodeA1 is not a symlink node
+   *
    * Input:
    *    link = symlinkNodeA1
    * Expect:
@@ -267,7 +267,7 @@ public class TestLinkManager extends BaseDMSTestCase {
     Node nodeB1_1 = rootNode.getNode("TestTreeNode/B1/B1_1");
     Node symlinkNodeA1 = linkManager.createLink(nodeA1, nodeB1_1);
     assertNotNull(symlinkNodeA1);
-    
+
     try {
       boolean isReachable = linkManager.isTargetReachable(nodeA1);
       assertFalse(isReachable);
@@ -276,7 +276,7 @@ public class TestLinkManager extends BaseDMSTestCase {
     }
     assertTrue(linkManager.isTargetReachable(symlinkNodeA1));
   }
-  
+
   /**
    * Gives the primary node type of the target
    * Input: Create a new link (symlinkNodeA1)
@@ -295,7 +295,7 @@ public class TestLinkManager extends BaseDMSTestCase {
     assertNotNull(symlinkNodeA1);
     assertEquals(linkManager.getTargetPrimaryNodeType(symlinkNodeA1), nodeB1_1.getPrimaryNodeType().getName());
   }
-  
+
   /**
    * Updates the target node of the given link
    * Input: Create a new link (symlinkNodeA1)
@@ -305,7 +305,7 @@ public class TestLinkManager extends BaseDMSTestCase {
    * Expect:
    *    node update is not null
    *    value property of this node
-   *        exo:workspace = workspace of node B1, exo:uuid = uuid of nodeB1, 
+   *        exo:workspace = workspace of node B1, exo:uuid = uuid of nodeB1,
    *        exo:primaryType = primaryType of node B1
    * @throws Exception
    */
@@ -316,7 +316,7 @@ public class TestLinkManager extends BaseDMSTestCase {
     Node nodeB1_1 = rootNode.getNode("TestTreeNode/B1/B1_1");
     Node symlinkNodeA1 = linkManager.createLink(nodeA1, nodeB1_1);
     assertNotNull(symlinkNodeA1);
-    
+
     Node symlinkNodeUpdate = linkManager.updateLink(symlinkNodeA1, nodeB1);
     assertNotNull(symlinkNodeUpdate);
     assertEquals(symlinkNodeUpdate.getName(), symlinkNodeA1.getName());
@@ -325,7 +325,7 @@ public class TestLinkManager extends BaseDMSTestCase {
     assertEquals(symlinkNodeUpdate.getProperty(PRIMARY_TYPE).getString(), nodeB1.getPrimaryNodeType().getName());
     assertEquals(symlinkNodeUpdate.getPrimaryNodeType().getName(), symlinkNodeA1.getPrimaryNodeType().getName());
   }
-  
+
   public void tearDown() throws Exception {
     try {
       Node root = session.getRootNode();

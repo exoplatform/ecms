@@ -39,22 +39,22 @@ import org.exoplatform.services.jcr.ext.common.SessionProvider;
  * Created by The eXo Platform SAS
  * Author : Pham Xuan Hoa
  *          hoa.pham@exoplatform.com
- * Jan 17, 2007  
+ * Jan 17, 2007
  */
 public class VotingServiceImpl implements VotingService {
 
-  final static String VOTABLE = "mix:votable".intern() ;  
-  final static String VOTER_PROP = "exo:voter".intern() ;  
+  final static String VOTABLE = "mix:votable".intern() ;
+  final static String VOTER_PROP = "exo:voter".intern() ;
   final static String VOTING_RATE_PROP = "exo:votingRate".intern() ;
-  final static String VOTE_TOTAL_PROP = "exo:voteTotal".intern() ; 
+  final static String VOTE_TOTAL_PROP = "exo:voteTotal".intern() ;
   final static String VOTE_TOTAL_LANG_PROP = "exo:voteTotalOfLang".intern() ;
   private static final String LANGUAGES = "languages".intern() ;
-  
-  private MultiLanguageService multiLangService_ ;  
-  
+
+  private MultiLanguageService multiLangService_ ;
+
   public VotingServiceImpl(MultiLanguageService multiLangService) {
     multiLangService_ = multiLangService ;
-  }  
+  }
 
   /**
    * {@inheritDoc}
@@ -78,11 +78,11 @@ public class VotingServiceImpl implements VotingService {
     }
     return voteTotal ;
   }
-  
+
   /**
    * Getting node is "nt:file" node type.
    * @param currentNode
-   * @return 
+   * @return
    */
   public Node getFileLangNode(Node currentNode) throws Exception {
     if(currentNode.getNodes().getSize() > 0) {
@@ -97,34 +97,34 @@ public class VotingServiceImpl implements VotingService {
     }
     return currentNode ;
   }
-  
+
   /**
    * {@inheritDoc}
    */
-  public void vote(Node node, double rate, String userName, String language) throws Exception {    
-  	Session session = node.getSession();
-  	node = handleUser(session, node, userName);
-    
+  public void vote(Node node, double rate, String userName, String language) throws Exception {
+    Session session = node.getSession();
+    node = handleUser(session, node, userName);
+
     if(!node.isNodeType(VOTABLE)) {
       if(node.canAddMixin(VOTABLE)) node.addMixin(VOTABLE) ;
       else throw new NoSuchNodeTypeException() ;
-    }        
+    }
     Node languageNode = handleLanguage(node, language);
     long voteTotalOfLang = languageNode.getProperty(VOTE_TOTAL_LANG_PROP).getLong() ;
     double votingRate = languageNode.getProperty(VOTING_RATE_PROP).getDouble() ;
-    double newRating = ((voteTotalOfLang*votingRate)+rate)/(voteTotalOfLang+1) ;    
+    double newRating = ((voteTotalOfLang*votingRate)+rate)/(voteTotalOfLang+1) ;
     DecimalFormat format = new DecimalFormat("###.##") ;
     double fomatedRating= format.parse(format.format(newRating)).doubleValue() ;
     Value[] voters = {} ;
     if(languageNode.hasProperty(VOTER_PROP)) {
-      voters = languageNode.getProperty(VOTER_PROP).getValues() ;        
+      voters = languageNode.getProperty(VOTER_PROP).getValues() ;
     }
-    Value newVoter = session.getValueFactory().createValue(userName) ;    
+    Value newVoter = session.getValueFactory().createValue(userName) ;
     List<Value> newVoterList = new ArrayList<Value>() ;
-    newVoterList.addAll(Arrays.<Value>asList(voters)) ;    
-    newVoterList.add(newVoter) ;        
+    newVoterList.addAll(Arrays.<Value>asList(voters)) ;
+    newVoterList.add(newVoter) ;
 
-    node.setProperty(VOTE_TOTAL_PROP,getVoteTotal(node)+1) ; 
+    node.setProperty(VOTE_TOTAL_PROP,getVoteTotal(node)+1) ;
     languageNode.setProperty(VOTE_TOTAL_LANG_PROP,voteTotalOfLang+1) ;
     languageNode.setProperty(VOTING_RATE_PROP,fomatedRating) ;
     languageNode.setProperty(VOTER_PROP,newVoterList.toArray(new Value[newVoterList.size()])) ;
@@ -132,32 +132,32 @@ public class VotingServiceImpl implements VotingService {
     session.save() ;
     session.logout();
   }
-  
+
   public boolean isVoted(Node node, String userName, String language) throws Exception {
-  	boolean isVoted = false;
-  	Session session = node.getSession();
-  	node = handleUser(session, node, userName);
-    
+    boolean isVoted = false;
+    Session session = node.getSession();
+    node = handleUser(session, node, userName);
+
     if(!node.isNodeType(VOTABLE)) {
       if(node.canAddMixin(VOTABLE)) node.addMixin(VOTABLE) ;
       else throw new NoSuchNodeTypeException() ;
     }
-    
-    Node languageNode = handleLanguage(node, language);               
+
+    Node languageNode = handleLanguage(node, language);
     Value[] voters = {} ;
     if(languageNode.hasProperty(VOTER_PROP)) {
-      voters = languageNode.getProperty(VOTER_PROP).getValues() ;        
+      voters = languageNode.getProperty(VOTER_PROP).getValues() ;
     }
-    Value newVoter = session.getValueFactory().createValue(userName) ;    
+    Value newVoter = session.getValueFactory().createValue(userName) ;
     List<Value> newVoterList = new ArrayList<Value>() ;
     newVoterList.addAll(Arrays.<Value>asList(voters)) ;
     if (newVoterList.contains(newVoter))
-    	isVoted = true;
+      isVoted = true;
     return isVoted;
-  } 
-  
+  }
+
   private Node handleLanguage(Node node, String language) throws Exception {
-  	String defaultLang = multiLangService_.getDefault(node) ;           
+    String defaultLang = multiLangService_.getDefault(node) ;
     Node multiLanguages =null, languageNode= null ;
     if((defaultLang == null && language == null) || language.equals(defaultLang)) {
       languageNode = node ;
@@ -168,14 +168,14 @@ public class VotingServiceImpl implements VotingService {
           languageNode = multiLanguages.getNode(language) ;
           if(node.getPrimaryNodeType().getName().equals("nt:file")) {
             languageNode = getFileLangNode(languageNode) ;
-          } 
+          }
         }
       }
     }
     return languageNode;
   }
-  
-  private Node handleUser(Session session, Node node, String userName) throws Exception {  	
+
+  private Node handleUser(Session session, Node node, String userName) throws Exception {
     if (userName == null) {
       String strWorkspaceName = node.getSession().getWorkspace().getName();
       ExoContainer eXoContainer = ExoContainerContext.getCurrentContainer();

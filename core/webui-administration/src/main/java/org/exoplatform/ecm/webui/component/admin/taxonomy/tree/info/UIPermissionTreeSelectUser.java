@@ -32,7 +32,7 @@ import org.exoplatform.webui.organization.account.UIUserSelector;
  * Created by The eXo Platform SARL
  * Author : Hoang Van Hung
  *          hunghvit@gmail.com
- * Apr 17, 2009  
+ * Apr 17, 2009
  */
 
 @ComponentConfig(
@@ -41,9 +41,9 @@ import org.exoplatform.webui.organization.account.UIUserSelector;
 )
 
 public class UIPermissionTreeSelectUser extends UIContainer implements UIPopupComponent  {
-  
+
   public static final String USER_SELECTOR_ID = "PermissionTreeSelectUser";
-  
+
   public UIPermissionTreeSelectUser() throws Exception {
     UIUserSelector uiUserSelector = getChildById(USER_SELECTOR_ID);
     if (uiUserSelector == null) {
@@ -56,14 +56,12 @@ public class UIPermissionTreeSelectUser extends UIContainer implements UIPopupCo
   }
 
   public void activate() throws Exception {
-    // TODO Auto-generated method stub
-    
+
   }
 
   public void deActivate() throws Exception {
-    // TODO Auto-generated method stub
   }
-  
+
   public static class AddUserActionListener extends EventListener<UIPermissionTreeSelectUser> {
     public void execute(Event<UIPermissionTreeSelectUser> event) throws Exception {
       UIPermissionTreeSelectUser uiUserContainer = event.getSource();
@@ -74,6 +72,6 @@ public class UIPermissionTreeSelectUser extends UIContainer implements UIPopupCo
       UIPopupWindow uiPopup = uiParent.findComponentById(UIPermissionTreeManager.POPUP_TAXONOMY_SELECT_USER);
       uiPopup.setShow(false);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiParent);
-    }  
+    }
   }
 }

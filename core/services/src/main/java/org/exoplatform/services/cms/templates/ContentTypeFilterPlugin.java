@@ -26,9 +26,9 @@ import org.exoplatform.container.xml.ObjectParameter;
 
 /**
  * Created by The eXo Platform SAS
- * Author : Hoa Pham	
+ * Author : Hoa Pham
  *          hoa.pham@exoplatform.com
- * Oct 3, 2008  
+ * Oct 3, 2008
  */
 public class ContentTypeFilterPlugin extends BaseComponentPlugin {
 
@@ -44,9 +44,9 @@ public class ContentTypeFilterPlugin extends BaseComponentPlugin {
 
   public List<FolderFilterConfig> getFolderFilterConfigList() { return folderFilterConfigs; }
 
-  public static class FolderFilterConfig {    
+  public static class FolderFilterConfig {
     private String folderType;
-    private ArrayList<String> contentTypes;    
+    private ArrayList<String> contentTypes;
     public String getFolderType() { return folderType; }
     public void setFolderType(String folderType) { this.folderType = folderType; }
 

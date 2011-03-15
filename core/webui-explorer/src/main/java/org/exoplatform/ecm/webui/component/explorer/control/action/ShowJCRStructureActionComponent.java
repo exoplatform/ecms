@@ -34,7 +34,7 @@ import org.exoplatform.webui.ext.filter.UIExtensionFilters;
  * Created by The eXo Platform SAS
  * Author : eXoPlatform
  *          nicolas.filotto@exoplatform.com
- * 6 mai 2009  
+ * 6 mai 2009
  */
 @ComponentConfig(
      events = {
@@ -49,7 +49,7 @@ public class ShowJCRStructureActionComponent extends UIComponent {
   public List<UIExtensionFilter> getFilters() {
     return FILTERS;
   }
-	
+
   public static class ShowJCRStructureActionListener extends UIActionBarActionListener<ShowJCRStructureActionComponent> {
     public void processEvent(Event<ShowJCRStructureActionComponent> event) throws Exception {
       UIJCRExplorer uiJCRExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class);

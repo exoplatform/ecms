@@ -30,18 +30,18 @@ import org.quartz.JobExecutionException;
  * Created by The eXo Platform SARL
  * Author : Hoang Van Hung
  *          hunghvit@gmail.com
- * Dec 30, 2008  
+ * Dec 30, 2008
  */
-public class BPActionActivationJob implements Job {    
+public class BPActionActivationJob implements Job {
   final private static String COUNTER_PROP = "exo:counter".intern() ;
-  public void execute(JobExecutionContext context) throws JobExecutionException {    
+  public void execute(JobExecutionContext context) throws JobExecutionException {
     ExoContainer exoContainer = ExoContainerContext.getCurrentContainer() ;
-    RepositoryService repositoryService = 
-      (RepositoryService) exoContainer.getComponentInstanceOfType(RepositoryService.class);    
-    ActionServiceContainer actionServiceContainer = 
+    RepositoryService repositoryService =
+      (RepositoryService) exoContainer.getComponentInstanceOfType(RepositoryService.class);
+    ActionServiceContainer actionServiceContainer =
       (ActionServiceContainer) exoContainer.getComponentInstanceOfType(ActionServiceContainer.class);
-    IdentityRegistry identityRegistry = 
-      (IdentityRegistry)exoContainer.getComponentInstanceOfType(IdentityRegistry.class); 
+    IdentityRegistry identityRegistry =
+      (IdentityRegistry)exoContainer.getComponentInstanceOfType(IdentityRegistry.class);
     ActionPlugin bpActionService = actionServiceContainer.getActionPlugin(BPActionPlugin.ACTION_TYPE) ;
 
     Session jcrSession = null;
@@ -59,12 +59,12 @@ public class BPActionActivationJob implements Job {
       jcrSession = repositoryService.getRepository(repository).getSystemSession(srcWorkspace);
       Node node = (Node) jcrSession.getItem(srcPath);
       actionNode = actionServiceContainer.getAction(node, actionName);
-      Property rolesProp = actionNode.getProperty("exo:roles");      
+      Property rolesProp = actionNode.getProperty("exo:roles");
       Value[] roles = rolesProp.getValues();
-      boolean hasPermission = checkExcetuteable(userId, roles, identityRegistry) ;      
+      boolean hasPermission = checkExcetuteable(userId, roles, identityRegistry) ;
       if (!hasPermission)  {
         jcrSession.logout();
-        return; 
+        return;
       }
       bpActionService.activateAction(userId,executable,variables,repository) ;
       int currentCounter = (int)actionNode.getProperty(COUNTER_PROP).getValue().getLong() ;
@@ -74,17 +74,17 @@ public class BPActionActivationJob implements Job {
       jcrSession.logout();
     } catch (Exception e) {
       jcrSession.logout();
-    }    
+    }
   }
-  
-  private boolean checkExcetuteable(String userId,Value[] roles, IdentityRegistry identityRegistry) throws Exception {        
+
+  private boolean checkExcetuteable(String userId,Value[] roles, IdentityRegistry identityRegistry) throws Exception {
     if(SystemIdentity.SYSTEM.equalsIgnoreCase(userId)) {
       return true ;
     }
     Identity identity = identityRegistry.getIdentity(userId);
     if(identity == null) {
-      return false ; 
-    }        
+      return false ;
+    }
     for (int i = 0; i < roles.length; i++) {
       String role = roles[i].getString();
       if("*".equalsIgnoreCase(role)) return true ;

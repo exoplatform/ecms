@@ -18,7 +18,6 @@ package org.exoplatform.services.cms.lock;
 
 import java.util.List;
 
-// TODO: Auto-generated Javadoc
 /**
  * Created by The eXo Platform SAS
  * Author : Chien Nguyen
@@ -26,13 +25,13 @@ import java.util.List;
  * Nov 17, 2009
  */
 
-public interface LockService {  
-  
+public interface LockService {
+
   public List<String> getPreSettingLockList() throws Exception;
-  
+
   public List<String> getAllGroupsOrUsersForLock() throws Exception;
-  
-  public void addGroupsOrUsersForLock(String groupsOrUsers) throws Exception; 
-  
-  public void removeGroupsOrUsersForLock(String groupsOrUsers) throws Exception;  
+
+  public void addGroupsOrUsersForLock(String groupsOrUsers) throws Exception;
+
+  public void removeGroupsOrUsersForLock(String groupsOrUsers) throws Exception;
 }

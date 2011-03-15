@@ -48,7 +48,7 @@ import org.exoplatform.webui.form.UIFormSelectBox;
  * Created by The eXo Platform SARL
  * Author : Dang Van Minh
  *          minh.dang@exoplatform.com
- * Jan 15, 2007  
+ * Jan 15, 2007
  * 1:48:19 PM
  */
 
@@ -87,7 +87,7 @@ public class UIMultiLanguageForm extends UIForm {
     languages.add(new SelectItemOption<String>(defaultLangName + "(default)", defaultLang)) ;
     if (currentNode.hasNode(Utils.LANGUAGES)){
       Node languageNode = currentNode.getNode(Utils.LANGUAGES) ;
-      NodeIterator iter  = languageNode.getNodes() ;      
+      NodeIterator iter  = languageNode.getNodes() ;
       while(iter.hasNext()) {
         Node lang = iter.nextNode() ;
         if (!lang.getName().equals(defaultLang)) {
@@ -105,14 +105,14 @@ public class UIMultiLanguageForm extends UIForm {
     getUIFormSelectBox(Utils.LANGUAGES).setOptions(languages) ;
     getUIFormSelectBox(Utils.LANGUAGES).setValue(defaultLang) ;
   }
-  
+
   static public class CancelActionListener extends EventListener<UIMultiLanguageForm> {
     public void execute(Event<UIMultiLanguageForm> event) throws Exception {
       UIJCRExplorer uiExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class) ;
       uiExplorer.cancelAction() ;
     }
   }
-  
+
   static public class SetDefaultActionListener extends EventListener<UIMultiLanguageForm> {
     public void execute(Event<UIMultiLanguageForm> event) throws Exception {
       UIMultiLanguageForm uiForm = event.getSource() ;
@@ -120,17 +120,17 @@ public class UIMultiLanguageForm extends UIForm {
       UIApplication uiApp = uiForm.getAncestorOfType(UIApplication.class) ;
       Node node = uiExplorer.getCurrentNode();
       uiExplorer.addLockToken(node);
-      if(!PermissionUtil.canAddNode(uiExplorer.getCurrentNode())) { 
-        throw new MessageException(new ApplicationMessage("UIMultiLanguageForm.msg.access-denied", 
+      if(!PermissionUtil.canAddNode(uiExplorer.getCurrentNode())) {
+        throw new MessageException(new ApplicationMessage("UIMultiLanguageForm.msg.access-denied",
                                                           null, ApplicationMessage.WARNING)) ;
       }
-      MultiLanguageService multiLanguageService = 
+      MultiLanguageService multiLanguageService =
         uiForm.getApplicationComponent(MultiLanguageService.class) ;
       String selectedLanguage = uiForm.getUIFormSelectBox(Utils.LANGUAGES).getValue() ;
       try {
         multiLanguageService.setDefault(uiExplorer.getCurrentNode(), selectedLanguage, uiExplorer.getRepositoryName()) ;
       } catch(AccessDeniedException ace) {
-        uiApp.addMessage(new ApplicationMessage("UIMultiLanguageForm.msg.access-denied", null, 
+        uiApp.addMessage(new ApplicationMessage("UIMultiLanguageForm.msg.access-denied", null,
                                                 ApplicationMessage.WARNING)) ;
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
         return ;
@@ -144,7 +144,7 @@ public class UIMultiLanguageForm extends UIForm {
       uiExplorer.updateAjax(event) ;
     }
   }
-  
+
   static public class ViewActionListener extends EventListener<UIMultiLanguageForm> {
     public void execute(Event<UIMultiLanguageForm> event) throws Exception {
       UIMultiLanguageForm uiForm = event.getSource() ;
@@ -158,7 +158,7 @@ public class UIMultiLanguageForm extends UIForm {
       try {
         multiLanguageService.setDefault(uiJCRExplorer.getCurrentNode(), selectedLanguage, uiJCRExplorer.getRepositoryName()) ;
       } catch(AccessDeniedException ace) {
-        uiApp.addMessage(new ApplicationMessage("UIMultiLanguageForm.msg.access-denied", null, 
+        uiApp.addMessage(new ApplicationMessage("UIMultiLanguageForm.msg.access-denied", null,
                                                 ApplicationMessage.WARNING)) ;
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
         return ;
@@ -168,7 +168,7 @@ public class UIMultiLanguageForm extends UIForm {
         return ;
       }
       uiJCRExplorer.setIsHidePopup(false);
-      uiJCRExplorer.refreshExplorer();      
+      uiJCRExplorer.refreshExplorer();
       event.getRequestContext().addUIComponentToUpdateByAjax(uiJCRExplorer);
     }
   }

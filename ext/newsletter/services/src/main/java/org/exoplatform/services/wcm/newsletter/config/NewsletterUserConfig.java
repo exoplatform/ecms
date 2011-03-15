@@ -26,13 +26,13 @@ public class NewsletterUserConfig {
 
   /** The mail. */
   private String mail;
-  
+
   /** The is banned. */
   private boolean isBanned;
 
   /**
    * Gets the mail.
-   * 
+   *
    * @return the mail
    */
   public String getMail() {
@@ -41,7 +41,7 @@ public class NewsletterUserConfig {
 
   /**
    * Sets the mail.
-   * 
+   *
    * @param mail the new mail
    */
   public void setMail(String mail) {
@@ -50,7 +50,7 @@ public class NewsletterUserConfig {
 
   /**
    * Gets the checks if is banned.
-   * 
+   *
    * @return the checks if is banned
    */
   public boolean getIsBanned() {
@@ -59,7 +59,7 @@ public class NewsletterUserConfig {
 
   /**
    * Sets the banned.
-   * 
+   *
    * @param isBanned the new banned
    */
   public void setBanned(boolean isBanned) {

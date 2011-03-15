@@ -52,8 +52,8 @@ import org.exoplatform.webui.form.UIForm;
  * phamtuanchip@yahoo.de Oct 13, 2006
  */
 @ComponentConfig(
-    lifecycle = UIFormLifecycle.class, 
-    template = "system:/groovy/webui/form/UIFormWithTitle.gtmpl", 
+    lifecycle = UIFormLifecycle.class,
+    template = "system:/groovy/webui/form/UIFormWithTitle.gtmpl",
     events = {
       @EventConfig(listeners = UIPermissionForm.SaveActionListener.class),
       @EventConfig(phase = Phase.DECODE, listeners = UIPermissionForm.ResetActionListener.class),
@@ -65,15 +65,15 @@ import org.exoplatform.webui.form.UIForm;
 )
 
 public class UIPermissionForm extends UIForm implements UISelectable {
-  
+
   public static final String PERMISSION   = "permission";
 
   public static final String POPUP_SELECT = "SelectUserOrGroup";
-  
+
   public static final String SELECT_GROUP_ID = "TaxoSelectUserOrGroup";
   private static final Log LOG  = ExoLogger.getLogger("admin.UIPermissionForm");
   private Node               currentNode;
-  
+
   public UIPermissionForm() throws Exception {
     addChild(new UIPermissionInputSet(PERMISSION));
     setActions(new String[] { "Save", "Reset", "Close" });
@@ -103,7 +103,7 @@ public class UIPermissionForm extends UIForm implements UISelectable {
       uiIn.setValue(user);
     }*/
     if(user.equals(Utils.getNodeOwner(node))) {
-      for (String perm : PermissionType.ALL) { 
+      for (String perm : PermissionType.ALL) {
         uiInputSet.getUIFormCheckBoxInput(perm).setChecked(true) ;
       }
     } else {
@@ -116,10 +116,10 @@ public class UIPermissionForm extends UIForm implements UISelectable {
           userPermission.append(accessControlEntry.getPermission()).append(" ");
         }
       }
-      for (String perm : PermissionType.ALL) { 
+      for (String perm : PermissionType.ALL) {
         boolean isCheck = userPermission.toString().contains(perm) ;
         uiInputSet.getUIFormCheckBoxInput(perm).setChecked(isCheck) ;
-      }   
+      }
     }
 
   }
@@ -132,7 +132,7 @@ public class UIPermissionForm extends UIForm implements UISelectable {
       setActions(new String[] { "Save", "Reset", "Close" });
       uiInputSet.setActionInfo(UIPermissionInputSet.FIELD_USERORGROUP, new String[] {"SelectUser", "SelectMember", "AddAny"}) ;
     }
-    for (String perm : PermissionType.ALL) { 
+    for (String perm : PermissionType.ALL) {
       uiInputSet.getUIFormCheckBoxInput(perm).setEnable(!isLock) ;
     }
   }
@@ -140,7 +140,7 @@ public class UIPermissionForm extends UIForm implements UISelectable {
   private String  getExoOwner(Node node) throws Exception {
     return Utils.getNodeOwner(node) ;
   }
-  
+
   public void doSelect(String selectField, Object value) {
     try {
       ExtendedNode node = (ExtendedNode)this.getCurrentNode();
@@ -176,7 +176,7 @@ public class UIPermissionForm extends UIForm implements UISelectable {
         if(lockToken != null) currentNode.getSession().addLockToken(lockToken);
       }
       if(!currentNode.isCheckedOut()) {
-        uiApp.addMessage(new ApplicationMessage("UIActionBar.msg.node-checkedin", null, 
+        uiApp.addMessage(new ApplicationMessage("UIActionBar.msg.node-checkedin", null,
             ApplicationMessage.WARNING)) ;
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
         return ;
@@ -186,7 +186,7 @@ public class UIPermissionForm extends UIForm implements UISelectable {
         else permsRemoveList.add(perm);
       }
       if(uiForm.getUIFormCheckBoxInput(PermissionType.ADD_NODE).isChecked() ||
-          uiForm.getUIFormCheckBoxInput(PermissionType.REMOVE).isChecked() || 
+          uiForm.getUIFormCheckBoxInput(PermissionType.REMOVE).isChecked() ||
           uiForm.getUIFormCheckBoxInput(PermissionType.SET_PROPERTY).isChecked())
       {
         if(!permsList.contains(PermissionType.READ))
@@ -194,13 +194,13 @@ public class UIPermissionForm extends UIForm implements UISelectable {
       }
 
       if (Utils.isNameEmpty(userOrGroup)) {
-        uiApp.addMessage(new ApplicationMessage("UIPermissionForm.msg.userOrGroup-required", null, 
+        uiApp.addMessage(new ApplicationMessage("UIPermissionForm.msg.userOrGroup-required", null,
             ApplicationMessage.WARNING));
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
         return;
       }
       if (permsList.size() == 0) {
-        uiApp.addMessage(new ApplicationMessage("UIPermissionForm.msg.checkbox-require", null, 
+        uiApp.addMessage(new ApplicationMessage("UIPermissionForm.msg.checkbox-require", null,
             ApplicationMessage.WARNING));
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
         return;
@@ -216,22 +216,22 @@ public class UIPermissionForm extends UIForm implements UISelectable {
           try {
             node.removePermission(userOrGroup, perm);
           } catch (AccessDeniedException ade) {
-            uiApp.addMessage(new ApplicationMessage("UIPermissionForm.msg.access-denied", null, 
+            uiApp.addMessage(new ApplicationMessage("UIPermissionForm.msg.access-denied", null,
                                                     ApplicationMessage.WARNING));
             event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
             return;
           }
         }
         if(PermissionUtil.canChangePermission(node)) node.setPermission(userOrGroup, permsArray);
-        node.save();        
+        node.save();
         uiParent.getChild(UIPermissionInfo.class).updateGrid();
       } else {
-        uiApp.addMessage(new ApplicationMessage("UIPermissionForm.msg.not-change-permission", null, 
+        uiApp.addMessage(new ApplicationMessage("UIPermissionForm.msg.not-change-permission", null,
             ApplicationMessage.WARNING));
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
         return;
       }
-      
+
       uiForm.refresh();
       currentNode.getSession().save();
       event.getRequestContext().addUIComponentToUpdateByAjax(uiParent);

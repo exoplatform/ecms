@@ -77,25 +77,25 @@ public class UIPublicationTree extends UITree {
 
     /** The portal name. */
     private String portalName;
-    
+
     /** The is page node. */
-    private boolean isPageNode;    
-    
+    private boolean isPageNode;
+
     /** The page node. */
     private PageNode pageNode;
-    
+
     /** The navigation. */
-    private PageNavigation navigation;    
-    
+    private PageNavigation navigation;
+
     /** The children. */
     private List<TreeNode> children;
-    
+
     /** The resource bundle. */
     private ResourceBundle resourceBundle;
 
     /**
      * Instantiates a new tree node.
-     * 
+     *
      * @param portalName the portal name
      * @param navigation the navigation
      * @param res the res
@@ -107,14 +107,14 @@ public class UIPublicationTree extends UITree {
       this.resourceBundle = res;
       this.isPageNode = isPageNode;
     }
-    
+
     /**
      * Gets the uri.
-     * 
+     *
      * @return the uri
      */
     public String getUri() {
-      if(isPageNode) {        
+      if(isPageNode) {
         return "/" + portalName + "/" +pageNode.getUri() ;
       }
       return "/" +portalName;
@@ -122,41 +122,41 @@ public class UIPublicationTree extends UITree {
 
     /**
      * Gets the page node uri.
-     * 
+     *
      * @return the page node uri
      */
     public String getPageNodeUri() {
       if(isPageNode) return pageNode.getUri();
       return null;
-    }        
+    }
 
     /**
      * Gets the icon.
-     * 
+     *
      * @return the icon
      */
     public String getIcon() {
       if(!isPageNode) return "";
       return pageNode.getIcon();
     }
-    
+
     /**
      * Gets the tree node children.
-     * 
+     *
      * @return the tree node children
      */
-    public List<TreeNode> getTreeNodeChildren() { return children; }    
-    
+    public List<TreeNode> getTreeNodeChildren() { return children; }
+
     /**
      * Sets the tree node children.
-     * 
+     *
      * @param list the new tree node children
      */
     public void setTreeNodeChildren(List<TreeNode> list) { this.children = list; }
 
     /**
      * Sets the page node.
-     * 
+     *
      * @param pageNode the new page node
      */
     public void setPageNode(PageNode pageNode) {
@@ -164,62 +164,62 @@ public class UIPublicationTree extends UITree {
       this.pageNode.setResolvedLabel(resourceBundle);
       if(pageNode.getChildren() == null) {
         children = null;
-      }      
+      }
     }
 
     /**
      * Checks if is page node.
-     * 
+     *
      * @return true, if is page node
      */
     public boolean isPageNode() {return isPageNode;}
-    
+
     /**
      * Sets the checks if is page node.
-     * 
+     *
      * @param isPageNode the new checks if is page node
      */
     public void setIsPageNode(boolean isPageNode) {this.isPageNode = isPageNode;}
-    
+
     /**
      * Gets the name.
-     * 
+     *
      * @return the name
      */
     public String getName() {
       if(isPageNode) return pageNode.getName();
       return portalName;
-    }    
-    
+    }
+
     /**
      * Gets the resolved label.
-     * 
+     *
      * @return the resolved label
      */
     public String getResolvedLabel() {
       if(isPageNode) return pageNode.getResolvedLabel();
       return portalName;
     }
-    
+
     /**
      * Sets the portal name.
-     * 
+     *
      * @param s the new portal name
      */
     public void setPortalName(String s) { this.portalName = s; }
-    
+
     /**
      * Gets the portal name.
-     * 
+     *
      * @return the portal name
      */
     public String getPortalName() {return this.portalName; }
 
     /**
      * Sets the children by page nodes.
-     * 
+     *
      * @param pagesNodes the new children by page nodes
-     * 
+     *
      * @throws Exception the exception
      */
     public void setChildrenByPageNodes(List<PageNode> pagesNodes) throws Exception {
@@ -227,10 +227,10 @@ public class UIPublicationTree extends UITree {
       List<TreeNode> list = new ArrayList<TreeNode>();
       UserPortalConfigService userPortalConfigService = WCMCoreUtils.getService(UserPortalConfigService.class);
       for(PageNode pNode: pagesNodes) {
-      	if (pNode.getPageReference() == null) continue;
+        if (pNode.getPageReference() == null) continue;
         Page page = userPortalConfigService.getPage(pNode.getPageReference(), org.exoplatform.portal.webui.util.Util.getPortalRequestContext().getRemoteUser());
         if (page == null) continue;
-        if(!pNode.isDisplay()) continue;                
+        if(!pNode.isDisplay()) continue;
         TreeNode treeNode = new TreeNode(portalName,navigation,resourceBundle,true);
         treeNode.setPageNode(pNode);
         treeNode.setChildrenByPageNodes(pNode.getChildren());
@@ -241,11 +241,11 @@ public class UIPublicationTree extends UITree {
 
     /**
      * Search tree node by uri.
-     * 
+     *
      * @param uri the uri
-     * 
+     *
      * @return the tree node
-     * 
+     *
      * @throws Exception the exception
      */
     public TreeNode searchTreeNodeByURI(String uri) throws Exception {
@@ -260,30 +260,30 @@ public class UIPublicationTree extends UITree {
       TreeNode treeNode = new TreeNode(portalName,navigation,resourceBundle, true);
       treeNode.setPageNode(other);
       treeNode.setChildrenByPageNodes(other.getChildren());
-      return treeNode; 
+      return treeNode;
     }
-    
+
     /**
      * Gets the children.
-     * 
+     *
      * @return the children
      */
     public List<TreeNode> getChildren() {
       return children;
     }
-    
+
     /**
      * Gets the navigation.
-     * 
+     *
      * @return the navigation
      */
     public PageNavigation getNavigation() {
       return navigation;
     }
-    
+
     /**
      * Gets the page node.
-     * 
+     *
      * @return the page node
      */
     public PageNode getPageNode() {

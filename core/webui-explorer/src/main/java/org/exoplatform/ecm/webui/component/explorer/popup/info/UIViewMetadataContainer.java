@@ -23,7 +23,7 @@ import org.exoplatform.webui.core.UIContainer;
  * Created by The eXo Platform SARL
  * Author : Dang Van Minh
  *          minh.dang@exoplatform.com
- * Jan 25, 2007  
+ * Jan 25, 2007
  * 1:59:57 PM
  */
 @ComponentConfig(template = "system:/groovy/webui/core/UITabPane.gtmpl")

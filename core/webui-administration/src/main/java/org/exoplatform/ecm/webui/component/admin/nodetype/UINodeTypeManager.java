@@ -26,7 +26,7 @@ import org.exoplatform.webui.ext.manager.UIAbstractManager;
  * Author : Dang Van Minh
  *          minh.dang@exoplatform.com
  * Sep 20, 2006
- * 2:20:55 PM 
+ * 2:20:55 PM
  */
 @ComponentConfig (
     lifecycle = UIContainerLifecycle.class
@@ -40,19 +40,19 @@ public class UINodeTypeManager extends UIAbstractManager {
     addChild(UINodeTypeSearchForm.class, null, "NodeTypeSearchForm") ;
     addChild(UINodeTypeList.class, null, "ListNodeType") ;
   }
-  
+
   public void refresh() throws Exception {
     update();
   }
-  
+
   public void update() throws Exception {
-    UINodeTypeList uiNodeTypeList = getChild(UINodeTypeList.class); 
+    UINodeTypeList uiNodeTypeList = getChild(UINodeTypeList.class);
     uiNodeTypeList.refresh(null, uiNodeTypeList.getUIPageIterator().getCurrentPage());
   }
   public void setExportPopup() throws Exception {
     removeChildById(EXPORT_POPUP) ;
     UIPopupWindow  uiPopup = addChild(UIPopupWindow.class, null, EXPORT_POPUP);
-    uiPopup.setWindowSize(500, 400);    
+    uiPopup.setWindowSize(500, 400);
     UINodeTypeExport uiExport = uiPopup.createUIComponent(UINodeTypeExport.class, null, null) ;
     uiExport.update() ;
     uiPopup.setUIComponent(uiExport) ;
@@ -63,14 +63,14 @@ public class UINodeTypeManager extends UIAbstractManager {
   public void setImportPopup() throws Exception {
     removeChildById(IMPORT_POPUP) ;
     UIPopupWindow uiPopup = addChild(UIPopupWindow.class, null, IMPORT_POPUP);
-    uiPopup.setWindowSize(500, 400);    
+    uiPopup.setWindowSize(500, 400);
     UINodeTypeImportPopup uiImportPopup =
       uiPopup.createUIComponent(UINodeTypeImportPopup.class, null, null) ;
     uiPopup.setUIComponent(uiImportPopup) ;
     uiPopup.setShow(true) ;
     uiPopup.setResizable(true) ;
   }
-  
+
   public void initPopup(boolean isView) throws Exception {
     String popupId = "NodeTypePopup" ;
     if(isView) popupId = "ViewNodeTypePopup" ;

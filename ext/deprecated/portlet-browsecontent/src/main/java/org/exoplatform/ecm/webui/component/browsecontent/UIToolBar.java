@@ -45,7 +45,7 @@ import org.exoplatform.webui.event.EventListener;
  * Created by The eXo Platform SARL
  * Author : Pham Tuan
  *          phamtuanchip@yahoo.de
- * Jan 5, 2007 2:32:34 PM 
+ * Jan 5, 2007 2:32:34 PM
  */
 @ComponentConfig(
     template =  "app:/groovy/webui/component/browse/UIToolBar.gtmpl",
@@ -64,21 +64,21 @@ public class UIToolBar extends UIContainer {
   private boolean isEnableTree_ = true ;
   private boolean isEnablePath_ = true ;
   private boolean isEnableSeach_ = false ;
-  
+
   private static final Pattern FILE_EXPLORER_URL_SYNTAX = Pattern.compile("([^:/]+):(/.*)");
-  
+
   public UIToolBar()throws Exception {}
   public void setEnablePath(boolean enablePath) {isEnablePath_ = enablePath ;}
   public boolean enablePath() {return isEnablePath_ ;}
   public void setEnableSearch(boolean enableSearch) {isEnableSeach_ = enableSearch ;}
   public boolean enableSearch() {return isEnableSeach_ ;}
-  public void setEnableTree(boolean enableTree) {isEnableTree_ = enableTree ;} 
+  public void setEnableTree(boolean enableTree) {isEnableTree_ = enableTree ;}
   public boolean enableTree() {return isEnableTree_ ;}
 
   public List<Node> getNodePaths(Node node) throws Exception {
     UIBrowseContainer uiContainer = getAncestorOfType(UIBrowseContainer.class);
     return uiContainer.getListHistoryNode();
-    
+
     /*
     UIBrowseContainer uiContainer = getAncestorOfType(UIBrowseContainer.class);
     Node rootNode = getRootNode() ;
@@ -93,7 +93,7 @@ public class UIToolBar extends UIContainer {
         boolean readyHistoryNode = true;
         while(!temp.getPath().equals(rootNode.getPath())) {
           if (!list.contains(temp)) list.add(0, temp);
-          if ((readyHistoryNode) && (temp != historyNode) && (historyNode != null) && 
+          if ((readyHistoryNode) && (temp != historyNode) && (historyNode != null) &&
               (historyNode.isNodeType(Utils.EXO_SYMLINK))) {
             temp = historyNode;
             readyHistoryNode = false;
@@ -124,13 +124,13 @@ public class UIToolBar extends UIContainer {
     UIBrowseContainer uiContainer = getAncestorOfType(UIBrowseContainer.class) ;
     return uiContainer.getCurrentNode();
   }
-  
+
   public Node getHistoryNode() throws Exception {
     UIBrowseContainer uiContainer = getAncestorOfType(UIBrowseContainer.class) ;
     Node historyNode = uiContainer.getHistory().get(UIBrowseContainer.KEY_CURRENT);
     return historyNode;
   }
-  
+
   public boolean isShowCategoryTree() {
     UIBrowseContainer uiBrowseContainer = getAncestorOfType(UIBrowseContainer.class) ;
     return  uiBrowseContainer.isShowCategoryTree() ;
@@ -140,7 +140,7 @@ public class UIToolBar extends UIContainer {
     return getAncestorOfType(UIBrowseContainer.class).getNodesHistory().isEmpty() ;
   }
 
-  static  public class SelectPathActionListener extends EventListener<UIToolBar> {    
+  static  public class SelectPathActionListener extends EventListener<UIToolBar> {
     public void execute(Event<UIToolBar> event) throws Exception {
       UIToolBar uiComp = event.getSource() ;
       String nodePath =  event.getRequestContext().getRequestParameter(OBJECTID) ;
@@ -165,7 +165,7 @@ public class UIToolBar extends UIContainer {
           LinkManager linkManager = uiContainer.getApplicationComponent(LinkManager.class);
           selectNode = linkManager.getTarget(selectNode);
         }
-        
+
         TemplateService templateService  = uiContainer.getApplicationComponent(TemplateService.class) ;
         List templates = templateService.getDocumentTemplates() ;
         if(templates.contains(selectNode.getPrimaryNodeType().getName())) {
@@ -199,7 +199,7 @@ public class UIToolBar extends UIContainer {
       UIBrowseContainer uiBrowseContainer = uiToolBar.getAncestorOfType(UIBrowseContainer.class) ;
       uiBrowseContainer.setShowCategoryTree(!uiBrowseContainer.isShowCategoryTree()) ;
     }
-  } 
+  }
 
   static public class SearchActionListener extends EventListener<UIToolBar> {
     public void execute(Event<UIToolBar> event) throws Exception {
@@ -215,7 +215,7 @@ public class UIToolBar extends UIContainer {
       uiSearchController.setShowHiddenSearch() ;
       event.getRequestContext().addUIComponentToUpdateByAjax(uiContainer) ;
     }
-  }  
+  }
 
   static public class NextActionListener extends EventListener<UIToolBar> {
     public void execute(Event<UIToolBar> event) throws Exception {
@@ -224,7 +224,7 @@ public class UIToolBar extends UIContainer {
       uiContainer.historyNext() ;
       event.getRequestContext().addUIComponentToUpdateByAjax(uiContainer) ;
     }
-  }  
+  }
 
   static public class BackActionListener extends EventListener<UIToolBar> {
     public void execute(Event<UIToolBar> event) throws Exception {
@@ -233,7 +233,7 @@ public class UIToolBar extends UIContainer {
       uiContainer.historyBack() ;
       event.getRequestContext().addUIComponentToUpdateByAjax(uiContainer) ;
     }
-  }  
+  }
 
   static public class VoteActionListener extends EventListener<UIToolBar> {
     public void execute(Event<UIToolBar> event) throws Exception {
@@ -248,10 +248,10 @@ public class UIToolBar extends UIContainer {
         return ;
       }
       if(!uiDocument.node_.isNodeType("mix:votable")) {
-        uiApp.addMessage(new ApplicationMessage("UIToolBar.msg.not-support-vote", null, 
+        uiApp.addMessage(new ApplicationMessage("UIToolBar.msg.not-support-vote", null,
             ApplicationMessage.WARNING)) ;
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
-        return ;  
+        return ;
       }
       String lockToken = LockUtil.getLockToken(uiDocument.node_);
       if(lockToken != null) uiDocument.node_.getSession().addLockToken(lockToken);
@@ -271,13 +271,13 @@ public class UIToolBar extends UIContainer {
         uiPopupAction.activate(UICBVoteForm.class, 300) ;
         uiPopupAction.getChild(UIPopupWindow.class).setResizable(false) ;
       } else {
-        uiApp.addMessage(new ApplicationMessage("UIToolBar.msg.readonly-doc", null, 
+        uiApp.addMessage(new ApplicationMessage("UIToolBar.msg.readonly-doc", null,
             ApplicationMessage.WARNING)) ;
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
         return ;
       }
     }
-  }  
+  }
   static public class CommentActionListener extends EventListener<UIToolBar> {
     public void execute(Event<UIToolBar> event) throws Exception {
       UIToolBar uiComp = event.getSource();
@@ -300,23 +300,23 @@ public class UIToolBar extends UIContainer {
         documentNode = uiDocument.getOriginalNode();
       }
       if ((documentNode == null) || !container.isShowDocumentDetail()) {
-        uiApp.addMessage(new ApplicationMessage("UIToolBar.msg.select-doc", null, 
+        uiApp.addMessage(new ApplicationMessage("UIToolBar.msg.select-doc", null,
             ApplicationMessage.WARNING)) ;
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
         event.getRequestContext().addUIComponentToUpdateByAjax(container) ;
         return ;
-      } 
+      }
       if(!container.hasAddPermission(documentNode)) {
-        uiApp.addMessage(new ApplicationMessage("UIToolBar.msg.access-add-denied", null, 
+        uiApp.addMessage(new ApplicationMessage("UIToolBar.msg.access-add-denied", null,
             ApplicationMessage.WARNING)) ;
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
         return ;
       }
       if(!documentNode.isNodeType("mix:commentable")) {
-        uiApp.addMessage(new ApplicationMessage("UIToolBar.msg.not-support-comment", null, 
+        uiApp.addMessage(new ApplicationMessage("UIToolBar.msg.not-support-comment", null,
             ApplicationMessage.WARNING)) ;
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
-        return ;        
+        return ;
       }
       String lockToken = LockUtil.getLockToken(documentNode);
       if(lockToken != null) documentNode.getSession().addLockToken(lockToken);
@@ -347,11 +347,11 @@ public class UIToolBar extends UIContainer {
         uiPopupAction.getChild(UIPopupWindow.class).setResizable(false) ;
         event.getRequestContext().addUIComponentToUpdateByAjax(uiPopupAction) ;
       } else {
-        uiApp.addMessage(new ApplicationMessage("UIToolBar.msg.readonly-doc", null, 
+        uiApp.addMessage(new ApplicationMessage("UIToolBar.msg.readonly-doc", null,
             ApplicationMessage.WARNING)) ;
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
         return ;
       }
     }
-  }  
+  }
 }

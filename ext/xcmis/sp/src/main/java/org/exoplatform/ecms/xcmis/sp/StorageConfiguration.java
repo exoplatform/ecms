@@ -22,7 +22,7 @@ import java.util.Map;
 
 /**
  * CMIS repository configuration.
- * 
+ *
  * @author <a href="mailto:andrey.parfonov@exoplatform.com">Andrey Parfonov</a>
  * @version $Id$
  */
@@ -71,7 +71,7 @@ public class StorageConfiguration
 
    /**
     * Get repository id.
-    * 
+    *
     * @return the repository id
     */
    public String getId()
@@ -83,7 +83,7 @@ public class StorageConfiguration
 
    /**
     * Set CMIS repository id.
-    * 
+    *
     * @param id
     *           repository id
     */
@@ -94,7 +94,7 @@ public class StorageConfiguration
 
    /**
     * Get repository name.
-    * 
+    *
     * @return repository name.
     */
    public String getRepository()
@@ -104,7 +104,7 @@ public class StorageConfiguration
 
    /**
     * Set repository name.
-    * 
+    *
     * @param repository
     *           the repository name
     */
@@ -115,7 +115,7 @@ public class StorageConfiguration
 
    /**
     * Get workspace name.
-    * 
+    *
     * @return the workspace name
     */
    public String getWorkspace()
@@ -125,7 +125,7 @@ public class StorageConfiguration
 
    /**
     * Set workspace name.
-    * 
+    *
     * @param workspace
     *           the workspace name
     */
@@ -136,7 +136,7 @@ public class StorageConfiguration
 
    /**
     * Get path of JCR node which must be considered as root folder.
-    * 
+    *
     * @return root folder path
     */
    public String getRootNodePath()
@@ -146,7 +146,7 @@ public class StorageConfiguration
 
    /**
     * Set path of JCR node which must be considered as root folder.
-    * 
+    *
     * @param rootFolderPath
     *           root folder path
     */
@@ -157,7 +157,7 @@ public class StorageConfiguration
 
    /**
     * Get description.
-    * 
+    *
     * @return repository description.
     */
    public String getDescription()
@@ -167,7 +167,7 @@ public class StorageConfiguration
 
    /**
     * Set repository description.
-    * 
+    *
     * @param description
     *           string description
     */
@@ -178,7 +178,7 @@ public class StorageConfiguration
 
    //   /**
    //    * Get index configuration.
-   //    * 
+   //    *
    //    * @return the index configuration
    //    */
    //   public IndexConfiguration getIndexConfiguration()
@@ -188,7 +188,7 @@ public class StorageConfiguration
    //
    //   /**
    //    * Set index configuration.
-   //    * 
+   //    *
    //    * @param indexConfiguration
    //    *           the index configuration
    //    */
@@ -199,7 +199,7 @@ public class StorageConfiguration
 
    /**
     * Get additional repository's properties.
-    * 
+    *
     * @return properties. If there is no any properties specified for repository
     *         then empty map will be returned
     */
@@ -214,7 +214,7 @@ public class StorageConfiguration
 
    /**
     * Set additional repository's properties.
-    * 
+    *
     * @param properties
     *           properties map
     */

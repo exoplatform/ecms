@@ -32,10 +32,10 @@ public class CopyContentFile implements ResourceContainer {
   private static String       stagingStorage;
 
   private static String       targetKey;
-  
+
   /** The Constant LAST_MODIFIED_PROPERTY. */
   private static final String LAST_MODIFIED_PROPERTY = "Last-Modified";
-  
+
   /** The Constant IF_MODIFIED_SINCE_DATE_FORMAT. */
   private static final String IF_MODIFIED_SINCE_DATE_FORMAT = "EEE, dd MMM yyyy HH:mm:ss z";
 
@@ -50,7 +50,7 @@ public class CopyContentFile implements ResourceContainer {
     if (log.isDebugEnabled()) {
       log.debug("Start Execute CopyContentFile Web Service");
     }
-    
+
     DateFormat dateFormat = new SimpleDateFormat(IF_MODIFIED_SINCE_DATE_FORMAT);
     try {
 

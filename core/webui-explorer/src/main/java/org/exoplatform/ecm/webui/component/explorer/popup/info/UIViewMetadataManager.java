@@ -29,22 +29,22 @@ import org.exoplatform.webui.core.lifecycle.UIContainerLifecycle;
  * Created by The eXo Platform SARL
  * Author : Dang Van Minh
  *          minh.dang@exoplatform.com
- * Jan 30, 2007  
+ * Jan 30, 2007
  * 9:27:48 AM
  */
 @ComponentConfig(lifecycle = UIContainerLifecycle.class)
 public class UIViewMetadataManager extends UIContainer implements UIPopupComponent {
 
   final static public String METADATAS_POPUP = "metadataForm" ;
-  
+
   public UIViewMetadataManager() throws Exception {
      addChild(UIViewMetadataContainer.class, null, null) ;
   }
-  
-  public Node getViewNode(String nodeType) throws Exception { 
-    return getAncestorOfType(UIJCRExplorer.class).getViewNode(nodeType) ; 
+
+  public Node getViewNode(String nodeType) throws Exception {
+    return getAncestorOfType(UIJCRExplorer.class).getViewNode(nodeType) ;
   }
-  
+
   public void initMetadataFormPopup(String nodeType) throws Exception {
     removeChildById(METADATAS_POPUP) ;
     UIPopupWindow uiPopup = addChild(UIPopupWindow.class, null, METADATAS_POPUP) ;

@@ -46,16 +46,16 @@ public abstract class UICLVContainer extends UIContainer {
 
   /**
    * Inits the.
-   * 
+   *
    * @throws Exception the exception
    */
   public abstract void init() throws Exception;
 
   /**
    * Gets the message.
-   * 
+   *
    * @return the message
-   * 
+   *
    * @throws Exception the exception
    */
   public String getMessageKey() throws Exception {
@@ -64,7 +64,7 @@ public abstract class UICLVContainer extends UIContainer {
 
   /**
    * Gets the portlet id.
-   * 
+   *
    * @return the portlet id
    */
   public String getPortletId() {
@@ -77,22 +77,22 @@ public abstract class UICLVContainer extends UIContainer {
    */
   public void processRender(WebuiRequestContext context) throws Exception {
     if(!Boolean.parseBoolean(Utils.getCurrentMode()) || context.getFullRender()) {
-      init(); 
-    }    
+      init();
+    }
     super.processRender(context);
   }
-  
+
   public String getEditLink(boolean isEditable, boolean isNew) {
     String itemPath = Utils.getPortletPreference(UICLVPortlet.PREFERENCE_ITEM_PATH);
     if (itemPath==null) itemPath="";
-	  return Utils.getEditLink(correctPath(itemPath), isEditable, isNew);
+    return Utils.getEditLink(correctPath(itemPath), isEditable, isNew);
   }
 
   public Node getFolderNode() {
-  	return NodeLocation.getNodeByExpression(
-  				Utils.getPortletPreference(UICLVPortlet.PREFERENCE_ITEM_PATH));
+    return NodeLocation.getNodeByExpression(
+          Utils.getPortletPreference(UICLVPortlet.PREFERENCE_ITEM_PATH));
   }
-  
+
   private String correctPath(String oldPath) {
       if ((oldPath==null) || ((oldPath!=null) && (oldPath.length()==0))) return "";
       int slashIndex = oldPath.indexOf("/");
@@ -104,9 +104,9 @@ public abstract class UICLVContainer extends UIContainer {
 
   /**
    * Gets the template resource resolver.
-   * 
+   *
    * @return the template resource resolver
-   * 
+   *
    * @throws Exception the exception
    */
   public ResourceResolver getTemplateResourceResolver() throws Exception {
@@ -124,7 +124,7 @@ public abstract class UICLVContainer extends UIContainer {
    * component's <code>addQuickEditActionListener<code> method. When
    * the quickEditAction event occurs, that object's appropriate
    * method is invoked.
-   * 
+   *
    */
   public static class PreferencesActionListener extends EventListener<UICLVFolderMode> {
     /* (non-Javadoc)
@@ -134,9 +134,9 @@ public abstract class UICLVContainer extends UIContainer {
       UICLVContainer clvContainer = event.getSource();
       UICLVConfig viewerManagementForm = clvContainer.createUIComponent(UICLVConfig.class, null, null);
       Utils.createPopupWindow(clvContainer, viewerManagementForm, "UIViewerManagementPopupWindow", 800);
-    }    
+    }
   }
-  
+
 
   public void onRefresh(Event<UICLVPresentation> event) throws Exception {
     UICLVPresentation clvPresentation = event.getSource();
@@ -146,34 +146,34 @@ public abstract class UICLVContainer extends UIContainer {
   }
 
   public boolean isModeByFolder() {
-  	return UICLVPortlet.DISPLAY_MODE_AUTOMATIC.equals(
-  						Utils.getPortletPreference(UICLVPortlet.PREFERENCE_DISPLAY_MODE));		
+    return UICLVPortlet.DISPLAY_MODE_AUTOMATIC.equals(
+              Utils.getPortletPreference(UICLVPortlet.PREFERENCE_DISPLAY_MODE));
   }
-  
+
   public boolean isShowManageContent() {
     return (Utils.isShowQuickEdit() && isModeByFolder());
   }
-  
+
   public boolean isShowAddContent() {
     if (isShowManageContent()) {
       PortletPreferences portletPreferences = ((PortletRequestContext) WebuiRequestContext.getCurrentInstance()).getRequest().getPreferences();
       String itemPath = portletPreferences.getValue(UICLVPortlet.PREFERENCE_ITEM_PATH, null);
-	    try {
-	    	Node content = NodeLocation.getNodeByExpression(itemPath);
-	  		((ExtendedNode) content).checkPermission(PermissionType.ADD_NODE);    	
-	    } catch (Exception e) {
-	    	return false;
-	    }
-	    return true;
+      try {
+        Node content = NodeLocation.getNodeByExpression(itemPath);
+        ((ExtendedNode) content).checkPermission(PermissionType.ADD_NODE);
+      } catch (Exception e) {
+        return false;
+      }
+      return true;
     } else return false;
   }
-  
+
   public boolean isShowPreferences() {
-  	try {
-  		return Utils.isShowQuickEdit() && Utils.hasEditPermissionOnPage();
-  	} catch (Exception e) {
-  		return false;
-  	}
+    try {
+      return Utils.isShowQuickEdit() && Utils.hasEditPermissionOnPage();
+    } catch (Exception e) {
+      return false;
+    }
   }
-  
+
 }

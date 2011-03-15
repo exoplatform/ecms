@@ -40,18 +40,18 @@ import org.exoplatform.webui.event.EventListener;
     template =  "app:/groovy/webui/component/explorer/UIViewRelationList.gtmpl",
     events = {@EventConfig(listeners = UIViewRelationList.CloseActionListener.class)}
   )
-  
+
 public class UIViewRelationList extends UIContainer{
-  
+
   public UIViewRelationList() throws Exception { }
-  
+
   public List<Node> getRelations() throws Exception {
     UIJCRExplorer uiExplorer = getAncestorOfType(UIJCRExplorer.class) ;
     Session session = uiExplorer.getSession() ;
     List<Node> relations = new ArrayList<Node>() ;
     Value[] vals = null ;
     try {
-     vals = uiExplorer.getCurrentNode().getProperty("exo:relation").getValues() ;    
+     vals = uiExplorer.getCurrentNode().getProperty("exo:relation").getValues() ;
     }catch (Exception e) { return relations ;}
     for(Value val : vals) {
       String uuid = val.getString();
@@ -59,8 +59,8 @@ public class UIViewRelationList extends UIContainer{
       relations.add(node) ;
     }
     return relations ;
-  }  
-  
+  }
+
   static public class CloseActionListener extends EventListener<UIViewRelationList> {
     public void execute(Event<UIViewRelationList> event) throws Exception {
     }

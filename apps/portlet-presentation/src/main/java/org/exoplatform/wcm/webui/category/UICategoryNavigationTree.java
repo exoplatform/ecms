@@ -59,7 +59,7 @@ import org.exoplatform.webui.event.EventListener;
     }
 )
 public class UICategoryNavigationTree extends UIContainer {
-  
+
   /** The allow publish. */
   private boolean            allowPublish        = false;
 
@@ -80,7 +80,7 @@ public class UICategoryNavigationTree extends UIContainer {
 
   /**
    * Checks if is allow publish.
-   * 
+   *
    * @return true, if is allow publish
    */
   public boolean isAllowPublish() {
@@ -89,12 +89,14 @@ public class UICategoryNavigationTree extends UIContainer {
 
   /**
    * Sets the allow publish.
-   * 
+   *
    * @param allowPublish the allow publish
    * @param publicationService the publication service
    * @param templates the templates
    */
-  public void setAllowPublish(boolean allowPublish, PublicationService publicationService, List<String> templates) {
+  public void setAllowPublish(boolean allowPublish,
+                              PublicationService publicationService,
+                              List<String> templates) {
     this.allowPublish = allowPublish;
     publicationService_ = publicationService;
     templates_ = templates;
@@ -102,24 +104,24 @@ public class UICategoryNavigationTree extends UIContainer {
 
   /**
    * Instantiates a new uI node tree builder.
-   * 
+   *
    * @throws Exception the exception
    */
   public UICategoryNavigationTree() throws Exception {
-    
+
     PortletPreferences portletPreferences = UICategoryNavigationUtils.getPortletPreferences();
     String preferenceRepository = portletPreferences.getValue(UICategoryNavigationConstant.PREFERENCE_REPOSITORY, "");
     String preferenceTreeName = portletPreferences.getValue(UICategoryNavigationConstant.PREFERENCE_TREE_NAME, "");
     TaxonomyService taxonomyService = getApplicationComponent(TaxonomyService.class);
     Node rootTreeNode = null;
     try {
-      rootTreeNode = taxonomyService.getTaxonomyTree(preferenceRepository, preferenceTreeName); 
+      rootTreeNode = taxonomyService.getTaxonomyTree(preferenceRepository, preferenceTreeName);
     } catch (RepositoryException e) {
       //return;
     }
     setRootTreeNode(rootTreeNode);
     setAcceptedNodeTypes(new String[] {"nt:folder", "nt:unstructured", "nt:file", "exo:taxonomy"});
-    
+
     UITree tree = addChild(UICategoryNavigationTreeBase.class, null, null);
     tree.setBeanLabelField("name");
     tree.setBeanIdField("path");
@@ -127,7 +129,7 @@ public class UICategoryNavigationTree extends UIContainer {
 
   /**
    * Gets the root tree node.
-   * 
+   *
    * @return the root tree node
    */
   public Node getRootTreeNode() {
@@ -136,9 +138,9 @@ public class UICategoryNavigationTree extends UIContainer {
 
   /**
    * Sets the root tree node.
-   * 
+   *
    * @param node the new root tree node
-   * 
+   *
    * @throws Exception the exception
    */
   public final void setRootTreeNode(Node node) throws Exception {
@@ -148,7 +150,7 @@ public class UICategoryNavigationTree extends UIContainer {
 
   /**
    * Gets the current node.
-   * 
+   *
    * @return the current node
    */
   public Node getCurrentNode() {
@@ -157,7 +159,7 @@ public class UICategoryNavigationTree extends UIContainer {
 
   /**
    * Sets the current node.
-   * 
+   *
    * @param currentNode the new current node
    */
   public void setCurrentNode(Node currentNode) {
@@ -166,7 +168,7 @@ public class UICategoryNavigationTree extends UIContainer {
 
   /**
    * Gets the accepted node types.
-   * 
+   *
    * @return the accepted node types
    */
   public String[] getAcceptedNodeTypes() {
@@ -175,7 +177,7 @@ public class UICategoryNavigationTree extends UIContainer {
 
   /**
    * Sets the accepted node types.
-   * 
+   *
    * @param acceptedNodeTypes the new accepted node types
    */
   public void setAcceptedNodeTypes(String[] acceptedNodeTypes) {
@@ -188,9 +190,17 @@ public class UICategoryNavigationTree extends UIContainer {
   public void processRender(WebuiRequestContext context) throws Exception {
     String parameters = null;
     try {
-      parameters = URLDecoder.decode(StringUtils.substringAfter(Util.getPortalRequestContext().getNodePath(), Util.getUIPortal().getSelectedNode().getUri() + "/"),"UTF-8");
+      parameters = URLDecoder.decode(StringUtils.substringAfter(Util.getPortalRequestContext()
+                                                                    .getNodePath(),
+                                                                Util.getUIPortal()
+                                                                    .getSelectedNode()
+                                                                    .getUri()
+                                                                    + "/"), "UTF-8");
     } catch (UnsupportedEncodingException e) {
-      org.exoplatform.wcm.webui.Utils.createPopupMessage(this, "UICategoryNavigationConfig.msg.not-support-encoding", null, ApplicationMessage.ERROR);
+      org.exoplatform.wcm.webui.Utils.createPopupMessage(this,
+                                                         "UICategoryNavigationConfig.msg.not-support-encoding",
+                                                         null,
+                                                         ApplicationMessage.ERROR);
     }
     PortletPreferences portletPreferences = UICategoryNavigationUtils.getPortletPreferences();
     String preferenceRepository = portletPreferences.getValue(UICategoryNavigationConstant.PREFERENCE_REPOSITORY, "");
@@ -205,18 +215,18 @@ public class UICategoryNavigationTree extends UIContainer {
       return;
     }
 
-    
+
     String categoryPath = parameters.substring(parameters.indexOf("/") + 1);
     if (preferenceTreeName.equals(categoryPath)) categoryPath = "";
     try {
-    	currentNode = treeNode.getNode(categoryPath);
-		} catch (Exception e) {}
+      currentNode = treeNode.getNode(categoryPath);
+    } catch (Exception e) {}
     super.processRender(context);
   }
-  
+
   /**
    * Builds the tree.
-   * 
+   *
    * @throws Exception the exception
    */
   public void buildTree() throws Exception {
@@ -226,7 +236,7 @@ public class UICategoryNavigationTree extends UIContainer {
     Node selectedNode = currentNode;
     tree.setSelected(selectedNode);
     if (selectedNode == null) {
-    	return;
+      return;
     }
     if (Utils.getNodeSymLink(selectedNode).getDepth() > 0) {
       tree.setParentSelected(selectedNode.getParent());
@@ -247,11 +257,11 @@ public class UICategoryNavigationTree extends UIContainer {
 
   /**
    * Adds the node publish.
-   * 
+   *
    * @param listNode the list node
    * @param node the node
    * @param publicationService the publication service
-   * 
+   *
    * @throws Exception the exception
    */
   private void addNodePublish(List<Node> listNode, Node node, PublicationService publicationService) throws Exception {
@@ -272,11 +282,11 @@ public class UICategoryNavigationTree extends UIContainer {
 
   /**
    * Filter.
-   * 
+   *
    * @param iterator the iterator
-   * 
+   *
    * @return the list< node>
-   * 
+   *
    * @throws Exception the exception
    */
   private List<Node> filter(final NodeIterator iterator) throws Exception {
@@ -314,10 +324,10 @@ public class UICategoryNavigationTree extends UIContainer {
   /**
    * When a node is change in tree. This method will be rerender the children & sibbling nodes of
    * current node and broadcast change node event to other uicomponent
-   * 
+   *
    * @param path the path
    * @param context the context
-   * 
+   *
    * @throws Exception the exception
    */
   public void changeNode(String path, Object context) throws Exception {
@@ -342,11 +352,11 @@ public class UICategoryNavigationTree extends UIContainer {
    * <code>addChangeNodeActionListener<code> method. When
    * the changeNodeAction event occurs, that object's appropriate
    * method is invoked.
-   * 
+   *
    * @see ChangeNodeActionEvent
    */
   static public class ChangeNodeActionListener extends EventListener<UITree> {
-    
+
     /* (non-Javadoc)
      * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
      */
@@ -357,7 +367,7 @@ public class UICategoryNavigationTree extends UIContainer {
       event.getRequestContext().addUIComponentToUpdateByAjax(categoryNavigationTree.getParent());
     }
   }
-  
+
   /**
    * The listener interface for receiving quickEditAction events. The class
    * that is interested in processing a quickEditAction event implements this
@@ -366,19 +376,24 @@ public class UICategoryNavigationTree extends UIContainer {
    * <code>addQuickEditActionListener<code> method. When
    * the quickEditAction event occurs, that object's appropriate
    * method is invoked.
-   * 
+   *
    * @see QuickEditActionEvent
    */
   public static class QuickEditActionListener extends EventListener<UICategoryNavigationTree> {
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
      */
     public void execute(Event<UICategoryNavigationTree> event) throws Exception {
       UICategoryNavigationTree uiContainer = event.getSource();
-      UICategoryNavigationConfig configForm = uiContainer.createUIComponent(UICategoryNavigationConfig.class, null, null);
-      org.exoplatform.wcm.webui.Utils.createPopupWindow(uiContainer, configForm, UICategoryNavigationPortlet.CONFIG_POPUP_WINDOW, 600);
+      UICategoryNavigationConfig configForm = uiContainer.createUIComponent(UICategoryNavigationConfig.class,
+                                                                            null,
+                                                                            null);
+      org.exoplatform.wcm.webui.Utils.createPopupWindow(uiContainer,
+                                                        configForm,
+                                                        UICategoryNavigationPortlet.CONFIG_POPUP_WINDOW,
+                                                        600);
     }
   }
 

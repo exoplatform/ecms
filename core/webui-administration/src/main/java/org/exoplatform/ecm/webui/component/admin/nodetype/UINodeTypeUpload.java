@@ -47,7 +47,7 @@ import org.jibx.runtime.JiBXException;
  * Author : Dang Van Minh
  *          minh.dang@exoplatform.com
  * Oct 2, 2006
- * 9:39:51 AM 
+ * 9:39:51 AM
  */
 @ComponentConfig(
     lifecycle = UIFormLifecycle.class,
@@ -60,7 +60,7 @@ import org.jibx.runtime.JiBXException;
 public class UINodeTypeUpload extends UIForm {
 
   final static public String FIELD_UPLOAD = "upload" ;
-  
+
 
   public UINodeTypeUpload() throws Exception {
     this.setMultiPart(true) ;
@@ -103,26 +103,26 @@ public class UINodeTypeUpload extends UIForm {
           uiApp.addMessage(new ApplicationMessage("UINodeTypeUpload.msg.data-file-error", null)) ;
           event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
           return;
-        }                                   
+        }
         IBindingFactory factory = BindingDirectory.getFactory(NodeTypeValuesList.class);
         IUnmarshallingContext uctx = factory.createUnmarshallingContext();
         NodeTypeValuesList nodeTypeValuesList = (NodeTypeValuesList)uctx.unmarshalDocument(is, null);
         ArrayList ntvList = nodeTypeValuesList.getNodeTypeValuesList();
         uiNodeTypeImport.update(ntvList);
         if (uiNodeTypeImport.getRegisteredNodeType().size() > 0 || uiNodeTypeImport.getUndefinedNodeTypes().size() > 0) {
-        	Class[] childrenToRender = {UINodeTypeImport.class, UIPopupWindow.class} ;
-        	uiImportPopup.setRenderedChildrenOfTypes(childrenToRender) ;
-        	uiPopup.setShow(true);
-        	event.getRequestContext().addUIComponentToUpdateByAjax(uiManager);
+          Class[] childrenToRender = {UINodeTypeImport.class, UIPopupWindow.class} ;
+          uiImportPopup.setRenderedChildrenOfTypes(childrenToRender) ;
+          uiPopup.setShow(true);
+          event.getRequestContext().addUIComponentToUpdateByAjax(uiManager);
         }
         if (uiNodeTypeImport.getRegisteredNodeType().size() > 0) {
-        	 uiApp.addMessage(new ApplicationMessage("UINodeTypeUpload.msg.nodetype-exist", 
-        			 new Object[] {uiNodeTypeImport.getRegisteredNodeType().toString()}, ApplicationMessage.WARNING )) ;
+           uiApp.addMessage(new ApplicationMessage("UINodeTypeUpload.msg.nodetype-exist",
+               new Object[] {uiNodeTypeImport.getRegisteredNodeType().toString()}, ApplicationMessage.WARNING )) ;
            event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
         }
         if (uiNodeTypeImport.getUndefinedNamespace().size() > 0) {
-        	 uiApp.addMessage(new ApplicationMessage("UINodeTypeUpload.msg.namespace-invalid",
- 							new Object[] { uiNodeTypeImport.getUndefinedNamespace().toString() }, ApplicationMessage.WARNING));
+           uiApp.addMessage(new ApplicationMessage("UINodeTypeUpload.msg.namespace-invalid",
+               new Object[] { uiNodeTypeImport.getUndefinedNamespace().toString() }, ApplicationMessage.WARNING));
            event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
          }
       } catch(JiBXException e) {
@@ -139,7 +139,7 @@ public class UINodeTypeUpload extends UIForm {
         uploadService.removeUploadResource(uiUploadInput.getUploadId());
         if (is != null) is.close();
       }
-    }    
+    }
   }
 
   static public class CancelActionListener extends EventListener<UINodeTypeUpload> {

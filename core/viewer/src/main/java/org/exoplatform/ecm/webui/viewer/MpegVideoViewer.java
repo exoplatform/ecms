@@ -23,14 +23,14 @@ import org.exoplatform.webui.core.UIComponent;
  * Created by The eXo Platform SARL
  * Author : Dang Van Minh
  *          minh.dang@exoplatform.com
- * Aug 18, 2009  
+ * Aug 18, 2009
  * 3:49:41 AM
  */
 @ComponentConfig(
     template = "classpath:resources/templates/MpegVideoViewer.gtmpl"
 )
 public class MpegVideoViewer extends UIComponent {
-  
+
   public MpegVideoViewer() throws Exception {
   }
 }

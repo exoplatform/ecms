@@ -42,7 +42,7 @@ import org.exoplatform.webui.form.UIFormStringInput;
  * Author : Dang Van Minh
  *          minh.dang@exoplatform.com
  * Sep 21, 2006
- * 3:36:17 PM 
+ * 3:36:17 PM
  */
 @ComponentConfig(
     template = "classpath:groovy/ecm/webui/form/UIFormInputSetWithAction.gtmpl"
@@ -56,7 +56,7 @@ public class UIPropertyDefinitionForm extends UIFormInputSetWithAction {
   final static public String MANDATORY = "mandatory";
   final static public String AUTOCREATED = "autoCreated";
   final static public String PROTECTED = "protected";
-  final static public String PARENTVERSION = "parentversion"; 
+  final static public String PARENTVERSION = "parentversion";
   final static public String CONSTRAINTS = "constraints";
   final static public String VALUE_CONSTRAINTS = "valueconstraints";
   final static public String TRUE = "true";
@@ -65,25 +65,25 @@ public class UIPropertyDefinitionForm extends UIFormInputSetWithAction {
   final static public String ACTION_CANCEL_PROPERTY = "CancelProperty";
 
   private String requiredValue_;
-  
+
   public UIPropertyDefinitionForm(String name) throws Exception {
     super(name);
     setComponentConfig(getClass(), null);
     List<SelectItemOption<String>> autoListItem = new ArrayList<SelectItemOption<String>>();
     autoListItem.add(new SelectItemOption<String>(FALSE, FALSE));
     autoListItem.add(new SelectItemOption<String>(TRUE, TRUE));
-    
+
     List<SelectItemOption<String>> mandoListItem = new ArrayList<SelectItemOption<String>>();
     mandoListItem.add(new SelectItemOption<String>(FALSE, FALSE));
     mandoListItem.add(new SelectItemOption<String>(TRUE, TRUE));
-    
+
     List<SelectItemOption<String>> multiListItem = new ArrayList<SelectItemOption<String>>();
     multiListItem.add(new SelectItemOption<String>(FALSE, FALSE));
     multiListItem.add(new SelectItemOption<String>(TRUE, TRUE));
-    
+
     List<SelectItemOption<String>> protectedItem = new ArrayList<SelectItemOption<String>>();
     protectedItem.add(new SelectItemOption<String>(FALSE, FALSE));
-    protectedItem.add(new SelectItemOption<String>(TRUE, TRUE));    
+    protectedItem.add(new SelectItemOption<String>(TRUE, TRUE));
 
     addUIFormInput(new UIFormSelectBox(NAMESPACE, NAMESPACE, getNamespaces()));
     addUIFormInput(new UIFormStringInput(DEFINITION_NAME, DEFINITION_NAME, null));
@@ -97,11 +97,11 @@ public class UIPropertyDefinitionForm extends UIFormInputSetWithAction {
     addUIFormInput(new UIFormSelectBox(MULTIPLE, MULTIPLE, multiListItem));
     addUIFormInput(new UIFormStringInput(VALUE_CONSTRAINTS, VALUE_CONSTRAINTS, null));
   }
-  
+
   public void processRender(WebuiRequestContext context) throws Exception {
     super.processRender(context);
   }
-  
+
   private List<SelectItemOption<String>> getParentVersions() {
     List<SelectItemOption<String>> versionItem = new ArrayList<SelectItemOption<String>>();
     versionItem.add(new SelectItemOption<String>("COPY", "1"));
@@ -112,7 +112,7 @@ public class UIPropertyDefinitionForm extends UIFormInputSetWithAction {
     versionItem.add(new SelectItemOption<String>("ABORT", "6"));
     return versionItem;
   }
-  
+
   private List<SelectItemOption<String>> getRequiredTypes() {
     List<SelectItemOption<String>> requireType = new ArrayList<SelectItemOption<String>>();
     requireType.add(new SelectItemOption<String>("STRING", "1"));
@@ -127,7 +127,7 @@ public class UIPropertyDefinitionForm extends UIFormInputSetWithAction {
     requireType.add(new SelectItemOption<String>("UNDEFINED", "0"));
     return requireType;
   }
-  
+
   public List<SelectItemOption<String>> getNamespaces() throws Exception {
     List<SelectItemOption<String>> namespacesOptions = new ArrayList<SelectItemOption<String>>();
     String[] namespaces = getApplicationComponent(RepositoryService.class)
@@ -137,24 +137,24 @@ public class UIPropertyDefinitionForm extends UIFormInputSetWithAction {
     }
     return namespacesOptions;
   }
-  
+
   public void refresh() throws Exception {
     List<SelectItemOption<String>> autoListItem = new ArrayList<SelectItemOption<String>>();
     autoListItem.add(new SelectItemOption<String>(FALSE, FALSE));
     autoListItem.add(new SelectItemOption<String>(TRUE, TRUE));
-    
+
     List<SelectItemOption<String>> mandoListItem = new ArrayList<SelectItemOption<String>>();
     mandoListItem.add(new SelectItemOption<String>(FALSE, FALSE));
     mandoListItem.add(new SelectItemOption<String>(TRUE, TRUE));
-    
+
     List<SelectItemOption<String>> multiListItem = new ArrayList<SelectItemOption<String>>();
     multiListItem.add(new SelectItemOption<String>(FALSE, FALSE));
     multiListItem.add(new SelectItemOption<String>(TRUE, TRUE));
-    
+
     List<SelectItemOption<String>> protectedItem = new ArrayList<SelectItemOption<String>>();
     protectedItem.add(new SelectItemOption<String>(FALSE, FALSE));
-    protectedItem.add(new SelectItemOption<String>(TRUE, TRUE));    
-    
+    protectedItem.add(new SelectItemOption<String>(TRUE, TRUE));
+
     getUIFormSelectBox(NAMESPACE).setOptions(getNamespaces()).setDisabled(false);
     getUIStringInput(DEFINITION_NAME).setEditable(true).setValue(null);
     getUIFormSelectBox(REQUIRED_TYPE).setOptions(getRequiredTypes()).setDisabled(false);
@@ -165,14 +165,14 @@ public class UIPropertyDefinitionForm extends UIFormInputSetWithAction {
     getUIFormSelectBox(MULTIPLE).setOptions(multiListItem).setDisabled(false);
     getUIStringInput(VALUE_CONSTRAINTS).setEditable(true).setValue(null);
     UINodeTypeForm uiForm = getParent();
-    UIFormInputSetWithAction uiPropertyTab = uiForm.getChildById(UINodeTypeForm.PROPERTY_DEFINITION); 
+    UIFormInputSetWithAction uiPropertyTab = uiForm.getChildById(UINodeTypeForm.PROPERTY_DEFINITION);
     uiForm.setActionInTab(uiPropertyTab);
   }
-  
+
   private void setRequiredValue(String requiredValue) { requiredValue_ = requiredValue; }
-  
-  private String getRequiredValue() { return requiredValue_ == null ? "1" : requiredValue_; } 
-   
+
+  private String getRequiredValue() { return requiredValue_ == null ? "1" : requiredValue_; }
+
   public void update(NodeType nodeType, String propertyName) throws Exception {
     if(propertyName != null) {
       PropertyDefinition[] propertyDefinitions = nodeType.getPropertyDefinitions();
@@ -294,7 +294,7 @@ public class UIPropertyDefinitionForm extends UIFormInputSetWithAction {
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
         return;
       }
-      PropertyDefinitionValue property = 
+      PropertyDefinitionValue property =
         uiPropertyForm.getPropertyByName(propertyName, uiForm.addedPropertiesDef_);
       uiPropertyForm.setValues(property);
       uiPropertyForm.setRequiredValue(Integer.toString(property.getRequiredType()));
@@ -302,7 +302,7 @@ public class UIPropertyDefinitionForm extends UIFormInputSetWithAction {
       String[] actionNames = {ACTION_UPDATE_PROPERTY, ACTION_CANCEL_PROPERTY};
       String[] fieldNames = {propertyName, null};
       propertyTab.setActions(actionNames, fieldNames);
-      uiForm.setTabRender(UINodeTypeForm.PROPERTY_DEFINITION); 
+      uiForm.setTabRender(UINodeTypeForm.PROPERTY_DEFINITION);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiForm.getParent());
     }
   }
@@ -313,7 +313,7 @@ public class UIPropertyDefinitionForm extends UIFormInputSetWithAction {
       UINodeTypeForm uiForm = event.getSource();
       UIPropertyDefinitionForm uiPropertyForm = uiForm.getChild(UIPropertyDefinitionForm.class);
       String propertyName = event.getRequestContext().getRequestParameter(OBJECTID);
-      PropertyDefinitionValue propertyInfo = 
+      PropertyDefinitionValue propertyInfo =
         uiPropertyForm.getPropertyByName(propertyName, uiForm.addedPropertiesDef_);
       UIApplication uiApp = uiForm.getAncestorOfType(UIApplication.class);
       String prefix = uiForm.getUIFormSelectBox(NAMESPACE).getValue();
@@ -330,18 +330,18 @@ public class UIPropertyDefinitionForm extends UIFormInputSetWithAction {
           || c=='-' || c=='.' || c==':' || c=='@' || c=='^' || c=='[' || c==']' || c==',') {
           continue ;
         }
-				uiApp.addMessage(new ApplicationMessage(
-						"UIPropertyDefinitionForm.msg.property-name", null,
-						ApplicationMessage.WARNING));
-				event.getRequestContext().addUIComponentToUpdateByAjax(
-						uiApp.getUIPopupMessages());
-				return;
-			}
+        uiApp.addMessage(new ApplicationMessage(
+            "UIPropertyDefinitionForm.msg.property-name", null,
+            ApplicationMessage.WARNING));
+        event.getRequestContext().addUIComponentToUpdateByAjax(
+            uiApp.getUIPopupMessages());
+        return;
+      }
       if(prefix != null && prefix.length() > 0 ) name = prefix + ":" + name;
       if (propertyInfo ==  null) {
-      	propertyInfo = new PropertyDefinitionValue();
+        propertyInfo = new PropertyDefinitionValue();
       }
-      propertyInfo.setName(name);      
+      propertyInfo.setName(name);
       String requiredType = uiForm.getUIFormSelectBox(REQUIRED_TYPE).getValue();
       propertyInfo.setRequiredType(Integer.parseInt(requiredType));
       String isMultiple = uiForm.getUIFormSelectBox(MULTIPLE).getValue();
@@ -352,7 +352,7 @@ public class UIPropertyDefinitionForm extends UIFormInputSetWithAction {
       propertyInfo.setAutoCreate(Boolean.parseBoolean(autoCreate));
       String isProtected = uiForm.getUIFormSelectBox(PROTECTED).getValue();
       propertyInfo.setReadOnly(Boolean.parseBoolean(isProtected));
-      
+
       String onParent = uiForm.getUIFormSelectBox(PARENTVERSION).getValue();
       propertyInfo.setOnVersion(Integer.parseInt(onParent));
       String valueConstraints = uiForm.getUIStringInput(VALUE_CONSTRAINTS).getValue();
@@ -364,9 +364,9 @@ public class UIPropertyDefinitionForm extends UIFormInputSetWithAction {
             constraintValues.add(arrValues[i]);
           }
         } else {
-          constraintValues.add(valueConstraints); 
+          constraintValues.add(valueConstraints);
         }
-      }   
+      }
       propertyInfo.setValueConstraints(constraintValues);
       uiForm.setPropertyValue(uiForm.addedPropertiesDef_);
       uiPropertyForm.refresh();
@@ -376,14 +376,14 @@ public class UIPropertyDefinitionForm extends UIFormInputSetWithAction {
       event.getRequestContext().addUIComponentToUpdateByAjax(uiForm.getParent());
     }
   }
-  
+
   @SuppressWarnings("unchecked")
   static public class AddPropertyActionListener extends EventListener<UINodeTypeForm> {
     public void execute(Event<UINodeTypeForm> event) throws Exception {
       UINodeTypeForm uiForm = event.getSource();
       UIApplication uiApp = uiForm.getAncestorOfType(UIApplication.class);
       String prefix = uiForm.getUIFormSelectBox(NAMESPACE).getValue();
-      String propertyName = 
+      String propertyName =
         uiForm.getUIStringInput(DEFINITION_NAME).getValue();
       if(propertyName == null || propertyName.trim().length() == 0) {
         uiForm.setTabRender(UINodeTypeForm.PROPERTY_DEFINITION);
@@ -391,24 +391,24 @@ public class UIPropertyDefinitionForm extends UIFormInputSetWithAction {
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
         return;
       }
-      
+
       for(int i = 0; i < propertyName.length(); i ++){
         char c = propertyName.charAt(i);
         if(Character.isLetter(c) || Character.isDigit(c) || Character.isSpaceChar(c) || c=='_'
           || c=='-' || c=='.' || c==':' || c=='@' || c=='^' || c=='[' || c==']' || c==',') {
           continue ;
         }
-				uiApp.addMessage(new ApplicationMessage(
-						"UIPropertyDefinitionForm.msg.property-name", null,
-						ApplicationMessage.WARNING));
-				event.getRequestContext().addUIComponentToUpdateByAjax(
-						uiApp.getUIPopupMessages());
-				return;
-			}
+        uiApp.addMessage(new ApplicationMessage(
+            "UIPropertyDefinitionForm.msg.property-name", null,
+            ApplicationMessage.WARNING));
+        event.getRequestContext().addUIComponentToUpdateByAjax(
+            uiApp.getUIPopupMessages());
+        return;
+      }
       if(prefix != null && prefix.length() > 0 ) propertyName = prefix + ":" + propertyName;
       UIPropertyDefinitionForm uiPropertyForm = uiForm.getChild(UIPropertyDefinitionForm.class);
-      PropertyDefinitionValue propertyInfo = new PropertyDefinitionValue();      
-      propertyInfo.setName(propertyName);      
+      PropertyDefinitionValue propertyInfo = new PropertyDefinitionValue();
+      propertyInfo.setName(propertyName);
 
       String requiredType = uiForm.getUIFormSelectBox(REQUIRED_TYPE).getValue();
       propertyInfo.setRequiredType(Integer.parseInt(requiredType));
@@ -431,7 +431,7 @@ public class UIPropertyDefinitionForm extends UIFormInputSetWithAction {
             constraintValues.add(arrValues[i].toString());
           }
         } else {
-          constraintValues.add(valueConstraints); 
+          constraintValues.add(valueConstraints);
         }
       }
       propertyInfo.setValueConstraints(constraintValues);
@@ -444,7 +444,7 @@ public class UIPropertyDefinitionForm extends UIFormInputSetWithAction {
       event.getRequestContext().addUIComponentToUpdateByAjax(uiForm.getParent());
     }
   }
-  
+
   static public class ChangeRequiredTypeActionListener extends EventListener<UINodeTypeForm> {
     public void execute(Event<UINodeTypeForm> event) throws Exception {
       UINodeTypeForm uiForm = event.getSource();
@@ -460,7 +460,7 @@ public class UIPropertyDefinitionForm extends UIFormInputSetWithAction {
       event.getRequestContext().addUIComponentToUpdateByAjax(uiForm.getParent());
     }
   }
-  
+
   static public class AddConstraintsActionListener extends EventListener<UINodeTypeForm> {
     public void execute(Event<UINodeTypeForm> event) throws Exception {
       UINodeTypeForm uiForm = event.getSource();
@@ -476,8 +476,8 @@ public class UIPropertyDefinitionForm extends UIFormInputSetWithAction {
         uiOptionList.update(values);
       } else if(uiPropertyForm.getRequiredValue().equals("1")) {
         constraintTab = new UIFormInputSetWithAction("Contraints");
-        UIFormMultiValueInputSet valuesConstraint = 
-          uiPropertyForm.createUIComponent(UIFormMultiValueInputSet.class, null, CONSTRAINTS); 
+        UIFormMultiValueInputSet valuesConstraint =
+          uiPropertyForm.createUIComponent(UIFormMultiValueInputSet.class, null, CONSTRAINTS);
         valuesConstraint.setType(UIFormStringInput.class);
         constraintTab.addUIFormInput(valuesConstraint);
         uiForm.addUIComponentInput(constraintTab);
@@ -495,7 +495,7 @@ public class UIPropertyDefinitionForm extends UIFormInputSetWithAction {
       event.getRequestContext().addUIComponentToUpdateByAjax(uiForm.getParent());
     }
   }
-  
+
   static public class CancelPropertyActionListener extends EventListener<UINodeTypeForm> {
     public void execute(Event<UINodeTypeForm> event) throws Exception {
       UINodeTypeForm uiForm = event.getSource();
@@ -507,7 +507,7 @@ public class UIPropertyDefinitionForm extends UIFormInputSetWithAction {
       event.getRequestContext().addUIComponentToUpdateByAjax(uiForm.getParent());
     }
   }
-  
+
   static public class AddActionListener extends EventListener<UINodeTypeForm> {
     public void execute(Event<UINodeTypeForm> event) throws Exception {
       UINodeTypeForm uiForm = event.getSource();
@@ -516,7 +516,7 @@ public class UIPropertyDefinitionForm extends UIFormInputSetWithAction {
       event.getRequestContext().addUIComponentToUpdateByAjax(uiForm.getParent());
     }
   }
-  
+
   static public class RemoveActionListener extends EventListener<UINodeTypeForm> {
     public void execute(Event<UINodeTypeForm> event) throws Exception {
       UINodeTypeForm uiForm = event.getSource();
@@ -524,7 +524,7 @@ public class UIPropertyDefinitionForm extends UIFormInputSetWithAction {
       event.getRequestContext().addUIComponentToUpdateByAjax(uiForm.getParent());
     }
   }
-  
+
   @SuppressWarnings("unchecked")
   static public class AddValueActionListener extends EventListener<UINodeTypeForm> {
     public void execute(Event<UINodeTypeForm> event) throws Exception {
@@ -554,7 +554,7 @@ public class UIPropertyDefinitionForm extends UIFormInputSetWithAction {
           if(strValues == null) strValues = constraintValues.get(i);
           else strValues = strValues + "," + constraintValues.get(i);
         }
-        
+
       }
       uiForm.getUIStringInput(VALUE_CONSTRAINTS).setValue(strValues);
       uiForm.removeChildById("Contraints");
@@ -562,7 +562,7 @@ public class UIPropertyDefinitionForm extends UIFormInputSetWithAction {
       event.getRequestContext().addUIComponentToUpdateByAjax(uiForm.getParent());
     }
   }
-  
+
   static public class CancelConstraintsActionListener extends EventListener<UINodeTypeForm> {
     public void execute(Event<UINodeTypeForm> event) throws Exception {
       UINodeTypeForm uiForm = event.getSource();

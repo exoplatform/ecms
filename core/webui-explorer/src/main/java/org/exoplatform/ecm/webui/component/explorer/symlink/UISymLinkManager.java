@@ -33,17 +33,17 @@ import org.exoplatform.webui.core.lifecycle.UIContainerLifecycle;
 )
 public class UISymLinkManager extends UIContainer implements UIPopupComponent {
   final static public String EXTARNAL_METADATA_POPUP = "AddMetadataPopup" ;
-  
+
   public UISymLinkManager() throws Exception {
     addChild(UISymLinkForm.class, null, null);
     addChild(UISymLinkContainer.class, null, null).setRendered(false);
   }
-  
+
   public void enableLocalizationMode() {
-	  UISymLinkForm linkForm = this.getChild(UISymLinkForm.class);
-	  linkForm.enableLocalizationMode();
+    UISymLinkForm linkForm = this.getChild(UISymLinkForm.class);
+    linkForm.enableLocalizationMode();
   }
-  
+
   public UIPopupWindow initPopupTaxonomy(String id) throws Exception {
     UIPopupWindow uiPopup = getChildById(id);
     if (uiPopup == null) {
@@ -54,26 +54,26 @@ public class UISymLinkManager extends UIContainer implements UIPopupComponent {
     uiPopup.setResizable(true);
     return uiPopup;
   }
-  
+
   public void activate() throws Exception {
     UISymLinkForm uiUploadForm = getChild(UISymLinkForm.class);
     uiUploadForm.initFieldInput();
   }
 
   public void deActivate() throws Exception {}
-  
+
   public void initMetadataPopup() throws Exception {
     removeChildById(EXTARNAL_METADATA_POPUP) ;
     UIPopupWindow uiPopup = addChild(UIPopupWindow.class, null, EXTARNAL_METADATA_POPUP) ;
-    uiPopup.setWindowSize(400, 400);    
+    uiPopup.setWindowSize(400, 400);
     uiPopup.setRendered(true);
     uiPopup.setShow(true) ;
     uiPopup.setResizable(true) ;
   }
   public void useWorkspaceSelector() {
-  	UISymLinkForm child = getChild(UISymLinkForm.class);
-  	if (child!=null)  {
-  		child.useWorkspaceSelector();
-  	}
+    UISymLinkForm child = getChild(UISymLinkForm.class);
+    if (child!=null)  {
+      child.useWorkspaceSelector();
+    }
   }
 }

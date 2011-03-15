@@ -43,16 +43,16 @@ import org.exoplatform.webui.form.UIForm;
     }
 )
 public class UIPageSelector extends UIForm {
-  
+
   /** The source ui component. */
   private UIComponent sourceUIComponent ;
-  
+
   /** The return field name. */
   private String returnFieldName ;
-  
+
   /**
    * Instantiates a new uI page selector.
-   * 
+   *
    * @throws Exception the exception
    */
   public UIPageSelector() throws Exception {
@@ -60,35 +60,35 @@ public class UIPageSelector extends UIForm {
     UITree uiTree = pageNodeSelector.getChild(UITree.class);
     uiTree.setUIRightClickPopupMenu(null);
     pageNodeSelector.selectPageNodeByUri(null);
-    
+
     UIPageSelectorPanel pageSelectorPanel = addChild(UIPageSelectorPanel.class, null, null);
     pageSelectorPanel.updateGrid();
   }
 
   /**
    * Gets the return field name.
-   * 
+   *
    * @return the return field name
    */
   public String getReturnFieldName() { return returnFieldName; }
 
   /**
    * Sets the return field name.
-   * 
+   *
    * @param name the new return field name
    */
   public void setReturnFieldName(String name) { this.returnFieldName = name; }
 
   /**
    * Gets the source component.
-   * 
+   *
    * @return the source component
    */
   public UIComponent getSourceComponent() { return sourceUIComponent; }
-  
+
   /**
    * Sets the source component.
-   * 
+   *
    * @param uicomponent the uicomponent
    * @param initParams the init params
    */
@@ -104,17 +104,17 @@ public class UIPageSelector extends UIForm {
       returnFieldName = initParams[0] ;
     }
   }
-  
+
   /* (non-Javadoc)
    * @see org.exoplatform.webui.core.UIComponent#processDecode(org.exoplatform.webui.application.WebuiRequestContext)
    */
-  public void processDecode(WebuiRequestContext context) throws Exception {   
+  public void processDecode(WebuiRequestContext context) throws Exception {
     super.processDecode(context);
     String action = context.getRequestParameter(UIForm.ACTION);
-    Event<UIComponent> event = createEvent(action, Event.Phase.DECODE, context) ;   
-    if(event != null) event.broadcast() ;   
+    Event<UIComponent> event = createEvent(action, Event.Phase.DECODE, context) ;
+    if(event != null) event.broadcast() ;
   }
-  
+
   /**
    * The listener interface for receiving changeNodeAction events.
    * The class that is interested in processing a changeNodeAction
@@ -123,17 +123,17 @@ public class UIPageSelector extends UIForm {
    * component's <code>addChangeNodeActionListener<code> method. When
    * the changeNodeAction event occurs, that object's appropriate
    * method is invoked.
-   * 
+   *
    * @see ChangeNodeActionEvent
    */
   public static class ChangeNodeActionListener extends EventListener<UIPageSelector> {
-    
+
     /* (non-Javadoc)
      * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
      */
     public void execute(Event<UIPageSelector> event) throws Exception {
       UIPageSelector pageSelector = event.getSource() ;
-      UIPageNodeSelector pageNodeSelector = pageSelector.getChild(UIPageNodeSelector.class) ; 
+      UIPageNodeSelector pageNodeSelector = pageSelector.getChild(UIPageNodeSelector.class) ;
       String uri  = event.getRequestContext().getRequestParameter(OBJECTID) ;
       UITree tree = pageNodeSelector.getChild(UITree.class) ;
       if(tree.getParentSelected() == null && (uri == null || uri.length() < 1)){
@@ -145,7 +145,7 @@ public class UIPageSelector extends UIForm {
       UIPageSelectorPanel pageSelectorPanel = pageSelector.getChild(UIPageSelectorPanel.class);
       pageSelectorPanel.setSelectedPage(pageNodeSelector.getSelectedNode().getNode());
       pageSelectorPanel.updateGrid();
-      
+
       event.getRequestContext().addUIComponentToUpdateByAjax(pageSelector) ;
     }
   }

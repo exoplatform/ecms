@@ -50,7 +50,7 @@ public class JcrConnection extends Connection
     */
    protected void validateChangeToken(ObjectData object, String changeToken) throws UpdateConflictException
    {
-      // XXX : Do not provide validation at the moment.
+      // Do not provide validation at the moment.
       // Some client may not work with this feature ON.
    }
 

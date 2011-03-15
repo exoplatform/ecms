@@ -27,7 +27,7 @@ import org.exoplatform.services.wcm.portal.PortalFolderSchemaHandler;
  * Created by The eXo Platform SAS
  * @author : Hoa.Pham
  *          hoa.pham@exoplatform.com
- * May 28, 2008  
+ * May 28, 2008
  */
 public class JSFileHandler extends BaseWebSchemaHandler {
 
@@ -36,28 +36,28 @@ public class JSFileHandler extends BaseWebSchemaHandler {
   private boolean isPortalJSFolder = false;
 
   public boolean matchHandler(SessionProvider sessionProvider, Node node) throws Exception {
-    if(!matchNodeType(node)) 
+    if(!matchNodeType(node))
       return false;
-    if(!matchMimeType(node)) 
+    if(!matchMimeType(node))
       return false;
     isPortalJSFolder = isInPortalJSFolder(sessionProvider, node);
     if(isPortalJSFolder) {
-      return true; 
-    }      
+      return true;
+    }
     if(!matchParenNodeType(node)) {
       return false;
-    }    
+    }
     return true;
   }
 
-  private boolean matchNodeType(Node node) throws Exception{    
+  private boolean matchNodeType(Node node) throws Exception{
     return node.getPrimaryNodeType().getName().equals("nt:file");
   }
-  
+
   private boolean matchParenNodeType(Node node ) throws Exception{
     return node.getParent().isNodeType("exo:jsFolder");
   }
-  
+
   private boolean matchMimeType(Node node) throws Exception{
     String mimeType = getFileMimeType(node);
     if("text/javascript".equals(mimeType))
@@ -73,36 +73,36 @@ public class JSFileHandler extends BaseWebSchemaHandler {
 
   private boolean isInPortalJSFolder(SessionProvider sessionProvider, Node file) throws Exception {
     Node portal = findPortalNode(sessionProvider, file);
-    if(portal == null)  {      
+    if(portal == null)  {
       return false;
-    }    
+    }
     WebSchemaConfigService schemaConfigService = getService(WebSchemaConfigService.class);
-    PortalFolderSchemaHandler schemaHandler = schemaConfigService.getWebSchemaHandlerByType(PortalFolderSchemaHandler.class);           
+    PortalFolderSchemaHandler schemaHandler = schemaConfigService.getWebSchemaHandlerByType(PortalFolderSchemaHandler.class);
     Node jsFolder = schemaHandler.getJSFolder(portal);
-    return file.getPath().startsWith(jsFolder.getPath());       
-  }    
-  
+    return file.getPath().startsWith(jsFolder.getPath());
+  }
+
   public void onCreateNode(SessionProvider sessionProvider, Node file) throws Exception {
     addMixin(file, "exo:jsFile") ;
     addMixin(file,"exo:owneable");
     file.setProperty("exo:presentationType","exo:jsFile");
     //If this jsFile belong to jsFolder of portal, the jsFile will be shared jsFile
     if(isPortalJSFolder) {
-      file.setProperty("exo:sharedJS",true); 
-    }    
-  }  
+      file.setProperty("exo:sharedJS",true);
+    }
+  }
 
   public void onModifyNode(SessionProvider sessionProvider, Node file) throws Exception {
-    if(isPortalJSFolder) { 
-    	Node portal = findPortalNode(sessionProvider, file);
+    if(isPortalJSFolder) {
+      Node portal = findPortalNode(sessionProvider, file);
       XJavascriptService javascriptService = getService(XJavascriptService.class);
       javascriptService.updatePortalJSOnModify(portal, file);
     }
   }
 
-  public void onRemoveNode(SessionProvider sessionProvider, Node file) throws Exception { 
-    if(isPortalJSFolder) { 
-    	Node portal = findPortalNode(sessionProvider, file);
+  public void onRemoveNode(SessionProvider sessionProvider, Node file) throws Exception {
+    if(isPortalJSFolder) {
+      Node portal = findPortalNode(sessionProvider, file);
       XJavascriptService javascriptService = getService(XJavascriptService.class);
       javascriptService.updatePortalJSOnRemove(portal, file);
     }

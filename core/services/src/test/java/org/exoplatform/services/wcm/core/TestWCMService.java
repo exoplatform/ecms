@@ -32,10 +32,10 @@ public class TestWCMService extends BaseWCMTestCase {
 
   /** The WCM Core Service. */
   private WCMService wcmService;
-  
+
   /** The jcr node. */
   private Node node;
-  
+
   /* (non-Javadoc)
    * @see org.exoplatform.services.wcm.core.BaseWCMTestCase#setUp()
    */
@@ -46,10 +46,10 @@ public class TestWCMService extends BaseWCMTestCase {
     session.save();
     wcmService = getService(WCMService.class);
   }
-  
+
   /**
    * Test get referenced jcr node by path.
-   * 
+   *
    * @throws Exception the exception
    */
   public void testGetReferencedContent1() throws Exception {
@@ -61,7 +61,7 @@ public class TestWCMService extends BaseWCMTestCase {
 
   /**
    * Test get referenced jcr node by UUID.
-   * 
+   *
    * @throws Exception the exception
    */
   public void testGetReferencedContent2() throws Exception {
@@ -70,10 +70,10 @@ public class TestWCMService extends BaseWCMTestCase {
     Node resultNode = wcmService.getReferencedContent(sessionProvider, REPO_NAME, COLLABORATION_WS, nodeUUID);
     assertEquals(resultNode.getUUID(), nodeUUID);
   }
-  
+
   /**
    * Test get null if input is wrong identifier.
-   * 
+   *
    * @throws Exception the exception
    */
   public void testGetReferencedContent3() throws Exception {
@@ -82,10 +82,10 @@ public class TestWCMService extends BaseWCMTestCase {
     Node resultNode = wcmService.getReferencedContent(sessionProvider, REPO_NAME, COLLABORATION_WS, nodeIdentifier);
     assertNull(resultNode);
   }
-  
+
   /**
    * Test a portal is shared portal.
-   * 
+   *
    * @throws Exception the exception
    */
   public void testIsSharedPortal1() throws Exception {
@@ -93,10 +93,10 @@ public class TestWCMService extends BaseWCMTestCase {
     boolean isSharedPortal = wcmService.isSharedPortal(sessionProvider, "shared");
     assertTrue(isSharedPortal);
   }
-  
+
   /**
    * Test a portal is not shared portal.
-   * 
+   *
    * @throws Exception the exception
    */
   public void testIsSharedPortal2() throws Exception {
@@ -104,7 +104,7 @@ public class TestWCMService extends BaseWCMTestCase {
     boolean isSharedPortal = wcmService.isSharedPortal(sessionProvider, "classic");
     assertFalse(isSharedPortal);
   }
-  
+
   /* (non-Javadoc)
    * @see junit.framework.TestCase#tearDown()
    */

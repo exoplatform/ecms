@@ -30,9 +30,9 @@ import org.exoplatform.webui.core.lifecycle.UIContainerLifecycle;
     lifecycle = UIContainerLifecycle.class
 )
 public class UIControl extends UIContainer {
-  
+
   public UIControl() throws Exception {
     addChild(UIAddressBar.class, null, null) ;
-    addChild(UIActionBar.class, null, null) ;    
+    addChild(UIActionBar.class, null, null) ;
   }
 }

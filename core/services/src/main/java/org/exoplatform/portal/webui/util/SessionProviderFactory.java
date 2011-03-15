@@ -13,7 +13,7 @@ import org.exoplatform.services.jcr.ext.common.SessionProvider;
  * Created by The eXo Platform SARL
  * Author : Dang Van Minh
  *          minh.dang@exoplatform.com
- * Jan 21, 2010  
+ * Jan 21, 2010
  */
 public class SessionProviderFactory {
 

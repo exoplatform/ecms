@@ -40,7 +40,7 @@ import org.exoplatform.webui.form.UIFormStringInput;
  * Author : Dang Van Minh
  *          minh.dang@exoplatform.com
  * Sep 22, 2006
- * 11:50:10 AM 
+ * 11:50:10 AM
  */
 @ComponentConfig(template = "classpath:groovy/ecm/webui/form/UIFormInputSetWithAction.gtmpl")
 public class UIChildNodeDefinitionForm extends UIFormInputSetWithAction {
@@ -66,18 +66,18 @@ public class UIChildNodeDefinitionForm extends UIFormInputSetWithAction {
     List<SelectItemOption<String>> autoListItem = new ArrayList<SelectItemOption<String>>();
     autoListItem.add(new SelectItemOption<String>(FALSE, FALSE));
     autoListItem.add(new SelectItemOption<String>(TRUE, TRUE));
-    
+
     List<SelectItemOption<String>> mandoListItem = new ArrayList<SelectItemOption<String>>();
     mandoListItem.add(new SelectItemOption<String>(FALSE, FALSE));
     mandoListItem.add(new SelectItemOption<String>(TRUE, TRUE));
-    
+
     List<SelectItemOption<String>> sameNameListItem = new ArrayList<SelectItemOption<String>>();
     sameNameListItem.add(new SelectItemOption<String>(FALSE, FALSE));
     sameNameListItem.add(new SelectItemOption<String>(TRUE, TRUE));
-    
+
     List<SelectItemOption<String>> protectedItem = new ArrayList<SelectItemOption<String>>();
     protectedItem.add(new SelectItemOption<String>(FALSE, FALSE));
-    protectedItem.add(new SelectItemOption<String>(TRUE, TRUE)); 
+    protectedItem.add(new SelectItemOption<String>(TRUE, TRUE));
 
     addUIFormInput(new UIFormSelectBox(NAMESPACE, NAMESPACE, getNamespaces()));
     addUIFormInput(new UIFormStringInput(CHILD_NAME, CHILD_NAME, null));
@@ -85,15 +85,15 @@ public class UIChildNodeDefinitionForm extends UIFormInputSetWithAction {
     addUIFormInput(new UIFormSelectBox(AUTOCREATED, AUTOCREATED, autoListItem));
     addUIFormInput(new UIFormSelectBox(MANDATORY, MANDATORY, mandoListItem));
     addUIFormInput(new UIFormSelectBox(PARENTVERSION, PARENTVERSION, getParentVersions()));
-    addUIFormInput(new UIFormSelectBox(PROTECTED, PROTECTED, protectedItem)); 
+    addUIFormInput(new UIFormSelectBox(PROTECTED, PROTECTED, protectedItem));
     addUIFormInput(new UIFormSelectBox(SAME_NAME, SAME_NAME, sameNameListItem));
     addUIFormInput(new UIFormStringInput(REQUIRED_PRIMARY_TYPE, REQUIRED_PRIMARY_TYPE, null));
   }
-  
+
   public void processRender(WebuiRequestContext context) throws Exception {
     super.processRender(context);
   }
-  
+
   private List<SelectItemOption<String>> getParentVersions() {
     List<SelectItemOption<String>> versionItem = new ArrayList<SelectItemOption<String>>();
     versionItem.add(new SelectItemOption<String>("COPY", "1"));
@@ -114,24 +114,24 @@ public class UIChildNodeDefinitionForm extends UIFormInputSetWithAction {
     }
     return namespacesOptions;
   }
-  
+
   public void refresh() throws Exception {
     List<SelectItemOption<String>> autoListItem = new ArrayList<SelectItemOption<String>>();
     autoListItem.add(new SelectItemOption<String>(FALSE, FALSE));
     autoListItem.add(new SelectItemOption<String>(TRUE, TRUE));
-    
+
     List<SelectItemOption<String>> mandoListItem = new ArrayList<SelectItemOption<String>>();
     mandoListItem.add(new SelectItemOption<String>(FALSE, FALSE));
     mandoListItem.add(new SelectItemOption<String>(TRUE, TRUE));
-    
+
     List<SelectItemOption<String>> sameNameListItem = new ArrayList<SelectItemOption<String>>();
     sameNameListItem.add(new SelectItemOption<String>(FALSE, FALSE));
     sameNameListItem.add(new SelectItemOption<String>(TRUE, TRUE));
-    
+
     List<SelectItemOption<String>> protectedItem = new ArrayList<SelectItemOption<String>>();
     protectedItem.add(new SelectItemOption<String>(FALSE, FALSE));
     protectedItem.add(new SelectItemOption<String>(TRUE, TRUE));
-    
+
     getUIFormSelectBox(NAMESPACE).setOptions(getNamespaces()).setDisabled(false);
     getUIStringInput(CHILD_NAME).setEditable(true).setValue(null);
     getUIStringInput(DEFAULT_PRIMARY_TYPE).setEditable(true).setValue(null);
@@ -142,7 +142,7 @@ public class UIChildNodeDefinitionForm extends UIFormInputSetWithAction {
     getUIFormSelectBox(SAME_NAME).setOptions(sameNameListItem).setDisabled(false);
     getUIStringInput(REQUIRED_PRIMARY_TYPE).setEditable(true).setValue(null);
     UINodeTypeForm uiForm = getParent();
-    UIFormInputSetWithAction uiChildTab = uiForm.getChildById(UINodeTypeForm.CHILDNODE_DEFINITION); 
+    UIFormInputSetWithAction uiChildTab = uiForm.getChildById(UINodeTypeForm.CHILDNODE_DEFINITION);
     uiForm.setActionInTab(uiChildTab);
   }
 
@@ -160,18 +160,18 @@ public class UIChildNodeDefinitionForm extends UIFormInputSetWithAction {
             getUIFormSelectBox(NAMESPACE).setValue("");
             getUIStringInput(CHILD_NAME).setValue(childNodeName);
           }
-          NodeType defaultNodeType = nodeDefinitions[i].getDefaultPrimaryType(); 
+          NodeType defaultNodeType = nodeDefinitions[i].getDefaultPrimaryType();
           if(defaultNodeType != null) {
-            getUIStringInput(DEFAULT_PRIMARY_TYPE).setValue(defaultNodeType.getName());          
+            getUIStringInput(DEFAULT_PRIMARY_TYPE).setValue(defaultNodeType.getName());
           }
           String sameName = String.valueOf(nodeDefinitions[i].allowsSameNameSiblings());
-          getUIFormSelectBox(SAME_NAME).setValue(sameName);          
-          getUIFormSelectBox(MANDATORY).setValue(String.valueOf(nodeDefinitions[i].isMandatory()));          
-          getUIFormSelectBox(AUTOCREATED).setValue(String.valueOf(nodeDefinitions[i].isAutoCreated()));          
+          getUIFormSelectBox(SAME_NAME).setValue(sameName);
+          getUIFormSelectBox(MANDATORY).setValue(String.valueOf(nodeDefinitions[i].isMandatory()));
+          getUIFormSelectBox(AUTOCREATED).setValue(String.valueOf(nodeDefinitions[i].isAutoCreated()));
           getUIFormSelectBox(PROTECTED).setValue(String.valueOf(nodeDefinitions[i].isProtected()));
           String parentVersion = Integer.toString(nodeDefinitions[i].getOnParentVersion());
-          getUIFormSelectBox(PARENTVERSION).setValue(parentVersion);          
-          StringBuilder requiredType = new StringBuilder(); 
+          getUIFormSelectBox(PARENTVERSION).setValue(parentVersion);
+          StringBuilder requiredType = new StringBuilder();
           NodeType[] requiredPrimaryType = nodeDefinitions[i].getRequiredPrimaryTypes();
           for(int j = 0; j < requiredPrimaryType.length; j ++){
             if(requiredType.length() > 0) requiredType.append(" , ");
@@ -181,7 +181,7 @@ public class UIChildNodeDefinitionForm extends UIFormInputSetWithAction {
           break;
         }
       }
-    } 
+    }
     getUIFormSelectBox(NAMESPACE).setDisabled(true);
     getUIStringInput(CHILD_NAME).setEditable(false);
     getUIStringInput(DEFAULT_PRIMARY_TYPE).setEditable(false);
@@ -206,11 +206,11 @@ public class UIChildNodeDefinitionForm extends UIFormInputSetWithAction {
     }
     getUIStringInput(DEFAULT_PRIMARY_TYPE).setValue(node.getDefaultNodeTypeName());
     getUIFormSelectBox(SAME_NAME).setValue(String.valueOf(node.isSameNameSiblings()));
-    getUIFormSelectBox(MANDATORY).setValue(String.valueOf(node.isMandatory()));          
+    getUIFormSelectBox(MANDATORY).setValue(String.valueOf(node.isMandatory()));
     getUIFormSelectBox(AUTOCREATED).setValue(String.valueOf(node.isAutoCreate()));
     getUIFormSelectBox(PROTECTED).setValue(String.valueOf(node.isReadOnly()));
     String parentVersion = Integer.toString(node.getOnVersion());
-    getUIFormSelectBox(PARENTVERSION).setValue(parentVersion);          
+    getUIFormSelectBox(PARENTVERSION).setValue(parentVersion);
     List<String> requiredPrimaryType = node.getRequiredNodeTypeNames();
     StringBuilder listRequired = new StringBuilder();
     for(int j = 0; j < requiredPrimaryType.size(); j ++){
@@ -223,7 +223,7 @@ public class UIChildNodeDefinitionForm extends UIFormInputSetWithAction {
     getUIStringInput(REQUIRED_PRIMARY_TYPE).setValue(listRequired.toString());
   }
 
-  private NodeDefinitionValue getChildNodeByName(String nodeName, 
+  private NodeDefinitionValue getChildNodeByName(String nodeName,
                                                  List<NodeDefinitionValue> listNode) {
     for(NodeDefinitionValue node : listNode) {
       if(node.getName().equals(nodeName)) return node;
@@ -264,14 +264,14 @@ public class UIChildNodeDefinitionForm extends UIFormInputSetWithAction {
           || c=='-' || c=='.' || c==':' || c=='@' || c=='^' || c=='[' || c==']' || c==',') {
           continue ;
         }
-				uiApp.addMessage(new ApplicationMessage(
-						"UIChildNodeDefinitionForm.msg.child-invalid", null,
-						ApplicationMessage.WARNING));
-				event.getRequestContext().addUIComponentToUpdateByAjax(
-						uiApp.getUIPopupMessages());
-				return;
-			}
-      NodeDefinitionValue nodeDefValue = 
+        uiApp.addMessage(new ApplicationMessage(
+            "UIChildNodeDefinitionForm.msg.child-invalid", null,
+            ApplicationMessage.WARNING));
+        event.getRequestContext().addUIComponentToUpdateByAjax(
+            uiApp.getUIPopupMessages());
+        return;
+      }
+      NodeDefinitionValue nodeDefValue =
         uiChildNodeForm.getChildNodeByName(nodeName, uiForm.addedChildDef_);
       uiChildNodeForm.setValues(nodeDefValue);
       UIFormInputSetWithAction childTab = uiForm.getChildById(UINodeTypeForm.CHILDNODE_DEFINITION);
@@ -289,11 +289,11 @@ public class UIChildNodeDefinitionForm extends UIFormInputSetWithAction {
       UIChildNodeDefinitionForm uiChildNodeForm = uiForm.getChild(UIChildNodeDefinitionForm.class);
       String nodeName = event.getRequestContext().getRequestParameter(OBJECTID);
       UIApplication uiApp = uiForm.getAncestorOfType(UIApplication.class);
-      NodeDefinitionValue nodeTypeValue = 
-      	uiChildNodeForm.getChildNodeByName(nodeName, uiForm.addedChildDef_);
+      NodeDefinitionValue nodeTypeValue =
+        uiChildNodeForm.getChildNodeByName(nodeName, uiForm.addedChildDef_);
       ApplicationMessage message;
       String prefix = uiForm.getUIFormSelectBox(UIChildNodeDefinitionForm.NAMESPACE).getValue();
-      String childNodeName = 
+      String childNodeName =
         uiForm.getUIStringInput(UIChildNodeDefinitionForm.CHILD_NAME).getValue();
       if(childNodeName == null || childNodeName.trim().length() == 0) {
         uiForm.setTabRender(UINodeTypeForm.CHILDNODE_DEFINITION);
@@ -306,19 +306,19 @@ public class UIChildNodeDefinitionForm extends UIFormInputSetWithAction {
           || c=='-' || c=='.' || c==':' || c=='@' || c=='^' || c=='[' || c==']' || c==',') {
           continue ;
         }
-				uiApp.addMessage(new ApplicationMessage(
-						"UIChildNodeDefinitionForm.msg.child-invalid", null,
-						ApplicationMessage.WARNING));
-				event.getRequestContext().addUIComponentToUpdateByAjax(
-						uiApp.getUIPopupMessages());
-				return;
-			}
+        uiApp.addMessage(new ApplicationMessage(
+            "UIChildNodeDefinitionForm.msg.child-invalid", null,
+            ApplicationMessage.WARNING));
+        event.getRequestContext().addUIComponentToUpdateByAjax(
+            uiApp.getUIPopupMessages());
+        return;
+      }
       if(prefix != null && prefix.length() > 0) childNodeName = prefix + ":" + childNodeName;
       if (nodeTypeValue == null) {
-      	nodeTypeValue = new NodeDefinitionValue();
+        nodeTypeValue = new NodeDefinitionValue();
       }
       nodeTypeValue.setName(childNodeName);
-      String defaultType = 
+      String defaultType =
         uiForm.getUIStringInput(UIChildNodeDefinitionForm.DEFAULT_PRIMARY_TYPE).getValue();
       if(defaultType == null || defaultType.trim().length() == 0) {
         uiForm.setTabRender(UINodeTypeForm.CHILDNODE_DEFINITION);
@@ -327,22 +327,22 @@ public class UIChildNodeDefinitionForm extends UIFormInputSetWithAction {
         return;
       }
       nodeTypeValue.setDefaultNodeTypeName(defaultType);
-      String isSameName = 
+      String isSameName =
         uiForm.getUIFormSelectBox(UIChildNodeDefinitionForm.SAME_NAME).getValue();
-      nodeTypeValue.setSameNameSiblings(Boolean.parseBoolean(isSameName));      
-      String isMandatory = 
+      nodeTypeValue.setSameNameSiblings(Boolean.parseBoolean(isSameName));
+      String isMandatory =
         uiForm.getUIFormSelectBox(UIChildNodeDefinitionForm.MANDATORY).getValue();
-      nodeTypeValue.setMandatory(Boolean.parseBoolean(isMandatory));  
-      String autoCreate = 
+      nodeTypeValue.setMandatory(Boolean.parseBoolean(isMandatory));
+      String autoCreate =
         uiForm.getUIFormSelectBox(UIChildNodeDefinitionForm.AUTOCREATED).getValue();
       nodeTypeValue.setAutoCreate(Boolean.parseBoolean(autoCreate));
-      String isProtected = 
+      String isProtected =
         uiForm.getUIFormSelectBox(UIChildNodeDefinitionForm.PROTECTED).getValue();
       nodeTypeValue.setReadOnly(Boolean.parseBoolean(isProtected));
-      String parentVer = 
+      String parentVer =
         uiForm.getUIFormSelectBox(UIChildNodeDefinitionForm.PARENTVERSION).getValue();
       nodeTypeValue.setOnVersion(Integer.parseInt(parentVer));
-      String requiredType = 
+      String requiredType =
         uiForm.getUIStringInput(UIChildNodeDefinitionForm.REQUIRED_PRIMARY_TYPE).getValue();
       if(requiredType == null || requiredType.length() == 0) {
         uiForm.setTabRender(UINodeTypeForm.CHILDNODE_DEFINITION);
@@ -364,7 +364,7 @@ public class UIChildNodeDefinitionForm extends UIFormInputSetWithAction {
       event.getRequestContext().addUIComponentToUpdateByAjax(uiForm.getParent());
     }
   }
-  
+
   static public class AddChildActionListener extends EventListener<UINodeTypeForm> {
     public void execute(Event<UINodeTypeForm> event) throws Exception {
       UINodeTypeForm uiForm = event.getSource();
@@ -384,13 +384,13 @@ public class UIChildNodeDefinitionForm extends UIFormInputSetWithAction {
           || c=='-' || c=='.' || c==':' || c=='@' || c=='^' || c=='[' || c==']' || c==',') {
           continue ;
         }
-				uiApp.addMessage(new ApplicationMessage(
-						"UIChildNodeDefinitionForm.msg.child-invalid", null,
-						ApplicationMessage.WARNING));
-				event.getRequestContext().addUIComponentToUpdateByAjax(
-						uiApp.getUIPopupMessages());
-				return;
-			}
+        uiApp.addMessage(new ApplicationMessage(
+            "UIChildNodeDefinitionForm.msg.child-invalid", null,
+            ApplicationMessage.WARNING));
+        event.getRequestContext().addUIComponentToUpdateByAjax(
+            uiApp.getUIPopupMessages());
+        return;
+      }
       if(prefix != null && prefix.length() > 0) childNodeName = prefix + ":" + childNodeName;
       nodeTypeValue.setName(childNodeName);
       String defaultType =
@@ -435,19 +435,19 @@ public class UIChildNodeDefinitionForm extends UIFormInputSetWithAction {
       event.getRequestContext().addUIComponentToUpdateByAjax(uiForm.getParent());
     }
   }
-  
+
   static  public class AddDefaultTypeActionListener extends EventListener<UINodeTypeForm> {
     public void execute(Event<UINodeTypeForm> event) throws Exception {
       UINodeTypeForm uiForm = event.getSource();
-      UIFormInputSetWithAction defaultPrimaryTypeTab = 
+      UIFormInputSetWithAction defaultPrimaryTypeTab =
         new UINodeTypeOptionList(UINodeTypeForm.DEFAULT_PRIMARY_TYPE_TAB);
-      uiForm.removeChildTabs(new String[] {UINodeTypeForm.SUPER_TYPE_TAB, 
+      uiForm.removeChildTabs(new String[] {UINodeTypeForm.SUPER_TYPE_TAB,
                                            UINodeTypeForm.REQUIRED_PRIMARY_TYPE_TAB});
       if(defaultPrimaryTypeTab.isRendered()) {
         uiForm.removeChildById(UINodeTypeForm.DEFAULT_PRIMARY_TYPE_TAB);
       }
       String[] actionNames = {UINodeTypeForm.ADD_TYPE, UINodeTypeForm.ACTION_CANCEL_TAB};
-      String[] fieldNames = {DEFAULT_PRIMARY_TYPE, 
+      String[] fieldNames = {DEFAULT_PRIMARY_TYPE,
                                           UINodeTypeForm.DEFAULT_PRIMARY_TYPE_TAB};
       defaultPrimaryTypeTab.setActions(actionNames, fieldNames);
       uiForm.addUIComponentInput(defaultPrimaryTypeTab);
@@ -462,9 +462,9 @@ public class UIChildNodeDefinitionForm extends UIFormInputSetWithAction {
   static  public class AddRequiredTypeActionListener extends EventListener<UINodeTypeForm> {
     public void execute(Event<UINodeTypeForm> event) throws Exception {
       UINodeTypeForm uiForm = event.getSource();
-      UIFormInputSetWithAction requiredPrimaryTypeTab = 
+      UIFormInputSetWithAction requiredPrimaryTypeTab =
         new UINodeTypeOptionList(UINodeTypeForm.REQUIRED_PRIMARY_TYPE_TAB);
-      uiForm.removeChildTabs(new String[] {UINodeTypeForm.SUPER_TYPE_TAB, 
+      uiForm.removeChildTabs(new String[] {UINodeTypeForm.SUPER_TYPE_TAB,
                                            UINodeTypeForm.DEFAULT_PRIMARY_TYPE_TAB});
       if(requiredPrimaryTypeTab.isRendered()) {
         uiForm.removeChildById(UINodeTypeForm.REQUIRED_PRIMARY_TYPE_TAB);
@@ -479,8 +479,8 @@ public class UIChildNodeDefinitionForm extends UIFormInputSetWithAction {
       uiOptionList.update(requiredTypeValue);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiForm.getParent());
     }
-  }  
-  
+  }
+
   static public class CancelChildActionListener extends EventListener<UINodeTypeForm> {
     public void execute(Event<UINodeTypeForm> event) throws Exception {
       UINodeTypeForm uiForm = event.getSource();

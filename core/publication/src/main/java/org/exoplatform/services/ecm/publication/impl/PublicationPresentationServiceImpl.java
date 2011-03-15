@@ -36,8 +36,8 @@ import org.exoplatform.webui.form.UIForm;
  * Created by The eXo Platform SAS
  * Author : Romain Dénarié
  *          romain.denarie@exoplatform.com
- * 7 mai 08  
- */ 
+ * 7 mai 08
+ */
 public class PublicationPresentationServiceImpl implements PublicationPresentationService {
 
   protected static Log log;
@@ -53,12 +53,12 @@ public class PublicationPresentationServiceImpl implements PublicationPresentati
    * @see org.exoplatform.services.cms.publication.PublicationService#getStateUI(javax.jcr.Node)
    */
   public UIForm getStateUI(Node node, UIComponent component) throws NotInPublicationLifecycleException, Exception {
-    ExoContainer container = ExoContainerContext.getCurrentContainer();    
+    ExoContainer container = ExoContainerContext.getCurrentContainer();
     PublicationService publicationService = (PublicationService) container.getComponentInstanceOfType(PublicationService.class);
 
     if (!publicationService.isNodeEnrolledInLifecycle(node)) {
       throw new NotInPublicationLifecycleException();
-    } 
+    }
     String lifecycleName=publicationService.getNodeLifecycleName(node);
     PublicationPlugin nodePlugin = this.publicationPlugins_.get(lifecycleName);
     return nodePlugin.getStateUI(node,component);
@@ -67,7 +67,7 @@ public class PublicationPresentationServiceImpl implements PublicationPresentati
   /**
    * Add a Publication Plugin to the service.
    * The method caches all added plugins.
-   * 
+   *
    * @param p the plugin to add
    */
   public void addPublicationPlugin(PublicationPlugin p) {

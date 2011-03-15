@@ -48,7 +48,7 @@ import org.exoplatform.webui.ext.filter.UIExtensionFilters;
  * Created by The eXo Platform SAS
  * Author : eXoPlatform
  *          nicolas.filotto@exoplatform.com
- * 6 mai 2009  
+ * 6 mai 2009
  */
 @ComponentConfig(
      events = {
@@ -58,12 +58,12 @@ import org.exoplatform.webui.ext.filter.UIExtensionFilters;
 public class ManageCategoriesActionComponent extends UIComponent {
 
   private static final List<UIExtensionFilter> FILTERS = Arrays.asList(new UIExtensionFilter[]{new IsNotRootNodeFilter(), new IsCheckedOutFilter(), new CanSetPropertyFilter(), new IsNotLockedFilter(), new IsDocumentFilter()});
-  
+
   @UIExtensionFilters
   public List<UIExtensionFilter> getFilters() {
     return FILTERS;
   }
-  
+
   public static class ManageCategoriesActionListener extends UIActionBarActionListener<ManageCategoriesActionComponent> {
     public void processEvent(Event<ManageCategoriesActionComponent> event) throws Exception {
       UIActionBar uiActionBar = event.getSource().getAncestorOfType(UIActionBar.class);

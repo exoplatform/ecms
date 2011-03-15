@@ -32,31 +32,31 @@ import org.exoplatform.webui.event.EventListener;
 
 /**
  * Created by The eXo Platform SAS
- * Author : Hoa Pham	
+ * Author : Hoa Pham
  *          hoa.pham@exoplatform.com
- * Sep 26, 2007  
+ * Sep 26, 2007
  */
 @ComponentConfig(
     template =  "app:/groovy/webui/component/explorer/sidebar/UITreeNodePageIterator.gtmpl",
-    events = @EventConfig(listeners = UITreeNodePageIterator.ShowPageActionListener.class )    
+    events = @EventConfig(listeners = UITreeNodePageIterator.ShowPageActionListener.class )
 )
 public class UITreeNodePageIterator extends UIPageIterator {
   private String selectedPath_ ;
-  
-  public UITreeNodePageIterator() {    
+
+  public UITreeNodePageIterator() {
   }
-  
+
   public String getSelectedPath() { return selectedPath_ ; }
   public void setSelectedPath(String path) { this.selectedPath_ = path ; }
   @SuppressWarnings("unused")
   static  public class ShowPageActionListener extends EventListener<UITreeNodePageIterator> {
-    public void execute(Event<UITreeNodePageIterator> event) throws Exception {      
-      UITreeNodePageIterator uiPageIterator = event.getSource() ;      
+    public void execute(Event<UITreeNodePageIterator> event) throws Exception {
+      UITreeNodePageIterator uiPageIterator = event.getSource() ;
       int page = Integer.parseInt(event.getRequestContext().getRequestParameter(OBJECTID)) ;
       uiPageIterator.setCurrentPage(page) ;
-      if(uiPageIterator.getParent() == null) return ;      
+      if(uiPageIterator.getParent() == null) return ;
       event.getRequestContext().addUIComponentToUpdateByAjax(uiPageIterator.getParent());
-      UIJCRExplorer uiExplorer = uiPageIterator.getAncestorOfType(UIJCRExplorer.class);  
+      UIJCRExplorer uiExplorer = uiPageIterator.getAncestorOfType(UIJCRExplorer.class);
       UIDocumentWorkspace uiDocumentWorkspace = uiExplorer.findFirstComponentOfType(UIDocumentWorkspace.class) ;
       UISearchResult uiSearchResult = uiDocumentWorkspace.getChild(UISearchResult.class) ;
       if(uiSearchResult.isRendered()) return ;
@@ -68,18 +68,18 @@ public class UITreeNodePageIterator extends UIPageIterator {
         Set<String> allItemByTypeFilterMap = uiExplorer.getAllItemByTypeFilterMap();
         if (allItemByTypeFilterMap.size() > 0)
           uiDocumentInfo = uiDocumentContainer.getChildById("UIDocumentWithTree");
-        else  
+        else
           uiDocumentInfo = uiDocumentContainer.getChildById("UIDocumentInfo");
       }
       if(uiDocumentInfo == null || !uiDocumentInfo.isRendered()) return ;
       String currentPath = uiExplorer.getCurrentNode().getPath();
-      if(!currentPath.equalsIgnoreCase(uiPageIterator.getSelectedPath())) return ;      
-      
+      if(!currentPath.equalsIgnoreCase(uiPageIterator.getSelectedPath())) return ;
+
       UIPageIterator iterator = uiDocumentInfo.getContentPageIterator();
       iterator.setCurrentPage(page);
       UIDrivesArea uiDrivesArea = uiExplorer.findFirstComponentOfType(UIDrivesArea.class);
       if (!uiDrivesArea.isRendered())
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiDocumentInfo);      
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiDocumentInfo);
     }
-  }    
+  }
 }

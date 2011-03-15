@@ -27,7 +27,7 @@ import org.exoplatform.webui.ext.filter.UIExtensionAbstractFilter;
  * Created by The eXo Platform SAS
  * Author : eXoPlatform
  *          nicolas.filotto@exoplatform.com
- * 6 mai 2009  
+ * 6 mai 2009
  */
 public class IsReferenceableNodeFilter extends UIExtensionAbstractFilter {
 
@@ -41,5 +41,5 @@ public class IsReferenceableNodeFilter extends UIExtensionAbstractFilter {
     Node currentNode = (Node) context.get(Node.class.getName());
     Object[] args = { currentNode.getPath() };
     createUIPopupMessages(context, "UIActionBar.msg.is-not-referenable", args);
-  }    
+  }
 }

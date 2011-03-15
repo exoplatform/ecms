@@ -51,10 +51,10 @@ import org.exoplatform.webui.event.EventListener;
 public class UIAdministrationManager extends UIContainer {
   private static String[] MONITOR_BEAN_FIELD = {"id", "name", "version"} ;
   private static String[] TIMERS_BEAN_FIELD = {"id", "name", "dueDate"} ;
-  
+
   private static String[] ACTION = {"View","Delete"} ;
   private static String[] ACTIONS = {"UploadProcess"} ;
-  
+
   public UIAdministrationManager() throws Exception {
     UIGrid uiMonitorGrid = addChild(UIGrid.class, "UIECMGrid", "UIMonitor") ;
     UIGrid uiTimersGrid = addChild(UIGrid.class, "UIECMGrid", "UITimers").setRendered(false) ;
@@ -62,15 +62,15 @@ public class UIAdministrationManager extends UIContainer {
     uiMonitorGrid.getUIPageIterator().setId("UIMonitorGrid") ;
     uiMonitorGrid.configure("id", MONITOR_BEAN_FIELD, ACTION) ;
     updateMonitorGrid() ;
-    
+
     uiTimersGrid.setLabel("UITimers") ;
     uiTimersGrid.getUIPageIterator().setId("UITimersGrid") ;
     uiTimersGrid.configure("id", TIMERS_BEAN_FIELD, null) ;
     updateTimersGrid() ;
   }
-  
+
   public String[] getActions() { return ACTIONS ; }
-  
+
   public void updateMonitorGrid() throws Exception {
     UIGrid uiMonitorGrid = getChildById("UIMonitor") ;
     WorkflowServiceContainer workflowServiceContainer = getApplicationComponent(WorkflowServiceContainer.class);
@@ -96,19 +96,19 @@ public class UIAdministrationManager extends UIContainer {
       }
     }
   }
-  
+
   static  public class DeleteActionListener extends EventListener<UIAdministrationManager> {
     public void execute(Event<UIAdministrationManager> event) throws Exception {
       UIAdministrationManager uiAdminManager = event.getSource() ;
       String processDef = event.getRequestContext().getRequestParameter(OBJECTID) ;
-      WorkflowServiceContainer workflowServiceContainer = 
+      WorkflowServiceContainer workflowServiceContainer =
         uiAdminManager.getApplicationComponent(WorkflowServiceContainer.class) ;
       workflowServiceContainer.deleteProcess(processDef);
       uiAdminManager.updateMonitorGrid() ;
       event.getRequestContext().addUIComponentToUpdateByAjax(uiAdminManager) ;
     }
   }
-  
+
   static  public class UploadProcessActionListener extends EventListener<UIAdministrationManager> {
     public void execute(Event<UIAdministrationManager> event) throws Exception {
       UIWorkflowAdministrationPortlet uiAdministrationPortlet = event.getSource().getParent() ;

@@ -65,7 +65,7 @@ import org.exoplatform.webui.form.UIFormRadioBoxInput;
  * Created by The eXo Platform SARL
  * Author : Dang Van Minh
  *          minh.dang@exoplatform.com
- * Oct 5, 2006  
+ * Oct 5, 2006
  */
 @ComponentConfig(
     lifecycle = UIFormLifecycle.class,
@@ -85,15 +85,15 @@ public class UIExportNode extends UIForm implements UIPopupComponent {
   public static final String SYS_VIEW = "sysview" ;
   public static final String VERSION_SQL_QUERY = "select * from mix:versionable where jcr:path like '$0/%' order by exo:dateCreated DESC";
   public static final String ROOT_SQL_QUERY = "select * from mix:versionable order by exo:dateCreated DESC";
-  
+
   private boolean isVerionNode_ = false;
-  
+
   public UIExportNode() throws Exception {
     RequestContext context = RequestContext.getCurrentInstance();
     ResourceBundle resourceBundle = context.getApplicationResourceBundle();
     List<SelectItemOption<String>> formatItem = new ArrayList<SelectItemOption<String>>() ;
     formatItem.add(new SelectItemOption<String>(
-    		resourceBundle.getString("Import.label." + SYS_VIEW), SYS_VIEW));
+        resourceBundle.getString("Import.label." + SYS_VIEW), SYS_VIEW));
     formatItem.add(new SelectItemOption<String>(
         resourceBundle.getString("Import.label." + DOC_VIEW), DOC_VIEW));
     addUIFormInput(new UIFormInputInfo(NODE_PATH, NODE_PATH, null)) ;
@@ -111,7 +111,7 @@ public class UIExportNode extends UIForm implements UIPopupComponent {
   }
 
   public void deActivate() throws Exception { }
-  
+
   public QueryResult getQueryResult(Node currentNode) throws RepositoryException {
     QueryManager queryManager = currentNode.getSession().getWorkspace().getQueryManager();
     String queryStatement = "";
@@ -123,7 +123,7 @@ public class UIExportNode extends UIForm implements UIPopupComponent {
     Query query = queryManager.createQuery(queryStatement, Query.SQL);
     return query.execute();
   }
-  
+
   public String[] getActions() {
     try {
       Node currentNode = getAncestorOfType(UIJCRExplorer.class).getCurrentNode();
@@ -133,11 +133,11 @@ public class UIExportNode extends UIForm implements UIPopupComponent {
         return new String[] {"Export", "ExportHistory", "Cancel"};
       }
     } catch(Exception e) {
-      return new String[] {"Export", "Cancel"}; 
+      return new String[] {"Export", "Cancel"};
     }
     return new String[] {"Export", "Cancel"};
   }
-  
+
   private String getHistoryValue(Node node) throws Exception {
     String versionHistory = node.getProperty("jcr:versionHistory").getValue().getString();
     String baseVersion = node.getProperty("jcr:baseVersion").getValue().getString();
@@ -149,7 +149,7 @@ public class UIExportNode extends UIForm implements UIPopupComponent {
       predecessorsBuilder.append(value.getString());
     }
     historyValue.append(node.getUUID()).append("=").append(versionHistory).
-      append(";").append(baseVersion).append(";").append(predecessorsBuilder.toString()); 
+      append(";").append(baseVersion).append(";").append(predecessorsBuilder.toString());
     return historyValue.toString();
   }
 
@@ -160,7 +160,7 @@ public class UIExportNode extends UIForm implements UIPopupComponent {
   private static File getExportedFile(String prefix, String suffix) throws IOException {
     return File.createTempFile(prefix.concat(UUID.randomUUID().toString()), suffix);
   }
-  
+
   static public class ExportActionListener extends EventListener<UIExportNode> {
     public void execute(Event<UIExportNode> event) throws Exception {
       UIExportNode uiExport = event.getSource();
@@ -213,10 +213,10 @@ public class UIExportNode extends UIForm implements UIPopupComponent {
         return;
       } finally {
         out.close();
-      }      
+      }
     }
   }
-  
+
   static public class ExportHistoryActionListener extends EventListener<UIExportNode> {
     public void execute(Event<UIExportNode> event) throws Exception {
       UIExportNode uiExport = event.getSource() ;
@@ -246,12 +246,12 @@ public class UIExportNode extends UIForm implements UIPopupComponent {
           out = new BufferedOutputStream(new FileOutputStream(exportedFile));
           in = new BufferedInputStream(new TempFileInputStream(exportedFile));
           Node node = queryIter.nextNode();
-          String historyValue = uiExport.getHistoryValue(node); 
+          String historyValue = uiExport.getHistoryValue(node);
           propertiesBOS.write(historyValue.getBytes());
           propertiesBOS.write('\n');
         if(format.equals(DOC_VIEW))
               session.exportDocumentView(node.getVersionHistory().getPath(), out, false, false );
-        else 
+        else
           session.exportSystemView(node.getVersionHistory().getPath(), out, false, false );
           out.flush();
           zipService.addInputStream(node.getUUID() + ".xml", in);
@@ -292,21 +292,21 @@ public class UIExportNode extends UIForm implements UIPopupComponent {
         if (out != null) {
           out.close();
         }
-      }      
+      }
     }
   }
-  
+
   static public class CancelActionListener extends EventListener<UIExportNode> {
     public void execute(Event<UIExportNode> event) throws Exception {
       UIJCRExplorer uiExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class) ;
       uiExplorer.cancelAction() ;
     }
   }
-  
+
   private static class TempFileInputStream extends FileInputStream {
 
     private final File file;
-    
+
     public TempFileInputStream(File file) throws FileNotFoundException {
       super(file);
       this.file = file;

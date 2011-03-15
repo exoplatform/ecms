@@ -38,7 +38,7 @@ import org.exoplatform.webui.ext.filter.UIExtensionFilters;
  * Created by The eXo Platform SAS
  * Author : eXoPlatform
  *          nicolas.filotto@exoplatform.com
- * 6 mai 2009  
+ * 6 mai 2009
  */
 @ComponentConfig(
      events = {
@@ -48,15 +48,15 @@ import org.exoplatform.webui.ext.filter.UIExtensionFilters;
 public class WatchDocumentActionComponent extends UIComponent {
 
   private static final List<UIExtensionFilter> FILTERS = Arrays.asList(new UIExtensionFilter[]{new IsNotLockedFilter(), new CanSetPropertyFilter(), new IsDocumentFilter("UIActionBar.msg.unsupported-watch"), new IsCheckedOutFilter("UIActionBar.msg.watch-checkedin")});
-  
+
   @UIExtensionFilters
   public List<UIExtensionFilter> getFilters() {
     return FILTERS;
   }
-  
+
   public static class WatchDocumentActionListener extends UIActionBarActionListener<WatchDocumentActionComponent> {
     public void processEvent(Event<WatchDocumentActionComponent> event) throws Exception {
-      UIJCRExplorer uiExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class);      
+      UIJCRExplorer uiExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class);
       UIPopupContainer UIPopupContainer = uiExplorer.getChild(UIPopupContainer.class);
       UIPopupContainer.activate(UIWatchDocumentForm.class, 600);
       event.getRequestContext().addUIComponentToUpdateByAjax(UIPopupContainer);

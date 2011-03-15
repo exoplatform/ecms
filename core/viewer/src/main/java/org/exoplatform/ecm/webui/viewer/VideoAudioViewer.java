@@ -33,7 +33,7 @@ import org.exoplatform.webui.core.UIComponent;
  * Created by The eXo Platform SARL
  * Author : Hoang Van Hung
  *          hunghvit@gmail.com
- * Oct 29, 2009  
+ * Oct 29, 2009
  */
 
 @ComponentConfig(
@@ -41,14 +41,14 @@ import org.exoplatform.webui.core.UIComponent;
 )
 
 public class VideoAudioViewer extends UIComponent {
-  
+
   private List<Node> presentNodes = new ArrayList<Node>();
 
   private String repository;
-  
+
   public VideoAudioViewer() throws Exception {
   }
-  
+
   public List<Node> getPresentNodes() {
     List<Node> result = new ArrayList<Node>();
     result.addAll(presentNodes);
@@ -58,22 +58,22 @@ public class VideoAudioViewer extends UIComponent {
   public void setPresentNodes(List<Node> presentNodes) {
     this.presentNodes = presentNodes;
   }
-  
+
   public void setRepository(String repository) {
     this.repository = repository;
   }
-  
-  
+
+
   public String getRepository() {
     return repository;
   }
-  
+
   public String getPortalName() {
     ExoContainer container = ExoContainerContext.getCurrentContainer() ;
-    PortalContainerInfo containerInfo = 
-      (PortalContainerInfo)container.getComponentInstanceOfType(PortalContainerInfo.class) ;      
-    return containerInfo.getContainerName() ; 
+    PortalContainerInfo containerInfo =
+      (PortalContainerInfo)container.getComponentInstanceOfType(PortalContainerInfo.class) ;
+    return containerInfo.getContainerName() ;
   }
-  
-  
+
+
 }

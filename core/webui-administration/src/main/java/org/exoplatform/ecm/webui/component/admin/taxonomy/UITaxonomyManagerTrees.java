@@ -44,7 +44,7 @@ import org.exoplatform.webui.ext.manager.UIAbstractManager;
 
 @ComponentConfig(lifecycle = UIContainerLifecycle.class)
 public class UITaxonomyManagerTrees extends UIAbstractManager {
-  
+
   public UITaxonomyManagerTrees() throws Exception {
     addChild(UITaxonomyTreeList.class, null, null);
   }
@@ -68,12 +68,12 @@ public class UITaxonomyManagerTrees extends UIAbstractManager {
   public void refresh() throws Exception {
     update();
   }
-  
+
   public void update() throws Exception {
     UITaxonomyTreeList uiTaxonomyTreeList = getChild(UITaxonomyTreeList.class);
     uiTaxonomyTreeList.updateTaxonomyTreeListGrid(uiTaxonomyTreeList.getUIPageIterator().getCurrentPage());
   }
-  
+
   public void initPopupPermission(String membership) throws Exception {
     removePopup();
     UIPopupWindow uiPopup = addChild(UIPopupWindow.class, null,
@@ -89,7 +89,7 @@ public class UITaxonomyManagerTrees extends UIAbstractManager {
     uiPopup.setUIComponent(uiTaxonomyTreePermission);
     uiPopup.setShow(true);
   }
-  
+
   public String getSystemWorkspaceName(String repository) throws RepositoryException, RepositoryConfigurationException {
     RepositoryService repositoryService = getApplicationComponent(RepositoryService.class);
     ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
@@ -101,7 +101,7 @@ public class UITaxonomyManagerTrees extends UIAbstractManager {
     DMSRepositoryConfiguration dmsRepoConfig = dmsConfiguration.getConfig();
     return dmsRepoConfig.getSystemWorkspace();
   }
-  
+
   public void initPopupJCRBrowser(String workspace, boolean isDisable) throws Exception {
     removePopup();
     String repository = getAncestorOfType(UIECMAdminPortlet.class).getPreferenceRepository();
@@ -127,7 +127,7 @@ public class UITaxonomyManagerTrees extends UIAbstractManager {
         new String[] { UITaxonomyTreeMainForm.FIELD_HOMEPATH });
     uiPopup.setShow(true);
   }
-  
+
   public void initPopupComponent(UIComponent uiComp, String id) throws Exception {
     removePopup();
     UIPopupWindow uiPopup = addChild(UIPopupWindow.class, null, id);
@@ -136,7 +136,7 @@ public class UITaxonomyManagerTrees extends UIAbstractManager {
     uiPopup.setShow(true);
     uiPopup.setResizable(true);
   }
-  
+
   private void removePopup() {
     removeChildById(UIActionForm.POPUP_COMPONENT);
     removeChildById(UITaxonomyTreeContainer.POPUP_PERMISSION);

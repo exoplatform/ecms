@@ -20,13 +20,13 @@ package org.exoplatform.ecm.webui.selector;
  * Created by The eXo Platform SAS
  * @author : Hoa.Pham
  *          hoa.pham@exoplatform.com
- * Jun 23, 2008  
+ * Jun 23, 2008
  */
 public interface UISelectable {
-  
+
   /**
    * Do select.
-   * 
+   *
    * @param selectField the select field
    * @param value the value
    * @throws Exception the exception

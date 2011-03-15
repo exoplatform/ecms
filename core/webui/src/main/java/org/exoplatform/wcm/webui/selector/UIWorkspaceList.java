@@ -55,7 +55,7 @@ import org.exoplatform.webui.form.UIFormSelectBox;
 @ComponentConfig(
     lifecycle = UIFormLifecycle.class,
     template = "classpath:groovy/ecm/webui/form/UIFormWithoutAction.gtmpl",
-    events = { 
+    events = {
       @EventConfig(listeners = UIWorkspaceList.ChangeWorkspaceActionListener.class),
       @EventConfig(listeners = UIWorkspaceList.AddRootNodeActionListener.class)
     }
@@ -64,22 +64,22 @@ public class UIWorkspaceList extends UIForm {
 
   /** The WORKSPAC e_ name. */
   static private String WORKSPACE_NAME = "workspaceName";
-  
+
   /** The ROO t_ nod e_ info. */
   static private String ROOT_NODE_INFO = "rootNodeInfo";
-  
+
   /** The ROO t_ nod e_ path. */
   static private String ROOT_NODE_PATH = "rootNodePath";
-  
+
   /** The ws list_. */
   private List<String> wsList_;
-  
+
   /** The is show system_. */
   private boolean isShowSystem_ = true;
 
   /**
    * Instantiates a new uI workspace list.
-   * 
+   *
    * @throws Exception the exception
    */
   public UIWorkspaceList() throws Exception {
@@ -95,43 +95,43 @@ public class UIWorkspaceList extends UIForm {
     rootNodeInfo.setRendered(false);
     addUIComponentInput(rootNodeInfo);
   }
-  
+
   /**
    * Sets the checks if is show system.
-   * 
+   *
    * @param isShowSystem the new checks if is show system
    */
   public void setIsShowSystem(boolean isShowSystem) { isShowSystem_ = isShowSystem; }
-  
+
   /**
    * Checks if is show system workspace.
-   * 
+   *
    * @return true, if is show system workspace
    */
   public boolean isShowSystemWorkspace() { return isShowSystem_; }
-  
+
   /**
    * Sets the show root path select.
-   * 
+   *
    * @param isRender the new show root path select
    */
-  public void setShowRootPathSelect(boolean isRender) { 
-    UIFormInputSetWithAction uiInputAction = getChildById(ROOT_NODE_INFO); 
-    uiInputAction.setRendered(isRender); 
+  public void setShowRootPathSelect(boolean isRender) {
+    UIFormInputSetWithAction uiInputAction = getChildById(ROOT_NODE_INFO);
+    uiInputAction.setRendered(isRender);
   }
-  
+
   /**
    * Sets the workspace list.
-   * 
+   *
    * @param repository the new workspace list
-   * 
+   *
    * @throws Exception the exception
    */
   public void setWorkspaceList(String repository) throws Exception {
     wsList_ = new ArrayList<String>();
     RepositoryService repositoryService = getApplicationComponent(RepositoryService.class);
     String[] wsNames = repositoryService.getRepository(repository).getWorkspaceNames();
-    String systemWsName = 
+    String systemWsName =
       repositoryService.getRepository(repository).getConfiguration().getSystemWorkspaceName();
     List<SelectItemOption<String>> workspace = new ArrayList<SelectItemOption<String>>();
     for(String wsName : wsNames) {
@@ -150,30 +150,30 @@ public class UIWorkspaceList extends UIForm {
     UIOneNodePathSelector uiBrowser = getParent();
     if(uiBrowser.getWorkspaceName() != null) {
       if(wsList_.contains(uiBrowser.getWorkspaceName())) {
-        uiWorkspaceList.setValue(uiBrowser.getWorkspaceName()); 
+        uiWorkspaceList.setValue(uiBrowser.getWorkspaceName());
       }
     }
   }
-  
+
   /**
    * Sets the is disable.
-   * 
+   *
    * @param wsName the ws name
    * @param isDisable the is disable
    */
   public void setIsDisable(String wsName, boolean isDisable) {
-    if(wsList_.contains(wsName)) getUIFormSelectBox(WORKSPACE_NAME).setValue(wsName); 
+    if(wsList_.contains(wsName)) getUIFormSelectBox(WORKSPACE_NAME).setValue(wsName);
     getUIFormSelectBox(WORKSPACE_NAME).setDisabled(isDisable);
   }
-  
+
   /**
    * Gets the root node.
-   * 
+   *
    * @param repositoryName the repository name
    * @param workspaceName the workspace name
-   * 
+   *
    * @return the root node
-   * 
+   *
    * @throws RepositoryException the repository exception
    * @throws RepositoryConfigurationException the repository configuration exception
    */
@@ -184,7 +184,7 @@ public class UIWorkspaceList extends UIForm {
     Session session = sessionProvider.getSession(workspaceName, manageableRepository);
     return session.getRootNode();
   }
-  
+
   /**
    * The listener interface for receiving changeWorkspaceAction events.
    * The class that is interested in processing a changeWorkspaceAction
@@ -193,11 +193,11 @@ public class UIWorkspaceList extends UIForm {
    * component's <code>addChangeWorkspaceActionListener<code> method. When
    * the changeWorkspaceAction event occurs, that object's appropriate
    * method is invoked.
-   * 
+   *
    * @see ChangeWorkspaceActionEvent
    */
   static public class ChangeWorkspaceActionListener extends EventListener<UIWorkspaceList> {
-    
+
     /* (non-Javadoc)
      * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
      */
@@ -210,7 +210,7 @@ public class UIWorkspaceList extends UIForm {
       UIApplication uiApp = uiWorkspaceList.getAncestorOfType(UIApplication.class);
       try {
         uiTreeJCRExplorer.setRootTreeNode(uiWorkspaceList.getRootNode(uiJBrowser.getRepositoryName(), wsName));
-      } catch (AccessDeniedException ade) {        
+      } catch (AccessDeniedException ade) {
         uiWorkspaceList.getUIFormSelectBox(WORKSPACE_NAME).setValue("collaboration");
         uiApp.addMessage(new ApplicationMessage("UIWorkspaceList.msg.AccessDeniedException", null, ApplicationMessage.WARNING));
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
@@ -222,7 +222,7 @@ public class UIWorkspaceList extends UIForm {
       event.getRequestContext().addUIComponentToUpdateByAjax(uiJBrowser);
     }
   }
-  
+
   /**
    * The listener interface for receiving addRootNodeAction events.
    * The class that is interested in processing a addRootNodeAction
@@ -231,11 +231,11 @@ public class UIWorkspaceList extends UIForm {
    * component's <code>addAddRootNodeActionListener<code> method. When
    * the addRootNodeAction event occurs, that object's appropriate
    * method is invoked.
-   * 
+   *
    * @see AddRootNodeActionEvent
    */
   static public class AddRootNodeActionListener extends EventListener<UIWorkspaceList> {
-    
+
     /* (non-Javadoc)
      * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
      */

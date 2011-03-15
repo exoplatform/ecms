@@ -38,12 +38,12 @@ import org.exoplatform.webui.form.UIFormStringInput;
  * Created by The eXo Platform SARL
  * Author : Nguyen Anh Vu
  *          anhvurz90@gmail.com
- * Dec 14, 2009  
+ * Dec 14, 2009
  * 10:02:37 AM
  */
 @ComponentConfig(
-    lifecycle = UIFormLifecycle.class, 
-    template = "system:/groovy/webui/form/UIFormWithTitle.gtmpl", 
+    lifecycle = UIFormLifecycle.class,
+    template = "system:/groovy/webui/form/UIFormWithTitle.gtmpl",
     events = {
       @EventConfig(listeners = UITagPermissionForm.SaveActionListener.class),
       @EventConfig(phase = Phase.DECODE, listeners = UITagPermissionForm.SelectMemberActionListener.class)
@@ -55,40 +55,40 @@ public class UITagPermissionForm extends UIForm implements UISelectable {
   final static public String POPUP_SELECT = "SelectUserOrGroup";
   private static final Log LOG  = ExoLogger.getLogger(UITagPermissionForm.class);
 
-	public UITagPermissionForm() throws Exception {
-		addChild(new UITagPermissionInputSet(PERMISSION));
-		setActions(new String[] {"Save"});
-	}
-	
+  public UITagPermissionForm() throws Exception {
+    addChild(new UITagPermissionInputSet(PERMISSION));
+    setActions(new String[] {"Save"});
+  }
+
   static public class SaveActionListener extends EventListener<UITagPermissionForm> {
     public void execute(Event<UITagPermissionForm> event) throws Exception {
-   		UITagPermissionForm uiForm = event.getSource();
+       UITagPermissionForm uiForm = event.getSource();
 //   		UIECMAdminPortlet uiECMAdminPortlet = uiForm.getAncestorOfType(UIECMAdminPortlet.class);
-   		UITagPermissionManager uiParent = uiForm.getParent();
-   		UIApplication uiApp = uiForm.getAncestorOfType(UIApplication.class);
-   		String userOrGroup = uiForm.getChild(UITagPermissionInputSet.class).getUIStringInput(
-   				UITagPermissionInputSet.FIELD_USERORGROUP).getValue();
-			NewFolksonomyService newFolksonomyService = uiForm.getApplicationComponent(NewFolksonomyService.class);   		
-   		
+       UITagPermissionManager uiParent = uiForm.getParent();
+       UIApplication uiApp = uiForm.getAncestorOfType(UIApplication.class);
+       String userOrGroup = uiForm.getChild(UITagPermissionInputSet.class).getUIStringInput(
+           UITagPermissionInputSet.FIELD_USERORGROUP).getValue();
+      NewFolksonomyService newFolksonomyService = uiForm.getApplicationComponent(NewFolksonomyService.class);
+
       if (Utils.isNameEmpty(userOrGroup)) {
-        uiApp.addMessage(new ApplicationMessage("UIPermissionForm.msg.userOrGroup-required", null, 
+        uiApp.addMessage(new ApplicationMessage("UIPermissionForm.msg.userOrGroup-required", null,
             ApplicationMessage.WARNING));
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
         return;
       }
       if (newFolksonomyService.getTagPermissionList().contains(userOrGroup)) {
-        uiApp.addMessage(new ApplicationMessage("UITagPermissionForm.msg.userOrGroup-alreadyExists", null, 
+        uiApp.addMessage(new ApplicationMessage("UITagPermissionForm.msg.userOrGroup-alreadyExists", null,
             ApplicationMessage.WARNING));
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
         return;
       }
-      
-			newFolksonomyService.addTagPermission(userOrGroup);
-			event.getRequestContext().addUIComponentToUpdateByAjax(uiParent);
-			uiForm.getChild(UITagPermissionInputSet.class).getChild(UIFormStringInput.class).setValue("");
+
+      newFolksonomyService.addTagPermission(userOrGroup);
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiParent);
+      uiForm.getChild(UITagPermissionInputSet.class).getChild(UIFormStringInput.class).setValue("");
     }
   }
-  
+
   static public class SelectMemberActionListener extends EventListener<UITagPermissionForm> {
     public void execute(Event<UITagPermissionForm> event) throws Exception {
       UITagPermissionForm uiForm = event.getSource();
@@ -108,5 +108,5 @@ public class UITagPermissionForm extends UIForm implements UISelectable {
       LOG.error("Unexpected error", e);
     }
   }
-  
+
 }

@@ -53,13 +53,13 @@ import org.exoplatform.webui.form.UIFormCheckBoxInput;
     events = {
       @EventConfig(listeners = UISingleExternalMetadataForm.AddActionListener.class),
       @EventConfig(phase=Phase.DECODE, listeners = UISingleExternalMetadataForm.CancelActionListener.class)
-    }    
+    }
 )
 public class UISingleExternalMetadataForm extends UIForm {
-  
+
   public UISingleExternalMetadataForm() throws Exception {
   }
-  
+
   public void renderExternalList() throws Exception {
     MetadataService metadataService = getApplicationComponent(MetadataService.class) ;
     String repository = getAncestorOfType(UIJCRExplorer.class).getRepositoryName() ;
@@ -78,7 +78,7 @@ public class UISingleExternalMetadataForm extends UIForm {
       }
     }
   }
-  
+
   private boolean isInternalUse(NodeType nodeType) throws Exception{
     for(PropertyDefinition pro : nodeType.getPropertyDefinitions()) {
       if(pro.getName().equals("exo:internalUse")) {
@@ -86,11 +86,11 @@ public class UISingleExternalMetadataForm extends UIForm {
       }
     }
     return false;
-//    PropertyDefinition def = 
-//      ((ExtendedNodeType)nodeType).getPropertyDefinitions("exo:internalUse").getAnyDefinition() ;    
+//    PropertyDefinition def =
+//      ((ExtendedNodeType)nodeType).getPropertyDefinitions("exo:internalUse").getAnyDefinition() ;
 //    return !def.getDefaultValues()[0].getBoolean() ;
   }
-  
+
   private boolean hasExternalMetadata(String name) throws Exception {
     UISingleUploadManager uiUploadManager = getAncestorOfType(UISingleUploadManager.class) ;
     UISingleUploadContainer uiUploadContainer = uiUploadManager.getChild(UISingleUploadContainer.class) ;
@@ -105,7 +105,7 @@ public class UISingleExternalMetadataForm extends UIForm {
     }
     return false ;
   }
-  
+
   public String getLabel(ResourceBundle res, String id)  {
     try {
       return res.getString("UIExternalMetadataForm.label." + id) ;
@@ -113,7 +113,7 @@ public class UISingleExternalMetadataForm extends UIForm {
       return '_' + id ;
     }
   }
-  
+
   static  public class CancelActionListener extends EventListener<UISingleExternalMetadataForm> {
     public void execute(Event<UISingleExternalMetadataForm> event) throws Exception {
       UISingleUploadManager uiUploadManager = event.getSource().getAncestorOfType(UISingleUploadManager.class) ;
@@ -123,12 +123,12 @@ public class UISingleExternalMetadataForm extends UIForm {
       event.getRequestContext().addUIComponentToUpdateByAjax(uiUploadManager) ;
     }
   }
-  
+
   static  public class AddActionListener extends EventListener<UISingleExternalMetadataForm> {
     public void execute(Event<UISingleExternalMetadataForm> event) throws Exception {
       UISingleExternalMetadataForm uiExternalMetadataForm = event.getSource() ;
       List<UIFormCheckBoxInput> listCheckbox =  new ArrayList<UIFormCheckBoxInput>();
-      uiExternalMetadataForm.findComponentOfType(listCheckbox, UIFormCheckBoxInput.class); 
+      uiExternalMetadataForm.findComponentOfType(listCheckbox, UIFormCheckBoxInput.class);
       UISingleUploadManager uiUploadManager = event.getSource().getAncestorOfType(UISingleUploadManager.class) ;
       UISingleUploadContainer uiContainer = uiUploadManager.getChild(UISingleUploadContainer.class) ;
       String metadataName = null ;
@@ -138,7 +138,7 @@ public class UISingleExternalMetadataForm extends UIForm {
           metadataName = listCheckbox.get(i).getName() ;
           if(!uploadedNode.canAddMixin(metadataName)) {
             UIApplication uiApp = uiExternalMetadataForm.getAncestorOfType(UIApplication.class) ;
-            uiApp.addMessage(new ApplicationMessage("UIExternalMetadataForm.msg.can-not-add", null, 
+            uiApp.addMessage(new ApplicationMessage("UIExternalMetadataForm.msg.can-not-add", null,
                                                     ApplicationMessage.WARNING)) ;
             event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
             return ;

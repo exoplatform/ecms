@@ -30,17 +30,17 @@ import org.exoplatform.webui.ext.filter.UIExtensionFilterType;
  * Created by The eXo Platform SAS
  * Author : eXoPlatform
  *          nicolas.filotto@exoplatform.com
- * 5 mai 2009  
+ * 5 mai 2009
  */
 public class IsNotLockedFilter extends UIExtensionAbstractFilter {
 
   private boolean checkGroup = false;
   private boolean checkOwner = false;
-  
+
   public IsNotLockedFilter() {
     this(null);
   }
-  
+
   public IsNotLockedFilter(String messageKey) {
     super(messageKey, UIExtensionFilterType.MANDATORY);
   }
@@ -49,25 +49,25 @@ public class IsNotLockedFilter extends UIExtensionAbstractFilter {
     this(null);
     this.checkGroup = checkGroup;
   }
-  
+
   public IsNotLockedFilter(boolean checkGroup, boolean checkOwner) {
-  	this(null);
-  	this.checkGroup = checkGroup;
-  	this.checkOwner = checkOwner;
+    this(null);
+    this.checkGroup = checkGroup;
+    this.checkOwner = checkOwner;
   }
-  
+
   public boolean accept(Map<String, Object> context) throws Exception {
     if (context == null) return true;
     Node currentNode = (Node) context.get(Node.class.getName());
     String remoteUser = currentNode.getSession().getUserID();
     String superUser = WCMCoreUtils.getService(UserACL.class).getSuperUser();
     if (remoteUser.equalsIgnoreCase(superUser)) {
-    	return true;
+      return true;
     }
-    if(!currentNode.isLocked()) return true;  
+    if(!currentNode.isLocked()) return true;
     if (checkOwner && currentNode.isLocked()) {
-    	String lockOwner = currentNode.getLock().getLockOwner();
-    	if (lockOwner.equals(remoteUser)) return true;
+      String lockOwner = currentNode.getLock().getLockOwner();
+      if (lockOwner.equals(remoteUser)) return true;
     }
     String lockToken = checkGroup ? LockUtil.getLockToken(currentNode): LockUtil.getLockTokenOfUser(currentNode);
     if(lockToken != null) {
@@ -75,7 +75,7 @@ public class IsNotLockedFilter extends UIExtensionAbstractFilter {
       return true;
     }
     return false;
-    
+
   }
 
   public void onDeny(Map<String, Object> context) throws Exception {
@@ -83,5 +83,5 @@ public class IsNotLockedFilter extends UIExtensionAbstractFilter {
     Node currentNode = (Node) context.get(Node.class.getName());
     Object[] arg = { currentNode.getPath() };
     createUIPopupMessages(context, "UIPopupMenu.msg.node-locked", arg);
-  }    
+  }
 }

@@ -95,7 +95,7 @@ import org.picocontainer.Startable;
 
 /**
  * Bonita implementation of the Workflow Service in eXo Platform
- * 
+ *
  * Created by Bull R&D
  * @author Brice Revenant , Rodrigue Le Gall
  * Dec 25, 2005
@@ -127,7 +127,7 @@ public class WorkflowServiceContainerImpl implements WorkflowServiceContainer, S
   private OrganizationService                    organizationService   = null;
 
   private String                                 superUser_            = "root";
-  
+
   private String                                 superPass_            = null;
 
   private String                                 jaasLoginContext_     = "gatein-domain";
@@ -137,7 +137,7 @@ public class WorkflowServiceContainerImpl implements WorkflowServiceContainer, S
   /**
    * Instantiates a new Bonita service instance.
    * This constructor requires the injection of the Forms Service.
-   * 
+   *
    * @param fileDefinitionService reference to the File Definition Service
    * @param formsService          reference to the Forms Service
    * @param organizationService   reference to the Organization Service
@@ -174,7 +174,7 @@ public class WorkflowServiceContainerImpl implements WorkflowServiceContainer, S
   /**
    * Add a plugin to the Workflow service.
    * This method currently only supports plugins to deploy predefined processes.
-   * 
+   *
    * @param plugin the plugin to add
    * @throws Exception if the plugin type is unknown.
    */
@@ -354,8 +354,11 @@ public class WorkflowServiceContainerImpl implements WorkflowServiceContainer, S
     }
   }
 
-  /* (non-Javadoc)
-   * @see org.exoplatform.services.workflow.WorkflowServiceContainer#endTask(java.lang.String, java.util.Map, java.lang.String)
+  /*
+   * (non-Javadoc)
+   * @see
+   * org.exoplatform.services.workflow.WorkflowServiceContainer#endTask(java
+   * .lang.String, java.util.Map, java.lang.String)
    */
   public void endTask(String taskId, Map variables, String transition) {
     /*
@@ -463,7 +466,7 @@ public class WorkflowServiceContainerImpl implements WorkflowServiceContainer, S
     // Security Check
     this.commit();
     try {
-      // Get the uuid 
+      // Get the uuid
       ProcessDefinitionUUID uuid = UUIDFactory.getProcessDefinitionUUID(processId);
       //Get the instance of the given process
       QueryRuntimeAPI rApi = AccessorUtil.getQueryAPIAccessor().getQueryRuntimeAPI();
@@ -532,7 +535,6 @@ public class WorkflowServiceContainerImpl implements WorkflowServiceContainer, S
         try {
           tasks.add(new TaskData(task));
         } catch (Exception e) {
-          // TODO Auto-generated catch block
           LOG.error(e);
         }
       }
@@ -543,7 +545,7 @@ public class WorkflowServiceContainerImpl implements WorkflowServiceContainer, S
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see org.exoplatform.services.workflow.WorkflowServiceContainer#getTimers()
    */
   public List<Timer> getTimers() {
@@ -571,7 +573,7 @@ public class WorkflowServiceContainerImpl implements WorkflowServiceContainer, S
     //      catch(Exception ignore) {
     //      }
     //    }
-    //    
+    //
     //    return timers;
   }
 
@@ -598,7 +600,6 @@ public class WorkflowServiceContainerImpl implements WorkflowServiceContainer, S
       try {
         tasks.add(new TaskData(task));
       } catch (Exception e) {
-        // TODO Auto-generated catch block
         LOG.error(e);
       }
     }
@@ -612,7 +613,7 @@ public class WorkflowServiceContainerImpl implements WorkflowServiceContainer, S
    * @param value
    * @param typeValue
    * @return the value object
-   * @throws ParseException 
+   * @throws ParseException
    */
   private Object getVariableValue(Object value, DataTypeValue typeValue) throws ParseException {
     if (EnumerationTypeDefinition.class.isInstance(typeValue)) {
@@ -686,7 +687,7 @@ public class WorkflowServiceContainerImpl implements WorkflowServiceContainer, S
       //          String processId = new APIAccessorImpl().getRecordQuerierAPI().getInstanceRecord(InstanceId).getProcessId();
       //      Form form = this.formsService.getForm(processId, activityId, Locale.getDefault());
       //        List<Map<String, Object>> formVariables = form.getVariables();
-      //        
+      //
       //        // Convert String to Objects based on Form information
       //        for(Map<String, Object> formVariable : formVariables) {
       //          String key       = (String) formVariable.get("name");
@@ -736,7 +737,7 @@ public class WorkflowServiceContainerImpl implements WorkflowServiceContainer, S
       BasicCallbackHandler handler = new BasicCallbackHandler(superUser_, password);
       lc = new LoginContext(jaasLoginContext_, handler);
       lc.login();
-      // Retrieve the already deployed Processes. 
+      // Retrieve the already deployed Processes.
 
       Collection<Process> projects = this.getProcesses();
 
@@ -784,8 +785,11 @@ public class WorkflowServiceContainerImpl implements WorkflowServiceContainer, S
     this.startProcess(null, processId, new HashMap());
   }
 
-  /* (non-Javadoc)
-   * @see org.exoplatform.services.workflow.WorkflowServiceContainer#startProcess(java.lang.String, java.lang.String, java.util.Map)
+  /*
+   * (non-Javadoc)
+   * @see
+   * org.exoplatform.services.workflow.WorkflowServiceContainer#startProcess
+   * (java.lang.String, java.lang.String, java.util.Map)
    */
   public void startProcess(String remoteUser, String processId, Map initialVariables) {
     // Security Check
@@ -851,16 +855,17 @@ public class WorkflowServiceContainerImpl implements WorkflowServiceContainer, S
     } catch (ProcessNotFoundException e) {
       LOG.error(e);
     } catch (ParseException e) {
-      // TODO Auto-generated catch block
       LOG.error(e);
     } catch (VariableNotFoundException e) {
-      // TODO Auto-generated catch block
       LOG.error(e);
     }
   }
 
-  /* (non-Javadoc)
-   * @see org.exoplatform.services.workflow.WorkflowServiceContainer#startProcessFromName(java.lang.String, java.lang.String, java.util.Map)
+  /*
+   * (non-Javadoc)
+   * @see
+   * org.exoplatform.services.workflow.WorkflowServiceContainer#startProcessFromName
+   * (java.lang.String, java.lang.String, java.util.Map)
    */
   public void startProcessFromName(String remoteUser, String processName, Map variables) {
     this.commit();

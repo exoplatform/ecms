@@ -33,12 +33,12 @@ import org.exoplatform.webui.core.lifecycle.UIContainerLifecycle;
 )
 public class UISingleUploadManager extends UIContainer implements UIPopupComponent {
   final static public String EXTARNAL_METADATA_POPUP = "AddMetadataPopup" ;
-  
+
   public UISingleUploadManager() throws Exception {
     addChild(UISingleUploadForm.class, null, null);
     addChild(UISingleUploadContainer.class, null, null).setRendered(false);
   }
-  
+
   public UIPopupWindow initPopupTaxonomy(String id) throws Exception {
     UIPopupWindow uiPopup = getChildById(id);
     if (uiPopup == null) {
@@ -49,14 +49,14 @@ public class UISingleUploadManager extends UIContainer implements UIPopupCompone
     uiPopup.setResizable(true);
     return uiPopup;
   }
-  
+
   public void activate() throws Exception {
     UISingleUploadForm uiSingleUploadForm = getChild(UISingleUploadForm.class);
     uiSingleUploadForm.initFieldInput();
   }
 
   public void deActivate() throws Exception {}
-  
+
   public void initMetadataPopup() throws Exception {
     removeChildById(EXTARNAL_METADATA_POPUP) ;
     UIPopupWindow uiPopup = addChild(UIPopupWindow.class, null, EXTARNAL_METADATA_POPUP) ;

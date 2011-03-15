@@ -27,16 +27,16 @@ import org.exoplatform.services.html.util.HyperLinkUtil;
  * Created by The eXo Platform SAS
  * Author : Phan Le Thanh Chuong
  *          chuong_phan@exoplatform.com
- * Sep 5, 2008  
+ * Sep 5, 2008
  */
-public class HyperLinkUtilExtended extends HyperLinkUtil {  
+public class HyperLinkUtilExtended extends HyperLinkUtil {
   public synchronized List<String> getSiteLink(HTMLNode node) {
-    Map<String, String> map = new HashMap<String, String>(4); 
+    Map<String, String> map = new HashMap<String, String>(4);
     map.put("a", "href");
     map.put("iframe", "src");
     map.put("frame", "src");
     map.put("meta", "url");
-    
+
     return getAttributes(node, null, map, null);
   }
 }

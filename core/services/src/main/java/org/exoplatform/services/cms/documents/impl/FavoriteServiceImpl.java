@@ -33,7 +33,7 @@ import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
  * Created by The eXo Platform SARL
  * Author : Dang Van Minh
  *          minh.dang@exoplatform.com
- * Nov 16, 2009  
+ * Nov 16, 2009
  * 10:02:04 AM
  */
 public class FavoriteServiceImpl implements FavoriteService {
@@ -43,8 +43,8 @@ public class FavoriteServiceImpl implements FavoriteService {
   private NodeHierarchyCreator nodeHierarchyCreator;
   private LinkManager linkManager;
   private SessionProviderService sessionProviderService;
-  
-  public FavoriteServiceImpl(NodeHierarchyCreator nodeHierarchyCreator, LinkManager linkManager, 
+
+  public FavoriteServiceImpl(NodeHierarchyCreator nodeHierarchyCreator, LinkManager linkManager,
       SessionProviderService sessionProviderService) {
     this.nodeHierarchyCreator = nodeHierarchyCreator;
     this.linkManager = linkManager;
@@ -55,22 +55,22 @@ public class FavoriteServiceImpl implements FavoriteService {
    * {@inheritDoc}
    */
   public void addFavorite(Node node, String userName) throws Exception {
-  	// check if node is symlink
-  	if (linkManager.isLink(node)) return;
-  	// check if node has already been favorite node of current user
+    // check if node is symlink
+    if (linkManager.isLink(node)) return;
+    // check if node has already been favorite node of current user
     Node userFavoriteNode = getUserFavoriteFolder(userName);
     NodeIterator nodeIter = userFavoriteNode.getNodes();
     while (nodeIter.hasNext()) {
-    	Node childNode = nodeIter.nextNode();
-    	if (linkManager.isLink(childNode)) {
-    		Node targetNode = null;
-    		try {
-					targetNode = linkManager.getTarget(childNode);
-    		} catch (Exception e) {}
-				if (node.isSame(targetNode)) return;
-    	}
+      Node childNode = nodeIter.nextNode();
+      if (linkManager.isLink(childNode)) {
+        Node targetNode = null;
+        try {
+          targetNode = linkManager.getTarget(childNode);
+        } catch (Exception e) {}
+        if (node.isSame(targetNode)) return;
+      }
     }
-		// add favorite symlink    
+    // add favorite symlink
     linkManager.createLink(userFavoriteNode, node);
     userFavoriteNode.getSession().save();
   }
@@ -79,19 +79,19 @@ public class FavoriteServiceImpl implements FavoriteService {
    * {@inheritDoc}
    */
   public List<Node> getAllFavoriteNodesByUser(String workspace, String repository, String userName) throws Exception {
-		List<Node> ret = new ArrayList<Node>();
-		Node userFavoriteNode = getUserFavoriteFolder(userName);
-		NodeIterator nodeIter = userFavoriteNode.getNodes();
-		while (nodeIter.hasNext()) {
-			Node childNode = nodeIter.nextNode();
-			if (linkManager.isLink(childNode)) {
-				Node targetNode = null;
-				try {
-					targetNode = linkManager.getTarget(childNode);
-				} catch (Exception ex) {}
-				if (targetNode != null) ret.add(targetNode);
-			}
-		}
+    List<Node> ret = new ArrayList<Node>();
+    Node userFavoriteNode = getUserFavoriteFolder(userName);
+    NodeIterator nodeIter = userFavoriteNode.getNodes();
+    while (nodeIter.hasNext()) {
+      Node childNode = nodeIter.nextNode();
+      if (linkManager.isLink(childNode)) {
+        Node targetNode = null;
+        try {
+          targetNode = linkManager.getTarget(childNode);
+        } catch (Exception ex) {}
+        if (targetNode != null) ret.add(targetNode);
+      }
+    }
     return ret;
   }
 
@@ -99,56 +99,56 @@ public class FavoriteServiceImpl implements FavoriteService {
    * {@inheritDoc}
    */
   public void removeFavorite(Node node, String userName) throws Exception {
-  	// check if node is symlink
+    // check if node is symlink
     if (linkManager.isLink(node)) return;
     // remove favorite
     Node userFavoriteNode = getUserFavoriteFolder(userName);
     NodeIterator nodeIter = userFavoriteNode.getNodes();
     while (nodeIter.hasNext()) {
-    	Node childNode = nodeIter.nextNode();
-    	if (linkManager.isLink(childNode)) {
-    		Node targetNode = null;
-    		try {
-    			targetNode = linkManager.getTarget(childNode);
-    		} catch (Exception e) { }
-    		if (node.isSame(targetNode)) {
-    			childNode.remove();
-    			userFavoriteNode.getSession().save();
-    			return;
-    		}
-    	}
+      Node childNode = nodeIter.nextNode();
+      if (linkManager.isLink(childNode)) {
+        Node targetNode = null;
+        try {
+          targetNode = linkManager.getTarget(childNode);
+        } catch (Exception e) { }
+        if (node.isSame(targetNode)) {
+          childNode.remove();
+          userFavoriteNode.getSession().save();
+          return;
+        }
+      }
     }
   }
-  
+
   public boolean isFavoriter(String userName, Node node) throws Exception {
     ExoContainer container = ExoContainerContext.getCurrentContainer();
     LinkManager lnkManager = (LinkManager)container.getComponentInstanceOfType(LinkManager.class);
-  	
+
     if (lnkManager.isLink(node) && lnkManager.isTargetReachable(node)) {
-    	node = lnkManager.getTarget(node);
+      node = lnkManager.getTarget(node);
     }
     Node userFavoriteNode = getUserFavoriteFolder(userName);
     NodeIterator nodeIter = userFavoriteNode.getNodes();
     while (nodeIter.hasNext()) {
-    	Node childNode = nodeIter.nextNode();
-    	if (linkManager.isLink(childNode)) {
-    		Node targetNode = null;
-    		try {
-    			targetNode = linkManager.getTarget(childNode);
-    		} catch (Exception e) { }
-    		if (node.isSame(targetNode)) {
-    			return true;
-    		}
-    	}
+      Node childNode = nodeIter.nextNode();
+      if (linkManager.isLink(childNode)) {
+        Node targetNode = null;
+        try {
+          targetNode = linkManager.getTarget(childNode);
+        } catch (Exception e) { }
+        if (node.isSame(targetNode)) {
+          return true;
+        }
+      }
     }
     return false;
   }
-  
+
   private Node getUserFavoriteFolder(String userName) throws Exception {
-    Node userNode = 
+    Node userNode =
       nodeHierarchyCreator.getUserNode(sessionProviderService.getSystemSessionProvider(null), userName);
     String favoritePath = nodeHierarchyCreator.getJcrPath(FAVORITE_ALIAS);
     return userNode.getNode(favoritePath);
   }
-  
+
 }

@@ -27,7 +27,7 @@ import org.exoplatform.webui.core.UIContainer;
  * Created by The eXo Platform SARL
  * Author : pham tuan
  *          tuan.pham@exoplatform.com
- * Mar 19, 2007  
+ * Mar 19, 2007
  */
 @ComponentConfig(
     template =  "app:/groovy/webui/component/browse/UISearchController.gtmpl"
@@ -41,7 +41,7 @@ public class UISearchController extends UIContainer  {
     addChild(UICBSearchForm.class, null, null) ;
     addChild(UICBSearchResults.class, null, null) ;
   }
-  
+
   public void setShowHiddenSearch() throws Exception {
     UICBSearchForm uiSearch = getChild(UICBSearchForm.class) ;
     uiSearch.reset() ;
@@ -57,7 +57,7 @@ public class UISearchController extends UIContainer  {
   }
 
   public boolean isShowResult() {return isShowResult_ ;}
-  
+
   public void setSearchTime(long val) {searchTime_ = val ;}
   public long getSearchTime() {return searchTime_ ;}
   public void setResultRecord(int val) {records_ = val ;}

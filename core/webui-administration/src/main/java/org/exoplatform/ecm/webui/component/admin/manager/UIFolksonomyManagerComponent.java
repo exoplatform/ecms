@@ -30,7 +30,7 @@ import org.exoplatform.webui.ext.manager.UIAbstractManagerComponent;
  * Created by The eXo Platform SAS
  * Author : eXoPlatform
  *          nicolas.filotto@exoplatform.com
- * 15 mai 2009  
+ * 15 mai 2009
  */
 @ComponentConfig(
      events = {
@@ -45,13 +45,13 @@ public class UIFolksonomyManagerComponent extends UIAbstractManagerComponent {
       UIECMAdminWorkingArea uiWorkingArea = portlet.getChild(UIECMAdminWorkingArea.class);
       uiWorkingArea.setChild(UIFolksonomyManager.class) ;
       UIFolksonomyManager uiFolksonomyManager = uiWorkingArea.getChild(UIFolksonomyManager.class);
-			uiFolksonomyManager.update();      
+      uiFolksonomyManager.update();
       event.getRequestContext().addUIComponentToUpdateByAjax(uiWorkingArea) ;
     }
-  }  
+  }
 
   @Override
   public Class<? extends UIAbstractManager> getUIAbstractManagerClass() {
     return UIFolksonomyManager.class;
-  }  
+  }
 }

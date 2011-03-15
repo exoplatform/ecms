@@ -59,7 +59,7 @@ import org.exoplatform.webui.form.UIFormTabPane;
  * Author : Tran The Trong
  *          trongtt@exoplatform.com
  * Sep 19, 2006
- * 5:31:04 PM 
+ * 5:31:04 PM
  */
 @ComponentConfig(
     lifecycle = UIFormLifecycle.class,
@@ -80,13 +80,13 @@ import org.exoplatform.webui.form.UIFormTabPane;
 )
 public class UIDriveForm extends UIFormTabPane implements UISelectable {
 
-  private boolean isAddNew_ = true;  
+  private boolean isAddNew_ = true;
   final static public String[] ACTIONS = {"Save", "Refresh", "Cancel"};
   final static public String POPUP_DRIVEPERMISSION = "PopupDrivePermission";
   final static public String POPUP_NODETYPE_SELECTOR = "PopupNodeTypeSelector";
   private String membershipString = "";
   private String nodeTypes = "";
-  
+
   final static public String ANY_PERMISSION = "*";
 
   public UIDriveForm() throws Exception {
@@ -97,7 +97,7 @@ public class UIDriveForm extends UIFormTabPane implements UISelectable {
     addUIFormInput(driveInputSet);
     setSelectedTab(driveInputSet.getId());
     UIFormInputSet viewInputSet = new UIViewsInputSet("ViewsInputSet");
-    addUIFormInput(viewInputSet);    
+    addUIFormInput(viewInputSet);
     setActions(ACTIONS);
   }
 
@@ -106,18 +106,18 @@ public class UIDriveForm extends UIFormTabPane implements UISelectable {
       return res.getString("UIDriveForm.label." + id);
     } catch (MissingResourceException ex) {
       return id + " ";
-    }    
+    }
   }
 
   public void doSelect(String selectField, Object value) {
     UIFormStringInput uiStringInput = getUIStringInput(selectField);
     if (selectField.equals(UIDriveInputSet.FIELD_PERMISSION)){
-      String membership = value.toString(); 
+      String membership = value.toString();
       String valuePermissions = uiStringInput.getValue();
       List<String> permissionsList = new ArrayList<String>();
-      StringBuilder newsPermissions = new StringBuilder();      
+      StringBuilder newsPermissions = new StringBuilder();
       if(valuePermissions != null) {
-        String[] permissionsArray = valuePermissions.split(","); 
+        String[] permissionsArray = valuePermissions.split(",");
         permissionsList = Arrays.asList(permissionsArray);
         if (permissionsList.size() > 0) {
           for (String permission : permissionsList) {
@@ -132,7 +132,7 @@ public class UIDriveForm extends UIFormTabPane implements UISelectable {
             newsPermissions.append(membership.trim());
           }
         }
-      }            
+      }
       uiStringInput.setValue(newsPermissions.toString());
     } else {
       uiStringInput.setValue(value.toString());
@@ -144,7 +144,7 @@ public class UIDriveForm extends UIFormTabPane implements UISelectable {
         UIPopupWindow uiPopup = uiContainer.getChildById(uiChild.getId()) ;
         uiPopup.setRendered(false) ;
         uiPopup.setShow(false) ;
-      } 
+      }
     }
   }
 
@@ -161,11 +161,11 @@ public class UIDriveForm extends UIFormTabPane implements UISelectable {
     getChild(UIDriveInputSet.class).update(drive);
     getChild(UIViewsInputSet.class).update(drive);
   }
-  
+
   public String getWorkspaceEntries(String selectedWorkspace, String repository) throws Exception {
-    RepositoryService repositoryService = 
+    RepositoryService repositoryService =
       getApplicationComponent(RepositoryService.class);
-    List<WorkspaceEntry> wsEntries = 
+    List<WorkspaceEntry> wsEntries =
       repositoryService.getRepository(repository).getConfiguration().getWorkspaceEntries();
     String wsInitRootNodeType = null;
     for(WorkspaceEntry wsEntry : wsEntries) {
@@ -175,7 +175,7 @@ public class UIDriveForm extends UIFormTabPane implements UISelectable {
       }
     }
     return wsInitRootNodeType;
-  }  
+  }
 
   static public class SaveActionListener extends EventListener<UIDriveForm> {
     public void execute(Event<UIDriveForm> event) throws Exception {
@@ -186,7 +186,7 @@ public class UIDriveForm extends UIFormTabPane implements UISelectable {
       UIApplication uiApp = uiDriveForm.getAncestorOfType(UIApplication.class);
       String name = driveInputSet.getUIStringInput(UIDriveInputSet.FIELD_NAME).getValue().trim();
       if(name == null || name.trim().length() == 0) {
-        uiApp.addMessage(new ApplicationMessage("UIDriveForm.msg.name-null", null, 
+        uiApp.addMessage(new ApplicationMessage("UIDriveForm.msg.name-null", null,
                                                 ApplicationMessage.WARNING));
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
         return;
@@ -194,18 +194,18 @@ public class UIDriveForm extends UIFormTabPane implements UISelectable {
       String[] arrFilterChar = {"&", "$", "@", "'", ":","]", "[", "*", "%", "!", "\""};
       for(String filterChar : arrFilterChar) {
         if(name.indexOf(filterChar) > -1) {
-          uiApp.addMessage(new ApplicationMessage("UIDriveForm.msg.fileName-invalid", null, 
+          uiApp.addMessage(new ApplicationMessage("UIDriveForm.msg.fileName-invalid", null,
                                                   ApplicationMessage.WARNING));
           event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
           return;
         }
       }
-      String workspace = 
+      String workspace =
         driveInputSet.getUIFormSelectBox(UIDriveInputSet.FIELD_WORKSPACE).getValue();
       String path = driveInputSet.getUIStringInput(UIDriveInputSet.FIELD_HOMEPATH).getValue();
       if((path == null)||(path.trim().length() == 0)) path = "/";
       Session session = null;
-      try {        
+      try {
         session = rservice.getCurrentRepository().getSystemSession(workspace);
         String userId = Util.getPortalRequestContext().getRemoteUser();
         String pathReal = path.replace("${userId}", userId);
@@ -215,23 +215,23 @@ public class UIDriveForm extends UIFormTabPane implements UISelectable {
         if(session!=null) {
           session.logout();
         }
-        uiApp.addMessage(new ApplicationMessage("UIDriveForm.msg.workspace-path-invalid", null, 
+        uiApp.addMessage(new ApplicationMessage("UIDriveForm.msg.workspace-path-invalid", null,
                                                 ApplicationMessage.WARNING));
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
         return;
-      }      
-      boolean viewReferences = 
+      }
+      boolean viewReferences =
         driveInputSet.getUIFormCheckBoxInput(UIDriveInputSet.FIELD_VIEWPREFERENCESDOC).isChecked();
-      boolean viewSideBar = 
+      boolean viewSideBar =
         driveInputSet.getUIFormCheckBoxInput(UIDriveInputSet.FIELD_VIEWSIDEBAR).isChecked();
-      boolean showHiddenNode = 
-        driveInputSet.getUIFormCheckBoxInput(UIDriveInputSet.SHOW_HIDDEN_NODE).isChecked();      
-      boolean viewNonDocument = 
+      boolean showHiddenNode =
+        driveInputSet.getUIFormCheckBoxInput(UIDriveInputSet.SHOW_HIDDEN_NODE).isChecked();
+      boolean viewNonDocument =
         driveInputSet.getUIFormCheckBoxInput(UIDriveInputSet.FIELD_VIEWNONDOC).isChecked();
       //String allowCreateFolder =  driveInputSet.<UIFormRadioBoxInput>getUIInput(UIDriveInputSet.ALLOW_CREATE_FOLDER).getValue();
-      String[] allowCreateFolders = driveInputSet.getUIFormSelectBox(UIDriveInputSet.FIELD_ALLOW_CREATE_FOLDERS).getSelectedValues();      
+      String[] allowCreateFolders = driveInputSet.getUIFormSelectBox(UIDriveInputSet.FIELD_ALLOW_CREATE_FOLDERS).getSelectedValues();
       if (allowCreateFolders == null || allowCreateFolders.length == 0 ) {
-        uiApp.addMessage(new ApplicationMessage("UIDriveForm.msg.allowedCreateFolder", null, 
+        uiApp.addMessage(new ApplicationMessage("UIDriveForm.msg.allowedCreateFolder", null,
             ApplicationMessage.WARNING));
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
         return;
@@ -242,15 +242,15 @@ public class UIDriveForm extends UIFormTabPane implements UISelectable {
       }
       if (foldertypes.toString().endsWith(",")) foldertypes.deleteCharAt(foldertypes.length() -1 );
       UIViewsInputSet viewsInputSet = uiDriveForm.getChild(UIViewsInputSet.class);
-      String views = viewsInputSet.getViewsSelected();      
+      String views = viewsInputSet.getViewsSelected();
       String permissions = driveInputSet.getUIStringInput(UIDriveInputSet.FIELD_PERMISSION).getValue();
       if(permissions == null || permissions.trim().length() == 0) {
-        uiApp.addMessage(new ApplicationMessage("UIDriveForm.msg.permission-null", null, 
+        uiApp.addMessage(new ApplicationMessage("UIDriveForm.msg.permission-null", null,
                                                 ApplicationMessage.WARNING));
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
         return;
       }
-      
+
       OrganizationService oservice = uiDriveForm.getApplicationComponent(OrganizationService.class);
       String[] arrPermissions = permissions.split(",");
       List<String> listMemberhip;
@@ -262,47 +262,47 @@ public class UIDriveForm extends UIFormTabPane implements UISelectable {
       listMemberhip.add("*");
       for(String itemPermission : arrPermissions) {
         if(itemPermission.length() == 0) {
-          uiApp.addMessage(new ApplicationMessage("UIDriveForm.msg.permission-path-invalid", null, 
+          uiApp.addMessage(new ApplicationMessage("UIDriveForm.msg.permission-path-invalid", null,
               ApplicationMessage.WARNING)) ;
           event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
           return;
-        } 
+        }
         if (itemPermission.contains(":")) {
           String[] permission = itemPermission.split(":");
           if((permission[0] == null) || (permission[0].length() == 0)){
-            uiApp.addMessage(new ApplicationMessage("UIDriveForm.msg.permission-path-invalid", null, 
+            uiApp.addMessage(new ApplicationMessage("UIDriveForm.msg.permission-path-invalid", null,
                 ApplicationMessage.WARNING)) ;
             event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
             return ;
           } else if(!listMemberhip.contains(permission[0])) {
-            uiApp.addMessage(new ApplicationMessage("UIDriveForm.msg.permission-path-invalid", null, 
+            uiApp.addMessage(new ApplicationMessage("UIDriveForm.msg.permission-path-invalid", null,
                 ApplicationMessage.WARNING)) ;
             event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
             return ;
           }
           if((permission[1] == null) || (permission[1].length() == 0)) {
-            uiApp.addMessage(new ApplicationMessage("UIDriveForm.msg.permission-path-invalid", null, 
+            uiApp.addMessage(new ApplicationMessage("UIDriveForm.msg.permission-path-invalid", null,
                 ApplicationMessage.WARNING)) ;
             event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
             return ;
           } else if(oservice.getGroupHandler().findGroupById(permission[1]) == null){
-            uiApp.addMessage(new ApplicationMessage("UIDriveForm.msg.permission-path-invalid", null, 
+            uiApp.addMessage(new ApplicationMessage("UIDriveForm.msg.permission-path-invalid", null,
                 ApplicationMessage.WARNING)) ;
             event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
             return;
           }
-        }        
+        }
       }
-      
+
       ManageDriveService dservice_ = uiDriveForm.getApplicationComponent(ManageDriveService.class);
       if(uiDriveForm.isAddNew_ && (dservice_.getDriveByName(name, repository) != null)) {
-        uiApp.addMessage(new ApplicationMessage("UIDriveForm.msg.drive-exists", null, 
+        uiApp.addMessage(new ApplicationMessage("UIDriveForm.msg.drive-exists", null,
                                                 ApplicationMessage.WARNING));
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
         return;
       }
       String iconPath = driveInputSet.getUIStringInput(UIDriveInputSet.FIELD_WORKSPACEICON).getValue();
-      if(iconPath != null && iconPath.trim().length() > 0) {        
+      if(iconPath != null && iconPath.trim().length() > 0) {
         Session jcrSession = null;
         try {
           if(iconPath.indexOf(":/") > -1) {
@@ -315,17 +315,17 @@ public class UIDriveForm extends UIFormTabPane implements UISelectable {
           if(jcrSession != null) {
             jcrSession.logout();
           }
-          uiApp.addMessage(new ApplicationMessage("UIDriveForm.msg.icon-not-found", null, 
+          uiApp.addMessage(new ApplicationMessage("UIDriveForm.msg.icon-not-found", null,
                                                   ApplicationMessage.WARNING));
           event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
           return;
-        }  
+        }
       } else {
         iconPath = "";
       }
       String allowNodeTypesOnTree = driveInputSet.getUIStringInput(UIDriveInputSet.FIELD_ALLOW_NODETYPES_ON_TREE).getValue();
       if ((allowNodeTypesOnTree==null) || (allowNodeTypesOnTree.length()==0)) allowNodeTypesOnTree = "*";
-      dservice_.addDrive(name, workspace, permissions, path, views, iconPath, viewReferences, 
+      dservice_.addDrive(name, workspace, permissions, path, views, iconPath, viewReferences,
           viewNonDocument, viewSideBar, showHiddenNode, foldertypes.toString(), allowNodeTypesOnTree);
       UIDriveManager uiManager = uiDriveForm.getAncestorOfType(UIDriveManager.class);
       UIDriveList uiDriveList = uiManager.getChild(UIDriveList.class);
@@ -368,18 +368,18 @@ public class UIDriveForm extends UIFormTabPane implements UISelectable {
           uiDriveForm.membershipString += "," + membership;
         else
           uiDriveForm.membershipString += membership;
-      }        
+      }
       uiDriveForm.getUIStringInput(UIDriveInputSet.FIELD_PERMISSION).setValue(uiDriveForm.membershipString);
-      
+
       uiManager.initPopupPermission(uiDriveForm.membershipString);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiManager);
     }
   }
-  
+
   static public class RemovePermissionActionListener extends EventListener<UIDriveForm> {
     public void execute(Event<UIDriveForm> event) throws Exception {
       UIDriveForm uiDriveForm = event.getSource();
-      uiDriveForm.membershipString = ""; 
+      uiDriveForm.membershipString = "";
       uiDriveForm.getUIStringInput(UIDriveInputSet.FIELD_PERMISSION).setValue(null);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiDriveForm);
     }
@@ -390,7 +390,7 @@ public class UIDriveForm extends UIFormTabPane implements UISelectable {
       UIDriveForm uiDriveForm = event.getSource();
       UIDriveManager uiManager = uiDriveForm.getAncestorOfType(UIDriveManager.class);
       UIDriveInputSet driveInputSet = uiDriveForm.getChild(UIDriveInputSet.class);
-      String workspace = 
+      String workspace =
         driveInputSet.getUIFormSelectBox(UIDriveInputSet.FIELD_WORKSPACE).getValue();
       uiManager.initPopupJCRBrowser(workspace, true);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiManager);
@@ -402,7 +402,7 @@ public class UIDriveForm extends UIFormTabPane implements UISelectable {
       UIDriveForm uiDriveForm = event.getSource();
       UIDriveManager uiManager = uiDriveForm.getAncestorOfType(UIDriveManager.class);
       UIDriveInputSet driveInputSet = uiDriveForm.getChild(UIDriveInputSet.class);
-      String workspace = 
+      String workspace =
         driveInputSet.getUIFormSelectBox(UIDriveInputSet.FIELD_WORKSPACE).getValue();
       uiManager.initPopupJCRBrowserAssets(workspace);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiManager);
@@ -417,11 +417,11 @@ public class UIDriveForm extends UIFormTabPane implements UISelectable {
       String selectedWorkspace = uiDriveForm.getUIStringInput(UIDriveInputSet.FIELD_WORKSPACE).getValue();
       UIDriveInputSet driveInputSet = uiDriveForm.getChild(UIDriveInputSet.class);
       UIDriveManager uiManager = uiDriveForm.getAncestorOfType(UIDriveManager.class);
-      ManageDriveService manageDriveService = 
+      ManageDriveService manageDriveService =
         uiDriveForm.getApplicationComponent(ManageDriveService.class);
-      RepositoryService repositoryService = 
+      RepositoryService repositoryService =
         uiDriveForm.getApplicationComponent(RepositoryService.class);
-      List<WorkspaceEntry> wsEntries = 
+      List<WorkspaceEntry> wsEntries =
         repositoryService.getCurrentRepository().getConfiguration().getWorkspaceEntries();
       String wsInitRootNodeType = null;
       for(WorkspaceEntry wsEntry : wsEntries) {
@@ -429,7 +429,7 @@ public class UIDriveForm extends UIFormTabPane implements UISelectable {
           wsInitRootNodeType = wsEntry.getAutoInitializedRootNt();
         }
       }
-      
+
       TemplateService templateService = uiDriveForm.getApplicationComponent(TemplateService.class);
       Set<String> setFoldertypes = templateService.getAllowanceFolderType();
       List<SelectItemOption<String>> foldertypeOptions = new ArrayList<SelectItemOption<String>>();
@@ -462,7 +462,7 @@ public class UIDriveForm extends UIFormTabPane implements UISelectable {
       event.getRequestContext().addUIComponentToUpdateByAjax(uiManager);
     }
   }
-  
+
   static public class ChooseNodeTypeActionListener extends EventListener<UIDriveForm> {
     public void execute(Event<UIDriveForm> event) throws Exception {
       UIDriveForm uiDriveForm = event.getSource();
@@ -473,30 +473,30 @@ public class UIDriveForm extends UIFormTabPane implements UISelectable {
           uiDriveForm.nodeTypes += "," + nodeTypes;
         else
           uiDriveForm.nodeTypes += nodeTypes;
-      }        
+      }
       uiDriveForm.getUIStringInput(
           UIDriveInputSet.FIELD_ALLOW_NODETYPES_ON_TREE).setValue(uiDriveForm.nodeTypes);
-      
+
       uiManager.initPopupNodeTypeSelector(uiDriveForm.nodeTypes);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiManager);
     }
   }
-  
+
   static public class RemoveNodeTypeActionListener extends EventListener<UIDriveForm> {
     public void execute(Event<UIDriveForm> event) throws Exception {
       UIDriveForm uiDriveForm = event.getSource();
-      uiDriveForm.nodeTypes = ""; 
+      uiDriveForm.nodeTypes = "";
       uiDriveForm.getUIStringInput(UIDriveInputSet.FIELD_ALLOW_NODETYPES_ON_TREE).setValue(null);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiDriveForm);
     }
   }
-  
+
   static public class SelectTabActionListener extends EventListener<UIDriveForm> {
     public void execute(Event<UIDriveForm> event) throws Exception {
       UIDriveForm uiView = event.getSource() ;
       UIDriveManager uiMetaManager = uiView.getAncestorOfType(UIDriveManager.class) ;
       event.getRequestContext().addUIComponentToUpdateByAjax(uiMetaManager) ;
     }
- }  
+ }
 
 }

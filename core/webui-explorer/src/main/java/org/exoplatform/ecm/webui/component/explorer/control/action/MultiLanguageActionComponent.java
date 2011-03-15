@@ -47,7 +47,7 @@ import org.exoplatform.webui.ext.filter.UIExtensionFilters;
  * Created by The eXo Platform SAS
  * Author : eXoPlatform
  *          nicolas.filotto@exoplatform.com
- * 6 mai 2009  
+ * 6 mai 2009
  */
 @ComponentConfig(
      events = {
@@ -62,7 +62,7 @@ public class MultiLanguageActionComponent extends UIComponent {
   public List<UIExtensionFilter> getFilters() {
     return FILTERS;
   }
-  
+
   public static class MultiLanguageActionListener extends UIActionBarActionListener<MultiLanguageActionComponent> {
     public void processEvent(Event<MultiLanguageActionComponent> event) throws Exception {
       UIActionBar uiActionBar = event.getSource().getAncestorOfType(UIActionBar.class);
@@ -71,7 +71,7 @@ public class MultiLanguageActionComponent extends UIComponent {
       NodeType nodeType = currentNode.getPrimaryNodeType();
       UIPopupContainer UIPopupContainer = uiExplorer.getChild(UIPopupContainer.class);
       UIPopupContainer.activate(UIMultiLanguageManager.class, null,780, 550);
-      UIMultiLanguageManager uiMultiManager = 
+      UIMultiLanguageManager uiMultiManager =
         UIPopupContainer.findFirstComponentOfType(UIMultiLanguageManager.class);
       UIAddLanguageContainer uiAddContainer = uiMultiManager.getChild(UIAddLanguageContainer.class);
       if(nodeType.getName().equals(Utils.NT_FILE)) {

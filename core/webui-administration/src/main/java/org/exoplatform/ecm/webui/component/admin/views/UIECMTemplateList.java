@@ -44,7 +44,7 @@ import org.exoplatform.webui.event.EventListener;
  * Author : Tran The Trong
  *          trongtt@exoplatform.com
  * Sep 19, 2006
- * 11:45:11 AM 
+ * 11:45:11 AM
  */
 @ComponentConfig(
     template = "system:/groovy/ecm/webui/UIGridWithButton.gtmpl",
@@ -57,7 +57,7 @@ import org.exoplatform.webui.event.EventListener;
 public class UIECMTemplateList extends UIGrid {
   private static String[] VIEW_BEAN_FIELD = {"name", "path", "baseVersion"} ;
   private static String[] VIEW_ACTION = {"EditInfo","Delete"} ;
-  public static String ST_ECMTempForm = "ECMTempForm" ;  
+  public static String ST_ECMTempForm = "ECMTempForm" ;
   public static String ST_ECMTemp = "ECMTemplate" ;
 
   public UIECMTemplateList() throws Exception {
@@ -69,7 +69,7 @@ public class UIECMTemplateList extends UIGrid {
 
   public String getBaseVersion(Node node) throws Exception {
     if(!node.isNodeType(Utils.MIX_VERSIONABLE) || node.isNodeType(Utils.NT_FROZEN)) return "";
-    return node.getBaseVersion().getName();    
+    return node.getBaseVersion().getName();
   }
 
   @SuppressWarnings("unchecked")
@@ -96,17 +96,17 @@ public class UIECMTemplateList extends UIGrid {
       return name1.compareToIgnoreCase(name2) ;
     }
   }
-  
+
   public String getRepository() {
     return getAncestorOfType(UIECMAdminPortlet.class).getPreferenceRepository() ;
   }
-  
+
   static  public class AddActionListener extends EventListener<UIECMTemplateList> {
     public void execute(Event<UIECMTemplateList> event) throws Exception {
       UIECMTemplateList uiECMTempList = event.getSource() ;
       SessionProvider provider = SessionProviderFactory.createSessionProvider() ;
       Node ecmTemplateHome = uiECMTempList.getApplicationComponent(ManageViewService.class)
-      .getTemplateHome(BasePath.ECM_EXPLORER_TEMPLATES, uiECMTempList.getRepository(),provider) ; 
+      .getTemplateHome(BasePath.ECM_EXPLORER_TEMPLATES, uiECMTempList.getRepository(),provider) ;
       if(ecmTemplateHome == null) {
         UIApplication uiApp = event.getSource().getAncestorOfType(UIApplication.class) ;
         uiApp.addMessage(new ApplicationMessage("UIECMTemplateList.msg.access-denied", null, ApplicationMessage.WARNING)) ;

@@ -38,7 +38,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 /*
- * Created by The eXo Platform SAS 
+ * Created by The eXo Platform SAS
  * Author : Benjamin Paillereau
  * benjamin.paillereau@exoplatform.com
  * July 10, 2009
@@ -48,94 +48,98 @@ public class VoteConnector extends BaseConnector implements ResourceContainer {
 
   /**
    * Instantiates a new vote connector.
-   * 
+   *
    * @param container the container
    */
   public VoteConnector() {}
 
   /**
    * post a Vote for a content
-   * 
+   *
    * @param repositoryName the repository name
    * @param workspaceName the workspace name
    * @param jcrPath the jcr path
-   * 
+   *
    * @return http code
-   * 
+   *
    * @throws Exception the exception
    */
   @GET
   @Path("/postVote/")
 //  @InputTransformer(PassthroughInputTransformer.class)
-  public Response postVote( 
-		  @QueryParam("repositoryName") String repositoryName, 
-		  @QueryParam("workspaceName") String workspaceName, 
-		  @QueryParam("jcrPath") String jcrPath,
-		  @QueryParam("vote") String vote, 
-		  @QueryParam("lang") String lang
-		  ) throws Exception {
+  public Response postVote(
+      @QueryParam("repositoryName") String repositoryName,
+      @QueryParam("workspaceName") String workspaceName,
+      @QueryParam("jcrPath") String jcrPath,
+      @QueryParam("vote") String vote,
+      @QueryParam("lang") String lang
+      ) throws Exception {
     try {
-    	Node content = getContent(repositoryName, workspaceName, jcrPath);
-    	if (content.isNodeType("mix:votable")) {
-    		String userName = content.getSession().getUserID();
-    		votingService.vote(content, Double.parseDouble(vote), userName, lang);
-    	}
+      Node content = getContent(repositoryName, workspaceName, jcrPath);
+      if (content.isNodeType("mix:votable")) {
+        String userName = content.getSession().getUserID();
+        votingService.vote(content, Double.parseDouble(vote), userName, lang);
+      }
     } catch (Exception e) {
-    	Response.serverError().build();
-    }    
-    
+      Response.serverError().build();
+    }
+
     DateFormat dateFormat = new SimpleDateFormat(IF_MODIFIED_SINCE_DATE_FORMAT);
     return Response.ok().header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
   }
 
   /**
    * get a Vote for a content
-   * 
+   *
    * @param repositoryName the repository name
    * @param workspaceName the workspace name
    * @param jcrPath the jcr path
-   * 
+   *
    * @return http code
-   * 
+   *
    * @throws Exception the exception
    */
   @GET
   @Path("/getVote/")
 //  @OutputTransformer(XMLOutputTransformer.class)
-  public Response getVote( 
-		  @QueryParam("repositoryName") String repositoryName, 
-		  @QueryParam("workspaceName") String workspaceName, 
-		  @QueryParam("jcrPath") String jcrPath) throws Exception {
-	  try {
-		  Node content = getContent(repositoryName, workspaceName, jcrPath);
-		  if (content.isNodeType("mix:votable")) {
-			  String votingRate = "";
-			  if (content.hasProperty("exo:votingRate")) votingRate = content.getProperty("exo:votingRate").getString();
-			  String votingTotal = "";
-			  if (content.hasProperty("exo:voteTotalOfLang")) votingTotal = content.getProperty("exo:voteTotalOfLang").getString();
-			  
-			  Document document =
-					DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
-			  Element element = document.createElement("vote");
-			  Element rate = document.createElement("rate");
-			  rate.setTextContent(votingRate);
-			  Element total = document.createElement("total");
-			  total.setTextContent(votingTotal);
-			  element.appendChild(rate);
-			  element.appendChild(total);
-			  document.appendChild(element);
+  public Response getVote(
+      @QueryParam("repositoryName") String repositoryName,
+      @QueryParam("workspaceName") String workspaceName,
+      @QueryParam("jcrPath") String jcrPath) throws Exception {
+    try {
+      Node content = getContent(repositoryName, workspaceName, jcrPath);
+      if (content.isNodeType("mix:votable")) {
+        String votingRate = "";
+        if (content.hasProperty("exo:votingRate"))
+          votingRate = content.getProperty("exo:votingRate").getString();
+        String votingTotal = "";
+        if (content.hasProperty("exo:voteTotalOfLang"))
+          votingTotal = content.getProperty("exo:voteTotalOfLang").getString();
 
-			  DateFormat dateFormat = new SimpleDateFormat(IF_MODIFIED_SINCE_DATE_FORMAT);
-			  return Response.ok(new DOMSource(document), MediaType.TEXT_XML).header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
-		  }
-	  } catch (Exception e) {
-		  Response.serverError().build();
-	  }  
-	  
-	  DateFormat dateFormat = new SimpleDateFormat(IF_MODIFIED_SINCE_DATE_FORMAT);
-	  return Response.ok().header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
+        Document document =
+          DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
+        Element element = document.createElement("vote");
+        Element rate = document.createElement("rate");
+        rate.setTextContent(votingRate);
+        Element total = document.createElement("total");
+        total.setTextContent(votingTotal);
+        element.appendChild(rate);
+        element.appendChild(total);
+        document.appendChild(element);
+
+        DateFormat dateFormat = new SimpleDateFormat(IF_MODIFIED_SINCE_DATE_FORMAT);
+        return Response.ok(new DOMSource(document), MediaType.TEXT_XML)
+                       .header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date()))
+                       .build();
+      }
+    } catch (Exception e) {
+      Response.serverError().build();
+    }
+
+    DateFormat dateFormat = new SimpleDateFormat(IF_MODIFIED_SINCE_DATE_FORMAT);
+    return Response.ok().header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
   }
-  
+
   /*
    * (non-Javadoc)
    * @see
@@ -145,10 +149,12 @@ public class VoteConnector extends BaseConnector implements ResourceContainer {
   @Override
   protected Node getRootContentStorage(Node parentNode) throws Exception {
     try {
-      PortalFolderSchemaHandler folderSchemaHandler = webSchemaConfigService.getWebSchemaHandlerByType(PortalFolderSchemaHandler.class);
+      PortalFolderSchemaHandler folderSchemaHandler =
+        webSchemaConfigService.getWebSchemaHandlerByType(PortalFolderSchemaHandler.class);
       return folderSchemaHandler.getDocumentStorage(parentNode);
     } catch (Exception e) {
-      WebContentSchemaHandler webContentSchemaHandler = webSchemaConfigService.getWebSchemaHandlerByType(WebContentSchemaHandler.class);
+      WebContentSchemaHandler webContentSchemaHandler =
+        webSchemaConfigService.getWebSchemaHandlerByType(WebContentSchemaHandler.class);
       return webContentSchemaHandler.getDocumentFolder(parentNode);
     }
   }

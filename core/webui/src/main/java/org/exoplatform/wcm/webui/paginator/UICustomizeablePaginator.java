@@ -35,46 +35,46 @@ import org.exoplatform.webui.event.EventListener;
  */
 @ComponentConfig(
     lifecycle = Lifecycle.class,
-    events = @EventConfig(listeners = UICustomizeablePaginator.ShowPageActionListener.class )    
+    events = @EventConfig(listeners = UICustomizeablePaginator.ShowPageActionListener.class )
 )
 public class UICustomizeablePaginator extends UIPageIterator {
 
   /** The template path. */
   private String templatePath;
-  
+
   /** The resource resolver. */
   private ResourceResolver resourceResolver;
 
   /**
    * Instantiates a new uI customizeable paginator.
    */
-  public UICustomizeablePaginator() {    
+  public UICustomizeablePaginator() {
   }
 
   /**
    * Gets the total pages.
-   * 
+   *
    * @return the total pages
    */
   public int getTotalPages() { return getPageList().getAvailablePage(); }
-  
+
   /**
    * Gets the total items.
-   * 
+   *
    * @return the total items
    */
   public int getTotalItems() { return getPageList().getAvailable(); }
-  
+
   /**
    * Gets the item per page.
-   * 
+   *
    * @return the item per page
    */
   public int getItemPerPage() { return getPageList().getPageSize(); }
-  
+
   /**
    * Inits the.
-   * 
+   *
    * @param resourceResolver the resource resolver
    * @param templatePath the template path
    */
@@ -82,17 +82,17 @@ public class UICustomizeablePaginator extends UIPageIterator {
     this.resourceResolver = resourceResolver;
     this.templatePath = templatePath;
   }
-  
+
   /**
    * Sets the template path.
-   * 
+   *
    * @param path the new template path
    */
   public void setTemplatePath(String path) { this.templatePath = path; }
-  
+
   /**
    * Sets the resource resolver.
-   * 
+   *
    * @param resolver the new resource resolver
    */
   public void setResourceResolver(ResourceResolver resolver) { this.resourceResolver = resolver; }
@@ -101,8 +101,8 @@ public class UICustomizeablePaginator extends UIPageIterator {
    * @see org.exoplatform.webui.core.UIComponent#getTemplate()
    */
   public String getTemplate() {
-    if(templatePath != null) 
-      return templatePath;    
+    if(templatePath != null)
+      return templatePath;
     return super.getTemplate();
   }
 
@@ -123,11 +123,11 @@ public class UICustomizeablePaginator extends UIPageIterator {
    * component's <code>addShowPageActionListener<code> method. When
    * the showPageAction event occurs, that object's appropriate
    * method is invoked.
-   * 
+   *
    * @see ShowPageActionEvent
    */
   static  public class ShowPageActionListener extends EventListener<UICustomizeablePaginator> {
-    
+
     /* (non-Javadoc)
      * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
      */
@@ -136,8 +136,8 @@ public class UICustomizeablePaginator extends UIPageIterator {
       int page = Integer.parseInt(event.getRequestContext().getRequestParameter(OBJECTID)) ;
       uiPaginator.setCurrentPage(page) ;
       UIComponent parent = uiPaginator.getParent();
-      if(parent == null) return ;      
-      event.getRequestContext().addUIComponentToUpdateByAjax(parent);           
+      if(parent == null) return ;
+      event.getRequestContext().addUIComponentToUpdateByAjax(parent);
       parent.broadcast(event,event.getExecutionPhase());
     }
   }

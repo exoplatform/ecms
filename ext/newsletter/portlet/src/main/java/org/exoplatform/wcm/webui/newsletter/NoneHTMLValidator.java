@@ -27,7 +27,7 @@ import org.exoplatform.webui.form.validator.Validator;
  * Created by The eXo Platform SAS
  * Author : eXoPlatform
  *          ha.mai@exoplatform.com
- * Dec 29, 2009  
+ * Dec 29, 2009
  */
 public class NoneHTMLValidator implements Validator {
   private String fullHtmltag = ".*<.*>.*</.*>.*";
@@ -36,13 +36,13 @@ public class NoneHTMLValidator implements Validator {
 
   @SuppressWarnings("unchecked")
   public void validate(UIFormInput uiInput) throws Exception {
-    if((uiInput.getValue() == null)) return;        
+    if((uiInput.getValue() == null)) return;
     String input = ((String)uiInput.getValue()).trim();
     if(!input.matches(fullHtmltag) && !input.matches(startHtmlTag) && !input.matches(finishHtmlTag))
-      return ;    
-    
+      return ;
+
     UIComponent uiComponent = (UIComponent) uiInput ;
-    UIForm uiForm = uiComponent.getAncestorOfType(UIForm.class) ;    
+    UIForm uiForm = uiComponent.getAncestorOfType(UIForm.class) ;
     String label;
     try{
       label = uiForm.getLabel(uiInput.getName());
@@ -54,5 +54,5 @@ public class NoneHTMLValidator implements Validator {
     Object[]  args = {label, uiInput.getBindingField() } ;
     throw new MessageException(new ApplicationMessage("NoneHTMLValidator.msg.invalid", args, ApplicationMessage.WARNING)) ;
   }
-  
+
 }

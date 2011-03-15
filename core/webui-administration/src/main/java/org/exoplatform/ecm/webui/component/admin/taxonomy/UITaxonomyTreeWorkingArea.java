@@ -50,7 +50,7 @@ import org.exoplatform.webui.event.EventListener;
  * Created by The eXo Platform SARL
  * Author : Hoang Van Hung
  *          hunghvit@gmail.com
- * Apr 7, 2009  
+ * Apr 7, 2009
  */
 
 @ComponentConfig(
@@ -74,33 +74,33 @@ public class UITaxonomyTreeWorkingArea extends UIContainer {
   private ClipboardCommand clipboard_ = new ClipboardCommand();
 
   private String           selectedPath_;
-  
+
   private String[] acceptedNodeTypes = {};
-  
+
   private String[] actions_ = { "Previous" };
   public UITaxonomyTreeWorkingArea() throws Exception {
     uiPageIterator_ = addChild(UIPageIterator.class, null, "UICategoriesSelect");
   }
-  
+
   public UIPageIterator getUIPageIterator() { return uiPageIterator_; }
-  
+
   public void updateGrid() throws Exception {
     ObjectPageList objPageList = new ObjectPageList(getNodeList(), 10);
     uiPageIterator_.setPageList(objPageList);
   }
-  
+
   public String[] getActions() {return actions_;}
-  
+
   public List getListNodes() throws Exception { return uiPageIterator_.getCurrentPageData(); }
-  
+
   public void setNodeList(List<Node> nodes) { taxonomyNodes_ = nodes;  }
-  public List<Node> getNodeList() {return taxonomyNodes_; } 
-  
+  public List<Node> getNodeList() {return taxonomyNodes_; }
+
   private String getRepository() throws Exception {
     UITaxonomyTreeCreateChild uiManager = getParent();
     return uiManager.getRepository();
   }
-  
+
   public boolean isRootNode() throws Exception {
     UITaxonomyTreeCreateChild uiManager = getParent();
     String selectedPath = uiManager.getSelectedPath();
@@ -110,7 +110,7 @@ public class UITaxonomyTreeWorkingArea extends UIContainer {
       return true;
     return false;
   }
-  
+
   boolean matchNodeType(Node node) throws Exception {
     if(acceptedNodeTypes == null || acceptedNodeTypes.length == 0) return true;
     for(String nodeType: acceptedNodeTypes) {
@@ -118,7 +118,7 @@ public class UITaxonomyTreeWorkingArea extends UIContainer {
     }
     return false;
   }
-  
+
   public void update() throws Exception {
     UITaxonomyTreeCreateChild uiManager = getParent();
     if (selectedPath_ != null) {
@@ -137,7 +137,7 @@ public class UITaxonomyTreeWorkingArea extends UIContainer {
     }
     updateGrid();
   }
-  
+
   public String[] getAcceptedNodeTypes() {
     return acceptedNodeTypes;
   }
@@ -145,9 +145,9 @@ public class UITaxonomyTreeWorkingArea extends UIContainer {
   public void setAcceptedNodeTypes(String[] acceptedNodeTypes) {
     this.acceptedNodeTypes = acceptedNodeTypes;
   }
-  
+
   public void setSelectedPath(String selectedPath) { selectedPath_ = selectedPath; }
-  
+
   public static class AddActionListener extends EventListener<UITaxonomyTreeWorkingArea> {
     public void execute(Event<UITaxonomyTreeWorkingArea> event) throws Exception {
       UITaxonomyTreeWorkingArea uiTreeWorkingArea = event.getSource();
@@ -157,7 +157,7 @@ public class UITaxonomyTreeWorkingArea extends UIContainer {
       event.getRequestContext().addUIComponentToUpdateByAjax(uiTaxonomyTreeCreateChild);
     }
   }
-  
+
   public static class RemoveActionListener extends EventListener<UITaxonomyTreeWorkingArea> {
     public void execute(Event<UITaxonomyTreeWorkingArea> event) throws Exception {
       UITaxonomyTreeWorkingArea uiTreeWorkingArea = event.getSource();
@@ -190,7 +190,7 @@ public class UITaxonomyTreeWorkingArea extends UIContainer {
       event.getRequestContext().addUIComponentToUpdateByAjax(uiTaxonomyTreeCreateChild);
     }
   }
-  
+
   public static class CopyActionListener extends EventListener<UITaxonomyTreeWorkingArea> {
     public void execute(Event<UITaxonomyTreeWorkingArea> event) throws Exception {
       UITaxonomyTreeWorkingArea uiManager = event.getSource();
@@ -260,7 +260,7 @@ public class UITaxonomyTreeWorkingArea extends UIContainer {
       event.getRequestContext().addUIComponentToUpdateByAjax(uiTaxonomyTreeCreateChild);
     }
   }
-  
+
   public static class CutActionListener extends EventListener<UITaxonomyTreeWorkingArea> {
     public void execute(Event<UITaxonomyTreeWorkingArea> event) throws Exception {
       UITaxonomyTreeWorkingArea uiManager = event.getSource();
@@ -270,12 +270,12 @@ public class UITaxonomyTreeWorkingArea extends UIContainer {
       event.getRequestContext().addUIComponentToUpdateByAjax(uiManager);
     }
   }
-  
+
   public static class ViewPermissionActionListener extends EventListener<UITaxonomyTreeWorkingArea> {
     public void execute(Event<UITaxonomyTreeWorkingArea> event) throws Exception {
       UITaxonomyTreeWorkingArea uiManager = event.getSource();
       UITaxonomyTreeCreateChild uiTaxonomyTreeCreateChild = uiManager.getParent();
-      String path = event.getRequestContext().getRequestParameter(OBJECTID);  
+      String path = event.getRequestContext().getRequestParameter(OBJECTID);
       UIPopupContainer uiPopupContainer = uiTaxonomyTreeCreateChild.initPopupPermission(UITaxonomyManager.PERMISSION_ID_POPUP);
       UIPermissionManager uiPerMan = uiPopupContainer.createUIComponent(UIPermissionManager.class, null, null);
       uiPerMan.getChild(UIPermissionInfo.class).setCurrentNode(uiTaxonomyTreeCreateChild.getNodeByPath(path));
@@ -285,7 +285,7 @@ public class UITaxonomyTreeWorkingArea extends UIContainer {
       uiPerMan.checkPermissonInfo(uiTaxonomyTreeCreateChild.getNodeByPath(path));
     }
   }
-  
+
   public static class PreviousActionListener extends EventListener<UITaxonomyTreeWorkingArea> {
     public void execute(Event<UITaxonomyTreeWorkingArea> event) throws Exception {
       UITaxonomyTreeContainer uiTaxonomyTreeContainer = event.getSource().getAncestorOfType(UITaxonomyTreeContainer.class);

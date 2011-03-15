@@ -34,36 +34,36 @@ import org.exoplatform.webui.form.UIFormInput;
  * Modified: - Extends from org.exoplatform.webui.form.validator.MandatoryValidator
  * 					   Use template name to generate a label for input instead of use form name
  * 					 - Only use for Form Generator feature
- * Nov 11, 2009  
+ * Nov 11, 2009
  */
 public class MandatoryValidator extends org.exoplatform.webui.form.validator.MandatoryValidator {
-  
+
   @SuppressWarnings("unchecked")
-	public void validate(UIFormInput uiInput) throws Exception {
+  public void validate(UIFormInput uiInput) throws Exception {
     if((uiInput.getValue() != null) && ((String)uiInput.getValue()).trim().length() > 0) {
       return ;
     }
-    
+
     UIComponent uiComponent = (UIComponent) uiInput ;
     UIForm uiForm = uiComponent.getAncestorOfType(UIForm.class) ;
     String templatePath = uiForm.getTemplate();
     String nodetypeName = "";
     String[] temps = templatePath.split("/");
     for (String temp : temps){
-    	if (temp.contains("_fg_n")) {
-    		nodetypeName = temp;
-    		break;
-    	}
+      if (temp.contains("_fg_n")) {
+        nodetypeName = temp;
+        break;
+      }
     }
-    TemplateService templateService = uiForm.getApplicationComponent(TemplateService.class); 
+    TemplateService templateService = uiForm.getApplicationComponent(TemplateService.class);
     String nodetypeLabel = templateService.getTemplateLabel(nodetypeName).trim();
-    ResourceBundle res = Util.getPortalRequestContext().getApplicationResourceBundle();     
+    ResourceBundle res = Util.getPortalRequestContext().getApplicationResourceBundle();
     String label = "";
     try {
-    	label = res.getString(nodetypeLabel + ".label." + uiInput.getName());
-		} catch (MissingResourceException e) {
-			label = uiInput.getName();
-		}
+      label = res.getString(nodetypeLabel + ".label." + uiInput.getName());
+    } catch (MissingResourceException e) {
+      label = uiInput.getName();
+    }
     Object[]  args = {label, uiInput.getBindingField() } ;
     throw new MessageException(new ApplicationMessage("EmptyFieldValidator.msg.empty-input", args, ApplicationMessage.WARNING)) ;
   }

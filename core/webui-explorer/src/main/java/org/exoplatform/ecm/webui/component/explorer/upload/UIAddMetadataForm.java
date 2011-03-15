@@ -75,23 +75,23 @@ public class UIAddMetadataForm extends UIDialogForm {
   public UIAddMetadataForm() throws Exception {
     setActions(ACTIONS) ;
   }
-  
+
   public void setNodeType(String nodeType) { nodeType_ = nodeType ; }
-  public String getNodeType() { return nodeType_ ; } 
-  
-  public String getDialogTemplatePath() {   
+  public String getNodeType() { return nodeType_ ; }
+
+  public String getDialogTemplatePath() {
     repositoryName = getAncestorOfType(UIJCRExplorer.class).getRepositoryName() ;
     MetadataService metadataService = getApplicationComponent(MetadataService.class) ;
     try {
       return metadataService.getMetadataPath(nodeType_, true, repositoryName) ;
     } catch (Exception e) {
       LOG.error("Unexpected error", e);
-    } 
+    }
     return null ;
   }
-  
+
   public String getTemplate() { return getDialogTemplatePath() ; }
-  
+
   @SuppressWarnings("unused")
   public ResourceResolver getTemplateResourceResolver(WebuiRequestContext context, String template) {
     return getAncestorOfType(UIJCRExplorer.class).getJCRTemplateResourceResolver() ;
@@ -107,7 +107,7 @@ public class UIAddMetadataForm extends UIDialogForm {
       NodeTypeManager ntManager = uiJCRExplorer.getSession().getWorkspace().getNodeTypeManager();
       PropertyDefinition[] props = ntManager.getNodeType(uiForm.getNodeType()).getPropertyDefinitions();
       List<Value> valueList = new ArrayList<Value>();
-      try {      
+      try {
       for (PropertyDefinition prop : props) {
         String name = prop.getName();
         String inputName = uiForm.fieldNames.get(name) ;
@@ -119,12 +119,12 @@ public class UIAddMetadataForm extends UIDialogForm {
               valueList.add(uiJCRExplorer.getSession().getValueFactory().createValue(uiFormDateTime.getCalendar())) ;
               node.setProperty(name, valueList.toArray(new Value[] {}));
             } else {
-            	if (((UIFormInput)uiForm.getUIInput(inputName)) instanceof UIFormSelectBox){
-            		node.setProperty(name, ((UIFormSelectBox)uiForm.getUIInput(inputName)).getSelectedValues());
-            	}else {
-            		List<String> values=(List<String>) ((UIFormMultiValueInputSet)uiForm.getUIInput(inputName)).getValue() ;
-            		node.setProperty(name, values.toArray(new String[values.size()]));
-            	}              
+              if (((UIFormInput)uiForm.getUIInput(inputName)) instanceof UIFormSelectBox){
+                node.setProperty(name, ((UIFormSelectBox)uiForm.getUIInput(inputName)).getSelectedValues());
+              }else {
+                List<String> values=(List<String>) ((UIFormMultiValueInputSet)uiForm.getUIInput(inputName)).getValue() ;
+                node.setProperty(name, values.toArray(new String[values.size()]));
+              }
             }
           } else {
             if (requiredType == 6) { // boolean
@@ -155,7 +155,7 @@ public class UIAddMetadataForm extends UIDialogForm {
       event.getRequestContext().addUIComponentToUpdateByAjax(uiUploadContainer) ;
     }
   }
-  
+
   static public class CancelActionListener extends EventListener<UIAddMetadataForm> {
     public void execute(Event<UIAddMetadataForm> event) throws Exception {
       UIUploadContainer uiUploadContainer = event.getSource().getParent() ;

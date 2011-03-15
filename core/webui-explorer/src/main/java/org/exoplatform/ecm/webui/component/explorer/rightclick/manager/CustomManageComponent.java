@@ -47,7 +47,7 @@ import org.exoplatform.webui.ext.manager.UIAbstractManagerComponent;
  * Created by The eXo Platform SARL
  * Author : Hoang Van Hung
  *          hunghvit@gmail.com
- * Aug 6, 2009  
+ * Aug 6, 2009
  */
 
 @ComponentConfig(
@@ -57,16 +57,16 @@ import org.exoplatform.webui.ext.manager.UIAbstractManagerComponent;
 )
 public class CustomManageComponent extends UIAbstractManagerComponent {
 
-	private static final List<UIExtensionFilter> FILTERS 
-			= Arrays.asList(new UIExtensionFilter[]{new IsNotInTrashFilter(),
-																							new IsNotTrashHomeNodeFilter() });
+  private static final List<UIExtensionFilter> FILTERS
+      = Arrays.asList(new UIExtensionFilter[]{new IsNotInTrashFilter(),
+                                              new IsNotTrashHomeNodeFilter() });
   private final static Log       LOG  = ExoLogger.getLogger(CustomManageComponent.class);
-  
+
   @UIExtensionFilters
   public List<UIExtensionFilter> getFilters() {
     return FILTERS;
   }
-  
+
   public static void customManage(Event<? extends UIComponent> event, UIJCRExplorer uiExplorer,
       UIApplication uiApp) throws Exception {
     UIWorkingArea uicomp = event.getSource().getParent();
@@ -75,7 +75,7 @@ public class CustomManageComponent extends UIAbstractManagerComponent {
     String repository = uiExplorer.getRepositoryName();
     String wsName = event.getRequestContext().getRequestParameter(UIWorkingArea.WS_NAME);
     Session session = uiExplorer.getSessionByWorkspace(wsName);
-    ActionServiceContainer actionService = 
+    ActionServiceContainer actionService =
       uicomp.getApplicationComponent(ActionServiceContainer.class);
     try {
       Node node = uiExplorer.getNodeByPath(nodePath, session);
@@ -92,7 +92,7 @@ public class CustomManageComponent extends UIAbstractManagerComponent {
       uiExplorer.updateAjax(event);
     }
   }
-  
+
   public static class CustomActionListener extends UIWorkingAreaActionListener<CustomManageComponent> {
     public void processEvent(Event<CustomManageComponent> event) throws Exception {
       UIJCRExplorer uiExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class);
@@ -100,10 +100,9 @@ public class CustomManageComponent extends UIAbstractManagerComponent {
       customManage(event, uiExplorer, uiApp);
     }
   }
-  
+
   @Override
   public Class<? extends UIAbstractManager> getUIAbstractManagerClass() {
-    // TODO Auto-generated method stub
     return null;
   }
 

@@ -44,31 +44,31 @@ import org.picocontainer.Startable;
  * May 21, 2009
  */
 public class NewsletterInitializationService implements Startable {
-  
+
   /** The portal names. */
   private List<String> portalNames;
-  
+
   /** The category configs. */
   private List<NewsletterCategoryConfig> categoryConfigs;
-  
+
   /** The subscription configs. */
   private List<NewsletterSubscriptionConfig> subscriptionConfigs;
-  
+
   /** The user configs. */
   private List<NewsletterUserConfig> userConfigs;
-  
+
   /** The manager service. */
   private NewsletterManagerService newsletterManagerService;
-  
+
   /** The live portal manager service. */
   private LivePortalManagerService livePortalManagerService;
-  
+
   /** The log. */
   private static Log log = ExoLogger.getLogger(NewsletterInitializationService.class);
-  
+
   /**
    * Instantiates a new newsletter initialization service.
-   * 
+   *
    * @param initParams the init params
    * @param livePortalManagerService the live portal manager service
    * @param newsletterManagerService the newsletter manager service
@@ -76,8 +76,8 @@ public class NewsletterInitializationService implements Startable {
    */
   @SuppressWarnings("unchecked")
   public NewsletterInitializationService(InitParams initParams, UserPortalConfigService userPortalConfigService) {
-  	this.livePortalManagerService = WCMCoreUtils.getService(LivePortalManagerService.class);
-  	this.newsletterManagerService = WCMCoreUtils.getService(NewsletterManagerService.class);
+    this.livePortalManagerService = WCMCoreUtils.getService(LivePortalManagerService.class);
+    this.newsletterManagerService = WCMCoreUtils.getService(NewsletterManagerService.class);
     portalNames = initParams.getValuesParam("portalNames").getValues();
     categoryConfigs = initParams.getObjectParamValues(NewsletterCategoryConfig.class);
     subscriptionConfigs = initParams.getObjectParamValues(NewsletterSubscriptionConfig.class);
@@ -107,7 +107,7 @@ public class NewsletterInitializationService implements Startable {
           for (NewsletterCategoryConfig categoryConfig : categoryConfigs) {
             categoryHandler.add(sessionProvider, portalName, categoryConfig);
           }
-          
+
           NewsletterSubscriptionHandler subscriptionHandler = newsletterManagerService.getSubscriptionHandler();
           for (NewsletterSubscriptionConfig subscriptionConfig : subscriptionConfigs) {
             subscriptionHandler.add(sessionProvider, portalName, subscriptionConfig);
@@ -118,13 +118,15 @@ public class NewsletterInitializationService implements Startable {
             manageUserHandler.add(sessionProvider, portalName, userConfig.getMail());
           }
           ExtendedNode userFolderNode = (ExtendedNode)((Node)session.getItem(NewsletterConstant.generateUserPath(portalName)));
-          if(userFolderNode.canAddMixin("exo:privilegeable")) 
+          if(userFolderNode.canAddMixin("exo:privilegeable"))
             userFolderNode.addMixin("exo:privilegeable");
-          
+
           userFolderNode.setPermission("any", arrayPers);
-          
-          Node newsletterInitializationServiceLog = newsletterInitializationService.addNode("NewsletterInitializationServiceLog", "nt:file");
-          Node newsletterInitializationServiceLogContent = newsletterInitializationServiceLog.addNode("jcr:content", "nt:resource");
+
+          Node newsletterInitializationServiceLog = newsletterInitializationService.addNode("NewsletterInitializationServiceLog",
+                                                                                            "nt:file");
+          Node newsletterInitializationServiceLogContent = newsletterInitializationServiceLog.addNode("jcr:content",
+                                                                                                      "nt:resource");
           newsletterInitializationServiceLogContent.setProperty("jcr:encoding", "UTF-8");
           newsletterInitializationServiceLogContent.setProperty("jcr:mimeType", "text/plain");
           newsletterInitializationServiceLogContent.setProperty("jcr:data", "Newsletter was created successfully");

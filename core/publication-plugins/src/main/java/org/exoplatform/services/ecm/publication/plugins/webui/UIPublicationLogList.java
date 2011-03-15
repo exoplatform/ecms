@@ -47,64 +47,64 @@ import org.exoplatform.webui.event.EventListener;
     }
 )
 public class UIPublicationLogList extends UIComponentDecorator {
-  
+
   private UIPageIterator uiPageIterator_ ;
   private Node currentNode_ ;
-  
+
   public UIPublicationLogList() throws Exception {
     uiPageIterator_ = createUIComponent(UIPageIterator.class, null, "PublicationLogListIterator");
     setUIComponent(uiPageIterator_) ;
   }
-  
+
   public void setNode(Node node) throws Exception { currentNode_ = node ; }
-  
+
   public List<HistoryBean> getLog() throws NotInPublicationLifecycleException, Exception {
     PublicationService publicationService = getApplicationComponent(PublicationService.class);
     String[][] array = publicationService.getLog(currentNode_);
-    List<HistoryBean> list = new ArrayList<HistoryBean>();    
+    List<HistoryBean> list = new ArrayList<HistoryBean>();
     for (int i = 0; i < array.length; i++) {
       HistoryBean bean = new HistoryBean();
       String[] currentLog = array[i];
       bean.setDate(bean.formatStringByDateTime(currentLog[0]));
       bean.setNewState(currentLog[1]);
       bean.setUser(currentLog[2]);
-      String[] values = new String[currentLog.length - 4]; 
+      String[] values = new String[currentLog.length - 4];
       System.arraycopy(currentLog, 4, values, 0, currentLog.length);
-      String description = publicationService.getLocalizedAndSubstituteLog(currentNode_, 
+      String description = publicationService.getLocalizedAndSubstituteLog(currentNode_,
           Util.getUIPortal().getAncestorOfType(UIPortalApplication.class).getLocale(), currentLog[3], values);
       bean.setDescription(description);
-      list.add(bean); 
+      list.add(bean);
     }
     return list;
   }
-  
+
   @SuppressWarnings("unchecked")
-  public void updateGrid() throws Exception {   
+  public void updateGrid() throws Exception {
     ObjectPageList objPageList = new ObjectPageList(getLog(), 10) ;
     uiPageIterator_.setPageList(objPageList) ;
   }
-  
+
   public UIPageIterator getUIPageIterator() { return uiPageIterator_ ; }
-  
+
   public List getLogList() throws Exception { return uiPageIterator_.getCurrentPageData() ; }
 
   public String[] getActions() {return new String[]{"Close"} ;}
-  
+
   static public class CloseActionListener extends EventListener<UIPublicationLogList> {
-    public void execute(Event<UIPublicationLogList> event) throws Exception {      
+    public void execute(Event<UIPublicationLogList> event) throws Exception {
       UIPublicationLogList uiPublicationLogList = event.getSource() ;
       UIPopupWindow uiPopup = uiPublicationLogList.getAncestorOfType(UIPopupWindow.class) ;
       uiPopup.setRendered(false) ;
       uiPopup.setShow(false) ;
     }
   }
-  
+
   public class HistoryBean {
     private String date;
     private String newState;
     private String user;
     private String description;
-    
+
     public String getDate() { return date; }
     public void setDate(String date) { this.date = date; }
     public String getDescription() { return description; }
@@ -113,27 +113,27 @@ public class UIPublicationLogList extends UIComponentDecorator {
     public void setNewState(String newState) { this.newState = newState; }
     public String getUser() { return user; }
     public void setUser(String user) { this.user = user; }
-    
+
     /**
      * Updated by Nguyen Van Chien
      * @param stringInput
      * @return
      */
-    public String formatStringByDateTime(String stringInput) {      
+    public String formatStringByDateTime(String stringInput) {
       String dateYear = stringInput.substring(0, 4);
       String dateMonth = stringInput.substring(4, 6);
       String dateDay = stringInput.substring(6, 8);
       String dateHour = stringInput.substring(9, 11);
       String dateMinute = stringInput.substring(11, 13);
-      String dateSecond = stringInput.substring(13, 15);      
-      StringBuilder builder = new StringBuilder();      
+      String dateSecond = stringInput.substring(13, 15);
+      StringBuilder builder = new StringBuilder();
       builder.append(dateMonth).append("/")
             .append(dateDay).append("/")
             .append(dateYear).append(" ")
             .append(dateHour).append(":")
             .append(dateMinute).append(":")
             .append(dateSecond);
-      
+
       return builder.toString();
     }
   }

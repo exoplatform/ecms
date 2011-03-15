@@ -8,7 +8,7 @@ import org.exoplatform.services.scheduler.CronJob;
 import org.quartz.JobDataMap;
 
 /**
- * Created by The eXo Platform MEA Author : 
+ * Created by The eXo Platform MEA Author :
  * haikel.thamri@exoplatform.com
  */
 public class FrontCronJob extends CronJob {
@@ -18,36 +18,36 @@ public class FrontCronJob extends CronJob {
     private JobDataMap jobDataMap;
 
     /**
-     * 
+     *
      * @param params
      *            : les parametres d'init pour le plugin
      * @throws Exception
      */
     public FrontCronJob(InitParams params) throws Exception {
-	super(params);
-	if (log.isInfoEnabled()) {
-	    log.info("Start Init CronJob");
-	}
+  super(params);
+  if (log.isInfoEnabled()) {
+      log.info("Start Init CronJob");
+  }
 
-	jobDataMap = new JobDataMap();
+  jobDataMap = new JobDataMap();
 
-	ExoProperties props = params.getPropertiesParam("importContentJob.generalParams").getProperties();
-	String stagingStorage = props.getProperty("stagingStorage");
-	String temporaryStorge = props.getProperty("temporaryStorge");
-	jobDataMap.put("stagingStorage", stagingStorage);
-	jobDataMap.put("temporaryStorge", temporaryStorge);
-	log.info("CronJob Params...stagingStorage : " + stagingStorage + ", temporaryStorge :" + temporaryStorge);
-	if (log.isInfoEnabled()) {
-	    log.info("End Init CronJob");
-	}
+  ExoProperties props = params.getPropertiesParam("importContentJob.generalParams").getProperties();
+  String stagingStorage = props.getProperty("stagingStorage");
+  String temporaryStorge = props.getProperty("temporaryStorge");
+  jobDataMap.put("stagingStorage", stagingStorage);
+  jobDataMap.put("temporaryStorge", temporaryStorge);
+  log.info("CronJob Params...stagingStorage : " + stagingStorage + ", temporaryStorge :" + temporaryStorge);
+  if (log.isInfoEnabled()) {
+      log.info("End Init CronJob");
+  }
     }
 
     /**
-     * 
+     *
      * @return JobDataMap
      */
     public JobDataMap getJobDataMap() {
-	return jobDataMap;
+  return jobDataMap;
     }
 
 }

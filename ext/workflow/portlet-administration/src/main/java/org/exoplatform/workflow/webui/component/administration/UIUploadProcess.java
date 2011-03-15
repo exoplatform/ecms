@@ -42,15 +42,15 @@ import org.exoplatform.webui.form.UIFormUploadInput;
     lifecycle = UIFormLifecycle.class,
     template =  "system:/groovy/webui/form/UIForm.gtmpl",
     events = {
-      @EventConfig(listeners = UIUploadProcess.SaveActionListener.class), 
+      @EventConfig(listeners = UIUploadProcess.SaveActionListener.class),
       @EventConfig(listeners = UIUploadProcess.CancelActionListener.class, phase = Phase.DECODE)
     }
 )
 public class UIUploadProcess extends UIForm {
-  
+
   final static public String FIELD_NAME =  "name" ;
   final static public String FIELD_UPLOAD = "upload" ;
-  
+
   public UIUploadProcess() throws Exception {
     setMultiPart(true);
     addUIFormInput(new UIFormStringInput(FIELD_NAME, FIELD_NAME, null));
@@ -58,13 +58,13 @@ public class UIUploadProcess extends UIForm {
     uiInput.setAutoUpload(true);
     addUIFormInput(uiInput) ;
   }
-  
+
   static  public class SaveActionListener extends EventListener<UIUploadProcess> {
     public void execute(Event<UIUploadProcess> event) throws Exception {
       UIUploadProcess uiUploadProcess = event.getSource() ;
-      UIWorkflowAdministrationPortlet uiWorkflowAdministrationPortlet = 
+      UIWorkflowAdministrationPortlet uiWorkflowAdministrationPortlet =
         uiUploadProcess.getAncestorOfType(UIWorkflowAdministrationPortlet.class) ;
-      WorkflowServiceContainer workflowServiceContainer = 
+      WorkflowServiceContainer workflowServiceContainer =
         uiUploadProcess.getApplicationComponent(WorkflowServiceContainer.class) ;
       UIApplication uiApp = uiUploadProcess.getAncestorOfType(UIApplication.class) ;
       UIFormUploadInput input = (UIFormUploadInput)uiUploadProcess.getUIInput(FIELD_UPLOAD);
@@ -72,7 +72,7 @@ public class UIUploadProcess extends UIForm {
         uiApp.addMessage(new ApplicationMessage("UIUploadProcess.msg.fileName-error", null)) ;
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
         return ;
-        
+
       }
       String fileName = input.getUploadResource().getFileName() ;
       if(fileName == null || fileName.equals("")) {
@@ -80,14 +80,14 @@ public class UIUploadProcess extends UIForm {
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
         return ;
       }
-      
+
       InputStream inputStream = input.getUploadDataAsStream();
       String name = uiUploadProcess.getUIStringInput(FIELD_NAME).getValue() ;
       if(name == null) name = fileName;
       String[] arrFilterChar = {"&", "$", "@", ":","]", "[", "*", "%", "!"} ;
       for(String filterChar : arrFilterChar) {
         if(name.indexOf(filterChar) > -1) {
-          uiApp.addMessage(new ApplicationMessage("UIUploadProcess.msg.fileName-invalid", null, 
+          uiApp.addMessage(new ApplicationMessage("UIUploadProcess.msg.fileName-invalid", null,
                                                    ApplicationMessage.WARNING)) ;
           event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
           return ;
@@ -98,12 +98,12 @@ public class UIUploadProcess extends UIForm {
         uiApp.addMessage(new ApplicationMessage("UIUploadProcess.msg.process-successful", null)) ;
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
       } catch(Exception e) {
-        uiApp.addMessage(new ApplicationMessage("UIUploadProcess.msg.data-invalid", null, 
+        uiApp.addMessage(new ApplicationMessage("UIUploadProcess.msg.data-invalid", null,
                                                 ApplicationMessage.WARNING)) ;
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
         return ;
       }
-      UIAdministrationManager uiAdminstrationManager = 
+      UIAdministrationManager uiAdminstrationManager =
         uiWorkflowAdministrationPortlet.getChild(UIAdministrationManager.class) ;
       uiAdminstrationManager.updateMonitorGrid() ;
       UIPopupWindow uiPopup = uiWorkflowAdministrationPortlet.getChildById("UploadProcessPopup") ;
@@ -112,10 +112,10 @@ public class UIUploadProcess extends UIForm {
       event.getRequestContext().addUIComponentToUpdateByAjax(uiWorkflowAdministrationPortlet) ;
     }
   }
-  
+
   static  public class CancelActionListener extends EventListener<UIUploadProcess> {
     public void execute(Event<UIUploadProcess> event) throws Exception {
-      UIWorkflowAdministrationPortlet uiWorkflowAdministrationPortlet = 
+      UIWorkflowAdministrationPortlet uiWorkflowAdministrationPortlet =
         event.getSource().getAncestorOfType(UIWorkflowAdministrationPortlet.class) ;
       UIPopupWindow uiPopup = uiWorkflowAdministrationPortlet.getChildById("UploadProcessPopup") ;
       uiPopup.setRendered(false) ;

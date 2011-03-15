@@ -35,7 +35,7 @@ public class NewsletterEmailJob extends BaseJob {
 
   /** The log. */
   private static Log log = ExoLogger.getLogger(NewsletterEmailJob.class);
-  
+
   private ExoContainer container;
 
   public void execute(JobExecutionContext context) throws JobExecutionException {
@@ -43,7 +43,7 @@ public class NewsletterEmailJob extends BaseJob {
     container = RootContainer.getInstance().getPortalContainer(containerName);
     super.execute(context);
   }
-  
+
   /* (non-Javadoc)
    * @see org.exoplatform.services.scheduler.BaseJob#execute(org.exoplatform.services.scheduler.JobContext)
    */

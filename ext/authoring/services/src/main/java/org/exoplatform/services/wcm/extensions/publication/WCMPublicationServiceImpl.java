@@ -61,7 +61,7 @@ public class WCMPublicationServiceImpl
   /**
    * Instantiates a new WCM publication service. This service delegate to
    * PublicationService to manage the publication
-   * 
+   *
    * @param publicationService the publication service
    */
   public WCMPublicationServiceImpl() {
@@ -79,7 +79,8 @@ public class WCMPublicationServiceImpl
     try {
       if (log.isInfoEnabled()) log.info(node.getPath() + "::" + siteName + "::"+remoteUser);
       ExoContainer container = ExoContainerContext.getCurrentContainer();
-      PublicationManagerImpl publicationManagerImpl = (PublicationManagerImpl) container.getComponentInstanceOfType(PublicationManagerImpl.class);
+      PublicationManagerImpl publicationManagerImpl = (PublicationManagerImpl)
+          container.getComponentInstanceOfType(PublicationManagerImpl.class);
       ContextComparator comparator = new ContextComparator();
       TreeSet<Context> treeSetContext = new TreeSet<Context>(comparator);
       treeSetContext.addAll(publicationManagerImpl.getContexts());
@@ -145,7 +146,7 @@ public class WCMPublicationServiceImpl
 
   /**
    * Automatically move to initial state if 'automatic'
-   * 
+   *
    * @param node
    * @param lifecycle
    * @throws Exception
@@ -156,8 +157,8 @@ public class WCMPublicationServiceImpl
       log.warn("could not find an initial state in lifecycle " + lifecycle.getName());
     } else {
       String initialState = states.get(0).getState();
-      PublicationService publicationService = (PublicationService) ExoContainerContext.getCurrentContainer()
-                                                                                      .getComponentInstanceOfType(PublicationService.class);
+      PublicationService publicationService = (PublicationService)
+          ExoContainerContext.getCurrentContainer().getComponentInstanceOfType(PublicationService.class);
       PublicationPlugin publicationPlugin = publicationService.getPublicationPlugins()
                                                               .get(AuthoringPublicationConstant.LIFECYCLE_NAME);
       HashMap<String, String> context = new HashMap<String, String>();
@@ -169,23 +170,23 @@ public class WCMPublicationServiceImpl
         context.put(AuthoringPublicationConstant.CURRENT_REVISION_NAME, currentRevision.getName());
       }
       try {
-    	if (node.isLocked()) {
-		  Lock lock = node.getLock();
-		  String owner = lock.getLockOwner();
-		  if (log.isInfoEnabled()) log.info("node is locked by owner, unlocking it for enrollement");
-		  if(node.holdsLock() && remoteUser.equals(owner)) {
-		    String lockToken = LockUtil.getLockToken(node);        
-		    if(lockToken != null) {
-		      node.getSession().addLockToken(lockToken);
-		    }
-		    node.unlock();   
-		    node.removeMixin(Utils.MIX_LOCKABLE);
-		    node.getSession().save();
-		    //remove lock from Cache
-		    LockUtil.removeLock(node);
-		  }
-		}
-    	  
+      if (node.isLocked()) {
+      Lock lock = node.getLock();
+      String owner = lock.getLockOwner();
+      if (log.isInfoEnabled()) log.info("node is locked by owner, unlocking it for enrollement");
+      if(node.holdsLock() && remoteUser.equals(owner)) {
+        String lockToken = LockUtil.getLockToken(node);
+        if(lockToken != null) {
+          node.getSession().addLockToken(lockToken);
+        }
+        node.unlock();
+        node.removeMixin(Utils.MIX_LOCKABLE);
+        node.getSession().save();
+        //remove lock from Cache
+        LockUtil.removeLock(node);
+      }
+    }
+
         publicationPlugin.changeState(node, initialState, context);
         node.setProperty("publication:lastUser", remoteUser);
         node.getSession().save();

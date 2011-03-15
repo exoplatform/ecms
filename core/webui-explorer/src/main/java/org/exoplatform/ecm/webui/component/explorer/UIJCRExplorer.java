@@ -106,19 +106,19 @@ public class UIJCRExplorer extends UIContainer {
    * Logger.
    */
   private static final Log LOG  = ExoLogger.getLogger("explorer.UIJCRExplorer");
-  
+
   private LinkedList<ClipboardCommand> clipboards_ = new LinkedList<ClipboardCommand>() ;
   private LinkedList<String> nodesHistory_ = new LinkedList<String>() ;
   private LinkedList<String> wsHistory_ = new LinkedList<String>();
   private PortletPreferences pref_ ;
   private Preference preferences_;
   private Map<String, HistoryEntry> addressPath_ = new HashMap<String, HistoryEntry>() ;
-  private JCRResourceResolver jcrTemplateResourceResolver_ ;  
+  private JCRResourceResolver jcrTemplateResourceResolver_ ;
 
   private String currentRootPath_ ;
   private String currentPath_ ;
   private String currentStatePath_ ;
-  private String currentStateWorkspaceName_ ;  
+  private String currentStateWorkspaceName_ ;
   private String lastWorkspaceName_ ;
   private String currentDriveRootPath_ ;
   private String currentDriveWorkspaceName_ ;
@@ -128,44 +128,44 @@ public class UIJCRExplorer extends UIContainer {
   private String tagPath_ ;
   private String referenceWorkspace_ ;
   private String pathBeforeEditing;
-  
+
   private boolean isViewTag_;
   private boolean isHidePopup_;
   private boolean isReferenceNode_;
   private DriveData driveData_ ;
-    
+
   private boolean isFilterSave_ ;
   private boolean  isShowDocumentViewForFile_ = true;
   private boolean preferencesSaved_ = false;
-  
+
   private int tagScope;
 
   private List<String> checkedSupportType = new ArrayList<String>();
   private Set<String> allItemFilterMap = new HashSet<String>();
   private Set<String> allItemByTypeFilterMap = new HashSet<String>();
-  
+
   public Set<String> getAllItemFilterMap() { return allItemFilterMap; }
   public Set<String> getAllItemByTypeFilterMap() { return allItemByTypeFilterMap; }
-  
+
   public int getTagScope() { return tagScope; }
   public void setTagScope(int scope) { tagScope = scope; }
-      
+
   public boolean isFilterSave() { return isFilterSave_; }
   public void setFilterSave(boolean isFilterSave) { isFilterSave_ = isFilterSave; }
-  
+
   public boolean  isShowDocumentViewForFile() { return isShowDocumentViewForFile_; }
- 	public void setShowDocumentViewForFile(boolean value) { isShowDocumentViewForFile_ = value; }
-  
+   public void setShowDocumentViewForFile(boolean value) { isShowDocumentViewForFile_ = value; }
+
   public boolean isPreferencesSaved() { return preferencesSaved_; }
   public void setPreferencesSaved(boolean value) { preferencesSaved_ = value; }
-  
+
   public boolean isAddingDocument() {
     UIPopupContainer uiPopupContainer = this.getChild(UIPopupContainer.class);
     UIPopupWindow uiPopup = uiPopupContainer.getChild(UIPopupWindow.class);
-    
+
     UIWorkingArea uiWorkingArea = this.getChild(UIWorkingArea.class);
     UIDocumentWorkspace uiDocumentWorkspace = uiWorkingArea.getChild(UIDocumentWorkspace.class);
-    //check if edit with popup    
+    //check if edit with popup
     UIComponent uiComp = uiPopup.getUIComponent();
     if (uiComp instanceof UIDocumentFormController && ((UIDocumentFormController)uiComp).isRendered()) {
       return ((UIDocumentFormController)uiComp).getChild(UIDocumentForm.class).isAddNew();
@@ -179,18 +179,18 @@ public class UIJCRExplorer extends UIContainer {
     }
     return false;
   }
-  
+
   public boolean isEditingDocument() {
     UIPopupContainer uiPopupContainer = this.getChild(UIPopupContainer.class);
     UIPopupWindow uiPopup = uiPopupContainer.getChild(UIPopupWindow.class);
-    
+
     UIWorkingArea uiWorkingArea = this.getChild(UIWorkingArea.class);
     UIDocumentWorkspace uiDocumentWorkspace = uiWorkingArea.getChild(UIDocumentWorkspace.class);
-    //check if edit with popup    
+    //check if edit with popup
     UIComponent uiComp = uiPopup.getUIComponent();
-    
+
     if (uiPopup.isShow() && uiPopup.isRendered() &&
-    		uiComp instanceof UIDocumentFormController && ((UIDocumentFormController)uiComp).isRendered()) {
+        uiComp instanceof UIDocumentFormController && ((UIDocumentFormController)uiComp).isRendered()) {
       return true;
     }
      //check if edit without popup
@@ -202,15 +202,15 @@ public class UIJCRExplorer extends UIContainer {
     }
     return false;
   }
-  
+
   public List<String> getCheckedSupportType() {
     return checkedSupportType;
   }
-  
+
   public void setCheckedSupportType(List<String> checkedSupportType) {
     this.checkedSupportType = checkedSupportType;
   }
-  
+
   public UIJCRExplorer() throws Exception {
     addChild(UIControl.class, null, null);
     addChild(UIWorkingArea.class, null, null);
@@ -225,7 +225,7 @@ public class UIJCRExplorer extends UIContainer {
     if(currentRootPath_.equals(currentPath_)) return "/" ;
     return currentPath.replaceFirst(currentRootPath_, "") ;
   }
-  
+
   /**
    * Sets the root path
    */
@@ -233,69 +233,69 @@ public class UIJCRExplorer extends UIContainer {
     currentDriveRootPath_ = rootPath;
     setCurrentRootPath(rootPath);
   }
-  
+
   private void setCurrentRootPath(String rootPath) {
     currentRootPath_ = rootPath ;
   }
-  
+
   /**
    * @return the root node itself if it is not a link otherwise the target node (= resolve the link)
    */
-  public Node getRootNode() throws Exception {     
-    return getNodeByPath(currentRootPath_, getSession()) ; 
+  public Node getRootNode() throws Exception {
+    return getNodeByPath(currentRootPath_, getSession()) ;
   }
 
   /**
    * @return the root path
    */
   public String getRootPath() { return currentRootPath_; }
-  
-  
+
+
   private String getDefaultRootPath() { return "/"; }
-  
+
   /**
    * @return the current node itself if it is not a link otherwise the target node (= resolve the link)
    */
   public Node getCurrentNode() throws Exception { return getNodeByPath(currentPath_, getSession()) ; }
-  
+
   /**
    * @return the current node even if it is a link (= don't resolve the link)
    */
   public Node getRealCurrentNode() throws Exception {
     return getNodeByPath(currentPath_, getSession(), false);
   }
-  
+
   /**
    * @return the virtual current path
    */
   public String getCurrentPath() { return currentPath_ ; }
-  
+
   /**
    * Sets the virtual current path
    */
   public void setCurrentPath(String  currentPath) {
-	  if (currentPath_ == null || !currentPath_.equals(currentPath)) {
-	          isShowDocumentViewForFile_ = true;
-	  }
-	  currentPath_ = currentPath; 
+    if (currentPath_ == null || !currentPath_.equals(currentPath)) {
+            isShowDocumentViewForFile_ = true;
+    }
+    currentPath_ = currentPath;
   }
-  
+
   /**
-   * Indicates if the current node is a referenced node 
+   * Indicates if the current node is a referenced node
    */
   public boolean isReferenceNode() { return isReferenceNode_ ; }
-  
+
   /**
-   * Tells that the current node is a referenced node 
+   * Tells that the current node is a referenced node
    */
   public void setIsReferenceNode(boolean isReferenceNode) { isReferenceNode_ = isReferenceNode ; }
-  
+
   /**
    * Sets the workspace name the referenced node
    */
   public void setReferenceWorkspace(String referenceWorkspace) { referenceWorkspace_ = referenceWorkspace ; }
   public String getReferenceWorkspace() { return referenceWorkspace_ ; }
-  
+
   private String setTargetWorkspaceProperties(String workspaceName) {
     if (workspaceName != null && workspaceName.length() > 0) {
       if (!workspaceName.equals(getCurrentDriveWorkspace())) {
@@ -305,25 +305,25 @@ public class UIJCRExplorer extends UIContainer {
         return workspaceName;
       } else if(isReferenceNode()) {
         setIsReferenceNode(false);
-        setCurrentRootPath(currentDriveRootPath_);        
+        setCurrentRootPath(currentDriveRootPath_);
       }
     }
     return getCurrentDriveWorkspace();
   }
-  
+
   @Deprecated
   public void setBackNodePath(String previousPath) throws Exception {
     setBackNodePath(null, previousPath);
   }
-  
+
   /**
-   * Tells to go back to the given location 
+   * Tells to go back to the given location
    */
   public void setBackNodePath(String previousWorkspaceName, String previousPath) throws Exception {
     setBackSelectNode(previousWorkspaceName, previousPath);
     refreshExplorer();
   }
-  
+
   public void setDriveData(DriveData driveData) { driveData_ = driveData ; }
   public DriveData getDriveData() { return driveData_ ; }
 
@@ -333,75 +333,75 @@ public class UIJCRExplorer extends UIContainer {
   public LinkedList<String> getNodesHistory() { return nodesHistory_ ; }
   @Deprecated
   public void setNodesHistory(LinkedList<String> h) {nodesHistory_ = h;}
-  
+
   public LinkedList<String> getWorkspacesHistory() { return wsHistory_; }
   @Deprecated
   public void setWorkspaceHistory(LinkedList<String> wsHistory) { wsHistory_ =  wsHistory; }
-  
+
   public Collection<HistoryEntry> getHistory() { return addressPath_.values() ; }
   @Deprecated
   public Set<String> getAddressPath() { return addressPath_.keySet() ; }
   @Deprecated
   public void setAddressPath(Set<String> s) {/*addressPath_ = s;*/} ;
 
-  public SessionProvider getSessionProvider() { return SessionProviderFactory.createSessionProvider(); }  
+  public SessionProvider getSessionProvider() { return SessionProviderFactory.createSessionProvider(); }
 
-  public SessionProvider getSystemProvider() { return SessionProviderFactory.createSystemProvider(); }  
+  public SessionProvider getSystemProvider() { return SessionProviderFactory.createSystemProvider(); }
 
   /**
    * @return the session of the current node (= UIJCRExplorer.getCurrentNode())
    */
   public Session getTargetSession() throws Exception {
-    return getCurrentNode().getSession();    
+    return getCurrentNode().getSession();
   }
 
-  public Session getSession() throws Exception { 
+  public Session getSession() throws Exception {
     if(isReferenceNode_) return getSessionProvider().getSession(referenceWorkspace_, getRepository()) ;
-    return getSessionProvider().getSession(currentDriveWorkspaceName_, getRepository()) ; 
+    return getSessionProvider().getSession(currentDriveWorkspaceName_, getRepository()) ;
   }
-  
+
   public Session getSystemSession() throws Exception {
     if(isReferenceNode_) return getSystemProvider().getSession(referenceWorkspace_, getRepository()) ;
-    return getSystemProvider().getSession(currentDriveWorkspaceName_, getRepository()) ;    
+    return getSystemProvider().getSession(currentDriveWorkspaceName_, getRepository()) ;
   }
-  
+
   public String getDocumentInfoTemplate() { return documentInfoTemplate_ ; }
-  public void setRenderTemplate(String template) { 
+  public void setRenderTemplate(String template) {
     newJCRTemplateResourceResolver() ;
-    documentInfoTemplate_  = template ; 
+    documentInfoTemplate_  = template ;
   }
-  
+
   public void setCurrentState() {
     setCurrentState(currentDriveWorkspaceName_, currentPath_);
   }
-  
+
   public void setCurrentState(String currentStateWorkspaceName, String currentStatePath) {
     currentStateWorkspaceName_ = currentStateWorkspaceName;
-    currentStatePath_ =  currentStatePath ; 
+    currentStatePath_ =  currentStatePath ;
   }
 
   public String getCurrentStatePath() { return currentStatePath_;};
-  public void setCurrentStatePath(String currentStatePath) { 
+  public void setCurrentStatePath(String currentStatePath) {
     setCurrentState(currentDriveWorkspaceName_, currentStatePath);
   }
-  
-  public Node getCurrentStateNode() throws Exception { 
-    return getNodeByPath(currentStatePath_, getSessionProvider().getSession(currentStateWorkspaceName_, getRepository())) ; 
+
+  public Node getCurrentStateNode() throws Exception {
+    return getNodeByPath(currentStatePath_, getSessionProvider().getSession(currentStateWorkspaceName_, getRepository())) ;
   }
 
   public JCRResourceResolver getJCRTemplateResourceResolver() { return jcrTemplateResourceResolver_; }
-  public void newJCRTemplateResourceResolver() {    
+  public void newJCRTemplateResourceResolver() {
     try{
       DMSConfiguration dmsConfiguration = getApplicationComponent(DMSConfiguration.class);
-      DMSRepositoryConfiguration dmsRepoConfig = 
+      DMSRepositoryConfiguration dmsRepoConfig =
         dmsConfiguration.getConfig();
       String workspace =  dmsRepoConfig.getSystemWorkspace();
       jcrTemplateResourceResolver_ = new JCRResourceResolver(currentDriveRepositoryName_, workspace, "exo:templateFile") ;
     } catch(Exception e) {
       LOG.error("Cannot instantiate the JCRResourceResolver", e);
-    }         
+    }
   }
-  
+
   /**
    * Sets the repository of the current drive
    */
@@ -416,30 +416,30 @@ public class UIJCRExplorer extends UIContainer {
       String repoName = System.getProperty("gatein.tenant.repository.name");
       if (repoName!=null)
         return repoName;
-      else 
+      else
         return currentDriveRepositoryName_;
     }
   }
-  
+
   /**
-   * Sets the workspace of the current drive 
+   * Sets the workspace of the current drive
    */
   public void setWorkspaceName(String workspaceName) {
-    currentDriveWorkspaceName_ = workspaceName ; 
+    currentDriveWorkspaceName_ = workspaceName ;
     if (lastWorkspaceName_ == null) {
       setLastWorkspace(workspaceName);
     }
   }
-  
+
   private void setLastWorkspace(String lastWorkspaceName) {
     lastWorkspaceName_ = lastWorkspaceName;
   }
-  
+
   /**
    * @return the workspace of the current drive
    */
   public String getCurrentDriveWorkspace() { return currentDriveWorkspaceName_ ; }
-  
+
   /**
    * @return the workspace of the session of the current node (= UIJCRExplorer.getCurrentNode())
    */
@@ -448,23 +448,23 @@ public class UIJCRExplorer extends UIContainer {
       return getCurrentNode().getSession().getWorkspace().getName();
     } catch (Exception e) {
       LOG.warn("The workspace of the current node cannot be found, the workspace of the drive will be used", e);
-    } 
+    }
     return getCurrentDriveWorkspace();
   }
 
-  public ManageableRepository getRepository() throws Exception{         
-    RepositoryService repositoryService  = getApplicationComponent(RepositoryService.class) ;      
+  public ManageableRepository getRepository() throws Exception{
+    RepositoryService repositoryService  = getApplicationComponent(RepositoryService.class) ;
     return repositoryService.getCurrentRepository();
   }
 
-  public Session getSessionByWorkspace(String wsName) throws Exception{    
-    if(wsName == null ) return getSession() ;                      
+  public Session getSessionByWorkspace(String wsName) throws Exception{
+    if(wsName == null ) return getSession() ;
     return getSessionProvider().getSession(wsName,getRepository()) ;
   }
-  
+
   public boolean isSystemWorkspace() throws Exception {
     RepositoryService repositoryService = getApplicationComponent(RepositoryService.class) ;
-    String systemWS = 
+    String systemWS =
       repositoryService.getRepository(getRepositoryName()).getConfiguration().getSystemWorkspaceName() ;
     if(getCurrentWorkspace().equals(systemWS)) return true ;
     return false ;
@@ -473,21 +473,21 @@ public class UIJCRExplorer extends UIContainer {
   public void refreshExplorer() throws Exception {
     refreshExplorer(null, true);
   }
-  
+
   public void refreshExplorerWithoutClosingPopup() throws Exception {
     refreshExplorer(null, false);
   }
-  
+
   public void setPathToAddressBar(String path) throws Exception {
     findFirstComponentOfType(UIAddressBar.class).getUIStringInput(
                                           UIAddressBar.FIELD_ADDRESS).setValue(filterPath(path)) ;
-  } 
-  
+  }
+
   private void refreshExplorer(Node currentNode) throws Exception {
     refreshExplorer(currentNode, true);
   }
-  
-  public void refreshExplorer(Node currentNode, boolean closePopup) throws Exception { 
+
+  public void refreshExplorer(Node currentNode, boolean closePopup) throws Exception {
     try {
       Node nodeGet = currentNode == null ? getCurrentNode() : currentNode;
       if(nodeGet.hasProperty(Utils.EXO_LANGUAGE)) {
@@ -502,7 +502,7 @@ public class UIJCRExplorer extends UIContainer {
     UIWorkingArea uiWorkingArea = getChild(UIWorkingArea.class);
     UIDocumentWorkspace uiDocumentWorkspace = uiWorkingArea.getChild(UIDocumentWorkspace.class);
     if(uiDocumentWorkspace.isRendered()) {
-      if (uiDocumentWorkspace.getChild(UIDocumentFormController.class) == null || 
+      if (uiDocumentWorkspace.getChild(UIDocumentFormController.class) == null ||
           !uiDocumentWorkspace.getChild(UIDocumentFormController.class).isRendered()) {
         UIDocumentContainer uiDocumentContainer = uiDocumentWorkspace.getChild(UIDocumentContainer.class);
         UIDocumentWithTree uiDocumentWithTree = uiDocumentContainer.getChildById("UIDocumentWithTree");
@@ -514,7 +514,7 @@ public class UIJCRExplorer extends UIContainer {
           uiDocumentInfo.updatePageListData();
           uiDocumentContainer.setRenderedChild("UIDocumentInfo") ;
         }
-        if(getCurrentNode().isNodeType(Utils.NT_FOLDER) || getCurrentNode().isNodeType(Utils.NT_UNSTRUCTURED)) 
+        if(getCurrentNode().isNodeType(Utils.NT_FOLDER) || getCurrentNode().isNodeType(Utils.NT_UNSTRUCTURED))
           uiDocumentWithTree.updatePageListData();
         uiDocumentWorkspace.setRenderedChild(UIDocumentContainer.class) ;
       }
@@ -538,12 +538,12 @@ public class UIJCRExplorer extends UIContainer {
   }
 
   public boolean nodeIsLocked(Node node) throws Exception {
-    if(!node.isLocked()) return false;        
+    if(!node.isLocked()) return false;
     String lockToken = LockUtil.getLockTokenOfUser(node);
     if(lockToken != null) {
       node.getSession().addLockToken(LockUtil.getLockToken(node));
       return false;
-    }                
+    }
     return true;
   }
 
@@ -558,10 +558,10 @@ public class UIJCRExplorer extends UIContainer {
       }
     }
   }
-  
+
   public boolean hasAddPermission() {
     try {
-      ((ExtendedNode)getCurrentNode()).checkPermission(PermissionType.ADD_NODE) ;      
+      ((ExtendedNode)getCurrentNode()).checkPermission(PermissionType.ADD_NODE) ;
     } catch(Exception e) {
       return false ;
     }
@@ -595,7 +595,7 @@ public class UIJCRExplorer extends UIContainer {
     return true ;
   }
 
-  public Node getViewNode(String nodeType) throws Exception { 
+  public Node getViewNode(String nodeType) throws Exception {
     try {
       Item primaryItem = getCurrentNode().getPrimaryItem() ;
       if(primaryItem == null || !primaryItem.isNode()) return getCurrentNode() ;
@@ -604,10 +604,10 @@ public class UIJCRExplorer extends UIContainer {
         if(primaryNode.isNodeType(nodeType)) return primaryNode ;
       }
     } catch(ItemNotFoundException item) {
-      LOG.error("Primary item not found for " + getCurrentNode().getPath());      
+      LOG.error("Primary item not found for " + getCurrentNode().getPath());
       return getCurrentNode() ;
-    } catch(Exception e) { 
-      LOG.error("The node cannot be seen", e);      
+    } catch(Exception e) {
+      LOG.error("The node cannot be seen", e);
       return getCurrentNode() ;
     }
     return getCurrentNode() ;
@@ -622,7 +622,7 @@ public class UIJCRExplorer extends UIContainer {
           list.add(node.getProperty(name).getString());
         }
       } catch(Exception e) {
-        LOG.error("The property '" + name + "' cannot be found ", e);        
+        LOG.error("The property '" + name + "' cannot be found ", e);
         list.add("") ;
       }
       return list;
@@ -642,19 +642,19 @@ public class UIJCRExplorer extends UIContainer {
     UIWorkingArea uiWorkingArea = getChild(UIWorkingArea.class) ;
     UIActionBar uiActionBar = findFirstComponentOfType(UIActionBar.class) ;
     UISideBar uiSideBar = findFirstComponentOfType(UISideBar.class);
-    
+
     uiAddressBar.getUIStringInput(UIAddressBar.FIELD_ADDRESS).setValue(
         Text.unescapeIllegalJcrChars(filterPath(currentPath_))) ;
-    event.getRequestContext().addUIComponentToUpdateByAjax(getChild(UIControl.class)) ;    
+    event.getRequestContext().addUIComponentToUpdateByAjax(getChild(UIControl.class)) ;
     if(preferences_.isShowSideBar()) {
       findFirstComponentOfType(UITreeExplorer.class).buildTree();
     }
     UIDocumentWorkspace uiDocWorkspace = uiWorkingArea.getChild(UIDocumentWorkspace.class);
     if(uiDocWorkspace.isRendered()) {
-      if (uiDocWorkspace.getChild(UIDocumentFormController.class) == null || 
+      if (uiDocWorkspace.getChild(UIDocumentFormController.class) == null ||
           !uiDocWorkspace.getChild(UIDocumentFormController.class).isRendered()) {
         UIDocumentContainer uiDocumentContainer = uiDocWorkspace.getChild(UIDocumentContainer.class) ;
-        UIDocumentWithTree uiDocumentWithTree = uiDocumentContainer.getChildById("UIDocumentWithTree");      
+        UIDocumentWithTree uiDocumentWithTree = uiDocumentContainer.getChildById("UIDocumentWithTree");
         if(isShowViewFile() &&  !(isShowDocumentViewForFile())) {
           uiDocumentWithTree.updatePageListData();
           uiDocumentContainer.setRenderedChild("UIDocumentWithTree");
@@ -663,28 +663,28 @@ public class UIJCRExplorer extends UIContainer {
           uiDocumentInfo.updatePageListData();
           uiDocumentContainer.setRenderedChild("UIDocumentInfo") ;
         }
-        if(getCurrentNode().isNodeType(Utils.NT_FOLDER) || getCurrentNode().isNodeType(Utils.NT_UNSTRUCTURED)) 
+        if(getCurrentNode().isNodeType(Utils.NT_FOLDER) || getCurrentNode().isNodeType(Utils.NT_UNSTRUCTURED))
           uiDocumentWithTree.updatePageListData();
         uiDocWorkspace.setRenderedChild(UIDocumentContainer.class) ;
         }
     }
     uiActionBar.setRendered(uiPortlet.isShowActionBar());
     uiAddressBar.setRendered(uiPortlet.isShowTopBar());
-    uiSideBar.setRendered(this.getPreference().isShowSideBar());    
+    uiSideBar.setRendered(this.getPreference().isShowSideBar());
     event.getRequestContext().addUIComponentToUpdateByAjax(uiWorkingArea);
     if (uiSideBar.isRendered()) event.getRequestContext().addUIComponentToUpdateByAjax(uiSideBar);
     event.getRequestContext().addUIComponentToUpdateByAjax(getChild(UIControl.class)) ;
-    
+
     if(!isHidePopup_) {
       UIPopupContainer popupAction = getChild(UIPopupContainer.class) ;
       if(popupAction.isRendered()) {
         popupAction.deActivate();
         event.getRequestContext().addUIComponentToUpdateByAjax(popupAction) ;
       }
-    }    
+    }
     isHidePopup_ = false ;
   }
-  
+
   public boolean isShowViewFile() throws Exception {
     TemplateService templateService = getApplicationComponent(TemplateService.class) ;
     NodeType nodeType = getCurrentNode().getPrimaryNodeType() ;
@@ -709,12 +709,12 @@ public class UIJCRExplorer extends UIContainer {
   }
 
   public void record(String str, String ws) {
-    //Uncomment this line if you have problem with the history 
+    //Uncomment this line if you have problem with the history
     //LOG.info("record(" + str + ", " + ws + ")", new Exception());
     nodesHistory_.add(str);
     wsHistory_.add(ws);
     addressPath_.put(str, new HistoryEntry(ws, str));
-    
+
     UIWorkingArea uiWorkingArea = getChild(UIWorkingArea.class);
     UIDocumentWorkspace uiDocWorkspace = uiWorkingArea.getChild(UIDocumentWorkspace.class);
     UIDocumentContainer uiDocumentContainer = uiDocWorkspace.getChild(UIDocumentContainer.class) ;
@@ -726,11 +726,11 @@ public class UIJCRExplorer extends UIContainer {
     addressPath_.clear();
     currentPath_ = currentPath;
   }
-  
+
   public String rewind() { return nodesHistory_.removeLast() ; }
 
   public String previousWsName() { return wsHistory_.removeLast(); }
-  
+
   @Deprecated
   public void setSelectNode(String uri, Session session) throws Exception {
     setSelectNode(session.getWorkspace().getName(), uri);
@@ -741,21 +741,21 @@ public class UIJCRExplorer extends UIContainer {
     setSelectNode(uri);
     setLastWorkspace(lastWorkspaceName);
   }
-  
+
   public void setBackSelectNode(String workspaceName, String uri) throws Exception {
     String lastWorkspaceName = setTargetWorkspaceProperties(workspaceName);
     setSelectNode(uri, true);
     setLastWorkspace(lastWorkspaceName);
   }
-  
+
   public void setSelectRootNode() throws Exception {
     setSelectNode(getCurrentDriveWorkspace(), getRootPath());
   }
-  
+
   public void setSelectNode(String uri) throws Exception {
     setSelectNode(uri, false);
   }
-  
+
   private boolean checkTargetForSymlink(String uri) throws Exception {
     Node testedNode;
     NodeFinder nodeFinder = getApplicationComponent(NodeFinder.class);
@@ -766,20 +766,20 @@ public class UIJCRExplorer extends UIContainer {
         UIApplication uiApp = this.getAncestorOfType(UIApplication.class);
         uiApp.addMessage(new ApplicationMessage("UIJCRExplorer.msg.target-path-not-found",
             null,
-            ApplicationMessage.WARNING));        
+            ApplicationMessage.WARNING));
         return false;
     }
     if (testedNode.isNodeType(Utils.EXO_RESTORELOCATION)) {
       UIApplication uiApp = this.getAncestorOfType(UIApplication.class);
       uiApp.addMessage(new ApplicationMessage("UIJCRExplorer.msg.target-path-not-found",
           null,
-          ApplicationMessage.WARNING));        
+          ApplicationMessage.WARNING));
       return false;
     }
     return true;
-  }  
-  
-  public void setSelectNode(String uri, boolean back) throws Exception {  
+  }
+
+  public void setSelectNode(String uri, boolean back) throws Exception {
     Node currentNode = null;
     if(uri == null || uri.length() == 0) uri = "/";
     String previousPath = currentPath_;
@@ -791,7 +791,7 @@ public class UIJCRExplorer extends UIContainer {
         LOG.error("Cannot find the node at " + uri, e);
         setCurrentPath(LinkUtils.getParentPath(currentPath_));
         currentNode = getCurrentNode();
-      }   
+      }
     } else {
       currentNode = getCurrentNode();
     }
@@ -802,7 +802,7 @@ public class UIJCRExplorer extends UIContainer {
       record(previousPath, lastWorkspaceName_);
     }
   }
-  
+
   public List<Node> getChildrenList(String path, boolean isReferences) throws Exception {
     RepositoryService repositoryService = getApplicationComponent(RepositoryService.class) ;
     TemplateService templateService = getApplicationComponent(TemplateService.class) ;
@@ -817,10 +817,10 @@ public class UIJCRExplorer extends UIContainer {
         isFolder = true ;
       }
     }
-    if(!preferences_.isJcrEnable() && 
+    if(!preferences_.isJcrEnable() &&
         templateService.isManagedNodeType(nodeType.getName()) && !isFolder) {
       return childrenList ;
-    } 
+    }
     if(isReferenceableNode(getCurrentNode()) && isReferences) {
       ManageableRepository manageableRepository = repositoryService.getRepository(getRepositoryName()) ;
       SessionProvider sessionProvider = SessionProviderFactory.createSystemProvider();
@@ -832,7 +832,7 @@ public class UIJCRExplorer extends UIContainer {
           while(categoriesIter.hasNext()) {
             Property exoCategoryProp = categoriesIter.nextProperty();
             Node refNode = exoCategoryProp.getParent() ;
-            childrenList.add(refNode) ;            
+            childrenList.add(refNode) ;
           }
         } catch(Exception e) {
           // do nothing
@@ -840,20 +840,20 @@ public class UIJCRExplorer extends UIContainer {
       }
     }
     if(!preferences_.isShowNonDocumentType()) {
-      List<String> documentTypes = templateService.getDocumentTemplates() ;      
+      List<String> documentTypes = templateService.getDocumentTemplates() ;
       while(childrenIterator.hasNext()){
         Node child = (Node)childrenIterator.next() ;
         if(PermissionUtil.canRead(child)) {
           NodeType type = child.getPrimaryNodeType() ;
           String typeName = type.getName();
           String primaryTypeName = typeName;
-          
-          if(typeName.equals(Utils.EXO_SYMLINK)) { 
+
+          if(typeName.equals(Utils.EXO_SYMLINK)) {
             primaryTypeName = child.getProperty(Utils.EXO_PRIMARYTYPE).getString();
           }
           if(Utils.NT_UNSTRUCTURED.equals(primaryTypeName) || Utils.NT_FOLDER.equals(primaryTypeName)) {
             childrenList.add(child) ;
-          } else if(typeName.equals(Utils.EXO_SYMLINK) && 
+          } else if(typeName.equals(Utils.EXO_SYMLINK) &&
               documentTypes.contains(primaryTypeName)) {
               childrenList.add(child);
           } else if(documentTypes.contains(typeName)) {
@@ -881,9 +881,9 @@ public class UIJCRExplorer extends UIContainer {
     sort(childList);
     return childList ;
   }
-  
+
   private void sort(List<Node> childrenList) {
-    if (Preference.SORT_BY_NODENAME.equals(preferences_.getSortType())) {      
+    if (Preference.SORT_BY_NODENAME.equals(preferences_.getSortType())) {
       Collections.sort(childrenList, new NodeNameComparator(preferences_.getOrder())) ;
     } else if (Preference.SORT_BY_NODETYPE.equals(preferences_.getSortType())) {
       Collections.sort(childrenList, new TypeNodeComparator(preferences_.getOrder())) ;
@@ -892,16 +892,16 @@ public class UIJCRExplorer extends UIContainer {
     } else if (Preference.SORT_BY_AUDITING.equals(preferences_.getSortType())) {
       Collections.sort(childrenList, new StringComparator(preferences_.getOrder(), Preference.SORT_BY_AUDITING));
     } else if (Preference.SORT_BY_CREATED_DATE.equals(preferences_.getSortType())) {
-        Collections.sort(childrenList, new PropertyValueComparator(Utils.EXO_CREATED_DATE, preferences_.getOrder())); 
+        Collections.sort(childrenList, new PropertyValueComparator(Utils.EXO_CREATED_DATE, preferences_.getOrder()));
     } else if (Preference.SORT_BY_MODIFIED_DATE.equals(preferences_.getSortType())) {
-        Collections.sort(childrenList, new PropertyValueComparator(Utils.EXO_MODIFIED_DATE, preferences_.getOrder()));  
+        Collections.sort(childrenList, new PropertyValueComparator(Utils.EXO_MODIFIED_DATE, preferences_.getOrder()));
     } else {
       Collections.sort(childrenList, new PropertyValueComparator(preferences_.getSortType(), preferences_.getOrder()));
     }
   }
-  
+
   public boolean isReferenceableNode(Node node) throws Exception {
-    return node.isNodeType(Utils.MIX_REFERENCEABLE) ;    
+    return node.isNodeType(Utils.MIX_REFERENCEABLE) ;
   }
 
   public boolean isPreferenceNode(Node node) {
@@ -915,11 +915,11 @@ public class UIJCRExplorer extends UIContainer {
   public Node getNodeByPath(String nodePath, Session session) throws Exception {
     return getNodeByPath(nodePath, session, true);
   }
-  
+
   public Node getNodeByPath(String nodePath, Session session, boolean giveTarget) throws Exception {
     return getNodeByPath(nodePath.trim(), session, giveTarget, true);
   }
-  
+
   private Node getNodeByPath(String nodePath, Session session, boolean giveTarget, boolean firstTime) throws Exception {
     NodeFinder nodeFinder = getApplicationComponent(NodeFinder.class);
     Node node;
@@ -933,7 +933,7 @@ public class UIJCRExplorer extends UIContainer {
       try {
         node = (Node) nodeFinder.getItem(session, nodePath, !giveTarget);
         return node;
-      } catch (Exception e3) {        
+      } catch (Exception e3) {
       }
       if (firstTime) {
         UIApplication uiApp = getAncestorOfType(UIApplication.class) ;
@@ -946,20 +946,21 @@ public class UIJCRExplorer extends UIContainer {
         } catch (Exception e2) {
           // do nothing
         }
-        LOG.warn("The node cannot be found at " + nodePath + (workspace == null ? "" : " into the workspace " + workspace));        
-      }      
+        LOG.warn("The node cannot be found at " + nodePath
+            + (workspace == null ? "" : " into the workspace " + workspace));
+      }
       throw e;
     }
     if (!firstTime) {
-      refreshExplorer(node);      
+      refreshExplorer(node);
     }
     return node;
   }
-  
+
   public void setTagPath(String tagPath) { tagPath_ = tagPath ; }
-  
+
   public String getTagPath() { return tagPath_ ; }
-  
+
   public List<Node> getDocumentByTag()throws Exception {
     NewFolksonomyService newFolksonomyService = getApplicationComponent(NewFolksonomyService.class) ;
     TemplateService templateService = getApplicationComponent(TemplateService.class) ;
@@ -969,8 +970,8 @@ public class UIJCRExplorer extends UIContainer {
     SessionProvider sessionProvider = (ctx.getRemoteUser() == null) ?
                                       SessionProviderFactory.createAnonimProvider() :
                                       SessionProviderFactory.createSessionProvider();
-    for(Node node : newFolksonomyService.getAllDocumentsByTag(tagPath_, getRepositoryName(), 
-                                                              getRepository().getConfiguration().getDefaultWorkspaceName(), 
+    for(Node node : newFolksonomyService.getAllDocumentsByTag(tagPath_, getRepositoryName(),
+                                                              getRepository().getConfiguration().getDefaultWorkspaceName(),
                                                               sessionProvider)) {
       if(documentsType.contains(node.getPrimaryNodeType().getName()) &&
          PermissionUtil.canRead(node)) {
@@ -979,9 +980,9 @@ public class UIJCRExplorer extends UIContainer {
     }
     return documentsOnTag ;
   }
-      
+
   public void setIsViewTag(boolean isViewTag) { isViewTag_ = isViewTag ; }
-  
+
   public boolean isViewTag() { return isViewTag_ ; }
 
   public LinkedList<ClipboardCommand> getAllClipBoard() { return clipboards_ ;}
@@ -994,25 +995,25 @@ public class UIJCRExplorer extends UIContainer {
       return true;
     } catch(AccessControlException e) {
       return false;
-    }    
+    }
   }
-  
+
   public static Cookie getCookieByCookieName(String cookieName, Cookie[] cookies) {
     String userId = Util.getPortalRequestContext().getRemoteUser();
-    cookieName += userId; 
-    for(int loopIndex = 0; loopIndex < cookies.length; loopIndex++) { 
+    cookieName += userId;
+    for(int loopIndex = 0; loopIndex < cookies.length; loopIndex++) {
       Cookie cookie1 = cookies[loopIndex];
-      if (cookie1.getName().equals(cookieName)) return cookie1; 
+      if (cookie1.getName().equals(cookieName)) return cookie1;
     }
     return null;
   }
-  
+
   public Preference getPreference() {
-  	if (preferencesSaved_) {
+    if (preferencesSaved_) {
       if (preferences_ != null && !this.getAncestorOfType(UIJCRExplorerPortlet.class).isShowSideBar())
-      	preferences_.setShowSideBar(false);
-  		return preferences_;
-  	}
+        preferences_.setShowSideBar(false);
+      return preferences_;
+    }
     HttpServletRequest request = Util.getPortalRequestContext().getRequest();
     Cookie[] cookies = request.getCookies();
     Cookie getCookieForUser;
@@ -1031,7 +1032,7 @@ public class UIJCRExplorer extends UIContainer {
         preferences_.setShowSideBar(false);
     }
     if (preferences_ != null && !this.getAncestorOfType(UIJCRExplorerPortlet.class).isShowSideBar())
-    	preferences_.setShowSideBar(false);
+      preferences_.setShowSideBar(false);
     getCookieForUser = getCookieByCookieName(Preference.SHOW_NON_DOCUMENTTYPE, cookies);
     if ((getCookieForUser != null) && (preferences_ != null)) {
       if (getCookieForUser.getValue().equals("true"))
@@ -1052,7 +1053,7 @@ public class UIJCRExplorer extends UIContainer {
         preferences_.setShowHiddenNode(true);
       else
         preferences_.setShowHiddenNode(false);
-    }    
+    }
     getCookieForUser = getCookieByCookieName(Preference.ENABLE_DRAG_AND_DROP, cookies);
     if ((getCookieForUser != null) && (preferences_ != null)) {
       if (getCookieForUser.getValue().equals("true"))
@@ -1061,34 +1062,35 @@ public class UIJCRExplorer extends UIContainer {
         preferences_.setEnableDragAndDrop(false);
     }
     getCookieForUser = getCookieByCookieName(Preference.PREFERENCE_QUERY_TYPE, cookies);
-    if ((getCookieForUser != null) && (preferences_ != null)) preferences_.setQueryType(getCookieForUser.getValue());    
+    if ((getCookieForUser != null) && (preferences_ != null)) preferences_.setQueryType(getCookieForUser.getValue());
     getCookieForUser = getCookieByCookieName(Preference.PREFERENCE_SORT_BY, cookies);
-    if ((getCookieForUser != null) && (preferences_ != null)) preferences_.setSortType(getCookieForUser.getValue());    
+    if ((getCookieForUser != null) && (preferences_ != null)) preferences_.setSortType(getCookieForUser.getValue());
     getCookieForUser = getCookieByCookieName(Preference.PREFERENCE_ORDER_BY, cookies);
-    if ((getCookieForUser != null) && (preferences_ != null)) preferences_.setOrder(getCookieForUser.getValue());    
+    if ((getCookieForUser != null) && (preferences_ != null)) preferences_.setOrder(getCookieForUser.getValue());
     getCookieForUser = getCookieByCookieName(Preference.NODES_PER_PAGE, cookies);
-    if ((getCookieForUser != null) && (preferences_ != null)) preferences_.setNodesPerPage(Integer.parseInt(getCookieForUser.getValue()));
-    
-    return preferences_; 
-  }  
+    if ((getCookieForUser != null) && (preferences_ != null))
+      preferences_.setNodesPerPage(Integer.parseInt(getCookieForUser.getValue()));
+
+    return preferences_;
+  }
   public void setPreferences(Preference preference) {this.preferences_ = preference; }
-  
+
   public void closeEditingFile() throws Exception {
 
     UIPopupContainer uiPopupContainer = this.getChild(UIPopupContainer.class);
     UIPopupWindow uiPopup = uiPopupContainer.getChild(UIPopupWindow.class);
-    
+
     UIWorkingArea uiWorkingArea = this.getChild(UIWorkingArea.class);
     UIDocumentWorkspace uiDocumentWorkspace = uiWorkingArea.getChild(UIDocumentWorkspace.class);
-    
-    //check if edit with popup    
+
+    //check if edit with popup
     UIComponent uiComp = uiPopup.getUIComponent();
     if (uiComp instanceof UIDocumentFormController && ((UIDocumentFormController)uiComp).isRendered()) {
       uiPopupContainer.deActivate();
       this.refreshExplorer();
       return;
     }
-    
+
     //check if edit without popup
     if (uiDocumentWorkspace.isRendered()) {
       UIDocumentFormController controller = uiDocumentWorkspace.getChild(UIDocumentFormController.class);
@@ -1099,7 +1101,7 @@ public class UIJCRExplorer extends UIContainer {
       }
     }
   }
-  
+
   @Deprecated
   public String getPreferencesPath() {
     String prefPath = driveData_.getHomePath() ;
@@ -1108,16 +1110,16 @@ public class UIJCRExplorer extends UIContainer {
   }
 
   @Deprecated
-  public String getPreferencesWorkspace() {       
+  public String getPreferencesWorkspace() {
     String workspaceName = driveData_.getWorkspace() ;
     if(workspaceName == null || workspaceName.length() == 0) return "" ;
     return workspaceName ;
   }
-  
+
   public static class HistoryEntry {
     private final String workspace;
     private final String path;
-    
+
     private HistoryEntry(String workspace, String path) {
       this.workspace = workspace;
       this.path = path;
@@ -1129,7 +1131,7 @@ public class UIJCRExplorer extends UIContainer {
 
     public String getPath() {
       return path;
-    }    
+    }
   }
 
 }

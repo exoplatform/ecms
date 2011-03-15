@@ -27,7 +27,7 @@ import org.exoplatform.services.jcr.core.ManageableRepository;
  * Created by The eXo Platform SAS
  * @author : Hoa.Pham
  *          hoa.pham@exoplatform.com
- * Jun 23, 2008  
+ * Jun 23, 2008
  */
 public class NodeIdentifier {
 
@@ -57,7 +57,7 @@ public class NodeIdentifier {
     }
     return null;
   }
-  
+
   public final static NodeIdentifier make(final Node node) throws RepositoryException {
     Session session = node.getSession();
     String repository = ((ManageableRepository)session.getRepository()).getConfiguration().getName();
@@ -65,12 +65,12 @@ public class NodeIdentifier {
     String uuid = node.getUUID();
     return new NodeIdentifier(repository, workspace, uuid);
   }
-  
+
   public final static String serialize(final NodeIdentifier identifier) {
     StringBuffer buffer = new StringBuffer();
     buffer.append(identifier.getRepository()).append("::")
     .append(identifier.getWorkspace()).append("::")
     .append(identifier.getUUID());
     return buffer.toString();
-  }  
+  }
 }

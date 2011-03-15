@@ -28,7 +28,7 @@ import org.exoplatform.services.jcr.core.ExtendedNode;
  * @author benjaminmestrallet
  */
 public class Utils {
-  
+
   public static Node makePath(Node rootNode, String path, String nodetype)
   throws PathNotFoundException, RepositoryException {
     return makePath(rootNode, path, nodetype, null);
@@ -36,7 +36,7 @@ public class Utils {
 
   @SuppressWarnings("unchecked")
   public static Node makePath(Node rootNode, String path, String nodetype, Map permissions)
-  throws PathNotFoundException, RepositoryException {    
+  throws PathNotFoundException, RepositoryException {
     String[] tokens = path.split("/") ;
     Node node = rootNode;
     for (int i = 0; i < tokens.length; i++) {
@@ -49,10 +49,10 @@ public class Utils {
           if (node.canAddMixin("exo:privilegeable")){
             node.addMixin("exo:privilegeable");
           }
-          if(permissions != null){          
+          if(permissions != null){
             ((ExtendedNode)node).setPermissions(permissions);
           }
-        }      
+        }
       }
     }
     return node;

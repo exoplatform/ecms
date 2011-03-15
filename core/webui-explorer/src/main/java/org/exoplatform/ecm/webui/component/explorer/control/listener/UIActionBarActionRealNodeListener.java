@@ -28,10 +28,10 @@ import org.exoplatform.webui.event.Event;
  * Created by The eXo Platform SAS
  * Author : eXoPlatform
  *          nicolas.filotto@exoplatform.com
- * 6 mai 2009  
+ * 6 mai 2009
  */
 public abstract class UIActionBarActionRealNodeListener<T extends UIComponent> extends UIActionBarActionListener<T> {
-  
+
   /**
    * {@inheritDoc}
    */

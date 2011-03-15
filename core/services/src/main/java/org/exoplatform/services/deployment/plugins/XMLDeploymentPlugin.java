@@ -47,36 +47,41 @@ public class XMLDeploymentPlugin extends DeploymentPlugin {
 
   /** The init params. */
   private InitParams initParams;
-  
+
   /** The configuration manager. */
   private ConfigurationManager configurationManager;
-  
+
   /** The repository service. */
   private RepositoryService repositoryService;
-  
+
   /** The log. */
   private Log log = ExoLogger.getLogger(this.getClass());
 
   /**
    * Instantiates a new xML deployment plugin.
-   * 
+   *
    * @param initParams the init params
    * @param configurationManager the configuration manager
    * @param repositoryService the repository service
    * @param publicationService the publication service
    */
-  public XMLDeploymentPlugin(InitParams initParams, ConfigurationManager configurationManager, RepositoryService repositoryService) {
+  public XMLDeploymentPlugin(InitParams initParams,
+                             ConfigurationManager configurationManager,
+                             RepositoryService repositoryService) {
     this.initParams = initParams;
     this.configurationManager = configurationManager;
     this.repositoryService = repositoryService;
   }
 
-  /* (non-Javadoc)
-   * @see org.exoplatform.services.deployment.DeploymentPlugin#deploy(org.exoplatform.services.jcr.ext.common.SessionProvider)
+  /*
+   * (non-Javadoc)
+   * @see
+   * org.exoplatform.services.deployment.DeploymentPlugin#deploy(org.exoplatform
+   * .services.jcr.ext.common.SessionProvider)
    */
   @SuppressWarnings("unchecked")
   public void deploy(SessionProvider sessionProvider) throws Exception {
-    Iterator iterator = initParams.getObjectParamIterator();    
+    Iterator iterator = initParams.getObjectParamIterator();
     while(iterator.hasNext()) {
       ObjectParameter objectParameter = (ObjectParameter)iterator.next();
       DeploymentDescriptor deploymentDescriptor = (DeploymentDescriptor)objectParameter.getObject();
@@ -85,37 +90,46 @@ public class XMLDeploymentPlugin extends DeploymentPlugin {
       Boolean cleanupPublication = deploymentDescriptor.getCleanupPublication();
 
       InputStream inputStream = configurationManager.getInputStream(sourcePath);
-      ManageableRepository repository = repositoryService.getRepository(deploymentDescriptor.getTarget().getRepository());
-      Session session = sessionProvider.getSession(deploymentDescriptor.getTarget().getWorkspace(), repository);
-      session.importXML(deploymentDescriptor.getTarget().getNodePath(), inputStream, ImportUUIDBehavior.IMPORT_UUID_CREATE_NEW );
-      
+      ManageableRepository repository = repositoryService.getRepository(deploymentDescriptor.getTarget()
+                                                                                            .getRepository());
+      Session session = sessionProvider.getSession(deploymentDescriptor.getTarget().getWorkspace(),
+                                                   repository);
+      session.importXML(deploymentDescriptor.getTarget().getNodePath(),
+                        inputStream,
+                        ImportUUIDBehavior.IMPORT_UUID_CREATE_NEW);
+
       if (cleanupPublication) {
-    	  /**
-    	   * This code allows to cleanup the publication lifecycle in the target folder after importing the data.
-    	   * By using this, the publication live revision property will be re-initialized and the content will be set as published directly.
-    	   * Thus, the content will be visible in front side.
-    	   */
-    	  	QueryManager manager = session.getWorkspace().getQueryManager();
-    	  	String statement = "select * from nt:base where jcr:path LIKE '"+deploymentDescriptor.getTarget().getNodePath()+"/%'";
-    		Query query = manager.createQuery(statement.toString(), Query.SQL);
-  		    NodeIterator iter = query.execute().getNodes();
-  		    while (iter.hasNext()) {
-  		    	Node node = iter.nextNode();
-  		    	if (node.hasProperty("publication:liveRevision") && node.hasProperty("publication:currentState")) {
-  	  		    	log.info("\""+node.getName()+"\" publication lifecycle has been cleaned up");
-  		    		node.setProperty("publication:liveRevision", "");
-  		    		node.setProperty("publication:currentState", "published");
-  		    	}
-  		    	
-  		    }
+        /**
+         * This code allows to cleanup the publication lifecycle in the target
+         * folder after importing the data. By using this, the publication live
+         * revision property will be re-initialized and the content will be set
+         * as published directly. Thus, the content will be visible in front
+         * side.
+         */
+        QueryManager manager = session.getWorkspace().getQueryManager();
+        String statement = "select * from nt:base where jcr:path LIKE '"
+            + deploymentDescriptor.getTarget().getNodePath() + "/%'";
+        Query query = manager.createQuery(statement.toString(), Query.SQL);
+        NodeIterator iter = query.execute().getNodes();
+        while (iter.hasNext()) {
+          Node node = iter.nextNode();
+          if (node.hasProperty("publication:liveRevision")
+              && node.hasProperty("publication:currentState")) {
+            log.info("\"" + node.getName() + "\" publication lifecycle has been cleaned up");
+            node.setProperty("publication:liveRevision", "");
+            node.setProperty("publication:currentState", "published");
+          }
+
+        }
 
       }
-      
+
       session.save();
       session.logout();
-      if(log.isInfoEnabled()) {
-        log.info(deploymentDescriptor.getSourcePath() + " is deployed succesfully into "+deploymentDescriptor.getTarget().getNodePath());
+      if (log.isInfoEnabled()) {
+        log.info(deploymentDescriptor.getSourcePath() + " is deployed succesfully into "
+            + deploymentDescriptor.getTarget().getNodePath());
       }
-    }   
+    }
   }
 }

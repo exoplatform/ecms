@@ -46,7 +46,7 @@ public class DocumentLinkHandler extends FCKFileHandler {
 
   /**
    * Instantiates a new document link handler.
-   * 
+   *
    * @param container the container
    */
   public DocumentLinkHandler() {
@@ -55,7 +55,7 @@ public class DocumentLinkHandler extends FCKFileHandler {
 
   /**
    * Sets the base uri.
-   * 
+   *
    * @param baseURI the new base uri
    */
   public void setBaseURI(String baseURI) {
@@ -84,20 +84,20 @@ public class DocumentLinkHandler extends FCKFileHandler {
       if("public".equals(accessMode)) {
         return builder.append(baseURI).append("/jcr/").append(repository).append("/")
         .append(workspace).append(nodePath).toString();
-      }     
+      }
       return builder.append(baseURI).append("/private/jcr/").append(repository).append("/")
       .append(workspace).append(nodePath).toString();
-    }    
+    }
     WCMConfigurationService configurationService = (WCMConfigurationService) ExoContainerContext
     .getCurrentContainer().getComponentInstanceOfType(WCMConfigurationService.class);
-    String parameterizedPageViewerURI = configurationService.getRuntimeContextParam(WCMConfigurationService.PARAMETERIZED_PAGE_URI);    
+    String parameterizedPageViewerURI = configurationService.getRuntimeContextParam(WCMConfigurationService.PARAMETERIZED_PAGE_URI);
     return baseURI.replace("/rest", "") + "/" + accessMode + "/" + currentPortal + parameterizedPageViewerURI + "/"
     + repository + "/" + workspace + nodePath;
   }
 
   /**
    * Sets the current portal.
-   * 
+   *
    * @param currentPortal the new current portal
    */
   public void setCurrentPortal(String currentPortal) {
@@ -106,7 +106,7 @@ public class DocumentLinkHandler extends FCKFileHandler {
 
   /**
    * Gets the current portal.
-   * 
+   *
    * @return the current portal
    */
   public String getCurrentPortal() {

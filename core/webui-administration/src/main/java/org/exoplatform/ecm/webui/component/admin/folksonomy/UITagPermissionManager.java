@@ -29,19 +29,19 @@ import org.exoplatform.webui.organization.account.UIUserSelector;
  * Created by The eXo Platform SARL
  * Author : Nguyen Anh Vu
  *          anhvurz90@gmail.com
- * Dec 11, 2009  
+ * Dec 11, 2009
  * 4:55:20 PM
  */
-@ComponentConfig( 
+@ComponentConfig(
     lifecycle = UIContainerLifecycle.class
 )
 public class UITagPermissionManager extends UIContainer {
-	
-	public UITagPermissionManager() throws Exception {
-		addChild(UITagPermissionInfo.class, null, null);
-		addChild(UITagPermissionForm.class, null, null);
-	}
-	
+
+  public UITagPermissionManager() throws Exception {
+    addChild(UITagPermissionInfo.class, null, null);
+    addChild(UITagPermissionForm.class, null, null);
+  }
+
   public void initPopupPermission(UIComponent uiSelector) throws Exception {
     UIPopupWindow uiPopup = getChildById(UITagPermissionForm.POPUP_SELECT);
     if(uiPopup == null) {
@@ -54,7 +54,7 @@ public class UITagPermissionManager extends UIContainer {
     uiPopup.setShow(true);
     uiPopup.setResizable(true);
   }
-  
+
   static  public class AddUserActionListener extends EventListener<UIUserSelector> {
     public void execute(Event<UIUserSelector> event) throws Exception {
       UIUserSelector uiForm = event.getSource();
@@ -65,7 +65,7 @@ public class UITagPermissionManager extends UIContainer {
       uiPopup.setUIComponent(null);
       uiPopup.setShow(false);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiParent);
-    }  
+    }
   }
-	
+
 }

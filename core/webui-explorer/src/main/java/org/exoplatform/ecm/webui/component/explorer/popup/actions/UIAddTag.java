@@ -23,21 +23,21 @@ import org.exoplatform.webui.core.UIComponent;
  * Created by The eXo Platform SARL
  * Author : Nguyen Anh Vu
  *          anhvurz90@gmail.com
- * Nov 27, 2009  
+ * Nov 27, 2009
  * 4:08:24 PM
  */
 @ComponentConfig(
     template = "app:/groovy/webui/component/explorer/popup/action/UIAddTag.gtmpl"
-		)
+    )
 public class UIAddTag extends UIComponent {
 
-	private static String[] ACTIONS = {"AddTag"};
-	
-	public UIAddTag() {
-		super();
-	}
-	
-	public String[] getActions() {
-		return ACTIONS;
-	}
+  private static String[] ACTIONS = {"AddTag"};
+
+  public UIAddTag() {
+    super();
+  }
+
+  public String[] getActions() {
+    return ACTIONS;
+  }
 }

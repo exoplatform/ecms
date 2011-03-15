@@ -21,24 +21,24 @@ package org.exoplatform.services.wcm.newsletter;
  * ngoc.tran@exoplatform.com May 27, 2009
  */
 public class NewsletterSubscriptionConfig {
-  
+
   /** The name. */
   private String name;
 
   /** The description. */
   private String description;
-  
+
   /** The title. */
   private String title;
-  
+
   /** The category name. */
   private String categoryName;
-  
+
   private String redactor;
 
   /**
    * Gets the category name.
-   * 
+   *
    * @return the category name
    */
   public String getCategoryName() {
@@ -47,7 +47,7 @@ public class NewsletterSubscriptionConfig {
 
   /**
    * Sets the category name.
-   * 
+   *
    * @param categoryName the new category name
    */
   public void setCategoryName(String categoryName) {
@@ -56,7 +56,7 @@ public class NewsletterSubscriptionConfig {
 
   /**
    * Gets the title.
-   * 
+   *
    * @return the title
    */
   public String getTitle() {
@@ -65,7 +65,7 @@ public class NewsletterSubscriptionConfig {
 
   /**
    * Sets the title.
-   * 
+   *
    * @param title the new title
    */
   public void setTitle(String title) {
@@ -74,7 +74,7 @@ public class NewsletterSubscriptionConfig {
 
   /**
    * Gets the name.
-   * 
+   *
    * @return the name
    */
   public String getName() {
@@ -83,7 +83,7 @@ public class NewsletterSubscriptionConfig {
 
   /**
    * Sets the name.
-   * 
+   *
    * @param name the new name
    */
   public void setName(String name) {
@@ -92,7 +92,7 @@ public class NewsletterSubscriptionConfig {
 
   /**
    * Gets the description.
-   * 
+   *
    * @return the description
    */
   public String getDescription() {
@@ -101,7 +101,7 @@ public class NewsletterSubscriptionConfig {
 
   /**
    * Sets the description.
-   * 
+   *
    * @param description the new description
    */
   public void setDescription(String description) {

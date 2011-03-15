@@ -38,9 +38,9 @@ import org.exoplatform.webui.form.validator.MandatoryValidator;
 
 /**
  * Created by The eXo Platform SAS
- * Author : Hoa Pham  
+ * Author : Hoa Pham
  *          hoa.pham@exoplatform.com
- * Oct 2, 2007  
+ * Oct 2, 2007
  */
 @ComponentConfig(
     lifecycle = UIFormLifecycle.class,
@@ -52,16 +52,16 @@ import org.exoplatform.webui.form.validator.MandatoryValidator;
 )
 public class UIContentNameSearch extends UIForm {
 
-  private static String KEYWORD = "keyword".intern();  
+  private static String KEYWORD = "keyword".intern();
   private static String SEARCH_LOCATION = "location".intern();
   private static final String ROOT_PATH_SQL_QUERY = "select * from nt:base where jcr:path like '%/$1' order by exo:dateCreated DESC,jcr:primaryType DESC";
   private static final String PATH_SQL_QUERY = "select * from nt:base where jcr:path like '$0/%/$1' or jcr:path like '$0/$1' order by exo:dateCreated DESC,jcr:primaryType DESC";
-  
+
   public UIContentNameSearch() throws Exception {
     addChild(new UIFormInputInfo(SEARCH_LOCATION,null,null));
     addChild(new UIFormStringInput(KEYWORD,null).addValidator(SearchValidator.class).addValidator(MandatoryValidator.class));
   }
-  
+
   public void setLocation(String location) {
     getUIFormInputInfo(SEARCH_LOCATION).setValue(location);
   }
@@ -71,8 +71,8 @@ public class UIContentNameSearch extends UIForm {
       UIContentNameSearch contentNameSearch = event.getSource();
       UIECMSearch uiECMSearch = contentNameSearch.getAncestorOfType(UIECMSearch.class);
       UISearchResult uiSearchResult = uiECMSearch.getChild(UISearchResult.class);
-      try {      
-        String keyword = contentNameSearch.getUIStringInput(KEYWORD).getValue();        
+      try {
+        String keyword = contentNameSearch.getUIStringInput(KEYWORD).getValue();
         String[] arrFilterChar = {"&", "$", "@", ":","]", "[", "*", "%", "!"};
         UIApplication application = contentNameSearch.getAncestorOfType(UIApplication.class);
         if (keyword == null || keyword.length() ==0) {
@@ -97,7 +97,7 @@ public class UIContentNameSearch extends UIForm {
           statement = StringUtils.replace(PATH_SQL_QUERY,"$0",currentNodePath);
           statement = StringUtils.replace(statement,"$1",keyword);
         }
-        QueryManager queryManager = explorer.getTargetSession().getWorkspace().getQueryManager();         
+        QueryManager queryManager = explorer.getTargetSession().getWorkspace().getQueryManager();
         Query query = queryManager.createQuery(statement,Query.SQL);
         long startTime = System.currentTimeMillis();
         QueryResult queryResult = query.execute();
@@ -114,13 +114,13 @@ public class UIContentNameSearch extends UIForm {
         uiSearchResult.updateGrid(true);
         uiECMSearch.setRenderedChild(UISearchResult.class);
       }
-    }  
+    }
   }
 
-  static public class CancelActionListener extends EventListener<UIContentNameSearch> {   
-    public void execute(Event<UIContentNameSearch> event) throws Exception {    
+  static public class CancelActionListener extends EventListener<UIContentNameSearch> {
+    public void execute(Event<UIContentNameSearch> event) throws Exception {
       event.getSource().getAncestorOfType(UIJCRExplorer.class).cancelAction();
-    }    
+    }
   }
 
 }

@@ -57,7 +57,7 @@ import org.exoplatform.webui.ext.manager.UIAbstractManagerComponent;
  * Created by The eXo Platform SAS
  * Author : eXoPlatform
  *          nicolas.filotto@exoplatform.com
- * 6 mai 2009  
+ * 6 mai 2009
  */
 @ComponentConfig(
      events = {
@@ -67,22 +67,22 @@ import org.exoplatform.webui.ext.manager.UIAbstractManagerComponent;
 
 public class AddSymLinkActionComponent extends UIAbstractManagerComponent {
 
-  private static final List<UIExtensionFilter> FILTERS = 
-  	Arrays.asList(new UIExtensionFilter[]{new CanAddNodeFilter(), 
-  																				new IsNotLockedFilter(), 
-  																				new IsCheckedOutFilter(), 
-  																				new IsNotSymlinkFilter(),
-  																				new IsNotTrashHomeNodeFilter(),
-  																				new IsNotInTrashFilter(),
-  																				new IsNotEditingDocumentFilter()});
-  
-	private static final Log LOG = ExoLogger.getLogger(AddSymLinkActionComponent.class);
-  
+  private static final List<UIExtensionFilter> FILTERS =
+    Arrays.asList(new UIExtensionFilter[]{new CanAddNodeFilter(),
+                                          new IsNotLockedFilter(),
+                                          new IsCheckedOutFilter(),
+                                          new IsNotSymlinkFilter(),
+                                          new IsNotTrashHomeNodeFilter(),
+                                          new IsNotInTrashFilter(),
+                                          new IsNotEditingDocumentFilter()});
+
+  private static final Log LOG = ExoLogger.getLogger(AddSymLinkActionComponent.class);
+
   @UIExtensionFilters
   public List<UIExtensionFilter> getFilters() {
     return FILTERS;
   }
-  
+
   public static class AddSymLinkActionListener extends UIActionBarActionListener<AddSymLinkActionComponent> {
     public void processEvent(Event<AddSymLinkActionComponent> event) throws Exception {
       UIJCRExplorer uiExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class);
@@ -94,7 +94,7 @@ public class AddSymLinkActionComponent extends UIAbstractManagerComponent {
       String symLinkName;
       try {
         if ((srcPath != null) && (srcPath.indexOf(";") > -1)) {
-          
+
           String[] nodePaths = srcPath.split(";");
           for (int i = 0; i < nodePaths.length; i++) {
             Matcher matcher = UIWorkingArea.FILE_EXPLORER_URL_SYNTAX.matcher(nodePaths[i]);
@@ -213,7 +213,7 @@ public class AddSymLinkActionComponent extends UIAbstractManagerComponent {
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
         return;
       }
-    } 
+    }
   }
 
   @Override

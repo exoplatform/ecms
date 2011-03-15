@@ -43,7 +43,7 @@ import org.exoplatform.webui.ext.manager.UIAbstractManagerComponent;
  * Created by The eXo Platform SAS
  * Author : eXoPlatform
  *          nicolas.filotto@exoplatform.com
- * 6 mai 2009  
+ * 6 mai 2009
  */
 @ComponentConfig(
      events = {
@@ -53,30 +53,30 @@ import org.exoplatform.webui.ext.manager.UIAbstractManagerComponent;
 
 public class AddLocalizationLinkActionComponent extends UIAbstractManagerComponent {
 
-  private static final List<UIExtensionFilter> FILTERS = 
-  	Arrays.asList(new UIExtensionFilter[]{new CanAddNodeFilter(), 
-  																				new IsNotLockedFilter(), 
-  																				new IsCheckedOutFilter(), 
-  																				new IsNotSymlinkFilter(),
-  																				new IsNotTrashHomeNodeFilter(),
-  																				new IsNotInTrashFilter()});
-  
-	private static final Log LOG = ExoLogger.getLogger(AddLocalizationLinkActionComponent.class);
-  
+  private static final List<UIExtensionFilter> FILTERS =
+    Arrays.asList(new UIExtensionFilter[]{new CanAddNodeFilter(),
+                                          new IsNotLockedFilter(),
+                                          new IsCheckedOutFilter(),
+                                          new IsNotSymlinkFilter(),
+                                          new IsNotTrashHomeNodeFilter(),
+                                          new IsNotInTrashFilter()});
+
+  private static final Log LOG = ExoLogger.getLogger(AddLocalizationLinkActionComponent.class);
+
   @UIExtensionFilters
   public List<UIExtensionFilter> getFilters() {
     return FILTERS;
   }
-  
+
   public static class AddLocalizationLinkActionListener extends UIActionBarActionListener<AddLocalizationLinkActionComponent> {
     public void processEvent(Event<AddLocalizationLinkActionComponent> event) throws Exception {
       UIJCRExplorer uiExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class);
-	  UIPopupContainer UIPopupContainer = uiExplorer.getChild(UIPopupContainer.class);
-	  UISymLinkManager uiSymLinkManager = event.getSource().createUIComponent(UISymLinkManager.class, null, null);
-	  uiSymLinkManager.enableLocalizationMode();
-	  UIPopupContainer.activate(uiSymLinkManager, 600, 155);
-	  event.getRequestContext().addUIComponentToUpdateByAjax(UIPopupContainer);
-    } 
+    UIPopupContainer UIPopupContainer = uiExplorer.getChild(UIPopupContainer.class);
+    UISymLinkManager uiSymLinkManager = event.getSource().createUIComponent(UISymLinkManager.class, null, null);
+    uiSymLinkManager.enableLocalizationMode();
+    UIPopupContainer.activate(uiSymLinkManager, 600, 155);
+    event.getRequestContext().addUIComponentToUpdateByAjax(UIPopupContainer);
+    }
   }
 
   @Override

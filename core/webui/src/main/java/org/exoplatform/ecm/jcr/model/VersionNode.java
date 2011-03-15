@@ -39,7 +39,7 @@ public class VersionNode {
   private static final Log LOG  = ExoLogger.getLogger("model.VersionNode");
   public VersionNode(Version version, Session session) {
     version_ = version;
-    try {      
+    try {
       String uuid = version.getUUID();
       QueryManager queryManager = session.getWorkspace().getQueryManager();
       Query query = queryManager.createQuery("//element(*, nt:version)[@jcr:predecessors='" + uuid + "']", Query.XPATH);
@@ -55,21 +55,21 @@ public class VersionNode {
   }
 
   public boolean isExpanded() { return isExpanded ; }
-  
+
   public void setExpanded(boolean isExpanded) { this.isExpanded = isExpanded ; }
-  
+
   public Version getVersion() { return version_; }
-  
+
   public void setVersion(Version version) { this.version_ = version ; }
-    
+
   public String getName() throws RepositoryException { return version_.getName() ; }
 
   public String getPath() throws RepositoryException { return version_.getPath() ; }
 
   public int getChildrenSize() { return children_.size() ; }
-  
+
   public List<VersionNode> getChildren() { return children_; }
-  
+
   public VersionNode findVersionNode(String path) throws RepositoryException {
     if(version_.getPath().equals(path)) return this ;
     VersionNode node = null ;
@@ -81,7 +81,7 @@ public class VersionNode {
     }
     return null;
   }
-  
+
   public void removeVersionInChild(VersionNode versionNode1, VersionNode versionNodeRemove) throws RepositoryException {
     if (versionNode1.getChildren().contains(versionNodeRemove)) versionNode1.getChildren().remove(versionNodeRemove);
     else {

@@ -50,7 +50,7 @@ import org.exoplatform.webui.form.UIFormSelectBox;
 @ComponentConfig(
     lifecycle = UIFormLifecycle.class,
     template =  "app:/groovy/webui/component/explorer/control/UIViewBar.gtmpl",
-    events = {      
+    events = {
       @EventConfig(listeners = UIViewBar.ShowSideBarActionListener.class),
       @EventConfig(listeners = UIViewBar.PreferencesActionListener.class),
       @EventConfig(listeners = UIViewBar.BackActionListener.class),
@@ -63,13 +63,13 @@ import org.exoplatform.webui.form.UIFormSelectBox;
 @Deprecated
 public class UIViewBar extends UIForm {
   final static private String FIELD_SELECT_VIEW = "views" ;
-  
+
   public UIViewBar() throws Exception {
     UIFormSelectBox selectView  = new UIFormSelectBox(FIELD_SELECT_VIEW, null, null) ;
     selectView.setOnChange("ChangeView") ;
-    addChild(selectView) ;    
+    addChild(selectView) ;
   }
-  
+
   public boolean isDirectlyDrive() {
     boolean returnboolean = false;
     PortletRequestContext pcontext = (PortletRequestContext)WebuiRequestContext.getCurrentInstance();
@@ -80,22 +80,22 @@ public class UIViewBar extends UIForm {
     }
     return returnboolean;
   }
-  
+
   public void setViewOptions(List<SelectItemOption<String>> viewOptions) {
     getUIFormSelectBox(FIELD_SELECT_VIEW).setOptions(viewOptions) ;
     getUIFormSelectBox(FIELD_SELECT_VIEW).setValue(viewOptions.get(0).getValue()) ;
   }
-  
+
   public boolean isShowSaveSession() throws Exception {
     UIJCRExplorer uiExplorer =  getAncestorOfType(UIJCRExplorer.class) ;
-    return uiExplorer.getPreference().isJcrEnable() ;    
+    return uiExplorer.getPreference().isJcrEnable() ;
   }
-  
+
   public boolean isShowSideBar() throws Exception {
     UIJCRExplorer uiExplorer =  getAncestorOfType(UIJCRExplorer.class);
-    return uiExplorer.getPreference().isShowSideBar();    
+    return uiExplorer.getPreference().isShowSideBar();
   }
-  
+
   static public class BackActionListener extends EventListener<UIViewBar> {
     public void execute(Event<UIViewBar> event) throws Exception {
       UIJCRExplorer uiJCRExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class) ;
@@ -104,14 +104,14 @@ public class UIViewBar extends UIForm {
       uiJCRExplorer.setRenderSibling(UIDrivesBrowserContainer.class);
     }
   }
-  
+
   static public class ShowSideBarActionListener extends EventListener<UIViewBar> {
-    public void execute(Event<UIViewBar> event) throws Exception {      
+    public void execute(Event<UIViewBar> event) throws Exception {
       UIViewBar uiViewBar = event.getSource();
-      UIJCRExplorerPortlet explorerPorltet = uiViewBar.getAncestorOfType(UIJCRExplorerPortlet.class);   
+      UIJCRExplorerPortlet explorerPorltet = uiViewBar.getAncestorOfType(UIJCRExplorerPortlet.class);
       UIJCRExplorer uiExplorer = explorerPorltet.findFirstComponentOfType(UIJCRExplorer.class);
       UIJcrExplorerContainer uiJcrExplorerContainer= explorerPorltet.getChild(UIJcrExplorerContainer.class);
-      Preference pref = uiExplorer.getPreference();      
+      Preference pref = uiExplorer.getPreference();
       pref.setShowSideBar(true);
       uiExplorer.refreshExplorer();
       uiJcrExplorerContainer.setRenderedChild(UIJCRExplorer.class);
@@ -122,13 +122,13 @@ public class UIViewBar extends UIForm {
   static public class PreferencesActionListener extends EventListener<UIViewBar> {
     public void execute(Event<UIViewBar> event) throws Exception {
       UIViewBar viewBar = event.getSource();
-      UIJCRExplorer uiJCRExplorer = viewBar.getAncestorOfType(UIJCRExplorer.class);                                         
+      UIJCRExplorer uiJCRExplorer = viewBar.getAncestorOfType(UIJCRExplorer.class);
       UIPopupContainer popupAction = uiJCRExplorer.getChild(UIPopupContainer.class);
       UIPreferencesForm uiPrefForm = popupAction.activate(UIPreferencesForm.class,600) ;
       uiPrefForm.update(uiJCRExplorer.getPreference()) ;
       event.getRequestContext().addUIComponentToUpdateByAjax(popupAction) ;
     }
-  }  
+  }
 
   static public class SaveSessionActionListener extends EventListener<UIViewBar> {
     public void execute(Event<UIViewBar> event) throws Exception {
@@ -155,7 +155,7 @@ public class UIViewBar extends UIForm {
       uiApp.addMessage(new ApplicationMessage(mess, null, ApplicationMessage.INFO)) ;
     }
   }
-  
+
   static public class ChangeViewActionListener extends EventListener<UIViewBar> {
     public void execute(Event<UIViewBar> event) throws Exception {
       UIViewBar uiViewBar = event.getSource();

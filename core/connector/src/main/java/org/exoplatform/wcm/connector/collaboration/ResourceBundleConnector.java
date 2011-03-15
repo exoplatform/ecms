@@ -43,7 +43,7 @@ import javax.xml.transform.dom.DOMSource;
  * Created by The eXo Platform SAS
  * Author : Phan Le Thanh Chuong
  *          chuong.phan@exoplatform.com, phan.le.thanh.chuong@gmail.com
- * Dec 21, 2009  
+ * Dec 21, 2009
  */
 @Path("/bundle/")
 public class ResourceBundleConnector implements ResourceContainer {

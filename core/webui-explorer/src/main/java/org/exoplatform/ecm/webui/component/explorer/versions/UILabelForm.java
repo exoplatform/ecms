@@ -49,7 +49,7 @@ import org.exoplatform.webui.form.validator.MandatoryValidator;
     template =  "system:/groovy/webui/form/UIFormWithTitle.gtmpl",
     events = {
       @EventConfig(listeners = UILabelForm.SaveActionListener.class),
-      @EventConfig(listeners = UILabelForm.CancelActionListener.class, phase = Phase.DECODE)    
+      @EventConfig(listeners = UILabelForm.CancelActionListener.class, phase = Phase.DECODE)
     }
 )
 
@@ -58,37 +58,37 @@ public class UILabelForm extends UIForm {
   private static  String FIELD_LABEL = "label" ;
 
   public UILabelForm() throws Exception {
-    addUIFormInput(new UIFormStringInput(FIELD_LABEL , FIELD_LABEL , null).addValidator(MandatoryValidator.class));   
+    addUIFormInput(new UIFormStringInput(FIELD_LABEL , FIELD_LABEL , null).addValidator(MandatoryValidator.class));
   }
 
   @SuppressWarnings("unused")
   static  public class SaveActionListener extends EventListener<UILabelForm> {
     public void execute(Event<UILabelForm> event) throws Exception {
       UILabelForm uiLabelForm = event.getSource();
-      String label = uiLabelForm.getUIStringInput(FIELD_LABEL).getValue().trim();    
+      String label = uiLabelForm.getUIStringInput(FIELD_LABEL).getValue().trim();
       UIVersionInfo uiVersionInfo = uiLabelForm.getParent();
       VersionNode currentVersion = uiVersionInfo.getCurrentVersionNode();
       UIJCRExplorer uiExplorer = uiLabelForm.getAncestorOfType(UIJCRExplorer.class) ;
       UIApplication uiApp = uiLabelForm.getAncestorOfType(UIApplication.class) ;
-      Node currentNode = uiExplorer.getCurrentNode() ;   
+      Node currentNode = uiExplorer.getCurrentNode() ;
       if(!Utils.isNameValid(label, Utils.SPECIALCHARACTER)) {
-        uiApp.addMessage(new ApplicationMessage("UILabelForm.msg.label-invalid", 
+        uiApp.addMessage(new ApplicationMessage("UILabelForm.msg.label-invalid",
             null, ApplicationMessage.WARNING)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;  
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
         return ;
       }
       try{
         currentNode.getVersionHistory().addVersionLabel(currentVersion.getName(), label, false) ;
       } catch (VersionException ve) {
         uiApp.addMessage(new ApplicationMessage("UILabelForm.msg.label-exist", new Object[]{label})) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;  
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
         return ;
       }
       uiLabelForm.reset() ;
       uiLabelForm.setRendered(false);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiVersionInfo) ;
     }
-  }  
+  }
 
   @SuppressWarnings("unused")
   static  public class CancelActionListener extends EventListener<UILabelForm> {

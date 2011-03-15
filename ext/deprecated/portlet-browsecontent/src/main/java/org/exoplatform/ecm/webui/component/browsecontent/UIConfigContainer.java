@@ -27,7 +27,7 @@ import org.exoplatform.webui.core.lifecycle.UIContainerLifecycle;
  * Created by The eXo Platform SARL
  * Author : Pham Tuan
  *          phamtuanchip@yahoo.de
- * Apr 12, 2007 9:24:36 AM 
+ * Apr 12, 2007 9:24:36 AM
  */
 
 @ComponentConfig(lifecycle = UIContainerLifecycle.class)
@@ -46,7 +46,7 @@ public class UIConfigContainer extends UIContainer {
       UIQueryConfig uiQueryConfig = getChild(UIQueryConfig.class);
       if(uiQueryConfig == null) {
         uiQueryConfig = addChild(UIQueryConfig.class, null, null);
-      }  
+      }
       uiQueryConfig.isEdit_ = true;
       uiQueryConfig.initForm(preference, repository, workspace, true);
       setRenderedChild(UIQueryConfig.class);

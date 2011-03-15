@@ -44,7 +44,7 @@ import org.exoplatform.webui.form.validator.MandatoryValidator;
  * Created by The eXo Platform SARL
  * Author : Dang Van Minh
  *          minh.dang@exoplatform.com
- * May 6, 2007  
+ * May 6, 2007
  * 10:18:56 AM
  */
 @ComponentConfig(
@@ -53,26 +53,26 @@ import org.exoplatform.webui.form.validator.MandatoryValidator;
     events = {
       @EventConfig(listeners = UICompareExactlyForm.SelectActionListener.class),
       @EventConfig(phase=Phase.DECODE, listeners = UICompareExactlyForm.CancelActionListener.class)
-    }    
+    }
 )
 public class UICompareExactlyForm extends UIForm implements UIPopupComponent {
   private static final String FILTER = "filter" ;
   private static final String RESULT = "result";
   private static final String TEMP_RESULT = "tempSel";
   private List<String> listValue_ ;
-  
+
   public UICompareExactlyForm() throws Exception {}
-  
+
   public void activate() throws Exception {}
   public void deActivate() throws Exception {}
-  
+
   public void init(String properties, QueryResult result) throws Exception {
     listValue_ = new ArrayList<String>() ;
     List<SelectItemOption<String>> opts = new ArrayList<SelectItemOption<String>>();
     addUIFormInput(new UIFormStringInput(FILTER, FILTER, null)) ;
     addUIFormInput(new UIFormSelectBox(RESULT, RESULT, opts).setSize(15).addValidator(MandatoryValidator.class)) ;
     addUIFormInput(new UIFormSelectBox(TEMP_RESULT, TEMP_RESULT, opts)) ;
-    
+
     NodeIterator iter = result.getNodes() ;
     String[] props = {} ;
     if(properties.indexOf(",") > -1) props = properties.split(",") ;
@@ -109,7 +109,7 @@ public class UICompareExactlyForm extends UIForm implements UIPopupComponent {
       if(!listValue_.contains(value.getString())) listValue_.add(value.getString()) ;
     }
   }
-  
+
   static  public class CancelActionListener extends EventListener<UICompareExactlyForm> {
     public void execute(Event<UICompareExactlyForm> event) throws Exception {
       UISearchContainer uiSearchContainer = event.getSource().getAncestorOfType(UISearchContainer.class) ;
@@ -118,7 +118,7 @@ public class UICompareExactlyForm extends UIForm implements UIPopupComponent {
       event.getRequestContext().addUIComponentToUpdateByAjax(uiPopup) ;
     }
   }
-  
+
   static  public class SelectActionListener extends EventListener<UICompareExactlyForm> {
     public void execute(Event<UICompareExactlyForm> event) throws Exception {
       UICompareExactlyForm uiForm = event.getSource() ;

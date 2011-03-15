@@ -29,13 +29,13 @@ import org.exoplatform.services.jcr.ext.classify.NodeClassifyPlugin;
  * Created by The eXo Platform SAS
  * Author : Hoa.Pham
  *          hoa.pham@exoplatform.com
- * Apr 9, 2008  
+ * Apr 9, 2008
  */
 public class TypeClassifyPlugin extends NodeClassifyPlugin {
-  
+
   public void classifyChildrenNode(Node parent) throws Exception {
     Session session = parent.getSession();
-    NodeIterator nodeIterator = parent.getNodes();            
+    NodeIterator nodeIterator = parent.getNodes();
     while (nodeIterator.hasNext()) {
       Node child = nodeIterator.nextNode();
       NodeType typeOfChild = child.getPrimaryNodeType();
@@ -53,5 +53,5 @@ public class TypeClassifyPlugin extends NodeClassifyPlugin {
     }
     session.save();
   }
-  
+
 }

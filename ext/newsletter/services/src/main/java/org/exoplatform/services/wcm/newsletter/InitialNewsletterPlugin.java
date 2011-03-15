@@ -43,22 +43,22 @@ public class InitialNewsletterPlugin extends CreatePortalPlugin {
 
   /** The category configs. */
   private List<NewsletterCategoryConfig> categoryConfigs;
-  
+
   /** The subscription configs. */
   private List<NewsletterSubscriptionConfig> subscriptionConfigs;
-  
+
   /** The manager service. */
   private NewsletterManagerService newsletterManagerService;
-  
+
   /** The live portal manager service. */
   private LivePortalManagerService livePortalManagerService;
-  
+
   /** The log. */
   private static Log log = ExoLogger.getLogger(InitialNewsletterPlugin.class);
-  
+
   /**
    * Instantiates a new initial newsletter plugin.
-   * 
+   *
    * @param initParams the init params
    * @param configurationManager the configuration manager
    * @param repositoryService the repository service
@@ -68,10 +68,10 @@ public class InitialNewsletterPlugin extends CreatePortalPlugin {
   public InitialNewsletterPlugin(InitParams initParams,
                                  ConfigurationManager configurationManager,
                                  RepositoryService repositoryService,
-                                 NewsletterManagerService newsletterManagerService, 
+                                 NewsletterManagerService newsletterManagerService,
                                  LivePortalManagerService livePortalManagerService) {
     super(initParams, configurationManager, repositoryService);
-    
+
     categoryConfigs = initParams.getObjectParamValues(NewsletterCategoryConfig.class);
     subscriptionConfigs = initParams.getObjectParamValues(NewsletterSubscriptionConfig.class);
     this.livePortalManagerService = livePortalManagerService;
@@ -92,11 +92,11 @@ public class InitialNewsletterPlugin extends CreatePortalPlugin {
       for (NewsletterSubscriptionConfig subscriptionConfig : subscriptionConfigs) {
         subscriptionHandler.add(sessionProvider, portalName, subscriptionConfig);
       }
-      
+
       Node portalNode = livePortalManagerService.getLivePortal(sessionProvider, portalName);
       String userFolderPath = NewsletterConstant.generateUserPath(portalName);
       ExtendedNode userFolderNode = (ExtendedNode) ((Node) portalNode.getSession().getItem(userFolderPath)) ;
-      if(userFolderNode.canAddMixin("exo:privilegeable")) 
+      if(userFolderNode.canAddMixin("exo:privilegeable"))
         userFolderNode.addMixin("exo:privilegeable");
       userFolderNode.setPermission("any", PermissionType.ALL) ;
     } catch (Exception e) {

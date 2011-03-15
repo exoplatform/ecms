@@ -27,11 +27,11 @@ public interface Task {
   public String getId();
 
   public String getProcessId();
-  
+
   public String getProcessInstanceId();
 
   public String getTaskName();
 
   public Date getEnd();
-  
+
 }

@@ -28,7 +28,7 @@ import org.exoplatform.webui.ext.filter.UIExtensionFilterType;
  * Created by The eXo Platform SARL
  * Author : Hoang Van Hung
  *          hunghvit@gmail.com
- * Nov 18, 2009  
+ * Nov 18, 2009
  */
 public class IsNotCategoryFilter implements UIExtensionFilter {
 
@@ -36,7 +36,7 @@ public class IsNotCategoryFilter implements UIExtensionFilter {
    * This method checks if the current node is of the right type
    */
   public boolean accept(Map<String, Object> context) throws Exception {
-	if (context == null) return true;
+  if (context == null) return true;
     Node currentNode = (Node) context.get(Node.class.getName());
     return !currentNode.isNodeType("exo:taxonomy");
   }

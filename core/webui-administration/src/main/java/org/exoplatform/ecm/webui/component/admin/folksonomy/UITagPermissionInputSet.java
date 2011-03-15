@@ -24,21 +24,21 @@ import org.exoplatform.webui.form.validator.MandatoryValidator;
  * Created by The eXo Platform SARL
  * Author : Nguyen Anh Vu
  *          anhvurz90@gmail.com
- * Dec 14, 2009  
+ * Dec 14, 2009
  * 4:46:20 PM
  */
 @ComponentConfig(template = "classpath:groovy/ecm/webui/form/UIFormInputSetWithAction.gtmpl")
 public class UITagPermissionInputSet extends UIFormInputSetWithAction {
   final static public String FIELD_USERORGROUP = "userOrGroup";
-  
+
   public UITagPermissionInputSet(String name) throws Exception {
     super(name);
     setComponentConfig(getClass(), null) ;
     UIFormStringInput userGroup = new UIFormStringInput(FIELD_USERORGROUP, FIELD_USERORGROUP, null) ;
-    userGroup.addValidator(MandatoryValidator.class) ;   
+    userGroup.addValidator(MandatoryValidator.class) ;
     userGroup.setEditable(false) ;
     addUIFormInput(userGroup) ;
     setActionInfo(FIELD_USERORGROUP, new String[] {"SelectMember"}) ;
   }
-  
+
 }

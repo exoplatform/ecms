@@ -43,7 +43,7 @@ import org.exoplatform.webui.ext.manager.UIAbstractManagerComponent;
  * Created by The eXo Platform SAS
  * Author : eXoPlatform
  *          nicolas.filotto@exoplatform.com
- * 6 mai 2009  
+ * 6 mai 2009
  */
 @ComponentConfig(
      events = {
@@ -51,15 +51,15 @@ import org.exoplatform.webui.ext.manager.UIAbstractManagerComponent;
      }
  )
 public class ManageAuditingActionComponent extends UIAbstractManagerComponent {
-  
-  private static final List<UIExtensionFilter> FILTERS = Arrays.asList(new UIExtensionFilter[]{new IsNotRootNodeFilter(), 
+
+  private static final List<UIExtensionFilter> FILTERS = Arrays.asList(new UIExtensionFilter[]{new IsNotRootNodeFilter(),
       new CanSetPropertyFilter(), new IsNotLockedFilter(), new IsCheckedOutFilter()});
-  
+
   @UIExtensionFilters
   public List<UIExtensionFilter> getFilters() {
     return FILTERS;
   }
-  
+
   public static class ManageAuditingActionListener extends UIActionBarActionListener<ManageAuditingActionComponent> {
     public void processEvent(Event<ManageAuditingActionComponent> event) throws Exception {
       UIJCRExplorer uiExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class);
@@ -76,7 +76,7 @@ public class ManageAuditingActionComponent extends UIAbstractManagerComponent {
       event.getRequestContext().addUIComponentToUpdateByAjax(UIPopupContainer);
     }
   }
-  
+
   @Override
   public Class<? extends UIAbstractManager> getUIAbstractManagerClass() {
     return null;

@@ -82,7 +82,7 @@ import org.exoplatform.webui.ext.UIExtensionManager;
     }
 )
 public class UIViewSearchResult extends UIContainer implements NodePresentation {
-  
+
   private Node node_ ;
   private String language_ ;
   final private static String COMMENT_COMPONENT = "Comment".intern();
@@ -90,23 +90,23 @@ public class UIViewSearchResult extends UIContainer implements NodePresentation 
    * Logger.
    */
   private static final Log LOG  = ExoLogger.getLogger("cms.UIViewSearchResult");
-  
+
   public UIViewSearchResult() throws Exception {
   }
 
-  
+
   public String getTemplate() {
     TemplateService templateService = getApplicationComponent(TemplateService.class) ;
     String userName = Util.getPortalRequestContext().getRemoteUser() ;
     try {
       String nodeType = node_.getPrimaryNodeType().getName() ;
-      return templateService.getTemplatePathByUser(false, nodeType, userName) ; 
+      return templateService.getTemplatePathByUser(false, nodeType, userName) ;
     } catch(Exception e) {
       LOG.error(e);
     }
-    return null; 
+    return null;
   }
-  
+
   public List<Node> getAttachments() throws Exception {
     List<Node> attachments = new ArrayList<Node>() ;
     NodeIterator childrenIterator = node_.getNodes();;
@@ -115,20 +115,20 @@ public class UIViewSearchResult extends UIContainer implements NodePresentation 
     while(childrenIterator.hasNext()) {
       Node childNode = childrenIterator.nextNode();
       String nodeType = childNode.getPrimaryNodeType().getName();
-      List<String> listCanCreateNodeType = 
-        Utils.getListAllowedFileType(node_, getRepository(), templateService) ;       
+      List<String> listCanCreateNodeType =
+        Utils.getListAllowedFileType(node_, getRepository(), templateService) ;
       if(listCanCreateNodeType.contains(nodeType)) {
-        
+
         // Case of childNode has jcr:data property
         if (childNode.hasProperty(Utils.JCR_DATA)) {
           attachData = childNode.getProperty(Utils.JCR_DATA).getStream().available();
-          
+
           // Case of jcr:data has content.
-          if (attachData > 0) 
-            attachments.add(childNode);          
+          if (attachData > 0)
+            attachments.add(childNode);
         } else {
           attachments.add(childNode);
-        }               
+        }
       }
     }
     return attachments;
@@ -153,8 +153,8 @@ public class UIViewSearchResult extends UIContainer implements NodePresentation 
     ((AbstractActionComponent)uicomponent).setLstComponentupdate(Arrays.asList(new Class[] {UIPopupWindow.class}));
     return uicomponent;
   }
-  
-  public Node getNode() throws ValueFormatException, PathNotFoundException, RepositoryException { 
+
+  public Node getNode() throws ValueFormatException, PathNotFoundException, RepositoryException {
     if(node_.hasProperty(Utils.EXO_LANGUAGE)) {
       String defaultLang = node_.getProperty(Utils.EXO_LANGUAGE).getString() ;
       if(language_ == null) language_ =  defaultLang ;
@@ -162,20 +162,20 @@ public class UIViewSearchResult extends UIContainer implements NodePresentation 
         if(!language_.equals(defaultLang)) {
           Node curNode = node_.getNode(Utils.LANGUAGES + Utils.SLASH + language_) ;
           return curNode ;
-        } 
+        }
       }
       return node_ ;
-    }    
-    return node_ ; 
+    }
+    return node_ ;
   }
   public Node getOriginalNode() throws Exception {return node_;}
-  
+
   public String getIcons(Node node, String size) throws Exception {
     return Utils.getNodeTypeIcon(node, size) ;
   }
-  
+
   public String getNodeType() throws Exception { return null; }
-  
+
   public List<Node> getRelations() throws Exception {
     List<Node> relations = new ArrayList<Node>() ;
     if (node_.hasProperty(Utils.EXO_RELATION)) {
@@ -200,16 +200,16 @@ public class UIViewSearchResult extends UIContainer implements NodePresentation 
   public String getTemplatePath() throws Exception { return null; }
 
   public boolean isNodeTypeSupported() { return false; }
-  
+
   public boolean isNodeTypeSupported(String nodeTypeName) {
-    try {      
+    try {
       TemplateService templateService = getApplicationComponent(TemplateService.class);
       return templateService.isManagedNodeType(nodeTypeName);
     } catch (Exception e) {
       return false;
     }
   }
-  
+
   public UIComponent getCommentComponent() {
     UIComponent uicomponent = null;
     try {
@@ -224,19 +224,19 @@ public class UIViewSearchResult extends UIContainer implements NodePresentation 
     }
     return (uicomponent != null ? uicomponent : this);
   }
-  
+
   public boolean hasPropertyContent(Node node, String property) {
     try {
       String value = node.getProperty(property).getString() ;
       if(value.length() > 0) return true ;
     } catch (Exception e) {
-      LOG.error(e);      
+      LOG.error(e);
     }
     return false ;
   }
 
   public void setNode(Node node) { node_ = node ; }
-  
+
   public Node getNodeByUUID(String uuid) throws Exception{
     String repository = getAncestorOfType(UIJCRExplorer.class).getRepositoryName() ;
     ManageableRepository manageRepo = getApplicationComponent(RepositoryService.class).getRepository(repository) ;
@@ -246,12 +246,12 @@ public class UIViewSearchResult extends UIContainer implements NodePresentation 
       try{
         return sessionProvider.getSession(ws,manageRepo).getNodeByUUID(uuid) ;
       }catch(Exception e) {
-        
-      }      
+
+      }
     }
     return null;
   }
-  
+
   @SuppressWarnings("unused")
   public ResourceResolver getTemplateResourceResolver(WebuiRequestContext context, String template) {
     return getAncestorOfType(UIJCRExplorer.class).getJCRTemplateResourceResolver() ;
@@ -260,7 +260,7 @@ public class UIViewSearchResult extends UIContainer implements NodePresentation 
   public List<Node> getComments() throws Exception {
     return getApplicationComponent(CommentsService.class).getComments(node_, language_) ;
   }
-  
+
   public String getViewTemplate(String nodeTypeName, String templateName) throws Exception {
     TemplateService tempServ = getApplicationComponent(TemplateService.class) ;
     return tempServ.getTemplatePath(false, nodeTypeName, templateName) ;
@@ -279,10 +279,10 @@ public class UIViewSearchResult extends UIContainer implements NodePresentation 
       service = getApplicationComponent(clazz);
     } catch (ClassNotFoundException ex) {
       LOG.error(ex);
-    } 
+    }
     return service;
   }
-  
+
 
   public String getImage(Node node) throws Exception {
     DownloadService downloadService = getApplicationComponent(DownloadService.class) ;
@@ -293,11 +293,11 @@ public class UIViewSearchResult extends UIContainer implements NodePresentation 
     inputResource.setDownloadName(node.getName()) ;
     return downloadService.getDownloadLink(downloadService.addDownloadResource(inputResource)) ;
   }
-  
+
   public String getImage(Node node, String nodeTypeName) throws Exception {
     DownloadService dservice = getApplicationComponent(DownloadService.class) ;
     InputStreamDownloadResource dresource ;
-    Node imageNode = node.getNode(nodeTypeName) ;    
+    Node imageNode = node.getNode(nodeTypeName) ;
     InputStream input = imageNode.getProperty(Utils.JCR_DATA).getStream() ;
     dresource = new InputStreamDownloadResource(input, "image") ;
     dresource.setDownloadName(node.getName()) ;
@@ -306,18 +306,18 @@ public class UIViewSearchResult extends UIContainer implements NodePresentation 
 
   public String getPortalName() {
     ExoContainer container = ExoContainerContext.getCurrentContainer();
-    PortalContainerInfo containerInfo = (PortalContainerInfo)container.getComponentInstanceOfType(PortalContainerInfo.class);      
+    PortalContainerInfo containerInfo = (PortalContainerInfo)container.getComponentInstanceOfType(PortalContainerInfo.class);
     return containerInfo.getContainerName();
   }
-  
+
   public String getRepository() throws Exception {
     return ((ManageableRepository)node_.getSession().getRepository()).getConfiguration().getName() ;
   }
-  
+
   public String getWebDAVServerPrefix() throws Exception {
     PortletRequestContext pRequestContext = PortletRequestContext.getCurrentInstance() ;
     PortletRequest pRequest = pRequestContext.getRequest() ;
-    String prefixWebDAV = pRequest.getScheme() + "://" + pRequest.getServerName() + ":" 
+    String prefixWebDAV = pRequest.getScheme() + "://" + pRequest.getServerName() + ":"
                           + String.format("%s",pRequest.getServerPort()) ;
     return prefixWebDAV ;
   }
@@ -331,12 +331,12 @@ public class UIViewSearchResult extends UIContainer implements NodePresentation 
       String selectedLanguage = event.getRequestContext().getRequestParameter(OBJECTID) ;
       uiViewSearchResult.setLanguage(selectedLanguage) ;
       event.getRequestContext().addUIComponentToUpdateByAjax(uiViewSearchResult.getParent()) ;
-    }   
+    }
   }
   public String getDownloadLink(Node node) throws Exception {
     DownloadService dservice = getApplicationComponent(DownloadService.class) ;
     InputStreamDownloadResource dresource ;
-    if(!node.getPrimaryNodeType().getName().equals(Utils.NT_FILE)) return null; 
+    if(!node.getPrimaryNodeType().getName().equals(Utils.NT_FILE)) return null;
     Node jcrContentNode = node.getNode(Utils.JCR_CONTENT) ;
     InputStream input = jcrContentNode.getProperty(Utils.JCR_DATA).getStream() ;
     dresource = new InputStreamDownloadResource(input, "image") ;
@@ -347,7 +347,7 @@ public class UIViewSearchResult extends UIContainer implements NodePresentation 
   public String encodeHTML(String text) throws Exception {
     return Utils.encodeHTML(text) ;
   }
- 
+
   public String getTemplateSkin(String nodeTypeName, String skinName) throws Exception {
     TemplateService tempServ = getApplicationComponent(TemplateService.class) ;
     return tempServ.getSkinPath(nodeTypeName, skinName, getLanguage()) ;
@@ -366,7 +366,7 @@ public class UIViewSearchResult extends UIContainer implements NodePresentation 
     return null;
   }
 
-  
+
   private Node getFileLangNode(Node currentNode) throws Exception {
     if(currentNode.getNodes().getSize() > 0) {
       NodeIterator nodeIter = currentNode.getNodes() ;
@@ -379,8 +379,8 @@ public class UIViewSearchResult extends UIContainer implements NodePresentation 
       return currentNode ;
     }
     return currentNode ;
-  } 
-  
+  }
+
   static  public class DownloadActionListener extends EventListener<UIViewSearchResult> {
     public void execute(Event<UIViewSearchResult> event) throws Exception {
       UIViewSearchResult uiComp = event.getSource() ;
@@ -389,11 +389,11 @@ public class UIViewSearchResult extends UIContainer implements NodePresentation 
       event.getRequestContext().addUIComponentToUpdateByAjax(uiComp.getParent()) ;
     }
   }
-  
+
   static  public class ChangeNodeActionListener extends EventListener<UIViewSearchResult> {
     public void execute(Event<UIViewSearchResult> event) throws Exception {
       UIViewSearchResult uicomp =  event.getSource() ;
-      UIJCRExplorer uiExplorer = uicomp.getAncestorOfType(UIJCRExplorer.class) ; 
+      UIJCRExplorer uiExplorer = uicomp.getAncestorOfType(UIJCRExplorer.class) ;
       String uri = event.getRequestContext().getRequestParameter(OBJECTID) ;
       String workspaceName = event.getRequestContext().getRequestParameter("workspaceName") ;
       Session session = uiExplorer.getSessionByWorkspace(workspaceName) ;
@@ -402,23 +402,19 @@ public class UIViewSearchResult extends UIContainer implements NodePresentation 
       event.getRequestContext().addUIComponentToUpdateByAjax(uicomp.getParent()) ;
     }
   }
-  
+
   public boolean isEnableComment() {
-    // TODO Auto-generated method stub
     return false;
   }
 
   public boolean isEnableVote() {
-    // TODO Auto-generated method stub
     return false;
   }
 
   public void setEnableComment(boolean value) {
-    // TODO Auto-generated method stub
   }
 
   public void setEnableVote(boolean value) {
-    // TODO Auto-generated method stub
   }
 
 }

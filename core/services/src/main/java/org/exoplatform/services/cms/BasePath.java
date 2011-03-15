@@ -26,9 +26,9 @@ public interface BasePath {
   public static final String CMS_USERS_PATH = "usersPath";
   public static final String CMS_GROUPS_PATH = "groupsPath";
   public static final String CMS_PUBLICATIONS_PATH = "cmsPublicationsPath";
-  public static final String CMS_RULES_PATH = "cmsRulesPath";   
+  public static final String CMS_RULES_PATH = "cmsRulesPath";
   public static final String CMS_VIEWTEMPLATES_PATH = "viewTemplatesPath" ;
-  public static final String CMS_VIEWS_PATH = "userViewsPath" ;  
+  public static final String CMS_VIEWS_PATH = "userViewsPath" ;
   public static final String EXO_ECM_SYSTEM_PATH = "exoECMSystemPath" ;
   public static final String EXO_TAXONOMIES_PATH = "exoTaxonomiesPath" ;
   public static final String CALENDAR_CATEGORIES_PATH = "calendarPath" ;
@@ -37,25 +37,25 @@ public interface BasePath {
   public static final String EXO_FOLKSONOMY_PATH = "exoFolksonomiesPath";
   public static final String EXO_TAGS_PATH = "exoTagsPath" ;
   public static final String EXO_TAG_STYLE_PATH = "exoOldTagStylePath" ;
-  public static final String EXO_NEW_TAG_STYLE_PATH = "exoTagStylePath" ;  
+  public static final String EXO_NEW_TAG_STYLE_PATH = "exoTagStylePath" ;
   public static final String METADATA_PATH = "metadataPath" ;
   public static final String QUERIES_PATH = "queriesPath" ;
   public static final String EXO_DRIVES_PATH = "exoDrivesPath" ;
   public static final String ECM_BUSINESS_PROCESSES_PATH ="businessProcessesPath" ;
-  
+
   public static final String ECM_EXPLORER_TEMPLATES = "ecmExplorerTemplates" ;
   public static final String CONTENT_BROWSER_TEMPLATES = "contentBrowserTemplates" ;
   public static final String CB_PATH_TEMPLATES = "cbPathTemplates" ;
   public static final String CB_QUERY_TEMPLATES = "cbQueryTemplates" ;
   public static final String CB_SCRIPT_TEMPLATES = "cbScriptTemplates" ;
   public static final String CB_DETAIL_VIEW_TEMPLATES = "cbDetaiViewTemplates" ;
-  
-  public static final String CMS_SCRIPTS_PATH = "cmsScriptsPath".intern() ;  
+
+  public static final String CMS_SCRIPTS_PATH = "cmsScriptsPath".intern() ;
   public static final String CONTENT_BROWSER_SCRIPTS = "contentBrowserScripts".intern() ;
   public static final String ECM_EXPLORER_SCRIPTS = "ecmExplorerScripts".intern() ;
   public static final String ECM_ACTION_SCRIPTS = "ecmActionScripts".intern() ;
   public static final String ECM_INTERCEPTOR_SCRIPTS = "ecmInterceptorScripts".intern() ;
   public static final String ECM_WIDGET_SCRIPTS = "ecmWidgetScripts".intern() ;
-  
+
   public static final String TRASH_PATH = "newDocumentsTrashPath".intern();
 }

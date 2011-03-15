@@ -37,7 +37,7 @@ import org.exoplatform.webui.event.EventListener;
  * Created by The eXo Platform SAS
  * @author : Hoa.Pham
  *          hoa.pham@exoplatform.com
- * Jun 23, 2008  
+ * Jun 23, 2008
  */
 
 @ComponentConfig(
@@ -59,32 +59,32 @@ public class UISelectTaxonomyPanel extends UISelectPathPanel {
     this.taxonomyTreePath = taxonomyTreePath;
   }
 
-  public UISelectTaxonomyPanel() throws Exception { 
+  public UISelectTaxonomyPanel() throws Exception {
     uiPageIterator_ = addChild(UIPageIterator.class, null, "UISelectPathIterate");
   }
-  
+
   public String getPathTaxonomy() throws Exception {
     NodeHierarchyCreator nodeHierarchyCreator = getApplicationComponent(NodeHierarchyCreator.class);
     return nodeHierarchyCreator.getJcrPath(BasePath.TAXONOMIES_TREE_STORAGE_PATH);
   }
-  
+
   public String getPathSystemTaxonomy() throws Exception {
     NodeHierarchyCreator nodeHierarchyCreator = getApplicationComponent(NodeHierarchyCreator.class);
     return nodeHierarchyCreator.getJcrPath(BasePath.EXO_TAXONOMIES_PATH);
   }
-  
+
   public String getDisplayName(Node node) throws RepositoryException {
     return getAncestorOfType(UIOneTaxonomySelector.class).getTaxonomyLabel(node);
   }
 
   static public class SelectActionListener extends EventListener<UISelectTaxonomyPanel> {
     public void execute(Event<UISelectTaxonomyPanel> event) throws Exception {
-      UISelectTaxonomyPanel uiSelectPathPanel = event.getSource();      
-      UIOneTaxonomySelector uiTaxonomySelector = uiSelectPathPanel.getParent();      
-      UITreeTaxonomyList uiTreeList = uiTaxonomySelector.getChild(UITreeTaxonomyList.class);     
+      UISelectTaxonomyPanel uiSelectPathPanel = event.getSource();
+      UIOneTaxonomySelector uiTaxonomySelector = uiSelectPathPanel.getParent();
+      UITreeTaxonomyList uiTreeList = uiTaxonomySelector.getChild(UITreeTaxonomyList.class);
       UIContainer uiTreeSelector = uiSelectPathPanel.getParent();
       String value = event.getRequestContext().getRequestParameter(OBJECTID);
-      String taxoTreeName = uiTreeList.getUIFormSelectBox(TAXONOMY_TREE).getValue();  
+      String taxoTreeName = uiTreeList.getUIFormSelectBox(TAXONOMY_TREE).getValue();
       Node taxoTreeNode = uiTaxonomySelector.getTaxoTreeNode(taxoTreeName);
       String taxoTreePath = taxoTreeNode.getPath();
       value = value.replace(taxoTreePath, taxoTreeName);
@@ -94,10 +94,10 @@ public class UISelectTaxonomyPanel extends UISelectPathPanel {
           value = ((UIOneNodePathSelector)uiTreeSelector).getWorkspaceName() + ":" + value ;
         }
       }
-      
+
       String returnField = ((UIBaseNodeTreeSelector)uiTreeSelector).getReturnFieldName();
       ((UISelectable)((UIBaseNodeTreeSelector)uiTreeSelector).getSourceComponent()).doSelect(returnField, value) ;
-      
+
       if (uiTreeSelector instanceof UIOneNodePathSelector) {
         UIComponent uiComponent = uiTreeSelector.getParent();
         if (uiComponent instanceof UIPopupWindow) {

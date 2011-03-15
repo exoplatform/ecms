@@ -49,24 +49,24 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
  * Oct 2, 2008
  */
 public class PublicationUtil {
- 
+
   /** The Constant HISTORY_SEPARATOR. */
   public static final String HISTORY_SEPARATOR = "; ";
-  
+
   /** The Constant APPLICATION_SEPARATOR. */
   public static final String APPLICATION_SEPARATOR = "@";
-  
+
   /** The Constant URI_SEPARATOR. */
   public static final String URI_SEPARATOR = "/";
-  
+
   /**
    * Find page node by page id.
-   * 
+   *
    * @param nav the nav
    * @param pageId the page id
-   * 
+   *
    * @return the list< page node>
-   * 
+   *
    * @throws Exception the exception
    */
   public static List<PageNode> findPageNodeByPageId(PageNavigation nav, String pageId) throws Exception {
@@ -81,11 +81,11 @@ public class PublicationUtil {
 
   /**
    * Find page node by page id.
-   * 
+   *
    * @param node the node
    * @param pageId the page id
    * @param allPageNode the all page node
-   * 
+   *
    * @throws Exception the exception
    */
   public static void findPageNodeByPageId(PageNode node, String pageId, List<PageNode> allPageNode)
@@ -100,24 +100,24 @@ public class PublicationUtil {
       findPageNodeByPageId(child, pageId, allPageNode);
     }
   }
-   
+
   /**
    * Find app instances by name.
-   * 
+   *
    * @param page the page
    * @param applicationName the application name
-   * 
+   *
    * @return the list< string>
    */
   public static List<String> findAppInstancesByName(Page page, String applicationName) {
-    List<String> results = new ArrayList<String>();    
+    List<String> results = new ArrayList<String>();
     findAppInstancesByContainerAndName(page, applicationName, results);
     return results;
   }
-  
+
   /**
    * Find app instances by container and name.
-   * 
+   *
    * @param container the container
    * @param applicationName the application name
    * @param results the results
@@ -136,17 +136,17 @@ public class PublicationUtil {
 //        findAppInstancesByContainerAndName(child, applicationName, results);
 //      }
 //    }
-  }   
-  
+  }
+
   /** The application. */
   private static Application<Portlet> application = null;
-  
+
   /**
    * Find app instances by id.
-   * 
+   *
    * @param container the container
    * @param applicationId the application id
-   * 
+   *
    * @return the application
    */
   public static Application<Portlet> findAppInstancesById(Container container, String applicationId) {
@@ -168,15 +168,15 @@ public class PublicationUtil {
 
   /**
    * Removed app instances in container by names.
-   * 
+   *
    * @param container the container
    * @param removingApplicationIds the removing application ids
    */
   @SuppressWarnings("unchecked")
   private static void removedAppInstancesInContainerByNames(
-  		Container container, List<String> removingApplicationIds) {
-  	ArrayList<Object> childrenTmp = new ArrayList<Object>();    
-//    ArrayList<Object> chidren = container.getChildren();    
+      Container container, List<String> removingApplicationIds) {
+    ArrayList<Object> childrenTmp = new ArrayList<Object>();
+//    ArrayList<Object> chidren = container.getChildren();
     ArrayList<Object> chidren = null;
     if(chidren == null) return ;
     for(Object object: chidren) {
@@ -184,7 +184,7 @@ public class PublicationUtil {
 //        Application application = Application.class.cast(object);
 //        if(!removingApplicationIds.contains(application.getInstanceId())) {
 //        	childrenTmp.add(object);
-//        }        
+//        }
       } else if(object instanceof Container) {
         Container child = Container.class.cast(object);
         removedAppInstancesInContainerByNames(child,removingApplicationIds);
@@ -193,15 +193,15 @@ public class PublicationUtil {
     }
 //    container.setChildren(childrenTmp);
   }
-  
+
   /**
    * Gets the values as string.
-   * 
+   *
    * @param node the node
    * @param propName the prop name
-   * 
+   *
    * @return the values as string
-   * 
+   *
    * @throws Exception the exception
    */
   public static List<String> getValuesAsString(Node node, String propName) throws Exception {
@@ -216,13 +216,13 @@ public class PublicationUtil {
     }
     return results;
   }
-  
+
   /**
    * To values.
-   * 
+   *
    * @param factory the factory
    * @param values the values
-   * 
+   *
    * @return the value[]
    */
   public static Value[] toValues(ValueFactory factory, List<String> values) {
@@ -232,14 +232,14 @@ public class PublicationUtil {
     }
     return list.toArray(new Value[list.size()]);
   }
-  
+
   /**
    * Gets the node by application id.
-   * 
+   *
    * @param applicationId the application id
-   * 
+   *
    * @return the node by application id
-   * 
+   *
    * @throws Exception the exception
    */
   public static Node getNodeByApplicationId(String applicationId) throws Exception {
@@ -258,27 +258,27 @@ public class PublicationUtil {
         workspaceName = preference.getValues().get(0).toString();
       } else if (preference.getName().equals("nodeIdentifier")) {
         nodeIdentifier = preference.getValues().get(0).toString();
-      }      
+      }
     }
     SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
     if (repositoryName != null && workspaceName != null && nodeIdentifier != null) {
-      Session session = sessionProvider.getSession(workspaceName, repositoryService.getRepository(repositoryName));        
+      Session session = sessionProvider.getSession(workspaceName, repositoryService.getRepository(repositoryName));
       Node content = null;
       try {
         content = session.getNodeByUUID(nodeIdentifier);
       } catch (ItemNotFoundException e) {
         try {
-	        content = (Node)session.getItem(nodeIdentifier);
+          content = (Node)session.getItem(nodeIdentifier);
         } catch (RepositoryException re) {}
       }
       return content;
     }
     return null;
   }
-  
+
   /**
    * Removes the application from page.
-   * 
+   *
    * @param page the page
    * @param removedApplicationIds the removed application ids
    */
@@ -288,22 +288,22 @@ public class PublicationUtil {
 
   /**
    * Gets the list application id by page.
-   * 
+   *
    * @param page the page
    * @param portletName the portlet name
-   * 
+   *
    * @return the list application id by page
    */
   public static List<String> getListApplicationIdByPage(Page page, String portletName) {
     return PublicationUtil.findAppInstancesByName(page, portletName);
   }
-  
+
   /**
    * Sets the mixed navigation uri.
-   * 
+   *
    * @param portalName the portal name
    * @param pageNodeUri the page node uri
-   * 
+   *
    * @return the string
    */
   public static String setMixedNavigationUri(String portalName, String pageNodeUri) {
@@ -312,9 +312,9 @@ public class PublicationUtil {
 
   /**
    * Parses the mixed navigation uri.
-   * 
+   *
    * @param mixedNavigationUri the mixed navigation uri
-   * 
+   *
    * @return the string[]
    */
   public static String[] parseMixedNavigationUri(String mixedNavigationUri) {
@@ -322,104 +322,104 @@ public class PublicationUtil {
     int first = 1;
     int second = mixedNavigationUri.indexOf(URI_SEPARATOR, first);
     mixedNavigationUris[0] = mixedNavigationUri.substring(first, second);
-    mixedNavigationUris[1] = mixedNavigationUri.substring(second + URI_SEPARATOR.length(), mixedNavigationUri.length()); 
+    mixedNavigationUris[1] = mixedNavigationUri.substring(second + URI_SEPARATOR.length(), mixedNavigationUri.length());
     return mixedNavigationUris;
   }
-  
+
   /**
    * Sets the mixed application id.
-   * 
+   *
    * @param pageId the page id
    * @param applicationId the application id
-   * 
+   *
    * @return the string
    */
   public static String setMixedApplicationId(String pageId, String applicationId) {
     return pageId + APPLICATION_SEPARATOR + applicationId;
   }
-  
+
   /**
    * Parses the mixed application id.
-   * 
+   *
    * @param mixedApplicationId the mixed application id
-   * 
+   *
    * @return the string[]
    */
   public static String[] parseMixedApplicationId(String mixedApplicationId) {
     return mixedApplicationId.split(APPLICATION_SEPARATOR);
   }
-  
+
   /**
    * Checks if is node content published to page node.
-   * 
+   *
    * @param contentNode the content node
    * @param navNodeURI the nav node uri
-   * 
+   *
    * @return true, if is node content published to page node
-   * 
+   *
    * @throws Exception the exception
    */
   public static boolean isNodeContentPublishedToPageNode(Node contentNode, String navNodeURI) throws Exception{
-  	DataStorage dataStorage = WCMCoreUtils.getService(DataStorage.class);
-  	PageNavigation pageNavigation = dataStorage.getPageNavigation(PortalConfig.PORTAL_TYPE, Util.getUIPortalApplication().getOwner());
-  	ArrayList<PageNode> lisPageNodes = PublicationUtil.getAllPageNodeFromPageNavigation(pageNavigation);
-  	PageNode pageNode = null;
-  	
-  	for (PageNode tempPageNode : lisPageNodes) {
-	    if (tempPageNode.getUri().equals(navNodeURI.replace("/" + Util.getUIPortalApplication().getOwner() + "/", ""))){
-	    	pageNode = tempPageNode;
-	    	break;
-	    }
+    DataStorage dataStorage = WCMCoreUtils.getService(DataStorage.class);
+    PageNavigation pageNavigation = dataStorage.getPageNavigation(PortalConfig.PORTAL_TYPE, Util.getUIPortalApplication().getOwner());
+    ArrayList<PageNode> lisPageNodes = PublicationUtil.getAllPageNodeFromPageNavigation(pageNavigation);
+    PageNode pageNode = null;
+
+    for (PageNode tempPageNode : lisPageNodes) {
+      if (tempPageNode.getUri().equals(navNodeURI.replace("/" + Util.getUIPortalApplication().getOwner() + "/", ""))){
+        pageNode = tempPageNode;
+        break;
+      }
     }
-  	
-  	if (pageNode == null || pageNode.getPageReference() == null) return false;
-  	
-  	return
-  		PublicationUtil.getValuesAsString(contentNode, "publication:webPageIDs").contains(pageNode.getPageReference());
+
+    if (pageNode == null || pageNode.getPageReference() == null) return false;
+
+    return
+      PublicationUtil.getValuesAsString(contentNode, "publication:webPageIDs").contains(pageNode.getPageReference());
   }
-  
+
   /**
    * Gets the all page node from page navigation.
-   * 
+   *
    * @param pageNavigation the page navigation
-   * 
+   *
    * @return the all page node from page navigation
    */
   public static ArrayList<PageNode> getAllPageNodeFromPageNavigation(PageNavigation pageNavigation){
-  	ArrayList<PageNode> pageNodeList = new ArrayList<PageNode>();
-  	
-  	if (pageNavigation == null || pageNavigation.getNodes() == null)
-  		return null;
-  	
-  	for (PageNode pageNode : pageNavigation.getNodes()) {
-  		pageNodeList.add(pageNode);
-	    pageNodeList.addAll(getChildrenPageNodes(pageNode));
+    ArrayList<PageNode> pageNodeList = new ArrayList<PageNode>();
+
+    if (pageNavigation == null || pageNavigation.getNodes() == null)
+      return null;
+
+    for (PageNode pageNode : pageNavigation.getNodes()) {
+      pageNodeList.add(pageNode);
+      pageNodeList.addAll(getChildrenPageNodes(pageNode));
     }
-  	
-  	return pageNodeList;
+
+    return pageNodeList;
   }
-  
+
   /**
    * Gets the children page nodes.
-   * 
+   *
    * @param parentPageNode the parent page node
-   * 
+   *
    * @return the children page nodes
    */
   private static ArrayList<PageNode> getChildrenPageNodes(PageNode parentPageNode){
-  	ArrayList<PageNode> pageNodeList = new ArrayList<PageNode>();
-  	
-  	if (parentPageNode == null || parentPageNode.getChildren() == null)
-  		return pageNodeList;
-  	
-  	for (PageNode pageNode : parentPageNode.getChildren()) {
-	    pageNodeList.add(pageNode);
-	    if(pageNode.getChildren() != null && pageNode.getChildren().size() > 0) {
-	    	pageNodeList.addAll(getChildrenPageNodes(pageNode));
-	    }
+    ArrayList<PageNode> pageNodeList = new ArrayList<PageNode>();
+
+    if (parentPageNode == null || parentPageNode.getChildren() == null)
+      return pageNodeList;
+
+    for (PageNode pageNode : parentPageNode.getChildren()) {
+      pageNodeList.add(pageNode);
+      if(pageNode.getChildren() != null && pageNode.getChildren().size() > 0) {
+        pageNodeList.addAll(getChildrenPageNodes(pageNode));
+      }
     }
-  	
-  	return pageNodeList;
+
+    return pageNodeList;
   }
-  
-} 
+
+}

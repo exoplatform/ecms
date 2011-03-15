@@ -28,29 +28,29 @@ import org.exoplatform.webui.ext.filter.UIExtensionFilterType;
  * Created by The eXo Platform SARL
  * Author : Nguyen Anh Vu
  *          anhvurz90@gmail.com
- * Oct 16, 2009  
+ * Oct 16, 2009
  * 10:48:40 AM
  */
 public class IsInTrashFilter extends UIExtensionAbstractFilter {
-	
-	public IsInTrashFilter() {
-		this(null);
-	}
-	
-	public IsInTrashFilter(String messageKey) {
-		super(messageKey, UIExtensionFilterType.MANDATORY);
-	}
-	
-	public static boolean isInTrash(Node node) throws Exception {
-		return node.isNodeType(Utils.EXO_RESTORELOCATION);
-	}
 
-	public boolean accept(Map<String, Object> context) throws Exception {
-		if (context == null) return true;
-		Node currentNode = (Node) context.get(Node.class.getName());
-		return isInTrash(currentNode);
-	}
+  public IsInTrashFilter() {
+    this(null);
+  }
 
-	public void onDeny(Map<String, Object> context) throws Exception {
-	}
+  public IsInTrashFilter(String messageKey) {
+    super(messageKey, UIExtensionFilterType.MANDATORY);
+  }
+
+  public static boolean isInTrash(Node node) throws Exception {
+    return node.isNodeType(Utils.EXO_RESTORELOCATION);
+  }
+
+  public boolean accept(Map<String, Object> context) throws Exception {
+    if (context == null) return true;
+    Node currentNode = (Node) context.get(Node.class.getName());
+    return isInTrash(currentNode);
+  }
+
+  public void onDeny(Map<String, Object> context) throws Exception {
+  }
 }

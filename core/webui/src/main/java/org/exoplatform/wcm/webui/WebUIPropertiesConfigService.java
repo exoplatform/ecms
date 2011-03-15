@@ -29,30 +29,30 @@ import org.exoplatform.container.xml.PropertiesParam;
  * hoa.phamvu@exoplatform.com
  * Dec 13, 2008
  */
-public class WebUIPropertiesConfigService {  
-  
+public class WebUIPropertiesConfigService {
+
   /** The Constant SCV_POPUP_SIZE_EDIT_PORTLET_MODE. */
   public final static String SCV_POPUP_SIZE_EDIT_PORTLET_MODE = "SCV.popup.size.in.edit.portlet.mode".intern();
-  
+
   /** The Constant SCV_POPUP_SIZE_QUICK_EDIT. */
   public final static String SCV_POPUP_SIZE_QUICK_EDIT = "SCV.popup.size.in.quickdedit".intern();
-  
+
   /** The Constant CLV_POPUP_SIZE_EDIT_PORTLET_MODE. */
   public final static String CLV_POPUP_SIZE_EDIT_PORTLET_MODE = "CLV.popup.size.in.edit.portlet.mode".intern();
-  
+
   /** The Constant CLV_POPUP_SIZE_QUICK_EDIT. */
-  public final static String CLV_POPUP_SIZE_QUICK_EDIT = "CLV.popup.size.in.quickedit".intern(); 
+  public final static String CLV_POPUP_SIZE_QUICK_EDIT = "CLV.popup.size.in.quickedit".intern();
 
   /** The properties map. */
   private ConcurrentHashMap<String,Object> propertiesMap = new ConcurrentHashMap<String,Object>();
 
   /**
    * Instantiates a new web ui properties config service.
-   * 
+   *
    * @param params the params
    */
   @SuppressWarnings("unchecked")
-  public WebUIPropertiesConfigService(InitParams params) {    
+  public WebUIPropertiesConfigService(InitParams params) {
     for(Iterator iterator = params.getPropertiesParamIterator();iterator.hasNext();) {
       PropertiesParam propertiesParam = (PropertiesParam)iterator.next();
       if(SCV_POPUP_SIZE_EDIT_PORTLET_MODE.equalsIgnoreCase(propertiesParam.getName())) {
@@ -67,26 +67,26 @@ public class WebUIPropertiesConfigService {
       }else if(CLV_POPUP_SIZE_EDIT_PORTLET_MODE.equals(propertiesParam.getName())) {
         PopupWindowProperties properties = readPropertiesFromXML(propertiesParam);
         propertiesMap.put(CLV_POPUP_SIZE_EDIT_PORTLET_MODE,properties);
-      }       
+      }
     }
-  }  
-  
+  }
+
   /**
    * Gets the properties.
-   * 
+   *
    * @param name the name
-   * 
+   *
    * @return the properties
    */
   public Object getProperties(String name) {
     return propertiesMap.get(name);
   }
-  
+
   /**
    * Read properties from xml.
-   * 
+   *
    * @param param the param
-   * 
+   *
    * @return the popup window properties
    */
   private PopupWindowProperties readPropertiesFromXML(PropertiesParam param) {
@@ -106,45 +106,45 @@ public class WebUIPropertiesConfigService {
    * The Class PopupWindowProperties.
    */
   public static class PopupWindowProperties {
-    
+
     /** The Constant WIDTH. */
     public final static String WIDTH = "width".intern();
-    
+
     /** The Constant HEIGHT. */
     public final static String HEIGHT = "height".intern();
-    
+
     /** The width. */
     private int width = 500;
-    
+
     /** The height. */
     private int height = 300;
 
     /**
      * Gets the width.
-     * 
+     *
      * @return the width
      */
     public int getWidth() { return width; }
-    
+
     /**
      * Sets the width.
-     * 
+     *
      * @param width the new width
      */
     public void setWidth(int width) { this.width = width;}
 
     /**
      * Gets the height.
-     * 
+     *
      * @return the height
      */
     public int getHeight() { return height; }
-    
+
     /**
      * Sets the height.
-     * 
+     *
      * @param height the new height
      */
-    public void setHeight(int height) { this.height = height; }    
+    public void setHeight(int height) { this.height = height; }
   }
 }

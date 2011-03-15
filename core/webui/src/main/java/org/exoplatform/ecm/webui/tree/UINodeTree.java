@@ -32,24 +32,24 @@ import org.exoplatform.webui.core.UITree;
  * Created by The eXo Platform SAS
  * @author : Hoa.Pham
  *          hoa.pham@exoplatform.com
- * Jun 23, 2008  
+ * Jun 23, 2008
  */
 
 @ComponentConfig(
-    template = "system:/groovy/webui/core/UITree.gtmpl" , 
+    template = "system:/groovy/webui/core/UITree.gtmpl" ,
     events = @EventConfig(listeners = UITree.ChangeNodeActionListener.class)
-  )  
+  )
   /**
-   * This class extend <code>org.exoplatform.webui.core.UITree</code> 
-   * to render node tree for <code>javax.jcr.Node</code> 
-   * 
+   * This class extend <code>org.exoplatform.webui.core.UITree</code>
+   * to render node tree for <code>javax.jcr.Node</code>
+   *
    * */
 public class UINodeTree extends UITree {
 
   private String rootPath = "";
-  
+
   private boolean isTaxonomyLocalize;
-  
+
   public boolean isTaxonomyLocalize() {
     return isTaxonomyLocalize;
   }
@@ -66,22 +66,22 @@ public class UINodeTree extends UITree {
     this.rootPath = rootPath;
   }
 
-  /* 
+  /*
    * render nodetype icon for node in tree
    * @see org.exoplatform.webui.core.UITree#renderNode(java.lang.Object)
    */
   public String renderNode(Object obj) throws Exception {
     Node node = (Node) obj;
     String nodeTypeIcon = Utils.getNodeTypeIcon(node,"16x16Icon");
-	
+
     String nodeIcon = this.getExpandIcon();
     String iconGroup = this.getIcon();
-    String note = "" ; 
+    String note = "" ;
     if(isSelected(obj)) {
       nodeIcon = getColapseIcon();
       iconGroup = getSelectedIcon();
-      note = " NodeSelected" ;             
-    }    
+      note = " NodeSelected" ;
+    }
     String beanIconField = getBeanIconField();
     if(beanIconField != null && beanIconField.length() > 0) {
       if(getFieldValue(obj, beanIconField) != null)
@@ -91,9 +91,20 @@ public class UINodeTree extends UITree {
     String actionLink = event("ChangeNode", objId);
     StringBuilder builder = new StringBuilder();
     if(nodeIcon.equals(getExpandIcon())) {
-      builder.append(" <a class=\"").append(nodeIcon).append(" ").append(nodeTypeIcon).append("\" href=\"").append(actionLink).append("\">") ;
+      builder.append(" <a class=\"")
+             .append(nodeIcon)
+             .append(" ")
+             .append(nodeTypeIcon)
+             .append("\" href=\"")
+             .append(actionLink)
+             .append("\">");
     } else {
-      builder.append(" <a class=\"").append(nodeIcon).append(" ").append(nodeTypeIcon).append("\" onclick=\"eXo.portal.UIPortalControl.collapseTree(this)").append("\">") ;
+      builder.append(" <a class=\"")
+             .append(nodeIcon)
+             .append(" ")
+             .append(nodeTypeIcon)
+             .append("\" onclick=\"eXo.portal.UIPortalControl.collapseTree(this)")
+             .append("\">");
     }
     UIRightClickPopupMenu popupMenu = getUiPopupMenu();
     String beanFieldValue = getDisplayFieldValue(obj);
@@ -145,11 +156,11 @@ public class UINodeTree extends UITree {
     }
     return String.valueOf(getFieldValue(bean, getBeanLabelField()));
   }
-  
+
   public boolean isSelected(Object obj) throws Exception {
     Node selectedNode = this.getSelected();
     Node node = (Node) obj;
-    if(selectedNode == null) return false;    
+    if(selectedNode == null) return false;
     return selectedNode.getPath().equals(node.getPath());
   }
 }

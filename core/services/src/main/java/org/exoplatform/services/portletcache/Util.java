@@ -66,7 +66,7 @@ class Util
       }
       return hashCode;
    }
-   
+
    static boolean equals(Map<String, String[]> map1, Map<String, String[]> map2)
    {
       if (map1.keySet().equals(map2.keySet()))

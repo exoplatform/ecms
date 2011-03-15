@@ -34,14 +34,14 @@ import org.exoplatform.webui.form.UIFormStringInput;
 import org.exoplatform.webui.form.validator.MandatoryValidator;
 
 /**
- * Created by The eXo Platform SARL 
+ * Created by The eXo Platform SARL
  * Author : phamtuan
- * phamtuanchip@yahoo.de September 20, 2006 16:37:15 
+ * phamtuanchip@yahoo.de September 20, 2006 16:37:15
  */
 
 @ComponentConfig(
     lifecycle = UIFormLifecycle.class,
-    template = "system:/groovy/webui/form/UIForm.gtmpl", 
+    template = "system:/groovy/webui/form/UIForm.gtmpl",
     events = {
       @EventConfig(listeners = UINamespaceForm.SaveActionListener.class),
       @EventConfig(phase=Phase.DECODE, listeners = UINamespaceForm.CancelActionListener.class)
@@ -54,7 +54,7 @@ public class UINamespaceForm extends UIForm {
 
   public UINamespaceForm() throws Exception {
     addUIFormInput(new UIFormStringInput(FIELD_PREFIX, FIELD_PREFIX, null).
-    		addValidator(MandatoryValidator.class).
+        addValidator(MandatoryValidator.class).
         addValidator(ECMNameValidator.class)) ;
     addUIFormInput(new UIFormStringInput(FIELD_URI, FIELD_URI, null).
         addValidator(MandatoryValidator.class)) ;
@@ -69,13 +69,13 @@ public class UINamespaceForm extends UIForm {
       .getCurrentRepository().getNamespaceRegistry() ;
       String prefix = uiForm.getUIStringInput(FIELD_PREFIX).getValue() ;
       if(prefix == null || prefix.trim().length() == 0) {
-        uiApp.addMessage(new ApplicationMessage("UINamespaceForm.msg.prefix-null", null, 
+        uiApp.addMessage(new ApplicationMessage("UINamespaceForm.msg.prefix-null", null,
             ApplicationMessage.WARNING)) ;
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
         return ;
       }
       if(uri == null || uri.trim().length() == 0) {
-        uiApp.addMessage(new ApplicationMessage("UINamespaceForm.msg.uri-null", null, 
+        uiApp.addMessage(new ApplicationMessage("UINamespaceForm.msg.uri-null", null,
             ApplicationMessage.WARNING)) ;
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
         return ;
@@ -83,7 +83,7 @@ public class UINamespaceForm extends UIForm {
       UINamespaceManager uiManager = uiForm.getAncestorOfType(UINamespaceManager.class) ;
       if (contains(namespaceRegistry.getPrefixes(), prefix) ||
           contains(namespaceRegistry.getURIs(), uri)) {
-        uiApp.addMessage(new ApplicationMessage("UINamespaceForm.msg.register-unsuccessfull", null, 
+        uiApp.addMessage(new ApplicationMessage("UINamespaceForm.msg.register-unsuccessfull", null,
             ApplicationMessage.WARNING)) ;
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
         return ;
@@ -93,20 +93,20 @@ public class UINamespaceForm extends UIForm {
         uiManager.refresh() ;
         uiManager.removeChild(UIPopupWindow.class) ;
       } catch (Exception e) {
-        uiApp.addMessage(new ApplicationMessage("UINamespaceForm.msg.register-unsuccessfull", null, 
+        uiApp.addMessage(new ApplicationMessage("UINamespaceForm.msg.register-unsuccessfull", null,
             ApplicationMessage.WARNING)) ;
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
         return ;
       }
       event.getRequestContext().addUIComponentToUpdateByAjax(uiManager) ;
     }
-    
+
     private boolean contains(String[] arr, String st) {
       if (st == null) return false;
-      for (String value : arr) 
+      for (String value : arr)
         if (st.equals(value))
           return true;
-      return false;      
+      return false;
     }
   }
 

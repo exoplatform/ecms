@@ -24,7 +24,7 @@ import org.exoplatform.webui.form.UIFormInputBase;
  * Created by The eXo Platform SAS
  * @author : Hoa.Pham
  *          hoa.pham@exoplatform.com
- * Jun 23, 2008  
+ * Jun 23, 2008
  */
 public class UIFormHiddenField extends DialogFormField {
 
@@ -38,11 +38,11 @@ public class UIFormHiddenField extends DialogFormField {
   }
 
   public JcrInputProperty createJcrInputProperty() {
-    JcrInputProperty inputProperty = new JcrInputProperty();    
+    JcrInputProperty inputProperty = new JcrInputProperty();
     inputProperty.setJcrPath(jcrPath);
     if(defaultValue != null && defaultValue.length() > 0) {
       inputProperty.setValue(defaultValue) ;
-    }    
+    }
     if (nodeType != null || mixinTypes != null) {
       inputProperty.setType(JcrInputProperty.NODE);
       if(nodeType != null) inputProperty.setNodetype(nodeType);

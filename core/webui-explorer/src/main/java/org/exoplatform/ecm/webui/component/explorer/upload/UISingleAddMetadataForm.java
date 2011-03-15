@@ -64,23 +64,23 @@ public class UISingleAddMetadataForm extends UIDialogForm {
   public UISingleAddMetadataForm() throws Exception {
     setActions(ACTIONS) ;
   }
-  
+
   public void setNodeType(String nodeType) { nodeType_ = nodeType ; }
-  public String getNodeType() { return nodeType_ ; } 
-  
-  public String getDialogTemplatePath() {   
+  public String getNodeType() { return nodeType_ ; }
+
+  public String getDialogTemplatePath() {
     repositoryName = getAncestorOfType(UIJCRExplorer.class).getRepositoryName() ;
     MetadataService metadataService = getApplicationComponent(MetadataService.class) ;
     try {
       return metadataService.getMetadataPath(nodeType_, true, repositoryName) ;
     } catch (Exception e) {
       LOG.error("Unexpected error", e);
-    } 
+    }
     return null ;
   }
-  
+
   public String getTemplate() { return getDialogTemplatePath() ; }
-  
+
   @SuppressWarnings("unused")
   public ResourceResolver getTemplateResourceResolver(WebuiRequestContext context, String template) {
     return getAncestorOfType(UIJCRExplorer.class).getJCRTemplateResourceResolver() ;
@@ -134,7 +134,7 @@ public class UISingleAddMetadataForm extends UIDialogForm {
       event.getRequestContext().addUIComponentToUpdateByAjax(uiUploadContainer) ;
     }
   }
-  
+
   static public class CancelActionListener extends EventListener<UISingleAddMetadataForm> {
     public void execute(Event<UISingleAddMetadataForm> event) throws Exception {
       UISingleUploadContainer uiUploadContainer = event.getSource().getParent() ;

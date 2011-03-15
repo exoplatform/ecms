@@ -65,9 +65,9 @@ import org.exoplatform.webui.form.UIFormDateTimeInput;
     @EventConfig(listeners = UIPublicationPanel.SaveActionListener.class),
     @EventConfig(listeners = UIPublicationPanel.CloseActionListener.class) })
 public class UIPublicationPanel extends org.exoplatform.services.wcm.publication.lifecycle.stageversion.ui.UIPublicationPanel {
-	  final static public String OBJECTID = "objectId";
+    final static public String OBJECTID = "objectId";
 
-	  public static final String START_PUBLICATION = "UIPublicationPanelStartDateInput";
+    public static final String START_PUBLICATION = "UIPublicationPanelStartDateInput";
 
   public static final String END_PUBLICATION   = "UIPublicationPanelEndDateInput";
 
@@ -75,7 +75,7 @@ public class UIPublicationPanel extends org.exoplatform.services.wcm.publication
 
   /**
    * Instantiates a new uI publication panel.
-   * 
+   *
    * @throws Exception the exception
    */
   public UIPublicationPanel() throws Exception {
@@ -110,7 +110,7 @@ public class UIPublicationPanel extends org.exoplatform.services.wcm.publication
     if (endDate != null) {
       ((UIFormDateTimeInput) getChildById(END_PUBLICATION)).setCalendar(endDate);
     }
-    
+
   }
 
   /**
@@ -120,7 +120,7 @@ public class UIPublicationPanel extends org.exoplatform.services.wcm.publication
    * component's <code>addDraftActionListener<code> method. When
    * the draftAction event occurs, that object's appropriate
    * method is invoked.
-   * 
+   *
    * @see DraftActionEvent
    */
   public static class ChangeStateActionListener extends EventListener<UIPublicationPanel> {
@@ -148,7 +148,7 @@ public class UIPublicationPanel extends org.exoplatform.services.wcm.publication
         currentNode.setProperty("publication:lastUser", event.getRequestContext().getRemoteUser());
         String siteName = Util.getPortalRequestContext().getPortalOwner();
         String remoteUser = Util.getPortalRequestContext().getRemoteUser();
-        wcmPublicationService.updateLifecyleOnChangeContent(currentNode, siteName, remoteUser, state);        
+        wcmPublicationService.updateLifecyleOnChangeContent(currentNode, siteName, remoteUser, state);
         publicationPanel.updatePanel();
       } catch (Exception e) {
         UIApplication uiApp = publicationPanel.getAncestorOfType(UIApplication.class);
@@ -209,7 +209,7 @@ public class UIPublicationPanel extends org.exoplatform.services.wcm.publication
     }
     return lifecycleName;
   }
-  
+
   /**
    * Check if a user is authorized to reach the given state of a given  node.
    * The user must satisfy the constraints defined by state (memberships or role)
@@ -219,10 +219,10 @@ public class UIPublicationPanel extends org.exoplatform.services.wcm.publication
    * @return
    */
   public boolean canReachState(State state, String remoteUser, NodeImpl node) {
-    
+
     IdentityRegistry identityRegistry = getApplicationComponent(IdentityRegistry.class);
     Identity currentUser = identityRegistry.getIdentity(remoteUser);
-    
+
     if (isAuthorizedByMembership(state, currentUser)) {
       return true;
     }
@@ -233,7 +233,7 @@ public class UIPublicationPanel extends org.exoplatform.services.wcm.publication
 
     return false;
   }
-  
+
   /**
    * Check if the user has the memberships defined in the state
    * @param state

@@ -45,7 +45,7 @@ import org.exoplatform.services.workflow.WorkflowFileDefinitionService;
 
 /**
  * Created by Bull R&D
- * @author Silani Patrick 
+ * @author Silani Patrick
  * E-mail: patrick.silani@gmail.com
  * May 29, 2006
  */
@@ -54,35 +54,35 @@ public class JCRFileDefinitionServiceImpl
 
   /** Name of the Portal Container to use if no current instance is set */
   private static final String EXO_PORTALNAME = "ecm";
-  
+
   /** Name of the Node Type corresponding to a Business Process Model */
   private static final String NODE_TYPE = "exo:businessProcessModel";
-  
+
   /** Property that identifies the Business Process in the Model node */
   private static final String BPID_PROPERTY ="exo:businessProcessId";
-  
+
   /** Property that identify the path in the JCR **/
   public static final String ECM_BUSINESS_PROCESSES_PATH ="businessProcessesPath" ;
 
   /** Business processes node path */
   private String bpNodePath;
-  
+
   /** Reference to the Cms configuration Service */
   private NodeHierarchyCreator nodeHierarchyCreator_;
- 
+
   /**
    * Cache to store File Definition objets, so we
    * don't need to get them from the JCR every time
    */
   private Hashtable<String, FileDefinition> fileDefinitions =
     new Hashtable<String, FileDefinition>();
-  
+
   private static final Log LOG = ExoLogger.getExoLogger(JCRFileDefinitionServiceImpl.class);
 
   /**
    * Adds files to the business process model node.
    * Files in META-INF directory and all class files are ignored.
-   *  
+   *
    * @param modelNode parent node
    * @param filePath complete file path
    * @param value file content
@@ -92,7 +92,7 @@ public class JCRFileDefinitionServiceImpl
                                    String filePath,
                                    byte[] value)
     throws Exception {
-  
+
     // We are ignoring all classes and all files in META-INF directory
     if (!(filePath.endsWith("class") || filePath.startsWith("META"))) {
 
@@ -103,7 +103,7 @@ public class JCRFileDefinitionServiceImpl
       if (filePath.contains("/")){
         fileName = new File(filePath).getName();
         path = filePath.substring(0,filePath.length() - fileName.length());
-        
+
         if (!modelNode.hasNode(path)) {
           Node pathNode = makePath(modelNode, path, "nt:unstructured");
           fileNode = pathNode.addNode(fileName, "nt:file");
@@ -114,9 +114,9 @@ public class JCRFileDefinitionServiceImpl
         fileName = filePath;
         fileNode = modelNode.addNode(fileName, "nt:file");
       }
-      
+
       Node contentNode = fileNode.addNode("jcr:content", "nt:resource");
-      String mimeType = new MimeTypeResolver().getMimeType(fileName); 
+      String mimeType = new MimeTypeResolver().getMimeType(fileName);
       contentNode.setProperty("jcr:mimeType", mimeType);
       if (mimeType.startsWith("text")) {
         contentNode.setProperty("jcr:encoding", "UTF-8");
@@ -127,28 +127,28 @@ public class JCRFileDefinitionServiceImpl
   }
 
   /**
-   * Gets a Node in the JCR from a Process id 
+   * Gets a Node in the JCR from a Process id
    * @param processId identifies the Process
    * @param Session   reference to the JCR session
    * @return the Node corresponding to the specified Process id
    */
-  private Node getNodeByProcessId(String processId, Session session) 
+  private Node getNodeByProcessId(String processId, Session session)
     throws RepositoryException {
 
-	  Node bpNode = session.getRootNode().getNode(
+    Node bpNode = session.getRootNode().getNode(
         bpNodePath.startsWith("/") ? bpNodePath.substring(1) : bpNodePath);
 
-	  String processName;
-	try {
-		processName = WorkflowServiceContainerHelper.getProcessName(processId);
-	
-      if(bpNode.hasNode(processName)) {  
+    String processName;
+  try {
+    processName = WorkflowServiceContainerHelper.getProcessName(processId);
+
+      if(bpNode.hasNode(processName)) {
         return  bpNode.getNode(processName);
       }
-	} catch (Exception e) {
-		LOG.warn(e.getMessage(), e);
-	}
-	  
+  } catch (Exception e) {
+    LOG.warn(e.getMessage(), e);
+  }
+
     QueryManager qm = session.getWorkspace().getQueryManager();
     Query q= qm.createQuery(
       "select * from "
@@ -168,16 +168,16 @@ public class JCRFileDefinitionServiceImpl
     }
     return null;
   }
-  
-  /** 
+
+  /**
    * Retrieves a system session to the production Workspace.
    * A reference to the default Portal Container is retrieved. If not found,
    * then a Portal container is looked up with a hardcoded name.
-   * 
+   *
    * @return Session object to the production Workspace
    */
   private Session getSession() {
-    
+
     boolean checkpoint = false;
 
     try {
@@ -189,10 +189,10 @@ public class JCRFileDefinitionServiceImpl
         PortalContainer.setInstance(container);
         checkpoint = true;
       }
-      
+
       RepositoryService repositoryService = (RepositoryService) container
         .getComponentInstanceOfType(RepositoryService.class);
-      String wsName = 
+      String wsName =
         repositoryService.getDefaultRepository().getConfiguration().getSystemWorkspaceName() ;
       return repositoryService.getDefaultRepository().getSystemSession(wsName);
     }
@@ -207,7 +207,7 @@ public class JCRFileDefinitionServiceImpl
     }
     return null;
   }
-  
+
   public static Node makePath(Node rootNode, String path, String nodetype)
   throws PathNotFoundException, RepositoryException {
     return makePath(rootNode, path, nodetype, null);
@@ -215,7 +215,7 @@ public class JCRFileDefinitionServiceImpl
 
   @SuppressWarnings("unchecked")
   public static Node makePath(Node rootNode, String path, String nodetype, Map permissions)
-  throws PathNotFoundException, RepositoryException {    
+  throws PathNotFoundException, RepositoryException {
     String[] tokens = path.split("/") ;
     Node node = rootNode;
     for (int i = 0; i < tokens.length; i++) {
@@ -227,10 +227,10 @@ public class JCRFileDefinitionServiceImpl
         if (node.canAddMixin("exo:privilegeable")){
           node.addMixin("exo:privilegeable");
         }
-        if(permissions != null){          
+        if(permissions != null){
           ((ExtendedNode)node).setPermissions(permissions);
         }
-      }      
+      }
     }
     return node;
   }
@@ -238,17 +238,17 @@ public class JCRFileDefinitionServiceImpl
   /**
    * Instantiates a new JCRFileDefinitionServiceImpl.
    * Caches a reference to the cmsConfiguration service.
-   * 
+   *
    * @param CmsConfiguration reference to the Cms Configuration Manager
    */
   public JCRFileDefinitionServiceImpl(
     NodeHierarchyCreator nodeHierarchyCreator) {
-    
+
     // Store references to dependent services
     this.nodeHierarchyCreator_ = nodeHierarchyCreator;
     this.bpNodePath = nodeHierarchyCreator_.
       getJcrPath(ECM_BUSINESS_PROCESSES_PATH);
-    
+
   }
 
   /* (non-Javadoc)
@@ -258,7 +258,7 @@ public class JCRFileDefinitionServiceImpl
 
     // Remove the Business Process from cache
     removeFromCache(processId);
-    
+
     try {
       Session session = getSession();
       Node node = getNodeByProcessId(processId, session);
@@ -276,7 +276,7 @@ public class JCRFileDefinitionServiceImpl
    * @see org.exoplatform.services.workflow.impl.bonita.WorkflowFileDefinitionService#removeFromCache(java.lang.String)
    */
   public void removeFromCache(String processId) {
-    
+
     if (fileDefinitions.containsKey(processId)) {
       fileDefinitions.remove(processId);
     }
@@ -289,9 +289,9 @@ public class JCRFileDefinitionServiceImpl
 
     // We get the filedefinition object from cache if we can
     if (fileDefinitions.containsKey(processId)) {
-      return fileDefinitions.get(processId);      
-    } 
-    
+      return fileDefinitions.get(processId);
+    }
+
     // Filedefinition is not cached we get it from the JCR
     try {
      Session session = getSession();
@@ -303,8 +303,8 @@ public class JCRFileDefinitionServiceImpl
     }
     catch (RepositoryException e) {
       LOG.warn(e.getMessage(), e);
-    } 
-    
+    }
+
     return null;
   }
 
@@ -313,27 +313,27 @@ public class JCRFileDefinitionServiceImpl
    */
   @SuppressWarnings("unchecked")
   public void store(FileDefinition fileDefinition, String processId) {
- 
+
     try {
       // We put filedefinition in the cache to increase performances
       fileDefinitions.put(processId, fileDefinition);
-       
-      Hashtable<String, byte[]> entries = fileDefinition.getEntries(); 
+
+      Hashtable<String, byte[]> entries = fileDefinition.getEntries();
       Session session = getSession();
-       
+
       // We have to delete the first '/' character from bpNodePath string
       Node bpNode = session.getRootNode().getNode(
         bpNodePath.startsWith("/") ? bpNodePath.substring(1) : bpNodePath);
 
-      if (bpNode.hasNode(fileDefinition.getProcessModelName())) {  
+      if (bpNode.hasNode(fileDefinition.getProcessModelName())) {
         Node n = bpNode.getNode(fileDefinition.getProcessModelName());
         n.remove();
       }
-       
-      Node modelNode = bpNode.addNode(fileDefinition.getProcessModelName(), 
+
+      Node modelNode = bpNode.addNode(fileDefinition.getProcessModelName(),
                                       NODE_TYPE);
       modelNode.setProperty(BPID_PROPERTY, processId);
-       
+
       for (Enumeration e = entries.keys(); e.hasMoreElements();) {
         Object element = e.nextElement();
         byte[] entry = entries.get(element);
@@ -341,10 +341,10 @@ public class JCRFileDefinitionServiceImpl
         String filename = element.toString();
         addFilesToModelNode(modelNode, filename, entry);
       }
-     
+
       // Commit changes
       session.save();
-     
+
     }
     catch (Exception e) {
       LOG.warn(e.getMessage(), e);

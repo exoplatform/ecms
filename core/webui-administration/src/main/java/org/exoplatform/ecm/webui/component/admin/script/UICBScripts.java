@@ -76,7 +76,7 @@ public class UICBScripts extends UIContainer {
       String version = "" ;
       if(node.isNodeType(Utils.MIX_VERSIONABLE) && !node.isNodeType(Utils.NT_FROZEN)){
         version = node.getBaseVersion().getName();
-      } 
+      }
       script = new ScriptData(node.getName(), node.getPath(), version) ;
       scriptData.add(script) ;
     }

@@ -30,7 +30,7 @@ import org.exoplatform.webui.event.EventListener;
  * Author : Ly Dinh Quang
  *          quang.ly@exoplatform.com
  *          xxx5669@gmail.com
- * Jan 13, 2009  
+ * Jan 13, 2009
  */
 @ComponentConfigs({
   @ComponentConfig(
@@ -46,7 +46,7 @@ public class UIControllerManager extends UIContainer {
   private static String[] BPDEFINITION_BEAN_FIELD = {"id", "name", "version"} ;
   private static String[] ACTION = {"ManageStart"} ;
   private WorkflowServiceContainer service_;
-  
+
   public UIControllerManager() throws Exception {
     service_ = getApplicationComponent(WorkflowServiceContainer.class) ;
     addChild(UITaskList.class, null, null) ;
@@ -60,7 +60,7 @@ public class UIControllerManager extends UIContainer {
     Locale locale = Util.getUIPortal().getAncestorOfType(UIPortalApplication.class).getLocale() ;
     WorkflowFormsService workflowFormsService = getApplicationComponent(WorkflowFormsService.class) ;
     List<Process> processes = service_.getProcesses() ;
-    
+
     List<Process> visibleDefinitions = new ArrayList<Process>() ;
     for(Process process : processes) {
       workflowFormsService.removeForms(process.getId()) ;
@@ -71,13 +71,13 @@ public class UIControllerManager extends UIContainer {
     uiBPDefinitionGrid.getUIPageIterator().setPageList(new ObjectPageList(visibleDefinitions, 10)) ;
     super.processRender(context);
   }
-  
+
   static  public class ManageStartActionListener extends EventListener<UIControllerManager> {
     public void execute(Event<UIControllerManager> event) throws Exception {
       UIControllerManager uiControllerManager = event.getSource() ;
       uiControllerManager.setRenderedChild(UIGrid.class) ;
       String processId = event.getRequestContext().getRequestParameter(OBJECTID);
-      if(uiControllerManager.service_.hasStartTask(processId)) {      
+      if(uiControllerManager.service_.hasStartTask(processId)) {
         UIWorkflowControllerPortlet portlet = uiControllerManager.getParent() ;
         UIPopupContainer uiPopup = portlet.getChild(UIPopupContainer.class) ;
         UITaskManager uiTaskManager = portlet.createUIComponent(UITaskManager.class, null, null) ;

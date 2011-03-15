@@ -15,18 +15,18 @@
  * along with this program; if not, see<http://www.gnu.org/licenses/>.
  */
 package org.exoplatform.services.cms.jcrext;
- 
+
 import javax.jcr.Node;
 import javax.jcr.Property;
- 
+
 import org.apache.commons.chain.Context;
 import org.exoplatform.services.command.action.Action;
- 
+
 /**
  * Created by The eXo Platform SARL
  * Author : Nguyen Anh Vu
  *          vu.nguyen@exoplatform.com
- * Aug 17, 2010  
+ * Aug 17, 2010
  * 3:09:32 PM
  */
 /**
@@ -34,22 +34,22 @@ import org.exoplatform.services.command.action.Action;
  *
  */
 public class AddNodeNameAction implements Action {
- 
+
  public boolean execute(Context context) throws Exception {
    Object item = context.get("currentItem");
    Node node = (item instanceof Property) ? ((Property)item).getParent() :
-                                            (Node)item;     
+                                            (Node)item;
    if(node.isNodeType("nt:resource")) node = node.getParent();
- 
+
    if(node.canAddMixin("exo:sortable")) {
-     node.addMixin("exo:sortable");            
+     node.addMixin("exo:sortable");
    }
-   
+
    if (!node.hasProperty("exo:name")) {
        node.setProperty("exo:name", node.getName());
    }
-   
+
    return false;
  }
- 
+
 }

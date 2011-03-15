@@ -35,18 +35,18 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
  * Oct 17, 2008
  */
 public class PaginatedQueryResult extends PaginatedNodeIterator {
-  
-  /** The query criteria. */
-  protected QueryCriteria queryCriteria; 
 
-  /** The row iterator. */  
+  /** The query criteria. */
+  protected QueryCriteria queryCriteria;
+
+  /** The row iterator. */
   protected QueryResult queryResult;
 
   private boolean isSearchContent;
-  
+
   /**
    * Instantiates a new paginated query result.
-   * 
+   *
    * @param pageSize the page size
    */
 
@@ -56,19 +56,19 @@ public class PaginatedQueryResult extends PaginatedNodeIterator {
 
   /**
    * Instantiates a new paginated query result.
-   * 
+   *
    * @param queryResult the query result
    * @param pageSize the page size
-   * 
+   *
    * @throws Exception the exception
    */
   @SuppressWarnings("deprecation")
   public PaginatedQueryResult(QueryResult queryResult,int pageSize, boolean isSearchContent) throws Exception{
-    super(pageSize);         
+    super(pageSize);
     this.nodeIterator = queryResult.getNodes();
     this.isSearchContent = isSearchContent;
-    this.setAvailablePage((int)nodeIterator.getSize()); 
-    this.queryResult = queryResult;    
+    this.setAvailablePage((int)nodeIterator.getSize());
+    this.queryResult = queryResult;
   }
 
   /* (non-Javadoc)
@@ -79,83 +79,83 @@ public class PaginatedQueryResult extends PaginatedNodeIterator {
     if(page == currentPage_ && (currentListPage_ != null && !currentListPage_.isEmpty())) {
       return;
     }
-    checkAndSetPosition(page);            
+    checkAndSetPosition(page);
     currentListPage_ = new CopyOnWriteArrayList<ResultNode>();
-    int count = 0;    
+    int count = 0;
     RowIterator iterator = queryResult.getRows();
     while(nodeIterator.hasNext()) {
-    Node node = nodeIterator.nextNode();      
-    Node viewNode = filterNodeToDisplay(node); 
-      
+    Node node = nodeIterator.nextNode();
+    Node viewNode = filterNodeToDisplay(node);
+
       if(viewNode != null) {
         //Skip back 1 position to get current row mapping to the node
         long position = nodeIterator.getPosition();
-        long rowPosition = iterator.getPosition();        
+        long rowPosition = iterator.getPosition();
         long skipNum = position - rowPosition;
-        iterator.skip(skipNum -1);        
+        iterator.skip(skipNum -1);
         Row row = iterator.nextRow();
         ResultNode resultNode = new ResultNode(viewNode,row);
         currentListPage_.add(resultNode);
-        count ++;        
-        if(count == getPageSize()) 
-          break;                    
+        count ++;
+        if(count == getPageSize())
+          break;
       }
-    }        
+    }
     currentPage_ = page;
-  }      
+  }
 
   /**
    * Filter node to display.
-   * 
+   *
    * @param node the node
-   * 
+   *
    * @return the node
-   * 
+   *
    * @throws Exception the exception
    */
   protected Node filterNodeToDisplay(Node node) throws Exception {
-	  Node displayNode = getNodeToCheckState(node);
-	  if(displayNode == null) return null;
-	  if (isSearchContent) return displayNode;
-	  NodeLocation nodeLocation = NodeLocation.make(displayNode);
-	  WCMComposer wcmComposer = WCMCoreUtils.getService(WCMComposer.class);
-	  HashMap<String, String> filters = new HashMap<String, String>();
-	  filters.put(WCMComposer.FILTER_MODE, WCMComposer.MODE_LIVE);
-	  return wcmComposer.getContent(nodeLocation.getRepository(), nodeLocation.getWorkspace(), nodeLocation.getPath(), filters, WCMCoreUtils.getSystemSessionProvider());
+    Node displayNode = getNodeToCheckState(node);
+    if(displayNode == null) return null;
+    if (isSearchContent) return displayNode;
+    NodeLocation nodeLocation = NodeLocation.make(displayNode);
+    WCMComposer wcmComposer = WCMCoreUtils.getService(WCMComposer.class);
+    HashMap<String, String> filters = new HashMap<String, String>();
+    filters.put(WCMComposer.FILTER_MODE, WCMComposer.MODE_LIVE);
+    return wcmComposer.getContent(nodeLocation.getRepository(), nodeLocation.getWorkspace(), nodeLocation.getPath(), filters, WCMCoreUtils.getSystemSessionProvider());
   }
   protected Node getNodeToCheckState(Node node)throws Exception{
-	  Node displayNode = node;
-	  if (node.getPath().contains("web contents/site artifacts")) {
-	  	  return null;
-	  }
-	  if (displayNode.isNodeType("nt:resource")) {
-	  	  displayNode = node.getParent();
-	  }
-	  if (displayNode.isNodeType("exo:htmlFile")) {
-	  	  Node parent = displayNode.getParent();
-	  	  if (parent.isNodeType("exo:webContent")) displayNode = parent;
-	  }
-	  if(queryCriteria.isSearchWebContent()) {
-	 	 if(!queryCriteria.isSearchDocument()) {
-	  	    if(!displayNode.isNodeType("exo:webContent")) 
-	  	       return null;
-	  	 }
-	  	 if(queryCriteria.isSearchWebpage()) {
-	        if (!displayNode.isNodeType("publication:webpagesPublication"))
-	  	        return null;
-	  	    }
-	  	  } else if(queryCriteria.isSearchWebpage()) {
-	  	      if (queryCriteria.isSearchDocument()) {
-	  	          return displayNode;
-	  	      } else if (!displayNode.isNodeType("publication:webpagesPublication"))
-	  	          return null;
-	  	  }
-	  	  String[] contentTypes = queryCriteria.getContentTypes();
-	  	  if(contentTypes != null && contentTypes.length>0) {
-	  	     String primaryNodeType = displayNode.getPrimaryNodeType().getName();
-	  	  if(!ArrayUtils.contains(contentTypes,primaryNodeType))
-	          return null;
-	    }
-	  	  return displayNode;
-	  }
+    Node displayNode = node;
+    if (node.getPath().contains("web contents/site artifacts")) {
+        return null;
+    }
+    if (displayNode.isNodeType("nt:resource")) {
+        displayNode = node.getParent();
+    }
+    if (displayNode.isNodeType("exo:htmlFile")) {
+        Node parent = displayNode.getParent();
+        if (parent.isNodeType("exo:webContent")) displayNode = parent;
+    }
+    if(queryCriteria.isSearchWebContent()) {
+      if(!queryCriteria.isSearchDocument()) {
+          if(!displayNode.isNodeType("exo:webContent"))
+             return null;
+       }
+       if(queryCriteria.isSearchWebpage()) {
+          if (!displayNode.isNodeType("publication:webpagesPublication"))
+              return null;
+          }
+        } else if(queryCriteria.isSearchWebpage()) {
+            if (queryCriteria.isSearchDocument()) {
+                return displayNode;
+            } else if (!displayNode.isNodeType("publication:webpagesPublication"))
+                return null;
+        }
+        String[] contentTypes = queryCriteria.getContentTypes();
+        if(contentTypes != null && contentTypes.length>0) {
+           String primaryNodeType = displayNode.getPrimaryNodeType().getName();
+        if(!ArrayUtils.contains(contentTypes,primaryNodeType))
+            return null;
+      }
+        return displayNode;
+    }
 }

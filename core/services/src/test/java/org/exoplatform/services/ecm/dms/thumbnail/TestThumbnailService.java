@@ -36,12 +36,12 @@ import org.exoplatform.services.jcr.impl.core.NodeImpl;
  * Created by The eXo Platform SARL
  * Author : Hoang Van Hung
  *          hunghvit@gmail.com
- * Jun 20, 2009  
+ * Jun 20, 2009
  */
 public class TestThumbnailService extends BaseDMSTestCase {
 
   private ThumbnailService thumbnailService;
-  
+
   public void setUp() throws Exception {
     super.setUp();
     thumbnailService = (ThumbnailService)container.getComponentInstanceOfType(ThumbnailService.class);
@@ -67,7 +67,7 @@ public class TestThumbnailService extends BaseDMSTestCase {
   /**
    * Test method ThumbnailService.addThumbnailNode()
    * Input: Node test with thumbnail node folder
-   * Expect: Node with name = identifier of test node in ThumbnailService.EXO_THUMBNAILS_FOLDER node exists 
+   * Expect: Node with name = identifier of test node in ThumbnailService.EXO_THUMBNAILS_FOLDER node exists
    * @throws Exception
    */
   public void testAddThumbnailNode2() throws Exception {
@@ -81,7 +81,7 @@ public class TestThumbnailService extends BaseDMSTestCase {
     String identifier = ((NodeImpl)test).getInternalIdentifier();
     assertTrue(thumbnailFoder.hasNode(identifier));
   }
-  
+
   /**
    * Test method ThumbnailService.getFlowImages()
    * Input: Add node test
@@ -97,7 +97,7 @@ public class TestThumbnailService extends BaseDMSTestCase {
 
   /**
    * Test method ThumbnailService.getFlowImages()
-   * Input: Add node test, add node childTest. getFlowImages of test  
+   * Input: Add node test, add node childTest. getFlowImages of test
    * Expect: return list images of childTest node with one node name = identifier of childTest node
    * @throws Exception
    */
@@ -150,7 +150,7 @@ public class TestThumbnailService extends BaseDMSTestCase {
     assertTrue(lstNode.contains(file1));
     assertTrue(lstNode.contains(file2));
   }
-  
+
   /**
    * Test method ThumbnailService.getFileNodesByType()
    * Input: Add 2 node (file1 and file2) with node type = nt:file
@@ -186,7 +186,7 @@ public class TestThumbnailService extends BaseDMSTestCase {
     assertTrue(lstNode2.contains(file2));
     assertEquals(lstNode2.get(0), file2);
   }
-  
+
   /**
    * Test method ThumbnailService.addThumbnailImage()
    * Input: Node: thumbnail, resource /conf/dms/artifacts/images/ThumnailView.jpg, size = ThumbnailService.SMALL_SIZE
@@ -201,7 +201,7 @@ public class TestThumbnailService extends BaseDMSTestCase {
     thumbnailService.addThumbnailImage(childTest, ImageIO.read(getClass().getResource("/conf/dms/artifacts/images/ThumnailView.jpg").openStream()),  ThumbnailService.SMALL_SIZE);
     assertNotNull(value);
   }
-  
+
   /**
    * Test method ThumbnailService.getThumbnailImage()
    * Input: add thumbnail image to childTest node with resource = /conf/dms/artifacts/images/ThumnailView.jpg, size = ThumbnailService.SMALL_SIZE
@@ -216,10 +216,10 @@ public class TestThumbnailService extends BaseDMSTestCase {
     thumbnailService.addThumbnailImage(childTest, ImageIO.read(getClass().getResourceAsStream("/conf/dms/artifacts/images/ThumnailView.jpg")),  ThumbnailService.SMALL_SIZE);
     assertNotNull(childTest.getProperty(ThumbnailService.SMALL_SIZE).getValue());
   }
-  
+
   /**
    * Test method ThumbnailService.createSpecifiedThumbnail()
-   * Input: resource = /conf/dms/artifacts/images/ThumnailView.jpg, mimeType = image/jpeg, node = test 
+   * Input: resource = /conf/dms/artifacts/images/ThumnailView.jpg, mimeType = image/jpeg, node = test
    * Output: thumbnail node has property exo:smallSize contains data of resource
    *           /conf/dms/artifacts/images/ThumnailView.jpg which is scale by size = 32*32
    * @throws Exception
@@ -228,13 +228,13 @@ public class TestThumbnailService extends BaseDMSTestCase {
     Node test = session.getRootNode().addNode("test");
 //    Value value = session.getValueFactory().createValue(ImageUtils.scaleImage(ImageIO.read(getClass().getResourceAsStream("/conf/dms/artifacts/images/ThumnailView.jpg")), 32, 32));
     thumbnailService.createSpecifiedThumbnail(test, ImageIO.read(getClass().getResourceAsStream("/conf/dms/artifacts/images/ThumnailView.jpg")), ThumbnailService.SMALL_SIZE);
-    Node thumbnail = thumbnailService.getThumbnailNode(test); 
+    Node thumbnail = thumbnailService.getThumbnailNode(test);
     assertNotNull(thumbnail.getProperty(ThumbnailService.SMALL_SIZE).getValue());
   }
-  
+
   /**
    * Test method ThumbnailService.createThumbnailImage()
-   * Input: resource = /conf/dms/artifacts/images/ThumnailView.jpg, mimeType = image/jpeg, node = test 
+   * Input: resource = /conf/dms/artifacts/images/ThumnailView.jpg, mimeType = image/jpeg, node = test
    * Output: thumbnail node has 3 property exo:smallSize, exo:midiumSize, exo:bigSize contain data of resource
    *           /conf/dms/artifacts/images/ThumnailView.jpg which is scale by size = 32*32, 64*64, 300*300 respectively
    * @throws Exception
@@ -246,18 +246,18 @@ public class TestThumbnailService extends BaseDMSTestCase {
 //    Value value3 = session.getValueFactory().createValue(ImageUtils.scaleImage(ImageIO.read(getClass().getResourceAsStream("/conf/dms/artifacts/images/ThumnailView.jpg")), 300, 300));
     InputStream is = getClass().getResource("/conf/dms/artifacts/images/ThumnailView.jpg").openStream();
     thumbnailService.createThumbnailImage(test, ImageIO.read(is), "image/jpeg");
-    Node thumbnail = thumbnailService.getThumbnailNode(test); 
+    Node thumbnail = thumbnailService.getThumbnailNode(test);
     assertNotNull(thumbnail.getProperty(ThumbnailService.SMALL_SIZE).getValue().getStream());
     assertNotNull(thumbnail.getProperty(ThumbnailService.MEDIUM_SIZE).getValue());
     assertNotNull(thumbnail.getProperty(ThumbnailService.BIG_SIZE).getValue());
   }
-  
+
   /**
    * Test method ThumbnailService.processThumbnailList()
    * Input: List child node, 3 in 4 node are nt:file node type, data in nt:file has mimeType = image/jpeg
    *          binary data = /conf/dms/artifacts/images/ThumnailView.jpg, propertyName = SMALL_SIZE
-   * Output: Create thumbnail node for each node in list, each node has property = SMALL_SIZE 
-   *         with binary data = /conf/dms/artifacts/images/ThumnailView.jpg 
+   * Output: Create thumbnail node for each node in list, each node has property = SMALL_SIZE
+   *         with binary data = /conf/dms/artifacts/images/ThumnailView.jpg
    * @throws Exception
    */
   public void testProcessThumbnailList() throws Exception {
@@ -300,9 +300,9 @@ public class TestThumbnailService extends BaseDMSTestCase {
     assertNotNull(thumbnailImage1.getProperty(ThumbnailService.SMALL_SIZE).getValue());
     assertNotNull(thumbnailImage2.getProperty(ThumbnailService.SMALL_SIZE).getValue());
     assertNotNull(thumbnailImage3.getProperty(ThumbnailService.SMALL_SIZE).getValue());
-    
+
   }
-  
+
   /**
    *  Test method ThumbnailService.getThumbnailNode()
    *  Input: 1.test node
@@ -321,7 +321,7 @@ public class TestThumbnailService extends BaseDMSTestCase {
     assertNotNull(thumbnail);
     assertEquals(((NodeImpl)test).getInternalIdentifier(), thumbnail.getName());
   }
-  
+
   /**
    * Test method ThumbnailService.processRemoveThumbnail()
    * Input: test node whether or not thumbnail node exists
@@ -339,7 +339,7 @@ public class TestThumbnailService extends BaseDMSTestCase {
     thumbnailService.processRemoveThumbnail(test);
     assertFalse(session.itemExists("/" + ThumbnailService.EXO_THUMBNAILS_FOLDER + "/" + identifier));
   }
-  
+
   /**
    * Clean data
    */

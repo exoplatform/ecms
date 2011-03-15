@@ -32,7 +32,7 @@ import org.exoplatform.webui.event.EventListener;
  * Created by The eXo Platform SARL
  * Author : Dang Van Minh
  *          minh.dang@exoplatform.com
- * Oct 29, 2009  
+ * Oct 29, 2009
  * 7:08:57 AM
  */
 @ComponentConfig(
@@ -45,17 +45,17 @@ import org.exoplatform.webui.event.EventListener;
 
 public class UIAllItemsByType extends UIComponent {
 
-  public UIAllItemsByType() {    
+  public UIAllItemsByType() {
   }
-  
-  public List<String> getAllSupportedType() {            
+
+  public List<String> getAllSupportedType() {
     DocumentTypeService documentTypeService = getApplicationComponent(DocumentTypeService.class);
-    UIJCRExplorer uiJCRExplorer = getAncestorOfType(UIJCRExplorer.class);    
+    UIJCRExplorer uiJCRExplorer = getAncestorOfType(UIJCRExplorer.class);
     if (uiJCRExplorer.isFilterSave())
       return uiJCRExplorer.getCheckedSupportType();
     return documentTypeService.getAllSupportedType();
   }
-  
+
   static public class ShowDocumentTypeActionListener extends EventListener<UIAllItemsByType> {
     public void execute(Event<UIAllItemsByType> event) throws Exception {
       UIAllItemsByType uiViewDocumentTypes = event.getSource();
@@ -63,15 +63,15 @@ public class UIAllItemsByType extends UIComponent {
       UIJCRExplorer uiExplorer = uiViewDocumentTypes.getAncestorOfType(UIJCRExplorer.class);
       Set<String> allItemByTypeFilterMap = uiExplorer.getAllItemByTypeFilterMap();
       if (allItemByTypeFilterMap.contains(supportedType)) {
-      	allItemByTypeFilterMap.remove(supportedType);
+        allItemByTypeFilterMap.remove(supportedType);
       } else {
-      	allItemByTypeFilterMap.add(supportedType);
+        allItemByTypeFilterMap.add(supportedType);
       }
 //      uiExplorer.setSupportedType(supportType);
-//      uiExplorer.setViewDocument(true);      
+//      uiExplorer.setViewDocument(true);
       uiExplorer.setIsViewTag(false);
 //      uiExplorer.setSelectRootNode();
-      
+
 //      UIWorkingArea uiWorkingArea = uiExplorer.getChild(UIWorkingArea.class);
 //      UIDocumentWorkspace uiDocumentWorkspace = uiWorkingArea.getChild(UIDocumentWorkspace.class);
 //      if(uiDocumentWorkspace.isRendered()) {
@@ -82,15 +82,15 @@ public class UIAllItemsByType extends UIComponent {
       uiExplorer.updateAjax(event);
     }
   }
-  
+
   static public class DocumentFilterActionListener extends EventListener<UIAllItemsByType> {
     public void execute(Event<UIAllItemsByType> event) throws Exception {
       UIAllItemsByType uiSideBar = event.getSource();
-      UIJCRExplorer uiJCRExplorer = uiSideBar.getAncestorOfType(UIJCRExplorer.class);   
+      UIJCRExplorer uiJCRExplorer = uiSideBar.getAncestorOfType(UIJCRExplorer.class);
       UIPopupContainer popupAction = uiJCRExplorer.getChild(UIPopupContainer.class);
-      UIDocumentFilterForm uiDocumentFilter = popupAction.activate(UIDocumentFilterForm.class,300);      
+      UIDocumentFilterForm uiDocumentFilter = popupAction.activate(UIDocumentFilterForm.class,300);
       uiDocumentFilter.invoke(uiSideBar.getAllSupportedType());
-      
+
 //      UIWorkingArea uiWorkingArea = uiJCRExplorer.getChild(UIWorkingArea.class);
 //      UIDocumentWorkspace uiDocumentWorkspace = uiWorkingArea.getChild(UIDocumentWorkspace.class);
 //      if(uiDocumentWorkspace.isRendered()) {

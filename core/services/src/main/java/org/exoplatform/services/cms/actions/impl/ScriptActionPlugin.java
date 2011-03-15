@@ -41,20 +41,20 @@ import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 
 public class ScriptActionPlugin extends BaseActionPlugin implements ComponentPlugin {
-  
+
   public static final String ACTION_TYPE = "exo:scriptAction";
-  
+
   private ScriptService scriptService_;
   private RepositoryService repositoryService_;
   private ActionConfig config_;
-  
+
   public ScriptActionPlugin(ScriptService scriptService, InitParams params,
                             RepositoryService repositoryService) throws Exception {
     scriptService_ = scriptService;
     repositoryService_ = repositoryService;
     config_ = (ActionConfig) params.getObjectParamValues(ActionConfig.class).get(0);
   }
-  
+
   public Collection<String> getActionExecutables(String repository) throws Exception {
     Collection<String> actionScriptNames = new ArrayList<String>();
     SessionProvider provider = SessionProvider.createSystemProvider();
@@ -67,9 +67,9 @@ public class ScriptActionPlugin extends BaseActionPlugin implements ComponentPlu
     provider.close();
     return actionScriptNames;
   }
-  
+
   public String getActionExecutableLabel() { return "Groovy Scripts:"; }
-  
+
   public String getExecutableDefinitionName() { return "exo:script"; }
   protected String getWorkspaceName() { return config_.getWorkspace() ; }
   protected List<RepositoryEntry> getRepositories() {
@@ -80,24 +80,24 @@ public class ScriptActionPlugin extends BaseActionPlugin implements ComponentPlu
   }
   protected String getActionType() {  return ACTION_TYPE;  }
   protected List getActions() { return config_.getActions(); }
-  
+
   protected ECMEventListener createEventListener(String actionName, String actionExecutable,
       String repository, String srcWorkspace, String srcPath, Map variables, String actiontype) throws Exception {
     return new ScriptActionLauncherListener(actionName, actionExecutable, repository, srcWorkspace,
         srcPath, variables);
   }
-  
-  public String getName() { return ACTION_TYPE; }  
+
+  public String getName() { return ACTION_TYPE; }
   public void setName(String s) { }
-  
-  public String getDescription() { return "Add a action service"; }  
+
+  public String getDescription() { return "Add a action service"; }
   public void setDescription(String desc) { }
-  
+
   @SuppressWarnings("unchecked")
   public void executeAction(String userId, Node actionNode, Map variables, String repository) throws Exception {
     String script = null;
     if(actionNode.hasProperty("exo:script")) {
-      script = actionNode.getProperty("exo:script").getString();    
+      script = actionNode.getProperty("exo:script").getString();
     } else {
       NodeType nodeType = actionNode.getPrimaryNodeType();
       for(PropertyDefinition propertyDefinition : nodeType.getPropertyDefinitions()) {
@@ -105,12 +105,12 @@ public class ScriptActionPlugin extends BaseActionPlugin implements ComponentPlu
           script = getDefaultValue(propertyDefinition);
         }
       }
-    }    
+    }
     variables.put("actionNode", actionNode);
     variables.put("repository",repository) ;
     executeAction(userId, script, variables, repository);
-  }     
-  
+  }
+
   private String getDefaultValue(PropertyDefinition proDef) throws Exception {
     StringBuilder defaultValue = new StringBuilder() ;
     Value[] values = proDef.getDefaultValues() ;
@@ -122,10 +122,10 @@ public class ScriptActionPlugin extends BaseActionPlugin implements ComponentPlu
     }
     return defaultValue.toString() ;
   }
-  
-  private String getPropertyValue(Value value) throws Exception{    
+
+  private String getPropertyValue(Value value) throws Exception{
     switch(value.getType()) {
-      case PropertyType.BINARY: return Integer.toString(PropertyType.BINARY) ; 
+      case PropertyType.BINARY: return Integer.toString(PropertyType.BINARY) ;
       case PropertyType.BOOLEAN :return Boolean.toString(value.getBoolean()) ;
       case PropertyType.DATE : return value.getDate().getTime().toString() ;
       case PropertyType.DOUBLE : return Double.toString(value.getDouble()) ;
@@ -134,22 +134,22 @@ public class ScriptActionPlugin extends BaseActionPlugin implements ComponentPlu
       case PropertyType.STRING : return value.getString() ;
     }
     return null ;
-  }   
-  
+  }
+
   public void executeAction(String userId, String executable, Map variables, String repository) throws Exception {
     ExoContainer container = ExoContainerContext.getCurrentContainer();
     ScriptService scriptService =  (ScriptService)container.getComponentInstanceOfType(ScriptService.class);
     CmsScript cmsScript = scriptService.getScript(executable, repository);
     cmsScript.execute(variables);
   }
-  
+
   public class ScriptActionLauncherListener extends BaseActionLauncherListener {
-    
+
     public ScriptActionLauncherListener(String actionName, String script, String repository, String srcWorkspace,
         String srcPath, Map actionVariables) throws Exception {
       super(actionName, script, repository, srcWorkspace, srcPath, actionVariables);
     }
-    
+
     public void triggerAction(String userId, Map variables, String repository) throws Exception {
       executeAction(userId, super.executable_, variables, repository);
     }
@@ -163,6 +163,6 @@ public class ScriptActionPlugin extends BaseActionPlugin implements ComponentPlu
 
   protected Class createActivationJob() throws Exception {
     return ScriptActionActivationJob.class ;
-  }  
-  
+  }
+
 }

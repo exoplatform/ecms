@@ -21,13 +21,13 @@ import org.exoplatform.services.jcr.ext.common.SessionProvider;
 
 /**
  * Created by The eXo Platform SAS
- * Author : Hoa Pham	
+ * Author : Hoa Pham
  *          hoa.pham@exoplatform.com
- * Sep 6, 2008  
+ * Sep 6, 2008
  */
 public class FSDeploymentPlugin extends DeploymentPlugin {
 
-  public void deploy(SessionProvider sessionProvider) throws Exception {    
+  public void deploy(SessionProvider sessionProvider) throws Exception {
   }
 
 }

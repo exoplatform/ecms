@@ -81,17 +81,17 @@ public class TaxonomyPlugin extends BaseComponentPlugin {
   private ActionServiceContainer actionServiceContainer_;
 
   private InitParams             params_;
-  
+
   final static String MIX_AFFECTED_NODETYPE  = "mix:affectedNodeTypes".intern();
   final static String AFFECTED_NODETYPE      = "exo:affectedNodeTypeNames".intern();
   final static String ALL_DOCUMENT_TYPES     = "ALL_DOCUMENT_TYPES".intern();
-  
+
   private DMSConfiguration dmsConfiguration_;
   private static final Log LOG  = ExoLogger.getLogger(TaxonomyPlugin.class);
-  
+
   public TaxonomyPlugin(InitParams params, RepositoryService repositoryService,
       NodeHierarchyCreator nodeHierarchyCreator, TaxonomyService taxonomyService,
-      ActionServiceContainer actionServiceContainer, 
+      ActionServiceContainer actionServiceContainer,
       DMSConfiguration dmsConfiguration) throws Exception {
     repositoryService_ = repositoryService;
     baseTaxonomiesStorage_ = nodeHierarchyCreator.getJcrPath(BasePath.TAXONOMIES_TREE_STORAGE_PATH);
@@ -105,7 +105,7 @@ public class TaxonomyPlugin extends BaseComponentPlugin {
     if (autoCreated != null) autoCreateInNewRepository_ = Boolean.parseBoolean(autoCreated.getValue());
     if (workspaceParam != null) {
       workspace = workspaceParam.getValue();
-    } 
+    }
     if (pathParam == null) {
       path = baseTaxonomiesStorage_;
     } else {
@@ -176,7 +176,7 @@ public class TaxonomyPlugin extends BaseComponentPlugin {
     Iterator<ObjectParameter> it = params_.getObjectParamIterator();
     Node taxonomyStorageNodeSystem = Utils.makePath(taxonomyStorageNode, treeName, "exo:taxonomy",
             null);
-    String systemUser = SystemIdentity.SYSTEM;    
+    String systemUser = SystemIdentity.SYSTEM;
 
     while (it.hasNext()) {
       ObjectParameter objectParam = it.next();
@@ -194,7 +194,7 @@ public class TaxonomyPlugin extends BaseComponentPlugin {
             if (taxonomyStorageNodeSystem.canAddMixin("exo:privilegeable"))
               taxonomyStorageNodeSystem.addMixin("exo:privilegeable");
             ((ExtendedNode)taxonomyStorageNodeSystem).setPermission(systemUser, PermissionType.ALL);
-          }    
+          }
         }
         session.save();
       } else if (objectParam.getName().equals("taxonomy.configuration")) {
@@ -207,7 +207,7 @@ public class TaxonomyPlugin extends BaseComponentPlugin {
             if (taxonomyNode.canAddMixin("exo:privilegeable"))
               taxonomyNode.addMixin("exo:privilegeable");
             ((ExtendedNode)taxonomyNode).setPermission(systemUser, PermissionType.ALL);
-          }          
+          }
           if (taxonomyNode.canAddMixin("mix:referenceable")) {
             taxonomyNode.addMixin("mix:referenceable");
           }
@@ -233,7 +233,7 @@ public class TaxonomyPlugin extends BaseComponentPlugin {
     session.save();
     session.logout();
   }
-  
+
   private boolean containsUserInACL(List<AccessControlEntry> entries, String userName) {
     if (userName == null) return false;
     for (AccessControlEntry entry : entries)
@@ -241,7 +241,7 @@ public class TaxonomyPlugin extends BaseComponentPlugin {
           return true;
     return false;
   }
-  
+
   private boolean containsUser(List<Permission> permissions, String userName) {
     if (userName == null) return false;
     for (Permission permission : permissions)
@@ -264,12 +264,12 @@ public class TaxonomyPlugin extends BaseComponentPlugin {
     jcrInputDes.setJcrPath("/node/exo:description");
     jcrInputDes.setValue(action.getDescription());
     sortedInputs.put("/node/exo:description", jcrInputDes);
-    
+
     JcrInputProperty jcrInputLife = new JcrInputProperty();
     jcrInputLife.setJcrPath("/node/exo:lifecyclePhase");
     jcrInputLife.setValue(action.getLifecyclePhase().toArray(new String[0]));
     sortedInputs.put("/node/exo:lifecyclePhase", jcrInputLife);
-    
+
     JcrInputProperty jcrInputHomePath = new JcrInputProperty();
     jcrInputHomePath.setJcrPath("/node/exo:storeHomePath");
     jcrInputHomePath.setValue(action.getHomePath());
@@ -284,7 +284,7 @@ public class TaxonomyPlugin extends BaseComponentPlugin {
     jcrInputTargetPath.setJcrPath("/node/exo:targetPath");
     jcrInputTargetPath.setValue(action.getTargetPath());
     sortedInputs.put("/node/exo:targetPath", jcrInputTargetPath);
-    
+
     JcrInputProperty rootProp = sortedInputs.get("/node");
     if (rootProp == null) {
       rootProp = new JcrInputProperty();
@@ -300,7 +300,7 @@ public class TaxonomyPlugin extends BaseComponentPlugin {
       String[] roles = StringUtils.split(action.getRoles(), ";");
       actionNode.setProperty("exo:roles", roles);
     }
-    
+
     Iterator mixins = action.getMixins().iterator();
     NodeType nodeType;
     String value;
@@ -313,17 +313,17 @@ public class TaxonomyPlugin extends BaseComponentPlugin {
       for (Iterator iterator = keys.iterator(); iterator.hasNext();) {
         String key = (String) iterator.next();
         for(PropertyDefinition pro : nodeType.getPropertyDefinitions()) {
-        	if (pro.getName().equals(key)) {
-        		if (pro.isMultiple()) {
-	        		value = props.get(key);
-	                if (value != null) {
-	                  actionNode.setProperty(key, value.split(","));
-	                }	
+          if (pro.getName().equals(key)) {
+            if (pro.isMultiple()) {
+              value = props.get(key);
+                  if (value != null) {
+                    actionNode.setProperty(key, value.split(","));
+                  }
                 } else {
-            		actionNode.setProperty(key, props.get(key));
-            	}
-        		break;
-        	}
+                actionNode.setProperty(key, props.get(key));
+              }
+            break;
+          }
         }
       }
     }

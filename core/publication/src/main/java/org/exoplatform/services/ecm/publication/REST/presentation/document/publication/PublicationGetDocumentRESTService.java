@@ -56,7 +56,7 @@ import org.exoplatform.services.rest.resource.ResourceContainer;
  * Created by The eXo Platform SARL Author : Ly Dinh Quang
  * quang.ly@exoplatform.com xxx5669@gmail.com Feb 19, 2009
  * modified hunghvit@gmail.com
- * May 17, 2009  
+ * May 17, 2009
  */
 @Path("/publication/presentation/")
 public class PublicationGetDocumentRESTService implements ResourceContainer {
@@ -66,17 +66,17 @@ public class PublicationGetDocumentRESTService implements ResourceContainer {
   private PublicationService publicationService_;
 
   private ManageDriveService manageDriveService_;
-  
+
   final static public String DEFAULT_ITEM = "5";
-  
+
   /** The Constant LAST_MODIFIED_PROPERTY. */
   private static final String LAST_MODIFIED_PROPERTY = "Last-Modified";
-   
+
   /** The Constant IF_MODIFIED_SINCE_DATE_FORMAT. */
   private static final String IF_MODIFIED_SINCE_DATE_FORMAT = "EEE, dd MMM yyyy HH:mm:ss z";
-  
+
   private static final Log LOG  = ExoLogger.getLogger(PublicationGetDocumentRESTService.class);
-  
+
   public PublicationGetDocumentRESTService(RepositoryService repositoryService,
       PublicationService publicationService, ManageDriveService manageDriveService) {
     repositoryService_ = repositoryService;
@@ -88,7 +88,7 @@ public class PublicationGetDocumentRESTService implements ResourceContainer {
    * <p>Get the document which is published</p>
    * ex:
    * /portal/rest/publication/presentation/{repository}/{workspace}/{state}?showItems={numberOfItem}
-   * 
+   *
    * @param repoName      Repository name
    * @param wsName        Workspace name
    * @param state         The state is specified to classify the process
@@ -108,8 +108,8 @@ public class PublicationGetDocumentRESTService implements ResourceContainer {
    * <p>Get the document which is published</p>
    * ex: /portal/rest/publication/presentation/{repository}/{workspace}/{publicationPluginName}/
    * {state}?showItems={numberOfItem}
-   * 
-   * @param repoName                Repository name               
+   *
+   * @param repoName                Repository name
    * @param wsName                  Workspace name
    * @param publicationPluginName   Plugin name
    * @param state                   The state is specified to classify the process
@@ -172,7 +172,7 @@ public class PublicationGetDocumentRESTService implements ResourceContainer {
     }
     return listNode;
   }
-  
+
   private String getPublishedDateTime(Node currentNode) throws Exception {
     Value[] history = currentNode.getProperty("publication:history").getValues();
     String time = currentNode.getProperty("exo:dateModified").getString();
@@ -205,7 +205,7 @@ public class PublicationGetDocumentRESTService implements ResourceContainer {
       return currentNode.getProperty("exo:dateModified").getString();
     }
   }
-  
+
   private String getDriveName(List<DriveData> lstDrive, Node node) throws RepositoryException{
     String driveName = "";
     for (DriveData drive : lstDrive) {
@@ -217,36 +217,36 @@ public class PublicationGetDocumentRESTService implements ResourceContainer {
     }
     return driveName;
   }
-  
+
   public class PublishedNode {
-    
+
     private String nodeName_;
     private String nodePath_;
     private String driveName_;
     private String datePublished_;
-    
+
     public void setName(String nodeName) { nodeName_ = nodeName; }
     public String getName() { return nodeName_; }
-    
+
     public void setPath(String nodePath) { nodePath_ = nodePath; }
     public String getPath() { return nodePath_; }
-    
+
     public void setDriveName(String driveName) { driveName_ = driveName; }
-    public String getDriveName() { return driveName_; } 
-    
+    public String getDriveName() { return driveName_; }
+
     public void setDatePublished(String datePublished) { datePublished_ = datePublished; }
     public String getDatePublished() { return datePublished_; }
-    
+
   }
-  
+
   public class PublishedListNode {
-    
+
     private List<PublishedNode> publishedListNode_;
-    
-    public void setPublishedListNode(List<PublishedNode> publishedListNode) { 
-      publishedListNode_ = publishedListNode; 
+
+    public void setPublishedListNode(List<PublishedNode> publishedListNode) {
+      publishedListNode_ = publishedListNode;
     }
     public List<PublishedNode> getPublishedListNode() { return publishedListNode_; }
-    
+
   }
 }

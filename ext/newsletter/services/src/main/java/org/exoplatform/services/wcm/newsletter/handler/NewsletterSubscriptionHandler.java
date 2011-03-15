@@ -49,18 +49,18 @@ public class NewsletterSubscriptionHandler {
 
   /** The log. */
   private static Log log = ExoLogger.getLogger(NewsletterSubscriptionHandler.class);
-  
+
   /** The repository service. */
   private RepositoryService repositoryService;
-  
+
   /** The repository. */
   private String repository;
-  
+
   /** The workspace. */
   private String workspace;
-  
+
   private boolean isRemove;
-  
+
   public boolean isRemove() {
     return isRemove;
   }
@@ -71,23 +71,25 @@ public class NewsletterSubscriptionHandler {
 
   /**
    * Update permission for category node.
-   * 
+   *
    * @param subscriptionNode    node which is will be updated
    * @param subscriptionConfig  Category Object
    * @param isAddNew        is <code>True</code> if is add new category node and <code>False</code> if only update
    * @throws Exception      The Exception
    */
-  public List<String> updatePermissionForSubscriptionNode(Node subscriptionNode, NewsletterSubscriptionConfig subscriptionConfig, 
-                                                   boolean isAddNew) throws Exception {
+  public List<String> updatePermissionForSubscriptionNode(Node subscriptionNode,
+                                                          NewsletterSubscriptionConfig subscriptionConfig,
+                                                          boolean isAddNew) throws Exception {
     ExtendedNode extendedSubscriptionNode = ExtendedNode.class.cast(subscriptionNode);
     List<String> afterRemovePermisions = new ArrayList<String>();
-    if (extendedSubscriptionNode.canAddMixin("exo:privilegeable") || extendedSubscriptionNode.isNodeType("exo:privilegeable")) {
+    if (extendedSubscriptionNode.canAddMixin("exo:privilegeable")
+        || extendedSubscriptionNode.isNodeType("exo:privilegeable")) {
       if(extendedSubscriptionNode.canAddMixin("exo:privilegeable"))
         extendedSubscriptionNode.addMixin("exo:privilegeable");
       List<String> newRedactors = new ArrayList<String>();
       if(subscriptionConfig.getRedactor() != null && subscriptionConfig.getRedactor().trim().length() > 0)
         newRedactors.addAll(Arrays.asList(subscriptionConfig.getRedactor().split(",")));
-      
+
       // get all administrator of newsletter and moderator of category which contain this subscription
       Node categoryNode = subscriptionNode.getParent();
       Node categoriesNode = categoryNode.getParent();
@@ -97,35 +99,35 @@ public class NewsletterSubscriptionHandler {
         Value[] values = categoriesNode.getProperty(NewsletterConstant.CATEGORIES_PROPERTY_ADDMINISTRATOR).getValues();
         listAddministrators = NewsletterConstant.convertValuesToArray(values);
       }
-      //listAddministrators.add(PublicationUtil.getServices(UserACL.class).getSuperUser());// add supper user into list administrator
       listAddministrators.addAll(listModerators);
-      
+
       // Set permission is all for Redactors
       String[] permissions = new String[]{PermissionType.REMOVE, PermissionType.ADD_NODE, PermissionType.SET_PROPERTY};
       ExtendedNode categoryExtend = ExtendedNode.class.cast(categoryNode);
-      for(String redactor : newRedactors){        
+      for(String redactor : newRedactors){
         // Set read permission in category which contain subscription for this redactor
         if(!listModerators.contains(redactor))categoryExtend.setPermission(redactor, permissions);
       }
       categoryExtend.getSession().save();
-      
+
       for(String redactor : newRedactors)
-      	extendedSubscriptionNode.setPermission(redactor, PermissionType.ALL);
-      
+        extendedSubscriptionNode.setPermission(redactor, PermissionType.ALL);
+
       // Set permission is addNode, remove and setProperty for administrators
-      permissions = new String[]{PermissionType.READ, PermissionType.ADD_NODE, PermissionType.REMOVE, PermissionType.SET_PROPERTY};
+      permissions = new String[] { PermissionType.READ, PermissionType.ADD_NODE,
+          PermissionType.REMOVE, PermissionType.SET_PROPERTY };
       for(String admin : listAddministrators){
         if(newRedactors.contains(admin)) continue;
         extendedSubscriptionNode.setPermission(admin, permissions);
         newRedactors.add(admin);
       }
-      
+
       permissions = new String[]{PermissionType.READ, PermissionType.SET_PROPERTY}; // permission for normal users
       // set permission for any user when add new
       if(isAddNew){
         extendedSubscriptionNode.setPermission("any", permissions);
       }
-      
+
       // set only read permission for normal users who are not administrator ,moderator or redactor.
       List<String> allPermissions = NewsletterConstant.getAllPermissionOfNode(subscriptionNode);
       if(allPermissions != null && allPermissions.size() > 0){
@@ -143,10 +145,10 @@ public class NewsletterSubscriptionHandler {
     extendedSubscriptionNode.save();
     return afterRemovePermisions;
   }
-  
+
   /**
    * Instantiates a new newsletter subscription handler.
-   * 
+   *
    * @param repository the repository
    * @param workspace the workspace
    */
@@ -155,23 +157,26 @@ public class NewsletterSubscriptionHandler {
     this.repository = repository;
     this.workspace = workspace;
   }
-  
+
   /**
    * Gets the subscription form node.
-   * 
+   *
    * @param subscriptionNode the subscription node
-   * 
+   *
    * @return the subscription form node
-   * 
+   *
    * @throws Exception the exception
    */
   private NewsletterSubscriptionConfig getSubscriptionFormNode(Node subscriptionNode) throws Exception{
     NewsletterSubscriptionConfig subscriptionConfig = new NewsletterSubscriptionConfig();
     subscriptionConfig.setName(subscriptionNode.getName());
-    subscriptionConfig.setTitle(subscriptionNode.getProperty(NewsletterConstant.SUBSCRIPTION_PROPERTY_TITLE).getString());      
-    if(subscriptionNode.hasProperty(NewsletterConstant.SUBSCRIPTION_PROPERTY_DECRIPTION))
-      subscriptionConfig.setDescription(subscriptionNode.getProperty(NewsletterConstant.SUBSCRIPTION_PROPERTY_DECRIPTION).getString());
-    subscriptionConfig.setCategoryName(subscriptionNode.getProperty(NewsletterConstant.SUBSCRIPTION_PROPERTY_CATEGORY_NAME).getString());
+    subscriptionConfig.setTitle(subscriptionNode.getProperty(NewsletterConstant.SUBSCRIPTION_PROPERTY_TITLE)
+                                                .getString());
+    if (subscriptionNode.hasProperty(NewsletterConstant.SUBSCRIPTION_PROPERTY_DECRIPTION))
+      subscriptionConfig.setDescription(subscriptionNode.getProperty(NewsletterConstant.SUBSCRIPTION_PROPERTY_DECRIPTION)
+                                                        .getString());
+    subscriptionConfig.setCategoryName(subscriptionNode.getProperty(NewsletterConstant.SUBSCRIPTION_PROPERTY_CATEGORY_NAME)
+                                                       .getString());
     // get permission for this category
     String permission = "";
     for(String per : NewsletterConstant.getAllPermissionOfNode(subscriptionNode)){
@@ -181,17 +186,19 @@ public class NewsletterSubscriptionHandler {
     subscriptionConfig.setRedactor(permission);
     return subscriptionConfig;
   }
-  
+
   /**
    * Adds the.
-   * 
+   *
    * @param sessionProvider the session provider
    * @param portalName the portal name
    * @param subscription the subscription
-   * 
+   *
    * @throws Exception the exception
    */
-  public void add(SessionProvider sessionProvider, String portalName, NewsletterSubscriptionConfig subscription) throws Exception {
+  public void add(SessionProvider sessionProvider,
+                  String portalName,
+                  NewsletterSubscriptionConfig subscription) throws Exception {
     log.info("Trying to add subcription " + subscription.getName());
     Session session = null;
     try {
@@ -213,10 +220,10 @@ public class NewsletterSubscriptionHandler {
       if (session != null) session.logout();
     }
   }
-  
+
   /**
    * Edits the.
-   * 
+   *
    * @param portalName the portal name
    * @param subscription the subscription
    * @param sessionProvider the session provider
@@ -234,7 +241,12 @@ public class NewsletterSubscriptionHandler {
       subscriptionNode.setProperty(NewsletterConstant.SUBSCRIPTION_PROPERTY_CATEGORY_NAME, subscription.getCategoryName());
       List<String> candicateRemove = this.updatePermissionForSubscriptionNode(subscriptionNode, subscription, false);
       if(isRemove) {
-        List<String> ableToRemove = NewsletterConstant.removePermission(subscriptionNode, null, candicateRemove, false, portalName, session);
+        List<String> ableToRemove = NewsletterConstant.removePermission(subscriptionNode,
+                                                                        null,
+                                                                        candicateRemove,
+                                                                        false,
+                                                                        portalName,
+                                                                        session);
         String [] removePer = new String [ableToRemove.size()];
         NewsletterConstant.removeAccessPermission(ableToRemove.toArray(removePer));
       }
@@ -246,7 +258,7 @@ public class NewsletterSubscriptionHandler {
 
   /**
    * Delete.
-   * 
+   *
    * @param portalName the portal name
    * @param categoryName the category name
    * @param subscription the subscription
@@ -254,7 +266,7 @@ public class NewsletterSubscriptionHandler {
    */
   public void delete(SessionProvider sessionProvider, String portalName,
                      String categoryName, NewsletterSubscriptionConfig subscription) {
-    
+
     log.info("Trying to delete subcription " + subscription.getName());
     try {
       ManageableRepository manageableRepository = repositoryService.getRepository(repository);
@@ -264,7 +276,12 @@ public class NewsletterSubscriptionHandler {
       Node subscriptionNode = categoryNode.getNode(subscription.getName());
       List<String> candicateRemove = NewsletterConstant.getAllRedactor(portalName, session);
       if(isRemove) {
-        List<String> ableToRemove = NewsletterConstant.removePermission(subscriptionNode, null, candicateRemove, false, portalName, session);
+        List<String> ableToRemove = NewsletterConstant.removePermission(subscriptionNode,
+                                                                        null,
+                                                                        candicateRemove,
+                                                                        false,
+                                                                        portalName,
+                                                                        session);
         String [] removePer = new String [ableToRemove.size()];
         NewsletterConstant.removeAccessPermission(ableToRemove.toArray(removePer));
       }
@@ -274,24 +291,22 @@ public class NewsletterSubscriptionHandler {
       log.error("Delete subcription " + subscription.getName() + " failed because of ", e);
     }
   }
-  
+
   /**
    * Gets the subscriptions by category.
-   * 
+   *
    * @param portalName the portal name
    * @param categoryName the category name
    * @param sessionProvider the session provider
-   * 
+   *
    * @return the subscriptions by category
-   * 
+   *
    * @throws Exception the exception
    */
-  public List<NewsletterSubscriptionConfig> getSubscriptionsByCategory(
-                                                                       SessionProvider sessionProvider, 
+  public List<NewsletterSubscriptionConfig> getSubscriptionsByCategory(SessionProvider sessionProvider,
                                                                        String portalName,
-                                                                       String categoryName)
-                                                                       throws Exception{
-    
+                                                                       String categoryName) throws Exception {
+
     List<NewsletterSubscriptionConfig> listSubscriptions = new ArrayList<NewsletterSubscriptionConfig>();
 
     ManageableRepository manageableRepository = repositoryService.getRepository(repository);
@@ -311,8 +326,10 @@ public class NewsletterSubscriptionHandler {
     return listSubscriptions;
   }
 
-  public List<NewsletterSubscriptionConfig> getSubscriptionByRedactor(String portalName, String categoryName,
-                                                                      String userName, SessionProvider sessionProvider) throws Exception{
+  public List<NewsletterSubscriptionConfig> getSubscriptionByRedactor(String portalName,
+                                                                      String categoryName,
+                                                                      String userName,
+                                                                      SessionProvider sessionProvider) throws Exception {
     List<NewsletterSubscriptionConfig> listSubs = new ArrayList<NewsletterSubscriptionConfig>();
     ManageableRepository manageableRepository = repositoryService.getRepository(repository);
     Session session = sessionProvider.getSession(workspace, manageableRepository);
@@ -321,39 +338,40 @@ public class NewsletterSubscriptionHandler {
     Node categoryNode = (Node)session.getItem(categoryPath);
     Node subscriptionNode;
     NodeIterator subscriptionIterator = categoryNode.getNodes();
-    while(subscriptionIterator.hasNext()){
-      try{
+    while (subscriptionIterator.hasNext()) {
+      try {
         subscriptionNode = subscriptionIterator.nextNode();
-        if(!subscriptionNode.isNodeType(NewsletterConstant.SUBSCRIPTION_NODETYPE)) continue;
-        if(NewsletterConstant.hasPermission(userName, subscriptionNode)) listSubs.add(getSubscriptionFormNode(subscriptionNode));
-      }catch(Exception ex){
-        log.error("Error when get subcriptions by category " + categoryName + " failed because of ", ex);
+        if (!subscriptionNode.isNodeType(NewsletterConstant.SUBSCRIPTION_NODETYPE))
+          continue;
+        if (NewsletterConstant.hasPermission(userName, subscriptionNode))
+          listSubs.add(getSubscriptionFormNode(subscriptionNode));
+      } catch (Exception ex) {
+        log.error("Error when get subcriptions by category " + categoryName + " failed because of ",
+                  ex);
       }
     }
     return listSubs;
   }
-  
+
   /**
    * Gets the subscription ids by public user.
-   * 
+   *
    * @param portalName the portal name
    * @param userEmail the user email
    * @param sessionProvider the session provider
-   * 
+   *
    * @return the subscription ids by public user
-   * 
+   *
    * @throws Exception the exception
    */
-  public List<NewsletterSubscriptionConfig> getSubscriptionIdsByPublicUser(
-                                                                           SessionProvider sessionProvider, 
+  public List<NewsletterSubscriptionConfig> getSubscriptionIdsByPublicUser(SessionProvider sessionProvider,
                                                                            String portalName,
-                                                                           String userEmail)
-                                                                           throws Exception{
+                                                                           String userEmail) throws Exception {
     List<NewsletterSubscriptionConfig> listSubscriptions = new ArrayList<NewsletterSubscriptionConfig>();
     ManageableRepository manageableRepository = repositoryService.getRepository(repository);
     Session session = sessionProvider.getSession(workspace, manageableRepository);
     QueryManager queryManager = session.getWorkspace().getQueryManager();
-    String sqlQuery = "select * from " + NewsletterConstant.SUBSCRIPTION_NODETYPE + 
+    String sqlQuery = "select * from " + NewsletterConstant.SUBSCRIPTION_NODETYPE +
                       " where " + NewsletterConstant.SUBSCRIPTION_PROPERTY_USER + " = '" + userEmail + "'";
     Query query = queryManager.createQuery(sqlQuery, Query.SQL);
     QueryResult queryResult = query.execute();
@@ -370,22 +388,20 @@ public class NewsletterSubscriptionHandler {
 
   /**
    * Gets the subscriptions by name.
-   * 
+   *
    * @param portalName the portal name
    * @param categoryName the category name
    * @param subCriptionName the sub cription name
    * @param sessionProvider the session provider
-   * 
+   *
    * @return the subscriptions by name
-   * 
+   *
    * @throws Exception the exception
    */
-  public NewsletterSubscriptionConfig getSubscriptionsByName(
-                                                             SessionProvider sessionProvider, 
+  public NewsletterSubscriptionConfig getSubscriptionsByName(SessionProvider sessionProvider,
                                                              String portalName,
                                                              String categoryName,
-                                                             String subCriptionName)
-                                                             throws Exception{
+                                                             String subCriptionName) throws Exception {
       ManageableRepository manageableRepository = repositoryService.getRepository(repository);
       Session session = sessionProvider.getSession(workspace, manageableRepository);
       String path = NewsletterConstant.generateCategoryPath(portalName);
@@ -398,31 +414,29 @@ public class NewsletterSubscriptionHandler {
         return null;
       }
   }
-  
+
   /**
    * Gets the number of newsletters waiting.
-   * 
+   *
    * @param portalName the portal name
    * @param categoryName the category name
    * @param subScriptionName the sub scription name
    * @param sessionProvider the session provider
-   * 
+   *
    * @return the number of newsletters waiting
-   * 
+   *
    * @throws Exception the exception
    */
-  public long getNumberOfNewslettersWaiting(
-                                            SessionProvider sessionProvider, 
+  public long getNumberOfNewslettersWaiting(SessionProvider sessionProvider,
                                             String portalName,
                                             String categoryName,
-                                            String subScriptionName)
-                                            throws Exception{
+                                            String subScriptionName) throws Exception {
     ManageableRepository manageableRepository = repositoryService.getRepository(repository);
     Session session = sessionProvider.getSession(workspace, manageableRepository);
     String path = NewsletterConstant.generateCategoryPath(portalName) + "/" + categoryName + "/" + subScriptionName;
     QueryManager queryManager = session.getWorkspace().getQueryManager();
-    String sqlQuery = "select * from " + NewsletterConstant.ENTRY_NODETYPE + 
-                      " where jcr:path LIKE '" + path + "[%]/%' and " + NewsletterConstant.ENTRY_PROPERTY_STATUS + 
+    String sqlQuery = "select * from " + NewsletterConstant.ENTRY_NODETYPE +
+                      " where jcr:path LIKE '" + path + "[%]/%' and " + NewsletterConstant.ENTRY_PROPERTY_STATUS +
                       " = '" + NewsletterConstant.STATUS_AWAITING + "'";
     Query query = queryManager.createQuery(sqlQuery, Query.SQL);
     QueryResult queryResult = query.execute();

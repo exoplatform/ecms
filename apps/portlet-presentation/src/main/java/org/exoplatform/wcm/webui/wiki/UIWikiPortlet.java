@@ -34,7 +34,7 @@ public class UIWikiPortlet extends UIPortletApplication {
 
   /**
    * Instantiates a new uI wiki portlet.
-   * 
+   *
    * @throws Exception the exception
    */
   public UIWikiPortlet() throws Exception {

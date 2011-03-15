@@ -71,9 +71,9 @@ public class CreateTaxonomyPlugin extends CreatePortalPlugin {
   protected static final Log log = ExoLogger.getLogger("wcm:CreateTaxonomyPlugin");
 
   public static final String MIX_AFFECTED_NODETYPE  = "mix:affectedNodeTypes".intern();
-  
+
   public static final String AFFECTED_NODETYPE      = "exo:affectedNodeTypeNames".intern();
-  
+
   public static final String ALL_DOCUMENT_TYPES     = "ALL_DOCUMENT_TYPES".intern();
 
   /** The workspace. */
@@ -96,13 +96,13 @@ public class CreateTaxonomyPlugin extends CreatePortalPlugin {
 
   /** The taxonomy service_. */
   private TaxonomyService         taxonomyService;
-  
+
   /** The link manager service_. */
   private LinkManager             linkManager;
 
   /** The base taxonomies storage_. */
   private String                  baseTaxonomiesStorage;
-  
+
   /** The base taxonomies definition_. */
   private String                  baseTaxonomiesDefinition;
 
@@ -111,18 +111,18 @@ public class CreateTaxonomyPlugin extends CreatePortalPlugin {
 
   /** The params_. */
   private InitParams              params;
-  
+
   /** The dms configuration_. */
   private DMSConfiguration        dmsConfiguration;
-  
+
   /** The name. */
   private String                  name;
-  
+
   private String                   portalName;
-  
+
   /**
    * Instantiates a new initial taxonomy plugin.
-   * 
+   *
    * @param params the params
    * @param configurationManager the configuration manager
    * @param repositoryService the repository service
@@ -130,19 +130,19 @@ public class CreateTaxonomyPlugin extends CreatePortalPlugin {
    * @param taxonomyService the taxonomy service
    * @param actionServiceContainer the action service container
    * @param dmsConfiguration the dms configuration
-   * 
+   *
    * @throws Exception the exception
    */
-  public CreateTaxonomyPlugin(InitParams params, 
+  public CreateTaxonomyPlugin(InitParams params,
                                ConfigurationManager configurationManager,
                                RepositoryService repositoryService,
-                               NodeHierarchyCreator nodeHierarchyCreator, 
+                               NodeHierarchyCreator nodeHierarchyCreator,
                                TaxonomyService taxonomyService,
-                               ActionServiceContainer actionServiceContainer, 
-                               DMSConfiguration dmsConfiguration, 
+                               ActionServiceContainer actionServiceContainer,
+                               DMSConfiguration dmsConfiguration,
                                LinkManager linkManager) throws Exception {
     super(params, configurationManager, repositoryService);
-    
+
     this.repositoryService = repositoryService;
     this.baseTaxonomiesStorage = nodeHierarchyCreator.getJcrPath(BasePath.TAXONOMIES_TREE_STORAGE_PATH);
     this.baseTaxonomiesDefinition = nodeHierarchyCreator.getJcrPath(BasePath.TAXONOMIES_TREE_DEFINITION_PATH);
@@ -153,8 +153,12 @@ public class CreateTaxonomyPlugin extends CreatePortalPlugin {
     this.linkManager = linkManager;
   }
 
-  /* (non-Javadoc)
-   * @see org.exoplatform.services.wcm.portal.artifacts.BasePortalArtifactsPlugin#deployToPortal(java.lang.String, org.exoplatform.services.jcr.ext.common.SessionProvider)
+  /*
+   * (non-Javadoc)
+   * @see
+   * org.exoplatform.services.wcm.portal.artifacts.BasePortalArtifactsPlugin
+   * #deployToPortal(java.lang.String,
+   * org.exoplatform.services.jcr.ext.common.SessionProvider)
    */
   public void deployToPortal(SessionProvider sessionProvider, String portalName) throws Exception {
     this.portalName = portalName;
@@ -167,7 +171,7 @@ public class CreateTaxonomyPlugin extends CreatePortalPlugin {
     if (pathParam == null || workspaceParam == null || workspaceParam.getValue().trim().length() == 0) {
       path = baseTaxonomiesStorage;
     } else {
-      path = pathParam.getValue();  
+      path = pathParam.getValue();
       workspace = workspaceParam.getValue();
     }
     if (nameParam != null) {
@@ -183,29 +187,31 @@ public class CreateTaxonomyPlugin extends CreatePortalPlugin {
       String repositoryName = repositoryService.getCurrentRepository().getConfiguration().getName();
       Node srcTaxonomy = taxonomyService.getTaxonomyTree(repositoryName, portalName);
       String srcWorkspace = srcTaxonomy.getSession().getWorkspace().getName();
-      
+
       // Get destination information
       ManageableRepository repository = repositoryService.getRepository(repositoryName);
       session = sessionProvider.getSession(this.workspace, repository);
       Workspace destWorkspace = session.getWorkspace();
       String destPath = path + "/" + srcTaxonomy.getName();
-      
+
       // If same workspace
       if (srcWorkspace.equals(destWorkspace.getName())) {
         destWorkspace.move(srcTaxonomy.getPath(), destPath);
       } else {
         // Clone taxonomy tree across workspace
         destWorkspace.clone(srcWorkspace, srcTaxonomy.getPath(), destPath, true);
-        
+
         // Remove old link taxonomy tree in definition
         String dmsSystemWorkspaceName = dmsConfiguration.getConfig().getSystemWorkspace();
-        Node taxonomyDefinition = (Node) sessionProvider.getSession(dmsSystemWorkspaceName, repository).getItem(baseTaxonomiesDefinition);
+        Node taxonomyDefinition = (Node) sessionProvider.getSession(dmsSystemWorkspaceName,
+                                                                    repository)
+                                                        .getItem(baseTaxonomiesDefinition);
         Node srcLinkTaxonomy = taxonomyDefinition.getNode(srcTaxonomy.getName());
         srcLinkTaxonomy.remove();
-        
+
         // Remove old taxonomy tree
         srcTaxonomy.remove();
-        
+
         // Register new taxonomy tree in definition
         Node destTaxonomy = (Node) session.getItem(destPath);
         linkManager.createLink(taxonomyDefinition, destTaxonomy);
@@ -221,7 +227,7 @@ public class CreateTaxonomyPlugin extends CreatePortalPlugin {
 
   /**
    * Inits the.
-   * 
+   *
    * @throws Exception the exception
    */
   public void init() throws Exception {
@@ -239,12 +245,12 @@ public class CreateTaxonomyPlugin extends CreatePortalPlugin {
     }
     importPredefineTaxonomies(repository);
   }
-  
+
   /**
    * Inits the.
-   * 
+   *
    * @param repository the repository
-   * 
+   *
    * @throws Exception the exception
    */
   public void init(String repository) throws Exception {
@@ -269,7 +275,7 @@ public class CreateTaxonomyPlugin extends CreatePortalPlugin {
 
   /**
    * Gets the path.
-   * 
+   *
    * @return the path
    */
   public String getPath() {
@@ -278,7 +284,7 @@ public class CreateTaxonomyPlugin extends CreatePortalPlugin {
 
   /**
    * Sets the path.
-   * 
+   *
    * @param path the new path
    */
   public void setPath(String path) {
@@ -287,7 +293,7 @@ public class CreateTaxonomyPlugin extends CreatePortalPlugin {
 
   /**
    * Gets the permissions.
-   * 
+   *
    * @return the permissions
    */
   public List<Permission> getPermissions() {
@@ -296,7 +302,7 @@ public class CreateTaxonomyPlugin extends CreatePortalPlugin {
 
   /**
    * Sets the permissions.
-   * 
+   *
    * @param permissions the new permissions
    */
   public void setPermissions(List<Permission> permissions) {
@@ -305,7 +311,7 @@ public class CreateTaxonomyPlugin extends CreatePortalPlugin {
 
   /**
    * Gets the workspace.
-   * 
+   *
    * @return the workspace
    */
   public String getWorkspace() {
@@ -314,18 +320,18 @@ public class CreateTaxonomyPlugin extends CreatePortalPlugin {
 
   /**
    * Sets the workspace.
-   * 
+   *
    * @param workspace the new workspace
    */
   public void setWorkspace(String workspace) {
     this.workspace = workspace;
   }
-  
+
   /**
    * Import predefine taxonomies.
-   * 
+   *
    * @param repository the repository
-   * 
+   *
    * @throws Exception the exception
    */
   @SuppressWarnings("unchecked")
@@ -391,11 +397,11 @@ public class CreateTaxonomyPlugin extends CreatePortalPlugin {
 
   /**
    * Adds the action.
-   * 
+   *
    * @param action the action
    * @param srcNode the src node
    * @param repository the repository
-   * 
+   *
    * @throws Exception the exception
    */
   @SuppressWarnings("unchecked")
@@ -410,12 +416,12 @@ public class CreateTaxonomyPlugin extends CreatePortalPlugin {
     jcrInputDes.setJcrPath("/node/exo:description");
     jcrInputDes.setValue(action.getDescription());
     sortedInputs.put("/node/exo:description", jcrInputDes);
-    
+
     JcrInputProperty jcrInputLife = new JcrInputProperty();
     jcrInputLife.setJcrPath("/node/exo:lifecyclePhase");
     jcrInputLife.setValue(action.getLifecyclePhase().toArray(new String[0]));
     sortedInputs.put("/node/exo:lifecyclePhase", jcrInputLife);
-    
+
     JcrInputProperty jcrInputHomePath = new JcrInputProperty();
     jcrInputHomePath.setJcrPath("/node/exo:storeHomePath");
     String homepath = action.getHomePath();
@@ -435,7 +441,7 @@ public class CreateTaxonomyPlugin extends CreatePortalPlugin {
     targetPath = StringUtils.replace(targetPath, "{portalName}", portalName);
     jcrInputTargetPath.setValue(targetPath);
     sortedInputs.put("/node/exo:targetPath", jcrInputTargetPath);
-    
+
     JcrInputProperty rootProp = sortedInputs.get("/node");
     if (rootProp == null) {
       rootProp = new JcrInputProperty();
@@ -451,7 +457,7 @@ public class CreateTaxonomyPlugin extends CreatePortalPlugin {
       String[] roles = StringUtils.split(action.getRoles(), ";");
       actionNode.setProperty("exo:roles", roles);
     }
-    
+
     Iterator mixins = action.getMixins().iterator();
     NodeType nodeType;
     String value;
@@ -470,7 +476,7 @@ public class CreateTaxonomyPlugin extends CreatePortalPlugin {
               value = props.get(key);
               if (value != null) {
                 actionNode.setProperty(key, value.split(","));
-              }  
+              }
             } else {
               actionNode.setProperty(key, props.get(key));
             }
@@ -484,9 +490,9 @@ public class CreateTaxonomyPlugin extends CreatePortalPlugin {
 
   /**
    * Gets the permissions.
-   * 
+   *
    * @param listPermissions the list permissions
-   * 
+   *
    * @return the permissions
    */
   private Map<String, String[]> getPermissions(List<Permission> listPermissions) {
@@ -505,5 +511,5 @@ public class CreateTaxonomyPlugin extends CreatePortalPlugin {
     }
     return permissionsMap;
   }
-  
+
 }

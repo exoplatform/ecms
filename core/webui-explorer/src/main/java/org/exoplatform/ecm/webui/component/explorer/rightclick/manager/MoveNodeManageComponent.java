@@ -61,7 +61,7 @@ import org.exoplatform.webui.ext.manager.UIAbstractManagerComponent;
  * Created by The eXo Platform SARL
  * Author : Hoang Van Hung
  *          hunghvit@gmail.com
- * Aug 6, 2009  
+ * Aug 6, 2009
  */
 
 @ComponentConfig(
@@ -72,16 +72,16 @@ import org.exoplatform.webui.ext.manager.UIAbstractManagerComponent;
 
 public class MoveNodeManageComponent extends UIAbstractManagerComponent {
 
-	private static final List<UIExtensionFilter> FILTERS 
-			= Arrays.asList(new UIExtensionFilter[]{ new IsNotTrashHomeNodeFilter() } );
-	
-	@UIExtensionFilters
-	public List<UIExtensionFilter> getFilters() {
-		return FILTERS;
-	}
+  private static final List<UIExtensionFilter> FILTERS
+      = Arrays.asList(new UIExtensionFilter[]{ new IsNotTrashHomeNodeFilter() } );
+
+  @UIExtensionFilters
+  public List<UIExtensionFilter> getFilters() {
+    return FILTERS;
+  }
 
   private static final Log LOG = ExoLogger.getLogger(MoveNodeManageComponent.class);
-  
+
   private static void processMultipleSelection(String nodePath, String destPath,
       Event<? extends UIComponent> event) throws Exception {
     UIJCRExplorer uiExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class);
@@ -169,7 +169,7 @@ public class MoveNodeManageComponent extends UIAbstractManagerComponent {
       return;
     }
   }
-  
+
   private static Node getNodeByPath(String srcPath, UIJCRExplorer uiExplorer) throws Exception {
     Matcher matcher = UIWorkingArea.FILE_EXPLORER_URL_SYNTAX.matcher(srcPath);
     String wsName = null;
@@ -182,7 +182,7 @@ public class MoveNodeManageComponent extends UIAbstractManagerComponent {
     Session srcSession = uiExplorer.getSessionByWorkspace(wsName);
     return uiExplorer.getNodeByPath(srcPath, srcSession, false);
   }
-  
+
   private static void moveNode(String srcPath, Node selectedNode, Node destNode, Event<?> event) throws Exception {
     UIComponent uiComponent = (UIComponent)event.getSource();
     UIJCRExplorer uiExplorer = uiComponent.getAncestorOfType(UIJCRExplorer.class);
@@ -212,22 +212,22 @@ public class MoveNodeManageComponent extends UIAbstractManagerComponent {
       String destPath = destNode.getPath();
       messagePath = destPath;
       // Make destination path without index on final name
-      destPath = destPath.concat("/").concat(selectedNode.getName());  
+      destPath = destPath.concat("/").concat(selectedNode.getName());
       Workspace srcWorkspace = srcSession.getWorkspace();
       Workspace destWorkspace = destNode.getSession().getWorkspace();
-    	if (srcPath.indexOf(":/") > -1)
-    		srcPath = srcPath.substring(srcPath.indexOf(":/") + 1);
+      if (srcPath.indexOf(":/") > -1)
+        srcPath = srcPath.substring(srcPath.indexOf(":/") + 1);
       if (srcWorkspace.equals(destWorkspace)) {
         srcWorkspace.move(srcPath, destPath);
-      	//delete EXO_RESTORE_LOCATION if source is in trash
+        //delete EXO_RESTORE_LOCATION if source is in trash
         removeMixinEXO_RESTORE_LOCATION(srcSession, destPath);
         LockUtil.changeLockToken(srcPath, (Node)srcSession.getItem(destPath));
-				srcSession.save();
+        srcSession.save();
       } else {
         destWorkspace.clone(srcWorkspace.getName(), srcPath, destPath, false);
-      	//delete EXO_RESTORE_LOCATION if source is in trash
-				removeMixinEXO_RESTORE_LOCATION(destWorkspace.getSession(), destPath);
-				destWorkspace.getSession().save();
+        //delete EXO_RESTORE_LOCATION if source is in trash
+        removeMixinEXO_RESTORE_LOCATION(destWorkspace.getSession(), destPath);
+        destWorkspace.getSession().save();
       }
     } catch (Exception e) {
       Object[] args = { srcPath, messagePath };
@@ -237,18 +237,18 @@ public class MoveNodeManageComponent extends UIAbstractManagerComponent {
       return;
     }
   }
-  
-	private static void removeMixinEXO_RESTORE_LOCATION(Session session, String restorePath) throws Exception {
-		Node sameNameNode = ((Node) session.getItem(restorePath));
-		Node parent = sameNameNode.getParent();
-		String name = sameNameNode.getName();
-		NodeIterator nodeIter = parent.getNodes(name);
-		while (nodeIter.hasNext()) {
-			Node node = nodeIter.nextNode();
-			if (node.isNodeType(Utils.EXO_RESTORELOCATION))
-				node.removeMixin(Utils.EXO_RESTORELOCATION);
-		}
-	}
+
+  private static void removeMixinEXO_RESTORE_LOCATION(Session session, String restorePath) throws Exception {
+    Node sameNameNode = ((Node) session.getItem(restorePath));
+    Node parent = sameNameNode.getParent();
+    String name = sameNameNode.getName();
+    NodeIterator nodeIter = parent.getNodes(name);
+    while (nodeIter.hasNext()) {
+      Node node = nodeIter.nextNode();
+      if (node.isNodeType(Utils.EXO_RESTORELOCATION))
+        node.removeMixin(Utils.EXO_RESTORELOCATION);
+    }
+  }
 
   private static void moveMultiNode(String[] srcPaths, Node destNode, Event<? extends UIComponent> event) throws Exception {
     Map<String, Node> mapNode = new HashMap <String, Node>();
@@ -259,7 +259,7 @@ public class MoveNodeManageComponent extends UIAbstractManagerComponent {
       mapNode.put(node.getPath(), node);
     }
     String path = null;
-    Iterator<String> iterator = mapNode.keySet().iterator(); 
+    Iterator<String> iterator = mapNode.keySet().iterator();
     while (iterator.hasNext()) {
       path = iterator.next();
       node = mapNode.get(path);
@@ -272,23 +272,23 @@ public class MoveNodeManageComponent extends UIAbstractManagerComponent {
     public void processEvent(Event<MoveNodeManageComponent> event) throws Exception {
       String nodePath = event.getRequestContext().getRequestParameter(OBJECTID);
       String destPath = event.getRequestContext().getRequestParameter("destInfo");
-      
+
       if (isInTrash(nodePath) && isInTrash(destPath))
-      	return;
+        return;
       else if (isInTrash(destPath))
-      	((UIWorkingArea)event.getSource().getParent()).getChild(DeleteManageComponent.class).doDelete(nodePath, event);
-      else 
-      	MoveNodeManageComponent.processMultipleSelection(nodePath.trim(), destPath.trim(), event);
+        ((UIWorkingArea)event.getSource().getParent()).getChild(DeleteManageComponent.class).doDelete(nodePath, event);
+      else
+        MoveNodeManageComponent.processMultipleSelection(nodePath.trim(), destPath.trim(), event);
     }
-    
+
     private static boolean isInTrash(String path) {
-    	PortletRequestContext pcontext = (PortletRequestContext)WebuiRequestContext.getCurrentInstance();
+      PortletRequestContext pcontext = (PortletRequestContext)WebuiRequestContext.getCurrentInstance();
       PortletPreferences portletPref = pcontext.getRequest().getPreferences();
-	  	String trashHomeNodePath = portletPref.getValue(Utils.TRASH_HOME_NODE_PATH, "");
-	  	String trashWorkspace = portletPref.getValue(Utils.TRASH_WORKSPACE, "");
-    	
-    	return (path.startsWith(trashHomeNodePath) ||
-      		path.startsWith(trashWorkspace + ":" + trashHomeNodePath));    	
+      String trashHomeNodePath = portletPref.getValue(Utils.TRASH_HOME_NODE_PATH, "");
+      String trashWorkspace = portletPref.getValue(Utils.TRASH_WORKSPACE, "");
+
+      return (path.startsWith(trashHomeNodePath) ||
+          path.startsWith(trashWorkspace + ":" + trashHomeNodePath));
     }
   }
   @Override

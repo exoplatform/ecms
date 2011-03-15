@@ -73,7 +73,7 @@ import org.exoplatform.webui.ext.manager.UIAbstractManagerComponent;
  * Created by The eXo Platform SAS
  * Author : eXoPlatform
  *          nicolas.filotto@exoplatform.com
- * 6 mai 2009  
+ * 6 mai 2009
  */
 @ComponentConfig(
      events = {
@@ -86,28 +86,28 @@ public class EditDocumentActionComponent extends UIAbstractManagerComponent {
   private static final List<UIExtensionFilter> FILTERS = Arrays.asList(new UIExtensionFilter[] {
       new IsDocumentFilter(), new IsEditableFilter(), new CanSetPropertyFilter(),
       new IsNotLockedFilter(), new IsCheckedOutFilter(), new IsNotInTrashFilter(), new IsNotEditingDocumentFilter() });
-  
+
   @UIExtensionFilters
   public static List<UIExtensionFilter> getFilters() {
     return FILTERS;
   }
-  
+
   private static void refresh(Node node) throws Exception {
     node.refresh(true);
   }
 
   @SuppressWarnings("unchecked")
   public static void editDocument(Event <? extends UIComponent> event,
-  																WebuiRequestContext context,
-  																UIComponent comp,
+                                  WebuiRequestContext context,
+                                  UIComponent comp,
                                   UIJCRExplorer uiExplorer,
                                   Node selectedNode,
                                   UIApplication uiApp) throws RepositoryException,
                                                       Exception,
                                                       ValueFormatException,
                                                       PathNotFoundException {
-  	if (event != null) 
-  		context = event.getRequestContext();
+    if (event != null)
+      context = event.getRequestContext();
     if (selectedNode.isNodeType(Utils.EXO_ACTION)) {
       UIActionContainer uiContainer = uiExplorer.createUIComponent(UIActionContainer.class, null, null);
       uiExplorer.setIsHidePopup(true);
@@ -127,9 +127,9 @@ public class EditDocumentActionComponent extends UIAbstractManagerComponent {
         nodeType = selectedNode.getProperty("exo:presentationType").getString();
       }else {
         nodeType = selectedNode.getPrimaryNodeType().getName();
-      }        
-      UIDocumentFormController uiController = 
-      	event != null ?
+      }
+      UIDocumentFormController uiController =
+        event != null ?
         event.getSource().createUIComponent(UIDocumentFormController.class, null, "EditFormController") :
         comp.createUIComponent(UIDocumentFormController.class, null, "EditFormController");
       UIDocumentForm uiDocumentForm = uiController.getChild(UIDocumentForm.class);
@@ -167,14 +167,14 @@ public class EditDocumentActionComponent extends UIAbstractManagerComponent {
                 lockTokenString = settingLock.replace("*", membership.getName());
                 LockUtil.keepLock(lock, lockTokenString);
               }
-            }      
+            }
             selectedNode.save();
             uiDocumentForm.setIsKeepinglock(true);
           }
         }
       }
       // Update data avoid concurrent modification by other session
-      refresh(selectedNode);      
+      refresh(selectedNode);
       // Check again after node is locking by current user or another
       if (LockUtil.getLockTokenOfUser(selectedNode) == null) {
         Object[] arg = { selectedNode.getPath() };
@@ -189,8 +189,8 @@ public class EditDocumentActionComponent extends UIAbstractManagerComponent {
       uiDocumentForm.setStoredPath(selectedNode.getPath());
       uiController.setRenderedChild(UIDocumentForm.class);
       if (uiExplorer.getAncestorOfType(UIJCRExplorerPortlet.class).isEditInNewWindow()) {
-        UIPopupContainer uiPopupContainer = uiExplorer.getChild(UIPopupContainer.class);      
-        uiPopupContainer.activate(uiController, 800, 600);          
+        UIPopupContainer uiPopupContainer = uiExplorer.getChild(UIPopupContainer.class);
+        uiPopupContainer.activate(uiController, 800, 600);
         context.addUIComponentToUpdateByAjax(uiPopupContainer);
         context.addUIComponentToUpdateByAjax(uiExplorer.getChild(UIControl.class));
       } else {
@@ -211,13 +211,13 @@ public class EditDocumentActionComponent extends UIAbstractManagerComponent {
         uiController.setRendered(true);
         context.addUIComponentToUpdateByAjax(uiWorkingArea);
         if (event != null) {
-        	uiExplorer.updateAjax(event);
+          uiExplorer.updateAjax(event);
         }
         context.addUIComponentToUpdateByAjax(uiExplorer.getChild(UIControl.class));
       }
     }
   }
-  
+
   public static class EditDocumentActionListener extends UIActionBarActionListener<EditDocumentActionComponent> {
     public void processEvent(Event<EditDocumentActionComponent> event) throws Exception {
       EditDocumentActionComponent uicomp = event.getSource();

@@ -45,32 +45,32 @@ public class UIContentSearchResult extends UIGrid {
 
   /** The Constant TITLE. */
   public static final String TITLE = "title".intern();
-  
+
   /** The Constant NODE_EXPECT. */
   public static final String NODE_EXPECT = "excerpt".intern();
-  
+
   /** The Constant SCORE. */
   public static final String SCORE = "score".intern();
-  
+
   /** The Constant CREATE_DATE. */
   public static final String CREATE_DATE = "CreateDate".intern();
-  
+
   /** The Constant PUBLICATION_STATE. */
   public static final String PUBLICATION_STATE = "publicationstate".intern();
-  
+
   /** The Constant NODE_PATH. */
   public static final String NODE_PATH = "path".intern();
-  
+
   /** The Actions. */
   public String[] Actions = {"Select", "View"};
-  
+
   /** The BEA n_ fields. */
   public String[] BEAN_FIELDS = {TITLE, SCORE, PUBLICATION_STATE};
 
 
   /**
    * Instantiates a new uIWCM search result.
-   * 
+   *
    * @throws Exception the exception
    */
   public UIContentSearchResult() throws Exception {
@@ -80,7 +80,7 @@ public class UIContentSearchResult extends UIGrid {
 
   /**
    * Gets the date format.
-   * 
+   *
    * @return the date format
    */
   public DateFormat getDateFormat() {
@@ -91,37 +91,37 @@ public class UIContentSearchResult extends UIGrid {
 
   /**
    * Update grid.
-   * 
+   *
    * @param paginatedResult the paginated result
-   * 
+   *
    * @throws Exception the exception
    */
-  public void updateGrid(PaginatedQueryResult paginatedResult) throws Exception {           
-    getUIPageIterator().setPageList(paginatedResult); 
+  public void updateGrid(PaginatedQueryResult paginatedResult) throws Exception {
+    getUIPageIterator().setPageList(paginatedResult);
   }
 
 
   /**
    * Gets the title node.
-   * 
+   *
    * @param node the node
-   * 
+   *
    * @return the title node
-   * 
+   *
    * @throws Exception the exception
    */
   public String getTitleNode(Node node) throws Exception {
-    return node.hasProperty("exo:title") ? 
+    return node.hasProperty("exo:title") ?
                                           node.getProperty("exo:title").getValue().getString() : node.getName();
   }
 
   /**
    * Gets the creates the date.
-   * 
+   *
    * @param node the node
-   * 
+   *
    * @return the creates the date
-   * 
+   *
    * @throws Exception the exception
    */
   public Date getCreateDate(Node node) throws Exception {
@@ -134,9 +134,9 @@ public class UIContentSearchResult extends UIGrid {
 
   /**
    * Gets the expect.
-   * 
+   *
    * @param expect the expect
-   * 
+   *
    * @return the expect
    */
   public String getExpect(String expect) {
@@ -146,11 +146,11 @@ public class UIContentSearchResult extends UIGrid {
 
   /**
    * Gets the current state.
-   * 
+   *
    * @param node the node
-   * 
+   *
    * @return the current state
-   * 
+   *
    * @throws Exception the exception
    */
   public String getCurrentState(Node node) throws Exception {
@@ -160,9 +160,9 @@ public class UIContentSearchResult extends UIGrid {
 
   /**
    * Gets the session.
-   * 
+   *
    * @return the session
-   * 
+   *
    * @throws Exception the exception
    */
   public Session getSession() throws Exception {
@@ -173,7 +173,7 @@ public class UIContentSearchResult extends UIGrid {
     PortletPreferences prefs = pContext.getRequest().getPreferences();
     String workspace = prefs.getValue("workspace", null);
     if(workspace == null) {
-      WCMConfigurationService wcmConfService = 
+      WCMConfigurationService wcmConfService =
         getApplicationComponent(WCMConfigurationService.class);
       NodeLocation nodeLocation = wcmConfService.getLivePortalsLocation(repository);
       workspace = nodeLocation.getWorkspace();
@@ -181,7 +181,7 @@ public class UIContentSearchResult extends UIGrid {
     Session session = Utils.getSessionProvider().getSession(workspace, maRepository);
     return session;
   }
-  
+
   /**
    * Gets the workspace name.
    * @param node the node
@@ -191,7 +191,7 @@ public class UIContentSearchResult extends UIGrid {
   public String getWorkspaceName(Node node) throws Exception {
     return node.getSession().getWorkspace().getName();
   }
-  
+
   public String getRepository() throws Exception {
     RepositoryService repoService = getApplicationComponent(RepositoryService.class);
     ManageableRepository maRepository = repoService.getCurrentRepository();
@@ -206,11 +206,11 @@ public class UIContentSearchResult extends UIGrid {
    * component's <code>addSelectActionListener<code> method. When
    * the selectAction event occurs, that object's appropriate
    * method is invoked.
-   * 
+   *
    * @see SelectActionEvent
    */
   public static class SelectActionListener extends EventListener<UIContentSearchResult> {
-    
+
     /* (non-Javadoc)
      * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
      */
@@ -230,11 +230,11 @@ public class UIContentSearchResult extends UIGrid {
    * component's <code>addViewActionListener<code> method. When
    * the viewAction event occurs, that object's appropriate
    * method is invoked.
-   * 
+   *
    * @see ViewActionEvent
    */
   public static class ViewActionListener extends EventListener<UIContentSearchResult> {
-    
+
     /* (non-Javadoc)
      * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
      */
@@ -255,5 +255,5 @@ public class UIContentSearchResult extends UIGrid {
       event.getRequestContext().addUIComponentToUpdateByAjax(contentSelector);
       contentSelector.setSelectedTab(contentResultViewer.getId());
     }
-  }  
+  }
 }

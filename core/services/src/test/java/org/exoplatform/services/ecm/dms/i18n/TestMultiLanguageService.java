@@ -37,14 +37,14 @@ import org.exoplatform.services.ecm.dms.BaseDMSTestCase;
  * Created by The eXo Platform SARL
  * Author : Hoang Van Hung
  *          hunghvit@gmail.com
- * Jun 17, 2009  
+ * Jun 17, 2009
  */
 public class TestMultiLanguageService extends BaseDMSTestCase {
-  
+
   private static final String I18NMixin = "mix:i18n";
 
   private static final String VOTEABLE = "mix:votable";
-  
+
   private static final String ARTICLE = "exo:article";
 
   private static final String PODCAST = "exo:podcast";
@@ -56,28 +56,28 @@ public class TestMultiLanguageService extends BaseDMSTestCase {
   private static final String TITLE = "exo:title";
 
   private static final String SUMMARY = "exo:summary";
-  
+
   private static final String TEXT = "exo:text";
-  
+
   private static final String CONTENT = "jcr:content";
-  
+
   private static final String MIMETYPE = "jcr:mimeType";
 
   private static final String LASTMODIFIED = "jcr:lastModified";
 
   private static final String DATA = "jcr:data";
-  
+
   private static final String LINK = "exo:link";
 
-  
-  
+
+
   private MultiLanguageService multiLanguageService;
-  
+
   public void setUp() throws Exception {
     super.setUp();
     multiLanguageService = (MultiLanguageService) container.getComponentInstanceOfType(MultiLanguageService.class);
   }
-  
+
   /**
    * Test method MultiLanguagetService.getSupportedLanguages()
    * Input: Add mixin type mix:i18n, add vi language for node
@@ -95,11 +95,11 @@ public class TestMultiLanguageService extends BaseDMSTestCase {
     List<String> lstLanguages = multiLanguageService.getSupportedLanguages(test);
     assertTrue(lstLanguages.contains("en"));
     assertTrue(lstLanguages.contains("vi"));
-    
+
   }
-  
+
   /**
-   * Create data for Node 
+   * Create data for Node
    */
   private Map<String, JcrInputProperty>  createMapInput1() {
     Map<String, JcrInputProperty> map = new HashMap<String, JcrInputProperty>();
@@ -111,12 +111,12 @@ public class TestMultiLanguageService extends BaseDMSTestCase {
 
     inputProperty.setValue("test");
     map.put(CmsService.NODE, inputProperty);
-    
+
     inputProperty = new JcrInputProperty();
     inputProperty.setJcrPath(titlePath);
     inputProperty.setValue("this is title");
     map.put(titlePath, inputProperty);
-    
+
     inputProperty = new JcrInputProperty();
     inputProperty.setJcrPath(summaryPath);
     inputProperty.setValue("this is summary");
@@ -139,27 +139,27 @@ public class TestMultiLanguageService extends BaseDMSTestCase {
     String textPath = CmsService.NODE + "/" + TEXT;
     JcrInputProperty inputProperty = new JcrInputProperty();
     inputProperty.setJcrPath(CmsService.NODE);
-    
+
     inputProperty.setValue("test");
     map.put(CmsService.NODE, inputProperty);
-    
+
     inputProperty = new JcrInputProperty();
     inputProperty.setJcrPath(titlePath);
     inputProperty.setValue("football");
     map.put(titlePath, inputProperty);
-    
+
     inputProperty = new JcrInputProperty();
     inputProperty.setJcrPath(summaryPath);
     inputProperty.setValue("report of season");
     map.put(summaryPath, inputProperty);
-    
+
     inputProperty = new JcrInputProperty();
     inputProperty.setJcrPath(textPath);
     inputProperty.setValue("standing table");
     map.put(textPath, inputProperty);
     return map;
   }
-  
+
   /**
    *  Create binary data for node
    * @throws IOException
@@ -173,14 +173,14 @@ public class TestMultiLanguageService extends BaseDMSTestCase {
     inputProperty.setJcrPath(data);
     inputProperty.setValue(getClass().getResource("/conf/standalone/system-configuration.xml").openStream());
     map.put(data, inputProperty);
-    
+
     inputProperty = new JcrInputProperty();
     inputProperty.setJcrPath(mimeType);
     inputProperty.setValue("text/xml");
     map.put(mimeType, inputProperty);
     return map;
   }
-  
+
   /**
    * Create podcast node
    * @return
@@ -193,7 +193,7 @@ public class TestMultiLanguageService extends BaseDMSTestCase {
     String data = CmsService.NODE + "/" + CONTENT + "/" + DATA;
     String mimeType = CmsService.NODE + "/" + CONTENT + "/" + MIMETYPE;
     String lastModified = CmsService.NODE + "/" + CONTENT + "/" + LASTMODIFIED;
-    
+
     JcrInputProperty inputProperty = new JcrInputProperty();
     inputProperty.setJcrPath(titlePath);
     inputProperty.setValue("this is podcast");
@@ -203,12 +203,12 @@ public class TestMultiLanguageService extends BaseDMSTestCase {
     inputProperty.setJcrPath(linkPath);
     inputProperty.setValue("connect");
     map.put(linkPath, inputProperty);
-    
+
     inputProperty = new JcrInputProperty();
     inputProperty.setJcrPath(data);
     inputProperty.setValue(getClass().getResource("/conf/standalone/system-configuration.xml").openStream());
     map.put(data, inputProperty);
-    
+
     inputProperty = new JcrInputProperty();
     inputProperty.setJcrPath(mimeType);
     inputProperty.setValue("text/xml");
@@ -218,7 +218,7 @@ public class TestMultiLanguageService extends BaseDMSTestCase {
     inputProperty.setJcrPath(lastModified);
     inputProperty.setValue(new GregorianCalendar());
     map.put(lastModified, inputProperty);
-    
+
     return map;
   }
 
@@ -237,7 +237,7 @@ public class TestMultiLanguageService extends BaseDMSTestCase {
     test.setProperty(SUMMARY, "report of season");
     test.setProperty(TEXT, "sport is exciting");
     session.save();
-   
+
     multiLanguageService.addLanguage(test, createMapInput1(), "fr", false);
     assertTrue(test.hasNode("languages/fr"));
     Node testlanguage = test.getNode("languages/fr");
@@ -248,8 +248,8 @@ public class TestMultiLanguageService extends BaseDMSTestCase {
     assertEquals("report of season", test.getProperty(SUMMARY).getString());
     assertEquals("sport is exciting", test.getProperty(TEXT).getString());
   }
-  
-  
+
+
   /**
    * Test method MultiLanguagetService.addLanguage(Node node, Map inputs, String language, boolean isDefault)
    * Input: add mix:i18n, exo:title = "sport", exo:summary = "supporter", exo:text: "sport is exciting"
@@ -266,7 +266,7 @@ public class TestMultiLanguageService extends BaseDMSTestCase {
     test.setProperty(SUMMARY, "supporter");
     test.setProperty(TEXT, "sport is exciting");
     session.save();
-   
+
     multiLanguageService.addLanguage(test, createMapInput1(), "fr", false);
     assertTrue(test.hasNode("languages/fr"));
     Node testlanguage = test.getNode("languages/fr");
@@ -276,7 +276,7 @@ public class TestMultiLanguageService extends BaseDMSTestCase {
     assertEquals("sport", test.getProperty(TITLE).getString());
     assertEquals("supporter", test.getProperty(SUMMARY).getString());
     assertEquals("sport is exciting", test.getProperty(TEXT).getString());
-   
+
     multiLanguageService.addLanguage(test, createMapInput2(), "fr", true);
     assertEquals("fr", test.getProperty(MultiLanguageService.EXO_LANGUAGE).getString());
     assertFalse(test.hasNode("languages/fr"));
@@ -289,7 +289,7 @@ public class TestMultiLanguageService extends BaseDMSTestCase {
    * Test method MultiLanguagetService.addLanguage(Node node, Map inputs, String language, boolean isDefault)
    * Input: Add language fr for node test with child node is a nt:file node type
    * Expect: if language fr is added as not default language then language node is add following relative path = languages/fr
-   *         if language fr is added as default language then content of test node contains data defined in method createFileInput()  
+   *         if language fr is added as default language then content of test node contains data defined in method createFileInput()
    * @throws Exception
    */
   public void testAddLanguage3() throws Exception {
@@ -317,7 +317,7 @@ public class TestMultiLanguageService extends BaseDMSTestCase {
       // TODO: handle exception
     }
   }
-  
+
   /**
    * Test method MultiLanguagetService.setDefault()
    * Input: Add language = fr as default language, then set fr as default language
@@ -359,7 +359,7 @@ public class TestMultiLanguageService extends BaseDMSTestCase {
     multiLanguageService.setDefault(test, "fr", REPO_NAME);
     assertEquals("fr", multiLanguageService.getDefault(test));
   }
-  
+
   /**
    * Test method MultiLanguagetService.addFileLanguage(Node node, String fileName, Value value, String mimeType, String language, String repositoryName, boolean isDefault)
    * Input:  add child node nt:file ("/conf/standalone/system-configuration.xml") to node
@@ -368,7 +368,7 @@ public class TestMultiLanguageService extends BaseDMSTestCase {
    * Expect: data of child node nt:file of test node is  ("/conf/standalone/system-configuration.xml")
    *         data of child node nt:file of node in path: /test/languages/English/test/jcr:content is
    *           ("/conf/standalone/system-configuration.xml")
-   *        
+   *
    * @throws Exception
    */
   public void testAddFileLanguage1() throws Exception {
@@ -379,11 +379,11 @@ public class TestMultiLanguageService extends BaseDMSTestCase {
     testFile.setProperty(LASTMODIFIED, new GregorianCalendar());
     test.addMixin(I18NMixin);
     test.addMixin(VOTEABLE);
-    
+
     session.save();
     InputStream is = getClass().getResource("/conf/standalone/system-configuration.xml").openStream();
     Value contentValue = session.getValueFactory().createValue(is);
-    
+
     multiLanguageService.addFileLanguage(test, "system-configuration.xml" , contentValue, "text/xml", "fr", REPO_NAME, false);
     String defaultLanguage = test.getProperty(MultiLanguageService.EXO_LANGUAGE).getString();
     assertEquals("en", defaultLanguage);
@@ -395,7 +395,7 @@ public class TestMultiLanguageService extends BaseDMSTestCase {
 //    assertTrue(test.hasNode("languages/en/test/jcr:content"));
 //    assertTrue(compareInputStream(getClass().getResource("/conf/standalone/system-configuration.xml").openStream(), test.getNode("languages/en/test/jcr:content").getProperty(DATA).getStream()));
 //    assertTrue(compareInputStream(getClass().getResource("/conf/standalone/system-configuration.xml").openStream(), test.getNode(CONTENT).getProperty(DATA).getStream()));
-    
+
   }
 
   /**
@@ -414,7 +414,7 @@ public class TestMultiLanguageService extends BaseDMSTestCase {
     testFile.setProperty(DATA, getClass().getResource("/conf/standalone/system-configuration.xml").openStream());
     test.addMixin(I18NMixin);
     session.save();
-    
+
     multiLanguageService.addFileLanguage(test, "fr" , createPodcastMapInput(), false);
     String defaultLanguage = test.getProperty(MultiLanguageService.EXO_LANGUAGE).getString();
     assertEquals("en", defaultLanguage);
@@ -423,7 +423,7 @@ public class TestMultiLanguageService extends BaseDMSTestCase {
     assertTrue(compareInputStream(getClass().getResource("/conf/standalone/system-configuration.xml").openStream(), testlanguage.getNode(CONTENT).getProperty(DATA).getStream()));
     assertEquals("this is podcast", testlanguage.getProperty(TITLE).getString());
     assertEquals("connect", testlanguage.getProperty(LINK).getString());
-    
+
     multiLanguageService.addFileLanguage(test, "vi" , createPodcastMapInput(), true);
     defaultLanguage = test.getProperty(MultiLanguageService.EXO_LANGUAGE).getString();
     assertEquals("vi", defaultLanguage);
@@ -432,7 +432,7 @@ public class TestMultiLanguageService extends BaseDMSTestCase {
     assertEquals("connect", test.getProperty(LINK).getString());
   }
 
-  
+
   /**
    * Get language node by language MultiLanguageService.getLanguage()
    * Input language fr is not default language and default language
@@ -459,7 +459,7 @@ public class TestMultiLanguageService extends BaseDMSTestCase {
       // TODO: handle exception
     }
   }
-  
+
   /**
    * Compare two input stream, return true if 2 streams are equal
    * @param is1

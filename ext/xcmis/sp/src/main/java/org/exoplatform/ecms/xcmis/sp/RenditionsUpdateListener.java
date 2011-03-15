@@ -80,10 +80,10 @@ public class RenditionsUpdateListener implements EventListener
                try {
                jcrData = (Property)session.getItem(path);
                } catch (PathNotFoundException ex){
-            	   // No data;
+                 // No data;
                }
                if (jcrData == null)
-            	   return; //No data, nothing to do;
+                 return; //No data, nothing to do;
                Node jcrContent = jcrData.getParent();
                Node fileNode = jcrContent.getParent();
                // Do nothing since 'nt:file' without mixin 'cmis:document' may

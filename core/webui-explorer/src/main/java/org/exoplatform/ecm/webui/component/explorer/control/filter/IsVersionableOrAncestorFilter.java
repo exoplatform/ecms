@@ -30,36 +30,36 @@ import org.exoplatform.webui.ext.filter.UIExtensionFilterType;
  * Created by The eXo Platform SARL
  * Author : Hoang Van Hung
  *          hunghvit@gmail.com
- * Aug 6, 2009  
+ * Aug 6, 2009
  */
 public class IsVersionableOrAncestorFilter extends UIExtensionAbstractFilter {
-  
+
 
   public IsVersionableOrAncestorFilter() {
     this(null);
   }
-  
+
   public IsVersionableOrAncestorFilter(String messageKey) {
     super(messageKey, UIExtensionFilterType.MANDATORY);
   }
-  
+
   public static boolean isAncestorVersionable(Node node) throws RepositoryException {
     int depth = node.getDepth() - 1;
     if (depth < 1) return false;
     Node parent = null;
     try {
-    	parent = (Node) node.getAncestor(depth);
+      parent = (Node) node.getAncestor(depth);
     } catch (ClassCastException ex) {
-    	parent = (Node) node.getAncestor(--depth);
+      parent = (Node) node.getAncestor(--depth);
     }
     while (true) {
       if (parent.isNodeType(Utils.MIX_VERSIONABLE)) return true;
       if (--depth == 0) return false;
       parent = (Node) node.getAncestor(depth);
-			if (parent == null) return false;
+      if (parent == null) return false;
     }
   }
-  
+
   public boolean accept(Map<String, Object> context) throws Exception {
     if (context == null) return true;
     Node currentNode = (Node) context.get(Node.class.getName());
@@ -67,5 +67,5 @@ public class IsVersionableOrAncestorFilter extends UIExtensionAbstractFilter {
     return false;
   }
 
-  public void onDeny(Map<String, Object> context) throws Exception {}   
+  public void onDeny(Map<String, Object> context) throws Exception {}
 }

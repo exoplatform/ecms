@@ -43,7 +43,7 @@ import org.exoplatform.webui.form.UIFormSelectBox;
  * Created by The eXo Platform SARL
  * Author : Dang Van Minh
  *          minh.dang@exoplatform.com
- * Jan 16, 2007  
+ * Jan 16, 2007
  * 11:35:27 AM
  */
 @ComponentConfig(
@@ -58,7 +58,7 @@ public class UILanguageTypeForm extends UIForm {
 
   final static public String LANGUAGE_TYPE = "typeLang" ;
   final static public String DEFAULT_TYPE = "default" ;
-  
+
   public UILanguageTypeForm() throws Exception {
     UIFormSelectBox uiSelectForm = new UIFormSelectBox(LANGUAGE_TYPE, LANGUAGE_TYPE, languages()) ;
     uiSelectForm.setOnChange("ChangeLanguage") ;
@@ -67,12 +67,12 @@ public class UILanguageTypeForm extends UIForm {
     uiCheckbox.setOnChange("SetDefault") ;
     addUIFormInput(uiCheckbox) ;
   }
-  
+
   public void resetLanguage() {
     getUIFormSelectBox(LANGUAGE_TYPE).setValue("") ;
     getUIFormCheckBoxInput(DEFAULT_TYPE).setChecked(false) ;
   }
-  
+
   public List<SelectItemOption<String>> languages() throws Exception {
     LocaleConfigService localService = getApplicationComponent(LocaleConfigService.class) ;
     List<SelectItemOption<String>> languages = new ArrayList<SelectItemOption<String>>() ;
@@ -80,7 +80,7 @@ public class UILanguageTypeForm extends UIForm {
     languages.add(new SelectItemOption<String>("- - - -", ""));
     while (iter.hasNext()) {
       LocaleConfig localConfig = iter.next() ;
-      languages.add(new SelectItemOption<String>(localConfig.getLocale().getDisplayLanguage(), 
+      languages.add(new SelectItemOption<String>(localConfig.getLocale().getDisplayLanguage(),
                                                  localConfig.getLocale().getLanguage())) ;
     }
     return languages ;
@@ -89,8 +89,8 @@ public class UILanguageTypeForm extends UIForm {
   static public class ChangeLanguageActionListener extends EventListener<UILanguageTypeForm> {
     public void execute(Event<UILanguageTypeForm> event) throws Exception {
       UILanguageTypeForm uiTypeForm = event.getSource();
-      String selectedLang = uiTypeForm.getUIFormSelectBox(LANGUAGE_TYPE).getValue().trim();      
-      MultiLanguageService multiLanguageService = 
+      String selectedLang = uiTypeForm.getUIFormSelectBox(LANGUAGE_TYPE).getValue().trim();
+      MultiLanguageService multiLanguageService =
         uiTypeForm.getApplicationComponent(MultiLanguageService.class) ;
       if (selectedLang == null || selectedLang.length() < 1) return;
       UIJCRExplorer uiExplorer = uiTypeForm.getAncestorOfType(UIJCRExplorer.class);
@@ -99,7 +99,7 @@ public class UILanguageTypeForm extends UIForm {
         UILanguageDialogForm uiDialogForm = uiContainer.getChild(UILanguageDialogForm.class) ;
         uiDialogForm.getChildren().clear() ;
         uiDialogForm.setTemplateNode(uiContainer.nodeTypeName_) ;
-        Node node = uiExplorer.getCurrentNode() ;        
+        Node node = uiExplorer.getCurrentNode() ;
         String currentPath = node.getPath() ;
         if(selectedLang.equals(multiLanguageService.getDefault(node))) {
           uiTypeForm.getUIFormCheckBoxInput(DEFAULT_TYPE).setChecked(true) ;
@@ -141,7 +141,7 @@ public class UILanguageTypeForm extends UIForm {
         }
         uiDialogForm.seti18nNodePath(currentPath);
         uiDialogForm.setSelectedLanguage(selectedLang) ;
-        if(selectedLang.equals(node.getProperty(Utils.EXO_LANGUAGE).getString())) {                  
+        if(selectedLang.equals(node.getProperty(Utils.EXO_LANGUAGE).getString())) {
           uiDialogForm.setChildPath(currentPath) ;
         } else {
           if(node.hasNode(Utils.LANGUAGES + Utils.SLASH + selectedLang)){
@@ -165,7 +165,7 @@ public class UILanguageTypeForm extends UIForm {
       event.getRequestContext().addUIComponentToUpdateByAjax(uiContainer) ;
     }
   }
-  
+
   static public class SetDefaultActionListener extends EventListener<UILanguageTypeForm> {
     public void execute(Event<UILanguageTypeForm> event) throws Exception {
       UILanguageTypeForm uiForm = event.getSource() ;

@@ -27,15 +27,15 @@ import org.exoplatform.services.scheduler.JobContext;
  * Created by The eXo Platform SAS
  * Author : Phan Le Thanh Chuong
  *          chuong_phan@exoplatform.com
- * Aug 4, 2008  
+ * Aug 4, 2008
  */
 public class LinkValidatorJob extends BaseJob {
-  
-  private Log log = ExoLogger.getLogger("wcm:LinkValidatorJob"); 
-  
+
+  private Log log = ExoLogger.getLogger("wcm:LinkValidatorJob");
+
   public void execute(JobContext arg0) throws Exception {
     ExoContainer container = ExoContainerContext.getCurrentContainer();
-    LiveLinkManagerService linkManagerService = 
+    LiveLinkManagerService linkManagerService =
       (LiveLinkManagerService)container.getComponentInstanceOfType(LiveLinkManagerService.class);
     if(linkManagerService == null) return;
     try {

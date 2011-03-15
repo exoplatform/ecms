@@ -51,7 +51,7 @@ import org.exoplatform.webui.ext.manager.UIAbstractManagerComponent;
  * Created by The eXo Platform SAS
  * Author : eXoPlatform
  *          nicolas.filotto@exoplatform.com
- * 6 mai 2009  
+ * 6 mai 2009
  */
 @ComponentConfig(
      events = {
@@ -60,43 +60,43 @@ import org.exoplatform.webui.ext.manager.UIAbstractManagerComponent;
  )
 public class AddDocumentActionComponent extends UIAbstractManagerComponent {
 
-  private static final List<UIExtensionFilter> FILTERS 
-      = Arrays.asList(new UIExtensionFilter[]{new CanAddNodeFilter(), 
-                                              new IsNotLockedFilter(), 
+  private static final List<UIExtensionFilter> FILTERS
+      = Arrays.asList(new UIExtensionFilter[]{new CanAddNodeFilter(),
+                                              new IsNotLockedFilter(),
                                               new IsCheckedOutFilter(),
                                               new IsNotTrashHomeNodeFilter(),
                                               new IsNotInTrashFilter(),
                                               new IsNotEditingDocumentFilter()});
-  
+
   @UIExtensionFilters
   public static List<UIExtensionFilter> getFilters() {
     return FILTERS;
   }
-  
+
   public static void addDocument(Event<? extends UIComponent> event,
                           UIJCRExplorer uiExplorer,
                           UIApplication uiApp,
                           UIComponent uiComp,
                           WebuiRequestContext context) throws Exception {
-  	if (event != null) 
-  		context = event.getRequestContext();
-  	
-    UIDocumentFormController uiController = 
+    if (event != null)
+      context = event.getRequestContext();
+
+    UIDocumentFormController uiController =
       uiComp.createUIComponent(UIDocumentFormController.class, null, null);
     uiController.setCurrentNode(uiExplorer.getCurrentNode());
     uiController.setRepository(uiExplorer.getRepositoryName());
     if(uiController.getListFileType().isEmpty()) {
-      uiApp.addMessage(new ApplicationMessage("UIActionBar.msg.empty-file-type", null, 
+      uiApp.addMessage(new ApplicationMessage("UIActionBar.msg.empty-file-type", null,
           ApplicationMessage.WARNING));
       context.addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
       return;
     }
-//    uiExplorer.setPathBeforeEditing(uiExplorer.getCurrentPath());        
+//    uiExplorer.setPathBeforeEditing(uiExplorer.getCurrentPath());
     uiController.init();
     if (uiExplorer.getAncestorOfType(UIJCRExplorerPortlet.class).isEditInNewWindow()) {
-      UIPopupContainer UIPopupContainer = uiExplorer.getChild(UIPopupContainer.class);      
+      UIPopupContainer UIPopupContainer = uiExplorer.getChild(UIPopupContainer.class);
       UIPopupContainer.activate(uiController, 800, 600);
-      context.addUIComponentToUpdateByAjax(UIPopupContainer);      
+      context.addUIComponentToUpdateByAjax(UIPopupContainer);
     } else {
       UIWorkingArea uiWorkingArea = uiExplorer.getChild(UIWorkingArea.class);
       UIDocumentWorkspace uiDocumentWorkspace = uiWorkingArea.getChild(UIDocumentWorkspace.class);
@@ -114,10 +114,10 @@ public class AddDocumentActionComponent extends UIAbstractManagerComponent {
       uiController.setRendered(true);
       context.addUIComponentToUpdateByAjax(uiWorkingArea);
       if (event != null)
-      	uiExplorer.updateAjax(event);      
+        uiExplorer.updateAjax(event);
     }
   }
-  
+
   public static class AddDocumentActionListener extends UIActionBarActionListener<AddDocumentActionComponent> {
     public void processEvent(Event<AddDocumentActionComponent> event) throws Exception {
       UIJCRExplorer uiExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class);

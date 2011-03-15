@@ -26,30 +26,30 @@ import org.exoplatform.webui.form.validator.Validator;
  * Author : Ly Dinh Quang
  *          quang.ly@exoplatform.com
  *      xxx5669@yahoo.com
- * Mar 20, 2008  
+ * Mar 20, 2008
  */
 public class StandardNameValidator implements Validator {
-  
+
   public void validate(UIFormInput uiInput) throws Exception {
     String inputValue = ((String)uiInput.getValue()).trim();
     if (inputValue == null || inputValue.length() == 0) {
-      throwException("ECMStandardPropertyNameValidator.msg.empty-input", uiInput);      
+      throwException("ECMStandardPropertyNameValidator.msg.empty-input", uiInput);
     }
     switch (inputValue.length()) {
     case 1:
       checkOneChar(inputValue, uiInput);
-      break;      
+      break;
     case 2:
       checkTwoChars(inputValue, uiInput);
     default:
       checkMoreChars(inputValue, uiInput);
       break;
     }
-    
+
   }
-  
+
   /**
-   * 
+   *
    * @param s
    * @param array
    * @return
@@ -62,20 +62,20 @@ public class StandardNameValidator implements Validator {
     }
     return false;
   }
-  
+
   /**
    * Check String Input s if s.length() = 1
    * @param s
    * @param uiInput
-   * @throws MessageException 
+   * @throws MessageException
    */
   private void checkOneChar(String s, UIFormInput uiInput) throws MessageException {
     String[] arrFilterChars = {".", "/", ":", "[", "]", "*", "'", "|", "\""} ;
     if (checkArr(s, arrFilterChars)) {
-      throwException("ECMStandardPropertyNameValidator.msg.Invalid-char", uiInput);     
+      throwException("ECMStandardPropertyNameValidator.msg.Invalid-char", uiInput);
     }
   }
-  
+
   /**
    * Check String Input s if s.length() = 2
    * @param s
@@ -92,18 +92,18 @@ public class StandardNameValidator implements Validator {
     } else {
       String s3 = s.substring(0, 1);
       String s4 = s.substring(1, 2);
-      
-      String[] arrFilterChars = {".", "/", ":", "[", "]", "*", "'", "|", "\""} ;      
+
+      String[] arrFilterChars = {".", "/", ":", "[", "]", "*", "'", "|", "\""} ;
       if (checkArr(s3, arrFilterChars)) {
-        throwException("ECMStandardPropertyNameValidator.msg.Invalid-char", uiInput);       
+        throwException("ECMStandardPropertyNameValidator.msg.Invalid-char", uiInput);
       } else {
         if (checkArr(s4, arrFilterChars)) {
-          throwException("ECMStandardPropertyNameValidator.msg.Invalid-char", uiInput);         
+          throwException("ECMStandardPropertyNameValidator.msg.Invalid-char", uiInput);
         }
       }
     }
   }
-  
+
   /**
    * Check String Input s if s.length() > 2
    * @param s
@@ -111,27 +111,27 @@ public class StandardNameValidator implements Validator {
    */
   private void checkMoreChars(String s, UIFormInput uiInput) throws MessageException {
     //check nonspace start and end char
-    String[] arrFilterChars = {"/", ":", "[", "]", "*", "'", "|", "\""} ; 
+    String[] arrFilterChars = {"/", ":", "[", "]", "*", "'", "|", "\""} ;
     //get start and end char
     String s1 = s.substring(0, 1);
     String s2 = s.substring(s.length() - 1, s.length());
     if (checkArr(s1, arrFilterChars)) {
-      throwException("ECMStandardPropertyNameValidator.msg.Invalid-char", uiInput);     
-    } else if (checkArr(s2, arrFilterChars)){      
-      throwException("ECMStandardPropertyNameValidator.msg.Invalid-char", uiInput); 
+      throwException("ECMStandardPropertyNameValidator.msg.Invalid-char", uiInput);
+    } else if (checkArr(s2, arrFilterChars)){
+      throwException("ECMStandardPropertyNameValidator.msg.Invalid-char", uiInput);
     } else {
-      String s3 = s.substring(1, s.length() - 1);     
+      String s3 = s.substring(1, s.length() - 1);
       for(String filterChar : arrFilterChars) {
-        if(s3.indexOf(filterChar) > -1) {   
-          throwException("ECMStandardPropertyNameValidator.msg.Invalid-char", uiInput);         
+        if(s3.indexOf(filterChar) > -1) {
+          throwException("ECMStandardPropertyNameValidator.msg.Invalid-char", uiInput);
         }
           }
     }
-  }   
-  
+  }
+
   private void throwException(String s, UIFormInput uiInput) throws MessageException {
     Object[] args = { uiInput.getName() };
     throw new MessageException(new ApplicationMessage(s, args, ApplicationMessage.WARNING));
   }
-  
+
 }

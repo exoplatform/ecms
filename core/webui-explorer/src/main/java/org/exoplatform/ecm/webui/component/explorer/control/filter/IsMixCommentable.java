@@ -28,18 +28,18 @@ import org.exoplatform.webui.ext.filter.UIExtensionFilterType;
  * Created by The eXo Platform SAS
  * Author : eXoPlatform
  *          nicolas.filotto@exoplatform.com
- * 7 mai 2009  
+ * 7 mai 2009
  */
 public class IsMixCommentable extends UIExtensionAbstractFilter {
 
   public IsMixCommentable() {
     this("UICommentForm.msg.not-support");
   }
-  
+
   public IsMixCommentable(String messageKey) {
     super(messageKey, UIExtensionFilterType.MANDATORY);
   }
-  
+
   public boolean accept(Map<String, Object> context) throws Exception {
     Node currentNode = (Node) context.get(Node.class.getName());
     return currentNode.isNodeType(Utils.MIX_COMMENTABLE);
@@ -47,5 +47,5 @@ public class IsMixCommentable extends UIExtensionAbstractFilter {
 
   public void onDeny(Map<String, Object> context) throws Exception {
     createUIPopupMessages(context, messageKey);
-  }    
+  }
 }

@@ -73,51 +73,59 @@ import com.ibm.icu.text.Transliterator;
     }
 )
 public class UIFormGeneratorTabPane extends UIFormTabPane {
-  
+
   /** The Constant PROPERTY_PREFIX. */
-	public static final String PROPERTY_PREFIX = "exo:fg_p_";
-  
+  public static final String PROPERTY_PREFIX = "exo:fg_p_";
+
   /** The Constant NODE_PREFIX. */
   public static final String NODE_PREFIX = "exo:";
-  
+
   /** The Constant NODE_SUFFIX. */
   public static final String NODE_SUFFIX = "_fg_n";
 
   /**
    * Instantiates a new uI form generator tab pane.
-   * 
+   *
    * @throws Exception the exception
    */
   public UIFormGeneratorTabPane() throws Exception {
     super(UIFormGeneratorConstant.FORM_GENERATOR_TABPANE);
-    
+
     UIFormInputSet formGeneratorGeneralTab = new UIFormInputSet(UIFormGeneratorConstant.FORM_GENERATOR_GENERAL_TAB);
-    UIFormStringInput nameFormStringInput = new UIFormStringInput(UIFormGeneratorConstant.NAME_FORM_STRING_INPUT, UIFormGeneratorConstant.NAME_FORM_STRING_INPUT, null);
+    UIFormStringInput nameFormStringInput = new UIFormStringInput(UIFormGeneratorConstant.NAME_FORM_STRING_INPUT,
+                                                                  UIFormGeneratorConstant.NAME_FORM_STRING_INPUT,
+                                                                  null);
     nameFormStringInput.addValidator(IdentifierValidator.class);
     nameFormStringInput.addValidator(MandatoryValidator.class);
     nameFormStringInput.addValidator(ECMNameValidator.class);
     formGeneratorGeneralTab.addUIFormInput(nameFormStringInput);
-    formGeneratorGeneralTab.addUIFormInput(new UIFormHiddenInput(UIFormGeneratorConstant.JSON_OBJECT_FORM_GENERATOR, UIFormGeneratorConstant.JSON_OBJECT_FORM_GENERATOR, null));
-    formGeneratorGeneralTab.addUIFormInput(new UIFormRichtextInput(UIFormGeneratorConstant.DESCRIPTION_FORM_WYSIWYG_INPUT, UIFormGeneratorConstant.DESCRIPTION_FORM_WYSIWYG_INPUT, ""));
-//    formGeneratorGeneralTab.addUIFormInput(new UIFormUploadInput(UIFormGeneratorConstant.ICON_FORM_UPLOAD_INPUT, UIFormGeneratorConstant.ICON_FORM_UPLOAD_INPUT));
+    formGeneratorGeneralTab.addUIFormInput(new UIFormHiddenInput(UIFormGeneratorConstant.JSON_OBJECT_FORM_GENERATOR,
+                                                                 UIFormGeneratorConstant.JSON_OBJECT_FORM_GENERATOR,
+                                                                 null));
+    formGeneratorGeneralTab.addUIFormInput(new UIFormRichtextInput(UIFormGeneratorConstant.DESCRIPTION_FORM_WYSIWYG_INPUT,
+                                                                   UIFormGeneratorConstant.DESCRIPTION_FORM_WYSIWYG_INPUT,
+                                                                   ""));
+    // formGeneratorGeneralTab.addUIFormInput(new
+    // UIFormUploadInput(UIFormGeneratorConstant.ICON_FORM_UPLOAD_INPUT,
+    // UIFormGeneratorConstant.ICON_FORM_UPLOAD_INPUT));
     addUIFormInput(formGeneratorGeneralTab);
-    
+
     addChild(UIFormGeneratorDnDTab.class, null, null);
-    
+
     setSelectedTab(formGeneratorGeneralTab.getId());
   }
-  
+
   /**
    * Clean string.
-   * 
+   *
    * @param str the str
-   * 
+   *
    * @return the string
    */
   private static String cleanString(String str) {
       Transliterator accentsconverter = Transliterator.getInstance("Latin; NFD; [:Nonspacing Mark:] Remove; NFC;");
-      str = accentsconverter.transliterate(str); 
-      //the character ? seems to not be changed to d by the transliterate function 
+      str = accentsconverter.transliterate(str);
+      //the character ? seems to not be changed to d by the transliterate function
       StringBuffer cleanedStr = new StringBuffer(str.trim());
       // delete special character
       for(int i = 0; i < cleanedStr.length(); i++) {
@@ -140,13 +148,13 @@ public class UIFormGeneratorTabPane extends UIFormTabPane {
       }
       return cleanedStr.toString().toLowerCase();
   }
-  
+
   /**
    * Gets the number require type.
-   * 
+   *
    * @param formType the form type
    * @param size the size
-   * 
+   *
    * @return the number require type
    */
   private int getNumberRequireType(String formType, int size) {
@@ -159,12 +167,12 @@ public class UIFormGeneratorTabPane extends UIFormTabPane {
     else
       return PropertyType.STRING;
   }
-  
+
   /**
    * Gets the nodetype name.
-   * 
+   *
    * @param nodetypeName the nodetype name
-   * 
+   *
    * @return the nodetype name
    */
   private String getNodetypeName(String nodetypeName) {
@@ -174,30 +182,33 @@ public class UIFormGeneratorTabPane extends UIFormTabPane {
      */
     return NODE_PREFIX + cleanString(nodetypeName) + NODE_SUFFIX;
   }
-  
+
   /**
    * Gets the property name.
-   * 
+   *
    * @param inputName the input name
-   * 
+   *
    * @return the property name
    */
   private String getPropertyName(String inputName) {
     return PROPERTY_PREFIX + cleanString(inputName);
   }
-  
+
   /**
    * Adds the nodetype.
-   * 
+   *
    * @param requestContext the request context
    * @param repository the repository
    * @param nodetypeName the nodetype name
    * @param formBeans the form beans
-   * 
+   *
    * @throws Exception the exception
    */
-  private void addNodetype(WebuiRequestContext requestContext, String repository, String nodetypeName, List<UIFormGeneratorInputBean> formBeans) throws Exception {
-    NodeTypeValue newNodeType = new NodeTypeValue() ;                             
+  private void addNodetype(WebuiRequestContext requestContext,
+                           String repository,
+                           String nodetypeName,
+                           List<UIFormGeneratorInputBean> formBeans) throws Exception {
+    NodeTypeValue newNodeType = new NodeTypeValue() ;
     newNodeType.setName(nodetypeName) ;
     newNodeType.setPrimaryItemName(null);
     newNodeType.setMixin(false) ;
@@ -207,47 +218,54 @@ public class UIFormGeneratorTabPane extends UIFormTabPane {
 
     List<PropertyDefinitionValue> properties = new ArrayList<PropertyDefinitionValue>();
     List<NodeDefinitionValue>  childNodesDefinitions = new ArrayList<NodeDefinitionValue>();
-    
+
     for (UIFormGeneratorInputBean form : formBeans) {
       PropertyDefinitionValue property = new PropertyDefinitionValue() ;
-      property.setName(getPropertyName(form.getName())) ;          
+      property.setName(getPropertyName(form.getName())) ;
       property.setRequiredType(getNumberRequireType(form.getType(), formBeans.size())) ;
-      property.setMultiple(false) ;    
+      property.setMultiple(false) ;
       property.setMandatory(form.isMandatory()) ;
       property.setAutoCreate(false) ;
       property.setReadOnly(false) ;
-      property.setOnVersion(OnParentVersionAction.COPY) ; 
+      property.setOnVersion(OnParentVersionAction.COPY) ;
       property.setValueConstraints(null) ;
       properties.add(property) ;
       String inputType = form.getType();
       //if (UIFormGeneratorConstant.UPLOAD.equals(inputType) && !supertypes.contains("nt:file")) supertypes.add("nt:file");
       if (UIFormGeneratorConstant.UPLOAD.equals(inputType)) {
-        String inputFieldName = cleanString(form.getName()) + "FieldName";              
-        String childName = "jcr:content" +  inputFieldName;             
-        NodeDefinitionValue nodeDef = new NodeDefinitionValue(childName, false, false, OnParentVersionAction.VERSION, false,
-        																											"nt:resource", Arrays.asList(new String[] {"nt:resource"}), true);
+        String inputFieldName = cleanString(form.getName()) + "FieldName";
+        String childName = "jcr:content" +  inputFieldName;
+        NodeDefinitionValue nodeDef = new NodeDefinitionValue(childName,
+                                                              false,
+                                                              false,
+                                                              OnParentVersionAction.VERSION,
+                                                              false,
+                                                              "nt:resource",
+                                                              Arrays.asList(new String[] { "nt:resource" }),
+                                                              true);
         childNodesDefinitions.add(nodeDef);
-      }      
+      }
     }
     newNodeType.setDeclaredSupertypeNames(supertypes);
     newNodeType.setDeclaredPropertyDefinitionValues(properties) ;
-    
+
     newNodeType.setDeclaredChildNodeDefinitionValues(childNodesDefinitions);
     try {
-      ExtendedNodeTypeManager extendedNodeTypeManager = getApplicationComponent(RepositoryService.class).getCurrentRepository().getNodeTypeManager(); 
+      ExtendedNodeTypeManager extendedNodeTypeManager = getApplicationComponent(RepositoryService.class).getCurrentRepository()
+                                                                                                        .getNodeTypeManager();
       extendedNodeTypeManager.registerNodeType(newNodeType, ExtendedNodeTypeManager.FAIL_IF_EXISTS);
     } catch (Exception e) {
       Utils.createPopupMessage(this, "UIFormGeneratorTabPane.msg.register-failed", null, ApplicationMessage.WARNING);
     }
   }
-  
+
   /**
    * Generate dialog template.
-   * 
+   *
    * @param forms the forms
-   * 
+   *
    * @return the string
-   * 
+   *
    * @throws Exception the exception
    */
   private String generateDialogTemplate(String templateName, List<UIFormGeneratorInputBean> forms) throws Exception {
@@ -256,7 +274,7 @@ public class UIFormGeneratorTabPane extends UIFormTabPane {
     for (int i = 0; i < forms.size(); i++) {
       UIFormGeneratorInputBean form = forms.get(i);
       String inputType = form.getType();
-      if (UIFormGeneratorConstant.UPLOAD.equals(inputType)) numberFormUploadInput++; 
+      if (UIFormGeneratorConstant.UPLOAD.equals(inputType)) numberFormUploadInput++;
     }
     StringBuilder dialogTemplate = new StringBuilder();
     dialogTemplate.append("<%\n");
@@ -275,15 +293,15 @@ public class UIFormGeneratorTabPane extends UIFormTabPane {
     dialogTemplate.append(" String timestampName = getTimestampName();\n");
     dialogTemplate.append(" %>\n");
     dialogTemplate.append("<!--DIALOG_BEGIN-->\n");
-    
+
     dialogTemplate.append("<div class=\"UIForm FormLayout\">\n");
     dialogTemplate.append("  <% uiform.begin() %>\n");
     dialogTemplate.append("    <div class=\"HorizontalLayout\">\n");
     dialogTemplate.append("      <table class=\"UIFormGrid\">\n");
-    
-    /* in WCM 1.2, we disable name and use a automatic timestamp name. 
-     * We will offer the possibility to choose in WCM 1.3 
-     * (show name, use timestamp, convert from another field like exo:title for example) 
+
+    /* in WCM 1.2, we disable name and use a automatic timestamp name.
+     * We will offer the possibility to choose in WCM 1.3
+     * (show name, use timestamp, convert from another field like exo:title for example)
      */
     dialogTemplate.append("        <tr style=\"display:none;\">\n");
     dialogTemplate.append("          <td class=\"FieldLabel\"><%=_ctx.appRes(\"" + templateName + ".label.Date\")%></td>\n");
@@ -325,12 +343,12 @@ public class UIFormGeneratorTabPane extends UIFormTabPane {
       } else if (UIFormGeneratorConstant.SELECT.equals(inputType)) {
         inputField = "SelectBoxField";
       } else if (UIFormGeneratorConstant.CHECKBOX.equals(inputType)){
-      	inputField = "CheckBoxField";
+        inputField = "CheckBoxField";
       } else if (UIFormGeneratorConstant.RADIO.equals(inputType)) {
-      	inputField = "RadioBoxField";
-      }	else {      
+        inputField = "RadioBoxField";
+      }	else {
         inputField = "TextField";
-      } 
+      }
       if (validate.endsWith(",")) validate = validate.substring(0, validate.length() - 1);
       if (validate.endsWith("=")) validate = "";
       String propertyName = getPropertyName(inputName);
@@ -342,24 +360,24 @@ public class UIFormGeneratorTabPane extends UIFormTabPane {
         dialogTemplate.append("      </tr>\n");
       } else {
         dialogTemplate.append("      <tr>\n");
-        
+
         dialogTemplate.append("        <td class=\"FieldLabel\"><%=_ctx.appRes(\"" + templateName + ".label." + inputName + "\")%></td>\n");
         dialogTemplate.append("        <td class=\"FieldComponent\">\n");
         dialogTemplate.append("          <%\n");
-        
+
         if (UIFormGeneratorConstant.UPLOAD.equals(inputType)) {
-          String extraFormUploadInput = "";                    
+          String extraFormUploadInput = "";
           String realDataNodeName = "jcr:content"  + (inputFieldName);
-          
+
           StringBuilder hiddenFields = new StringBuilder();
           hiddenFields.append("hiddenField1 = [\"jcrPath=/node" + extraFormUploadInput + "/" + realDataNodeName + "\", \"nodetype=nt:resource\", \"visible=false\"];\n");
-          hiddenFields.append("uicomponent.addHiddenField(\"" + inputFieldName + "_hiddenInput1\", hiddenField1);\n");         
+          hiddenFields.append("uicomponent.addHiddenField(\"" + inputFieldName + "_hiddenInput1\", hiddenField1);\n");
           hiddenFields.append("hiddenField2 = [\"jcrPath=/node" + extraFormUploadInput + "/" + realDataNodeName + "/jcr:encoding\", \"visible=false\", \"UTF-8\"];\n");
-          hiddenFields.append("uicomponent.addHiddenField(\"" + inputFieldName + "_hiddenInput2\", hiddenField2);\n");         
+          hiddenFields.append("uicomponent.addHiddenField(\"" + inputFieldName + "_hiddenInput2\", hiddenField2);\n");
           hiddenFields.append("hiddenField3 = [\"jcrPath=/node" + extraFormUploadInput + "/" + realDataNodeName + "/jcr:lastModified\", \"visible=false\"];\n");
           hiddenFields.append("uicomponent.addCalendarField(\"" + inputFieldName + "_hiddenInput3\", hiddenField3);\n");
           String hiddenFieldsStr = hiddenFields.toString();
-	          
+
           dialogTemplate.append("           if(uicomponent.isEditing()) {\n");
           dialogTemplate.append("             def curNode = uicomponent.getNode() ;\n");
           dialogTemplate.append("             if (curNode.hasNode(\"" + realDataNodeName + "\")) {\n");
@@ -406,7 +424,7 @@ public class UIFormGeneratorTabPane extends UIFormTabPane {
         dialogTemplate.append("        </td>\n");
         dialogTemplate.append("      </tr>\n");
       }
-      
+
       dialogTemplate.append("      <tr>\n");
       dialogTemplate.append("        <td>&nbsp;</td>\n");
       dialogTemplate.append("        <td>\n");
@@ -447,12 +465,12 @@ public class UIFormGeneratorTabPane extends UIFormTabPane {
     dialogTemplate.append("<!--DIALOG_END-->\n");
     return dialogTemplate.toString();
   }
-  
+
   /**
    * Generate view template.
-   * 
+   *
    * @param forms the forms
-   * 
+   *
    * @return the string
    */
   private String generateViewTemplate(String templateName, List<UIFormGeneratorInputBean> forms) {
@@ -474,19 +492,19 @@ public class UIFormGeneratorTabPane extends UIFormTabPane {
       viewTemplate.append("   <tr>\n");
       viewTemplate.append("     <%\n");
       viewTemplate.append("       if (currentNode.hasProperty(\"" + propertyName + "\")) {\n");
-      viewTemplate.append("           String cleanName = currentNode.getProperty(\"" + propertyName + "\").getName();\n"); 
-      viewTemplate.append("           if (cleanName.startsWith(\""+NODE_PREFIX+"\")) cleanName = cleanName.substring(9);\n"); 
-      viewTemplate.append("           cleanName = cleanName.replaceAll(\"_\", \" \");\n"); 
+      viewTemplate.append("           String cleanName = currentNode.getProperty(\"" + propertyName + "\").getName();\n");
+      viewTemplate.append("           if (cleanName.startsWith(\""+NODE_PREFIX+"\")) cleanName = cleanName.substring(9);\n");
+      viewTemplate.append("           cleanName = cleanName.replaceAll(\"_\", \" \");\n");
       viewTemplate.append("         %>\n");
       viewTemplate.append("           <td style=\"padding:5px\"><%= cleanName %></td>\n");
       if(UIFormGeneratorConstant.UPLOAD.equals(form.getType())) {
-      	String inputName  = form.getName();
+        String inputName  = form.getName();
         String inputFieldName = cleanString(inputName) + "FieldName";
-        String realDataNodeName = "jcr:content" + (inputFieldName);      	
+        String realDataNodeName = "jcr:content" + (inputFieldName);
         viewTemplate.append("<%\n");
         viewTemplate.append("if (currentNode.hasNode(\"" + realDataNodeName + "\")) {\n");
- 	 	 	 	viewTemplate.append("           def imageNode = currentNode.getNode(\"" + realDataNodeName + "\");\n");
- 	 	 	 	viewTemplate.append("           DownloadService dservice = uicomponent.getApplicationComponent(DownloadService.class);\n");
+            viewTemplate.append("           def imageNode = currentNode.getNode(\"" + realDataNodeName + "\");\n");
+            viewTemplate.append("           DownloadService dservice = uicomponent.getApplicationComponent(DownloadService.class);\n");
         viewTemplate.append("           InputStream input = imageNode.getProperty(\"jcr:data\").getStream();\n");
         viewTemplate.append("           InputStreamDownloadResource dresource = new InputStreamDownloadResource(input, \"" + form.getName() + "\");\n");
         viewTemplate.append("           dresource.setDownloadName(currentNode.getName());\n");
@@ -507,7 +525,7 @@ public class UIFormGeneratorTabPane extends UIFormTabPane {
     viewTemplate.append("<!--VIEW_END-->\n");
     return viewTemplate.toString();
   }
-  
+
   /**
    * The listener interface for receiving saveAction events.
    * The class that is interested in processing a saveAction
@@ -516,11 +534,11 @@ public class UIFormGeneratorTabPane extends UIFormTabPane {
    * component's <code>addSaveActionListener<code> method. When
    * the saveAction event occurs, that object's appropriate
    * method is invoked.
-   * 
+   *
    * @see SaveActionEvent
    */
   public static class SaveActionListener extends EventListener<UIFormGeneratorTabPane> {
-    
+
     /* (non-Javadoc)
      * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
      */
@@ -529,15 +547,15 @@ public class UIFormGeneratorTabPane extends UIFormTabPane {
       UIFormInputSet formGeneratorGeneralTab = formGeneratorTabPane.getChildById(UIFormGeneratorConstant.FORM_GENERATOR_GENERAL_TAB);
       UIFormHiddenInput hiddenInputJSonObject = formGeneratorGeneralTab.getChildById(UIFormGeneratorConstant.JSON_OBJECT_FORM_GENERATOR);
       String jsonObjectGenerated = hiddenInputJSonObject.getValue();
-      
+
       jsonObjectGenerated = jsonObjectGenerated.replaceAll("\n", "<br/>");
-      
+
       JsonHandler jsonHandler = new JsonDefaultHandler();
       Charset cs = Charset.forName("utf-8");
       new JsonParserImpl().parse(new InputStreamReader(new ByteArrayInputStream(jsonObjectGenerated.getBytes("utf-8")), cs), jsonHandler);
       JsonValue jsonValue = jsonHandler.getJsonObject();
       List<UIFormGeneratorInputBean> forms = ((UIFormGeneratorInputBean)new BeanBuilder().createObject(UIFormGeneratorInputBean.class, jsonValue)).getInputs();
-      
+
       for(int i = 0; i < forms.size(); i++) {
         for(int j = i + 1; j < forms.size(); j++){
           if(forms.get(i).getName().equals(forms.get(j).getName())) {
@@ -571,31 +589,31 @@ public class UIFormGeneratorTabPane extends UIFormTabPane {
       UIFormStringInput nameFormStringInput = formGeneratorTabPane.getUIStringInput(UIFormGeneratorConstant.NAME_FORM_STRING_INPUT);
       String templateName = nameFormStringInput.getValue().trim();
       String nodetypeName = formGeneratorTabPane.getNodetypeName(templateName);
-      
+
       String preferenceRepository = UIFormGeneratorUtils.getPreferenceRepository();
       ListenerService listenerService = Utils.getService(ListenerService.class);
-      
+
       listenerService.broadcast(UIFormGeneratorConstant.PRE_CREATE_NODETYPE_EVENT, null, nodetypeName);
-      
+
       formGeneratorTabPane.addNodetype(event.getRequestContext(), preferenceRepository, nodetypeName, forms);
       String newDialogTemplate = formGeneratorTabPane.generateDialogTemplate(templateName, forms);
       String newViewTemplate = formGeneratorTabPane.generateViewTemplate(templateName, forms);
-      
+
       TemplateService templateService = Utils.getService(TemplateService.class);
       templateService.addTemplate(TemplateService.DIALOGS, nodetypeName, templateName, true, cleanString(templateName), new String[] {"*"}, new ByteArrayInputStream(newDialogTemplate.getBytes())) ;
       templateService.addTemplate(TemplateService.VIEWS, nodetypeName, templateName, true, cleanString(templateName), new String[] {"*"}, new ByteArrayInputStream(newViewTemplate.getBytes())) ;
       templateService.addTemplate(TemplateService.SKINS, nodetypeName, templateName, true, cleanString(templateName), new String[] {"*"}, new ByteArrayInputStream("".getBytes())) ;
-      
-      listenerService.broadcast(UIFormGeneratorConstant.POST_CREATE_NODETYPE_EVENT, null, nodetypeName);      
+
+      listenerService.broadcast(UIFormGeneratorConstant.POST_CREATE_NODETYPE_EVENT, null, nodetypeName);
 
       Utils.createPopupMessage(formGeneratorTabPane, "UIFormGeneratorTabPane.msg.AddNewsSuccessful", new Object[]{templateName}, ApplicationMessage.INFO);
-      
+
       nameFormStringInput.setValue("");
       ((UIFormRichtextInput)formGeneratorGeneralTab.getChildById(UIFormGeneratorConstant.DESCRIPTION_FORM_WYSIWYG_INPUT)).setValue("");
       event.getRequestContext().addUIComponentToUpdateByAjax(formGeneratorTabPane);
     }
   }
-  
+
   /**
    * The listener interface for receiving resetAction events.
    * The class that is interested in processing a resetAction
@@ -604,11 +622,11 @@ public class UIFormGeneratorTabPane extends UIFormTabPane {
    * component's <code>addResetActionListener<code> method. When
    * the resetAction event occurs, that object's appropriate
    * method is invoked.
-   * 
+   *
    * @see ResetActionEvent
    */
   public static class ResetActionListener extends EventListener<UIFormGeneratorTabPane> {
-    
+
     /* (non-Javadoc)
      * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
      */

@@ -20,7 +20,7 @@ import org.exoplatform.services.workflow.Process;
 import org.jbpm.graph.def.ProcessDefinition;
 
 public class ProcessData implements Process {
-  
+
   private ProcessDefinition def_;
 
   public ProcessData(ProcessDefinition def) {

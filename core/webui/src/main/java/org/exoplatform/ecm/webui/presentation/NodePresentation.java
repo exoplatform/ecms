@@ -30,59 +30,59 @@ import org.exoplatform.webui.core.UIComponent;
  */
 
 public interface NodePresentation {
-  
+
   /**
    * Sets enable vote
-   * 
+   *
    * @param value value to set
    */
   public void setEnableVote(boolean value);
-  
+
   /**
    * checks if enable vote
-   * 
-   */  
+   *
+   */
   public boolean isEnableVote();
-  
+
   /**
    * Sets enable comment
-   * 
+   *
    * @param value value to set
    */
   public void setEnableComment(boolean value);
-  
+
   /**
    * checks if enable comment
-   * 
-   */  
-  public boolean isEnableComment();  
-  
+   *
+   */
+  public boolean isEnableComment();
+
   /**
    * Sets the node.
-   * 
+   *
    * @param node the new node
    */
   public void setNode(Node node);
 
   /**
    * Gets the node.
-   * 
+   *
    * @return the node
    * @throws Exception the exception
    */
   public Node getNode() throws Exception;
-  
+
   /**
    * Gets the original node.
-   * 
+   *
    * @return the original node
    * @throws Exception the exception
    */
   public Node getOriginalNode() throws Exception;
-  
+
   /**
    * Gets the node type.
-   * 
+   *
    * @return the node type
    * @throws Exception the exception
    */
@@ -90,14 +90,14 @@ public interface NodePresentation {
 
   /**
    * Checks if is node type supported.
-   * 
+   *
    * @return true, if is node type supported
    */
   public boolean isNodeTypeSupported();
 
   /**
    * Gets the template path.
-   * 
+   *
    * @return the template path
    * @throws Exception the exception
    */
@@ -105,7 +105,7 @@ public interface NodePresentation {
 
   /**
    * Gets the relations.
-   * 
+   *
    * @return the relations
    * @throws Exception the exception
    */
@@ -113,7 +113,7 @@ public interface NodePresentation {
 
   /**
    * Gets the attachments.
-   * 
+   *
    * @return the attachments
    * @throws Exception the exception
    */
@@ -121,107 +121,107 @@ public interface NodePresentation {
 
   /**
    * Gets the attachment URL.
-   * 
+   *
    * @return the attachment URL
    * @throws Exception the exception
    */
   public String getAttachmentURL(Node attNode, Parameter[] params) throws Exception;
-  
-  
+
+
   /**
    * Checks if is rss link.
-   * 
+   *
    * @return true, if is rss link
    */
   public boolean isRssLink();
 
   /**
    * Gets the rss link.
-   * 
+   *
    * @return the rss link
    */
   public String getRssLink();
 
   /**
    * Gets the supported localise.
-   * 
+   *
    * @return the supported localise
    * @throws Exception the exception
    */
   public List getSupportedLocalise() throws Exception;
-  
+
   /**
    * Sets the language.
-   * 
+   *
    * @param language the new language
    */
   public void setLanguage(String language);
-  
+
   /**
    * Gets the language.
-   * 
+   *
    * @return the language
    */
   public String getLanguage();
-  
+
   /**
    * Gets the component instance of type.
-   * 
+   *
    * @param className the class name
    * @return the component instance of type
    */
   public Object getComponentInstanceOfType(String className);
-  
+
   /**
    * Gets the web dav server prefix.
-   * 
+   *
    * @return the web dav server prefix
    * @throws Exception the exception
    */
   public String getWebDAVServerPrefix() throws Exception;
-  
+
   /**
    * Gets the image.
-   * 
+   *
    * @param node the node
    * @return the image
    * @throws Exception the exception
    */
   public String getImage(Node node) throws Exception;
-  
+
   /**
    * Gets the portal name.
-   * 
+   *
    * @return the portal name
    */
   public String getPortalName();
-  
+
   /**
    * Gets the repository.
-   * 
+   *
    * @return the repository
    * @throws Exception the exception
    */
-  public String getRepository() throws Exception; 
-  
+  public String getRepository() throws Exception;
+
   /**
    * Gets the workspace name.
-   * 
+   *
    * @return the workspace name
    * @throws Exception the exception
    */
   public String getWorkspaceName() throws Exception;
-  
+
   /**
    * Gets the view template.
-   * 
+   *
    * @param nodeTypeName the node type name
    * @param templateName the template name
    * @return the view template
    * @throws Exception the exception
    */
   public String getViewTemplate(String nodeTypeName, String templateName) throws Exception;
-  
+
   /**
    * Get the skin of template if it's existing
    * @param nodeTypeName The node type name
@@ -230,14 +230,14 @@ public interface NodePresentation {
    * @throws Exception
    */
   public String getTemplateSkin(String nodeTypeName, String skinName) throws Exception;
-  
+
   /**
    * Get UIComponent for comment
    * @return
    * @throws Exception
    */
   public UIComponent getCommentComponent() throws Exception;
-  
+
   /**
    * Get UIComponent to remove attachment in document
    * @return
@@ -250,38 +250,38 @@ public interface NodePresentation {
    * @return
    * @throws Exception
    */
-  
+
   public UIComponent getRemoveComment() throws Exception;
-  
+
   /**
    * Gets the comments.
-   * 
+   *
    * @return the comments
    * @throws Exception the exception
    */
   public List<Node> getComments() throws Exception;
-  
+
   /**
    * Gets the download link.
-   * 
+   *
    * @param node the node
    * @return the download link
    * @throws Exception the exception
    */
   public String getDownloadLink(Node node) throws Exception;
-  
+
   /**
    * Encode html.
-   * 
+   *
    * @param text the text
    * @return the string
    * @throws Exception the exception
    */
   public String encodeHTML(String text) throws Exception;
-  
+
   /**
    * Gets the icons.
-   * 
+   *
    * @param node the node
    * @param size the size
    * @return the icons

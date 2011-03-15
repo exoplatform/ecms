@@ -40,11 +40,11 @@ public class UIScriptManager extends UIAbstractManager {
     getChild(UIECMScripts.class).refresh(1);
     getChild(UICBScripts.class).refresh(1);
   }
-  
+
   public void removeECMScripForm() {
     getChild(UIECMScripts.class).removeChild(UIPopupWindow.class) ;
   }
-  
+
   public void removeCBScripForm() {
     getChild(UICBScripts.class).removeChild(UIPopupWindow.class) ;
   }

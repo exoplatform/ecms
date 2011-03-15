@@ -23,15 +23,15 @@ import java.util.List;
  * Created by The eXo Platform SARL
  * Author : Nguyen Anh Vu
  *          anhvurz90@gmail.com
- * Dec 15, 2009  
+ * Dec 15, 2009
  * 9:51:25 AM
  */
 public class LockGroupsOrUsersConfig {
-	private List<String> settingLockList = new ArrayList<String>();
-	
-	public List<String> getSettingLockList() { return this.settingLockList; };
-	public void setSettingLockList(List<String> list) { 
-		this.settingLockList = list;
-	}
+  private List<String> settingLockList = new ArrayList<String>();
+
+  public List<String> getSettingLockList() { return this.settingLockList; };
+  public void setSettingLockList(List<String> list) {
+    this.settingLockList = list;
+  }
 
 }

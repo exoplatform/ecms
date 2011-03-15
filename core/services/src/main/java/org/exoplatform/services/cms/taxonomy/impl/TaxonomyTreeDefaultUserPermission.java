@@ -20,32 +20,32 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * This class is used to store data about some default user permissions in 
+ * This class is used to store data about some default user permissions in
  * configure file dms-taxonomies-configuration.xml
- * 
+ *
  * Created by The eXo Platform SARL
  * Author : Nguyen Anh Vu
  *          anhvurz90@gmail.com
- * Feb 2, 2010  
+ * Feb 2, 2010
  * 11:09:57 AM
  */
 public class TaxonomyTreeDefaultUserPermission {
 
-	private List<Permission> permissions = new ArrayList<Permission>();
+  private List<Permission> permissions = new ArrayList<Permission>();
 
-	public List<Permission> getPermissions() { return permissions; }
-	
-	public void setPermissions(List<Permission> permissions) {
-		this.permissions = permissions;
-	}
-	
+  public List<Permission> getPermissions() { return permissions; }
+
+  public void setPermissions(List<Permission> permissions) {
+    this.permissions = permissions;
+  }
+
   static public class Permission {
     private String identity;
     private String read;
     private String addNode;
     private String setProperty;
     private String remove;
-    
+
     public String getIdentity() {
       return identity;
     }
@@ -86,5 +86,5 @@ public class TaxonomyTreeDefaultUserPermission {
       this.setProperty = setProperty;
     }
   }
-	
+
 }

@@ -1,16 +1,16 @@
 /**
  * Copyright (C) 2009 eXo Platform SAS.
- * 
+ *
  * This is free software; you can redistribute it and/or modify it
  * under the terms of the GNU Lesser General Public License as
  * published by the Free Software Foundation; either version 2.1 of
  * the License, or (at your option) any later version.
- * 
+ *
  * This software is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this software; if not, write to the Free
  * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
@@ -21,7 +21,7 @@ package org.exoplatform.services.chars.chardet;
 
 public abstract class Verifier
 {
-	
+
 
    static final byte eStart = (byte)0;
 
@@ -77,8 +77,8 @@ public abstract class Verifier
    public static byte getNextState(Verifier v, byte b, byte s)
    {
 
-      return (byte)(0xFF & (((v.states()[(((s * v.stFactor() + (((v.cclass()[((b & 0xFF) >> Verifier.eidxSft4bits)]) >> ((b & Verifier.eSftMsk4bits) << Verifier.eBitSft4bits)) & Verifier.eUnitMsk4bits)) & 0xFF) >> Verifier.eidxSft4bits)]) >> ((((s
-         * v.stFactor() + (((v.cclass()[((b & 0xFF) >> Verifier.eidxSft4bits)]) >> ((b & Verifier.eSftMsk4bits) << Verifier.eBitSft4bits)) & Verifier.eUnitMsk4bits)) & 0xFF) & Verifier.eSftMsk4bits) << Verifier.eBitSft4bits)) & Verifier.eUnitMsk4bits));
+    return (byte) (0xFF & (((v.states()[(((s * v.stFactor() + (((v.cclass()[((b & 0xFF) >> Verifier.eidxSft4bits)]) >> ((b & Verifier.eSftMsk4bits) << Verifier.eBitSft4bits)) & Verifier.eUnitMsk4bits)) & 0xFF) >> Verifier.eidxSft4bits)]) >> ((((s
+        * v.stFactor() + (((v.cclass()[((b & 0xFF) >> Verifier.eidxSft4bits)]) >> ((b & Verifier.eSftMsk4bits) << Verifier.eBitSft4bits)) & Verifier.eUnitMsk4bits)) & 0xFF) & Verifier.eSftMsk4bits) << Verifier.eBitSft4bits)) & Verifier.eUnitMsk4bits));
 
    }
 

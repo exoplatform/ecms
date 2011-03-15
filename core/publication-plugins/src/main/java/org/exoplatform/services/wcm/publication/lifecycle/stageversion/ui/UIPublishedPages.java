@@ -46,44 +46,44 @@ import org.exoplatform.webui.event.EventListener;
 )
 
 public class UIPublishedPages extends UIContainer {
-  
+
   /** The selected navigation node uri. */
   private String selectedNavigationNodeURI;
-  
+
   /** The list navigation node uri. */
   private List<String> listNavigationNodeURI;
-  
+
   /**
    * Gets the list navigation node uri.
-   * 
+   *
    * @return the list navigation node uri
    */
   public List<String> getListNavigationNodeURI() {return listNavigationNodeURI;}
-  
+
   /**
    * Sets the list navigation node uri.
-   * 
+   *
    * @param listNavigationNodeURI the new list navigation node uri
    */
   public void setListNavigationNodeURI(List<String> listNavigationNodeURI) {this.listNavigationNodeURI = listNavigationNodeURI;}
-  
+
   /**
    * Gets the selected navigation node uri.
-   * 
+   *
    * @return the selected navigation node uri
    */
   public String getSelectedNavigationNodeURI() {return selectedNavigationNodeURI;}
-  
+
   /**
    * Sets the selected navigation node uri.
-   * 
+   *
    * @param selectedNavigationNodeURI the new selected navigation node uri
    */
   public void setSelectedNavigationNodeURI(String selectedNavigationNodeURI) {this.selectedNavigationNodeURI = selectedNavigationNodeURI;}
-  
+
   /**
    * Inits the.
-   * 
+   *
    * @throws Exception the exception
    */
   public void init() throws Exception {
@@ -98,16 +98,16 @@ public class UIPublishedPages extends UIContainer {
         values = new Value[]{contentNode.getProperty("publication:navigationNodeURIs").getValue()};
       }
       for (Value value : values) {
-      	if (PublicationUtil.isNodeContentPublishedToPageNode(contentNode, value.getString())) {
-      		if(!listNavigationNodeURI.contains(value.getString()))
-      			listNavigationNodeURI.add(value.getString()); 
-      	}
+        if (PublicationUtil.isNodeContentPublishedToPageNode(contentNode, value.getString())) {
+          if(!listNavigationNodeURI.contains(value.getString()))
+            listNavigationNodeURI.add(value.getString());
+        }
       }
     } else {
       listNavigationNodeURI = new ArrayList<String>();
     }
   }
-  
+
   /**
    * The listener interface for receiving selectNavigationNodeURIAction events.
    * The class that is interested in processing a selectNavigationNodeURIAction
@@ -116,11 +116,11 @@ public class UIPublishedPages extends UIContainer {
    * component's <code>addSelectNavigationNodeURIActionListener<code> method. When
    * the selectNavigationNodeURIAction event occurs, that object's appropriate
    * method is invoked.
-   * 
+   *
    * @see SelectNavigationNodeURIActionEvent
    */
   public static class SelectNavigationNodeURIActionListener extends EventListener<UIPublishedPages> {
-    
+
     /* (non-Javadoc)
      * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
      */
@@ -128,7 +128,7 @@ public class UIPublishedPages extends UIContainer {
       UIPublishedPages publishedPages = event.getSource();
       String selectedTreeNode = event.getRequestContext().getRequestParameter(OBJECTID);
       publishedPages.setSelectedNavigationNodeURI(selectedTreeNode);
-      
+
       UIPublicationContainer publicationContainer = publishedPages.getAncestorOfType(UIPublicationContainer.class);
       UIPublicationPagesContainer publicationPagesContainer = publishedPages.getAncestorOfType(UIPublicationPagesContainer.class);
       publicationContainer.setActiveTab(publicationPagesContainer, event.getRequestContext());

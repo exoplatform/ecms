@@ -50,7 +50,7 @@ import org.exoplatform.webui.form.UIFormSelectBox;
  */
 
 @ComponentConfig(
-    lifecycle = UIFormLifecycle.class, 
+    lifecycle = UIFormLifecycle.class,
     template = "app:/groovy/webui/component/admin/taxonomy/UIFormWithoutAction.gtmpl",
     events = @EventConfig(listeners = UIActionTypeForm.ChangeActionTypeActionListener.class)
 )
@@ -81,7 +81,7 @@ public class UIActionTypeForm extends UIForm {
   public void setDefaultActionType(String actionType) throws Exception {
     defaultActionType_ = actionType;
     if (actionType == null) {
-      defaultActionType_ = "exo:taxonomyAction";            
+      defaultActionType_ = "exo:taxonomyAction";
     }
     List<SelectItemOption<String>> actionTypeList = new ArrayList<SelectItemOption<String>>();
     actionTypeList.add(new SelectItemOption<String>(defaultActionType_, defaultActionType_));
@@ -99,7 +99,7 @@ public class UIActionTypeForm extends UIForm {
       }
       getUIFormSelectBox(ACTION_TYPE).setOptions(typeList_);
       setDefaultActionType(defaultActionType_);
-      
+
     }
   }
 
@@ -133,7 +133,7 @@ public class UIActionTypeForm extends UIForm {
         actionType = TaxonomyTreeData.ACTION_TAXONOMY_TREE;
         uiActionType.getUIFormSelectBox(UIActionTypeForm.ACTION_TYPE).setValue(actionType);
       }
-      
+
       TaxonomyTreeData taxoTreeData = uiTaxonomyTreeContainer.getTaxonomyTreeData();
       TaxonomyService taxonomyService = uiTaxonomyTreeContainer.getApplicationComponent(TaxonomyService.class);
       Node taxoTreeNode = null;

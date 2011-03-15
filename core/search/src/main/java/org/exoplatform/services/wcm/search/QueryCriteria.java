@@ -25,14 +25,14 @@ import java.util.Calendar;
  * Oct 7, 2008
  */
 /*
- * This is query criteria for SiteSearch service. Base on search criteria, SiteSearch service 
+ * This is query criteria for SiteSearch service. Base on search criteria, SiteSearch service
  * can easy create query statement to search.
  * */
-public class QueryCriteria {  
-  
+public class QueryCriteria {
+
   /** The Constant ALL_PROPERTY_SCOPE. */
   public static final String ALL_PROPERTY_SCOPE = ".";
-  
+
   /** The site name. */
   private String siteName;
 
@@ -49,7 +49,7 @@ public class QueryCriteria {
   private DatetimeRange endPublicationDateRange = null;
 
   /** The authors. */
-  private String[] authors = null;  
+  private String[] authors = null;
 
   /** The content types. */
   private String[] contentTypes = null;
@@ -73,17 +73,17 @@ public class QueryCriteria {
   private String keyword = null;
 
   /** The search web content. */
-  private boolean searchWebContent = true;  
+  private boolean searchWebContent = true;
 
   /** The fulltext search. */
   private boolean fulltextSearch = true;
-  
+
   /** The is live mode. */
   private boolean isLiveMode = true;
-  
+
   /**
    * Checks if is live mode.
-   * 
+   *
    * @return true, if is live mode
    */
   public boolean isLiveMode() {
@@ -92,7 +92,7 @@ public class QueryCriteria {
 
   /**
    * Sets the live mode.
-   * 
+   *
    * @param isLiveMode the new live mode
    */
   public void setLiveMode(boolean isLiveMode) {
@@ -101,23 +101,23 @@ public class QueryCriteria {
 
   /** The query metadatas. */
   private QueryProperty[] queryMetadatas = null;
-  
+
   /** The fulltext search property. */
   private String fulltextSearchProperty = ALL_PROPERTY_SCOPE;
-  
+
   /** The date range selected. */
   private DATE_RANGE_SELECTED dateRangeSelected = null;
-  
+
   /**
    * Gets the site name.
-   * 
+   *
    * @return the site name
    */
   public String getSiteName() { return siteName; }
 
   /**
    * Sets the site name.
-   * 
+   *
    * @param siteName the new site name
    */
   public void setSiteName(String siteName) { this.siteName = siteName; }
@@ -125,49 +125,49 @@ public class QueryCriteria {
 
   /**
    * Gets the authors.
-   * 
+   *
    * @return the authors
    */
   public String[] getAuthors() { return authors; }
 
   /**
    * Sets the authors.
-   * 
+   *
    * @param authors the new authors
    */
   public void setAuthors(String[] authors) { this.authors = authors; }
 
   /**
    * Gets the content types.
-   * 
+   *
    * @return the content types
    */
   public String[] getContentTypes() { return contentTypes; }
 
   /**
    * Sets the content types.
-   * 
+   *
    * @param contentTypes the new content types
    */
   public void setContentTypes(String[] contentTypes) { this.contentTypes = contentTypes; }
 
   /**
    * Gets the mime types.
-   * 
+   *
    * @return the mime types
    */
   public String[] getMimeTypes() { return mimeTypes; }
 
   /**
    * Sets the mime types.
-   * 
+   *
    * @param mimeTypes the new mime types
    */
-  public void setMimeTypes(String[] mimeTypes) { this.mimeTypes = mimeTypes; }  
+  public void setMimeTypes(String[] mimeTypes) { this.mimeTypes = mimeTypes; }
 
   /**
    * Gets the start publication date range.
-   * 
+   *
    * @return the start publication date range
    */
   public DatetimeRange getStartPublicationDateRange() {
@@ -176,7 +176,7 @@ public class QueryCriteria {
 
   /**
    * Sets the start publication date range.
-   * 
+   *
    * @param startPublicationDateRange the new start publication date range
    */
   public void setStartPublicationDateRange(DatetimeRange startPublicationDateRange) {
@@ -185,7 +185,7 @@ public class QueryCriteria {
 
   /**
    * Gets the end publication date range.
-   * 
+   *
    * @return the end publication date range
    */
   public DatetimeRange getEndPublicationDateRange() {
@@ -194,7 +194,7 @@ public class QueryCriteria {
 
   /**
    * Sets the end publication date range.
-   * 
+   *
    * @param endPublicationDateRange the new end publication date range
    */
   public void setEndPublicationDateRange(DatetimeRange endPublicationDateRange) {
@@ -203,7 +203,7 @@ public class QueryCriteria {
 
   /**
    * Gets the created date range.
-   * 
+   *
    * @return the created date range
    */
   public DatetimeRange getCreatedDateRange() {
@@ -212,7 +212,7 @@ public class QueryCriteria {
 
   /**
    * Sets the created date range.
-   * 
+   *
    * @param createdDateRange the new created date range
    */
   public void setCreatedDateRange(DatetimeRange createdDateRange) {
@@ -221,7 +221,7 @@ public class QueryCriteria {
 
   /**
    * Gets the last modified date range.
-   * 
+   *
    * @return the last modified date range
    */
   public DatetimeRange getLastModifiedDateRange() {
@@ -230,7 +230,7 @@ public class QueryCriteria {
 
   /**
    * Sets the last modified date range.
-   * 
+   *
    * @param lastModifiedDateRange the new last modified date range
    */
   public void setLastModifiedDateRange(DatetimeRange lastModifiedDateRange) {
@@ -239,7 +239,7 @@ public class QueryCriteria {
 
   /**
    * Checks if is fulltext search.
-   * 
+   *
    * @return true, if is fulltext search
    */
   public boolean isFulltextSearch() {
@@ -249,7 +249,7 @@ public class QueryCriteria {
 
   /**
    * Sets the fulltext search.
-   * 
+   *
    * @param fulltextSearch the new fulltext search
    */
   public void setFulltextSearch(boolean fulltextSearch) {
@@ -258,44 +258,44 @@ public class QueryCriteria {
 
   /**
    * Gets the keyword.
-   * 
+   *
    * @return the keyword
    */
   public String getKeyword() { return this.keyword; }
 
   /**
    * Sets the keyword.
-   * 
+   *
    * @param s the new keyword
    */
   public void setKeyword(String s) { this.keyword = s; }
 
   /**
    * Checks if is search webpage.
-   * 
+   *
    * @return true, if is search webpage
    */
   public boolean isSearchWebpage() { return searchWebpage;}
 
   /**
    * Sets the search webpage.
-   * 
+   *
    * @param searchWebpage the new search webpage
    */
-  public void setSearchWebpage(boolean searchWebpage) { 
+  public void setSearchWebpage(boolean searchWebpage) {
     this.searchWebpage = searchWebpage;
   }
 
   /**
    * Checks if is search document.
-   * 
+   *
    * @return true, if is search document
    */
   public boolean isSearchDocument() { return searchDocument;}
 
   /**
    * Sets the search document.
-   * 
+   *
    * @param searchDocument the new search document
    */
   public void setSearchDocument(boolean searchDocument) {
@@ -304,7 +304,7 @@ public class QueryCriteria {
 
   /**
    * Checks if is search web content.
-   * 
+   *
    * @return true, if is search web content
    */
   public boolean isSearchWebContent() {
@@ -313,7 +313,7 @@ public class QueryCriteria {
 
   /**
    * Sets the search web content.
-   * 
+   *
    * @param searchWebContent the new search web content
    */
   public void setSearchWebContent(boolean searchWebContent) {
@@ -333,7 +333,7 @@ public class QueryCriteria {
 
     /**
      * Instantiates a new datetime range.
-     * 
+     *
      * @param fromDate the from date
      * @param toDate the to date
      */
@@ -344,7 +344,7 @@ public class QueryCriteria {
 
     /**
      * Gets the from date.
-     * 
+     *
      * @return the from date
      */
     public Calendar getFromDate() {
@@ -353,7 +353,7 @@ public class QueryCriteria {
 
     /**
      * Sets the from date.
-     * 
+     *
      * @param fromDate the new from date
      */
     public void setFromDate(Calendar fromDate) {
@@ -362,7 +362,7 @@ public class QueryCriteria {
 
     /**
      * Gets the to date.
-     * 
+     *
      * @return the to date
      */
     public Calendar getToDate() {
@@ -371,12 +371,12 @@ public class QueryCriteria {
 
     /**
      * Sets the to date.
-     * 
+     *
      * @param toDate the new to date
      */
     public void setToDate(Calendar toDate) {
       this.toDate = toDate;
-    }    
+    }
   }
 
   /**
@@ -392,7 +392,7 @@ public class QueryCriteria {
 
   /**
    * Gets the date range selected.
-   * 
+   *
    * @return the date range selected
    */
   public DATE_RANGE_SELECTED getDateRangeSelected() {
@@ -401,7 +401,7 @@ public class QueryCriteria {
 
   /**
    * Sets the date range selected.
-   * 
+   *
    * @param dateRangeSelected the new date range selected
    */
   public void setDateRangeSelected(DATE_RANGE_SELECTED dateRangeSelected) {
@@ -410,7 +410,7 @@ public class QueryCriteria {
 
   /**
    * Gets the category uui ds.
-   * 
+   *
    * @return the category uui ds
    */
   public String[] getCategoryUUIDs() {
@@ -419,7 +419,7 @@ public class QueryCriteria {
 
   /**
    * Sets the category uui ds.
-   * 
+   *
    * @param categoryUUIDs the new category uui ds
    */
   public void setCategoryUUIDs(String[] categoryUUIDs) {
@@ -428,7 +428,7 @@ public class QueryCriteria {
 
   /**
    * Gets the tag uui ds.
-   * 
+   *
    * @return the tag uui ds
    */
   public String[] getTagUUIDs() {
@@ -437,7 +437,7 @@ public class QueryCriteria {
 
   /**
    * Sets the tag uui ds.
-   * 
+   *
    * @param tagUUIDs the new tag uui ds
    */
   public void setTagUUIDs(String[] tagUUIDs) {
@@ -449,54 +449,54 @@ public class QueryCriteria {
    * The Class QueryProperty.
    */
   public class QueryProperty {
-    
+
     /** The name. */
     private String name;
-    
+
     /** The value. */
     private String value;
-    
+
     /**
      * Gets the name.
-     * 
+     *
      * @return the name
      */
     public String getName() {
       return name;
     }
-    
+
     /**
      * Sets the name.
-     * 
+     *
      * @param name the new name
      */
     public void setName(String name) {
       this.name = name;
     }
-    
+
     /**
      * Gets the value.
-     * 
+     *
      * @return the value
      */
     public String getValue() {
       return value;
     }
-    
+
     /**
      * Sets the value.
-     * 
+     *
      * @param value the new value
      */
     public void setValue(String value) {
       this.value = value;
-    }    
+    }
   }
 
 
   /**
    * Gets the query metadatas.
-   * 
+   *
    * @return the query metadatas
    */
   public QueryProperty[] getQueryMetadatas() {
@@ -505,7 +505,7 @@ public class QueryCriteria {
 
   /**
    * Sets the query metadatas.
-   * 
+   *
    * @param queryMetadatas the new query metadatas
    */
   public void setQueryMetadatas(QueryProperty[] queryMetadatas) {
@@ -514,7 +514,7 @@ public class QueryCriteria {
 
   /**
    * Gets the fulltext search property.
-   * 
+   *
    * @return the fulltext search property
    */
   public String getFulltextSearchProperty() {
@@ -523,7 +523,7 @@ public class QueryCriteria {
 
   /**
    * Sets the fulltext search property.
-   * 
+   *
    * @param fulltextSearchProperty the new fulltext search property
    */
   public void setFulltextSearchProperty(String fulltextSearchProperty) {

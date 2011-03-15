@@ -44,7 +44,7 @@ import org.exoplatform.webui.event.EventListener;
  * Created by The eXo Platform SARL
  * Author : Dang Van Minh
  *          minh.dang@exoplatform.com
- * Nov 18, 2009  
+ * Nov 18, 2009
  * 10:37:42 AM
  */
 @ComponentConfig(
@@ -60,9 +60,9 @@ public class UISkinTab extends UIContainer {
   final private static String[] ACTIONS = {"Edit", "Delete"} ;
   final public static String SKIN_LIST_NAME = "SkinList" ;
   final public static String SKIN_FORM_NAME = "SkinForm" ;
-  
+
   private List<String> listSkin_ = new ArrayList<String>() ;
-  
+
   public UISkinTab() throws Exception {
     UIGrid uiGrid = addChild(UIGrid.class, null, SKIN_LIST_NAME) ;
     uiGrid.getUIPageIterator().setId("SkinListIterator") ;
@@ -71,14 +71,14 @@ public class UISkinTab extends UIContainer {
     uiForm.setTemplateType(TemplateService.SKINS);
     uiForm.update(null);
   }
-  
+
   public void setTabRendered() {
     UIViewTemplate uiViewTemplate = getAncestorOfType(UIViewTemplate.class) ;
     uiViewTemplate.setRenderedChild(UISkinTab.class) ;
   }
-  
+
   public List<String> getListSkin() { return listSkin_ ; }
-  
+
   public void updateGrid(String nodeName, String repository) throws Exception {
     TemplateService tempService = getApplicationComponent(TemplateService.class) ;
     Node templateHome = tempService.getTemplatesHome(SessionProviderFactory.createSystemProvider()).getNode(nodeName);
@@ -104,9 +104,9 @@ public class UISkinTab extends UIContainer {
     }
     UIGrid uiGrid = getChild(UIGrid.class) ;
     ObjectPageList objDPageList = new ObjectPageList(data, 4) ;
-    uiGrid.getUIPageIterator().setPageList(objDPageList) ;  
-  }  
-  
+    uiGrid.getUIPageIterator().setPageList(objDPageList) ;
+  }
+
   static public class EditActionListener extends EventListener<UISkinTab> {
     public void execute(Event<UISkinTab> event) throws Exception {
       UISkinTab skinTab = event.getSource() ;
@@ -127,7 +127,7 @@ public class UISkinTab extends UIContainer {
       String templateName = event.getRequestContext().getRequestParameter(OBJECTID) ;
       TemplateService templateService = skinTab.getApplicationComponent(TemplateService.class) ;
       UITemplateContent uiForm = skinTab.findFirstComponentOfType(UITemplateContent.class) ;
-      for(String template : TemplateService.UNDELETABLE_TEMPLATES) {        
+      for(String template : TemplateService.UNDELETABLE_TEMPLATES) {
         if(template.equals(templateName)) {
           UIApplication app = skinTab.getAncestorOfType(UIApplication.class) ;
           Object[] args = {template} ;
@@ -142,14 +142,14 @@ public class UISkinTab extends UIContainer {
       templateService.removeTemplate(TemplateService.SKINS, nodeTypeName, templateName) ;
       uiForm.update(null);
       uiForm.reset();
-      
+
       skinTab.updateGrid(nodeTypeName, repository) ;
       skinTab.setTabRendered() ;
       UITemplatesManager uiManager = skinTab.getAncestorOfType(UITemplatesManager.class) ;
       event.getRequestContext().addUIComponentToUpdateByAjax(uiManager) ;
     }
-  }  
-  
+  }
+
   public static class SkinData {
     private String name ;
     private String roles ;

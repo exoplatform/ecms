@@ -27,30 +27,30 @@ import org.exoplatform.container.ExoContainerContext;
  * Created by The eXo Platform SAS
  * Author : eXoPlatform
  *          nicolas.filotto@exoplatform.com
- * 1 avr. 2009  
+ * 1 avr. 2009
  */
 public final class LinkUtils {
 
   /**
-   * Convert a path of type /my/../folder or /my/./folder to a real path 
+   * Convert a path of type /my/../folder or /my/./folder to a real path
    * @param path the path to convert
    * @return the real absolute path
    */
-   
+
   public static String evaluatePath(String path) {
     if (!path.startsWith("/")) {
       throw new IllegalArgumentException("The path '" + path +  "' must be an absolute path");
     }
     path = cleanPath(path);
-    int index;    
+    int index;
     while ((index = path.indexOf("/..")) != -1) {
       if (index == 0) {
         path = path.substring(3);
       } else {
         path = createPath(getParentPath(path.substring(0, index)), path.substring(index + 3));
-        if (!path.endsWith("/")) path = path.concat("/");        
+        if (!path.endsWith("/")) path = path.concat("/");
       }
-    }   
+    }
     // Avoid for file with name starts with a dot
     while ((index = path.indexOf("/./")) != -1) {
       if (index == 0) {
@@ -62,7 +62,7 @@ public final class LinkUtils {
     path = cleanPath(path);
     return path.length() == 0 ? "/" : path;
   }
-  
+
   /**
    * Gives the name of the item according to the given absolute path
    * @param path the absolute of the item
@@ -76,7 +76,7 @@ public final class LinkUtils {
     int index = path.lastIndexOf('/');
     return path.substring(index + 1);
   }
-  
+
   /**
    * Appends the parentPath and the relativePath to give a full absolute path
    */
@@ -95,11 +95,11 @@ public final class LinkUtils {
       if (!parentPath.equals("/")) {
         path.append('/');
       }
-      path.append(relativePath);      
+      path.append(relativePath);
     }
     return path.toString();
   }
-  
+
   /**
    * Gives the total depth of the given absolute path
    * @param path an absolute path
@@ -145,7 +145,7 @@ public final class LinkUtils {
     }
     return result.toString();
   }
-  
+
   /**
    * Gives the parent path of the given path
    * @param path an absolute path
@@ -161,51 +161,51 @@ public final class LinkUtils {
     }
     int index = path.lastIndexOf('/');
     if (index == 0) {
-      return "/";      
+      return "/";
     }
     return path.substring(0, index);
   }
-  
+
   public static NodeFinder getNodeFinder() {
     ExoContainer context = ExoContainerContext.getCurrentContainer();
     return (NodeFinder) context.getComponentInstance(NodeFinder.class);
   }
-  
+
   public static LinkManager getLinkManager() {
     ExoContainer context = ExoContainerContext.getCurrentContainer();
     return (LinkManager) context.getComponentInstance(LinkManager.class);
   }
-  
+
   /**
    * The procedure which return the path existed in tree.<br>
-   * @author Phan Trong Lam. 
-   * @param node is a Node type which represents current node. 
+   * @author Phan Trong Lam.
+   * @param node is a Node type which represents current node.
    * @param path a current path
    * @return the path existed in tree
    * @throws RepositoryException when some exceptions occurrence.
    */
   public static String getExistPath(Node node, String path) throws RepositoryException {
-    
+
     // The following process is added by lampt.
-    int deep = getDepth(path);      
-    
+    int deep = getDepth(path);
+
     // In case of path is root path.
-    if (deep == 0) { 
-      path = LinkUtils.getAncestorPath(path, 0);        
+    if (deep == 0) {
+      path = LinkUtils.getAncestorPath(path, 0);
     } else {
       Session session = node.getSession();
-      for (int i = deep; i > 0; i-- ) {         
-        if (session.itemExists(path))          
-          break;        
-        else 
+      for (int i = deep; i > 0; i-- ) {
+        if (session.itemExists(path))
+          break;
+        else
           path = getParentPath(path);
       }
     }
     return path;
   }
-  
+
   private static String cleanPath(String path) {
-    
+
     // Remove unnecessary '/'
     path = path.replaceAll("/+", "/");
     // Avoid for file with name starts with a dot
@@ -214,5 +214,5 @@ public final class LinkUtils {
     }
     return path;
   }
- 
+
 }

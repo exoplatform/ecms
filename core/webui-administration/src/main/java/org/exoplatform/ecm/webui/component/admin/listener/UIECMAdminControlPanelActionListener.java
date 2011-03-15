@@ -32,7 +32,7 @@ import org.exoplatform.webui.ext.UIExtensionEventListener;
  * Created by The eXo Platform SAS
  * Author : eXoPlatform
  *          nicolas.filotto@exoplatform.com
- * 15 mai 2009  
+ * 15 mai 2009
  */
 public abstract class UIECMAdminControlPanelActionListener<T extends UIComponent> extends UIExtensionEventListener<T> {
 

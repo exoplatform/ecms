@@ -49,7 +49,7 @@ import org.exoplatform.webui.form.wysiwyg.UIFormWYSIWYGInput;
  * Created by The eXo Platform SARL
  * Author : pham tuan
  *          phamtuanchip@gmail.com
- * Jan 30, 2007  
+ * Jan 30, 2007
  */
 
 @ComponentConfig(
@@ -59,20 +59,20 @@ import org.exoplatform.webui.form.wysiwyg.UIFormWYSIWYGInput;
       @EventConfig(listeners = UICBCommentForm.SaveActionListener.class),
       @EventConfig(phase = Phase.DECODE, listeners = UICBCommentForm.CancelActionListener.class)
     }
-) 
+)
 
 public class UICBCommentForm extends UIForm implements UIPopupComponent {
   final public static String DEFAULT_LANGUAGE = "default".intern();
   final private static String FIELD_EMAIL = "email";
   final private static String FIELD_WEBSITE = "website";
   final private static String FIELD_COMMENT = "comment";
-  
+
   private Node docNode_;
 
   private boolean edit;
-  
+
   private String nodeCommentPath;
-  
+
   public boolean isEdit() {
     return edit;
   }
@@ -88,8 +88,8 @@ public class UICBCommentForm extends UIForm implements UIPopupComponent {
   public void setNodeCommentPath(String nodeCommentPath) {
     this.nodeCommentPath = nodeCommentPath;
   }
-  
-  
+
+
 
   public UICBCommentForm() throws Exception {
     setActions(new String[] {"Save", "Cancel"});
@@ -104,7 +104,7 @@ public class UICBCommentForm extends UIForm implements UIPopupComponent {
     if(userName == null || userName.length() == 0){
       addUIFormInput(new UIFormStringInput(FIELD_EMAIL, FIELD_EMAIL, null).addValidator(EmailAddressValidator.class));
       addUIFormInput(new UIFormStringInput(FIELD_WEBSITE, FIELD_WEBSITE, null));
-    } 
+    }
     addUIFormInput(new UIFormWYSIWYGInput(FIELD_COMMENT, FIELD_COMMENT, null).addValidator(MandatoryValidator.class));
     if (isEdit()) {
       Node comment = getAncestorOfType(UIBrowseContentPortlet.class).findFirstComponentOfType(UIBrowseContainer.class)
@@ -114,7 +114,7 @@ public class UICBCommentForm extends UIForm implements UIPopupComponent {
       }
     }
   }
-  
+
   public static class CancelActionListener extends EventListener<UICBCommentForm>{
     public void execute(Event<UICBCommentForm> event) throws Exception {
       UICBCommentForm uiForm = event.getSource();
@@ -122,7 +122,7 @@ public class UICBCommentForm extends UIForm implements UIPopupComponent {
       UIPopupContainer uiPopupAction = uiForm.getAncestorOfType(UIPopupContainer.class);
       uiPopupAction.deActivate();
     }
-  }  
+  }
 
   public void activate() throws Exception {
     prepareFields();

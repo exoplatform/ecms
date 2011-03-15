@@ -54,76 +54,74 @@ import org.exoplatform.webui.form.UIForm;
  * chuong_phan@exoplatform.com
  * Mar 19, 2009
  */
-@ComponentConfig (
-    lifecycle = UIFormLifecycle.class,
-    template = "classpath:groovy/wcm/webui/publication/lifecycle/stageversion/ui/UIPublishClvChooser.gtmpl",
-    events = {
-      @EventConfig(listeners = UIPublishClvChooser.ChooseActionListener.class),
-      @EventConfig(listeners = UIPublishClvChooser.CloseActionListener.class)
-    }
-)
+@ComponentConfig(lifecycle = UIFormLifecycle.class,
+                 template = "classpath:groovy/wcm/webui/publication/lifecycle/stageversion/ui/UIPublishClvChooser.gtmpl",
+                 events = {
+    @EventConfig(listeners = UIPublishClvChooser.ChooseActionListener.class),
+    @EventConfig(listeners = UIPublishClvChooser.CloseActionListener.class) })
 public class UIPublishClvChooser extends UIForm implements UIPopupComponent {
-  
+
   /** The page. */
   private Page page;
-  
+
   /** The node. */
   private NodeLocation nodeLocation;
-  
+
   /**
    * Gets the page.
-   * 
+   *
    * @return the page
    */
   public Page getPage() {return page;}
-  
+
   /**
    * Sets the page.
-   * 
+   *
    * @param page the new page
    */
   public void setPage(Page page) {this.page = page;}
-  
+
   /**
    * Gets the node.
-   * 
+   *
    * @return the node
    */
   public Node getNode() {
     return NodeLocation.getNodeByLocation(nodeLocation);
   }
-  
+
   /**
    * Sets the node.
-   * 
+   *
    * @param node the new node
    */
   public void setNode(Node node) {
     nodeLocation = NodeLocation.make(node);
   }
-  
+
   /**
    * Instantiates a new uI publish clv chooser.
    */
   public UIPublishClvChooser() {
   }
-  
+
   /**
    * Gets the clv portlets.
-   * 
+   *
    * @return the clv portlets
-   * 
+   *
    * @throws Exception the exception
    */
   public List<Application<Portlet>> getClvPortlets() throws Exception {
     WCMConfigurationService wcmConfigurationService = WCMCoreUtils.getService(WCMConfigurationService.class);
+    String portletName = wcmConfigurationService.getRuntimeContextParam(WCMConfigurationService.CLV_PORTLET);
     DataStorage dataStorage = WCMCoreUtils.getService(DataStorage.class);
-    List<String> clvPortletsId = PublicationUtil.findAppInstancesByName(page, wcmConfigurationService.getRuntimeContextParam(WCMConfigurationService.CLV_PORTLET));
+    List<String> clvPortletsId = PublicationUtil.findAppInstancesByName(page, portletName);
     List<Application<Portlet>> applications = new ArrayList<Application<Portlet>>();
     for (String clvPortletId : clvPortletsId) {
-    	boolean isManualViewerMode = false;
+      boolean isManualViewerMode = false;
       Application<Portlet> application = PublicationUtil.findAppInstancesById(page, clvPortletId);
-      PortletPreferences portletPreferences = dataStorage.getPortletPreferences(clvPortletId);      
+      PortletPreferences portletPreferences = dataStorage.getPortletPreferences(clvPortletId);
       if (portletPreferences != null) {
         for (Object object : portletPreferences.getPreferences()) {
           Preference preference = (Preference) object;
@@ -131,12 +129,12 @@ public class UIPublishClvChooser extends UIForm implements UIPopupComponent {
             application.setTitle(preference.getValues().get(0).toString());
           }
           if ("mode".equals(preference.getName()) && preference.getValues().size() > 0) {
-          	isManualViewerMode = "ManualViewerMode".equals(preference.getValues().get(0).toString());
+            isManualViewerMode = "ManualViewerMode".equals(preference.getValues().get(0).toString());
           }
         }
       }
       if (isManualViewerMode)
-      	applications.add(application);
+        applications.add(application);
     }
     return applications;
   }
@@ -149,11 +147,11 @@ public class UIPublishClvChooser extends UIForm implements UIPopupComponent {
    * component's <code>addChooseActionListener<code> method. When
    * the chooseAction event occurs, that object's appropriate
    * method is invoked.
-   * 
+   *
    * @see ChooseActionEvent
    */
   public static class ChooseActionListener extends EventListener<UIPublishClvChooser> {
-    
+
     /* (non-Javadoc)
      * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
      */
@@ -161,7 +159,6 @@ public class UIPublishClvChooser extends UIForm implements UIPopupComponent {
       UIPublishClvChooser clvChooser = event.getSource();
       String clvPortletId = URLDecoder.decode(event.getRequestContext().getRequestParameter(OBJECTID), "UTF-8");
       WCMPublicationService presentationService = clvChooser.getApplicationComponent(WCMPublicationService.class);
-//      clvPortletId = PortalConfig.PORTAL_TYPE + "#" + org.exoplatform.portal.webui.util.Util.getUIPortal().getOwner() + ":" + clvPortletId;
       DataStorage dataStorage = WCMCoreUtils.getService(DataStorage.class);
       PortletPreferences portletPreferences = dataStorage.getPortletPreferences(clvPortletId);
       Node node = clvChooser.getNode();
@@ -172,26 +169,33 @@ public class UIPublishClvChooser extends UIForm implements UIPopupComponent {
             String contentValues = preference.getValues().get(0).toString();
             if (contentValues.indexOf(node.getPath()) >= 0) {
               UIApplication application = clvChooser.getAncestorOfType(UIApplication.class);
-              application.addMessage(new ApplicationMessage("UIPublishClvChooser.msg.duplicate", null, ApplicationMessage.WARNING));
+              application.addMessage(new ApplicationMessage("UIPublishClvChooser.msg.duplicate",
+                                                            null,
+                                                            ApplicationMessage.WARNING));
               event.getRequestContext().addUIComponentToUpdateByAjax(application.getUIPopupMessages());
               return;
             }
           }
         }
       }
-      StageAndVersionPublicationPlugin publicationPlugin = (StageAndVersionPublicationPlugin) presentationService.getWebpagePublicationPlugins().get(StageAndVersionPublicationConstant.LIFECYCLE_NAME);
-      publicationPlugin.publishContentToCLV(node, clvChooser.page, clvPortletId, Util.getUIPortal().getOwner(), event.getRequestContext().getRemoteUser());
-       
+      StageAndVersionPublicationPlugin publicationPlugin = (StageAndVersionPublicationPlugin) presentationService.
+          getWebpagePublicationPlugins().get(StageAndVersionPublicationConstant.LIFECYCLE_NAME);
+      publicationPlugin.publishContentToCLV(node,
+                                            clvChooser.page,
+                                            clvPortletId,
+                                            Util.getUIPortal().getOwner(),
+                                            event.getRequestContext().getRemoteUser());
+
       UIPublicationPagesContainer uiPublicationPagesContainer =
-      	clvChooser.getAncestorOfType(UIPublicationPagesContainer.class);
-      UIPublicationAction publicationAction = 
-      	((UIContainer) uiPublicationPagesContainer.getChildById("UIPublicationPages")).getChildById("UIPublicationAction");
+        clvChooser.getAncestorOfType(UIPublicationPagesContainer.class);
+      UIPublicationAction publicationAction =
+        ((UIContainer) uiPublicationPagesContainer.getChildById("UIPublicationPages")).getChildById("UIPublicationAction");
       publicationAction.updateUI();
       UIPopupWindow popupWindow = clvChooser.getAncestorOfType(UIPopupWindow.class);
       popupWindow.setShow(false);
     }
   }
-  
+
   /**
    * The listener interface for receiving closeAction events.
    * The class that is interested in processing a closeAction
@@ -200,11 +204,11 @@ public class UIPublishClvChooser extends UIForm implements UIPopupComponent {
    * component's <code>addCloseActionListener<code> method. When
    * the closeAction event occurs, that object's appropriate
    * method is invoked.
-   * 
+   *
    * @see CloseActionEvent
    */
   public static class CloseActionListener extends EventListener<UIPublishClvChooser> {
-    
+
     /* (non-Javadoc)
      * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
      */

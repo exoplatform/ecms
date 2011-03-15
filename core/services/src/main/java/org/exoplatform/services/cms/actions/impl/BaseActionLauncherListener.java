@@ -59,20 +59,20 @@ public abstract class BaseActionLauncherListener implements ECMEventListener {
     actionVariables_ = actionVariables;
   }
 
-  public String getSrcWorkspace() { return srcWorkspace_; }  
+  public String getSrcWorkspace() { return srcWorkspace_; }
   public String getRepository() { return repository_; }
 
   @SuppressWarnings("unchecked")
   public void onEvent(EventIterator events) {
     ExoContainer exoContainer = ExoContainerContext.getCurrentContainer();
-    RepositoryService repositoryService = 
-      (RepositoryService) exoContainer.getComponentInstanceOfType(RepositoryService.class);    
-    ActionServiceContainer actionServiceContainer = 
+    RepositoryService repositoryService =
+      (RepositoryService) exoContainer.getComponentInstanceOfType(RepositoryService.class);
+    ActionServiceContainer actionServiceContainer =
       (ActionServiceContainer) exoContainer.getComponentInstanceOfType(ActionServiceContainer.class);
     IdentityRegistry identityRegistry = (IdentityRegistry) exoContainer.getComponentInstanceOfType(IdentityRegistry.class);
     while (events.hasNext()) {
-      Event event = events.nextEvent();  
-      Node node = null;      
+      Event event = events.nextEvent();
+      Node node = null;
       Session jcrSession = null;
       try {
         jcrSession = repositoryService.getCurrentRepository().getSystemSession(srcWorkspace_);
@@ -80,8 +80,8 @@ public abstract class BaseActionLauncherListener implements ECMEventListener {
         node = (Node) jcrSession.getItem(srcPath_);
         String userId = event.getUserID();
         Node actionNode = actionServiceContainer.getAction(node, actionName_);
-        Property rolesProp = actionNode.getProperty("exo:roles");        
-        Value[] roles = rolesProp.getValues();        
+        Property rolesProp = actionNode.getProperty("exo:roles");
+        Value[] roles = rolesProp.getValues();
         boolean hasPermission = checkExcetuteable(userId, roles, identityRegistry) ;
         if (!hasPermission) {
           jcrSession.logout();
@@ -101,13 +101,13 @@ public abstract class BaseActionLauncherListener implements ECMEventListener {
         variables.put("srcWorkspace", srcWorkspace_);
         variables.put("srcPath", srcPath_);
         variables.putAll(actionVariables_);
-        if(event.getType() == Event.NODE_ADDED) {     
+        if(event.getType() == Event.NODE_ADDED) {
           try {
-            node = (Node) jcrSession.getItem(path);        
+            node = (Node) jcrSession.getItem(path);
           } catch (Exception e) {
             if (path.contains("exo:actions")) {
               Node tempnode = (Node) jcrSession.getItem(path.substring(0, path.indexOf("exo:actions") - 1));
-              node = tempnode.getNodes("exo:actions").nextNode().getNode(path.substring(path.indexOf("exo:actions") + "exo:actions".length() + 1));            
+              node = tempnode.getNodes("exo:actions").nextNode().getNode(path.substring(path.indexOf("exo:actions") + "exo:actions".length() + 1));
             }
           }
           String nodeType = node.getPrimaryNodeType().getName();
@@ -129,25 +129,25 @@ public abstract class BaseActionLauncherListener implements ECMEventListener {
 
   }
 
-  private boolean checkExcetuteable(String userId, Value[] roles, 
+  private boolean checkExcetuteable(String userId, Value[] roles,
                               IdentityRegistry identityRegistry) throws Exception {
     if(SystemIdentity.SYSTEM.equalsIgnoreCase(userId)) {
       return true;
     }
-    
+
     Identity identity;
     if (SystemIdentity.ANONIM.equalsIgnoreCase(userId)) {
       return true;
     } else {
       identity = identityRegistry.getIdentity(userId);
       if(identity == null) {
-        return false ; 
+        return false ;
       }
     }
-    
+
     for (int i = 0; i < roles.length; i++) {
       String role = roles[i].getString();
-      if("*".equalsIgnoreCase(role)) 
+      if("*".equalsIgnoreCase(role))
         return true ;
       MembershipEntry membershipEntry = MembershipEntry.parse(role) ;
       if(identity != null && identity.isMemberOf(membershipEntry)) {
@@ -155,11 +155,11 @@ public abstract class BaseActionLauncherListener implements ECMEventListener {
       }
     }
     return false ;
-  }    
-  
+  }
+
   /**
-   * Check node added/edited (if available) is one of affected node types 
-   * If exo:affectedNodeTypeNames contains value ALL_DOCUMENT_TYPES then 
+   * Check node added/edited (if available) is one of affected node types
+   * If exo:affectedNodeTypeNames contains value ALL_DOCUMENT_TYPES then
    * all document types (base on template service) will be affected
    * @param actionNode
    * @param session
@@ -181,5 +181,5 @@ public abstract class BaseActionLauncherListener implements ECMEventListener {
     }
     return false;
   }
-  
-}      
+
+}

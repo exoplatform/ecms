@@ -22,7 +22,7 @@ import org.exoplatform.webui.core.UIComponent;
  * Created by The eXo Platform SAS
  * Author : eXoPlatform
  *          nicolas.filotto@exoplatform.com
- * 15 mai 2009  
+ * 15 mai 2009
  */
 public abstract class UIAbstractManagerComponent extends UIComponent {
 
@@ -34,8 +34,8 @@ public abstract class UIAbstractManagerComponent extends UIComponent {
   /**
    * The category of the related UIExtension
    */
-  private String uiExtensionCategory;    
-  
+  private String uiExtensionCategory;
+
   public String getUIExtensionName() {
     return uiExtensionName;
   }

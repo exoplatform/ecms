@@ -32,7 +32,7 @@ import org.exoplatform.webui.event.EventListener;
 
 /**
  * Created by The eXo Platform SAS.
- * 
+ *
  * @author : Hoa.Pham hoa.pham@exoplatform.com Jun 23, 2008
  */
 @ComponentConfig(
@@ -44,34 +44,39 @@ import org.exoplatform.webui.event.EventListener;
   }
 )
 public class UIContentBrowsePanelOne extends UIContentBrowsePanel{
-  
+
   private String _initPath = "";
   private String _initDrive = "";
-  
+
   public void setInitPath(String initDrive, String initPath) {
     this._initPath = initPath;
     this._initDrive = initDrive;
   }
-  
+
   public String getInitDrive() { return this._initDrive; }
   public String getInitPath() { return this._initPath; }
 
   public static class SelectActionListener extends EventListener<UIContentBrowsePanel> {
-    public void execute(Event<UIContentBrowsePanel> event) throws Exception {      
+    public void execute(Event<UIContentBrowsePanel> event) throws Exception {
       UIContentBrowsePanel contentBrowsePanel = event.getSource();
-      String returnFieldName = contentBrowsePanel.getReturnFieldName();      
+      String returnFieldName = contentBrowsePanel.getReturnFieldName();
       String itemPath = event.getRequestContext().getRequestParameter(OBJECTID);
       Node node = NodeLocation.getNodeByExpression(Text.escapeIllegalJcrChars(itemPath.substring(itemPath.indexOf(':') + 1)));
       Node realNode = node;
       if (node.isNodeType("exo:symlink")) {
-    	String uuid = node.getProperty("exo:uuid").getString();
-    	realNode = node.getSession().getNodeByUUID(uuid);
+      String uuid = node.getProperty("exo:uuid").getString();
+      realNode = node.getSession().getNodeByUUID(uuid);
       }
       if(!realNode.isCheckedOut()){
-        Utils.createPopupMessage(contentBrowsePanel, "UIContentBrowsePanelOne.msg.node-checkout", null, ApplicationMessage.WARNING);
+        Utils.createPopupMessage(contentBrowsePanel,
+                                 "UIContentBrowsePanelOne.msg.node-checkout",
+                                 null,
+                                 ApplicationMessage.WARNING);
         return;
-      }  	
-      ((UISelectable)(contentBrowsePanel.getSourceComponent())).doSelect(returnFieldName, event.getRequestContext().getRequestParameter(OBJECTID));
+      }
+      ((UISelectable) (contentBrowsePanel.getSourceComponent())).doSelect(returnFieldName,
+                                                                          event.getRequestContext()
+                                                                               .getRequestParameter(OBJECTID));
     }
   }
 }

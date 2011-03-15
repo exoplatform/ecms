@@ -45,14 +45,14 @@ import org.exoplatform.webui.form.UIFormStringInput;
 import org.exoplatform.webui.form.validator.MandatoryValidator;
 
 /**
- * Created by The eXo Platform SARL 
+ * Created by The eXo Platform SARL
  * Author : pham tuan
  * phamtuanchip@yahoo.de September 20, 2006 04:27:15 PM
  */
 
 @ComponentConfig(
     lifecycle = UIFormLifecycle.class,
-    template = "system:/groovy/webui/form/UIForm.gtmpl", 
+    template = "system:/groovy/webui/form/UIForm.gtmpl",
     events = {
       @EventConfig(listeners = UIActionTypeForm.SaveActionListener.class),
       @EventConfig(phase=Phase.DECODE, listeners = UIActionTypeForm.ChangeTypeActionListener.class),
@@ -68,26 +68,26 @@ public class UIActionTypeForm extends UIForm {
   final static public String FIELD_NAME = "name" ;
   final static public String FIELD_ISMOVE = "isMove" ;
   final static public String FIELD_VARIABLES = "variables" ;
-  
+
   public UIFormMultiValueInputSet uiFormMultiValue = null ;
-  
+
   public UIActionTypeForm() throws Exception {
     List<SelectItemOption<String>> actionOptions = new ArrayList<SelectItemOption<String>>() ;
-    UIFormSelectBox actionType = 
+    UIFormSelectBox actionType =
       new UIFormSelectBox(FIELD_ACTIONTYPE, FIELD_ACTIONTYPE, actionOptions) ;
     actionType.setOnChange("ChangeType") ;
     addUIFormInput(actionType) ;
     addUIFormInput(new UIFormStringInput(FIELD_NAME, FIELD_NAME, null).
         addValidator(MandatoryValidator.class)) ;
     addUIFormInput(new UIFormCheckBoxInput<Boolean>(FIELD_ISMOVE, FIELD_ISMOVE, null)) ;
-    UIFormSelectBox actionExecutables = new UIFormSelectBox(FIELD_EXECUTEACTION,FIELD_EXECUTEACTION, 
+    UIFormSelectBox actionExecutables = new UIFormSelectBox(FIELD_EXECUTEACTION,FIELD_EXECUTEACTION,
         new ArrayList<SelectItemOption<String>>());
     addUIFormInput(actionExecutables) ;
     setActions( new String[]{"Save", "Cancel"}) ;
   }
 
-  private List<SelectItemOption<String>> getActionTypesValues() throws Exception { 
-    ActionServiceContainer actionServiceContainer = 
+  private List<SelectItemOption<String>> getActionTypesValues() throws Exception {
+    ActionServiceContainer actionServiceContainer =
       getApplicationComponent(ActionServiceContainer.class) ;
     List <String> actionsTypes= (List <String>) actionServiceContainer.getActionPluginNames();
     List<SelectItemOption<String>> options = new ArrayList<SelectItemOption<String>>() ;
@@ -119,13 +119,13 @@ public class UIActionTypeForm extends UIForm {
     PortletRequestContext pcontext = (PortletRequestContext)WebuiRequestContext.getCurrentInstance() ;
     PortletPreferences portletPref = pcontext.getRequest().getPreferences() ;
     String repository =  portletPref.getValue(Utils.REPOSITORY, "") ;
-    ActionServiceContainer actionServiceContainer = 
-      getApplicationComponent(ActionServiceContainer.class) ;    
+    ActionServiceContainer actionServiceContainer =
+      getApplicationComponent(ActionServiceContainer.class) ;
     ActionPlugin actionPlugin = actionServiceContainer.getActionPluginForActionType(actionTypeName) ;
     List<String> executables = (List)actionPlugin.getActionExecutables(repository);
     for(String actionExec : executables) {
       options.add(new SelectItemOption<String>(actionExec, actionExec)) ;
-    } 
+    }
     return options ;
   }
 
@@ -161,7 +161,7 @@ public class UIActionTypeForm extends UIForm {
       PortletPreferences preferences = context.getRequest().getPreferences() ;
       String repository = preferences.getValue(Utils.REPOSITORY, "") ;
       UIActionManager uiActionManager = uiForm.getAncestorOfType(UIActionManager.class) ;
-      ActionServiceContainer actionServiceContainer = 
+      ActionServiceContainer actionServiceContainer =
         uiForm.getApplicationComponent(ActionServiceContainer.class) ;
       UIApplication uiApp = uiForm.getAncestorOfType(UIApplication.class) ;
       String selectValue = uiForm.getUIFormSelectBox(FIELD_ACTIONTYPE).getValue() ;
@@ -171,19 +171,19 @@ public class UIActionTypeForm extends UIForm {
       String[] arrActionNames = actionName.split(":") ;
       for(String filterChar : arrFilterChar) {
         if(actionName.indexOf(filterChar) > -1) {
-          uiApp.addMessage(new ApplicationMessage("UIActionTypeForm.msg.fileName-invalid", null, 
+          uiApp.addMessage(new ApplicationMessage("UIActionTypeForm.msg.fileName-invalid", null,
               ApplicationMessage.WARNING)) ;
           event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
           return ;
         }
       }
-      if(!actionName.startsWith("exo:")) { 
+      if(!actionName.startsWith("exo:")) {
         uiApp.addMessage(new ApplicationMessage("UIActionTypeForm.msg.action-name-invalid", args,
-                                                 ApplicationMessage.WARNING)) ; 
+                                                 ApplicationMessage.WARNING)) ;
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
         return ;
-      }    
-      List<String> variables = new ArrayList<String>();     
+      }
+      List<String> variables = new ArrayList<String>();
       List values = uiForm.uiFormMultiValue.getValue();
       if(values != null && values.size() > 0) {
         for(Object value : values) {
@@ -200,7 +200,7 @@ public class UIActionTypeForm extends UIForm {
       try {
         boolean isMove = uiForm.getUIFormCheckBoxInput(FIELD_ISMOVE).isChecked() ;
         String execute = uiForm.getUIFormSelectBox(FIELD_EXECUTEACTION).getValue() ;
-        actionServiceContainer.createActionType(actionName, selectValue, execute, variables, 
+        actionServiceContainer.createActionType(actionName, selectValue, execute, variables,
                                                 isMove, repository);
         uiActionManager.refresh() ;
         uiForm.refresh() ;
@@ -214,7 +214,7 @@ public class UIActionTypeForm extends UIForm {
       event.getRequestContext().addUIComponentToUpdateByAjax(uiActionManager) ;
     }
   }
-  
+
   static public class CancelActionListener extends EventListener<UIActionTypeForm> {
     public void execute(Event<UIActionTypeForm> event) throws Exception {
       UIActionTypeForm uiForm = event.getSource();
@@ -224,14 +224,14 @@ public class UIActionTypeForm extends UIForm {
       event.getRequestContext().addUIComponentToUpdateByAjax(uiActionManager) ;
     }
   }
-  
+
   static public class AddActionListener extends EventListener<UIActionTypeForm> {
     public void execute(Event<UIActionTypeForm> event) throws Exception {
       UIActionTypeForm uiForm = event.getSource();
       event.getRequestContext().addUIComponentToUpdateByAjax(uiForm.getParent()) ;
     }
   }
-  
+
   static public class RemoveActionListener extends EventListener<UIActionTypeForm> {
     public void execute(Event<UIActionTypeForm> event) throws Exception {
       UIActionTypeForm uiForm = event.getSource();

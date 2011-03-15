@@ -23,15 +23,15 @@ import java.util.List;
  * Created by The eXo Platform SARL
  * Author : Nguyen Anh Vu
  *          anhvurz90@gmail.com
- * Dec 15, 2009  
+ * Dec 15, 2009
  * 9:51:25 AM
  */
 public class TagPermissionConfig {
-	private List<String> tagPermissionList = new ArrayList<String>();
-	
-	public List<String> getTagPermissionList() { return this.tagPermissionList; };
-	public void setTagPermissionList(List<String> list) { 
-		this.tagPermissionList = list;
-	}
+  private List<String> tagPermissionList = new ArrayList<String>();
+
+  public List<String> getTagPermissionList() { return this.tagPermissionList; };
+  public void setTagPermissionList(List<String> list) {
+    this.tagPermissionList = list;
+  }
 
 }

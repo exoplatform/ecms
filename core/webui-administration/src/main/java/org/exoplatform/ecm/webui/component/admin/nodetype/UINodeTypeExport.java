@@ -50,7 +50,7 @@ import org.exoplatform.webui.form.UIFormTableInputSet;
  * Author : Dang Van Minh
  *          minh.dang@exoplatform.com
  * Sep 29, 2006
- * 12:01:58 PM 
+ * 12:01:58 PM
  */
 @ComponentConfig(
     lifecycle = UIFormLifecycle.class,
@@ -64,7 +64,7 @@ import org.exoplatform.webui.form.UIFormTableInputSet;
 )
 public class UINodeTypeExport extends UIForm {
 
-  final static String TABLE_NAME =  "UINodeTypeExport" ; 
+  final static String TABLE_NAME =  "UINodeTypeExport" ;
   final static String LABEL = "label" ;
   final static String INPUT = "input" ;
   final static String[] TABLE_COLUMNS = {LABEL, INPUT} ;
@@ -90,10 +90,10 @@ public class UINodeTypeExport extends UIForm {
       UIFormInputInfo uiInfo = new UIFormInputInfo(LABEL, null, ntName);
       uiInputSet.addChild(uiInfo);
       UIFormCheckBoxInput<String> uiCheckbox = new UIFormCheckBoxInput<String>(ntName, ntName, null);
-      uiCheckbox.setChecked(true); 
+      uiCheckbox.setChecked(true);
       uiCheckbox.setValue(ntName);
       uiInputSet.addChild(uiCheckbox);
-      uiTableInputSet.addChild(uiInputSet);      
+      uiTableInputSet.addChild(uiInputSet);
     }
     setActions(new String[] {"Export", "Cancel", "UncheckAll"}) ;
     addUIFormInput(uiTableInputSet) ;
@@ -166,7 +166,7 @@ public class UINodeTypeExport extends UIForm {
         String representSuperType = representSuperTypes(nodeType) ;
         nodeTypeXML.append(representSuperType) ;
         // represent PropertiesDefinition
-        String representPropertiesXML = representPropertyDefinition(nodeType) ; 
+        String representPropertiesXML = representPropertyDefinition(nodeType) ;
         nodeTypeXML.append(representPropertiesXML) ;
         // represent ChildNodeDefinition
         String representChildXML = representChildNodeDefinition(nodeType) ;
@@ -190,31 +190,31 @@ public class UINodeTypeExport extends UIForm {
       }
       return superTypeXML.toString() ;
     }
-    
+
     private String representPropertyDefinition(NodeType nodeType) {
-      String[] requireType = {"undefined", "String", "Binary", "Long", "Double", "Date", "Boolean", 
+      String[] requireType = {"undefined", "String", "Binary", "Long", "Double", "Date", "Boolean",
                               "Name", "Path", "Reference"} ;
       String[] onparentVersion = {"", "COPY", "VERSION", "INITIALIZE", "COMPUTE", "IGNORE", "ABORT"} ;
       StringBuilder propertyXML = new StringBuilder() ;
-      propertyXML.append("<propertyDefinitions>").append("\n") ;        
+      propertyXML.append("<propertyDefinitions>").append("\n") ;
       PropertyDefinition[] proDef = nodeType.getPropertyDefinitions() ;
       for(int j = 0 ; j < proDef.length; j ++) {
         propertyXML.append("<propertyDefinition ") ;
-        propertyXML.append("name=").append("\"").append(proDef[j].getName()).append("\" ") ;         
+        propertyXML.append("name=").append("\"").append(proDef[j].getName()).append("\" ") ;
         String requiredValue = null ;
         if(proDef[j].getRequiredType() == 100) requiredValue = "Permission" ;
         else requiredValue = requireType[proDef[j].getRequiredType()] ;
-        propertyXML.append("requiredType=").append("\"").append(requiredValue).append("\" ") ;         
-        String autoCreate = String.valueOf(proDef[j].isAutoCreated()) ; 
-        propertyXML.append("autoCreated=").append("\"").append(autoCreate).append("\" ") ;         
-        String mandatory = String.valueOf(proDef[j].isMandatory()) ; 
-        propertyXML.append("mandatory=").append("\"").append(mandatory).append("\" ") ;         
-        String onVersion = onparentVersion[proDef[j].getOnParentVersion()] ; 
-        propertyXML.append("onParentVersion=").append("\"").append(onVersion).append("\" ") ;         
-        String protect = String.valueOf(proDef[j].isProtected()) ; 
+        propertyXML.append("requiredType=").append("\"").append(requiredValue).append("\" ") ;
+        String autoCreate = String.valueOf(proDef[j].isAutoCreated()) ;
+        propertyXML.append("autoCreated=").append("\"").append(autoCreate).append("\" ") ;
+        String mandatory = String.valueOf(proDef[j].isMandatory()) ;
+        propertyXML.append("mandatory=").append("\"").append(mandatory).append("\" ") ;
+        String onVersion = onparentVersion[proDef[j].getOnParentVersion()] ;
+        propertyXML.append("onParentVersion=").append("\"").append(onVersion).append("\" ") ;
+        String protect = String.valueOf(proDef[j].isProtected()) ;
         propertyXML.append("protected=").append("\"").append(protect).append("\" ") ;
-        String multiple = String.valueOf(proDef[j].isMultiple()) ; 
-        propertyXML.append("multiple=").append("\"").append(multiple).append("\" >").append("\n") ;         
+        String multiple = String.valueOf(proDef[j].isMultiple()) ;
+        propertyXML.append("multiple=").append("\"").append(multiple).append("\" >").append("\n") ;
         String[] constraints = proDef[j].getValueConstraints() ;
         if(constraints != null && constraints.length > 0) {
           propertyXML.append("<valueConstraints>").append("\n") ;
@@ -248,16 +248,16 @@ public class UINodeTypeExport extends UIForm {
             childNodeXML.append("defaultPrimaryType=").append("\"").append(defaultName).append("\" ") ;
           } else {
             childNodeXML.append("defaultPrimaryType=").append("\"").append("\" ") ;
-          }               
-          String autoCreate = String.valueOf(childDef[j].isAutoCreated()) ; 
+          }
+          String autoCreate = String.valueOf(childDef[j].isAutoCreated()) ;
           childNodeXML.append("autoCreated=").append("\"").append(autoCreate).append("\" ") ;
-          String mandatory = String.valueOf(childDef[j].isMandatory()) ; 
+          String mandatory = String.valueOf(childDef[j].isMandatory()) ;
           childNodeXML.append("mandatory=").append("\"").append(mandatory).append("\" ") ;
-          String onVersion = onparentVersion[childDef[j].getOnParentVersion()] ; 
+          String onVersion = onparentVersion[childDef[j].getOnParentVersion()] ;
           childNodeXML.append("onParentVersion=").append("\"").append(onVersion).append("\" ") ;
-          String protect = String.valueOf(childDef[j].isProtected()) ; 
+          String protect = String.valueOf(childDef[j].isProtected()) ;
           childNodeXML.append("protected=").append("\"").append(protect).append("\" ") ;
-          String sameName = String.valueOf(childDef[j].allowsSameNameSiblings()) ; 
+          String sameName = String.valueOf(childDef[j].allowsSameNameSiblings()) ;
           childNodeXML.append("sameNameSiblings=").append("\"").append(sameName).append("\" >") ;
           childNodeXML.append("\n") ;
           NodeType[] requiredType = childDef[j].getRequiredPrimaryTypes() ;
@@ -270,14 +270,14 @@ public class UINodeTypeExport extends UIForm {
             }
             childNodeXML.append("</requiredPrimaryTypes>").append("\n") ;
           }
-          childNodeXML.append("</childNodeDefinition>").append("\n") ; 
-        }          
+          childNodeXML.append("</childNodeDefinition>").append("\n") ;
+        }
         childNodeXML.append("</childNodeDefinitions>").append("\n") ;
       }
       return childNodeXML.toString() ;
     }
   }
-  
+
   static public class CancelActionListener extends EventListener<UINodeTypeExport> {
     public void execute(Event<UINodeTypeExport> event) throws Exception {
       UINodeTypeExport uiExport = event.getSource() ;
@@ -287,7 +287,7 @@ public class UINodeTypeExport extends UIForm {
       event.getRequestContext().addUIComponentToUpdateByAjax(uiManager) ;
     }
   }
-  
+
   static public class UncheckAllActionListener extends EventListener<UINodeTypeExport> {
     public void execute(Event<UINodeTypeExport> event) throws Exception {
       UINodeTypeExport uiExport = event.getSource() ;
@@ -300,7 +300,7 @@ public class UINodeTypeExport extends UIForm {
       event.getRequestContext().addUIComponentToUpdateByAjax(uiExport.getParent()) ;
     }
   }
-  
+
   static public class CheckAllActionListener extends EventListener<UINodeTypeExport> {
     public void execute(Event<UINodeTypeExport> event) throws Exception {
       UINodeTypeExport uiExport = event.getSource() ;

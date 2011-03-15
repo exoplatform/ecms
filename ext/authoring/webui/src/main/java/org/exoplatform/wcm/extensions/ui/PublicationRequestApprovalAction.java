@@ -43,36 +43,37 @@ import org.exoplatform.webui.ext.filter.UIExtensionFilters;
  *          benjamin.paillereau@exoplatform.com
  * 27 june 2010
  */
-@ComponentConfig(
-		events = {
-				@EventConfig(listeners = PublicationRequestApprovalAction.PublicationRequestApprovalActionListener.class)
-		}
-)
+@ComponentConfig(events = {
+    @EventConfig(listeners = PublicationRequestApprovalAction.PublicationRequestApprovalActionListener.class) })
 public class PublicationRequestApprovalAction extends UIComponent {
 
-	private static final List<UIExtensionFilter> FILTERS = Arrays.asList(
-			new UIExtensionFilter[] {
-					new CanAddNodeFilter(), new IsNotLockedFilter(), new IsCheckedOutFilter(), new CanValidateFilter()});
+  private static final List<UIExtensionFilter> FILTERS = Arrays.asList(
+      new UIExtensionFilter[] {
+          new CanAddNodeFilter(), new IsNotLockedFilter(), new IsCheckedOutFilter(), new CanValidateFilter()});
 
-	@UIExtensionFilters
-	public List<UIExtensionFilter> getFilters() {
-		return FILTERS;
-	}
-	public static class PublicationRequestApprovalActionListener extends UIActionBarActionListener<PublicationRequestApprovalAction> {
+  @UIExtensionFilters
+  public List<UIExtensionFilter> getFilters() {
+    return FILTERS;
+  }
 
-		@Override
-		protected void processEvent(Event<PublicationRequestApprovalAction> event) throws Exception {
-			UIJCRExplorer uiExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class);
-			PublicationService publicationService = (PublicationService)PortalContainer.getInstance().getComponentInstanceOfType(PublicationService.class);
-			Node node = uiExplorer.getCurrentNode();
-		    HashMap<String,String> context = new HashMap<String,String>();
-			
-		    publicationService.changeState(node, "pending", context);
+  public static class PublicationRequestApprovalActionListener
+                                                              extends
+                                                              UIActionBarActionListener<PublicationRequestApprovalAction> {
 
-			UIPopupContainer UIPopupContainer = uiExplorer.getChild(UIPopupContainer.class);
-			event.getRequestContext().addUIComponentToUpdateByAjax(UIPopupContainer);
-			event.getRequestContext().addUIComponentToUpdateByAjax(uiExplorer);
+    @Override
+    protected void processEvent(Event<PublicationRequestApprovalAction> event) throws Exception {
+      UIJCRExplorer uiExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class);
+      PublicationService publicationService = (PublicationService) PortalContainer.getInstance()
+                                                                                  .getComponentInstanceOfType(PublicationService.class);
+      Node node = uiExplorer.getCurrentNode();
+        HashMap<String,String> context = new HashMap<String,String>();
 
-		}		
-	}
+        publicationService.changeState(node, "pending", context);
+
+      UIPopupContainer UIPopupContainer = uiExplorer.getChild(UIPopupContainer.class);
+      event.getRequestContext().addUIComponentToUpdateByAjax(UIPopupContainer);
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiExplorer);
+
+    }
+  }
 }

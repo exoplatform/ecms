@@ -59,7 +59,7 @@ public class UIECMScripts extends UIContainer {
   private List<SelectItemOption<String>> getECMCategoryOptions() throws Exception {
     List<SelectItemOption<String>> ecmOptions = new ArrayList<SelectItemOption<String>>() ;
     String repository = getAncestorOfType(UIECMAdminPortlet.class).getPreferenceRepository() ;
-    Node ecmScriptHome = getApplicationComponent(ScriptService.class).getECMScriptHome(repository, 
+    Node ecmScriptHome = getApplicationComponent(ScriptService.class).getECMScriptHome(repository,
         SessionProviderFactory.createSystemProvider()) ;
     NodeIterator categories = ecmScriptHome.getNodes() ;
     while(categories.hasNext()) {
@@ -71,25 +71,25 @@ public class UIECMScripts extends UIContainer {
 
   public void refresh(int currentPage) throws Exception {
     UIECMFilterForm ecmFilterForm = getChild(UIECMFilterForm.class) ;
-    String categoryName = 
-      ecmFilterForm.getUIFormSelectBox(UIECMFilterForm.FIELD_SELECT_SCRIPT).getValue() ;  
+    String categoryName =
+      ecmFilterForm.getUIFormSelectBox(UIECMFilterForm.FIELD_SELECT_SCRIPT).getValue() ;
     if (categoryName == null)  {
-      ecmFilterForm.setOptions(getECMCategoryOptions()) ; 
-      categoryName = ecmFilterForm.getUIFormSelectBox(UIECMFilterForm.FIELD_SELECT_SCRIPT).getValue() ;  
+      ecmFilterForm.setOptions(getECMCategoryOptions()) ;
+      categoryName = ecmFilterForm.getUIFormSelectBox(UIECMFilterForm.FIELD_SELECT_SCRIPT).getValue() ;
     }
     UIScriptList uiScriptList = getChildById(SCRIPTLIST_NAME);
     uiScriptList.updateGrid(getECMScript(categoryName), currentPage);
   }
-  
+
   public List<ScriptData> getECMScript(String name) throws Exception {
     List <ScriptData> scriptData = new ArrayList <ScriptData>() ;
     String repository = getAncestorOfType(UIECMAdminPortlet.class).getPreferenceRepository() ;
     List<Node> scripts = new ArrayList<Node> () ;
     if(name.equals("action")) {
-      scripts = getApplicationComponent(ScriptService.class).getECMActionScripts(repository, 
+      scripts = getApplicationComponent(ScriptService.class).getECMActionScripts(repository,
           SessionProviderFactory.createSystemProvider()) ;
     }else if(name.equals("widget")){
-      scripts = getApplicationComponent(ScriptService.class).getECMWidgetScripts(repository, 
+      scripts = getApplicationComponent(ScriptService.class).getECMWidgetScripts(repository,
           SessionProviderFactory.createSessionProvider()) ;
     }else if(name.equals("interceptor")) {
       scripts = getApplicationComponent(ScriptService.class).getECMInterceptorScripts(repository,

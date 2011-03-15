@@ -38,34 +38,34 @@ import org.exoplatform.webui.ext.filter.UIExtensionFilters;
  * 27 june 2010
  */
 @ComponentConfig(
-		events = {
-				@EventConfig(listeners = ShowDrivesAction.ShowDrivesActionListener.class)
-		}
+    events = {
+        @EventConfig(listeners = ShowDrivesAction.ShowDrivesActionListener.class)
+    }
 )
 public class ShowDrivesAction extends UIComponent {
 
-	private static final List<UIExtensionFilter> FILTERS = Arrays.asList(
-			new UIExtensionFilter[] {});
+  private static final List<UIExtensionFilter> FILTERS = Arrays.asList(
+      new UIExtensionFilter[] {});
 
-	@UIExtensionFilters
-	public List<UIExtensionFilter> getFilters() {
-		return FILTERS;
-	}
-	public static class ShowDrivesActionListener extends UIActionBarActionListener<ShowDrivesAction> {
+  @UIExtensionFilters
+  public List<UIExtensionFilter> getFilters() {
+    return FILTERS;
+  }
+  public static class ShowDrivesActionListener extends UIActionBarActionListener<ShowDrivesAction> {
 
-		@Override
-		protected void processEvent(Event<ShowDrivesAction> event) throws Exception {
-		  UIJCRExplorer uiExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class);
-	      UIWorkingArea uiWorkingArea = uiExplorer.getChild(UIWorkingArea.class);
-	      UIDrivesArea uiDriveArea = uiWorkingArea.getChild(UIDrivesArea.class);
-	      if (uiDriveArea.isRendered()) {
-	    	uiDriveArea.setRendered(false);
-	    	uiWorkingArea.getChild(UIDocumentWorkspace.class).setRendered(true);
-	      } else {
-	    	uiDriveArea.setRendered(true);
-	    	uiWorkingArea.getChild(UIDocumentWorkspace.class).setRendered(false);
-	      }
-	      event.getRequestContext().addUIComponentToUpdateByAjax(uiWorkingArea) ;
-		}		
-	}
+    @Override
+    protected void processEvent(Event<ShowDrivesAction> event) throws Exception {
+      UIJCRExplorer uiExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class);
+        UIWorkingArea uiWorkingArea = uiExplorer.getChild(UIWorkingArea.class);
+        UIDrivesArea uiDriveArea = uiWorkingArea.getChild(UIDrivesArea.class);
+        if (uiDriveArea.isRendered()) {
+        uiDriveArea.setRendered(false);
+        uiWorkingArea.getChild(UIDocumentWorkspace.class).setRendered(true);
+        } else {
+        uiDriveArea.setRendered(true);
+        uiWorkingArea.getChild(UIDocumentWorkspace.class).setRendered(false);
+        }
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiWorkingArea) ;
+    }
+  }
 }

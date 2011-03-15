@@ -24,18 +24,18 @@ import org.exoplatform.webui.form.wysiwyg.FCKEditorConfig;
 
 /**
  * Created by The eXo Platform SAS.
- * 
+ *
  * @author : Hoa.Pham hoa.pham@exoplatform.com Jun 23, 2008
  */
 public class FCKConfigService {
-  
+
   private List<FCKConfigPlugin> fckConfigPlugins = new ArrayList<FCKConfigPlugin>();
-  
+
   public FCKConfigService() { }
-  
+
   /**
    * Adds the FCKConfigPlugin.
-   * 
+   *
    * @param plugin the FCKConfigPlugin
    */
   public void addPlugin(ComponentPlugin plugin) {
@@ -43,16 +43,16 @@ public class FCKConfigService {
       fckConfigPlugins.add(FCKConfigPlugin.class.cast(plugin));
     }
   }
-  
+
   /**
    * Use to configure the fckeditoConfig by via FCKConfigPlugin.
-   * 
+   *
    * @param editorConfig the FCKEditorConfig
    * @throws Exception the exception
    */
   public void processFCKEditorConfig(final FCKEditorConfig editorConfig, final FCKEditorContext context) throws Exception{
     for(FCKConfigPlugin plugin: fckConfigPlugins) {
       plugin.addParameters(editorConfig,context);
-    } 
-  }  
+    }
+  }
 }

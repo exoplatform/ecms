@@ -28,7 +28,7 @@ import org.exoplatform.services.wcm.link.LiveLinkManagerService;
 
 /**
  * Created by The eXo Platform SAS.
- * 
+ *
  * @author : Hoa.Pham
  * hoa.pham@exoplatform.com
  * Jun 23, 2008
@@ -40,12 +40,12 @@ public class HTMLFileSchemaHandler extends BaseWebSchemaHandler {
    * @see org.exoplatform.services.wcm.core.BaseWebSchemaHandler#getHandlerNodeType()
    */
   protected String getHandlerNodeType() {   return "nt:file"; }
-  
+
   /* (non-Javadoc)
    * @see org.exoplatform.services.wcm.core.BaseWebSchemaHandler#getParentNodeType()
    */
-  protected String getParentNodeType() { return "exo:webFolder"; }  
-  
+  protected String getParentNodeType() { return "exo:webFolder"; }
+
   /* (non-Javadoc)
    * @see org.exoplatform.services.wcm.core.BaseWebSchemaHandler#matchHandler(javax.jcr.Node, org.exoplatform.services.jcr.ext.common.SessionProvider)
    */
@@ -53,40 +53,40 @@ public class HTMLFileSchemaHandler extends BaseWebSchemaHandler {
     if(!matchNodeType(node))
       return false;
     if(!matchMimeType(node))
-      return false;    
+      return false;
     if(!matchParentNodeType(node)) {
       if(!isInWebContent(node))
         return false;
-    }        
+    }
     return true;
   }
 
   /**
    * Match node type.
-   * 
+   *
    * @param node the node
-   * 
+   *
    * @return true, if successful
-   * 
+   *
    * @throws Exception the exception
    */
-  private boolean matchNodeType(Node node) throws Exception{    
+  private boolean matchNodeType(Node node) throws Exception{
     return node.getPrimaryNodeType().getName().equals("nt:file");
   }
 
   /**
    * Match mime type.
-   * 
+   *
    * @param node the node
-   * 
+   *
    * @return true, if successful
-   * 
+   *
    * @throws Exception the exception
    */
   private boolean matchMimeType(Node node) throws Exception {
-    String mimeType = getFileMimeType(node);       
+    String mimeType = getFileMimeType(node);
     if("text/html".equals(mimeType))
-      return true;    
+      return true;
     if("text/plain".equals(mimeType))
       return true;
     return false;
@@ -94,27 +94,27 @@ public class HTMLFileSchemaHandler extends BaseWebSchemaHandler {
 
   /**
    * Checks if is in web content.
-   * 
+   *
    * @param file the file
-   * 
+   *
    * @return true, if is in web content
-   * 
+   *
    * @throws Exception the exception
    */
   public boolean isInWebContent(Node file) throws Exception{
     if(file.getParent().isNodeType("exo:webContent")) {
       return file.isNodeType("exo:htmlFile");
-    } 
+    }
     return false;
   }
 
   /**
    * Match parent node type.
-   * 
+   *
    * @param file the file
-   * 
+   *
    * @return true, if successful
-   * 
+   *
    * @throws Exception the exception
    */
   private boolean matchParentNodeType(Node file) throws Exception{
@@ -125,30 +125,30 @@ public class HTMLFileSchemaHandler extends BaseWebSchemaHandler {
    * @see org.exoplatform.services.wcm.core.BaseWebSchemaHandler#onCreateNode(javax.jcr.Node, org.exoplatform.services.jcr.ext.common.SessionProvider)
    */
   public void onCreateNode(SessionProvider sessionProvider, final Node file) throws Exception {
-    Session session = file.getSession();    
+    Session session = file.getSession();
     Node webFolder = file.getParent();
     String fileName = file.getName();
     //create temp folder
     addMixin(file, "exo:htmlFile");
-    file.setProperty("exo:presentationType","exo:htmlFile");    
+    file.setProperty("exo:presentationType","exo:htmlFile");
     String tempFolderName = fileName + this.hashCode();
-    Node tempFolder = webFolder.addNode(tempFolderName, NT_UNSTRUCTURED);    
-    String tempPath = tempFolder.getPath() + "/" +file.getName();        
+    Node tempFolder = webFolder.addNode(tempFolderName, NT_UNSTRUCTURED);
+    String tempPath = tempFolder.getPath() + "/" +file.getName();
     session.move(file.getPath(),tempPath);
     session.save();
-    //rename the folder        
+    //rename the folder
     Node webContent = webFolder.addNode(fileName, "exo:webContent");
     addMixin(webContent,"exo:privilegeable");
     addMixin(webContent,"exo:owneable");
-    // need check why WebContentSchemaHandler doesn't run for this case    
+    // need check why WebContentSchemaHandler doesn't run for this case
     WebSchemaConfigService schemaConfigService = getService(WebSchemaConfigService.class);
     WebContentSchemaHandler contentSchemaHandler = schemaConfigService.getWebSchemaHandlerByType(WebContentSchemaHandler.class);
     contentSchemaHandler.createSchema(webContent);
     session.save();
     //the htmlFile become default.html file for the web content
-    String htmlFilePath = webContent.getPath() + "/default.html";    
+    String htmlFilePath = webContent.getPath() + "/default.html";
     session.move(tempPath, htmlFilePath);
-    tempFolder.remove();    
+    tempFolder.remove();
     createDefautWebData(webContent);
     session.save();
   }
@@ -156,10 +156,10 @@ public class HTMLFileSchemaHandler extends BaseWebSchemaHandler {
   /* (non-Javadoc)
    * @see org.exoplatform.services.wcm.core.BaseWebSchemaHandler#onModifyNode(javax.jcr.Node, org.exoplatform.services.jcr.ext.common.SessionProvider)
    */
-  public void onModifyNode(final SessionProvider sessionProvider, final Node node) throws Exception {        
+  public void onModifyNode(final SessionProvider sessionProvider, final Node node) throws Exception {
     Node parent = node.getParent();
     if(!parent.isNodeType("exo:webContent"))
-      return;    
+      return;
     if (!parent.isCheckedOut() || parent.isLocked() || !node.isCheckedOut() || node.isLocked()) {
       return;
     }
@@ -170,7 +170,7 @@ public class HTMLFileSchemaHandler extends BaseWebSchemaHandler {
 //    List<Heading> headings = tocGeneratorService.extractHeadings(document);
 //    if(headings != null) {
 //      tocGeneratorService.updateTOC(node,headings);
-//    }    
+//    }
   }
 
 }

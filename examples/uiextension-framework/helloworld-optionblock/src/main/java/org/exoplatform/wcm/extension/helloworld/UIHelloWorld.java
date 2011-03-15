@@ -26,19 +26,19 @@ import org.exoplatform.webui.core.UIComponent;
  * Created by The eXo Platform SAS
  * Author : Khuong.Van.Dung
  *          dung.khuong@exoplatform.com
- * Aug 5, 2010  
+ * Aug 5, 2010
  */
 
 @ComponentConfig(
-		template = "classpath:templates/helloworld/UIHelloWorld.gtmpl"
+    template = "classpath:templates/helloworld/UIHelloWorld.gtmpl"
 )
 
 public class UIHelloWorld extends UIComponent {
 
-	public UIHelloWorld() {
-	}
-	
-	public Node getEditingNode() throws Exception {
-		return getAncestorOfType(UIJCRExplorer.class).getCurrentNode();
-	}
+  public UIHelloWorld() {
+  }
+
+  public Node getEditingNode() throws Exception {
+    return getAncestorOfType(UIJCRExplorer.class).getCurrentNode();
+  }
 }

@@ -36,7 +36,7 @@ public class BossAssignementHandler implements AssignmentHandler{
     if("benj".equals(taskInstance.getPreviousActorId()) ||
         "bossOfBenj".equals(taskInstance.getPreviousActorId())){
       System.out.println("  --> Next actor : bossOfBenj");
-    }    
+    }
     assignable.setActorId("bossOfBenj");
   }
 }

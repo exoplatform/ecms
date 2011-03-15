@@ -29,9 +29,9 @@ import org.jbpm.graph.exe.ExecutionContext;
  * Date: 12 mai 2004
  */
 public class MockActionHandler implements ActionHandler {
-	
-	private static Logger log = Logger.getLogger(MockDecisionHandler.class.getName());
-	
+
+  private static Logger log = Logger.getLogger(MockDecisionHandler.class.getName());
+
   public void execute(ExecutionContext executionContext) {
     log.info("MockActionHandlerCalled");
   }

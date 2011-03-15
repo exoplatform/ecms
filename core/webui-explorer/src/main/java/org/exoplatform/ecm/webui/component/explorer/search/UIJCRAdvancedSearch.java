@@ -50,10 +50,10 @@ import org.exoplatform.webui.form.UIFormTextAreaInput;
 import org.exoplatform.webui.form.validator.MandatoryValidator;
 /**
  * Created by The eXo Platform SARL
- * Author : Tran The Trong  
+ * Author : Tran The Trong
  *          trongtt@gmail.com
  * Oct 2, 2006
- * 1:55:22 PM 
+ * 1:55:22 PM
  */
 @ComponentConfig(
     lifecycle = UIFormLifecycle.class,
@@ -63,7 +63,7 @@ import org.exoplatform.webui.form.validator.MandatoryValidator;
       @EventConfig(listeners = UIJCRAdvancedSearch.SearchActionListener.class),
       @EventConfig(listeners = UIJCRAdvancedSearch.CancelActionListener.class, phase = Phase.DECODE),
       @EventConfig(phase=Phase.DECODE, listeners = UIJCRAdvancedSearch.ChangeOptionActionListener.class)
-    }    
+    }
 )
 public class UIJCRAdvancedSearch extends UIForm implements UIPopupComponent {
   public static final String FIELD_NAME = "name" ;
@@ -97,7 +97,7 @@ public class UIJCRAdvancedSearch extends UIForm implements UIPopupComponent {
       Node selectedNode = uiExplorer.getCurrentNode() ;
       String path = selectedNode.getPath() ;
       String queryText = StringUtils.replace(SQL_QUERY, "$0", path) ;
-      if ("/".equals(path)) queryText = ROOT_SQL_QUERY  ; 
+      if ("/".equals(path)) queryText = ROOT_SQL_QUERY  ;
       getUIStringInput(FIELD_NAME).setValue(null) ;
       getUIStringInput(FIELD_NAME).setEditable(true) ;
       getUIFormSelectBox(FIELD_SELECT_BOX).setOnChange(CHANGE_OPTION) ;
@@ -116,12 +116,12 @@ public class UIJCRAdvancedSearch extends UIForm implements UIPopupComponent {
   }
 
   public void setQuery(Query query) { query_ = query ; }
-  
+
   public void setIsEdit(boolean isEdit) { isEdit_ = isEdit ; }
   public boolean isEdit() { return isEdit_ ; }
-  
+
   public void activate() throws Exception {}
-  
+
   public void deActivate() throws Exception {}
 
   static  public class CancelActionListener extends EventListener<UIJCRAdvancedSearch> {
@@ -159,7 +159,7 @@ public class UIJCRAdvancedSearch extends UIForm implements UIPopupComponent {
         Query query = queryManager.createQuery(queryS, searchType);
         QueryResult queryResult = null ;
         queryResult = query.execute();
-        UISearchResult uiSearchResult = uiSearch.getChild(UISearchResult.class) ;      
+        UISearchResult uiSearchResult = uiSearch.getChild(UISearchResult.class) ;
         uiSearchResult.clearAll() ;
         uiSearchResult.setQueryResults(queryResult) ;
         uiSearchResult.updateGrid(true) ;
@@ -168,7 +168,7 @@ public class UIJCRAdvancedSearch extends UIForm implements UIPopupComponent {
         uiSearch.setRenderedChild(UIECMSearch.ADVANCED_RESULT) ;
       } catch (Exception e){
         UIApplication uiApp = uiForm.getAncestorOfType(UIApplication.class) ;
-        uiApp.addMessage(new ApplicationMessage("UIJCRAdvancedSearch.msg.invalid-queryStatement", null, 
+        uiApp.addMessage(new ApplicationMessage("UIJCRAdvancedSearch.msg.invalid-queryStatement", null,
                                                 ApplicationMessage.WARNING)) ;
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
         return ;
@@ -178,23 +178,23 @@ public class UIJCRAdvancedSearch extends UIForm implements UIPopupComponent {
 
   static  public class ChangeOptionActionListener extends EventListener<UIJCRAdvancedSearch> {
     public void execute(Event<UIJCRAdvancedSearch> event) throws Exception {
-      UIJCRAdvancedSearch uiForm = event.getSource() ;     
+      UIJCRAdvancedSearch uiForm = event.getSource() ;
       UIJCRExplorer uiExplorer = uiForm.getAncestorOfType(UIJCRExplorer.class) ;
       String  currentPath = uiExplorer.getCurrentNode().getPath() ;
-      String queryText = "" ;      
+      String queryText = "" ;
       String searchType = uiForm.getUIFormSelectBox(FIELD_SELECT_BOX).getValue() ;
       if(searchType.equals(Query.SQL)){
         if ("/".equals(currentPath)) queryText = ROOT_SQL_QUERY ;
-        else queryText = StringUtils.replace(SQL_QUERY, "$0", currentPath) ;     
+        else queryText = StringUtils.replace(SQL_QUERY, "$0", currentPath) ;
         uiForm.getUIFormTextAreaInput(FIELD_QUERY).setValue(queryText) ;
       } else {
         if ("/".equals(currentPath)) queryText = ROOT_XPATH_QUERY ;
         else queryText = StringUtils.replace(XPATH_QUERY, "$0", currentPath) ;
-        uiForm.getUIFormTextAreaInput(FIELD_QUERY).setValue(queryText) ;       
+        uiForm.getUIFormTextAreaInput(FIELD_QUERY).setValue(queryText) ;
       }
       if(uiForm.isEdit_ && uiForm.query_ != null) {
         if(searchType.equals(uiForm.query_.getLanguage())) {
-          uiForm.getUIFormTextAreaInput(FIELD_QUERY).setValue(uiForm.query_.getStatement()) ; 
+          uiForm.getUIFormTextAreaInput(FIELD_QUERY).setValue(uiForm.query_.getStatement()) ;
         }
       }
       event.getRequestContext().addUIComponentToUpdateByAjax(uiForm) ;
@@ -207,18 +207,18 @@ public class UIJCRAdvancedSearch extends UIForm implements UIPopupComponent {
       String statement = uiForm.getUIFormTextAreaInput(FIELD_QUERY).getValue() ;
       String queryLang = uiForm.getUIFormSelectBox(FIELD_SELECT_BOX).getValue() ;
       UIApplication uiApp = uiForm.getAncestorOfType(UIApplication.class) ;
-      
+
       if(statement == null || statement.trim().length() ==0) {
-        uiApp.addMessage(new ApplicationMessage("UIJCRAdvancedSearch.msg.value-save-null", null, 
+        uiApp.addMessage(new ApplicationMessage("UIJCRAdvancedSearch.msg.value-save-null", null,
                                                 ApplicationMessage.WARNING)) ;
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
         return ;
       }
-      
+
       if(!uiForm.isEdit_) {
         String repository = uiForm.getAncestorOfType(UIJCRExplorer.class).getRepositoryName() ;
         QueryService queryService = uiForm.getApplicationComponent(QueryService.class) ;
-        String name = uiForm.getUIStringInput(FIELD_NAME).getValue() ;        
+        String name = uiForm.getUIStringInput(FIELD_NAME).getValue() ;
         if(name == null || name.trim().length() == 0) {
           uiApp.addMessage(new ApplicationMessage("UIJCRAdvancedSearch.msg.query-name-null", null)) ;
           event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
@@ -227,7 +227,7 @@ public class UIJCRAdvancedSearch extends UIForm implements UIPopupComponent {
         String[] arrFilterChar = {"&", "$", "@", ":", "]", "[", "*", "%", "!", "+", "(", ")", "'", "#", ";", "}", "{", "/", "|", "\\", "\""};
         for(String filterChar : arrFilterChar) {
           if(name.indexOf(filterChar) > -1) {
-            uiApp.addMessage(new ApplicationMessage("UIJCRAdvancedSearch.msg.name-invalid", null, 
+            uiApp.addMessage(new ApplicationMessage("UIJCRAdvancedSearch.msg.name-invalid", null,
                                                     ApplicationMessage.WARNING)) ;
             event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
             return ;
@@ -235,7 +235,7 @@ public class UIJCRAdvancedSearch extends UIForm implements UIPopupComponent {
         }
         String userName = Util.getPortalRequestContext().getRemoteUser() ;
         try {
-          queryService.addQuery(name, statement, queryLang, userName, repository) ;        
+          queryService.addQuery(name, statement, queryLang, userName, repository) ;
         } catch(Exception e){
           uiApp.addMessage(new ApplicationMessage("UIJCRAdvancedSearch.msg.save_unSuccessful", null,
                                                   ApplicationMessage.WARNING)) ;
@@ -260,14 +260,14 @@ public class UIJCRAdvancedSearch extends UIForm implements UIPopupComponent {
         }
         ManageableRepository repository =
           uiForm.getApplicationComponent(RepositoryService.class).getRepository(uiExplorer.getRepositoryName()) ;
-        Session session = repository.getSystemSession(repository.getConfiguration().getDefaultWorkspaceName()) ; 
+        Session session = repository.getSystemSession(repository.getConfiguration().getDefaultWorkspaceName()) ;
         Node queryNode = (Node) session.getItem(uiForm.queryPath_) ;
         queryNode.setProperty("jcr:language", queryLang) ;
         queryNode.setProperty("jcr:statement", statement) ;
         queryNode.save() ;
         if(!uiExplorer.getPreference().isJcrEnable()) session.save() ;
         session.logout() ;
-        UISavedQuery uiSavedQuery = uiForm.getAncestorOfType(UISavedQuery.class) ; 
+        UISavedQuery uiSavedQuery = uiForm.getAncestorOfType(UISavedQuery.class) ;
         uiSavedQuery.updateGrid(1);
         uiSavedQuery.removeChildById(UISavedQuery.EDIT_FORM) ;
         event.getRequestContext().addUIComponentToUpdateByAjax(uiSavedQuery.getParent()) ;

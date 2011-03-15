@@ -53,19 +53,19 @@ public class NewsletterManageUserHandler {
 
   /** The log. */
   private static Log log = ExoLogger.getLogger(NewsletterManageUserHandler.class);
-  
+
   /** The repository service. */
   private RepositoryService repositoryService;
-  
+
   /** The repository. */
   private String repository;
-  
+
   /** The workspace. */
   private String workspace;
-  
+
   /**
    * Instantiates a new newsletter manage user handler.
-   * 
+   *
    * @param repository the repository
    * @param workspace the workspace
    */
@@ -74,14 +74,14 @@ public class NewsletterManageUserHandler {
     this.repository = repository;
     this.workspace = workspace;
   }
-  
+
   /**
    * Gets the user from node.
-   * 
+   *
    * @param userNode the user node
-   * 
+   *
    * @return the user from node
-   * 
+   *
    * @throws Exception the exception
    */
   private NewsletterUserConfig getUserFromNode(Node userNode) throws Exception{
@@ -90,12 +90,12 @@ public class NewsletterManageUserHandler {
     user.setBanned(userNode.getProperty(NewsletterConstant.USER_PROPERTY_BANNED).getBoolean());
     return user;
   }
-  
+
   /**
    * Convert values to array.
-   * 
+   *
    * @param values the values
-   * 
+   *
    * @return the list< string>
    */
   private List<String> convertValuesToArray(Value[] values){
@@ -109,45 +109,47 @@ public class NewsletterManageUserHandler {
     }
     return listString;
   }
-  
+
   /**
    * Gets the all administrator.
-   * 
+   *
    * @param portalName the portal name
-   * 
+   *
    * @return the all administrator
    */
-  public List<String> getAllAdministrator(SessionProvider sessionProvider, String portalName){
-    try{
+  public List<String> getAllAdministrator(SessionProvider sessionProvider, String portalName) {
+    try {
       ManageableRepository manageableRepository = repositoryService.getRepository(repository);
       Session session = sessionProvider.getSession(workspace, manageableRepository);
       Node categoriesNode = (Node) session.getItem(NewsletterConstant.generateCategoryPath(portalName));
-      if(categoriesNode.hasProperty(NewsletterConstant.CATEGORIES_PROPERTY_ADDMINISTRATOR)) {
-        return convertValuesToArray(categoriesNode.getProperty(NewsletterConstant.CATEGORIES_PROPERTY_ADDMINISTRATOR).getValues());
+      if (categoriesNode.hasProperty(NewsletterConstant.CATEGORIES_PROPERTY_ADDMINISTRATOR)) {
+        return convertValuesToArray(categoriesNode.getProperty(NewsletterConstant.CATEGORIES_PROPERTY_ADDMINISTRATOR)
+                                                  .getValues());
       }
-    } catch(Exception ex){
+    } catch (Exception ex) {
       log.error("getAllAdministrator() failed because of ", ex);
     }
     return new ArrayList<String>();
   }
-  
+
   /**
    * Adds the administrator.
-   * 
+   *
    * @param portalName the portal name
    * @param userId the user id
-   * 
+   *
    * @throws Exception the exception
    */
   public void addAdministrator(SessionProvider sessionProvider, String portalName, String userId) throws Exception{
-    try{
+    try {
       ManageableRepository manageableRepository = repositoryService.getRepository(repository);
       Session session = sessionProvider.getSession(workspace, manageableRepository);
       Node categoriesNode = (Node) session.getItem(NewsletterConstant.generateCategoryPath(portalName));
       List<String> listUsers = new ArrayList<String>();
-      if(categoriesNode.hasProperty(NewsletterConstant.CATEGORIES_PROPERTY_ADDMINISTRATOR))
-        listUsers.addAll(convertValuesToArray(categoriesNode.getProperty(NewsletterConstant.CATEGORIES_PROPERTY_ADDMINISTRATOR).getValues()));
-      if(listUsers.contains(userId)) {
+      if (categoriesNode.hasProperty(NewsletterConstant.CATEGORIES_PROPERTY_ADDMINISTRATOR))
+        listUsers.addAll(convertValuesToArray(categoriesNode.getProperty(NewsletterConstant.CATEGORIES_PROPERTY_ADDMINISTRATOR)
+                                                            .getValues()));
+      if (listUsers.contains(userId)) {
         return;
       }
       listUsers.add(userId);
@@ -164,7 +166,7 @@ public class NewsletterManageUserHandler {
             extendedCategoryNode.addMixin("exo:privilegeable");
           extendedCategoryNode.setPermission(userId, permissions);
         }
-        
+
         // update permission for subscriptions node which are contained in this category
         NewsletterConstant.addPermissionsFromCateToSubs(categoryNode, new String[]{userId}, permissions);
       }
@@ -173,36 +175,39 @@ public class NewsletterManageUserHandler {
       log.info("Add administrator for newsletter failed because of ", ex);
     }
   }
-  
+
   /**
    * Delete user addministrator.
-   * 
+   *
    * @param portalName the portal name
    * @param userId the user id
-   * 
+   *
    * @throws Exception the exception
    */
-  public void deleteUserAddministrator(SessionProvider sessionProvider, String portalName, String userId) throws Exception{
+  public void deleteUserAddministrator(SessionProvider sessionProvider,
+                                       String portalName,
+                                       String userId) throws Exception {
     ManageableRepository manageableRepository = repositoryService.getRepository(repository);
     Session session = sessionProvider.getSession(workspace, manageableRepository);
     Node categoriesNode = (Node) session.getItem(NewsletterConstant.generateCategoryPath(portalName));
     List<String> listUsers = new ArrayList<String>();
-    if(categoriesNode.hasProperty(NewsletterConstant.CATEGORIES_PROPERTY_ADDMINISTRATOR))
-      listUsers.addAll(convertValuesToArray(categoriesNode.getProperty(NewsletterConstant.CATEGORIES_PROPERTY_ADDMINISTRATOR).getValues()));
+    if (categoriesNode.hasProperty(NewsletterConstant.CATEGORIES_PROPERTY_ADDMINISTRATOR))
+      listUsers.addAll(convertValuesToArray(categoriesNode.getProperty(NewsletterConstant.CATEGORIES_PROPERTY_ADDMINISTRATOR)
+                                                          .getValues()));
     listUsers.remove(userId);
     categoriesNode.setProperty(NewsletterConstant.CATEGORIES_PROPERTY_ADDMINISTRATOR, listUsers.toArray(new String[]{}));
     session.save();
   }
-  
+
   /**
    * Adds the.
-   * 
+   *
    * @param portalName the portal name
    * @param userMail the user mail
    * @param sessionProvider the session provider
-   * 
+   *
    * @return the node
-   * @throws Exception 
+   * @throws Exception
    */
   public Node add(SessionProvider sessionProvider, String portalName, String userMail) throws Exception {
     log.info("Trying to add user " + userMail);
@@ -216,7 +221,8 @@ public class NewsletterManageUserHandler {
       userNode = userFolderNode.addNode(userMail, NewsletterConstant.USER_NODETYPE);
       userNode.setProperty(NewsletterConstant.USER_PROPERTY_MAIL, userMail);
       userNode.setProperty(NewsletterConstant.USER_PROPERTY_BANNED, false);
-      userNode.setProperty(NewsletterConstant.USER_PROPERTY_VALIDATION_CODE, "PublicUser" + IdGenerator.generate() );
+      userNode.setProperty(NewsletterConstant.USER_PROPERTY_VALIDATION_CODE, "PublicUser"
+          + IdGenerator.generate());
       userNode.setProperty(NewsletterConstant.USER_PROPERTY_IS_CONFIRM, false);
       session.save();
     } catch (Exception e) {
@@ -229,19 +235,21 @@ public class NewsletterManageUserHandler {
     }
     return userNode;
   }
-  
+
   /**
    * Gets the user node by email.
-   * 
+   *
    * @param portalName the portal name
    * @param userMail the user mail
    * @param session the session
-   * 
+   *
    * @return the user node by email
-   * 
+   *
    * @throws Exception the exception
    */
-  private Node getUserNodeByEmail(SessionProvider sessionProvider, String portalName, String userMail) throws Exception{
+  private Node getUserNodeByEmail(SessionProvider sessionProvider,
+                                  String portalName,
+                                  String userMail) throws Exception {
     try{
       ManageableRepository manageableRepository = repositoryService.getRepository(repository);
       Session session = sessionProvider.getSession(workspace, manageableRepository);
@@ -252,32 +260,35 @@ public class NewsletterManageUserHandler {
       return null;
     }
   }
-  
+
   /**
    * Change ban status.
-   * 
+   *
    * @param portalName the portal name
    * @param userMail the user mail
    * @param isBanClicked the is ban clicked
    */
-  public void changeBanStatus(SessionProvider sessionProvider, String portalName, String userMail, boolean isBanClicked) {
+  public void changeBanStatus(SessionProvider sessionProvider,
+                              String portalName,
+                              String userMail,
+                              boolean isBanClicked) {
     log.info("Trying to ban/unban user " + userMail);
     try {
       ManageableRepository manageableRepository = repositoryService.getRepository(repository);
       Session session = sessionProvider.getSession(workspace, manageableRepository);
       Node userNode = getUserNodeByEmail(sessionProvider, portalName, userMail);
       if (userNode.getProperty(NewsletterConstant.USER_PROPERTY_BANNED).getBoolean() == isBanClicked) return;
-      userNode.setProperty(NewsletterConstant.USER_PROPERTY_BANNED, 
+      userNode.setProperty(NewsletterConstant.USER_PROPERTY_BANNED,
                            !userNode.getProperty(NewsletterConstant.USER_PROPERTY_BANNED).getBoolean());
       session.save();
     } catch (Exception e) {
       log.error("Ban/UnBan user " + userMail + " failed because of ", e);
     }
   }
-  
+
   /**
    * Delete.
-   * 
+   *
    * @param portalName      the portal name
    * @param userMail        the user mail
    * @param SessionProvider the sessionprovider
@@ -293,7 +304,8 @@ public class NewsletterManageUserHandler {
       userNode.remove();
 
       QueryManager queryManager = session.getWorkspace().getQueryManager();
-      String sqlQuery = "select * from " + NewsletterConstant.SUBSCRIPTION_NODETYPE + " where " + NewsletterConstant.SUBSCRIPTION_PROPERTY_USER + " like '%" + userMail + "%'";
+      String sqlQuery = "select * from " + NewsletterConstant.SUBSCRIPTION_NODETYPE + " where "
+          + NewsletterConstant.SUBSCRIPTION_PROPERTY_USER + " like '%" + userMail + "%'";
       Query query = queryManager.createQuery(sqlQuery, Query.SQL);
       QueryResult queryResult = query.execute();
       NodeIterator nodeIterator = queryResult.getNodes();
@@ -321,20 +333,19 @@ public class NewsletterManageUserHandler {
 
   /**
    * Gets the users.
-   * 
+   *
    * @param portalName the portal name
    * @param categoryName the category name
    * @param subscriptionName the subscription name
-   * 
+   *
    * @return the users
-   * 
+   *
    * @throws Exception the exception
    */
-  public List<NewsletterUserConfig> getUsers(
-                                             SessionProvider sessionProvider, 
+  public List<NewsletterUserConfig> getUsers(SessionProvider sessionProvider,
                                              String portalName,
                                              String categoryName,
-                                             String subscriptionName) throws Exception{
+                                             String subscriptionName) throws Exception {
     List<NewsletterUserConfig> listUsers = new ArrayList<NewsletterUserConfig>();
     ManageableRepository manageableRepository = repositoryService.getRepository(repository);
     Session session = sessionProvider.getSession(workspace, manageableRepository);
@@ -375,21 +386,25 @@ public class NewsletterManageUserHandler {
 
   /**
    * Gets the users by subscription.
-   * 
+   *
    * @param portalName the portal name
    * @param categoryName the category name
    * @param subscriptionName the subscription name
    * @param session the session
-   * 
+   *
    * @return the users by subscription
    */
-  private List<String> getUsersBySubscription(SessionProvider sessionProvider, String portalName, String categoryName, String subscriptionName) {
+  private List<String> getUsersBySubscription(SessionProvider sessionProvider,
+                                              String portalName,
+                                              String categoryName,
+                                              String subscriptionName) {
     log.info("Trying to get list user by subscription " + portalName + "/" + categoryName + "/" + subscriptionName);
     List<String> subscribedUsers = new ArrayList<String>();
     try {
       ManageableRepository manageableRepository = repositoryService.getRepository(repository);
       Session session = sessionProvider.getSession(workspace, manageableRepository);
-      String subscriptionPath = NewsletterConstant.generateCategoryPath(portalName) + "/" + categoryName + "/" + subscriptionName;
+      String subscriptionPath = NewsletterConstant.generateCategoryPath(portalName) + "/"
+          + categoryName + "/" + subscriptionName;
       Node subscriptionNode = Node.class.cast(session.getItem(subscriptionPath));
       if (subscriptionNode.hasProperty(NewsletterConstant.SUBSCRIPTION_PROPERTY_USER)) {
         Property subscribedUserProperty = subscriptionNode.getProperty(NewsletterConstant.SUBSCRIPTION_PROPERTY_USER);
@@ -399,22 +414,22 @@ public class NewsletterManageUserHandler {
         }
       }
     } catch (Exception e) {
-      log.error("Get list user by subscription " + portalName + "/" + categoryName + "/" + subscriptionName + " failed because of ", e);
+      log.error("Get list user by subscription " + portalName + "/" + categoryName + "/"
+          + subscriptionName + " failed because of ", e);
     }
     return subscribedUsers;
   }
-  
+
   /**
    * Gets the quantity user by subscription.
-   * 
+   *
    * @param portalName the portal name
    * @param categoryName the category name
    * @param subscriptionName the subscription name
-   * 
+   *
    * @return the quantity user by subscription
    */
-  public int getQuantityUserBySubscription(
-                                           SessionProvider sessionProvider, 
+  public int getQuantityUserBySubscription(SessionProvider sessionProvider,
                                            String portalName,
                                            String categoryName,
                                            String subscriptionName) {
@@ -423,24 +438,26 @@ public class NewsletterManageUserHandler {
     try {
       ManageableRepository manageableRepository = repositoryService.getRepository(repository);
       Session session = sessionProvider.getSession(workspace, manageableRepository);
-      String subscriptionPath = NewsletterConstant.generateCategoryPath(portalName) + "/" + categoryName + "/" + subscriptionName;
+      String subscriptionPath = NewsletterConstant.generateCategoryPath(portalName) + "/"
+          + categoryName + "/" + subscriptionName;
       Node subscriptionNode = Node.class.cast(session.getItem(subscriptionPath));
       if (subscriptionNode.hasProperty(NewsletterConstant.SUBSCRIPTION_PROPERTY_USER)) {
         Property subscribedUserProperty = subscriptionNode.getProperty(NewsletterConstant.SUBSCRIPTION_PROPERTY_USER);
         countUser = subscribedUserProperty.getValues().length;
       }
     } catch (Exception e) {
-      log.error("Get user's quantity by subscription " + portalName + "/" + categoryName + "/" + subscriptionName + " failed because of ", e);
+      log.error("Get user's quantity by subscription " + portalName + "/" + categoryName + "/"
+          + subscriptionName + " failed because of ", e);
     }
     return countUser;
   }
-  
+
   /**
    * Check existed email.
-   * 
+   *
    * @param portalName the portal name
    * @param email the email
-   * 
+   *
    * @return true, if successful
    */
   public boolean checkExistedEmail(SessionProvider sessionProvider, String portalName, String email) {
@@ -455,20 +472,20 @@ public class NewsletterManageUserHandler {
     }
     return false;
   }
-  
-  
-  
-  
-  
-  
+
+
+
+
+
+
 
   /**
    * Check if user is an administrator or not
-   * 
+   *
    * @param userId the current user
-   * 
+   *
    * @return true if user is an administrator, otherwise return false
-   * 
+   *
    * @throws Exception the exception
    */
   public boolean isAdministrator(String portalName, String userId) {
@@ -484,15 +501,15 @@ public class NewsletterManageUserHandler {
     }
     return false;
   }
-  
+
   /**
    * Check if user is a moderator of current category or not
-   * 
+   *
    * @param userId the current user
    * @param categoryName the current category's name
-   * 
+   *
    * @return true if user is an administrator, otherwise return false
-   * 
+   *
    * @throws Exception the exception
    */
   public boolean isModerator(String userId, NewsletterCategoryConfig config) {
@@ -504,5 +521,5 @@ public class NewsletterManageUserHandler {
     }
     return false;
   }
-  
+
 }

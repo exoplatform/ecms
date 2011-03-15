@@ -43,26 +43,26 @@ public class NodetypeUtils {
 
   /**
    * Display all nodes and their properties inside a workspace.
-   * 
+   *
    * @param workspaceName the workspace name
    * @param repositoryName the repository name
-   * 
+   *
    * @throws Exception the exception
    */
   public static void displayAllNode(String workspaceName, String repositoryName) throws Exception {
     SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
     RepositoryService repositoryService = (RepositoryService) ExoContainerContext.getCurrentContainer().getComponentInstanceOfType(RepositoryService.class);
-    ManageableRepository repository = repositoryService.getRepository(repositoryName); 
+    ManageableRepository repository = repositoryService.getRepository(repositoryName);
     Session session = sessionProvider.getSession(workspaceName, repository);
     Node root = session.getRootNode();
     displayAllChildNode(root);
   }
-  
+
   /**
    * Display the child node and its properties.
-   * 
+   *
    * @param node the current node
-   * 
+   *
    * @throws Exception the exception
    */
   public static void displayAllChildNode(Node node) throws Exception {
@@ -74,12 +74,12 @@ public class NodetypeUtils {
       displayAllChildNode(childNode);
     }
   }
-  
+
   /**
    * Display one node. and its properties
-   * 
+   *
    * @param node the node
-   * 
+   *
    * @throws Exception the exception
    */
   public static void displayOneNode(Node node) throws Exception {

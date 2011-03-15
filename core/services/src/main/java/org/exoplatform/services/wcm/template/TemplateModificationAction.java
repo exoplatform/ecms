@@ -28,16 +28,16 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
  * Created by The eXo Platform SAS
  * Author : Phan Le Thanh Chuong
  *          chuong_phan@exoplatform.com, phan.le.thanh.chuong@gmail.com
- * Oct 27, 2009  
+ * Oct 27, 2009
  */
 public class TemplateModificationAction implements Action {
 
-	public boolean execute(Context context) throws Exception {
-		Property property = (Property)context.get("currentItem");
-		Node node = property.getParent();
-		TemplateService templateService = WCMCoreUtils.getService(TemplateService.class);
-		templateService.reloadTemplate(node.getParent().getPath());
-		return true;
-	}
+  public boolean execute(Context context) throws Exception {
+    Property property = (Property)context.get("currentItem");
+    Node node = property.getParent();
+    TemplateService templateService = WCMCoreUtils.getService(TemplateService.class);
+    templateService.reloadTemplate(node.getParent().getPath());
+    return true;
+  }
 
 }

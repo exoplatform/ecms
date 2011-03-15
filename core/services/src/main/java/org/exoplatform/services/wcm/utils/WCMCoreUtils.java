@@ -44,25 +44,25 @@ import org.quartz.JobExecutionContext;
  * Sep 8, 2009
  */
 public class WCMCoreUtils {
-  
+
   private static Log log = ExoLogger.getLogger("wcm.WCMCoreUtils");
 
   private static PortalContainer manager;
-  
+
   /**
    * Gets the service.
-   * 
+   *
    * @param clazz the clazz
-   * 
+   *
    * @return the service
    */
   public static <T> T getService(Class<T> clazz) {
     return getService(clazz, null);
   }
-  
+
   /**
    * Gets the system session provider.
-   * 
+   *
    * @return the system session provider
    */
   public static SessionProvider getSystemSessionProvider() {
@@ -70,29 +70,29 @@ public class WCMCoreUtils {
     SessionProvider sessionProvider = sessionProviderService.getSystemSessionProvider(null);
     return sessionProvider;
   }
-  
+
   /**
    * Gets the session provider.
-   * 
+   *
    * @return the session provider
    */
   public static SessionProvider getUserSessionProvider() {
-	  SessionProviderService sessionProviderService = getService(SessionProviderService.class);
-	  SessionProvider sessionProvider = sessionProviderService.getSessionProvider(null);
-	  return sessionProvider;
+    SessionProviderService sessionProviderService = getService(SessionProviderService.class);
+    SessionProvider sessionProvider = sessionProviderService.getSessionProvider(null);
+    return sessionProvider;
   }
-  
-  
-  
-  
-  
-  
+
+
+
+
+
+
   /**
    * Gets the service.
-   * 
+   *
    * @param clazz the class
    * @param containerName the container's name
-   * 
+   *
    * @return the service
    */
   public static <T> T getService(Class<T> clazz, String containerName) {
@@ -102,22 +102,22 @@ public class WCMCoreUtils {
     }
     return clazz.cast(container.getComponentInstanceOfType(clazz));
   }
-  
+
   public static String getContainerNameFromJobContext(JobExecutionContext context) {
     return context.getJobDetail().getGroup().split(":")[0];
   }
-  
+
   /**
-   * Check current user has permission to access a node or not 
+   * Check current user has permission to access a node or not
    * -    For each permission, compare with user's permissions
    * -      If permission has membership type is "*", just check the user's group id only
    * -      If permission has other membership types, then check the user's membership type and user's group id
-   *  
+   *
    * @param userId the current user's name
    * @param permissions the current node
    * @param isNeedFullAccess if true, count full access (4) then return true, if false, return true if match first permission
-   * 
-   * @return true is user has permissions, otherwise return false 
+   *
+   * @return true is user has permissions, otherwise return false
    */
   public static boolean hasPermission(String userId, List<String> permissions, boolean isNeedFullAccess) {
     try {
@@ -156,8 +156,8 @@ public class WCMCoreUtils {
                 if (count == 4) return true;
               }
               else return true;
-            } 
-          } 
+            }
+          }
         }
         permissionTmp = permission;
       }
@@ -167,7 +167,7 @@ public class WCMCoreUtils {
     }
     return false;
   }
-  
+
   public static <T> List<T> getAllElementsOfListAccess(ListAccess<T> listAccess) {
     try {
       return Arrays.asList(listAccess.load(0, listAccess.getSize()));
@@ -179,19 +179,19 @@ public class WCMCoreUtils {
 
   /**
    * Get the repository by name
-   * 
+   *
    * @param repository the repository name
-   *  
-   * @return the manageable repository by name, the current repository if name is null 
+   *
+   * @return the manageable repository by name, the current repository if name is null
    */
   public static ManageableRepository getRepository(String repository) {
     try {
       RepositoryService repositoryService = getService(RepositoryService.class);
-      return repositoryService.getCurrentRepository(); 
+      return repositoryService.getCurrentRepository();
     } catch (Exception e) {
       log.error("getRepository(" + repository + ") failed because of ", e);
     }
     return null;
   }
-  
+
 }

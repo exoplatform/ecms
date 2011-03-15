@@ -42,12 +42,12 @@ import org.exoplatform.services.security.ConversationState;
  * Created by The eXo Platform SARL
  * Author : Hoang Van Hung
  *          hunghvit@gmail.com
- * Sep 30, 2009  
+ * Sep 30, 2009
  */
 public class LockManagerListener extends Listener<ConversationRegistry, ConversationState > {
-  
+
   protected static Log log  = ExoLogger.getLogger(LockManagerListener.class);
-  
+
   @Override
   @SuppressWarnings("unchecked")
   public void onEvent(Event<ConversationRegistry, ConversationState> event) throws Exception {
@@ -64,19 +64,19 @@ public class LockManagerListener extends Listener<ConversationRegistry, Conversa
     ExoCache lockcache = cacheService.getCacheInstance(LockManagerImpl.class.getName());
     try {
       Map<String,String> lockedNodes = (Map<String,String>)lockcache.get(userid);
-      if(lockedNodes == null || lockedNodes.values().isEmpty()) return;      
+      if(lockedNodes == null || lockedNodes.values().isEmpty()) return;
       RepositoryService repositoryService = (RepositoryService)container.getComponentInstanceOfType(RepositoryService.class);
       String key = null, nodePath = null, repoName = null,workspaceName = null, lockToken= null ;
       String[] temp = null, location = null ;
-      Session session = null;      
-      for(Iterator<String> iter = lockedNodes.keySet().iterator(); iter.hasNext();) {                
+      Session session = null;
+      for(Iterator<String> iter = lockedNodes.keySet().iterator(); iter.hasNext();) {
         try {
           //The key structure is built in org.exoplatform.ecm.webui.utils.LockUtil.createLockKey() method
-          key = iter.next();          
+          key = iter.next();
           temp = key.split(":/:");
           nodePath = temp[1];
           location = temp[0].split("/::/");
-          repoName = location[0]; 
+          repoName = location[0];
           workspaceName = location[1] ;
           session = sessionProvider.getSession(workspaceName,repositoryService.getRepository(repoName));
           lockToken = lockedNodes.get(key);

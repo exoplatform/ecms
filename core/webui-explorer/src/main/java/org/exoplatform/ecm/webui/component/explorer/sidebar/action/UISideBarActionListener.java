@@ -38,9 +38,9 @@ import org.exoplatform.webui.exception.MessageException;
 import org.exoplatform.webui.ext.UIExtensionEventListener;
 
 /**
- * Created by The eXo Platform SAS 
- * Author : eXoPlatform 
- *          ha.dangviet@exoplatform.com 
+ * Created by The eXo Platform SAS
+ * Author : eXoPlatform
+ *          ha.dangviet@exoplatform.com
  * Nov 22, 2010
  */
 public abstract class UISideBarActionListener<T extends UIComponent> extends
@@ -49,7 +49,7 @@ public abstract class UISideBarActionListener<T extends UIComponent> extends
   private static final Log LOG = ExoLogger.getLogger(UISideBarActionListener.class);
 
   /**
-   * 
+   *
    */
   @Override
   protected Map<String, Object> createContext(Event<T> event) throws Exception {

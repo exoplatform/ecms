@@ -28,27 +28,27 @@ import org.w3c.dom.Element;
 
 /**
  * Created by The eXo Platform SAS.
- * 
+ *
  * @author : Hoa.Pham hoa.pham@exoplatform.com Jun 23, 2008
  */
 public class FCKFileHandler {
-  
+
   private TemplateService templateService;
 
   private static final String[] IMAGE_MIMETYPE = {"image/gif", "image/jpeg", "image/bmp", "image/png", "image/tiff"};
 
   /**
    * Instantiates a new fCK file handler.
-   * 
+   *
    * @param container the container
    */
   public FCKFileHandler(ExoContainer container) {
     templateService = (TemplateService)container.getComponentInstanceOfType(TemplateService.class);
-  }    
-  
+  }
+
   /**
    * Gets the file type.
-   * 
+   *
    * @param node the node
    * @param resourceType the resource type
    * @return the file type
@@ -66,66 +66,66 @@ public class FCKFileHandler {
     }
     return null;
   }
-  
+
   /**
    * Gets the file url.
-   * 
+   *
    * @param file the file
    * @return the file url
    * @throws Exception the exception
    */
-  protected String getFileURL(final Node file) throws Exception {   
+  protected String getFileURL(final Node file) throws Exception {
     return FCKUtils.createWebdavURL(file);
-  }    
-  
+  }
+
   /**
    * Creates the file element for connector response looks like that <File
    * name="" fileType="" dateCreated="" dateModified="" creator="" size=""
    * url="" />.
-   * 
+   *
    * @param document the document
    * @param child the child
    * @param fileType the file type
    * @return the org.w3c.dom.Element element
    * @throws Exception the exception
    */
-  public Element createFileElement(Document document, Node child, String fileType) throws Exception {   
+  public Element createFileElement(Document document, Node child, String fileType) throws Exception {
     Element file = document.createElement("File");
-    file.setAttribute("name", child.getName());     
-    SimpleDateFormat formatter = new SimpleDateFormat(ISO8601.SIMPLE_DATETIME_FORMAT);    
-    file.setAttribute("dateCreated", formatter.format(child.getProperty("exo:dateCreated").getDate().getTime()));    
-    file.setAttribute("dateModified", formatter.format(child.getProperty("exo:dateModified").getDate().getTime()));      
+    file.setAttribute("name", child.getName());
+    SimpleDateFormat formatter = new SimpleDateFormat(ISO8601.SIMPLE_DATETIME_FORMAT);
+    file.setAttribute("dateCreated", formatter.format(child.getProperty("exo:dateCreated").getDate().getTime()));
+    file.setAttribute("dateModified", formatter.format(child.getProperty("exo:dateModified").getDate().getTime()));
     file.setAttribute("creator", child.getProperty("exo:owner").getString());
-    file.setAttribute("fileType", fileType);              
-    file.setAttribute("url",getFileURL(child));        
+    file.setAttribute("fileType", fileType);
+    file.setAttribute("url",getFileURL(child));
     if(child.isNodeType(FCKUtils.NT_FILE)) {
       long size = child.getNode("jcr:content").getProperty("jcr:data").getLength();
-      file.setAttribute("size", "" + size / 1000);      
+      file.setAttribute("size", "" + size / 1000);
     }else {
       file.setAttribute("size", "");
     }
     return file;
-  }  
-  
+  }
+
   /**
    * Gets the document type.
-   * 
+   *
    * @param node the node
    * @return the document type
    * @throws Exception the exception
    */
-  protected String getDocumentType(final Node node) throws Exception {    
+  protected String getDocumentType(final Node node) throws Exception {
     if (node.isNodeType("exo:presentationable"))
-      return node.getProperty("exo:presentationType").getString();        
+      return node.getProperty("exo:presentationType").getString();
     String primaryType = node.getPrimaryNodeType().getName();
-    if (templateService.getDocumentTemplates().contains(primaryType)) 
-      return primaryType;  
+    if (templateService.getDocumentTemplates().contains(primaryType))
+      return primaryType;
     return null;
   }
 
   /**
    * Gets the image type.
-   * 
+   *
    * @param node the node
    * @return the image type
    * @throws Exception the exception
@@ -144,7 +144,7 @@ public class FCKFileHandler {
 
   /**
    * Gets the flash type.
-   * 
+   *
    * @param node the node
    * @return the flash type
    * @throws Exception the exception
@@ -155,13 +155,13 @@ public class FCKFileHandler {
 
   /**
    * Gets the link type.
-   * 
+   *
    * @param node the node
    * @return the link type
    * @throws Exception the exception
    */
   protected String getLinkType(final Node node) throws Exception {
     return "exo:link";
-  }    
+  }
 
 }

@@ -29,29 +29,29 @@ import javax.jcr.Value;
  */
 
 public interface MultiLanguageService {
-  
+
   /**
    * Node name as LANGUAGES
    */
   final static public String LANGUAGES = "languages" ;
-  
+
   /**
    * Property name as EXO_LANGUAGE
    */
   final static public String EXO_LANGUAGE = "exo:language" ;
-  
+
   /**
    * Node name as COMMENTS
    */
   final static public String COMMENTS = "comments".intern() ;
-  
+
   /**
    * Get list of value in exo:language property in child node of current node
    * @param node    current node
    * @return value of exo:language property
    */
   public List<String> getSupportedLanguages(Node node) throws Exception ;
-  
+
   /**
    * Set data for current node
    * @param node              current node
@@ -60,7 +60,7 @@ public interface MultiLanguageService {
    * @throws Exception
    */
   public void setDefault(Node node, String language, String repositoryName) throws Exception ;
-  
+
   /**
    * Add new language for current node
    * Set value of property in inputs Map to new language node
@@ -71,7 +71,7 @@ public interface MultiLanguageService {
    * @throws Exception
    */
   public void addLanguage(Node node, Map inputs, String language, boolean isDefault) throws Exception ;
-  
+
   /**
    * Add new language for current node
    * Processing for some new added node
@@ -85,7 +85,7 @@ public interface MultiLanguageService {
    * @throws Exception
    */
   public void addLanguage(Node node, Map inputs, String language, boolean isDefault, String nodeType) throws Exception ;
-  
+
   /**
    * Add newLanguageNode node, then add new file to newLanguageNode
    * @param node              current node
@@ -98,7 +98,7 @@ public interface MultiLanguageService {
    * @throws Exception
    */
   public void addFileLanguage(Node node, String fileName, Value value, String mimeType, String language, String repositoryName, boolean isDefault) throws Exception ;
-  
+
   /**
    * Add newLanguageNode node, then set property in mapping to newLanguageNode
    * @param node              current node
@@ -109,7 +109,7 @@ public interface MultiLanguageService {
    */
   public void addFileLanguage(Node node, String language, Map mappings, boolean isDefault) throws Exception ;
 
-  
+
   /**
    * Add newLanguageNode node with a symlink, based on exo:language targetNode property
    * @param node              current node
@@ -128,14 +128,14 @@ public interface MultiLanguageService {
    * @throws Exception
    */
   public void addFolderLanguage(Node node, Map inputs, String language, boolean isDefault, String nodeType, String repositoryName) throws Exception ;
-  
+
   /**
    * Get value of property exo:language in current node
    * @param node    current node
    * @return value of exo:language property
    */
   public String getDefault(Node node) throws Exception ;
-  
+
   /**
    * Get node following relative path = "languages/" + language
    * @param node
@@ -144,6 +144,6 @@ public interface MultiLanguageService {
    *         null if not exist
    */
   public Node getLanguage(Node node, String language) throws Exception ;
-  
-  
+
+
 }

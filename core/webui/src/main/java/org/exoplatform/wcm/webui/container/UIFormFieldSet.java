@@ -33,13 +33,13 @@ public class UIFormFieldSet extends UIContainer {
 
   /**
    * Instantiates a new uI form field set.
-   * 
+   *
    * @param name the name
    */
   public UIFormFieldSet(String name) {
     setId(name) ;
   }
-  
+
   /* (non-Javadoc)
    * @see org.exoplatform.webui.core.UIComponent#processDecode(org.exoplatform.webui.application.WebuiRequestContext)
    */
@@ -48,7 +48,7 @@ public class UIFormFieldSet extends UIContainer {
       child.processDecode(context) ;
     }
   }
-  
+
   /* (non-Javadoc)
    * @see org.exoplatform.webui.core.UIComponent#processRender(org.exoplatform.webui.application.WebuiRequestContext)
    */
@@ -69,12 +69,12 @@ public class UIFormFieldSet extends UIContainer {
         String componentName = uiForm.getLabel(component.getId());
         if(componentName != null && componentName.length() > 0 && !componentName.equals(getId())) {
           writer.write("<td class=\"FieldLabel\">" + componentName + "</td>") ;
-          writer.write("<td class=\"FieldComponent\">") ; 
-          renderUIComponent(component) ; 
+          writer.write("<td class=\"FieldComponent\">") ;
+          renderUIComponent(component) ;
           writer.write("</td>") ;
         } else {
-          writer.write("<td class=\"FieldComponent\" colspans=\"2\">") ; 
-          renderUIComponent(component) ; 
+          writer.write("<td class=\"FieldComponent\" colspans=\"2\">") ;
+          renderUIComponent(component) ;
           writer.write("</td>") ;
         }
         writer.write("</tr>") ;

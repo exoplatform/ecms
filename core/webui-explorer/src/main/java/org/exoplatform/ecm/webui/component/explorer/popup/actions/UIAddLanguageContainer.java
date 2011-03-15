@@ -30,18 +30,18 @@ import org.exoplatform.webui.core.lifecycle.UIContainerLifecycle;
  * Created by The eXo Platform SARL
  * Author : Dang Van Minh
  *          minh.dang@exoplatform.com
- * Jan 16, 2007  
+ * Jan 16, 2007
  * 11:27:32 AM
  */
-@ComponentConfig (lifecycle = UIContainerLifecycle.class) 
+@ComponentConfig (lifecycle = UIContainerLifecycle.class)
 public class UIAddLanguageContainer extends UIContainer implements UIPopupComponent {
 
   public String nodeTypeName_ = null;
-  
+
   public UIAddLanguageContainer() throws Exception {
     addChild(UILanguageTypeForm.class, null, null) ;
   }
-  
+
   public void initPopup(UIComponent uiComp) throws Exception {
     removeChildById("PopupComponent") ;
     UIPopupWindow uiPopup = addChild(UIPopupWindow.class, null, "PopupComponent") ;
@@ -50,7 +50,7 @@ public class UIAddLanguageContainer extends UIContainer implements UIPopupCompon
     uiPopup.setShow(true) ;
     uiPopup.setResizable(true) ;
   }
-  
+
   public void setComponentDisplay(String nodeTypeName) throws Exception {
     nodeTypeName_ = nodeTypeName ;
     Node currentNode = getAncestorOfType(UIJCRExplorer.class).getCurrentNode() ;
@@ -62,8 +62,8 @@ public class UIAddLanguageContainer extends UIContainer implements UIPopupCompon
     uiDialogForm.setStoredPath(currentNode.getPath()) ;
     addChild(uiDialogForm) ;
   }
-  
+
   public void activate() throws Exception {}
-  
+
   public void deActivate() throws Exception {}
 }

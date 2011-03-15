@@ -32,15 +32,15 @@ import org.exoplatform.webui.core.lifecycle.UIContainerLifecycle;
     lifecycle = UIContainerLifecycle.class
 )
 public class UIUploadManager extends UIContainer implements UIPopupComponent {
-  
+
   final static public String EXTARNAL_METADATA_POPUP = "AddMetadataPopup" ;
   final static public String SAMENAME_POPUP = "SameNamePopup" ;
-  
+
   public UIUploadManager() throws Exception {
     addChild(UIUploadForm.class, null, null);
     addChild(UIUploadContainer.class, null, null).setRendered(false);
   }
-  
+
   public UIPopupWindow initPopupTaxonomy(String id) throws Exception {
     UIPopupWindow uiPopup = getChildById(id);
     if (uiPopup == null) {
@@ -51,7 +51,7 @@ public class UIUploadManager extends UIContainer implements UIPopupComponent {
     uiPopup.setResizable(true);
     return uiPopup;
   }
-  
+
   public UIPopupWindow initPopupWhenHaveSameName() throws Exception {
     UIPopupWindow uiPopup = getChildById(SAMENAME_POPUP);
     if (uiPopup == null) {
@@ -61,15 +61,15 @@ public class UIUploadManager extends UIContainer implements UIPopupComponent {
     uiPopup.setShow(false);
     uiPopup.setResizable(true);
     return uiPopup;
-  }  
-  
+  }
+
   public void activate() throws Exception {
     UIUploadForm uiUploadForm = getChild(UIUploadForm.class);
     uiUploadForm.initFieldInput();
   }
 
   public void deActivate() throws Exception {}
-  
+
   public void initMetadataPopup() throws Exception {
     removeChildById(EXTARNAL_METADATA_POPUP) ;
     UIPopupWindow uiPopup = addChild(UIPopupWindow.class, null, EXTARNAL_METADATA_POPUP) ;

@@ -57,7 +57,7 @@ import org.exoplatform.webui.event.EventListener;
  * Created by The eXo Platform SARL
  * Author : Dang Van Minh
  *          minh.dang@exoplatform.com
- * Oct 23, 2009  
+ * Oct 23, 2009
  * 4:01:53 AM
  */
 @ComponentConfig(
@@ -69,18 +69,17 @@ import org.exoplatform.webui.event.EventListener;
     }
 )
 public class UISavedSearches extends UIComponent {
-  
+
   public final static String ACTION_TAXONOMY = "exo:taxonomyAction";
-  public final static String EXO_TARGETPATH = "exo:targetPath"; 
+  public final static String EXO_TARGETPATH = "exo:targetPath";
   public final static String EXO_TARGETWORKSPACE = "exo:targetWorkspace";
-  
-  private List<Node> sharedQueries_ = new ArrayList<Node>();  
+
+  private List<Node> sharedQueries_ = new ArrayList<Node>();
   private List<Query> privateQueries = new ArrayList<Query>();
   private String queryPath;
   public UISavedSearches() throws Exception {
-    // TODO Auto-generated constructor stub
   }
-  
+
   public List<Object> queryList() throws Exception {
     List<Object> objectList = new ArrayList<Object>();
     if(hasSharedQueries()) {
@@ -95,74 +94,74 @@ public class UISavedSearches extends UIComponent {
     }
     return objectList;
   }
-  
-  
+
+
   public String getCurrentUserId() { return Util.getPortalRequestContext().getRemoteUser();}
-  
+
   public boolean hasQueries() throws Exception {
     QueryService queryService = getApplicationComponent(QueryService.class);
     try {
-      privateQueries = queryService.getQueries(getCurrentUserId(), 
+      privateQueries = queryService.getQueries(getCurrentUserId(),
           getRepositoryName(), SessionProviderFactory.createSessionProvider());
-      return !privateQueries.isEmpty();    
+      return !privateQueries.isEmpty();
     } catch(AccessDeniedException ace) {
       return privateQueries.isEmpty();
     }
   }
-  
+
   public List<Query> getQueries() throws Exception { return privateQueries; }
-  
-  public boolean hasSharedQueries() throws Exception {    
+
+  public boolean hasSharedQueries() throws Exception {
     PortletRequestContext pcontext = (PortletRequestContext)WebuiRequestContext.getCurrentInstance();
     QueryService queryService = getApplicationComponent(QueryService.class);
-    String userId = pcontext.getRemoteUser();    
-    SessionProvider provider = SessionProviderFactory.createSystemProvider();    
+    String userId = pcontext.getRemoteUser();
+    SessionProvider provider = SessionProviderFactory.createSystemProvider();
     sharedQueries_ = queryService.getSharedQueries(userId, getRepositoryName(),provider);
     return !sharedQueries_.isEmpty();
   }
-  
-  public List<Node> getSharedQueries() { return sharedQueries_; }  
-  
+
+  public List<Node> getSharedQueries() { return sharedQueries_; }
+
   public void setQueryPath(String queryPath) throws Exception {
-    this.queryPath = queryPath;    
+    this.queryPath = queryPath;
   }
-  
+
   public String getQueryPath() throws Exception {
     return this.queryPath;
   }
-  
+
   private String getRepositoryName() {
     return getAncestorOfType(UIJCRExplorer.class).getRepositoryName();
-  }    
-  
+  }
+
   static public class ExecuteActionListener extends EventListener<UISavedSearches> {
     public void execute(Event<UISavedSearches> event) throws Exception {
       UISavedSearches uiSavedSearches = event.getSource();
-      UIJCRExplorer uiExplorer = uiSavedSearches.getAncestorOfType(UIJCRExplorer.class);      
+      UIJCRExplorer uiExplorer = uiSavedSearches.getAncestorOfType(UIJCRExplorer.class);
       String queryPath = event.getRequestContext().getRequestParameter(OBJECTID);
       uiSavedSearches.setQueryPath(queryPath);
-           
+
       uiExplorer.setPathToAddressBar(Text.unescapeIllegalJcrChars(
                                                            uiExplorer.filterPath(queryPath)));
-      String wsName = uiSavedSearches.getAncestorOfType(UIJCRExplorer.class).getCurrentWorkspace();      
+      String wsName = uiSavedSearches.getAncestorOfType(UIJCRExplorer.class).getCurrentWorkspace();
       UIApplication uiApp = uiSavedSearches.getAncestorOfType(UIApplication.class);
       QueryService queryService = uiSavedSearches.getApplicationComponent(QueryService.class);
       UIComponent uiSearch = uiExplorer.getChild(UIWorkingArea.class).getChild(UIDocumentWorkspace.class);
       UISearchResult uiSearchResult = ((UIDocumentWorkspace)uiSearch).getChild(UISearchResult.class);
       QueryResult queryResult = null;
-      try {        
+      try {
         queryResult = queryService.execute(queryPath, wsName, uiExplorer.getRepositoryName(),
             SessionProviderFactory.createSystemProvider(), uiSavedSearches.getCurrentUserId());
       } catch(Exception e) {
-        uiApp.addMessage(new ApplicationMessage("UISearchResult.msg.query-invalid", null, 
+        uiApp.addMessage(new ApplicationMessage("UISearchResult.msg.query-invalid", null,
                                                 ApplicationMessage.WARNING));
         // return;
       } finally {
         if(queryResult == null || queryResult.getNodes().getSize() ==0) {
-          // uiApp.addMessage(new ApplicationMessage("UISavedQuery.msg.not-result-found", null)); 
+          // uiApp.addMessage(new ApplicationMessage("UISavedQuery.msg.not-result-found", null));
           // event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
           // return;
-        }        
+        }
         uiSearchResult.clearAll();
         uiSearchResult.setQueryResults(queryResult);
         uiSearchResult.updateGrid(true);
@@ -170,7 +169,7 @@ public class UISavedSearches extends UIComponent {
       ((UIDocumentWorkspace)uiSearch).setRenderedChild(UISearchResult.class);
     }
   }
-  
+
   static public class AdvanceSearchActionListener extends EventListener<UISavedSearches> {
     public void execute(Event<UISavedSearches> event) throws Exception {
       UIJCRExplorer uiJCRExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class);
@@ -189,12 +188,12 @@ public class UISavedSearches extends UIComponent {
             for (Node actionNode : listAction) {
               if (actionNode.isNodeType(ACTION_TAXONOMY)) {
                 String searchPath = actionNode.getProperty(EXO_TARGETPATH).getString();
-                String searchWorkspace = actionNode.getProperty(EXO_TARGETWORKSPACE).getString();              
+                String searchWorkspace = actionNode.getProperty(EXO_TARGETWORKSPACE).getString();
                 uiJCRExplorer.setSelectNode(searchWorkspace, searchPath);
                 uiJCRExplorer.setCurrentStatePath(searchPath);
                 currentNodePath = uiJCRExplorer.getCurrentNode().getPath();
                 ManageDriveService manageDriveService = uiJCRExplorer.getApplicationComponent(ManageDriveService.class);
-                List<DriveData> driveList = 
+                List<DriveData> driveList =
                   manageDriveService.getAllDrives(uiJCRExplorer.getRepositoryName());
                 for (DriveData drive : driveList) {
                   if (searchWorkspace.equals(drive.getWorkspace())
@@ -202,7 +201,7 @@ public class UISavedSearches extends UIComponent {
                     uiJCRExplorer.setDriveData(drive);
                     break;
                   }
-                }              
+                }
                 uiJCRExplorer.updateAjax(event);
                 break;
               }
@@ -217,7 +216,7 @@ public class UISavedSearches extends UIComponent {
       event.getRequestContext().addUIComponentToUpdateByAjax(UIPopupContainer);
     }
   }
-  
+
   static public class SavedQueriesActionListener extends EventListener<UISavedSearches> {
     public void execute(Event<UISavedSearches> event) throws Exception {
       UIJCRExplorer uiJCRExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class);
@@ -229,6 +228,6 @@ public class UISavedSearches extends UIComponent {
       UIPopupContainer.activate(uiSavedQuery, 700, 400);
       event.getRequestContext().addUIComponentToUpdateByAjax(UIPopupContainer);
     }
-  }  
-  
+  }
+
 }

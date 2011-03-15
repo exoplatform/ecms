@@ -52,7 +52,7 @@ public class CmisContentReader extends ContentReaderInterceptor
 
    /**
     * Constructor.
-    * 
+    *
     * @param storage
     *           Storage
     */
@@ -63,69 +63,58 @@ public class CmisContentReader extends ContentReaderInterceptor
       this.contentEntryAdapter = new ContentEntryAdapter();
    }
 
-   /**
-    * @see org.xcmis.search.content.interceptors.ContentReaderInterceptor#visitChildEntriesCommand(org.xcmis.search.content.command.InvocationContext,
-    *      org.xcmis.search.content.command.read.GetChildEntriesCommand)
-    */
+  /**
+   * @see org.xcmis.search.content.interceptors.ContentReaderInterceptor#visitChildEntriesCommand(org.xcmis.search.content.command.InvocationContext,
+   *      org.xcmis.search.content.command.read.GetChildEntriesCommand)
+   */
    @Override
-   public Object visitChildEntriesCommand(InvocationContext ctx, GetChildEntriesCommand command) throws Throwable
-   {
-      List<ContentEntry> childs = new ArrayList<ContentEntry>();
-      ObjectData parent = storage.getObjectById(command.getParentUuid());
-      if (parent instanceof FolderData)
-      {
-         ItemsIterator<ObjectData> childDatas = ((FolderData)parent).getChildren(null);
-         while (childDatas.hasNext())
-         {
-            childs.add(contentEntryAdapter.createEntry(childDatas.next()));
-
-         }
+  public Object visitChildEntriesCommand(InvocationContext ctx, GetChildEntriesCommand command) throws Throwable {
+    List<ContentEntry> childs = new ArrayList<ContentEntry>();
+    ObjectData parent = storage.getObjectById(command.getParentUuid());
+    if (parent instanceof FolderData) {
+      ItemsIterator<ObjectData> childDatas = ((FolderData) parent).getChildren(null);
+      while (childDatas.hasNext()) {
+        childs.add(contentEntryAdapter.createEntry(childDatas.next()));
 
       }
-      return childs;
-   }
 
-   /**
-    * @see org.xcmis.search.content.interceptors.ContentReaderInterceptor#visitGetContentEntryCommand(org.xcmis.search.content.command.InvocationContext,
-    *      org.xcmis.search.content.command.read.GetContentEntryCommand)
-    */
+    }
+    return childs;
+  }
+
+  /**
+   * @see org.xcmis.search.content.interceptors.ContentReaderInterceptor#visitGetContentEntryCommand(org.xcmis.search.content.command.InvocationContext,
+   *      org.xcmis.search.content.command.read.GetContentEntryCommand)
+   */
    @Override
-   public Object visitGetContentEntryCommand(InvocationContext ctx, GetContentEntryCommand command) throws Throwable
-   {
+  public Object visitGetContentEntryCommand(InvocationContext ctx, GetContentEntryCommand command) throws Throwable {
 
-      //TODO delegate exception handling 
-      ObjectData entry;
-      try
-      {
-         entry = storage.getObjectById(command.getEntryUuid());
+    // TODO delegate exception handling
+    ObjectData entry;
+    try {
+      entry = storage.getObjectById(command.getEntryUuid());
+    } catch (ObjectNotFoundException e) {
+      if (LOG.isDebugEnabled()) {
+        LOG.debug(e.getLocalizedMessage(), e);
       }
-      catch (ObjectNotFoundException e)
-      {
-         if (LOG.isDebugEnabled())
-         {
-            LOG.debug(e.getLocalizedMessage(), e);
-         }
-         return null;
+      return null;
+    } catch (NotSupportedNodeTypeException e) {
+      if (LOG.isDebugEnabled()) {
+        LOG.debug(e.getLocalizedMessage(), e);
       }
-      catch (NotSupportedNodeTypeException e)
-      {
-         if (LOG.isDebugEnabled())
-         {
-            LOG.debug(e.getLocalizedMessage(), e);
-         }
-         return null;
-      }
-      return contentEntryAdapter.createEntry(entry);
-   }
+      return null;
+    }
+    return contentEntryAdapter.createEntry(entry);
+  }
 
-   /**
-    * @see org.xcmis.search.content.interceptors.ContentReaderInterceptor#visitGetUnfilledEntriesCommand(org.xcmis.search.content.command.InvocationContext,
-    *      org.xcmis.search.content.command.read.GetUnfilledEntriesCommand)
-    */
-   @Override
-   public Object visitGetUnfiledEntriesCommand(InvocationContext ctx, GetUnfiledEntriesCommand command)
-      throws Throwable
-   {
-      return storage.getUnfiledObjectsId();
-   }
+  /**
+   * @see org.xcmis.search.content.interceptors.ContentReaderInterceptor#visitGetUnfilledEntriesCommand(
+   *      org.xcmis.search.content.command.InvocationContext,
+   *      org.xcmis.search.content.command.read.GetUnfilledEntriesCommand)
+   */
+  @Override
+  public Object visitGetUnfiledEntriesCommand(InvocationContext ctx,
+                                              GetUnfiledEntriesCommand command) throws Throwable {
+    return storage.getUnfiledObjectsId();
+  }
 }

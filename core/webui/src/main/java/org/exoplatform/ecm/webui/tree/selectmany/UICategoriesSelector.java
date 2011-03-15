@@ -40,7 +40,7 @@ import org.exoplatform.webui.event.EventListener;
  * Created by The eXo Platform SAS
  * Author : DANG TAN DUNG
  *          dzungdev@gmail.com"
- * Aug 11, 2008  
+ * Aug 11, 2008
  */
 @ComponentConfigs(
     {
@@ -58,14 +58,14 @@ public class UICategoriesSelector extends UIBaseNodeTreeSelector implements UIPo
 //  final static public String[] ACTIONS = {"Close"} ;
   private List<String> existedCategoryList = new ArrayList<String>() ;
   private String pathTaxonomy = "" ;
-  
+
   public UICategoriesSelector() throws Exception {
     addChild(UIBreadcumbs.class, "BreadcumbCategories", "BreadcumbCategories") ;
     addChild(UINodeTreeBuilder.class, null, null) ;
     addChild(UICategoriesSelectPanel.class, null, null) ;
     addChild(UISelectedCategoriesGrid.class, null, null).setRendered(false) ;
   }
-  
+
 //  public String[] getActions() { return ACTIONS  ; }
 
   public void init() throws Exception {
@@ -80,7 +80,7 @@ public class UICategoriesSelector extends UIBaseNodeTreeSelector implements UIPo
 
     UICategoriesSelectPanel uiCategoriesSelectPanel = getChild(UICategoriesSelectPanel.class) ;
     uiCategoriesSelectPanel.updateGrid() ;
-    
+
     UISelectedCategoriesGrid categoriesGrid = getChild(UISelectedCategoriesGrid.class) ;
     categoriesGrid.setSelectedCategories(existedCategoryList) ;
     if (existedCategoryList.size() > 0) {
@@ -93,14 +93,14 @@ public class UICategoriesSelector extends UIBaseNodeTreeSelector implements UIPo
     UICategoriesSelectPanel uiCategoriesSelectPanel = getChild(UICategoriesSelectPanel.class) ;
     uiCategoriesSelectPanel.setParentNode(currentNode) ;
     uiCategoriesSelectPanel.updateGrid() ;
-    
+
     UIBreadcumbs uiBreadcumbs = getChild(UIBreadcumbs.class) ;
     List<LocalPath> listLocalPath = new ArrayList<LocalPath>() ;
     String path = currentNode.getPath().trim() ;
-    
+
     if (path.startsWith(pathTaxonomy)) {
       path = path.substring(pathTaxonomy.length(), path.length());
-    }    
+    }
     String[] arrayPath = path.split("/");
     if (arrayPath.length > 0) {
       for (int i = 0; i < arrayPath.length; i++) {
@@ -118,17 +118,17 @@ public class UICategoriesSelector extends UIBaseNodeTreeSelector implements UIPo
   }
 
   public void setExistedCategoryList(List<String> existedCategoryList) {
-    this.existedCategoryList = existedCategoryList ; 
+    this.existedCategoryList = existedCategoryList ;
   }
-  
-  public void activate() throws Exception {    
+
+  public void activate() throws Exception {
   }
-  
+
   public void deActivate() throws Exception {
   }
-  
-  public void changeGroup(String groupId, Object context) throws Exception {    
-    String stringPath = pathTaxonomy ;    
+
+  public void changeGroup(String groupId, Object context) throws Exception {
+    String stringPath = pathTaxonomy ;
     UIBreadcumbs uiBreadcumb = getChild(UIBreadcumbs.class) ;
     if (groupId == null) groupId = "" ;
     List<LocalPath> listLocalPath = uiBreadcumb.getPath() ;
@@ -155,17 +155,17 @@ public class UICategoriesSelector extends UIBaseNodeTreeSelector implements UIPo
       changeNode(stringPath, context) ;
     }
   }
-  
+
   private void changeNode(String stringPath, Object context) throws Exception {
     UINodeTreeBuilder builder = getChild(UINodeTreeBuilder.class) ;
     builder.changeNode(stringPath, context) ;
-    UIBaseNodeTreeSelector nodeTreeSelector = builder.getAncestorOfType(UIBaseNodeTreeSelector.class) ;      
+    UIBaseNodeTreeSelector nodeTreeSelector = builder.getAncestorOfType(UIBaseNodeTreeSelector.class) ;
     UICategoriesSelector uiCategoriesSelector = nodeTreeSelector.getChild(UICategoriesSelector.class) ;
     if (uiCategoriesSelector != null) uiCategoriesSelector.setRenderedChild(UICategoriesSelectPanel.class) ;
   }
-  
+
   static public class CloseActionListener extends EventListener<UICategoriesSelector> {
-    public void execute(Event<UICategoriesSelector> event) throws Exception {      
+    public void execute(Event<UICategoriesSelector> event) throws Exception {
       UICategoriesSelector uiCategoriesSelector = event.getSource() ;
       UIPopupWindow uiPopup = uiCategoriesSelector.getParent() ;
       if(uiPopup != null) {
@@ -177,13 +177,13 @@ public class UICategoriesSelector extends UIBaseNodeTreeSelector implements UIPo
       uiCategoriesSelector.deActivate() ;
     }
   }
-  
+
   static  public class SelectPathActionListener extends EventListener<UIBreadcumbs> {
     public void execute(Event<UIBreadcumbs> event) throws Exception {
       UIBreadcumbs uiBreadcumbs = event.getSource()  ;
       UICategoriesSelector uiCategoriesSelector = uiBreadcumbs.getParent()  ;
       String objectId =  event.getRequestContext().getRequestParameter(OBJECTID)  ;
-      uiBreadcumbs.setSelectPath(objectId) ;    
+      uiBreadcumbs.setSelectPath(objectId) ;
       String selectGroupId = uiBreadcumbs.getSelectLocalPath().getId()  ;
       uiCategoriesSelector.changeGroup(selectGroupId, event.getRequestContext())  ;
       event.getRequestContext().addUIComponentToUpdateByAjax(uiCategoriesSelector)  ;

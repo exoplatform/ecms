@@ -25,7 +25,7 @@ import javax.jcr.Node;
  * Created by The eXo Platform SARL
  * Author : Pham Xuan Hoa
  *          hoa.pham@exoplatform.com
- * Feb 26, 2008  
+ * Feb 26, 2008
  */
 @Deprecated
 /*
@@ -35,14 +35,14 @@ public class LockTokenHolderService {
 
   private final HashMap<String, String> lockTokenHolder = new HashMap<String,String>();
 
-  public void keepLockToken(Node node, String lockToken) throws Exception{        
+  public void keepLockToken(Node node, String lockToken) throws Exception{
     lockTokenHolder.put(createKey(node),lockToken);
   }
 
-  public String getLockToken(Node node) throws Exception{    
+  public String getLockToken(Node node) throws Exception{
     return lockTokenHolder.get(createKey(node));
-  }  
-  
+  }
+
   private String createKey(Node node) throws Exception {
     StringBuffer buffer = new StringBuffer();
     buffer.append(node.getSession().getRepository().hashCode())

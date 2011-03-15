@@ -45,12 +45,12 @@ import org.exoplatform.webui.form.UIFormSelectBox;
  * Author : Dang Van Minh
  *          minh.dang@exoplatform.com
  * Nov 8, 2006
- * 9:41:47 AM 
+ * 9:41:47 AM
  */
 @ComponentConfig(
     lifecycle = UIFormLifecycle.class,
     template = "app:/groovy/webui/component/explorer/UIFormWithoutAction.gtmpl",
-    events = @EventConfig(listeners = UIActionTypeForm.ChangeActionTypeActionListener.class) 
+    events = @EventConfig(listeners = UIActionTypeForm.ChangeActionTypeActionListener.class)
 )
 public class UIActionTypeForm extends UIForm {
 
@@ -74,7 +74,7 @@ public class UIActionTypeForm extends UIForm {
     return actionService.getCreatedActionTypes(repository).iterator();
   }
 
-  public void setDefaultActionType() throws Exception{    
+  public void setDefaultActionType() throws Exception{
     UIJCRExplorer uiExplorer = getAncestorOfType(UIJCRExplorer.class) ;
     UIActionContainer uiActionContainer = getParent() ;
     Node currentNode = uiExplorer.getCurrentNode() ;
@@ -82,10 +82,10 @@ public class UIActionTypeForm extends UIForm {
     uiActionForm.createNewAction(currentNode, typeList_.get(0).getValue(), true) ;
     uiActionForm.setWorkspace(currentNode.getSession().getWorkspace().getName()) ;
     uiActionForm.setStoredPath(currentNode.getPath()) ;
-  }  
+  }
 
   public void update() throws Exception {
-    Iterator<NodeType> actions = getCreatedActionTypes(); 
+    Iterator<NodeType> actions = getCreatedActionTypes();
     List<String> actionList = new ArrayList<String>();
     while(actions.hasNext()){
       String action =  actions.next().getName();
@@ -100,7 +100,7 @@ public class UIActionTypeForm extends UIForm {
         typeList_.add(new SelectItemOption<String>(action, action));
       } catch (Exception e){
         continue;
-      }  
+      }
     }
     getUIFormSelectBox(ACTION_TYPE).setOptions(typeList_) ;
     defaultActionType_ = typeList_.get(0).getValue();
@@ -118,11 +118,11 @@ public class UIActionTypeForm extends UIForm {
       String userName = Util.getPortalRequestContext().getRemoteUser() ;
       UIApplication uiApp = uiActionType.getAncestorOfType(UIApplication.class) ;
       try {
-        String templatePath = 
+        String templatePath =
           templateService.getTemplatePathByUser(true, actionType, userName) ;
         if(templatePath == null) {
           Object[] arg = { actionType } ;
-          uiApp.addMessage(new ApplicationMessage("UIActionForm.msg.access-denied", arg, 
+          uiApp.addMessage(new ApplicationMessage("UIActionForm.msg.access-denied", arg,
                                                   ApplicationMessage.WARNING)) ;
           event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
           uiActionType.getUIFormSelectBox(
@@ -136,7 +136,7 @@ public class UIActionTypeForm extends UIForm {
         }
       } catch(PathNotFoundException path) {
         Object[] arg = { actionType } ;
-        uiApp.addMessage(new ApplicationMessage("UIActionForm.msg.not-support", arg, 
+        uiApp.addMessage(new ApplicationMessage("UIActionForm.msg.not-support", arg,
                                                 ApplicationMessage.WARNING)) ;
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
         uiActionType.getUIFormSelectBox(
@@ -146,7 +146,7 @@ public class UIActionTypeForm extends UIForm {
         uiActionForm.createNewAction(currentNode, uiActionType.defaultActionType_, true) ;
         uiActionContainer.setRenderSibling(UIActionContainer.class) ;
         event.getRequestContext().addUIComponentToUpdateByAjax(uiActionContainer) ;
-      } 
+      }
       UIActionContainer uiActionContainer = uiActionType.getParent() ;
       UIActionForm uiActionForm = uiActionContainer.getChild(UIActionForm.class) ;
       uiActionForm.createNewAction(currentNode, actionType, true) ;

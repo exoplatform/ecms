@@ -63,7 +63,7 @@ import org.exoplatform.webui.event.EventListener;
  * Created by The eXo Platform SARL
  * Author : Dang Van Minh
  *          minh.dang@exoplatform.com
- * Oct 21, 2009  
+ * Oct 21, 2009
  * 9:58:02 AM
  */
 @ComponentConfig (
@@ -74,11 +74,11 @@ import org.exoplatform.webui.event.EventListener;
     }
 )
 public class UIDrivesArea extends UIContainer {
-  
-  final public static String FIELD_SELECTREPO = "selectRepo" ; 
+
+  final public static String FIELD_SELECTREPO = "selectRepo" ;
   private String repoName_;
   private boolean firstVisit = true;
-  
+
   public UIDrivesArea() throws Exception {
   }
 
@@ -97,9 +97,9 @@ public class UIDrivesArea extends UIContainer {
       return res.getString("Drives.label." + id.replace(" ", ""));
     } catch (MissingResourceException ex) {
       return id;
-    }    
+    }
   }
-  
+
   public String getGroupLabel(String groupId) {
     RequestContext context = RequestContext.getCurrentInstance();
     ResourceBundle res = context.getApplicationResourceBundle();
@@ -109,10 +109,10 @@ public class UIDrivesArea extends UIContainer {
       return groupId.replace(".", " / ");
     }
   }
-  
+
   public List<String> getRepositoryList() {
     RepositoryService repositoryService = getApplicationComponent(RepositoryService.class);
-    List<String> repositories = new ArrayList<String>();    
+    List<String> repositories = new ArrayList<String>();
     RepositoryEntry re = null;
     try {
       re = repositoryService.getCurrentRepository().getConfiguration();
@@ -121,14 +121,14 @@ public class UIDrivesArea extends UIContainer {
     repositories.add(re.getName());
     return repositories;
   }
-  
+
   public String getPortalName() {
     ExoContainer container = ExoContainerContext.getCurrentContainer();
     PortalContainerInfo containerInfo = (PortalContainerInfo) container
         .getComponentInstanceOfType(PortalContainerInfo.class);
-    return containerInfo.getContainerName(); 
+    return containerInfo.getContainerName();
   }
-  
+
   public String getRestName() {
     PortalContainerConfig portalContainerConfig = this.getApplicationComponent(PortalContainerConfig.class);
     return portalContainerConfig.getRestContextName(this.getPortalName());
@@ -141,40 +141,40 @@ public class UIDrivesArea extends UIContainer {
     }
     return repoName_;
   }
-  
-  public void setRepository(String repoName) {repoName_ = repoName; }  
-  
+
+  public void setRepository(String repoName) {repoName_ = repoName; }
+
   public List<DriveData> mainDrives() throws Exception {
-    ManageDriveService driveService = getApplicationComponent(ManageDriveService.class);      
-    List<String> userRoles = Utils.getMemberships();    
+    ManageDriveService driveService = getApplicationComponent(ManageDriveService.class);
+    List<String> userRoles = Utils.getMemberships();
     String userId = Util.getPortalRequestContext().getRemoteUser();
     return driveService.getMainDrives(getRepository(), userId, userRoles);
   }
-  
+
   public List<DriveData> groupDrives() throws Exception {
     ManageDriveService driveService = getApplicationComponent(ManageDriveService.class);
     List<String> groups = Utils.getGroups();
-    List<String> userRoles = Utils.getMemberships();    
+    List<String> userRoles = Utils.getMemberships();
     String userId = Util.getPortalRequestContext().getRemoteUser();
     return driveService.getGroupDrives(getRepository(), userId, userRoles, groups);
   }
-  
+
   public List<DriveData> personalDrives() throws Exception {
-    ManageDriveService driveService = getApplicationComponent(ManageDriveService.class);      
-    List<String> userRoles = Utils.getMemberships();    
+    ManageDriveService driveService = getApplicationComponent(ManageDriveService.class);
+    List<String> userRoles = Utils.getMemberships();
     String userId = Util.getPortalRequestContext().getRemoteUser();
     return driveService.getPersonalDrives(getRepository(), userId, userRoles);
   }
-  
+
   static  public class SelectRepoActionListener extends EventListener<UIDrivesArea> {
     public void execute(Event<UIDrivesArea> event) throws Exception {
       String repoName = event.getRequestContext().getRequestParameter(OBJECTID);
       UIDrivesArea uiDrivesArea = event.getSource();
-      uiDrivesArea.setRepository(repoName);  
+      uiDrivesArea.setRepository(repoName);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiDrivesArea);
     }
-  }  
-  
+  }
+
   static  public class SelectDriveActionListener extends EventListener<UIDrivesArea> {
     public void execute(Event<UIDrivesArea> event) throws Exception {
       UIDrivesArea uiDrivesArea = event.getSource();
@@ -189,7 +189,7 @@ public class UIDrivesArea extends UIContainer {
       for(String role : Utils.getMemberships()){
         for(String viewName : drive.getViews().split(",")) {
           if(!viewList.contains(viewName.trim())) {
-            Node viewNode = 
+            Node viewNode =
               uiDrivesArea.getApplicationComponent(ManageViewService.class).getViewByName(
                   viewName.trim(), repoName,SessionProviderFactory.createSystemProvider());
             String permiss = viewNode.getProperty("exo:accessPermissions").getString();
@@ -214,7 +214,7 @@ public class UIDrivesArea extends UIContainer {
       drive.setViews(viewListStr);
       String homePath = drive.getHomePath();
       if(homePath.contains("${userId}")) homePath = homePath.replace("${userId}", userId);
-      UIJCRExplorerPortlet uiParent = uiDrivesArea.getAncestorOfType(UIJCRExplorerPortlet.class);  
+      UIJCRExplorerPortlet uiParent = uiDrivesArea.getAncestorOfType(UIJCRExplorerPortlet.class);
       uiParent.setFlagSelect(true);
       UIJcrExplorerContainer explorerContainer = uiParent.getChild(UIJcrExplorerContainer.class);
       UIJCRExplorer uiJCRExplorer = explorerContainer.getChild(UIJCRExplorer.class);
@@ -223,36 +223,36 @@ public class UIDrivesArea extends UIContainer {
       pref.setShowSideBar(drive.getViewSideBar());
       pref.setShowNonDocumentType(drive.getViewNonDocument());
       pref.setShowPreferenceDocuments(drive.getViewPreferences());
-      pref.setAllowCreateFoder(drive.getAllowCreateFolders()); 
+      pref.setAllowCreateFoder(drive.getAllowCreateFolders());
       pref.setShowHiddenNode(drive.getShowHiddenNode());
 //      uiJCRExplorer.setPreferences(pref);
       uiJCRExplorer.setDriveData(drive);
       uiJCRExplorer.setIsReferenceNode(false);
       uiJCRExplorer.setPreferencesSaved(true);
-      
-      SessionProvider provider = SessionProviderFactory.createSessionProvider();                  
+
+      SessionProvider provider = SessionProviderFactory.createSessionProvider();
       ManageableRepository repository = rservice.getRepository(uiDrivesArea.getRepository());
       try {
         Session session = provider.getSession(drive.getWorkspace(),repository);
         // check if it exists
         // we assume that the path is a real path
-        session.getItem(homePath);        
+        session.getItem(homePath);
       } catch(AccessDeniedException ace) {
         Object[] args = { driveName };
-        uiApp.addMessage(new ApplicationMessage("UIDrivesBrowser.msg.access-denied", args, 
+        uiApp.addMessage(new ApplicationMessage("UIDrivesBrowser.msg.access-denied", args,
             ApplicationMessage.WARNING));
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
-        return;        
+        return;
       } catch(NoSuchWorkspaceException nosuchWS) {
         Object[] args = { driveName };
-        uiApp.addMessage(new ApplicationMessage("UIDrivesBrowser.msg.workspace-not-exist", args, 
+        uiApp.addMessage(new ApplicationMessage("UIDrivesBrowser.msg.workspace-not-exist", args,
             ApplicationMessage.WARNING));
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
-        return;        
+        return;
       } catch(Exception e) {
         JCRExceptionManager.process(uiApp, e);
         return;
-      } 
+      }
       uiJCRExplorer.clearNodeHistory(homePath);
       uiJCRExplorer.setRepositoryName(repoName);
       uiJCRExplorer.setWorkspaceName(drive.getWorkspace());

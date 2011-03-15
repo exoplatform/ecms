@@ -21,17 +21,17 @@ import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.core.lifecycle.UIContainerLifecycle;
 
 /*
- * Created by The eXo Platform SAS 
- * Author : Anh Do Ngoc 
+ * Created by The eXo Platform SAS
+ * Author : Anh Do Ngoc
  * anh.do@exoplatform.com
  * Oct 31, 2008
  */
 @ComponentConfig(lifecycle = UIContainerLifecycle.class)
 public class UIPortletConfig extends UIContainer {
-  
+
   /**
    * Instantiates a new uI portlet config.
-   * 
+   *
    * @throws Exception the exception
    */
   public UIPortletConfig() throws Exception {

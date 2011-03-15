@@ -27,32 +27,32 @@ import org.exoplatform.commons.utils.MimeTypeResolver;
  * Created by The eXo Platform SARL
  * Author : Hoang Van Hung
  *          hunghvit@gmail.com
- * Nov 2, 2009  
+ * Nov 2, 2009
  */
 public class DMSMimeTypeResolver {
-  
+
   private Properties dmsmimeTypes       = new Properties();
 
   private static MimeTypeResolver mimeTypes       = new MimeTypeResolver();
 
   private static DMSMimeTypeResolver dmsMimeTypeResolver;
-  
-  
+
+
   private DMSMimeTypeResolver() throws IOException {
     dmsmimeTypes.load(getClass().getResourceAsStream("/conf/mimetype/mimetypes.properties"));
   }
-  
+
   public static DMSMimeTypeResolver getInstance() throws IOException {
     if (dmsMimeTypeResolver == null) {
       synchronized (DMSMimeTypeResolver.class) {
         if (dmsMimeTypeResolver == null) {
-          dmsMimeTypeResolver = new DMSMimeTypeResolver();    
+          dmsMimeTypeResolver = new DMSMimeTypeResolver();
         }
       }
     }
     return dmsMimeTypeResolver;
   }
-  
+
   public String getMimeType(String filename) {
     String ext = filename.substring(filename.lastIndexOf(".") + 1);
     if (ext.equals("")) {
@@ -80,6 +80,6 @@ public class DMSMimeTypeResolver {
     }
     return ext;
   }
-  
-  
+
+
 }

@@ -45,39 +45,39 @@ import org.exoplatform.webui.event.EventListener;
     type = UIGrid.class, id = "UITaskListOfProcess",
     template = "app:/groovy/webui/component/UIECMGrid.gtmpl"
   ),
-  @ComponentConfig(    
-    template = "app:/groovy/webui/component/UITabPaneWithAction.gtmpl", 
+  @ComponentConfig(
+    template = "app:/groovy/webui/component/UITabPaneWithAction.gtmpl",
     events = {
         @EventConfig(listeners = UITaskListOfProcess.CancelActionListener.class)
     }
   )
 })
 public class UITaskListOfProcess extends UIContainer {
-  
+
   private static String[] TASK_BEAN_FIELD = {"id", "taskName", "actorId", "end"} ;
   private static String[] ACTIONS = {"Cancel"};
-  
-  public UITaskListOfProcess() throws Exception {    
-    UIGrid uiTasksGrid = addChild(UIGrid.class, "UITaskListOfProcess", "UITasksGrid");    
+
+  public UITaskListOfProcess() throws Exception {
+    UIGrid uiTasksGrid = addChild(UIGrid.class, "UITaskListOfProcess", "UITasksGrid");
     uiTasksGrid.setLabel("UITasksGrid");
     uiTasksGrid.getUIPageIterator().setId("UITasksGrid") ;
     uiTasksGrid.configure("id", TASK_BEAN_FIELD, null) ;
   }
-  
+
   public String[] getActions() { return ACTIONS; }
-  
+
   public void updateTasksGrid(String id) throws Exception {
-    WorkflowServiceContainer workflowServiceContainer = 
+    WorkflowServiceContainer workflowServiceContainer =
       getApplicationComponent(WorkflowServiceContainer.class);
     UIGrid uiGrid = getChildById("UITasksGrid") ;
     List<Task> haveEndDateList = new ArrayList<Task>() ;
-    for(Task task : workflowServiceContainer.getTasks(id)) {      
+    for(Task task : workflowServiceContainer.getTasks(id)) {
       haveEndDateList.add(task);
     }
     Collections.sort(haveEndDateList, new TaskIdComparator());
     uiGrid.getUIPageIterator().setPageList(new ObjectPageList(haveEndDateList, 10)) ;
   }
-  
+
   static public class TaskIdComparator implements Comparator {
     public int compare(Object o1, Object o2) throws ClassCastException {
       String id1 = ((Task) o1).getId();
@@ -85,7 +85,7 @@ public class UITaskListOfProcess extends UIContainer {
       return id1.compareTo(id2);
     }
   }
-  
+
   static public class CancelActionListener extends EventListener<UITaskListOfProcess> {
     public void execute(Event<UITaskListOfProcess> event) throws Exception {
       UITaskListOfProcess uicomp = event.getSource();

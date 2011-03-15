@@ -27,10 +27,10 @@ import org.exoplatform.webui.core.UIComponent;
  * Created by The eXo Platform SARL
  * Author : Hoang Van Hung
  *          hunghvit@gmail.com
- * Sep 18, 2009  
+ * Sep 18, 2009
  */
 public abstract class AbstractActionComponent extends UIComponent {
- 
+
   private List<Class> lstComponentupdate = new ArrayList<Class>();
 
   public void setLstComponentupdate(List<Class> lstComponentupdate) {

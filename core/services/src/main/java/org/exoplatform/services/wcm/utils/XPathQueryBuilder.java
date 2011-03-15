@@ -20,25 +20,25 @@ package org.exoplatform.services.wcm.utils;
 
 /**
  * Created by The eXo Platform SAS
- * Author : Hoa Pham	
+ * Author : Hoa Pham
  *          hoa.pham@exoplatform.com
- * Oct 7, 2008  
+ * Oct 7, 2008
  */
-public class XPathQueryBuilder extends AbstractQueryBuilder {  
+public class XPathQueryBuilder extends AbstractQueryBuilder {
 
-  public void isNull(String propertyName, LOGICAL condition) {      
-  }  
+  public void isNull(String propertyName, LOGICAL condition) {
+  }
 
-  public void isNotNull(String propertyName, LOGICAL condition) {                
-  } 
+  public void isNotNull(String propertyName, LOGICAL condition) {
+  }
 
   public void lessThan(String propertyName, String value, LOGICAL condition) {
     comparison(propertyName,value,condition,"<");
-  } 
+  }
 
   public void greaterThan(String propName, String value, LOGICAL condition) {
     comparison(propName,value,condition,">");
-  }    
+  }
 
   public void lessThanOrEqual(String propName, String value, LOGICAL condition) {
     comparison(propName,value,condition,"<=");
@@ -50,20 +50,20 @@ public class XPathQueryBuilder extends AbstractQueryBuilder {
 
   public void equal(String propName, String value , LOGICAL condition) {
     comparison(propName,value,condition,"=");
-  } 
+  }
 
-  public void notEqual(String propName, String value, LOGICAL condition) {    
+  public void notEqual(String propName, String value, LOGICAL condition) {
     if(condition == LOGICAL.AND)
       propertiesClause.append("and @").append(propName).append(" != '").append(value).append("' ");
-    else if(condition == LOGICAL.OR) 
+    else if(condition == LOGICAL.OR)
       propertiesClause.append("or @").append(" != '").append(value).append("' ");
-    return;    
+    return;
   }
 
-  private void comparison(String propName, String value, LOGICAL condition, String symbol) {           
+  private void comparison(String propName, String value, LOGICAL condition, String symbol) {
   }
 
-  public void like(String propName, String value, LOGICAL condition) {    
+  public void like(String propName, String value, LOGICAL condition) {
   }
 
   @Override
@@ -86,7 +86,7 @@ public class XPathQueryBuilder extends AbstractQueryBuilder {
   @Override
   public String createQueryStatement() {
     return null;
-  }  
+  }
 
   @Override
   public void merge(AbstractQueryBuilder other) {
@@ -102,9 +102,9 @@ public class XPathQueryBuilder extends AbstractQueryBuilder {
 
   @Override
   public void reference(String propName, String value, LOGICAL condition) {
-  } 
-  
-  public void spellCheck(String value) {  
+  }
+
+  public void spellCheck(String value) {
   }
 
   @Override
@@ -129,5 +129,5 @@ public class XPathQueryBuilder extends AbstractQueryBuilder {
 
   @Override
   public void openGroup(LOGICAL logical) {
-  }       
+  }
 }

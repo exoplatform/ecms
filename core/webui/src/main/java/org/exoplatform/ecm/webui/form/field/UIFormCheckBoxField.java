@@ -24,7 +24,7 @@ import org.exoplatform.webui.form.UIFormInputBase;
  * Created by The eXo Platform SARL
  * Author : Nguyen Manh Cuong
  *          manhcuongpt@gmail.com
- * Jul 2, 2009  
+ * Jul 2, 2009
  */
 public class UIFormCheckBoxField extends DialogFormField{
 
@@ -36,6 +36,6 @@ public class UIFormCheckBoxField extends DialogFormField{
   public <T extends UIFormInputBase> T createUIFormInput() throws Exception {
     return null;
   }
-  
+
   public boolean isOnchange() { return "true".equalsIgnoreCase(onchange); }
 }

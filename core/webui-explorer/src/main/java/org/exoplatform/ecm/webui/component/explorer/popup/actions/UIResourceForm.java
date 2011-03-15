@@ -54,29 +54,29 @@ import org.exoplatform.webui.form.UIFormUploadInput;
 )
 
 public class UIResourceForm extends UIForm {
-  
+
   final static public String FIElD_NAME = "name" ;
   final static public String FIElD_TEXTTOMODIFY = "textToModify" ;
   final static public String FIElD_FILETOUPLOAD = "fileToUpload" ;
-  
+
   private Node contentNode_ ;
   private Property mime_ ;
-  private Session session_ ; 
-  
+  private Session session_ ;
+
   public UIResourceForm() throws Exception {
     setMultiPart(true) ;
-    addUIFormInput(new UIFormStringInput(FIElD_NAME, FIElD_NAME, null)) ;    
+    addUIFormInput(new UIFormStringInput(FIElD_NAME, FIElD_NAME, null)) ;
   }
 
   public void setContentNode(Node node, Session session) throws RepositoryException {
     session_ = session ;
-    contentNode_ = node ;    
+    contentNode_ = node ;
     mime_ = node.getProperty("jcr:mimeType") ;
-    String name = node.getParent().getName() ;    
-    getUIStringInput(FIElD_NAME).setValue(name) ;    
+    String name = node.getParent().getName() ;
+    getUIStringInput(FIElD_NAME).setValue(name) ;
     if(mime_.getString().startsWith("text")) {
       String contentText = node.getProperty("jcr:data").getString() ;
-      addUIFormInput(new UIFormTextAreaInput(FIElD_TEXTTOMODIFY, FIElD_TEXTTOMODIFY, contentText)) ;      
+      addUIFormInput(new UIFormTextAreaInput(FIElD_TEXTTOMODIFY, FIElD_TEXTTOMODIFY, contentText)) ;
     }else {
       getUIStringInput(FIElD_NAME).setEditable(false);
       UIFormUploadInput uiInput = new UIFormUploadInput(FIElD_FILETOUPLOAD, FIElD_FILETOUPLOAD);
@@ -84,9 +84,9 @@ public class UIResourceForm extends UIForm {
       addUIFormInput(uiInput) ;
     }
   }
-  
+
   public boolean isText() throws RepositoryException {return (mime_.getString().startsWith("text")) ;}
-  
+
   static  public class SaveActionListener extends EventListener<UIResourceForm> {
     public void execute(Event<UIResourceForm> event) throws Exception {
       UIResourceForm uiResourceForm = event.getSource() ;
@@ -96,17 +96,17 @@ public class UIResourceForm extends UIForm {
         String text = uiResourceForm.getUIFormTextAreaInput(FIElD_TEXTTOMODIFY).getValue() ;
         uiResourceForm.contentNode_.setProperty("jcr:data", text) ;
       }else {
-        UIFormUploadInput  fileUpload = 
-          (UIFormUploadInput)uiResourceForm.getUIInput(FIElD_FILETOUPLOAD) ; 
+        UIFormUploadInput  fileUpload =
+          (UIFormUploadInput)uiResourceForm.getUIInput(FIElD_FILETOUPLOAD) ;
         InputStream content =  fileUpload.getUploadDataAsStream() ;
         uiResourceForm.contentNode_.setProperty("jcr:data", content) ;
       }
       if(uiResourceForm.session_ != null) uiResourceForm.session_.save() ;
       else uiJCRExplorer.getSession().save() ;
-      uiResourceForm.setRenderSibling(UIDocumentInfo.class);      
+      uiResourceForm.setRenderSibling(UIDocumentInfo.class);
     }
   }
-  
+
   static  public class BackActionListener extends EventListener<UIResourceForm> {
     public void execute(Event<UIResourceForm> event) throws Exception {
       UIResourceForm uiResourceForm = event.getSource() ;

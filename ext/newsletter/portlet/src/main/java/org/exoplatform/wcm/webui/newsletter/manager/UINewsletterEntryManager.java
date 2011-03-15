@@ -69,41 +69,41 @@ import org.exoplatform.webui.form.UIFormSelectBox;
      }
  )
 public class UINewsletterEntryManager extends UIForm {
-  
+
   /** The check box input. */
   private UIFormCheckBoxInput<Boolean>  checkBoxInput;
-  
+
   /** The subscription config. */
   private NewsletterSubscriptionConfig subscriptionConfig;
-  
+
   /** The category config. */
   private NewsletterCategoryConfig categoryConfig;
-  
+
   /** The list newsletter config. */
   private List<NewsletterManagerConfig> listNewsletterConfig;
-  
+
   /** The newsletter entry handler. */
   private NewsletterEntryHandler newsletterEntryHandler ;
-  
+
   /** The PAGEITERATO r_ id. */
   private String PAGEITERATOR_ID = "NewsletterEntryManagerPageIterator";
-  
+
   /** The ui page iterator_. */
   private UIPageIterator uiPageIterator_;
 
   /**
    * Instantiates a new uI newsletter entry manager.
-   * 
+   *
    * @throws Exception the exception
    */
   public UINewsletterEntryManager () throws Exception {
     NewsletterManagerService newsletterManagerService = getApplicationComponent(NewsletterManagerService.class);
     newsletterEntryHandler = newsletterManagerService.getEntryHandler();
   }
-  
+
   /**
    * Inits the.
-   * 
+   *
    * @throws Exception the exception
    */
   @SuppressWarnings("unchecked")
@@ -113,10 +113,10 @@ public class UINewsletterEntryManager extends UIForm {
     addChild(uiPageIterator_);
     uiPageIterator_.setPageList(objPageList) ;
   }
-  
+
   /**
    * Sets the list newsletter entries.
-   * 
+   *
    * @return the list< newsletter manager config>
    */
   private List<NewsletterManagerConfig> setListNewsletterEntries(){
@@ -126,7 +126,7 @@ public class UINewsletterEntryManager extends UIForm {
       listNewsletterConfig.addAll(newsletterEntryHandler
                                     .getNewsletterEntriesBySubscription(
                                                                         Utils.getSessionProvider(),
-                                                                        NewsLetterUtil.getPortalName(), 
+                                                                        NewsLetterUtil.getPortalName(),
                                                                         categoryConfig.getName(),
                                                                         subscriptionConfig.getName()));
       for (NewsletterManagerConfig newletter : listNewsletterConfig) {
@@ -138,23 +138,23 @@ public class UINewsletterEntryManager extends UIForm {
     }
     return listNewsletterConfig;
   }
-  
+
   /**
    * Gets the list newsletter entries.
-   * 
+   *
    * @return the list newsletter entries
-   * 
+   *
    * @throws Exception the exception
    */
   @SuppressWarnings("unchecked")
-  public List getListNewsletterEntries() throws Exception { 
+  public List getListNewsletterEntries() throws Exception {
     if(uiPageIterator_ != null)return uiPageIterator_.getCurrentPageData() ;
     else return new ArrayList<NewsletterManagerConfig>();
   }
 
   /**
    * Gets the checked.
-   * 
+   *
    * @return the checked
    */
   @SuppressWarnings("unchecked")
@@ -176,7 +176,7 @@ public class UINewsletterEntryManager extends UIForm {
 
   /**
    * Gets the subscription config.
-   * 
+   *
    * @return the subscription config
    */
   public NewsletterSubscriptionConfig getSubscriptionConfig() {
@@ -185,16 +185,16 @@ public class UINewsletterEntryManager extends UIForm {
 
   /**
    * Sets the subscription config.
-   * 
+   *
    * @param subscriptionConfig the new subscription config
    */
   public void setSubscriptionConfig(NewsletterSubscriptionConfig subscriptionConfig) {
     this.subscriptionConfig = subscriptionConfig;
   }
-  
+
   /**
    * Gets the category config.
-   * 
+   *
    * @return the category config
    */
   public NewsletterCategoryConfig getCategoryConfig() {
@@ -203,13 +203,13 @@ public class UINewsletterEntryManager extends UIForm {
 
   /**
    * Sets the category config.
-   * 
+   *
    * @param categoryConfig the new category config
    */
   public void setCategoryConfig(NewsletterCategoryConfig categoryConfig) {
     this.categoryConfig = categoryConfig;
   }
-  
+
   /**
    * The listener interface for receiving backToSubcriptionsAction events.
    * The class that is interested in processing a backToSubcriptionsAction
@@ -218,11 +218,11 @@ public class UINewsletterEntryManager extends UIForm {
    * component's <code>addBackToSubcriptionsActionListener<code> method. When
    * the backToSubcriptionsAction event occurs, that object's appropriate
    * method is invoked.
-   * 
+   *
    * @see BackToSubcriptionsActionEvent
    */
   static  public class BackToSubcriptionsActionListener extends EventListener<UINewsletterEntryManager> {
-    
+
     /* (non-Javadoc)
      * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
      */
@@ -246,11 +246,11 @@ public class UINewsletterEntryManager extends UIForm {
    * component's <code>addBackToCategoriesActionListener<code> method. When
    * the backToCategoriesAction event occurs, that object's appropriate
    * method is invoked.
-   * 
+   *
    * @see BackToCategoriesActionEvent
    */
   static  public class BackToCategoriesActionListener extends EventListener<UINewsletterEntryManager> {
-    
+
     /* (non-Javadoc)
      * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
      */
@@ -274,30 +274,43 @@ public class UINewsletterEntryManager extends UIForm {
    * component's <code>addOpenNewsletterActionListener<code> method. When
    * the openNewsletterAction event occurs, that object's appropriate
    * method is invoked.
-   * 
+   *
    * @see OpenNewsletterActionEvent
    */
   static  public class OpenNewsletterActionListener extends EventListener<UINewsletterEntryManager> {
-    
+
     /* (non-Javadoc)
      * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
      */
     public void execute(Event<UINewsletterEntryManager> event) throws Exception {
       UINewsletterEntryManager uiNewsletterEntryManager = event.getSource();
       List<String> subIds = uiNewsletterEntryManager.getChecked();
-      if(subIds == null){
-        Utils.createPopupMessage(uiNewsletterEntryManager, "UISubscription.msg.checkOneNewsletterToOpen", null, ApplicationMessage.WARNING);
+      if (subIds == null) {
+        Utils.createPopupMessage(uiNewsletterEntryManager,
+                                 "UISubscription.msg.checkOneNewsletterToOpen",
+                                 null,
+                                 ApplicationMessage.WARNING);
         return;
       } else if (subIds.size() != 1) {
-    	Utils.createPopupMessage(uiNewsletterEntryManager, "UISubscription.msg.checkOnlyOneNewsletterToOpen", null, ApplicationMessage.WARNING);
+        Utils.createPopupMessage(uiNewsletterEntryManager,
+                                 "UISubscription.msg.checkOnlyOneNewsletterToOpen",
+                                 null,
+                                 ApplicationMessage.WARNING);
         return;
       }
-      UINewsletterManagerPopup newsletterManagerPopup = uiNewsletterEntryManager.createUIComponent(UINewsletterManagerPopup.class, null, null);
-      newsletterManagerPopup.setNewsletterInfor(uiNewsletterEntryManager.categoryConfig.getName(), uiNewsletterEntryManager.subscriptionConfig.getName(), subIds.get(0));
-      Utils.createPopupWindow(uiNewsletterEntryManager, newsletterManagerPopup, UINewsletterConstant.UIVIEW_ENTRY_PUPUP_WINDOW, 800);
+      UINewsletterManagerPopup newsletterManagerPopup = uiNewsletterEntryManager.createUIComponent(UINewsletterManagerPopup.class,
+                                                                                                   null,
+                                                                                                   null);
+      newsletterManagerPopup.setNewsletterInfor(uiNewsletterEntryManager.categoryConfig.getName(),
+                                                uiNewsletterEntryManager.subscriptionConfig.getName(),
+                                                subIds.get(0));
+      Utils.createPopupWindow(uiNewsletterEntryManager,
+                              newsletterManagerPopup,
+                              UINewsletterConstant.UIVIEW_ENTRY_PUPUP_WINDOW,
+                              800);
     }
   }
-  
+
   /**
    * The listener interface for receiving selectNewsletterAction events.
    * The class that is interested in processing a selectNewsletterAction
@@ -306,23 +319,30 @@ public class UINewsletterEntryManager extends UIForm {
    * component's <code>addSelectNewsletterActionListener<code> method. When
    * the selectNewsletterAction event occurs, that object's appropriate
    * method is invoked.
-   * 
+   *
    * @see SelectNewsletterActionEvent
    */
   static  public class SelectNewsletterActionListener extends EventListener<UINewsletterEntryManager> {
-    
+
     /* (non-Javadoc)
      * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
      */
     public void execute(Event<UINewsletterEntryManager> event) throws Exception {
       UINewsletterEntryManager uiNewsletterEntryManager = event.getSource();
       String newsletterName = event.getRequestContext().getRequestParameter(OBJECTID);
-      UINewsletterManagerPopup newsletterManagerPopup = uiNewsletterEntryManager.createUIComponent(UINewsletterManagerPopup.class, null, null);
-      newsletterManagerPopup.setNewsletterInfor(uiNewsletterEntryManager.categoryConfig.getName(), uiNewsletterEntryManager.subscriptionConfig.getName(), newsletterName);
-      Utils.createPopupWindow(uiNewsletterEntryManager, newsletterManagerPopup, UINewsletterConstant.UIVIEW_ENTRY_PUPUP_WINDOW, 800);
+      UINewsletterManagerPopup newsletterManagerPopup = uiNewsletterEntryManager.createUIComponent(UINewsletterManagerPopup.class,
+                                                                                                   null,
+                                                                                                   null);
+      newsletterManagerPopup.setNewsletterInfor(uiNewsletterEntryManager.categoryConfig.getName(),
+                                                uiNewsletterEntryManager.subscriptionConfig.getName(),
+                                                newsletterName);
+      Utils.createPopupWindow(uiNewsletterEntryManager,
+                              newsletterManagerPopup,
+                              UINewsletterConstant.UIVIEW_ENTRY_PUPUP_WINDOW,
+                              800);
     }
   }
-  
+
   /**
    * The listener interface for receiving addEntryAction events.
    * The class that is interested in processing a addEntryAction
@@ -331,24 +351,30 @@ public class UINewsletterEntryManager extends UIForm {
    * component's <code>addAddEntryActionListener<code> method. When
    * the addEntryAction event occurs, that object's appropriate
    * method is invoked.
-   * 
+   *
    * @see AddEntryActionEvent
    */
   public static class AddEntryActionListener extends EventListener<UINewsletterEntryManager> {
-    
+
     /* (non-Javadoc)
      * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
      */
     public void execute(Event<UINewsletterEntryManager> event) throws Exception {
       UINewsletterEntryManager uiNewsletterEntryManager = event.getSource();
-      UINewsletterEntryContainer entryContainer = uiNewsletterEntryManager.createUIComponent(UINewsletterEntryContainer.class, null, null);
+      UINewsletterEntryContainer entryContainer = uiNewsletterEntryManager.createUIComponent(UINewsletterEntryContainer.class,
+                                                                                             null,
+                                                                                             null);
       entryContainer.setCategoryConfig(uiNewsletterEntryManager.categoryConfig);
-      entryContainer.getChild(UINewsletterEntryDialogSelector.class).init(uiNewsletterEntryManager.categoryConfig.getName(), 
-                                                                           uiNewsletterEntryManager.subscriptionConfig.getName());
-      Utils.createPopupWindow(uiNewsletterEntryManager, entryContainer, UINewsletterConstant.ENTRY_FORM_POPUP_WINDOW, 800);
+      entryContainer.getChild(UINewsletterEntryDialogSelector.class)
+                    .init(uiNewsletterEntryManager.categoryConfig.getName(),
+                          uiNewsletterEntryManager.subscriptionConfig.getName());
+      Utils.createPopupWindow(uiNewsletterEntryManager,
+                              entryContainer,
+                              UINewsletterConstant.ENTRY_FORM_POPUP_WINDOW,
+                              800);
     }
   }
-  
+
   /**
    * The listener interface for receiving deleteNewsletterEntryAction events.
    * The class that is interested in processing a deleteNewsletterEntryAction
@@ -357,32 +383,34 @@ public class UINewsletterEntryManager extends UIForm {
    * component's <code>addDeleteNewsletterEntryActionListener<code> method. When
    * the deleteNewsletterEntryAction event occurs, that object's appropriate
    * method is invoked.
-   * 
+   *
    * @see DeleteNewsletterEntryActionEvent
    */
   public static class DeleteNewsletterEntryActionListener extends EventListener<UINewsletterEntryManager> {
-    
+
     /* (non-Javadoc)
      * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
      */
     public void execute(Event<UINewsletterEntryManager> event) throws Exception {
       UINewsletterEntryManager uiNewsletterEntryManager = event.getSource();
       List<String> subIds = uiNewsletterEntryManager.getChecked();
-      if(subIds == null || subIds.size() == 0){
-        Utils.createPopupMessage(uiNewsletterEntryManager, "UISubscription.msg.checkOnlyOneNewsletterToDelete", null, ApplicationMessage.WARNING);
+      if (subIds == null || subIds.size() == 0) {
+        Utils.createPopupMessage(uiNewsletterEntryManager,
+                                 "UISubscription.msg.checkOnlyOneNewsletterToDelete",
+                                 null,
+                                 ApplicationMessage.WARNING);
         return;
       }
-      uiNewsletterEntryManager.newsletterEntryHandler.delete(
-                                                             Utils.getSessionProvider(),
-                                                             NewsLetterUtil.getPortalName(), 
-                                                             uiNewsletterEntryManager.categoryConfig.getName(), 
+      uiNewsletterEntryManager.newsletterEntryHandler.delete(Utils.getSessionProvider(),
+                                                             NewsLetterUtil.getPortalName(),
+                                                             uiNewsletterEntryManager.categoryConfig.getName(),
                                                              uiNewsletterEntryManager.subscriptionConfig.getName(),
                                                              subIds);
       uiNewsletterEntryManager.init();
       event.getRequestContext().addUIComponentToUpdateByAjax(uiNewsletterEntryManager) ;
     }
   }
-  
+
   /**
    * The listener interface for receiving editNewsletterEntryAction events.
    * The class that is interested in processing a editNewsletterEntryAction
@@ -391,41 +419,54 @@ public class UINewsletterEntryManager extends UIForm {
    * component's <code>addEditNewsletterEntryActionListener<code> method. When
    * the editNewsletterEntryAction event occurs, that object's appropriate
    * method is invoked.
-   * 
+   *
    * @see EditNewsletterEntryActionEvent
    */
   public static class EditNewsletterEntryActionListener extends EventListener<UINewsletterEntryManager> {
-    
+
     /* (non-Javadoc)
      * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
      */
     public void execute(Event<UINewsletterEntryManager> event) throws Exception {
       UINewsletterEntryManager uiNewsletterEntryManager = event.getSource();
       List<String> subIds = uiNewsletterEntryManager.getChecked();
-      if(subIds == null || subIds.size()==0){
-        Utils.createPopupMessage(uiNewsletterEntryManager, "UISubscription.msg.checkOneNewsletterToEdit", null, ApplicationMessage.WARNING);
+      if (subIds == null || subIds.size() == 0) {
+        Utils.createPopupMessage(uiNewsletterEntryManager,
+                                 "UISubscription.msg.checkOneNewsletterToEdit",
+                                 null,
+                                 ApplicationMessage.WARNING);
         return;
       } else if (subIds.size() != 1) {
-    	Utils.createPopupMessage(uiNewsletterEntryManager, "UISubscription.msg.checkOnlyOneNewsletterToEdit", null, ApplicationMessage.WARNING);
-        return;   
+        Utils.createPopupMessage(uiNewsletterEntryManager,
+                                 "UISubscription.msg.checkOnlyOneNewsletterToEdit",
+                                 null,
+                                 ApplicationMessage.WARNING);
+        return;
       } else {
-        NewsletterManagerConfig newsletterName = uiNewsletterEntryManager.newsletterEntryHandler.
-                                                            getNewsletterEntry(Utils.getSessionProvider(), NewsLetterUtil.getPortalName(), 
-                                                                              uiNewsletterEntryManager.categoryConfig.getName(), 
-                                                                              uiNewsletterEntryManager.getSubscriptionConfig().getName(), 
-                                                                              subIds.get(0));
-        if(newsletterName.getStatus().equals(NewsletterConstant.STATUS_SENT)){
-          Utils.createPopupMessage(uiNewsletterEntryManager, "UINewsletterEntryManager.msg.canNotEditNewsletter", null, ApplicationMessage.WARNING);
+        NewsletterManagerConfig newsletterName = uiNewsletterEntryManager.newsletterEntryHandler.getNewsletterEntry(Utils.getSessionProvider(),
+                                                                                                                    NewsLetterUtil.getPortalName(),
+                                                                                                                    uiNewsletterEntryManager.categoryConfig.getName(),
+                                                                                                                    uiNewsletterEntryManager.getSubscriptionConfig()
+                                                                                                                                            .getName(),
+                                                                                                                    subIds.get(0));
+        if (newsletterName.getStatus().equals(NewsletterConstant.STATUS_SENT)) {
+          Utils.createPopupMessage(uiNewsletterEntryManager,
+                                   "UINewsletterEntryManager.msg.canNotEditNewsletter",
+                                   null,
+                                   ApplicationMessage.WARNING);
           return;
         }
       }
-      UINewsletterEntryContainer entryContainer = uiNewsletterEntryManager.createUIComponent(UINewsletterEntryContainer.class, null, null);
-      entryContainer.setNewsletterInfor(NewsletterConstant.generateCategoryPath(NewsLetterUtil.getPortalName()) + "/"
-                                        + uiNewsletterEntryManager.categoryConfig.getName() + "/" 
-                                        + uiNewsletterEntryManager.getSubscriptionConfig().getName() + "/" 
-                                        + subIds.get(0));
+      UINewsletterEntryContainer entryContainer = uiNewsletterEntryManager.createUIComponent(UINewsletterEntryContainer.class,
+                                                                                             null,
+                                                                                             null);
+      entryContainer.setNewsletterInfor(NewsletterConstant.generateCategoryPath(NewsLetterUtil.getPortalName())
+          + "/"
+          + uiNewsletterEntryManager.categoryConfig.getName()
+          + "/"
+          + uiNewsletterEntryManager.getSubscriptionConfig().getName() + "/" + subIds.get(0));
       UINewsletterEntryDialogSelector newsletterEntryDialogSelector = entryContainer.getChild(UINewsletterEntryDialogSelector.class);
-      newsletterEntryDialogSelector.init(uiNewsletterEntryManager.categoryConfig.getName(), 
+      newsletterEntryDialogSelector.init(uiNewsletterEntryManager.categoryConfig.getName(),
                                          uiNewsletterEntryManager.subscriptionConfig.getName());
       UIFormSelectBox categorySelectBox = newsletterEntryDialogSelector.getChildById(UINewsletterConstant.ENTRY_CATEGORY_SELECTBOX);
       categorySelectBox.setValue(uiNewsletterEntryManager.categoryConfig.getName());
@@ -435,10 +476,13 @@ public class UINewsletterEntryManager extends UIForm {
       subscriptionSelectBox.setDisabled(true);
       UINewsletterEntryForm newsletterEntryForm = entryContainer.getChild(UINewsletterEntryForm.class);
       newsletterEntryForm.addNew(false);
-      Utils.createPopupWindow(uiNewsletterEntryManager, entryContainer, UINewsletterConstant.ENTRY_FORM_POPUP_WINDOW, 800);
+      Utils.createPopupWindow(uiNewsletterEntryManager,
+                              entryContainer,
+                              UINewsletterConstant.ENTRY_FORM_POPUP_WINDOW,
+                              800);
     }
   }
-  
+
   /**
    * The listener interface for receiving convertTemplateAction events.
    * The class that is interested in processing a convertTemplateAction
@@ -447,11 +491,11 @@ public class UINewsletterEntryManager extends UIForm {
    * component's <code>addConvertTemplateActionListener<code> method. When
    * the convertTemplateAction event occurs, that object's appropriate
    * method is invoked.
-   * 
+   *
    * @see ConvertTemplateActionEvent
    */
   public static class ConvertTemplateActionListener extends EventListener<UINewsletterEntryManager> {
-    
+
     /* (non-Javadoc)
      * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
      */
@@ -466,20 +510,24 @@ public class UINewsletterEntryManager extends UIForm {
         message = "UISubscription.msg.checkOneNewsletterToConvert";
         messageType = ApplicationMessage.WARNING;
       } else if (subIds.size() != 1) {
-    	message = "UISubscription.msg.checkOnlyOneNewsletterToConvert";
-        messageType = ApplicationMessage.WARNING; 
+      message = "UISubscription.msg.checkOnlyOneNewsletterToConvert";
+        messageType = ApplicationMessage.WARNING;
       } else {
         try{
           String newsletterName = subIds.get(0);
           NewsletterManagerService newsletterManagerService = newsletterEntryManager.getApplicationComponent(NewsletterManagerService.class);
           RepositoryService repositoryService = newsletterEntryManager.getApplicationComponent(RepositoryService.class);
-          ManageableRepository manageableRepository = repositoryService.getRepository(newsletterManagerService.getRepositoryName()); 
-          Session session = Utils.getSessionProvider().getSession(newsletterManagerService.getWorkspaceName(), manageableRepository);
-          String newsletterPath = NewsletterConstant.generateNewsletterPath(NewsLetterUtil.getPortalName(), categoryName, subscriptionName, newsletterName) ;
+          ManageableRepository manageableRepository = repositoryService.getRepository(newsletterManagerService.getRepositoryName());
+          Session session = Utils.getSessionProvider()
+                                 .getSession(newsletterManagerService.getWorkspaceName(),
+                                             manageableRepository);
+          String newsletterPath = NewsletterConstant.generateNewsletterPath(NewsLetterUtil.getPortalName(),
+                                                                            categoryName,
+                                                                            subscriptionName,
+                                                                            newsletterName);
           Node newsletterNode = (Node) session.getItem(newsletterPath);
           NewsletterTemplateHandler newsletterTemplateHandler = newsletterManagerService.getTemplateHandler();
-          newsletterTemplateHandler.convertAsTemplate(
-                                                      Utils.getSessionProvider(),
+          newsletterTemplateHandler.convertAsTemplate(Utils.getSessionProvider(),
                                                       newsletterNode.getPath(),
                                                       NewsLetterUtil.getPortalName(),
                                                       categoryName);

@@ -43,7 +43,7 @@ import org.exoplatform.webui.form.UIFormStringInput;
  * Created by The eXo Platform SARL
  * Author : Pham Tuan
  *          phamtuanchip@yahoo.de
- * Dec 19, 2006 9:05:58 AM 
+ * Dec 19, 2006 9:05:58 AM
  */
 @ComponentConfig(
     lifecycle = UIFormLifecycle.class,
@@ -66,7 +66,7 @@ public class UIDocumentConfig extends UIForm implements UISelectable{
   public UIDocumentConfig() throws Exception {
     List<SelectItemOption<String>> Options = new ArrayList<SelectItemOption<String>>();
     addChild(new UIFormStringInput(UINewConfigForm.FIELD_REPOSITORY, UINewConfigForm.FIELD_REPOSITORY, null));
-    addChild(new UIFormStringInput(UINewConfigForm.FIELD_WORKSPACE, UINewConfigForm.FIELD_WORKSPACE, null)); 
+    addChild(new UIFormStringInput(UINewConfigForm.FIELD_WORKSPACE, UINewConfigForm.FIELD_WORKSPACE, null));
     addChild(new UIFormCheckBoxInput<Boolean>(UINewConfigForm.FIELD_ALLOW_PUBLISH, null, null));
     UIFormInputSetWithAction categoryPathSelect = new UIFormInputSetWithAction(FIELD_PATHSELECT);
     categoryPathSelect.addUIFormInput(new UIFormStringInput(UINewConfigForm.FIELD_CATEGORYPATH, null, null));
@@ -113,7 +113,7 @@ public class UIDocumentConfig extends UIForm implements UISelectable{
       categoryPathSelect.setActionInfo(UINewConfigForm.FIELD_CATEGORYPATH, new String[] {"AddPath"});
       documentSelect.setActionInfo(UINewConfigForm.FIELD_DOCNAME, new String[] {"DocSelect"});
       if (isAddNew) {
-        setActions(UINewConfigForm.ADD_NEW_ACTION);      
+        setActions(UINewConfigForm.ADD_NEW_ACTION);
         detailtempField.setOptions(uiConfigTabPane.getBoxTemplateOption(repository));
         allowPublishField.setChecked(isAllowPublish);
         enableCommentField.setChecked(Boolean.parseBoolean(hasComment));
@@ -132,7 +132,7 @@ public class UIDocumentConfig extends UIForm implements UISelectable{
       docName = preference.getValue(Utils.CB_DOCUMENT_NAME, "");
       hasComment = preference.getValue(Utils.CB_VIEW_COMMENT, "");
       hasVote = preference.getValue(Utils.CB_VIEW_VOTE, "");
-      detailTemplate = preference.getValue(Utils.CB_BOX_TEMPLATE, ""); 
+      detailTemplate = preference.getValue(Utils.CB_BOX_TEMPLATE, "");
       categoryPathField.setValue(path);
       documentNameField.setValue(docName);
       detailtempField.setOptions(uiConfigTabPane.getBoxTemplateOption(repository));
@@ -157,10 +157,10 @@ public class UIDocumentConfig extends UIForm implements UISelectable{
       UIFormInputSetWithAction documentSelect = getChildById(FIELD_DOCSELECT);
       UIFormStringInput documentNameField = documentSelect.getChildById(UINewConfigForm.FIELD_DOCNAME);
       documentNameField.setValue("");
-    } 
+    }
     if (uiConfig.getChildById(UIConfigTabPane.DOCUMENT_SELECTOR) != null ) {
       UIFormInputSetWithAction categoryPathSelect = getChildById(FIELD_PATHSELECT);
-      UIFormStringInput categoryPathField = categoryPathSelect.getChildById(UINewConfigForm.FIELD_CATEGORYPATH);  
+      UIFormStringInput categoryPathField = categoryPathSelect.getChildById(UINewConfigForm.FIELD_CATEGORYPATH);
       String path = categoryPathField.getValue();
       UIFormInputSetWithAction documentSelect = getChildById(FIELD_DOCSELECT);
       UIFormStringInput documentNameField = documentSelect.getChildById(UINewConfigForm.FIELD_DOCNAME);
@@ -187,12 +187,12 @@ public class UIDocumentConfig extends UIForm implements UISelectable{
         app.addMessage(new ApplicationMessage("UIDocumentConfig.msg.require-path", null));
         event.getRequestContext().addUIComponentToUpdateByAjax(app.getUIPopupMessages());
         return;
-      } 
+      }
       if (container.getNodeByPath(jcrPath, workSpace) == null) {
         app.addMessage(new ApplicationMessage("UIDocumentConfig.msg.invalid-path", null));
         event.getRequestContext().addUIComponentToUpdateByAjax(app.getUIPopupMessages());
         return;
-      } 
+      }
       UIFormInputSetWithAction documentSelect = uiForm.getChildById(FIELD_DOCSELECT);
       UIFormStringInput documentField = documentSelect.getChildById(UINewConfigForm.FIELD_DOCNAME);
       String docName = documentField.getValue();
@@ -200,14 +200,14 @@ public class UIDocumentConfig extends UIForm implements UISelectable{
         app.addMessage(new ApplicationMessage("UIDocumentConfig.msg.require-doc", null));
         event.getRequestContext().addUIComponentToUpdateByAjax(app.getUIPopupMessages());
         return;
-      } 
+      }
       String fullPath = jcrPath.concat(docName).replaceAll("/+", "/");
       if(container.getNodeByPath(fullPath, workSpace) == null){
-        app.addMessage(new ApplicationMessage("UIDocumentConfig.msg.invalid-doc", null, 
+        app.addMessage(new ApplicationMessage("UIDocumentConfig.msg.invalid-doc", null,
                                               ApplicationMessage.WARNING));
         event.getRequestContext().addUIComponentToUpdateByAjax(app.getUIPopupMessages());
         return;
-      } 
+      }
       String boxTemplate = uiForm.getUIStringInput(UINewConfigForm.FIELD_DETAILBOXTEMP).getValue();
       boolean allowPublish = uiForm.getUIFormCheckBoxInput(UINewConfigForm.FIELD_ALLOW_PUBLISH).isChecked();
       boolean hasComment = uiForm.getUIFormCheckBoxInput(UINewConfigForm.FIELD_ENABLECOMMENT).isChecked();
@@ -221,21 +221,21 @@ public class UIDocumentConfig extends UIForm implements UISelectable{
       prefs.setValue(Utils.CB_BOX_TEMPLATE, boxTemplate);
       prefs.setValue(Utils.CB_ALLOW_PUBLISH, String.valueOf(allowPublish));
       prefs.setValue(Utils.CB_VIEW_TOOLBAR,String.valueOf(hasComment || hasVote));
-      prefs.setValue(Utils.CB_VIEW_COMMENT, String.valueOf(hasComment));    
-      prefs.setValue(Utils.CB_VIEW_VOTE, String.valueOf(hasVote));    
-      prefs.store(); 
+      prefs.setValue(Utils.CB_VIEW_COMMENT, String.valueOf(hasComment));
+      prefs.setValue(Utils.CB_VIEW_VOTE, String.valueOf(hasVote));
+      prefs.store();
       container.loadPortletConfig(prefs);
       uiForm.isEdit_ = false;
       uiForm.getAncestorOfType(UIConfigTabPane.class).setNewConfig(false);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiForm.getAncestorOfType(UIConfigTabPane.class));
     }
-  }  
+  }
 
   @SuppressWarnings("unused")
   public static class ChangeTemplateOptionActionListener extends EventListener<UIDocumentConfig>{
     public void execute(Event<UIDocumentConfig> event) throws Exception {
     }
-  }  
+  }
 
   public static class AddActionListener extends EventListener<UIDocumentConfig>{
     public void execute(Event<UIDocumentConfig> event) throws Exception {

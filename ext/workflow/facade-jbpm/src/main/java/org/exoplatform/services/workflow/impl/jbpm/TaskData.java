@@ -27,7 +27,7 @@ import org.jbpm.taskmgmt.exe.TaskInstance;
  * @author benjaminmestrallet
  */
 public class TaskData implements Task{
-  
+
   public static final String STARTED = "started";
   public static final String FINISHED = "finished";
 
@@ -37,16 +37,16 @@ public class TaskData implements Task{
   public TaskData(TaskInstance taskInstance) {
     this.taskInstance = taskInstance;
   }
-  
+
   public String getId(){
     return "" + taskInstance.getId();
   }
-  
+
   public String getTaskName(){
     return taskInstance.getName();
   }
 
-  public String getActorId(){    
+  public String getActorId(){
     String actorId = taskInstance.getActorId();
     if(actorId == null) {
       SwimlaneInstance swimlane = taskInstance.getSwimlaneInstance();
@@ -57,25 +57,25 @@ public class TaskData implements Task{
       actorId = "N/A";
     return actorId;
   }
-    
+
   public String getSwimlane(){
     return taskInstance.getSwimlaneInstance().getName();
   }
-  
+
   public Date getEnd(){
     return taskInstance.getEnd();
   }
-  
+
   public String getProcessId() {
     return "" + taskInstance.getToken().getProcessInstance().getProcessDefinition().getId();
   }
-  
+
   public String getProcessInstanceId() {
     return "" + taskInstance.getToken().getProcessInstance().getId();
   }
-  
+
   public String getDescription() {
     return taskInstance.getTask().getDescription();
   }
-  
+
 }

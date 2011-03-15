@@ -50,9 +50,9 @@ import org.exoplatform.webui.event.EventListener;
  */
 
 @ComponentConfig(
-  lifecycle = Lifecycle.class, 
-  template = "app:/groovy/ParameterizedContentViewer/UIPCVContainer.gtmpl", 
-  events = { 
+  lifecycle = Lifecycle.class,
+  template = "app:/groovy/ParameterizedContentViewer/UIPCVContainer.gtmpl",
+  events = {
     @EventConfig(listeners = UIPCVContainer.QuickEditActionListener.class),
     @EventConfig(listeners = UIPCVContainer.EditActionListener.class)
   }
@@ -67,26 +67,30 @@ public class UIPCVContainer extends UIContainer {
 
   /** Content child of this content. */
   private UIPCVPresentation uiContentViewer;
-  
+
   /** The repository. */
   private String repository;
 
-  /** A flag used to display Print/Close buttons and hide Back one if its' value is <code>true</code>. In <code>false</code> case, the Back button will be shown only */
-  private boolean isPrint;
-  
+  /**
+   * A flag used to display Print/Close buttons and hide Back one if its' value
+   * is <code>true</code>. In <code>false</code> case, the Back button will be
+   * shown only
+   */
+  private boolean            isPrint;
+
   /** The Constant PREFERENCE_REPOSITORY. */
   public static final String PREFERENCE_REPOSITORY = "repository";
-  
+
   /** The date formatter. */
   private DateFormat               dateFormatter = null;
 
   /**
    * Instantiates a new uI content viewer container.
-   * 
+   *
    * @throws Exception the exception
    */
   public UIPCVContainer() throws Exception {
-    
+
     addChild(UIPCVPresentation.class, null, null);
     uiContentViewer = getChild(UIPCVPresentation.class);
     PortletRequestContext porletRequestContext = WebuiRequestContext.getCurrentInstance();
@@ -95,20 +99,20 @@ public class UIPCVContainer extends UIContainer {
     ((SimpleDateFormat) dateFormatter).applyPattern("dd.MM.yyyy '|' hh'h'mm");
   }
 
-	/**
-	 * Checks if is show title.
-	 * 
-	 * @return true, if is show title
-	 */
-	public boolean isShowTitle() {
-	  PortletPreferences portletPreferences = getPortletPreferences();
+  /**
+   * Checks if is show title.
+   *
+   * @return true, if is show title
+   */
+  public boolean isShowTitle() {
+    PortletPreferences portletPreferences = getPortletPreferences();
     String showAble = portletPreferences.getValue(UIPCVPortlet.SHOW_TITLE, null);
     return (showAble != null) ? Boolean.parseBoolean(showAble) : false;
-	}
-	
-	/**
+  }
+
+  /**
    * Gets the portlet preferences.
-   * 
+   *
    * @return the portlet preferences
    */
   private PortletPreferences getPortletPreferences() {
@@ -119,64 +123,64 @@ public class UIPCVContainer extends UIContainer {
 
   /**
    * Gets the title.
-   * 
+   *
    * @param node the node
-   * 
+   *
    * @return the title
-   * 
+   *
    * @throws Exception the exception
    */
   public String getTitle(Node node) throws Exception {
-	  String title = null;
-	  if (node.hasNode("jcr:content")) {
-		  Node content = node.getNode("jcr:content");
-		  if (content.hasProperty("dc:title")) {
-		    try {
-		      title = content.getProperty("dc:title").getValues()[0].getString();
-		    } catch (Exception e) {
-		      title = null;
-		    }
-		  }
-	  } 
-	  if (node.hasProperty("exo:title")) {
-		  title = node.getProperty("exo:title").getValue().getString();
-	  }
-	  if (title==null) title = node.getName();
-	  
-	  return title;
+    String title = null;
+    if (node.hasNode("jcr:content")) {
+      Node content = node.getNode("jcr:content");
+      if (content.hasProperty("dc:title")) {
+        try {
+          title = content.getProperty("dc:title").getValues()[0].getString();
+        } catch (Exception e) {
+          title = null;
+        }
+      }
+    }
+    if (node.hasProperty("exo:title")) {
+      title = node.getProperty("exo:title").getValue().getString();
+    }
+    if (title==null) title = node.getName();
+
+    return title;
   }
 
-	/**
-	 * Checks if is show date created.
-	 * 
-	 * @return true, if is show date created
-	 */
-	public boolean isShowDateCreated() {
-	  PortletPreferences portletPreferences = getPortletPreferences();
+  /**
+   * Checks if is show date created.
+   *
+   * @return true, if is show date created
+   */
+  public boolean isShowDateCreated() {
+    PortletPreferences portletPreferences = getPortletPreferences();
     String showAble = portletPreferences.getValue(UIPCVPortlet.SHOW_DATE_CREATED, null);
     return (showAble != null) ? Boolean.parseBoolean(showAble) : false;
-	}
+  }
 
-	/**
-	 * Checks if is show date created.
-	 * 
-	 * @return true, if is show date created
-	 */
-	public boolean isShowBar() {
-		PortletPreferences portletPreferences = getPortletPreferences();
-		String showAble = portletPreferences.getValue(UIPCVPortlet.SHOW_BAR, null);
-		return (showAble != null) ? Boolean.parseBoolean(showAble) : false;
-	}
-	
   /**
-	 * Gets the created date.
-	 * 
-	 * @param node the node
-	 * 
-	 * @return the created date
-	 * 
-	 * @throws Exception the exception
-	 */
+   * Checks if is show date created.
+   *
+   * @return true, if is show date created
+   */
+  public boolean isShowBar() {
+    PortletPreferences portletPreferences = getPortletPreferences();
+    String showAble = portletPreferences.getValue(UIPCVPortlet.SHOW_BAR, null);
+    return (showAble != null) ? Boolean.parseBoolean(showAble) : false;
+  }
+
+  /**
+   * Gets the created date.
+   *
+   * @param node the node
+   *
+   * @return the created date
+   *
+   * @throws Exception the exception
+   */
   public String getCreatedDate(Node node) throws Exception {
     if (node.hasProperty("exo:dateCreated")) {
       Calendar calendar = node.getProperty("exo:dateCreated").getValue().getDate();
@@ -185,20 +189,20 @@ public class UIPCVContainer extends UIContainer {
     return null;
   }
 
-	/**
-	 * Gets the repository.
-	 * 
-	 * @return the repository
-	 * 
-	 * @throws RepositoryException the repository exception
-	 */
+  /**
+   * Gets the repository.
+   *
+   * @return the repository
+   *
+   * @throws RepositoryException the repository exception
+   */
   public String getRepository() throws RepositoryException {
     return repository;
   }
 
   /**
    * Sets the repository.
-   * 
+   *
    * @param repository the new repository
    */
   public void setRepository(String repository) {
@@ -207,9 +211,9 @@ public class UIPCVContainer extends UIContainer {
 
   /**
    * Gets the node.
-   * 
+   *
    * @return the node
-   * 
+   *
    * @throws Exception the exception
    */
   public Node getNode() throws Exception {
@@ -220,63 +224,68 @@ public class UIPCVContainer extends UIContainer {
 //    NodeLocation nodeLocation = NodeLocation.make(node);
     Node nodeView = Utils.getViewableNodeByComposer(null, null, parameters);
     if (nodeView!=null) {
-	    boolean isDocumentType = false;
-	    if (nodeView.isNodeType("nt:frozenNode")) isDocumentType = true; 
-	    // check node is a document node
-	    TemplateService templateService = getApplicationComponent(TemplateService.class);
-	    List<String> documentTypes = templateService.getDocumentTemplates();
-	    for (String documentType : documentTypes) {
-	      if (nodeView.isNodeType(documentType)) {
-	        isDocumentType = true;
-	        break;
-	      }
-	    }
-	    if (!isDocumentType) return null;
-	    if (hasChildren()) removeChild(UIPCVContainer.class);
-	    
-	    // set node view for UIPCVPresentation
-	    if (nodeView != null && nodeView.isNodeType("nt:frozenNode")) {
-	      String nodeUUID = nodeView.getProperty("jcr:frozenUuid").getString();
-	      uiContentViewer.setOriginalNode(nodeView.getSession().getNodeByUUID(nodeUUID));
-	      uiContentViewer.setNode(nodeView);
-	    } else if (nodeView == null) {
-	      return null;
-	    } else {
-	      uiContentViewer.setOriginalNode(nodeView);
-	      uiContentViewer.setNode(nodeView);
-	    }
-	    uiContentViewer.setRepository(this.getRepository());
-	    uiContentViewer.setWorkspace(nodeView.getSession().getWorkspace().getName());
-	    isPrint = Boolean.parseBoolean(Util.getPortalRequestContext().getRequestParameter("isPrint"));
-    }    
+      boolean isDocumentType = false;
+      if (nodeView.isNodeType("nt:frozenNode")) isDocumentType = true;
+      // check node is a document node
+      TemplateService templateService = getApplicationComponent(TemplateService.class);
+      List<String> documentTypes = templateService.getDocumentTemplates();
+      for (String documentType : documentTypes) {
+        if (nodeView.isNodeType(documentType)) {
+          isDocumentType = true;
+          break;
+        }
+      }
+      if (!isDocumentType) return null;
+      if (hasChildren()) removeChild(UIPCVContainer.class);
+
+      // set node view for UIPCVPresentation
+      if (nodeView != null && nodeView.isNodeType("nt:frozenNode")) {
+        String nodeUUID = nodeView.getProperty("jcr:frozenUuid").getString();
+        uiContentViewer.setOriginalNode(nodeView.getSession().getNodeByUUID(nodeUUID));
+        uiContentViewer.setNode(nodeView);
+      } else if (nodeView == null) {
+        return null;
+      } else {
+        uiContentViewer.setOriginalNode(nodeView);
+        uiContentViewer.setNode(nodeView);
+      }
+      uiContentViewer.setRepository(this.getRepository());
+      uiContentViewer.setWorkspace(nodeView.getSession().getWorkspace().getName());
+      isPrint = Boolean.parseBoolean(Util.getPortalRequestContext().getRequestParameter("isPrint"));
+    }
     return nodeView;
   }
-  
+
   /**
    * Gets the request parameters.
-   * 
+   *
    * @return the request parameters
    */
   private String getRequestParameters() throws Exception {
     String parameters = null;
-    try {    	
-    	parameters = URLDecoder.decode(StringUtils.substringAfter(Util.getPortalRequestContext().getNodePath(), Util.getUIPortal().getSelectedNode().getUri() + "/"), "UTF-8");    	
+    try {
+      parameters = URLDecoder.decode(StringUtils.substringAfter(Util.getPortalRequestContext()
+                                                                    .getNodePath(),
+                                                                Util.getUIPortal()
+                                                                    .getSelectedNode()
+                                                                    .getUri()
+                                                                    + "/"), "UTF-8");
     } catch (UnsupportedEncodingException e) {
       return null;
     }
-    
+
     if (!parameters.matches(UIPCVPresentation.PARAMETER_REGX)) {
-    	String path = Util.getPortalRequestContext().getRequestParameter("path");
-    	if (path == null){
-    		return getAncestorOfType(UIPCVPortlet.class).getCurrentNodePath();
-    	} 
-    		
-    	parameters = Util.getPortalRequestContext().getRequestParameter("path").substring(1);
+      String path = Util.getPortalRequestContext().getRequestParameter("path");
+      if (path == null){
+        return getAncestorOfType(UIPCVPortlet.class).getCurrentNodePath();
+      }
+
+      parameters = Util.getPortalRequestContext().getRequestParameter("path").substring(1);
       return parameters;
     }
     return parameters;
   }
-  
+
   /**
    * The listener interface for receiving quickEditAction events. The class
    * that is interested in processing a quickEditAction event implements this
@@ -285,13 +294,13 @@ public class UIPCVContainer extends UIContainer {
    * <code>addQuickEditActionListener<code> method. When
    * the quickEditAction event occurs, that object's appropriate
    * method is invoked.
-   * 
+   *
    * @see QuickEditActionEvent
    */
   public static class QuickEditActionListener extends EventListener<UIPCVContainer> {
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
      */
     public void execute(Event<UIPCVContainer> event) throws Exception {
@@ -300,22 +309,22 @@ public class UIPCVContainer extends UIContainer {
       Utils.createPopupWindow(uiContentViewerContainer, pcvConfigForm, UIPCVPortlet.PCV_CONFIG_POPUP_WINDOW, 600);
     }
   }
-  
+
   /**
-   * The listener interface for receiving quickEditAction events. The class
-   * that is interested in processing a quickEditAction event implements this
+   * The listener interface for receiving quickEditAction events. The class that
+   * is interested in processing a quickEditAction event implements this
    * interface, and the object created with that class is registered with a
    * component using the component's
    * <code>addQuickEditActionListener<code> method. When
    * the quickEditAction event occurs, that object's appropriate
    * method is invoked.
-   * 
+   *
    * @see EditActionListener
    */
   public static class EditActionListener extends EventListener<UIPCVContainer> {
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
      */
     public void execute(Event<UIPCVContainer> event) throws Exception {
@@ -323,13 +332,18 @@ public class UIPCVContainer extends UIContainer {
       UIPCVPresentation uiContentViewer = uiContentViewerContainer.getChild(UIPCVPresentation.class);
       Node orginialNode = uiContentViewer.getOriginalNode();
       UIContentDialogForm uiDocumentDialogForm = uiContentViewerContainer.createUIComponent(UIContentDialogForm.class, null, null);
-      try{
+      try {
         uiDocumentDialogForm.init(orginialNode, false);
-        Utils.createPopupWindow(uiContentViewerContainer, uiDocumentDialogForm, UIContentDialogForm.CONTENT_DIALOG_FORM_POPUP_WINDOW, 800);
-      }catch(Exception ex){
+        Utils.createPopupWindow(uiContentViewerContainer,
+                                uiDocumentDialogForm,
+                                UIContentDialogForm.CONTENT_DIALOG_FORM_POPUP_WINDOW,
+                                800);
+      } catch (Exception ex) {
         UIApplication uiApp = uiContentViewerContainer.getAncestorOfType(UIApplication.class);
-        Object[] arg = {orginialNode.getPrimaryNodeType().getName()};
-        uiApp.addMessage(new ApplicationMessage("UIPCVContainer.msg.not-support", arg, ApplicationMessage.ERROR));
+        Object[] arg = { orginialNode.getPrimaryNodeType().getName() };
+        uiApp.addMessage(new ApplicationMessage("UIPCVContainer.msg.not-support",
+                                                arg,
+                                                ApplicationMessage.ERROR));
       }
     }
   }
@@ -338,7 +352,7 @@ public class UIPCVContainer extends UIContainer {
    * Gets <code>isPrint</code> value that is used to display Print/Close
    * buttons and hide Back one if its' value is <code>True</code>. In
    * <code>False</code> case, the Back button will be shown only.
-   * 
+   *
    * @return <code>isPrint</code>
    */
   public boolean getIsPrint() {
@@ -349,7 +363,7 @@ public class UIPCVContainer extends UIContainer {
    * Sets <code>isPrint</code> value that is used to display Print/Close
    * buttons and hide Back one if its' value is <code>True</code>. In
    * <code>False</code> case, the Back button will be shown only.
-   * 
+   *
    * @param isPrint the is print
    */
   public void setIsPrint(boolean isPrint) {
@@ -359,7 +373,7 @@ public class UIPCVContainer extends UIContainer {
   /**
    * Gets the draft revision value. If the revision is draft, an icon and one
    * text is shown. Otherwise, false.
-   * 
+   *
    * @return <code>isDraftRevision</code>
    */
   public boolean isDraftRevision() {
@@ -369,7 +383,7 @@ public class UIPCVContainer extends UIContainer {
   /**
    * Sets the draft revision value. If the revision is draft, an icon and one
    * text is shown. Otherwise, false.
-   * 
+   *
    * @param isDraftRevision the is draft revision
    */
   public void setDraftRevision(boolean isDraftRevision) {
@@ -379,7 +393,7 @@ public class UIPCVContainer extends UIContainer {
   /**
    * Gets the draft obsolete value. If the revision is draft, the message is
    * shown to inform users of this state. Otherwise, false.
-   * 
+   *
    * @return <code>isDraftRevision</code>
    */
   public boolean isObsoletedContent() {
@@ -389,7 +403,7 @@ public class UIPCVContainer extends UIContainer {
   /**
    * Sets the draft obsolete value. If the revision is draft, the message is
    * shown to inform users of this state. Otherwise, false.
-   * 
+   *
    * @param isObsoletedContent the is obsoleted content
    */
   public void setObsoletedContent(boolean isObsoletedContent) {

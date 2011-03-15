@@ -24,7 +24,7 @@ import org.exoplatform.webui.form.UIFormSelectBox;
  * Created by The eXo Platform SARL
  * Author : Hoang Van Hung
  *          hunghvit@gmail.com
- * Nov 8, 2008  
+ * Nov 8, 2008
  */
 
 @ComponentConfig (
@@ -36,13 +36,13 @@ import org.exoplatform.webui.form.UIFormSelectBox;
 )
 
 public class UIRepositoryList extends UIForm {
-  
+
   public static String      FIELD_SELECTREPO = "selectRepo";
 
   private String            repoName_;
 
   private RepositoryService rService;
-  
+
   /**
    * Contructor
    * @throws Exception
@@ -53,13 +53,13 @@ public class UIRepositoryList extends UIForm {
   }
 
   /**
-   * 
+   *
    * @return repository name
    */
   public String getRepository() {
     return repoName_;
   }
-  
+
   /**
    * Set repository name
    * @param repoName
@@ -67,7 +67,7 @@ public class UIRepositoryList extends UIForm {
   public void setRepository(String repoName) {
     repoName_ = repoName;
   }
-  
+
   /**
    * Initiate data for repository box
    * @param defaultRepo
@@ -86,10 +86,10 @@ public class UIRepositoryList extends UIForm {
     uiFormSelectBox.setOnChange("ChangeRepo");
     uiFormSelectBox.setValue(selectedValue);
   }
-  
+
   /**
    * Use RepositoryService get data of repository
-   * @return repositories in ArrayList<SelectItemOption<String>> 
+   * @return repositories in ArrayList<SelectItemOption<String>>
    */
   private List<SelectItemOption<String>> getRepoItem() {
     List<SelectItemOption<String>> options = new ArrayList<SelectItemOption<String>>();
@@ -101,7 +101,7 @@ public class UIRepositoryList extends UIForm {
     options.add(new SelectItemOption<String>(repo.getName(), repo.getName()));
     return options;
   }
-  
+
   /*
    * Fire event when changing repository
    */

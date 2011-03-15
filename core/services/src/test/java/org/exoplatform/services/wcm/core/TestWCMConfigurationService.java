@@ -31,7 +31,7 @@ public class TestWCMConfigurationService extends BaseWCMTestCase {
 
   /** The configuration service. */
   private WCMConfigurationService configurationService;
-  
+
   /* (non-Javadoc)
    * @see org.exoplatform.services.wcm.BaseWCMTestCase#setUp()
    */
@@ -39,7 +39,7 @@ public class TestWCMConfigurationService extends BaseWCMTestCase {
     super.setUp();
     configurationService = getService(WCMConfigurationService.class);
   }
-  
+
   /**
    * Test get site drive config.
    */
@@ -57,7 +57,7 @@ public class TestWCMConfigurationService extends BaseWCMTestCase {
     assertFalse(driveData.getShowHiddenNode());
     assertEquals("nt:folder,nt:unstructured", driveData.getAllowCreateFolders());
   }
-  
+
   /**
    * Test get live portals location.
    */
@@ -67,7 +67,7 @@ public class TestWCMConfigurationService extends BaseWCMTestCase {
     assertEquals("collaboration", nodeLocation.getWorkspace());
     assertEquals("/sites content/live", nodeLocation.getPath());
   }
-  
+
   /**
    * Test get runtime context param.
    */
@@ -82,7 +82,7 @@ public class TestWCMConfigurationService extends BaseWCMTestCase {
     assertEquals("/exo:ecm/views/templates/content-list-viewer/list/UIContentListPresentationDefault.gtmpl", configurationService.getRuntimeContextParam(WCMConfigurationService.FORM_VIEW_TEMPLATE_PATH));
     assertEquals("/exo:ecm/views/templates/content-list-viewer/paginators/UIPaginatorDefault.gtmpl", configurationService.getRuntimeContextParam(WCMConfigurationService.PAGINATOR_TEMPLAET_PATH));
   }
-  
+
   /**
    * Test get runtime context params.
    */
@@ -99,14 +99,14 @@ public class TestWCMConfigurationService extends BaseWCMTestCase {
     assertTrue(runtimeContextParams.contains("/exo:ecm/views/templates/content-list-viewer/paginators/UIPaginatorDefault.gtmpl"));
     assertEquals(9, runtimeContextParams.size());
   }
-  
+
   /**
    * Test get shared portal name.
    */
   public void testGetSharedPortalName() {
     assertEquals("shared", configurationService.getSharedPortalName("repository"));
   }
-  
+
   /**
    * Test get all live portals location.
    */

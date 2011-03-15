@@ -39,35 +39,35 @@ import org.exoplatform.services.organization.UserEventListener;
  * @author Benjamin Mestrallet benjamin.mestrallet@exoplatform.com
  */
 public class NewUserListener extends UserEventListener {
-  
-  private static final String[] perms = {PermissionType.READ, PermissionType.ADD_NODE, 
-    PermissionType.SET_PROPERTY, PermissionType.REMOVE };  
-  
+
+  private static final String[] perms = {PermissionType.READ, PermissionType.ADD_NODE,
+    PermissionType.SET_PROPERTY, PermissionType.REMOVE };
+
   private NewUserConfig config_;
   private RepositoryService jcrService_;
   private NodeHierarchyCreator nodeHierarchyCreator_;
   private String relativePath_;
 
   public NewUserListener(RepositoryService jcrService,
-                         NodeHierarchyCreator nodeHierarchyCreator, 
+                         NodeHierarchyCreator nodeHierarchyCreator,
                          InitParams params)    throws Exception {
     jcrService_ = jcrService;
     nodeHierarchyCreator_ = nodeHierarchyCreator;
     config_ = (NewUserConfig) params.getObjectParamValues(NewUserConfig.class).get(0);
     relativePath_ = params.getValueParam("relativePath").getValue();
   }
-  
+
   public void preSave(User user, boolean isNew)
-      throws Exception {        
+      throws Exception {
     String userName = user.getUserName();
     prepareSystemWorkspace(userName);
   }
-  
+
   private void prepareSystemWorkspace(String userName) throws Exception {
-    Session session = null;    
+    Session session = null;
     //Manage production workspace
     RepositoryEntry repo = jcrService_.getCurrentRepository().getConfiguration();
-    try {              
+    try {
       String defaultWorkspaceName = jcrService_.getDefaultRepository().getConfiguration().getDefaultWorkspaceName() ;
       session = jcrService_.getRepository(repo.getName()).getSystemSession(defaultWorkspaceName);
       Node usersHome = (Node) session.getItem(
@@ -80,14 +80,14 @@ public class NewUserListener extends UserEventListener {
       return;
     }
   }
-  
-  private void initSystemData(Node usersHome, String userName) throws Exception{           
+
+  private void initSystemData(Node usersHome, String userName) throws Exception{
     Node userHome = usersHome.getNode(userName) ;
-    Node queriesHome =  userHome.getNode(relativePath_) ;           
+    Node queriesHome =  userHome.getNode(relativePath_) ;
     boolean userFound = false;
     NewUserConfig.User templateConfig = null;
-    for (NewUserConfig.User userConfig : config_.getUsers()) {      
-      String currentName = userConfig.getUserName();            
+    for (NewUserConfig.User userConfig : config_.getUsers()) {
+      String currentName = userConfig.getUserName();
       if (config_.getTemplate().equals(currentName))  templateConfig = userConfig;
       if (currentName.equals(userName)) {
         List<NewUserConfig.Query> queries = userConfig.getQueries();
@@ -101,12 +101,12 @@ public class NewUserListener extends UserEventListener {
       List<NewUserConfig.Query> queries = templateConfig.getQueries();
       importQueries(queriesHome, queries);
     }
-    usersHome.save();   
+    usersHome.save();
   }
-  
+
   public void importQueries(Node queriesHome, List<NewUserConfig.Query> queries) throws Exception {
     QueryManager manager = queriesHome.getSession().getWorkspace().getQueryManager();
-    for (NewUserConfig.Query query:queries) {      
+    for (NewUserConfig.Query query:queries) {
       String queryName = query.getQueryName();
       String language = query.getLanguage();
       String statement = query.getQuery();
@@ -114,11 +114,11 @@ public class NewUserListener extends UserEventListener {
       String absPath = queriesHome.getPath() + "/" + queryName;
       Node node = queryNode.storeAsNode(absPath);
       if (!node.isNodeType("exo:datetime")) {
-        node.addMixin("exo:datetime");        
+        node.addMixin("exo:datetime");
       }
       node.setProperty("exo:dateCreated",new GregorianCalendar()) ;
       node.getSession().save();
-    }    
+    }
   }
 
   public void preDelete(User user) {

@@ -24,7 +24,7 @@ import org.exoplatform.webui.ext.manager.UIAbstractManager;
  * Created by The eXo Platform SARL
  * Author : Dang Van Minh
  *          minh.dang@exoplatform.com
- * Dec 29, 2006  
+ * Dec 29, 2006
  * 11:27:14 AM
  */
 @ComponentConfig(template = "system:/groovy/webui/core/UITabPane.gtmpl")
@@ -32,13 +32,13 @@ public class UIUnLockManager extends UIAbstractManager {
 
   public UIUnLockManager() throws Exception {
     addChild(UILockNodeList.class, null, null).setRendered(true);
-    addChild(UILockHolderContainer.class, null, null).setRendered(false);    
+    addChild(UILockHolderContainer.class, null, null).setRendered(false);
   }
-  
+
   public void refresh() throws Exception {
     update();
   }
-  
+
   public void update() throws Exception {
     UILockNodeList uiLockNodeList = getChild(UILockNodeList.class);
     uiLockNodeList.updateLockedNodesGrid(uiLockNodeList.getUIPageIterator().getCurrentPage());
@@ -48,7 +48,7 @@ public class UIUnLockManager extends UIAbstractManager {
       uiLockHolderList.updateLockedNodesGrid(uiLockHolderList.getUIPageIterator().getCurrentPage());
     }
   }
-  
+
   public void initFormPopup(String id) throws Exception {
     removeChildById(id);
     UIPopupWindow uiPopup = addChild(UIPopupWindow.class, null, id);
@@ -59,12 +59,12 @@ public class UIUnLockManager extends UIAbstractManager {
     uiPopup.setShow(true);
     uiPopup.setResizable(true);
   }
-  
+
   public void initPermissionPopup(String membership) throws Exception {
     removeChildById("PermissionPopup");
     UIPopupWindow uiPopup = addChild(UIPopupWindow.class, null, "PermissionPopup");
     uiPopup.setWindowSize(560, 300);
-    UIPermissionSelector uiECMPermission = 
+    UIPermissionSelector uiECMPermission =
       createUIComponent(UIPermissionSelector.class, null, "GroupsOrUsersBrowse");
     uiECMPermission.setSelectedMembership(true);
     if(membership != null && membership.indexOf(":/") > -1) {

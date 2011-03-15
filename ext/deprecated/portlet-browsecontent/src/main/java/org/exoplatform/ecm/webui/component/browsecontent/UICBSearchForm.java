@@ -54,7 +54,7 @@ import org.exoplatform.webui.form.UIFormStringInput;
  * Created by The eXo Platform SARL
  * Author : Pham Tuan
  *          phamtuanchip@yahoo.de
- * Dec 22, 2006 2:48:18 PM 
+ * Dec 22, 2006 2:48:18 PM
  */
 @ComponentConfig(
     lifecycle = UIFormLifecycle.class,
@@ -71,19 +71,19 @@ public class UICBSearchForm extends UIForm {
   final static public String FIELD_CB_CHILD = "childDoc";
   private static final Log LOG  = ExoLogger.getLogger("browsecontent.UICBSearchForm");
   public static final String CATEGORY_SEARCH = "Category";
-  public static final String DOCUMENT_SEARCH = "Content";  
+  public static final String DOCUMENT_SEARCH = "Content";
   public static final String CATEGORY_QUERY = "select * from $0 where jcr:path like '%/$1[%]' " ;
-  public static final String DOCUMENT_QUERY = "select * from $0 where contains(*, '$1') AND jcr:path like '$2[%]/%' ";  
+  public static final String DOCUMENT_QUERY = "select * from $0 where contains(*, '$1') AND jcr:path like '$2[%]/%' ";
   public static final String DOCUMENT_ROOT_QUERY = "select * from $0 where contains(*, '$1') ";
   public boolean isDocumentType = true;
-  protected long duration_ = 0; 
+  protected long duration_ = 0;
   public UICBSearchForm() throws Exception {
     UIFormSelectBox selectType = new UIFormSelectBox(FIELD_OPTION, FIELD_OPTION, getOptions());
     selectType.setOnChange("ChangeType");
     selectType.setValue(DOCUMENT_SEARCH);
     addChild(new UIFormStringInput(FIELD_SEARCHVALUE, FIELD_SEARCHVALUE, null).addValidator(SearchValidator.class));
     addChild(selectType);
-    UIFormCheckBoxInput cbRef = new UIFormCheckBoxInput<Boolean>(FIELD_CB_REF, FIELD_CB_REF, null); 
+    UIFormCheckBoxInput cbRef = new UIFormCheckBoxInput<Boolean>(FIELD_CB_REF, FIELD_CB_REF, null);
     UIFormCheckBoxInput cbRel = new UIFormCheckBoxInput<Boolean>(FIELD_CB_CHILD, FIELD_CB_CHILD, null);
     addChild(cbRef.setRendered(isDocumentType));
     addChild(cbRel.setRendered(isDocumentType));
@@ -94,7 +94,7 @@ public class UICBSearchForm extends UIForm {
     options.add(new SelectItemOption<String>(DOCUMENT_SEARCH,DOCUMENT_SEARCH));
     options.add(new SelectItemOption<String>(CATEGORY_SEARCH,CATEGORY_SEARCH));
     return options;
-  } 
+  }
   public Node getNode()throws Exception{return getAncestorOfType(UIBrowseContainer.class).getCurrentNode();}
   public long searchTime() { return duration_; }
 
@@ -107,10 +107,10 @@ public class UICBSearchForm extends UIForm {
       queryManager = currentNode.getSession().getWorkspace().getQueryManager();
     }catch (Exception e) {
       return resultList;
-    }            
+    }
     duration_ = 0;
     String statement = StringUtils.replace(CATEGORY_QUERY, "$1", keyword.trim());
-    for(String type : Utils.CATEGORY_NODE_TYPES) {            
+    for(String type : Utils.CATEGORY_NODE_TYPES) {
       String queryStatement = StringUtils.replace(statement, "$0", type);
       long beforeTime = System.currentTimeMillis();
       try{
@@ -121,10 +121,10 @@ public class UICBSearchForm extends UIForm {
         NodeIterator iter = queryResult.getNodes();
         while(iter.hasNext()) {
           Node node = iter.nextNode();
-          if(node.getPath().startsWith(currentNode.getPath())) {                    
-            result = new ResultData(node.getName(), node.getPath(), 
+          if(node.getPath().startsWith(currentNode.getPath())) {
+            result = new ResultData(node.getName(), node.getPath(),
                 node.getSession().getWorkspace().getName());
-            resultList.add(result); 
+            resultList.add(result);
           }
         }
       } catch(Exception e) {
@@ -135,11 +135,11 @@ public class UICBSearchForm extends UIForm {
     uiController.setSearchTime(duration_);
     uiController.setResultRecord(resultList.size());
     return resultList;
-  } 
+  }
 
   @SuppressWarnings({"unused", "unchecked"})
   public List<ResultData> searchDocument(String keyword, boolean reference,
-      boolean relation, Node currentNode) throws Exception { 
+      boolean relation, Node currentNode) throws Exception {
     String nodePath = currentNode.getPath();
     List<ResultData> resultList = new ArrayList<ResultData>();
     Map<String, ResultData> temp = new HashMap<String, ResultData>();
@@ -176,8 +176,8 @@ public class UICBSearchForm extends UIForm {
     if(nodePath.equals("/")) {
       statement = StringUtils.replace(DOCUMENT_ROOT_QUERY, "$1", keyword) ;
     } else {
-      statement = StringUtils.replace(statement, "$2", nodePath) ;    
-    }    
+      statement = StringUtils.replace(statement, "$2", nodePath) ;
+    }
     duration_ = 0;
     TemplateService templateService = getApplicationComponent(TemplateService.class);
     List<String> documentNodeTypes = templateService.getDocumentTemplates();
@@ -185,8 +185,8 @@ public class UICBSearchForm extends UIForm {
     documentNodeTypes.add("nt:resource");
     //TODO need review this code to improve performance
     //TODO need define one nodetype as a super type of all documents node type
-    for(String ntDocument : documentNodeTypes) {            
-      String queryStatement = StringUtils.replace(statement, "$0", ntDocument);      
+    for(String ntDocument : documentNodeTypes) {
+      String queryStatement = StringUtils.replace(statement, "$0", ntDocument);
       long beforeTime = System.currentTimeMillis();
       try{
         Query query = queryManager.createQuery(queryStatement, Query.SQL);
@@ -237,11 +237,11 @@ public class UICBSearchForm extends UIForm {
     public void execute(Event<UICBSearchForm>  event) throws Exception {
       UICBSearchForm uiForm = event.getSource();
       String searchType = uiForm.getUIFormSelectBox(FIELD_OPTION).getValue();
-      uiForm.isDocumentType = searchType.equals(DOCUMENT_SEARCH); 
+      uiForm.isDocumentType = searchType.equals(DOCUMENT_SEARCH);
       uiForm.getUIFormCheckBoxInput(FIELD_CB_REF).setRendered(uiForm.isDocumentType);
       uiForm.getUIFormCheckBoxInput(FIELD_CB_CHILD).setRendered(uiForm.isDocumentType);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiForm.getAncestorOfType(UISearchController.class));
-    }   
+    }
   }
 
   static  public class SearchActionListener extends EventListener<UICBSearchForm> {
@@ -250,11 +250,11 @@ public class UICBSearchForm extends UIForm {
       UIBrowseContainer container = uiForm.getAncestorOfType(UIBrowseContainer.class);
       Node currentNode = container.getCurrentNode();
       String keyword = uiForm.getUIStringInput(FIELD_SEARCHVALUE).getValue();
-      String type = uiForm.getUIFormSelectBox(FIELD_OPTION).getValue();            
+      String type = uiForm.getUIFormSelectBox(FIELD_OPTION).getValue();
       List<ResultData> queryResult = null;
       UICBSearchResults searchResults = container.findFirstComponentOfType(UICBSearchResults.class);
       UIApplication app = uiForm.getAncestorOfType(UIApplication.class);
-      if(Utils.isNameEmpty(keyword)) {          
+      if(Utils.isNameEmpty(keyword)) {
         app.addMessage(new ApplicationMessage("UICBSearchForm.msg.not-empty", null));
         event.getRequestContext().addUIComponentToUpdateByAjax(app.getUIPopupMessages());
         return;
@@ -263,7 +263,7 @@ public class UICBSearchForm extends UIForm {
         queryResult = uiForm.searchByCategory(keyword, currentNode);
       } else {
         boolean reference = uiForm.getUIFormCheckBoxInput(FIELD_CB_REF).isChecked();
-        boolean relation = uiForm.getUIFormCheckBoxInput(FIELD_CB_CHILD).isChecked();   
+        boolean relation = uiForm.getUIFormCheckBoxInput(FIELD_CB_CHILD).isChecked();
         queryResult = uiForm.searchDocument(keyword, reference, relation, currentNode);
       }
       searchResults.updateGrid(queryResult);

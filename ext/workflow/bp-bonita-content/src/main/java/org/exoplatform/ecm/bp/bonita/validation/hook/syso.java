@@ -9,12 +9,12 @@ import org.ow2.bonita.facade.runtime.ActivityInstance;
 
 public class syso implements Hook {
 
-	private static Logger log = Logger.getLogger(syso.class.getName());
-	
-	public void execute(QueryAPIAccessor arg0,
-			ActivityInstance<ActivityBody> arg1) throws Exception {
-		log.info("#####################   I AM IN THE ACTIVITY : " + arg1.getActivityId());
-		
-	}
+  private static Logger log = Logger.getLogger(syso.class.getName());
+
+  public void execute(QueryAPIAccessor arg0,
+      ActivityInstance<ActivityBody> arg1) throws Exception {
+    log.info("#####################   I AM IN THE ACTIVITY : " + arg1.getActivityId());
+
+  }
 
 }

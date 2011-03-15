@@ -49,14 +49,14 @@ public class ThumbnailServiceImpl implements ThumbnailService {
   final private static String JCR_MIMETYPE = "jcr:mimeType".intern();
   final private static String JCR_DATA = "jcr:data".intern();
   final private static String NT_FILE = "nt:file".intern();
-  
+
   private boolean isEnableThumbnail_ = false;
   private String smallSize_;
   private String mediumSize_;
   private String bigSize_;
   private String mimeTypes_;
   private List<ComponentPlugin> plugins_ = new ArrayList<ComponentPlugin>();
-  
+
   public ThumbnailServiceImpl(InitParams initParams) throws Exception {
     smallSize_ = initParams.getValueParam("smallSize").getValue();
     mediumSize_ = initParams.getValueParam("mediumSize").getValue();
@@ -98,7 +98,7 @@ public class ThumbnailServiceImpl implements ThumbnailService {
     }
     return fileListNodes;
   }
-  
+
   /**
    * {@inheritDoc}
    */
@@ -139,7 +139,7 @@ public class ThumbnailServiceImpl implements ThumbnailService {
     }
     return null;
   }
-  
+
   /**
    * {@inheritDoc}
    */
@@ -148,14 +148,14 @@ public class ThumbnailServiceImpl implements ThumbnailService {
     else if(propertyName.equals(MEDIUM_SIZE)) parseImageSize(thumbnailNode, image, mediumSize_, MEDIUM_SIZE);
     else if(propertyName.equals(BIG_SIZE)) parseImageSize(thumbnailNode, image, bigSize_, BIG_SIZE);
   }
- 
+
   /**
    * {@inheritDoc}
    */
   public void createSpecifiedThumbnail(Node node, BufferedImage image, String propertyName) throws Exception {
     addThumbnailImage(addThumbnailNode(node), image, propertyName);
   }
-  
+
   /**
    * {@inheritDoc}
    */
@@ -167,14 +167,14 @@ public class ThumbnailServiceImpl implements ThumbnailService {
       thumbnailNode.getSession().save();
     }
   }
-  
+
   /**
    * {@inheritDoc}
    */
   public void processThumbnailList(List<Node> listNodes, String type) throws Exception {
     for(Node node : listNodes) {
       Node thumbnailNode = addThumbnailNode(node);
-      if(thumbnailNode != null && !thumbnailNode.hasProperty(THUMBNAIL_LAST_MODIFIED) && 
+      if(thumbnailNode != null && !thumbnailNode.hasProperty(THUMBNAIL_LAST_MODIFIED) &&
           node.isNodeType(NT_FILE)) {
         Node contentNode = node.getNode(JCR_CONTENT);
         if(contentNode.getProperty(JCR_MIMETYPE).getString().startsWith("image")) {
@@ -184,14 +184,14 @@ public class ThumbnailServiceImpl implements ThumbnailService {
       }
     }
   }
-  
+
   /**
    * {@inheritDoc}
    */
   public List<String> getMimeTypes() {
     return Arrays.asList(mimeTypes_.split(";"));
   }
-  
+
   /**
    * {@inheritDoc}
    */
@@ -202,7 +202,7 @@ public class ThumbnailServiceImpl implements ThumbnailService {
     Node thumbnailNode = ThumbnailUtils.getThumbnailNode(thumbnailFolder, identifier);
     return thumbnailNode;
   }
-  
+
   /**
    * {@inheritDoc}
    */
@@ -215,7 +215,7 @@ public class ThumbnailServiceImpl implements ThumbnailService {
       return null;
     }
   }
-  
+
   /**
    * {@inheritDoc}
    */
@@ -231,18 +231,18 @@ public class ThumbnailServiceImpl implements ThumbnailService {
       }
     }
   }
-  
+
   public void addPlugin(ComponentPlugin plugin) {
     if(plugin instanceof ThumbnailPlugin) plugins_.add(plugin);
   }
 
   public List<ComponentPlugin> getComponentPlugins() {
     return plugins_;
-  }  
-  
+  }
+
   /**
    * Put data from image to 3 property : exo:smallSizes, exo:mediumSizes, exo:bigSizes
-   * with each property, image is parsed to correlative size 
+   * with each property, image is parsed to correlative size
    * @param node
    * @param image
    * @throws Exception
@@ -252,7 +252,7 @@ public class ThumbnailServiceImpl implements ThumbnailService {
     parseImageSize(node, image, mediumSize_, MEDIUM_SIZE);
     parseImageSize(node, image, bigSize_, BIG_SIZE);
   }
-  
+
   /**
    * Put image data to property name of node with given height and width
    * @param thumbnailNode
@@ -262,21 +262,21 @@ public class ThumbnailServiceImpl implements ThumbnailService {
    * @param propertyName
    * @throws Exception
    */
-  private void createThumbnailImage(Node thumbnailNode, BufferedImage image, int width, int height, 
+  private void createThumbnailImage(Node thumbnailNode, BufferedImage image, int width, int height,
       String propertyName) throws Exception {
     InputStream thumbnailStream = ImageUtils.scaleImage(image, width, height);
     try {
       thumbnailNode.setProperty(propertyName, thumbnailStream);
       thumbnailNode.getSession().save();
       thumbnailNode.setProperty(THUMBNAIL_LAST_MODIFIED, new GregorianCalendar());
-      thumbnailNode.getSession().save();      
+      thumbnailNode.getSession().save();
     } catch (ItemExistsException e) {
       // The folder could already be created due to potential concurrent access
     } finally {
-      thumbnailStream.close();      
+      thumbnailStream.close();
     }
   }
-  
+
   /**
    * Analysis size which has format (width x height) and call method createThumbnailImage
    * to put data into propertyName of node

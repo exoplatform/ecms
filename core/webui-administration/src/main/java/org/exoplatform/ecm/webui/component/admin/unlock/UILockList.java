@@ -32,7 +32,7 @@ import org.exoplatform.webui.event.EventListener;
  * Created by The eXo Platform SARL
  * Author : Dang Van Minh
  *          minh.dang@exoplatform.com
- * Dec 29, 2006  
+ * Dec 29, 2006
  * 11:30:17 AM
  */
 @ComponentConfig(
@@ -45,14 +45,14 @@ public class UILockList extends UIComponentDecorator {
   final static public String[] ACTIONS = {};
   final static public String ST_EDIT = "EditUnLockForm";
   private UIPageIterator uiPageIterator_;
-  
+
   public UILockList() throws Exception {
     uiPageIterator_ = createUIComponent(UIPageIterator.class, null, "LockListIterator");
-    setUIComponent(uiPageIterator_) ;    
+    setUIComponent(uiPageIterator_) ;
   }
-  
+
   public String[] getActions() { return ACTIONS ; }
-  
+
   public void updateLockedNodesGrid(int currentPage) throws Exception {
     PageList pageList = new ObjectPageList(getAllGroupsOrUsersForLock(), 10);
     uiPageIterator_.setPageList(pageList);
@@ -61,17 +61,17 @@ public class UILockList extends UIComponentDecorator {
     else
       uiPageIterator_.setCurrentPage(currentPage);
   }
-  
+
   public UIPageIterator getUIPageIterator() { return uiPageIterator_ ; }
-  
-  public List getGroupsOrUsersForLock() throws Exception { return uiPageIterator_.getCurrentPageData(); } 
-  
+
+  public List getGroupsOrUsersForLock() throws Exception { return uiPageIterator_.getCurrentPageData(); }
+
   public List<String> getAllGroupsOrUsersForLock() throws Exception {
     LockService lockService = getApplicationComponent(LockService.class);
-        
+
     return lockService.getAllGroupsOrUsersForLock();
   }
-  
+
   static public class DeleteLockActionListener extends EventListener<UILockList> {
     public void execute(Event<UILockList> event) throws Exception {
       UIUnLockManager uiUnLockManager = event.getSource().getParent();
@@ -82,5 +82,5 @@ public class UILockList extends UIComponentDecorator {
       uiLockList.updateLockedNodesGrid(uiLockList.uiPageIterator_.getCurrentPage());
       event.getRequestContext().addUIComponentToUpdateByAjax(uiUnLockManager);
     }
-  }  
+  }
 }

@@ -27,7 +27,7 @@ import org.exoplatform.webui.core.lifecycle.Lifecycle;
  * Created by The eXo Platform SAS
  * @author : Hoa.Pham
  *          hoa.pham@exoplatform.com
- * Jun 23, 2008  
+ * Jun 23, 2008
  */
 /**
  * The Class UIPopupContainer.
@@ -35,10 +35,10 @@ import org.exoplatform.webui.core.lifecycle.Lifecycle;
 @ComponentConfig( lifecycle = Lifecycle.class )
 @Deprecated
 public class UIPopupContainer extends UIContainer {
-  
+
   /**
    * Instantiates a new uI popup container.
-   * 
+   *
    * @throws Exception the exception
    */
   public UIPopupContainer() throws Exception {
@@ -56,7 +56,7 @@ public class UIPopupContainer extends UIContainer {
 
   /**
    * Activate.
-   * 
+   *
    * @param type the type
    * @param width the width
    * @return the t
@@ -68,7 +68,7 @@ public class UIPopupContainer extends UIContainer {
 
   /**
    * Activate.
-   * 
+   *
    * @param type the type
    * @param configId the config id
    * @param width the width
@@ -85,7 +85,7 @@ public class UIPopupContainer extends UIContainer {
 
   /**
    * Activate.
-   * 
+   *
    * @param uiComponent the ui component
    * @param width the width
    * @param height the height
@@ -94,14 +94,14 @@ public class UIPopupContainer extends UIContainer {
   public void activate(UIComponent uiComponent, int width, int height) throws Exception {
     activate(uiComponent, width, height, true);
   }
-  
+
   public void activate(UIComponent uiComponent, int width) throws Exception {
     activate(uiComponent, width, 0, true);
   }
 
   /**
    * Activate.
-   * 
+   *
    * @param uiComponent the ui component
    * @param width the width
    * @param height the height
@@ -121,7 +121,7 @@ public class UIPopupContainer extends UIContainer {
 
   /**
    * De activate.
-   * 
+   *
    * @throws Exception the exception
    */
   public void deActivate() throws Exception {
@@ -134,7 +134,7 @@ public class UIPopupContainer extends UIContainer {
 
   /**
    * Cancel popup action.
-   * 
+   *
    * @throws Exception the exception
    */
   public void cancelPopupAction() throws Exception {

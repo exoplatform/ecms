@@ -28,7 +28,7 @@ import org.exoplatform.services.jcr.ext.classify.NodeClassifyService;
  * Created by The eXo Platform SAS
  * Author : Hoa.Pham
  *          hoa.pham@exoplatform.com
- * Apr 9, 2008  
+ * Apr 9, 2008
  */
 public class NodeClassifyServiceImpl implements NodeClassifyService {
   private HashMap<String, NodeClassifyPlugin> nodeClassifyPlugins = new HashMap<String, NodeClassifyPlugin>();
@@ -43,7 +43,7 @@ public class NodeClassifyServiceImpl implements NodeClassifyService {
   public void addClassifyPlugin(ComponentPlugin componentPlugin) throws Exception {
     if (componentPlugin instanceof NodeClassifyPlugin) {
       NodeClassifyPlugin classifyPlugin = (NodeClassifyPlugin) componentPlugin;
-      nodeClassifyPlugins.put(classifyPlugin.getClass().getName(), classifyPlugin);      
+      nodeClassifyPlugins.put(classifyPlugin.getClass().getName(), classifyPlugin);
     }
   }
 
@@ -53,7 +53,7 @@ public class NodeClassifyServiceImpl implements NodeClassifyService {
   }
 
   public NodeClassifyPlugin getNodeClassifyPlugin(String type) throws Exception {
-    return nodeClassifyPlugins.get(type);   
+    return nodeClassifyPlugins.get(type);
   }
 
   public void removeClassifyPlygin(String type) throws Exception {

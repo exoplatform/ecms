@@ -23,23 +23,23 @@ import org.exoplatform.webui.ext.manager.UIAbstractManager;
  * Created by The eXo Platform SARL
  * Author : Dang Van Minh
  *          minh.dang@exoplatform.com
- * Jan 11, 2007  
+ * Jan 11, 2007
  * 2:22:08 PM
  */
 @ComponentConfig(template = "system:/groovy/webui/core/UITabPane.gtmpl")
 public class UIFolksonomyManager extends UIAbstractManager {
-  
+
   public UIFolksonomyManager() throws Exception {
     addChild(UITagManager.class, null, null);
     addChild(UITagPermissionManager.class, null, null).setRendered(false);
   }
-  
+
   public void refresh() throws Exception {
     update();
   }
-  
+
   public void update() throws Exception {
     getChild(UITagManager.class).update();
   }
-  
+
 }

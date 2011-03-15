@@ -41,13 +41,13 @@ import org.exoplatform.services.organization.OrganizationService;
  * Sep 15, 2008 11:17:13 AM
  */
 public class LockUtil {
-  
+
   public static ExoCache getLockCache() throws Exception {
     ExoContainer container = ExoContainerContext.getCurrentContainer();
     CacheService cacheService = (CacheService)container.getComponentInstanceOfType(CacheService.class);
     return cacheService.getCacheInstance(LockManagerImpl.class.getName());
   }
-  
+
   @SuppressWarnings("unchecked")
   public static void keepLock(Lock lock) throws Exception {
     ExoCache lockcache = getLockCache();
@@ -59,11 +59,11 @@ public class LockUtil {
       lockedNodesInfo = new HashMap<String,String>();
     }
     lockedNodesInfo.put(key,lock.getLockToken());
-    lockcache.put(userId,lockedNodesInfo);    
+    lockcache.put(userId,lockedNodesInfo);
   }
-  
+
   public static void keepLock(Lock lock, String userId) throws Exception {
-    ExoCache lockcache = getLockCache();    
+    ExoCache lockcache = getLockCache();
     String keyRoot = createLockKey(lock.getNode(), userId);
     Map<String,String> lockedNodesInfo = (Map<String,String>)lockcache.get(userId);
     if(lockedNodesInfo == null) {
@@ -72,9 +72,9 @@ public class LockUtil {
     lockedNodesInfo.put(keyRoot, lock.getLockToken());
     lockcache.put(userId, lockedNodesInfo);
   }
-  
+
   public static void keepLock(Lock lock, String userId, String lockToken) throws Exception {
-    ExoCache lockcache = getLockCache();    
+    ExoCache lockcache = getLockCache();
     String keyRoot = createLockKey(lock.getNode(), userId);
     Map<String,String> lockedNodesInfo = (Map<String,String>)lockcache.get(userId);
     if(lockedNodesInfo == null) {
@@ -83,7 +83,7 @@ public class LockUtil {
     lockedNodesInfo.put(keyRoot, lockToken);
     lockcache.put(userId, lockedNodesInfo);
   }
-  
+
   @SuppressWarnings("unchecked")
   public static void removeLock(Node node) throws Exception {
     ExoCache lockcache = getLockCache();
@@ -94,7 +94,7 @@ public class LockUtil {
     if(lockedNodesInfo == null) return;
     lockedNodesInfo.remove(key);
   }
-  
+
   @SuppressWarnings("unchecked")
   public static void changeLockToken(Node oldNode, Node newNode) throws Exception {
     ExoCache lockcache = getLockCache();
@@ -110,7 +110,7 @@ public class LockUtil {
     lockedNodesInfo.put(newKey,newNode.getLock().getLockToken());
     lockcache.put(userId,lockedNodesInfo);
   }
-  
+
   @SuppressWarnings("unchecked")
   public static void changeLockToken(String srcPath, Node newNode) throws Exception {
     ExoCache lockcache = getLockCache();
@@ -128,33 +128,33 @@ public class LockUtil {
     }
     lockcache.put(userId, lockedNodesInfo);
   }
-  
+
   @SuppressWarnings("unchecked")
-  public static String getLockTokenOfUser(Node node) throws Exception {    
+  public static String getLockTokenOfUser(Node node) throws Exception {
     ExoCache lockcache = getLockCache();
     String key = createLockKey(node);
     String userId = Util.getPortalRequestContext().getRemoteUser();
     if(userId == null) userId = SystemIdentity.ANONIM;
     Map<String,String> lockedNodesInfo = (Map<String,String>)lockcache.get(userId);
-    if ((lockedNodesInfo != null) && (lockedNodesInfo.get(key) != null)) { 
+    if ((lockedNodesInfo != null) && (lockedNodesInfo.get(key) != null)) {
       return lockedNodesInfo.get(key);
     }
     return null;
   }
-  
+
   @SuppressWarnings("unchecked")
-  public static String getLockToken(Node node) throws Exception {    
+  public static String getLockToken(Node node) throws Exception {
     ExoCache lockcache = getLockCache();
     String key = createLockKey(node);
     String userId = Util.getPortalRequestContext().getRemoteUser();
     if(userId == null) userId = SystemIdentity.ANONIM;
     Map<String,String> lockedNodesInfo = (Map<String,String>)lockcache.get(userId);
-    if ((lockedNodesInfo != null) && (lockedNodesInfo.get(key) != null)) { 
+    if ((lockedNodesInfo != null) && (lockedNodesInfo.get(key) != null)) {
       return lockedNodesInfo.get(key);
     }
     ExoContainer container = ExoContainerContext.getCurrentContainer();
-    OrganizationService service = (OrganizationService) container.getComponentInstanceOfType(OrganizationService.class);    
-    Collection<org.exoplatform.services.organization.Membership>  
+    OrganizationService service = (OrganizationService) container.getComponentInstanceOfType(OrganizationService.class);
+    Collection<org.exoplatform.services.organization.Membership>
                         collection = service.getMembershipHandler().findMembershipsByUser(userId);
     String keyPermission;
     for(org.exoplatform.services.organization.Membership membership : collection) {
@@ -169,24 +169,24 @@ public class LockUtil {
       }
     }
     return null;
-  }  
-  
+  }
+
   public static String getOldLockKey(String srcPath, Node node) throws Exception {
     StringBuffer buffer = new StringBuffer();
     Session session = node.getSession();
-    String repositoryName = ((ManageableRepository)session.getRepository()).getConfiguration().getName();    
+    String repositoryName = ((ManageableRepository)session.getRepository()).getConfiguration().getName();
     buffer.append(repositoryName).append("/::/")
           .append(session.getWorkspace().getName()).append("/::/")
           .append(session.getUserID()).append(":/:")
-          .append(srcPath);      
+          .append(srcPath);
     return buffer.toString();
   }
-  
+
   public static String createLockKey(Node node) throws Exception {
     StringBuffer buffer = new StringBuffer();
     Session session = node.getSession();
-    String repositoryName = ((ManageableRepository)session.getRepository()).getConfiguration().getName();    
-    String userId = Util.getPortalRequestContext().getRemoteUser();    
+    String repositoryName = ((ManageableRepository)session.getRepository()).getConfiguration().getName();
+    String userId = Util.getPortalRequestContext().getRemoteUser();
     if(userId == null) userId = SystemIdentity.ANONIM;
     buffer.append(repositoryName).append("/::/")
           .append(session.getWorkspace().getName()).append("/::/")
@@ -194,11 +194,11 @@ public class LockUtil {
           .append(node.getPath());
     return buffer.toString();
   }
-  
+
   public static String createLockKey(Node node, String userId) throws Exception {
     StringBuffer buffer = new StringBuffer();
     Session session = node.getSession();
-    String repositoryName = ((ManageableRepository)session.getRepository()).getConfiguration().getName();    
+    String repositoryName = ((ManageableRepository)session.getRepository()).getConfiguration().getName();
     if(userId == null) userId = SystemIdentity.ANONIM;
     buffer.append(repositoryName).append("/::/")
           .append(session.getWorkspace().getName()).append("/::/")
@@ -206,5 +206,5 @@ public class LockUtil {
           .append(node.getPath());
     return buffer.toString();
   }
-  
+
 }

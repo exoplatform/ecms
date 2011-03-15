@@ -51,7 +51,7 @@ import org.exoplatform.webui.ext.manager.UIAbstractManagerComponent;
  * Created by The eXo Platform SARL
  * Author : Hoang Van Hung
  *          hunghvit@gmail.com
- * Aug 6, 2009  
+ * Aug 6, 2009
  */
 
 @ComponentConfig(
@@ -61,21 +61,21 @@ import org.exoplatform.webui.ext.manager.UIAbstractManagerComponent;
 )
 
 public class CheckInManageComponent extends UIAbstractManagerComponent {
-  
-  private static final List<UIExtensionFilter> FILTERS 
-  			= Arrays.asList(new UIExtensionFilter[]{new IsNotInTrashFilter(),
-  																							new CanSetPropertyFilter(), 
-  																							new IsNotLockedFilter(), 
-  																							new IsVersionableOrAncestorFilter(), 
-  																							new IsCheckedOutFilter(), 
-  																							new IsVersionableFilter(),
-  																							new IsNotTrashHomeNodeFilter()});
-  
+
+  private static final List<UIExtensionFilter> FILTERS
+        = Arrays.asList(new UIExtensionFilter[]{new IsNotInTrashFilter(),
+                                                new CanSetPropertyFilter(),
+                                                new IsNotLockedFilter(),
+                                                new IsVersionableOrAncestorFilter(),
+                                                new IsCheckedOutFilter(),
+                                                new IsVersionableFilter(),
+                                                new IsNotTrashHomeNodeFilter()});
+
   @UIExtensionFilters
   public List<UIExtensionFilter> getFilters() {
     return FILTERS;
   }
-  
+
   public static void checkInManage(Event<? extends UIComponent> event, UIJCRExplorer uiExplorer,
       UIApplication uiApp) throws Exception {
     String nodePath = event.getRequestContext().getRequestParameter(OBJECTID);
@@ -94,15 +94,15 @@ public class CheckInManageComponent extends UIAbstractManagerComponent {
     nodePath = node.getPath();
     // Reset the session to manage the links that potentially change of workspace
     session = node.getSession();
-    // Reset the workspace name to manage the links that potentially change of workspace 
-    wsName = session.getWorkspace().getName();  
-    
+    // Reset the workspace name to manage the links that potentially change of workspace
+    wsName = session.getWorkspace().getName();
+
     try {
       Node parentNode = node.getParent();
       uiExplorer.addLockToken(parentNode);
       node.checkin();
     } catch(PathNotFoundException path) {
-      uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.path-not-found-exception", 
+      uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.path-not-found-exception",
           null,ApplicationMessage.WARNING));
       event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
       return;
@@ -111,9 +111,9 @@ public class CheckInManageComponent extends UIAbstractManagerComponent {
       event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
       uiExplorer.updateAjax(event);
     }
-    
+
   }
-  
+
   public static class CheckInActionListener extends UIWorkingAreaActionListener<CheckInManageComponent> {
     public void processEvent(Event<CheckInManageComponent> event) throws Exception {
       UIJCRExplorer uiExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class);
@@ -121,7 +121,7 @@ public class CheckInManageComponent extends UIAbstractManagerComponent {
       checkInManage(event, uiExplorer, uiApp);
     }
   }
-  
+
   @Override
   public Class<? extends UIAbstractManager> getUIAbstractManagerClass() {
     return null;

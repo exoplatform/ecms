@@ -30,50 +30,50 @@ import org.jbpm.instantiation.Delegation;
  * Created by The eXo Platform SAS
  * Author : Pham Xuan Hoa
  *          hoa.pham@exoplatform.com
- * Dec 13, 2007  
+ * Dec 13, 2007
  */
 public class ScheduleBackupTimerActionHandler extends BackupContentActionHandler {
 
   private static final long serialVersionUID = 1L;
   private static final Log LOG  = ExoLogger.getLogger(ScheduleBackupTimerActionHandler.class);
-  
-  public void execute(ExecutionContext context) {    
-    try {              
+
+  public void execute(ExecutionContext context) {
+    try {
       Date currentDate = new Date();
       Date endDate = null;
       if (context.getVariable("endDate") instanceof Date) {
         endDate = (Date) context.getVariable("endDate");
       }
       if (endDate != null) {
-        if (endDate.after(currentDate)) {        
+        if (endDate.after(currentDate)) {
           // Create and save the Action object
           Delegation delegation = new Delegation();
-          delegation.setClassName("org.exoplatform.processes.publishing.BackupContentActionHandler");        
+          delegation.setClassName("org.exoplatform.processes.publishing.BackupContentActionHandler");
           delegation.setProcessDefinition(context.getProcessDefinition());
-          
+
           Action backupAction = new Action();
           backupAction.setName("backupAction");
           backupAction.setActionDelegation(delegation);
-          backupAction.setProcessDefinition(context.getProcessDefinition());        
+          backupAction.setProcessDefinition(context.getProcessDefinition());
           context.getProcessDefinition().addAction(backupAction);
-          //create the timer      
+          //create the timer
           org.jbpm.job.Timer jobTimer = new org.jbpm.job.Timer(context.getToken());
-          jobTimer.setName("backupTimer");            
+          jobTimer.setName("backupTimer");
           jobTimer.setDueDate(endDate);
           jobTimer.setGraphElement(context.getEventSource());
           jobTimer.setTaskInstance(context.getTaskInstance());
           jobTimer.setAction(backupAction);
-          jobTimer.setTransitionName("end");  
+          jobTimer.setTransitionName("end");
           ProcessUtil.createTimer(context, jobTimer);
-          
+
           //TODO we should change this code to update process by asynchronys technichque
           WorkflowServiceContainerImpl containerImpl = ProcessUtil.getService(context, WorkflowServiceContainerImpl.class);
           JbpmContext jbpmContext = containerImpl.openJbpmContext();
-          jbpmContext.save(context.getProcessInstance());        
-        } else {                
-          backupContent(context);      
+          jbpmContext.save(context.getProcessInstance());
+        } else {
+          backupContent(context);
           context.getProcessInstance().getRootToken().signal("backup-done");
-        }      
+        }
       }
     } catch (Exception ex) {
       ExoLogger.getLogger(this.getClass()).equals(ex);

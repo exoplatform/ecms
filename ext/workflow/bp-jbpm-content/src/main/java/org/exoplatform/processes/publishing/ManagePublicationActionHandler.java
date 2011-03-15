@@ -26,42 +26,42 @@ import org.jbpm.graph.exe.ExecutionContext;
  * Created by The eXo Platform SAS
  * Author : Pham Xuan Hoa
  *          hoa.pham@exoplatform.com
- * Dec 13, 2007  
+ * Dec 13, 2007
  */
 public class ManagePublicationActionHandler implements ActionHandler {
 
-  private static final long serialVersionUID = 1L;    
+  private static final long serialVersionUID = 1L;
   private boolean executed = false;
   private static final Log LOG  = ExoLogger.getLogger(ManagePublicationActionHandler.class);
 
   public void execute(ExecutionContext context) {
-    try {      
+    try {
       if(executed) {
-        return; 
-      }             
+        return;
+      }
       executed = true;
       publishContent(context);
     } catch (Exception e) {
       LOG.error("Unexpected error", e);
       ExoLogger.getLogger(this.getClass()).error(e);
-    } finally {               
-      ProcessUtil.deleteTimer(context, "publicationTimer", context.getToken());      
-      context.getToken().signal("publication-done");            
+    } finally {
+      ProcessUtil.deleteTimer(context, "publicationTimer", context.getToken());
+      context.getToken().signal("publication-done");
     }
   }
-  
-  protected void publishContent(ExecutionContext context) throws Exception{    
+
+  protected void publishContent(ExecutionContext context) throws Exception{
     String[] currentLocation = ProcessUtil.getCurrentLocation(context);
     String currentWorkspace = currentLocation[1];
-    String currentPath = currentLocation[2];                    
+    String currentPath = currentLocation[2];
     String publishWorkspace=(String)context.getVariable("exo:publishWorkspace");
     String publishPath = (String)context.getVariable("exo:publishPath");
     String realPublishPath = ProcessUtil.computeDestinationPath(context, currentPath,publishPath);
-    CmsService cmsService = ProcessUtil.getService(context, CmsService.class);            
-    cmsService.moveNode(currentPath, currentWorkspace, publishWorkspace, realPublishPath);    
-    context.setVariable(ProcessUtil.CURRENT_STATE,ProcessUtil.LIVE);    
+    CmsService cmsService = ProcessUtil.getService(context, CmsService.class);
+    cmsService.moveNode(currentPath, currentWorkspace, publishWorkspace, realPublishPath);
+    context.setVariable(ProcessUtil.CURRENT_STATE,ProcessUtil.LIVE);
     ProcessUtil.setCurrentLocation(context,publishWorkspace,realPublishPath);
     ProcessUtil.publish(context);
   }
 
-} 
+}

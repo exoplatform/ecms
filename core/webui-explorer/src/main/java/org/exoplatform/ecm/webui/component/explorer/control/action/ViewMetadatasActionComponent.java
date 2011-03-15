@@ -40,7 +40,7 @@ import org.exoplatform.webui.ext.filter.UIExtensionFilters;
  * Created by The eXo Platform SAS
  * Author : eXoPlatform
  *          nicolas.filotto@exoplatform.com
- * 6 mai 2009  
+ * 6 mai 2009
  */
 @ComponentConfig(
      events = {
@@ -50,12 +50,12 @@ import org.exoplatform.webui.ext.filter.UIExtensionFilters;
 public class ViewMetadatasActionComponent extends UIComponent {
 
   private static final List<UIExtensionFilter> FILTERS = Arrays.asList(new UIExtensionFilter[]{new HasMetadataTemplatesFilter()});
-  
+
   @UIExtensionFilters
   public List<UIExtensionFilter> getFilters() {
     return FILTERS;
   }
-  
+
   public static class ViewMetadatasActionListener extends UIActionBarActionListener<ViewMetadatasActionComponent> {
     public void processEvent(Event<ViewMetadatasActionComponent> event) throws Exception {
       UIActionBar uiActionBar = event.getSource().getAncestorOfType(UIActionBar.class);
@@ -63,7 +63,7 @@ public class ViewMetadatasActionComponent extends UIComponent {
       Hashtable<String, String> metaDataTemp = uiActionBar.getMetadataTemplates();
       UIPopupContainer UIPopupContainer = uiJCRExplorer.getChild(UIPopupContainer.class);
       UIPopupContainer.activate(UIViewMetadataManager.class, 700);
-      UIViewMetadataManager uiMetadataManager = 
+      UIViewMetadataManager uiMetadataManager =
         UIPopupContainer.findFirstComponentOfType(UIViewMetadataManager.class);
       UIViewMetadataContainer uiMetadataContainer = uiMetadataManager.getChild(UIViewMetadataContainer.class);
       int i = 0;
@@ -72,7 +72,7 @@ public class ViewMetadatasActionComponent extends UIComponent {
         String key = (String) enu.nextElement();
         String template = metaDataTemp.get(key);
         if(template != null && template.length() > 0) {
-          UIViewMetadataTemplate uiMetaView = 
+          UIViewMetadataTemplate uiMetaView =
             uiMetadataContainer.createUIComponent(UIViewMetadataTemplate.class, null, key) ;
           uiMetaView.setTemplateType(key) ;
           uiMetadataContainer.addChild(uiMetaView) ;

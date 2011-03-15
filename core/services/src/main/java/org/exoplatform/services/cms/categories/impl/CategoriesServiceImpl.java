@@ -45,89 +45,89 @@ import org.picocontainer.Startable;
  * to replace this one.
  */
 @Deprecated
-public class CategoriesServiceImpl implements CategoriesService,Startable {		
+public class CategoriesServiceImpl implements CategoriesService,Startable {
   private static final String CATEGORY_MIXIN = "exo:categorized";
   private static final String CATEGORY_PROP = "exo:category";
   private static final String COPY = "copy";
-  private static final String CUT = "cut"; 
-  
-  private RepositoryService repositoryService_;  
-  private String baseTaxonomyPath_ ;  
+  private static final String CUT = "cut";
+
+  private RepositoryService repositoryService_;
+  private String baseTaxonomyPath_ ;
   List<TaxonomyPlugin> plugins_ = new ArrayList<TaxonomyPlugin>() ;
 
   /**
    * DMS configuration which used to store informations
-   */   
+   */
   private DMSConfiguration dmsConfiguration_;
   private static final Log LOG  = ExoLogger.getLogger(CategoriesServiceImpl.class);
-  
+
   public CategoriesServiceImpl(RepositoryService repositoryService,
-      NodeHierarchyCreator nodeHierarchyCreator, 
-      DMSConfiguration dmsConfiguration) throws Exception{  
-    repositoryService_ = repositoryService;    
+      NodeHierarchyCreator nodeHierarchyCreator,
+      DMSConfiguration dmsConfiguration) throws Exception{
+    repositoryService_ = repositoryService;
     baseTaxonomyPath_ = nodeHierarchyCreator.getJcrPath(BasePath.EXO_TAXONOMIES_PATH);
     dmsConfiguration_ = dmsConfiguration;
   }
-  
+
   public void init(String repository) throws Exception {
     for(TaxonomyPlugin plugin : plugins_) {
       plugin.init(repository) ;
     }
   }
-  
-  public void addTaxonomyPlugin(ComponentPlugin plugin) {    
-    if(plugin instanceof TaxonomyPlugin) {			
-      plugins_.add((TaxonomyPlugin)plugin) ;           
+
+  public void addTaxonomyPlugin(ComponentPlugin plugin) {
+    if(plugin instanceof TaxonomyPlugin) {
+      plugins_.add((TaxonomyPlugin)plugin) ;
     }
   }
 
-  public Node getTaxonomyHomeNode (String repository,SessionProvider provider) throws Exception {    
-    Session session = getSession(repository,provider) ;    
+  public Node getTaxonomyHomeNode (String repository,SessionProvider provider) throws Exception {
+    Session session = getSession(repository,provider) ;
     Node homeTaxonomy = (Node)session.getItem(baseTaxonomyPath_) ;
     return homeTaxonomy ;
-  }	
-  
+  }
+
   public void addTaxonomy(String parentPath,String childName, String repository) throws Exception  {
     Session adminSession = getSession(repository) ;
     Node parent = (Node)adminSession.getItem(parentPath) ;
     if(parent.hasNode(childName)) {
       throw (new ItemExistsException()) ;
-    }		
+    }
     Node taxonomyNode = parent.addNode(childName,"exo:taxonomy") ;
     if(taxonomyNode.canAddMixin("mix:referenceable")) {
       taxonomyNode.addMixin("mix:referenceable") ;
-    }					
+    }
     adminSession.save() ;
     adminSession.logout();
   }
 
   public void removeTaxonomyNode(String realPath, String repository) throws Exception {
-    Session adminSession = getSession(repository) ;    
+    Session adminSession = getSession(repository) ;
     Node selectedNode = (Node)adminSession.getItem(realPath) ;
     selectedNode.remove() ;
     adminSession.getRootNode().save();
-    adminSession.save();    
+    adminSession.save();
     adminSession.logout();
-  }						
+  }
 
-  public void moveTaxonomyNode(String srcPath, String destPath, String type, String repository) throws Exception { 
-    Session session = getSession(repository) ;    		   
-    if(CUT.equals(type)) {			
+  public void moveTaxonomyNode(String srcPath, String destPath, String type, String repository) throws Exception {
+    Session session = getSession(repository) ;
+    if(CUT.equals(type)) {
       session.move(srcPath,destPath) ;
-      session.save() ;      
+      session.save() ;
       session.logout();
     }
-    else if(COPY.equals(type)) {		
-      Workspace workspace = session.getWorkspace() ;       
+    else if(COPY.equals(type)) {
+      Workspace workspace = session.getWorkspace() ;
       workspace.copy(srcPath,destPath) ;
-      session.save() ;      
+      session.save() ;
       session.logout();
     }
     else {
       session.logout();
-      throw( new UnsupportedRepositoryOperationException()) ;		
-    }									
-  }	
+      throw( new UnsupportedRepositoryOperationException()) ;
+    }
+  }
 
   public boolean hasCategories(Node node) throws Exception {
     if (node.isNodeType(CATEGORY_MIXIN)) {
@@ -145,10 +145,10 @@ public class CategoriesServiceImpl implements CategoriesService,Startable {
     List<Node> cats = new ArrayList<Node>();
     if (node.hasProperty("exo:category")) {
       Session session = getSession(repository) ;
-      try {			
+      try {
         Property categories = node.getProperty("exo:category");
         Value[] values = categories.getValues();
-        for (int i = 0; i < values.length; i++) {				
+        for (int i = 0; i < values.length; i++) {
           cats.add(session.getNodeByUUID(values[i].getString()));
         }
       } catch (Exception e) {
@@ -163,7 +163,7 @@ public class CategoriesServiceImpl implements CategoriesService,Startable {
   public void removeCategory(Node node, String categoryPath, String repository) throws Exception {
     Session systemSession = getSession(repository) ;
     List<Value> vals = new ArrayList<Value>();
-    if (!"*".equals(categoryPath)) {						
+    if (!"*".equals(categoryPath)) {
       Property categories = node.getProperty("exo:category");
       Value[] values = categories.getValues();
       String uuid2Remove = null;
@@ -171,40 +171,40 @@ public class CategoriesServiceImpl implements CategoriesService,Startable {
         String uuid = values[i].getString();
         Node refNode = systemSession.getNodeByUUID(uuid);
         if(refNode.getPath().equals(categoryPath)) {
-          uuid2Remove = uuid;              
+          uuid2Remove = uuid;
         } else {
           vals.add(values[i]);
         }
       }
       if(uuid2Remove == null) {
         systemSession.logout();
-        return; 
-      }			
+        return;
+      }
     }
     node.setProperty(CATEGORY_PROP, vals.toArray(new Value[vals.size()]));
     node.getSession().save() ;
     systemSession.logout();
   }
-  
+
   private void processRemoveCategory(Node node) throws Exception {
     List<Value> vals = new ArrayList<Value>();
     if (node.hasProperty("exo:category")) node.setProperty(CATEGORY_PROP, vals.toArray(new Value[vals.size()]));
     node.save();
   }
-  
+
   private void processCategory(Session systemSession, Node node, String categoryPath) throws Exception {
     Node catNode = (Node) systemSession.getItem(categoryPath.trim());
     String catNodeUUID = catNode.getUUID();
-    Value value2add = node.getSession().getValueFactory().createValue(catNode);      
-    if (!node.isNodeType(CATEGORY_MIXIN)) {     
-      node.addMixin(CATEGORY_MIXIN);    
+    Value value2add = node.getSession().getValueFactory().createValue(catNode);
+    if (!node.isNodeType(CATEGORY_MIXIN)) {
+      node.addMixin(CATEGORY_MIXIN);
       node.setProperty(CATEGORY_PROP, new Value[] {value2add});
       node.save();
     } else {
       List<Value> vals = new ArrayList<Value>();
       Value[] values = node.getProperty(CATEGORY_PROP).getValues();
       for (Value value: values) {
-        String uuid = value.getString();      
+        String uuid = value.getString();
         if (uuid.equals(catNodeUUID)) { continue; }
         vals.add(value);
       }
@@ -212,19 +212,19 @@ public class CategoriesServiceImpl implements CategoriesService,Startable {
       node.setProperty(CATEGORY_PROP, vals.toArray(new Value[vals.size()]));
       node.save();
       systemSession.logout();
-    }     
+    }
   }
 
   public void addMultiCategory(Node node, String[] arrCategoryPath, String repository) throws Exception {
-    Session systemSession = getSession(repository);    
+    Session systemSession = getSession(repository);
     processRemoveCategory(node);
-    for(String categoryPath : arrCategoryPath) {      
+    for(String categoryPath : arrCategoryPath) {
       processCategory(systemSession, node, categoryPath);
     }
     systemSession.logout();
   }
-  
-  public void addCategory(Node node, String categoryPath, String repository) throws Exception {    
+
+  public void addCategory(Node node, String categoryPath, String repository) throws Exception {
     Session systemSession = getSession(repository) ;
     processCategory(systemSession, node, categoryPath);
     systemSession.logout();
@@ -235,14 +235,14 @@ public class CategoriesServiceImpl implements CategoriesService,Startable {
       removeCategory(node, "*", repository) ;
     }
     addCategory(node, categoryPath, repository) ;
-  }    
+  }
 
-  public Session getSession(String repository) throws Exception {    
+  public Session getSession(String repository) throws Exception {
     ManageableRepository manageableRepository = repositoryService_.getCurrentRepository() ;
     DMSRepositoryConfiguration dmsRepoConfig = dmsConfiguration_.getConfig();
     return manageableRepository.getSystemSession(dmsRepoConfig.getSystemWorkspace()) ;
   }
-  
+
   private Session getSession(String repository,SessionProvider provider) throws Exception {
     ManageableRepository manageableRepository = repositoryService_.getRepository(repository) ;
     DMSRepositoryConfiguration dmsRepoConfig = dmsConfiguration_.getConfig();
@@ -257,10 +257,10 @@ public class CategoriesServiceImpl implements CategoriesService,Startable {
     }catch (Exception e) {
       LOG.error("Unexpected error", e);
     }
-    
+
   }
 
   public void stop() {
-    
+
   }
 }

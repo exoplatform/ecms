@@ -50,7 +50,7 @@ import org.exoplatform.webui.form.UIFormTableInputSet;
  * Author : Dang Van Minh
  *          minh.dang@exoplatform.com
  * Sep 29, 2006
- * 12:02:38 PM 
+ * 12:02:38 PM
  */
 @ComponentConfig(
     lifecycle = UIFormLifecycle.class,
@@ -62,37 +62,37 @@ import org.exoplatform.webui.form.UIFormTableInputSet;
     }
 )
 public class UINodeTypeImport extends UIForm {
-  
+
   private List<NodeTypeValue> nodeTypeList_ = new ArrayList<NodeTypeValue>() ;
-  final static String TABLE_NAME =  "UINodeTypeImport"; 
-  final static String [] TABLE_COLUMNS = {"label", "input"};  
+  final static String TABLE_NAME =  "UINodeTypeImport";
+  final static String [] TABLE_COLUMNS = {"label", "input"};
   private static final Log LOG  = ExoLogger.getLogger(UINodeTypeImport.class);
-  
+
   private List<String> undefinedNodeType = new ArrayList<String>();
-  
+
   private List<String> registeredNodeType = new ArrayList<String>();
-  
+
   private List<String> undefinedNamespace = new ArrayList<String>();
-  
+
   public List<String> getUndefinedNamespace() {
-		return undefinedNamespace;
-	}
+    return undefinedNamespace;
+  }
 
-	public void setUndefinedNamespace(List<String> undefinedNamespace) {
-		this.undefinedNamespace = undefinedNamespace;
-	}
+  public void setUndefinedNamespace(List<String> undefinedNamespace) {
+    this.undefinedNamespace = undefinedNamespace;
+  }
 
-	public List<String> getUndefinedNodeTypes() {
+  public List<String> getUndefinedNodeTypes() {
     return undefinedNodeType;
   }
-  
+
   public void setUndefinedNodeType(List<String> undefinedNodeType) {
     this.undefinedNodeType = undefinedNodeType;
   }
 
   public UINodeTypeImport() throws Exception {
   }
-  
+
   public void update(ArrayList nodeTypeList) throws Exception {
     UIFormTableInputSet uiTableInputSet = getChild(UIFormTableInputSet.class) ;
     if(uiTableInputSet == null ) {
@@ -122,49 +122,49 @@ public class UINodeTypeImport extends UIForm {
       uiInfo = new UIFormInputInfo("label", null, nodeTypeName);
       uiInputSet.addChild(uiInfo);
       checkbox = new UIFormCheckBoxInput<String>(nodeTypeName, nodeTypeName, "") ;
-      try {               
+      try {
         register = ntManager.getNodeType(nodeTypeName) ;
         uiInputSet.addChild(checkbox);
-        uiTableInputSet.addChild(uiInputSet);   
+        uiTableInputSet.addChild(uiInputSet);
         if(register != null) {
-        	getRegisteredNodeType().add(nodeTypeName);
-        	checkbox.setEnable(false);
+          getRegisteredNodeType().add(nodeTypeName);
+          checkbox.setEnable(false);
         }
       } catch (NamespaceException e) {
-				if (nodeTypeName != null && nodeTypeName.contains(":")) {
-					getUndefinedNamespace().add(
-							nodeTypeName.substring(0, nodeTypeName.indexOf(":")));
-				}
+        if (nodeTypeName != null && nodeTypeName.contains(":")) {
+          getUndefinedNamespace().add(
+              nodeTypeName.substring(0, nodeTypeName.indexOf(":")));
+        }
       } catch (NoSuchNodeTypeException e) {
-      	getUndefinedNodeTypes().add(nodeTypeName);
-      	uiInputSet.addChild(checkbox);
-        uiTableInputSet.addChild(uiInputSet);   
-      	checkbox.setEnable(true);
+        getUndefinedNodeTypes().add(nodeTypeName);
+        uiInputSet.addChild(checkbox);
+        uiTableInputSet.addChild(uiInputSet);
+        checkbox.setEnable(true);
       } catch (RepositoryException e) {
-      	if (NamespaceException.class.isInstance(e.getCause())) {
-      		if (nodeTypeName != null && nodeTypeName.contains(":")) {
-  					getUndefinedNamespace().add(
-  							nodeTypeName.substring(0, nodeTypeName.indexOf(":")));
-  				}
-      	} else {
-      		throw e;
-      	}
-			}
-      
-    }    
+        if (NamespaceException.class.isInstance(e.getCause())) {
+          if (nodeTypeName != null && nodeTypeName.contains(":")) {
+            getUndefinedNamespace().add(
+                nodeTypeName.substring(0, nodeTypeName.indexOf(":")));
+          }
+        } else {
+          throw e;
+        }
+      }
+
+    }
   }
-  
+
   public String getLabel(String id) { return id ; }
-  
+
   public void setRegisteredNodeType(List<String> registeredNodeType) {
-		this.registeredNodeType = registeredNodeType;
-	}
+    this.registeredNodeType = registeredNodeType;
+  }
 
-	public List<String> getRegisteredNodeType() {
-		return registeredNodeType;
-	}
+  public List<String> getRegisteredNodeType() {
+    return registeredNodeType;
+  }
 
-	static public class CancelActionListener extends EventListener<UINodeTypeImport> {
+  static public class CancelActionListener extends EventListener<UINodeTypeImport> {
     public void execute(Event<UINodeTypeImport> event) throws Exception {
       UINodeTypeImport uiImport = event.getSource() ;
       UINodeTypeImportPopup uiImportPopup = uiImport.getParent() ;
@@ -173,7 +173,7 @@ public class UINodeTypeImport extends UIForm {
       uiPopup.setRendered(false) ;
     }
   }
-  
+
   static public class UploadActionListener extends EventListener<UINodeTypeImport> {
     public void execute(Event<UINodeTypeImport> event) throws Exception {
       UINodeTypeImport uiImport = event.getSource() ;
@@ -184,31 +184,31 @@ public class UINodeTypeImport extends UIForm {
       uiPopup.setShow(true) ;
     }
   }
-  
+
   static public class ImportActionListener extends EventListener<UINodeTypeImport> {
     public void execute(Event<UINodeTypeImport> event) throws Exception {
       UINodeTypeImport uiImport = event.getSource() ;
-      RepositoryService repositoryService = 
+      RepositoryService repositoryService =
         uiImport.getApplicationComponent(RepositoryService.class) ;
       NodeTypeManager ntManager = repositoryService.getCurrentRepository().getNodeTypeManager() ;
       UINodeTypeManager uiManager = uiImport.getAncestorOfType(UINodeTypeManager.class) ;
       UINodeTypeImportPopup uiImportPopup = uiImport.getParent() ;
       uiImportPopup.setRenderedChild(UINodeTypeUpload.class) ;
       UIApplication uiApp = uiImport.getAncestorOfType(UIApplication.class) ;
-      ExtendedNodeTypeManager extManager = (ExtendedNodeTypeManager) ntManager ;      
+      ExtendedNodeTypeManager extManager = (ExtendedNodeTypeManager) ntManager ;
       int counter = 0 ;
       List<UIFormCheckBoxInput> listCheckbox =  new ArrayList<UIFormCheckBoxInput>();
       uiImport.findComponentOfType(listCheckbox, UIFormCheckBoxInput.class);
       for(int i = 0 ; i < uiImport.nodeTypeList_.size() ; i ++){
         NodeTypeValue nodeTypeValue = (NodeTypeValue)uiImport.nodeTypeList_.get(i) ;
         if(listCheckbox.get(i).isChecked()) {
-        	try {
-	          extManager.registerNodeType(nodeTypeValue, ExtendedNodeTypeManager.IGNORE_IF_EXISTS) ;
-	          counter += 1 ;
-        	} catch(RepositoryException re) {
-        		LOG.error("Cannot register nodetype " + nodeTypeValue + " cause by: " + re.getMessage());
-        	}
-        }          
+          try {
+            extManager.registerNodeType(nodeTypeValue, ExtendedNodeTypeManager.IGNORE_IF_EXISTS) ;
+            counter += 1 ;
+          } catch(RepositoryException re) {
+            LOG.error("Cannot register nodetype " + nodeTypeValue + " cause by: " + re.getMessage());
+          }
+        }
       }
       if(counter > 0) {
         String[] count = {String.valueOf(counter)} ;
@@ -220,7 +220,7 @@ public class UINodeTypeImport extends UIForm {
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
         event.getRequestContext().addUIComponentToUpdateByAjax(uiManager) ;
         return ;
-      } 
+      }
       uiApp.addMessage(new ApplicationMessage("UINodeTypeImport.msg.no-nodetype-registered", null)) ;
       event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
     }

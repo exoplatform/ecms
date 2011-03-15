@@ -166,10 +166,11 @@ public class ImportContentsJob implements Job {
                         variables.put("nodePath", contentTargetPath);
                         variables.put("workspaceName", workspace);
                         if (currentContent.hasProperty(StageAndVersionPublicationConstant.PUBLICATION_LIFECYCLE_NAME)
-                            && AuthoringPublicationConstant.LIFECYCLE_NAME.equals(currentContent.getProperty(StageAndVersionPublicationConstant.PUBLICATION_LIFECYCLE_NAME)
-                                                                                                .getString())
-                            && PublicationDefaultStates.PUBLISHED.equals(currentContent.getProperty(StageAndVersionPublicationConstant.CURRENT_STATE)
-                                                                                       .getString())) {
+                            && AuthoringPublicationConstant.LIFECYCLE_NAME.equals(
+                                currentContent.getProperty(
+                                    StageAndVersionPublicationConstant.PUBLICATION_LIFECYCLE_NAME).getString())
+                            && PublicationDefaultStates.PUBLISHED.equals(
+                                currentContent.getProperty(StageAndVersionPublicationConstant.CURRENT_STATE).getString())) {
 
                           publicationPlugin.changeState(currentContent,
                                                         PublicationDefaultStates.UNPUBLISHED,

@@ -26,14 +26,14 @@ import org.exoplatform.services.jcr.impl.core.query.lucene.SearchIndex;
  * Created by The eXo Platform SARL
  * Author : Nguyen Van Chien
  *          chien.nguyen@exoplatform.com
- * Jul 19, 2010  
+ * Jul 19, 2010
  */
 public class IgnoreAccentIndexer extends SearchIndex {
-  
+
   public IgnoreAccentIndexer(QueryHandlerEntry queryHandlerConfig, ConfigurationManager cfm) {
     super();
   }
-  
+
   public Analyzer getTextAnalyzer() {
     return new IgnoreAccentAnalyzer();
   }

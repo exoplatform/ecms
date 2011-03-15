@@ -37,7 +37,7 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
  * Created by The eXo Platform SAS
- * 
+ *
  * @author : Hoa.Pham hoa.pham@exoplatform.com Jun 23, 2008
  */
 public class CreateLivePortalEventListener extends Listener<DataStorageImpl, PortalConfig> {
@@ -45,7 +45,7 @@ public class CreateLivePortalEventListener extends Listener<DataStorageImpl, Por
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see org.exoplatform.services.listener.Listener#onEvent(org.exoplatform.services.listener.Event)
    */
   public final void onEvent(final Event<DataStorageImpl, PortalConfig> event) throws Exception {
@@ -61,22 +61,22 @@ public class CreateLivePortalEventListener extends Listener<DataStorageImpl, Por
       log.info("Create new resource storage for portal: " + portalConfig.getName());
     } catch (Exception e) {
       log.error("Error when create new resource storage: " + portalConfig.getName(), e);
-    }        
+    }
     // create drive for the site content storage
     ManageDriveService manageDriveService = (ManageDriveService) container
     .getComponentInstanceOfType(ManageDriveService.class);
     WCMConfigurationService configurationService = (WCMConfigurationService) container
-    .getComponentInstanceOfType(WCMConfigurationService.class);        
+    .getComponentInstanceOfType(WCMConfigurationService.class);
     try {
       Node portal = livePortalManagerService.getLivePortal(sessionProvider, portalConfig.getName());
       createPortalDrive(portal,portalConfig,configurationService,manageDriveService);
     } catch (Exception e) {
       log.error("Error when create drive for portal: " + portalConfig.getName(), e);
-    }      
-    //Deploy initial artifacts for this portal 
+    }
+    //Deploy initial artifacts for this portal
     CreatePortalArtifactsService artifactsInitializerService = (CreatePortalArtifactsService)
     container.getComponentInstanceOfType(CreatePortalArtifactsService.class);
-    try {      
+    try {
       artifactsInitializerService.deployArtifactsToPortal(sessionProvider, portalConfig.getName());
     } catch (Exception e) {
       log.error("Error when create drive for portal: " + portalConfig.getName(), e);
@@ -84,16 +84,16 @@ public class CreateLivePortalEventListener extends Listener<DataStorageImpl, Por
   }
 
   private void createPortalDrive(Node portal, PortalConfig portalConfig, WCMConfigurationService wcmConfigService,ManageDriveService driveService) throws Exception {
-    Session session = portal.getSession();      
+    Session session = portal.getSession();
     String workspace = session.getWorkspace().getName();
     DriveData mainDriveData = wcmConfigService.getSiteDriveConfig();
     String permission = portalConfig.getEditPermission();
     String portalPath = portal.getPath();
-    
-    String homePath = mainDriveData.getHomePath(); 
+
+    String homePath = mainDriveData.getHomePath();
     homePath = homePath.replaceAll(WCMConfigurationService.SITE_NAME_EXP, portal.getName());
     homePath = homePath.replaceAll(WCMConfigurationService.SITE_PATH_EXP, portalPath);
-    
+
     String views = mainDriveData.getViews();
     String icon = mainDriveData.getIcon();
     boolean viewReferences = mainDriveData.getViewPreferences();

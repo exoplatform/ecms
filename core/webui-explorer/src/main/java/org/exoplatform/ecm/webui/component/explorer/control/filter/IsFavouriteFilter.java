@@ -31,32 +31,32 @@ import org.exoplatform.webui.ext.filter.UIExtensionFilterType;
  * Created by The eXo Platform SARL
  * Author : Nguyen Anh Vu
  *          anhvurz90@gmail.com
- * Oct 16, 2009  
+ * Oct 16, 2009
  * 10:20:29 AM
  */
 public class IsFavouriteFilter extends UIExtensionAbstractFilter {
-	
-	public IsFavouriteFilter() {
-		this(null);
-	}
-	
-	public IsFavouriteFilter(String messageKey) {
-		super(messageKey, UIExtensionFilterType.MANDATORY);
-	}
-	
-	public static boolean isFavourite(Node node, UIJCRExplorer uiExplorer) throws Exception {
-		ExoContainer myContainer = ExoContainerContext.getCurrentContainer();
-		FavoriteService favoriteService 
-				= (FavoriteService)myContainer.getComponentInstanceOfType(FavoriteService.class);
-		
-		return favoriteService.isFavoriter(uiExplorer.getSession().getUserID(), node);
-	}
-	public boolean accept(Map<String, Object> context) throws Exception {
-	    if (context == null) return true;
-	    Node currentNode = (Node) context.get(Node.class.getName());
-	    UIJCRExplorer uiExplorer = (UIJCRExplorer)context.get(UIJCRExplorer.class.getName());
-	    return isFavourite(currentNode, uiExplorer);
-	}
-	
-	public void onDeny(Map<String, Object> context) throws Exception {  }    
+
+  public IsFavouriteFilter() {
+    this(null);
+  }
+
+  public IsFavouriteFilter(String messageKey) {
+    super(messageKey, UIExtensionFilterType.MANDATORY);
+  }
+
+  public static boolean isFavourite(Node node, UIJCRExplorer uiExplorer) throws Exception {
+    ExoContainer myContainer = ExoContainerContext.getCurrentContainer();
+    FavoriteService favoriteService
+        = (FavoriteService)myContainer.getComponentInstanceOfType(FavoriteService.class);
+
+    return favoriteService.isFavoriter(uiExplorer.getSession().getUserID(), node);
+  }
+  public boolean accept(Map<String, Object> context) throws Exception {
+      if (context == null) return true;
+      Node currentNode = (Node) context.get(Node.class.getName());
+      UIJCRExplorer uiExplorer = (UIJCRExplorer)context.get(UIJCRExplorer.class.getName());
+      return isFavourite(currentNode, uiExplorer);
+  }
+
+  public void onDeny(Map<String, Object> context) throws Exception {  }
 }

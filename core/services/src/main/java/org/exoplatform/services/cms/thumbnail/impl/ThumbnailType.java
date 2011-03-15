@@ -23,17 +23,17 @@ import java.util.List;
  * Created by The eXo Platform SARL
  * Author : Dang Van Minh
  *          minh.dang@exoplatform.com
- * Oct 22, 2009  
+ * Oct 22, 2009
  * 2:20:21 PM
  */
 public class ThumbnailType {
 
   private List<String> mimeTypes = new ArrayList<String>();
-  
+
   public List<String> getMimeTypes() {
     return mimeTypes;
   }
-  
+
   public void setMimeTypes(List<String> mimeTypes) {
     this.mimeTypes = mimeTypes;
   }

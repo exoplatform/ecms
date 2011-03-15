@@ -32,17 +32,17 @@ import org.exoplatform.webui.form.UIFormSelectBox;
  * Author : Ly Dinh Quang
  *          quang.ly@exoplatform.com
  *          xxx5669@gmail.com
- * 4 févr. 09  
+ * 4 févr. 09
  */
 @ComponentConfig(
     lifecycle = UIContainerLifecycle.class
 )
 public class UIJcrExplorerEditContainer extends UIContainer {
-  
+
   public UIJcrExplorerEditContainer() throws Exception {
     addChild(UIJcrExplorerEditForm.class, null, null);
   }
-  
+
   public UIPopupWindow initPopup(String id) throws Exception {
     removeChildById(id);
     UIPopupWindow uiPopup = addChild(UIPopupWindow.class, null, id);
@@ -51,7 +51,7 @@ public class UIJcrExplorerEditContainer extends UIContainer {
     uiPopup.setResizable(true);
     return uiPopup;
   }
-  
+
   public UIPopupWindow initPopupDriveBrowser(String id, String driveName) throws Exception {
     String repository = getAncestorOfType(UIJCRExplorerPortlet.class).getPreferenceRepository();
     UIPopupWindow uiPopup = initPopup(id);

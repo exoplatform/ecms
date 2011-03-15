@@ -38,11 +38,11 @@ import org.exoplatform.webui.core.lifecycle.Lifecycle;
  * anh.do@exoplatform.com, anhdn86@gmail.com
  * Feb 23, 2009
  */
-@ComponentConfig(      
-  lifecycle = Lifecycle.class,                 
+@ComponentConfig(
+  lifecycle = Lifecycle.class,
    template = "app:/groovy/ContentListViewer/UICLVContainer.gtmpl",
-   events = { 
-     @EventConfig(listeners = UICLVManualMode.PreferencesActionListener.class) 
+   events = {
+     @EventConfig(listeners = UICLVManualMode.PreferencesActionListener.class)
    }
 )
 @SuppressWarnings("deprecation")
@@ -51,39 +51,39 @@ public class UICLVManualMode extends UICLVContainer {
   /* (non-Javadoc)
    * @see org.exoplatform.wcm.webui.clv.UICLVContainer#init()
    */
-	@SuppressWarnings("unchecked")
+  @SuppressWarnings("unchecked")
   public void init() throws Exception {
-	  PortletPreferences portletPreferences = Utils.getAllPortletPreferences();
+    PortletPreferences portletPreferences = Utils.getAllPortletPreferences();
     String[] listContent = portletPreferences.getValue(UICLVPortlet.PREFERENCE_ITEM_PATH, null).split(";");
     int itemsPerPage = Integer.parseInt(portletPreferences.getValue(UICLVPortlet.PREFERENCE_ITEMS_PER_PAGE, null));
     List<Node> nodes = new ArrayList<Node>();
     if (listContent != null && listContent.length != 0) {
       for (String itemPath : listContent) {
-      	NodeLocation nodeLocation = NodeLocation.getNodeLocationByExpression(itemPath);
-      	Node viewNode = Utils.getViewableNodeByComposer(nodeLocation.getRepository(), 
-      	    Text.escapeIllegalJcrChars(nodeLocation.getWorkspace()), Text.escapeIllegalJcrChars(nodeLocation.getPath()));
-      	if (viewNode != null) nodes.add(viewNode);    
+        NodeLocation nodeLocation = NodeLocation.getNodeLocationByExpression(itemPath);
+        Node viewNode = Utils.getViewableNodeByComposer(nodeLocation.getRepository(),
+            Text.escapeIllegalJcrChars(nodeLocation.getWorkspace()), Text.escapeIllegalJcrChars(nodeLocation.getPath()));
+        if (viewNode != null) nodes.add(viewNode);
       }
     }
     if (nodes.size() == 0) {
       messageKey = "UICLVContainer.msg.non-contents";
-    }    
+    }
     getChildren().clear();
-    ObjectPageList pageList = new ObjectPageList(nodes, itemsPerPage);    
+    ObjectPageList pageList = new ObjectPageList(nodes, itemsPerPage);
     ResourceResolver resourceResolver = getTemplateResourceResolver();
     UICLVPresentation clvPresentation = addChild(UICLVPresentation.class, null, null);
-    clvPresentation.init(resourceResolver, pageList);    
+    clvPresentation.init(resourceResolver, pageList);
   }
-	/**
-	 * Gets the bar info show.
-	 * 
-	 * @return the value for info bar setting
-	 * 
-	 * @throws Exception the exception
-	 */
-	public boolean isShowInfoBar() throws Exception {		
-		if (UIPortlet.getCurrentUIPortlet().getShowInfoBar())
-			return true;
-		return false;
-	}
+  /**
+   * Gets the bar info show.
+   *
+   * @return the value for info bar setting
+   *
+   * @throws Exception the exception
+   */
+  public boolean isShowInfoBar() throws Exception {
+    if (UIPortlet.getCurrentUIPortlet().getShowInfoBar())
+      return true;
+    return false;
+  }
 }

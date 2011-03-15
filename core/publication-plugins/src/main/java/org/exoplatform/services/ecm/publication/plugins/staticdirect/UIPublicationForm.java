@@ -62,24 +62,24 @@ import org.exoplatform.webui.form.UIFormRadioBoxInput;
     }
 )
 public class UIPublicationForm extends UIForm {
-  
+
   final static public String VISIBILITY = "visibility".intern();
   final static public String STATE = "state".intern();
-  
+
   private VersionNode curentVersion_;
   private VersionNode rootVersion_;
   private Node currentNode_;
   private String visibility_;
   private String state_;
-  
+
   public UIPublicationForm() throws Exception {
   }
-  
+
   public void updateForm(VersionNode versionNode) throws Exception {
     String state = getStateByVersion(versionNode);
     resetCurrentState(state, visibility_);
   }
-  
+
   public void resetCurrentState(String state, String visibility) throws Exception {
     RequestContext context = RequestContext.getCurrentInstance();
     ResourceBundle res = context.getApplicationResourceBundle();
@@ -94,14 +94,14 @@ public class UIPublicationForm extends UIForm {
     visibilityOptions.add(new SelectItemOption<String>(lblPrivate, StaticAndDirectPublicationPlugin.PRIVATE));
     addUIFormInput(new UIFormRadioBoxInput(VISIBILITY, visibility, visibilityOptions).
         setAlign(UIFormRadioBoxInput.HORIZONTAL_ALIGN));
-    
+
     List<SelectItemOption<String>> stateOptions = new ArrayList<SelectItemOption<String>>();
     stateOptions.add(new SelectItemOption<String>(published, StaticAndDirectPublicationPlugin.PUBLISHED));
     stateOptions.add(new SelectItemOption<String>(non_published, StaticAndDirectPublicationPlugin.NON_PUBLISHED));
     addUIFormInput(new UIFormRadioBoxInput(STATE, state, stateOptions).
         setAlign(UIFormRadioBoxInput.HORIZONTAL_ALIGN));
   }
-  
+
   public String getStateByVersion(VersionNode versionNode) throws Exception {
     Value[] publicationStates =  currentNode_.getProperty(StaticAndDirectPublicationPlugin.VERSIONS_PUBLICATION_STATES).getValues();
     for(Value value : publicationStates) {
@@ -114,42 +114,42 @@ public class UIPublicationForm extends UIForm {
     }
     return StaticAndDirectPublicationPlugin.DEFAULT_STATE;
   }
-  
+
   public void initForm(Node currentNode) throws Exception {
-    currentNode_ = currentNode;   
+    currentNode_ = currentNode;
     rootVersion_ = new VersionNode(currentNode_.getVersionHistory().getRootVersion());
     curentVersion_ = new VersionNode(currentNode_.getBaseVersion());
     visibility_ = currentNode_.getProperty(StaticAndDirectPublicationPlugin.VISIBILITY).getString();
-    
+
     state_ = getStateByVersion(curentVersion_);
     resetCurrentState(state_, visibility_);
   }
-  
+
   public void setVersionNode(VersionNode versionNode) {
     curentVersion_ = versionNode;
   }
-  
+
   @SuppressWarnings("unchecked")
-  public static String getLockToken(Node node) throws Exception {    
+  public static String getLockToken(Node node) throws Exception {
     PortalRequestContext requestContext = Util.getPortalRequestContext();
     HttpSession httpSession = requestContext.getRequest().getSession();
     String key = createLockKey(node);
     Map<String,String> lockedNodesInfo = (Map<String,String>)httpSession.getAttribute(LockManagerImpl.class.getName());
-    if(lockedNodesInfo == null) return null;    
+    if(lockedNodesInfo == null) return null;
     return lockedNodesInfo.get(key);
-  }  
-  
+  }
+
   public static String createLockKey(Node node) throws Exception {
     StringBuffer buffer = new StringBuffer();
     Session session = node.getSession();
-    String repositoryName = ((ManageableRepository)session.getRepository()).getConfiguration().getName();    
+    String repositoryName = ((ManageableRepository)session.getRepository()).getConfiguration().getName();
     buffer.append(repositoryName).append("/::/")
           .append(session.getWorkspace().getName()).append("/::/")
           .append(session.getUserID()).append(":/:")
-          .append(node.getPath());      
+          .append(node.getPath());
     return buffer.toString();
   }
-  
+
   static public class SaveActionListener extends EventListener<UIPublicationForm> {
     public void execute(Event<UIPublicationForm> event) throws Exception {
       UIPublicationForm uiForm = event.getSource();
@@ -162,8 +162,8 @@ public class UIPublicationForm extends UIForm {
           uiForm.currentNode_.getSession().addLockToken(lockToken);
         }
       }
-      if(!uiForm.currentNode_.isCheckedOut()) {        
-        uiApp.addMessage(new ApplicationMessage("UIActionBar.msg.node-checkedin", null, 
+      if(!uiForm.currentNode_.isCheckedOut()) {
+        uiApp.addMessage(new ApplicationMessage("UIActionBar.msg.node-checkedin", null,
             ApplicationMessage.WARNING));
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
         return;
@@ -186,14 +186,14 @@ public class UIPublicationForm extends UIForm {
     public void execute(Event<UIPublicationForm> event) throws Exception {
       UIPublicationForm uiPublicationForm = event.getSource();
       Node selectedNode = uiPublicationForm.currentNode_;
-      UIApplication uiApp = uiPublicationForm.getAncestorOfType(UIApplication.class);      
-      if(!selectedNode.isCheckedOut()) {        
-        uiApp.addMessage(new ApplicationMessage("UIActionBar.msg.node-checkedin", null, 
+      UIApplication uiApp = uiPublicationForm.getAncestorOfType(UIApplication.class);
+      if(!selectedNode.isCheckedOut()) {
+        uiApp.addMessage(new ApplicationMessage("UIActionBar.msg.node-checkedin", null,
             ApplicationMessage.WARNING));
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
         return;
       }
-      
+
       /*
        * Check unsubcribe and display message incase node has already been
        * unsubcribed
@@ -222,7 +222,7 @@ public class UIPublicationForm extends UIForm {
       return;
     }
   }
-  
+
   static public class CancelActionListener extends EventListener<UIPublicationForm> {
     public void execute(Event<UIPublicationForm> event) throws Exception {
       UIPublicationForm uiForm = event.getSource();
@@ -231,5 +231,5 @@ public class UIPublicationForm extends UIForm {
       uiPopup.setShow(false);
     }
   }
- 
+
 }

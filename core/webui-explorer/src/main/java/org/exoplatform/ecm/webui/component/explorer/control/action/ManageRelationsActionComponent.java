@@ -48,7 +48,7 @@ import org.exoplatform.webui.ext.filter.UIExtensionFilters;
  * Created by The eXo Platform SAS
  * Author : eXoPlatform
  *          nicolas.filotto@exoplatform.com
- * 6 mai 2009  
+ * 6 mai 2009
  */
 @ComponentConfig(
      events = {
@@ -58,30 +58,30 @@ import org.exoplatform.webui.ext.filter.UIExtensionFilters;
 public class ManageRelationsActionComponent extends UIComponent {
 
   private static final List<UIExtensionFilter> FILTERS = Arrays.asList(new UIExtensionFilter[]{new IsNotRootNodeFilter(), new IsCheckedOutFilter(), new CanSetPropertyFilter(), new IsNotLockedFilter()});
-  
+
   @UIExtensionFilters
   public List<UIExtensionFilter> getFilters() {
     return FILTERS;
   }
-  
+
   public static class ManageRelationsActionListener extends UIActionBarActionListener<ManageRelationsActionComponent> {
     public void processEvent(Event<ManageRelationsActionComponent> event) throws Exception {
       UIActionBar uiActionBar = event.getSource().getAncestorOfType(UIActionBar.class);
       UIJCRExplorer uiExplorer = uiActionBar.getAncestorOfType(UIJCRExplorer.class);
       uiExplorer.setIsHidePopup(true);
       RepositoryService repoService = uiActionBar.getApplicationComponent(RepositoryService.class);
-      UIRelationManager uiRelationManager = 
+      UIRelationManager uiRelationManager =
         uiExplorer.createUIComponent(UIRelationManager.class, null, null);
-      RelationsService relateService = 
+      RelationsService relateService =
         uiActionBar.getApplicationComponent(RelationsService.class);
-      UIRelationsAddedList uiRelateAddedList = 
+      UIRelationsAddedList uiRelateAddedList =
         uiRelationManager.getChild(UIRelationsAddedList.class);
-      List<Node> relations = 
-        relateService.getRelations(uiExplorer.getCurrentNode(), uiExplorer.getRepositoryName(), 
+      List<Node> relations =
+        relateService.getRelations(uiExplorer.getCurrentNode(), uiExplorer.getRepositoryName(),
             SessionProviderFactory.createSessionProvider());
       uiRelateAddedList.updateGrid(relations, 1);
       String repository = uiActionBar.getAncestorOfType(UIJCRExplorer.class).getRepositoryName();
-      String defaultWsName = 
+      String defaultWsName =
         repoService.getRepository(repository).getConfiguration().getDefaultWorkspaceName();
       UIOneNodePathSelector uiNodePathSelector = uiRelationManager.getChild(UIOneNodePathSelector.class);
       uiNodePathSelector.setIsDisable(defaultWsName, false);

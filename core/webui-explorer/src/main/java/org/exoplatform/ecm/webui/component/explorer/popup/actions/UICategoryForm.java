@@ -53,19 +53,19 @@ import org.exoplatform.webui.form.validator.MandatoryValidator;
 )
 
 public class UICategoryForm extends UIForm implements UIPopupComponent {
-  
+
   final static public String FIELD_NAME = "name";
 
   final static public String FIELD_TYPE = "type";
 
   final static public Log LOG = ExoLogger.getLogger(UICategoryForm.class);
-  
-  public void activate() throws Exception { 
+
+  public void activate() throws Exception {
     addUIFormInput(new UIFormStringInput(FIELD_NAME, FIELD_NAME, null).addValidator(MandatoryValidator.class));
     setActions(new String[] { "Save", "Cancel" });
     getUIStringInput(FIELD_NAME).setValue(null);
   }
-  
+
   public void deActivate() throws Exception {}
 
   static public class SaveActionListener extends EventListener<UICategoryForm> {
@@ -75,34 +75,34 @@ public class UICategoryForm extends UIForm implements UIPopupComponent {
       UIApplication uiApp = uiFolderForm.getAncestorOfType(UIApplication.class);
       String title = uiFolderForm.getUIStringInput(FIELD_NAME).getValue();
       String name = Utils.cleanString(title);
-      Node node = uiExplorer.getCurrentNode();                 
+      Node node = uiExplorer.getCurrentNode();
       if (uiExplorer.nodeIsLocked(node)) {
         uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.node-locked", null));
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
         return;
-      }    
+      }
       if (name == null || name.length() == 0) {
         uiApp.addMessage(new ApplicationMessage("UIFolderForm.msg.name-invalid", null));
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
         return;
-      }  
+      }
       String type = "exo:taxonomy";
       try {
         Node newNode = node.addNode(Text.escapeIllegalJcrChars(name), type);
         if (newNode.canAddMixin("exo:rss-enable")) {
-        	newNode.addMixin("exo:rss-enable");
-        	newNode.setProperty("exo:title", title);
+          newNode.addMixin("exo:rss-enable");
+          newNode.setProperty("exo:title", title);
         }
         node.save();
         node.getSession().save();
         if(!uiExplorer.getPreference().isJcrEnable())  { node.getSession().save(); }
         uiExplorer.updateAjax(event);
-      } catch(ConstraintViolationException cve) {  
+      } catch(ConstraintViolationException cve) {
         Object[] arg = { type };
         throw new MessageException(new ApplicationMessage("UIFolderForm.msg.constraint-violation",
             arg, ApplicationMessage.WARNING));
       } catch(AccessDeniedException accessDeniedException) {
-        uiApp.addMessage(new ApplicationMessage("UIFolderForm.msg.repository-exception-permission", null, 
+        uiApp.addMessage(new ApplicationMessage("UIFolderForm.msg.repository-exception-permission", null,
             ApplicationMessage.WARNING));
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
         return;
@@ -128,7 +128,7 @@ public class UICategoryForm extends UIForm implements UIPopupComponent {
         JCRExceptionManager.process(uiApp, e);
         LOG.error("Error when create category node", e);
         return;
-      }      
+      }
     }
   }
 

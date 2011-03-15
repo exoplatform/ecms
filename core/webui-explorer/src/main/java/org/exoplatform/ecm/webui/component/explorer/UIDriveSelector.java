@@ -41,7 +41,7 @@ import org.exoplatform.webui.form.UIFormSelectBox;
  * Author : Ly Dinh Quang
  *          quang.ly@exoplatform.com
  *          xxx5669@gmail.com
- * 10 févr. 09  
+ * 10 févr. 09
  */
 @ComponentConfig(
     template = "app:/groovy/webui/component/explorer/UIDriveSelector.gtmpl",
@@ -56,24 +56,24 @@ public class UIDriveSelector extends UIContainer {
   public UIDriveSelector() throws Exception {
     uiPageIterator_ = addChild(UIPageIterator.class, null, "DriveSelectorList");
   }
-  
+
   public UIPageIterator getUIPageIterator() { return uiPageIterator_; }
-  
+
   public List getListDrive() throws Exception { return uiPageIterator_.getCurrentPageData(); }
-  
+
   public void updateGrid() throws Exception {
     ObjectPageList objPageList = new ObjectPageList(getDrives("repository"), 10);
     uiPageIterator_.setPageList(objPageList);
   }
-  
+
   public List<DriveData> getDrives(String repoName) throws Exception {
     ManageDriveService driveService = getApplicationComponent(ManageDriveService.class) ;
-    List<DriveData> driveList = 
+    List<DriveData> driveList =
       driveService.getDriveByUserRoles(repoName, Util.getPortalRequestContext().getRemoteUser(), Utils.getMemberships());
     Collections.sort(driveList, new DriveComparator()) ;
-    return driveList ; 
+    return driveList ;
   }
-  
+
   static public class DriveComparator implements Comparator<DriveData> {
     public int compare(DriveData d1, DriveData d2) throws ClassCastException {
       String name1 = d1.getName();
@@ -81,9 +81,9 @@ public class UIDriveSelector extends UIContainer {
       return name1.compareToIgnoreCase(name2);
     }
   }
-  
+
   static public class CancelActionListener extends EventListener<UIDriveSelector> {
-    public void execute(Event<UIDriveSelector> event) throws Exception { 
+    public void execute(Event<UIDriveSelector> event) throws Exception {
       UIDriveSelector driveSelector = event.getSource();
       UIComponent uiComponent = driveSelector.getParent();
       if (uiComponent != null) {
@@ -92,19 +92,19 @@ public class UIDriveSelector extends UIContainer {
           ((UIPopupWindow)uiComponent).setRendered(false);
           event.getRequestContext().addUIComponentToUpdateByAjax(((UIPopupWindow)uiComponent).getParent());
           return;
-        } 
-      } 
+        }
+      }
     }
   }
-  
+
   static public class AddDriveActionListener extends EventListener<UIDriveSelector> {
-    public void execute(Event<UIDriveSelector> event) throws Exception { 
+    public void execute(Event<UIDriveSelector> event) throws Exception {
       String driveName = event.getRequestContext().getRequestParameter(OBJECTID);
       UIDriveSelector driveSelector = event.getSource();
       UIJcrExplorerEditContainer editContainer = driveSelector.getAncestorOfType(UIJcrExplorerEditContainer.class);
       UIJcrExplorerEditForm form = editContainer.getChild(UIJcrExplorerEditForm.class);
       UIFormInputSetWithAction driveNameInput = form.getChildById("DriveNameInput");
-      driveNameInput.getUIStringInput(UIJCRExplorerPortlet.DRIVE_NAME).setValue(driveName); 
+      driveNameInput.getUIStringInput(UIJCRExplorerPortlet.DRIVE_NAME).setValue(driveName);
       UIComponent uiComponent = driveSelector.getParent();
       UIFormSelectBox typeSelectBox = form.getChildById(UIJCRExplorerPortlet.USECASE);
       if (UIJCRExplorerPortlet.PARAMETERIZE.equals(typeSelectBox.getValue())) {
@@ -117,8 +117,8 @@ public class UIDriveSelector extends UIContainer {
           ((UIPopupWindow)uiComponent).setRendered(false);
           event.getRequestContext().addUIComponentToUpdateByAjax(((UIPopupWindow)uiComponent).getParent());
           return;
-        } 
-      } 
+        }
+      }
     }
   }
 }

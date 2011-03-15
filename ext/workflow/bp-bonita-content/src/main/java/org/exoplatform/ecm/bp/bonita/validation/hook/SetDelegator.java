@@ -8,10 +8,10 @@ import org.ow2.bonita.facade.runtime.TaskInstance;
 
 public class SetDelegator implements TxHook {
 
-	public void execute(APIAccessor api, ActivityInstance<ActivityBody> activity)
-	throws Exception {
-		String delegator = ((TaskInstance)activity.getBody()).getTaskUser();
-		api.getRuntimeAPI().setProcessInstanceVariable(activity.getProcessInstanceUUID(), "delegator", delegator);
-	}
+  public void execute(APIAccessor api, ActivityInstance<ActivityBody> activity)
+  throws Exception {
+    String delegator = ((TaskInstance)activity.getBody()).getTaskUser();
+    api.getRuntimeAPI().setProcessInstanceVariable(activity.getProcessInstanceUUID(), "delegator", delegator);
+  }
 
 }

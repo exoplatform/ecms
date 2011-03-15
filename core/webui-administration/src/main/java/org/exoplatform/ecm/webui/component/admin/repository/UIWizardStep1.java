@@ -36,11 +36,11 @@ import org.exoplatform.webui.form.validator.MandatoryValidator;
  * Created by The eXo Platform SARL
  * Author : Pham Tuan
  *          tuan.pham@exoplatform.com
- * Aug 8, 2007  
+ * Aug 8, 2007
  */
 @ComponentConfig(template = "classpath:groovy/ecm/webui/form/UIFormInputSetWithAction.gtmpl")
 public class UIWizardStep1 extends UIFormInputSetWithAction {
-  final static public String FIELD_NAME = "name";  
+  final static public String FIELD_NAME = "name";
   final static public String FIELD_NODETYPE = "autoInitializedRootNt";
   final static public String FIELD_PERMISSION = "permission";
   final static public String FIELD_TIMEOUT = "setLockTimeOut";
@@ -61,7 +61,7 @@ public class UIWizardStep1 extends UIFormInputSetWithAction {
     setActionInfo(FIELD_PERMISSION, actionInfor);
     setFieldActions(FIELD_PERMISSION, new String[]{"AddPermission"});
     showActionInfo(true);
-    addChild(new UIFormStringInput(FIELD_TIMEOUT, FIELD_TIMEOUT, null).addValidator(MandatoryValidator.class)); 
+    addChild(new UIFormStringInput(FIELD_TIMEOUT, FIELD_TIMEOUT, null).addValidator(MandatoryValidator.class));
   }
   private List<SelectItemOption<String>>  getNodeType() {
     List<SelectItemOption<String>> options = new ArrayList<SelectItemOption<String>>();
@@ -88,7 +88,7 @@ public class UIWizardStep1 extends UIFormInputSetWithAction {
   protected void setFieldDefault(boolean isDefault) {
     getUIFormCheckBoxInput(FIELD_ISDEFAULT).setChecked(isDefault);
   }
-  
+
   protected void setFieldDMSSystem(boolean isDMSSystem) {
     getUIFormCheckBoxInput(FIELD_ISDMS_SYSTEM_WS).setChecked(isDMSSystem);
   }
@@ -103,7 +103,7 @@ public class UIWizardStep1 extends UIFormInputSetWithAction {
     setFieldDefault(false);
     setFieldNodeType(getNodeType());
   }
-  
+
   protected void fillFields(String name, String selectedNodeType, boolean isDefaultWS, boolean isDMSSystem,
       String permission, String lockTime) {
     setFieldName(name);
@@ -130,7 +130,7 @@ public class UIWizardStep1 extends UIFormInputSetWithAction {
       List<String> userList = new ArrayList<String>();
       for(String perm : permission.split(";")) {
         String userName = perm.substring(0,perm.lastIndexOf(" "));
-        if(!userList.contains(userName)) userList.add(userName);      
+        if(!userList.contains(userName)) userList.add(userName);
       }
       for(String user : userList) {
         StringBuilder sb = new StringBuilder();
@@ -157,7 +157,7 @@ public class UIWizardStep1 extends UIFormInputSetWithAction {
   }
   protected void removePermission(String perm) {
     permissions_.remove(perm);
-  }  
+  }
   protected boolean isPermissionEmpty() {return permissions_.isEmpty();}
   protected Map<String, String> getPermissions() {return permissions_;}
 }

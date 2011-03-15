@@ -29,7 +29,7 @@ import org.exoplatform.webui.ext.manager.UIAbstractManager;
  * Author : pham tuan
  *          phamtuanchip@yahoo.de
  * Oct 03, 2006
- * 9:43:23 AM 
+ * 9:43:23 AM
  */
 @ComponentConfig(lifecycle = UIContainerLifecycle.class)
 
@@ -43,17 +43,17 @@ public class UITemplatesManager extends UIAbstractManager {
 
   public boolean isEditingTemplate() {
     UIPopupWindow uiPopup = getChildById(EDIT_TEMPLATE);
-    return (uiPopup != null && uiPopup.isShow() && uiPopup.isRendered());    
+    return (uiPopup != null && uiPopup.isShow() && uiPopup.isRendered());
   }
-  
+
   public void initPopup(UIComponent uiComponent, String title) throws Exception {
-    String popuId = title ; 
+    String popuId = title ;
     if (title == null ) popuId = uiComponent.getId() ;
     UIPopupWindow uiPopup = getChildById(popuId) ;
     if(uiPopup == null) {
       uiPopup = addChild(UIPopupWindow.class, null, popuId) ;
       uiPopup.setWindowSize(700, 500) ;
-    } else { 
+    } else {
       uiPopup.setRendered(true) ;
     }
     uiPopup.setUIComponent(uiComponent) ;
@@ -62,7 +62,7 @@ public class UITemplatesManager extends UIAbstractManager {
   }
 
   public void initPopupPermission(String id, String membership) throws Exception {
-    String popupId = id.concat(UITemplateContent.TEMPLATE_PERMISSION);    
+    String popupId = id.concat(UITemplateContent.TEMPLATE_PERMISSION);
     UIPopupWindow uiPopup = addChild(UIPopupWindow.class, null, popupId);
     uiPopup.setWindowSize(560, 300);
     UIPermissionSelector uiECMPermission = createUIComponent(UIPermissionSelector.class, null, null);
@@ -87,5 +87,5 @@ public class UITemplatesManager extends UIAbstractManager {
 
   public void refresh() throws Exception {
     getChild(UITemplateList.class).updateGrid(1);
-  }   
+  }
 }

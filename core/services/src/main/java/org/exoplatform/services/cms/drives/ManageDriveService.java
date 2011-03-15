@@ -41,39 +41,39 @@ public interface ManageDriveService {
  * @param allowCreateFolder the string to specify which type of folder can add in the drive
    * @throws Exception
    */
-  public void addDrive(String name, String workspace, String permissions, String homePath, 
+  public void addDrive(String name, String workspace, String permissions, String homePath,
                         String views, String icon, boolean viewReferences, boolean viewNonDocument,
                         boolean viewSideBar, boolean showHiddenNode, String allowCreateFolder, String allowNodeTypesOnTree)throws Exception ;
   /**
    * Return an DriveData Object
-   * @param driveName  the string contain the drive name 
+   * @param driveName  the string contain the drive name
    * @param repository  the repository name
    * @see DriveData
    * @return  DriveData with specified drive name and repository
    * @throws Exception
    */
   public DriveData getDriveByName(String driveName, String repository) throws Exception;
-  
+
   /**
    * Return the list of DriveData
-   * This method will look up in all workspaces of repository to find DriveData with 
-   * specified permission 
-   * @param permission  the string contain the permission  
+   * This method will look up in all workspaces of repository to find DriveData with
+   * specified permission
+   * @param permission  the string contain the permission
    * @param repository name of repository
    * @return  list of DriveData with specified repository and permission
    * @see DriveData
    * @throws Exception
    */
   public List<DriveData> getAllDriveByPermission(String permission, String repository) throws Exception;
-  
+
   /**
    * Remove drive with specified drive name and repository
    * @param driveName  drive name
    * @param repository repository name
    * @throws Exception
    */
-  public void removeDrive(String driveName, String repository) throws Exception;      
-  
+  public void removeDrive(String driveName, String repository) throws Exception;
+
   /**
    * This method will look up in all workspaces of repository to find DriveData
    * @param repository repository name
@@ -81,7 +81,7 @@ public interface ManageDriveService {
    * @throws Exception
    */
   public List<DriveData> getAllDrives(String repository) throws Exception;
-  
+
   /**
    * This method will check to make sure the view is not in used before remove this view
    * @param viewName view name
@@ -90,23 +90,23 @@ public interface ManageDriveService {
    * @throws Exception
    */
   public boolean isUsedView(String viewName, String repository) throws Exception;
-  
+
   /**
    * Register all drive plugins to repository
    * @param repository the string contain repository name
    * @throws Exception
    */
   public void init() throws Exception;
-  
+
   /**
    * Register all drive plugins to repository.
-   * 
+   *
    * @deprecated Since WCM 2.1-CLOUD-DEV you should use {@link #buildDocumentTypePattern()} instead.
    * @param repository the string contain repository name
    * @throws Exception
    */
-  public void init(String repository) throws Exception; 
-  
+  public void init(String repository) throws Exception;
+
   /**
    * Get all drives by user roles
    * @param repository Repository name
@@ -115,9 +115,9 @@ public interface ManageDriveService {
    * @return List<DriveData>
    * @throws Exception
    */
-  public List<DriveData> getDriveByUserRoles(String repository, String userId, 
+  public List<DriveData> getDriveByUserRoles(String repository, String userId,
       List<String> roles) throws Exception;
-  
+
   /**
    * Get all main drives
    * @param repository Repository name
@@ -126,9 +126,9 @@ public interface ManageDriveService {
    * @return List<DriveData>
    * @throws Exception
    */
-  public List<DriveData> getMainDrives(String repository, String userId, 
+  public List<DriveData> getMainDrives(String repository, String userId,
       List<String> userRoles) throws Exception;
-  
+
   /**
    * Get all personal drives
    * @param repository Repository name
@@ -137,9 +137,9 @@ public interface ManageDriveService {
    * @return List<DriveData>
    * @throws Exception
    */
-  public List<DriveData> getPersonalDrives(String repository, String userId, 
+  public List<DriveData> getPersonalDrives(String repository, String userId,
       List<String> userRoles) throws Exception;
-  
+
   /**
    * Get all group drives
    * @param repository Repository name
@@ -149,6 +149,6 @@ public interface ManageDriveService {
    * @return List<DriveData>
    * @throws Exception
    */
-  public List<DriveData> getGroupDrives(String repository, String userId, List<String> userRoles, 
+  public List<DriveData> getGroupDrives(String repository, String userId, List<String> userRoles,
       List<String> groups) throws Exception;
 }

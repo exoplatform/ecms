@@ -42,35 +42,35 @@ public class UIUserMemberSelector extends UIContainer implements ComponentSelect
 
   /** The ui component. */
   private UIComponent uiComponent;
-  
+
   /** The return field. */
   private String returnField;
-  
+
   /** The is use popup. */
   private boolean isUsePopup = true;
-  
+
   /** The is multi. */
   private boolean isMulti = true;
-  
+
   /** The is show search group. */
   private boolean isShowSearchGroup = true;
-  
+
   /** The is show search user. */
   private boolean isShowSearchUser = true;
-  
+
   /** The is show search. */
   private boolean isShowSearch;
-  
+
   /**
    * Instantiates a new uIWCM user container.
-   * 
+   *
    * @throws Exception the exception
    */
   public UIUserMemberSelector() {}
-  
+
   /**
    * Inits the.
-   * 
+   *
    * @throws Exception the exception
    */
   public void init() throws Exception {
@@ -83,113 +83,113 @@ public class UIUserMemberSelector extends UIContainer implements ComponentSelect
     uiUserSelector.setShowSearchUser(isShowSearchUser);
     uiUserSelector.setShowSearch(isShowSearch);
   }
-  
+
   /**
    * Checks if is use popup.
-   * 
+   *
    * @return true, if is use popup
    */
   public boolean isUsePopup() {
     return isUsePopup;
   }
-  
+
   /**
    * Sets the use popup.
-   * 
+   *
    * @param isUsePopup the new use popup
    */
   public void setUsePopup(boolean isUsePopup) {
     this.isUsePopup = isUsePopup;
   }
-  
+
   /**
    * Checks if is multi.
-   * 
+   *
    * @return true, if is multi
    */
   public boolean isMulti() {
     return isMulti;
   }
-  
+
   /**
    * Sets the multi.
-   * 
+   *
    * @param isMulti the new multi
    */
   public void setMulti(boolean isMulti) {
     this.isMulti = isMulti;
   }
-  
+
   /**
    * Checks if is show search group.
-   * 
+   *
    * @return true, if is show search group
    */
   public boolean isShowSearchGroup() {
     return isShowSearchGroup;
   }
-  
+
   /**
    * Sets the show search group.
-   * 
+   *
    * @param isShowSearchGroup the new show search group
    */
   public void setShowSearchGroup(boolean isShowSearchGroup) {
     this.isShowSearchGroup = isShowSearchGroup;
   }
-  
+
   /**
    * Checks if is show search user.
-   * 
+   *
    * @return true, if is show search user
    */
   public boolean isShowSearchUser() {
     return isShowSearchUser;
   }
-  
+
   /**
    * Sets the show search user.
-   * 
+   *
    * @param isShowSearchUser the new show search user
    */
   public void setShowSearchUser(boolean isShowSearchUser) {
     this.isShowSearchUser = isShowSearchUser;
   }
-  
+
   /**
    * Checks if is show search.
-   * 
+   *
    * @return true, if is show search
    */
   public boolean isShowSearch() {
     return isShowSearch;
   }
-  
+
   /**
    * Sets the show search.
-   * 
+   *
    * @param isShowSearch the new show search
    */
   public void setShowSearch(boolean isShowSearch) {
     this.isShowSearch = isShowSearch;
   }
-  
+
   /* (non-Javadoc)
    * @see org.exoplatform.ecm.webui.selector.ComponentSelector#getSourceComponent()
    */
   public UIComponent getSourceComponent() {
     return uiComponent;
   }
-  
+
   /**
    * Gets the return field.
-   * 
+   *
    * @return the return field
    */
   public String getReturnField() {
     return returnField;
   }
-  
+
   /* (non-Javadoc)
    * @see org.exoplatform.ecm.webui.selector.ComponentSelector#setSourceComponent(org.exoplatform.webui.core.UIComponent, java.lang.String[])
    */
@@ -206,7 +206,7 @@ public class UIUserMemberSelector extends UIContainer implements ComponentSelect
       returnField = initParams[0];
     }
   }
-  
+
   /**
    * The listener interface for receiving addUserAction events.
    * The class that is interested in processing a addUserAction
@@ -215,7 +215,7 @@ public class UIUserMemberSelector extends UIContainer implements ComponentSelect
    * component's <code>addAddUserActionListener<code> method. When
    * the addUserAction event occurs, that object's appropriate
    * method is invoked.
-   * 
+   *
    * @see AddUserActionEvent
    */
   static  public class AddUserActionListener extends EventListener<UIUserMemberSelector> {
@@ -239,6 +239,6 @@ public class UIUserMemberSelector extends UIContainer implements ComponentSelect
         event.getRequestContext().addUIComponentToUpdateByAjax(
             userMemberSelector.getSourceComponent());
       }
-    }  
+    }
   }
 }

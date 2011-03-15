@@ -28,18 +28,18 @@ import org.exoplatform.webui.ext.filter.UIExtensionFilterType;
  * Created by The eXo Platform SARL
  * Author : Hoang Van Hung
  *          hunghvit@gmail.com
- * Aug 10, 2009  
+ * Aug 10, 2009
  */
 public class IsNotSimpleLockedFilter extends UIExtensionAbstractFilter {
 
   public IsNotSimpleLockedFilter() {
     this(null);
   }
-  
+
   public IsNotSimpleLockedFilter(String messageKey) {
     super(messageKey, UIExtensionFilterType.MANDATORY);
   }
-  
+
   public boolean accept(Map<String, Object> context) throws Exception {
     if (context == null) return true;
     Node currentNode = (Node) context.get(Node.class.getName());
@@ -51,5 +51,5 @@ public class IsNotSimpleLockedFilter extends UIExtensionAbstractFilter {
     Node currentNode = (Node) context.get(Node.class.getName());
     Object[] arg = { currentNode.getPath() };
     createUIPopupMessages(context, "UIPopupMenu.msg.node-locked", arg);
-  }    
+  }
 }

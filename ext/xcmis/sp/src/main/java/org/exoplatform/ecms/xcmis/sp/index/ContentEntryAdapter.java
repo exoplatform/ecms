@@ -29,7 +29,7 @@ public class ContentEntryAdapter
 {
    /**
     * Convert {@link ObjectData} to {@link ContentEntry}.
-    * 
+    *
     * @param objectData
     *           ObjectData
     * @return contentEntry ContentEntry
@@ -119,7 +119,7 @@ public class ContentEntryAdapter
 
    /**
     * Convert {@link FolderData} to {@link ContentEntry}.
-    * 
+    *
     * @param objectData
     *           FolderData
     * @return contentEntry ContentEntry
@@ -133,7 +133,7 @@ public class ContentEntryAdapter
 
    /**
     * Convert {@link DocumentData} to {@link ContentEntry}.
-    * 
+    *
     * @param objectData
     *           DocumentData
     * @return contentEntry ContentEntry.

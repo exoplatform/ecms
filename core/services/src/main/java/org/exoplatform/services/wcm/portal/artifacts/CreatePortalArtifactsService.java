@@ -25,23 +25,23 @@ import org.exoplatform.services.jcr.ext.common.SessionProvider;
  * Oct 22, 2008
  */
 public interface CreatePortalArtifactsService {
-  
+
   /**
    * Adds the plugin.
-   * 
+   *
    * @param artifactsPlugin the artifacts plugin
-   * 
+   *
    * @throws Exception the exception
    */
   public void addPlugin(CreatePortalPlugin artifactsPlugin) throws Exception;
-  
+
   /**
    * Deploy artifacts to portal.
-   * 
+   *
    * @param portalName the portal name
    * @param sessionProvider the session provider
-   * 
+   *
    * @throws Exception the exception
    */
-  public void deployArtifactsToPortal(SessionProvider sessionProvider, String portalName) throws Exception;  
+  public void deployArtifactsToPortal(SessionProvider sessionProvider, String portalName) throws Exception;
 }

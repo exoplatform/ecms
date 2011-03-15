@@ -47,7 +47,7 @@ import org.exoplatform.webui.ext.filter.UIExtensionFilters;
  * Created by The eXo Platform SAS
  * Author : eXoPlatform
  *          nicolas.filotto@exoplatform.com
- * 6 mai 2009  
+ * 6 mai 2009
  */
 @ComponentConfig(
      events = {
@@ -57,31 +57,38 @@ import org.exoplatform.webui.ext.filter.UIExtensionFilters;
 @Deprecated
 public class ManageSimpleCategoriesActionComponent extends UIComponent {
 
-  private static final List<UIExtensionFilter> FILTERS = Arrays.asList(new UIExtensionFilter[]{new IsNotRootNodeFilter(), new IsCheckedOutFilter(), new CanSetPropertyFilter(), new IsNotLockedFilter(), new IsDocumentFilter()});
+  private static final List<UIExtensionFilter> FILTERS = Arrays.asList(new UIExtensionFilter[] {
+      new IsNotRootNodeFilter(), new IsCheckedOutFilter(), new CanSetPropertyFilter(),
+      new IsNotLockedFilter(), new IsDocumentFilter() });
 
   @UIExtensionFilters
   public List<UIExtensionFilter> getFilters() {
     return FILTERS;
   }
-  
-  public static class ManageSimpleCategoriesActionListener extends UIActionBarActionListener<ManageSimpleCategoriesActionComponent> {
+
+  public static class ManageSimpleCategoriesActionListener
+                                                          extends
+                                                          UIActionBarActionListener<ManageSimpleCategoriesActionComponent> {
     public void processEvent(Event<ManageSimpleCategoriesActionComponent> event) throws Exception {
       UIActionBar uiActionBar = event.getSource().getAncestorOfType(UIActionBar.class);
       UIJCRExplorer uiExplorer = uiActionBar.getAncestorOfType(UIJCRExplorer.class);
       String repository = uiExplorer.getRepositoryName();
-      ManageableRepository manaRepository = 
+      ManageableRepository manaRepository =
         uiActionBar.getApplicationComponent(RepositoryService.class).getRepository(repository);
       String workspaceName = manaRepository.getConfiguration().getSystemWorkspaceName();
       NodeHierarchyCreator nodeHierarchyCreator = uiActionBar.getApplicationComponent(NodeHierarchyCreator.class);
       uiExplorer.setIsHidePopup(true);
-      UISimpleCategoryManager uiSimpleCategoryManager = uiExplorer.createUIComponent(UISimpleCategoryManager.class, null, null);
+      UISimpleCategoryManager uiSimpleCategoryManager = uiExplorer.createUIComponent(UISimpleCategoryManager.class,
+                                                                                     null,
+                                                                                     null);
       UIOneNodePathSelector uiNodePathSelector = uiSimpleCategoryManager.getChild(UIOneNodePathSelector.class);
       uiNodePathSelector.setIsDisable(workspaceName, true);
       uiNodePathSelector.setExceptedNodeTypesInPathPanel(new String[] {Utils.EXO_SYMLINK});
-      String rootTreePath = nodeHierarchyCreator.getJcrPath(BasePath.EXO_TAXONOMIES_PATH);      
+      String rootTreePath = nodeHierarchyCreator.getJcrPath(BasePath.EXO_TAXONOMIES_PATH);
       uiNodePathSelector.setRootNodeLocation(repository, workspaceName, rootTreePath);
       uiNodePathSelector.init(uiExplorer.getSessionProvider());
-      UISimpleCategoriesAddedList uiSimpleCategoriesAddedList = uiSimpleCategoryManager.getChild(UISimpleCategoriesAddedList.class);
+      UISimpleCategoriesAddedList uiSimpleCategoriesAddedList =
+          uiSimpleCategoryManager.getChild(UISimpleCategoriesAddedList.class);
       uiNodePathSelector.setSourceComponent(uiSimpleCategoriesAddedList, null);
       UIPopupContainer UIPopupContainer = uiExplorer.getChild(UIPopupContainer.class);
       UIPopupContainer.activate(uiSimpleCategoryManager, 630, 500);

@@ -62,7 +62,7 @@ import org.exoplatform.webui.form.validator.PositiveNumberFormatValidator;
  * Jun 23, 2009
  */
 @ComponentConfig(
-                 lifecycle = UIFormLifecycle.class, 
+                 lifecycle = UIFormLifecycle.class,
                  template = "app:/groovy/ParameterizedContentListViewer/config/UIPCLVConfig.gtmpl",
                  events = {
                      @EventConfig(listeners = UIPCLVConfig.CancelActionListener.class, phase = Phase.DECODE),
@@ -122,7 +122,7 @@ public class UIPCLVConfig extends UIForm implements UISelectable {
 
   /** The Constant VIEWER_HEADER. */
   public static final String VIEWER_HEADER                     = "ViewerHeader";
-  
+
   /** The Constant AUTO_DETECT. */
   public static final String AUTO_DETECT                       = "AutomaticDetection";
 
@@ -149,22 +149,22 @@ public class UIPCLVConfig extends UIForm implements UISelectable {
 
   /** The Constant ORDER_ASC. */
   public static final String ORDER_ASC                         = "OrderAsc";
-  
+
   /** The Constant PREFERENCE_REPOSITORY. */
   public static final String PREFERENCE_REPOSITORY            = "repository";
-  
+
   /** The Constant PREFERENCE_TREE_NAME. */
   public static final String PREFERENCE_TREE_NAME             = "treeName";
 
   /** The Constant TREE_NAME_FORM_SELECTBOX. */
   public static final String TREE_NAME_FORM_SELECTBOX         = "UICategoryNavigationTreeNameFormSelectBox";
-  
+
   /** The popup id. */
   private String popupId;
-  
+
   /**
    * Instantiates a new uI parameterized management form.
-   * 
+   *
    * @throws Exception the exception
    */
   @SuppressWarnings("unchecked")
@@ -172,7 +172,7 @@ public class UIPCLVConfig extends UIForm implements UISelectable {
 
     PortletRequestContext context = (PortletRequestContext) WebuiRequestContext.getCurrentInstance();
     PortletPreferences portletPreferences = context.getRequest().getPreferences();
-    
+
     List<SelectItemOption<String>> orderTypeOptions = new ArrayList<SelectItemOption<String>>();
     orderTypeOptions.add(new SelectItemOption<String>(ORDER_DESC, "DESC"));
     orderTypeOptions.add(new SelectItemOption<String>(ORDER_ASC, "ASC"));
@@ -189,12 +189,12 @@ public class UIPCLVConfig extends UIForm implements UISelectable {
     orderByOptions.add(new SelectItemOption<String>(UICLVPortlet.ORDER_BY_TITLE, NodetypeConstant.EXO_TITLE));
     orderByOptions.add(new SelectItemOption<String>(UICLVPortlet.ORDER_BY_DATE_CREATED, NodetypeConstant.EXO_DATE_CREATED));
     orderByOptions.add(new SelectItemOption<String>(UICLVPortlet.ORDER_BY_DATE_MODIFIED, NodetypeConstant.EXO_DATE_MODIFIED));
-    orderByOptions.add(new SelectItemOption<String>(UICLVPortlet.ORDER_BY_DATE_PUBLISHED,"publication:liveDate"));    
-    orderByOptions.add(new SelectItemOption<String>(UICLVPortlet.ORDER_BY_DATE_START_EVENT,"exo:startEvent"));    
+    orderByOptions.add(new SelectItemOption<String>(UICLVPortlet.ORDER_BY_DATE_PUBLISHED,"publication:liveDate"));
+    orderByOptions.add(new SelectItemOption<String>(UICLVPortlet.ORDER_BY_DATE_START_EVENT,"exo:startEvent"));
     UIFormSelectBox orderBySelectBox = new UIFormSelectBox(ORDER_BY, ORDER_BY, orderByOptions);
     String orderByPref = portletPreferences.getValue(UIPCLVPortlet.ORDER_BY, null);
     orderBySelectBox.setValue(orderByPref);
-    
+
     UIFormCheckBoxInput autoDetect = new UIFormCheckBoxInput(AUTO_DETECT, AUTO_DETECT, null);
     autoDetect.setChecked(true);
     String autoDetected = portletPreferences.getValue(UIPCLVPortlet.SHOW_AUTO_DETECT, null);
@@ -202,16 +202,16 @@ public class UIPCLVConfig extends UIForm implements UISelectable {
 
     UIFormStringInput headerInput = new UIFormStringInput(HEADER, HEADER, null);
     headerInput.setValue(portletPreferences.getValue(UIPCLVPortlet.HEADER, null));
-    
+
     List<SelectItemOption<String>> formViewerTemplateList = getTemplateList(PORTLET_NAME, FORM_VIEW_TEMPLATE_CATEGORY);
     List<SelectItemOption<String>> paginatorTemplateList = getTemplateList(PORTLET_NAME, PAGINATOR_TEMPLATE_CATEGORY);
-    
+
     String preferenceRepository = portletPreferences.getValue(PREFERENCE_REPOSITORY, "");
     String preferenceTreeName = portletPreferences.getValue(PREFERENCE_TREE_NAME, "");
     List<SelectItemOption<String>> trees = getTaxonomyTrees(preferenceRepository);
     UIFormSelectBox treeNameFormSelectBox = new UIFormSelectBox(TREE_NAME_FORM_SELECTBOX, TREE_NAME_FORM_SELECTBOX, trees);
     treeNameFormSelectBox.setValue(preferenceTreeName);
-    
+
     UIFormStringInput itemsPerPageStringInput = new UIFormStringInput(ITEMS_PER_PAGE_INPUT, ITEMS_PER_PAGE_INPUT, null);
     String itemsPerPageVal = portletPreferences.getValue(UIPCLVPortlet.ITEMS_PER_PAGE, null);
     itemsPerPageStringInput.setValue(itemsPerPageVal);
@@ -219,35 +219,35 @@ public class UIPCLVConfig extends UIForm implements UISelectable {
     itemsPerPageStringInput.addValidator(ZeroNumberValidator.class);
     itemsPerPageStringInput.addValidator(PositiveNumberFormatValidator.class);
     itemsPerPageStringInput.setMaxLength(3);
-    
+
     UIFormSelectBox formViewTemplateSelector = new UIFormSelectBox(FORM_VIEW_TEMPLATES_SELECTOR, FORM_VIEW_TEMPLATES_SELECTOR, formViewerTemplateList);
     String formViewTemplate = portletPreferences.getValue(UIPCLVPortlet.FORM_VIEW_TEMPLATE_PATH, null);
     formViewTemplateSelector.setValue(formViewTemplate);
-    
+
     UIFormSelectBox paginatorTemplateSelector = new UIFormSelectBox(PAGINATOR_TEMPLATES_SELECTOR, PAGINATOR_TEMPLATES_SELECTOR, paginatorTemplateList);
     String paginatorTemplate = portletPreferences.getValue(UIPCLVPortlet.PAGINATOR_TEMPlATE_PATH, null);
     paginatorTemplateSelector.setValue(paginatorTemplate);
-    
+
     UIFormCheckBoxInput viewerButtonRefreshCheckbox = new UIFormCheckBoxInput(VIEWER_BUTTON_REFRESH, VIEWER_BUTTON_REFRESH, null);
     viewerButtonRefreshCheckbox.setChecked(false);
     String refreshAble = portletPreferences.getValue(UIPCLVPortlet.SHOW_REFRESH_BUTTON, null);
     viewerButtonRefreshCheckbox.setChecked(Boolean.parseBoolean(refreshAble));
-    
+
     UIFormCheckBoxInput thumbnailsViewCheckbox = new UIFormCheckBoxInput(VIEWER_THUMBNAILS_IMAGE, VIEWER_THUMBNAILS_IMAGE, null);
     thumbnailsViewCheckbox.setChecked(true);
     String imageShowAble = portletPreferences.getValue(UIPCLVPortlet.SHOW_THUMBNAILS_VIEW, null);
     thumbnailsViewCheckbox.setChecked(Boolean.parseBoolean(imageShowAble));
-    
+
     UIFormCheckBoxInput titleViewerCheckbox = new UIFormCheckBoxInput(VIEWER_TITLE, VIEWER_TITLE, null);
     titleViewerCheckbox.setChecked(true);
     String titleShowAble = portletPreferences.getValue(UIPCLVPortlet.SHOW_TITLE, null);
     titleViewerCheckbox.setChecked(Boolean.parseBoolean(titleShowAble));
-    
+
     UIFormCheckBoxInput summaryViewerCheckbox = new UIFormCheckBoxInput(VIEWER_SUMMARY, VIEWER_SUMMARY, null);
     summaryViewerCheckbox.setChecked(true);
     String summaryShowAble = portletPreferences.getValue(UIPCLVPortlet.SHOW_SUMMARY, null);
     summaryViewerCheckbox.setChecked(Boolean.parseBoolean(summaryShowAble));
-    
+
     UIFormCheckBoxInput dateCreatedViewerCheckbox = new UIFormCheckBoxInput(VIEWER_DATE_CREATED, VIEWER_DATE_CREATED, null);
     dateCreatedViewerCheckbox.setChecked(true);
     String dateShowAble = portletPreferences.getValue(UIPCLVPortlet.SHOW_DATE_CREATED, null);
@@ -257,7 +257,7 @@ public class UIPCLVConfig extends UIForm implements UISelectable {
     viewerHeader.setChecked(true);
     String viewHeader = portletPreferences.getValue(UIPCLVPortlet.SHOW_HEADER, null);
     viewerHeader.setChecked(Boolean.parseBoolean(viewHeader));
-    
+
     String preferenceTargetPath = portletPreferences.getValue(UIPCLVPortlet.TARGET_PAGE, null);
     UIFormInputSetWithAction targetPathFormInputSet = new UIFormInputSetWithAction(TARGET_PAGE_INPUT_SET_ACTION);
     UIFormStringInput targetPathFormStringInput = new UIFormStringInput(TARGET_PAGE_INPUT, TARGET_PAGE_INPUT, preferenceTargetPath);
@@ -265,22 +265,22 @@ public class UIPCLVConfig extends UIForm implements UISelectable {
     targetPathFormStringInput.setEditable(false);
     targetPathFormInputSet.setActionInfo(TARGET_PAGE_INPUT, new String[] {"SelectTargetPage"}) ;
     targetPathFormInputSet.addUIFormInput(targetPathFormStringInput);
-    
+
     UIFormCheckBoxInput readMoreLink = new UIFormCheckBoxInput(SHOW_READMORE, SHOW_READMORE, null);
     readMoreLink.setChecked(true);
     String showReadMore = portletPreferences.getValue(UIPCLVPortlet.SHOW_READMORE, null);
     readMoreLink.setChecked(Boolean.parseBoolean(showReadMore));
-    
+
     UIFormCheckBoxInput showRssLink = new UIFormCheckBoxInput(SHOW_RSS_LINK, SHOW_RSS_LINK, null);
     showRssLink.setChecked(true);
     String rssLink = portletPreferences.getValue(UIPCLVPortlet.SHOW_RSS_LINK, null);
     showRssLink.setChecked(Boolean.parseBoolean(rssLink));
-    
+
     UIFormCheckBoxInput showLink = new UIFormCheckBoxInput(SHOW_LINK, SHOW_LINK, null);
     showLink.setChecked(true);
     String link = portletPreferences.getValue(UIPCLVPortlet.SHOW_LINK, null);
     showLink.setChecked(Boolean.parseBoolean(link));
-    
+
     addChild(orderBySelectBox);
     addChild(orderTypeRadioBoxInput);
     addChild(headerInput);
@@ -288,7 +288,7 @@ public class UIPCLVConfig extends UIForm implements UISelectable {
     addChild(formViewTemplateSelector);
     addChild(paginatorTemplateSelector);
     addChild(treeNameFormSelectBox);
-    addChild(itemsPerPageStringInput);    
+    addChild(itemsPerPageStringInput);
     addChild(viewerButtonRefreshCheckbox);
     addChild(thumbnailsViewCheckbox);
     addChild(titleViewerCheckbox);
@@ -299,17 +299,17 @@ public class UIPCLVConfig extends UIForm implements UISelectable {
     addChild(targetPathFormInputSet);
     addChild(readMoreLink);
     addChild(showRssLink);
-    
+
     setActions(new String[] { "Save", "Cancel" });
   }
- 
+
   /**
    * Gets the taxonomy trees.
-   * 
+   *
    * @param repository the repository
-   * 
+   *
    * @return the taxonomy trees
-   * 
+   *
    * @throws Exception the exception
    */
   private List<SelectItemOption<String>> getTaxonomyTrees(String repository) throws Exception {
@@ -318,13 +318,13 @@ public class UIPCLVConfig extends UIForm implements UISelectable {
     List<Node> taxonomyNodes = taxonomyService.getAllTaxonomyTrees(repository);
     List<SelectItemOption<String>> taxonomyTrees = new ArrayList<SelectItemOption<String>>();
     for(Node taxonomyNode : taxonomyNodes) {
-    	Node portalNode = livePortalManagerService.getLivePortalByChild(taxonomyNode);
-    	if (portalNode != null)
-    		taxonomyTrees.add(new SelectItemOption<String>(taxonomyNode.getName(), taxonomyNode.getName()));
+      Node portalNode = livePortalManagerService.getLivePortalByChild(taxonomyNode);
+      if (portalNode != null)
+        taxonomyTrees.add(new SelectItemOption<String>(taxonomyNode.getName(), taxonomyNode.getName()));
     }
     return taxonomyTrees;
   }
-  
+
   /* (non-Javadoc)
    * @see org.exoplatform.ecm.webui.selector.UISelectable#doSelect(java.lang.String, java.lang.Object)
    */
@@ -333,15 +333,15 @@ public class UIPCLVConfig extends UIForm implements UISelectable {
     formStringInput.setValue(value.toString()) ;
     Utils.closePopupWindow(this, UICategoryNavigationConstant.TARGET_PATH_SELECTOR_POPUP_WINDOW);
   }
-  
+
   /**
    * Gets the template list.
-   * 
+   *
    * @param portletName the portlet name
    * @param category the category
-   * 
+   *
    * @return the template list
-   * 
+   *
    * @throws Exception the exception
    */
   private List<SelectItemOption<String>> getTemplateList(String portletName, String category) throws Exception {
@@ -358,7 +358,7 @@ public class UIPCLVConfig extends UIForm implements UISelectable {
     }
     return templateOptionList;
   }
-  
+
   /**
    * The listener interface for receiving cancelAction events.
    * The class that is interested in processing a cancelAction
@@ -367,11 +367,11 @@ public class UIPCLVConfig extends UIForm implements UISelectable {
    * component's <code>addCancelActionListener<code> method. When
    * the cancelAction event occurs, that object's appropriate
    * method is invoked.
-   * 
+   *
    * @see CancelActionEvent
    */
   public static class CancelActionListener extends EventListener<UIPCLVConfig> {
-    
+
     /* (non-Javadoc)
      * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
      */
@@ -383,7 +383,7 @@ public class UIPCLVConfig extends UIForm implements UISelectable {
       ((PortletRequestContext)event.getRequestContext()).setApplicationMode(PortletMode.VIEW);
     }
   }
-  
+
   /**
    * The listener interface for receiving selectTargetPageAction events.
    * The class that is interested in processing a selectTargetPageAction
@@ -392,11 +392,11 @@ public class UIPCLVConfig extends UIForm implements UISelectable {
    * component's <code>addSelectTargetPageActionListener<code> method. When
    * the selectTargetPageAction event occurs, that object's appropriate
    * method is invoked.
-   * 
+   *
    * @see SelectTargetPageActionEvent
    */
   public static class SelectTargetPageActionListener extends EventListener<UIPCLVConfig> {
-    
+
     /* (non-Javadoc)
      * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
      */
@@ -411,7 +411,7 @@ public class UIPCLVConfig extends UIForm implements UISelectable {
 
   /**
    * Gets the popup id.
-   * 
+   *
    * @return the popup id
    */
   public String getPopupId() {
@@ -420,7 +420,7 @@ public class UIPCLVConfig extends UIForm implements UISelectable {
 
   /**
    * Sets the popup id.
-   * 
+   *
    * @param popupId the new popup id
    */
   public void setPopupId(String popupId) {
@@ -435,11 +435,11 @@ public class UIPCLVConfig extends UIForm implements UISelectable {
    * component's <code>addSaveActionListener<code> method. When
    * the saveAction event occurs, that object's appropriate
    * method is invoked.
-   * 
+   *
    * @see SaveActionEvent
    */
   public static class SaveActionListener extends EventListener<UIPCLVConfig> {
-    
+
     /* (non-Javadoc)
      * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
      */
@@ -449,10 +449,10 @@ public class UIPCLVConfig extends UIForm implements UISelectable {
       PortletPreferences portletPreferences = portletRequestContext.getRequest().getPreferences();
       RepositoryService repositoryService = uiParameterizedManagementForm.getApplicationComponent(RepositoryService.class);
       ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
-      
+
       String repository = manageableRepository.getConfiguration().getName();
       String workspace = manageableRepository.getConfiguration().getDefaultWorkspaceName();
-      
+
       String formViewTemplatePath = uiParameterizedManagementForm.getUIFormSelectBox(UIPCLVConfig.FORM_VIEW_TEMPLATES_SELECTOR).getValue();
       String paginatorTemplatePath = uiParameterizedManagementForm.getUIFormSelectBox(UIPCLVConfig.PAGINATOR_TEMPLATES_SELECTOR).getValue();
       String itemsPerPage = uiParameterizedManagementForm.getUIStringInput(UIPCLVConfig.ITEMS_PER_PAGE_INPUT).getValue();
@@ -496,7 +496,7 @@ public class UIPCLVConfig extends UIForm implements UISelectable {
       portletPreferences.setValue(UIPCLVPortlet.WORKSPACE, workspace);
       portletPreferences.setValue(UIPCLVPortlet.FORM_VIEW_TEMPLATE_PATH, formViewTemplatePath);
       portletPreferences.setValue(UIPCLVPortlet.PAGINATOR_TEMPlATE_PATH, paginatorTemplatePath);
-      portletPreferences.setValue(UIPCLVPortlet.ITEMS_PER_PAGE, itemsPerPage);      
+      portletPreferences.setValue(UIPCLVPortlet.ITEMS_PER_PAGE, itemsPerPage);
       portletPreferences.setValue(UIPCLVPortlet.SHOW_REFRESH_BUTTON, showRefreshButton);
       portletPreferences.setValue(UIPCLVPortlet.SHOW_THUMBNAILS_VIEW, viewThumbnails);
       portletPreferences.setValue(UIPCLVPortlet.SHOW_TITLE, viewTitle);
@@ -512,7 +512,7 @@ public class UIPCLVConfig extends UIForm implements UISelectable {
       portletPreferences.setValue(UIPCLVPortlet.SHOW_AUTO_DETECT, autoDetect);
       portletPreferences.setValue(UIPCLVPortlet.TARGET_PAGE, targetPage);
       portletPreferences.store();
-      
+
       if (Utils.isQuickEditMode(uiParameterizedManagementForm, UIPCLVPortlet.PARAMETERIZED_MANAGEMENT_PORTLET_POPUP_WINDOW)) {
         Utils.closePopupWindow(uiParameterizedManagementForm, UIPCLVPortlet.PARAMETERIZED_MANAGEMENT_PORTLET_POPUP_WINDOW);
       } else {

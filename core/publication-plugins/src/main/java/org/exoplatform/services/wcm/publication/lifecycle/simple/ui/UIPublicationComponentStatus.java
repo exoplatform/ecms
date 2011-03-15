@@ -55,7 +55,7 @@ public class UIPublicationComponentStatus extends UIForm {
 
   /**
    * Instantiates a new uI publication component status.
-   * 
+   *
    * @throws Exception the exception
    */
   public UIPublicationComponentStatus() throws Exception {
@@ -63,9 +63,9 @@ public class UIPublicationComponentStatus extends UIForm {
 
   /**
    * Instantiates a new uI publication component status.
-   * 
+   *
    * @param node the node
-   * 
+   *
    * @throws Exception the exception
    */
   public UIPublicationComponentStatus(Node node) throws Exception {
@@ -74,7 +74,7 @@ public class UIPublicationComponentStatus extends UIForm {
 
   /**
    * Gets the node.
-   * 
+   *
    * @return the node
    */
   public Node getNode() {
@@ -83,7 +83,7 @@ public class UIPublicationComponentStatus extends UIForm {
 
   /**
    * Sets the node.
-   * 
+   *
    * @param node the new node
    */
   public void setNode(Node node) {
@@ -92,7 +92,7 @@ public class UIPublicationComponentStatus extends UIForm {
 
   /**
    * Gets the node name.
-   * 
+   *
    * @return the node name
    */
   public String getNodeName() {
@@ -105,7 +105,7 @@ public class UIPublicationComponentStatus extends UIForm {
 
   /**
    * Gets the life cycle name.
-   * 
+   *
    * @return the life cycle name
    */
   public String getLifeCycleName () {
@@ -119,7 +119,7 @@ public class UIPublicationComponentStatus extends UIForm {
 
   /**
    * Gets the state name.
-   * 
+   *
    * @return the state name
    */
   public String getStateName () {
@@ -133,9 +133,9 @@ public class UIPublicationComponentStatus extends UIForm {
 
   /**
    * Gets the link state image.
-   * 
+   *
    * @param locale the locale
-   * 
+   *
    * @return the link state image
    */
   public String getLinkStateImage (Locale locale) {
@@ -144,7 +144,7 @@ public class UIPublicationComponentStatus extends UIForm {
       PublicationService service = getApplicationComponent(PublicationService.class) ;
 
       byte[] bytes=service.getStateImage(getNode(),locale);
-      InputStream iS = new ByteArrayInputStream(bytes);    
+      InputStream iS = new ByteArrayInputStream(bytes);
       String id = dS.addDownloadResource(new InputStreamDownloadResource(iS, "image/gif"));
       return dS.getDownloadLink(id);
     } catch (Exception e) {
@@ -160,11 +160,11 @@ public class UIPublicationComponentStatus extends UIForm {
    * component's <code>addCloseActionListener<code> method. When
    * the closeAction event occurs, that object's appropriate
    * method is invoked.
-   * 
+   *
    * @see CloseActionEvent
    */
   public static class CloseActionListener extends EventListener<UIPublicationComponentStatus> {
-    
+
     /* (non-Javadoc)
      * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
      */

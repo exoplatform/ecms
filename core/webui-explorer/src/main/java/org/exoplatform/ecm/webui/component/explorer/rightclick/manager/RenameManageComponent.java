@@ -53,7 +53,7 @@ import org.exoplatform.webui.ext.manager.UIAbstractManagerComponent;
  * Created by The eXo Platform SARL
  * Author : Hoang Van Hung
  *          hunghvit@gmail.com
- * Aug 6, 2009  
+ * Aug 6, 2009
  */
 
 @ComponentConfig(
@@ -64,20 +64,20 @@ import org.exoplatform.webui.ext.manager.UIAbstractManagerComponent;
 
 public class RenameManageComponent extends UIAbstractManagerComponent {
 
- private static final List<UIExtensionFilter> FILTERS 
- 				= Arrays.asList(new UIExtensionFilter[]{new IsNotInTrashFilter(),
- 																								new IsNotInTrashFilter(),
- 																								new CanSetPropertyFilter(), 
- 																								new IsNotLockedFilter(), 
- 																								new IsCheckedOutFilter(), 
- 																								new IsNotTrashHomeNodeFilter(),
- 																								new IsNotEditingDocumentFilter()});
-  
+ private static final List<UIExtensionFilter> FILTERS
+         = Arrays.asList(new UIExtensionFilter[]{new IsNotInTrashFilter(),
+                                                 new IsNotInTrashFilter(),
+                                                 new CanSetPropertyFilter(),
+                                                 new IsNotLockedFilter(),
+                                                 new IsCheckedOutFilter(),
+                                                 new IsNotTrashHomeNodeFilter(),
+                                                 new IsNotEditingDocumentFilter()});
+
   @UIExtensionFilters
   public List<UIExtensionFilter> getFilters() {
     return FILTERS;
   }
-  
+
   public static void renameManage(Event<RenameManageComponent> event, UIJCRExplorer uiExplorer)
       throws Exception {
     UIWorkingArea uicomp = event.getSource().getParent();
@@ -99,10 +99,10 @@ public class RenameManageComponent extends UIAbstractManagerComponent {
       renameNode = uiExplorer.getNodeByPath(renameNodePath, session, false);
       // Reset the session to manage the links that potentially change of workspace
       session = renameNode.getSession();
-      // Reset the workspace name to manage the links that potentially change of workspace 
+      // Reset the workspace name to manage the links that potentially change of workspace
       wsName = renameNode.getSession().getWorkspace().getName();
     } catch(PathNotFoundException path) {
-      uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.path-not-found-exception", 
+      uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.path-not-found-exception",
           null,ApplicationMessage.WARNING));
       event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
       return;
@@ -124,7 +124,7 @@ public class RenameManageComponent extends UIAbstractManagerComponent {
       uiExplorer.updateAjax(event);
     }
   }
-  
+
   public static class RenameActionListener extends UIWorkingAreaActionListener<RenameManageComponent> {
     public void processEvent(Event<RenameManageComponent> event) throws Exception {
       UIJCRExplorer uiExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class);
@@ -132,7 +132,7 @@ public class RenameManageComponent extends UIAbstractManagerComponent {
     }
   }
 
-  
+
   @Override
   public Class<? extends UIAbstractManager> getUIAbstractManagerClass() {
     return null;

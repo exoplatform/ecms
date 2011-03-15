@@ -59,39 +59,39 @@ import org.exoplatform.webui.ext.manager.UIAbstractManagerComponent;
  * Created by The eXo Platform SARL
  * Author : Nguyen Anh Vu
  *          anhvurz90@gmail.com
- * Oct 14, 2009  
+ * Oct 14, 2009
  */
 
 @ComponentConfig(
-	    events = {
-	      @EventConfig(listeners = FavouriteManageComponent.AddToFavouriteActionListener.class)
-	    }
-	)
+      events = {
+        @EventConfig(listeners = FavouriteManageComponent.AddToFavouriteActionListener.class)
+      }
+  )
 
 public class FavouriteManageComponent extends UIAbstractManagerComponent {
-	
-	private static final List<UIExtensionFilter> FILTERS 
-				= Arrays.asList(new UIExtensionFilter[]{new IsNotInTrashFilter(),
-																								new IsNotFavouriteFilter(),
-																						 		new IsNotLockedFilter(),
-																						 		new IsCheckedOutFilter(),
-																						 		new CanSetPropertyFilter(),
-																						 		new IsNotTrashHomeNodeFilter() });
-	  
-	private final static Log       LOG  = ExoLogger.getLogger(FavouriteManageComponent.class);
-	  
-	@UIExtensionFilters
-	public List<UIExtensionFilter> getFilters() {
-		return FILTERS;
-	}
-	
-	private static void addToFavourite(String srcPath, Event<FavouriteManageComponent> event) throws Exception {
+
+  private static final List<UIExtensionFilter> FILTERS
+        = Arrays.asList(new UIExtensionFilter[]{new IsNotInTrashFilter(),
+                                                new IsNotFavouriteFilter(),
+                                                 new IsNotLockedFilter(),
+                                                 new IsCheckedOutFilter(),
+                                                 new CanSetPropertyFilter(),
+                                                 new IsNotTrashHomeNodeFilter() });
+
+  private final static Log       LOG  = ExoLogger.getLogger(FavouriteManageComponent.class);
+
+  @UIExtensionFilters
+  public List<UIExtensionFilter> getFilters() {
+    return FILTERS;
+  }
+
+  private static void addToFavourite(String srcPath, Event<FavouriteManageComponent> event) throws Exception {
     UIWorkingArea uiWorkingArea = event.getSource().getParent();
     UIJCRExplorer uiExplorer = uiWorkingArea.getAncestorOfType(UIJCRExplorer.class);
-    
+
     ExoContainer myContainer = ExoContainerContext.getCurrentContainer();
     FavoriteService favoriteService = (FavoriteService)myContainer.getComponentInstanceOfType(FavoriteService.class);
-    
+
     UIApplication uiApp = uiWorkingArea.getAncestorOfType(UIApplication.class);
     Matcher matcher = UIWorkingArea.FILE_EXPLORER_URL_SYNTAX.matcher(srcPath);
     String wsName = null;
@@ -109,16 +109,16 @@ public class FavouriteManageComponent extends UIAbstractManagerComponent {
       //check if node is link
       LinkManager lnkManager = uiExplorer.getApplicationComponent(LinkManager.class);
       if (lnkManager.isLink(node) && lnkManager.isTargetReachable(node)) {
-      	node = lnkManager.getTarget(node);
+        node = lnkManager.getTarget(node);
       }
       // Reset the path to manage the links that potentially create virtual path
       srcPath = node.getPath();
       // Reset the session to manage the links that potentially change of workspace
       session = node.getSession();
-      // Reset the workspace name to manage the links that potentially change of workspace 
+      // Reset the workspace name to manage the links that potentially change of workspace
       wsName = session.getWorkspace().getName();
     } catch(PathNotFoundException path) {
-      uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.path-not-found-exception", 
+      uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.path-not-found-exception",
           null,ApplicationMessage.WARNING));
       event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
       return;
@@ -130,66 +130,65 @@ public class FavouriteManageComponent extends UIAbstractManagerComponent {
       JCRExceptionManager.process(uiApp, e);
       return;
     }
-    
+
     try {
-    	if (!node.isCheckedOut()) 
-    		throw new VersionException("node is locked, can't add favourite to node:" + node.getPath());
-    	if (!PermissionUtil.canSetProperty(node))
-    		throw new AccessDeniedException("access denied, can't add favourite to node:" + node.getPath());
-    	favoriteService.addFavorite(node, session.getUserID());
-      uiExplorer.updateAjax(event);    	
+      if (!node.isCheckedOut())
+        throw new VersionException("node is locked, can't add favourite to node:" + node.getPath());
+      if (!PermissionUtil.canSetProperty(node))
+        throw new AccessDeniedException("access denied, can't add favourite to node:" + node.getPath());
+      favoriteService.addFavorite(node, session.getUserID());
+      uiExplorer.updateAjax(event);
     } catch (LockException e) {
-    	LOG.error("node is locked, can't add favourite to node:" + node.getPath());
-    	JCRExceptionManager.process(uiApp, e);
-    	event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
-    	uiExplorer.updateAjax(event);
+      LOG.error("node is locked, can't add favourite to node:" + node.getPath());
+      JCRExceptionManager.process(uiApp, e);
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+      uiExplorer.updateAjax(event);
     } catch (VersionException e) {
-    	LOG.error("node is checked in, can't add favourite to node:" + node.getPath());
-    	JCRExceptionManager.process(uiApp, e);
-    	event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
-    	uiExplorer.updateAjax(event);
+      LOG.error("node is checked in, can't add favourite to node:" + node.getPath());
+      JCRExceptionManager.process(uiApp, e);
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+      uiExplorer.updateAjax(event);
     } catch (AccessDeniedException e) {
-    	LOG.error("access denied, can't add favourite to node:" + node.getPath());
-    	JCRExceptionManager.process(uiApp, e);
-    	event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
-    	uiExplorer.updateAjax(event);
+      LOG.error("access denied, can't add favourite to node:" + node.getPath());
+      JCRExceptionManager.process(uiApp, e);
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+      uiExplorer.updateAjax(event);
     } catch (Exception e) {
         LOG.error("an unexpected error occurs", e);
         JCRExceptionManager.process(uiApp, e);
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
         uiExplorer.updateAjax(event);
     }
-	}
-			
+  }
 
-	public static class AddToFavouriteActionListener extends UIWorkingAreaActionListener<FavouriteManageComponent> {
 
-	  private void multiAddToFavourite(String[] paths, Event<FavouriteManageComponent> event) throws Exception {
-	    for (String path : paths) {
-	      if (acceptForMultiNode(event, path)) {
-	        addToFavourite(path, event);
-	      }
-	    }
-	  }
-	  
-	  private void favouriteManage(Event<FavouriteManageComponent> event) throws Exception {
-	    String srcPath = event.getRequestContext().getRequestParameter(OBJECTID);
-	    if (srcPath.indexOf(';') > -1) {
-	      multiAddToFavourite(srcPath.split(";"), event);
-	    } else {
-	      addToFavourite(srcPath, event);
-	    }
-	  }
-	  
+  public static class AddToFavouriteActionListener extends UIWorkingAreaActionListener<FavouriteManageComponent> {
+
+    private void multiAddToFavourite(String[] paths, Event<FavouriteManageComponent> event) throws Exception {
+      for (String path : paths) {
+        if (acceptForMultiNode(event, path)) {
+          addToFavourite(path, event);
+        }
+      }
+    }
+
+    private void favouriteManage(Event<FavouriteManageComponent> event) throws Exception {
+      String srcPath = event.getRequestContext().getRequestParameter(OBJECTID);
+      if (srcPath.indexOf(';') > -1) {
+        multiAddToFavourite(srcPath.split(";"), event);
+      } else {
+        addToFavourite(srcPath, event);
+      }
+    }
+
     public void processEvent(Event<FavouriteManageComponent> event) throws Exception {
         favouriteManage(event);
       }
-	}
-	
-	@Override
-	public Class<? extends UIAbstractManager> getUIAbstractManagerClass() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+  }
+
+  @Override
+  public Class<? extends UIAbstractManager> getUIAbstractManagerClass() {
+    return null;
+  }
 
 }

@@ -26,7 +26,7 @@ import org.jbpm.graph.exe.ExecutionContext;
  * Created by The eXo Platform SAS
  * Author : Pham Xuan Hoa
  *          hoa.pham@exoplatform.com
- * Dec 13, 2007  
+ * Dec 13, 2007
  */
 public class BackupContentActionHandler implements ActionHandler {
 
@@ -35,7 +35,7 @@ public class BackupContentActionHandler implements ActionHandler {
   private boolean executed = false;
   private static final Log LOG  = ExoLogger.getLogger(BackupContentActionHandler.class);
 
-  public void execute(ExecutionContext context) {    
+  public void execute(ExecutionContext context) {
     try {
       if (executed)
         return;
@@ -45,20 +45,20 @@ public class BackupContentActionHandler implements ActionHandler {
       LOG.error("Unexpected error", e);
     } finally {
       ProcessUtil.deleteTimer(context, "backupTimer", context.getToken());
-      context.getToken().signal("backup-done");      
+      context.getToken().signal("backup-done");
     }
   }
 
-  protected void backupContent(ExecutionContext context) throws Exception {                  
+  protected void backupContent(ExecutionContext context) throws Exception {
     String[] currentLocation = ProcessUtil.getCurrentLocation(context);
     String currentWorkspace = currentLocation[1];
     String currentPath = currentLocation[2];
     String backupWorkspace = (String)context.getVariable("exo:backupWorkspace");
     String backupPath = (String)context.getVariable("exo:backupPath");
-    String realBackupPath = ProcessUtil.computeDestinationPath(context, currentPath,backupPath);                
+    String realBackupPath = ProcessUtil.computeDestinationPath(context, currentPath,backupPath);
     CmsService cmsService = ProcessUtil.getService(context, CmsService.class);
     cmsService.moveNode(currentPath, currentWorkspace, backupWorkspace, realBackupPath);
-    ProcessUtil.setCurrentLocation(context,backupWorkspace,realBackupPath);    
+    ProcessUtil.setCurrentLocation(context,backupWorkspace,realBackupPath);
     ProcessUtil.backup(context);
   }
 

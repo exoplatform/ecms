@@ -28,7 +28,7 @@ import org.exoplatform.webui.form.UIFormStringInput;
  * Created by The eXo Platform SARL
  * Author : Hoang Van Hung
  *          hunghvit@gmail.com
- * Dec 23, 2009  
+ * Dec 23, 2009
  */
 
 @ComponentConfig(
@@ -45,9 +45,9 @@ public class UINodeTypeSearch extends UIFormInputContainer<String> {
   public String event(String name) throws Exception {
     return getAncestorOfType(UIForm.class).event(name);
   }
-  
+
   public String getResource(String key) {
-    try { 
+    try {
       return Utils.getResourceBundle(Utils.LOCALE_WEBUI_DMS, key, getClass().getClassLoader());
     } catch (Exception e) {
       return key;
@@ -55,10 +55,10 @@ public class UINodeTypeSearch extends UIFormInputContainer<String> {
   }
 
   @Override
-  public String getValue() throws Exception { 
-    return getChild(UIFormStringInput.class).getValue(); 
+  public String getValue() throws Exception {
+    return getChild(UIFormStringInput.class).getValue();
  }
-  
+
   public Class getTypeValue() {
     return String.class;
   }

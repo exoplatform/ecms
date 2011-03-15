@@ -29,7 +29,7 @@ public class NewsletterEmailService {
 
   /** The log. */
   private static Log log = ExoLogger.getLogger(NewsletterEmailService.class);
-  
+
   /**
    * Instantiates a new newsletter email service.
    */

@@ -43,103 +43,103 @@ import java.util.List;
  * Created by The eXo Platform SAS
  * Author : Phan Le Thanh Chuong
  *          chuong.phan@exoplatform.com, phan.le.thanh.chuong@gmail.com
- * Nov 9, 2009  
+ * Nov 9, 2009
  */
 @ComponentConfig(
-	lifecycle = Lifecycle.class    
+  lifecycle = Lifecycle.class
 )
 public class UIContentViewer extends UIBaseNodePresentation {
 
-	public static final String TEMPLATE_NOT_SUPPORT = "UIContentViewer.msg.template-not-support";
-	
-	private NodeLocation originalNodeLocation;
-	
-	private NodeLocation viewNodeLocation;
-	
-	public Node getOriginalNode() {
-		return NodeLocation.getNodeByLocation(originalNodeLocation);
-	}
-	
+  public static final String TEMPLATE_NOT_SUPPORT = "UIContentViewer.msg.template-not-support";
+
+  private NodeLocation originalNodeLocation;
+
+  private NodeLocation viewNodeLocation;
+
+  public Node getOriginalNode() {
+    return NodeLocation.getNodeByLocation(originalNodeLocation);
+  }
+
   public void setOriginalNode(Node originalNode) throws Exception{
     originalNodeLocation = NodeLocation.make(originalNode);
   }
-	
-	public Node getNode() {
-		return NodeLocation.getNodeByLocation(viewNodeLocation);
-	}
 
-	public void setNode(Node viewNode) {
-		viewNodeLocation = NodeLocation.make(viewNode);
-	}
+  public Node getNode() {
+    return NodeLocation.getNodeByLocation(viewNodeLocation);
+  }
 
-	public String getTemplate() {
-		TemplateService templateService = getApplicationComponent(TemplateService.class);
+  public void setNode(Node viewNode) {
+    viewNodeLocation = NodeLocation.make(viewNode);
+  }
+
+  public String getTemplate() {
+    TemplateService templateService = getApplicationComponent(TemplateService.class);
     String userName = Util.getPortalRequestContext().getRemoteUser() ;
     try {
       String nodeType = getOriginalNode().getPrimaryNodeType().getName();
-      if(templateService.isManagedNodeType(nodeType)) 
+      if(templateService.isManagedNodeType(nodeType))
         return templateService.getTemplatePathByUser(false, nodeType, userName) ;
     } catch (PathNotFoundException e) {
-    	Utils.createPopupMessage(this, TEMPLATE_NOT_SUPPORT, null, ApplicationMessage.ERROR);
-		} catch (Exception e) {
-    	Utils.createPopupMessage(this, TEMPLATE_NOT_SUPPORT, null, ApplicationMessage.ERROR);
+      Utils.createPopupMessage(this, TEMPLATE_NOT_SUPPORT, null, ApplicationMessage.ERROR);
+    } catch (Exception e) {
+      Utils.createPopupMessage(this, TEMPLATE_NOT_SUPPORT, null, ApplicationMessage.ERROR);
     }
     return null ;
-	}
+  }
 
-	public ResourceResolver getTemplateResourceResolver(WebuiRequestContext context, String template) {
-		try {
-			DMSConfiguration dmsConfiguration = getApplicationComponent(DMSConfiguration.class);
-			String repository = getRepository();
-			String workspace = dmsConfiguration.getConfig().getSystemWorkspace();
-			return new JCRResourceResolver(repository, workspace, "exo:templateFile");
-		} catch (Exception e) {
-			return null;
-		}
-	}
-	
-	public String getRepositoryName() {
-		try {
-			return getRepository();
-		}catch (Exception ex) {
-			return null;
-		}
-	}
-	
-	public String getTemplatePath() {
-		return null;
-	}
-	
-	public String getNodeType() {
-		return null;
-	}
+  public ResourceResolver getTemplateResourceResolver(WebuiRequestContext context, String template) {
+    try {
+      DMSConfiguration dmsConfiguration = getApplicationComponent(DMSConfiguration.class);
+      String repository = getRepository();
+      String workspace = dmsConfiguration.getConfig().getSystemWorkspace();
+      return new JCRResourceResolver(repository, workspace, "exo:templateFile");
+    } catch (Exception e) {
+      return null;
+    }
+  }
 
-	public boolean isNodeTypeSupported() {
-		return false;
-	}
+  public String getRepositoryName() {
+    try {
+      return getRepository();
+    }catch (Exception ex) {
+      return null;
+    }
+  }
 
-	public UIComponent getCommentComponent() {
-		return null;
-	}
-	
-	public UIComponent getRemoveAttach() {
-		return null;
-	}
+  public String getTemplatePath() {
+    return null;
+  }
 
-	public UIComponent getRemoveComment() {
-		return null;
-	}
+  public String getNodeType() {
+    return null;
+  }
 
-	public UIComponent getUIComponent(String mimeType) throws Exception {
-		UIExtensionManager manager = getApplicationComponent(UIExtensionManager.class);
-		List<UIExtension> extensions = manager.getUIExtensions(org.exoplatform.ecm.webui.utils.Utils.FILE_VIEWER_EXTENSION_TYPE);
-	    Map<String, Object> context = new HashMap<String, Object>();
-	    context.put(org.exoplatform.ecm.webui.utils.Utils.MIME_TYPE, mimeType);
-	    for (UIExtension extension : extensions) {
-	      UIComponent uiComponent = manager.addUIExtension(extension, context, this);
-	      if(uiComponent != null) return uiComponent;
-	    }
-	    return null;
-	}
-	
+  public boolean isNodeTypeSupported() {
+    return false;
+  }
+
+  public UIComponent getCommentComponent() {
+    return null;
+  }
+
+  public UIComponent getRemoveAttach() {
+    return null;
+  }
+
+  public UIComponent getRemoveComment() {
+    return null;
+  }
+
+  public UIComponent getUIComponent(String mimeType) throws Exception {
+    UIExtensionManager manager = getApplicationComponent(UIExtensionManager.class);
+    List<UIExtension> extensions = manager.getUIExtensions(org.exoplatform.ecm.webui.utils.Utils.FILE_VIEWER_EXTENSION_TYPE);
+      Map<String, Object> context = new HashMap<String, Object>();
+      context.put(org.exoplatform.ecm.webui.utils.Utils.MIME_TYPE, mimeType);
+      for (UIExtension extension : extensions) {
+        UIComponent uiComponent = manager.addUIExtension(extension, context, this);
+        if(uiComponent != null) return uiComponent;
+      }
+      return null;
+  }
+
 }

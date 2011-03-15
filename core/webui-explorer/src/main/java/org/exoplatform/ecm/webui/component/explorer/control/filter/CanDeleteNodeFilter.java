@@ -30,32 +30,32 @@ import org.exoplatform.webui.ext.filter.UIExtensionFilterType;
  * Created by The eXo Platform SARL
  * Author : Hoang Van Hung
  *          hunghvit@gmail.com
- * Aug 6, 2009  
+ * Aug 6, 2009
  */
 public class CanDeleteNodeFilter  extends UIExtensionAbstractFilter {
 
   public CanDeleteNodeFilter() {
     this("UIActionBar.msg.node-checkedin");
   }
-  
+
   public CanDeleteNodeFilter(String messageKey) {
     super(messageKey, UIExtensionFilterType.MANDATORY);
   }
-  
+
   public boolean accept(Map<String, Object> context) throws Exception {
     if (context==null) return true;
     Node currentNode = (Node) context.get(Node.class.getName());
-    return (PermissionUtil.canRemoveNode(currentNode))&& 
-	    		(!isVersionableOrAncestor(currentNode) || 
-	      	(isVersionableOrAncestor(currentNode) && 
-	        IsCheckedOutFilter.isCheckedOut(currentNode)));
+    return (PermissionUtil.canRemoveNode(currentNode))&&
+          (!isVersionableOrAncestor(currentNode) ||
+          (isVersionableOrAncestor(currentNode) &&
+          IsCheckedOutFilter.isCheckedOut(currentNode)));
   }
 
   public void onDeny(Map<String, Object> context) throws Exception {
   }
-  
+
   private boolean isVersionableOrAncestor(Node node) throws Exception {
-  	return Utils.isVersionable(node) ||
-  				 IsVersionableOrAncestorFilter.isAncestorVersionable(node);
+    return Utils.isVersionable(node) ||
+           IsVersionableOrAncestorFilter.isAncestorVersionable(node);
   }
 }

@@ -58,21 +58,21 @@ import org.exoplatform.webui.form.UIFormSelectBox;
       @EventConfig(phase=Phase.DECODE, listeners = UISelectPropertyForm.CancelActionListener.class),
       @EventConfig(listeners = UISelectPropertyForm.AddActionListener.class),
       @EventConfig(listeners = UISelectPropertyForm.ChangeMetadataTypeActionListener.class)
-    }    
+    }
 )
 public class UISelectPropertyForm extends UIForm implements UIPopupComponent {
-  
+
   final static public String METADATA_TYPE= "metadataType" ;
   final static public String PROPERTY = "property" ;
-  
+
   private String fieldName_ = null ;
-  
+
   private List<SelectItemOption<String>> properties_ = new ArrayList<SelectItemOption<String>>() ;
-  
+
   public UISelectPropertyForm() throws Exception {
     setActions(new String[] {"Add", "Cancel"}) ;
   }
-  
+
   public String getLabel(ResourceBundle res, String id)  {
     try {
       return super.getLabel(res, id) ;
@@ -80,7 +80,7 @@ public class UISelectPropertyForm extends UIForm implements UIPopupComponent {
       return id ;
     }
   }
-  
+
   public void activate() throws Exception {
     List<SelectItemOption<String>> options = new ArrayList<SelectItemOption<String>>() ;
     NodeHierarchyCreator nodeHierarchyCreator = getApplicationComponent(NodeHierarchyCreator.class) ;
@@ -104,9 +104,9 @@ public class UISelectPropertyForm extends UIForm implements UIPopupComponent {
     addUIFormInput(new UIFormRadioBoxInput(PROPERTY, null, properties_).
                        setAlign(UIFormRadioBoxInput.VERTICAL_ALIGN)) ;
   }
-  
+
   public void deActivate() throws Exception {}
-  
+
   public void setFieldName(String fieldName) { fieldName_ = fieldName ; }
 
   public void renderProperties(String metadata) throws Exception {
@@ -120,7 +120,7 @@ public class UISelectPropertyForm extends UIForm implements UIPopupComponent {
       if(!name.equals("exo:internalUse")) properties_.add(new SelectItemOption<String>(name, name)) ;
     }
   }
-  
+
   static  public class CancelActionListener extends EventListener<UISelectPropertyForm> {
     public void execute(Event<UISelectPropertyForm> event) throws Exception {
       UISearchContainer uiSearchContainer = event.getSource().getAncestorOfType(UISearchContainer.class) ;
@@ -129,7 +129,7 @@ public class UISelectPropertyForm extends UIForm implements UIPopupComponent {
       event.getRequestContext().addUIComponentToUpdateByAjax(uiPopup) ;
     }
   }
-  
+
   static  public class AddActionListener extends EventListener<UISelectPropertyForm> {
     public void execute(Event<UISelectPropertyForm> event) throws Exception {
       UISelectPropertyForm uiForm = event.getSource() ;
@@ -153,7 +153,7 @@ public class UISelectPropertyForm extends UIForm implements UIPopupComponent {
       event.getRequestContext().addUIComponentToUpdateByAjax(uiConstraintsForm) ;
     }
   }
-  
+
   static  public class ChangeMetadataTypeActionListener extends EventListener<UISelectPropertyForm> {
     public void execute(Event<UISelectPropertyForm> event) throws Exception {
       UISelectPropertyForm uiForm = event.getSource() ;

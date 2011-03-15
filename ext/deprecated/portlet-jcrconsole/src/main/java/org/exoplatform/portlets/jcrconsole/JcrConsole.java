@@ -44,7 +44,7 @@ import org.exoplatform.services.log.ExoLogger;
 
 /**
  * Created by The eXo Platform SARL .
- * 
+ *
  * @author <a href="mailto:uy7c@yahoo.com">Max Shaposhnik</a>
  * @version $Id$
  */
@@ -53,24 +53,24 @@ public class JcrConsole extends GenericPortlet {
 
   //private CliAppContext context;
   private static final Log LOG  = ExoLogger.getLogger("JcrConsole");
-  
+
   protected void doView(RenderRequest renderRequest,
       RenderResponse renderResponse) throws PortletException, IOException {
 
     ExoContainer container = ExoContainerContext.getCurrentContainer();
-    
+
     renderResponse.setContentType("text/html; charset=UTF-8");
     PortletContext context = getPortletContext();
-    
+
     ResourceURL resourceURL = renderResponse.createResourceURL();
     String resourceString = resourceURL.toString();
 
-    
+
     while (resourceString.indexOf("&amp;") != -1 )
     {
       resourceString = resourceString.replace("&amp;", "&");
     }
-    
+
     PrintWriter w = renderResponse.getWriter();
     w.println("<SCRIPT LANGUAGE=\"JavaScript\" TYPE=\"text/javascript\" SRC=\"/jcr-console/scripts/console.js\"></SCRIPT>");
     w.println("<LINK REL=\"stylesheet\"  HREF=\"/jcr-console/styles/styles.css\" TYPE=\"text/css\">");
@@ -80,7 +80,7 @@ public class JcrConsole extends GenericPortlet {
     w.println("termOpen();");
     w.println("</SCRIPT>");
   }
-  
+
   private void parseQuery(String query, ArrayList params) {
     try {
       params.clear();
@@ -123,21 +123,21 @@ public class JcrConsole extends GenericPortlet {
   public void processAction(ActionRequest actionRequest,
       ActionResponse actionResponse) throws PortletException, IOException {
   }
-  
+
   public void serveResource (ResourceRequest resourceRequest, ResourceResponse resourceResponse)
   throws PortletException, IOException {
-    
+
     CliAppContext context = (CliAppContext) resourceRequest.getPortletSession().getAttribute("context");
-    
+
     //CliAppContext context = null;
-    
+
     ArrayList<String> params = new ArrayList<String>();
     String PARAMETERS_KEY = "parameterss";
     resourceResponse.setContentType("text/html");
     PrintWriter printWriter = resourceResponse.getWriter();
     try {
       ExoContainer container = ExoContainerContext.getCurrentContainer();
-      
+
       String commandLine = resourceRequest.getParameter("myaction").trim();
       String commandFromCommandLine = commandLine.substring(0,
           (commandLine.indexOf(" ") < 0) ? commandLine.length() : commandLine.indexOf(" "));
@@ -156,7 +156,7 @@ public class JcrConsole extends GenericPortlet {
             .getComponentInstanceOfType(RepositoryService.class);
 
         String workspace = repService.getRepository().getConfiguration().getDefaultWorkspaceName();
-        
+
         context = new CliAppContext(repService.getRepository(), PARAMETERS_KEY);
         context.setCurrentWorkspace(workspace);
         context.setCurrentItem(context.getSession().getRootNode());

@@ -28,33 +28,33 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
  * Created by The eXo Platform SAS.
- * 
+ *
  * @author : Hoa.Pham
  * hoa.pham@exoplatform.com
  * Jun 20, 2008
  */
 public class NodeLocation {
-  
+
   /** The log. */
   private static Log log = ExoLogger.getLogger("wcm:NodeLocation");
-  
+
   /** The repository. */
   private String repository;
-  
+
   /** The workspace. */
   private String workspace;
-  
+
   /** The path. */
   private String path;
-  
+
   /**
    * Instantiates a new node location.
    */
   public NodeLocation() { }
-  
+
   /**
    * Instantiates a new node location.
-   * 
+   *
    * @param repository the repository
    * @param workspace the workspace
    * @param path the path
@@ -62,12 +62,12 @@ public class NodeLocation {
   public NodeLocation(final String repository, final String workspace, final String path) {
     this.repository = repository;
     this.workspace = workspace;
-    this.path = path; 
+    this.path = path;
   }
 
   /**
    * Gets the repository.
-   * 
+   *
    * @return the repository
    */
   public String getRepository() {
@@ -76,7 +76,7 @@ public class NodeLocation {
 
   /**
    * Sets the repository.
-   * 
+   *
    * @param repository the new repository
    */
   public void setRepository(String repository) {
@@ -85,7 +85,7 @@ public class NodeLocation {
 
   /**
    * Gets the workspace.
-   * 
+   *
    * @return the workspace
    */
   public String getWorkspace() {
@@ -94,7 +94,7 @@ public class NodeLocation {
 
   /**
    * Sets the workspace.
-   * 
+   *
    * @param workspace the new workspace
    */
   public void setWorkspace(String workspace) {
@@ -103,7 +103,7 @@ public class NodeLocation {
 
   /**
    * Gets the path.
-   * 
+   *
    * @return the path
    */
   public String getPath() {
@@ -112,25 +112,25 @@ public class NodeLocation {
 
   /**
    * Sets the path.
-   * 
+   *
    * @param path the new path
    */
   public void setPath(String path) {
     this.path = path;
   }
-  
+
   /**
    * Parses the.
-   * 
+   *
    * @param exp the exp
    * @return the node location
    */
   @Deprecated
   /**
    * Get an NodeLocation object by an expression.
-   * 
+   *
    * @param exp the expression with pattern repository:workspace:path
-   * 
+   *
    * @return a NodeLocation object
    */
   public static final NodeLocation parse(final String exp) {
@@ -138,22 +138,23 @@ public class NodeLocation {
     if (temp.length == 3 && temp[2].indexOf("/") == 0) {
       return new NodeLocation(temp[0], temp[1], temp[2]);
     } else {
-      throw new IllegalArgumentException("Invalid expression: " + exp + ". An valid expression has pattern repository:workspace:path");
+      throw new IllegalArgumentException("Invalid expression: " + exp
+          + ". An valid expression has pattern repository:workspace:path");
     }
   }
 
   /**
    * Make.
-   * 
+   *
    * @param node the node
    * @return the node location
    */
   @Deprecated
   /**
    * Get an NodeLocation object by a node. Try to use toNodeLocation() instead.
-   * 
+   *
    * @param node the node
-   * 
+   *
    * @return a NodeLocation object
    */
   public static final NodeLocation make(final Node node) {
@@ -171,9 +172,9 @@ public class NodeLocation {
 
   /**
    * Get an NodeLocation object by an expression.
-   * 
+   *
    * @param exp the expression with pattern repository:workspace:path
-   * 
+   *
    * @return a NodeLocation object
    */
   public static final NodeLocation getNodeLocationByExpression(final String exp) {
@@ -184,15 +185,16 @@ public class NodeLocation {
       String nodepath = exp.substring(repository.length() + workspace.length() + 2);
       return new NodeLocation(repository, workspace, nodepath);
     } else {
-      throw new IllegalArgumentException("Invalid expression: " + exp + ". An valid expression has pattern repository:workspace:path");
+      throw new IllegalArgumentException("Invalid expression: " + exp
+          + ". An valid expression has pattern repository:workspace:path");
     }
   }
-  
+
   /**
    * Get an NodeLocation object by a node.
-   * 
+   *
    * @param node the node
-   * 
+   *
    * @return a NodeLocation object
    */
   public static final NodeLocation getNodeLocationByNode(final Node node) {
@@ -208,12 +210,12 @@ public class NodeLocation {
     }
     return null;
   }
-  
+
   /**
    * Get a node by a NodeLocation object.
-   * 
+   *
    * @param nodeLocation the NodeLocation object
-   * 
+   *
    * @return a node
    */
   public static final Node getNodeByLocation(final NodeLocation nodeLocation) {
@@ -230,10 +232,10 @@ public class NodeLocation {
       return null;
     }
   }
-  
+
   /**
    * Get a node by an expression.
-   * 
+   *
    * @param expression the expression
    * @return a node
    */
@@ -243,35 +245,35 @@ public class NodeLocation {
 
   /**
    * Get node's expression by a node.
-   * 
+   *
    * @param Node the node to get expression
    * @return The node's expression
    */
   public static final String getExpressionByNode(final Node node) {
-    NodeLocation location = NodeLocation.getNodeLocationByNode(node);        
+    NodeLocation location = NodeLocation.getNodeLocationByNode(node);
     return mergeString(location.getRepository(), location.getWorkspace(), location.getPath());
   }
-  
+
   /**
    * Get node's expression by a NodeLocation.
-   * 
+   *
    * @param NodeLocation location
    * @return The node's expression
    */
-  public static final String getExpressionByNodeLocation(final NodeLocation location) {           
+  public static final String getExpressionByNodeLocation(final NodeLocation location) {
     return mergeString(location.getRepository(), location.getWorkspace(), location.getPath());
   }
-  
+
   /* (non-Javadoc)
    * @see java.lang.Object#toString()
    */
   public String toString() {
     return mergeString(repository, workspace, path);
   }
-  
+
   /**
    * Get the merged string
-   * 
+   *
    * @param repository: The node's repository
    * @param workspace: The node's workspace
    * @param path: The node's path
@@ -284,6 +286,6 @@ public class NodeLocation {
     buffer.append(workspace);
     buffer.append(":");
     buffer.append(path);
-    return buffer.toString();  
-  }   
+    return buffer.toString();
+  }
 }

@@ -32,7 +32,7 @@ import org.exoplatform.webui.form.UIFormSelectBox;
  * Created by The eXo Platform SARL
  * Author : Pham Tuan
  *          phamtuanchip@yahoo.de
- * Nov 8, 2006 10:06:40 AM 
+ * Nov 8, 2006 10:06:40 AM
  */
 @ComponentConfig(
     lifecycle = UIFormLifecycle.class,
@@ -48,7 +48,7 @@ public class UISelectDocumentForm extends UIForm {
   public UISelectDocumentForm() {
     List<SelectItemOption<String>> options = new ArrayList<SelectItemOption<String>>() ;
     UIFormSelectBox templateSelect = new UIFormSelectBox(FIELD_SELECT, FIELD_SELECT, options) ;
-    templateSelect.setOnChange("Change") ;  
+    templateSelect.setOnChange("Change") ;
     addUIFormInput(templateSelect) ;
   }
 

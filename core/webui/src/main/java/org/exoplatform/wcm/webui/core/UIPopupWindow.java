@@ -26,21 +26,21 @@ import org.exoplatform.webui.event.EventListener;
  * Created by The eXo Platform SAS
  * Author : Phan Le Thanh Chuong
  *          chuong.phan@exoplatform.com, phan.le.thanh.chuong@gmail.com
- * Oct 29, 2009  
+ * Oct 29, 2009
  */
-@ComponentConfig(  
-	template =  "classpath:groovy/wcm/webui/core/UIPopupWindow.gtmpl",
-	events = @EventConfig(listeners = UIPopupWindow.CloseActionListener.class, name = "ClosePopup")  
+@ComponentConfig(
+  template =  "classpath:groovy/wcm/webui/core/UIPopupWindow.gtmpl",
+  events = @EventConfig(listeners = UIPopupWindow.CloseActionListener.class, name = "ClosePopup")
 )
 public class UIPopupWindow extends org.exoplatform.webui.core.UIPopupWindow {
 
-	public static class CloseActionListener extends EventListener<UIPopupWindow> {
-		public void execute(Event<UIPopupWindow> event) throws Exception {
-			UIPopupWindow popupWindow = event.getSource();
-			UIPopupContainer popupContainer = popupWindow.getAncestorOfType(UIPopupContainer.class);
-			popupContainer.removeChildById(popupWindow.getId());
-			event.getRequestContext().addUIComponentToUpdateByAjax(popupContainer);
-		}
-	}
-	
+  public static class CloseActionListener extends EventListener<UIPopupWindow> {
+    public void execute(Event<UIPopupWindow> event) throws Exception {
+      UIPopupWindow popupWindow = event.getSource();
+      UIPopupContainer popupContainer = popupWindow.getAncestorOfType(UIPopupContainer.class);
+      popupContainer.removeChildById(popupWindow.getId());
+      event.getRequestContext().addUIComponentToUpdateByAjax(popupContainer);
+    }
+  }
+
 }

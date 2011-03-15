@@ -33,22 +33,22 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
  * Created by The eXo Platform SARL
  * Author : Pham Xuan Hoa
  *          hoa.pham@exoplatform.com
- * Mar 11, 2008  
+ * Mar 11, 2008
  */
 public class WebSchemaCreationAction implements Action {
   private static final Log log = ExoLogger.getLogger("wcm:WebSchemaCreationAction");
-  
-  public boolean execute(Context context) throws Exception {    
+
+  public boolean execute(Context context) throws Exception {
     Node node = (Node)context.get("currentItem");
     ExoContainer container = ExoContainerContext.getCurrentContainer();
-    WebSchemaConfigService schemaConfigService = 
+    WebSchemaConfigService schemaConfigService =
       (WebSchemaConfigService) container.getComponentInstanceOfType(WebSchemaConfigService.class);
     SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
-    try {      
+    try {
       schemaConfigService.createSchema(sessionProvider, node);
-    } catch (Exception e) { 
+    } catch (Exception e) {
       log.error("Error when creat web schema for node"+node.getPath() , e);
-    }       
+    }
     return false;
   }
 

@@ -26,28 +26,28 @@ import org.exoplatform.webui.form.UIForm;
  * Created by The eXo Platform SARL
  * Author : Tran The Trong
  *          trongtt@gmail.com
- * Oct 20, 2006  
+ * Oct 20, 2006
  */
 
 @ComponentConfig(
-    lifecycle = UIFormLifecycle.class,    
-    template = "app:/groovy/webui/component/explorer/versions/UINodeInfo.gtmpl"    
+    lifecycle = UIFormLifecycle.class,
+    template = "app:/groovy/webui/component/explorer/versions/UINodeInfo.gtmpl"
 )
 public class UINodeInfo extends UIForm {
-  
+
   private Node node_ ;
   private Version version_ ;
-  
+
   public UINodeInfo() {
-    
+
   }
-  
+
   public void update() throws Exception {
     UIVersionInfo uiVersionInfo = getAncestorOfType(UIVersionInfo.class) ;
     node_ = uiVersionInfo.getCurrentNode() ;
-    version_ = uiVersionInfo.getCurrentVersionNode().getVersion() ;   
+    version_ = uiVersionInfo.getCurrentVersionNode().getVersion() ;
   }
-  
+
   public String getNodeType() throws Exception {
     return node_.getPrimaryNodeType().getName() ;
   }
@@ -59,7 +59,7 @@ public class UINodeInfo extends UIForm {
   public String getVersionName() throws Exception {
     return getAncestorOfType(UIVersionInfo.class) .getCurrentVersionNode().getName();
   }
-  
+
   public String getVersionLabels() throws Exception{
     UIVersionInfo uiVersionInfo = getAncestorOfType(UIVersionInfo.class) ;
     String[] labels = uiVersionInfo.getVersionLabels(uiVersionInfo.getCurrentVersionNode());

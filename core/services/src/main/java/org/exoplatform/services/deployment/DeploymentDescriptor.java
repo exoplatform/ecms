@@ -18,16 +18,16 @@ package org.exoplatform.services.deployment;
 
 /**
  * Created by The eXo Platform SAS
- * Author : Hoa Pham	
+ * Author : Hoa Pham
  *          hoa.pham@exoplatform.com
- * Sep 6, 2008  
+ * Sep 6, 2008
  */
 public class DeploymentDescriptor {
-  
+
   private Target target;
-  private String sourcePath;  
-  private Boolean cleanupPublication = false;  
-  
+  private String sourcePath;
+  private Boolean cleanupPublication = false;
+
   /**
    * @return the target where data will be stored
    */
@@ -43,7 +43,7 @@ public class DeploymentDescriptor {
   /**
    * @return the sourcePath of data the will be stored
    * sourcePath should point out where resource is located example: war:/,jar:/,file:/, http://...
-   * the deployment plugin will base of the scheme to load resource   
+   * the deployment plugin will base of the scheme to load resource
    */
   public String getSourcePath() { return sourcePath; }
 
@@ -52,26 +52,26 @@ public class DeploymentDescriptor {
    * @param sourcePath the sourcePath to set
    */
   public void setSourcePath(String sourcePath) { this.sourcePath = sourcePath; }
-  
-  
-  
+
+
+
   /**
-   * 
+   *
    * @return true if cleanup is enabled
    */
   public Boolean getCleanupPublication() {
-	return cleanupPublication;
-  } 
+  return cleanupPublication;
+  }
 
   /**
    * This method allows to cleanup the publication lifecycle in the target folder after importing the data.
    * By using this, the publication live revision property will be re-initialized and the content will be set as published directly.
    * Thus, the content will be visible in front side.
-   * 
+   *
    * @param cleanupPublication
    */
   public void setCleanupPublication(Boolean cleanupPublication) {
-	this.cleanupPublication = cleanupPublication;
+  this.cleanupPublication = cleanupPublication;
   }
 
 
@@ -81,7 +81,7 @@ public static class Target {
     private String repository;
     private String workspace;
     private String nodePath;
-    
+
     /**
      * @return the repository
      */
@@ -105,7 +105,7 @@ public static class Target {
     /**
      * @param nodePath the nodePath to set
      */
-    public void setNodePath(String nodePath) { this.nodePath = nodePath; }       
+    public void setNodePath(String nodePath) { this.nodePath = nodePath; }
   }
-  
+
 }

@@ -30,7 +30,7 @@ import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 
 /**
- * Created by The eXo Platform SARL Author : Phan Trong Lam 
+ * Created by The eXo Platform SARL Author : Phan Trong Lam
  * lamptdev@gmail.com
  * Oct 6, 2009
  */
@@ -70,7 +70,7 @@ public class TestDocumentTypeService extends BaseDMSTestCase {
     session.save();
     session.logout();
   }
-  
+
   /**
    * Execute test for getAllSupportedType method
    * Input : dms-document-type-configuration.xml
@@ -78,9 +78,9 @@ public class TestDocumentTypeService extends BaseDMSTestCase {
    * @throws Exception
    */
   public void testAllSupportedType() throws Exception {
-        
+
     List<String> expectedList = documentTypeService_.getAllSupportedType();
-        
+
     Iterator<String> iterSupportedType = expectedList.iterator();
     String expectedSupportedName = null;
     while (iterSupportedType.hasNext()) {
@@ -88,9 +88,9 @@ public class TestDocumentTypeService extends BaseDMSTestCase {
       System.out.println(" The supported type is :" +expectedSupportedName);
     }
   }
-  
+
   /**
-   * Execute test for getAllDocumentsByKindOfDocumentType method. 
+   * Execute test for getAllDocumentsByKindOfDocumentType method.
    * Input : Video supported type
    * Expect: Get list of mime types of Video supported type.
    * @throws Exception
@@ -98,7 +98,7 @@ public class TestDocumentTypeService extends BaseDMSTestCase {
   public void testAllDocumentsByKindOfDocumentType() throws Exception {
     Node rootNode = session.getRootNode();
     Node documentNode = getDocument(rootNode, "document");
-    addDocumentFile(documentNode, "testaudio01", "audio/mp3");    
+    addDocumentFile(documentNode, "testaudio01", "audio/mp3");
     addDocumentFile(documentNode, "videomp302", "video/mp3");
     addDocumentFile(documentNode, "One night at museum", "video/mpeg");
     addDocumentFile(documentNode, "Black dahlia", "video/mpeg");
@@ -106,25 +106,25 @@ public class TestDocumentTypeService extends BaseDMSTestCase {
     addDocumentFile(documentNode, "image02", "image/jpeg");
     addDocumentFile(documentNode, "image03", "image/png");
     addDocumentFile(documentNode, "image04", "image/tiff");
-    documentNode.getSession().save();    
+    documentNode.getSession().save();
     String supportedType = "Video";
     List<Node> expectedList = documentTypeService_
-                  .getAllDocumentsByDocumentType(supportedType, COLLABORATION_WS, 
+                  .getAllDocumentsByDocumentType(supportedType, COLLABORATION_WS,
         REPO_NAME, createSessionProvider());
-    assertNotNull(expectedList);    
+    assertNotNull(expectedList);
     Iterator<Node> iterNodes = expectedList.iterator();
-    Node expectedNode = null;    
+    Node expectedNode = null;
     while (iterNodes.hasNext()) {
       expectedNode = iterNodes.next();
       System.out.println("The node name : "+expectedNode.getName()+" have mime type : "
-        + expectedNode.getNode("jcr:content").getProperty("jcr:mimeType").getValue().getString());      
+        + expectedNode.getNode("jcr:content").getProperty("jcr:mimeType").getValue().getString());
     }
   }
-    
-  
+
+
   /**
-   * Test method getAllDocumentsByType 
-   * Input : image type 
+   * Test method getAllDocumentsByType
+   * Input : image type
    * Expect: Get list of nodes in which jcr:mimeType properties are image/gif types.
    * @throws Exception
    */
@@ -138,8 +138,8 @@ public class TestDocumentTypeService extends BaseDMSTestCase {
     addDocumentFile(documentNode, "image03", "image/gif");
     addDocumentFile(documentNode, "text01", "text/plain");
     documentNode.getSession().save();
-    
-    List<Node> expectedList = documentTypeService_.getAllDocumentsByType(COLLABORATION_WS, 
+
+    List<Node> expectedList = documentTypeService_.getAllDocumentsByType(COLLABORATION_WS,
         REPO_NAME, createSessionProvider(), "image/gif");
     assertNotNull(expectedList);
     assertEquals(3, expectedList.size());
@@ -147,14 +147,14 @@ public class TestDocumentTypeService extends BaseDMSTestCase {
     Node expectedNode = null;
     while (iterNodes.hasNext()) {
       expectedNode = iterNodes.next();
-      assertEquals("image/gif", 
+      assertEquals("image/gif",
           expectedNode.getNode("jcr:content").getProperty(JCR_MINE_TYPE).getString());
     }
   }
-  
+
   /**
-   * Test method getAllDocumentsByType 
-   * Input : image, audio, text types. 
+   * Test method getAllDocumentsByType
+   * Input : image, audio, text types.
    * Expect: Get list of nodes in which include jcr:mimeType properties are image/gif,
    * audio/mp3, text/plain types.
    * @throws Exception
@@ -170,27 +170,27 @@ public class TestDocumentTypeService extends BaseDMSTestCase {
     addDocumentFile(documentNode, "image03", "image/gif");
     addDocumentFile(documentNode, "text01", "text/plain");
     documentNode.getSession().save();
-    
-    List<Node> expectedList = documentTypeService_.getAllDocumentsByType(COLLABORATION_WS, 
-        REPO_NAME, createSessionProvider(), mimeTypes);   
+
+    List<Node> expectedList = documentTypeService_.getAllDocumentsByType(COLLABORATION_WS,
+        REPO_NAME, createSessionProvider(), mimeTypes);
     Iterator<Node> expectedIter  = expectedList.iterator();
     Node expectedNode = null;
     while( expectedIter.hasNext()) {
       expectedNode = expectedIter.next();
       System.out.println("Expected mime type:"
-             +expectedNode.getNode("jcr:content").getProperty(JCR_MINE_TYPE).getString());            
-    }    
+             +expectedNode.getNode("jcr:content").getProperty(JCR_MINE_TYPE).getString());
+    }
   }
 
   /**
    * Test method getAllDocumentsByUser
-   * Input : audio, text types and root user name. 
-   * Expect: Get list of nodes in which jcr:mimeType properties are audio/mp3, text/plain and 
-   * exo:owner is root 
+   * Input : audio, text types and root user name.
+   * Expect: Get list of nodes in which jcr:mimeType properties are audio/mp3, text/plain and
+   * exo:owner is root
    * @throws Exception
    */
   public void testAllDocumentsByUser01() throws Exception {
-    String[] mimeTypes = { "audio/mp3", "text/plain" };    
+    String[] mimeTypes = { "audio/mp3", "text/plain" };
     Node rootNode = session.getRootNode();
     Node documentNode = getDocument(rootNode, "document");
     addDocumentFile(documentNode, "testaudio01", "audio/mp3");
@@ -201,21 +201,21 @@ public class TestDocumentTypeService extends BaseDMSTestCase {
     addDocumentFile(documentNode, "text", "text/plain");
     documentNode.getSession().save();
     String username = "__system";
-    
-    List<Node> expectedList = documentTypeService_.getAllDocumentsByUser(COLLABORATION_WS, 
-        REPO_NAME, createSessionProvider(), mimeTypes, username);    
+
+    List<Node> expectedList = documentTypeService_.getAllDocumentsByUser(COLLABORATION_WS,
+        REPO_NAME, createSessionProvider(), mimeTypes, username);
     //TODO: Need to check why the list is empty
     //    assertEquals(3, expectedList.size());
     Iterator<Node> iterator = expectedList.iterator();
-    Node expectedNode= null; 
+    Node expectedNode= null;
     while (iterator.hasNext()) {
       expectedNode = iterator.next();
       System.out.println("Expected mime type:"
         +expectedNode.getNode("jcr:content").getProperty(JCR_MINE_TYPE).getString());
-    }     
+    }
   }
-  
-  
+
+
   /**
    * Test method getAllDocumentsByUser
    * Input : audio, text types and jame user name.
@@ -223,7 +223,7 @@ public class TestDocumentTypeService extends BaseDMSTestCase {
    * @throws Exception
    */
   public void testAllDocumentsByUser02() throws Exception {
-    String[] mimeTypes = { "audio/mp3", "text/plain" };       
+    String[] mimeTypes = { "audio/mp3", "text/plain" };
     Node rootNode = session.getRootNode();
     Node documentNode = getDocument(rootNode, "document");
     addDocumentFile(documentNode, "testaudio01", "audio/mp3");
@@ -234,27 +234,27 @@ public class TestDocumentTypeService extends BaseDMSTestCase {
     addDocumentFile(documentNode, "text", "text/plain");
     documentNode.getSession().save();
     String username = "jame";
-    
-    List<Node> expectedList = documentTypeService_.getAllDocumentsByUser(COLLABORATION_WS, 
-        REPO_NAME, createSessionProvider(), mimeTypes, username);    
-    
+
+    List<Node> expectedList = documentTypeService_.getAllDocumentsByUser(COLLABORATION_WS,
+        REPO_NAME, createSessionProvider(), mimeTypes, username);
+
     assertEquals(0, expectedList.size());
     Iterator<Node> iterator = expectedList.iterator();
-    Node expectedNode= null; 
+    Node expectedNode= null;
     while (iterator.hasNext()) {
       expectedNode = iterator.next();
       System.out.println("Expected mime type:"
                       +expectedNode.getProperty(JCR_MINE_TYPE).getString());
-    }     
+    }
   }
-  
-  
+
+
   private SessionProvider createSessionProvider() {
     SessionProviderService sessionProviderService = (SessionProviderService) container
         .getComponentInstanceOfType(SessionProviderService.class);
     return sessionProviderService.getSystemSessionProvider(null);
   }
-  
+
 
   /**
    * @throws Exception
@@ -265,10 +265,10 @@ public class TestDocumentTypeService extends BaseDMSTestCase {
     Node rootNode = session.getRootNode();
 
     // 2. Create basic tree nodes and it's properties
-    rootNode.addNode("document", NT_UNSTRUCTURED);   
+    rootNode.addNode("document", NT_UNSTRUCTURED);
     session.save();
   }
-  
+
 
   /**
    * @throws Exception
@@ -283,7 +283,7 @@ public class TestDocumentTypeService extends BaseDMSTestCase {
     documentNode.remove();
     session.save();
   }
-  
+
 
   /**
    * @param currentNode
@@ -298,9 +298,9 @@ public class TestDocumentTypeService extends BaseDMSTestCase {
     subNode.setProperty(JCR_MINE_TYPE, mimeTypeValue);
     subNode.setProperty(JCR_DATA, "");
     subNode.setProperty(JCR_LAST_MODIFIED, new GregorianCalendar());
-  
+
   }
-  
+
 
   /**
    * @param parentNode
@@ -308,14 +308,14 @@ public class TestDocumentTypeService extends BaseDMSTestCase {
    * @return
    * @throws PathNotFoundException
    * @throws RepositoryException
-   */  
+   */
   private Node getDocument(Node parentNode, String documentName) throws PathNotFoundException,
       RepositoryException {
     try {
       return parentNode.getNode(documentName);
     } catch(PathNotFoundException e) {
       return parentNode.addNode(documentName);
-    } 
+    }
   }
 
 }

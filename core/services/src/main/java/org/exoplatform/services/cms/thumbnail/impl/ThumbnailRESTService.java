@@ -58,24 +58,27 @@ import org.exoplatform.services.rest.resource.ResourceContainer;
  * {repoName} Repository name
  * {workspaceName} Name of workspace
  * {nodePath} The node path
- * Example: 
+ * Example:
  * <img src="/portal/rest/thumbnailImage/repository/collaboration/test.gif" />
  */
 @Path("/thumbnailImage/")
 public class ThumbnailRESTService implements ResourceContainer {
-  
+
   /** The Constant LAST_MODIFIED_PROPERTY. */
   private static final String LAST_MODIFIED_PROPERTY = "Last-Modified";
-   
+
   /** The Constant IF_MODIFIED_SINCE_DATE_FORMAT. */
   private static final String IF_MODIFIED_SINCE_DATE_FORMAT = "EEE, dd MMM yyyy HH:mm:ss z";
-  
+
   private final RepositoryService repositoryService_;
   private final ThumbnailService thumbnailService_;
   private final NodeFinder nodeFinder_;
   private final LinkManager linkManager_;
-  
-  public ThumbnailRESTService(RepositoryService repositoryService, ThumbnailService thumbnailService, NodeFinder nodeFinder, LinkManager linkManager) {
+
+  public ThumbnailRESTService(RepositoryService repositoryService,
+                              ThumbnailService thumbnailService,
+                              NodeFinder nodeFinder,
+                              LinkManager linkManager) {
     repositoryService_ = repositoryService;
     thumbnailService_ = thumbnailService;
     nodeFinder_ = nodeFinder;
@@ -89,17 +92,21 @@ public class ThumbnailRESTService implements ResourceContainer {
  * @param nodePath Node path
  * @return Response inputstream
  * @throws Exception
- */  
-  
+ */
+
   @Path("/medium/{repoName}/{workspaceName}/{nodePath:.*}/")
   @GET
-  public Response getThumbnailImage(@PathParam("repoName") String repoName, 
+  public Response getThumbnailImage(@PathParam("repoName") String repoName,
                                     @PathParam("workspaceName") String wsName,
                                     @PathParam("nodePath") String nodePath,
                                     @HeaderParam("If-Modified-Since") String ifModifiedSince) throws Exception {
-    return getThumbnailByType(repoName, wsName, nodePath, ThumbnailService.MEDIUM_SIZE, ifModifiedSince);
+    return getThumbnailByType(repoName,
+                              wsName,
+                              nodePath,
+                              ThumbnailService.MEDIUM_SIZE,
+                              ifModifiedSince);
   }
-  
+
 /**
  * Get the image with big size
  * ex: /portal/rest/thumbnailImage/big/repository/collaboration/test.gif/
@@ -108,16 +115,16 @@ public class ThumbnailRESTService implements ResourceContainer {
  * @param nodePath Node path
  * @return Response inputstream
  * @throws Exception
- */   
+ */
   @Path("/big/{repoName}/{workspaceName}/{nodePath:.*}/")
   @GET
-  public Response getCoverImage(@PathParam("repoName") String repoName, 
+  public Response getCoverImage(@PathParam("repoName") String repoName,
                                 @PathParam("workspaceName") String wsName,
                                 @PathParam("nodePath") String nodePath,
                                 @HeaderParam("If-Modified-Since") String ifModifiedSince) throws Exception {
     return getThumbnailByType(repoName, wsName, nodePath, ThumbnailService.BIG_SIZE, ifModifiedSince);
   }
-  
+
 /**
  * Get the image with small size
  * ex: /portal/rest/thumbnailImage/small/repository/collaboration/test.gif/
@@ -126,16 +133,16 @@ public class ThumbnailRESTService implements ResourceContainer {
  * @param nodePath Node path
  * @return Response inputstream
  * @throws Exception
- */   
+ */
   @Path("/small/{repoName}/{workspaceName}/{nodePath:.*}/")
   @GET
-  public Response getSmallImage(@PathParam("repoName") String repoName, 
+  public Response getSmallImage(@PathParam("repoName") String repoName,
                                 @PathParam("workspaceName") String wsName,
                                 @PathParam("nodePath") String nodePath,
                                 @HeaderParam("If-Modified-Since") String ifModifiedSince) throws Exception {
     return getThumbnailByType(repoName, wsName, nodePath, ThumbnailService.SMALL_SIZE, ifModifiedSince);
   }
-  
+
   /**
    * Get the image with origin data
    * ex: /portal/rest/thumbnailImage/origin/repository/collaboration/test.gif/
@@ -144,11 +151,11 @@ public class ThumbnailRESTService implements ResourceContainer {
    * @param nodePath Node path
    * @return Response data stream
    * @throws Exception
-   */   
+   */
   @Path("/origin/{repoName}/{workspaceName}/{nodePath:.*}/")
   @GET
   public Response getOriginImage(@PathParam("repoName") String repoName,
-                                 @PathParam("workspaceName") String wsName, 
+                                 @PathParam("workspaceName") String wsName,
                                  @PathParam("nodePath") String nodePath,
                                  @HeaderParam("If-Modified-Since") String ifModifiedSince) throws Exception {
     DateFormat dateFormat = new SimpleDateFormat(IF_MODIFIED_SINCE_DATE_FORMAT);
@@ -156,41 +163,45 @@ public class ThumbnailRESTService implements ResourceContainer {
       return Response.ok().header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
     Node showingNode = getShowingNode(repoName, wsName, getNodePath(nodePath));
     Node targetNode = getTargetNode(showingNode);
-    if (targetNode.getPrimaryNodeType().getName().equals("nt:file") || targetNode.getPrimaryNodeType().getName().equals("nt:resource")) {
+    if (targetNode.getPrimaryNodeType().getName().equals("nt:file")
+        || targetNode.getPrimaryNodeType().getName().equals("nt:resource")) {
       Node content = targetNode;
-      if (targetNode.getPrimaryNodeType().getName().equals("nt:file")) content = targetNode.getNode("jcr:content");
+      if (targetNode.getPrimaryNodeType().getName().equals("nt:file"))
+        content = targetNode.getNode("jcr:content");
       if (ifModifiedSince != null) {
         // get last-modified-since from header
         Date ifModifiedSinceDate = dateFormat.parse(ifModifiedSince);
-        
+
         // get last modified date of node
         Date lastModifiedDate = content.getProperty("jcr:lastModified").getDate().getTime();
-        
+
         // Check if cached resource has not been modifed, return 304 code
-        if (ifModifiedSinceDate.getTime() >= lastModifiedDate.getTime()) {      
+        if (ifModifiedSinceDate.getTime() >= lastModifiedDate.getTime()) {
           return Response.notModified().build();
         }
       }
-      
+
       String mimeType = content.getProperty("jcr:mimeType").getString();
       for (ComponentPlugin plugin : thumbnailService_.getComponentPlugins()) {
         if (plugin instanceof ThumbnailPlugin) {
           ThumbnailPlugin thumbnailPlugin = (ThumbnailPlugin) plugin;
           if (thumbnailPlugin.getMimeTypes().contains(mimeType)) {
             InputStream inputStream = content.getProperty("jcr:data").getStream();
-            return Response.ok(inputStream, "image").header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
+            return Response.ok(inputStream, "image").header(LAST_MODIFIED_PROPERTY,
+                                                            dateFormat.format(new Date())).build();
           }
         }
       }
     }
-    
+
     return Response.ok().header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
   }
-    
-  private Response getThumbnailByType(String repoName, String wsName, String nodePath, 
+
+  private Response getThumbnailByType(String repoName, String wsName, String nodePath,
       String propertyName, String ifModifiedSince) throws Exception {
     DateFormat dateFormat = new SimpleDateFormat(IF_MODIFIED_SINCE_DATE_FORMAT);
-    if(!thumbnailService_.isEnableThumbnail()) return Response.ok().header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
+    if (!thumbnailService_.isEnableThumbnail())
+      return Response.ok().header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
     Node showingNode = getShowingNode(repoName, wsName, getNodePath(nodePath));
     Node parentNode = showingNode.getParent();
     String identifier = ((NodeImpl) showingNode).getInternalIdentifier();
@@ -203,23 +214,25 @@ public class ThumbnailRESTService implements ResourceContainer {
           ThumbnailPlugin thumbnailPlugin = (ThumbnailPlugin) plugin;
           if(thumbnailPlugin.getMimeTypes().contains(mimeType)) {
             Node thumbnailFolder = ThumbnailUtils.getThumbnailFolder(parentNode);
-            
+
             Node thumbnailNode = ThumbnailUtils.getThumbnailNode(thumbnailFolder, identifier);
-            
+
             if(!thumbnailNode.hasProperty(propertyName)) {
               BufferedImage image = thumbnailPlugin.getBufferedImage(content, targetNode.getPath());
               thumbnailService_.addThumbnailImage(thumbnailNode, image, propertyName);
             }
-            
+
             if(ifModifiedSince != null && thumbnailNode.hasProperty(ThumbnailService.THUMBNAIL_LAST_MODIFIED)) {
               // get last-modified-since from header
               Date ifModifiedSinceDate = dateFormat.parse(ifModifiedSince);
-              
+
               // get last modified date of node
-              Date lastModifiedDate = thumbnailNode.getProperty(ThumbnailService.THUMBNAIL_LAST_MODIFIED).getDate().getTime();
-              
+              Date lastModifiedDate = thumbnailNode.getProperty(ThumbnailService.THUMBNAIL_LAST_MODIFIED)
+                                                   .getDate()
+                                                   .getTime();
+
               // Check if cached resource has not been modifed, return 304 code
-              if (ifModifiedSinceDate.getTime() >= lastModifiedDate.getTime()) {      
+              if (ifModifiedSinceDate.getTime() >= lastModifiedDate.getTime()) {
                 return Response.notModified().build();
               }
             }
@@ -227,16 +240,20 @@ public class ThumbnailRESTService implements ResourceContainer {
             if(thumbnailNode.hasProperty(propertyName)) {
               inputStream = thumbnailNode.getProperty(propertyName).getStream();
             }
-            return Response.ok(inputStream, "image").header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
+            return Response.ok(inputStream, "image").header(LAST_MODIFIED_PROPERTY,
+                                                            dateFormat.format(new Date())).build();
           }
         }
       }
     }
     return getThumbnailRes(parentNode, identifier, propertyName, ifModifiedSince);
   }
-  
-  private Response getThumbnailRes(Node parentNode, String identifier, String propertyName, String ifModifiedSince) throws Exception{
-    
+
+  private Response getThumbnailRes(Node parentNode,
+                                   String identifier,
+                                   String propertyName,
+                                   String ifModifiedSince) throws Exception {
+
     DateFormat dateFormat = new SimpleDateFormat(IF_MODIFIED_SINCE_DATE_FORMAT);
     if(parentNode.hasNode(ThumbnailService.EXO_THUMBNAILS_FOLDER)) {
       Node thumbnailFolder = parentNode.getNode(ThumbnailService.EXO_THUMBNAILS_FOLDER);
@@ -245,25 +262,26 @@ public class ThumbnailRESTService implements ResourceContainer {
         if (ifModifiedSince != null && thumbnailNode.hasProperty("exo:dateModified")) {
           // get last-modified-since from header
           Date ifModifiedSinceDate = dateFormat.parse(ifModifiedSince);
-          
+
           // get last modified date of node
           Date lastModifiedDate = thumbnailNode.getProperty("exo:dateModified").getDate().getTime();
-          
+
           // Check if cached resource has not been modifed, return 304 code
-          if (ifModifiedSinceDate.getTime() >= lastModifiedDate.getTime()) {      
+          if (ifModifiedSinceDate.getTime() >= lastModifiedDate.getTime()) {
             return Response.notModified().build();
           }
         }
-        
+
         if(thumbnailNode.hasProperty(propertyName)) {
           InputStream inputStream = thumbnailNode.getProperty(propertyName).getStream();
-          return Response.ok(inputStream, "image").header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
+          return Response.ok(inputStream, "image").header(LAST_MODIFIED_PROPERTY,
+                                                          dateFormat.format(new Date())).build();
         }
       }
     }
     return Response.ok().header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
   }
-  
+
   private String getNodePath(String nodePath) throws Exception {
     ArrayList<String> encodeNameArr = new ArrayList<String>();
     if(!nodePath.equals("/")) {
@@ -278,9 +296,9 @@ public class ThumbnailRESTService implements ResourceContainer {
       }
       nodePath = encodedPath.toString();
     }
-    return nodePath; 
+    return nodePath;
   }
-  
+
   private Node getTargetNode(Node showingNode) throws Exception {
     Node targetNode = null;
     if (linkManager_.isLink(showingNode)) {
@@ -294,7 +312,7 @@ public class ThumbnailRESTService implements ResourceContainer {
     }
     return targetNode;
   }
-  
+
   private Node getShowingNode(String repoName, String wsName, String nodePath) throws Exception {
     ManageableRepository repository = repositoryService_.getRepository(repoName);
     Session session = getSystemProvider().getSession(wsName, repository);
@@ -310,7 +328,8 @@ public class ThumbnailRESTService implements ResourceContainer {
 
   private SessionProvider getSystemProvider() {
     ExoContainer container = ExoContainerContext.getCurrentContainer();
-    SessionProviderService service = (SessionProviderService) container.getComponentInstanceOfType(SessionProviderService.class);
-    return service.getSystemSessionProvider(null) ;  
+    SessionProviderService service = (SessionProviderService) container.
+        getComponentInstanceOfType(SessionProviderService.class);
+    return service.getSystemSessionProvider(null) ;
   }
 }

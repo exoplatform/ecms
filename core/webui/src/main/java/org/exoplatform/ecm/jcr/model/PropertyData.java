@@ -39,38 +39,38 @@ public class PropertyData {
   private boolean residual_ ;
   private int type_ ;
   private boolean newDataRead_ = true ;
-  
-  public PropertyData(PropertyDefinition def) { 
+
+  public PropertyData(PropertyDefinition def) {
     def_ =  def ;
     name_ = def.getName() ;
     id_ = Integer.toString(hashCode()) ;
     residual_ = "*".equals(name_) ;
     type_ = def.getRequiredType() ;
   }
-  
+
   public String getId() { return id_ ; }
-  
+
   public String getName() { return name_ ; }
   public void   setName(String s) { name_ = s ; }
-  
+
   public int getPropertyType() { return type_ ; }
   public void setPropertyType(int type) { type_ = type ; }
-  
+
   public PropertyDefinition getPropertyDef() { return def_ ; }
-  
+
   public boolean isResidual() { return residual_ ; }
-  
+
   public boolean isMultiple() { return def_.isMultiple() ; }
-  
+
   public Object getValue() { return value_ ; }
-  
+
   public boolean hasValue() { return value_ != null ; }
-  
+
   public void setValue(byte[] value) throws Exception {
     value_ = "" ;
     stream_ = value ;
   }
-  
+
   @SuppressWarnings("unchecked")
   public void setValue(String value) throws Exception {
     if(isMultiple()) {
@@ -86,7 +86,7 @@ public class PropertyData {
       value_ = value ;
     }
   }
-  
+
   public void setValue(Node node) throws Exception {
     Property prop = node.getProperty(name_);
     if(isMultiple()) {
@@ -102,41 +102,41 @@ public class PropertyData {
       else value_ = prop.getValue().getString() ;
     }
   }
-  
+
   public String getValueAsString() { return (String) value_ ; }
-  
+
   public List getValuesAsString() {
     newDataRead_ = true ;
-    return (List) value_ ; 
+    return (List) value_ ;
   }
-  
+
 //@TODO statement put in bracket when use if statement
   public Value getPropertyValue(ValueFactory factory) throws Exception {
-  	// need to use session.getValueFactory().create... instead
-  	if(getPropertyType() != PropertyType.BINARY)
-  		return factory.createValue((String)value_, getPropertyType()) ;
-  	return factory.createValue(new String((byte[]) stream_), getPropertyType()) ;
-  	
+    // need to use session.getValueFactory().create... instead
+    if(getPropertyType() != PropertyType.BINARY)
+      return factory.createValue((String)value_, getPropertyType()) ;
+    return factory.createValue(new String((byte[]) stream_), getPropertyType()) ;
+
     //if(getPropertyType() == PropertyType.STRING) return new StringValue((String)value_) ;
     //if(getPropertyType() == PropertyType.NAME) return NameValue.valueOf((String)value_) ;
     //if(getPropertyType() == PropertyType.BOOLEAN) return new BooleanValue("true".equals(value_)) ;
     //if(getPropertyType() == PropertyType.BINARY) return new BinaryValue((byte[]) stream_) ;
     //return null ;
   }
-  
+
 // @TODO statement put in bracket when use if statement
   public Value[] getPropertyValues(ValueFactory factory) throws Exception {
     newDataRead_ = true ;
-    List values = (List) value_ ; 
+    List values = (List) value_ ;
     if(values == null || values.size() == 0) return null ;
     Value[] value = new Value[values.size()] ;
     for(int i = 0; i < values.size(); i++) {
       String  s = (String)values.get(i) ;
-   	  if(getPropertyType() != PropertyType.BINARY)
-   	  	value[i] = factory.createValue(s, getPropertyType()) ;
+       if(getPropertyType() != PropertyType.BINARY)
+         value[i] = factory.createValue(s, getPropertyType()) ;
       else
-      	value[i] = factory.createValue(new String((byte[]) stream_), getPropertyType()) ;
-      
+        value[i] = factory.createValue(new String((byte[]) stream_), getPropertyType()) ;
+
       //if(getPropertyType() == PropertyType.STRING) value[i] =  new StringValue(s) ;
       //if(getPropertyType() == PropertyType.NAME) value[i] = NameValue.valueOf(s) ;
       //if(getPropertyType() == PropertyType.BOOLEAN) value[i] = new BooleanValue("true".equals(s)) ;

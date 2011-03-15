@@ -21,9 +21,9 @@ package org.exoplatform.ecm.webui.component.admin.views;
  * Author : Tran The Trong
  *          trongtt@gmail.com
  * Oct 9, 2006
- * 2:36:06 PM 
+ * 2:36:06 PM
  */
-public class TemplateBean {    
+public class TemplateBean {
   private String name ;
   private String path ;
   private String baseVersion =  "";

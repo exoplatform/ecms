@@ -49,7 +49,7 @@ import org.exoplatform.webui.event.EventListener;
     template = "app:/groovy/webui/component/explorer/versions/UIVersionInfo.gtmpl",
     events = {
         @EventConfig(listeners = UIVersionInfo.SelectActionListener.class),
-        @EventConfig(listeners = UIVersionInfo.RestoreVersionActionListener.class),        
+        @EventConfig(listeners = UIVersionInfo.RestoreVersionActionListener.class),
         @EventConfig(listeners = UIVersionInfo.ViewVersionActionListener.class),
         @EventConfig(listeners = UIVersionInfo.AddLabelActionListener.class),
         @EventConfig(listeners = UIVersionInfo.CompareVersionActionListener.class),
@@ -67,7 +67,7 @@ public class UIVersionInfo extends UIContainer implements UIPopupComponent {
   protected Node node_ ;
   private static final Log LOG  = ExoLogger.getLogger("explorer.UIVersionInfo");
   public UIVersionInfo() throws Exception {
-    addChild(UILabelForm.class, null, null).setRendered(false);   
+    addChild(UILabelForm.class, null, null).setRendered(false);
     addChild(UIRemoveLabelForm.class, null, null).setRendered(false);
     addChild(UIViewVersion.class, null, null).setRendered(false);
     addChild(UIDiff.class, null, null).setRendered(false) ;
@@ -75,7 +75,7 @@ public class UIVersionInfo extends UIContainer implements UIPopupComponent {
 
   public String[] getVersionLabels(VersionNode version) throws Exception {
     VersionHistory vH = node_.getVersionHistory();
-    return vH.getVersionLabels(version.getVersion());   
+    return vH.getVersionLabels(version.getVersion());
   }
 
   public boolean isBaseVersion(VersionNode versionNode) throws Exception {
@@ -87,22 +87,22 @@ public class UIVersionInfo extends UIContainer implements UIPopupComponent {
 
   public void activate() throws Exception {
     UIJCRExplorer uiExplorer = getAncestorOfType(UIJCRExplorer.class) ;
-    node_ = uiExplorer.getCurrentNode() ;   
+    node_ = uiExplorer.getCurrentNode() ;
     rootVersion_ = new VersionNode(node_.getVersionHistory().getRootVersion(), uiExplorer.getSession()) ;
     curentVersion_ = rootVersion_ ;
-    getChild(UIViewVersion.class).update() ;  
+    getChild(UIViewVersion.class).update() ;
   }
 
-  public void deActivate() throws Exception {}  
+  public void deActivate() throws Exception {}
 
   public VersionNode getCurrentVersionNode() { return curentVersion_ ;}
   public Node getCurrentNode() { return node_ ; }
-  
+
   public boolean isViewVersion() {
     UIViewVersion uiViewVersion = getChild(UIViewVersion.class);
     if(uiViewVersion.isRendered()) return true;
     return false;
-  }  
+  }
 
   static  public class ViewVersionActionListener extends EventListener<UIVersionInfo> {
     public void execute(Event<UIVersionInfo> event) throws Exception {
@@ -121,40 +121,40 @@ public class UIVersionInfo extends UIContainer implements UIPopupComponent {
         uiApp.addMessage(new ApplicationMessage("UIVersionInfo.msg.have-no-view-template", null)) ;
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
         return ;
-      }  
+      }
       uiViewVersion.setRendered(true) ;
       event.getRequestContext().addUIComponentToUpdateByAjax(uiVersionInfo) ;
     }
   }
 
   static  public class AddLabelActionListener extends EventListener<UIVersionInfo> {
-    public void execute(Event<UIVersionInfo> event) throws Exception {      
+    public void execute(Event<UIVersionInfo> event) throws Exception {
       UIVersionInfo uiVersionInfo = event.getSource();
       for(UIComponent uiChild : uiVersionInfo.getChildren()) {
         uiChild.setRendered(false) ;
       }
       String objectId = event.getRequestContext().getRequestParameter(OBJECTID) ;
-      uiVersionInfo.curentVersion_  = uiVersionInfo.rootVersion_.findVersionNode(objectId) ;      
+      uiVersionInfo.curentVersion_  = uiVersionInfo.rootVersion_.findVersionNode(objectId) ;
       uiVersionInfo.getChild(UILabelForm.class).setRendered(true);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiVersionInfo) ;
     }
   }
 
   static  public class RemoveLabelActionListener extends EventListener<UIVersionInfo> {
-    public void execute(Event<UIVersionInfo> event) throws Exception {      
+    public void execute(Event<UIVersionInfo> event) throws Exception {
       UIVersionInfo uiVersionInfo = event.getSource();
       for(UIComponent uiChild : uiVersionInfo.getChildren()) {
         uiChild.setRendered(false) ;
       }
       String objectId = event.getRequestContext().getRequestParameter(OBJECTID) ;
-      uiVersionInfo.curentVersion_  = uiVersionInfo.rootVersion_.findVersionNode(objectId) ;      
+      uiVersionInfo.curentVersion_  = uiVersionInfo.rootVersion_.findVersionNode(objectId) ;
       uiVersionInfo.getChild(UIRemoveLabelForm.class).update() ;
       event.getRequestContext().addUIComponentToUpdateByAjax(uiVersionInfo) ;
     }
   }
 
   static  public class RestoreVersionActionListener extends EventListener<UIVersionInfo> {
-    public void execute(Event<UIVersionInfo> event) throws Exception {      
+    public void execute(Event<UIVersionInfo> event) throws Exception {
       UIVersionInfo uiVersionInfo = event.getSource();
       UIJCRExplorer uiExplorer = uiVersionInfo.getAncestorOfType(UIJCRExplorer.class) ;
       for(UIComponent uiChild : uiVersionInfo.getChildren()) {
@@ -167,18 +167,18 @@ public class UIVersionInfo extends UIContainer implements UIPopupComponent {
       try {
         uiVersionInfo.node_.restore(uiVersionInfo.curentVersion_.getVersion(), true);
       } catch(JCRInvalidItemStateException invalid) {
-        uiApp.addMessage(new ApplicationMessage("UIVersionInfo.msg.invalid-item-state", null, 
+        uiApp.addMessage(new ApplicationMessage("UIVersionInfo.msg.invalid-item-state", null,
             ApplicationMessage.WARNING)) ;
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
         return ;
       } catch(NullPointerException nuException){
-        uiApp.addMessage(new ApplicationMessage("UIVersionInfo.msg.invalid-item-state", null, 
+        uiApp.addMessage(new ApplicationMessage("UIVersionInfo.msg.invalid-item-state", null,
             ApplicationMessage.WARNING)) ;
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
         return;
       } catch(Exception e) {
-        //JCRExceptionManager.process(uiApp, e);        
-        uiApp.addMessage(new ApplicationMessage("UIVersionInfo.msg.invalid-item-state", null, 
+        //JCRExceptionManager.process(uiApp, e);
+        uiApp.addMessage(new ApplicationMessage("UIVersionInfo.msg.invalid-item-state", null,
             ApplicationMessage.WARNING)) ;
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
         return;
@@ -236,7 +236,7 @@ public class UIVersionInfo extends UIContainer implements UIPopupComponent {
       VersionNode node = uiVersionInfo.rootVersion_.findVersionNode(objectId) ;
       UIDiff uiDiff = uiVersionInfo.getChild(UIDiff.class) ;
       uiDiff.setVersions(uiVersionInfo.getCurrentNode().getBaseVersion(), node.getVersion()) ;
-      uiDiff.setRendered(true) ;      
+      uiDiff.setRendered(true) ;
       event.getRequestContext().addUIComponentToUpdateByAjax(uiVersionInfo) ;
     }
   }
@@ -250,7 +250,7 @@ public class UIVersionInfo extends UIContainer implements UIPopupComponent {
       selectedVersion.setExpanded(!selectedVersion.isExpanded()) ;
       event.getRequestContext().addUIComponentToUpdateByAjax(uiVersionInfo) ;
     }
-  } 
+  }
 
   static public class CloseActionListener extends EventListener<UIVersionInfo> {
     public void execute(Event<UIVersionInfo> event) throws Exception {
@@ -265,7 +265,7 @@ public class UIVersionInfo extends UIContainer implements UIPopupComponent {
       uiExplorer.cancelAction() ;
     }
   }
-  
+
   static public class CloseViewActionListener extends EventListener<UIVersionInfo> {
     public void execute(Event<UIVersionInfo> event) throws Exception {
       UIVersionInfo uiVersionInfo = event.getSource();
@@ -276,5 +276,5 @@ public class UIVersionInfo extends UIContainer implements UIPopupComponent {
         return;
       }
     }
-  }  
+  }
 }

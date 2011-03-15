@@ -30,10 +30,10 @@ import org.apache.lucene.analysis.standard.StandardFilter;
  * Created by The eXo Platform SARL
  * Author : Nguyen Van Chien
  *          chien.nguyen@exoplatform.com
- * Jul 19, 2010  
+ * Jul 19, 2010
  */
 public class IgnoreAccentAnalyzer extends Analyzer {
-  
+
   public TokenStream tokenStream(String fieldName, Reader reader) {
     TokenStream result = new WhitespaceTokenizer(reader);
     result = new UnescapeHTMLFilter(result);

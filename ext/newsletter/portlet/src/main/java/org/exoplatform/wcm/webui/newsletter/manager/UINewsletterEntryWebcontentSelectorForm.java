@@ -40,34 +40,34 @@ import org.exoplatform.webui.form.UIFormStringInput;
     }
 )
 public class UINewsletterEntryWebcontentSelectorForm extends UIForm implements UISelectable {
-  
+
   /** The popup id. */
   private String popupId;
-  
+
   /** The Constant FORM_WEBCONTENT_SELECTOR. */
   public static final String FORM_WEBCONTENT_SELECTOR = "FormWebcontentSelector";
-  
+
   /** The Constant INPUT_WEBCONTENT_SELECTOR. */
   public static final String INPUT_WEBCONTENT_SELECTOR = "WebcontentSelector";
-  
+
   /**
    * Instantiates a new uI newsletter entry webcontent selector form.
    */
   public UINewsletterEntryWebcontentSelectorForm() {
     UIFormStringInput inputWebcontentSelector = new UIFormStringInput(INPUT_WEBCONTENT_SELECTOR, INPUT_WEBCONTENT_SELECTOR, null);
     inputWebcontentSelector.setEditable(false);
-    
+
     UIFormInputSetWithAction formWebcontentSelector = new UIFormInputSetWithAction(FORM_WEBCONTENT_SELECTOR);
     formWebcontentSelector.addChild(inputWebcontentSelector);
     formWebcontentSelector.setActionInfo(INPUT_WEBCONTENT_SELECTOR, new String[] {"SelectWebcontent"});
     formWebcontentSelector.showActionInfo(true);
-    
+
     addChild(formWebcontentSelector);
   }
 
   /**
    * Gets the popup id.
-   * 
+   *
    * @return the popup id
    */
   public String getPopupId() {
@@ -76,13 +76,13 @@ public class UINewsletterEntryWebcontentSelectorForm extends UIForm implements U
 
   /**
    * Sets the popup id.
-   * 
+   *
    * @param popupId the new popup id
    */
   public void setPopupId(String popupId) {
     this.popupId = popupId;
   }
-  
+
   /* (non-Javadoc)
    * @see org.exoplatform.ecm.webui.selector.UISelectable#doSelect(java.lang.String, java.lang.Object)
    */
@@ -90,7 +90,7 @@ public class UINewsletterEntryWebcontentSelectorForm extends UIForm implements U
     getUIStringInput(selectField).setValue((String) value);
     Utils.closePopupWindow(this, popupId);
   }
-  
+
   /**
    * The listener interface for receiving selectWebcontentAction events.
    * The class that is interested in processing a selectWebcontentAction
@@ -99,11 +99,11 @@ public class UINewsletterEntryWebcontentSelectorForm extends UIForm implements U
    * component's <code>addSelectWebcontentActionListener<code> method. When
    * the selectWebcontentAction event occurs, that object's appropriate
    * method is invoked.
-   * 
+   *
    * @see SelectWebcontentActionEvent
    */
   public static class SelectWebcontentActionListener extends EventListener<UINewsletterEntryWebcontentSelectorForm> {
-    
+
     /* (non-Javadoc)
      * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
      */

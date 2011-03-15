@@ -44,7 +44,7 @@ import org.exoplatform.webui.event.EventListener;
  * Created by The eXo Platform SARL
  * Author : Dang Van Minh
  *          minh.dang@exoplatform.com
- * Dec 29, 2006  
+ * Dec 29, 2006
  * 11:30:17 AM
  */
 @ComponentConfig(
@@ -61,14 +61,14 @@ public class UIQueriesList extends UIComponentDecorator {
   final static public String ST_ADD = "AddQueryForm" ;
   final static public String ST_EDIT = "EditQueryForm" ;
   private UIPageIterator uiPageIterator_ ;
-  
+
   public UIQueriesList() throws Exception {
     uiPageIterator_ = createUIComponent(UIPageIterator.class, null, "QueriesListIterator");
     setUIComponent(uiPageIterator_) ;
   }
 
   public String[] getActions() { return ACTIONS ; }
-  
+
   public void updateQueriesGrid(int currentPage) throws Exception {
     PageList pageList = new ObjectPageList(getAllSharedQueries(), 10) ;
     uiPageIterator_.setPageList(pageList) ;
@@ -77,42 +77,42 @@ public class UIQueriesList extends UIComponentDecorator {
     else
       uiPageIterator_.setCurrentPage(currentPage);
   }
-  
+
   public UIPageIterator getUIPageIterator() { return uiPageIterator_ ; }
   public boolean canEditNode(Node node) {
-	  SessionProvider sProvider = WCMCoreUtils.getUserSessionProvider();
-	  try {
-		  ManageableRepository manageableRepository = ((ManageableRepository)node.getSession().getRepository());
-		  Session session = sProvider.getSession(node.getSession().getWorkspace().getName(), manageableRepository);
-		  session.checkPermission(node.getPath(), PermissionType.SET_PROPERTY);
-	  }catch (Exception e){
-		  return false;
-	  }
-	  return true;
+    SessionProvider sProvider = WCMCoreUtils.getUserSessionProvider();
+    try {
+      ManageableRepository manageableRepository = ((ManageableRepository)node.getSession().getRepository());
+      Session session = sProvider.getSession(node.getSession().getWorkspace().getName(), manageableRepository);
+      session.checkPermission(node.getPath(), PermissionType.SET_PROPERTY);
+    }catch (Exception e){
+      return false;
+    }
+    return true;
   }
   public boolean canRemoveNode(Node node) {
-	  SessionProvider sProvider = WCMCoreUtils.getUserSessionProvider();
-	  try {
-		  ManageableRepository manageableRepository = ((ManageableRepository)node.getSession().getRepository());
-		  Session session = sProvider.getSession(node.getSession().getWorkspace().getName(), manageableRepository);
-		  session.checkPermission(node.getPath(), PermissionType.REMOVE);
-	  }catch (Exception e){
-		  return false;
-	  }
-	  return true;
+    SessionProvider sProvider = WCMCoreUtils.getUserSessionProvider();
+    try {
+      ManageableRepository manageableRepository = ((ManageableRepository)node.getSession().getRepository());
+      Session session = sProvider.getSession(node.getSession().getWorkspace().getName(), manageableRepository);
+      session.checkPermission(node.getPath(), PermissionType.REMOVE);
+    }catch (Exception e){
+      return false;
+    }
+    return true;
   }
-  public List getQueryList() throws Exception { return uiPageIterator_.getCurrentPageData() ; } 
-  
+  public List getQueryList() throws Exception { return uiPageIterator_.getCurrentPageData() ; }
+
   @SuppressWarnings("unchecked")
   public List<Node> getAllSharedQueries() throws Exception {
     QueryService queryService = getApplicationComponent(QueryService.class) ;
     String repository = getAncestorOfType(UIECMAdminPortlet.class).getPreferenceRepository() ;
-    List<Node> queries = queryService.getSharedQueries(repository, 
-    		SessionProviderFactory.createSystemProvider()) ;
+    List<Node> queries = queryService.getSharedQueries(repository,
+        SessionProviderFactory.createSystemProvider()) ;
     Collections.sort(queries, new QueryComparator()) ;
     return queries ;
   }
-  
+
   static public class QueryComparator implements Comparator {
     public int compare(Object o1, Object o2) throws ClassCastException {
       try {
@@ -124,7 +124,7 @@ public class UIQueriesList extends UIComponentDecorator {
       }
     }
   }
-  
+
   static public class AddQueryActionListener extends EventListener<UIQueriesList> {
     public void execute(Event<UIQueriesList> event) throws Exception {
       UIQueriesManager uiQueriesMan = event.getSource().getParent() ;
@@ -133,7 +133,7 @@ public class UIQueriesList extends UIComponentDecorator {
       event.getRequestContext().addUIComponentToUpdateByAjax(uiQueriesMan) ;
     }
   }
-  
+
   static public class EditActionListener extends EventListener<UIQueriesList> {
     public void execute(Event<UIQueriesList> event) throws Exception {
       UIQueriesManager uiQueriesMan = event.getSource().getParent() ;
@@ -146,7 +146,7 @@ public class UIQueriesList extends UIComponentDecorator {
       event.getRequestContext().addUIComponentToUpdateByAjax(uiQueriesMan) ;
     }
   }
-  
+
   static public class DeleteActionListener extends EventListener<UIQueriesList> {
     public void execute(Event<UIQueriesList> event) throws Exception {
       UIQueriesList uiQueriesList = event.getSource();

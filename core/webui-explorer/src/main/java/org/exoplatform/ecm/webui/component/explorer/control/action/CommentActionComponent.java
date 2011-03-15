@@ -38,7 +38,7 @@ import org.exoplatform.webui.ext.filter.UIExtensionFilters;
  * Created by The eXo Platform SAS
  * Author : eXoPlatform
  *          nicolas.filotto@exoplatform.com
- * 7 mai 2009  
+ * 7 mai 2009
  */
 @ComponentConfig(
      events = {
@@ -48,12 +48,12 @@ import org.exoplatform.webui.ext.filter.UIExtensionFilters;
 public class CommentActionComponent extends UIComponent {
 
   private static final List<UIExtensionFilter> FILTERS = Arrays.asList(new UIExtensionFilter[]{new CanAddNodeFilter(), new IsMixCommentable(), new IsCheckedOutFilter("UICommentForm.msg.not-checkedout"), new IsNotLockedFilter()});
-  
+
   @UIExtensionFilters
   public List<UIExtensionFilter> getFilters() {
     return FILTERS;
   }
-  
+
   public static class CommentActionListener extends UIActionBarActionListener<CommentActionComponent> {
     public void processEvent(Event<CommentActionComponent> event) throws Exception {
       UIJCRExplorer uiExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class);
@@ -62,7 +62,7 @@ public class CommentActionComponent extends UIComponent {
       String commentNodePath = event.getRequestContext().getRequestParameter("nodePath");
       if (commentNodePath != null && commentNodePath.length() > 0) {
         uiCommentForm.setNodeCommentPath(commentNodePath);
-        uiCommentForm.setEdit(true);  
+        uiCommentForm.setEdit(true);
       }
       uiPopupContainer.activate(uiCommentForm, 750, 700);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiPopupContainer);

@@ -54,7 +54,7 @@ public class PageEventListenerDelegate {
 
   /**
    * Instantiates a new page event listener delegate.
-   * 
+   *
    * @param lifecycleName the lifecycle name
    * @param container the container
    */
@@ -64,42 +64,48 @@ public class PageEventListenerDelegate {
 
   /**
    * Update lifecyle on create page.
-   * 
+   *
    * @param page the page
    * @param remoteUser the remote user
    * @param plugin
    * @throws Exception the exception
    */
-  public void updateLifecyleOnCreatePage(Page page, String remoteUser, WebpagePublicationPlugin plugin) throws Exception { 
+  public void updateLifecyleOnCreatePage(Page page,
+                                         String remoteUser,
+                                         WebpagePublicationPlugin plugin) throws Exception {
     updateAddedApplication(page, remoteUser, plugin);
   }
 
   /**
    * Update lifecyle on change page.
-   * 
+   *
    * @param page the page
    * @param remoteUser the remote user
    * @param plugin
    * @throws Exception the exception
    */
-  public void updateLifecyleOnChangePage(Page page, String remoteUser, WebpagePublicationPlugin plugin) throws Exception {
+  public void updateLifecyleOnChangePage(Page page,
+                                         String remoteUser,
+                                         WebpagePublicationPlugin plugin) throws Exception {
     updateAddedApplication(page, remoteUser, plugin);
     updateRemovedApplication(page, remoteUser, plugin);
   }
 
   /**
    * Update lifecycle on remove page.
-   * 
+   *
    * @param page the page
    * @param remoteUser the remote user
    * @param plugin
    * @throws Exception the exception
    */
-  public void updateLifecycleOnRemovePage(Page page, String remoteUser, WebpagePublicationPlugin plugin) throws Exception {
+  public void updateLifecycleOnRemovePage(Page page,
+                                          String remoteUser,
+                                          WebpagePublicationPlugin plugin) throws Exception {
     WCMConfigurationService wcmConfigurationService = WCMCoreUtils.getService(WCMConfigurationService.class);
-    List<String> listPageApplicationId = 
-    	PublicationUtil.getListApplicationIdByPage(
-    			page, wcmConfigurationService.getRuntimeContextParam(WCMConfigurationService.SCV_PORTLET));
+    List<String> listPageApplicationId =
+      PublicationUtil.getListApplicationIdByPage(
+          page, wcmConfigurationService.getRuntimeContextParam(WCMConfigurationService.SCV_PORTLET));
     for (String applicationId : listPageApplicationId) {
       Node content = PublicationUtil.getNodeByApplicationId(applicationId);
       if (content != null) {
@@ -110,7 +116,7 @@ public class PageEventListenerDelegate {
 
   /**
    * Update added application.
-   * 
+   *
    * @param page the page
    * @param remoteUser the remote user
    * @param plugin
@@ -118,32 +124,34 @@ public class PageEventListenerDelegate {
    */
   private void updateAddedApplication(Page page, String remoteUser, WebpagePublicationPlugin plugin) throws Exception {
     WCMConfigurationService wcmConfigurationService = WCMCoreUtils.getService(WCMConfigurationService.class);
-    List<String> listPageApplicationId = PublicationUtil.getListApplicationIdByPage(page, wcmConfigurationService.getRuntimeContextParam(WCMConfigurationService.SCV_PORTLET));
+    String portletName = wcmConfigurationService.getRuntimeContextParam(WCMConfigurationService.SCV_PORTLET);
+    List<String> listPageApplicationId = PublicationUtil.getListApplicationIdByPage(page,
+                                                                                    portletName);
     for (String applicationtId : listPageApplicationId) {
       Node content = PublicationUtil.getNodeByApplicationId(applicationtId);
-      if (content != null) saveAddedApplication(page, applicationtId, content, lifecycleName, remoteUser, plugin);
+      if (content != null)
+        saveAddedApplication(page, applicationtId, content, lifecycleName, remoteUser, plugin);
     }
   }
 
   /**
    * Update removed application.
-   * 
+   *
    * @param page the page
    * @param remoteUser the remote user
    * @param plugin
    * @throws Exception the exception
    */
-  private void updateRemovedApplication(Page page, String remoteUser, WebpagePublicationPlugin plugin) throws Exception {
+  private void updateRemovedApplication(Page page,
+                                        String remoteUser,
+                                        WebpagePublicationPlugin plugin) throws Exception {
     List<Node> listNode = getListNodeByApplicationId(page, plugin);
     WCMConfigurationService wcmConfigurationService = WCMCoreUtils.getService(WCMConfigurationService.class);
+    String portletName = wcmConfigurationService.getRuntimeContextParam(WCMConfigurationService.SCV_PORTLET);
     List<String>	listApplicationId = new ArrayList<String>();
-    listApplicationId.addAll(
-    		PublicationUtil.getListApplicationIdByPage(
-    				page, wcmConfigurationService.getRuntimeContextParam(WCMConfigurationService.SCV_PORTLET)));
-    listApplicationId.addAll(
-    		PublicationUtil.getListApplicationIdByPage(
-    				page, wcmConfigurationService.getRuntimeContextParam(WCMConfigurationService.CLV_PORTLET)));
-    
+    listApplicationId.addAll(PublicationUtil.getListApplicationIdByPage(page, portletName));
+    listApplicationId.addAll(PublicationUtil.getListApplicationIdByPage(page, portletName));
+
     for (Node content : listNode) {
       for (Value value : content.getProperty("publication:applicationIDs").getValues()) {
         String[] tmp = PublicationUtil.parseMixedApplicationId(value.getString());
@@ -157,12 +165,12 @@ public class PageEventListenerDelegate {
 
   /**
    * Gets the list node by application id.
-   * 
+   *
    * @param page the page
    * @param plugin
-   * 
+   *
    * @return the list node by application id
-   * 
+   *
    * @throws Exception the exception
    */
   private List<Node> getListNodeByApplicationId(Page page, WebpagePublicationPlugin plugin) throws Exception {
@@ -179,7 +187,10 @@ public class PageEventListenerDelegate {
 
     List<Node> listPublishedNode = new ArrayList<Node>();
     QueryManager queryManager = session.getWorkspace().getQueryManager();
-    Query query = queryManager.createQuery("select * from " + plugin.getLifecycleType() + " where publication:lifecycleName='" + lifecycleName + "' and publication:webPageIDs like '%" + page.getPageId() + "%' and jcr:path like '" + path + "/%' order by jcr:score", Query.SQL);
+    Query query = queryManager.createQuery("select * from " + plugin.getLifecycleType()
+        + " where publication:lifecycleName='" + lifecycleName
+        + "' and publication:webPageIDs like '%" + page.getPageId() + "%' and jcr:path like '"
+        + path + "/%' order by jcr:score", Query.SQL);
     QueryResult results = query.execute();
     for (NodeIterator nodeIterator = results.getNodes(); nodeIterator.hasNext();) {
       listPublishedNode.add(nodeIterator.nextNode());
@@ -189,7 +200,7 @@ public class PageEventListenerDelegate {
 
   /**
    * Save added application.
-   * 
+   *
    * @param page the page
    * @param applicationId the application id
    * @param content the content
@@ -199,10 +210,10 @@ public class PageEventListenerDelegate {
    * @throws Exception the exception
    */
   private void saveAddedApplication(
-  		Page page, String applicationId, Node content, String lifecycleName,
-  		String remoteUser, WebpagePublicationPlugin plugin) throws Exception {
-  	if (!content.isCheckedOut()) content.checkout();
-    PublicationService publicationService = WCMCoreUtils.getService(PublicationService.class);                 
+      Page page, String applicationId, Node content, String lifecycleName,
+      String remoteUser, WebpagePublicationPlugin plugin) throws Exception {
+    if (!content.isCheckedOut()) content.checkout();
+    PublicationService publicationService = WCMCoreUtils.getService(PublicationService.class);
     String nodeLifecycleName = null;
     try {
       nodeLifecycleName = publicationService.getNodeLifecycleName(content);
@@ -212,23 +223,25 @@ public class PageEventListenerDelegate {
     Session session = content.getSession();
     ValueFactory valueFactory = session.getValueFactory();
 
-    if (content.canAddMixin("publication:webpagesPublication")) 
-    	content.addMixin("publication:webpagesPublication");
-    
+    if (content.canAddMixin("publication:webpagesPublication"))
+      content.addMixin("publication:webpagesPublication");
+
     List<String> nodeAppIds = PublicationUtil.getValuesAsString(content, "publication:applicationIDs");
     String mixedAppId = PublicationUtil.setMixedApplicationId(page.getPageId(), applicationId);
     if(nodeAppIds.contains(mixedAppId))
       return;
 
-    List<String> listExistedNavigationNodeUri = PublicationUtil.getValuesAsString(content, "publication:navigationNodeURIs");    
+    List<String> listExistedNavigationNodeUri = PublicationUtil.getValuesAsString(content,
+                                                                                  "publication:navigationNodeURIs");
     List<String> listPageNavigationUri = plugin.getListPageNavigationUri(page, remoteUser);
     if (listPageNavigationUri.isEmpty())  {
       return ;
-    }            
+    }
     for (String uri : listPageNavigationUri) {
-        listExistedNavigationNodeUri.add(uri);                           
-    }                   
-    content.setProperty("publication:navigationNodeURIs", PublicationUtil.toValues(valueFactory, listExistedNavigationNodeUri));
+        listExistedNavigationNodeUri.add(uri);
+    }
+    content.setProperty("publication:navigationNodeURIs",
+                        PublicationUtil.toValues(valueFactory, listExistedNavigationNodeUri));
 
     List<String> nodeWebPageIds = PublicationUtil.getValuesAsString(content, "publication:webPageIDs");
     nodeWebPageIds.add(page.getPageId());
@@ -236,11 +249,11 @@ public class PageEventListenerDelegate {
     content.setProperty("publication:applicationIDs", PublicationUtil.toValues(valueFactory, nodeAppIds));
     content.setProperty("publication:webPageIDs", PublicationUtil.toValues(valueFactory, nodeWebPageIds));
     session.save();
-  } 
+  }
 
   /**
    * Save removed application.
-   * 
+   *
    * @param page the page
    * @param applicationId the application id
    * @param content the content
@@ -248,8 +261,12 @@ public class PageEventListenerDelegate {
    * @param plugin
    * @throws Exception the exception
    */
-  private void saveRemovedApplication(Page page, String applicationId, Node content, String remoteUser, WebpagePublicationPlugin plugin) throws Exception {
-  	if (!content.isCheckedOut()) content.checkout();
+  private void saveRemovedApplication(Page page,
+                                      String applicationId,
+                                      Node content,
+                                      String remoteUser,
+                                      WebpagePublicationPlugin plugin) throws Exception {
+    if (!content.isCheckedOut()) content.checkout();
     Session session = content.getSession();
     ValueFactory valueFactory = session.getValueFactory();
 
@@ -262,16 +279,18 @@ public class PageEventListenerDelegate {
     content.setProperty("publication:webPageIDs", PublicationUtil.toValues(valueFactory, listExistedPageId));
 
     List<String> listPageNavigationUri = plugin.getListPageNavigationUri(page, remoteUser);
-    List<String> listExistedNavigationNodeUri = PublicationUtil.getValuesAsString(content, "publication:navigationNodeURIs");
+    List<String> listExistedNavigationNodeUri = PublicationUtil.getValuesAsString(content,
+                                                                                  "publication:navigationNodeURIs");
     List<String> listExistedNavigationNodeUriTmp = new ArrayList<String>();
-    listExistedNavigationNodeUriTmp.addAll(listExistedNavigationNodeUri);    
+    listExistedNavigationNodeUriTmp.addAll(listExistedNavigationNodeUri);
     for (String existedNavigationNodeUri : listExistedNavigationNodeUriTmp) {
       if (listPageNavigationUri.contains(existedNavigationNodeUri)) {
         listExistedNavigationNodeUri.remove(existedNavigationNodeUri);
         break;
       }
     }
-    content.setProperty("publication:navigationNodeURIs", PublicationUtil.toValues(valueFactory, listExistedNavigationNodeUri));
+    content.setProperty("publication:navigationNodeURIs",
+                        PublicationUtil.toValues(valueFactory, listExistedNavigationNodeUri));
     session.save();
   }
 }

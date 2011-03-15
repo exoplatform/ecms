@@ -42,7 +42,7 @@ import org.exoplatform.webui.event.EventListener;
  * Author : pham tuan
  *          phamtuanchip@yahoo.de
  * Oct 03, 2006
- * 9:43:23 AM 
+ * 9:43:23 AM
  */
 @ComponentConfig(
     lifecycle = UIContainerLifecycle.class,
@@ -58,10 +58,10 @@ public class UIViewTab extends UIContainer {
   final private static String[] ACTIONS = {"Edit", "Delete"} ;
   final public static String VIEW_LIST_NAME = "VewList" ;
   final public static String VIEW_FORM_NAME = "ViewForm" ;
-  
+
   private List<String> listView_ = new ArrayList<String>() ;
 
-  public UIViewTab() throws Exception { 
+  public UIViewTab() throws Exception {
     UIGrid uiGrid = addChild(UIGrid.class, null, VIEW_LIST_NAME) ;
     uiGrid.getUIPageIterator().setId("ViewListIterator") ;
     uiGrid.configure("name", BEAN_FIELD, ACTIONS) ;
@@ -71,10 +71,10 @@ public class UIViewTab extends UIContainer {
   }
 
   public List<String> getListView() { return listView_ ; }
-  
+
   public void updateGrid(String nodeName) throws Exception {
     TemplateService tempService = getApplicationComponent(TemplateService.class) ;
-    NodeIterator iter = tempService.getAllTemplatesOfNodeType(false, nodeName, 
+    NodeIterator iter = tempService.getAllTemplatesOfNodeType(false, nodeName,
         SessionProviderFactory.createSystemProvider()) ;
     List<ViewData> data = new ArrayList<ViewData>() ;
     ViewData item  ;
@@ -94,19 +94,19 @@ public class UIViewTab extends UIContainer {
       item = new ViewData(node.getName(), rule.toString(), version) ;
       data.add(item);
     }
-    UIGrid uiGrid = getChild(UIGrid.class) ;    
+    UIGrid uiGrid = getChild(UIGrid.class) ;
     ObjectPageList objDPageList = new ObjectPageList(data, 4) ;
-    uiGrid.getUIPageIterator().setPageList(objDPageList) ;  
+    uiGrid.getUIPageIterator().setPageList(objDPageList) ;
   }
 
   public void setTabRendered() {
     UIViewTemplate uiViewTemplate = getAncestorOfType(UIViewTemplate.class) ;
     uiViewTemplate.setRenderedChild(UIViewTab.class) ;
   }
-  
+
   static public class EditActionListener extends EventListener<UIViewTab> {
     public void execute(Event<UIViewTab> event) throws Exception {
-      UIViewTab viewTab = event.getSource() ; 
+      UIViewTab viewTab = event.getSource() ;
       String viewName = event.getRequestContext().getRequestParameter(OBJECTID) ;
       UITemplateContent uiForm = viewTab.getChild(UITemplateContent.class) ;
       uiForm.update(viewName) ;
@@ -123,7 +123,7 @@ public class UIViewTab extends UIContainer {
       String nodeTypeName = uiViewTemplate.getNodeTypeName() ;
       String templateName = event.getRequestContext().getRequestParameter(OBJECTID) ;
       TemplateService templateService = viewTab.getApplicationComponent(TemplateService.class) ;
-      for(String template : TemplateService.UNDELETABLE_TEMPLATES) {        
+      for(String template : TemplateService.UNDELETABLE_TEMPLATES) {
         if(template.equals(templateName)){
           UIApplication app = viewTab.getAncestorOfType(UIApplication.class) ;
           Object[] args = {template} ;
@@ -153,8 +153,8 @@ public class UIViewTab extends UIContainer {
       this.roles = roles ;
       baseVersion = version ;
     }
-    public String getName(){return name ; } 
+    public String getName(){return name ; }
     public String getRoles(){return roles ; }
     public String getBaseVersion(){return baseVersion ; }
-  } 
+  }
 }

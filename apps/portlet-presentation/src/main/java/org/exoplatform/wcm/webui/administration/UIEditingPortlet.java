@@ -24,7 +24,7 @@ public class UIEditingPortlet extends UIPortletApplication {
   public UIEditingPortlet() throws Exception {
     addChild(UIEditingForm.class, null, null);
   }
-  
+
   /* (non-Javadoc)
    * @see org.exoplatform.webui.core.UIPortletApplication#processRender(org.exoplatform.webui.application.WebuiApplication, org.exoplatform.webui.application.WebuiRequestContext)
    */
@@ -34,7 +34,7 @@ public class UIEditingPortlet extends UIPortletApplication {
     elementS.setAttribute("type", "text/javascript");
     elementS.setAttribute("src", "/eXoWCMResources/javascript/eXo/wcm/frontoffice/private/QuickEdit.js");
     response.addProperty(MimeResponse.MARKUP_HEAD_ELEMENT,elementS);
-  
+
     UIEditingForm editingForm = getChild(UIEditingForm.class);
     UIFormSelectBox orderBySelectBox = editingForm.getChild(UIFormSelectBox.class);
     orderBySelectBox.setValue((Utils.isShowQuickEdit())?UIEditingForm.DRAFT:UIEditingForm.PUBLISHED);

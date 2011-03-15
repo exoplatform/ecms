@@ -25,13 +25,13 @@ import org.exoplatform.ecm.connector.fckeditor.FCKFileHandler;
  * Created by The eXo Platform SAS
  * Author : Anh Do Ngoc
  *          anh.do@exoplatform.com
- * Sep 12, 2008  
+ * Sep 12, 2008
  */
 public class LinkFileHandler extends FCKFileHandler {
 
   /**
    * Instantiates a new link file handler.
-   * 
+   *
    * @param container the container
    */
   public LinkFileHandler() {

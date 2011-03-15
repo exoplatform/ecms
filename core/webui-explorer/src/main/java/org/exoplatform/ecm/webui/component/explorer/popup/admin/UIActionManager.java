@@ -29,23 +29,23 @@ import org.exoplatform.webui.core.UIPopupWindow;
  * Author : Dang Van Minh
  *          minh.dang@exoplatform.com
  * Nov 8, 2006
- * 9:39:58 AM 
+ * 9:39:58 AM
  */
 @ComponentConfig(template = "system:/groovy/webui/core/UITabPane.gtmpl")
 public class UIActionManager extends UIContainer implements UIPopupComponent {
-  
+
   public UIActionManager() throws Exception {
     addChild(UIActionListContainer.class, null, null) ;
     addChild(UIActionContainer.class, null, null).setRendered(false) ;
   }
-  
+
   public void activate() throws Exception {
     UIActionTypeForm uiActionTypeForm = findFirstComponentOfType(UIActionTypeForm.class) ;
     uiActionTypeForm.update() ;
     UIActionList uiActionList = findFirstComponentOfType(UIActionList.class) ;
     uiActionList.updateGrid(getAncestorOfType(UIJCRExplorer.class).getCurrentNode(), uiActionList.getChild(UIPageIterator.class).getCurrentPage());
   }
-  
+
   /**
    * Remove lock if node is locked for editing
    */
@@ -64,7 +64,7 @@ public class UIActionManager extends UIContainer implements UIPopupComponent {
     }
     super.processRender(context);
   }
-  
+
   public void setDefaultConfig() throws Exception {
     UIActionContainer uiActionContainer = getChild(UIActionContainer.class) ;
     UIActionTypeForm uiActionType = uiActionContainer.getChild(UIActionTypeForm.class) ;
@@ -72,5 +72,5 @@ public class UIActionManager extends UIContainer implements UIPopupComponent {
     Class[] renderClasses = {UIActionTypeForm.class, UIActionForm.class} ;
     uiActionContainer.setRenderedChildrenOfTypes(renderClasses) ;
   }
-  
+
 }

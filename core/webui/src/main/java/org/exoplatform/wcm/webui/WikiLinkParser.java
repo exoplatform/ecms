@@ -43,86 +43,86 @@ import org.exoplatform.services.wcm.core.WCMConfigurationService;
 public class WikiLinkParser {
 
   /** The data source. */
-  private String dataSource; 
-  
+  private String dataSource;
+
   /** The Constant XWIKI_LINK. */
   public final static Pattern XWIKI_LINK = Pattern.compile("(\\[)([\\w\\W&&[^\\]]]+)(\\>)([:/\\w\\s\\.]+)(\\])");
-  
+
   /** The links. */
   Map<String, String> links = new HashMap<String, String>();
-  
+
   /**
    * Instantiates a new wiki link parser.
-   * 
+   *
    * @param source the source
    */
   public WikiLinkParser(String source) {
     this.dataSource = source;
   }
-  
+
   /**
    * Sets the data source.
-   * 
+   *
    * @param dataSource the new data source
    */
   public void setDataSource(String dataSource) {
     this.dataSource = dataSource;
   }
-  
+
   /**
    * Gets the data source.
-   * 
+   *
    * @return the data source
    */
   public String getDataSource() {
     return this.dataSource;
   }
-  
+
   /**
    * Gets the navigations.
-   * 
+   *
    * @return the navigations
-   * 
+   *
    * @throws Exception the exception
    */
   protected static List<PageNavigation> getNavigations() throws Exception {
     List<PageNavigation> allNav = Util.getUIPortal().getNavigations();
     String remoteUser = Util.getPortalRequestContext().getRemoteUser();
     List<PageNavigation> result = new ArrayList<PageNavigation>();
-    for (PageNavigation nav : allNav) {      
+    for (PageNavigation nav : allNav) {
       result.add(PageNavigationUtils.filter(nav, remoteUser));
-    }    
+    }
     return result;
-  }  
-  
+  }
+
   /**
    * Gets the base uri.
-   * 
+   *
    * @return the base uri
    */
   private String getBaseURI() {
     PortalRequestContext portalRequestContext = Util.getPortalRequestContext();
     HttpServletRequest servletRequest = portalRequestContext.getRequest();
     String baseURI = servletRequest.getScheme() + "://" + servletRequest.getServerName() + ":"
-        + servletRequest.getServerPort() + portalRequestContext.getPortalURI();   
+        + servletRequest.getServerPort() + portalRequestContext.getPortalURI();
     WCMConfigurationService configurationService = (WCMConfigurationService) ExoContainerContext.getCurrentContainer().getComponentInstanceOfType(WCMConfigurationService.class);
-    String wikiContext = configurationService.getRuntimeContextParam(WCMConfigurationService.CREATE_WIKI_PAGE_URI);    
+    String wikiContext = configurationService.getRuntimeContextParam(WCMConfigurationService.CREATE_WIKI_PAGE_URI);
     return baseURI.concat(wikiContext);
   }
-  
+
   /**
    * Generate link.
-   * 
+   *
    * @param uri the uri
    * @param label the label
-   * 
+   *
    * @return the string
-   * 
+   *
    * @throws Exception the exception
    */
   private String generateLink(String uri, String label) throws Exception {
-    if (uri == null || uri.trim().length() == 0 || uri.startsWith(".") || uri.endsWith(".")) return "#";    
-    if (uri.contains("//")) {      
+    if (uri == null || uri.trim().length() == 0 || uri.startsWith(".") || uri.endsWith(".")) return "#";
+    if (uri.contains("//")) {
       return "<a href=\"" + uri.trim() + "\">" + label + "</a>";
     }
     uri = uri.replace('.', '/').replace(" ", "");
@@ -133,7 +133,7 @@ public class WikiLinkParser {
     List<PageNavigation> navs = getNavigations();
     PageNode pageNode = null;
     for (PageNavigation navigation : navs) {
-      pageNode = PageNavigationUtils.searchPageNodeByUri(navigation, uri);      
+      pageNode = PageNavigationUtils.searchPageNodeByUri(navigation, uri);
       while (pageNode == null) {
         uri = uri.substring(0, uri.lastIndexOf('/'));
         pageNode = PageNavigationUtils.searchPageNodeByUri(navigation, uri);
@@ -148,14 +148,14 @@ public class WikiLinkParser {
     } else {
       correctLink = getBaseURI() + temp;
       return "<a href=\"" + correctLink + "\">" + label + "</a>";
-    }    
+    }
   }
-  
+
   /**
    * Correct links.
-   * 
+   *
    * @param list the list
-   * 
+   *
    * @throws Exception the exception
    */
   private void correctLinks(List<String> list) throws Exception {
@@ -167,16 +167,16 @@ public class WikiLinkParser {
       dataSource = dataSource.replace(list.get(i), correctLink);
     }
   }
-  
+
   /**
    * Parses the html.
-   * 
+   *
    * @return the string
-   * 
+   *
    * @throws Exception the exception
    */
   public String parseHTML() throws Exception {
-    dataSource = dataSource.replace("&gt;", ">");    
+    dataSource = dataSource.replace("&gt;", ">");
     Matcher matcher = XWIKI_LINK.matcher(dataSource);
     List<String> list = new ArrayList<String>();
     while(matcher.find()) {
@@ -184,7 +184,7 @@ public class WikiLinkParser {
       String label = matcher.group(2);
       list.add(dataSource.substring(matcher.start(), matcher.end()));
       links.put(link, label);
-    } 
+    }
     correctLinks(list);
     return dataSource;
   }

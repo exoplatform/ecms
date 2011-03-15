@@ -26,15 +26,15 @@ import org.jbpm.graph.exe.ExecutionContext;
  * Created by The eXo Platform SARL
  * Author : Pham Xuan Hoa
  *          hoa.pham@exoplatform.com
- * Dec 24, 2007  
+ * Dec 24, 2007
  */
 public class DelegateActionHandler implements ActionHandler {
-  
+
   private static final long serialVersionUID = 1L;
 
   private static final Log LOG = ExoLogger.getLogger(DelegateActionHandler.class);
-  
-  public void execute(ExecutionContext context) {    
+
+  public void execute(ExecutionContext context) {
     try {
       LOG.info("Delegate" + context.getVariable("delegator").toString());
       LOG.info("initiator" + context.getVariable("initiator").toString());
@@ -42,8 +42,8 @@ public class DelegateActionHandler implements ActionHandler {
       context.setVariable("delegate_flg", "true");                /* Set flag for delegate process */
       ProcessUtil.delegate(context);
     } catch (Exception e) {
-    	LOG.warn(e.getMessage(), e);
-    } 
+      LOG.warn(e.getMessage(), e);
+    }
   }
-  
+
 }

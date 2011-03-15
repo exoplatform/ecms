@@ -10,12 +10,12 @@ import org.ow2.bonita.facade.runtime.ActivityInstance;
 
 public class SetBackupTimer implements TxHook {
 
-	public void execute(APIAccessor api, ActivityInstance<ActivityBody> activity)
-			throws Exception {
-		// Get the publication date
-		Date endDate = (Date) api.getQueryRuntimeAPI().getProcessInstanceVariable(activity.getProcessInstanceUUID(), "endDate");
-		CommandTimer cTimer = new CommandTimer(activity.getProcessInstanceUUID(),activity.getActivityId(),endDate);
-		api.getCommandAPI().execute(cTimer);
-	}
+  public void execute(APIAccessor api, ActivityInstance<ActivityBody> activity)
+      throws Exception {
+    // Get the publication date
+    Date endDate = (Date) api.getQueryRuntimeAPI().getProcessInstanceVariable(activity.getProcessInstanceUUID(), "endDate");
+    CommandTimer cTimer = new CommandTimer(activity.getProcessInstanceUUID(),activity.getActivityId(),endDate);
+    api.getCommandAPI().execute(cTimer);
+  }
 
 }

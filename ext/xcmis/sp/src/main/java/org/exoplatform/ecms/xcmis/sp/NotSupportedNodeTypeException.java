@@ -22,7 +22,7 @@ import org.xcmis.spi.CmisRuntimeException;
 /**
  * Should be thrown if requested JCR node-type registered but that type is not
  * one of supported by xCMIS implementation.
- * 
+ *
  * @author <a href="mailto:andrew00x@gmail.com">Andrey Parfonov</a>
  * @version $Id: NotSupportedNodeTypeException.java 1260 2010-06-09 09:18:30Z
  *          andrew00x $

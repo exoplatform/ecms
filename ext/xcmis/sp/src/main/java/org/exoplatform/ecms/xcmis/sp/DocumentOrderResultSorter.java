@@ -42,7 +42,7 @@ public class DocumentOrderResultSorter implements Comparator<ScoredRow>
 
    /**
     * The Constructor.
-    * 
+    *
     * @param selectorName
     *           String selector name
     * @param storage
@@ -76,7 +76,7 @@ public class DocumentOrderResultSorter implements Comparator<ScoredRow>
 
    /**
     * Return comparable location of the object.
-    * 
+    *
     * @param identifer
     *           String
     * @return path String
@@ -92,7 +92,6 @@ public class DocumentOrderResultSorter implements Comparator<ScoredRow>
          }
          catch (ObjectNotFoundException e)
          {
-            // XXX : correct ?
             return null;
          }
          itemCache.put(identifer, obj);

@@ -27,7 +27,7 @@ import org.exoplatform.webui.event.EventListener;
  * Created by The eXo Platform SARL
  * Author : Dang Van Minh
  *          minh.dang@exoplatform.com
- * Oct 1, 2009  
+ * Oct 1, 2009
  * 3:46:19 AM
  */
 @ComponentConfig(
@@ -42,9 +42,9 @@ public class UIUploadBehaviorWithSameName extends UIConfirmMessage {
 
   public UIUploadBehaviorWithSameName() throws Exception {
   }
-  
+
   public String[] getActions() { return new String[] {"ReplaceData", "Back", "Keepfile"}; }
-  
+
   static  public class ReplaceDataActionListener extends EventListener<UIUploadBehaviorWithSameName> {
     public void execute(Event<UIUploadBehaviorWithSameName> event) throws Exception {
       UIUploadBehaviorWithSameName uiUploadBehavior = event.getSource();
@@ -58,7 +58,7 @@ public class UIUploadBehaviorWithSameName extends UIConfirmMessage {
       event.getRequestContext().addUIComponentToUpdateByAjax(uiUploadManager);
     }
   }
-  
+
   static  public class BackActionListener extends EventListener<UIUploadBehaviorWithSameName> {
     public void execute(Event<UIUploadBehaviorWithSameName> event) throws Exception {
       UIUploadBehaviorWithSameName uiUploadBehavior = event.getSource();
@@ -68,7 +68,7 @@ public class UIUploadBehaviorWithSameName extends UIConfirmMessage {
       event.getRequestContext().addUIComponentToUpdateByAjax(uiPopup.getParent());
     }
   }
- 
+
   static  public class KeepfileActionListener extends EventListener<UIUploadBehaviorWithSameName> {
     public void execute(Event<UIUploadBehaviorWithSameName> event) throws Exception {
       UIUploadBehaviorWithSameName uiUploadBehavior = event.getSource();
@@ -78,6 +78,6 @@ public class UIUploadBehaviorWithSameName extends UIConfirmMessage {
       uiForm.doUpload(event, true);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiUploadManager);
     }
-  }  
+  }
 }
 

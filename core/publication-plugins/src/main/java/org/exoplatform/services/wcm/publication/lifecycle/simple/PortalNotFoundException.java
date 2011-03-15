@@ -23,13 +23,13 @@ package org.exoplatform.services.wcm.publication.lifecycle.simple;
  * Sep 19, 2008
  */
 public class PortalNotFoundException extends Exception{
- 
+
   /** The Constant serialVersionUID. */
   private static final long serialVersionUID = 1L;
-   
+
   /**
    * Instantiates a new portal not found exception.
-   * 
+   *
    * @param message the message
    */
   public PortalNotFoundException(String message) {

@@ -20,8 +20,8 @@ package org.exoplatform.services.wcm.core;
  * Created by The eXo Platform SAS
  * @author : Hoa.Pham
  *          hoa.pham@exoplatform.com
- * May 28, 2008  
+ * May 28, 2008
  */
-public class WebSchemaHandlerNotFoundException extends Exception {  
-  private static final long serialVersionUID = 1L;  
+public class WebSchemaHandlerNotFoundException extends Exception {
+  private static final long serialVersionUID = 1L;
 }

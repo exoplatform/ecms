@@ -50,7 +50,7 @@ import org.exoplatform.webui.ext.manager.UIAbstractManagerComponent;
  * Created by The eXo Platform SARL
  * Author : Hoang Van Hung
  *          hunghvit@gmail.com
- * Aug 6, 2009  
+ * Aug 6, 2009
  */
 
 @ComponentConfig(
@@ -61,19 +61,19 @@ import org.exoplatform.webui.ext.manager.UIAbstractManagerComponent;
 
 public class CheckOutManageComponent extends UIAbstractManagerComponent {
 
-  private static final List<UIExtensionFilter> FILTERS 
-  		= Arrays.asList(new UIExtensionFilter[]{new IsNotInTrashFilter(),
-  																						new CanSetPropertyFilter(), 
-  																						new IsNotLockedFilter(), 
-  																						new IsNotCheckedOutFilter(), 
-  																						new IsVersionableFilter(),
-  																						new IsNotTrashHomeNodeFilter()});
-  
+  private static final List<UIExtensionFilter> FILTERS
+      = Arrays.asList(new UIExtensionFilter[]{new IsNotInTrashFilter(),
+                                              new CanSetPropertyFilter(),
+                                              new IsNotLockedFilter(),
+                                              new IsNotCheckedOutFilter(),
+                                              new IsVersionableFilter(),
+                                              new IsNotTrashHomeNodeFilter()});
+
   @UIExtensionFilters
   public List<UIExtensionFilter> getFilters() {
     return FILTERS;
   }
-  
+
   public static void checkOutManage(Event<? extends UIComponent> event, UIJCRExplorer uiExplorer,
       UIApplication uiApp) throws Exception {
     String nodePath = event.getRequestContext().getRequestParameter(OBJECTID);
@@ -85,20 +85,20 @@ public class CheckOutManageComponent extends UIAbstractManagerComponent {
     } else {
       throw new IllegalArgumentException("The ObjectId is invalid '"+ nodePath + "'");
     }
-    Session session = uiExplorer.getSessionByWorkspace(wsName);      
+    Session session = uiExplorer.getSessionByWorkspace(wsName);
     // Use the method getNodeByPath because it is link aware
     Node node = uiExplorer.getNodeByPath(nodePath, session);
     // Reset the path to manage the links that potentially create virtual path
     nodePath = node.getPath();
     // Reset the session to manage the links that potentially change of workspace
     session = node.getSession();
-    // Reset the workspace name to manage the links that potentially change of workspace 
-    wsName = session.getWorkspace().getName();  
+    // Reset the workspace name to manage the links that potentially change of workspace
+    wsName = session.getWorkspace().getName();
 
     try {
       node.checkout();
     } catch(PathNotFoundException path) {
-      uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.path-not-found-exception", 
+      uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.path-not-found-exception",
           null,ApplicationMessage.WARNING));
       event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
       return;
@@ -116,10 +116,10 @@ public class CheckOutManageComponent extends UIAbstractManagerComponent {
       checkOutManage(event, uiExplorer, uiApp);
     }
   }
-  
+
   @Override
   public Class<? extends UIAbstractManager> getUIAbstractManagerClass() {
     return null;
   }
-  
+
 }

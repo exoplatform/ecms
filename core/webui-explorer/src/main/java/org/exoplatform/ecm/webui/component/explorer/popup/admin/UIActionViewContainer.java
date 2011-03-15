@@ -23,9 +23,9 @@ import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
 
 /**
- * Created by The eXo Platform SARL 
- * Author : Pham Tuan 
- *          phamtuanchip@yahoo.de 
+ * Created by The eXo Platform SARL
+ * Author : Pham Tuan
+ *          phamtuanchip@yahoo.de
  * Nov 15, 2006 11:10:20 AM
  */
 

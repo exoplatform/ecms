@@ -51,8 +51,8 @@ import org.exoplatform.webui.ext.manager.UIAbstractManagerComponent;
  * Created by The eXo Platform SARL
  * Author : Hoang Van Hung
  *          hunghvit@gmail.com
- * Aug 6, 2009  
- */                         
+ * Aug 6, 2009
+ */
 
 @ComponentConfig(
     events = {
@@ -64,18 +64,21 @@ public class CutManageComponent extends UIAbstractManagerComponent {
 
   private final static Log       LOG  = ExoLogger.getLogger(CutManageComponent.class);
 
-  private static final List<UIExtensionFilter> FILTERS 
-  		= Arrays.asList(new UIExtensionFilter[] { new IsNotInTrashFilter(),
-  																							new CanCutNodeFilter(), 
-  																							new IsNotLockedFilter(),
-  																							new IsNotTrashHomeNodeFilter() });
+  private static final List<UIExtensionFilter> FILTERS
+      = Arrays.asList(new UIExtensionFilter[] { new IsNotInTrashFilter(),
+                                                new CanCutNodeFilter(),
+                                                new IsNotLockedFilter(),
+                                                new IsNotTrashHomeNodeFilter() });
 
   @UIExtensionFilters
   public List<UIExtensionFilter> getFilters() {
     return FILTERS;
   }
-  
-  private static void processCut(String nodePath, Event<CutManageComponent> event, UIJCRExplorer uiExplorer, boolean isMultiSelect) throws Exception {
+
+  private static void processCut(String nodePath,
+                                 Event<CutManageComponent> event,
+                                 UIJCRExplorer uiExplorer,
+                                 boolean isMultiSelect) throws Exception {
     UIWorkingArea uiWorkingArea = uiExplorer.getChild(UIWorkingArea.class);
     UIApplication uiApp = event.getSource().getAncestorOfType(UIApplication.class);
     Matcher matcher = UIWorkingArea.FILE_EXPLORER_URL_SYNTAX.matcher(nodePath);
@@ -95,18 +98,18 @@ public class CutManageComponent extends UIAbstractManagerComponent {
       nodePath = selectedNode.getPath();
       // Reset the session to manage the links that potentially change of workspace
       session = selectedNode.getSession();
-      // Reset the workspace name to manage the links that potentially change of workspace 
+      // Reset the workspace name to manage the links that potentially change of workspace
       wsName = session.getWorkspace().getName();
     } catch(ConstraintViolationException cons) {
       uiExplorer.getSession().refresh(false);
       uiExplorer.refreshExplorer();
-      uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.constraintviolation-exception", 
+      uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.constraintviolation-exception",
           null,ApplicationMessage.WARNING));
       event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
       uiExplorer.updateAjax(event);
-      return;        
+      return;
     } catch(PathNotFoundException path) {
-      uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.path-not-found-exception", 
+      uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.path-not-found-exception",
           null,ApplicationMessage.WARNING));
       event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
       return;
@@ -122,7 +125,7 @@ public class CutManageComponent extends UIAbstractManagerComponent {
           clipboards.remove(command);
           break;
         }
-      }       
+      }
       ClipboardCommand clipboard = new ClipboardCommand();
       clipboard.setType(ClipboardCommand.CUT);
       clipboard.setSrcPath(nodePath);
@@ -140,14 +143,16 @@ public class CutManageComponent extends UIAbstractManagerComponent {
     }
   }
 
-  private static void processMultipleCut(String[] nodePaths, Event<CutManageComponent> event, UIJCRExplorer uiExplorer) throws Exception {
+  private static void processMultipleCut(String[] nodePaths,
+                                         Event<CutManageComponent> event,
+                                         UIJCRExplorer uiExplorer) throws Exception {
     for(int i=0; i< nodePaths.length; i++) {
       processCut(nodePaths[i], event, uiExplorer, true);
     }
     if(!uiExplorer.getPreference().isJcrEnable()) uiExplorer.getSession().save();
     uiExplorer.updateAjax(event);
   }
-  
+
   public static void cutManage(Event<CutManageComponent> event, UIJCRExplorer uiExplorer) throws Exception {
     UIWorkingArea uiWorkingArea = event.getSource().getParent();
     String nodePath = event.getRequestContext().getRequestParameter(OBJECTID);
@@ -158,14 +163,14 @@ public class CutManageComponent extends UIAbstractManagerComponent {
       processCut(nodePath, event, uiExplorer, false);
     }
   }
-  
+
   public static class CutActionListener extends UIWorkingAreaActionListener<CutManageComponent> {
     public void processEvent(Event<CutManageComponent> event) throws Exception {
       UIJCRExplorer uiExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class);
       cutManage(event, uiExplorer);
     }
   }
-  
+
   @Override
   public Class<? extends UIAbstractManager> getUIAbstractManagerClass() {
     return null;

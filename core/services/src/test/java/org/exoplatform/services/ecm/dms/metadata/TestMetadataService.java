@@ -29,10 +29,10 @@ import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 
 /**
  * Created by The eXo Platform SARL
- * June 09, 2009  
+ * June 09, 2009
  */
 public class TestMetadataService extends BaseDMSTestCase {
-    
+
   private MetadataService metadataService;
   private String expectedArticleDialogPath = "/exo:ecm/metadata/exo:article/dialogs/dialog1";
   private NodeHierarchyCreator nodeHierarchyCreator;
@@ -40,7 +40,7 @@ public class TestMetadataService extends BaseDMSTestCase {
   private Session sessionDMS;
 
   static private final String EXO_ARTICLE = "exo:article".intern();
-  
+
   public void setUp() throws Exception {
     super.setUp();
     metadataService = (MetadataService)container.getComponentInstanceOfType(MetadataService.class);
@@ -48,7 +48,7 @@ public class TestMetadataService extends BaseDMSTestCase {
     baseMetadataPath = nodeHierarchyCreator.getJcrPath(BasePath.METADATA_PATH);
     sessionDMS = sessionProviderService_.getSystemSessionProvider(null).getSession(DMSSYSTEM_WS, repository);
   }
-  
+
   /**
    * Test MetadataServiceImpl.init()
    * Check all data initiated from repository in test-metadata-configuration.xml file
@@ -57,7 +57,7 @@ public class TestMetadataService extends BaseDMSTestCase {
   public void testInit() throws Exception {
     metadataService.init();
   }
-  
+
   /**
    * Test method: MetadataServiceImpl.getMetadataList()
    * Input: repository      String
@@ -76,7 +76,7 @@ public class TestMetadataService extends BaseDMSTestCase {
     assertTrue(metadataTypes.contains("rma:accessionable"));
     assertTrue(metadataTypes.contains("rma:destroyable"));
   }
-  
+
   /**
    * Test method: MetadataServiceImpl.getAllMetadatasNodeType()
    * Input: repository      String
@@ -88,7 +88,7 @@ public class TestMetadataService extends BaseDMSTestCase {
     List<NodeType> metadataTypes = metadataService.getAllMetadatasNodeType(REPO_NAME);
     assertNotNull(metadataTypes.size());
   }
-  
+
   /**
    * Test method: MetadataServiceImpl.addMetadata()
    * Input: nodetype    Node name for processing
@@ -102,17 +102,17 @@ public class TestMetadataService extends BaseDMSTestCase {
    */
   public void testAddMetadata() throws Exception {
     metadataService.addMetadata(EXO_ARTICLE, true, "*:/platform/administrators;*:/platform/users", "This is content", true, REPO_NAME);
-    
+
     Node myMetadata = (Node)sessionDMS.getItem("/exo:ecm/metadata/exo:article/dialogs/dialog1");
     assertEquals("This is content", myMetadata.getNode("jcr:content").getProperty("jcr:data").getString());
-    
+
     String roles = metadataService.getMetadataRoles(EXO_ARTICLE, true, repository.getConfiguration().getName());
     assertEquals("*:/platform/administrators; *:/platform/users", roles);
   }
-  
+
   /**
    * Test method: MetadataServiceImpl.getMetadataTemplate()
-   * Input: name            Node name      
+   * Input: name            Node name
    *        isDialog        true: Get dialog template content
    *                        false: Get view template content
    *        repository      repository name
@@ -140,7 +140,7 @@ public class TestMetadataService extends BaseDMSTestCase {
 
   /**
    * Test method: MetadataServiceImpl.getExternalMetadataType()
-   * Input: repository    String    
+   * Input: repository    String
    *                      The name of repository
    * Expect: Remove metadata
    * @throws Exception
@@ -149,10 +149,10 @@ public class TestMetadataService extends BaseDMSTestCase {
     List<String> extenalMetaTypes = metadataService.getExternalMetadataType(REPO_NAME);
     assertEquals(2, extenalMetaTypes.size());
   }
-  
+
   /**
    * Test method: MetadataServiceImpl.getMetadataPath()
-   * Input: name            Node name      
+   * Input: name            Node name
    *        isDialog        true: Get dialog template content
    *                        false: Get view template content
    *        repository      repository name
@@ -166,7 +166,7 @@ public class TestMetadataService extends BaseDMSTestCase {
 
   /**
    * Test method: MetadataServiceImpl.getMetadataRoles()
-   * Input: name            Node name      
+   * Input: name            Node name
    *        isDialog        true: Get dialog template content
    *                        false: Get view template content
    *        repository      repository name
@@ -180,7 +180,7 @@ public class TestMetadataService extends BaseDMSTestCase {
 
   /**
    * Test method: MetadataServiceImpl.hasMetadata()
-   * Input: name            Node name      
+   * Input: name            Node name
    *        repository      repository name
    * Expect: true : Exist this node name
    *         false: Not exist this node name
@@ -192,9 +192,9 @@ public class TestMetadataService extends BaseDMSTestCase {
     metadataService.removeMetadata(EXO_ARTICLE, REPO_NAME);
     assertFalse(metadataService.hasMetadata(EXO_ARTICLE, REPO_NAME));
   }
-  
+
   /**
-   * Clean all metadata test node 
+   * Clean all metadata test node
    */
   public void tearDown() throws Exception {
     Node myMetadata = (Node)sessionDMS.getItem(baseMetadataPath);

@@ -24,15 +24,15 @@ import javax.jcr.Node;
  * Created by The eXo Platform SAS
  * Author : Pham Xuan Hoa
  *          hoa.pham@exoplatform.com
- * Jan 22, 2007  
+ * Jan 22, 2007
  */
 public interface CommentsService {
-  
+
   /**
    * Comment the document is specified by the node by giving the commentor, email, site, comment and
    * language params
    * Any language belongs to this document can be commented.
-   * This method uses variables to store values which are commented from user for all kind languages 
+   * This method uses variables to store values which are commented from user for all kind languages
    * of this document
    * @param document        The node document is commented
    * @param commentor       The name of current user
@@ -40,14 +40,14 @@ public interface CommentsService {
    * @param email           The email of current user
    *                        Can be <code>null</code>
    * @param site            The site of current user
-   *                        Can be <code>null</code>                      
+   *                        Can be <code>null</code>
    * @param comment         The comment's content
    * @param language        The language of this document is commented
    * @see                   Node
    * @throws Exception
    */
   public void addComment(Node document, String commentor, String email, String site, String comment, String language) throws Exception ;
-  
+
   /**
    * Update comment for document: set new comment for node
    * @param comment
@@ -55,7 +55,7 @@ public interface CommentsService {
    * @throws Exception
    */
   public void updateComment(Node commentNode, String newComment) throws Exception;
-  
+
   /**
    * Delete comment of document by given comment node
    * @param commentNode
@@ -63,12 +63,12 @@ public interface CommentsService {
    */
   public void deleteComment(Node commentNode) throws Exception;
   /**
-   * Gets all comments from the specified node 
+   * Gets all comments from the specified node
    * @param document        The node document is commented
    * @param language        The language of this document is commented
    * @see                   Node
    * @throws Exception
    */
   public List<Node> getComments(Node document, String language) throws Exception ;
-  
+
 }

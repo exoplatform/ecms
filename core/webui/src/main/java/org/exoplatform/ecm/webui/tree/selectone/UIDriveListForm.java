@@ -20,7 +20,7 @@ package org.exoplatform.ecm.webui.tree.selectone;
  * Created by The eXo Platform SAS
  * @author : Hoa.Pham
  *          hoa.pham@exoplatform.com
- * Jun 23, 2008  
+ * Jun 23, 2008
  */
 public class UIDriveListForm {
 

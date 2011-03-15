@@ -75,57 +75,59 @@ import org.exoplatform.webui.event.EventListener;
         @EventConfig(listeners = UITreeExplorer.CollapseActionListener.class),
         @EventConfig(listeners = UITreeExplorer.ExpandTreeActionListener.class),
         @EventConfig(listeners = UITreeExplorer.ShowDrivesAreaActionListener.class)
-    }    
+    }
 )
 
 public class UITreeExplorer extends UIContainer {
-  
+
   /**
    * Logger.
    */
   private static final Log LOG  = ExoLogger.getLogger("dms.UIJCRExplorer");
   private static final String EXO_RESTORE_LOCATION = "exo:restoreLocation";
   private TreeNode treeRoot_ ;
-  public UITreeExplorer() throws Exception { 
+  public UITreeExplorer() throws Exception {
   }
-  
-  
+
+
   public UIRightClickPopupMenu getContextMenu() {
     return getAncestorOfType(UIWorkingArea.class).getChild(UIRightClickPopupMenu.class) ;
   }
-  
+
   UIWorkingArea getWorkingArea() {
     return getAncestorOfType(UIWorkingArea.class);
   }
-  
+
   UIComponent getCustomAction() throws Exception {
     return getAncestorOfType(UIWorkingArea.class).getCustomAction();
   }
-  
+
   public TreeNode getRootTreeNode() { return treeRoot_ ; }
-  
+
   public String getRootActionList() throws Exception {
     UIJCRExplorer uiExplorer = getAncestorOfType(UIJCRExplorer.class);
-    if(uiExplorer.getAllClipBoard().size() > 0) {
-      return getContextMenu().getJSOnclickShowPopup(uiExplorer.getCurrentDriveWorkspace() + ":" + uiExplorer.getRootPath(), "Paste").toString() ;
+    if (uiExplorer.getAllClipBoard().size() > 0) {
+      return getContextMenu().getJSOnclickShowPopup(uiExplorer.getCurrentDriveWorkspace() + ":"
+                                                        + uiExplorer.getRootPath(),
+                                                    "Paste").toString();
     }
     return "" ;
   }
-  
+
   public boolean isDirectlyDrive() {
-    PortletPreferences portletPref = 
+    PortletPreferences portletPref =
       getAncestorOfType(UIJCRExplorerPortlet.class).getPortletPreferences();
     String usecase =  portletPref.getValue("usecase", "").trim();
     if ("selection".equals(usecase)) {
       return false;
     }
     return true;
-  }  
-  
+  }
+
   public String getDriveName() {
     return getAncestorOfType(UIJCRExplorer.class).getDriveData().getName() ;
-  }  
-  
+  }
+
   public String getLabel()  {
     RequestContext context = RequestContext.getCurrentInstance();
     ResourceBundle res = context.getApplicationResourceBundle();
@@ -134,9 +136,9 @@ public class UITreeExplorer extends UIContainer {
       return res.getString("Drives.label." + id.replace(".", "").replace(" ", ""));
     } catch (MissingResourceException ex) {
       return id.replace(".", " / ");
-    }    
+    }
   }
-  
+
   public boolean isAllowNodeTypesOnTree(Node node) throws RepositoryException {
     DriveData currentDrive = getAncestorOfType(UIJCRExplorer.class).getDriveData();
     String allowNodeTypesOnTree = currentDrive.getAllowNodeTypesOnTree();
@@ -147,12 +149,12 @@ public class UITreeExplorer extends UIContainer {
     }
     return false;
   }
-    
+
   public String getActionsList(Node node) throws Exception {
     if(node == null) return "" ;
-    UIJCRExplorer uiExplorer = getAncestorOfType(UIJCRExplorer.class);         
+    UIJCRExplorer uiExplorer = getAncestorOfType(UIJCRExplorer.class);
     try {
-      NodeFinder nodeFinder = getApplicationComponent(NodeFinder.class);      
+      NodeFinder nodeFinder = getApplicationComponent(NodeFinder.class);
       nodeFinder.getItem(uiExplorer.getSession(), node.getPath());
       //uiExplorer.getSession().getItem(node.getPath());
       return getAncestorOfType(UIWorkingArea.class).getActionsExtensionList(node) ;
@@ -161,97 +163,100 @@ public class UITreeExplorer extends UIContainer {
       return "";
     }
   }
-  
+
   public List<Node> getCustomActions(Node node) throws Exception {
     return getAncestorOfType(UIWorkingArea.class).getCustomActions(node) ;
   }
-  
+
   public boolean isPreferenceNode(Node node) {
     return getAncestorOfType(UIWorkingArea.class).isPreferenceNode(node) ;
   }
-  
+
   @SuppressWarnings("unchecked")
-  public List<TreeNode> getRenderedChildren(TreeNode treeNode) throws Exception {    
-    if(isPaginated(treeNode)) {      
-      UITreeNodePageIterator pageIterator = findComponentById(treeNode.getPath());      
+  public List<TreeNode> getRenderedChildren(TreeNode treeNode) throws Exception {
+    if(isPaginated(treeNode)) {
+      UITreeNodePageIterator pageIterator = findComponentById(treeNode.getPath());
       return pageIterator.getCurrentPageData();
     }
     return treeNode.getChildren();
   }
-  
+
   public boolean isSystemWorkspace() throws Exception {
     return getAncestorOfType(UIJCRExplorer.class).isSystemWorkspace() ;
   }
-  
-  public UITreeNodePageIterator getUIPageIterator(String id) throws Exception {    
+
+  public UITreeNodePageIterator getUIPageIterator(String id) throws Exception {
     return findComponentById(id);
   }
-  
+
   public boolean isSymLink(Node node) throws RepositoryException {
     LinkManager linkManager = getApplicationComponent(LinkManager.class);
     return linkManager.isLink(node);
   }
-  
+
   public String getViewTemplate(String nodeTypeName, String templateName) throws Exception {
     TemplateService tempServ = getApplicationComponent(TemplateService.class) ;
     return tempServ.getTemplatePath(false, nodeTypeName, templateName) ;
   }
-  
+
   public boolean isPaginated(TreeNode treeNode) {
     UIJCRExplorer jcrExplorer = getAncestorOfType(UIJCRExplorer.class) ;
     int nodePerPages = jcrExplorer.getPreference().getNodesPerPage();
-    return (treeNode.getChildrenSize()>nodePerPages) ;   
+    return (treeNode.getChildrenSize()>nodePerPages) ;
   }
-  
+
   public String getPortalName() {
     ExoContainer container = ExoContainerContext.getCurrentContainer();
-    PortalContainerInfo containerInfo = (PortalContainerInfo)container.getComponentInstanceOfType(PortalContainerInfo.class);      
-    return containerInfo.getContainerName(); 
+    PortalContainerInfo containerInfo = (PortalContainerInfo) container.getComponentInstanceOfType(PortalContainerInfo.class);
+    return containerInfo.getContainerName();
   }
-  
+
   public String getServerPath() {
     PortletRequestContext portletRequestContext = PortletRequestContext.getCurrentInstance() ;
-    String prefixWebDAV = portletRequestContext.getRequest().getScheme() + "://" + 
+    String prefixWebDAV = portletRequestContext.getRequest().getScheme() + "://" +
                           portletRequestContext.getRequest().getServerName() + ":" +
                           String.format("%s",portletRequestContext.getRequest().getServerPort()) ;
     return prefixWebDAV ;
   }
-  
-  public String getRepository() { 
+
+  public String getRepository() {
     return getAncestorOfType(UIJCRExplorer.class).getRepositoryName();
-  }    
-  
+  }
+
   public String getEncodeCurrentPath() {
     return encodeBase64(getAncestorOfType(UIJCRExplorer.class).getCurrentPath());
   }
-  
+
   public static String encodeBase64(String value) {
     value = value == null ? "" : value;
     return Base64.encode(value.getBytes()).replaceAll(Base64.LINE_SEPARATOR,"");
   }
-  
-  private void addTreeNodePageIteratorAsChild(String id,ObjectPageList pageList, String selectedPath,String currentPath) throws Exception {
-    if(findComponentById(id)== null) {
-      UITreeNodePageIterator nodePageIterator = addChild(UITreeNodePageIterator.class,null,id);
+
+  private void addTreeNodePageIteratorAsChild(String id,
+                                              ObjectPageList pageList,
+                                              String selectedPath,
+                                              String currentPath) throws Exception {
+    if (findComponentById(id) == null) {
+      UITreeNodePageIterator nodePageIterator = addChild(UITreeNodePageIterator.class, null, id);
       nodePageIterator.setPageList(pageList);
       nodePageIterator.setSelectedPath(selectedPath);
-    }else {
-      UITreeNodePageIterator existedComponent = findComponentById(id);      
+    } else {
+      UITreeNodePageIterator existedComponent = findComponentById(id);
       int currentPage = existedComponent.getCurrentPage();
       existedComponent.setPageList(pageList);
-      if(!selectedPath.equalsIgnoreCase(currentPath)) {
-        if(currentPage <= existedComponent.getAvailablePage()) {
+      if (!selectedPath.equalsIgnoreCase(currentPath)) {
+        if (currentPage <= existedComponent.getAvailablePage()) {
           existedComponent.setCurrentPage(currentPage);
-        } 
-      }      
+        }
+      }
     }
   }
-  
+
   private Node getRootNode() throws Exception {
     UIJCRExplorer uiExplorer = getAncestorOfType(UIJCRExplorer.class) ;
     return uiExplorer.getRootNode();
   }
-  
+
   private List<Node> getTreeWithNoDocuments(List<Node> childrenList) throws Exception {
     TemplateService templateService = getApplicationComponent(TemplateService.class);
     List<String> nodeTypes = templateService.getAllDocumentNodeTypes();
@@ -262,15 +267,15 @@ public class UITreeExplorer extends UIContainer {
     }
     return treeList;
   }
-  
+
   private boolean isTimelineView() {
     UIJCRExplorer jcrExplorer = getAncestorOfType(UIJCRExplorer.class);
     UIAddressBar uiAddressBar = jcrExplorer.findFirstComponentOfType(UIAddressBar.class);
-    if(uiAddressBar.getSelectedViewName() != null && 
+    if(uiAddressBar.getSelectedViewName() != null &&
         uiAddressBar.getSelectedViewName().equals("timeline-view")) return true;
     return false;
   }
-  
+
   private void buildTree(String path) throws Exception {
     UIJCRExplorer jcrExplorer = getAncestorOfType(UIJCRExplorer.class);
     int nodePerPages = jcrExplorer.getPreference().getNodesPerPage();
@@ -283,7 +288,7 @@ public class UITreeExplorer extends UIContainer {
     String rootPath = treeRoot.getPath();
     String prefix = rootPath;
     if (!rootPath.equals("/")) {
-      prefix += "/";      
+      prefix += "/";
     }
     if(isTimelineView()) {
       temp.setChildren(getTreeWithNoDocuments(jcrExplorer.getChildrenList(rootPath, false)));
@@ -312,7 +317,7 @@ public class UITreeExplorer extends UIContainer {
       } else {
         temp.setChildren(jcrExplorer.getChildrenList(subPath, false));
       }
-      
+
       if (temp.getChildrenSize() > nodePerPages) {
         ObjectPageList list = new ObjectPageList(temp.getChildren(), nodePerPages);
         addTreeNodePageIteratorAsChild(temp.getPath(), list, subPath, path);
@@ -320,22 +325,22 @@ public class UITreeExplorer extends UIContainer {
     }
     treeRoot_ = treeRoot;
   }
-  
-  public void buildTree() throws Exception {    
+
+  public void buildTree() throws Exception {
     buildTree(null);
-    
+
   }
-  
+
   public boolean isDocumentNodeType(Node node) throws Exception {
     TemplateService templateService = getApplicationComponent(TemplateService.class);
     return templateService.isManagedNodeType(node.getPrimaryNodeType().getName());
-  }    
-  
+  }
+
   public String getSelectedPath() throws Exception {
-    UIJCRExplorer uiExplorer = getAncestorOfType(UIJCRExplorer.class) ;    
+    UIJCRExplorer uiExplorer = getAncestorOfType(UIJCRExplorer.class) ;
     return encodeBase64(uiExplorer.getCurrentPath());
   }
-  
+
   static public class ExpandActionListener extends EventListener<UITreeExplorer> {
     public void execute(Event<UITreeExplorer> event) throws Exception {
       UITreeExplorer uiTreeExplorer = event.getSource();
@@ -343,40 +348,40 @@ public class UITreeExplorer extends UIContainer {
       UIJCRExplorer uiExplorer = uiTreeExplorer.getAncestorOfType(UIJCRExplorer.class) ;
       UIApplication uiApp = uiTreeExplorer.getAncestorOfType(UIApplication.class) ;
       String workspaceName = event.getRequestContext().getRequestParameter("workspaceName");
-      Item item = null;      
-      try {      
+      Item item = null;
+      try {
         Session session = uiExplorer.getSessionByWorkspace(workspaceName);
         // Check if the path exists
         NodeFinder nodeFinder = uiTreeExplorer.getApplicationComponent(NodeFinder.class);
         item = nodeFinder.getItem(session, path);
       } catch(PathNotFoundException pa) {
-        uiApp.addMessage(new ApplicationMessage("UITreeExplorer.msg.path-not-found", null, 
+        uiApp.addMessage(new ApplicationMessage("UITreeExplorer.msg.path-not-found", null,
             ApplicationMessage.WARNING)) ;
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
         return ;
       } catch(ItemNotFoundException inf) {
-          uiApp.addMessage(new ApplicationMessage("UITreeExplorer.msg.path-not-found", null, 
+          uiApp.addMessage(new ApplicationMessage("UITreeExplorer.msg.path-not-found", null,
               ApplicationMessage.WARNING)) ;
           event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
           return ;
       } catch(AccessDeniedException ace) {
-          uiApp.addMessage(new ApplicationMessage("UIDocumentInfo.msg.access-denied", null, 
+          uiApp.addMessage(new ApplicationMessage("UIDocumentInfo.msg.access-denied", null,
                   ApplicationMessage.WARNING)) ;
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
-        return ;        
+        return ;
       } catch(RepositoryException e) {
-        LOG.error("Repository cannot be found");        
-        uiApp.addMessage(new ApplicationMessage("UITreeExplorer.msg.repository-error", null, 
+        LOG.error("Repository cannot be found");
+        uiApp.addMessage(new ApplicationMessage("UITreeExplorer.msg.repository-error", null,
             ApplicationMessage.WARNING)) ;
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
-        return ;        
+        return ;
       } catch (Exception e) {
         JCRExceptionManager.process(uiApp, e);
         return;
       }
-      if (isInTrash(item)) 
+      if (isInTrash(item))
         return;
-      
+
       UIWorkingArea uiWorkingArea = uiExplorer.getChild(UIWorkingArea.class);
       UIDocumentWorkspace uiDocumentWorkspace = uiWorkingArea.getChild(UIDocumentWorkspace.class);
       if(!uiDocumentWorkspace.isRendered()) {
@@ -384,21 +389,21 @@ public class UITreeExplorer extends UIContainer {
         uiDocumentWorkspace.setRendered(true);
       } else {
         uiDocumentWorkspace.setRenderedChild(UIDocumentContainer.class);
-      }      
+      }
       uiExplorer.setSelectNode(workspaceName, path);
 //      UIDocumentContainer uiDocumentContainer = uiDocumentWorkspace.getChild(UIDocumentContainer.class);
 //      UIDocumentInfo uiDocumentInfo = uiDocumentContainer.getChildById("UIDocumentInfo") ;
-      
+
       uiExplorer.updateAjax(event);
     }
-    
+
   }
-  
+
   private static boolean isInTrash(Item item) throws RepositoryException {
     return (item instanceof Node) &&
            ((Node) item).isNodeType(EXO_RESTORE_LOCATION);
   }
-  
+
   static public class ExpandTreeActionListener extends EventListener<UITreeExplorer> {
     public void execute(Event<UITreeExplorer> event) throws Exception {
       UITreeExplorer uiTreeExplorer = event.getSource();
@@ -408,7 +413,7 @@ public class UITreeExplorer extends UIContainer {
       String workspaceName = event.getRequestContext().getRequestParameter("workspaceName");
       Item item = null;
       try {
-        Session session = uiExplorer.getSessionByWorkspace(workspaceName);        
+        Session session = uiExplorer.getSessionByWorkspace(workspaceName);
         // Check if the path exists
         NodeFinder nodeFinder = uiTreeExplorer.getApplicationComponent(NodeFinder.class);
         item = nodeFinder.getItem(session, path);
@@ -431,47 +436,48 @@ public class UITreeExplorer extends UIContainer {
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
         return;
       } catch(RepositoryException e) {
-        LOG.error("Repository cannot be found");        
-        uiApp.addMessage(new ApplicationMessage("UITreeExplorer.msg.repository-error", null, 
+        LOG.error("Repository cannot be found");
+        uiApp.addMessage(new ApplicationMessage("UITreeExplorer.msg.repository-error", null,
             ApplicationMessage.WARNING)) ;
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
-        return ;        
+        return ;
       } catch (Exception e) {
         JCRExceptionManager.process(uiApp, e);
         return;
       }
       if (isInTrash(item))
         return;
-      
-      if (uiExplorer.getPreference().isShowSideBar() && uiExplorer.getAncestorOfType(UIJCRExplorerPortlet.class).isShowSideBar()) {
+
+      if (uiExplorer.getPreference().isShowSideBar()
+          && uiExplorer.getAncestorOfType(UIJCRExplorerPortlet.class).isShowSideBar()) {
         uiTreeExplorer.buildTree(path);
       }
     }
   }
-  
+
   static public class CollapseActionListener extends EventListener<UITreeExplorer> {
     public void execute(Event<UITreeExplorer> event) throws Exception {
       UITreeExplorer treeExplorer = event.getSource();
       UIApplication uiApp = treeExplorer.getAncestorOfType(UIApplication.class);
-      try {       
+      try {
         String path = event.getRequestContext().getRequestParameter(OBJECTID) ;
         UIJCRExplorer uiExplorer = treeExplorer.getAncestorOfType(UIJCRExplorer.class) ;
         path = LinkUtils.getParentPath(path) ;
         uiExplorer.setSelectNode(path) ;
         uiExplorer.updateAjax(event) ;
       } catch(RepositoryException e) {
-        LOG.error("Repository cannot be found");        
-        uiApp.addMessage(new ApplicationMessage("UITreeExplorer.msg.repository-error", null, 
+        LOG.error("Repository cannot be found");
+        uiApp.addMessage(new ApplicationMessage("UITreeExplorer.msg.repository-error", null,
             ApplicationMessage.WARNING)) ;
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
-        return ;        
+        return ;
       } catch (Exception e) {
         JCRExceptionManager.process(uiApp, e);
         return;
       }
     }
   }
-  
+
   static public class ShowDrivesAreaActionListener extends EventListener<UITreeExplorer> {
     public void execute(Event<UITreeExplorer> event) throws Exception {
       UITreeExplorer uiTreeExplorer = event.getSource() ;
@@ -480,6 +486,6 @@ public class UITreeExplorer extends UIContainer {
       uiWorkingArea.getChild(UIDocumentWorkspace.class).setRendered(false);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiWorkingArea) ;
     }
-  }   
-  
+  }
+
 }

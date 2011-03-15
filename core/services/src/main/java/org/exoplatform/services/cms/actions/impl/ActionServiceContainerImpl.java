@@ -68,98 +68,98 @@ public class ActionServiceContainerImpl implements ActionServiceContainer, Start
    * Logger.
    */
   private static final Log LOG  = ExoLogger.getLogger("cms.action.ActionServiceContainerImpl");
-  
+
   /**
    * Define nodetype ACTIONABLE
    */
   private static final String         ACTIONABLE           = "exo:actionable".intern();
-  
+
   /**
-   * Define nodetype ACTION 
+   * Define nodetype ACTION
    */
   private static final String         ACTION               = "exo:action".intern();
-  
+
   /**
    * Define nodetype JOB_NAME_PROP
    */
   private static final String         JOB_NAME_PROP        = "exo:jobName".intern();
-  
+
   /**
    * Define nodetype JOB_NAME_PROP
    */
   private static final String         JOB_GROUP_PROP       = "exo:jobGroup".intern();
-  
+
   /**
    * Define nodetype JOB_CLASS_PROP
    */
   private static final String         JOB_CLASS_PROP       = "exo:jobClass".intern();
-  
+
   /**
    * Define nodetype LIFECYCLE_PHASE_PROP
    */
   private static final String         LIFECYCLE_PHASE_PROP = "exo:lifecyclePhase".intern() ;
-  
+
   /**
    * Define query statement
    */
   private static final String         ACTION_QUERY         = "//element(*, exo:action)".intern() ;
-  
+
   /**
    * Define sql query statement
    */
-  private static final String ACTION_SQL_QUERY = 
+  private static final String ACTION_SQL_QUERY =
                 "select * from exo:action".intern() ;
-  
+
   /**
    * Define sql append query operator.
    */
   private static final String WHERE_OPERATOR = " where".intern() ;
-  
+
   /**
    * Define sql path.
    */
   private static final String JCR_PATH = " jcr:path".intern() ;
-  
+
   /**
    * Define sql like operator.
    */
   private static final String LIKE_OPERATOR = " like".intern() ;
-  
+
   /**
    * Sql query single quote.
    */
   private static final String SINGLE_QUOTE = "'";
-  
+
   /**
    * Define nodetype SCHEDULABLE_MIXIN
    */
   private static final String         SCHEDULABLE_MIXIN    = "exo:schedulableInfo".intern();
-  
+
   /**
    * Define relative path for action node
    */
   private static final String         EXO_ACTIONS          = "exo:actions".intern();
-  
+
   /**
    * Define nodetype ACTION_STORAGE
    */
   private static final String         ACTION_STORAGE       = "exo:actionStorage".intern();
-  
+
   /**
    * Define nodetype EXO_HIDDENABLE
    */
   private static final String         EXO_HIDDENABLE       = "exo:hiddenable".intern();
-  
+
   /**
    * RepositoryService
    */
   private RepositoryService           repositoryService_;
-  
+
   /**
    * CmsService
    */
   private CmsService                  cmsService_;
-  
+
   /**
    * Collection of ComponentPlugin
    */
@@ -175,7 +175,7 @@ public class ActionServiceContainerImpl implements ActionServiceContainer, Start
   public ActionServiceContainerImpl(RepositoryService repositoryService, CmsService cmsService
       ) throws Exception {
     repositoryService_ = repositoryService;
-    cmsService_ = cmsService;    
+    cmsService_ = cmsService;
   }
 
   /**
@@ -193,7 +193,7 @@ public class ActionServiceContainerImpl implements ActionServiceContainer, Start
       LOG.error("Cannot start ActionServiceContainerImpl", e);
     }
   }
-  
+
   /**
    * Implement method stop service
    */
@@ -216,7 +216,7 @@ public class ActionServiceContainerImpl implements ActionServiceContainer, Start
       LOG.error("Cannot initialize the ActionServiceContainerImpl", e);
     }
   }
-  
+
   public Collection<String> getActionPluginNames() {
     Collection<String> actionPluginNames = new ArrayList<String>(actionPlugins.size());
     for (ComponentPlugin plugin : actionPlugins) {
@@ -224,7 +224,7 @@ public class ActionServiceContainerImpl implements ActionServiceContainer, Start
     }
     return actionPluginNames;
   }
-  
+
   public ActionPlugin getActionPlugin(String actionsServiceName) {
     for (ComponentPlugin plugin : actionPlugins) {
       if (plugin.getName().equals(actionsServiceName))
@@ -232,7 +232,7 @@ public class ActionServiceContainerImpl implements ActionServiceContainer, Start
     }
     return null;
   }
-  
+
   /**
    * Create NodeTypeValue is in kind of ActionType following action type name
    * @param actionTypeName        name of action type
@@ -244,7 +244,7 @@ public class ActionServiceContainerImpl implements ActionServiceContainer, Start
    * @throws Exception
    */
   @SuppressWarnings("unchecked")
-  public void createActionType(String actionTypeName, String parentActionTypeName, String executable, 
+  public void createActionType(String actionTypeName, String parentActionTypeName, String executable,
       List<String> variableNames, boolean isMoveType, String repository) throws Exception {
     NodeTypeValue nodeTypeValue = new NodeTypeValue();
     nodeTypeValue.setName(actionTypeName);
@@ -304,7 +304,7 @@ public class ActionServiceContainerImpl implements ActionServiceContainer, Start
    * @throws Exception
    */
   public Collection<NodeType> getCreatedActionTypes(String repository) throws Exception {
-    Collection<NodeType> createsActions = new ArrayList<NodeType>();    
+    Collection<NodeType> createsActions = new ArrayList<NodeType>();
     NodeTypeManager ntmanager = repositoryService_.getCurrentRepository().getNodeTypeManager();
     for(NodeTypeIterator iter = ntmanager.getAllNodeTypes();iter.hasNext();) {
       NodeType nt = (NodeType) iter.next();
@@ -312,10 +312,10 @@ public class ActionServiceContainerImpl implements ActionServiceContainer, Start
       if (nt.isNodeType(ACTION) && !isAbstractType(name)) {
         createsActions.add(nt);
       }
-    }        
+    }
     return createsActions;
   }
-  
+
   /**
    * Check ComponentPlugin is abstract type or not
    * @param name  name of ComponentPlugin
@@ -329,7 +329,7 @@ public class ActionServiceContainerImpl implements ActionServiceContainer, Start
     }
     return false;
   }
-  
+
   /**
    * Get SystemSession of specific workspace and repository
  * @param workspace
@@ -382,7 +382,7 @@ public class ActionServiceContainerImpl implements ActionServiceContainer, Start
       return null ;
     }
   }
-  
+
   public List<Node> getActions(Node node, String lifecyclePhase) throws Exception {
     List<Node> actions = new ArrayList<Node>();
     Node actionStorage = null;
@@ -390,7 +390,7 @@ public class ActionServiceContainerImpl implements ActionServiceContainer, Start
       actionStorage = node.getNodes(EXO_ACTIONS).nextNode();
     }catch (Exception e) {
       return actions;
-    }        
+    }
     for (NodeIterator iter = actionStorage.getNodes(); iter.hasNext();) {
       Node tmpNode = iter.nextNode();
       if (tmpNode.isNodeType(ACTION)
@@ -412,9 +412,9 @@ public class ActionServiceContainerImpl implements ActionServiceContainer, Start
       removeAction(node, action.getName(), repository);
     }
   }
-  
+
   public void removeAction(Node node, String actionName, String repository) throws Exception {
-    if(!node.isNodeType(ACTIONABLE)) return  ;    
+    if(!node.isNodeType(ACTIONABLE)) return  ;
     Node action2Remove = getAction(node, actionName);
     String[] lifecyclePhase = parseValuesToArray(action2Remove.getProperty(LIFECYCLE_PHASE_PROP)
         .getValues());
@@ -437,7 +437,7 @@ public class ActionServiceContainerImpl implements ActionServiceContainer, Start
       }
     }
     action2Remove.remove();
-    node.save();    
+    node.save();
   }
 
   public void addAction(Node storeActionNode, String repository, String actionType, boolean isDeep, String[] uuid, String[] nodeTypeNames, Map mappings) throws Exception {
@@ -457,10 +457,10 @@ public class ActionServiceContainerImpl implements ActionServiceContainer, Start
     storeActionNode.save();
     String srcWorkspace = storeActionNode.getSession().getWorkspace().getName();
 
-    String srcPath = storeActionNode.getPath();         
+    String srcPath = storeActionNode.getPath();
     ActionPlugin actionService = getActionPluginForActionType(actionType);
-    if (actionService == null) 
-      throw new ClassNotFoundException("Not found any action's service compatible with action type "+actionType) ;      
+    if (actionService == null)
+      throw new ClassNotFoundException("Not found any action's service compatible with action type "+actionType) ;
     try {
       actionService.addAction(actionType, repository, srcWorkspace, srcPath, isDeep, uuid, nodeTypeNames, mappings);
     } catch (Exception e) {
@@ -469,10 +469,10 @@ public class ActionServiceContainerImpl implements ActionServiceContainer, Start
       Node actionNode = (Node) session.getItem(newActionPath);
       actionNode.remove();
       session.save();
-      session.logout(); 
+      session.logout();
     }
   }
-  
+
   public void addAction(Node storeActionNode, String repository, String actionType, Map mappings) throws Exception {
     boolean isDeep = true;
     String[] nodeTypeName = null;
@@ -488,8 +488,8 @@ public class ActionServiceContainerImpl implements ActionServiceContainer, Start
       nodeTypeName = (String[]) ((JcrInputProperty) mappings.get("/node/exo:nodeTypeName"))
           .getValue();
       if(nodeTypeName.length == 0) {
-      	nodeTypeName = null;
-      	mappings.remove("/node/exo:nodeTypeName");
+        nodeTypeName = null;
+        mappings.remove("/node/exo:nodeTypeName");
       }
     }
     addAction(storeActionNode, repository, actionType, isDeep, uuid, nodeTypeName, mappings);
@@ -510,7 +510,7 @@ public class ActionServiceContainerImpl implements ActionServiceContainer, Start
     variables.put("initiator", userId);
     variables.put("actionName", actionName);
     variables.put("nodePath", node.getPath());
-    variables.put("srcWorkspace", node.getSession().getWorkspace().getName());    
+    variables.put("srcWorkspace", node.getSession().getWorkspace().getName());
     variables.put("srcPath", node.getPath());
 
     NodeType nodeType = node.getPrimaryNodeType();
@@ -530,7 +530,7 @@ public class ActionServiceContainerImpl implements ActionServiceContainer, Start
     executeAction(userId, node, actionName, variables, repository);
   }
 
-  
+
   /**
    * Put to Map with key = property name and value = value of property in actionNode
    * @param actionNode  get value of property in this node
@@ -538,20 +538,20 @@ public class ActionServiceContainerImpl implements ActionServiceContainer, Start
    * @param variables   Map to keep (key, value) of all property
    * @throws Exception
    */
-  private void fillVariables(Node actionNode, NodeType nodeType, Map variables) throws Exception {    
+  private void fillVariables(Node actionNode, NodeType nodeType, Map variables) throws Exception {
     for(PropertyDefinition def:nodeType.getDeclaredPropertyDefinitions()) {
       String propName = def.getName();
       if (actionNode.hasProperty(propName)) {
         if(actionNode.getProperty(propName).getDefinition().isMultiple()) {
-          
+
         } else {
           String propValue = actionNode.getProperty(propName).getString();
           variables.put(propName, propValue);
         }
       }
-    }    
+    }
   }
-  
+
   /**
    * Execute action following userId, node, variables, repository
    * @param userId      user identify
@@ -571,7 +571,7 @@ public class ActionServiceContainerImpl implements ActionServiceContainer, Start
       if (actionPlugin.isActionTypeSupported(actionTypeName)) {
         actionPlugin.executeAction(userId, actionNode, variables, repository);
       }
-    }    
+    }
   }
 
   /**
@@ -608,7 +608,7 @@ public class ActionServiceContainerImpl implements ActionServiceContainer, Start
       jcrRepository = repositoryService_.getCurrentRepository();
       String[] workspaces = jcrRepository.getWorkspaceNames();
       for (String workspace : workspaces) {
-        Session session = jcrRepository.getSystemSession(workspace);        
+        Session session = jcrRepository.getSystemSession(workspace);
         QueryManager queryManager = null;
         try {
           queryManager = session.getWorkspace().getQueryManager();
@@ -618,8 +618,8 @@ public class ActionServiceContainerImpl implements ActionServiceContainer, Start
         }
         if (queryManager == null) {
           session.logout();
-          continue; 
-        }          
+          continue;
+        }
         initAction(queryManager, repository.getName(), workspace) ;
         session.logout();
       }
@@ -633,7 +633,7 @@ public class ActionServiceContainerImpl implements ActionServiceContainer, Start
    * @see {@link #initAction(QueryManager, String, String)}
    */
   private void reInitiateActionConfiguration(String repository) throws Exception {
-    ManageableRepository jcrRepository = repositoryService_.getCurrentRepository();    
+    ManageableRepository jcrRepository = repositoryService_.getCurrentRepository();
     for (String workspace : jcrRepository.getWorkspaceNames()) {
       Session session = jcrRepository.getSystemSession(workspace);
       QueryManager queryManager = null;
@@ -653,10 +653,10 @@ public class ActionServiceContainerImpl implements ActionServiceContainer, Start
   }
 
   /**
-   * Initialize the action listener for all node in repository 
+   * Initialize the action listener for all node in repository
    * All node is got by query following ACTION_QUERY
    * @param queryManager QueryManager
-   * @param repository   repository name 
+   * @param repository   repository name
    * @param workspace    workspace name
    * @throws Exception
    */
@@ -679,13 +679,13 @@ public class ActionServiceContainerImpl implements ActionServiceContainer, Start
               actionService.reScheduleActivations(actionNode, repository);
             }
             if (DMSEvent.getEventTypes(lifecyclePhase) == DMSEvent.SCHEDULE)
-            	continue;
+              continue;
               actionService.initiateActionObservation(actionNode, repository);
           }
         }
       }
     } catch (Exception e) {
-      LOG.error(">>>> Can not launch action listeners for workspace: " 
+      LOG.error(">>>> Can not launch action listeners for workspace: "
           + workspace + " in '" + repository + "' repository", e);
     }
   }
@@ -701,12 +701,12 @@ public class ActionServiceContainerImpl implements ActionServiceContainer, Start
           queryStr = "/jcr:root" + node.getPath() + ACTION_QUERY;
         } else {
           queryStr = ACTION_QUERY;
-        }      
+        }
         query = queryManager.createQuery(queryStr, Query.XPATH);
       } catch(InvalidQueryException invalid) {
-      // With some special character, XPath will be invalid , try SQL  
+      // With some special character, XPath will be invalid , try SQL
         if (!"/".equals(node.getPath())) {
-          queryStr = ACTION_SQL_QUERY + WHERE_OPERATOR + JCR_PATH + LIKE_OPERATOR 
+          queryStr = ACTION_SQL_QUERY + WHERE_OPERATOR + JCR_PATH + LIKE_OPERATOR
                                         + SINGLE_QUOTE + node.getPath() + "/" + "%" + SINGLE_QUOTE;
         } else {
           queryStr = ACTION_SQL_QUERY;
@@ -734,7 +734,7 @@ public class ActionServiceContainerImpl implements ActionServiceContainer, Start
       LOG.error("Can not launch action listeners inside " + node.getPath() + " node.", ex);
     }
   }
-  
+
   private String[] parseValuesToArray(Value[] values) throws Exception {
     return parseValuesToList(values).toArray(new String[0]);
   }

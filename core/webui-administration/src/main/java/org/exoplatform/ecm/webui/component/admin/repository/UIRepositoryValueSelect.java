@@ -31,7 +31,7 @@ import org.exoplatform.webui.event.EventListener;
  * Created by The eXo Platform SARL
  * Author : Pham Tuan
  *          tuan.pham@exoplatform.com
- * 19-07-2007  
+ * 19-07-2007
  */
 
 @ComponentConfig(
@@ -102,7 +102,6 @@ public class UIRepositoryValueSelect  extends UIGrid implements UIPopupComponent
     public String getName() { return name ;}
   }
   public void activate() throws Exception {
-    // TODO Auto-generated method stub
 
   }
   public void deActivate() throws Exception {

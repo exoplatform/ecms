@@ -33,44 +33,44 @@ import org.exoplatform.test.BasicTestCase;
  * Created by The eXo Platform SARL
  * Author : Dang Van Minh
  *          minh.dang@exoplatform.com
- * Mar 16, 2009  
+ * Mar 16, 2009
  * 4:08:30 PM
  */
 public abstract class BaseDMSTestCase extends BasicTestCase {
 
-  protected static Log          log = ExoLogger.getLogger("dms.services.test");  
+  protected static Log          log = ExoLogger.getLogger("dms.services.test");
 
-  protected CredentialsImpl     credentials;  
+  protected CredentialsImpl     credentials;
 
   protected RepositoryService   repositoryService;
 
   protected PortalContainer     container;
-  
+
   protected Session         session;
 
   protected ManageableRepository     repository;
-  
+
   protected SessionProviderService   sessionProviderService_;
-  
+
   protected final String         REPO_NAME        = "repository".intern();
 
   protected final String         DMSSYSTEM_WS     = "dms-system".intern();
-  
+
   protected final String         SYSTEM_WS        = "system".intern();
 
   protected final String         COLLABORATION_WS = "collaboration".intern();
 
   public void setUp() throws Exception {
-    
+
     System.setProperty("gatein.tenant.repository.name", REPO_NAME);
-    
+
 //    String containerConf = BaseDMSTestCase.class.getResource("/conf/standalone/system-configuration.xml").toString();
 
 //    StandaloneContainer.addConfigurationURL(containerConf);
 //
 //    String loginConf = Thread.currentThread().getContextClassLoader().getResource("conf/standalone/login.conf").toString();
 //    System.setProperty("java.security.auth.login.config", loginConf);
-    
+
     container = PortalContainer.getInstance();
 
 //    if (System.getProperty("java.security.auth.login.config") == null)
@@ -78,7 +78,7 @@ public abstract class BaseDMSTestCase extends BasicTestCase {
 //          .getResource("conf/standalone/login.conf").toString());
 
 //    credentials = new CredentialsImpl("root", "gtn".toCharArray());
-    
+
     repositoryService = (RepositoryService) container.getComponentInstanceOfType(RepositoryService.class);
 //    System.out.println("\n\nRepository====" +repositoryService.getRepository(REPO_NAME).getConfiguration().getName()+ "\n\n");
 //    if(repositoryService.getRepository(REPO_NAME) == null) {
@@ -91,11 +91,11 @@ public abstract class BaseDMSTestCase extends BasicTestCase {
     session = sessionProviderService_.getSystemSessionProvider(null).getSession(COLLABORATION_WS, repository);
     //session = (SessionImpl) repository.login(credentials, COLLABORATION_WS);
     //sessionProviderService_.setSessionProvider(null, new SessionProvider(session.getUserState()));
-    
-    
-    
+
+
+
   }
-  
+
   protected void checkMixins(String[] mixins, NodeImpl node) {
     try {
       String[] nodeMixins = node.getMixinTypeNames();
@@ -135,5 +135,5 @@ public abstract class BaseDMSTestCase extends BasicTestCase {
     return Math.round(((System.currentTimeMillis() - from) * 100.00d / 60000.00d)) / 100.00d
     + "min";
   }
-  
+
 }

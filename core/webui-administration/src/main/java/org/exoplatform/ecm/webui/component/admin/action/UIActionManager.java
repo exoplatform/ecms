@@ -47,7 +47,7 @@ public class UIActionManager extends UIAbstractManager {
   public void initPopup(UIComponent uiActionForm, int width) throws Exception {
     UIPopupWindow uiPopup = getChild(UIPopupWindow.class) ;
     if(uiPopup == null) {
-      uiPopup = addChild(UIPopupWindow.class, null, "ActionPopup") ;     
+      uiPopup = addChild(UIPopupWindow.class, null, "ActionPopup") ;
       uiPopup.setUIComponent(uiActionForm) ;
       uiPopup.setWindowSize(width, 0) ;
       uiPopup.setShow(true) ;

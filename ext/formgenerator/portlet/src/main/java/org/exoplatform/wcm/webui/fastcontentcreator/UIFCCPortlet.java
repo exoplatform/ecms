@@ -41,7 +41,7 @@ public class UIFCCPortlet extends UIPortletApplication {
 
   /**
    * Instantiates a new uIFCC portlet.
-   * 
+   *
    * @throws Exception the exception
    */
   public UIFCCPortlet() throws Exception {}
@@ -49,7 +49,7 @@ public class UIFCCPortlet extends UIPortletApplication {
   /* (non-Javadoc)
    * @see org.exoplatform.webui.core.UIPortletApplication#processRender(org.exoplatform.webui.application.WebuiApplication, org.exoplatform.webui.application.WebuiRequestContext)
    */
-  public void processRender(WebuiApplication app, WebuiRequestContext context) throws Exception {    
+  public void processRender(WebuiApplication app, WebuiRequestContext context) throws Exception {
     context.getJavascriptManager().importJavascript("eXo.ecm.ECMUtils","/ecm-wcm-extension/javascript/");
     context.getJavascriptManager().addJavascript("eXo.ecm.ECMUtils.init('UIFastContentCreatorPortlet') ;");
     PortletRequestContext portletRequestContext = (PortletRequestContext)  context ;
@@ -76,5 +76,5 @@ public class UIFCCPortlet extends UIPortletApplication {
       }
     }
     super.processRender(app, context) ;
-  }  
+  }
 }

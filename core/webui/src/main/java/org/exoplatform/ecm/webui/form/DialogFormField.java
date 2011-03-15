@@ -25,9 +25,9 @@ import org.exoplatform.webui.form.UIFormInputBase;
  * Created by The eXo Platform SAS
  * @author : Hoa.Pham
  *          hoa.pham@exoplatform.com
- * Jun 23, 2008  
+ * Jun 23, 2008
  */
-public abstract class DialogFormField {  
+public abstract class DialogFormField {
 
   protected final String SEPARATOR = "=";
   protected final String JCR_PATH = "jcrPath" + SEPARATOR;
@@ -53,14 +53,14 @@ public abstract class DialogFormField {
   protected final String ROW_SIZE = "rows" + SEPARATOR ;
   protected final String COL_SIZE = "columns" + SEPARATOR ;
   protected final String SIZE = "size" + SEPARATOR ;
-  
+
   protected String editable;
   protected String defaultValue;
   protected String rowSize;
   protected String colSize;
   protected String jcrPath;
   protected String selectorAction;
-  protected String selectorClass;    
+  protected String selectorClass;
   protected String workspaceField;
   protected String selectorIcon;
   protected String multiValues;
@@ -78,7 +78,7 @@ public abstract class DialogFormField {
   protected String[] scriptParams;
   protected String type;
   protected String size;
-  
+
   public DialogFormField(String name, String label, String[] arguments) {
     HashMap<String,String> parsedArguments = parseArguments(arguments) ;
     this.editable = parsedArguments.get(EDITABLE);
@@ -87,12 +87,12 @@ public abstract class DialogFormField {
     this.colSize = parsedArguments.get(COL_SIZE);
     this.jcrPath = parsedArguments.get(JCR_PATH);
     this.selectorAction = parsedArguments.get(SELECTOR_ACTION);
-    this.selectorClass = parsedArguments.get(SELECTOR_CLASS);    
+    this.selectorClass = parsedArguments.get(SELECTOR_CLASS);
     this.workspaceField = parsedArguments.get(WORKSPACE_FIELD);
     this.selectorIcon = parsedArguments.get(SELECTOR_ICON);
     this.multiValues = parsedArguments.get(MULTI_VALUES);
     this.reference = parsedArguments.get(REFERENCE);
-    this.validateType = parsedArguments.get(VALIDATE);    
+    this.validateType = parsedArguments.get(VALIDATE);
     this.selectorParams = parsedArguments.get(SELECTOR_PARAMS) ;
     this.options = parsedArguments.get(OPTIONS);
     this.visible = parsedArguments.get(VISIBLE);
@@ -100,25 +100,25 @@ public abstract class DialogFormField {
     this.mixinTypes = parsedArguments.get(MIXINTYPE);
     this.onchange = parsedArguments.get(ONCHANGE);
     this.groovyScript = parsedArguments.get(SCRIPT);
-    this.type = parsedArguments.get(TYPE);    
-    this.size = parsedArguments.get(SIZE);    
+    this.type = parsedArguments.get(TYPE);
+    this.size = parsedArguments.get(SIZE);
     String scriptParam = parsedArguments.get(SCRIPT_PARAMS);
     if(scriptParam != null) {
       scriptParams = scriptParam.split(",");
     }
     this.name = name;
     this.label = label;
-  }        
+  }
 
   @SuppressWarnings("unchecked")
   public abstract <T extends UIFormInputBase> T createUIFormInput() throws Exception;
-  
+
   public JcrInputProperty createJcrInputProperty (){
     JcrInputProperty inputProperty = new JcrInputProperty();
     inputProperty.setJcrPath(jcrPath);
     return inputProperty;
   }
-  
+
   public String getEditable() { return editable; }
   public void setEditable(String editable) { this.editable = editable; }
 
@@ -130,7 +130,7 @@ public abstract class DialogFormField {
 
   public String getColSize() { return colSize; }
   public void setColSize(String colSize) { this.colSize = colSize; }
-  
+
   public String getJcrPath() { return jcrPath; }
   public void setJcrPath(String jcrPath) { this.jcrPath = jcrPath; }
 
@@ -158,7 +158,7 @@ public abstract class DialogFormField {
   public void setMultiValues(String multiValues) {
     this.multiValues = multiValues;
   }
-  
+
   public String getReference() { return reference; }
   public void setReferenceType(String reference) {
     this.reference = reference;
@@ -168,20 +168,20 @@ public abstract class DialogFormField {
   public void setValidateType(String validateType) {
     this.validateType = validateType;
   }
-  
+
   public String[] getSelectorParams() {
     if(selectorParams != null) {
       return selectorParams.split(",");
     }
-    return null; 
-  }  
-  
+    return null;
+  }
+
   public String getSelectorParam() { return selectorParams; }
-  public void setSelectorParam(String param) { this.selectorParams = param; }    
-  
+  public void setSelectorParam(String param) { this.selectorParams = param; }
+
   public String getName() { return name; }
   public void setName(String name) { this.name = name; }
-  
+
   public String getLabel() { return label; }
   public void setLabel(String label) {this.label = label;}
 
@@ -211,15 +211,15 @@ public abstract class DialogFormField {
 
   public String getSize() { return size; }
   public void setSize(String size) { this.size = size;}
-  
+
   public boolean isMultiValues() { return "true".equalsIgnoreCase(multiValues); }
   public boolean isReference() { return "true".equalsIgnoreCase(reference); }
   public boolean isEditable() { return !"false".equalsIgnoreCase(editable); }
   public boolean isEditableIfNull() { return "if-null".equalsIgnoreCase(editable); }
   public boolean isVisibleIfNotNull() { return "if-not-null".equals(visible); }
-  
+
   private HashMap<String,String> parseArguments(String[] arguments) {
-    HashMap<String,String> map = new HashMap<String,String>() ;    
+    HashMap<String,String> map = new HashMap<String,String>() ;
     for(String argument:arguments) {
       String value = null;
       if(argument.indexOf(SEPARATOR)>0) {
@@ -227,40 +227,40 @@ public abstract class DialogFormField {
       }else {
         value = argument;
         map.put(DEFAULT_VALUES,value) ; continue;
-      }      
-      if (argument.startsWith(JCR_PATH)) {        
+      }
+      if (argument.startsWith(JCR_PATH)) {
         map.put(JCR_PATH,value); continue;
-      } else if (argument.startsWith(EDITABLE)) {       
+      } else if (argument.startsWith(EDITABLE)) {
         map.put(EDITABLE,value); continue;
-      } else if (argument.startsWith(SELECTOR_ACTION)) {        
+      } else if (argument.startsWith(SELECTOR_ACTION)) {
         map.put(SELECTOR_ACTION,value) ; continue;
-      } else if (argument.startsWith(SELECTOR_CLASS)) {        
+      } else if (argument.startsWith(SELECTOR_CLASS)) {
         map.put(SELECTOR_CLASS,value); continue;
-      } else if (argument.startsWith(MULTI_VALUES)) {        
+      } else if (argument.startsWith(MULTI_VALUES)) {
         map.put(MULTI_VALUES,value); continue;
-      } else if (argument.startsWith(SELECTOR_ICON)) {        
+      } else if (argument.startsWith(SELECTOR_ICON)) {
         map.put(SELECTOR_ICON,value); continue;
-      } else if (argument.startsWith(SELECTOR_PARAMS)) {               
+      } else if (argument.startsWith(SELECTOR_PARAMS)) {
         map.put(SELECTOR_PARAMS,value); continue;
-      }else if (argument.startsWith(WORKSPACE_FIELD)) {        
+      }else if (argument.startsWith(WORKSPACE_FIELD)) {
         map.put(WORKSPACE_FIELD,value); continue;
-      } else if (argument.startsWith(VALIDATE)) {       
-        map.put(VALIDATE,value); continue;        
-      } else if (argument.startsWith(REFERENCE)) {       
+      } else if (argument.startsWith(VALIDATE)) {
+        map.put(VALIDATE,value); continue;
+      } else if (argument.startsWith(REFERENCE)) {
         map.put(REFERENCE, value); continue;
-      } else if(argument.startsWith(DEFAULT_VALUES)) {       
+      } else if(argument.startsWith(DEFAULT_VALUES)) {
         map.put(DEFAULT_VALUES,value); continue;
-      } else if(argument.startsWith(ROW_SIZE)) {       
+      } else if(argument.startsWith(ROW_SIZE)) {
         map.put(ROW_SIZE,value); continue;
-      } else if(argument.startsWith(COL_SIZE)) {       
+      } else if(argument.startsWith(COL_SIZE)) {
         map.put(COL_SIZE,value); continue;
-      } else if(argument.startsWith(OPTIONS)){        
+      } else if(argument.startsWith(OPTIONS)){
         map.put(OPTIONS,value);  continue;
       } else if(argument.startsWith(SCRIPT)) {
         map.put(SCRIPT,value); continue;
-      } else if(argument.startsWith(SCRIPT_PARAMS)){        
+      } else if(argument.startsWith(SCRIPT_PARAMS)){
         map.put(SCRIPT_PARAMS,value); continue;
-      } else if(argument.startsWith(VISIBLE)){        
+      } else if(argument.startsWith(VISIBLE)){
         map.put(VISIBLE,value); continue;
       } else if(argument.startsWith(TYPE)){
         map.put(TYPE,value) ; continue;
@@ -276,8 +276,8 @@ public abstract class DialogFormField {
         continue ;
       } else {
         map.put(DEFAULT_VALUES,argument);
-      }      
+      }
     }
     return map;
-  }  
+  }
 }

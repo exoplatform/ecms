@@ -61,7 +61,7 @@ import org.exoplatform.webui.form.validator.MandatoryValidator;
  */
 @ComponentConfig(template = "classpath:groovy/ecm/webui/form/UIFormInputSetWithAction.gtmpl")
 public class UIViewForm extends UIFormInputSetWithAction implements UISelectable {
-  
+
   final static public String FIELD_VERSION = "version" ;
   final static public String FIELD_NAME = "viewName" ;
   final static public String FIELD_PERMISSION = "permission" ;
@@ -71,14 +71,14 @@ public class UIViewForm extends UIFormInputSetWithAction implements UISelectable
 
   private boolean isView_ = true ;
   private Node views_;
-  private HashMap<String, Tab> tabMap_ = new HashMap<String, Tab>() ;  
+  private HashMap<String, Tab> tabMap_ = new HashMap<String, Tab>() ;
   private ManageViewService vservice_ = null ;
   private String viewName = null;
   private List<String> listVersion = new ArrayList<String>() ;
   private Version baseVersion_;
   private VersionNode selectedVersion_;
   private VersionNode rootVersionNode;
-  
+
   public String getViewName() {
     return viewName;
   }
@@ -92,7 +92,7 @@ public class UIViewForm extends UIFormInputSetWithAction implements UISelectable
     PortletPreferences portletPref = pcontext.getRequest().getPreferences() ;
     return portletPref.getValue(Utils.REPOSITORY, "") ;
   }
-  
+
   public UIViewForm(String name) throws Exception {
     super(name) ;
     setComponentConfig(getClass(), null) ;
@@ -107,9 +107,9 @@ public class UIViewForm extends UIFormInputSetWithAction implements UISelectable
     setActionInfo(FIELD_PERMISSION, new String[] {"AddPermission"}) ;
     vservice_ = getApplicationComponent(ManageViewService.class) ;
     String repository = getRepository() ;
-    Node ecmTemplateHome = vservice_.getTemplateHome(BasePath.ECM_EXPLORER_TEMPLATES, repository, 
+    Node ecmTemplateHome = vservice_.getTemplateHome(BasePath.ECM_EXPLORER_TEMPLATES, repository,
         SessionProviderFactory.createSessionProvider()) ;
-    List<SelectItemOption<String>> temp = new ArrayList<SelectItemOption<String>>() ; 
+    List<SelectItemOption<String>> temp = new ArrayList<SelectItemOption<String>>() ;
     if(ecmTemplateHome != null) {
       NodeIterator iter = ecmTemplateHome.getNodes() ;
       while(iter.hasNext()) {
@@ -118,53 +118,53 @@ public class UIViewForm extends UIFormInputSetWithAction implements UISelectable
       }
     }
     addUIFormInput(new UIFormSelectBox(FIELD_TEMPLATE,FIELD_TEMPLATE, temp)) ;
-    UIFormCheckBoxInput enableVersion = 
+    UIFormCheckBoxInput enableVersion =
       new UIFormCheckBoxInput<Boolean>(FIELD_ENABLEVERSION, FIELD_ENABLEVERSION, null) ;
     enableVersion.setRendered(false) ;
     addUIFormInput(enableVersion) ;
     setActions(new String[]{"Save", "Reset", "Cancel", "AddTabForm"}, null) ;
   }
-  
+
   public void processRender(WebuiRequestContext context) throws Exception {
     super.processRender(context) ;
   }
-  
+
   @SuppressWarnings("unused")
   public void doSelect(String selectField, Object value) {
     getUIStringInput(UIViewForm.FIELD_PERMISSION).setValue(value.toString()) ;
     UIViewContainer uiContainer = getAncestorOfType(UIViewContainer.class) ;
     uiContainer.removeChildById(UIViewFormTabPane.POPUP_PERMISSION) ;
   }
-  
+
   public boolean isView() { return isView_ ; }
-  
+
   public Node getViews() { return views_; }
-  
+
   public boolean canEnableVersionning(Node node) throws Exception {
     return node.canAddMixin(Utils.MIX_VERSIONABLE);
   }
 
-  private boolean isVersioned(Node node) throws RepositoryException {          
-    return node.isNodeType(Utils.MIX_VERSIONABLE);    
+  private boolean isVersioned(Node node) throws RepositoryException {
+    return node.isNodeType(Utils.MIX_VERSIONABLE);
   }
 
-  private VersionNode getRootVersion(Node node) throws Exception{       
+  private VersionNode getRootVersion(Node node) throws Exception{
     VersionHistory vH = node.getVersionHistory() ;
     if(vH != null) return new VersionNode(vH.getRootVersion(), node.getSession()) ;
     return null ;
   }
 
-  private List<String> getNodeVersions(List<VersionNode> children) throws Exception {         
+  private List<String> getNodeVersions(List<VersionNode> children) throws Exception {
     List<VersionNode> child = new ArrayList<VersionNode>() ;
     for(VersionNode vNode : children){
       listVersion.add(vNode.getName());
       child = vNode.getChildren() ;
-      if (!child.isEmpty()) getNodeVersions(child) ; 
-    }           
+      if (!child.isEmpty()) getNodeVersions(child) ;
+    }
     return listVersion ;
   }
 
-  private List<SelectItemOption<String>> getVersionValues(Node node) throws Exception { 
+  private List<SelectItemOption<String>> getVersionValues(Node node) throws Exception {
     List<SelectItemOption<String>> options = new ArrayList<SelectItemOption<String>>() ;
     List<VersionNode> children = getRootVersion(node).getChildren() ;
     listVersion.clear() ;
@@ -181,7 +181,7 @@ public class UIViewForm extends UIFormInputSetWithAction implements UISelectable
     }
     return options ;
   }
-  
+
   public void addTab(String tabName, String buttons){
     Tab tab = new Tab() ;
     tab.setTabName(tabName) ;
@@ -200,7 +200,7 @@ public class UIViewForm extends UIFormInputSetWithAction implements UISelectable
     }
     return result.toString() ;
   }
-  
+
   public void refresh(boolean isAddNew) throws Exception {
     getUIFormSelectBox(FIELD_VERSION).setRendered(!isAddNew) ;
     getUIFormSelectBox(FIELD_VERSION).setDisabled(!isAddNew) ;
@@ -221,7 +221,7 @@ public class UIViewForm extends UIFormInputSetWithAction implements UISelectable
     selectedVersion_ = null ;
     baseVersion_ = null ;
   }
-  
+
   public void update(Node viewNode, boolean isView, VersionNode selectedVersion) throws Exception {
     isView_ = isView ;
     if(viewNode != null) {
@@ -238,7 +238,7 @@ public class UIViewForm extends UIFormInputSetWithAction implements UISelectable
       }
 
       getUIFormCheckBoxInput(FIELD_ENABLEVERSION).setRendered(true) ;
-      if (isVersioned(views_)) {              
+      if (isVersioned(views_)) {
         rootVersionNode = getRootVersion(views_);
         getUIFormSelectBox(FIELD_VERSION).setOptions(getVersionValues(views_)).setRendered(true) ;
         getUIFormSelectBox(FIELD_VERSION).setValue(baseVersion_.getName()) ;
@@ -247,10 +247,10 @@ public class UIViewForm extends UIFormInputSetWithAction implements UISelectable
       } else if (!isVersioned(views_)) {
         getUIFormSelectBox(FIELD_VERSION).setRendered(false) ;
         getUIFormCheckBoxInput(FIELD_ENABLEVERSION).setChecked(false) ;
-        getUIFormCheckBoxInput(FIELD_ENABLEVERSION).setEnable(true) ;   
-      } 
+        getUIFormCheckBoxInput(FIELD_ENABLEVERSION).setEnable(true) ;
+      }
     }
-    if (selectedVersion != null) {      
+    if (selectedVersion != null) {
       views_.restore(selectedVersion.getVersion(), false) ;
       views_.checkout() ;
       tabMap_.clear() ;
@@ -262,7 +262,7 @@ public class UIViewForm extends UIFormInputSetWithAction implements UISelectable
         tabObj.setButtons(buttons) ;
         tabMap_.put(tab.getName(), tabObj) ;
       }
-      selectedVersion_ = selectedVersion;         
+      selectedVersion_ = selectedVersion;
     }
     if(views_ != null) {
       getUIStringInput(FIELD_NAME).setEditable(false).setValue(views_.getName()) ;
@@ -286,13 +286,13 @@ public class UIViewForm extends UIFormInputSetWithAction implements UISelectable
     String viewName = getUIStringInput(FIELD_NAME).getValue().trim();
     ApplicationMessage message ;
     if(viewName == null || viewName.trim().length() == 0){
-      throw new MessageException(new ApplicationMessage("UIViewForm.msg.view-name-invalid", null, 
+      throw new MessageException(new ApplicationMessage("UIViewForm.msg.view-name-invalid", null,
                                                         ApplicationMessage.WARNING)) ;
     }
     String[] arrFilterChar = {"&", "$", "@", ",", ":","]", "[", "*", "%", "!", "#", "/", "\\", "\""} ;
     for(String filterChar : arrFilterChar) {
       if(viewName.indexOf(filterChar) > -1) {
-        throw new MessageException(new ApplicationMessage("UIViewForm.msg.fileName-invalid", null, 
+        throw new MessageException(new ApplicationMessage("UIViewForm.msg.fileName-invalid", null,
                                                           ApplicationMessage.WARNING)) ;
       }
     }
@@ -303,7 +303,7 @@ public class UIViewForm extends UIFormInputSetWithAction implements UISelectable
     if(uiPopup.getId().equals(UIViewList.ST_ADD)) {
       for(ViewConfig view : viewList) {
         if(view.getName().equals(viewName) && !isEnableVersioning) {
-          message = new ApplicationMessage("UIViewForm.msg.view-exist", null, 
+          message = new ApplicationMessage("UIViewForm.msg.view-exist", null,
                                            ApplicationMessage.WARNING) ;
           throw new MessageException(message) ;
         }
@@ -311,12 +311,12 @@ public class UIViewForm extends UIFormInputSetWithAction implements UISelectable
     }
     String permissions = getUIStringInput(FIELD_PERMISSION).getValue() ;
     if(permissions == null || permissions.length() < 1){
-      message = new ApplicationMessage("UIViewForm.msg.permission-not-empty", null, 
+      message = new ApplicationMessage("UIViewForm.msg.permission-not-empty", null,
                                        ApplicationMessage.WARNING) ;
       throw new MessageException(message) ;
     }
     if(tabMap_.size() < 1 ){
-      message = new ApplicationMessage("UIViewForm.msg.mustbe-add-tab", null, 
+      message = new ApplicationMessage("UIViewForm.msg.mustbe-add-tab", null,
                                        ApplicationMessage.WARNING) ;
       throw new MessageException(message) ;
     }
@@ -368,8 +368,8 @@ public class UIViewForm extends UIFormInputSetWithAction implements UISelectable
   }
 
   public void deleteTab(String tabName) throws Exception {
-	UIViewFormTabPane viewTabPane = getParent() ;
-	String permLastest = viewTabPane.getUIStringInput(UIViewForm.FIELD_PERMISSION).getValue();
+  UIViewFormTabPane viewTabPane = getParent() ;
+  String permLastest = viewTabPane.getUIStringInput(UIViewForm.FIELD_PERMISSION).getValue();
     tabMap_.remove(tabName) ;
     update(null, false, null) ;
     getUIStringInput(FIELD_PERMISSION).setValue(permLastest);
@@ -381,18 +381,18 @@ public class UIViewForm extends UIFormInputSetWithAction implements UISelectable
   }
 
   public void changeVersion() throws Exception {
-    String path = 
+    String path =
       views_.getVersionHistory().getVersion(getUIFormSelectBox(FIELD_VERSION).getValue()).getPath();
     VersionNode selectedVesion = rootVersionNode.findVersionNode(path);
     update(null, false, selectedVesion) ;
   }
-  
+
   public void revertVersion() throws Exception {
-    if (selectedVersion_ != null && !selectedVersion_.equals(baseVersion_)) { 
+    if (selectedVersion_ != null && !selectedVersion_.equals(baseVersion_)) {
       views_.restore(baseVersion_, true);
     }
   }
-  
+
   static public class AddPermissionActionListener extends EventListener<UIViewFormTabPane> {
     public void execute(Event<UIViewFormTabPane> event) throws Exception {
       UIViewFormTabPane uiViewTabPane = event.getSource() ;
@@ -402,14 +402,14 @@ public class UIViewForm extends UIFormInputSetWithAction implements UISelectable
       event.getRequestContext().addUIComponentToUpdateByAjax(uiContainer) ;
     }
   }
-  
+
   static public class ChangeVersionActionListener extends EventListener<UIViewFormTabPane> {
-		public void execute(Event<UIViewFormTabPane> event) throws Exception {
-			UIViewFormTabPane uiFormTab = event.getSource();
-			UIViewForm uiForm = uiFormTab.getChild(UIViewForm.class);
-			uiForm.changeVersion();
-			UIViewContainer uiViewContainer = uiFormTab.getAncestorOfType(UIViewContainer.class) ;
-			event.getRequestContext().addUIComponentToUpdateByAjax(uiViewContainer) ;
-		}
+    public void execute(Event<UIViewFormTabPane> event) throws Exception {
+      UIViewFormTabPane uiFormTab = event.getSource();
+      UIViewForm uiForm = uiFormTab.getChild(UIViewForm.class);
+      uiForm.changeVersion();
+      UIViewContainer uiViewContainer = uiFormTab.getAncestorOfType(UIViewContainer.class) ;
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiViewContainer) ;
+    }
   }
 }

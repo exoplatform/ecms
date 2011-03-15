@@ -32,7 +32,7 @@ public class UIFCCUtils {
 
   /**
    * Gets the portlet preferences.
-   * 
+   *
    * @return the portlet preferences
    */
   public static PortletPreferences getPortletPreferences() {
@@ -40,10 +40,10 @@ public class UIFCCUtils {
     PortletRequest request = portletRequestContext.getRequest();
     return request.getPreferences();
   }
-  
+
   /**
    * Gets the preference repository.
-   * 
+   *
    * @return the preference repository
    */
   public static String getPreferenceRepository() {
@@ -52,37 +52,37 @@ public class UIFCCUtils {
 
   /**
    * Gets the preference workspace.
-   * 
+   *
    * @return the preference workspace
    */
   public static String getPreferenceWorkspace() {
     return getPortletPreferences().getValue(UIFCCConstant.PREFERENCE_WORKSPACE, "");
   }
-  
+
   /**
    * Gets the preference type.
-   * 
+   *
    * @return the preference type
    */
   public static String getPreferenceType() {
     return getPortletPreferences().getValue(UIFCCConstant.PREFERENCE_TYPE, "");
   }
-  
+
   /**
    * Gets the preference path.
-   * 
+   *
    * @return the preference path
    */
   public static String getPreferencePath() {
     return getPortletPreferences().getValue(UIFCCConstant.PREFERENCE_PATH, "");
   }
-  
+
   /**
    * Gets the preference save message.
-   * 
+   *
    * @return the preference save message
    */
   public static String getPreferenceSaveMessage() {
-	  return getPortletPreferences().getValue(UIFCCConstant.PREFERENCE_SAVE_MESSAGE, "");
+    return getPortletPreferences().getValue(UIFCCConstant.PREFERENCE_SAVE_MESSAGE, "");
   }
 }

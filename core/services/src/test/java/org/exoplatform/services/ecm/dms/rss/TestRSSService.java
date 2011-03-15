@@ -26,17 +26,17 @@ import org.exoplatform.services.ecm.dms.BaseDMSTestCase;
 
 /**
  * Created by The eXo Platform SARL
- * June 09, 2009  
+ * June 09, 2009
  */
 public class TestRSSService extends BaseDMSTestCase {
-    
+
   private RSSService rssService;
-  
+
   public void setUp() throws Exception {
     super.setUp();
     rssService = (RSSService)container.getComponentInstanceOfType(RSSService.class);
   }
-  
+
   /**
    * Test method: generateFeed()
    * Input: context     Map
@@ -56,25 +56,25 @@ public class TestRSSService extends BaseDMSTestCase {
     contextRss.put("exo:description", "Hello Description");
     contextRss.put("exo:storePath", "/Feeds");
     contextRss.put("exo:feedName", "feedName");
-    contextRss.put("exo:queryPath", "/jcr:root/Documents//element(*, exo:article)");    
+    contextRss.put("exo:queryPath", "/jcr:root/Documents//element(*, exo:article)");
     contextRss.put("exo:title", "Hello Title");
-    contextRss.put("exo:url", "http://www.facebook.com");    
+    contextRss.put("exo:url", "http://www.facebook.com");
     rssService.generateFeed(contextRss);
-    
-    session.getRootNode().addNode("Feeds");    
+
+    session.getRootNode().addNode("Feeds");
     Node myFeeds = (Node) session.getItem("/Feeds");
     myFeeds.addNode("rss");
     Node myRSS = (Node) session.getItem("/Feeds/rss");
     myRSS.addNode("feedName");
     Node myFeedName = (Node) session.getItem("/Feeds/rss/feedName");
     myFeedName.addNode("jcr:content");
-    Node myJcrContent = myFeedName.getNode("jcr:content");    
+    Node myJcrContent = myFeedName.getNode("jcr:content");
     assertEquals("Feeds", myFeeds.getName());
     assertEquals("rss", myRSS.getName());
     assertEquals("feedName", myFeedName.getName());
     assertEquals("/Feeds/rss/feedName/jcr:content", myJcrContent.getPath());
     if (myJcrContent.hasProperty("jcr:data")) {
-      String jcrData = myJcrContent.getProperty("jcr:data").getString(); 
+      String jcrData = myJcrContent.getProperty("jcr:data").getString();
       assertNotNull(myJcrContent.getProperty("jcr:data").getString());
       assertTrue(jcrData.indexOf("<title>Hello Feed</title>") > 0);
       assertTrue(jcrData.indexOf("<description>Hello Description</description>") > 0);
@@ -82,8 +82,8 @@ public class TestRSSService extends BaseDMSTestCase {
       assertEquals("application/rss+xml", myJcrContent.getProperty("jcr:mimeType").getString());
     }
   }
-  
-  public void testGenerateFeed2() throws Exception {    
+
+  public void testGenerateFeed2() throws Exception {
     Map<String, String> contextPodcast = new HashMap<String, String>();
     contextPodcast.put("exo:feedType", "podcast");
     contextPodcast.put("repository", "repository");
@@ -91,16 +91,16 @@ public class TestRSSService extends BaseDMSTestCase {
     contextPodcast.put("actionName", "actionName");
     contextPodcast.put("exo:rssVersion", "rss_1.0");
     contextPodcast.put("exo:feedTitle", "Hello Feed");
-    contextPodcast.put("exo:link", "Testing");    
+    contextPodcast.put("exo:link", "Testing");
     contextPodcast.put("exo:summary", "Hello Summary");
     contextPodcast.put("exo:description", "Hello Description");
     contextPodcast.put("exo:storePath", "/Feeds");
     contextPodcast.put("exo:feedName", "podcastName");
-    contextPodcast.put("exo:queryPath", "/jcr:root/Documents//element(*, exo:article)");    
+    contextPodcast.put("exo:queryPath", "/jcr:root/Documents//element(*, exo:article)");
     contextPodcast.put("exo:title", "Hello Title");
-    contextPodcast.put("exo:url", "http://twitter.com");    
+    contextPodcast.put("exo:url", "http://twitter.com");
     rssService.generateFeed(contextPodcast);
-    
+
     session.getRootNode().addNode("Feeds");
     Node myFeeds = (Node) session.getItem("/Feeds");
     myFeeds.addNode("podcast");
@@ -111,16 +111,16 @@ public class TestRSSService extends BaseDMSTestCase {
     assertEquals("podcast", myPodcast.getName());
     assertEquals("podcastName", myPodcastName.getName());
   }
-  
+
   /**
-   * Clean all node for testing 
+   * Clean all node for testing
    */
-  public void tearDown() throws Exception {    
+  public void tearDown() throws Exception {
     Node myRoot = session.getRootNode();
     if (myRoot.hasNode("Feeds")) {
       myRoot.getNode("Feeds").remove();
     }
-    session.save();        
+    session.save();
     super.tearDown();
   }
 }

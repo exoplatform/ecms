@@ -31,23 +31,23 @@ import org.exoplatform.webui.ext.manager.UIAbstractManager;
  * Author : Dang Van Minh
  *          minh.dang@exoplatform.com
  * Sep 19, 2006
- * 11:45:11 AM 
+ * 11:45:11 AM
  */
 @ComponentConfig(lifecycle = UIContainerLifecycle.class)
 public class UIMetadataManager extends UIAbstractManager {
-  
+
   final static public String METADATA_POPUP = "MetadataPopupEdit" ;
   final static public String VIEW_METADATA_POPUP = "ViewMetadataPopup" ;
   final static public String PERMISSION_POPUP = "PermissionPopup" ;
-  
+
   public UIMetadataManager() throws Exception {
     addChild(UIMetadataList.class, null, null) ;
   }
-  
+
   public void refresh() throws Exception {
     update();
   }
-  
+
   public void update() throws Exception {
     getChild(UIMetadataList.class).updateGrid() ;
   }
@@ -59,9 +59,9 @@ public class UIMetadataManager extends UIAbstractManager {
     uiPopup.setUIComponent(uiMetaForm) ;
     uiPopup.setRendered(true);
     uiPopup.setShow(true) ;
-    uiPopup.setResizable(true) ;    
+    uiPopup.setResizable(true) ;
   }
-  
+
   public void initViewPopup(String metadataName) throws Exception {
     UIPopupWindow uiPopup = addChild(UIPopupWindow.class, null, VIEW_METADATA_POPUP);
     uiPopup.setShow(true) ;
@@ -75,12 +75,12 @@ public class UIMetadataManager extends UIAbstractManager {
     uiPopup.setUIComponent(uiView) ;
     uiPopup.setResizable(true) ;
   }
-  
+
   public void initPopupPermission(String membership) throws Exception {
     removeChildById(PERMISSION_POPUP) ;
     UIPopupWindow uiPopup = addChild(UIPopupWindow.class, null, PERMISSION_POPUP);
     uiPopup.setWindowSize(560, 300);
-    UIPermissionSelector uiECMPermission = 
+    UIPermissionSelector uiECMPermission =
       createUIComponent(UIPermissionSelector.class, null, "MetadataPermission") ;
     uiECMPermission.setSelectedMembership(true);
     if(membership != null && membership.indexOf(":/") > -1) {

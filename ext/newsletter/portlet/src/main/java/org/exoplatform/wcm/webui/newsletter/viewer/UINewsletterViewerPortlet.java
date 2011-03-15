@@ -46,13 +46,13 @@ public class UINewsletterViewerPortlet extends UIPortletApplication {
 
   /**
    * Instantiates a new uI newsletter viewer portlet.
-   * 
+   *
    * @throws Exception the exception
    */
   public UINewsletterViewerPortlet() throws Exception {
     this.addChild(UINewsletterViewerForm.class, null, null);
   }
-  
+
   /**
    * The listener interface for receiving confirmUserCodeAction events.
    * The class that is interested in processing a confirmUserCodeAction
@@ -61,11 +61,11 @@ public class UINewsletterViewerPortlet extends UIPortletApplication {
    * component's <code>addConfirmUserCodeActionListener<code> method. When
    * the confirmUserCodeAction event occurs, that object's appropriate
    * method is invoked.
-   * 
+   *
    * @see ConfirmUserCodeActionEvent
    */
   public static class ConfirmUserCodeActionListener extends EventListener<UINewsletterViewerPortlet> {
-    
+
     /* (non-Javadoc)
      * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
      */
@@ -75,10 +75,13 @@ public class UINewsletterViewerPortlet extends UIPortletApplication {
       String[] confirms = event.getRequestContext().getRequestParameter(OBJECTID).split("/");
       List<String> listIds = new ArrayList<String>();
       SessionProvider sessionProvider = Utils.getSessionProvider();
-      boolean correctUser = newsletterForm.publicUserHandler.confirmPublicUser(sessionProvider, confirms[0], confirms[1], NewsLetterUtil.getPortalName());
+      boolean correctUser = newsletterForm.publicUserHandler.confirmPublicUser(sessionProvider,
+                                                                               confirms[0],
+                                                                               confirms[1],
+                                                                               NewsLetterUtil.getPortalName());
       if(correctUser){
-        List<NewsletterSubscriptionConfig> listSubscriptions = 
-          newsletterForm.subcriptionHandler.getSubscriptionIdsByPublicUser(sessionProvider, NewsLetterUtil.getPortalName(), confirms[0]);
+        List<NewsletterSubscriptionConfig> listSubscriptions = newsletterForm.
+            subcriptionHandler.getSubscriptionIdsByPublicUser(sessionProvider, NewsLetterUtil.getPortalName(), confirms[0]);
         for(NewsletterSubscriptionConfig subscriptionConfig : listSubscriptions){
           listIds.add(subscriptionConfig.getCategoryName() + "#" + subscriptionConfig.getName());
         }

@@ -31,14 +31,14 @@ import org.exoplatform.services.jcr.ext.common.SessionProvider;
  * Created by The eXo Platform SARL
  * Author : Dang Van Minh
  *          minh.dang@exoplatform.com
- * Oct 22, 2009  
+ * Oct 22, 2009
  * 10:50:05 AM
  */
 public class TestTimelineService extends BaseDMSTestCase {
 
   private TimelineService timelineService;
   final private static String EXO_MODIFIED_DATE = "exo:dateModified";
-  
+
   /**
    * {@inheritDoc}
    */
@@ -46,7 +46,7 @@ public class TestTimelineService extends BaseDMSTestCase {
     super.setUp();
     timelineService = (TimelineService)container.getComponentInstanceOfType(TimelineService.class);
   }
-  
+
   /**
    * test method getDocumentsOfToday
    * input:		/testNode/today1(dateModified is today)
@@ -59,32 +59,32 @@ public class TestTimelineService extends BaseDMSTestCase {
   public void testGetDocumentsOfToday() throws Exception {
     Node rootNode = session.getRootNode();
     Node testNode = rootNode.addNode("testNode");
-    
+
     Calendar currentTime = new GregorianCalendar();
-    
+
     Node today1 = testNode.addNode("today1", "exo:sample");
     today1.setProperty("exo:title", "sample");
     if(today1.canAddMixin("exo:datetime")) today1.addMixin("exo:datetime");
     today1.setProperty(EXO_MODIFIED_DATE, currentTime);
-    
+
     Node today2 = testNode.addNode("today2", "exo:sample");
     today2.setProperty("exo:title", "sample");
     if(today2.canAddMixin("exo:datetime")) today2.addMixin("exo:datetime");
     today2.setProperty(EXO_MODIFIED_DATE, currentTime);
-    
+
     Calendar yesterdayTime = (Calendar)currentTime.clone();
     yesterdayTime.add(Calendar.DATE, -1);
-    
+
     Node yesterday1 = testNode.addNode("yesterday1", "exo:sample");
     yesterday1.setProperty("exo:title", "sample");
     if(yesterday1.canAddMixin("exo:datetime")) yesterday1.addMixin("exo:datetime");
     yesterday1.setProperty(EXO_MODIFIED_DATE, yesterdayTime);
     session.save();
-    
+
     List<Node> res = timelineService.getDocumentsOfToday(testNode.getPath(), REPO_NAME, COLLABORATION_WS, createSessionProvider(), "root", true);
 //    assertEquals("testGetDocumentsOfToday failed! ", 2, res.size());
   }
-  
+
   /**
    * test method getDocumentsOfYesterday
    * input:		/testNode/today1(dateModified is today)
@@ -97,26 +97,26 @@ public class TestTimelineService extends BaseDMSTestCase {
   public void testGetDocumentsOfYesterday() throws Exception {
     Node rootNode = session.getRootNode();
     Node testNode = rootNode.addNode("testNode");
-    
+
     Calendar currentTime = new GregorianCalendar();
-    
+
     Node today1 = testNode.addNode("today1", "exo:sample");
     today1.setProperty("exo:title", "sample");
     if(today1.canAddMixin("exo:datetime")) {
       today1.addMixin("exo:datetime");
     }
     today1.setProperty(EXO_MODIFIED_DATE, currentTime);
-    
+
     Node today2 = testNode.addNode("today2", "exo:sample");
     today2.setProperty("exo:title", "sample");
     if(today2.canAddMixin("exo:datetime")) {
       today2.addMixin("exo:datetime");
     }
     today2.setProperty(EXO_MODIFIED_DATE, currentTime);
-    
+
     Calendar yesterdayTime = (Calendar)currentTime.clone();
     yesterdayTime.add(Calendar.DATE, -1);
-    
+
     Node yesterday1 = testNode.addNode("yesterday1", "exo:sample");
     yesterday1.setProperty("exo:title", "sample");
     if(yesterday1.canAddMixin("exo:datetime")) {
@@ -124,11 +124,11 @@ public class TestTimelineService extends BaseDMSTestCase {
     }
     yesterday1.setProperty(EXO_MODIFIED_DATE, yesterdayTime);
     session.save();
-	  
+
     List<Node> res = timelineService.getDocumentsOfYesterday(rootNode.getPath(), REPO_NAME, COLLABORATION_WS, createSessionProvider(), "root", true);
 //    assertEquals("testGetDocumentsOfYesterday failed! ", 1, res.size());
   }
-  
+
   /**
    * test method getDocumentsOfEarlierThisWeek
    * input:		/testNode/Sunday
@@ -143,32 +143,32 @@ public class TestTimelineService extends BaseDMSTestCase {
   public void testGetDocumentsOfEarlierThisWeek() throws Exception {
     Node rootNode = session.getRootNode();
     Node testNode = rootNode.addNode("testNode");
-    
+
     Calendar currentTime = new GregorianCalendar();
     Calendar time = (Calendar)currentTime.clone();
     int count = 0;
     int index = 0;
     while (currentTime.get(Calendar.WEEK_OF_YEAR) == time.get(Calendar.WEEK_OF_YEAR)) {
-    	if (currentTime.get(Calendar.WEEK_OF_YEAR) == time.get(Calendar.WEEK_OF_YEAR)) {
-    		if (time.get(Calendar.DAY_OF_YEAR) < currentTime.get(Calendar.DAY_OF_YEAR)-1)
-    			count++;
-    	}
-    	Node dayNode = testNode.addNode("dayNode" + index++, "exo:sample");
-    	dayNode.setProperty("exo:title", "sample");
-    	if(dayNode.canAddMixin("exo:datetime")) {
-    	  dayNode.addMixin("exo:datetime");
-    	}
-    	dayNode.setProperty(EXO_MODIFIED_DATE, time);
-    	time.add(Calendar.DATE, -1);
+      if (currentTime.get(Calendar.WEEK_OF_YEAR) == time.get(Calendar.WEEK_OF_YEAR)) {
+        if (time.get(Calendar.DAY_OF_YEAR) < currentTime.get(Calendar.DAY_OF_YEAR)-1)
+          count++;
+      }
+      Node dayNode = testNode.addNode("dayNode" + index++, "exo:sample");
+      dayNode.setProperty("exo:title", "sample");
+      if(dayNode.canAddMixin("exo:datetime")) {
+        dayNode.addMixin("exo:datetime");
+      }
+      dayNode.setProperty(EXO_MODIFIED_DATE, time);
+      time.add(Calendar.DATE, -1);
     }
-    
+
     session.save();
-	List<Node> res = timelineService.getDocumentsOfEarlierThisWeek(rootNode.getPath(), REPO_NAME, COLLABORATION_WS, createSessionProvider(), "root", true);
+  List<Node> res = timelineService.getDocumentsOfEarlierThisWeek(rootNode.getPath(), REPO_NAME, COLLABORATION_WS, createSessionProvider(), "root", true);
 //	assertEquals("testGetDocumentsOfEarlierThisWeek falied! ", Math.min(5, count), res.size());
-	System.out.println("Expected: " + count);
-	System.out.println("actual: " + res.size());
+  System.out.println("Expected: " + count);
+  System.out.println("actual: " + res.size());
   }
-  
+
   /**
    * test method getDocumentsOfEarlierThisMonth
    * input:		/testNode/1stOfThisMonth
@@ -183,30 +183,30 @@ public class TestTimelineService extends BaseDMSTestCase {
   public void testGetDocumentsOfEarlierThisMonth() throws Exception {
     Node rootNode = session.getRootNode();
     Node testNode = rootNode.addNode("testNode");
-    
+
     Calendar currentTime = new GregorianCalendar();
     Calendar time = (Calendar)currentTime.clone();
     int count = 0;
     int index = 0;
     while (currentTime.get(Calendar.MONTH) == time.get(Calendar.MONTH)) {
-    	if (currentTime.get(Calendar.MONTH) == time.get(Calendar.MONTH)) {
-    		if (time.get(Calendar.WEEK_OF_YEAR) < currentTime.get(Calendar.WEEK_OF_YEAR))
-    			count++;
-    	}
-    	Node dayNode = testNode.addNode("dayNode" + index++, "exo:sample");
-    	dayNode.setProperty("exo:title", "sample");
-    	if(dayNode.canAddMixin("exo:datetime")) {
-    	  dayNode.addMixin("exo:datetime");
-    	}
-    	dayNode.setProperty(EXO_MODIFIED_DATE, time);
-    	time.add(Calendar.DATE, -1);
+      if (currentTime.get(Calendar.MONTH) == time.get(Calendar.MONTH)) {
+        if (time.get(Calendar.WEEK_OF_YEAR) < currentTime.get(Calendar.WEEK_OF_YEAR))
+          count++;
+      }
+      Node dayNode = testNode.addNode("dayNode" + index++, "exo:sample");
+      dayNode.setProperty("exo:title", "sample");
+      if(dayNode.canAddMixin("exo:datetime")) {
+        dayNode.addMixin("exo:datetime");
+      }
+      dayNode.setProperty(EXO_MODIFIED_DATE, time);
+      time.add(Calendar.DATE, -1);
     }
-    
+
     session.save();
-	List<Node> res = timelineService.getDocumentsOfEarlierThisMonth(rootNode.getPath(), REPO_NAME, COLLABORATION_WS, createSessionProvider(), "root", true);
+  List<Node> res = timelineService.getDocumentsOfEarlierThisMonth(rootNode.getPath(), REPO_NAME, COLLABORATION_WS, createSessionProvider(), "root", true);
 //	assertEquals("testGetDocumentsOfEarlierThisMonth falied! ", Math.min(5, count), res.size());
-	System.out.println("Expected: " + count);
-	System.out.println("actual: " + res.size());
+  System.out.println("Expected: " + count);
+  System.out.println("actual: " + res.size());
   }
 
   /**
@@ -223,48 +223,48 @@ public class TestTimelineService extends BaseDMSTestCase {
   public void testGetDocumentsOfEarlierThisYear() throws Exception {
     Node rootNode = session.getRootNode();
     Node testNode = rootNode.addNode("testNode");
-    
+
     Calendar currentTime = new GregorianCalendar();
     Calendar time = (Calendar)currentTime.clone();
     int count = 0;
     int index = 0;
     while (currentTime.get(Calendar.YEAR) == time.get(Calendar.YEAR)) {
-    	if (currentTime.get(Calendar.YEAR) == time.get(Calendar.YEAR)) {
-    		if (time.get(Calendar.MONTH) < currentTime.get(Calendar.MONTH))
-    			count++;
-    	}
-    	Node dayNode = testNode.addNode("dayNode" + index++, "exo:sample");
-    	dayNode.setProperty("exo:title", "sample");
-    	if(dayNode.canAddMixin("exo:datetime")) {
-    	  dayNode.addMixin("exo:datetime");
-    	}
-    	dayNode.setProperty(EXO_MODIFIED_DATE, time);
-    	time.add(Calendar.DATE, -1);
+      if (currentTime.get(Calendar.YEAR) == time.get(Calendar.YEAR)) {
+        if (time.get(Calendar.MONTH) < currentTime.get(Calendar.MONTH))
+          count++;
+      }
+      Node dayNode = testNode.addNode("dayNode" + index++, "exo:sample");
+      dayNode.setProperty("exo:title", "sample");
+      if(dayNode.canAddMixin("exo:datetime")) {
+        dayNode.addMixin("exo:datetime");
+      }
+      dayNode.setProperty(EXO_MODIFIED_DATE, time);
+      time.add(Calendar.DATE, -1);
     }
-    
+
     session.save();
     List<Node> res = timelineService.getDocumentsOfEarlierThisYear(rootNode.getPath(), REPO_NAME, COLLABORATION_WS, createSessionProvider(), "root", true);
     //assertEquals("testGetDocumentsOfEarlierThisYear falied! ", Math.min(5, count), res.size());
     System.out.println("Expected: " + count);
     System.out.println("actual: " + res.size());
-  }  
-  
+  }
+
   /**
    * private method create sessionProvider instance.
-   * @return SessionProvider 
+   * @return SessionProvider
    */
   private SessionProvider createSessionProvider() {
     SessionProviderService sessionProviderService = (SessionProviderService) container
         .getComponentInstanceOfType(SessionProviderService.class);
     return sessionProviderService.getSystemSessionProvider(null);
-  }  
-  
+  }
+
   public void tearDown() throws Exception {
-	Node rootNode = session.getRootNode();
-	Node testNode = rootNode.getNode("testNode");
-	if (testNode != null)
-		testNode.remove();
-	  session.save();
+  Node rootNode = session.getRootNode();
+  Node testNode = rootNode.getNode("testNode");
+  if (testNode != null)
+    testNode.remove();
+    session.save();
     super.tearDown();
   }
 }

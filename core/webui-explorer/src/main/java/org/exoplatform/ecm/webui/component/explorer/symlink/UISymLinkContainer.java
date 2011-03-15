@@ -34,20 +34,20 @@ import org.exoplatform.webui.event.EventListener;
  */
 @ComponentConfig(
     template = "app:/groovy/webui/component/explorer/UITabPaneWithAction.gtmpl",
-    events = { 
+    events = {
         @EventConfig(listeners = UISymLinkContainer.CloseActionListener.class)
     }
 )
 public class UISymLinkContainer extends UIContainer {
 
   private Node uploadedNode_ ;
-  
+
   public UISymLinkContainer() throws Exception {
   }
 
   public String[] getActions() {return new String[] {"AddMetadata","Close"} ;}
-  
-  public Node getEditNode(String nodeType) throws Exception { 
+
+  public Node getEditNode(String nodeType) throws Exception {
     try {
       Item primaryItem = uploadedNode_.getPrimaryItem() ;
       if(primaryItem == null || !primaryItem.isNode()) return uploadedNode_ ;
@@ -58,14 +58,14 @@ public class UISymLinkContainer extends UIContainer {
     } catch(Exception e) { }
     return uploadedNode_ ;
   }
-  
+
   public void setUploadedNode(Node node) throws Exception { uploadedNode_ = node ; }
   public Node getUploadedNode() { return uploadedNode_ ; }
-  
+
   static public class CloseActionListener extends EventListener<UISymLinkContainer> {
     public void execute(Event<UISymLinkContainer> event) throws Exception {
-      UIJCRExplorer uiExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class);     
+      UIJCRExplorer uiExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class);
       uiExplorer.cancelAction() ;
     }
-  }  
+  }
 }

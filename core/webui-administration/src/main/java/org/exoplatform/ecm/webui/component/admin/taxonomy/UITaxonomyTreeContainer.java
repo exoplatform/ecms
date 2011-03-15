@@ -60,7 +60,7 @@ import org.exoplatform.webui.form.UIFormStringInput;
  * Created by The eXo Platform SARL
  * Author : Hoang Van Hung
  *          hunghvit@gmail.com
- * Apr 3, 2009  
+ * Apr 3, 2009
  */
 
 @ComponentConfig(
@@ -84,15 +84,15 @@ public class UITaxonomyTreeContainer extends UIContainer implements UISelectable
   public static final String POPUP_TAXONOMYHOMEPATH = "PopupTaxonomyJCRBrowser";
 
   private String[]           actions_               = { "Cancel" };
-  
+
   public UITaxonomyTreeContainer() throws Exception {
     addChild(UITaxonomyTreeMainForm.class, null, "TaxonomyTreeMainForm");
     addChild(UIPermissionTreeManager.class, null, "TaxonomyPermissionTree").setRendered(false);
     addChild(UIActionTaxonomyManager.class, null, null).setRendered(false);
   }
-  
+
   public String[] getActions() {return actions_;}
-  
+
   public void setCurrentSep(int step) {
     currentStep_ = step;
   }
@@ -116,11 +116,11 @@ public class UITaxonomyTreeContainer extends UIContainer implements UISelectable
   public void setTaxonomyTreeData(TaxonomyTreeData taxonomyTreeData) {
     this.taxonomyTreeData = taxonomyTreeData;
   }
-  
-  public void viewStep(int step) {   
+
+  public void viewStep(int step) {
     selectedStep_ = step;
-    currentStep_ = step - 1;    
-    List<UIComponent> children = getChildren(); 
+    currentStep_ = step - 1;
+    List<UIComponent> children = getChildren();
     for(int i=0; i<children.size(); i++){
       if(i == getCurrentStep()) {
         children.get(i).setRendered(true);
@@ -129,7 +129,7 @@ public class UITaxonomyTreeContainer extends UIContainer implements UISelectable
       }
     }
   }
-  
+
   public void refresh() throws Exception {
     if (taxonomyTreeData == null) {
       taxonomyTreeData = new TaxonomyTreeData();
@@ -169,7 +169,7 @@ public class UITaxonomyTreeContainer extends UIContainer implements UISelectable
     uiActionTypeForm.setDefaultActionType(null);
     findFirstComponentOfType(UITaxonomyTreeMainForm.class).update(taxonomyTreeData);
   }
-  
+
   private void loadData(Node taxoTreeTargetNode) throws RepositoryException, Exception{
     String taxoTreeName = taxonomyTreeData.getTaxoTreeName();
     if (taxoTreeName == null || taxoTreeName.length() == 0) return;
@@ -189,20 +189,20 @@ public class UITaxonomyTreeContainer extends UIContainer implements UISelectable
       }
     }
   }
-  
+
   private UIFormStringInput getFormInputById(String id) {
     return (UIFormStringInput)findComponentById(id);
   }
-  
+
   private String getRepository(){
     return getAncestorOfType(UIECMAdminPortlet.class).getPreferenceRepository();
   }
-  
+
   public Session getSession(String workspace) throws RepositoryException, RepositoryConfigurationException  {
     RepositoryService rservice = getApplicationComponent(RepositoryService.class);
     return rservice.getCurrentRepository().getSystemSession(workspace);
   }
-  
+
   public void doSelect(String selectField, Object value) throws Exception {
     getFormInputById(selectField).setValue(value.toString());
     UITaxonomyManagerTrees uiContainer = getAncestorOfType(UITaxonomyManagerTrees.class);
@@ -215,7 +215,7 @@ public class UITaxonomyTreeContainer extends UIContainer implements UISelectable
       }
     }
   }
-  
+
   /**
    * Add taxonomy tree with given name, workspace, home path. Add permission for tree node
    * @param name
@@ -252,7 +252,7 @@ public class UITaxonomyTreeContainer extends UIContainer implements UISelectable
                 node.setPermission(permBean.getUsersOrGroups(), permsList.toArray(new String[permsList.size()]));
               }
             }
-          
+
           node.save();
         }
       }
@@ -262,7 +262,7 @@ public class UITaxonomyTreeContainer extends UIContainer implements UISelectable
     session.logout();
     taxonomyService.addTaxonomyTree(taxonomyTreeNode);
   }
-  
+
   /**
    * Update taxonomy tree: If home path or workspace is changed, move taxonomy tree to new target
    * @param name
@@ -289,7 +289,7 @@ public class UITaxonomyTreeContainer extends UIContainer implements UISelectable
     if (actionService.hasActions(taxonomyTreeNode)) {
       actionService.removeAction(taxonomyTreeNode, actionName, repository);
     }
-    
+
     String destPath = homePath + "/" + name;
     destPath = destPath.replaceAll("/+", "/");
     if (srcWorkspace.equals(workspace)) {
@@ -306,14 +306,14 @@ public class UITaxonomyTreeContainer extends UIContainer implements UISelectable
     taxonomyService.updateTaxonomyTree(name, taxonomyTreeNode);
     return true;
   }
-  
+
   public static class RefreshActionListener extends EventListener<UITaxonomyTreeContainer> {
     public void execute(Event<UITaxonomyTreeContainer> event) throws Exception {
       event.getSource().refresh();
       event.getRequestContext().addUIComponentToUpdateByAjax(event.getSource());
     }
   }
-  
+
   public static class CancelActionListener extends EventListener<UITaxonomyTreeContainer> {
     public void execute(Event<UITaxonomyTreeContainer> event) throws Exception {
       UITaxonomyTreeContainer uiTaxonomyTreeContainer = event.getSource();

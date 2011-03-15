@@ -32,7 +32,7 @@ import org.exoplatform.webui.form.UIFormSelectBox;
 /**
  * Author : TAN DUNG DANG
  *          dzungdev@gmail.com
- * Jan 21, 2009  
+ * Jan 21, 2009
  */
 
 @ComponentConfig(
@@ -42,12 +42,12 @@ import org.exoplatform.webui.form.UIFormSelectBox;
       @EventConfig(phase=Phase.DECODE, listeners = UIContentPropertySelector.CancelActionListener.class),
       @EventConfig(listeners = UIContentPropertySelector.AddActionListener.class),
       @EventConfig(listeners = UIContentPropertySelector.ChangeMetadataTypeActionListener.class)
-    }    
+    }
 )
 public class UIContentPropertySelector extends UIForm{
 
   public final static String WEB_CONTENT_METADATA_POPUP = "WebContentMetadataPopup";
-  
+
   final static public String METADATA_TYPE = "metadataType" ;
   final static public String PROPERTY_SELECT = "property_select" ;
 

@@ -38,7 +38,7 @@ public class RepeatCountValidator implements Validator {
       throw new MessageException(
           new ApplicationMessage("RepeatCountValidator.msg.invalid-value", null, ApplicationMessage.WARNING)) ;
     }
-    
+
   }
 
 }

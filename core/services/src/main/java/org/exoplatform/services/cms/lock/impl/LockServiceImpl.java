@@ -34,50 +34,50 @@ import org.picocontainer.Startable;
  */
 
 public class LockServiceImpl implements LockService, Startable {
-  
+
   private List<String> settingLockList = new ArrayList<String>();
   private List<String> preSettingLockList = new ArrayList<String>();
   private List<LockGroupsOrUsersPlugin> lockGroupsOrUsersPlugin_ = new ArrayList<LockGroupsOrUsersPlugin>();
   private static final Log LOG = ExoLogger.getLogger(LockService.class);
-  
+
   /**
    * Constructor method
    * @param params
    * @throws Exception
    */
   public LockServiceImpl(InitParams params) throws Exception {
-    //group_ = params.getValueParam("group").getValue();    
+    //group_ = params.getValueParam("group").getValue();
   }
-  
+
   /**
    * Add new users or groups into lockGroupsOrUsersPlugin_
    * @param usersOrGroups
    */
-  public void addLockGroupsOrUsersPlugin(ComponentPlugin plugin) {      
+  public void addLockGroupsOrUsersPlugin(ComponentPlugin plugin) {
     if (plugin instanceof LockGroupsOrUsersPlugin)
       lockGroupsOrUsersPlugin_.add((LockGroupsOrUsersPlugin)plugin);
   }
-  
+
   public List<String> getPreSettingLockList(){
     return preSettingLockList;
   }
-  
+
   public List<String> getAllGroupsOrUsersForLock() throws Exception {
     return settingLockList;
   }
-  
+
   public void addGroupsOrUsersForLock(String groupsOrUsers) throws Exception {
     if (!settingLockList.contains(groupsOrUsers)) settingLockList.add(groupsOrUsers);
   }
-  
+
   public void removeGroupsOrUsersForLock(String groupsOrUsers) throws Exception {
     if (settingLockList.contains(groupsOrUsers)) settingLockList.remove(groupsOrUsers);
   }
-    
+
   /**
    * {@inheritDoc}
    */
-  public void start() {    
+  public void start() {
     try {
       settingLockList.clear();
       for(LockGroupsOrUsersPlugin plugin : lockGroupsOrUsersPlugin_) {
@@ -89,7 +89,7 @@ public class LockServiceImpl implements LockService, Startable {
         }
       }
     }catch (Exception e) {
-      LOG.error("===>>>>Exception when init LockService", e);      
+      LOG.error("===>>>>Exception when init LockService", e);
     }
   }
 

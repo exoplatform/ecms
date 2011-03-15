@@ -23,20 +23,20 @@ import org.exoplatform.webui.core.UIComponent;
  * Created by The eXo Platform SARL
  * Author : Nguyen Anh Vu
  *          anhvurz90@gmail.com
- * Nov 25, 2009  
+ * Nov 25, 2009
  * 11:33:01 AM
  */
 @ComponentConfig(
-		template = "app:/groovy/webui/component/admin/folksonomy/UITagStyleAddAction.gtmpl"
-		)
+    template = "app:/groovy/webui/component/admin/folksonomy/UITagStyleAddAction.gtmpl"
+    )
 public class UITagStyleAddAction extends UIComponent {
-	
-	private static String[] ACTIONS = {"AddStyle"} ;
-	
-	public UITagStyleAddAction() {
-		super();
-	}
-	
+
+  private static String[] ACTIONS = {"AddStyle"} ;
+
+  public UITagStyleAddAction() {
+    super();
+  }
+
   public String[] getActions() {
     return ACTIONS;
   }

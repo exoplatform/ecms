@@ -44,12 +44,12 @@ import org.exoplatform.webui.core.lifecycle.UIContainerLifecycle;
   lifecycle = UIContainerLifecycle.class
 )
 public class UIPublicationPagesContainer extends UIContainer {
-  
+
   /**
    * Inits the.
-   * 
+   *
    * @param node the node
-   * 
+   *
    * @throws Exception the exception
    */
   public void init(Node node) throws Exception {
@@ -61,14 +61,14 @@ public class UIPublicationPagesContainer extends UIContainer {
     popupWindow = getChildById("UIClvPopupContainer");
     if (popupWindow == null ) popupWindow = addChild(UIPopupWindow.class, null, "UIClvPopupContainer");
   }
-  
+
   /**
    * Gets the running portals.
-   * 
+   *
    * @param userId the user id
-   * 
+   *
    * @return the running portals
-   * 
+   *
    * @throws Exception the exception
    */
   @SuppressWarnings("unchecked")

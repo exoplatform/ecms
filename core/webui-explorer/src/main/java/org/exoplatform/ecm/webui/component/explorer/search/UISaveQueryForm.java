@@ -50,7 +50,7 @@ import org.exoplatform.webui.form.UIFormStringInput;
     }
 )
 public class UISaveQueryForm extends UIForm implements UIPopupComponent {
-  
+
   final static public String QUERY_NAME = "queryName" ;
   private String statement_ ;
   private boolean isSimpleSearch_ = false ;
@@ -59,17 +59,17 @@ public class UISaveQueryForm extends UIForm implements UIPopupComponent {
   public UISaveQueryForm() throws Exception {
     addUIFormInput(new UIFormStringInput(QUERY_NAME, QUERY_NAME, null).addValidator(ECMNameValidator.class)) ;
   }
-  
+
   public void activate() throws Exception {}
-  
+
   public void deActivate() throws Exception {}
-  
+
   public void setSimpleSearch(boolean isSimpleSearch) { isSimpleSearch_ = isSimpleSearch ; }
-  
+
   public void setStatement(String statement) { statement_ = statement ; }
-  
-  public void setQueryType(String queryType) { queryType_ = queryType ; } 
-  
+
+  public void setQueryType(String queryType) { queryType_ = queryType ; }
+
   static  public class SaveActionListener extends EventListener<UISaveQueryForm> {
     public void execute(Event<UISaveQueryForm> event) throws Exception {
       UISaveQueryForm uiSaveQueryForm = event.getSource() ;
@@ -85,14 +85,14 @@ public class UISaveQueryForm extends UIForm implements UIPopupComponent {
         return ;
       }
       try {
-        queryService.addQuery(queryName, uiSaveQueryForm.statement_, uiSaveQueryForm.queryType_, userName, repository) ;        
+        queryService.addQuery(queryName, uiSaveQueryForm.statement_, uiSaveQueryForm.queryType_, userName, repository) ;
       } catch(AccessDeniedException ace) {
-        uiApp.addMessage(new ApplicationMessage("UISaveQueryForm.msg.access-denied", null, 
+        uiApp.addMessage(new ApplicationMessage("UISaveQueryForm.msg.access-denied", null,
                                                 ApplicationMessage.WARNING)) ;
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
         return ;
       } catch (Exception e){
-        uiApp.addMessage(new ApplicationMessage("UISaveQueryForm.msg.save-failed", null, 
+        uiApp.addMessage(new ApplicationMessage("UISaveQueryForm.msg.save-failed", null,
                                                 ApplicationMessage.WARNING)) ;
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
         return ;
@@ -107,7 +107,7 @@ public class UISaveQueryForm extends UIForm implements UIPopupComponent {
       event.getRequestContext().addUIComponentToUpdateByAjax(uiECMSearch) ;
     }
   }
-  
+
   static  public class CancelActionListener extends EventListener<UISaveQueryForm> {
     public void execute(Event<UISaveQueryForm> event) throws Exception {
       UISearchContainer uiSearchContainer = event.getSource().getAncestorOfType(UISearchContainer.class) ;

@@ -55,7 +55,7 @@ import org.exoplatform.webui.exception.MessageException;
  * Author : Dang Van Minh
  *          minh.dang@exoplatform.com
  * Oct 18, 2006
- * 2:28:18 PM 
+ * 2:28:18 PM
  */
 @ComponentConfig(
     template = "app:/groovy/webui/component/explorer/popup/admin/UICategoriesAddedList.gtmpl",
@@ -64,19 +64,19 @@ import org.exoplatform.webui.exception.MessageException;
     }
 )
 public class UICategoriesAddedList extends UIContainer implements UISelectable {
-  
+
   private UIPageIterator uiPageIterator_;
 
   private static final Log LOG = ExoLogger.getLogger(UICategoriesAddedList.class);
-  
+
   public UICategoriesAddedList() throws Exception {
     uiPageIterator_ = addChild(UIPageIterator.class, null, "CategoriesAddedList");
   }
-  
+
   public UIPageIterator getUIPageIterator() { return uiPageIterator_; }
-  
+
   public List getListCategories() throws Exception { return uiPageIterator_.getCurrentPageData(); }
-  
+
   public void updateGrid(int currentPage) throws Exception {
     ObjectPageList objPageList = new ObjectPageList(getCategories(), 10);
     uiPageIterator_.setPageList(objPageList);
@@ -85,7 +85,7 @@ public class UICategoriesAddedList extends UIContainer implements UISelectable {
     else
       getUIPageIterator().setCurrentPage(currentPage);
   }
-  
+
   public List<Node> getCategories() throws Exception {
     List<Node> listCategories = new ArrayList<Node>();
     UIJCRExplorer uiJCRExplorer = getAncestorOfType(UIJCRExplorer.class);
@@ -96,14 +96,14 @@ public class UICategoriesAddedList extends UIContainer implements UISelectable {
     }
     return listCategories;
   }
-  
+
   List<Node> getAllTaxonomyTrees() throws RepositoryException {
     UIJCRExplorer uiJCRExplorer = getAncestorOfType(UIJCRExplorer.class);
     String repository = uiJCRExplorer.getRepositoryName();
     TaxonomyService taxonomyService = getApplicationComponent(TaxonomyService.class);
     return taxonomyService.getAllTaxonomyTrees(repository);
   }
-  
+
   String displayCategory(Node node, List<Node> taxonomyTrees) {
     try {
       for (Node taxonomyTree : taxonomyTrees) {
@@ -116,7 +116,7 @@ public class UICategoriesAddedList extends UIContainer implements UISelectable {
     }
     return "";
   }
-  
+
   private String getCategoryLabel(String resource) {
     String[] taxonomyPathSplit = resource.split("/");
     StringBuilder buildlabel;
@@ -134,10 +134,10 @@ public class UICategoriesAddedList extends UIContainer implements UISelectable {
     }
     return buildPathlabel.substring(0, buildPathlabel.length() - 1);
   }
-  
+
   @SuppressWarnings("unused")
   public void doSelect(String selectField, Object value) throws Exception {
-    UIJCRExplorer uiJCRExplorer = getAncestorOfType(UIJCRExplorer.class);    
+    UIJCRExplorer uiJCRExplorer = getAncestorOfType(UIJCRExplorer.class);
     UICategoryManager uiCategoryManager = getAncestorOfType(UICategoryManager.class);
     String rootTaxonomyName;
     if (uiCategoryManager == null) {
@@ -150,10 +150,10 @@ public class UICategoriesAddedList extends UIContainer implements UISelectable {
     }
     TaxonomyService taxonomyService = getApplicationComponent(TaxonomyService.class);
     try {
-      Node currentNode = uiJCRExplorer.getCurrentNode();      
+      Node currentNode = uiJCRExplorer.getCurrentNode();
       uiJCRExplorer.addLockToken(currentNode);
       if (rootTaxonomyName.equals(value)) {
-      	taxonomyService.addCategory(currentNode, rootTaxonomyName, "");
+        taxonomyService.addCategory(currentNode, rootTaxonomyName, "");
       } else {
         String[] arrayCategoryPath = String.valueOf(value.toString()).split("/");
         StringBuffer categoryPath = new StringBuffer().append("/");
@@ -165,13 +165,13 @@ public class UICategoriesAddedList extends UIContainer implements UISelectable {
       }
       uiJCRExplorer.getCurrentNode().save() ;
       uiJCRExplorer.getSession().save() ;
-      updateGrid(1) ;           
+      updateGrid(1) ;
       setRenderSibling(UICategoriesAddedList.class) ;
-      
+
       NodeLocation location = NodeLocation.getNodeLocationByNode(currentNode);
-      WCMComposer composer = WCMCoreUtils.getService(WCMComposer.class);           
+      WCMComposer composer = WCMCoreUtils.getService(WCMComposer.class);
       composer.updateContent(location.getRepository(), location.getWorkspace(), location.getPath(), new HashMap<String, String>());
-      
+
     } catch(AccessDeniedException accessDeniedException) {
       throw new MessageException(new ApplicationMessage("AccessControlException.msg",
           null, ApplicationMessage.WARNING));
@@ -183,7 +183,7 @@ public class UICategoriesAddedList extends UIContainer implements UISelectable {
       JCRExceptionManager.process(getAncestorOfType(UIApplication.class), e);
     }
   }
-  
+
   static public class DeleteActionListener extends EventListener<UICategoriesAddedList> {
     public void execute(Event<UICategoriesAddedList> event) throws Exception {
       UICategoriesAddedList uiAddedList = event.getSource();
@@ -191,25 +191,25 @@ public class UICategoriesAddedList extends UIContainer implements UISelectable {
       UIApplication uiApp = uiAddedList.getAncestorOfType(UIApplication.class);
       String nodePath = event.getRequestContext().getRequestParameter(OBJECTID);
       UIJCRExplorer uiExplorer = uiAddedList.getAncestorOfType(UIJCRExplorer.class);
-      WCMComposer composer = WCMCoreUtils.getService(WCMComposer.class);      
+      WCMComposer composer = WCMCoreUtils.getService(WCMComposer.class);
       Node currentNode = uiExplorer.getCurrentNode();
-      TaxonomyService taxonomyService = 
+      TaxonomyService taxonomyService =
         uiAddedList.getApplicationComponent(TaxonomyService.class);
-			List<Node> categories = taxonomyService.getAllCategories(currentNode);
-      
+      List<Node> categories = taxonomyService.getAllCategories(currentNode);
+
       try {
         List<Node> listNode = uiAddedList.getAllTaxonomyTrees();
         for(Node itemNode : listNode) {
           if(nodePath.contains(itemNode.getPath())) {
-            taxonomyService.removeCategory(currentNode, itemNode.getName(), 
+            taxonomyService.removeCategory(currentNode, itemNode.getName(),
                 nodePath.substring(itemNode.getPath().length()));
             break;
           }
         }
         uiAddedList.updateGrid(uiAddedList.getUIPageIterator().getCurrentPage());
-				for (Node catnode : categories) {
-					composer.updateContents(uiExplorer.getRepositoryName(), catnode.getSession().getWorkspace().getName(), catnode.getPath(), new HashMap<String, String>());
-				}
+        for (Node catnode : categories) {
+          composer.updateContents(uiExplorer.getRepositoryName(), catnode.getSession().getWorkspace().getName(), catnode.getPath(), new HashMap<String, String>());
+        }
       } catch(AccessDeniedException ace) {
         throw new MessageException(new ApplicationMessage("UICategoriesAddedList.msg.access-denied",
                                    null, ApplicationMessage.WARNING)) ;

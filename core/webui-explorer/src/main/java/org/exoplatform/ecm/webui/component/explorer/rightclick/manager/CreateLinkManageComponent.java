@@ -54,7 +54,7 @@ import org.exoplatform.webui.ext.manager.UIAbstractManagerComponent;
  * Created by The eXo Platform SARL
  * Author : Hoang Van Hung
  *          hunghvit@gmail.com
- * Aug 16, 2009  
+ * Aug 16, 2009
  */
 @ComponentConfig(
     events = {
@@ -63,13 +63,13 @@ import org.exoplatform.webui.ext.manager.UIAbstractManagerComponent;
 )
 public class CreateLinkManageComponent extends UIAbstractManagerComponent {
 
-  private static final List<UIExtensionFilter> FILTERS 
-					= Arrays.asList(new UIExtensionFilter[]{new IsNotInTrashFilter(),
-																									new IsNotTrashHomeNodeFilter()});
+  private static final List<UIExtensionFilter> FILTERS
+          = Arrays.asList(new UIExtensionFilter[]{new IsNotInTrashFilter(),
+                                                  new IsNotTrashHomeNodeFilter()});
 
   private static final Log LOG = ExoLogger.getLogger(CreateLinkManageComponent.class);
-  private static final String EXO_TRASH_FOLDER = "exo:trashFolder";  
-  
+  private static final String EXO_TRASH_FOLDER = "exo:trashFolder";
+
   @UIExtensionFilters
   public List<UIExtensionFilter> getFilters() {
     return FILTERS;

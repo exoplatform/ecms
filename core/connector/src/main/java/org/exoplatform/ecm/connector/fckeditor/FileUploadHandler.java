@@ -44,7 +44,7 @@ import org.w3c.dom.Element;
  * Created by The eXo Platform SAS
  * @author : Hoa.Pham
  *          hoa.pham@exoplatform.com
- * Jun 23, 2008  
+ * Jun 23, 2008
  */
 /**
  * The Class FileUploadHandler.
@@ -67,103 +67,143 @@ public class FileUploadHandler {
   public final static String SAVE_ACTION = "save".intern();
 
   private UploadService uploadService;
-  
-  
+
+
   private FCKMessage fckMessage;
-  
+
   /**
    * Instantiates a new file upload handler.
-   * 
+   *
    * @param container the container
    */
-  public FileUploadHandler(ExoContainer container) {	
+  public FileUploadHandler(ExoContainer container) {
     uploadService = (UploadService)container.getComponentInstanceOfType(UploadService.class);
     fckMessage = new FCKMessage();
   }
   @Deprecated
-  public Response upload(String uploadId, String contentType, double contentLength, InputStream inputStream, Node currentNode, String language) throws Exception {
+  public Response upload(String uploadId,
+                         String contentType,
+                         double contentLength,
+                         InputStream inputStream,
+                         Node currentNode,
+                         String language) throws Exception {
     CacheControl cacheControl = new CacheControl();
     cacheControl.setNoCache(true);
-    uploadService.createUploadResource(uploadId,null,contentType,contentLength,inputStream);
-    
+    uploadService.createUploadResource(uploadId, null, contentType, contentLength, inputStream);
+
     DateFormat dateFormat = new SimpleDateFormat(FCKUtils.IF_MODIFIED_SINCE_DATE_FORMAT);
-    return Response.ok(null, new MediaType("text", "xml")).cacheControl(cacheControl).header(FCKUtils.LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();            
+    return Response.ok(null, new MediaType("text", "xml"))
+                   .cacheControl(cacheControl)
+                   .header(FCKUtils.LAST_MODIFIED_PROPERTY, dateFormat.format(new Date()))
+                   .build();
   }
+
   public Response upload(HttpServletRequest servletRequest) throws Exception {
     CacheControl cacheControl = new CacheControl();
-	cacheControl.setNoCache(true);
-	uploadService.createUploadResource(servletRequest);
-	return Response.ok(null, new MediaType("text", "xml")).cacheControl(cacheControl).build();
+    cacheControl.setNoCache(true);
+    uploadService.createUploadResource(servletRequest);
+    return Response.ok(null, new MediaType("text", "xml")).cacheControl(cacheControl).build();
   }
+
   public Response control(String uploadId, String action) throws Exception {
     CacheControl cacheControl = new CacheControl();
     cacheControl.setNoCache(true);
     DateFormat dateFormat = new SimpleDateFormat(FCKUtils.IF_MODIFIED_SINCE_DATE_FORMAT);
-    if(FileUploadHandler.PROGRESS_ACTION.equals(action)) {
-      Document currentProgress = getProgress(uploadId);      
-      return Response.ok(currentProgress, new MediaType("text", "xml")).cacheControl(cacheControl).header(FCKUtils.LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
-    }else if(FileUploadHandler.ABORT_ACTION.equals(action)) {
+    if (FileUploadHandler.PROGRESS_ACTION.equals(action)) {
+      Document currentProgress = getProgress(uploadId);
+      return Response.ok(currentProgress, new MediaType("text", "xml"))
+                     .cacheControl(cacheControl)
+                     .header(FCKUtils.LAST_MODIFIED_PROPERTY, dateFormat.format(new Date()))
+                     .build();
+    } else if (FileUploadHandler.ABORT_ACTION.equals(action)) {
       uploadService.removeUploadResource(uploadId);
-      return Response.ok(null, new MediaType("text", "xml")).cacheControl(cacheControl).header(FCKUtils.LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();    
-    }else if(FileUploadHandler.DELETE_ACTION.equals(action)) {
+      return Response.ok(null, new MediaType("text", "xml"))
+                     .cacheControl(cacheControl)
+                     .header(FCKUtils.LAST_MODIFIED_PROPERTY, dateFormat.format(new Date()))
+                     .build();
+    } else if (FileUploadHandler.DELETE_ACTION.equals(action)) {
       uploadService.removeUploadResource(uploadId);
-      return Response.ok(null, new MediaType("text", "xml")).cacheControl(cacheControl).header(FCKUtils.LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();    
+      return Response.ok(null, new MediaType("text", "xml"))
+                     .cacheControl(cacheControl)
+                     .header(FCKUtils.LAST_MODIFIED_PROPERTY, dateFormat.format(new Date()))
+                     .build();
     }
-    return Response.status(HTTPStatus.BAD_REQUEST).cacheControl(cacheControl).header(FCKUtils.LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
+    return Response.status(HTTPStatus.BAD_REQUEST)
+                   .cacheControl(cacheControl)
+                   .header(FCKUtils.LAST_MODIFIED_PROPERTY, dateFormat.format(new Date()))
+                   .build();
   }
-  
+
   public Response saveAsNTFile(Node parent, String uploadId, String fileName, String language) throws Exception {
     CacheControl cacheControl = new CacheControl();
     cacheControl.setNoCache(true);
     UploadResource resource = uploadService.getUploadResource(uploadId);
     DateFormat dateFormat = new SimpleDateFormat(FCKUtils.IF_MODIFIED_SINCE_DATE_FORMAT);
     if (parent == null) {
-      Document fileNotUploaded = 
-        fckMessage.createMessage(FCKMessage.FILE_NOT_UPLOADED, FCKMessage.ERROR, language, null);
-      return Response.ok(fileNotUploaded, new MediaType("text", "xml")).cacheControl(cacheControl).header(FCKUtils.LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
+      Document fileNotUploaded = fckMessage.createMessage(FCKMessage.FILE_NOT_UPLOADED,
+                                                          FCKMessage.ERROR,
+                                                          language,
+                                                          null);
+      return Response.ok(fileNotUploaded, new MediaType("text", "xml"))
+                     .cacheControl(cacheControl)
+                     .header(FCKUtils.LAST_MODIFIED_PROPERTY, dateFormat.format(new Date()))
+                     .build();
     }
-    if(!FCKUtils.hasAddNodePermission(parent)) {
+    if (!FCKUtils.hasAddNodePermission(parent)) {
       Object[] args = { parent.getPath() };
-      Document message = 
-        fckMessage.createMessage(FCKMessage.FILE_UPLOAD_RESTRICTION,FCKMessage.ERROR,language,args);
-      return Response.ok(message, new MediaType("text", "xml")).cacheControl(cacheControl).header(FCKUtils.LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
+      Document message = fckMessage.createMessage(FCKMessage.FILE_UPLOAD_RESTRICTION,
+                                                  FCKMessage.ERROR,
+                                                  language,
+                                                  args);
+      return Response.ok(message, new MediaType("text", "xml"))
+                     .cacheControl(cacheControl)
+                     .header(FCKUtils.LAST_MODIFIED_PROPERTY, dateFormat.format(new Date()))
+                     .build();
     }
-    if((fileName == null) || (fileName.length() == 0)) {
+    if ((fileName == null) || (fileName.length() == 0)) {
       fileName = resource.getFileName();
     }
-    if(parent.hasNode(fileName)) {
+    if (parent.hasNode(fileName)) {
       Object args[] = { fileName, parent.getPath() };
-      Document fileExisted = 
-        fckMessage.createMessage(FCKMessage.FILE_EXISTED, FCKMessage.ERROR, language, args);
-      return Response.ok(fileExisted, new MediaType("text", "xml")).cacheControl(cacheControl).header(FCKUtils.LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
-    }                
+      Document fileExisted = fckMessage.createMessage(FCKMessage.FILE_EXISTED,
+                                                      FCKMessage.ERROR,
+                                                      language,
+                                                      args);
+      return Response.ok(fileExisted, new MediaType("text", "xml"))
+                     .cacheControl(cacheControl)
+                     .header(FCKUtils.LAST_MODIFIED_PROPERTY, dateFormat.format(new Date()))
+                     .build();
+    }
     String location = resource.getStoreLocation();
     byte[] uploadData = IOUtil.getFileContentAsBytes(location);
     Node file = parent.addNode(fileName,FCKUtils.NT_FILE);
     Node jcrContent = file.addNode("jcr:content","nt:resource");
     String mimetype = DMSMimeTypeResolver.getInstance().getMimeType(resource.getFileName());
     jcrContent.setProperty("jcr:data",new ByteArrayInputStream(uploadData));
-    jcrContent.setProperty("jcr:lastModified",new GregorianCalendar());    
+    jcrContent.setProperty("jcr:lastModified",new GregorianCalendar());
     jcrContent.setProperty("jcr:mimeType",mimetype);
     parent.getSession().save();
     uploadService.removeUploadResource(uploadId);
-    return Response.ok(null, new MediaType("text", "xml")).cacheControl(cacheControl).header(FCKUtils.LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
+    return Response.ok(null, new MediaType("text", "xml"))
+                   .cacheControl(cacheControl)
+                   .header(FCKUtils.LAST_MODIFIED_PROPERTY, dateFormat.format(new Date()))
+                   .build();
   }
-  
-  private Document getProgress(String uploadId) throws Exception {    
+
+  private Document getProgress(String uploadId) throws Exception {
     UploadResource resource = uploadService.getUploadResource(uploadId);
     DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
     DocumentBuilder builder = factory.newDocumentBuilder();
-    Document doc = builder.newDocument();    
+    Document doc = builder.newDocument();
     if(resource == null) {
       return doc;
     }
     Double percent = 0.0;
     if (resource.getStatus() == UploadResource.UPLOADING_STATUS) {
-      percent = (resource.getUploadedSize() * 100) / resource.getEstimatedSize();      
+      percent = (resource.getUploadedSize() * 100) / resource.getEstimatedSize();
     } else {
       percent = 100.0;
-    } 
+    }
     Element rootElement = doc.createElement("UploadProgress");
     rootElement.setAttribute("uploadId", uploadId);
     rootElement.setAttribute("fileName", resource.getFileName());

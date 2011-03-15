@@ -59,15 +59,12 @@ import org.exoplatform.webui.form.validator.SpecialCharacterValidator;
  * Jun 4, 2009
  */
 @ComponentConfig(
-                 lifecycle = UIFormLifecycle.class ,
-                 template = "system:/groovy/webui/form/UIForm.gtmpl",
-                 events = {
-                   @EventConfig(listeners = UISubcriptionForm.SaveActionListener.class),
-                   @EventConfig(listeners = UISubcriptionForm.CancelActionListener.class, phase = Phase.DECODE),
-                   @EventConfig(listeners = UISubcriptionForm.DeleteModeratorActionListener.class, phase = Phase.DECODE),
-                   @EventConfig(listeners = UISubcriptionForm.SelectUserActionListener.class, phase = Phase.DECODE),
-                   @EventConfig(listeners = UISubcriptionForm.SelectMemberActionListener.class, phase = Phase.DECODE)
-                 }
+lifecycle = UIFormLifecycle.class, template = "system:/groovy/webui/form/UIForm.gtmpl", events = {
+    @EventConfig(listeners = UISubcriptionForm.SaveActionListener.class),
+    @EventConfig(listeners = UISubcriptionForm.CancelActionListener.class, phase = Phase.DECODE),
+    @EventConfig(listeners = UISubcriptionForm.DeleteModeratorActionListener.class, phase = Phase.DECODE),
+    @EventConfig(listeners = UISubcriptionForm.SelectUserActionListener.class, phase = Phase.DECODE),
+    @EventConfig(listeners = UISubcriptionForm.SelectMemberActionListener.class, phase = Phase.DECODE) }
 )
 public class UISubcriptionForm extends UIForm implements UIPopupComponent, UISelectable{
 
@@ -91,11 +88,11 @@ public class UISubcriptionForm extends UIForm implements UIPopupComponent, UISel
 
   /** The subscription config. */
   private NewsletterSubscriptionConfig subscriptionConfig            = null;
-  
+
   private String popupId;
-  
+
   private boolean isRemove;
-  
+
   public boolean isRemove() {
     return isRemove;
   }
@@ -106,7 +103,7 @@ public class UISubcriptionForm extends UIForm implements UIPopupComponent, UISel
 
   /**
    * Instantiates a new uI subcription form.
-   * 
+   *
    * @throws Exception the exception
    */
   public UISubcriptionForm() throws Exception{
@@ -132,7 +129,8 @@ public class UISubcriptionForm extends UIForm implements UIPopupComponent, UISel
     inputModerator.addValidator(MandatoryValidator.class);
     UIFormInputSetWithAction formSubscriptionDeractor = new UIFormInputSetWithAction(FORM_SUBSCRIPTION_REDACTOR);
     formSubscriptionDeractor.addChild(inputModerator);
-    formSubscriptionDeractor.setActionInfo(SELECT_REDACTOR, new String[] {"SelectUser", "SelectMember", "DeleteModerator"});
+    formSubscriptionDeractor.setActionInfo(SELECT_REDACTOR, new String[] { "SelectUser",
+        "SelectMember", "DeleteModerator" });
     formSubscriptionDeractor.showActionInfo(true);
     UIFormTextAreaInput descriptionInput = new UIFormTextAreaInput(INPUT_SUBCRIPTION_DESCRIPTION, null, null);
     descriptionInput.addValidator(NoneHTMLValidator.class);
@@ -164,7 +162,7 @@ public class UISubcriptionForm extends UIForm implements UIPopupComponent, UISel
 
   /**
    * Gets the popup id.
-   * 
+   *
    * @return the popup id
    */
   public String getPopupId() {
@@ -173,7 +171,7 @@ public class UISubcriptionForm extends UIForm implements UIPopupComponent, UISel
 
   /**
    * Sets the popup id.
-   * 
+   *
    * @param popupId the new popup id
    */
   public void setPopupId(String popupId) {
@@ -182,7 +180,7 @@ public class UISubcriptionForm extends UIForm implements UIPopupComponent, UISel
 
   /**
    * Sets the subscription infor.
-   * 
+   *
    * @param subscriptionConfig the new subscription infor
    */
   public void setSubscriptionInfor(NewsletterSubscriptionConfig subscriptionConfig){
@@ -199,7 +197,7 @@ public class UISubcriptionForm extends UIForm implements UIPopupComponent, UISel
     UIFormSelectBox formSelectBox = this.getChildById(SELECT_CATEGORIES_NAME);
     formSelectBox.setValue(subscriptionConfig.getCategoryName());
     formSelectBox.setDisabled(true);
-    
+
     UIFormInputSetWithAction inputSetWithAction = getChildById(FORM_SUBSCRIPTION_REDACTOR);
     UIFormStringInput inputModerator = inputSetWithAction.getChildById(SELECT_REDACTOR);
     inputModerator.setValue(subscriptionConfig.getRedactor());
@@ -207,7 +205,7 @@ public class UISubcriptionForm extends UIForm implements UIPopupComponent, UISel
 
   /**
    * Gets the list categories.
-   * 
+   *
    * @return the list categories
    */
   private List<NewsletterCategoryConfig> getListCategories(){
@@ -228,7 +226,7 @@ public class UISubcriptionForm extends UIForm implements UIPopupComponent, UISel
    * component's <code>addSaveActionListener<code> method. When
    * the saveAction event occurs, that object's appropriate
    * method is invoked.
-   * 
+   *
    * @see SaveActionEvent
    */
   static  public class SaveActionListener extends EventListener<UISubcriptionForm> {
@@ -239,15 +237,17 @@ public class UISubcriptionForm extends UIForm implements UIPopupComponent, UISel
     public void execute(Event<UISubcriptionForm> event) throws Exception {
 
       UISubcriptionForm uiSubcriptionForm = event.getSource();
-      
+
       UINewsletterManagerPortlet newsletterPortlet = uiSubcriptionForm.getAncestorOfType(UINewsletterManagerPortlet.class);
-      NewsletterManagerService newsletterManagerService = (NewsletterManagerService)newsletterPortlet.getApplicationComponent(NewsletterManagerService.class) ;
+      NewsletterManagerService newsletterManagerService = (NewsletterManagerService)
+          newsletterPortlet.getApplicationComponent(NewsletterManagerService.class);
 
       UIFormSelectBox formSelectBox = uiSubcriptionForm.getChildById(SELECT_CATEGORIES_NAME);
       String categoryName = formSelectBox.getSelectedValues()[0].toString();
       String subcriptionTitle = ((UIFormStringInput)uiSubcriptionForm.getChildById(INPUT_SUBCRIPTION_TITLE)).getValue();
       String subcriptionName = uiSubcriptionForm.getUIStringInput(INPUT_SUBCRIPTION_NAME).getValue();
-      String subcriptionDecription = ((UIFormTextAreaInput)uiSubcriptionForm.getChildById(INPUT_SUBCRIPTION_DESCRIPTION)).getValue();
+      String subcriptionDecription = ((UIFormTextAreaInput) uiSubcriptionForm.
+          getChildById(INPUT_SUBCRIPTION_DESCRIPTION)).getValue();
 
       UIApplication uiApp = uiSubcriptionForm.getAncestorOfType(UIApplication.class);
 
@@ -257,23 +257,29 @@ public class UISubcriptionForm extends UIForm implements UIPopupComponent, UISel
       SessionProvider sessionProvider = Utils.getSessionProvider();
       UIFormInputSetWithAction inputSetWithAction = uiSubcriptionForm.getChildById(FORM_SUBSCRIPTION_REDACTOR);
       UIFormStringInput inputModerator = inputSetWithAction.getChildById(SELECT_REDACTOR);
-      
+
       String inputRedactorValue = inputModerator.getValue();
       if (("".equals(inputRedactorValue)) || (inputRedactorValue == null)) {
-        uiApp.addMessage(new ApplicationMessage("UISubcriptionForm.msg.selectRedactorPermission", null, ApplicationMessage.WARNING));
+        uiApp.addMessage(new ApplicationMessage("UISubcriptionForm.msg.selectRedactorPermission",
+                                                null,
+                                                ApplicationMessage.WARNING));
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
         return;
       }
-      
+
       // Update Redactors into access permissions of newsletter manager page
       NewsletterConstant.updateAccessPermission(inputRedactorValue.split(","));
-      
+
       if(uiSubcriptionForm.subscriptionConfig == null) {
-        newsletterSubscriptionConfig = subscriptionHandler
-                                      .getSubscriptionsByName(sessionProvider, NewsLetterUtil.getPortalName(), categoryName, subcriptionName);
+        newsletterSubscriptionConfig = subscriptionHandler.getSubscriptionsByName(sessionProvider,
+                                                                                  NewsLetterUtil.getPortalName(),
+                                                                                  categoryName,
+                                                                                  subcriptionName);
         if (newsletterSubscriptionConfig != null) {
 
-          uiApp.addMessage(new ApplicationMessage("UISubcriptionForm.msg.subcriptionNameIsAlreadyExist", null, ApplicationMessage.WARNING));
+          uiApp.addMessage(new ApplicationMessage("UISubcriptionForm.msg.subcriptionNameIsAlreadyExist",
+                                                  null,
+                                                  ApplicationMessage.WARNING));
           event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
           return;
         }
@@ -295,11 +301,12 @@ public class UISubcriptionForm extends UIForm implements UIPopupComponent, UISel
         newsletterSubscriptionConfig.setRedactor(inputRedactorValue);
         subscriptionHandler.edit(sessionProvider, NewsLetterUtil.getPortalName(), newsletterSubscriptionConfig);
       }
-      UISubscriptions uiSubscriptions = uiSubcriptionForm.getAncestorOfType(UINewsletterManagerPortlet.class).getChild(UISubscriptions.class);
-      if(uiSubscriptions != null) {
-    	  if(uiSubscriptions.categoryConfig != null) {
-    		  uiSubscriptions.init();
-    	  }
+      UISubscriptions uiSubscriptions = uiSubcriptionForm.getAncestorOfType(UINewsletterManagerPortlet.class)
+                                                         .getChild(UISubscriptions.class);
+      if (uiSubscriptions != null) {
+        if (uiSubscriptions.categoryConfig != null) {
+          uiSubscriptions.init();
+        }
       }
       Utils.closePopupWindow(uiSubcriptionForm, UINewsletterConstant.SUBSCRIPTION_FORM_POPUP_WINDOW);
     }
@@ -313,7 +320,7 @@ public class UISubcriptionForm extends UIForm implements UIPopupComponent, UISel
    * component's <code>addCancelActionListener<code> method. When
    * the cancelAction event occurs, that object's appropriate
    * method is invoked.
-   * 
+   *
    * @see CancelActionEvent
    */
   static  public class CancelActionListener extends EventListener<UISubcriptionForm> {
@@ -330,9 +337,9 @@ public class UISubcriptionForm extends UIForm implements UIPopupComponent, UISel
       Utils.closePopupWindow(uiSubcriptionForm, UINewsletterConstant.SUBSCRIPTION_FORM_POPUP_WINDOW);
     }
   }
-  
+
 public static class SelectUserActionListener extends EventListener<UISubcriptionForm> {
-    
+
     /* (non-Javadoc)
      * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
      */
@@ -357,11 +364,11 @@ public static class SelectUserActionListener extends EventListener<UISubcription
    * component's <code>addSelectMemberActionListener<code> method. When
    * the selectMemberAction event occurs, that object's appropriate
    * method is invoked.
-   * 
+   *
    * @see SelectMemberActionEvent
    */
   public static class SelectMemberActionListener extends EventListener<UISubcriptionForm> {
-    
+
     /* (non-Javadoc)
      * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
      */
@@ -375,9 +382,9 @@ public static class SelectUserActionListener extends EventListener<UISubcription
       uiSubcriptionForm.setPopupId(UINewsletterConstant.GROUP_SELECTOR_POPUP_WINDOW);
     }
   }
-  
+
   public static class DeleteModeratorActionListener extends EventListener<UISubcriptionForm> {
-    
+
     /* (non-Javadoc)
      * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
      */
@@ -394,17 +401,19 @@ public static class SelectUserActionListener extends EventListener<UISubcription
       };
       UIRemoveModerators removeModerators = subscriptionForm.createUIComponent(UIRemoveModerators.class, null, null);
       removeModerators.permissionForSubscriptionForm();
-      removeModerators.init(((UIFormStringInput)((UIFormInputSetWithAction)subscriptionForm.getChildById(FORM_SUBSCRIPTION_REDACTOR)).getChildById(SELECT_REDACTOR)).getValue());
-      Utils.createPopupWindow(subscriptionForm, removeModerators, UINewsletterConstant.REMOVE_MODERATORS_FORM_POPUP_WINDOW, 480);
+      removeModerators.init(((UIFormStringInput) ((UIFormInputSetWithAction) subscriptionForm.
+          getChildById(FORM_SUBSCRIPTION_REDACTOR)).getChildById(SELECT_REDACTOR)).getValue());
+      Utils.createPopupWindow(subscriptionForm,
+                              removeModerators,
+                              UINewsletterConstant.REMOVE_MODERATORS_FORM_POPUP_WINDOW,
+                              480);
       subscriptionForm.setPopupId(UINewsletterConstant.REMOVE_MODERATORS_FORM_POPUP_WINDOW);
     }
   }
 
   public void activate() throws Exception {
-    // TODO Auto-generated method stub
   }
 
   public void deActivate() throws Exception {
-    // TODO Auto-generated method stub
   }
 }

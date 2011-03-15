@@ -26,32 +26,32 @@ import org.exoplatform.webui.form.validator.Validator;
  * Created by The eXo Platform SARL
  * Author : Hoang Van Hung
  *          hunghvit@gmail.com
- * Dec 30, 2009  
+ * Dec 30, 2009
  */
 public class NodeTypeNameValidator implements Validator {
 
   private static final String[] FILTER_CHARS = {"{", "/", "{", "[", "]", "|", "\"", "$", "(", ")"};
-  
+
   public void validate(UIFormInput uiInput) throws Exception {
     String inputValue = (String) uiInput.getValue();
     if (inputValue == null || inputValue.trim().length() == 0) {
-      throwException("NodeTypeNameValidator.msg.empty-input", uiInput);      
+      throwException("NodeTypeNameValidator.msg.empty-input", uiInput);
     }
     switch (inputValue.length()) {
     case 1:
       checkOneChar(inputValue, uiInput);
-      break;      
+      break;
     case 2:
       checkTwoChars(inputValue, uiInput);
     default:
       checkMoreChars(inputValue, uiInput);
       break;
     }
-    
+
   }
-  
+
   /**
-   * 
+   *
    * @param s
    * @param array
    * @return
@@ -64,19 +64,19 @@ public class NodeTypeNameValidator implements Validator {
     }
     return false;
   }
-  
+
   /**
    * Check String Input s if s.length() = 1
    * @param s
    * @param uiInput
-   * @throws MessageException 
+   * @throws MessageException
    */
   private void checkOneChar(String s, UIFormInput uiInput) throws MessageException {
     if (checkArr(s, FILTER_CHARS)) {
-      throwException("NodeTypeNameValidator.msg.Invalid-char", uiInput);     
+      throwException("NodeTypeNameValidator.msg.Invalid-char", uiInput);
     }
   }
-  
+
   /**
    * Check String Input s if s.length() = 2
    * @param s
@@ -93,17 +93,17 @@ public class NodeTypeNameValidator implements Validator {
     } else {
       String s3 = s.substring(0, 1);
       String s4 = s.substring(1, 2);
-      
+
       if (checkArr(s3, FILTER_CHARS)) {
-        throwException("NodeTypeNameValidator.msg.Invalid-char", uiInput);       
+        throwException("NodeTypeNameValidator.msg.Invalid-char", uiInput);
       } else {
         if (checkArr(s4, FILTER_CHARS)) {
-          throwException("NodeTypeNameValidator.msg.Invalid-char", uiInput);         
+          throwException("NodeTypeNameValidator.msg.Invalid-char", uiInput);
         }
       }
     }
   }
-  
+
   /**
    * Check String Input s if s.length() > 2
    * @param s
@@ -114,21 +114,21 @@ public class NodeTypeNameValidator implements Validator {
     String s1 = s.substring(0, 1);
     String s2 = s.substring(s.length() - 1, s.length());
     if (checkArr(s1, FILTER_CHARS)) {
-      throwException("NodeTypeNameValidator.msg.Invalid-char", uiInput);     
-    } else if (checkArr(s2, FILTER_CHARS)){      
-      throwException("NodeTypeNameValidator.msg.Invalid-char", uiInput); 
+      throwException("NodeTypeNameValidator.msg.Invalid-char", uiInput);
+    } else if (checkArr(s2, FILTER_CHARS)){
+      throwException("NodeTypeNameValidator.msg.Invalid-char", uiInput);
     } else {
-      String s3 = s.substring(1, s.length() - 1);     
+      String s3 = s.substring(1, s.length() - 1);
       for(String filterChar : FILTER_CHARS) {
-        if(s3.indexOf(filterChar) > -1) {   
-          throwException("ECMNameValidator.msg.Invalid-char", uiInput);         
+        if(s3.indexOf(filterChar) > -1) {
+          throwException("ECMNameValidator.msg.Invalid-char", uiInput);
         }
           }
     }
-  }   
-  
+  }
+
   private void throwException(String s, UIFormInput uiInput) throws MessageException {
     throw new MessageException(new ApplicationMessage(s, null, ApplicationMessage.WARNING));
   }
-  
+
 }

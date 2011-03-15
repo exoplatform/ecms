@@ -45,7 +45,7 @@ import org.exoplatform.webui.form.UIFormStringInput;
  * Created by The eXo Platform SARL
  * Author : Pham Tuan
  *          phamtuanchip@yahoo.de
- * Dec 19, 2006 9:05:58 AM 
+ * Dec 19, 2006 9:05:58 AM
  */
 @ComponentConfig(
     lifecycle = UIFormLifecycle.class,
@@ -61,7 +61,7 @@ import org.exoplatform.webui.form.UIFormStringInput;
 public class UIScriptConfig extends UIForm {
 
   protected boolean isEdit_ = false;
-  
+
   public UIScriptConfig() {
     List<SelectItemOption<String>> Options = new ArrayList<SelectItemOption<String>>();
     addChild(new UIFormStringInput(UINewConfigForm.FIELD_REPOSITORY, UINewConfigForm.FIELD_REPOSITORY, null));
@@ -118,7 +118,7 @@ public class UIScriptConfig extends UIForm {
       scriptField.setValue(scriptName);
       templateName = preference.getValue(Utils.CB_TEMPLATE, "");
       templateField.setValue(templateName);
-      detailTemplate = preference.getValue(Utils.CB_BOX_TEMPLATE, ""); 
+      detailTemplate = preference.getValue(Utils.CB_BOX_TEMPLATE, "");
       detailtemField.setValue(detailTemplate);
       hasComment = preference.getValue(Utils.CB_VIEW_COMMENT, "");
       hasVote = preference.getValue(Utils.CB_VIEW_VOTE, "");
@@ -134,7 +134,7 @@ public class UIScriptConfig extends UIForm {
     scriptField.setEnable(isEdit_);
     templateField.setEnable(isEdit_);
     detailtemField.setEnable(isEdit_);
-    enableVoteField.setEnable(isEdit_); 
+    enableVoteField.setEnable(isEdit_);
   }
 
   public List<SelectItemOption<String>> getWorkSpaceOption() throws Exception {
@@ -183,12 +183,12 @@ public class UIScriptConfig extends UIForm {
       prefs.setValue(Utils.WORKSPACE_NAME, workSpace);
       prefs.setValue(Utils.CB_SCRIPT_NAME, scriptName);
       prefs.setValue(Utils.CB_TEMPLATE, template);
-      prefs.setValue(Utils.CB_BOX_TEMPLATE, boxTemplate); 
-      prefs.setValue(Utils.CB_ALLOW_PUBLISH, String.valueOf(allowPublish)); 
-      prefs.setValue(Utils.CB_VIEW_TAGMAP, String.valueOf(hasTagMap)); 
-      prefs.setValue(Utils.CB_VIEW_COMMENT,String.valueOf(hasComment));    
-      prefs.setValue(Utils.CB_VIEW_VOTE,String.valueOf(hasVote));   
-      prefs.store(); 
+      prefs.setValue(Utils.CB_BOX_TEMPLATE, boxTemplate);
+      prefs.setValue(Utils.CB_ALLOW_PUBLISH, String.valueOf(allowPublish));
+      prefs.setValue(Utils.CB_VIEW_TAGMAP, String.valueOf(hasTagMap));
+      prefs.setValue(Utils.CB_VIEW_COMMENT,String.valueOf(hasComment));
+      prefs.setValue(Utils.CB_VIEW_VOTE,String.valueOf(hasVote));
+      prefs.store();
       uiBrowseContentPortlet.getChild(UIBrowseContainer.class).setShowDocumentDetail(false);
       uiBrowseContentPortlet.getChild(UIBrowseContainer.class).loadPortletConfig(prefs);
       uiForm.isEdit_ = false;
@@ -196,7 +196,7 @@ public class UIScriptConfig extends UIForm {
       uiConfigTabpane.setNewConfig(false);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiConfigTabpane);
     }
-  }  
+  }
 
   public static class AddActionListener extends EventListener<UIScriptConfig>{
     public void execute(Event<UIScriptConfig> event) throws Exception {

@@ -1,18 +1,18 @@
 ================================================================================
   Copyright (C) 2003-2010 eXo Platform SAS.
- 
+
   This program is free software; you can redistribute it and/or
   modify it under the terms of the GNU Affero General Public License
   as published by the Free Software Foundation; either version 3
   of the License, or (at your option) any later version.
- 
+
   This program is distributed in the hope that it will be useful,
   but WITHOUT ANY WARRANTY; without even the implied warranty of
   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
   GNU General Public License for more details.
- 
+
   You should have received a copy of the GNU General Public License
-  along with this program; if not, see<http://www.gnu.org/licenses/>. 
+  along with this program; if not, see<http://www.gnu.org/licenses/>.
 ================================================================================
 
 TABLE OF CONTENTS
@@ -27,31 +27,31 @@ TABLE OF CONTENTS
 
 1. WHAT IS EXO CONTENT
 ---------------------------------------------------
-	Enterprise Content Management is the strategies, methods and tools used to capture, manage, store, preserve and deliver 
-contents and documents related to organizational processes with the purpose of improving operational productivity and efficiency. 
-eXo Content tools and strategies allow the management of an organization's unstructured information, whether that information exists. 
-The eXo Content portlet provides you with a portal solution that can help you achieve these processes easily and it is carefully 
-designed so that you can leverage your business content across all formats for competitive gain. An environment for employees is also 
+  Enterprise Content Management is the strategies, methods and tools used to capture, manage, store, preserve and deliver
+contents and documents related to organizational processes with the purpose of improving operational productivity and efficiency.
+eXo Content tools and strategies allow the management of an organization's unstructured information, whether that information exists.
+The eXo Content portlet provides you with a portal solution that can help you achieve these processes easily and it is carefully
+designed so that you can leverage your business content across all formats for competitive gain. An environment for employees is also
 provided to share and collaborate digital contents as well as delivering a comprehensive unified solution with rich functionalities.
-eXo Content consists of three parts: 
-	DMS (Document Management System): used to store, manage and track electronic documents and electronic images. DMS allows 
+eXo Content consists of three parts:
+  DMS (Document Management System): used to store, manage and track electronic documents and electronic images. DMS allows
 documents to be modified and managed easily and conveniently by managing versions, properties, ect.
-	Workflow: is the way of looking at and controlling the processes presented in an organization such as service provision or 
-information processing, etc. It is an effective tool to use in times of crisis to make certain that the processes are efficient and 
+  Workflow: is the way of looking at and controlling the processes presented in an organization such as service provision or
+information processing, etc. It is an effective tool to use in times of crisis to make certain that the processes are efficient and
 effective with the purpose of better and more cost efficient organization.
-	WCM (Web Content Management): helps in maintaining, controlling, changing and reassembling the content on a web-page. It also 
-helps webmasters who handle all tasks needed to run a website, including development, deployment, design, content publication and 
-monitoring.				
+  WCM (Web Content Management): helps in maintaining, controlling, changing and reassembling the content on a web-page. It also
+helps webmasters who handle all tasks needed to run a website, including development, deployment, design, content publication and
+monitoring.
 
 2. WHAT's NEW?
 ---------------------------------------------------
-	* EAR compliance with EPP5
-	*	CKEditor3 compatibility, Simple Json based UITable for dialogs/views
-	*	Rest service for cleanName in nodes
-	*	Authoring Plugin (as Tech Preview for RedHat)
-	*	L11n (as Tech Preview for RedHat)
-	*  PDF View for almost document: MS Document, Openfice Document
-	Find more details at the RELEASE NOTEs part
+  * EAR compliance with EPP5
+  *	CKEditor3 compatibility, Simple Json based UITable for dialogs/views
+  *	Rest service for cleanName in nodes
+  *	Authoring Plugin (as Tech Preview for RedHat)
+  *	L11n (as Tech Preview for RedHat)
+  *  PDF View for almost document: MS Document, Openfice Document
+  Find more details at the RELEASE NOTEs part
 
 3. HOW TO SET UP EXO CONTENT
 ---------------------------------------------------
@@ -68,85 +68,85 @@ Based on JavaEE, our WCM runs currently fine with version 1.6 so if you are usin
 3.4 Open a shell session and go to the bin/ directory that has just been extracted.
 
 3.5 Then run the command :
-		* Start tomcat server
-			+)On the Windows platform
-				Open a DOS prompt command, go to tomcat/bin and type the command:
-					"gatein.bat run" for production
-					"gatein-dev.bat run" for development 
+    * Start tomcat server
+      +)On the Windows platform
+        Open a DOS prompt command, go to tomcat/bin and type the command:
+          "gatein.bat run" for production
+          "gatein-dev.bat run" for development
 
-			+)On Unix/Linux/cygwin
-				Open a terminal, go to tomcat/bin and type the command:
-					 "./gatein.sh run" for production
-					 "./gatein-dev.sh run" for development
-		
-		* Start JBoss server
-			+) On the Windows platform
-				 Open a DOS prompt command, go to jboss/bin and type the command:
-					"run.bat"
+      +)On Unix/Linux/cygwin
+        Open a terminal, go to tomcat/bin and type the command:
+           "./gatein.sh run" for production
+           "./gatein-dev.sh run" for development
 
-			+) On Unix/Linux/cygwin
-				 Open a terminal, go to jboss/bin and type the command:
-					 "./run.sh" for production
+    * Start JBoss server
+      +) On the Windows platform
+         Open a DOS prompt command, go to jboss/bin and type the command:
+          "run.bat"
+
+      +) On Unix/Linux/cygwin
+         Open a terminal, go to jboss/bin and type the command:
+           "./run.sh" for production
 3.6 Run Openoffice service to convert document to PDF file for using PDF View.
-		OpenOffice should available on your machine.
+    OpenOffice should available on your machine.
       * Run command:
-		soffice -headless -accept="socket,host=127.0.0.1,port=8100;urp;" -nofirststartwizard
-		Please refer to: http://www.artofsolving.com for using JODCONVERTER
+    soffice -headless -accept="socket,host=127.0.0.1,port=8100;urp;" -nofirststartwizard
+    Please refer to: http://www.artofsolving.com for using JODCONVERTER
 3.7 Using PDF Viewer
-		Now we using icepdf to enable viewing function in eXo Content
-		Some PDF document make Icet pdf generating image with wrong font. We can improve this by
-		installing some Ghostscripts font. Please refer here: http://wiki.icefaces.org/display/PDF/Optimized+Font+Substitution
+    Now we using icepdf to enable viewing function in eXo Content
+    Some PDF document make Icet pdf generating image with wrong font. We can improve this by
+    installing some Ghostscripts font. Please refer here: http://wiki.icefaces.org/display/PDF/Optimized+Font+Substitution
 
-4. BUILDING FROM SOURCES	
-		This will explain you how to build a package of WCM 2.0.0-GA with Tomcat.
-		For general information about installation, please refer to :
-		http://anonsvn.jboss.org/repos/gatein/portal/trunk/README.txt
+4. BUILDING FROM SOURCES
+    This will explain you how to build a package of WCM 2.0.0-GA with Tomcat.
+    For general information about installation, please refer to :
+    http://anonsvn.jboss.org/repos/gatein/portal/trunk/README.txt
 
-		*****************
-		* COMPILATION
-		*****************
+    *****************
+    * COMPILATION
+    *****************
 
-		* mvn install
-		For example: mvn install
+    * mvn install
+    For example: mvn install
 
-		***********************
-		* PACKAGING FOR TOMCAT:
-		***********************
-		WCM only:
-		** mvn clean install in /delivery/wcm/assembly
-		*  Creates a Tomcat delivery in /delivery/wcm/assembly/target/tomcat/ 
-		
-		WCM + WKF:
-		** mvn clean install in /delivery/wkf-wcm/assembly
-		*  Creates a Tomcat delivery in /delivery/wkf-wcm/assembly/target/tomcat/ 
-		
-		***************************
-		* PACKAGING FOR JBOSS EARs:
-		***************************		
-		* WCM extension ear:
-		** mvn clean install in /packaging/wcm/ear
-		
-		* ECMDEMO ear
-		** mvn clean install in /packaging/ecmdemo/ear
-		
-		* Workflow ear(optional):
-		** mvn clean install in /packaging/workflow/ear
+    ***********************
+    * PACKAGING FOR TOMCAT:
+    ***********************
+    WCM only:
+    ** mvn clean install in /delivery/wcm/assembly
+    *  Creates a Tomcat delivery in /delivery/wcm/assembly/target/tomcat/
 
-		*****************
-		* STARTING:
-		*****************		
-		* On Tomcat: go to the tomcat directory (or unzip the archive in your favorite location) and execute 'bin/gatein.sh start' ('bin/gatein.bat start' on Windows)
-		* On EPP5: Copy WCM extension ear and ECMDEMO ear to folder /jboss-epp-5.0/jboss-as/server/default/deploy 
-			Go to /jboss-epp-5.0/jboss-as/bin and execute './run.sh' ('/run.bat start' on Windows)
-	
+    WCM + WKF:
+    ** mvn clean install in /delivery/wkf-wcm/assembly
+    *  Creates a Tomcat delivery in /delivery/wkf-wcm/assembly/target/tomcat/
+
+    ***************************
+    * PACKAGING FOR JBOSS EARs:
+    ***************************
+    * WCM extension ear:
+    ** mvn clean install in /packaging/wcm/ear
+
+    * ECMDEMO ear
+    ** mvn clean install in /packaging/ecmdemo/ear
+
+    * Workflow ear(optional):
+    ** mvn clean install in /packaging/workflow/ear
+
+    *****************
+    * STARTING:
+    *****************
+    * On Tomcat: go to the tomcat directory (or unzip the archive in your favorite location) and execute 'bin/gatein.sh start' ('bin/gatein.bat start' on Windows)
+    * On EPP5: Copy WCM extension ear and ECMDEMO ear to folder /jboss-epp-5.0/jboss-as/server/default/deploy
+      Go to /jboss-epp-5.0/jboss-as/bin and execute './run.sh' ('/run.bat start' on Windows)
+
 5. RUNNING
 ---------------------------------------------------
 5.1 Open your web browsers, now eXo Content can run on FireFox 2 or newer, Internet Explorer 7 or newer (we recommend using FireFox 3+ or Internet Explorer 7+ for the best result)
-		Navigate to URL: http://localhost:8080/ecmdemo
+    Navigate to URL: http://localhost:8080/ecmdemo
 
 5.2 When the page has been loaded, click "Login" on the top right corner. Specify the username "root" and the password "gtn".
 
-6. RELEASE NOTES 
+6. RELEASE NOTES
 ---------------------------------------------------
 
 Release Notes - exo-ecms - Version wcm-2.0.0-GA
@@ -154,13 +154,13 @@ Release Notes - exo-ecms - Version wcm-2.0.0-GA
 ** Bug
     * [ECMS-183] - Can't add gadgets into  web content
     * [ECMS-269] - Bad display font with pdf file when viewing
-    * [ECMS-284] - link of document on folder which was add exo:taxonomy action is still displayed content when this document was deleted 
+    * [ECMS-284] - link of document on folder which was add exo:taxonomy action is still displayed content when this document was deleted
     * [ECMS-313] - User is logout when open  a file .pdf
     * [ECMS-335] - DMS gadgets can not display
     * [ECMS-343] - after closing the popup "Welcome to single content viewer" in edit mode, it's not possible to open it again
     * [ECMS-349] - View Image in the other language is not displayed
     * [ECMS-352] - Lose icon of node in Content selector
-    * [ECMS-370] - Delete Option 
+    * [ECMS-370] - Delete Option
     * [ECMS-371] - Exception while creating Translations
     * [ECMS-376] - Display empty space on sidebar resize
     * [ECMS-388] - Update "How to use this demo ?" content to reflect good user and password
@@ -170,7 +170,7 @@ Release Notes - exo-ecms - Version wcm-2.0.0-GA
     * [ECMS-423] - Can't activate auditing for node
     * [ECMS-432] - Corresponding icon of driver is not shown
     * [ECMS-435] - The first check-box is not uncheck automatically when uncheck on 1 subscription
-    * [ECMS-452] - Unknown error when edit CLV without selecting folder path 
+    * [ECMS-452] - Unknown error when edit CLV without selecting folder path
     * [ECMS-456] - The "Global CSS"of a newly created site is not active by default, when it should be
     * [ECMS-458] - confirm message is not shown when activate version for document
     * [ECMS-459] - broken UI at File View Tab of  File Plan
@@ -196,7 +196,7 @@ Release Notes - exo-ecms - Version wcm-2.0.0-GA
     * [ECMS-517] - memberships not loaded properly
     * [ECMS-518] - Broken UI when show/hide relation in special case
     * [ECMS-522] - Unable to deploy JBPM process definitions on WCM 2.0 CR 01 (EPP)
-    * [ECMS-524] - Can not delete subscription 
+    * [ECMS-524] - Can not delete subscription
     * [ECMS-525] - Error when view content of link in SCV
     * [ECMS-526] - Exception in authoringPublication
     * [ECMS-532] - SlideShow cannot view in IE
@@ -239,7 +239,7 @@ Release Notes - exo-ecms - Version wcm-2.0.0-GA
     * [ECMS-650] - Error while setting a page with PCLV portlet
     * [ECMS-651] - In Site Explorer: Wrongly displaying the name of an uploaded file if the name contains special characters.
     * [ECMS-652] - Can't delete Template after edited this template
-    * [ECMS-654] - Still show previous results when searching 
+    * [ECMS-654] - Still show previous results when searching
     * [ECMS-655] - Label categories are not translated in Content Selector
     * [ECMS-657] - Cannot edit and save template
     * [ECMS-659] - SE : Cannot load and merge the bundle
@@ -281,11 +281,11 @@ Release Notes - exo-ecms - Version wcm-2.0.0-GA
     * [ECMS-407] - fix the missing translations
     * [ECMS-484] - Acessing a field in Pre Node Save Interceptor
     * [ECMS-519] - Use SYSTEM navigation instead of HIDDEN for pcv detail page
-    * [ECMS-520] - Friendly Service shouldn't be active by default 
+    * [ECMS-520] - Friendly Service shouldn't be active by default
     * [ECMS-521] - use Kernel profiles to include Authoring extension in WCM
-    * [ECMS-543] -  [WCM] Should change message when new node type's name contains special character 
+    * [ECMS-543] -  [WCM] Should change message when new node type's name contains special character
     * [ECMS-544] - Umbrella for issues come from Test Campaign
-    * [ECMS-557] -  [DMS] Always show message in ECM Templates after delete a view in case delete all ECM Templates 
+    * [ECMS-557] -  [DMS] Always show message in ECM Templates after delete a view in case delete all ECM Templates
     * [ECMS-582] - Performance Test on WCM 2.0
     * [ECMS-618] - Create mvn project for explorer portlet java classes
     * [ECMS-621] - Add default icon for action on action bar
@@ -303,7 +303,7 @@ Release Notes - exo-ecms - Version wcm-2.0.0-GA
     * [ECMS-538] - DMS: Unknown error when create new drive with " in name
     * [ECMS-539] - DMS - Should set folder default in Allowance to create folder when Edit drive
     * [ECMS-540] -  DMS: Unknown error when search draft node type
-    * [ECMS-547] - [WCM] Litter error in [Page Selector] form while select target path 
+    * [ECMS-547] - [WCM] Litter error in [Page Selector] form while select target path
     * [ECMS-548] - IE7: Menu item display under menu item bar
     * [ECMS-550] - [WCM] Should require users put values in fields when configuration for Contact Us form
     * [ECMS-565] -  [WCM] Page's content isn't displayed in Print Preview form
@@ -318,14 +318,14 @@ Release Notes - exo-ecms - Version wcm-2.0.0-GA
 
 
 ** Other resources and links
-	Company site        http://www.exoplatform.com
-	Community JIRA      http://jira.exoplatform.org
-	Community site      http://www.exoplatform.org
-	
+  Company site        http://www.exoplatform.com
+  Community JIRA      http://jira.exoplatform.org
+  Community site      http://www.exoplatform.org
+
 For more documentation and latest updated news, please visit our websites:
-	www.exoplatform.com
-	www.blog.exoplatform.org
-	
+  www.exoplatform.com
+  www.blog.exoplatform.org
+
 If you have questions, please send a mail to the list exoplatform@objectweb.org.
 
 Thank your for using eXo Content product!

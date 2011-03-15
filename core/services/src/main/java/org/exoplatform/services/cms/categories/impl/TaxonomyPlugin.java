@@ -45,34 +45,34 @@ import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
  * to replace this one
  */
 @Deprecated
-public class TaxonomyPlugin extends BaseComponentPlugin{	
+public class TaxonomyPlugin extends BaseComponentPlugin{
 
-  private RepositoryService repositoryService_ ;  
-  private String baseTaxonomiesPath_ ;  
-  private InitParams params_ ;  
-  private boolean autoCreateInNewRepository_ = true;  
+  private RepositoryService repositoryService_ ;
+  private String baseTaxonomiesPath_ ;
+  private InitParams params_ ;
+  private boolean autoCreateInNewRepository_ = true;
   /**
    * DMS configuration which used to store informations
-   */   
+   */
   private DMSConfiguration dmsConfiguration_;
 
-  public TaxonomyPlugin(InitParams params, RepositoryService repositoryService, 
-      NodeHierarchyCreator nodeHierarchyCreator, 
+  public TaxonomyPlugin(InitParams params, RepositoryService repositoryService,
+      NodeHierarchyCreator nodeHierarchyCreator,
       DMSConfiguration dmsConfiguration) throws Exception {
     repositoryService_ = repositoryService ;
-    baseTaxonomiesPath_ = nodeHierarchyCreator.getJcrPath(BasePath.EXO_TAXONOMIES_PATH) ;    
+    baseTaxonomiesPath_ = nodeHierarchyCreator.getJcrPath(BasePath.EXO_TAXONOMIES_PATH) ;
     params_ = params ;
     ValueParam valueParam = params_.getValueParam("autoCreateInNewRepository") ;
     if(valueParam !=null) {
       autoCreateInNewRepository_ = Boolean.parseBoolean(valueParam.getValue()) ;
-    }   
+    }
     dmsConfiguration_ = dmsConfiguration;
   }
 
-  public void init() throws Exception {    
+  public void init() throws Exception {
     if(autoCreateInNewRepository_) {
       RepositoryEntry repositoryEntry = repositoryService_.getCurrentRepository().getConfiguration();
-      importPredefineTaxonomies(repositoryEntry.getName()) ;        
+      importPredefineTaxonomies(repositoryEntry.getName()) ;
       return ;
     }
     ValueParam param = params_.getValueParam("repository") ;
@@ -81,7 +81,7 @@ public class TaxonomyPlugin extends BaseComponentPlugin{
       repository = repositoryService_.getDefaultRepository().getConfiguration().getName();
     }else {
       repository = param.getValue() ;
-    }    
+    }
     importPredefineTaxonomies(repository) ;
   }
 
@@ -91,15 +91,15 @@ public class TaxonomyPlugin extends BaseComponentPlugin{
   }
 
   @SuppressWarnings("unchecked")
-  private void importPredefineTaxonomies(String repository) throws Exception {    
+  private void importPredefineTaxonomies(String repository) throws Exception {
     ManageableRepository manageableRepository = repositoryService_.getCurrentRepository();
-    DMSRepositoryConfiguration dmsRepoConfig = dmsConfiguration_.getConfig();    
-    Session session = manageableRepository.getSystemSession(dmsRepoConfig.getSystemWorkspace()) ;    
+    DMSRepositoryConfiguration dmsRepoConfig = dmsConfiguration_.getConfig();
+    Session session = manageableRepository.getSystemSession(dmsRepoConfig.getSystemWorkspace()) ;
     Node taxonomyHomeNode = (Node)session.getItem(baseTaxonomiesPath_) ;
     //TODO Need remove this code
-    if(taxonomyHomeNode.hasProperty("exo:isImportedChildren"))  { 
+    if(taxonomyHomeNode.hasProperty("exo:isImportedChildren"))  {
       session.logout();
-      return ; 
+      return ;
     }
     taxonomyHomeNode.setProperty("exo:isImportedChildren",true) ;
     Iterator<ObjectParameter> it = params_.getObjectParamIterator() ;
@@ -116,7 +116,7 @@ public class TaxonomyPlugin extends BaseComponentPlugin{
     session.save();
     session.logout();
   }
-  
+
   public Map getPermissions(List<Permission> permissions) {
     Map<String, String[]> permissionsMap = new HashMap<String, String[]>();
     for (Permission permission : permissions) {

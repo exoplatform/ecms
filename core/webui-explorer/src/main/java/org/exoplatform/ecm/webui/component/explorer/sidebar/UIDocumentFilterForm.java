@@ -38,19 +38,19 @@ import org.exoplatform.webui.form.UIFormCheckBoxInput;
  * Created by The eXo Platform SARL
  * Author : Phan Trong Lam
  *          lamptdev@gmail.com
- * Oct 27, 2009  
+ * Oct 27, 2009
  */
-@ComponentConfig(lifecycle = UIFormLifecycle.class, 
-    template = "system:/groovy/webui/form/UIFormWithTitle.gtmpl", 
+@ComponentConfig(lifecycle = UIFormLifecycle.class,
+    template = "system:/groovy/webui/form/UIFormWithTitle.gtmpl",
     events = {
       @EventConfig(listeners = UIDocumentFilterForm.SaveActionListener.class),
       @EventConfig(phase = Phase.DECODE, listeners = UIDocumentFilterForm.CancelActionListener.class)
     }
 )
-  
+
   public class UIDocumentFilterForm extends UIForm implements UIPopupComponent {
 
-  public UIDocumentFilterForm(){    
+  public UIDocumentFilterForm(){
   }
 
   public void activate() throws Exception {
@@ -60,10 +60,10 @@ import org.exoplatform.webui.form.UIFormCheckBoxInput;
   }
 
   public void invoke(List<String> checkedTypes) {
-    DocumentTypeService documentTypeService = getApplicationComponent(DocumentTypeService.class);        
+    DocumentTypeService documentTypeService = getApplicationComponent(DocumentTypeService.class);
     List<String> supportedTypes = documentTypeService.getAllSupportedType();
 
-    for (String supportedName : supportedTypes) {                     
+    for (String supportedName : supportedTypes) {
       addUIFormInput(new UIFormCheckBoxInput<Boolean>(supportedName, supportedName,null));
 
       for (String checkedTypeName : checkedTypes) {
@@ -71,27 +71,27 @@ import org.exoplatform.webui.form.UIFormCheckBoxInput;
           getUIFormCheckBoxInput(supportedName).setChecked(true);
           continue;
         }
-      }                                             
-    }                
+      }
+    }
   }
 
   static public class SaveActionListener extends EventListener<UIDocumentFilterForm> {
-    public void execute(Event<UIDocumentFilterForm> event) throws Exception {            
-      UIDocumentFilterForm uiForm = event.getSource();      
+    public void execute(Event<UIDocumentFilterForm> event) throws Exception {
+      UIDocumentFilterForm uiForm = event.getSource();
       UIJCRExplorerPortlet uiExplorerPorltet = uiForm.getAncestorOfType(UIJCRExplorerPortlet.class);
-      UIJCRExplorer uiExplorer = uiExplorerPorltet.findFirstComponentOfType(UIJCRExplorer.class);      
+      UIJCRExplorer uiExplorer = uiExplorerPorltet.findFirstComponentOfType(UIJCRExplorer.class);
       DocumentTypeService documentTypeService = uiForm.getApplicationComponent(DocumentTypeService.class);
       List<String> supportedTypes = documentTypeService.getAllSupportedType();
       List<String> checkedSupportTypes = new ArrayList<String>();
 
-      for (String checkedName : supportedTypes) {                        
-        if (uiForm.getUIFormCheckBoxInput(checkedName).isChecked()) 
-          checkedSupportTypes.add(checkedName);                                        
+      for (String checkedName : supportedTypes) {
+        if (uiForm.getUIFormCheckBoxInput(checkedName).isChecked())
+          checkedSupportTypes.add(checkedName);
       }
       uiExplorer.setCheckedSupportType(checkedSupportTypes);
       uiExplorer.setFilterSave(true);
-      uiExplorer.refreshExplorer();      
-      uiExplorerPorltet.setRenderedChild(UIJCRExplorer.class);      
+      uiExplorer.refreshExplorer();
+      uiExplorerPorltet.setRenderedChild(UIJCRExplorer.class);
     }
   }
 

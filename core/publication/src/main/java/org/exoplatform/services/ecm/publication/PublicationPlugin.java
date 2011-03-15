@@ -33,7 +33,7 @@ import org.exoplatform.webui.form.UIForm;
  * Publication plugins implement a publication lifecycle. Each time a new
  * custom lifecycle needs to be defined, a new plugin has to be implemented
  * and registered with the Publication Service.
- * 
+ *
  * The getName() method in the parent class is used to identify the lifecycle.
  * The getDescription() method in the parent class is used to describe the
  * lifecycle. Internationalization resource bundles are used in the
@@ -43,7 +43,7 @@ public abstract class PublicationPlugin extends BaseComponentPlugin {
 
   /**
    * Retrieves all possible states in the publication lifecycle.
-   * 
+   *
    * @return an array of Strings giving the names of all possible states
    */
   public abstract String[] getPossibleStates();
@@ -56,12 +56,12 @@ public abstract class PublicationPlugin extends BaseComponentPlugin {
    * yes, appropriate action is made (eg: launch a publication workflow). In
    * all cases, the current state information is updated in the publication
    * mixin of the specified Node.
-   * 
+   *
    * @param node the Node whose state needs to be changed
    * @param newState the new state.
    * @param context a Hashmap containing contextual information needed
    * to change the state. The information set is defined on a State basis.
-   * 
+   *
    * @throws IncorrectStateUpdateLifecycleException if the update is not
    * allowed
    * @throws Exception the exception
@@ -84,12 +84,12 @@ public abstract class PublicationPlugin extends BaseComponentPlugin {
    * a publication mixin, then it throws a NotInPublicationLifecycleException
    * exception. Else, it retrieves the lifecycle name from the mixin,
    * selects the appropriate publication plugin and delegates the call to it.
-   * 
+   *
    * @param node the Node from which the state UI should be retrieved
    * @param component the component
-   * 
+   *
    * @return a WebUI form corresponding to the current state and node.
-   * 
+   *
    * @throws Exception the exception
    */
   public abstract UIForm getStateUI(Node node, UIComponent component) throws Exception;
@@ -100,13 +100,13 @@ public abstract class PublicationPlugin extends BaseComponentPlugin {
    * of the specified Node, then fetches the bytes of an appropriate image
    * found in the jar of the plugin. This image is supposed to be shown in
    * the publication dialog of the JCR File Explorer Portlet.
-   * 
+   *
    * @param node the node from which the image should be obtained
    * @param locale the locale
-   * 
+   *
    * @return an array of bytes corresponding to the image to be shown to the
    * user
-   * 
+   *
    * @throws IOException Signals that an I/O exception has occurred.
    * @throws FileNotFoundException the file not found exception
    * @throws Exception the exception
@@ -123,22 +123,22 @@ public abstract class PublicationPlugin extends BaseComponentPlugin {
    * and put in a backup state.".
    * - "The document is in draft state. At any time you can turn it to
    * published state."
-   * 
+   *
    * The returned message should be obtained from internationalization
    * resource bundles (ie not hardcoded).
-   * 
+   *
    * @param node the node from which the publication state should be retrieved
    * @param locale the locale
-   * 
+   *
    * @return a String giving the current state.
-   * 
+   *
    * @throws Exception the exception
    */
   public abstract String getUserInfo(Node node, Locale locale) throws Exception;
 
   /**
    * Retrieves the lifecycleName.
-   * 
+   *
    * @return a String giving the lifecycleName
    */
 
@@ -148,9 +148,9 @@ public abstract class PublicationPlugin extends BaseComponentPlugin {
 
   /**
    * Retrieves the description of the plugin.
-   * 
+   *
    * @param node the node
-   * 
+   *
    * @return a String giving the description
    */
   public String getNodeLifecycleDesc(Node node) {
@@ -159,45 +159,45 @@ public abstract class PublicationPlugin extends BaseComponentPlugin {
 
   /**
    * Return if the plugin can add the specific mixin for the publication.
-   * 
+   *
    * @param node the node to add the mixin
-   * 
+   *
    * @return boolean
-   * 
+   *
    * @throws Exception the exception
    */
   public abstract boolean canAddMixin (Node node) throws Exception;
 
   /**
    * Add the specific plugin mixin to the node.
-   * 
+   *
    * @param node the node
-   * 
+   *
    * @throws Exception the exception
    */
   public abstract void addMixin (Node node) throws Exception;
-  
+
   /**
    * Retrieves a node view of the specific node in a context
-   * 
+   *
    * @param node the node
    * @param context the context
-   * 
+   *
    * @return the node to view
-   * 
+   *
    * @throws Exception the exception
    */
   public abstract Node getNodeView(Node node, Map<String,Object> context) throws Exception;
-  
+
   /**
    * Get localized log messages and substitute variables.
-   * 
+   *
    * @param locale : the locale to use
    * @param key : the key to translate
    * @param values : array of string to susbtitute in the string
-   * 
+   *
    * @return the localized and substitute log
-   * 
+   *
    * @result a string localized and where values are substitute
    */
   public abstract String getLocalizedAndSubstituteMessage(Locale locale, String key, String[] values) throws Exception;

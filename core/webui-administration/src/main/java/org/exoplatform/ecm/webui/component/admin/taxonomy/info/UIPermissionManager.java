@@ -39,7 +39,7 @@ import org.exoplatform.webui.organization.account.UIUserSelector;
  *          TrongTT@exoplatform.com
  * Sep 13, 2006
  * Editor : TuanP
- *        phamtuanchip@yahoo.de   
+ *        phamtuanchip@yahoo.de
  * Oct 13, 2006
  */
 
@@ -47,10 +47,10 @@ import org.exoplatform.webui.organization.account.UIUserSelector;
 
 public class UIPermissionManager extends UIContainer implements UIPopupComponent{
   public UIPermissionManager() throws Exception {
-    addChild(UIPermissionInfo.class, null, null);    
-    addChild(UIPermissionForm.class, null, null);    
+    addChild(UIPermissionInfo.class, null, null);
+    addChild(UIPermissionForm.class, null, null);
   }
-  
+
   public void initPopupPermission(UIComponent uiSelector) throws Exception {
     removeChildById(UIPermissionForm.POPUP_SELECT);
     UIPopupWindow uiPopup = addChild(UIPopupWindow.class, null, UIPermissionForm.POPUP_SELECT);
@@ -60,7 +60,7 @@ public class UIPermissionManager extends UIContainer implements UIPopupComponent
     uiPopup.setShow(true);
     uiPopup.setResizable(true);
   }
-  
+
   public void initUserSelector() throws Exception {
     UIPopupWindow uiPopup = getChildById("PopupUserSelector") ;
     if(uiPopup == null) {
@@ -72,7 +72,7 @@ public class UIPermissionManager extends UIContainer implements UIPopupComponent
     uiPopup.setShow(true) ;
     uiPopup.setResizable(true) ;
   }
-  
+
   public void activate() throws Exception {
     getChild(UIPermissionInfo.class).updateGrid() ;
   }
@@ -92,7 +92,7 @@ public class UIPermissionManager extends UIContainer implements UIPopupComponent
     }
   }
   public void deActivate() throws Exception {}
-  
+
   static  public class AddUserActionListener extends EventListener<UIUserSelector> {
     public void execute(Event<UIUserSelector> event) throws Exception {
       UIUserSelector uiForm = event.getSource();
@@ -103,6 +103,6 @@ public class UIPermissionManager extends UIContainer implements UIPopupComponent
       uiPopup.setUIComponent(null);
       uiPopup.setShow(false);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiParent);
-    }  
+    }
   }
 }

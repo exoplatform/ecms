@@ -31,14 +31,14 @@ import org.exoplatform.workflow.webui.component.UIUserSelectContainer;
  * Author : Ly Dinh Quang
  *          quang.ly@exoplatform.com
  *          xxx5669@gmail.com
- * Jan 12, 2009  
+ * Jan 12, 2009
  */
 @ComponentConfig(template = "classpath:templates/controller/UITabPane.gtmpl")
 public class UITaskManager extends UIContainer implements UIPopupComponent {
-  
+
   private String tokenId_ ;
   private boolean isStart_ = false;
-  
+
   public static final String UIPOPUP_DELEGATEDSELECTOR_ID = "PopupDelegatedSelectorId";
   public UITaskManager() throws Exception {
     addChild(UITask.class, null, null) ;
@@ -64,13 +64,13 @@ public class UITaskManager extends UIContainer implements UIPopupComponent {
     uiPopup.setResizable(true);
   }
   public void setTokenId(String tokenId) { tokenId_ = tokenId ; }
-  
+
   public void setIsStart(boolean isStart) { isStart_ = isStart ; }
-  
+
   public void activate() throws Exception { }
-  
+
   public boolean checkBeforeActive() throws Exception {
-    WorkflowServiceContainer workflowServiceContainer = 
+    WorkflowServiceContainer workflowServiceContainer =
       getApplicationComponent(WorkflowServiceContainer.class);
     try {
       UITask uiTask = getChild(UITask.class);
@@ -80,10 +80,10 @@ public class UITaskManager extends UIContainer implements UIPopupComponent {
       return true;
     } catch (PathNotFoundException e) {
       Task task = workflowServiceContainer.getTask(tokenId_);
-      String pid = task.getProcessInstanceId();       
+      String pid = task.getProcessInstanceId();
       workflowServiceContainer.deleteProcessInstance(pid);
       return false;
-    } 
+    }
   }
 
   public void deActivate() throws Exception { }

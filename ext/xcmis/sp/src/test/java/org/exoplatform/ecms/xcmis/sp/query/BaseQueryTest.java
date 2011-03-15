@@ -51,7 +51,7 @@ import java.util.Set;
 /**
  * Created by The eXo Platform SAS. <br/>
  * Date:
- * 
+ *
  * @author <a href="karpenko.sergiy@gmail.com">Karpenko Sergiy</a>
  * @version $Id$
  */
@@ -283,7 +283,7 @@ public abstract class BaseQueryTest extends BaseTest
 
    /**
     * Create content for Apollo program.
-    * 
+    *
     * @param folder
     * @return
     * @throws Exception
@@ -324,7 +324,6 @@ public abstract class BaseQueryTest extends BaseTest
    @Override
    public void setUp() throws Exception
    {
-      // TODO Auto-generated method stub
       super.setUp();
 
    }

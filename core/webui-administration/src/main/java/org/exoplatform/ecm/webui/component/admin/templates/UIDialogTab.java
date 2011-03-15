@@ -45,7 +45,7 @@ import org.exoplatform.webui.event.EventListener;
  * Author : pham tuan
  *          phamtuanchip@yahoo.de
  * Oct 03, 2006
- * 9:43:23 AM 
+ * 9:43:23 AM
  */
 @ComponentConfig(
     lifecycle = UIContainerLifecycle.class,
@@ -61,7 +61,7 @@ public class UIDialogTab extends UIContainer {
   final private static String[] ACTIONS = {"Edit", "Delete"} ;
   final public static String DIALOG_LIST_NAME = "DialogList" ;
   final public static String DIALOG_FORM_NAME = "DialogForm" ;
-  
+
   private List<String> listDialog_ = new ArrayList<String>() ;
 
   public UIDialogTab() throws Exception {
@@ -74,10 +74,10 @@ public class UIDialogTab extends UIContainer {
   }
 
   public List<String> getListDialog() { return listDialog_ ; }
-  
+
   public void updateGrid(String nodeName, String repository) throws Exception {
     TemplateService tempService = getApplicationComponent(TemplateService.class) ;
-    NodeIterator iter = tempService.getAllTemplatesOfNodeType(true, nodeName,  
+    NodeIterator iter = tempService.getAllTemplatesOfNodeType(true, nodeName,
         SessionProviderFactory.createSystemProvider()) ;
     List<DialogData> data = new ArrayList<DialogData>() ;
     DialogData item  ;
@@ -99,7 +99,7 @@ public class UIDialogTab extends UIContainer {
     }
     UIGrid uiGrid = getChild(UIGrid.class) ;
     ObjectPageList objDPageList = new ObjectPageList(data, 4) ;
-    uiGrid.getUIPageIterator().setPageList(objDPageList) ;  
+    uiGrid.getUIPageIterator().setPageList(objDPageList) ;
   }
 
   public void setTabRendered() {
@@ -127,7 +127,7 @@ public class UIDialogTab extends UIContainer {
       String templateName = event.getRequestContext().getRequestParameter(OBJECTID) ;
       TemplateService templateService = dialogTab.getApplicationComponent(TemplateService.class) ;
       UITemplateContent uiForm = dialogTab.findFirstComponentOfType(UITemplateContent.class) ;
-      for(String template : TemplateService.UNDELETABLE_TEMPLATES) {        
+      for(String template : TemplateService.UNDELETABLE_TEMPLATES) {
         if(template.equals(templateName)) {
           UIApplication app = dialogTab.getAncestorOfType(UIApplication.class) ;
           Object[] args = {template} ;
@@ -141,8 +141,8 @@ public class UIDialogTab extends UIContainer {
       String repository = portletPref.getValue(Utils.REPOSITORY, "") ;
       templateService.removeTemplate(TemplateService.DIALOGS, nodeTypeName, templateName) ;
       uiForm.update(null);
-      uiForm.reset();      
-      
+      uiForm.reset();
+
       dialogTab.updateGrid(nodeTypeName, repository) ;
       dialogTab.setTabRendered() ;
       UITemplatesManager uiManager = dialogTab.getAncestorOfType(UITemplatesManager.class) ;

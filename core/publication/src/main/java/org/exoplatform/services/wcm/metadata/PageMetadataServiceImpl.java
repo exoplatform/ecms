@@ -43,92 +43,92 @@ import org.exoplatform.services.wcm.portal.LivePortalManagerService;
  * Nov 3, 2008
  */
 public class PageMetadataServiceImpl implements PageMetadataService {
-  
+
   /** The log. */
   private static Log log = ExoLogger.getLogger("wcm:PageMetadataService");
-  
+
   /** The live portal manager service. */
-  private LivePortalManagerService livePortalManagerService; 
-  
+  private LivePortalManagerService livePortalManagerService;
+
   /** The categories service. */
   private TaxonomyService taxonomyService;
-  
+
   /** The folksonomy service. */
   private NewFolksonomyService folksonomyService;
-  
+
   /**
    * Instantiates a new page metadata service impl.
-   * 
+   *
    * @param livePortalManagerService the live portal manager service
    * @param categoriesService the categories service
    * @param folksonomyService the folksonomy service
-   * 
+   *
    * @throws Exception the exception
    */
-  public PageMetadataServiceImpl(LivePortalManagerService livePortalManagerService, 
-                                 TaxonomyService taxonomyService, 
-                                 NewFolksonomyService folksonomyService) throws Exception {        
-    this.livePortalManagerService = livePortalManagerService;    
+  public PageMetadataServiceImpl(LivePortalManagerService livePortalManagerService,
+                                 TaxonomyService taxonomyService,
+                                 NewFolksonomyService folksonomyService) throws Exception {
+    this.livePortalManagerService = livePortalManagerService;
     this.taxonomyService = taxonomyService;
     this.folksonomyService = folksonomyService;
-  }      
-  
+  }
+
   /* (non-Javadoc)
    * @see org.exoplatform.services.wcm.metadata.PageMetadataService#getPortalMetadata(java.lang.String, org.exoplatform.services.jcr.ext.common.SessionProvider)
    */
   public HashMap<String, String> getPortalMetadata(SessionProvider sessionProvider, String uri)
   throws Exception {
-    String portalName = uri.split("/")[1];      
+    String portalName = uri.split("/")[1];
     try {
       Node portal = livePortalManagerService.getLivePortal(sessionProvider, portalName);
-      return extractPortalMetadata(portal);      
+      return extractPortalMetadata(portal);
     } catch (Exception e) {
       if(log.isDebugEnabled())
-        log.debug(e);      
-    }       
+        log.debug(e);
+    }
     return null;
   }
 
   /**
    * Extract portal metadata.
-   * 
+   *
    * @param portalNode the portal node
-   * 
+   *
    * @return the hash map< string, string>
-   * 
+   *
    * @throws Exception the exception
    */
   private HashMap<String,String> extractPortalMetadata(Node portalNode) throws Exception {
     HashMap<String,String> metadata = new HashMap<String,String>();
-    NodeTypeManager manager = portalNode.getSession().getWorkspace().getNodeTypeManager();    
-    NodeType siteMedata = manager.getNodeType("metadata:siteMetadata");    
+    NodeTypeManager manager = portalNode.getSession().getWorkspace().getNodeTypeManager();
+    NodeType siteMedata = manager.getNodeType("metadata:siteMetadata");
     for(PropertyDefinition pdef: siteMedata.getDeclaredPropertyDefinitions()) {
       String metadataName = pdef.getName();
       String metadataValue = getProperty(portalNode,metadataName);
-      if(metadataValue != null) 
-        metadata.put(metadataName,metadataValue);              
-    }    
+      if(metadataValue != null)
+        metadata.put(metadataName,metadataValue);
+    }
     HashMap<String,String> dcElementSet = extractDCElementSetMetadata(portalNode);
     metadata.putAll(dcElementSet);
     return metadata;
-  }  
-  
+  }
+
   /**
    * Extract dc element set metadata.
-   * 
+   *
    * @param node the node
-   * 
+   *
    * @return the hash map< string, string>
-   * 
+   *
    * @throws Exception the exception
    */
   private HashMap<String,String> extractDCElementSetMetadata(Node node) throws Exception {
     HashMap<String,String> metadata = new HashMap<String,String>();
     Node checkNode = node;
     if(node.isNodeType("nt:file"))
-      checkNode = (Node)node.getPrimaryItem();    
+      checkNode = (Node)node.getPrimaryItem();
     if(!checkNode.isNodeType("dc:elementSet")) return metadata;
-    
+
     NodeType dcElementSet = node.getSession().getWorkspace().getNodeTypeManager().getNodeType("dc:elementSet");
     for(PropertyDefinition pdef: dcElementSet.getDeclaredPropertyDefinitions()) {
       String metadataName = pdef.getName();
@@ -137,7 +137,7 @@ public class PageMetadataServiceImpl implements PageMetadataService {
         String metaTagName = metadataName.replaceFirst(":",".");
         metaTagName = metaTagName.replace("dc","DC");
         metadata.put(metaTagName,metadataValue);
-      }                             
+      }
     }
     return metadata;
   }
@@ -146,7 +146,7 @@ public class PageMetadataServiceImpl implements PageMetadataService {
    */
   public HashMap<String, String> extractMetadata(Node node) throws Exception {
     HashMap<String, String> medatata = new HashMap<String,String>();
-    Node portalNode = findPortal(node);    
+    Node portalNode = findPortal(node);
     String siteTitle = null;
     String portalKeywords = null;
     if(portalNode != null) {
@@ -157,123 +157,123 @@ public class PageMetadataServiceImpl implements PageMetadataService {
     }
     String pageTitle = getProperty(node,"exo:title");
     if(pageTitle == null)
-      pageTitle = node.getName();    
+      pageTitle = node.getName();
     if(siteTitle != null) {
       pageTitle = pageTitle + "-" + siteTitle;
-    }    
-    String description = getProperty(node,"exo:summary");    
+    }
+    String description = getProperty(node,"exo:summary");
     medatata.put(PAGE_TITLE,pageTitle);
     if(description != null) {
-      medatata.put(DESCRIPTION,description); 
+      medatata.put(DESCRIPTION,description);
     }
     String keywords = computeContentKeywords(node,pageTitle);
     if(portalKeywords != null) {
       keywords = keywords.concat(",").concat(portalKeywords);
     }
     HashMap<String,String> dcElementSet = extractDCElementSetMetadata(node);
-    medatata.put(KEYWORDS,keywords);    
+    medatata.put(KEYWORDS,keywords);
     medatata.putAll(dcElementSet);
     return medatata;
   }
 
   /**
    * Compute content keywords.
-   * 
+   *
    * @param node the node
    * @param title the title
-   * 
+   *
    * @return the string
-   * 
+   *
    * @throws Exception the exception
    */
   private String computeContentKeywords(Node node, String title) throws Exception {
     StringBuilder builder = new StringBuilder();
     NodeLocation nodeLocation = NodeLocation.make(node);
-    String repository = nodeLocation.getRepository();    
+    String repository = nodeLocation.getRepository();
     try {
       List<Node> iterator = taxonomyService.getCategories(node,repository);
       for(Node category: iterator) {
         builder.append(category.getName()).append(",");
-      }  
+      }
     } catch(Exception e) {
       return builder.toString();
     }
-    
+
     for(Node tag: folksonomyService.getLinkedTagsOfDocument(node,repository, nodeLocation.getWorkspace())) {
       builder.append(tag.getName()).append(",");
     }
     builder.append(title.replaceAll(" ",","));
     return builder.toString();
   }
-  
+
   /**
    * Gets the property.
-   * 
+   *
    * @param node the node
    * @param propertyName the property name
-   * 
+   *
    * @return the property
-   * 
+   *
    * @throws Exception the exception
    */
   private String getProperty(Node node, String propertyName) throws Exception {
     return node.hasProperty(propertyName)? node.getProperty(propertyName).getString():null;
   }
-  
+
   /**
    * Gets the values.
-   * 
+   *
    * @param node the node
    * @param propertyName the property name
-   * 
+   *
    * @return the values
-   * 
+   *
    * @throws Exception the exception
    */
   private String getValues(Node node, String propertyName) throws Exception {
     try {
       Property property = node.getProperty(propertyName);
-      PropertyDefinition definition = property.getDefinition();      
+      PropertyDefinition definition = property.getDefinition();
       if(!definition.isMultiple())
-        return property.getValue().getString();      
+        return property.getValue().getString();
       int propertyType = definition.getRequiredType();
       if(PropertyType.BINARY == propertyType)
         return null;
       if(PropertyType.REFERENCE == propertyType)
-        return null;      
+        return null;
       StringBuilder builder = new StringBuilder();
       for(Value value: property.getValues()) {
         if(propertyType == PropertyType.DATE) {
           String v = ISO8601.format(value.getDate());
           builder.append(v).append(",");
         }else {
-          builder.append(value.getString()).append(","); 
-        }        
+          builder.append(value.getString()).append(",");
+        }
       }
       if(builder.charAt(builder.length()-1) == ',') {
         builder.deleteCharAt(builder.length() -1);
       }
       return builder.toString();
-    } catch (Exception e) { 
+    } catch (Exception e) {
       return null;
-    }    
+    }
   }
-  
+
   /**
    * Find portal.
-   * 
+   *
    * @param child the child
-   * 
+   *
    * @return the node
-   * 
+   *
    * @throws Exception the exception
    */
-  protected Node findPortal(Node child) throws Exception{                       
+  protected Node findPortal(Node child) throws Exception{
     try {
       return livePortalManagerService.getLivePortalByChild(child);
     } catch (Exception e) {
       log.error("Error when findPortal: ", e);
     }
     return null;
-  }               
+  }
 }

@@ -22,43 +22,43 @@ import org.exoplatform.services.jcr.ext.common.SessionProvider;
 
 /**
  * Created by The eXo Platform SAS.
- * 
+ *
  * @author Benjamin Paillereau
  * benjamin.paillereau@exoplatform.com
  * Apr 30, 2009
  */
 
 public interface WCMService {
-  
-	/**
-	 * This method returns a jcr Node based on the given identifier.
-	 * 
-	 * @param repository the repository name
-	 * @param workspace the workspace name
-	 * @param nodeIdentifier the node identifier
-	 * @param sessionProvider the session provider
-	 * 
-	 * @return a jcr Node
-	 * 
-	 * @throws Exception the exception
-	 * 
-	 * @see javax.jcr.Node
-	 */
-	public Node getReferencedContent(SessionProvider sessionProvider, String repository, String workspace, String nodeIdentifier) throws Exception ;
 
-	/**
-	 * This method checks if the given portal is the default shared portal.
-	 * 
-	 * @param portalName the portal name
-	 * @param sessionProvider the session provider
-	 * 
-	 * @return true if portal is shared portal
-	 * 
-	 * @throws Exception the exception
-	 */
-	public boolean isSharedPortal(SessionProvider sessionProvider, String portalName) throws Exception ;
-	
-	
+  /**
+   * This method returns a jcr Node based on the given identifier.
+   *
+   * @param repository the repository name
+   * @param workspace the workspace name
+   * @param nodeIdentifier the node identifier
+   * @param sessionProvider the session provider
+   *
+   * @return a jcr Node
+   *
+   * @throws Exception the exception
+   *
+   * @see javax.jcr.Node
+   */
+  public Node getReferencedContent(SessionProvider sessionProvider, String repository, String workspace, String nodeIdentifier) throws Exception ;
+
+  /**
+   * This method checks if the given portal is the default shared portal.
+   *
+   * @param portalName the portal name
+   * @param sessionProvider the session provider
+   *
+   * @return true if portal is shared portal
+   *
+   * @throws Exception the exception
+   */
+  public boolean isSharedPortal(SessionProvider sessionProvider, String portalName) throws Exception ;
+
+
   /**
    * Sets the expiration time in seconds for WCM portlets.
    * <P>
@@ -66,8 +66,8 @@ public interface WCMService {
    * portlet; if the value is set to <code>-1</code>, the cache does not expire.
    * <p>
    */
-	public void setPortletExpirationCache(int expirationCache) throws Exception ;
-	
+  public void setPortletExpirationCache(int expirationCache) throws Exception ;
+
   /**
    * Gets the expiration time in seconds for WCM portlets.
    * <P>
@@ -75,6 +75,6 @@ public interface WCMService {
    * portlet; if the value is set to <code>-1</code>, the cache does not expire.
    * <p>
    */
-	public int getPortletExpirationCache() throws Exception ;
-	
+  public int getPortletExpirationCache() throws Exception ;
+
 }

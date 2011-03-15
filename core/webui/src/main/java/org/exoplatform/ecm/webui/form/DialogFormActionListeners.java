@@ -27,10 +27,10 @@ import org.exoplatform.webui.event.EventListener;
  * Created by The eXo Platform SAS
  * Author : Phan Le Thanh Chuong
  *          chuong.phan@exoplatform.com, phan.le.thanh.chuong@gmail.com
- * Nov 14, 2008  
+ * Nov 14, 2008
  */
 public class DialogFormActionListeners {
-  
+
   static public class RemoveDataActionListener extends EventListener<UIDialogForm> {
     public void execute(Event<UIDialogForm> event) throws Exception {
       UIDialogForm uiForm = event.getSource();
@@ -46,10 +46,10 @@ public class DialogFormActionListeners {
       } else {
         Node currentNode = uiForm.getNode();
         if (currentNode.isLocked()) {
-	        Object[] args = { currentNode.getPath() };
-	        org.exoplatform.wcm.webui.Utils.createPopupMessage(uiForm, "UIPermissionManagerGrid.msg.node-locked", args,
-	            ApplicationMessage.WARNING);
-	        return;
+          Object[] args = { currentNode.getPath() };
+          org.exoplatform.wcm.webui.Utils.createPopupMessage(uiForm, "UIPermissionManagerGrid.msg.node-locked", args,
+              ApplicationMessage.WARNING);
+          return;
         }
         if (currentNode.hasProperty(referenceNodePath)) {
           currentNode.setProperty(referenceNodePath, "");
@@ -59,16 +59,16 @@ public class DialogFormActionListeners {
       event.getRequestContext().addUIComponentToUpdateByAjax(uiForm);
     }
   }
-  
+
   static public class ChangeTabActionListener extends EventListener<UIDialogForm> {
-	  /* (non-Javadoc)
-	   * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
-	   */
-	  public void execute(Event<UIDialogForm> event) throws Exception {
-	  	UIDialogForm uiForm = event.getSource();
-  		uiForm.setSelectedTab(event.getRequestContext().getRequestParameter(UIDialogForm.OBJECTID));
-  		event.getRequestContext().addUIComponentToUpdateByAjax(uiForm);
-  	}
+    /* (non-Javadoc)
+     * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
+     */
+    public void execute(Event<UIDialogForm> event) throws Exception {
+      UIDialogForm uiForm = event.getSource();
+      uiForm.setSelectedTab(event.getRequestContext().getRequestParameter(UIDialogForm.OBJECTID));
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiForm);
+    }
   }
-  
+
 }

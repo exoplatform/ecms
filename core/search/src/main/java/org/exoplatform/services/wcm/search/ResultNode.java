@@ -55,7 +55,7 @@ import javax.jcr.version.VersionHistory;
  * hoa.phamvu@exoplatform.com
  * Feb 2, 2009
  */
-public class ResultNode implements Node{ 
+public class ResultNode implements Node{
 
   /** The node. */
   private Node node;
@@ -64,14 +64,14 @@ public class ResultNode implements Node{
   private float score;
 
   /** The excerpt. */
-  private String excerpt;        
+  private String excerpt;
 
   /**
    * Instantiates a new result node.
-   * 
+   *
    * @param node the node
    * @param row the row
-   * 
+   *
    * @throws RepositoryException the repository exception
    */
   public ResultNode(Node node, Row row) throws RepositoryException{
@@ -83,41 +83,41 @@ public class ResultNode implements Node{
 
   /**
    * Gets the node.
-   * 
+   *
    * @return the node
    */
   public Node getNode() { return node; }
-  
+
   /**
    * Sets the node.
-   * 
+   *
    * @param node the new node
    */
   public void setNode(Node node) { this.node = node; }
 
   /**
    * Gets the score.
-   * 
+   *
    * @return the score
    */
   public float getScore() { return score; }
 
   /**
    * Sets the score.
-   * 
+   *
    * @param score the new score
    */
   public void setScore(float score) { this.score = score; }
 
   /**
    * Gets the excerpt.
-   * 
+   *
    * @return the excerpt
    */
   public String getExcerpt() {
     return excerpt;
   }
-  
+
   public String getEditor(){
     try{
     if(node.hasProperty("exo:owner"))
@@ -128,7 +128,7 @@ public class ResultNode implements Node{
 
   /**
    * Sets the excerpt.
-   * 
+   *
    * @param excerpt the new excerpt
    */
   public void setExcerpt(String excerpt) {
@@ -137,9 +137,9 @@ public class ResultNode implements Node{
 
   /**
    * Gets the title.
-   * 
+   *
    * @return the title
-   * 
+   *
    * @throws Exception the exception
    */
   public String getTitle() throws Exception {
@@ -151,9 +151,9 @@ public class ResultNode implements Node{
 
   /**
    * Gets the summary.
-   * 
+   *
    * @return the summary
-   * 
+   *
    * @throws Exception the exception
    */
   public String getSummary() throws Exception {
@@ -168,7 +168,7 @@ public class ResultNode implements Node{
    */
   public void addMixin(String name) throws NoSuchNodeTypeException, VersionException,
   ConstraintViolationException, LockException, RepositoryException {
-    throw new  ConstraintViolationException("Unsupported this method");    
+    throw new  ConstraintViolationException("Unsupported this method");
   }
 
   /* (non-Javadoc)
@@ -413,7 +413,7 @@ public class ResultNode implements Node{
   public NodeIterator merge(String arg0, boolean arg1) throws NoSuchWorkspaceException,
   AccessDeniedException, MergeException, LockException, InvalidItemStateException,
   RepositoryException {
-    throw new RepositoryException("Unsupported this method");    
+    throw new RepositoryException("Unsupported this method");
   }
 
   /* (non-Javadoc)
@@ -456,7 +456,7 @@ public class ResultNode implements Node{
   public void restore(Version arg0, String arg1, boolean arg2) throws PathNotFoundException,
   ItemExistsException, VersionException, ConstraintViolationException,
   UnsupportedRepositoryOperationException, LockException, InvalidItemStateException,
-  RepositoryException {    
+  RepositoryException {
     throw new RepositoryException("Unsupported this method");
   }
 
@@ -706,12 +706,12 @@ public class ResultNode implements Node{
   public Session getSession() throws RepositoryException {
     return node.getSession();
   }
-  
+
   /* (non-Javadoc)
    * @see java.lang.Object#equals(java.lang.Object)
    */
   @Override
-  public boolean equals(Object obj) {    
+  public boolean equals(Object obj) {
     try {
       ResultNode resNode = (ResultNode)obj;
       if(node.getPath().equals(resNode.getNode().getPath())) return true;

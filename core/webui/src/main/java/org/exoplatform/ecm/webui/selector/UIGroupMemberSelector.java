@@ -29,12 +29,12 @@ import org.exoplatform.webui.form.UIForm;
  * Created by The eXo Platform SARL
  * Author : Hoang Van Hung
  *          hunghvit@gmail.com
- * Dec 10, 2008  
+ * Dec 10, 2008
  */
 
 @ComponentConfigs( {
   @ComponentConfig(
-      template = "classpath:groovy/ecm/webui/UIMemberSelector.gtmpl", 
+      template = "classpath:groovy/ecm/webui/UIMemberSelector.gtmpl",
       events = {
         @EventConfig(listeners = UIGroupMemberSelector.ChangeNodeActionListener.class),
         @EventConfig(listeners = UIGroupMemberSelector.SelectMembershipActionListener.class),
@@ -42,20 +42,20 @@ import org.exoplatform.webui.form.UIForm;
         @EventConfig(listeners = UIGroupMemberSelector.AddAnyPermissionActionListener.class)
       }),
   @ComponentConfig(
-      type = UITree.class, 
-      id = "UITreeMembershipSelector", 
-      template = "system:/groovy/webui/core/UITree.gtmpl", 
+      type = UITree.class,
+      id = "UITreeMembershipSelector",
+      template = "system:/groovy/webui/core/UITree.gtmpl",
       events = @EventConfig(listeners = UITree.ChangeNodeActionListener.class)),
   @ComponentConfig(
-      type = UIBreadcumbs.class, 
-      id = "BreadcumbMembershipSelector", 
-      template = "system:/groovy/webui/core/UIBreadcumbs.gtmpl", 
-      events = @EventConfig(listeners = UIBreadcumbs.SelectPathActionListener.class)) 
+      type = UIBreadcumbs.class,
+      id = "BreadcumbMembershipSelector",
+      template = "system:/groovy/webui/core/UIBreadcumbs.gtmpl",
+      events = @EventConfig(listeners = UIBreadcumbs.SelectPathActionListener.class))
   }
 )
 
 public class UIGroupMemberSelector extends UIContainer implements ComponentSelector{
-  
+
   /** The Constant defaultValue. */
   final static public String defaultValue    = "/admin";
 
@@ -73,14 +73,14 @@ public class UIGroupMemberSelector extends UIContainer implements ComponentSelec
 
   /** The is use popup. */
   private boolean             isUsePopup      = true;
-  
+
   /** Show/hide Add AnyPermission form   */
   private boolean             isShowAnyPermission = true;
-  
+
   private Group selectGroup_;
-  
+
   private List<String> listMemberhip;
-  
+
   @SuppressWarnings("unchecked")
   public UIGroupMemberSelector() throws Exception {
     addChild(UIAnyPermission.class, null, null);
@@ -88,14 +88,14 @@ public class UIGroupMemberSelector extends UIContainer implements ComponentSelec
     UITree tree = addChild(UITree.class, "UITreeMembershipSelector", "TreeMembershipSelector");
     OrganizationService service = getApplicationComponent(OrganizationService.class) ;
     Collection<?> sibblingsGroup = service.getGroupHandler().findGroups(null);
-    
+
     Collection<?> collection = service.getMembershipTypeHandler().findMembershipTypes();
     listMemberhip  = new ArrayList<String>(5);
     for(Object obj : collection){
       listMemberhip.add(((MembershipType)obj).getName());
     }
     if (!listMemberhip.contains("*")) listMemberhip.add("*");
-    
+
     tree.setSibbling((List)sibblingsGroup);
     tree.setIcon("GroupAdminIcon");
     tree.setSelectedIcon("PortalIcon");
@@ -107,17 +107,17 @@ public class UIGroupMemberSelector extends UIContainer implements ComponentSelec
   public Group getCurrentGroup() { return selectGroup_ ; }
 
   public List<String> getListMemberhip() { return listMemberhip; }
-  
+
   @SuppressWarnings("unchecked")
-  public void changeGroup(String groupId) throws Exception {    
-    OrganizationService service = getApplicationComponent(OrganizationService.class) ;    
+  public void changeGroup(String groupId) throws Exception {
+    OrganizationService service = getApplicationComponent(OrganizationService.class) ;
     UIBreadcumbs uiBreadcumb = getChild(UIBreadcumbs.class);
     uiBreadcumb.setPath(getPath(null, groupId)) ;
 
     UITree tree = getChild(UITree.class);
     Collection<?> sibblingGroup;
-    
-    if(groupId == null) {      
+
+    if(groupId == null) {
       sibblingGroup = service.getGroupHandler().findGroups(null);
       tree.setSibbling((List)sibblingGroup);
       tree.setChildren(null);
@@ -140,20 +140,20 @@ public class UIGroupMemberSelector extends UIContainer implements ComponentSelec
     tree.setSelected(selectGroup_);
     tree.setParentSelected(parentGroup);
   }
-  
+
   private List<LocalPath> getPath(List<LocalPath> list, String id) throws Exception {
     if(list == null) list = new ArrayList<LocalPath>(5);
     if(id == null) return list;
     OrganizationService service = getApplicationComponent(OrganizationService.class) ;
     Group group = service.getGroupHandler().findGroupById(id);
     if(group == null) return list;
-    list.add(0, new LocalPath(group.getId(), group.getGroupName())); 
+    list.add(0, new LocalPath(group.getId(), group.getGroupName()));
     getPath(list, group.getParentId());
     return list ;
   }
 
   @SuppressWarnings("unchecked")
-  public List<String> getListGroup() throws Exception { 
+  public List<String> getListGroup() throws Exception {
     OrganizationService service = getApplicationComponent(OrganizationService.class) ;
     List<String> listGroup = new ArrayList<String>();
     if(getCurrentGroup() == null) return null;
@@ -164,12 +164,12 @@ public class UIGroupMemberSelector extends UIContainer implements ComponentSelec
         listGroup.add(childGroup.getId()) ;
       }
     }
-    return listGroup; 
-    
+    return listGroup;
+
   }
   /**
    * Gets the return component.
-   * 
+   *
    * @return the return component
    */
 
@@ -179,20 +179,20 @@ public class UIGroupMemberSelector extends UIContainer implements ComponentSelec
 
   /**
    * Gets the return field.
-   * 
+   *
    * @return the return field
    */
   public String getReturnField() {
     return returnFieldName;
   }
-  
+
   public void setIsUsePopup(boolean isUsePopup) { this.isUsePopup = isUsePopup; }
-  
+
   public boolean isUsePopup() { return isUsePopup; }
 
   /**
    * Sets the selected user.
-   * 
+   *
    * @param bool the new selected user
    */
   public void setSelectedUser(boolean bool) {
@@ -201,7 +201,7 @@ public class UIGroupMemberSelector extends UIContainer implements ComponentSelec
 
   /**
    * Checks if is selected user.
-   * 
+   *
    * @return true, if is selected user
    */
   public boolean isSelectedUser() {
@@ -210,7 +210,7 @@ public class UIGroupMemberSelector extends UIContainer implements ComponentSelec
 
   /**
    * Sets the selected membership.
-   * 
+   *
    * @param bool the new selected membership
    */
   public void setSelectedMembership(boolean bool) {
@@ -219,7 +219,7 @@ public class UIGroupMemberSelector extends UIContainer implements ComponentSelec
 
   /**
    * Checks if is selected membership.
-   * 
+   *
    * @return true, if is selected membership
    */
   public boolean isSelectedMembership() {
@@ -239,14 +239,14 @@ public class UIGroupMemberSelector extends UIContainer implements ComponentSelec
       returnFieldName = initParams[0];
     }
   }
-  
+
   public String event(String name, String beanId) throws Exception {
     UIForm uiForm = getAncestorOfType(UIForm.class) ;
     if(uiForm != null) return uiForm.event(name, getId(), beanId);
     return super.event(name, beanId);
   }
 
-  static  public class ChangeNodeActionListener extends EventListener<UITree> {   
+  static  public class ChangeNodeActionListener extends EventListener<UITree> {
     public void execute(Event<UITree> event) throws Exception {
       UIGroupMemberSelector uiGroupMemberSelector = event.getSource().getParent();
       String groupId = event.getRequestContext().getRequestParameter(OBJECTID);
@@ -255,7 +255,7 @@ public class UIGroupMemberSelector extends UIContainer implements ComponentSelec
     }
   }
 
-  static  public class SelectMembershipActionListener extends EventListener<UIGroupMemberSelector> {   
+  static  public class SelectMembershipActionListener extends EventListener<UIGroupMemberSelector> {
     public void execute(Event<UIGroupMemberSelector> event) throws Exception {
       UIGroupMemberSelector uiGroupMemberSelector = event.getSource();
       if (uiGroupMemberSelector.getCurrentGroup() == null)
@@ -292,7 +292,7 @@ public class UIGroupMemberSelector extends UIContainer implements ComponentSelec
    * <code>addSelectPathActionListener<code> method. When
    * the selectPathAction event occurs, that object's appropriate
    * method is invoked.
-   * 
+   *
    * @see SelectPathActionEvent
    */
   static  public class SelectPathActionListener extends EventListener<UIBreadcumbs> {
@@ -310,7 +310,7 @@ public class UIGroupMemberSelector extends UIContainer implements ComponentSelec
       event.getRequestContext().addUIComponentToUpdateByAjax(uiGroupMemberSelector);
     }
   }
- 
+
   static public class AddAnyPermissionActionListener extends EventListener<UIAnyPermission> {
     public void execute(Event<UIAnyPermission> event) throws Exception {
       UIAnyPermission uiAnyPermission = event.getSource();

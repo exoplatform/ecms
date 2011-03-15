@@ -24,14 +24,14 @@ import org.exoplatform.container.xml.ObjectParameter;
 import org.exoplatform.container.xml.ValueParam;
 
 
-public class ScriptPlugin extends BaseComponentPlugin{	
-  
+public class ScriptPlugin extends BaseComponentPlugin{
+
   private String name;
   private String description;
-  private InitParams params_ ;    
+  private InitParams params_ ;
 
   public ScriptPlugin(InitParams params) throws Exception {
-    params_ = params; 
+    params_ = params;
   }
 
   @SuppressWarnings("unchecked")
@@ -40,7 +40,7 @@ public class ScriptPlugin extends BaseComponentPlugin{
   public boolean getAutoCreateInNewRepository() {
     ValueParam param = params_.getValueParam("autoInitInNewRepository") ;
     if(param == null) return true ;
-    return Boolean.parseBoolean(param.getValue()) ;    
+    return Boolean.parseBoolean(param.getValue()) ;
   }
 
   public String getInitRepository() {
@@ -48,13 +48,13 @@ public class ScriptPlugin extends BaseComponentPlugin{
     if(param == null) return null ;
     return param.getValue() ;
   }
-  
+
   public String getPredefineScriptsLocation() {
     ValueParam param = params_.getValueParam("predefinedScriptsLocation") ;
     if(param == null) return null ;
     return param.getValue() ;
   }
-  
+
   public String getName() {   return name; }
   public void setName(String s) { name = s ; }
 

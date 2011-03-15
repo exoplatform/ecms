@@ -55,55 +55,56 @@ import org.exoplatform.webui.form.UIFormStringInput;
  * Created by The eXo Platform SAS
  * Author : Phan Le Thanh Chuong
  *          chuong.phan@exoplatform.com, phan.le.thanh.chuong@gmail.com
- * Oct 29, 2009  
+ * Oct 29, 2009
  */
 @ComponentConfig (
     lifecycle = UIFormLifecycle.class,
-    template = "classpath:groovy/wcm/webui/dialog/permission/UIPermissionManager.gtmpl", 
+    template = "classpath:groovy/wcm/webui/dialog/permission/UIPermissionManager.gtmpl",
     events = {
-      @EventConfig(listeners = UIPermissionManager.DeleteActionListener.class, confirm = "UIPermissionManagerGrid.msg.confirm-delete-permission"),
+      @EventConfig(listeners = UIPermissionManager.DeleteActionListener.class,
+                   confirm = "UIPermissionManagerGrid.msg.confirm-delete-permission"),
       @EventConfig(listeners = UIPermissionManager.EditActionListener.class),
       @EventConfig(listeners = UIPermissionManager.SaveActionListener.class),
       @EventConfig(listeners = UIPermissionManager.ClearActionListener.class),
       @EventConfig(listeners = UIPermissionManager.SelectUserActionListener.class),
       @EventConfig(listeners = UIPermissionManager.SelectMemberActionListener.class),
-      @EventConfig(listeners = UIPermissionManager.AddAnyActionListener.class) 
+      @EventConfig(listeners = UIPermissionManager.AddAnyActionListener.class)
     }
 )
 public class UIPermissionManager extends UIForm implements UISelectable {
-	
-	/** The Constant PERMISSION_MANAGER_GRID. */
-	public static final String PERMISSION_MANAGER_GRID    = "UIPermissionManagerGrid";
-	
+
+  /** The Constant PERMISSION_MANAGER_GRID. */
+  public static final String PERMISSION_MANAGER_GRID    = "UIPermissionManagerGrid";
+
   /** The Constant PERMISSION_INPUT_SET. */
   public static final String PERMISSION_INPUT_SET    		= "UIPermissionInputSetWithAction";
-  
+
   /** The Constant PERMISSION_STRING_INPUT. */
   public static final String PERMISSION_STRING_INPUT 		= "UIPermissionStringInput";
 
   /** The Constant ACCESSIBLE_CHECKBOX_INPUT. */
   public static final String ACCESSIBLE_CHECKBOX_INPUT  = "UIAccessibleCheckboxInput";
-  
+
   /** The Constant EDITABLE_CHECKBOX_INPUT. */
   public static final String EDITABLE_CHECKBOX_INPUT    = "UIEditableCheckboxInput";
 
   public static final String USER_SELECTOR_POPUP_WINDOW = "UIUserSelectorPopupWindow";
-  
+
   public static final String GROUP_SELECTOR_POPUP_WINDOW = "UIGroupSelectorPopupWindow";
-  
+
   private String popupId;
-  
-	public String getPopupId() {
-		return popupId;
-	}
 
-	public void setPopupId(String popupId) {
-		this.popupId = popupId;
-	}
+  public String getPopupId() {
+    return popupId;
+  }
 
-	/**
+  public void setPopupId(String popupId) {
+    this.popupId = popupId;
+  }
+
+  /**
    * Instantiates a new uI permission info.
-   * 
+   *
    * @throws Exception the exception
    */
   public UIPermissionManager() throws Exception {
@@ -111,8 +112,8 @@ public class UIPermissionManager extends UIForm implements UISelectable {
     uiGrid.setLabel(PERMISSION_MANAGER_GRID);
     uiGrid.configure("owner", new String[] {"owner", "accessible", "editable"}, new String[] {"Edit", "Delete"});
     addChild(uiGrid);
-    
-    UIFormInputSetWithAction permissionInputSet = new UIFormInputSetWithAction(PERMISSION_INPUT_SET);       
+
+    UIFormInputSetWithAction permissionInputSet = new UIFormInputSetWithAction(PERMISSION_INPUT_SET);
     UIFormStringInput formStringInput = new UIFormStringInput(PERMISSION_STRING_INPUT, PERMISSION_STRING_INPUT, null);
     formStringInput.setEditable(false);
     permissionInputSet.addChild(formStringInput);
@@ -123,19 +124,19 @@ public class UIPermissionManager extends UIForm implements UISelectable {
     addChild(new UIFormCheckBoxInput<String>(EDITABLE_CHECKBOX_INPUT, EDITABLE_CHECKBOX_INPUT, null));
     setActions(new String[] {"Save", "Clear"});
   }
-  
+
   /**
    * Update grid.
-   * 
+   *
    * @throws Exception the exception
    */
   public void updateGrid() throws Exception {
-  	// Get node
-  	UIContentDialogForm contentDialogForm = getAncestorOfType(UIPopupContainer.class).getChild(UIContentDialogForm.class);
-  	NodeLocation webcontentNodeLocation = contentDialogForm.getWebcontentNodeLocation();
+    // Get node
+    UIContentDialogForm contentDialogForm = getAncestorOfType(UIPopupContainer.class).getChild(UIContentDialogForm.class);
+    NodeLocation webcontentNodeLocation = contentDialogForm.getWebcontentNodeLocation();
     Node node = NodeLocation.getNodeByLocation(webcontentNodeLocation);
     ExtendedNode webcontent = (ExtendedNode) node;
-    
+
     // Convert permission entries to map
     List<UIPermissionConfig> permissionConfigs = new ArrayList<UIPermissionConfig>();
     Map<String, List<String>> permissionMap = new HashMap<String, List<String>>();
@@ -154,7 +155,7 @@ public class UIPermissionManager extends UIForm implements UISelectable {
       }
       permissionMap.put(identity, currentPermissions);
     }
-    
+
     // Add owner's permission
     String owner = SystemIdentity.SYSTEM;
     if (webcontent.hasProperty("exo:owner"))
@@ -196,18 +197,18 @@ public class UIPermissionManager extends UIForm implements UISelectable {
    * @see org.exoplatform.ecm.webui.selector.UISelectable#doSelect(java.lang.String, java.lang.Object)
    */
   public void doSelect(String selectField, Object value) throws Exception {
-  	UIFormInputSetWithAction permissionInputSet = getChildById(PERMISSION_INPUT_SET);
+    UIFormInputSetWithAction permissionInputSet = getChildById(PERMISSION_INPUT_SET);
     permissionInputSet.getUIStringInput(PERMISSION_STRING_INPUT).setValue(value.toString());
     Utils.closePopupWindow(this, popupId);
   }
-  
+
   /**
   * Checks for change permission right.
-  * 
+  *
   * @param node the node
-  * 
+  *
   * @return true, if successful
-  * 
+  *
   * @throws Exception the exception
   */
   private boolean hasChangePermissionRight(ExtendedNode node) throws Exception {
@@ -220,7 +221,7 @@ public class UIPermissionManager extends UIForm implements UISelectable {
      return false;
    }
   }
-  
+
   /**
    * The listener interface for receiving deleteAction events.
    * The class that is interested in processing a deleteAction
@@ -229,7 +230,7 @@ public class UIPermissionManager extends UIForm implements UISelectable {
    * component's <code>addDeleteActionListener<code> method. When
    * the deleteAction event occurs, that object's appropriate
    * method is invoked.
-   * 
+   *
    * @see DeleteActionEvent
    */
   public static class DeleteActionListener extends EventListener<UIPermissionManager> {
@@ -238,37 +239,47 @@ public class UIPermissionManager extends UIForm implements UISelectable {
      * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
      */
     public void execute(Event<UIPermissionManager> event) throws Exception {
-    	UIPermissionManager permissionManager = event.getSource();
-      UIContentDialogForm contentDialogForm = permissionManager.getAncestorOfType(UIPopupContainer.class).getChild(UIContentDialogForm.class);
-    	NodeLocation webcontentNodeLocation = contentDialogForm.getWebcontentNodeLocation();
+      UIPermissionManager permissionManager = event.getSource();
+      UIContentDialogForm contentDialogForm = permissionManager.getAncestorOfType(UIPopupContainer.class)
+                                                               .getChild(UIContentDialogForm.class);
+      NodeLocation webcontentNodeLocation = contentDialogForm.getWebcontentNodeLocation();
       Node node = NodeLocation.getNodeByLocation(webcontentNodeLocation);
       ExtendedNode webcontent = (ExtendedNode) node;
       Session session = webcontent.getSession();
-      
+
       String name = event.getRequestContext().getRequestParameter(OBJECTID);
       String nodeOwner = webcontent.getProperty("exo:owner").getString();
       if (name.equals(nodeOwner)) {
-        Utils.createPopupMessage(permissionManager, "UIPermissionManagerGrid.msg.no-permission-remove", null, ApplicationMessage.WARNING);
+        Utils.createPopupMessage(permissionManager,
+                                 "UIPermissionManagerGrid.msg.no-permission-remove",
+                                 null,
+                                 ApplicationMessage.WARNING);
         return;
       }
       if (permissionManager.hasChangePermissionRight(webcontent)) {
         if (webcontent.canAddMixin("exo:privilegeable")) {
-        	webcontent.addMixin("exo:privilegeable");
-        	webcontent.setPermission(nodeOwner, PermissionType.ALL);
+          webcontent.addMixin("exo:privilegeable");
+          webcontent.setPermission(nodeOwner, PermissionType.ALL);
         }
         try {
-        	webcontent.removePermission(name);
+          webcontent.removePermission(name);
           session.save();
           permissionManager.updateGrid();
         } catch (AccessControlException e) {
-        	Object[] args = {webcontent.getPath()};
-        	Utils.createPopupMessage(permissionManager, "UIPermissionManagerGrid.msg.node-locked", args, ApplicationMessage.WARNING);
-        	return;
+          Object[] args = {webcontent.getPath()};
+          Utils.createPopupMessage(permissionManager,
+                                   "UIPermissionManagerGrid.msg.node-locked",
+                                   args,
+                                   ApplicationMessage.WARNING);
+          return;
         } catch (AccessDeniedException ace) {
-        	Utils.createPopupMessage(permissionManager, "UIPermissionManagerGrid.msg.access-denied", null, ApplicationMessage.WARNING);
+          Utils.createPopupMessage(permissionManager,
+                                   "UIPermissionManagerGrid.msg.access-denied",
+                                   null,
+                                   ApplicationMessage.WARNING);
           return;
         }
-      }      
+      }
     }
   }
 
@@ -280,7 +291,7 @@ public class UIPermissionManager extends UIForm implements UISelectable {
    * component's <code>addEditActionListener<code> method. When
    * the editAction event occurs, that object's appropriate
    * method is invoked.
-   * 
+   *
    * @see EditActionEvent
    */
   public static class EditActionListener extends EventListener<UIPermissionManager> {
@@ -289,9 +300,10 @@ public class UIPermissionManager extends UIForm implements UISelectable {
      * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
      */
     public void execute(Event<UIPermissionManager> event) throws Exception {
-    	UIPermissionManager permissionManager = event.getSource();
-      UIContentDialogForm contentDialogForm = permissionManager.getAncestorOfType(UIPopupContainer.class).getChild(UIContentDialogForm.class);
-    	NodeLocation webcontentNodeLocation = contentDialogForm.getWebcontentNodeLocation();
+      UIPermissionManager permissionManager = event.getSource();
+      UIContentDialogForm contentDialogForm = permissionManager.getAncestorOfType(UIPopupContainer.class)
+                                                               .getChild(UIContentDialogForm.class);
+      NodeLocation webcontentNodeLocation = contentDialogForm.getWebcontentNodeLocation();
       Node node = NodeLocation.getNodeByLocation(webcontentNodeLocation);
       ExtendedNode webcontent = (ExtendedNode) node;
       String name = event.getRequestContext().getRequestParameter(OBJECTID);
@@ -300,10 +312,10 @@ public class UIPermissionManager extends UIForm implements UISelectable {
       permissionInputSet.getUIStringInput(PERMISSION_STRING_INPUT).setValue(name);
       String owner = node.getProperty("exo:owner").getString();
       if (name.equals(owner)) {
-      	permissionManager.getUIFormCheckBoxInput(ACCESSIBLE_CHECKBOX_INPUT).setChecked(true);
-      	permissionManager.getUIFormCheckBoxInput(EDITABLE_CHECKBOX_INPUT).setChecked(true);
-      	permissionManager.setActions(new String[] {"Clear"});
-      	permissionInputSet.setActionInfo(PERMISSION_STRING_INPUT, null);
+        permissionManager.getUIFormCheckBoxInput(ACCESSIBLE_CHECKBOX_INPUT).setChecked(true);
+        permissionManager.getUIFormCheckBoxInput(EDITABLE_CHECKBOX_INPUT).setChecked(true);
+        permissionManager.setActions(new String[] {"Clear"});
+        permissionInputSet.setActionInfo(PERMISSION_STRING_INPUT, null);
       } else {
         List<AccessControlEntry> permsList = webcontent.getACL().getPermissionEntries();
         StringBuilder userPermission = new StringBuilder();
@@ -318,14 +330,15 @@ public class UIPermissionManager extends UIForm implements UISelectable {
             numPermission++;
         }
         if (numPermission == PermissionType.ALL.length) {
-        	permissionManager.getUIFormCheckBoxInput(ACCESSIBLE_CHECKBOX_INPUT).setChecked(true);
-        	permissionManager.getUIFormCheckBoxInput(EDITABLE_CHECKBOX_INPUT).setChecked(true);
+          permissionManager.getUIFormCheckBoxInput(ACCESSIBLE_CHECKBOX_INPUT).setChecked(true);
+          permissionManager.getUIFormCheckBoxInput(EDITABLE_CHECKBOX_INPUT).setChecked(true);
         } else {
-        	permissionManager.getUIFormCheckBoxInput(ACCESSIBLE_CHECKBOX_INPUT).setChecked(true);
-        	permissionManager.getUIFormCheckBoxInput(EDITABLE_CHECKBOX_INPUT).setChecked(false);
+          permissionManager.getUIFormCheckBoxInput(ACCESSIBLE_CHECKBOX_INPUT).setChecked(true);
+          permissionManager.getUIFormCheckBoxInput(EDITABLE_CHECKBOX_INPUT).setChecked(false);
         }
         permissionManager.setActions(new String[] {"Save", "Clear"});
-        permissionInputSet.setActionInfo(PERMISSION_STRING_INPUT, new String[] {"SelectUser", "SelectMember", "AddAny"});
+        permissionInputSet.setActionInfo(PERMISSION_STRING_INPUT, new String[] { "SelectUser",
+            "SelectMember", "AddAny" });
       }
     }
   }
@@ -338,27 +351,31 @@ public class UIPermissionManager extends UIForm implements UISelectable {
   * component's <code>addSaveActionListener<code> method. When
   * the saveAction event occurs, that object's appropriate
   * method is invoked.
-  * 
+  *
   * @see SaveActionEvent
   */
   public static class SaveActionListener extends EventListener<UIPermissionManager> {
-  
+
    /* (non-Javadoc)
     * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
     */
    public void execute(Event<UIPermissionManager> event) throws Exception {
-  	 UIPermissionManager permissionManager = event.getSource();
-  	 UIContentDialogForm contentDialogForm = permissionManager.getAncestorOfType(UIPopupContainer.class).getChild(UIContentDialogForm.class);
-  	 NodeLocation webcontentNodeLocation = contentDialogForm.getWebcontentNodeLocation();
+     UIPermissionManager permissionManager = event.getSource();
+      UIContentDialogForm contentDialogForm = permissionManager.getAncestorOfType(UIPopupContainer.class)
+                                                               .getChild(UIContentDialogForm.class);
+     NodeLocation webcontentNodeLocation = contentDialogForm.getWebcontentNodeLocation();
      Node node = NodeLocation.getNodeByLocation(webcontentNodeLocation);
      ExtendedNode webcontent = (ExtendedNode) node;
      Session session = webcontent.getSession();
-     
+
      UIFormInputSetWithAction formInputSet = permissionManager.getChildById(PERMISSION_INPUT_SET);
      String identity = ((UIFormStringInput) formInputSet.getChildById(PERMISSION_STRING_INPUT)).getValue();
      List<String> permsList = new ArrayList<String>();
      if (!webcontent.isCheckedOut()) {
-       Utils.createPopupMessage(permissionManager, "UIPermissionManagerGrid.msg.node-checkedin", null, ApplicationMessage.WARNING);
+        Utils.createPopupMessage(permissionManager,
+                                 "UIPermissionManagerGrid.msg.node-checkedin",
+                                 null,
+                                 ApplicationMessage.WARNING);
        return;
      }
      if (permissionManager.getUIFormCheckBoxInput(ACCESSIBLE_CHECKBOX_INPUT).isChecked()) {
@@ -371,27 +388,36 @@ public class UIPermissionManager extends UIForm implements UISelectable {
          permsList.add(perm);
      }
      if (identity == null || identity.trim().length() == 0) {
-    	 Utils.createPopupMessage(permissionManager, "UIPermissionManagerGrid.msg.userOrGroup-required", null, ApplicationMessage.WARNING);
+        Utils.createPopupMessage(permissionManager,
+                                 "UIPermissionManagerGrid.msg.userOrGroup-required",
+                                 null,
+                                 ApplicationMessage.WARNING);
        return;
      }
      if (permsList.size() == 0) {
-    	 Utils.createPopupMessage(permissionManager, "UIPermissionManagerGrid.msg.checkbox-require", null, ApplicationMessage.WARNING);
+        Utils.createPopupMessage(permissionManager,
+                                 "UIPermissionManagerGrid.msg.checkbox-require",
+                                 null,
+                                 ApplicationMessage.WARNING);
        return;
      }
      String[] permsArray = permsList.toArray(new String[permsList.size()]);
      if (webcontent.canAddMixin("exo:privilegeable")) {
-    	 webcontent.addMixin("exo:privilegeable");
-    	 webcontent.setPermission(webcontent.getProperty("exo:owner").getString(), PermissionType.ALL);
+       webcontent.addMixin("exo:privilegeable");
+       webcontent.setPermission(webcontent.getProperty("exo:owner").getString(), PermissionType.ALL);
      }
      try {
-	    webcontent.setPermission(identity, permsArray);
+      webcontent.setPermission(identity, permsArray);
     } catch (AccessControlException e) {
-    	Object[] args = {webcontent.getPath()};
-    	Utils.createPopupMessage(permissionManager, "UIPermissionManagerGrid.msg.node-locked", args, ApplicationMessage.WARNING);
-    	return;
+      Object[] args = {webcontent.getPath()};
+        Utils.createPopupMessage(permissionManager,
+                                 "UIPermissionManagerGrid.msg.node-locked",
+                                 args,
+                                 ApplicationMessage.WARNING);
+      return;
     }
      session.save();
-     
+
      permissionManager.updateGrid();
      UIFormInputSetWithAction permissionInputSet = permissionManager.getChildById(PERMISSION_INPUT_SET);
      ((UIFormStringInput) permissionInputSet.getChildById(PERMISSION_STRING_INPUT)).setValue("");
@@ -400,7 +426,7 @@ public class UIPermissionManager extends UIForm implements UISelectable {
    }
   }
 
-  
+
   /**
   * The listener interface for receiving resetAction events.
   * The class that is interested in processing a resetAction
@@ -409,22 +435,23 @@ public class UIPermissionManager extends UIForm implements UISelectable {
   * component's <code>addResetActionListener<code> method. When
   * the resetAction event occurs, that object's appropriate
   * method is invoked.
-  * 
+  *
   * @see ResetActionEvent
   */
   public static class ClearActionListener extends EventListener<UIPermissionManager> {
-  
+
    /* (non-Javadoc)
     * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
     */
    public void execute(Event<UIPermissionManager> event) throws Exception {
-  	 UIPermissionManager permissionManager = event.getSource();
+     UIPermissionManager permissionManager = event.getSource();
      UIFormInputSetWithAction permissionInputSet = permissionManager.getChildById(PERMISSION_INPUT_SET);
      ((UIFormStringInput) permissionInputSet.getChildById(PERMISSION_STRING_INPUT)).setValue("");
      permissionManager.getUIFormCheckBoxInput(ACCESSIBLE_CHECKBOX_INPUT).setChecked(false);
      permissionManager.getUIFormCheckBoxInput(EDITABLE_CHECKBOX_INPUT).setChecked(false);
      permissionManager.setActions(new String[] {"Save", "Clear"});
-     permissionInputSet.setActionInfo(PERMISSION_STRING_INPUT, new String[] {"SelectUser", "SelectMember", "AddAny"});
+      permissionInputSet.setActionInfo(PERMISSION_STRING_INPUT, new String[] { "SelectUser",
+          "SelectMember", "AddAny" });
    }
   }
 
@@ -436,24 +463,24 @@ public class UIPermissionManager extends UIForm implements UISelectable {
   * component's <code>addSelectUserActionListener<code> method. When
   * the selectUserAction event occurs, that object's appropriate
   * method is invoked.
-  * 
+  *
   * @see SelectUserActionEvent
   */
   public static class SelectUserActionListener extends EventListener<UIPermissionManager> {
-  
+
    /* (non-Javadoc)
     * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
     */
    public void execute(Event<UIPermissionManager> event) throws Exception {
-  	 UIPermissionManager permissionManager = event.getSource();
-  	 UIUserContainer userContainer = permissionManager.createUIComponent(UIUserContainer.class, null, null);
-  	 userContainer.setSelectable(permissionManager);
-  	 userContainer.setSourceComponent(PERMISSION_STRING_INPUT);
-  	 Utils.createPopupWindow(permissionManager, userContainer, USER_SELECTOR_POPUP_WINDOW, 740);
-  	 permissionManager.setPopupId(USER_SELECTOR_POPUP_WINDOW);
+     UIPermissionManager permissionManager = event.getSource();
+     UIUserContainer userContainer = permissionManager.createUIComponent(UIUserContainer.class, null, null);
+     userContainer.setSelectable(permissionManager);
+     userContainer.setSourceComponent(PERMISSION_STRING_INPUT);
+     Utils.createPopupWindow(permissionManager, userContainer, USER_SELECTOR_POPUP_WINDOW, 740);
+     permissionManager.setPopupId(USER_SELECTOR_POPUP_WINDOW);
    }
   }
-  
+
   /**
   * The listener interface for receiving selectMemberAction events.
   * The class that is interested in processing a selectMemberAction
@@ -462,24 +489,24 @@ public class UIPermissionManager extends UIForm implements UISelectable {
   * component's <code>addSelectMemberActionListener<code> method. When
   * the selectMemberAction event occurs, that object's appropriate
   * method is invoked.
-  * 
+  *
   * @see SelectMemberActionEvent
   */
   public static class SelectMemberActionListener extends EventListener<UIPermissionManager> {
-  
-  	/* (non-Javadoc)
-  	 * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
-  	 */
-  	public void execute(Event<UIPermissionManager> event) throws Exception {
-  		UIPermissionManager permissionManager = event.getSource();
-  		UIGroupMemberSelector groupContainer = permissionManager.createUIComponent(UIGroupMemberSelector.class, null, null);
-  		groupContainer.setShowAnyPermission(false);
-  		groupContainer.setSourceComponent(permissionManager, new String[] {PERMISSION_STRING_INPUT});
-  		Utils.createPopupWindow(permissionManager, groupContainer, GROUP_SELECTOR_POPUP_WINDOW, 600);
-  		permissionManager.setPopupId(GROUP_SELECTOR_POPUP_WINDOW);
-  	}
+
+    /* (non-Javadoc)
+     * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
+     */
+    public void execute(Event<UIPermissionManager> event) throws Exception {
+      UIPermissionManager permissionManager = event.getSource();
+      UIGroupMemberSelector groupContainer = permissionManager.createUIComponent(UIGroupMemberSelector.class, null, null);
+      groupContainer.setShowAnyPermission(false);
+      groupContainer.setSourceComponent(permissionManager, new String[] {PERMISSION_STRING_INPUT});
+      Utils.createPopupWindow(permissionManager, groupContainer, GROUP_SELECTOR_POPUP_WINDOW, 600);
+      permissionManager.setPopupId(GROUP_SELECTOR_POPUP_WINDOW);
+    }
   }
-  
+
   /**
    * The listener interface for receiving addAnyAction events.
    * The class that is interested in processing a addAnyAction
@@ -488,16 +515,16 @@ public class UIPermissionManager extends UIForm implements UISelectable {
    * component's <code>addAddAnyActionListener<code> method. When
    * the addAnyAction event occurs, that object's appropriate
    * method is invoked.
-   * 
+   *
    * @see AddAnyActionEvent
    */
   public static class AddAnyActionListener extends EventListener<UIPermissionManager> {
-  
+
     /* (non-Javadoc)
      * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
      */
-  	public void execute(Event<UIPermissionManager> event) throws Exception {
-  		UIPermissionManager permissionManager = event.getSource();
+    public void execute(Event<UIPermissionManager> event) throws Exception {
+      UIPermissionManager permissionManager = event.getSource();
       UIFormInputSetWithAction permisionInputSet = permissionManager.getChildById(PERMISSION_INPUT_SET);
       ((UIFormStringInput) permisionInputSet.getChildById(PERMISSION_STRING_INPUT)).setValue(SystemIdentity.ANY);
       permissionManager.getUIFormCheckBoxInput(ACCESSIBLE_CHECKBOX_INPUT).setChecked(true);

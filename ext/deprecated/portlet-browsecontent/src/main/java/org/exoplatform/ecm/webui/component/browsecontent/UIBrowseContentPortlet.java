@@ -39,7 +39,7 @@ import org.exoplatform.webui.core.lifecycle.UIApplicationLifecycle;
  * Created by The eXo Platform SARL
  * Author : Pham Tuan
  *          phamtuanchip@yahoo.de
- * Dec 14, 2006 5:15:47 PM 
+ * Dec 14, 2006 5:15:47 PM
  */
 @ComponentConfig(
     lifecycle = UIApplicationLifecycle.class
@@ -51,9 +51,9 @@ public class UIBrowseContentPortlet extends UIPortletApplication  {
    * Logger.
    */
   private static final Log LOG  = ExoLogger.getLogger(UIBrowseContentPortlet.class);
-  
+
   private boolean isViewModing_ = true;
-  @SuppressWarnings("unused") 
+  @SuppressWarnings("unused")
   public UIBrowseContentPortlet() throws Exception {
     PortletRequestContext pcontext = (PortletRequestContext)WebuiRequestContext.getCurrentInstance();
     PortletPreferences portletPref = pcontext.getRequest().getPreferences();
@@ -66,7 +66,7 @@ public class UIBrowseContentPortlet extends UIPortletApplication  {
     popup.getChild(UIPopupWindow.class).setId("UICBPopupWindow");
     addChild(UIPopupContainer.class, null, "UICBPopupComment");
     UIBrowseContainer uiBrowseContainer = addChild(UIBrowseContainer.class, null , null);
-    addChild(UIConfigTabPane.class, null, null);    
+    addChild(UIConfigTabPane.class, null, null);
     try {
       uiBrowseContainer.loadPortletConfig(getPortletPreferences());
     } catch (Exception e) {
@@ -74,7 +74,7 @@ public class UIBrowseContentPortlet extends UIPortletApplication  {
     }
   }
 
-  public void  processRender(WebuiApplication app, WebuiRequestContext context) throws Exception {    
+  public void  processRender(WebuiApplication app, WebuiRequestContext context) throws Exception {
     context.getJavascriptManager().importJavascript("eXo.ecm.ECMUtils","/ecm-wcm-extension/javascript/");
     context.getJavascriptManager().addJavascript("eXo.ecm.ECMUtils.init('UIBrowseContentPortlet');");
     PortletRequestContext portletReqContext = (PortletRequestContext)  context;
@@ -87,13 +87,13 @@ public class UIBrowseContentPortlet extends UIPortletApplication  {
     UIConfigTabPane uiTabPane = getChild(UIConfigTabPane.class);
     UIBrowseContainer uiContainer = getChild(UIBrowseContainer.class);
     UIBrowseContentHelp uiBCHelp = getChild(UIBrowseContentHelp.class);
-    if(portletReqContext.getApplicationMode() == PortletMode.VIEW) {       
+    if(portletReqContext.getApplicationMode() == PortletMode.VIEW) {
       uiTabPane.setRendered(false);
       uiBCHelp.setRendered(false);
       uiContainer.setRendered(true);
       if(isViewModing_) uiContainer.refreshContent();
       isViewModing_ = true;
-    } else if(portletReqContext.getApplicationMode() == PortletMode.EDIT) {      
+    } else if(portletReqContext.getApplicationMode() == PortletMode.EDIT) {
       if(!SessionProviderFactory.isAnonim()) {
         if(!uiTabPane.isNewConfig()) uiTabPane.getCurrentConfig();
         uiTabPane.setRendered(true);
@@ -102,7 +102,7 @@ public class UIBrowseContentPortlet extends UIPortletApplication  {
         uiContainer.getListHistoryNode().clear();
         isViewModing_ = false;
       }
-    } else if(portletReqContext.getApplicationMode() == PortletMode.HELP) {      
+    } else if(portletReqContext.getApplicationMode() == PortletMode.HELP) {
       uiTabPane.setRendered(false);
       uiBCHelp.setRendered(true);
       uiContainer.setRendered(false);
@@ -119,7 +119,7 @@ public class UIBrowseContentPortlet extends UIPortletApplication  {
     WebuiApplication app =  (WebuiApplication)context.getApplication();
     processRender(app, context);
   }
-  
+
   protected void setPorletMode(PortletMode mode) throws PortletModeException {
     PortletRequestContext portletReqContext =  (PortletRequestContext)WebuiRequestContext.getCurrentInstance();
     portletReqContext.setApplicationMode(mode);

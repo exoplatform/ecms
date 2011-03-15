@@ -28,7 +28,7 @@ import org.exoplatform.webui.core.lifecycle.UIContainerLifecycle;
  * Created by The eXo Platform SARL
  * Author : Pham Tuan
  *          tuan.pham@exoplatform.com
- * Jun 7, 2007  
+ * Jun 7, 2007
  */
 @ComponentConfig(lifecycle = UIContainerLifecycle.class)
 
@@ -47,12 +47,10 @@ public class UIRepositoryFormContainer extends UIContainer implements UIPopupCom
   }
 
   public void activate() throws Exception {
-    // TODO Auto-generated method stub
 
   }
 
   public void deActivate() throws Exception {
-    // TODO Auto-generated method stub
 
   }
 }

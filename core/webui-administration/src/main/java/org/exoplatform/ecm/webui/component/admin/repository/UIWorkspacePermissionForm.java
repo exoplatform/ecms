@@ -37,7 +37,7 @@ import org.exoplatform.webui.form.validator.MandatoryValidator;
  * Created by The eXo Platform SARL
  * Author : Pham Tuan
  *          tuan.pham@exoplatform.com
- * 02-07-2007  
+ * 02-07-2007
  */
 @ComponentConfig(
     lifecycle = UIFormLifecycle.class,
@@ -79,7 +79,7 @@ public class UIWorkspacePermissionForm extends UIForm implements UISelectable {
       getUIFormCheckBoxInput(perm).setChecked(check) ;
     }
   }
-  
+
   protected void lockForm(boolean lock) {
     boolean editable = !lock ;
     UIPermissionContainer uiContainer = getAncestorOfType(UIPermissionContainer.class) ;
@@ -88,10 +88,10 @@ public class UIWorkspacePermissionForm extends UIForm implements UISelectable {
     for(String perm : PermissionType.ALL) {
       getUIFormCheckBoxInput(perm).setEnable(editable) ;
     }
-    if(!editable) setActions(new String[]{"Cancel"}) ; 
-    else {setActions(new String[]{"Save", "Cancel"}); } 
+    if(!editable) setActions(new String[]{"Cancel"}) ;
+    else {setActions(new String[]{"Save", "Cancel"}); }
   }
-  
+
   public static class SaveActionListener extends EventListener<UIWorkspacePermissionForm> {
     public void execute (Event<UIWorkspacePermissionForm> event) throws Exception {
       UIWorkspacePermissionForm uiForm =  event.getSource();
@@ -109,7 +109,7 @@ public class UIWorkspacePermissionForm extends UIForm implements UISelectable {
         if(uiForm.getUIFormCheckBoxInput(perm).isChecked()) sb.append(user +" "+ perm + ";") ;
       }
       if(uiForm.getUIFormCheckBoxInput(PermissionType.ADD_NODE).isChecked() ||
-          uiForm.getUIFormCheckBoxInput(PermissionType.REMOVE).isChecked() || 
+          uiForm.getUIFormCheckBoxInput(PermissionType.REMOVE).isChecked() ||
           uiForm.getUIFormCheckBoxInput(PermissionType.SET_PROPERTY).isChecked())
       {
         String readperm = user +" "+ PermissionType.READ + ";" ;

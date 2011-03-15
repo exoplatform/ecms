@@ -39,7 +39,7 @@ import org.exoplatform.services.ecm.dms.BaseDMSTestCase;
  * Created by eXo Platform
  * Author : Nguyen Manh Cuong
  *          manhcuongpt@gmail.com
- * Jun 17, 2009  
+ * Jun 17, 2009
  */
 
 /**
@@ -49,33 +49,33 @@ import org.exoplatform.services.ecm.dms.BaseDMSTestCase;
  * 2. Get Vote Total method
  */
 public class TestVotingService extends BaseDMSTestCase {
-  
+
   private final static String I18NMixin = "mix:i18n";
 
   private final static String VOTEABLE = "mix:votable";
-  
+
   private final static String VOTER_PROP = "exo:voter".intern();
-  
+
   private final static String VOTE_TOTAL_PROP = "exo:voteTotal".intern();
-  
+
   private final static String VOTING_RATE_PROP = "exo:votingRate".intern();
 
-  private final static String VOTE_TOTAL_LANG_PROP = "exo:voteTotalOfLang".intern();  
-  
+  private final static String VOTE_TOTAL_LANG_PROP = "exo:voteTotalOfLang".intern();
+
   private final static String ARTICLE = "exo:article";
-  
+
   private final static String CONTENT = "jcr:content";
-  
-  private final static String MIMETYPE = "jcr:mimeType";  
-  
+
+  private final static String MIMETYPE = "jcr:mimeType";
+
   private final static String DATA = "jcr:data";
-  
+
   private final static String LASTMODIFIED = "jcr:lastModified";
-  
+
   private final static String FILE = "nt:file";
-  
+
   private final static String RESOURCE = "nt:resource";
-  
+
   private final static String TITLE = "exo:title";
 
   private final static String SUMMARY = "exo:summary";
@@ -92,10 +92,10 @@ public class TestVotingService extends BaseDMSTestCase {
     votingService = (VotingService) container.getComponentInstanceOfType(VotingService.class);
     multiLanguageService = (MultiLanguageService) container.getComponentInstanceOfType(MultiLanguageService.class);
   }
-  
+
   /**
    * Test Method: vote()
-   * Input: Test node is set English default language, but not set MultiLanguage. 
+   * Input: Test node is set English default language, but not set MultiLanguage.
    *        Voter: root,  rate: 1.0, voter's language is default language.
    *               marry, rate: 4.0, voter's language is default language.
    *               john,  rate: 5.0, voter's language is default language.
@@ -122,13 +122,13 @@ public class TestVotingService extends BaseDMSTestCase {
     assertEquals(3, test.getProperty(VOTE_TOTAL_LANG_PROP).getValue().getLong());
     assertEquals(3.33, test.getProperty(VOTING_RATE_PROP).getValue().getDouble());
   }
-  
+
   /**
    * Test Method: vote()
-   * Input: Test node is set English default language, but not set MultiLanguage 
+   * Input: Test node is set English default language, but not set MultiLanguage
    *        Voter's language is not default language
    * Expected: throws exception
-   */  
+   */
   public void testVote1() throws Exception{
     Node test = session.getRootNode().addNode("Test");
     if (test.canAddMixin(I18NMixin)) {
@@ -140,7 +140,7 @@ public class TestVotingService extends BaseDMSTestCase {
     } catch (NullPointerException ex) {
     }
   }
-  
+
   /**
    * Test Method: vote()
    * Input: test node is set English default language.
@@ -159,17 +159,17 @@ public class TestVotingService extends BaseDMSTestCase {
     votingService.vote(test, 1, null, "fr");
     votingService.vote(test, 4, null, "fr");
     Node fr = multiLanguageService.getLanguage(test, "fr");
-    
+
     assertEquals(0, fr.getProperty(VOTER_PROP).getValues().length);
     assertEquals(2.67, fr.getProperty(VOTING_RATE_PROP).getValue().getDouble());
     assertEquals(3, fr.getProperty(VOTE_TOTAL_LANG_PROP).getValue().getLong());
-  }  
-  
+  }
+
   /**
    * Test Method: vote()
    * Input: Test node is set default language not equals voter's language
    *        In this case: voter's language is fr
-   *        Example 
+   *        Example
    *              first vote : root, rate: 2.0, language = fr,
    *              second vote: root, rate: 3.0, language = fr,
    *              third vote : root, rate: 4.0, language = fr
@@ -194,14 +194,14 @@ public class TestVotingService extends BaseDMSTestCase {
     assertEquals(3.0, fr.getProperty(VOTING_RATE_PROP).getValue().getDouble());
     assertEquals(3, fr.getProperty(VOTE_TOTAL_LANG_PROP).getValue().getLong());
   }
-  
+
   /**
    * Test Method: vote()
    * Input: Test node is set default language and is not equals voter's language.
    *        first vote : root, rate: 3.0, language fr
    *        second vote: marry, rate: 2.0, language fr
    *        second vote: john, rate: 5.0, language fr
-   * Expected: 
+   * Expected:
    *        Each language add "jcr:contest" node and their data is equals data of "jcr:content" of test node.
    *        Voters who use fr language is "root", "marry", "john"
    *        Total of vote of fr is 3
@@ -209,7 +209,7 @@ public class TestVotingService extends BaseDMSTestCase {
    */
   @SuppressWarnings("unchecked")
   public void testVote4() throws Exception{
-    try {    
+    try {
       Node test = session.getRootNode().addNode("Test", FILE);
       Node testFile = test.addNode(CONTENT, RESOURCE);
       testFile.setProperty(DATA, getClass().getResource("/conf/standalone/system-configuration.xml").openStream());
@@ -249,7 +249,7 @@ public class TestVotingService extends BaseDMSTestCase {
       // TODO: handle exception
     }
   }
-  
+
   /**
    * Test Method: vote()
    * Input: test node is set default language
@@ -266,14 +266,14 @@ public class TestVotingService extends BaseDMSTestCase {
       votingService.vote(test, 3, "root", null);
     } catch (Exception ex) {
     }
-  }   
-  
+  }
+
   /**
    * Test Method: vote()
    * Input: Test node doesn't have multiple language.
    *        Voter's language is not equal default language.
    * Expected: throws Exception
-   */  
+   */
   public void testVote6() throws Exception{
     try {
       Node test = session.getRootNode().addNode("Test");
@@ -287,8 +287,8 @@ public class TestVotingService extends BaseDMSTestCase {
    * Test Method: getVoteTotal()
    * Input: Test node is set English default language and doesn't have MultiLanguage
    *        Voter's language equals default language.
-   * Expected: 
-   *        Total of test's vote = value of VOTE_TOTAL_LANG_PROP property. 
+   * Expected:
+   *        Total of test's vote = value of VOTE_TOTAL_LANG_PROP property.
    */
   public void testGetVoteTotal() throws Exception{
     Node test = session.getRootNode().addNode("Test");
@@ -300,7 +300,7 @@ public class TestVotingService extends BaseDMSTestCase {
     long voteTotal = votingService.getVoteTotal(test);
     assertEquals(voteTotal, test.getProperty(VOTE_TOTAL_LANG_PROP).getValue().getLong());
   }
-  
+
   /**
    * Test Method: getVoteTotal()
    * Input: test node is set English default language and has MultiLanguage
@@ -309,7 +309,7 @@ public class TestVotingService extends BaseDMSTestCase {
    *                                    marry votes 3 times using both fr, vi, and en language.
    * Expected:
    *       Total of votes of test node = value of VOTE_TOTAL_PROP property of test node.
-   *       In this case: 
+   *       In this case:
    *       total = total of voters with default language + total of voter with other languages.
    */
   public void testGetVoteTotal1() throws Exception{
@@ -323,7 +323,7 @@ public class TestVotingService extends BaseDMSTestCase {
     long voteTotal = votingService.getVoteTotal(test);
     assertEquals(voteTotal, test.getProperty(VOTE_TOTAL_PROP).getValue().getLong());
   }
-  
+
   /**
    * Clean data test
    */
@@ -335,7 +335,7 @@ public class TestVotingService extends BaseDMSTestCase {
     }
     super.tearDown();
   }
-  
+
   /**
    * Create a map to use for MultilLanguageService
    */
@@ -365,8 +365,8 @@ public class TestVotingService extends BaseDMSTestCase {
     inputProperty.setValue("this is article content");
     map.put(textPath, inputProperty);
     return map;
-  }  
-  
+  }
+
   /**
    * Create binary data
    */
@@ -383,9 +383,9 @@ public class TestVotingService extends BaseDMSTestCase {
     inputProperty.setValue("text/xml");
     map.put(mimeType, inputProperty);
     return map;
-  }  
-  
-  
+  }
+
+
   /**
    * This method will create a node which is added MultiLanguage
    */
@@ -406,5 +406,5 @@ public class TestVotingService extends BaseDMSTestCase {
     multiLanguageService.addLanguage(test, createMapInput(), "fr", false);
     return test;
   }
-    
+
 }

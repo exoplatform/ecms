@@ -61,11 +61,11 @@ import org.exoplatform.services.rest.ext.webdav.method.VERSIONCONTROL;
 
 /**
  * This class is used to override the default WebDavServiceImpl in order to support symlinks
- * 
+ *
  * Created by The eXo Platform SAS
  * Author : eXoPlatform
  *          nicolas.filotto@exoplatform.com
- * 9 avr. 2009  
+ * 9 avr. 2009
  */
 @Path("/jcr/")
 public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDavServiceImpl {
@@ -74,9 +74,9 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
    * Logger.
    */
   private static Log log = ExoLogger.getLogger("cms.webdav.WebDavServiceImpl");
-  
+
   private final NodeFinder nodeFinder;
-  
+
   public WebDavServiceImpl(InitParams params,
                            RepositoryService repositoryService,
                            ThreadLocalSessionProviderService sessionProviderService,
@@ -95,16 +95,20 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
     }
 
     String destPath = destinationHeader.substring(serverURI.length() + 1);
-    
+
     try {
-      Item item = nodeFinder.getItem(repoName, workspaceName(destPath), LinkUtils.getParentPath(path(destPath)), true);
-      return item.getSession().getWorkspace().getName() + LinkUtils.createPath(item.getPath(), LinkUtils.getItemName(path(destPath)));
+      Item item = nodeFinder.getItem(repoName,
+                                     workspaceName(destPath),
+                                     LinkUtils.getParentPath(path(destPath)),
+                                     true);
+      return item.getSession().getWorkspace().getName()
+          + LinkUtils.createPath(item.getPath(), LinkUtils.getItemName(path(destPath)));
     } catch (Exception e) {
       log.warn("Cannot find the item at " + repoName + "/" + destPath, e);
       return null;
     }
   }
-  
+
   @CHECKIN
   @Path("/{repoName}/{repoPath:.*}/")
   public Response checkin(@PathParam("repoName") String repoName,
@@ -113,7 +117,10 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
                           @HeaderParam(ExtHttpHeaders.IF) String ifHeader) {
 
     try {
-      Item item = nodeFinder.getItem(repoName, workspaceName(repoPath), path(Text.escapeIllegalJcrChars(repoPath)), true);
+      Item item = nodeFinder.getItem(repoName,
+                                     workspaceName(repoPath),
+                                     path(Text.escapeIllegalJcrChars(repoPath)),
+                                     true);
       repoPath = item.getSession().getWorkspace().getName() + item.getPath();
     } catch (PathNotFoundException exc) {
       return Response.status(HTTPStatus.NOT_FOUND).entity(exc.getMessage()).build();
@@ -133,7 +140,10 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
                            @HeaderParam(ExtHttpHeaders.LOCKTOKEN) String lockTokenHeader,
                            @HeaderParam(ExtHttpHeaders.IF) String ifHeader) {
     try {
-      Item item = nodeFinder.getItem(repoName, workspaceName(repoPath), path(Text.escapeIllegalJcrChars(repoPath)), true);
+      Item item = nodeFinder.getItem(repoName,
+                                     workspaceName(repoPath),
+                                     path(Text.escapeIllegalJcrChars(repoPath)),
+                                     true);
       repoPath = item.getSession().getWorkspace().getName() + item.getPath();
     } catch (PathNotFoundException exc) {
       return Response.status(HTTPStatus.NOT_FOUND).entity(exc.getMessage()).build();
@@ -173,7 +183,15 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
     if (realDestinationHeader != null) {
       destinationHeader = realDestinationHeader;
     }
-    return super.copy(repoName, repoPath, destinationHeader, lockTokenHeader, ifHeader, depthHeader, overwriteHeader, uriInfo, body);
+    return super.copy(repoName,
+                      repoPath,
+                      destinationHeader,
+                      lockTokenHeader,
+                      ifHeader,
+                      depthHeader,
+                      overwriteHeader,
+                      uriInfo,
+                      body);
   }
 
   @GET
@@ -350,8 +368,12 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
                       InputStream inputStream) {
 
     try {
-      Item item = nodeFinder.getItem(repoName, workspaceName(repoPath), LinkUtils.getParentPath(path(Text.escapeIllegalJcrChars(repoPath))), true);
-      repoPath = item.getSession().getWorkspace().getName() + LinkUtils.createPath(item.getPath(), LinkUtils.getItemName(path(repoPath)));
+      Item item = nodeFinder.getItem(repoName,
+                                     workspaceName(repoPath),
+                                     LinkUtils.getParentPath(path(Text.escapeIllegalJcrChars(repoPath))),
+                                     true);
+      repoPath = item.getSession().getWorkspace().getName()
+          + LinkUtils.createPath(item.getPath(), LinkUtils.getItemName(path(repoPath)));
     } catch (PathNotFoundException exc) {
       return Response.status(HTTPStatus.NOT_FOUND).entity(exc.getMessage()).build();
     } catch (NoSuchWorkspaceException exc) {
@@ -360,7 +382,15 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
       log.warn("Cannot find the item at " + repoName + "/" + repoPath, e);
       return Response.serverError().build();
     }
-    return super.put(repoName, repoPath, lockTokenHeader, ifHeader, null, nodeTypeHeader, mixinTypes, mediaType, inputStream);
+    return super.put(repoName,
+                     repoPath,
+                     lockTokenHeader,
+                     ifHeader,
+                     null,
+                     nodeTypeHeader,
+                     mixinTypes,
+                     mediaType,
+                     inputStream);
   }
 
   @REPORT
@@ -372,7 +402,10 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
                          HierarchicalProperty body) {
 
     try {
-      Item item = nodeFinder.getItem(repoName, workspaceName(repoPath), path(Text.escapeIllegalJcrChars(repoPath)), true);
+      Item item = nodeFinder.getItem(repoName,
+                                     workspaceName(repoPath),
+                                     path(Text.escapeIllegalJcrChars(repoPath)),
+                                     true);
       repoPath = item.getSession().getWorkspace().getName() + item.getPath();
     } catch (PathNotFoundException exc) {
       return Response.status(HTTPStatus.NOT_FOUND).entity(exc.getMessage()).build();
@@ -393,7 +426,10 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
                          HierarchicalProperty body) {
 
     try {
-      Item item = nodeFinder.getItem(repoName, workspaceName(repoPath), path(Text.escapeIllegalJcrChars(repoPath)), true);
+      Item item = nodeFinder.getItem(repoName,
+                                     workspaceName(repoPath),
+                                     path(Text.escapeIllegalJcrChars(repoPath)),
+                                     true);
       repoPath = item.getSession().getWorkspace().getName() + item.getPath();
     } catch (PathNotFoundException exc) {
       return Response.status(HTTPStatus.NOT_FOUND).entity(exc.getMessage()).build();
@@ -414,7 +450,10 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
                              @HeaderParam(ExtHttpHeaders.IF) String ifHeader) {
 
     try {
-      Item item = nodeFinder.getItem(repoName, workspaceName(repoPath), path(Text.escapeIllegalJcrChars(repoPath)), true);
+      Item item = nodeFinder.getItem(repoName,
+                                     workspaceName(repoPath),
+                                     path(Text.escapeIllegalJcrChars(repoPath)),
+                                     true);
       repoPath = item.getSession().getWorkspace().getName() + item.getPath();
     } catch (PathNotFoundException exc) {
       return Response.status(HTTPStatus.NOT_FOUND).entity(exc.getMessage()).build();
@@ -435,7 +474,10 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
                                  @HeaderParam(ExtHttpHeaders.IF) String ifHeader) {
 
     try {
-      Item item = nodeFinder.getItem(repoName, workspaceName(repoPath), path(Text.escapeIllegalJcrChars(repoPath)), true);
+      Item item = nodeFinder.getItem(repoName,
+                                     workspaceName(repoPath),
+                                     path(Text.escapeIllegalJcrChars(repoPath)),
+                                     true);
       repoPath = item.getSession().getWorkspace().getName() + item.getPath();
     } catch (PathNotFoundException exc) {
       return Response.status(HTTPStatus.NOT_FOUND).entity(exc.getMessage()).build();

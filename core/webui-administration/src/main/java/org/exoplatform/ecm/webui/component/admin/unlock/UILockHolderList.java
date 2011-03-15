@@ -34,7 +34,7 @@ import org.exoplatform.webui.event.EventListener;
  * Created by The eXo Platform SARL
  * Author : Dang Van Minh
  *          minh.dang@exoplatform.com
- * Dec 29, 2006  
+ * Dec 29, 2006
  * 11:30:17 AM
  */
 @ComponentConfig(
@@ -47,14 +47,14 @@ public class UILockHolderList extends UIComponentDecorator {
   final static public String[] ACTIONS = {};
   final static public String ST_EDIT = "EditUnLockForm";
   private UIPageIterator uiPageIterator_;
-  
+
   public UILockHolderList() throws Exception {
     uiPageIterator_ = createUIComponent(UIPageIterator.class, null, "LockHolderListIterator");
-    setUIComponent(uiPageIterator_);    
+    setUIComponent(uiPageIterator_);
   }
-  
+
   public String[] getActions() { return ACTIONS ; }
-  
+
   public void updateLockedNodesGrid(int currentPage) throws Exception {
     PageList pageList = new ObjectPageList(getAllGroupsOrUsersForLock(), 10);
     uiPageIterator_.setPageList(pageList);
@@ -63,20 +63,20 @@ public class UILockHolderList extends UIComponentDecorator {
     else
       uiPageIterator_.setCurrentPage(currentPage);
   }
-  
+
   public UIPageIterator getUIPageIterator() { return uiPageIterator_ ; }
-  
-  public List getGroupsOrUsersForLock() throws Exception { return uiPageIterator_.getCurrentPageData(); } 
-  
+
+  public List getGroupsOrUsersForLock() throws Exception { return uiPageIterator_.getCurrentPageData(); }
+
   public List<String> getAllGroupsOrUsersForLock() throws Exception {
     LockService lockService = getApplicationComponent(LockService.class);
-    
+
     return lockService.getAllGroupsOrUsersForLock();
   }
-  
+
   static public class DeleteLockActionListener extends EventListener<UILockHolderList> {
     public void execute(Event<UILockHolderList> event) throws Exception {
-      UILockHolderList uiLockHolderList = event.getSource(); 
+      UILockHolderList uiLockHolderList = event.getSource();
       UILockHolderContainer uiLockHolderContainer = uiLockHolderList.getAncestorOfType(UILockHolderContainer.class);
       String settingLock = event.getRequestContext().getRequestParameter(OBJECTID);
       LockService lockService = uiLockHolderContainer.getApplicationComponent(LockService.class);
@@ -85,11 +85,11 @@ public class UILockHolderList extends UIComponentDecorator {
       } else {
         Object[] args = {settingLock};
         UIApplication uiApp = uiLockHolderList.getAncestorOfType(UIApplication.class);
-        uiApp.addMessage(new ApplicationMessage("UILockHolderList.msg.can-not-delete-lock-holder", args, 
+        uiApp.addMessage(new ApplicationMessage("UILockHolderList.msg.can-not-delete-lock-holder", args,
             ApplicationMessage.WARNING));
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
         event.getRequestContext().addUIComponentToUpdateByAjax(uiLockHolderContainer.getParent());
-      } 
+      }
       UILockHolderList uiHolderList = uiLockHolderContainer.getChild(UILockHolderList.class);
       uiHolderList.updateLockedNodesGrid(uiHolderList.uiPageIterator_.getCurrentPage());
       UIUnLockManager uiUnLockManager = uiLockHolderContainer.getParent();
@@ -97,5 +97,5 @@ public class UILockHolderList extends UIComponentDecorator {
       uiLockHolderContainer.setRendered(true);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiLockHolderContainer.getParent());
     }
-  }  
+  }
 }

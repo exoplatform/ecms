@@ -22,23 +22,23 @@ import java.util.HashMap;
  * Created by The eXo Platform SAS
  * @author : Hoa.Pham
  *          hoa.pham@exoplatform.com
- * Jun 23, 2008  
+ * Jun 23, 2008
  */
 @SuppressWarnings({ "hiding", "serial" })
-public class FCKEditorContext extends HashMap<String, Object> {  
-  
+public class FCKEditorContext extends HashMap<String, Object> {
+
   public String getPortalName() { return (String)this.get("portalName"); }
   public void setPortalName(String portalName) { this.put("portalName",portalName); }
-  
+
   public String getSkinName() {return (String)this.get("skinName"); }
   public void setSkinName(String skinName) { this.put("skinName",skinName);}
-  
+
   public String getRepository() { return (String)this.get("repository"); }
   public void setRepository(String repository) { this.put("repository",repository); }
-  
+
   public String getWorkspace() {return (String)this.get("workspace"); }
   public void setWorkspace(String worksapce) { this.put("workspace",worksapce); }
-  
+
   public String getCurrentNodePath() { return (String) this.get("jcrPath"); }
   public void setCurrentNodePath(String path) { this.put("jcrPath",path); }
  }

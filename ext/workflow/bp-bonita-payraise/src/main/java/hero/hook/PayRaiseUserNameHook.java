@@ -28,18 +28,18 @@ import org.ow2.bonita.facade.runtime.ActivityInstance;
  * This Node Hook gets the user name who started the Instance and puts it
  * in "initiator" attribute. It is used to print the initiator name into a
  * Form component.
- * 
+ *
  * Created by Bull R&D
  * @author Rodrigue Le Gall
  */
 public class PayRaiseUserNameHook implements TxHook {
-    
+
   /** Name of the Property which represents the process initiator user name */
   public static final String PROCESS_INITIATOR_USER_NAME = "initiator";
 
 public void execute(APIAccessor accessor, ActivityInstance<ActivityBody> activity)
-		throws Exception {
-	String user_Name = accessor.getQueryRuntimeAPI().getProcessInstance(activity.getProcessInstanceUUID()).getStartedBy();
+    throws Exception {
+  String user_Name = accessor.getQueryRuntimeAPI().getProcessInstance(activity.getProcessInstanceUUID()).getStartedBy();
     accessor.getRuntimeAPI().setProcessInstanceVariable(activity.getProcessInstanceUUID(), PROCESS_INITIATOR_USER_NAME, user_Name);
 //    System.out.println("Initiator set to "+user_Name);
 }

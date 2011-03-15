@@ -44,35 +44,35 @@ import org.exoplatform.webui.ext.filter.UIExtensionFilters;
  * 27 june 2010
  */
 @ComponentConfig(
-		events = {
-				@EventConfig(listeners = PublicationApproveContentAction.PublicationApproveContentActionListener.class)
-		}
+    events = {
+        @EventConfig(listeners = PublicationApproveContentAction.PublicationApproveContentActionListener.class)
+    }
 )
 public class PublicationApproveContentAction extends UIComponent {
 
-	private static final List<UIExtensionFilter> FILTERS = Arrays.asList(
-			new UIExtensionFilter[] {
-					new CanAddNodeFilter(), new IsNotLockedFilter(), new IsCheckedOutFilter(), new CanApproveFilter()});
+  private static final List<UIExtensionFilter> FILTERS = Arrays.asList(
+      new UIExtensionFilter[] {
+          new CanAddNodeFilter(), new IsNotLockedFilter(), new IsCheckedOutFilter(), new CanApproveFilter()});
 
-	@UIExtensionFilters
-	public List<UIExtensionFilter> getFilters() {
-		return FILTERS;
-	}
-	public static class PublicationApproveContentActionListener extends UIActionBarActionListener<PublicationApproveContentAction> {
+  @UIExtensionFilters
+  public List<UIExtensionFilter> getFilters() {
+    return FILTERS;
+  }
+  public static class PublicationApproveContentActionListener extends UIActionBarActionListener<PublicationApproveContentAction> {
 
-		@Override
-		protected void processEvent(Event<PublicationApproveContentAction> event) throws Exception {
-			UIJCRExplorer uiExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class);
-			PublicationService publicationService = (PublicationService)PortalContainer.getInstance().getComponentInstanceOfType(PublicationService.class);
-			Node node = uiExplorer.getCurrentNode();
-		    HashMap<String,String> context = new HashMap<String,String>();
-			
-		    publicationService.changeState(node, "approved", context);
+    @Override
+    protected void processEvent(Event<PublicationApproveContentAction> event) throws Exception {
+      UIJCRExplorer uiExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class);
+      PublicationService publicationService = (PublicationService)PortalContainer.getInstance().getComponentInstanceOfType(PublicationService.class);
+      Node node = uiExplorer.getCurrentNode();
+        HashMap<String,String> context = new HashMap<String,String>();
 
-			UIPopupContainer UIPopupContainer = uiExplorer.getChild(UIPopupContainer.class);
-			event.getRequestContext().addUIComponentToUpdateByAjax(UIPopupContainer);
-			event.getRequestContext().addUIComponentToUpdateByAjax(uiExplorer);
+        publicationService.changeState(node, "approved", context);
 
-		}		
-	}
+      UIPopupContainer UIPopupContainer = uiExplorer.getChild(UIPopupContainer.class);
+      event.getRequestContext().addUIComponentToUpdateByAjax(UIPopupContainer);
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiExplorer);
+
+    }
+  }
 }

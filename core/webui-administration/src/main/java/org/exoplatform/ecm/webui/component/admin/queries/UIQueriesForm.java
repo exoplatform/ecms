@@ -53,7 +53,7 @@ import org.exoplatform.webui.form.validator.MandatoryValidator;
  * Created by The eXo Platform SARL
  * Author : Dang Van Minh
  *          minh.dang@exoplatform.com
- * Dec 29, 2006  
+ * Dec 29, 2006
  * 11:30:29 AM
  */
 @ComponentConfig(
@@ -77,9 +77,9 @@ public class UIQueriesForm extends UIForm implements UISelectable {
   final static public String SQL_QUERY = "select * from exo:article where jcr:path like '/Documents/Live/%'" ;
   final static public String XPATH_QUERY = "/jcr:root/Documents/Live//element(*, exo:article)" ;
   final static public String[] REG_EXPRESSION = {"[", "]", ":", "&"} ;
-  
+
   private boolean isAddNew_ = false ;
-  
+
   public UIQueriesForm() throws Exception {
     addUIFormInput(new UIFormStringInput(QUERY_NAME, QUERY_NAME, null).
       addValidator(MandatoryValidator.class).
@@ -106,22 +106,22 @@ public class UIQueriesForm extends UIForm implements UISelectable {
   public void doSelect(String selectField, Object value) {
     getUIStringInput(selectField).setValue(value.toString());
     UIQueriesManager uiManager = getAncestorOfType(UIQueriesManager.class);
-    UIPopupWindow uiPopup = uiManager.getChildById("PermissionPopup");    
+    UIPopupWindow uiPopup = uiManager.getChildById("PermissionPopup");
     uiManager.removeChildById("PermissionPopup");
   }
-  
+
   public void setIsAddNew(boolean isAddNew) { isAddNew_ = isAddNew ; }
-  
+
   public void update(String queryName)throws Exception{
     isAddNew_ = false ;
     QueryService queryService = getApplicationComponent(QueryService.class) ;
     if(queryName == null) {
-      isAddNew_ = true ; 
+      isAddNew_ = true ;
       reset() ;
       return ;
     }
     String repository = getAncestorOfType(UIECMAdminPortlet.class).getPreferenceRepository() ;
-    Node query = queryService.getSharedQuery(queryName, repository, 
+    Node query = queryService.getSharedQuery(queryName, repository,
         SessionProviderFactory.createSystemProvider()) ;
     getUIStringInput(QUERY_NAME).setValue(queryName) ;
     getUIStringInput(QUERY_NAME).setEditable(false) ;
@@ -143,7 +143,7 @@ public class UIQueriesForm extends UIForm implements UISelectable {
         if(strValues.length() > 0) strValues = strValues.append(",") ;
         strValues = strValues.append(values[i].getString()) ;
       }
-      getUIStringInput(PERMISSIONS).setValue(strValues.toString()) ;      
+      getUIStringInput(PERMISSIONS).setValue(strValues.toString()) ;
     }
   }
 
@@ -167,7 +167,7 @@ public class UIQueriesForm extends UIForm implements UISelectable {
       if(uiForm.isAddNew_) {
         for(Node queryNode : queryService.getSharedQueries(repository, SessionProviderFactory.createSystemProvider())) {
           if(queryNode.getName().equals(queryName)) {
-            uiApp.addMessage(new ApplicationMessage("UIQueriesForm.msg.name-existing", null, 
+            uiApp.addMessage(new ApplicationMessage("UIQueriesForm.msg.name-existing", null,
                 ApplicationMessage.WARNING)) ;
             event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
             return ;
@@ -175,7 +175,7 @@ public class UIQueriesForm extends UIForm implements UISelectable {
         }
       }
       if(!Utils.isNameValid(queryName, REG_EXPRESSION)) {
-        uiApp.addMessage(new ApplicationMessage("UIQueriesForm.msg.name-invalid", null, 
+        uiApp.addMessage(new ApplicationMessage("UIQueriesForm.msg.name-invalid", null,
                                                 ApplicationMessage.WARNING)) ;
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
         return ;
@@ -184,7 +184,7 @@ public class UIQueriesForm extends UIForm implements UISelectable {
       UIFormInputSetWithAction permField = uiForm.getChildById("PermissionButton") ;
       String permissions = permField.getUIStringInput(PERMISSIONS).getValue() ;
       if((permissions == null)||(permissions.trim().length() == 0)) {
-        uiApp.addMessage(new ApplicationMessage("UIQueriesForm.msg.permission-require", null, 
+        uiApp.addMessage(new ApplicationMessage("UIQueriesForm.msg.permission-require", null,
                                                 ApplicationMessage.WARNING)) ;
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
         return ;
@@ -193,22 +193,22 @@ public class UIQueriesForm extends UIForm implements UISelectable {
       boolean cacheResult = uiForm.getUIFormCheckBoxInput(CACHE_RESULT).isChecked() ;
       try {
         if(permissions.indexOf(",") > -1) {
-          queryService.addSharedQuery(queryName, statement, queryType, permissions.split(","), 
-              cacheResult, repository) ;  
-        } else {
-          queryService.addSharedQuery(queryName, statement, queryType, new String[] {permissions}, 
+          queryService.addSharedQuery(queryName, statement, queryType, permissions.split(","),
               cacheResult, repository) ;
-        }   
+        } else {
+          queryService.addSharedQuery(queryName, statement, queryType, new String[] {permissions},
+              cacheResult, repository) ;
+        }
       } catch(InvalidQueryException qe) {
-        uiApp.addMessage(new ApplicationMessage("UIQueriesForm.msg.invalid-query", null, 
+        uiApp.addMessage(new ApplicationMessage("UIQueriesForm.msg.invalid-query", null,
                                                 ApplicationMessage.WARNING)) ;
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
         return ;
       } catch (AccessDeniedException ade) {
-    	  uiApp.addMessage(new ApplicationMessage("UIQueriesForm.msg.access-denied", null, 
+        uiApp.addMessage(new ApplicationMessage("UIQueriesForm.msg.access-denied", null,
                   ApplicationMessage.WARNING)) ;
-    	  event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
-    	  return ;
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+        return ;
       }
       UIQueriesManager uiManager = uiForm.getAncestorOfType(UIQueriesManager.class) ;
       uiManager.getChild(UIQueriesList.class).updateQueriesGrid(1);

@@ -23,19 +23,19 @@ import org.exoplatform.webui.form.UIFormInputBase;
  * Created by The eXo Platform SAS
  * @author : Hoa.Pham
  *          hoa.pham@exoplatform.com
- * Jun 23, 2008  
+ * Jun 23, 2008
  */
 public class UIFormSelectBoxField extends DialogFormField {
-  
+
   public UIFormSelectBoxField(String name, String label, String[] arguments) {
     super(name, label, arguments);
   }
-  
+
   @SuppressWarnings("unchecked")
   public <T extends UIFormInputBase> T createUIFormInput() throws Exception {
     return null;
   }
-  
+
   public boolean isOnchange() { return "true".equalsIgnoreCase(onchange); }
   public boolean isEditable() { return "true".equalsIgnoreCase(editable); }
 }

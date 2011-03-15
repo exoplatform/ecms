@@ -43,7 +43,7 @@ import org.exoplatform.webui.exception.MessageException;
  * Author : Dang Van Minh
  *          minh.dang@exoplatform.com
  * Oct 18, 2006
- * 2:28:18 PM 
+ * 2:28:18 PM
  */
 @ComponentConfig(
     template = "app:/groovy/webui/component/explorer/popup/admin/UICategoriesAddedList.gtmpl",
@@ -57,11 +57,11 @@ public class UISimpleCategoriesAddedList extends UIContainer implements UISelect
   public UISimpleCategoriesAddedList() throws Exception {
     uiPageIterator_ = addChild(UIPageIterator.class, null, "SimpleCategoriesAddedList");
   }
-  
+
   public UIPageIterator getUIPageIterator() { return uiPageIterator_; }
-  
+
   public List getListCategories() throws Exception { return uiPageIterator_.getCurrentPageData(); }
-  
+
   public void updateGrid(int currentPage) throws Exception {
     ObjectPageList objPageList = new ObjectPageList(getCategories(), 10);
     uiPageIterator_.setPageList(objPageList);
@@ -70,13 +70,13 @@ public class UISimpleCategoriesAddedList extends UIContainer implements UISelect
     else
       getUIPageIterator().setCurrentPage(currentPage);
   }
-  
+
   public List<Node> getCategories() throws Exception {
     UIJCRExplorer uiJCRExplorer = getAncestorOfType(UIJCRExplorer.class);
     CategoriesService categoriesService = getApplicationComponent(CategoriesService.class);
     return categoriesService.getCategories(uiJCRExplorer.getCurrentNode(), uiJCRExplorer.getRepositoryName());
   }
-  
+
   @SuppressWarnings("unused")
   public void doSelect(String selectField, Object value) throws Exception {
     UIJCRExplorer uiJCRExplorer = getAncestorOfType(UIJCRExplorer.class) ;
@@ -93,7 +93,7 @@ public class UISimpleCategoriesAddedList extends UIContainer implements UISelect
       LOG.error("Unexpected error", e);
     }
   }
-  
+
   static public class DeleteActionListener extends EventListener<UISimpleCategoriesAddedList> {
     public void execute(Event<UISimpleCategoriesAddedList> event) throws Exception {
       UISimpleCategoriesAddedList uiAddedList = event.getSource() ;

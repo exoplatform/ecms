@@ -24,16 +24,16 @@ import org.exoplatform.webui.core.UIComponent;
 
 /**
  * Created by The eXo Platform SAS.
- * 
+ *
  * @author : Hoa.Pham hoa.pham@exoplatform.com Jun 23, 2008
  */
-public abstract class UIBaseNodeTreeSelector extends UIContainer implements ComponentSelector {  
+public abstract class UIBaseNodeTreeSelector extends UIContainer implements ComponentSelector {
 
   protected UIComponent sourceUIComponent ;
   protected String returnFieldName = null ;
   /**
    * On change.
-   * 
+   *
    * @param currentNode the current node
    * @param requestContext the request context
    * @throws Exception the exception

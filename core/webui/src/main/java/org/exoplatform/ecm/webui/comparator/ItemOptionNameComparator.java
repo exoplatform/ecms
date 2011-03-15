@@ -27,7 +27,7 @@ import org.exoplatform.webui.core.model.SelectItemOption;
  * Sep 15, 2008 10:05:19 AM
  */
 public class ItemOptionNameComparator implements Comparator<SelectItemOption> {
-  
+
   public int compare(SelectItemOption o1, SelectItemOption o2) throws ClassCastException {
     try {
       String name1 = o1.getLabel().toString() ;

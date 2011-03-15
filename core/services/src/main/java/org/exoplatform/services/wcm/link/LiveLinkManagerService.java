@@ -27,65 +27,65 @@ import javax.jcr.Node;
  * Aug 6, 2008
  */
 public interface LiveLinkManagerService {
-  
+
   /**
    * Get all link existed in all portal and update status for them (live or broken)
-   * 
+   *
    * @throws Exception the exception
    */
   public void updateLinks() throws Exception;
-  
+
   /**
    * Get all link existed in specified portal and update status for them (live or broken)
-   * 
+   *
    * @param portalName the portal name
-   * 
+   *
    * @throws Exception the exception
    */
   public void updateLinks(String portalName) throws Exception;
-  
+
   /**
    * Gets the broken links by portal.
-   * 
+   *
    * @param portalName the portal name
-   * 
+   *
    * @return the broken links
-   * 
+   *
    * @throws Exception the exception
    */
   public List<LinkBean> getBrokenLinks(String portalName) throws Exception;
-  
+
   /**
    * Gets the broken links by web content.
-   * 
+   *
    * @param webContent the web content
-   * 
+   *
    * @return the broken links
-   * 
+   *
    * @throws Exception the exception
    */
   public List<String> getBrokenLinks(Node webContent) throws Exception ;
-  
+
   /**
-   * Extract all link (<code>a</code>, <code>iframe</code>, <code>frame</code>, <code>href</code>) 
+   * Extract all link (<code>a</code>, <code>iframe</code>, <code>frame</code>, <code>href</code>)
    * and all image (<code>img</code>) from html document
-   * 
+   *
    * @param htmlFile the node html file
-   * 
+   *
    * @return the list of link's URL
-   * 
+   *
    * @throws Exception the exception
    */
   public List<String> extractLinks(Node htmlFile) throws Exception ;
-  
+
   /**
    * Add exo:links (multi value) property of exo:linkable node type to web content node, with pattern
-   * 
+   *
    * @param webContent the current web content node
    * @param newLinks the list of new links will be updated
-   *  
+   *
    * @throws Exception the exception
    */
   public void updateLinkDataForNode(Node webContent, List<String> newLinks) throws Exception ;
-  
+
 }
