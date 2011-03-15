@@ -27,6 +27,8 @@ import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
@@ -36,6 +38,8 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
  * Jul 21, 2009
  */
 public class NodetypeUtils {
+
+  private static final Log LOG = ExoLogger.getLogger(NodetypeUtils.class);
 
   /**
    * Display all nodes and their properties inside a workspace.
@@ -66,7 +70,7 @@ public class NodetypeUtils {
     while (nodeIterator.hasNext()) {
       Node childNode = nodeIterator.nextNode();
       displayOneNode(childNode);
-      System.out.println("\n------------------\n");
+      LOG.info("\n------------------\n");
       displayAllChildNode(childNode);
     }
   }
@@ -79,16 +83,16 @@ public class NodetypeUtils {
    * @throws Exception the exception
    */
   public static void displayOneNode(Node node) throws Exception {
-    System.out.println("Node name: " + node.getName());
-    System.out.println("Node path: " + node.getPath());
+    LOG.info("Node name: " + node.getName());
+    LOG.info("Node path: " + node.getPath());
     PropertyIterator propertyIterator = node.getProperties();
     while (propertyIterator.hasNext()) {
       Property property = propertyIterator.nextProperty();
       try {
-        System.out.println("\t" + property.getName() + ": " + property.getString());
+        LOG.info("\t" + property.getName() + ": " + property.getString());
       } catch (Exception e) {
         for (Value value : property.getValues()) {
-          System.out.println("\t" + property.getName() + ": " + value.getString());
+          LOG.info("\t" + property.getName() + ": " + value.getString());
         }
       }
     }

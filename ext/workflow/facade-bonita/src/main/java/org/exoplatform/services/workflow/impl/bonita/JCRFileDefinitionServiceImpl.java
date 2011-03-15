@@ -197,7 +197,7 @@ public class JCRFileDefinitionServiceImpl
       return repositoryService.getDefaultRepository().getSystemSession(wsName);
     }
     catch (Exception e) {
-      e.printStackTrace();
+      LOG.warn(e.getMessage(), e);
     }
     finally {
       if (checkpoint) {
@@ -268,7 +268,7 @@ public class JCRFileDefinitionServiceImpl
       session.save();
     }
     catch (Exception e) {
-      e.printStackTrace();
+      LOG.warn(e.getMessage(), e);
     }
   }
 
@@ -302,7 +302,7 @@ public class JCRFileDefinitionServiceImpl
      return fd;
     }
     catch (RepositoryException e) {
-      e.printStackTrace();
+      LOG.warn(e.getMessage(), e);
     } 
     
     return null;
@@ -347,7 +347,7 @@ public class JCRFileDefinitionServiceImpl
      
     }
     catch (Exception e) {
-      e.printStackTrace();
+      LOG.warn(e.getMessage(), e);
     }
   }
 }

@@ -203,9 +203,9 @@ public class AutomaticFormImpl implements Form {
         
             initializeVariables(vList);
         } catch (ProcessNotFoundException e) {
-            e.printStackTrace();
+            LOG.warn(e.getMessage(), e);
         } catch (ActivityDefNotFoundException e) {
-            e.printStackTrace();
+            LOG.warn(e.getMessage(), e);
         } 
   }
   
@@ -216,7 +216,7 @@ public class AutomaticFormImpl implements Form {
         
     		initializeVariables(vList);
         } catch (ProcessNotFoundException e) {
-            e.printStackTrace();
+            LOG.warn(e.getMessage(), e);
         }
 	
   }
@@ -282,7 +282,7 @@ public class AutomaticFormImpl implements Form {
           try {
             lc = new LoginContext("Bonita", s);
           } catch (LoginException le) {
-            le.printStackTrace();
+            LOG.warn(le.getMessage(), le);
           }
         } else {
           UserHandler userHandler = organizationService.getUserHandler();
@@ -292,7 +292,8 @@ public class AutomaticFormImpl implements Form {
           lc = new LoginContext("gatein-domain", handler);
         }
     		lc.login();
-  	  } catch(Exception e) {
-      }
+    } catch (Exception e) {
+      LOG.warn(e.getMessage(), e);
+    }
     }
 }

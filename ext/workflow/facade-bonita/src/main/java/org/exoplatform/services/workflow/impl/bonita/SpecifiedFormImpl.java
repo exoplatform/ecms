@@ -275,42 +275,38 @@ public class SpecifiedFormImpl implements Form {
         return out;
     }
     
-    /**
-     * Retrieves the whole Form definition as a DOM Element
-     * 
-     * @return a DOM Element corresponding to the Form definition file
-     */
-    public Element getFormsDefinition(FileDefinition f) {
-      Element ret           = null;
-      byte[] xpdlDefinition;
-	try {
-		xpdlDefinition = f.getEntry("forms.xml");
-	
+  /**
+   * Retrieves the whole Form definition as a DOM Element
+   * 
+   * @return a DOM Element corresponding to the Form definition file
+   */
+  public Element getFormsDefinition(FileDefinition f) {
+    Element ret = null;
+    byte[] xpdlDefinition;
+    try {
+      xpdlDefinition = f.getEntry("forms.xml");
 
       try {
-        if(xpdlDefinition == null) {
+        if (xpdlDefinition == null) {
           // The XPDL file definition is not contained by the archive. Throw an
           // exception that will be used as a cause by the outer catch block.
           throw new Exception("The XPDL definition file was not retrieved.");
         }
         Element formDefinition;
-          // The definition has not been parsed yet
-          InputStream inputStream =
-            new ByteArrayInputStream(xpdlDefinition);
-          DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-          DocumentBuilder builder = factory.newDocumentBuilder();
-          formDefinition = builder.parse(inputStream).getDocumentElement();
+        // The definition has not been parsed yet
+        InputStream inputStream = new ByteArrayInputStream(xpdlDefinition);
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder builder = factory.newDocumentBuilder();
+        formDefinition = builder.parse(inputStream).getDocumentElement();
         // Return what is contained by the cache
         ret = formDefinition;
-      }
-      catch(Exception e) {
+      } catch (Exception e) {
         throw new RuntimeException("Error while parsing the XPDL Definition", e);
       }
-	} catch (Exception e1) {
-		// TODO Auto-generated catch block
-		e1.printStackTrace();
-	}
-      return ret;
+    } catch (Exception e1) {
+      LOG.warn(e1.getMessage(), e1);
     }
+    return ret;
+  }
     
 }
