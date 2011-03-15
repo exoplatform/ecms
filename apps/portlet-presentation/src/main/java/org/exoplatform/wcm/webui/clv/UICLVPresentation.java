@@ -573,7 +573,6 @@ public class UICLVPresentation extends UIContainer {
       uri = imagesRendererService.generateImageURI(illustrativeImage, null);
     } catch(PathNotFoundException ex) {
       // We don't do anything here because so many documents doesn't have illustration image
-      LOG.warn(ex.getMessage(), ex);
     } catch (Exception e) {
       LOG.warn(e.getMessage(), e);
     }
