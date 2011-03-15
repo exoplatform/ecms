@@ -37,7 +37,10 @@ import org.exoplatform.services.log.Log;
 class PortletFutureCache extends FutureCache<WindowKey, MarkupFragment, PortletRenderContext>
 {
 
-   /** . */
+   private static final int	DEFAULT_CACHE_SIZE = 5000;	// default to 5000 entries
+
+
+    /** . */
    private final ConcurrentHashMap<WindowKey, MarkupFragment> entries;
 
    /** . */
@@ -48,6 +51,9 @@ class PortletFutureCache extends FutureCache<WindowKey, MarkupFragment, PortletR
 
    /** . */
    private int cleanupCache;
+
+   /** . */
+   private int cacheMaxSize = DEFAULT_CACHE_SIZE;
 
    /** . */
    private ScheduledFuture<?> scheduled;
@@ -61,6 +67,12 @@ class PortletFutureCache extends FutureCache<WindowKey, MarkupFragment, PortletR
       this.entries = new ConcurrentHashMap<WindowKey, MarkupFragment>();
       this.cleanupCache = preventWrongCleanupCacheValue(cleanupCache);
       this.scheduled = null;
+   }
+
+   PortletFutureCache(Log log, int cleanupCache, int cacheSize)
+   {
+      this(log, cleanupCache);
+      this.cacheMaxSize = cacheSize;
    }
 
    private static int preventWrongCleanupCacheValue(int value)
@@ -86,50 +98,95 @@ class PortletFutureCache extends FutureCache<WindowKey, MarkupFragment, PortletR
       }
    }
 
+   /*
+    * Returns the number of entries in this cache.
+    */
+   protected int getCacheSize()
+   {
+       return (entries.size());
+   }
+
+   /*
+    * Returns the defined Max Cache Size.
+    */
+   protected int getCacheMaxSize()
+   {
+       return (cacheMaxSize);
+   }
+
+   /*
+    * Returns the defined Max Cache Size.
+    */
+   protected void setCacheMaxSize(int cacheMaxSize)
+   {
+       this.cacheMaxSize = cacheMaxSize;
+   }
+
+   /*
+    * Clear Cache (should be called by JMX in urgently mode.
+    */
+   protected void clearCache()
+   {
+          if (scheduled != null)
+          {
+             stop();
+             entries.clear();
+             start();
+          }
+          else
+              entries.clear();
+   }
+
+   /*
+    * Did Cache contains the following key (do not remove old values).
+    */
+   protected boolean containsKey(WindowKey key)
+   {
+          return (entries.containsKey(key));
+   }
+
+
    @Override
    protected MarkupFragment get(WindowKey key)
    {
-      MarkupFragment value = entries.get(key);
-      if (value != null)
-      {
-         if (value.expirationTimeMillis > System.currentTimeMillis())
-         {
-/*
-            if (log.isTraceEnabled())
-            {
-               log.trace("Using cached markup for portlet " + key);
-            }
-*/
-            //System.out.println("Using cached markup for portlet " + key);
-            return value;
-         }
-         else
-         {
-            //System.out.println("Expired markup for portlet " + key);
-            entries.remove(key);
-            return null;
-         }
-      }
-      else
-      {
-         return null;
-      }
+     // System.out.println("get asked for key " + key);
+
+     MarkupFragment value = entries.get(key);
+     if (value != null)
+     {
+       if (value.expirationTimeMillis > System.currentTimeMillis())
+       {
+         if (log.isTraceEnabled())
+           log.trace("Using cached markup for portlet " + key);
+         return value;
+       }
+       if (log.isTraceEnabled())
+         log.trace("Expired markup for portlet " + key);
+       entries.remove(key);
+       return null;
+     }
+     return null;
    }
 
    @Override
    protected void put(WindowKey key, MarkupFragment value)
    {
-      if (value.expirationTimeMillis > System.currentTimeMillis())
-      {
-         entries.put(key, value);
-         //System.out.println("Cached markup for portlet " + key);
-/*
-         if (log.isTraceEnabled())
-         {
-            log.trace("Cached markup for portlet " + key);
-         }
-*/
-      }
+       boolean canInsert = false;
+
+       // System.out.println("put asked for key " + key + " duration " + (value.expirationTimeMillis - System.currentTimeMillis()));
+
+        if (value.expirationTimeMillis > System.currentTimeMillis()) {
+                if ((entries.size() < cacheMaxSize))
+                    canInsert = true;
+
+                if (canInsert) {
+                    entries.put(key, value);
+                    if (log.isTraceEnabled())
+                        log.trace("Cached markup for portlet " + key);
+
+                // System.out.println("Cached markup for portlet " + key);
+            }
+        }
    }
 
    public void start()
@@ -137,7 +194,7 @@ class PortletFutureCache extends FutureCache<WindowKey, MarkupFragment, PortletR
       if (scheduled == null)
       {
          log.debug("Starting cache cleaner with a period of " + cleanupCache + " seconds");
-         scheduler.scheduleWithFixedDelay(new Runnable()
+         scheduled = scheduler.scheduleWithFixedDelay(new Runnable()
          {
             public void run()
             {
@@ -145,10 +202,14 @@ class PortletFutureCache extends FutureCache<WindowKey, MarkupFragment, PortletR
                for (Iterator<Map.Entry<WindowKey, MarkupFragment>> i = entries.entrySet().iterator(); i.hasNext();)
                {
                   Map.Entry<WindowKey, MarkupFragment> entry = i.next();
-                  if (entry.getValue().expirationTimeMillis > now)
+                  if (entry.getValue().expirationTimeMillis < now)
                   {
-                     log.trace("Removing expired entry " + entry.getKey().getWindowId());
-                     i.remove();
+                          if (log.isTraceEnabled())
+                                  log.trace("Removing expired entry " + entry.getKey().getWindowId());
+
+                          // System.out.println("Removing expired entry " + entry.getKey().getWindowId());
+
+                          i.remove();
                   }
                }
             }

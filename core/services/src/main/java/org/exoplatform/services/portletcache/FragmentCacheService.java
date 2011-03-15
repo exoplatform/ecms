@@ -20,6 +20,11 @@
 package org.exoplatform.services.portletcache;
 
 import org.exoplatform.container.xml.InitParams;
+import org.exoplatform.management.annotations.Managed;
+import org.exoplatform.management.annotations.ManagedDescription;
+import org.exoplatform.management.jmx.annotations.NameTemplate;
+import org.exoplatform.management.jmx.annotations.Property;
+import org.exoplatform.management.rest.annotations.RESTEndpoint;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.picocontainer.Startable;
@@ -28,8 +33,18 @@ import org.picocontainer.Startable;
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
  * @version $Revision$
  */
+
+@Managed
+@NameTemplate({@Property(key = "view", value = "portal"), @Property(key = "service", value = "fragmentcache"),
+   @Property(key = "type", value = "content")})
+@ManagedDescription("FragmentCache Service")
+@RESTEndpoint(path = "fragmentcacheservice")
 public class FragmentCacheService implements Startable
 {
+
+    private static final int	DEFAULT_CACHE_SIZE = 10000;	// default to 10000 entries in FutureCache
+
+    private static final int	DEFAULT_CACHE_CLEANUP = 15;	// default 15s interval for cleanup thread
 
    /** . */
    private static final Log log = ExoLogger.getLogger(FragmentCacheService.class);
@@ -39,7 +54,9 @@ public class FragmentCacheService implements Startable
 
    public FragmentCacheService(InitParams params)
    {
-      int cleanupCache = -1;
+      int cleanupCache = DEFAULT_CACHE_CLEANUP;
+      int cacheSize = DEFAULT_CACHE_SIZE;
+
       if (params.getValueParam("cleanup-cache") != null)
       {
          String cleanupCacheConfig = params.getValueParam("cleanup-cache").getValue();
@@ -53,15 +70,60 @@ public class FragmentCacheService implements Startable
          }
       }
 
-      //
-      this.cache = new PortletFutureCache(log, cleanupCache);
+      if (params.getValueParam("cache-size") != null)
+      {
+         String cacheSizeConfig = params.getValueParam("cache-size").getValue();
+         try
+         {
+             cacheSize = Integer.parseInt(cacheSizeConfig);
+         }
+         catch (NumberFormatException e)
+         {
+            log.warn("Invalid cache-size setting " + cacheSizeConfig);
+         }
+      }
+
+      this.cache = new PortletFutureCache(log, cleanupCache, cacheSize);
+
    }
 
+   @Managed
+   @ManagedDescription("What is the Cleanup Cache period (in seconds) ?")
    public int getCleanupCache()
    {
       return cache.getCleanupCache();
    }
 
+   @Managed
+   @ManagedDescription("How many Entries in Cache  ?")
+   public int getCacheSize()
+   {
+      return cache.getCacheSize();
+   }
+
+   @Managed
+   @ManagedDescription("Get Maximum Entries in Cache")
+   public int getCacheMaxSize()
+   {
+      return cache.getCacheMaxSize();
+   }
+
+   @Managed
+   @ManagedDescription("Set Maximum Entries in Cache")
+   /***
+     * Set Max Cache size, ie, max entries allowed in FutureCache.
+     * An IllegalArgumentException is thrown if cacheMaxSize is less than 1.
+    */
+   public void setCacheSize(int cacheMaxSize)
+   {
+       if (cacheMaxSize < 1)
+           throw new IllegalArgumentException("invalid value for max cache size");
+
+      cache.setCacheMaxSize(cacheMaxSize);
+   }
+
+    @Managed
+    @ManagedDescription("Sets Cleanup Cache period (in seconds)")
    public void setCleanupCache(int cleanupCache)
    {
       this.cache.updateCleanupCache(cleanupCache);
@@ -75,5 +137,12 @@ public class FragmentCacheService implements Startable
    public void stop()
    {
       cache.stop();
+   }
+
+   @Managed
+   @ManagedDescription("Clear the Fragment Cache")
+   public void clearCache()
+   {
+       cache.clearCache();
    }
 }
