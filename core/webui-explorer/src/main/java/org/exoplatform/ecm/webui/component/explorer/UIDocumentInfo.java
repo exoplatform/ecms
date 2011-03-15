@@ -164,8 +164,15 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
   private String timeLineSortByName = "";
   private String timeLineSortByDate = "";
   
+  private FavoriteService favoriteService;
+  private DocumentTypeService documentTypeService;
+  private TemplateService templateService;
+  
   public UIDocumentInfo() throws Exception {
     pageIterator_ = addChild(UIPageIterator.class, null,CONTENT_PAGE_ITERATOR_ID);
+  	favoriteService = this.getApplicationComponent(FavoriteService.class);
+  	documentTypeService = this.getApplicationComponent(DocumentTypeService.class);
+    templateService = getApplicationComponent(TemplateService.class) ;  	
   }
 
   public String getTimeLineSortByFavourite() { return timeLineSortByFavourite; }
@@ -256,7 +263,6 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
     UIJCRExplorer uiExplorer = getAncestorOfType(UIJCRExplorer.class) ;
     if(uiExplorer.getPreference().isJcrEnable()) 
       return uiExplorer.getDocumentInfoTemplate();
-    TemplateService templateService = getApplicationComponent(TemplateService.class) ;
     try {
       Node node = uiExplorer.getCurrentNode();
       String template = templateService.getTemplatePath(node,false) ;
@@ -470,7 +476,6 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
   }
 
   public List<Node> getAttachments() throws Exception {
-    TemplateService templateService = getApplicationComponent(TemplateService.class) ;
     List<Node> attachments = new ArrayList<Node>() ;
     NodeIterator childrenIterator = currentNode_.getNodes();
     int attachData =0 ;
@@ -504,7 +509,6 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
 
   public boolean isNodeTypeSupported(String nodeTypeName) {
     try {      
-      TemplateService templateService = getApplicationComponent(TemplateService.class);
       return templateService.isManagedNodeType(nodeTypeName);
     } catch (Exception e) {
       return false;
@@ -803,8 +807,6 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
   
   private boolean filterOk(Node node) throws Exception {
   	UIJCRExplorer uiExplorer = this.getAncestorOfType(UIJCRExplorer.class);
-  	FavoriteService favoriteService = this.getApplicationComponent(FavoriteService.class);
-  	DocumentTypeService documentTypeService = this.getApplicationComponent(DocumentTypeService.class);
   	
   	Set<String> allItemsFilterSet = uiExplorer.getAllItemFilterMap();
   	Set<String> allItemsByTypeFilterSet = uiExplorer.getAllItemByTypeFilterMap();
@@ -830,18 +832,23 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
   	
   	//By types
   	for (String documentType : allItemsByTypeFilterSet) { 
-  		if (allItemsByTypeFilterSet.contains(documentType)) {
-  			boolean found = false;
-  			for (String mimeType : documentTypeService.getMimeTypes(documentType)) {
-  				if (node.getNode(Utils.JCR_CONTENT).getProperty(Utils.JCR_MIMETYPE).getString().indexOf(mimeType) >= 0) {
-  					found = true;
-  					break;
-  				}
-  			}  			
-  			
-  			if (!found)
-  				return false;
-  		}
+			boolean found = false;
+			if (documentTypeService.isContentsType(documentType)) {
+				for (String documentNodeType : templateService.getAllDocumentNodeTypes())
+					if (node.isNodeType(documentNodeType)) {
+						found = true;
+						break;
+					}
+			}
+			if (!found)
+				for (String mimeType : documentTypeService.getMimeTypes(documentType)) {
+					if (node.getNode(Utils.JCR_CONTENT).getProperty(Utils.JCR_MIMETYPE).getString().indexOf(mimeType) >= 0) {
+						found = true;
+						break;
+					}
+				}  			
+			if (!found)
+				return false;
   	}
   	
   	return true;
