@@ -72,7 +72,7 @@ public class TestThumbnailService extends BaseDMSTestCase {
    */
   public void testAddThumbnailNode2() throws Exception {
     Node test = session.getRootNode().addNode("test");
-    test.getParent().addNode(ThumbnailService.EXO_THUMBNAILS_FOLDER, ThumbnailService.EXO_THUNBNAILS);
+    test.getParent().addNode(ThumbnailService.EXO_THUMBNAILS_FOLDER, ThumbnailService.EXO_THUMBNAILS);
     session.save();
     assertTrue(test.getParent().hasNode(ThumbnailService.EXO_THUMBNAILS_FOLDER));
     thumbnailService.addThumbnailNode(test);
