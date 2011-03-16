@@ -34,7 +34,7 @@ public final class ThumbnailUtils {
     if (!parentNode.hasNode(ThumbnailService.EXO_THUMBNAILS_FOLDER)) {
       try {
         Node thumbnailFolder = parentNode.addNode(ThumbnailService.EXO_THUMBNAILS_FOLDER,
-                                             ThumbnailService.EXO_THUNBNAILS);
+                                             ThumbnailService.EXO_THUMBNAILS);
         parentNode.getSession().save();
         if (thumbnailFolder.canAddMixin(ThumbnailService.HIDDENABLE_NODETYPE)) {
           thumbnailFolder.addMixin(ThumbnailService.HIDDENABLE_NODETYPE);

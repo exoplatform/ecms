@@ -147,6 +147,7 @@ public class ThumbnailServiceImpl implements ThumbnailService {
     if(propertyName.equals(SMALL_SIZE)) parseImageSize(thumbnailNode, image, smallSize_, SMALL_SIZE);
     else if(propertyName.equals(MEDIUM_SIZE)) parseImageSize(thumbnailNode, image, mediumSize_, MEDIUM_SIZE);
     else if(propertyName.equals(BIG_SIZE)) parseImageSize(thumbnailNode, image, bigSize_, BIG_SIZE);
+    else parseImageSize(thumbnailNode, image, propertyName.substring(4), propertyName, true);
   }
 
   /**
@@ -263,8 +264,10 @@ public class ThumbnailServiceImpl implements ThumbnailService {
    * @throws Exception
    */
   private void createThumbnailImage(Node thumbnailNode, BufferedImage image, int width, int height,
-      String propertyName) throws Exception {
-    InputStream thumbnailStream = ImageUtils.scaleImage(image, width, height);
+      String propertyName, boolean crop) throws Exception {
+    if (width>1600) width=1600;
+    if (height>1600) height=1600;
+    InputStream thumbnailStream = ImageUtils.scaleImage(image, width, height, crop);
     try {
       thumbnailNode.setProperty(propertyName, thumbnailStream);
       thumbnailNode.getSession().save();
@@ -287,11 +290,29 @@ public class ThumbnailServiceImpl implements ThumbnailService {
    * @throws Exception
    */
   private void parseImageSize(Node node, BufferedImage image, String size, String propertyName) throws Exception {
-    if(size.indexOf("x") > -1) {
+    parseImageSize(node, image, size, propertyName, false);
+  }
+  /**
+   * Analysis size which has format (width x height) and call method createThumbnailImage
+   * to put data into propertyName of node
+   * @param node
+   * @param image
+   * @param size
+   * @param propertyName
+   * @throws Exception
+   */
+  private void parseImageSize(Node node, BufferedImage image, String size, String propertyName, boolean crop) throws Exception {
+    int width = 0;
+    int height = 0;
+    if (size.startsWith("x")) {
+      height = Integer.parseInt(size.substring(1));
+    } else if (size.endsWith("x")) {
+      width = Integer.parseInt(size.substring(0, size.length()-1));
+    } else if(size.indexOf("x") > -1) {
       String[] imageSize = size.split("x");
-      int width = Integer.parseInt(imageSize[0]);
-      int height = Integer.parseInt(imageSize[1]);
-      createThumbnailImage(node, image, width, height, propertyName);
+      width = Integer.parseInt(imageSize[0]);
+      height = Integer.parseInt(imageSize[1]);
     }
+    createThumbnailImage(node, image, width, height, propertyName, crop);
   }
 }

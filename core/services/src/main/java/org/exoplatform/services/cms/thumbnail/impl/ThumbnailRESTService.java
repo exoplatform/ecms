@@ -126,6 +126,24 @@ public class ThumbnailRESTService implements ResourceContainer {
   }
 
 /**
+ * Get the image with large size
+ * ex: /portal/rest/thumbnailImage/large/repository/collaboration/test.gif/
+ * @param repoName Repository name
+ * @param wsName Workspace name
+ * @param nodePath Node path
+ * @return Response inputstream
+ * @throws Exception
+ */
+  @Path("/large/{repoName}/{workspaceName}/{nodePath:.*}/")
+  @GET
+  public Response getLargeImage(@PathParam("repoName") String repoName,
+                                @PathParam("workspaceName") String wsName,
+                                @PathParam("nodePath") String nodePath,
+                                @HeaderParam("If-Modified-Since") String ifModifiedSince) throws Exception {
+    return getThumbnailByType(repoName, wsName, nodePath, ThumbnailService.BIG_SIZE, ifModifiedSince);
+  }
+
+/**
  * Get the image with small size
  * ex: /portal/rest/thumbnailImage/small/repository/collaboration/test.gif/
  * @param repoName Repository name
@@ -141,6 +159,25 @@ public class ThumbnailRESTService implements ResourceContainer {
                                 @PathParam("nodePath") String nodePath,
                                 @HeaderParam("If-Modified-Since") String ifModifiedSince) throws Exception {
     return getThumbnailByType(repoName, wsName, nodePath, ThumbnailService.SMALL_SIZE, ifModifiedSince);
+  }
+
+/**
+ * Get the image with custom size
+ * ex: /portal/rest/thumbnailImage/custom/30x40/repository/collaboration/test.gif/
+ * @param repoName Repository name
+ * @param wsName Workspace name
+ * @param nodePath Node path
+ * @return Response inputstream
+ * @throws Exception
+ */
+  @Path("/custom/{size}/{repoName}/{workspaceName}/{nodePath:.*}/")
+  @GET
+  public Response getCustomImage(@PathParam("size") String size,
+                                @PathParam("repoName") String repoName,
+                                @PathParam("workspaceName") String wsName,
+                                @PathParam("nodePath") String nodePath,
+                                @HeaderParam("If-Modified-Since") String ifModifiedSince) throws Exception {
+    return getThumbnailByType(repoName, wsName, nodePath, "exo:"+size, ifModifiedSince);
   }
 
   /**

@@ -37,8 +37,8 @@ import org.exoplatform.container.component.ComponentPlugin;
  */
 public interface ThumbnailService {
 
-  final public static String EXO_THUNBNAILS = "exo:thumbnails".intern();
-  final public static String EXO_THUMBNAIL = "exo:thumbnail".intern();
+  final public static String EXO_THUMBNAILS = "nt:unstructured".intern();
+  final public static String EXO_THUMBNAIL = "nt:unstructured".intern();
   final public static String SMALL_SIZE = "exo:smallSize".intern();
   final public static String MEDIUM_SIZE = "exo:mediumSize".intern();
   final public static String BIG_SIZE = "exo:bigSize".intern();
