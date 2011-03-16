@@ -66,7 +66,7 @@
       </step>
       <step>
         <para>
-     Check or uncheck the &apos;Enable cache results&apos; option. If you tick this checkbox, for the fist time you use this query to search, the result will be cached. For the second time you search using this query, it will show the cached results. After 45minutes, the cache will be removed.
+     Check or uncheck the <guilabel>Enable cache results</guilabel> option. If you tick this checkbox, for the fist time you use this query to search, the result will be cached. For the second time you search using this query, it will show the cached results. After 45minutes, the cache will be removed.
     </para>
         <para>
      For example: you have the query <literal>Test</literal> with statement <literal>//element (*, nt:file)</literal>. In the File Explorer, you have a <filename>nt:file</filename> document named <filename>File1</filename>. When you execute the query <literal>Test</literal>, only document <filename>File1</filename> will be shown. After that, create a <filename>nt:file</filename> document named <filename>File2</filename> and execute query <literal>Test</literal>, only document <filename>File2</filename> document will be listed. After 45 minutes, the cache will be removed. When you execute the query <literal>Test</literal>, the documents <filename>File1</filename> and <filename>File2</filename> will be listed.

@@ -8,8 +8,7 @@
 		<firstname>eXo Platform</firstname>
 		 <surname>Documentation Team</surname>
 		 <affiliation>
-			<orgdiv><emphasis role="bold"><ulink type="http" url="http://www.exoplatform.com">eXo Platform</ulink></emphasis></orgdiv>
-
+			<shortaffil><emphasis role="bold"><ulink type="http" url="http://www.exoplatform.com">eXo Platform</ulink></emphasis></shortaffil>
 		</affiliation>
 
 	</author>

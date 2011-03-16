@@ -642,7 +642,7 @@
       </step>
       <step>
         <para>
-     Click <emphasis role="bold">Save</emphasis> to attach the files or <emphasis role="bold">Cancel</emphasis> to to quit.
+      Click <emphasis role="bold">Save</emphasis> to attach the files or <emphasis role="bold">Cancel</emphasis> to quit.
     </para>
       </step>
     </procedure>
@@ -2183,27 +2183,27 @@
                     <entry> Select the life-cycle for this action. The action will be executed depending on the life-cycle: <itemizedlist>
                         <listitem>
                           <para>
-              &apos;<emphasis role="bold">Add</emphasis>&apos;: The action will be executed to a new document, but not to a subfolder when the document or the subfolder is created in the folder in which an action has been added to. It&apos;s also applied to a new document in the subfolder of the folder.
+              <emphasis role="bold">Add</emphasis>: The action will be executed to a new document, but not to a subfolder when the document or the subfolder is created in the folder in which an action has been added to. It&apos;s also applied to a new document in the subfolder of the folder.
              </para>
                         </listitem>
                         <listitem>
                           <para>
-              &apos;<emphasis role="bold">Modify</emphasis>&apos;: the action will be executed when a folder /node is modified.
+              <emphasis role="bold">Modify</emphasis>: the action will be executed when a folder /node is modified.
              </para>
                         </listitem>
                         <listitem>
                           <para>
-              &apos;<emphasis role="bold">User action</emphasis>&apos;: The action is executed when right-clicking on the folder and then selecting the action.
+              <emphasis role="bold">User action</emphasis>: The action is executed when right-clicking on the folder and then selecting the action.
              </para>
                         </listitem>
                         <listitem>
                           <para>
-              &apos;<emphasis role="bold">Remove</emphasis>&apos;: The action will be executed to a document, but not to a subfolder in the folder when the document or the subfolder is moved.
+              ;<emphasis role="bold">Remove</emphasis>: The action will be executed to a document, but not to a subfolder in the folder when the document or the subfolder is moved.
              </para>
                         </listitem>
                         <listitem>
                           <para>
-              &apos;<emphasis role="bold">Schedule&apos;</emphasis>: the action is done at specific time. There are 2 schedule lifeless types: period and cron. (See more about Schedule life-cycle).
+              <emphasis role="bold">Schedule</emphasis>: the action is done at specific time. There are 2 schedule lifeless types: period and cron. (See more about Schedule life-cycle).
              </para>
                           <para>
               If you need the same action to be executed in several life-cycles, you have to create several actions.
@@ -2229,7 +2229,7 @@
     Once an action is added to a node it is automatically added to any child nodes of the selected node.
    </para>
       <para>
-    If an action added with the life-cycle &apos;user action&apos;, it will be applied for the current node. And an action added with other lifestyles, it will be applied for the child nodes.
+    If an action added with the life-cycle <emphasis role="bold">user action</emphasis>, it will be applied for the current node. And an action added with other lifestyles, it will be applied for the child nodes.
    </para>
       <note>
         <title>Actions in menus</title>
@@ -3985,7 +3985,7 @@
         <note>
           <title>File Size Limits</title>
           <para>
-      The size of the uploaded file depends on the size limit of the uploaded file that you set up in the &apos;Edit&apos; mode of Content Explorer. If your file size exceeds the limit, a pop-up message will appears to alert you.
+      The size of the uploaded file depends on the size limit of the uploaded file that you set up in the <emphasis>Edit</emphasis> mode of Content Explorer. If your file size exceeds the limit, a pop-up message will appears to alert you.
      </para>
         </note>
       </step>

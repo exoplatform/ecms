@@ -237,7 +237,7 @@
       </imageobject>
     </mediaobject>
     <para>
-   For example, after creating a portal named &apos;eXo&apos;, there is a drive named &apos;eXo&apos; in Content Explorer:
+   For example, after creating a portal named <literal>eXo</literal>, there is a drive named <literal>eXo</literal> in Content Explorer:
   </para>
     <mediaobject>
       <imageobject role="html">
@@ -706,7 +706,7 @@
                   </row>
                   <row>
                     <entry> Publication date &amp; time: </entry>
-                    <entry> This option allows this node to be published for a period of time. Two fields, including &apos;Start Publication Date&apos; and &apos;End Publication Date&apos; only display when this option is checked. </entry>
+                    <entry> This option allows this node to be published for a period of time. Two fields, including <literal>Start Publication Date</literal> and <literal>End Publication Date</literal> only display when this option is checked. </entry>
                   </row>
                   <row>
                     <entry> Start Publication Date: </entry>

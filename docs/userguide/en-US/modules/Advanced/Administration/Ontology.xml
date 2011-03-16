@@ -86,12 +86,12 @@
         <itemizedlist>
           <listitem>
             <para>
-       The format of valid range must be: a..b where &apos;a&apos;, &apos;b&apos; are positive integers. You can use * instead of &apos;b&apos; to indicate it is unlimited. For example, 0..2 (means 0-2 documents assigned to a tag), 10..* (means at least 10 documents assigned to a tag).
+       The format of valid range must be: a..b where <replaceable>a</replaceable>, <replaceable>b</replaceable> are positive integers. You can use * instead of<replaceable>b</replaceable> to indicate it is unlimited. For example, 0..2 (means 0-2 documents assigned to a tag), 10..* (means at least 10 documents assigned to a tag).
       </para>
           </listitem>
           <listitem>
             <para>
-       The &apos;HTML style&apos; text box cannot be empty: you can change values of font-size, font–weight, color, font-family, text-decoration.
+       The <guilabel>HTML style</guilabel> text box cannot be empty: you can change values of font-size, font–weight, color, font-family, text-decoration.
       </para>
           </listitem>
         </itemizedlist>
@@ -100,7 +100,7 @@
     <section id="sect-User_Guide-Manage_Tags-Edit">
       <title>Edit</title>
       <para>
-    <emphasis role="bold">Tag manager</emphasis> tab enables you to edit the existing tags.
+    <guilabel>Tag manager</guilabel> tab enables you to edit the existing tags.
    </para>
       <para>
     Do the following:
@@ -109,7 +109,7 @@
         <title>Editing existing tabs</title>
         <step>
           <para>
-      Click the pen icon corresponding to the tag name which you want to edit in the <emphasis role="bold">Action</emphasis> column to edit the tag style configuration. The <emphasis role="bold">Edit tag style configuration</emphasis> form appears like the form to add a tag style.</para>
+      Click the pen icon corresponding to the tag name which you want to edit in the <guilabel>Action</guilabel> column to edit the tag style configuration. The <emphasis role="bold">Edit tag style configuration</emphasis> form appears like the form to add a tag style.</para>
         </step>
         <step>
           <para>
@@ -390,7 +390,7 @@
       <itemizedlist>
         <listitem>
           <para>
-      Do not input some special characters in the &apos;Name&apos; field like: !,@,#,$,%,&amp;,*,(,).
+      Do not input some special characters in the <guilabel>Name</guilabel> field like: !,@,#,$,%,&amp;,*,(,).
      </para>
         </listitem>
         <listitem>

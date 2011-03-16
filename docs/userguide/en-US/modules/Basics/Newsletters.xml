@@ -316,7 +316,7 @@
                           <term>True</term>
                           <listitem>
                             <para>
-               The user isn&apos;t allowed to get email.
+               The user is not allowed to get email.
               </para>
                           </listitem>
                         </varlistentry>

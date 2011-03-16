@@ -54,7 +54,7 @@
       </step>
       <step id="step-User_Guide-Add_a_New_Template-Open_Permissions_dialog.">
         <para>
-     Click the <guibutton></guibutton> icon next to the <emphasis role="bold">Permissions</emphasis> field to open the <emphasis role="bold">Select Permission</emphasis> dialog.
+     Click the icon next to the <emphasis role="bold">Permissions</emphasis> field to open the <emphasis role="bold">Select Permission</emphasis> dialog.
     </para>
       </step>
       <step id="step-User_Guide-Add_a_New_Template-Assign_memberships_to_the_group">
@@ -135,7 +135,7 @@
         <substeps>
           <step>
             <para>
-       Input content for this dialog in the &apos; Content &apos; field.
+       Input content for this dialog in the <guilabel>Content</guilabel> field.
       </para>
           </step>
           <step>
@@ -243,7 +243,7 @@
       You cannot change the view name.
      </para>
           <para>
-      If you click <guilabel>Enable Version</guilabel> checkbox, this view automatically increments one version after you click <guibutton>Save</guibutton>. It is displayed at &apos; version&apos; column in the <guilabel>View</guilabel> tab.
+      If you click <guilabel>Enable Version</guilabel> checkbox, this view automatically increments one version after you click <guibutton>Save</guibutton>. It is displayed at <guilabel>version</guilabel> column in the <guilabel>View</guilabel> tab.
      </para>
           <para>
       If the dialog has at least two versions, in the <guilabel>View</guilabel> tab, it displays the <guibutton>Restore</guibutton> button. You can use <guibutton>Restore</guibutton> to roll back to the previous View.
@@ -453,7 +453,7 @@
       You cannot change the view name.
      </para>
           <para>
-      If you click the<emphasis role="bold"> Enable Version</emphasis> checkbox, this view automatically increments one version after you click <guibutton>Save</guibutton>. It is displayed at &apos; version&apos; column in the <guilabel>View</guilabel> tab.
+      If you click the<emphasis role="bold"> Enable Version</emphasis> checkbox, this view automatically increments one version after you click <guibutton>Save</guibutton>. It is displayed at <guilabel>version</guilabel> column in the <guilabel>View</guilabel> tab.
      </para>
           <para>
       If the dialog has at least two versions, in the <guilabel>View</guilabel> tab, it displays the <guibutton>Restore</guibutton> button. You can use <guibutton>Restore</guibutton> to roll back to the previous View.
@@ -613,10 +613,10 @@
        You cannot edit the template name.
       </para>
             <para>
-       If you tick the &apos;Enable Version&apos; checkbox, this template will automatically increase to 1 version after you have clicked <emphasis role="bold">Save</emphasis>. It is displayed at the &apos;Base version&apos; column in &apos;ECM template&apos; tab.
+       If you tick the <guilabel>Enable Version</guilabel> checkbox, this template will automatically increase to 1 version after you have clicked <guilabel>Save</guilabel>. It is displayed at the <guilabel>Base version</guilabel> column in <guilabel>ECM template</guilabel> tab.
       </para>
             <para>
-       If the template has at least two versions, in the &apos;Edit ECM Template&apos; form, it displays the Restore button that allows restoring the template version.
+       If the template has at least two versions, in the <guilabel>Edit ECM Template</guilabel> form, it displays the Restore button that allows restoring the template version.
       </para>
           </note>
         </step>
@@ -728,10 +728,10 @@
        You cannot edit the template type.
       </para>
             <para>
-       If you tick the &apos;Enable Version&apos; checkbox, this template will automatically increase by 1 version after you have clicked <emphasis role="bold">Save</emphasis>. It is displayed at the &apos;Base Version&apos; column in ECM Template tab.
+       If you tick the <guilabel>Enable Version</guilabel> checkbox, this template will automatically increase by 1 version after you have clicked <guilabel>Save</guilabel>. It is displayed at the <guilabel>Base Version</guilabel> column in <guilabel>ECM Template</guilabel> tab.
       </para>
             <para>
-       If the template has at least 2 versions, in the &apos;Edit ECM Template&apos; form, it displays the <emphasis role="bold">Restore</emphasis> button that allows restoring the template version.
+       If the template has at least 2 versions, in the <guilabel>Edit ECM Template</guilabel> form, it displays the <guilabel>Restore</guilabel> button that allows restoring the template version.
       </para>
           </note>
         </step>
