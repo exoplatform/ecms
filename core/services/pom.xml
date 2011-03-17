@@ -17,12 +17,6 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>org.exoplatform.kernel</groupId>
-      <artifactId>exo.kernel.container</artifactId>
-      <version>${org.exoplatform.kernel.version}</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
       <groupId>org.exoplatform.core</groupId>
       <artifactId>exo.core.component.security.core</artifactId>
       <version>${org.exoplatform.core.version}</version>

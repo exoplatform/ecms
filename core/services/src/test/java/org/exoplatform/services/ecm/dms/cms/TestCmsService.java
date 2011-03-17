@@ -412,7 +412,8 @@ public class TestCmsService extends BaseDMSTestCase {
   public void testStoreNodeArticleByPath2() throws RepositoryException, Exception {
     Map<String, JcrInputProperty> map = createArticleMapInput();
     try {
-      String path = cmsService.storeNode(COLLABORATION_WS, ARTICLE, "/temp", map);
+      MockCmsServiceImpl mock = (MockCmsServiceImpl) container.getComponentInstanceOfType(MockCmsServiceImpl.class);
+      String path = mock.storeNode(COLLABORATION_WS, ARTICLE, "/temp", map);
       session.getItem(path).remove();
       session.save();
     } catch (PathNotFoundException ex) {

@@ -126,7 +126,6 @@ public class DocumentTypeServiceImpl implements DocumentTypeService {
     return getAllDocumentsByUser(workspace, sessionProvider, mimeTypes, userName);
   }
 
-  @Override
   public List<Node> getAllDocumentsByUser(String workspace,
                                           SessionProvider sessionProvider,
                                           String[] mimeTypes,

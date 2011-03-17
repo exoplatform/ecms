@@ -50,10 +50,13 @@ public class TestTaxonomyService extends BaseDMSTestCase {
   private Session                      dmsSesssion;
 
   private NodeHierarchyCreator nodeHierarchyCreator;
+  
+  private MockTaxonomyService mockTaxonomyService;
 
   public void setUp() throws Exception {
     super.setUp();
     taxonomyService = (TaxonomyService) container.getComponentInstanceOfType(TaxonomyService.class);
+    mockTaxonomyService = (MockTaxonomyService) container.getComponentInstanceOfType(MockTaxonomyService.class);
     dmsSesssion = sessionProviderService_.getSystemSessionProvider(null).getSession(DMSSYSTEM_WS, repository);
     nodeHierarchyCreator = (NodeHierarchyCreator) container.getComponentInstanceOfType(NodeHierarchyCreator.class);
     linkManage = (LinkManager)container.getComponentInstanceOfType(LinkManager.class);
@@ -356,8 +359,8 @@ public class TestTaxonomyService extends BaseDMSTestCase {
     taxonomyService.addTaxonomyTree(rootTree1);
     taxonomyService.addTaxonomyTree(rootTree2);
     taxonomyService.addCategories(article, "Serie", new String[] {"A", "B"}, true);
-    assertTrue(taxonomyService.hasCategories(article, "Serie", true));
-    assertFalse(taxonomyService.hasCategories(article, "Budesliga", true));
+    assertTrue(mockTaxonomyService.hasCategories(article, "Serie", true));
+    assertFalse(mockTaxonomyService.hasCategories(article, "Budesliga", true));
   }
 
   /**
@@ -378,7 +381,7 @@ public class TestTaxonomyService extends BaseDMSTestCase {
     Node rootTree = (Node)session.getItem("/MyDocuments/Stories");
     taxonomyService.addTaxonomyTree(rootTree);
     taxonomyService.addCategories(article, "Stories", new String[] {"Homorous", "Fairy"}, true);
-    List<Node> lstNode = taxonomyService.getCategories(article, "Stories", true);
+    List<Node> lstNode = mockTaxonomyService.getCategories(article, "Stories", true);
     Node taxoLink1 = (Node)session.getItem("/MyDocuments/Stories/Homorous");
     Node taxoLink2 = (Node)session.getItem("/MyDocuments/Stories/Fairy");
     assertEquals(2, lstNode.size());
@@ -409,7 +412,7 @@ public class TestTaxonomyService extends BaseDMSTestCase {
     taxonomyService.addTaxonomyTree(rootTree2);
     taxonomyService.addCategories(article, "Culture", new String[] {"Foods", "Art"}, true);
     taxonomyService.addCategory(article, "News", "Politics", true);
-    List<Node> lstNode = taxonomyService.getAllCategories(article, true);
+    List<Node> lstNode = mockTaxonomyService.getAllCategories(article, true);
     Node taxoLink1 = (Node)session.getItem("/MyDocuments/Culture/Foods");
     Node taxoLink2 = (Node)session.getItem("/MyDocuments/Culture/Art");
     Node taxoLink3 = (Node)session.getItem("/MyDocuments/News/Politics");
@@ -441,13 +444,13 @@ public class TestTaxonomyService extends BaseDMSTestCase {
     taxonomyService.addTaxonomyTree(rootTree2);
     taxonomyService.addCategory(article, "Education", "Language", true);
     taxonomyService.addCategory(article, "News", "Weather", true);
-    List<Node> lstNode = taxonomyService.getAllCategories(article, true);
+    List<Node> lstNode = mockTaxonomyService.getAllCategories(article, true);
     assertEquals(2, lstNode.size());
     taxonomyService.removeCategory(article, "Education", "Language", true);
-    lstNode = taxonomyService.getAllCategories(article, true);
+    lstNode = mockTaxonomyService.getAllCategories(article, true);
     assertEquals(1, lstNode.size());
     taxonomyService.removeCategory(article, "News", "Weather", true);
-    lstNode = taxonomyService.getAllCategories(article, true);
+    lstNode = mockTaxonomyService.getAllCategories(article, true);
     assertEquals(0, lstNode.size());
   }
 

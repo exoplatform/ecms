@@ -46,10 +46,6 @@ public class TestNewsletterSubscriptionHandler extends BaseWCMTestCase {
   public void setUp() throws Exception {
     super.setUp();
     newsletterApplicationNode = (Node) session.getItem("/sites content/live/classic/ApplicationData/NewsletterApplication");
-    NodeIterator nodesList = newsletterApplicationNode.getNodes();
-    while(nodesList.hasNext()) {
-      System.out.println("\n\n\n\n TEST =================>" + nodesList.nextNode().getName());
-    }
     categoriesNode = newsletterApplicationNode.getNode("Categories");
     categoriesNode.setProperty(NewsletterConstant.CATEGORIES_PROPERTY_ADDMINISTRATOR, new String[]{this.userRoot});
     userHomeNode = newsletterApplicationNode.getNode("Users");
@@ -84,12 +80,12 @@ public class TestNewsletterSubscriptionHandler extends BaseWCMTestCase {
       newsletterSubscriptionHandler.add(sessionProvider, "classicPortal", newsletterSubscriptionConfig);
     }catch(Exception ex){}
     try{
-      sub = (Node)categoriesNode.getNode("CategoryNameNewsletterSubcription").getNode("NameNewsletterSubcription");
+      sub = categoriesNode.getNode("CategoryNameNewsletterSubcription").getNode("NameNewsletterSubcription");
     }catch(Exception ex){}
     assertNull(sub);
 
     newsletterSubscriptionHandler.add(sessionProvider, classicPortal, newsletterSubscriptionConfig);
-    sub = (Node)categoriesNode.getNode("CategoryNameNewsletterSubcription").getNode("NameNewsletterSubcription");
+    sub = categoriesNode.getNode("CategoryNameNewsletterSubcription").getNode("NameNewsletterSubcription");
     assertNotNull(sub);
     assertEquals(sub.getName(), newsletterSubscriptionConfig.getName());
     assertEquals(sub.getProperty(NewsletterConstant.SUBSCRIPTION_PROPERTY_CATEGORY_NAME).getString(), newsletterSubscriptionConfig.getCategoryName());
@@ -110,14 +106,14 @@ public class TestNewsletterSubscriptionHandler extends BaseWCMTestCase {
     newsletterSubscriptionConfig.setRedactor(newsletterSubscriptionConfig.getRedactor() + ",demo");
     newsletterSubscriptionHandler.edit(sessionProvider, classicPortal, newsletterSubscriptionConfig);
 
-    Node sub = (Node)categoriesNode.getNode("CategoryNameNewsletterSubcription").getNode("NameNewsletterSubcription");
+    Node sub = categoriesNode.getNode("CategoryNameNewsletterSubcription").getNode("NameNewsletterSubcription");
     assertEquals(sub.getProperty(NewsletterConstant.SUBSCRIPTION_PROPERTY_TITLE).getString(), newsletterSubscriptionConfig.getTitle());
     assertEquals(sub.getProperty(NewsletterConstant.SUBSCRIPTION_PROPERTY_DECRIPTION).getString(), newsletterSubscriptionConfig.getDescription());
 
     // edit subscription with wrong portal's name
     newsletterSubscriptionConfig.setDescription("i have just edited");
     newsletterSubscriptionHandler.edit(sessionProvider, classicPortal + "wrong", newsletterSubscriptionConfig);
-    sub = (Node)categoriesNode.getNode("CategoryNameNewsletterSubcription").getNode("NameNewsletterSubcription");
+    sub = categoriesNode.getNode("CategoryNameNewsletterSubcription").getNode("NameNewsletterSubcription");
     assertNotSame(sub.getProperty(NewsletterConstant.SUBSCRIPTION_PROPERTY_DECRIPTION).getString(), newsletterSubscriptionConfig.getDescription());
   }
 
@@ -162,7 +158,6 @@ public class TestNewsletterSubscriptionHandler extends BaseWCMTestCase {
    * @throws Exception the exception
    */
   public void testGetSubscriptionIdsByPublicUser() throws Exception {
-    SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
     java.util.List<String> list = new ArrayList<String>();
     for(int i = 0 ; i < 5; i++) {
       newsletterSubscriptionConfig = new	NewsletterSubscriptionConfig();
