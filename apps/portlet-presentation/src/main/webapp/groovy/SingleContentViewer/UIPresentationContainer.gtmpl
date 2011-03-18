@@ -133,6 +133,9 @@
            </div>
          </div>
        </div>
+       <div class="SCVNoContent">
+            <span><%= _ctx.appRes("UIPresentationContainer.msg.no-content") %></span>
+       </div>
      </div>			
 		<%
 		}

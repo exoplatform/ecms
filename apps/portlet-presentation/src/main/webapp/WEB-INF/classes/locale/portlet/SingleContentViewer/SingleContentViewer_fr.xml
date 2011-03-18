@@ -10,7 +10,7 @@
    <print>Imprimer</print>
   </label>
   <msg>
-   <no-content>Il n'y a pas de contenu à afficher</no-content>
+   <no-content>Il n'y a pas de contenu</no-content>
   </msg>
  </UIPresentationContainer>
   <CorrectContentSelectorPopupWindow>

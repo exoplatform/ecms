@@ -10,7 +10,7 @@
    <print>Print</print>
   </label>
   <msg>
-   <no-content>There is no content to show</no-content>
+   <no-content>There is no content</no-content>
   </msg>
  </UIPresentationContainer>
  
