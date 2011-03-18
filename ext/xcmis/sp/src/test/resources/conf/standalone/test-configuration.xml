@@ -155,6 +155,16 @@
       </init-params>
    </component>
 
+  <component>
+    <type>org.exoplatform.services.jcr.impl.RepositoryCreationSynchronizer</type>
+    <init-params>
+       <value-param>
+          <name>disabled</name>
+          <value>false</value>
+       </value-param>
+    </init-params>
+  </component>
+
    <component>
       <key>org.exoplatform.services.document.DocumentReaderService</key>
       <type>org.xcmis.spi.utils.CmisDocumentReaderService</type>
