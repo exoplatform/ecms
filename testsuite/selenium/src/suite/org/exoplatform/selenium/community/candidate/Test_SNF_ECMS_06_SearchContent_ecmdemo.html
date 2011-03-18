@@ -118,12 +118,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@id='iconTreeExplorer']/div[2]/a</td>
+	<td>//div[@id='iconTreeExplorer']//a[@title='acme ']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[@id='iconTreeExplorer']/div[2]/a</td>
+	<td>//div[@id='iconTreeExplorer']//a[@title='acme ']</td>
 	<td></td>
 </tr>
 <tr>
@@ -194,7 +194,7 @@
 <tr>
 	<td>type</td>
 	<td>//html/body</td>
-	<td>I hate myself for loving you</td>
+	<td>Test_SNF_ECMS_06</td>
 </tr>
 <tr>
 	<td>selectFrame</td>
@@ -209,7 +209,7 @@
 <tr>
 	<td>type</td>
 	<td>//html/body</td>
-	<td>Em yeu chi ! Tieu Huong Duong</td>
+	<td>Test_SNF_ECMS_06</td>
 </tr>
 <tr>
 	<td>selectFrame</td>
@@ -298,12 +298,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@id='UISideBar']/div/div[1]/div[2]/div[1]/div/div/div/a/div</td>
+	<td>//div[@id='UISideBar']//div[@title='Show Drives']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[@id='UISideBar']/div/div[1]/div[2]/div[1]/div/div/div/a/div</td>
+	<td>//div[@id='UISideBar']//div[@title='Show Drives']</td>
 	<td></td>
 </tr>
 <tr>
@@ -318,12 +318,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@id='iconTreeExplorer']/div[2]/a</td>
+	<td>//div[@id='iconTreeExplorer']//a[@title='acme ']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[@id='iconTreeExplorer']/div[2]/a</td>
+	<td>//div[@id='iconTreeExplorer']//a[@title='acme ']</td>
 	<td></td>
 </tr>
 <tr>
@@ -404,7 +404,7 @@
 <tr>
 	<td>type</td>
 	<td>keyword</td>
-	<td>Tieu Huong Duong</td>
+	<td>Test_SNF_ECMS_06</td>
 </tr>
 <tr>
 	<td>keyPress</td>
@@ -428,32 +428,37 @@
 </tr>
 <tr>
 	<td>waitForTextPresent</td>
-	<td>I hate myself for loving you</td>
+	<td>Test_SNF_ECMS_06</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>I hate myself for loving you</td>
+	<td>Test_SNF_ECMS_06</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForTextPresent</td>
-	<td>Em yeu chi ! Tieu Huong Duong</td>
+	<td>Test_SNF_ECMS_06</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>Em yeu chi ! Tieu Huong Duong</td>
+	<td>Test_SNF_ECMS_06</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>-- Click Back button --</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@id='UIPresentationContainer']/div[4]/div</td>
+	<td>//div[@id='UIPresentationContainer']//div[@class='BackButton']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[@id='UIPresentationContainer']/div[4]/div</td>
+	<td>//div[@id='UIPresentationContainer']//div[@class='BackButton']</td>
 	<td></td>
 </tr>
 <tr>
@@ -473,12 +478,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@id='UISideBar']/div/div[1]/div[2]/div[1]/div/div/div/a/div</td>
+	<td>//div[@id='UISideBar']//div[@title='Show Drives']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[@id='UISideBar']/div/div[1]/div[2]/div[1]/div/div/div/a/div</td>
+	<td>//div[@id='UISideBar']//div[@title='Show Drives']</td>
 	<td></td>
 </tr>
 <tr>
@@ -493,12 +498,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@id='iconTreeExplorer']/div[2]/a</td>
+	<td>//div[@id='iconTreeExplorer']//a[@title='acme ']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[@id='iconTreeExplorer']/div[2]/a</td>
+	<td>//div[@id='iconTreeExplorer']//a[@title='acme ']</td>
 	<td></td>
 </tr>
 <tr>
@@ -533,17 +538,27 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@id='UIPopupWindow']/div/div[2]/div/div/div/div/div/div/div/div[2]/table/tbody/tr/td/div[1]/div/div/div/a</td>
+	<td>//div[@id='UIPopupWindow']//a[text()=&quot;OK&quot;]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[@id='UIPopupWindow']/div/div[2]/div/div/div/div/div/div/div/div[2]/table/tbody/tr/td/div[1]/div/div/div/a</td>
+	<td>//div[@id='UIPopupWindow']//a[text()=&quot;OK&quot;]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>pause</td>
 	<td>5000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementNotPresent</td>
+	<td>link=Test_SNF_ECMS_06</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyElementNotPresent</td>
+	<td>link=Test_SNF_ECMS_06</td>
 	<td></td>
 </tr>
 <tr>

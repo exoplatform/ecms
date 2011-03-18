@@ -188,6 +188,11 @@
 </tr>
 <tr>
 	<td>echo</td>
+	<td>-- Choose Edit Permission Setting tab --</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
 	<td>-- Edit Permission Setting</td>
 	<td></td>
 </tr>
@@ -218,12 +223,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@id='PermissionSelector']/div/div[2]/div/div[2]/div/div/div[5]/div/a</td>
+	<td>//div[@id='PermissionSelector']//a[@title='Platform']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[@id='PermissionSelector']/div/div[2]/div/div[2]/div/div/div[5]/div/a</td>
+	<td>//div[@id='PermissionSelector']//a[@title='Platform']</td>
 	<td></td>
 </tr>
 <tr>
@@ -233,12 +238,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@id='PermissionSelector']/div/div[2]/div/div[2]/div/div/div[5]/div[2]/div[1]/div/a</td>
+	<td>//div[@id='PermissionSelector']//a[@title='Administrators']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[@id='PermissionSelector']/div/div[2]/div/div[2]/div/div/div[5]/div[2]/div[1]/div/a</td>
+	<td>//div[@id='PermissionSelector']//a[@title='Administrators']</td>
 	<td></td>
 </tr>
 <tr>
@@ -248,12 +253,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@id='PermissionSelector']/div/div[3]/div/div[2]/div[7]/a</td>
+	<td>//div[@id='PermissionSelector']//a[@title='*']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[@id='PermissionSelector']/div/div[3]/div/div[2]/div[7]/a</td>
+	<td>//div[@id='PermissionSelector']//a[@title='*']</td>
 	<td></td>
 </tr>
 <tr>
@@ -364,6 +369,11 @@
 <tr>
 	<td>click</td>
 	<td>//div[@id='PermissionSelector']//a[@title=&quot;Administrators&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>-- manager --</td>
 	<td></td>
 </tr>
 <tr>
