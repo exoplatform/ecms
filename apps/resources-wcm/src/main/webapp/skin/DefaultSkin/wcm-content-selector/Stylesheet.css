@@ -368,7 +368,9 @@
 	height: 24px;
 	padding-left: 7px;
 }
-
+.ListContainer .RightWorkspace .PageIterator {
+	padding-top: 7px;
+}
 
 .ListContainer .RightWorkspace .MultiListContainer .ListView th {
 	border:1px solid #C7C7C7;
