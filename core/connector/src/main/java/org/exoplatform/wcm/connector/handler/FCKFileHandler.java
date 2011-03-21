@@ -58,7 +58,7 @@ public class FCKFileHandler {
       file.setAttribute("size", "" + size / 1000);
     }else {
       file.setAttribute("size", "");
-    }
+    }    
     return file;
   }
 

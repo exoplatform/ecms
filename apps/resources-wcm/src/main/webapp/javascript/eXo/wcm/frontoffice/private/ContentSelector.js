@@ -194,9 +194,11 @@ EcmContentSelector.prototype.getDir = function(currentNode, event) {
 		eXo.ecm.ECS.driverName = driverName =nodeDriveName;
 	}
 
-	var dropdownlist = document.getElementById("Filter");
-	if(dropdownlist) filter = dropdownlist.options[dropdownlist.selectedIndex].value;
-	else filter = 'All';
+	var dropdownlist = document.getElementById("Filter");	
+  if(dropdownlist) {
+		if(dropdownlist.type=="hidden") filter = dropdownlist.value;		
+		else filter = dropdownlist.options[dropdownlist.selectedIndex].value;
+	}	else filter = 'All';
 
 	var command = ECS.cmdEcmDriver+ECS.cmdGetFolderAndFile+"driverName="+driverName+"&currentFolder="+encodeURIComponent(currentFolder)+"&currentPortal="+ECS.portalName+"&repositoryName="+ECS.repositoryName+"&workspaceName="+ECS.workspaceName;
 	var url = ECS.hostName + ECS.connector+command+"&filterBy="+filter;

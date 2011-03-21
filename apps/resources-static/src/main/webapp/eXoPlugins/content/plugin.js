@@ -6,7 +6,7 @@ CKEDITOR.plugins.add('content',
 			editor.ui.addButton(
 				'content.btn',
 				{
-					label : "WCM Content Selector",
+					label : "Insert Content Link",
 					command : 'content.cmd',
 					icon : mypath + '/images/content.jpg'
 				}

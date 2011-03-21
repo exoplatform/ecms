@@ -103,9 +103,15 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
 
   /** The Constant FILE_TYPE_MEDIAS. */
   public static final String FILE_TYPE_ALL                       = "All";
+  
+  /** The Constant FILE_TYPE_IMAGE. */
+  public static final String FILE_TYPE_IMAGE                       = "Image";
 
   /** The Constant MEDIA_MIMETYPE. */
   public static final String[] MEDIA_MIMETYPE = new String[]{"application", "image", "audio", "video"};
+  
+  /** The Constant MEDIA_MIMETYPE. */
+  public static final String[] IMAGE_MIMETYPE = new String[]{"image"};
 
   /** The log. */
   private static Log log = ExoLogger.getLogger(DriverConnector.class);
@@ -580,12 +586,10 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
       Element files = document.createElement("Files");
       files.setAttribute("isUpload", "true");
       Node sourceNode = null;
-      Node checkNode = null;
-
+      Node checkNode = null;       
       for (NodeIterator iterator = node.getNodes(); iterator.hasNext();) {
         Node child = iterator.nextNode();
-        String fileType = null;
-
+        String fileType = null;        
         if (child.isNodeType(FCKUtils.EXO_HIDDENABLE))
           continue;
 
@@ -620,8 +624,12 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
         if (FILE_TYPE_DMSDOC.equals(filterBy) && isDMSDocument(checkNode, repositoryName)) {
           fileType = FILE_TYPE_DMSDOC;
         }
+        
+        if (FILE_TYPE_IMAGE.equals(filterBy) && isImageType(checkNode, repositoryName)) {
+            fileType = FILE_TYPE_IMAGE;
+          }
 
-        if (fileType != null) {
+        if (fileType != null) {          
           Element file = FCKFileHandler.createFileElement(document, fileType, checkNode, child, currentPortal);
           files.appendChild(file);
         }
@@ -694,6 +702,32 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
     }
 
     for(String type: MEDIA_MIMETYPE) {
+      if(mimeType.contains(type)){
+        return true;
+      }
+    }
+
+    return false;
+  }
+  
+  /**
+   * Checks if is image type.
+   *
+   * @param node the node
+   * @param repository the repository
+   *
+   * @return true, if is image type
+   */
+  private boolean isImageType(Node node, String repository){
+    String mimeType = "";
+
+    try {
+      mimeType = node.getNode("jcr:content").getProperty("jcr:mimeType").getString();
+    } catch (Exception e) {
+      return false;
+    }
+
+    for(String type: IMAGE_MIMETYPE) {
       if(mimeType.contains(type)){
         return true;
       }
