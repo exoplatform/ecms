@@ -55,42 +55,46 @@ import org.exoplatform.webui.form.UIFormStringInput;
 import org.exoplatform.webui.form.UIFormTextAreaInput;
 
 /**
- * Created by The eXo Platform SARL
- * Author : Dang Van Minh
- *          minh.dang@exoplatform.com
- * Jan 12, 2007
- * 11:56:51 AM
+ * Created by The eXo Platform SARL Author : Dang Van Minh
+ * minh.dang@exoplatform.com Jan 12, 2007 11:56:51 AM
  */
-@ComponentConfig(
-    lifecycle = UIFormLifecycle.class,
-    template = "system:/groovy/webui/form/UIForm.gtmpl",
-    events = {
-      @EventConfig(listeners = UITaggingForm.AddTagActionListener.class),
-      @EventConfig(listeners = UITaggingForm.EditActionListener.class, phase = Phase.DECODE),
-      @EventConfig(listeners = UITaggingForm.RemoveActionListener.class, phase = Phase.DECODE),
-      @EventConfig(listeners = UITaggingForm.CancelActionListener.class, phase = Phase.DECODE),
-      @EventConfig(listeners = UITaggingForm.ChangeActionListener.class, phase = Phase.DECODE)
-    }
-)
+@ComponentConfig(lifecycle = UIFormLifecycle.class, template = "system:/groovy/webui/form/UIForm.gtmpl", events = {
+    @EventConfig(listeners = UITaggingForm.AddTagActionListener.class),
+    @EventConfig(listeners = UITaggingForm.EditActionListener.class, phase = Phase.DECODE),
+    @EventConfig(listeners = UITaggingForm.RemoveActionListener.class, phase = Phase.DECODE),
+    @EventConfig(listeners = UITaggingForm.CancelActionListener.class, phase = Phase.DECODE),
+    @EventConfig(listeners = UITaggingForm.ChangeActionListener.class, phase = Phase.DECODE) })
 public class UITaggingForm extends UIForm {
 
-  final static public String TAG_NAME_LIST = "tagNameList";
-  final static public String TAG_NAMES = "names";
-  final static public String TAG_SCOPES = "tagScopes";
-  final static public String SCOPE_VALUES = "scopeValues";
-  final static public String LINKED_TAGS = "linked";
-  final static public String LINKED_TAGS_SET = "tagSet";
-  final static public String TAG_STATUS_PROP = "exo:tagStatus".intern();
-  final static public String TAG_NAME_ACTION = "tagNameAct".intern();
-  final static public String ASCENDING_ORDER = "Ascending".intern();
-  private static final String USER_FOLKSONOMY_ALIAS = "userPrivateFolksonomy".intern();
+  final static public String  TAG_NAME_LIST          = "tagNameList";
+
+  final static public String  TAG_NAMES              = "names";
+
+  final static public String  TAG_SCOPES             = "tagScopes";
+
+  final static public String  SCOPE_VALUES           = "scopeValues";
+
+  final static public String  LINKED_TAGS            = "linked";
+
+  final static public String  LINKED_TAGS_SET        = "tagSet";
+
+  final static public String  TAG_STATUS_PROP        = "exo:tagStatus".intern();
+
+  final static public String  TAG_NAME_ACTION        = "tagNameAct".intern();
+
+  final static public String  ASCENDING_ORDER        = "Ascending".intern();
+
+  private static final String USER_FOLKSONOMY_ALIAS  = "userPrivateFolksonomy".intern();
+
   private static final String GROUP_FOLKSONOMY_ALIAS = "folksonomy".intern();
-  private static final String GROUPS_ALIAS = "groupsPath".intern();
 
-  final static public String PUBLIC_TAG_NODE_PATH = "exoPublicTagNode";
+  private static final String GROUPS_ALIAS           = "groupsPath".intern();
 
-  String[] groups;
-  String[] users;
+  final static public String  PUBLIC_TAG_NODE_PATH   = "exoPublicTagNode";
+
+  String[]                    groups;
+
+  String[]                    users;
 
   public UITaggingForm() throws Exception {
     UIFormInputSetWithActionForTaggingForm uiInputSet = new UIFormInputSetWithActionForTaggingForm(LINKED_TAGS_SET);
@@ -100,30 +104,34 @@ public class UITaggingForm extends UIForm {
     RequestContext context = RequestContext.getCurrentInstance();
     ResourceBundle res = context.getApplicationResourceBundle();
     List<SelectItemOption<String>> tagScopes = new ArrayList<SelectItemOption<String>>();
-    tagScopes.add(new SelectItemOption<String>(res.getString("UITaggingForm.label." + Utils.PRIVATE), Utils.PRIVATE));
-    tagScopes.add(new SelectItemOption<String>(res.getString("UITaggingForm.label." + Utils.PUBLIC), Utils.PUBLIC));
-    /* Disable Group and Site tag
-    tagScopes.add(new SelectItemOption<String>(res.getString("UITaggingForm.label." + Utils.GROUP), Utils.GROUP));
-    tagScopes.add(new SelectItemOption<String>(res.getString("UITaggingForm.label." + Utils.SITE), Utils.SITE));
-    */
+    tagScopes.add(new SelectItemOption<String>(res.getString("UITaggingForm.label." + Utils.PRIVATE),
+                                               Utils.PRIVATE));
+    tagScopes.add(new SelectItemOption<String>(res.getString("UITaggingForm.label." + Utils.PUBLIC),
+                                               Utils.PUBLIC));
+    /*
+     * Disable Group and Site tag tagScopes.add(new
+     * SelectItemOption<String>(res.getString("UITaggingForm.label." +
+     * Utils.GROUP), Utils.GROUP)); tagScopes.add(new
+     * SelectItemOption<String>(res.getString("UITaggingForm.label." +
+     * Utils.SITE), Utils.SITE));
+     */
     UIFormSelectBox box = new UIFormSelectBox(TAG_SCOPES, TAG_SCOPES, tagScopes);
     box.setOnChange("Change");
     uiInputSet.addUIFormInput(box);
-    box.setSelectedValues(new String[] {Utils.PRIVATE});
+    box.setSelectedValues(new String[] { Utils.PRIVATE });
 
     uiInputSet.addUIFormInput(new UIFormInputInfo(LINKED_TAGS, LINKED_TAGS, null));
     uiInputSet.setIntroduction(TAG_NAMES, "UITaggingForm.introduction.tagName");
     addUIComponentInput(uiInputSet);
     uiInputSet.setIsView(false);
-    super.setActions(new String[] {"AddTag", "Cancel"});
+    super.setActions(new String[] { "AddTag", "Cancel" });
   }
 
   public void activate() throws Exception {
 
     ExoContainer container = ExoContainerContext.getCurrentContainer();
-    RepositoryService repositoryService	= (RepositoryService)
-                container.getComponentInstanceOfType(RepositoryService.class);
-    ManageableRepository	manageableRepo = repositoryService.getCurrentRepository();
+    RepositoryService repositoryService = (RepositoryService) container.getComponentInstanceOfType(RepositoryService.class);
+    ManageableRepository manageableRepo = repositoryService.getCurrentRepository();
     String workspace = manageableRepo.getConfiguration().getDefaultWorkspaceName();
     NewFolksonomyService folksonomyService = getApplicationComponent(NewFolksonomyService.class);
 
@@ -132,52 +140,63 @@ public class UITaggingForm extends UIForm {
     String tagScope = this.getUIFormSelectBox(TAG_SCOPES).getValue();
 
     Node currentNode = getAncestorOfType(UIJCRExplorer.class).getCurrentNode();
-    for(Node tag : folksonomyService.getLinkedTagsOfDocumentByScope(getIntValue(tagScope),
-                                                             getStrValue(tagScope, currentNode),
-                                                             currentNode,
-                                                             null,
-                                                             workspace)) {
+    for (Node tag : folksonomyService.getLinkedTagsOfDocumentByScope(getIntValue(tagScope),
+                                                                     getStrValue(tagScope,
+                                                                                 currentNode),
+                                                                     currentNode,
+                                                                     null,
+                                                                     workspace)) {
       linkedTagSet.add(tag.getName());
     }
     for (String tagName : linkedTagSet) {
-      if(linkedTags.length() > 0) linkedTags = linkedTags.append(",");
+      if (linkedTags.length() > 0)
+        linkedTags = linkedTags.append(",");
       linkedTags.append(tagName);
     }
 
     UIFormInputSetWithAction uiLinkedInput = getChildById(LINKED_TAGS_SET);
     uiLinkedInput.setInfoField(LINKED_TAGS, linkedTags.toString());
-    uiLinkedInput.setActionInfo(LINKED_TAGS, new String[] { "Edit", "Remove"});
+    uiLinkedInput.setActionInfo(LINKED_TAGS, new String[] { "Edit", "Remove" });
     uiLinkedInput.setIsShowOnly(true);
     uiLinkedInput.setIsDeleteOnly(false);
   }
-  public void deActivate() throws Exception {}
+
+  public void deActivate() throws Exception {
+  }
 
   public int getIntValue(String scope) {
-    if (Utils.PUBLIC.equals(scope)) return NewFolksonomyService.PUBLIC;
-    else if (Utils.GROUP.equals(scope)) return NewFolksonomyService.GROUP;
-    else if (Utils.PRIVATE.equals(scope)) return NewFolksonomyService.PRIVATE;
+    if (Utils.PUBLIC.equals(scope))
+      return NewFolksonomyService.PUBLIC;
+    else if (Utils.GROUP.equals(scope))
+      return NewFolksonomyService.GROUP;
+    else if (Utils.PRIVATE.equals(scope))
+      return NewFolksonomyService.PRIVATE;
     return NewFolksonomyService.SITE;
   }
 
   public List<String> getAllTagNames() throws Exception {
     ExoContainer container = ExoContainerContext.getCurrentContainer();
     String repository = getAncestorOfType(UIJCRExplorer.class).getRepositoryName();
-    RepositoryService repositoryService	= (RepositoryService)
-                container.getComponentInstanceOfType(RepositoryService.class);
-    ManageableRepository	manageableRepo = repositoryService.getRepository(repository);
+    RepositoryService repositoryService = (RepositoryService) container.getComponentInstanceOfType(RepositoryService.class);
+    ManageableRepository manageableRepo = repositoryService.getRepository(repository);
     String workspace = manageableRepo.getConfiguration().getDefaultWorkspaceName();
     NewFolksonomyService folksonomyService = getApplicationComponent(NewFolksonomyService.class);
 
     String tagScope = this.getUIFormSelectBox(TAG_SCOPES).getValue();
     Node currentNode = getAncestorOfType(UIJCRExplorer.class).getCurrentNode();
 
-    return folksonomyService.getAllTagNames(repository, workspace, getIntValue(tagScope), getStrValue(tagScope, currentNode));
+    return folksonomyService.getAllTagNames(repository,
+                                            workspace,
+                                            getIntValue(tagScope),
+                                            getStrValue(tagScope, currentNode));
   }
 
   @Override
   public void processRender(WebuiRequestContext context) throws Exception {
-    context.getJavascriptManager().importJavascript("eXo.ecm.ECMUtils","/ecm-wcm-extension/javascript/");
-    context.getJavascriptManager().addJavascript("eXo.ecm.ECMUtils.disableAutocomplete('UITaggingForm');");
+    context.getJavascriptManager().importJavascript("eXo.ecm.ECMUtils",
+                                                    "/ecm-wcm-extension/javascript/");
+    context.getJavascriptManager()
+           .addJavascript("eXo.ecm.ECMUtils.disableAutocomplete('UITaggingForm');");
     super.processRender(context);
   }
 
@@ -201,15 +220,19 @@ public class UITaggingForm extends UIForm {
       UITaggingForm uiForm = event.getSource();
       UIApplication uiApp = uiForm.getAncestorOfType(UIApplication.class);
       String repository = uiForm.getAncestorOfType(UIJCRExplorer.class).getRepositoryName();
-      String workspace = uiForm.getAncestorOfType(UIJCRExplorer.class).getRepository().getConfiguration().getDefaultWorkspaceName();
+      String workspace = uiForm.getAncestorOfType(UIJCRExplorer.class)
+                               .getRepository()
+                               .getConfiguration()
+                               .getDefaultWorkspaceName();
       String tagName = uiForm.getUIStringInput(TAG_NAMES).getValue();
       NewFolksonomyService newFolksonomyService = uiForm.getApplicationComponent(NewFolksonomyService.class);
       UIJCRExplorer uiExplorer = uiForm.getAncestorOfType(UIJCRExplorer.class);
       Node currentNode = uiExplorer.getCurrentNode();
       uiExplorer.addLockToken(currentNode);
-      if(tagName == null || tagName.trim().length() == 0) {
-        uiApp.addMessage(new ApplicationMessage("UITaggingForm.msg.tag-name-empty", null,
-            ApplicationMessage.WARNING));
+      if (tagName == null || tagName.trim().length() == 0) {
+        uiApp.addMessage(new ApplicationMessage("UITaggingForm.msg.tag-name-empty",
+                                                null,
+                                                ApplicationMessage.WARNING));
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
         return;
       }
@@ -226,36 +249,40 @@ public class UITaggingForm extends UIForm {
           String tag = listTagNames.get(i);
           listTagNamesClone.remove(tag);
           if (listTagNamesClone.contains(tag)) {
-            uiApp.addMessage(new ApplicationMessage("UITaggingForm.msg.tag-name-duplicate", null,
-                ApplicationMessage.WARNING));
+            uiApp.addMessage(new ApplicationMessage("UITaggingForm.msg.tag-name-duplicate",
+                                                    null,
+                                                    ApplicationMessage.WARNING));
             event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
             return;
           }
           listTagNamesClone.add(tag);
         }
-      }
-      else tagNames = new String[] {tagName};
+      } else
+        tagNames = new String[] { tagName };
       String[] fitlerTagNames = new String[tagNames.length];
       int i = 0;
-      for(String t : tagNames) {
+      for (String t : tagNames) {
         fitlerTagNames[i] = tagNames[i].trim();
         i++;
-        if(t.trim().length() == 0) {
-          uiApp.addMessage(new ApplicationMessage("UITaggingForm.msg.tag-name-empty", null,
-              ApplicationMessage.WARNING));
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
-          return;
-        }
-        if(t.trim().length() > 30) {
-          uiApp.addMessage(new ApplicationMessage("UITaggingForm.msg.tagName-too-long", null,
+        if (t.trim().length() == 0) {
+          uiApp.addMessage(new ApplicationMessage("UITaggingForm.msg.tag-name-empty",
+                                                  null,
                                                   ApplicationMessage.WARNING));
           event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
           return;
         }
-        String[] arrFilterChar = {"&", "'", "$", "@", ":","]", "[", "*", "%", "!", "/", "\\"};
-        for(String filterChar : arrFilterChar) {
-          if(t.indexOf(filterChar) > -1) {
-            uiApp.addMessage(new ApplicationMessage("UITaggingForm.msg.tagName-invalid", null,
+        if (t.trim().length() > 30) {
+          uiApp.addMessage(new ApplicationMessage("UITaggingForm.msg.tagName-too-long",
+                                                  null,
+                                                  ApplicationMessage.WARNING));
+          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          return;
+        }
+        String[] arrFilterChar = { "&", "'", "$", "@", ":", "]", "[", "*", "%", "!", "/", "\\" };
+        for (String filterChar : arrFilterChar) {
+          if (t.indexOf(filterChar) > -1) {
+            uiApp.addMessage(new ApplicationMessage("UITaggingForm.msg.tagName-invalid",
+                                                    null,
                                                     ApplicationMessage.WARNING));
             event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
             return;
@@ -263,23 +290,26 @@ public class UITaggingForm extends UIForm {
         }
       }
       String tagScope = uiForm.getUIFormSelectBox(TAG_SCOPES).getValue();
-      List<Node> tagList = newFolksonomyService.
-      getLinkedTagsOfDocumentByScope(uiForm.getIntValue(tagScope),
-                                      uiForm.getStrValue(tagScope, currentNode),
-                                     uiExplorer.getCurrentNode(),
-                                     repository, workspace);
-      for(Node tag : tagList) {
-        for(String t : fitlerTagNames) {
-          if(t.equals(tag.getName())) {
-            Object[] args = {t};
-            uiApp.addMessage(new ApplicationMessage("UITaggingForm.msg.name-exist", args,
+      List<Node> tagList = newFolksonomyService.getLinkedTagsOfDocumentByScope(uiForm.getIntValue(tagScope),
+                                                                               uiForm.getStrValue(tagScope,
+                                                                                                  currentNode),
+                                                                               uiExplorer.getCurrentNode(),
+                                                                               repository,
+                                                                               workspace);
+      for (Node tag : tagList) {
+        for (String t : fitlerTagNames) {
+          if (t.equals(tag.getName())) {
+            Object[] args = { t };
+            uiApp.addMessage(new ApplicationMessage("UITaggingForm.msg.name-exist",
+                                                    args,
                                                     ApplicationMessage.WARNING));
             event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
             return;
           }
         }
       }
-//      String tagScope = uiForm.getChild(UIFormInputSetWithAction.class).getChild(UIFormSelectBox.class).getValue();
+      // String tagScope =
+      // uiForm.getChild(UIFormInputSetWithAction.class).getChild(UIFormSelectBox.class).getValue();
       addTagToNode(tagScope, currentNode, fitlerTagNames, repository, uiForm);
       uiForm.activate();
 
@@ -292,23 +322,30 @@ public class UITaggingForm extends UIForm {
       event.getRequestContext().addUIComponentToUpdateByAjax(uiForm);
     }
 
-    private void addTagToNode(String scope, Node currentNode, String[] tagNames,
-        String repository, UITaggingForm uiForm) throws Exception {
+    private void addTagToNode(String scope,
+                              Node currentNode,
+                              String[] tagNames,
+                              String repository,
+                              UITaggingForm uiForm) throws Exception {
 
       ExoContainer container = ExoContainerContext.getCurrentContainer();
       NewFolksonomyService newFolksonomyService = uiForm.getApplicationComponent(NewFolksonomyService.class);
-      RepositoryService repositoryService
-      = (RepositoryService) container.getComponentInstanceOfType(RepositoryService.class);
-      ManageableRepository	manageableRepo = repositoryService.getRepository(repository);
+      RepositoryService repositoryService = (RepositoryService) container.getComponentInstanceOfType(RepositoryService.class);
+      ManageableRepository manageableRepo = repositoryService.getRepository(repository);
       NodeHierarchyCreator nodeHierarchyCreator = uiForm.getApplicationComponent(NodeHierarchyCreator.class);
       String workspace = manageableRepo.getConfiguration().getDefaultWorkspaceName();
-      String[] roles = Utils.getGroups().toArray(new String[]{});
+      String[] roles = Utils.getGroups().toArray(new String[] {});
       String publicTagNodePath = nodeHierarchyCreator.getJcrPath(PUBLIC_TAG_NODE_PATH);
 
       if (Utils.PUBLIC.equals(scope))
-        newFolksonomyService.addPublicTag(publicTagNodePath, tagNames, currentNode, repository, workspace);
-//      else if (SITE.equals(scope))
-//      	newFolksonomyService.addSiteTag(siteName, treePath, tagNames, currentNode, repository, workspace);
+        newFolksonomyService.addPublicTag(publicTagNodePath,
+                                          tagNames,
+                                          currentNode,
+                                          repository,
+                                          workspace);
+      // else if (SITE.equals(scope))
+      // newFolksonomyService.addSiteTag(siteName, treePath, tagNames,
+      // currentNode, repository, workspace);
       else if (Utils.GROUP.equals(scope))
         newFolksonomyService.addGroupsTag(tagNames, currentNode, repository, workspace, roles);
       else if (Utils.PRIVATE.equals(scope)) {
@@ -334,10 +371,9 @@ public class UITaggingForm extends UIForm {
       List<String> memberships = Utils.getMemberships();
       if (!newFolksonomyService.canEditTag(uiForm.getIntValue(tagScope), memberships)) {
         UIApplication uiApp = uiForm.getAncestorOfType(UIApplication.class);
-        uiApp
-        .addMessage(new ApplicationMessage(
-            "UIPopupMenu.msg.editTagAccessDenied", null,
-            ApplicationMessage.WARNING));
+        uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.editTagAccessDenied",
+                                                null,
+                                                ApplicationMessage.WARNING));
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
         return;
       }
@@ -347,13 +383,15 @@ public class UITaggingForm extends UIForm {
       String[] arrFilterChar = { "&", "'", "$", "@", ":", "]", "[", "*", "%", "!", "/", "\\" };
       UIApplication uiApp = uiForm.getAncestorOfType(UIApplication.class);
       if (!Utils.isNameValid(tagName, arrFilterChar)) {
-        uiApp.addMessage(new ApplicationMessage("UITaggingForm.msg.tagName-invalid", null,
-            ApplicationMessage.WARNING));
+        uiApp.addMessage(new ApplicationMessage("UITaggingForm.msg.tagName-invalid",
+                                                null,
+                                                ApplicationMessage.WARNING));
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
         return;
       }
       removeTagFromNode(tagScope, currentNode, tagName, uiForm);
-          //newFolksonomyService.removeTagOfDocument(currentNode, tagName, uiExplorer.getRepositoryName());
+      // newFolksonomyService.removeTagOfDocument(currentNode, tagName,
+      // uiExplorer.getRepositoryName());
       uiForm.activate();
 
       Preference preferences = uiExplorer.getPreference();
@@ -364,7 +402,9 @@ public class UITaggingForm extends UIForm {
       event.getRequestContext().addUIComponentToUpdateByAjax(uiForm);
     }
 
-    public void removeTagFromNode(String scope, Node currentNode, String tagName,
+    public void removeTagFromNode(String scope,
+                                  Node currentNode,
+                                  String tagName,
                                   UITaggingForm uiForm) throws Exception {
 
       ExoContainer container = ExoContainerContext.getCurrentContainer();
@@ -374,17 +414,15 @@ public class UITaggingForm extends UIForm {
       String repository = uiForm.getAncestorOfType(UIJCRExplorer.class).getRepositoryName();
       String userName = currentNode.getSession().getUserID();
 
-      RepositoryService repositoryService
-      = (RepositoryService) container.getComponentInstanceOfType(RepositoryService.class);
-      ManageableRepository	manageableRepo = repositoryService.getRepository(repository);
+      RepositoryService repositoryService = (RepositoryService) container.getComponentInstanceOfType(RepositoryService.class);
+      ManageableRepository manageableRepo = repositoryService.getRepository(repository);
       String workspace = manageableRepo.getConfiguration().getDefaultWorkspaceName();
 
       String tagPath = "";
       if (Utils.PUBLIC.equals(scope)) {
         tagPath = nodeHierarchyCreator.getJcrPath(PUBLIC_TAG_NODE_PATH) + '/' + tagName;
         newFolksonomyService.removeTagOfDocument(tagPath, currentNode, repository, workspace);
-      }
-      else if (Utils.PRIVATE.equals(scope)) {
+      } else if (Utils.PRIVATE.equals(scope)) {
         Node userFolksonomyNode = getUserFolksonomyFolder(userName, uiForm);
         tagPath = userFolksonomyNode.getNode(tagName).getPath();
         newFolksonomyService.removeTagOfDocument(tagPath, currentNode, repository, workspace);
@@ -401,9 +439,8 @@ public class UITaggingForm extends UIForm {
 
     private Node getNode(String repository, String workspace, String path) throws Exception {
       ExoContainer myContainer = ExoContainerContext.getCurrentContainer();
-      RepositoryService repositoryService
-      = (RepositoryService) myContainer.getComponentInstanceOfType(RepositoryService.class);
-      ManageableRepository	manageableRepository = repositoryService.getRepository(repository);
+      RepositoryService repositoryService = (RepositoryService) myContainer.getComponentInstanceOfType(RepositoryService.class);
+      ManageableRepository manageableRepository = repositoryService.getRepository(repository);
       SessionProvider sessionProvider = SessionProviderFactory.createSessionProvider();
       return (Node) sessionProvider.getSession(workspace, manageableRepository).getItem(path);
     }
@@ -433,16 +470,14 @@ public class UITaggingForm extends UIForm {
       List<String> memberships = Utils.getMemberships();
       if (!newFolksonomyService.canEditTag(uiForm.getIntValue(tagScope), memberships)) {
         UIApplication uiApp = uiForm.getAncestorOfType(UIApplication.class);
-        uiApp
-        .addMessage(new ApplicationMessage(
-            "UIPopupMenu.msg.editTagAccessDenied", null,
-            ApplicationMessage.WARNING));
+        uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.editTagAccessDenied",
+                                                null,
+                                                ApplicationMessage.WARNING));
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
         return;
       }
-      ((UITaggingFormContainer)uiForm.getParent()).edit(event);
+      ((UITaggingFormContainer) uiForm.getParent()).edit(event);
     }
   }
-
 
 }

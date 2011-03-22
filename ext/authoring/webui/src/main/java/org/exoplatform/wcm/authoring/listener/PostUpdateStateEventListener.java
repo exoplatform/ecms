@@ -48,11 +48,11 @@ import org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.Lifecy
  *          benjamin.paillereau@exoplatform.com
  * May 31, 2010
  */
-public class PostUpdateStateEventListener extends Listener<CmsService,Node> {
+public class PostUpdateStateEventListener extends Listener<CmsService, Node> {
 
-    private static final Log log = ExoLogger.getLogger(PostUpdateStateEventListener.class);
+  private static final Log   log = ExoLogger.getLogger(PostUpdateStateEventListener.class);
 
-    /** The pservice. */
+  /** The pservice. */
   private PublicationManager publicationManager;
 
   /**
@@ -64,8 +64,11 @@ public class PostUpdateStateEventListener extends Listener<CmsService,Node> {
     this.publicationManager = publicationManager;
   }
 
-  /* (non-Javadoc)
-   * @see org.exoplatform.services.listener.Listener#onEvent(org.exoplatform.services.listener.Event)
+  /*
+   * (non-Javadoc)
+   * @see
+   * org.exoplatform.services.listener.Listener#onEvent(org.exoplatform.services
+   * .listener.Event)
    */
   public void onEvent(Event<CmsService, Node> event) throws Exception {
     Node node = event.getData();
@@ -74,15 +77,16 @@ public class PostUpdateStateEventListener extends Listener<CmsService,Node> {
     try {
       userId = Util.getPortalRequestContext().getRemoteUser();
     } catch (Exception e) {
-    userId = node.getSession().getUserID();
-  }
-
+      userId = node.getSession().getUserID();
+    }
 
     String currentState = node.getProperty("publication:currentState").getString();
     if (!"enrolled".equals(currentState)) {
       String nodeLifecycle = node.getProperty("publication:lifecycle").getString();
-//  	if (log.isInfoEnabled()) log.info(userId+"::"+currentState+"::"+nodeLifecycle);
-      if (log.isInfoEnabled()) log.info("@@@ "+currentState+" @@@@@@@@@@@@@@@@@@@ "+node.getPath());
+      // if (log.isInfoEnabled())
+      // log.info(userId+"::"+currentState+"::"+nodeLifecycle);
+      if (log.isInfoEnabled())
+        log.info("@@@ " + currentState + " @@@@@@@@@@@@@@@@@@@ " + node.getPath());
 
       Lifecycle lifecycle = publicationManager.getLifecycle(nodeLifecycle);
       Iterator<State> states = lifecycle.getStates().iterator();
@@ -91,7 +95,7 @@ public class PostUpdateStateEventListener extends Listener<CmsService,Node> {
         State state = states.next();
         if (state.getState().equals(currentState)) {
           sendMail(node, state, userId, false, false);
-          if ("published".equals(state.getState()) && prevState!=null) {
+          if ("published".equals(state.getState()) && prevState != null) {
             sendMail(node, prevState, userId, false, true);
           }
           if (states.hasNext()) {
@@ -104,11 +108,11 @@ public class PostUpdateStateEventListener extends Listener<CmsService,Node> {
       }
 
       try {
-          UIPortalApplication portalApplication = Util.getUIPortalApplication();
-          PortalRequestContext portalRequestContext = Util.getPortalRequestContext();
-          UIWorkingWorkspace uiWorkingWS = portalApplication.getChildById(UIPortalApplication.UI_WORKING_WS_ID);
-          portalRequestContext.addUIComponentToUpdateByAjax(uiWorkingWS) ;
-          portalRequestContext.setFullRender(true);
+        UIPortalApplication portalApplication = Util.getUIPortalApplication();
+        PortalRequestContext portalRequestContext = Util.getPortalRequestContext();
+        UIWorkingWorkspace uiWorkingWS = portalApplication.getChildById(UIPortalApplication.UI_WORKING_WS_ID);
+        portalRequestContext.addUIComponentToUpdateByAjax(uiWorkingWS);
+        portalRequestContext.setFullRender(true);
       } catch (Exception e) {
 
       }
@@ -116,58 +120,63 @@ public class PostUpdateStateEventListener extends Listener<CmsService,Node> {
     }
   }
 
-  private void sendMail(Node node, State state, String userId, boolean isNextState, boolean isPublished) throws Exception {
-//  	if (log.isInfoEnabled()) {
-//  		if (isNextState)
-//  			log.info("### Next State is "+state.getState());
-//  		else
-//  			log.info("### Current State is "+state.getState());
-//  	}
+  private void sendMail(Node node,
+                        State state,
+                        String userId,
+                        boolean isNextState,
+                        boolean isPublished) throws Exception {
+    // if (log.isInfoEnabled()) {
+    // if (isNextState)
+    // log.info("### Next State is "+state.getState());
+    // else
+    // log.info("### Current State is "+state.getState());
+    // }
     if (state.getMembership().contains(":")) {
       String[] membership = state.getMembership().split(":");
       String membershipType = membership[0];
       String group = membership[1];
-//  		ExoContainer container = ExoContainerContext.getCurrentContainer();
-//  		ExoContainer container = RootContainer.getInstance();
-        ExoContainer container = RootContainer.getInstance().getPortalContainer("ecmdemo");
-      OrganizationService orgService = (OrganizationService)container.getComponentInstanceOfType(OrganizationService.class);
+      // ExoContainer container = ExoContainerContext.getCurrentContainer();
+      // ExoContainer container = RootContainer.getInstance();
+      ExoContainer container = RootContainer.getInstance().getPortalContainer("ecmdemo");
+      OrganizationService orgService = (OrganizationService) container.getComponentInstanceOfType(OrganizationService.class);
       UserHandler userh = orgService.getUserHandler();
-//		MailService mailService = (MailService)container.getComponentInstanceOfType(MailService.class);
+      // MailService mailService =
+      // (MailService)container.getComponentInstanceOfType(MailService.class);
       MembershipHandler msh = orgService.getMembershipHandler();
       List<User> users = userh.findUsersByGroup(group).getAll();
       User currentUser = null;
       try {
         currentUser = userh.findUserByName(userId);
-      } catch (Exception e) { }
+      } catch (Exception e) {
+      }
       String username = userId;
-      if (currentUser!=null) username = currentUser.getFirstName()+" "+currentUser.getLastName();
-      for (User user:users) {
+      if (currentUser != null)
+        username = currentUser.getFirstName() + " " + currentUser.getLastName();
+      for (User user : users) {
         Collection<Membership> mss = msh.findMembershipsByUserAndGroup(user.getUserName(), group);
-        for (Membership ms:mss) {
+        for (Membership ms : mss) {
           if (membershipType.equals(ms.getMembershipType())) {
-            String from = "\""+username+"\" <exocontent@exoplatform.com>";
+            String from = "\"" + username + "\" <exocontent@exoplatform.com>";
             String to = user.getEmail();
             String subject, body;
-            String editUrl = "http://localhost:8080/ecmdemo/private/classic/siteExplorer/repository/collaboration"+node.getPath();
+            String editUrl = "http://localhost:8080/ecmdemo/private/classic/siteExplorer/repository/collaboration"
+                + node.getPath();
             if (isPublished) {
-              subject = "[eXo Content] Published : (published) "+node.getName();
+              subject = "[eXo Content] Published : (published) " + node.getName();
             } else {
               if (isNextState) {
-                subject = "[eXo Content] Request : ("+state.getState()+") "+node.getName();
+                subject = "[eXo Content] Request : (" + state.getState() + ") " + node.getName();
               } else {
-                subject = "[eXo Content] Updated : ("+state.getState()+") "+node.getName();
+                subject = "[eXo Content] Updated : (" + state.getState() + ") " + node.getName();
               }
             }
-            body = "[ <a href=\""+editUrl+"\">"+editUrl+"</a> ]<br/>" +
-            "updated by "+username;
-//  					mailService.sendMessage(from, to, subject, body);
+            body = "[ <a href=\"" + editUrl + "\">" + editUrl + "</a> ]<br/>" + "updated by "
+                + username;
+            // mailService.sendMessage(from, to, subject, body);
             if (log.isInfoEnabled()) {
-              log.info("\n################ SEND MAIL TO USER :: "+user.getUserName() +
-                  "\nfrom: "+from +
-                  "\nto: "+to +
-                  "\nsubject: "+subject +
-                  "\nbody: "+body+
-                  "\n######################################################");
+              log.info("\n################ SEND MAIL TO USER :: " + user.getUserName() + "\nfrom: "
+                  + from + "\nto: " + to + "\nsubject: " + subject + "\nbody: " + body
+                  + "\n######################################################");
             }
 
           }
@@ -176,6 +185,5 @@ public class PostUpdateStateEventListener extends Listener<CmsService,Node> {
     }
 
   }
-
 
 }

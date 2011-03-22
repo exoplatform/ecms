@@ -102,7 +102,7 @@ public class UIImportNode extends UIForm implements UIPopupComponent {
 //    RequestContext context = RequestContext.getCurrentInstance();
 //    ResourceBundle resourceBundle = context.getApplicationResourceBundle();
 //    formatItem.add(new SelectItemOption<String>(
-//    		resourceBundle.getString("Import.label." + SYS_VIEW), SYS_VIEW));
+//        resourceBundle.getString("Import.label." + SYS_VIEW), SYS_VIEW));
 //    formatItem.add(new SelectItemOption<String>(
 //        resourceBundle.getString("Import.label." + DOC_VIEW), DOC_VIEW));
 //    addUIFormInput(new UIFormRadioBoxInput(FORMAT, SYS_VIEW, formatItem).setAlign(UIFormRadioBoxInput.VERTICAL_ALIGN));

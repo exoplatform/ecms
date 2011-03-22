@@ -32,8 +32,8 @@ import org.exoplatform.webui.form.UIFormInput;
  * Author : Phan Le Thanh Chuong
  *          chuong.phan@exoplatform.com, phan.le.thanh.chuong@gmail.com
  * Modified: - Extends from org.exoplatform.webui.form.validator.MandatoryValidator
- * 					   Use template name to generate a label for input instead of use form name
- * 					 - Only use for Form Generator feature
+ *             Use template name to generate a label for input instead of use form name
+ *           - Only use for Form Generator feature
  * Nov 11, 2009
  */
 public class MandatoryValidator extends org.exoplatform.webui.form.validator.MandatoryValidator {

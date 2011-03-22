@@ -47,11 +47,11 @@ import org.exoplatform.webui.event.EventListener;
  *          minh.dang@exoplatform.com
  * Oct 26, 2007 4:59:40 PM
  */
-@ComponentConfig(
-    template =  "app:/groovy/webui/component/explorer/sidebar/UITagExplorer.gtmpl",
-    events = {	@EventConfig(listeners = UITagExplorer.ViewTagActionListener.class),
-                @EventConfig(listeners = UITagExplorer.EditTagsActionListener.class)}
-)
+
+@ComponentConfig(template = "app:/groovy/webui/component/explorer/sidebar/UITagExplorer.gtmpl",
+                 events = {
+    @EventConfig(listeners = UITagExplorer.ViewTagActionListener.class),
+    @EventConfig(listeners = UITagExplorer.EditTagsActionListener.class) })
 public class UITagExplorer extends UIContainer {
 
   public static final String PUBLIC_TAG_NODE_PATH = "exoPublicTagNode";
@@ -73,8 +73,7 @@ public class UITagExplorer extends UIContainer {
     NodeHierarchyCreator nodeHierarchyCreator = getApplicationComponent(NodeHierarchyCreator.class);
     String publicTagNodePath = nodeHierarchyCreator.getJcrPath(PUBLIC_TAG_NODE_PATH);
 
-    RepositoryService repositoryService
-    = getApplicationComponent(RepositoryService.class);
+    RepositoryService repositoryService = getApplicationComponent(RepositoryService.class);
     ManageableRepository	manageableRepo = repositoryService.getRepository(getRepository());
 
     String workspace = manageableRepo.getConfiguration().getDefaultWorkspaceName();
@@ -152,8 +151,8 @@ public class UITagExplorer extends UIContainer {
       UITagExplorer uiTagExplorer = event.getSource();
       NewFolksonomyService newFolksonomyService = uiTagExplorer.getApplicationComponent(NewFolksonomyService.class);
       String scope = event.getRequestContext().getRequestParameter(OBJECTID);
-      int intScope = Utils.PUBLIC.equals(scope) ? NewFolksonomyService.PUBLIC :
-                                                  NewFolksonomyService.PRIVATE;
+      int intScope = Utils.PUBLIC.equals(scope) ? NewFolksonomyService.PUBLIC
+                                               : NewFolksonomyService.PRIVATE;
       uiTagExplorer.getAncestorOfType(UIJCRExplorer.class).setTagScope(intScope);
 
       List<String> memberships = Utils.getMemberships();
@@ -164,10 +163,9 @@ public class UITagExplorer extends UIContainer {
         event.getRequestContext().addUIComponentToUpdateByAjax(uiPopupContainer);
       } else {
         UIApplication uiApp = uiTagExplorer.getAncestorOfType(UIApplication.class);
-        uiApp
-        .addMessage(new ApplicationMessage(
-            "UIPopupMenu.msg.editTagAccessDenied", null,
-            ApplicationMessage.WARNING));
+        uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.editTagAccessDenied",
+                                                null,
+                                                ApplicationMessage.WARNING));
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
         uiTagExplorer.getAncestorOfType(UIJCRExplorer.class).updateAjax(event);
       }

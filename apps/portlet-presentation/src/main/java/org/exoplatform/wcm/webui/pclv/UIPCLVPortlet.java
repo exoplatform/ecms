@@ -33,100 +33,102 @@ import org.exoplatform.webui.core.lifecycle.UIApplicationLifecycle;
  * Created by The eXo Platform SAS Author : eXoPlatform
  * chuong.phan@exoplatform.com, phan.le.thanh.chuong@gmail.com Jun 19, 2009
  */
-@ComponentConfig(
-  lifecycle = UIApplicationLifecycle.class
-)
+@ComponentConfig(lifecycle = UIApplicationLifecycle.class)
 public class UIPCLVPortlet extends UIPortletApplication {
 
   /** The Constant PARAMETERIZED_MANAGEMENT_PORTLET_POPUP_WINDOW. */
-  public static final String	PARAMETERIZED_MANAGEMENT_PORTLET_POPUP_WINDOW	= "UIParameterizedManagerPopupWindow";
+  public static final String PARAMETERIZED_MANAGEMENT_PORTLET_POPUP_WINDOW = "UIParameterizedManagerPopupWindow";
 
   /** The Constant REPOSITORY. */
-  public final static String	PREFERENCE_REPOSITORY													= "repository";
+  public final static String PREFERENCE_REPOSITORY                         = "repository";
 
   /** The Constant PREFERENCE_TREE_NAME. */
-  public final static String	PREFERENCE_TREE_NAME													= "treeName";
+  public final static String PREFERENCE_TREE_NAME                          = "treeName";
 
   /** The Constant PREFERENCE_TARGET_PAGE. */
-  public final static String	PREFERENCE_TARGET_PAGE												= "targetPage";
+  public final static String PREFERENCE_TARGET_PAGE                        = "targetPage";
 
   /** The Constant WORKSPACE. */
-  public final static String	WORKSPACE																			= "workspace";
+  public final static String WORKSPACE                                     = "workspace";
 
   /** The Constant VIEWER_MODE. */
-  public static final String	VIEWER_MODE																		= "mode";
+  public static final String VIEWER_MODE                                   = "mode";
 
   /** The Constant HEADER. */
-  public final static String	HEADER																				= "header";
+  public final static String HEADER                                        = "header";
 
   /** The Constant ORDER_TYPE. */
-  public static final String	ORDER_TYPE																		= "orderType";
+  public static final String ORDER_TYPE                                    = "orderType";
 
   /** The Constant ORDER_BY. */
-  public static final String	ORDER_BY																			= "orderBy";
+  public static final String ORDER_BY                                      = "orderBy";
 
   /** The Constant ITEMS_PER_PAGE. */
-  public final static String	ITEMS_PER_PAGE																= "itemsPerPage";
+  public final static String ITEMS_PER_PAGE                                = "itemsPerPage";
 
   /** The Constant SHOW_LINK. */
-  public final static String	SHOW_LINK																			= "showLink";
+  public final static String SHOW_LINK                                     = "showLink";
 
   /** The Constant FORM_VIEW_TEMPLATE_PATH. */
-  public final static String	FORM_VIEW_TEMPLATE_PATH												= "formViewTemplatePath";
+  public final static String FORM_VIEW_TEMPLATE_PATH                       = "formViewTemplatePath";
 
   /** The Constant PAGINATOR_TEMPlATE_PATH. */
-  public final static String	PAGINATOR_TEMPlATE_PATH												= "paginatorTemplatePath";
+  public final static String PAGINATOR_TEMPlATE_PATH                       = "paginatorTemplatePath";
 
   /** The Constant SHOW_HEADER. */
-  public final static String	SHOW_HEADER																		= "showHeader";
+  public final static String SHOW_HEADER                                   = "showHeader";
 
   /** The Constant SHOW_REFRESH_BUTTON. */
-  public final static String	SHOW_REFRESH_BUTTON														= "showRefreshButton";
+  public final static String SHOW_REFRESH_BUTTON                           = "showRefreshButton";
 
   /** The Constant SHOW_SUMMARY. */
-  public final static String	SHOW_SUMMARY																	= "showSummary";
+  public final static String SHOW_SUMMARY                                  = "showSummary";
 
   /** The Constant SHOW_THUMBNAILS_VIEW. */
-  public final static String	SHOW_THUMBNAILS_VIEW													= "showThumbnailsView";
+  public final static String SHOW_THUMBNAILS_VIEW                          = "showThumbnailsView";
 
   /** The Constant SHOW_TITLE. */
-  public final static String	SHOW_TITLE																		= "showTitle";
+  public final static String SHOW_TITLE                                    = "showTitle";
 
   /** The Constant SHOW_DATE_CREATED. */
-  public final static String	SHOW_DATE_CREATED															= "showDateCreated";
+  public final static String SHOW_DATE_CREATED                             = "showDateCreated";
 
   /** The Constant SHOW_MORE_LINK. */
-  public final static String	SHOW_READMORE																= "showReadMore";
+  public final static String SHOW_READMORE                                 = "showReadMore";
 
   /** The Constant SHOW_RSS_LINK. */
-  public final static String	SHOW_RSS_LINK																	= "showRssLink";
+  public final static String SHOW_RSS_LINK                                 = "showRssLink";
 
   /** The Constant SHOW_AUTO_DETECT. */
-  public final static String	SHOW_AUTO_DETECT															= "showAutoDetect";
+  public final static String SHOW_AUTO_DETECT                              = "showAutoDetect";
 
   /** The Constant TARGET_PAGE. */
-  public final static String	TARGET_PAGE																		= "targetPage";
+  public final static String TARGET_PAGE                                   = "targetPage";
 
   /** The Constant FOLDER_PATH. */
-  public final static String	FOLDER_PATH																		= "folderPath";
+  public final static String FOLDER_PATH                                   = "folderPath";
 
   /** The Constant REPOSITORY. */
-  public final static String	REPOSITORY																		= "repository";
+  public final static String REPOSITORY                                    = "repository";
 
   /** The mode. */
-  private PortletMode					mode																					= PortletMode.VIEW;
+  private PortletMode        mode                                          = PortletMode.VIEW;
 
   /**
    * Instantiates a new uIPCLV portlet.
-   *
+   * 
    * @throws Exception the exception
    */
   public UIPCLVPortlet() throws Exception {
     activateMode(mode);
   }
 
-  /* (non-Javadoc)
-   * @see org.exoplatform.webui.core.UIPortletApplication#processRender(org.exoplatform.webui.application.WebuiApplication, org.exoplatform.webui.application.WebuiRequestContext)
+  /*
+   * (non-Javadoc)
+   * @see
+   * org.exoplatform.webui.core.UIPortletApplication#processRender(org.exoplatform
+   * .webui.application.WebuiApplication,
+   * org.exoplatform.webui.application.WebuiRequestContext)
    */
   public void processRender(WebuiApplication app, WebuiRequestContext context) throws Exception {
     PortletRequestContext pContext = (PortletRequestContext) context;
@@ -140,9 +142,8 @@ public class UIPCLVPortlet extends UIPortletApplication {
 
   /**
    * Activate mode.
-   *
+   * 
    * @param mode the mode
-   *
    * @throws Exception the exception
    */
   private void activateMode(PortletMode mode) throws Exception {
@@ -152,7 +153,7 @@ public class UIPCLVPortlet extends UIPortletApplication {
       UIPCLVContainer container = addChild(UIPCLVContainer.class, null, null);
       container.init();
     } else if (PortletMode.EDIT.equals(mode)) {
-        addChild(UIPCLVConfig.class, null, null);
+      addChild(UIPCLVConfig.class, null, null);
     }
   }
 }

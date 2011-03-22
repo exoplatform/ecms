@@ -63,7 +63,6 @@ public class UITagPermissionForm extends UIForm implements UISelectable {
   static public class SaveActionListener extends EventListener<UITagPermissionForm> {
     public void execute(Event<UITagPermissionForm> event) throws Exception {
        UITagPermissionForm uiForm = event.getSource();
-//   		UIECMAdminPortlet uiECMAdminPortlet = uiForm.getAncestorOfType(UIECMAdminPortlet.class);
        UITagPermissionManager uiParent = uiForm.getParent();
        UIApplication uiApp = uiForm.getAncestorOfType(UIApplication.class);
        String userOrGroup = uiForm.getChild(UITagPermissionInputSet.class).getUIStringInput(

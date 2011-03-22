@@ -85,7 +85,7 @@ public class RestoreFromTrashManageComponent extends UIAbstractManagerComponent 
                                                    new HasRemovePermissionFilter(),
                                                    new IsNotTrashHomeNodeFilter() });
 
-  private final static Log 	LOG = ExoLogger.getLogger(RestoreFromTrashManageComponent.class);
+  private final static Log                     LOG     = ExoLogger.getLogger(RestoreFromTrashManageComponent.class);
 
   @UIExtensionFilters
   public List<UIExtensionFilter> getFilters() {
@@ -118,13 +118,6 @@ public class RestoreFromTrashManageComponent extends UIAbstractManagerComponent 
       event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
       return;
     }
-    //--------------
-//  	ExoContainer myContainer = ExoContainerContext.getCurrentContainer();
-//  	LinkManager linkManager = (LinkManager)myContainer.getComponentInstanceOfType(LinkManager.class);
-//    if (linkManager.isLink(node)) {
-//    	node = linkManager.getTarget(node);
-//    	srcPath = node.getPath();
-//    }
     confirmToRestore(node, srcPath, event);
   }
 

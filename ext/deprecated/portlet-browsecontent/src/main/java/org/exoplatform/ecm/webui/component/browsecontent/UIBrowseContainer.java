@@ -1065,15 +1065,11 @@ public class UIBrowseContainer extends UIContainer {
 
   public String getDMSSystemWorkspace(String repository) throws Exception {
     ExoContainer container = ExoContainerContext.getCurrentContainer();
-//  	RepositoryService repoService = (RepositoryService)
-//  			container.getComponentInstanceOfType(RepositoryService.class);
     DMSConfiguration dmsConfiguration = (DMSConfiguration)
         container.getComponentInstanceOfType(DMSConfiguration.class);
 
-    //ManageableRepository manageableRepository = repoService.getRepository(repository) ;
     DMSRepositoryConfiguration dmsRepoConfig = dmsConfiguration.getConfig();
     return dmsRepoConfig.getSystemWorkspace();
-    //return manageableRepository.getSystemSession(dmsRepoConfig.getSystemWorkspace());
   }
 
   public void initToolBar(boolean showTree, boolean showPath,boolean showSearch) throws Exception {

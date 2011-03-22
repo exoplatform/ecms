@@ -29,8 +29,8 @@ import org.exoplatform.services.ecm.publication.NotInPublicationLifecycleExcepti
  * Author : Hoa Pham (hoa.pham@exoplatform.com)
  * Sep 29, 2008
  * Modified : Jul 29, 2009 - Benjamin Paillereau (benjamin.paillereau@exoplatform.com)
- * 		- added enrollNodeInLifecycle by context
- * 		- added updateLifecyleOnChangeContent by context
+ *    - added enrollNodeInLifecycle by context
+ *    - added updateLifecyleOnChangeContent by context
  */
 public interface WCMPublicationService {
 

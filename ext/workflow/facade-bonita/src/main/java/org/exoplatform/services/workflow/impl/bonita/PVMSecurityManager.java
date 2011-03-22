@@ -37,7 +37,7 @@ public class PVMSecurityManager {
     // Change for the trunk version
     //Subject subject = (Subject) ConversationState.getCurrent().getAttribute(ConversationState.SUBJECT);
     /**
-//		  ExoContainer container = ExoContainerContext.getCurrentContainer();
+//        ExoContainer container = ExoContainerContext.getCurrentContainer();
 //        AuthenticationService authenticationService = (AuthenticationService) container
 //        .getComponentInstanceOfType(AuthenticationService.class);
 //        if(authenticationService.getCurrentIdentity()!=null){

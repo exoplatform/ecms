@@ -130,9 +130,6 @@ public class UIEditingTagsForm extends UIContainer implements UIPopupComponent {
       UIEditingTagsForm uiEdit = event.getSource();
       UIJCRExplorer uiExplorer = uiEdit.getAncestorOfType(UIJCRExplorer.class);
       String selectedName = event.getRequestContext().getRequestParameter(OBJECTID);
-//  		Node selectedTag = uiEdit.getSelectedTag(selectedName);
-
-//      NewFolksonomyService newFolksonomyService = uiEdit.getApplicationComponent(NewFolksonomyService.class);
       removeTagFromNode(uiExplorer.getSession().getUserID(), uiExplorer.getTagScope(), selectedName, uiEdit);
       uiEdit.getChild(UIEditingTagList.class).updateGrid();
 

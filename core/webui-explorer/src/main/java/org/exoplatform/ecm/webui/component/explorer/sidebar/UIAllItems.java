@@ -47,18 +47,32 @@ import org.exoplatform.webui.event.EventListener;
 )
 public class UIAllItems extends UIComponent {
 
-  public static final String FAVORITE = "Favorites";
+  public static final String FAVORITE    = "Favorites";
+
   public static final String OWNED_BY_ME = "OwnedByMe";
-  public static final String HIDDEN = "Hidden";
-  public static final String TRASH = "Trash";
+
+  public static final String HIDDEN      = "Hidden";
+
+  public static final String TRASH       = "Trash";
 
   public UIAllItems() throws Exception {
   }
 
-  public static String getFAVORITE() { return FAVORITE; }
-  public static String getOWNED_BY_ME() {	return OWNED_BY_ME;	}
-  public static String getHIDDEN() { return HIDDEN; }
-  public static String getTRASH() {	return TRASH;	}
+  public static String getFAVORITE() {
+    return FAVORITE;
+  }
+
+  public static String getOWNED_BY_ME() {
+    return OWNED_BY_ME;
+  }
+
+  public static String getHIDDEN() {
+    return HIDDEN;
+  }
+
+  public static String getTRASH() {
+    return TRASH;
+  }
 
   public Preference getPreference() {
     return getAncestorOfType(UIJCRExplorer.class).getPreference();
@@ -73,7 +87,7 @@ public class UIAllItems extends UIComponent {
       String filterType = event.getRequestContext().getRequestParameter(OBJECTID);
       if (allItemFilterMap.contains(filterType)) {
         allItemFilterMap.remove(filterType);
-      }	else {
+      } else {
         allItemFilterMap.add(filterType);
       }
 
@@ -84,8 +98,6 @@ public class UIAllItems extends UIComponent {
         uiWorkingArea.getChild(UIDrivesArea.class).setRendered(false);
         uiWorkingArea.getChild(UIDocumentWorkspace.class).setRendered(true);
       }
-//     	uiExplorer.record(uiExplorer.getCurrentPath(), uiExplorer.getCurrentWorkspace());
-
       uiExplorer.updateAjax(event);
     }
   }

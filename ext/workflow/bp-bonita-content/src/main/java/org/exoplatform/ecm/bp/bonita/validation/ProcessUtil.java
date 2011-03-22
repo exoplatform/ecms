@@ -46,7 +46,7 @@ import org.ow2.bonita.facade.runtime.ActivityInstance;
 /**
  * Created by The eXo Platform SARL and Bull R&D
  * Author : Rodrigue Le Gall
- * 			Pham Xuan Hoa
+ *          Pham Xuan Hoa
  */
 public class ProcessUtil {
 

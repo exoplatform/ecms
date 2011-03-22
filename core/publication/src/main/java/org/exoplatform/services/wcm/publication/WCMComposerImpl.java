@@ -49,8 +49,8 @@ import org.picocontainer.Startable;
  * @author benjamin
  */
 @Managed
-@NameTemplate({@Property(key = "view", value = "portal"), @Property(key = "service", value = "composer"),
-   @Property(key = "type", value = "content")})
+@NameTemplate( { @Property(key = "view", value = "portal"),
+    @Property(key = "service", value = "composer"), @Property(key = "type", value = "content") })
 @ManagedDescription("WCM Composer service")
 @RESTEndpoint(path = "wcmcomposerservice")
 public class WCMComposerImpl implements WCMComposer, Startable {
@@ -116,7 +116,6 @@ public class WCMComposerImpl implements WCMComposer, Startable {
     wcmService = WCMCoreUtils.getService(WCMService.class);
     multiLanguageService = WCMCoreUtils.getService(MultiLanguageService.class);
     cache = WCMCoreUtils.getService(CacheService.class).getCacheInstance("wcm.composer");
-//		cache.setLiveTime(60);
 
     usedLanguages = new ArrayList<String>();
     usedLanguages.add(null);
@@ -171,7 +170,6 @@ public class WCMComposerImpl implements WCMComposer, Startable {
     }
     if (MODE_LIVE.equals(mode) && isCached) {
       String hash = getHash(nodeIdentifier, version, remoteUser, language, null, null, null, null);
-//			cache.remove(hash);
       cache.put(hash, node);
     }
     return node;
@@ -222,7 +220,6 @@ public class WCMComposerImpl implements WCMComposer, Startable {
     }
     if (MODE_LIVE.equals(mode) && isCached) {
       String hash = getHash(path, version, remoteUser, language, recursive, orderBy, orderType, primaryType);
-//			cache.remove(hash);
       cache.put(hash, nodes);
     }
     return nodes;

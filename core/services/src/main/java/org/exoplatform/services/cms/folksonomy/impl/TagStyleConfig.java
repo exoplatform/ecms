@@ -23,7 +23,7 @@ import java.util.List;
  * Created by The eXo Platform SAS
  * Author : Xuan Hoa Pham
  *          hoapham@exoplatform.com
- * 					phamvuxuanhoa@gmail.com
+ *          phamvuxuanhoa@gmail.com
  * Dec 8, 2006
  */
 public class TagStyleConfig {

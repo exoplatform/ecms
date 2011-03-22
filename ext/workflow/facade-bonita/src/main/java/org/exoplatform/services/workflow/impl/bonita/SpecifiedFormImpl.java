@@ -181,16 +181,16 @@ public class SpecifiedFormImpl implements Form {
    * This constructor instantiates a Form specified in a File Definition, based
    * on a State name and a Locale.
    *
-   * @param processId	   contains the id of the process
+   * @param processId contains the id of the process
    * @param fileDefinition contains the definition of Process in which
-   *                       information of Forms should be found
-   * @param activity      identifies the State for which to create the Form
-   * @param locale         specifies the Locale for which to create the Form
+   *          information of Forms should be found
+   * @param activity identifies the State for which to create the Form
+   * @param locale specifies the Locale for which to create the Form
    */
-  public SpecifiedFormImpl(String		  processId,
-                 FileDefinition fileDefinition,
-                           String         activity,
-                           Locale         locale) {
+  public SpecifiedFormImpl(String processId,
+                           FileDefinition fileDefinition,
+                           String activity,
+                           Locale locale) {
     // Retrieve information from the File Definition
     this.customizedView  = fileDefinition.getCustomizedView(activity);
     this.isDelegatedView = fileDefinition.isDelegatedView(activity);

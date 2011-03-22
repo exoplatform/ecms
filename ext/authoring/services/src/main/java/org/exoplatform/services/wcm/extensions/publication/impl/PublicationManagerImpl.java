@@ -34,11 +34,11 @@ import org.picocontainer.Startable;
  */
 public class PublicationManagerImpl implements PublicationManager, Startable {
 
-  private Map<String,Lifecycle> 	lifecycles = new HashMap<String, Lifecycle>();
+  private Map<String, Lifecycle> lifecycles = new HashMap<String, Lifecycle>();
 
-  private Map<String,Context>         contexts = new HashMap<String, Context>();
+  private Map<String, Context>   contexts   = new HashMap<String, Context>();
 
-  private static final Log log         = ExoLogger.getLogger(PublicationManagerImpl.class);
+  private static final Log       log        = ExoLogger.getLogger(PublicationManagerImpl.class);
 
   public void addLifecycle(ComponentPlugin plugin) {
     if (plugin instanceof StatesLifecyclePlugin) {

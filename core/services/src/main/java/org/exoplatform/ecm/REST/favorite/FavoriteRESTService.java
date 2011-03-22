@@ -84,7 +84,7 @@ public class FavoriteRESTService implements ResourceContainer {
       LOG.error(e);
     } catch (RepositoryException e) {
       LOG.error(e);
-    }	catch (Exception e) {
+    } catch (Exception e) {
       LOG.error(e);
       return Response.serverError().build();
     }

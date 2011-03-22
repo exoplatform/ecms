@@ -45,16 +45,16 @@ import org.exoplatform.webui.form.UIFormStringInput;
 public class UISearchBox extends UIForm {
 
   /** The template path. */
-  private String							templatePath;
+  private String             templatePath;
 
   /** The Constant KEYWORD_INPUT. */
-  public static final String	KEYWORD_INPUT			= "keywordInput".intern();
+  public static final String KEYWORD_INPUT     = "keywordInput".intern();
 
   /** The Constant PORTAL_NAME_PARAM. */
-  public static final String	PORTAL_NAME_PARAM	= "portal".intern();
+  public static final String PORTAL_NAME_PARAM = "portal".intern();
 
   /** The Constant KEYWORD_PARAM. */
-  public static final String	KEYWORD_PARAM			= "keyword".intern();
+  public static final String KEYWORD_PARAM     = "keyword".intern();
 
   /**
    * Instantiates a new uI search box.

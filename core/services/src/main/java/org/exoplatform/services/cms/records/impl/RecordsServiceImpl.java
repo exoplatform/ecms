@@ -104,8 +104,6 @@ public class RecordsServiceImpl implements RecordsService {
   public void addRecord(Node filePlan, Node record) throws RepositoryException {
     //TODO need filter nodetype whe register evenlistener for observation
     if(!record.isNodeType("nt:file")) return;
-//    if(!record.isNodeType("nt:file") ||
-//    		(record.isNodeType("exo:actionStorage")&& "exo:actions".equals(record.getName()))) return;
     long counter = filePlan.getProperty("rma:recordCounter").getLong() + 1;
     filePlan.setProperty("rma:recordCounter", counter);
     processDefaultRecordProperties(filePlan, record, counter);

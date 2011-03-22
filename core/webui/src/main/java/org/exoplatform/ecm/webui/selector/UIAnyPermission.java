@@ -30,7 +30,7 @@ import org.exoplatform.webui.form.UIFormInputInfo;
  * Created by The eXo Platform SAS
  * Author : Ly Dinh Quang
  *          quang.ly@exoplatform.com
- *			    xxx5669@yahoo.com
+ *          xxx5669@yahoo.com
  * Oct 9, 2008
  */
 @ComponentConfig(

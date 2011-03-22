@@ -66,7 +66,6 @@ public class UIECMAdminPortlet extends UIPortletApplication {
   private String repoName_ = "" ;
 
   public UIECMAdminPortlet() throws Exception {
-//    addChild(UIRepositoryControl.class, null, null) ;
     UIPopupContainer uiPopupAction = addChild(UIPopupContainer.class, null, "UIECMAdminUIPopupAction");
     uiPopupAction.getChild(UIPopupWindow.class).setId("UIECMAdminUIPopupWindow") ;
     try{
@@ -157,15 +156,11 @@ public class UIECMAdminPortlet extends UIPortletApplication {
 
   public String getDMSSystemWorkspace(String repository) throws Exception {
     ExoContainer container = ExoContainerContext.getCurrentContainer();
-//  	RepositoryService repoService = (RepositoryService)
-//  			container.getComponentInstanceOfType(RepositoryService.class);
     DMSConfiguration dmsConfiguration = (DMSConfiguration)
         container.getComponentInstanceOfType(DMSConfiguration.class);
 
-    //ManageableRepository manageableRepository = repoService.getRepository(repository) ;
     DMSRepositoryConfiguration dmsRepoConfig = dmsConfiguration.getConfig();
     return dmsRepoConfig.getSystemWorkspace();
-    //return manageableRepository.getSystemSession(dmsRepoConfig.getSystemWorkspace());
   }
 
 }

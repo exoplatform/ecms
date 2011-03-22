@@ -66,12 +66,12 @@ import org.exoplatform.webui.event.EventListener;
  * Oct 22, 2009
  * 2:44:09 PM
  */
-@ComponentConfig(
-    template = "app:/groovy/webui/component/explorer/search/UIShowAllHiddenResult.gtmpl",
-    events = {	@EventConfig(listeners = UIShowAllHiddenResult.ViewActionListener.class),
-          @EventConfig(listeners = UIShowAllHiddenResult.RemoveHiddenAttributeActionListener.class),
-          @EventConfig(listeners = UIShowAllHiddenResult.SortASCActionListener.class),
-          @EventConfig(listeners = UIShowAllHiddenResult.SortDESCActionListener.class)})
+@ComponentConfig(template = "app:/groovy/webui/component/explorer/search/UIShowAllHiddenResult.gtmpl",
+                 events = {
+    @EventConfig(listeners = UIShowAllHiddenResult.ViewActionListener.class),
+    @EventConfig(listeners = UIShowAllHiddenResult.RemoveHiddenAttributeActionListener.class),
+    @EventConfig(listeners = UIShowAllHiddenResult.SortASCActionListener.class),
+    @EventConfig(listeners = UIShowAllHiddenResult.SortDESCActionListener.class) })
 public class UIShowAllHiddenResult extends UIComponentDecorator {
 
   private static final Log LOG  = ExoLogger.getLogger("explorer.search.UIShowAllHiddenResult");
@@ -115,14 +115,13 @@ public class UIShowAllHiddenResult extends UIComponentDecorator {
     UIJCRExplorer uiExplorer = getAncestorOfType(UIJCRExplorer.class);
     boolean byUser = uiExplorer.getPreference().isShowItemsByUser();
 
-    StringBuilder queryString	= new StringBuilder("SELECT * FROM ")
-                                    .append(Utils.EXO_HIDDENABLE);
+    StringBuilder queryString = new StringBuilder("SELECT * FROM ").append(Utils.EXO_HIDDENABLE);
     if (byUser) {
-      queryString.append(" WHERE CONTAINS(").
-                  append(Utils.EXO_OWNER).
-                  append(",'").
-                  append(uiExplorer.getSession().getUserID()).
-                  append("')");
+      queryString.append(" WHERE CONTAINS(")
+                 .append(Utils.EXO_OWNER)
+                 .append(",'")
+                 .append(uiExplorer.getSession().getUserID())
+                 .append("')");
     }
     Session session = uiExplorer.getSession();
     QueryManager queryManager = session.getWorkspace().getQueryManager();

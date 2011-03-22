@@ -44,10 +44,10 @@ import org.exoplatform.webui.event.EventListener;
 public class UISearchPageLayout extends UIContainer {
 
   /** The Constant SEARCH_FORM. */
-  public static final String	SEARCH_FORM		= "uiSearchForm".intern();
+  public static final String SEARCH_FORM   = "uiSearchForm".intern();
 
   /** The Constant SEARCH_RESULT. */
-  public static final String	SEARCH_RESULT	= "uiSearchResult".intern();
+  public static final String SEARCH_RESULT = "uiSearchResult".intern();
 
   /**
    * Instantiates a new uI search page layout.

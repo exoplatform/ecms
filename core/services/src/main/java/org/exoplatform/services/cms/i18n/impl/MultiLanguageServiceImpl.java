@@ -55,84 +55,84 @@ import org.exoplatform.services.jcr.impl.core.value.StringValue;
  * @mail   nguyenkequanghung@yahoo.com
  */
 
-public class MultiLanguageServiceImpl implements MultiLanguageService{
+public class MultiLanguageServiceImpl implements MultiLanguageService {
 
   /**
    * Path to child node keep content of parent node
    */
-  final static public String  JCRCONTENT = "jcr:content";
+  final static public String  JCRCONTENT           = "jcr:content";
 
   /**
    * Property name keep data of node
    */
-  final static public String  JCRDATA = "jcr:data";
+  final static public String  JCRDATA              = "jcr:data";
 
   /**
    * Property name keep mimeType of data
    */
-  final static public String  JCR_MIMETYPE = "jcr:mimeType";
+  final static public String  JCR_MIMETYPE         = "jcr:mimeType";
 
   /**
    * NodeType name nt:unstructured
    */
-  final static public String  NTUNSTRUCTURED = "nt:unstructured";
+  final static public String  NTUNSTRUCTURED       = "nt:unstructured";
 
   /**
    * NodeType name nt:folder
    */
-  final static public String  NTFOLDER = "nt:folder";
+  final static public String  NTFOLDER             = "nt:folder";
 
   /**
    * NodeType name nt:file
    */
-  final static public String  NTFILE = "nt:file";
+  final static public String  NTFILE               = "nt:file";
 
   /**
    * Property name jcr:lastModified
    */
-  final static public String JCR_LASTMODIFIED = "jcr:lastModified" ;
+  final static public String  JCR_LASTMODIFIED     = "jcr:lastModified";
 
   /**
    * Property name exo:voter
    */
-  final static String VOTER_PROP = "exo:voter".intern() ;
+  final static String         VOTER_PROP           = "exo:voter".intern();
 
   /**
    * Property name exo:votingRate
    */
-  final static String VOTING_RATE_PROP = "exo:votingRate".intern() ;
+  final static String         VOTING_RATE_PROP     = "exo:votingRate".intern();
 
   /**
    * Property name exo:voteTotal
    */
-  final static String VOTE_TOTAL_PROP = "exo:voteTotal".intern() ;
+  final static String         VOTE_TOTAL_PROP      = "exo:voteTotal".intern();
 
   /**
    * Property name exo:boteTotalOfLang
    */
-  final static String VOTE_TOTAL_LANG_PROP = "exo:voteTotalOfLang".intern() ;
+  final static String         VOTE_TOTAL_LANG_PROP = "exo:voteTotalOfLang".intern();
 
   /**
    * Node path
    */
-  final static String NODE = "/node/" ;
+  final static String         NODE                 = "/node/";
 
   /**
    * Node path for language
    */
-  final static String NODE_LANGUAGE = "/node/languages/" ;
+  final static String         NODE_LANGUAGE        = "/node/languages/";
 
   /**
    * Path to content node
    */
-  final static String CONTENT_PATH = "/node/jcr:content/" ;
+  final static String         CONTENT_PATH         = "/node/jcr:content/";
 
   /**
    * Name of temporatory node
    */
-  final static String TEMP_NODE = "temp" ;
+  final static String         TEMP_NODE            = "temp";
 
-  private static final String MIX_REFERENCEABLE = "mix:referenceable";
+  private static final String MIX_REFERENCEABLE    = "mix:referenceable";
 
   /**
    * CmsService
@@ -450,7 +450,6 @@ public class MultiLanguageServiceImpl implements MultiLanguageService{
    * {@inheritDoc}
    */
   public void addLinkedLanguage(Node node, Node translationNode) throws Exception {
-  //  	String LANGUAGES = "languages";
     Node languagesNode;
     if (node.hasNode(LANGUAGES))
       languagesNode = node.getNode(LANGUAGES);

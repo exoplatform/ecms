@@ -54,60 +54,56 @@ import org.exoplatform.webui.core.lifecycle.Lifecycle;
  */
 @SuppressWarnings("deprecation")
 @ComponentConfigs( {
-  @ComponentConfig(
-    lifecycle = Lifecycle.class),
-  @ComponentConfig(
-    type = UICustomizeablePaginator.class,
-    events = @EventConfig(listeners = UICustomizeablePaginator.ShowPageActionListener.class))
-})
+    @ComponentConfig(lifecycle = Lifecycle.class),
+    @ComponentConfig(type = UICustomizeablePaginator.class,
+                     events = @EventConfig(listeners = UICustomizeablePaginator.ShowPageActionListener.class)) })
 public class UISearchResult extends UIContainer {
 
   /** The template path. */
-  private String										templatePath;
+  private String                   templatePath;
 
   /** The resource resolver. */
-  private ResourceResolver					resourceResolver;
+  private ResourceResolver         resourceResolver;
 
   /** The ui paginator. */
-  private UICustomizeablePaginator	uiPaginator;
+  private UICustomizeablePaginator uiPaginator;
 
   /** The keyword. */
-  private String										keyword;
+  private String                   keyword;
 
   /** The result type. */
-  private String										resultType;
+  private String                   resultType;
 
   /** The suggestion. */
-  private String										suggestion;
+  private String                   suggestion;
 
   /** The suggestion. */
-  private String										suggestionURL;
+  private String                   suggestionURL;
 
   /** The date formatter. */
-  private SimpleDateFormat					dateFormatter			= new SimpleDateFormat(ISO8601.SIMPLE_DATETIME_FORMAT);
+  private SimpleDateFormat         dateFormatter    = new SimpleDateFormat(ISO8601.SIMPLE_DATETIME_FORMAT);
 
   /** The search time. */
-  private float											searchTime;
+  private float                    searchTime;
 
   /** The Constant PARAMETER_REGX. */
-  public final static String				PARAMETER_REGX		= "(portal=.*)&(keyword=.*)";
+  public final static String       PARAMETER_REGX   = "(portal=.*)&(keyword=.*)";
 
   /** The Constant RESULT_NOT_FOUND. */
-  public final static String				RESULT_NOT_FOUND	= "UISearchResult.msg.result-not-found";
+  public final static String       RESULT_NOT_FOUND = "UISearchResult.msg.result-not-found";
 
   /**
    * Inits the.
    *
    * @param templatePath the template path
    * @param resourceResolver the resource resolver
-   *
    * @throws Exception the exception
    */
   public void init(String templatePath, ResourceResolver resourceResolver) throws Exception {
     PortletRequestContext portletRequestContext = (PortletRequestContext) WebuiRequestContext.getCurrentInstance();
     PortletPreferences portletPreferences = portletRequestContext.getRequest().getPreferences();
-    String paginatorTemplatePath = portletPreferences.getValue(	UIWCMSearchPortlet.SEARCH_PAGINATOR_TEMPLATE_PATH,
-                                                                null);
+    String paginatorTemplatePath = portletPreferences.getValue(UIWCMSearchPortlet.SEARCH_PAGINATOR_TEMPLATE_PATH,
+                                                               null);
     this.templatePath = templatePath;
     this.resourceResolver = resourceResolver;
     uiPaginator = addChild(UICustomizeablePaginator.class, null, null);
@@ -133,11 +129,13 @@ public class UISearchResult extends UIContainer {
     if ((portal != null) && (keyword != null) && (keyword.length() > 0)) {
       UISearchPageLayout uiSearchPageContainer = getAncestorOfType(UISearchPageLayout.class);
       UISearchForm searchForm = uiSearchPageContainer.getChild(UISearchForm.class);
-      //searchForm.getUIFormSelectBox(UISearchForm.PORTALS_SELECTOR).setSelectedValues(new String[] {portal});
+      // searchForm.getUIFormSelectBox(UISearchForm.PORTALS_SELECTOR).setSelectedValues(new
+      // String[] {portal});
       searchForm.getUIStringInput(UISearchForm.KEYWORD_INPUT).setValue(keyword);
       if (searchForm.getUIFormSelectBox(UISearchForm.PORTALS_SELECTOR).getValue() != null) {
         portal = searchForm.getUIFormSelectBox(UISearchForm.PORTALS_SELECTOR).getValue();
-        portal = portal.equals(UISearchForm.ALL_OPTION)?Util.getPortalRequestContext().getPortalOwner():portal;
+        portal = portal.equals(UISearchForm.ALL_OPTION) ? Util.getPortalRequestContext()
+                                                              .getPortalOwner() : portal;
       }
       if (searchForm.getUIStringInput(UISearchForm.KEYWORD_INPUT).getValue() != null) {
         keyword = searchForm.getUIStringInput(UISearchForm.KEYWORD_INPUT).getValue();
@@ -147,8 +145,9 @@ public class UISearchResult extends UIContainer {
       SiteSearchService siteSearchService = getApplicationComponent(SiteSearchService.class);
       QueryCriteria queryCriteria = new QueryCriteria();
 
-      boolean isSearchDocument  = searchForm.getUIFormCheckBoxInput(UISearchForm.DOCUMENT_CHECKING).isChecked();
-      boolean isWebPage  = searchForm.getUIFormCheckBoxInput(UISearchForm.PAGE_CHECKING).isChecked();
+      boolean isSearchDocument = searchForm.getUIFormCheckBoxInput(UISearchForm.DOCUMENT_CHECKING)
+                                           .isChecked();
+      boolean isWebPage = searchForm.getUIFormCheckBoxInput(UISearchForm.PAGE_CHECKING).isChecked();
 
       TemplateService templateService = WCMCoreUtils.getService(TemplateService.class);
       List<String> documentNodeTypes = templateService.getAllDocumentNodeTypes();
@@ -165,13 +164,12 @@ public class UISearchResult extends UIContainer {
       } else {
         queryCriteria.setLiveMode(false);
       }
-      int itemsPerPage = Integer.parseInt(portletPreferences.getValue(UIWCMSearchPortlet.ITEMS_PER_PAGE, null));
+      int itemsPerPage = Integer.parseInt(portletPreferences.getValue(UIWCMSearchPortlet.ITEMS_PER_PAGE,
+                                                                      null));
       try {
         WCMPaginatedQueryResult paginatedQueryResult = siteSearchService.searchSiteContents(
 
-            Utils.getSessionProvider(),
-                                                                                            queryCriteria,
-                                                                                            itemsPerPage, false);
+        Utils.getSessionProvider(), queryCriteria, itemsPerPage, false);
         setSearchTime(paginatedQueryResult.getQueryTimeInSecond());
         setSuggestion(paginatedQueryResult.getSpellSuggestion());
         String suggestionURL = Util.getPortalRequestContext().getRequestURI();
@@ -181,7 +179,9 @@ public class UISearchResult extends UIContainer {
         searchForm.setSubmitAction(suggestionURL);
       } catch (Exception e) {
         UIApplication uiApp = getAncestorOfType(UIApplication.class);
-        uiApp.addMessage(new ApplicationMessage(UISearchForm.MESSAGE_NOT_SUPPORT_KEYWORD, null, ApplicationMessage.WARNING));
+        uiApp.addMessage(new ApplicationMessage(UISearchForm.MESSAGE_NOT_SUPPORT_KEYWORD,
+                                                null,
+                                                ApplicationMessage.WARNING));
       }
     }
     super.processRender(context);
@@ -246,7 +246,6 @@ public class UISearchResult extends UIContainer {
    * Gets the current page data.
    *
    * @return the current page data
-   *
    * @throws Exception the exception
    */
   @SuppressWarnings("unchecked")
@@ -258,9 +257,7 @@ public class UISearchResult extends UIContainer {
    * Gets the title.
    *
    * @param node the node
-   *
    * @return the title
-   *
    * @throws Exception the exception
    */
   public String getTitle(Node node) throws Exception {
@@ -272,9 +269,7 @@ public class UISearchResult extends UIContainer {
    * Gets the uRL.
    *
    * @param node the node
-   *
    * @return the uRL
-   *
    * @throws Exception the exception
    */
   public List<String> getURLs(Node node) throws Exception {
@@ -293,7 +288,6 @@ public class UISearchResult extends UIContainer {
    * Gets the published node uri.
    *
    * @param navNodeURI the nav node uri
-   *
    * @return the published node uri
    */
   public String getPublishedNodeURI(String navNodeURI) {
@@ -317,9 +311,7 @@ public class UISearchResult extends UIContainer {
    * Gets the uRL.
    *
    * @param node the node
-   *
    * @return the uRL
-   *
    * @throws Exception the exception
    */
   public String getURL(Node node) throws Exception {
@@ -335,7 +327,7 @@ public class UISearchResult extends UIContainer {
     String basePath = portletPreferences.getValue(UIWCMSearchPortlet.BASE_PATH, null);
 
     link = baseURI + portalURI + basePath + "/" + repository + "/" + workspace;
-    if (node.isNodeType("nt:frozenNode")){
+    if (node.isNodeType("nt:frozenNode")) {
       String uuid = node.getProperty("jcr:frozenUuid").getString();
       Node originalNode = node.getSession().getNodeByUUID(uuid);
       link += originalNode.getPath() + "?version=" + node.getParent().getName();
@@ -355,9 +347,7 @@ public class UISearchResult extends UIContainer {
    * Gets the created date.
    *
    * @param node the node
-   *
    * @return the created date
-   *
    * @throws Exception the exception
    */
   public String getCreatedDate(Node node) throws Exception {
@@ -372,7 +362,6 @@ public class UISearchResult extends UIContainer {
    * Checks if is show paginator.
    *
    * @return true, if is show paginator
-   *
    * @throws Exception the exception
    */
   public boolean isShowPaginator() throws Exception {

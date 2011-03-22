@@ -59,9 +59,8 @@ public class UITagList extends UIComponent {
   public List<Node> getPrivateTagLink() throws Exception {
     String repository = getRepository();
     ExoContainer container = ExoContainerContext.getCurrentContainer();
-    RepositoryService repositoryService
-    = (RepositoryService) container.getComponentInstanceOfType(RepositoryService.class);
-    ManageableRepository	manageableRepo = repositoryService.getCurrentRepository();
+    RepositoryService repositoryService = (RepositoryService) container.getComponentInstanceOfType(RepositoryService.class);
+    ManageableRepository manageableRepo = repositoryService.getCurrentRepository();
 
     String workspace = manageableRepo.getConfiguration().getDefaultWorkspaceName();
     String userName = getUserName();
@@ -72,16 +71,15 @@ public class UITagList extends UIComponent {
   public List<Node> getPublicTagLink() throws Exception {
     String repository = getRepository();
     ExoContainer container = ExoContainerContext.getCurrentContainer();
-    RepositoryService repositoryService =
-    (RepositoryService) container.getComponentInstanceOfType(RepositoryService.class);
-    ManageableRepository	manageableRepo = repositoryService.getCurrentRepository();
-    NodeHierarchyCreator nodeHierarchyCreator =
-    (NodeHierarchyCreator) container.getComponentInstanceOfType(NodeHierarchyCreator.class);
+    RepositoryService repositoryService = (RepositoryService) container.getComponentInstanceOfType(RepositoryService.class);
+    ManageableRepository manageableRepo = repositoryService.getCurrentRepository();
+    NodeHierarchyCreator nodeHierarchyCreator = (NodeHierarchyCreator) container.
+        getComponentInstanceOfType(NodeHierarchyCreator.class);
 
     String workspace = manageableRepo.getConfiguration().getDefaultWorkspaceName();
 
     String publicTagNodePath = nodeHierarchyCreator.getJcrPath(PUBLIC_TAG_NODE_PATH);
-    NewFolksonomyService newFolksonomyService = getApplicationComponent(NewFolksonomyService.class) ;
+    NewFolksonomyService newFolksonomyService = getApplicationComponent(NewFolksonomyService.class);
 
     return newFolksonomyService.getAllPublicTags(publicTagNodePath, repository, workspace);
   }

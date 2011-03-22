@@ -54,12 +54,10 @@ public class CommandTimer implements Command<Boolean> {
     Session session = env.get(HibernateJobDbSession.class).getSession();
 
     // Create the hibernate query
-    String query = 	"select timer " +
-            "from " + TimerImpl.class.getName() +" as timer, "
-                + XpdlExecution.class.getName()+" as xpdl " +
-            "where timer.execution = xpdl "
-                  + " and xpdl.xpdlInstance.uuid.value='"+this.puuid+"'"
-                  + " and xpdl.node.name='"+this.activity+"'"
+    String query = "select timer " + "from " + TimerImpl.class.getName() + " as timer, "
+        + XpdlExecution.class.getName() + " as xpdl " + "where timer.execution = xpdl "
+        + " and xpdl.xpdlInstance.uuid.value='" + this.puuid + "'" + " and xpdl.node.name='"
+        + this.activity + "'"
                 ;
     Query q = session.createQuery(query);
 

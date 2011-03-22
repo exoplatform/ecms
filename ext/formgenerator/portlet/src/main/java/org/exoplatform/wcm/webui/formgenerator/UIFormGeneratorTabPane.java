@@ -346,7 +346,7 @@ public class UIFormGeneratorTabPane extends UIFormTabPane {
         inputField = "CheckBoxField";
       } else if (UIFormGeneratorConstant.RADIO.equals(inputType)) {
         inputField = "RadioBoxField";
-      }	else {
+      } else {
         inputField = "TextField";
       }
       if (validate.endsWith(",")) validate = validate.substring(0, validate.length() - 1);

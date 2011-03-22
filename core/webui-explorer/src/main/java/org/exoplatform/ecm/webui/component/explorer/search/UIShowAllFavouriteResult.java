@@ -62,13 +62,13 @@ import org.exoplatform.webui.event.EventListener;
  * Oct 15, 2009 2:12:00 PM
  */
 
-@ComponentConfig(
-    template = "app:/groovy/webui/component/explorer/search/UIShowAllFavouriteResult.gtmpl",
-    events = {	@EventConfig(listeners = UIShowAllFavouriteResult.ViewActionListener.class),
-          @EventConfig(listeners = UIShowAllFavouriteResult.OpenFolderActionListener.class),
-          @EventConfig(listeners = UIShowAllFavouriteResult.SortASCActionListener.class),
-          @EventConfig(listeners = UIShowAllFavouriteResult.SortDESCActionListener.class),
-          @EventConfig(listeners = UIShowAllFavouriteResult.StarClickActionListener.class)})
+@ComponentConfig(template = "app:/groovy/webui/component/explorer/search/UIShowAllFavouriteResult.gtmpl",
+                 events = {
+    @EventConfig(listeners = UIShowAllFavouriteResult.ViewActionListener.class),
+    @EventConfig(listeners = UIShowAllFavouriteResult.OpenFolderActionListener.class),
+    @EventConfig(listeners = UIShowAllFavouriteResult.SortASCActionListener.class),
+    @EventConfig(listeners = UIShowAllFavouriteResult.SortDESCActionListener.class),
+    @EventConfig(listeners = UIShowAllFavouriteResult.StarClickActionListener.class) })
 public class UIShowAllFavouriteResult extends UIComponentDecorator {
 
   public static final int SHOW_ALL_FAVOURITE = 0;
@@ -292,7 +292,6 @@ public class UIShowAllFavouriteResult extends UIComponentDecorator {
         UIShowAllFavouriteResult uiShow = event.getSource();
         UIJCRExplorer uiExplorer = uiShow.getAncestorOfType(UIJCRExplorer.class);
         UIApplication uiApp = uiShow.getAncestorOfType(UIApplication.class);
-//	    	UIStar uiStar = uiShow.uiStars.get(id);
         Node node = uiShow.mapIndexNode.get(id);
 
         try {

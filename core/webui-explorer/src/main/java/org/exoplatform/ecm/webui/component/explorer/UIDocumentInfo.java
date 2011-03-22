@@ -159,20 +159,20 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
   private List<Node> earlierThisWeekNodes;
   private List<Node> earlierThisMonthNodes;
   private List<Node> earlierThisYearNodes;
-  
+
   private String timeLineSortByFavourite = Preference.BLUE_DOWN_ARROW;
   private String timeLineSortByName = "";
   private String timeLineSortByDate = "";
-  
+
   private FavoriteService favoriteService;
   private DocumentTypeService documentTypeService;
   private TemplateService templateService;
-  
+
   public UIDocumentInfo() throws Exception {
     pageIterator_ = addChild(UIPageIterator.class, null,CONTENT_PAGE_ITERATOR_ID);
-  	favoriteService = this.getApplicationComponent(FavoriteService.class);
-  	documentTypeService = this.getApplicationComponent(DocumentTypeService.class);
-    templateService = getApplicationComponent(TemplateService.class) ;  	
+    favoriteService = this.getApplicationComponent(FavoriteService.class);
+    documentTypeService = this.getApplicationComponent(DocumentTypeService.class);
+    templateService = getApplicationComponent(TemplateService.class) ;
   }
 
   public String getTimeLineSortByFavourite() { return timeLineSortByFavourite; }
@@ -508,7 +508,7 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
   }
 
   public boolean isNodeTypeSupported(String nodeTypeName) {
-    try {      
+    try {
       return templateService.isManagedNodeType(nodeTypeName);
     } catch (Exception e) {
       return false;
@@ -793,85 +793,85 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
     }
     return driveData;
   }
-  
+
   private List<Node> filterNodeList(List<Node> sourceNodeList) throws Exception {
-  	List<Node> ret = new ArrayList<Node>();
-  	
-  	for (Node node : sourceNodeList) 
-  		try {
-	  		if (filterOk(node))
-	  			ret.add(node);
-  		} catch (Exception ex) {}
-  	
-  	return ret;
+    List<Node> ret = new ArrayList<Node>();
+
+    for (Node node : sourceNodeList)
+      try {
+        if (filterOk(node))
+          ret.add(node);
+      } catch (Exception ex) {}
+
+    return ret;
   }
-  
+
   private boolean filterOk(Node node) throws Exception {
-  	UIJCRExplorer uiExplorer = this.getAncestorOfType(UIJCRExplorer.class);
-  	
-  	Set<String> allItemsFilterSet = uiExplorer.getAllItemFilterMap();
-  	Set<String> allItemsByTypeFilterSet = uiExplorer.getAllItemByTypeFilterMap();
-  	
-  	String userId = uiExplorer.getSession().getUserID();
-  	
-  	//Owned by me
-  	if (allItemsFilterSet.contains(UIAllItems.OWNED_BY_ME) && 
-  			!userId.equals(node.getProperty(Utils.EXO_OWNER).getString()))
-  				return false;
-  	//Favorite
-  	if (allItemsFilterSet.contains(UIAllItems.FAVORITE) &&
-  			!favoriteService.isFavoriter(userId, node))
-  				return false;
-  	//Hidden
-  	if (allItemsFilterSet.contains(UIAllItems.HIDDEN)) {
-  		if (!node.isNodeType(Utils.EXO_HIDDENABLE))
-  			return false;
-  		else {
-  			uiExplorer.getPreference().setShowHiddenNode(true);
-  		}
-  	}
-  	
-  	//By types
-  	for (String documentType : allItemsByTypeFilterSet) { 
-			boolean found = false;
-			if (documentTypeService.isContentsType(documentType)) {
-				for (String documentNodeType : templateService.getAllDocumentNodeTypes())
-					if (node.isNodeType(documentNodeType)) {
-						found = true;
-						break;
-					}
-			}
-			if (!found)
-				for (String mimeType : documentTypeService.getMimeTypes(documentType)) {
-					if (node.getNode(Utils.JCR_CONTENT).getProperty(Utils.JCR_MIMETYPE).getString().indexOf(mimeType) >= 0) {
-						found = true;
-						break;
-					}
-				}  			
-			if (!found)
-				return false;
-  	}
-  	
-  	return true;
+    UIJCRExplorer uiExplorer = this.getAncestorOfType(UIJCRExplorer.class);
+
+    Set<String> allItemsFilterSet = uiExplorer.getAllItemFilterMap();
+    Set<String> allItemsByTypeFilterSet = uiExplorer.getAllItemByTypeFilterMap();
+
+    String userId = uiExplorer.getSession().getUserID();
+
+    //Owned by me
+    if (allItemsFilterSet.contains(UIAllItems.OWNED_BY_ME) &&
+        !userId.equals(node.getProperty(Utils.EXO_OWNER).getString()))
+          return false;
+    //Favorite
+    if (allItemsFilterSet.contains(UIAllItems.FAVORITE) &&
+        !favoriteService.isFavoriter(userId, node))
+          return false;
+    //Hidden
+    if (allItemsFilterSet.contains(UIAllItems.HIDDEN)) {
+      if (!node.isNodeType(Utils.EXO_HIDDENABLE))
+        return false;
+      else {
+        uiExplorer.getPreference().setShowHiddenNode(true);
+      }
+    }
+
+    //By types
+    for (String documentType : allItemsByTypeFilterSet) {
+      boolean found = false;
+      if (documentTypeService.isContentsType(documentType)) {
+        for (String documentNodeType : templateService.getAllDocumentNodeTypes())
+          if (node.isNodeType(documentNodeType)) {
+            found = true;
+            break;
+          }
+      }
+      if (!found)
+        for (String mimeType : documentTypeService.getMimeTypes(documentType)) {
+          if (node.getNode(Utils.JCR_CONTENT).getProperty(Utils.JCR_MIMETYPE).getString().indexOf(mimeType) >= 0) {
+            found = true;
+            break;
+          }
+        }
+      if (!found)
+        return false;
+    }
+
+    return true;
   }
-  
+
   static public class ViewNodeActionListener extends EventListener<UIDocumentInfo> {
-    public void execute(Event<UIDocumentInfo> event) throws Exception {      
+    public void execute(Event<UIDocumentInfo> event) throws Exception {
       UIDocumentInfo uicomp = event.getSource() ;
-      UIApplication uiApp = uicomp.getAncestorOfType(UIApplication.class);      
+      UIApplication uiApp = uicomp.getAncestorOfType(UIApplication.class);
       UIJCRExplorer uiExplorer = uicomp.getAncestorOfType(UIJCRExplorer.class);
       try {
-	      String uri = event.getRequestContext().getRequestParameter(OBJECTID) ;
-	      String workspaceName = event.getRequestContext().getRequestParameter("workspaceName") ;      
-	      uiExplorer.setSelectNode(workspaceName, uri) ;
-	      uiExplorer.updateAjax(event) ;           
-	      event.broadcast();
+        String uri = event.getRequestContext().getRequestParameter(OBJECTID) ;
+        String workspaceName = event.getRequestContext().getRequestParameter("workspaceName") ;
+        uiExplorer.setSelectNode(workspaceName, uri) ;
+        uiExplorer.updateAjax(event) ;
+        event.broadcast();
       } catch(RepositoryException e) {
-     		LOG.error("Repository cannot be found");      	
-        uiApp.addMessage(new ApplicationMessage("UIDocumentInfo.msg.repository-error", null, 
+         LOG.error("Repository cannot be found");
+        uiApp.addMessage(new ApplicationMessage("UIDocumentInfo.msg.repository-error", null,
             ApplicationMessage.WARNING)) ;
-			  event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
-			  return ;    	  
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+        return ;
       } catch (Exception e) {
         JCRExceptionManager.process(uiApp, e);
         return;

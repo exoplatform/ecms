@@ -102,7 +102,6 @@ public class UITaggingFormContainer extends UIContainer implements UIPopupCompon
   }
 
   public void edit(Event<? extends UIComponent> event) throws Exception {
-//  	UITaggingFormContainer uiTaggingFormContainer = event.getSource();
     UITaggingFormContainer uiTaggingFormContainer = this;
     String selectedName = event.getRequestContext().getRequestParameter(OBJECTID);
     Node selectedTag = uiTaggingFormContainer.getSelectedTag(selectedName);

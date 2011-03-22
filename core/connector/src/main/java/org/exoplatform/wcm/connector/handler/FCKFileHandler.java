@@ -45,8 +45,6 @@ public class FCKFileHandler {
     } else {
       file.setAttribute("nodeType", sourceNode.getPrimaryNodeType().getName());
     }
-//    if (displayNode.hasProperty("exo:uuid")
-//    		&& displayNode.getProperty("exo:uuid").getString().equals(sourceNode.getUUID())) {
     if (sourceNode.isNodeType(NodetypeConstant.EXO_WEBCONTENT)
         || sourceNode.isNodeType(NodetypeConstant.EXO_ARTICLE)){
       file.setAttribute("url",getDocURL(displayNode, currentPortal));
@@ -58,7 +56,7 @@ public class FCKFileHandler {
       file.setAttribute("size", "" + size / 1000);
     }else {
       file.setAttribute("size", "");
-    }    
+    }
     return file;
   }
 

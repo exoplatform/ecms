@@ -83,101 +83,113 @@ import org.exoplatform.webui.form.validator.PositiveNumberFormatValidator;
 public class UICLVConfig extends UIForm  implements UISelectable {
 
   /** The Constant DISPLAY_MODE_FORM_RADIO_BOX_INPUT. */
-  public static final String DISPLAY_MODE_FORM_RADIO_BOX_INPUT      = "UICLVConfigDisplayModeFormRadioBoxInput";
+  public static final String DISPLAY_MODE_FORM_RADIO_BOX_INPUT       = "UICLVConfigDisplayModeFormRadioBoxInput";
 
   /** The Constant ITEM_PATH_FORM_INPUT_SET. */
-  public final static String ITEM_PATH_FORM_INPUT_SET               = "UICLVConfigItemPathFormInputSet";
+  public final static String ITEM_PATH_FORM_INPUT_SET                = "UICLVConfigItemPathFormInputSet";
 
   /** The Constant ITEM_PATH_FORM_STRING_INPUT. */
-  public final static String ITEM_PATH_FORM_STRING_INPUT            = "UICLVConfigItemPathFormStringInput";
+  public final static String ITEM_PATH_FORM_STRING_INPUT             = "UICLVConfigItemPathFormStringInput";
 
   /** The Constant ORDER_BY_FORM_SELECT_BOX. */
-  public static final String ORDER_BY_FORM_SELECT_BOX               = "UICLVConfigOrderByFormSelectBox";
+  public static final String ORDER_BY_FORM_SELECT_BOX                = "UICLVConfigOrderByFormSelectBox";
 
   /** The Constant ORDER_TYPE_FORM_RADIO_BOX_INPUT. */
-  public static final String ORDER_TYPE_FORM_RADIO_BOX_INPUT        = "UICLVConfigOrderTypeFormRadioBoxInput";
+  public static final String ORDER_TYPE_FORM_RADIO_BOX_INPUT         = "UICLVConfigOrderTypeFormRadioBoxInput";
 
   /** The Constant HEADER_FORM_STRING_INPUT. */
-  public final static String HEADER_FORM_STRING_INPUT               = "UICLVConfigHeaderFormStringInput";
+  public final static String HEADER_FORM_STRING_INPUT                = "UICLVConfigHeaderFormStringInput";
 
   /** The Constant SHOW_AUTOMATIC_DETECTION_CHECKBOX_INPUT. */
-  public static final String SHOW_AUTOMATIC_DETECTION_CHECKBOX_INPUT= "UICLVConfigShowAutomaticDetectionCheckboxInput";
+  public static final String SHOW_AUTOMATIC_DETECTION_CHECKBOX_INPUT = "UICLVConfigShowAutomaticDetectionCheckboxInput";
 
   /** The Constant DISPLAY_TEMPLATE_FORM_SELECT_BOX. */
-  public final static String DISPLAY_TEMPLATE_FORM_SELECT_BOX       = "UICLVConfigDisplayTemplateFormSelectBox";
+  public final static String DISPLAY_TEMPLATE_FORM_SELECT_BOX        = "UICLVConfigDisplayTemplateFormSelectBox";
 
   /** The Constant PAGINATOR_TEMPLATE_FORM_SELECT_BOX. */
-  public final static String PAGINATOR_TEMPLATE_FORM_SELECT_BOX     = "UICLVConfigPaginatorTemplateFormSelectBox";
+  public final static String PAGINATOR_TEMPLATE_FORM_SELECT_BOX      = "UICLVConfigPaginatorTemplateFormSelectBox";
 
   /** The Constant ITEMS_PER_PAGE_FORM_STRING_INPUT. */
-  public final static String ITEMS_PER_PAGE_FORM_STRING_INPUT       = "UICLVConfigItemsPerPageFormStringInput";
+  public final static String ITEMS_PER_PAGE_FORM_STRING_INPUT        = "UICLVConfigItemsPerPageFormStringInput";
 
   /** The Constant SHOW_TITLE_FORM_CHECKBOX_INPUT. */
-  public static final String SHOW_TITLE_FORM_CHECKBOX_INPUT         = "UICLVConfigShowTitleFormCheckboxInput";
+  public static final String SHOW_TITLE_FORM_CHECKBOX_INPUT          = "UICLVConfigShowTitleFormCheckboxInput";
 
   /** The Constant SHOW_HEADER_FORM_CHECKBOX_INPUT. */
-  public static final String SHOW_HEADER_FORM_CHECKBOX_INPUT        = "UICLVConfigShowHeaderFormCheckboxInput";
+  public static final String SHOW_HEADER_FORM_CHECKBOX_INPUT         = "UICLVConfigShowHeaderFormCheckboxInput";
 
   /** The Constant SHOW_REFRESH_FORM_CHECKBOX_INPUT. */
-  public final static String SHOW_REFRESH_FORM_CHECKBOX_INPUT       = "UICLVConfigShowRefreshFormCheckboxInput";
+  public final static String SHOW_REFRESH_FORM_CHECKBOX_INPUT        = "UICLVConfigShowRefreshFormCheckboxInput";
 
   /** The Constant SHOW_ILLUSTRATION_FORM_CHECKBOX_INPUT. */
   /** The Constant SHOW_IMAGE_FORM_CHECKBOX_INPUT. */
-  public static final String SHOW_ILLUSTRATION_FORM_CHECKBOX_INPUT  = "UICLVConfigShowIllustrationFormCheckboxInput";
-//  public static final String SHOW_IMAGE_FORM_CHECKBOX_INPUT         = "UICLVConfigShowImageFormCheckboxInput";
+  public static final String SHOW_ILLUSTRATION_FORM_CHECKBOX_INPUT   = "UICLVConfigShowIllustrationFormCheckboxInput";
+
+  // public static final String SHOW_IMAGE_FORM_CHECKBOX_INPUT =
+  // "UICLVConfigShowImageFormCheckboxInput";
 
   /** The Constant SHOW_DATE_CREATED_FORM_CHECKBOX_INPUT. */
-  public static final String SHOW_DATE_CREATED_FORM_CHECKBOX_INPUT  = "UICLVConfigShowDateCreatedFormCheckboxInput";
+  public static final String SHOW_DATE_CREATED_FORM_CHECKBOX_INPUT   = "UICLVConfigShowDateCreatedFormCheckboxInput";
 
   /** The Constant SHOW_MORE_LINK_FORM_CHECKBOX_INPUT. */
-  public final static String SHOW_READMORE_FORM_CHECKBOX_INPUT      = "UICLVConfigShowReadmoreFormCheckboxInput";
-//  public static final String SHOW_MORE_LINK_FORM_CHECKBOX_INPUT     = "UICLVConfigShowMoreLinkCheckedboxInput";
+  public final static String SHOW_READMORE_FORM_CHECKBOX_INPUT       = "UICLVConfigShowReadmoreFormCheckboxInput";
+
+  // public static final String SHOW_MORE_LINK_FORM_CHECKBOX_INPUT =
+  // "UICLVConfigShowMoreLinkCheckedboxInput";
 
   /** The Constant SHOW_SUMMARY_FORM_CHECKBOX_INPUT. */
-  public static final String SHOW_SUMMARY_FORM_CHECKBOX_INPUT       = "UICLVConfigShowSummaryFormCheckboxInput";
+  public static final String SHOW_SUMMARY_FORM_CHECKBOX_INPUT        = "UICLVConfigShowSummaryFormCheckboxInput";
 
   /** The Constant SHOW_LINK_FORM_CHECKBOX_INPUT. */
-  public static final String SHOW_LINK_FORM_CHECKBOX_INPUT          = "UICLVConfigShowLinkFormCheckboxInput";
+  public static final String SHOW_LINK_FORM_CHECKBOX_INPUT           = "UICLVConfigShowLinkFormCheckboxInput";
 
   /** The Constant SHOW_RSSLINK_FORM_CHECKBOX_INPUT. */
-  public static final String SHOW_RSSLINK_FORM_CHECKBOX_INPUT       = "UICLVConfigShowRssLinkFormCheckboxInput";
+  public static final String SHOW_RSSLINK_FORM_CHECKBOX_INPUT        = "UICLVConfigShowRssLinkFormCheckboxInput";
 
   /** The Constant TARGET_PAGE_FORM_INPUT_SET. */
-  public final static String TARGET_PAGE_FORM_INPUT_SET             = "UICLVConfigTargetPageFormInputSet";
+  public final static String TARGET_PAGE_FORM_INPUT_SET              = "UICLVConfigTargetPageFormInputSet";
 
   /** The Constant TARGET_PAGE_FORM_STRING_INPUT. */
-  public final static String TARGET_PAGE_FORM_STRING_INPUT          = "UICLVConfigTargetPageFormStringInput";
+  public final static String TARGET_PAGE_FORM_STRING_INPUT           = "UICLVConfigTargetPageFormStringInput";
 
   /** The Constant TARGET_PAGE_SELECTOR_POPUP_WINDOW. */
-  public final static String TARGET_PAGE_SELECTOR_POPUP_WINDOW      = "UICLVConfigTargetPageSelectorPopupWindow";
+  public final static String TARGET_PAGE_SELECTOR_POPUP_WINDOW       = "UICLVConfigTargetPageSelectorPopupWindow";
 
   /** The Constant DYNAMIC_NAVIGATION_LABEL. */
-  public static final String DYNAMIC_NAVIGATION_LABEL               = "UICLVConfigDynamicNavigationLabel";
+  public static final String DYNAMIC_NAVIGATION_LABEL                = "UICLVConfigDynamicNavigationLabel";
 
   /** The Constant CONTEXTUAL_FOLDER_RADIOBOX_INPUT. */
-  public static final String CONTEXTUAL_FOLDER_RADIOBOX_INPUT       = "UICLVConfigContextualFolderRadioBoxInput";
+  public static final String CONTEXTUAL_FOLDER_RADIOBOX_INPUT        = "UICLVConfigContextualFolderRadioBoxInput";
 
   /** The Constant SHOW_CLV_BY_STRING_INPUT. */
-  public static final String SHOW_CLV_BY_STRING_INPUT               = "UICLVConfigShowCLVByStringInput";
+  public static final String SHOW_CLV_BY_STRING_INPUT                = "UICLVConfigShowCLVByStringInput";
 
   /** The Constant SHOW_SCV_WITH_STRING_INPUT. */
-  public static final String SHOW_SCV_WITH_STRING_INPUT             = "UICLVConfigshowSCVWithStringInput";
+  public static final String SHOW_SCV_WITH_STRING_INPUT              = "UICLVConfigshowSCVWithStringInput";
 
   /** The Constant PAGINATOR_TEMPLATE_CATEGORY. */
-  public final static String PAGINATOR_TEMPLATE_CATEGORY            = "paginators";
+  public final static String PAGINATOR_TEMPLATE_CATEGORY             = "paginators";
 
-  /** TODO: Need to improve, we should get portlet's name by API, not hardcode like this */
+  /**
+   * TODO: Need to improve, we should get portlet's name by API, not hardcode
+   * like this
+   */
   /** The Constant PORTLET_NAME. */
-  public final static String PORTLET_NAME                           = "Content List Viewer";
+  public final static String PORTLET_NAME                            = "Content List Viewer";
 
   /** TODO: Need to improve, we should allow user can choose template category by configuration or portlet's preference */
   /** The Constant DISPLAY_TEMPLATE_CATEGORY. */
-  public final static String DISPLAY_TEMPLATE_CATEGORY              = "navigation";
-  public final static String DISPLAY_TEMPLATE_LIST					= "list";
-  public final static String TEMPLATE_STORAGE_FOLDER				= "content-list-viewer";
-  public final static String CONTENT_LIST_TYPE						= "ContentList";
-  public final static String CATEGORIES_CONTENT_TYPE				= "CategoryContents";
-  public final static String CATOGORIES_NAVIGATION_TYPE				= "CategoryNavigation";
+  public final static String DISPLAY_TEMPLATE_CATEGORY               = "navigation";
+
+  public final static String DISPLAY_TEMPLATE_LIST                   = "list";
+
+  public final static String TEMPLATE_STORAGE_FOLDER                 = "content-list-viewer";
+
+  public final static String CONTENT_LIST_TYPE                       = "ContentList";
+
+  public final static String CATEGORIES_CONTENT_TYPE                 = "CategoryContents";
+
+  public final static String CATOGORIES_NAVIGATION_TYPE              = "CategoryNavigation";
 
   /** The popup id. */
   private String popupId;

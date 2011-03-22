@@ -74,21 +74,21 @@ import org.exoplatform.webui.form.UIFormStringInput;
 public class UIPermissionManager extends UIForm implements UISelectable {
 
   /** The Constant PERMISSION_MANAGER_GRID. */
-  public static final String PERMISSION_MANAGER_GRID    = "UIPermissionManagerGrid";
+  public static final String PERMISSION_MANAGER_GRID     = "UIPermissionManagerGrid";
 
   /** The Constant PERMISSION_INPUT_SET. */
-  public static final String PERMISSION_INPUT_SET    		= "UIPermissionInputSetWithAction";
+  public static final String PERMISSION_INPUT_SET        = "UIPermissionInputSetWithAction";
 
   /** The Constant PERMISSION_STRING_INPUT. */
-  public static final String PERMISSION_STRING_INPUT 		= "UIPermissionStringInput";
+  public static final String PERMISSION_STRING_INPUT     = "UIPermissionStringInput";
 
   /** The Constant ACCESSIBLE_CHECKBOX_INPUT. */
-  public static final String ACCESSIBLE_CHECKBOX_INPUT  = "UIAccessibleCheckboxInput";
+  public static final String ACCESSIBLE_CHECKBOX_INPUT   = "UIAccessibleCheckboxInput";
 
   /** The Constant EDITABLE_CHECKBOX_INPUT. */
-  public static final String EDITABLE_CHECKBOX_INPUT    = "UIEditableCheckboxInput";
+  public static final String EDITABLE_CHECKBOX_INPUT     = "UIEditableCheckboxInput";
 
-  public static final String USER_SELECTOR_POPUP_WINDOW = "UIUserSelectorPopupWindow";
+  public static final String USER_SELECTOR_POPUP_WINDOW  = "UIUserSelectorPopupWindow";
 
   public static final String GROUP_SELECTOR_POPUP_WINDOW = "UIGroupSelectorPopupWindow";
 

@@ -56,52 +56,47 @@ import org.exoplatform.webui.form.UIForm;
  */
 @SuppressWarnings("deprecation")
 @ComponentConfigs( {
-  @ComponentConfig(
-    lifecycle = UIFormLifecycle.class,
-    events = @EventConfig(listeners = UIPCLVForm.RefreshActionListener.class)
-  ),
-  @ComponentConfig(
-    type = UICustomizeablePaginator.class,
-    events = @EventConfig(listeners = UICustomizeablePaginator.ShowPageActionListener.class))
-  }
-)
+    @ComponentConfig(lifecycle = UIFormLifecycle.class,
+                     events = @EventConfig(listeners = UIPCLVForm.RefreshActionListener.class)),
+    @ComponentConfig(type = UICustomizeablePaginator.class,
+                     events = @EventConfig(listeners = UICustomizeablePaginator.ShowPageActionListener.class)) })
 public class UIPCLVForm extends UIForm {
 
   /** The template path. */
-  private String										templatePath;
+  private String                   templatePath;
 
   /** The resource resolver. */
-  private ResourceResolver					resourceResolver;
+  private ResourceResolver         resourceResolver;
 
   /** The ui paginator. */
-  private UICustomizeablePaginator	uiPaginator;
+  private UICustomizeablePaginator uiPaginator;
 
   /** The content column. */
-  private String										contentColumn;
+  private String                   contentColumn;
 
   /** The show link. */
-  private boolean										showLink;
+  private boolean                  showLink;
 
   /** The show header. */
-  private boolean										showHeader;
+  private boolean                  showHeader;
 
   /** The show readmore. */
-  private boolean										showReadmore;
+  private boolean                  showReadmore;
 
   /** The header. */
-  private String										header;
+  private String                   header;
 
   /** The date formatter. */
-  private DateFormat								dateFormatter	= null;
+  private DateFormat               dateFormatter = null;
 
   /** Auto detection. */
-  private String										autoDetection;
+  private String                   autoDetection;
 
   /** Show RSS link. */
-  private String										showRSSLink;
+  private String                   showRSSLink;
 
   /** The rss link. */
-  private String                     rssLink;
+  private String                   rssLink;
 
   /**
    * Gets the rss link.
@@ -133,15 +128,16 @@ public class UIPCLVForm extends UIForm {
    * @param templatePath the template path
    * @param resourceResolver the resource resolver
    * @param dataPageList the data page list
-   *
    * @throws Exception the exception
    */
   @SuppressWarnings("unchecked")
   public void init(String templatePath, ResourceResolver resourceResolver, PageList dataPageList) throws Exception {
 
     PortletPreferences portletPreferences = getPortletPreferences();
-    String paginatorTemplatePath = portletPreferences.getValue(	UIPCLVPortlet.PAGINATOR_TEMPlATE_PATH, null);
-    if(dataPageList == null) return;
+    String paginatorTemplatePath = portletPreferences.getValue(UIPCLVPortlet.PAGINATOR_TEMPlATE_PATH,
+                                                               null);
+    if (dataPageList == null)
+      return;
     this.templatePath = templatePath;
     this.resourceResolver = resourceResolver;
     uiPaginator = addChild(UICustomizeablePaginator.class, null, null);
@@ -149,9 +145,9 @@ public class UIPCLVForm extends UIForm {
     uiPaginator.setResourceResolver(resourceResolver);
     uiPaginator.setPageList(dataPageList);
     Locale locale = Util.getPortalRequestContext().getLocale();
-    dateFormatter = SimpleDateFormat.getDateTimeInstance(	SimpleDateFormat.MEDIUM,
-                                                          SimpleDateFormat.MEDIUM,
-                                                          locale);
+    dateFormatter = SimpleDateFormat.getDateTimeInstance(SimpleDateFormat.MEDIUM,
+                                                         SimpleDateFormat.MEDIUM,
+                                                         locale);
   }
 
   /**
@@ -191,7 +187,6 @@ public class UIPCLVForm extends UIForm {
    * Checks if is show field.
    *
    * @param field the field
-   *
    * @return true, if is show field
    */
   public boolean isShowField(String field) {
@@ -204,7 +199,6 @@ public class UIPCLVForm extends UIForm {
    * Show paginator.
    *
    * @return true, if successful
-   *
    * @throws Exception the exception
    */
   public boolean showPaginator() throws Exception {
@@ -212,10 +206,11 @@ public class UIPCLVForm extends UIForm {
     String itemsPerPage = portletPreferences.getValue(UIPCLVPortlet.ITEMS_PER_PAGE, null);
     UIPCLVContainer container = getAncestorOfType(UIPCLVContainer.class);
     List<Node> nodes = container.getListNode();
-    if(nodes == null) return false;
+    if (nodes == null)
+      return false;
     int count = 0;
-    for(Node node : nodes) {
-      if(node != null) {
+    for (Node node : nodes) {
+      if (node != null) {
         count++;
       }
     }
@@ -252,8 +247,11 @@ public class UIPCLVForm extends UIForm {
     return uiPaginator;
   }
 
-  /* (non-Javadoc)
-   * @see org.exoplatform.webui.core.UIComponent#getTemplateResourceResolver(org.exoplatform.webui.application.WebuiRequestContext, java.lang.String)
+  /*
+   * (non-Javadoc)
+   * @see
+   * org.exoplatform.webui.core.UIComponent#getTemplateResourceResolver(org.
+   * exoplatform.webui.application.WebuiRequestContext, java.lang.String)
    */
   public ResourceResolver getTemplateResourceResolver(WebuiRequestContext context, String template) {
     return resourceResolver;
@@ -263,7 +261,6 @@ public class UIPCLVForm extends UIForm {
    * Gets the current page data.
    *
    * @return the current page data
-   *
    * @throws Exception the exception
    */
   @SuppressWarnings("unchecked")
@@ -275,9 +272,7 @@ public class UIPCLVForm extends UIForm {
    * Gets the title.
    *
    * @param node the node
-   *
    * @return the title
-   *
    * @throws Exception the exception
    */
   public String getTitle(Node node) throws Exception {
@@ -295,7 +290,8 @@ public class UIPCLVForm extends UIForm {
     if (node.hasProperty("exo:title")) {
       title = node.getProperty("exo:title").getValue().getString();
     }
-    if (title==null) title = node.getName();
+    if (title == null)
+      title = node.getName();
 
     return title;
   }
@@ -304,9 +300,7 @@ public class UIPCLVForm extends UIForm {
    * Gets the summary.
    *
    * @param node the node
-   *
    * @return the summary
-   *
    * @throws Exception the exception
    */
   public String getSummary(Node node) throws Exception {
@@ -320,9 +314,7 @@ public class UIPCLVForm extends UIForm {
    * Gets the created date.
    *
    * @param node the node
-   *
    * @return the created date
-   *
    * @throws Exception the exception
    */
   public String getCreatedDate(Node node) throws Exception {
@@ -337,9 +329,7 @@ public class UIPCLVForm extends UIForm {
    * Gets the illustrative image.
    *
    * @param node the node
-   *
    * @return the illustrative image
-   *
    * @throws Exception the exception
    */
   public String getIllustrativeImage(Node node) throws Exception {
@@ -352,7 +342,8 @@ public class UIPCLVForm extends UIForm {
       illustrativeImage = contentSchemaHandler.getIllustrationImage(node);
       uri = imagesRendererService.generateImageURI(illustrativeImage, null);
     } catch (Exception e) {
-      // You shouldn't throw popup message, because some exception often rise here.
+      // You shouldn't throw popup message, because some exception often rise
+      // here.
     }
     return uri;
   }
@@ -361,9 +352,7 @@ public class UIPCLVForm extends UIForm {
    * Generate link.
    *
    * @param node the node
-   *
    * @return the string
-   *
    * @throws Exception the exception
    */
   public String generateLink(Node node) throws Exception {
@@ -373,15 +362,17 @@ public class UIPCLVForm extends UIForm {
     PortletPreferences portletPreferences = portletRequest.getPreferences();
     String workspace = portletPreferences.getValue(UIPCLVPortlet.WORKSPACE, null);
     String repository = portletPreferences.getValue(UIPCLVPortlet.REPOSITORY, null);
-    String preferenceTargetPage = portletPreferences.getValue(UIPCLVPortlet.PREFERENCE_TARGET_PAGE, "");
+    String preferenceTargetPage = portletPreferences.getValue(UIPCLVPortlet.PREFERENCE_TARGET_PAGE,
+                                                              "");
     RepositoryService repositoryService = getApplicationComponent(RepositoryService.class);
     ManageableRepository manageableRepository = repositoryService.getRepository(repository);
     String nodeName = null;
-    if(node.getName().equals("jcr:frozenNode")) {
+    if (node.getName().equals("jcr:frozenNode")) {
       String uuid = node.getProperty("jcr:frozenUuid").getString();
-      Session session = WCMCoreUtils.getUserSessionProvider().getSession(workspace, manageableRepository);
+      Session session = WCMCoreUtils.getUserSessionProvider().getSession(workspace,
+                                                                         manageableRepository);
       Node realNode = session.getNodeByUUID(uuid);
-      if(realNode != null){
+      if (realNode != null) {
         nodeName = realNode.getName();
       }
     } else {
@@ -394,8 +385,8 @@ public class UIPCLVForm extends UIForm {
     String itemPath = path.substring(path.lastIndexOf(((UIPCLVContainer) getParent()).getTaxonomyTreeName()));
     String portalURI = portalRequestContext.getPortalURI();
     link = portalURI + preferenceTargetPage + "?path=/" + itemPath;
-      FriendlyService friendlyService = getApplicationComponent(FriendlyService.class);
-      link = friendlyService.getFriendlyUri(link);
+    FriendlyService friendlyService = getApplicationComponent(FriendlyService.class);
+    link = friendlyService.getFriendlyUri(link);
 
     return link;
   }
@@ -609,7 +600,8 @@ public class UIPCLVForm extends UIForm {
     this.showRSSLink = showRSSLink;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
    * @see org.exoplatform.webui.core.UIComponent#getTemplate()
    */
   public String getTemplate() {
@@ -617,19 +609,21 @@ public class UIPCLVForm extends UIForm {
   }
 
   /**
-   * The listener interface for receiving refreshAction events.
-   * The class that is interested in processing a refreshAction
-   * event implements this interface, and the object created
-   * with that class is registered with a component using the
-   * component's <code>addRefreshActionListener<code> method. When
+   * The listener interface for receiving refreshAction events. The class that
+   * is interested in processing a refreshAction event implements this
+   * interface, and the object created with that class is registered with a
+   * component using the component's
+   * <code>addRefreshActionListener<code> method. When
    * the refreshAction event occurs, that object's appropriate
    * method is invoked.
-   *
    */
   public static class RefreshActionListener extends EventListener<UIPCLVForm> {
 
-    /* (non-Javadoc)
-     * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
+    /*
+     * (non-Javadoc)
+     * @see
+     * org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui
+     * .event.Event)
      */
     public void execute(Event<UIPCLVForm> event) throws Exception {
       UIPCLVForm contentListPresentation = event.getSource();

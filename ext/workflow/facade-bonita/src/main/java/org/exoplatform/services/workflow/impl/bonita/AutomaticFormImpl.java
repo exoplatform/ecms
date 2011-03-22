@@ -224,30 +224,31 @@ public class AutomaticFormImpl implements Form {
 
   }
 
-  private void initializeVariables(Set<DataFieldDefinition> vList){
-    for(DataFieldDefinition key : vList){
+  private void initializeVariables(Set<DataFieldDefinition> vList) {
+    for (DataFieldDefinition key : vList) {
       Map<String, Object> attributes = new HashMap<String, Object>();
-      attributes.put("name",      key.getDataFieldId());
-      attributes.put("editable",  "true");
+      attributes.put("name", key.getDataFieldId());
+      attributes.put("editable", "true");
       attributes.put("mandatory", "false");
       attributes.put("visiable", "true");
-      if(key.getDataType().getType().equals(DataTypeDefinition.Type.EnumerationType)){				/*
-             * In case of multiple values, the component is select and different
-             * values are specified in the variable attributes, so that the bundle
-             * can retrieve them. Constant variables in UITask.java cannot be
-             * referenced since this class is currently not contained by a jar.
-             */
-            attributes.put("component", "select");
+      if (key.getDataType().getType().equals(DataTypeDefinition.Type.EnumerationType)) {
+        /*
+         * In case of multiple values, the component is select and different
+         * values are specified in the variable attributes, so that the bundle
+         * can retrieve them. Constant variables in UITask.java cannot be
+         * referenced since this class is currently not contained by a jar.
+         */
+        attributes.put("component", "select");
         attributes.put("possible-values",
                        (Collection<String>) ((EnumerationTypeDefinition) key.getDataType()
                                                                             .getValue()).getEnumerationValues());
-      }else{
+      } else {
         // The default component is text
-            attributes.put("component", "text");
+        attributes.put("component", "text");
       }
       // Include the variable in the variables list and in the bundle
-        this.variables.put(key.getDataFieldId(), attributes);
-        ((AutomaticFormBundle) this.bundle).addVariable(attributes);
+      this.variables.put(key.getDataFieldId(), attributes);
+      ((AutomaticFormBundle) this.bundle).addVariable(attributes);
     }
   }
 

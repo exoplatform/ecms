@@ -37,7 +37,7 @@ import org.exoplatform.services.log.Log;
 class PortletFutureCache extends FutureCache<WindowKey, MarkupFragment, PortletRenderContext>
 {
 
-  private static final int	DEFAULT_CACHE_SIZE = 5000;	// default to 5000 entries
+  private static final int DEFAULT_CACHE_SIZE = 5000;	// default to 5000 entries
 
 
   /** . */

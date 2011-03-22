@@ -148,7 +148,7 @@ public class PageEventListenerDelegate {
     List<Node> listNode = getListNodeByApplicationId(page, plugin);
     WCMConfigurationService wcmConfigurationService = WCMCoreUtils.getService(WCMConfigurationService.class);
     String portletName = wcmConfigurationService.getRuntimeContextParam(WCMConfigurationService.SCV_PORTLET);
-    List<String>	listApplicationId = new ArrayList<String>();
+    List<String> listApplicationId = new ArrayList<String>();
     listApplicationId.addAll(PublicationUtil.getListApplicationIdByPage(page, portletName));
     listApplicationId.addAll(PublicationUtil.getListApplicationIdByPage(page, portletName));
 

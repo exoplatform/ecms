@@ -17,7 +17,7 @@ import org.exoplatform.services.jcr.RepositoryService;
  * Created by The eXo Platform SARL
  * Author : Ly Dinh Quang
  *          quang.ly@exoplatform.com
- *					xxx5669@gmail.com
+ *          xxx5669@gmail.com
  * Dec 27, 2008
  */
 public class WorkflowMoveNodeAction {

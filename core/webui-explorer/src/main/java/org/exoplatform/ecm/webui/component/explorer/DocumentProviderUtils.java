@@ -72,11 +72,16 @@ public class DocumentProviderUtils {
   public List<Node> getItemsBySourceType(int source, UIJCRExplorer uiExplorer) throws Exception {
     List<Node> ret = new ArrayList<Node>();
     switch (source) {
-      case CURRENT_NODE_ITEMS : return getCurrentNodeChildren(uiExplorer);
-      case FAVOURITE_ITEMS		: return getFavouriteNodeList(uiExplorer);
-      case TRASH_ITEMS				: return getTrashNodeList(uiExplorer);
-      case OWNED_BY_USER_ITEMS: return getOwnedByUserNodeList(uiExplorer);
-      case HIDDEN_ITEMS				: return getHiddenNodeList(uiExplorer);
+    case CURRENT_NODE_ITEMS:
+      return getCurrentNodeChildren(uiExplorer);
+    case FAVOURITE_ITEMS:
+      return getFavouriteNodeList(uiExplorer);
+    case TRASH_ITEMS:
+      return getTrashNodeList(uiExplorer);
+    case OWNED_BY_USER_ITEMS:
+      return getOwnedByUserNodeList(uiExplorer);
+    case HIDDEN_ITEMS:
+      return getHiddenNodeList(uiExplorer);
     }
     return ret;
   }
@@ -124,7 +129,7 @@ public class DocumentProviderUtils {
     List<Node> ret = new ArrayList<Node>();
     boolean byUser = uiExplorer.getPreference().isShowItemsByUser();
 
-    StringBuilder queryString	= new StringBuilder("SELECT * FROM " + Utils.EXO_HIDDENABLE);
+    StringBuilder queryString = new StringBuilder("SELECT * FROM " + Utils.EXO_HIDDENABLE);
 
     if (byUser) {
       queryString.append(" WHERE CONTAINS(").
@@ -167,13 +172,13 @@ public class DocumentProviderUtils {
     List<Node> ret = new ArrayList<Node>();
 
     Session session = uiExplorer.getSession();
-    StringBuilder queryString	= new StringBuilder("SELECT * FROM ").append(Utils.NT_BASE);
+    StringBuilder queryString = new StringBuilder("SELECT * FROM ").append(Utils.NT_BASE);
 
-      queryString.append(" WHERE CONTAINS(").
-                  append(Utils.EXO_OWNER).
-                  append(",'").
-                  append(uiExplorer.getSession().getUserID()).
-                  append("')");
+    queryString.append(" WHERE CONTAINS(")
+               .append(Utils.EXO_OWNER)
+               .append(",'")
+               .append(uiExplorer.getSession().getUserID())
+               .append("')");
 
     QueryManager queryManager = session.getWorkspace().getQueryManager();
     Query query = queryManager.createQuery(queryString.toString(), Query.SQL);
@@ -184,8 +189,10 @@ public class DocumentProviderUtils {
     Set<Node> set = new TreeSet<Node>(new NodeComparator());
     while (iter.hasNext()) {
       node = iter.nextNode();
-      if (node.getName().equals(Utils.JCR_CONTENT)) continue;
-      if (node.isNodeType(Utils.EXO_RESTORELOCATION)) continue;
+      if (node.getName().equals(Utils.JCR_CONTENT))
+        continue;
+      if (node.isNodeType(Utils.EXO_RESTORELOCATION))
+        continue;
       if (node.isNodeType(Utils.NT_RESOURCE))
         node = node.getParent();
       if (!set.contains(node)) {

@@ -70,19 +70,23 @@ import org.exoplatform.webui.form.UIFormStringInput;
 )
 public class UISelectRestorePath extends UIForm implements UIPopupComponent, UISelectable {
 
-  final static public String FIELD_PATH = "PathNode";
-  final static public String FORM_INPUT = "formInput";
-  final static public String POPUP_PATH = "UIPopupPathFoRestore";
-  final static public String FORM_MESSAGE = "UIFormMessage";
+  final static public String FIELD_PATH                  = "PathNode";
 
-  final static public String CHOOSE_PATH_TO_RESTORE_NODE =
-                                "ChooseTagToRestoreNode";
+  final static public String FORM_INPUT                  = "formInput";
 
-  private final static Log 	LOG = ExoLogger.getLogger(UISelectRestorePath.class);
+  final static public String POPUP_PATH                  = "UIPopupPathFoRestore";
 
-  private Node trashHomeNode;
-  private String repository;
-  private String srcPath;
+  final static public String FORM_MESSAGE                = "UIFormMessage";
+
+  final static public String CHOOSE_PATH_TO_RESTORE_NODE = "ChooseTagToRestoreNode";
+
+  private final static Log   LOG                         = ExoLogger.getLogger(UISelectRestorePath.class);
+
+  private Node               trashHomeNode;
+
+  private String             repository;
+
+  private String             srcPath;
 
   public Node getTrashHomeNode() { return trashHomeNode;}
   public void setTrashHomeNode(Node trashHomeNode) {

@@ -61,43 +61,43 @@ import org.exoplatform.webui.form.UIFormStringInput;
 public class UISearchPageLayoutManager extends UIForm  implements UISelectable {
 
   /** The Constant PORTLET_NAME. */
-  public static final String	PORTLET_NAME												= "WCM Advance Search".intern();
+  public static final String PORTLET_NAME                       = "WCM Advance Search".intern();
 
   /** The Constant SEARCH_PAGE_LAYOUT_CATEGORY. */
-  public static final String	SEARCH_PAGE_LAYOUT_CATEGORY					= "search-page-layout".intern();
+  public static final String SEARCH_PAGE_LAYOUT_CATEGORY        = "search-page-layout".intern();
 
   /** The Constant SEARCH_PAGE_LAYOUT_SELECTOR. */
-  public static final String	SEARCH_PAGE_LAYOUT_SELECTOR					= "searchPageLayoutSelector".intern();
+  public static final String SEARCH_PAGE_LAYOUT_SELECTOR        = "searchPageLayoutSelector".intern();
 
   /** The Constant SEARCH_FORM_TEMPLATE_CATEGORY. */
-  public static final String	SEARCH_FORM_TEMPLATE_CATEGORY				= "search-form".intern();
+  public static final String SEARCH_FORM_TEMPLATE_CATEGORY      = "search-form".intern();
 
   /** The Constant SEARCH_PAGINATOR_TEMPLATE_CATEGORY. */
-  public static final String	SEARCH_PAGINATOR_TEMPLATE_CATEGORY	= "search-paginator";
+  public static final String SEARCH_PAGINATOR_TEMPLATE_CATEGORY = "search-paginator";
 
   /** The Constant SEARCH_RESULT_TEMPLATE_CATEGORY. */
-  public static final String	SEARCH_RESULT_TEMPLATE_CATEGORY			= "search-result";
+  public static final String SEARCH_RESULT_TEMPLATE_CATEGORY    = "search-result";
 
   /** The Constant SEARCH_FORM_TEMPLATE_SELECTOR. */
-  public static final String	SEARCH_FORM_TEMPLATE_SELECTOR				= "searchFormSelector";
+  public static final String SEARCH_FORM_TEMPLATE_SELECTOR      = "searchFormSelector";
 
   /** The Constant SEARCH_PAGINATOR_TEMPLATE_SELECTOR. */
-  public static final String	SEARCH_PAGINATOR_TEMPLATE_SELECTOR	= "searchPaginatorSelector";
+  public static final String SEARCH_PAGINATOR_TEMPLATE_SELECTOR = "searchPaginatorSelector";
 
   /** The Constant SEARCH_RESULT_TEMPLATE_SELECTOR. */
-  public static final String	SEARCH_RESULT_TEMPLATE_SELECTOR			= "searchResultSelector";
+  public static final String SEARCH_RESULT_TEMPLATE_SELECTOR    = "searchResultSelector";
 
   /** The Constant ITEMS_PER_PAGE_SELECTOR. */
-  public final static String	ITEMS_PER_PAGE_SELECTOR							= "itemsPerPageSelector";
+  public final static String ITEMS_PER_PAGE_SELECTOR            = "itemsPerPageSelector";
 
   /** The Constant BASE_PATH_INPUT. */
-  public final static String BASE_PATH_INPUT                 = "searchResultBasePathInput";
+  public final static String BASE_PATH_INPUT                    = "searchResultBasePathInput";
 
   /** The Constant BASE_PATH_SELECTOR_POPUP_WINDOW. */
-  public final static String BASE_PATH_SELECTOR_POPUP_WINDOW = "searchResultBasePathPopupWindow";
+  public final static String BASE_PATH_SELECTOR_POPUP_WINDOW    = "searchResultBasePathPopupWindow";
 
   /** The Constant BASE_PATH_INPUT_SET_ACTION. */
-  public final static String BASE_PATH_INPUT_SET_ACTION      = "searchResultBasePathInputSetAction";
+  public final static String BASE_PATH_INPUT_SET_ACTION         = "searchResultBasePathInputSetAction";
 
   /** The popup id. */
   private String popupId;
@@ -129,38 +129,38 @@ public class UISearchPageLayoutManager extends UIForm  implements UISelectable {
                                                             null);
     String searchResultTemplate = portletPreferences.getValue(UIWCMSearchPortlet.SEARCH_RESULT_TEMPLATE_PATH,
                                                               null);
-    String searchPaginatorTemplate = portletPreferences.getValue(	UIWCMSearchPortlet.SEARCH_PAGINATOR_TEMPLATE_PATH,
-                                                                  null);
+    String searchPaginatorTemplate = portletPreferences.getValue(UIWCMSearchPortlet.SEARCH_PAGINATOR_TEMPLATE_PATH,
+                                                                 null);
     String searchPageLayoutTemplate = portletPreferences.getValue(UIWCMSearchPortlet.SEARCH_PAGE_LAYOUT_TEMPLATE_PATH,
                                                                   null);
-    List<SelectItemOption<String>> searchFormTemplateList = createTemplateList(	PORTLET_NAME,
-                                                                                SEARCH_FORM_TEMPLATE_CATEGORY);
-    List<SelectItemOption<String>> searchResultTemplateList = createTemplateList(	PORTLET_NAME,
-                                                                                  SEARCH_RESULT_TEMPLATE_CATEGORY);
+    List<SelectItemOption<String>> searchFormTemplateList = createTemplateList(PORTLET_NAME,
+                                                                               SEARCH_FORM_TEMPLATE_CATEGORY);
+    List<SelectItemOption<String>> searchResultTemplateList = createTemplateList(PORTLET_NAME,
+                                                                                 SEARCH_RESULT_TEMPLATE_CATEGORY);
     List<SelectItemOption<String>> searchPaginatorTemplateList = createTemplateList(PORTLET_NAME,
                                                                                     SEARCH_PAGINATOR_TEMPLATE_CATEGORY);
-    List<SelectItemOption<String>> searchPageLayoutTemplateList = createTemplateList(	PORTLET_NAME,
-                                                                                      SEARCH_PAGE_LAYOUT_CATEGORY);
+    List<SelectItemOption<String>> searchPageLayoutTemplateList = createTemplateList(PORTLET_NAME,
+                                                                                     SEARCH_PAGE_LAYOUT_CATEGORY);
     List<SelectItemOption<String>> itemsPerPageList = new ArrayList<SelectItemOption<String>>();
     itemsPerPageList.add(new SelectItemOption<String>("5", "5"));
     itemsPerPageList.add(new SelectItemOption<String>("10", "10"));
     itemsPerPageList.add(new SelectItemOption<String>("20", "20"));
 
-    UIFormSelectBox itemsPerPageSelector = new UIFormSelectBox(	ITEMS_PER_PAGE_SELECTOR,
-                                                                ITEMS_PER_PAGE_SELECTOR,
-                                                                itemsPerPageList);
-    UIFormSelectBox searchFormTemplateSelector = new UIFormSelectBox(	SEARCH_FORM_TEMPLATE_SELECTOR,
-                                                                      SEARCH_FORM_TEMPLATE_SELECTOR,
-                                                                      searchFormTemplateList);
-    UIFormSelectBox searchResultTemplateSelector = new UIFormSelectBox(	SEARCH_RESULT_TEMPLATE_SELECTOR,
-                                                                        SEARCH_RESULT_TEMPLATE_SELECTOR,
-                                                                        searchResultTemplateList);
+    UIFormSelectBox itemsPerPageSelector = new UIFormSelectBox(ITEMS_PER_PAGE_SELECTOR,
+                                                               ITEMS_PER_PAGE_SELECTOR,
+                                                               itemsPerPageList);
+    UIFormSelectBox searchFormTemplateSelector = new UIFormSelectBox(SEARCH_FORM_TEMPLATE_SELECTOR,
+                                                                     SEARCH_FORM_TEMPLATE_SELECTOR,
+                                                                     searchFormTemplateList);
+    UIFormSelectBox searchResultTemplateSelector = new UIFormSelectBox(SEARCH_RESULT_TEMPLATE_SELECTOR,
+                                                                       SEARCH_RESULT_TEMPLATE_SELECTOR,
+                                                                       searchResultTemplateList);
     UIFormSelectBox searchPaginatorTemplateSelector = new UIFormSelectBox(SEARCH_PAGINATOR_TEMPLATE_SELECTOR,
                                                                           SEARCH_PAGINATOR_TEMPLATE_SELECTOR,
                                                                           searchPaginatorTemplateList);
-    UIFormSelectBox searchPageLayoutTemplateSelector = new UIFormSelectBox(	SEARCH_PAGE_LAYOUT_SELECTOR,
-                                                                            SEARCH_PAGE_LAYOUT_SELECTOR,
-                                                                            searchPageLayoutTemplateList);
+    UIFormSelectBox searchPageLayoutTemplateSelector = new UIFormSelectBox(SEARCH_PAGE_LAYOUT_SELECTOR,
+                                                                           SEARCH_PAGE_LAYOUT_SELECTOR,
+                                                                           searchPageLayoutTemplateList);
 
     String preferenceBasePath = portletPreferences.getValue(UIWCMSearchPortlet.BASE_PATH, null);
     UIFormInputSetWithAction targetPathFormInputSet = new UIFormInputSetWithAction(BASE_PATH_INPUT_SET_ACTION);

@@ -54,7 +54,6 @@ public class LocalizationConnector implements ResourceContainer {
    */
   private static String cleanString(String str) {
     Transliterator accentsconverter = Transliterator.getInstance("Latin; NFD; [:Nonspacing Mark:] Remove; NFC;");
-    //	      Transliterator accentsconverter = Transliterator.getInstance("NFD;  [:M:] Remove; NFC");
     str = accentsconverter.transliterate(str);
     //the character ? seems to not be changed to d by the transliterate function
     StringBuffer cleanedStr = new StringBuffer(str.trim());

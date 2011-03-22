@@ -59,50 +59,65 @@ import org.picocontainer.Startable;
  * Nov 16, 2009
  * 10:30:24 AM
  */
-public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable  {
+public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable {
 
-  private static final String USER_FOLKSONOMY_ALIAS = "userPrivateFolksonomy".intern();
-  private static final String GROUP_FOLKSONOMY_ALIAS = "groupFolksonomy".intern();
-  private static final String GROUPS_ALIAS = "groupsPath".intern();
-  private static final String TAG_STYLE_ALIAS = "exoTagStylePath".intern();
-  private static final String PUBLIC_TAG_NODE_PATH = "exoPublicTagNode";
-  private static final String EXO_TRASH_FOLDER = "exo:trashFolder";
-  private static final String EXO_HIDDENABLE = "exo:hiddenable";
+  private static final String       USER_FOLKSONOMY_ALIAS  = "userPrivateFolksonomy".intern();
 
-  private static final Log LOG = ExoLogger.getLogger(NewFolksonomyService.class);
+  private static final String       GROUP_FOLKSONOMY_ALIAS = "groupFolksonomy".intern();
 
-  private NodeHierarchyCreator nodeHierarchyCreator;
-  private LinkManager linkManager;
-  private NodeFinder nodeFinder;
-  private InitParams initParams_;
-  private SessionProvider sessionProvider;
-  private List<TagStylePlugin> plugin_ = new ArrayList<TagStylePlugin>();
-  private List<TagPermissionPlugin> tagPermissionPlugin_ = new ArrayList<TagPermissionPlugin>();
-  private Set<String> tagPermissionList = new HashSet<String>();
-  private Map<String, String> sitesTagPath = new HashMap<String, String>();
+  private static final String       GROUPS_ALIAS           = "groupsPath".intern();
 
-  public NewFolksonomyServiceImpl(InitParams initParams, NodeHierarchyCreator nodeHierarchyCreator,
-      LinkManager linkManager, NodeFinder nodeFinder) throws Exception {
+  private static final String       TAG_STYLE_ALIAS        = "exoTagStylePath".intern();
+
+  private static final String       PUBLIC_TAG_NODE_PATH   = "exoPublicTagNode";
+
+  private static final String       EXO_TRASH_FOLDER       = "exo:trashFolder";
+
+  private static final String       EXO_HIDDENABLE         = "exo:hiddenable";
+
+  private static final Log          LOG                    = ExoLogger.getLogger(NewFolksonomyService.class);
+
+  private NodeHierarchyCreator      nodeHierarchyCreator;
+
+  private LinkManager               linkManager;
+
+  private NodeFinder                nodeFinder;
+
+  private InitParams                initParams_;
+
+  private SessionProvider           sessionProvider;
+
+  private List<TagStylePlugin>      plugin_                = new ArrayList<TagStylePlugin>();
+
+  private List<TagPermissionPlugin> tagPermissionPlugin_   = new ArrayList<TagPermissionPlugin>();
+
+  private Set<String>               tagPermissionList      = new HashSet<String>();
+
+  private Map<String, String>       sitesTagPath           = new HashMap<String, String>();
+
+  public NewFolksonomyServiceImpl(InitParams initParams,
+                                  NodeHierarchyCreator nodeHierarchyCreator,
+                                  LinkManager linkManager,
+                                  NodeFinder nodeFinder) throws Exception {
     this.nodeHierarchyCreator = nodeHierarchyCreator;
     this.linkManager = linkManager;
     this.nodeFinder = nodeFinder;
     this.initParams_ = initParams;
 
     ExoContainer myContainer = ExoContainerContext.getCurrentContainer();
-    SessionProviderService sessionProviderService
-        =	(SessionProviderService) myContainer.getComponentInstanceOfType(SessionProviderService.class);
+    SessionProviderService sessionProviderService = (SessionProviderService) myContainer.getComponentInstanceOfType(SessionProviderService.class);
     this.sessionProvider = sessionProviderService.getSystemSessionProvider(null);
   }
 
   /**
-   * Implement method in Startable
-   * Call init() method
+   * Implement method in Startable Call init() method
+   *
    * @see {@link #init()}
    */
   public void start() {
     try {
-      init() ;
-    }catch (Exception e) {
+      init();
+    } catch (Exception e) {
       LOG.error("===>>>>Exception when init FolksonomySerice", e);
     }
   }
@@ -110,7 +125,8 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
   /**
    * Implement method in Startable
    */
-  public void stop() { }
+  public void stop() {
+  }
 
   /**
    * {@inheritDoc}
@@ -124,14 +140,14 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
     Node targetNode = getTargetNode(documentNode);
     for (String tag : tagsName) {
       try {
-        //find tag node
-        Node tagNode = userFolksonomyNode.hasNode(tag) ?
-            userFolksonomyNode.getNode(tag) : userFolksonomyNode.addNode(tag);
-        //add symlink and total
+        // find tag node
+        Node tagNode = userFolksonomyNode.hasNode(tag) ? userFolksonomyNode.getNode(tag)
+                                                      : userFolksonomyNode.addNode(tag);
+        // add symlink and total
         if (targetNode != null && !existSymlink(tagNode, targetNode)) {
           linkManager.createLink(tagNode, targetNode);
-          long total = tagNode.hasProperty(EXO_TOTAL) ?
-              tagNode.getProperty(EXO_TOTAL).getLong() : 0;
+          long total = tagNode.hasProperty(EXO_TOTAL) ? tagNode.getProperty(EXO_TOTAL).getLong()
+                                                     : 0;
           tagNode.setProperty(EXO_TOTAL, total + 1);
           if (!tagNode.isNodeType(EXO_TAGGED))
             tagNode.addMixin(EXO_TAGGED);
@@ -160,14 +176,14 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
       Node groupFolksonomyNode = getGroupFolksonomyFolder(group, repository, workspace);
       for (String tag : tagsName) {
         try {
-          //find tag node
-          Node tagNode = groupFolksonomyNode.hasNode(tag) ?
-              groupFolksonomyNode.getNode(tag) : groupFolksonomyNode.addNode(tag);
-          //add symlink and total
+          // find tag node
+          Node tagNode = groupFolksonomyNode.hasNode(tag) ? groupFolksonomyNode.getNode(tag)
+                                                         : groupFolksonomyNode.addNode(tag);
+          // add symlink and total
           if (targetNode != null && !existSymlink(tagNode, targetNode)) {
             linkManager.createLink(tagNode, targetNode);
-            long total = tagNode.hasProperty(EXO_TOTAL) ?
-                tagNode.getProperty(EXO_TOTAL).getLong() : 0;
+            long total = tagNode.hasProperty(EXO_TOTAL) ? tagNode.getProperty(EXO_TOTAL).getLong()
+                                                       : 0;
             tagNode.setProperty(EXO_TOTAL, total + 1);
             if (!tagNode.isNodeType(EXO_TAGGED))
               tagNode.addMixin(EXO_TAGGED);
@@ -177,7 +193,8 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
           }
           groupFolksonomyNode.getSession().save();
         } catch (Exception e) {
-          LOG.error("can't add tag '" + tag + "' to node: " + targetNode.getPath() + " for group: " + group);
+          LOG.error("can't add tag '" + tag + "' to node: " + targetNode.getPath() + " for group: "
+              + group);
         }
       }
     }
@@ -195,14 +212,14 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
     Node targetNode = getTargetNode(documentNode);
     for (String tag : tagsName) {
       try {
-        //find tag node
-        Node tagNode = publicFolksonomyTreeNode.hasNode(tag) ?
-            publicFolksonomyTreeNode.getNode(tag) : publicFolksonomyTreeNode.addNode(tag);
-        //add symlink and total
+        // find tag node
+        Node tagNode = publicFolksonomyTreeNode.hasNode(tag) ? publicFolksonomyTreeNode.getNode(tag)
+                                                            : publicFolksonomyTreeNode.addNode(tag);
+        // add symlink and total
         if (targetNode != null && !existSymlink(tagNode, targetNode)) {
           linkManager.createLink(tagNode, targetNode);
-          long total = tagNode.hasProperty(EXO_TOTAL) ?
-              tagNode.getProperty(EXO_TOTAL).getLong() : 0;
+          long total = tagNode.hasProperty(EXO_TOTAL) ? tagNode.getProperty(EXO_TOTAL).getLong()
+                                                     : 0;
           tagNode.setProperty(EXO_TOTAL, total + 1);
           if (!tagNode.isNodeType(EXO_TAGGED))
             tagNode.addMixin(EXO_TAGGED);
@@ -212,7 +229,8 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
         }
         publicFolksonomyTreeNode.getSession().save();
       } catch (Exception e) {
-        LOG.error("can't add tag '" + tag + "' to node: " + targetNode.getPath() + " in public folksonomy tree!");
+        LOG.error("can't add tag '" + tag + "' to node: " + targetNode.getPath()
+            + " in public folksonomy tree!");
       }
     }
   }
@@ -230,7 +248,6 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
     }
     return targetNode;
   }
-
 
   /**
    * {@inheritDoc}
@@ -261,19 +278,19 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
     Node tagNode = getNode(repository, workspace, tagPath, sessionProvider);
     NodeIterator nodeIter = tagNode.getNodes();
 
-     while (nodeIter.hasNext()) {
-       Node node = nodeIter.nextNode();
-       if (linkManager.isLink(node)) {
-         Node targetNode = null;
-         try {
-           targetNode = linkManager.getTarget(node);
-         } catch (Exception e) {}
-         if (targetNode != null &&
-           !((Node)targetNode.getAncestor(1)).isNodeType(EXO_TRASH_FOLDER)) {
-               ret.add(targetNode);
-         }
-       }
-     }
+    while (nodeIter.hasNext()) {
+      Node node = nodeIter.nextNode();
+      if (linkManager.isLink(node)) {
+        Node targetNode = null;
+        try {
+          targetNode = linkManager.getTarget(node);
+        } catch (Exception e) {
+        }
+        if (targetNode != null && !((Node) targetNode.getAncestor(1)).isNodeType(EXO_TRASH_FOLDER)) {
+          ret.add(targetNode);
+        }
+      }
+    }
     return ret;
   }
 
@@ -281,33 +298,32 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
    * {@inheritDoc}
    */
   public List<Node> getAllGroupTags(String[] roles, String repository, String workspace) throws Exception {
-     Set<Node> tagSet = new TreeSet<Node>(new NodeComparator());
-     for (String group : roles) {
+    Set<Node> tagSet = new TreeSet<Node>(new NodeComparator());
+    for (String group : roles) {
       Node groupFolksonomyNode = getGroupFolksonomyFolder(group, repository, workspace);
       NodeIterator nodeIter = groupFolksonomyNode.getNodes();
       while (nodeIter.hasNext()) {
         Node tag = nodeIter.nextNode();
-        if (!((Node)tag.getAncestor(1)).isNodeType(EXO_TRASH_FOLDER)) {
+        if (!((Node) tag.getAncestor(1)).isNodeType(EXO_TRASH_FOLDER)) {
           tagSet.add(tag);
         }
       }
-     }
-     return new ArrayList<Node>(tagSet);
+    }
+    return new ArrayList<Node>(tagSet);
   }
 
   /**
    * {@inheritDoc}
    */
   public List<Node> getAllGroupTags(String role, String repository, String workspace) throws Exception {
-     List<Node> tagSet = new ArrayList<Node>();
+    List<Node> tagSet = new ArrayList<Node>();
     Node groupFolksonomyNode = getGroupFolksonomyFolder(role, repository, workspace);
     NodeIterator nodeIter = groupFolksonomyNode.getNodes();
     while (nodeIter.hasNext()) {
-        tagSet.add(nodeIter.nextNode());
+      tagSet.add(nodeIter.nextNode());
     }
-     return tagSet;
+    return tagSet;
   }
-
 
   /**
    * {@inheritDoc}
@@ -345,10 +361,10 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
     } catch (NullPointerException e) {
       String repositoryName = System.getProperty("gatein.tenant.repository.name");
       if (repositoryName != null) {
-       return repositoryName;
+        return repositoryName;
       } else {
-       LOG.error("Repository exception occurs:", e);
-       return null;
+        LOG.error("Repository exception occurs:", e);
+        return null;
       }
     }
   }
@@ -372,11 +388,12 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
 
   /**
    * Add new TagStylePlugin in plugin_
+   *
    * @param plugin
    */
   public void addTagStylePlugin(ComponentPlugin plugin) {
-    if(plugin instanceof TagStylePlugin) {
-      plugin_.add((TagStylePlugin)plugin) ;
+    if (plugin instanceof TagStylePlugin) {
+      plugin_.add((TagStylePlugin) plugin);
     }
   }
 
@@ -384,10 +401,10 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
    * {@inheritDoc}
    */
   public void init(String repository) throws Exception {
-    for(TagStylePlugin plugin : plugin_) {
-      try{
-        plugin.init(repository) ;
-      }catch(Exception e) {
+    for (TagStylePlugin plugin : plugin_) {
+      try {
+        plugin.init(repository);
+      } catch (Exception e) {
         LOG.error("can not init:", e);
       }
     }
@@ -395,27 +412,27 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
 
   /**
    * init all avaiable TagStylePlugin
+   *
    * @throws Exception
    */
   private void init() throws Exception {
-    for(TagStylePlugin plugin : plugin_) {
-      try{
-        plugin.init() ;
-      }catch(Exception e) {
+    for (TagStylePlugin plugin : plugin_) {
+      try {
+        plugin.init();
+      } catch (Exception e) {
         LOG.error("can not init tag style: ", e);
       }
     }
 
-    for(TagPermissionPlugin plugin : tagPermissionPlugin_) {
-      try{
+    for (TagPermissionPlugin plugin : tagPermissionPlugin_) {
+      try {
         tagPermissionList.addAll(plugin.initPermission());
-      }catch(Exception e) {
+      } catch (Exception e) {
         LOG.error("can not init tag permission: ", e);
       }
     }
 
   }
-
 
   /**
    * {@inheritDoc}
@@ -425,13 +442,12 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
     if (oldTagNode.getParent().hasNode(newTagName))
       throw new ItemExistsException("node " + newTagName + " has already existed!");
 
-    StringBuilder newPath = new StringBuilder(oldTagNode.getParent().getPath())
-                            .append('/').append(newTagName);
+    StringBuilder newPath = new StringBuilder(oldTagNode.getParent().getPath()).append('/')
+                                                                               .append(newTagName);
 
     ExoContainer myContainer = ExoContainerContext.getCurrentContainer();
-    RepositoryService repositoryService
-        = (RepositoryService) myContainer.getComponentInstanceOfType(RepositoryService.class);
-    ManageableRepository	manageableRepository = repositoryService.getCurrentRepository();
+    RepositoryService repositoryService = (RepositoryService) myContainer.getComponentInstanceOfType(RepositoryService.class);
+    ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
 
     Session session = sessionProvider.getSession(workspace, manageableRepository);
     session.move(tagPath, newPath.toString());
@@ -455,14 +471,14 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
   public void removeTagOfDocument(String tagPath, Node document, String repository, String workspace) throws Exception {
     Node tagNode = getNode(repository, workspace, tagPath);
     NodeIterator nodeIter = tagNode.getNodes();
-    while (nodeIter.hasNext())
-    {
+    while (nodeIter.hasNext()) {
       Node link = nodeIter.nextNode();
       if (linkManager.isLink(link)) {
         Node targetNode = null;
         try {
           targetNode = linkManager.getTarget(link);
-        } catch (RepositoryException e) {}
+        } catch (RepositoryException e) {
+        }
         if (document.isSame(targetNode)) {
           link.remove();
           long total = tagNode.getProperty(EXO_TOTAL).getLong();
@@ -496,8 +512,11 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
   /**
    * {@inheritDoc}
    */
-  public void addTagStyle(String styleName, String tagRange, String htmlStyle,
-      String repository, String workspace) throws Exception {
+  public void addTagStyle(String styleName,
+                          String tagRange,
+                          String htmlStyle,
+                          String repository,
+                          String workspace) throws Exception {
     String tagStylesPath = nodeHierarchyCreator.getJcrPath(TAG_STYLE_ALIAS);
     Node tagStylesNode = getNode(repository, workspace, tagStylesPath);
     Node styleNode = tagStylesNode.addNode(styleName, EXO_TAGSTYLE);
@@ -510,8 +529,11 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
   /**
    * {@inheritDoc}
    */
-  public void removeTagsOfNodeRecursively(Node node, String repository, String workspace,
-      String username, String groups) throws Exception {
+  public void removeTagsOfNodeRecursively(Node node,
+                                          String repository,
+                                          String workspace,
+                                          String username,
+                                          String groups) throws Exception {
     int[] scopes = new int[] { PRIVATE, PUBLIC, GROUP, SITE };
     Map<Integer, String> map = new HashMap<Integer, String>();
     map.put(PUBLIC, "");
@@ -520,9 +542,13 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
     map.put(SITE, "");
     for (int scope : scopes) {
       for (Node child : getAllNodes(node)) {
-        List<Node> tags = getLinkedTagsOfDocumentByScope(scope, map.get(scope), child, repository, workspace);
-          for (Node tag : tags)
-            removeTagOfDocument(tag.getPath(), child, repository, workspace);
+        List<Node> tags = getLinkedTagsOfDocumentByScope(scope,
+                                                         map.get(scope),
+                                                         child,
+                                                         repository,
+                                                         workspace);
+        for (Node tag : tags)
+          removeTagOfDocument(tag.getPath(), child, repository, workspace);
       }
     }
   }
@@ -552,7 +578,8 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
   private Node getGroupFolksonomyFolder(String group, String repository, String workspace) throws Exception {
     // code for running
     String groupsPath = nodeHierarchyCreator.getJcrPath(GROUPS_ALIAS);
-    //String folksonomyPath = nodeHierarchyCreator.getJcrPath(GROUP_FOLKSONOMY_ALIAS);
+    // String folksonomyPath =
+    // nodeHierarchyCreator.getJcrPath(GROUP_FOLKSONOMY_ALIAS);
     String folksonomyPath = "ApplicationData/Tags";
     Node groupsNode = getNode(repository, workspace, groupsPath);
     return groupsNode.getNode(group.substring(1)).getNode(folksonomyPath);
@@ -567,19 +594,20 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
 
   private Node getNode(String repository, String workspace, String path) throws Exception {
     ExoContainer myContainer = ExoContainerContext.getCurrentContainer();
-    RepositoryService repositoryService
-    = (RepositoryService) myContainer.getComponentInstanceOfType(RepositoryService.class);
-    ManageableRepository	manageableRepository = repositoryService.getCurrentRepository();
+    RepositoryService repositoryService = (RepositoryService) myContainer.getComponentInstanceOfType(RepositoryService.class);
+    ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
 
     return (Node) sessionProvider.getSession(workspace, manageableRepository).getItem(path);
   }
 
-  private Node getNode(String repository, String workspace, String path, SessionProvider sessionProvider) throws Exception {
+  private Node getNode(String repository,
+                       String workspace,
+                       String path,
+                       SessionProvider sessionProvider) throws Exception {
     ExoContainer myContainer = ExoContainerContext.getCurrentContainer();
 
-    RepositoryService repositoryService
-    = (RepositoryService) myContainer.getComponentInstanceOfType(RepositoryService.class);
-    ManageableRepository	manageableRepository = repositoryService.getCurrentRepository();
+    RepositoryService repositoryService = (RepositoryService) myContainer.getComponentInstanceOfType(RepositoryService.class);
+    ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
 
     return (Node) sessionProvider.getSession(workspace, manageableRepository).getItem(path);
   }
@@ -591,8 +619,9 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
       Node pointTo = null;
       try {
         if (linkManager.isLink(link))
-        pointTo = linkManager.getTarget(link);
-      } catch (Exception e) {}
+          pointTo = linkManager.getTarget(link);
+      } catch (Exception e) {
+      }
       if (targetNode != null && targetNode.isSame(pointTo))
         return true;
     }
@@ -612,20 +641,18 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
     }
   }
 
-  public List<Node> getLinkedTagsOfDocument(Node documentNode,
-      String repository, String workspace) throws Exception {
+  public List<Node> getLinkedTagsOfDocument(Node documentNode, String repository, String workspace) throws Exception {
 
     Set<Node> ret = new HashSet<Node>();
     // prepare query
-    StringBuilder queryStr = new StringBuilder("SELECT * FROM ")
-                                      .append(EXO_TAGGED);
+    StringBuilder queryStr = new StringBuilder("SELECT * FROM ").append(EXO_TAGGED);
     ExoContainer myContainer = ExoContainerContext.getCurrentContainer();
-    RepositoryService repositoryService
-    = (RepositoryService) myContainer.getComponentInstanceOfType(RepositoryService.class);
-    ManageableRepository	manageableRepository = repositoryService.getCurrentRepository();
+    RepositoryService repositoryService = (RepositoryService) myContainer.getComponentInstanceOfType(RepositoryService.class);
+    ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
 
-    QueryManager queryManager =
-      sessionProvider.getSession(workspace, manageableRepository).getWorkspace().getQueryManager();
+    QueryManager queryManager = sessionProvider.getSession(workspace, manageableRepository)
+                                               .getWorkspace()
+                                               .getQueryManager();
     Query query = queryManager.createQuery(queryStr.toString(), Query.SQL);
     QueryResult queryResult = query.execute();
     NodeIterator nodeIter = queryResult.getNodes();
@@ -637,8 +664,11 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
     return new ArrayList<Node>(ret);
   }
 
-  public List<Node> getLinkedTagsOfDocumentByScope(int scope, String value,
-      Node documentNode, String repository, String workspace) throws Exception {
+  public List<Node> getLinkedTagsOfDocumentByScope(int scope,
+                                                   String value,
+                                                   Node documentNode,
+                                                   String repository,
+                                                   String workspace) throws Exception {
 
     List<Node> ret = new ArrayList<Node>();
     if (scope == PRIVATE) {
@@ -665,7 +695,8 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
     else if (scope == GROUP) {
       String[] roles = value.split(";");
       for (String group : roles) {
-        if (group.length() < 1) continue;
+        if (group.length() < 1)
+          continue;
         Node groupFolksonomyNode = getGroupFolksonomyFolder(group, repository, workspace);
         NodeIterator iter = groupFolksonomyNode.getNodes();
         while (iter.hasNext()) {
@@ -680,11 +711,12 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
 
   /**
    * Add new users or groups into tagPermissionPlugin_
+   *
    * @param usersOrGroups
    */
   public void addTagPermissionPlugin(ComponentPlugin plugin) {
     if (plugin instanceof TagPermissionPlugin)
-      tagPermissionPlugin_.add((TagPermissionPlugin)plugin);
+      tagPermissionPlugin_.add((TagPermissionPlugin) plugin);
   }
 
   /**
@@ -731,33 +763,34 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
   /**
    * {@inheritDoc}
    */
-  public List<String> getAllTagNames(String repository, String workspace,
-      int scope, String value) throws Exception {
+  public List<String> getAllTagNames(String repository, String workspace, int scope, String value) throws Exception {
     List<String> ret = new ArrayList<String>();
     List<Node> tags = new ArrayList<Node>();
-    switch(scope) {
-      case PUBLIC	 : tags = getAllPublicTags(value, repository, workspace);
+    switch (scope) {
+    case PUBLIC:
+      tags = getAllPublicTags(value, repository, workspace);
       break;
-      case PRIVATE : tags = getAllPrivateTags(value, repository, workspace);
+    case PRIVATE:
+      tags = getAllPrivateTags(value, repository, workspace);
       break;
-      case GROUP 	 : tags = value.indexOf(";") >= 0 ? getAllGroupTags(value.split(";"), repository, workspace) :
-                                                      getAllGroupTags(value, repository, workspace);
+    case GROUP:
+      tags = value.indexOf(";") >= 0 ? getAllGroupTags(value.split(";"), repository, workspace)
+                                    : getAllGroupTags(value, repository, workspace);
       break;
-      case SITE		 : tags = getAllSiteTags(value, repository, workspace);
+    case SITE:
+      tags = getAllSiteTags(value, repository, workspace);
     }
     for (Node tag : tags)
-       ret.add(tag.getName());
+      ret.add(tag.getName());
     Collections.sort(ret);
     return ret;
   }
-
 
   private void createSiteTagPath() throws Exception {
     if (sitesTagPath.get(getRepoName()) == null) {
       // init path to site tags
       ExoContainer myContainer = ExoContainerContext.getCurrentContainer();
-      RepositoryService repositoryService = (RepositoryService) myContainer.
-          getComponentInstanceOfType(RepositoryService.class);
+      RepositoryService repositoryService = (RepositoryService) myContainer.getComponentInstanceOfType(RepositoryService.class);
       ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
 
       Session session = sessionProvider.getSession(initParams_.getValueParam("workspace")

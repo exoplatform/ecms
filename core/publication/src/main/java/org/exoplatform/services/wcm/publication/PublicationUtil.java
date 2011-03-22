@@ -173,25 +173,20 @@ public class PublicationUtil {
    * @param removingApplicationIds the removing application ids
    */
   @SuppressWarnings("unchecked")
-  private static void removedAppInstancesInContainerByNames(
-      Container container, List<String> removingApplicationIds) {
+  private static void removedAppInstancesInContainerByNames(Container container,
+                                                            List<String> removingApplicationIds) {
     ArrayList<Object> childrenTmp = new ArrayList<Object>();
-//    ArrayList<Object> chidren = container.getChildren();
     ArrayList<Object> chidren = null;
-    if(chidren == null) return ;
-    for(Object object: chidren) {
-      if(object instanceof Application) {
-//        Application application = Application.class.cast(object);
-//        if(!removingApplicationIds.contains(application.getInstanceId())) {
-//        	childrenTmp.add(object);
-//        }
-      } else if(object instanceof Container) {
+    if (chidren == null)
+      return;
+    for (Object object : chidren) {
+      if (object instanceof Application) {
+      } else if (object instanceof Container) {
         Container child = Container.class.cast(object);
-        removedAppInstancesInContainerByNames(child,removingApplicationIds);
+        removedAppInstancesInContainerByNames(child, removingApplicationIds);
         childrenTmp.add(child);
       }
     }
-//    container.setChildren(childrenTmp);
   }
 
   /**

@@ -93,11 +93,10 @@ public class TrashServiceImpl implements TrashService {
       node.setProperty(RESTORE_WORKSPACE, nodeWorkspaceName);
       nodeSession.save();
 
-      ManageableRepository manageableRepository
-      = repositoryService.getRepository(repository);
-      Session trashSession = sessionProvider.getSession(trashWorkspace,
-          manageableRepository);
-      String actualTrashPath = trashPath	+ (trashPath.endsWith("/") ? "" : "/") + fixRestorePath(nodeName);
+      ManageableRepository manageableRepository = repositoryService.getRepository(repository);
+      Session trashSession = sessionProvider.getSession(trashWorkspace, manageableRepository);
+      String actualTrashPath = trashPath + (trashPath.endsWith("/") ? "" : "/")
+          + fixRestorePath(nodeName);
       if (trashSession.getWorkspace().getName().equals(
           nodeSession.getWorkspace().getName())) {
         trashSession.getWorkspace().move(node.getPath(),

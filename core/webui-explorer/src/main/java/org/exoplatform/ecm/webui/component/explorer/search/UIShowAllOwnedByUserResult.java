@@ -63,12 +63,11 @@ import org.exoplatform.webui.event.EventListener;
  * Oct 23, 2009
  * 9:44:59 AM
  */
-@ComponentConfig(
-    template = "app:/groovy/webui/component/explorer/search/UIShowAllOwnedByUserResult.gtmpl",
-    events = {	@EventConfig(listeners = UIShowAllOwnedByUserResult.ViewActionListener.class),
-          @EventConfig(listeners = UIShowAllOwnedByUserResult.SortASCActionListener.class),
-          @EventConfig(listeners = UIShowAllOwnedByUserResult.SortDESCActionListener.class)})
-
+@ComponentConfig(template = "app:/groovy/webui/component/explorer/search/UIShowAllOwnedByUserResult.gtmpl",
+                 events = {
+    @EventConfig(listeners = UIShowAllOwnedByUserResult.ViewActionListener.class),
+    @EventConfig(listeners = UIShowAllOwnedByUserResult.SortASCActionListener.class),
+    @EventConfig(listeners = UIShowAllOwnedByUserResult.SortDESCActionListener.class) })
 public class UIShowAllOwnedByUserResult extends UIComponentDecorator {
 
   private static final Log LOG  = ExoLogger.getLogger("explorer.search.UIShowAllOwnedByUserResult");
@@ -112,13 +111,12 @@ public class UIShowAllOwnedByUserResult extends UIComponentDecorator {
     UIJCRExplorer uiExplorer = getAncestorOfType(UIJCRExplorer.class);
     Session session = uiExplorer.getSession();
     String userName = session.getUserID();
-    StringBuilder queryString	= new StringBuilder("SELECT * FROM ").
-                        append(Utils.NT_BASE);
-      queryString.append(" WHERE CONTAINS(").
-                  append(Utils.EXO_OWNER).
-                  append(",'").
-                  append(userName).
-                  append("')");
+    StringBuilder queryString = new StringBuilder("SELECT * FROM ").append(Utils.NT_BASE);
+    queryString.append(" WHERE CONTAINS(")
+               .append(Utils.EXO_OWNER)
+               .append(",'")
+               .append(userName)
+               .append("')");
     QueryManager queryManager = session.getWorkspace().getQueryManager();
     Query query = queryManager.createQuery(queryString.toString(), Query.SQL);
     QueryResult queryResult = query.execute();

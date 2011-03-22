@@ -74,25 +74,17 @@ import org.exoplatform.webui.event.EventListener;
  * The Class UICLVPresentation.
  */
 @SuppressWarnings("deprecation")
-@ComponentConfigs({
-  @ComponentConfig(
-    lifecycle = Lifecycle.class,
-    events = {
-      @EventConfig(listeners = UICLVPresentation.RefreshActionListener.class),
-      @EventConfig(listeners = UICLVPresentation.DeleteContentActionListener.class)
-    }
-  ),
-  @ComponentConfig(
-    type = UICustomizeablePaginator.class,
-    events = @EventConfig(listeners = UICustomizeablePaginator.ShowPageActionListener.class)
-  )
-})
-
+@ComponentConfigs( {
+    @ComponentConfig(lifecycle = Lifecycle.class, events = {
+        @EventConfig(listeners = UICLVPresentation.RefreshActionListener.class),
+        @EventConfig(listeners = UICLVPresentation.DeleteContentActionListener.class) }),
+    @ComponentConfig(type = UICustomizeablePaginator.class, 
+                     events = @EventConfig(listeners = UICustomizeablePaginator.ShowPageActionListener.class)) })
 public class UICLVPresentation extends UIContainer {
 
-  public static final String defaultScvParam = "content-id";
+  public static final String       defaultScvParam = "content-id";
 
-  private static final Log LOG = ExoLogger.getLogger(UICLVPresentation.class);
+  private static final Log         LOG             = ExoLogger.getLogger(UICLVPresentation.class);
 
   /** The template path. */
   private String                   templatePath;
@@ -104,11 +96,10 @@ public class UICLVPresentation extends UIContainer {
   private UICustomizeablePaginator uiPaginator;
 
   /** The date formatter. */
-  private DateFormat               dateFormatter = null;
+  private DateFormat               dateFormatter   = null;
 
   /** Generic TagStyles configurable in ECM Administration */
-  private Map<String, String> tagStyles = null;
-
+  private Map<String, String>      tagStyles       = null;
 
   /**
    * Instantiates a new uICLV presentation.
@@ -118,7 +109,7 @@ public class UICLVPresentation extends UIContainer {
 
   /**
    * Inits the.
-   *
+   * 
    * @param resourceResolver the resource resolver
    * @param dataPageList the data page list
    * @throws Exception the exception
@@ -135,7 +126,9 @@ public class UICLVPresentation extends UIContainer {
     uiPaginator.setResourceResolver(resourceResolver);
     uiPaginator.setPageList(dataPageList);
     Locale locale = Util.getPortalRequestContext().getLocale();
-    dateFormatter = SimpleDateFormat.getDateTimeInstance(SimpleDateFormat.MEDIUM, SimpleDateFormat.MEDIUM, locale);
+    dateFormatter = SimpleDateFormat.getDateTimeInstance(SimpleDateFormat.MEDIUM,
+                                                         SimpleDateFormat.MEDIUM,
+                                                         locale);
   }
 
   public List<CategoryBean> getCategories() throws Exception {
@@ -151,7 +144,7 @@ public class UICLVPresentation extends UIContainer {
   }
 
   public List<CategoryBean> getCategories(String fullPath, String primaryType, int depth) throws Exception {
-    if (fullPath==null || fullPath.length()==0) {
+    if (fullPath == null || fullPath.length() == 0) {
       return null;
     }
     WCMComposer wcmComposer = getApplicationComponent(WCMComposer.class);
@@ -160,12 +153,14 @@ public class UICLVPresentation extends UIContainer {
 
     String orderType = Utils.getPortletPreference(UICLVPortlet.PREFERENCE_ORDER_TYPE);
     String orderBy = Utils.getPortletPreference(UICLVPortlet.PREFERENCE_ORDER_BY);
-//    orderType = "ASC";
-//    orderBy = "jcr:path";
+    // orderType = "ASC";
+    // orderBy = "jcr:path";
     filters.put(WCMComposer.FILTER_ORDER_BY, orderBy);
     filters.put(WCMComposer.FILTER_ORDER_TYPE, orderType);
-    filters.put(WCMComposer.FILTER_LANGUAGE, Util.getPortalRequestContext().getLocale().getLanguage());
-//    filters.put(WCMComposer.FILTER_RECURSIVE, "true");
+    filters.put(WCMComposer.FILTER_LANGUAGE, Util.getPortalRequestContext()
+                                                 .getLocale()
+                                                 .getLanguage());
+    // filters.put(WCMComposer.FILTER_RECURSIVE, "true");
     filters.put(WCMComposer.FILTER_PRIMARY_TYPE, primaryType);
 
     String clvBy = Utils.getPortletPreference(UICLVPortlet.PREFERENCE_SHOW_CLV_BY);
@@ -175,20 +170,32 @@ public class UICLVPresentation extends UIContainer {
 
     NodeLocation nodeLocation = NodeLocation.getNodeLocationByExpression(fullPath);
 
-    List<Node> nodes = wcmComposer.getContents(nodeLocation.getRepository(), nodeLocation.getWorkspace(), nodeLocation.getPath(), filters, WCMCoreUtils.getUserSessionProvider());
+    List<Node> nodes = wcmComposer.getContents(nodeLocation.getRepository(),
+                                               nodeLocation.getWorkspace(),
+                                               nodeLocation.getPath(),
+                                               filters,
+                                               WCMCoreUtils.getUserSessionProvider());
     List<CategoryBean> categories = new LinkedList<CategoryBean>();
-    for (Node node:nodes) {
+    for (Node node : nodes) {
       String title = getTitle(node);
       String url = getCategoryURL(node);
       String path = node.getPath();
-      long total = (node.hasProperty("exo:total"))?node.getProperty("exo:total").getValue().getLong():0;
-      boolean isSelected = paramPath!=null&&paramPath.endsWith(path);
-      CategoryBean cat = new CategoryBean(node.getName(), node.getPath(), title, url, isSelected, depth, total);
+      long total = (node.hasProperty("exo:total")) ? node.getProperty("exo:total")
+                                                         .getValue()
+                                                         .getLong() : 0;
+      boolean isSelected = paramPath != null && paramPath.endsWith(path);
+      CategoryBean cat = new CategoryBean(node.getName(),
+                                          node.getPath(),
+                                          title,
+                                          url,
+                                          isSelected,
+                                          depth,
+                                          total);
       NodeLocation catLocation = NodeLocation.getNodeLocationByNode(node);
-      List<CategoryBean> childs = getCategories(catLocation.toString(), primaryType, depth+1);
-      if (childs!=null && childs.size()>0)
+      List<CategoryBean> childs = getCategories(catLocation.toString(), primaryType, depth + 1);
+      if (childs != null && childs.size() > 0)
         cat.setChilds(childs);
-//    	System.out.println(cat.getName()+"::"+cat.getPath()+"::"+cat.getTitle()+"::"+cat.isSelected()+"::"+cat.getDepth());
+      // System.out.println(cat.getName()+"::"+cat.getPath()+"::"+cat.getTitle()+"::"+cat.isSelected()+"::"+cat.getDepth());
       categories.add(cat);
 
     }
@@ -205,36 +212,36 @@ public class UICLVPresentation extends UIContainer {
     return "";
   }
 
-  private Map<String ,String> getTagStyles() throws Exception {
-    if (tagStyles==null) {
-      NewFolksonomyService folksonomyService = getApplicationComponent(NewFolksonomyService.class) ;
+  private Map<String, String> getTagStyles() throws Exception {
+    if (tagStyles == null) {
+      NewFolksonomyService folksonomyService = getApplicationComponent(NewFolksonomyService.class);
       String workspace = "dms-system";
-      tagStyles = new HashMap<String ,String>() ;
-      for(Node tag : folksonomyService.getAllTagStyle("repository", workspace)) {
+      tagStyles = new HashMap<String, String>();
+      for (Node tag : folksonomyService.getAllTagStyle("repository", workspace)) {
         tagStyles.put(tag.getProperty("exo:styleRange").getValue().getString(),
-                     tag.getProperty("exo:htmlStyle").getValue().getString());
+                      tag.getProperty("exo:htmlStyle").getValue().getString());
       }
     }
-    return tagStyles ;
+    return tagStyles;
   }
 
   private boolean checkTagRate(long numOfDocument, String range) throws Exception {
-    String[] vals = StringUtils.split(range ,"..") ;
-    int minValue = Integer.parseInt(vals[0]) ;
-    int maxValue ;
-    if(vals[1].equals("*")) {
-      maxValue = Integer.MAX_VALUE ;
-    }else {
-      maxValue = Integer.parseInt(vals[1]) ;
+    String[] vals = StringUtils.split(range, "..");
+    int minValue = Integer.parseInt(vals[0]);
+    int maxValue;
+    if (vals[1].equals("*")) {
+      maxValue = Integer.MAX_VALUE;
+    } else {
+      maxValue = Integer.parseInt(vals[1]);
     }
-    if(minValue <=numOfDocument && numOfDocument <maxValue ) return true ;
-    return false ;
+    if (minValue <= numOfDocument && numOfDocument < maxValue)
+      return true;
+    return false;
   }
-
 
   /**
    * Gets the uRL.
-   *
+   * 
    * @param node the node
    * @return the uRL
    * @throws Exception the exception
@@ -246,12 +253,14 @@ public class UICLVPresentation extends UIContainer {
     PortletRequest portletRequest = portletRequestContext.getRequest();
     String portalURI = portalRequestContext.getPortalURI();
     NodeLocation nodeLocation = NodeLocation.getNodeLocationByNode(node);
-    String baseURI = portletRequest.getScheme() + "://" + portletRequest.getServerName() + ":" + String.format("%s", portletRequest.getServerPort());
+    String baseURI = portletRequest.getScheme() + "://" + portletRequest.getServerName() + ":"
+        + String.format("%s", portletRequest.getServerPort());
     String basePath = Utils.getPortletPreference(UICLVPortlet.PREFERENCE_TARGET_PAGE);
     String clvBy = Utils.getPortletPreference(UICLVPortlet.PREFERENCE_SHOW_CLV_BY);
     if (clvBy == null || clvBy.length() == 0)
       clvBy = UICLVPortlet.DEFAULT_SHOW_CLV_BY;
-    link = baseURI + portalURI + basePath + "?" + clvBy + "=" + nodeLocation.getRepository() + ":" + nodeLocation.getWorkspace() +":"+ node.getPath();
+    link = baseURI + portalURI + basePath + "?" + clvBy + "=" + nodeLocation.getRepository() + ":"
+        + nodeLocation.getWorkspace() + ":" + node.getPath();
 
     FriendlyService friendlyService = getApplicationComponent(FriendlyService.class);
     link = friendlyService.getFriendlyUri(link);
@@ -261,7 +270,7 @@ public class UICLVPresentation extends UIContainer {
 
   /**
    * Checks if is show field.
-   *
+   * 
    * @param field the field
    * @return true, if is show field
    */
@@ -272,7 +281,7 @@ public class UICLVPresentation extends UIContainer {
 
   /**
    * Show paginator.
-   *
+   * 
    * @return true, if successful
    * @throws Exception the exception
    */
@@ -295,7 +304,9 @@ public class UICLVPresentation extends UIContainer {
 
   /*
    * (non-Javadoc)
-   * @see org.exoplatform.webui.core.UIComponent#getTemplateResourceResolver(org.exoplatform.webui.application.WebuiRequestContext, java.lang.String)
+   * @see
+   * org.exoplatform.webui.core.UIComponent#getTemplateResourceResolver(org.
+   * exoplatform.webui.application.WebuiRequestContext, java.lang.String)
    */
   public ResourceResolver getTemplateResourceResolver(WebuiRequestContext context, String template) {
     return resourceResolver;
@@ -303,7 +314,7 @@ public class UICLVPresentation extends UIContainer {
 
   /**
    * Gets the title.
-   *
+   * 
    * @param node the node
    * @return the title
    * @throws Exception the exception
@@ -315,13 +326,14 @@ public class UICLVPresentation extends UIContainer {
       if (content.hasProperty("dc:title")) {
         try {
           title = content.getProperty("dc:title").getValues()[0].getString();
-        } catch(Exception ex) {}
+        } catch (Exception ex) {
+        }
       }
     } else if (node.hasProperty("exo:title")) {
       title = node.getProperty("exo:title").getValue().getString();
     }
-    if (title==null) {
-      if (node.isNodeType("nt:frozenNode")){
+    if (title == null) {
+      if (node.isNodeType("nt:frozenNode")) {
         String uuid = node.getProperty("jcr:frozenUuid").getString();
         Node originalNode = node.getSession().getNodeByUUID(uuid);
         title = originalNode.getName();
@@ -335,7 +347,7 @@ public class UICLVPresentation extends UIContainer {
 
   /**
    * Gets the summary.
-   *
+   * 
    * @param node the node
    * @return the summary
    * @throws Exception the exception
@@ -349,7 +361,7 @@ public class UICLVPresentation extends UIContainer {
       if (content.hasProperty("dc:description")) {
         try {
           desc = content.getProperty("dc:description").getValues()[0].getString();
-        } catch(Exception ex) {
+        } catch (Exception ex) {
           return null;
         }
       }
@@ -359,7 +371,7 @@ public class UICLVPresentation extends UIContainer {
 
   /**
    * Gets the uRL.
-   *
+   * 
    * @param node the node
    * @return the uRL
    * @throws Exception the exception
@@ -371,23 +383,26 @@ public class UICLVPresentation extends UIContainer {
     PortletRequest portletRequest = portletRequestContext.getRequest();
     String portalURI = portalRequestContext.getPortalURI();
     NodeLocation nodeLocation = NodeLocation.getNodeLocationByNode(node);
-    String baseURI = portletRequest.getScheme() + "://" + portletRequest.getServerName() + ":" + String.format("%s", portletRequest.getServerPort());
+    String baseURI = portletRequest.getScheme() + "://" + portletRequest.getServerName() + ":"
+        + String.format("%s", portletRequest.getServerPort());
     String basePath = Utils.getPortletPreference(UICLVPortlet.PREFERENCE_TARGET_PAGE);
     String scvWith = Utils.getPortletPreference(UICLVPortlet.PREFERENCE_SHOW_SCV_WITH);
     if (scvWith == null || scvWith.length() == 0)
       scvWith = UICLVPortlet.DEFAULT_SHOW_SCV_WITH;
-    if (node.isNodeType("nt:frozenNode")){
+    if (node.isNodeType("nt:frozenNode")) {
       String uuid = node.getProperty("jcr:frozenUuid").getString();
       Node originalNode = node.getSession().getNodeByUUID(uuid);
-      link = baseURI + portalURI + basePath + "?" + scvWith + "=/" + nodeLocation.getRepository() + "/" + nodeLocation.getWorkspace() + originalNode.getPath();
+      link = baseURI + portalURI + basePath + "?" + scvWith + "=/" + nodeLocation.getRepository()
+          + "/" + nodeLocation.getWorkspace() + originalNode.getPath();
     } else {
-      link = baseURI + portalURI + basePath + "?" + scvWith + "=/" + nodeLocation.getRepository() + "/" + nodeLocation.getWorkspace() + node.getPath();
+      link = baseURI + portalURI + basePath + "?" + scvWith + "=/" + nodeLocation.getRepository()
+          + "/" + nodeLocation.getWorkspace() + node.getPath();
     }
 
     String fullPath = this.getAncestorOfType(UICLVPortlet.class).getFolderPathParamValue();
-    if (fullPath!=null) {
-        String clvBy = Utils.getPortletPreference(UICLVPortlet.PREFERENCE_SHOW_CLV_BY);
-      link += "&"+clvBy+"="+fullPath;
+    if (fullPath != null) {
+      String clvBy = Utils.getPortletPreference(UICLVPortlet.PREFERENCE_SHOW_CLV_BY);
+      link += "&" + clvBy + "=" + fullPath;
     }
 
     FriendlyService friendlyService = getApplicationComponent(FriendlyService.class);
@@ -398,7 +413,7 @@ public class UICLVPresentation extends UIContainer {
 
   /**
    * Gets the webdav url.
-   *
+   * 
    * @param node the node
    * @return the webdav url
    * @throws Exception the exception
@@ -409,19 +424,22 @@ public class UICLVPresentation extends UIContainer {
     NodeLocation nodeLocation = NodeLocation.getNodeLocationByNode(node);
     String repository = nodeLocation.getRepository();
     String workspace = nodeLocation.getWorkspace();
-    String baseURI = portletRequest.getScheme() + "://" + portletRequest.getServerName() + ":" + String.format("%s", portletRequest.getServerPort());
+    String baseURI = portletRequest.getScheme() + "://" + portletRequest.getServerName() + ":"
+        + String.format("%s", portletRequest.getServerPort());
 
     FriendlyService friendlyService = getApplicationComponent(FriendlyService.class);
-    String link = "#";//friendlyService.getFriendlyUri(link);
+    String link = "#";// friendlyService.getFriendlyUri(link);
 
     String portalName = PortalContainer.getCurrentPortalContainerName();
     String restContextName = PortalContainer.getCurrentRestContextName();
-    if (node.isNodeType("nt:frozenNode")){
+    if (node.isNodeType("nt:frozenNode")) {
       String uuid = node.getProperty("jcr:frozenUuid").getString();
       Node originalNode = node.getSession().getNodeByUUID(uuid);
-      link = baseURI + "/" + portalName + "/" + restContextName + "/jcr/" + repository + "/" + workspace + originalNode.getPath() + "?version=" + node.getParent().getName();
+      link = baseURI + "/" + portalName + "/" + restContextName + "/jcr/" + repository + "/"
+          + workspace + originalNode.getPath() + "?version=" + node.getParent().getName();
     } else {
-      link = baseURI + "/" + portalName + "/" + restContextName + "/jcr/" + repository + "/" + workspace + node.getPath();
+      link = baseURI + "/" + portalName + "/" + restContextName + "/jcr/" + repository + "/"
+          + workspace + node.getPath();
     }
 
     return friendlyService.getFriendlyUri(link);
@@ -430,7 +448,7 @@ public class UICLVPresentation extends UIContainer {
 
   /**
    * Gets the author.
-   *
+   * 
    * @param node the node
    * @return the author
    * @throws Exception the exception
@@ -445,7 +463,7 @@ public class UICLVPresentation extends UIContainer {
 
   /**
    * Gets the created date.
-   *
+   * 
    * @param node the node
    * @return the created date
    * @throws Exception the exception
@@ -460,7 +478,7 @@ public class UICLVPresentation extends UIContainer {
 
   /**
    * Gets the modified date.
-   *
+   * 
    * @param node the node
    * @return the modified date
    * @throws Exception the exception
@@ -475,22 +493,27 @@ public class UICLVPresentation extends UIContainer {
 
   /**
    * Gets the content icon.
-   *
+   * 
    * @param node the node
    * @return the content icon
    */
   public String getContentIcon(Node node) {
     try {
-      if (node.isNodeType("nt:frozenNode")){
+      if (node.isNodeType("nt:frozenNode")) {
         String uuid = node.getProperty("jcr:frozenUuid").getString();
         Node originalNode = node.getSession().getNodeByUUID(uuid);
-        return "Icon16x16 default16x16Icon " + org.exoplatform.ecm.webui.utils.Utils.getNodeTypeIcon(originalNode, "16x16Icon");
+        return "Icon16x16 default16x16Icon "
+            + org.exoplatform.ecm.webui.utils.Utils.getNodeTypeIcon(originalNode, "16x16Icon");
       } else {
-        return "Icon16x16 default16x16Icon "+org.exoplatform.ecm.webui.utils.Utils.getNodeTypeIcon(node, "16x16Icon");
+        return "Icon16x16 default16x16Icon "
+            + org.exoplatform.ecm.webui.utils.Utils.getNodeTypeIcon(node, "16x16Icon");
       }
 
     } catch (RepositoryException e) {
-      Utils.createPopupMessage(this, "UIMessageBoard.msg.get-content-icon", null, ApplicationMessage.ERROR);
+      Utils.createPopupMessage(this,
+                               "UIMessageBoard.msg.get-content-icon",
+                               null,
+                               ApplicationMessage.ERROR);
     }
     return null;
   }
@@ -504,13 +527,16 @@ public class UICLVPresentation extends UIContainer {
     String clvBy = Utils.getPortletPreference(UICLVPortlet.PREFERENCE_SHOW_CLV_BY);
     String paramPath = Util.getPortalRequestContext().getRequestParameter(clvBy);
 
-    if (!isAutoDetect || !clvContainer.isModeByFolder() || paramPath==null || !isContextualEnable) return header;
+    if (!isAutoDetect || !clvContainer.isModeByFolder() || paramPath == null || !isContextualEnable)
+      return header;
 
     try {
 
-      Node folderNode =NodeLocation.getNodeByExpression(this.getAncestorOfType(UICLVPortlet.class).getFolderPath());
+      Node folderNode = NodeLocation.getNodeByExpression(this.getAncestorOfType(UICLVPortlet.class)
+                                                             .getFolderPath());
       if (folderNode.hasProperty(org.exoplatform.ecm.webui.utils.Utils.EXO_TITLE)) {
-        String folderTitle = folderNode.getProperty(org.exoplatform.ecm.webui.utils.Utils.EXO_TITLE).getString();
+        String folderTitle = folderNode.getProperty(org.exoplatform.ecm.webui.utils.Utils.EXO_TITLE)
+                                       .getString();
         if (folderTitle != null && folderTitle.length() > 0)
           header = folderTitle;
       } else {
@@ -545,8 +571,8 @@ public class UICLVPresentation extends UIContainer {
     if (Utils.isShowQuickEdit()) {
       try {
         Node parent = node.getParent();
-        ((ExtendedNode)node).checkPermission(PermissionType.SET_PROPERTY);
-        ((ExtendedNode)parent).checkPermission(PermissionType.ADD_NODE);
+        ((ExtendedNode) node).checkPermission(PermissionType.SET_PROPERTY);
+        ((ExtendedNode) parent).checkPermission(PermissionType.ADD_NODE);
       } catch (Exception e) {
         return false;
       }
@@ -558,7 +584,7 @@ public class UICLVPresentation extends UIContainer {
 
   /**
    * Gets the illustrative image.
-   *
+   * 
    * @param node the node
    * @return the illustrative image
    */
@@ -568,11 +594,12 @@ public class UICLVPresentation extends UIContainer {
     RESTImagesRendererService imagesRendererService = getApplicationComponent(RESTImagesRendererService.class);
     Node illustrativeImage = null;
     String uri = null;
-    try{
+    try {
       illustrativeImage = contentSchemaHandler.getIllustrationImage(node);
       uri = imagesRendererService.generateImageURI(illustrativeImage, null);
-    } catch(PathNotFoundException ex) {
-      // We don't do anything here because so many documents doesn't have illustration image
+    } catch (PathNotFoundException ex) {
+      // We don't do anything here because so many documents doesn't have
+      // illustration image
     } catch (Exception e) {
       LOG.warn(e.getMessage(), e);
     }
@@ -581,14 +608,12 @@ public class UICLVPresentation extends UIContainer {
 
   public boolean isShowRssLink() {
     return isShowField(UICLVPortlet.PREFERENCE_SHOW_RSSLINK)
-           &&
-           (this.getAncestorOfType(UICLVPortlet.class).getFolderPathParamValue() != null ||
-            UICLVPortlet.DISPLAY_MODE_AUTOMATIC.equals(Utils.getPortletPreference(UICLVPortlet.PREFERENCE_DISPLAY_MODE)));
+        && (this.getAncestorOfType(UICLVPortlet.class).getFolderPathParamValue() != null || UICLVPortlet.DISPLAY_MODE_AUTOMATIC.equals(Utils.getPortletPreference(UICLVPortlet.PREFERENCE_DISPLAY_MODE)));
   }
 
   /**
    * Gets the rss link.
-   *
+   * 
    * @return the rss link
    */
   public String getRssLink() {
@@ -599,31 +624,28 @@ public class UICLVPresentation extends UIContainer {
     if (fullPath == null || fullPath.length() == 0)
       fullPath = Utils.getPortletPreference(UICLVPortlet.PREFERENCE_ITEM_PATH);
     if (fullPath == null)
-      return "/"+portal+"/"+rest+
-      "&siteName=" + Util.getUIPortal().getOwner() +
-      "&orderBy=" + Utils.getPortletPreference(UICLVPortlet.PREFERENCE_ORDER_BY) +
-      "&orderType=" + Utils.getPortletPreference(UICLVPortlet.PREFERENCE_ORDER_TYPE) +
-      "&detailPage=" + Utils.getPortletPreference(UICLVPortlet.PREFERENCE_TARGET_PAGE) +
-      "&detailParam=" + Utils.getPortletPreference(UICLVPortlet.PREFERENCE_SHOW_SCV_WITH);
+      return "/" + portal + "/" + rest + "&siteName=" + Util.getUIPortal().getOwner() + "&orderBy="
+          + Utils.getPortletPreference(UICLVPortlet.PREFERENCE_ORDER_BY) + "&orderType="
+          + Utils.getPortletPreference(UICLVPortlet.PREFERENCE_ORDER_TYPE) + "&detailPage="
+          + Utils.getPortletPreference(UICLVPortlet.PREFERENCE_TARGET_PAGE) + "&detailParam="
+          + Utils.getPortletPreference(UICLVPortlet.PREFERENCE_SHOW_SCV_WITH);
     String[] repoWsPath = fullPath.split(":");
-    return  "/"+portal+"/"+rest+
-            "/feed/rss?repository=" + repoWsPath[0] +
-            "&workspace=" + repoWsPath[1] +
-            "&server=" + server +
-            "&siteName=" + Util.getUIPortal().getOwner() +
-            "&folderPath=" + repoWsPath[2] +
-            "&orderBy=" + Utils.getPortletPreference(UICLVPortlet.PREFERENCE_ORDER_BY) +
-            "&orderType=" + Utils.getPortletPreference(UICLVPortlet.PREFERENCE_ORDER_TYPE) +
-//						"&title="
-//						"&desc="My%20description
-            "&detailPage=" + Utils.getPortletPreference(UICLVPortlet.PREFERENCE_TARGET_PAGE) +
-            "&detailParam=" + Utils.getPortletPreference(UICLVPortlet.PREFERENCE_SHOW_SCV_WITH);
+    return "/" + portal + "/" + rest + "/feed/rss?repository=" + repoWsPath[0] + "&workspace="
+        + repoWsPath[1] + "&server=" + server + "&siteName=" + Util.getUIPortal().getOwner()
+        + "&folderPath=" + repoWsPath[2] + "&orderBy="
+        + Utils.getPortletPreference(UICLVPortlet.PREFERENCE_ORDER_BY)
+        + "&orderType="
+        + Utils.getPortletPreference(UICLVPortlet.PREFERENCE_ORDER_TYPE)
+        +
+        // "&title="
+        // "&desc="My%20description
+        "&detailPage=" + Utils.getPortletPreference(UICLVPortlet.PREFERENCE_TARGET_PAGE)
+        + "&detailParam=" + Utils.getPortletPreference(UICLVPortlet.PREFERENCE_SHOW_SCV_WITH);
   }
-
 
   /**
    * This method will put the mandatory html code to manage QuickEdit mode
-   *
+   * 
    * @param cssClass
    * @param viewNode
    * @return
@@ -635,31 +657,38 @@ public class UICLVPresentation extends UIContainer {
     String contentDeleteLink = event("DeleteContent", NodeLocation.getExpressionByNode(viewNode));
     String hoverClass = Utils.isShowQuickEdit() ? " ContainerHoverClassInner" : "";
     PortletRequestContext portletRequestContext = WebuiRequestContext.getCurrentInstance();
-    sb.append("<div class=\""+cssClass+"\" onmouseover=\"this.className  = '"+cssClass+" "+hoverClass+"' \" onmouseout=\"this.className = '"+cssClass+"' \">");
+    sb.append("<div class=\"" + cssClass + "\" onmouseover=\"this.className  = '" + cssClass + " "
+        + hoverClass + "' \" onmouseout=\"this.className = '" + cssClass + "' \">");
     if (Utils.isShowQuickEdit()) {
       sb.append("	<div class=\"EdittingContent\" style=\" z-index: 1\">");
       sb.append("		<div class=\"EdittingToolBar \" >");
       sb.append("			<div class=\"EdittingToolBarL\">");
       sb.append("				<div class=\"EdittingToolBarC clearfix\">");
       if (Utils.isShowDelete(viewNode)) {
-          String strDeleteBundle="Delete";
-          try {
-            strDeleteBundle = portletRequestContext.getApplicationResourceBundle().getString("UICLVPresentation.action.delete");
-          } catch (MissingResourceException e) { }
+        String strDeleteBundle = "Delete";
+        try {
+          strDeleteBundle = portletRequestContext.getApplicationResourceBundle()
+                                                 .getString("UICLVPresentation.action.delete");
+        } catch (MissingResourceException e) {
+        }
         sb.append("					<div style=\"float: right\">");
-        sb.append("                     <a href=\""+contentDeleteLink+"\" title=\"" + strDeleteBundle + "\"class=\"CloseContentIcon\" >");
+        sb.append("                     <a href=\"" + contentDeleteLink + "\" title=\""
+            + strDeleteBundle + "\"class=\"CloseContentIcon\" >");
         sb.append("						  &nbsp;");
         sb.append("						</a>");
         sb.append("					</div>");
       }
 
-      if(isShowEdit(viewNode) && !LockUtil.isLocked(viewNode)){
-         String strEditBundle="Delete";
-         try {
-           strEditBundle = portletRequestContext.getApplicationResourceBundle().getString("UICLVPresentation.action.edit");
-         } catch (MissingResourceException e) { }
+      if (isShowEdit(viewNode) && !LockUtil.isLocked(viewNode)) {
+        String strEditBundle = "Delete";
+        try {
+          strEditBundle = portletRequestContext.getApplicationResourceBundle()
+                                               .getString("UICLVPresentation.action.edit");
+        } catch (MissingResourceException e) {
+        }
         sb.append("					<div style=\"float: right\">");
-        sb.append("						<a onclick = 'eXo.ecm.CLV.addURL(this)' href=\""+contentEditLink+"\" title=\"" + strEditBundle + "\" class=\"EditContentIcon\" >");
+        sb.append("						<a onclick = 'eXo.ecm.CLV.addURL(this)' href=\"" + contentEditLink
+            + "\" title=\"" + strEditBundle + "\" class=\"EditContentIcon\" >");
         sb.append("						  &nbsp;");
         sb.append("						</a>");
         sb.append("					</div>");
@@ -673,10 +702,12 @@ public class UICLVPresentation extends UIContainer {
       if (viewNode.hasProperty("publication:currentState")) {
         String state = viewNode.getProperty("publication:currentState").getValue().getString();
         try {
-          state = portletRequestContext.getApplicationResourceBundle().getString("PublicationStates."+state);
-        } catch (MissingResourceException e) { }
+          state = portletRequestContext.getApplicationResourceBundle()
+                                       .getString("PublicationStates." + state);
+        } catch (MissingResourceException e) {
+        }
         sb.append("         <div class=\"EdittingCurrentState\" style=\"float: right\">");
-        sb.append(""+state);
+        sb.append("" + state);
         sb.append("         </div>");
       }
       sb.append("				</div>");
@@ -689,19 +720,20 @@ public class UICLVPresentation extends UIContainer {
   }
 
   /**
-   * The listener interface for receiving refreshAction events.
-   * The class that is interested in processing a refreshAction
-   * event implements this interface, and the object created
-   * with that class is registered with a component using the
-   * component's <code>addRefreshActionListener<code> method. When
+   * The listener interface for receiving refreshAction events. The class that
+   * is interested in processing a refreshAction event implements this
+   * interface, and the object created with that class is registered with a
+   * component using the component's
+   * <code>addRefreshActionListener<code> method. When
    * the refreshAction event occurs, that object's appropriate
    * method is invoked.
-   *
    */
   public static class RefreshActionListener extends EventListener<UICLVPresentation> {
     /*
      * (non-Javadoc)
-     * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
+     * @see
+     * org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui
+     * .event.Event)
      */
     public void execute(Event<UICLVPresentation> event) throws Exception {
       UICLVPresentation clvPresentation = event.getSource();
@@ -711,8 +743,11 @@ public class UICLVPresentation extends UIContainer {
 
   public static class DeleteContentActionListener extends EventListener<UICLVPresentation> {
 
-    /* (non-Javadoc)
-     * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
+    /*
+     * (non-Javadoc)
+     * @see
+     * org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui
+     * .event.Event)
      */
     public void execute(Event<UICLVPresentation> event) throws Exception {
       UICLVPresentation contentListPresentation = event.getSource();
@@ -722,7 +757,10 @@ public class UICLVPresentation extends UIContainer {
       node.remove();
       parent.getSession().save();
       event.getRequestContext().addUIComponentToUpdateByAjax(contentListPresentation);
-      Utils.createPopupMessage(contentListPresentation, "UICLVPresentation.msg.delete-content-successfull", null, ApplicationMessage.INFO);
+      Utils.createPopupMessage(contentListPresentation,
+                               "UICLVPresentation.msg.delete-content-successfull",
+                               null,
+                               ApplicationMessage.INFO);
     }
   }
 

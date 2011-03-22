@@ -73,27 +73,35 @@ import org.exoplatform.webui.event.EventListener;
  * 3:30:22 PM
  */
 
-@ComponentConfig(
-    template = "app:/groovy/webui/component/explorer/search/UIShowAllTrashResult.gtmpl",
-    events = {	@EventConfig(listeners = UIShowAllTrashResult.DeleteActionListener.class),
-          @EventConfig(listeners = UIShowAllTrashResult.RestoreActionListener.class),
-          @EventConfig(listeners = UIShowAllTrashResult.SortASCActionListener.class),
-          @EventConfig(listeners = UIShowAllTrashResult.SortDESCActionListener.class)})
+@ComponentConfig(template = "app:/groovy/webui/component/explorer/search/UIShowAllTrashResult.gtmpl",
+                 events = {
+    @EventConfig(listeners = UIShowAllTrashResult.DeleteActionListener.class),
+    @EventConfig(listeners = UIShowAllTrashResult.RestoreActionListener.class),
+    @EventConfig(listeners = UIShowAllTrashResult.SortASCActionListener.class),
+    @EventConfig(listeners = UIShowAllTrashResult.SortDESCActionListener.class) })
 public class UIShowAllTrashResult extends UIComponentDecorator {
 
-  public static final int SHOW_ALL_FROM_TRASH = 0;
-  public static final int SHOW_ALL_FROM_TRASH_BY_USER = 1;
+  public static final int  SHOW_ALL_FROM_TRASH         = 0;
 
-  private static final Log LOG  = ExoLogger.getLogger("explorer.search.UIShowAllTrashResult");
-  private static final int FILE_PER_PAGE = 10;
-  private static String iconType = "BlueDownArrow";
-  private static String iconName = "";
-  private long searchTime_ = 0;
-  private List<Node> trashNodes_ = new ArrayList<Node>();
-//	private Map<Integer, Node> mapIndexNode = new Hashtable<Integer, Node>();
-  private UIPageIterator uiPageIterator_ ;
-  private int showNodeCase;
-  private boolean nodeListChange = false;
+  public static final int  SHOW_ALL_FROM_TRASH_BY_USER = 1;
+
+  private static final Log LOG                         = ExoLogger.getLogger("explorer.search.UIShowAllTrashResult");
+
+  private static final int FILE_PER_PAGE               = 10;
+
+  private static String    iconType                    = "BlueDownArrow";
+
+  private static String    iconName                    = "";
+
+  private long             searchTime_                 = 0;
+
+  private List<Node>       trashNodes_                 = new ArrayList<Node>();
+
+  private UIPageIterator   uiPageIterator_;
+
+  private int              showNodeCase;
+
+  private boolean          nodeListChange              = false;
 
   public UIShowAllTrashResult() throws Exception {
     uiPageIterator_ = createUIComponent(UIPageIterator.class, null, "UIShowAllTrashIterator");
@@ -112,7 +120,6 @@ public class UIShowAllTrashResult extends UIComponentDecorator {
   public long getSearchTime() { return searchTime_; }
   public void setSearchTime(long time) { this.searchTime_ = time; }
   public UIPageIterator  getUIPageIterator() {  return uiPageIterator_ ; }
-//	public Map<Integer, Node> getMapIndexNode() { return mapIndexNode; }
 
   public Date getDateCreated(Node node) throws Exception{
       if (node.hasProperty("exo:dateCreated")) {
@@ -123,7 +130,6 @@ public class UIShowAllTrashResult extends UIComponentDecorator {
 
   @SuppressWarnings("unchecked")
   public List<Node> getAllTrashNodes() throws Exception {
-    //return trashNodes_;
     return (List<Node>)uiPageIterator_.getCurrentPageData();
   }
 
@@ -137,7 +143,6 @@ public class UIShowAllTrashResult extends UIComponentDecorator {
       .getComponentInstanceOfType(TrashService.class);
     PortletRequestContext pcontext = (PortletRequestContext)WebuiRequestContext.getCurrentInstance();
       PortletPreferences portletPref = pcontext.getRequest().getPreferences();
-    //String trashHomeNodePath = portletPref.getValue(Utils.TRASH_HOME_NODE_PATH, "");
     String trashWorkspace = portletPref.getValue(Utils.TRASH_WORKSPACE, "");
     String trashRepository = portletPref.getValue(Utils.TRASH_REPOSITORY, "");
     SessionProvider sessionProvider = uiExplorer.getSessionProvider();
@@ -224,7 +229,6 @@ public class UIShowAllTrashResult extends UIComponentDecorator {
 
   static  public class DeleteActionListener extends EventListener<UIShowAllTrashResult> {
       public void execute(Event<UIShowAllTrashResult> event) throws Exception {
-          //final String virtualNodePath = nodePath;
           String srcPath = event.getRequestContext().getRequestParameter(OBJECTID);
           UIShowAllTrashResult uiShowAllTrashResult = event.getSource();
           UIJCRExplorer uiExplorer = uiShowAllTrashResult.getAncestorOfType(UIJCRExplorer.class);

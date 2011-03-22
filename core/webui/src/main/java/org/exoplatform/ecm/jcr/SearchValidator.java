@@ -25,7 +25,7 @@ import org.exoplatform.webui.form.validator.Validator;
  * Created by The eXo Platform SAS
  * Author : Ly Dinh Quang
  *          quang.ly@exoplatform.com
- *			    xxx5669@yahoo.com
+ *          xxx5669@yahoo.com
  * Jul 9, 2008
  */
 public class SearchValidator implements Validator {

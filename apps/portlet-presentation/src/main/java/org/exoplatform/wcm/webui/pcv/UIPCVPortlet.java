@@ -62,7 +62,7 @@ public class UIPCVPortlet extends UIPortletApplication {
   public final static String SHOW_DATE_CREATED       = "showDateCreated";
 
   /** The Constant SHOW_BAR. */
-  public final static String SHOW_BAR        		 = "showBar";
+  public final static String SHOW_BAR                = "showBar";
 
   private String currentNodePath;
 

@@ -98,9 +98,11 @@ public class Utils {
    */
   public static boolean isQuickEditMode(UIContainer container, String popupWindowId) {
     UIPopupContainer popupContainer = getPopupContainer(container);
-    if (popupContainer == null) return false;
+    if (popupContainer == null)
+      return false;
     UIPopupWindow popupWindow = popupContainer.getChildById(popupWindowId);
-    if (popupWindow == null) return false;
+    if (popupWindow == null)
+      return false;
     return true;
   }
 
@@ -127,16 +129,17 @@ public class Utils {
    * Can edit current portal.
    *
    * @param remoteUser the remote user
-   *
    * @return true, if successful
-   *
    * @throws Exception the exception
    */
   public static boolean canEditCurrentPortal(String remoteUser) throws Exception {
-    if (remoteUser == null) return false;
-    IdentityRegistry identityRegistry = Util.getUIPortalApplication().getApplicationComponent(IdentityRegistry.class);
+    if (remoteUser == null)
+      return false;
+    IdentityRegistry identityRegistry = Util.getUIPortalApplication()
+                                            .getApplicationComponent(IdentityRegistry.class);
     Identity identity = identityRegistry.getIdentity(remoteUser);
-    if (identity == null) return false;
+    if (identity == null)
+      return false;
     UIPortal uiPortal = Util.getUIPortal();
     // this code only work for single edit permission
     String editPermission = uiPortal.getEditPermission();
@@ -148,48 +151,48 @@ public class Utils {
    * Clean string.
    *
    * @param str the str
-   *
    * @return the string
    */
   public static String cleanString(String str) {
-      Transliterator accentsconverter = Transliterator.getInstance("Latin; NFD; [:Nonspacing Mark:] Remove; NFC;");
-      str = accentsconverter.transliterate(str);
-      //the character ? seems to not be changed to d by the transliterate function
-      StringBuffer cleanedStr = new StringBuffer(str.trim());
-      // delete special character
-      for(int i = 0; i < cleanedStr.length(); i++) {
-        char c = cleanedStr.charAt(i);
-        if(c == ' ') {
-          if (i > 0 && cleanedStr.charAt(i - 1) == '-') {
-            cleanedStr.deleteCharAt(i--);
-          } else {
-            c = '-';
-            cleanedStr.setCharAt(i, c);
-          }
-          continue;
-        }
-        if(i > 0 && !(Character.isLetterOrDigit(c) || c == '-')) {
+    Transliterator accentsconverter = Transliterator.getInstance("Latin; NFD; [:Nonspacing Mark:] Remove; NFC;");
+    str = accentsconverter.transliterate(str);
+    // the character ? seems to not be changed to d by the transliterate
+    // function
+    StringBuffer cleanedStr = new StringBuffer(str.trim());
+    // delete special character
+    for (int i = 0; i < cleanedStr.length(); i++) {
+      char c = cleanedStr.charAt(i);
+      if (c == ' ') {
+        if (i > 0 && cleanedStr.charAt(i - 1) == '-') {
           cleanedStr.deleteCharAt(i--);
-          continue;
+        } else {
+          c = '-';
+          cleanedStr.setCharAt(i, c);
         }
-        if(i > 0 && c == '-' && cleanedStr.charAt(i-1) == '-')
-          cleanedStr.deleteCharAt(i--);
+        continue;
       }
-      return cleanedStr.toString().toLowerCase();
+      if (i > 0 && !(Character.isLetterOrDigit(c) || c == '-')) {
+        cleanedStr.deleteCharAt(i--);
+        continue;
+      }
+      if (i > 0 && c == '-' && cleanedStr.charAt(i - 1) == '-')
+        cleanedStr.deleteCharAt(i--);
+    }
+    return cleanedStr.toString().toLowerCase();
   }
-
 
   /**
    * Refresh whole portal by AJAX.
+   *
    * @param context the portlet request context
    */
   public static void updatePortal(PortletRequestContext context) {
     UIPortalApplication portalApplication = Util.getUIPortalApplication();
-    PortalRequestContext portalRequestContext = (PortalRequestContext)context.getParentAppRequestContext();
+    PortalRequestContext portalRequestContext = (PortalRequestContext) context.getParentAppRequestContext();
     UIWorkingWorkspace uiWorkingWS = portalApplication.getChildById(UIPortalApplication.UI_WORKING_WS_ID);
-    portalRequestContext.addUIComponentToUpdateByAjax(uiWorkingWS) ;
+    portalRequestContext.addUIComponentToUpdateByAjax(uiWorkingWS);
     UIMaskWorkspace uiMaskWS = portalApplication.getChildById(UIPortalApplication.UI_MASK_WS_ID);
-    portalRequestContext.addUIComponentToUpdateByAjax(uiMaskWS) ;
+    portalRequestContext.addUIComponentToUpdateByAjax(uiMaskWS);
     portalRequestContext.setFullRender(true);
   }
 
@@ -204,29 +207,41 @@ public class Utils {
    * @see #getViewableNodeByComposer(String repository, String workspace, String
    *      nodeIdentifier, String version) getViewableNodeByComposer()
    */
-  public static Node getViewableNodeByComposer(String repository, String workspace, String nodeIdentifier) {
+  public static Node getViewableNodeByComposer(String repository,
+                                               String workspace,
+                                               String nodeIdentifier) {
     return getViewableNodeByComposer(repository, workspace, nodeIdentifier, null);
   }
 
   /**
    * Gets the viewable node by WCMComposer (depends on site mode)
+   *
    * @param repository the repository's name
    * @param workspace the workspace's name
    * @param nodeIdentifier the node's path or node's UUID
-   * @param version the base version (e.g. <code>WCMComposer.BASE_VERSION</code>)
-   * @return the viewable node. Return <code>null</code> if <code>nodeIdentifier</code> is invalid
-   * @see #getViewableNodeByComposer(String repository, String workspace, String nodeIdentifier) getViewableNodeByComposer()
+   * @param version the base version (e.g. <code>WCMComposer.BASE_VERSION</code>
+   *          )
+   * @return the viewable node. Return <code>null</code> if
+   *         <code>nodeIdentifier</code> is invalid
+   * @see #getViewableNodeByComposer(String repository, String workspace, String
+   *      nodeIdentifier) getViewableNodeByComposer()
    * @see WCMComposer
    */
-  public static Node getViewableNodeByComposer(String repository, String workspace, String nodeIdentifier, String version) {
+  public static Node getViewableNodeByComposer(String repository,
+                                               String workspace,
+                                               String nodeIdentifier,
+                                               String version) {
     try {
       HashMap<String, String> filters = new HashMap<String, String>();
-        filters.put(WCMComposer.FILTER_LANGUAGE, Util.getPortalRequestContext().getLocale().getLanguage());
+      filters.put(WCMComposer.FILTER_LANGUAGE, Util.getPortalRequestContext()
+                                                   .getLocale()
+                                                   .getLanguage());
       filters.put(WCMComposer.FILTER_MODE, Utils.getCurrentMode());
       PortletRequestContext portletRequestContext = WebuiRequestContext.getCurrentInstance();
       PortletMode portletMode = portletRequestContext.getApplicationMode();
       filters.put(WCMComposer.PORTLET_MODE, portletMode.toString());
-      if (version != null) filters.put(WCMComposer.FILTER_VERSION, version);
+      if (version != null)
+        filters.put(WCMComposer.FILTER_VERSION, version);
       return WCMCoreUtils.getService(WCMComposer.class)
                          .getContent(repository,
                                      workspace,
@@ -240,31 +255,42 @@ public class Utils {
 
   /**
    * Gets the current mode of the site
+   *
    * @return the current mode (e.g. <code>WCMComposer.MODE_EDIT</code>)
    * @see WCMComposer
    */
   public static String getCurrentMode() {
-    Object isQuickEditable = Util.getPortalRequestContext().getRequest().getSession().getAttribute(TURN_ON_QUICK_EDIT);
-    if(isQuickEditable == null) return WCMComposer.MODE_LIVE;
+    Object isQuickEditable = Util.getPortalRequestContext()
+                                 .getRequest()
+                                 .getSession()
+                                 .getAttribute(TURN_ON_QUICK_EDIT);
+    if (isQuickEditable == null)
+      return WCMComposer.MODE_LIVE;
     boolean turnOnQuickEdit = Boolean.parseBoolean(isQuickEditable.toString());
     return turnOnQuickEdit ? WCMComposer.MODE_EDIT : WCMComposer.MODE_LIVE;
   }
 
   /**
    * Check if the content is draft and current mode of the site is edit mode
+   *
    * @param content the content node.
-   * @return true, the content is draft and current mode is edit mode, otherwise return false.
+   * @return true, the content is draft and current mode is edit mode, otherwise
+   *         return false.
    */
   public static boolean isShowDraft(Node content) {
-    if (content == null) return false;
+    if (content == null)
+      return false;
     try {
-      if(content.isNodeType("nt:frozenNode")) return false;
+      if (content.isNodeType("nt:frozenNode"))
+        return false;
       WCMPublicationService wcmPublicationService = WCMCoreUtils.getService(WCMPublicationService.class);
       String contentState = wcmPublicationService.getContentState(content);
       boolean isDraftContent = false;
-      if (PublicationDefaultStates.DRAFT.equals(contentState)) isDraftContent = true;
+      if (PublicationDefaultStates.DRAFT.equals(contentState))
+        isDraftContent = true;
       boolean isShowDraft = false;
-      if (WCMComposer.MODE_EDIT.equals(getCurrentMode())) isShowDraft = true;
+      if (WCMComposer.MODE_EDIT.equals(getCurrentMode()))
+        isShowDraft = true;
       return isDraftContent && isShowDraft;
     } catch (Exception e) {
       return false;
@@ -273,12 +299,14 @@ public class Utils {
 
   /**
    * Check if the current mode of the site is edit mode
+   *
    * @return true, if current mode is edit mode
    */
   public static boolean isShowQuickEdit() {
     try {
       boolean isEditMode = false;
-      if (WCMComposer.MODE_EDIT.equals(getCurrentMode())) isEditMode = true;
+      if (WCMComposer.MODE_EDIT.equals(getCurrentMode()))
+        isEditMode = true;
       return isEditMode;
     } catch (Exception e) {
       return false;
@@ -287,29 +315,33 @@ public class Utils {
 
   /**
    * Check if the user can delete the current node
+   *
    * @return true, if current mode is edit mode
    */
   public static boolean isShowDelete(Node content) {
     return false;
-//  	try {
-//  		boolean isEditMode = false;
-//  		if (WCMComposer.MODE_EDIT.equals(getCurrentMode())) isEditMode = true;
-//  		((ExtendedNode) content).checkPermission(PermissionType.SET_PROPERTY);
-//  		((ExtendedNode) content).checkPermission(PermissionType.ADD_NODE);
-//      ((ExtendedNode) content).checkPermission(PermissionType.REMOVE);
-//  		return isEditMode;
-//		} catch (Exception e) {
-//			return false;
-//		}
+    // try {
+    // boolean isEditMode = false;
+    // if (WCMComposer.MODE_EDIT.equals(getCurrentMode())) isEditMode = true;
+    // ((ExtendedNode) content).checkPermission(PermissionType.SET_PROPERTY);
+    // ((ExtendedNode) content).checkPermission(PermissionType.ADD_NODE);
+    // ((ExtendedNode) content).checkPermission(PermissionType.REMOVE);
+    // return isEditMode;
+    // } catch (Exception e) {
+    // return false;
+    // }
   }
 
   /**
    * Check if the content is editable and current mode of the site is edit mode
+   *
    * @param content the content node
-   * @return true if there is no content if the content is editable and current mode is edit mode
+   * @return true if there is no content if the content is editable and current
+   *         mode is edit mode
    */
   public static boolean isShowQuickEdit(Node content) {
-    if (content == null) return true;
+    if (content == null)
+      return true;
     try {
       boolean isEditMode = false;
       if (WCMComposer.MODE_EDIT.equals(getCurrentMode())
@@ -330,16 +362,17 @@ public class Utils {
                                                                                   .getName()
           + '/' + node.getSession().getWorkspace().getName() + '/' + node.getPath();
       return getEditLink(itemPath, isEditable, isNew);
-    } catch (RepositoryException e) {}
+    } catch (RepositoryException e) {
+    }
     return null;
   }
 
   /**
-   * Creates a restfull compliant link to the editor for editing a content, adding a content or managing contents.
-   * Example :
-   *   Add Content : isEditable = false, isNew = true, itemPath = the parent folder path
-   *   Edit Content : isEditable = true, isNew = false, itemPath = the content path
-   *   Manage Contents =  isEditable = false, isNew = false, itemPath = the folder path
+   * Creates a restfull compliant link to the editor for editing a content,
+   * adding a content or managing contents. Example : Add Content : isEditable =
+   * false, isNew = true, itemPath = the parent folder path Edit Content :
+   * isEditable = true, isNew = false, itemPath = the content path Manage
+   * Contents = isEditable = false, isNew = false, itemPath = the folder path
    *
    * @param itemPath
    * @param isEditable
@@ -368,8 +401,11 @@ public class Utils {
   }
 
   /**
-   * Creates the popup window. Each portlet have a <code>UIPopupContainer</code>. <br/>
-   * Every <code>UIPopupWindow</code> created by this method is belong to this container.
+   * Creates the popup window. Each portlet have a <code>UIPopupContainer</code>
+   * . <br/>
+   * Every <code>UIPopupWindow</code> created by this method is belong to this
+   * container.
+   *
    * @param container the current container
    * @param component the component which will be display as a popup
    * @param popupWindowId the popup's ID
@@ -395,6 +431,7 @@ public class Utils {
 
   /**
    * Close popup window.
+   *
    * @param container the current container
    * @param popupWindowId the popup's ID
    */
@@ -405,11 +442,15 @@ public class Utils {
 
   /**
    * Update popup window.
+   *
    * @param container the container
-   * @param component the component which will be replace for the old one in the same popup
+   * @param component the component which will be replace for the old one in the
+   *          same popup
    * @param popupWindowId the popup's ID
    */
-  public static void updatePopupWindow(UIContainer container, UIComponent component, String popupWindowId) {
+  public static void updatePopupWindow(UIContainer container,
+                                       UIComponent component,
+                                       String popupWindowId) {
     UIPopupContainer popupContainer = getPopupContainer(container);
     UIPopupWindow popupWindow = popupContainer.getChildById(popupWindowId);
     popupWindow.setUIComponent(component);
@@ -417,28 +458,34 @@ public class Utils {
 
   /**
    * Gets the popup container.
+   *
    * @param container the current container
    * @return the popup container
    */
   public static UIPopupContainer getPopupContainer(UIContainer container) {
-    if (container instanceof UIPortletApplication) return container.getChild(UIPopupContainer.class);
+    if (container instanceof UIPortletApplication)
+      return container.getChild(UIPopupContainer.class);
     UIPortletApplication portletApplication = container.getAncestorOfType(UIPortletApplication.class);
     return portletApplication.getChild(UIPopupContainer.class);
   }
 
   /**
    * Creates the popup message.
+   *
    * @param container the current container
    * @param message the message key
    * @param args the arguments to show in the message
    * @param type the message's type (e.g. <code>ApplicationMessage.INFO</code>)
    * @see ApplicationMessage
    */
-  public static void createPopupMessage(UIContainer container, String message, Object[] args, int type) {
+  public static void createPopupMessage(UIContainer container,
+                                        String message,
+                                        Object[] args,
+                                        int type) {
     UIApplication application = container.getAncestorOfType(UIApplication.class);
-    application.addMessage(new ApplicationMessage(message, args, type)) ;
+    application.addMessage(new ApplicationMessage(message, args, type));
     WebuiRequestContext requestContext = WebuiRequestContext.getCurrentInstance();
-    requestContext.addUIComponentToUpdateByAjax(application.getUIPopupMessages()) ;
+    requestContext.addUIComponentToUpdateByAjax(application.getUIPopupMessages());
   }
 
   @Deprecated
@@ -478,7 +525,6 @@ public class Utils {
    * Get one portlet preference by name
    *
    * @param preferenceName the name of preference
-   *
    * @return the portlet preference's value
    */
   public static String getPortletPreference(String preferenceName) {
@@ -500,26 +546,28 @@ public class Utils {
   /**
    * Check if the node is viewable for the current user or not viewable. <br/>
    * return True if the node is viewable, otherwise will return False
+   *
    * @param node: The node to check
    */
   public static boolean isViewable(Node node) {
     try {
-        node.refresh(true);
-        ((ExtendedNode) node).checkPermission(PermissionType.READ);
-    }catch(Exception e){
-        return false;
+      node.refresh(true);
+      ((ExtendedNode) node).checkPermission(PermissionType.READ);
+    } catch (Exception e) {
+      return false;
     }
     return true;
   }
 
   /**
-   * Get the real node from frozen node, symlink node
-   * return True if the node is viewable, otherwise will return False
+   * Get the real node from frozen node, symlink node return True if the node is
+   * viewable, otherwise will return False
+   *
    * @param node: The node to check
    */
   public static Node getRealNode(Node node) throws Exception {
     // TODO: Need to add to check symlink node
-    if (node.isNodeType("nt:frozenNode")){
+    if (node.isNodeType("nt:frozenNode")) {
       String uuid = node.getProperty("jcr:frozenUuid").getString();
       return node.getSession().getNodeByUUID(uuid);
     } else {
@@ -544,7 +592,8 @@ public class Utils {
     String portalName = PortalContainer.getCurrentPortalContainerName();
 
     String originalNodePath = getRealNodePath(node);
-    String imagePath = "/" + portalName + "/" + currentProtal + "/jcr/" + repository + "/" + workspace + originalNodePath;
+    String imagePath = "/" + portalName + "/" + currentProtal + "/jcr/" + repository + "/"
+        + workspace + originalNodePath;
     if (imagePath.contains("?")) {
       imagePath += "&time=";
     } else {
@@ -560,7 +609,8 @@ public class Utils {
    * @param strRepository
    * @param strWorkspace
    * @param strIdentifier
-   * @return the required node/ the target of a symlink node / null if node was in trash.
+   * @return the required node/ the target of a symlink node / null if node was
+   *         in trash.
    * @throws RepositoryException
    */
   public static Node getRealNode(String strRepository,
@@ -570,11 +620,14 @@ public class Utils {
     LinkManager linkManager = WCMCoreUtils.getService(LinkManager.class);
     Node selectedNode;
     if (isWCMBase) {
-      selectedNode = getViewableNodeByComposer(strRepository, strWorkspace, strIdentifier, WCMComposer.BASE_VERSION);
-    }else {
+      selectedNode = getViewableNodeByComposer(strRepository,
+                                               strWorkspace,
+                                               strIdentifier,
+                                               WCMComposer.BASE_VERSION);
+    } else {
       selectedNode = getViewableNodeByComposer(strRepository, strWorkspace, strIdentifier);
     }
-    if (selectedNode != null){
+    if (selectedNode != null) {
       if (!org.exoplatform.ecm.webui.utils.Utils.isInTrash(selectedNode)) {
         if (linkManager.isLink(selectedNode)) {
           if (linkManager.isTargetReachable(selectedNode)) {
@@ -591,13 +644,12 @@ public class Utils {
     return null;
   }
 
-  public static boolean hasEditPermissionOnPage() throws Exception
-  {
-     UIPortalApplication portalApp = Util.getUIPortalApplication();
-     UIWorkingWorkspace uiWorkingWS = portalApp.getChildById(UIPortalApplication.UI_WORKING_WS_ID);
-     UIPageBody pageBody = uiWorkingWS.findFirstComponentOfType(UIPageBody.class);
-     UIPage uiPage = (UIPage)pageBody.getUIComponent();
-     UserACL userACL = portalApp.getApplicationComponent(UserACL.class);
+  public static boolean hasEditPermissionOnPage() throws Exception {
+    UIPortalApplication portalApp = Util.getUIPortalApplication();
+    UIWorkingWorkspace uiWorkingWS = portalApp.getChildById(UIPortalApplication.UI_WORKING_WS_ID);
+    UIPageBody pageBody = uiWorkingWS.findFirstComponentOfType(UIPageBody.class);
+    UIPage uiPage = (UIPage) pageBody.getUIComponent();
+    UserACL userACL = portalApp.getApplicationComponent(UserACL.class);
 
     if (uiPage != null) {
       return userACL.hasEditPermissionOnPage(uiPage.getOwnerType(),
@@ -649,6 +701,5 @@ public class Utils {
   public static PageNavigation getSelectedNavigation() throws Exception {
     return Util.getUIPortal().getSelectedNavigation();
   }
-
 
 }

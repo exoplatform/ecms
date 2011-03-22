@@ -74,7 +74,6 @@ public class UITagForm extends UIForm {
       oldTagPath_ = selectedTag_.getPath();
       oldName_ = selectedTag_.getName();
       getUIStringInput(TAG_NAME).setValue(oldName_);
-//	    getUIStringInput(TAG_NAME).setEditable(false) ;
     }
   }
 

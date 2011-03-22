@@ -392,14 +392,12 @@ public class UIFCCConfig extends UIForm implements UISelectable {
         preferenceWorkspace = fastContentCreatorConfig.getUIFormSelectBox(UIFCCConstant.WORKSPACE_FORM_SELECTBOX)
                                                       .getValue();
       }
-//			String preferencePath = fastContentCreatorConfig.getUIStringInput(UIFCCConstant.LOCATION_FORM_STRING_INPUT).getValue() ;
       UIOneNodePathSelector uiOneNodePathSelector = fastContentCreatorConfig.createUIComponent(UIOneNodePathSelector.class,
                                                                                                null,
                                                                                                null);
       uiOneNodePathSelector.setIsDisable(preferenceWorkspace, true) ;
       uiOneNodePathSelector.setShowRootPathSelect(true) ;
       uiOneNodePathSelector.setRootNodeLocation(preferenceRepository, preferenceWorkspace, "/");
-//			uiOneNodePathSelector.setRootTreePath(preferencePath);
       uiOneNodePathSelector.init(Utils.getSessionProvider()) ;
       uiOneNodePathSelector.setSourceComponent(fastContentCreatorConfig,
                                                new String[] { UIFCCConstant.LOCATION_FORM_STRING_INPUT });

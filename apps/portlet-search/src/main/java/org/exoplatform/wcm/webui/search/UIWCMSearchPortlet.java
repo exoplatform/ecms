@@ -26,37 +26,35 @@ import org.exoplatform.webui.core.lifecycle.UIApplicationLifecycle;
  * Created by The eXo Platform SAS Author : Anh Do Ngoc anh.do@exoplatform.com
  * Oct 31, 2008
  */
-@ComponentConfig(
-  lifecycle = UIApplicationLifecycle.class
-)
+@ComponentConfig(lifecycle = UIApplicationLifecycle.class)
 public class UIWCMSearchPortlet extends UIPortletApplication {
 
   /** The mode. */
-  private PortletMode					mode															= PortletMode.VIEW;
+  private PortletMode        mode                             = PortletMode.VIEW;
 
   /** The Constant SEARCH_FORM_TEMPLATE_PATH. */
-  public static final String	SEARCH_FORM_TEMPLATE_PATH					= "searchFormTemplatePath".intern();
+  public static final String SEARCH_FORM_TEMPLATE_PATH        = "searchFormTemplatePath".intern();
 
   /** The Constant SEARCH_RESULT_TEMPLATE_PATH. */
-  public static final String	SEARCH_RESULT_TEMPLATE_PATH				= "searchResultTemplatePath".intern();
+  public static final String SEARCH_RESULT_TEMPLATE_PATH      = "searchResultTemplatePath".intern();
 
   /** The Constant SEARCH_PAGINATOR_TEMPLATE_PATH. */
-  public static final String	SEARCH_PAGINATOR_TEMPLATE_PATH		= "searchPaginatorTemplatePath".intern();
+  public static final String SEARCH_PAGINATOR_TEMPLATE_PATH   = "searchPaginatorTemplatePath".intern();
 
   /** The Constant SEARCH_PAGE_LAYOUT_TEMPLATE_PATH. */
-  public static final String	SEARCH_PAGE_LAYOUT_TEMPLATE_PATH	= "searchPageLayoutTemplatePath".intern();
+  public static final String SEARCH_PAGE_LAYOUT_TEMPLATE_PATH = "searchPageLayoutTemplatePath".intern();
 
   /** The Constant REPOSITORY. */
-  public static final String	REPOSITORY												= "repository";
+  public static final String REPOSITORY                       = "repository";
 
   /** The Constant WORKSPACE. */
-  public static final String	WORKSPACE													= "workspace";
+  public static final String WORKSPACE                        = "workspace";
 
   /** The Constant ITEMS_PER_PAGE. */
-  public final static String	ITEMS_PER_PAGE										= "itemsPerPage";
+  public final static String ITEMS_PER_PAGE                   = "itemsPerPage";
 
   /** The Constant SHOW_DATE_CREATED. */
-  public final static String  BASE_PATH                          = "basePath";
+  public final static String BASE_PATH                        = "basePath";
 
   /**
    * Instantiates a new uIWCM search portlet.
@@ -89,7 +87,6 @@ public class UIWCMSearchPortlet extends UIPortletApplication {
    * Activate mode.
    *
    * @param mode the mode
-   *
    * @throws Exception the exception
    */
   private void activateMode(PortletMode mode) throws Exception {

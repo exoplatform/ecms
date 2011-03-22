@@ -45,38 +45,38 @@ import org.exoplatform.webui.ext.filter.UIExtensionFilters;
  * 27 june 2010
  */
 @ComponentConfig(
-		events = {
-				@EventConfig(listeners = PublicationPublishAction.PublicationPublishActionListener.class)
-		}
+    events = {
+        @EventConfig(listeners = PublicationPublishAction.PublicationPublishActionListener.class)
+    }
 )
 public class PublicationPublishAction extends UIComponent {
 
-	private static final List<UIExtensionFilter> FILTERS = Arrays.asList(
-			new UIExtensionFilter[] {
-					new CanAddNodeFilter(), new IsNotLockedFilter(), new IsCheckedOutFilter(), new CanPublishFilter()});
+  private static final List<UIExtensionFilter> FILTERS = Arrays.asList(
+      new UIExtensionFilter[] {
+          new CanAddNodeFilter(), new IsNotLockedFilter(), new IsCheckedOutFilter(), new CanPublishFilter()});
 
-	@UIExtensionFilters
-	public List<UIExtensionFilter> getFilters() {
-		return FILTERS;
-	}
-	public static class PublicationPublishActionListener extends UIActionBarActionListener<PublicationPublishAction> {
+  @UIExtensionFilters
+  public List<UIExtensionFilter> getFilters() {
+    return FILTERS;
+  }
+  public static class PublicationPublishActionListener extends UIActionBarActionListener<PublicationPublishAction> {
 
-		@Override
-		protected void processEvent(Event<PublicationPublishAction> event) throws Exception {
-			UIJCRExplorer uiExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class);
-			PublicationService publicationService = (PublicationService)PortalContainer.getInstance().getComponentInstanceOfType(PublicationService.class);
-			Node node = uiExplorer.getCurrentNode();
-			if(node.isLocked()) {
-			  node.getSession().addLockToken(LockUtil.getLockToken(node));
-			}
-			HashMap<String,String> context = new HashMap<String,String>();
+    @Override
+    protected void processEvent(Event<PublicationPublishAction> event) throws Exception {
+      UIJCRExplorer uiExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class);
+      PublicationService publicationService = (PublicationService)PortalContainer.getInstance().getComponentInstanceOfType(PublicationService.class);
+      Node node = uiExplorer.getCurrentNode();
+      if(node.isLocked()) {
+        node.getSession().addLockToken(LockUtil.getLockToken(node));
+      }
+      HashMap<String,String> context = new HashMap<String,String>();
 
-			publicationService.changeState(node, "published", context);
+      publicationService.changeState(node, "published", context);
 
-			UIPopupContainer UIPopupContainer = uiExplorer.getChild(UIPopupContainer.class);
-			event.getRequestContext().addUIComponentToUpdateByAjax(UIPopupContainer);
-			event.getRequestContext().addUIComponentToUpdateByAjax(uiExplorer);
+      UIPopupContainer UIPopupContainer = uiExplorer.getChild(UIPopupContainer.class);
+      event.getRequestContext().addUIComponentToUpdateByAjax(UIPopupContainer);
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiExplorer);
 
-		}		
-	}
+    }
+  }
 }

@@ -104,9 +104,7 @@ public class XJavascriptService implements Startable {
    * Get active java script.
    *
    * @param home the home
-   *
-   * @return 		Code of all js file in home node.
-   *
+   * @return Code of all js file in home node.
    * @throws Exception the exception
    */
   public String getActiveJavaScript(Node webcontent) throws Exception {

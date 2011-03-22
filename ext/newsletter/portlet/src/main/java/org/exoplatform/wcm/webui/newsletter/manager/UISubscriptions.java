@@ -70,29 +70,29 @@ import org.exoplatform.webui.form.UIFormSelectBox;
                )
 public class UISubscriptions extends UIForm {
   /** The subscription handler. */
-  NewsletterSubscriptionHandler subscriptionHandler;
+  NewsletterSubscriptionHandler      subscriptionHandler;
 
   /** The category handler. */
-  NewsletterCategoryHandler categoryHandler;
+  NewsletterCategoryHandler          categoryHandler;
 
   /** The category config. */
-  NewsletterCategoryConfig categoryConfig;
+  NewsletterCategoryConfig           categoryConfig;
 
   /** The user handler. */
-  NewsletterManageUserHandler userHandler = null;
+  NewsletterManageUserHandler        userHandler                      = null;
 
-  String selectSubscriptionCheckboxHeader = "SelectSubscriptionCheckboxHeader";
+  String                             selectSubscriptionCheckboxHeader = "SelectSubscriptionCheckboxHeader";
 
-  String selectSubscriptionCheckbox 	  = "SelectSubscriptionCheckbox";
+  String                             selectSubscriptionCheckbox       = "SelectSubscriptionCheckbox";
 
-  String uiSubscriptionsCheckAll = "UISubscriptionsCheckAll";
+  String                             uiSubscriptionsCheckAll          = "UISubscriptionsCheckAll";
 
-  List<NewsletterSubscriptionConfig> listSubs = null;
+  List<NewsletterSubscriptionConfig> listSubs                         = null;
 
   /** The portal name. */
-  String portalName;
+  String                             portalName;
 
-  String userId;
+  String                             userId;
 
   /**
    * Instantiates a new uI subscriptions.

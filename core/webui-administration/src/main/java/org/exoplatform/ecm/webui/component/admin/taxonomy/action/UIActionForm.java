@@ -445,10 +445,6 @@ public class UIActionForm extends UIDialogForm implements UISelectable {
             addPermission(currentNode.getNode(Utils.EXO_ACTIONS), Utils.EXO_PERMISSIONS,
                           Util.getPortalRequestContext().getRemoteUser(), uiActionForm);
           session.save();
-//          addPermission(currentNode.getNode(Utils.EXO_ACTIONS).getNode(actionName),
-//          							Utils.EXO_PERMISSIONS,
-//          							Util.getPortalRequestContext().getRemoteUser(), uiActionForm);
-//          session.save();
 
         } catch (ConstraintViolationException cex) {
           uiApp.addMessage(new ApplicationMessage("UIActionForm.msg.constraint-violation-exception",

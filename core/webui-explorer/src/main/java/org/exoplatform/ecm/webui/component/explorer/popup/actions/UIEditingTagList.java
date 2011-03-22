@@ -55,7 +55,6 @@ public class UIEditingTagList extends UIGrid {
   public void updateGrid() throws Exception {
     NewFolksonomyService newFolksonomyService = getApplicationComponent(NewFolksonomyService.class);
     UIJCRExplorer uiExplorer = getAncestorOfType(UIJCRExplorer.class);
-//		UITagExplorer uiTagExplorer = getAncestorOfType(UITagExplorer.class);
     NodeHierarchyCreator nodeHierarchyCreator = uiExplorer.getApplicationComponent(NodeHierarchyCreator.class);
     String repository = uiExplorer.getRepositoryName();
     String workspace = uiExplorer.getRepository().getConfiguration().getDefaultWorkspaceName();

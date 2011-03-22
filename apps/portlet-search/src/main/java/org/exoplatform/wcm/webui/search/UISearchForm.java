@@ -47,43 +47,40 @@ import org.exoplatform.webui.form.UIFormStringInput;
  * Created by The eXo Platform SAS Author : Anh Do Ngoc anh.do@exoplatform.com
  * Oct 31, 2008
  */
-@ComponentConfig(
-  lifecycle = UIFormLifecycle.class,
-  events = {
-    @EventConfig(listeners = UISearchForm.SearchActionListener.class)
-  }
-)
+@ComponentConfig(lifecycle = UIFormLifecycle.class,
+                 events = {
+  @EventConfig(listeners = UISearchForm.SearchActionListener.class) })
 public class UISearchForm extends UIForm {
 
   /** The template path. */
-  private String							templatePath;
+  private String             templatePath;
 
   /** The resource resolver. */
-  private ResourceResolver		resourceResolver;
+  private ResourceResolver   resourceResolver;
 
   /** The Constant KEYWORD_INPUT. */
-  public static final String	KEYWORD_INPUT										= "keywordInput".intern();
+  public static final String KEYWORD_INPUT                   = "keywordInput".intern();
 
   /** The Constant DOCUMENT_CHECKING. */
-  public static final String	DOCUMENT_CHECKING								= "documentCheckBox".intern();
+  public static final String DOCUMENT_CHECKING               = "documentCheckBox".intern();
 
   /** The Constant PAGE_CHECKING. */
-  public static final String	PAGE_CHECKING										= "pageCheckBox".intern();
+  public static final String PAGE_CHECKING                   = "pageCheckBox".intern();
 
   /** The Constant PORTALS_SELECTOR. */
-  public static final String	PORTALS_SELECTOR								= "portalSelector".intern();
+  public static final String PORTALS_SELECTOR                = "portalSelector".intern();
 
   /** The Constant ALL_OPTION. */
-  public static final String	ALL_OPTION											= "all".intern();
+  public static final String ALL_OPTION                      = "all".intern();
 
   /** The Constant MESSAGE_NOT_CHECKED_TYPE_SEARCH. */
-  public static final String	MESSAGE_NOT_CHECKED_TYPE_SEARCH	= "UISearchForm.message.not-checked".intern();
+  public static final String MESSAGE_NOT_CHECKED_TYPE_SEARCH = "UISearchForm.message.not-checked".intern();
 
   /** The Constant MESSAGE_NOT_SUPPORT_KEYWORD. */
-  public static final String	MESSAGE_NOT_SUPPORT_KEYWORD			= "UISearchForm.message.keyword-not-support".intern();
+  public static final String MESSAGE_NOT_SUPPORT_KEYWORD     = "UISearchForm.message.keyword-not-support".intern();
 
   /** The Constant MESSAGE_NOT_EMPTY_KEYWORD. */
-  public static final String	MESSAGE_NOT_EMPTY_KEYWORD				= "UISearchForm.message.keyword-not-empty".intern();
+  public static final String MESSAGE_NOT_EMPTY_KEYWORD       = "UISearchForm.message.keyword-not-empty".intern();
 
   /**
    * Instantiates a new uI search form.
@@ -98,9 +95,9 @@ public class UISearchForm extends UIForm {
                                                             getPortalList());
     UIFormCheckBoxInput uiPageCheckBox = new UIFormCheckBoxInput(PAGE_CHECKING, PAGE_CHECKING, null);
     uiPageCheckBox.setChecked(false);
-    UIFormCheckBoxInput uiDocumentCheckBox = new UIFormCheckBoxInput(	DOCUMENT_CHECKING,
-                                                                      DOCUMENT_CHECKING,
-                                                                      null);
+    UIFormCheckBoxInput uiDocumentCheckBox = new UIFormCheckBoxInput(DOCUMENT_CHECKING,
+                                                                     DOCUMENT_CHECKING,
+                                                                     null);
     uiDocumentCheckBox.setChecked(true);
 
     addUIFormInput(uiKeywordInput);
@@ -128,13 +125,13 @@ public class UISearchForm extends UIForm {
     return templatePath;
   }
 
-   public void setKeyword() {
+  public void setKeyword() {
     PortalRequestContext portalRequestContext = Util.getPortalRequestContext();
     String keyword = portalRequestContext.getRequestParameter("keyword");
-    if(keyword != null && keyword.length() > 0) {
+    if (keyword != null && keyword.length() > 0) {
       getUIStringInput(UISearchForm.KEYWORD_INPUT).setValue(keyword);
     }
-   }
+  }
 
   /*
    * (non-Javadoc)
@@ -150,7 +147,6 @@ public class UISearchForm extends UIForm {
    * Gets the portal list.
    *
    * @return the portal list
-   *
    * @throws Exception the exception
    */
   @SuppressWarnings("unchecked")
@@ -227,7 +223,8 @@ public class UISearchForm extends UIForm {
       }
       keyword = keyword.replace('-', ' ').toLowerCase(portletRequestContext.getLocale());
       uiSearchResult.setResultType(resultType);
-      String selectedPortal = (uiPortalSelectBox.getValue().equals(UISearchForm.ALL_OPTION)) ? Util.getPortalRequestContext().getPortalOwner()
+      String selectedPortal = (uiPortalSelectBox.getValue().equals(UISearchForm.ALL_OPTION)) ? Util.getPortalRequestContext()
+                                                                                                   .getPortalOwner()
                                                                                             : uiPortalSelectBox.getValue();
       QueryCriteria queryCriteria = new QueryCriteria();
 
@@ -254,10 +251,10 @@ public class UISearchForm extends UIForm {
       int itemsPerPage = Integer.parseInt(portletPreferences.getValue(UIWCMSearchPortlet.ITEMS_PER_PAGE,
                                                                       null));
       try {
-        WCMPaginatedQueryResult paginatedQueryResult = siteSearchService.searchSiteContents(
-                                                                                            Utils.getSessionProvider(),
+        WCMPaginatedQueryResult paginatedQueryResult = siteSearchService.searchSiteContents(Utils.getSessionProvider(),
                                                                                             queryCriteria,
-                                                                                            itemsPerPage, false);
+                                                                                            itemsPerPage,
+                                                                                            false);
         uiSearchResult.setKeyword(keyword);
         uiSearchResult.setPageList(paginatedQueryResult);
         float timeSearch = paginatedQueryResult.getQueryTimeInSecond();

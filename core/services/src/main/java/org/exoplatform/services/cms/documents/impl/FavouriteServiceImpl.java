@@ -88,8 +88,7 @@ public class FavouriteServiceImpl implements FavouriteService {
         Value[] values = favouriteProperty.getValues();
         Value[] newValues = new Value[values.length + 1];
         System.arraycopy(values, 0, newValues, 0, values.length);
-        ValueFactory valueFactory =	node.getSession().getValueFactory();
-        //System.out.println(values.length + " " + newValues[values.length] + " " + valueFactory);
+        ValueFactory valueFactory = node.getSession().getValueFactory();
         newValues[values.length] = valueFactory.createValue(userName);
         node.setProperty(EXO_FAVOURITER_PROPERTY, newValues);
         node.getSession().save();
@@ -144,21 +143,25 @@ public class FavouriteServiceImpl implements FavouriteService {
    * {@inheritDoc}
    */
   public List<Node> getAllFavouriteNodesByUser(String workspace,
-      String repository, SessionProvider sessionProvider, String userName)
-      throws Exception {
+                                               String repository,
+                                               SessionProvider sessionProvider,
+                                               String userName) throws Exception {
 
-    StringBuilder query	= new StringBuilder("SELECT * FROM ").
-                    append(EXO_FAVOURITE_NODE).
-                    append(" WHERE ").
-                    append(EXO_FAVOURITER_PROPERTY).
-                    append(" IS NOT NULL AND ").
-                    append(" CONTAINS (").
-                    append(EXO_FAVOURITER_PROPERTY).
-                    append(", '").
-                    append(userName).append("')");
+    StringBuilder query = new StringBuilder("SELECT * FROM ").append(EXO_FAVOURITE_NODE)
+                                                             .append(" WHERE ")
+                                                             .append(EXO_FAVOURITER_PROPERTY)
+                                                             .append(" IS NOT NULL AND ")
+                                                             .append(" CONTAINS (")
+                                                             .append(EXO_FAVOURITER_PROPERTY)
+                                                             .append(", '")
+                                                             .append(userName)
+                                                             .append("')");
 
-    return selectNodesByQueryString(workspace, repository, sessionProvider,
-        query.toString(), Query.SQL);
+    return selectNodesByQueryString(workspace,
+                                    repository,
+                                    sessionProvider,
+                                    query.toString(),
+                                    Query.SQL);
   }
 
 

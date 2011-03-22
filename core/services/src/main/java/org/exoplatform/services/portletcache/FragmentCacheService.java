@@ -35,114 +35,106 @@ import org.picocontainer.Startable;
  */
 
 @Managed
-@NameTemplate({@Property(key = "view", value = "portal"), @Property(key = "service", value = "fragmentcache"),
-   @Property(key = "type", value = "content")})
+@NameTemplate( { @Property(key = "view", value = "portal"),
+    @Property(key = "service", value = "fragmentcache"), @Property(key = "type", value = "content") })
 @ManagedDescription("FragmentCache Service")
 @RESTEndpoint(path = "fragmentcacheservice")
-public class FragmentCacheService implements Startable
-{
+public class FragmentCacheService implements Startable {
 
-    private static final int	DEFAULT_CACHE_SIZE = 10000;	// default to 10000 entries in FutureCache
+  private static final int DEFAULT_CACHE_SIZE    = 10000;                                          // default
+                                                                                                    // to
+                                                                                                    // 10000
+                                                                                                    // entries
+                                                                                                    // in
+                                                                                                    // FutureCache
 
-    private static final int	DEFAULT_CACHE_CLEANUP = 15;	// default 15s interval for cleanup thread
+  private static final int DEFAULT_CACHE_CLEANUP = 15;                                             // default
+                                                                                                    // 15s
+                                                                                                    // interval
+                                                                                                    // for
+                                                                                                    // cleanup
+                                                                                                    // thread
 
-   /** . */
-   private static final Log log = ExoLogger.getLogger(FragmentCacheService.class);
+  /** . */
+  private static final Log log                   = ExoLogger.getLogger(FragmentCacheService.class);
 
-   /** . */
-   final PortletFutureCache cache;
+  /** . */
+  final PortletFutureCache cache;
 
-   public FragmentCacheService(InitParams params)
-   {
-      int cleanupCache = DEFAULT_CACHE_CLEANUP;
-      int cacheSize = DEFAULT_CACHE_SIZE;
+  public FragmentCacheService(InitParams params) {
+    int cleanupCache = DEFAULT_CACHE_CLEANUP;
+    int cacheSize = DEFAULT_CACHE_SIZE;
 
-      if (params.getValueParam("cleanup-cache") != null)
-      {
-         String cleanupCacheConfig = params.getValueParam("cleanup-cache").getValue();
-         try
-         {
-            cleanupCache = Integer.parseInt(cleanupCacheConfig);
-         }
-         catch (NumberFormatException e)
-         {
-            log.warn("Invalid cleanup-cache setting " + cleanupCacheConfig);
-         }
+    if (params.getValueParam("cleanup-cache") != null) {
+      String cleanupCacheConfig = params.getValueParam("cleanup-cache").getValue();
+      try {
+        cleanupCache = Integer.parseInt(cleanupCacheConfig);
+      } catch (NumberFormatException e) {
+        log.warn("Invalid cleanup-cache setting " + cleanupCacheConfig);
       }
+    }
 
-      if (params.getValueParam("cache-size") != null)
-      {
-         String cacheSizeConfig = params.getValueParam("cache-size").getValue();
-         try
-         {
-             cacheSize = Integer.parseInt(cacheSizeConfig);
-         }
-         catch (NumberFormatException e)
-         {
-            log.warn("Invalid cache-size setting " + cacheSizeConfig);
-         }
+    if (params.getValueParam("cache-size") != null) {
+      String cacheSizeConfig = params.getValueParam("cache-size").getValue();
+      try {
+        cacheSize = Integer.parseInt(cacheSizeConfig);
+      } catch (NumberFormatException e) {
+        log.warn("Invalid cache-size setting " + cacheSizeConfig);
       }
+    }
 
-      this.cache = new PortletFutureCache(log, cleanupCache, cacheSize);
+    this.cache = new PortletFutureCache(log, cleanupCache, cacheSize);
 
-   }
+  }
 
-   @Managed
-   @ManagedDescription("What is the Cleanup Cache period (in seconds) ?")
-   public int getCleanupCache()
-   {
-      return cache.getCleanupCache();
-   }
+  @Managed
+  @ManagedDescription("What is the Cleanup Cache period (in seconds) ?")
+  public int getCleanupCache() {
+    return cache.getCleanupCache();
+  }
 
-   @Managed
-   @ManagedDescription("How many Entries in Cache  ?")
-   public int getCacheSize()
-   {
-      return cache.getCacheSize();
-   }
+  @Managed
+  @ManagedDescription("How many Entries in Cache  ?")
+  public int getCacheSize() {
+    return cache.getCacheSize();
+  }
 
-   @Managed
-   @ManagedDescription("Get Maximum Entries in Cache")
-   public int getCacheMaxSize()
-   {
-      return cache.getCacheMaxSize();
-   }
+  @Managed
+  @ManagedDescription("Get Maximum Entries in Cache")
+  public int getCacheMaxSize() {
+    return cache.getCacheMaxSize();
+  }
 
-   @Managed
-   @ManagedDescription("Set Maximum Entries in Cache")
-   /***
-     * Set Max Cache size, ie, max entries allowed in FutureCache.
-     * An IllegalArgumentException is thrown if cacheMaxSize is less than 1.
-    */
-   public void setCacheSize(int cacheMaxSize)
-   {
-       if (cacheMaxSize < 1)
-           throw new IllegalArgumentException("invalid value for max cache size");
+  @Managed
+  @ManagedDescription("Set Maximum Entries in Cache")
+  /***
+   * Set Max Cache size, ie, max entries allowed in FutureCache.
+   * An IllegalArgumentException is thrown if cacheMaxSize is less than 1.
+   */
+  public void setCacheSize(int cacheMaxSize) {
+    if (cacheMaxSize < 1)
+      throw new IllegalArgumentException("invalid value for max cache size");
 
-      cache.setCacheMaxSize(cacheMaxSize);
-   }
+    cache.setCacheMaxSize(cacheMaxSize);
+  }
 
-    @Managed
-    @ManagedDescription("Sets Cleanup Cache period (in seconds)")
-   public void setCleanupCache(int cleanupCache)
-   {
-      this.cache.updateCleanupCache(cleanupCache);
-   }
+  @Managed
+  @ManagedDescription("Sets Cleanup Cache period (in seconds)")
+  public void setCleanupCache(int cleanupCache) {
+    this.cache.updateCleanupCache(cleanupCache);
+  }
 
-   public void start()
-   {
-      cache.start();
-   }
+  public void start() {
+    cache.start();
+  }
 
-   public void stop()
-   {
-      cache.stop();
-   }
+  public void stop() {
+    cache.stop();
+  }
 
-   @Managed
-   @ManagedDescription("Clear the Fragment Cache")
-   public void clearCache()
-   {
-       cache.clearCache();
-   }
+  @Managed
+  @ManagedDescription("Clear the Fragment Cache")
+  public void clearCache() {
+    cache.clearCache();
+  }
 }

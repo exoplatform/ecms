@@ -35,14 +35,12 @@ import org.exoplatform.webui.event.EventListener;
  * Dec 11, 2009
  * 4:31:33 PM
  */
-@ComponentConfig(
-    lifecycle = UIContainerLifecycle.class,
-//    template = "app:/groovy/webui/component/admin/folksonomy/UIFolksonomyManager.gtmpl",
-    events = {	@EventConfig(listeners = UITagManager.EditStyleActionListener.class),
-                @EventConfig(listeners = UITagManager.AddStyleActionListener.class),
-                 @EventConfig(listeners = UITagManager.RemoveStyleActionListener.class, confirm = "UIFolksonomyManager.msg.confirm-delete")
-              }
-)
+@ComponentConfig(lifecycle = UIContainerLifecycle.class,
+events = {
+    @EventConfig(listeners = UITagManager.EditStyleActionListener.class),
+    @EventConfig(listeners = UITagManager.AddStyleActionListener.class),
+    @EventConfig(listeners = UITagManager.RemoveStyleActionListener.class,
+                 confirm = "UIFolksonomyManager.msg.confirm-delete") })
 public class UITagManager extends UIContainer {
 
   public UITagManager() throws Exception {
@@ -95,7 +93,6 @@ public class UITagManager extends UIContainer {
       UITagManager uiManager = event.getSource();
       String selectedName = event.getRequestContext().getRequestParameter(OBJECTID);
       Node selectedTagStyle = uiManager.getSelectedTagStyle(selectedName);
-//      NewFolksonomyService newFolksonomyService = uiManager.getApplicationComponent(NewFolksonomyService.class) ;
       Node parentNode = selectedTagStyle.getParent();
       selectedTagStyle.remove();
       parentNode.getSession().save();
@@ -108,7 +105,6 @@ public class UITagManager extends UIContainer {
     public void execute(Event<UITagManager> event) throws Exception {
       UITagManager uiManager = event.getSource() ;
       String selectedName = event.getRequestContext().getRequestParameter(OBJECTID) ;
-//      Node selectedTagStyle = uiManager.getSelectedTagStyle(selectedName) ;
       uiManager.initTaggingFormPopup(null) ;
       event.getRequestContext().addUIComponentToUpdateByAjax(uiManager) ;
     }

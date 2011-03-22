@@ -125,7 +125,6 @@ public class FriendlyServiceImpl implements FriendlyService {
     for (String unf : unfriendlies.keySet()) {
       if (unfriendlyUri.contains(unf)) {
         String fr = unfriendlies.get(unf);
-//				String target = unfriendlyUri.substring(unfriendlyUri.indexOf(unf));
         return unfriendlyUri.replace(unf, "/"+getServletName()+"/"+fr);
       }
     }
