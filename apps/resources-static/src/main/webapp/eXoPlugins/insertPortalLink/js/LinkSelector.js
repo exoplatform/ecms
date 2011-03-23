@@ -104,8 +104,14 @@ LinkSelector.listPortalLinks = function(oPortalLink) {
 		treeHTML +=			'</div>';
 		treeHTML +=		'</div>';
 		treeHTML +=	'</div>';
+		treeHTML +=	'<div class="ChildrenContainer" style="display:none;">';
+		treeHTML +=	'</div>';
 	}
-	nodeGroup.innerHTML = treeHTML;
+	if (treeHTML.length > 0) {
+		nodeGroup.innerHTML = treeHTML;
+	} else {
+		nodeGroup.style.height = 0;
+	}
 	var iconElt = eXo.core.DOMUtil.getChildrenByTagName(parentNode, "div")[0]
 	if(nodeGroup.style.display != 'block') {
 		nodeGroup.style.display = 'block';
