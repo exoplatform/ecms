@@ -59,9 +59,9 @@ public class UIPageSelector extends UIForm {
     UIPageNodeSelector pageNodeSelector = addChild(UIPageNodeSelector.class, null, null);
     UITree uiTree = pageNodeSelector.getChild(UITree.class);
     uiTree.setUIRightClickPopupMenu(null);
-    pageNodeSelector.selectPageNodeByUri(null);
 
     UIPageSelectorPanel pageSelectorPanel = addChild(UIPageSelectorPanel.class, null, null);
+    pageSelectorPanel.setSelectedPage(pageNodeSelector.getSelectedNode().getNode());
     pageSelectorPanel.updateGrid();
   }
 
