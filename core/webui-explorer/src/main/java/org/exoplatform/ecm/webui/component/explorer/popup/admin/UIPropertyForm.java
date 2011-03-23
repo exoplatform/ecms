@@ -111,7 +111,8 @@ public class UIPropertyForm extends UIForm {
         Integer.toString(PropertyType.REFERENCE)));
     List<SelectItemOption<String>> nsOptions = new ArrayList<SelectItemOption<String>>();
     addUIFormInput(new UIFormSelectBox(FIELD_NAMESPACE,FIELD_NAMESPACE, nsOptions));
-    addUIFormInput(new UIFormStringInput(FIELD_PROPERTY, FIELD_PROPERTY, null).addValidator(MandatoryValidator.class).addValidator(ECMNameValidator.class));
+    addUIFormInput(new UIFormStringInput(FIELD_PROPERTY, FIELD_PROPERTY, null).addValidator(MandatoryValidator.class)
+                                                                              .addValidator(ECMNameValidator.class));
     UIFormSelectBox uiSelectBox = new UIFormSelectBox(FIELD_TYPE, FIELD_TYPE, options);
     uiSelectBox.setOnChange("ChangeType");
     addUIFormInput(uiSelectBox);

@@ -78,7 +78,7 @@ import org.exoplatform.webui.event.EventListener;
     @ComponentConfig(lifecycle = Lifecycle.class, events = {
         @EventConfig(listeners = UICLVPresentation.RefreshActionListener.class),
         @EventConfig(listeners = UICLVPresentation.DeleteContentActionListener.class) }),
-    @ComponentConfig(type = UICustomizeablePaginator.class, 
+    @ComponentConfig(type = UICustomizeablePaginator.class,
                      events = @EventConfig(listeners = UICustomizeablePaginator.ShowPageActionListener.class)) })
 public class UICLVPresentation extends UIContainer {
 
@@ -109,7 +109,7 @@ public class UICLVPresentation extends UIContainer {
 
   /**
    * Inits the.
-   * 
+   *
    * @param resourceResolver the resource resolver
    * @param dataPageList the data page list
    * @throws Exception the exception
@@ -241,7 +241,7 @@ public class UICLVPresentation extends UIContainer {
 
   /**
    * Gets the uRL.
-   * 
+   *
    * @param node the node
    * @return the uRL
    * @throws Exception the exception
@@ -270,7 +270,7 @@ public class UICLVPresentation extends UIContainer {
 
   /**
    * Checks if is show field.
-   * 
+   *
    * @param field the field
    * @return true, if is show field
    */
@@ -281,7 +281,7 @@ public class UICLVPresentation extends UIContainer {
 
   /**
    * Show paginator.
-   * 
+   *
    * @return true, if successful
    * @throws Exception the exception
    */
@@ -314,7 +314,7 @@ public class UICLVPresentation extends UIContainer {
 
   /**
    * Gets the title.
-   * 
+   *
    * @param node the node
    * @return the title
    * @throws Exception the exception
@@ -347,7 +347,7 @@ public class UICLVPresentation extends UIContainer {
 
   /**
    * Gets the summary.
-   * 
+   *
    * @param node the node
    * @return the summary
    * @throws Exception the exception
@@ -371,7 +371,7 @@ public class UICLVPresentation extends UIContainer {
 
   /**
    * Gets the uRL.
-   * 
+   *
    * @param node the node
    * @return the uRL
    * @throws Exception the exception
@@ -413,7 +413,7 @@ public class UICLVPresentation extends UIContainer {
 
   /**
    * Gets the webdav url.
-   * 
+   *
    * @param node the node
    * @return the webdav url
    * @throws Exception the exception
@@ -448,7 +448,7 @@ public class UICLVPresentation extends UIContainer {
 
   /**
    * Gets the author.
-   * 
+   *
    * @param node the node
    * @return the author
    * @throws Exception the exception
@@ -463,7 +463,7 @@ public class UICLVPresentation extends UIContainer {
 
   /**
    * Gets the created date.
-   * 
+   *
    * @param node the node
    * @return the created date
    * @throws Exception the exception
@@ -478,7 +478,7 @@ public class UICLVPresentation extends UIContainer {
 
   /**
    * Gets the modified date.
-   * 
+   *
    * @param node the node
    * @return the modified date
    * @throws Exception the exception
@@ -493,7 +493,7 @@ public class UICLVPresentation extends UIContainer {
 
   /**
    * Gets the content icon.
-   * 
+   *
    * @param node the node
    * @return the content icon
    */
@@ -584,7 +584,7 @@ public class UICLVPresentation extends UIContainer {
 
   /**
    * Gets the illustrative image.
-   * 
+   *
    * @param node the node
    * @return the illustrative image
    */
@@ -613,7 +613,7 @@ public class UICLVPresentation extends UIContainer {
 
   /**
    * Gets the rss link.
-   * 
+   *
    * @return the rss link
    */
   public String getRssLink() {
@@ -645,7 +645,7 @@ public class UICLVPresentation extends UIContainer {
 
   /**
    * This method will put the mandatory html code to manage QuickEdit mode
-   * 
+   *
    * @param cssClass
    * @param viewNode
    * @return
@@ -660,10 +660,10 @@ public class UICLVPresentation extends UIContainer {
     sb.append("<div class=\"" + cssClass + "\" onmouseover=\"this.className  = '" + cssClass + " "
         + hoverClass + "' \" onmouseout=\"this.className = '" + cssClass + "' \">");
     if (Utils.isShowQuickEdit()) {
-      sb.append("	<div class=\"EdittingContent\" style=\" z-index: 1\">");
-      sb.append("		<div class=\"EdittingToolBar \" >");
-      sb.append("			<div class=\"EdittingToolBarL\">");
-      sb.append("				<div class=\"EdittingToolBarC clearfix\">");
+      sb.append("  <div class=\"EdittingContent\" style=\" z-index: 1\">");
+      sb.append("    <div class=\"EdittingToolBar \" >");
+      sb.append("      <div class=\"EdittingToolBarL\">");
+      sb.append("        <div class=\"EdittingToolBarC clearfix\">");
       if (Utils.isShowDelete(viewNode)) {
         String strDeleteBundle = "Delete";
         try {
@@ -671,12 +671,12 @@ public class UICLVPresentation extends UIContainer {
                                                  .getString("UICLVPresentation.action.delete");
         } catch (MissingResourceException e) {
         }
-        sb.append("					<div style=\"float: right\">");
-        sb.append("                     <a href=\"" + contentDeleteLink + "\" title=\""
+        sb.append("          <div style=\"float: right\">");
+        sb.append("            <a href=\"" + contentDeleteLink + "\" title=\""
             + strDeleteBundle + "\"class=\"CloseContentIcon\" >");
-        sb.append("						  &nbsp;");
-        sb.append("						</a>");
-        sb.append("					</div>");
+        sb.append("              &nbsp;");
+        sb.append("            </a>");
+        sb.append("          </div>");
       }
 
       if (isShowEdit(viewNode) && !LockUtil.isLocked(viewNode)) {
@@ -686,18 +686,18 @@ public class UICLVPresentation extends UIContainer {
                                                .getString("UICLVPresentation.action.edit");
         } catch (MissingResourceException e) {
         }
-        sb.append("					<div style=\"float: right\">");
-        sb.append("						<a onclick = 'eXo.ecm.CLV.addURL(this)' href=\"" + contentEditLink
+        sb.append("          <div style=\"float: right\">");
+        sb.append("            <a onclick = 'eXo.ecm.CLV.addURL(this)' href=\"" + contentEditLink
             + "\" title=\"" + strEditBundle + "\" class=\"EditContentIcon\" >");
-        sb.append("						  &nbsp;");
-        sb.append("						</a>");
-        sb.append("					</div>");
+        sb.append("            &nbsp;");
+        sb.append("            </a>");
+        sb.append("          </div>");
       } else {
-        sb.append("					<div style=\"float: right\">");
-        sb.append("						<div title=\"lock\" class=\"IconLocked\" >");
-        sb.append("						  &nbsp;");
-        sb.append("						</div>");
-        sb.append("					</div>");
+        sb.append("          <div style=\"float: right\">");
+        sb.append("            <div title=\"lock\" class=\"IconLocked\" >");
+        sb.append("              &nbsp;");
+        sb.append("            </div>");
+        sb.append("          </div>");
       }
       if (viewNode.hasProperty("publication:currentState")) {
         String state = viewNode.getProperty("publication:currentState").getValue().getString();
@@ -706,14 +706,14 @@ public class UICLVPresentation extends UIContainer {
                                        .getString("PublicationStates." + state);
         } catch (MissingResourceException e) {
         }
-        sb.append("         <div class=\"EdittingCurrentState\" style=\"float: right\">");
+        sb.append("          <div class=\"EdittingCurrentState\" style=\"float: right\">");
         sb.append("" + state);
-        sb.append("         </div>");
+        sb.append("          </div>");
       }
-      sb.append("				</div>");
-      sb.append("			</div>");
-      sb.append("		</div>");
-      sb.append("	</div>");
+      sb.append("          </div>");
+      sb.append("        </div>");
+      sb.append("      </div>");
+      sb.append("    </div>");
     }
 
     return sb.toString();

@@ -46,7 +46,12 @@ public interface CommentsService {
    * @see                   Node
    * @throws Exception
    */
-  public void addComment(Node document, String commentor, String email, String site, String comment, String language) throws Exception ;
+  public void addComment(Node document,
+                         String commentor,
+                         String email,
+                         String site,
+                         String comment,
+                         String language) throws Exception;
 
   /**
    * Update comment for document: set new comment for node

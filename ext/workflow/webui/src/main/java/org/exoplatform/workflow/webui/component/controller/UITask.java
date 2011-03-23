@@ -403,9 +403,9 @@ public class UITask extends UIForm implements UISelectable {
         value = ((UIFormStringInput) input).getValue();
       } else if (input instanceof UIFormDateTimeInput) {
         Calendar calendar = ((UIFormDateTimeInput) input).getCalendar();
-        /*if (calendar == null) calendar = new GregorianCalendar();
-        value = calendar.getTime();*/
-        value = ((calendar == null) ? (name.equals("startDate") ? (new GregorianCalendar().getTime()) : ("")) : (calendar.getTime()));
+        value = ((calendar == null) ? (name.equals("startDate") ? (new GregorianCalendar().getTime())
+                                                               : (""))
+                                   : (calendar.getTime()));
       } else if (input instanceof UIFormWYSIWYGInput) {
         value = ((UIFormWYSIWYGInput)input).getValue();
       } else if (input instanceof UIFormTextAreaInput) {

@@ -127,27 +127,31 @@ public class StageAndVersionPublicationPlugin extends WebpagePublicationPlugin{
     return node.canAddMixin(StageAndVersionPublicationConstant.PUBLICATION_LIFECYCLE_TYPE);
   }
 
-  /* (non-Javadoc)
-   * @see org.exoplatform.services.ecm.publication.PublicationPlugin#changeState(javax.jcr.Node, java.lang.String, java.util.HashMap)
+  /*
+   * (non-Javadoc)
+   * @see
+   * org.exoplatform.services.ecm.publication.PublicationPlugin#changeState(
+   * javax.jcr.Node, java.lang.String, java.util.HashMap)
    */
-  public void changeState(Node node, String newState, HashMap<String, String> context) throws IncorrectStateUpdateLifecycleException,
-                                                                                      Exception {
+  public void changeState(Node node,
+                          String newState,
+                          HashMap<String,
+                          String> context) throws IncorrectStateUpdateLifecycleException, Exception {
     String versionName = context.get(StageAndVersionPublicationConstant.CURRENT_REVISION_NAME);
     String logItemName = versionName;
     ConversationState conversationState = ConversationState.getCurrent();
-//    String userId = node.getSession().getUserID();
     String userId = conversationState.getIdentity().getUserId();
     Node selectedRevision = null;
-    if(node.getName().equals(versionName) || versionName == null) {
+    if (node.getName().equals(versionName) || versionName == null) {
       selectedRevision = node;
       logItemName = node.getName();
-    }else {
+    } else {
       selectedRevision = node.getVersionHistory().getVersion(versionName);
     }
     Map<String, VersionData> revisionsMap = getRevisionData(node);
     VersionLog versionLog = null;
     ValueFactory valueFactory = node.getSession().getValueFactory();
-    if(PublicationDefaultStates.ENROLLED.equalsIgnoreCase(newState)) {
+    if (PublicationDefaultStates.ENROLLED.equalsIgnoreCase(newState)) {
       versionLog = new VersionLog(logItemName,
                                   newState,
                                   node.getSession().getUserID(),
@@ -158,7 +162,7 @@ public class StageAndVersionPublicationPlugin extends WebpagePublicationPlugin{
       revisionsMap.put(node.getUUID(),revisionData);
       addRevisionData(node,revisionsMap.values());
       addLog(node,versionLog);
-    } else if(PublicationDefaultStates.DRAFT.equalsIgnoreCase(newState)) {
+    } else if (PublicationDefaultStates.DRAFT.equalsIgnoreCase(newState)) {
       node.setProperty(StageAndVersionPublicationConstant.CURRENT_STATE,newState);
       versionLog = new VersionLog(logItemName,
                                   newState,
@@ -167,15 +171,15 @@ public class StageAndVersionPublicationPlugin extends WebpagePublicationPlugin{
                                   StageAndVersionPublicationConstant.PUBLICATION_LOG_DRAFT);
       addLog(node,versionLog);
       VersionData versionData = revisionsMap.get(node.getUUID());
-      if(versionData != null) {
+      if (versionData != null) {
         versionData.setAuthor(userId);
         versionData.setState(newState);
-      }else {
-        versionData = new VersionData(node.getUUID(),newState,userId);
+      } else {
+        versionData = new VersionData(node.getUUID(), newState, userId);
       }
-      revisionsMap.put(node.getUUID(),versionData);
-      addRevisionData(node,revisionsMap.values());
-    } else if(PublicationDefaultStates.PUBLISHED.equals(newState)) {
+      revisionsMap.put(node.getUUID(), versionData);
+      addRevisionData(node, revisionsMap.values());
+    } else if (PublicationDefaultStates.PUBLISHED.equals(newState)) {
       if (!node.isCheckedOut()) {
         node.checkout();
       }
@@ -183,21 +187,23 @@ public class StageAndVersionPublicationPlugin extends WebpagePublicationPlugin{
       node.checkout();
       //Change current live revision to obsolete
       Node oldLiveRevision = getLiveRevision(node);
-      if(oldLiveRevision != null) {
+      if (oldLiveRevision != null) {
         VersionData versionData = revisionsMap.get(oldLiveRevision.getUUID());
-        if(versionData != null) {
+        if (versionData != null) {
           versionData.setAuthor(userId);
           versionData.setState(PublicationDefaultStates.OBSOLETE);
-        }else {
-          versionData = new VersionData(oldLiveRevision.getUUID(), PublicationDefaultStates.OBSOLETE, userId);
+        } else {
+          versionData = new VersionData(oldLiveRevision.getUUID(),
+                                        PublicationDefaultStates.OBSOLETE,
+                                        userId);
         }
-        revisionsMap.put(oldLiveRevision.getUUID(),versionData);
+        revisionsMap.put(oldLiveRevision.getUUID(), versionData);
         versionLog = new VersionLog(oldLiveRevision.getName(),
                                     PublicationDefaultStates.OBSOLETE,
                                     userId,
                                     new GregorianCalendar(),
                                     StageAndVersionPublicationConstant.PUBLICATION_LOG_OBSOLETE);
-        addLog(node,versionLog);
+        addLog(node, versionLog);
       }
       versionLog = new VersionLog(liveVersion.getName(),
                                   newState,
@@ -208,11 +214,13 @@ public class StageAndVersionPublicationPlugin extends WebpagePublicationPlugin{
       //change base version to published state
       node.setProperty(StageAndVersionPublicationConstant.CURRENT_STATE, PublicationDefaultStates.PUBLISHED);
       VersionData editableRevision = revisionsMap.get(node.getUUID());
-      if(editableRevision != null) {
+      if (editableRevision != null) {
         editableRevision.setAuthor(userId);
         editableRevision.setState(PublicationDefaultStates.ENROLLED);
-      }else {
-        editableRevision = new VersionData(node.getUUID(), PublicationDefaultStates.ENROLLED, userId);
+      } else {
+        editableRevision = new VersionData(node.getUUID(),
+                                           PublicationDefaultStates.ENROLLED,
+                                           userId);
       }
       revisionsMap.put(node.getUUID(),editableRevision);
       versionLog = new VersionLog(node.getBaseVersion().getName(),
@@ -227,11 +235,12 @@ public class StageAndVersionPublicationPlugin extends WebpagePublicationPlugin{
       VersionData liveRevisionData = new VersionData(liveVersion.getUUID(), PublicationDefaultStates.PUBLISHED,userId);
       revisionsMap.put(liveVersion.getUUID(),liveRevisionData);
       addRevisionData(node,revisionsMap.values());
-    } else if(PublicationDefaultStates.OBSOLETE.equalsIgnoreCase(newState)) {
+    } else if (PublicationDefaultStates.OBSOLETE.equalsIgnoreCase(newState)) {
       Value value = valueFactory.createValue(selectedRevision);
       Value liveRevision = getValue(node,StageAndVersionPublicationConstant.LIVE_REVISION_PROP);
-      if(liveRevision != null && value.getString().equals(liveRevision.getString())) {
-        node.setProperty(StageAndVersionPublicationConstant.LIVE_REVISION_PROP,valueFactory.createValue(""));
+      if (liveRevision != null && value.getString().equals(liveRevision.getString())) {
+        node.setProperty(StageAndVersionPublicationConstant.LIVE_REVISION_PROP,
+                         valueFactory.createValue(""));
       }
       versionLog = new VersionLog(selectedRevision.getName(),
                                   PublicationDefaultStates.OBSOLETE,
@@ -239,11 +248,13 @@ public class StageAndVersionPublicationPlugin extends WebpagePublicationPlugin{
                                   new GregorianCalendar(),
                                   StageAndVersionPublicationConstant.PUBLICATION_LOG_OBSOLETE);
       VersionData versionData = revisionsMap.get(selectedRevision.getUUID());
-      if(versionData != null) {
+      if (versionData != null) {
         versionData.setAuthor(userId);
         versionData.setState(PublicationDefaultStates.OBSOLETE);
-      }else {
-        versionData = new VersionData(selectedRevision.getUUID(), PublicationDefaultStates.OBSOLETE,userId);
+      } else {
+        versionData = new VersionData(selectedRevision.getUUID(),
+                                      PublicationDefaultStates.OBSOLETE,
+                                      userId);
       }
       revisionsMap.put(selectedRevision.getUUID(),versionData);
       addLog(node,versionLog);
@@ -251,11 +262,14 @@ public class StageAndVersionPublicationPlugin extends WebpagePublicationPlugin{
       node.setProperty(StageAndVersionPublicationConstant.CURRENT_STATE, PublicationDefaultStates.OBSOLETE);
       addRevisionData(node,revisionsMap.values());
     }
-    if(!node.isNew())
+    if (!node.isNew())
       node.save();
 
     NodeLocation location = NodeLocation.make(node);
-    composer.updateContent(location.getRepository(), location.getWorkspace(), location.getPath(), new HashMap<String, String>());
+    composer.updateContent(location.getRepository(),
+                           location.getWorkspace(),
+                           location.getPath(),
+                           new HashMap<String, String>());
   }
 
   /**
@@ -349,8 +363,11 @@ public class StageAndVersionPublicationPlugin extends WebpagePublicationPlugin{
     return map;
   }
 
-  /* (non-Javadoc)
-   * @see org.exoplatform.services.ecm.publication.PublicationPlugin#getLocalizedAndSubstituteMessage(java.util.Locale, java.lang.String, java.lang.String[])
+  /*
+   * (non-Javadoc)
+   * @seeorg.exoplatform.services.ecm.publication.PublicationPlugin#
+   * getLocalizedAndSubstituteMessage(java.util.Locale, java.lang.String,
+   * java.lang.String[])
    */
   public String getLocalizedAndSubstituteMessage(Locale locale, String key, String[] values) throws Exception {
     ClassLoader cl=this.getClass().getClassLoader();
@@ -407,7 +424,8 @@ public class StageAndVersionPublicationPlugin extends WebpagePublicationPlugin{
   }
 
   /* (non-Javadoc)
-   * @see org.exoplatform.services.ecm.publication.PublicationPlugin#getStateUI(javax.jcr.Node, org.exoplatform.webui.core.UIComponent)
+   * @see org.exoplatform.services.ecm.publication.PublicationPlugin#getStateUI(
+   *     javax.jcr.Node, org.exoplatform.webui.core.UIComponent)
    */
   public UIForm getStateUI(Node node, UIComponent component) throws Exception {
     UIPublicationContainer publicationContainer = component.createUIComponent(UIPublicationContainer.class, null, null);
@@ -422,8 +440,11 @@ public class StageAndVersionPublicationPlugin extends WebpagePublicationPlugin{
     return null;
   }
 
-  /* (non-Javadoc)
-   * @see org.exoplatform.services.wcm.publication.WebpagePublicationPlugin#publishContentToSCV(javax.jcr.Node, org.exoplatform.portal.config.model.Page, java.lang.String)
+  /*
+   * (non-Javadoc)
+   * @seeorg.exoplatform.services.wcm.publication.WebpagePublicationPlugin#
+   * publishContentToSCV(javax.jcr.Node,
+   * org.exoplatform.portal.config.model.Page, java.lang.String)
    */
   public void publishContentToSCV(Node content, Page page, String portalOwnerName) throws Exception {
     if (pomManager.getSession() == null) pomSession = pomManager.openSession();
@@ -441,7 +462,6 @@ public class StageAndVersionPublicationPlugin extends WebpagePublicationPlugin{
             .append(configurationService.getRuntimeContextParam(WCMConfigurationService.SCV_PORTLET))
             .append("/")
             .append(IdGenerator.generate());
-//    portlet.setInstanceId(windowId.toString());
 
     //// Add preferences to portlet
     ArrayList<Preference> preferences = new ArrayList<Preference>();
@@ -467,8 +487,12 @@ public class StageAndVersionPublicationPlugin extends WebpagePublicationPlugin{
     if (pomSession != null) pomSession.close();
   }
 
-  /* (non-Javadoc)
-   * @see org.exoplatform.services.wcm.publication.WebpagePublicationPlugin#publishContentToCLV(javax.jcr.Node, org.exoplatform.portal.config.model.Page, java.lang.String, java.lang.String, java.lang.String)
+  /*
+   * (non-Javadoc)
+   * @seeorg.exoplatform.services.wcm.publication.WebpagePublicationPlugin#
+   * publishContentToCLV(javax.jcr.Node,
+   * org.exoplatform.portal.config.model.Page, java.lang.String,
+   * java.lang.String, java.lang.String)
    */
   @SuppressWarnings("unchecked")
   public void publishContentToCLV(Node content,
@@ -486,9 +510,11 @@ public class StageAndVersionPublicationPlugin extends WebpagePublicationPlugin{
       preferences.add(addPreference("workspace", content.getSession().getWorkspace().getName()));
       preferences.add(addPreference("folderPath", content.getPath() + ";"));
       preferences.add(addPreference("formViewTemplatePath",
-                                    wcmConfigurationService.getRuntimeContextParam(WCMConfigurationService.FORM_VIEW_TEMPLATE_PATH)));
+                                    wcmConfigurationService.
+                                        getRuntimeContextParam(WCMConfigurationService.FORM_VIEW_TEMPLATE_PATH)));
       preferences.add(addPreference("paginatorTemplatePath",
-                                    wcmConfigurationService.getRuntimeContextParam(WCMConfigurationService.PAGINATOR_TEMPLAET_PATH)));
+                                    wcmConfigurationService.
+                                        getRuntimeContextParam(WCMConfigurationService.PAGINATOR_TEMPLAET_PATH)));
       preferences.add(addPreference("itemsPerPage", "10"));
       preferences.add(addPreference("showQuickEditButton", "true"));
       preferences.add(addPreference("showRefreshButton", "false"));
@@ -559,13 +585,19 @@ public class StageAndVersionPublicationPlugin extends WebpagePublicationPlugin{
    *
    * @throws Exception the exception
    */
-  private void updateOnAddNodeProperties(Page page, Node content, String clvPortletId, String remoteUser) throws Exception {
-    if (content.canAddMixin("publication:webpagesPublication")) content.addMixin("publication:webpagesPublication");
-    List<String> listExistedNavigationNodeUri = PublicationUtil.getValuesAsString(content, "publication:navigationNodeURIs");
+  private void updateOnAddNodeProperties(Page page,
+                                         Node content,
+                                         String clvPortletId,
+                                         String remoteUser) throws Exception {
+    if (content.canAddMixin("publication:webpagesPublication"))
+      content.addMixin("publication:webpagesPublication");
+    List<String> listExistedNavigationNodeUri = PublicationUtil.getValuesAsString(content,
+                                                                                  "publication:navigationNodeURIs");
     List<String> listPageNavigationUri = getListPageNavigationUri(page, remoteUser);
-    if (listPageNavigationUri.isEmpty()) return ;
+    if (listPageNavigationUri.isEmpty())
+      return;
     for (String uri : listPageNavigationUri) {
-      if(!listExistedNavigationNodeUri.contains(uri)) {
+      if (!listExistedNavigationNodeUri.contains(uri)) {
         listExistedNavigationNodeUri.add(uri);
       }
     }
@@ -580,9 +612,12 @@ public class StageAndVersionPublicationPlugin extends WebpagePublicationPlugin{
 
     Session session = content.getSession();
     ValueFactory valueFactory = session.getValueFactory();
-    content.setProperty("publication:navigationNodeURIs", PublicationUtil.toValues(valueFactory, listExistedNavigationNodeUri));
-    content.setProperty("publication:applicationIDs", PublicationUtil.toValues(valueFactory, nodeAppIds));
-    content.setProperty("publication:webPageIDs", PublicationUtil.toValues(valueFactory, nodeWebPageIds));
+    content.setProperty("publication:navigationNodeURIs",
+                        PublicationUtil.toValues(valueFactory, listExistedNavigationNodeUri));
+    content.setProperty("publication:applicationIDs", PublicationUtil.toValues(valueFactory,
+                                                                               nodeAppIds));
+    content.setProperty("publication:webPageIDs", PublicationUtil.toValues(valueFactory,
+                                                                           nodeWebPageIds));
     session.save();
   }
 
@@ -596,15 +631,20 @@ public class StageAndVersionPublicationPlugin extends WebpagePublicationPlugin{
    *
    * @throws Exception the exception
    */
-  private void updateOnRemoveNodeProperties(Page page, Node content, String clvPortletId, String remoteUser) throws Exception {
-    List<String> listExistedApplicationId = PublicationUtil.getValuesAsString(content, "publication:applicationIDs");
+  private void updateOnRemoveNodeProperties(Page page,
+                                            Node content,
+                                            String clvPortletId,
+                                            String remoteUser) throws Exception {
+    List<String> listExistedApplicationId = PublicationUtil.getValuesAsString(content,
+                                                                              "publication:applicationIDs");
 
     if (listExistedApplicationId.remove(PublicationUtil.setMixedApplicationId(page.getPageId(), clvPortletId))) {
       List<String> listExistedPageId = PublicationUtil.getValuesAsString(content, "publication:webPageIDs");
       listExistedPageId.remove(page.getPageId());
 
       List<String> listPageNavigationUri = getListPageNavigationUri(page, remoteUser);
-      List<String> listExistedNavigationNodeUri = PublicationUtil.getValuesAsString(content, "publication:navigationNodeURIs");
+      List<String> listExistedNavigationNodeUri = PublicationUtil.getValuesAsString(content,
+                                                                                    "publication:navigationNodeURIs");
       List<String> listExistedNavigationNodeUriTmp = new ArrayList<String>();
       listExistedNavigationNodeUriTmp.addAll(listExistedNavigationNodeUri);
       for (String existedNavigationNodeUri : listExistedNavigationNodeUriTmp) {
@@ -654,21 +694,23 @@ public class StageAndVersionPublicationPlugin extends WebpagePublicationPlugin{
     if (pomManager.getSession() == null) pomSession = pomManager.openSession();
     PortletPreferences portletPreferences = new PortletPreferences();
     portletPreferences.setWindowId(portletId);
-//    portletPreferences.setOwnerType(PortalConfig.PORTAL_TYPE);
-//    portletPreferences.setOwnerId(portalOwnerName);
     portletPreferences.setPreferences(listPreference);
     dataStorage.save(portletPreferences);
     if (pomSession != null) pomSession.close();
   }
 
-  /* (non-Javadoc)
-   * @see org.exoplatform.services.wcm.publication.WebpagePublicationPlugin#suspendPublishedContentFromPage(javax.jcr.Node, org.exoplatform.portal.config.model.Page, java.lang.String)
+  /*
+   * (non-Javadoc)
+   * @seeorg.exoplatform.services.wcm.publication.WebpagePublicationPlugin#
+   * suspendPublishedContentFromPage(javax.jcr.Node,
+   * org.exoplatform.portal.config.model.Page, java.lang.String)
    */
   public void suspendPublishedContentFromPage(Node content, Page page, String remoteUser) throws Exception {
     // Remove content from CLV portlet
     WCMConfigurationService wcmConfigurationService = WCMCoreUtils.getService(WCMConfigurationService.class);
     List<String> clvPortletsId = PublicationUtil.findAppInstancesByName(page,
-                                                                        wcmConfigurationService.getRuntimeContextParam(WCMConfigurationService.CLV_PORTLET));
+                                                                        wcmConfigurationService.getRuntimeContextParam
+                                                                            (WCMConfigurationService.CLV_PORTLET));
     if (content != null && !clvPortletsId.isEmpty()) {
       for (String clvPortletId : clvPortletsId) {
         PortletPreferences portletPreferences = dataStorage.getPortletPreferences(clvPortletId);
@@ -709,43 +751,61 @@ public class StageAndVersionPublicationPlugin extends WebpagePublicationPlugin{
     userPortalConfigService.update(page);
   }
 
-  /* (non-Javadoc)
-   * @see org.exoplatform.services.wcm.publication.WebpagePublicationPlugin#updateLifecycleOnChangeNavigation(org.exoplatform.portal.config.model.PageNavigation, java.lang.String)
+  /*
+   * (non-Javadoc)
+   * @seeorg.exoplatform.services.wcm.publication.WebpagePublicationPlugin#
+   * updateLifecycleOnChangeNavigation
+   * (org.exoplatform.portal.config.model.PageNavigation, java.lang.String)
    */
   public void updateLifecycleOnChangeNavigation(PageNavigation pageNavigation, String remoteUser) throws Exception {
     navigationEventListenerDelegate.updateLifecycleOnChangeNavigation(pageNavigation, remoteUser, this);
   }
 
-  /* (non-Javadoc)
-   * @see org.exoplatform.services.wcm.publication.WebpagePublicationPlugin#updateLifecycleOnRemovePage(org.exoplatform.portal.config.model.Page, java.lang.String)
+  /*
+   * (non-Javadoc)
+   * @seeorg.exoplatform.services.wcm.publication.WebpagePublicationPlugin#
+   * updateLifecycleOnRemovePage(org.exoplatform.portal.config.model.Page,
+   * java.lang.String)
    */
   public void updateLifecycleOnRemovePage(Page page, String remoteUser) throws Exception {
     pageEventListenerDelegate.updateLifecycleOnRemovePage(page, remoteUser, this);
   }
 
-  /* (non-Javadoc)
-   * @see org.exoplatform.services.wcm.publication.WebpagePublicationPlugin#updateLifecyleOnChangePage(org.exoplatform.portal.config.model.Page, java.lang.String)
+  /*
+   * (non-Javadoc)
+   * @seeorg.exoplatform.services.wcm.publication.WebpagePublicationPlugin#
+   * updateLifecyleOnChangePage(org.exoplatform.portal.config.model.Page,
+   * java.lang.String)
    */
   public void updateLifecyleOnChangePage(Page page, String remoteUser) throws Exception {
     pageEventListenerDelegate.updateLifecyleOnChangePage(page, remoteUser, this);
   }
 
-  /* (non-Javadoc)
-   * @see org.exoplatform.services.wcm.publication.WebpagePublicationPlugin#updateLifecyleOnCreateNavigation(org.exoplatform.portal.config.model.PageNavigation)
+  /*
+   * (non-Javadoc)
+   * @seeorg.exoplatform.services.wcm.publication.WebpagePublicationPlugin#
+   * updateLifecyleOnCreateNavigation
+   * (org.exoplatform.portal.config.model.PageNavigation)
    */
   public void updateLifecyleOnCreateNavigation(PageNavigation pageNavigation) throws Exception {
     navigationEventListenerDelegate.updateLifecyleOnCreateNavigation(pageNavigation);
   }
 
-  /* (non-Javadoc)
-   * @see org.exoplatform.services.wcm.publication.WebpagePublicationPlugin#updateLifecyleOnCreatePage(org.exoplatform.portal.config.model.Page, java.lang.String)
+  /*
+   * (non-Javadoc)
+   * @seeorg.exoplatform.services.wcm.publication.WebpagePublicationPlugin#
+   * updateLifecyleOnCreatePage(org.exoplatform.portal.config.model.Page,
+   * java.lang.String)
    */
   public void updateLifecyleOnCreatePage(Page page, String remoteUser) throws Exception {
     pageEventListenerDelegate.updateLifecyleOnCreatePage(page, remoteUser, this);
   }
 
-  /* (non-Javadoc)
-   * @see org.exoplatform.services.wcm.publication.WebpagePublicationPlugin#updateLifecyleOnRemoveNavigation(org.exoplatform.portal.config.model.PageNavigation)
+  /*
+   * (non-Javadoc)
+   * @seeorg.exoplatform.services.wcm.publication.WebpagePublicationPlugin#
+   * updateLifecyleOnRemoveNavigation
+   * (org.exoplatform.portal.config.model.PageNavigation)
    */
   public void updateLifecyleOnRemoveNavigation(PageNavigation pageNavigation) throws Exception {
     navigationEventListenerDelegate.updateLifecyleOnRemoveNavigation(pageNavigation);

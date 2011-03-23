@@ -33,24 +33,24 @@ public interface MultiLanguageService {
   /**
    * Node name as LANGUAGES
    */
-  final static public String LANGUAGES = "languages" ;
+  final static public String LANGUAGES    = "languages";
 
   /**
    * Property name as EXO_LANGUAGE
    */
-  final static public String EXO_LANGUAGE = "exo:language" ;
+  final static public String EXO_LANGUAGE = "exo:language";
 
   /**
    * Node name as COMMENTS
    */
-  final static public String COMMENTS = "comments".intern() ;
+  final static public String COMMENTS     = "comments".intern();
 
   /**
    * Get list of value in exo:language property in child node of current node
    * @param node    current node
    * @return value of exo:language property
    */
-  public List<String> getSupportedLanguages(Node node) throws Exception ;
+  public List<String> getSupportedLanguages(Node node) throws Exception;
 
   /**
    * Set data for current node
@@ -59,7 +59,7 @@ public interface MultiLanguageService {
    * @param repositoryName    repository name
    * @throws Exception
    */
-  public void setDefault(Node node, String language, String repositoryName) throws Exception ;
+  public void setDefault(Node node, String language, String repositoryName) throws Exception;
 
   /**
    * Add new language for current node
@@ -70,7 +70,7 @@ public interface MultiLanguageService {
    * @param isDefault       flag to define default language is used or not
    * @throws Exception
    */
-  public void addLanguage(Node node, Map inputs, String language, boolean isDefault) throws Exception ;
+  public void addLanguage(Node node, Map inputs, String language, boolean isDefault) throws Exception;
 
   /**
    * Add new language for current node
@@ -84,7 +84,7 @@ public interface MultiLanguageService {
    * @param nodeType        node name
    * @throws Exception
    */
-  public void addLanguage(Node node, Map inputs, String language, boolean isDefault, String nodeType) throws Exception ;
+  public void addLanguage(Node node, Map inputs, String language, boolean isDefault, String nodeType) throws Exception;
 
   /**
    * Add newLanguageNode node, then add new file to newLanguageNode
@@ -97,7 +97,13 @@ public interface MultiLanguageService {
    * @param isDefault         flag to use new language or default language
    * @throws Exception
    */
-  public void addFileLanguage(Node node, String fileName, Value value, String mimeType, String language, String repositoryName, boolean isDefault) throws Exception ;
+  public void addFileLanguage(Node node,
+                              String fileName,
+                              Value value,
+                              String mimeType,
+                              String language,
+                              String repositoryName,
+                              boolean isDefault) throws Exception;
 
   /**
    * Add newLanguageNode node, then set property in mapping to newLanguageNode
@@ -107,7 +113,7 @@ public interface MultiLanguageService {
    * @param isDefault         flag to use new language or default language
    * @throws Exception
    */
-  public void addFileLanguage(Node node, String language, Map mappings, boolean isDefault) throws Exception ;
+  public void addFileLanguage(Node node, String language, Map mappings, boolean isDefault) throws Exception;
 
 
   /**
@@ -116,7 +122,7 @@ public interface MultiLanguageService {
    * @param translationNode   target translation node
    * @throws Exception
    */
-  public void addLinkedLanguage(Node node, Node translationNode) throws Exception ;
+  public void addLinkedLanguage(Node node, Node translationNode) throws Exception;
 
   /**
    * Add new language node as a folder
@@ -127,14 +133,19 @@ public interface MultiLanguageService {
    * @param nodeType
    * @throws Exception
    */
-  public void addFolderLanguage(Node node, Map inputs, String language, boolean isDefault, String nodeType, String repositoryName) throws Exception ;
+  public void addFolderLanguage(Node node,
+                                Map inputs,
+                                String language,
+                                boolean isDefault,
+                                String nodeType,
+                                String repositoryName) throws Exception;
 
   /**
    * Get value of property exo:language in current node
    * @param node    current node
    * @return value of exo:language property
    */
-  public String getDefault(Node node) throws Exception ;
+  public String getDefault(Node node) throws Exception;
 
   /**
    * Get node following relative path = "languages/" + language
@@ -143,7 +154,7 @@ public interface MultiLanguageService {
    * @return node if exist node with relative path = "languages/" + language with current node
    *         null if not exist
    */
-  public Node getLanguage(Node node, String language) throws Exception ;
+  public Node getLanguage(Node node, String language) throws Exception;
 
 
 }

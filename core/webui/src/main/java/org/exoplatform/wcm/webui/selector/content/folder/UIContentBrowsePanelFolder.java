@@ -56,7 +56,9 @@ public class UIContentBrowsePanelFolder extends UIContentBrowsePanel{
     public void execute(Event<UIContentBrowsePanel> event) throws Exception {
       UIContentBrowsePanel contentBrowsePanel = event.getSource();
       String returnFieldName = contentBrowsePanel.getReturnFieldName();
-      ((UISelectable)(contentBrowsePanel.getSourceComponent())).doSelect(returnFieldName, event.getRequestContext().getRequestParameter(OBJECTID));
+      ((UISelectable) (contentBrowsePanel.getSourceComponent())).doSelect(returnFieldName,
+                                                                          event.getRequestContext()
+                                                                               .getRequestParameter(OBJECTID));
     }
   }
 }

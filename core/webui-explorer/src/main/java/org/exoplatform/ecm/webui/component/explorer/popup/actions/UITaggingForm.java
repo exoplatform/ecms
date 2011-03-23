@@ -58,7 +58,8 @@ import org.exoplatform.webui.form.UIFormTextAreaInput;
  * Created by The eXo Platform SARL Author : Dang Van Minh
  * minh.dang@exoplatform.com Jan 12, 2007 11:56:51 AM
  */
-@ComponentConfig(lifecycle = UIFormLifecycle.class, template = "system:/groovy/webui/form/UIForm.gtmpl", events = {
+@ComponentConfig(lifecycle = UIFormLifecycle.class, template = "system:/groovy/webui/form/UIForm.gtmpl", 
+                 events = {
     @EventConfig(listeners = UITaggingForm.AddTagActionListener.class),
     @EventConfig(listeners = UITaggingForm.EditActionListener.class, phase = Phase.DECODE),
     @EventConfig(listeners = UITaggingForm.RemoveActionListener.class, phase = Phase.DECODE),

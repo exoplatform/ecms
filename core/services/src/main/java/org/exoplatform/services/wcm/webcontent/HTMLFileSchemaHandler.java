@@ -46,8 +46,11 @@ public class HTMLFileSchemaHandler extends BaseWebSchemaHandler {
    */
   protected String getParentNodeType() { return "exo:webFolder"; }
 
-  /* (non-Javadoc)
-   * @see org.exoplatform.services.wcm.core.BaseWebSchemaHandler#matchHandler(javax.jcr.Node, org.exoplatform.services.jcr.ext.common.SessionProvider)
+  /*
+   * (non-Javadoc)
+   * @see
+   * org.exoplatform.services.wcm.core.BaseWebSchemaHandler#matchHandler(javax
+   * .jcr.Node, org.exoplatform.services.jcr.ext.common.SessionProvider)
    */
   public boolean matchHandler(SessionProvider sessionProvider, Node node) throws Exception {
     if(!matchNodeType(node))
@@ -121,8 +124,11 @@ public class HTMLFileSchemaHandler extends BaseWebSchemaHandler {
     return file.getParent().isNodeType("exo:webFolder");
   }
 
-  /* (non-Javadoc)
-   * @see org.exoplatform.services.wcm.core.BaseWebSchemaHandler#onCreateNode(javax.jcr.Node, org.exoplatform.services.jcr.ext.common.SessionProvider)
+  /*
+   * (non-Javadoc)
+   * @see
+   * org.exoplatform.services.wcm.core.BaseWebSchemaHandler#onCreateNode(javax
+   * .jcr.Node, org.exoplatform.services.jcr.ext.common.SessionProvider)
    */
   public void onCreateNode(SessionProvider sessionProvider, final Node file) throws Exception {
     Session session = file.getSession();
@@ -153,8 +159,11 @@ public class HTMLFileSchemaHandler extends BaseWebSchemaHandler {
     session.save();
   }
 
-  /* (non-Javadoc)
-   * @see org.exoplatform.services.wcm.core.BaseWebSchemaHandler#onModifyNode(javax.jcr.Node, org.exoplatform.services.jcr.ext.common.SessionProvider)
+  /*
+   * (non-Javadoc)
+   * @see
+   * org.exoplatform.services.wcm.core.BaseWebSchemaHandler#onModifyNode(javax
+   * .jcr.Node, org.exoplatform.services.jcr.ext.common.SessionProvider)
    */
   public void onModifyNode(final SessionProvider sessionProvider, final Node node) throws Exception {
     Node parent = node.getParent();

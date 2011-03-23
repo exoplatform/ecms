@@ -51,8 +51,10 @@ public interface DocumentTypeService {
    * @return List<Node> all documents by kind of document type
    * @throws Exception
    */
-  public List<Node> getAllDocumentsByDocumentType(String documentType, String workspace, String repository,
-      SessionProvider sessionProvider) throws Exception;
+  public List<Node> getAllDocumentsByDocumentType(String documentType,
+                                                  String workspace,
+                                                  String repository,
+                                                  SessionProvider sessionProvider) throws Exception;
 
   /**
    * Get all document by mimetype
@@ -63,8 +65,10 @@ public interface DocumentTypeService {
    * @return List<Node> all documents by mime type
    * @throws Exception
    */
-  public List<Node> getAllDocumentsByType(String workspace, String repository,
-      SessionProvider sessionProvider, String mimeType) throws Exception;
+  public List<Node> getAllDocumentsByType(String workspace,
+                                          String repository,
+                                          SessionProvider sessionProvider,
+                                          String mimeType) throws Exception;
 
   /**
    * Get all document by array of mimetype
@@ -75,8 +79,10 @@ public interface DocumentTypeService {
    * @return List<Node> all documents by mime type
    * @throws Exception
    */
-  public List<Node> getAllDocumentsByType(String workspace, String repository,
-      SessionProvider sessionProvider, String[] mimeTypes) throws Exception;
+  public List<Node> getAllDocumentsByType(String workspace,
+                                          String repository,
+                                          SessionProvider sessionProvider,
+                                          String[] mimeTypes) throws Exception;
 
   /**
    * Get all document type by user
@@ -88,7 +94,9 @@ public interface DocumentTypeService {
    * @throws Exception
    */
   public List<Node> getAllDocumentsByUser(String workspace,
-      SessionProvider sessionProvider, String[] mimeTypes, String userName) throws Exception;
+                                          SessionProvider sessionProvider,
+                                          String[] mimeTypes,
+                                          String userName) throws Exception;
 
   /**
    * Get all document type by user
@@ -101,8 +109,11 @@ public interface DocumentTypeService {
    * @return List<Node> all documents by mime type
    * @throws Exception
    */
-  public List<Node> getAllDocumentsByUser(String workspace, String repository,
-      SessionProvider sessionProvider, String[] mimeTypes, String userName) throws Exception;
+  public List<Node> getAllDocumentsByUser(String workspace,
+                                          String repository,
+                                          SessionProvider sessionProvider,
+                                          String[] mimeTypes,
+                                          String userName) throws Exception;
 
   /**
    * Check the document is content type or not
@@ -120,22 +131,30 @@ public interface DocumentTypeService {
    * @return List<Node> all contents type document
    * @throws Exception
    */
-  public List<Node> getAllDocumentByContentsType(String documentType, String workspace,
-      SessionProvider sessionProvider, String userName) throws Exception;
+  public List<Node> getAllDocumentByContentsType(String documentType,
+                                                 String workspace,
+                                                 SessionProvider sessionProvider,
+                                                 String userName) throws Exception;
 
   /**
    * Get all contents type document
+   *
    * @param documentType Contents type
    * @param workspace The name of workspace will be used to get documents
    * @param repository The name of repository will be used to get documents
    * @param sessionProvider
    * @param userName
-   * @deprecated Since WCM 2.1-CLOUD-DEV you should use {@link #getAllDocumentByContentsType(documentType, workspace, sessionProvider, userName)} instead.
+   * @deprecated Since WCM 2.1-CLOUD-DEV you should use
+   *             {@link #getAllDocumentByContentsType(documentType, workspace, sessionProvider, userName)}
+   *             instead.
    * @return List<Node> all contents type document
    * @throws Exception
    */
-  public List<Node> getAllDocumentByContentsType(String documentType, String workspace, String repository,
-      SessionProvider sessionProvider, String userName) throws Exception;
+  public List<Node> getAllDocumentByContentsType(String documentType,
+                                                 String workspace,
+                                                 String repository,
+                                                 SessionProvider sessionProvider,
+                                                 String userName) throws Exception;
 
   /**
    * Get mime types by document type

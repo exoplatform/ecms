@@ -37,26 +37,28 @@ import org.exoplatform.services.log.Log;
 class PortletFutureCache extends FutureCache<WindowKey, MarkupFragment, PortletRenderContext>
 {
 
-  private static final int DEFAULT_CACHE_SIZE = 5000;	// default to 5000 entries
-
+  /**
+   * default to 5000 entries
+   */
+  private static final int                                   DEFAULT_CACHE_SIZE = 5000;
 
   /** . */
   private final ConcurrentHashMap<WindowKey, MarkupFragment> entries;
 
   /** . */
-  private final Log log;
+  private final Log                                          log;
 
   /** . */
-  private static final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+  private static final ScheduledExecutorService              scheduler          = Executors.newScheduledThreadPool(1);
 
   /** . */
-  private int cleanupCache;
+  private int                                                cleanupCache;
 
   /** . */
-  private int cacheMaxSize = DEFAULT_CACHE_SIZE;
+  private int                                                cacheMaxSize       = DEFAULT_CACHE_SIZE;
 
   /** . */
-  private ScheduledFuture<?> scheduled;
+  private ScheduledFuture<?>                                 scheduled;
 
   PortletFutureCache(Log log, int cleanupCache)
   {

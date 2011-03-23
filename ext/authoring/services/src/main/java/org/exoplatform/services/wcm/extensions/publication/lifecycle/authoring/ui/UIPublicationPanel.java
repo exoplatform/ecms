@@ -56,7 +56,9 @@ import org.exoplatform.webui.form.UIFormDateTimeInput;
 /**
  * Created by The eXo Platform MEA Author : haikel.thamri@exoplatform.com
  */
-@ComponentConfig(lifecycle = UIFormLifecycle.class, template = "classpath:groovy/wcm/webui/publication/lifecycle/authoring/ui/UIPublicationPanel.gtmpl", events = {
+@ComponentConfig(lifecycle = UIFormLifecycle.class,
+                 template = "classpath:groovy/wcm/webui/publication/lifecycle/authoring/ui/UIPublicationPanel.gtmpl",
+                 events = {
     @EventConfig(listeners = UIPublicationPanel.ChangeStateActionListener.class),
     @EventConfig(listeners = UIPublicationPanel.ChangeVersionActionListener.class),
     @EventConfig(listeners = UIPublicationPanel.PreviewVersionActionListener.class),
@@ -64,10 +66,12 @@ import org.exoplatform.webui.form.UIFormDateTimeInput;
     @EventConfig(listeners = UIPublicationPanel.SeeAllVersionActionListener.class),
     @EventConfig(listeners = UIPublicationPanel.SaveActionListener.class),
     @EventConfig(listeners = UIPublicationPanel.CloseActionListener.class) })
-public class UIPublicationPanel extends org.exoplatform.services.wcm.publication.lifecycle.stageversion.ui.UIPublicationPanel {
-    final static public String OBJECTID = "objectId";
+public class UIPublicationPanel
+                               extends
+                               org.exoplatform.services.wcm.publication.lifecycle.stageversion.ui.UIPublicationPanel {
+  final static public String OBJECTID          = "objectId";
 
-    public static final String START_PUBLICATION = "UIPublicationPanelStartDateInput";
+  public static final String START_PUBLICATION = "UIPublicationPanelStartDateInput";
 
   public static final String END_PUBLICATION   = "UIPublicationPanelEndDateInput";
 

@@ -236,7 +236,8 @@ public class UINodeTypeSelector extends UIForm implements ComponentSelector {
       UIFormStringInput uiInputNodeType = (UIFormStringInput)uiNodeTypeSelect.findComponentById("NodeTypeText");
       String nodeTypeName = uiInputNodeType.getValue();
       if (nodeTypeName == null || nodeTypeName.length() == 0) return;
-      nodeTypeName = (nodeTypeName.contains("*") && !nodeTypeName.contains(".*")) ? nodeTypeName.replace("*", ".*") : nodeTypeName;
+      nodeTypeName = (nodeTypeName.contains("*") && !nodeTypeName.contains(".*")) ? nodeTypeName.replace("*", ".*")
+                                                                                 : nodeTypeName;
       Pattern p = Pattern.compile(".*".concat(nodeTypeName.trim()).concat(".*"), Pattern.CASE_INSENSITIVE);
       if (uiNodeTypeSelect.lstNodetype == null) {
         uiNodeTypeSelect.lstNodetype = uiNodeTypeSelect.getAllNodeTypes();
@@ -260,10 +261,11 @@ public class UINodeTypeSelector extends UIForm implements ComponentSelector {
       String returnField = uiNodeTypeSelect.getReturnFieldName();
       if (selectedNodetypes.contains(uiNodeTypeSelect.ALL_DOCUMENT_TYPES)) {
         selectedNodetypes.remove(uiNodeTypeSelect.ALL_DOCUMENT_TYPES);
-        for(String docNodeType : uiNodeTypeSelect.getDocumentNodetypes()) {
-         if (!selectedNodetypes.contains(docNodeType) && ((UIFormCheckBoxInput) uiNodeTypeSelect.findComponentById(docNodeType)).isChecked()) {
-           selectedNodetypes.add(docNodeType);
-         }
+        for (String docNodeType : uiNodeTypeSelect.getDocumentNodetypes()) {
+          if (!selectedNodetypes.contains(docNodeType)
+              && ((UIFormCheckBoxInput) uiNodeTypeSelect.findComponentById(docNodeType)).isChecked()) {
+            selectedNodetypes.add(docNodeType);
+          }
         }
       }
       ((UISelectable)(uiNodeTypeSelect).getSourceComponent()).doSelect(returnField, selectedNodetypes);
@@ -272,8 +274,7 @@ public class UINodeTypeSelector extends UIForm implements ComponentSelector {
       if (uiPopup != null) {
         uiPopup.setShow(false);
         uiPopup.setRendered(false);
-        //UIPopupContainer uiPopupContainer = uiPopup.getParent();
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiPopup);
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiPopup);
       }
       UIComponent component = event.getSource().getSourceComponent().getParent();
       if (component != null) {
@@ -347,8 +348,7 @@ public class UINodeTypeSelector extends UIForm implements ComponentSelector {
       uiPopup.setRendered(false);
       UIComponent component = event.getSource().getSourceComponent().getParent();
       if (component != null) {
-      //UIPopupContainer uiPopupContainer = uiPopup.getParent();
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiPopup);
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiPopup);
         event.getRequestContext().addUIComponentToUpdateByAjax(component);
       }
     }

@@ -63,7 +63,11 @@ public abstract class WebpagePublicationPlugin extends PublicationPlugin {
    *
    * @throws Exception the exception
    */
-  public abstract void publishContentToCLV(Node content, Page page, String clvPortletId, String portalOwnerName, String remoteUser) throws Exception;
+  public abstract void publishContentToCLV(Node content,
+                                           Page page,
+                                           String clvPortletId,
+                                           String portalOwnerName,
+                                           String remoteUser) throws Exception;
 
   /**
    * Suspend published content from a portal page.

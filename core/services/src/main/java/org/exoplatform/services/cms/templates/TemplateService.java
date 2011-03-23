@@ -502,17 +502,18 @@ public interface TemplateService {
 
   /**
    * Return all teamplate of the specified NodeType.
-   * @deprecated Since WCM 2.1-CLOUD-DEV you should use {@link #getAllTemplatesOfNodeType(boolean, String, SessionProvider)} instead.
-   * @param isDialog        boolean
-   *                        The boolean value which specify the type of template
-   * @param nodeTypeName    String
-   *                        The name of NodeType
-   * @param repository      String
-   *                        The name of repository
-   * @param provider        SessionProvider
-   *                        The SessionProvider object is used to managed Sessions
-   * @see                   SessionProvider
-   * @see                   Node
+   *
+   * @deprecated Since WCM 2.1-CLOUD-DEV you should use
+   *             {@link #getAllTemplatesOfNodeType(boolean, String, SessionProvider)}
+   *             instead.
+   * @param isDialog boolean The boolean value which specify the type of
+   *          template
+   * @param nodeTypeName String The name of NodeType
+   * @param repository String The name of repository
+   * @param provider SessionProvider The SessionProvider object is used to
+   *          managed Sessions
+   * @see SessionProvider
+   * @see Node
    * @throws Exception
    */
   public NodeIterator getAllTemplatesOfNodeType(boolean isDialog,

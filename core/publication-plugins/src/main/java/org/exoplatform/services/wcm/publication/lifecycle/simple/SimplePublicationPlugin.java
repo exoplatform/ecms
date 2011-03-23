@@ -157,7 +157,9 @@ public class SimplePublicationPlugin extends WebpagePublicationPlugin{
    * org.exoplatform.services.ecm.publication.PublicationPlugin#changeState(
    * javax.jcr.Node, java.lang.String, java.util.HashMap)
    */
-  public void changeState(Node node, String newState, HashMap<String, String> context) throws IncorrectStateUpdateLifecycleException,
+  public void changeState(Node node,
+                          String newState,
+                          HashMap<String, String> context) throws IncorrectStateUpdateLifecycleException,
                                                                                       Exception {
     Session session = node.getSession();
     node.setProperty(CURRENT_STATE, newState);

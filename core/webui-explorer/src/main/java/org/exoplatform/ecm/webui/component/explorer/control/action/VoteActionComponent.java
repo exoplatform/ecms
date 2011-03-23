@@ -47,7 +47,9 @@ import org.exoplatform.webui.ext.filter.UIExtensionFilters;
  )
 public class VoteActionComponent extends UIComponent {
 
-  private static final List<UIExtensionFilter> FILTERS = Arrays.asList(new UIExtensionFilter[]{new CanSetPropertyFilter(), new IsMixVotable(), new IsCheckedOutFilter("UIVoteForm.msg.not-checkedout"), new IsNotLockedFilter()});
+  private static final List<UIExtensionFilter> FILTERS = Arrays.asList(new UIExtensionFilter[] {
+      new CanSetPropertyFilter(), new IsMixVotable(),
+      new IsCheckedOutFilter("UIVoteForm.msg.not-checkedout"), new IsNotLockedFilter() });
 
   @UIExtensionFilters
   public List<UIExtensionFilter> getFilters() {

@@ -47,7 +47,10 @@ import org.exoplatform.webui.ext.filter.UIExtensionFilters;
  )
 public class WatchDocumentActionComponent extends UIComponent {
 
-  private static final List<UIExtensionFilter> FILTERS = Arrays.asList(new UIExtensionFilter[]{new IsNotLockedFilter(), new CanSetPropertyFilter(), new IsDocumentFilter("UIActionBar.msg.unsupported-watch"), new IsCheckedOutFilter("UIActionBar.msg.watch-checkedin")});
+  private static final List<UIExtensionFilter> FILTERS = Arrays.asList(new UIExtensionFilter[] {
+      new IsNotLockedFilter(), new CanSetPropertyFilter(),
+      new IsDocumentFilter("UIActionBar.msg.unsupported-watch"),
+      new IsCheckedOutFilter("UIActionBar.msg.watch-checkedin") });
 
   @UIExtensionFilters
   public List<UIExtensionFilter> getFilters() {

@@ -83,7 +83,10 @@ public class UITagForm extends UIForm {
       UIJCRExplorer uiExplorer = uiForm.getAncestorOfType(UIJCRExplorer.class);
       UIApplication uiApp = uiForm.getAncestorOfType(UIApplication.class) ;
 
-      String workspace = uiForm.getAncestorOfType(UIJCRExplorer.class).getRepository().getConfiguration().getDefaultWorkspaceName();
+      String workspace = uiForm.getAncestorOfType(UIJCRExplorer.class)
+                               .getRepository()
+                               .getConfiguration()
+                               .getDefaultWorkspaceName();
       String userName = uiExplorer.getSession().getUserID();
       int scope = uiExplorer.getTagScope();
 

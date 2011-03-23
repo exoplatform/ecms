@@ -49,16 +49,13 @@ import org.exoplatform.webui.form.UIFormSelectBox;
  * chuong.phan@exoplatform.com, phan.le.thanh.chuong@gmail.com
  * Jun 12, 2009
  */
-@ComponentConfig (
-                  lifecycle = UIFormLifecycle.class,
-                  template = "app:/groovy/webui/newsletter/NewsletterManager/UINewsletterEntryDialogSelector.gtmpl",
-                  events = {
-                    @EventConfig (listeners = UINewsletterEntryDialogSelector.UpdateNewsletterActionListener.class),
-                    @EventConfig (listeners = UINewsletterEntryDialogSelector.OpenWebcontentSelectorFormActionListener.class),
-                    @EventConfig (listeners = UINewsletterEntryDialogSelector.ChangeTemplateActionListener.class),
-                    @EventConfig (listeners = UINewsletterEntryDialogSelector.ChangeCategoryActionListener.class)
-                  }
-)
+@ComponentConfig(lifecycle = UIFormLifecycle.class,
+                 template = "app:/groovy/webui/newsletter/NewsletterManager/UINewsletterEntryDialogSelector.gtmpl",
+                 events = {
+    @EventConfig(listeners = UINewsletterEntryDialogSelector.UpdateNewsletterActionListener.class),
+    @EventConfig(listeners = UINewsletterEntryDialogSelector.OpenWebcontentSelectorFormActionListener.class),
+    @EventConfig(listeners = UINewsletterEntryDialogSelector.ChangeTemplateActionListener.class),
+    @EventConfig(listeners = UINewsletterEntryDialogSelector.ChangeCategoryActionListener.class) })
 public class UINewsletterEntryDialogSelector extends UIForm {
 
   /** The Constant NEWSLETTER_ENTRY_TEMPLATE. */
@@ -95,7 +92,9 @@ public class UINewsletterEntryDialogSelector extends UIForm {
    */
   public UINewsletterEntryDialogSelector() throws Exception {
     this.setActions(new String[]{"UpdateNewsletter"});
-    UIFormSelectBox newsletterEntryTemplate = new UIFormSelectBox(NEWSLETTER_ENTRY_TEMPLATE, NEWSLETTER_ENTRY_TEMPLATE, new ArrayList<SelectItemOption<String>>());
+    UIFormSelectBox newsletterEntryTemplate = new UIFormSelectBox(NEWSLETTER_ENTRY_TEMPLATE,
+                                                                  NEWSLETTER_ENTRY_TEMPLATE,
+                                                                  new ArrayList<SelectItemOption<String>>());
     newsletterEntryTemplate.setOnChange("ChangeTemplate");
     addChild(newsletterEntryTemplate);
     addUIFormInput(new UIFormDateTimeInput(NEWSLETTER_ENTRY_SEND_DATE, NEWSLETTER_ENTRY_SEND_DATE, null, true));
@@ -130,15 +129,16 @@ public class UINewsletterEntryDialogSelector extends UIForm {
 
     if(CategoryName == null) CategoryName = categories.get(0).getValue();
     NewsletterSubscriptionHandler newsletterSubscriptionHandler = newsletterManagerService.getSubscriptionHandler();
-    List<NewsletterSubscriptionConfig> listSubscriptions =
-                                              newsletterSubscriptionHandler.getSubscriptionsByCategory(sessionProvider, portalName,
-                                                                                                       CategoryName);
+    List<NewsletterSubscriptionConfig> listSubscriptions = newsletterSubscriptionHandler.
+        getSubscriptionsByCategory(sessionProvider, portalName, CategoryName);
     List<SelectItemOption<String>> subscriptions = new ArrayList<SelectItemOption<String>>();
     for (NewsletterSubscriptionConfig newsletterSubscriptionConfig : listSubscriptions) {
-      subscriptions.add(new SelectItemOption<String>(newsletterSubscriptionConfig.getTitle(), newsletterSubscriptionConfig.getName()));
+      subscriptions.add(new SelectItemOption<String>(newsletterSubscriptionConfig.getTitle(),
+                                                     newsletterSubscriptionConfig.getName()));
     }
     UIFormSelectBox subscriptionSelectBox = new UIFormSelectBox(UINewsletterConstant.ENTRY_SUBSCRIPTION_SELECTBOX,
-                                                                UINewsletterConstant.ENTRY_SUBSCRIPTION_SELECTBOX, subscriptions);
+                                                                UINewsletterConstant.ENTRY_SUBSCRIPTION_SELECTBOX,
+                                                                subscriptions);
     if(subScriptionName != null && subScriptionName.trim().length() > 0){
       subscriptionSelectBox.setValue(subScriptionName);
       subscriptionSelectBox.setDisabled(true);
@@ -163,8 +163,7 @@ public class UINewsletterEntryDialogSelector extends UIForm {
     List<SelectItemOption<String>> templates = new ArrayList<SelectItemOption<String>>();
     NewsletterManagerService newsletterManagerService = getApplicationComponent(NewsletterManagerService.class);
     NewsletterTemplateHandler newsletterTemplateHandler = newsletterManagerService.getTemplateHandler();
-    List<Node> templateNodes = newsletterTemplateHandler.getTemplates(
-                                                                      Utils.getSessionProvider(),
+    List<Node> templateNodes = newsletterTemplateHandler.getTemplates(Utils.getSessionProvider(),
                                                                       NewsLetterUtil.getPortalName(),
                                                                       categoryConfig);
     for (Node template : templateNodes) {
@@ -194,15 +193,17 @@ public class UINewsletterEntryDialogSelector extends UIForm {
       UIFormSelectBox newsletterEntryTemplate = newsletterEntryDialogSelector.getChildById(NEWSLETTER_ENTRY_TEMPLATE);
       String templateName = newsletterEntryTemplate.getValue();
       newsletterEntryDialogSelector.setDialog(templateName) ;
-      NewsletterManagerService newsletterManagerService = newsletterEntryDialogSelector.getApplicationComponent(NewsletterManagerService.class);
+      NewsletterManagerService newsletterManagerService = newsletterEntryDialogSelector.
+          getApplicationComponent(NewsletterManagerService.class);
       NewsletterTemplateHandler newsletterTemplateHandler = newsletterManagerService.getTemplateHandler();
-      UINewsletterEntryContainer newsletterEntryContainer = newsletterEntryDialogSelector.getAncestorOfType(UINewsletterEntryContainer.class);
-      UINewsletterEntryForm newsletterEntryForm = newsletterEntryContainer.getChild(UINewsletterEntryForm.class) ;
-      newsletterEntryForm.setNodePath(newsletterTemplateHandler.getTemplate(
-                                                                            Utils.getSessionProvider(),
+      UINewsletterEntryContainer newsletterEntryContainer = newsletterEntryDialogSelector.
+          getAncestorOfType(UINewsletterEntryContainer.class);
+      UINewsletterEntryForm newsletterEntryForm = newsletterEntryContainer.getChild(UINewsletterEntryForm.class);
+      newsletterEntryForm.setNodePath(newsletterTemplateHandler.getTemplate(Utils.getSessionProvider(),
                                                                             NewsLetterUtil.getPortalName(),
                                                                             newsletterEntryContainer.getCategoryConfig(),
-                                                                            templateName).getPath());
+                                                                            templateName)
+                                                               .getPath());
       newsletterEntryForm.getChildren().clear();
       newsletterEntryForm.resetProperties();
       event.getRequestContext().addUIComponentToUpdateByAjax(newsletterEntryContainer) ;
@@ -228,8 +229,12 @@ public class UINewsletterEntryDialogSelector extends UIForm {
      */
     public void execute(Event<UINewsletterEntryDialogSelector> event) throws Exception {
       UINewsletterEntryDialogSelector newsletterEntryDialogSelector = event.getSource();
-      UINewsletterEntryWebcontentSelectorForm newsletterEntryWebcontentSelector = newsletterEntryDialogSelector.createUIComponent(UINewsletterEntryWebcontentSelectorForm.class, null, null);
-      Utils.createPopupWindow(newsletterEntryDialogSelector, newsletterEntryWebcontentSelector, UINewsletterConstant.WEBCONTENT_SELECTOR_FORM_POPUP_WINDOW, 300);
+      UINewsletterEntryWebcontentSelectorForm newsletterEntryWebcontentSelector = newsletterEntryDialogSelector.
+          createUIComponent(UINewsletterEntryWebcontentSelectorForm.class, null, null);
+      Utils.createPopupWindow(newsletterEntryDialogSelector,
+                              newsletterEntryWebcontentSelector,
+                              UINewsletterConstant.WEBCONTENT_SELECTOR_FORM_POPUP_WINDOW,
+                              300);
     }
   }
 
@@ -252,26 +257,33 @@ public class UINewsletterEntryDialogSelector extends UIForm {
     public void execute(Event<UINewsletterEntryDialogSelector> event) throws Exception {
       UINewsletterEntryDialogSelector newsletterEntryDialogSelector = event.getSource();
 
-      UINewsletterEntryContainer newsletterEntryContainer = newsletterEntryDialogSelector.getAncestorOfType(UINewsletterEntryContainer.class);
+      UINewsletterEntryContainer newsletterEntryContainer = newsletterEntryDialogSelector.
+          getAncestorOfType(UINewsletterEntryContainer.class);
 
-      UIFormSelectBox categorySelectBox = newsletterEntryDialogSelector.getChildById(UINewsletterConstant.ENTRY_CATEGORY_SELECTBOX);
+      UIFormSelectBox categorySelectBox = newsletterEntryDialogSelector.
+          getChildById(UINewsletterConstant.ENTRY_CATEGORY_SELECTBOX);
       List<SelectItemOption<String>> subscriptions = new ArrayList<SelectItemOption<String>>();
-      NewsletterManagerService newsletterManagerService = newsletterEntryDialogSelector.getApplicationComponent(NewsletterManagerService.class);
+      NewsletterManagerService newsletterManagerService = newsletterEntryDialogSelector.
+          getApplicationComponent(NewsletterManagerService.class);
       NewsletterSubscriptionHandler newsletterSubscriptionHandler = newsletterManagerService.getSubscriptionHandler();
       String portalName = NewsLetterUtil.getPortalName();
       SessionProvider sessionProvider = Utils.getSessionProvider();
-      NewsletterCategoryConfig categoryConfig = newsletterManagerService.getCategoryHandler().getCategoryByName(sessionProvider, portalName,
-                                                                                                                categorySelectBox.getValue());
+      NewsletterCategoryConfig categoryConfig = newsletterManagerService.getCategoryHandler()
+                                                                        .getCategoryByName(sessionProvider,
+                                                                                           portalName,
+                                                                                           categorySelectBox.getValue());
       List<NewsletterSubscriptionConfig> newsletterSubscriptionConfigs =
-              newsletterSubscriptionHandler.getSubscriptionsByCategory(sessionProvider, portalName, categorySelectBox.getValue());
+          newsletterSubscriptionHandler.getSubscriptionsByCategory(sessionProvider, portalName, categorySelectBox.getValue());
       for (NewsletterSubscriptionConfig newsletterSubscriptionConfig : newsletterSubscriptionConfigs) {
-        subscriptions.add(new SelectItemOption<String>(newsletterSubscriptionConfig.getTitle(), newsletterSubscriptionConfig.getName()));
+        subscriptions.add(new SelectItemOption<String>(newsletterSubscriptionConfig.getTitle(),
+                                                       newsletterSubscriptionConfig.getName()));
       }
 
-      UIFormSelectBox subscriptionSelectBox = newsletterEntryDialogSelector.getChildById(UINewsletterConstant.ENTRY_SUBSCRIPTION_SELECTBOX);
+      UIFormSelectBox subscriptionSelectBox = newsletterEntryDialogSelector.
+          getChildById(UINewsletterConstant.ENTRY_SUBSCRIPTION_SELECTBOX);
       subscriptionSelectBox.setOptions(subscriptions);
       newsletterEntryDialogSelector.updateTemplateSelectBox(categoryConfig);
-      event.getRequestContext().addUIComponentToUpdateByAjax(newsletterEntryContainer) ;
+      event.getRequestContext().addUIComponentToUpdateByAjax(newsletterEntryContainer);
     }
   }
 
@@ -299,29 +311,41 @@ public class UINewsletterEntryDialogSelector extends UIForm {
       Calendar calendar = formDateTimeInput.getCalendar();
 
       UIFormSelectBox categorySelectBox = newsletterEntryDialogSelector.getChildById("UINewsletterEntryCategorySelectBox");
-      UIFormSelectBox subcriptionSelectBox = newsletterEntryDialogSelector.getChildById("UINewsletterEntrySubscriptionSelectBox");
+      UIFormSelectBox subcriptionSelectBox = newsletterEntryDialogSelector.
+          getChildById("UINewsletterEntrySubscriptionSelectBox");
 
-      UINewsletterEntryContainer entryContainer = newsletterEntryDialogSelector.getAncestorOfType(UINewsletterEntryContainer.class);
+      UINewsletterEntryContainer entryContainer = newsletterEntryDialogSelector.
+          getAncestorOfType(UINewsletterEntryContainer.class);
       UIApplication uiApp = entryContainer.getAncestorOfType(UIApplication.class);
-      if(calendar == null || formDateTimeInput.getValue().trim().length() < 1){
-        if(formDateTimeInput.getValue() == null || formDateTimeInput.getValue().trim().length() < 1){
-          uiApp.addMessage(new ApplicationMessage("UINewsletterEntryForm.msg.DateTimeIsNotNull", null, ApplicationMessage.WARNING));
-        }else {
-          uiApp.addMessage(new ApplicationMessage("UINewsletterEntryForm.msg.DateTimeIsInvalid", null, ApplicationMessage.WARNING));
+      if (calendar == null || formDateTimeInput.getValue().trim().length() < 1) {
+        if (formDateTimeInput.getValue() == null
+            || formDateTimeInput.getValue().trim().length() < 1) {
+          uiApp.addMessage(new ApplicationMessage("UINewsletterEntryForm.msg.DateTimeIsNotNull",
+                                                  null,
+                                                  ApplicationMessage.WARNING));
+        } else {
+          uiApp.addMessage(new ApplicationMessage("UINewsletterEntryForm.msg.DateTimeIsInvalid",
+                                                  null,
+                                                  ApplicationMessage.WARNING));
         }
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
         return;
       }
       if (categorySelectBox.getValue() == null || subcriptionSelectBox.getValue() == null
-          || categorySelectBox.getValue().length() == 0 || subcriptionSelectBox.getValue().length() == 0)
-      {
-        Utils.createPopupMessage(newsletterEntryDialogSelector, "UINewsletterEntryDialogSelector.msg.subcriptionIsNotEmpty", null, ApplicationMessage.WARNING);
+          || categorySelectBox.getValue().length() == 0
+          || subcriptionSelectBox.getValue().length() == 0) {
+        Utils.createPopupMessage(newsletterEntryDialogSelector,
+                                 "UINewsletterEntryDialogSelector.msg.subcriptionIsNotEmpty",
+                                 null,
+                                 ApplicationMessage.WARNING);
         return;
       }
 
       entryContainer.setUpdated(true);
       formDateTimeInput.setCalendar(calendar);
-      uiApp.addMessage(new ApplicationMessage("UINewsletterEntryForm.msg.UpdateInformationSuccessful", null, ApplicationMessage.INFO));
+      uiApp.addMessage(new ApplicationMessage("UINewsletterEntryForm.msg.UpdateInformationSuccessful",
+                                              null,
+                                              ApplicationMessage.INFO));
       event.getRequestContext().addUIComponentToUpdateByAjax(newsletterEntryDialogSelector) ;
       newsletterEntryTemplate.setValue(templateName);
     }

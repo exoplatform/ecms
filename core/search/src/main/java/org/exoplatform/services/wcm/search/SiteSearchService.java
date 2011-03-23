@@ -52,5 +52,8 @@ public interface SiteSearchService {
    *
    * @throws Exception the exception
    */
-  public WCMPaginatedQueryResult searchSiteContents(SessionProvider sessionProvider, QueryCriteria queryCriteria, int pageSize, boolean isSearchContent) throws Exception;
+  public WCMPaginatedQueryResult searchSiteContents(SessionProvider sessionProvider,
+                                                    QueryCriteria queryCriteria,
+                                                    int pageSize,
+                                                    boolean isSearchContent) throws Exception;
 }

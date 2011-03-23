@@ -39,7 +39,7 @@ import java.util.List;
  * @author <a href="mailto:Sergey.Kabashnyuk@exoplatform.org">Sergey
  *         Kabashnyuk</a>
  * @version $Id$
- * 
+ *
  */
 public class CmisContentReader extends ContentReaderInterceptor
 {
@@ -64,10 +64,11 @@ public class CmisContentReader extends ContentReaderInterceptor
    }
 
   /**
-   * @see org.xcmis.search.content.interceptors.ContentReaderInterceptor#visitChildEntriesCommand(org.xcmis.search.content.command.InvocationContext,
+   * @see org.xcmis.search.content.interceptors.ContentReaderInterceptor#visitChildEntriesCommand(
+   *      org.xcmis.search.content.command.InvocationContext,
    *      org.xcmis.search.content.command.read.GetChildEntriesCommand)
    */
-   @Override
+  @Override
   public Object visitChildEntriesCommand(InvocationContext ctx, GetChildEntriesCommand command) throws Throwable {
     List<ContentEntry> childs = new ArrayList<ContentEntry>();
     ObjectData parent = storage.getObjectById(command.getParentUuid());
@@ -83,7 +84,8 @@ public class CmisContentReader extends ContentReaderInterceptor
   }
 
   /**
-   * @see org.xcmis.search.content.interceptors.ContentReaderInterceptor#visitGetContentEntryCommand(org.xcmis.search.content.command.InvocationContext,
+   * @see org.xcmis.search.content.interceptors.ContentReaderInterceptor#visitGetContentEntryCommand(
+   *      org.xcmis.search.content.command.InvocationContext,
    *      org.xcmis.search.content.command.read.GetContentEntryCommand)
    */
    @Override

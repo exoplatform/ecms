@@ -52,10 +52,16 @@ import org.exoplatform.webui.form.validator.MandatoryValidator;
 )
 public class UIContentNameSearch extends UIForm {
 
-  private static String KEYWORD = "keyword".intern();
-  private static String SEARCH_LOCATION = "location".intern();
-  private static final String ROOT_PATH_SQL_QUERY = "select * from nt:base where jcr:path like '%/$1' order by exo:dateCreated DESC,jcr:primaryType DESC";
-  private static final String PATH_SQL_QUERY = "select * from nt:base where jcr:path like '$0/%/$1' or jcr:path like '$0/$1' order by exo:dateCreated DESC,jcr:primaryType DESC";
+  private static String       KEYWORD             = "keyword".intern();
+
+  private static String       SEARCH_LOCATION     = "location".intern();
+
+  private static final String ROOT_PATH_SQL_QUERY = "select * from nt:base where jcr:path like '%/$1'"
+                                                      + " order by exo:dateCreated DESC,jcr:primaryType DESC";
+
+  private static final String PATH_SQL_QUERY      = "select * from nt:base where jcr:path like '$0/%/$1'"
+                                                      + " or jcr:path like '$0/$1'"
+                                                      + " order by exo:dateCreated DESC,jcr:primaryType DESC";
 
   public UIContentNameSearch() throws Exception {
     addChild(new UIFormInputInfo(SEARCH_LOCATION,null,null));

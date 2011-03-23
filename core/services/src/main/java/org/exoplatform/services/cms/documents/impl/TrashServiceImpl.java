@@ -224,7 +224,6 @@ public class TrashServiceImpl implements TrashService {
     String trashWorkspace = trashNodeSession.getWorkspace().getName();
     String restoreWorkspace = trashNode.getProperty(RESTORE_WORKSPACE).getString();
     String restorePath = trashNode.getProperty(RESTORE_PATH).getString();
-    //		restorePath = fixRestorePath(restorePath);
     String nodeUUID = trashNode.isNodeType(MIX_REFERENCEABLE) ? trashNode.getUUID() : null;
     if (trashNode.isNodeType(SYMLINK)) nodeUUID = null;
     String taxonomyLinkUUID = trashNode.isNodeType(TAXONOMY_LINK) ? trashNode.getProperty(UUID).getString() : null;

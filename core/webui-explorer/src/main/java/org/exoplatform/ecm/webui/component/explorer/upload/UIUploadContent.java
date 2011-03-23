@@ -67,20 +67,23 @@ public class UIUploadContent extends UIContainer {
 
   public List<String> getExternalList() throws Exception {
     NodeType[] mixinTypes = getUploadedNode().getMixinNodeTypes();
-    for(NodeType nodeType : mixinTypes) {
-      if(nodeType.getName().equals(Utils.EXO_METADATA) && isExternalUse(nodeType) && !externalList_.contains(nodeType.getName())) {
-        externalList_.add(nodeType.getName()) ;
+    for (NodeType nodeType : mixinTypes) {
+      if (nodeType.getName().equals(Utils.EXO_METADATA) && isExternalUse(nodeType)
+          && !externalList_.contains(nodeType.getName())) {
+        externalList_.add(nodeType.getName());
       }
-      for(NodeType superType : nodeType.getSupertypes()) {
-        if(superType.getName().equals(Utils.EXO_METADATA) && isExternalUse(nodeType) && !externalList_.contains(nodeType.getName())) {
-          externalList_.add(nodeType.getName()) ;
+      for (NodeType superType : nodeType.getSupertypes()) {
+        if (superType.getName().equals(Utils.EXO_METADATA) && isExternalUse(nodeType)
+            && !externalList_.contains(nodeType.getName())) {
+          externalList_.add(nodeType.getName());
         }
       }
     }
-    if(getUploadedNode().hasNode(Utils.JCR_CONTENT)) {
-      for(NodeType nodeType : getUploadedNode().getNode(Utils.JCR_CONTENT).getMixinNodeTypes()) {
-        if(nodeType.isNodeType(Utils.EXO_METADATA) && isExternalUse(nodeType) && !externalList_.contains(nodeType.getName())) {
-          externalList_.add(nodeType.getName()) ;
+    if (getUploadedNode().hasNode(Utils.JCR_CONTENT)) {
+      for (NodeType nodeType : getUploadedNode().getNode(Utils.JCR_CONTENT).getMixinNodeTypes()) {
+        if (nodeType.isNodeType(Utils.EXO_METADATA) && isExternalUse(nodeType)
+            && !externalList_.contains(nodeType.getName())) {
+          externalList_.add(nodeType.getName());
         }
       }
     }
@@ -94,9 +97,6 @@ public class UIUploadContent extends UIContainer {
         return pro.getDefaultValues()[0].getBoolean();
       }
     }
-//    PropertyDefinition def =
-//      ((ExtendedNodeType)nodeType).getPropertyDefinitions("exo:internalUse").getAnyDefinition() ;
-//    return !def.getDefaultValues()[0].getBoolean() ;
     return false;
   }
 

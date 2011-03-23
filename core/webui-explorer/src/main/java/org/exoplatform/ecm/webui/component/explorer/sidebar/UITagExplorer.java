@@ -74,7 +74,7 @@ public class UITagExplorer extends UIContainer {
     String publicTagNodePath = nodeHierarchyCreator.getJcrPath(PUBLIC_TAG_NODE_PATH);
 
     RepositoryService repositoryService = getApplicationComponent(RepositoryService.class);
-    ManageableRepository	manageableRepo = repositoryService.getRepository(getRepository());
+    ManageableRepository manageableRepo = repositoryService.getRepository(getRepository());
 
     String workspace = manageableRepo.getConfiguration().getDefaultWorkspaceName();
 

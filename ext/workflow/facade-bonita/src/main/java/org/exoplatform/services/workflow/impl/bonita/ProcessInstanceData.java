@@ -26,23 +26,29 @@ import org.exoplatform.services.workflow.ProcessInstance;
  * Created by Bull R&D
  * @author Rodrigue Le Gall
  */
+
 public class ProcessInstanceData implements ProcessInstance {
-  private String processInstanceId = null;
-  private String processId         = null;
-  private String processName       = null;
-  private Date   startDate         = null;
-  private Date   endDate           = null;
+  private String        processInstanceId = null;
+
+  private String        processId         = null;
+
+  private String        processName       = null;
+
+  private Date          startDate         = null;
+
+  private Date          endDate           = null;
 
   private static Logger log = Logger.getLogger(ProcessInstanceData.class.getName());
 
   public ProcessInstanceData(org.ow2.bonita.facade.runtime.ProcessInstance processInstance) {
     try {
       this.processInstanceId = processInstance.getUUID().toString();
-      this.processName       = WorkflowServiceContainerHelper.getProcessName(processInstance.getProcessDefinitionUUID().toString());
-      this.startDate         = processInstance.getStartedDate();
-      this.processId         = processInstance.getProcessDefinitionUUID().toString();
-      //TODO delete the IllegalStateException catching
-      this.endDate           = processInstance.getEndedDate();
+      this.processName = WorkflowServiceContainerHelper.getProcessName(processInstance.getProcessDefinitionUUID()
+                                                                                      .toString());
+      this.startDate = processInstance.getStartedDate();
+      this.processId = processInstance.getProcessDefinitionUUID().toString();
+      // TODO delete the IllegalStateException catching
+      this.endDate = processInstance.getEndedDate();
 
     } catch (IllegalStateException e) {
       this.endDate = null;

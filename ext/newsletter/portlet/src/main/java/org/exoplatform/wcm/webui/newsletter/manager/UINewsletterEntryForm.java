@@ -136,9 +136,12 @@ public class UINewsletterEntryForm extends UIDialogForm {
     boolean isNull = true;
     // Prepare node store location
     UINewsletterEntryContainer newsletterEntryContainer = getAncestorOfType(UINewsletterEntryContainer.class);
-    UINewsletterEntryDialogSelector newsletterEntryDialogSelector = newsletterEntryContainer.getChild(UINewsletterEntryDialogSelector.class);
-    String selectedCategory = ((UIFormSelectBox) newsletterEntryDialogSelector.getChildById(UINewsletterConstant.ENTRY_CATEGORY_SELECTBOX)).getValue();
-    String selectedSubsctiption = ((UIFormSelectBox) newsletterEntryDialogSelector.getChildById(UINewsletterConstant.ENTRY_SUBSCRIPTION_SELECTBOX)).getValue();
+    UINewsletterEntryDialogSelector newsletterEntryDialogSelector = newsletterEntryContainer.
+        getChild(UINewsletterEntryDialogSelector.class);
+    String selectedCategory = ((UIFormSelectBox) newsletterEntryDialogSelector.
+        getChildById(UINewsletterConstant.ENTRY_CATEGORY_SELECTBOX)).getValue();
+    String selectedSubsctiption = ((UIFormSelectBox) newsletterEntryDialogSelector.
+        getChildById(UINewsletterConstant.ENTRY_SUBSCRIPTION_SELECTBOX)).getValue();
     setStoredPath(NewsletterConstant.generateSubscriptionPath(NewsLetterUtil.getPortalName(),
                                                               selectedCategory,
                                                               selectedSubsctiption));
@@ -212,10 +215,13 @@ public class UINewsletterEntryForm extends UIDialogForm {
      */
     public void execute(Event<UINewsletterEntryForm> event) throws Exception {
       UINewsletterEntryForm newsletterEntryForm = event.getSource();
-      UINewsletterEntryContainer newsletterEntryContainer = newsletterEntryForm.getAncestorOfType(UINewsletterEntryContainer.class);
+      UINewsletterEntryContainer newsletterEntryContainer = newsletterEntryForm.
+          getAncestorOfType(UINewsletterEntryContainer.class);
       if(!newsletterEntryContainer.isUpdated()){
         UIApplication uiApp = newsletterEntryContainer.getAncestorOfType(UIApplication.class);
-        uiApp.addMessage(new ApplicationMessage("UINewsletterEntryForm.msg.UpdateBeforeSave", null, ApplicationMessage.WARNING));
+        uiApp.addMessage(new ApplicationMessage("UINewsletterEntryForm.msg.UpdateBeforeSave",
+                                                null,
+                                                ApplicationMessage.WARNING));
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
         return;
       }
@@ -223,7 +229,9 @@ public class UINewsletterEntryForm extends UIDialogForm {
         newsletterEntryForm.saveContent(false);
       }catch(ItemExistsException itemExistsException){
         UIApplication uiApp = newsletterEntryContainer.getAncestorOfType(UIApplication.class);
-        uiApp.addMessage(new ApplicationMessage("UINewsletterEntryForm.msg.NodeNameInvalid", null, ApplicationMessage.WARNING));
+        uiApp.addMessage(new ApplicationMessage("UINewsletterEntryForm.msg.NodeNameInvalid",
+                                                null,
+                                                ApplicationMessage.WARNING));
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
         return;
       }
@@ -248,21 +256,26 @@ public class UINewsletterEntryForm extends UIDialogForm {
      */
     public void execute(Event<UINewsletterEntryForm> event) throws Exception {
       UINewsletterEntryForm newsletterEntryForm = event.getSource();
-      UINewsletterEntryContainer newsletterEntryContainer = newsletterEntryForm.getAncestorOfType(UINewsletterEntryContainer.class);
+      UINewsletterEntryContainer newsletterEntryContainer = newsletterEntryForm.
+          getAncestorOfType(UINewsletterEntryContainer.class);
       PortletRequestContext portletRequestContext = (PortletRequestContext) event.getRequestContext();
       PortletRequest portletRequest = portletRequestContext.getRequest();
-      if(!newsletterEntryContainer.isUpdated()){
+      if (!newsletterEntryContainer.isUpdated()) {
         UIApplication uiApp = newsletterEntryContainer.getAncestorOfType(UIApplication.class);
-        uiApp.addMessage(new ApplicationMessage("UINewsletterEntryForm.msg.UpdateBeforeSave", null, ApplicationMessage.WARNING));
+        uiApp.addMessage(new ApplicationMessage("UINewsletterEntryForm.msg.UpdateBeforeSave",
+                                                null,
+                                                ApplicationMessage.WARNING));
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
         return;
       }
       Node newsletterNode = null;
-      try{
+      try {
         newsletterNode = newsletterEntryForm.saveContent(true);
-      }catch(ItemExistsException itemExistsException){
+      } catch (ItemExistsException itemExistsException) {
         UIApplication uiApp = newsletterEntryContainer.getAncestorOfType(UIApplication.class);
-        uiApp.addMessage(new ApplicationMessage("UINewsletterEntryForm.msg.NodeNameInvalid", null, ApplicationMessage.WARNING));
+        uiApp.addMessage(new ApplicationMessage("UINewsletterEntryForm.msg.NodeNameInvalid",
+                                                null,
+                                                ApplicationMessage.WARNING));
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
         return;
       }
@@ -274,7 +287,8 @@ public class UINewsletterEntryForm extends UIDialogForm {
         List<String> listEmailAddress = new ArrayList<String>();
         String receiver = "";
         Node subscriptionNode = newsletterNode.getParent();
-        NewsletterManagerService newsletterManagerService = newsletterEntryForm.getApplicationComponent(NewsletterManagerService.class);
+        NewsletterManagerService newsletterManagerService = newsletterEntryForm.
+            getApplicationComponent(NewsletterManagerService.class);
         if(subscriptionNode.hasProperty(NewsletterConstant.SUBSCRIPTION_PROPERTY_USER)){
           List<String> listEmailBanned = newsletterManagerService.getAllBannedUser();
           Property subscribedUserProperty = subscriptionNode.getProperty(NewsletterConstant.SUBSCRIPTION_PROPERTY_USER);

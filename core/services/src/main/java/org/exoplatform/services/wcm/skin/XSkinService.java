@@ -50,9 +50,13 @@ import org.picocontainer.Startable;
 public class XSkinService implements Startable {
 
   /** The SHARE d_ cs s_ query. */
-  private static String           SHARED_CSS_QUERY     = "select * from exo:cssFile where jcr:path like '{path}/%' and exo:active='true' and exo:sharedCSS='true' order by exo:priority DESC".intern();
+  private static String           SHARED_CSS_QUERY     = "select * from exo:cssFile where jcr:path like '{path}/%' "
+                                                           + "and exo:active='true' and exo:sharedCSS='true' "
+                                                           + "order by exo:priority DESC".intern();
 
-  private static String           WEBCONTENT_CSS_QUERY = "select * from exo:cssFile where jcr:path like '{path}/%' and exo:active='true' order by exo:priority DESC".intern();
+  private static String           WEBCONTENT_CSS_QUERY = "select * from exo:cssFile where jcr:path like '{path}/%' "
+                                                           + "and exo:active='true' "
+                                                           + "order by exo:priority DESC".intern();
 
   /** The Constant SKIN_PATH_REGEXP. */
   public final static String      SKIN_PATH_REGEXP     = "/(.*)/css/jcr/(.*)/(.*)/(.*).css".intern();
@@ -169,11 +173,12 @@ public class XSkinService implements Startable {
    * @throws Exception the exception
    */
   public void updatePortalSkinOnRemove(Node portal, Node cssFile) throws Exception {
-    String repository = ((ManageableRepository)portal.getSession().getRepository()).getConfiguration().getName();
+    String repository = ((ManageableRepository) portal.getSession().getRepository()).getConfiguration()
+                                                                                    .getName();
     String sharedPortalName = configurationService.getSharedPortalName(repository);
-    if(sharedPortalName.equals(portal.getName())) {
+    if (sharedPortalName.equals(portal.getName())) {
       addSharedPortalSkin(portal, cssFile, false);
-    }else {
+    } else {
       addPortalSkin(portal, cssFile, false);
     }
   }
@@ -307,10 +312,10 @@ public class XSkinService implements Startable {
       Node sharedPortal = livePortalManagerService.getLiveSharedPortal(sessionProvider);
       addSharedPortalSkin(sharedPortal, null, true);
       List<Node> livePortals = livePortalManagerService.getLivePortals(sessionProvider);
-      for(Node portal: livePortals) {
+      for (Node portal : livePortals) {
         addPortalSkin(portal, null, true);
       }
-    }catch (Exception e) {
+    } catch (Exception e) {
       log.error("Exception when start XSkinService", e);
     }
   }
@@ -318,6 +323,7 @@ public class XSkinService implements Startable {
   /* (non-Javadoc)
    * @see org.picocontainer.Startable#stop()
    */
-  public void stop() { }
+  public void stop() {
+  }
 
 }

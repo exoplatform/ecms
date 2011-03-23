@@ -53,23 +53,30 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 public class TemplatePlugin extends BaseComponentPlugin {
 
-  static final public String DIALOGS = "dialogs".intern();
-  static final public String VIEWS = "views".intern();
-  static final public String SKINS = "skins".intern();
+  static final public String   DIALOGS                    = "dialogs".intern();
 
-  static final public String DEFAULT_DIALOG = "dialog1".intern();
-  static final public String DEFAULT_VIEW = "view1".intern();
+  static final public String   VIEWS                      = "views".intern();
 
-  static final String[] UNDELETABLE_TEMPLATES = {DEFAULT_DIALOG, DEFAULT_VIEW};
+  static final public String   SKINS                      = "skins".intern();
 
-  static final public String DEFAULT_DIALOGS_PATH = "/" + DIALOGS + "/" + DEFAULT_DIALOG;
-  static final public String DEFAULT_VIEWS_PATH = "/" + VIEWS + "/" + DEFAULT_VIEW;
+  static final public String   DEFAULT_DIALOG             = "dialog1".intern();
 
-  static final public String NT_UNSTRUCTURED = "nt:unstructured".intern() ;
-  static final public String DOCUMENT_TEMPLATE_PROP = "isDocumentTemplate".intern() ;
-  static final public String TEMPLATE_LABEL = "label".intern() ;
+  static final public String   DEFAULT_VIEW               = "view1".intern();
 
-  public static final String[] EXO_ROLES_DEFAULT          = new String[] {"*".intern()};
+  static final String[]        UNDELETABLE_TEMPLATES      = { DEFAULT_DIALOG, DEFAULT_VIEW };
+
+  static final public String   DEFAULT_DIALOGS_PATH       = "/" + DIALOGS + "/" + DEFAULT_DIALOG;
+
+  static final public String   DEFAULT_VIEWS_PATH         = "/" + VIEWS + "/" + DEFAULT_VIEW;
+
+  static final public String   NT_UNSTRUCTURED            = "nt:unstructured".intern();
+
+  static final public String   DOCUMENT_TEMPLATE_PROP     = "isDocumentTemplate".intern();
+
+  static final public String   TEMPLATE_LABEL             = "label".intern();
+
+  public static final String[] EXO_ROLES_DEFAULT          = new String[] { "*".intern() };
+
   private static final String  NAME;
 
   private static final String  COMMENT_TEMPLATE;
@@ -198,9 +205,11 @@ public class TemplatePlugin extends BaseComponentPlugin {
    */
   private DMSConfiguration dmsConfiguration_;
 
-  public TemplatePlugin(InitParams params, RepositoryService jcrService,
-      ConfigurationManager configManager, NodeHierarchyCreator nodeHierarchyCreator,
-      DMSConfiguration dmsConfiguration) throws Exception {
+  public TemplatePlugin(InitParams params,
+                        RepositoryService jcrService,
+                        ConfigurationManager configManager,
+                        NodeHierarchyCreator nodeHierarchyCreator,
+                        DMSConfiguration dmsConfiguration) throws Exception {
     nodeHierarchyCreator_ = nodeHierarchyCreator;
     repositoryService_ = jcrService;
     configManager_ = configManager;
@@ -233,7 +242,7 @@ public class TemplatePlugin extends BaseComponentPlugin {
   }
 
   @SuppressWarnings("unchecked")
-  private void addTemplate(TemplateConfig templateConfig, Node templatesHome,String storedLocation) throws Exception {
+  private void addTemplate(TemplateConfig templateConfig, Node templatesHome, String storedLocation) throws Exception {
     NodeTypeManager ntManager = templatesHome.getSession().getWorkspace().getNodeTypeManager() ;
     NodeTypeIterator nodetypeIter = ntManager.getAllNodeTypes();
     List<String> listNodeTypeName = new ArrayList<String>();
@@ -316,8 +325,14 @@ public class TemplatePlugin extends BaseComponentPlugin {
         specifiedTemplatesHome = Utils.makePath(nodeTypeHome, templateType, NT_UNSTRUCTURED);
       }
       if(!specifiedTemplatesHome.hasNode(nodeName)) {
-        templateService.addTemplate(templateType, nodeType.getNodetypeName(), nodeType.getLabel(), nodeType.getDocumentTemplate(), nodeName,
-            template.getParsedRoles(), in, templatesHome);
+        templateService.addTemplate(templateType,
+                                    nodeType.getNodetypeName(),
+                                    nodeType.getLabel(),
+                                    nodeType.getDocumentTemplate(),
+                                    nodeName,
+                                    template.getParsedRoles(),
+                                    in,
+                                    templatesHome);
       }
     }
   }
@@ -341,7 +356,9 @@ public class TemplatePlugin extends BaseComponentPlugin {
     buildDialogForm.append(START_DIALOG_FORM).append(START_TABLE);
     buildDialogForm.append(START_TR);
     buildDialogForm.append(DEF_FIELD_PROPERTY);
-    buildDialogForm.append(TD_LABEL.replace("${nodetypename}", nodeType.getName()).replace(":", "_").replace("${propertyname}", "name"));
+    buildDialogForm.append(TD_LABEL.replace("${nodetypename}", nodeType.getName())
+                                   .replace(":", "_")
+                                   .replace("${propertyname}", "name"));
     buildDialogForm.append(TD_COMPONENT.replace("${contentcomponent}", NAME));
     buildDialogForm.append(END_TR);
     buildDialogForm.append(buildDialogNodeType(nodeType));
@@ -364,7 +381,8 @@ public class TemplatePlugin extends BaseComponentPlugin {
    * @param nodeType
    * @return
    */
-  private String buildDialogNodeType(NodeType nodeType, String jcrPath) throws ValueFormatException, RepositoryException {
+  private String buildDialogNodeType(NodeType nodeType, String jcrPath) throws ValueFormatException,
+                                                                       RepositoryException {
     StringBuilder buildDialogNodeType = new StringBuilder();
     StringBuilder componentField;
     String propertyNameFormat;
@@ -382,11 +400,17 @@ public class TemplatePlugin extends BaseComponentPlugin {
       propertyNameFormat = prodef.getName().replace(":", "_");
       propertyPath = jcrPath.concat(prodef.getName());
       propertyId = propertyPath.replace(":", "_");
-      componentField = new StringBuilder("\n\t\t\t\t\t\tuicomponent.addTextField(\"").append(propertyId).append("\", ");
+      componentField = new StringBuilder("\n\t\t\t\t\t\tuicomponent.addTextField(\"").append(propertyId)
+                                                                                     .append("\", ");
       validate = new StringBuilder("validate=");
       buildDialogNodeType.append(START_TR);
-      buildDialogNodeType.append(TD_LABEL.replace("${nodetypename}", nodeType.getName()).replace(":", "_").replace("${propertyname}", propertyNameFormat));
-      params = new StringBuilder("\t\t\t\t\t\t").append(FIELD_PROPERTY).append(" = [\"jcrPath=").append(propertyPath).append("\"");
+      buildDialogNodeType.append(TD_LABEL.replace("${nodetypename}", nodeType.getName())
+                                         .replace(":", "_")
+                                         .replace("${propertyname}", propertyNameFormat));
+      params = new StringBuilder("\t\t\t\t\t\t").append(FIELD_PROPERTY)
+                                                .append(" = [\"jcrPath=")
+                                                .append(propertyPath)
+                                                .append("\"");
       if (prodef.isMultiple()) {
         params.append(", \"multiValues=true\"");
       }
@@ -400,7 +424,8 @@ public class TemplatePlugin extends BaseComponentPlugin {
 
       case PropertyType.BOOLEAN :
         params.append(", \"options=true,false\"");
-        componentField = new StringBuilder("\n\t\t\t\t\t\tuicomponent.addSelectBoxField(\"").append(propertyId).append("\", ");
+        componentField = new StringBuilder("\n\t\t\t\t\t\tuicomponent.addSelectBoxField(\"").append(propertyId)
+                                                                                            .append("\", ");
         break;
 
       case PropertyType.STRING :
@@ -409,7 +434,8 @@ public class TemplatePlugin extends BaseComponentPlugin {
       case PropertyType.DATE :
         validate.append("datetime,");
         params.append(", \"options=displaytime\", \"visible=true\"");
-        componentField = new StringBuilder("\n\t\t\t\t\t\tuicomponent.addCalendarField(\"").append(propertyId).append("\", ");
+        componentField = new StringBuilder("\n\t\t\t\t\t\tuicomponent.addCalendarField(\"").append(propertyId)
+                                                                                           .append("\", ");
         break;
 
       case PropertyType.LONG :
@@ -425,7 +451,8 @@ public class TemplatePlugin extends BaseComponentPlugin {
         break;
 
       case PropertyType.BINARY :
-        componentField = new StringBuilder("\n\t\t\t\t\t\tuicomponent.addUploadField(\"").append(propertyId).append("\", ");
+        componentField = new StringBuilder("\n\t\t\t\t\t\tuicomponent.addUploadField(\"").append(propertyId)
+                                                                                         .append("\", ");
         break;
 
       default:
@@ -449,7 +476,11 @@ public class TemplatePlugin extends BaseComponentPlugin {
 
       params.append("];");
       componentField.append(FIELD_PROPERTY).append(");");
-      buildDialogNodeType.append(TD_COMPONENT.replace("${contentcomponent}", START_JAVA.concat(params.append(componentField).append(END_JAVA).append("\n").toString())));
+      buildDialogNodeType.append(TD_COMPONENT.replace("${contentcomponent}",
+                                                      START_JAVA.concat(params.append(componentField)
+                                                                              .append(END_JAVA)
+                                                                              .append("\n")
+                                                                              .toString())));
       buildDialogNodeType.append(END_TR);
     }
 
@@ -482,7 +513,9 @@ public class TemplatePlugin extends BaseComponentPlugin {
     buildViewForm.append("\n\t\t<div id=\"$uicomponent.id\">");
     buildViewForm.append(START_TABLE);
     buildViewForm.append(START_TR);
-    buildViewForm.append(TD_LABEL.replace("${nodetypename}", nodeType.getName()).replace(":", "_").replace("${propertyname}", "name"));
+    buildViewForm.append(TD_LABEL.replace("${nodetypename}", nodeType.getName())
+                                 .replace(":", "_")
+                                 .replace("${propertyname}", "name"));
     buildViewForm.append(TD_COMPONENT.replace("${contentcomponent}\t\t\t\t\t", "${name}"));
     buildViewForm.append(END_TR);
     buildViewForm.append(buildViewNodeType(nodeType));
@@ -510,16 +543,22 @@ public class TemplatePlugin extends BaseComponentPlugin {
       }
       if (prodef.isMultiple()) {
         buildViewNodeType.append("\t\t\t\t\t// Render for multi value;\n");
-        buildViewNodeType.append("\t\t\t\t\tvalues = ").append(GET_PROPERTY.replace("${propertyname}", prodef.getName())).append(".getValues()").append(";\n");
+        buildViewNodeType.append("\t\t\t\t\tvalues = ")
+                         .append(GET_PROPERTY.replace("${propertyname}", prodef.getName()))
+                         .append(".getValues()")
+                         .append(";\n");
         buildViewNodeType.append("\t\t\t\t\tvalueDisplay = \"\";\n");
         buildViewNodeType.append("\t\t\t\t\tfor(value in values) {\n" );
         buildViewNodeType.append("\t\t\t\t\t\tvalueDisplay += value.getString() + \",\";\n" );
         buildViewNodeType.append("\t\t\t\t\t}\n" );
-        buildViewNodeType.append("\t\t\t\t\tif (valueDisplay.length() > 0 && valueDisplay.indexOf(\",\") > -1) valueDisplay = valueDisplay.substring(0, valueDisplay.length() - 1);");
+        buildViewNodeType.append("\t\t\t\t\tif (valueDisplay.length() > 0 && valueDisplay.indexOf(\",\") > -1) ")
+                         .append("valueDisplay = valueDisplay.substring(0, valueDisplay.length() - 1);");
 
       } else {
         buildViewNodeType.append("\t\t\t\t\t// Render for single value;\n");
-        buildViewNodeType.append("\t\t\t\t\tvalueDisplay = ").append(GET_PROPERTY.replace("${propertyname}", prodef.getName())).append(".getString();");
+        buildViewNodeType.append("\t\t\t\t\tvalueDisplay = ")
+                         .append(GET_PROPERTY.replace("${propertyname}", prodef.getName()))
+                         .append(".getString();");
       }
       buildViewNodeType.append(END_JAVA);
       buildViewNodeType.append(TD_COMPONENT.replace("${contentcomponent}\t\t\t\t\t", "${valueDisplay}"));

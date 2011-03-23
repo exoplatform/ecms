@@ -238,7 +238,8 @@ public class DateTimeClassifyPlugin extends NodeClassifyPlugin {
    * @return true, if is valid field
    */
   private boolean isValidField(String field) {
-    if ((!"YYYY".equals(field)) && (!"MM".equals(field)) && (!"WW".equals(field.toUpperCase())) && (!"DD".equals(field.toUpperCase())))
+    if ((!"YYYY".equals(field)) && (!"MM".equals(field)) && (!"WW".equals(field.toUpperCase()))
+        && (!"DD".equals(field.toUpperCase())))
       return false;
     return true;
   }

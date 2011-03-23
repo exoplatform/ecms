@@ -34,8 +34,12 @@ import org.exoplatform.webui.form.wysiwyg.FCKEditorConfig;
  */
 public class FCKDynamicSkinPlugin extends FCKConfigPlugin {
 
-  /* (non-Javadoc)
-   * @see org.exoplatform.services.ecm.fckconfig.FCKConfigPlugin#addParameters(org.exoplatform.webui.form.wysiwyg.FCKEditorConfig, org.exoplatform.services.ecm.fckconfig.FCKEditorContext)
+  /*
+   * (non-Javadoc)
+   * @see
+   * org.exoplatform.services.ecm.fckconfig.FCKConfigPlugin#addParameters(org
+   * .exoplatform.webui.form.wysiwyg.FCKEditorConfig,
+   * org.exoplatform.services.ecm.fckconfig.FCKEditorContext)
    */
   public void addParameters(FCKEditorConfig editorConfig, FCKEditorContext editorContext) throws Exception {
     StringBuffer cssMergedBuffer = new StringBuffer();

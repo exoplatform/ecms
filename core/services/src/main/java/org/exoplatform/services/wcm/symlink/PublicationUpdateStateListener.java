@@ -109,7 +109,9 @@ public class PublicationUpdateStateListener extends Listener<CmsService, Node> {
       }
 
       if (liveNode!=null && liveNode.hasProperty("exo:title")) {
-        titlePublished = targetNode.hasProperty("exo:titlePublished")?targetNode.getProperty("exo:titlePublished").getString():null;
+        titlePublished = targetNode.hasProperty("exo:titlePublished") ? targetNode.getProperty("exo:titlePublished")
+                                                                                  .getString()
+                                                                     : null;
         String liveTitle = liveNode.getProperty("exo:title").getString();
         if (liveTitle != null && !liveTitle.equals(titlePublished)) {
           targetNode.setProperty("exo:titlePublished", liveTitle);
@@ -122,7 +124,8 @@ public class PublicationUpdateStateListener extends Listener<CmsService, Node> {
         Session session = repositoryService.getCurrentRepository().getSystemSession(workspace);
         try {
           QueryManager queryManager = session.getWorkspace().getQueryManager();
-          Query query = queryManager.createQuery("SELECT * FROM exo:taxonomyLink WHERE exo:uuid='" + targetNode.getUUID() + "'", Query.SQL);
+          Query query = queryManager.createQuery("SELECT * FROM exo:taxonomyLink WHERE exo:uuid='"
+              + targetNode.getUUID() + "'", Query.SQL);
           NodeIterator iterator = query.execute().getNodes();
           boolean needSessionSave=false;
           while (iterator.hasNext()) {
@@ -158,15 +161,19 @@ public class PublicationUpdateStateListener extends Listener<CmsService, Node> {
             } catch (PathNotFoundException e) {}
 
             try {
-              String currentTitlePublished = linkNode.hasProperty("exo:titlePublished")?linkNode.getProperty("exo:titlePublished").getString():null;
-              if (titlePublished != null && !titlePublished.equals(currentTitlePublished)) {
+              String currTitlePublished = linkNode.hasProperty("exo:titlePublished") ? linkNode.getProperty("exo:titlePublished")
+                                                                                               .getString()
+                                                                                    : null;
+              if (titlePublished != null && !titlePublished.equals(currTitlePublished)) {
                 linkNode.setProperty("exo:titlePublished", titlePublished);
                 needSessionSave = true;
               }
             } catch (PathNotFoundException e) {}
             try {
-              Calendar currentLiveDate = linkNode.hasProperty("publication:liveDate")?linkNode.getProperty("publication:liveDate").getDate():null;
-              if (liveDate != null && !liveDate.equals(currentLiveDate)) {
+              Calendar currLiveDate = linkNode.hasProperty("publication:liveDate") ? linkNode.getProperty("publication:liveDate")
+                                                                                             .getDate()
+                                                                                  : null;
+              if (liveDate != null && !liveDate.equals(currLiveDate)) {
                 linkNode.setProperty("publication:liveDate", liveDate);
                 needSessionSave = true;
               }
@@ -181,15 +188,37 @@ public class PublicationUpdateStateListener extends Listener<CmsService, Node> {
             } catch (PathNotFoundException e) {}
 
             if (log.isInfoEnabled()) {
-              String currentState = targetNode.hasProperty("publication:currentState")?targetNode.getProperty("publication:currentState").getString():"";
-              String currentName = linkNode.hasProperty("exo:name")?linkNode.getProperty("exo:name").getString():"";
-              String currentIndex = linkNode.hasProperty("exo:index")?linkNode.getProperty("exo:index").getString():"";
-              String currentTitle = linkNode.hasProperty("exo:title")?linkNode.getProperty("exo:title").getString():"";
-              String currentTitlePub = linkNode.hasProperty("exo:titlePublished")?linkNode.getProperty("exo:titlePublished").getString():"";
-              String currentLiveDate = linkNode.hasProperty("publication:liveDate")?linkNode.getProperty("publication:liveDate").getDate().getTime().toString():"";
-              String currentDateModified = linkNode.hasProperty("exo:dateModified")?linkNode.getProperty("exo:dateModified").getDate().getTime().toString():"";
+              String currentState = targetNode.hasProperty("publication:currentState") ? targetNode.
+                                                                                       getProperty("publication:currentState")
+                                                                                       .getString()
+                                                                                      : "";
+              String currentName = linkNode.hasProperty("exo:name") ? linkNode.getProperty("exo:name")
+                                                                              .getString()
+                                                                   : "";
+              String currentIndex = linkNode.hasProperty("exo:index") ? linkNode.getProperty("exo:index")
+                                                                                .getString()
+                                                                     : "";
+              String currentTitle = linkNode.hasProperty("exo:title") ? linkNode.getProperty("exo:title")
+                                                                                .getString()
+                                                                     : "";
+              String currentTitlePub = linkNode.hasProperty("exo:titlePublished") ? linkNode.getProperty("exo:titlePublished")
+                                                                                            .getString()
+                                                                                 : "";
+              String currLiveDate = linkNode.hasProperty("publication:liveDate") ? linkNode.getProperty("publication:liveDate")
+                                                                                           .getDate()
+                                                                                           .getTime()
+                                                                                           .toString()
+                                                                                   : "";
+              String currentDateModified = linkNode.hasProperty("exo:dateModified") ? linkNode.getProperty("exo:dateModified")
+                                                                                              .getDate()
+                                                                                              .getTime()
+                                                                                              .toString()
+                                                                                   : "";
 
-              log.info("@@@@ "+needSessionSave+" @state@"+currentState+" @Name@"+currentName+" @Index@"+currentIndex+" @Title@"+currentTitle+" @TitlePub@"+currentTitlePub+" @DateLive@"+currentLiveDate+" @DateMod@"+currentDateModified);
+              log.info("@@@@ " + needSessionSave + " @state@" + currentState + " @Name@"
+                  + currentName + " @Index@" + currentIndex + " @Title@" + currentTitle
+                  + " @TitlePub@" + currentTitlePub + " @DateLive@" + currLiveDate + " @DateMod@"
+                  + currentDateModified);
             }
           }
           if (needSessionSave) session.save();

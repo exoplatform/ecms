@@ -65,18 +65,16 @@ import org.exoplatform.webui.form.UIFormUploadInput;
 /**
  * Created by The eXo Platform SARL Author : Dang Van Minh minh.dang@exoplatform.com Oct 5, 2006
  */
-@ComponentConfig(lifecycle = UIFormLifecycle.class, template = "app:/groovy/webui/component/explorer/popup/admin/UIFormWithMultiRadioBox.gtmpl", events = {
+@ComponentConfig(lifecycle = UIFormLifecycle.class,
+                 template = "app:/groovy/webui/component/explorer/popup/admin/UIFormWithMultiRadioBox.gtmpl",
+                 events = {
     @EventConfig(listeners = UIImportNode.ImportActionListener.class),
     @EventConfig(listeners = UIImportNode.CancelActionListener.class, phase = Phase.DECODE) })
 public class UIImportNode extends UIForm implements UIPopupComponent {
 
-  private final static Log          log                  = ExoLogger.getLogger("ecm.UIImportNode");
+  private final static Log   log                         = ExoLogger.getLogger("ecm.UIImportNode");
 
   public static final String FORMAT                      = "format";
-
-//  public static final String DOC_VIEW                    = "docview";
-
-//  public static final String SYS_VIEW                    = "sysview";
 
   public static final String FILE_UPLOAD                 = "upload";
 

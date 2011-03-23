@@ -78,24 +78,34 @@ public class UIPermissionManager extends UIContainer implements UIPopupComponent
   public void activate() throws Exception {
     getChild(UIPermissionInfo.class).updateGrid(1);
   }
+
   public void checkPermissonInfo(Node node) throws Exception {
-    if(node.isLocked()){
+    if (node.isLocked()) {
       String lockToken = LockUtil.getLockToken(node);
-      if(lockToken != null) node.getSession().addLockToken(lockToken);
-      if(!Utils.isLockTokenHolder(node)) {
-        getChild(UIPermissionInfo.class).getChild(UIGrid.class).configure("usersOrGroups", UIPermissionInfo.PERMISSION_BEAN_FIELD, new String[]{});
+      if (lockToken != null)
+        node.getSession().addLockToken(lockToken);
+      if (!Utils.isLockTokenHolder(node)) {
+        getChild(UIPermissionInfo.class).getChild(UIGrid.class)
+                                        .configure("usersOrGroups",
+                                                   UIPermissionInfo.PERMISSION_BEAN_FIELD,
+                                                   new String[] {});
         getChild(UIPermissionForm.class).setRendered(false);
       }
     } else {
-      if(!PermissionUtil.canChangePermission(node)) {
-        getChild(UIPermissionInfo.class).getChild(UIGrid.class).configure("usersOrGroups", UIPermissionInfo.PERMISSION_BEAN_FIELD, new String[]{});
+      if (!PermissionUtil.canChangePermission(node)) {
+        getChild(UIPermissionInfo.class).getChild(UIGrid.class)
+                                        .configure("usersOrGroups",
+                                                   UIPermissionInfo.PERMISSION_BEAN_FIELD,
+                                                   new String[] {});
         getChild(UIPermissionForm.class).setRendered(false);
       }
     }
   }
-  public void deActivate() throws Exception {}
 
-  static  public class AddUserActionListener extends EventListener<UIUserSelector> {
+  public void deActivate() throws Exception {
+  }
+
+  static public class AddUserActionListener extends EventListener<UIUserSelector> {
     public void execute(Event<UIUserSelector> event) throws Exception {
       UIUserSelector uiForm = event.getSource();
       UIPermissionManager uiParent = uiForm.getAncestorOfType(UIPermissionManager.class);

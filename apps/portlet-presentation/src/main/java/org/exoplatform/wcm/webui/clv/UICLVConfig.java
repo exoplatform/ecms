@@ -287,7 +287,6 @@ public class UICLVConfig extends UIForm  implements UISelectable {
 
     boolean showAutomaticDetection = Boolean.parseBoolean(portletPreferences.getValue(UICLVPortlet.PREFERENCE_AUTOMATIC_DETECTION,
                                                                                       null));
-//    boolean showIlustration  = Boolean.parseBoolean(portletPreferences.getValue(UICLVPortlet.PREFERENCE_SHOW_ILLUSTRATION, null));
     boolean showTitle  = Boolean.parseBoolean(portletPreferences.getValue(UICLVPortlet.PREFERENCE_SHOW_TITLE, null));
     boolean showHeader  = Boolean.parseBoolean(portletPreferences.getValue(UICLVPortlet.PREFERENCE_SHOW_HEADER, null));
     boolean showRefresh  = Boolean.parseBoolean(portletPreferences.getValue(UICLVPortlet.PREFERENCE_SHOW_REFRESH_BUTTON, null));
@@ -382,10 +381,6 @@ public class UICLVConfig extends UIForm  implements UISelectable {
     itemsPerPageStringInput.addValidator(PositiveNumberFormatValidator.class);
     itemsPerPageStringInput.setMaxLength(3);
 
-//    /** SHOW ILLUSTRATION */
-//    UIFormCheckBoxInput<Boolean> showIllustrationCheckbox = new UIFormCheckBoxInput<Boolean>(SHOW_ILLUSTRATION_FORM_CHECKBOX_INPUT, SHOW_ILLUSTRATION_FORM_CHECKBOX_INPUT, null);
-//    showIllustrationCheckbox.setChecked(showIlustration);
-
     /** SHOW TITLE */
     UIFormCheckBoxInput<Boolean> showTitleCheckbox = new UIFormCheckBoxInput<Boolean>(SHOW_TITLE_FORM_CHECKBOX_INPUT,
                                                                                       SHOW_TITLE_FORM_CHECKBOX_INPUT,
@@ -434,9 +429,6 @@ public class UICLVConfig extends UIForm  implements UISelectable {
                                                                                      null);
     showLinkCheckbox.setChecked(showLink);
 
-//    /** SHOW READMORE */
-//    UIFormCheckBoxInput<Boolean> showReadmoreCheckbox = new UIFormCheckBoxInput<Boolean>(SHOW_READMORE_FORM_CHECKBOX_INPUT, SHOW_READMORE_FORM_CHECKBOX_INPUT, null);
-//    showReadmoreCheckbox.setChecked(showReadmore);
     /** SHOW RSS LINK */
     UIFormCheckBoxInput<Boolean> showRssLinkCheckbox = new UIFormCheckBoxInput<Boolean>(SHOW_RSSLINK_FORM_CHECKBOX_INPUT,
                                                                                         SHOW_RSSLINK_FORM_CHECKBOX_INPUT,
@@ -626,8 +618,10 @@ public class UICLVConfig extends UIForm  implements UISelectable {
     strRepository = itemPath.substring(0, repoIndex);
     strWorkspace = itemPath.substring(repoIndex+1, wsIndex);
     strIdentifier = itemPath.substring(wsIndex +1);
-    Node selectedNode = Utils.getRealNode(Text.escapeIllegalJcrChars(strRepository), Text.escapeIllegalJcrChars(strWorkspace),
-        Text.escapeIllegalJcrChars(strIdentifier), false);
+    Node selectedNode = Utils.getRealNode(Text.escapeIllegalJcrChars(strRepository),
+                                          Text.escapeIllegalJcrChars(strWorkspace),
+                                          Text.escapeIllegalJcrChars(strIdentifier),
+                                          false);
     if (selectedNode==null) return null;
     String title = null;
     if (selectedNode.hasProperty("exo:title")) {
@@ -668,8 +662,8 @@ public class UICLVConfig extends UIForm  implements UISelectable {
       UICLVConfig clvConfig = event.getSource();
 
       /** GET VALUES FROM UIFORM */
-      String displayMode = ((UIFormRadioBoxInput) clvConfig.getChildById(UICLVConfig.DISPLAY_MODE_FORM_RADIO_BOX_INPUT)).getValue();
-//      String itemPath = clvConfig.getUIStringInput(UICLVConfig.ITEM_PATH_FORM_STRING_INPUT).getValue();
+      String displayMode = ((UIFormRadioBoxInput) clvConfig.
+          getChildById(UICLVConfig.DISPLAY_MODE_FORM_RADIO_BOX_INPUT)).getValue();
       String itemPath = clvConfig.getSavedPath();
 
       if (itemPath == null || itemPath.length() == 0
@@ -713,7 +707,8 @@ public class UICLVConfig extends UIForm  implements UISelectable {
       String showRssLink = clvConfig.getUIFormCheckBoxInput(UICLVConfig.SHOW_RSSLINK_FORM_CHECKBOX_INPUT)
                                     .isChecked() ? "true" : "false";
 
-      String contextualFolderMode = ((UIFormRadioBoxInput) clvConfig.getChildById(UICLVConfig.CONTEXTUAL_FOLDER_RADIOBOX_INPUT)).getValue();
+      String contextualFolderMode = ((UIFormRadioBoxInput) clvConfig.
+          getChildById(UICLVConfig.CONTEXTUAL_FOLDER_RADIOBOX_INPUT)).getValue();
       String showClvBy = clvConfig.getUIStringInput(UICLVConfig.SHOW_CLV_BY_STRING_INPUT).getValue();
       if (showClvBy == null || showClvBy.length() == 0)
         showClvBy = UICLVPortlet.DEFAULT_SHOW_CLV_BY;
@@ -819,7 +814,8 @@ public class UICLVConfig extends UIForm  implements UISelectable {
      */
     public void execute(Event<UICLVConfig> event) throws Exception {
       UICLVConfig clvConfig = event.getSource();
-      UIFormRadioBoxInput modeBoxInput = (UIFormRadioBoxInput) clvConfig.getChildById(UICLVConfig.DISPLAY_MODE_FORM_RADIO_BOX_INPUT);
+      UIFormRadioBoxInput modeBoxInput = (UIFormRadioBoxInput) clvConfig.
+          getChildById(UICLVConfig.DISPLAY_MODE_FORM_RADIO_BOX_INPUT);
       String mode = modeBoxInput.getValue();
       if (mode.equals(UICLVPortlet.DISPLAY_MODE_AUTOMATIC)) {
         UIContentSelectorFolder contentSelector = clvConfig.createUIComponent(UIContentSelectorFolder.class, null, null);

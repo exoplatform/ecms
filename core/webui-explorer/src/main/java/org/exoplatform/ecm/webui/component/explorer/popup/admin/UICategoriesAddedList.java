@@ -57,12 +57,10 @@ import org.exoplatform.webui.exception.MessageException;
  * Oct 18, 2006
  * 2:28:18 PM
  */
-@ComponentConfig(
-    template = "app:/groovy/webui/component/explorer/popup/admin/UICategoriesAddedList.gtmpl",
-    events = {
-      @EventConfig(listeners = UICategoriesAddedList.DeleteActionListener.class, confirm="UICategoriesAddedList.msg.confirm-delete")
-    }
-)
+@ComponentConfig(template = "app:/groovy/webui/component/explorer/popup/admin/UICategoriesAddedList.gtmpl",
+                 events = {
+    @EventConfig(listeners = UICategoriesAddedList.DeleteActionListener.class,
+                 confirm = "UICategoriesAddedList.msg.confirm-delete") })
 public class UICategoriesAddedList extends UIContainer implements UISelectable {
 
   private UIPageIterator uiPageIterator_;
@@ -170,15 +168,20 @@ public class UICategoriesAddedList extends UIContainer implements UISelectable {
 
       NodeLocation location = NodeLocation.getNodeLocationByNode(currentNode);
       WCMComposer composer = WCMCoreUtils.getService(WCMComposer.class);
-      composer.updateContent(location.getRepository(), location.getWorkspace(), location.getPath(), new HashMap<String, String>());
+      composer.updateContent(location.getRepository(),
+                             location.getWorkspace(),
+                             location.getPath(),
+                             new HashMap<String, String>());
 
-    } catch(AccessDeniedException accessDeniedException) {
+    } catch (AccessDeniedException accessDeniedException) {
       throw new MessageException(new ApplicationMessage("AccessControlException.msg",
-          null, ApplicationMessage.WARNING));
-    } catch(ItemExistsException item) {
+                                                        null,
+                                                        ApplicationMessage.WARNING));
+    } catch (ItemExistsException item) {
       throw new MessageException(new ApplicationMessage("UICategoriesAddedList.msg.ItemExistsException",
-          null, ApplicationMessage.WARNING));
-    } catch(Exception e) {
+                                                        null,
+                                                        ApplicationMessage.WARNING));
+    } catch (Exception e) {
       LOG.error("Unexpected error", e);
       JCRExceptionManager.process(getAncestorOfType(UIApplication.class), e);
     }
@@ -208,7 +211,10 @@ public class UICategoriesAddedList extends UIContainer implements UISelectable {
         }
         uiAddedList.updateGrid(uiAddedList.getUIPageIterator().getCurrentPage());
         for (Node catnode : categories) {
-          composer.updateContents(uiExplorer.getRepositoryName(), catnode.getSession().getWorkspace().getName(), catnode.getPath(), new HashMap<String, String>());
+          composer.updateContents(uiExplorer.getRepositoryName(),
+                                  catnode.getSession().getWorkspace().getName(),
+                                  catnode.getPath(),
+                                  new HashMap<String, String>());
         }
       } catch(AccessDeniedException ace) {
         throw new MessageException(new ApplicationMessage("UICategoriesAddedList.msg.access-denied",

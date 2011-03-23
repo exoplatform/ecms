@@ -201,7 +201,8 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
    * @param mapClipboard
    * @throws Exception
    */
-  private static void updateClipboard(List<ClipboardCommand> clipboardCommands, Map<ClipboardCommand, Node> mapClipboard) throws Exception {
+  private static void updateClipboard(List<ClipboardCommand> clipboardCommands,
+                                      Map<ClipboardCommand, Node> mapClipboard) throws Exception {
     Node srcNode;
     for (ClipboardCommand clipboard : clipboardCommands) {
       if (ClipboardCommand.CUT.equals(clipboard.getType())) {
@@ -219,7 +220,8 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
    * @return
    * @throws Exception
    */
-  private static Map<ClipboardCommand, Node> parseToMap(List<ClipboardCommand> clipboardCommands, UIJCRExplorer uiExplorer) throws Exception {
+  private static Map<ClipboardCommand, Node> parseToMap(List<ClipboardCommand> clipboardCommands,
+                                                        UIJCRExplorer uiExplorer) throws Exception {
     String srcPath;
     String type;
     String srcWorkspace;

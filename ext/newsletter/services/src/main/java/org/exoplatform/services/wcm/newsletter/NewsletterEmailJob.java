@@ -48,8 +48,10 @@ public class NewsletterEmailJob extends BaseJob {
    * @see org.exoplatform.services.scheduler.BaseJob#execute(org.exoplatform.services.scheduler.JobContext)
    */
   public void execute(JobContext context) {
-    NewsletterManagerService newsletterManagerService = (NewsletterManagerService)container.getComponentInstanceOfType(NewsletterManagerService.class);
-    if(newsletterManagerService == null) return;
+    NewsletterManagerService newsletterManagerService = (NewsletterManagerService) container.
+        getComponentInstanceOfType(NewsletterManagerService.class);
+    if (newsletterManagerService == null)
+      return;
     try {
       newsletterManagerService.sendNewsletter();
     } catch (Exception e) {

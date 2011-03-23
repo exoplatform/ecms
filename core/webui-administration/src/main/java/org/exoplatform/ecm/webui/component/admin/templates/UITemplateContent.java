@@ -100,7 +100,10 @@ public class UITemplateContent extends UIForm implements UISelectable {
     isVersion.setRendered(false) ;
     addUIFormInput(isVersion) ;
     UIFormInputSetWithAction uiActionTab = new UIFormInputSetWithAction("UITemplateContent");
-    uiActionTab.addUIFormInput(new UIFormStringInput(FIELD_VIEWPERMISSION, FIELD_VIEWPERMISSION, null).setEditable(false).addValidator(MandatoryValidator.class)) ;
+    uiActionTab.addUIFormInput(new UIFormStringInput(FIELD_VIEWPERMISSION,
+                                                     FIELD_VIEWPERMISSION,
+                                                     null).setEditable(false)
+                                                          .addValidator(MandatoryValidator.class));
     uiActionTab.setActionInfo(FIELD_VIEWPERMISSION, new String[] {"AddPermission"}) ;
     addUIComponentInput(uiActionTab) ;
   }

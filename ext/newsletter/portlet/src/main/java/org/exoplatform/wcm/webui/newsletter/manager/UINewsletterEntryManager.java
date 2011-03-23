@@ -96,7 +96,7 @@ public class UINewsletterEntryManager extends UIForm {
    *
    * @throws Exception the exception
    */
-  public UINewsletterEntryManager () throws Exception {
+  public UINewsletterEntryManager() throws Exception {
     NewsletterManagerService newsletterManagerService = getApplicationComponent(NewsletterManagerService.class);
     newsletterEntryHandler = newsletterManagerService.getEntryHandler();
   }
@@ -107,11 +107,11 @@ public class UINewsletterEntryManager extends UIForm {
    * @throws Exception the exception
    */
   @SuppressWarnings("unchecked")
-  public void init() throws Exception{
-    ObjectPageList objPageList = new ObjectPageList(setListNewsletterEntries(), 10) ;
+  public void init() throws Exception {
+    ObjectPageList objPageList = new ObjectPageList(setListNewsletterEntries(), 10);
     uiPageIterator_ = createUIComponent(UIPageIterator.class, null, PAGEITERATOR_ID);
     addChild(uiPageIterator_);
-    uiPageIterator_.setPageList(objPageList) ;
+    uiPageIterator_.setPageList(objPageList);
   }
 
   /**
@@ -122,19 +122,22 @@ public class UINewsletterEntryManager extends UIForm {
   private List<NewsletterManagerConfig> setListNewsletterEntries(){
     this.getChildren().clear();
     listNewsletterConfig = new ArrayList<NewsletterManagerConfig>();
-    try{
-      listNewsletterConfig.addAll(newsletterEntryHandler
-                                    .getNewsletterEntriesBySubscription(
-                                                                        Utils.getSessionProvider(),
-                                                                        NewsLetterUtil.getPortalName(),
-                                                                        categoryConfig.getName(),
-                                                                        subscriptionConfig.getName()));
+    try {
+      listNewsletterConfig.addAll(newsletterEntryHandler.getNewsletterEntriesBySubscription(Utils.getSessionProvider(),
+                                                                                            NewsLetterUtil.getPortalName(),
+                                                                                            categoryConfig.getName(),
+                                                                                            subscriptionConfig.getName()));
       for (NewsletterManagerConfig newletter : listNewsletterConfig) {
-        checkBoxInput = new UIFormCheckBoxInput<Boolean>(newletter.getNewsletterName(), newletter.getNewsletterName(), false);
+        checkBoxInput = new UIFormCheckBoxInput<Boolean>(newletter.getNewsletterName(),
+                                                         newletter.getNewsletterName(),
+                                                         false);
         this.addChild(checkBoxInput);
       }
-    }catch(Exception ex){
-      Utils.createPopupMessage(this, "UINewsletterEntryManager.msg.set-list-newsletter", null, ApplicationMessage.ERROR);
+    } catch (Exception ex) {
+      Utils.createPopupMessage(this,
+                               "UINewsletterEntryManager.msg.set-list-newsletter",
+                               null,
+                               ApplicationMessage.ERROR);
     }
     return listNewsletterConfig;
   }
@@ -158,17 +161,18 @@ public class UINewsletterEntryManager extends UIForm {
    * @return the checked
    */
   @SuppressWarnings("unchecked")
-  public List<String> getChecked(){
+  public List<String> getChecked() {
     List<String> newsletterId = new ArrayList<String>();
     UIFormCheckBoxInput<Boolean> checkbox = null;
-    for(UIComponent component : this.getChildren()){
-      try{
-        checkbox = (UIFormCheckBoxInput<Boolean>)component;
-        if(checkbox.isChecked()){
+    for (UIComponent component : this.getChildren()) {
+      try {
+        checkbox = (UIFormCheckBoxInput<Boolean>) component;
+        if (checkbox.isChecked()) {
           newsletterId.add(checkbox.getName());
         }
-      }catch(Exception e){
-        // You shouldn't throw popup message, because some exception often rise here.
+      } catch (Exception e) {
+        // You shouldn't throw popup message, because some exception often rise
+        // here.
       }
     }
     return newsletterId;
@@ -228,7 +232,8 @@ public class UINewsletterEntryManager extends UIForm {
      */
     public void execute(Event<UINewsletterEntryManager> event) throws Exception {
       UINewsletterEntryManager uiNewsletterEntryManager = event.getSource();
-      UINewsletterManagerPortlet newsletterManagerPortlet = uiNewsletterEntryManager.getAncestorOfType(UINewsletterManagerPortlet.class);
+      UINewsletterManagerPortlet newsletterManagerPortlet = uiNewsletterEntryManager.
+          getAncestorOfType(UINewsletterManagerPortlet.class);
       UISubscriptions uiSubscriptions = newsletterManagerPortlet.getChild(UISubscriptions.class);
       newsletterManagerPortlet.getChild(UICategories.class).setRendered(false);
       uiSubscriptions.setRendered(true);
@@ -277,7 +282,7 @@ public class UINewsletterEntryManager extends UIForm {
    *
    * @see OpenNewsletterActionEvent
    */
-  static  public class OpenNewsletterActionListener extends EventListener<UINewsletterEntryManager> {
+  static public class OpenNewsletterActionListener extends EventListener<UINewsletterEntryManager> {
 
     /* (non-Javadoc)
      * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
@@ -443,12 +448,12 @@ public class UINewsletterEntryManager extends UIForm {
                                  ApplicationMessage.WARNING);
         return;
       } else {
-        NewsletterManagerConfig newsletterName = uiNewsletterEntryManager.newsletterEntryHandler.getNewsletterEntry(Utils.getSessionProvider(),
-                                                                                                                    NewsLetterUtil.getPortalName(),
-                                                                                                                    uiNewsletterEntryManager.categoryConfig.getName(),
-                                                                                                                    uiNewsletterEntryManager.getSubscriptionConfig()
-                                                                                                                                            .getName(),
-                                                                                                                    subIds.get(0));
+        NewsletterManagerConfig newsletterName = uiNewsletterEntryManager.newsletterEntryHandler.
+            getNewsletterEntry(Utils.getSessionProvider(),
+                               NewsLetterUtil.getPortalName(),
+                               uiNewsletterEntryManager.categoryConfig.getName(),
+                               uiNewsletterEntryManager.getSubscriptionConfig().getName(),
+                               subIds.get(0));
         if (newsletterName.getStatus().equals(NewsletterConstant.STATUS_SENT)) {
           Utils.createPopupMessage(uiNewsletterEntryManager,
                                    "UINewsletterEntryManager.msg.canNotEditNewsletter",
@@ -465,13 +470,16 @@ public class UINewsletterEntryManager extends UIForm {
           + uiNewsletterEntryManager.categoryConfig.getName()
           + "/"
           + uiNewsletterEntryManager.getSubscriptionConfig().getName() + "/" + subIds.get(0));
-      UINewsletterEntryDialogSelector newsletterEntryDialogSelector = entryContainer.getChild(UINewsletterEntryDialogSelector.class);
+      UINewsletterEntryDialogSelector newsletterEntryDialogSelector = entryContainer.
+          getChild(UINewsletterEntryDialogSelector.class);
       newsletterEntryDialogSelector.init(uiNewsletterEntryManager.categoryConfig.getName(),
                                          uiNewsletterEntryManager.subscriptionConfig.getName());
-      UIFormSelectBox categorySelectBox = newsletterEntryDialogSelector.getChildById(UINewsletterConstant.ENTRY_CATEGORY_SELECTBOX);
+      UIFormSelectBox categorySelectBox = newsletterEntryDialogSelector.
+          getChildById(UINewsletterConstant.ENTRY_CATEGORY_SELECTBOX);
       categorySelectBox.setValue(uiNewsletterEntryManager.categoryConfig.getName());
       categorySelectBox.setDisabled(true);
-      UIFormSelectBox subscriptionSelectBox = newsletterEntryDialogSelector.getChildById(UINewsletterConstant.ENTRY_SUBSCRIPTION_SELECTBOX);
+      UIFormSelectBox subscriptionSelectBox = newsletterEntryDialogSelector.
+          getChildById(UINewsletterConstant.ENTRY_SUBSCRIPTION_SELECTBOX);
       subscriptionSelectBox.setValue(uiNewsletterEntryManager.subscriptionConfig.getName());
       subscriptionSelectBox.setDisabled(true);
       UINewsletterEntryForm newsletterEntryForm = entryContainer.getChild(UINewsletterEntryForm.class);
@@ -506,7 +514,7 @@ public class UINewsletterEntryManager extends UIForm {
       List<String> subIds = newsletterEntryManager.getChecked();
       String message;
       int messageType;
-      if(subIds == null){
+      if (subIds == null) {
         message = "UISubscription.msg.checkOneNewsletterToConvert";
         messageType = ApplicationMessage.WARNING;
       } else if (subIds.size() != 1) {
@@ -515,9 +523,11 @@ public class UINewsletterEntryManager extends UIForm {
       } else {
         try{
           String newsletterName = subIds.get(0);
-          NewsletterManagerService newsletterManagerService = newsletterEntryManager.getApplicationComponent(NewsletterManagerService.class);
+          NewsletterManagerService newsletterManagerService = newsletterEntryManager.
+              getApplicationComponent(NewsletterManagerService.class);
           RepositoryService repositoryService = newsletterEntryManager.getApplicationComponent(RepositoryService.class);
-          ManageableRepository manageableRepository = repositoryService.getRepository(newsletterManagerService.getRepositoryName());
+          ManageableRepository manageableRepository = repositoryService.
+              getRepository(newsletterManagerService.getRepositoryName());
           Session session = Utils.getSessionProvider()
                                  .getSession(newsletterManagerService.getWorkspaceName(),
                                              manageableRepository);
@@ -533,7 +543,7 @@ public class UINewsletterEntryManager extends UIForm {
                                                       categoryName);
           message = "UISubscription.msg.convertSuccessful";
           messageType = ApplicationMessage.INFO;
-        }catch(Exception ex){
+        } catch (Exception ex) {
           message = "UISubscription.msg.templateIsExist";
           messageType = ApplicationMessage.ERROR;
         }

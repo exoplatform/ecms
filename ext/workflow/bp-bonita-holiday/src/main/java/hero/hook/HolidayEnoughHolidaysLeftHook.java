@@ -47,13 +47,18 @@ public class HolidayEnoughHolidaysLeftHook implements TxHook {
   public static final String PROCESS_INITIATOR_USER_NAME = "initiator";
 
 
-  public void execute(APIAccessor accessor, ActivityInstance<ActivityBody> activity)
-    throws Exception {
-   // Retrieve workflow session creator and set the instance property
+  public void execute(APIAccessor accessor, ActivityInstance<ActivityBody> activity) throws Exception {
+    // Retrieve workflow session creator and set the instance property
     // "initiator" with it
-  String user_Name = accessor.getQueryRuntimeAPI().getProcessInstance(activity.getProcessInstanceUUID()).getStartedBy();
-    accessor.getRuntimeAPI().setProcessInstanceVariable(activity.getProcessInstanceUUID(), PROCESS_INITIATOR_USER_NAME, user_Name);
-    accessor.getRuntimeAPI().setActivityInstanceVariable(activity.getUUID(), CHOICE_PROPERTY_NAME, "enough");
+    String user_Name = accessor.getQueryRuntimeAPI()
+                               .getProcessInstance(activity.getProcessInstanceUUID())
+                               .getStartedBy();
+    accessor.getRuntimeAPI().setProcessInstanceVariable(activity.getProcessInstanceUUID(),
+                                                        PROCESS_INITIATOR_USER_NAME,
+                                                        user_Name);
+    accessor.getRuntimeAPI().setActivityInstanceVariable(activity.getUUID(),
+                                                         CHOICE_PROPERTY_NAME,
+                                                         "enough");
 
   }
 }

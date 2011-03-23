@@ -75,24 +75,35 @@ public class DocumentLinkHandler extends FCKFileHandler {
         break;
       }
     }
-    String repository = ((ManageableRepository) node.getSession().getRepository())
-    .getConfiguration().getName();
+    String repository = ((ManageableRepository) node.getSession().getRepository()).getConfiguration()
+                                                                                  .getName();
     String workspace = node.getSession().getWorkspace().getName();
     String nodePath = node.getPath();
     StringBuilder builder = new StringBuilder();
-    if(node.isNodeType(NodetypeConstant.NT_FILE)) {
-      if("public".equals(accessMode)) {
-        return builder.append(baseURI).append("/jcr/").append(repository).append("/")
-        .append(workspace).append(nodePath).toString();
+    if (node.isNodeType(NodetypeConstant.NT_FILE)) {
+      if ("public".equals(accessMode)) {
+        return builder.append(baseURI)
+                      .append("/jcr/")
+                      .append(repository)
+                      .append("/")
+                      .append(workspace)
+                      .append(nodePath)
+                      .toString();
       }
-      return builder.append(baseURI).append("/private/jcr/").append(repository).append("/")
-      .append(workspace).append(nodePath).toString();
+      return builder.append(baseURI)
+                    .append("/private/jcr/")
+                    .append(repository)
+                    .append("/")
+                    .append(workspace)
+                    .append(nodePath)
+                    .toString();
     }
     WCMConfigurationService configurationService = (WCMConfigurationService) ExoContainerContext
-    .getCurrentContainer().getComponentInstanceOfType(WCMConfigurationService.class);
-    String parameterizedPageViewerURI = configurationService.getRuntimeContextParam(WCMConfigurationService.PARAMETERIZED_PAGE_URI);
-    return baseURI.replace("/rest", "") + "/" + accessMode + "/" + currentPortal + parameterizedPageViewerURI + "/"
-    + repository + "/" + workspace + nodePath;
+        .getCurrentContainer().getComponentInstanceOfType(WCMConfigurationService.class);
+    String parameterizedPageViewerURI = configurationService.
+        getRuntimeContextParam(WCMConfigurationService.PARAMETERIZED_PAGE_URI);
+    return baseURI.replace("/rest", "") + "/" + accessMode + "/" + currentPortal
+        + parameterizedPageViewerURI + "/" + repository + "/" + workspace + nodePath;
   }
 
   /**

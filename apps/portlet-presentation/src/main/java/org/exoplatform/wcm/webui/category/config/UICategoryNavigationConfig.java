@@ -81,7 +81,8 @@ public class UICategoryNavigationConfig extends UIForm implements UISelectable {
   public UICategoryNavigationConfig() throws Exception {
     PortletPreferences preferences = UICategoryNavigationUtils.getPortletPreferences();
 
-    String preferenceRepository = preferences.getValue(UICategoryNavigationConstant.PREFERENCE_REPOSITORY, "");
+    String preferenceRepository = preferences.getValue(UICategoryNavigationConstant.PREFERENCE_REPOSITORY,
+                                                       "");
     RepositoryService repositoryService = getApplicationComponent(RepositoryService.class) ;
     List<SelectItemOption<String>> repositories = new ArrayList<SelectItemOption<String>>() ;
     RepositoryEntry repositoryEntry = repositoryService.getCurrentRepository().getConfiguration();
@@ -117,10 +118,12 @@ public class UICategoryNavigationConfig extends UIForm implements UISelectable {
     addUIFormInput(templateFormSelectBox);
 
     String preferenceTargetPath = preferences.getValue(UICategoryNavigationConstant.PREFERENCE_TARGET_PAGE, "");
-    UIFormInputSetWithAction targetPathFormInputSet = new UIFormInputSetWithAction(UICategoryNavigationConstant.TARGET_PATH_FORM_INPUT_SET);
-    UIFormStringInput targetPathFormStringInput = new UIFormStringInput(UICategoryNavigationConstant.TARGET_PATH_FORM_STRING_INPUT,
-                                                                        UICategoryNavigationConstant.TARGET_PATH_FORM_STRING_INPUT,
-                                                                        preferenceTargetPath);
+    UIFormInputSetWithAction targetPathFormInputSet =
+      new UIFormInputSetWithAction(UICategoryNavigationConstant.TARGET_PATH_FORM_INPUT_SET);
+    UIFormStringInput targetPathFormStringInput =
+      new UIFormStringInput(UICategoryNavigationConstant.TARGET_PATH_FORM_STRING_INPUT,
+                            UICategoryNavigationConstant.TARGET_PATH_FORM_STRING_INPUT,
+                            preferenceTargetPath);
     targetPathFormStringInput.setEditable(false);
     targetPathFormInputSet.setActionInfo(UICategoryNavigationConstant.TARGET_PATH_FORM_STRING_INPUT,
                                          new String[] { "SelectTargetPath" });
@@ -162,12 +165,12 @@ public class UICategoryNavigationConfig extends UIForm implements UISelectable {
     List<SelectItemOption<String>> templates = new ArrayList<SelectItemOption<String>>();
     RepositoryService repositoryService = getApplicationComponent(RepositoryService.class);
     ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
-    ApplicationTemplateManagerService applicationTemplateManagerService = getApplicationComponent(ApplicationTemplateManagerService.class);
+    ApplicationTemplateManagerService appTemplateMngService = getApplicationComponent(ApplicationTemplateManagerService.class);
     String repository = manageableRepository.getConfiguration().getName();
-    List<Node> templateNodes = applicationTemplateManagerService.getTemplatesByCategory(repository,
-                                                                                        portletName,
-                                                                                        templateCategory,
-                                                                                        Utils.getSessionProvider());
+    List<Node> templateNodes = appTemplateMngService.getTemplatesByCategory(repository,
+                                                                            portletName,
+                                                                            templateCategory,
+                                                                            Utils.getSessionProvider());
     for (Node templateNode : templateNodes) {
       String templateName = templateNode.getName();
       String templatePath = templateNode.getPath();
@@ -228,12 +231,18 @@ public class UICategoryNavigationConfig extends UIForm implements UISelectable {
      */
     public void execute(Event<UICategoryNavigationConfig> event) throws Exception {
       UICategoryNavigationConfig categoryNavigationConfig = event.getSource();
-      String preferenceRepository = categoryNavigationConfig.getUIFormSelectBox(UICategoryNavigationConstant.REPOSITORY_FORM_SELECTBOX).getValue();
-      String preferenceTreeName = categoryNavigationConfig.getUIFormSelectBox(UICategoryNavigationConstant.TREE_NAME_FORM_SELECTBOX).getValue();
-      String preferenceTreeTitle = categoryNavigationConfig.getUIStringInput(UICategoryNavigationConstant.TREE_TITLE_FORM_STRING_INPUT).getValue();
-      if (preferenceTreeTitle == null) preferenceTreeTitle = "";
-      String preferenceTargetPath = categoryNavigationConfig.getUIStringInput(UICategoryNavigationConstant.TARGET_PATH_FORM_STRING_INPUT).getValue();
-      String preferenceTemplate = categoryNavigationConfig.getUIFormSelectBox(UICategoryNavigationConstant.TEMPLATE_FORM_SELECTBOX).getValue();
+      String preferenceRepository = categoryNavigationConfig.
+          getUIFormSelectBox(UICategoryNavigationConstant.REPOSITORY_FORM_SELECTBOX).getValue();
+      String preferenceTreeName = categoryNavigationConfig.
+          getUIFormSelectBox(UICategoryNavigationConstant.TREE_NAME_FORM_SELECTBOX).getValue();
+      String preferenceTreeTitle = categoryNavigationConfig.
+          getUIStringInput(UICategoryNavigationConstant.TREE_TITLE_FORM_STRING_INPUT).getValue();
+      if (preferenceTreeTitle == null)
+        preferenceTreeTitle = "";
+      String preferenceTargetPath = categoryNavigationConfig.
+          getUIStringInput(UICategoryNavigationConstant.TARGET_PATH_FORM_STRING_INPUT).getValue();
+      String preferenceTemplate = categoryNavigationConfig.
+          getUIFormSelectBox(UICategoryNavigationConstant.TEMPLATE_FORM_SELECTBOX).getValue();
       PortletPreferences portletPreferences = UICategoryNavigationUtils.getPortletPreferences();
       portletPreferences.setValue(UICategoryNavigationConstant.PREFERENCE_REPOSITORY, preferenceRepository);
       portletPreferences.setValue(UICategoryNavigationConstant.PREFERENCE_TREE_NAME, preferenceTreeName);
@@ -254,8 +263,10 @@ public class UICategoryNavigationConfig extends UIForm implements UISelectable {
         event.getRequestContext().getJavascriptManager().addJavascript("ajaxRedirect('" + portalURI
             + pageNodeSelected + "');");
       } else {
-        if (Utils.isQuickEditMode(categoryNavigationConfig, UICategoryNavigationPortlet.CONFIG_POPUP_WINDOW)) {
-          Utils.closePopupWindow(categoryNavigationConfig, UICategoryNavigationPortlet.CONFIG_POPUP_WINDOW);
+        if (Utils.isQuickEditMode(categoryNavigationConfig,
+                                  UICategoryNavigationPortlet.CONFIG_POPUP_WINDOW)) {
+          Utils.closePopupWindow(categoryNavigationConfig,
+                                 UICategoryNavigationPortlet.CONFIG_POPUP_WINDOW);
         } else {
           Utils.createPopupMessage(categoryNavigationConfig,
                                    "UICategoryNavigationConfig.msg.saving-success",
@@ -328,7 +339,8 @@ public class UICategoryNavigationConfig extends UIForm implements UISelectable {
      */
     public void execute(Event<UICategoryNavigationConfig> event) throws Exception {
       UICategoryNavigationConfig categoryNavigationConfig = event.getSource();
-      UICategoryNavigationPortlet categoryNavigationPortlet = categoryNavigationConfig.getAncestorOfType(UICategoryNavigationPortlet.class);
+      UICategoryNavigationPortlet categoryNavigationPortlet = categoryNavigationConfig.
+          getAncestorOfType(UICategoryNavigationPortlet.class);
       UIPopupContainer popupContainer = categoryNavigationPortlet.getChild(UIPopupContainer.class);
       UIPageSelector pageSelector = popupContainer.createUIComponent(UIPageSelector.class, null, null);
       pageSelector.setSourceComponent(categoryNavigationConfig,
