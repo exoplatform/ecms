@@ -64,14 +64,15 @@ public class DeploymentDescriptor {
   }
 
   /**
-   * This method allows to cleanup the publication lifecycle in the target folder after importing the data.
-   * By using this, the publication live revision property will be re-initialized and the content will be set as published directly.
-   * Thus, the content will be visible in front side.
+   * This method allows to cleanup the publication lifecycle in the target
+   * folder after importing the data. By using this, the publication live
+   * revision property will be re-initialized and the content will be set as
+   * published directly. Thus, the content will be visible in front side.
    *
    * @param cleanupPublication
    */
   public void setCleanupPublication(Boolean cleanupPublication) {
-  this.cleanupPublication = cleanupPublication;
+    this.cleanupPublication = cleanupPublication;
   }
 
 

@@ -78,13 +78,20 @@ import org.exoplatform.webui.form.UIFormRadioBoxInput;
 )
 public class UIExportNode extends UIForm implements UIPopupComponent {
 
-  public static final String NODE_PATH = "nodePath" ;
-  public static final String FORMAT = "format" ;
-  public static final String ZIP = "zip" ;
-  public static final String DOC_VIEW = "docview" ;
-  public static final String SYS_VIEW = "sysview" ;
-  public static final String VERSION_SQL_QUERY = "select * from mix:versionable where jcr:path like '$0/%' order by exo:dateCreated DESC";
-  public static final String ROOT_SQL_QUERY = "select * from mix:versionable order by exo:dateCreated DESC";
+  public static final String NODE_PATH         = "nodePath";
+
+  public static final String FORMAT            = "format";
+
+  public static final String ZIP               = "zip";
+
+  public static final String DOC_VIEW          = "docview";
+
+  public static final String SYS_VIEW          = "sysview";
+
+  public static final String VERSION_SQL_QUERY = "select * from mix:versionable where jcr:path like '$0/%' "
+                                                   + "order by exo:dateCreated DESC";
+
+  public static final String ROOT_SQL_QUERY    = "select * from mix:versionable order by exo:dateCreated DESC";
 
   private boolean isVerionNode_ = false;
 

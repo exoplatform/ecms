@@ -109,7 +109,9 @@ public class RESTImagesRendererService implements ResourceContainer{
         }else if(node.isNodeType("nt:versionedChild")) {
           VersionHistory versionHistory = (VersionHistory)node.getProperty("jcr:childVersionHistory").getNode();
           String versionableUUID = versionHistory.getVersionableUUID();
-          dataNode = sessionProvider.getSession(workspace,repositoryService.getRepository(repository)).getNodeByUUID(versionableUUID);
+          dataNode = sessionProvider.getSession(workspace,
+                                                repositoryService.getRepository(repository))
+                                    .getNodeByUUID(versionableUUID);
         }else {
           return Response.status(HTTPStatus.NOT_FOUND).build();
         }

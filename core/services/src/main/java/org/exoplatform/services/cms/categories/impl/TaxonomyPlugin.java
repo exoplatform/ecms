@@ -106,7 +106,10 @@ public class TaxonomyPlugin extends BaseComponentPlugin{
     while(it.hasNext()) {
       TaxonomyConfig config = (TaxonomyConfig)it.next().getObject() ;
       for(Taxonomy taxonomy : config.getTaxonomies()) {
-        Node taxonomyNode = Utils.makePath(taxonomyHomeNode, taxonomy.getPath(), "exo:taxonomy", getPermissions(taxonomy.getPermissions())) ;
+        Node taxonomyNode = Utils.makePath(taxonomyHomeNode,
+                                           taxonomy.getPath(),
+                                           "exo:taxonomy",
+                                           getPermissions(taxonomy.getPermissions()));
         if(taxonomyNode.canAddMixin("mix:referenceable")) {
           taxonomyNode.addMixin("mix:referenceable") ;
         }

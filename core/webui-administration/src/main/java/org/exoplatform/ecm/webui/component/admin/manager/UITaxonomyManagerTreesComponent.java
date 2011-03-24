@@ -39,7 +39,9 @@ import org.exoplatform.webui.ext.manager.UIAbstractManagerComponent;
  )
 public class UITaxonomyManagerTreesComponent extends UIAbstractManagerComponent {
 
-  public static class UITaxonomyManagerTreesActionListener extends UIECMAdminControlPanelActionListener<UITaxonomyManagerTreesComponent> {
+  public static class UITaxonomyManagerTreesActionListener
+                                                          extends
+                                                          UIECMAdminControlPanelActionListener<UITaxonomyManagerTreesComponent> {
     public void processEvent(Event<UITaxonomyManagerTreesComponent> event) throws Exception {
       UIECMAdminPortlet portlet = event.getSource().getAncestorOfType(UIECMAdminPortlet.class);
       UIECMAdminWorkingArea uiWorkingArea = portlet.getChild(UIECMAdminWorkingArea.class);

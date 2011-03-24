@@ -103,7 +103,8 @@ public class UIPublicationForm extends UIForm {
   }
 
   public String getStateByVersion(VersionNode versionNode) throws Exception {
-    Value[] publicationStates =  currentNode_.getProperty(StaticAndDirectPublicationPlugin.VERSIONS_PUBLICATION_STATES).getValues();
+    Value[] publicationStates = currentNode_.getProperty(StaticAndDirectPublicationPlugin.VERSIONS_PUBLICATION_STATES)
+                                            .getValues();
     for(Value value : publicationStates) {
       String[] arrPublicationState = value.getString().split(",");
       for(int i=0; i < arrPublicationState.length; i++) {

@@ -112,11 +112,12 @@ public class UIDriveInputSet extends UIFormInputSetWithAction {
     RequestContext context = RequestContext.getCurrentInstance();
     ResourceBundle res = context.getApplicationResourceBundle();
 
-    for(String foldertype : setFoldertypes) {
+    for (String foldertype : setFoldertypes) {
       try {
-        foldertypeOptions.add(new SelectItemOption<String>(res.getString(getId() + ".label." + foldertype.replace(":", "_")),  foldertype));
-      } catch(MissingResourceException mre) {
-        foldertypeOptions.add(new SelectItemOption<String>(foldertype,  foldertype));
+        foldertypeOptions.add(new SelectItemOption<String>(res.getString(getId() + ".label."
+            + foldertype.replace(":", "_")), foldertype));
+      } catch (MissingResourceException mre) {
+        foldertypeOptions.add(new SelectItemOption<String>(foldertype, foldertype));
       }
     }
     getUIFormSelectBox(FIELD_WORKSPACE).setOptions(workspace);

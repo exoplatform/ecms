@@ -58,7 +58,10 @@ public class SmallPaginatedQueryResult extends WCMPaginatedQueryResult{
    * @throws Exception the exception
    */
   @SuppressWarnings("deprecation")
-  public SmallPaginatedQueryResult(QueryResult queryResult, QueryCriteria queryCriteria, int pageSize, boolean isSearchContent) throws Exception {
+  public SmallPaginatedQueryResult(QueryResult queryResult,
+                                   QueryCriteria queryCriteria,
+                                   int pageSize,
+                                   boolean isSearchContent) throws Exception {
     super(queryResult, queryCriteria, pageSize, isSearchContent);
       RowIterator rowIterator = queryResult.getRows();
       NodeIterator nodeIterator = queryResult.getNodes();

@@ -51,14 +51,14 @@ import org.exoplatform.webui.ext.manager.UIAbstractManagerComponent;
     }
 )
 public class UISideBar extends UIContainer {
-  private String currentComp;
+  private String                           currentComp;
 
-  private static final Log                 LOG                      = ExoLogger.getLogger("dms.UISideBar");
-
+  private static final Log                 LOG            = ExoLogger.getLogger("dms.UISideBar");
 
   public static final String               EXTENSION_TYPE = "org.exoplatform.ecm.dms.UISideBar";
 
-  private List<UIAbstractManagerComponent> managers       = Collections.synchronizedList(new ArrayList<UIAbstractManagerComponent>());
+  private List<UIAbstractManagerComponent> managers
+      = Collections.synchronizedList(new ArrayList<UIAbstractManagerComponent>());
 
   private String selectedComp;
 

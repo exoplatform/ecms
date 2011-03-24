@@ -37,7 +37,9 @@ public abstract class RemovePortalPlugin extends XMLDeploymentPlugin {
    * @param configurationManager the configuration manager
    * @param repositoryService the repository service
    */
-  public RemovePortalPlugin(InitParams initParams, ConfigurationManager configurationManager, RepositoryService repositoryService) {
+  public RemovePortalPlugin(InitParams initParams,
+                            ConfigurationManager configurationManager,
+                            RepositoryService repositoryService) {
     super(initParams, configurationManager, repositoryService);
   }
 

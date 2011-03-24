@@ -60,7 +60,9 @@ public class PostCreateContentEventListener extends Listener<CmsService, Node>{
    * @param configurationService the configuration service
    * @param schemaConfigService the schema config service
    */
-   public PostCreateContentEventListener(WCMPublicationService publicationService,WCMConfigurationService configurationService, WebSchemaConfigService schemaConfigService) {
+  public PostCreateContentEventListener(WCMPublicationService publicationService,
+                                        WCMConfigurationService configurationService,
+                                        WebSchemaConfigService schemaConfigService) {
     this.publicationService = publicationService;
     this.configurationService = configurationService;
     webContentSchemaHandler = schemaConfigService.getWebSchemaHandlerByType(WebContentSchemaHandler.class);
@@ -73,12 +75,12 @@ public class PostCreateContentEventListener extends Listener<CmsService, Node>{
     Node currentNode = event.getData();
     if(currentNode.canAddMixin("exo:rss-enable")) {
       currentNode.addMixin("exo:rss-enable");
-      if(!currentNode.hasProperty("exo:title")) {
-        currentNode.setProperty("exo:title",currentNode.getName());
+      if (!currentNode.hasProperty("exo:title")) {
+        currentNode.setProperty("exo:title", currentNode.getName());
       }
     }
-    if(currentNode.isNodeType("exo:cssFile") ||
-        currentNode.isNodeType("exo:jsFile") || currentNode.getParent().isNodeType("exo:actionStorage")){
+    if (currentNode.isNodeType("exo:cssFile") || currentNode.isNodeType("exo:jsFile")
+        || currentNode.getParent().isNodeType("exo:actionStorage")) {
       return;
     }
 

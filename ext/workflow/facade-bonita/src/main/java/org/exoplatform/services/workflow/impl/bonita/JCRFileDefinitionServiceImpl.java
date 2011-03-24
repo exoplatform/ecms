@@ -308,8 +308,12 @@ public class JCRFileDefinitionServiceImpl
     return null;
   }
 
-  /* (non-Javadoc)
-   * @see org.exoplatform.services.workflow.impl.bonita.WorkflowFileDefinitionService#store(org.exoplatform.services.workflow.impl.bonita.FileDefinition, java.lang.String)
+  /*
+   * (non-Javadoc)
+   * @see
+   * org.exoplatform.services.workflow.impl.bonita.WorkflowFileDefinitionService
+   * #store(org.exoplatform.services.workflow.impl.bonita.FileDefinition,
+   * java.lang.String)
    */
   @SuppressWarnings("unchecked")
   public void store(FileDefinition fileDefinition, String processId) {

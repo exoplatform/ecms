@@ -60,8 +60,12 @@ public interface ActionServiceContainer {
    * @param repository            repository name
    * @throws Exception
    */
-  public void createActionType(String actionTypeName, String parentActionTypeName,
-      String executable, List<String> variableNames, boolean isMoveType, String repository) throws Exception;
+  public void createActionType(String actionTypeName,
+                               String parentActionTypeName,
+                               String executable,
+                               List<String> variableNames,
+                               boolean isMoveType,
+                               String repository) throws Exception;
 
   /**
    * Get all created node with nodetype = "exo:action
@@ -104,7 +108,7 @@ public interface ActionServiceContainer {
    * @return list of node
    * @throws Exception
    */
-  public List<Node> getCustomActionsNode(Node node, String lifecyclePhase) throws Exception ;
+  public List<Node> getCustomActionsNode(Node node, String lifecyclePhase) throws Exception;
 
   /**
    * Get list of child node with exo:lifecyclePhase = lifecyclePhase
@@ -155,7 +159,13 @@ public interface ActionServiceContainer {
    * @param mappings    value of property for adding to new node
    * @throws Exception
    */
-  public void addAction(Node node, String repository, String type, boolean isDeep, String[] uuid, String[] nodeTypeNames, Map mappings) throws Exception;
+  public void addAction(Node node,
+                        String repository,
+                        String type,
+                        boolean isDeep,
+                        String[] uuid,
+                        String[] nodeTypeNames,
+                        Map mappings) throws Exception;
 
   /**
    * Execute action following userId, node, variables, repository
@@ -166,7 +176,11 @@ public interface ActionServiceContainer {
    * @param repository  current repository
    * @throws Exception
    */
-  public void executeAction(String userId, Node node, String actionName, Map variables, String repository) throws Exception;
+  public void executeAction(String userId,
+                            Node node,
+                            String actionName,
+                            Map variables,
+                            String repository) throws Exception;
 
   /**
    * Execute action following userId, node, repository, initiated variables
@@ -185,13 +199,13 @@ public interface ActionServiceContainer {
    * @param repository  Repository name
    * @throws Exception
    */
-  public void initiateObservation(Node node, String repository) throws Exception ;
+  public void initiateObservation(Node node, String repository) throws Exception;
 
   /**
    * init service with repository name
    * @param repository   repository name
    * @throws Exception
    */
-  public void init(String repository) throws Exception ;
+  public void init(String repository) throws Exception;
 
 }

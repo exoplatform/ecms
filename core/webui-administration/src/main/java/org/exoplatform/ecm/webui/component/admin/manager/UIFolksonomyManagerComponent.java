@@ -39,14 +39,16 @@ import org.exoplatform.webui.ext.manager.UIAbstractManagerComponent;
  )
 public class UIFolksonomyManagerComponent extends UIAbstractManagerComponent {
 
-  public static class UIFolksonomyManagerActionListener extends UIECMAdminControlPanelActionListener<UIFolksonomyManagerComponent> {
+  public static class UIFolksonomyManagerActionListener
+                                                       extends
+                                                       UIECMAdminControlPanelActionListener<UIFolksonomyManagerComponent> {
     public void processEvent(Event<UIFolksonomyManagerComponent> event) throws Exception {
       UIECMAdminPortlet portlet = event.getSource().getAncestorOfType(UIECMAdminPortlet.class);
       UIECMAdminWorkingArea uiWorkingArea = portlet.getChild(UIECMAdminWorkingArea.class);
-      uiWorkingArea.setChild(UIFolksonomyManager.class) ;
+      uiWorkingArea.setChild(UIFolksonomyManager.class);
       UIFolksonomyManager uiFolksonomyManager = uiWorkingArea.getChild(UIFolksonomyManager.class);
       uiFolksonomyManager.update();
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiWorkingArea) ;
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiWorkingArea);
     }
   }
 

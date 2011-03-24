@@ -47,7 +47,9 @@ import org.exoplatform.webui.ext.filter.UIExtensionFilters;
  )
 public class ImportNodeActionComponent extends UIComponent {
 
-  private static final List<UIExtensionFilter> FILTERS = Arrays.asList(new UIExtensionFilter[]{new CanAddNodeFilter(), new IsNotLockedFilter(), new IsCheckedOutFilter(), new IsNotEditingDocumentFilter()});
+  private static final List<UIExtensionFilter> FILTERS = Arrays.asList(new UIExtensionFilter[] {
+      new CanAddNodeFilter(), new IsNotLockedFilter(), new IsCheckedOutFilter(),
+      new IsNotEditingDocumentFilter()                });
 
   @UIExtensionFilters
   public List<UIExtensionFilter> getFilters() {

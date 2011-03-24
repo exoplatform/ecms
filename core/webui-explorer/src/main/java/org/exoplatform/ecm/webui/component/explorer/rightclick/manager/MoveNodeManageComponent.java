@@ -187,11 +187,13 @@ public class MoveNodeManageComponent extends UIAbstractManagerComponent {
     UIComponent uiComponent = (UIComponent)event.getSource();
     UIJCRExplorer uiExplorer = uiComponent.getAncestorOfType(UIJCRExplorer.class);
     UIApplication uiApp = uiComponent.getAncestorOfType(UIApplication.class);
-    if(srcPath.indexOf(":/") > -1 || (selectedNode != null)) {
+    if (srcPath.indexOf(":/") > -1 || (selectedNode != null)) {
       String[] arrSrcPath = srcPath.split(":/");
-      if((srcPath.contains(":/") && ("/" + arrSrcPath[1]).equals(destNode.getPath())) || (selectedNode != null && selectedNode.equals(destNode))) {
-        uiApp.addMessage(new ApplicationMessage("UIWorkingArea.msg.can-not-move-to-itself", null,
-            ApplicationMessage.WARNING));
+      if ((srcPath.contains(":/") && ("/" + arrSrcPath[1]).equals(destNode.getPath()))
+          || (selectedNode != null && selectedNode.equals(destNode))) {
+        uiApp.addMessage(new ApplicationMessage("UIWorkingArea.msg.can-not-move-to-itself",
+                                                null,
+                                                ApplicationMessage.WARNING));
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
         return;
       }

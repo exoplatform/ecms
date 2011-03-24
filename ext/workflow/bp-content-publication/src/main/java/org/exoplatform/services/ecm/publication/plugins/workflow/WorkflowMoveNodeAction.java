@@ -22,8 +22,12 @@ import org.exoplatform.services.jcr.RepositoryService;
  */
 public class WorkflowMoveNodeAction {
 
-  public static void moveNode(RepositoryService repositoryService, String nodePath, String srcWorkspace, String destWorkspace, String destPath,
-      String repository) {
+  public static void moveNode(RepositoryService repositoryService,
+                              String nodePath,
+                              String srcWorkspace,
+                              String destWorkspace,
+                              String destPath,
+                              String repository) {
     Session srcSession = null;
     Session destSession = null;
     if (!srcWorkspace.equals(destWorkspace)){

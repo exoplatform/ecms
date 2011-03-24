@@ -52,26 +52,19 @@ import org.exoplatform.webui.form.UIFormStringInput;
  * Jan 25, 2007
  * 1:47:55 PM
  */
-@ComponentConfigs(
-                  {
-        @ComponentConfig(
-                         type = UIFormMultiValueInputSet.class,
-                         id="WYSIWYGRichTextMultipleInputset",
-                         events = {@EventConfig(listeners = UIDialogForm.AddActionListener.class, phase = Phase.DECODE),
-                                   @EventConfig(listeners = UIFormMultiValueInputSet.RemoveActionListener.class, phase = Phase.DECODE)
-                                  }
+@ComponentConfigs( {
+    @ComponentConfig(type = UIFormMultiValueInputSet.class, id = "WYSIWYGRichTextMultipleInputset", 
+                     events = {
+        @EventConfig(listeners = UIDialogForm.AddActionListener.class, phase = Phase.DECODE),
+        @EventConfig(listeners = UIFormMultiValueInputSet.RemoveActionListener.class, phase = Phase.DECODE) }
 
-                     ),
-        @ComponentConfig(
-            lifecycle = UIFormLifecycle.class,
-            events = {
-              @EventConfig(listeners = UIViewMetadataForm.SaveActionListener.class),
-              @EventConfig(listeners = UIViewMetadataForm.CancelActionListener.class, phase=Phase.DECODE),
-              @EventConfig(listeners = UIViewMetadataForm.AddActionListener.class, phase = Phase.DECODE),
-              @EventConfig(listeners = UIViewMetadataForm.RemoveActionListener.class, phase = Phase.DECODE)
-            }
-        )
-})
+    ),
+    @ComponentConfig(lifecycle = UIFormLifecycle.class, 
+                     events = {
+        @EventConfig(listeners = UIViewMetadataForm.SaveActionListener.class),
+        @EventConfig(listeners = UIViewMetadataForm.CancelActionListener.class, phase = Phase.DECODE),
+        @EventConfig(listeners = UIViewMetadataForm.AddActionListener.class, phase = Phase.DECODE),
+        @EventConfig(listeners = UIViewMetadataForm.RemoveActionListener.class, phase = Phase.DECODE) }) })
 public class UIViewMetadataForm extends UIDialogForm {
 
   private String nodeType_;

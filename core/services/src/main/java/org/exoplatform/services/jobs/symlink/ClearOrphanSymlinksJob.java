@@ -38,7 +38,7 @@ import org.quartz.JobExecutionException;
  * 10:48:40 AM
  */
 public class ClearOrphanSymlinksJob implements Job {
-  private static final Log log                 = ExoLogger.getLogger(ClearOrphanSymlinksJob.class);
+  private static final Log    log                 = ExoLogger.getLogger(ClearOrphanSymlinksJob.class);
 
   private static final String EXO_RESTORELOCATION = "exo:restoreLocation";
   @Override
@@ -51,7 +51,8 @@ public class ClearOrphanSymlinksJob implements Job {
     RepositoryService repositoryService = (RepositoryService)exoContainer.getComponentInstanceOfType(RepositoryService.class);
     LinkManager linkManager = (LinkManager)exoContainer.getComponentInstanceOfType(LinkManager.class);
     TrashService trashService = (TrashService)exoContainer.getComponentInstanceOfType(TrashService.class);
-    NodeHierarchyCreator nodeHierarchyCreator = (NodeHierarchyCreator)exoContainer.getComponentInstanceOfType(NodeHierarchyCreator.class);
+    NodeHierarchyCreator nodeHierarchyCreator = (NodeHierarchyCreator) exoContainer.
+        getComponentInstanceOfType(NodeHierarchyCreator.class);
 
     Session session = null;
     try {

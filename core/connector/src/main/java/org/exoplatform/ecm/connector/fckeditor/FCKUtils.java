@@ -118,7 +118,8 @@ public class FCKUtils {
     String repository = ((ManageableRepository) node.getSession().getRepository()).getConfiguration().getName();
     String workspace = node.getSession().getWorkspace().getName();
     String currentPath = node.getPath();
-    String url = "/" + getPortalName() + "/" + PortalContainer.getCurrentRestContextName() + "/jcr/" + repository + "/" + workspace + currentPath;
+    String url = "/" + getPortalName() + "/" + PortalContainer.getCurrentRestContextName()
+        + "/jcr/" + repository + "/" + workspace + currentPath;
     return url;
   }
 }

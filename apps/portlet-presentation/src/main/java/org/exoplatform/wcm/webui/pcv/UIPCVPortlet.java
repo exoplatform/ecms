@@ -64,7 +64,7 @@ public class UIPCVPortlet extends UIPortletApplication {
   /** The Constant SHOW_BAR. */
   public final static String SHOW_BAR                = "showBar";
 
-  private String currentNodePath;
+  private String             currentNodePath;
 
   /** The mode_. */
   private PortletMode        mode                    = PortletMode.VIEW;
@@ -94,20 +94,24 @@ public class UIPCVPortlet extends UIPortletApplication {
       addChild(UIPCVConfig.class, null, null);
     }
   }
-  /* (non-Javadoc)
-   * @see org.exoplatform.webui.core.UIPortletApplication#processRender(org.exoplatform.webui.application.WebuiApplication, org.exoplatform.webui.application.WebuiRequestContext)
-   */
 
+  /*
+   * (non-Javadoc)
+   * @see
+   * org.exoplatform.webui.core.UIPortletApplication#processRender(org.exoplatform
+   * .webui.application.WebuiApplication,
+   * org.exoplatform.webui.application.WebuiRequestContext)
+   */
   public void processRender(WebuiApplication app, WebuiRequestContext context) throws Exception {
-    if(Util.getPortalRequestContext().getRequestParameter("path") != null) {
+    if (Util.getPortalRequestContext().getRequestParameter("path") != null) {
       setCurrentNodePath(Util.getPortalRequestContext().getRequestParameter("path").substring(1));
     }
 
-    PortletRequestContext pContext = (PortletRequestContext) context ;
-    PortletMode newMode = pContext.getApplicationMode() ;
-    if(!mode.equals(newMode)) {
-      activateMode(newMode) ;
-      mode = newMode ;
+    PortletRequestContext pContext = (PortletRequestContext) context;
+    PortletMode newMode = pContext.getApplicationMode();
+    if (!mode.equals(newMode)) {
+      activateMode(newMode);
+      mode = newMode;
     }
     UIPCVContainer container =  this.getChild(UIPCVContainer.class);
     if (container!=null && container.getNode()!=null) {
@@ -134,11 +138,11 @@ public class UIPCVPortlet extends UIPortletApplication {
   }
 
   public String getCurrentNodePath() {
-  return currentNodePath;
+    return currentNodePath;
   }
 
   public void setCurrentNodePath(String currentNodePath) {
-  this.currentNodePath = currentNodePath;
+    this.currentNodePath = currentNodePath;
   }
 
 }

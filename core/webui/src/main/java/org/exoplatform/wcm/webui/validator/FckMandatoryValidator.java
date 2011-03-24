@@ -31,10 +31,13 @@ public class FckMandatoryValidator extends org.exoplatform.webui.form.validator.
 
   @SuppressWarnings("unchecked")
   public void validate(UIFormInput uiInput) throws Exception {
-    if((uiInput.getValue() != null) && (((String)uiInput.getValue()).trim().length() > 0) &&(!uiInput.getValue().toString().trim().equals("<br />"))) {
-      return ;
+    if ((uiInput.getValue() != null) && (((String) uiInput.getValue()).trim().length() > 0)
+        && (!uiInput.getValue().toString().trim().equals("<br />"))) {
+      return;
     } else {
-      throw new MessageException(new ApplicationMessage("EmptyFieldValidator.msg.empty-input", null, ApplicationMessage.WARNING));
+      throw new MessageException(new ApplicationMessage("EmptyFieldValidator.msg.empty-input",
+                                                        null,
+                                                        ApplicationMessage.WARNING));
     }
   }
 }

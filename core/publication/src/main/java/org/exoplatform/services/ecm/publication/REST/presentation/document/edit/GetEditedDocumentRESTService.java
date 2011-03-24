@@ -118,7 +118,9 @@ public class GetEditedDocumentRESTService implements ResourceContainer {
     listEditDocumentNode.setLstDocNode(lstDocNode);
 
     DateFormat dateFormat = new SimpleDateFormat(IF_MODIFIED_SINCE_DATE_FORMAT);
-    return Response.ok(listEditDocumentNode, new MediaType("application", "json")).header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
+    return Response.ok(listEditDocumentNode, new MediaType("application", "json"))
+                   .header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date()))
+                   .build();
   }
 
   private List<Node> getLastEditedNode(String repository, String noOfItem, String showGadgetWs) throws Exception{

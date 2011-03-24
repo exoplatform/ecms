@@ -47,7 +47,10 @@ import org.exoplatform.webui.ext.filter.UIExtensionFilters;
  )
 public class TaggingDocumentActionComponent extends UIComponent {
 
-  private static final List<UIExtensionFilter> FILTERS = Arrays.asList(new UIExtensionFilter[]{new CanSetPropertyFilter(), new IsNotLockedFilter(), new IsDocumentFilter("UIActionBar.msg.unsupported-tagging"), new IsCheckedOutFilter("UIActionBar.msg.tagnode-checkedin")});
+  private static final List<UIExtensionFilter> FILTERS = Arrays.asList(new UIExtensionFilter[] {
+      new CanSetPropertyFilter(), new IsNotLockedFilter(),
+      new IsDocumentFilter("UIActionBar.msg.unsupported-tagging"),
+      new IsCheckedOutFilter("UIActionBar.msg.tagnode-checkedin") });
 
   @UIExtensionFilters
   public List<UIExtensionFilter> getFilters() {

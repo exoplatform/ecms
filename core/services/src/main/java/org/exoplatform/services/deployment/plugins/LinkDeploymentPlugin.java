@@ -60,7 +60,10 @@ public class LinkDeploymentPlugin extends DeploymentPlugin {
    * @param repositoryService the repository service
    * @param publicationService the publication service
    */
-  public LinkDeploymentPlugin(InitParams initParams, RepositoryService repositoryService, LinkManager linkManager, TaxonomyService taxonomyService) {
+  public LinkDeploymentPlugin(InitParams initParams,
+                              RepositoryService repositoryService,
+                              LinkManager linkManager,
+                              TaxonomyService taxonomyService) {
     this.initParams = initParams;
     this.repositoryService = repositoryService;
     this.linkManager = linkManager;

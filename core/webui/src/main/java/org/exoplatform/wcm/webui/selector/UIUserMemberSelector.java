@@ -190,8 +190,11 @@ public class UIUserMemberSelector extends UIContainer implements ComponentSelect
     return returnField;
   }
 
-  /* (non-Javadoc)
-   * @see org.exoplatform.ecm.webui.selector.ComponentSelector#setSourceComponent(org.exoplatform.webui.core.UIComponent, java.lang.String[])
+  /*
+   * (non-Javadoc)
+   * @see
+   * org.exoplatform.ecm.webui.selector.ComponentSelector#setSourceComponent
+   * (org.exoplatform.webui.core.UIComponent, java.lang.String[])
    */
   public void setSourceComponent(UIComponent uicomponent, String[] initParams) {
     uiComponent = uicomponent;

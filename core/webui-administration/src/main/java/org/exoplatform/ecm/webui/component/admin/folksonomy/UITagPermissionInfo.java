@@ -41,7 +41,8 @@ import org.exoplatform.webui.event.EventListener;
 @ComponentConfig(
     lifecycle = UIContainerLifecycle.class,
     events = {
-      @EventConfig (listeners = UITagPermissionInfo.DeleteActionListener.class, confirm = "UITagPermissionInfo.msg.confirm-delete-permission")
+      @EventConfig (listeners = UITagPermissionInfo.DeleteActionListener.class, 
+                    confirm = "UITagPermissionInfo.msg.confirm-delete-permission")
     }
 )
 public class UITagPermissionInfo extends UIContainer {

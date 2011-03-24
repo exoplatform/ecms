@@ -48,7 +48,8 @@ import org.exoplatform.webui.exception.MessageException;
 @ComponentConfig(
     template = "app:/groovy/webui/component/explorer/popup/admin/UICategoriesAddedList.gtmpl",
     events = {
-      @EventConfig(listeners = UISimpleCategoriesAddedList.DeleteActionListener.class, confirm="UICategoriesAddedList.msg.confirm-delete")
+      @EventConfig(listeners = UISimpleCategoriesAddedList.DeleteActionListener.class,
+                   confirm="UICategoriesAddedList.msg.confirm-delete")
     }
 )
 public class UISimpleCategoriesAddedList extends UIContainer implements UISelectable {

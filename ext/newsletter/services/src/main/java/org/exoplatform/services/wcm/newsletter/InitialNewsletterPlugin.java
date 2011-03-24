@@ -78,8 +78,12 @@ public class InitialNewsletterPlugin extends CreatePortalPlugin {
     this.newsletterManagerService = newsletterManagerService;
   }
 
-  /* (non-Javadoc)
-   * @see org.exoplatform.services.wcm.portal.artifacts.BasePortalArtifactsPlugin#deployToPortal(java.lang.String, org.exoplatform.services.jcr.ext.common.SessionProvider)
+  /*
+   * (non-Javadoc)
+   * @see
+   * org.exoplatform.services.wcm.portal.artifacts.BasePortalArtifactsPlugin
+   * #deployToPortal(java.lang.String,
+   * org.exoplatform.services.jcr.ext.common.SessionProvider)
    */
   public void deployToPortal(SessionProvider sessionProvider, String portalName) throws Exception {
     try {

@@ -160,7 +160,9 @@ public class UISelectRestorePath extends UIForm implements UIPopupComponent, UIS
       String repository = uiExplorer.getRepositoryName();
 
       UIPopupWindow uiPopupWindow = initPopup(uiPopupContainer, POPUP_PATH);
-      UIOneNodePathSelector uiNodePathSelector = uiPopupContainer.createUIComponent(UIOneNodePathSelector.class, null, null);
+      UIOneNodePathSelector uiNodePathSelector = uiPopupContainer.createUIComponent(UIOneNodePathSelector.class,
+                                                                                    null,
+                                                                                    null);
 
       uiNodePathSelector.setIsDisable(workspaceName, false);
       uiNodePathSelector.setShowRootPathSelect(true);
@@ -185,7 +187,8 @@ public class UISelectRestorePath extends UIForm implements UIPopupComponent, UIS
       event.getRequestContext().addUIComponentToUpdateByAjax(uiPopupContainer);
     }
 
-    private String getSystemWorkspaceName(String repository, UIJCRExplorer uiExplorer) throws RepositoryException, RepositoryConfigurationException {
+    private String getSystemWorkspaceName(String repository, UIJCRExplorer uiExplorer) throws RepositoryException,
+                                                                                      RepositoryConfigurationException {
       RepositoryService repositoryService = uiExplorer.getApplicationComponent(RepositoryService.class);
       ManageableRepository manageableRepository = repositoryService.getRepository(repository);
       return manageableRepository.getConfiguration().getSystemWorkspaceName();
@@ -215,7 +218,9 @@ public class UISelectRestorePath extends UIForm implements UIPopupComponent, UIS
       if (colonIndex == -1) return;
       String restoreWorkspace = fullRestorePath.substring(0, colonIndex);
       String restorePath = fullRestorePath.substring(colonIndex + 1);
-      Node trashNode = (Node)uiSelectRestorePath.getTrashHomeNode().getSession().getItem(uiSelectRestorePath.getSrcPath());
+      Node trashNode = (Node) uiSelectRestorePath.getTrashHomeNode()
+                                                 .getSession()
+                                                 .getItem(uiSelectRestorePath.getSrcPath());
       trashNode.setProperty(TrashService.RESTORE_WORKSPACE, restoreWorkspace);
       trashNode.setProperty(TrashService.RESTORE_PATH, restorePath +
                                                        (restorePath.endsWith("/") ? "" : '/') +

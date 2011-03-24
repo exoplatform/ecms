@@ -190,7 +190,12 @@ public class MetadataServiceImpl implements MetadataService, Startable{
   /**
    * {@inheritDoc}
    */
-  public String addMetadata(String nodetype, boolean isDialog, String role, String content, boolean isAddNew, String repository) throws Exception {
+  public String addMetadata(String nodetype,
+                            boolean isDialog,
+                            String role,
+                            String content,
+                            boolean isAddNew,
+                            String repository) throws Exception {
     Session session = getSession(repository);
     Node metadataHome = (Node)session.getItem(baseMetadataPath_);
     String path = null;

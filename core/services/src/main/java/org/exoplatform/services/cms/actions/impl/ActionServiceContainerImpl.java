@@ -440,7 +440,13 @@ public class ActionServiceContainerImpl implements ActionServiceContainer, Start
     node.save();
   }
 
-  public void addAction(Node storeActionNode, String repository, String actionType, boolean isDeep, String[] uuid, String[] nodeTypeNames, Map mappings) throws Exception {
+  public void addAction(Node storeActionNode,
+                        String repository,
+                        String actionType,
+                        boolean isDeep,
+                        String[] uuid,
+                        String[] nodeTypeNames,
+                        Map mappings) throws Exception {
     Node actionsNode = null;
     try {
       actionsNode = storeActionNode.getNode(EXO_ACTIONS);

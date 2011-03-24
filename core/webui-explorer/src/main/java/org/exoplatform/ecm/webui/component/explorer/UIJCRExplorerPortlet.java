@@ -494,8 +494,12 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
     uiExplorer.setRenderSibling(UIJCRExplorer.class);
   }
 
-  private boolean canManageNode(Node selectedNode, UIApplication uiApp, UIJCRExplorer uiExplorer, UIActionBar uiActionBar, Object context,
-                              List<UIExtensionFilter> filters) throws Exception {
+  private boolean canManageNode(Node selectedNode,
+                                UIApplication uiApp,
+                                UIJCRExplorer uiExplorer,
+                                UIActionBar uiActionBar,
+                                Object context,
+                                List<UIExtensionFilter> filters) throws Exception {
     Map<String, Object> ctx = new HashMap<String, Object>();
     ctx.put(UIActionBar.class.getName(), uiActionBar);
     ctx.put(UIJCRExplorer.class.getName(), uiExplorer);
@@ -504,7 +508,8 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
     ctx.put(WebuiRequestContext.class.getName(), context);
     for (UIExtensionFilter filter : filters)
       try {
-        if (!filter.accept(ctx)) return false;
+        if (!filter.accept(ctx))
+          return false;
       } catch (Exception e) {
         return false;
       }

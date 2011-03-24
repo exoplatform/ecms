@@ -42,10 +42,9 @@ import org.exoplatform.webui.core.UIApplication;
  * Sep 16, 2009
  */
 
-@ComponentConfig(
-    events = {
-      @EventConfig(listeners = RemoveAttachmentComponent.RemoveAttachActionListener.class, confirm = "RemoveAttachmentComponent.msg.confirm-deleteattachment")
-    }
+@ComponentConfig(events = {
+    @EventConfig(listeners = RemoveAttachmentComponent.RemoveAttachActionListener.class,
+                 confirm = "RemoveAttachmentComponent.msg.confirm-deleteattachment") }
 )
 
 public class RemoveAttachmentComponent extends AbstractActionComponent {
@@ -55,13 +54,19 @@ public class RemoveAttachmentComponent extends AbstractActionComponent {
   /**
    * Overide method UIComponent.loadConfirmMesssage() to get resource bundle in jar file
    */
-  protected String loadConfirmMesssage(org.exoplatform.webui.config.Event event, WebuiRequestContext context, String beanId) {
-    String confirmKey  = event.getConfirm();
-    if(confirmKey.length() < 1) return confirmKey;
+  protected String loadConfirmMesssage(org.exoplatform.webui.config.Event event,
+                                       WebuiRequestContext context,
+                                       String beanId) {
+    String confirmKey = event.getConfirm();
+    if (confirmKey.length() < 1)
+      return confirmKey;
     try {
-      String confirm = Utils.getResourceBundle(Utils.LOCALE_WEBUI_DMS, confirmKey, getClass().getClassLoader());
+      String confirm = Utils.getResourceBundle(Utils.LOCALE_WEBUI_DMS,
+                                               confirmKey,
+                                               getClass().getClassLoader());
       return confirm.replaceAll("\\{0\\}", beanId);
-    }catch (Exception e) {}
+    } catch (Exception e) {
+    }
     return confirmKey;
   }
 

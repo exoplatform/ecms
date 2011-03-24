@@ -311,7 +311,11 @@ public class ProcessUtil {
     provider.close();
   }
 
-  public static Node getNode(ExecutionContext context, String repositoryName, String workspace, String path, SessionProvider provider) throws Exception {
+  public static Node getNode(ExecutionContext context,
+                             String repositoryName,
+                             String workspace,
+                             String path,
+                             SessionProvider provider) throws Exception {
     RepositoryService repositoryService = getService(context, RepositoryService.class);
     ManageableRepository repository= repositoryService.getRepository(repositoryName);
     Session session = provider.getSession(workspace,repository);
@@ -336,7 +340,7 @@ public class ProcessUtil {
 
   public static <T> T getService(ExecutionContext context, Class<T> type) {
     ContextInstance contextInstance = context.getContextInstance();
-    ExoContainer container = ExoContainerContext.getContainerByName((String)contextInstance.getVariable("exocontainer"));
+    ExoContainer container = ExoContainerContext.getContainerByName((String) contextInstance.getVariable("exocontainer"));
     return  type.cast(container.getComponentInstanceOfType(type));
   }
 
@@ -403,8 +407,8 @@ public class ProcessUtil {
    * @return SessionProvider
    */
   private static SessionProvider getSessionProvider() {
-  SessionProviderService sessionProviderService = (SessionProviderService) ExoContainerContext
-    .getCurrentContainer().getComponentInstanceOfType(SessionProviderService.class);
-  return sessionProviderService.getSessionProvider(null);
+    SessionProviderService sessionProviderService = (SessionProviderService) ExoContainerContext.
+        getCurrentContainer().getComponentInstanceOfType(SessionProviderService.class);
+    return sessionProviderService.getSessionProvider(null);
   }
 }

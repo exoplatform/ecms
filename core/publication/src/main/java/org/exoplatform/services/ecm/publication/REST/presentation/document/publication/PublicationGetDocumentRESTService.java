@@ -158,7 +158,9 @@ public class PublicationGetDocumentRESTService implements ResourceContainer {
     publishedListNode.setPublishedListNode(publishedNodes);
     session.logout();
     DateFormat dateFormat = new SimpleDateFormat(IF_MODIFIED_SINCE_DATE_FORMAT);
-    return Response.ok(publishedListNode, new MediaType("application", "json")).header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
+    return Response.ok(publishedListNode, new MediaType("application", "json"))
+                   .header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date()))
+                   .build();
   }
 
   private List<Node> getNodePublish(NodeIterator iter, String pluginName) throws Exception {

@@ -58,7 +58,8 @@ public class CanValidateFilter implements UIExtensionFilter {
 
           String nodeLifecycle = currentNode.getProperty("publication:lifecycle").getString();
 
-          PublicationManager publicationManager = (PublicationManager)ExoContainerContext.getCurrentContainer().getComponentInstanceOfType(PublicationManager.class);
+          PublicationManager publicationManager = (PublicationManager)ExoContainerContext.getCurrentContainer().
+              getComponentInstanceOfType(PublicationManager.class);
           List<Lifecycle> lifecycles = publicationManager.getLifecyclesFromUser(userId, "pending");
 
           for (Lifecycle lifecycle:lifecycles) {

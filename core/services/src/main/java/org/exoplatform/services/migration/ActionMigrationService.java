@@ -71,7 +71,10 @@ public class ActionMigrationService implements Startable {
         } catch (Exception e) {
           if (session != null && session.isLive())
             session.logout();
-          if (log.isErrorEnabled()) log.error("An unexpected problem occurs when migrating data for action nodes in workspace " + wsName, e);
+          if (log.isErrorEnabled())
+            log.error("An unexpected problem occurs when migrating data for action nodes in workspace "
+                          + wsName,
+                      e);
         }
       }
     } catch (Exception e) {

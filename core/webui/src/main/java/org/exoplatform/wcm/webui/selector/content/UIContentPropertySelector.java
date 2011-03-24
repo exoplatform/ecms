@@ -119,7 +119,8 @@ public class UIContentPropertySelector extends UIForm{
     public void execute(Event<UIContentPropertySelector> event) throws Exception {
       UIContentPropertySelector contentPropertySelector = event.getSource();
       String property = contentPropertySelector.<UIFormRadioBoxInput>getUIInput(PROPERTY_SELECT).getValue();
-      UIPopupWindow popupWindow = Utils.getPopupContainer(contentPropertySelector).getChildById(UIContentSelector.CORRECT_CONTENT_SELECTOR_POPUP_WINDOW);
+      UIPopupWindow popupWindow = Utils.getPopupContainer(contentPropertySelector)
+                                       .getChildById(UIContentSelector.CORRECT_CONTENT_SELECTOR_POPUP_WINDOW);
       UIContentSelector contentSelector = (UIContentSelector) popupWindow.getUIComponent();
       UIContentSearchForm contentSearchForm =contentSelector.findFirstComponentOfType(UIContentSearchForm.class);
       contentSearchForm.getUIStringInput(contentPropertySelector.getFieldName()).setValue(property);

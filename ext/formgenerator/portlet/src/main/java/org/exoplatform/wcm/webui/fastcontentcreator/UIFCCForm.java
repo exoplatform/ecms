@@ -572,25 +572,25 @@ public class UIFCCForm extends UIDialogForm implements UISelectable {
      * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
      */
     public void execute(Event<UIFCCForm> event) throws Exception {
-      UIFCCForm fastContentCreatorForm = event.getSource();
-      UIFCCPortlet fastContentCreatorPortlet = fastContentCreatorForm.getParent();
+      UIFCCForm uiFCCForm = event.getSource();
+      UIFCCPortlet fastContentCreatorPortlet = uiFCCForm.getParent();
       String clickedField = event.getRequestContext().getRequestParameter(OBJECTID);
-      if (fastContentCreatorForm.isReference) {
-        UIFormMultiValueInputSet uiSet = fastContentCreatorForm.getChildById(FIELD_TAXONOMY);
+      if (uiFCCForm.isReference) {
+        UIFormMultiValueInputSet uiSet = uiFCCForm.getChildById(FIELD_TAXONOMY);
         if((uiSet != null) && (uiSet.getName() != null) && uiSet.getName().equals(FIELD_TAXONOMY)) {
           if ((clickedField != null) && (clickedField.equals(FIELD_TAXONOMY))){
-            NodeHierarchyCreator nodeHierarchyCreator = fastContentCreatorForm.getApplicationComponent(NodeHierarchyCreator.class);
+            NodeHierarchyCreator nodeHierarchyCreator = uiFCCForm.getApplicationComponent(NodeHierarchyCreator.class);
             if(uiSet.getValue().size() == 0) uiSet.setValue(new ArrayList<Value>());
-            String workspaceName = fastContentCreatorForm.getDMSWorkspace();
-            UIOneTaxonomySelector uiOneTaxonomySelector = fastContentCreatorForm.createUIComponent(UIOneTaxonomySelector.class,
+            String workspaceName = uiFCCForm.getDMSWorkspace();
+            UIOneTaxonomySelector uiOneTaxonomySelector = uiFCCForm.createUIComponent(UIOneTaxonomySelector.class,
                                                                                                    null,
                                                                                                    null);
             uiOneTaxonomySelector.setIsDisable(workspaceName, false);
             String rootTreePath = nodeHierarchyCreator.getJcrPath(BasePath.TAXONOMIES_TREE_STORAGE_PATH);
-            RepositoryService repositoryService  = fastContentCreatorForm.getApplicationComponent(RepositoryService.class);
+            RepositoryService repositoryService  = uiFCCForm.getApplicationComponent(RepositoryService.class);
             SessionProvider sessionProvider = WCMCoreUtils.getUserSessionProvider();
             Session session = sessionProvider.getSession(workspaceName,
-                                                         repositoryService.getRepository(fastContentCreatorForm.repositoryName));
+                                                         repositoryService.getRepository(uiFCCForm.repositoryName));
             Node rootTree = (Node) session.getItem(rootTreePath);
             NodeIterator childrenIterator = rootTree.getNodes();
             while (childrenIterator.hasNext()) {
@@ -598,16 +598,16 @@ public class UIFCCForm extends UIDialogForm implements UISelectable {
               rootTreePath = childNode.getPath();
               break;
             }
-            uiOneTaxonomySelector.setRootNodeLocation(fastContentCreatorForm.repositoryName, workspaceName, rootTreePath);
+            uiOneTaxonomySelector.setRootNodeLocation(uiFCCForm.repositoryName, workspaceName, rootTreePath);
             uiOneTaxonomySelector.init(WCMCoreUtils.getUserSessionProvider());
             String param = "returnField=" + FIELD_TAXONOMY;
-            uiOneTaxonomySelector.setSourceComponent(fastContentCreatorForm, new String[]{param});
-            Utils.createPopupWindow(fastContentCreatorForm, uiOneTaxonomySelector, UIFCCConstant.TAXONOMY_POPUP_WINDOW, 640);
+            uiOneTaxonomySelector.setSourceComponent(uiFCCForm, new String[]{param});
+            Utils.createPopupWindow(uiFCCForm, uiOneTaxonomySelector, UIFCCConstant.TAXONOMY_POPUP_WINDOW, 640);
           }
         }
         event.getRequestContext().addUIComponentToUpdateByAjax(fastContentCreatorPortlet);
       } else {
-        event.getRequestContext().addUIComponentToUpdateByAjax(fastContentCreatorForm.getParent());
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiFCCForm.getParent());
       }
     }
   }

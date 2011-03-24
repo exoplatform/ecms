@@ -177,7 +177,8 @@ public class UIWorkspaceList extends UIForm {
    * @throws RepositoryException the repository exception
    * @throws RepositoryConfigurationException the repository configuration exception
    */
-  private Node getRootNode(String repositoryName, String workspaceName) throws RepositoryException, RepositoryConfigurationException {
+  private Node getRootNode(String repositoryName, String workspaceName) throws RepositoryException,
+                                                                       RepositoryConfigurationException {
     RepositoryService repositoryService = getApplicationComponent(RepositoryService.class);
     ManageableRepository manageableRepository = repositoryService.getRepository(repositoryName);
     SessionProvider sessionProvider =  WCMCoreUtils.getSystemSessionProvider();

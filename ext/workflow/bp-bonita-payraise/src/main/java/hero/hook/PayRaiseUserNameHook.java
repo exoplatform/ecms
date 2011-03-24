@@ -37,11 +37,13 @@ public class PayRaiseUserNameHook implements TxHook {
   /** Name of the Property which represents the process initiator user name */
   public static final String PROCESS_INITIATOR_USER_NAME = "initiator";
 
-public void execute(APIAccessor accessor, ActivityInstance<ActivityBody> activity)
-    throws Exception {
-  String user_Name = accessor.getQueryRuntimeAPI().getProcessInstance(activity.getProcessInstanceUUID()).getStartedBy();
-    accessor.getRuntimeAPI().setProcessInstanceVariable(activity.getProcessInstanceUUID(), PROCESS_INITIATOR_USER_NAME, user_Name);
-//    System.out.println("Initiator set to "+user_Name);
-}
+  public void execute(APIAccessor accessor, ActivityInstance<ActivityBody> activity) throws Exception {
+    String user_Name = accessor.getQueryRuntimeAPI()
+                               .getProcessInstance(activity.getProcessInstanceUUID())
+                               .getStartedBy();
+    accessor.getRuntimeAPI().setProcessInstanceVariable(activity.getProcessInstanceUUID(),
+                                                        PROCESS_INITIATOR_USER_NAME,
+                                                        user_Name);
+  }
 
 }

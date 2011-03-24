@@ -42,13 +42,11 @@ import org.exoplatform.webui.form.UIForm;
  *          exo@exoplatform.com
  * Feb 2, 2010
  */
-@ComponentConfig(
-                 lifecycle = UIFormLifecycle.class,
-                 template = "app:/groovy/authoring/UIDashboardForm.gtmpl",
+@ComponentConfig(lifecycle = UIFormLifecycle.class, 
+                 template = "app:/groovy/authoring/UIDashboardForm.gtmpl", 
                  events = {
-                   @EventConfig(listeners = UIDashboardForm.ShowDocumentActionListener.class),
-                   @EventConfig(listeners = UIDashboardForm.RefreshActionListener.class)
-})
+    @EventConfig(listeners = UIDashboardForm.ShowDocumentActionListener.class),
+    @EventConfig(listeners = UIDashboardForm.RefreshActionListener.class) })
 public class UIDashboardForm extends UIForm {
 
   public UIDashboardForm() {
@@ -63,7 +61,8 @@ public class UIDashboardForm extends UIForm {
   }
 
   public List<Node> getContents(String fromstate, String tostate, String date) {
-    PublicationManager manager = (PublicationManager)ExoContainerContext.getCurrentContainer().getComponentInstanceOfType(PublicationManager.class);
+    PublicationManager manager = (PublicationManager) ExoContainerContext.getCurrentContainer()
+                                                                         .getComponentInstanceOfType(PublicationManager.class);
     String user = PortalRequestContext.getCurrentInstance().getRemoteUser();
     String lang = Util.getPortalRequestContext().getLocale().getLanguage();
     List<Node> nodes = new ArrayList<Node>();

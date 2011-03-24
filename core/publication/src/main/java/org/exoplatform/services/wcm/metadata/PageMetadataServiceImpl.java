@@ -73,17 +73,19 @@ public class PageMetadataServiceImpl implements PageMetadataService {
     this.folksonomyService = folksonomyService;
   }
 
-  /* (non-Javadoc)
-   * @see org.exoplatform.services.wcm.metadata.PageMetadataService#getPortalMetadata(java.lang.String, org.exoplatform.services.jcr.ext.common.SessionProvider)
+  /*
+   * (non-Javadoc)
+   * @see
+   * org.exoplatform.services.wcm.metadata.PageMetadataService#getPortalMetadata
+   * (java.lang.String, org.exoplatform.services.jcr.ext.common.SessionProvider)
    */
-  public HashMap<String, String> getPortalMetadata(SessionProvider sessionProvider, String uri)
-  throws Exception {
+  public HashMap<String, String> getPortalMetadata(SessionProvider sessionProvider, String uri) throws Exception {
     String portalName = uri.split("/")[1];
     try {
       Node portal = livePortalManagerService.getLivePortal(sessionProvider, portalName);
       return extractPortalMetadata(portal);
     } catch (Exception e) {
-      if(log.isDebugEnabled())
+      if (log.isDebugEnabled())
         log.debug(e);
     }
     return null;
@@ -234,24 +236,24 @@ public class PageMetadataServiceImpl implements PageMetadataService {
     try {
       Property property = node.getProperty(propertyName);
       PropertyDefinition definition = property.getDefinition();
-      if(!definition.isMultiple())
+      if (!definition.isMultiple())
         return property.getValue().getString();
       int propertyType = definition.getRequiredType();
-      if(PropertyType.BINARY == propertyType)
+      if (PropertyType.BINARY == propertyType)
         return null;
-      if(PropertyType.REFERENCE == propertyType)
+      if (PropertyType.REFERENCE == propertyType)
         return null;
       StringBuilder builder = new StringBuilder();
-      for(Value value: property.getValues()) {
-        if(propertyType == PropertyType.DATE) {
+      for (Value value : property.getValues()) {
+        if (propertyType == PropertyType.DATE) {
           String v = ISO8601.format(value.getDate());
           builder.append(v).append(",");
-        }else {
+        } else {
           builder.append(value.getString()).append(",");
         }
       }
-      if(builder.charAt(builder.length()-1) == ',') {
-        builder.deleteCharAt(builder.length() -1);
+      if (builder.charAt(builder.length() - 1) == ',') {
+        builder.deleteCharAt(builder.length() - 1);
       }
       return builder.toString();
     } catch (Exception e) {

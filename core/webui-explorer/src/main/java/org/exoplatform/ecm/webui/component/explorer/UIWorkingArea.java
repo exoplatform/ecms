@@ -76,34 +76,33 @@ public class UIWorkingArea extends UIContainer {
    */
   private static final Log                 LOG                      = ExoLogger.getLogger("dms.UIWorkingArea");
 
-  public static final Pattern              FILE_EXPLORER_URL_SYNTAX = Pattern
-                                                                        .compile("([^:/]+):(/.*)");
+  public static final Pattern              FILE_EXPLORER_URL_SYNTAX = Pattern.compile("([^:/]+):(/.*)");
 
   public static final String               WS_NAME                  = "workspaceName";
 
   public static final String               EXTENSION_TYPE           = "org.exoplatform.ecm.dms.UIWorkingArea";
 
-  public static final String               ITEM_CONTEXT_MENU      = "ItemContextMenu";
+  public static final String               ITEM_CONTEXT_MENU        = "ItemContextMenu";
 
-  public static final String               MULTI_ITEM_CONTEXT_MENU      = "MultiItemContextMenu";
+  public static final String               MULTI_ITEM_CONTEXT_MENU  = "MultiItemContextMenu";
 
   public static final String               GROUND_CONTEXT_MENU      = "GroundContextMenu";
 
   public static final String               ITEM_GROUND_CONTEXT_MENU = "ItemGroundContextMenu";
 
-  public static final String               MOVE_NODE = "MoveNode";
+  public static final String               MOVE_NODE                = "MoveNode";
 
-  public static final String               CREATE_LINK = "CreateLink";
+  public static final String               CREATE_LINK              = "CreateLink";
 
-  public static final String               CUSTOM_ACTIONS = "CustomActions";
+  public static final String               CUSTOM_ACTIONS           = "CustomActions";
 
-  public static final String               PERMLINK = "PermlinkContextMenu";
+  public static final String               PERMLINK                 = "PermlinkContextMenu";
 
-  private List<UIAbstractManagerComponent> managers                 = Collections
-                                                                        .synchronizedList(new ArrayList<UIAbstractManagerComponent>());
+  private List<UIAbstractManagerComponent> managers                 =
+    Collections.synchronizedList(new ArrayList<UIAbstractManagerComponent>());
 
-  private List<ClipboardCommand>           virtualClipboards_       = Collections
-                                                                        .synchronizedList(new LinkedList<ClipboardCommand>());
+  private List<ClipboardCommand>           virtualClipboards_       =
+    Collections.synchronizedList(new LinkedList<ClipboardCommand>());
 
   public UIWorkingArea() throws Exception {
     addChild(UIRightClickPopupMenu.class, "ECMContextMenu", null);

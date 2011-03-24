@@ -105,7 +105,8 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
     this.initParams_ = initParams;
 
     ExoContainer myContainer = ExoContainerContext.getCurrentContainer();
-    SessionProviderService sessionProviderService = (SessionProviderService) myContainer.getComponentInstanceOfType(SessionProviderService.class);
+    SessionProviderService sessionProviderService = (SessionProviderService) myContainer.
+        getComponentInstanceOfType(SessionProviderService.class);
     this.sessionProvider = sessionProviderService.getSystemSessionProvider(null);
   }
 

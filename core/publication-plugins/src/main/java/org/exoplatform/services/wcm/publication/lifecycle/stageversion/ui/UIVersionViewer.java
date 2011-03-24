@@ -114,8 +114,11 @@ public class UIVersionViewer extends UIBaseNodePresentation {
     return getRepository();
   }
 
-  /* (non-Javadoc)
-   * @see org.exoplatform.webui.core.UIComponent#getTemplateResourceResolver(org.exoplatform.webui.application.WebuiRequestContext, java.lang.String)
+  /*
+   * (non-Javadoc)
+   * @see
+   * org.exoplatform.webui.core.UIComponent#getTemplateResourceResolver(org.
+   * exoplatform.webui.application.WebuiRequestContext, java.lang.String)
    */
   public ResourceResolver getTemplateResourceResolver(WebuiRequestContext context, String template) {
     try{

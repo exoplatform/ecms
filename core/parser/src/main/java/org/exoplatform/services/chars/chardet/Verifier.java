@@ -74,13 +74,16 @@ public abstract class Verifier
       return false;
    };
 
-   public static byte getNextState(Verifier v, byte b, byte s)
-   {
+  public static byte getNextState(Verifier v, byte b, byte s) {
 
-    return (byte) (0xFF & (((v.states()[(((s * v.stFactor() + (((v.cclass()[((b & 0xFF) >> Verifier.eidxSft4bits)]) >> ((b & Verifier.eSftMsk4bits) << Verifier.eBitSft4bits)) & Verifier.eUnitMsk4bits)) & 0xFF) >> Verifier.eidxSft4bits)]) >> ((((s
-        * v.stFactor() + (((v.cclass()[((b & 0xFF) >> Verifier.eidxSft4bits)]) >> ((b & Verifier.eSftMsk4bits) << Verifier.eBitSft4bits)) & Verifier.eUnitMsk4bits)) & 0xFF) & Verifier.eSftMsk4bits) << Verifier.eBitSft4bits)) & Verifier.eUnitMsk4bits));
+    return (byte) (0xFF & (((v.states()[(((s * v.stFactor() 
+        + (((v.cclass()[((b & 0xFF) >> Verifier.eidxSft4bits)]) >> ((b & Verifier.eSftMsk4bits) << Verifier.eBitSft4bits)) 
+            & Verifier.eUnitMsk4bits)) & 0xFF) >> Verifier.eidxSft4bits)]) >> ((((s
+        * v.stFactor() + (((v.cclass()[((b & 0xFF) >> Verifier.eidxSft4bits)]) >> ((b 
+            & Verifier.eSftMsk4bits) << Verifier.eBitSft4bits)) & Verifier.eUnitMsk4bits)) & 0xFF) 
+            & Verifier.eSftMsk4bits) << Verifier.eBitSft4bits)) & Verifier.eUnitMsk4bits));
 
-   }
+  }
 
 }
 

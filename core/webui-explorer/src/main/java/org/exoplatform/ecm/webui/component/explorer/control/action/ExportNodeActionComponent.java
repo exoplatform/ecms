@@ -32,26 +32,22 @@ import org.exoplatform.webui.ext.filter.UIExtensionFilter;
 import org.exoplatform.webui.ext.filter.UIExtensionFilters;
 
 /**
- * Created by The eXo Platform SAS
- * Author : eXoPlatform
- *          nicolas.filotto@exoplatform.com
- * 6 mai 2009
+ * Created by The eXo Platform SAS Author : eXoPlatform
+ * nicolas.filotto@exoplatform.com 6 mai 2009
  */
-@ComponentConfig(
-     events = {
-       @EventConfig(listeners = ExportNodeActionComponent.ExportNodeActionListener.class)
-     }
- )
+@ComponentConfig(events = { @EventConfig(listeners = ExportNodeActionComponent.ExportNodeActionListener.class) })
 public class ExportNodeActionComponent extends UIComponent {
 
-  private static final List<UIExtensionFilter> FILTERS = Arrays.asList(new UIExtensionFilter[]{ new IsNotEditingDocumentFilter()});
+  private static final List<UIExtensionFilter> FILTERS = Arrays.asList(new UIExtensionFilter[] {
+      new IsNotEditingDocumentFilter() });
 
   @UIExtensionFilters
   public List<UIExtensionFilter> getFilters() {
     return FILTERS;
   }
 
-  public static class ExportNodeActionListener extends UIActionBarActionListener<ExportNodeActionComponent> {
+  public static class ExportNodeActionListener extends
+                                              UIActionBarActionListener<ExportNodeActionComponent> {
     public void processEvent(Event<ExportNodeActionComponent> event) throws Exception {
       UIJCRExplorer uiExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class);
       UIPopupContainer UIPopupContainer = uiExplorer.getChild(UIPopupContainer.class);

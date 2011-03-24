@@ -104,7 +104,9 @@ public interface LivePortalManagerService {
    * @return the live portal
    * @throws Exception the exception
    */
-  public Node getLivePortal(final SessionProvider sessionProvider, final String repository, final String portalName) throws Exception;
+  public Node getLivePortal(final SessionProvider sessionProvider,
+                            final String repository,
+                            final String portalName) throws Exception;
 
   /**
    * Adds the live portal on current repository.

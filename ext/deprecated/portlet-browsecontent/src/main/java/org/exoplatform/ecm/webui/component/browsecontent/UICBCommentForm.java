@@ -151,7 +151,10 @@ public class UICBCommentForm extends UIForm implements UIPopupComponent {
         currentDoc.getSession().addLockToken(lockToken);
       try {
         if (uiForm.isEdit()) {
-          Node commentNode = uiBCContainer.getNodeByPath(uiForm.getNodeCommentPath(), currentDoc.getSession().getWorkspace().getName());
+          Node commentNode = uiBCContainer.getNodeByPath(uiForm.getNodeCommentPath(),
+                                                         currentDoc.getSession()
+                                                                   .getWorkspace()
+                                                                   .getName());
           commentsService.updateComment(commentNode, comment);
         } else {
           String userName = event.getRequestContext().getRemoteUser();

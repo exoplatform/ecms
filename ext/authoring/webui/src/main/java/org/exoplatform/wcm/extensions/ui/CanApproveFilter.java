@@ -58,8 +58,9 @@ public class CanApproveFilter implements UIExtensionFilter {
 
           String nodeLifecycle = currentNode.getProperty("publication:lifecycle").getString();
 
-          PublicationManager publicationManager = (PublicationManager)ExoContainerContext.getCurrentContainer().getComponentInstanceOfType(PublicationManager.class);
-          List<Lifecycle> lifecycles = publicationManager.getLifecyclesFromUser(userId, "approved");
+        PublicationManager publicationManager = (PublicationManager) ExoContainerContext.
+            getCurrentContainer().getComponentInstanceOfType(PublicationManager.class);
+        List<Lifecycle> lifecycles = publicationManager.getLifecyclesFromUser(userId, "approved");
 
           for (Lifecycle lifecycle:lifecycles) {
             if (nodeLifecycle.equals(lifecycle.getName())) {

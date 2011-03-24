@@ -1587,7 +1587,8 @@ public class UIDialogForm extends UIForm {
               + getId()
               + "','RemoveReference','&objectId="
               + fieldName
-              + "' )\"><img class='ActionIcon Remove16x16Icon' src=\"/eXoResources/skin/DefaultSkin/background/Blank.gif\" /></a>");
+              + "' )\"><img class='ActionIcon Remove16x16Icon' src=\"/eXoResources/skin/DefaultSkin/background/Blank.gif\" />"
+              + "</a>");
         w.write("</td>");
         w.write("</tr>");
         w.write("</table>");

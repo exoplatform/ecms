@@ -79,7 +79,9 @@ public class UIPublishedPages extends UIContainer {
    *
    * @param selectedNavigationNodeURI the new selected navigation node uri
    */
-  public void setSelectedNavigationNodeURI(String selectedNavigationNodeURI) {this.selectedNavigationNodeURI = selectedNavigationNodeURI;}
+  public void setSelectedNavigationNodeURI(String selectedNavigationNodeURI) {
+    this.selectedNavigationNodeURI = selectedNavigationNodeURI;
+  }
 
   /**
    * Inits the.
@@ -130,7 +132,8 @@ public class UIPublishedPages extends UIContainer {
       publishedPages.setSelectedNavigationNodeURI(selectedTreeNode);
 
       UIPublicationContainer publicationContainer = publishedPages.getAncestorOfType(UIPublicationContainer.class);
-      UIPublicationPagesContainer publicationPagesContainer = publishedPages.getAncestorOfType(UIPublicationPagesContainer.class);
+      UIPublicationPagesContainer publicationPagesContainer = publishedPages.
+          getAncestorOfType(UIPublicationPagesContainer.class);
       publicationContainer.setActiveTab(publicationPagesContainer, event.getRequestContext());
     }
   }

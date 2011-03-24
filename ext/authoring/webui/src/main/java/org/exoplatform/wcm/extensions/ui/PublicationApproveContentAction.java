@@ -58,12 +58,16 @@ public class PublicationApproveContentAction extends UIComponent {
   public List<UIExtensionFilter> getFilters() {
     return FILTERS;
   }
-  public static class PublicationApproveContentActionListener extends UIActionBarActionListener<PublicationApproveContentAction> {
+
+  public static class PublicationApproveContentActionListener
+                                                             extends
+                                                             UIActionBarActionListener<PublicationApproveContentAction> {
 
     @Override
     protected void processEvent(Event<PublicationApproveContentAction> event) throws Exception {
       UIJCRExplorer uiExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class);
-      PublicationService publicationService = (PublicationService)PortalContainer.getInstance().getComponentInstanceOfType(PublicationService.class);
+      PublicationService publicationService = (PublicationService)PortalContainer.getInstance().
+          getComponentInstanceOfType(PublicationService.class);
       Node node = uiExplorer.getCurrentNode();
         HashMap<String,String> context = new HashMap<String,String>();
 

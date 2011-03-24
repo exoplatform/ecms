@@ -92,7 +92,9 @@ public class FavoriteRESTService implements ResourceContainer {
     listResultNode.setListFavorite(listFavorites);
 
     DateFormat dateFormat = new SimpleDateFormat(IF_MODIFIED_SINCE_DATE_FORMAT);
-    return Response.ok(listResultNode, new MediaType("application", "json")).header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
+    return Response.ok(listResultNode, new MediaType("application", "json"))
+                   .header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date()))
+                   .build();
   }
 
   private String getTitle(Node node) throws Exception {

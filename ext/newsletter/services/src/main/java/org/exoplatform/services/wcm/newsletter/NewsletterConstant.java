@@ -151,7 +151,9 @@ public class NewsletterConstant {
   /** The TEMPLATE base path. */
   public static String           TEMPLATE_BASE_PATH                  = "/sites content/live/"
                                                                          + PORTAL_NAME
-                                                                         + "/ApplicationData/NewsletterApplication/DefaultTemplates";
+                                                                         + "/ApplicationData"
+                                                                         + "/NewsletterApplication"
+                                                                         + "/DefaultTemplates";
 
   /** The CATEGORY base path. */
   public static String           CATEGORY_BASE_PATH                  = "/sites content/live/"

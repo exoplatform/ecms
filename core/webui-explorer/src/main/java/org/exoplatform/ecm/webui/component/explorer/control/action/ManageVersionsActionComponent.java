@@ -52,7 +52,10 @@ import org.exoplatform.webui.ext.filter.UIExtensionFilters;
  )
 public class ManageVersionsActionComponent extends UIComponent {
 
-  private static final List<UIExtensionFilter> FILTERS = Arrays.asList(new UIExtensionFilter[]{new IsNotRootNodeFilter("UIActionBar.msg.cannot-enable-version-rootnode"), new CanSetPropertyFilter(), new IsNotLockedFilter(), new CanEnableVersionFilter(), new IsNotEditingDocumentFilter()});
+  private static final List<UIExtensionFilter> FILTERS = Arrays.asList(new UIExtensionFilter[] {
+      new IsNotRootNodeFilter("UIActionBar.msg.cannot-enable-version-rootnode"),
+      new CanSetPropertyFilter(), new IsNotLockedFilter(), new CanEnableVersionFilter(),
+      new IsNotEditingDocumentFilter()                });
 
   @UIExtensionFilters
   public List<UIExtensionFilter> getFilters() {

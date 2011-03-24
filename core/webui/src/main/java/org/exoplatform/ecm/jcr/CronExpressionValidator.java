@@ -28,13 +28,16 @@ import org.quartz.CronTrigger;
  *          hoa.pham@exoplatform.com
  * Aug 13, 2007
  */
-public class CronExpressionValidator implements Validator{
+
+public class CronExpressionValidator implements Validator {
 
   public void validate(UIFormInput uiInput) throws Exception {
-    try{
-      new CronTrigger().setCronExpression((String)uiInput.getValue()) ;
-    }catch (Exception e) {
-      throw new MessageException(new ApplicationMessage("CronExpressionValidator.invalid-input",null, ApplicationMessage.WARNING)) ;
+    try {
+      new CronTrigger().setCronExpression((String) uiInput.getValue());
+    } catch (Exception e) {
+      throw new MessageException(new ApplicationMessage("CronExpressionValidator.invalid-input",
+                                                        null,
+                                                        ApplicationMessage.WARNING));
     }
   }
 

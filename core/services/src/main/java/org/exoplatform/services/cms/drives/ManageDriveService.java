@@ -41,9 +41,18 @@ public interface ManageDriveService {
  * @param allowCreateFolder the string to specify which type of folder can add in the drive
    * @throws Exception
    */
-  public void addDrive(String name, String workspace, String permissions, String homePath,
-                        String views, String icon, boolean viewReferences, boolean viewNonDocument,
-                        boolean viewSideBar, boolean showHiddenNode, String allowCreateFolder, String allowNodeTypesOnTree)throws Exception ;
+  public void addDrive(String name,
+                       String workspace,
+                       String permissions,
+                       String homePath,
+                       String views,
+                       String icon,
+                       boolean viewReferences,
+                       boolean viewNonDocument,
+                       boolean viewSideBar,
+                       boolean showHiddenNode,
+                       String allowCreateFolder,
+                       String allowNodeTypesOnTree) throws Exception;
   /**
    * Return an DriveData Object
    * @param driveName  the string contain the drive name

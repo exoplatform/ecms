@@ -45,7 +45,8 @@ import org.exoplatform.webui.ext.filter.UIExtensionFilters;
  )
 public class ViewReferencesActionComponent extends UIComponent {
 
-  private static final List<UIExtensionFilter> FILTERS = Arrays.asList(new UIExtensionFilter[]{new IsReferenceableNodeFilter(), new IsNotRootNodeFilter()});
+  private static final List<UIExtensionFilter> FILTERS = Arrays.asList(new UIExtensionFilter[] {
+      new IsReferenceableNodeFilter(), new IsNotRootNodeFilter() });
 
   @UIExtensionFilters
   public List<UIExtensionFilter> getFilters() {

@@ -327,10 +327,12 @@ public class UIWorkflowPublicationActionForm extends UIForm implements UISelecta
         backupWorkspace = workflowForm.getUIStringInput(workflowForm.FIELD_BACKUP_WORKSPACE).getValue();
         if (validator == null || validator.trim().equals("") || destPath == null
             || destPath.trim().equals("") || backupPath == null || backupPath.trim().equals("")) {
-          WorkflowPublicationPlugin plugin = (WorkflowPublicationPlugin) publicationService.getPublicationPlugins()
-                                                                                           .get(WorkflowPublicationPlugin.WORKFLOW);
+          WorkflowPublicationPlugin plugin = (WorkflowPublicationPlugin) publicationService.
+              getPublicationPlugins().get(WorkflowPublicationPlugin.WORKFLOW);
           Locale locale = Util.getUIPortal().getAncestorOfType(UIPortalApplication.class).getLocale();
-          String msg = plugin.getLocalizedAndSubstituteMessage(locale, "UIWorkflowPublicationActionForm.msg.fillfield", null);
+          String msg = plugin.getLocalizedAndSubstituteMessage(locale,
+                                                               "UIWorkflowPublicationActionForm.msg.fillfield",
+                                                               null);
           UIApplication uiApp = workflowForm.getAncestorOfType(UIApplication.class);
           uiApp.addMessage(new ApplicationMessage(msg, null, ApplicationMessage.WARNING));
           event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());

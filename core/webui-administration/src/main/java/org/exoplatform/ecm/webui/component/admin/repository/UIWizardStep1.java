@@ -54,7 +54,9 @@ public class UIWizardStep1 extends UIFormInputSetWithAction {
     addChild(new UIFormSelectBox(FIELD_NODETYPE, FIELD_NODETYPE, getNodeType()));
     UIFormCheckBoxInput<Boolean> checkbox = new UIFormCheckBoxInput<Boolean>(FIELD_ISDEFAULT, FIELD_ISDEFAULT, null);
     addChild(checkbox);
-    UIFormCheckBoxInput<Boolean> checkboxDMSSystem = new UIFormCheckBoxInput<Boolean>(FIELD_ISDMS_SYSTEM_WS, FIELD_ISDMS_SYSTEM_WS, null);
+    UIFormCheckBoxInput<Boolean> checkboxDMSSystem = new UIFormCheckBoxInput<Boolean>(FIELD_ISDMS_SYSTEM_WS,
+                                                                                      FIELD_ISDMS_SYSTEM_WS,
+                                                                                      null);
     addChild(checkboxDMSSystem);
     addUIFormInput(new UIFormInputInfo(FIELD_PERMISSION, FIELD_PERMISSION, null));
     String[] actionInfor = {"EditPermission", "RemovePermission"};

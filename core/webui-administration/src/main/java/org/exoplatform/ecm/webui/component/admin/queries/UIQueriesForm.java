@@ -96,7 +96,8 @@ public class UIQueriesForm extends UIForm implements UISelectable {
     addUIFormInput(uiStatement) ;
     addUIFormInput(new UIFormCheckBoxInput<Boolean>(CACHE_RESULT, CACHE_RESULT, null)) ;
     UIFormInputSetWithAction uiInputAct = new UIFormInputSetWithAction("PermissionButton") ;
-    uiInputAct.addUIFormInput( new UIFormStringInput(PERMISSIONS, PERMISSIONS, null).setEditable(false).addValidator(MandatoryValidator.class));
+    uiInputAct.addUIFormInput(new UIFormStringInput(PERMISSIONS, PERMISSIONS, null).setEditable(false)
+                                                                                   .addValidator(MandatoryValidator.class));
     uiInputAct.setActionInfo(PERMISSIONS, new String[] {"AddPermission"}) ;
     addUIComponentInput(uiInputAct) ;
   }

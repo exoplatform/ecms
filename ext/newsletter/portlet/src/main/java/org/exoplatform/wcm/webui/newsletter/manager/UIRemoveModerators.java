@@ -127,7 +127,8 @@ public class UIRemoveModerators extends UIForm {
         // if now is modifying for subscription then update for subscriptionForm
       } else {
         UISubcriptionForm componentForm = popupContainer.findFirstComponentOfType(UISubcriptionForm.class);
-        formInputSetWithAction = (UIFormInputSetWithAction) componentForm.getChildById(UISubcriptionForm.FORM_SUBSCRIPTION_REDACTOR);
+        formInputSetWithAction = (UIFormInputSetWithAction) componentForm.
+            getChildById(UISubcriptionForm.FORM_SUBSCRIPTION_REDACTOR);
         inputId = UISubcriptionForm.SELECT_REDACTOR;
       }
       UIFormStringInput formStringInput = (UIFormStringInput)formInputSetWithAction.getChildById(inputId);

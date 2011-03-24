@@ -46,13 +46,17 @@ public class IllegalDMSCharValidator implements Validator {
     String s = (String)uiInput.getValue();
     if(s == null || s.trim().length() == 0) {
       Object[] args = { uiInput.getLabel() };
-      throw new MessageException(new ApplicationMessage("ECMNameValidator.msg.empty-input", args, ApplicationMessage.WARNING)) ;
+      throw new MessageException(new ApplicationMessage("ECMNameValidator.msg.empty-input",
+                                                        args,
+                                                        ApplicationMessage.WARNING));
     }
     for(int i = 0; i < s.length(); i ++){
       char c = s.charAt(i);
       if(c=='[' || c==']' || c=='/' || c=='"') {
         Object[] args = { label };
-        throw new MessageException(new ApplicationMessage("ECMNameValidator.msg.Invalid-char", args, ApplicationMessage.WARNING)) ;
+        throw new MessageException(new ApplicationMessage("ECMNameValidator.msg.Invalid-char",
+                                                          args,
+                                                          ApplicationMessage.WARNING));
       }
     }
   }

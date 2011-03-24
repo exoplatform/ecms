@@ -23,18 +23,18 @@ import org.exoplatform.services.wcm.extensions.security.SHAMessageDigester;
 @Path("/copyfile/")
 public class CopyContentFile implements ResourceContainer {
 
-  private static final Log log         = ExoLogger.getLogger(CopyContentFile.class);
+  private static final Log    log                           = ExoLogger.getLogger(CopyContentFile.class);
 
-  private static final String OK_RESPONSE = "OK".intern();
+  private static final String OK_RESPONSE                   = "OK".intern();
 
-  private static final String KO_RESPONSE = "KO".intern();
+  private static final String KO_RESPONSE                   = "KO".intern();
 
   private static String       stagingStorage;
 
   private static String       targetKey;
 
   /** The Constant LAST_MODIFIED_PROPERTY. */
-  private static final String LAST_MODIFIED_PROPERTY = "Last-Modified";
+  private static final String LAST_MODIFIED_PROPERTY        = "Last-Modified";
 
   /** The Constant IF_MODIFIED_SINCE_DATE_FORMAT. */
   private static final String IF_MODIFIED_SINCE_DATE_FORMAT = "EEE, dd MMM yyyy HH:mm:ss z";
@@ -84,15 +84,18 @@ public class CopyContentFile implements ResourceContainer {
       }
     } catch (Exception ex) {
       log.error("error when copying content file" + ex.getMessage());
-      return Response.ok(KO_RESPONSE + "..." + ex.getMessage(), "text/plain").header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
+      return Response.ok(KO_RESPONSE + "..." + ex.getMessage(), "text/plain")
+                     .header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date()))
+                     .build();
     }
     if (log.isDebugEnabled()) {
       log.debug("Start Execute CopyContentFile Web Service");
     }
     return Response.ok(OK_RESPONSE
-                                   + "...content has been successfully copied in the production server",
-                               "text/plain")
-                           .header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
+                           + "...content has been successfully copied in the production server",
+                       "text/plain")
+                   .header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date()))
+                   .build();
 
   }
 

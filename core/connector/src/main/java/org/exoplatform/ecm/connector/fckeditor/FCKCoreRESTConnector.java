@@ -124,7 +124,10 @@ public class FCKCoreRESTConnector implements ResourceContainer {
     session.logout();
 
     DateFormat dateFormat = new SimpleDateFormat(FCKUtils.IF_MODIFIED_SINCE_DATE_FORMAT);
-    return Response.ok(document, new MediaType("text", "xml")).cacheControl(cacheControl).header(FCKUtils.LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
+    return Response.ok(document, new MediaType("text", "xml"))
+                   .cacheControl(cacheControl)
+                   .header(FCKUtils.LAST_MODIFIED_PROPERTY, dateFormat.format(new Date()))
+                   .build();
   }
 
   /**

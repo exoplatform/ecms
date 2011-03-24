@@ -42,7 +42,7 @@ public interface MetadataService {
    * @param repository    repository name
    * @return              ArrayList of NodeType
    */
-  public List<NodeType> getAllMetadatasNodeType(String repository) throws Exception ;
+  public List<NodeType> getAllMetadatasNodeType(String repository) throws Exception;
 
   /**
    * Add new nodetype and set property  EXO_ROLES_PROP, EXO_TEMPLATE_FILE_PROP
@@ -58,7 +58,12 @@ public interface MetadataService {
    * @return path to node if node exist, otherwise return null
    * @throws Exception
    */
-  public String addMetadata(String nodetype, boolean isDialog, String role, String content, boolean isAddNew, String repository) throws Exception;
+  public String addMetadata(String nodetype,
+                            boolean isDialog,
+                            String role,
+                            String content,
+                            boolean isAddNew,
+                            String repository) throws Exception;
 
   /**
    * Remove node named nodetype below baseMetadataPath_
@@ -73,7 +78,7 @@ public interface MetadataService {
    * @param repository      repository name
    * @return                ArrayList of metadata type
    */
-  public List<String> getExternalMetadataType(String repository) throws Exception ;
+  public List<String> getExternalMetadataType(String repository) throws Exception;
 
   /**
    * Get content of dialog template node or view template in repository
@@ -129,5 +134,5 @@ public interface MetadataService {
    * @throws Exception
    */
   @Deprecated
-  public void init(String repository) throws Exception ;
+  public void init(String repository) throws Exception;
 }

@@ -49,7 +49,10 @@ public class UpdateNavigationEventListener extends Listener<DataStorageImpl, Pag
       if (ConversationState.getCurrent() == null)
         publicationService.updateLifecycleOnChangeNavigation(event.getData(), null);
       else
-        publicationService.updateLifecycleOnChangeNavigation(event.getData(), ConversationState.getCurrent().getIdentity().getUserId());
+        publicationService.updateLifecycleOnChangeNavigation(event.getData(),
+                                                             ConversationState.getCurrent()
+                                                                              .getIdentity()
+                                                                              .getUserId());
     } catch (Exception e) {
       log.error("Exception when update publication lifecyle", e);
     }

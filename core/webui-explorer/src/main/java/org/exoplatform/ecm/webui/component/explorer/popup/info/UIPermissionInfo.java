@@ -59,13 +59,10 @@ import org.exoplatform.webui.event.EventListener;
  * Oct 13, 20006
  */
 
-@ComponentConfig(
-    lifecycle = UIContainerLifecycle.class,
-    events = {
-      @EventConfig (listeners = UIPermissionInfo.DeleteActionListener.class, confirm = "UIPermissionInfo.msg.confirm-delete-permission"),
-      @EventConfig (listeners = UIPermissionInfo.EditActionListener.class)
-    }
-)
+@ComponentConfig(lifecycle = UIContainerLifecycle.class, events = {
+    @EventConfig(listeners = UIPermissionInfo.DeleteActionListener.class,
+                 confirm = "UIPermissionInfo.msg.confirm-delete-permission"),
+    @EventConfig(listeners = UIPermissionInfo.EditActionListener.class) })
 
 public class UIPermissionInfo extends UIContainer {
 

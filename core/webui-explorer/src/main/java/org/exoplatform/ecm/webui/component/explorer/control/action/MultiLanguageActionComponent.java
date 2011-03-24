@@ -56,14 +56,20 @@ import org.exoplatform.webui.ext.filter.UIExtensionFilters;
  )
 public class MultiLanguageActionComponent extends UIComponent {
 
-  private static final List<UIExtensionFilter> FILTERS = Arrays.asList(new UIExtensionFilter[]{new CanSetPropertyFilter("UIActionBar.msg.access-denied"), new CanAddNodeFilter(), new IsNotLockedFilter(), new IsCheckedOutFilter("UIActionBar.msg.multilang-checkedin"), new IsDocumentFilter("UIActionBar.msg.unsupported-multilanguage"), new IsNotEditingDocumentFilter()});
+  private static final List<UIExtensionFilter> FILTERS = Arrays.asList(new UIExtensionFilter[] {
+      new CanSetPropertyFilter("UIActionBar.msg.access-denied"), new CanAddNodeFilter(),
+      new IsNotLockedFilter(), new IsCheckedOutFilter("UIActionBar.msg.multilang-checkedin"),
+      new IsDocumentFilter("UIActionBar.msg.unsupported-multilanguage"),
+      new IsNotEditingDocumentFilter()                });
 
   @UIExtensionFilters
   public List<UIExtensionFilter> getFilters() {
     return FILTERS;
   }
 
-  public static class MultiLanguageActionListener extends UIActionBarActionListener<MultiLanguageActionComponent> {
+  public static class MultiLanguageActionListener
+                                                 extends
+                                                 UIActionBarActionListener<MultiLanguageActionComponent> {
     public void processEvent(Event<MultiLanguageActionComponent> event) throws Exception {
       UIActionBar uiActionBar = event.getSource().getAncestorOfType(UIActionBar.class);
       UIJCRExplorer uiExplorer = uiActionBar.getAncestorOfType(UIJCRExplorer.class);

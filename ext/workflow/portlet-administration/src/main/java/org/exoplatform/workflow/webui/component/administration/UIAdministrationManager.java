@@ -43,7 +43,8 @@ import org.exoplatform.webui.event.EventListener;
       template = "app:/groovy/webui/component/UITabPaneWithAction.gtmpl",
       events = {
           @EventConfig(listeners = UIAdministrationManager.ViewActionListener.class),
-          @EventConfig(listeners = UIAdministrationManager.DeleteActionListener.class, confirm = "UIAdministrationManager.msg.confirm-delete-process"),
+          @EventConfig(listeners = UIAdministrationManager.DeleteActionListener.class,
+                       confirm = "UIAdministrationManager.msg.confirm-delete-process"),
           @EventConfig(listeners = UIAdministrationManager.UploadProcessActionListener.class)
       }
   )}

@@ -55,7 +55,8 @@ public class UIUnLockForm extends UIForm implements UISelectable {
 
   public UIUnLockForm() throws Exception {
     UIFormInputSetWithAction uiInputAct = new UIFormInputSetWithAction("PermissionButton");
-    uiInputAct.addUIFormInput( new UIFormStringInput(GROUPS_OR_USERS, GROUPS_OR_USERS, null).setEditable(false).addValidator(MandatoryValidator.class));
+    uiInputAct.addUIFormInput( new UIFormStringInput(GROUPS_OR_USERS, GROUPS_OR_USERS, null).
+                               setEditable(false).addValidator(MandatoryValidator.class));
     uiInputAct.setActionInfo(GROUPS_OR_USERS, new String[] {"AddPermission"});
     addUIComponentInput(uiInputAct);
   }

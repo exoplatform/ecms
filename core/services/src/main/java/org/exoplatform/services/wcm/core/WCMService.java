@@ -44,7 +44,10 @@ public interface WCMService {
    *
    * @see javax.jcr.Node
    */
-  public Node getReferencedContent(SessionProvider sessionProvider, String repository, String workspace, String nodeIdentifier) throws Exception ;
+  public Node getReferencedContent(SessionProvider sessionProvider,
+                                   String repository,
+                                   String workspace,
+                                   String nodeIdentifier) throws Exception;
 
   /**
    * This method checks if the given portal is the default shared portal.

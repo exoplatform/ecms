@@ -67,7 +67,8 @@ public class SCVPortletPreferenceMigrationService implements Startable {
 
         Session session = sessionProvider.getSession("portal-system", repository);
         QueryManager manager = session.getWorkspace().getQueryManager();
-        String statement = "SELECT * from mop:workspaceclone WHERE mop:contentid='presentation/SingleContentViewer' and fn:name() = 'mop:customization'";
+        String statement = "SELECT * from mop:workspaceclone "
+            + "WHERE mop:contentid='presentation/SingleContentViewer' and fn:name() = 'mop:customization'";
         Query query = manager.createQuery(statement.toString(), Query.SQL);
         NodeIterator nodes = query.execute().getNodes();
 

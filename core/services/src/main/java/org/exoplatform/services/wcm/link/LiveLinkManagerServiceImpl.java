@@ -200,9 +200,10 @@ public class LiveLinkManagerServiceImpl implements LiveLinkManagerService {
     Query query = queryManager.createQuery(queryCommand, Query.SQL);
     QueryResult results = query.execute();
     NodeIterator iter = results.getNodes();
-    for (;iter.hasNext();) {
+    for (; iter.hasNext();) {
       Node webContent = iter.nextNode();
-      if (!webContent.isCheckedOut() || webContent.isLocked() || (webContent.isCheckedOut() && !webContent.getParent().isCheckedOut())) {
+      if (!webContent.isCheckedOut() || webContent.isLocked()
+          || (webContent.isCheckedOut() && !webContent.getParent().isCheckedOut())) {
         continue;
       }
       Property links = webContent.getProperty("exo:links");

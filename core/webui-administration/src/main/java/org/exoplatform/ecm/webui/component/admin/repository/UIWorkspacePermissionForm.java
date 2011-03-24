@@ -51,7 +51,8 @@ public class UIWorkspacePermissionForm extends UIForm implements UISelectable {
   final static public String FIELD_PERMISSION = "permission" ;
 
   public UIWorkspacePermissionForm() throws Exception {
-    addUIFormInput(new UIFormStringInput(FIELD_PERMISSION, FIELD_PERMISSION, null).addValidator(MandatoryValidator.class).setEditable(false)) ;
+    addUIFormInput(new UIFormStringInput(FIELD_PERMISSION, FIELD_PERMISSION, null).addValidator(MandatoryValidator.class)
+                                                                                  .setEditable(false));
     for (String perm : PermissionType.ALL) {
       addUIFormInput(new UIFormCheckBoxInput<String>(perm, perm, null)) ;
     }

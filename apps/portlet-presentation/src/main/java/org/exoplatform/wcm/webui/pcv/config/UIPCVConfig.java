@@ -115,7 +115,8 @@ public class UIPCVConfig extends UIForm {
       String workspace = manageableRepository.getConfiguration().getDefaultWorkspaceName();
 
       String showTitle = uiPCVConfigForm.getUIFormCheckBoxInput(UIPCVConfig.SHOW_TITLE).isChecked() ? "true" : "false";
-      String showDateCreated = uiPCVConfigForm.getUIFormCheckBoxInput(UIPCVConfig.SHOW_DATE_CREATED).isChecked() ? "true" : "false";
+      String showDateCreated = uiPCVConfigForm.getUIFormCheckBoxInput(UIPCVConfig.SHOW_DATE_CREATED)
+                                              .isChecked() ? "true" : "false";
       String showBar = uiPCVConfigForm.getUIFormCheckBoxInput(UIPCVConfig.SHOW_BAR).isChecked() ? "true" : "false";
 
       portletPreferences.setValue(UIPCVPortlet.PREFERENCE_REPOSITORY, repository);

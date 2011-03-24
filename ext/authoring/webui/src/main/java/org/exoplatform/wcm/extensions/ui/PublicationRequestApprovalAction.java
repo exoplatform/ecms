@@ -47,9 +47,9 @@ import org.exoplatform.webui.ext.filter.UIExtensionFilters;
     @EventConfig(listeners = PublicationRequestApprovalAction.PublicationRequestApprovalActionListener.class) })
 public class PublicationRequestApprovalAction extends UIComponent {
 
-  private static final List<UIExtensionFilter> FILTERS = Arrays.asList(
-      new UIExtensionFilter[] {
-          new CanAddNodeFilter(), new IsNotLockedFilter(), new IsCheckedOutFilter(), new CanValidateFilter()});
+  private static final List<UIExtensionFilter> FILTERS = Arrays.asList(new UIExtensionFilter[] {
+      new CanAddNodeFilter(), new IsNotLockedFilter(), new IsCheckedOutFilter(),
+      new CanValidateFilter()                         });
 
   @UIExtensionFilters
   public List<UIExtensionFilter> getFilters() {
@@ -63,12 +63,12 @@ public class PublicationRequestApprovalAction extends UIComponent {
     @Override
     protected void processEvent(Event<PublicationRequestApprovalAction> event) throws Exception {
       UIJCRExplorer uiExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class);
-      PublicationService publicationService = (PublicationService) PortalContainer.getInstance()
-                                                                                  .getComponentInstanceOfType(PublicationService.class);
+      PublicationService publicationService = (PublicationService) PortalContainer.getInstance().
+          getComponentInstanceOfType(PublicationService.class);
       Node node = uiExplorer.getCurrentNode();
-        HashMap<String,String> context = new HashMap<String,String>();
+      HashMap<String, String> context = new HashMap<String, String>();
 
-        publicationService.changeState(node, "pending", context);
+      publicationService.changeState(node, "pending", context);
 
       UIPopupContainer UIPopupContainer = uiExplorer.getChild(UIPopupContainer.class);
       event.getRequestContext().addUIComponentToUpdateByAjax(UIPopupContainer);

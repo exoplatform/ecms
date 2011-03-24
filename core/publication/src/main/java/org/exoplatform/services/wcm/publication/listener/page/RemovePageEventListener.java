@@ -43,12 +43,16 @@ public class RemovePageEventListener extends Listener<DataStorageImpl, Page>{
    */
   public void onEvent(Event<DataStorageImpl, Page> event) throws Exception {
     ExoContainer container = ExoContainerContext.getCurrentContainer();
-    WCMPublicationService publicationService = (WCMPublicationService)container.getComponentInstanceOfType(WCMPublicationService.class);
+    WCMPublicationService publicationService = (WCMPublicationService) container.
+        getComponentInstanceOfType(WCMPublicationService.class);
     try {
       if (ConversationState.getCurrent() == null)
         publicationService.updateLifecycleOnRemovePage(event.getData(), null);
       else
-        publicationService.updateLifecycleOnRemovePage(event.getData(), ConversationState.getCurrent().getIdentity().getUserId());
+        publicationService.updateLifecycleOnRemovePage(event.getData(),
+                                                       ConversationState.getCurrent()
+                                                                        .getIdentity()
+                                                                        .getUserId());
     } catch (Exception e) {
       log.error("Exception when update publication lifecyle", e);
     }

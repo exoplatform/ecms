@@ -34,7 +34,9 @@ public class CronExpressionValidator implements Validator{
     try{
       new CronTrigger().setCronExpression((String)uiInput.getValue()) ;
     }catch (Exception e) {
-      throw new MessageException(new ApplicationMessage("CronExpressionValidator.invalid-input",null, ApplicationMessage.WARNING)) ;
+      throw new MessageException(new ApplicationMessage("CronExpressionValidator.invalid-input",
+                                                        null,
+                                                        ApplicationMessage.WARNING));
     }
   }
 

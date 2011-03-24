@@ -55,7 +55,9 @@ public class UIWizardStep2 extends UIFormInputSetWithAction {
     addChild(new UIFormCheckBoxInput<Boolean>(FIELD_ISMULTI, FIELD_ISMULTI, null)) ;
     addChild(new UIFormStringInput(FIELD_MAXBUFFER, FIELD_MAXBUFFER, null)) ;
     addChild(new UIFormStringInput(FIELD_SWAPPATH, FIELD_SWAPPATH, null)) ;
-    UIFormCheckBoxInput<Boolean> externalStore = new UIFormCheckBoxInput<Boolean>(FIELD_EXTERNAL_STORE,FIELD_EXTERNAL_STORE, null) ;
+    UIFormCheckBoxInput<Boolean> externalStore = new UIFormCheckBoxInput<Boolean>(FIELD_EXTERNAL_STORE,
+                                                                                  FIELD_EXTERNAL_STORE,
+                                                                                  null);
     externalStore.setOnChange("ChangeTypeStore") ;
     addChild(externalStore) ;
     addChild(new UIFormStringInput(FIELD_STORETYPE, FIELD_STORETYPE, null).setRendered(false)) ;
@@ -80,17 +82,26 @@ public class UIWizardStep2 extends UIFormInputSetWithAction {
     setFieldIsMulti(false) ;
     setFieldDBType(getDbType()) ;
   }
-  protected void fillFields(String containerType, String sourceName, String selectedDBType, boolean isMutil,
-      String storeType, String storePath, String filter, String maxBuffer, String swapPath){
-    setFieldContainer(containerType) ;
-    setFieldSourceName(sourceName) ;
-    setFieldDBType(selectedDBType) ;
-    setFieldIsMulti(isMutil) ;
-    setFieldStoreType(storeType) ;
-    setFieldStorePath(storePath) ;
+
+  protected void fillFields(String containerType,
+                            String sourceName,
+                            String selectedDBType,
+                            boolean isMutil,
+                            String storeType,
+                            String storePath,
+                            String filter,
+                            String maxBuffer,
+                            String swapPath) {
+
+    setFieldContainer(containerType);
+    setFieldSourceName(sourceName);
+    setFieldDBType(selectedDBType);
+    setFieldIsMulti(isMutil);
+    setFieldStoreType(storeType);
+    setFieldStorePath(storePath);
     setFieldFilter(filter);
-    setFieldMaxBuffer(maxBuffer) ;
-    setFieldSwapPath(swapPath) ;
+    setFieldMaxBuffer(maxBuffer);
+    setFieldSwapPath(swapPath);
   }
   protected void setFieldContainer(String container) {
     getUIStringInput(FIELD_CONTAINER).setValue(container) ;

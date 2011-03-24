@@ -43,11 +43,9 @@ import org.exoplatform.webui.core.UIApplication;
  * Sep 17, 2009
  */
 
-@ComponentConfig(
-    events = {
-      @EventConfig(listeners = RemoveCommentComponent.RemoveCommentActionListener.class, confirm = "RemoveCommentComponent.msg.confirm-deletecomment")
-    }
-)
+@ComponentConfig(events = {
+    @EventConfig(listeners = RemoveCommentComponent.RemoveCommentActionListener.class,
+                 confirm = "RemoveCommentComponent.msg.confirm-deletecomment") })
 public class RemoveCommentComponent extends AbstractActionComponent {
 
   private static final Log LOG = ExoLogger.getLogger(RemoveCommentComponent.class);
@@ -55,7 +53,9 @@ public class RemoveCommentComponent extends AbstractActionComponent {
   /**
    * Overide method UIComponent.loadConfirmMesssage() to get resource bundle in jar file
    */
-  protected String loadConfirmMesssage(org.exoplatform.webui.config.Event event, WebuiRequestContext context, String beanId) {
+  protected String loadConfirmMesssage(org.exoplatform.webui.config.Event event,
+                                       WebuiRequestContext context,
+                                       String beanId) {
     String confirmKey  = event.getConfirm();
     if(confirmKey.length() < 1) return confirmKey;
     try {

@@ -62,7 +62,9 @@ public class AuthoringPublicationPlugin extends StageAndVersionPublicationPlugin
    * (javax.jcr.Node, java.lang.String, java.util.HashMap)
    */
 
-  public void changeState(Node node, String newState, HashMap<String, String> context) throws IncorrectStateUpdateLifecycleException,
+  public void changeState(Node node, 
+                          String newState, 
+                          HashMap<String, String> context) throws IncorrectStateUpdateLifecycleException,
                                                                                       Exception {
     String versionName = context.get(StageAndVersionPublicationConstant.CURRENT_REVISION_NAME);
     String logItemName = versionName;

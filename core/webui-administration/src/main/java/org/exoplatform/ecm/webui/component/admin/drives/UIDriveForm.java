@@ -228,8 +228,8 @@ public class UIDriveForm extends UIFormTabPane implements UISelectable {
         driveInputSet.getUIFormCheckBoxInput(UIDriveInputSet.SHOW_HIDDEN_NODE).isChecked();
       boolean viewNonDocument =
         driveInputSet.getUIFormCheckBoxInput(UIDriveInputSet.FIELD_VIEWNONDOC).isChecked();
-      //String allowCreateFolder =  driveInputSet.<UIFormRadioBoxInput>getUIInput(UIDriveInputSet.ALLOW_CREATE_FOLDER).getValue();
-      String[] allowCreateFolders = driveInputSet.getUIFormSelectBox(UIDriveInputSet.FIELD_ALLOW_CREATE_FOLDERS).getSelectedValues();
+      String[] allowCreateFolders = driveInputSet.getUIFormSelectBox(UIDriveInputSet.FIELD_ALLOW_CREATE_FOLDERS)
+                                                 .getSelectedValues();
       if (allowCreateFolders == null || allowCreateFolders.length == 0 ) {
         uiApp.addMessage(new ApplicationMessage("UIDriveForm.msg.allowedCreateFolder", null,
             ApplicationMessage.WARNING));

@@ -194,7 +194,11 @@ public class UIConfigTabPane extends UIContainer {
   }
 
   @SuppressWarnings("unchecked")
-  public void initPopupDocumentSelect(UIForm uiForm, String repo, String workSpace, String path, boolean isAllowPublish) throws Exception {
+  public void initPopupDocumentSelect(UIForm uiForm,
+                                      String repo,
+                                      String workSpace,
+                                      String path,
+                                      boolean isAllowPublish) throws Exception {
     removeChildById(PATH_SELECTOR);
     removeChildById(DOCUMENT_SELECTOR);
     UIPopupWindow uiPopup = addChild(UIPopupWindow.class, null, DOCUMENT_SELECTOR);

@@ -128,8 +128,10 @@ public class UIPermissionSelector extends UIGroupMembershipSelector implements C
 
   public boolean isUsePopup() { return isUsePopup; }
 
-  /* (non-Javadoc)
-   * @see org.exoplatform.ecm.webui.selector.ComponentSelector#setComponent(org.exoplatform.webui.core.UIComponent, java.lang.String[])
+  /*
+   * (non-Javadoc)
+   * @seeorg.exoplatform.ecm.webui.selector.ComponentSelector#setComponent(org.
+   * exoplatform.webui.core.UIComponent, java.lang.String[])
    */
   public void setSourceComponent(UIComponent uicomponent, String[] initParams) {
     uiComponent = uicomponent;

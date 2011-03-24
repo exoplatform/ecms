@@ -125,13 +125,13 @@ public class Jcr2XcmisChangesListener implements ItemsPersistenceListener
       return false;
    }
 
-   /**
-    * @see org.exoplatform.services.jcr.dataflow.persistent.ItemsPersistenceListener#onSaveItems(org.exoplatform.services.jcr.dataflow.ItemStateChangesLog)
-    */
-   public void onSaveItems(ItemStateChangesLog itemStates)
-   {
-      applyChangesLog(itemStates);
-   }
+  /**
+   * @see org.exoplatform.services.jcr.dataflow.persistent.ItemsPersistenceListener#onSaveItems(
+   *     org.exoplatform.services.jcr.dataflow.ItemStateChangesLog)
+   */
+  public void onSaveItems(ItemStateChangesLog itemStates) {
+    applyChangesLog(itemStates);
+  }
 
    private void applyChangesLog(ItemStateChangesLog itemStates)
    {

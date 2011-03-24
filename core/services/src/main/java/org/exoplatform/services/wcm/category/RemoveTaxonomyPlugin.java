@@ -65,8 +65,12 @@ public class RemoveTaxonomyPlugin extends RemovePortalPlugin {
     this.actionServiceContainer = actionServiceContainer;
   }
 
-  /* (non-Javadoc)
-   * @see org.exoplatform.services.wcm.portal.artifacts.BasePortalArtifactsPlugin#deployToPortal(java.lang.String, org.exoplatform.services.jcr.ext.common.SessionProvider)
+  /*
+   * (non-Javadoc)
+   * @see
+   * org.exoplatform.services.wcm.portal.artifacts.BasePortalArtifactsPlugin
+   * #deployToPortal(java.lang.String,
+   * org.exoplatform.services.jcr.ext.common.SessionProvider)
    */
   public void invalidateFromPortal(SessionProvider sessionProvider, String portalName) throws Exception {
     String repository = repositoryService.getCurrentRepository().getConfiguration().getName();

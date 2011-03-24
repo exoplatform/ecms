@@ -307,7 +307,8 @@ public class UIFormGeneratorTabPane extends UIFormTabPane {
     dialogTemplate.append("          <td class=\"FieldLabel\"><%=_ctx.appRes(\"" + templateName + ".label.Date\")%></td>\n");
     dialogTemplate.append("          <td class=\"FieldComponent\">\n");
     dialogTemplate.append("            $timestampName \n               <div style=\"display:none;\"><%\n");
-    dialogTemplate.append("              String[] fieldName = [\"jcrPath=/node\", \"mixintype=mix:i18n\", \"editable=if-null\", \"validate=empty,name\", timestampName] ;\n");
+    dialogTemplate.append("              String[] fieldName = [\"jcrPath=/node\", \"mixintype=mix:i18n\", ");
+    dialogTemplate.append("\"editable=if-null\", \"validate=empty,name\", timestampName] ;\n");
     dialogTemplate.append("              uicomponent.addTextField(\"name\", fieldName) ;\n");
     dialogTemplate.append("            %></div>\n");
     dialogTemplate.append("          </td>\n");
@@ -361,7 +362,8 @@ public class UIFormGeneratorTabPane extends UIFormTabPane {
       } else {
         dialogTemplate.append("      <tr>\n");
 
-        dialogTemplate.append("        <td class=\"FieldLabel\"><%=_ctx.appRes(\"" + templateName + ".label." + inputName + "\")%></td>\n");
+        dialogTemplate.append("        <td class=\"FieldLabel\"><%=_ctx.appRes(\""
+                              + templateName + ".label." + inputName + "\")%></td>\n");
         dialogTemplate.append("        <td class=\"FieldComponent\">\n");
         dialogTemplate.append("          <%\n");
 
@@ -370,11 +372,14 @@ public class UIFormGeneratorTabPane extends UIFormTabPane {
           String realDataNodeName = "jcr:content"  + (inputFieldName);
 
           StringBuilder hiddenFields = new StringBuilder();
-          hiddenFields.append("hiddenField1 = [\"jcrPath=/node" + extraFormUploadInput + "/" + realDataNodeName + "\", \"nodetype=nt:resource\", \"visible=false\"];\n");
+          hiddenFields.append("hiddenField1 = [\"jcrPath=/node" + extraFormUploadInput + "/"
+                              + realDataNodeName + "\", \"nodetype=nt:resource\", \"visible=false\"];\n");
           hiddenFields.append("uicomponent.addHiddenField(\"" + inputFieldName + "_hiddenInput1\", hiddenField1);\n");
-          hiddenFields.append("hiddenField2 = [\"jcrPath=/node" + extraFormUploadInput + "/" + realDataNodeName + "/jcr:encoding\", \"visible=false\", \"UTF-8\"];\n");
+          hiddenFields.append("hiddenField2 = [\"jcrPath=/node" + extraFormUploadInput + "/"
+                              + realDataNodeName + "/jcr:encoding\", \"visible=false\", \"UTF-8\"];\n");
           hiddenFields.append("uicomponent.addHiddenField(\"" + inputFieldName + "_hiddenInput2\", hiddenField2);\n");
-          hiddenFields.append("hiddenField3 = [\"jcrPath=/node" + extraFormUploadInput + "/" + realDataNodeName + "/jcr:lastModified\", \"visible=false\"];\n");
+          hiddenFields.append("hiddenField3 = [\"jcrPath=/node" + extraFormUploadInput + "/"
+                              + realDataNodeName + "/jcr:lastModified\", \"visible=false\"];\n");
           hiddenFields.append("uicomponent.addCalendarField(\"" + inputFieldName + "_hiddenInput3\", hiddenField3);\n");
           String hiddenFieldsStr = hiddenFields.toString();
 
@@ -383,42 +388,58 @@ public class UIFormGeneratorTabPane extends UIFormTabPane {
           dialogTemplate.append("             if (curNode.hasNode(\"" + realDataNodeName + "\")) {\n");
           dialogTemplate.append("               def imageNode = curNode.getNode(\"" + realDataNodeName + "\");\n");
           dialogTemplate.append("               if(imageNode.getProperty(\"jcr:data\").getStream().available() > 0) {\n");
-          dialogTemplate.append("                 DownloadService dservice = uicomponent.getApplicationComponent(DownloadService.class);\n");
+          dialogTemplate.append("                 DownloadService dservice = ");
+          dialogTemplate.append("uicomponent.getApplicationComponent(DownloadService.class);\n");
           dialogTemplate.append("                 InputStream input = imageNode.getProperty(\"jcr:data\").getStream();\n");
-          dialogTemplate.append("                 InputStreamDownloadResource dresource = new InputStreamDownloadResource(input, \"" + inputFieldName + "\");\n");
+          dialogTemplate.append("                 InputStreamDownloadResource dresource = ");
+          dialogTemplate.append("new InputStreamDownloadResource(input, \"" + inputFieldName + "\");\n");
           dialogTemplate.append("                 dresource.setDownloadName(curNode.getName());\n");
-          dialogTemplate.append("                 def imgSrc = dservice.getDownloadLink(dservice.addDownloadResource(dresource));\n");
-          dialogTemplate.append("                 def actionLink = uicomponent.event(\"RemoveData\", \"/" + realDataNodeName + "\");\n");
+          dialogTemplate.append("                 def imgSrc = dservice.getDownloadLink(");
+          dialogTemplate.append("dservice.addDownloadResource(dresource));\n");
+          dialogTemplate.append("                 def actionLink = uicomponent.event(\"RemoveData\", \"/"
+                                + realDataNodeName + "\");\n");
           dialogTemplate.append("                 %>\n");
           dialogTemplate.append("                   <div>\n");
           dialogTemplate.append("                     <image src=\"$imgSrc\" width=\"100px\" height=\"80px\"/>\n");
           dialogTemplate.append("                     <a href=\"$actionLink\">\n");
-          dialogTemplate.append("                       <img src=\"/eXoResources/skin/DefaultSkin/background/Blank.gif\" alt=\"\" class=\"ActionIcon Remove16x16Icon\"/>\n");
+          dialogTemplate.append("                       <img src=\"/eXoResources/skin/DefaultSkin/background/Blank.gif\" ");
+          dialogTemplate.append("alt=\"\" class=\"ActionIcon Remove16x16Icon\"/>\n");
           dialogTemplate.append("                     </a>\n");
           dialogTemplate.append("                   </div>\n");
           dialogTemplate.append("                 <%\n");
           dialogTemplate.append("               } else {\n");
-          dialogTemplate.append("                 fieldImage = [\"jcrPath=/node" + extraFormUploadInput  + "/" + realDataNodeName  + "/jcr:data\"] ;\n");
-          dialogTemplate.append("                 uicomponent.addUploadField(\"" + "/node/"  + inputFieldName + "\", fieldImage) ;\n");
+          dialogTemplate.append("                 fieldImage = [\"jcrPath=/node" + extraFormUploadInput
+                                + "/" + realDataNodeName  + "/jcr:data\"] ;\n");
+          dialogTemplate.append("                 uicomponent.addUploadField(\"" + "/node/"
+                                + inputFieldName + "\", fieldImage) ;\n");
           dialogTemplate.append(hiddenFieldsStr);
           dialogTemplate.append("               }\n");
           dialogTemplate.append("             } else {\n");
-          dialogTemplate.append("               fieldImage = [\"jcrPath=/node" + extraFormUploadInput  + "/" + realDataNodeName  + "/jcr:data\"] ;\n");
-          dialogTemplate.append("               uicomponent.addUploadField(\"" + "/node/"  + inputFieldName + "\", fieldImage) ;\n");
+          dialogTemplate.append("               fieldImage = [\"jcrPath=/node" + extraFormUploadInput  + "/"
+                                + realDataNodeName  + "/jcr:data\"] ;\n");
+          dialogTemplate.append("               uicomponent.addUploadField(\"" + "/node/"
+                                + inputFieldName + "\", fieldImage) ;\n");
           dialogTemplate.append(hiddenFieldsStr);
           dialogTemplate.append("             }\n");
           dialogTemplate.append("           } else if(uicomponent.dataRemoved()) {\n");
-          dialogTemplate.append("             fieldImage = [\"jcrPath=/node" + extraFormUploadInput  + "/" + realDataNodeName  + "/jcr:data\"] ;\n");
-          dialogTemplate.append("             uicomponent.addUploadField(\"" + "/node/"  + inputFieldName + "\", fieldImage) ;\n");
+          dialogTemplate.append("             fieldImage = [\"jcrPath=/node" + extraFormUploadInput  + "/"
+                                + realDataNodeName  + "/jcr:data\"] ;\n");
+          dialogTemplate.append("             uicomponent.addUploadField(\"" + "/node/"
+                                + inputFieldName + "\", fieldImage) ;\n");
           dialogTemplate.append(hiddenFieldsStr);
           dialogTemplate.append("           } else {\n");
-          dialogTemplate.append("             fieldImage = [\"jcrPath=/node" + extraFormUploadInput  + "/" + realDataNodeName  + "/jcr:data\"] ;\n");
-          dialogTemplate.append("             uicomponent.addUploadField(\"" + "/node/"  + inputFieldName + "\", fieldImage) ;\n");
+          dialogTemplate.append("             fieldImage = [\"jcrPath=/node" + extraFormUploadInput
+                                + "/" + realDataNodeName  + "/jcr:data\"] ;\n");
+          dialogTemplate.append("             uicomponent.addUploadField(\"" + "/node/"
+                                + inputFieldName + "\", fieldImage) ;\n");
           dialogTemplate.append(hiddenFieldsStr);
           dialogTemplate.append("           }\n");
         } else {
-          dialogTemplate.append("           String[] " + inputFieldName + " = [\"jcrPath=/node/" + propertyName + "\", \"defaultValues=" + value + "\", \"" + validate + "\", \"options=" + form.getAdvanced() + "\"];\n");
-          dialogTemplate.append("           uicomponent.add" + inputField + "(\"" + "/node/" + inputName + "\", " + inputFieldName + ");\n");
+          dialogTemplate.append("           String[] " + inputFieldName + " = [\"jcrPath=/node/"
+                                + propertyName + "\", \"defaultValues=" + value + "\", \"" + validate
+                                + "\", \"options=" + form.getAdvanced() + "\"];\n");
+          dialogTemplate.append("           uicomponent.add" + inputField + "(\"" + "/node/"
+                                + inputName + "\", " + inputFieldName + ");\n");
         }
         dialogTemplate.append("          %>\n");
         dialogTemplate.append("        </td>\n");
@@ -497,23 +518,26 @@ public class UIFormGeneratorTabPane extends UIFormTabPane {
       viewTemplate.append("           cleanName = cleanName.replaceAll(\"_\", \" \");\n");
       viewTemplate.append("         %>\n");
       viewTemplate.append("           <td style=\"padding:5px\"><%= cleanName %></td>\n");
-      if(UIFormGeneratorConstant.UPLOAD.equals(form.getType())) {
+      if (UIFormGeneratorConstant.UPLOAD.equals(form.getType())) {
         String inputName  = form.getName();
         String inputFieldName = cleanString(inputName) + "FieldName";
         String realDataNodeName = "jcr:content" + (inputFieldName);
         viewTemplate.append("<%\n");
         viewTemplate.append("if (currentNode.hasNode(\"" + realDataNodeName + "\")) {\n");
-            viewTemplate.append("           def imageNode = currentNode.getNode(\"" + realDataNodeName + "\");\n");
-            viewTemplate.append("           DownloadService dservice = uicomponent.getApplicationComponent(DownloadService.class);\n");
-        viewTemplate.append("           InputStream input = imageNode.getProperty(\"jcr:data\").getStream();\n");
-        viewTemplate.append("           InputStreamDownloadResource dresource = new InputStreamDownloadResource(input, \"" + form.getName() + "\");\n");
-        viewTemplate.append("           dresource.setDownloadName(currentNode.getName());\n");
-        viewTemplate.append("           def dataSrc = dservice.getDownloadLink(dservice.addDownloadResource(dresource));\n");
+        viewTemplate.append("       def imageNode = currentNode.getNode(\"" + realDataNodeName + "\");\n");
+        viewTemplate.append("       DownloadService dservice = uicomponent.getApplicationComponent(DownloadService.class);\n");
+        viewTemplate.append("       InputStream input = imageNode.getProperty(\"jcr:data\").getStream();\n");
+        viewTemplate.append("       InputStreamDownloadResource dresource = new InputStreamDownloadResource(input, \""
+                            + form.getName() + "\");\n");
+        viewTemplate.append("       dresource.setDownloadName(currentNode.getName());\n");
+        viewTemplate.append("       def dataSrc = dservice.getDownloadLink(dservice.addDownloadResource(dresource));\n");
         viewTemplate.append("}\n");
         viewTemplate.append("%>\n");
-        viewTemplate.append("           <td style=\"padding:5px\"><a href=\"$dataSrc\"><%= _ctx.appRes(\"FormGeneratorDialog.label.Download\") %></a></td>\n");
+        viewTemplate.append("           <td style=\"padding:5px\"><a href=\"$dataSrc\">");
+        viewTemplate.append("<%= _ctx.appRes(\"FormGeneratorDialog.label.Download\") %></a></td>\n");
       } else {
-        viewTemplate.append("           <td style=\"padding:5px\"><%=currentNode.getProperty(\"" + propertyName + "\").getString()%></td>\n");
+        viewTemplate.append("           <td style=\"padding:5px\"><%=currentNode.getProperty(\""
+                            + propertyName + "\").getString()%></td>\n");
       }
       viewTemplate.append("         <%\n");
       viewTemplate.append("       }\n");
@@ -544,22 +568,30 @@ public class UIFormGeneratorTabPane extends UIFormTabPane {
      */
     public void execute(Event<UIFormGeneratorTabPane> event) throws Exception {
       UIFormGeneratorTabPane formGeneratorTabPane = event.getSource();
-      UIFormInputSet formGeneratorGeneralTab = formGeneratorTabPane.getChildById(UIFormGeneratorConstant.FORM_GENERATOR_GENERAL_TAB);
-      UIFormHiddenInput hiddenInputJSonObject = formGeneratorGeneralTab.getChildById(UIFormGeneratorConstant.JSON_OBJECT_FORM_GENERATOR);
+      UIFormInputSet formGeneratorGeneralTab = formGeneratorTabPane.
+          getChildById(UIFormGeneratorConstant.FORM_GENERATOR_GENERAL_TAB);
+      UIFormHiddenInput hiddenInputJSonObject = formGeneratorGeneralTab.
+          getChildById(UIFormGeneratorConstant.JSON_OBJECT_FORM_GENERATOR);
       String jsonObjectGenerated = hiddenInputJSonObject.getValue();
 
       jsonObjectGenerated = jsonObjectGenerated.replaceAll("\n", "<br/>");
 
       JsonHandler jsonHandler = new JsonDefaultHandler();
       Charset cs = Charset.forName("utf-8");
-      new JsonParserImpl().parse(new InputStreamReader(new ByteArrayInputStream(jsonObjectGenerated.getBytes("utf-8")), cs), jsonHandler);
+      new JsonParserImpl().parse(new InputStreamReader(new ByteArrayInputStream(jsonObjectGenerated.getBytes("utf-8")),
+                                                       cs),
+                                 jsonHandler);
       JsonValue jsonValue = jsonHandler.getJsonObject();
-      List<UIFormGeneratorInputBean> forms = ((UIFormGeneratorInputBean)new BeanBuilder().createObject(UIFormGeneratorInputBean.class, jsonValue)).getInputs();
+      List<UIFormGeneratorInputBean> forms = ((UIFormGeneratorInputBean)new BeanBuilder().
+              createObject(UIFormGeneratorInputBean.class, jsonValue)).getInputs();
 
       for(int i = 0; i < forms.size(); i++) {
         for(int j = i + 1; j < forms.size(); j++){
           if(forms.get(i).getName().equals(forms.get(j).getName())) {
-            Utils.createPopupMessage(formGeneratorTabPane, "UIFormGeneratorTabPane.msg.duplicate-name", null, ApplicationMessage.INFO);
+            Utils.createPopupMessage(formGeneratorTabPane,
+                                     "UIFormGeneratorTabPane.msg.duplicate-name",
+                                     null,
+                                     ApplicationMessage.INFO);
             return;
           }
         }
@@ -580,13 +612,17 @@ public class UIFormGeneratorTabPane extends UIFormTabPane {
           } else {
             isEmptyValue = true;
           }
-          if(isEmptyValue) {
-            Utils.createPopupMessage(formGeneratorTabPane, "UIFormGeneratorTabPane.msg.select-value-empty", null, ApplicationMessage.INFO);
+          if (isEmptyValue) {
+            Utils.createPopupMessage(formGeneratorTabPane,
+                                     "UIFormGeneratorTabPane.msg.select-value-empty",
+                                     null,
+                                     ApplicationMessage.INFO);
             return;
           }
         }
       }
-      UIFormStringInput nameFormStringInput = formGeneratorTabPane.getUIStringInput(UIFormGeneratorConstant.NAME_FORM_STRING_INPUT);
+      UIFormStringInput nameFormStringInput = formGeneratorTabPane.
+          getUIStringInput(UIFormGeneratorConstant.NAME_FORM_STRING_INPUT);
       String templateName = nameFormStringInput.getValue().trim();
       String nodetypeName = formGeneratorTabPane.getNodetypeName(templateName);
 
@@ -600,16 +636,38 @@ public class UIFormGeneratorTabPane extends UIFormTabPane {
       String newViewTemplate = formGeneratorTabPane.generateViewTemplate(templateName, forms);
 
       TemplateService templateService = Utils.getService(TemplateService.class);
-      templateService.addTemplate(TemplateService.DIALOGS, nodetypeName, templateName, true, cleanString(templateName), new String[] {"*"}, new ByteArrayInputStream(newDialogTemplate.getBytes())) ;
-      templateService.addTemplate(TemplateService.VIEWS, nodetypeName, templateName, true, cleanString(templateName), new String[] {"*"}, new ByteArrayInputStream(newViewTemplate.getBytes())) ;
-      templateService.addTemplate(TemplateService.SKINS, nodetypeName, templateName, true, cleanString(templateName), new String[] {"*"}, new ByteArrayInputStream("".getBytes())) ;
+      templateService.addTemplate(TemplateService.DIALOGS,
+                                  nodetypeName,
+                                  templateName,
+                                  true,
+                                  cleanString(templateName),
+                                  new String[] { "*" },
+                                  new ByteArrayInputStream(newDialogTemplate.getBytes()));
+      templateService.addTemplate(TemplateService.VIEWS,
+                                  nodetypeName,
+                                  templateName,
+                                  true,
+                                  cleanString(templateName),
+                                  new String[] { "*" },
+                                  new ByteArrayInputStream(newViewTemplate.getBytes()));
+      templateService.addTemplate(TemplateService.SKINS,
+                                  nodetypeName,
+                                  templateName,
+                                  true,
+                                  cleanString(templateName),
+                                  new String[] { "*" },
+                                  new ByteArrayInputStream("".getBytes()));
 
       listenerService.broadcast(UIFormGeneratorConstant.POST_CREATE_NODETYPE_EVENT, null, nodetypeName);
 
-      Utils.createPopupMessage(formGeneratorTabPane, "UIFormGeneratorTabPane.msg.AddNewsSuccessful", new Object[]{templateName}, ApplicationMessage.INFO);
+      Utils.createPopupMessage(formGeneratorTabPane,
+                               "UIFormGeneratorTabPane.msg.AddNewsSuccessful",
+                               new Object[] { templateName },
+                               ApplicationMessage.INFO);
 
       nameFormStringInput.setValue("");
-      ((UIFormRichtextInput)formGeneratorGeneralTab.getChildById(UIFormGeneratorConstant.DESCRIPTION_FORM_WYSIWYG_INPUT)).setValue("");
+      ((UIFormRichtextInput) formGeneratorGeneralTab.
+           getChildById(UIFormGeneratorConstant.DESCRIPTION_FORM_WYSIWYG_INPUT)).setValue("");
       event.getRequestContext().addUIComponentToUpdateByAjax(formGeneratorTabPane);
     }
   }
@@ -632,9 +690,12 @@ public class UIFormGeneratorTabPane extends UIFormTabPane {
      */
     public void execute(Event<UIFormGeneratorTabPane> event) throws Exception {
       UIFormGeneratorTabPane formGeneratorTabPane = event.getSource();
-      UIFormInputSet formGeneratorGeneralTab = formGeneratorTabPane.getChildById(UIFormGeneratorConstant.FORM_GENERATOR_GENERAL_TAB);
-      formGeneratorGeneralTab.getUIStringInput(UIFormGeneratorConstant.NAME_FORM_STRING_INPUT).setValue("");
-      ((UIFormRichtextInput)formGeneratorGeneralTab.getChildById(UIFormGeneratorConstant.DESCRIPTION_FORM_WYSIWYG_INPUT)).setValue("");
+      UIFormInputSet formGeneratorGeneralTab = formGeneratorTabPane.
+          getChildById(UIFormGeneratorConstant.FORM_GENERATOR_GENERAL_TAB);
+      formGeneratorGeneralTab.getUIStringInput(UIFormGeneratorConstant.NAME_FORM_STRING_INPUT)
+                             .setValue("");
+      ((UIFormRichtextInput) formGeneratorGeneralTab.
+           getChildById(UIFormGeneratorConstant.DESCRIPTION_FORM_WYSIWYG_INPUT)).setValue("");
       event.getRequestContext().addUIComponentToUpdateByAjax(formGeneratorTabPane);
     }
   }

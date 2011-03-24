@@ -46,33 +46,42 @@ public class UIFCCPortlet extends UIPortletApplication {
    */
   public UIFCCPortlet() throws Exception {}
 
-  /* (non-Javadoc)
-   * @see org.exoplatform.webui.core.UIPortletApplication#processRender(org.exoplatform.webui.application.WebuiApplication, org.exoplatform.webui.application.WebuiRequestContext)
+  /*
+   * (non-Javadoc)
+   * @see
+   * org.exoplatform.webui.core.UIPortletApplication#processRender(org.exoplatform
+   * .webui.application.WebuiApplication,
+   * org.exoplatform.webui.application.WebuiRequestContext)
    */
   public void processRender(WebuiApplication app, WebuiRequestContext context) throws Exception {
-    context.getJavascriptManager().importJavascript("eXo.ecm.ECMUtils","/ecm-wcm-extension/javascript/");
-    context.getJavascriptManager().addJavascript("eXo.ecm.ECMUtils.init('UIFastContentCreatorPortlet') ;");
-    PortletRequestContext portletRequestContext = (PortletRequestContext)  context ;
+    context.getJavascriptManager().importJavascript("eXo.ecm.ECMUtils",
+                                                    "/ecm-wcm-extension/javascript/");
+    context.getJavascriptManager()
+           .addJavascript("eXo.ecm.ECMUtils.init('UIFastContentCreatorPortlet') ;");
+    PortletRequestContext portletRequestContext = (PortletRequestContext) context;
     addChild(UIPopupContainer.class, null, null);
     if (portletRequestContext.getApplicationMode() == PortletMode.VIEW) {
-      if(getChild(UIFCCConfig.class) != null) {
-        removeChild(UIFCCConfig.class) ;
+      if (getChild(UIFCCConfig.class) != null) {
+        removeChild(UIFCCConfig.class);
       }
-      if(getChild(UIFCCForm.class) == null) {
-        UIFCCForm fastContentCreatorForm = addChild(UIFCCForm.class, null, null) ;
+      if (getChild(UIFCCForm.class) == null) {
+        UIFCCForm fastContentCreatorForm = addChild(UIFCCForm.class, null, null);
         PortletPreferences preferences = UIFCCUtils.getPortletPreferences();
-        fastContentCreatorForm.setTemplateNode(preferences.getValue(UIFCCConstant.PREFERENCE_TYPE, "")) ;
-        fastContentCreatorForm.setWorkspace(preferences.getValue(UIFCCConstant.PREFERENCE_WORKSPACE, "")) ;
-        fastContentCreatorForm.setStoredPath(preferences.getValue(UIFCCConstant.PREFERENCE_PATH, "")) ;
-        fastContentCreatorForm.setRepositoryName(preferences.getValue(UIFCCConstant.PREFERENCE_REPOSITORY, "")) ;
+        fastContentCreatorForm.setTemplateNode(preferences.getValue(UIFCCConstant.PREFERENCE_TYPE,
+                                                                    ""));
+        fastContentCreatorForm.setWorkspace(preferences.getValue(UIFCCConstant.PREFERENCE_WORKSPACE,
+                                                                 ""));
+        fastContentCreatorForm.setStoredPath(preferences.getValue(UIFCCConstant.PREFERENCE_PATH, ""));
+        fastContentCreatorForm.setRepositoryName(preferences.getValue(UIFCCConstant.PREFERENCE_REPOSITORY,
+                                                                      ""));
       }
-    } else if(portletRequestContext.getApplicationMode() == PortletMode.EDIT) {
-      if(getChild(UIFCCForm.class) != null) {
-        removeChild(UIFCCForm.class) ;
+    } else if (portletRequestContext.getApplicationMode() == PortletMode.EDIT) {
+      if (getChild(UIFCCForm.class) != null) {
+        removeChild(UIFCCForm.class);
       }
-      if(getChild(UIFCCConfig.class) == null) {
-        UIFCCConfig fastContentCreatorConfig = addChild(UIFCCConfig.class, null, null) ;
-        fastContentCreatorConfig.initEditMode() ;
+      if (getChild(UIFCCConfig.class) == null) {
+        UIFCCConfig fastContentCreatorConfig = addChild(UIFCCConfig.class, null, null);
+        fastContentCreatorConfig.initEditMode();
       }
     }
     super.processRender(app, context) ;

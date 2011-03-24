@@ -43,16 +43,16 @@ public class WorkflowFileDefinitionServiceImpl implements WorkflowFileDefinition
   }
 
   public FileDefinition retrieve(String processId) {
-    try{
+    try {
       ExoContainer container = ExoContainerContext.getCurrentContainer();
-      WorkflowServiceContainerImpl containerImpl = (WorkflowServiceContainerImpl)container.getComponentInstanceOfType(WorkflowServiceContainer.class);
-      // JbpmSession jbpmSession = containerImpl.openSession();
+      WorkflowServiceContainerImpl containerImpl = (WorkflowServiceContainerImpl) container.
+          getComponentInstanceOfType(WorkflowServiceContainer.class);
       JbpmContext jbpmContext = containerImpl.openJbpmContext();
-      ProcessDefinition processDefinition =
-        jbpmContext.getGraphSession().loadProcessDefinition(Long.parseLong(processId));
+      ProcessDefinition processDefinition = jbpmContext.getGraphSession()
+                                                       .loadProcessDefinition(Long.parseLong(processId));
       FileDefinitionWapper fileDefinitionWapper = new FileDefinitionWapper(processDefinition.getFileDefinition());
       return fileDefinitionWapper;
-    }catch (Exception e) {
+    } catch (Exception e) {
     }
     return null;
   }

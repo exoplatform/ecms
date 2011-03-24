@@ -331,7 +331,9 @@ public class UIPCVContainer extends UIContainer {
       UIPCVContainer uiContentViewerContainer = event.getSource();
       UIPCVPresentation uiContentViewer = uiContentViewerContainer.getChild(UIPCVPresentation.class);
       Node orginialNode = uiContentViewer.getOriginalNode();
-      UIContentDialogForm uiDocumentDialogForm = uiContentViewerContainer.createUIComponent(UIContentDialogForm.class, null, null);
+      UIContentDialogForm uiDocumentDialogForm = uiContentViewerContainer.createUIComponent(UIContentDialogForm.class,
+                                                                                            null,
+                                                                                            null);
       try {
         uiDocumentDialogForm.init(orginialNode, false);
         Utils.createPopupWindow(uiContentViewerContainer,

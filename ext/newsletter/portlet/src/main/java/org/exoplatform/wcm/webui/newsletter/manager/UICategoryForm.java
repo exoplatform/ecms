@@ -248,7 +248,9 @@ public class UICategoryForm extends UIForm implements UIPopupComponent, UISelect
         SessionProvider sessionProvider = Utils.getSessionProvider();
         if(uiCategoryForm.categoryConfig == null){ // if add new category then check cateogry's name is already exist or not
           if(categoryHandler.getCategoryByName(sessionProvider, portalName, categoryConfig.getName()) != null){
-            uiApp.addMessage(new ApplicationMessage("UICategoryForm.msg.categoryNameIsAlreadyExist", null, ApplicationMessage.WARNING));
+            uiApp.addMessage(new ApplicationMessage("UICategoryForm.msg.categoryNameIsAlreadyExist",
+                                                    null,
+                                                    ApplicationMessage.WARNING));
             event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
             return;
           }else{

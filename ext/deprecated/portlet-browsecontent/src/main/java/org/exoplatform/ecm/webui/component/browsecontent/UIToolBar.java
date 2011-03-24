@@ -142,22 +142,22 @@ public class UIToolBar extends UIContainer {
 
   static  public class SelectPathActionListener extends EventListener<UIToolBar> {
     public void execute(Event<UIToolBar> event) throws Exception {
-      UIToolBar uiComp = event.getSource() ;
-      String nodePath =  event.getRequestContext().getRequestParameter(OBJECTID) ;
-      UIBrowseContainer uiContainer = uiComp.getAncestorOfType(UIBrowseContainer.class) ;
-      UIBrowseContentPortlet uiBCPortlet =  uiComp.getAncestorOfType(UIBrowseContentPortlet.class) ;
+      UIToolBar uiComp = event.getSource();
+      String nodePath = event.getRequestContext().getRequestParameter(OBJECTID);
+      UIBrowseContainer uiContainer = uiComp.getAncestorOfType(UIBrowseContainer.class);
+      UIBrowseContentPortlet uiBCPortlet = uiComp.getAncestorOfType(UIBrowseContentPortlet.class);
       Node selectNode = uiContainer.getNodeByPath(nodePath);
       uiContainer.getHistory().clear();
-      if(selectNode == null) {
-        if(uiContainer.getNodeByPath(uiContainer.getCategoryPath()) == null) {
+      if (selectNode == null) {
+        if (uiContainer.getNodeByPath(uiContainer.getCategoryPath()) == null) {
           uiBCPortlet.setPorletMode(PortletMode.HELP);
-          uiBCPortlet.reload() ;
+          uiBCPortlet.reload();
         } else {
-          UIApplication uiApp = uiComp.getAncestorOfType(UIApplication.class) ;
-          uiApp.addMessage(new ApplicationMessage("UIToolBar.msg.node-removed", null)) ;
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
-          selectNode = uiComp.getRootNode() ;
-          uiContainer.changeNode(selectNode) ;
+          UIApplication uiApp = uiComp.getAncestorOfType(UIApplication.class);
+          uiApp.addMessage(new ApplicationMessage("UIToolBar.msg.node-removed", null));
+          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          selectNode = uiComp.getRootNode();
+          uiContainer.changeNode(selectNode);
         }
       } else {
         uiContainer.storeListHistory(selectNode);
@@ -166,30 +166,36 @@ public class UIToolBar extends UIContainer {
           selectNode = linkManager.getTarget(selectNode);
         }
 
-        TemplateService templateService  = uiContainer.getApplicationComponent(TemplateService.class) ;
-        List templates = templateService.getDocumentTemplates() ;
-        if(templates.contains(selectNode.getPrimaryNodeType().getName())) {
-          ManageViewService vservice = uiContainer.getApplicationComponent(ManageViewService.class) ;
-          String repoName = uiContainer.getPortletPreferences().getValue(Utils.REPOSITORY, "") ;
-          String detailTemplateName = uiContainer.getPortletPreferences().getValue(Utils.CB_BOX_TEMPLATE, "") ;
-          uiContainer.setTemplateDetail(vservice.getTemplateHome(BasePath.CB_DETAIL_VIEW_TEMPLATES, repoName,SessionProviderFactory.createSystemProvider())
-              .getNode(detailTemplateName).getPath());
+        TemplateService templateService = uiContainer.getApplicationComponent(TemplateService.class);
+        List templates = templateService.getDocumentTemplates();
+        if (templates.contains(selectNode.getPrimaryNodeType().getName())) {
+          ManageViewService vservice = uiContainer.getApplicationComponent(ManageViewService.class);
+          String repoName = uiContainer.getPortletPreferences().getValue(Utils.REPOSITORY, "");
+          String detailTemplateName = uiContainer.getPortletPreferences()
+                                                 .getValue(Utils.CB_BOX_TEMPLATE, "");
+          uiContainer.setTemplateDetail(vservice.getTemplateHome(BasePath.CB_DETAIL_VIEW_TEMPLATES,
+                                                                 repoName,
+                                                                 SessionProviderFactory.createSystemProvider())
+                                                .getNode(detailTemplateName)
+                                                .getPath());
           uiContainer.viewDocument(selectNode, true);
         } else {
-          String templateType = uiContainer.getPortletPreferences().getValue(Utils.CB_USECASE, "") ;
-          if((templateType.equals(Utils.CB_USE_JCR_QUERY)) || (templateType.equals(Utils.CB_SCRIPT_NAME))) {
-            UIApplication app = uiContainer.getAncestorOfType(UIApplication.class) ;
-            app.addMessage(new ApplicationMessage("UIBrowseContainer.msg.template-notsupported", null)) ;
-            event.getRequestContext().addUIComponentToUpdateByAjax(app.getUIPopupMessages()) ;
+          String templateType = uiContainer.getPortletPreferences().getValue(Utils.CB_USECASE, "");
+          if ((templateType.equals(Utils.CB_USE_JCR_QUERY))
+              || (templateType.equals(Utils.CB_SCRIPT_NAME))) {
+            UIApplication app = uiContainer.getAncestorOfType(UIApplication.class);
+            app.addMessage(new ApplicationMessage("UIBrowseContainer.msg.template-notsupported",
+                                                  null));
+            event.getRequestContext().addUIComponentToUpdateByAjax(app.getUIPopupMessages());
           } else {
-            uiContainer.changeNode(selectNode) ;
-            uiContainer.setPageIterator(uiContainer.getSubDocumentList(selectNode)) ;
+            uiContainer.changeNode(selectNode);
+            uiContainer.setPageIterator(uiContainer.getSubDocumentList(selectNode));
           }
         }
-        uiContainer.setCurrentNodePath(nodePath) ;
-        uiContainer.setSelectedTabPath(nodePath) ;
+        uiContainer.setCurrentNodePath(nodePath);
+        uiContainer.setSelectedTabPath(nodePath);
       }
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiBCPortlet) ;
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiBCPortlet);
     }
   }
 
@@ -205,76 +211,80 @@ public class UIToolBar extends UIContainer {
     public void execute(Event<UIToolBar> event) throws Exception {
       UIToolBar uiToolBar = event.getSource() ;
       UIBrowseContainer uiContainer = uiToolBar.getAncestorOfType(UIBrowseContainer.class) ;
-      if(uiContainer.isShowDocumentDetail()) {
-        UIApplication uiApp = uiToolBar.getAncestorOfType(UIApplication.class) ;
-        uiApp.addMessage(new ApplicationMessage("UIToolBar.msg.back-view-search", null)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
-        return ;
+      if (uiContainer.isShowDocumentDetail()) {
+        UIApplication uiApp = uiToolBar.getAncestorOfType(UIApplication.class);
+        uiApp.addMessage(new ApplicationMessage("UIToolBar.msg.back-view-search", null));
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        return;
       }
-      UISearchController uiSearchController = uiContainer.getChild(UISearchController.class) ;
-      uiSearchController.setShowHiddenSearch() ;
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiContainer) ;
+      UISearchController uiSearchController = uiContainer.getChild(UISearchController.class);
+      uiSearchController.setShowHiddenSearch();
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiContainer);
     }
   }
 
   static public class NextActionListener extends EventListener<UIToolBar> {
     public void execute(Event<UIToolBar> event) throws Exception {
       UIToolBar uiComp = event.getSource() ;
-      UIBrowseContainer uiContainer = uiComp.getAncestorOfType(UIBrowseContainer.class) ;
-      uiContainer.historyNext() ;
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiContainer) ;
+      UIBrowseContainer uiContainer = uiComp.getAncestorOfType(UIBrowseContainer.class);
+      uiContainer.historyNext();
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiContainer);
     }
   }
 
   static public class BackActionListener extends EventListener<UIToolBar> {
     public void execute(Event<UIToolBar> event) throws Exception {
-      UIToolBar uiComp = event.getSource() ;
-      UIBrowseContainer uiContainer = uiComp.getAncestorOfType(UIBrowseContainer.class) ;
-      uiContainer.historyBack() ;
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiContainer) ;
+      UIToolBar uiComp = event.getSource();
+      UIBrowseContainer uiContainer = uiComp.getAncestorOfType(UIBrowseContainer.class);
+      uiContainer.historyBack();
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiContainer);
     }
   }
 
   static public class VoteActionListener extends EventListener<UIToolBar> {
     public void execute(Event<UIToolBar> event) throws Exception {
-      UIToolBar uiComp = event.getSource() ;
-      UIBrowseContainer container = uiComp.getAncestorOfType(UIBrowseContainer.class) ;
-      UIDocumentDetail uiDocument = container.getChild(UIDocumentDetail.class)  ;
-      UIApplication uiApp = uiComp.getAncestorOfType(UIApplication.class) ;
-      if(!container.isShowDocumentDetail() || !uiDocument.isValidNode() ) {
-        uiApp.addMessage(new ApplicationMessage("UIToolBar.msg.select-doc", null)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(container) ;
-        return ;
+      UIToolBar uiComp = event.getSource();
+      UIBrowseContainer container = uiComp.getAncestorOfType(UIBrowseContainer.class);
+      UIDocumentDetail uiDocument = container.getChild(UIDocumentDetail.class);
+      UIApplication uiApp = uiComp.getAncestorOfType(UIApplication.class);
+      if (!container.isShowDocumentDetail() || !uiDocument.isValidNode()) {
+        uiApp.addMessage(new ApplicationMessage("UIToolBar.msg.select-doc", null));
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        event.getRequestContext().addUIComponentToUpdateByAjax(container);
+        return;
       }
-      if(!uiDocument.node_.isNodeType("mix:votable")) {
-        uiApp.addMessage(new ApplicationMessage("UIToolBar.msg.not-support-vote", null,
-            ApplicationMessage.WARNING)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
-        return ;
+      if (!uiDocument.node_.isNodeType("mix:votable")) {
+        uiApp.addMessage(new ApplicationMessage("UIToolBar.msg.not-support-vote",
+                                                null,
+                                                ApplicationMessage.WARNING));
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        return;
       }
       String lockToken = LockUtil.getLockToken(uiDocument.node_);
-      if(lockToken != null) uiDocument.node_.getSession().addLockToken(lockToken);
+      if (lockToken != null)
+        uiDocument.node_.getSession().addLockToken(lockToken);
       if (container.nodeIsLocked(uiDocument.node_)) {
         String strLockOwner = uiDocument.node_.getLock().getLockOwner();
         String userId = Util.getPortalRequestContext().getRemoteUser();
         if (!strLockOwner.equals(userId)) {
-          uiApp.addMessage(new ApplicationMessage("UIToolBar.msg.node-is-locked", null,
-              ApplicationMessage.WARNING));
+          uiApp.addMessage(new ApplicationMessage("UIToolBar.msg.node-is-locked",
+                                                  null,
+                                                  ApplicationMessage.WARNING));
           event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
           return;
         }
       }
-      if((uiDocument.node_.isCheckedOut())) {
-        UIBrowseContentPortlet cbPortlet = uiComp.getAncestorOfType(UIBrowseContentPortlet.class) ;
-        UIPopupContainer uiPopupAction = cbPortlet.getChildById("UICBPopupAction") ;
-        uiPopupAction.activate(UICBVoteForm.class, 300) ;
-        uiPopupAction.getChild(UIPopupWindow.class).setResizable(false) ;
+      if ((uiDocument.node_.isCheckedOut())) {
+        UIBrowseContentPortlet cbPortlet = uiComp.getAncestorOfType(UIBrowseContentPortlet.class);
+        UIPopupContainer uiPopupAction = cbPortlet.getChildById("UICBPopupAction");
+        uiPopupAction.activate(UICBVoteForm.class, 300);
+        uiPopupAction.getChild(UIPopupWindow.class).setResizable(false);
       } else {
-        uiApp.addMessage(new ApplicationMessage("UIToolBar.msg.readonly-doc", null,
-            ApplicationMessage.WARNING)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
-        return ;
+        uiApp.addMessage(new ApplicationMessage("UIToolBar.msg.readonly-doc",
+                                                null,
+                                                ApplicationMessage.WARNING));
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        return;
       }
     }
   }
@@ -330,9 +340,9 @@ public class UIToolBar extends UIContainer {
           return;
         }
       }
-      if((documentNode.isCheckedOut())) {
-        UIBrowseContentPortlet cbPortlet = uiComp.getAncestorOfType(UIBrowseContentPortlet.class) ;
-        UICBCommentForm commentForm = uiComp.createUIComponent(UICBCommentForm.class, null, null) ;
+      if ((documentNode.isCheckedOut())) {
+        UIBrowseContentPortlet cbPortlet = uiComp.getAncestorOfType(UIBrowseContentPortlet.class);
+        UICBCommentForm commentForm = uiComp.createUIComponent(UICBCommentForm.class, null, null);
         commentForm.setDocument(documentNode);
         UIPopupContainer uiPopupAction = cbPortlet.getChildById("UICBPopupComment");
         if (uiPopupAction == null) {
@@ -343,14 +353,15 @@ public class UIToolBar extends UIContainer {
           commentForm.setEdit(true);
           commentForm.setNodeCommentPath(nodeCommentPath);
         }
-        uiPopupAction.activate(commentForm, 750, 0) ;
-        uiPopupAction.getChild(UIPopupWindow.class).setResizable(false) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiPopupAction) ;
+        uiPopupAction.activate(commentForm, 750, 0);
+        uiPopupAction.getChild(UIPopupWindow.class).setResizable(false);
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiPopupAction);
       } else {
-        uiApp.addMessage(new ApplicationMessage("UIToolBar.msg.readonly-doc", null,
-            ApplicationMessage.WARNING)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
-        return ;
+        uiApp.addMessage(new ApplicationMessage("UIToolBar.msg.readonly-doc",
+                                                null,
+                                                ApplicationMessage.WARNING));
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        return;
       }
     }
   }

@@ -47,7 +47,9 @@ import org.exoplatform.webui.ext.filter.UIExtensionFilters;
  )
 public class CommentActionComponent extends UIComponent {
 
-  private static final List<UIExtensionFilter> FILTERS = Arrays.asList(new UIExtensionFilter[]{new CanAddNodeFilter(), new IsMixCommentable(), new IsCheckedOutFilter("UICommentForm.msg.not-checkedout"), new IsNotLockedFilter()});
+  private static final List<UIExtensionFilter> FILTERS = Arrays.asList(new UIExtensionFilter[] {
+      new CanAddNodeFilter(), new IsMixCommentable(),
+      new IsCheckedOutFilter("UICommentForm.msg.not-checkedout"), new IsNotLockedFilter() });
 
   @UIExtensionFilters
   public List<UIExtensionFilter> getFilters() {

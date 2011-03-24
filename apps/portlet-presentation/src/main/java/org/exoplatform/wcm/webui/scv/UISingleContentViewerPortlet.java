@@ -142,8 +142,13 @@ public class UISingleContentViewerPortlet extends UIPortletApplication {
     return Utils.getCurrentMode().equals(PortletMode.VIEW);
 
   }
-  /* (non-Javadoc)
-   * @see org.exoplatform.webui.core.UIPortletApplication#processRender(org.exoplatform.webui.application.WebuiApplication, org.exoplatform.webui.application.WebuiRequestContext)
+
+  /*
+   * (non-Javadoc)
+   * @see
+   * org.exoplatform.webui.core.UIPortletApplication#processRender(org.exoplatform
+   * .webui.application.WebuiApplication,
+   * org.exoplatform.webui.application.WebuiRequestContext)
    */
   public void processRender(WebuiApplication app, WebuiRequestContext context) throws Exception {
     PortletRequestContext pContext = (PortletRequestContext) context ;

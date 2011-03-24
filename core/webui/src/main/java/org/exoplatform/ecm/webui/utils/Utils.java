@@ -602,7 +602,8 @@ public class Utils {
 
   public static String getRestContextName(String portalContainerName) {
     ExoContainer container = ExoContainerContext.getCurrentContainer();
-    PortalContainerConfig portalContainerConfig = (PortalContainerConfig)container.getComponentInstance(PortalContainerConfig.class);
+    PortalContainerConfig portalContainerConfig = (PortalContainerConfig) container.
+        getComponentInstance(PortalContainerConfig.class);
     return portalContainerConfig.getRestContextName(portalContainerName);
   }
 

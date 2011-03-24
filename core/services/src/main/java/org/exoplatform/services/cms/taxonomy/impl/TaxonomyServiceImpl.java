@@ -73,14 +73,17 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
 
   private LinkManager            linkManager_;
 
-  private final String           SQL_QUERY       = "Select * from exo:taxonomyLink where jcr:path like '$0/%' and exo:uuid = '$1' order by exo:dateCreated DESC";
+  private final String           SQL_QUERY       = "Select * from exo:taxonomyLink where jcr:path like '$0/%' "
+                                                     + "and exo:uuid = '$1' "
+                                                     + "order by exo:dateCreated DESC";
 
   List<TaxonomyPlugin>           plugins_        = new ArrayList<TaxonomyPlugin>();
 
-  private DMSConfiguration dmsConfiguration_;
+  private DMSConfiguration       dmsConfiguration_;
 
-  private Map<String, String[]> taxonomyTreeDefaultUserPermissions_;
-  private static final Log LOG  = ExoLogger.getLogger(TaxonomyServiceImpl.class);
+  private Map<String, String[]>  taxonomyTreeDefaultUserPermissions_;
+
+  private static final Log       LOG             = ExoLogger.getLogger(TaxonomyServiceImpl.class);
 
   /**
    * Constructor method

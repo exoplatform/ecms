@@ -53,7 +53,12 @@ class WindowKey
   /** . */
   private final int hashCode;
 
-  WindowKey(String windowId, WindowState windowState, PortletMode portletMode, Locale locale, Map<String, String[]> parameters, Map<String, String[]> query)
+  WindowKey(String windowId,
+            WindowState windowState,
+            PortletMode portletMode,
+            Locale locale,
+            Map<String, String[]> parameters,
+            Map<String, String[]> query)
   {
 
     // Clone parameter map

@@ -129,12 +129,14 @@ public class PublicationManagerImpl implements PublicationManager, Startable {
       String lang,
       String workspace) throws Exception {
 
-    WCMComposer wcmComposer = (WCMComposer)ExoContainerContext.getCurrentContainer().getComponentInstanceOfType(WCMComposer.class);
+    WCMComposer wcmComposer = (WCMComposer) ExoContainerContext.getCurrentContainer()
+                                                               .getComponentInstanceOfType(WCMComposer.class);
 
     HashMap<String, String> filters = new HashMap<String, String>();
     filters.put(WCMComposer.FILTER_MODE, WCMComposer.MODE_EDIT);
     filters.put(WCMComposer.FILTER_LANGUAGE, lang);
-    StringBuffer query = new StringBuffer("select * from nt:base where publication:currentState='"+fromstate+"'");
+    StringBuffer query = new StringBuffer("select * from nt:base where publication:currentState='"
+        + fromstate + "'");
 
     if (tostate!=null) {
       List<Lifecycle> lifecycles = this.getLifecyclesFromUser(user, tostate);

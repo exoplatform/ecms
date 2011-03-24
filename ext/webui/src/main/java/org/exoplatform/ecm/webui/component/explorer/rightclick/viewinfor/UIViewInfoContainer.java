@@ -180,7 +180,8 @@ public class UIViewInfoContainer extends UIContainer {
     String strNodeTypeName = nodeType.getName();
     String strType = "";
     isFolder = false;
-    if (nodeType.isNodeType(Utils.NT_FILE)) { // is file that is uploaded by user
+    if (nodeType.isNodeType(Utils.NT_FILE)) { // is file that is uploaded by
+                                              // user
 
       if (!node.isCheckedOut())
         node.checkout();
@@ -188,9 +189,19 @@ public class UIViewInfoContainer extends UIContainer {
 
       strType = contentNode.getProperty(Utils.JCR_MIMETYPE).getString();
 
-    } else if (templateService.isManagedNodeType(strNodeTypeName, uiExplorer.getRepositoryName())) { // is Document which is created by user on web
+    } else if (templateService.isManagedNodeType(strNodeTypeName, uiExplorer.getRepositoryName())) { // is
+                                                                                                     // Document
+                                                                                                     // which
+                                                                                                     // is
+                                                                                                     // created
+                                                                                                     // by
+                                                                                                     // user
+                                                                                                     // on
+                                                                                                     // web
       strType = templateService.getTemplateLabel(strNodeTypeName, uiExplorer.getRepositoryName());
-    } else if (nodeType.isNodeType(Utils.NT_UNSTRUCTURED) || nodeType.isNodeType(Utils.NT_FOLDER)) { // is a folder
+    } else if (nodeType.isNodeType(Utils.NT_UNSTRUCTURED) || nodeType.isNodeType(Utils.NT_FOLDER)) { // is
+                                                                                                     // a
+                                                                                                     // folder
       isFolder = true;
     } else { // other
       strType = strNodeTypeName;

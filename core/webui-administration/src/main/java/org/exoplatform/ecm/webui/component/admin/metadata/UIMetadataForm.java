@@ -122,13 +122,26 @@ public class UIMetadataForm extends UIFormTabPane implements UISelectable {
       if(viewTemplate == null) viewTemplate = "" ;
       if(!metadataService.hasMetadata(uiForm.metadataName_, uiForm.repository_)) uiForm.isAddNew_ = true ;
       else uiForm.isAddNew_ = false ;
-      JCRResourceResolver resourceResolver =
-        new JCRResourceResolver(uiForm.repository_, uiForm.workspaceName_, "exo:templateFile") ;
+      JCRResourceResolver resourceResolver = new JCRResourceResolver(uiForm.repository_,
+                                                                     uiForm.workspaceName_,
+                                                                     "exo:templateFile");
       TemplateService templateService = uiForm.getApplicationComponent(TemplateService.class) ;
-      String path = metadataService.addMetadata(uiForm.metadataName_, true, roles, dialogTemplate, uiForm.isAddNew_, uiForm.repository_) ;
-      if(path != null) templateService.invalidateTemplate(path, resourceResolver) ;
-      path = metadataService.addMetadata(uiForm.metadataName_, false, roles, viewTemplate, uiForm.isAddNew_, uiForm.repository_) ;
-      if(path != null) templateService.invalidateTemplate(path, resourceResolver) ;
+      String path = metadataService.addMetadata(uiForm.metadataName_,
+                                                true,
+                                                roles,
+                                                dialogTemplate,
+                                                uiForm.isAddNew_,
+                                                uiForm.repository_);
+      if (path != null)
+        templateService.invalidateTemplate(path, resourceResolver);
+      path = metadataService.addMetadata(uiForm.metadataName_,
+                                         false,
+                                         roles,
+                                         viewTemplate,
+                                         uiForm.isAddNew_,
+                                         uiForm.repository_);
+      if (path != null)
+        templateService.invalidateTemplate(path, resourceResolver);
       uiForm.reset() ;
       uiMetaManager.getChild(UIMetadataList.class).updateGrid() ;
       uiMetaManager.removeChildById(UIMetadataManager.METADATA_POPUP) ;

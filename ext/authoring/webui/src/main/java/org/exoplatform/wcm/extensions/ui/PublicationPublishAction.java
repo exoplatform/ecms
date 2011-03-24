@@ -64,7 +64,8 @@ public class PublicationPublishAction extends UIComponent {
     @Override
     protected void processEvent(Event<PublicationPublishAction> event) throws Exception {
       UIJCRExplorer uiExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class);
-      PublicationService publicationService = (PublicationService)PortalContainer.getInstance().getComponentInstanceOfType(PublicationService.class);
+      PublicationService publicationService = (PublicationService)PortalContainer.getInstance().
+          getComponentInstanceOfType(PublicationService.class);
       Node node = uiExplorer.getCurrentNode();
       if(node.isLocked()) {
         node.getSession().addLockToken(LockUtil.getLockToken(node));

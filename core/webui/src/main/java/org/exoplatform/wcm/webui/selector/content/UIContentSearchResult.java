@@ -218,7 +218,9 @@ public class UIContentSearchResult extends UIGrid {
       UIContentSearchResult contentSearchResult = event.getSource();
       UIContentSelector contentSelector = contentSearchResult.getAncestorOfType(UIContentSelector.class);
       UIContentBrowsePanel contentBrowsePanel = contentSelector.getChild(UIContentBrowsePanel.class);
-      ((UISelectable)(contentBrowsePanel.getSourceComponent())).doSelect(contentBrowsePanel.getReturnFieldName(), event.getRequestContext().getRequestParameter(OBJECTID));
+      ((UISelectable) (contentBrowsePanel.getSourceComponent())).doSelect(contentBrowsePanel.getReturnFieldName(),
+                                                                          event.getRequestContext()
+                                                                               .getRequestParameter(OBJECTID));
     }
   }
 

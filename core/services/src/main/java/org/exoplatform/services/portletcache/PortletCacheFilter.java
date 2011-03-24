@@ -90,7 +90,8 @@ public class PortletCacheFilter implements PortletFilter, ActionFilter, RenderFi
           query);
 
       //
-      FragmentCacheService service = (FragmentCacheService)PortalContainer.getInstance().getComponentInstanceOfType(FragmentCacheService.class);
+      FragmentCacheService service = (FragmentCacheService)PortalContainer.getInstance().
+          getComponentInstanceOfType(FragmentCacheService.class);
       MarkupFragment value = service.cache.get(new PortletRenderContext(req, resp, chain), key);
       OutputStream out = resp.getPortletOutputStream();
       out.write(value.data);

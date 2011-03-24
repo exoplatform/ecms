@@ -141,7 +141,8 @@ public class PDFViewer extends UIForm {
   public String getResourceBundle(String key) {
     ExoContainer container = ExoContainerContext.getCurrentContainer();
     Locale locale = Util.getUIPortal().getAncestorOfType(UIPortalApplication.class).getLocale() ;
-    ResourceBundleService resourceBundleService = (ResourceBundleService) container.getComponentInstanceOfType(ResourceBundleService.class);
+    ResourceBundleService resourceBundleService = (ResourceBundleService) container.
+        getComponentInstanceOfType(ResourceBundleService.class);
     ResourceBundle resourceBundle=resourceBundleService.getResourceBundle(localeFile, locale, this.getClass().getClassLoader());
     return resourceBundle.getString(key);
   }

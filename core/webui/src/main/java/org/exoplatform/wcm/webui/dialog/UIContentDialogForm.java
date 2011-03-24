@@ -599,10 +599,9 @@ public class UIContentDialogForm extends UIDialogForm  implements UIPopupCompone
   }
 
   /**
-   * The listener interface for receiving addAction events.
-   * The class that is interested in processing a addAction
-   * event implements this interface, and the object created
-   * with that class is registered with a component using the
+   * The listener interface for receiving addAction events. The class that is
+   * interested in processing a addAction event implements this interface, and
+   * the object created with that class is registered with a component using the
    * component's <code>addAddActionListener<code> method. When
    * the addAction event occurs, that object's appropriate
    * method is invoked.
@@ -611,31 +610,38 @@ public class UIContentDialogForm extends UIDialogForm  implements UIPopupCompone
    */
   static public class AddActionListener extends EventListener<UIContentDialogForm> {
 
-    /* (non-Javadoc)
-     * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
+    /*
+     * (non-Javadoc)
+     * @see
+     * org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui
+     * .event.Event)
      */
     public void execute(Event<UIContentDialogForm> event) throws Exception {
       UIContentDialogForm contentDialogForm = event.getSource();
       String clickedField = event.getRequestContext().getRequestParameter(OBJECTID);
       if (contentDialogForm.isReference) {
         UIApplication uiApp = contentDialogForm.getAncestorOfType(UIApplication.class);
-        try{
+        try {
           UIFormMultiValueInputSet uiSet = contentDialogForm.getChildById(FIELD_TAXONOMY);
-          if((uiSet != null) && (uiSet.getName() != null) && uiSet.getName().equals(FIELD_TAXONOMY)) {
-            if ((clickedField != null) && (clickedField.equals(FIELD_TAXONOMY))){
-              NodeHierarchyCreator nodeHierarchyCreator =
-                contentDialogForm.getApplicationComponent(NodeHierarchyCreator.class);
+          if ((uiSet != null) && (uiSet.getName() != null)
+              && uiSet.getName().equals(FIELD_TAXONOMY)) {
+            if ((clickedField != null) && (clickedField.equals(FIELD_TAXONOMY))) {
+              NodeHierarchyCreator nodeHierarchyCreator = contentDialogForm.getApplicationComponent(NodeHierarchyCreator.class);
               String repository = contentDialogForm.repositoryName;
               DMSConfiguration dmsConfiguration = contentDialogForm.getApplicationComponent(DMSConfiguration.class);
               DMSRepositoryConfiguration repositoryConfiguration = dmsConfiguration.getConfig();
               String workspaceName = repositoryConfiguration.getSystemWorkspace();
-              UIOneTaxonomySelector uiOneTaxonomySelector =
-                contentDialogForm.createUIComponent(UIOneTaxonomySelector.class, null, null);
-              if(uiSet.getValue().size() == 0) uiSet.setValue(new ArrayList<Value>());
+              UIOneTaxonomySelector uiOneTaxonomySelector = contentDialogForm.createUIComponent(UIOneTaxonomySelector.class,
+                                                                                                null,
+                                                                                                null);
+              if (uiSet.getValue().size() == 0)
+                uiSet.setValue(new ArrayList<Value>());
               String rootTreePath = nodeHierarchyCreator.getJcrPath(BasePath.TAXONOMIES_TREE_STORAGE_PATH);
-              RepositoryService repositoryService = (RepositoryService) contentDialogForm.getApplicationComponent(RepositoryService.class);
+              RepositoryService repositoryService = (RepositoryService) contentDialogForm.
+                  getApplicationComponent(RepositoryService.class);
               ManageableRepository manageableRepository = repositoryService.getRepository(repository);
-              Session session = WCMCoreUtils.getUserSessionProvider().getSession(workspaceName, manageableRepository);
+              Session session = WCMCoreUtils.getUserSessionProvider()
+                                            .getSession(workspaceName, manageableRepository);
               Node rootTree = (Node) session.getItem(rootTreePath);
               NodeIterator childrenIterator = rootTree.getNodes();
               while (childrenIterator.hasNext()) {
@@ -644,21 +650,26 @@ public class UIContentDialogForm extends UIDialogForm  implements UIPopupCompone
                 break;
               }
               uiOneTaxonomySelector.setRootNodeLocation(repository, workspaceName, rootTreePath);
-              uiOneTaxonomySelector.setExceptedNodeTypesInPathPanel(new String[] {"exo:symlink"});
+              uiOneTaxonomySelector.setExceptedNodeTypesInPathPanel(new String[] { "exo:symlink" });
               uiOneTaxonomySelector.init(WCMCoreUtils.getUserSessionProvider());
               String param = "returnField=" + FIELD_TAXONOMY;
-              uiOneTaxonomySelector.setSourceComponent(contentDialogForm, new String[]{param});
-              Utils.createPopupWindow(contentDialogForm, uiOneTaxonomySelector, TAXONOMY_CONTENT_POPUP_WINDOW, 700);
+              uiOneTaxonomySelector.setSourceComponent(contentDialogForm, new String[] { param });
+              Utils.createPopupWindow(contentDialogForm,
+                                      uiOneTaxonomySelector,
+                                      TAXONOMY_CONTENT_POPUP_WINDOW,
+                                      700);
             }
           }
-        }catch (AccessDeniedException accessDeniedException) {
-          uiApp.addMessage(new ApplicationMessage("UIContentDialogForm.msg.access-denied", null,
+        } catch (AccessDeniedException accessDeniedException) {
+          uiApp.addMessage(new ApplicationMessage("UIContentDialogForm.msg.access-denied",
+                                                  null,
                                                   ApplicationMessage.WARNING));
           event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
           return;
         } catch (Exception e) {
-          uiApp.addMessage(new ApplicationMessage("UIContentDialogForm.msg.exception", null,
-              ApplicationMessage.WARNING));
+          uiApp.addMessage(new ApplicationMessage("UIContentDialogForm.msg.exception",
+                                                  null,
+                                                  ApplicationMessage.WARNING));
           event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
           return;
         }

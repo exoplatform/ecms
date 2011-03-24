@@ -35,7 +35,8 @@ public class FriendlyServlet extends HttpServlet {
   protected void service(HttpServletRequest request,
       HttpServletResponse response) throws ServletException, IOException {
 
-    FriendlyService fs = (FriendlyService) ExoContainerContext.getCurrentContainer().getComponentInstanceOfType(FriendlyService.class);
+    FriendlyService fs = (FriendlyService) ExoContainerContext.getCurrentContainer()
+                                                              .getComponentInstanceOfType(FriendlyService.class);
 
     String path = request.getRequestURI();
     path = fs.getUnfriendlyUri(path);

@@ -279,25 +279,36 @@ public class SQLQueryBuilder extends AbstractQueryBuilder {
                       .append(endTime)
                       .append("' ");
   }
-  /* (non-Javadoc)
-   * @see org.exoplatform.services.wcm.search.AbstractQueryBuilder#setQueryPath(java.lang.String, org.exoplatform.services.wcm.search.AbstractQueryBuilder.PATH_TYPE)
+
+  /*
+   * (non-Javadoc)
+   * @see
+   * org.exoplatform.services.wcm.search.AbstractQueryBuilder#setQueryPath(java
+   * .lang.String,
+   * org.exoplatform.services.wcm.search.AbstractQueryBuilder.PATH_TYPE)
    */
   public void setQueryPath(String path, PATH_TYPE pathtype) {
-    if(PATH_TYPE.EXACT == pathtype) {
-      if(path.indexOf("[%]")>0)
+    if (PATH_TYPE.EXACT == pathtype) {
+      if (path.indexOf("[%]") > 0)
         pathClause = new StringBuilder().append("jcr:path LIKE '").append(path).append("' ");
       else
         pathClause = new StringBuilder().append("jcr:path = '").append(path).append("' ");
-    }else if(PATH_TYPE.CHILDNODES == pathtype) {
-      pathClause =
-        new StringBuilder().append("jcr:path LIKE '").append(path).append("/%'")
-        .append("AND NOT jcr:path like '").append(path).append("/%/%' ");
-    }else if(PATH_TYPE.DECENDANTS == pathtype) {
-      pathClause =  new StringBuilder().append("jcr:path LIKE '").append(path).append("/%' ");
-    }else if(PATH_TYPE.DECENDANTS_OR_SELFT == pathtype) {
-      pathClause =
-        new StringBuilder().append("jcr:path LIKE '").append(path).append("'")
-        .append("OR jcr:path LIKE '").append(path).append("/%' ");
+    } else if (PATH_TYPE.CHILDNODES == pathtype) {
+      pathClause = new StringBuilder().append("jcr:path LIKE '")
+                                      .append(path)
+                                      .append("/%'")
+                                      .append("AND NOT jcr:path like '")
+                                      .append(path)
+                                      .append("/%/%' ");
+    } else if (PATH_TYPE.DECENDANTS == pathtype) {
+      pathClause = new StringBuilder().append("jcr:path LIKE '").append(path).append("/%' ");
+    } else if (PATH_TYPE.DECENDANTS_OR_SELFT == pathtype) {
+      pathClause = new StringBuilder().append("jcr:path LIKE '")
+                                      .append(path)
+                                      .append("'")
+                                      .append("OR jcr:path LIKE '")
+                                      .append(path)
+                                      .append("/%' ");
     }
   }
 
@@ -309,11 +320,11 @@ public class SQLQueryBuilder extends AbstractQueryBuilder {
    * org.exoplatform.services.wcm.search.AbstractQueryBuilder.LOGICAL)
    */
   public void contains(String scope, String term, LOGICAL condition) {
-    if(scope == null)
+    if (scope == null)
       scope = ".";
-    if(LOGICAL.AND == condition)
+    if (LOGICAL.AND == condition)
       containsClause.append("AND CONTAINS(").append(scope).append(",'").append(term).append("') ");
-    else if(LOGICAL.OR == condition)
+    else if (LOGICAL.OR == condition)
       containsClause.append("OR CONTAINS(").append(scope).append(",'").append(term).append("') ");
     else
       containsClause.append("CONTAINS(").append(scope).append(",'").append(term).append("') ");
@@ -327,12 +338,20 @@ public class SQLQueryBuilder extends AbstractQueryBuilder {
    * org.exoplatform.services.wcm.search.AbstractQueryBuilder.LOGICAL)
    */
   public void notContains(String scope, String term, LOGICAL condition) {
-    if(scope == null)
+    if (scope == null)
       scope = ".";
-    if(LOGICAL.AND == condition)
-      containsClause.append("AND NOT CONTAINS(").append(scope).append(",'").append(term).append("') ");
-    else if(LOGICAL.OR == condition)
-      containsClause.append("OR NOT CONTAINS(").append(scope).append(",'").append(term).append("') ");
+    if (LOGICAL.AND == condition)
+      containsClause.append("AND NOT CONTAINS(")
+                    .append(scope)
+                    .append(",'")
+                    .append(term)
+                    .append("') ");
+    else if (LOGICAL.OR == condition)
+      containsClause.append("OR NOT CONTAINS(")
+                    .append(scope)
+                    .append(",'")
+                    .append(term)
+                    .append("') ");
     else
       containsClause.append("NOT CONTAINS(").append(scope).append(",'").append(term).append("') ");
   }
@@ -430,21 +449,23 @@ public class SQLQueryBuilder extends AbstractQueryBuilder {
    */
   public String createQueryStatement() {
     StringBuffer statement = new StringBuffer();
-    statement = statement.append(selectClause.toString()).append(fromClause.toString()).append(" WHERE ");
-    if(containsClause.length()>0) {
+    statement = statement.append(selectClause.toString())
+                         .append(fromClause.toString())
+                         .append(" WHERE ");
+    if (containsClause.length() > 0) {
       statement = statement.append(containsClause.toString());
-      if(pathClause.length()>0) {
+      if (pathClause.length() > 0) {
         statement = statement.append("AND ").append(pathClause.toString());
       }
-    }else {
-      if(pathClause.length()>0) {
+    } else {
+      if (pathClause.length() > 0) {
         statement = statement.append(pathClause.toString());
       }
     }
-    if(propertiesClause.length()>0) {
+    if (propertiesClause.length() > 0) {
       statement = statement.append(propertiesClause.toString());
     }
-    if(orderByClause.length()>0) {
+    if (orderByClause.length() > 0) {
       statement = statement.append("ORDER BY ").append(orderByClause.toString());
     }
     return statement.toString();
@@ -461,7 +482,14 @@ public class SQLQueryBuilder extends AbstractQueryBuilder {
 
   public void queryByNodeName(String rootPath, String nodeName) {
     pathClause = new StringBuilder().append(" jcr:path LIKE '")
-    .append(rootPath).append("/%/").append(nodeName).append("' ")
-    .append(" or jcr:path like '").append(rootPath).append("/").append(nodeName).append("' ");
+                                    .append(rootPath)
+                                    .append("/%/")
+                                    .append(nodeName)
+                                    .append("' ")
+                                    .append(" or jcr:path like '")
+                                    .append(rootPath)
+                                    .append("/")
+                                    .append(nodeName)
+                                    .append("' ");
   }
 }

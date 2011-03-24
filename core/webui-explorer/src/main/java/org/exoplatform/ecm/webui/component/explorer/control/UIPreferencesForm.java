@@ -173,11 +173,21 @@ public class UIPreferencesForm extends UIForm implements UIPopupComponent {
     String b = context.getURLBuilder().createURL(this, null, null);
 
     Writer writer = context.getWriter();
-    writer.append("<form class=\"").append(getId()).append("\" id=\"").append(getId()).append("\" action=\"").append(b).append('\"');
-    if(getSubmitAction() != null) writer.append(" onsubmit=\"").append(getSubmitAction()).append("\"");
-    if(isMultipart()) writer.append(" enctype=\"multipart/form-data\"");
+    writer.append("<form class=\"")
+          .append(getId())
+          .append("\" id=\"")
+          .append(getId())
+          .append("\" action=\"")
+          .append(b)
+          .append('\"');
+    if (getSubmitAction() != null)
+      writer.append(" onsubmit=\"").append(getSubmitAction()).append("\"");
+    if (isMultipart())
+      writer.append(" enctype=\"multipart/form-data\"");
     writer.append(" method=\"post\">");
-    writer.append("<div><input type=\"hidden\" name=\"").append(ACTION).append("\" value=\"\"/></div>");
+    writer.append("<div><input type=\"hidden\" name=\"")
+          .append(ACTION)
+          .append("\" value=\"\"/></div>");
   }
 
   public void activate() throws Exception {
@@ -189,8 +199,8 @@ public class UIPreferencesForm extends UIForm implements UIPopupComponent {
   public void update(Preference pref) {
     getUIFormCheckBoxInput(FIELD_ENABLESTRUCTURE).setChecked(pref.isJcrEnable());
     UIFormCheckBoxInput<Boolean> showSideBar = getUIFormCheckBoxInput(FIELD_SHOWSIDEBAR);
-    showSideBar.setChecked(pref.isShowSideBar() );
-     showSideBar.setEnable(this.getAncestorOfType(UIJCRExplorerPortlet.class).isShowSideBar());
+    showSideBar.setChecked(pref.isShowSideBar());
+    showSideBar.setEnable(this.getAncestorOfType(UIJCRExplorerPortlet.class).isShowSideBar());
 
     getUIFormCheckBoxInput(FIELD_SHOWNONDOCUMENT).setChecked(pref.isShowNonDocumentType());
     getUIFormCheckBoxInput(FIELD_SHOWREFDOCUMENTS).setChecked(pref.isShowPreferenceDocuments());

@@ -22,21 +22,21 @@ package org.exoplatform.services.chars.chardet;
 public abstract class PSMDetector
 {
 
-   public static final int ALL = 0;
+  public static final int ALL                 = 0;
 
-   public static final int JAPANESE = 1;
+  public static final int JAPANESE            = 1;
 
-   public static final int CHINESE = 2;
+  public static final int CHINESE             = 2;
 
-   public static final int SIMPLIFIED_CHINESE = 3;
+  public static final int SIMPLIFIED_CHINESE  = 3;
 
-   public static final int TRADITIONAL_CHINESE = 4;
+  public static final int TRADITIONAL_CHINESE = 4;
 
-   public static final int KOREAN = 5;
+  public static final int KOREAN              = 5;
 
-   public static final int NO_OF_LANGUAGES = 6;
+  public static final int NO_OF_LANGUAGES     = 6;
 
-   public static final int MAX_VERIFIERS = 16;
+  public static final int MAX_VERIFIERS       = 16;
 
    Verifier[] mVerifier;
 
@@ -198,14 +198,9 @@ public abstract class PSMDetector
          for (j = 0; j < mItems;)
          {
             st = Verifier.getNextState(mVerifier[mItemIdx[j]], b, mState[j]);
-            //      if (st != 0)
-            //      System.out.println( "state(0x" + Integer.toHexString(0xFF&b) +") =>"+ Integer.toHexString(st&0xFF)+ " " + mVerifier[mItemIdx[j]].charset());
 
             if (st == Verifier.eItsMe)
             {
-
-               //        System.out.println( "eItsMe(0x" + Integer.toHexString(0xFF&b) +") =>"+ mVerifier[mItemIdx[j]].charset());
-
                report(mVerifier[mItemIdx[j]].charset());
                mDone = true;
                return mDone;
@@ -214,7 +209,6 @@ public abstract class PSMDetector
             else if (st == Verifier.eError)
             {
 
-               //        System.out.println( "eNotMe(0x" + Integer.toHexString(0xFF&b) +") =>"+ mVerifier[mItemIdx[j]].charset());
                mItems--;
                if (j < mItems)
                {

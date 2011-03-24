@@ -99,25 +99,26 @@ public class UIWorkspaceList extends UIForm {
     wsList_ = new ArrayList<String>();
     RepositoryService repositoryService = getApplicationComponent(RepositoryService.class);
     String[] wsNames = repositoryService.getCurrentRepository().getWorkspaceNames();
-    String systemWsName =
-      repositoryService.getCurrentRepository().getConfiguration().getSystemWorkspaceName();
+    String systemWsName = repositoryService.getCurrentRepository()
+                                           .getConfiguration()
+                                           .getSystemWorkspaceName();
     List<SelectItemOption<String>> workspace = new ArrayList<SelectItemOption<String>>();
-    for(String wsName : wsNames) {
-      if(!isShowSystem_) {
-        if(!wsName.equals(systemWsName)) {
-          workspace.add(new SelectItemOption<String>(wsName,  wsName));
+    for (String wsName : wsNames) {
+      if (!isShowSystem_) {
+        if (!wsName.equals(systemWsName)) {
+          workspace.add(new SelectItemOption<String>(wsName, wsName));
           wsList_.add(wsName);
         }
       } else {
-        workspace.add(new SelectItemOption<String>(wsName,  wsName));
+        workspace.add(new SelectItemOption<String>(wsName, wsName));
         wsList_.add(wsName);
       }
     }
     UIFormSelectBox uiWorkspaceList = getUIFormSelectBox(WORKSPACE_NAME);
     uiWorkspaceList.setOptions(workspace);
     UIOneNodePathSelector uiBrowser = getParent();
-    if(uiBrowser.getWorkspaceName() != null) {
-      if(wsList_.contains(uiBrowser.getWorkspaceName())) {
+    if (uiBrowser.getWorkspaceName() != null) {
+      if (wsList_.contains(uiBrowser.getWorkspaceName())) {
         uiWorkspaceList.setValue(uiBrowser.getWorkspaceName());
       }
     }
@@ -128,7 +129,8 @@ public class UIWorkspaceList extends UIForm {
     getUIFormSelectBox(WORKSPACE_NAME).setDisabled(isDisable);
   }
 
-  private Node getRootNode(String repositoryName, String workspaceName) throws RepositoryException, RepositoryConfigurationException {
+  private Node getRootNode(String repositoryName, String workspaceName) throws RepositoryException,
+                                                                       RepositoryConfigurationException {
     RepositoryService repositoryService = getApplicationComponent(RepositoryService.class);
     ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
     SessionProvider sessionProvider =  SessionProviderFactory.createSessionProvider();
@@ -149,7 +151,9 @@ public class UIWorkspaceList extends UIForm {
         uiTreeBuilder.setRootTreeNode(uiWorkspaceList.getRootNode(uiJBrowser.getRepositoryName(), wsName));
       } catch (AccessDeniedException ade) {
         uiWorkspaceList.getUIFormSelectBox(WORKSPACE_NAME).setValue("collaboration");
-        uiApp.addMessage(new ApplicationMessage("UIWorkspaceList.msg.AccessDeniedException", null, ApplicationMessage.WARNING));
+        uiApp.addMessage(new ApplicationMessage("UIWorkspaceList.msg.AccessDeniedException",
+                                                null,
+                                                ApplicationMessage.WARNING));
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
         return;
       } catch(Exception e) {

@@ -102,7 +102,8 @@ public class UIFolderForm extends UIForm implements UIPopupComponent {
       if (uiExplorer.getCurrentNode().isNodeType(Utils.NT_FOLDER)) {
         if (getAncestorOfType(UIJCRExplorer.class).getCurrentNode().isNodeType(Utils.NT_FOLDER)) {
           options.clear();
-          options.add(new SelectItemOption<String>(res.getString(getId() + ".label." + Utils.NT_FOLDER.replace(":", "_")), Utils.NT_FOLDER));
+          options.add(new SelectItemOption<String>(res.getString(getId() + ".label."
+              + Utils.NT_FOLDER.replace(":", "_")), Utils.NT_FOLDER));
           Collections.sort(options, new ItemOptionNameComparator());
           getUIFormSelectBox(FIELD_TYPE).setOptions(options);
         }

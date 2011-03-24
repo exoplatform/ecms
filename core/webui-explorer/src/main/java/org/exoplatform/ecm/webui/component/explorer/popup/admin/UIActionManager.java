@@ -35,15 +35,16 @@ import org.exoplatform.webui.core.UIPopupWindow;
 public class UIActionManager extends UIContainer implements UIPopupComponent {
 
   public UIActionManager() throws Exception {
-    addChild(UIActionListContainer.class, null, null) ;
-    addChild(UIActionContainer.class, null, null).setRendered(false) ;
+    addChild(UIActionListContainer.class, null, null);
+    addChild(UIActionContainer.class, null, null).setRendered(false);
   }
 
   public void activate() throws Exception {
-    UIActionTypeForm uiActionTypeForm = findFirstComponentOfType(UIActionTypeForm.class) ;
-    uiActionTypeForm.update() ;
-    UIActionList uiActionList = findFirstComponentOfType(UIActionList.class) ;
-    uiActionList.updateGrid(getAncestorOfType(UIJCRExplorer.class).getCurrentNode(), uiActionList.getChild(UIPageIterator.class).getCurrentPage());
+    UIActionTypeForm uiActionTypeForm = findFirstComponentOfType(UIActionTypeForm.class);
+    uiActionTypeForm.update();
+    UIActionList uiActionList = findFirstComponentOfType(UIActionList.class);
+    uiActionList.updateGrid(getAncestorOfType(UIJCRExplorer.class).getCurrentNode(),
+                            uiActionList.getChild(UIPageIterator.class).getCurrentPage());
   }
 
   /**
@@ -66,11 +67,11 @@ public class UIActionManager extends UIContainer implements UIPopupComponent {
   }
 
   public void setDefaultConfig() throws Exception {
-    UIActionContainer uiActionContainer = getChild(UIActionContainer.class) ;
-    UIActionTypeForm uiActionType = uiActionContainer.getChild(UIActionTypeForm.class) ;
-    uiActionType.setDefaultActionType() ;
-    Class[] renderClasses = {UIActionTypeForm.class, UIActionForm.class} ;
-    uiActionContainer.setRenderedChildrenOfTypes(renderClasses) ;
+    UIActionContainer uiActionContainer = getChild(UIActionContainer.class);
+    UIActionTypeForm uiActionType = uiActionContainer.getChild(UIActionTypeForm.class);
+    uiActionType.setDefaultActionType();
+    Class[] renderClasses = { UIActionTypeForm.class, UIActionForm.class };
+    uiActionContainer.setRenderedChildrenOfTypes(renderClasses);
   }
 
 }

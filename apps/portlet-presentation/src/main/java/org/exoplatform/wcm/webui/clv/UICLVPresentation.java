@@ -608,7 +608,8 @@ public class UICLVPresentation extends UIContainer {
 
   public boolean isShowRssLink() {
     return isShowField(UICLVPortlet.PREFERENCE_SHOW_RSSLINK)
-        && (this.getAncestorOfType(UICLVPortlet.class).getFolderPathParamValue() != null || UICLVPortlet.DISPLAY_MODE_AUTOMATIC.equals(Utils.getPortletPreference(UICLVPortlet.PREFERENCE_DISPLAY_MODE)));
+        && (this.getAncestorOfType(UICLVPortlet.class).getFolderPathParamValue() != null
+            || UICLVPortlet.DISPLAY_MODE_AUTOMATIC.equals(Utils.getPortletPreference(UICLVPortlet.PREFERENCE_DISPLAY_MODE)));
   }
 
   /**
