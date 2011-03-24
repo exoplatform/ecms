@@ -265,10 +265,11 @@ UploadForm.prototype.updateFiles = function(nodeId) {
 	if (currentFolder == null) currentFolder = '';
 	driverName = eXo.ecm.ECS.driverName;
 	strConnector 	+= eXo.ecm.ECS.cmdGetFolderAndFile+"driverName="+driverName+"&currentFolder="+currentFolder+"&";	
-	var filter = '';
-	var dropdownlist = document.getElementById("Filter");
-	if(dropdownlist) filter = dropdownlist.options[dropdownlist.selectedIndex].value;
-	else filter = 'Web Contents';
+	var dropdownlist = document.getElementById("Filter");	
+  if(dropdownlist) {
+		if(dropdownlist.type=="hidden") filter = dropdownlist.value;		
+		else filter = dropdownlist.options[dropdownlist.selectedIndex].value;
+	}	else filter = 'Web Contents';
 	var connector = eXo.ecm.ECS.hostName + strConnector+"repositoryName="+eXo.ecm.ECS.repositoryName+"&workspaceName="+eXo.ecm.ECS.workspaceName+"&userId=" + eXo.ecm.ECS.userId + "&filterBy="+filter;
 	var xmlTreeNodes = eXo.ecm.WCMUtils.request(connector);
 	if(!xmlTreeNodes) return;

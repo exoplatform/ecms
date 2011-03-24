@@ -6,7 +6,7 @@ CKEDITOR.eXoPath = CKEDITOR.basePath.substr(0, CKEDITOR.basePath.indexOf("ckedit
 
 // config to add custom plugin	
 (function() {CKEDITOR.plugins.addExternal('content',CKEDITOR.eXoPath+'eXoPlugins/content/','plugin.js');})();
-(function() {CKEDITOR.plugins.addExternal('insertImage',CKEDITOR.eXoPath+'eXoPlugins/insertImage/','plugin.js');})();
+(function() {CKEDITOR.plugins.addExternal('insertImage',CKEDITOR.eXoPath+'eXoPlugins/content/','plugin.js');})();
 (function() {CKEDITOR.plugins.addExternal('insertGadget',CKEDITOR.eXoPath+'eXoPlugins/insertGadget/','plugin.js');})();
 (function() {CKEDITOR.plugins.addExternal('insertPortalLink',CKEDITOR.eXoPath+'eXoPlugins/insertPortalLink/','plugin.js');})();
 

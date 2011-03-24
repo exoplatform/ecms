@@ -25,7 +25,9 @@ eXp.init = function(){
 	eXo.ecm.ECS.eventNode = false;
 	eXo.ecm.ECS.isUpload = false;
 	var currentEditor = this.getUrlParam("currentInstance") || "";
+  var insertContentType = this.getUrlParam("insertContentType") || "";
 	eXo.ecm.ECS.currentEditor = eval('CKEDITOR.instances.'+currentEditor);
+	eXo.ecm.ECS.insertContentType = insertContentType;
 };
 
 eXp.getID = function() {
