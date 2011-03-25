@@ -74,31 +74,36 @@
 <tr>
 	<td>type</td>
 	<td>FormGeneratorName</td>
-	<td>LamYKhue_16</td>
+	<td>Test_SNF_ECMS_16</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[text()='Form builder']</td>
+	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[@id='UIFormGeneratorPortlet']/div[1]/div/div/div/div[2]/div/div/div/div</td>
+	<td>//div[text()='Form builder']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@id='UITabContentContainer']/div/div[1]/div/div/div[1]</td>
+	<td>//div[text()='Input Text']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[@id='UITabContentContainer']/div/div[1]/div/div/div[1]</td>
+	<td>//div[text()='Input Text']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@id='UITabContentContainer']/div/div[3]/div/div/div[1]</td>
+	<td>//div[text()='Text Area']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[@id='UITabContentContainer']/div/div[3]/div/div/div[1]</td>
+	<td>//div[text()='Text Area']</td>
 	<td></td>
 </tr>
 <tr>
@@ -117,23 +122,23 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForText</td>
-	<td>//div[3]/div/div/div/div/div[2]</td>
-	<td>Nodetype LamYKhue_16's template is generated successful</td>
+	<td>verifyTextPresent</td>
+	<td>Nodetype Test_SNF_ECMS_16's template is generated successful</td>
+	<td></td>
 </tr>
 <tr>
-	<td>verifyText</td>
-	<td>//div[3]/div/div/div/div/div[2]</td>
-	<td>Nodetype LamYKhue_16's template is generated successful</td>
+	<td>waitForTextPresent</td>
+	<td>Nodetype Test_SNF_ECMS_16's template is generated successful</td>
+	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[3]/div/div[2]/div/div/div/div/div/div[3]/div/table/tbody/tr/td/div/div/div/div/a</td>
+	<td>//div[@id='UIFormGeneratorPortlet']//a[text()=&quot;OK&quot;]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[3]/div/div[2]/div/div/div/div/div/div[3]/div/table/tbody/tr/td/div/div/div/div/a</td>
+	<td>//div[@id='UIFormGeneratorPortlet']//a[text()=&quot;OK&quot;]</td>
 	<td></td>
 </tr>
 <tr>
@@ -153,12 +158,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@id='UISideBar']/div/div[1]/div[2]/div[1]/div/div/div/a/div</td>
+	<td>//div[@id='UISideBar']//div[@title=&quot;Show Drives&quot;]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[@id='UISideBar']/div/div[1]/div[2]/div[1]/div/div/div/a/div</td>
+	<td>//div[@id='UISideBar']//div[@title=&quot;Show Drives&quot;]</td>
 	<td></td>
 </tr>
 <tr>
@@ -234,7 +239,7 @@
 <tr>
 	<td>select</td>
 	<td>selectTemplate</td>
-	<td>label=LamYKhue_16</td>
+	<td>label=Test_SNF_ECMS_16</td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
@@ -277,6 +282,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>echo</td>
+	<td>-- Select node --</td>
+	<td></td>
+</tr>
+<tr>
 	<td>waitForElementPresent</td>
 	<td>//div[@id='iconTreeExplorer']/div[2]/a</td>
 	<td></td>
@@ -287,18 +297,23 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>link=Delete</td>
+	<td></td>
+</tr>
+<tr>
 	<td>click</td>
 	<td>link=Delete</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@id='UIPopupWindow']/div/div[2]/div/div/div/div/div/div/div/div[2]/table/tbody/tr/td/div[1]/div/div/div/a</td>
+	<td>//div[@id='UIPopupWindow']//a[text()='OK']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[@id='UIPopupWindow']/div/div[2]/div/div/div/div/div/div/div/div[2]/table/tbody/tr/td/div[1]/div/div/div/a</td>
+	<td>//div[@id='UIPopupWindow']//a[text()='OK']</td>
 	<td></td>
 </tr>
 <tr>
