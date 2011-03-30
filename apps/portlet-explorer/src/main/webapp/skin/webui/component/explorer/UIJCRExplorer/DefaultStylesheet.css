@@ -181,14 +181,14 @@
  	padding: 4px 8px 4px 0px; /* orientation=lt */
  	padding: 4px 0px 4px 8px; /* orientation=rt */
  	_width: 120px;
-	width: 148px;
+	width: 43%;
 }
 
 .UIJCRExplorerPortlet .SelectNodePath .UIFormInputSet .UIFormInputSetWithAction .UIFormGrid td.FieldLabel {
  	padding: 4px 8px 4px 0px; /* orientation=lt */
  	padding: 4px 0px 4px 8px; /* orientation=rt */
  	_width: 120px;
-	width: 148px;
+	width: 43%;
 }
 
 
