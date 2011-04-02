@@ -456,8 +456,7 @@ EcmContentSelector.prototype.listFiles = function(list) {
   var ECS = eXo.ecm.ECS;
   //Get view type to display content  
   var viewType = eXo.ecm.ECS.viewType; 
-  //view = document.getElementById("viewTypeID").value;
-     
+  //view = document.getElementById("viewTypeID").value;    
 	var rightWS = document.getElementById('RightWorkspace');  
 	if(!list || list.length <= 0) {
 		if(viewType=="list") {
@@ -469,7 +468,7 @@ EcmContentSelector.prototype.listFiles = function(list) {
 			document.getElementById("pageNavPosition").innerHTML = "";
 		} else {
 			var container = eXo.core.DOMUtil.findFirstDescendantByClass(rightWS,'div','ActionIconsContainer');
-			container.innerHTML = "<div userLanguage=\"UserLanguage.NoContent\">There is no content</div>";
+			container.innerHTML = "<div class=\"NoContent\" userLanguage=\"UserLanguage.NoContent\">There is no content</div>";
 			document.getElementById("pageNavPosition").innerHTML = "";
 		}
 		return;
@@ -515,9 +514,9 @@ EcmContentSelector.prototype.listFiles = function(list) {
 				var strViewContent = "";
 				var command = ECS.connector + "/thumbnailImage/medium/" + ECS.repositoryName + "/" + ECS.workspaceName + path + "/?reloadnum=" + Math.random();        
         if(nodeType.indexOf("image")>=0)  
-					strViewContent += '<div class="ActionIconBox"><div class="NodeLabel"><div class="ThumbnailImage"><div style="display: block;" class="LoadingProgressIcon"><img src="'+command+'" /></div><div style="display: none;" class="Icon48x48 default48x48Icon '+nodeTypeIcon+'"></div></div><div class="ActionIconLabel" style="width: auto;"><a class="ActionLabel" onclick="eXo.ecm.ECS.insertContent(this);" url="'+url+'" path="'+path+'" nodeType="'+nodeType+'" title="'+node+'">'+node+'</a></div></div>';
+					strViewContent += '<div class="ActionIconBox" onclick="eXo.ecm.ECS.insertContent(this);" url="'+url+'" path="'+path+'" nodeType="'+nodeType+'" title="'+node+'"><div class="NodeLabel"><div class="ThumbnailImage"><div style="display: block;" class="LoadingProgressIcon"><img src="'+command+'" /></div><div style="display: none;" class="Icon48x48 default48x48Icon '+nodeTypeIcon+'"></div></div><div class="ActionIconLabel" style="width: auto;"><a class="ActionLabel" onclick="eXo.ecm.ECS.insertContent(this);" url="'+url+'" path="'+path+'" nodeType="'+nodeType+'" title="'+node+'">'+node+'</a></div></div>';
         else 
-					strViewContent += '<div class="ActionIconBox"><div class="NodeLabel"><div class="ThumbnailImage"><div style="display: block;" class="LoadingProgressIcon"><img src="'+command+'" /></div><div style="display: block;" class="Icon48x48 default48x48Icon '+nodeTypeIcon+'"></div></div><div class="ActionIconLabel" style="width: auto;"><a class="ActionLabel" onclick="eXo.ecm.ECS.insertContent(this);" url="'+url+'" path="'+path+'" nodeType="'+nodeType+'" title="'+node+'">'+node+'</a></div></div>';	        
+					strViewContent += '<div class="ActionIconBox" onclick="eXo.ecm.ECS.insertContent(this);" url="'+url+'" path="'+path+'" nodeType="'+nodeType+'" title="'+node+'"><div class="NodeLabel"><div class="ThumbnailImage"><div style="display: block;" class="LoadingProgressIcon"><img src="'+command+'" /></div><div style="display: block;" class="Icon48x48 default48x48Icon '+nodeTypeIcon+'"></div></div><div class="ActionIconLabel" style="width: auto;"><a class="ActionLabel" onclick="eXo.ecm.ECS.insertContent(this);" url="'+url+'" path="'+path+'" nodeType="'+nodeType+'" title="'+node+'">'+node+'</a></div></div>';	        
 				container.innerHTML += strViewContent;
 			}
 		}			
@@ -544,7 +543,7 @@ EcmContentSelector.prototype.updateHTML = function(viewType) {
 		strViewPresent += "<th class=\"THBar\" style=\"width: 80px;\" userLanguage=\"UserLanguage.FileSize\"> Size </th></tr></thead>";
 		strViewPresent += "</table></div>";
 	} else {
-		strViewPresent = "<div class=\"UIThumbnailsView\" style=\"overflow-y: auto; overflow-x: hidden;\"><div class=\"ActionIconsContainer\" id=\"ListRecords\"></div></div>";
+		strViewPresent = "<div class=\"UIThumbnailsView\" style=\"overflow-y: auto; overflow-x: hidden;\"><div class=\"ActionIconsContainer\" id=\"ActionIconsContainer\"></div></div>";
 	}
 	var rightWS = document.getElementById('RightWorkspace');  
   if(rightWS) {
@@ -812,7 +811,7 @@ EcmContentSelector.prototype.insertContent = function(objNode) {
  		index = temp.indexOf("%27");
   }
   url = eXo.ecm.ECS.hostName+temp;    
- 	var name 	= encodeURIComponent(objNode.innerHTML);
+ 	var name 	= encodeURIComponent(objNode.title);
 		var strHTML = '';	
 		var editor = eXo.ecm.ECS.currentEditor ;    
     if(eXo.ecm.ECS.components=="") {
@@ -986,13 +985,32 @@ EcmContentSelector.prototype.changeFilter = function() {
 EcmContentSelector.prototype.changeViewType = function(viewType) {  
   eXo.ecm.ECS.viewType = viewType;  
   var view = document.getElementById("view");
-	view.innerHTML = "";
+	view.innerHTML = "";  
   if(viewType=="list") 
 		view.innerHTML = "<a onClick=\"eXo.ecm.ECS.changeViewType('thumbnail');\" title=\"Thumbnail View\" class=\"thumbnail-view\" ><span></span></a><a class=\"list-view-selected\" title=\"List View\"><span></span></a><input type=\"hidden\" id=\"viewTypeID\" value=\"list\">";
   else
 		view.innerHTML = "<a class=\"thumbnail-view-selected\" title=\"Thumbnail View\"><span></span></a><a onClick=\"eXo.ecm.ECS.changeViewType('list');\" class=\"list-view\" title=\"List View\"><span></span></a><input type=\"hidden\" id=\"viewTypeID\" value=\"thumbnail\">";
   eXo.ecm.ECS.switchView = true;	   
 	if(eXo.ecm.ECS.currentNode) eXo.ecm.ECS.getDir(eXo.ecm.ECS.currentNode, eXo.ecm.ECS.eventNode);
+  else {
+		var strViewPresent = "";
+		if(viewType=="list") {
+			strViewPresent = "<div class=\"ListView\"><table cellspacing=\"0\" style=\"table-layout: fixed; width: 100%;\" id=\"ListRecords\">";
+			strViewPresent += "<thead><tr><th class=\"THBar\" userLanguage=\"UserLanguage.FileName\"> Name </th>";
+			strViewPresent += "<th class=\"THBar\" style=\"width: 120px;\" userLanguage=\"UserLanguage.CreateDate\"> Date </th>";
+			strViewPresent += "<th class=\"THBar\" style=\"width: 80px;\" userLanguage=\"UserLanguage.FileSize\"> Size </th></tr></thead>";
+      strViewPresent += "<tr><td class=\"Item TRNoContent\" colspan=\"3\" userLanguage=\"UserLanguage.NoContent\">There is no content</td></tr>";
+			strViewPresent += "</table></div>";
+		} else {
+			strViewPresent = "<div class=\"UIThumbnailsView\" style=\"overflow-y: auto; overflow-x: hidden;\"><div class=\"ActionIconsContainer\" id=\"ActionIconsContainer\"><div class=\"NoContent\" userLanguage=\"UserLanguage.NoContent\">There is no content</div></div></div>";
+		}
+		var rightWS = document.getElementById('RightWorkspace');  
+		if(rightWS) {
+			rightWS.innerHTML = "";
+			strViewPresent += "<div class=\"PageIterator\" id=\"pageNavPosition\"></div><div style=\"clear: left;\"><span></span></div>";
+			rightWS.innerHTML = strViewPresent;
+		}
+	}
   eXo.ecm.ECS.switchView = false;
 	var filter = document.getElementById('Filter');
 	var action = filter.getAttribute("action");

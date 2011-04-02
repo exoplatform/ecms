@@ -665,6 +665,7 @@ body {
   margin: auto;
   height: 30px;
   text-align: center;
+  cursor: pointer;
 }
 
 .UIHomePagePortlet  .UIWorkingWorkspace .RightWorkspace .UIThumbnailsView .ActionIconContainer {
@@ -675,12 +676,19 @@ body {
   margin: auto;
 }
 
- .UIThumbnailsView .ActionIconBox {
+.UIHomePagePortlet  .UIWorkingWorkspace .RightWorkspace .UIThumbnailsView .ActionIconBox {
 	width: 90px;
   float: left; /* orientation=lt */  
   margin: 5px;
   height: 110px;
-  overflow:hidden
+  overflow:hidden;
+	cursor: pointer;
+}
+
+.UIThumbnailsView .NoContent{
+  color: #FF5604;
+  font-style: italic;
+  text-align: center;
 }
 
 /*############################## -- End UIThumbnailsView -- ##############################*/
