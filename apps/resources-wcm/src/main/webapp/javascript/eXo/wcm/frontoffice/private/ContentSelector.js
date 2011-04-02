@@ -635,7 +635,7 @@ EcmContentSelector.prototype.listMutilFiles = function(list) {
 		var node = list[i].getAttribute("name");
 		var newRow = tblRWS.insertRow(i+1);
 		newRow.className = clazz;
-		newRow.insertCell(0).innerHTML = '<a class="Item default16x16Icon '+clazzItem+'" url="'+url+'" path="'+path+'" nodeType="'+nodeType+'" style = "overflow:hidden;" title="'+decodeURIComponent(node)+' onclick="eXo.ecm.ECS.addFile2ListContent(this);">'+node.trunc(15,false)+'</a>';
+		newRow.insertCell(0).innerHTML = '<a class="Item default16x16Icon '+clazzItem+'" url="'+url+'" path="'+path+'" nodeType="'+nodeType+'" style = "overflow:hidden;" title="'+decodeURIComponent(node)+'" onclick="eXo.ecm.ECS.addFile2ListContent(this);">'+node.trunc(15,false)+'</a>';
 				
 	}
 	
@@ -885,12 +885,12 @@ EcmContentSelector.prototype.insertMultiContent = function(operation, currentpat
 	}
 };
 
-EcmContentSelector.prototype.addFile2ListContent = function(objNode) {
+EcmContentSelector.prototype.addFile2ListContent = function(objNode) {  
 	var tblListFilesContent = document.getElementById("ListFilesContent");
 	var rowsContent = eXo.core.DOMUtil.findDescendantsByTagName(tblListFilesContent, "tr");
 	var trNoContent = eXo.core.DOMUtil.findFirstDescendantByClass(tblListFilesContent, "td", "TRNoContent");
 	if(trNoContent) tblListFilesContent.deleteRow(trNoContent.parentNode.rowIndex);
-	var url = objNode.getAttribute("url");
+	var url = objNode.getAttribute("url");  
 	var nodeType	= objNode.getAttribute("nodeType");
 	var path = objNode.getAttribute("path");
 	var selectedNodeList = eXo.core.DOMUtil.findDescendantsByClass(tblListFilesContent, "a", "Item");
@@ -904,7 +904,7 @@ EcmContentSelector.prototype.addFile2ListContent = function(objNode) {
 	var	clazzItem = objNode.className;
 	var newRow = tblListFilesContent.insertRow(tblListFilesContent.children[0].children.length);
 	newRow.className = "Item";
-	newRow.insertCell(0).innerHTML = '<a class="Item" url="'+url+'" path="'+decodeURIComponent(path)+'" nodeType="'+nodeType+'style = "overflow:hidden" title="'+decodeURIComponent(node)+'">'+decodeURIComponent(path).trunc(15,false)+'</a>';
+	newRow.insertCell(0).innerHTML = '<a class="Item" url="'+url+'" path="'+decodeURIComponent(path)+'" nodeType="'+nodeType+'style = "overflow:hidden" title="'+decodeURIComponent(objNode)+'">'+decodeURIComponent(path).trunc(15,false)+'</a>';
 	newRow.insertCell(1).innerHTML = '<div class="DeleteIcon" onclick="eXo.ecm.ECS.removeContent(this);"><span></span></div>';
 	this.insertMultiContent("SaveTemporary", path);	
 };
