@@ -8,7 +8,7 @@ eXp.init = function(){
 		eXo.ecm.ECS.accessMode = accessMode;
 		eXo.ecm.ECS.userId = userName;
 		eXo.ecm.ECS.userLanguage = language;
-	}
+	}  
 	var parentLocation = window.opener.location;
 	eXo.ecm.ECS.hostName = parentLocation.href.substring(0, parentLocation.href.indexOf(parentLocation.pathname));
 	eXo.ecm.ECS.repositoryName = "repository";
@@ -26,8 +26,12 @@ eXp.init = function(){
 	eXo.ecm.ECS.isUpload = false;
 	var currentEditor = this.getUrlParam("currentInstance") || "";
   var insertContentType = this.getUrlParam("insertContentType") || "";
+  var viewType = this.getUrlParam("viewType") || "";  
+	var components = this.getUrlParam("components") || "";
 	eXo.ecm.ECS.currentEditor = eval('CKEDITOR.instances.'+currentEditor);
 	eXo.ecm.ECS.insertContentType = insertContentType;
+  eXo.ecm.ECS.viewType = viewType;
+	eXo.ecm.ECS.components = components;	
 };
 
 eXp.getID = function() {

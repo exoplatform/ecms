@@ -24,6 +24,7 @@ function EcmContentSelector() {
 	this.initPathExpanded ="";
 	this.initComponentIdExpanded ="";
 	this.deleteConfirmationMsg="";
+  this.switchView = false;
 }
 EcmContentSelector.prototype.setDeleteConfirmationMessage = function(msg) {
 	this.deleteConfirmationMsg=msg;
@@ -76,9 +77,9 @@ EcmContentSelector.prototype.ajaxRequest = function(url) {
 
 EcmContentSelector.prototype.processResponse = function() {
 	if (eXo.ecm.ECS.xmlHttpRequest.readyState == 4) {
-     if (eXo.ecm.ECS.xmlHttpRequest.status == 200) {    
+     if (eXo.ecm.ECS.xmlHttpRequest.status == 200) {					  
        eXo.ecm.ECS.buildECSTreeView();
-       if (eXo.ecm.ECS.initDriverExpanded!=null && eXo.ecm.ECS.initDriverExpanded.length>0) { 
+       if (eXo.ecm.ECS.initDriverExpanded!=null && eXo.ecm.ECS.initDriverExpanded.length>0) {          
          eXo.ecm.ECS.waitAndInitPath(eXo.ecm.ECS.initDriverExpanded, eXo.ecm.ECS.initPathExpanded, eXo.ecm.ECS.initComponentIdExpanded);
        }
     } else {
@@ -92,7 +93,7 @@ EcmContentSelector.prototype.initRequestXmlTree = function(typeObj, iDriver, iPa
   this.initDriverExpanded =iDriver;
   this.initPathExpanded =iPath;
   this.initComponentIdExpanded =iID;
-	if(!typeObj) return;
+	if(!typeObj) return;  
 	eXo.ecm.ECS.typeObj = false;
 	switch(typeObj) {
 		case "folder" :
@@ -110,11 +111,11 @@ EcmContentSelector.prototype.initRequestXmlTree = function(typeObj, iDriver, iPa
 		default :
 			eXo.ecm.ECS.typeObj = false;
 			break;
-	}
+	}	
 	eXo.ecm.ECS.isShowFilter();
-	var ECS = eXo.ecm.ECS;
+	var ECS = eXo.ecm.ECS;  
 	var command = ECS.cmdEcmDriver+ECS.cmdGetDriver + "lang=" + ECS.userLanguage;
-	var url = ECS.hostName+ECS.connector+ command ;
+	var url = ECS.hostName+ECS.connector+ command ;    
 	eXo.ecm.ECS.ajaxRequest(url);	
 };
 
@@ -143,7 +144,7 @@ EcmContentSelector.prototype.buildECSTreeView = function() {
 	if(uiLeftWorkspace) uiLeftWorkspace.innerHTML = treeHTML;
 };
 
-EcmContentSelector.prototype.getDir = function(currentNode, event) {
+EcmContentSelector.prototype.getDir = function(currentNode, event) {  
 	var ECS = eXo.ecm.ECS;
 	if (event)
 		eXo.ecm.ECS.eventNode = event;
@@ -155,7 +156,7 @@ EcmContentSelector.prototype.getDir = function(currentNode, event) {
 	var currentFolder;
 	var driverName;	
 	var driverPath = currentNode.getAttribute("driverPath");
-	var nodeDriveName = currentNode.getAttribute("nodedrivename");
+	var nodeDriveName = currentNode.getAttribute("nodedrivename");  
 	if(driverPath && driverPath != "") {		
 		driverName =	currentNode.getAttribute('name');
 		eXo.ecm.ECS.driverName = driverName;
@@ -183,8 +184,7 @@ EcmContentSelector.prototype.getDir = function(currentNode, event) {
 
 
 			eXo.ecm.ECS.showUpload();	
-	}
-	
+	}	
 	
 	eXo.ecm.ECS.currentFolder = currentFolder;
 	eXo.ecm.ECS.currentNode = currentNode;
@@ -201,14 +201,14 @@ EcmContentSelector.prototype.getDir = function(currentNode, event) {
 	}	else filter = 'All';
 
 	var command = ECS.cmdEcmDriver+ECS.cmdGetFolderAndFile+"driverName="+driverName+"&currentFolder="+encodeURIComponent(currentFolder)+"&currentPortal="+ECS.portalName+"&repositoryName="+ECS.repositoryName+"&workspaceName="+ECS.workspaceName;
-	var url = ECS.hostName + ECS.connector+command+"&filterBy="+filter;
-	if(eXo.ecm.ECS.strConnection == url) return;	
+	var url = ECS.hostName + ECS.connector+command+"&filterBy="+filter;	
+	//if(eXo.ecm.ECS.strConnection == url) return;	
 	eXo.ecm.ECS.strConnection = url;
 	eXo.ecm.ECS.renderSubTrees(currentNode, event, url);
 	eXo.ecm.ECS.renderBreadcrumbs(currentNode);
 };
 
-EcmContentSelector.prototype.renderSubTree = function(currentNode) {
+EcmContentSelector.prototype.renderSubTree = function(currentNode) {  
 	if(!currentNode) return;
 	var nodeList = currentNode.getElementsByTagName('Folder');
 	var nodeListParent = currentNode.getElementsByTagName('Folders');
@@ -216,7 +216,7 @@ EcmContentSelector.prototype.renderSubTree = function(currentNode) {
 	if(nodeList && nodeList.length > 0) {
 		treeHTML += '<div class="ChildrenContainer" style="display:none;">'	;
 		for(var i = 0; i < nodeList.length; i++) {
-			var id = eXo.ecm.ECS.generateIdDriver(nodeList[i]);
+			var id = eXo.ecm.ECS.generateIdDriver(nodeList[i]);			
 			var strName = nodeList[i].getAttribute("name");
 			var driverPath = nodeList[i].getAttribute("driverPath");
 			var repository =  nodeList[i].getAttribute("repository");
@@ -224,7 +224,7 @@ EcmContentSelector.prototype.renderSubTree = function(currentNode) {
 			var isUpload = nodeList[i].getAttribute("isUpload");
 			var label = nodeList[i].getAttribute("label");
 			var nodeDriveName = nodeList[i].getAttribute("nodeDriveName");
-			if (nodeDriveName==null) nodeDriveName='';
+			if (nodeDriveName==null) nodeDriveName='';			
 			if (!label) label = strName;
 			treeHTML += '<div class="Node" onclick="eXo.ecm.ECS.actionColExp(this);">';
 			treeHTML += 	'<div class="ExpandIcon">';
@@ -239,10 +239,9 @@ EcmContentSelector.prototype.renderSubTree = function(currentNode) {
 	return treeHTML;
 };
 
-EcmContentSelector.prototype.listRootFolder = function(rootNode) {
+EcmContentSelector.prototype.listRootFolder = function(rootNode) {  
 	eXo.ecm.ECS.hideUpload();
 	if(eXo.ecm.ECS.typeObj != 'folder') return;
-        
 	var rightWS = document.getElementById('RightWorkspace');
 	var tblRWS  = eXo.core.DOMUtil.findDescendantsByTagName(rightWS, "table")[0];
 	var rowsRWS = eXo.core.DOMUtil.findDescendantsByTagName(tblRWS, "tr");
@@ -267,15 +266,15 @@ EcmContentSelector.prototype.listRootFolder = function(rootNode) {
 	}
 };
 
-EcmContentSelector.prototype.renderSubTrees = function(currentNode, event, connector) {
+EcmContentSelector.prototype.renderSubTrees = function(currentNode, event, connector) {  
 	var event = event || window.event;
 	if (event)
-		event.cancelBubble = true;
-	if(!currentNode) return;
+		event.cancelBubble = true;  
+	if(!currentNode) return;  
 	var treeHTML = '';
 	var fileList = '';
 	var folderList = '';
-	var nodeList = currentNode.getElementsByTagName('Folder');
+	var nodeList = currentNode.getElementsByTagName('Folder');  
 	if(nodeList && nodeList.length > 0) {
 		folderList = nodeList;	
 		fileList = currentNode.getElementsByTagName('File');
@@ -295,7 +294,7 @@ EcmContentSelector.prototype.renderSubTrees = function(currentNode, event, conne
 			treeHTML +=	'</div>';
 		}
 		treeHTML += '</div>';
-	} else {
+	} else {    
 		var xmlTreeNodes = eXo.ecm.WCMUtils.request(connector);
 		var currentNodeList = xmlTreeNodes.getElementsByTagName('Folder');
 		folderList = currentNodeList;
@@ -319,16 +318,16 @@ EcmContentSelector.prototype.renderSubTrees = function(currentNode, event, conne
 			var nodeIcon = eXo.core.DOMUtil.findAncestorByTagName(currentNode, "div");
 			var nextElementNode = eXo.core.DOMUtil.findNextElementByTagName(parentNode, "div");
 			var tmpNode = document.createElement("div");
-			tmpNode.className = "ChildrenContainer" ;
+			tmpNode.className = "ChildrenContainer" ;      
 			tmpNode.innerHTML = treeHTML;
-			if(nextElementNode && nextElementNode.className == "Node") {
+			if(nextElementNode && nextElementNode.className == "Node") {        
 				nextElementNode.parentNode.insertBefore(tmpNode, nextElementNode) ;
 				nodeIcon.className = 'CollapseIcon';				
 				tmpNode.style.display = "block";
-			} else if(nextElementNode && nextElementNode.className == "ChildrenContainer"){
+			} else if(nextElementNode && nextElementNode.className == "ChildrenContainer"){				
 				eXo.ecm.ECS.actionColExp(parentNode);
 				if(nodeIcon) nodeIcon.className = 'ExpandIcon';
-			} else {
+			} else {				
 				var cldrContainer = eXo.core.DOMUtil.findAncestorByClass(currentNode, "ChildrenContainer");
 				nodeIcon.className = 'CollapseIcon';
 				cldrContainer.appendChild(tmpNode);
@@ -340,26 +339,28 @@ EcmContentSelector.prototype.renderSubTrees = function(currentNode, event, conne
 		eXo.ecm.ECS.listFolders(folderList);
 	} else if(eXo.ecm.ECS.typeObj == "multi"){
 		eXo.ecm.ECS.listMutilFiles(fileList);
-	} else {		
+	} else {		    
 		eXo.ecm.ECS.listFiles(fileList);
 	}
 };
 
 EcmContentSelector.prototype.actionColExp = function(objNode) {
+ 
 	if(!objNode) return;
 	var nextElt = eXo.core.DOMUtil.findNextElementByTagName(objNode, "div");
 	var iconElt = eXo.core.DOMUtil.getChildrenByTagName(objNode, "div")[0];
 	if(!nextElt || nextElt.className != "ChildrenContainer") {		
 		var currentNode	= eXo.core.DOMUtil.findFirstDescendantByClass(objNode,"a","NodeIcon");			
-		if (currentNode != null) {
+		if (currentNode != null) {      
 			eXo.ecm.ECS.getDir(currentNode, false);
 		} else return;
 	}
-	if(nextElt.style.display != 'block') {
+	if(nextElt.style.display != 'block') {    
 		nextElt.style.display = 'block';
 		iconElt.className = 'CollapseIcon';
-	} else {
-		nextElt.style.display = 'none';
+	} else if(!eXo.ecm.ECS.switchView) {
+    eXo.ecm.ECS.switchView = false;
+    nextElt.style.display = 'none';
 		iconElt.className = 'ExpandIcon';
 	}
 };
@@ -438,7 +439,7 @@ EcmContentSelector.prototype.actionBreadcrumbs = function(nodeId) {
 	if(eXo.ecm.ECS.strConnection == url) return;	
 	eXo.ecm.ECS.strConnection = url;
 	var xmlDoc = eXo.ecm.WCMUtils.request(url);
-	if(!xmlDoc) return;
+	if(!xmlDoc) return;  
 	if(eXo.ecm.ECS.typeObj == "folder") {
 		var folderList = xmlDoc.getElementsByTagName("Folder");
 		eXo.ecm.ECS.listFolders(folderList);
@@ -451,57 +452,107 @@ EcmContentSelector.prototype.actionBreadcrumbs = function(nodeId) {
 	} 
 };
 
-EcmContentSelector.prototype.listFiles = function(list) {
-	var rightWS = document.getElementById('RightWorkspace');
-	var tblRWS  = eXo.core.DOMUtil.findDescendantsByTagName(rightWS, "table")[0];
-	var rowsRWS = eXo.core.DOMUtil.findDescendantsByTagName(tblRWS, "tr");
-	if(rowsRWS && rowsRWS.length > 0) {
-		for(var i = 0; i < rowsRWS.length; i++) {
-			if(i > 0) tblRWS.deleteRow(rowsRWS[i].rowIndex);
-		}
-	} 
+EcmContentSelector.prototype.listFiles = function(list) {	
+  var ECS = eXo.ecm.ECS;
+  //Get view type to display content  
+  var viewType = eXo.ecm.ECS.viewType; 
+  //view = document.getElementById("viewTypeID").value;
+     
+	var rightWS = document.getElementById('RightWorkspace');  
 	if(!list || list.length <= 0) {
-		var tdNoContent = tblRWS.insertRow(1).insertCell(0);
-		tdNoContent.innerHTML = "There is no content";
-		tdNoContent.className = "Item TRNoContent";
-		tdNoContent.setAttribute("colspan",3);
-		tdNoContent.userLanguage = "UserLanguage.NoContent";	
-		document.getElementById("pageNavPosition").innerHTML = "";
-		return;
-	}
-	var listItem = '';
-	var clazz = 'OddItem';
-	for(var i = 0; i < list.length; i++) {
-		if(clazz == 'EventItem') {
-			clazz = 'OddItem';
-		} else if(clazz == 'OddItem') {
-			clazz = 'EventItem';
+		if(viewType=="list") {
+			var tdNoContent = tblRWS.insertRow(0).insertCell(0);
+			tdNoContent.innerHTML = "There is no content";
+			tdNoContent.className = "Item TRNoContent";
+			tdNoContent.setAttribute("colspan",3);
+			tdNoContent.userLanguage = "UserLanguage.NoContent";	
+			document.getElementById("pageNavPosition").innerHTML = "";
+		} else {
+			var container = eXo.core.DOMUtil.findFirstDescendantByClass(rightWS,'div','ActionIconsContainer');
+			container.innerHTML = "<div userLanguage=\"UserLanguage.NoContent\">There is no content</div>";
+			document.getElementById("pageNavPosition").innerHTML = "";
 		}
-		var clazzItem = eXo.ecm.ECS.getClazzIcon(list[i].getAttribute("nodeType"));
-		var url 			= list[i].getAttribute("url");
-		var path 			= list[i].getAttribute("path");
-		var nodeType	= list[i].getAttribute("nodeType");
-		var node = list[i].getAttribute("name");
-		var size = 	list[i].getAttribute("size");
-		if(size == 0) size = "";
-		else size += '&nbsp;kb';
-		var newRow = tblRWS.insertRow(i+1);
-		newRow.className = clazz;		
-		newRow.insertCell(0).innerHTML = '<a class="Item default16x16Icon '+clazzItem+'" url="'+url+'" path="'+path+'" nodeType="'+nodeType+'" style = "overflow:hidden;" title="'+decodeURIComponent(node)+'" onclick="eXo.ecm.ECS.insertContent(this);">'+decodeURIComponent(node).trunc(15,false)+'</a>';
-		newRow.insertCell(1).innerHTML = '<div class="Item">'+ list[i].getAttribute("dateCreated") +'</div>';
-		newRow.insertCell(2).innerHTML = '<div class="Item">'+ size +'</div>';
-	}
-	
+		return;
+	} else {		
+    
+    if(viewType=="list") {
+			var tblRWS  = eXo.core.DOMUtil.findDescendantsByTagName(rightWS, "table")[0];
+			if(tblRWS) {
+				var rowsRWS = eXo.core.DOMUtil.findDescendantsByTagName(tblRWS, "tr");
+				if(rowsRWS && rowsRWS.length > 0) {
+					for(var i = 0; i < rowsRWS.length; i++) {
+						if(i > 0) tblRWS.deleteRow(rowsRWS[i].rowIndex);
+					}
+				} 
+			} else eXo.ecm.ECS.updateHTML(viewType);			
+		} else {
+			var container = eXo.core.DOMUtil.findFirstDescendantByClass(rightWS,'div','ActionIconsContainer');
+			if(container) container.innerHTML = "";
+      else eXo.ecm.ECS.updateHTML(viewType);
+		}			
+		var listItem = '';
+		for(var i = 0; i < list.length; i++) {      
+			var url 			= list[i].getAttribute("url");
+			var path 			= list[i].getAttribute("path");
+			var nodeType	= list[i].getAttribute("nodeType");
+      var nodeTypeIcon = nodeType.replace(":", "_") + "48x48Icon default16x16Icon";
+			var node = list[i].getAttribute("name");
+			var size = 	list[i].getAttribute("size");
+			if(size == 0) size = "";
+			else size += '&nbsp;kb';
+      
+      if(viewType=="list") {	        
+				var clazz = 'OddItem';
+        var tblRWS  = eXo.core.DOMUtil.findDescendantsByTagName(rightWS, "table")[0];
+				var clazzItem = eXo.ecm.ECS.getClazzIcon(list[i].getAttribute("nodeType"));
+				var newRow = tblRWS.insertRow(i+1);
+				newRow.className = clazz;					
+				newRow.insertCell(0).innerHTML = '<a class="Item default16x16Icon '+clazzItem+'" url="'+url+'" path="'+path+'" nodeType="'+nodeType+'" style = 					"overflow:hidden;" title="'+decodeURIComponent(node)+'" onclick="eXo.ecm.ECS.insertContent(this);">'+decodeURIComponent(node).trunc(15,false)+'</a>';
+				newRow.insertCell(1).innerHTML = '<div class="Item">'+ list[i].getAttribute("dateCreated") +'</div>';
+				newRow.insertCell(2).innerHTML = '<div class="Item">'+ size +'</div>';
+			} else {				  
+        var container = eXo.core.DOMUtil.findFirstDescendantByClass(rightWS,'div','ActionIconsContainer');			
+				var strViewContent = "";
+				var command = ECS.connector + "/thumbnailImage/medium/" + ECS.repositoryName + "/" + ECS.workspaceName + path + "/?reloadnum=" + Math.random();        
+        if(nodeType.indexOf("image")>=0)  
+					strViewContent += '<div class="ActionIconBox"><div class="NodeLabel"><div class="ThumbnailImage"><div style="display: block;" class="LoadingProgressIcon"><img src="'+command+'" /></div><div style="display: none;" class="Icon48x48 default48x48Icon '+nodeTypeIcon+'"></div></div><div class="ActionIconLabel" style="width: auto;"><a class="ActionLabel" onclick="eXo.ecm.ECS.insertContent(this);" url="'+url+'" path="'+path+'" nodeType="'+nodeType+'" title="'+node+'">'+node+'</a></div></div>';
+        else 
+					strViewContent += '<div class="ActionIconBox"><div class="NodeLabel"><div class="ThumbnailImage"><div style="display: block;" class="LoadingProgressIcon"><img src="'+command+'" /></div><div style="display: block;" class="Icon48x48 default48x48Icon '+nodeTypeIcon+'"></div></div><div class="ActionIconLabel" style="width: auto;"><a class="ActionLabel" onclick="eXo.ecm.ECS.insertContent(this);" url="'+url+'" path="'+path+'" nodeType="'+nodeType+'" title="'+node+'">'+node+'</a></div></div>';	        
+				container.innerHTML += strViewContent;
+			}
+		}			
+	}	
 	if(i > 12) {
-		var numberRecords = 12;
-		eXo.ecm.Pager = new Pager("ListRecords", numberRecords);
+		var numberRecords = 12;		
+		var viewType = eXo.ecm.ECS.viewType; 
+    if(viewType=='list') eXo.ecm.Pager = new Pager("ListRecords", numberRecords);
+    else eXo.ecm.Pager = new Pager("ActionIconsContainer", numberRecords);
 		eXo.ecm.Pager.init(); 
 		eXo.ecm.Pager.showPageNav('pageNavPosition');
 		eXo.ecm.Pager.showPage(1);	
 	} else {
 		document.getElementById("pageNavPosition").innerHTML = "";
-	}
+	}	
 };
+
+EcmContentSelector.prototype.updateHTML = function(viewType) {
+  var strViewPresent = "";
+	if(viewType=="list") {
+		strViewPresent = "<div class=\"ListView\"><table cellspacing=\"0\" style=\"table-layout: fixed; width: 100%;\" id=\"ListRecords\">";
+		strViewPresent += "<thead><tr><th class=\"THBar\" userLanguage=\"UserLanguage.FileName\"> Name </th>";
+		strViewPresent += "<th class=\"THBar\" style=\"width: 120px;\" userLanguage=\"UserLanguage.CreateDate\"> Date </th>";
+		strViewPresent += "<th class=\"THBar\" style=\"width: 80px;\" userLanguage=\"UserLanguage.FileSize\"> Size </th></tr></thead>";
+		strViewPresent += "</table></div>";
+	} else {
+		strViewPresent = "<div class=\"UIThumbnailsView\" style=\"overflow-y: auto; overflow-x: hidden;\"><div class=\"ActionIconsContainer\" id=\"ListRecords\"></div></div>";
+	}
+	var rightWS = document.getElementById('RightWorkspace');  
+  if(rightWS) {
+		rightWS.innerHTML = "";
+		strViewPresent += "<div class=\"PageIterator\" id=\"pageNavPosition\"></div><div style=\"clear: left;\"><span></span></div>";
+		rightWS.innerHTML = strViewPresent;
+	}
+}
 
 EcmContentSelector.prototype.listFolders = function(list) {
 	var rightWS = document.getElementById('RightWorkspace');
@@ -591,7 +642,7 @@ EcmContentSelector.prototype.listMutilFiles = function(list) {
 	
 	if(i > 12) {
 		var numberRecords = 12;
-		eXo.ecm.Pager = new Pager("ListRecords", numberRecords);
+    eXo.ecm.Pager = new Pager("ListRecords", numberRecords);
 		eXo.ecm.Pager.init(); 
 		eXo.ecm.Pager.showPageNav('pageNavPosition');
 		eXo.ecm.Pager.showPage(1);	
@@ -612,7 +663,7 @@ EcmContentSelector.prototype.getClazzIcon = function(nodeType) {
 };
 
 function Pager(objTable, itemsPerPage) {
-	this.tableName = objTable;
+	  this.tableName = objTable;
     this.itemsPerPage = itemsPerPage;
     this.currentPage = 1;
     this.pages = 0;
@@ -628,49 +679,68 @@ Pager.prototype.setHeightRightWS = function(list) {
 Pager.prototype.init = function() {
 	this.setHeightRightWS();
 	var len = 0;
-	var table = document.getElementById(eXo.ecm.Pager.tableName);
-	if(navigator.userAgent.indexOf("MSIE") >= 0) { //is IE
-		var tBody = eXo.core.DOMUtil.getChildrenByTagName(table, "tbody")[0];
-		len = tBody.childNodes.length;
+  if(eXo.ecm.ECS.viewType=="list") {
+		var table = document.getElementById(eXo.ecm.Pager.tableName);
+		if(navigator.userAgent.indexOf("MSIE") >= 0) { //is IE
+			var tBody = eXo.core.DOMUtil.getChildrenByTagName(table, "tbody")[0];
+			len = tBody.childNodes.length;
+		} else {
+			var tHead = eXo.core.DOMUtil.getChildrenByTagName(table, "thead")[0];
+			var rowsTHead = eXo.core.DOMUtil.getChildrenByTagName(tHead, "tr");
+			len = rowsTHead.length - 1;		
+		}
 	} else {
-		var tHead = eXo.core.DOMUtil.getChildrenByTagName(table, "thead")[0];
-		var rowsTHead = eXo.core.DOMUtil.getChildrenByTagName(tHead, "tr");
-		len = rowsTHead.length - 1;		
+		var icon_container = document.getElementById(eXo.ecm.Pager.tableName);    
+    icons =  eXo.core.DOMUtil.findChildrenByClass(icon_container ,"div", "ActionIconBox");    
+    len = icons.length;		
 	}
-    var records = len; 
-    this.pages = Math.ceil(records / eXo.ecm.Pager.itemsPerPage);
+  var records = len; 
+  this.pages = Math.ceil(records / eXo.ecm.Pager.itemsPerPage);
 	if(this.pages < 0) this.page =1;
     this.inited = true;
 };
 
-Pager.prototype.showRecords = function(from, to) {
-	var rows = null;
-	var table = document.getElementById(eXo.ecm.Pager.tableName);
-	var len = 0;
-	if(navigator.userAgent.indexOf("MSIE") >= 0) { //is IE
-		var tBody = eXo.core.DOMUtil.getChildrenByTagName(table, "tbody")[0];
-		rows =tBody.childNodes;		
-		len = rows.length;
+Pager.prototype.showRecords = function(from, to) {  
+  if(eXo.ecm.ECS.viewType=="list") {
+		var rows = null;
+		var table = document.getElementById(eXo.ecm.Pager.tableName);
+		var len = 0;
+		if(navigator.userAgent.indexOf("MSIE") >= 0) { //is IE
+			var tBody = eXo.core.DOMUtil.getChildrenByTagName(table, "tbody")[0];
+			rows =tBody.childNodes;		
+			len = rows.length;
 		
+			for (var i = 0; i < len; i++) {
+				if (i < (from-1) || i > (to-1))  {
+					  rows[i].style.display = 'none';
+				} else {
+					  rows[i].style.display = '';
+				}
+			}
+		}	else {
+			var tHead = eXo.core.DOMUtil.getChildrenByTagName(table, "thead")[0];
+			rows = eXo.core.DOMUtil.getChildrenByTagName(tHead ,"tr");
+			len = rows.length - 1;		  
+			for (var i = 1; i < len + 1; i++) {  //starts from 1 to skip table header row
+				if (i < from || i > to)  {
+					  rows[i].style.display = 'none';
+				} else {
+					  rows[i].style.display = '';
+				}
+			}
+		}
+	} else {
+		var icons = null;   
+    var icon_container = document.getElementById(eXo.ecm.Pager.tableName);    
+    icons =  eXo.core.DOMUtil.findChildrenByClass(icon_container ,"div", "ActionIconBox");    
+    len = icons.length;		
 		for (var i = 0; i < len; i++) {
-			if (i < (from-1) || i > (to-1))  {
-			    rows[i].style.display = 'none';
-			} else {
-			    rows[i].style.display = '';
-			}
-		}
-	}	else {
-		var tHead = eXo.core.DOMUtil.getChildrenByTagName(table, "thead")[0];
-		rows = eXo.core.DOMUtil.getChildrenByTagName(tHead ,"tr");
-		len = rows.length - 1;
-		
-		for (var i = 1; i < len + 1; i++) {  //starts from 1 to skip table header row
 			if (i < from || i > to)  {
-			    rows[i].style.display = 'none';
+				  icons[i].style.display = 'none';
 			} else {
-			    rows[i].style.display = '';
+				  icons[i].style.display = '';
 			}
-		}
+		}    
 	}
 	if(len <= 12) { document.getElementById("pageNavPosition").innerHTML = "";	return;}
 };
@@ -716,7 +786,7 @@ Pager.prototype.showPageNav = function(positionId) {
     element.innerHTML = pagerHtml;
 };
 
-EcmContentSelector.prototype.insertContent = function(objNode) {
+EcmContentSelector.prototype.insertContent = function(objNode) {  
 	if(!objNode) return;
 	var rws = document.getElementById("RightWorkspace");
 	if(eXo.ecm.ECS.typeObj == "folder" || eXo.ecm.ECS.typeObj == "one") {
@@ -741,23 +811,45 @@ EcmContentSelector.prototype.insertContent = function(objNode) {
    temp = temp.replace("%27","%2527");
  		index = temp.indexOf("%27");
   }
-  url = temp;
+  url = eXo.ecm.ECS.hostName+temp;    
  	var name 	= encodeURIComponent(objNode.innerHTML);
 		var strHTML = '';	
-		var editor = eXo.ecm.ECS.currentEditor ;
-		if(window.opener.document.getElementById(eXp.getParameterValueByName("browserType"))){		
-			strHTML += url;		
-			window.opener.document.getElementById(eXp.getParameterValueByName("browserType")).value=strHTML;
-		} else {
-			if(nodeType.indexOf("image") >=0) {
-				strHTML += "<img src=\""+url+"\" name=\""+name+"\" alt=\""+name+"\"/>";
+		var editor = eXo.ecm.ECS.currentEditor ;    
+    if(eXo.ecm.ECS.components=="") {
+			if(window.opener.document.getElementById(eXp.getParameterValueByName("browserType"))){		
+				strHTML += url;		
+				window.opener.document.getElementById(eXp.getParameterValueByName("browserType")).value=strHTML;
 			} else {
-				strHTML += "<a href=\"" + url+"\" style='text-decoration:none;'>"+name+"</a>";		
+				if(nodeType.indexOf("image") >=0) {
+					strHTML += "<img src=\""+url+"\" name=\""+name+"\" alt=\""+name+"\"/>";
+				} else {
+					strHTML += "<a href=\"" + url+"\" style='text-decoration:none;'>"+name+"</a>";		
+				}		    		    
+				editor.insertHtml(strHTML);
+				window.close();
+				editor.OnAfterSetHTML = window.close();				
 			}
-			editor.insertHtml(strHTML);
-		}
-		window.close();			
-		editor.OnAfterSetHTML = window.close();
+		} else {      						
+			var newImg = new Image();
+			newImg.src = url;
+      newImg.onload = function() {
+				var height = newImg.height;
+				var width = newImg.width;  
+        var parent = window.opener.document;
+        parent.getElementById(eXo.ecm.ECS.components).src=url;
+				parent.getElementById(eXo.ecm.ECS.components).style.display="block";
+				parent.getElementById(editor.name+"_txtWidth").value=width;	
+				parent.getElementById(editor.name+"_txtHeight").value=height;        
+        var elements = parent.getElementsByTagName('*');
+       	for(var i=0;i<elements.length;i++)	{        
+					if(elements[i].type && elements[i].type=="text") {          
+						if(elements[i].id && elements[i].id==editor.name+"_txtUrl") elements[i].value = url;
+					}
+				}       
+				window.close();
+				editor.OnAfterSetHTML = window.close();				
+			}
+		}		
 	}
 };
 
@@ -859,23 +951,27 @@ EcmContentSelector.prototype.removeContent = function(objNode) {
 }
 
 EcmContentSelector.prototype.changeFilter = function() {
-	var rightWS = document.getElementById('RightWorkspace');
-	var tblRWS	= eXo.core.DOMUtil.findDescendantsByTagName(rightWS, "table")[0];
-	var rowsRWS = eXo.core.DOMUtil.findDescendantsByTagName(tblRWS, "tr");
-	if(rowsRWS && rowsRWS.length > 0) {
-		for(var i = 0; i < rowsRWS.length; i++) {
-			if(i > 0) tblRWS.deleteRow(rowsRWS[i].rowIndex);
-		}
-	} 
+	var rightWS = document.getElementById('RightWorkspace');	
+  if(eXo.ecm.ECS.viewType=="list") {
+		var tblRWS	= eXo.core.DOMUtil.findDescendantsByTagName(rightWS, "table")[0];
+		var rowsRWS = eXo.core.DOMUtil.findDescendantsByTagName(tblRWS, "tr");
+		if(rowsRWS && rowsRWS.length > 0) {
+			for(var i = 0; i < rowsRWS.length; i++) {
+				if(i > 0) tblRWS.deleteRow(rowsRWS[i].rowIndex);
+			}
+		} 
+	} else {
+		var container = eXo.core.DOMUtil.findFirstDescendantByClass(rightWS,'div','ActionIconsContainer');
+			container.innerHTML = "";
+	}
 	
-	if(eXo.ecm.ECS.typeObj == "folder") {
+	/*if(eXo.ecm.ECS.typeObj == "folder") {
 		eXo.ecm.ECS.listFolders();
 	} else if(eXo.ecm.ECS.typeObj == "multi") {
 		eXo.ecm.ECS.listMutilFiles();
 	} else {
 		eXo.ecm.ECS.listFiles();
-	}
-	
+	}*/	
 	if(eXo.ecm.ECS.currentNode)	 eXo.ecm.ECS.getDir(eXo.ecm.ECS.currentNode, eXo.ecm.ECS.eventNode);
 	
 	var filter = document.getElementById('Filter');
@@ -886,6 +982,26 @@ EcmContentSelector.prototype.changeFilter = function() {
 		eval(action);
 	}	
 };
+
+EcmContentSelector.prototype.changeViewType = function(viewType) {  
+  eXo.ecm.ECS.viewType = viewType;  
+  var view = document.getElementById("view");
+	view.innerHTML = "";
+  if(viewType=="list") 
+		view.innerHTML = "<a onClick=\"eXo.ecm.ECS.changeViewType('thumbnail');\" title=\"Thumbnail View\" class=\"thumbnail-view\" ><span></span></a><a class=\"list-view-selected\" title=\"List View\"><span></span></a><input type=\"hidden\" id=\"viewTypeID\" value=\"list\">";
+  else
+		view.innerHTML = "<a class=\"thumbnail-view-selected\" title=\"Thumbnail View\"><span></span></a><a onClick=\"eXo.ecm.ECS.changeViewType('list');\" class=\"list-view\" title=\"List View\"><span></span></a><input type=\"hidden\" id=\"viewTypeID\" value=\"thumbnail\">";
+  eXo.ecm.ECS.switchView = true;	   
+	if(eXo.ecm.ECS.currentNode) eXo.ecm.ECS.getDir(eXo.ecm.ECS.currentNode, eXo.ecm.ECS.eventNode);
+  eXo.ecm.ECS.switchView = false;
+	var filter = document.getElementById('Filter');
+	var action = filter.getAttribute("action");
+	if(action) {
+		action = action.substring(0, action.length - 2);
+		action += '&objectId=' + filter.options[filter.selectedIndex].value + '\')';    
+		eval(action);
+	}	
+}
 
 EcmContentSelector.prototype.generateIdDriver = function(objNode) {
 	if(!objNode) return;

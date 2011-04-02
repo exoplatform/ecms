@@ -514,6 +514,13 @@ body {
 	line-height: 20px;
 }
 
+.UIHomePagePortlet  .UIWorkingWorkspace .ActionBar .ViewType{
+	float: right;	
+	line-height: 20px;
+  margin: 4px 2px 2px 0px;
+	width: 200px;
+}
+
 .UIHomePagePortlet  a{
 	color: black;
 	text-decoration: none;
@@ -588,6 +595,95 @@ body {
 	text-decoration: none;
 	color: black;
 }
+/* ################# Select View Type ###################*/
+.list-view{
+	background: url("/ecmexplorer/skin/webui/component/explorer/control/DefaultSkin/background/DetailView.gif") no-repeat scroll 0 0 transparent;
+  display: block;
+  height: 21px;
+  width: 23px;
+  float: right;
+}
+.list-view-selected{
+	background: url("/ecmexplorer/skin/webui/component/explorer/control/DefaultSkin/background/DetailViewSelected.gif") no-repeat scroll 0 0 transparent;
+  display: block;
+	height: 21px;
+  width: 23px;
+  float: right;
+}
+.thumbnail-view{
+  background: url("/ecmexplorer/skin/webui/component/explorer/control/DefaultSkin/background/ThumbnailView.gif") no-repeat scroll 0 0 transparent;
+  display: block;
+	height: 21px;
+  width: 23px;
+  float: right;
+}
+.thumbnail-view-selected{
+  background: url("/ecmexplorer/skin/webui/component/explorer/control/DefaultSkin/background/ThumbnailViewSelected.gif") no-repeat scroll 0 0 transparent;
+  display: block;
+	height: 21px;
+  width: 23px;
+  float: right;
+}
+/*############################## -- Begin UIThumbnailsView -- ##############################*/
+
+.UIHomePagePortlet  .UIWorkingWorkspace .RightWorkspace .UIThumbnailsView{
+}
+
+.UIHomePagePortlet  .UIWorkingWorkspace .RightWorkspace .UIThumbnailsView .ThumbnailImage {
+  width: 64px;
+  height: 64px;
+  border: 1px solid #afffff;
+  text-align: center;
+  margin: auto;
+}
+
+.UIHomePagePortlet .UIWorkingWorkspace .RightWorkspace .UIThumbnailsView .ActionIconsContainer {
+  padding-left: 10px; /* orientation=lt */
+  padding-right: 10px; /* orientation=rt */
+}
+
+.UIHomePagePortlet  .UIWorkingWorkspace .RightWorkspace .UIThumbnailsView .Icon48x48 {
+  width: 48px;
+  height: 48px;
+  margin: auto;
+  cursor: pointer;
+  position: relative;
+}
+
+.UIHomePagePortlet  .UIWorkingWorkspace .RightWorkspace .UIThumbnailsView .ActionIconLabel a {
+  color: black;
+}
+
+.UIHomePagePortlet  .UIWorkingWorkspace .RightWorkspace .UIThumbnailsView .ActionIconLabel a:hover {
+  color: orange;
+  cursor: pointer;
+}
+
+.UIHomePagePortlet  .UIWorkingWorkspace .RightWorkspace .UIThumbnailsView .ActionIconLabel {
+  width: 100px;
+  line-height: 15px;
+  margin: auto;
+  height: 30px;
+  text-align: center;
+}
+
+.UIHomePagePortlet  .UIWorkingWorkspace .RightWorkspace .UIThumbnailsView .ActionIconContainer {
+	width: 70px;
+  height: 70px;
+  border: solid 1px #eeeeee;
+  background: #f8f8f8;
+  margin: auto;
+}
+
+ .UIThumbnailsView .ActionIconBox {
+	width: 90px;
+  float: left; /* orientation=lt */  
+  margin: 5px;
+  height: 110px;
+  overflow:hidden
+}
+
+/*############################## -- End UIThumbnailsView -- ##############################*/
 
 .UIHomePagePortlet  .UIWorkingWorkspace .RightWorkspace .THBar{
 	background: #dee0e4;

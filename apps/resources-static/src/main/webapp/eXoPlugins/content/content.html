@@ -34,7 +34,20 @@
 				strHTML += "<option value=\"DMS Documents\" userLanguage=\"UserLanguage.DMSDocuments\">DMS Documents</option>";
 				strHTML += "<option value=\"Medias\" userLanguage=\"UserLanguage.Medias\">Medias</option>";
 				strHTML += "</select></div><div class=\"SeparatorLineL\"><span></span></div>";
-			}         
+			}        			
+			var strView = "";
+			var strViewPresent = "";
+			if(eXo.ecm.ECS.viewType=="list") {
+				strView = "<div id=\"view\" class=\"ViewType\"><a onClick=\"eXo.ecm.ECS.changeViewType('thumbnail');\" title=\"Thumbnail View\" class=\"thumbnail-view\" ><span></span></a><a class=\"list-view-selected\" title=\"List View\"><span></span></a><input type=\"hidden\" id=\"viewTypeID\" value=\"list\"><div style=\"clear:both\"></div></div>";
+				strViewPresent = "<div class=\"ListView\"><table cellspacing=\"0\" style=\"table-layout: fixed; width: 100%;\" id=\"ListRecords\">";
+				strViewPresent += "<thead><tr><th class=\"THBar\" userLanguage=\"UserLanguage.FileName\"> Name </th>";
+				strViewPresent += "<th class=\"THBar\" style=\"width: 120px;\" userLanguage=\"UserLanguage.CreateDate\"> Date </th>";
+				strViewPresent += "<th class=\"THBar\" style=\"width: 80px;\" userLanguage=\"UserLanguage.FileSize\"> Size </th></tr></thead>";
+				strViewPresent += "<tr><td class=\"Item TRNoContent\" colspan=\"3\" userLanguage=\"UserLanguage.NoContent\">There is no content</td></tr></table></div>";
+} else {    
+				strView = "<div id=\"view\" class=\"ViewType\"><a class=\"thumbnail-view-selected\" title=\"Thumbnail View\"><span></span></a><a onClick=\"eXo.ecm.ECS.changeViewType('list');\" class=\"list-view\" title=\"List View\"><span></span></a><input type=\"hidden\" id=\"viewTypeID\" value=\"thumbnail\"><div style=\"clear:both\"></div></div>";								
+				strViewPresent = "<div class=\"UIThumbnailsView\" style=\"overflow-y: auto; overflow-x: hidden;\"><div class=\"ActionIconsContainer\" id=\"ActionIconsContainer\"><div>There is no content</div></div></div>";
+			}			
 		</script>
 </head>
 <body>
@@ -151,7 +164,10 @@
 				    </div>
 					</div>
 					<div class="SeparatorLineR"><span></span></div>
-					<div style="clear: both;"><span></span></div>
+					<!--<div style="clear: both;"><span></span></div>-->
+					<script type="text/javascript">
+						document.write(strView);
+					</script>
 				</div>
 				<div class="BreadcumbsPortlet">
 					<div class="HomeIcon"><span></span></div> 
@@ -164,20 +180,9 @@
 					
 					</div>
 					<div class="RightWorkspace" id="RightWorkspace">
-						<div class="ListView">
-						  	<table cellspacing="0" style="table-layout: fixed; width: 100%;" id="ListRecords">
-						    	<thead>
-						    		<tr>
-						    		  <th class="THBar" userLanguage="UserLanguage.FileName"> Name </th>
-						   	      <th class="THBar" style="width: 120px;" userLanguage="UserLanguage.CreateDate"> Date </th>
-						   	      <th class="THBar" style="width: 80px;" userLanguage="UserLanguage.FileSize"> Size </th>
-						    	 	</tr>
-						    	</thead>
-						    	<tr>
-						    		<td class="Item TRNoContent" colspan="3" userLanguage="UserLanguage.NoContent">There is no content</td>
-						    	</tr>
-						  	</table>
-						</div>
+						<script type="text/javascript">
+							document.write(strViewPresent);
+						</script>
 						<div class="PageIterator" id="pageNavPosition"></div>
 					<div style="clear: left;"><span></span></div>
 				</div>

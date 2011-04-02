@@ -6,13 +6,12 @@ CKEDITOR.eXoPath = CKEDITOR.basePath.substr(0, CKEDITOR.basePath.indexOf("ckedit
 
 // config to add custom plugin	
 (function() {CKEDITOR.plugins.addExternal('content',CKEDITOR.eXoPath+'eXoPlugins/content/','plugin.js');})();
-(function() {CKEDITOR.plugins.addExternal('insertImage',CKEDITOR.eXoPath+'eXoPlugins/content/','plugin.js');})();
 (function() {CKEDITOR.plugins.addExternal('insertGadget',CKEDITOR.eXoPath+'eXoPlugins/insertGadget/','plugin.js');})();
 (function() {CKEDITOR.plugins.addExternal('insertPortalLink',CKEDITOR.eXoPath+'eXoPlugins/insertPortalLink/','plugin.js');})();
 
 CKEDITOR.editorConfig = function( config ){
 	config.resize_enabled = false; // config to disable editor resizing in CKEDITOR
-	config.extraPlugins = 'content,insertImage,insertGadget,insertPortalLink';
+	config.extraPlugins = 'content,insertGadget,insertPortalLink';
 	config.toolbarCanCollapse = false;
 	//config.uiColor = '#AADC6E';
 	config.toolbar_Default = [
@@ -40,7 +39,7 @@ CKEDITOR.editorConfig = function( config ){
 	config.toolbar_CompleteWCM = [
 		['Source','Templates','ShowBlocks'],
 		['Cut','Copy','PasteText','-','SpellCheck','-','Undo','Redo'],
-		['insertGadget.btn','Flash','Table','SpecialChar', 'content.btn', 'insertImage.btn'], 
+		['insertGadget.btn','Flash','Table','SpecialChar', 'content.btn', 'Image'], 
 		'/',	
 		['Bold','Italic','Underline','Strike','-','JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock','-','NumberedList','BulletedList','-','TextColor','BGColor','-','RemoveFormat'],
 		['Link','insertPortalLink.btn','Unlink','Anchor'],
@@ -51,13 +50,13 @@ CKEDITOR.editorConfig = function( config ){
 	config.toolbar_BasicWCM = [
 		['Source','-','Bold','Italic','Underline','Strike','-','NumberedList','BulletedList','Outdent','Indent'],
 		['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock'],
-		['Blockquote','-','Link','Unlink','insertPortalLink.btn','content.btn', 'insertImage.btn','-','Maximize','ShowBlocks'],	
+		['Blockquote','-','Link','Unlink','insertPortalLink.btn','content.btn', 'Image','-','Maximize','ShowBlocks'],	
 		['Style','Format','Font','FontSize']
 	] ;
 
 	config.toolbar_SuperBasicWCM = [
 		   ['Source','-','Bold','Italic','Underline'],
 		   ['-','JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock'],
-		   ['-','Link','Unlink','insertPortalLink.btn','insertGadget.btn','content.btn', 'insertImage.btn'],	
+		   ['-','Link','Unlink','insertPortalLink.btn','insertGadget.btn','content.btn', 'Image'],	
 	] ;
 };
