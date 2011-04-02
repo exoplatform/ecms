@@ -1265,11 +1265,4 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
 
   public void setEnableVote(boolean value) {
   }
-
-	@Override
-  public String getInlineEditingField(String currentValue, String inputType,
-      String propertyName, String cssClass) throws Exception {
-	  return null;
-  }
-
 }

@@ -296,17 +296,4 @@ public interface NodePresentation {
    * @throws Exception
    */
   public UIComponent getUIComponent(String mimeType) throws Exception;
-  /**
-   * 
-   * @param restPath				rest-service path to execute
-   * @param inputType				input type for editing: TEXT, TEXTAREA, WYSIWYG
-   * @param propertyName		which property used for editing
-   * @param cssClass				class name for CSS, should implement: cssClass, [cssClass]Title
-   * 												Edit[cssClass] as relative css
-   * 												Should create the function: InlineEditor.presentationRequestChange[cssClass] 
-   * 												to request the rest-service
-   * @return								String that can be put on groovy template
-   * @throws 								Exception
-   */
-  public String getInlineEditingField(String currentValue, String inputType, String propertyName, String cssClass) throws Exception;
 }
