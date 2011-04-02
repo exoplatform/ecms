@@ -11,6 +11,8 @@
   </label>
   <msg>
    <no-content>There is no content</no-content>
+   <internal-server-error>There was problem while requesting server data</internal-server-error>
+   <empty-title-error>Please specify new title</empty-title-error>
   </msg>
  </UIPresentationContainer>
  

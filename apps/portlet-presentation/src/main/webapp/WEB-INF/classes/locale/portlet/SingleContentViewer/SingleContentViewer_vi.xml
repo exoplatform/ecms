@@ -4,6 +4,7 @@
   <title>
    <QuickEdit>Sửa nhanh</QuickEdit>
    <print>In trang này</print>
+   <TitleSuggest>Double click để thay đổi</TitleSuggest>
   </title>
   <label>
    <draft>Nháp</draft>
@@ -11,6 +12,8 @@
   </label>
   <msg>
    <no-content>Không có nội dung nào</no-content>
+   <internal-server-error>Lỗi trong quá trình lấy thông tin từ server</internal-server-error>
+   <empty-title-error>Vui lòng nhập thông tin title</empty-title-error>
   </msg>
  </UIPresentationContainer>
    

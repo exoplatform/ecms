@@ -8,9 +8,12 @@
   <label>
    <draft>مسودة</draft>
    <print>طباعة</print>
+   <TitleSuggest>Double click to edit</TitleSuggest>
   </label>
   <msg>
    <no-content>لا يوجد لعرض المحتوى</no-content>
+   <internal-server-error>There was problem while requesting server data</internal-server-error>
+   <empty-title-error>Please specify new title!</empty-title-error>
   </msg>
  </UIPresentationContainer>
 

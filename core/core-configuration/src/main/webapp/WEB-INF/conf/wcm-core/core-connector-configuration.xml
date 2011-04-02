@@ -35,6 +35,9 @@
     <type>org.exoplatform.wcm.connector.fckeditor.PortalLinkConnector</type>
   </component>
   <component>
+    <type>org.exoplatform.wcm.connector.collaboration.InlineEditingService</type>
+  </component>
+  <component>
     <type>org.exoplatform.wcm.connector.fckeditor.DriverConnector</type>
     <init-params>
       <value-param>
@@ -56,6 +59,7 @@
       </properties-param>
     </init-params>
   </component>
+
   <external-component-plugins>
     <target-component>org.exoplatform.services.ecm.fckconfig.FCKConfigService</target-component>
     <component-plugin>

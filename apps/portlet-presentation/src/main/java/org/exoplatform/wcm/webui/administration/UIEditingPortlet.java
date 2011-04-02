@@ -38,7 +38,12 @@ public class UIEditingPortlet extends UIPortletApplication {
     elementS.setAttribute("type", "text/javascript");
     elementS.setAttribute("src", "/eXoWCMResources/javascript/eXo/wcm/frontoffice/private/QuickEdit.js");
     response.addProperty(MimeResponse.MARKUP_HEAD_ELEMENT,elementS);
-
+    
+    elementS = response.createElement("script");
+    elementS.setAttribute("type", "text/javascript");
+    elementS.setAttribute("src", "/eXoWCMResources/javascript/eXo/wcm/frontoffice/private/InlineEditing.js");
+    response.addProperty(MimeResponse.MARKUP_HEAD_ELEMENT,elementS);
+    
     UIEditingForm editingForm = getChild(UIEditingForm.class);
     UIFormSelectBox orderBySelectBox = editingForm.getChild(UIFormSelectBox.class);
     orderBySelectBox.setValue((Utils.isShowQuickEdit())?UIEditingForm.DRAFT:UIEditingForm.PUBLISHED);

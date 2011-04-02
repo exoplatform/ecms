@@ -15,12 +15,14 @@
  * along with this program; if not, see<http://www.gnu.org/licenses/>.
  */
 package org.exoplatform.wcm.webui.scv;
+
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 import java.util.MissingResourceException;
+import java.util.ResourceBundle;
 
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
@@ -33,6 +35,7 @@ import org.exoplatform.portal.webui.application.UIPortlet;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
+import org.exoplatform.services.wcm.publication.WCMComposer;
 import org.exoplatform.wcm.webui.Utils;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.application.portlet.PortletRequestContext;
@@ -56,8 +59,8 @@ import org.exoplatform.webui.event.EventListener;
     }
 )
 public class UIPresentationContainer extends UIContainer{
-  public final static String  PARAMETER_REGX        = "(.*)/(.*)";
-
+  public final static String PARAMETER_REGX       = "(.*)/(.*)";
+	
   private boolean isPrint = false;
   private PortletPreferences portletPreferences;
   private String contentParameter = null;
@@ -355,6 +358,38 @@ public class UIPresentationContainer extends UIContainer{
     return Utils.getEditLink(tempNode, true, false);
   }
 
+  public Node getOriginalNode() {
+  	UIPresentation presentation = getChild(UIPresentation.class);
+  	if (presentation == null)
+  		return null;
+  	try {
+  		return presentation.getOriginalNode();
+  	} catch (Exception e) {
+  		return null;
+  	}
+  }
+
+  public boolean isViewMode() {
+  	return Utils.getCurrentMode().equals(WCMComposer.MODE_LIVE);
+  }
+
+  public String getInlineEditingMsg() {
+  	StringBuffer sb = new StringBuffer();
+  	sb.append("new Array(");
+  	ResourceBundle resourceBundle = WebuiRequestContext.getCurrentInstance()
+  	.getApplicationResourceBundle();
+  	sb.append("'").append(
+  			resourceBundle
+  			.getString("UIPresentationContainer.msg.internal-server-error"))
+  			.append("'");
+  	sb.append(", '").append(
+  			resourceBundle
+  			.getString("UIPresentationContainer.msg.empty-title-error"))
+  			.append("')");
+  	return sb.toString();
+  }
+  
+
   /**
    * The listener interface for receiving preferencesAction events.
    * The class that is interested in processing a preferencesAction
@@ -373,5 +408,23 @@ public class UIPresentationContainer extends UIContainer{
       UISCVPreferences pcvConfigForm = presentationContainer.createUIComponent(UISCVPreferences.class, null, null);
       Utils.createPopupWindow(presentationContainer, pcvConfigForm, UISingleContentViewerPortlet.UIPreferencesPopupID, 600);
     }
+  }
+  /**
+   * 
+   * @param restPath				rest-service path to execute
+   * @param inputType				input type for editing: TEXT, TEXTAREA, WYSIWYG
+   * @param propertyName		which property used for editing
+   * @param cssClass				class name for CSS, should implement: cssClass, [cssClass]Title
+   * 												Edit[cssClass] as relative css
+   * 												Should create the function: InlineEditor.presentationRequestChange[cssClass] 
+   * 												to request the rest-service
+   * @return								String that can be put on groovy template
+   * @throws 								Exception
+   * @author 								vinh_nguyen
+   */
+  public String getInlineEditingField(String currentValue, String inputType, String propertyName, String cssClass) throws Exception{
+  	UIPresentation presentation = getChild(UIPresentation.class);
+  	if (presentation == null) return null;  	
+  	return presentation.getInlineEditingField(currentValue, inputType, propertyName, cssClass);  
   }
 }

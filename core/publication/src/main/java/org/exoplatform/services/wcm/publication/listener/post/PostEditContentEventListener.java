@@ -24,6 +24,7 @@ import org.exoplatform.services.listener.Event;
 import org.exoplatform.services.listener.Listener;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.wcm.publication.WCMPublicationService;
 
 /**
@@ -52,16 +53,24 @@ public class PostEditContentEventListener extends Listener<CmsService,Node> {
    * @see org.exoplatform.services.listener.Listener#onEvent(org.exoplatform.services.listener.Event)
    */
   public void onEvent(Event<CmsService, Node> event) throws Exception {
-    Node currentNode = event.getData();
+    Node currentNode = event.getData();    
     if( currentNode.isNodeType("exo:cssFile") ||
         currentNode.isNodeType("exo:template") ||
         currentNode.isNodeType("exo:jsFile") ||
         currentNode.isNodeType("exo:action") ){
       return;
+    }    
+    String siteName = "";
+    String remoteUser = "";
+    try {
+      siteName = Util.getPortalRequestContext().getPortalOwner();
+      remoteUser = Util.getPortalRequestContext().getRemoteUser();
+    } catch(NullPointerException npe) {
+      ConversationState conversationState = ConversationState.getCurrent();
+      siteName = conversationState.getAttribute("siteName").toString();
+      remoteUser = currentNode.getSession().getUserID(); 
     }
-    String siteName = Util.getPortalRequestContext().getPortalOwner();
-    String remoteUser = Util.getPortalRequestContext().getRemoteUser();
-    if (log.isInfoEnabled()) log.info(currentNode.getPath() + "::" + siteName + "::"+remoteUser);
+    if (log.isInfoEnabled()) log.info(currentNode.getPath() + "::" + siteName + "::"+remoteUser);    
     publicationService.updateLifecyleOnChangeContent(currentNode, siteName, remoteUser);
   }
 }

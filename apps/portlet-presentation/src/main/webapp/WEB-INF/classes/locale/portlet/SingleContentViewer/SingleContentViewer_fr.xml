@@ -11,6 +11,8 @@
   </label>
   <msg>
    <no-content>Il n'y a pas de contenu</no-content>
+   <internal-server-error>Une erreur s'est produite lors de la sauvegarde.</internal-server-error>
+   <empty-title-error>Entrer un nouveau titre</empty-title-error>
   </msg>
  </UIPresentationContainer>
   <CorrectContentSelectorPopupWindow>

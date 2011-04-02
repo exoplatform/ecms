@@ -308,8 +308,55 @@ Title
 }
 
 .UIPresentationContainer .Title {
-    color: #000000;
     font-size: 24px;
+    width:100%;
+    line-height: 20px;    
+    padding: 2px 0 0;
+    over-flow: hidden;
+}
+.UIPresentationContainer .TitleHover {
+    background: #fffacd;
+    font-size: 24px;
+    width:100%;
+    line-height: 20px;
+    padding: 2px 0 0;
+    cursor: text;
+    over-flow: hidden;
+}
+
+.UIPresentationContainer .EditTitle {
+    background: #fffacd;
+    display:none;
+    line-height: 20px;
+    padding: 2px 7px 2px 2px;
+}
+
+.UIPresentationContainer .EditTitleInput {
+    margin-right: 45px;    
+}
+
+.UIPresentationContainer .EditTitleInput input{
+    width:99%;
+    border: 1px solid #BFD5ED;
+} 
+   
+.UIPresentationContainer .EditTitleInput TEXTAREA{
+    width:99%;
+    border: 1px solid #BFD5ED;
+} 
+.UIPresentationContainer .EditTitle .AcceptButton{
+  background: url(background/accep_button.png) no-repeat scroll left center;
+  display: inline-block;
+  width: 16px; height: 22px;
+  float: right; 
+  margin-right: 5px;
+}
+
+.UIPresentationContainer .EditTitle .CancelButton{
+  background: url(background/cancel_button.png) no-repeat scroll left center;
+  display: inline-block;
+  width: 14px; height: 22px;
+  float: right;
 }
 
 .UIPresentationContainer .BackButton {

@@ -1,23 +1,28 @@
 <%
-	import org.exoplatform.wcm.webui.scv.UISingleContentViewerPortlet;
-	import org.exoplatform.wcm.webui.Utils;
-	import org.exoplatform.wcm.webui.dialog.UIContentDialogForm;
-	import org.exoplatform.ecm.webui.utils.LockUtil;
-%>
-	<%
-		def rcontext = _ctx.getRequestContext() ;
+  	import org.exoplatform.wcm.webui.scv.UISingleContentViewerPortlet;
+  	import org.exoplatform.wcm.webui.Utils;
+  	import org.exoplatform.wcm.webui.dialog.UIContentDialogForm;
+  	import org.exoplatform.ecm.webui.utils.LockUtil;
+  	import org.exoplatform.services.jcr.core.ManageableRepository;
+
+		def rcontext = _ctx.getRequestContext();
+    def jsManager = rcontext.getJavascriptManager();
+    
     String portletId = Utils.getRealPortletId(rcontext);
 		def quickEditingBlockId = portletId + "-QuickEditingBlock";
 		def hoverClass = Utils.isShowQuickEdit() ? " ContainerHoverClass" : "";
-
 		def node = uicomponent.getNodeView();
-
-		
 		if (node != null) {
 			def isShowOptionBar = uicomponent.isShowOptionBar(); 
 			def isShowTitle = uicomponent.isShowTitle();
 			def isShowDate  = uicomponent.isShowDate();
 			boolean isShowInfoBar = uicomponent.isShowInfoBar();
+			
+			if (isShowTitle && (!uicomponent.isViewMode())) {
+        def multiLangMsg = uicomponent.getInlineEditingMsg();
+        jsManager.addOnLoadJavascript("InlineEditor.loadLanguage(" + multiLangMsg + ")");
+      }
+      
 			def edittingStyle = "z-index: 1";
 			if (isShowInfoBar)
 				edittingStyle = "z-index: 1; top:20px";
@@ -84,9 +89,15 @@
 				}
 			if (isShowTitle||isShowDate) {
 				%>
-					  <% if (isShowTitle) { %>
-						  <div class="Title"><%= uicomponent.getTitle(node) %></div>
-						<% } %>
+					  <% if (isShowTitle) {
+  					  if (uicomponent.isViewMode() ){
+                %><div class="Title"><%= uicomponent.getTitle(node) %></div><%
+  					  }else {    					  
+    					  %>
+    					  <%= uicomponent.getInlineEditingField(uicomponent.getTitle(node), "TEXT", "exo:title", "Title") %>    						  
+                <%            
+              }
+            } %>
 						<% if (isShowDate) { %>
 						<div class="DateAndMail"><%= uicomponent.getCreatedDate(node) %></div>
 						<% } %>
