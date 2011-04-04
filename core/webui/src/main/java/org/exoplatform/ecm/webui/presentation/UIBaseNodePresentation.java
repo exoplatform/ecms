@@ -434,13 +434,13 @@ public abstract class UIBaseNodePresentation extends UIContainer implements Node
    * @throws 								Exception
    * @author 								vinh_nguyen
    */
-  public String getInlineEditingField(String currentValue, String inputType, String propertyName, String cssClass) throws Exception{
+  public static String getInlineEditingField(String currentValue, String inputType, String propertyName, String cssClass, Node orgNode) throws Exception{
   	String portletRealID = org.exoplatform.wcm.webui.Utils.getRealPortletId((PortletRequestContext)
   			WebuiRequestContext.getCurrentInstance());
   	ResourceBundle resourceBundle = WebuiRequestContext.getCurrentInstance().getApplicationResourceBundle();
   	StringBuffer sb = new StringBuffer();
   	StringBuffer actionsb = new StringBuffer();
-  	Node orgNode = getOriginalNode();
+//  	Node orgNode = getOriginalNode();
   	String repo = ((ManageableRepository)orgNode.getSession().getRepository()).getConfiguration().getName();
   	String workspace = orgNode.getSession().getWorkspace().getName();
   	String uuid = orgNode.getUUID();
@@ -500,7 +500,7 @@ public abstract class UIBaseNodePresentation extends UIContainer implements Node
    * @param value_
    * @return
    */
-  private String createCKEditorField(String name, String width, String height, String value_) {	
+  private static String createCKEditorField(String name, String width, String height, String value_) {	
   	String toolbar = "Basic";
 
   	if (width == null) width = "'100%'";

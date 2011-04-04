@@ -92,9 +92,10 @@
 					  <% if (isShowTitle) {
   					  if (uicomponent.isViewMode() ){
                 %><div class="Title"><%= uicomponent.getTitle(node) %></div><%
-  					  }else {    					  
+  					  }else {
+  					   def orgNode =uicomponent.getOriginalNode();    					  
     					  %>
-    					  <%= uicomponent.getInlineEditingField(uicomponent.getTitle(node), "TEXT", "exo:title", "Title") %>    						  
+    					  <%= uicomponent.getInlineEditingField(uicomponent.getTitle(node), "TEXT", "exo:title", "Title", orgNode) %>    						  
                 <%            
               }
             } %>
