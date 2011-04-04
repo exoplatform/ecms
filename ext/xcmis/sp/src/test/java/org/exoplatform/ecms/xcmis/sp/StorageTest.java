@@ -1121,6 +1121,26 @@ public class StorageTest extends BaseTest
          + ((DocumentDataImpl)document).getNodeEntry().getNode().getPath());
    }
 
+
+
+
+
+
+   public void testGetMultifiledByPath() throws Exception
+   {
+      ContentStream cs = new BaseContentStream("to be or not to be".getBytes(), null, new MimeType("text", "plain"));
+      DocumentData document = createDocument(rootFolder, "multifiledByPathTest", "cmis:document", cs, null);
+      FolderData folder1 = createFolder(rootFolder, "multifiledByPathTest1", "cmis:folder");
+      FolderData folder2 = createFolder(rootFolder, "multifiledByPathTest2", "cmis:folder");
+      folder1.addObject(document);
+      folder2.addObject(document);
+
+      DocumentData doc = (DocumentData)storageA.getObjectByPath("/multifiledByPathTest2/multifiledByPathTest");
+      assertEquals(cs.length(), doc.getContentStream().length());
+
+   }
+
+
    public void testRenameDocument() throws Exception
    {
       ContentStream cs = new BaseContentStream("to be or not to be".getBytes(), null, new MimeType("text", "plain"));
