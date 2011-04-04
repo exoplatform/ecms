@@ -79,9 +79,6 @@
       <type>org.exoplatform.services.idgenerator.impl.IDGeneratorServiceImpl</type>
    </component>
 
-   <component>
-      <type>org.xcmis.spi.deploy.ExoContainerCmisRegistry</type>
-   </component>
 
    <component>
       <type>org.exoplatform.ecms.xcmis.sp.StorageProviderImpl</type>
@@ -121,10 +118,6 @@
       </init-params>
    </component>
 
-   <component>
-      <key>org.exoplatform.services.document.DocumentReaderService</key>
-      <type>org.xcmis.spi.utils.CmisDocumentReaderService</type>
-   </component>
 
    <component>
       <type>org.xcmis.spi.PermissionService</type>

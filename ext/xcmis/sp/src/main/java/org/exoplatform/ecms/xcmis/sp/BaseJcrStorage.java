@@ -1201,6 +1201,11 @@ abstract class BaseJcrStorage implements TypeManager
             }
             return new SymLinkNodeEntry(link, node, this);
          }
+         else if (node.isNodeType("nt:linkedFile"))
+         {
+            Node target = node.getProperty("jcr:content").getNode();
+            return new JcrNodeEntry(target, this);
+         }
          return new JcrNodeEntry(node, this);
       }
       catch (RepositoryException re)
