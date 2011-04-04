@@ -154,11 +154,9 @@ public class InlineEditingService implements ResourceContainer{
 				session.save();
 			} catch (AccessDeniedException ace) {
 				log.error("AccessDeniedException: ", ace);
-				ace.printStackTrace();
 				return Response.status(Status.UNAUTHORIZED).build();
 			} catch (FileNotFoundException fie) {
 				log.error("FileNotFoundException: ", fie);
-				fie.printStackTrace();
 				return Response.status(Status.NOT_FOUND).build();		    
 			}  catch (LockException lockex) {
 				log.error("LockException", lockex);
