@@ -57,6 +57,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>link=Business Process Controller</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>link=Business Process Controller</td>
 	<td></td>
@@ -68,12 +73,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@id='UIControllerManager']/div/div/div[1]/div/div/div/div/div[2]/div/div/div/div</td>
+	<td>//div[@id='UIControllerManager']//div[text()=&quot;BP Definition Controller&quot;]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[@id='UIControllerManager']/div/div/div[1]/div/div/div/div/div[2]/div/div/div/div</td>
+	<td>//div[@id='UIControllerManager']//div[text()=&quot;BP Definition Controller&quot;]</td>
 	<td></td>
 </tr>
 <tr>
@@ -83,12 +88,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@id='UIBPDefinition']/table/tbody/tr[2]/td[4]/div/img</td>
+	<td>//img[contains(@onclick,&quot;objectId=1&quot;)]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[@id='UIBPDefinition']/table/tbody/tr[2]/td[4]/div/img</td>
+	<td>//img[contains(@onclick,&quot;objectId=1&quot;)]</td>
 	<td></td>
 </tr>
 <tr>
@@ -105,6 +110,11 @@
 	<td>type</td>
 	<td>reason</td>
 	<td>to buy new machine</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Submit</td>
+	<td></td>
 </tr>
 <tr>
 	<td>click</td>
@@ -162,14 +172,34 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>link=Business Process Controller</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>link=Business Process Controller</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Manage</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
 	<td>link=Manage</td>
 	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>amount-granted</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>amount-granted</td>
+	<td>5000</td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
