@@ -25,6 +25,8 @@ function EcmContentSelector() {
 	this.initComponentIdExpanded ="";
 	this.deleteConfirmationMsg="";
   this.switchView = false;
+  if(this.viewType==undefined)
+		this.viewType="list";
 }
 EcmContentSelector.prototype.setDeleteConfirmationMessage = function(msg) {
 	this.deleteConfirmationMsg=msg;
