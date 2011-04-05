@@ -6,13 +6,14 @@ h1. Available preferences {anchor:id=CONTref.Portlets.Administration.AvailablePr
 
 
 h1. Sample Configuration {anchor:id=CONTref.Portlets.Administration.SampleConfiguration}
-{code:language=xml|indent=2}
-		<portlet-preferences>
-			<preference>
-				<name>repository</name>
-                                <value>repository</value>
-                                <read-only>false</read-only>
-			</preference>
-		</portlet-preferences>
+
+{code:xml}
+<portlet-preferences>
+  <preference>
+    <name>repository</name>
+    <value>repository</value>
+    <read-only>false</read-only>
+  </preference>
+</portlet-preferences>
 {code}
 

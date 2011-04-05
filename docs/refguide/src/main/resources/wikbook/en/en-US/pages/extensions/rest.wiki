@@ -33,15 +33,15 @@ Specify the format requested.
 h2. REST configuration {anchor:id=CONTref.Extensions.RESTServices.RestfulWebService.RestConfiguration}
 
 First, we have to register the REST service class to the configuration file in the package named *_conf.portal_*.
-{code:lang=xml}
-<configuration
-   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-   xsi:schemaLocation="http://www.exoplaform.org/xml/ns/kernel_1_1.xsd http://www.exoplaform.org/xml/ns/kernel_1_1.xsd"
-   xmlns="http://www.exoplaform.org/xml/ns/kernel_1_1.xsd">
 
-   <component>    			        	   
-	  <type>org.exoplatform.services.ecm.publication.REST.presentation.document.publication.PublicationGetDocumentRESTService</type>
-   </component>	
+{code:xml}
+<configuration
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.exoplaform.org/xml/ns/kernel_1_1.xsd http://www.exoplaform.org/xml/ns/kernel_1_1.xsd"
+  xmlns="http://www.exoplaform.org/xml/ns/kernel_1_1.xsd">
+  <component>    			        	   
+    <type>org.exoplatform.services.ecm.publication.REST.presentation.document.publication.PublicationGetDocumentRESTService</type>
+  </component>	
 </configuration>
 {code}
 
@@ -50,16 +50,16 @@ h2. Create a REST service {anchor:id=CONTref.Extensions.RESTServices.RestfulWebS
 
 You can start creating GetEditedDocumentRESTService that implements from the ResourceContainer interface as follows:
 
-{code}
+{code:java}
 @Path("/presentation/document/edit/")
-	public class GetEditedDocumentRESTService implements ResourceContainer {
-		@Path("/{repository}/")
+public class GetEditedDocumentRESTService implements ResourceContainer {
+	@Path("/{repository}/")
 		@GET
 		public Response getLastEditedDoc(@PathParam("repository") String repository,
 		   @QueryParam("showItems") String showItems) throws Exception {
 		   ........
 		}
-	}
+}
 {code}
 
 

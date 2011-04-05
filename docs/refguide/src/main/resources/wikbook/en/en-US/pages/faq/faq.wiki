@@ -10,28 +10,36 @@ You can use "war:(FOLDER_PATH)" to configure which *.jar* files contain your wor
 	
 {code:xml}
 <external-component-plugins>
-	<target-component>org.exoplatform.services.workflow.WorkflowServiceContainer</target-component>
-	<component-plugin>
-		<name>deploy.predefined.processes</name>
-		<set-method>addPlugin</set-method>
-		<type>org.exoplatform.services.workflow.PredefinedProcessesPlugin</type>
-		<init-params>
-			<object-param>
-				<name>predefined.processes</name>
-				<description>load of default business processes</description>
-				<object type="org.exoplatform.services.workflow.ProcessesConfig">
-					<field name="processLocation"><string>war:/conf/bp</string></field>
-					<field name="predefinedProcess">
-						<collection type="java.util.HashSet">
-							<value><string>/exo-ecms-ext-workflow-bp-jbpm-content-2.1.1.jar</string></value>
-							<value><string>/exo-ecms-ext-workflow-bp-jbpm-payraise-2.1.1.jar</string></value>
-							<value><string>/exo-ecms-ext-workflow-bp-jbpm-holiday-2.1.1.jar</string></value>
-						</collection>
-					</field>
-				</object>
-			</object-param>
-		</init-params>
-	</component-plugin>	    
+  <target-component>org.exoplatform.services.workflow.WorkflowServiceContainer</target-component>
+  <component-plugin>
+    <name>deploy.predefined.processes</name>
+    <set-method>addPlugin</set-method>
+    <type>org.exoplatform.services.workflow.PredefinedProcessesPlugin</type>
+    <init-params>
+      <object-param>
+        <name>predefined.processes</name>
+        <description>load of default business processes</description>
+        <object type="org.exoplatform.services.workflow.ProcessesConfig">
+          <field name="processLocation">
+            <string>war:/conf/bp</string>
+          </field>
+          <field name="predefinedProcess">
+            <collection type="java.util.HashSet">
+              <value>
+                <string>/exo-ecms-ext-workflow-bp-jbpm-content-2.1.1.jar</string>
+              </value>
+              <value>
+                <string>/exo-ecms-ext-workflow-bp-jbpm-payraise-2.1.1.jar</string>
+              </value>
+              <value>
+                <string>/exo-ecms-ext-workflow-bp-jbpm-holiday-2.1.1.jar</string>
+              </value>
+            </collection>
+          </field>
+        </object>
+      </object-param>
+    </init-params>
+  </component-plugin>
 </external-component-plugins>
 {code}
 
@@ -42,26 +50,30 @@ You can use "classpath:" to configure which *.jar* files contain your workflow p
 	
 {code:xml}
 <external-component-plugins>
-	<target-component>org.exoplatform.services.workflow.WorkflowServiceContainer</target-component>	  
-	<component-plugin>
-		<name>deploy.predefined.processes</name>
-		<set-method>addPlugin</set-method>
-		<type>org.exoplatform.services.workflow.PredefinedProcessesPlugin</type>
-		<init-params>
-			<object-param>
-				<name>predefined.processes</name>
-				<description>load of default business processes</description>
-				<object type="org.exoplatform.services.workflow.ProcessesConfig">
-					<field name="processLocation"><string>classpath:</string></field>
-					<field name="predefinedProcess">
-						<collection type="java.util.HashSet">
-							<value><string>/exo-ecms-ext-workflow-bp-jbpm-content-myworkflow.jar</string></value>     
-						</collection>
-					</field>
-				</object>
-			</object-param>
-		</init-params>
-	</component-plugin>	    
+  <target-component>org.exoplatform.services.workflow.WorkflowServiceContainer</target-component>
+  <component-plugin>
+    <name>deploy.predefined.processes</name>
+    <set-method>addPlugin</set-method>
+    <type>org.exoplatform.services.workflow.PredefinedProcessesPlugin</type>
+    <init-params>
+      <object-param>
+        <name>predefined.processes</name>
+        <description>load of default business processes</description>
+        <object type="org.exoplatform.services.workflow.ProcessesConfig">
+          <field name="processLocation">
+            <string>classpath:</string>
+          </field>
+          <field name="predefinedProcess">
+            <collection type="java.util.HashSet">
+              <value>
+                <string>/exo-ecms-ext-workflow-bp-jbpm-content-myworkflow.jar</string>
+              </value>
+            </collection>
+          </field>
+        </object>
+      </object-param>
+    </init-params>
+  </component-plugin>
 </external-component-plugins>
 {code}	
   

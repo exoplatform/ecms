@@ -13,52 +13,53 @@ h1. Available preferences {anchor:id=CONTref.Portlets.Search.AvailablePreference
 | *basePath* | {{String}} | {{parameterizedviewer}} | The page which is used to display the search result. |
 
 h1. Sample configuration {anchor:id=CONTref.Portlets.Search.SampleConfiguration}
-{code:language=xml|indent=2}
-		<portlet-preferences>
-		      <preference>
-		        <name>repository</name>
-		        <value>repository</value>
-		        <read-only>false</read-only>
-		      </preference>
-		      <preference>
-		        <name>workspace</name>
-		        <value>collaboration</value>
-		        <read-only>false</read-only>
-		      </preference>
-		      <preference>
-		        <name>searchFormTemplatePath</name>
-		        <value>/exo:ecm/views/templates/WCM Advance Search/search-form/UIDefaultSearchForm.gtmpl</value>
-		        <read-only>false</read-only>
-		      </preference>
-		      <preference>
-		        <name>searchResultTemplatePath</name>
-		        <value>/exo:ecm/views/templates/WCM Advance Search/search-result/UIDefaultSearchResult.gtmpl</value>
-		        <read-only>false</read-only>
-		      </preference>
-		      <preference>
-		        <name>searchPaginatorTemplatePath</name>
-		        <value>/exo:ecm/views/templates/WCM Advance Search/search-paginator/UIDefaultSearchPaginator.gtmpl</value>
-		        <read-only>false</read-only>
-		      </preference>
-		      <preference>
-		        <name>searchPageLayoutTemplatePath</name>
-		        <value>/exo:ecm/views/templates/WCM Advance Search/search-page-layout/UISearchPageLayoutDefault.gtmpl</value>
-		        <read-only>false</read-only>
-		      </preference>
-		      <preference>
-		        <name>itemsPerPage</name>
-		        <value>5</value>
-		        <read-only>false</read-only>
-		      </preference>
-		      <preference>
-		        <name>showQuickEditButton</name>
-		        <value>true</value>
-		        <read-only>false</read-only>
-		      </preference>
-		      <preference>
-		        <name>basePath</name>
-		        <value>parameterizedviewer</value>
-		        <read-only>false</read-only>
-		      </preference>
-		    </portlet-preferences>
+
+{code:xml}
+<portlet-preferences>
+  <preference>
+    <name>repository</name>
+    <value>repository</value>
+    <read-only>false</read-only>
+  </preference>
+  <preference>
+    <name>workspace</name>
+    <value>collaboration</value>
+    <read-only>false</read-only>
+  </preference>
+  <preference>
+    <name>searchFormTemplatePath</name>
+    <value>/exo:ecm/views/templates/WCM Advance Search/search-form/UIDefaultSearchForm.gtmpl</value>
+    <read-only>false</read-only>
+  </preference>
+  <preference>
+    <name>searchResultTemplatePath</name>
+    <value>/exo:ecm/views/templates/WCM Advance Search/search-result/UIDefaultSearchResult.gtmpl</value>
+    <read-only>false</read-only>
+  </preference>
+  <preference>
+    <name>searchPaginatorTemplatePath</name>
+    <value>/exo:ecm/views/templates/WCM Advance Search/search-paginator/UIDefaultSearchPaginator.gtmpl</value>
+    <read-only>false</read-only>
+  </preference>
+  <preference>
+    <name>searchPageLayoutTemplatePath</name>
+    <value>/exo:ecm/views/templates/WCM Advance Search/search-page-layout/UISearchPageLayoutDefault.gtmpl</value>
+    <read-only>false</read-only>
+  </preference>
+  <preference>
+    <name>itemsPerPage</name>
+    <value>5</value>
+    <read-only>false</read-only>
+  </preference>
+  <preference>
+    <name>showQuickEditButton</name>
+    <value>true</value>
+    <read-only>false</read-only>
+  </preference>
+  <preference>
+    <name>basePath</name>
+    <value>parameterizedviewer</value>
+    <read-only>false</read-only>
+  </preference>
+</portlet-preferences>
 {code}

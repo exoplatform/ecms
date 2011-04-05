@@ -13,61 +13,62 @@ h1. Available preferences  {anchor:id=CONTref.Portlets.ContentDetail.AvailablePr
 | *ShowComments* | {{Boolean}} | {{false}} | Show the existing comments of this content (if any). |
 
 h1. Sample configuration {anchor:id=CONTref.Portlets.ContentDetail.SampleConfiguration}
-{code:language=xml|indent=2}
-		<portlet-preferences>
-			<preference>
-				<name>repository</name>
-				<value>repository</value>
-				<read-only>false</read-only>
-			</preference>
-			<preference>
-				<name>workspace</name>
-				<value>collaboration</value>
-				<read-only>false</read-only>
-			</preference>
-			<preference>
-				<name>nodeIdentifier</name>
-				<value>/myfolder/mycontent</value>
-				<read-only>false</read-only>
-			</preference>
-			<preference>
-				<name>ShowTitle</name>
-				<value>true</value>
-				<read-only>false</read-only>
-			</preference>
-			<preference>
-				<name>ShowDate</name>
-				<value>false</value>
-				<read-only>false</read-only>
-			</preference>
-			<preference>
-				<name>ShowOptionBar</name>
-				<value>false</value>
-				<read-only>false</read-only>
-			</preference>
-			<preference>
-				<name>ShowPrintAction</name>
-				<value>true</value>
-				<read-only>false</read-only>
-			</preference>
-			<preference>
-				<name>isQuickCreate</name>
-				<value>false</value>
-				<read-only>true</read-only>
-			</preference>
-			<preference>
-				<name>ContextEnable</name>
-				<value>false</value>
-				<read-only>false</read-only>
-			</preference>
-			<preference>
-				<name>ParameterName</name>
-				<value>content-id</value>
-				<read-only>false</read-only>
-			</preference>
-		</portlet-preferences>
+
+{code:xml}
+<portlet-preferences>
+  <preference>
+    <name>repository</name>
+    <value>repository</value>
+    <read-only>false</read-only>
+  </preference>
+  <preference>
+    <name>workspace</name>
+    <value>collaboration</value>
+    <read-only>false</read-only>
+  </preference>
+  <preference>
+    <name>nodeIdentifier</name>
+    <value>/myfolder/mycontent</value>
+    <read-only>false</read-only>
+  </preference>
+  <preference>
+    <name>ShowTitle</name>
+    <value>true</value>
+    <read-only>false</read-only>
+  </preference>
+  <preference>
+    <name>ShowDate</name>
+    <value>false</value>
+    <read-only>false</read-only>
+  </preference>
+  <preference>
+    <name>ShowOptionBar</name>
+    <value>false</value>
+    <read-only>false</read-only>
+  </preference>
+  <preference>
+    <name>ShowPrintAction</name>
+    <value>true</value>
+    <read-only>false</read-only>
+  </preference>
+  <preference>
+    <name>isQuickCreate</name>
+    <value>false</value>
+    <read-only>true</read-only>
+  </preference>
+  <preference>
+    <name>ContextEnable</name>
+    <value>false</value>
+    <read-only>false</read-only>
+  </preference>
+  <preference>
+    <name>ParameterName</name>
+    <value>content-id</value>
+    <read-only>false</read-only>
+  </preference>
+</portlet-preferences>
 {code}
 
 {note}
-In eXo Content 2.x, there are some preferences that are no longer used, for example, the ShowPrintAction preference.
+In eXo Content 2.x, some preferences are no longer used, for example, the ShowPrintAction preference.
 {note}
