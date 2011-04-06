@@ -50,7 +50,7 @@ h1. Example of template configuration {anchor:id=CONTref.Configuration.Templates
 This below example is configuration for the _nt:file_ template, any other template will be put in the same level with this template start from the line
 {{<object type="org.exoplatform.services.cms.templates.impl.TemplateConfig$NodeType">}} as the another node type.
 
-{code:language=xml|indent=2}
+{code:xml}
 <external-component-plugins>
     <target-component>org.exoplatform.services.cms.templates.TemplateService</target-component>
       <component-plugin>

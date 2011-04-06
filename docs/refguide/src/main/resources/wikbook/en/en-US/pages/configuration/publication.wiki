@@ -37,7 +37,7 @@ h1. external-component-plugins configuration {anchor:id=CONTref.Configuration.Pu
 h1. Example {anchor:id=CONTref.Configuration.Publication.Example}
 
 h2. Component that use plugins example {anchor:id=CONTref.Configuration.Publication.ComponentUsePluginsExamples}
-{code:language=xml|indent=2}
+{code:xml}
 <component>
     <key>org.exoplatform.services.wcm.publication.WCMPublicationService</key>
     <type>org.exoplatform.services.wcm.publication.WCMPublicationServiceImpl</type>
@@ -55,11 +55,11 @@ h2. Component that use plugins example {anchor:id=CONTref.Configuration.Publicat
         <description>This publication lifecycle publish a web content or DMS document to a portal page without version</description>
       </component-plugin>
     </component-plugins>
-  </component>
+</component>
 {code}
 
 h2. Component with init-params example {anchor:id=CONTref.Configuration.Publication.ComponentInitparamExample}
-{code:language=xml|indent=2}
+{code:xml}
 <component>
     <key>org.exoplatform.services.wcm.publication.WCMComposer</key>
     <type>org.exoplatform.services.wcm.publication.WCMComposerImpl</type>
@@ -69,11 +69,11 @@ h2. Component with init-params example {anchor:id=CONTref.Configuration.Publicat
         <value>true</value>
       </value-param>
     </init-params>
-  </component>
+</component>
 {code}
 
 h2. External-component-plugins configuration example {anchor:id=CONTref.Configuration.Publication.Externalcomponentpluginsexample}
-{code:language=xml|indent=2}
+{code:xml}
 <external-component-plugins>
     <target-component>org.exoplatform.services.cache.CacheService</target-component>
     <component-plugin>
@@ -105,5 +105,5 @@ h2. External-component-plugins configuration example {anchor:id=CONTref.Configur
         </object-param>
       </init-params>
     </component-plugin>
-  </external-component-plugins>
+</external-component-plugins>
 {code}

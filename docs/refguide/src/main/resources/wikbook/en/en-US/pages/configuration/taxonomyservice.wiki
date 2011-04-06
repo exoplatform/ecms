@@ -1,0 +1,57 @@
+h1. Desciption
+Taxonomies are used to sort documents to ease searches when browsing documents online. The main idea behind that concept is to provide a multi-dimensional set of paths to find a document. The best example is when you browse Yahoo news. In many cases, you can get your content by using different category paths. Therefore, after creating a document somewhere in the repository, it is possible to categorize it by adding several taxonomy references. By browsing the taxonomy tree, it will be possible to find the referencing article and display them as if they were children of the taxonomy nodes. As you can imagine, taxonomies are stored in the JCR itself and we are using the JCR Reference functionality to provide that advanced ECM feature.
+
+Managing the tree of taxonomies is very simple, you can copy/cut nodes and paste them. Of course, you can add and remove taxonomies from the tree. Once a taxonomy has been added, any user who has access to the "Manage Categories" icon from his/her view can then browse the taxonomy tree and refer to one of its nodes to the created documents.
+
+
+h1. Fields {anchor:id=CONTref.Configuration.Taxonomies.Fields}
+*Object type*: _org.exoplatform.services.cms.taxonomy.impl.TaxonomyTreeDefaultUserPermission_
+|| Field name || Collection type || Description ||
+| *permissions* |{{java.util.ArrayList<TaxonomyTreeDefaultUserPermission$Permission>}} |List of default user permissions to access the taxonomy tree. |
+
+*Object type*: _org.exoplatform.services.cms.taxonomy.impl.TaxonomyTreeDefaultUserPermission$Permission_
+
+
+|| *Field name*|| *Type* || *Default value*|| *Description* ||
+| *identity* | {{String}} |{{ {{{*:/platform/administrators}}} }}| The name of a user or a group. |
+| *read* | {{Boolean}} |{{true}}| Permission to read  the taxonomy tree. |
+| *addNode* | {{Boolean}} | {{true}}| Permission to add a node to the taxonomy tree. |
+| *setProperty* | {{Boolean}} |{{true}}| Permission to set properties for a node in the taxonomy tree . |
+| *remove* | {{Boolean }} | {{true}}| Permission to remove a node from the taxonomy tree. |
+
+h1. Sample Congiguration
+{code:xml}
+<component>
+    <key>org.exoplatform.services.cms.taxonomy.TaxonomyService</key>
+    <type>org.exoplatform.services.cms.taxonomy.impl.TaxonomyServiceImpl</type>
+	<init-params>
+      <object-param>
+        <name>defaultPermission.configuration</name>
+	        <object type="org.exoplatform.services.cms.taxonomy.impl.TaxonomyTreeDefaultUserPermission">
+	          <field name="permissions">
+	            <collection type="java.util.ArrayList">
+	              <value>
+	                <object type="org.exoplatform.services.cms.taxonomy.impl.TaxonomyTreeDefaultUserPermission$Permission">
+	                  <field name="identity"><string>*:/platform/administrators</string></field>
+	                  <field name="read"><string>true</string></field>
+	                  <field name="addNode"><string>true</string></field>
+	                  <field name="setProperty"><string>true</string></field>
+	                  <field name="remove"><string>true</string></field>
+	                </object>
+	              </value>
+                <value>
+                  <object type="org.exoplatform.services.cms.taxonomy.impl.TaxonomyTreeDefaultUserPermission$Permission">
+                    <field name="identity"><string>*:/platform/users</string></field>
+                    <field name="read"><string>true</string></field>
+                    <field name="addNode"><string>true</string></field>
+                    <field name="setProperty"><string>true</string></field>
+                    <field name="remove"><string>false</string></field>
+                  </object>
+                </value>
+	            </collection>
+	          </field>
+	        </object>
+       </object-param>
+	  </init-params>
+</component>
+{code}

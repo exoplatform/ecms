@@ -7,7 +7,7 @@ h1. Fields {anchor:id=CONTref.Configuration.Views.Fields}
 - *Set-method*: {{setManageViewPlugin}}
 - *Type*: {{org.exoplatform.services.cms.views.impl.ManageViewPlugin}}
 - *Description*: This plugin manages user views
-        
+
 
 *Object type*: _org.exoplatform.services.cms.views.ViewConfig_
 
@@ -34,13 +34,12 @@ h1. Fields {anchor:id=CONTref.Configuration.Views.Fields}
 | *name* | {{String}} | {{system-view}}| Specify a set of view component names. |
 | *warPath*| {{String}} |{{/ecm-explorer/SystemView.gtmpl}}| Specify a template location to view.|
 
-
 h1. Example of configuration {anchor:id=CONTref.Configuration.Views.ConfigurationExample}
-{code:language=xml|indent=2}
+{code:xml}
 <external-component-plugins>
-    <target-component>org.exoplatform.services.cms.views.ManageViewService</target-component>
-    	<component-plugin> 
-        <name>manage.view.plugin</name>
+ <target-component>org.exoplatform.services.cms.views.ManageViewService</target-component>
+  <component-plugin>
+  <name>manage.view.plugin</name>
         <set-method>setManageViewPlugin</set-method>
         <type>org.exoplatform.services.cms.views.impl.ManageViewPlugin</type>
         <description>this plugin manage user view</description>
@@ -52,20 +51,20 @@ h1. Example of configuration {anchor:id=CONTref.Configuration.Views.Configuratio
 	        <value-param>
 	        	<name>predefinedViewsLocation</name>
 	        	<value>war:/conf/dms-extension/dms/artifacts</value>
-	        </value-param>	        
+	        </value-param>
 	        <value-param>
 	        	<name>repository</name>
 	        	<value>repository</value>
 	        </value-param>
-		<object-param>	      
+		<object-param>
 		       <name>System-View</name>
 		       <description>View configuration for System workspace</description>
-		       <object type="org.exoplatform.services.cms.views.ViewConfig">		          
+		       <object type="org.exoplatform.services.cms.views.ViewConfig">
 		          <field name="name"><string>system-view</string></field>
 		          <field name="permissions"><string>*:/platform/administrators</string></field>
-		          <field name="template"><string>/exo:ecm/views/templates/ecm-explorer/SystemView</string></field>	
+		          <field name="template"><string>/exo:ecm/views/templates/ecm-explorer/SystemView</string></field>
 		          <field name="tabList">
-                             <collection type="java.util.ArrayList">               
+                             <collection type="java.util.ArrayList">
                                  <value>
                                  <object type="org.exoplatform.services.cms.views.ViewConfig$Tab">
                                     <field name="tabName"><string>Info</string></field>
@@ -75,16 +74,16 @@ h1. Example of configuration {anchor:id=CONTref.Configuration.Views.Configuratio
                                  </object>
                                  </value>
                               </collection>
-                          </field>	          
+                          </field>
 	               </object>
 	        </object-param>
-                <object-param>	      
+                <object-param>
 		        <name>System Template</name>
 		        <description>Template for display documents in list style</description>
-		        <object type="org.exoplatform.services.cms.views.TemplateConfig">		        	
+		        <object type="org.exoplatform.services.cms.views.TemplateConfig">
                             <field name="type"><string>ecmExplorerTemplate</string></field>
 		            <field name="name"><string>SystemView</string></field>
-		            <field name="warPath"><string>/ecm-explorer/SystemView.gtmpl</string></field>              
+		            <field name="warPath"><string>/ecm-explorer/SystemView.gtmpl</string></field>
 		        </object>
 		</object-param>
        </init-params>

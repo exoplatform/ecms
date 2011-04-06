@@ -15,7 +15,7 @@ h1. Fields {anchor:id=CONTref.Configuration.Nodetypes.Fields}
 h1. Examples of Nodetype configuration  {anchor:id=CONTref.Configuration.Nodetypes.NodetypeConfigurationExample}
 
 The node definition should be placed in a special XML file (see DTD below) and declared in the service's configuration file to eXo component plugin mechanism which is described as follows:
-{code}
+{code:xml}
 	<external-component-plugins>
   	<target-component>org.exoplatform.services.jcr.RepositoryService</target-component>
 		<component-plugin>
@@ -46,7 +46,7 @@ The node definition should be placed in a special XML file (see DTD below) and d
 {code}
 
 The following is the definition file format of nodetype:
-{code}
+{code:xml}
 <nodeTypes xmlns:nt="http://www.jcp.org/jcr/nt/1.0" xmlns:mix="http://www.jcp.org/jcr/mix/1.0"
   xmlns:jcr="http://www.jcp.org/jcr/1.0">
   <nodeType name="publication:publication" isMixin="true" hasOrderableChildNodes="false" primaryItemName="">

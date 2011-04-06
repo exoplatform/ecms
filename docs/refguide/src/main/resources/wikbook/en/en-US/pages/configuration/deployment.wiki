@@ -3,7 +3,7 @@ When a site is created, most of end-users want to see something in the page inst
 There are two main cases to use:
 - The site is created only one time when the database is cleaned.
 
-- The site is created at runtime, when a user uses the core feature of GateIn portal.
+- The site is created at runtime, when a user uses the core features of eXo GateIn portal.
 h1. Fields {anchor:id=CONTref.Configuration.Deployment.Fields}
 
 *{{init-params}}*
@@ -18,7 +18,7 @@ h1. Fields {anchor:id=CONTref.Configuration.Deployment.Fields}
 
 *{{object}}*
 || *Attribute* || *Type* || *Default value* || *Description* ||
-| *type* | {{String}} | {{org.exoplatform.services.deployment.DeploymentDescriptor (*)}} | The type of this object |
+| *type* | {{String}} | {{org.exoplatform.services.deployment.DeploymentDescriptor (*)}} | The type of this object. |
 
 _*org.exoplatform.services.deployment.DeploymentDescriptor*_
 || *Name* || *Type* || *Default value* || *Description* ||
@@ -34,7 +34,7 @@ _*org.exoplatform.services.deployment.DeploymentDescriptor*_
 | *nodePath* | {{String}} | {{/sites content/live/acme/web contents/site artifacts}} | The path of the target node. |
 
 h1. Example of configuration {anchor:id=CONTref.Configuration.Deployment.ConfigurationExample}
-{code:language=xml|indent=2}
+{code:xml}
   <external-component-plugins>
     <target-component>org.exoplatform.services.deployment.WCMContentInitializerService</target-component>
     <component-plugin>
