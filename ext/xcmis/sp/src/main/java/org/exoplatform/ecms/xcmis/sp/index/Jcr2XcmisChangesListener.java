@@ -368,49 +368,36 @@ public class Jcr2XcmisChangesListener implements ItemsPersistenceListener
       if (readOnlyIndexConfiguration != null && rootStorage == null)
       {
 
-         StorageConfiguration rootStorageConfiguration =
-            new StorageConfiguration(UUID.randomUUID().toString(), currentRepositoryName, workspaceName, "/",
-               Collections.EMPTY_MAP, "Virtual root storage");
-         SessionProvider sessionProvider = sessionProviderService.getSystemSessionProvider(null);
-         rootStorage =
-            new StorageImpl(sessionProvider.getSession(workspaceName, repository), rootStorageConfiguration, null,
-               new PermissionService(), StorageProviderImpl.DEFAULT_NODETYPE_MAPPING);
-
-         //prepare search service
-         CmisSchema schema = new CmisSchema(rootStorage);
-         CmisSchemaTableResolver tableResolver =
-            new CmisSchemaTableResolver(new ToStringNameConverter(), schema, rootStorage);
-
-         IndexConfiguration indexConfiguration = new IndexConfiguration();
-
-         File rootFolder = new File(readOnlyIndexConfiguration.getIndexDir());
-         File indexFolder = new File(new File(rootFolder, currentRepositoryName), workspaceName);
-
-         indexConfiguration.setIndexDir(indexFolder.getPath());
-         indexConfiguration.setDocumentReaderService(documentReaderService);
-         indexConfiguration.setRootUuid(Constants.ROOT_UUID);
-
-         //if list of root parents is empty it will be indexed as empty string
-         indexConfiguration.setRootParentUuid("");
-
-         //default invocation context
-         InvocationContext invocationContext = new InvocationContext();
-         invocationContext.setNameConverter(new ToStringNameConverter());
-         invocationContext.setSchema(schema);
-         invocationContext.setPathSplitter(new SlashSplitter());
-         invocationContext.setTableResolver(tableResolver);
-
-         SearchServiceConfiguration configuration = new SearchServiceConfiguration();
-         configuration.setIndexConfiguration(indexConfiguration);
-         configuration.setContentReader(new CmisContentReader(rootStorage));
-         configuration.setNameConverter(new ToStringNameConverter());
-         configuration.setDefaultInvocationContext(invocationContext);
-         configuration.setTableResolver(tableResolver);
-         configuration.setPathSplitter(new SlashSplitter());
-
-         searchService = new SearchService(configuration);
-         searchService.start();
-
+         try {
+	         StorageConfiguration rootStorageConfiguration =
+	            new StorageConfiguration(UUID.randomUUID().toString(), currentRepositoryName, workspaceName, "/",
+	               Collections.EMPTY_MAP, "Virtual root storage");
+	         SessionProvider sessionProvider = sessionProviderService.getSystemSessionProvider(null);
+	         rootStorage =
+	            new StorageImpl(sessionProvider.getSession(workspaceName, repository), rootStorageConfiguration, null,
+	               new PermissionService(), StorageProviderImpl.DEFAULT_NODETYPE_MAPPING);
+	
+	         //prepare search service
+	         CmisSchema schema = new CmisSchema(rootStorage);
+	         CmisSchemaTableResolver tableResolver =
+	            new CmisSchemaTableResolver(new ToStringNameConverter(), schema, rootStorage);
+	
+	         File rootFolder = new File(readOnlyIndexConfiguration.getIndexDir());
+	         File indexFolder = new File(new File(rootFolder, currentRepositoryName), workspaceName);
+	         
+	         IndexConfiguration indexConfiguration = new IndexConfiguration(indexFolder.getPath(), Constants.ROOT_PARENT_UUID, Constants.ROOT_UUID);
+	
+	         SearchServiceConfiguration configuration = new SearchServiceConfiguration(schema, tableResolver,
+	        		 new CmisContentReader(rootStorage), indexConfiguration);
+	
+	         searchService = new SearchService(configuration);
+	         searchService.start();
+	         
+    	 } catch (org.apache.tika.mime.MimeTypeException e) {
+    	    throw new SearchServiceException(e.getLocalizedMessage(), e);
+	     } catch (java.io.IOException e) {
+		    throw new SearchServiceException(e.getLocalizedMessage(), e);
+	     }
       }
    }
 

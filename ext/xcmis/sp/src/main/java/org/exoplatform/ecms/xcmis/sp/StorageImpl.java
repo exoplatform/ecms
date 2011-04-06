@@ -183,7 +183,7 @@ public class StorageImpl extends BaseJcrStorage implements Storage
    {
       ConversationState state = ConversationState.getCurrent();
       AllowableActions actions =
-         permissionService.calculateAllowableActions(object, state != null ? state.getIdentity() : null,
+         permissionService.calculateAllowableActions(object, state != null ? state.getIdentity().getUserId() : null,
             getRepositoryInfo());
 
       if (object instanceof JcrFile)
