@@ -144,6 +144,11 @@ EcmContentSelector.prototype.buildECSTreeView = function() {
 	}
 	var uiLeftWorkspace = document.getElementById('LeftWorkspace');	
 	if(uiLeftWorkspace) uiLeftWorkspace.innerHTML = treeHTML;
+	var contentSelectorPop = document.getElementById('CorrectContentSelectorPopupWindow');
+  if(contentSelectorPop) {
+		var contentBlock = eXo.core.DOMUtil.findFirstDescendantByClass(contentSelectorPop, 'div' ,'PopupContent');
+		if(contentBlock) contentBlock.style.height="";
+	}
 };
 
 EcmContentSelector.prototype.getDir = function(currentNode, event) {  
