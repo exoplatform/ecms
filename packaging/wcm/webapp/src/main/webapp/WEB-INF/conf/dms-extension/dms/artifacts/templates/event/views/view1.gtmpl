@@ -175,12 +175,14 @@
 					        String wsName = "";
 													for (att in attachments) {
 														if(att != null) {
-	  													wsName = att.getSession().getWorkspace().getName();
-	  													params  = [new Parameter("workspaceName", wsName), new Parameter("findDrive","true")];
+							  							wsName = att.getSession().getWorkspace().getName();
+							  							params  = [new Parameter("workspaceName", wsName), new Parameter("findDrive","true")];
+							  							def viewAttachmentLink =  uicomponent.getAttachmentURL(att, params);
+							  							def linkActionName = (viewAttachmentLink.startsWith("http")) ? "href" : "onclick";
 												%>
 												  <div class="AttachmentsContainer">	
 					                  <div class="AttachmentsContentIcon">
-					                  	<a onclick="<%=uicomponent.event("ChangeNode", Utils.formatNodeName(att.getPath()), params)%>" style="cursor: pointer;"><%=att.getName()%></a>
+					                  <a $linkActionName="$viewAttachmentLink" style="cursor: pointer;"><%=att.getName()%></a>
 					                  </div>
 					                  <% if (PermissionUtil.canRemoveNode(att)) {
 					                       params = [new Parameter("workspaceName", wsName), new Parameter("repository", uicomponent.getRepository())];
