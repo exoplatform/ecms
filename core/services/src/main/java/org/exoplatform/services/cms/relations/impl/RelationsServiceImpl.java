@@ -109,27 +109,29 @@ public class RelationsServiceImpl implements RelationsService, Startable {
    * {@inheritDoc}
    */
   public void removeRelation(Node node, String relationPath, String repository) throws Exception {
-    List<Value> vals = new ArrayList<Value>();
-    if (!"*".equals(relationPath)) {
-      SessionProvider provider = SessionProvider.createSystemProvider() ;
-      Property relations = node.getProperty(RELATION_PROP);
-      if (relations != null) {
-        Value[] values = relations.getValues();
-        String uuid2Remove = null;
-        for (int i = 0; i < values.length; i++) {
-          String uuid = values[i].getString();
-          Node refNode = getNodeByUUID(uuid, repository,provider);
-          if(refNode == null) continue ;
-          if (refNode.getPath().equals(relationPath)) uuid2Remove = uuid;
-          else vals.add(values[i]);
+    if(node.hasProperty(RELATION_PROP)) {
+      List<Value> vals = new ArrayList<Value>();
+      if (!"*".equals(relationPath)) {
+        SessionProvider provider = SessionProvider.createSystemProvider() ;
+        Property relations = node.getProperty(RELATION_PROP);
+        if (relations != null) {
+          Value[] values = relations.getValues();
+          String uuid2Remove = null;
+          for (int i = 0; i < values.length; i++) {
+            String uuid = values[i].getString();
+            Node refNode = getNodeByUUID(uuid, repository,provider);
+            if(refNode == null) continue ;
+            if (refNode.getPath().equals(relationPath)) uuid2Remove = uuid;
+            else vals.add(values[i]);
+          }
+          if (uuid2Remove == null) return;
         }
-        if (uuid2Remove == null) return;
+        provider.close();
       }
-      provider.close();
+      if(vals.size() == 0) node.removeMixin(RELATION_MIXIN);
+      else node.setProperty(RELATION_PROP, vals.toArray(new Value[vals.size()]));
+      node.save();
     }
-    if(vals.size() == 0) node.removeMixin(RELATION_MIXIN);
-    else node.setProperty(RELATION_PROP, vals.toArray(new Value[vals.size()]));
-    node.save() ;
   }
 
   /**
