@@ -154,7 +154,12 @@
 <tr>
 	<td>type</td>
 	<td>name</td>
-	<td>YKhue</td>
+	<td>Test_SNF_ECMS_34</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Save</td>
+	<td></td>
 </tr>
 <tr>
 	<td>click</td>
@@ -164,6 +169,11 @@
 <tr>
 	<td>pause</td>
 	<td>10000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>-- Add second folder --</td>
 	<td></td>
 </tr>
 <tr>
@@ -184,7 +194,7 @@
 <tr>
 	<td>type</td>
 	<td>name</td>
-	<td>LinhNhi</td>
+	<td>Test_SNF_ECMS_34_add</td>
 </tr>
 <tr>
 	<td>click</td>
@@ -198,17 +208,17 @@
 </tr>
 <tr>
 	<td>echo</td>
-	<td>-- Copy folder1 to folder2</td>
+	<td>-- Cut folder1 to folder2</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=LinhNhi</td>
+	<td>link=Test_SNF_ECMS_34</td>
 	<td></td>
 </tr>
 <tr>
 	<td>mouseDownRight</td>
-	<td>link=LinhNhi</td>
+	<td>link=Test_SNF_ECMS_34</td>
 	<td></td>
 </tr>
 <tr>
@@ -233,12 +243,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=YKhue</td>
+	<td>link=Test_SNF_ECMS_34_add</td>
 	<td></td>
 </tr>
 <tr>
 	<td>mouseDownRight</td>
-	<td>link=YKhue</td>
+	<td>link=Test_SNF_ECMS_34_add</td>
 	<td></td>
 </tr>
 <tr>
@@ -258,47 +268,47 @@
 </tr>
 <tr>
 	<td>echo</td>
-	<td>-- Check YKhue is cut</td>
+	<td>-- Check Test_SNF_ECMS_34_add is cut</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementNotPresent</td>
-	<td>link=LinhNhi</td>
+	<td>link=Test_SNF_ECMS_34</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyElementNotPresent</td>
-	<td>link=LinhNhi</td>
+	<td>link=Test_SNF_ECMS_34</td>
 	<td></td>
 </tr>
 <tr>
 	<td>echo</td>
-	<td>-- Check YKhue in LinhNhi</td>
+	<td>-- Check Test_SNF_ECMS_34_add in Test_SNF_ECMS_34</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=YKhue</td>
+	<td>link=Test_SNF_ECMS_34_add</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>link=YKhue</td>
+	<td>link=Test_SNF_ECMS_34_add</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//a[text()='LinhNhi']</td>
+	<td>//div[@title=&quot;Test_SNF_ECMS_34&quot;]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>//a[text()='LinhNhi']</td>
+	<td>//div[@title=&quot;Test_SNF_ECMS_34&quot;]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>mouseDownRight</td>
-	<td>link=YKhue</td>
+	<td>link=Test_SNF_ECMS_34_add</td>
 	<td></td>
 </tr>
 <tr>
@@ -313,12 +323,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@id='UIPopupWindow']/div/div[2]/div/div/div/div/div/div/div/div[2]/table/tbody/tr/td/div[1]/div/div/div</td>
+	<td>//div[@id='UIPopupWindow']//a[text()=&quot;OK&quot;]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[@id='UIPopupWindow']/div/div[2]/div/div/div/div/div/div/div/div[2]/table/tbody/tr/td/div[1]/div/div/div</td>
+	<td>//div[@id='UIPopupWindow']//a[text()=&quot;OK&quot;]</td>
 	<td></td>
 </tr>
 <tr>
@@ -328,22 +338,22 @@
 </tr>
 <tr>
 	<td>waitForElementNotPresent</td>
-	<td>link=LinhNhi</td>
+	<td>link=Test_SNF_ECMS_34</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementNotPresent</td>
-	<td>link=LinhNhi</td>
+	<td>link=Test_SNF_ECMS_34</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementNotPresent</td>
-	<td>link=YKhue</td>
+	<td>link=Test_SNF_ECMS_34_add</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementNotPresent</td>
-	<td>link=YKhue</td>
+	<td>link=Test_SNF_ECMS_34_add</td>
 	<td></td>
 </tr>
 <tr>
