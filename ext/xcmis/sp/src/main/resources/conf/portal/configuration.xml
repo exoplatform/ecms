@@ -3,6 +3,11 @@
    xmlns="http://www.exoplaform.org/xml/ns/kernel_1_0.xsd">
 
    <component>
+     <key>org.xcmis.restatom.CmisRestApplication</key>
+     <type>org.xcmis.restatom.CmisRestApplicationSingle</type>
+   </component>
+   
+   <component>
       <type>org.exoplatform.ecms.xcmis.sp.DriveCmisRegistry</type>
       <init-params>
          <!-- Disabled by default. Uncomment if you need query support in CMIS. -->
