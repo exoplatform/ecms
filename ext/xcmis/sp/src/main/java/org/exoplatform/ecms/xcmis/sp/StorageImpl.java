@@ -930,6 +930,10 @@ public class StorageImpl extends BaseJcrStorage implements Storage
             {
                return new PWC(entry);
             }
+            if (node.isNodeType(JcrCMIS.NT_FROZEN_NODE))
+            {
+               return new DocumentVersion(entry);
+            }
             if (!node.isNodeType(JcrCMIS.CMIS_MIX_DOCUMENT))
             {
                // Has not required mixin 'cmis:document'. Some operation for
@@ -940,10 +944,6 @@ public class StorageImpl extends BaseJcrStorage implements Storage
                      + " has not 'cmis:document' mixin type. Some operations may be disabled.");
                }
                return new JcrFile(entry);
-            }
-            if (node.isNodeType(JcrCMIS.NT_FROZEN_NODE))
-            {
-               return new DocumentVersion(entry);
             }
             return new DocumentDataImpl(entry);
          }
