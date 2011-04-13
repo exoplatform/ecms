@@ -205,7 +205,7 @@ class JcrNodeEntry
     * @param storage CMIS storage
     * @throws RepositoryException if any JCR repository error occurs
     * @throws NotSupportedNodeTypeException if specified <code>node</code> has
-    *         node-type which is unsupported by xCMIS
+    *            node-type which is unsupported by xCMIS
     * @see Node#getPrimaryNodeType()
     * @see Workspace#getNodeTypeManager()
     * @see RepositoryException
@@ -217,8 +217,8 @@ class JcrNodeEntry
       if (node.isNodeType(JcrCMIS.NT_FROZEN_NODE))
       {
          nodeType =
-            session.getWorkspace().getNodeTypeManager().getNodeType(
-               node.getProperty(JcrCMIS.JCR_FROZEN_PRIMARY_TYPE).getString());
+            session.getWorkspace().getNodeTypeManager()
+               .getNodeType(node.getProperty(JcrCMIS.JCR_FROZEN_PRIMARY_TYPE).getString());
       }
       else
       {
@@ -491,7 +491,7 @@ class JcrNodeEntry
 
    /**
     * Create permission map which can be passed to JCR node.
-    *
+    * 
     * @param source source ACL
     * @return permission map
     */
@@ -629,6 +629,21 @@ class JcrNodeEntry
       return null;
    }
 
+   String getContentStreamFileName()
+   {
+      if (getBaseType() == BaseType.DOCUMENT)
+      {
+         String contentFileName = getString(CmisConstants.CONTENT_STREAM_FILE_NAME);
+         if (contentFileName == null)
+         {
+            // Use name of Document if content not empty. 
+            contentFileName = getName();
+         }
+         return contentFileName;
+      }
+      return null;
+   }
+
    ContentStream getContentStream(String streamId)
    {
       try
@@ -652,7 +667,7 @@ class JcrNodeEntry
                   contentNode.getProperty(JcrCMIS.JCR_ENCODING).getString());
             }
             return new BaseContentStream(contentNode.getProperty(JcrCMIS.JCR_DATA).getStream(), contentLength,
-               getName(), mimeType);
+               getContentStreamFileName(), mimeType);
          }
          else
          {
@@ -685,7 +700,7 @@ class JcrNodeEntry
 
    /**
     * Set new or remove (if <code>content == null</code>) content stream.
-    *
+    * 
     * @param content content
     * @throws IOException if any i/o error occurs
     */
@@ -1633,8 +1648,8 @@ class JcrNodeEntry
          try
          {
             relationships =
-               getRelationships(RelationshipDirection.EITHER, storage.getTypeDefinition(CmisConstants.RELATIONSHIP,
-                  true), true);
+               getRelationships(RelationshipDirection.EITHER,
+                  storage.getTypeDefinition(CmisConstants.RELATIONSHIP, true), true);
          }
          catch (TypeNotFoundException ignore)
          {

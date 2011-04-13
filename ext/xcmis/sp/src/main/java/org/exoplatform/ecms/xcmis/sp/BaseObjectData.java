@@ -446,7 +446,7 @@ abstract class BaseObjectData implements ObjectData
          if (((DocumentData)this).hasContent())
          {
             return new StringProperty(definition.getId(), definition.getQueryName(), definition.getLocalName(),
-               definition.getDisplayName(), getName());
+               definition.getDisplayName(), ((DocumentDataImpl)this).getContentStreamFileName());
          }
       }
       else if (definition.getId().equals(CmisConstants.CONTENT_STREAM_MIME_TYPE))
