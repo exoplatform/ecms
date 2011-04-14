@@ -90,9 +90,8 @@ public class UIContentViewer extends UIBaseNodePresentation {
   public ResourceResolver getTemplateResourceResolver(WebuiRequestContext context, String template) {
     try {
       DMSConfiguration dmsConfiguration = getApplicationComponent(DMSConfiguration.class);
-      String repository = getRepository();
       String workspace = dmsConfiguration.getConfig().getSystemWorkspace();
-      return new JCRResourceResolver(repository, workspace, "exo:templateFile");
+      return new JCRResourceResolver(workspace);
     } catch (Exception e) {
       return null;
     }

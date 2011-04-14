@@ -190,13 +190,14 @@ public class MetadataServiceImpl implements MetadataService, Startable{
   /**
    * {@inheritDoc}
    */
+  @Deprecated
   public String addMetadata(String nodetype,
                             boolean isDialog,
                             String role,
                             String content,
                             boolean isAddNew,
                             String repository) throws Exception {
-    Session session = getSession(repository);
+    Session session = getSession();
     Node metadataHome = (Node)session.getItem(baseMetadataPath_);
     String path = null;
     if(!isAddNew) {
@@ -218,6 +219,37 @@ public class MetadataServiceImpl implements MetadataService, Startable{
     session.logout();
     return path;
   }
+  
+  /**
+   * {@inheritDoc}
+   */
+  public String addMetadata(String nodetype,
+                            boolean isDialog,
+                            String role,
+                            String content,
+                            boolean isAddNew) throws Exception {
+    Session session = getSession();
+    Node metadataHome = (Node)session.getItem(baseMetadataPath_);
+    String path = null;
+    if(!isAddNew) {
+      if(isDialog) {
+        Node dialog1 = metadataHome.getNode(nodetype).getNode(DIALOGS).getNode(DIALOG1);
+        path = templateService.updateTemplate(dialog1, new ByteArrayInputStream(content.getBytes()), role.split(";"));
+      } else {
+        Node view1 = metadataHome.getNode(nodetype).getNode(VIEWS).getNode(VIEW1);
+        path = templateService.updateTemplate(view1, new ByteArrayInputStream(content.getBytes()), role.split(";"));
+      }
+    } else {
+      Node metadata = null;
+      if(metadataHome.hasNode(nodetype)) metadata = metadataHome.getNode(nodetype);
+      else metadata = metadataHome.addNode(nodetype, NT_UNSTRUCTURED);
+      addTemplate(metadata, role, new ByteArrayInputStream(content.getBytes()), isDialog);
+      metadataHome.save();
+    }
+    session.save();
+    session.logout();
+    return path;
+  }  
 
   /**
    * Add new node named nodetype
@@ -243,8 +275,9 @@ public class MetadataServiceImpl implements MetadataService, Startable{
   /**
    * {@inheritDoc}
    */
+  @Deprecated
   public void removeMetadata(String nodetype, String repository) throws Exception {
-    Session session = getSession(repository);
+    Session session = getSession();
     Node metadataHome = (Node)session.getItem(baseMetadataPath_);
     Node metadata = metadataHome.getNode(nodetype);
     metadata.remove();
@@ -256,6 +289,20 @@ public class MetadataServiceImpl implements MetadataService, Startable{
   /**
    * {@inheritDoc}
    */
+  public void removeMetadata(String nodetype) throws Exception {
+    Session session = getSession();
+    Node metadataHome = (Node)session.getItem(baseMetadataPath_);
+    Node metadata = metadataHome.getNode(nodetype);
+    metadata.remove();
+    metadataHome.save();
+    session.save();
+    session.logout();
+  }  
+  
+  /**
+   * {@inheritDoc}
+   */
+  @Deprecated
   public List<String> getMetadataList(String repository) throws Exception {
     List<String> metadataTypes = new ArrayList<String>();
     for(NodeType metadata:getAllMetadatasNodeType(repository)) {
@@ -267,6 +314,18 @@ public class MetadataServiceImpl implements MetadataService, Startable{
   /**
    * {@inheritDoc}
    */
+  public List<String> getMetadataList() throws Exception {
+    List<String> metadataTypes = new ArrayList<String>();
+    for(NodeType metadata:getAllMetadatasNodeType()) {
+      metadataTypes.add(metadata.getName());
+    }
+    return metadataTypes;
+  }
+  
+  /**
+   * {@inheritDoc}
+   */
+  @Deprecated
   public List<NodeType> getAllMetadatasNodeType(String repository) throws Exception {
     List<NodeType> metadataTypes = new ArrayList<NodeType>();
     ExtendedNodeTypeManager ntManager = repositoryService_.getCurrentRepository().getNodeTypeManager();
@@ -277,6 +336,20 @@ public class MetadataServiceImpl implements MetadataService, Startable{
     }
     return metadataTypes;
   }
+  
+  /**
+   * {@inheritDoc}
+   */
+  public List<NodeType> getAllMetadatasNodeType() throws Exception {
+    List<NodeType> metadataTypes = new ArrayList<NodeType>();
+    ExtendedNodeTypeManager ntManager = repositoryService_.getCurrentRepository().getNodeTypeManager();
+    NodeTypeIterator ntIter = ntManager.getMixinNodeTypes();
+    while(ntIter.hasNext()) {
+      NodeType nt = ntIter.nextNodeType();
+      if(nt.isNodeType(METADATA_TYPE) && !nt.getName().equals(METADATA_TYPE)) metadataTypes.add(nt);
+    }
+    return metadataTypes;
+  }  
 
 
   /**
@@ -303,8 +376,9 @@ public class MetadataServiceImpl implements MetadataService, Startable{
   /**
    * {@inheritDoc}
    */
+  @Deprecated
   public String getMetadataTemplate(String name, boolean isDialog, String repository) throws Exception {
-    Session session = getSession(repository);
+    Session session = getSession();
     Node metadataHome = (Node)session.getItem(baseMetadataPath_);
     Node template = null;
     if(!hasMetadata(name, repository)) return null;
@@ -313,12 +387,27 @@ public class MetadataServiceImpl implements MetadataService, Startable{
     session.logout();
     return templateService.getTemplate(template);
   }
+  
+  /**
+   * {@inheritDoc}
+   */
+  public String getMetadataTemplate(String name, boolean isDialog) throws Exception {
+    Session session = getSession();
+    Node metadataHome = (Node)session.getItem(baseMetadataPath_);
+    Node template = null;
+    if(!hasMetadata(name)) return null;
+    if(isDialog) template = metadataHome.getNode(name).getNode(DIALOGS).getNode(DIALOG1);
+    else template = metadataHome.getNode(name).getNode(VIEWS).getNode(VIEW1);
+    session.logout();
+    return templateService.getTemplate(template);
+  }  
 
   /**
    * {@inheritDoc}
    */
+  @Deprecated
   public String getMetadataPath(String name, boolean isDialog, String repository) throws Exception {
-    Session session = getSession(repository);
+    Session session = getSession();
     Node metadataHome = (Node)session.getItem(baseMetadataPath_);
     if(!hasMetadata(name, repository)) return null;
     Node template = null;
@@ -330,12 +419,30 @@ public class MetadataServiceImpl implements MetadataService, Startable{
     session.logout();
     return template.getPath();
   }
+  
+  /**
+   * {@inheritDoc}
+   */
+  public String getMetadataPath(String name, boolean isDialog) throws Exception {
+    Session session = getSession();
+    Node metadataHome = (Node)session.getItem(baseMetadataPath_);
+    if(!hasMetadata(name)) return null;
+    Node template = null;
+    if(isDialog){
+      template = metadataHome.getNode(name).getNode(DIALOGS).getNode(DIALOG1);
+    } else {
+      template = metadataHome.getNode(name).getNode(VIEWS).getNode(VIEW1);
+    }
+    session.logout();
+    return template.getPath();
+  }  
 
   /**
    * {@inheritDoc}
    */
+  @Deprecated
   public String getMetadataRoles(String name, boolean isDialog, String repository) throws Exception {
-    Session session = getSession(repository);
+    Session session = getSession();
     Node metadataHome = (Node)session.getItem(baseMetadataPath_);
     Node template = null;
     if(!hasMetadata(name, repository)) return null;
@@ -347,12 +454,30 @@ public class MetadataServiceImpl implements MetadataService, Startable{
     session.logout();
     return templateService.getTemplateRoles(template);
   }
+  
+  /**
+   * {@inheritDoc}
+   */
+  public String getMetadataRoles(String name, boolean isDialog) throws Exception {
+    Session session = getSession();
+    Node metadataHome = (Node)session.getItem(baseMetadataPath_);
+    Node template = null;
+    if(!hasMetadata(name)) return null;
+    if(isDialog){
+      template = metadataHome.getNode(name).getNode(DIALOGS).getNode(DIALOG1);
+    } else {
+      template = metadataHome.getNode(name).getNode(VIEWS).getNode(VIEW1);
+    }
+    session.logout();
+    return templateService.getTemplateRoles(template);
+  }  
 
   /**
    * {@inheritDoc}
    */
+  @Deprecated
   public boolean hasMetadata(String name, String repository) throws Exception {
-    Session session = getSession(repository);
+    Session session = getSession();
     Node metadataHome = (Node)session.getItem(baseMetadataPath_);
     if(metadataHome.hasNode(name)) {
       session.logout();
@@ -361,10 +486,25 @@ public class MetadataServiceImpl implements MetadataService, Startable{
     session.logout();
     return false;
   }
+  
+  /**
+   * {@inheritDoc}
+   */
+  public boolean hasMetadata(String name) throws Exception {
+    Session session = getSession();
+    Node metadataHome = (Node)session.getItem(baseMetadataPath_);
+    if(metadataHome.hasNode(name)) {
+      session.logout();
+      return true;
+    }
+    session.logout();
+    return false;
+  }  
 
   /**
    * {@inheritDoc}
    */
+  @Deprecated
   public List<String> getExternalMetadataType(String repository) throws Exception {
     List<String> extenalMetaTypes = new ArrayList<String>();
     for(NodeType metadata: getAllMetadatasNodeType(repository)) {
@@ -379,6 +519,25 @@ public class MetadataServiceImpl implements MetadataService, Startable{
 
     return extenalMetaTypes;
   }
+  
+  /**
+   * {@inheritDoc}
+   */
+  public List<String> getExternalMetadataType() throws Exception {
+    List<String> extenalMetaTypes = new ArrayList<String>();
+    for (NodeType metadata : getAllMetadatasNodeType()) {
+      for (PropertyDefinition pro : metadata.getPropertyDefinitions()) {
+        if (pro.getName().equals(INTERNAL_USE)) {
+          if (!pro.getDefaultValues()[0].getBoolean() && !metadata.getName().equals(METADATA_TYPE))
+            extenalMetaTypes.add(metadata.getName());
+          break;
+        }
+      }
+    }
+
+    return extenalMetaTypes;
+  }
+  
 
   /**
    * Get session of respository
@@ -387,7 +546,7 @@ public class MetadataServiceImpl implements MetadataService, Startable{
    * @return              Session
    * @throws Exception
    */
-  private Session getSession(String repository) throws Exception{
+  private Session getSession() throws Exception{
     ManageableRepository manageableRepository = repositoryService_.getCurrentRepository();
     DMSRepositoryConfiguration dmsRepoConfig = dmsConfiguration_.getConfig();
     return manageableRepository.getSystemSession(dmsRepoConfig.getSystemWorkspace());

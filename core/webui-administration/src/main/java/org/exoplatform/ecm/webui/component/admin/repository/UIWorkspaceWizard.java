@@ -197,7 +197,7 @@ public class UIWorkspaceWizard extends UIFormTabPane implements UISelectable {
         manageRepository = rService.getDefaultRepository();
       } else {
         try {
-          manageRepository = rService.getRepository(repoName);
+          manageRepository = rService.getCurrentRepository();
         } catch (RepositoryException e) {
           manageRepository = rService.getDefaultRepository();
         }
@@ -226,9 +226,6 @@ public class UIWorkspaceWizard extends UIFormTabPane implements UISelectable {
           if (!isAddNewWs) {
             permission = uiRepoForm.getWorkspaceMapPermission(repoName);
           }
-          // manageRepository = rService.getRepository(repoName);
-          // selectedNodeType =
-          // manageRepository.getSystemSession(workSpace.getName()).getRootNode().getPrimaryNodeType().getName();
         }
       }
       if (permission == null) permission = uiRepoForm.getWorkspaceMapPermission(name);
@@ -792,7 +789,7 @@ public class UIWorkspaceWizard extends UIFormTabPane implements UISelectable {
         if(ic != null) ic.recall() ;
         RepositoryService rService = (RepositoryService)uiFormWizard.getApplicationComponent(ExoContainer.class).
         getComponentInstanceOfType(RepositoryService.class);
-        ManageableRepository manageRepository = rService.getRepository(uiRepoForm.repoName_);
+        ManageableRepository manageRepository = rService.getCurrentRepository();
         try {
           manageRepository.configWorkspace(workspaceEntry) ;
           manageRepository.createWorkspace(workspaceEntry.getName()) ;

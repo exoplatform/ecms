@@ -100,8 +100,7 @@ public class ThumbnailRESTService implements ResourceContainer {
                                     @PathParam("workspaceName") String wsName,
                                     @PathParam("nodePath") String nodePath,
                                     @HeaderParam("If-Modified-Since") String ifModifiedSince) throws Exception {
-    return getThumbnailByType(repoName,
-                              wsName,
+    return getThumbnailByType(wsName,
                               nodePath,
                               ThumbnailService.MEDIUM_SIZE,
                               ifModifiedSince);
@@ -122,7 +121,7 @@ public class ThumbnailRESTService implements ResourceContainer {
                                 @PathParam("workspaceName") String wsName,
                                 @PathParam("nodePath") String nodePath,
                                 @HeaderParam("If-Modified-Since") String ifModifiedSince) throws Exception {
-    return getThumbnailByType(repoName, wsName, nodePath, ThumbnailService.BIG_SIZE, ifModifiedSince);
+    return getThumbnailByType(wsName, nodePath, ThumbnailService.BIG_SIZE, ifModifiedSince);
   }
 
 /**
@@ -140,7 +139,7 @@ public class ThumbnailRESTService implements ResourceContainer {
                                 @PathParam("workspaceName") String wsName,
                                 @PathParam("nodePath") String nodePath,
                                 @HeaderParam("If-Modified-Since") String ifModifiedSince) throws Exception {
-    return getThumbnailByType(repoName, wsName, nodePath, ThumbnailService.BIG_SIZE, ifModifiedSince);
+    return getThumbnailByType(wsName, nodePath, ThumbnailService.BIG_SIZE, ifModifiedSince);
   }
 
 /**
@@ -158,7 +157,7 @@ public class ThumbnailRESTService implements ResourceContainer {
                                 @PathParam("workspaceName") String wsName,
                                 @PathParam("nodePath") String nodePath,
                                 @HeaderParam("If-Modified-Since") String ifModifiedSince) throws Exception {
-    return getThumbnailByType(repoName, wsName, nodePath, ThumbnailService.SMALL_SIZE, ifModifiedSince);
+    return getThumbnailByType(wsName, nodePath, ThumbnailService.SMALL_SIZE, ifModifiedSince);
   }
 
 /**
@@ -177,7 +176,7 @@ public class ThumbnailRESTService implements ResourceContainer {
                                 @PathParam("workspaceName") String wsName,
                                 @PathParam("nodePath") String nodePath,
                                 @HeaderParam("If-Modified-Since") String ifModifiedSince) throws Exception {
-    return getThumbnailByType(repoName, wsName, nodePath, "exo:"+size, ifModifiedSince);
+    return getThumbnailByType(wsName, nodePath, "exo:"+size, ifModifiedSince);
   }
 
   /**
@@ -198,7 +197,7 @@ public class ThumbnailRESTService implements ResourceContainer {
     DateFormat dateFormat = new SimpleDateFormat(IF_MODIFIED_SINCE_DATE_FORMAT);
     if (!thumbnailService_.isEnableThumbnail())
       return Response.ok().header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
-    Node showingNode = getShowingNode(repoName, wsName, getNodePath(nodePath));
+    Node showingNode = getShowingNode(wsName, getNodePath(nodePath));
     Node targetNode = getTargetNode(showingNode);
     if (targetNode.getPrimaryNodeType().getName().equals("nt:file")
         || targetNode.getPrimaryNodeType().getName().equals("nt:resource")) {
@@ -234,12 +233,12 @@ public class ThumbnailRESTService implements ResourceContainer {
     return Response.ok().header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
   }
 
-  private Response getThumbnailByType(String repoName, String wsName, String nodePath,
+  private Response getThumbnailByType(String wsName, String nodePath,
       String propertyName, String ifModifiedSince) throws Exception {
     DateFormat dateFormat = new SimpleDateFormat(IF_MODIFIED_SINCE_DATE_FORMAT);
     if (!thumbnailService_.isEnableThumbnail())
       return Response.ok().header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
-    Node showingNode = getShowingNode(repoName, wsName, getNodePath(nodePath));
+    Node showingNode = getShowingNode(wsName, getNodePath(nodePath));
     Node parentNode = showingNode.getParent();
     String identifier = ((NodeImpl) showingNode).getInternalIdentifier();
     Node targetNode = getTargetNode(showingNode);
@@ -350,8 +349,8 @@ public class ThumbnailRESTService implements ResourceContainer {
     return targetNode;
   }
 
-  private Node getShowingNode(String repoName, String wsName, String nodePath) throws Exception {
-    ManageableRepository repository = repositoryService_.getRepository(repoName);
+  private Node getShowingNode(String wsName, String nodePath) throws Exception {
+    ManageableRepository repository = repositoryService_.getCurrentRepository();
     Session session = getSystemProvider().getSession(wsName, repository);
     Node showingNode = null;
     Node root = session.getRootNode();

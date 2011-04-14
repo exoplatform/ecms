@@ -81,8 +81,7 @@ public class UINewConfigForm extends UIForm {
     UIFormSelectBox repoSelectBox = new UIFormSelectBox(FIELD_REPOSITORY, FIELD_REPOSITORY, getRepoOption());
     repoSelectBox.setOnChange("OnChange");
     addChild(repoSelectBox);
-    String repo = repoSelectBox.getValue();
-    addChild(new UIFormSelectBox(FIELD_WORKSPACE, FIELD_WORKSPACE, getWorkSpaceOption(repo)));
+    addChild(new UIFormSelectBox(FIELD_WORKSPACE, FIELD_WORKSPACE, getWorkSpaceOption()));
     addChild( new UIFormSelectBox(FIELD_BROWSETYPE, FIELD_BROWSETYPE, getBrowseTypeOption()));
     setActions(new String[]{"Back", "Next"});
   }
@@ -90,7 +89,7 @@ public class UINewConfigForm extends UIForm {
   public void resetForm() throws Exception{
     UIFormSelectBox repoField = getUIFormSelectBox(FIELD_REPOSITORY);
     repoField.setOptions(getRepoOption());
-    getUIFormSelectBox(FIELD_WORKSPACE).setOptions(getWorkSpaceOption(repoField.getValue()));
+    getUIFormSelectBox(FIELD_WORKSPACE).setOptions(getWorkSpaceOption());
     getUIFormSelectBox(FIELD_WORKSPACE).reset();
     getUIFormSelectBox(FIELD_BROWSETYPE).setOptions(getBrowseTypeOption());
     getUIFormSelectBox(FIELD_BROWSETYPE).reset();
@@ -104,10 +103,10 @@ public class UINewConfigForm extends UIForm {
     return options;
   }
 
-  private List<SelectItemOption<String>> getWorkSpaceOption(String repository) throws Exception {
+  private List<SelectItemOption<String>> getWorkSpaceOption() throws Exception {
     List<SelectItemOption<String>> options = new ArrayList<SelectItemOption<String>>();
     String[] workspaceNames =
-      getApplicationComponent(RepositoryService.class).getRepository(repository).getWorkspaceNames();
+      getApplicationComponent(RepositoryService.class).getCurrentRepository().getWorkspaceNames();
     for(String workspace:workspaceNames) {
       options.add(new SelectItemOption<String>(workspace,workspace));
     }
@@ -126,9 +125,8 @@ public class UINewConfigForm extends UIForm {
   public static class OnChangeActionListener extends EventListener<UINewConfigForm>{
     public void execute(Event<UINewConfigForm> event) throws Exception {
       UINewConfigForm uiForm = event.getSource();
-      UIFormSelectBox repoSelect = uiForm.getUIFormSelectBox(UINewConfigForm.FIELD_REPOSITORY);
       UIFormSelectBox workspaceSelect = uiForm.getUIFormSelectBox(UINewConfigForm.FIELD_WORKSPACE);
-      workspaceSelect.setOptions(uiForm.getWorkSpaceOption(repoSelect.getValue()));
+      workspaceSelect.setOptions(uiForm.getWorkSpaceOption());
       event.getRequestContext().addUIComponentToUpdateByAjax(uiForm);
     }
 
@@ -151,6 +149,7 @@ public class UINewConfigForm extends UIForm {
       String browseType = uiForm.getUIFormSelectBox(FIELD_BROWSETYPE).getValue();
       String workSpace = uiForm.getUIFormSelectBox(FIELD_WORKSPACE).getValue();
       String repository = uiForm.getUIFormSelectBox(FIELD_REPOSITORY).getValue();
+      // TODO ECMS-2132 This one is need to be change for supporting multi-tenant or not???
       uiConfigTabPane.initNewConfig(browseType, repository, workSpace);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiConfigTabPane);
     }

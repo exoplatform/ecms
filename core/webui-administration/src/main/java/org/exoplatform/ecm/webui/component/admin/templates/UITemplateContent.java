@@ -23,7 +23,6 @@ import java.util.List;
 import javax.jcr.Node;
 import javax.jcr.Value;
 import javax.jcr.version.VersionHistory;
-import javax.portlet.PortletPreferences;
 
 import org.exoplatform.ecm.jcr.model.VersionNode;
 import org.exoplatform.ecm.webui.form.UIFormInputSetWithAction;
@@ -32,8 +31,6 @@ import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.web.application.ApplicationMessage;
-import org.exoplatform.webui.application.WebuiRequestContext;
-import org.exoplatform.webui.application.portlet.PortletRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIApplication;
@@ -42,8 +39,8 @@ import org.exoplatform.webui.core.UIPopupWindow;
 import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.core.model.SelectItemOption;
 import org.exoplatform.webui.event.Event;
-import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.event.Event.Phase;
+import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.form.UIForm;
 import org.exoplatform.webui.form.UIFormCheckBoxInput;
 import org.exoplatform.webui.form.UIFormSelectBox;
@@ -216,11 +213,6 @@ public class UITemplateContent extends UIForm implements UISelectable {
     uiManager.removeChildById(getId() + TEMPLATE_PERMISSION) ;
   }
 
-  private String getRepository() {
-    PortletRequestContext pcontext = (PortletRequestContext)WebuiRequestContext.getCurrentInstance() ;
-    PortletPreferences portletPref = pcontext.getRequest().getPreferences() ;
-    return portletPref.getValue(Utils.REPOSITORY, "") ;
-  }
   static public class RestoreActionListener extends EventListener<UITemplateContent> {
     public void execute(Event<UITemplateContent> event) throws Exception {
       UITemplateContent uiForm = event.getSource() ;
@@ -246,7 +238,6 @@ public class UITemplateContent extends UIForm implements UISelectable {
   static public class SaveActionListener extends EventListener<UITemplateContent> {
     public void execute(Event<UITemplateContent> event) throws Exception {
       UITemplateContent uiForm = event.getSource() ;
-      String repository = uiForm.getRepository() ;
       UITemplatesManager uiManager = uiForm.getAncestorOfType(UITemplatesManager.class) ;
       UIApplication uiApp = uiForm.getAncestorOfType(UIApplication.class) ;
       String name = uiForm.getUIStringInput(FIELD_NAME).getValue() ;

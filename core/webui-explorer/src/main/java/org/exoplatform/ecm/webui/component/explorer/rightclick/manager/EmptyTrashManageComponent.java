@@ -127,7 +127,7 @@ public class EmptyTrashManageComponent extends UIAbstractManagerComponent {
     node = uiExplorer.getNodeByPath(nodePath, session, false);
     // If node has taxonomy
     TaxonomyService taxonomyService = uiExplorer.getApplicationComponent(TaxonomyService.class);
-    List<Node> listTaxonomyTrees = taxonomyService.getAllTaxonomyTrees(uiExplorer.getRepositoryName());
+    List<Node> listTaxonomyTrees = taxonomyService.getAllTaxonomyTrees();
     List<Node> listExistedTaxonomy = taxonomyService.getAllCategories(node);
     for (Node existedTaxonomy : listExistedTaxonomy) {
       for (Node taxonomyTrees : listTaxonomyTrees) {
@@ -149,7 +149,7 @@ public class EmptyTrashManageComponent extends UIAbstractManagerComponent {
     ThumbnailService thumbnailService = uiExplorer.getApplicationComponent(ThumbnailService.class);
     thumbnailService.processRemoveThumbnail(node);
     TrashService trashService = uiExplorer.getApplicationComponent(TrashService.class);
-    trashService.removeRelations(node, uiExplorer.getSystemProvider(), uiExplorer.getRepositoryName());
+    trashService.removeRelations(node, uiExplorer.getSystemProvider());
     node.remove();
     session.save();
     uiExplorer.updateAjax(event);
@@ -168,13 +168,10 @@ public class EmptyTrashManageComponent extends UIAbstractManagerComponent {
     PortletPreferences portletPref = pcontext.getRequest().getPreferences();
     String trashHomeNodePath = portletPref.getValue(Utils.TRASH_HOME_NODE_PATH, "");
     String trashWorkspace = portletPref.getValue(Utils.TRASH_WORKSPACE, "");
-    String trashRepository = portletPref.getValue(Utils.TRASH_REPOSITORY, "");
 
     ExoContainer myContainer = ExoContainerContext.getCurrentContainer();
-    RepositoryService repositoryService
-        = (RepositoryService) myContainer.getComponentInstanceOfType(RepositoryService.class);
-    ManageableRepository manageableRepository
-        = repositoryService.getRepository(trashRepository);
+    RepositoryService repositoryService = (RepositoryService) myContainer.getComponentInstanceOfType(RepositoryService.class);
+    ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
     Session trashSession = uiExplorer.getSessionProvider().getSession(trashWorkspace, manageableRepository);
     return (Node)trashSession.getItem(trashHomeNodePath);
   }

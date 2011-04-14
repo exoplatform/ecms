@@ -170,8 +170,7 @@ public class UICLVPresentation extends UIContainer {
 
     NodeLocation nodeLocation = NodeLocation.getNodeLocationByExpression(fullPath);
 
-    List<Node> nodes = wcmComposer.getContents(nodeLocation.getRepository(),
-                                               nodeLocation.getWorkspace(),
+    List<Node> nodes = wcmComposer.getContents(nodeLocation.getWorkspace(),
                                                nodeLocation.getPath(),
                                                filters,
                                                WCMCoreUtils.getUserSessionProvider());

@@ -32,8 +32,8 @@ public class WorkflowMoveNodeAction {
     Session destSession = null;
     if (!srcWorkspace.equals(destWorkspace)){
       try {
-        srcSession = repositoryService.getRepository(repository).getSystemSession(srcWorkspace);
-        destSession = repositoryService.getRepository(repository).getSystemSession(destWorkspace);
+        srcSession = repositoryService.getCurrentRepository().getSystemSession(srcWorkspace);
+        destSession = repositoryService.getCurrentRepository().getSystemSession(destWorkspace);
         Workspace workspace = destSession.getWorkspace();
         Node srcNode = (Node) srcSession.getItem(nodePath);
         try {
@@ -59,7 +59,7 @@ public class WorkflowMoveNodeAction {
     }else {
       Session session = null;
       try{
-        session = repositoryService.getRepository(repository).getSystemSession(srcWorkspace);
+        session = repositoryService.getCurrentRepository().getSystemSession(srcWorkspace);
         Workspace workspace = session.getWorkspace();
         try {
           session.getItem(destPath);

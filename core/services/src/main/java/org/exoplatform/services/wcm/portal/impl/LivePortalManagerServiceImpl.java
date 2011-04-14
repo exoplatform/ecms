@@ -160,7 +160,7 @@ public class LivePortalManagerServiceImpl implements LivePortalManagerService, S
     NodeLocation locationEntry = wcmConfigService.getLivePortalsLocation(repository);
     String workspace = locationEntry.getWorkspace();
     String portalsStoragePath = locationEntry.getPath();
-    ManageableRepository manageableRepository = repositoryService.getRepository(repository);
+    ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
     Session session = sessionProvider.getSession(workspace,manageableRepository);
     Node livePortal = (Node)session.getItem(portalsStoragePath);
     return livePortal;

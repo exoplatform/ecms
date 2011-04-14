@@ -16,8 +16,6 @@
  */
 package org.exoplatform.services.wcm.portal.listener;
 
-import javax.jcr.Node;
-
 import org.exoplatform.portal.config.DataStorageImpl;
 import org.exoplatform.portal.config.model.PortalConfig;
 import org.exoplatform.services.cms.drives.ManageDriveService;
@@ -26,7 +24,6 @@ import org.exoplatform.services.listener.Event;
 import org.exoplatform.services.listener.Listener;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
-import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.portal.LivePortalManagerService;
 import org.exoplatform.services.wcm.portal.artifacts.RemovePortalArtifactsService;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
@@ -50,13 +47,11 @@ public class RemoveLivePortalEventListener extends Listener<DataStorageImpl, Por
     String portalName = portalConfig.getName();
     LivePortalManagerService livePortalManagerService = WCMCoreUtils.getService(LivePortalManagerService.class);
     SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
-    Node portal = livePortalManagerService.getLivePortal(sessionProvider, portalName);
 
     // Remove drive for the site content storage
     ManageDriveService manageDriveService = WCMCoreUtils.getService(ManageDriveService.class);
-    String repository = NodeLocation.make(portal).getRepository();
     try {
-      manageDriveService.removeDrive(portalName, repository);
+      manageDriveService.removeDrive(portalName);
       log.info("Removed drive for portal: " + portalName);
     } catch (Exception e) {
       log.error("Error when remove drive for portal: " + portalName, e);

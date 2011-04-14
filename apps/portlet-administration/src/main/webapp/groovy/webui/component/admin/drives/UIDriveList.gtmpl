@@ -9,6 +9,10 @@
 %>
 <%
   import org.exoplatform.ecm.webui.utils.Utils ;
+  import org.exoplatform.services.jcr.RepositoryService;  
+  
+  RepositoryService rService = uicomponent.getApplicationComponent(RepositoryService.class) ;
+  String repository = rService.getCurrentRepository().getConfiguration().getName() ;    
 %>
 <div class="UIDriveList" id="$uicomponent.id">
   <table class="UIGrid">
@@ -38,7 +42,7 @@
               if(drive.getIcon() != null && drive.getIcon().length() > 0) {
                 String[] iconPath = drive.getIcon().split(":/") ;
             %>
-                <img src="/${uicomponent.getPortalName()}/rest/jcr/${uicomponent.getRepository()}/${iconPath[0]}/${iconPath[1]}" alt="" width="20px" height="20px" />
+                <img src="/${uicomponent.getPortalName()}/rest/jcr/${repository}/${iconPath[0]}/${iconPath[1]}" alt="" width="20px" height="20px" />
             <%} else {%>
               <span></span>
             <%}%>

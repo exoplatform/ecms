@@ -157,7 +157,6 @@ public class UISelectRestorePath extends UIForm implements UIPopupComponent, UIS
       UIPopupContainer uiPopupContainer = uiSelectRestorePath.getAncestorOfType(UIPopupContainer.class);
       UIJCRExplorer uiExplorer = uiSelectRestorePath.getAncestorOfType(UIJCRExplorer.class);
       String workspaceName = uiExplorer.getCurrentWorkspace();
-      String repository = uiExplorer.getRepositoryName();
 
       UIPopupWindow uiPopupWindow = initPopup(uiPopupContainer, POPUP_PATH);
       UIOneNodePathSelector uiNodePathSelector = uiPopupContainer.createUIComponent(UIOneNodePathSelector.class,
@@ -174,7 +173,7 @@ public class UISelectRestorePath extends UIForm implements UIPopupComponent, UIS
 //      uiNodePathSelector.setIsShowSystem(false);
       if(SessionProviderFactory.isAnonim()) {
         uiNodePathSelector.init(SessionProviderFactory.createAnonimProvider()) ;
-      } else if(workspaceName.equals(getSystemWorkspaceName(repository, uiExplorer))){
+      } else if(workspaceName.equals(getSystemWorkspaceName(uiExplorer))){
         uiNodePathSelector.init(SessionProviderFactory.createSystemProvider()) ;
       } else {
         uiNodePathSelector.init(SessionProviderFactory.createSessionProvider()) ;
@@ -187,10 +186,10 @@ public class UISelectRestorePath extends UIForm implements UIPopupComponent, UIS
       event.getRequestContext().addUIComponentToUpdateByAjax(uiPopupContainer);
     }
 
-    private String getSystemWorkspaceName(String repository, UIJCRExplorer uiExplorer) throws RepositoryException,
+    private String getSystemWorkspaceName(UIJCRExplorer uiExplorer) throws RepositoryException,
                                                                                       RepositoryConfigurationException {
       RepositoryService repositoryService = uiExplorer.getApplicationComponent(RepositoryService.class);
-      ManageableRepository manageableRepository = repositoryService.getRepository(repository);
+      ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
       return manageableRepository.getConfiguration().getSystemWorkspaceName();
     }
 
@@ -229,7 +228,6 @@ public class UISelectRestorePath extends UIForm implements UIPopupComponent, UIS
       try {
         trashService.restoreFromTrash(uiSelectRestorePath.getTrashHomeNode(),
                                       uiSelectRestorePath.getSrcPath(),
-                                      uiSelectRestorePath.getRepository(),
                                       uiExplorer.getSessionProvider());
         UIPopupContainer uiPopupContainer = uiExplorer.getChild(UIPopupContainer.class);
         uiPopupContainer.removeChild(UISelectRestorePath.class);

@@ -67,8 +67,11 @@ public class UITaxonomyForm extends UIForm {
 
   public void addTaxonomy(String parentPath, String name) throws Exception {
     UITaxonomyManager uiManager = getAncestorOfType(UITaxonomyManager.class) ;
-    getApplicationComponent(CategoriesService.class).addTaxonomy(parentPath, name,
-        uiManager.getRepository()) ;
+    getApplicationComponent(CategoriesService.class).addTaxonomy(parentPath,
+                                                                 name,
+                                                                 uiManager.getRepository()
+                                                                          .getConfiguration()
+                                                                          .getName());
   }
 
   static public class SaveActionListener extends EventListener<UITaxonomyForm> {

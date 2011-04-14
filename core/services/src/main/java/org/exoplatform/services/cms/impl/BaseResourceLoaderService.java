@@ -174,8 +174,6 @@ public abstract class BaseResourceLoaderService implements Startable{
 
   /**
    * get ResourcesHome
-   * @param repository        String
-   *                          The name of repository
    * @param sessionProvider   SessionProvider
    * @see                     SessionProvider
    * @see                     DMSRepositoryConfiguration
@@ -183,15 +181,12 @@ public abstract class BaseResourceLoaderService implements Startable{
    * @return
    * @throws Exception
    */
-  protected Node getResourcesHome(String repository,SessionProvider sessionProvider) throws Exception {
-    ManageableRepository manageableRepository = null ;
-    if(repository == null) {
-      manageableRepository = repositoryService_.getDefaultRepository();
-    }else {
-      manageableRepository = repositoryService_.getCurrentRepository() ;
-    }
+  protected Node getResourcesHome(SessionProvider sessionProvider) throws Exception {
+    ManageableRepository manageableRepository = null;
+    manageableRepository = repositoryService_.getCurrentRepository();
     DMSRepositoryConfiguration dmsRepoConfig = dmsConfiguration_.getConfig();
-    Session session = sessionProvider.getSession(dmsRepoConfig.getSystemWorkspace(), manageableRepository);
+    Session session = sessionProvider.getSession(dmsRepoConfig.getSystemWorkspace(),
+                                                 manageableRepository);
     String resourcesPath = getBasePath();
     return (Node) session.getItem(resourcesPath);
   }
@@ -209,12 +204,29 @@ public abstract class BaseResourceLoaderService implements Startable{
   @Deprecated
   public String getResourceAsText(String resourceName, String repository) throws Exception {
     SessionProvider sessionProvider = SessionProvider.createSystemProvider() ;
-    Node resourcesHome = getResourcesHome(repository,sessionProvider);
+    Node resourcesHome = getResourcesHome(sessionProvider);
     Node resourceNode = resourcesHome.getNode(resourceName);
     String text = resourceNode.getNode("jcr:content").getProperty("jcr:data").getString();
     sessionProvider.close();
     return text;
   }
+  
+  /**
+   * get Resource As Text
+   * @param resourceName    String
+   * @deprecated Since WCM 2.1 you should use {@link #getResourceAsStream(String, String)} instead.
+   * @see
+   * @return                SessionProvider
+   * @throws Exception
+   */
+  public String getResourceAsText(String resourceName) throws Exception {
+    SessionProvider sessionProvider = SessionProvider.createSystemProvider() ;
+    Node resourcesHome = getResourcesHome(sessionProvider);
+    Node resourceNode = resourcesHome.getNode(resourceName);
+    String text = resourceNode.getNode("jcr:content").getProperty("jcr:data").getString();
+    sessionProvider.close();
+    return text;
+  }  
 
   /**
    * get Resource As Stream
@@ -225,14 +237,31 @@ public abstract class BaseResourceLoaderService implements Startable{
    * @return                SessionProvider
    * @throws Exception
    */
+  @Deprecated
   public InputStream getResourceAsStream(String resourceName, String repository) throws Exception {
     SessionProvider sessionProvider = SessionProvider.createSystemProvider() ;
-    Node resourcesHome = getResourcesHome(repository,sessionProvider);
+    Node resourcesHome = getResourcesHome(sessionProvider);
     Node resourceNode = resourcesHome.getNode(resourceName);
     InputStream stream = resourceNode.getNode("jcr:content").getProperty("jcr:data").getStream();
     sessionProvider.close();
     return stream;
   }
+  
+  /**
+   * get Resource As Stream
+   * @param resourceName    String
+   * @see
+   * @return                SessionProvider
+   * @throws Exception
+   */
+  public InputStream getResourceAsStream(String resourceName) throws Exception {
+    SessionProvider sessionProvider = SessionProvider.createSystemProvider() ;
+    Node resourcesHome = getResourcesHome(sessionProvider);
+    Node resourceNode = resourcesHome.getNode(resourceName);
+    InputStream stream = resourceNode.getNode("jcr:content").getProperty("jcr:data").getStream();
+    sessionProvider.close();
+    return stream;
+  }  
 
   /**
    * get Resources
@@ -243,8 +272,21 @@ public abstract class BaseResourceLoaderService implements Startable{
    * @return
    * @throws Exception
    */
+  @Deprecated
   public NodeIterator getResources(String repository,SessionProvider sessionProvider) throws Exception {
-    Node resourcesHome = getResourcesHome(repository,sessionProvider);
+    Node resourcesHome = getResourcesHome(sessionProvider);
+    return resourcesHome.getNodes();
+  }
+  
+  /**
+   * get Resources
+   * @param sessionProvider     SessionProvider
+   * @see                       SessionProvider
+   * @return
+   * @throws Exception
+   */
+  public NodeIterator getResources(SessionProvider sessionProvider) throws Exception {
+    Node resourcesHome = getResourcesHome(sessionProvider);
     return resourcesHome.getNodes();
   }
 
@@ -257,10 +299,23 @@ public abstract class BaseResourceLoaderService implements Startable{
    * @return
    * @throws Exception
    */
+  @Deprecated
   public boolean hasResources(String repository,SessionProvider sessionProvider) throws Exception {
-    Node resourcesHome = getResourcesHome(repository,sessionProvider);
+    Node resourcesHome = getResourcesHome(sessionProvider);
     return resourcesHome.hasNodes();
   }
+  
+  /**
+   * Check has Resources
+   * @param sessionProvider   SessionProvider
+   * @see                     SessionProvider
+   * @return
+   * @throws Exception
+   */
+  public boolean hasResources(SessionProvider sessionProvider) throws Exception {
+    Node resourcesHome = getResourcesHome(sessionProvider);
+    return resourcesHome.hasNodes();
+  }  
 
   /**
    * add Resource
@@ -273,12 +328,29 @@ public abstract class BaseResourceLoaderService implements Startable{
    * @see                 SessionProvider
    * @throws Exception
    */
+  @Deprecated
   public void addResource(String name, String text, String repository,SessionProvider provider) throws Exception {
-    Node resourcesHome = getResourcesHome(repository,provider);
+    Node resourcesHome = getResourcesHome(provider);
     InputStream in = new ByteArrayInputStream(text.getBytes());
     addResource(resourcesHome, name, in);
     resourcesHome.save();
   }
+  
+  /**
+   * add Resource
+   * @param name          String
+   *                      The name of resource
+   * @param text          String
+   * @param provider      SessionProvider
+   * @see                 SessionProvider
+   * @throws Exception
+   */
+  public void addResource(String name, String text,SessionProvider provider) throws Exception {
+    Node resourcesHome = getResourcesHome(provider);
+    InputStream in = new ByteArrayInputStream(text.getBytes());
+    addResource(resourcesHome, name, in);
+    resourcesHome.save();
+  }  
 
   /**
    * remove Resource
@@ -290,11 +362,28 @@ public abstract class BaseResourceLoaderService implements Startable{
    * @see                   SessionProvider
    * @throws Exception
    */
+  @Deprecated
   public void removeResource(String resourceName, String repository,SessionProvider provider) throws Exception {
     removeFromCache(resourceName);
-    Node resourcesHome = getResourcesHome(repository,provider);
+    Node resourcesHome = getResourcesHome(provider);
     Node resource2remove = resourcesHome.getNode(resourceName);
     resource2remove.remove();
     resourcesHome.save();
   }
+  
+  /**
+   * remove Resource
+   * @param resourceName    String
+   *                        The name of resource
+   * @param provider        SessionProvider
+   * @see                   SessionProvider
+   * @throws Exception
+   */
+  public void removeResource(String resourceName,SessionProvider provider) throws Exception {
+    removeFromCache(resourceName);
+    Node resourcesHome = getResourcesHome(provider);
+    Node resource2remove = resourcesHome.getNode(resourceName);
+    resource2remove.remove();
+    resourcesHome.save();
+  }  
 }

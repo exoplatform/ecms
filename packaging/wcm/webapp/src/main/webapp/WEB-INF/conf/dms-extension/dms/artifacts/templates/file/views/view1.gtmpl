@@ -8,6 +8,7 @@
 	import org.exoplatform.ecm.webui.utils.Utils;	
 	import org.exoplatform.services.wcm.core.NodeLocation;
 	import org.exoplatform.ecm.utils.text.Text;
+	import org.exoplatform.services.jcr.RepositoryService;
 	
 	public Node getFileLangNode(Node currentNode) throws Exception {
     if(currentNode.isNodeType("nt:unstructured")) {
@@ -29,6 +30,8 @@
   rcontext.getJavascriptManager().importJavascript('eXo.ecm.ECMUtils','/ecm-wcm-extension/javascript/');
   rcontext.getJavascriptManager().importJavascript('eXo.ecm.DMSBrowser','/ecm-wcm-extension/javascript/');
   rcontext.getJavascriptManager().addJavascript("eXo.ecm.DMSBrowser.managerResize();");
+  RepositoryService rService = uicomponent.getApplicationComponent(RepositoryService.class);
+  String repository = rService.getCurrentRepository().getConfiguration().getName();  
 	
 	
   UIPopupWindow uiPopupWindow = uicomponent.getAncestorOfType(UIPopupWindow.class);
@@ -55,7 +58,7 @@
 			  <div class="TopTitle" style="float:left;">
 			   <%=Text.unescapeIllegalJcrChars(currentNode.name) %>
 			  </div>
-        <div style="float:right;padding: 4px 10px;" onclick="javascript:eXo.ecm.ECMUtils.generateWebDAVLink('<%=uicomponent.getWebDAVServerPrefix()%>','<%=uicomponent.getPortalName()%>','<%=Utils.getRestContextName(uicomponent.getPortalName())%>','<%=uicomponent.getRepository()%>','<%=uicomponent.getWorkspaceName()%>','<%=formatNodeName(currentNodePath)%>','<%=mimeType%>')" class="ActionButton LightBlueStyle">
+        <div style="float:right;padding: 4px 10px;" onclick="javascript:eXo.ecm.ECMUtils.generateWebDAVLink('<%=uicomponent.getWebDAVServerPrefix()%>','<%=uicomponent.getPortalName()%>','<%=Utils.getRestContextName(uicomponent.getPortalName())%>','${repository}','<%=uicomponent.getWorkspaceName()%>','<%=formatNodeName(currentNodePath)%>','<%=mimeType%>')" class="ActionButton LightBlueStyle">
           <a href="javascript:void(0);"><%=_ctx.appRes("File.view.label.download")%></a>
         </div>			  
         <div style="clear:both"></div>

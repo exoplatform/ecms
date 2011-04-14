@@ -45,7 +45,7 @@ public class Initial implements TxHook {
       ProcessUtil.setCurrentLocation(api,activity,srcWorkspace,nodePath);
       RepositoryService repositoryService = ProcessUtil.getService(RepositoryService.class);
       ActionServiceContainer actionServiceContainer = ProcessUtil.getService(ActionServiceContainer.class);
-      ManageableRepository manageableRepository = repositoryService.getRepository(repository);
+      ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
       Session session = manageableRepository.getSystemSession(srcWorkspace);
       Node actionableNode = (Node) session.getItem(srcPath);
       if(!actionableNode.isNodeType("exo:actionable")) {

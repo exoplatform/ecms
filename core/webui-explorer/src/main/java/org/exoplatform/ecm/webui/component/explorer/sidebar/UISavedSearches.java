@@ -102,7 +102,7 @@ public class UISavedSearches extends UIComponent {
     QueryService queryService = getApplicationComponent(QueryService.class);
     try {
       privateQueries = queryService.getQueries(getCurrentUserId(),
-          getRepositoryName(), SessionProviderFactory.createSessionProvider());
+                                               SessionProviderFactory.createSessionProvider());
       return !privateQueries.isEmpty();
     } catch(AccessDeniedException ace) {
       return privateQueries.isEmpty();
@@ -150,8 +150,10 @@ public class UISavedSearches extends UIComponent {
       UISearchResult uiSearchResult = ((UIDocumentWorkspace)uiSearch).getChild(UISearchResult.class);
       QueryResult queryResult = null;
       try {
-        queryResult = queryService.execute(queryPath, wsName, uiExplorer.getRepositoryName(),
-            SessionProviderFactory.createSystemProvider(), uiSavedSearches.getCurrentUserId());
+        queryResult = queryService.execute(queryPath,
+                                           wsName,
+                                           SessionProviderFactory.createSystemProvider(),
+                                           uiSavedSearches.getCurrentUserId());
       } catch(Exception e) {
         uiApp.addMessage(new ApplicationMessage("UISearchResult.msg.query-invalid", null,
                                                 ApplicationMessage.WARNING));
@@ -180,7 +182,7 @@ public class UISavedSearches extends UIComponent {
       Node currentNode = uiJCRExplorer.getCurrentNode();
       if (currentNode.isNodeType(Utils.EXO_TAXANOMY)) {
         TaxonomyService taxonomyService = uiJCRExplorer.getApplicationComponent(TaxonomyService.class);
-        List<Node> TaxonomyTrees = taxonomyService.getAllTaxonomyTrees(uiJCRExplorer.getRepositoryName());
+        List<Node> TaxonomyTrees = taxonomyService.getAllTaxonomyTrees();
         for (Node taxonomyNode : TaxonomyTrees) {
           if (currentNode.getPath().startsWith(taxonomyNode.getPath())) {
             ActionServiceContainer actionService = uiJCRExplorer.getApplicationComponent(ActionServiceContainer.class);
@@ -194,7 +196,7 @@ public class UISavedSearches extends UIComponent {
                 currentNodePath = uiJCRExplorer.getCurrentNode().getPath();
                 ManageDriveService manageDriveService = uiJCRExplorer.getApplicationComponent(ManageDriveService.class);
                 List<DriveData> driveList =
-                  manageDriveService.getAllDrives(uiJCRExplorer.getRepositoryName());
+                  manageDriveService.getAllDrives();
                 for (DriveData drive : driveList) {
                   if (searchWorkspace.equals(drive.getWorkspace())
                       && searchPath.contains(drive.getHomePath()) && drive.getHomePath().equals("/")) {

@@ -92,7 +92,6 @@ public class UIEditingTagsForm extends UIContainer implements UIPopupComponent {
     NodeHierarchyCreator nodeHierarchyCreator = getApplicationComponent(NodeHierarchyCreator.class);
     UIJCRExplorer uiExplorer = getAncestorOfType(UIJCRExplorer.class);
 
-    String repository = uiExplorer.getRepositoryName();
     String workspace = uiExplorer.getRepository().getConfiguration().getDefaultWorkspaceName();
     String userName = uiExplorer.getSession().getUserID();
     int scope = uiExplorer.getTagScope();
@@ -100,8 +99,8 @@ public class UIEditingTagsForm extends UIContainer implements UIPopupComponent {
     String publicTagNodePath = nodeHierarchyCreator.getJcrPath(PUBLIC_TAG_NODE_PATH);
 
     List<Node> tagList = (scope == NewFolksonomyService.PUBLIC) ?
-            newFolksonomyService.getAllPublicTags(publicTagNodePath, repository, workspace) :
-            newFolksonomyService.getAllPrivateTags(userName, repository, workspace);
+            newFolksonomyService.getAllPublicTags(publicTagNodePath, workspace) :
+            newFolksonomyService.getAllPrivateTags(userName);
 
     for (Node tag : tagList)
       if (tag.getName().equals(tagName)) return tag;
@@ -147,23 +146,20 @@ public class UIEditingTagsForm extends UIContainer implements UIPopupComponent {
       NewFolksonomyService newFolksonomyService = uiForm.getApplicationComponent(NewFolksonomyService.class);
       NodeHierarchyCreator nodeHierarchyCreator = uiForm.getApplicationComponent(NodeHierarchyCreator.class);
 
-      String repository = uiForm.getAncestorOfType(UIJCRExplorer.class).getRepositoryName();
-
       RepositoryService repositoryService
       = (RepositoryService) container.getComponentInstanceOfType(RepositoryService.class);
-      ManageableRepository manageableRepo
-      = repositoryService.getRepository(repository);
+      ManageableRepository manageableRepo = repositoryService.getCurrentRepository();
       String workspace = manageableRepo.getConfiguration().getDefaultWorkspaceName();
 
       String tagPath = "";
       if (NewFolksonomyService.PUBLIC == scope) {
         tagPath = nodeHierarchyCreator.getJcrPath(PUBLIC_TAG_NODE_PATH) + '/'
             + tagName;
-        newFolksonomyService.removeTag(tagPath, repository, workspace);
+        newFolksonomyService.removeTag(tagPath, workspace);
       } else if (NewFolksonomyService.PRIVATE == scope) {
         Node userFolksonomyNode = getUserFolksonomyFolder(userID, uiForm);
         tagPath = userFolksonomyNode.getNode(tagName).getPath();
-        newFolksonomyService.removeTag(tagPath, repository, workspace);
+        newFolksonomyService.removeTag(tagPath, workspace);
       }
     }
 

@@ -99,7 +99,7 @@ public class RESTImagesRendererService implements ResourceContainer{
     try {
       SessionProvider sessionProvider = sessionProviderService.getSessionProvider(null);
       WCMService wcmService = WCMCoreUtils.getService(WCMService.class);
-      Node node = wcmService.getReferencedContent(sessionProvider, repository, workspace, nodeIdentifier);
+      Node node = wcmService.getReferencedContent(sessionProvider, workspace, nodeIdentifier);
       if (node == null) return Response.status(HTTPStatus.NOT_FOUND).build();
 
       if ("file".equals(param)) {
@@ -110,7 +110,7 @@ public class RESTImagesRendererService implements ResourceContainer{
           VersionHistory versionHistory = (VersionHistory)node.getProperty("jcr:childVersionHistory").getNode();
           String versionableUUID = versionHistory.getVersionableUUID();
           dataNode = sessionProvider.getSession(workspace,
-                                                repositoryService.getRepository(repository))
+                                                repositoryService.getCurrentRepository())
                                     .getNodeByUUID(versionableUUID);
         }else {
           return Response.status(HTTPStatus.NOT_FOUND).build();
@@ -195,9 +195,9 @@ public class RESTImagesRendererService implements ResourceContainer{
    */
   public String generateImageURI(Node file, String propertyName) throws Exception {
     StringBuilder builder = new StringBuilder();
-    NodeLocation fielLocation = NodeLocation.make(file);
-    String repository = fielLocation.getRepository();
-    String workspaceName = fielLocation.getWorkspace();
+    NodeLocation fileLocation = NodeLocation.make(file);
+    String repository = fileLocation.getRepository();
+    String workspaceName = fileLocation.getWorkspace();
     String nodeIdentifiler = file.isNodeType("mix:referenceable") ? file.getUUID() : file.getPath().replaceFirst("/","");
     String portalName = PortalContainer.getCurrentPortalContainerName();
     String restContextName = PortalContainer.getCurrentRestContextName();

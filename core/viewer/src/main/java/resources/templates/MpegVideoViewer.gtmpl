@@ -6,6 +6,7 @@
 	import org.exoplatform.webui.core.UIComponent;
   import org.exoplatform.services.jcr.util.Text;
   import org.exoplatform.container.PortalContainer;
+  import org.exoplatform.services.jcr.RepositoryService;
 
 	UIComponent uiParent = uicomponent.getParent();
 
@@ -29,8 +30,11 @@
   def currentNode = getFileLangNode(uiParent.getNode()) ;
   def contentNode = currentNode.getNode("jcr:content") ;
   def mimeType = contentNode.getProperty("jcr:mimeType").getString() ;
+  
+  RepositoryService rService = uicomponent.getApplicationComponent(RepositoryService.class) ;
+  String repository = rService.getCurrentRepository().getConfiguration().getName();
 
-  def binarySrc = "/" + PortalContainer.getCurrentPortalContainerName() + "/" + PortalContainer.getCurrentRestContextName() + "/jcr/" + uiParent.getRepository() + "/" + uiParent.getWorkspaceName() + currentNode.getPath();
+  def binarySrc = "/" + PortalContainer.getCurrentPortalContainerName() + "/" + PortalContainer.getCurrentRestContextName() + "/jcr/" + repository + "/" + uiParent.getWorkspaceName() + currentNode.getPath();
   
 %>
 

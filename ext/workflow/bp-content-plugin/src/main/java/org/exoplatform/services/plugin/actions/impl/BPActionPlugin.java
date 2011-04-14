@@ -94,15 +94,23 @@ public class BPActionPlugin extends BaseActionPlugin implements ComponentPlugin 
     String businessProcess = actionNode.getProperty("exo:businessProcess").getString();
     //TODO check maybe don't need put repository here
     variables.put("repository",repository) ;
-    executeAction(userId, businessProcess, variables, repository);
+    executeAction(userId, businessProcess, variables);
   }
 
+  @Deprecated
   public void executeAction(String userId, String executable, Map variables, String repository) {
     ExoContainer container = ExoContainerContext.getCurrentContainer() ;
     WorkflowServiceContainer workflowSContainer = (WorkflowServiceContainer) container
     .getComponentInstanceOfType(WorkflowServiceContainer.class);
     workflowSContainer.startProcessFromName(userId, executable, variables);
   }
+  
+  public void executeAction(String userId, String executable, Map variables) {
+    ExoContainer container = ExoContainerContext.getCurrentContainer() ;
+    WorkflowServiceContainer workflowSContainer = (WorkflowServiceContainer) container
+    .getComponentInstanceOfType(WorkflowServiceContainer.class);
+    workflowSContainer.startProcessFromName(userId, executable, variables);
+  }  
 
   public class BPActionLauncherListener extends BaseActionLauncherListener {
 

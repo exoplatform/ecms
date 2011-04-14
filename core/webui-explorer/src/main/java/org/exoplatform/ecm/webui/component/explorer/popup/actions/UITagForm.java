@@ -32,8 +32,8 @@ import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.webui.core.UIPopupWindow;
 import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.event.Event;
-import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.event.Event.Phase;
+import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.form.UIForm;
 import org.exoplatform.webui.form.UIFormStringInput;
 import org.exoplatform.webui.form.validator.MandatoryValidator;
@@ -113,7 +113,6 @@ public class UITagForm extends UIForm {
           if (scope == NewFolksonomyService.PRIVATE) {
             newFolksonomyService.addPrivateTag(new String[] { tagName },
                                                null,
-                                               null,
                                                workspace,
                                                userName);
           }
@@ -123,14 +122,13 @@ public class UITagForm extends UIForm {
             newFolksonomyService.addPublicTag(publicTagNodePath,
                                               new String[] { tagName },
                                               null,
-                                              null,
                                               workspace);
           }
         }
         // rename tag
         else {
           if (!existTag(tagName, null, workspace, scope, uiForm, userName)) {
-            newFolksonomyService.modifyTagName(uiForm.oldTagPath_, tagName, null, workspace);
+            newFolksonomyService.modifyTagName(uiForm.oldTagPath_, tagName, workspace);
           } else if (!tagName.equals(uiForm.oldName_)) {
            uiApp.addMessage(new ApplicationMessage("UITagForm.msg.NameAlreadyExist", null,
                           ApplicationMessage.WARNING));
@@ -164,8 +162,8 @@ public class UITagForm extends UIForm {
       NodeHierarchyCreator nodeHierarchyCreator = uiForm.getApplicationComponent(NodeHierarchyCreator.class);
       String publicTagNodePath = nodeHierarchyCreator.getJcrPath(PUBLIC_TAG_NODE_PATH);
       List<Node> tagList = (scope == NewFolksonomyService.PUBLIC) ?
-                            newFolksonomyService.getAllPublicTags(publicTagNodePath, repo, workspace) :
-                            newFolksonomyService.getAllPrivateTags(userName, repo, workspace);
+                            newFolksonomyService.getAllPublicTags(publicTagNodePath, workspace) :
+                            newFolksonomyService.getAllPrivateTags(userName);
       for (Node tag : tagList)
         if (tag.getName().equals(tagName))
           return true;

@@ -74,16 +74,29 @@ public class UIConfigTabPane extends UIContainer {
   }
 
   @SuppressWarnings("unchecked")
+  @Deprecated
   public List<SelectItemOption<String>> getBoxTemplateOption(String repository) throws Exception {
     List<SelectItemOption<String>> options = new ArrayList<SelectItemOption<String>>();
     List<Node> docTemplates = getApplicationComponent(ManageViewService.class)
-    .getAllTemplates(BasePath.CB_DETAIL_VIEW_TEMPLATES, repository, SessionProviderFactory.createSystemProvider());
+    .getAllTemplates(BasePath.CB_DETAIL_VIEW_TEMPLATES, SessionProviderFactory.createSystemProvider());
     for(Node template: docTemplates) {
       options.add(new SelectItemOption<String>(template.getName(), template.getName()));
     }
     Collections.sort(options, new ItemOptionNameComparator());
     return options;
   }
+  
+  @SuppressWarnings("unchecked")
+  public List<SelectItemOption<String>> getBoxTemplateOption() throws Exception {
+    List<SelectItemOption<String>> options = new ArrayList<SelectItemOption<String>>();
+    List<Node> docTemplates = getApplicationComponent(ManageViewService.class)
+    .getAllTemplates(BasePath.CB_DETAIL_VIEW_TEMPLATES, SessionProviderFactory.createSystemProvider());
+    for(Node template: docTemplates) {
+      options.add(new SelectItemOption<String>(template.getName(), template.getName()));
+    }
+    Collections.sort(options, new ItemOptionNameComparator());
+    return options;
+  }  
 
   public void setIsChangeValue(boolean isChanged) { isChanged_ = isChanged; }
 

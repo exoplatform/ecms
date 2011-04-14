@@ -170,11 +170,9 @@ public class UIToolBar extends UIContainer {
         List templates = templateService.getDocumentTemplates();
         if (templates.contains(selectNode.getPrimaryNodeType().getName())) {
           ManageViewService vservice = uiContainer.getApplicationComponent(ManageViewService.class);
-          String repoName = uiContainer.getPortletPreferences().getValue(Utils.REPOSITORY, "");
           String detailTemplateName = uiContainer.getPortletPreferences()
                                                  .getValue(Utils.CB_BOX_TEMPLATE, "");
           uiContainer.setTemplateDetail(vservice.getTemplateHome(BasePath.CB_DETAIL_VIEW_TEMPLATES,
-                                                                 repoName,
                                                                  SessionProviderFactory.createSystemProvider())
                                                 .getNode(detailTemplateName)
                                                 .getPath());

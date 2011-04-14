@@ -105,10 +105,19 @@ public class ApplicationTemplateManagerServiceImpl implements ApplicationTemplat
   /**
    * {@inheritDoc}
    */
+  @Deprecated
   public List<Node> getTemplatesByApplication(String repository, String portletName,
       SessionProvider provider) throws Exception {
     return null;
   }
+  
+  /**
+   * {@inheritDoc}
+   */
+  public List<Node> getTemplatesByApplication(String portletName,
+      SessionProvider provider) throws Exception {
+    return null;
+  }  
 
   /**
    * {@inheritDoc}
@@ -138,9 +147,25 @@ public class ApplicationTemplateManagerServiceImpl implements ApplicationTemplat
    * @return the application template home
    * @throws Exception the exception
    */
-  public Node getApplicationTemplateHome(String repository, String portletName,
-      SessionProvider provider) throws Exception {
-    Node basedApplicationTemplateHome = getBasedApplicationTemplatesHome(provider,repository);
+  @Deprecated
+  public Node getApplicationTemplateHome(String repository,
+                                         String portletName,
+                                         SessionProvider provider) throws Exception {
+    Node basedApplicationTemplateHome = getBasedApplicationTemplatesHome(provider);
+    return basedApplicationTemplateHome.getNode(portletName);
+  }
+  
+  /**
+   * Gets the application template home.
+   * @param portletName       String
+   *                          The name of portlet
+   * @param provider          SessionProvider
+   * @see SessionProvider
+   * @return the application template home
+   * @throws Exception the exception
+   */
+  public Node getApplicationTemplateHome(String portletName, SessionProvider provider) throws Exception {
+    Node basedApplicationTemplateHome = getBasedApplicationTemplatesHome(provider);
     return basedApplicationTemplateHome.getNode(portletName);
   }
 
@@ -150,22 +175,33 @@ public class ApplicationTemplateManagerServiceImpl implements ApplicationTemplat
   public List<String> getAllManagedPortletName(String repository) throws Exception {
     return managedApplicationNames.get(repository);
   }
-
+  
   /**
    * {@inheritDoc}
    */
+  @Deprecated
   public Node getTemplateByName(String repository, String portletName, String category,
       String templateName, SessionProvider sessionProvider) throws Exception {
-    Node basedApplicationTemplateHome = getBasedApplicationTemplatesHome(sessionProvider,repository);
+    Node basedApplicationTemplateHome = getBasedApplicationTemplatesHome(sessionProvider);
     return basedApplicationTemplateHome.getNode(portletName + "/" + category + "/" + templateName);
   }
+  
+  /**
+   * {@inheritDoc}
+   */
+  public Node getTemplateByName(String portletName, String category,
+      String templateName, SessionProvider sessionProvider) throws Exception {
+    Node basedApplicationTemplateHome = getBasedApplicationTemplatesHome(sessionProvider);
+    return basedApplicationTemplateHome.getNode(portletName + "/" + category + "/" + templateName);
+  }  
 
   /**
    * {@inheritDoc}
    */
+  @Deprecated
   public List<Node> getTemplatesByCategory(String repository, String portletName, String category,
       SessionProvider sessionProvider) throws Exception {
-    Node basedApplicationTemplateHome = getBasedApplicationTemplatesHome(sessionProvider,repository);
+    Node basedApplicationTemplateHome = getBasedApplicationTemplatesHome(sessionProvider);
     Node applicationHome = basedApplicationTemplateHome.getNode(portletName);
     Node categoryNode = applicationHome.getNode(category);
     List<Node> templateNodes = new ArrayList<Node>();
@@ -174,26 +210,63 @@ public class ApplicationTemplateManagerServiceImpl implements ApplicationTemplat
     }
     return templateNodes;
   }
+  
+  /**
+   * {@inheritDoc}
+   */
+  public List<Node> getTemplatesByCategory(String portletName, String category,
+      SessionProvider sessionProvider) throws Exception {
+    Node basedApplicationTemplateHome = getBasedApplicationTemplatesHome(sessionProvider);
+    Node applicationHome = basedApplicationTemplateHome.getNode(portletName);
+    Node categoryNode = applicationHome.getNode(category);
+    List<Node> templateNodes = new ArrayList<Node>();
+    for(NodeIterator iterator = categoryNode.getNodes();iterator.hasNext();) {
+      templateNodes.add(iterator.nextNode());
+    }
+    return templateNodes;
+  }  
 
   /**
    * {@inheritDoc}
    */
+  @Deprecated
   public Node getTemplateByPath(String repository, String templatePath, SessionProvider sessionProvider) throws Exception {
-   Node basedTemplateNode = getBasedApplicationTemplatesHome(sessionProvider,repository);
+   Node basedTemplateNode = getBasedApplicationTemplatesHome(sessionProvider);
    return (Node)basedTemplateNode.getSession().getItem(templatePath);
   }
+  
+  /**
+   * {@inheritDoc}
+   */
+  public Node getTemplateByPath(String templatePath, SessionProvider sessionProvider) throws Exception {
+   Node basedTemplateNode = getBasedApplicationTemplatesHome(sessionProvider);
+   return (Node)basedTemplateNode.getSession().getItem(templatePath);
+  }  
 
   /**
    * {@inheritDoc}
    */
+  @Deprecated
   public void removeTemplate(String repository, String portletName, String catgory,
       String templateName, SessionProvider sessionProvider) throws Exception {
-    Node templateNode = getTemplateByName(repository,portletName,catgory,templateName, sessionProvider );
+    Node templateNode = getTemplateByName(portletName,catgory,templateName, sessionProvider );
     Session session = templateNode.getSession();
     templateNode.remove();
     session.save();
     session.logout();
   }
+  
+  /**
+   * {@inheritDoc}
+   */
+  public void removeTemplate(String portletName, String catgory,
+      String templateName, SessionProvider sessionProvider) throws Exception {
+    Node templateNode = getTemplateByName(portletName,catgory,templateName, sessionProvider );
+    Session session = templateNode.getSession();
+    templateNode.remove();
+    session.save();
+    session.logout();
+  }  
 
   /**
    * Gets the based application templates home.
@@ -205,9 +278,9 @@ public class ApplicationTemplateManagerServiceImpl implements ApplicationTemplat
    * @see SessionProvider
    * @throws Exception the exception
    */
-  private Node getBasedApplicationTemplatesHome(SessionProvider sessionProvider, String repository) throws Exception {
+  private Node getBasedApplicationTemplatesHome(SessionProvider sessionProvider) throws Exception {
     DMSRepositoryConfiguration dmsRepoConfig = dmsConfiguration_.getConfig();
-    ManageableRepository manageableRepository = repositoryService.getRepository(repository);
+    ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
     Session session =
       sessionProvider.getSession(dmsRepoConfig.getSystemWorkspace(),manageableRepository);
     Node basedTemplateHome = (Node)session.getItem(basedApplicationTemplatesPath);
@@ -280,7 +353,7 @@ public class ApplicationTemplateManagerServiceImpl implements ApplicationTemplat
     for(Iterator<String> repositories = storedWorkspaces.keySet().iterator(); repositories.hasNext();) {
       String repository = repositories.next();
       try {
-        Node storedTemplateHome = getBasedApplicationTemplatesHome(sessionProvider,repository);
+        Node storedTemplateHome = getBasedApplicationTemplatesHome(sessionProvider);
         importPredefinedTemplateToDB(storedTemplateHome);
       } catch (Exception e) {
         log.error("Exception when import predefine application template into repository: " + repository, e);

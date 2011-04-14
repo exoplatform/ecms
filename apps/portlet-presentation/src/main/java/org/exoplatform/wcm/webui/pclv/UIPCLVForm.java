@@ -361,11 +361,11 @@ public class UIPCLVForm extends UIForm {
     PortletRequest portletRequest = portletRequestContext.getRequest();
     PortletPreferences portletPreferences = portletRequest.getPreferences();
     String workspace = portletPreferences.getValue(UIPCLVPortlet.WORKSPACE, null);
-    String repository = portletPreferences.getValue(UIPCLVPortlet.REPOSITORY, null);
     String preferenceTargetPage = portletPreferences.getValue(UIPCLVPortlet.PREFERENCE_TARGET_PAGE,
                                                               "");
     RepositoryService repositoryService = getApplicationComponent(RepositoryService.class);
-    ManageableRepository manageableRepository = repositoryService.getRepository(repository);
+    ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
+    
     String nodeName = null;
     if (node.getName().equals("jcr:frozenNode")) {
       String uuid = node.getProperty("jcr:frozenUuid").getString();

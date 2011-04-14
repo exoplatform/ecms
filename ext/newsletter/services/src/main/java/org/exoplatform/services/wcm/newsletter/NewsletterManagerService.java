@@ -95,6 +95,7 @@ public class NewsletterManagerService {
                                   RepositoryService repositoryService,
                                   MailService mailService) {
     log.info("Starting NewsletterManagerService ... ");
+    // TODO ECMS-2132 How to get repository's name here ????????
     repositoryName = initParams.getValueParam("repository").getValue();
     workspaceName = initParams.getValueParam("workspace").getValue();
     categoryHandler = new NewsletterCategoryHandler(repositoryName, workspaceName);
@@ -145,7 +146,7 @@ public class NewsletterManagerService {
   }
 
   public List<String> getAllBannedUser() throws Exception {
-    ManageableRepository manageableRepository = repositoryService_.getRepository(repositoryName);
+    ManageableRepository manageableRepository = repositoryService_.getCurrentRepository();
     SessionProvider sessionProvider = SessionProvider.createSystemProvider();
     Session session = sessionProvider.getSession(workspaceName, manageableRepository);
     List<String> listEmails = new ArrayList<String>();
@@ -199,7 +200,7 @@ public class NewsletterManagerService {
   public void sendNewsletter() throws Exception {
     List<String> listBannedEmail = this.getAllBannedUser();
 
-    ManageableRepository manageableRepository = repositoryService_.getRepository(repositoryName);
+    ManageableRepository manageableRepository = repositoryService_.getCurrentRepository();
     SessionProvider sessionProvider = SessionProvider.createSystemProvider();
     Session session = sessionProvider.getSession(workspaceName, manageableRepository);
 

@@ -275,9 +275,10 @@ public class Utils {
     return buffer.toString();
   }
 
-
+  @Deprecated
   public static List<String> getListAllowedFileType(Node currentNode,
-      String repository, TemplateService templateService) throws Exception {
+                                                    String repository,
+                                                    TemplateService templateService) throws Exception {
     List<String> nodeTypes = new ArrayList<String>();
     NodeTypeManager ntManager = currentNode.getSession().getWorkspace()
         .getNodeTypeManager();
@@ -328,6 +329,59 @@ public class Utils {
     }
     return nodeTypes;
   }
+  
+  public static List<String> getListAllowedFileType(Node currentNode,
+                                                    TemplateService templateService) throws Exception {
+    List<String> nodeTypes = new ArrayList<String>();
+    NodeTypeManager ntManager = currentNode.getSession().getWorkspace()
+        .getNodeTypeManager();
+    NodeType currentNodeType = currentNode.getPrimaryNodeType();
+    NodeDefinition[] childDefs = currentNodeType.getChildNodeDefinitions();
+    List<String> templates = templateService.getDocumentTemplates();
+    try {
+      for (int i = 0; i < templates.size(); i++) {
+        String nodeTypeName = templates.get(i).toString();
+        NodeType nodeType = ntManager.getNodeType(nodeTypeName);
+        NodeType[] superTypes = nodeType.getSupertypes();
+        boolean isCanCreateDocument = false;
+        for (NodeDefinition childDef : childDefs) {
+          NodeType[] requiredChilds = childDef.getRequiredPrimaryTypes();
+          for (NodeType requiredChild : requiredChilds) {
+            if (nodeTypeName.equals(requiredChild.getName())) {
+              isCanCreateDocument = true;
+              break;
+            }
+          }
+          if (nodeTypeName.equals(childDef.getName()) || isCanCreateDocument) {
+            if (!nodeTypes.contains(nodeTypeName))
+              nodeTypes.add(nodeTypeName);
+            isCanCreateDocument = true;
+          }
+        }
+        if (!isCanCreateDocument) {
+          for (NodeType superType : superTypes) {
+            for (NodeDefinition childDef : childDefs) {
+              for (NodeType requiredType : childDef.getRequiredPrimaryTypes()) {
+                if (superType.getName().equals(requiredType.getName())) {
+                  if (!nodeTypes.contains(nodeTypeName))
+                    nodeTypes.add(nodeTypeName);
+                  isCanCreateDocument = true;
+                  break;
+                }
+              }
+              if (isCanCreateDocument)
+                break;
+            }
+            if (isCanCreateDocument)
+              break;
+          }
+        }
+      }
+    } catch (Exception e) {
+      LOG.error("Unexpected error", e);
+    }
+    return nodeTypes;
+  }  
 
   public static String getNodeTypeIcon(Node node, String appended, String mode)
       throws RepositoryException {
@@ -459,6 +513,7 @@ public class Utils {
     return null;
   }
 
+  @Deprecated
   public static Node findNodeByUUID(String repository, String uuid)
       throws Exception {
     RepositoryService repositoryService = Util.getUIPortal()
@@ -467,8 +522,7 @@ public class Utils {
         .getApplicationComponent(SessionProviderService.class);
     SessionProvider sessionProvider = sessionProviderService
         .getSessionProvider(null);
-    ManageableRepository manageableRepository = repositoryService
-        .getRepository(repository);
+    ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
     Node node = null;
     for (String wsName : manageableRepository.getWorkspaceNames()) {
       try {
@@ -480,6 +534,26 @@ public class Utils {
     }
     return node;
   }
+  
+  public static Node findNodeByUUID(String uuid) throws Exception {
+    RepositoryService repositoryService = Util.getUIPortal()
+        .getApplicationComponent(RepositoryService.class);
+    SessionProviderService sessionProviderService = Util.getUIPortal()
+        .getApplicationComponent(SessionProviderService.class);
+    SessionProvider sessionProvider = sessionProviderService
+        .getSessionProvider(null);
+    ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
+    Node node = null;
+    for (String wsName : manageableRepository.getWorkspaceNames()) {
+      try {
+        node = sessionProvider.getSession(wsName, manageableRepository)
+            .getNodeByUUID(uuid);
+      } catch (ItemNotFoundException e) {
+        continue;
+      }
+    }
+    return node;
+  }  
 
   public static boolean isSymLink(Node node) throws RepositoryException {
     LinkManager linkManager = Util.getUIPortal().getApplicationComponent(

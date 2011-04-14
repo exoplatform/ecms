@@ -50,7 +50,6 @@ import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.access.AccessControlEntry;
 import org.exoplatform.services.jcr.access.PermissionType;
 import org.exoplatform.services.jcr.access.SystemIdentity;
-import org.exoplatform.services.jcr.config.RepositoryEntry;
 import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
@@ -117,11 +116,14 @@ public class TaxonomyPlugin extends BaseComponentPlugin {
     dmsConfiguration_ = dmsConfiguration;
   }
 
+  @Deprecated
   public void init(String repository) throws Exception {
-    if (!autoCreateInNewRepository_)
-      return;
-    importPredefineTaxonomies(repository);
+    importPredefineTaxonomies();
   }
+  
+  public void init() throws Exception {
+    importPredefineTaxonomies();
+  }  
 
   public String getName() {
     return name;
@@ -156,7 +158,7 @@ public class TaxonomyPlugin extends BaseComponentPlugin {
   }
 
   @SuppressWarnings("unchecked")
-  private void importPredefineTaxonomies(String repository) throws Exception {
+  private void importPredefineTaxonomies() throws Exception {
     ManageableRepository manageableRepository = repositoryService_.getCurrentRepository();
     DMSRepositoryConfiguration dmsRepoConfig = dmsConfiguration_.getConfig();
     if (workspace == null) {
@@ -219,7 +221,7 @@ public class TaxonomyPlugin extends BaseComponentPlugin {
         for (Iterator iter = actions.iterator(); iter.hasNext();) {
           TaxonomyAction action = (TaxonomyAction) iter.next();
           taxonomyStorageNodeSystem = (Node)session.getItem(taxonomyStorageNodeSystem.getPath());
-          addAction(action, taxonomyStorageNodeSystem, repository);
+          addAction(action, taxonomyStorageNodeSystem);
         }
       }
 
@@ -250,7 +252,7 @@ public class TaxonomyPlugin extends BaseComponentPlugin {
     return false;
   }
 
-  private void addAction(ActionConfig.TaxonomyAction action, Node srcNode, String repository)
+  private void addAction(ActionConfig.TaxonomyAction action, Node srcNode)
       throws Exception {
     ExoContainer container = ExoContainerContext.getCurrentContainer();
     ManageableRepository manageRepo = repositoryService_.getCurrentRepository();
@@ -294,7 +296,7 @@ public class TaxonomyPlugin extends BaseComponentPlugin {
     } else {
       rootProp.setValue((sortedInputs.get("/node/exo:name")).getValue());
     }
-    actionServiceContainer_.addAction(srcNode, repository, action.getType(), sortedInputs);
+    actionServiceContainer_.addAction(srcNode, action.getType(), sortedInputs);
     Node actionNode = actionServiceContainer_.getAction(srcNode, action.getName());
     if (action.getRoles() != null) {
       String[] roles = StringUtils.split(action.getRoles(), ";");
@@ -345,21 +347,5 @@ public class TaxonomyPlugin extends BaseComponentPlugin {
       permissionsMap.put(permission.getIdentity(), strPer.toString().split(","));
     }
     return permissionsMap;
-  }
-
-  public void init() throws Exception {
-    if (autoCreateInNewRepository_) {
-      RepositoryEntry repositoryEntry = repositoryService_.getCurrentRepository().getConfiguration();
-      importPredefineTaxonomies(repositoryEntry.getName());
-      return;
-    }
-    ValueParam param = params_.getValueParam("repository");
-    String repository = null;
-    if (param == null) {
-      repository = repositoryService_.getDefaultRepository().getConfiguration().getName();
-    } else {
-      repository = param.getValue();
-    }
-    importPredefineTaxonomies(repository);
   }
 }

@@ -8,8 +8,12 @@
  */
 %>
 <% 
-  String repoName = uicomponent.getRepository();
+  import org.exoplatform.services.jcr.RepositoryService;
+  
+  RepositoryService rService = uicomponent.getApplicationComponent(RepositoryService.class) ;
+  String repoName = rService.getCurrentRepository().getConfiguration().getName() ;    
   uicomponent.initRepoList(repoName);
+  
 %>
 
 <% uiform.begin(); %>

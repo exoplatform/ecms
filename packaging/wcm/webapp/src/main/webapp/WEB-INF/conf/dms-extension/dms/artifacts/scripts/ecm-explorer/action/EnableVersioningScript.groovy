@@ -43,7 +43,7 @@ public class EnableVersioningScript implements CmsScript {
     String workspace = (String)variables.get("srcWorkspace") ;
     Session session = null ;
     try {
-      session = repositoryService_.getRepository().getSystemSession(workspace) ;
+      session = repositoryService_.getCurrentRepository().getSystemSession(workspace) ;
       Node addedNode = (Node) session.getItem(nodePath);
       if(addedNode.canAddMixin("mix:versionable")) {
         addedNode.addMixin("mix:versionable") ;

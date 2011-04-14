@@ -13,6 +13,8 @@
   import org.exoplatform.ecm.webui.utils.Utils;
   import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
   import org.exoplatform.services.cms.link.LinkManager;
+  import org.exoplatform.services.jcr.RepositoryService;
+  
 %>
 <%
   def linkManager = uicomponent.getComponentInstanceOfType("org.exoplatform.services.cms.link.LinkManager");
@@ -28,6 +30,8 @@
 	rcontext.getJavascriptManager().importJavascript('eXo.ecm.DMSBrowser','/ecm-wcm-extension/javascript/');    
 	rcontext.getJavascriptManager().importJavascript('eXo.ecm.UICoverFlow','/ecmexplorer/javascript/');
 	rcontext.getJavascriptManager().addOnLoadJavascript("eXo.ecm.UICoverFlow.initEvent('$viewComponentId')");
+  RepositoryService rService = uicomponent.getApplicationComponent(RepositoryService.class);
+  String repository = rService.getCurrentRepository().getConfiguration().getName();	
 %>
   <div id="$uicomponent.id" class="UISlideShowView UICoverFlowView">
     <div class="TLBox">
@@ -272,7 +276,7 @@
                   } else {
                     isShowSlideShow = false;
                   }
-                  imgSrc = "/".concat(portalName).concat("/").concat(restContextName).concat("/thumbnailImage/{size}/").concat(uicomponent.getRepository()).concat("/").concat(wsName).concat(image.getPath());
+                  imgSrc = "/".concat(portalName).concat("/").concat(restContextName).concat("/thumbnailImage/{size}/").concat(repository).concat("/").concat(wsName).concat(image.getPath());
                   if((!linkManager.isLink(image) || linkManager.isTargetReachable(image)) && uicomponent.isSupportedThumbnailImage(image)) {
                     imgSrc = imgSrc.replace("{size}","origin").concat("/?reloadnum=").concat(String.valueOf(Math.random())); 
                   } else if (isShowSlideShow) {

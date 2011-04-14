@@ -6,8 +6,11 @@
 	import org.exoplatform.webui.core.UIComponent;
     import org.exoplatform.services.jcr.util.Text;
     import org.exoplatform.ecm.webui.utils.Utils;
+    import org.exoplatform.services.jcr.RepositoryService;    
 	
 	UIComponent uiParent = uicomponent.getParent();
+  RepositoryService rService = uicomponent.getApplicationComponent(RepositoryService.class);
+  String repository = rService.getCurrentRepository().getConfiguration().getName();	
 	
 	public boolean isVersionable(Node node) throws Exception {
     return node.isNodeType("mix:versionable");
@@ -236,7 +239,7 @@
 	<div class="PDFViewerContent">
   	<div class="ImageView" style="overflow:auto;height:375px;" id ="pdf_viewer_image" name="pdf_viewer_image">
 		<%
-			  String pdfPageImage = "/" + uiParent.getPortalName() + "/" + Utils.getRestContextName(uiParent.getPortalName()) + "/pdfviewer/" + uiParent.getRepository() + "/" + uiParent.getWorkspaceName() + "/${currentPage}/${currentRotation}/${currentScale}/" + currentNode.getUUID() + "/";
+			  String pdfPageImage = "/" + uiParent.getPortalName() + "/" + Utils.getRestContextName(uiParent.getPortalName()) + "/pdfviewer/" + repository + "/" + uiParent.getWorkspaceName() + "/${currentPage}/${currentRotation}/${currentScale}/" + currentNode.getUUID() + "/";
 		%>
 			  <a href="$pdfPageImage" title="<%=uicomponent.getResourceBundle("PDFViewer.label.viewFullPage")%>"><image src="$pdfPageImage"></a>
 		</div>

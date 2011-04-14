@@ -117,13 +117,28 @@ public interface WCMComposer {
    *
    * @throws Exception the exception
    */
+  @Deprecated
   public List<Node> getContents(String repository,
                                 String workspace,
                                 String path,
                                 HashMap<String, String> filters,
                                 SessionProvider sessionProvider) throws Exception;
-
-
+  
+  /**
+   * returns contents at the specified path based on filters.
+   * 
+   * @param workspace the workspace
+   * @param path the path
+   * @param filters the filters
+   * @param sessionProvider the session provider
+   * @return a jcr node
+   * @throws Exception the exception
+   */
+  public List<Node> getContents(String workspace,
+                                String path,
+                                HashMap<String, String> filters,
+                                SessionProvider sessionProvider) throws Exception;
+  
   /**
    * Update content.
    *
@@ -134,8 +149,21 @@ public interface WCMComposer {
    *
    * @return true, if successful
    */
+  @Deprecated
   public boolean updateContent(String repository,
                                String workspace,
+                               String nodeIdentifier,
+                               HashMap<String, String> filters) throws Exception;
+  
+  /**
+   * Update content.
+   * 
+   * @param workspace the workspace
+   * @param path the path
+   * @param filters the filters
+   * @return true, if successful
+   */
+  public boolean updateContent(String workspace,
                                String nodeIdentifier,
                                HashMap<String, String> filters) throws Exception;
 
@@ -149,10 +177,21 @@ public interface WCMComposer {
    *
    * @return true, if successful
    */
+  @Deprecated
   public boolean updateContents(String repository,
                                 String workspace,
                                 String path,
                                 HashMap<String, String> filters) throws Exception;
+  
+  /**
+   * Update contents.
+   * 
+   * @param workspace the workspace
+   * @param path the path
+   * @param filters the filters
+   * @return true, if successful
+   */
+  public boolean updateContents(String workspace, String path, HashMap<String, String> filters) throws Exception;
 
   /**
    * returns allowed states for a specified mode.

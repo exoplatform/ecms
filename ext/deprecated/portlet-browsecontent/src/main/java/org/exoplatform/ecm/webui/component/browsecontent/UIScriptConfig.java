@@ -97,10 +97,10 @@ public class UIScriptConfig extends UIForm {
     UIFormCheckBoxInput enableTagMapField = getChildById(UINewConfigForm.FIELD_ENABLETAGMAP);
     UIFormCheckBoxInput enableCommentField = getChildById(UINewConfigForm.FIELD_ENABLECOMMENT);
     UIFormCheckBoxInput enableVoteField = getChildById(UINewConfigForm.FIELD_ENABLEVOTE);
-    scriptField.setOptions(getScriptOption(repository));
-    templateField.setOptions(getTemplateOption(repository));
+    scriptField.setOptions(getScriptOption());
+    templateField.setOptions(getTemplateOption());
     UIConfigTabPane uiConfigTabPane = getAncestorOfType(UIConfigTabPane.class);
-    detailtemField.setOptions(uiConfigTabPane.getBoxTemplateOption(repository));
+    detailtemField.setOptions(uiConfigTabPane.getBoxTemplateOption());
     if (isEdit_) {
       if(isAddNew) {
         setActions(UINewConfigForm.ADD_NEW_ACTION);
@@ -142,10 +142,10 @@ public class UIScriptConfig extends UIForm {
     return uiTabPane.getWorkSpaceOption();
   }
   @SuppressWarnings("unchecked")
-  private List<SelectItemOption<String>> getTemplateOption(String repository) throws Exception {
+  private List<SelectItemOption<String>> getTemplateOption() throws Exception {
     List<SelectItemOption<String>> Options = new ArrayList<SelectItemOption<String>>();
     List<Node> scriptTemplates = getApplicationComponent(ManageViewService.class).
-                getAllTemplates(BasePath.CB_SCRIPT_TEMPLATES, repository, SessionProviderFactory.createSystemProvider());
+                getAllTemplates(BasePath.CB_SCRIPT_TEMPLATES, SessionProviderFactory.createSystemProvider());
     for(Node template:scriptTemplates) {
       Options.add(new SelectItemOption<String>(template.getName(),template.getName()));
     }
@@ -153,12 +153,11 @@ public class UIScriptConfig extends UIForm {
     return Options;
   }
 
-  private List<SelectItemOption<String>> getScriptOption(String repository) throws Exception {
+  private List<SelectItemOption<String>> getScriptOption() throws Exception {
     List<SelectItemOption<String>> Options = new ArrayList<SelectItemOption<String>>();
-    Node cbScripts = getApplicationComponent(ScriptService.class).getCBScriptHome(repository,
-                                                                                  SessionProviderFactory.createSystemProvider());
+    Node cbScripts = getApplicationComponent(ScriptService.class).getCBScriptHome(SessionProviderFactory.createSystemProvider());
     NodeIterator nodeList = cbScripts.getNodes();
-    while(nodeList.hasNext()) {
+    while (nodeList.hasNext()) {
       Node node = nodeList.nextNode();
       Options.add(new SelectItemOption<String>(node.getName(), node.getName()));
     }

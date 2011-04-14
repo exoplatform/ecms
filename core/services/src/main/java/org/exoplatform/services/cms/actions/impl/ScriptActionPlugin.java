@@ -55,10 +55,11 @@ public class ScriptActionPlugin extends BaseActionPlugin implements ComponentPlu
     config_ = (ActionConfig) params.getObjectParamValues(ActionConfig.class).get(0);
   }
 
+  @Deprecated
   public Collection<String> getActionExecutables(String repository) throws Exception {
     Collection<String> actionScriptNames = new ArrayList<String>();
     SessionProvider provider = SessionProvider.createSystemProvider();
-    List<Node> actionScriptList = scriptService_.getECMActionScripts(repository,provider) ;
+    List<Node> actionScriptList = scriptService_.getECMActionScripts(provider) ;
     String baseScriptPath = scriptService_.getBaseScriptPath() ;
     for(Node script:actionScriptList) {
       String actionScriptName = StringUtils.substringAfter(script.getPath(),baseScriptPath + "/") ;
@@ -67,6 +68,19 @@ public class ScriptActionPlugin extends BaseActionPlugin implements ComponentPlu
     provider.close();
     return actionScriptNames;
   }
+  
+  public Collection<String> getActionExecutables() throws Exception {
+    Collection<String> actionScriptNames = new ArrayList<String>();
+    SessionProvider provider = SessionProvider.createSystemProvider();
+    List<Node> actionScriptList = scriptService_.getECMActionScripts(provider) ;
+    String baseScriptPath = scriptService_.getBaseScriptPath() ;
+    for(Node script:actionScriptList) {
+      String actionScriptName = StringUtils.substringAfter(script.getPath(),baseScriptPath + "/") ;
+      actionScriptNames.add(actionScriptName) ;
+    }
+    provider.close();
+    return actionScriptNames;
+  }  
 
   public String getActionExecutableLabel() { return "Groovy Scripts:"; }
 
@@ -108,7 +122,7 @@ public class ScriptActionPlugin extends BaseActionPlugin implements ComponentPlu
     }
     variables.put("actionNode", actionNode);
     variables.put("repository",repository) ;
-    executeAction(userId, script, variables, repository);
+    executeAction(userId, script, variables);
   }
 
   private String getDefaultValue(PropertyDefinition proDef) throws Exception {
@@ -136,12 +150,20 @@ public class ScriptActionPlugin extends BaseActionPlugin implements ComponentPlu
     return null ;
   }
 
+  @Deprecated
   public void executeAction(String userId, String executable, Map variables, String repository) throws Exception {
     ExoContainer container = ExoContainerContext.getCurrentContainer();
     ScriptService scriptService =  (ScriptService)container.getComponentInstanceOfType(ScriptService.class);
-    CmsScript cmsScript = scriptService.getScript(executable, repository);
+    CmsScript cmsScript = scriptService.getScript(executable);
     cmsScript.execute(variables);
   }
+  
+  public void executeAction(String userId, String executable, Map variables) throws Exception {
+    ExoContainer container = ExoContainerContext.getCurrentContainer();
+    ScriptService scriptService =  (ScriptService)container.getComponentInstanceOfType(ScriptService.class);
+    CmsScript cmsScript = scriptService.getScript(executable);
+    cmsScript.execute(variables);
+  }  
 
   public class ScriptActionLauncherListener extends BaseActionLauncherListener {
 
@@ -151,14 +173,14 @@ public class ScriptActionPlugin extends BaseActionPlugin implements ComponentPlu
     }
 
     public void triggerAction(String userId, Map variables, String repository) throws Exception {
-      executeAction(userId, super.executable_, variables, repository);
+      executeAction(userId, super.executable_, variables);
     }
   }
 
   @SuppressWarnings("unchecked")
   public void activateAction(String userId, String executable, Map variables, String repository) throws Exception {
     variables.put("repository",repository) ;
-    executeAction(userId,executable,variables, repository) ;
+    executeAction(userId,executable,variables) ;
   }
 
   protected Class createActivationJob() throws Exception {

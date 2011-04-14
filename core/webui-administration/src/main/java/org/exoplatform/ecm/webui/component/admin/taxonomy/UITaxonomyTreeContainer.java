@@ -27,7 +27,6 @@ import javax.jcr.Session;
 import javax.jcr.Workspace;
 
 import org.exoplatform.ecm.permission.PermissionBean;
-import org.exoplatform.ecm.webui.component.admin.UIECMAdminPortlet;
 import org.exoplatform.ecm.webui.component.admin.taxonomy.action.UIActionForm;
 import org.exoplatform.ecm.webui.component.admin.taxonomy.action.UIActionTaxonomyManager;
 import org.exoplatform.ecm.webui.component.admin.taxonomy.action.UIActionTypeForm;
@@ -134,7 +133,9 @@ public class UITaxonomyTreeContainer extends UIContainer implements UISelectable
     if (taxonomyTreeData == null) {
       taxonomyTreeData = new TaxonomyTreeData();
     }
-    taxonomyTreeData.setRepository(getRepository());
+    taxonomyTreeData.setRepository(getApplicationComponent(RepositoryService.class).getCurrentRepository()
+                                                                                   .getConfiguration()
+                                                                                   .getName());
     String taxoTreeName = taxonomyTreeData.getTaxoTreeName();
     UIActionTaxonomyManager uiActionTaxonomyManager = getChild(UIActionTaxonomyManager.class);
     UIActionTypeForm uiActionTypeForm = uiActionTaxonomyManager.getChild(UIActionTypeForm.class);
@@ -192,10 +193,6 @@ public class UITaxonomyTreeContainer extends UIContainer implements UISelectable
 
   private UIFormStringInput getFormInputById(String id) {
     return (UIFormStringInput)findComponentById(id);
-  }
-
-  private String getRepository(){
-    return getAncestorOfType(UIECMAdminPortlet.class).getPreferenceRepository();
   }
 
   public Session getSession(String workspace) throws RepositoryException, RepositoryConfigurationException  {
@@ -276,7 +273,9 @@ public class UITaxonomyTreeContainer extends UIContainer implements UISelectable
    */
   public boolean updateTaxonomyTree(String name, String workspace, String homePath, String actionName)
       throws RepositoryException, AccessControlException, Exception {
-    String repository = getRepository();
+    String repository = getApplicationComponent(RepositoryService.class).getCurrentRepository()
+                                                                        .getConfiguration()
+                                                                        .getName();
     TaxonomyService taxonomyService = getApplicationComponent(TaxonomyService.class);
     Node taxonomyTreeNode = taxonomyService.getTaxonomyTree(name, true);
     Node homeNode = taxonomyTreeNode.getParent();

@@ -301,7 +301,7 @@ public class UIContentDialogForm extends UIDialogForm  implements UIPopupCompone
   public ResourceResolver getTemplateResourceResolver(WebuiRequestContext context, String template) {
     DMSConfiguration dmsConfiguration = getApplicationComponent(DMSConfiguration.class);
     String workspace = dmsConfiguration.getConfig().getSystemWorkspace();
-    return new JCRResourceResolver(this.repositoryName, workspace);
+    return new JCRResourceResolver(workspace);
   }
 
   /**
@@ -639,7 +639,7 @@ public class UIContentDialogForm extends UIDialogForm  implements UIPopupCompone
               String rootTreePath = nodeHierarchyCreator.getJcrPath(BasePath.TAXONOMIES_TREE_STORAGE_PATH);
               RepositoryService repositoryService = (RepositoryService) contentDialogForm.
                   getApplicationComponent(RepositoryService.class);
-              ManageableRepository manageableRepository = repositoryService.getRepository(repository);
+              ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
               Session session = WCMCoreUtils.getUserSessionProvider()
                                             .getSession(workspaceName, manageableRepository);
               Node rootTree = (Node) session.getItem(rootTreePath);

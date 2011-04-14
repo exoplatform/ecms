@@ -83,8 +83,8 @@ public class UITaxonomyWorkingArea extends UIContainer {
   public List<Node> getNodeList() {return taxonomyNodes_; } ;
 
   private String getRepository() throws Exception {
-    UITaxonomyManager uiManager = getParent() ;
-    return uiManager.getRepository() ;
+    UITaxonomyManager uiManager = getParent();
+    return uiManager.getRepository().getConfiguration().getName();
   }
 
   public boolean isRootNode() throws Exception {

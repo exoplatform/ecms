@@ -47,7 +47,7 @@ public class TransformBinaryChildrenToTextScript implements CmsScript {
     Node folderNode = null ;
     Session session = null ;
     try {
-      session = repositoryService_.getRepository().getSystemSession(srcWorkspace);
+      session = repositoryService_.getCurrentRepository().getSystemSession(srcWorkspace);
       folderNode = (Node) session.getItem(srcPath);
     } catch(Exception e) {}
     try {

@@ -70,8 +70,19 @@ public interface FavouriteService {
    * @return List<Node> Get all favourite nodes
    * @throws Exception
    */
-  public List<Node> getAllFavouriteNodes(String workspace, String repository,
-      SessionProvider sessionProvider) throws Exception;
+  @Deprecated
+  public List<Node> getAllFavouriteNodes(String workspace,
+                                         String repository,
+                                         SessionProvider sessionProvider) throws Exception;
+  
+  /**
+   * Get all favourite nodes
+   * @param workspace Get all favourite nodes from this workspace
+   * @param sessionProvider The session provider which will be used to get session
+   * @return List<Node> Get all favourite nodes
+   * @throws Exception
+   */
+  public List<Node> getAllFavouriteNodes(String workspace, SessionProvider sessionProvider) throws Exception;
 
   /**
    * Get all favourite nodes by user
@@ -82,6 +93,19 @@ public interface FavouriteService {
    * @return List<Node> All favourite node added by user
    * @throws Exception
    */
+  @Deprecated
   public List<Node> getAllFavouriteNodesByUser(String workspace, String repository,
       SessionProvider sessionProvider, String userName) throws Exception;
+  
+  /**
+   * Get all favourite nodes by user
+   * @param workspace Get all favourite nodes from this workspace
+   * @param sessionProvider The session provider which will be used to get session
+   * @param userName User added favourite to the node
+   * @return List<Node> All favourite node added by user
+   * @throws Exception
+   */
+  public List<Node> getAllFavouriteNodesByUser(String workspace,
+                                               SessionProvider sessionProvider,
+                                               String userName) throws Exception;
 }

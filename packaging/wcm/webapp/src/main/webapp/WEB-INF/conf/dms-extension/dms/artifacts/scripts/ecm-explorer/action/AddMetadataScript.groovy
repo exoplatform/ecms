@@ -45,12 +45,11 @@ public class AddMetadataScript implements CmsScript {
   public void execute(Object context) {
     Map variables = (Map) context;   
     String metadataName = (String)context.get("exo:mixinMetadata") ;
-    String repository = (String)variables.get("repository");
     String srcWorkspace = (String)context.get("srcWorkspace") ;
     String nodePath = (String)context.get("nodePath") ;
     Session session = null ;
     try {
-    	ManageableRepository manageableRepository = repositoryService_.getRepository(repository);
+    	ManageableRepository manageableRepository = repositoryService_.getCurrentRepository();
     	SessionProvider sessionProvider = seProviderService_.getSessionProvider(null);
     	if (sessionProvider == null) {
     		sessionProvider = seProviderService_.getSystemSessionProvider(null);

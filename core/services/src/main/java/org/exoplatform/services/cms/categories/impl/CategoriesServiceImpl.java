@@ -69,11 +69,18 @@ public class CategoriesServiceImpl implements CategoriesService,Startable {
     dmsConfiguration_ = dmsConfiguration;
   }
 
+  @Deprecated
   public void init(String repository) throws Exception {
     for(TaxonomyPlugin plugin : plugins_) {
       plugin.init(repository) ;
     }
   }
+  
+  public void init() throws Exception {
+    for(TaxonomyPlugin plugin : plugins_) {
+      plugin.init() ;
+    }
+  }  
 
   public void addTaxonomyPlugin(ComponentPlugin plugin) {
     if(plugin instanceof TaxonomyPlugin) {
@@ -81,10 +88,17 @@ public class CategoriesServiceImpl implements CategoriesService,Startable {
     }
   }
 
+  @Deprecated
   public Node getTaxonomyHomeNode (String repository,SessionProvider provider) throws Exception {
-    Session session = getSession(repository,provider) ;
+    Session session = getSession(provider) ;
     Node homeTaxonomy = (Node)session.getItem(baseTaxonomyPath_) ;
     return homeTaxonomy ;
+  }
+  
+  public Node getTaxonomyHomeNode(SessionProvider provider) throws Exception {
+    Session session = getSession(provider);
+    Node homeTaxonomy = (Node) session.getItem(baseTaxonomyPath_);
+    return homeTaxonomy;
   }
 
   public void addTaxonomy(String parentPath,String childName, String repository) throws Exception  {
@@ -243,8 +257,8 @@ public class CategoriesServiceImpl implements CategoriesService,Startable {
     return manageableRepository.getSystemSession(dmsRepoConfig.getSystemWorkspace()) ;
   }
 
-  private Session getSession(String repository,SessionProvider provider) throws Exception {
-    ManageableRepository manageableRepository = repositoryService_.getRepository(repository) ;
+  private Session getSession(SessionProvider provider) throws Exception {
+    ManageableRepository manageableRepository = repositoryService_.getCurrentRepository() ;
     DMSRepositoryConfiguration dmsRepoConfig = dmsConfiguration_.getConfig();
     return provider.getSession(dmsRepoConfig.getSystemWorkspace(), manageableRepository) ;
   }

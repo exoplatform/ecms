@@ -84,17 +84,16 @@ public class UITaggingFormContainer extends UIContainer implements UIPopupCompon
     UIJCRExplorer uiExplorer = getAncestorOfType(UIJCRExplorer.class);
     UITaggingForm uiTaggingForm = getChild(UITaggingForm.class);
 
-    String repository = uiExplorer.getRepositoryName();
     String workspace = uiExplorer.getRepository().getConfiguration().getDefaultWorkspaceName();
     String userName = uiExplorer.getSession().getUserID();
-    String tagScope = uiTaggingForm.getUIFormSelectBox(uiTaggingForm.TAG_SCOPES).getValue();
+    String tagScope = uiTaggingForm.getUIFormSelectBox(UITaggingForm.TAG_SCOPES).getValue();
     int scope = uiTaggingForm.getIntValue(tagScope);
 
-    String publicTagNodePath = nodeHierarchyCreator.getJcrPath(uiTaggingForm.PUBLIC_TAG_NODE_PATH);
+    String publicTagNodePath = nodeHierarchyCreator.getJcrPath(UITaggingForm.PUBLIC_TAG_NODE_PATH);
 
     List<Node> tagList = (scope == NewFolksonomyService.PUBLIC) ?
-            newFolksonomyService.getAllPublicTags(publicTagNodePath, repository, workspace) :
-            newFolksonomyService.getAllPrivateTags(userName, repository, workspace);
+            newFolksonomyService.getAllPublicTags(publicTagNodePath, workspace) :
+            newFolksonomyService.getAllPrivateTags(userName);
 
     for (Node tag : tagList)
       if (tag.getName().equals(tagName)) return tag;

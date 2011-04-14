@@ -166,7 +166,6 @@ public class RestoreFromTrashManageComponent extends UIAbstractManagerComponent 
       try {
         trashService.restoreFromTrash(trashHomeNode,
                         srcPath,
-                        repository,
                         sessionProvider);
         uiExplorer.updateAjax(event);
       } catch(PathNotFoundException e) {
@@ -190,16 +189,15 @@ public class RestoreFromTrashManageComponent extends UIAbstractManagerComponent 
         List<Node> categories = WCMCoreUtils.getService(TaxonomyService.class).getAllCategories(restoredNode);
 
         for(Node categoryNode : categories){
-          wcmComposer.updateContents(categoryNode.getSession().getRepository().toString(),
-                                     categoryNode.getSession().getWorkspace().getName(),
-                                     categoryNode.getPath(), new HashMap<String, String>());
+          wcmComposer.updateContents(categoryNode.getSession().getWorkspace().getName(),
+                                     categoryNode.getPath(),
+                                     new HashMap<String, String>());
         }
 
         String parentPath = restoredNode.getParent().getPath();
-        String parentRepo = restoredNode.getSession().getRepository().toString();
         String parentWSpace = restoredNode.getSession().getWorkspace().getName();
 
-        wcmComposer.updateContents(parentRepo, parentWSpace, parentPath, new HashMap<String, String>());
+        wcmComposer.updateContents(parentWSpace, parentPath, new HashMap<String, String>());
 
       } catch (Exception e) {}
     } catch (PathNotFoundException e) {

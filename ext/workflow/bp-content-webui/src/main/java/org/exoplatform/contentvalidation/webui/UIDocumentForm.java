@@ -43,6 +43,7 @@ import org.exoplatform.services.cms.impl.DMSConfiguration;
 import org.exoplatform.services.cms.impl.DMSRepositoryConfiguration;
 import org.exoplatform.services.cms.taxonomy.TaxonomyService;
 import org.exoplatform.services.cms.templates.TemplateService;
+import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
@@ -114,11 +115,6 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
 
   public void setWorkspace(String workspace) { workspaceName = workspace; }
 
-  private String getRepository() throws Exception {
-    ManageableRepository manaRepo = (ManageableRepository)getCurrentNode().getSession().getRepository() ;
-    return manaRepo.getConfiguration().getName() ;
-  }
-
   public String getTemplate() {
     String userName = Util.getPortalRequestContext().getRemoteUser() ;
     TemplateService templateService = getApplicationComponent(TemplateService.class) ;
@@ -134,7 +130,7 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
     try {
       DMSConfiguration dmsConfiguration = getApplicationComponent(DMSConfiguration.class);
       String wsName = dmsConfiguration.getConfig().getSystemWorkspace();
-      return new JCRResourceResolver(getRepository(), wsName, Utils.EXO_TEMPLATEFILE);
+      return new JCRResourceResolver(wsName);
     } catch (Exception e) {
       LOG.error("Unexpected error", e);
     }
@@ -153,7 +149,7 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
   public Node getRootPathTaxonomy(Node node) throws Exception {
     try {
       TaxonomyService taxonomyService = getApplicationComponent(TaxonomyService.class);
-      List<Node> allTaxonomyTrees = taxonomyService.getAllTaxonomyTrees(this.repositoryName);
+      List<Node> allTaxonomyTrees = taxonomyService.getAllTaxonomyTrees();
       for (Node taxonomyTree : allTaxonomyTrees) {
         if (node.getPath().startsWith(taxonomyTree.getPath())) return taxonomyTree;
       }
@@ -257,7 +253,6 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
     public void execute(Event<UIDocumentForm> event) throws Exception {
       UIDocumentForm uiForm = event.getSource();
       List inputs = uiForm.getChildren();
-      String repository = uiForm.getRepository();
       UIApplication uiApp = uiForm.getAncestorOfType(UIApplication.class);
       int index = 0;
       boolean hasCategories = false;
@@ -277,9 +272,9 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
               for (String categoryPath : listTaxonomy) {
                 index = categoryPath.indexOf("/");
                 if (index < 0) {
-                  taxonomyService.getTaxonomyTree(repository, categoryPath);
+                  taxonomyService.getTaxonomyTree(categoryPath);
                 } else {
-                  taxonomyService.getTaxonomyTree(repository, categoryPath.substring(0, index))
+                  taxonomyService.getTaxonomyTree(categoryPath.substring(0, index))
                                  .getNode(categoryPath.substring(index + 1));
                 }
               }
@@ -302,7 +297,7 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
         homeNode.getSession().save() ;
         homeNode.save() ;
         Node newNode = (Node)homeNode.getSession().getItem(addedPath);
-        List<Node> listTaxonomyTrees = taxonomyService.getAllTaxonomyTrees(repository);
+        List<Node> listTaxonomyTrees = taxonomyService.getAllTaxonomyTrees();
         List<Node> listExistedTaxonomy = taxonomyService.getAllCategories(newNode);
         List<String> listExistingTaxonomy = new ArrayList<String>();
 
@@ -399,7 +394,10 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
           UIFormMultiValueInputSet uiSet = uiDocumentForm.getChildById(FIELD_TAXONOMY);
           if((uiSet != null) && (uiSet.getName() != null) && uiSet.getName().equals(FIELD_TAXONOMY)) {
             if ((clickedField != null) && (clickedField.equals(FIELD_TAXONOMY))) {
-              String repository = uiDocumentForm.getRepository();
+              String repository = uiDocumentForm.getApplicationComponent(RepositoryService.class)
+                                                .getCurrentRepository()
+                                                .getConfiguration()
+                                                .getName();
               DMSConfiguration dmsConfig = uiDocumentForm.getApplicationComponent(DMSConfiguration.class);
               DMSRepositoryConfiguration dmsRepoConfig = dmsConfig.getConfig();
               String workspaceName = dmsRepoConfig.getSystemWorkspace();
@@ -408,7 +406,7 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
                 uiTaskManager.createUIComponent(UIOneTaxonomySelector.class, null, null);
               uiOneTaxonomySelector.setIsDisable(workspaceName, false);
               TaxonomyService taxonomyService = uiDocumentForm.getApplicationComponent(TaxonomyService.class);
-              List<Node> lstTaxonomyTree = taxonomyService.getAllTaxonomyTrees(repository);
+              List<Node> lstTaxonomyTree = taxonomyService.getAllTaxonomyTrees();
               if (lstTaxonomyTree.size() == 0) throw new AccessDeniedException();
               uiOneTaxonomySelector.setRootNodeLocation(repository, workspaceName, lstTaxonomyTree.get(0).getPath());
               uiOneTaxonomySelector.setExceptedNodeTypesInPathPanel(new String[] {Utils.EXO_SYMLINK});

@@ -78,13 +78,11 @@ public class ManageRelationsActionComponent extends UIComponent {
         uiActionBar.getApplicationComponent(RelationsService.class);
       UIRelationsAddedList uiRelateAddedList =
         uiRelationManager.getChild(UIRelationsAddedList.class);
-      List<Node> relations =
-        relateService.getRelations(uiExplorer.getCurrentNode(), uiExplorer.getRepositoryName(),
-            SessionProviderFactory.createSessionProvider());
+      List<Node> relations = relateService.getRelations(uiExplorer.getCurrentNode(),
+                                                        SessionProviderFactory.createSessionProvider());
       uiRelateAddedList.updateGrid(relations, 1);
       String repository = uiActionBar.getAncestorOfType(UIJCRExplorer.class).getRepositoryName();
-      String defaultWsName =
-        repoService.getRepository(repository).getConfiguration().getDefaultWorkspaceName();
+      String defaultWsName = repoService.getCurrentRepository().getConfiguration().getDefaultWorkspaceName();
       UIOneNodePathSelector uiNodePathSelector = uiRelationManager.getChild(UIOneNodePathSelector.class);
       uiNodePathSelector.setIsDisable(defaultWsName, false);
       uiNodePathSelector.setRootNodeLocation(repository, defaultWsName, "/");

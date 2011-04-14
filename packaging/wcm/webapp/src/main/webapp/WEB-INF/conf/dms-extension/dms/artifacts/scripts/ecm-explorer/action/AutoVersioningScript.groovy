@@ -45,10 +45,9 @@ public class AutoVersioningScript implements CmsScript{
     String workspace = (String)variables.get("srcWorkspace") ;
     String srcPath = (String)variables.get("srcPath") ;
     String actionName = (String)variables.get("actionName") ;
-    String repository = (String)variables.get("repository") ;
     Session session = null ;
     try{
-      session = repositoryService_.getRepository(repository).getSystemSession(workspace) ;
+      session = repositoryService_.getCurrentRepository().getSystemSession(workspace) ;
       Node srcNode = (Node)session.getItem(srcPath) ;
       Node exoActionNodes = srcNode.getNode("exo:actions") ;
       Node actionNode = exoActionNodes.getNode(actionName) ;

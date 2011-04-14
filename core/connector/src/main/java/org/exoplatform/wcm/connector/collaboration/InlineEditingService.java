@@ -129,7 +129,7 @@ public class InlineEditingService implements ResourceContainer{
 		try {
 			SessionProvider sessionProvider = WCMCoreUtils.getUserSessionProvider();
 			RepositoryService repositoryService = (RepositoryService)ExoContainerContext.getCurrentContainer().getComponentInstanceOfType(RepositoryService.class);
-			ManageableRepository manageableRepository = repositoryService.getRepository(repositoryName);
+			ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
 			Session session = sessionProvider.getSession(workspaceName, manageableRepository);		    
 			try {
 				Node node = (Node)session.getNodeByUUID(nodeUIID);			    

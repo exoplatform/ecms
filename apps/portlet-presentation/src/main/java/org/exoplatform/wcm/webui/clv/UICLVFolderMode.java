@@ -117,7 +117,7 @@ public class UICLVFolderMode extends UICLVContainer {
         (folderPath != null) ? folderPath : preferences.getValue(UICLVPortlet.PREFERENCE_ITEM_PATH, null));
     //encoding
     String nPath  = new String(nodeLocation.getPath().getBytes("ISO-8859-1"), "UTF-8");
-    return wcmComposer.getContents(nodeLocation.getRepository(), Text.escapeIllegalJcrChars(nodeLocation.getWorkspace()),
+    return wcmComposer.getContents(Text.escapeIllegalJcrChars(nodeLocation.getWorkspace()),
         Text.escapeIllegalJcrChars(nPath), filters, WCMCoreUtils.getUserSessionProvider());
   }
   /**

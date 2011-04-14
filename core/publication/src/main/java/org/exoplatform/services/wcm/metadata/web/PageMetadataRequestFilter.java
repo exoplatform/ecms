@@ -133,7 +133,6 @@ public class PageMetadataRequestFilter implements Filter {
       return false;
     if(!parameter.matches(PCV_PARAMETER_REGX)) return false;
     int firstSlash = parameter.indexOf("/");
-    String repository = parameter.substring(0,firstSlash);
     int secondSlash = parameter.indexOf("/",firstSlash +1);
     String workspace = parameter.substring(firstSlash + 1, secondSlash);
     String nodeIdentifier = parameter.substring(secondSlash + 1);
@@ -141,7 +140,8 @@ public class PageMetadataRequestFilter implements Filter {
     SessionProvider sessionProvider =WCMCoreUtils.getSystemSessionProvider();
     Node node = null;
     try {
-      Session session = sessionProvider.getSession(workspace,repositoryService.getRepository(repository));
+      Session session = sessionProvider.getSession(workspace,
+                                                   repositoryService.getCurrentRepository());
       if(nodeIdentifier.indexOf("/")<0) {
         node = session.getNodeByUUID(nodeIdentifier);
       }else {

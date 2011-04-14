@@ -158,10 +158,9 @@ public class LiveLinkManagerServiceImpl implements LiveLinkManagerService {
       SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
       Session session = null;
       for (NodeLocation nodeLocation : nodeLocationCollection) {
-        String repository = nodeLocation.getRepository();
         String workspace = nodeLocation.getWorkspace();
         String path = nodeLocation.getPath();
-        ManageableRepository manageableRepository = repositoryService.getRepository(repository);
+        ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
         session = sessionProvider.getSession(workspace, manageableRepository);
         updateLinkStatus(session, "select * from exo:linkable where jcr:path like '" + path + "/%'");
       }

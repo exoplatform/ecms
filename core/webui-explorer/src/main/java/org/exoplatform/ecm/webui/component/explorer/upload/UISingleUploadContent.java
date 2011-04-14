@@ -102,9 +102,8 @@ public class UISingleUploadContent extends UIContainer {
       UISingleUploadContainer uiUploadContainer = uiUploadContent.getParent() ;
       MetadataService metadataService = uiUploadContent.getApplicationComponent(MetadataService.class) ;
       UIJCRExplorer uiExplorer = uiUploadContent.getAncestorOfType(UIJCRExplorer.class) ;
-      String repository = uiExplorer.getRepositoryName() ;
       String nodeType = event.getRequestContext().getRequestParameter(OBJECTID) ;
-      String template = metadataService.getMetadataTemplate(nodeType, true, repository) ;
+      String template = metadataService.getMetadataTemplate(nodeType, true) ;
       if(template == null || template.trim().length() == 0) {
         UIApplication uiApp = uiUploadContent.getAncestorOfType(UIApplication.class) ;
         Object[] args = {nodeType} ;

@@ -179,11 +179,10 @@ public class PageEventListenerDelegate {
     ManageableRepository repository = repositoryService.getCurrentRepository();
     NodeLocation nodeLocation = configurationService.getLivePortalsLocation(repository.getConfiguration().getName());
 
-    String repositoryName = nodeLocation.getRepository();
     String workspaceName = nodeLocation.getWorkspace();
     String path = nodeLocation.getPath();
     SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
-    Session session = sessionProvider.getSession(workspaceName, repositoryService.getRepository(repositoryName));
+    Session session = sessionProvider.getSession(workspaceName, repositoryService.getCurrentRepository());
 
     List<Node> listPublishedNode = new ArrayList<Node>();
     QueryManager queryManager = session.getWorkspace().getQueryManager();

@@ -81,20 +81,19 @@ public class UIJcrExplorerContainer extends UIContainer {
       RepositoryService rservice = getApplicationComponent(RepositoryService.class);
       String repoName = rservice.getCurrentRepository().getConfiguration().getName();
       ManageDriveService dservice = getApplicationComponent(ManageDriveService.class);
-      DriveData drive = dservice.getDriveByName(driveName, repoName);
+      DriveData drive = dservice.getDriveByName(driveName);
       String userId = Util.getPortalRequestContext().getRemoteUser();
       List<String> userRoles = Utils.getMemberships();
       if(!uiFEPortlet.canUseConfigDrive(repoName, driveName)) {
-        drive = getAncestorOfType(UIJCRExplorerPortlet.class).getUserDrive(repoName, "private");
+        drive = getAncestorOfType(UIJCRExplorerPortlet.class).getUserDrive("private");
       }
       UIApplication uiApp = getApplicationComponent(UIApplication.class);
       List<String> viewList = new ArrayList<String>();
       for (String role : userRoles) {
         for (String viewName : drive.getViews().split(",")) {
           if (!viewList.contains(viewName.trim())) {
-            Node viewNode =
-              getApplicationComponent(ManageViewService.class).getViewByName(viewName.trim(),
-                  repoName, SessionProviderFactory.createSystemProvider());
+            Node viewNode = getApplicationComponent(ManageViewService.class)
+                .getViewByName(viewName.trim(),SessionProviderFactory.createSystemProvider());
             String permiss = viewNode.getProperty("exo:accessPermissions").getString();
             if (permiss.contains("${userId}")) permiss = permiss.replace("${userId}", userId);
             String[] viewPermissions = permiss.split(",");

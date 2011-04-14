@@ -178,8 +178,7 @@ public class UIRenameForm extends UIForm implements UIPopupComponent {
                 Node refNode = pro.getParent();
                 if (refNode.hasProperty(RELATION_PROP)) {
                   refList.add(refNode);
-                  relationsService.removeRelation(refNode, uiRenameForm.renameNode_.getPath(),
-                      uiJCRExplorer.getRepositoryName());
+                  relationsService.removeRelation(refNode, uiRenameForm.renameNode_.getPath());
                   refNode.save();
                 }
               }
@@ -199,10 +198,7 @@ public class UIRenameForm extends UIForm implements UIPopupComponent {
           nodeSession.save();
           for(int i = 0; i < refList.size(); i ++) {
             Node addRef = refList.get(i);
-            relationsService.addRelation(addRef,
-                                         destPath,
-                                         nodeSession.getWorkspace().getName(),
-                                         uiJCRExplorer.getRepositoryName());
+            relationsService.addRelation(addRef, destPath, nodeSession.getWorkspace().getName());
             addRef.save();
           }
           Node destNode = (Node) nodeSession.getItem(destPath);

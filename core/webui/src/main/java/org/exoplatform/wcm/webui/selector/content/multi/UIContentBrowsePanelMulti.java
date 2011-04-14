@@ -125,7 +125,6 @@ public class UIContentBrowsePanelMulti extends UIContentBrowsePanel {
       String itemPaths = event.getRequestContext().getRequestParameter(OBJECTID);
       String iDriver = event.getRequestContext().getRequestParameter("driverName");
       String iPath = event.getRequestContext().getRequestParameter("currentPath");
-      String repoName;
       String[] locations = (iPath == null) ? null : iPath.split(":");
       if (iDriver != null && iDriver.length() > 0) {
         if (locations != null && locations.length > 2)
@@ -134,9 +133,7 @@ public class UIContentBrowsePanelMulti extends UIContentBrowsePanel {
                                                  locations[2],
                                                  WCMComposer.BASE_VERSION);
         if (node != null) {
-          repoName = ((ManageableRepository) node.getSession().getRepository()).getConfiguration()
-                                                                               .getName();
-          iPath = fixPath(iDriver, node.getPath(), repoName, contentBrowsePanelMulti);
+          iPath = fixPath(iDriver, node.getPath(), contentBrowsePanelMulti);
           contentBrowsePanelMulti.setInitPath(iDriver, iPath);
         } else {
           contentBrowsePanelMulti.setInitPath(iDriver, iPath);
@@ -151,13 +148,12 @@ public class UIContentBrowsePanelMulti extends UIContentBrowsePanel {
 
     private String fixPath(String driveName,
                            String path,
-                           String repository,
                            UIContentBrowsePanelMulti uiBrowser) throws Exception {
-      if (path == null || path.length() == 0 || repository == null || repository.length() == 0)
+      if (path == null || path.length() == 0)
         return "";
 
       ManageDriveService managerDriveService = uiBrowser.getApplicationComponent(ManageDriveService.class);
-      DriveData driveData = managerDriveService.getDriveByName(driveName, repository);
+      DriveData driveData = managerDriveService.getDriveByName(driveName);
       if (!path.startsWith(driveData.getHomePath()))
         return "";
       if ("/".equals(driveData.getHomePath()))

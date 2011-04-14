@@ -186,7 +186,7 @@ public class UITask extends UIForm implements UISelectable {
     if(repository == null) {
       repository = jcrService.getDefaultRepository().getConfiguration().getName();
     }
-    ManageableRepository mRepository = jcrService.getRepository(repository);
+    ManageableRepository mRepository = jcrService.getCurrentRepository();
     SessionProviderService sessionProviderService = Util.getUIPortal().getApplicationComponent(SessionProviderService.class);
     SessionProvider sessionProvider = sessionProviderService.getSessionProvider(null);
     List variables = form.getVariables();
@@ -521,14 +521,14 @@ public class UITask extends UIForm implements UISelectable {
           String transition = (String) attributes.get("transition");
           try {
             if(nodePath != null) {
-              Session session = sessionProvider.getSession(srcWorkspace, repositoryService.getRepository(repository));
+              Session session = sessionProvider.getSession(srcWorkspace, repositoryService.getCurrentRepository());
               Node node = (Node)session.getItem(nodePath);
               if(node.isLocked() && node.hasProperty(DEST_PATH) && node.hasProperty(DEST_WORKSPACE)) {
                 String actionName = (String)variablesForService.get("actionName");
                 Node actionNode = uiTask.getAction((Node)session.getItem(srcPath), actionName);
                 String destPath = actionNode.getProperty(DEST_PATH).getString() + nodePath.substring(nodePath.lastIndexOf("/"));
                 String destWorkspace = actionNode.getProperty(DEST_WORKSPACE).getString();
-                Session desSession = sessionProvider.getSession(destWorkspace, repositoryService.getRepository(repository));
+                Session desSession = sessionProvider.getSession(destWorkspace, repositoryService.getCurrentRepository());
                 Node destNode = (Node)desSession.getItem(destPath);
                 LockUtil.changeLockToken(nodePath, destNode);
               }

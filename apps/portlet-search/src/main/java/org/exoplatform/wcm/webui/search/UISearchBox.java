@@ -13,7 +13,6 @@ package org.exoplatform.wcm.webui.search;
 
 import java.net.URLEncoder;
 
-import javax.portlet.PortletPreferences;
 import javax.servlet.http.HttpServletRequest;
 
 import org.exoplatform.ecm.resolver.JCRResourceResolver;
@@ -23,7 +22,6 @@ import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.resolver.ResourceResolver;
 import org.exoplatform.services.cms.impl.DMSConfiguration;
 import org.exoplatform.webui.application.WebuiRequestContext;
-import org.exoplatform.webui.application.portlet.PortletRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
@@ -83,33 +81,32 @@ public class UISearchBox extends UIForm {
     return templatePath;
   }
 
-  /**
-   * Gets the repository.
-   *
-   * @return the repository
-   */
-  private String getRepository() {
-    PortletRequestContext portletRequestContext = WebuiRequestContext.getCurrentInstance();
-    PortletPreferences portletPreferences = portletRequestContext.getRequest().getPreferences();
-    return portletPreferences.getValue(UIWCMSearchPortlet.REPOSITORY, null);
-  }
-
   /*
    * (non-Javadoc)
    * @see
    * org.exoplatform.webui.core.UIComponent#getTemplateResourceResolver(org.
    * exoplatform.webui.application.WebuiRequestContext, java.lang.String)
    */
+  @Deprecated
   public ResourceResolver getTemplateResourceResolver(WebuiRequestContext context, String template) {
     try {
-      String repository = getRepository();
       DMSConfiguration dmsConfiguration = getApplicationComponent(DMSConfiguration.class);
       String workspace = dmsConfiguration.getConfig().getSystemWorkspace();
-      return new JCRResourceResolver(repository, workspace, "exo:templateFile");
+      return new JCRResourceResolver(workspace);
     } catch (Exception e) {
       return null;
     }
   }
+  
+  public ResourceResolver getTemplateResourceResolver() {
+    try {
+      DMSConfiguration dmsConfiguration = getApplicationComponent(DMSConfiguration.class);
+      String workspace = dmsConfiguration.getConfig().getSystemWorkspace();
+      return new JCRResourceResolver(workspace);
+    } catch (Exception e) {
+      return null;
+    }
+  }  
 
   /**
    * The listener interface for receiving searchAction events. The class that is

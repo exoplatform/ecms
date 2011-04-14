@@ -313,7 +313,6 @@ public class UIUploadForm extends UIForm implements UIPopupComponent, UISelectab
   public void doUpload(Event event, boolean isKeepFile) throws Exception {
     UIApplication uiApp = getAncestorOfType(UIApplication.class) ;
     UIJCRExplorer uiExplorer = getAncestorOfType(UIJCRExplorer.class) ;
-    String repository = uiExplorer.getRepositoryName();
 
     UIUploadManager uiManager = getParent();
     UIUploadContainer uiUploadContainer = uiManager.getChild(UIUploadContainer.class);
@@ -443,7 +442,7 @@ public class UIUploadForm extends UIForm implements UIPopupComponent, UISelectab
                 {
                   taxonomyTree = categoryPath.substring(0, categoryPath.indexOf("/"));
                   taxonomyPath = categoryPath.substring(categoryPath.indexOf("/") + 1);
-                  taxonomyService.getTaxonomyTree(repository, taxonomyTree).hasNode(taxonomyPath);
+                  taxonomyService.getTaxonomyTree(taxonomyTree).hasNode(taxonomyPath);
                 }
                 else
                 {
@@ -506,7 +505,7 @@ public class UIUploadForm extends UIForm implements UIPopupComponent, UISelectab
                 try {
                   newNode = selectedNode.getSession().getNodeByUUID(newNodeUUID);
                 } catch(ItemNotFoundException e) {
-                  newNode = Utils.findNodeByUUID(repository, newNodeUUID);
+                  newNode = Utils.findNodeByUUID(newNodeUUID);
                 }
                 if (newNode != null) {
                   for (String categoryPath : listTaxonomyNameNew) {
@@ -602,7 +601,7 @@ public class UIUploadForm extends UIForm implements UIPopupComponent, UISelectab
               try {
                 newNode = selectedNode.getSession().getNodeByUUID(newNodeUUID);
               } catch(ItemNotFoundException e) {
-                newNode = Utils.findNodeByUUID(repository, newNodeUUID);
+                newNode = Utils.findNodeByUUID(newNodeUUID);
               }
             } else {
               newNode = selectedNode.getNode(name) ;
@@ -852,7 +851,7 @@ public class UIUploadForm extends UIForm implements UIPopupComponent, UISelectab
           uiUploadManager.createUIComponent(UIOneTaxonomySelector.class, null, null);
         uiPopupWindow.setUIComponent(uiOneTaxonomySelector);
         TaxonomyService taxonomyService = uiUploadForm.getApplicationComponent(TaxonomyService.class);
-        List<Node> lstTaxonomyTree = taxonomyService.getAllTaxonomyTrees(repository);
+        List<Node> lstTaxonomyTree = taxonomyService.getAllTaxonomyTrees();
         if (lstTaxonomyTree.size() == 0) throw new AccessDeniedException();
         String workspaceName = lstTaxonomyTree.get(0).getSession().getWorkspace().getName();
         uiOneTaxonomySelector.setIsDisable(workspaceName, false);

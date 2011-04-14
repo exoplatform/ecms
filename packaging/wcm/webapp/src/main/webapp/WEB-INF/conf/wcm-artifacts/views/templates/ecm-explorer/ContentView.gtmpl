@@ -16,6 +16,7 @@
   import org.exoplatform.ecm.webui.component.explorer.DocumentProviderUtils;
   import org.exoplatform.ecm.jcr.model.Preference;
   import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
+  import org.exoplatform.services.jcr.RepositoryService;
   
   import javax.jcr.Value;
   import javax.jcr.PathNotFoundException;
@@ -204,7 +205,8 @@
       <%
         String serverUrl = uicomponent.getWebDAVServerPrefix();
         String portalName = uicomponent.getPortalName() ;
-        String repository = uicomponent.getRepository();
+        RepositoryService rService = uicomponent.getApplicationComponent(RepositoryService.class) ;
+        String repository = rService.getCurrentRepository().getConfiguration().getName();
         String restContextName = Utils.getRestContextName(portalName);
         WCMPublicationService wcmPublicationService = uicomponent.getApplicationComponent(WCMPublicationService.class);
         def permlink;

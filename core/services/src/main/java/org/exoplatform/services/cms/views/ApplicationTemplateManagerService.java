@@ -61,7 +61,7 @@ public interface ApplicationTemplateManagerService {
    * @throws Exception the exception
    */
   public List<String> getAllManagedPortletName(String repository) throws Exception;
-
+  
   /**
    * Retrieves the templates node by application.
    *
@@ -73,9 +73,22 @@ public interface ApplicationTemplateManagerService {
    *
    * @throws Exception the exception
    */
+  @Deprecated
   public List<Node> getTemplatesByApplication(String repository,
                                               String portletName,
                                               SessionProvider provider) throws Exception;
+  
+  /**
+   * Retrieves the templates node by application.
+   *
+   * @param portletName the portlet name
+   * @param provider the provider
+   *
+   * @return the templates by application
+   *
+   * @throws Exception the exception
+   */
+  public List<Node> getTemplatesByApplication(String portletName, SessionProvider provider) throws Exception;
 
   /**
    * Retrieves the templates node by category.
@@ -89,8 +102,24 @@ public interface ApplicationTemplateManagerService {
    *
    * @throws Exception the exception
    */
+  @Deprecated
   public List<Node> getTemplatesByCategory(String repository,
                                            String portletName,
+                                           String category,
+                                           SessionProvider sessionProvider) throws Exception;
+  
+  /**
+   * Retrieves the templates node by category.
+   *
+   * @param portletName the portlet name
+   * @param category the category
+   * @param sessionProvider the session provider
+   *
+   * @return the templates by category
+   *
+   * @throws Exception the exception
+   */
+  public List<Node> getTemplatesByCategory(String portletName,
                                            String category,
                                            SessionProvider sessionProvider) throws Exception;
 
@@ -107,8 +136,26 @@ public interface ApplicationTemplateManagerService {
    *
    * @throws Exception the exception
    */
+  @Deprecated
   public Node getTemplateByName(String repository,
                                 String portletName,
+                                String category,
+                                String templateName,
+                                SessionProvider sessionProvider) throws Exception;
+  
+  /**
+   * Retrieves the template by name.
+   *
+   * @param portletName the portlet name
+   * @param category the category
+   * @param templateName the template name
+   * @param sessionProvider the session provider
+   *
+   * @return the template by name
+   *
+   * @throws Exception the exception
+   */
+  public Node getTemplateByName(String portletName,
                                 String category,
                                 String templateName,
                                 SessionProvider sessionProvider) throws Exception;
@@ -124,9 +171,20 @@ public interface ApplicationTemplateManagerService {
    *
    * @throws Exception the exception
    */
+  @Deprecated
   public Node getTemplateByPath(String repository,
                                 String templatePath,
                                 SessionProvider sessionProvider) throws Exception;
+  
+  /**
+   * Gets the template by path.
+   * 
+   * @param templatePath the template path
+   * @param sessionProvider the session provider
+   * @return the template by path
+   * @throws Exception the exception
+   */
+  public Node getTemplateByPath(String templatePath, SessionProvider sessionProvider) throws Exception;
 
   /**
    * Adds the template.
@@ -149,8 +207,24 @@ public interface ApplicationTemplateManagerService {
    *
    * @throws Exception the exception
    */
+  @Deprecated
   public void removeTemplate(String repository,
                              String portletName,
+                             String catgory,
+                             String templateName,
+                             SessionProvider sessionProvider) throws Exception;
+  
+  /**
+   * Removes the template.
+   *
+   * @param portletName the portlet name
+   * @param catgory the catgory
+   * @param templateName the template name
+   * @param sessionProvider the session provider
+   *
+   * @throws Exception the exception
+   */
+  public void removeTemplate(String portletName,
                              String catgory,
                              String templateName,
                              SessionProvider sessionProvider) throws Exception;

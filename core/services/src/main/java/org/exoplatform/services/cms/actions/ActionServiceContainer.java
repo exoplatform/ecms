@@ -126,7 +126,7 @@ public interface ActionServiceContainer {
    * @throws Exception
    */
   public void removeAction(Node node, String repository) throws Exception;
-
+  
   /**
    * Remove all relative node of current node with node type = exo:actionable
    * @param node        current node
@@ -145,7 +145,18 @@ public interface ActionServiceContainer {
    * @param mappings    value of property for adding to new node
    * @throws Exception
    */
+  @Deprecated
   public void addAction(Node node, String repository, String type, Map mappings) throws Exception;
+  
+  /**
+   * Add mixintype = exo:actionable to current node
+   * Add new node to current node with nodetype = type
+   * @param node        current node
+   * @param type        nodetype name
+   * @param mappings    value of property for adding to new node
+   * @throws Exception
+   */
+  public void addAction(Node node, String type, Map mappings) throws Exception;  
 
   /**
    * Add mixintype = exo:actionable to current node
@@ -159,6 +170,7 @@ public interface ActionServiceContainer {
    * @param mappings    value of property for adding to new node
    * @throws Exception
    */
+  @Deprecated
   public void addAction(Node node,
                         String repository,
                         String type,
@@ -166,6 +178,24 @@ public interface ActionServiceContainer {
                         String[] uuid,
                         String[] nodeTypeNames,
                         Map mappings) throws Exception;
+  
+  /**
+   * Add mixintype = exo:actionable to current node
+   * Add new node to current node with nodetype = type
+   * @param node        current node
+   * @param type        nodetype name
+   * @param isDeep      affect to child node of node
+   * @param uuid        affect only to parent node of event having given uuid
+   * @param nodeTypeNames        affect to parent node of event having nodetype in nodeTypeNames
+   * @param mappings    value of property for adding to new node
+   * @throws Exception
+   */
+  public void addAction(Node node,
+                        String type,
+                        boolean isDeep,
+                        String[] uuid,
+                        String[] nodeTypeNames,
+                        Map mappings) throws Exception;  
 
   /**
    * Execute action following userId, node, variables, repository
@@ -206,6 +236,13 @@ public interface ActionServiceContainer {
    * @param repository   repository name
    * @throws Exception
    */
+  @Deprecated
   public void init(String repository) throws Exception;
+  
+  /**
+   * init service with repository name
+   * @throws Exception
+   */
+  public void init() throws Exception;  
 
 }

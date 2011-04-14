@@ -162,11 +162,10 @@ public class NavigationEventListenerDelegate {
     NodeLocation nodeLocation = wcmConfigurationService.getLivePortalsLocation(repository.getConfiguration().getName());
     String portletName = wcmConfigurationService.getRuntimeContextParam(WCMConfigurationService.SCV_PORTLET);
 
-    String repositoryName = nodeLocation.getRepository();
     String workspaceName = nodeLocation.getWorkspace();
     String path = nodeLocation.getPath();
     SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
-    Session session = sessionProvider.getSession(workspaceName, repositoryService.getRepository(repositoryName));
+    Session session = sessionProvider.getSession(workspaceName, repositoryService.getCurrentRepository());
 
     QueryManager queryManager = session.getWorkspace().getQueryManager();
     Query query = queryManager.createQuery("select * from " + plugin.getLifecycleType()

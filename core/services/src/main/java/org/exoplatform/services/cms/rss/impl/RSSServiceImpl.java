@@ -149,7 +149,6 @@ public class RSSServiceImpl implements RSSService{
     String rssUrl = (String) context.get(URL) ;
     String title = (String) context.get(TITLE) ;
     String feedLink = (String) context.get(LINK) ;
-    String repository = (String) context.get("repository") ;
     Date pubDate ;
     try{
       pubDate = ((GregorianCalendar)context.get(PUBDATE)).getTime() ;
@@ -161,7 +160,7 @@ public class RSSServiceImpl implements RSSService{
     if(feedTitle == null || feedTitle.length() == 0) feedTitle = actionName ;
     Session session = null;
     try {
-      session = repositoryService_.getRepository(repository).getSystemSession(srcWorkspace);
+      session = repositoryService_.getCurrentRepository().getSystemSession(srcWorkspace);
       session.refresh(true) ;
       QueryManager queryManager = session.getWorkspace().getQueryManager();
       Query query = queryManager.createQuery(queryPath, Query.SQL);
@@ -216,7 +215,7 @@ public class RSSServiceImpl implements RSSService{
       SyndFeedOutput output = new SyndFeedOutput();
       String feedXML = output.outputString(feed);
       feedXML = StringUtils.replace(feedXML,"&amp;","&");
-      storeXML(feedXML, storePath, feedName, repository);
+      storeXML(feedXML, storePath, feedName);
     } catch (Exception e) {
       LOG.error("Unexpected error", e);
     } finally {
@@ -261,11 +260,10 @@ public class RSSServiceImpl implements RSSService{
       String rssVersion = (String) context.get(RSS_VERSION) ;
       String queryPath = (String) context.get(QUERY_PATH) ;
       String rssUrl = (String) context.get(URL) ;
-      String repository = (String) context.get("repository") ;
       storePath = storePath + "/" + feedType ;
       if(feedName == null || feedName.length() == 0) feedName = actionName ;
       if(feedTitle == null || feedTitle.length() == 0) feedTitle = actionName ;
-      session = repositoryService_.getRepository(repository).getSystemSession(srcWorkspace);
+      session = repositoryService_.getCurrentRepository().getSystemSession(srcWorkspace);
       session.refresh(true) ;
       QueryManager queryManager = session.getWorkspace().getQueryManager();
       Query query = queryManager.createQuery(queryPath, Query.SQL);
@@ -316,10 +314,6 @@ public class RSSServiceImpl implements RSSService{
       List<SyndEntry> entries = new ArrayList<SyndEntry>();
       SyndEntry entry;
       SyndContent description;
-      ExoContainer container = ExoContainerContext.getCurrentContainer() ;
-      PortalContainerInfo containerInfo =
-        (PortalContainerInfo)container.getComponentInstanceOfType(PortalContainerInfo.class) ;
-      String portalName = containerInfo.getContainerName() ;
       MimeTypeResolver resolver = new MimeTypeResolver();
       NodeIterator iter = queryResult.getNodes() ;
       while (iter.hasNext()) {
@@ -409,7 +403,7 @@ public class RSSServiceImpl implements RSSService{
       feed.setEncoding("UTF-8") ;
       SyndFeedOutput output = new SyndFeedOutput();
       String feedXML = output.outputString(feed);
-      storeXML(feedXML, storePath, feedName, repository);
+      storeXML(feedXML, storePath, feedName);
     }catch(Exception e) {
       LOG.error("Unexpected error", e);
     } finally {
@@ -424,13 +418,11 @@ public class RSSServiceImpl implements RSSService{
    *                          The path is used to store RSS
    * @param rssNodeName       String
    *                          The name of specified node is used to store RSS
-   * @param repository        String
-   *                          The name of repository
    */
-  private void storeXML(String feedXML, String rssStoredPath, String rssNodeName, String repository){
+  private void storeXML(String feedXML, String rssStoredPath, String rssNodeName){
     Session session = null;
     try {
-      ManageableRepository manageableRepository = repositoryService_.getRepository(repository) ;
+      ManageableRepository manageableRepository = repositoryService_.getCurrentRepository();
       session = manageableRepository.getSystemSession(manageableRepository.getConfiguration().getDefaultWorkspaceName());
       Node rootNode = session.getRootNode();
       String[] arrayPaths = rssStoredPath.split("/") ;

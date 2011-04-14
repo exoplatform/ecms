@@ -77,15 +77,6 @@ public class UISearchPageLayout extends UIContainer {
   }
 
   /**
-   * Gets the repository.
-   *
-   * @return the repository
-   */
-  private String getRepository() {
-    return getPortletPreference().getValue(UIWCMSearchPortlet.REPOSITORY, null);
-  }
-
-  /**
    * Gets the template path.
    *
    * @param templateType the template type
@@ -114,10 +105,9 @@ public class UISearchPageLayout extends UIContainer {
    */
   public ResourceResolver getTemplateResourceResolver(WebuiRequestContext context, String template) {
     try {
-      String repository = getRepository();
       DMSConfiguration dmsConfiguration = getApplicationComponent(DMSConfiguration.class);
       String workspace = dmsConfiguration.getConfig().getSystemWorkspace();
-      return new JCRResourceResolver(repository, workspace, "exo:templateFile");
+      return new JCRResourceResolver(workspace);
     } catch (Exception e) {
       return null;
     }

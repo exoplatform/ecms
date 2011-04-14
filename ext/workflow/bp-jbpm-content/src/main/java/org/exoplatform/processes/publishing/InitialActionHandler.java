@@ -52,13 +52,12 @@ public class InitialActionHandler implements ActionHandler {
     String nodePath = (String) context.getVariable("nodePath");
     String srcPath = (String) context.getVariable("srcPath");
     String srcWorkspace = (String) context.getVariable("srcWorkspace");
-    String repository = (String) context.getVariable("repository");
     ContextInstance contextInstance = context.getContextInstance();
     contextInstance.setVariable("exocontainer", ((PortalContainer)ExoContainerContext.getCurrentContainer()).getName());
     ProcessUtil.setCurrentLocation(context,srcWorkspace,nodePath);
     RepositoryService repositoryService = ProcessUtil.getService(context, RepositoryService.class);
     ActionServiceContainer actionServiceContainer = ProcessUtil.getService(context, ActionServiceContainer.class);
-    ManageableRepository manageableRepository = repositoryService.getRepository(repository);
+    ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
     Session session = manageableRepository.getSystemSession(srcWorkspace);
     Node actionableNode = (Node) session.getItem(srcPath);
     if(!actionableNode.isNodeType("exo:actionable")) {

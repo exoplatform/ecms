@@ -203,9 +203,8 @@ public class UIPCLVConfig extends UIForm implements UISelectable {
     List<SelectItemOption<String>> formViewerTemplateList = getTemplateList(PORTLET_NAME, FORM_VIEW_TEMPLATE_CATEGORY);
     List<SelectItemOption<String>> paginatorTemplateList = getTemplateList(PORTLET_NAME, PAGINATOR_TEMPLATE_CATEGORY);
 
-    String preferenceRepository = portletPreferences.getValue(PREFERENCE_REPOSITORY, "");
     String preferenceTreeName = portletPreferences.getValue(PREFERENCE_TREE_NAME, "");
-    List<SelectItemOption<String>> trees = getTaxonomyTrees(preferenceRepository);
+    List<SelectItemOption<String>> trees = getTaxonomyTrees();
     UIFormSelectBox treeNameFormSelectBox = new UIFormSelectBox(TREE_NAME_FORM_SELECTBOX, TREE_NAME_FORM_SELECTBOX, trees);
     treeNameFormSelectBox.setValue(preferenceTreeName);
 
@@ -319,10 +318,10 @@ public class UIPCLVConfig extends UIForm implements UISelectable {
    *
    * @throws Exception the exception
    */
-  private List<SelectItemOption<String>> getTaxonomyTrees(String repository) throws Exception {
+  private List<SelectItemOption<String>> getTaxonomyTrees() throws Exception {
     TaxonomyService taxonomyService = getApplicationComponent(TaxonomyService.class);
     LivePortalManagerService livePortalManagerService = getApplicationComponent(LivePortalManagerService.class);
-    List<Node> taxonomyNodes = taxonomyService.getAllTaxonomyTrees(repository);
+    List<Node> taxonomyNodes = taxonomyService.getAllTaxonomyTrees();
     List<SelectItemOption<String>> taxonomyTrees = new ArrayList<SelectItemOption<String>>();
     for(Node taxonomyNode : taxonomyNodes) {
       Node portalNode = livePortalManagerService.getLivePortalByChild(taxonomyNode);
@@ -354,11 +353,7 @@ public class UIPCLVConfig extends UIForm implements UISelectable {
   private List<SelectItemOption<String>> getTemplateList(String portletName, String category) throws Exception {
     List<SelectItemOption<String>> templateOptionList = new ArrayList<SelectItemOption<String>>();
     ApplicationTemplateManagerService templateManagerService = getApplicationComponent(ApplicationTemplateManagerService.class);
-    RepositoryService repositoryService = getApplicationComponent(RepositoryService.class);
-    ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
-    String repository = manageableRepository.getConfiguration().getName();
-    List<Node> templateNodeList = templateManagerService.getTemplatesByCategory(repository,
-                                                                                portletName,
+    List<Node> templateNodeList = templateManagerService.getTemplatesByCategory(portletName,
                                                                                 category,
                                                                                 Utils.getSessionProvider());
     for (Node templateNode : templateNodeList) {

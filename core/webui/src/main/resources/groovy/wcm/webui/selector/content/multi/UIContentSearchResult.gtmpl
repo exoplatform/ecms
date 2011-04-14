@@ -9,13 +9,15 @@
   import org.exoplatform.services.ecm.publication.PublicationService;
   import org.exoplatform.services.wcm.publication.WCMPublicationService;
   import org.exoplatform.services.wcm.core.NodeLocation;
+  import org.exoplatform.services.jcr.RepositoryService;
 
   String[] beanFields =  uicomponent.getBeanFields();  
   String[] beanActions =  uicomponent.getBeanActions();
   UIComponent uiParent = uicomponent.getParent() ;
   UIForm uiForm = uicomponent.getAncestorOfType(UIForm.class);
   DateFormat dateFormat = uicomponent.getDateFormat();
-  String repositoryName = uicomponent.getRepository();  
+  RepositoryService rService = uicomponent.getApplicationComponent(RepositoryService.class);
+  String repositoryName = rService.getCurrentRepository().getConfiguration().getName();  
 %>
 <div id="$uicomponent.id">
   <table class="UIGrid" cellspacing="0">

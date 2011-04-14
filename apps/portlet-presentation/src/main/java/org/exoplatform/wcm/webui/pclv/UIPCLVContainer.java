@@ -34,6 +34,7 @@ import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.resolver.ResourceResolver;
 import org.exoplatform.services.cms.impl.DMSConfiguration;
 import org.exoplatform.services.cms.taxonomy.TaxonomyService;
+import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.wcm.publication.WCMComposer;
 import org.exoplatform.services.wcm.utils.PaginatedNodeIterator;
 import org.exoplatform.wcm.webui.Utils;
@@ -142,7 +143,9 @@ public class UIPCLVContainer extends UIContainer {
     PortletRequestContext portletRequestContext = (PortletRequestContext) WebuiRequestContext.getCurrentInstance();
     PortletRequest portletRequest = portletRequestContext.getRequest();
     PortletPreferences portletPreferences = portletRequest.getPreferences();
-    String preferenceRepository = portletPreferences.getValue(UIPCLVPortlet.PREFERENCE_REPOSITORY, "");
+    String preferenceRepository = getApplicationComponent(RepositoryService.class).getCurrentRepository()
+                                                                                  .getConfiguration()
+                                                                                  .getName();
     String preferenceTreeName = portletPreferences.getValue(UIPCLVPortlet.PREFERENCE_TREE_NAME, "");
     TaxonomyService taxonomyService = getApplicationComponent(TaxonomyService.class);
     String categoryPath = null;
@@ -168,7 +171,7 @@ public class UIPCLVContainer extends UIContainer {
 
     Node treeNode = null;
     try {
-      treeNode = taxonomyService.getTaxonomyTree(preferenceRepository, preferenceTreeName);
+      treeNode = taxonomyService.getTaxonomyTree(preferenceTreeName);
     } catch(RepositoryException ex){
       //return;
     }
@@ -266,13 +269,10 @@ public class UIPCLVContainer extends UIContainer {
    * @throws Exception the exception
    */
   public ResourceResolver getTemplateResourceResolver() throws Exception {
-    PortletRequestContext portletRequestContext = WebuiRequestContext.getCurrentInstance();
-    PortletPreferences references = portletRequestContext.getRequest().getPreferences();
-    String repository = references.getValue(UIPCLVPortlet.PREFERENCE_REPOSITORY, null);
     DMSConfiguration dmsConfiguration = Utils.getService(DMSConfiguration.class);
     String workspace = dmsConfiguration.getConfig().getSystemWorkspace();
 
-    return new JCRResourceResolver(repository, workspace, "exo:templateFile");
+    return new JCRResourceResolver(workspace);
   }
 
   /**
@@ -341,7 +341,6 @@ public class UIPCLVContainer extends UIContainer {
    * @throws Exception the exception
    */
   private List<Node> getListSymlinkNode(PortletPreferences portletPreferences, String categoryPath) throws Exception {
-    String repository = portletPreferences.getValue(UIPCLVPortlet.REPOSITORY, "");
     String workspace = portletPreferences.getValue(UIPCLVPortlet.WORKSPACE, "");
     String orderType = portletPreferences.getValue(UIPCLVPortlet.ORDER_TYPE, "");
     String orderBy = portletPreferences.getValue(UIPCLVPortlet.ORDER_BY, "");
@@ -353,8 +352,7 @@ public class UIPCLVContainer extends UIContainer {
     filters.put(WCMComposer.FILTER_ORDER_BY, orderBy);
     filters.put(WCMComposer.FILTER_ORDER_TYPE, orderType);
     filters.put(WCMComposer.FILTER_LANGUAGE, Util.getPortalRequestContext().getLocale().getLanguage());
-    List<Node> nodes = wcmComposer.getContents(repository,
-                                               workspace,
+    List<Node> nodes = wcmComposer.getContents(workspace,
                                                categoryPath,
                                                filters,
                                                Utils.getSessionProvider());

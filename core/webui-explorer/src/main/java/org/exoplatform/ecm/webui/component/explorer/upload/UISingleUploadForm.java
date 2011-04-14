@@ -235,7 +235,6 @@ public class UISingleUploadForm extends UIForm implements UIPopupComponent, UISe
       UISingleUploadForm uiForm = event.getSource();
       UIApplication uiApp = uiForm.getAncestorOfType(UIApplication.class) ;
       UIJCRExplorer uiExplorer = uiForm.getAncestorOfType(UIJCRExplorer.class) ;
-      String repository = uiExplorer.getRepositoryName();
       UIFormUploadInput input = (UIFormUploadInput)uiForm.getUIInput(FIELD_UPLOAD);
       CmsService cmsService = uiForm.getApplicationComponent(CmsService.class) ;
       TaxonomyService taxonomyService = uiForm.getApplicationComponent(TaxonomyService.class);
@@ -300,7 +299,7 @@ public class UISingleUploadForm extends UIForm implements UIPopupComponent, UISe
           if (categoryPath.startsWith("/")) categoryPath = categoryPath.substring(1);
           taxonomyTree = categoryPath.substring(0, categoryPath.indexOf("/"));
           taxonomyPath = categoryPath.substring(categoryPath.indexOf("/") + 1);
-          taxonomyService.getTaxonomyTree(repository, taxonomyTree).hasNode(taxonomyPath);
+          taxonomyService.getTaxonomyTree(taxonomyTree).hasNode(taxonomyPath);
         } catch (ItemNotFoundException e) {
           uiApp.addMessage(new ApplicationMessage("UISelectedCategoriesGrid.msg.non-categories", null,
               ApplicationMessage.WARNING)) ;
@@ -389,7 +388,7 @@ public class UISingleUploadForm extends UIForm implements UIPopupComponent, UISe
               try {
                 newNode = selectedNode.getSession().getNodeByUUID(newNodeUUID);
               } catch(ItemNotFoundException e) {
-                newNode = Utils.findNodeByUUID(repository, newNodeUUID);
+                newNode = Utils.findNodeByUUID(newNodeUUID);
               }
               if (newNode != null) {
                 for (String categoryPath : listTaxonomyNameNew) {
@@ -458,7 +457,7 @@ public class UISingleUploadForm extends UIForm implements UIPopupComponent, UISe
             try {
               newNode = selectedNode.getSession().getNodeByUUID(newNodeUUID);
             } catch(ItemNotFoundException e) {
-              newNode = Utils.findNodeByUUID(repository, newNodeUUID);
+              newNode = Utils.findNodeByUUID(newNodeUUID);
             }
           } else {
             newNode = selectedNode.getNode(name) ;

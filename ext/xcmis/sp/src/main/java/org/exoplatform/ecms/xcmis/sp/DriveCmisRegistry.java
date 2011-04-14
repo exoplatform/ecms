@@ -151,7 +151,7 @@ public class DriveCmisRegistry extends JcrCmisRegistry
       List<DriveData> availableDrives = null;
       try
       {
-         availableDrives = driveService.getDriveByUserRoles(repository, userId, memberships);
+         availableDrives = driveService.getDriveByUserRoles(userId, memberships);
       }
       catch (Exception e)
       {

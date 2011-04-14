@@ -145,7 +145,6 @@ public class UITaggingForm extends UIForm {
                                                                      getStrValue(tagScope,
                                                                                  currentNode),
                                                                      currentNode,
-                                                                     null,
                                                                      workspace)) {
       linkedTagSet.add(tag.getName());
     }
@@ -177,17 +176,15 @@ public class UITaggingForm extends UIForm {
 
   public List<String> getAllTagNames() throws Exception {
     ExoContainer container = ExoContainerContext.getCurrentContainer();
-    String repository = getAncestorOfType(UIJCRExplorer.class).getRepositoryName();
     RepositoryService repositoryService = (RepositoryService) container.getComponentInstanceOfType(RepositoryService.class);
-    ManageableRepository manageableRepo = repositoryService.getRepository(repository);
+    ManageableRepository manageableRepo = repositoryService.getCurrentRepository();
     String workspace = manageableRepo.getConfiguration().getDefaultWorkspaceName();
     NewFolksonomyService folksonomyService = getApplicationComponent(NewFolksonomyService.class);
 
     String tagScope = this.getUIFormSelectBox(TAG_SCOPES).getValue();
     Node currentNode = getAncestorOfType(UIJCRExplorer.class).getCurrentNode();
 
-    return folksonomyService.getAllTagNames(repository,
-                                            workspace,
+    return folksonomyService.getAllTagNames(workspace,
                                             getIntValue(tagScope),
                                             getStrValue(tagScope, currentNode));
   }
@@ -220,7 +217,6 @@ public class UITaggingForm extends UIForm {
     public void execute(Event<UITaggingForm> event) throws Exception {
       UITaggingForm uiForm = event.getSource();
       UIApplication uiApp = uiForm.getAncestorOfType(UIApplication.class);
-      String repository = uiForm.getAncestorOfType(UIJCRExplorer.class).getRepositoryName();
       String workspace = uiForm.getAncestorOfType(UIJCRExplorer.class)
                                .getRepository()
                                .getConfiguration()
@@ -295,7 +291,6 @@ public class UITaggingForm extends UIForm {
                                                                                uiForm.getStrValue(tagScope,
                                                                                                   currentNode),
                                                                                uiExplorer.getCurrentNode(),
-                                                                               repository,
                                                                                workspace);
       for (Node tag : tagList) {
         for (String t : fitlerTagNames) {
@@ -311,7 +306,7 @@ public class UITaggingForm extends UIForm {
       }
       // String tagScope =
       // uiForm.getChild(UIFormInputSetWithAction.class).getChild(UIFormSelectBox.class).getValue();
-      addTagToNode(tagScope, currentNode, fitlerTagNames, repository, uiForm);
+      addTagToNode(tagScope, currentNode, fitlerTagNames, uiForm);
       uiForm.activate();
 
       Preference preferences = uiExplorer.getPreference();
@@ -326,13 +321,12 @@ public class UITaggingForm extends UIForm {
     private void addTagToNode(String scope,
                               Node currentNode,
                               String[] tagNames,
-                              String repository,
                               UITaggingForm uiForm) throws Exception {
 
       ExoContainer container = ExoContainerContext.getCurrentContainer();
       NewFolksonomyService newFolksonomyService = uiForm.getApplicationComponent(NewFolksonomyService.class);
       RepositoryService repositoryService = (RepositoryService) container.getComponentInstanceOfType(RepositoryService.class);
-      ManageableRepository manageableRepo = repositoryService.getRepository(repository);
+      ManageableRepository manageableRepo = repositoryService.getCurrentRepository();
       NodeHierarchyCreator nodeHierarchyCreator = uiForm.getApplicationComponent(NodeHierarchyCreator.class);
       String workspace = manageableRepo.getConfiguration().getDefaultWorkspaceName();
       String[] roles = Utils.getGroups().toArray(new String[] {});
@@ -342,16 +336,15 @@ public class UITaggingForm extends UIForm {
         newFolksonomyService.addPublicTag(publicTagNodePath,
                                           tagNames,
                                           currentNode,
-                                          repository,
                                           workspace);
       // else if (SITE.equals(scope))
       // newFolksonomyService.addSiteTag(siteName, treePath, tagNames,
       // currentNode, repository, workspace);
       else if (Utils.GROUP.equals(scope))
-        newFolksonomyService.addGroupsTag(tagNames, currentNode, repository, workspace, roles);
+        newFolksonomyService.addGroupsTag(tagNames, currentNode, workspace, roles);
       else if (Utils.PRIVATE.equals(scope)) {
         String userName = currentNode.getSession().getUserID();
-        newFolksonomyService.addPrivateTag(tagNames, currentNode, repository, workspace, userName);
+        newFolksonomyService.addPrivateTag(tagNames, currentNode, workspace, userName);
       }
     }
   }
@@ -412,36 +405,35 @@ public class UITaggingForm extends UIForm {
       NewFolksonomyService newFolksonomyService = uiForm.getApplicationComponent(NewFolksonomyService.class);
       NodeHierarchyCreator nodeHierarchyCreator = uiForm.getApplicationComponent(NodeHierarchyCreator.class);
 
-      String repository = uiForm.getAncestorOfType(UIJCRExplorer.class).getRepositoryName();
       String userName = currentNode.getSession().getUserID();
 
       RepositoryService repositoryService = (RepositoryService) container.getComponentInstanceOfType(RepositoryService.class);
-      ManageableRepository manageableRepo = repositoryService.getRepository(repository);
+      ManageableRepository manageableRepo = repositoryService.getCurrentRepository();
       String workspace = manageableRepo.getConfiguration().getDefaultWorkspaceName();
 
       String tagPath = "";
       if (Utils.PUBLIC.equals(scope)) {
         tagPath = nodeHierarchyCreator.getJcrPath(PUBLIC_TAG_NODE_PATH) + '/' + tagName;
-        newFolksonomyService.removeTagOfDocument(tagPath, currentNode, repository, workspace);
+        newFolksonomyService.removeTagOfDocument(tagPath, currentNode, workspace);
       } else if (Utils.PRIVATE.equals(scope)) {
         Node userFolksonomyNode = getUserFolksonomyFolder(userName, uiForm);
         tagPath = userFolksonomyNode.getNode(tagName).getPath();
-        newFolksonomyService.removeTagOfDocument(tagPath, currentNode, repository, workspace);
+        newFolksonomyService.removeTagOfDocument(tagPath, currentNode, workspace);
       } else if (Utils.GROUP.equals(scope)) {
         String groupsPath = nodeHierarchyCreator.getJcrPath(GROUPS_ALIAS);
         String folksonomyPath = nodeHierarchyCreator.getJcrPath(GROUP_FOLKSONOMY_ALIAS);
-        Node groupsNode = getNode(repository, workspace, groupsPath);
+        Node groupsNode = getNode(workspace, groupsPath);
         for (String role : Utils.getGroups()) {
           tagPath = groupsNode.getNode(role).getNode(folksonomyPath).getNode(tagName).getPath();
-          newFolksonomyService.removeTagOfDocument(tagPath, currentNode, repository, workspace);
+          newFolksonomyService.removeTagOfDocument(tagPath, currentNode, workspace);
         }
       }
     }
 
-    private Node getNode(String repository, String workspace, String path) throws Exception {
+    private Node getNode(String workspace, String path) throws Exception {
       ExoContainer myContainer = ExoContainerContext.getCurrentContainer();
       RepositoryService repositoryService = (RepositoryService) myContainer.getComponentInstanceOfType(RepositoryService.class);
-      ManageableRepository manageableRepository = repositoryService.getRepository(repository);
+      ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
       SessionProvider sessionProvider = SessionProviderFactory.createSessionProvider();
       return (Node) sessionProvider.getSession(workspace, manageableRepository).getItem(path);
     }

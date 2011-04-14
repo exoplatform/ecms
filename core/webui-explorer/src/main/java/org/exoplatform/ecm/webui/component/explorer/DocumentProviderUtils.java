@@ -107,18 +107,15 @@ public class DocumentProviderUtils {
     PortletPreferences portletPref = pcontext.getRequest().getPreferences();
     //String trashHomeNodePath = portletPref.getValue(Utils.TRASH_HOME_NODE_PATH, "");
     String trashWorkspace = portletPref.getValue(Utils.TRASH_WORKSPACE, "");
-    String trashRepository = portletPref.getValue(Utils.TRASH_REPOSITORY, "");
     SessionProvider sessionProvider = uiExplorer.getSessionProvider();
     boolean byUser = uiExplorer.getPreference().isShowItemsByUser();
     if (!byUser) {
       ret = trashService_.getAllNodeInTrash(
           trashWorkspace,
-          trashRepository,
           sessionProvider);
     } else {
       ret = trashService_.getAllNodeInTrashByUser(
           trashWorkspace,
-          trashRepository,
           sessionProvider,
           uiExplorer.getSession().getUserID());
     }

@@ -526,8 +526,7 @@ public class UINewsletterEntryManager extends UIForm {
           NewsletterManagerService newsletterManagerService = newsletterEntryManager.
               getApplicationComponent(NewsletterManagerService.class);
           RepositoryService repositoryService = newsletterEntryManager.getApplicationComponent(RepositoryService.class);
-          ManageableRepository manageableRepository = repositoryService.
-              getRepository(newsletterManagerService.getRepositoryName());
+          ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
           Session session = Utils.getSessionProvider()
                                  .getSession(newsletterManagerService.getWorkspaceName(),
                                              manageableRepository);

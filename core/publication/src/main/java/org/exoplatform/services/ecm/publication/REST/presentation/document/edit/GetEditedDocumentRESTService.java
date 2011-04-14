@@ -112,8 +112,8 @@ public class GetEditedDocumentRESTService implements ResourceContainer {
 //  @OutputTransformer(Bean2JsonOutputTransformer.class)
   public Response getLastEditedDoc(@PathParam("repository") String repository,
       @QueryParam("showItems") String showItems, @QueryParam("showGadgetWs") String showGadgetWs) throws Exception {
-    List<Node> lstLastEditedNode = getLastEditedNode(repository, showItems, showGadgetWs);
-    List<DocumentNode> lstDocNode = getDocumentData(repository, lstLastEditedNode);
+    List<Node> lstLastEditedNode = getLastEditedNode(showItems, showGadgetWs);
+    List<DocumentNode> lstDocNode = getDocumentData(lstLastEditedNode);
     ListEditDocumentNode listEditDocumentNode = new ListEditDocumentNode();
     listEditDocumentNode.setLstDocNode(lstDocNode);
 
@@ -123,7 +123,7 @@ public class GetEditedDocumentRESTService implements ResourceContainer {
                    .build();
   }
 
-  private List<Node> getLastEditedNode(String repository, String noOfItem, String showGadgetWs) throws Exception{
+  private List<Node> getLastEditedNode(String noOfItem, String showGadgetWs) throws Exception{
     if (showGadgetWs != null && showGadgetWs.length() > 0) {
       show_gadget = Boolean.parseBoolean(showGadgetWs);
     }
@@ -143,7 +143,7 @@ public class GetEditedDocumentRESTService implements ResourceContainer {
     String queryStatement = StringUtils.replace(QUERY_STATEMENT, "$0", NT_BASE);
     queryStatement = StringUtils.replace(queryStatement, "$1", bf.toString());
     queryStatement = StringUtils.replace(queryStatement, "$2", DATE_MODIFIED);
-    ManageableRepository manageableRepository = repositoryService.getRepository(repository);
+    ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
     try {
       String[] workspaces = manageableRepository.getWorkspaceNames();
       List<String> lstWorkspace = new ArrayList<String>();
@@ -181,23 +181,23 @@ public class GetEditedDocumentRESTService implements ResourceContainer {
     }
   }
 
-  private List<DocumentNode> getDocumentData(String repository, List<Node> lstNode) throws Exception {
-    return getDocumentData(repository, lstNode, String.valueOf(NO_PER_PAGE));
+  private List<DocumentNode> getDocumentData(List<Node> lstNode) throws Exception {
+    return getDocumentData(lstNode, String.valueOf(NO_PER_PAGE));
   }
 
   private String getDateFormat(Calendar date) {
     return String.valueOf(date.getTimeInMillis());
   }
 
-  private List<DocumentNode> getDocumentData(String repository, List<Node> lstNode, String noOfItem) throws Exception {
+  private List<DocumentNode> getDocumentData(List<Node> lstNode, String noOfItem) throws Exception {
     if (lstNode == null || lstNode.size() == 0) return null;
     List<DocumentNode> lstDocNode = new ArrayList<DocumentNode>();
     DocumentNode docNode = null;
     StringBuilder tags = null;
 
     Collections.sort(lstNode, new PropertyValueComparator(DATE_MODIFIED, PropertyValueComparator.DESCENDING_ORDER));
-    ManageableRepository manageableRepository = repositoryService.getRepository(repository);
-    List<DriveData> lstDrive = manageDriveService.getAllDrives(repository);
+    ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
+    List<DriveData> lstDrive = manageDriveService.getAllDrives();
     for (Node node : lstNode) {
       docNode = new DocumentNode();
       docNode.setName(node.getName());
@@ -207,9 +207,11 @@ public class GetEditedDocumentRESTService implements ResourceContainer {
       docNode.setDateEdited(getDateFormat(node.getProperty(DATE_MODIFIED).getDate()));
       tags = new StringBuilder(1024);
 
-      List<Node> tagList = newFolksonomyService.
-          getLinkedTagsOfDocumentByScope(NewFolksonomyService.PUBLIC, "", node,
-                            repository, manageableRepository.getConfiguration().getDefaultWorkspaceName());
+      List<Node> tagList = newFolksonomyService.getLinkedTagsOfDocumentByScope(NewFolksonomyService.PUBLIC,
+                                                                               "",
+                                                                               node,
+                                                                               manageableRepository.getConfiguration()
+                                                                                                   .getDefaultWorkspaceName());
       for(Node tag : tagList) {
         tags.append(tag.getName()).append(", ");
       }

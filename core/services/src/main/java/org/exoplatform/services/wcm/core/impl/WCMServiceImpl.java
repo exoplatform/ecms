@@ -64,6 +64,7 @@ public class WCMServiceImpl implements WCMService {
    * lang.String, java.lang.String, java.lang.String,
    * org.exoplatform.services.jcr.ext.common.SessionProvider)
    */
+  @Deprecated
   public Node getReferencedContent(SessionProvider sessionProvider,
                                    String repository,
                                    String workspace,
@@ -71,7 +72,7 @@ public class WCMServiceImpl implements WCMService {
     if(repository == null || workspace == null || nodeIdentifier == null) throw new ItemNotFoundException();
     ExoContainer container = ExoContainerContext.getCurrentContainer();
     RepositoryService repositoryService = (RepositoryService) container.getComponentInstanceOfType(RepositoryService.class);
-    ManageableRepository manageableRepository = repositoryService.getRepository(repository);
+    ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
     Session session = sessionProvider.getSession(workspace, manageableRepository);
     Node content = null;
     try {
@@ -87,6 +88,36 @@ public class WCMServiceImpl implements WCMService {
     }
     return content;
   }
+  
+  /*
+   * (non-Javadoc)
+   * @see
+   * org.exoplatform.services.wcm.core.WCMService#getReferencedContent(java.
+   * lang.String, java.lang.String, java.lang.String,
+   * org.exoplatform.services.jcr.ext.common.SessionProvider)
+   */
+  public Node getReferencedContent(SessionProvider sessionProvider,
+                                   String workspace,
+                                   String nodeIdentifier) throws Exception {
+    if(workspace == null || nodeIdentifier == null) throw new ItemNotFoundException();
+    ExoContainer container = ExoContainerContext.getCurrentContainer();
+    RepositoryService repositoryService = (RepositoryService) container.getComponentInstanceOfType(RepositoryService.class);
+    ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
+    Session session = sessionProvider.getSession(workspace, manageableRepository);
+    Node content = null;
+    try {
+      content = session.getNodeByUUID(nodeIdentifier);
+    } catch (ItemNotFoundException itemNotFoundException) {
+      try {
+        content = (Node) session.getItem(nodeIdentifier);
+      } catch(Exception exception) {
+        content = null;
+      }
+    } finally {
+      if(session != null) session.logout();
+    }
+    return content;
+  }  
 
   /*
    * (non-Javadoc)

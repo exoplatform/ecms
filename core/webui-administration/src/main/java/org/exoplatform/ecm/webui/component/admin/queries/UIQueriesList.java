@@ -106,9 +106,7 @@ public class UIQueriesList extends UIComponentDecorator {
   @SuppressWarnings("unchecked")
   public List<Node> getAllSharedQueries() throws Exception {
     QueryService queryService = getApplicationComponent(QueryService.class) ;
-    String repository = getAncestorOfType(UIECMAdminPortlet.class).getPreferenceRepository() ;
-    List<Node> queries = queryService.getSharedQueries(repository,
-        SessionProviderFactory.createSystemProvider()) ;
+    List<Node> queries = queryService.getSharedQueries(SessionProviderFactory.createSystemProvider()) ;
     Collections.sort(queries, new QueryComparator()) ;
     return queries ;
   }
@@ -151,11 +149,10 @@ public class UIQueriesList extends UIComponentDecorator {
     public void execute(Event<UIQueriesList> event) throws Exception {
       UIQueriesList uiQueriesList = event.getSource();
       UIQueriesManager uiQueriesMan = event.getSource().getParent() ;
-      String repository = uiQueriesMan.getAncestorOfType(UIECMAdminPortlet.class).getPreferenceRepository() ;
       String userName = Util.getPortalRequestContext().getRemoteUser() ;
       String queryName = event.getRequestContext().getRequestParameter(OBJECTID) ;
       QueryService queryService = event.getSource().getApplicationComponent(QueryService.class) ;
-      queryService.removeQuery(queryName, userName, repository) ;
+      queryService.removeQuery(queryName, userName) ;
       event.getSource().updateQueriesGrid(uiQueriesList.getUIPageIterator().getCurrentPage());
       event.getRequestContext().addUIComponentToUpdateByAjax(uiQueriesMan) ;
     }

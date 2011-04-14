@@ -18,7 +18,6 @@ package org.exoplatform.ecm.webui.component.admin.drives;
 
 import java.util.List;
 
-import org.exoplatform.ecm.webui.component.admin.UIECMAdminPortlet;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.views.ManageViewService;
 import org.exoplatform.services.cms.views.ViewConfig;
@@ -41,8 +40,7 @@ public class UIViewsInputSet extends UIFormInputSet {
 
   public String getViewsSelected() throws Exception {
     StringBuilder selectedView = new StringBuilder() ;
-    String repository = getAncestorOfType(UIECMAdminPortlet.class).getPreferenceRepository() ;
-    List<ViewConfig> views_ = getApplicationComponent(ManageViewService.class).getAllViews(repository);
+    List<ViewConfig> views_ = getApplicationComponent(ManageViewService.class).getAllViews();
     for(ViewConfig view : views_){
       String viewName= view.getName() ;
       boolean checked = getUIFormCheckBoxInput(viewName).isChecked() ;
@@ -59,8 +57,7 @@ public class UIViewsInputSet extends UIFormInputSet {
   }
 
   private void clear() throws Exception {
-    String repository = getAncestorOfType(UIECMAdminPortlet.class).getPreferenceRepository() ;
-    List<ViewConfig> views_ = getApplicationComponent(ManageViewService.class).getAllViews(repository);
+    List<ViewConfig> views_ = getApplicationComponent(ManageViewService.class).getAllViews();
     for(ViewConfig view : views_){
       String viewName = view.getName() ;
       if(getUIFormCheckBoxInput(viewName) != null) {

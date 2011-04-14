@@ -128,8 +128,9 @@ public class UIPropertyForm extends UIForm {
 
   public List<SelectItemOption<String>> getNamespaces() throws Exception {
     List<SelectItemOption<String>> namespaceOptions = new ArrayList<SelectItemOption<String>>();
-    String[] namespaces =
-      getApplicationComponent(RepositoryService.class).getRepository(repositoryName_).getNamespaceRegistry().getPrefixes();
+    String[] namespaces = getApplicationComponent(RepositoryService.class).getCurrentRepository()
+                                                                          .getNamespaceRegistry()
+                                                                          .getPrefixes();
     for(String namespace : namespaces){
       namespaceOptions.add(new SelectItemOption<String>(namespace, namespace));
     }

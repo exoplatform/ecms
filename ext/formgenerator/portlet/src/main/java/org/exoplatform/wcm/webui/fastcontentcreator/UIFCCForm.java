@@ -225,10 +225,10 @@ public class UIFCCForm extends UIDialogForm implements UISelectable {
   public Node getCurrentNode() throws Exception {
     RepositoryService repositoryService = getApplicationComponent(RepositoryService.class) ;
     PortletPreferences preferences = UIFCCUtils.getPortletPreferences() ;
-    Session session =
-      WCMCoreUtils.getUserSessionProvider().getSession(
-        preferences.getValue(UIFCCConstant.PREFERENCE_WORKSPACE, ""),
-        repositoryService.getRepository(preferences.getValue(UIFCCConstant.PREFERENCE_REPOSITORY, ""))) ;
+    Session session = WCMCoreUtils.getUserSessionProvider()
+                                  .getSession(preferences.getValue(UIFCCConstant.PREFERENCE_WORKSPACE,
+                                                                   ""),
+                                              repositoryService.getCurrentRepository());
     return (Node) session.getItem(preferences.getValue("path", ""));
   }
 
@@ -297,14 +297,13 @@ public class UIFCCForm extends UIDialogForm implements UISelectable {
       UIFCCForm fastContentCreatorForm = event.getSource() ;
       UIApplication uiApp = fastContentCreatorForm.getAncestorOfType(UIApplication.class);
       PortletPreferences preferences = UIFCCUtils.getPortletPreferences();
-      String preferenceRepository = preferences.getValue(UIFCCConstant.PREFERENCE_REPOSITORY, "");
       String preferencePath = preferences.getValue(UIFCCConstant.PREFERENCE_PATH, "") ;
       String preferenceType = preferences.getValue(UIFCCConstant.PREFERENCE_TYPE, "") ;
       String preferenceWorkspace = preferences.getValue(UIFCCConstant.PREFERENCE_WORKSPACE, "") ;
 
       RepositoryService repositoryService  = fastContentCreatorForm.getApplicationComponent(RepositoryService.class);
       SessionProvider sessionProvider = WCMCoreUtils.getUserSessionProvider();
-      Session session = sessionProvider.getSession(preferenceWorkspace, repositoryService.getRepository(preferenceRepository));
+      Session session = sessionProvider.getSession(preferenceWorkspace, repositoryService.getCurrentRepository());
       CmsService cmsService = fastContentCreatorForm.getApplicationComponent(CmsService.class) ;
       TaxonomyService taxonomyService = fastContentCreatorForm.getApplicationComponent(TaxonomyService.class);
       boolean hasCategories = false;
@@ -507,7 +506,7 @@ public class UIFCCForm extends UIDialogForm implements UISelectable {
         String rootTreePath = nodeHierarchyCreator.getJcrPath(BasePath.TAXONOMIES_TREE_STORAGE_PATH);
         RepositoryService repositoryService  = fastContentCreatorForm.getApplicationComponent(RepositoryService.class);
         Session session = sessionProvider.getSession(workspaceName,
-                                                     repositoryService.getRepository(fastContentCreatorForm.repositoryName));
+                                                     repositoryService.getCurrentRepository());
         Node rootTree = (Node) session.getItem(rootTreePath);
         NodeIterator childrenIterator = rootTree.getNodes();
         while (childrenIterator.hasNext()) {
@@ -590,7 +589,7 @@ public class UIFCCForm extends UIDialogForm implements UISelectable {
             RepositoryService repositoryService  = uiFCCForm.getApplicationComponent(RepositoryService.class);
             SessionProvider sessionProvider = WCMCoreUtils.getUserSessionProvider();
             Session session = sessionProvider.getSession(workspaceName,
-                                                         repositoryService.getRepository(uiFCCForm.repositoryName));
+                                                         repositoryService.getCurrentRepository());
             Node rootTree = (Node) session.getItem(rootTreePath);
             NodeIterator childrenIterator = rootTree.getNodes();
             while (childrenIterator.hasNext()) {

@@ -146,4 +146,14 @@ public interface LinkManager {
    * @throws Exception
    */
   public List<Node> getAllLinks(Node targetNode, String linkType, String repoName) throws Exception;
+  
+  /**
+   * Gives all links of the given node
+   *
+   * @param targetNode The target node to get links
+   * @param linkType The type of link to get
+   * @return the list of link of the target node with given type
+   * @throws Exception
+   */
+  public List<Node> getAllLinks(Node targetNode, String linkType) throws Exception;  
 }

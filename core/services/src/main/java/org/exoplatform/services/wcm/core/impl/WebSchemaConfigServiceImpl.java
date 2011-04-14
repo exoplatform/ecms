@@ -148,7 +148,7 @@ public class WebSchemaConfigServiceImpl implements WebSchemaConfigService, Start
     for (NodeLocation locationEntry: wcmConfigService.getAllLivePortalsLocation()) {
       String repoName = locationEntry.getRepository();
       try {
-        ManageableRepository repository = repositoryService.getRepository(repoName);
+        ManageableRepository repository = repositoryService.getCurrentRepository();
         Session session = sessionProvider.getSession(locationEntry.getWorkspace(), repository);
         Node livePortalsStorage = (Node)session.getItem(locationEntry.getPath());
         String liveSharedPortalName = wcmConfigService.getSharedPortalName(repoName);

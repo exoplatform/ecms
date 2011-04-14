@@ -65,12 +65,11 @@ public class TagStylePlugin extends BaseComponentPlugin{
     while(it.hasNext()) {
       tagConfig = (TagStyleConfig)it.next().getObject() ;
       if(tagConfig.getAutoCreatedInNewRepository()) {
-        RepositoryEntry repo = repositoryService_.getCurrentRepository().getConfiguration();
-        session = getSession(repo.getName());
+        session = getSession();
         addTag(session, tagConfig) ;
         session.logout();
       } else {
-        session = getSession(tagConfig.getRepository());
+        session = getSession();
         addTag(session, tagConfig) ;
         session.logout();
       }
@@ -88,7 +87,7 @@ public class TagStylePlugin extends BaseComponentPlugin{
     while(it.hasNext()) {
       tagConfig = (TagStyleConfig)it.next().getObject() ;
       if(tagConfig.getAutoCreatedInNewRepository() || repository.equals(tagConfig.getRepository())) {
-        session = getSession(tagConfig.getRepository());
+        session = getSession();
         addTag(session, tagConfig) ;
         session.logout();
       }
@@ -113,13 +112,13 @@ public class TagStylePlugin extends BaseComponentPlugin{
   }
 
   /**
-  * Get session in system workspace from given repository name
+  * Get session in system workspace from current repository name
   * @param repository        repository name
   * @return                  Session
   * @throws Exception
   */
- private Session getSession(String repository) throws Exception{
-   ManageableRepository manageableRepository = repositoryService_.getRepository(repository);
+ private Session getSession() throws Exception{
+   ManageableRepository manageableRepository = repositoryService_.getCurrentRepository();
    ExoContainer myContainer = ExoContainerContext.getCurrentContainer();
    DMSConfiguration dmsConfiguration = (DMSConfiguration)
    myContainer.getComponentInstanceOfType(DMSConfiguration.class);

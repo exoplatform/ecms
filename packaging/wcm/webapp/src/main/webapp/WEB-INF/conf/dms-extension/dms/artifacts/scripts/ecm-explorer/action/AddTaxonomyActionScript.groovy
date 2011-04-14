@@ -63,7 +63,6 @@ public class AddTaxonomyActionScript implements CmsScript {
     String storeFullPath = (String)variables.get("exo:storeHomePath");
     String storeHomePath = null;
     String storeWorkspace = null;
-    String repository = (String)variables.get("repository");
     String targetWorkspace = (String)variables.get("exo:targetWorkspace");
     String targetPath = (String)variables.get("exo:targetPath");
     if(storeFullPath.indexOf(":/") > -1) {
@@ -77,7 +76,7 @@ public class AddTaxonomyActionScript implements CmsScript {
       storeWorkspace = targetWorkspace;
       storeHomePath = targetPath;
     }
-    ManageableRepository manageableRepository = repositoryService_.getRepository(repository);
+    ManageableRepository manageableRepository = repositoryService_.getCurrentRepository();
     Session sessionHomeNode = null;
     Session sessionTargetNode = null;
     Node targetNode = null;

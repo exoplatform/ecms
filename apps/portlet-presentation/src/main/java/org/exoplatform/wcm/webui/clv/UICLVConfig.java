@@ -528,11 +528,7 @@ public class UICLVConfig extends UIForm  implements UISelectable {
   private List<SelectItemOption<String>> getTemplateList(String portletName, String category) throws Exception {
     List<SelectItemOption<String>> templateOptionList = new ArrayList<SelectItemOption<String>>();
     ApplicationTemplateManagerService templateManagerService = getApplicationComponent(ApplicationTemplateManagerService.class);
-    RepositoryService repositoryService = getApplicationComponent(RepositoryService.class);
-    ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
-    String repository = manageableRepository.getConfiguration().getName();
-    List<Node> templateNodeList = templateManagerService.getTemplatesByCategory(repository,
-                                                                                portletName,
+    List<Node> templateNodeList = templateManagerService.getTemplatesByCategory(portletName,
                                                                                 category,
                                                                                 WCMCoreUtils.getUserSessionProvider());
     for (Node templateNode : templateNodeList) {

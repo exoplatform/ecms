@@ -114,7 +114,7 @@ public class UIDocumentConfig extends UIForm implements UISelectable{
       documentSelect.setActionInfo(UINewConfigForm.FIELD_DOCNAME, new String[] {"DocSelect"});
       if (isAddNew) {
         setActions(UINewConfigForm.ADD_NEW_ACTION);
-        detailtempField.setOptions(uiConfigTabPane.getBoxTemplateOption(repository));
+        detailtempField.setOptions(uiConfigTabPane.getBoxTemplateOption());
         allowPublishField.setChecked(isAllowPublish);
         enableCommentField.setChecked(Boolean.parseBoolean(hasComment));
         enableVoteField.setChecked(Boolean.parseBoolean(hasVote));
@@ -135,7 +135,7 @@ public class UIDocumentConfig extends UIForm implements UISelectable{
       detailTemplate = preference.getValue(Utils.CB_BOX_TEMPLATE, "");
       categoryPathField.setValue(path);
       documentNameField.setValue(docName);
-      detailtempField.setOptions(uiConfigTabPane.getBoxTemplateOption(repository));
+      detailtempField.setOptions(uiConfigTabPane.getBoxTemplateOption());
       detailtempField.setValue(detailTemplate);
       allowPublishField.setChecked(isAllowPublish);
       enableCommentField.setChecked(Boolean.parseBoolean(hasComment));

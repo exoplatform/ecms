@@ -164,9 +164,7 @@ public class WatchDocumentServiceImpl implements WatchDocumentService, Startable
    */
   private void observeNode(Node node, EventListener listener) throws Exception {
     String workspace = node.getSession().getWorkspace().getName() ;
-    ManageableRepository manageRepo = (ManageableRepository)node.getSession().getRepository() ;
-    String repository = manageRepo.getConfiguration().getName() ;
-    Session systemSession = repoService_.getRepository(repository).getSystemSession(workspace) ;
+    Session systemSession = repoService_.getCurrentRepository().getSystemSession(workspace) ;
     List<String> list = getDocumentNodeTypes(node) ;
     String[] observedNodeTypeNames = list.toArray(new String[list.size()]) ;
     ObservationManager observationManager = systemSession.getWorkspace().getObservationManager() ;
@@ -219,7 +217,7 @@ public class WatchDocumentServiceImpl implements WatchDocumentService, Startable
    */
   private void reInitObserver() throws Exception {
     RepositoryEntry repo = repoService_.getCurrentRepository().getConfiguration();
-    ManageableRepository repository = repoService_.getRepository(repo.getName()) ;
+    ManageableRepository repository = repoService_.getCurrentRepository();
     String[] workspaceNames = repository.getWorkspaceNames() ;
     for(String workspace: workspaceNames) {
       Session session = repository.getSystemSession(workspace) ;

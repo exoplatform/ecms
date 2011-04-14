@@ -185,10 +185,9 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
       List<Node> categories = WCMCoreUtils.getService(TaxonomyService.class).getAllCategories(node);
 
       String parentPath = node.getParent().getPath();
-      String parentRepo = node.getSession().getRepository().toString();
       String parentWSpace = node.getSession().getWorkspace().getName();
 
-      wcmComposer.updateContent(parentRepo, parentWSpace, node.getPath(), new HashMap<String, String>());
+      wcmComposer.updateContent(parentWSpace, node.getPath(), new HashMap<String, String>());
       boolean isNodeReferenceable = Utils.isReferenceable(node);
       String nodeUUID = null;
       if(isNodeReferenceable)
@@ -196,9 +195,9 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
       boolean moveOK = moveToTrash(nodePath, node, event, isMultiSelect);
       if (moveOK) {
         for(Node categoryNode : categories){
-          wcmComposer.updateContents(categoryNode.getSession().getRepository().toString(),
-                                     categoryNode.getSession().getWorkspace().getName(),
-                                     categoryNode.getPath(), new HashMap<String, String>());
+          wcmComposer.updateContents(categoryNode.getSession().getWorkspace().getName(),
+                                     categoryNode.getPath(),
+                                     new HashMap<String, String>());
         }
         PortletRequestContext pcontext = (PortletRequestContext)WebuiRequestContext.getCurrentInstance();
 
@@ -206,9 +205,9 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
 
         String trashWorkspace = portletPref.getValue(Utils.TRASH_WORKSPACE, "");
         if(isNodeReferenceable) {
-          wcmComposer.updateContent(parentRepo, trashWorkspace, nodeUUID, new HashMap<String, String>());
+          wcmComposer.updateContent(trashWorkspace, nodeUUID, new HashMap<String, String>());
         }
-        wcmComposer.updateContents(parentRepo, parentWSpace, parentPath, new HashMap<String, String>());
+        wcmComposer.updateContents(parentWSpace, parentPath, new HashMap<String, String>());
       }
   }
   }
@@ -238,7 +237,7 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
       PropertyIterator iter = node.getReferences();
       while (iter.hasNext()) {
         Node refNode = iter.nextProperty().getParent();
-        relationService.removeRelation(refNode, node.getPath(), uiExplorer.getRepositoryName());
+        relationService.removeRelation(refNode, node.getPath());
       }
 
     if (!node.isCheckedOut())
@@ -249,14 +248,11 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
         PortletPreferences portletPref = pcontext.getRequest().getPreferences();
       String trashHomeNodePath = portletPref.getValue(Utils.TRASH_HOME_NODE_PATH, "");
       String trashWorkspace = portletPref.getValue(Utils.TRASH_WORKSPACE, "");
-      String trashRepository = portletPref.getValue(Utils.TRASH_REPOSITORY, "");
       SessionProvider sessionProvider = uiExplorer.getSessionProvider();
       Node currentNode = uiExplorer.getCurrentNode();
 
       try {
-        trashService.moveToTrash(node,
-                     trashHomeNodePath, trashWorkspace,
-                     trashRepository, sessionProvider);
+        trashService.moveToTrash(node, trashHomeNodePath, trashWorkspace, sessionProvider);
       } catch (PathNotFoundException ex) { ret = false;}
       String currentPath = LinkUtils.getExistPath(currentNode, uiExplorer.getCurrentPath());
       uiExplorer.setCurrentPath(currentPath);
@@ -316,7 +312,7 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
 
       // If node has taxonomy
       TaxonomyService taxonomyService = uiExplorer.getApplicationComponent(TaxonomyService.class);
-      List<Node> listTaxonomyTrees = taxonomyService.getAllTaxonomyTrees(uiExplorer.getRepositoryName());
+      List<Node> listTaxonomyTrees = taxonomyService.getAllTaxonomyTrees();
       List<Node> listExistedTaxonomy = taxonomyService.getAllCategories(node);
       for (Node existedTaxonomy : listExistedTaxonomy) {
         for (Node taxonomyTrees : listTaxonomyTrees) {
@@ -336,9 +332,10 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
       thumbnailService.processRemoveThumbnail(node);
       NewFolksonomyService newFolksonomyService = getApplicationComponent(NewFolksonomyService.class);
 
-      newFolksonomyService.removeTagsOfNodeRecursively(node,uiExplorer.getRepositoryName(),
-                                                       uiExplorer.getRepository().getConfiguration().
-                                                       getDefaultWorkspaceName(),
+      newFolksonomyService.removeTagsOfNodeRecursively(node,
+                                                       uiExplorer.getRepository()
+                                                                 .getConfiguration()
+                                                                 .getDefaultWorkspaceName(),
                                                        node.getSession().getUserID(),
                                                        getGroups());
       //trashService.removeRelations(node, uiExplorer.getSystemProvider(), uiExplorer.getRepositoryName());

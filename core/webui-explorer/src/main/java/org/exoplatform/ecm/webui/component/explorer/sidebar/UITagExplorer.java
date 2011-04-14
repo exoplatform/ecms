@@ -65,7 +65,7 @@ public class UITagExplorer extends UIContainer {
 
   public List<Node> getPrivateTagLink() throws Exception {
     NewFolksonomyService folksonomyService = getApplicationComponent(NewFolksonomyService.class) ;
-    return folksonomyService.getAllPrivateTags(getUserName(), getRepository(), getWorkspace()) ;
+    return folksonomyService.getAllPrivateTags(getUserName()) ;
   }
 
   public List<Node> getPublicTagLink() throws Exception {
@@ -74,18 +74,18 @@ public class UITagExplorer extends UIContainer {
     String publicTagNodePath = nodeHierarchyCreator.getJcrPath(PUBLIC_TAG_NODE_PATH);
 
     RepositoryService repositoryService = getApplicationComponent(RepositoryService.class);
-    ManageableRepository manageableRepo = repositoryService.getRepository(getRepository());
+    ManageableRepository manageableRepo = repositoryService.getCurrentRepository();
 
     String workspace = manageableRepo.getConfiguration().getDefaultWorkspaceName();
 
-    return folksonomyService.getAllPublicTags(publicTagNodePath, getRepository(), workspace) ;
+    return folksonomyService.getAllPublicTags(publicTagNodePath, workspace) ;
   }
 
   public Map<String ,String> getTagStyle() throws Exception {
     NewFolksonomyService folksonomyService = getApplicationComponent(NewFolksonomyService.class) ;
     String workspace = getApplicationComponent(DMSConfiguration.class).getConfig().getSystemWorkspace();
     Map<String , String> tagStyle = new HashMap<String ,String>() ;
-    for(Node tag : folksonomyService.getAllTagStyle(getRepository(), workspace)) {
+    for(Node tag : folksonomyService.getAllTagStyle(workspace)) {
       tagStyle.put(tag.getProperty("exo:styleRange").getValue().getString(),
                    tag.getProperty("exo:htmlStyle").getValue().getString());
     }

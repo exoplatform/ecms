@@ -36,7 +36,6 @@ import org.exoplatform.services.cms.impl.DMSRepositoryConfiguration;
 import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.access.PermissionType;
-import org.exoplatform.services.jcr.config.RepositoryEntry;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 
@@ -69,29 +68,21 @@ public class TaxonomyPlugin extends BaseComponentPlugin{
     dmsConfiguration_ = dmsConfiguration;
   }
 
-  public void init() throws Exception {
-    if(autoCreateInNewRepository_) {
-      RepositoryEntry repositoryEntry = repositoryService_.getCurrentRepository().getConfiguration();
-      importPredefineTaxonomies(repositoryEntry.getName()) ;
-      return ;
-    }
-    ValueParam param = params_.getValueParam("repository") ;
-    String repository = null ;
-    if(param == null) {
-      repository = repositoryService_.getDefaultRepository().getConfiguration().getName();
-    }else {
-      repository = param.getValue() ;
-    }
-    importPredefineTaxonomies(repository) ;
+  @Deprecated
+  public void init(String repository) throws Exception {
+    if (!autoCreateInNewRepository_)
+      return;
+    importPredefineTaxonomies();
   }
 
-  public void init(String repository) throws Exception {
-    if(!autoCreateInNewRepository_) return ;
-    importPredefineTaxonomies(repository) ;
+  public void init() throws Exception {
+    if (!autoCreateInNewRepository_)
+      return;
+    importPredefineTaxonomies();
   }
 
   @SuppressWarnings("unchecked")
-  private void importPredefineTaxonomies(String repository) throws Exception {
+  private void importPredefineTaxonomies() throws Exception {
     ManageableRepository manageableRepository = repositoryService_.getCurrentRepository();
     DMSRepositoryConfiguration dmsRepoConfig = dmsConfiguration_.getConfig();
     Session session = manageableRepository.getSystemSession(dmsRepoConfig.getSystemWorkspace()) ;

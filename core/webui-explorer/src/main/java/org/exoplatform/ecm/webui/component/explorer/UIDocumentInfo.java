@@ -222,21 +222,20 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
     UIJCRExplorer uiExplorer = this.getAncestorOfType(UIJCRExplorer.class);
     SessionProvider sessionProvider = uiExplorer.getSessionProvider();
     Session session = uiExplorer.getSession();
-    String repository = this.getRepository();
     String workspace = this.getWorkspaceName();
     String userName = session.getUserID();
     String nodePath = uiExplorer.getCurrentPath();
 //    boolean byUser = uiExplorer.getPreference().isShowItemsByUser();
     todayNodes = timelineService.
-          getDocumentsOfToday(nodePath, repository, workspace, sessionProvider, userName, false);
+          getDocumentsOfToday(nodePath, workspace, sessionProvider, userName, false);
     yesterdayNodes = timelineService.
-          getDocumentsOfYesterday(nodePath, repository, workspace, sessionProvider, userName, false);
+          getDocumentsOfYesterday(nodePath, workspace, sessionProvider, userName, false);
     earlierThisWeekNodes = timelineService.
-          getDocumentsOfEarlierThisWeek(nodePath, repository, workspace, sessionProvider, userName, false);
+          getDocumentsOfEarlierThisWeek(nodePath, workspace, sessionProvider, userName, false);
     earlierThisMonthNodes = timelineService.
-          getDocumentsOfEarlierThisMonth(nodePath, repository, workspace, sessionProvider, userName, false);
+          getDocumentsOfEarlierThisMonth(nodePath, workspace, sessionProvider, userName, false);
     earlierThisYearNodes = timelineService.
-          getDocumentsOfEarlierThisYear(nodePath, repository, workspace, sessionProvider, userName, false);
+          getDocumentsOfEarlierThisYear(nodePath, workspace, sessionProvider, userName, false);
 
     Collections.sort(todayNodes, new SearchComparator());
     Collections.sort(yesterdayNodes, new SearchComparator());
@@ -290,7 +289,7 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
   }
 
   public Node getNodeByUUID(String uuid) throws Exception{
-    ManageableRepository manageRepo = getApplicationComponent(RepositoryService.class).getRepository(getRepository()) ;
+    ManageableRepository manageRepo = getApplicationComponent(RepositoryService.class).getCurrentRepository();
     String[] workspaces = manageRepo.getWorkspaceNames() ;
     for(String ws : workspaces) {
       try{
@@ -318,7 +317,7 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
   public boolean isSystemWorkspace() throws Exception {
     UIJCRExplorer uiExplorer = getAncestorOfType(UIJCRExplorer.class) ;
     ManageableRepository manaRepoService =
-      getApplicationComponent(RepositoryService.class).getRepository(uiExplorer.getRepositoryName()) ;
+      getApplicationComponent(RepositoryService.class).getCurrentRepository();
     String systemWsName = manaRepoService.getConfiguration().getSystemWorkspaceName() ;
     if(systemWsName.equals(uiExplorer.getCurrentWorkspace())) return true ;
     return false ;
@@ -406,7 +405,7 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
   }
 
   public Node getNodeByPath(String nodePath, String workspace) throws Exception {
-    ManageableRepository manageRepo = getApplicationComponent(RepositoryService.class).getRepository(getRepository()) ;
+    ManageableRepository manageRepo = getApplicationComponent(RepositoryService.class).getCurrentRepository();
     Session session = SessionProviderFactory.createSystemProvider().getSession(workspace, manageRepo) ;
     return getAncestorOfType(UIJCRExplorer.class).getNodeByPath(nodePath, session) ;
   }
@@ -483,7 +482,7 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
       Node childNode = childrenIterator.nextNode();
       String nodeType = childNode.getPrimaryNodeType().getName();
       List<String> listCanCreateNodeType =
-                Utils.getListAllowedFileType(currentNode_, getRepository(), templateService) ;
+                Utils.getListAllowedFileType(currentNode_, templateService) ;
       if(listCanCreateNodeType.contains(nodeType) ) {
 
         // Case of childNode has jcr:data property
@@ -893,15 +892,14 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
         // Manage ../ and ./
         uri = LinkUtils.evaluatePath(uri);
         // Just in order to check if the node exists
-        Item item = nodeFinder.getItem(uiExplorer.getRepositoryName(), workspaceName, uri);
+        Item item = nodeFinder.getItem(workspaceName, uri);
         if ((item instanceof Node) &&
             ((Node)item).isNodeType(Utils.EXO_RESTORELOCATION))
           return;
         uiExplorer.setSelectNode(workspaceName, uri);
         if (findDrive) {
           ManageDriveService manageDriveService = uicomp.getApplicationComponent(ManageDriveService.class);
-          List<DriveData> driveList = manageDriveService.getDriveByUserRoles(uiExplorer.getRepositoryName(),
-                                                                             Util.getPortalRequestContext()
+          List<DriveData> driveList = manageDriveService.getDriveByUserRoles(Util.getPortalRequestContext()
                                                                                  .getRemoteUser(),
                                                                              Utils.getMemberships());
           DriveData drive = uicomp.getDrive(driveList, uiExplorer.getCurrentNode());

@@ -5,6 +5,10 @@
 	import javax.jcr.NodeIterator;
 	import org.exoplatform.webui.core.UIPopupWindow;
 	import org.exoplatform.web.application.Parameter;
+	import org.exoplatform.services.jcr.RepositoryService;
+  RepositoryService rService = uicomponent.getApplicationComponent(RepositoryService.class);
+  String repository = rService.getCurrentRepository().getConfiguration().getName();	
+	
 	
 	public Node getFileLangNode(Node currentNode) throws Exception {
     if(currentNode.isNodeType("nt:unstructured")) {
@@ -63,7 +67,7 @@
 		  <table class="ActionContainer">  
 		  	<tr>
 		  		<td>
-			      <div onclick="javascript:eXo.ecm.ECMUtils.generateWebDAVLink('<%=uicomponent.getWebDAVServerPrefix()%>','<%=uicomponent.getPortalName()%>','<%=uicomponent.getRepository()%>','<%=uicomponent.getWorkspaceName()%>','<%=formatNodeName(currentNode.getPath())%>','<%=mimeType%>')" class="ActionButton LightBlueStyle">
+			      <div onclick="javascript:eXo.ecm.ECMUtils.generateWebDAVLink('<%=uicomponent.getWebDAVServerPrefix()%>','<%=uicomponent.getPortalName()%>','${repository}','<%=uicomponent.getWorkspaceName()%>','<%=formatNodeName(currentNode.getPath())%>','<%=mimeType%>')" class="ActionButton LightBlueStyle">
 			        <div class="ButtonLeft">
 			          <div class="ButtonRight">
 			            <div class="ButtonMiddle">

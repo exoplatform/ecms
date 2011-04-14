@@ -93,7 +93,7 @@ public class FCKCoreRESTConnector implements ResourceContainer {
       @QueryParam("currentFolder") String currentFolder,
       @QueryParam("command") String command,
       @QueryParam("type") String type) throws Exception {
-    Session session = getSession(repoName,workspaceName);
+    Session session = getSession(workspaceName);
     Node currentNode = (Node)session.getItem(currentFolder);
     String ftype = folderHandler.getFolderType(currentNode);
     if(ftype == null) {
@@ -150,7 +150,7 @@ public class FCKCoreRESTConnector implements ResourceContainer {
       @QueryParam("currentFolder") String currentFolder,
       @QueryParam("newFolderName") String newFolderName,
       @QueryParam("language") String language) throws Exception {
-    Session session = getSession(repositoryName,workspaceName);
+    Session session = getSession(workspaceName);
     Node currentNode = (Node)session.getItem(currentFolder);
     return folderHandler.createNewFolder(currentNode, newFolderName, language);
   }
@@ -188,7 +188,7 @@ public class FCKCoreRESTConnector implements ResourceContainer {
       @QueryParam("fileName") String fileName,
       @QueryParam("uploadId") String uploadId) throws Exception {
     if(FileUploadHandler.SAVE_ACTION.equals(action)) {
-      Session session = getSession(repositoryName,workspaceName);
+      Session session = getSession(workspaceName);
       Node currentNode = (Node)session.getItem(currentFolder);
       session.logout();
       return fileUploadHandler.saveAsNTFile(currentNode, uploadId, fileName, language);
@@ -196,13 +196,8 @@ public class FCKCoreRESTConnector implements ResourceContainer {
     return fileUploadHandler.control(uploadId,action);
   }
 
-  private Session getSession(String repository,String workspaceName) throws Exception {
-    ManageableRepository manageableRepository = null;
-    if(repository == null) {
-      manageableRepository = repositoryService.getCurrentRepository();
-    }else {
-      manageableRepository = repositoryService.getRepository(repository);
-    }
+  private Session getSession(String workspaceName) throws Exception {
+    ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
     if(workspaceName == null) {
       workspaceName = manageableRepository.getConfiguration().getDefaultWorkspaceName();
     }

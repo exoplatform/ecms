@@ -183,7 +183,7 @@ public class UISymLinkForm extends UIForm implements UIPopupComponent, UISelecta
       */
       NodeFinder nodeFinder = uiSymLinkForm.getApplicationComponent(NodeFinder.class);
       try {
-        nodeFinder.getItem(uiExplorer.getRepositoryName(), workspaceName, pathNode);
+        nodeFinder.getItem(workspaceName, pathNode);
       } catch (ItemNotFoundException e) {
         uiApp.addMessage(new ApplicationMessage("UISymLinkForm.msg.non-node", null,
             ApplicationMessage.WARNING));
@@ -202,7 +202,7 @@ public class UISymLinkForm extends UIForm implements UIPopupComponent, UISelecta
         return;
       }
       try {
-        Node targetNode = (Node) nodeFinder.getItem(uiExplorer.getRepositoryName(), workspaceName, pathNode);
+        Node targetNode = (Node) nodeFinder.getItem(workspaceName, pathNode);
         if (uiSymLinkForm.localizationMode) {
             MultiLanguageService langService = uiSymLinkForm.getApplicationComponent(MultiLanguageService.class);
             langService.addLinkedLanguage(node, targetNode);

@@ -19,6 +19,7 @@ import org.exoplatform.webui.core.UIRightClickPopupMenu ;
 import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
 import org.exoplatform.services.jcr.util.Text;
 import org.exoplatform.ecm.jcr.model.Preference;
+import org.exoplatform.services.jcr.RepositoryService;
 %>
 
 <%
@@ -26,7 +27,8 @@ import org.exoplatform.ecm.jcr.model.Preference;
 	String componentId = uicomponent.getId();
     String serverUrl= uicomponent.getWebDAVServerPrefix();
     String portalName = uicomponent.getPortalName();
-    String repository = uicomponent.getRepository(); 
+    RepositoryService rService = uicomponent.getApplicationComponent(RepositoryService.class);
+    String repository = rService.getCurrentRepository().getConfiguration().getName();    
     def viewComponentId  = new Date().getTime();
     def rcontext = _ctx.getRequestContext() ;
     rcontext.getJavascriptManager().importJavascript('eXo.ecm.UIListView','/ecmexplorer/javascript/');

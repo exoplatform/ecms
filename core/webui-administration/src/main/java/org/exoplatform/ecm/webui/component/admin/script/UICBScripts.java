@@ -21,17 +21,14 @@ import java.util.List;
 
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
-import javax.portlet.PortletPreferences;
 
-import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.ecm.webui.component.admin.script.UIScriptList.ScriptData;
-import org.exoplatform.webui.core.UIPopupContainer;
+import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.services.cms.scripts.ScriptService;
-import org.exoplatform.webui.application.WebuiRequestContext;
-import org.exoplatform.webui.application.portlet.PortletRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.core.UIContainer;
+import org.exoplatform.webui.core.UIPopupContainer;
 import org.exoplatform.webui.core.UIPopupWindow;
 import org.exoplatform.webui.core.lifecycle.UIContainerLifecycle;
 
@@ -64,11 +61,8 @@ public class UICBScripts extends UIContainer {
 
   public List<ScriptData> getCBScript() throws Exception {
     List <ScriptData> scriptData = new ArrayList <ScriptData>() ;
-    PortletRequestContext pcontext = (PortletRequestContext)WebuiRequestContext.getCurrentInstance() ;
-    PortletPreferences portletPref = pcontext.getRequest().getPreferences() ;
-    String repository =  portletPref.getValue(Utils.REPOSITORY, "") ;
     ScriptService scriptService = getApplicationComponent(ScriptService.class) ;
-    Node cbScripts = scriptService.getCBScriptHome(repository,SessionProviderFactory.createSystemProvider()) ;
+    Node cbScripts = scriptService.getCBScriptHome(SessionProviderFactory.createSystemProvider()) ;
     NodeIterator nodeList = cbScripts.getNodes() ;
     ScriptData script ;
     while(nodeList.hasNext()) {

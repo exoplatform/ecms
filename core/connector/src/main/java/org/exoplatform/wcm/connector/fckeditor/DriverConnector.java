@@ -158,10 +158,9 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
   @GET
   @Path("/getDrivers/")
   public Response getDrivers(@QueryParam("lang") String lang) throws Exception {
-    String repositoryName = WCMCoreUtils.getRepository(null).getConfiguration().getName();
     ConversationState conversationState = ConversationState.getCurrent();
     String userId = conversationState.getIdentity().getUserId();
-    List<DriveData> listDriver = getDriversByUserId(repositoryName, userId);
+    List<DriveData> listDriver = getDriversByUserId(userId);
     DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
     DocumentBuilder builder = factory.newDocumentBuilder();
     Document document = builder.newDocument();
@@ -214,13 +213,13 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
       SessionProvider sessionProvider = WCMCoreUtils.getUserSessionProvider();
       RepositoryService repositoryService = (RepositoryService)ExoContainerContext.getCurrentContainer()
         .getComponentInstanceOfType(RepositoryService.class);
-      ManageableRepository manageableRepository = repositoryService.getRepository(repositoryName);
+      ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
       Session session = sessionProvider.getSession(workspaceName, manageableRepository);
       ManageDriveService manageDriveService = (ManageDriveService)ExoContainerContext.getCurrentContainer()
         .getComponentInstanceOfType(ManageDriveService.class);
 
-      String driverHomePath = manageDriveService.getDriveByName(Text.escapeIllegalJcrChars(driverName),
-          Text.escapeIllegalJcrChars(repositoryName)).getHomePath();
+      String driverHomePath = manageDriveService.getDriveByName(Text.escapeIllegalJcrChars(driverName))
+                                                .getHomePath();
       String itemPath = driverHomePath
                         + ((currentFolder != null && !"".equals(currentFolder) && !driverHomePath.endsWith("/")) ? "/" : "")
                         + currentFolder;
@@ -230,7 +229,6 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
       Node node = (Node)session.getItem(Text.escapeIllegalJcrChars(itemPath));
       return buildXMLResponseForChildren(node,
                                          null,
-                                         repositoryName,
                                          filterBy,
                                          session,
                                          currentPortal,
@@ -309,12 +307,10 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
     try {
       if ((repositoryName != null) && (workspaceName != null) && (driverName != null)
           && (currentFolder != null)) {
-        Node currentFolderNode = getParentFolderNode(repositoryName,
-                                                     Text.escapeIllegalJcrChars(workspaceName),
+        Node currentFolderNode = getParentFolderNode(Text.escapeIllegalJcrChars(workspaceName),
                                                      Text.escapeIllegalJcrChars(driverName),
                                                      Text.escapeIllegalJcrChars(currentFolder));
-        return createProcessUploadResponse(repositoryName,
-                                           Text.escapeIllegalJcrChars(workspaceName),
+        return createProcessUploadResponse(Text.escapeIllegalJcrChars(workspaceName),
                                            currentFolderNode,
                                            siteName,
                                            userId,
@@ -342,12 +338,12 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
    *
    * @throws Exception the exception
    */
-  private List<DriveData> getDriversByUserId(String repoName, String userId) throws Exception {
+  private List<DriveData> getDriversByUserId(String userId) throws Exception {
     ManageDriveService driveService = (ManageDriveService) ExoContainerContext.getCurrentContainer()
                                                         .getComponentInstanceOfType(ManageDriveService.class);
     List<DriveData> driveList = new ArrayList<DriveData>();
     List<String> userRoles = getMemberships(userId);
-    List<DriveData> allDrives = driveService.getAllDrives(repoName);
+    List<DriveData> allDrives = driveService.getAllDrives();
     Set<DriveData> temp = new HashSet<DriveData>();
     if (userId != null) {
       // We will improve ManageDrive service to allow getAllDriveByUser
@@ -411,7 +407,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
     folders.setAttribute("name", resolveDriveLabel(groupName, lang));
     folders.setAttribute("isUpload", "false");
     for (DriveData driver : driversList) {
-      String repository = WCMCoreUtils.getRepository(null).getConfiguration().getName();
+      String repository = WCMCoreUtils.getRepository().getConfiguration().getName();
       String workspace  = driver.getWorkspace();
       String path = driver.getHomePath();
       String name = driver.getName();
@@ -571,7 +567,6 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
 
   private Response buildXMLResponseForChildren(Node node,
                                                String command,
-                                               String repositoryName,
                                                String filterBy,
                                                Session session,
                                                String currentPortal,
@@ -617,15 +612,15 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
           }
         }
 
-        if (FILE_TYPE_MEDIAS.equals(filterBy) && isMediaType(checkNode, repositoryName)){
+        if (FILE_TYPE_MEDIAS.equals(filterBy) && isMediaType(checkNode)){
           fileType = FILE_TYPE_MEDIAS;
         }
 
-        if (FILE_TYPE_DMSDOC.equals(filterBy) && isDMSDocument(checkNode, repositoryName)) {
+        if (FILE_TYPE_DMSDOC.equals(filterBy) && isDMSDocument(checkNode)) {
           fileType = FILE_TYPE_DMSDOC;
         }
         
-        if (FILE_TYPE_IMAGE.equals(filterBy) && isImageType(checkNode, repositoryName)) {
+        if (FILE_TYPE_IMAGE.equals(filterBy) && isImageType(checkNode)) {
             fileType = FILE_TYPE_IMAGE;
           }
 
@@ -659,13 +654,12 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
    * Checks if is dMS document.
    *
    * @param node the node
-   * @param repositoryName the repository name
    *
    * @return true, if is dMS document
    *
    * @throws Exception the exception
    */
-  private boolean isDMSDocument(Node node, String repositoryName) throws Exception {
+  private boolean isDMSDocument(Node node) throws Exception {
     TemplateService templateService = (TemplateService) ExoContainerContext.getCurrentContainer()
                                                                            .getComponentInstanceOfType(TemplateService.class);
     List<String> dmsDocumentListTmp = templateService.getDocumentTemplates();
@@ -675,7 +669,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
     dmsDocumentList.remove(NodetypeConstant.EXO_ARTICLE);
     for (String documentType : dmsDocumentList) {
       if (node.getPrimaryNodeType().isNodeType(documentType)
-          && !isMediaType(node, repositoryName)
+          && !isMediaType(node)
           && !node.isNodeType(NodetypeConstant.EXO_WEBCONTENT)) {
         return true;
       }
@@ -688,11 +682,10 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
    * Checks if is media type.
    *
    * @param node the node
-   * @param repository the repository
    *
    * @return true, if is media type
    */
-  private boolean isMediaType(Node node, String repository){
+  private boolean isMediaType(Node node){
     String mimeType = "";
 
     try {
@@ -714,11 +707,10 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
    * Checks if is image type.
    *
    * @param node the node
-   * @param repository the repository
    *
    * @return true, if is image type
    */
-  private boolean isImageType(Node node, String repository){
+  private boolean isImageType(Node node){
     String mimeType = "";
 
     try {
@@ -804,7 +796,6 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
   /**
    * Creates the process upload response.
    *
-   * @param repositoryName the repository name
    * @param workspaceName the workspace name
    * @param jcrPath the jcr path
    * @param action the action
@@ -818,8 +809,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
    *
    * @throws Exception the exception
    */
-  protected Response createProcessUploadResponse(String repositoryName,
-                                                 String workspaceName,
+  protected Response createProcessUploadResponse(String workspaceName,
                                                  Node currentFolderNode,
                                                  String siteName,
                                                  String userId,
@@ -848,19 +838,18 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
    *
    * @throws Exception the exception
    */
-  private Node getParentFolderNode(
-      String repositoryName, String workspaceName, String driverName, String currentFolder) throws Exception{
+  private Node getParentFolderNode(String workspaceName, String driverName, String currentFolder) throws Exception {
     SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
     RepositoryService repositoryService = (RepositoryService)ExoContainerContext.getCurrentContainer()
       .getComponentInstanceOfType(RepositoryService.class);
-    ManageableRepository manageableRepository = repositoryService.getRepository(repositoryName);
+    ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
     Session session = sessionProvider.getSession(workspaceName, manageableRepository);
     ManageDriveService manageDriveService = (ManageDriveService)ExoContainerContext.getCurrentContainer()
       .getComponentInstanceOfType(ManageDriveService.class);
 
     try {
       return (Node)session.getItem(
-          manageDriveService.getDriveByName(driverName, repositoryName).getHomePath()
+          manageDriveService.getDriveByName(driverName).getHomePath()
           + ((currentFolder != null && currentFolder.length() != 0) ? "/" : "")
           + currentFolder);
     } catch (Exception e) {

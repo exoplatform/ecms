@@ -178,11 +178,12 @@ public class UIPCVPresentation extends UIBaseNodePresentation {
    * org.exoplatform.webui.core.UIComponent#getTemplateResourceResolver(org.
    * exoplatform.webui.application.WebuiRequestContext, java.lang.String)
    */
+  @Deprecated
   public ResourceResolver getTemplateResourceResolver(WebuiRequestContext context, String template) {
     try {
-        DMSConfiguration dmsConfiguration = getApplicationComponent(DMSConfiguration.class);
-        String workspace = dmsConfiguration.getConfig().getSystemWorkspace();
-        resourceResolver = new JCRResourceResolver(repository, workspace, "exo:templateFile");
+      DMSConfiguration dmsConfiguration = getApplicationComponent(DMSConfiguration.class);
+      String workspace = dmsConfiguration.getConfig().getSystemWorkspace();
+      resourceResolver = new JCRResourceResolver(workspace);
     } catch (Exception e) {
       Utils.createPopupMessage(this,
                                "UIMessageBoard.msg.get-template-resource",
@@ -191,6 +192,26 @@ public class UIPCVPresentation extends UIBaseNodePresentation {
     }
     return resourceResolver;
   }
+  
+  /*
+   * (non-Javadoc)
+   * @see
+   * org.exoplatform.webui.core.UIComponent#getTemplateResourceResolver(org.
+   * exoplatform.webui.application.WebuiRequestContext, java.lang.String)
+   */
+  public ResourceResolver getTemplateResourceResolver() {
+    try {
+      DMSConfiguration dmsConfiguration = getApplicationComponent(DMSConfiguration.class);
+      String workspace = dmsConfiguration.getConfig().getSystemWorkspace();
+      resourceResolver = new JCRResourceResolver(workspace);
+    } catch (Exception e) {
+      Utils.createPopupMessage(this,
+                               "UIMessageBoard.msg.get-template-resource",
+                               null,
+                               ApplicationMessage.ERROR);
+    }
+    return resourceResolver;
+  }  
 
   /* (non-Javadoc)
    * @see org.exoplatform.ecm.webui.presentation.NodePresentation#getNodeType()

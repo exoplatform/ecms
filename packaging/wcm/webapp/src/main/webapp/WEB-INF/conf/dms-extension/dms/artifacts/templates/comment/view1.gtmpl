@@ -1,6 +1,9 @@
 <%
   import org.exoplatform.web.application.Parameter ;
+  import org.exoplatform.services.jcr.RepositoryService;
   
+  RepositoryService rService = uicomponent.getApplicationComponent(RepositoryService.class);
+  String repository = rService.getCurrentRepository().getConfiguration().getName();
   def commentsList = uicomponent.getComments() ;
   def uicomment = uicomponent.getCommentComponent();
   if(commentsList.size() > 0) {
@@ -78,7 +81,7 @@
 							<image class="EditComment" src="/eXoResources/skin/sharedImages/Blank.gif" alt="" title="<%=_ctx.appRes("Comments.tooltip.edit-comment")%>"/>
 						</a>
 				<%
-	  		 Parameter[] params = [new Parameter("workspaceName", comment.getSession().getWorkspace().getName()), new Parameter("repository", uicomponent.getRepository())];
+	  		 Parameter[] params = [new Parameter("workspaceName", comment.getSession().getWorkspace().getName()), new Parameter("repository", repository)];
 	  		%>
 						<a href="<%=uiremovecomment.event("RemoveComment", org.exoplatform.ecm.webui.utils.Utils.formatNodeName(path), params)%>">
 						<image class="RemoveAttachments" src="/eXoResources/skin/sharedImages/Blank.gif" alt="" title="<%=_ctx.appRes("Comments.tooltip.remove-comment")%>"/>

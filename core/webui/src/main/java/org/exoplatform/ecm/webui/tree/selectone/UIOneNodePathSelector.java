@@ -111,11 +111,11 @@ public class UIOneNodePathSelector extends UIBaseNodeTreeSelector {
         String rootTreeOfSpecialDriver = rootTreePath.replace("${userId}", userId);
         rootTreePath = rootTreeOfSpecialDriver;
       }
-      rootNode = (Node) nodeFinder.getItem(repositoryName, workspaceName, rootTreePath);
+      rootNode = (Node) nodeFinder.getItem(workspaceName, rootTreePath);
     }
 
     UIWorkspaceList uiWorkspaceList = getChild(UIWorkspaceList.class);
-    uiWorkspaceList.setWorkspaceList(repositoryName);
+    uiWorkspaceList.setWorkspaceList();
     uiWorkspaceList.setIsDisable(workspaceName, isDisable);
     UINodeTreeBuilder builder = getChild(UINodeTreeBuilder.class);
     builder.setAllowPublish(allowPublish, publicationService, templates);
@@ -237,7 +237,7 @@ public class UIOneNodePathSelector extends UIBaseNodeTreeSelector {
     UIBreadcumbs uiBreadcumbs = getChild(UIBreadcumbs.class);
     String pathName = currentNode.getName();
     NodeFinder nodeFinder = getApplicationComponent(NodeFinder.class);
-    Node rootNode = (Node) nodeFinder.getItem(repositoryName, workspaceName, rootTreePath);
+    Node rootNode = (Node) nodeFinder.getItem(workspaceName, rootTreePath);
 
     if (currentNode.equals(rootNode)) {
       pathName = "";
@@ -270,7 +270,7 @@ public class UIOneNodePathSelector extends UIBaseNodeTreeSelector {
 
   private Node getNodeByVirtualPath(String pathLinkNode) throws Exception{
     NodeFinder nodeFinder_ = getApplicationComponent(NodeFinder.class);
-    Item item = nodeFinder_.getItem(repositoryName, workspaceName, pathLinkNode);
+    Item item = nodeFinder_.getItem(workspaceName, pathLinkNode);
     return (Node)item;
   }
 

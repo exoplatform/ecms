@@ -20,7 +20,6 @@ import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.drives.ManageDriveService;
 import org.exoplatform.services.jcr.RepositoryService;
-import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.organization.User;
 import org.exoplatform.services.organization.UserEventListener;
@@ -112,10 +111,9 @@ public class NewUserListener extends UserEventListener {
    *
    */
   public void preDelete(User user) throws Exception {
-    ManageableRepository repository = jcrService_.getCurrentRepository() ;
     driveService_.removeDrive(user.getUserName() + "|"
-        + nodeHierarchyCreator_.getJcrPath(PRIVATE_ALIAS), repository.getConfiguration().getName());
+        + nodeHierarchyCreator_.getJcrPath(PRIVATE_ALIAS));
     driveService_.removeDrive(user.getUserName() + "|"
-        + nodeHierarchyCreator_.getJcrPath(PUBLIC_ALIAS), repository.getConfiguration().getName());
+        + nodeHierarchyCreator_.getJcrPath(PUBLIC_ALIAS));
   }
 }

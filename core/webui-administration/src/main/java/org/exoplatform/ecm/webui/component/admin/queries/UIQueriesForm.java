@@ -121,9 +121,8 @@ public class UIQueriesForm extends UIForm implements UISelectable {
       reset() ;
       return ;
     }
-    String repository = getAncestorOfType(UIECMAdminPortlet.class).getPreferenceRepository() ;
-    Node query = queryService.getSharedQuery(queryName, repository,
-        SessionProviderFactory.createSystemProvider()) ;
+    Node query = queryService.getSharedQuery(queryName,
+                                             SessionProviderFactory.createSystemProvider());
     getUIStringInput(QUERY_NAME).setValue(queryName) ;
     getUIStringInput(QUERY_NAME).setEditable(false) ;
     if(query.hasProperty("exo:cachedResult")) {
@@ -161,12 +160,11 @@ public class UIQueriesForm extends UIForm implements UISelectable {
   static public class SaveActionListener extends EventListener<UIQueriesForm> {
     public void execute(Event<UIQueriesForm> event) throws Exception {
       UIQueriesForm uiForm = event.getSource() ;
-      String repository = uiForm.getAncestorOfType(UIECMAdminPortlet.class).getPreferenceRepository() ;
       QueryService queryService = uiForm.getApplicationComponent(QueryService.class) ;
       UIApplication uiApp = uiForm.getAncestorOfType(UIApplication.class) ;
       String queryName = uiForm.getUIStringInput(QUERY_NAME).getValue().trim();
       if(uiForm.isAddNew_) {
-        for(Node queryNode : queryService.getSharedQueries(repository, SessionProviderFactory.createSystemProvider())) {
+        for(Node queryNode : queryService.getSharedQueries(SessionProviderFactory.createSystemProvider())) {
           if(queryNode.getName().equals(queryName)) {
             uiApp.addMessage(new ApplicationMessage("UIQueriesForm.msg.name-existing", null,
                 ApplicationMessage.WARNING)) ;
@@ -194,11 +192,17 @@ public class UIQueriesForm extends UIForm implements UISelectable {
       boolean cacheResult = uiForm.getUIFormCheckBoxInput(CACHE_RESULT).isChecked() ;
       try {
         if(permissions.indexOf(",") > -1) {
-          queryService.addSharedQuery(queryName, statement, queryType, permissions.split(","),
-              cacheResult, repository) ;
+          queryService.addSharedQuery(queryName,
+                                      statement,
+                                      queryType,
+                                      permissions.split(","),
+                                      cacheResult);
         } else {
-          queryService.addSharedQuery(queryName, statement, queryType, new String[] {permissions},
-              cacheResult, repository) ;
+          queryService.addSharedQuery(queryName,
+                                      statement,
+                                      queryType,
+                                      new String[] { permissions },
+                                      cacheResult);
         }
       } catch(InvalidQueryException qe) {
         uiApp.addMessage(new ApplicationMessage("UIQueriesForm.msg.invalid-query", null,

@@ -71,15 +71,14 @@ public class UICBTemplateList extends UIGrid {
   }
 
   public List<Node> getAllTemplates() throws Exception {
-    ManageViewService viewService = getApplicationComponent(ManageViewService.class) ;
-    List<Node> templateList = new ArrayList<Node>() ;
-    String repository = getAncestorOfType(UIECMAdminPortlet.class).getPreferenceRepository() ;
-    SessionProvider provider = SessionProviderFactory.createSessionProvider() ;
-    templateList.addAll(viewService.getAllTemplates(BasePath.CB_DETAIL_VIEW_TEMPLATES, repository,provider)) ;
-    templateList.addAll(viewService.getAllTemplates(BasePath.CB_PATH_TEMPLATES, repository,provider)) ;
-    templateList.addAll(viewService.getAllTemplates(BasePath.CB_QUERY_TEMPLATES, repository,provider)) ;
-    templateList.addAll(viewService.getAllTemplates(BasePath.CB_SCRIPT_TEMPLATES,repository,provider)) ;
-    return templateList ;
+    ManageViewService viewService = getApplicationComponent(ManageViewService.class);
+    List<Node> templateList = new ArrayList<Node>();
+    SessionProvider provider = SessionProviderFactory.createSessionProvider();
+    templateList.addAll(viewService.getAllTemplates(BasePath.CB_DETAIL_VIEW_TEMPLATES, provider));
+    templateList.addAll(viewService.getAllTemplates(BasePath.CB_PATH_TEMPLATES, provider));
+    templateList.addAll(viewService.getAllTemplates(BasePath.CB_QUERY_TEMPLATES, provider));
+    templateList.addAll(viewService.getAllTemplates(BasePath.CB_SCRIPT_TEMPLATES, provider));
+    return templateList;
   }
 
   public String getRepository() {
@@ -114,7 +113,7 @@ public class UICBTemplateList extends UIGrid {
       UICBTemplateList uiCBTemp = event.getSource() ;
       SessionProvider provider = SessionProviderFactory.createSessionProvider() ;
       Node cbTemplateHome = uiCBTemp.getApplicationComponent(ManageViewService.class)
-      .getTemplateHome(BasePath.CONTENT_BROWSER_TEMPLATES, uiCBTemp.getRepository(),provider) ;
+      .getTemplateHome(BasePath.CONTENT_BROWSER_TEMPLATES, provider) ;
       if(cbTemplateHome == null) {
         UIApplication uiApp = event.getSource().getAncestorOfType(UIApplication.class) ;
         uiApp.addMessage(new ApplicationMessage("UICBTemplateList.msg.access-denied", null, ApplicationMessage.WARNING)) ;
@@ -133,9 +132,8 @@ public class UICBTemplateList extends UIGrid {
   static  public class DeleteActionListener extends EventListener<UICBTemplateList> {
     public void execute(Event<UICBTemplateList> event) throws Exception {
       UICBTemplateList uiCBTemp = event.getSource() ;
-      String repository = uiCBTemp.getAncestorOfType(UIECMAdminPortlet.class).getPreferenceRepository() ;
       String templatePath = event.getRequestContext().getRequestParameter(OBJECTID) ;
-      uiCBTemp.getApplicationComponent(ManageViewService.class).removeTemplate(templatePath, repository) ;
+      uiCBTemp.getApplicationComponent(ManageViewService.class).removeTemplate(templatePath);
       uiCBTemp.updateCBTempListGrid(uiCBTemp.getUIPageIterator().getCurrentPage());
       uiCBTemp.setRenderSibling(UICBTemplateList.class);
       UIViewManager uiViewManager = uiCBTemp.getAncestorOfType(UIViewManager.class) ;

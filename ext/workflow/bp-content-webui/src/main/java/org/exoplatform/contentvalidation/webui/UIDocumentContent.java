@@ -123,7 +123,7 @@ public class UIDocumentContent extends UIContainer implements NodePresentation {
     try {
       DMSConfiguration dmsConfiguration = getApplicationComponent(DMSConfiguration.class);
       String wsName = dmsConfiguration.getConfig().getSystemWorkspace();
-      return new JCRResourceResolver(getRepository(), wsName, Utils.EXO_TEMPLATEFILE) ;
+      return new JCRResourceResolver(wsName);
     } catch (Exception e) {
       LOG.error("Unexpected error", e);
     }
@@ -152,7 +152,7 @@ public class UIDocumentContent extends UIContainer implements NodePresentation {
   }
 
   public Node getNodeByPath(String nodePath, String workspace) throws Exception {
-    ManageableRepository manageRepo = getApplicationComponent(RepositoryService.class).getRepository(getRepository()) ;
+    ManageableRepository manageRepo = getApplicationComponent(RepositoryService.class).getCurrentRepository();
     Session session = SessionProviderFactory.createSystemProvider().getSession(workspace, manageRepo) ;
     return (Node) session.getItem(nodePath) ;
   }
@@ -180,7 +180,7 @@ public class UIDocumentContent extends UIContainer implements NodePresentation {
   }
 
   public Node getNodeByUUID(String uuid) throws Exception{
-    ManageableRepository manageRepo = (ManageableRepository)node_.getSession().getRepository() ;
+    ManageableRepository manageRepo = (ManageableRepository) node_.getSession().getRepository();
     SessionProvider sessionProvider = SessionProviderFactory.createSessionProvider();
     for(String ws : manageRepo.getWorkspaceNames()) {
       try{
@@ -192,7 +192,7 @@ public class UIDocumentContent extends UIContainer implements NodePresentation {
     return null;
   }
 
-  private List<String> getListAllowedFileType(Node currentNode, String repository) throws Exception {
+  private List<String> getListAllowedFileType(Node currentNode) throws Exception {
     List<String> nodeTypes = new ArrayList<String>() ;
     NodeTypeManager ntManager = currentNode.getSession().getWorkspace().getNodeTypeManager() ;
     NodeType currentNodeType = currentNode.getPrimaryNodeType() ;
@@ -279,7 +279,7 @@ public class UIDocumentContent extends UIContainer implements NodePresentation {
       Node childNode = childrenIterator.nextNode();
       try {
         nodeType = childNode.getPrimaryNodeType().getName();
-        List<String> listCanCreateNodeType = getListAllowedFileType(node_, getRepository()) ;
+        List<String> listCanCreateNodeType = getListAllowedFileType(node_);
         if(listCanCreateNodeType.contains(nodeType)) attachments.add(childNode);
       } catch (Exception e) {}
     }
@@ -440,7 +440,7 @@ public class UIDocumentContent extends UIContainer implements NodePresentation {
     public void execute(Event<UIDocumentContent> event) throws Exception {
       UIDocumentContent uiComp = event.getSource() ;
       RepositoryService repositoryService  = uiComp.getApplicationComponent(RepositoryService.class) ;
-      ManageableRepository repository = repositoryService.getRepository(uiComp.getRepository()) ;
+      ManageableRepository repository = repositoryService.getCurrentRepository();
       String uri = event.getRequestContext().getRequestParameter(OBJECTID) ;
       String workspaceName = event.getRequestContext().getRequestParameter("workspaceName") ;
       Session session = SessionProviderFactory.createSessionProvider().getSession(workspaceName, repository) ;

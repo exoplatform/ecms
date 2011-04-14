@@ -74,12 +74,11 @@ public class RemoveAttachmentComponent extends AbstractActionComponent {
     AbstractActionComponent uicomponent = (AbstractActionComponent)variables.get(UICOMPONENT);
     UIApplication uiApp = uicomponent.getAncestorOfType(UIApplication.class);
     NodeFinder nodefinder = uicomponent.getApplicationComponent(NodeFinder.class);
-    String repository = String.valueOf(variables.get(Utils.REPOSITORY));
     String wsname = String.valueOf(variables.get(Utils.WORKSPACE_PARAM));
     String nodepath = String.valueOf(variables.get(OBJECTID));
     WebuiRequestContext requestcontext = (WebuiRequestContext)variables.get(Utils.REQUESTCONTEXT);
     try {
-        Node node = (Node) nodefinder.getItem(repository, wsname, nodepath);
+        Node node = (Node) nodefinder.getItem(wsname, nodepath);
 
         // begin of lampt's modification.
         Session session = node.getSession();

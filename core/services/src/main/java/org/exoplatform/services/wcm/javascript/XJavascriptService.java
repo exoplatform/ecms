@@ -114,7 +114,7 @@ public class XJavascriptService implements Startable {
     // Need re-login to get session because this node is get from template and the session is not live anymore.
     NodeLocation webcontentLocation = NodeLocation.make(webcontent);
     RepositoryService repositoryService = WCMCoreUtils.getService(RepositoryService.class);
-    ManageableRepository repository = repositoryService.getRepository(webcontentLocation.getRepository());
+    ManageableRepository repository = repositoryService.getCurrentRepository();
     Session session = null;
     if (webcontentLocation.getPath().startsWith("/jcr:system"))
       session = repository.getSystemSession(repository.getConfiguration().getSystemWorkspaceName());
@@ -223,7 +223,7 @@ public class XJavascriptService implements Startable {
     RepositoryService repositoryService = WCMCoreUtils.getService(RepositoryService.class);
     SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
     NodeLocation portalNodeLocation = NodeLocation.make(portalNode);
-    ManageableRepository repository = repositoryService.getRepository(portalNodeLocation.getRepository());
+    ManageableRepository repository = repositoryService.getCurrentRepository();
     Session session = sessionProvider.getSession(portalNodeLocation.getWorkspace(), repository);
     QueryManager queryManager = session.getWorkspace().getQueryManager();
     QueryResult queryResult = null;

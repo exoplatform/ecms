@@ -180,13 +180,12 @@ public class UIRepositoryControl extends UIContainer {
   public static class EditRepositoryActionListener extends EventListener<UIRepositoryControl> {
     public void execute(Event<UIRepositoryControl> event) throws Exception {
       UIRepositoryControl uiControl = event.getSource();
-      String repoName = uiControl.getChild(UIRepositorySelectForm.class).getSelectedValue();
       UIECMAdminPortlet ecmPortlet = uiControl.getAncestorOfType(UIECMAdminPortlet.class);
       UIPopupContainer uiPopupAction = ecmPortlet.getChild(UIPopupContainer.class);
       UIRepositoryFormContainer uiForm = uiPopupAction.activate(UIRepositoryFormContainer.class,
           600);
       RepositoryService rservice = uiControl.getApplicationComponent(RepositoryService.class);
-      ManageableRepository repo = rservice.getRepository(repoName);
+      ManageableRepository repo = rservice.getCurrentRepository();
       uiForm.refresh(false, repo.getConfiguration());
       event.getRequestContext().addUIComponentToUpdateByAjax(uiPopupAction);
     }

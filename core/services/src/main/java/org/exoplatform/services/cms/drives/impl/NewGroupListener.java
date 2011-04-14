@@ -19,7 +19,6 @@ package org.exoplatform.services.cms.drives.impl;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.services.cms.drives.ManageDriveService;
 import org.exoplatform.services.jcr.RepositoryService;
-import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.organization.Group;
 import org.exoplatform.services.organization.GroupEventListener;
@@ -81,7 +80,6 @@ public class NewGroupListener extends GroupEventListener {
   }
 
   public void preDelete(Group group) throws Exception {
-    ManageableRepository repository = jcrService_.getCurrentRepository() ;
-    driveService_.removeDrive(group.getId().replace("/", "."), repository.getConfiguration().getName()) ;
+    driveService_.removeDrive(group.getId().replace("/", "."));
   }
 }

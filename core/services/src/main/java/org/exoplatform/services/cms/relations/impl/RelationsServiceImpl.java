@@ -73,7 +73,7 @@ public class RelationsServiceImpl implements RelationsService, Startable {
    * @return              Node with specified UUID
    * @throws Exception
    */
-  private Node getNodeByUUID(String uuid, String repository,SessionProvider provider) throws Exception {
+  private Node getNodeByUUID(String uuid, SessionProvider provider) throws Exception {
     ManageableRepository manageRepo = repositoryService_.getCurrentRepository();
     String[] workspaces = manageRepo.getWorkspaceNames() ;
     for(String ws : workspaces) {
@@ -89,14 +89,15 @@ public class RelationsServiceImpl implements RelationsService, Startable {
   /**
    * {@inheritDoc}
    */
+  @Deprecated
   public List<Node> getRelations(Node node, String repository, SessionProvider provider) {
     List<Node> rels = new ArrayList<Node>();
     try {
       if(node.hasProperty(RELATION_PROP)) {
         Value[] values = node.getProperty(RELATION_PROP).getValues();
         for (int i = 0; i < values.length; i++) {
-          if(getNodeByUUID(values[i].getString(), repository, provider) != null) {
-            rels.add(getNodeByUUID(values[i].getString(), repository, provider));
+          if(getNodeByUUID(values[i].getString(), provider) != null) {
+            rels.add(getNodeByUUID(values[i].getString(), provider));
           }
         }
       }
@@ -104,10 +105,30 @@ public class RelationsServiceImpl implements RelationsService, Startable {
     }
     return rels ;
   }
+  
+  /**
+   * {@inheritDoc}
+   */
+  public List<Node> getRelations(Node node, SessionProvider provider) {
+    List<Node> rels = new ArrayList<Node>();
+    try {
+      if(node.hasProperty(RELATION_PROP)) {
+        Value[] values = node.getProperty(RELATION_PROP).getValues();
+        for (int i = 0; i < values.length; i++) {
+          if(getNodeByUUID(values[i].getString(), provider) != null) {
+            rels.add(getNodeByUUID(values[i].getString(), provider));
+          }
+        }
+      }
+    } catch(Exception e) {
+    }
+    return rels ;
+  }  
 
   /**
    * {@inheritDoc}
    */
+  @Deprecated
   public void removeRelation(Node node, String relationPath, String repository) throws Exception {
     if(node.hasProperty(RELATION_PROP)) {
       List<Value> vals = new ArrayList<Value>();
@@ -119,7 +140,7 @@ public class RelationsServiceImpl implements RelationsService, Startable {
           String uuid2Remove = null;
           for (int i = 0; i < values.length; i++) {
             String uuid = values[i].getString();
-            Node refNode = getNodeByUUID(uuid, repository,provider);
+            Node refNode = getNodeByUUID(uuid, provider);
             if(refNode == null) continue ;
             if (refNode.getPath().equals(relationPath)) uuid2Remove = uuid;
             else vals.add(values[i]);
@@ -133,13 +154,41 @@ public class RelationsServiceImpl implements RelationsService, Startable {
       node.save();
     }
   }
+  
+  /**
+   * {@inheritDoc}
+   */
+  public void removeRelation(Node node, String relationPath) throws Exception {
+    List<Value> vals = new ArrayList<Value>();
+    if (!"*".equals(relationPath)) {
+      SessionProvider provider = SessionProvider.createSystemProvider() ;
+      Property relations = node.getProperty(RELATION_PROP);
+      if (relations != null) {
+        Value[] values = relations.getValues();
+        String uuid2Remove = null;
+        for (int i = 0; i < values.length; i++) {
+          String uuid = values[i].getString();
+          Node refNode = getNodeByUUID(uuid, provider);
+          if(refNode == null) continue ;
+          if (refNode.getPath().equals(relationPath)) uuid2Remove = uuid;
+          else vals.add(values[i]);
+        }
+        if (uuid2Remove == null) return;
+      }
+      provider.close();
+    }
+    if(vals.size() == 0) node.removeMixin(RELATION_MIXIN);
+    else node.setProperty(RELATION_PROP, vals.toArray(new Value[vals.size()]));
+    node.save() ;
+  }  
 
   /**
    * {@inheritDoc}
    */
+  @Deprecated
   public void addRelation(Node node, String relationPath,String workpace,String repository) throws Exception {
     SessionProvider provider = SessionProvider.createSystemProvider() ;
-    Session session = getSession(repository,workpace,provider) ;
+    Session session = getSession(workpace,provider) ;
     Node catNode = (Node) session.getItem(relationPath);
     if(!catNode.isNodeType("mix:referenceable")) {
       catNode.addMixin("mix:referenceable") ;
@@ -160,10 +209,9 @@ public class RelationsServiceImpl implements RelationsService, Startable {
         String uuid = value.getString();
         Node refNode = null ;
         try {
-//          refNode = session.getNodeByUUID(uuid);
-          refNode = getNodeByUUID(uuid, repository, provider) ;
+          refNode = getNodeByUUID(uuid, provider) ;
         } catch(ItemNotFoundException ie) {
-          removeRelation(node, relationPath, repository) ;
+          removeRelation(node, relationPath) ;
           continue ;
         }
         if(refNode.getPath().equals(relationPath)) return;
@@ -177,6 +225,49 @@ public class RelationsServiceImpl implements RelationsService, Startable {
       provider.close();
     }
   }
+  
+  /**
+   * {@inheritDoc}
+   */
+  public void addRelation(Node node, String relationPath,String workpace) throws Exception {
+    SessionProvider provider = SessionProvider.createSystemProvider() ;
+    Session session = getSession(workpace,provider) ;
+    Node catNode = (Node) session.getItem(relationPath);
+    if(!catNode.isNodeType("mix:referenceable")) {
+      catNode.addMixin("mix:referenceable") ;
+      catNode.save() ;
+      session.save() ;
+    }
+    Value value2add = session.getValueFactory().createValue(catNode);
+    if (!node.isNodeType(RELATION_MIXIN)) {
+      node.addMixin(RELATION_MIXIN);
+      node.setProperty(RELATION_PROP, new Value[] {value2add});
+      node.save() ;
+      session.save() ;
+    } else {
+      List<Value> vals = new ArrayList<Value>();
+      Value[] values = node.getProperty(RELATION_PROP).getValues();
+      for (int i = 0; i < values.length; i++) {
+        Value value = values[i];
+        String uuid = value.getString();
+        Node refNode = null ;
+        try {
+          refNode = getNodeByUUID(uuid, provider) ;
+        } catch(ItemNotFoundException ie) {
+          removeRelation(node, relationPath) ;
+          continue ;
+        }
+        if(refNode.getPath().equals(relationPath)) return;
+        vals.add(value);
+      }
+      vals.add(value2add);
+      node.setProperty(RELATION_PROP, vals.toArray(new Value[vals.size()]));
+      node.save() ;
+      session.save() ;
+      session.logout();
+      provider.close();
+    }
+  }  
 
   /**
    * {@inheritDoc}
@@ -213,7 +304,31 @@ public class RelationsServiceImpl implements RelationsService, Startable {
   /**
    * {@inheritDoc}
    */
+  @Deprecated
   public void init(String repository) throws Exception {
+    Session session = getSession();
+    String relationPath = nodeHierarchyCreator_.getJcrPath(BasePath.CMS_PUBLICATIONS_PATH);
+    if (relationPath == null) throw new IllegalArgumentException();
+    try {
+      Node relationsHome = (Node) session.getItem(relationPath);
+      for (NodeIterator iterator = relationsHome.getNodes(); iterator.hasNext();) {
+        Node rel = iterator.nextNode();
+        rel.addMixin("mix:referenceable");
+      }
+      relationsHome.save();
+    } catch (IllegalArgumentException e) {
+      LOG.error("Cannot find path by alias " + BasePath.CMS_PUBLICATIONS_PATH);
+    } catch (Exception e) {
+      LOG.error("Unexpected error", e);
+    } finally {
+      if(session != null) session.logout();
+    }
+  }
+  
+  /**
+   * {@inheritDoc}
+   */
+  public void init() throws Exception {
     Session session = getSession();
     String relationPath = nodeHierarchyCreator_.getJcrPath(BasePath.CMS_PUBLICATIONS_PATH);
     if (relationPath == null) throw new IllegalArgumentException();
@@ -247,15 +362,14 @@ public class RelationsServiceImpl implements RelationsService, Startable {
 
   /**
    * Get session of workspace
-   * @param repository    The name of repository
    * @param workspace     The name of workspace
    * @param provider      SessionProvider
    * @see                 SessionProvider
    * @return              Session
    * @throws Exception
    */
-  private Session getSession(String repository,String workspace,SessionProvider provider) throws Exception{
+  private Session getSession(String workspace, SessionProvider provider) throws Exception {
     ManageableRepository manageableRepository = repositoryService_.getCurrentRepository();
-    return provider.getSession(workspace,manageableRepository) ;
+    return provider.getSession(workspace, manageableRepository);
   }
 }

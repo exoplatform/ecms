@@ -1,6 +1,8 @@
 <% 
 	import javax.jcr.Node;
 	import org.exoplatform.portal.webui.util.Util;
+	import org.exoplatform.services.jcr.RepositoryService;
+	
 	def rcontext = _ctx.getRequestContext() ;
 	def docBase = Util.getPortalRequestContext().getRequestContextPath();
 	def String htmlWYSIWYGFormId = "htmlData" + uicomponent.hashCode();
@@ -9,6 +11,8 @@
 	def jsManager = rcontext.getJavascriptManager();
 	jsManager.importJavascript('eXo.wcm.backoffice.private.WCMUtils', '/eXoWCMResources/javascript/') ;
   jsManager.addOnLoadJavascript("eXo.ecm.CKEditor.insertCSS('" + htmlWYSIWYGFormId + "', '" + cssFormId + "')");
+  RepositoryService rService = uicomponent.getApplicationComponent(RepositoryService.class) ;
+  String repository = rService.getCurrentRepository().getConfiguration().getName() ;  
 	
 	
 	private void setUploadFields() {
@@ -271,7 +275,7 @@
 																	".UIBreadcrumbs .RightBlackGridArrowIcon {\n" +
 																	"\tfloat: left;\n" +
 																	"\tmargin: 1px;\n" +
-																	"\tbackground:url('$docBase/rest/jcr/repository/collaboration/sites content/live/{portalName}/web contents/site artifacts/breadcrumb/Default/medias/images/BreadcrumbsArrowIcon.gif') repeat 0 0;\n" +
+																	"\tbackground:url('$docBase/rest/jcr/$repository/collaboration/sites content/live/{portalName}/web contents/site artifacts/breadcrumb/Default/medias/images/BreadcrumbsArrowIcon.gif') repeat 0 0;\n" +
 																	"\theight:16px;\n" +
 																	"\twidth:16px;\n" +
 																	"}";

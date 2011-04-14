@@ -110,12 +110,11 @@ public class UICategoryNavigationTree extends UIContainer {
   public UICategoryNavigationTree() throws Exception {
 
     PortletPreferences portletPreferences = UICategoryNavigationUtils.getPortletPreferences();
-    String preferenceRepository = portletPreferences.getValue(UICategoryNavigationConstant.PREFERENCE_REPOSITORY, "");
     String preferenceTreeName = portletPreferences.getValue(UICategoryNavigationConstant.PREFERENCE_TREE_NAME, "");
     TaxonomyService taxonomyService = getApplicationComponent(TaxonomyService.class);
     Node rootTreeNode = null;
     try {
-      rootTreeNode = taxonomyService.getTaxonomyTree(preferenceRepository, preferenceTreeName);
+      rootTreeNode = taxonomyService.getTaxonomyTree(preferenceTreeName);
     } catch (RepositoryException e) {
       //return;
     }
@@ -203,12 +202,11 @@ public class UICategoryNavigationTree extends UIContainer {
                                                          ApplicationMessage.ERROR);
     }
     PortletPreferences portletPreferences = UICategoryNavigationUtils.getPortletPreferences();
-    String preferenceRepository = portletPreferences.getValue(UICategoryNavigationConstant.PREFERENCE_REPOSITORY, "");
     String preferenceTreeName = portletPreferences.getValue(UICategoryNavigationConstant.PREFERENCE_TREE_NAME, "");
     TaxonomyService taxonomyService = getApplicationComponent(TaxonomyService.class);
     Node treeNode = null;
     try {
-      treeNode = taxonomyService.getTaxonomyTree(preferenceRepository, preferenceTreeName);
+      treeNode = taxonomyService.getTaxonomyTree(preferenceTreeName);
     } catch (RepositoryException e) {
       currentNode = null;
       super.processRender(context);

@@ -112,7 +112,7 @@ public class PDFViewerRESTService implements ResourceContainer {
     try {
       File content = new File((String) pdfCache.get(new ObjectKey(bd.toString())));
       if (!content.exists()) {
-        ManageableRepository repository = repositoryService_.getRepository(repoName);
+        ManageableRepository repository = repositoryService_.getCurrentRepository();
         session = getSystemProvider().getSession(wsName, repository);
         Node currentNode = session.getNodeByUUID(uuid);
         initDocument(currentNode, repoName);

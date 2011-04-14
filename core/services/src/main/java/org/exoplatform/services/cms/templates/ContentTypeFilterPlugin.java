@@ -20,9 +20,14 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.jcr.RepositoryException;
+
+import org.exoplatform.container.ExoContainer;
+import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.container.component.BaseComponentPlugin;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.container.xml.ObjectParameter;
+import org.exoplatform.services.jcr.RepositoryService;
 
 /**
  * Created by The eXo Platform SAS
@@ -33,6 +38,8 @@ import org.exoplatform.container.xml.ObjectParameter;
 public class ContentTypeFilterPlugin extends BaseComponentPlugin {
 
   private List<FolderFilterConfig> folderFilterConfigs = new ArrayList<FolderFilterConfig>();
+  
+  
   public ContentTypeFilterPlugin(InitParams initParams) {
     for(Iterator<ObjectParameter> iterator = initParams.getObjectParamIterator();iterator.hasNext();) {
       Object object = iterator.next().getObject();
@@ -44,6 +51,12 @@ public class ContentTypeFilterPlugin extends BaseComponentPlugin {
 
   public List<FolderFilterConfig> getFolderFilterConfigList() { return folderFilterConfigs; }
 
+  public String getRepository() throws RepositoryException {
+    ExoContainer container = ExoContainerContext.getCurrentContainer();
+    RepositoryService service = (RepositoryService)container.getComponentInstanceOfType(RepositoryService.class);
+    return service.getCurrentRepository().getConfiguration().getName();
+  }
+  
   public static class FolderFilterConfig {
     private String folderType;
     private ArrayList<String> contentTypes;

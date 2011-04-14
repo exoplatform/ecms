@@ -84,8 +84,12 @@ public class CmsServiceImpl implements CmsService {
   /**
    * {@inheritDoc}
    */
-  public String storeNode(String workspace, String nodeTypeName, String storePath,
-      Map mappings) throws Exception {
+  @Deprecated
+  public String storeNode(String workspace,
+                          String nodeTypeName,
+                          String storePath,
+                          Map mappings,
+                          String repository) throws Exception {
     Session session = jcrService.getCurrentRepository().login(workspace);
     Node storeHomeNode = (Node) session.getItem(storePath);
     String path = storeNode(nodeTypeName, storeHomeNode, mappings, true);
@@ -94,7 +98,110 @@ public class CmsServiceImpl implements CmsService {
     session.logout();
     return path;
   }
+  
+  /**
+   * {@inheritDoc}
+   */
+  public String storeNode(String workspace, String nodeTypeName, String storePath, Map mappings) throws Exception {
+    Session session = jcrService.getCurrentRepository().login(workspace);
+    Node storeHomeNode = (Node) session.getItem(storePath);
+    String path = storeNode(nodeTypeName, storeHomeNode, mappings, true);
+    storeHomeNode.save();
+    session.save();
+    session.logout();
+    return path;
+  }  
 
+  /**
+   * {@inheritDoc}
+   */
+  @Deprecated
+  public String storeNode(String nodeTypeName, Node storeHomeNode, Map mappings,
+      boolean isAddNew, String repository) throws Exception {
+    Set keys = mappings.keySet();
+    String nodePath = extractNodeName(keys);
+    JcrInputProperty relRootProp = (JcrInputProperty) mappings.get(nodePath);
+    String nodeName = (String)relRootProp.getValue();
+    if (nodeName == null || nodeName.length() == 0) {
+      nodeName = idGeneratorService.generateStringID(nodeTypeName);
+    }
+    nodeName = Text.escapeIllegalJcrChars(nodeName);
+    String primaryType = relRootProp.getNodetype() ;
+    if(primaryType == null || primaryType.length() == 0) {
+      primaryType = nodeTypeName ;
+    }
+    Session session = storeHomeNode.getSession();
+    NodeTypeManager nodetypeManager = session.getWorkspace().getNodeTypeManager();
+    NodeType nodeType = nodetypeManager.getNodeType(primaryType);
+    Node currentNode = null;
+    String[] mixinTypes = null ;
+    String mixintypeName = relRootProp.getMixintype();
+    if(mixintypeName != null && mixintypeName.trim().length() > 0) {
+      if(mixintypeName.indexOf(",") > -1){
+        mixinTypes = mixintypeName.split(",") ;
+      }else {
+        mixinTypes = new String[] {mixintypeName} ;
+      }
+    }
+    if (isAddNew) {
+      //Broadcast CmsService.event.preCreate event
+      listenerService.broadcast(PRE_CREATE_CONTENT_EVENT,storeHomeNode,mappings);
+      currentNode = storeHomeNode.addNode(nodeName, primaryType);
+      createNodeRecursively(NODE, currentNode, nodeType, mappings);
+      if(mixinTypes != null){
+        for(String type : mixinTypes){
+          if(!currentNode.isNodeType(type)) {
+            currentNode.addMixin(type);
+          }
+          NodeType mixinType = nodetypeManager.getNodeType(type);
+          for (Iterator<String> iter = keys.iterator(); iter.hasNext();) {
+            String keyJCRPath = (String) iter.next();
+            JcrInputProperty jcrInputProperty = (JcrInputProperty) mappings.get(keyJCRPath);
+            if (!jcrInputProperty.getJcrPath().equals(NODE)) {
+              String inputMixinTypeName = jcrInputProperty.getMixintype();
+              String[] inputMixinTypes = null ;
+              if(inputMixinTypeName != null && inputMixinTypeName.trim().length() > 0) {
+                if(inputMixinTypeName.indexOf(",") > -1){
+                  inputMixinTypes = inputMixinTypeName.split(",");
+                }else {
+                  inputMixinTypes = new String[] {inputMixinTypeName};
+                }
+              }
+              if (inputMixinTypes != null) {
+                for(String inputType : inputMixinTypes) {
+                  if (inputType.equals(type)) {
+                    String childPath = jcrInputProperty.getJcrPath().replaceAll(NODE + "/", "");
+                    createNodeRecursively(jcrInputProperty.getJcrPath(), currentNode.getNode(childPath), mixinType, mappings);
+                  }
+                }
+              }
+            }
+          }
+          createNodeRecursively(NODE, currentNode, mixinType, mappings);
+        }
+      }
+      //all document node should be mix:referenceable that allow retrieve UUID by method Node.getUUID()
+      if(!currentNode.isNodeType(MIX_REFERENCEABLE)) {
+        currentNode.addMixin(MIX_REFERENCEABLE);
+      }
+    //Broadcast CmsService.event.postCreate event
+      listenerService.broadcast(POST_CREATE_CONTENT_EVENT,this,currentNode);
+    } else {
+      currentNode = storeHomeNode.getNode(nodeName);
+    //Broadcast CmsService.event.preEdit event
+      listenerService.broadcast(PRE_EDIT_CONTENT_EVENT,currentNode,mappings);
+      updateNodeRecursively(NODE, currentNode, nodeType, mappings);
+      if (currentNode.isNodeType("exo:datetime")) {
+        currentNode.setProperty("exo:dateModified", new GregorianCalendar());
+      }
+      listenerService.broadcast(POST_EDIT_CONTENT_EVENT, this, currentNode);
+    }
+    //add lastModified property to jcr:content
+    session.save();
+    session.logout();
+    return currentNode.getPath();
+  }
+  
   /**
    * {@inheritDoc}
    */
@@ -183,6 +290,37 @@ public class CmsServiceImpl implements CmsService {
     session.logout();
     return currentNode.getPath();
   }
+  
+  /**
+   * {@inheritDoc}
+   */
+  @Deprecated
+  public String storeEditedNode(String nodeTypeName, Node storeNode, Map mappings,
+      boolean isAddNew, String repository) throws Exception {
+    Set keys = mappings.keySet();
+    String nodePath = extractNodeName(keys);
+    JcrInputProperty relRootProp = (JcrInputProperty) mappings.get(nodePath);
+
+    String primaryType = relRootProp.getNodetype() ;
+    if(primaryType == null || primaryType.length() == 0) {
+      primaryType = nodeTypeName ;
+    }
+    Session session = storeNode.getSession();
+    NodeTypeManager nodetypeManager = session.getWorkspace().getNodeTypeManager();
+    NodeType nodeType = nodetypeManager.getNodeType(primaryType);
+
+  //Broadcast CmsService.event.preEdit event
+    listenerService.broadcast(PRE_EDIT_CONTENT_EVENT,storeNode,mappings);
+    updateNodeRecursively(NODE, storeNode, nodeType, mappings);
+    if (storeNode.isNodeType("exo:datetime")) {
+      storeNode.setProperty("exo:dateModified", new GregorianCalendar());
+    }
+    listenerService.broadcast(POST_EDIT_CONTENT_EVENT, this, storeNode);
+    //add lastModified property to jcr:content
+    session.save();
+    session.logout();
+    return storeNode.getPath();
+  }  
 
   /**
    * {@inheritDoc}
@@ -214,7 +352,85 @@ public class CmsServiceImpl implements CmsService {
     return storeNode.getPath();
   }
 
+  /**
+   * {@inheritDoc}
+   */
+  @Deprecated
+  public String storeNodeByUUID(String nodeTypeName, Node storeHomeNode, Map mappings,
+      boolean isAddNew, String repository) throws Exception {
+    Set keys = mappings.keySet();
+    String nodePath = extractNodeName(keys);
+    JcrInputProperty relRootProp = (JcrInputProperty) mappings.get(nodePath);
+    String nodeName = (String)relRootProp.getValue();
+    if (nodeName == null || nodeName.length() == 0) {
+      nodeName = idGeneratorService.generateStringID(nodeTypeName);
+    }
+    String primaryType = relRootProp.getNodetype() ;
+    if(primaryType == null || primaryType.length() == 0) {
+      primaryType = nodeTypeName ;
+    }
+    Session session = storeHomeNode.getSession();
+    NodeTypeManager nodetypeManager = session.getWorkspace().getNodeTypeManager();
+    NodeType nodeType = nodetypeManager.getNodeType(primaryType);
+    Node currentNode = null;
+    String[] mixinTypes = null ;
+    String mixintypeName = relRootProp.getMixintype();
+    if(mixintypeName != null && mixintypeName.trim().length() > 0) {
+      if(mixintypeName.indexOf(",") > -1){
+        mixinTypes = mixintypeName.split(",") ;
+      }else {
+        mixinTypes = new String[] {mixintypeName} ;
+      }
+    }
+    String currentNodePath;
+    if (isAddNew) {
+      //Broadcast CmsService.event.preCreate event
+      listenerService.broadcast(PRE_CREATE_CONTENT_EVENT,storeHomeNode,mappings);
+      currentNode = storeHomeNode.addNode(nodeName, primaryType);
+      currentNodePath = currentNode.getPath();
+      if(mixinTypes != null){
+        for(String type : mixinTypes){
+          if(!currentNode.isNodeType(type)) {
+            currentNode.addMixin(type);
+          }
+          NodeType mixinType = nodetypeManager.getNodeType(type);
+          createNodeRecursively(NODE, currentNode, mixinType, mappings);
+        }
+      }
+      createNodeRecursively(NODE, currentNode, nodeType, mappings);
+      if(!currentNode.isNodeType(MIX_REFERENCEABLE)) {
+        currentNode.addMixin(MIX_REFERENCEABLE) ;
+      }
+      //Broadcast CmsService.event.postCreate event
+      listenerService.broadcast(POST_CREATE_CONTENT_EVENT,this,currentNode);
+    } else {
+      currentNode = storeHomeNode.getNode(nodeName);
+      currentNodePath = currentNode.getPath();
+      updateNodeRecursively(NODE, currentNode, nodeType, mappings);
+      if(currentNode.isNodeType("exo:datetime")) {
+        currentNode.setProperty("exo:dateModified",new GregorianCalendar()) ;
+      }
+      listenerService.broadcast(POST_EDIT_CONTENT_EVENT, this, currentNode);
+    }
+    //check if currentNode has been moved
+    if (currentNode instanceof NodeImpl && !((NodeImpl)currentNode).isValid()) {
+      currentNode = (Node)session.getItem(currentNodePath);
+      ExoContainer container = ExoContainerContext.getCurrentContainer();
+      LinkManager linkManager = (LinkManager)container.getComponentInstanceOfType(LinkManager.class);
+      if (linkManager.isLink(currentNode)) {
+        try {
+          currentNode = linkManager.getTarget(currentNode, false);
+        } catch (Exception ex) {
+          currentNode = linkManager.getTarget(currentNode, true);
+        }
+      }
+    }
 
+    String uuid = currentNode.getUUID();
+    session.save();
+    return uuid;
+  }
+  
   /**
    * {@inheritDoc}
    */
@@ -683,11 +899,10 @@ public class CmsServiceImpl implements CmsService {
         String referenceWorksapce = null;
         String referenceNodeName = null ;
         Session session = node.getSession();
-        String repositoty = ((ManageableRepository)session.getRepository()).getConfiguration().getName();
         if (((String) value).indexOf(":/") > -1) {
           referenceWorksapce = ((String) value).split(":/")[0];
           referenceNodeName = ((String) value).split(":/")[1];
-          Session session2 = jcrService.getRepository(repositoty).getSystemSession(referenceWorksapce);
+          Session session2 = jcrService.getCurrentRepository().getSystemSession(referenceWorksapce);
           if (session2.getRootNode().hasNode(referenceNodeName)) {
             Node referenceNode = session2.getRootNode().getNode(referenceNodeName);
             if (referenceNode != null) {
@@ -727,14 +942,13 @@ public class CmsServiceImpl implements CmsService {
         String referenceWorksapce = null;
         String referenceNodeName = null ;
         Session session = node.getSession();
-        String repositoty = ((ManageableRepository)session.getRepository()).getConfiguration().getName();
         List<Value> list = new ArrayList<Value>() ;
         for (String v : values) {
           Value valueObj = null;
           if (v.indexOf(":/") > 0) {
             referenceWorksapce = v.split(":/")[0];
             referenceNodeName = v.split(":/")[1];
-            Session session2 = jcrService.getRepository(repositoty).getSystemSession(referenceWorksapce);
+            Session session2 = jcrService.getCurrentRepository().getSystemSession(referenceWorksapce);
             if(session2.getRootNode().hasNode(referenceNodeName)) {
               Node referenceNode = session2.getRootNode().getNode(referenceNodeName);
               valueObj = session2.getValueFactory().createValue(referenceNode);
@@ -941,11 +1155,10 @@ public class CmsServiceImpl implements CmsService {
         String referenceWorksapce = null;
         String referenceNodeName = null ;
         Session session = node.getSession();
-        String repositoty = ((ManageableRepository)session.getRepository()).getConfiguration().getName();
         if (((String) value).indexOf(":/") > -1) {
           referenceWorksapce = ((String) value).split(":/")[0];
           referenceNodeName = ((String) value).split(":/")[1];
-          Session session2 = jcrService.getRepository(repositoty).getSystemSession(referenceWorksapce);
+          Session session2 = jcrService.getCurrentRepository().getSystemSession(referenceWorksapce);
           if(session2.getRootNode().hasNode(referenceNodeName)) {
             Node referenceNode = session2.getRootNode().getNode(referenceNodeName);
             Value value2add = session2.getValueFactory().createValue(referenceNode);
@@ -987,14 +1200,13 @@ public class CmsServiceImpl implements CmsService {
         String referenceWorksapce = null;
         String referenceNodeName = null ;
         Session session = node.getSession();
-        String repositoty = ((ManageableRepository)session.getRepository()).getConfiguration().getName();
         List<Value> list = new ArrayList<Value>() ;
         for (String v : values) {
           Value valueObj = null;
           if (v.indexOf(":/") > 0) {
             referenceWorksapce = v.split(":/")[0];
             referenceNodeName = v.split(":/")[1];
-            Session session2 = jcrService.getRepository(repositoty).getSystemSession(referenceWorksapce);
+            Session session2 = jcrService.getCurrentRepository().getSystemSession(referenceWorksapce);
             if(session2.getRootNode().hasNode(referenceNodeName)) {
               Node referenceNode = session2.getRootNode().getNode(referenceNodeName);
               valueObj = session2.getValueFactory().createValue(referenceNode);
@@ -1043,7 +1255,12 @@ public class CmsServiceImpl implements CmsService {
   /**
    * {@inheritDoc}
    */
-  public void moveNode(String nodePath, String srcWorkspace, String destWorkspace, String destPath) {
+  @Deprecated
+  public void moveNode(String nodePath,
+                       String srcWorkspace,
+                       String destWorkspace,
+                       String destPath,
+                       String repository) {
     Session srcSession = null ;
     Session destSession = null ;
     if(!srcWorkspace.equals(destWorkspace)){
@@ -1085,6 +1302,56 @@ public class CmsServiceImpl implements CmsService {
       }catch(Exception e){
       } finally {
         if(session !=null && session.isLive()) session.logout();
+      }
+    }
+  }
+  
+  /**
+   * {@inheritDoc}
+   */
+  public void moveNode(String nodePath, String srcWorkspace, String destWorkspace, String destPath) {
+    Session srcSession = null ;
+    Session destSession = null ;
+    if (!srcWorkspace.equals(destWorkspace)) {
+      try {
+        srcSession = jcrService.getCurrentRepository().getSystemSession(srcWorkspace);
+        destSession = jcrService.getCurrentRepository().getSystemSession(destWorkspace);
+        Workspace workspace = destSession.getWorkspace();
+        Node srcNode = (Node) srcSession.getItem(nodePath);
+        try {
+          destSession.getItem(destPath);
+        } catch (PathNotFoundException e) {
+          createNode(destSession, destPath);
+        }
+        workspace.clone(srcWorkspace, nodePath, destPath, true);
+        //Remove src node
+        srcNode.remove();
+        srcSession.save();
+        destSession.save() ;
+        srcSession.logout();
+        destSession.logout();
+      } catch (Exception e) {
+      } finally {
+        if(srcSession != null) srcSession.logout();
+        if(destSession !=null) destSession.logout();
+      }
+    } else {
+      Session session = null ;
+      try{
+        session = jcrService.getCurrentRepository().getSystemSession(srcWorkspace);
+        Workspace workspace = session.getWorkspace();
+        try {
+          session.getItem(destPath);
+        } catch (PathNotFoundException e) {
+          createNode(session, destPath);
+          session.refresh(false) ;
+        }
+        workspace.move(nodePath, destPath);
+        session.logout();
+      } catch (Exception e) {
+      } finally {
+        if (session != null && session.isLive())
+          session.logout();
       }
     }
   }

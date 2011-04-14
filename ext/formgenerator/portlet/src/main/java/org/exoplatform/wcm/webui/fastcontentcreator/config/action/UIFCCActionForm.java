@@ -183,9 +183,7 @@ public class UIFCCActionForm extends UIDialogForm implements UISelectable {
   public ResourceResolver getTemplateResourceResolver(WebuiRequestContext context, String template) {
     DMSConfiguration dmsConfiguration = getApplicationComponent(DMSConfiguration.class);
     DMSRepositoryConfiguration repositoryConfiguration = dmsConfiguration.getConfig();
-    return new JCRResourceResolver(repositoryName,
-                                   repositoryConfiguration.getSystemWorkspace(),
-                                   "exo:templateFile");
+    return new JCRResourceResolver(repositoryConfiguration.getSystemWorkspace());
   }
 
   /* (non-Javadoc)

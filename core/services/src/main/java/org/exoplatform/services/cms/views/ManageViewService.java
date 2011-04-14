@@ -39,20 +39,33 @@ public interface ManageViewService {
 
   /**
    * Inserts a new view by giving the following params
-   * @param name          String
-   *                      The name of view
-   * @param permissions   String
-   *                      who can access the view
-   * @param template      String
-   *                      The name of template
-   * @param tabs          List
-   *                      tabs list
-   * @param repository    String
-   *                      The name of repository
-   * @see                 Node
+   * 
+   * @param name String The name of view
+   * @param permissions String who can access the view
+   * @param template String The name of template
+   * @param tabs List tabs list
+   * @param repository String The name of repository
+   * @see Node
    * @throws Exception
    */
-  public void addView(String name, String permissions, String template, List<?> tabs, String repository)throws Exception ;
+  @Deprecated
+  public void addView(String name,
+                      String permissions,
+                      String template,
+                      List<?> tabs,
+                      String repository) throws Exception;
+  
+  /**
+   * Inserts a new view by giving the following params
+   * 
+   * @param name String The name of view
+   * @param permissions String who can access the view
+   * @param template String The name of template
+   * @param tabs List tabs list
+   * @see Node
+   * @throws Exception
+   */
+  public void addView(String name, String permissions, String template, List<?> tabs) throws Exception;
 
   /**
    * Return specify view depend on Name by giving the following params
@@ -66,7 +79,20 @@ public interface ManageViewService {
    * @see                 SessionProvider
    * @throws Exception
    */
+  @Deprecated
   public Node getViewByName(String viewName, String repository, SessionProvider provider) throws Exception;
+  
+  /**
+   * Return specify view depend on Name by giving the following params
+   * @param viewName      String
+   *                      The name of view
+   * @param provider      SessionProvider
+   *                      The SessionProvider object is used to managed Sessions
+   * @see                 Node
+   * @see                 SessionProvider
+   * @throws Exception
+   */
+  public Node getViewByName(String viewName, SessionProvider provider) throws Exception;  
 
   /**
    * Return all string of buttons
@@ -84,7 +110,18 @@ public interface ManageViewService {
    * @see                 Session
    * @throws Exception
    */
+  @Deprecated
   public void removeView(String viewName, String repository) throws Exception;
+  
+  /**
+   * Removes the view by giving the following params
+   * @param viewName      String
+   *                      The name of view
+   * @see                 Node
+   * @see                 Session
+   * @throws Exception
+   */
+  public void removeView(String viewName) throws Exception;  
 
   /**
    * Return all views of the repository is configed in XML file by giving the following params
@@ -95,7 +132,17 @@ public interface ManageViewService {
    * @see                 Session
    * @throws Exception
    */
+  @Deprecated
   public List<ViewConfig> getAllViews(String repository) throws Exception;
+  
+  /**
+   * Return all views of the repository is configed in XML file by giving the following params
+   * @see                 ViewConfig
+   * @see                 Node
+   * @see                 Session
+   * @throws Exception
+   */
+  public List<ViewConfig> getAllViews() throws Exception;  
 
   /**
    * Returns true is the given repository has view by giving the following params
@@ -107,10 +154,21 @@ public interface ManageViewService {
    * @see                 Session
    * @throws Exception
    */
-  public boolean hasView(String name, String repository) throws Exception ;
+  @Deprecated
+  public boolean hasView(String name, String repository) throws Exception;
+  
+  /**
+   * Returns true is the given repository has view by giving the following params
+   * @param name          String
+   *                      The name of repository
+   * @see                 Node
+   * @see                 Session
+   * @throws Exception
+   */
+  public boolean hasView(String name) throws Exception;  
 
   /**
-   * Get teamplate Node that has path by giving the following params
+   * Get template Node that has path by giving the following params
    * @param homeAlias     String
    * @param repository    String
    * @param provider      SessionProvider
@@ -120,7 +178,20 @@ public interface ManageViewService {
    * @see                 Node
    * @throws Exception
    */
+  @Deprecated
   public Node getTemplateHome(String homeAlias, String repository, SessionProvider provider) throws Exception;
+  
+  /**
+   * Get template Node that has path by giving the following params
+   * @param homeAlias     String
+   * @param provider      SessionProvider
+   *                      The SessionProvider object is used to managed Sessions
+   * @see                 SessionProvider
+   * @see                 NodeHierarchyCreator
+   * @see                 Node
+   * @throws Exception
+   */
+  public Node getTemplateHome(String homeAlias, SessionProvider provider) throws Exception;  
 
   /**
    * Gets all node that has template path to the given node
@@ -135,7 +206,23 @@ public interface ManageViewService {
    * @see                 Node
    * @throws Exception
    */
+  @Deprecated
   public List<Node> getAllTemplates(String homeAlias, String repository,SessionProvider provider) throws Exception;
+  
+  /**
+   * Gets all node that has template path to the given node
+   * @param homeAlias     String
+   *                      Alias of template home
+   * @param provider      SessionProvider
+   *                      The SessionProvider object is used to managed Sessions
+   * @see                 SessionProvider
+   * @see                 NodeHierarchyCreator
+   * @see                 Node
+   * @throws Exception
+   */
+  public List<Node> getAllTemplates(String homeAlias,SessionProvider provider) throws Exception;  
+  
+  
 
   /**
    * Return node that has path of the repository
@@ -150,7 +237,21 @@ public interface ManageViewService {
    * @see                 Node
    * @throws Exception
    */
+  @Deprecated
   public Node getTemplate(String path, String repository,SessionProvider provider) throws Exception;
+  
+  /**
+   * Return node that has path of the repository
+   * @param path          String
+   *                      The path of template
+   * @param provider      SessionProvider
+   *                      The SessionProvider object is used to managed Sessions
+   * @see                 SessionProvider
+   * @see                 NodeHierarchyCreator
+   * @see                 Node
+   * @throws Exception
+   */
+  public Node getTemplate(String path, SessionProvider provider) throws Exception;  
 
   /**
    * Inserts a new template for node by specified path
@@ -166,7 +267,22 @@ public interface ManageViewService {
    * @see                   Node
    * @throws Exception
    */
-  public String addTemplate(String name, String content, String homePath, String repository)throws Exception ;
+  @Deprecated
+  public String addTemplate(String name, String content, String homePath, String repository) throws Exception;
+  
+  /**
+   * Inserts a new template for node by specified path
+   * @param name            String
+   *                        The name of new template
+   * @param content         String
+   *                        The property of template
+   * @param homePath       String
+   *                        The path of specified node
+   * @see                   Session
+   * @see                   Node
+   * @throws Exception
+   */
+  public String addTemplate(String name, String content, String homePath) throws Exception;  
 
   /**
    * Update a template for node by specified path
@@ -182,7 +298,22 @@ public interface ManageViewService {
    * @see                   Node
    * @throws Exception
    */
-  public String updateTemplate(String name, String content, String homePath, String repository)throws Exception ;
+  @Deprecated
+  public String updateTemplate(String name, String content, String homePath, String repository) throws Exception;
+  
+  /**
+   * Update a template for node by specified path
+   * @param name            String
+   *                        The name of current template
+   * @param content         String
+   *                        The property of current template
+   * @param homePath       String
+   *                        The path of specified node
+   * @see                   Session
+   * @see                   Node
+   * @throws Exception
+   */
+  public String updateTemplate(String name, String content, String homePath) throws Exception;  
 
   /**
    * Removes the template to the given node by specified the templatePath params
@@ -194,10 +325,23 @@ public interface ManageViewService {
    * @see                   Session
    * @throws Exception
    */
-  public void removeTemplate(String templatePath, String repository) throws Exception  ;
+  @Deprecated
+  public void removeTemplate(String templatePath, String repository) throws Exception;
+  
+  /**
+   * Removes the template to the given node by specified the templatePath params
+   * @param templatePath    String
+   *                        The path of template
+   * @param repository      String
+   *                        The name of repository
+   * @see                   Node
+   * @see                   Session
+   * @throws Exception
+   */
+  public void removeTemplate(String templatePath) throws Exception;  
 
   /**
-   * Insert new tab to the givin view node by specified the following params
+   * Insert new tab to the giving view node by specified the following params
    * @param view            Node
    *                        Specify the node wants to add a tab
    * @param name            String
@@ -216,6 +360,14 @@ public interface ManageViewService {
    * @see                   ManageViewPlugin
    * @throws Exception
    */
+  @Deprecated
   public void init(String repository) throws Exception ;
+  
+  /**
+   * Get all template that is configed in XML file of specified repository
+   * @see                   ManageViewPlugin
+   * @throws Exception
+   */
+  public void init() throws Exception ;  
 
 }

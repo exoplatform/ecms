@@ -126,7 +126,7 @@ public class NewsletterCategoryHandler {
   public Node getCategoryFromConfig(SessionProvider sessionProvider,
                                     String portalName,
                                     NewsletterCategoryConfig config) throws Exception {
-    ManageableRepository manageableRepository = repositoryService.getRepository(repository);
+    ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
     Session session = sessionProvider.getSession(workspace, manageableRepository);
     String categoryPath = NewsletterConstant.generateCategoryPath(portalName);
     Node categoriesNode = (Node)session.getItem(categoryPath);
@@ -209,7 +209,7 @@ public class NewsletterCategoryHandler {
                   NewsletterCategoryConfig categoryConfig) {
     log.info("Trying to add category " + categoryConfig.getName());
     try {
-      ManageableRepository manageableRepository = repositoryService.getRepository(repository);
+      ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
       Session session = sessionProvider.getSession(workspace, manageableRepository);
       String categoryPath = NewsletterConstant.generateCategoryPath(portalName);
       Node categoriesNode = (Node)session.getItem(categoryPath);
@@ -245,7 +245,7 @@ public class NewsletterCategoryHandler {
   public void edit(SessionProvider sessionProvider, String portalName, NewsletterCategoryConfig categoryConfig) {
     log.info("Trying to edit category " + categoryConfig.getName());
     try {
-      ManageableRepository manageableRepository = repositoryService.getRepository(repository);
+      ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
       Session session = sessionProvider.getSession(workspace, manageableRepository);
       String categoryPath = NewsletterConstant.generateCategoryPath(portalName);
       Node categoryNode = ((Node)session.getItem(categoryPath)).getNode(categoryConfig.getName());
@@ -281,7 +281,7 @@ public class NewsletterCategoryHandler {
   public void delete(SessionProvider sessionProvider, String portalName, String categoryName) {
     log.info("Trying to delete category " + categoryName);
     try {
-      ManageableRepository manageableRepository = repositoryService.getRepository(repository);
+      ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
       Session session = sessionProvider.getSession(workspace, manageableRepository);
       String categoryPath = NewsletterConstant.generateCategoryPath(portalName);
       Node categoryNode = ((Node)session.getItem(categoryPath)).getNode((categoryName));
@@ -318,7 +318,7 @@ public class NewsletterCategoryHandler {
                                                     String portalName,
                                                     String categoryName) throws Exception {
     try {
-      ManageableRepository manageableRepository = repositoryService.getRepository(repository);
+      ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
       Session session = sessionProvider.getSession(workspace, manageableRepository);
       String categoryPath = NewsletterConstant.generateCategoryPath(portalName);
       Node categoriesNode = (Node) session.getItem(categoryPath);
@@ -344,7 +344,7 @@ public class NewsletterCategoryHandler {
     List<NewsletterCategoryConfig> listCategories = new ArrayList<NewsletterCategoryConfig>();
     NodeIterator nodeIterator = null;
     try{
-      ManageableRepository manageableRepository = repositoryService.getRepository(repository);
+      ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
       Session session = sessionProvider.getSession(workspace, manageableRepository);
       String categoryPath = NewsletterConstant.generateCategoryPath(portalName);
       Node categoriesNode = (Node)session.getItem(categoryPath);
@@ -374,7 +374,7 @@ public class NewsletterCategoryHandler {
                                                                  String userName,
                                                                  SessionProvider sessionProvider) throws Exception {
     List<NewsletterCategoryConfig> listCategories = new ArrayList<NewsletterCategoryConfig>();
-    ManageableRepository manageableRepository = repositoryService.getRepository(repository);
+    ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
     Session session = sessionProvider.getSession(workspace, manageableRepository);
     String categoryPath = NewsletterConstant.generateCategoryPath(portalName);
     Node categoriesNode = (Node)session.getItem(categoryPath);

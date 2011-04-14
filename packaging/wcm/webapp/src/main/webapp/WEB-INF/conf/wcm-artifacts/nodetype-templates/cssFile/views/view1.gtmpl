@@ -46,10 +46,14 @@
 </style>
 <%
 		import org.exoplatform.ecm.webui.utils.Utils;
+		import org.exoplatform.services.jcr.RepositoryService;
   def originalNode = uicomponent.getOriginalNode();
   def currentNode = uicomponent.getNode() ; 
   def contentNode = currentNode.getNode("jcr:content") ;
   def mimeType = contentNode.getProperty("jcr:mimeType").getString() ;
+  
+  RepositoryService rService = uicomponent.getApplicationComponent(RepositoryService.class);
+  String repository = rService.getCurrentRepository().getConfiguration().getName();  
   
   public String formatNodeName(String text) {
     return text.replaceAll("'", "\\\\'") ;
@@ -69,7 +73,7 @@
     <table align="center" class="ActionContainer">  
       <tr>
         <td align="center">
-          <a href="javascript:eXo.ecm.ECMUtils.generateWebDAVLink('<%=uicomponent.getWebDAVServerPrefix()%>','<%=uicomponent.getPortalName()%>','<%=restContextName%>','<%=uicomponent.getRepository()%>','<%=uicomponent.getWorkspaceName()%>','<%=formatNodeName(originalNode.getPath())%>','<%=mimeType%>')" class="ActionButton LightBlueStyle">
+          <a href="javascript:eXo.ecm.ECMUtils.generateWebDAVLink('<%=uicomponent.getWebDAVServerPrefix()%>','<%=uicomponent.getPortalName()%>','<%=restContextName%>','${repository}','<%=uicomponent.getWorkspaceName()%>','<%=formatNodeName(originalNode.getPath())%>','<%=mimeType%>')" class="ActionButton LightBlueStyle">
             <div class="ButtonLeft">
               <div class="ButtonRight">
                 <div class="ButtonMiddle">

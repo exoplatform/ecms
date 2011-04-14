@@ -102,7 +102,7 @@ public class UIDrivesBrowser extends UIContainer {
     ManageDriveService driveService = getApplicationComponent(ManageDriveService.class);
     List<String> userRoles = Utils.getMemberships();
     String userId = Util.getPortalRequestContext().getRemoteUser();
-    return driveService.getMainDrives(repoName_, userId, userRoles);
+    return driveService.getMainDrives(userId, userRoles);
   }
 
   public List<DriveData> groupDrives() throws Exception {
@@ -110,14 +110,14 @@ public class UIDrivesBrowser extends UIContainer {
     List<String> groups = Utils.getGroups();
     List<String> userRoles = Utils.getMemberships();
     String userId = Util.getPortalRequestContext().getRemoteUser();
-    return driveService.getGroupDrives(repoName_, userId, userRoles, groups);
+    return driveService.getGroupDrives(userId, userRoles, groups);
   }
 
   public List<DriveData> personalDrives() throws Exception {
     ManageDriveService driveService = getApplicationComponent(ManageDriveService.class);
     List<String> userRoles = Utils.getMemberships();
     String userId = Util.getPortalRequestContext().getRemoteUser();
-    return driveService.getPersonalDrives(repoName_, userId, userRoles);
+    return driveService.getPersonalDrives(userId, userRoles);
   }
 
   static  public class SelectRepoActionListener extends EventListener<UIDrivesBrowser> {
@@ -135,16 +135,16 @@ public class UIDrivesBrowser extends UIContainer {
       String driveName = event.getRequestContext().getRequestParameter(OBJECTID);
       RepositoryService rservice = uiDrive.getApplicationComponent(RepositoryService.class);
       ManageDriveService dservice = uiDrive.getApplicationComponent(ManageDriveService.class);
-      DriveData drive = dservice.getDriveByName(driveName, uiDrive.repoName_);
+      DriveData drive = dservice.getDriveByName(driveName);
       String userId = Util.getPortalRequestContext().getRemoteUser();
       UIApplication uiApp = uiDrive.getAncestorOfType(UIApplication.class);
       List<String> viewList = new ArrayList<String>();
       for(String role : Utils.getMemberships()){
         for(String viewName : drive.getViews().split(",")) {
           if(!viewList.contains(viewName.trim())) {
-            Node viewNode =
-              uiDrive.getApplicationComponent(ManageViewService.class).getViewByName(viewName.trim(),
-                  uiDrive.repoName_,SessionProviderFactory.createSystemProvider());
+            Node viewNode = uiDrive.getApplicationComponent(ManageViewService.class)
+                                   .getViewByName(viewName.trim(),
+                                                  SessionProviderFactory.createSystemProvider());
             String permiss = viewNode.getProperty("exo:accessPermissions").getString();
             if(permiss.contains("${userId}")) permiss = permiss.replace("${userId}", userId);
             String[] viewPermissions = permiss.split(",");
@@ -183,7 +183,7 @@ public class UIDrivesBrowser extends UIContainer {
       uiJCRExplorer.setIsReferenceNode(false);
 
       SessionProvider provider = SessionProviderFactory.createSessionProvider();
-      ManageableRepository repository = rservice.getRepository(uiDrive.repoName_);
+      ManageableRepository repository = rservice.getCurrentRepository();
       try {
         Session session = provider.getSession(drive.getWorkspace(),repository);
         // check if it exists

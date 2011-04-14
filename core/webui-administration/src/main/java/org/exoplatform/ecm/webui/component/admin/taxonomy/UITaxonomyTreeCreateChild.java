@@ -23,7 +23,6 @@ import java.util.List;
 import javax.jcr.Node;
 import javax.jcr.Session;
 
-import org.exoplatform.ecm.webui.component.admin.UIECMAdminPortlet;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.services.jcr.RepositoryService;
@@ -32,10 +31,10 @@ import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.ComponentConfigs;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIBreadcumbs;
+import org.exoplatform.webui.core.UIBreadcumbs.LocalPath;
 import org.exoplatform.webui.core.UIContainer;
 import org.exoplatform.webui.core.UIPopupContainer;
 import org.exoplatform.webui.core.UIPopupWindow;
-import org.exoplatform.webui.core.UIBreadcumbs.LocalPath;
 import org.exoplatform.webui.core.lifecycle.UIContainerLifecycle;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
@@ -113,20 +112,20 @@ public class UITaxonomyTreeCreateChild extends UIContainer {
     return (Node) getSession().getItem(path) ;
   }
 
-  String getRepository() throws Exception {
-    return getAncestorOfType(UIECMAdminPortlet.class).getPreferenceRepository();
-  }
-
   Session getSession() throws Exception {
-    String repositoryName = getRepository();
-    return SessionProviderFactory.createSystemProvider().getSession(workspace,
-        getRepository(repositoryName));
+    return SessionProviderFactory.createSystemProvider().getSession(workspace, getRepository());
   }
 
+  @Deprecated
   public ManageableRepository getRepository(String repositoryName) throws Exception{
     RepositoryService repositoryService = getApplicationComponent(RepositoryService.class);
     return repositoryService.getCurrentRepository();
   }
+  
+  public ManageableRepository getRepository() throws Exception {
+    RepositoryService repositoryService = getApplicationComponent(RepositoryService.class);
+    return repositoryService.getCurrentRepository();
+  } 
 
   public void initPopup(String path) throws Exception {
     removeChildById("TaxonomyPopupCreateChild");

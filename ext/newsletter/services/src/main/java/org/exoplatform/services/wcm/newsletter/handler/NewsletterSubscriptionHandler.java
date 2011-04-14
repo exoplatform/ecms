@@ -202,7 +202,7 @@ public class NewsletterSubscriptionHandler {
     log.info("Trying to add subcription " + subscription.getName());
     Session session = null;
     try {
-      ManageableRepository manageableRepository = repositoryService.getRepository(repository);
+      ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
       session = sessionProvider.getSession(workspace, manageableRepository);
       String path = NewsletterConstant.generateCategoryPath(portalName);
       Node categoryNode = ((Node)session.getItem(path)).getNode(subscription.getCategoryName());
@@ -231,7 +231,7 @@ public class NewsletterSubscriptionHandler {
   public void edit(SessionProvider sessionProvider, String portalName, NewsletterSubscriptionConfig subscription) {
     log.info("Trying to edit subcription " + subscription.getName());
     try {
-      ManageableRepository manageableRepository = repositoryService.getRepository(repository);
+      ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
       Session session = sessionProvider.getSession(workspace, manageableRepository);
       String path = NewsletterConstant.generateCategoryPath(portalName);
       Node categoryNode = ((Node)session.getItem(path)).getNode(subscription.getCategoryName());
@@ -269,7 +269,7 @@ public class NewsletterSubscriptionHandler {
 
     log.info("Trying to delete subcription " + subscription.getName());
     try {
-      ManageableRepository manageableRepository = repositoryService.getRepository(repository);
+      ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
       Session session = sessionProvider.getSession(workspace, manageableRepository);
       String path = NewsletterConstant.generateCategoryPath(portalName);
       Node categoryNode = ((Node)session.getItem(path)).getNode(categoryName);
@@ -309,7 +309,7 @@ public class NewsletterSubscriptionHandler {
 
     List<NewsletterSubscriptionConfig> listSubscriptions = new ArrayList<NewsletterSubscriptionConfig>();
 
-    ManageableRepository manageableRepository = repositoryService.getRepository(repository);
+    ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
     Session session = sessionProvider.getSession(workspace, manageableRepository);
     String path = NewsletterConstant.generateCategoryPath(portalName);
     Node categoryNode = ((Node)session.getItem(path)).getNode(categoryName);
@@ -331,7 +331,7 @@ public class NewsletterSubscriptionHandler {
                                                                       String userName,
                                                                       SessionProvider sessionProvider) throws Exception {
     List<NewsletterSubscriptionConfig> listSubs = new ArrayList<NewsletterSubscriptionConfig>();
-    ManageableRepository manageableRepository = repositoryService.getRepository(repository);
+    ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
     Session session = sessionProvider.getSession(workspace, manageableRepository);
     String categoriesPath = NewsletterConstant.generateCategoryPath(portalName);
     String categoryPath = categoriesPath + "/" + categoryName;
@@ -368,7 +368,7 @@ public class NewsletterSubscriptionHandler {
                                                                            String portalName,
                                                                            String userEmail) throws Exception {
     List<NewsletterSubscriptionConfig> listSubscriptions = new ArrayList<NewsletterSubscriptionConfig>();
-    ManageableRepository manageableRepository = repositoryService.getRepository(repository);
+    ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
     Session session = sessionProvider.getSession(workspace, manageableRepository);
     QueryManager queryManager = session.getWorkspace().getQueryManager();
     String sqlQuery = "select * from " + NewsletterConstant.SUBSCRIPTION_NODETYPE +
@@ -402,7 +402,7 @@ public class NewsletterSubscriptionHandler {
                                                              String portalName,
                                                              String categoryName,
                                                              String subCriptionName) throws Exception {
-      ManageableRepository manageableRepository = repositoryService.getRepository(repository);
+      ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
       Session session = sessionProvider.getSession(workspace, manageableRepository);
       String path = NewsletterConstant.generateCategoryPath(portalName);
       Node categoryNode = ((Node)session.getItem(path)).getNode(categoryName);
@@ -431,7 +431,7 @@ public class NewsletterSubscriptionHandler {
                                             String portalName,
                                             String categoryName,
                                             String subScriptionName) throws Exception {
-    ManageableRepository manageableRepository = repositoryService.getRepository(repository);
+    ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
     Session session = sessionProvider.getSession(workspace, manageableRepository);
     String path = NewsletterConstant.generateCategoryPath(portalName) + "/" + categoryName + "/" + subScriptionName;
     QueryManager queryManager = session.getWorkspace().getQueryManager();

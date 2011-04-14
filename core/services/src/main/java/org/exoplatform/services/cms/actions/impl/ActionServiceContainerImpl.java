@@ -205,17 +205,35 @@ public class ActionServiceContainerImpl implements ActionServiceContainer, Start
    * @param repository   repository name
    * @throws Exception
    */
+  @Deprecated
   public void init(String repository) {
     try {
       for (ComponentPlugin cPlungin : actionPlugins) {
         BaseActionPlugin plugin = (BaseActionPlugin) cPlungin;
-        plugin.reImportPredefinedActionsInJcr(repository);
+        plugin.reImportPredefinedActionsInJcr();
       }
-      reInitiateActionConfiguration(repository);
+      reInitiateActionConfiguration();
     } catch (Exception e) {
       LOG.error("Cannot initialize the ActionServiceContainerImpl", e);
     }
   }
+  
+  /**
+   * Add mixin exo:actionable for node in current repository
+   * @param repository   repository name
+   * @throws Exception
+   */
+  public void init() {
+    try {
+      for (ComponentPlugin cPlungin : actionPlugins) {
+        BaseActionPlugin plugin = (BaseActionPlugin) cPlungin;
+        plugin.reImportPredefinedActionsInJcr();
+      }
+      reInitiateActionConfiguration();
+    } catch (Exception e) {
+      LOG.error("Cannot initialize the ActionServiceContainerImpl", e);
+    }
+  }  
 
   public Collection<String> getActionPluginNames() {
     Collection<String> actionPluginNames = new ArrayList<String>(actionPlugins.size());
@@ -412,7 +430,7 @@ public class ActionServiceContainerImpl implements ActionServiceContainer, Start
       removeAction(node, action.getName(), repository);
     }
   }
-
+  
   public void removeAction(Node node, String actionName, String repository) throws Exception {
     if(!node.isNodeType(ACTIONABLE)) return  ;
     Node action2Remove = getAction(node, actionName);
@@ -439,7 +457,8 @@ public class ActionServiceContainerImpl implements ActionServiceContainer, Start
     action2Remove.remove();
     node.save();
   }
-
+  
+  @Deprecated
   public void addAction(Node storeActionNode,
                         String repository,
                         String actionType,
@@ -478,7 +497,46 @@ public class ActionServiceContainerImpl implements ActionServiceContainer, Start
       session.logout();
     }
   }
+  
+  public void addAction(Node storeActionNode,
+                        String actionType,
+                        boolean isDeep,
+                        String[] uuid,
+                        String[] nodeTypeNames,
+                        Map mappings) throws Exception {
+    Node actionsNode = null;
+    try {
+      actionsNode = storeActionNode.getNode(EXO_ACTIONS);
+    } catch (PathNotFoundException e) {
+      actionsNode = storeActionNode.addNode(EXO_ACTIONS,ACTION_STORAGE) ;
+      actionsNode.addMixin(EXO_HIDDENABLE) ;
+      storeActionNode.save();
+    }
+    if (!storeActionNode.isNodeType(ACTIONABLE)) {
+      storeActionNode.addMixin(ACTIONABLE);
+      storeActionNode.save();
+    }
+    String newActionPath = cmsService_.storeNode(actionType, actionsNode, mappings,true);
+    storeActionNode.save();
+    String srcWorkspace = storeActionNode.getSession().getWorkspace().getName();
 
+    String srcPath = storeActionNode.getPath();
+    ActionPlugin actionService = getActionPluginForActionType(actionType);
+    if (actionService == null)
+      throw new ClassNotFoundException("Not found any action's service compatible with action type "+actionType) ;
+    try {
+      actionService.addAction(actionType, srcWorkspace, srcPath, isDeep, uuid, nodeTypeNames, mappings);
+    } catch (Exception e) {
+      if (LOG.isDebugEnabled()) LOG.error(e);
+      Session session = getSystemSession(storeActionNode.getSession().getWorkspace().getName());
+      Node actionNode = (Node) session.getItem(newActionPath);
+      actionNode.remove();
+      session.save();
+      session.logout();
+    }
+  }  
+
+  @Deprecated
   public void addAction(Node storeActionNode, String repository, String actionType, Map mappings) throws Exception {
     boolean isDeep = true;
     String[] nodeTypeName = null;
@@ -500,6 +558,28 @@ public class ActionServiceContainerImpl implements ActionServiceContainer, Start
     }
     addAction(storeActionNode, repository, actionType, isDeep, uuid, nodeTypeName, mappings);
   }
+  
+  public void addAction(Node storeActionNode, String actionType, Map mappings) throws Exception {
+    boolean isDeep = true;
+    String[] nodeTypeName = null;
+    String[] uuid = null;
+    if (mappings.containsKey("/node/exo:isDeep")) {
+      isDeep = (Boolean) ((JcrInputProperty) mappings.get("/node/exo:isDeep")).getValue();
+    }
+    if (mappings.containsKey("/node/exo:uuid")) {
+      uuid = (String[]) ((JcrInputProperty) mappings.get("/node/exo:uuid")).getValue();
+      if(uuid.length == 0) uuid = null;
+    }
+    if (mappings.containsKey("/node/exo:nodeTypeName")) {
+      nodeTypeName = (String[]) ((JcrInputProperty) mappings.get("/node/exo:nodeTypeName"))
+          .getValue();
+      if(nodeTypeName.length == 0) {
+        nodeTypeName = null;
+        mappings.remove("/node/exo:nodeTypeName");
+      }
+    }
+    addAction(storeActionNode, actionType, isDeep, uuid, nodeTypeName, mappings);
+  }  
 
   /**
    * Call addAction(Node node, String repository, String type, Map mappings) to
@@ -626,7 +706,7 @@ public class ActionServiceContainerImpl implements ActionServiceContainer, Start
           session.logout();
           continue;
         }
-        initAction(queryManager, repository.getName(), workspace) ;
+        initAction(queryManager, workspace) ;
         session.logout();
       }
   }
@@ -638,7 +718,7 @@ public class ActionServiceContainerImpl implements ActionServiceContainer, Start
    * @throws Exception
    * @see {@link #initAction(QueryManager, String, String)}
    */
-  private void reInitiateActionConfiguration(String repository) throws Exception {
+  private void reInitiateActionConfiguration() throws Exception {
     ManageableRepository jcrRepository = repositoryService_.getCurrentRepository();
     for (String workspace : jcrRepository.getWorkspaceNames()) {
       Session session = jcrRepository.getSystemSession(workspace);
@@ -653,7 +733,7 @@ public class ActionServiceContainerImpl implements ActionServiceContainer, Start
         session.logout();
         continue;
       }
-      initAction(queryManager, repository, workspace) ;
+      initAction(queryManager, workspace) ;
       session.logout();
     }
   }
@@ -666,7 +746,7 @@ public class ActionServiceContainerImpl implements ActionServiceContainer, Start
    * @param workspace    workspace name
    * @throws Exception
    */
-  private void initAction(QueryManager queryManager, String repository, String workspace) throws Exception {
+  private void initAction(QueryManager queryManager, String workspace) throws Exception {
     try {
       Query query = queryManager.createQuery(ACTION_QUERY, Query.XPATH);
       QueryResult queryResult = query.execute();
@@ -682,17 +762,17 @@ public class ActionServiceContainerImpl implements ActionServiceContainer, Start
             if (DMSEvent.getEventTypes(lifecyclePhase) == DMSEvent.READ)
               continue;
             if ((DMSEvent.getEventTypes(lifecyclePhase) & DMSEvent.SCHEDULE) > 0) {
-              actionService.reScheduleActivations(actionNode, repository);
+              actionService.reScheduleActivations(actionNode);
             }
             if (DMSEvent.getEventTypes(lifecyclePhase) == DMSEvent.SCHEDULE)
               continue;
-              actionService.initiateActionObservation(actionNode, repository);
+              actionService.initiateActionObservation(actionNode);
           }
         }
       }
     } catch (Exception e) {
       LOG.error(">>>> Can not launch action listeners for workspace: "
-          + workspace + " in '" + repository + "' repository", e);
+          + workspace + " in current repository", e);
     }
   }
 

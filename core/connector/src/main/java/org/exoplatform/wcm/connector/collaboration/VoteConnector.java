@@ -75,7 +75,7 @@ public class VoteConnector extends BaseConnector implements ResourceContainer {
       @QueryParam("lang") String lang
       ) throws Exception {
     try {
-      Node content = getContent(repositoryName, workspaceName, jcrPath);
+      Node content = getContent(workspaceName, jcrPath);
       if (content.isNodeType("mix:votable")) {
         String userName = content.getSession().getUserID();
         votingService.vote(content, Double.parseDouble(vote), userName, lang);
@@ -107,7 +107,7 @@ public class VoteConnector extends BaseConnector implements ResourceContainer {
       @QueryParam("workspaceName") String workspaceName,
       @QueryParam("jcrPath") String jcrPath) throws Exception {
     try {
-      Node content = getContent(repositoryName, workspaceName, jcrPath);
+      Node content = getContent(workspaceName, jcrPath);
       if (content.isNodeType("mix:votable")) {
         String votingRate = "";
         if (content.hasProperty("exo:votingRate"))

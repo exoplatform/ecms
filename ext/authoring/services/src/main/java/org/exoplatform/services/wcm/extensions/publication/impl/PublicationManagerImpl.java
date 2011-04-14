@@ -123,11 +123,11 @@ public class PublicationManagerImpl implements PublicationManager, Startable {
   }
 
   public List<Node> getContents(String fromstate,
-      String tostate,
-      String date,
-      String user,
-      String lang,
-      String workspace) throws Exception {
+                                String tostate,
+                                String date,
+                                String user,
+                                String lang,
+                                String workspace) throws Exception {
 
     WCMComposer wcmComposer = (WCMComposer) ExoContainerContext.getCurrentContainer()
                                                                .getComponentInstanceOfType(WCMComposer.class);
@@ -166,7 +166,7 @@ public class PublicationManagerImpl implements PublicationManager, Startable {
     }
     filters.put(WCMComposer.FILTER_QUERY_FULL, query.toString());
     if (log.isDebugEnabled()) log.debug("query="+query.toString());
-    List<Node> nodes = wcmComposer.getContents("repository", workspace, "/", filters, WCMCoreUtils.getUserSessionProvider());
+    List<Node> nodes = wcmComposer.getContents(workspace, "/", filters, WCMCoreUtils.getUserSessionProvider());
 
     return nodes;
   }

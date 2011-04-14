@@ -55,6 +55,7 @@ import org.exoplatform.services.cms.taxonomy.TaxonomyTreeData;
 import org.exoplatform.services.cms.taxonomy.impl.TaxonomyAlreadyExistsException;
 import org.exoplatform.services.cms.taxonomy.impl.TaxonomyNodeAlreadyExistsException;
 import org.exoplatform.services.cms.templates.TemplateService;
+import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.access.AccessControlEntry;
 import org.exoplatform.services.jcr.access.PermissionType;
 import org.exoplatform.services.jcr.access.SystemIdentity;
@@ -164,8 +165,7 @@ public class UIActionForm extends UIDialogForm implements UISelectable {
     TaxonomyTreeData taxoTreeData = getTaxoTreeData();
     String workspace = taxoTreeData.getTaxoTreeWorkspace();
     String homePath = taxoTreeData.getTaxoTreeHomePath();
-    String systemWorkspace = getAncestorOfType(UITaxonomyManagerTrees.class)
-    .getDmsSystemWorkspaceName(getRepositoryName());
+    String systemWorkspace = getAncestorOfType(UITaxonomyManagerTrees.class).getDmsSystemWorkspaceName();
     if (workspace.equals(systemWorkspace) && homePath.length() == 0) {
       homePath = getJcrPath(BasePath.TAXONOMIES_TREE_STORAGE_PATH);
       taxoTreeData.setTaxoTreeHomePath(homePath);
@@ -181,7 +181,7 @@ public class UIActionForm extends UIDialogForm implements UISelectable {
   public ResourceResolver getTemplateResourceResolver(WebuiRequestContext context, String template) {
     DMSConfiguration dmsConfiguration = getApplicationComponent(DMSConfiguration.class);
     String workspace =  dmsConfiguration.getConfig().getSystemWorkspace();
-    return new JCRResourceResolver(getTaxoTreeData().getRepository(), workspace, "exo:templateFile");
+    return new JCRResourceResolver(workspace);
   }
 
   public String getTemplate() {
@@ -189,7 +189,6 @@ public class UIActionForm extends UIDialogForm implements UISelectable {
   }
 
   public String getDialogPath() {
-    repositoryName = getTaxoTreeData().getRepository();
     TemplateService templateService = getApplicationComponent(TemplateService.class);
     String userName = Util.getPortalRequestContext().getRemoteUser();
     String dialogPath = null;
@@ -277,9 +276,12 @@ public class UIActionForm extends UIDialogForm implements UISelectable {
       TaxonomyTreeData taxoTreeData = uiActionForm.getTaxoTreeData();
       UITaxonomyManagerTrees uiTaxonomyManagerTrees = uiActionForm.getAncestorOfType(UITaxonomyManagerTrees.class);
       TaxonomyService taxonomyService = uiTaxonomyTreeContainer.getApplicationComponent(TaxonomyService.class);
-      String repository = taxoTreeData.getRepository();
+      String repository = uiActionForm.getApplicationComponent(RepositoryService.class)
+                                      .getCurrentRepository()
+                                      .getConfiguration()
+                                      .getName();
       String dmsSysWorkspace = uiTaxonomyTreeContainer.getAncestorOfType(UITaxonomyManagerTrees.class)
-          .getDmsSystemWorkspaceName(repository);
+                                                      .getDmsSystemWorkspaceName();
       UIApplication uiApp = uiTaxonomyTreeContainer.getAncestorOfType(UIApplication.class);
       String name = taxoTreeData.getTaxoTreeName();
       String workspace = taxoTreeData.getTaxoTreeWorkspace();
@@ -533,7 +535,10 @@ public class UIActionForm extends UIDialogForm implements UISelectable {
       ClassLoader cl = Thread.currentThread().getContextClassLoader();
       Class clazz = Class.forName(classPath, true, cl);
       UIComponent uiComp = uiManager.createUIComponent(clazz, null, null);
-      String repositoryName = uiForm.getTaxoTreeData().getRepository();
+      String repositoryName = uiForm.getApplicationComponent(RepositoryService.class)
+                                    .getCurrentRepository()
+                                    .getConfiguration()
+                                    .getName();
       String selectorParams = (String) fieldPropertiesMap.get("selectorParams");
       if (uiComp instanceof UIOneNodePathSelector) {
         SessionProvider provider = SessionProviderFactory.createSessionProvider();

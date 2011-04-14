@@ -43,6 +43,7 @@ public class NTFileResourceResolver extends JCRResourceResolver {
    * @param workspace the workspace
    * @param propertyName the property name
    */
+  @Deprecated
   public NTFileResourceResolver(String repository, String workspace, String propertyName) {
     super(repository, workspace, propertyName);
   }
@@ -53,8 +54,13 @@ public class NTFileResourceResolver extends JCRResourceResolver {
    * @param repository the repository
    * @param workspace the workspace
    */
+  @Deprecated
   public NTFileResourceResolver(String repository, String workspace) {
     super(repository,workspace,null);
+  }
+  
+  public NTFileResourceResolver(String workspace) {
+    super(workspace);
   }
 
   /**
@@ -65,7 +71,7 @@ public class NTFileResourceResolver extends JCRResourceResolver {
     ExoContainer container = ExoContainerContext.getCurrentContainer() ;
     RepositoryService repositoryService =
       (RepositoryService)container.getComponentInstanceOfType(RepositoryService.class) ;
-    ManageableRepository manageableRepository = repositoryService.getRepository(repository) ;
+    ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
     SessionProvider provider = SessionProviderFactory.createSystemProvider();
     Session session = provider.getSession(workspace,manageableRepository);
     String fileUUID = removeScheme(url);

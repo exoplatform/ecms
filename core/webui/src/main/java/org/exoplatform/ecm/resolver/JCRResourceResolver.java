@@ -68,8 +68,20 @@ public class JCRResourceResolver extends ResourceResolver {
    * @param workspace the workspace
    * @param propertyName the property name
    */
+  @Deprecated
   public JCRResourceResolver(String repository,String workspace) {
     this.repository = repository ;
+    this.workspace = workspace;
+    templateService = WCMCoreUtils.getService(TemplateService.class);
+  }
+  
+  /**
+   * Instantiates a new jCR resource resolver to load template that stored as a
+   * property of node in jcr
+   * 
+   * @param workspace the workspace
+   */
+  public JCRResourceResolver(String workspace) {
     this.workspace = workspace;
     templateService = WCMCoreUtils.getService(TemplateService.class);
   }
@@ -87,7 +99,7 @@ public class JCRResourceResolver extends ResourceResolver {
    */
   public InputStream getInputStream(String url) throws Exception  {
     SessionProvider provider = SessionProviderFactory.createSystemProvider();
-    Session session = provider.getSession(workspace, WCMCoreUtils.getRepository(repository));
+    Session session = provider.getSession(workspace, WCMCoreUtils.getRepository());
     ByteArrayInputStream inputStream = null;
     try {
       Node template = (Node)session.getItem(removeScheme(url));

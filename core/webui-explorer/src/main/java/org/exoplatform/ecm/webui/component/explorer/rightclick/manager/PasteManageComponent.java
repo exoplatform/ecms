@@ -422,7 +422,7 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
           Property pro = references.nextProperty();
           Node refNode = pro.getParent();
           if (refNode.hasProperty(RELATION_PROP)) {
-            relationsService.removeRelation(refNode, srcPath, uiExplorer.getRepositoryName());
+            relationsService.removeRelation(refNode, srcPath);
             refNode.save();
             refList.add(refNode);
           }
@@ -460,8 +460,7 @@ public class PasteManageComponent extends UIAbstractManagerComponent {
           actionContainer.initiateObservation(desNode, repository);
         for (int i = 0; i < refList.size(); i++) {
           Node addRef = refList.get(i);
-          relationsService.addRelation(addRef, destPath, session.getWorkspace().getName(),
-              uiExplorer.getRepositoryName());
+          relationsService.addRelation(addRef, destPath, session.getWorkspace().getName());
           addRef.save();
         }
         uiWorkingArea.getVirtualClipboards().clear();

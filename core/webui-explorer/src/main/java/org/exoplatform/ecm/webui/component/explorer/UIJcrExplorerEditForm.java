@@ -314,13 +314,13 @@ public class UIJcrExplorerEditForm extends UIForm implements UISelectable {
         driveNameInput.setRendered(false);
       } else if(typeSelectBox.getValue().equals(UIJCRExplorerPortlet.SELECTION)) {
         DriveData personalPrivateDrive =
-          uiJExplorerPortlet.getUserDrive(uiJExplorerPortlet.getPreferenceRepository(), "private");
+          uiJExplorerPortlet.getUserDrive("private");
         UIFormStringInput stringInputDrive =
           driveNameInput.getUIStringInput(UIJCRExplorerPortlet.DRIVE_NAME);
         stringInputDrive.setValue(personalPrivateDrive.getName());
       } else if(typeSelectBox.getValue().equals(UIJCRExplorerPortlet.PERSONAL)) {
         DriveData personalPrivateDrive =
-          uiJExplorerPortlet.getUserDrive(uiJExplorerPortlet.getPreferenceRepository(), "private");
+          uiJExplorerPortlet.getUserDrive("private");
         UIFormStringInput stringInputDrive =
           driveNameInput.getUIStringInput(UIJCRExplorerPortlet.DRIVE_NAME);
         stringInputDrive.setValue(personalPrivateDrive.getName());

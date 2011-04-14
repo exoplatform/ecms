@@ -66,10 +66,19 @@ public class UIDriveSelector extends UIContainer {
     uiPageIterator_.setPageList(objPageList);
   }
 
+  @Deprecated
   public List<DriveData> getDrives(String repoName) throws Exception {
     ManageDriveService driveService = getApplicationComponent(ManageDriveService.class) ;
     List<DriveData> driveList =
-      driveService.getDriveByUserRoles(repoName, Util.getPortalRequestContext().getRemoteUser(), Utils.getMemberships());
+      driveService.getDriveByUserRoles(Util.getPortalRequestContext().getRemoteUser(), Utils.getMemberships());
+    Collections.sort(driveList, new DriveComparator()) ;
+    return driveList ;
+  }
+  
+  public List<DriveData> getDrives() throws Exception {
+    ManageDriveService driveService = getApplicationComponent(ManageDriveService.class) ;
+    List<DriveData> driveList =
+      driveService.getDriveByUserRoles(Util.getPortalRequestContext().getRemoteUser(), Utils.getMemberships());
     Collections.sort(driveList, new DriveComparator()) ;
     return driveList ;
   }

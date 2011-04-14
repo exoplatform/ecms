@@ -73,8 +73,7 @@ public class UIReferencesList extends UIGrid implements UIPopupComponent{
     UIJCRExplorer uiJCRExplorer = getAncestorOfType(UIJCRExplorer.class) ;
     Node currentNode = uiJCRExplorer.getCurrentNode() ;
     String uuid = currentNode.getUUID() ;
-    String repositoryName = uiJCRExplorer.getRepositoryName() ;
-    ManageableRepository repository = repositoryService.getRepository(repositoryName) ;
+    ManageableRepository repository = repositoryService.getCurrentRepository();
     Session session = null ;
     for(String workspace : repository.getWorkspaceNames()) {
       session = repository.getSystemSession(workspace) ;

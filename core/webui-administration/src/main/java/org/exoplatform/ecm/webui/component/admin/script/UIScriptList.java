@@ -24,8 +24,6 @@ import javax.jcr.AccessDeniedException;
 import javax.jcr.Node;
 
 import org.exoplatform.commons.utils.ObjectPageList;
-import org.exoplatform.ecm.webui.component.admin.UIECMAdminPortlet;
-import org.exoplatform.webui.core.UIPopupContainer;
 import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.services.cms.scripts.ScriptService;
 import org.exoplatform.web.application.ApplicationMessage;
@@ -34,6 +32,7 @@ import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.core.UIComponentDecorator;
 import org.exoplatform.webui.core.UIPageIterator;
+import org.exoplatform.webui.core.UIPopupContainer;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.exception.MessageException;
@@ -80,17 +79,16 @@ public class UIScriptList extends UIComponentDecorator {
 
   public String getScriptCategory() throws Exception {
     UIComponent parent = getParent() ;
-    String repository = getAncestorOfType(UIECMAdminPortlet.class).getPreferenceRepository() ;
     ScriptService scriptService =  getApplicationComponent(ScriptService.class) ;
     Node script = null ;
     if(parent instanceof UIECMScripts) {
       UIECMFilterForm filterForm = parent.findFirstComponentOfType(UIECMFilterForm.class) ;
       String categoryName =
         filterForm.getUIFormSelectBox(UIECMFilterForm.FIELD_SELECT_SCRIPT).getValue() ;
-      script = scriptService.getECMScriptHome(repository,
-          SessionProviderFactory.createSystemProvider()).getNode(categoryName) ;
+      script = scriptService.getECMScriptHome(SessionProviderFactory.createSystemProvider())
+                            .getNode(categoryName);
     } else {
-      script = scriptService.getCBScriptHome(repository, SessionProviderFactory.createSystemProvider()) ;
+      script = scriptService.getCBScriptHome(SessionProviderFactory.createSystemProvider());
     }
     String basePath = scriptService.getBaseScriptPath() + "/" ;
     return script.getPath().substring(basePath.length()) ;
@@ -110,19 +108,17 @@ public class UIScriptList extends UIComponentDecorator {
 
   public Node getScriptNode(String nodeName) throws Exception {
     UIComponent parent = getParent() ;
-    String repository = getAncestorOfType(UIECMAdminPortlet.class).getPreferenceRepository() ;
     ScriptService scriptService =  getApplicationComponent(ScriptService.class) ;
     Node script = null  ;
     if(parent instanceof UIECMScripts) {
       UIECMFilterForm filterForm = parent.findFirstComponentOfType(UIECMFilterForm.class) ;
       String categoryName =
         filterForm.getUIFormSelectBox(UIECMFilterForm.FIELD_SELECT_SCRIPT).getValue() ;
-      Node category = scriptService.getECMScriptHome(repository,
-          SessionProviderFactory.createSessionProvider()).getNode(categoryName) ;
+      Node category = scriptService.getECMScriptHome(SessionProviderFactory.createSessionProvider())
+                                   .getNode(categoryName);
       script = category.getNode(nodeName) ;
     } else {
-      Node cbScript = scriptService.getCBScriptHome(repository,
-          SessionProviderFactory.createSystemProvider()) ;
+      Node cbScript = scriptService.getCBScriptHome(SessionProviderFactory.createSystemProvider());
       script = cbScript.getNode(nodeName) ;
     }
     return script ;
@@ -188,13 +184,12 @@ public class UIScriptList extends UIComponentDecorator {
   static public class DeleteActionListener extends EventListener<UIScriptList> {
     public void execute(Event<UIScriptList> event) throws Exception {
       UIScriptList uiScriptList = event.getSource() ;
-      String repository = uiScriptList.getAncestorOfType(UIECMAdminPortlet.class).getPreferenceRepository() ;
       ScriptService scriptService =  uiScriptList.getApplicationComponent(ScriptService.class) ;
       String scriptName = event.getRequestContext().getRequestParameter(OBJECTID) ;
       String namePrefix = uiScriptList.getScriptCategory() ;
       try {
-        scriptService.removeScript(namePrefix + "/" + scriptName, repository,
-            SessionProviderFactory.createSessionProvider()) ;
+        scriptService.removeScript(namePrefix + "/" + scriptName,
+                                   SessionProviderFactory.createSessionProvider());
       } catch(AccessDeniedException ace) {
         throw new MessageException(new ApplicationMessage("UIECMAdminControlPanel.msg.access-denied",
                                                           null, ApplicationMessage.WARNING)) ;

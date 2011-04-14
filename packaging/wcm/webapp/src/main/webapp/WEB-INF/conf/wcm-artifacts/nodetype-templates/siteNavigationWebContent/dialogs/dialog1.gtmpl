@@ -1,5 +1,7 @@
 <% 
 	import javax.jcr.Node;
+	import org.exoplatform.services.jcr.RepositoryService;
+	
 	def rcontext = _ctx.getRequestContext() ;
 	def String htmlWYSIWYGFormId = "htmlData" + uicomponent.hashCode();
 	def String cssFormId = "ContentCSS[" + uicomponent.hashCode() + "]";
@@ -8,6 +10,8 @@
 	jsManager.importJavascript('eXo.wcm.backoffice.private.WCMUtils', '/eXoWCMResources/javascript/') ;
 	jsManager.importJavascript('eXo.wcm.frontoffice.public.Breadcrumb', '/eXoWCMResources/javascript/') ;
 	jsManager.addOnLoadJavascript("eXo.ecm.CKEditor.insertCSS('" + htmlWYSIWYGFormId + "', '" + cssFormId + "')");
+  RepositoryService rService = uicomponent.getApplicationComponent(RepositoryService.class) ;
+  String repository = rService.getCurrentRepository().getConfiguration().getName() ;	
 	
 	private void setUploadFields() {
 			String[] illustrationHiddenField1 = ["jcrPath=/node/medias/images/illustration", "nodetype=nt:file", "defaultValues=illustration"];
@@ -256,49 +260,49 @@
 																 ".UIWCMNavigationPortlet .UINavigationBar {\n\tpadding: 35px 40px 0 40px;\n}\n\n" + 
 																 ".UIWCMNavigationPortlet .UINavigationBar .UIHorizontalTabs {\n\theight: 41px;\n}\n\n" +
 								 								 ".UIWCMNavigationPortlet .UINavigationBar .UIHorizontalTabs .TabsContainer {\n\tfloat: none;\n}\n\n" + 
-																 ".UIWCMNavigationPortlet .UINavigationBar .LeftNavigationBar {\n\tline-height: 41px;\n\tbackground: url('/portal/rest/jcr/repository/collaboration/sites%20content/live/acme/web%20contents/site%20artifacts/navigation/Default/medias/images/NavigationBar.gif') top left no-repeat;\n\tpadding-left: 3px;\n}\n\n" +
-																 ".UIWCMNavigationPortlet .UINavigationBar .RightNavigationBar {\n\tline-height: 41px;\n\tbackground: url('/portal/rest/jcr/repository/collaboration/sites%20content/live/acme/web%20contents/site%20artifacts/navigation/Default/medias/images/NavigationBar.gif') top right no-repeat;\n\tpadding-right: 3px;\n}\n\n" +
-																 ".UIWCMNavigationPortlet .UINavigationBar .MiddleNavigationBar {\n\tbackground: url('/portal/rest/jcr/repository/collaboration/sites%20content/live/acme/web%20contents/site%20artifacts/navigation/Default/medias/images/NavigationBar.gif') left -41px repeat-x;\n\theight: 41px;\n\tpadding: 0 15px;\n}\n\n" +
+																 ".UIWCMNavigationPortlet .UINavigationBar .LeftNavigationBar {\n\tline-height: 41px;\n\tbackground: url('/portal/rest/jcr/$repository/collaboration/sites%20content/live/acme/web%20contents/site%20artifacts/navigation/Default/medias/images/NavigationBar.gif') top left no-repeat;\n\tpadding-left: 3px;\n}\n\n" +
+																 ".UIWCMNavigationPortlet .UINavigationBar .RightNavigationBar {\n\tline-height: 41px;\n\tbackground: url('/portal/rest/jcr/$repository/collaboration/sites%20content/live/acme/web%20contents/site%20artifacts/navigation/Default/medias/images/NavigationBar.gif') top right no-repeat;\n\tpadding-right: 3px;\n}\n\n" +
+																 ".UIWCMNavigationPortlet .UINavigationBar .MiddleNavigationBar {\n\tbackground: url('/portal/rest/jcr/$repository/collaboration/sites%20content/live/acme/web%20contents/site%20artifacts/navigation/Default/medias/images/NavigationBar.gif') left -41px repeat-x;\n\theight: 41px;\n\tpadding: 0 15px;\n}\n\n" +
 																 ".UIWCMNavigationPortlet .MenuItemContainer {\n\twhite-space: nowrap;\n\tborder: solid #b7b7b7 1px;\n\tbackground: #f3f3f3;\n\ttext-align: left;\n}\n\n" +
 																 ".UIWCMNavigationPortlet .MenuItemContainer .MenuItemDecorator {\n\tborder: 1px solid #fcfcfc;\n\tbackground: #f3f3f3;\n\tpadding-bottom: 6px;\n}\n\n" +
 																 ".UIWCMNavigationPortlet .MenuItemContainer .MenuItem {\n\tborder-bottom: 1px solid #fff;\n\tcursor: pointer;\n\tline-height: 24px;\n\theight: 24px; width: auto;\n\tdisplay: block;\n\twhite-space: nowrap;\n\tfont-weight: normal;\n}\n\n" +
 																 ".UIWCMNavigationPortlet .MenuItemContainer .MenuItem a {\n\tpadding: 0px 20px 0px 25px;\n\tdisplay: block;\n}\n\n" +
-																 ".UIWCMNavigationPortlet .MenuItemContainer .MenuItem a:hover {\n\tcolor: #3e8df0;\n\tbackground: url('/portal/rest/jcr/repository/collaboration/sites%20content/live/acme/web%20contents/site%20artifacts/navigation/Default/medias/images/HoverItem.gif') repeat-x bottom;\n}\n\n" +
-																 ".UIWCMNavigationPortlet .MenuItemContainer .SelectedItem {\n\tline-height: 24px;\n\twidth: auto;\n\tbackground: url('/portal/rest/jcr/repository/collaboration/sites%20content/live/acme/web%20contents/site%20artifacts/navigation/Default/medias/images/HoverItem.gif') repeat-x bottom;\n}\n\n" +
+																 ".UIWCMNavigationPortlet .MenuItemContainer .MenuItem a:hover {\n\tcolor: #3e8df0;\n\tbackground: url('/portal/rest/jcr/$repository/collaboration/sites%20content/live/acme/web%20contents/site%20artifacts/navigation/Default/medias/images/HoverItem.gif') repeat-x bottom;\n}\n\n" +
+																 ".UIWCMNavigationPortlet .MenuItemContainer .SelectedItem {\n\tline-height: 24px;\n\twidth: auto;\n\tbackground: url('/portal/rest/jcr/$repository/collaboration/sites%20content/live/acme/web%20contents/site%20artifacts/navigation/Default/medias/images/HoverItem.gif') repeat-x bottom;\n}\n\n" +
 																 ".UIWCMNavigationPortlet .MenuItemContainer .SelectedItem a {\n\tcolor: #3e8df0;\n}\n\n" +
 																 ".UIWCMNavigationPortlet .MenuItemContainer .ItemIcon {\n\theight: 24px; width: auto;\n}\n\n" +
 																 ".UIWCMNavigationPortlet .MenuItemContainer .MenuItemLabel {\n\tline-height: 24px;\n\tpadding: 0px 5px 0px 3px;\n\tfont-weight: normal;\n}\n\n" +
-																 ".UIWCMNavigationPortlet .MenuItemContainer .MenuItem .ArrowIcon {\n\theight: 24px;\n\twidth: auto;\n\tbackground-image: url('/portal/rest/jcr/repository/collaboration/sites%20content/live/acme/web%20contents/site%20artifacts/navigation/Default/medias/images/Button.gif');\n\tbackground-repeat: no-repeat;\n\tbackground-position: right -48px;\n}\n\n" +
+																 ".UIWCMNavigationPortlet .MenuItemContainer .MenuItem .ArrowIcon {\n\theight: 24px;\n\twidth: auto;\n\tbackground-image: url('/portal/rest/jcr/$repository/collaboration/sites%20content/live/acme/web%20contents/site%20artifacts/navigation/Default/medias/images/Button.gif');\n\tbackground-repeat: no-repeat;\n\tbackground-position: right -48px;\n}\n\n" +
 																 ".UIWCMNavigationPortlet .MenuItemContainer .PageNodeIcon {\n\theight: 24px ;\n\tbackground: url('/eXoResources/skin/DefaultSkin/skinIcons/16x16/icons/DefaultPageIcon.gif') no-repeat 5px;\n}\n\n" +
 																 ".UIWCMNavigationPortlet .ScrollButtons {\n\tfloat: right;\n\tpadding-top: 10px;\n\tdisplay: none;\n}\n\n" +
-																 ".UIWCMNavigationPortlet .ScrollLeftButton {\n\tcursor: pointer;\n\tbackground: url('/portal/rest/jcr/repository/collaboration/sites%20content/live/acme/web%20contents/site%20artifacts/navigation/Default/medias/images/Button.gif') no-repeat left -15px;\n\tpadding-left: 18px;\n\tmargin: 0px 5px;\n}\n\n" +
-																 ".UIWCMNavigationPortlet .ScrollRightButton {\n\tcursor: pointer;\n\tbackground: url('/portal/rest/jcr/repository/collaboration/sites%20content/live/acme/web%20contents/site%20artifacts/navigation/Default/medias/images/Button.gif') no-repeat right -15px;\n\twidth: 15px;\n\theight: 15px;\n}\n\n" +
-																 ".UIWCMNavigationPortlet .DisableScrollLeftButton {\n\tcursor: pointer;\n\tbackground: url('/portal/rest/jcr/repository/collaboration/sites%20content/live/acme/web%20contents/site%20artifacts/navigation/Default/medias/images/Button.gif') no-repeat left -30px;\n\tpadding-left: 18px;\n\tmargin: 0px 5px;\n}\n\n" +
-																 ".UIWCMNavigationPortlet .DisableScrollRightButton {\n\tcursor: pointer;\n\tbackground: url('/portal/rest/jcr/repository/collaboration/sites%20content/live/acme/web%20contents/site%20artifacts/navigation/Default/medias/images/Button.gif') no-repeat right -30px;\n\twidth: 15px;\n\theight: 15px;\n}\n\n" +
-																 ".UIWCMNavigationPortlet .HighlightScrollLeftButton {\n\tcursor: pointer;\n\tbackground: url('/portal/rest/jcr/repository/collaboration/sites%20content/live/acme/web%20contents/site%20artifacts/navigation/Default/medias/images/Button.gif') no-repeat left top;\n\tpadding-left: 18px;\n\tmargin: 0px 5px;\n}\n\n" +
-																 ".UIWCMNavigationPortlet .HighlightScrollRightButton {\n\tcursor: pointer;\n\tbackground: url('/portal/rest/jcr/repository/collaboration/sites%20content/live/acme/web%20contents/site%20artifacts/navigation/Default/medias/images/Button.gif') no-repeat right top;\n\twidth: 15px;\n\theight: 15px;\n}\n\n" +
+																 ".UIWCMNavigationPortlet .ScrollLeftButton {\n\tcursor: pointer;\n\tbackground: url('/portal/rest/jcr/$repository/collaboration/sites%20content/live/acme/web%20contents/site%20artifacts/navigation/Default/medias/images/Button.gif') no-repeat left -15px;\n\tpadding-left: 18px;\n\tmargin: 0px 5px;\n}\n\n" +
+																 ".UIWCMNavigationPortlet .ScrollRightButton {\n\tcursor: pointer;\n\tbackground: url('/portal/rest/jcr/$repository/collaboration/sites%20content/live/acme/web%20contents/site%20artifacts/navigation/Default/medias/images/Button.gif') no-repeat right -15px;\n\twidth: 15px;\n\theight: 15px;\n}\n\n" +
+																 ".UIWCMNavigationPortlet .DisableScrollLeftButton {\n\tcursor: pointer;\n\tbackground: url('/portal/rest/jcr/$repository/collaboration/sites%20content/live/acme/web%20contents/site%20artifacts/navigation/Default/medias/images/Button.gif') no-repeat left -30px;\n\tpadding-left: 18px;\n\tmargin: 0px 5px;\n}\n\n" +
+																 ".UIWCMNavigationPortlet .DisableScrollRightButton {\n\tcursor: pointer;\n\tbackground: url('/portal/rest/jcr/$repository/collaboration/sites%20content/live/acme/web%20contents/site%20artifacts/navigation/Default/medias/images/Button.gif') no-repeat right -30px;\n\twidth: 15px;\n\theight: 15px;\n}\n\n" +
+																 ".UIWCMNavigationPortlet .HighlightScrollLeftButton {\n\tcursor: pointer;\n\tbackground: url('/portal/rest/jcr/$repository/collaboration/sites%20content/live/acme/web%20contents/site%20artifacts/navigation/Default/medias/images/Button.gif') no-repeat left top;\n\tpadding-left: 18px;\n\tmargin: 0px 5px;\n}\n\n" +
+																 ".UIWCMNavigationPortlet .HighlightScrollRightButton {\n\tcursor: pointer;\n\tbackground: url('/portal/rest/jcr/$repository/collaboration/sites%20content/live/acme/web%20contents/site%20artifacts/navigation/Default/medias/images/Button.gif') no-repeat right top;\n\twidth: 15px;\n\theight: 15px;\n}\n\n" +
 																 ".UIWCMNavigationPortlet .CenterHorizontalTabs {\n\toverflow-y: hidden;\n\tbackground: url('background/NormalTabStyle.gif') repeat-x center top;\n\tpadding: 0px 6px;\n\t}\n\n" +
 																 ".UIWCMNavigationPortlet .TabsContainer {\n\theight: 41px;\n}\n\n" +
 																 ".UIWCMNavigationPortlet .UITab {\n\tfloat: left;\n\ttext-align: center;\n\twidth: auto;\n}\n\n" +
 																 ".UIWCMNavigationPortlet .UITab  a{\n\tfont-size: 14px;\n\tfont-family: Arial;\n\tfont-weight: normal;\n}\n\n" +
 																 ".UIWCMNavigationPortlet .UITab .NormalNavigationTab {\n\tmargin: 0px;\n}\n\n" +
 																 ".UIWCMNavigationPortlet .UITab .NormalNavigationTab .LeftTab {\n\tbackground: none;\n}\n\n" +
-																 ".UIWCMNavigationPortlet .UITab .NormalNavigationTab .RightTab {\n\tbackground: url('/portal/rest/jcr/repository/collaboration/sites%20content/live/acme/web%20contents/site%20artifacts/navigation/Default/medias/images/NavigationTab.gif') right -82px no-repeat;\n\tpadding-right: 2px;\n}\n\n" +
+																 ".UIWCMNavigationPortlet .UITab .NormalNavigationTab .RightTab {\n\tbackground: url('/portal/rest/jcr/$repository/collaboration/sites%20content/live/acme/web%20contents/site%20artifacts/navigation/Default/medias/images/NavigationTab.gif') right -82px no-repeat;\n\tpadding-right: 2px;\n}\n\n" +
 																 ".UIWCMNavigationPortlet .UITab .NormalNavigationTab .MiddleTab {\n\tline-height: 20px;\n\tpadding: 13px 20px 6px 20px;\n\tbackground: none;\n}\n\n" +
 																 ".UIWCMNavigationPortlet .UITab .NormalNavigationTab .TabIcon {\n\tcolor: #fff;\n\tline-height: 21px;\n}" +
 																 ".UIWCMNavigationPortlet .UITab .NormalNavigationTab a {\n\tcolor: #FFFFFF;\n\tfont-size: 13px;\n}\n\n" +
 																 ".UIWCMNavigationPortlet .UITab .NormalNavigationTab .DefaultPageIcon {\n\tpadding: 2px 0 1px 20px;\n}\n\n" +
 																 ".UIWCMNavigationPortlet .UITab .HighlightNavigationTab {\n\tmargin: 0px;\n}\n\n" +
 																 ".UIWCMNavigationPortlet .UITab .HighlightNavigationTab .LeftTab  {\n\tbackground: none;\n}\n\n" +
-																 ".UIWCMNavigationPortlet .UITab .HighlightNavigationTab .RightTab {\n\tbackground: url('/portal/rest/jcr/repository/collaboration/sites%20content/live/acme/web%20contents/site%20artifacts/navigation/Default/medias/images/NavigationTab.gif') right -82px no-repeat;\n\tpadding-right: 2px;\n}\n\n" +
-																 ".UIWCMNavigationPortlet .UITab .HighlightNavigationTab .MiddleTab {\n\tbackground: url('/portal/rest/jcr/repository/collaboration/sites%20content/live/acme/web%20contents/site%20artifacts/navigation/Default/medias/images/NavigationTab.gif') left -123px repeat-x;\n\tline-height: 20px;\n\tpadding: 13px 20px 6px 20px;\n}\n\n" +
+																 ".UIWCMNavigationPortlet .UITab .HighlightNavigationTab .RightTab {\n\tbackground: url('/portal/rest/jcr/$repository/collaboration/sites%20content/live/acme/web%20contents/site%20artifacts/navigation/Default/medias/images/NavigationTab.gif') right -82px no-repeat;\n\tpadding-right: 2px;\n}\n\n" +
+																 ".UIWCMNavigationPortlet .UITab .HighlightNavigationTab .MiddleTab {\n\tbackground: url('/portal/rest/jcr/$repository/collaboration/sites%20content/live/acme/web%20contents/site%20artifacts/navigation/Default/medias/images/NavigationTab.gif') left -123px repeat-x;\n\tline-height: 20px;\n\tpadding: 13px 20px 6px 20px;\n}\n\n" +
 																 ".UIWCMNavigationPortlet .UITab .HighlightNavigationTab .TabIcon {\n\tcolor: #fff;\n\tline-height: 21px;\n}\n\n" +
 																 ".UIWCMNavigationPortlet .UITab .HighlightNavigationTab a {\n\tcolor: #FFFFFF;\n\tfont-size:13px;\n}\n\n" +																	
 																 ".UIWCMNavigationPortlet .UITab .HighlightNavigationTab .DefaultPageIcon {\n\tpadding: 2px 0 1px 20px;\n}\n\n" +
 																 ".UIWCMNavigationPortlet .UITab .SelectedNavigationTab {\n\tmargin: 0px;\n}\n\n" +
-																 ".UIWCMNavigationPortlet .UITab .SelectedNavigationTab .LeftTab {\n\tbackground: url('/portal/rest/jcr/repository/collaboration/sites%20content/live/acme/web%20contents/site%20artifacts/navigation/Default/medias/images/NavigationTab.gif') no-repeat left top;\n\tpadding-left: 4px;\n}\n\n" +
-																 ".UIWCMNavigationPortlet .UITab .SelectedNavigationTab .RightTab {\n\tbackground: url('/portal/rest/jcr/repository/collaboration/sites%20content/live/acme/web%20contents/site%20artifacts/navigation/Default/medias/images/NavigationTab.gif') no-repeat right top;\n\tpadding-right: 4px;}\n\n" +
-																 ".UIWCMNavigationPortlet .UITab .SelectedNavigationTab .MiddleTab {\n\tline-height: 18px;\n\tbackground: url('/portal/rest/jcr/repository/collaboration/sites%20content/live/acme/web%20contents/site%20artifacts/navigation/Default/medias/images/NavigationTab.gif') repeat-x left -41px;\n\tpadding: 13px 20px 6px 20px;\n}\n\n" +
+																 ".UIWCMNavigationPortlet .UITab .SelectedNavigationTab .LeftTab {\n\tbackground: url('/portal/rest/jcr/$repository/collaboration/sites%20content/live/acme/web%20contents/site%20artifacts/navigation/Default/medias/images/NavigationTab.gif') no-repeat left top;\n\tpadding-left: 4px;\n}\n\n" +
+																 ".UIWCMNavigationPortlet .UITab .SelectedNavigationTab .RightTab {\n\tbackground: url('/portal/rest/jcr/$repository/collaboration/sites%20content/live/acme/web%20contents/site%20artifacts/navigation/Default/medias/images/NavigationTab.gif') no-repeat right top;\n\tpadding-right: 4px;}\n\n" +
+																 ".UIWCMNavigationPortlet .UITab .SelectedNavigationTab .MiddleTab {\n\tline-height: 18px;\n\tbackground: url('/portal/rest/jcr/$repository/collaboration/sites%20content/live/acme/web%20contents/site%20artifacts/navigation/Default/medias/images/NavigationTab.gif') repeat-x left -41px;\n\tpadding: 13px 20px 6px 20px;\n}\n\n" +
 																 ".UIWCMNavigationPortlet .UITab .SelectedNavigationTab .TabIcon {\n\tcolor: #f57a00;\n\tline-height: 16px;\n}\n\n" +
 																 ".UIWCMNavigationPortlet .UITab .SelectedNavigationTab a {\n\tcolor:#000000;\n\tfont-size:18px;\n\tline-height: 22px;\n\tmargin: 0;\n}\n\n" +
 																 ".UIWCMNavigationPortlet .UITab .SelectedNavigationTab .DefaultPageIcon {\n\tpadding: 2px 0 1px 20px;\n}";

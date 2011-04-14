@@ -38,7 +38,7 @@ public class FillSelectBoxWithWorkspaces implements CmsScript {
   public void execute(Object context) {
     UIFormSelectBox selectBox = (UIFormSelectBox) context;
 
-    ManageableRepository jcrRepository = repositoryService_.getRepository(repository_);
+    ManageableRepository jcrRepository = repositoryService_.getCurrentRepository();
     List options = new ArrayList();
     String[] workspaceNames = jcrRepository.getWorkspaceNames();
     for(i in 0..<workspaceNames.length) {

@@ -224,8 +224,21 @@ public class UIDialogForm extends UIForm {
   }
 
 
+  @Deprecated
   public void setStoredLocation(String repository, String workspace, String storedPath) {
     this.repositoryName = repository;
+    setWorkspace(workspace);
+    setStoredPath(storedPath);
+  }
+  
+  public void setStoredLocation(String workspace, String storedPath) {
+    try {
+    this.repositoryName = getApplicationComponent(RepositoryService.class).getCurrentRepository()
+                                                                          .getConfiguration()
+                                                                          .getName();
+    } catch (RepositoryException ex) {
+      this.repositoryName = null;
+    }
     setWorkspace(workspace);
     setStoredPath(storedPath);
   }
@@ -588,9 +601,10 @@ public class UIDialogForm extends UIForm {
       if (script != null) {
         try {
           String[] scriptParams = formSelectBoxField.getScriptParams();
-          if (scriptParams != null && scriptParams.length > 0
-              && "repository".equals(scriptParams[0]))
-            scriptParams[0] = repositoryName;
+          // TODO: ECMS-2132 Why check the param as below???
+//          if (scriptParams != null && scriptParams.length > 0
+//              && "repository".equals(scriptParams[0]))
+//            scriptParams[0] = repositoryName;
           executeScript(script, uiSelectBox, scriptParams, true);
         } catch (Exception e) {
           LOG.error("An unexpected error occurs", e);
@@ -1469,11 +1483,6 @@ public class UIDialogForm extends UIForm {
     return null;
   }
 
-  @Deprecated
-  public Session getSesssion() throws Exception {
-    return getSession();
-  }
-
   public Session getSession() throws Exception {
     return SessionProviderFactory.createSessionProvider().getSession(workspaceName, getRepository());
   }
@@ -1705,10 +1714,10 @@ public class UIDialogForm extends UIForm {
       throws Exception {
     ScriptService scriptService = getApplicationComponent(ScriptService.class);
     try {
-      CmsScript dialogScript = scriptService.getScript(script, repositoryName);
+      CmsScript dialogScript = scriptService.getScript(script);
       if (params != null) {
-        if (params.length > 0 && REPOSITORY.equals(params[0]))
-          params = new String[] { repositoryName };
+//        if (params.length > 0 && REPOSITORY.equals(params[0]))
+//          params = new String[] { repositoryName };
         dialogScript.setParams(params);
       }
       dialogScript.execute(o);
@@ -1747,7 +1756,7 @@ public class UIDialogForm extends UIForm {
 
   private ManageableRepository getRepository() throws Exception{
     RepositoryService repositoryService  = getApplicationComponent(RepositoryService.class);
-    return repositoryService.getRepository(repositoryName);
+    return repositoryService.getCurrentRepository();
   }
 
   @SuppressWarnings("unchecked")

@@ -73,7 +73,6 @@ public class UISaveQueryForm extends UIForm implements UIPopupComponent {
   static  public class SaveActionListener extends EventListener<UISaveQueryForm> {
     public void execute(Event<UISaveQueryForm> event) throws Exception {
       UISaveQueryForm uiSaveQueryForm = event.getSource() ;
-      String repository = uiSaveQueryForm.getAncestorOfType(UIJCRExplorer.class).getRepositoryName() ;
       UIECMSearch uiECMSearch = uiSaveQueryForm.getAncestorOfType(UIECMSearch.class) ;
       UIApplication uiApp = uiSaveQueryForm.getAncestorOfType(UIApplication.class) ;
       String userName = Util.getPortalRequestContext().getRemoteUser() ;
@@ -85,7 +84,7 @@ public class UISaveQueryForm extends UIForm implements UIPopupComponent {
         return ;
       }
       try {
-        queryService.addQuery(queryName, uiSaveQueryForm.statement_, uiSaveQueryForm.queryType_, userName, repository) ;
+        queryService.addQuery(queryName, uiSaveQueryForm.statement_, uiSaveQueryForm.queryType_, userName) ;
       } catch(AccessDeniedException ace) {
         uiApp.addMessage(new ApplicationMessage("UISaveQueryForm.msg.access-denied", null,
                                                 ApplicationMessage.WARNING)) ;

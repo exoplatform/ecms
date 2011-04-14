@@ -6,6 +6,7 @@
   import org.exoplatform.webui.core.UIComponent;
   import org.exoplatform.services.jcr.util.Text;
   import org.exoplatform.ecm.webui.utils.Utils;
+  import org.exoplatform.services.jcr.RepositoryService;
 
   public Node getFileLangNode(Node currentNode) throws Exception {
     if(currentNode.isNodeType("nt:unstructured")) {
@@ -34,8 +35,8 @@
     title = Text.unescapeIllegalJcrChars(originalNode.getName());
     presentNodes.add(currentNode);
   }
-  def repository = uicomponent.getRepository();
-  repository = repository == null ? uiParent.getRepository() : repository;
+  RepositoryService rService = uicomponent.getApplicationComponent(RepositoryService.class) ;
+  String repository = rService.getCurrentRepository().getConfiguration().getName() ;  
   def link = "";
   def url = "";
   for(nodedata in presentNodes) {

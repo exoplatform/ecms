@@ -144,18 +144,15 @@ public class UIShowAllTrashResult extends UIComponentDecorator {
     PortletRequestContext pcontext = (PortletRequestContext)WebuiRequestContext.getCurrentInstance();
       PortletPreferences portletPref = pcontext.getRequest().getPreferences();
     String trashWorkspace = portletPref.getValue(Utils.TRASH_WORKSPACE, "");
-    String trashRepository = portletPref.getValue(Utils.TRASH_REPOSITORY, "");
     SessionProvider sessionProvider = uiExplorer.getSessionProvider();
     boolean byUser = uiExplorer.getPreference().isShowItemsByUser();
     if (!byUser) {
       ret = trashService.getAllNodeInTrash(
           trashWorkspace,
-          trashRepository,
           sessionProvider);
     } else {
       ret = trashService.getAllNodeInTrashByUser(
           trashWorkspace,
-          trashRepository,
           sessionProvider,
           uiExplorer.getSession().getUserID());
     }
@@ -380,7 +377,6 @@ public class UIShowAllTrashResult extends UIComponentDecorator {
         try {
           if (PermissionUtil.canRemoveNode(node)) {
             PortletPreferences portletPrefs = uiExplorer.getPortletPreferences();
-            String repository = uiExplorer.getRepositoryName();
             String trashWorkspace = portletPrefs.getValue(Utils.TRASH_WORKSPACE, "");
             String trashHomeNodePath = portletPrefs.getValue(Utils.TRASH_HOME_NODE_PATH, "");
             Session trashSession = uiExplorer.getSessionByWorkspace(trashWorkspace);
@@ -390,7 +386,6 @@ public class UIShowAllTrashResult extends UIComponentDecorator {
 
             trashService.restoreFromTrash(trashHomeNode,
                             srcPath,
-                            repository,
                             sessionProvider);
             uiShowAllTrashResult.nodeListChange = true;
             uiShowAllTrashResult.updateTable(event);

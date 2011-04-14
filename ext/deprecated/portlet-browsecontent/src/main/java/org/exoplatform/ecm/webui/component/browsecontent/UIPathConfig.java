@@ -147,19 +147,19 @@ public class UIPathConfig extends UIForm implements UISelectable{
     return options;
   }
 
-  private ManageableRepository getRepository(String repositoryName) throws Exception{
+  private ManageableRepository getRepository() throws Exception{
     RepositoryService repositoryService = getApplicationComponent(RepositoryService.class);
     return repositoryService.getCurrentRepository();
   }
 
-  private List<SelectItemOption<String>> getWorkSpaceOption(String repository) throws Exception {
+  private List<SelectItemOption<String>> getWorkSpaceOptionList() throws Exception {
     List<SelectItemOption<String>> options = new ArrayList<SelectItemOption<String>>();
     Session session;
     String[] workspaceNames = getApplicationComponent(RepositoryService.class)
     .getCurrentRepository().getWorkspaceNames();
     wsNames_.clear();
     for(String workspace:workspaceNames) {
-      session = SessionProviderFactory.createSessionProvider().getSession(workspace, getRepository(repository));
+      session = SessionProviderFactory.createSessionProvider().getSession(workspace, getRepository());
       try {
         session.getRootNode();
         wsNames_.add(workspace);
@@ -202,7 +202,7 @@ public class UIPathConfig extends UIForm implements UISelectable{
     if (!repoNames_.contains(repository)) repository = getRepoOption().get(0).getValue();
     repositoryField.setValue(repository);
     UIFormSelectBox workSpaceField = getChildById(UINewConfigForm.FIELD_WORKSPACE);
-    workSpaceField.setOptions(getWorkSpaceOption(repository));
+    workSpaceField.setOptions(getWorkSpaceOptionList());
     if (!wsNames_.contains(workSpace)) {
       workSpace = repositoryService.getCurrentRepository().getConfiguration().getDefaultWorkspaceName();
     }
@@ -233,8 +233,8 @@ public class UIPathConfig extends UIForm implements UISelectable{
         searchPathSelect.setActionInfo(UINewConfigForm.FIELD_SEARCH_LOCATION, null);
       }
       if (isAddNew) {
-        templateField.setOptions(getTemplateOption(repository));
-        detailtemField.setOptions(uiConfigTabPane.getBoxTemplateOption(repository));
+        templateField.setOptions(getTemplateOption());
+        detailtemField.setOptions(uiConfigTabPane.getBoxTemplateOption());
         enableFilterCategory.setChecked(Boolean.parseBoolean(filterCategory));
         enableToolBarField.setChecked(Boolean.parseBoolean(hasToolBar));
         enablePublishField.setChecked(isAllowPublish);
@@ -267,9 +267,9 @@ public class UIPathConfig extends UIForm implements UISelectable{
       itemPerPage = (preference.getValue(Utils.CB_NB_PER_PAGE, ""));
       detailTemp = (preference.getValue(Utils.CB_BOX_TEMPLATE, ""));
       if (!repoNames_.contains(repository)) repository = currentRepositoryName;
-      templateField.setOptions(getTemplateOption(repository));
+      templateField.setOptions(getTemplateOption());
       templateField.setValue(template);
-      detailtemField.setOptions(uiConfigTabPane.getBoxTemplateOption(repository));
+      detailtemField.setOptions(uiConfigTabPane.getBoxTemplateOption());
       detailtemField.setValue(detailTemp);
       repositoryField.setValue(repository);
       workSpaceField.setValue(workSpace);
@@ -304,11 +304,12 @@ public class UIPathConfig extends UIForm implements UISelectable{
   }
 
   @SuppressWarnings("unchecked")
+  @Deprecated
   public List<SelectItemOption<String>> getTemplateOption(String repository) throws Exception {
     List<SelectItemOption<String>> options = new ArrayList<SelectItemOption<String>>();
     ManageViewService viewService =
       (ManageViewService)PortalContainer.getComponent(ManageViewService.class);
-    List<Node> scriptTemplates = viewService.getAllTemplates(BasePath.CB_PATH_TEMPLATES, repository,
+    List<Node> scriptTemplates = viewService.getAllTemplates(BasePath.CB_PATH_TEMPLATES,
           SessionProviderFactory.createSystemProvider());
     for(Node template:scriptTemplates) {
       options.add(new SelectItemOption<String>(template.getName(),template.getName()));
@@ -316,6 +317,21 @@ public class UIPathConfig extends UIForm implements UISelectable{
     Collections.sort(options, new ItemOptionNameComparator());
     return options;
   }
+  
+  @SuppressWarnings("unchecked")
+  public List<SelectItemOption<String>> getTemplateOption() throws Exception {
+    List<SelectItemOption<String>> options = new ArrayList<SelectItemOption<String>>();
+    ManageViewService viewService =
+      (ManageViewService)PortalContainer.getComponent(ManageViewService.class);
+    List<Node> scriptTemplates = viewService.getAllTemplates(BasePath.CB_PATH_TEMPLATES,
+          SessionProviderFactory.createSystemProvider());
+    for(Node template:scriptTemplates) {
+      options.add(new SelectItemOption<String>(template.getName(),template.getName()));
+    }
+    Collections.sort(options, new ItemOptionNameComparator());
+    return options;
+  }
+  
 
   @SuppressWarnings("unused")
   public void doSelect(String selectField, Object value) {
@@ -351,7 +367,7 @@ public class UIPathConfig extends UIForm implements UISelectable{
       }
       try {
         NodeFinder nodeFinder = uiForm.getApplicationComponent(NodeFinder.class);
-        Node nodePath = (Node) nodeFinder.getItem(repository, workSpace, jcrPath);
+        Node nodePath = (Node) nodeFinder.getItem(workSpace, jcrPath);
       } catch(PathNotFoundException path) {
         uiApp.addMessage(new ApplicationMessage("UIPathConfig.msg.invalid-path", null,
                                               ApplicationMessage.WARNING));
@@ -488,13 +504,12 @@ public class UIPathConfig extends UIForm implements UISelectable{
       UIPathConfig uiForm = event.getSource();
       UIConfigTabPane uiConfigTabPane = uiForm.getAncestorOfType(UIConfigTabPane.class);
       uiConfigTabPane.setIsChangeValue(true);
-      String repoName = uiForm.getUIFormSelectBox(UINewConfigForm.FIELD_REPOSITORY).getValue();
-      uiForm.getUIFormSelectBox(UINewConfigForm.FIELD_WORKSPACE).setOptions(uiForm.getWorkSpaceOption(repoName));
+      uiForm.getUIFormSelectBox(UINewConfigForm.FIELD_WORKSPACE).setOptions(uiForm.getWorkSpaceOptionList());
       UIFormInputSetWithAction categoryPathSelect = uiForm.getChildById(FIELD_PATHSELECT);
       UIFormStringInput categoryPathField = categoryPathSelect.getChildById(UINewConfigForm.FIELD_CATEGORYPATH);
       categoryPathField.setValue("/");
       UIFormSelectBox detailtemField = uiForm.getChildById(UINewConfigForm.FIELD_DETAILBOXTEMP);
-      detailtemField.setOptions(uiConfigTabPane.getBoxTemplateOption(repoName));
+      detailtemField.setOptions(uiConfigTabPane.getBoxTemplateOption());
       event.getRequestContext().addUIComponentToUpdateByAjax(uiForm);
     }
   }

@@ -71,8 +71,7 @@ public class UIDriveList extends UIComponentDecorator {
 
   @SuppressWarnings("unchecked")
   public void updateDriveListGrid(int currentPage) throws Exception {
-    String repository = getAncestorOfType(UIECMAdminPortlet.class).getPreferenceRepository() ;
-    ObjectPageList objPageList = new ObjectPageList(getDrives(repository), 10) ;
+    ObjectPageList objPageList = new ObjectPageList(getDrives(), 10) ;
     uiPageIterator_.setPageList(objPageList) ;
     if(currentPage > getUIPageIterator().getAvailablePage())
       uiPageIterator_.setCurrentPage(currentPage-1);
@@ -85,13 +84,14 @@ public class UIDriveList extends UIComponentDecorator {
   public List getDriveList() throws Exception { return uiPageIterator_.getCurrentPageData() ; }
 
   @SuppressWarnings("unchecked")
+  @Deprecated
   public List<DriveData> getDrives(String repoName) throws Exception {
     RepositoryService rservice = getApplicationComponent(RepositoryService.class) ;
     ManageDriveService driveService = getApplicationComponent(ManageDriveService.class) ;
     ManageableRepository repository = rservice.getCurrentRepository() ;
     List<DriveData> driveList = new ArrayList<DriveData>() ;
     Session session = null ;
-    List<DriveData> drives = driveService.getAllDrives(repoName) ;
+    List<DriveData> drives = driveService.getAllDrives() ;
     if(drives != null && drives.size() > 0) {
       for(DriveData drive : drives) {
         if(drive.getIcon() != null && drive.getIcon().length() > 0) {
@@ -110,6 +110,33 @@ public class UIDriveList extends UIComponentDecorator {
     Collections.sort(driveList) ;
     return driveList ;
   }
+  
+  @SuppressWarnings("unchecked")
+  public List<DriveData> getDrives() throws Exception {
+    RepositoryService rservice = getApplicationComponent(RepositoryService.class) ;
+    ManageDriveService driveService = getApplicationComponent(ManageDriveService.class) ;
+    ManageableRepository repository = rservice.getCurrentRepository() ;
+    List<DriveData> driveList = new ArrayList<DriveData>() ;
+    Session session = null ;
+    List<DriveData> drives = driveService.getAllDrives() ;
+    if(drives != null && drives.size() > 0) {
+      for(DriveData drive : drives) {
+        if(drive.getIcon() != null && drive.getIcon().length() > 0) {
+          try {
+            String[] iconPath = drive.getIcon().split(":/") ;
+            session = repository.getSystemSession(iconPath[0]) ;
+            session.getItem("/" + iconPath[1]) ;
+            session.logout() ;
+          } catch(PathNotFoundException pnf) {
+            drive.setIcon("") ;
+          }
+        }
+        if(isExistWorspace(repository, drive)) driveList.add(drive) ;
+      }
+    }
+    Collections.sort(driveList) ;
+    return driveList ;
+  }  
 
   public String getPortalName() {
     ExoContainer container = ExoContainerContext.getCurrentContainer();
@@ -152,8 +179,7 @@ public class UIDriveList extends UIComponentDecorator {
       String name = event.getRequestContext().getRequestParameter(OBJECTID) ;
       UIDriveList uiDriveList = event.getSource();
       ManageDriveService driveService = uiDriveList.getApplicationComponent(ManageDriveService.class) ;
-      String repository = uiDriveList.getAncestorOfType(UIECMAdminPortlet.class).getPreferenceRepository() ;
-      driveService.removeDrive(name, repository) ;
+      driveService.removeDrive(name) ;
       uiDriveList.updateDriveListGrid(uiDriveList.getUIPageIterator().getCurrentPage()) ;
       event.getRequestContext().addUIComponentToUpdateByAjax(uiDriveList.getParent()) ;
     }

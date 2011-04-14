@@ -126,7 +126,7 @@ public class UISavedQuery extends UIContainer implements UIPopupComponent {
     QueryService queryService = getApplicationComponent(QueryService.class);
     try {
       privateQueries = queryService.getQueries(getCurrentUserId(),
-          repositoryName_,SessionProviderFactory.createSessionProvider());
+                                               SessionProviderFactory.createSessionProvider());
       return !privateQueries.isEmpty();
     } catch(AccessDeniedException ace) {
       return privateQueries.isEmpty();
@@ -176,8 +176,10 @@ public class UISavedQuery extends UIContainer implements UIPopupComponent {
       }
       QueryResult queryResult = null;
       try {
-        queryResult = queryService.execute(queryPath, wsName, uiQuery.repositoryName_,
-            SessionProviderFactory.createSystemProvider(), uiQuery.getCurrentUserId());
+        queryResult = queryService.execute(queryPath,
+                                           wsName,
+                                           SessionProviderFactory.createSystemProvider(),
+                                           uiQuery.getCurrentUserId());
       } catch(Exception e) {
         uiApp.addMessage(new ApplicationMessage("UISearchResult.msg.query-invalid", null,
                                                 ApplicationMessage.WARNING));
@@ -208,8 +210,9 @@ public class UISavedQuery extends UIContainer implements UIPopupComponent {
       String userName = Util.getPortalRequestContext().getRemoteUser();
       QueryService queryService = uiQuery.getApplicationComponent(QueryService.class);
       String queryPath = event.getRequestContext().getRequestParameter(OBJECTID);
-      Query query = queryService.getQueryByPath(queryPath, userName, uiQuery.repositoryName_,
-          SessionProviderFactory.createSystemProvider());
+      Query query = queryService.getQueryByPath(queryPath,
+                                                userName,
+                                                SessionProviderFactory.createSystemProvider());
       uiQuery.initPopupEditForm(query);
       if(!uiQuery.isQuickSearch_) {
         UIECMSearch uiECSearch = uiQuery.getParent();
@@ -227,7 +230,7 @@ public class UISavedQuery extends UIContainer implements UIPopupComponent {
       String userName = Util.getPortalRequestContext().getRemoteUser();
       QueryService queryService = uiQuery.getApplicationComponent(QueryService.class);
       String path = event.getRequestContext().getRequestParameter(OBJECTID);
-      queryService.removeQuery(path, userName, uiQuery.repositoryName_);
+      queryService.removeQuery(path, userName);
       uiQuery.updateGrid(uiQuery.getUIPageIterator().getCurrentPage());
       event.getRequestContext().addUIComponentToUpdateByAjax(uiQuery);
     }

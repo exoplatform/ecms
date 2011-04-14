@@ -125,12 +125,8 @@ public class UITaskList extends UIContainer {
       variablesForService = workflowServiceContainer_.getVariables(processInstanceId, identification_);
       RepositoryService jcrService = getApplicationComponent(RepositoryService.class) ;
       String workspaceName = (String) variablesForService.get(WORKSPACE_VARIABLE);
-      String repository = (String) variablesForService.get(REPOSITORY_VARIABLE);
       try {
-        if(repository == null) {
-          repository = jcrService.getDefaultRepository().getConfiguration().getName() ;
-        }
-        ManageableRepository mRepository = jcrService.getRepository(repository) ;
+        ManageableRepository mRepository = jcrService.getCurrentRepository();
         SessionProviderService sessionProviderService = Util.getUIPortal().getApplicationComponent(SessionProviderService.class);
         SessionProvider sessionProvider = sessionProviderService.getSessionProvider(null);
         List variables = form.getVariables();

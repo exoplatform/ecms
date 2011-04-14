@@ -15,6 +15,7 @@
   import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
   import org.exoplatform.ecm.jcr.model.Preference;
   import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
+  import org.exoplatform.services.jcr.RepositoryService;
   
   def uiWorkingArea = uicomponent.getAncestorOfType(UIWorkingArea.class);
   def uiExplorer = uicomponent.getAncestorOfType(UIJCRExplorer.class);
@@ -146,7 +147,8 @@
 	      <%
 	      	String serverUrl = uicomponent.getWebDAVServerPrefix();
 	      	String portalName = uicomponent.getPortalName();
-	      	String repository = uicomponent.getRepository();
+	      	RepositoryService rService = uicomponent.getApplicationComponent(RepositoryService.class);
+	      	String repository = rService.getCurrentRepository().getConfiguration().getName();
 	        for(data in uicomponent.getChildrenList()) {
 	          def isPreferenceNode = uicomponent.isPreferenceNode(data);
 	          def preferenceWS = data.getSession().getWorkspace().getName();

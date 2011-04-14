@@ -51,14 +51,13 @@ public class TrashFolderScript implements CmsScript {
     Map variables = (Map) context;       
     String nodePath = (String)variables.get("nodePath");
 		String workspace = (String)variables.get("srcWorkspace");
-    String repository = (String)variables.get("repository");
     String srcPath = (String)variables.get("srcPath");
     int eventType = ((Integer)variables.get("eventType")).intValue();
     int index = nodePath.indexOf(':');
     if (index > -1)
     	nodePath = nodePath.substring(index + 1);
 
-    ManageableRepository manageableRepository = repositoryService_.getRepository(repository);
+    ManageableRepository manageableRepository = repositoryService_.getCurrentRepository();
     Session session = null;
     Node node = null;
     try{

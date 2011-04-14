@@ -32,7 +32,6 @@ import org.exoplatform.container.xml.ValueParam;
 import org.exoplatform.services.cms.impl.DMSConfiguration;
 import org.exoplatform.services.cms.impl.DMSRepositoryConfiguration;
 import org.exoplatform.services.jcr.RepositoryService;
-import org.exoplatform.services.jcr.config.RepositoryEntry;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 
 public class QueryPlugin extends BaseComponentPlugin {
@@ -44,7 +43,6 @@ public class QueryPlugin extends BaseComponentPlugin {
 
   private InitParams params_ ;
   private boolean autoCreateInNewRepository_ = false;
-  private String repository_ ;
   private RepositoryService repositoryService_ ;
   private DMSConfiguration dmsConfiguration_;
 
@@ -56,10 +54,6 @@ public class QueryPlugin extends BaseComponentPlugin {
     if(autoInitParam !=null) {
       autoCreateInNewRepository_ = Boolean.parseBoolean(autoInitParam.getValue()) ;
     }
-    ValueParam param = params.getValueParam("repository") ;
-    if(param !=null) {
-      repository_ = param.getValue();
-    }
     dmsConfiguration_ = dmsConfiguration;
   }
 
@@ -67,8 +61,7 @@ public class QueryPlugin extends BaseComponentPlugin {
     Iterator<ObjectParameter> it = params_.getObjectParamIterator() ;
     Session session = null ;
     if(autoCreateInNewRepository_) {
-      RepositoryEntry entry = repositoryService_.getCurrentRepository().getConfiguration();
-      session = getSession(entry.getName()) ;
+      session = getSession() ;
       Node queryHomeNode = (Node)session.getItem(basedQueriesPath);
       while(it.hasNext()) {
         QueryData data = (QueryData)it.next().getObject() ;
@@ -78,7 +71,7 @@ public class QueryPlugin extends BaseComponentPlugin {
       session.save();
       session.logout();
     } else {
-      session = getSession(repository_) ;
+      session = getSession() ;
       Node queryHomeNode = (Node)session.getItem(basedQueriesPath);
       while(it.hasNext()) {
         QueryData data = (QueryData)it.next().getObject() ;
@@ -90,10 +83,11 @@ public class QueryPlugin extends BaseComponentPlugin {
     }
   }
 
+  @Deprecated
   public void init(String repository,String baseQueriesPath) throws Exception {
     if(!autoCreateInNewRepository_) return ;
     Iterator<ObjectParameter> it = params_.getObjectParamIterator() ;
-    Session session = getSession(repository) ;
+    Session session = getSession() ;
     Node queryHomeNode = (Node)session.getItem(baseQueriesPath) ;
     while(it.hasNext()){
       QueryData data = (QueryData)it.next().getObject() ;
@@ -102,10 +96,10 @@ public class QueryPlugin extends BaseComponentPlugin {
     queryHomeNode.save();
     session.save();
     session.logout();
-  }
+  } 
 
-  private Session getSession(String repository) throws Exception {
-    ManageableRepository manageableRepository = repositoryService_.getRepository(repository) ;
+  private Session getSession() throws Exception {
+    ManageableRepository manageableRepository = repositoryService_.getCurrentRepository();
     DMSRepositoryConfiguration dmsRepoConfig = dmsConfiguration_.getConfig();
     return manageableRepository.getSystemSession(dmsRepoConfig.getSystemWorkspace()) ;
   }

@@ -9,6 +9,7 @@
   import org.exoplatform.ecm.jcr.model.Preference;
   import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
   import org.exoplatform.services.cms.link.LinkManager;
+  import org.exoplatform.services.jcr.RepositoryService;
      
   def linkManager = uicomponent.getComponentInstanceOfType("org.exoplatform.services.cms.link.LinkManager");  
   def uiWorkingArea = uicomponent.getAncestorOfType(UIWorkingArea.class);
@@ -26,7 +27,8 @@
   String serverUrl= uicomponent.getWebDAVServerPrefix();
   String portalName = uicomponent.getPortalName();
   String restContextName = Utils.getRestContextName(portalName);
-  String repository = uicomponent.getRepository(); 
+  RepositoryService rService = uicomponent.getApplicationComponent(RepositoryService.class);
+  String repository = rService.getCurrentRepository().getConfiguration().getName();
   def size = uicomponent.getChildrenList().size();
   def viewComponentId  = new Date().getTime();
   def rcontext = _ctx.getRequestContext() ;

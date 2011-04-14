@@ -122,10 +122,9 @@ public class UIVersionViewer extends UIBaseNodePresentation {
    */
   public ResourceResolver getTemplateResourceResolver(WebuiRequestContext context, String template) {
     try{
-        String repository = getRepository();
         DMSConfiguration dmsConfiguration = getApplicationComponent(DMSConfiguration.class);
         String workspace = dmsConfiguration.getConfig().getSystemWorkspace();
-        resourceResolver = new JCRResourceResolver(repository, workspace, "exo:templateFile");
+        resourceResolver = new JCRResourceResolver(workspace);
     }catch (Exception e) {}
     return resourceResolver ;
   }

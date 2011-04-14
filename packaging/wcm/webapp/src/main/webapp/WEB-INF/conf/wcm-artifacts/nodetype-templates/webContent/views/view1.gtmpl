@@ -66,7 +66,7 @@
 						if(isShowTags) {
 						  NewFolksonomyService folkService = uicomponent.getApplicationComponent(NewFolksonomyService.class);
 						  def nodeLocation = NodeLocation.make(currentNode);
-							List<Node> tagList = folkService.getLinkedTagsOfDocument(currentNode, nodeLocation.getRepository(), nodeLocation.getWorkspace());
+							List<Node> tagList = folkService.getLinkedTagsOfDocument(currentNode, nodeLocation.getWorkspace());
 							if(!tagList.isEmpty()) {
 								StringBuffer tagBuff = new StringBuffer("[");
 								for(Node tag: tagList) {

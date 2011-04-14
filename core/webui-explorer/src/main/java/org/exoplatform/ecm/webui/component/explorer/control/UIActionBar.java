@@ -138,8 +138,7 @@ public class UIActionBar extends UIForm {
 
   public void setTabOptions(String viewName) throws Exception {
     tabList_ = new ArrayList<String>();
-    String repository = getAncestorOfType(UIJCRExplorer.class).getRepositoryName();
-    view_ = getApplicationComponent(ManageViewService.class).getViewByName(viewName,repository,
+    view_ = getApplicationComponent(ManageViewService.class).getViewByName(viewName,
         SessionProviderFactory.createSystemProvider());
     NodeIterator tabs = view_.getNodes();
     while (tabs.hasNext()) {
@@ -209,22 +208,19 @@ public class UIActionBar extends UIForm {
 
   public List<Query> getSavedQueries() throws Exception {
     String userName = Util.getPortalRequestContext().getRemoteUser();
-    String repository = getAncestorOfType(UIJCRExplorer.class).getRepositoryName();
-    return getApplicationComponent(QueryService.class).getQueries(userName, repository,
-        SessionProviderFactory.createSystemProvider());
+    return getApplicationComponent(QueryService.class).getQueries(userName, SessionProviderFactory.createSystemProvider());
   }
 
   public Hashtable<String, String> getMetadataTemplates() throws Exception {
     MetadataService metadataService = getApplicationComponent(MetadataService.class) ;
     Node node = getAncestorOfType(UIJCRExplorer.class).getCurrentNode() ;
-    String repository = getAncestorOfType(UIJCRExplorer.class).getRepositoryName() ;
     Hashtable<String, String> templates = new Hashtable<String, String>();
-    List<String> metaDataList = metadataService.getMetadataList(repository);
+    List<String> metaDataList = metadataService.getMetadataList();
 
     NodeType[] nodeTypes = node.getMixinNodeTypes();
     for(NodeType nt : nodeTypes) {
       if(metaDataList.contains(nt.getName())) {
-        templates.put(nt.getName(), metadataService.getMetadataPath(nt.getName(), false, repository));
+        templates.put(nt.getName(), metadataService.getMetadataPath(nt.getName(), false));
       }
     }
     Item primaryItem = null;
@@ -237,7 +233,7 @@ public class UIActionBar extends UIForm {
       NodeType[] primaryTypes = primaryNode.getMixinNodeTypes();
       for(NodeType nt : primaryTypes) {
         if(metaDataList.contains(nt.getName())) {
-          templates.put(nt.getName(), metadataService.getMetadataPath(nt.getName(), false, repository));
+          templates.put(nt.getName(), metadataService.getMetadataPath(nt.getName(), false));
         }
       }
     }

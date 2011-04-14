@@ -67,7 +67,7 @@ public class ImportContentsJob implements Job {
       SessionProvider sessionProvider = SessionProvider.createSystemProvider();
       String containerName = WCMCoreUtils.getContainerNameFromJobContext(context);
       RepositoryService repositoryService_ = WCMCoreUtils.getService(RepositoryService.class, containerName);
-      ManageableRepository manageableRepository = repositoryService_.getRepository("repository");
+      ManageableRepository manageableRepository = repositoryService_.getCurrentRepository();
       PublicationService publicationService = WCMCoreUtils.getService(PublicationService.class, containerName);
       PublicationPlugin publicationPlugin = publicationService.getPublicationPlugins()
                                                               .get(AuthoringPublicationConstant.LIFECYCLE_NAME);
@@ -156,8 +156,7 @@ public class ImportContentsJob implements Job {
                       }
                       sessionProvider = SessionProvider.createSystemProvider();
 
-                      String repository = strContentPath[0];
-                      manageableRepository = repositoryService_.getRepository(repository);
+                      manageableRepository = repositoryService_.getCurrentRepository();
                       String workspace = strContentPath[1];
                       session = sessionProvider.getSession(workspace, manageableRepository);
                       if (session.itemExists(contentPath)) {

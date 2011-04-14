@@ -43,7 +43,7 @@ public class RemovePrivilegeableScript implements CmsScript {
     String nodePath = (String)context.get("srcPath") ;
     Session session = null ;
     try {
-      session = repositoryService_.getRepository().login(srcWorkspace);
+      session = repositoryService_.getCurrentRepository().login(srcWorkspace);
       Node node = (Node) session.getItem(nodePath);
       processRemovePrivilegeableMixin(node);
       node.save();

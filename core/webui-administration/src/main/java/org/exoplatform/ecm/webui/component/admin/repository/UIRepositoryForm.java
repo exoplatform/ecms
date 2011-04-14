@@ -288,9 +288,9 @@ public class UIRepositoryForm extends UIForm implements UIPopupComponent {
           }
         }
         for(WorkspaceEntry ws : getWorkspaceMap().values()) {
-          if(!rService.getRepository(repositoryEntry.getName()).isWorkspaceInitialized(ws.getName())) {
-            rService.getRepository(repositoryEntry.getName()).configWorkspace(ws);
-            rService.getRepository(repositoryEntry.getName()).createWorkspace(ws.getName());
+          if(!rService.getCurrentRepository().isWorkspaceInitialized(ws.getName())) {
+            rService.getCurrentRepository().configWorkspace(ws);
+            rService.getCurrentRepository().createWorkspace(ws.getName());
           }
         }
       } catch (RepositoryConfigurationException repositoryConfigurationException) {
@@ -301,14 +301,14 @@ public class UIRepositoryForm extends UIForm implements UIPopupComponent {
         LOG.error("Unexpected error", e);
         return;
       }
-      initServices(repositoryEntry.getName());
+      initServices();
       if(rService.getConfig().isRetainable()) {
         rService.getConfig().retain();
       }
     }
   }
 
-  private void initServices(String repository) throws Exception{
+  private void initServices() throws Exception{
     try {
       RepositoryService rService = getApplicationComponent(RepositoryService.class);
       InputStream xml = configurationManager.getURL("classpath:/conf/portal/registry-nodetypes.xml").openStream();
@@ -317,17 +317,19 @@ public class UIRepositoryForm extends UIForm implements UIPopupComponent {
               .registerNodeTypes(xml, ExtendedNodeTypeManager.IGNORE_IF_EXISTS);
       xml.close();
       getApplicationComponent(RegistryService.class).initStorage(false);
-      getApplicationComponent(NodeHierarchyCreator.class).init(repository);
-      getApplicationComponent(TaxonomyService.class).init(repository);
+      getApplicationComponent(NodeHierarchyCreator.class).init(rService.getCurrentRepository()
+                                                                       .getConfiguration()
+                                                                       .getName());
+      getApplicationComponent(TaxonomyService.class).init();
       getApplicationComponent(ManageDriveService.class).init();
-      getApplicationComponent(NewFolksonomyService.class).init(repository);
-      getApplicationComponent(MetadataService.class).init(repository);
-      getApplicationComponent(QueryService.class).init(repository);
-      getApplicationComponent(RelationsService.class).init(repository);
-      getApplicationComponent(ScriptService.class).initRepo(repository);
+      getApplicationComponent(NewFolksonomyService.class).init();
+      getApplicationComponent(MetadataService.class).init();
+      getApplicationComponent(QueryService.class).init();
+      getApplicationComponent(RelationsService.class).init();
+      getApplicationComponent(ScriptService.class).initRepo();
       getApplicationComponent(TemplateService.class).init();
-      getApplicationComponent(ManageViewService.class).init(repository);
-      getApplicationComponent(ActionServiceContainer.class).init(repository);
+      getApplicationComponent(ManageViewService.class).init();
+      getApplicationComponent(ActionServiceContainer.class).init();
     } catch(NullPointerException nullPointerException) {
       return;
     } catch(ItemExistsException itemExistsException) {
@@ -581,7 +583,7 @@ public class UIRepositoryForm extends UIForm implements UIPopupComponent {
       Iterator wsPermission = uiForm.workspaceMapPermission_.keySet().iterator();
       while (wsPermission.hasNext()) {
         String workSpaceName = (String)wsPermission.next();
-        ManageableRepository manageRepository = rService.getRepository(repoName);
+        ManageableRepository manageRepository = rService.getCurrentRepository();
         Session systemSession = manageRepository.getSystemSession(workSpaceName);
         String stringPermission = uiForm.workspaceMapPermission_.get(workSpaceName);
         ExtendedNode rootNode = (ExtendedNode)systemSession.getRootNode();
@@ -663,7 +665,7 @@ public class UIRepositoryForm extends UIForm implements UIPopupComponent {
       event.getRequestContext().addUIComponentToUpdateByAjax(uiWizardPopup);
       RepositoryService rService = uiForm.getApplicationComponent(RepositoryService.class);
       if(uiForm.isAddnew_) uiForm.refresh(rService.getDefaultRepository().getConfiguration());
-      else uiForm.refresh(rService.getRepository(uiForm.repoName_).getConfiguration());
+      else uiForm.refresh(rService.getCurrentRepository().getConfiguration());
       event.getRequestContext().addUIComponentToUpdateByAjax(uiForm.getAncestorOfType(UIPopupContainer.class));
     }
   }
@@ -760,7 +762,7 @@ public class UIRepositoryForm extends UIForm implements UIPopupComponent {
           return;
         }
         RepositoryService rService = uiForm.getApplicationComponent(RepositoryService.class);
-        ManageableRepository manaRepo = rService.getRepository(uiForm.repoName_);
+        ManageableRepository manaRepo = rService.getCurrentRepository();
         if(manaRepo.canRemoveWorkspace(workspaceName)) {
           manaRepo.removeWorkspace(workspaceName);
           InitialContextInitializer ic = (InitialContextInitializer)uiForm.getApplicationComponent(ExoContainer.class).

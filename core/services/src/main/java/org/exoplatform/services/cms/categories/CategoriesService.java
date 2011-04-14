@@ -45,7 +45,16 @@ public interface CategoriesService {
    * @see                     SessionProvider
    * @throws Exception
    */
+  @Deprecated
   public Node getTaxonomyHomeNode(String repository, SessionProvider provider) throws Exception;
+  
+  /**
+   * Gets the root node of taxonomy
+   * @param provider          The SessionProvider object is used to managed Sessions
+   * @see                     SessionProvider
+   * @throws Exception
+   */
+  public Node getTaxonomyHomeNode(SessionProvider provider) throws Exception;
 
   /**
    * Adds a new taxonomy node to the node is specified by parentPath param

@@ -101,9 +101,9 @@ public class UIMetadataForm extends UIFormTabPane implements UISelectable {
     repository_ = getAncestorOfType(UIECMAdminPortlet.class).getPreferenceRepository() ;
     workspaceName_ = getAncestorOfType(UIECMAdminPortlet.class).getPreferenceWorkspace() ;
     getUIStringInput(METADATA_NAME).setValue(metadata) ;
-    String dialogTemplate = metadataService.getMetadataTemplate(metadata, true, repository_) ;
-    String viewTemplate = metadataService.getMetadataTemplate(metadata, false, repository_) ;
-    String role = metadataService.getMetadataRoles(metadata, true, repository_) ;
+    String dialogTemplate = metadataService.getMetadataTemplate(metadata, true) ;
+    String viewTemplate = metadataService.getMetadataTemplate(metadata, false) ;
+    String role = metadataService.getMetadataRoles(metadata, true) ;
     getUIStringInput(METADATA_NAME).setEditable(false) ;
     getUIStringInput(VIEW_PERMISSION).setValue(role) ;
     getUIFormTextAreaInput(DIALOG_TEMPLATE).setValue(dialogTemplate) ;
@@ -120,26 +120,22 @@ public class UIMetadataForm extends UIFormTabPane implements UISelectable {
       if(dialogTemplate == null) dialogTemplate = "" ;
       String viewTemplate = uiForm.getUIFormTextAreaInput(VIEW_TEMPLATE).getValue() ;
       if(viewTemplate == null) viewTemplate = "" ;
-      if(!metadataService.hasMetadata(uiForm.metadataName_, uiForm.repository_)) uiForm.isAddNew_ = true ;
+      if(!metadataService.hasMetadata(uiForm.metadataName_)) uiForm.isAddNew_ = true ;
       else uiForm.isAddNew_ = false ;
-      JCRResourceResolver resourceResolver = new JCRResourceResolver(uiForm.repository_,
-                                                                     uiForm.workspaceName_,
-                                                                     "exo:templateFile");
+      JCRResourceResolver resourceResolver = new JCRResourceResolver(uiForm.workspaceName_);
       TemplateService templateService = uiForm.getApplicationComponent(TemplateService.class) ;
       String path = metadataService.addMetadata(uiForm.metadataName_,
                                                 true,
                                                 roles,
                                                 dialogTemplate,
-                                                uiForm.isAddNew_,
-                                                uiForm.repository_);
+                                                uiForm.isAddNew_);
       if (path != null)
         templateService.invalidateTemplate(path, resourceResolver);
       path = metadataService.addMetadata(uiForm.metadataName_,
                                          false,
                                          roles,
                                          viewTemplate,
-                                         uiForm.isAddNew_,
-                                         uiForm.repository_);
+                                         uiForm.isAddNew_);
       if (path != null)
         templateService.invalidateTemplate(path, resourceResolver);
       uiForm.reset() ;

@@ -11,6 +11,7 @@
   import java.util.List;
 	import java.util.ArrayList;
   import org.exoplatform.ecm.utils.text.Text;
+  import org.exoplatform.services.jcr.RepositoryService;
   
 %>
 
@@ -25,7 +26,8 @@
     String serverPath = uicomponent.getServerPath();
     String portalName = uicomponent.getPortalName();
     String restContextName = Utils.getRestContextName(portalName);
-    String repository = uicomponent.getRepository();
+    RepositoryService rService = uicomponent.getApplicationComponent(RepositoryService.class) ;
+    String repository = rService.getCurrentRepository().getConfiguration().getName() ;  
     String drive = uicomponent.getDriveName();
     int counter = 1 ;     
 	  List childrenNodes=uicomponent.getRenderedChildren(rootTree);

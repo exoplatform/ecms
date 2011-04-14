@@ -184,6 +184,7 @@ public class WCMCoreUtils {
    *
    * @return the manageable repository by name, the current repository if name is null
    */
+  @Deprecated
   public static ManageableRepository getRepository(String repository) {
     try {
       RepositoryService repositoryService = getService(RepositoryService.class);
@@ -193,5 +194,20 @@ public class WCMCoreUtils {
     }
     return null;
   }
+  
+  /**
+   * Get the current repository
+   *
+   * @return the current manageable repository
+   */
+  public static ManageableRepository getRepository() {
+    try {
+      RepositoryService repositoryService = getService(RepositoryService.class);
+      return repositoryService.getCurrentRepository();
+    } catch (Exception e) {
+      log.error("getRepository() failed because of ", e);
+    }
+    return null;
+  }  
 
 }

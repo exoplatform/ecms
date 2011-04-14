@@ -4,11 +4,15 @@
   import org.exoplatform.web.application.Parameter ;
   import org.exoplatform.webui.core.UIPopupWindow;
   import org.exoplatform.ecm.webui.component.explorer.UIDocumentInfo;
+  import org.exoplatform.services.jcr.RepositoryService;
 	
 	UIPopupWindow uiPopupWindow = uicomponent.getAncestorOfType(UIPopupWindow.class);
   def resizeBlock = "class=\"UIResizableBlock\"";
   if(uiPopupWindow != null) resizeBlock = ""; 
   Parameter[] params;
+  
+  RepositoryService rService = uicomponent.getApplicationComponent(RepositoryService.class);
+  String repository = rService.getCurrentRepository().getConfiguration().getName();  
 %>
 <style>
   <% _ctx.include(uicomponent.getTemplateSkin("exo:article", "Stylesheet")); %>
@@ -162,7 +166,7 @@
 							                  	<a $linkActionName="$viewAttachmentLink" style="cursor: pointer;"><%=att.getName()%></a>
 							                  </div>
 							                  <% if (PermissionUtil.canRemoveNode(att)) {
-							                       params = [new Parameter("workspaceName", wsName), new Parameter("repository", uicomponent.getRepository())];
+							                       params = [new Parameter("workspaceName", wsName), new Parameter("repository", repository)];
 							                    %>
 							                    <a onclick="<%=removeattachcomponent.event("RemoveAttach", Utils.formatNodeName(att.getPath()), params)%>" style="cursor: pointer;" title="<%=_ctx.appRes(uicomponent.getId() + ".tooltip.remove-attachment")%>">
 							                      <div class="RemoveAttachments"><span></span></div>

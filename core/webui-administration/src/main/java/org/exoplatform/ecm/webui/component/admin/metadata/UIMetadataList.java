@@ -70,13 +70,12 @@ public class UIMetadataList extends UIContainer {
   public List<Metadata> getAllMetadatas() throws Exception {
     List<Metadata> metadatas = new ArrayList<Metadata>() ;
     MetadataService metadataService = getApplicationComponent(MetadataService.class) ;
-    String repository = getAncestorOfType(UIECMAdminPortlet.class).getPreferenceRepository() ;
-    List<NodeType> nodetypes = metadataService.getAllMetadatasNodeType(repository) ;
+    List<NodeType> nodetypes = metadataService.getAllMetadatasNodeType() ;
     Collections.sort(nodetypes, new Utils.NodeTypeNameComparator()) ;
     for(NodeType nt : nodetypes) {
       Metadata mt = new Metadata() ;
       mt.setName(nt.getName()) ;
-      mt.isTemplate(metadataService.hasMetadata(nt.getName(), repository)) ;
+      mt.isTemplate(metadataService.hasMetadata(nt.getName())) ;
       for(PropertyDefinition def : nt.getPropertyDefinitions()) {
         if(def.getName().equals(INTERNAL_USE)) {
           if(def.getDefaultValues() != null && def.getDefaultValues()[0].getBoolean()) {
@@ -126,9 +125,8 @@ public class UIMetadataList extends UIContainer {
       UIMetadataList uiMetaList = event.getSource() ;
       String metadataName = event.getRequestContext().getRequestParameter(OBJECTID) ;
       UIMetadataManager uiManager = uiMetaList.getParent() ;
-      String repository = uiMetaList.getAncestorOfType(UIECMAdminPortlet.class).getPreferenceRepository() ;
       MetadataService metadataService = uiMetaList.getApplicationComponent(MetadataService.class) ;
-      metadataService.removeMetadata(metadataName, repository) ;
+      metadataService.removeMetadata(metadataName);
       uiMetaList.updateGrid() ;
       event.getRequestContext().addUIComponentToUpdateByAjax(uiManager) ;
       UIApplication uiApp = uiMetaList.getAncestorOfType(UIApplication.class) ;

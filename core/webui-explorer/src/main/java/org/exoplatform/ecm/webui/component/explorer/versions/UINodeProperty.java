@@ -58,8 +58,7 @@ public class UINodeProperty extends UIForm{
     RepositoryService repositoryService =
       (RepositoryService)PortalContainer.getComponent(RepositoryService.class) ;
     List<Property> list = new ArrayList<Property>() ;
-    String repository = getAncestorOfType(UIJCRExplorer.class).getRepositoryName() ;
-    NodeTypeManager nodeTypeManager = repositoryService.getRepository(repository).getNodeTypeManager() ;
+    NodeTypeManager nodeTypeManager = repositoryService.getCurrentRepository().getNodeTypeManager();
     NodeType jcrFrozenNode = nodeTypeManager.getNodeType("nt:frozenNode") ;
     NodeType ntVersion = nodeTypeManager.getNodeType("nt:version") ;
     NodeType ntVersionHistory = nodeTypeManager.getNodeType("nt:versionHistory") ;
@@ -146,9 +145,7 @@ public class UINodeProperty extends UIForm{
   }
 
   private Session getSystemSession() throws Exception {
-    String repository = getAncestorOfType(UIJCRExplorer.class).getRepositoryName() ;
-    ManageableRepository manageableRepository =
-      getApplicationComponent(RepositoryService.class).getRepository(repository) ;
+    ManageableRepository manageableRepository = getApplicationComponent(RepositoryService.class).getCurrentRepository();
     String systemWorksapce = manageableRepository.getConfiguration().getDefaultWorkspaceName();
     Session session = SessionProviderFactory.createSystemProvider().getSession(systemWorksapce, manageableRepository) ;
     return session ;

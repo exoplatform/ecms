@@ -107,7 +107,7 @@ public class UIECMAdminPortlet extends UIPortletApplication {
 
   public ManageableRepository getRepository() throws Exception {
     RepositoryService rservice = getApplicationComponent(RepositoryService.class) ;
-    return rservice.getRepository(repoName_) ;
+    return rservice.getCurrentRepository();
   }
 
   public boolean isShowSideBar() { return isShowSideBar ; }

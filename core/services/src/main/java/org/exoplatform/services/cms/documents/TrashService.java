@@ -49,8 +49,22 @@ public interface TrashService {
    * @param sessionProvider User session provider which will be used to get session
    * @throws Exception
    */
+  @Deprecated
   public void moveToTrash(Node node, String trashPath, String trashWorkspace, String repository,
       SessionProvider sessionProvider) throws Exception;
+  
+  /**
+   * Move node to trash location
+   * @param node Node will be moved to trash
+   * @param trashPath The trash node path
+   * @param trashWorkspace The trash workspace
+   * @param sessionProvider User session provider which will be used to get session
+   * @throws Exception
+   */
+  public void moveToTrash(Node node,
+                          String trashPath,
+                          String trashWorkspace,
+                          SessionProvider sessionProvider) throws Exception;
 
   /**
    * Restore node from trash
@@ -61,8 +75,21 @@ public interface TrashService {
    * @param sessionProvider User session provider which will be used to get session
    * @throws Exception
    */
+  @Deprecated
   public void restoreFromTrash(Node trashHomeNode, String trashNodePath,
       String repository, SessionProvider sessionProvider) throws Exception;
+  
+  /**
+   * Restore node from trash
+   * @param trashHomeNode trash home node
+   * @param restorePath Restore path which will be used to restore
+   * @param restoreWorkspace The workspace name of node which moved to trash
+   * @param repository The repository name
+   * @throws Exception
+   */
+  public void restoreFromTrash(Node trashHomeNode,
+                               String trashNodePath,
+                               SessionProvider sessionProvider) throws Exception;
 
   /**
    * Get all nodes in trash location
@@ -72,8 +99,19 @@ public interface TrashService {
    * @return List<Node> All nodes in trash
    * @throws Exception
    */
+  @Deprecated
   public List<Node> getAllNodeInTrash(String trashWorkspace, String repository,
       SessionProvider sessionProvider) throws Exception;
+  
+  /**
+   * Get all nodes in trash location
+   * 
+   * @param trashWorkspace
+   * @param sessionProvider
+   * @return List<Node> All nodes in trash
+   * @throws Exception
+   */
+  public List<Node> getAllNodeInTrash(String trashWorkspace, SessionProvider sessionProvider) throws Exception;
 
   /**
    * Get all nodes by user in trash location
@@ -84,8 +122,21 @@ public interface TrashService {
    * @return List<Node> all node in trash which moved by user
    * @throws Exception
    */
+  @Deprecated
   public List<Node> getAllNodeInTrashByUser(String trashWorkspace, String repository,
       SessionProvider sessionProvider, String userName) throws Exception;
+  
+  /**
+   * Get all nodes by user in trash location
+   * @param trashWorkspace
+   * @param sessionProvider
+   * @param userName
+   * @return List<Node> all node in trash which moved by user
+   * @throws Exception
+   */
+  public List<Node> getAllNodeInTrashByUser(String trashWorkspace,
+                                            SessionProvider sessionProvider,
+                                            String userName) throws Exception;
 
   /**
    * Removes all 'relationable' property of nodes that have relation to this node
@@ -95,6 +146,17 @@ public interface TrashService {
    * @return
    * @throws Exception
    */
+  @Deprecated
   public void removeRelations(Node node, SessionProvider sessionProvider,
       String repository) throws Exception;
+  
+
+  /**
+   * Removes all 'relationable' property of nodes that have relation to this node
+   * @param node
+   * @param sessionProvider
+   * @return
+   * @throws Exception
+   */
+  public void removeRelations(Node node, SessionProvider sessionProvider) throws Exception;  
 }

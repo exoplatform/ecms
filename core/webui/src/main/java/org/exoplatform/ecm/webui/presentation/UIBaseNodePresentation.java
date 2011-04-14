@@ -114,7 +114,7 @@ public abstract class UIBaseNodePresentation extends UIContainer implements Node
       Node childNode = childrenIterator.nextNode();
       String nodeType = childNode.getPrimaryNodeType().getName();
       List<String> listCanCreateNodeType =
-        Utils.getListAllowedFileType(getNode(), getRepository(), templateService) ;
+        Utils.getListAllowedFileType(getNode(), templateService) ;
       if (listCanCreateNodeType.contains(nodeType)) attachments.add(childNode);
     }
     return attachments;
@@ -277,7 +277,7 @@ public abstract class UIBaseNodePresentation extends UIContainer implements Node
    * @throws Exception the exception
    */
   public Node getNodeByUUID(String uuid) throws Exception{
-    ManageableRepository manageRepo = getApplicationComponent(RepositoryService.class).getRepository(getRepositoryName()) ;
+    ManageableRepository manageRepo = getApplicationComponent(RepositoryService.class).getCurrentRepository();
     String[] workspaces = manageRepo.getWorkspaceNames() ;
     //TODO: SystemProvider or SessionProvider
     SessionProvider provider = SessionProviderFactory.createSystemProvider() ;
@@ -314,10 +314,10 @@ public abstract class UIBaseNodePresentation extends UIContainer implements Node
    */
   public List<Node> getTags(Node node) throws Exception {
     NewFolksonomyService folksonomyService = getApplicationComponent(NewFolksonomyService.class);
-    return folksonomyService.
-      getLinkedTagsOfDocumentByScope(NewFolksonomyService.PRIVATE,
-                                     getStrValue(Utils.PRIVATE, node),
-                                     node,getRepositoryName(), getWorkspaceName());
+    return folksonomyService.getLinkedTagsOfDocumentByScope(NewFolksonomyService.PRIVATE,
+                                                            getStrValue(Utils.PRIVATE, node),
+                                                            node,
+                                                            getWorkspaceName());
   }
 
   /**

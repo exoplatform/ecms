@@ -101,7 +101,7 @@ public class PublicationGetDocumentRESTService implements ResourceContainer {
   public Response getPublishDocument(@PathParam("repository") String repoName, @PathParam("workspace")
   String wsName, @PathParam("state") String state, @QueryParam("showItems")
   String showItems) throws Exception {
-    return getPublishDocument(repoName, wsName, state, null, showItems);
+    return getPublishDocuments(wsName, state, null, showItems);
   }
 
   /**
@@ -123,19 +123,21 @@ public class PublicationGetDocumentRESTService implements ResourceContainer {
   String wsName, @PathParam("publicationPluginName") String pluginName, @PathParam("state")
   String state, @QueryParam("showItems")
   String showItems) throws Exception {
-    return getPublishDocument(repoName, wsName, state, pluginName, showItems);
+    return getPublishDocuments(wsName, state, pluginName, showItems);
   }
 
   @SuppressWarnings("unused")
-  private Response getPublishDocument(String repoName, String wsName, String state,
-      String pluginName, String itemPage) throws Exception {
+  private Response getPublishDocuments(String wsName,
+                                       String state,
+                                       String pluginName,
+                                       String itemPage) throws Exception {
     List<PublishedNode> publishedNodes = new ArrayList<PublishedNode>();
     PublishedListNode publishedListNode = new PublishedListNode();
     if(itemPage == null) itemPage = DEFAULT_ITEM;
     int item = Integer.parseInt(itemPage);
     String queryStatement = "select * from publication:publication order by exo:dateModified ASC";
     SessionProvider provider = SessionProviderFactory.createAnonimProvider();
-    Session session = provider.getSession(wsName, repositoryService_.getRepository(repoName));
+    Session session = provider.getSession(wsName, repositoryService_.getCurrentRepository());
     QueryManager queryManager = session.getWorkspace().getQueryManager();
     QueryImpl query = (QueryImpl) queryManager.createQuery(queryStatement, Query.SQL);
     query.setLimit(item);
@@ -145,7 +147,7 @@ public class PublicationGetDocumentRESTService implements ResourceContainer {
     List<Node> listNode = getNodePublish(iter, pluginName);
     Collections.sort(listNode, new DateComparator());
     if(listNode.size() < item) item = listNode.size();
-    List<DriveData> lstDrive = manageDriveService_.getAllDrives(repoName);
+    List<DriveData> lstDrive = manageDriveService_.getAllDrives();
     for (int i = 0; i < item; i++) {
       PublishedNode publishedNode = new PublishedNode();
       Node node = listNode.get(i);

@@ -80,7 +80,7 @@ public class UIViewMetadataForm extends UIDialogForm {
     repositoryName = getAncestorOfType(UIJCRExplorer.class).getRepositoryName();
     MetadataService metadataService = getApplicationComponent(MetadataService.class);
     try {
-      return metadataService.getMetadataPath(nodeType_, true, repositoryName);
+      return metadataService.getMetadataPath(nodeType_, true);
     } catch (Exception e) {
       LOG.error("Unexpected error", e);
     }

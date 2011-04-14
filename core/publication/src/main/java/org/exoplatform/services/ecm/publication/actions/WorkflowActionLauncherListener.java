@@ -86,7 +86,7 @@ public abstract class WorkflowActionLauncherListener implements ECMEventListener
       Node node = null;
       Session jcrSession = null;
       try {
-        jcrSession = repositoryService.getRepository(repository_).getSystemSession(srcWorkspace_);
+        jcrSession = repositoryService.getCurrentRepository().getSystemSession(srcWorkspace_);
         node = (Node) jcrSession.getItem(srcPath_);
         String userId = event.getUserID();
         Node actionNode = actionServiceContainer.getAction(node, actionName_);

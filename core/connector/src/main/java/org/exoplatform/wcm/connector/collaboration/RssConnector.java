@@ -177,8 +177,7 @@ public class RssConnector extends BaseConnector implements ResourceContainer {
     }
 
 
-    List<Node> nodes = wcmComposer.getContents(repositoryName,
-                                               workspaceName,
+    List<Node> nodes = wcmComposer.getContents(workspaceName,
                                                path,
                                                filters,
                                                WCMCoreUtils.getUserSessionProvider());

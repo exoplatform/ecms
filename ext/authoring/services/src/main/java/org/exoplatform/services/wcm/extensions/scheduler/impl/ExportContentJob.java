@@ -107,7 +107,7 @@ public class ExportContentJob implements Job {
 
       String containerName = WCMCoreUtils.getContainerNameFromJobContext(context);
       RepositoryService repositoryService_ = WCMCoreUtils.getService(RepositoryService.class, containerName);
-      ManageableRepository manageableRepository = repositoryService_.getRepository(repository);
+      ManageableRepository manageableRepository = repositoryService_.getCurrentRepository();
       PublicationService publicationService = WCMCoreUtils.getService(PublicationService.class, containerName);
       PublicationPlugin publicationPlugin = publicationService.getPublicationPlugins()
                                                               .get(AuthoringPublicationConstant.LIFECYCLE_NAME);

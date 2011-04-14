@@ -311,16 +311,28 @@ public class ProcessUtil {
     provider.close();
   }
 
+  @Deprecated
   public static Node getNode(ExecutionContext context,
                              String repositoryName,
                              String workspace,
                              String path,
                              SessionProvider provider) throws Exception {
     RepositoryService repositoryService = getService(context, RepositoryService.class);
-    ManageableRepository repository= repositoryService.getRepository(repositoryName);
+    ManageableRepository repository= repositoryService.getCurrentRepository();
     Session session = provider.getSession(workspace,repository);
     return (Node)session.getItem(path);
   }
+  
+  public static Node getNode(ExecutionContext context,
+                             String workspace,
+                             String path,
+                             SessionProvider provider) throws Exception {
+    RepositoryService repositoryService = getService(context, RepositoryService.class);
+    ManageableRepository repository= repositoryService.getCurrentRepository();
+    Session session = provider.getSession(workspace,repository);
+    return (Node)session.getItem(path);
+  }
+
 
   public static String getActorId(ExecutionContext context) {
     return (String)context.getVariable("initiator");

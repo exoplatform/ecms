@@ -242,22 +242,19 @@ public class PublicationUtil {
     RepositoryService repositoryService = WCMCoreUtils.getService(RepositoryService.class);
     PortletPreferences portletPreferences = dataStorage.getPortletPreferences(applicationId);
     if (portletPreferences == null) return null;
-    String repositoryName = null;
     String workspaceName = null;
     String nodeIdentifier = null;
     for (Object object : portletPreferences.getPreferences()) {
       Preference preference = (Preference) object;
-      if (preference.getName().equals("repository")) {
-        repositoryName = preference.getValues().get(0).toString();
-      } else if (preference.getName().equals("workspace")) {
+      if (preference.getName().equals("workspace")) {
         workspaceName = preference.getValues().get(0).toString();
       } else if (preference.getName().equals("nodeIdentifier")) {
         nodeIdentifier = preference.getValues().get(0).toString();
       }
     }
     SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
-    if (repositoryName != null && workspaceName != null && nodeIdentifier != null) {
-      Session session = sessionProvider.getSession(workspaceName, repositoryService.getRepository(repositoryName));
+    if (workspaceName != null && nodeIdentifier != null) {
+      Session session = sessionProvider.getSession(workspaceName, repositoryService.getCurrentRepository());
       Node content = null;
       try {
         content = session.getNodeByUUID(nodeIdentifier);

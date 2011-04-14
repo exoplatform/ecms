@@ -66,15 +66,31 @@ public class TrashServiceImpl implements TrashService {
   /**
    * {@inheritDoc}
    */
+  @Deprecated
   public void moveToTrash(Node node, String trashPath, String trashWorkspace,
       String repository, SessionProvider sessionProvider)
   throws Exception {
     moveToTrash(node, trashPath, trashWorkspace, repository, sessionProvider, 0);
   }
-
-  public void moveToTrash(Node node, String trashPath, String trashWorkspace,
-      String repository, SessionProvider sessionProvider, int deep)
+  
+  /**
+   * {@inheritDoc}
+   */
+  public void moveToTrash(Node node,
+                          String trashPath,
+                          String trashWorkspace,
+                          SessionProvider sessionProvider)
   throws Exception {
+    moveToTrash(node, trashPath, trashWorkspace, sessionProvider, 0);
+  }
+
+  @Deprecated
+  public void moveToTrash(Node node,
+                          String trashPath,
+                          String trashWorkspace,
+                          String repository,
+                          SessionProvider sessionProvider,
+                          int deep) throws Exception {
 
 
     String nodeName = node.getName();
@@ -93,7 +109,7 @@ public class TrashServiceImpl implements TrashService {
       node.setProperty(RESTORE_WORKSPACE, nodeWorkspaceName);
       nodeSession.save();
 
-      ManageableRepository manageableRepository = repositoryService.getRepository(repository);
+      ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
       Session trashSession = sessionProvider.getSession(trashWorkspace, manageableRepository);
       String actualTrashPath = trashPath + (trashPath.endsWith("/") ? "" : "/")
           + fixRestorePath(nodeName);
@@ -113,9 +129,9 @@ public class TrashServiceImpl implements TrashService {
             myContainer.getComponentInstanceOfType(NewFolksonomyService.class);
 
             String tagWorkspace = manageableRepository.getConfiguration().getDefaultWorkspaceName();
-            List<Node> tags = newFolksonomyService.getLinkedTagsOfDocument(node, repository, tagWorkspace);
+            List<Node> tags = newFolksonomyService.getLinkedTagsOfDocument(node, tagWorkspace);
             for (Node tag : tags) {
-              newFolksonomyService.removeTagOfDocument(tag.getPath(), node, repository, tagWorkspace);
+              newFolksonomyService.removeTagOfDocument(tag.getPath(), node, tagWorkspace);
               linkManager.createLink(tag, clonedNode);
               long total = tag.hasProperty(EXO_TOTAL) ?
                   tag.getProperty(EXO_TOTAL).getLong() : 0;
@@ -161,7 +177,7 @@ public class TrashServiceImpl implements TrashService {
         try {
           targetNode = targetNodeSession.getNodeByUUID(taxonomyLinkUUID);
         } catch (Exception e) {}
-        if (targetNode != null && isInTaxonomyTree(repository, node, targetNode)) {
+        if (targetNode != null && isInTaxonomyTree(node, targetNode)) {
           List<Node> symlinks = linkManager.getAllLinks(targetNode, SYMLINK, repository);
           boolean found = false;
           for (Node symlink : symlinks)
@@ -185,8 +201,123 @@ public class TrashServiceImpl implements TrashService {
       nodeSession.logout();
     }
   }
+  
+  public void moveToTrash(Node node,
+                          String trashPath,
+                          String trashWorkspace,
+                          SessionProvider sessionProvider,
+                          int deep) throws Exception {
 
-  private boolean isInTaxonomyTree(String repository, Node taxonomyNode, Node targetNode) {
+
+    String nodeName = node.getName();
+    Session nodeSession = node.getSession();
+    String nodeWorkspaceName = nodeSession.getWorkspace().getName();
+    ExoContainer myContainer = ExoContainerContext.getCurrentContainer();
+    List<Node> categories = taxonomyService_.getAllCategories(node, true);
+    String nodeUUID = node.isNodeType(MIX_REFERENCEABLE) ? node.getUUID() : null;
+    if (node.isNodeType(SYMLINK)) nodeUUID = null;
+    String taxonomyLinkUUID = node.isNodeType(TAXONOMY_LINK) ? node.getProperty(UUID).getString() : null;
+    String taxonomyLinkWS = node.isNodeType(TAXONOMY_LINK) ? node.getProperty(EXO_WORKSPACE).getString() : null;
+
+    if (!node.isNodeType(EXO_RESTORE_LOCATION)) {
+      node.addMixin(EXO_RESTORE_LOCATION);
+      node.setProperty(RESTORE_PATH, fixRestorePath(node.getPath()));
+      node.setProperty(RESTORE_WORKSPACE, nodeWorkspaceName);
+      nodeSession.save();
+
+      ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
+      Session trashSession = sessionProvider.getSession(trashWorkspace, manageableRepository);
+      String actualTrashPath = trashPath + (trashPath.endsWith("/") ? "" : "/")
+          + fixRestorePath(nodeName);
+      if (trashSession.getWorkspace().getName().equals(
+          nodeSession.getWorkspace().getName())) {
+        trashSession.getWorkspace().move(node.getPath(),
+            actualTrashPath);
+      } else {
+        //clone node in trash folder
+        trashSession.getWorkspace().clone(nodeWorkspaceName,
+            node.getPath(), actualTrashPath, true);
+        if (node.isNodeType(MIX_REFERENCEABLE)) {
+            Node clonedNode = trashSession.getNodeByUUID(node.getUUID());
+            //remove link from tag to node
+
+            NewFolksonomyService newFolksonomyService = (NewFolksonomyService)
+            myContainer.getComponentInstanceOfType(NewFolksonomyService.class);
+
+            String tagWorkspace = manageableRepository.getConfiguration().getDefaultWorkspaceName();
+            List<Node> tags = newFolksonomyService.getLinkedTagsOfDocument(node, tagWorkspace);
+            for (Node tag : tags) {
+              newFolksonomyService.removeTagOfDocument(tag.getPath(), node, tagWorkspace);
+              linkManager.createLink(tag, clonedNode);
+              long total = tag.hasProperty(EXO_TOTAL) ?
+                  tag.getProperty(EXO_TOTAL).getLong() : 0;
+                  tag.setProperty(EXO_TOTAL, total + 1);
+                  tag.getSession().save();
+            }
+        }
+        node.remove();
+      }
+
+      nodeSession.save();
+      trashSession.save();
+      //remove categories
+      if (deep == 0 && nodeUUID != null) {
+        for (Node category : categories) {
+          NodeIterator iter = category.getNodes();
+          while (iter.hasNext()) {
+            Node categoryChild = iter.nextNode();
+            if (categoryChild.isNodeType(TAXONOMY_LINK) && categoryChild.hasProperty(UUID)
+                && categoryChild.hasProperty(EXO_WORKSPACE)
+                && nodeUUID.equals(categoryChild.getProperty(UUID).getString())
+                && nodeWorkspaceName.equals(categoryChild.getProperty(EXO_WORKSPACE).getString())) {
+              try {
+                moveToTrash(categoryChild,
+                            trashPath,
+                            trashWorkspace,
+                            sessionProvider,
+                            deep + 1);
+              } catch (Exception e) {
+              }
+            }
+          }
+        }
+      }
+
+      trashSession.save();
+
+      //check and delete target node when there is no its symlink
+      if (deep == 0 && taxonomyLinkUUID != null && taxonomyLinkWS != null) {
+        Session targetNodeSession = sessionProvider.getSession(taxonomyLinkWS, manageableRepository);
+        Node targetNode = null;
+        try {
+          targetNode = targetNodeSession.getNodeByUUID(taxonomyLinkUUID);
+        } catch (Exception e) {}
+        if (targetNode != null && isInTaxonomyTree(node, targetNode)) {
+          List<Node> symlinks = linkManager.getAllLinks(targetNode, SYMLINK);
+          boolean found = false;
+          for (Node symlink : symlinks)
+            if (!symlink.isNodeType(EXO_RESTORE_LOCATION)) {
+              found = true;
+              break;
+            }
+          if (!found) {
+            this.moveToTrash(targetNode, trashPath, trashWorkspace, sessionProvider);
+          }
+        }
+      }
+
+      trashSession.save();
+      trashSession.logout();
+
+    }
+
+    nodeSession.save();
+    if (deep == 0) {
+      nodeSession.logout();
+    }
+  }
+
+  private boolean isInTaxonomyTree(Node taxonomyNode, Node targetNode) {
     try {
       List<Node> taxonomyTrees = taxonomyService_.getAllTaxonomyTrees(true);
       for (Node tree : taxonomyTrees)
@@ -209,14 +340,23 @@ public class TrashServiceImpl implements TrashService {
    * {@inheritDoc}
    */
   //parameter:restorePath->trashNodePath
+  @Deprecated
   public void restoreFromTrash(Node trashHomeNode, String trashNodePath,
       String repository,
       SessionProvider sessionProvider) throws Exception {
-    restoreFromTrash(trashHomeNode, trashNodePath, repository, sessionProvider, 0);
+    restoreFromTrash(trashHomeNode, trashNodePath, sessionProvider, 0);
+  }
+  
+  /**
+   * {@inheritDoc}
+   */
+  public void restoreFromTrash(Node trashHomeNode,
+                               String trashNodePath,
+                               SessionProvider sessionProvider) throws Exception {
+    restoreFromTrash(trashHomeNode, trashNodePath, sessionProvider, 0);
   }
 
   private void restoreFromTrash(Node trashHomeNode, String trashNodePath,
-      String repository,
       SessionProvider sessionProvider, int deep) throws Exception {
 
     Session trashNodeSession = trashHomeNode.getSession();
@@ -229,7 +369,7 @@ public class TrashServiceImpl implements TrashService {
     String taxonomyLinkUUID = trashNode.isNodeType(TAXONOMY_LINK) ? trashNode.getProperty(UUID).getString() : null;
     String taxonomyLinkWS = trashNode.isNodeType(TAXONOMY_LINK) ? trashNode.getProperty(EXO_WORKSPACE).getString() : null;
 
-    ManageableRepository manageableRepository = repositoryService.getRepository(repository);
+    ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
     Session restoreSession = sessionProvider.getSession(restoreWorkspace,  manageableRepository);
 
     if (restoreWorkspace.equals(trashWorkspace)) {
@@ -247,9 +387,9 @@ public class TrashServiceImpl implements TrashService {
         myContainer.getComponentInstanceOfType(NewFolksonomyService.class);
 
         String tagWorkspace = manageableRepository.getConfiguration().getDefaultWorkspaceName();
-        List<Node> tags = newFolksonomyService.getLinkedTagsOfDocument(trashNode, repository, tagWorkspace);
+        List<Node> tags = newFolksonomyService.getLinkedTagsOfDocument(trashNode, tagWorkspace);
         for (Node tag : tags) {
-          newFolksonomyService.removeTagOfDocument(tag.getPath(), trashNode, repository, tagWorkspace);
+          newFolksonomyService.removeTagOfDocument(tag.getPath(), trashNode, tagWorkspace);
           linkManager.createLink(tag, restoredNode);
           long total = tag.hasProperty(EXO_TOTAL) ?
               tag.getProperty(EXO_TOTAL).getLong() : 0;
@@ -278,7 +418,7 @@ public class TrashServiceImpl implements TrashService {
               && nodeUUID.equals(trashChild.getProperty(UUID).getString())
               && restoreWorkspace.equals(trashChild.getProperty(EXO_WORKSPACE))) {
             try {
-                restoreFromTrash(trashHomeNode, trashChild.getPath(), repository, sessionProvider, deep + 1);
+                restoreFromTrash(trashHomeNode, trashChild.getPath(), sessionProvider, deep + 1);
                 found = true;
                 break;
             } catch (Exception e) {}
@@ -303,7 +443,6 @@ public class TrashServiceImpl implements TrashService {
             try {
               restoreFromTrash(trashHomeNode,
                                trashChild.getPath(),
-                               repository,
                                sessionProvider,
                                deep + 1);
               found = true;
@@ -326,6 +465,7 @@ public class TrashServiceImpl implements TrashService {
       restoreSession.logout();
   }
 
+  @Deprecated
   public List<Node> getAllNodeInTrash(String trashWorkspace, String repository,
       SessionProvider sessionProvider) throws Exception {
 
@@ -333,22 +473,65 @@ public class TrashServiceImpl implements TrashService {
     StringBuilder query = new StringBuilder("SELECT * FROM nt:base WHERE exo:restorePath IS NOT NULL");
 
     // System.out.println(query);
-    return selectNodesByQuery(trashWorkspace, repository,
-        sessionProvider, query.toString(), Query.SQL);
+    return selectNodesByQuery(trashWorkspace, sessionProvider, query.toString(), Query.SQL);
+  }
+  
+  public List<Node> getAllNodeInTrash(String trashWorkspace,
+                                      SessionProvider sessionProvider) throws Exception {
+
+    // String trashPathTail = (trashPath.endsWith("/"))? "" : "/";
+    StringBuilder query = new StringBuilder("SELECT * FROM nt:base WHERE exo:restorePath IS NOT NULL");
+
+    // System.out.println(query);
+    return selectNodesByQuery(trashWorkspace, sessionProvider, query.toString(), Query.SQL);
   }
 
+  @Deprecated
   public List<Node> getAllNodeInTrashByUser(String trashWorkspace, String repository,
       SessionProvider sessionProvider, String userName) throws Exception {
     StringBuilder query = new StringBuilder(
         "SELECT * FROM nt:base WHERE exo:restorePath IS NOT NULL AND exo:lastModifier='").append(userName).append("'");
-    return selectNodesByQuery(trashWorkspace, repository,
-        sessionProvider, query.toString(), Query.SQL);
+    return selectNodesByQuery(trashWorkspace, sessionProvider, query.toString(), Query.SQL);
+  }
+  
+  public List<Node> getAllNodeInTrashByUser(String trashWorkspace,
+                                            SessionProvider sessionProvider,
+                                            String userName) throws Exception {
+    StringBuilder query = new StringBuilder("SELECT * FROM nt:base WHERE exo:restorePath IS NOT NULL AND exo:lastModifier='").append(userName)
+                                                                                                                             .append("'");
+    return selectNodesByQuery(trashWorkspace, sessionProvider, query.toString(), Query.SQL);
   }
 
-  public void removeRelations(Node node, SessionProvider sessionProvider,
-      String repository) throws Exception {
-    ManageableRepository manageableRepository
-    = repositoryService.getRepository(repository);
+  @Deprecated
+  public void removeRelations(Node node, SessionProvider sessionProvider, String repository) throws Exception {
+    ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
+    String[] workspaces = manageableRepository.getWorkspaceNames();
+
+    String queryString = "SELECT * FROM exo:relationable WHERE exo:relation IS NOT NULL";
+    boolean error = false;
+
+    for (String ws : workspaces) {
+      Session session = sessionProvider.getSession(ws, manageableRepository);
+      QueryManager queryManager = session.getWorkspace().getQueryManager();
+      Query query = queryManager.createQuery(queryString, Query.SQL);
+      QueryResult queryResult = query.execute();
+
+      NodeIterator iter = queryResult.getNodes();
+      while (iter.hasNext()) {
+        try {
+          iter.nextNode().removeMixin("exo:relationable");
+          session.save();
+        } catch (Exception e) {
+          error = true;
+        }
+      }
+    }
+    if (error)
+      throw new Exception("Can't remove exo:relationable of all related nodes");
+  }
+
+  public void removeRelations(Node node, SessionProvider sessionProvider) throws Exception {
+    ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
     String[] workspaces = manageableRepository.getWorkspaceNames();
 
     String queryString = "SELECT * FROM exo:relationable WHERE exo:relation IS NOT NULL";
@@ -375,11 +558,11 @@ public class TrashServiceImpl implements TrashService {
 
 
   private List<Node> selectNodesByQuery(String trashWorkspace,
-      String repository, SessionProvider sessionProvider,
-      String queryString, String language) throws Exception {
+                                        SessionProvider sessionProvider,
+                                        String queryString,
+                                        String language) throws Exception {
     List<Node> ret = new ArrayList<Node>();
-    ManageableRepository manageableRepository
-    = repositoryService.getRepository(repository);
+    ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
     Session session = sessionProvider.getSession(trashWorkspace, manageableRepository);
     QueryManager queryManager = session.getWorkspace().getQueryManager();
     Query query = queryManager.createQuery(queryString, language);

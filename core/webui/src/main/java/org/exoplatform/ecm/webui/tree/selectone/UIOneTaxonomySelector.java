@@ -98,14 +98,14 @@ public class UIOneTaxonomySelector extends UIBaseNodeTreeSelector {
 
   Node getTaxoTreeNode(String taxoTreeName) throws RepositoryException {
     TaxonomyService taxonomyService = getApplicationComponent(TaxonomyService.class);
-    return taxonomyService.getTaxonomyTree(repositoryName, taxoTreeName);
+    return taxonomyService.getTaxonomyTree(taxoTreeName);
   }
 
   public String[] getDefaultExceptedNodeTypes() { return defaultExceptedNodeTypes; }
 
   public void init(SessionProvider sessionProvider) throws Exception {
     RepositoryService repositoryService = getApplicationComponent(RepositoryService.class);
-    ManageableRepository manageableRepository = repositoryService.getRepository(repositoryName);
+    ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
     PublicationService publicationService = getApplicationComponent(PublicationService.class);
     TemplateService templateService = getApplicationComponent(TemplateService.class);
     List<String> templates = templateService.getDocumentTemplates();
@@ -116,14 +116,14 @@ public class UIOneTaxonomySelector extends UIBaseNodeTreeSelector {
     } else {
       NodeFinder nodeFinder = getApplicationComponent(NodeFinder.class);
       try {
-        rootNode = (Node) nodeFinder.getItem(repositoryName, workspaceName, rootTreePath);
+        rootNode = (Node) nodeFinder.getItem(workspaceName, rootTreePath);
       } catch (PathNotFoundException pathNotFoundException) {
         rootNode = null;
       }
     }
 
     UITreeTaxonomyList uiTreeTaxonomyList = getChild(UITreeTaxonomyList.class);
-    uiTreeTaxonomyList.setTaxonomyTreeList(repositoryName);
+    uiTreeTaxonomyList.setTaxonomyTreeList();
     UITreeTaxonomyBuilder builder = getChild(UITreeTaxonomyBuilder.class);
     builder.setAllowPublish(allowPublish, publicationService, templates);
     builder.setAcceptedNodeTypes(acceptedNodeTypesInTree);

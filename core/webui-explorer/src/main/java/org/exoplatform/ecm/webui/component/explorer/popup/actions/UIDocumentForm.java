@@ -139,7 +139,7 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
     UIJCRExplorer uiExplorer = getAncestorOfType(UIJCRExplorer.class);
     try {
       TaxonomyService taxonomyService = getApplicationComponent(TaxonomyService.class);
-      List<Node> allTaxonomyTrees = taxonomyService.getAllTaxonomyTrees(uiExplorer.getRepositoryName());
+      List<Node> allTaxonomyTrees = taxonomyService.getAllTaxonomyTrees();
       for (Node taxonomyTree : allTaxonomyTrees) {
         if (node.getPath().startsWith(taxonomyTree.getPath())) return taxonomyTree;
       }
@@ -259,7 +259,6 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
       UIApplication uiApp = documentForm.getAncestorOfType(UIApplication.class);
       boolean hasCategories = false;
       String categoriesPath = "";
-      String repository = uiExplorer.getRepositoryName();
       TaxonomyService taxonomyService = documentForm.getApplicationComponent(TaxonomyService.class);
       if (documentForm.isAddNew()) {
         for (int i = 0; i < inputs.size(); i++) {
@@ -293,9 +292,9 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
               for (String categoryPath : listTaxonomy) {
                 index = categoryPath.indexOf("/");
                 if (index < 0) {
-                  taxonomyService.getTaxonomyTree(repository, categoryPath);
+                  taxonomyService.getTaxonomyTree(categoryPath);
                 } else {
-                  taxonomyService.getTaxonomyTree(repository, categoryPath.substring(0, index))
+                  taxonomyService.getTaxonomyTree(categoryPath.substring(0, index))
                                  .getNode(categoryPath.substring(index + 1));
                 }
               }
@@ -342,7 +341,7 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
           if(newNode.isLocked()) {
             newNode.getSession().addLockToken(LockUtil.getLockToken(newNode));
           }
-          List<Node> listTaxonomyTrees = taxonomyService.getAllTaxonomyTrees(repository);
+          List<Node> listTaxonomyTrees = taxonomyService.getAllTaxonomyTrees();
           List<Node> listExistedTaxonomy = taxonomyService.getAllCategories(newNode);
           List<String> listExistingTaxonomy = new ArrayList<String>();
 
@@ -584,7 +583,7 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
                 uiFormController.createUIComponent(UIOneTaxonomySelector.class, null, null);
               uiOneTaxonomySelector.setIsDisable(workspaceName, false);
               TaxonomyService taxonomyService = uiDocumentForm.getApplicationComponent(TaxonomyService.class);
-              List<Node> lstTaxonomyTree = taxonomyService.getAllTaxonomyTrees(repository);
+              List<Node> lstTaxonomyTree = taxonomyService.getAllTaxonomyTrees();
               if (lstTaxonomyTree.size() == 0) throw new AccessDeniedException();
               uiOneTaxonomySelector.setRootNodeLocation(repository, workspaceName, lstTaxonomyTree.get(0).getPath());
               uiOneTaxonomySelector.setExceptedNodeTypesInPathPanel(new String[] {Utils.EXO_SYMLINK});

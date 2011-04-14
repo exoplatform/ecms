@@ -26,7 +26,6 @@ import java.util.Set;
 
 import javax.jcr.Session;
 
-import org.exoplatform.ecm.webui.component.admin.UIECMAdminPortlet;
 import org.exoplatform.ecm.webui.selector.UISelectable;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.portal.webui.util.Util;
@@ -47,8 +46,8 @@ import org.exoplatform.webui.core.UIPopupWindow;
 import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.core.model.SelectItemOption;
 import org.exoplatform.webui.event.Event;
-import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.event.Event.Phase;
+import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.form.UIFormInputSet;
 import org.exoplatform.webui.form.UIFormSelectBox;
 import org.exoplatform.webui.form.UIFormStringInput;
@@ -149,24 +148,25 @@ public class UIDriveForm extends UIFormTabPane implements UISelectable {
   }
 
   public void refresh(String driveName) throws Exception {
-    String repository = getAncestorOfType(UIECMAdminPortlet.class).getPreferenceRepository();
     DriveData drive = null;
     if(driveName == null) {
       isAddNew_ = true;
     } else {
       isAddNew_ = false;
       setActions(new String[] {"Save", "Cancel"});
-      drive = getApplicationComponent(ManageDriveService.class).getDriveByName(driveName, repository);
+      drive = getApplicationComponent(ManageDriveService.class).getDriveByName(driveName);
     }
     getChild(UIDriveInputSet.class).update(drive);
     getChild(UIViewsInputSet.class).update(drive);
   }
 
+  @Deprecated
   public String getWorkspaceEntries(String selectedWorkspace, String repository) throws Exception {
     RepositoryService repositoryService =
       getApplicationComponent(RepositoryService.class);
-    List<WorkspaceEntry> wsEntries =
-      repositoryService.getRepository(repository).getConfiguration().getWorkspaceEntries();
+    List<WorkspaceEntry> wsEntries = repositoryService.getCurrentRepository()
+                                                      .getConfiguration()
+                                                      .getWorkspaceEntries();
     String wsInitRootNodeType = null;
     for(WorkspaceEntry wsEntry : wsEntries) {
       if(wsEntry.getName().equals(selectedWorkspace)) {
@@ -176,11 +176,26 @@ public class UIDriveForm extends UIFormTabPane implements UISelectable {
     }
     return wsInitRootNodeType;
   }
+  
+  public String getWorkspaceEntries(String selectedWorkspace) throws Exception {
+    RepositoryService repositoryService =
+      getApplicationComponent(RepositoryService.class);
+    List<WorkspaceEntry> wsEntries = repositoryService.getCurrentRepository()
+                                                      .getConfiguration()
+                                                      .getWorkspaceEntries();
+    String wsInitRootNodeType = null;
+    for(WorkspaceEntry wsEntry : wsEntries) {
+      if(wsEntry.getName().equals(selectedWorkspace)) {
+        wsInitRootNodeType = wsEntry.getAutoInitializedRootNt();
+        break;
+      }
+    }
+    return wsInitRootNodeType;
+  }  
 
   static public class SaveActionListener extends EventListener<UIDriveForm> {
     public void execute(Event<UIDriveForm> event) throws Exception {
       UIDriveForm uiDriveForm = event.getSource();
-      String repository = uiDriveForm.getAncestorOfType(UIECMAdminPortlet.class).getPreferenceRepository();
       RepositoryService rservice = uiDriveForm.getApplicationComponent(RepositoryService.class);
       UIDriveInputSet driveInputSet = uiDriveForm.getChild(UIDriveInputSet.class);
       UIApplication uiApp = uiDriveForm.getAncestorOfType(UIApplication.class);
@@ -295,7 +310,7 @@ public class UIDriveForm extends UIFormTabPane implements UISelectable {
       }
 
       ManageDriveService dservice_ = uiDriveForm.getApplicationComponent(ManageDriveService.class);
-      if(uiDriveForm.isAddNew_ && (dservice_.getDriveByName(name, repository) != null)) {
+      if(uiDriveForm.isAddNew_ && (dservice_.getDriveByName(name) != null)) {
         uiApp.addMessage(new ApplicationMessage("UIDriveForm.msg.drive-exists", null,
                                                 ApplicationMessage.WARNING));
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
@@ -413,7 +428,6 @@ public class UIDriveForm extends UIFormTabPane implements UISelectable {
     public void execute(Event<UIDriveForm> event) throws Exception {
       UIDriveForm uiDriveForm = event.getSource();
       String driverName = uiDriveForm.getUIStringInput(UIDriveInputSet.FIELD_NAME).getValue();
-      String repository = uiDriveForm.getAncestorOfType(UIECMAdminPortlet.class).getPreferenceRepository();
       String selectedWorkspace = uiDriveForm.getUIStringInput(UIDriveInputSet.FIELD_WORKSPACE).getValue();
       UIDriveInputSet driveInputSet = uiDriveForm.getChild(UIDriveInputSet.class);
       UIDriveManager uiManager = uiDriveForm.getAncestorOfType(UIDriveManager.class);
@@ -454,7 +468,7 @@ public class UIDriveForm extends UIFormTabPane implements UISelectable {
       }
       uiInput.setOptions(folderOptions);
       if(!uiDriveForm.isAddNew_) {
-        DriveData drive = manageDriveService.getDriveByName(driverName, repository);
+        DriveData drive = manageDriveService.getDriveByName(driverName);
         String defaultPath = drive.getHomePath();
         if(!drive.getWorkspace().equals(selectedWorkspace)) defaultPath = "/";
         uiDriveForm.getUIStringInput(UIDriveInputSet.FIELD_HOMEPATH).setValue(defaultPath);

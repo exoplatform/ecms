@@ -125,11 +125,21 @@ public class ManageViewServiceImpl implements ManageViewService, Startable {
   /**
    * {@inheritDoc}
    */
+  @Deprecated
   public void init(String repository) throws Exception  {
     for(ManageViewPlugin plugin : plugins_) {
       plugin.init(repository) ;
     }
   }
+  
+  /**
+   * {@inheritDoc}
+   */
+  public void init() throws Exception  {
+    for(ManageViewPlugin plugin : plugins_) {
+      plugin.init() ;
+    }
+  }  
 
   /**
    * {@inheritDoc}
@@ -148,20 +158,30 @@ public class ManageViewServiceImpl implements ManageViewService, Startable {
   /**
    * {@inheritDoc}
    */
+  @Deprecated
   public Node getViewHome(String repository) throws Exception {
     String viewsPath = nodeHierarchyCreator_.getJcrPath(BasePath.CMS_VIEWS_PATH);
-    return (Node) getSession(repository).getItem(viewsPath);
+    return (Node) getSession().getItem(viewsPath);
   }
+  
+  /**
+   * {@inheritDoc}
+   */
+  public Node getViewHome() throws Exception {
+    String viewsPath = nodeHierarchyCreator_.getJcrPath(BasePath.CMS_VIEWS_PATH);
+    return (Node) getSession().getItem(viewsPath);
+  }  
 
   /**
    * {@inheritDoc}
    */
+  @Deprecated
   public List<ViewConfig> getAllViews(String repository) throws Exception {
     List<ViewConfig> viewList = new ArrayList<ViewConfig>() ;
     ViewConfig view = null;
     Node viewNode  = null ;
     String viewsPath = nodeHierarchyCreator_.getJcrPath(BasePath.CMS_VIEWS_PATH);
-    Session session = getSession(repository) ;
+    Session session = getSession();
     try {
       Node viewHome = (Node)session.getItem(viewsPath) ;
       for(NodeIterator iter = viewHome.getNodes(); iter.hasNext();) {
@@ -186,37 +206,98 @@ public class ManageViewServiceImpl implements ManageViewService, Startable {
     }
     return viewList ;
   }
+  
+  /**
+   * {@inheritDoc}
+   */
+  public List<ViewConfig> getAllViews() throws Exception {
+    List<ViewConfig> viewList = new ArrayList<ViewConfig>() ;
+    ViewConfig view = null;
+    Node viewNode  = null ;
+    String viewsPath = nodeHierarchyCreator_.getJcrPath(BasePath.CMS_VIEWS_PATH);
+    Session session = getSession();
+    try {
+      Node viewHome = (Node)session.getItem(viewsPath) ;
+      for(NodeIterator iter = viewHome.getNodes(); iter.hasNext();) {
+        view = new ViewConfig() ;
+        viewNode = iter.nextNode() ;
+        view.setName(viewNode.getName()) ;
+        view.setPermissions(viewNode.getProperty(EXO_PERMISSIONS).getString()) ;
+        view.setTemplate(viewNode.getProperty(EXO_TEMPLATE).getString()) ;
+        List<Tab> tabList = new ArrayList<Tab>() ;
+        for(NodeIterator tabsIterator = viewNode.getNodes(); tabsIterator.hasNext(); ) {
+          Tab tab = new Tab();
+          tab.setTabName(tabsIterator.nextNode().getName());
+          tabList.add(tab) ;
+        }
+        view.setTabList(tabList) ;
+        viewList.add(view) ;
+      }
+    } catch(AccessDeniedException ace) {
+      return new ArrayList<ViewConfig>() ;
+    } finally {
+      if(session != null) session.logout();
+    }
+    return viewList ;
+  }  
 
   /**
    * {@inheritDoc}
    */
+  @Deprecated
   public boolean hasView(String name, String repository) throws Exception {
-    Session session = getSession(repository) ;
+    Session session = getSession() ;
     Node viewHome = (Node)session.getItem(baseViewPath_) ;
     boolean b = viewHome.hasNode(name) ;
     session.logout();
     return b;
   }
+  
+  /**
+   * {@inheritDoc}
+   */
+  public boolean hasView(String name) throws Exception {
+    Session session = getSession();
+    Node viewHome = (Node) session.getItem(baseViewPath_);
+    boolean b = viewHome.hasNode(name);
+    session.logout();
+    return b;
+  }  
 
   /**
    * {@inheritDoc}
    */
-  public Node getViewByName(String name, String repository,SessionProvider provider) throws Exception{
-    Session session = getSession(repository,provider) ;
+  @Deprecated
+  public Node getViewByName(String name, String repository, SessionProvider provider) throws Exception {
+    Session session = getSession(repository, provider);
     try {
-      return (Node)session.getItem(baseViewPath_ + "/" + name) ;
-    } catch(AccessDeniedException ace) {
+      return (Node) session.getItem(baseViewPath_ + "/" + name);
+    } catch (AccessDeniedException ace) {
       session.logout();
-      return null ;
+      return null;
     }
   }
+  
+  /**
+   * {@inheritDoc}
+   */
+  public Node getViewByName(String name, SessionProvider provider) throws Exception {
+    Session session = getSession(provider);
+    try {
+      return (Node) session.getItem(baseViewPath_ + "/" + name);
+    } catch (AccessDeniedException ace) {
+      session.logout();
+      return null;
+    }
+  }  
 
   /**
    * {@inheritDoc}
    */
+  @Deprecated
   public void addView(String name, String permissions, String template, List<?> tabs,
       String repository) throws Exception{
-    Session session = getSession(repository) ;
+    Session session = getSession() ;
     Node viewHome = (Node)session.getItem(baseViewPath_) ;
     Node view ;
     if(viewHome.hasNode(name)) {
@@ -245,12 +326,49 @@ public class ManageViewServiceImpl implements ManageViewService, Startable {
     session.save();
     session.logout();
   }
+  
+  /**
+   * {@inheritDoc}
+   */
+  public void addView(String name, String permissions, String template, List<?> tabs) throws Exception {
+    Session session = getSession();
+    Node viewHome = (Node) session.getItem(baseViewPath_);
+    Node view;
+    if (viewHome.hasNode(name)) {
+      view = viewHome.getNode(name);
+      if (!view.isCheckedOut())
+        view.checkout();
+      view.setProperty(EXO_PERMISSIONS, permissions);
+      view.setProperty(EXO_TEMPLATE, template);
+    } else {
+      view = addView(viewHome, name, permissions, template);
+    }
+    String tabName;
+    String buttons;
+    for (int i = 0; i < tabs.size(); i++) {
+      try {
+        Node tab = (Node) tabs.get(i);
+        tabName = tab.getName();
+        buttons = tab.getProperty(BUTTON_PROP).getString();
+      } catch (Exception e) {
+        Tab tab = (Tab) tabs.get(i);
+        tabName = tab.getTabName();
+        buttons = tab.getButtons();
+      }
+      addTab(view, tabName, buttons);
+    }
+    viewHome.save();
+    session.save();
+    session.logout();
+  }
+  
 
   /**
    * {@inheritDoc}
    */
+  @Deprecated
   public void removeView(String viewName, String repository) throws Exception {
-    Session session = getSession(repository) ;
+    Session session = getSession() ;
     Node viewHome = (Node)session.getItem(baseViewPath_) ;
     if(viewHome.hasNode(viewName)){
       Node view = viewHome.getNode(viewName) ;
@@ -260,6 +378,21 @@ public class ManageViewServiceImpl implements ManageViewService, Startable {
     }
     session.logout();
   }
+  
+  /**
+   * {@inheritDoc}
+   */
+  public void removeView(String viewName) throws Exception {
+    Session session = getSession() ;
+    Node viewHome = (Node)session.getItem(baseViewPath_) ;
+    if(viewHome.hasNode(viewName)){
+      Node view = viewHome.getNode(viewName) ;
+      view.remove() ;
+      viewHome.save() ;
+      session.save();
+    }
+    session.logout();
+  }  
 
   /**
    * {@inheritDoc}
@@ -278,6 +411,7 @@ public class ManageViewServiceImpl implements ManageViewService, Startable {
   /**
    * {@inheritDoc}
    */
+  @Deprecated
   public Node getTemplateHome(String homeAlias, String repository,SessionProvider provider) throws Exception{
     String homePath = getJCRPath(homeAlias) ;
     Session session = getSession(repository,provider) ;
@@ -288,6 +422,20 @@ public class ManageViewServiceImpl implements ManageViewService, Startable {
       return null ;
     }
   }
+  
+  /**
+   * {@inheritDoc}
+   */
+  public Node getTemplateHome(String homeAlias, SessionProvider provider) throws Exception{
+    String homePath = getJCRPath(homeAlias) ;
+    Session session = getSession(provider) ;
+    try {
+      return (Node)session.getItem(homePath);
+    } catch(AccessDeniedException ace) {
+      session.logout();
+      return null ;
+    }
+  }  
 
   /**
    * Get path by alias
@@ -306,7 +454,7 @@ public class ManageViewServiceImpl implements ManageViewService, Startable {
    * @return
    * @throws Exception
    */
-  private Session getSession(String repository) throws Exception {
+  private Session getSession() throws Exception {
     ManageableRepository manageableRepository = repositoryService_.getCurrentRepository() ;
     DMSRepositoryConfiguration dmsRepoConfig = dmsConfiguration_.getConfig();
     return manageableRepository.getSystemSession(dmsRepoConfig.getSystemWorkspace()) ;
@@ -319,17 +467,31 @@ public class ManageViewServiceImpl implements ManageViewService, Startable {
    * @return
    * @throws Exception
    */
+  @Deprecated
   private Session getSession(String repository,SessionProvider sessionProvider) throws Exception{
     ManageableRepository manageableRepository = repositoryService_.getCurrentRepository() ;
     DMSRepositoryConfiguration dmsRepoConfig = dmsConfiguration_.getConfig();
     return sessionProvider.getSession(dmsRepoConfig.getSystemWorkspace(), manageableRepository) ;
   }
+  
+  /**
+   * Get session by SessionProvider
+   * @param sessionProvider
+   * @return
+   * @throws Exception
+   */
+  private Session getSession(SessionProvider sessionProvider) throws Exception{
+    ManageableRepository manageableRepository = repositoryService_.getCurrentRepository() ;
+    DMSRepositoryConfiguration dmsRepoConfig = dmsConfiguration_.getConfig();
+    return sessionProvider.getSession(dmsRepoConfig.getSystemWorkspace(), manageableRepository) ;
+  }  
 
   /**
    * {@inheritDoc}
    */
+  @Deprecated
   public List<Node> getAllTemplates(String homeAlias, String repository,SessionProvider provider) throws Exception {
-    Node templateHomNode = getTemplateHome(homeAlias, repository,provider) ;
+    Node templateHomNode = getTemplateHome(homeAlias, provider) ;
     List<Node> list = new ArrayList<Node>() ;
     if(templateHomNode == null) return list ;
     for(NodeIterator iter = templateHomNode.getNodes() ; iter.hasNext() ;) {
@@ -337,20 +499,43 @@ public class ManageViewServiceImpl implements ManageViewService, Startable {
     }
     return list;
   }
+  
+  /**
+   * {@inheritDoc}
+   */
+  public List<Node> getAllTemplates(String homeAlias, SessionProvider provider) throws Exception {
+    Node templateHomNode = getTemplateHome(homeAlias, provider);
+    List<Node> list = new ArrayList<Node>();
+    if (templateHomNode == null)
+      return list;
+    for (NodeIterator iter = templateHomNode.getNodes(); iter.hasNext();) {
+      list.add(iter.nextNode());
+    }
+    return list;
+  } 
 
   /**
    * {@inheritDoc}
    */
+  @Deprecated
   public Node getTemplate(String path, String repository,SessionProvider provider) throws Exception{
     return (Node)getSession(repository,provider).getItem(path) ;
   }
+  
+  /**
+   * {@inheritDoc}
+   */
+  public Node getTemplate(String path, SessionProvider provider) throws Exception{
+    return (Node)getSession(provider).getItem(path) ;
+  }  
 
 
   /**
    * {@inheritDoc}
    */
+  @Deprecated
   public String addTemplate(String name, String content, String homeTemplate, String repository) throws Exception {
-    Session session = getSession(repository) ;
+    Session session = getSession() ;
     Node templateHome = (Node)session.getItem(homeTemplate) ;
     String templatePath = templateService.createTemplate(templateHome,
                                                          name,
@@ -359,12 +544,27 @@ public class ManageViewServiceImpl implements ManageViewService, Startable {
     session.save();
     return templatePath;
   }
+  
+  /**
+   * {@inheritDoc}
+   */
+  public String addTemplate(String name, String content, String homeTemplate) throws Exception {
+    Session session = getSession() ;
+    Node templateHome = (Node)session.getItem(homeTemplate) ;
+    String templatePath = templateService.createTemplate(templateHome,
+                                                         name,
+                                                         new ByteArrayInputStream(content.getBytes()),
+                                                         new String[] { "*" });
+    session.save();
+    return templatePath;
+  }  
 
   /**
    * {@inheritDoc}
    */
+  @Deprecated
   public String updateTemplate(String name, String content, String homeTemplate, String repository) throws Exception {
-    Session session = getSession(repository) ;
+    Session session = getSession() ;
     Node templateHome = (Node)session.getItem(homeTemplate) ;
     String templatePath = templateService.updateTemplate(templateHome.getNode(name),
                                                          new ByteArrayInputStream(content.getBytes()),
@@ -373,17 +573,41 @@ public class ManageViewServiceImpl implements ManageViewService, Startable {
     return templatePath;
   }
 
-
   /**
    * {@inheritDoc}
    */
+  public String updateTemplate(String name, String content, String homeTemplate) throws Exception {
+    Session session = getSession() ;
+    Node templateHome = (Node)session.getItem(homeTemplate) ;
+    String templatePath = templateService.updateTemplate(templateHome.getNode(name),
+                                                         new ByteArrayInputStream(content.getBytes()),
+                                                         new String[] { "*" });
+    session.save();
+    return templatePath;
+  }
+  
+  /**
+   * {@inheritDoc}
+   */
+  @Deprecated
   public void removeTemplate(String templatePath, String repository) throws Exception {
-    Node selectedTemplate = (Node) getSession(repository).getItem(templatePath);
+    Node selectedTemplate = (Node) getSession().getItem(templatePath);
     Node parent = selectedTemplate.getParent();
     selectedTemplate.remove();
     parent.save();
     parent.getSession().save();
   }
+  
+  /**
+   * {@inheritDoc}
+   */
+  public void removeTemplate(String templatePath) throws Exception {
+    Node selectedTemplate = (Node) getSession().getItem(templatePath);
+    Node parent = selectedTemplate.getParent();
+    selectedTemplate.remove();
+    parent.save();
+    parent.getSession().save();
+  }  
 
   /**
    * Add view node into one node with given name, permssion and template

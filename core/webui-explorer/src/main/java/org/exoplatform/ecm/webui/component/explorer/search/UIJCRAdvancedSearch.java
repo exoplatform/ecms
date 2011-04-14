@@ -216,7 +216,6 @@ public class UIJCRAdvancedSearch extends UIForm implements UIPopupComponent {
       }
 
       if(!uiForm.isEdit_) {
-        String repository = uiForm.getAncestorOfType(UIJCRExplorer.class).getRepositoryName() ;
         QueryService queryService = uiForm.getApplicationComponent(QueryService.class) ;
         String name = uiForm.getUIStringInput(FIELD_NAME).getValue() ;
         if(name == null || name.trim().length() == 0) {
@@ -236,7 +235,7 @@ public class UIJCRAdvancedSearch extends UIForm implements UIPopupComponent {
         }
         String userName = Util.getPortalRequestContext().getRemoteUser() ;
         try {
-          queryService.addQuery(name, statement, queryLang, userName, repository) ;
+          queryService.addQuery(name, statement, queryLang, userName) ;
         } catch(Exception e){
           uiApp.addMessage(new ApplicationMessage("UIJCRAdvancedSearch.msg.save_unSuccessful", null,
                                                   ApplicationMessage.WARNING)) ;

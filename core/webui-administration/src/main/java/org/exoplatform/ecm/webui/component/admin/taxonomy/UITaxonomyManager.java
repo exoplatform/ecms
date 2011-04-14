@@ -21,25 +21,20 @@ import java.util.List;
 
 import javax.jcr.Node;
 import javax.jcr.Session;
-import javax.portlet.PortletPreferences;
 
-import org.exoplatform.ecm.webui.component.admin.UIECMAdminPortlet;
-import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.services.cms.impl.DMSConfiguration;
 import org.exoplatform.services.cms.impl.DMSRepositoryConfiguration;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
-import org.exoplatform.webui.application.WebuiRequestContext;
-import org.exoplatform.webui.application.portlet.PortletRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.ComponentConfigs;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIBreadcumbs;
+import org.exoplatform.webui.core.UIBreadcumbs.LocalPath;
 import org.exoplatform.webui.core.UIPopupContainer;
 import org.exoplatform.webui.core.UIPopupWindow;
-import org.exoplatform.webui.core.UIBreadcumbs.LocalPath;
 import org.exoplatform.webui.core.lifecycle.UIContainerLifecycle;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
@@ -115,27 +110,32 @@ public class UITaxonomyManager extends UIAbstractManager {
     return (Node) getSession().getItem(path) ;
   }
 
-  public String getRepository() throws Exception {
-    PortletRequestContext pcontext = (PortletRequestContext)WebuiRequestContext.getCurrentInstance() ;
-    PortletPreferences pref = pcontext.getRequest().getPreferences() ;
-    String repository = pref.getValue(Utils.REPOSITORY, "") ;
-    return repository ;
-  }
+//  public String getRepository() throws Exception {
+//    PortletRequestContext pcontext = (PortletRequestContext)WebuiRequestContext.getCurrentInstance() ;
+//    PortletPreferences pref = pcontext.getRequest().getPreferences() ;
+//    String repository = pref.getValue(Utils.REPOSITORY, "") ;
+//    return repository ;
+//  }
 
-  private String getDmsSystemWorkspaceName(String repository) {
+  private String getDmsSystemWorkspaceName() {
     DMSConfiguration dmsConfiguration = getApplicationComponent(DMSConfiguration.class);
     DMSRepositoryConfiguration dmsRepoConfig = dmsConfiguration.getConfig();
     return dmsRepoConfig.getSystemWorkspace();
   }
 
   public Session getSession() throws Exception {
-    String repositoryName = getAncestorOfType(UIECMAdminPortlet.class).getPreferenceRepository() ;
-    String workspace = getDmsSystemWorkspaceName(repositoryName) ;
-    return SessionProviderFactory.createSystemProvider().getSession(workspace, getRepository(repositoryName)) ;
+    String workspace = getDmsSystemWorkspaceName();
+    return SessionProviderFactory.createSystemProvider().getSession(workspace, getRepository());
   }
 
+  @Deprecated
   public ManageableRepository getRepository(String repositoryName) throws Exception{
     RepositoryService repositoryService = getApplicationComponent(RepositoryService.class) ;
+    return repositoryService.getCurrentRepository();
+  }
+  
+  public ManageableRepository getRepository() throws Exception{
+    RepositoryService repositoryService = getApplicationComponent(RepositoryService.class);
     return repositoryService.getCurrentRepository();
   }
 

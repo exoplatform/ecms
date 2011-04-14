@@ -56,7 +56,7 @@ public class BPActionActivationJob implements Job {
     String repository = jdatamap.getString("repository") ;
     Map variables = jdatamap.getWrappedMap() ;
     try {
-      jcrSession = repositoryService.getRepository(repository).getSystemSession(srcWorkspace);
+      jcrSession = repositoryService.getCurrentRepository().getSystemSession(srcWorkspace);
       Node node = (Node) jcrSession.getItem(srcPath);
       actionNode = actionServiceContainer.getAction(node, actionName);
       Property rolesProp = actionNode.getProperty("exo:roles");

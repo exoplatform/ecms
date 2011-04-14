@@ -156,7 +156,7 @@ public class UINewsletterEntryForm extends UIDialogForm {
     // Store node
     String storedPath = getStoredPath().replace(NewsletterConstant.PORTAL_NAME, NewsLetterUtil.getPortalName());
     RepositoryService repositoryService = getApplicationComponent(RepositoryService.class);
-    ManageableRepository manageableRepository = repositoryService.getRepository(repositoryName);
+    ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
     Session session = Utils.getSessionProvider().getSession(workspaceName, manageableRepository);
     Node storedNode = (Node)session.getItem(storedPath);
     CmsService cmsService = getApplicationComponent(CmsService.class);

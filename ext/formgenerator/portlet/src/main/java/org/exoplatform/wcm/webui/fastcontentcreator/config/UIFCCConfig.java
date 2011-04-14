@@ -88,7 +88,6 @@ public class UIFCCConfig extends UIForm implements UISelectable {
     PortletPreferences portletPreferences = UIFCCUtils.getPortletPreferences();
     String preferenceMode = portletPreferences.getValue(UIFCCConstant.PREFERENCE_MODE, "");
     String preferenceWorkspace = portletPreferences.getValue(UIFCCConstant.PREFERENCE_WORKSPACE, "");
-    String preferenceRepository = portletPreferences.getValue(UIFCCConstant.PREFERENCE_REPOSITORY, "");
     String preferencePath = portletPreferences.getValue(UIFCCConstant.PREFERENCE_PATH, "");
 
     List<SelectItemOption<String>> options = new ArrayList<SelectItemOption<String>>() ;
@@ -140,7 +139,7 @@ public class UIFCCConfig extends UIForm implements UISelectable {
     UIFCCActionList fastContentCreatorActionList = actionField.addChild(UIFCCActionList.class, null, null);
     fastContentCreatorActionList.init(preferenceMode);
     RepositoryService repositoryService = getApplicationComponent(RepositoryService.class);
-    ManageableRepository repository = repositoryService.getRepository(preferenceRepository);
+    ManageableRepository repository = repositoryService.getCurrentRepository();
     Session session = Utils.getSessionProvider().getSession(preferenceWorkspace, repository);
       fastContentCreatorActionList.updateGrid((Node) session.getItem(preferencePath),
                                               fastContentCreatorActionList.getChild(UIGrid.class)
@@ -175,7 +174,7 @@ public class UIFCCConfig extends UIForm implements UISelectable {
     uiRepositoryList.setOptions(repositories) ;
     uiRepositoryList.setValue(preferenceRepository) ;
       try {
-        ManageableRepository repository = getApplicationComponent(RepositoryService.class).getRepository(preferenceRepository);
+        ManageableRepository repository = getApplicationComponent(RepositoryService.class).getCurrentRepository();
         String[] workspaceNames = repository.getWorkspaceNames();
         String systemWsName = repository.getConfiguration().getSystemWorkspaceName();
         List<SelectItemOption<String>> workspace = new ArrayList<SelectItemOption<String>>();
@@ -200,7 +199,7 @@ public class UIFCCConfig extends UIForm implements UISelectable {
     }
     getUIStringInput(UIFCCConstant.LOCATION_FORM_STRING_INPUT).setValue(preferencePath) ;
 
-    setTemplateOptions(preferencePath, preferenceRepository, preferenceWorkspace) ;
+    setTemplateOptions(preferencePath, preferenceWorkspace) ;
 
     getUIStringInput(UIFCCConstant.SAVE_FORM_STRING_INPUT).setValue(preferences.
                                                                     getValue(UIFCCConstant.PREFERENCE_SAVE_BUTTON,
@@ -224,10 +223,10 @@ public class UIFCCConfig extends UIForm implements UISelectable {
    *
    * @throws Exception the exception
    */
-  private void setTemplateOptions(String nodePath, String repositoryName, String workspaceName) throws Exception {
+  private void setTemplateOptions(String nodePath, String workspaceName) throws Exception {
     try {
       RepositoryService repositoryService = getApplicationComponent(RepositoryService.class);
-      ManageableRepository repository = repositoryService.getRepository(repositoryName);
+      ManageableRepository repository = repositoryService.getCurrentRepository();
       Session session = Utils.getSessionProvider().getSession(workspaceName, repository);
       Node currentNode = null ;
       UIFormSelectBox uiSelectTemplate = getUIFormSelectBox(UIFCCConstant.TEMPLATE_FORM_SELECTBOX);
@@ -319,22 +318,20 @@ public class UIFCCConfig extends UIForm implements UISelectable {
     getUIStringInput(selectField).setValue(value.toString()) ;
     PortletPreferences preferences = UIFCCUtils.getPortletPreferences();
     String preferenceMode = preferences.getValue(UIFCCConstant.PREFERENCE_MODE, "");
-    String preferenceRepository = preferences.getValue(UIFCCConstant.PREFERENCE_REPOSITORY, "") ;
     String preferenceWorkspace = preferences.getValue(UIFCCConstant.PREFERENCE_WORKSPACE, "") ;
     if (!"basic".equals(preferenceMode)) {
-      preferenceRepository = getUIFormSelectBox(UIFCCConstant.REPOSITORY_FORM_SELECTBOX).getValue() ;
       preferenceWorkspace = getUIFormSelectBox(UIFCCConstant.WORKSPACE_FORM_SELECTBOX).getValue() ;
     }
     String savedLocationPath = value.toString();
     try {
-      setTemplateOptions(savedLocationPath, preferenceRepository, preferenceWorkspace) ;
+      setTemplateOptions(savedLocationPath, preferenceWorkspace) ;
     } catch(Exception ex) {
       Utils.createPopupMessage(this, "UIFCCConfig.msg.do-select", null, ApplicationMessage.ERROR);
     }
 
     try {
       RepositoryService repositoryService = getApplicationComponent(RepositoryService.class);
-      ManageableRepository repository = repositoryService.getRepository(preferenceRepository);
+      ManageableRepository repository = repositoryService.getCurrentRepository();
       Session session = Utils.getSessionProvider().getSession(preferenceWorkspace, repository);
       UIFCCActionList uiFCCActionList = ((UIFormFieldSet) getChildById("UIFCCActionField")).getChild(UIFCCActionList.class);
       uiFCCActionList.updateGrid((Node) session.getItem(savedLocationPath),
@@ -427,11 +424,9 @@ public class UIFCCConfig extends UIForm implements UISelectable {
     public void execute(Event<UIFCCConfig> event) throws Exception {
       UIFCCConfig uiFCCConfig = event.getSource();
       uiFCCConfig.getUIStringInput(UIFCCConstant.LOCATION_FORM_STRING_INPUT).setValue("/");
-      String repoName = uiFCCConfig.getUIFormSelectBox(UIFCCConstant.REPOSITORY_FORM_SELECTBOX).getValue();
       String wsName = uiFCCConfig.getUIFormSelectBox(UIFCCConstant.WORKSPACE_FORM_SELECTBOX).getValue();
       uiFCCConfig.setTemplateOptions(uiFCCConfig.getUIStringInput(UIFCCConstant.LOCATION_FORM_STRING_INPUT)
                                                 .getValue(),
-                                     repoName,
                                      wsName);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiFCCConfig);
     }
@@ -457,15 +452,14 @@ public class UIFCCConfig extends UIForm implements UISelectable {
       UIFCCConfig fastContentCreatorConfig = event.getSource() ;
       RepositoryService repositoryService = fastContentCreatorConfig.getApplicationComponent(RepositoryService.class) ;
       fastContentCreatorConfig.getUIStringInput(UIFCCConstant.LOCATION_FORM_STRING_INPUT).setValue("/") ;
-      String repoName = fastContentCreatorConfig.getUIFormSelectBox(UIFCCConstant.REPOSITORY_FORM_SELECTBOX).getValue() ;
-      String[] wsNames = repositoryService.getRepository(repoName).getWorkspaceNames();
-      String systemWsName = repositoryService.getRepository(repoName).getConfiguration().getSystemWorkspaceName() ;
+      String[] wsNames = repositoryService.getCurrentRepository().getWorkspaceNames();
+      String systemWsName = repositoryService.getCurrentRepository().getConfiguration().getSystemWorkspaceName() ;
       List<SelectItemOption<String>> workspace = new ArrayList<SelectItemOption<String>>() ;
       for(String ws : wsNames) {
         if(!ws.equals(systemWsName)) workspace.add(new SelectItemOption<String>(ws, ws)) ;
       }
       if(workspace.size() > 0) {
-        fastContentCreatorConfig.setTemplateOptions("/", repoName, workspace.get(0).getLabel()) ;
+        fastContentCreatorConfig.setTemplateOptions("/", workspace.get(0).getLabel()) ;
       }
       fastContentCreatorConfig.getUIFormSelectBox(UIFCCConstant.WORKSPACE_FORM_SELECTBOX).setOptions(workspace) ;
       event.getRequestContext().addUIComponentToUpdateByAjax(fastContentCreatorConfig) ;

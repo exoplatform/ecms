@@ -70,8 +70,7 @@ public class UIViewList extends UIGrid {
   }
 
   private String getBaseVersion(String name) throws Exception {
-    Node node = getApplicationComponent(ManageViewService.class).getViewByName(name,
-        getRepository(), SessionProviderFactory.createSystemProvider());
+    Node node = getApplicationComponent(ManageViewService.class).getViewByName(name, SessionProviderFactory.createSystemProvider());
     if(node == null) return null ;
     if(!node.isNodeType(Utils.MIX_VERSIONABLE) || node.isNodeType(Utils.NT_FROZEN)) return "";
     return node.getBaseVersion().getName();
@@ -91,7 +90,7 @@ public class UIViewList extends UIGrid {
 
   private List<ViewBean> getViewsBean() throws Exception {
     List<ViewConfig> views =
-      getApplicationComponent(ManageViewService.class).getAllViews(getRepository()) ;
+      getApplicationComponent(ManageViewService.class).getAllViews() ;
     List<ViewBean> viewBeans = new ArrayList<ViewBean>() ;
     for(ViewConfig view:views) {
       List<String>tabsName = new ArrayList<String>() ;
@@ -153,19 +152,17 @@ public class UIViewList extends UIGrid {
   static  public class DeleteActionListener extends EventListener<UIViewList> {
     public void execute(Event<UIViewList> event) throws Exception {
       UIViewList viewList = event.getSource() ;
-      String repository = viewList.getAncestorOfType(UIECMAdminPortlet.class)
-                                           .getPreferenceRepository() ;
       viewList.setRenderSibling(UIViewList.class) ;
       String viewName = event.getRequestContext().getRequestParameter(OBJECTID)  ;
       ManageDriveService manageDrive = viewList.getApplicationComponent(ManageDriveService.class) ;
-      if(!viewList.canDelete(manageDrive.getAllDrives(repository), viewName)) {
+      if(!viewList.canDelete(manageDrive.getAllDrives(), viewName)) {
         UIApplication app = viewList.getAncestorOfType(UIApplication.class) ;
         Object[] args = {viewName} ;
         app.addMessage(new ApplicationMessage("UIViewList.msg.template-in-use", args)) ;
         event.getRequestContext().addUIComponentToUpdateByAjax(viewList.getParent()) ;
         return ;
       }
-      viewList.getApplicationComponent(ManageViewService.class).removeView(viewName, repository) ;
+      viewList.getApplicationComponent(ManageViewService.class).removeView(viewName) ;
       viewList.updateViewListGrid(viewList.getUIPageIterator().getCurrentPage()) ;
       event.getRequestContext().addUIComponentToUpdateByAjax(viewList.getParent()) ;
     }
@@ -174,11 +171,10 @@ public class UIViewList extends UIGrid {
   static  public class EditInfoActionListener extends EventListener<UIViewList> {
     public void execute(Event<UIViewList> event) throws Exception {
       UIViewList uiViewList = event.getSource() ;
-      String repository = uiViewList.getAncestorOfType(UIECMAdminPortlet.class).getPreferenceRepository() ;
       uiViewList.setRenderSibling(UIViewList.class) ;
       String viewName = event.getRequestContext().getRequestParameter(OBJECTID) ;
       Node viewNode = uiViewList.getApplicationComponent(ManageViewService.class).
-        getViewByName(viewName, repository, SessionProviderFactory.createSystemProvider()) ;
+        getViewByName(viewName, SessionProviderFactory.createSystemProvider()) ;
       UIViewContainer uiViewContainer = uiViewList.getParent() ;
       uiViewContainer.removeChildById(UIViewList.ST_VIEW) ;
       uiViewContainer.removeChildById(UIViewList.ST_ADD) ;
@@ -206,11 +202,10 @@ public class UIViewList extends UIGrid {
   static  public class ViewActionListener extends EventListener<UIViewList> {
     public void execute(Event<UIViewList> event) throws Exception {
       UIViewList uiViewList = event.getSource() ;
-      String repository = uiViewList.getAncestorOfType(UIECMAdminPortlet.class).getPreferenceRepository() ;
       uiViewList.setRenderSibling(UIViewList.class) ;
       String viewName = event.getRequestContext().getRequestParameter(OBJECTID) ;
       Node viewNode = uiViewList.getApplicationComponent(ManageViewService.class).getViewByName(
-          viewName, repository, SessionProviderFactory.createSystemProvider()) ;
+          viewName, SessionProviderFactory.createSystemProvider()) ;
       UIViewContainer uiViewContainer = uiViewList.getParent() ;
       uiViewContainer.removeChildById(UIViewList.ST_EDIT) ;
       uiViewContainer.removeChildById(UIViewList.ST_ADD) ;

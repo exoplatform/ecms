@@ -40,7 +40,6 @@ public class PublishingRequestScript implements CmsScript {
     String nodePath = (String)variables.get("nodePath") ;
     String workspace = (String)variables.get("srcWorkspace") ;
     String srcPath = (String)variables.get("srcPath") ;
-    String repository = (String)variables.get("repository");
     String requestWorkspace = (String)variables.get("exo:requestWorkspace");
     String requestPath = (String)variables.get("exo:requestPath");
     String reservePath = (String)variables.get("exo:reservePath");
@@ -53,7 +52,7 @@ public class PublishingRequestScript implements CmsScript {
     }
     Session session = null;
     try{
-      session = repositoryService_.getRepository(repository).getSystemSession(workspace);
+      session = repositoryService_.getCurrentRepository().getSystemSession(workspace);
       session.getWorkspace().copy(nodePath,destPath);
       session.save();
       if(reservePath != null && !reservePath.equals(srcPath)) {
@@ -62,7 +61,7 @@ public class PublishingRequestScript implements CmsScript {
         }else {
           reservePath = reservePath + nodePath.substring(nodePath.lastIndexOf("/"))
         }
-        cmsService_.moveNode(nodePath, workspace, workspace, reservePath, repository); 
+        cmsService_.moveNode(nodePath, workspace, workspace, reservePath); 
       } 
     }catch(Exception e){      
     } finally {

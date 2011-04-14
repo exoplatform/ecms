@@ -50,7 +50,6 @@ import org.exoplatform.services.cms.taxonomy.impl.TaxonomyConfig.Permission;
 import org.exoplatform.services.cms.taxonomy.impl.TaxonomyConfig.Taxonomy;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.access.PermissionType;
-import org.exoplatform.services.jcr.config.RepositoryEntry;
 import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
@@ -184,12 +183,11 @@ public class CreateTaxonomyPlugin extends CreatePortalPlugin {
     Session session = null;
     try {
       // Get source information
-      String repositoryName = repositoryService.getCurrentRepository().getConfiguration().getName();
-      Node srcTaxonomy = taxonomyService.getTaxonomyTree(repositoryName, portalName);
+      Node srcTaxonomy = taxonomyService.getTaxonomyTree(portalName);
       String srcWorkspace = srcTaxonomy.getSession().getWorkspace().getName();
 
       // Get destination information
-      ManageableRepository repository = repositoryService.getRepository(repositoryName);
+      ManageableRepository repository = repositoryService.getCurrentRepository();
       session = sessionProvider.getSession(this.workspace, repository);
       Workspace destWorkspace = session.getWorkspace();
       String destPath = path + "/" + srcTaxonomy.getName();
@@ -232,18 +230,9 @@ public class CreateTaxonomyPlugin extends CreatePortalPlugin {
    */
   public void init() throws Exception {
     if (autoCreateInNewRepository_) {
-      RepositoryEntry repositoryEntry = repositoryService.getCurrentRepository().getConfiguration();
-      importPredefineTaxonomies(repositoryEntry.getName());
+      importPredefineTaxonomies();
       return;
     }
-    ValueParam param = params.getValueParam("repository");
-    String repository = null;
-    if (param == null) {
-      repository = repositoryService.getDefaultRepository().getConfiguration().getName();
-    } else {
-      repository = param.getValue();
-    }
-    importPredefineTaxonomies(repository);
   }
 
   /**
@@ -253,10 +242,11 @@ public class CreateTaxonomyPlugin extends CreatePortalPlugin {
    *
    * @throws Exception the exception
    */
+  @Deprecated
   public void init(String repository) throws Exception {
     if (!autoCreateInNewRepository_)
       return;
-    importPredefineTaxonomies(repository);
+    importPredefineTaxonomies();
   }
 
   /* (non-Javadoc)
@@ -335,8 +325,8 @@ public class CreateTaxonomyPlugin extends CreatePortalPlugin {
    * @throws Exception the exception
    */
   @SuppressWarnings("unchecked")
-  private void importPredefineTaxonomies(String repository) throws Exception {
-    ManageableRepository manageableRepository = this.repositoryService.getRepository(repository);
+  private void importPredefineTaxonomies() throws Exception {
+    ManageableRepository manageableRepository = this.repositoryService.getCurrentRepository();
     DMSRepositoryConfiguration dmsRepoConfig = this.dmsConfiguration.getConfig();
     if (getWorkspace() == null) {
       setWorkspace(dmsRepoConfig.getSystemWorkspace());
@@ -380,7 +370,7 @@ public class CreateTaxonomyPlugin extends CreatePortalPlugin {
         List actions = config.getActions();
         for (Iterator iter = actions.iterator(); iter.hasNext();) {
           TaxonomyAction action = (TaxonomyAction) iter.next();
-          addAction(action, taxonomyStorageNodeSystem, repository);
+          addAction(action, taxonomyStorageNodeSystem);
         }
       }
 
@@ -405,7 +395,7 @@ public class CreateTaxonomyPlugin extends CreatePortalPlugin {
    * @throws Exception the exception
    */
   @SuppressWarnings("unchecked")
-  private void addAction(ActionConfig.TaxonomyAction action, Node srcNode, String repository)
+  private void addAction(ActionConfig.TaxonomyAction action, Node srcNode)
       throws Exception {
     Map<String, JcrInputProperty> sortedInputs = new HashMap<String, JcrInputProperty>();
     JcrInputProperty jcrInputName = new JcrInputProperty();
@@ -451,7 +441,7 @@ public class CreateTaxonomyPlugin extends CreatePortalPlugin {
     } else {
       rootProp.setValue((sortedInputs.get("/node/exo:name")).getValue());
     }
-    actionServiceContainer.addAction(srcNode, repository, action.getType(), sortedInputs);
+    actionServiceContainer.addAction(srcNode, action.getType(), sortedInputs);
     Node actionNode = actionServiceContainer.getAction(srcNode, action.getName());
     if (action.getRoles() != null) {
       String[] roles = StringUtils.split(action.getRoles(), ";");
@@ -461,7 +451,7 @@ public class CreateTaxonomyPlugin extends CreatePortalPlugin {
     Iterator mixins = action.getMixins().iterator();
     NodeType nodeType;
     String value;
-    ManageableRepository manageableRepository = WCMCoreUtils.getRepository(repository);
+    ManageableRepository manageableRepository = WCMCoreUtils.getRepository();
     while (mixins.hasNext()) {
       ActionConfig.Mixin mixin = (ActionConfig.Mixin) mixins.next();
       actionNode.addMixin(mixin.getName());

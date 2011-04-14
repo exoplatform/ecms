@@ -34,6 +34,7 @@ import org.exoplatform.groovyscript.text.TemplateService;
 import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.views.ManageViewService;
+import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
@@ -112,10 +113,13 @@ public class UITemplateForm extends UIForm {
   }
 
   public String getRepository() {
-    PortletRequestContext pcontext = (PortletRequestContext) WebuiRequestContext
-        .getCurrentInstance();
-    PortletPreferences portletPref = pcontext.getRequest().getPreferences();
-    return portletPref.getValue(Utils.REPOSITORY, "");
+    try {
+      return getApplicationComponent(RepositoryService.class).getCurrentRepository()
+                                                             .getConfiguration()
+                                                             .getName();
+    } catch (RepositoryException e) {
+      return null;
+    }
   }
 
   public void updateOptionList() throws Exception {
@@ -124,18 +128,17 @@ public class UITemplateForm extends UIForm {
 
   public List<SelectItemOption<String>> getOptionList() throws Exception {
     List<SelectItemOption<String>> typeList = new ArrayList<SelectItemOption<String>>();
-    String repository = getRepository();
     SessionProvider provider = SessionProviderFactory.createSessionProvider();
     if (getId().equalsIgnoreCase("ECMTempForm")) {
       Node ecmTemplateHome = getApplicationComponent(ManageViewService.class).getTemplateHome(
-          BasePath.ECM_EXPLORER_TEMPLATES, repository, provider);
+          BasePath.ECM_EXPLORER_TEMPLATES, provider);
       if (ecmTemplateHome != null) {
         typeList.add(new SelectItemOption<String>(ecmTemplateHome.getName(), ecmTemplateHome
             .getPath()));
       }
     } else {
       Node cbTemplateHome = getApplicationComponent(ManageViewService.class).getTemplateHome(
-          BasePath.CONTENT_BROWSER_TEMPLATES, repository, provider);
+          BasePath.CONTENT_BROWSER_TEMPLATES, provider);
       if (cbTemplateHome != null) {
         NodeIterator iter = cbTemplateHome.getNodes();
         while (iter.hasNext()) {
@@ -208,10 +211,9 @@ public class UITemplateForm extends UIForm {
 
   public void update(String templatePath, VersionNode selectedVersion) throws Exception {
     if (templatePath != null) {
-      String repository = getRepository();
       templatePath_ = templatePath;
       template_ = getApplicationComponent(ManageViewService.class).getTemplate(templatePath,
-          repository, SessionProviderFactory.createSessionProvider());
+                                                                               SessionProviderFactory.createSessionProvider());
       getUIStringInput(FIELD_NAME).setValue(template_.getName());
       getUIStringInput(FIELD_NAME).setEditable(false);
       String value = templatePath.substring(0, templatePath.lastIndexOf("/"));
@@ -248,7 +250,6 @@ public class UITemplateForm extends UIForm {
   static public class SaveActionListener extends EventListener<UITemplateForm> {
     public void execute(Event<UITemplateForm> event) throws Exception {
       UITemplateForm uiForm = event.getSource();
-      String repository = uiForm.getRepository();
       String templateName = uiForm.getUIStringInput(FIELD_NAME).getValue().trim();
       String content = uiForm.getUIFormTextAreaInput(FIELD_CONTENT).getValue();
       String homeTemplate = uiForm.getUIFormSelectBox(FIELD_HOMETEMPLATE).getValue();
@@ -263,7 +264,7 @@ public class UITemplateForm extends UIForm {
       String path = null;
       if (uiForm.getId().equalsIgnoreCase(UIECMTemplateList.ST_ECMTempForm)) {
         List<Node> ecmTemps = manageViewService.getAllTemplates(BasePath.ECM_EXPLORER_TEMPLATES,
-            repository, SessionProviderFactory.createSessionProvider());
+                                                                SessionProviderFactory.createSessionProvider());
         for (Node temp : ecmTemps) {
           if (temp.getName().equals(templateName) && uiForm.isAddNew_) {
             Object[] args = { templateName };
@@ -293,15 +294,15 @@ public class UITemplateForm extends UIForm {
           String oldHomeTemplate = uiForm.templatePath_.substring(0, uiForm.templatePath_
               .lastIndexOf("/"));
           if (!oldHomeTemplate.equals(homeTemplate)) {
-            Node oldNode = manageViewService.getTemplate(uiForm.templatePath_, repository,
-                SessionProviderFactory.createSessionProvider());
+            Node oldNode = manageViewService.getTemplate(uiForm.templatePath_,
+                                                         SessionProviderFactory.createSessionProvider());
             oldNode.remove();
-            manageViewService.getTemplate(oldHomeTemplate, repository,
-                SessionProviderFactory.createSessionProvider()).save();
+            manageViewService.getTemplate(oldHomeTemplate,
+                                          SessionProviderFactory.createSessionProvider()).save();
           }
         }
-        path = manageViewService.addTemplate(templateName, content, homeTemplate, repository);
-        uiForm.template_ = manageViewService.getTemplate(path, repository, SessionProviderFactory
+        path = manageViewService.addTemplate(templateName, content, homeTemplate);
+        uiForm.template_ = manageViewService.getTemplate(path, SessionProviderFactory
             .createSessionProvider());
       } else {
         if (isEnableVersioning) {
@@ -312,15 +313,14 @@ public class UITemplateForm extends UIForm {
             uiForm.template_.checkout();
           }
         }
-        path = manageViewService.updateTemplate(templateName, content, homeTemplate, repository);
+        path = manageViewService.updateTemplate(templateName, content, homeTemplate);
         uiForm.template_.save();
         if (isEnableVersioning) {
           uiForm.template_.checkin();
         }
       }
       String workspaceName = uiForm.template_.getSession().getWorkspace().getName();
-      JCRResourceResolver resourceResolver = new JCRResourceResolver(repository, workspaceName,
-          "exo:templateFile");
+      JCRResourceResolver resourceResolver = new JCRResourceResolver(workspaceName);
       TemplateService templateService = uiForm.getApplicationComponent(TemplateService.class);
       if (path != null)
         templateService.invalidateTemplate(path, resourceResolver);

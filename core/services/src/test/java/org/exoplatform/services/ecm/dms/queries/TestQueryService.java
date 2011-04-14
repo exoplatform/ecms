@@ -151,7 +151,7 @@ public class TestQueryService extends BaseDMSTestCase {
     try {
 //      String queryPathMarry = baseUserPath + "/marry/" + relativePath + "/QueryAll2";
       queryService.removeSharedQuery("Created Documents", REPO_NAME);
-      List<Node> listQuery = queryService.getSharedQueries(REPO_NAME, sessionProvider);
+      List<Node> listQuery = queryService.getSharedQueries(sessionProvider);
       assertEquals(listQuery.size(), 2);
       fail("Query Path not found!");
     } catch (PathNotFoundException e) {
@@ -325,7 +325,7 @@ public class TestQueryService extends BaseDMSTestCase {
     queryService.addSharedQuery("QueryAll2", "//element(*, exo:article)", "xpath",
         new String[] { "*:/platform/users" }, true, REPO_NAME, sessionProvider);
     // Test getSharedQueries(String repository, SessionProvider provider)
-    List<Node> listQuery = queryService.getSharedQueries(REPO_NAME, sessionProvider);
+    List<Node> listQuery = queryService.getSharedQueries(sessionProvider);
     assertEquals(listQuery.size(), 5);
 //    Node queryNode1 = listQuery.get(1);
 //    assertEquals(queryNode1.getName(), "QueryAll1");

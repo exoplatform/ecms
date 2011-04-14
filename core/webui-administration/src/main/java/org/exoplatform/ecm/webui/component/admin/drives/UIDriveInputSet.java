@@ -23,7 +23,6 @@ import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 import java.util.Set;
 
-import org.exoplatform.ecm.webui.component.admin.UIECMAdminPortlet;
 import org.exoplatform.ecm.webui.form.UIFormInputSetWithAction;
 import org.exoplatform.ecm.webui.form.validator.ECMNameValidator;
 import org.exoplatform.ecm.webui.utils.Utils;
@@ -97,7 +96,6 @@ public class UIDriveInputSet extends UIFormInputSetWithAction {
   }
 
   public void update(DriveData drive) throws Exception {
-    String repository = getAncestorOfType(UIECMAdminPortlet.class).getPreferenceRepository();
     String[] wsNames = getApplicationComponent(RepositoryService.class)
                       .getCurrentRepository().getWorkspaceNames();
     TemplateService templateService = getApplicationComponent(TemplateService.class);
@@ -128,7 +126,7 @@ public class UIDriveInputSet extends UIFormInputSetWithAction {
       // Begin of update
       UIDriveForm uiDriveForm =  getAncestorOfType(UIDriveForm.class);
       String selectedWorkspace = drive.getWorkspace();
-      String wsInitRootNodeType = uiDriveForm.getWorkspaceEntries(selectedWorkspace, repository);
+      String wsInitRootNodeType = uiDriveForm.getWorkspaceEntries(selectedWorkspace);
       // End of update
 
       invokeGetBindingField(drive);

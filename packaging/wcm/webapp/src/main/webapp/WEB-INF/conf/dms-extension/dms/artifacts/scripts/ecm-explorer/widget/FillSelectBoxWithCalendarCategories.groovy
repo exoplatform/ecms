@@ -49,7 +49,7 @@ public class FillSelectBoxWithCalendarCategories implements CmsScript {
     Session session = null ;
 		try {
       UIFormSelectBox selectBox = (UIFormSelectBox) context;
-      ManageableRepository jcrRepository = repositoryService_.getRepository(repository_);
+      ManageableRepository jcrRepository = repositoryService_.getCurrentRepository();
       session = jcrRepository.getSystemSession(jcrRepository.getConfiguration().getSystemWorkspaceName());
       String path = nodeHierarchyCreator_.getJcrPath(PathAlias.CALENDAR_CATEGORIES_PATH) ;
       Node calendar = (Node) session.getItem(path) ;

@@ -73,8 +73,8 @@ public class ManageSimpleCategoriesActionComponent extends UIComponent {
       UIActionBar uiActionBar = event.getSource().getAncestorOfType(UIActionBar.class);
       UIJCRExplorer uiExplorer = uiActionBar.getAncestorOfType(UIJCRExplorer.class);
       String repository = uiExplorer.getRepositoryName();
-      ManageableRepository manaRepository =
-        uiActionBar.getApplicationComponent(RepositoryService.class).getRepository(repository);
+      ManageableRepository manaRepository = uiActionBar.getApplicationComponent(RepositoryService.class)
+                                                       .getCurrentRepository();
       String workspaceName = manaRepository.getConfiguration().getSystemWorkspaceName();
       NodeHierarchyCreator nodeHierarchyCreator = uiActionBar.getApplicationComponent(NodeHierarchyCreator.class);
       uiExplorer.setIsHidePopup(true);

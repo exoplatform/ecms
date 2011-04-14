@@ -90,8 +90,7 @@ public class XMLDeploymentPlugin extends DeploymentPlugin {
       Boolean cleanupPublication = deploymentDescriptor.getCleanupPublication();
 
       InputStream inputStream = configurationManager.getInputStream(sourcePath);
-      ManageableRepository repository = repositoryService.getRepository(deploymentDescriptor.getTarget()
-                                                                                            .getRepository());
+      ManageableRepository repository = repositoryService.getCurrentRepository();
       Session session = sessionProvider.getSession(deploymentDescriptor.getTarget().getWorkspace(),
                                                    repository);
       session.importXML(deploymentDescriptor.getTarget().getNodePath(),

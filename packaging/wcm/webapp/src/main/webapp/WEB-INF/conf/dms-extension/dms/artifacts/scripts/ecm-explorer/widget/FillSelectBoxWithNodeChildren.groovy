@@ -51,7 +51,7 @@ public class FillSelectBoxWithNodeChildren implements CmsScript {
   public void execute(Object context) {
     UIFormSelectBox selectBox = (UIFormSelectBox) context;
 
-    ManageableRepository jcrRepository = repositoryService_.getRepository();
+    ManageableRepository jcrRepository = repositoryService_.getCurrentRepository();
     List options = new ArrayList();
     Session session = null;
     try{

@@ -57,19 +57,12 @@ public class UITagList extends UIComponent {
   }
 
   public List<Node> getPrivateTagLink() throws Exception {
-    String repository = getRepository();
-    ExoContainer container = ExoContainerContext.getCurrentContainer();
-    RepositoryService repositoryService = (RepositoryService) container.getComponentInstanceOfType(RepositoryService.class);
-    ManageableRepository manageableRepo = repositoryService.getCurrentRepository();
-
-    String workspace = manageableRepo.getConfiguration().getDefaultWorkspaceName();
     String userName = getUserName();
     NewFolksonomyService newFolksonomyService = getApplicationComponent(NewFolksonomyService.class) ;
-    return newFolksonomyService.getAllPrivateTags(userName, repository, workspace);
+    return newFolksonomyService.getAllPrivateTags(userName);
   }
 
   public List<Node> getPublicTagLink() throws Exception {
-    String repository = getRepository();
     ExoContainer container = ExoContainerContext.getCurrentContainer();
     RepositoryService repositoryService = (RepositoryService) container.getComponentInstanceOfType(RepositoryService.class);
     ManageableRepository manageableRepo = repositoryService.getCurrentRepository();
@@ -81,15 +74,14 @@ public class UITagList extends UIComponent {
     String publicTagNodePath = nodeHierarchyCreator.getJcrPath(PUBLIC_TAG_NODE_PATH);
     NewFolksonomyService newFolksonomyService = getApplicationComponent(NewFolksonomyService.class);
 
-    return newFolksonomyService.getAllPublicTags(publicTagNodePath, repository, workspace);
+    return newFolksonomyService.getAllPublicTags(publicTagNodePath, workspace);
   }
 
   public Map<String ,String> getTagStyle() throws Exception {
-    String repository = getRepository() ;
-    String workspace = getAncestorOfType(UIBrowseContainer.class).getDMSSystemWorkspace(repository);
+    String workspace = getAncestorOfType(UIBrowseContainer.class).getDMSSystemWorkspace();
     NewFolksonomyService newFolksonomyService = getApplicationComponent(NewFolksonomyService.class) ;
     Map<String , String> tagStyle = new HashMap<String ,String>() ;
-    for(Node tag : newFolksonomyService.getAllTagStyle(repository, workspace)) {
+    for(Node tag : newFolksonomyService.getAllTagStyle(workspace)) {
       tagStyle.put(tag.getProperty("exo:styleRange").getValue().getString(),
                     tag.getProperty("exo:htmlStyle").getValue().getString());
 

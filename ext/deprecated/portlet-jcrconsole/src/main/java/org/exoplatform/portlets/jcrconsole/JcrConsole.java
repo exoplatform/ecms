@@ -33,13 +33,13 @@ import javax.portlet.ResourceURL;
 
 import org.apache.commons.chain.Catalog;
 import org.apache.commons.chain.Command;
-import org.exoplatform.services.log.Log;
 import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.frameworks.jcr.cli.CliAppContext;
 import org.exoplatform.services.command.impl.CommandService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 
 
 /**
@@ -155,9 +155,9 @@ public class JcrConsole extends GenericPortlet {
         RepositoryService repService = (RepositoryService) container
             .getComponentInstanceOfType(RepositoryService.class);
 
-        String workspace = repService.getRepository().getConfiguration().getDefaultWorkspaceName();
+        String workspace = repService.getCurrentRepository().getConfiguration().getDefaultWorkspaceName();
 
-        context = new CliAppContext(repService.getRepository(), PARAMETERS_KEY);
+        context = new CliAppContext(repService.getCurrentRepository(), PARAMETERS_KEY);
         context.setCurrentWorkspace(workspace);
         context.setCurrentItem(context.getSession().getRootNode());
       }

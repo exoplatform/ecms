@@ -66,7 +66,7 @@ public class LockManagerListener extends Listener<ConversationRegistry, Conversa
       Map<String,String> lockedNodes = (Map<String,String>)lockcache.get(userid);
       if(lockedNodes == null || lockedNodes.values().isEmpty()) return;
       RepositoryService repositoryService = (RepositoryService)container.getComponentInstanceOfType(RepositoryService.class);
-      String key = null, nodePath = null, repoName = null,workspaceName = null, lockToken= null ;
+      String key = null, nodePath = null, workspaceName = null, lockToken= null ;
       String[] temp = null, location = null ;
       Session session = null;
       for(Iterator<String> iter = lockedNodes.keySet().iterator(); iter.hasNext();) {
@@ -76,9 +76,8 @@ public class LockManagerListener extends Listener<ConversationRegistry, Conversa
           temp = key.split(":/:");
           nodePath = temp[1];
           location = temp[0].split("/::/");
-          repoName = location[0];
           workspaceName = location[1] ;
-          session = sessionProvider.getSession(workspaceName,repositoryService.getRepository(repoName));
+          session = sessionProvider.getSession(workspaceName, repositoryService.getCurrentRepository());
           lockToken = lockedNodes.get(key);
           session.addLockToken(lockToken);
           Node node = (Node)session.getItem(nodePath);

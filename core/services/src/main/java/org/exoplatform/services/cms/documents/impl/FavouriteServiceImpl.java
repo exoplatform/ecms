@@ -126,8 +126,10 @@ public class FavouriteServiceImpl implements FavouriteService {
   /**
    * {@inheritDoc}
    */
-  public List<Node> getAllFavouriteNodes(String workspace, String repository,
-      SessionProvider sessionProvider) throws Exception {
+  @Deprecated
+  public List<Node> getAllFavouriteNodes(String workspace,
+                                         String repository,
+                                         SessionProvider sessionProvider) throws Exception {
 
     StringBuilder query = new StringBuilder("SELECT * FROM ").
                     append(EXO_FAVOURITE_NODE).
@@ -135,13 +137,28 @@ public class FavouriteServiceImpl implements FavouriteService {
                     append(EXO_FAVOURITER_PROPERTY).
                     append(" IS NOT NULL");
 
-    return selectNodesByQueryString(workspace, repository, sessionProvider,
-              query.toString(), Query.SQL);
+    return selectNodesByQueryString(workspace, sessionProvider, query.toString(), Query.SQL);
   }
+  
+  /**
+   * {@inheritDoc}
+   */
+  public List<Node> getAllFavouriteNodes(String workspace,
+                                         SessionProvider sessionProvider) throws Exception {
+
+    StringBuilder query = new StringBuilder("SELECT * FROM ").
+                    append(EXO_FAVOURITE_NODE).
+                    append(" WHERE ").
+                    append(EXO_FAVOURITER_PROPERTY).
+                    append(" IS NOT NULL");
+
+    return selectNodesByQueryString(workspace, sessionProvider, query.toString(), Query.SQL);
+  }  
 
   /**
    * {@inheritDoc}
    */
+  @Deprecated
   public List<Node> getAllFavouriteNodesByUser(String workspace,
                                                String repository,
                                                SessionProvider sessionProvider,
@@ -158,11 +175,33 @@ public class FavouriteServiceImpl implements FavouriteService {
                                                              .append("')");
 
     return selectNodesByQueryString(workspace,
-                                    repository,
                                     sessionProvider,
                                     query.toString(),
                                     Query.SQL);
   }
+  
+  /**
+   * {@inheritDoc}
+   */
+  public List<Node> getAllFavouriteNodesByUser(String workspace,
+                                               SessionProvider sessionProvider,
+                                               String userName) throws Exception {
+
+    StringBuilder query = new StringBuilder("SELECT * FROM ").append(EXO_FAVOURITE_NODE)
+                                                             .append(" WHERE ")
+                                                             .append(EXO_FAVOURITER_PROPERTY)
+                                                             .append(" IS NOT NULL AND ")
+                                                             .append(" CONTAINS (")
+                                                             .append(EXO_FAVOURITER_PROPERTY)
+                                                             .append(", '")
+                                                             .append(userName)
+                                                             .append("')");
+
+    return selectNodesByQueryString(workspace,
+                                    sessionProvider,
+                                    query.toString(),
+                                    Query.SQL);
+  }  
 
 
   /**
@@ -191,18 +230,19 @@ public class FavouriteServiceImpl implements FavouriteService {
   /**
    * Get all nodes by a query
    * @param workspace Get all favourite nodes from this workspace
-   * @param repository Get all favourite nodes from this repository
    * @param sessionProvider The session provider which will be used to get session
    * @param queryString Query string
    * @param language Language SQL or XPath
    * @return List<Node> Get all favourite nodes
    * @throws Exception
    */
-  private List<Node> selectNodesByQueryString(String workspace, String repository,
-      SessionProvider sessionProvider, String queryString, String language) throws Exception {
+  private List<Node> selectNodesByQueryString(String workspace,
+                                              SessionProvider sessionProvider,
+                                              String queryString,
+                                              String language) throws Exception {
     List<Node> ret = new ArrayList<Node>();
 
-    ManageableRepository manageableRepository = repositoryService.getRepository(repository);
+    ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
     Session session = sessionProvider.getSession(workspace, manageableRepository);
     QueryManager queryManager = session.getWorkspace().getQueryManager();
     Query query = queryManager.createQuery(queryString, language);

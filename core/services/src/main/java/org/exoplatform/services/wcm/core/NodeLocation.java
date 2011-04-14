@@ -221,7 +221,7 @@ public class NodeLocation {
   public static final Node getNodeByLocation(final NodeLocation nodeLocation) {
     Session session = null;
     try {
-      ManageableRepository repository = WCMCoreUtils.getRepository(nodeLocation.getRepository());
+      ManageableRepository repository = WCMCoreUtils.getRepository();
       session = WCMCoreUtils.getSystemSessionProvider().getSession(nodeLocation.getWorkspace(), repository);
       Node node = (Node)session.getItem(nodeLocation.getPath());
       return node;

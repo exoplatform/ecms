@@ -119,7 +119,7 @@ public class NewsletterManageUserHandler {
    */
   public List<String> getAllAdministrator(SessionProvider sessionProvider, String portalName) {
     try {
-      ManageableRepository manageableRepository = repositoryService.getRepository(repository);
+      ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
       Session session = sessionProvider.getSession(workspace, manageableRepository);
       Node categoriesNode = (Node) session.getItem(NewsletterConstant.generateCategoryPath(portalName));
       if (categoriesNode.hasProperty(NewsletterConstant.CATEGORIES_PROPERTY_ADDMINISTRATOR)) {
@@ -142,7 +142,7 @@ public class NewsletterManageUserHandler {
    */
   public void addAdministrator(SessionProvider sessionProvider, String portalName, String userId) throws Exception{
     try {
-      ManageableRepository manageableRepository = repositoryService.getRepository(repository);
+      ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
       Session session = sessionProvider.getSession(workspace, manageableRepository);
       Node categoriesNode = (Node) session.getItem(NewsletterConstant.generateCategoryPath(portalName));
       List<String> listUsers = new ArrayList<String>();
@@ -187,7 +187,7 @@ public class NewsletterManageUserHandler {
   public void deleteUserAddministrator(SessionProvider sessionProvider,
                                        String portalName,
                                        String userId) throws Exception {
-    ManageableRepository manageableRepository = repositoryService.getRepository(repository);
+    ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
     Session session = sessionProvider.getSession(workspace, manageableRepository);
     Node categoriesNode = (Node) session.getItem(NewsletterConstant.generateCategoryPath(portalName));
     List<String> listUsers = new ArrayList<String>();
@@ -214,7 +214,7 @@ public class NewsletterManageUserHandler {
     Node userNode = null;
     Session session = null;
     try {
-      ManageableRepository manageableRepository = repositoryService.getRepository(repository);
+      ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
       session = sessionProvider.getSession(workspace, manageableRepository);
       String userPath = NewsletterConstant.generateUserPath(portalName);
       Node userFolderNode = (Node)session.getItem(userPath);
@@ -251,7 +251,7 @@ public class NewsletterManageUserHandler {
                                   String portalName,
                                   String userMail) throws Exception {
     try{
-      ManageableRepository manageableRepository = repositoryService.getRepository(repository);
+      ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
       Session session = sessionProvider.getSession(workspace, manageableRepository);
       String userPath = NewsletterConstant.generateUserPath(portalName);
       Node userFolderNode = (Node)session.getItem(userPath);
@@ -274,7 +274,7 @@ public class NewsletterManageUserHandler {
                               boolean isBanClicked) {
     log.info("Trying to ban/unban user " + userMail);
     try {
-      ManageableRepository manageableRepository = repositoryService.getRepository(repository);
+      ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
       Session session = sessionProvider.getSession(workspace, manageableRepository);
       Node userNode = getUserNodeByEmail(sessionProvider, portalName, userMail);
       if (userNode.getProperty(NewsletterConstant.USER_PROPERTY_BANNED).getBoolean() == isBanClicked) return;
@@ -296,7 +296,7 @@ public class NewsletterManageUserHandler {
   public void delete(SessionProvider sessionProvider, String portalName, String userMail) {
     log.info("Trying to delete user " + userMail);
     try {
-      ManageableRepository manageableRepository = repositoryService.getRepository(repository);
+      ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
       Session session = sessionProvider.getSession(workspace, manageableRepository);
       String userPath = NewsletterConstant.generateUserPath(portalName);
       Node userFolderNode = (Node)session.getItem(userPath);
@@ -347,7 +347,7 @@ public class NewsletterManageUserHandler {
                                              String categoryName,
                                              String subscriptionName) throws Exception {
     List<NewsletterUserConfig> listUsers = new ArrayList<NewsletterUserConfig>();
-    ManageableRepository manageableRepository = repositoryService.getRepository(repository);
+    ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
     Session session = sessionProvider.getSession(workspace, manageableRepository);
     String userPath = NewsletterConstant.generateUserPath(portalName);
     Node userHomeNode = (Node)session.getItem(userPath);
@@ -401,7 +401,7 @@ public class NewsletterManageUserHandler {
     log.info("Trying to get list user by subscription " + portalName + "/" + categoryName + "/" + subscriptionName);
     List<String> subscribedUsers = new ArrayList<String>();
     try {
-      ManageableRepository manageableRepository = repositoryService.getRepository(repository);
+      ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
       Session session = sessionProvider.getSession(workspace, manageableRepository);
       String subscriptionPath = NewsletterConstant.generateCategoryPath(portalName) + "/"
           + categoryName + "/" + subscriptionName;
@@ -436,7 +436,7 @@ public class NewsletterManageUserHandler {
     log.info("Trying to get user's quantity by subscription " + portalName + "/" + categoryName + "/" + subscriptionName);
     int countUser = 0;
     try {
-      ManageableRepository manageableRepository = repositoryService.getRepository(repository);
+      ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
       Session session = sessionProvider.getSession(workspace, manageableRepository);
       String subscriptionPath = NewsletterConstant.generateCategoryPath(portalName) + "/"
           + categoryName + "/" + subscriptionName;

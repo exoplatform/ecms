@@ -93,9 +93,8 @@ public class UITaxonomyTreeList extends UIComponentDecorator {
 
   private List<TaxonomyTreeData> getAllTaxonomyTreeList() throws RepositoryException {
     List<TaxonomyTreeData> lstTaxonomyTreeData = new ArrayList<TaxonomyTreeData>();
-    String repository = getAncestorOfType(UIECMAdminPortlet.class).getPreferenceRepository();
     TaxonomyService taxonomyService = getApplicationComponent(TaxonomyService.class);
-    List<Node> lstTaxonomyTreeNode = taxonomyService.getAllTaxonomyTrees(repository);
+    List<Node> lstTaxonomyTreeNode = taxonomyService.getAllTaxonomyTrees();
     if (lstTaxonomyTreeNode != null && lstTaxonomyTreeNode.size() > 0) {
       for (Node node : lstTaxonomyTreeNode) {
         lstTaxonomyTreeData.add(setData(node));

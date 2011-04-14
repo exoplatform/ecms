@@ -365,6 +365,7 @@ public abstract class BaseConnector {
    * @return the jcr content
    * @throws Exception the exception
    */
+  @Deprecated
   protected Node getContent(String repositoryName,
                             String workspaceName,
                             String jcrPath,
@@ -375,7 +376,7 @@ public abstract class BaseConnector {
     try {
       SessionProvider sessionProvider = isSystemSession ? WCMCoreUtils.getSystemSessionProvider()
                                                        : WCMCoreUtils.getUserSessionProvider();
-      ManageableRepository repository = repositoryService.getRepository(repositoryName);
+      ManageableRepository repository = repositoryService.getCurrentRepository();
       Session session = sessionProvider.getSession(workspaceName, repository);
       Node content = (Node) session.getItem(jcrPath);
       if (content.isNodeType("exo:taxonomyLink")) {
@@ -393,15 +394,60 @@ public abstract class BaseConnector {
   /**
    * Gets the jcr content.
    *
+   * @param workspaceName the workspace name
+   * @param jcrPath the jcr path
+   * @return the jcr content
+   * @throws Exception the exception
+   */
+  protected Node getContent(String workspaceName,
+                            String jcrPath,
+                            String NodeTypeFilter,
+                            boolean isSystemSession) throws Exception {
+    if (jcrPath == null || jcrPath.trim().length() == 0)
+      return null;
+    try {
+      SessionProvider sessionProvider = isSystemSession ? WCMCoreUtils.getSystemSessionProvider()
+                                                       : WCMCoreUtils.getUserSessionProvider();
+      ManageableRepository repository = repositoryService.getCurrentRepository();
+      Session session = sessionProvider.getSession(workspaceName, repository);
+      Node content = (Node) session.getItem(jcrPath);
+      if (content.isNodeType("exo:taxonomyLink")) {
+        content = linkManager.getTarget(content);
+      }
+
+      if (NodeTypeFilter==null || (NodeTypeFilter!=null && content.isNodeType(NodeTypeFilter)) )
+        return content;
+    } catch (Exception e) {
+      log.error("Error when perform getContent: ", e);
+    }
+    return null;
+  }
+  
+  /**
+   * Gets the jcr content.
+   *
    * @param repositoryName the repository name
    * @param workspaceName the workspace name
    * @param jcrPath the jcr path
    * @return the jcr content
    * @throws Exception the exception
    */
+  @Deprecated
   protected Node getContent(String repositoryName, String workspaceName, String jcrPath) throws Exception {
     return getContent(repositoryName, workspaceName, jcrPath, null, true);
   }
+  
+  /**
+   * Gets the jcr content.
+   *
+   * @param workspaceName the workspace name
+   * @param jcrPath the jcr path
+   * @return the jcr content
+   * @throws Exception the exception
+   */
+  protected Node getContent(String workspaceName, String jcrPath) throws Exception {
+    return getContent(workspaceName, jcrPath, null, true);
+  }  
 
   /**
    * Gets the web content.

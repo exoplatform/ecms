@@ -35,7 +35,6 @@ import org.exoplatform.services.cms.views.TemplateConfig;
 import org.exoplatform.services.cms.views.ViewConfig;
 import org.exoplatform.services.cms.views.ViewConfig.Tab;
 import org.exoplatform.services.jcr.RepositoryService;
-import org.exoplatform.services.jcr.config.RepositoryEntry;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
@@ -76,32 +75,26 @@ public class ManageViewPlugin extends BaseComponentPlugin {
 
   public void init() throws Exception {
     if(autoCreateInNewRepository_) {
-      RepositoryEntry entry = repositoryService_.getCurrentRepository().getConfiguration();
-      importPredefineViews(entry.getName()) ;
+      importPredefineViews() ;
       return ;
     }
-    ValueParam param = params_.getValueParam("repository") ;
-    String repository = null ;
-    if(param !=null) {
-      repository = param.getValue();
-    }else {
-      repository = repositoryService_.getDefaultRepository().getConfiguration().getName();
-    }
-    importPredefineViews(repository) ;
+    return;
   }
 
+  @Deprecated
   public void init(String repository) throws Exception {
-    if(!autoCreateInNewRepository_) return ;
-    importPredefineViews(repository) ;
+    if (!autoCreateInNewRepository_)
+      return;
+    importPredefineViews();
   }
 
   @SuppressWarnings("unchecked")
-  private void importPredefineViews(String repository) throws Exception {
+  private void importPredefineViews() throws Exception {
     Iterator<ObjectParameter> it = params_.getObjectParamIterator() ;
     String viewsPath = nodeHierarchyCreator_.getJcrPath(BasePath.CMS_VIEWS_PATH);
     String templatesPath = nodeHierarchyCreator_.getJcrPath(BasePath.CMS_VIEWTEMPLATES_PATH);
     String warViewPath = predefinedViewsLocation_ + templatesPath.substring(templatesPath.lastIndexOf("exo:ecm") + 7) ;
-    ManageableRepository manageableRepository = repositoryService_.getRepository(repository) ;
+    ManageableRepository manageableRepository = repositoryService_.getCurrentRepository();
     DMSRepositoryConfiguration dmsRepoConfig = dmsConfiguration_.getConfig();
     Session session = manageableRepository.getSystemSession(dmsRepoConfig.getSystemWorkspace()) ;
     ViewConfig viewObject = null ;

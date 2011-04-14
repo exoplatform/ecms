@@ -74,9 +74,8 @@ public class UIECMTemplateList extends UIGrid {
 
   @SuppressWarnings("unchecked")
   public void updateTempListGrid(int currentPage) throws Exception {
-    String repository = getAncestorOfType(UIECMAdminPortlet.class).getPreferenceRepository() ;
     List<Node> nodes = getApplicationComponent(ManageViewService.class).
-      getAllTemplates(BasePath.ECM_EXPLORER_TEMPLATES, repository, SessionProviderFactory.createSessionProvider()) ;
+      getAllTemplates(BasePath.ECM_EXPLORER_TEMPLATES, SessionProviderFactory.createSessionProvider()) ;
     List<TemplateBean> tempBeans = new ArrayList<TemplateBean>() ;
     for(Node node : nodes) {
       tempBeans.add(new TemplateBean(node.getName(), node.getPath(), getBaseVersion(node))) ;
@@ -97,16 +96,17 @@ public class UIECMTemplateList extends UIGrid {
     }
   }
 
-  public String getRepository() {
-    return getAncestorOfType(UIECMAdminPortlet.class).getPreferenceRepository() ;
-  }
+//  public String getRepository() {
+//    return getAncestorOfType(UIECMAdminPortlet.class).getPreferenceRepository() ;
+//  }
 
   static  public class AddActionListener extends EventListener<UIECMTemplateList> {
     public void execute(Event<UIECMTemplateList> event) throws Exception {
       UIECMTemplateList uiECMTempList = event.getSource() ;
       SessionProvider provider = SessionProviderFactory.createSessionProvider() ;
       Node ecmTemplateHome = uiECMTempList.getApplicationComponent(ManageViewService.class)
-      .getTemplateHome(BasePath.ECM_EXPLORER_TEMPLATES, uiECMTempList.getRepository(),provider) ;
+                                          .getTemplateHome(BasePath.ECM_EXPLORER_TEMPLATES,
+                                                           provider);
       if(ecmTemplateHome == null) {
         UIApplication uiApp = event.getSource().getAncestorOfType(UIApplication.class) ;
         uiApp.addMessage(new ApplicationMessage("UIECMTemplateList.msg.access-denied", null, ApplicationMessage.WARNING)) ;
@@ -125,19 +125,18 @@ public class UIECMTemplateList extends UIGrid {
   static  public class DeleteActionListener extends EventListener<UIECMTemplateList> {
     public void execute(Event<UIECMTemplateList> event) throws Exception {
       UIECMTemplateList uiECMTemp = event.getSource() ;
-      String repository = uiECMTemp.getAncestorOfType(UIECMAdminPortlet.class).getPreferenceRepository() ;
       ManageViewService vservice = uiECMTemp.getApplicationComponent(ManageViewService.class) ;
       UIViewManager uiViewManager = uiECMTemp.getAncestorOfType(UIViewManager.class) ;
       uiViewManager.setRenderedChild(UIECMTemplateList.ST_ECMTemp) ;
       String templatePath = event.getRequestContext().getRequestParameter(OBJECTID) ;
       String templateName = templatePath.substring(templatePath.lastIndexOf("/") + 1) ;
-      if(uiECMTemp.getApplicationComponent(ManageDriveService.class).isUsedView(templateName, repository)) {
+      if(uiECMTemp.getApplicationComponent(ManageDriveService.class).isUsedView(templateName)) {
         UIApplication app = uiECMTemp.getAncestorOfType(UIApplication.class) ;
         Object[] args = {templateName} ;
         app.addMessage(new ApplicationMessage("UIECMTemplateList.msg.template-in-use", args)) ;
         return ;
       }
-      vservice.removeTemplate(templatePath, repository) ;
+      vservice.removeTemplate(templatePath) ;
       uiECMTemp.updateTempListGrid(uiECMTemp.getUIPageIterator().getCurrentPage()) ;
       UITemplateContainer uiTempContainer = uiECMTemp.getParent() ;
       event.getRequestContext().addUIComponentToUpdateByAjax(uiTempContainer) ;

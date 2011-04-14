@@ -174,8 +174,7 @@ public class UIWorkingArea extends UIContainer {
 
   public Node getNodeByUUID(String uuid) throws Exception {
     String repository = getAncestorOfType(UIJCRExplorer.class).getRepositoryName();
-    ManageableRepository repo = getApplicationComponent(RepositoryService.class).getRepository(
-        repository);
+    ManageableRepository repo = getApplicationComponent(RepositoryService.class).getCurrentRepository();
     String workspace = repo.getConfiguration().getDefaultWorkspaceName();
     Session session = SessionProviderFactory.createSystemProvider().getSession(workspace, repo);
     return session.getNodeByUUID(uuid);

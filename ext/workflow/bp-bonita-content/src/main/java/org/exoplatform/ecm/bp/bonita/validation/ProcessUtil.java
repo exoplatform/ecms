@@ -94,12 +94,11 @@ public class ProcessUtil {
       log.error(e1);
     }
     String[] location = getCurrentLocation(api,activity);
-    String repository = location[REPOSITORY_INDEX];
     String workspace = location[WORKSPACE_INDEX];
     String path = location[PATH_INDEX] ;
     SessionProvider provider = SessionProvider.createSystemProvider();
     try{
-      Node requestNode = getNode(repository,workspace,path,provider);
+      Node requestNode = getNode(workspace,path,provider);
       if(!requestNode.isNodeType(EXO_CONENT_STATE)) {
         requestNode.addMixin(EXO_CONENT_STATE) ;
         requestNode.save();
@@ -127,12 +126,11 @@ public class ProcessUtil {
       log.error(e1);
     }
     String[] location = getCurrentLocation(api,activity);
-    String repository = location[REPOSITORY_INDEX];
     String workspace = location[WORKSPACE_INDEX];
     String path = location[PATH_INDEX] ;
     SessionProvider provider = SessionProvider.createSystemProvider();
     try {
-      Node validatedNode = getNode(repository,workspace,path,provider) ;
+      Node validatedNode = getNode(workspace,path,provider) ;
       if(!validatedNode.isNodeType("exo:approved")) {
         validatedNode.addMixin("exo:approved");
         validatedNode.save();
@@ -162,12 +160,11 @@ public class ProcessUtil {
       log.error(e1);
     }
     String[] location = getCurrentLocation(api,activity);
-    String repository = location[REPOSITORY_INDEX];
     String workspace = location[WORKSPACE_INDEX];
     String path = location[PATH_INDEX] ;
     SessionProvider provider = SessionProvider.createSystemProvider();
     try {
-      Node disapprovedNode = getNode(repository,workspace,path,provider) ;
+      Node disapprovedNode = getNode(workspace,path,provider) ;
       if(!disapprovedNode.isNodeType("exo:disapproved")) {
         disapprovedNode.addMixin("exo:disapproved");
         disapprovedNode.save();
@@ -197,12 +194,11 @@ public class ProcessUtil {
       log.error(e1);
     }
     String[] location = getCurrentLocation(api,activity);
-    String repository = location[REPOSITORY_INDEX];
     String workspace = location[WORKSPACE_INDEX];
     String path = location[PATH_INDEX] ;
     SessionProvider provider = SessionProvider.createSystemProvider();
     try {
-      Node publishedNode = getNode(repository,workspace,path,provider) ;
+      Node publishedNode = getNode(workspace,path,provider) ;
       if(!publishedNode.isNodeType("exo:published")) {
         publishedNode.addMixin("exo:published");
         publishedNode.save();
@@ -233,12 +229,11 @@ public class ProcessUtil {
       log.error(e1);
     }
     String[] location = getCurrentLocation(api,activity);
-    String repository = location[REPOSITORY_INDEX];
     String workspace = location[WORKSPACE_INDEX];
     String path = location[PATH_INDEX] ;
     SessionProvider provider = SessionProvider.createSystemProvider();
     try {
-      Node pendingNode = getNode(repository,workspace,path,provider) ;
+      Node pendingNode = getNode(workspace,path,provider) ;
       if(!pendingNode.isNodeType("exo:pending")) {
         pendingNode.addMixin("exo:pending");
         pendingNode.save();
@@ -268,12 +263,11 @@ public class ProcessUtil {
       log.error(e1);
     }
     String[] location = getCurrentLocation(api,activity);
-    String repository = location[REPOSITORY_INDEX];
     String workspace = location[WORKSPACE_INDEX];
     String path = location[PATH_INDEX] ;
     SessionProvider provider = SessionProvider.createSystemProvider();
     try {
-      Node delegateNode = getNode(repository,workspace,path,provider) ;
+      Node delegateNode = getNode(workspace,path,provider) ;
       if(!delegateNode.isNodeType("exo:delegated")) {
         delegateNode.addMixin("exo:delegated");
         delegateNode.save();
@@ -307,12 +301,11 @@ public class ProcessUtil {
       log.error(e1);
     }
     String[] location = getCurrentLocation(api,activity);
-    String repository = location[REPOSITORY_INDEX];
     String workspace = location[WORKSPACE_INDEX];
     String path = location[PATH_INDEX] ;
     SessionProvider provider = SessionProvider.createSystemProvider();
     try {
-      Node backupNode = getNode(repository,workspace,path,provider) ;
+      Node backupNode = getNode(workspace,path,provider) ;
       if(!backupNode.isNodeType("exo:backup")) {
         backupNode.addMixin("exo:backup");
         backupNode.save();
@@ -343,14 +336,11 @@ public class ProcessUtil {
   }
     String[] location = getCurrentLocation(api,activity);
 
-
-
-    String repository = location[REPOSITORY_INDEX];
     String workspace = location[WORKSPACE_INDEX];
     String path = location[PATH_INDEX] ;
     SessionProvider provider = SessionProvider.createSystemProvider();
     try {
-      Node trashNode = getNode(repository,workspace,path,provider) ;
+      Node trashNode = getNode(workspace,path,provider) ;
       if(!trashNode.isNodeType("exo:trashMovement")) {
         trashNode.addMixin("exo:trashMovement");
         trashNode.save();
@@ -365,12 +355,20 @@ public class ProcessUtil {
     provider.close();
   }
 
+  @Deprecated
   public static Node getNode(String repositoryName, String workspace, String path, SessionProvider provider) throws Exception {
     RepositoryService repositoryService = getService(RepositoryService.class);
-    ManageableRepository repository= repositoryService.getRepository(repositoryName);
+    ManageableRepository repository= repositoryService.getCurrentRepository();
     Session session = provider.getSession(workspace,repository);
     return (Node)session.getItem(path);
   }
+  
+  public static Node getNode(String workspace, String path, SessionProvider provider) throws Exception {
+    RepositoryService repositoryService = getService(RepositoryService.class);
+    ManageableRepository repository= repositoryService.getCurrentRepository();
+    Session session = provider.getSession(workspace,repository);
+    return (Node)session.getItem(path);
+  }  
 
   public static String getActorId(APIAccessor api, ActivityInstance<ActivityBody> activity) {
     try {
@@ -433,7 +431,7 @@ public class ProcessUtil {
     String[] location = getCurrentLocation(api,activity);
     SessionProvider provider = SessionProvider.createSystemProvider();
     try{
-      Node node = getNode(location[0],location[1],location[2],provider);
+      Node node = getNode(location[1],location[2],provider);
       return node.getProperty("exo:owner").getString();
     }catch (Exception e) {
     }finally {

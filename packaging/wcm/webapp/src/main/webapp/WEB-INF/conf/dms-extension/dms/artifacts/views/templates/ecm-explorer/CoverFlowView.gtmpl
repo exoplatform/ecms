@@ -13,6 +13,7 @@
   import org.exoplatform.ecm.webui.utils.Utils;
   import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
   import org.exoplatform.services.cms.link.LinkManager;
+  import org.exoplatform.services.jcr.RepositoryService;
 %>
 <%
   def linkManager = uicomponent.getComponentInstanceOfType("org.exoplatform.services.cms.link.LinkManager");
@@ -25,6 +26,8 @@
 	  rcontext.getJavascriptManager().importJavascript('eXo.ecm.DMSBrowser','/ecm-wcm-extension/javascript/');    
 	  rcontext.getJavascriptManager().addOnLoadJavascript("eXo.ecm.UICoverFlow.initEvent('$viewComponentId')");
 	  rcontext.getJavascriptManager().addOnLoadJavascript("eXo.ecm.UICoverFlow.setHeight");
+	  RepositoryService rService = uicomponent.getApplicationComponent(RepositoryService.class);
+	  String repository = rService.getCurrentRepository().getConfiguration().getName();	  
 %>
 <div id="$uicomponent.id" class="UICoverFlowView">
 		<div class="TLBox">
@@ -132,7 +135,7 @@
 	  					    } else {
 	  					      isShowCoverFlow = false;
 	  					    }
-	                imgSrc = "/" + portalName + "/" + restContextName + "/thumbnailImage/big/" + uicomponent.getRepository() + "/" + wsName + image.getPath() + "/?";
+	                imgSrc = "/" + portalName + "/" + restContextName + "/thumbnailImage/big/" + repository + "/" + wsName + image.getPath() + "/?";
 	  					    if((!linkManager.isLink(image) || linkManager.isTargetReachable(image)) && uicomponent.isSupportedThumbnailImage(image)) {
 								    if(isShowCoverFlow) {
 	                    println "<image src=\"$imgSrc\" longdesc=\""+actionLink+"\" w=\""+arrSize[0]+"\" h=\""+arrSize[1]+"\" alt=\""+Text.unescapeIllegalJcrChars(title)+"\"/>";

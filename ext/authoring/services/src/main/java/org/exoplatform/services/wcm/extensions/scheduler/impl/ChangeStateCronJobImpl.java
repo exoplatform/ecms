@@ -77,7 +77,7 @@ public class ChangeStateCronJobImpl implements Job {
         String containerName = WCMCoreUtils.getContainerNameFromJobContext(context);
         RepositoryService repositoryService_ = WCMCoreUtils.getService(RepositoryService.class, containerName);
         PublicationService publicationService = WCMCoreUtils.getService(PublicationService.class, containerName);
-        ManageableRepository manageableRepository = repositoryService_.getRepository(repository);
+        ManageableRepository manageableRepository = repositoryService_.getCurrentRepository();
         if (manageableRepository == null) {
           if (log.isDebugEnabled()) log.debug("Repository '" + repository + "' not found., ignoring");
           return;

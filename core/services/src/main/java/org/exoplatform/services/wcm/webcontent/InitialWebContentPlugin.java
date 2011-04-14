@@ -98,7 +98,7 @@ public class InitialWebContentPlugin extends CreatePortalPlugin {
         xmlData = IOUtil.getStreamContentAsString(stream);
         artifactsCache.put(sourcePath,xmlData);
       }
-      ManageableRepository repository = repositoryService.getRepository(deploymentDescriptor.getTarget().getRepository());
+      ManageableRepository repository = repositoryService.getCurrentRepository();
       Session session = sessionProvider.getSession(deploymentDescriptor.getTarget().getWorkspace(), repository);
       String targetPath = deploymentDescriptor.getTarget().getNodePath();
       String realTargetFolder = StringUtils.replace(targetPath,"{portalName}",portalName);

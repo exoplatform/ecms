@@ -87,11 +87,11 @@ public class UIViewForm extends UIFormInputSetWithAction implements UISelectable
     this.viewName = viewName;
   }
 
-  public String getRepository() {
-    PortletRequestContext pcontext = (PortletRequestContext)WebuiRequestContext.getCurrentInstance() ;
-    PortletPreferences portletPref = pcontext.getRequest().getPreferences() ;
-    return portletPref.getValue(Utils.REPOSITORY, "") ;
-  }
+//  public String getRepository() {
+//    PortletRequestContext pcontext = (PortletRequestContext)WebuiRequestContext.getCurrentInstance() ;
+//    PortletPreferences portletPref = pcontext.getRequest().getPreferences() ;
+//    return portletPref.getValue(Utils.REPOSITORY, "") ;
+//  }
 
   public UIViewForm(String name) throws Exception {
     super(name) ;
@@ -107,9 +107,8 @@ public class UIViewForm extends UIFormInputSetWithAction implements UISelectable
     addUIFormInput(new UIFormInputInfo(FIELD_TABS, FIELD_TABS, null)) ;
     setActionInfo(FIELD_PERMISSION, new String[] {"AddPermission"}) ;
     vservice_ = getApplicationComponent(ManageViewService.class) ;
-    String repository = getRepository() ;
-    Node ecmTemplateHome = vservice_.getTemplateHome(BasePath.ECM_EXPLORER_TEMPLATES, repository,
-        SessionProviderFactory.createSessionProvider()) ;
+    Node ecmTemplateHome = vservice_.getTemplateHome(BasePath.ECM_EXPLORER_TEMPLATES,
+                                                     SessionProviderFactory.createSessionProvider());
     List<SelectItemOption<String>> temp = new ArrayList<SelectItemOption<String>>() ;
     if(ecmTemplateHome != null) {
       NodeIterator iter = ecmTemplateHome.getNodes() ;
@@ -298,8 +297,7 @@ public class UIViewForm extends UIFormInputSetWithAction implements UISelectable
       }
     }
     boolean isEnableVersioning = getUIFormCheckBoxInput(FIELD_ENABLEVERSION).isChecked() ;
-    String repository = getRepository() ;
-    List<ViewConfig> viewList = vservice_.getAllViews(getRepository()) ;
+    List<ViewConfig> viewList = vservice_.getAllViews() ;
     UIPopupWindow uiPopup = getAncestorOfType(UIPopupWindow.class) ;
     if(uiPopup.getId().equals(UIViewList.ST_ADD)) {
       for(ViewConfig view : viewList) {
@@ -325,7 +323,7 @@ public class UIViewForm extends UIFormInputSetWithAction implements UISelectable
 
     List<Tab> tabList = new ArrayList<Tab>(tabMap_.values());
     if(views_ == null || !isEnableVersioning) {
-      vservice_.addView(viewName, permissions, template, tabList, repository) ;
+      vservice_.addView(viewName, permissions, template, tabList) ;
       if(views_ != null) {
         for(NodeIterator iter = views_.getNodes(); iter.hasNext(); ) {
           Node tab = iter.nextNode() ;
@@ -344,7 +342,7 @@ public class UIViewForm extends UIFormInputSetWithAction implements UISelectable
         Node tab = iter.nextNode() ;
         if(!tabMap_.containsKey(tab.getName())) tab.remove() ;
       }
-      vservice_.addView(viewName, permissions, template, tabList, repository) ;
+      vservice_.addView(viewName, permissions, template, tabList) ;
       try {
         views_.save() ;
         views_.checkin();

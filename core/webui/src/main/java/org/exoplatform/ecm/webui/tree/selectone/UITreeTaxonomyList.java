@@ -111,9 +111,10 @@ public class UITreeTaxonomyList extends UIForm {
     return display;
   }
 
+  @Deprecated
   public void setTaxonomyTreeList(String repository) throws Exception {
     TaxonomyService taxonomyService = getApplicationComponent(TaxonomyService.class);
-    List<Node> listNode = taxonomyService.getAllTaxonomyTrees(repository);
+    List<Node> listNode = taxonomyService.getAllTaxonomyTrees();
     List<SelectItemOption<String>> taxonomyTree = new ArrayList<SelectItemOption<String>>();
     for(Node itemNode : listNode) {
       taxonomyTree.add(new SelectItemOption<String>(getTaxonomyLabel(itemNode.getName()), itemNode.getName()));
@@ -121,11 +122,22 @@ public class UITreeTaxonomyList extends UIForm {
     UIFormSelectBox uiTreeTaxonomyList = getUIFormSelectBox(TAXONOMY_TREE);
     uiTreeTaxonomyList.setOptions(taxonomyTree);
   }
+  
+  public void setTaxonomyTreeList() throws Exception {
+    TaxonomyService taxonomyService = getApplicationComponent(TaxonomyService.class);
+    List<Node> listNode = taxonomyService.getAllTaxonomyTrees();
+    List<SelectItemOption<String>> taxonomyTree = new ArrayList<SelectItemOption<String>>();
+    for(Node itemNode : listNode) {
+      taxonomyTree.add(new SelectItemOption<String>(getTaxonomyLabel(itemNode.getName()), itemNode.getName()));
+    }
+    UIFormSelectBox uiTreeTaxonomyList = getUIFormSelectBox(TAXONOMY_TREE);
+    uiTreeTaxonomyList.setOptions(taxonomyTree);
+  }  
 
-  private Node getRootNode(String repositoryName, String workspaceName, String pathNode) throws
+  private Node getRootNode(String workspaceName, String pathNode) throws
     RepositoryException, RepositoryConfigurationException {
       RepositoryService repositoryService = getApplicationComponent(RepositoryService.class);
-      ManageableRepository manageableRepository = repositoryService.getRepository(repositoryName);
+      ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
       SessionProvider sessionProvider =  SessionProviderFactory.createSessionProvider();
       return (Node) sessionProvider.getSession(workspaceName, manageableRepository).getItem(pathNode);
   }
@@ -147,8 +159,7 @@ public class UITreeTaxonomyList extends UIForm {
         uiBreadcumbs.getPath().clear();
         UITreeTaxonomyBuilder uiTreeJCRExplorer = uiOneTaxonomySelector.getChild(UITreeTaxonomyBuilder.class);
         try {
-          uiTreeJCRExplorer.setRootTreeNode(uiTreeTaxonomyList.getRootNode(uiOneTaxonomySelector
-              .getRepositoryName(), workspaceName, pathTaxonomy));
+          uiTreeJCRExplorer.setRootTreeNode(uiTreeTaxonomyList.getRootNode(workspaceName, pathTaxonomy));
           uiTreeJCRExplorer.buildTree();
         } catch (AccessDeniedException ade) {
           UIFormSelectBox uiTaxonomyTree = uiTreeTaxonomyList.getUIFormSelectBox(TAXONOMY_TREE);

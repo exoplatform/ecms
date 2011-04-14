@@ -110,7 +110,7 @@ public class NewsletterPublicUserHandler {
     Property subscribedUserProperty;
     List<String> subscribedUsers = new ArrayList<String>();
     String categryHomePath = NewsletterConstant.generateCategoryPath(portalName);
-    ManageableRepository manageableRepository = repositoryService.getRepository(repository);
+    ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
     Session session = sessionProvider.getSession(workspace, manageableRepository);
     for (String categoryAndSubscription : listCategorySubscription) {
       categoryName = categoryAndSubscription.split("#")[0];
@@ -143,7 +143,7 @@ public class NewsletterPublicUserHandler {
    */
   protected void clearEmailInSubscription(SessionProvider sessionProvider, String email) {
     try {
-      ManageableRepository manageableRepository = repositoryService.getRepository(repository);
+      ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
       Session session = sessionProvider.getSession(workspace, manageableRepository);
 
       QueryManager queryManager = session.getWorkspace().getQueryManager();
@@ -235,7 +235,7 @@ public class NewsletterPublicUserHandler {
                                    String Email,
                                    String userCode,
                                    String portalName) throws Exception {
-    ManageableRepository manageableRepository = repositoryService.getRepository(repository);
+    ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
     Session session = sessionProvider.getSession(workspace, manageableRepository);
     QueryManager queryManager = session.getWorkspace().getQueryManager();
     String sqlQuery = "select * from " + NewsletterConstant.USER_NODETYPE + " where "

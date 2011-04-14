@@ -51,6 +51,7 @@ private final RepositoryService repositoryService_;
   /**
    * {@inheritDoc}
    */
+  @Deprecated
   public Item getItem(String repository, String workspace, String absPath, boolean giveTarget) throws PathNotFoundException,
                                                                           RepositoryException {
     return getItemGiveTargetSys(repository, workspace, absPath, giveTarget, false);
@@ -59,6 +60,7 @@ private final RepositoryService repositoryService_;
   /**
    * {@inheritDoc}
    */
+  @Deprecated
   public Item getItemGiveTargetSys(String repository, String workspace, String absPath,
       boolean giveTarget, boolean system) throws PathNotFoundException, RepositoryException {
     if (!absPath.startsWith("/"))
@@ -70,6 +72,7 @@ private final RepositoryService repositoryService_;
   /**
    * {@inheritDoc}
    */
+  @Deprecated
   public Item getItem(String repository, String workspace, String absPath) throws PathNotFoundException,
                                                                           RepositoryException {
     return getItem(repository, workspace, absPath, false);
@@ -78,6 +81,7 @@ private final RepositoryService repositoryService_;
   /**
    * {@inheritDoc}
    */
+  @Deprecated
   public Item getItemSys(String repository, String workspace, String absPath, boolean system) throws PathNotFoundException,
                                                                           RepositoryException {
     return getItemGiveTargetSys(repository, workspace, absPath, false, system);
@@ -222,5 +226,31 @@ private final RepositoryService repositoryService_;
       buffer.append('/').append(splitString[i]);
     }
     return buffer.toString();
+  }
+
+  public Item getItem(String workspace, String absPath) throws PathNotFoundException,
+                                                       RepositoryException {
+    return getItem(workspace, absPath, false);
+  }
+
+  public Item getItemSys(String workspace, String absPath, boolean system) throws PathNotFoundException,
+                                                                          RepositoryException {
+    return getItemGiveTargetSys(workspace, absPath, false, system);
+  }
+
+  public Item getItem(String workspace, String absPath, boolean giveTarget) throws PathNotFoundException,
+                                                                           RepositoryException {
+    return getItemGiveTargetSys(workspace, absPath, giveTarget, false);
+  }
+
+  public Item getItemGiveTargetSys(String workspace,
+                                   String absPath,
+                                   boolean giveTarget,
+                                   boolean system) throws PathNotFoundException,
+                                                  RepositoryException {
+    if (!absPath.startsWith("/"))
+      throw new IllegalArgumentException(absPath + " isn't absolute path");
+    Session session = getSession(repositoryService_.getCurrentRepository(), workspace);
+    return getItemTarget(session, absPath, giveTarget, system);
   }
 }

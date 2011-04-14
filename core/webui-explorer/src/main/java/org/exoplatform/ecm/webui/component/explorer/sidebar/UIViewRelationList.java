@@ -65,7 +65,7 @@ public class UIViewRelationList extends UIContainer{
       vals = uiExplorer.getCurrentNode().getProperty("exo:relation").getValues() ;
     }catch (Exception e) { return relations ;}
     RepositoryService repositoryService = getApplicationComponent(RepositoryService.class) ;
-    ManageableRepository repository = repositoryService.getRepository(uiExplorer.getRepositoryName()) ;
+    ManageableRepository repository = repositoryService.getCurrentRepository() ;
     String[] wsNames = repository.getWorkspaceNames() ;
     for(String wsName : wsNames) {
       Session session = SessionProviderFactory.createSystemProvider().getSession(wsName, repository) ;
@@ -90,8 +90,7 @@ public class UIViewRelationList extends UIContainer{
       Node currentNode = uiJCRExplorer.getCurrentNode() ;
       try {
         String uuid = currentNode.getUUID() ;
-        String repositoryName = uiJCRExplorer.getRepositoryName() ;
-        ManageableRepository repository = repositoryService.getRepository(repositoryName) ;
+        ManageableRepository repository = repositoryService.getCurrentRepository();
         Session session = null ;
         for(String workspace : repository.getWorkspaceNames()) {
           session = repository.getSystemSession(workspace) ;

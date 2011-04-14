@@ -90,17 +90,32 @@ public class UITaxonomyManagerTrees extends UIAbstractManager {
     uiPopup.setShow(true);
   }
 
+  @Deprecated
   public String getSystemWorkspaceName(String repository) throws RepositoryException, RepositoryConfigurationException {
     RepositoryService repositoryService = getApplicationComponent(RepositoryService.class);
     ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
     return manageableRepository.getConfiguration().getSystemWorkspaceName();
   }
+  
+  public String getSystemWorkspaceName() throws RepositoryException, RepositoryConfigurationException {
+    RepositoryService repositoryService = getApplicationComponent(RepositoryService.class);
+    ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
+    return manageableRepository.getConfiguration().getSystemWorkspaceName();
+  }  
+  
 
+  @Deprecated
   public String getDmsSystemWorkspaceName(String repository) {
     DMSConfiguration dmsConfiguration = getApplicationComponent(DMSConfiguration.class);
     DMSRepositoryConfiguration dmsRepoConfig = dmsConfiguration.getConfig();
     return dmsRepoConfig.getSystemWorkspace();
   }
+  
+  public String getDmsSystemWorkspaceName() {
+    DMSConfiguration dmsConfiguration = getApplicationComponent(DMSConfiguration.class);
+    DMSRepositoryConfiguration dmsRepoConfig = dmsConfiguration.getConfig();
+    return dmsRepoConfig.getSystemWorkspace();
+  }  
 
   public void initPopupJCRBrowser(String workspace, boolean isDisable) throws Exception {
     removePopup();
@@ -116,7 +131,7 @@ public class UITaxonomyManagerTrees extends UIAbstractManager {
     uiOneNodePathSelector.setRootNodeLocation(repository, workspace, "/");
     if (SessionProviderFactory.isAnonim()) {
       uiOneNodePathSelector.init(SessionProviderFactory.createAnonimProvider());
-    } else if (workspace.equals(getSystemWorkspaceName(repository))) {
+    } else if (workspace.equals(getSystemWorkspaceName())) {
       uiOneNodePathSelector.init(SessionProviderFactory.createSystemProvider());
     } else {
       uiOneNodePathSelector.init(SessionProviderFactory.createSessionProvider());

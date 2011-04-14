@@ -184,12 +184,11 @@ public class StorageProviderImpl implements StorageProvider, Startable
          throw new InvalidArgumentException("CMIS repository is not configured.");
       }
 
-      String repositoryId = storageConfiguration.getRepository();
       String ws = storageConfiguration.getWorkspace();
 
       try
       {
-         ManageableRepository repository = repositoryService.getRepository(repositoryId);
+         ManageableRepository repository = repositoryService.getCurrentRepository();
          Session session = repository.login(ws);
          StorageImpl storage =
             new StorageImpl(session, storageConfiguration, searchService, permissionService, nodeTypeMapping);
@@ -200,11 +199,11 @@ public class StorageProviderImpl implements StorageProvider, Startable
          throw new CmisRuntimeException("Unable get CMIS storage " + storageConfiguration.getId() + ". "
             + re.getMessage(), re);
       }
-      catch (RepositoryConfigurationException rce)
-      {
-         throw new CmisRuntimeException("Unable get CMIS storage " + storageConfiguration.getId() + ". "
-            + rce.getMessage(), rce);
-      }
+//      catch (RepositoryConfigurationException rce)
+//      {
+//         throw new CmisRuntimeException("Unable get CMIS storage " + storageConfiguration.getId() + ". "
+//            + rce.getMessage(), rce);
+//      }
    }
 
    /**
@@ -282,7 +281,7 @@ public class StorageProviderImpl implements StorageProvider, Startable
          throw new CmisRuntimeException("CMIS repository is not configured.");
       }
 
-      ManageableRepository repository = repositoryService.getRepository(storageConfiguration.getRepository());
+      ManageableRepository repository = repositoryService.getCurrentRepository();
       Session session = repository.getSystemSession(storageConfiguration.getWorkspace());
       Node root = session.getRootNode();
 

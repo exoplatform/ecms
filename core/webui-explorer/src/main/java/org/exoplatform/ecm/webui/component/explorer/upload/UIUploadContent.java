@@ -126,9 +126,8 @@ public class UIUploadContent extends UIContainer {
       UIUploadContainer uiUploadContainer = uiUploadContent.getParent() ;
       MetadataService metadataService = uiUploadContent.getApplicationComponent(MetadataService.class) ;
       UIJCRExplorer uiExplorer = uiUploadContent.getAncestorOfType(UIJCRExplorer.class) ;
-      String repository = uiExplorer.getRepositoryName() ;
       String nodeType = event.getRequestContext().getRequestParameter(OBJECTID) ;
-      String template = metadataService.getMetadataTemplate(nodeType, true, repository) ;
+      String template = metadataService.getMetadataTemplate(nodeType, true) ;
       if(template == null || template.trim().length() == 0) {
         UIApplication uiApp = uiUploadContent.getAncestorOfType(UIApplication.class) ;
         Object[] args = {nodeType} ;
@@ -160,7 +159,6 @@ public class UIUploadContent extends UIContainer {
       MetadataService metadataService = uiUploadContent.getApplicationComponent(MetadataService.class) ;
       UIJCRExplorer uiExplorer = uiUploadContent.getAncestorOfType(UIJCRExplorer.class);
       uiUploadContent.setIsExternalMetadata(true);
-      String repository = uiExplorer.getRepositoryName() ;
       String uploadedNodePath = event.getRequestContext().getRequestParameter(OBJECTID);
       Node uploadedNode = (Node) uiExplorer.getCurrentNode().getSession().getItem(uploadedNodePath);
       uiUploadContainer.setUploadedNode(uploadedNode);
@@ -172,7 +170,7 @@ public class UIUploadContent extends UIContainer {
           }
         }
       }
-      String template = metadataService.getMetadataTemplate(nodeType, true, repository) ;
+      String template = metadataService.getMetadataTemplate(nodeType, true) ;
       if(template == null || template.trim().length() == 0) {
         UIApplication uiApp = uiUploadContent.getAncestorOfType(UIApplication.class) ;
         Object[] args = {nodeType} ;

@@ -183,13 +183,9 @@ public class UIDocumentDetail extends UIContainer implements NodePresentation, U
 
   public void newJCRTemplateResourceResolver() {
     try {
-      String repository = getAncestorOfType(UIBrowseContentPortlet.class).getChild(UIBrowseContainer.class)
-                                                                         .getRepository();
       String systemWorkspace = getAncestorOfType(UIBrowseContentPortlet.class).getChild(UIBrowseContainer.class)
                                                                               .getDmsSystemWorkspace();
-      jcrTemplateResourceResolver_ = new JCRResourceResolver(repository,
-                                                             systemWorkspace,
-                                                             Utils.EXO_TEMPLATEFILE);
+      jcrTemplateResourceResolver_ = new JCRResourceResolver(systemWorkspace);
     } catch (Exception e) {
       LOG.error("Exception when get template resource", e);
     }
@@ -273,7 +269,7 @@ public class UIDocumentDetail extends UIContainer implements NodePresentation, U
       Node childNode = childrenIterator.nextNode();
       String nodeType = childNode.getPrimaryNodeType().getName();
       List<String> listCanCreateNodeType =
-        Utils.getListAllowedFileType(originalNode_, getRepository(), templateService) ;
+        Utils.getListAllowedFileType(originalNode_, templateService) ;
       if (listCanCreateNodeType.contains(nodeType)) {
 
         // Case of childNode has jcr:data property

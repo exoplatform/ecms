@@ -16,6 +16,9 @@
  */
 package org.exoplatform.services.cms.impl;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.exoplatform.container.component.ComponentPlugin;
 import org.picocontainer.Startable;
 
@@ -27,11 +30,25 @@ import org.picocontainer.Startable;
  * 9:14:45 AM
  */
 public class DMSConfiguration implements Startable {
-
+  private Map<String, DMSRepositoryConfiguration> dmsConfigMap_ = new HashMap<String, DMSRepositoryConfiguration>();
   private DMSRepositoryConfiguration dmsConfig;
 
   /**
    * Get DMS configuration with specific repository.
+   * @return
+   */  
+  @Deprecated
+  public DMSRepositoryConfiguration getConfig(String repository) {
+    DMSRepositoryConfiguration dmsRepositoryConfiguration = dmsConfigMap_.get(repository);
+    if (dmsRepositoryConfiguration != null) {
+      return dmsRepositoryConfiguration;
+    }
+    dmsConfigMap_.putAll(getDmsConfigMap());
+    return dmsConfigMap_.get(repository);
+  }
+  
+  /**
+   * Get DMS configuration with current repository.
    * @return
    */
   public DMSRepositoryConfiguration getConfig() {
@@ -62,5 +79,9 @@ public class DMSConfiguration implements Startable {
 
   public void stop() {
   }
+  
+  public Map<String, DMSRepositoryConfiguration> getDmsConfigMap() {
+    return dmsConfigMap_;
+  }  
 
 }

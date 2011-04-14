@@ -108,9 +108,9 @@ public class UIDriveManager extends UIAbstractManager {
     uiPopup.setShow(true) ;
   }
 
-  private String getSystemWorkspaceName(String repository) throws RepositoryException, RepositoryConfigurationException {
+  private String getSystemWorkspaceName() throws RepositoryException, RepositoryConfigurationException {
     RepositoryService repositoryService = getApplicationComponent(RepositoryService.class);
-    ManageableRepository manageableRepository = repositoryService.getRepository(repository);
+    ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
     return manageableRepository.getConfiguration().getSystemWorkspaceName();
   }
 
@@ -127,7 +127,7 @@ public class UIDriveManager extends UIAbstractManager {
     uiOneNodePathSelector.setRootNodeLocation(repository, workspace, "/");
     if(SessionProviderFactory.isAnonim()) {
       uiOneNodePathSelector.init(SessionProviderFactory.createAnonimProvider()) ;
-    } else if(workspace.equals(getSystemWorkspaceName(repository))){
+    } else if(workspace.equals(getSystemWorkspaceName())){
       uiOneNodePathSelector.init(SessionProviderFactory.createSystemProvider()) ;
     } else {
       uiOneNodePathSelector.init(SessionProviderFactory.createSessionProvider()) ;
@@ -153,7 +153,7 @@ public class UIDriveManager extends UIAbstractManager {
     uiOneNodePathSelector.setRootNodeLocation(repository, workspace, "/");
     if(SessionProviderFactory.isAnonim()) {
       uiOneNodePathSelector.init(SessionProviderFactory.createAnonimProvider()) ;
-    } else if(workspace.equals(getSystemWorkspaceName(repository))){
+    } else if(workspace.equals(getSystemWorkspaceName())){
       uiOneNodePathSelector.init(SessionProviderFactory.createSystemProvider()) ;
     } else {
       uiOneNodePathSelector.init(SessionProviderFactory.createSessionProvider()) ;

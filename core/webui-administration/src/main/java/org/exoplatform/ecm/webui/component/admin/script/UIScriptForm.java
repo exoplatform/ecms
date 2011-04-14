@@ -177,7 +177,6 @@ public class UIScriptForm extends UIForm implements UIPopupComponent {
   static public class SaveActionListener extends EventListener<UIScriptForm> {
     public void execute(Event<UIScriptForm> event) throws Exception {
       UIScriptForm uiForm = event.getSource() ;
-      String repository = uiForm.getAncestorOfType(UIECMAdminPortlet.class).getPreferenceRepository() ;
       ScriptService scriptService = uiForm.getApplicationComponent(ScriptService.class) ;
       UIApplication uiApp = uiForm.getAncestorOfType(UIApplication.class) ;
       String name = uiForm.getUIStringInput(FIELD_SCRIPT_NAME).getValue().trim();
@@ -231,8 +230,9 @@ public class UIScriptForm extends UIForm implements UIPopupComponent {
         uiForm.getUIFormCheckBoxInput(FIELD_ENABLE_VERSION).isChecked() ;
       if(uiForm.isAddNew_ || !isEnableVersioning) {
         try {
-          scriptService.addScript(namePrefix + "/" + name, content, repository,
-              SessionProviderFactory.createSessionProvider()) ;
+          scriptService.addScript(namePrefix + "/" + name,
+                                  content,
+                                  SessionProviderFactory.createSessionProvider());
         } catch(AccessDeniedException ace) {
           uiApp.addMessage(new ApplicationMessage("UIECMAdminControlPanel.msg.access-denied", null,
                                                   ApplicationMessage.WARNING)) ;
@@ -244,8 +244,9 @@ public class UIScriptForm extends UIForm implements UIPopupComponent {
           Node node = curentList.getScriptNode(name) ;
           if(!node.isNodeType(Utils.MIX_VERSIONABLE)) node.addMixin(Utils.MIX_VERSIONABLE) ;
           else node.checkout() ;
-          scriptService.addScript(namePrefix + "/" + name, content, repository,
-            SessionProviderFactory.createSessionProvider()) ;
+          scriptService.addScript(namePrefix + "/" + name,
+                                  content,
+                                  SessionProviderFactory.createSessionProvider());
           node.save() ;
           node.checkin() ;
         } catch (PathNotFoundException pathNotFoundException) {

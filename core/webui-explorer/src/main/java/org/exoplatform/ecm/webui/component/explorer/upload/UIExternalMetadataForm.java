@@ -62,9 +62,8 @@ public class UIExternalMetadataForm extends UIForm {
 
   public void renderExternalList() throws Exception {
     MetadataService metadataService = getApplicationComponent(MetadataService.class) ;
-    String repository = getAncestorOfType(UIJCRExplorer.class).getRepositoryName() ;
     UIFormCheckBoxInput<String> uiCheckBox ;
-    for(NodeType nodeType : metadataService.getAllMetadatasNodeType(repository)) {
+    for(NodeType nodeType : metadataService.getAllMetadatasNodeType()) {
       uiCheckBox = new UIFormCheckBoxInput<String>(nodeType.getName(), nodeType.getName(), "") ;
       if(!isInternalUse(nodeType)) {
         if(hasExternalMetadata(nodeType.getName())) {

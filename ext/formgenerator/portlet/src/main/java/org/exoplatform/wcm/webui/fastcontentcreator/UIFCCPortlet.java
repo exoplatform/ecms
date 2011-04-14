@@ -16,9 +16,11 @@
  */
 package org.exoplatform.wcm.webui.fastcontentcreator;
 
+import javax.jcr.RepositoryException;
 import javax.portlet.PortletMode;
 import javax.portlet.PortletPreferences;
 
+import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.wcm.webui.fastcontentcreator.config.UIFCCConfig;
 import org.exoplatform.webui.application.WebuiApplication;
 import org.exoplatform.webui.application.WebuiRequestContext;
@@ -72,8 +74,9 @@ public class UIFCCPortlet extends UIPortletApplication {
         fastContentCreatorForm.setWorkspace(preferences.getValue(UIFCCConstant.PREFERENCE_WORKSPACE,
                                                                  ""));
         fastContentCreatorForm.setStoredPath(preferences.getValue(UIFCCConstant.PREFERENCE_PATH, ""));
-        fastContentCreatorForm.setRepositoryName(preferences.getValue(UIFCCConstant.PREFERENCE_REPOSITORY,
-                                                                      ""));
+        fastContentCreatorForm.setRepositoryName(getApplicationComponent(RepositoryService.class).getCurrentRepository()
+                                                                                                 .getConfiguration()
+                                                                                                 .getName());
       }
     } else if (portletRequestContext.getApplicationMode() == PortletMode.EDIT) {
       if (getChild(UIFCCForm.class) != null) {

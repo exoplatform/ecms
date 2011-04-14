@@ -146,9 +146,9 @@ public class UIQueryConfig extends UIForm {
     if(isEdit_) {
       if(isAddNew) {
         setActions(UINewConfigForm.ADD_NEW_ACTION);
-        templateField.setOptions(getQueryTemplate(repository));
+        templateField.setOptions(getQueryTemplate());
         UIConfigTabPane uiConfigTabPane = getAncestorOfType(UIConfigTabPane.class);
-        detailtemField.setOptions(uiConfigTabPane.getBoxTemplateOption(repository));
+        detailtemField.setOptions(uiConfigTabPane.getBoxTemplateOption());
         queryStatusField.setOptions(getQueryStatus());
         queryStatusField.setValue(NEW_QUERY);
         queryLangField.setOptions(getQueryLang());
@@ -181,11 +181,11 @@ public class UIQueryConfig extends UIForm {
       hasVote = preference.getValue(Utils.CB_VIEW_VOTE, "");
       template = preference.getValue(Utils.CB_TEMPLATE, "");
 
-      templateField.setOptions(getQueryTemplate(repository));
+      templateField.setOptions(getQueryTemplate());
       templateField.setValue(template);
       numbPerPageField.setValue(itemPerPage);
       UIConfigTabPane uiConfigTabPane = getAncestorOfType(UIConfigTabPane.class);
-      detailtemField.setOptions(uiConfigTabPane.getBoxTemplateOption(repository));
+      detailtemField.setOptions(uiConfigTabPane.getBoxTemplateOption());
       detailtemField.setValue(detailTemp);
       allowPublishField.setChecked(isAllowPublish);
       enableTagMapField.setChecked(Boolean.parseBoolean(hasTagMap));
@@ -244,10 +244,10 @@ public class UIQueryConfig extends UIForm {
   }
 
   @SuppressWarnings("unchecked")
-  private List<SelectItemOption<String>> getQueryTemplate(String repository) throws Exception {
+  private List<SelectItemOption<String>> getQueryTemplate() throws Exception {
     List<SelectItemOption<String>> options = new ArrayList<SelectItemOption<String>>();
     List<Node> querylTemplates = getApplicationComponent(ManageViewService.class).
-      getAllTemplates(BasePath.CB_QUERY_TEMPLATES, repository, SessionProviderFactory.createSystemProvider());
+      getAllTemplates(BasePath.CB_QUERY_TEMPLATES, SessionProviderFactory.createSystemProvider());
     for(Node node: querylTemplates){
       options.add(new SelectItemOption<String>(node.getName(),node.getName()));
     }
@@ -284,12 +284,11 @@ public class UIQueryConfig extends UIForm {
   @SuppressWarnings("unchecked")
   private List<SelectItemOption<String>> getQueryStore(String queryType, String queryLanguage) throws Exception {
     List<SelectItemOption<String>> options = new ArrayList<SelectItemOption<String>>();
-    String repository = getUIStringInput(UINewConfigForm.FIELD_REPOSITORY).getValue();
     QueryService qservice = getApplicationComponent(QueryService.class);
     SessionProvider provider = SessionProviderFactory.createSystemProvider();
     String userId = Util.getPortalRequestContext().getRemoteUser();
     if(UIQueryConfig.PERSONAL_QUERY.equals(queryType)) {
-      List<Query> queries = qservice.getQueries(userId, repository,provider);
+      List<Query> queries = qservice.getQueries(userId, provider);
       for(Query queryNode : queries) {
         String path = queryNode.getStoredQueryPath();
         if(queryNode.getLanguage().equals(queryLanguage)) {
@@ -297,7 +296,7 @@ public class UIQueryConfig extends UIForm {
         }
       }
     } else {
-      List<Node> queries = qservice.getSharedQueries(queryLanguage,userId, repository,provider);
+      List<Node> queries = qservice.getSharedQueries(queryLanguage,userId, provider);
       for(Node queryNode : queries) {
         options.add(new SelectItemOption<String>(queryNode.getName(), queryNode.getPath()));
       }
@@ -310,10 +309,9 @@ public class UIQueryConfig extends UIForm {
   }
 
   public Session getSession() throws Exception {
-    String repositoryName = getUIStringInput(UINewConfigForm.FIELD_REPOSITORY).getValue();
     String workspace = getUIStringInput(UINewConfigForm.FIELD_WORKSPACE).getValue();
     ManageableRepository repository =
-      getApplicationComponent(RepositoryService.class).getRepository(repositoryName);
+      getApplicationComponent(RepositoryService.class).getCurrentRepository();
     if(SessionProviderFactory.isAnonim()) {
       return SessionProviderFactory.createAnonimProvider().getSession(workspace,repository);
     }

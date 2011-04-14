@@ -207,7 +207,7 @@ public class UITreeTaxonomyBuilder extends UIContainer {
     if (path.length() == 0) path = "/";
     if (buffer.length() == 0) return currentNode;
     NodeFinder nodeFinder_ = getApplicationComponent(NodeFinder.class);
-    return (Node)nodeFinder_.getItem(uiOneTaxonomySelector.getRepositoryName(), uiOneTaxonomySelector.getWorkspaceName(), path);
+    return (Node)nodeFinder_.getItem(uiOneTaxonomySelector.getWorkspaceName(), path);
   }
 
   private void addNodePublish(List<Node> listNode, Node node, PublicationService publicationService) throws Exception {

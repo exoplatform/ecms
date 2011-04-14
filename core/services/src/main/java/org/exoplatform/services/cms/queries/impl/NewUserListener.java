@@ -30,8 +30,9 @@ import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.access.PermissionType;
-import org.exoplatform.services.jcr.config.RepositoryEntry;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.services.organization.User;
 import org.exoplatform.services.organization.UserEventListener;
 
@@ -39,6 +40,8 @@ import org.exoplatform.services.organization.UserEventListener;
  * @author Benjamin Mestrallet benjamin.mestrallet@exoplatform.com
  */
 public class NewUserListener extends UserEventListener {
+  
+  private static Log log = ExoLogger.getLogger(NewUserListener.class);
 
   private static final String[] perms = {PermissionType.READ, PermissionType.ADD_NODE,
     PermissionType.SET_PROPERTY, PermissionType.REMOVE };
@@ -66,18 +69,20 @@ public class NewUserListener extends UserEventListener {
   private void prepareSystemWorkspace(String userName) throws Exception {
     Session session = null;
     //Manage production workspace
-    RepositoryEntry repo = jcrService_.getCurrentRepository().getConfiguration();
     try {
       String defaultWorkspaceName = jcrService_.getDefaultRepository().getConfiguration().getDefaultWorkspaceName() ;
-      session = jcrService_.getRepository(repo.getName()).getSystemSession(defaultWorkspaceName);
+      session = jcrService_.getCurrentRepository().getSystemSession(defaultWorkspaceName);
       Node usersHome = (Node) session.getItem(
           nodeHierarchyCreator_.getJcrPath(BasePath.CMS_USERS_PATH));
       initSystemData(usersHome, userName) ;
       session.save();
       session.logout();
-    } catch (RepositoryException re){
-      session.logout();
-      return;
+    } catch (RepositoryException re) {
+      log.warn(re.getMessage(), re);
+    } finally {
+      if (session != null) {
+        session.logout();
+      }
     }
   }
 

@@ -53,7 +53,7 @@ public class NewsletterTemplateHandler {
   private String workspace;
 
   /** The templates. */
-  private List<Node> templates;
+  private List<Node> templates = null;
 
   /**
    * Instantiates a new newsletter template handler.
@@ -82,7 +82,7 @@ public class NewsletterTemplateHandler {
     log.info("Trying to get templates of category " + categoryConfig);
     try {
       List<Node> templates = new ArrayList<Node>();
-      ManageableRepository manageableRepository = repositoryService.getRepository(repository);
+      ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
       Session session = sessionProvider.getSession(workspace, manageableRepository);
 
       Node defaultTemplateFolder = (Node)session.getItem(NewsletterConstant.generateDefaultTemplatePath(portalName));
@@ -116,14 +116,14 @@ public class NewsletterTemplateHandler {
    *
    * @return the template
    */
-  public Node getTemplate(
-                          SessionProvider sessionProvider,
+  public Node getTemplate(SessionProvider sessionProvider,
                           String portalName,
                           NewsletterCategoryConfig categoryConfig,
                           String templateName) {
     log.info("Trying to get template " + templateName);
     try {
-      if (templates == null) templates = getTemplates(sessionProvider, portalName, categoryConfig);
+      if (templates == null || templates.size() == 0)
+        templates = getTemplates(sessionProvider, portalName, categoryConfig);
       if (templateName == null && templates.size() > 0) return templates.get(0);
       for (Node template : templates) {
         if (templateName.equals(template.getName())) {
@@ -153,7 +153,7 @@ public class NewsletterTemplateHandler {
                                 String categoryName) throws Exception {
     log.info("Trying to convert node " + webcontentPath + " to template at category " + categoryName);
     try {
-      ManageableRepository manageableRepository = repositoryService.getRepository(repository);
+      ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
       Session session = sessionProvider.getSession(workspace, manageableRepository);
       Node categoryTemplateFolder = (Node) session.getItem(NewsletterConstant.generateCategoryTemplateBasePath(portalName,
                                                                                                                categoryName));

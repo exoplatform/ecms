@@ -25,7 +25,6 @@ import javax.jcr.NodeIterator;
 import javax.jcr.PathNotFoundException;
 import javax.jcr.ReferentialIntegrityException;
 
-import org.exoplatform.services.log.Log;
 import org.exoplatform.commons.utils.ObjectPageList;
 import org.exoplatform.ecm.jcr.model.ClipboardCommand;
 import org.exoplatform.ecm.webui.component.admin.taxonomy.action.UIActionForm;
@@ -36,6 +35,7 @@ import org.exoplatform.ecm.webui.component.admin.taxonomy.info.UIPermissionManag
 import org.exoplatform.services.cms.taxonomy.TaxonomyService;
 import org.exoplatform.services.cms.taxonomy.TaxonomyTreeData;
 import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -96,11 +96,6 @@ public class UITaxonomyTreeWorkingArea extends UIContainer {
 
   public void setNodeList(List<Node> nodes) { taxonomyNodes_ = nodes;  }
   public List<Node> getNodeList() {return taxonomyNodes_; }
-
-  private String getRepository() throws Exception {
-    UITaxonomyTreeCreateChild uiManager = getParent();
-    return uiManager.getRepository();
-  }
 
   public boolean isRootNode() throws Exception {
     UITaxonomyTreeCreateChild uiManager = getParent();
@@ -168,8 +163,8 @@ public class UITaxonomyTreeWorkingArea extends UIContainer {
       Node selectedNode = uiTaxonomyTreeCreateChild.getNodeByPath(path);
       try {
         uiTreeWorkingArea.setSelectedPath(selectedNode.getParent().getPath());
-        uiTreeWorkingArea.getApplicationComponent(TaxonomyService.class).removeTaxonomyNode(
-            uiTreeWorkingArea.getRepository(), uiTaxonomyTreeCreateChild.getWorkspace(), path);
+        uiTreeWorkingArea.getApplicationComponent(TaxonomyService.class)
+                         .removeTaxonomyNode(uiTaxonomyTreeCreateChild.getWorkspace(), path);
       } catch (ReferentialIntegrityException ref) {
         Object[] arg = { path };
         uiApp.addMessage(new ApplicationMessage("UITaxonomyWorkingArea.msg.reference-exception",
@@ -246,8 +241,10 @@ public class UITaxonomyTreeWorkingArea extends UIContainer {
       TaxonomyService taxonomyService = uiWorkingArea
           .getApplicationComponent(TaxonomyService.class);
       try {
-        taxonomyService.moveTaxonomyNode(taxoTreeData.getRepository(), taxoTreeData
-            .getTaxoTreeWorkspace(), srcPath, destPath, type);
+        taxonomyService.moveTaxonomyNode(taxoTreeData.getTaxoTreeWorkspace(),
+                                         srcPath,
+                                         destPath,
+                                         type);
         UITaxonomyTreeBrowser uiTaxonomyTreeBrowser = uiTaxonomyTreeCreateChild.getChild(UITaxonomyTreeBrowser.class);
         if ((uiTaxonomyTreeBrowser != null) && (uiTaxonomyTreeBrowser.getSelectedNode() != null))
           uiWorkingArea.setSelectedPath(uiTaxonomyTreeBrowser.getSelectedNode().getPath());

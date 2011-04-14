@@ -25,7 +25,6 @@ import org.exoplatform.services.cms.impl.DMSConfiguration;
 import org.exoplatform.services.jcr.access.PermissionType;
 import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.wcm.core.NodeLocation;
-import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.wcm.webui.Utils;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.application.portlet.PortletRequestContext;
@@ -110,10 +109,9 @@ public abstract class UICLVContainer extends UIContainer {
    * @throws Exception the exception
    */
   public ResourceResolver getTemplateResourceResolver() throws Exception {
-    String repository = WCMCoreUtils.getRepository(null).getConfiguration().getName();
     DMSConfiguration dmsConfiguration = getApplicationComponent(DMSConfiguration.class);
     String workspace = dmsConfiguration.getConfig().getSystemWorkspace();
-    return new JCRResourceResolver(repository, workspace);
+    return new JCRResourceResolver(workspace);
   }
 
   /**

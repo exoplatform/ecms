@@ -68,8 +68,7 @@ public class PostCreateNodeTypeEventListener extends Listener<CmsService, String
     this.taxonomyService = WCMCoreUtils.getService(TaxonomyService.class);
     this.actionServiceContainer = WCMCoreUtils.getService(ActionServiceContainer.class);
     String nodetypeName = event.getData();
-    String repository = WCMCoreUtils.getRepository(null).getConfiguration().getName();
-    List<Node> taxonomyTrees = taxonomyService.getAllTaxonomyTrees(repository);
+    List<Node> taxonomyTrees = taxonomyService.getAllTaxonomyTrees();
     for (Node taxonomyTree : taxonomyTrees) {
       Node action = actionServiceContainer.getAction(taxonomyTree, "taxonomyAction");
       Session session = action.getSession();

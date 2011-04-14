@@ -116,7 +116,7 @@ public class UIViewSearchResult extends UIContainer implements NodePresentation 
       Node childNode = childrenIterator.nextNode();
       String nodeType = childNode.getPrimaryNodeType().getName();
       List<String> listCanCreateNodeType =
-        Utils.getListAllowedFileType(node_, getRepository(), templateService) ;
+        Utils.getListAllowedFileType(node_, templateService) ;
       if(listCanCreateNodeType.contains(nodeType)) {
 
         // Case of childNode has jcr:data property
@@ -238,8 +238,7 @@ public class UIViewSearchResult extends UIContainer implements NodePresentation 
   public void setNode(Node node) { node_ = node ; }
 
   public Node getNodeByUUID(String uuid) throws Exception{
-    String repository = getAncestorOfType(UIJCRExplorer.class).getRepositoryName() ;
-    ManageableRepository manageRepo = getApplicationComponent(RepositoryService.class).getRepository(repository) ;
+    ManageableRepository manageRepo = getApplicationComponent(RepositoryService.class).getCurrentRepository();
     String[] workspaces = manageRepo.getWorkspaceNames() ;
     SessionProvider sessionProvider = SessionProviderFactory.createSessionProvider() ;
     for(String ws : workspaces) {

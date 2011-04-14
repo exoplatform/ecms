@@ -138,12 +138,18 @@ public class UIPresentation extends UIBaseNodePresentation {
    * org.exoplatform.webui.core.UIComponent#getTemplateResourceResolver(org.
    * exoplatform.webui.application.WebuiRequestContext, java.lang.String)
    */
+  @Deprecated
   public ResourceResolver getTemplateResourceResolver(WebuiRequestContext context, String template) {
-    String repository = getRepositoryName();
     DMSConfiguration dmsConfiguration = getApplicationComponent(DMSConfiguration.class);
     String workspace = dmsConfiguration.getConfig().getSystemWorkspace();
-    return new JCRResourceResolver(repository, workspace, "exo:templateFile");
+    return new JCRResourceResolver(workspace);
   }
+  
+  public ResourceResolver getTemplateResourceResolver() {
+    DMSConfiguration dmsConfiguration = getApplicationComponent(DMSConfiguration.class);
+    String workspace = dmsConfiguration.getConfig().getSystemWorkspace();
+    return new JCRResourceResolver(workspace);
+  }  
 
   /* (non-Javadoc)
    * @see org.exoplatform.ecm.webui.presentation.NodePresentation#getNodeType()

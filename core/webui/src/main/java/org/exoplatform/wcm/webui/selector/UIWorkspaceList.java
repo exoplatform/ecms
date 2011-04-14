@@ -127,12 +127,13 @@ public class UIWorkspaceList extends UIForm {
    *
    * @throws Exception the exception
    */
+  @Deprecated
   public void setWorkspaceList(String repository) throws Exception {
     wsList_ = new ArrayList<String>();
     RepositoryService repositoryService = getApplicationComponent(RepositoryService.class);
-    String[] wsNames = repositoryService.getRepository(repository).getWorkspaceNames();
-    String systemWsName =
-      repositoryService.getRepository(repository).getConfiguration().getSystemWorkspaceName();
+    ManageableRepository mrepository= repositoryService.getCurrentRepository();
+    String[] wsNames = mrepository.getWorkspaceNames();
+    String systemWsName = mrepository.getConfiguration().getSystemWorkspaceName();
     List<SelectItemOption<String>> workspace = new ArrayList<SelectItemOption<String>>();
     for(String wsName : wsNames) {
       if(!isShowSystem_) {
@@ -154,6 +155,40 @@ public class UIWorkspaceList extends UIForm {
       }
     }
   }
+  
+  /**
+   * Sets the workspace list.
+   *
+   *
+   * @throws Exception the exception
+   */
+  public void setWorkspaceList() throws Exception {
+    wsList_ = new ArrayList<String>();
+    RepositoryService repositoryService = getApplicationComponent(RepositoryService.class);
+    ManageableRepository mrepository= repositoryService.getCurrentRepository();
+    String[] wsNames = mrepository.getWorkspaceNames();
+    String systemWsName = mrepository.getConfiguration().getSystemWorkspaceName();
+    List<SelectItemOption<String>> workspace = new ArrayList<SelectItemOption<String>>();
+    for(String wsName : wsNames) {
+      if(!isShowSystem_) {
+        if(!wsName.equals(systemWsName)) {
+          workspace.add(new SelectItemOption<String>(wsName,  wsName));
+          wsList_.add(wsName);
+        }
+      } else {
+        workspace.add(new SelectItemOption<String>(wsName,  wsName));
+        wsList_.add(wsName);
+      }
+    }
+    UIFormSelectBox uiWorkspaceList = getUIFormSelectBox(WORKSPACE_NAME);
+    uiWorkspaceList.setOptions(workspace);
+    UIOneNodePathSelector uiBrowser = getParent();
+    if(uiBrowser.getWorkspaceName() != null) {
+      if(wsList_.contains(uiBrowser.getWorkspaceName())) {
+        uiWorkspaceList.setValue(uiBrowser.getWorkspaceName());
+      }
+    }
+  }  
 
   /**
    * Sets the is disable.
@@ -177,10 +212,10 @@ public class UIWorkspaceList extends UIForm {
    * @throws RepositoryException the repository exception
    * @throws RepositoryConfigurationException the repository configuration exception
    */
-  private Node getRootNode(String repositoryName, String workspaceName) throws RepositoryException,
+  private Node getRootNode(String workspaceName) throws RepositoryException,
                                                                        RepositoryConfigurationException {
     RepositoryService repositoryService = getApplicationComponent(RepositoryService.class);
-    ManageableRepository manageableRepository = repositoryService.getRepository(repositoryName);
+    ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
     SessionProvider sessionProvider =  WCMCoreUtils.getSystemSessionProvider();
     Session session = sessionProvider.getSession(workspaceName, manageableRepository);
     return session.getRootNode();
@@ -210,7 +245,7 @@ public class UIWorkspaceList extends UIForm {
       UINodeTreeBuilder uiTreeJCRExplorer = uiJBrowser.getChild(UINodeTreeBuilder.class);
       UIApplication uiApp = uiWorkspaceList.getAncestorOfType(UIApplication.class);
       try {
-        uiTreeJCRExplorer.setRootTreeNode(uiWorkspaceList.getRootNode(uiJBrowser.getRepositoryName(), wsName));
+        uiTreeJCRExplorer.setRootTreeNode(uiWorkspaceList.getRootNode(wsName));
       } catch (AccessDeniedException ade) {
         uiWorkspaceList.getUIFormSelectBox(WORKSPACE_NAME).setValue("collaboration");
         uiApp.addMessage(new ApplicationMessage("UIWorkspaceList.msg.AccessDeniedException", null, ApplicationMessage.WARNING));
@@ -245,7 +280,6 @@ public class UIWorkspaceList extends UIForm {
       UIOneNodePathSelector uiJBrowser = uiWorkspaceList.getParent();
       String returnField = uiJBrowser.getReturnFieldName();
       String workspaceName = uiJBrowser.getWorkspaceName();
-      String repositoryName = uiJBrowser.getRepositoryName();
       RepositoryService repositoryService = uiWorkspaceList.getApplicationComponent(RepositoryService.class);
       ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
       SessionProvider sessionProvider = Utils.getSessionProvider();

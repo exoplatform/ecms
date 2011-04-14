@@ -26,6 +26,44 @@ import java.util.List;
  */
 public interface ManageDriveService {
 
+  
+  /**
+   * Register a new drive to workspace or update if the drive is existing
+   * 
+   * @param name drive name
+   * @param workspace the workspace name where will store the drive
+   * @param permissions specify who can access to this drive
+   * @param homePath specify the location of drive
+   * @param views include all views can see in drive
+   * @param icon the drive icon which can see in drive browser
+   * @param viewReferences the boolean to set default for drive can view
+   *          references node or not
+   * @param viewNonDocument the boolean to set default for drive can view non
+   *          document node or not
+   * @param viewSideBar the boolean to set default for drive can view side bar
+   *          or not
+   * @param showHiddenNode the boolean to set default for drive can see hidden
+   *          node or not
+   * @param repository the string contain repository name
+   * @param allowCreateFolder the string to specify which type of folder can add
+   *          in the drive
+   * @throws Exception
+   */
+  @Deprecated
+  public void addDrive(String name,
+                       String workspace,
+                       String permissions,
+                       String homePath,
+                       String views,
+                       String icon,
+                       boolean viewReferences,
+                       boolean viewNonDocument,
+                       boolean viewSideBar,
+                       boolean showHiddenNode,
+                       String repository,
+                       String allowCreateFolder,
+                       String allowNodeTypesOnTree) throws Exception;
+  
   /**
    * Register a new drive to workspace or update if the drive is existing
    * @param name  drive name
@@ -61,7 +99,17 @@ public interface ManageDriveService {
    * @return  DriveData with specified drive name and repository
    * @throws Exception
    */
+  @Deprecated
   public DriveData getDriveByName(String driveName, String repository) throws Exception;
+  
+  /**
+   * Return an DriveData Object
+   * @param driveName  the string contain the drive name
+   * @see DriveData
+   * @return  DriveData with specified drive name and repository
+   * @throws Exception
+   */
+  public DriveData getDriveByName(String driveName) throws Exception;  
 
   /**
    * Return the list of DriveData
@@ -81,7 +129,16 @@ public interface ManageDriveService {
    * @param repository repository name
    * @throws Exception
    */
+  @Deprecated
   public void removeDrive(String driveName, String repository) throws Exception;
+  
+  /**
+   * Remove drive with specified drive name and repository
+   * @param driveName  drive name
+   * @param repository repository name
+   * @throws Exception
+   */
+  public void removeDrive(String driveName) throws Exception;  
 
   /**
    * This method will look up in all workspaces of repository to find DriveData
@@ -89,7 +146,15 @@ public interface ManageDriveService {
    * @return list of DriveData with specified repository
    * @throws Exception
    */
+  @Deprecated
   public List<DriveData> getAllDrives(String repository) throws Exception;
+  
+  /**
+   * This method will look up in all workspaces of current repository to find DriveData
+   * @return list of DriveData with specified repository
+   * @throws Exception
+   */
+  public List<DriveData> getAllDrives() throws Exception;  
 
   /**
    * This method will check to make sure the view is not in used before remove this view
@@ -98,7 +163,16 @@ public interface ManageDriveService {
    * @return the status of current view is in used or not
    * @throws Exception
    */
+  @Deprecated
   public boolean isUsedView(String viewName, String repository) throws Exception;
+  
+  /**
+   * This method will check to make sure the view is not in used before remove this view
+   * @param viewName view name
+   * @return the status of current view is in used or not
+   * @throws Exception
+   */
+  public boolean isUsedView(String viewName) throws Exception;  
 
   /**
    * Register all drive plugins to repository
@@ -124,8 +198,18 @@ public interface ManageDriveService {
    * @return List<DriveData>
    * @throws Exception
    */
+  @Deprecated
   public List<DriveData> getDriveByUserRoles(String repository, String userId,
       List<String> roles) throws Exception;
+  
+  /**
+   * Get all drives by user roles
+   * @param userId User name
+   * @param roles Roles of user
+   * @return List<DriveData>
+   * @throws Exception
+   */
+  public List<DriveData> getDriveByUserRoles(String userId, List<String> roles) throws Exception;
 
   /**
    * Get all main drives
@@ -135,8 +219,17 @@ public interface ManageDriveService {
    * @return List<DriveData>
    * @throws Exception
    */
-  public List<DriveData> getMainDrives(String repository, String userId,
-      List<String> userRoles) throws Exception;
+  @Deprecated
+  public List<DriveData> getMainDrives(String repository, String userId, List<String> userRoles) throws Exception;
+  
+  /**
+   * Get all main drives
+   * @param userId Name of user
+   * @param userRoles Roles of user
+   * @return List<DriveData>
+   * @throws Exception
+   */
+  public List<DriveData> getMainDrives(String userId, List<String> userRoles) throws Exception;
 
   /**
    * Get all personal drives
@@ -146,8 +239,17 @@ public interface ManageDriveService {
    * @return List<DriveData>
    * @throws Exception
    */
-  public List<DriveData> getPersonalDrives(String repository, String userId,
-      List<String> userRoles) throws Exception;
+  @Deprecated
+  public List<DriveData> getPersonalDrives(String repository, String userId, List<String> userRoles) throws Exception;
+  
+  /**
+   * Get all personal drives
+   * @param userId Name of user
+   * @param userRoles Roles of user
+   * @return List<DriveData>
+   * @throws Exception
+   */
+  public List<DriveData> getPersonalDrives(String userId, List<String> userRoles) throws Exception;  
 
   /**
    * Get all group drives
@@ -158,6 +260,19 @@ public interface ManageDriveService {
    * @return List<DriveData>
    * @throws Exception
    */
-  public List<DriveData> getGroupDrives(String repository, String userId, List<String> userRoles,
-      List<String> groups) throws Exception;
+  @Deprecated
+  public List<DriveData> getGroupDrives(String repository,
+                                        String userId,
+                                        List<String> userRoles,
+                                        List<String> groups) throws Exception;
+  
+  /**
+   * Get all group drives
+   * @param userId Name of user
+   * @param userRoles Roles of user
+   * @param groups Groups of user
+   * @return List<DriveData>
+   * @throws Exception
+   */
+  public List<DriveData> getGroupDrives(String userId, List<String> userRoles, List<String> groups) throws Exception;
 }

@@ -201,11 +201,7 @@ public class UINodeTypeForm extends UIFormTabPane {
       return id ;
     }
   }
-  private String getRepository() {
-    PortletRequestContext pcontext = (PortletRequestContext)WebuiRequestContext.getCurrentInstance() ;
-    PortletPreferences portletPref = pcontext.getRequest().getPreferences() ;
-    return portletPref.getValue(Utils.REPOSITORY, "") ;
-  }
+
   public List<SelectItemOption<String>> getNamespaces() throws Exception {
     if (namespacesOptions_.size() == 0) {
       String[] namespaces = getApplicationComponent(RepositoryService.class)
@@ -635,7 +631,6 @@ public class UINodeTypeForm extends UIFormTabPane {
   static public class SaveDraftActionListener extends EventListener<UINodeTypeForm> {
     public void execute(Event<UINodeTypeForm> event) throws Exception {
       UINodeTypeForm uiForm = event.getSource() ;
-      String repository = uiForm.getRepository() ;
       UIApplication uiApp = uiForm.getAncestorOfType(UIApplication.class) ;
       ManageableRepository mRepository =
         uiForm.getApplicationComponent(RepositoryService.class).getCurrentRepository() ;

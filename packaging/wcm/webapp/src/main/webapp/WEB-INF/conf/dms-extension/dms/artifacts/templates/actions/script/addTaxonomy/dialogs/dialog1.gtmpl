@@ -1,5 +1,8 @@
 <%
-	def repository = uicomponent.getRepositoryName();
+  import org.exoplatform.services.jcr.RepositoryService;
+  
+  RepositoryService rService = uicomponent.getApplicationComponent(RepositoryService.class);
+  def repository = rService.getCurrentRepository().getConfiguration().getName();  
 	String[] repositoryField = ["jcrPath=/node/exo:repository", "visible=false", repository] ;
 	uicomponent.addHiddenField("repository", repositoryField) ;
 %>

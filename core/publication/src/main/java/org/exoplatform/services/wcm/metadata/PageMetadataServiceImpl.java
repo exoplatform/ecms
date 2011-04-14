@@ -201,7 +201,7 @@ public class PageMetadataServiceImpl implements PageMetadataService {
       return builder.toString();
     }
 
-    for(Node tag: folksonomyService.getLinkedTagsOfDocument(node,repository, nodeLocation.getWorkspace())) {
+    for(Node tag: folksonomyService.getLinkedTagsOfDocument(node, nodeLocation.getWorkspace())) {
       builder.append(tag.getName()).append(",");
     }
     builder.append(title.replaceAll(" ",","));

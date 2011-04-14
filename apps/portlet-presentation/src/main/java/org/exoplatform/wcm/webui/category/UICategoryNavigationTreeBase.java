@@ -164,12 +164,9 @@ public class UICategoryNavigationTreeBase extends UITree {
    * exoplatform.webui.application.WebuiRequestContext, java.lang.String)
    */
   public ResourceResolver getTemplateResourceResolver(WebuiRequestContext context, String template) {
-    String repository = UICategoryNavigationUtils.getPortletPreferences()
-                                                 .getValue(UICategoryNavigationConstant.PREFERENCE_REPOSITORY,
-                                                           null);
     DMSConfiguration dmsConfiguration = getApplicationComponent(DMSConfiguration.class);
     String workspace = dmsConfiguration.getConfig().getSystemWorkspace();
-    return new JCRResourceResolver(repository, workspace);
+    return new JCRResourceResolver(workspace);
   }
 
   /* (non-Javadoc)
@@ -343,9 +340,8 @@ public class UICategoryNavigationTreeBase extends UITree {
   private Node getCategoryNode(String categoryPath) throws Exception {
   TaxonomyService taxonomyService = getApplicationComponent(TaxonomyService.class);
   PortletPreferences portletPreferences = UICategoryNavigationUtils.getPortletPreferences();
-  String preferenceRepository = portletPreferences.getValue(UICategoryNavigationConstant.PREFERENCE_REPOSITORY, "");
   String preferenceTreeName = portletPreferences.getValue(UICategoryNavigationConstant.PREFERENCE_TREE_NAME, "");
-  Node treeNode = taxonomyService.getTaxonomyTree(preferenceRepository, preferenceTreeName);
+  Node treeNode = taxonomyService.getTaxonomyTree(preferenceTreeName);
   Node categoryNode = null;
   if ("".equals(categoryPath)) categoryNode = treeNode;
   else categoryNode = treeNode.getNode(categoryPath);

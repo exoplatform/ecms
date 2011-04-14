@@ -158,10 +158,9 @@ public class UICBSearchForm extends UIForm {
     }
     Session session = null;
     UIBrowseContainer uiContainer = getAncestorOfType(UIBrowseContainer.class);
-    String repository = uiContainer.getRepository();
     QueryManager queryManager = null;
     if(workspaceName != null) {
-      session = uiContainer.getSession(repository, workspaceName);
+      session = uiContainer.getSession(workspaceName);
     } else {
       session = currentNode.getSession();
     }

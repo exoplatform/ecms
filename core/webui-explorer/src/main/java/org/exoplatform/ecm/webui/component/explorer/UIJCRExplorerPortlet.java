@@ -255,23 +255,47 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
     return pcontext.getRequest().getPreferences();
   }
 
+  @Deprecated
   public DriveData getUserDrive(String repoName, String userType) throws Exception {
     ManageDriveService manageDriveService = getApplicationComponent(ManageDriveService.class);
     List<String> userRoles = Utils.getMemberships();
     String userId = Util.getPortalRequestContext().getRemoteUser();
-    for(DriveData userDrive : manageDriveService.getPersonalDrives(repoName, userId, userRoles)) {
+    for(DriveData userDrive : manageDriveService.getPersonalDrives(userId, userRoles)) {
       if(userDrive.getName().equalsIgnoreCase(userType)) {
         return userDrive;
       }
     }
     return null;
   }
+  
+  public DriveData getUserDrive(String userType) throws Exception {
+    ManageDriveService manageDriveService = getApplicationComponent(ManageDriveService.class);
+    List<String> userRoles = Utils.getMemberships();
+    String userId = Util.getPortalRequestContext().getRemoteUser();
+    for(DriveData userDrive : manageDriveService.getPersonalDrives(userId, userRoles)) {
+      if(userDrive.getName().equalsIgnoreCase(userType)) {
+        return userDrive;
+      }
+    }
+    return null;
+  }  
 
+  @Deprecated
   public boolean canUseConfigDrive(String repoName, String driveName) throws Exception {
     ManageDriveService dservice = getApplicationComponent(ManageDriveService.class);
     String userId = Util.getPortalRequestContext().getRemoteUser();
     List<String> userRoles = Utils.getMemberships();
-    for(DriveData drive : dservice.getDriveByUserRoles(repoName, userId, userRoles)) {
+    for(DriveData drive : dservice.getDriveByUserRoles(userId, userRoles)) {
+      if(drive.getName().equals(driveName)) return true;
+    }
+    return false;
+  }
+  
+  public boolean canUseConfigDrive(String driveName) throws Exception {
+    ManageDriveService dservice = getApplicationComponent(ManageDriveService.class);
+    String userId = Util.getPortalRequestContext().getRemoteUser();
+    List<String> userRoles = Utils.getMemberships();
+    for(DriveData drive : dservice.getDriveByUserRoles(userId, userRoles)) {
       if(drive.getName().equals(driveName)) return true;
     }
     return false;
@@ -348,7 +372,7 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
     ManageDriveService manageDrive = getApplicationComponent(ManageDriveService.class);
     DriveData driveData = null;
     try {
-      driveData = manageDrive.getDriveByName(driveName, repositoryName);
+      driveData = manageDrive.getDriveByName(driveName);
       if (driveData == null) throw new PathNotFoundException();
     } catch (PathNotFoundException e) {
       Object[] args = { driveName };
@@ -365,7 +389,7 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
         if (!viewList.contains(viewName.trim())) {
           Node viewNode =
             getApplicationComponent(ManageViewService.class).getViewByName(viewName.trim(),
-                repositoryName, SessionProviderFactory.createSystemProvider());
+                SessionProviderFactory.createSystemProvider());
           String permiss = viewNode.getProperty("exo:accessPermissions").getString();
           if (permiss.contains("${userId}")) permiss = permiss.replace("${userId}", userId);
           String[] viewPermissions = permiss.split(",");
@@ -401,7 +425,7 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
     uiExplorer.setIsReferenceNode(false);
 
     SessionProvider provider = SessionProviderFactory.createSessionProvider();
-    ManageableRepository repository = rservice.getRepository(repositoryName);
+    ManageableRepository repository = rservice.getCurrentRepository();
     try {
       Session session = provider.getSession(driveData.getWorkspace(),repository);
       // check if it exists

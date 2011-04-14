@@ -77,7 +77,7 @@ public class ManageCategoriesActionComponent extends UIComponent {
       UIOneTaxonomySelector uiOneTaxonomySelector = uiManager.getChild(UIOneTaxonomySelector.class);
       TaxonomyService taxonomyService = uiActionBar.getApplicationComponent(TaxonomyService.class);
       UIApplication uiApp = uiActionBar.getAncestorOfType(UIApplication.class);
-      List<Node> lstNode = taxonomyService.getAllTaxonomyTrees(repository);
+      List<Node> lstNode = taxonomyService.getAllTaxonomyTrees();
       if (lstNode != null && lstNode.size() > 0) {
         uiOneTaxonomySelector.setRootTaxonomyName(lstNode.get(0).getName());
         workspaceName = lstNode.get(0).getSession().getWorkspace().getName();

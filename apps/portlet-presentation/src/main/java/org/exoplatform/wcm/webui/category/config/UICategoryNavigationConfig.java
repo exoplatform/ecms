@@ -31,7 +31,6 @@ import org.exoplatform.services.cms.taxonomy.TaxonomyService;
 import org.exoplatform.services.cms.views.ApplicationTemplateManagerService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.config.RepositoryEntry;
-import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.wcm.portal.LivePortalManagerService;
 import org.exoplatform.wcm.webui.Utils;
 import org.exoplatform.wcm.webui.category.UICategoryNavigationConstant;
@@ -100,7 +99,7 @@ public class UICategoryNavigationConfig extends UIForm implements UISelectable {
                                          preferenceTreeTitle));
 
     String preferenceTreeName = preferences.getValue(UICategoryNavigationConstant.PREFERENCE_TREE_NAME, "");
-    List<SelectItemOption<String>> trees = getTaxonomyTrees(preferenceRepository);
+    List<SelectItemOption<String>> trees = getTaxonomyTrees();
     UIFormSelectBox treeNameFormSelectBox = new UIFormSelectBox(UICategoryNavigationConstant.TREE_NAME_FORM_SELECTBOX,
                                                                 UICategoryNavigationConstant.TREE_NAME_FORM_SELECTBOX,
                                                                 trees);
@@ -163,12 +162,8 @@ public class UICategoryNavigationConfig extends UIForm implements UISelectable {
    */
   private List<SelectItemOption<String>> getTemplateList(String portletName, String templateCategory) throws Exception {
     List<SelectItemOption<String>> templates = new ArrayList<SelectItemOption<String>>();
-    RepositoryService repositoryService = getApplicationComponent(RepositoryService.class);
-    ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
     ApplicationTemplateManagerService appTemplateMngService = getApplicationComponent(ApplicationTemplateManagerService.class);
-    String repository = manageableRepository.getConfiguration().getName();
-    List<Node> templateNodes = appTemplateMngService.getTemplatesByCategory(repository,
-                                                                            portletName,
+    List<Node> templateNodes = appTemplateMngService.getTemplatesByCategory(portletName,
                                                                             templateCategory,
                                                                             Utils.getSessionProvider());
     for (Node templateNode : templateNodes) {
@@ -188,10 +183,10 @@ public class UICategoryNavigationConfig extends UIForm implements UISelectable {
    *
    * @throws Exception the exception
    */
-  private List<SelectItemOption<String>> getTaxonomyTrees(String repository) throws Exception {
+  private List<SelectItemOption<String>> getTaxonomyTrees() throws Exception {
     TaxonomyService taxonomyService = getApplicationComponent(TaxonomyService.class);
     LivePortalManagerService livePortalManagerService = getApplicationComponent(LivePortalManagerService.class);
-    List<Node> taxonomyNodes = taxonomyService.getAllTaxonomyTrees(repository);
+    List<Node> taxonomyNodes = taxonomyService.getAllTaxonomyTrees();
     List<SelectItemOption<String>> taxonomyTrees = new ArrayList<SelectItemOption<String>>();
     for(Node taxonomyNode : taxonomyNodes) {
       Node portalNode = livePortalManagerService.getLivePortalByChild(taxonomyNode);

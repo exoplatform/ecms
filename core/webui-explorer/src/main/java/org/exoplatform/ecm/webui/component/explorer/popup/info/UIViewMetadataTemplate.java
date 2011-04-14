@@ -60,9 +60,8 @@ public class UIViewMetadataTemplate extends UIContainer {
 
   public String getViewTemplatePath() {
     MetadataService metadataService = getApplicationComponent(MetadataService.class) ;
-    String repository = getAncestorOfType(UIJCRExplorer.class).getRepositoryName() ;
     try {
-      return metadataService.getMetadataPath(documentType_, false, repository) ;
+      return metadataService.getMetadataPath(documentType_, false) ;
     } catch (Exception e) {
       LOG.error("Unexpected error", e);
     }

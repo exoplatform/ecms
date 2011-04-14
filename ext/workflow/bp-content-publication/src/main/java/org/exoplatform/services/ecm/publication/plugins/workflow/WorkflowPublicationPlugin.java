@@ -225,7 +225,7 @@ public class WorkflowPublicationPlugin extends PublicationPlugin {
         }
 
         Session jcrSession = null;
-        jcrSession = repositoryService.getRepository(repositoryName).getSystemSession(workspaceName);
+        jcrSession = repositoryService.getCurrentRepository().getSystemSession(workspaceName);
         String userId = node.getSession().getUserID();
         Property rolesProp = node.getProperty(WorkflowPublicationPlugin.VALIDATOR);
         Value roles = rolesProp.getValue();

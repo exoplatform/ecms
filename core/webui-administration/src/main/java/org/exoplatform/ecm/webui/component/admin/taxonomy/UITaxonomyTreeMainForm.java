@@ -20,7 +20,6 @@ package org.exoplatform.ecm.webui.component.admin.taxonomy;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.exoplatform.ecm.webui.component.admin.UIECMAdminPortlet;
 import org.exoplatform.ecm.webui.component.admin.taxonomy.tree.info.UIPermissionTreeManager;
 import org.exoplatform.ecm.webui.form.UIFormInputSetWithAction;
 import org.exoplatform.ecm.webui.utils.Utils;
@@ -36,8 +35,8 @@ import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.core.model.SelectItemOption;
 import org.exoplatform.webui.event.Event;
-import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.event.Event.Phase;
+import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.form.UIForm;
 import org.exoplatform.webui.form.UIFormInputBase;
 import org.exoplatform.webui.form.UIFormSelectBox;
@@ -85,12 +84,11 @@ public class UITaxonomyTreeMainForm extends UIForm {
   }
 
   public void update(TaxonomyTreeData taxonomyTree) throws Exception {
-    String repository = getRepository();
     String[] wsNames = getApplicationComponent(RepositoryService.class)
                       .getCurrentRepository().getWorkspaceNames();
     List<SelectItemOption<String>> workspace = new ArrayList<SelectItemOption<String>>();
-    String systemWorkspace = getAncestorOfType(UITaxonomyManagerTrees.class).getSystemWorkspaceName(repository);
-    String dmsSystemWorkspace = getAncestorOfType(UITaxonomyManagerTrees.class).getDmsSystemWorkspaceName(repository);
+    String systemWorkspace = getAncestorOfType(UITaxonomyManagerTrees.class).getSystemWorkspaceName();
+    String dmsSystemWorkspace = getAncestorOfType(UITaxonomyManagerTrees.class).getDmsSystemWorkspaceName();
 
     for(String wsName : wsNames) {
       if (!systemWorkspace.equals(wsName))
@@ -118,10 +116,6 @@ public class UITaxonomyTreeMainForm extends UIForm {
     }
   }
 
-  private String getRepository(){
-    return getAncestorOfType(UIECMAdminPortlet.class).getPreferenceRepository();
-  }
-
   int checkForm() throws Exception {
     UIFormStringInput input = getChildById(UITaxonomyTreeMainForm.FIELD_WORKSPACE);
     if (input == null || input.getValue() == null || input.getValue().length() == 0) {
@@ -133,7 +127,7 @@ public class UITaxonomyTreeMainForm extends UIForm {
     if (inputHomePath != null && inputHomePath.getValue() != null) {
       homePath = inputHomePath.getValue().toString();
     }
-    String dmsSysWorkspace = getAncestorOfType(UITaxonomyManagerTrees.class).getDmsSystemWorkspaceName(getRepository());
+    String dmsSysWorkspace = getAncestorOfType(UITaxonomyManagerTrees.class).getDmsSystemWorkspaceName();
     String workspace = selectBox.getValue();
     if (homePath.length() == 0) {
       if (!dmsSysWorkspace.equals(workspace)) {
@@ -165,7 +159,7 @@ public class UITaxonomyTreeMainForm extends UIForm {
       taxonomyTreeData.setTaxoTreeHomePath("");
       taxonomyTreeData.setTaxoTreeWorkspace(selectBox.getValue());
 
-      String dmsSysWorkspace = uiTaxonomyManagerTrees.getDmsSystemWorkspaceName(uiTaxonomyTreeMainForm.getRepository());
+      String dmsSysWorkspace = uiTaxonomyManagerTrees.getDmsSystemWorkspaceName();
       UIFormInputSetWithAction uiActionHomePath = uiTaxonomyTreeMainForm.getChildById("TaxonomyTreeHomePath");
       uiActionHomePath.removeChildById(FIELD_HOMEPATH);
       if (!selectBox.getValue().equals(dmsSysWorkspace)) {

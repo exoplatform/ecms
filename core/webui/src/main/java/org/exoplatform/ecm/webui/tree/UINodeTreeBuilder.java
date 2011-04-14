@@ -204,7 +204,7 @@ public class UINodeTreeBuilder extends UIContainer {
     if (path.length() == 0) path = "/";
     if (buffer.length() == 0) return currentNode;
     NodeFinder nodeFinder_ = getApplicationComponent(NodeFinder.class);
-    return (Node)nodeFinder_.getItem(uiOneNodePathSelector.getRepositoryName(), uiOneNodePathSelector.getWorkspaceName(), path);
+    return (Node)nodeFinder_.getItem(uiOneNodePathSelector.getWorkspaceName(), path);
   }
 
   private void addNodePublish(List<Node> listNode, Node node, PublicationService publicationService) throws Exception {

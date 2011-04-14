@@ -96,19 +96,33 @@ public class DocumentTypeServiceImpl implements DocumentTypeService {
     return supportedType;
   }
 
+  @Deprecated
   public List<Node> getAllDocumentsByDocumentType(String documentType,
                                                   String workspace,
                                                   String repository,
                                                   SessionProvider sessionProvider) throws Exception {
     return getAllDocumentsByType(workspace, repository, sessionProvider, getMimeTypes(documentType));
   }
+  
+  public List<Node> getAllDocumentsByDocumentType(String documentType,
+                                                  String workspace,
+                                                  SessionProvider sessionProvider) throws Exception {
+    return getAllDocumentsByType(workspace, sessionProvider, getMimeTypes(documentType));
+  }
 
+  @Deprecated
   public List<Node> getAllDocumentsByType(String workspace,
                                           String repository,
                                           SessionProvider sessionProvider,
                                           String mimeType) throws Exception {
     return getAllDocumentsByType(workspace, repository, sessionProvider, new String[] { mimeType });
   }
+  
+  public List<Node> getAllDocumentsByType(String workspace,
+                                          SessionProvider sessionProvider,
+                                          String mimeType) throws Exception {
+    return getAllDocumentsByType(workspace, sessionProvider, new String[] { mimeType });
+  }  
 
   /*
    * (non-Javadoc)
@@ -149,11 +163,18 @@ public class DocumentTypeServiceImpl implements DocumentTypeService {
     return resultList;
   }
 
+  @Deprecated
   public List<Node> getAllDocumentsByType(String workspace,
                                           String repository,
                                           SessionProvider sessionProvider,
                                           String[] mimeTypes) throws Exception {
     return getAllDocumentsByUser(workspace, repository, sessionProvider, mimeTypes, null);
+  }
+  
+  public List<Node> getAllDocumentsByType(String workspace,
+                                          SessionProvider sessionProvider,
+                                          String[] mimeTypes) throws Exception {
+    return getAllDocumentsByUser(workspace, sessionProvider, mimeTypes, null);
   }
 
   public String[] getMimeTypes(String documentType) {

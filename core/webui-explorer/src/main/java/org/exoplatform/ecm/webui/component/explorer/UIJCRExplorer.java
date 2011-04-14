@@ -396,7 +396,7 @@ public class UIJCRExplorer extends UIContainer {
       DMSRepositoryConfiguration dmsRepoConfig =
         dmsConfiguration.getConfig();
       String workspace =  dmsRepoConfig.getSystemWorkspace();
-      jcrTemplateResourceResolver_ = new JCRResourceResolver(currentDriveRepositoryName_, workspace, "exo:templateFile") ;
+      jcrTemplateResourceResolver_ = new JCRResourceResolver(workspace) ;
     } catch(Exception e) {
       LOG.error("Cannot instantiate the JCRResourceResolver", e);
     }
@@ -464,8 +464,9 @@ public class UIJCRExplorer extends UIContainer {
 
   public boolean isSystemWorkspace() throws Exception {
     RepositoryService repositoryService = getApplicationComponent(RepositoryService.class) ;
-    String systemWS =
-      repositoryService.getRepository(getRepositoryName()).getConfiguration().getSystemWorkspaceName() ;
+    String systemWS = repositoryService.getCurrentRepository()
+                                       .getConfiguration()
+                                       .getSystemWorkspaceName();
     if(getCurrentWorkspace().equals(systemWS)) return true ;
     return false ;
   }
@@ -822,7 +823,7 @@ public class UIJCRExplorer extends UIContainer {
       return childrenList ;
     }
     if(isReferenceableNode(getCurrentNode()) && isReferences) {
-      ManageableRepository manageableRepository = repositoryService.getRepository(getRepositoryName()) ;
+      ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
       SessionProvider sessionProvider = SessionProviderFactory.createSystemProvider();
       for(String workspace:manageableRepository.getWorkspaceNames()) {
         Session session = sessionProvider.getSession(workspace,manageableRepository) ;
@@ -970,12 +971,12 @@ public class UIJCRExplorer extends UIContainer {
     SessionProvider sessionProvider = (ctx.getRemoteUser() == null) ?
                                       SessionProviderFactory.createAnonimProvider() :
                                       SessionProviderFactory.createSessionProvider();
-    for(Node node : newFolksonomyService.getAllDocumentsByTag(tagPath_, getRepositoryName(),
-                                                              getRepository().getConfiguration().getDefaultWorkspaceName(),
-                                                              sessionProvider)) {
-      if(documentsType.contains(node.getPrimaryNodeType().getName()) &&
-         PermissionUtil.canRead(node)) {
-        documentsOnTag.add(node) ;
+    for (Node node : newFolksonomyService.getAllDocumentsByTag(tagPath_,
+                                                               getRepository().getConfiguration().getDefaultWorkspaceName(),
+                                                               sessionProvider)) {
+      if (documentsType.contains(node.getPrimaryNodeType().getName())
+          && PermissionUtil.canRead(node)) {
+        documentsOnTag.add(node);
       }
     }
     return documentsOnTag ;

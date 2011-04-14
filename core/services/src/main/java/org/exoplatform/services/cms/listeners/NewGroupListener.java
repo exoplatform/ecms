@@ -67,25 +67,23 @@ public class NewGroupListener extends GroupEventListener
 
    public void preSave(Group group, boolean isNew) throws Exception
    {
-     RepositoryEntry repo = jcrService_.getCurrentRepository().getConfiguration();
-     buildGroupStructure(repo.getName(), group.getId());
+     buildGroupStructure(group.getId());
    }
 
    public void preDelete(Group group) throws Exception
    {
      try
      {
-       RepositoryEntry repo = jcrService_.getCurrentRepository().getConfiguration();
-        removeGroup(repo.getName(), group.getId());
+        removeGroup(group.getId());
      }
      catch (Exception e)
      {
      }
    }
 
-   private void removeGroup(String repoName, String groupId) throws Exception
+   private void removeGroup(String groupId) throws Exception
    {
-      ManageableRepository manageableRepository = jcrService_.getRepository(repoName);
+      ManageableRepository manageableRepository = jcrService_.getCurrentRepository();
       String systemWorkspace = manageableRepository.getConfiguration().getDefaultWorkspaceName();
       Session session = manageableRepository.getSystemSession(systemWorkspace);
       Node groupNode = (Node)session.getItem(groupsPath_ + groupId);
@@ -95,9 +93,9 @@ public class NewGroupListener extends GroupEventListener
    }
 
    @SuppressWarnings("unchecked")
-   private void buildGroupStructure(String repository, String groupId) throws Exception
+   private void buildGroupStructure(String groupId) throws Exception
    {
-      ManageableRepository manageableRepository = jcrService_.getRepository(repository);
+      ManageableRepository manageableRepository = jcrService_.getCurrentRepository();
       String systemWorkspace = manageableRepository.getConfiguration().getDefaultWorkspaceName();
       Session session = manageableRepository.getSystemSession(systemWorkspace);
       Node groupsHome = (Node)session.getItem(groupsPath_);
