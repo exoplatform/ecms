@@ -24,36 +24,43 @@
 <div $resizeBlock id="$uicomponent.id">
 	<div class="WorkSample">
 		<div class="SampleBG">
-				<label class="text"><%=_ctx.appRes("Sample.view.label.node-name")%> </label>
-				<span class="text"><%=originalNode.getName()%></span>
+		  <table><tr>
+				<td class="text"><%=_ctx.appRes("Sample.view.label.node-name")%> </td>
+				<td class="TextDetail"><%=originalNode.getName()%></td>
+			</tr></table>
 		</div>
 		<div class="SampleBG">
-			<label class="text"><%=_ctx.appRes("Sample.view.label.title")%> </label>
-			<span class="text">
-				<%if(node.hasProperty("exo:title")) {%>
-					<%=node.getProperty("exo:title").getString()%>
-				<%}%>
-			</span>
+		  <table><tr>
+  			<td class="text"><%=_ctx.appRes("Sample.view.label.title")%></td>
+  			<td class="TextDetail">  
+          <% 
+            print uicomponent.getInlineEditingField("", "TEXT", "exo:title", "TdGtmplTitle", "TdGtmplTitle", node, true); 
+          %>
+  			</td>
+			</tr></table>
 		</div>
 		<div class="SampleBG">
-			<label class="text"><%=_ctx.appRes("Sample.view.label.date")%> </label>
-			<span class="text">
-				<%if(node.hasProperty("exo:date")) {
-				  dateFormat.applyPattern("MMMMM dd yyyy") ;						
-				%>
-					<%=dateFormat.format(node.getProperty("exo:date").getDate().getTime())%>
-				<%}%>
-			</span>
+		  <table><tr>
+  			<td class="text"><%=_ctx.appRes("Sample.view.label.date")%> </td>
+  			<td class="TextDetail">
+  				<%if(node.hasProperty("exo:date")) {
+  				  dateFormat.applyPattern("MMMMM dd yyyy") ;						
+  				%>
+  					<%=dateFormat.format(node.getProperty("exo:date").getDate().getTime())%>
+  				<%}%>
+  			</td>
+  		</tr></table>
 		</div>
 		<div class="SampleBG">
-			<label class="text"><%=_ctx.appRes("Sample.view.label.date-time")%> </label>
-			<span class="text">
-				<%if(node.hasProperty("exo:datetime")) {
-					 dateFormat.applyPattern("MMMMM dd yyyy hh:mm:ss") ;		
-				%>
-					<%=dateFormat.format(node.getProperty("exo:datetime").getDate().getTime())%>
-				<%}%>	
-			</span>
+		  <table><tr>
+  			<td class="text"><%=_ctx.appRes("Sample.view.label.date-time")%> </td>
+  			<td class="TextDetail">
+  				<%if(node.hasProperty("exo:datetime")) {
+  					 dateFormat.applyPattern("MMMMM dd yyyy hh:mm:ss") ;
+  					 print dateFormat.format(node.getProperty("exo:datetime").getDate().getTime());
+  				}%>	
+  			</td>
+  		</tr></table>
 		</div>
 		<div style="overflow: hidden">
 			<div class="LableLeftDescription" >
@@ -61,9 +68,9 @@
 					<label class="text" style="padding-left: 5px"><%=_ctx.appRes("Sample.view.label.description")%></label>
 				</div>
 				<div class="summary" >
-					<%if(node.hasProperty("exo:description")) {%>
-						<%=node.getProperty("exo:description").getString()%>
-					<%}%>
+				  <%			  
+            print uicomponent.getInlineEditingField("", "TEXTAREA", "exo:description", "Description", "Content", node, true);
+          %>
 				</div>
 			</div>
 			<% if(node.hasNode("exo:image")) {
@@ -86,9 +93,9 @@
 					<label class="text" style="padding-left: 5px"><%=_ctx.appRes("Sample.view.label.summary")%></label>
 				</div>
 				<div class="summary" >
-					<%if(node.hasProperty("exo:summary")) {%>
-						<%=node.getProperty("exo:summary").getString()%>
-					<%}%>
+			   <%
+            print uicomponent.getInlineEditingField("", "TEXTAREA", "exo:summary", "Summary", "Content",node, true);
+         %>
 				</div>
 			</div>
 			<div class="LableRightDescription">
@@ -96,9 +103,9 @@
 					<label class="text" style="padding: 5px;"><%=_ctx.appRes("Sample.view.label.content")%></label>
 				</div>
 				<div class="content">
-					<%if(node.hasProperty("exo:content")) {%>
-						<%=node.getProperty("exo:content").getString()%>
-					<%}%>
+			   <%          
+            print uicomponent.getInlineEditingField("", "TEXTAREA", "exo:content", "Content", "Content", node, true);
+         %>
 				</div>
 			</div>
 		</div>
@@ -178,3 +185,4 @@
 	<div><% _ctx.include(uicomponent.getViewTemplate("mix:votable", "view1")); %></div>
   <div><% _ctx.include(uicomponent.getViewTemplate("exo:comments", "view1")); %></div>
 </div>
+wqewqe

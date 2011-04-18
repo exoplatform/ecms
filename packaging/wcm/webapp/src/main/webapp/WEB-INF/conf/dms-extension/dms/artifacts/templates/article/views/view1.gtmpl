@@ -28,7 +28,9 @@
 			<div class="ArticleTLDecorator">
 				<div class="ArticleTRDecorator">
 					<div class="ArticleTCDecorator">
-		        <div class="TitleLabel"><%=node.getProperty("exo:title").getString()%></div>
+		        <div class="TitleLabel">
+		          <% print uicomponent.getInlineEditingField("", "TEXT", "exo:title", "GtmplTitle", "GtmplTitle", node, true); %>
+		        </div>
 	        </div>
 				</div>
 			</div>
@@ -54,12 +56,12 @@
 			              	<div class="FieldContainerContent">
 			              		<div class="LabelContent">
 					                <%
-					                  if(node.hasProperty("exo:summary")) {
-					                    print node.getProperty("exo:summary").getString() ;
-					                  } else {
-					                %>
-					                  <%=_ctx.appRes("Article.view.label.none-summary")%>
-					                <%}%>
+                            if(node.hasProperty("exo:summary")) {
+                              print uicomponent.getInlineEditingField("", "WYSIWYG", "exo:summary", "Summary", "Content", node, true);
+                            } else {
+                              print uicomponent.getInlineEditingField(_ctx.appRes("Article.view.label.none-summary"), "WYSIWYG", "exo:summary", "Summary", "Content", node, true);
+                            }
+                          %>
 					              </div>
 											</div>	
 			              </div>
@@ -86,13 +88,13 @@
 			              <div class="FieldContent">
 			                <div class="FieldContainerContent">
 			                	<div class="LabelContent">
-					                <%
-					                  if(node.hasProperty("exo:text")) {
-					                    print node.getProperty("exo:text").getString() ;
-					                  } else {
-					                %>
-					                  <%=_ctx.appRes("Article.view.label.none-content")%>
-					                <%}%>
+<%
+                            if(node.hasProperty("exo:text")) {
+                              print uicomponent.getInlineEditingField(node.getProperty("exo:text").getString(), "WYSIWYG", "exo:text", "Text", "Content", node, true);
+                            } else {
+                              print uicomponent.getInlineEditingField(_ctx.appRes("Article.view.label.none-content"), "WYSIWYG", "exo:text", "Text", "Content", node, true);
+                            }
+                        %>
 				                </div>
 											</div>			                
 			                <div class="ContainerLinks">
@@ -172,33 +174,33 @@
 							                      <div class="RemoveAttachments"><span></span></div>
 							                    </a>
                                 <% } %>
-							                  <div style="clear: left;"><span></span></div>
-							                </div>
-						              <%	}
-						              	} 
-												 	}%>
-											</div>
-										</div>
-								  </div>
-							  </div>
-		          </div>
-		        </div>
-		        <div style="height: 10px;"><span></span></div>
-					</div>
-				</div>
-			</div>
-			<div class="ArticleBLDecorator">
-				<div class="ArticleBRDecorator">
-					<div class="ArticleBCDecorator"><span></span></div>
-				</div>
-			</div> 
-			<% try{
-			 _ctx.include(uicomponent.getViewTemplate("mix:votable", "view1"));
-			 }catch (Exception e) {}%> 
-		</div>
-		<% try{ 
-		_ctx.include(uicomponent.getViewTemplate("exo:comments", "view1"));
-		}catch (Exception e) {}%>
+                                <div style="clear: left;"><span></span></div>
+                              </div>
+                          <%  }
+                            } 
+                          }%>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div style="height: 10px;"><span></span></div>
+          </div>
+        </div>
+      </div>
+      <div class="ArticleBLDecorator">
+        <div class="ArticleBRDecorator">
+          <div class="ArticleBCDecorator"><span></span></div>
+        </div>
+      </div> 
+      <% try{
+       _ctx.include(uicomponent.getViewTemplate("mix:votable", "view1"));
+       }catch (Exception e) {}%> 
+    </div>
+    <% try{ 
+    _ctx.include(uicomponent.getViewTemplate("exo:comments", "view1"));
+    }catch (Exception e) {}%>
   <%} else {%>
       <div class="UIArticle">
         <div class="FieldLabel"><%=_ctx.appRes("Article.msg.no-view")%> </div>

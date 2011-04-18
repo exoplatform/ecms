@@ -42,8 +42,8 @@
   #end  
 </table>
 
-<div style="padding: 10px"> 
+<div style="padding: 10px">  
 	#if($node.hasProperty("exo:content"))
-	  <td>$node.getProperty("exo:content").getString()</td>		  
+	  <td><% print uicomponent.getInlineEditingField("", "WYSIWYG", "exo:content", "Content", "Content", node, true);%></td>		  
   #end
 </div>

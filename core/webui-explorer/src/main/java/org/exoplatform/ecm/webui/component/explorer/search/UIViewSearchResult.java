@@ -416,4 +416,10 @@ public class UIViewSearchResult extends UIContainer implements NodePresentation 
   public void setEnableVote(boolean value) {
   }
 
+
+	@Override
+  public String getInlineEditingField(String currentValue, String inputType,String propertyName, 
+  									String idGenerator, String cssClass, Node orgNode, boolean isGenericProperty) throws Exception {
+	  return "";
+  }
 }

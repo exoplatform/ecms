@@ -464,4 +464,10 @@ public class UIDocumentContent extends UIContainer implements NodePresentation {
   public void setEnableVote(boolean value) {
   }
 
+  @Override
+  public String getInlineEditingField(String defaultValue, String inputType,String propertyName, 
+  										String idGenerator, String cssClass, Node orgNode, boolean isGenericProperty) throws Exception {
+		return org.exoplatform.ecm.webui.utils.Utils.getInlineEditingField(defaultValue, inputType, propertyName, 
+																																	idGenerator, cssClass, orgNode, isGenericProperty);
+	}
 }

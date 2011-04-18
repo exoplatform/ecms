@@ -11,6 +11,17 @@
 	line-height: 18px;
 }
 
+.WorkSample td.text { 
+  font: normal bold 11px Verdana;
+  color: black; 
+  line-height: 18px;
+  width:120px;
+}
+.WorkSample td.TextDetail  { 
+  font-size: 11px; 
+  vertical-align:bottom; 
+  color: #00000; 
+}
 .WorkSample span.text  { 
 	font-size: 11px; 
 	vertical-align:bottom; 

@@ -2,6 +2,7 @@
 	import java.text.SimpleDateFormat ;
 	import org.exoplatform.webui.core.UIPopupWindow;
 	import org.exoplatform.web.application.Parameter;
+	import org.exoplatform.services.wcm.publication.WCMComposer;
 	
 	UIPopupWindow uiPopupWindow = uicomponent.getAncestorOfType(UIPopupWindow.class);
   def resizeBlock = "class=\"UIResizableBlock\"";
@@ -11,6 +12,7 @@
 	String pattern = "MMMMM dd yyyy" ;
 	SimpleDateFormat dateFormat = new SimpleDateFormat() ;
   dateFormat.applyPattern(pattern) ;
+  def originalNode = uicomponent.getOriginalNode();
 %>
 <style>
   <% _ctx.include(uicomponent.getTemplateSkin("exo:podcast", "Stylesheet")); %>
@@ -18,84 +20,101 @@
 <div $resizeBlock id="$uicomponent.id">
 	<div style="padding: 8px">
 		<div class="ContentPodcast">
-			<% def originalNode = uicomponent.getOriginalNode(); %>
-			<span class="text"><%=_ctx.appRes("Podcast.view.label.podcast")%>: <span>
-			<span class="TextDetail"><%=originalNode.getName()%></span>
+		  <table><tr>
+			 <td class="text"><%=_ctx.appRes("Podcast.view.label.podcast")%>: </td>
+			 <td class="TextDetail"><%=originalNode.getName()%></td>
+			</tr></table>
 		</div>
 		<div class="ContentPodcast">
-			<span class="text"><%=_ctx.appRes("Podcast.view.label.title")%>: </span>
-			<span class="TextDetail">
-				<%if(node.hasProperty("exo:title")) {%>
-					<%=node.getProperty("exo:title").getString()%>
-				<%}%>
-			</span>
+		  <table><tr>
+  			<td class="text"><%=_ctx.appRes("Podcast.view.label.title")%>: </td>
+  			<td class="TextDetail">
+  				<% print uicomponent.getInlineEditingField("", "TEXT", "exo:title", "TdGtmplTitle", "TdGtmplTitle", node, true); %>
+  			</td>
+			</tr></table>
 		</div>
 		<div class="ContentPodcast">
-			<span class="text"><%=_ctx.appRes("Podcast.view.label.link")%>: <span>
-			<span class="TextDetail">
+		  <table><tr>
+			<td class="text"><%=_ctx.appRes("Podcast.view.label.link")%>: </td>
+			<td class="TextDetail">
 				<%if(node.hasProperty("exo:link")) {%>
 					<%=node.getProperty("exo:link").getString()%>
 				<%}%>
-			</span>
+			</td>
+			</tr></table>
 		</div>
 		<div class="ContentPodcast">
-			<span class="text"><%=_ctx.appRes("Podcast.view.label.author")%>:</span>
-			<span class="TextDetail">
-				<%if(node.hasProperty("exo:author")) {%>
-					<%=node.getProperty("exo:author").getString()%>
-				<%}%>
-			</span>
+		  <table><tr>
+  			<td class="text"><%=_ctx.appRes("Podcast.view.label.author")%>:</td>
+  			<td class="TextDetail">
+  				<%if(node.hasProperty("exo:author")) {%>
+  					<%=node.getProperty("exo:author").getString()%>
+  				<%}%>
+  			</td>
+  	 </tr></table>
 		</div>
 		<div class="ContentPodcast">
-			<span class="text"><%=_ctx.appRes("Podcast.view.label.explicit")%>:</span>
-			<span class="TextDetail">
-				<%if(node.hasProperty("exo:explicit")) {%>
-					<%=node.getProperty("exo:explicit").getString()%>
-				<%}%>
-			</span>
+		  <table><tr>
+  			<td class="text"><%=_ctx.appRes("Podcast.view.label.explicit")%>:</td>
+  			<td class="TextDetail">
+  				<%if(node.hasProperty("exo:explicit")) {%>
+  					<%=node.getProperty("exo:explicit").getString()%>
+  				<%}%>
+  			</td>
+  		</tr></table>
 		</div>	
 		<div class="ContentPodcast">
-			<span class="text"><%=_ctx.appRes("Podcast.view.label.category")%>:</span>
-			<span class="TextDetail">
-				<%if(node.hasProperty("exo:podcastCategory")) {%>
-					<%=node.getProperty("exo:podcastCategory").getString()%>
-				<%}%>
-			</span>
+		  <table><tr>
+  			<td class="text"><%=_ctx.appRes("Podcast.view.label.category")%>:</td>
+  			<td class="TextDetail">
+  				<%if(node.hasProperty("exo:podcastCategory")) {%>
+  					<%=node.getProperty("exo:podcastCategory").getString()%>
+  				<%}%>
+  			</td>
+  		</tr></table>
 		</div>		
 		<div class="ContentPodcast">
-			<span class="text"><%=_ctx.appRes("Podcast.view.label.keyword")%>:</span>
-			<span class="TextDetail">
-				<%if(node.hasProperty("exo:keywords")) {%>
-					<%=node.getProperty("exo:keywords").getString()%>
-				<%}%>
-			</span>
+		  <table><tr>
+  			<td class="text"><%=_ctx.appRes("Podcast.view.label.keyword")%>:</td>
+  			<td class="TextDetail">
+  				<%if(node.hasProperty("exo:keywords")) {%>
+  					<%=node.getProperty("exo:keywords").getString()%>
+  				<%}%>
+  			</td>
+  		</tr></table>
 		</div>
 		<div class="ContentPodcast">
-			<span class="text"><%=_ctx.appRes("Podcast.view.label.publish-date")%>:</span>
-			<span class="TextDetail">
-				<%if(node.hasProperty("exo:publishedDate")) {%>
-					<%=dateFormat.format(node.getProperty("exo:publishedDate").getDate().getTime())%>
-				<%}%>
-			</span>
+		  <table><tr>
+  			<td class="text"><%=_ctx.appRes("Podcast.view.label.publish-date")%>:</td>
+  			<td class="TextDetail">
+  				<%if(node.hasProperty("exo:publishedDate")) {%>
+  					<%=dateFormat.format(node.getProperty("exo:publishedDate").getDate().getTime())%>
+  				<%}%>
+  			</td>
+  		</tr></table>
 		</div>		
 		<div class="ContentPodcast">
-			<span class="text"><%=_ctx.appRes("Podcast.view.label.mime-type")%>:</span>
-			<span class="TextDetail">
-			<%if(node.hasNode("jcr:content")) {
-					def contentNode = node.getNode("jcr:content") ;
-					if(contentNode.hasProperty("jcr:mimeType")) {%>				
-						<%=contentNode.getProperty("jcr:mimeType").getString()%>
-			<%	}
-				}%>
-			</span>
+		  <table><tr>
+  			<td class="text"><%=_ctx.appRes("Podcast.view.label.mime-type")%>:</td>
+  			<td class="TextDetail">
+    			<%if(node.hasNode("jcr:content")) {
+    					def contentNode = node.getNode("jcr:content") ;
+    					if(contentNode.hasProperty("jcr:mimeType")) {%>				
+    						<%=contentNode.getProperty("jcr:mimeType").getString()%>
+    			<%	}
+  				}%>
+  			</td>
+			</tr></table>
 		</div>		
 		<div class="ContentPodcast">
-			<span class="text"><%=_ctx.appRes("Podcast.view.label.length")%>:</span>
-			<span class="TextDetail">
-				<%if(node.hasProperty("exo:length")) {%>
-					<%=node.getProperty("exo:length").getString()%>
-				<%}%>
-			</span>
+		  <table><tr>
+  			<td class="text"><%=_ctx.appRes("Podcast.view.label.length")%>:</td>
+  			<td class="TextDetail">
+  				<%if(node.hasProperty("exo:length")) {%>
+  					<%=node.getProperty("exo:length").getString()%>
+  				<%}%>
+  			</td>
+  	   </tr></table>
 		</div>				
 		<!-- div for  Description -->
 		<div style="margin-top: 10px; border: 1px solid #bdbdbd;">
@@ -103,9 +122,17 @@
 				<span class="text"><%=_ctx.appRes("Podcast.view.label.description")%>:</span>
 			</div>
 			<div class="summary" >
-				<%if(node.hasProperty("exo:description")) {%>
-					<%=node.getProperty("exo:description").getString()%>
-				<%}%>
+			<%
+        def strTmpDescription = "";				
+        if(node.hasProperty("exo:description")) {
+           strTmpDescription = node.getProperty("exo:description").getString() ;
+        }
+        if (org.exoplatform.wcm.webui.Utils.getCurrentMode().equals(WCMComposer.MODE_LIVE)) {
+          print strTmpDescription;
+        }else {
+          print uicomponent.getInlineEditingField(strTmpDescription, "TEXTAREA", "exo:description", "Description", "Content", node, true);
+        }
+      %>
 			</div>
 		</div>
 	  <!-- End div for  Description -->	

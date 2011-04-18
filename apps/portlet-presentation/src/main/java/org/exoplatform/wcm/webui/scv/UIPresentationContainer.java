@@ -422,9 +422,11 @@ public class UIPresentationContainer extends UIContainer{
    * @throws 								Exception
    * @author 								vinh_nguyen
    */
-  public String getInlineEditingField(String currentValue, String inputType, String propertyName, String cssClass, Node orgNode) throws Exception{
+  public String getInlineEditingField(String defaultValue, String inputType, String propertyName, 
+  										String idGenerator, String cssClass, Node orgNode, boolean isGenericProperty) throws Exception{
   	UIPresentation presentation = getChild(UIPresentation.class);
   	if (presentation == null) return null;  	
-  	return presentation.getInlineEditingField(currentValue, inputType, propertyName, cssClass, orgNode);  
+  	return presentation.getInlineEditingField(defaultValue, inputType, propertyName, 
+  																						idGenerator, cssClass, orgNode, isGenericProperty);  
   }
 }

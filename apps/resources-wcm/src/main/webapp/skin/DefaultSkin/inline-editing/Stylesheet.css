@@ -1,0 +1,126 @@
+/* ============== INLINE-EDITING feature css===========================*/
+/* ============== Groovy title =================================================*/
+.InlineEditing {
+  width:100%;
+  height:100%;
+}
+.InlineEditing .AcceptButton{
+  background: url(/eXoDMSResources/skin/background/accep_button.png) no-repeat scroll left center;
+  display: inline-block;
+  width: 16px; height: 22px;
+  float: right; 
+  margin-right: 5px;
+}
+
+.InlineEditing .CancelButton{
+  background: url(/eXoDMSResources/skin/background/cancel_button.png) no-repeat scroll left center;
+  display: inline-block;
+  width: 14px; height: 22px;
+  float: right;
+}
+.InlineEditing .GtmplTitle {
+    font-size: 24px;
+    width:100%;
+    line-height: 20px;    
+    padding: 2px 0 0;
+    over-flow: hidden;
+}
+.InlineEditing .GtmplTitleHover {
+    background: #fffacd;
+    font-size: 24px;
+    width:100%;
+    line-height: 20px;
+    padding: 2px 0 0;
+    cursor: text;
+    over-flow: hidden;
+}
+
+.InlineEditing .EditGtmplTitle {
+    background: #fffacd;
+    display:none;
+    line-height: 20px;
+    padding: 2px 7px 2px 2px;
+}
+
+.InlineEditing .EditGtmplTitleInput {
+    margin-right: 45px;    
+}
+
+.InlineEditing .EditGtmplTitleInput input{
+    width:99%;
+    border: 1px solid #BFD5ED;
+}
+* ============== Groovy title in small text ===============================================*/
+
+.InlineEditing .TdGtmplTitle {
+    width:100%;
+    line-height: 20px;    
+    padding: 2px 0 0;
+    over-flow: hidden;
+}
+.InlineEditing .TdGtmplTitleHover {
+    background: #fffacd;
+    width:100%;
+    line-height: 20px;
+    padding: 2px 0 0;
+    cursor: text;
+    over-flow: hidden;
+}
+
+.InlineEditing .EditTdGtmplTitle {
+    background: #fffacd;
+    display:none;
+    line-height: 20px;
+    padding: 2px 7px 2px 2px;
+}
+
+.InlineEditing .EditTdGtmplTitleInput {
+    margin-right: 45px;    
+}
+
+.InlineEditing .EditTdGtmplTitleInput input{
+    width:99%;
+    border: 1px solid #BFD5ED;
+}
+
+/* ==================== Content ================================== */
+.InlineEditing .Content {
+    width:98%;
+    height:99%;
+    line-height: 20px;    
+    padding: 1px 0px 1px 0;
+    over-flow: hidden;
+}
+.InlineEditing .ContentHover {
+    background: #fffacd;
+    width:98%;
+    height:99%;
+    line-height: 20px;
+    padding: 1px 0px 1px 0;
+    cursor: text;
+    over-flow: hidden;
+}
+
+.InlineEditing .EditContent {
+    background: #fffacd;
+    display:none;
+    line-height: 20px;
+    padding: 2px 7px 2px 2px;
+    width:98%;
+    height:99%;
+}
+
+.InlineEditing .EditContentInput {
+    margin-right: 35px;    
+}
+
+.InlineEditing .EditContentInput input{
+    width:99%;
+    border: 1px solid #BFD5ED;
+} 
+   
+.InlineEditing .EditContentInput TEXTAREA{
+    width:99%;
+    border:1px solid #BFD5ED;
+    height:155px;
+} 

@@ -18,26 +18,20 @@ package org.exoplatform.ecm.webui.presentation;
 
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import java.util.ResourceBundle;
 
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
 import javax.jcr.Value;
 
-import org.exoplatform.services.log.Log;
 import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.container.xml.PortalContainerInfo;
 import org.exoplatform.download.DownloadService;
 import org.exoplatform.download.InputStreamDownloadResource;
 import org.exoplatform.ecm.webui.utils.Utils;
-import org.exoplatform.portal.resource.SkinConfig;
-import org.exoplatform.portal.resource.SkinService;
 import org.exoplatform.portal.webui.container.UIContainer;
 import org.exoplatform.portal.webui.util.SessionProviderFactory;
-import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.comments.CommentsService;
 import org.exoplatform.services.cms.folksonomy.NewFolksonomyService;
 import org.exoplatform.services.cms.i18n.MultiLanguageService;
@@ -48,7 +42,7 @@ import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
-import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.web.application.Parameter;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.application.portlet.PortletRequestContext;
@@ -70,9 +64,6 @@ public abstract class UIBaseNodePresentation extends UIContainer implements Node
   private boolean enableVote;
   private boolean enableComment;
   private static final Log LOG  = ExoLogger.getLogger("admin.UIBaseNodePresentation");
-  public static final String INPUT_TEXT_AREA 			= "TEXTAREA".intern();
-	public static final String INPUT_WYSIWYG				= "WYSIWYG".intern();
-	public static final String INPUT_TEXT						= "TEXT".intern();
 
   /* (non-Javadoc)
    * @see org.exoplatform.ecm.webui.presentation.NodePresentation#getNode()
@@ -434,109 +425,9 @@ public abstract class UIBaseNodePresentation extends UIContainer implements Node
    * @throws 								Exception
    * @author 								vinh_nguyen
    */
-  public static String getInlineEditingField(String currentValue, String inputType, String propertyName, String cssClass, Node orgNode) throws Exception{
-  	String portletRealID = org.exoplatform.wcm.webui.Utils.getRealPortletId((PortletRequestContext)
-  			WebuiRequestContext.getCurrentInstance());
-  	ResourceBundle resourceBundle = WebuiRequestContext.getCurrentInstance().getApplicationResourceBundle();
-  	StringBuffer sb = new StringBuffer();
-  	StringBuffer actionsb = new StringBuffer();
-//  	Node orgNode = getOriginalNode();
-  	String repo = ((ManageableRepository)orgNode.getSession().getRepository()).getConfiguration().getName();
-  	String workspace = orgNode.getSession().getWorkspace().getName();
-  	String uuid = orgNode.getUUID();
-  	String strSuggestion="";
-  	portletRealID = portletRealID.replace('-', '_');
-  	String showBlockId = "Current" + cssClass + "_" + portletRealID;
-  	String editBlockEditorID = "Edit" + cssClass + "_" + portletRealID;
-  	String editFormID = "Edit" + cssClass + "Form_" + portletRealID;
-  	String newValueInputId = "new" + cssClass + "_" + portletRealID;
-  	String currentValueID = "old" + cssClass + "_" + portletRealID;
-  	String siteName = org.exoplatform.portal.webui.util.Util.getPortalRequestContext().getPortalOwner();
-  	try {
-  		strSuggestion = resourceBundle.getString("UIPresentation.label.EditingSuggestion");
-  	}catch (Exception E){}
-  	actionsb.append(" return InlineEditor.presentationRequestChange").append(cssClass).append("('")
-  	.append(currentValueID).append("', '").append(newValueInputId).append("', '").append(repo)
-  	.append("', '").append(workspace).append("', '").append(uuid).append("', '")
-  	.append(editBlockEditorID).append("', '").append(showBlockId).append("', '").append(siteName);
-
-  	if (inputType.equals(INPUT_WYSIWYG)) {
-  		actionsb.append("', 1);");
-  	}else {
-  		actionsb.append("');");
-  	}
-  	String strAction = actionsb.toString();
-
-  	sb.append("\n<div id=\"").append(showBlockId).append("\" Class=\"").append(cssClass).append("\"");
-  	sb.append("title=\"").append(strSuggestion).append("\"");
-  	sb.append(" onDblClick=\"InlineEditor.presentationSwitchBlock('").append(showBlockId).append("', '").append(editBlockEditorID).append("');\"");
-  	sb.append("onmouseout=\"this.className='").append(cssClass).append("';\" onmouseover=\"this.className='").append(cssClass).append("Hover';\">").append(currentValue).append("</div>\n");
-  	sb.append("\t<div id=\"").append(editBlockEditorID).append("\" class=\"Edit").append(cssClass).append(" ClearFix\">\n");
-  	sb.append("\t\t<form name=\"").append(editFormID).append("\" id=\"").append(editFormID).append("\" onSubmit=\"").append(strAction).append("\">\n");
-  	sb.append("<DIV style=\"display:none; visible:hidden\" id=\"").append(currentValueID).append("\" name=\"").append(currentValueID).append("\">").append(currentValue).append("</DIV>");
-  	sb.append("\t\t<a href=\"#\" class =\"CancelButton\" ").append("onClick=\"InlineEditor.presentationSwitchBlock('");
-  	sb.append(editBlockEditorID).append("', '").append(showBlockId).append("');\">&nbsp;</a>\n");
-  	sb.append("\t\t<a href=\"#\" class =\"AcceptButton\" onclick=\"").append(strAction).append("\">&nbsp;</a>\n");
-  	sb.append("\t\t<div class=\"Edit").append(cssClass).append("Input\">\n");
-  	if (inputType.equals(INPUT_WYSIWYG)) {
-  		sb.append(createCKEditorField(newValueInputId, "'98%'", "200", currentValue));
-  	}else if (inputType.equals(INPUT_TEXT_AREA)){
-  		sb.append("\t\t<TEXTAREA ").append("\" name =\"");
-  		sb.append(newValueInputId).append("\" id =\"").append(newValueInputId).append("\" >");
-  		sb.append(currentValue).append("</TEXTAREA>");
-  	}else if (inputType.equals(INPUT_TEXT)) {
-  		sb.append("\t\t<input type=\"").append(inputType).append("\" name =\"");
-  		sb.append(newValueInputId).append("\" id =\"").append(newValueInputId).append("\" value=\"").append(currentValue).append("\"/>");
-  	}
-  	sb.append("\n\t\t</div>\n\t</form>\n</div>");		
-  	return sb.toString();
-  }
-  
-  /**
-   * 
-   * @param name
-   * @param width
-   * @param height
-   * @param value_
-   * @return
-   */
-  private static String createCKEditorField(String name, String width, String height, String value_) {	
-  	String toolbar = "Basic";
-
-  	if (width == null) width = "'100%'";
-  	if (height == null) height = "200";
-  	StringBuffer contentsCss = new StringBuffer();
-  	contentsCss.append("[");
-  	SkinService skinService = WCMCoreUtils.getService(SkinService.class);
-  	String skin = Util.getUIPortalApplication().getUserPortalConfig().getPortalConfig().getSkin();
-  	String portal = Util.getUIPortal().getName();
-  	Collection<SkinConfig> portalSkins = skinService.getPortalSkins(skin);
-  	SkinConfig customSkin = skinService.getSkin(portal, Util.getUIPortalApplication()
-  			.getUserPortalConfig()
-  			.getPortalConfig()
-  			.getSkin());
-  	if (customSkin != null) portalSkins.add(customSkin);
-  	for (SkinConfig portalSkin : portalSkins) {
-  		contentsCss.append("'").append(portalSkin.createURL()).append("',");
-  	}
-  	contentsCss.delete(contentsCss.length() - 1, contentsCss.length());
-  	contentsCss.append("]");
-
-  	StringBuffer buffer = new StringBuffer();
-  	if (value_!=null) {
-  		buffer.append("<textarea id='" + name + "' name='" + name + "'>" + value_ + "</textarea>\n");
-  	}else {
-  		buffer.append("<textarea id='" + name + "' name='" + name + "'></textarea>\n");
-  	}
-  	buffer.append("<script type='text/javascript'>\n");
-  	buffer.append("  //<![CDATA[\n");
-  	buffer.append("    var instances = CKEDITOR.instances['" + name + "']; if (instances) instances.destroy(true);\n");
-  	buffer.append("    CKEDITOR.replace('" + name + "', {toolbar:'" + toolbar + "', width:" + width
-  			+ ", height:" + height + ", contentsCss:" + contentsCss + ", ignoreEmptyParagraph:true});\n");
-  	buffer.append("  //]]>\n");
-  	
-  	buffer.append("</script>\n");
-
-  	return buffer.toString();
+  public String getInlineEditingField(String defaultValue, String inputType, String propertyName, 
+  									String idGenerator, String cssClass, Node orgNode, boolean isGenericProperty) throws Exception{
+  	return org.exoplatform.ecm.webui.utils.Utils.getInlineEditingField(defaultValue, inputType, propertyName, 
+  																																idGenerator, cssClass, orgNode, isGenericProperty);
   }
 }

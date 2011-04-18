@@ -28,6 +28,8 @@
 
 @import url('wcm-portal/Stylesheet.css');
 
+@import url('inline-editing/Stylesheet.css');
+
 @import url('wcm-publication/Stylesheet.css');
 
 .cke_show_borders {

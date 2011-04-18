@@ -32,7 +32,7 @@ InlineEditor.presentationSwitchBlock = function (block2hidden, block2show) {
   }  
 }
 
-InlineEditor.presentationRequestChangeTitle = function (oldTitleID, newTitleID, repo, workspace, uuid, block2hidden, block2show, siteName, isCKEDITOR){
+InlineEditor.presentationRequestChangeTitle = function (oldTitleID, newTitleID, repo, workspace, uuid, block2hidden, block2show, siteName, language, isCKEDITOR){
   var functionName ="/title?"
   var strTitle ="";
   var params ="";
@@ -55,38 +55,58 @@ InlineEditor.presentationRequestChangeTitle = function (oldTitleID, newTitleID, 
     return false;
   }
   params = "newValue=" + encodeURIComponent(strTitle);
-  InlineEditor.presentationRequestChangePropertyPOST(functionName, null, repo, workspace, uuid, siteName, params);
+  InlineEditor.presentationRequestChangePropertyPOST(functionName, null, repo, workspace, uuid, siteName, language, params);
   return false;
 }
 
-InlineEditor.presentationRequestChangeSummary = function (oldSummary, newSummaryID, repo, workspace, uuid, block2hidden, block2show, siteName){
-  var functionName ="/summary?" 
-  var strSummary = document.getElementById(newSummaryID).value;
-  var params ="";
+InlineEditor.presentationRequestChangeSummary = function (oldSummary, newSummaryID, repo, workspace, uuid, block2hidden, block2show, siteName, language, isCKEDITOR){
+  var functionName ="/summary?"
+  var params =""; 
+  var strSummary ="";
+  if (isCKEDITOR) {
+    strSummary = CKEDITOR.instances[newSummaryID].getData();
+  }else {
+    strSummary= document.getElementById(newSummaryID).value;
+  }  
   
-  if (strSummary==oldSummary) {
-    InlineEditor.presentationSwitchBlock(block2hidden, block2show);
-    return false;
-  }
   params = "newValue=" + encodeURIComponent(strSummary);
-  InlineEditor.presentationRequestChangePropertyPOST(functionName, null, repo, workspace, uuid, siteName, params);  
+  InlineEditor.presentationRequestChangePropertyPOST(functionName, null, repo, workspace, uuid, siteName, language, params);  
   return false;
 }
 
-InlineEditor.presentationRequestChangeProperty = function (functionName, propertyName, newValue, repo, workspace, uuid,  siteName, params, method){
-  var url = InlineEditor.hostName + eXo.env.portal.context + "/" + eXo.env.portal.rest + InlineEditor.command + functionName
-  url = url + "&repositoryName="+repo + "&workspaceName=" + workspace + "&nodeUIID=" + uuid + "&siteName=" + siteName;
-  if (propertyName!=null) {
-    url = url + "&" +encodeURIComponent( propertyName);
-  }
-  InlineEditor.presentationAjaxRequest(url, params, method);
+InlineEditor.presentationRequestChangeText = function (oldText, newTextID, repo, workspace, uuid, block2hidden, block2show, siteName, language, isCKEDITOR){
+  var functionName ="/text?"
+  var params =""; 
+  var strText ="";
+  if (isCKEDITOR) {
+    strText = CKEDITOR.instances[newTextID].getData();
+  }else {
+    strText= document.getElementById(newTextID).value;
+  }  
+  
+  params = "newValue=" + encodeURIComponent(strText);
+  InlineEditor.presentationRequestChangePropertyPOST(functionName, null, repo, workspace, uuid, siteName, language, params);  
+  return false;
 }
 
-InlineEditor.presentationRequestChangePropertyPOST = function (functionName, propertyName, repo, workspace, uuid,  siteName, params){
-  var url = InlineEditor.hostName + eXo.env.portal.context + "/" + eXo.env.portal.rest + InlineEditor.command + functionName
-  url = url + "repositoryName="+repo + "&workspaceName=" + workspace + "&nodeUIID=" + uuid + "&siteName=" + siteName
+InlineEditor.presentationRequestChangeProperty = function (functionName, propertyName, oldText, newTextID, repo, workspace, uuid, block2hidden, block2show, siteName, language, isCKEDITOR){  
+  var params =""; 
+  var strText ="";
+  if (isCKEDITOR) {
+    strText = CKEDITOR.instances[newTextID].getData();
+  }else {
+    strText= document.getElementById(newTextID).value;
+  }  
+  params = "newValue=" + encodeURIComponent(strText);
+  InlineEditor.presentationRequestChangePropertyPOST(functionName, propertyName, repo, workspace, uuid, siteName, language, params);  
+  return false;
+}
+
+InlineEditor.presentationRequestChangePropertyPOST = function (functionName, propertyName, repo, workspace, uuid,  siteName, language, params){
+  var url = InlineEditor.hostName + eXo.env.portal.context + "/" + eXo.env.portal.rest + InlineEditor.command + functionName;
+  url = url + "repositoryName="+repo + "&workspaceName=" + workspace + "&nodeUIID=" + uuid + "&siteName=" + siteName + "&language=" + language;
   if (propertyName!=null) {
-    url = url + "&" +encodeURIComponent( propertyName);
+    url = url + "&propertyName=" +encodeURIComponent( propertyName);
   }
   InlineEditor.presentationAjaxRequest(url, params, "POST");
 }
@@ -136,9 +156,13 @@ InlineEditor.presentationAjaxRequest = function (url, params, method) {
 };
 
 InlineEditor.presentationAjaxResponse = function (){
+	var xmlTreeNodes = InlineEditor.xmlHttpRequest.responseXML;		
+    var nodeList = xmlTreeNodes.getElementsByTagName("bundle");   
+    var locale_message = nodeList[0].getAttribute("message"); 
     if (InlineEditor.xmlHttpRequest.readyState == 4) {
       if (InlineEditor.xmlHttpRequest.status == 200) {
-        location.reload(true);
+        if(locale_message == "OK") location.reload(true);
+        else alert(locale_message);
       }
     }else {
       try{

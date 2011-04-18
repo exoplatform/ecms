@@ -67,7 +67,7 @@
       <div class="TitleLabel">
         <%if(node.hasProperty("exo:url")) { %>
         <a href="<%=node.getProperty("exo:url").getString()%>" target="_newPage">
-        <%}%>           
+        <%}%>
         <%=node.getProperty("exo:title").getString()%>
         <%if(node.hasProperty("exo:url")) { %>
         </a>
@@ -79,12 +79,16 @@
 			<div class="ArticleFrame">
         <% if(node.hasProperty("exo:summary")) { %>
           <div class="LabelContent">
-            <% print node.getProperty("exo:summary").getString() ; %>
+            <%
+              print uicomponent.getInlineEditingField("", "WYSIWYG", "exo:summary", "Summary", "Content", node, true);
+            %>
           </div>
         <% } %>
         <% if(node.hasProperty("exo:text")) { %>
           <div class="LabelContent">
-            <% print node.getProperty("exo:text").getString() ; %>
+            <%
+              print uicomponent.getInlineEditingField("", "WYSIWYG", "exo:text", "Text", "Content", node, true);
+            %>
           </div>
         <% } %>
 			</div>

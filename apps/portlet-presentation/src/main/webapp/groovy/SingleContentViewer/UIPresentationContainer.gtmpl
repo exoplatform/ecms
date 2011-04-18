@@ -95,7 +95,7 @@
   					  }else {
   					   def orgNode =uicomponent.getOriginalNode();    					  
     					  %>
-    					  <%= uicomponent.getInlineEditingField(uicomponent.getTitle(node), "TEXT", "exo:title", "Title", orgNode) %>    						  
+    					  <%= uicomponent.getInlineEditingField(uicomponent.getTitle(node), "TEXT", "exo:title", "SCVTitle", "Title", orgNode, false) %>    						  
                 <%            
               }
             } %>
