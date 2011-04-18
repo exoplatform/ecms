@@ -171,6 +171,8 @@ public class RESTImagesRendererService implements ResourceContainer{
   private boolean isModified(String ifModifiedSince, Node node) throws Exception {
      // get last-modified-since from header
      DateFormat dateFormat = new SimpleDateFormat(IF_MODIFIED_SINCE_DATE_FORMAT);
+     if(ifModifiedSince == null || ifModifiedSince.length() == 0)
+       return false;
      Date ifModifiedSinceDate = dateFormat.parse(ifModifiedSince);
 
      // get last modified date of node
