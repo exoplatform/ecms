@@ -58,7 +58,7 @@ public class RecordsJob extends BaseJob {
       ExoContainer container = ExoContainerContext.getCurrentContainer();
       repositoryService_ = (RepositoryService) container.getComponentInstanceOfType(RepositoryService.class);
       recordsService_ = (RecordsService) container.getComponentInstanceOfType(RecordsService.class);
-      ManageableRepository repository = repositoryService_.getDefaultRepository();
+      ManageableRepository repository = repositoryService_.getCurrentRepository();
 
       if (repository.getState() != ManageableRepository.OFFLINE) {
         String[] workspaces = repository.getWorkspaceNames();

@@ -89,7 +89,7 @@ public class UIWorkflowPublicationActionForm extends UIForm implements UISelecta
 
   public UIWorkflowPublicationActionForm() throws Exception {
     repositoryService = getApplicationComponent(RepositoryService.class);
-    repositoryName = repositoryService.getDefaultRepository().getConfiguration().getName();
+    repositoryName = repositoryService.getCurrentRepository().getConfiguration().getName();
   }
 
   private void initSelectBox(UIFormSelectBox selectBox) throws Exception {

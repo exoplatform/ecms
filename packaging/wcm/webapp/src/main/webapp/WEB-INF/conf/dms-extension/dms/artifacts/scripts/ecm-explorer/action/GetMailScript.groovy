@@ -177,7 +177,7 @@ public class GetMailScript implements CmsScript {
   
   private Node createStoreNode(String storePath) {
     try{
-      ManageableRepository manaRepository = repositoryService_.getDefaultRepository() ;
+      ManageableRepository manaRepository = repositoryService_.getCurrentRepository() ;
       Node rootNode = manaRepository.getSystemSession(manaRepository.getConfiguration().getDefaultWorkspaceName()).getRootNode();
       //Node rootNode = session.getRootNode();
       String[] array = storePath.split("/") ;

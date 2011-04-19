@@ -64,7 +64,7 @@ public class RssServlet extends HttpServlet {
       (TemplateService)pcontainer.getComponentInstanceOfType(TemplateService.class);
     Session session = null ;
     try{
-      session = repositoryService.getDefaultRepository().getSystemSession(wsName) ;
+      session = repositoryService.getCurrentRepository().getSystemSession(wsName) ;
       String repositoryName = repositoryService.getCurrentRepository().getConfiguration().getName();
       Node rootNode = session.getRootNode() ;
       Node file = null ;

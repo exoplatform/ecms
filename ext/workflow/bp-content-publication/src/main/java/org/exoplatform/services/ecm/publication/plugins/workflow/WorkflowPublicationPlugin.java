@@ -176,7 +176,7 @@ public class WorkflowPublicationPlugin extends PublicationPlugin {
         ExoContainer container = ExoContainerContext.getCurrentContainer();
         RepositoryService repositoryService = (RepositoryService)container.getComponentInstanceOfType(RepositoryService.class);
         IdentityRegistry identityRegistry = (IdentityRegistry) container.getComponentInstanceOfType(IdentityRegistry.class);
-        String repositoryName = repositoryService.getDefaultRepository()
+        String repositoryName = repositoryService.getCurrentRepository()
                                                  .getConfiguration()
                                                  .getName();
         String workspaceName = node.getSession().getWorkspace().getName();

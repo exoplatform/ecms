@@ -62,7 +62,7 @@ public class UIWorkflowPublicationViewForm extends UIForm {
   public UIWorkflowPublicationViewForm() throws Exception {
     identityRegistry = getApplicationComponent(IdentityRegistry.class);
     RepositoryService repositoryService = getApplicationComponent(RepositoryService.class);
-    repositoryName = repositoryService.getDefaultRepository().getConfiguration().getName();
+    repositoryName = repositoryService.getCurrentRepository().getConfiguration().getName();
     setActions(new String[]{"Cancel"});
   }
 

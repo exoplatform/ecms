@@ -210,7 +210,7 @@ public class UIRepositoryControl extends UIContainer {
       UIRepositoryFormContainer uiForm = uiPopupAction.activate(UIRepositoryFormContainer.class,
           600);
       RepositoryService rService = uiControl.getApplicationComponent(RepositoryService.class);
-      uiForm.refresh(true, rService.getDefaultRepository().getConfiguration());
+      uiForm.refresh(true, rService.getCurrentRepository().getConfiguration());
       event.getRequestContext().addUIComponentToUpdateByAjax(uiPopupAction);
     }
   }

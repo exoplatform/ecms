@@ -22,6 +22,7 @@ import java.util.List;
 
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
+import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 import javax.jcr.Value;
 import javax.jcr.query.Query;
@@ -52,9 +53,6 @@ public class NewsletterSubscriptionHandler {
 
   /** The repository service. */
   private RepositoryService repositoryService;
-
-  /** The repository. */
-  private String repository;
 
   /** The workspace. */
   private String workspace;
@@ -152,9 +150,19 @@ public class NewsletterSubscriptionHandler {
    * @param repository the repository
    * @param workspace the workspace
    */
+  @Deprecated
   public NewsletterSubscriptionHandler(String repository, String workspace) {
     repositoryService = WCMCoreUtils.getService(RepositoryService.class);
-    this.repository = repository;
+    this.workspace = workspace;
+  }
+  
+  /**
+   * Instantiates a new newsletter subscription handler.
+   *
+   * @param workspace the workspace
+   */
+  public NewsletterSubscriptionHandler(String workspace) {
+    repositoryService = WCMCoreUtils.getService(RepositoryService.class);
     this.workspace = workspace;
   }
 
@@ -312,17 +320,22 @@ public class NewsletterSubscriptionHandler {
     ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
     Session session = sessionProvider.getSession(workspace, manageableRepository);
     String path = NewsletterConstant.generateCategoryPath(portalName);
-    Node categoryNode = ((Node)session.getItem(path)).getNode(categoryName);
-    NodeIterator nodeIterator = categoryNode.getNodes();
-    while(nodeIterator.hasNext()){
-      try{
-        Node childNode = nodeIterator.nextNode();
-        if(!childNode.isNodeType(NewsletterConstant.SUBSCRIPTION_NODETYPE)) continue;
-        listSubscriptions.add(getSubscriptionFormNode(childNode));
-      }catch(Exception ex){
-        log.error("Error when get subcriptions by category " + categoryName + " failed because of ", ex);
-      }
+    try {
+      Node categoryNode = ((Node)session.getItem(path)).getNode(categoryName);
+      NodeIterator nodeIterator = categoryNode.getNodes();
+      while(nodeIterator.hasNext()){
+        try{
+          Node childNode = nodeIterator.nextNode();
+          if(!childNode.isNodeType(NewsletterConstant.SUBSCRIPTION_NODETYPE)) continue;
+          listSubscriptions.add(getSubscriptionFormNode(childNode));
+        }catch(Exception ex){
+          log.error("Error when get subcriptions by category " + categoryName + " failed because of ", ex);
+        }
+      }  
+    } catch(RepositoryException repo) {
+      return new ArrayList<NewsletterSubscriptionConfig>();
     }
+    
     return listSubscriptions;
   }
 

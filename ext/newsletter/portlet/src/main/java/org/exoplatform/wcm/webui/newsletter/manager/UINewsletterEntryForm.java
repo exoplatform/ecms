@@ -47,6 +47,7 @@ import org.exoplatform.services.mail.MailService;
 import org.exoplatform.services.mail.Message;
 import org.exoplatform.services.wcm.newsletter.NewsletterConstant;
 import org.exoplatform.services.wcm.newsletter.NewsletterManagerService;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.wcm.webui.Utils;
 import org.exoplatform.wcm.webui.newsletter.UINewsletterConstant;
 import org.exoplatform.web.application.ApplicationMessage;
@@ -157,7 +158,7 @@ public class UINewsletterEntryForm extends UIDialogForm {
     String storedPath = getStoredPath().replace(NewsletterConstant.PORTAL_NAME, NewsLetterUtil.getPortalName());
     RepositoryService repositoryService = getApplicationComponent(RepositoryService.class);
     ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
-    Session session = Utils.getSessionProvider().getSession(workspaceName, manageableRepository);
+    Session session = WCMCoreUtils.getUserSessionProvider().getSession(workspaceName, manageableRepository);
     Node storedNode = (Node)session.getItem(storedPath);
     CmsService cmsService = getApplicationComponent(CmsService.class);
     String newsletterNodePath = cmsService.storeNode("exo:webContent", storedNode, inputProperties, isAddNew());
@@ -309,7 +310,7 @@ public class UINewsletterEntryForm extends UIDialogForm {
           for (int i = 1; i < listEmailAddress.size(); i ++) {
             receiver += listEmailAddress.get(i) + ",";
           }
-          String content = newsletterManagerService.getEntryHandler().getContent(Utils.getSessionProvider(), newsletterNode);
+          String content = newsletterManagerService.getEntryHandler().getContent(WCMCoreUtils.getUserSessionProvider(), newsletterNode);
           String baseURI = portletRequest.getScheme() + "://" + portletRequest.getServerName()
               + ":" + String.format("%s", portletRequest.getServerPort());
           String data = newsletterNode.getNode("default.html").getNode("jcr:content").getProperty("jcr:data").getString();

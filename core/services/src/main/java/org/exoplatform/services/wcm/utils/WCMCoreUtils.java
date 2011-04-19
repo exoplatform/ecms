@@ -24,9 +24,7 @@ import java.util.List;
 import org.exoplatform.commons.utils.ListAccess;
 import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
-import org.exoplatform.container.PortalContainer;
 import org.exoplatform.container.RootContainer;
-import org.exoplatform.container.component.ComponentRequestLifecycle;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
@@ -46,8 +44,6 @@ import org.quartz.JobExecutionContext;
 public class WCMCoreUtils {
 
   private static Log log = ExoLogger.getLogger("wcm.WCMCoreUtils");
-
-  private static PortalContainer manager;
 
   /**
    * Gets the service.
@@ -122,7 +118,6 @@ public class WCMCoreUtils {
   public static boolean hasPermission(String userId, List<String> permissions, boolean isNeedFullAccess) {
     try {
       OrganizationService organizationService = WCMCoreUtils.getService(OrganizationService.class);
-      ((ComponentRequestLifecycle) organizationService).startRequest(manager);
       Collection<?> memberships = null;
       Membership userMembership = null;
       String userMembershipTmp = null;
@@ -161,7 +156,6 @@ public class WCMCoreUtils {
         }
         permissionTmp = permission;
       }
-//      ((ComponentRequestLifecycle) organizationService).endRequest(manager);
     } catch (Exception e) {
       log.error("hasPermission() failed because of ", e);
     }

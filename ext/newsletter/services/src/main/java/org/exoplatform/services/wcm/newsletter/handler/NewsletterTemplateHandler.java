@@ -46,9 +46,6 @@ public class NewsletterTemplateHandler {
   /** The repository service. */
   private RepositoryService repositoryService;
 
-  /** The repository. */
-  private String repository;
-
   /** The workspace. */
   private String workspace;
 
@@ -61,11 +58,23 @@ public class NewsletterTemplateHandler {
    * @param repository the repository
    * @param workspace the workspace
    */
+  @Deprecated
   public NewsletterTemplateHandler(String repository, String workspace) {
     repositoryService = WCMCoreUtils.getService(RepositoryService.class);
-    this.repository = repository;
     this.workspace = workspace;
   }
+  
+  /**
+   * Instantiates a new newsletter template handler.
+   *
+   * @param workspace the workspace
+   */
+  public NewsletterTemplateHandler(String workspace) {
+    repositoryService = WCMCoreUtils.getService(RepositoryService.class);
+    this.workspace = workspace;
+  }
+  
+  
 
   /**
    * Gets the templates.

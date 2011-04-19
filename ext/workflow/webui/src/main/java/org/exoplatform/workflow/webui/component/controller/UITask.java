@@ -184,7 +184,7 @@ public class UITask extends UIForm implements UISelectable {
     String workspaceName = (String) variablesForService.get(WORKSPACE_VARIABLE);
     String repository = (String) variablesForService.get(REPOSITORY_VARIABLE);
     if(repository == null) {
-      repository = jcrService.getDefaultRepository().getConfiguration().getName();
+      repository = jcrService.getCurrentRepository().getConfiguration().getName();
     }
     ManageableRepository mRepository = jcrService.getCurrentRepository();
     SessionProviderService sessionProviderService = Util.getUIPortal().getApplicationComponent(SessionProviderService.class);
@@ -428,7 +428,7 @@ public class UITask extends UIForm implements UISelectable {
       if (variable != null && variable.length() != 0) workflowVariables.put(variable, decision);
     }
     if ("delegate".equals(decision)) workflowVariables.put("delegate", "true");
-    String repository = jcrService.getDefaultRepository().getConfiguration().getName();
+    String repository = jcrService.getCurrentRepository().getConfiguration().getName();
     workflowVariables.put(Utils.REPOSITORY, repository);
     return new VariableMaps(workflowVariables, jcrVariables);
   }

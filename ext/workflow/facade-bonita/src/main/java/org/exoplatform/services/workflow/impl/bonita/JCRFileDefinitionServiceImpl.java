@@ -193,8 +193,8 @@ public class JCRFileDefinitionServiceImpl
       RepositoryService repositoryService = (RepositoryService) container
         .getComponentInstanceOfType(RepositoryService.class);
       String wsName =
-        repositoryService.getDefaultRepository().getConfiguration().getSystemWorkspaceName() ;
-      return repositoryService.getDefaultRepository().getSystemSession(wsName);
+        repositoryService.getCurrentRepository().getConfiguration().getSystemWorkspaceName() ;
+      return repositoryService.getCurrentRepository().getSystemSession(wsName);
     }
     catch (Exception e) {
       LOG.warn(e.getMessage(), e);

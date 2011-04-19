@@ -57,9 +57,6 @@ public class NewsletterManageUserHandler {
   /** The repository service. */
   private RepositoryService repositoryService;
 
-  /** The repository. */
-  private String repository;
-
   /** The workspace. */
   private String workspace;
 
@@ -69,9 +66,19 @@ public class NewsletterManageUserHandler {
    * @param repository the repository
    * @param workspace the workspace
    */
+  @Deprecated
   public NewsletterManageUserHandler(String repository, String workspace) {
     repositoryService = WCMCoreUtils.getService(RepositoryService.class);
-    this.repository = repository;
+    this.workspace = workspace;
+  }
+  
+  /**
+  * Instantiates a new newsletter manage user handler.
+  *
+  * @param workspace the workspace
+  */
+  public NewsletterManageUserHandler(String workspace) {
+    repositoryService = WCMCoreUtils.getService(RepositoryService.class);
     this.workspace = workspace;
   }
 

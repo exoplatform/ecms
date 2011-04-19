@@ -52,9 +52,6 @@ public class NewsletterEntryHandler {
 
   private XSkinService xSkinService;
 
-  /** The repository. */
-  private String repository;
-
   /** The workspace. */
   private String workspace;
 
@@ -64,10 +61,21 @@ public class NewsletterEntryHandler {
    * @param repository the repository
    * @param workspace the workspace
    */
+  @Deprecated
   public NewsletterEntryHandler(String repository, String workspace) {
     repositoryService = WCMCoreUtils.getService(RepositoryService.class);
     xSkinService = WCMCoreUtils.getService(XSkinService.class);
-    this.repository = repository;
+    this.workspace = workspace;
+  }
+  
+  /**
+   * Instantiates a new newsletter entry handler.
+   *
+   * @param workspace the workspace
+   */
+  public NewsletterEntryHandler(String workspace) {
+    repositoryService = WCMCoreUtils.getService(RepositoryService.class);
+    xSkinService = WCMCoreUtils.getService(XSkinService.class);
     this.workspace = workspace;
   }
 

@@ -194,12 +194,12 @@ public class UIWorkspaceWizard extends UIFormTabPane implements UISelectable {
           getComponentInstanceOfType(RepositoryService.class);
       ManageableRepository manageRepository;
       if (isAddNewWs) {
-        manageRepository = rService.getDefaultRepository();
+        manageRepository = rService.getCurrentRepository();
       } else {
         try {
           manageRepository = rService.getCurrentRepository();
         } catch (RepositoryException e) {
-          manageRepository = rService.getDefaultRepository();
+          manageRepository = rService.getCurrentRepository();
         }
       }
       if (!isNewWizard_) {

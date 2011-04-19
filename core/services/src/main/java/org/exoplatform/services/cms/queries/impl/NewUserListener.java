@@ -29,7 +29,6 @@ import javax.jcr.query.QueryManager;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.jcr.RepositoryService;
-import org.exoplatform.services.jcr.access.PermissionType;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
@@ -43,9 +42,6 @@ public class NewUserListener extends UserEventListener {
   
   private static Log log = ExoLogger.getLogger(NewUserListener.class);
 
-  private static final String[] perms = {PermissionType.READ, PermissionType.ADD_NODE,
-    PermissionType.SET_PROPERTY, PermissionType.REMOVE };
-
   private NewUserConfig config_;
   private RepositoryService jcrService_;
   private NodeHierarchyCreator nodeHierarchyCreator_;
@@ -56,7 +52,7 @@ public class NewUserListener extends UserEventListener {
                          InitParams params)    throws Exception {
     jcrService_ = jcrService;
     nodeHierarchyCreator_ = nodeHierarchyCreator;
-    config_ = (NewUserConfig) params.getObjectParamValues(NewUserConfig.class).get(0);
+    config_ = params.getObjectParamValues(NewUserConfig.class).get(0);
     relativePath_ = params.getValueParam("relativePath").getValue();
   }
 
@@ -70,7 +66,7 @@ public class NewUserListener extends UserEventListener {
     Session session = null;
     //Manage production workspace
     try {
-      String defaultWorkspaceName = jcrService_.getDefaultRepository().getConfiguration().getDefaultWorkspaceName() ;
+      String defaultWorkspaceName = jcrService_.getCurrentRepository().getConfiguration().getDefaultWorkspaceName() ;
       session = jcrService_.getCurrentRepository().getSystemSession(defaultWorkspaceName);
       Node usersHome = (Node) session.getItem(
           nodeHierarchyCreator_.getJcrPath(BasePath.CMS_USERS_PATH));

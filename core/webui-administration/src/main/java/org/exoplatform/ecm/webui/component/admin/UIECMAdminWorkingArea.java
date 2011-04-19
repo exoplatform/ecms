@@ -106,7 +106,7 @@ public class UIECMAdminWorkingArea extends UIContainer {
     try {
       getApplicationComponent(RepositoryService.class).getCurrentRepository();
     } catch (Exception e) {
-      String defaultRepo = getApplicationComponent(RepositoryService.class).getDefaultRepository()
+      String defaultRepo = getApplicationComponent(RepositoryService.class).getCurrentRepository()
           .getConfiguration().getName();
       pref.setValue(Utils.REPOSITORY, defaultRepo);
       pref.store();

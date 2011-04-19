@@ -51,9 +51,6 @@ public class NewsletterCategoryHandler {
   /** The repository service. */
   private RepositoryService repositoryService;
 
-  /** The repository. */
-  private String repository;
-
   /** The workspace. */
   private String workspace;
 
@@ -73,9 +70,19 @@ public class NewsletterCategoryHandler {
    * @param repository the repository
    * @param workspace the workspace
    */
+  @Deprecated
   public NewsletterCategoryHandler(String repository, String workspace) {
     repositoryService = WCMCoreUtils.getService(RepositoryService.class);
-    this.repository = repository;
+    this.workspace = workspace;
+  }
+  
+  /**
+   * Instantiates a new newsletter category handler.
+   *
+   * @param workspace the workspace
+   */
+  public NewsletterCategoryHandler(String workspace) {
+    repositoryService = WCMCoreUtils.getService(RepositoryService.class);
     this.workspace = workspace;
   }
 

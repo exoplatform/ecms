@@ -73,7 +73,7 @@ public class UIDrivesBrowser extends UIContainer {
   private RepositoryService rService;
   public UIDrivesBrowser() throws Exception {
     rService = getApplicationComponent(RepositoryService.class);
-    repoName_ = rService.getDefaultRepository().getConfiguration().getName();
+    repoName_ = rService.getCurrentRepository().getConfiguration().getName();
   }
 
   public List<String> getRepositoryList() {

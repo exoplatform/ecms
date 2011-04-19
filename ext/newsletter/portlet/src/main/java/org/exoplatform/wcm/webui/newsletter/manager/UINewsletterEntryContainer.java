@@ -18,10 +18,12 @@ package org.exoplatform.wcm.webui.newsletter.manager;
 
 import java.util.Calendar;
 
+import javax.jcr.Node;
+
 import org.exoplatform.services.wcm.newsletter.NewsletterCategoryConfig;
 import org.exoplatform.services.wcm.newsletter.NewsletterManagerService;
 import org.exoplatform.services.wcm.newsletter.handler.NewsletterTemplateHandler;
-import org.exoplatform.wcm.webui.Utils;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.core.UIContainer;
 import org.exoplatform.webui.core.lifecycle.UIContainerLifecycle;
@@ -98,18 +100,17 @@ public class UINewsletterEntryContainer extends UIContainer {
     UINewsletterEntryForm newsletterEntryForm = createUIComponent(UINewsletterEntryForm.class, null, null);
     newsletterEntryForm.setRepositoryName(newsletterManagerService.getRepositoryName());
     newsletterEntryForm.setWorkspace(newsletterManagerService.getWorkspaceName());
-    if(this.newsletterPath == null){
+    if(newsletterPath == null){
       NewsletterTemplateHandler newsletterTemplateHandler = newsletterManagerService.getTemplateHandler();
-      this.newsletterPath = newsletterTemplateHandler.getTemplate(Utils.getSessionProvider(),
-                                                                  NewsLetterUtil.getPortalName(),
-                                                                  categoryConfig,
-                                                                  null).getPath();
+      Node templateNode = newsletterTemplateHandler.getTemplate(
+          WCMCoreUtils.getUserSessionProvider(), NewsLetterUtil.getPortalName(), categoryConfig, null);
+      if(templateNode != null) newsletterPath = templateNode.getPath();
       newsletterEntryForm.addNew(true);
     }else{
       UIFormDateTimeInput dateTimeInput = newsletterEntryDialogSelector.getChild(UIFormDateTimeInput.class);
       Calendar calendar = dateTimeInput.getCalendar().getInstance();
       calendar.setTime(newsletterManagerService.getEntryHandler()
-                                               .getNewsletterEntryByPath(Utils.getSessionProvider(),
+                                               .getNewsletterEntryByPath(WCMCoreUtils.getUserSessionProvider(),
                                                                          this.newsletterPath)
                                                .getNewsletterSentDate());
       dateTimeInput.setCalendar(calendar);
@@ -119,7 +120,7 @@ public class UINewsletterEntryContainer extends UIContainer {
     newsletterEntryForm.getChildren().clear();
     newsletterEntryForm.resetProperties();
     addChild(newsletterEntryForm);
-    this.newsletterPath = null;
+    newsletterPath = null;
   }
 
   /**

@@ -29,6 +29,7 @@ import org.exoplatform.services.wcm.newsletter.NewsletterSubscriptionConfig;
 import org.exoplatform.services.wcm.newsletter.handler.NewsletterCategoryHandler;
 import org.exoplatform.services.wcm.newsletter.handler.NewsletterSubscriptionHandler;
 import org.exoplatform.services.wcm.newsletter.handler.NewsletterTemplateHandler;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.wcm.webui.Utils;
 import org.exoplatform.wcm.webui.newsletter.UINewsletterConstant;
 import org.exoplatform.web.application.ApplicationMessage;
@@ -103,15 +104,15 @@ public class UINewsletterEntryDialogSelector extends UIForm {
   /**
    * Inits the.
    *
-   * @param CategoryName the category name
+   * @param categoryName the category name
    * @param subScriptionName the sub scription name
    *
    * @throws Exception the exception
    */
-  public void init(String CategoryName, String subScriptionName) throws Exception{
+  public void init(String categoryName, String subScriptionName) throws Exception{
     NewsletterManagerService newsletterManagerService = getApplicationComponent(NewsletterManagerService.class);
     NewsletterCategoryHandler newsletterCategoryHandler = newsletterManagerService.getCategoryHandler();
-    SessionProvider sessionProvider = Utils.getSessionProvider();
+    SessionProvider sessionProvider = WCMCoreUtils.getUserSessionProvider();
     String portalName = NewsLetterUtil.getPortalName();
     List<NewsletterCategoryConfig> newsletterCategoryConfigs = newsletterCategoryHandler.getListCategories(portalName,
                                                                                                            sessionProvider);
@@ -122,15 +123,15 @@ public class UINewsletterEntryDialogSelector extends UIForm {
     UIFormSelectBox categorySelectBox = new UIFormSelectBox(UINewsletterConstant.ENTRY_CATEGORY_SELECTBOX,
                                                             UINewsletterConstant.ENTRY_CATEGORY_SELECTBOX, categories);
     categorySelectBox.setOnChange("ChangeCategory");
-    if(CategoryName != null && CategoryName.trim().length() > 0){
-      categorySelectBox.setValue(CategoryName);
+    if(categoryName != null && categoryName.trim().length() > 0){
+      categorySelectBox.setValue(categoryName);
       categorySelectBox.setDisabled(true);
     }
 
-    if(CategoryName == null) CategoryName = categories.get(0).getValue();
+    if(categoryName == null && categories.size() > 0) categoryName = categories.get(0).getValue();
     NewsletterSubscriptionHandler newsletterSubscriptionHandler = newsletterManagerService.getSubscriptionHandler();
     List<NewsletterSubscriptionConfig> listSubscriptions = newsletterSubscriptionHandler.
-        getSubscriptionsByCategory(sessionProvider, portalName, CategoryName);
+        getSubscriptionsByCategory(sessionProvider, portalName, categoryName);
     List<SelectItemOption<String>> subscriptions = new ArrayList<SelectItemOption<String>>();
     for (NewsletterSubscriptionConfig newsletterSubscriptionConfig : listSubscriptions) {
       subscriptions.add(new SelectItemOption<String>(newsletterSubscriptionConfig.getTitle(),
@@ -147,7 +148,7 @@ public class UINewsletterEntryDialogSelector extends UIForm {
     addChild(categorySelectBox);
     addChild(subscriptionSelectBox);
     NewsletterCategoryConfig categoryConfig = getAncestorOfType(UINewsletterEntryContainer.class).getCategoryConfig();
-    if(categoryConfig == null)
+    if(categoryConfig == null && newsletterCategoryConfigs.size() > 0)
       categoryConfig = newsletterCategoryConfigs.get(0);
     updateTemplateSelectBox(categoryConfig);
   }
@@ -163,7 +164,7 @@ public class UINewsletterEntryDialogSelector extends UIForm {
     List<SelectItemOption<String>> templates = new ArrayList<SelectItemOption<String>>();
     NewsletterManagerService newsletterManagerService = getApplicationComponent(NewsletterManagerService.class);
     NewsletterTemplateHandler newsletterTemplateHandler = newsletterManagerService.getTemplateHandler();
-    List<Node> templateNodes = newsletterTemplateHandler.getTemplates(Utils.getSessionProvider(),
+    List<Node> templateNodes = newsletterTemplateHandler.getTemplates(WCMCoreUtils.getUserSessionProvider(),
                                                                       NewsLetterUtil.getPortalName(),
                                                                       categoryConfig);
     for (Node template : templateNodes) {
@@ -199,7 +200,7 @@ public class UINewsletterEntryDialogSelector extends UIForm {
       UINewsletterEntryContainer newsletterEntryContainer = newsletterEntryDialogSelector.
           getAncestorOfType(UINewsletterEntryContainer.class);
       UINewsletterEntryForm newsletterEntryForm = newsletterEntryContainer.getChild(UINewsletterEntryForm.class);
-      newsletterEntryForm.setNodePath(newsletterTemplateHandler.getTemplate(Utils.getSessionProvider(),
+      newsletterEntryForm.setNodePath(newsletterTemplateHandler.getTemplate(WCMCoreUtils.getUserSessionProvider(),
                                                                             NewsLetterUtil.getPortalName(),
                                                                             newsletterEntryContainer.getCategoryConfig(),
                                                                             templateName)
@@ -267,7 +268,7 @@ public class UINewsletterEntryDialogSelector extends UIForm {
           getApplicationComponent(NewsletterManagerService.class);
       NewsletterSubscriptionHandler newsletterSubscriptionHandler = newsletterManagerService.getSubscriptionHandler();
       String portalName = NewsLetterUtil.getPortalName();
-      SessionProvider sessionProvider = Utils.getSessionProvider();
+      SessionProvider sessionProvider = WCMCoreUtils.getUserSessionProvider();
       NewsletterCategoryConfig categoryConfig = newsletterManagerService.getCategoryHandler()
                                                                         .getCategoryByName(sessionProvider,
                                                                                            portalName,

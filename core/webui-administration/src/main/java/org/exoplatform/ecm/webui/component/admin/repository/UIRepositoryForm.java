@@ -664,7 +664,7 @@ public class UIRepositoryForm extends UIForm implements UIPopupComponent {
       uiWizardPopup.deActivate();
       event.getRequestContext().addUIComponentToUpdateByAjax(uiWizardPopup);
       RepositoryService rService = uiForm.getApplicationComponent(RepositoryService.class);
-      if(uiForm.isAddnew_) uiForm.refresh(rService.getDefaultRepository().getConfiguration());
+      if(uiForm.isAddnew_) uiForm.refresh(rService.getCurrentRepository().getConfiguration());
       else uiForm.refresh(rService.getCurrentRepository().getConfiguration());
       event.getRequestContext().addUIComponentToUpdateByAjax(uiForm.getAncestorOfType(UIPopupContainer.class));
     }
@@ -707,7 +707,7 @@ public class UIRepositoryForm extends UIForm implements UIPopupComponent {
       UIPopupContainer uiWorkspaceAction = uiControl.getChild(UIPopupContainer.class);
       UIWorkspaceWizardContainer uiWsContainer = uiWorkspaceAction.activate(UIWorkspaceWizardContainer.class, 700);
       WorkspaceEntry wsdf = null;
-      RepositoryEntry  repoEntry = rService.getDefaultRepository().getConfiguration();
+      RepositoryEntry  repoEntry = rService.getCurrentRepository().getConfiguration();
       for(WorkspaceEntry ws : repoEntry.getWorkspaceEntries()) {
         if(ws.getName().equals(repoEntry.getDefaultWorkspaceName())) {
           wsdf = ws;

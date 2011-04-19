@@ -49,7 +49,7 @@ public class UIRepositoryList extends UIForm {
    */
   public UIRepositoryList() throws Exception {
     rService = getApplicationComponent(RepositoryService.class);
-    repoName_ = rService.getDefaultRepository().getConfiguration().getName();
+    repoName_ = rService.getCurrentRepository().getConfiguration().getName();
   }
 
   /**
