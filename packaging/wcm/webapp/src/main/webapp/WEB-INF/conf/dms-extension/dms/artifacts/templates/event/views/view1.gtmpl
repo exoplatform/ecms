@@ -80,7 +80,7 @@
         <% if(node.hasProperty("exo:summary")) { %>
           <div class="LabelContent">
             <%
-              print uicomponent.getInlineEditingField("", "WYSIWYG", "exo:summary", "Summary", "Content", node, true);
+              print uicomponent.getInlineEditingField("", "WYSIWYG", "exo:summary", "Summary", "Content", node, true, "toolbar=SuperBasicWCM");
             %>
           </div>
         <% } %>

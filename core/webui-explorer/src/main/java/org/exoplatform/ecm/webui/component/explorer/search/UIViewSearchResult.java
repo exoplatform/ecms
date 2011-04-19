@@ -419,7 +419,11 @@ public class UIViewSearchResult extends UIContainer implements NodePresentation 
 
 	@Override
   public String getInlineEditingField(String currentValue, String inputType,String propertyName, 
-  									String idGenerator, String cssClass, Node orgNode, boolean isGenericProperty) throws Exception {
-	  return "";
+  									String idGenerator, String cssClass, Node orgNode, boolean isGenericProperty, String... arguments) throws Exception {
+	  if (orgNode.hasProperty(propertyName)) {
+	      return orgNode.getProperty(propertyName).getString();
+	  }else {
+	    return currentValue;
+	  }
   }
 }

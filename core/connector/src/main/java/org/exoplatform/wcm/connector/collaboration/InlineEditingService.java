@@ -210,8 +210,18 @@ public class InlineEditingService implements ResourceContainer{
 								if (!node.hasProperty(EXO_TITLE))
 									node.addMixin(EXO_RSS_ENABLE);
 							}
-							node.setProperty(propertyName, newValue);
-							node.save();
+							if (!propertyName.contains("/")) {
+  							node.setProperty(propertyName, newValue);
+  							node.save();
+							}else {
+							  int iSlash = propertyName.lastIndexOf("/");
+							  String subnodePath = propertyName.substring(0, iSlash);
+							  String subnodeProperty = propertyName.substring(iSlash+1);
+							  Node subnode = node.getNode(subnodePath);
+							  subnode.setProperty(subnodeProperty, newValue);
+							  subnode.save();
+							  node.save();
+							}
 							ConversationState conversationState = ConversationState.getCurrent();
 							conversationState.setAttribute("siteName", siteName);
 							listenerService.broadcast(POST_EDIT_CONTENT_EVENT, null, node);

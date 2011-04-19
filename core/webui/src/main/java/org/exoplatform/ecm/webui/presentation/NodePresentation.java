@@ -310,5 +310,5 @@ public interface NodePresentation {
    * @author 								vinh_nguyen
    */
   public String getInlineEditingField(String defaultValue, String inputType, String propertyName, 
-  											String idGenerator, String cssClass, Node orgNode, boolean isGenericProperty) throws Exception;
+  											String idGenerator, String cssClass, Node orgNode, boolean isGenericProperty, String... arguments) throws Exception;
 }

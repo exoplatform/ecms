@@ -16,6 +16,7 @@
   	def currentNode = uicomponent.getNode() ; 
     def html = currentNode.getNode("default.html/jcr:content").getProperty("jcr:data").getString();
   	def css = currentNode.getNode("css/default.css/jcr:content").getProperty("jcr:data").getString();
+  	def cssOption = "CSSData=" + css;
   	def js = currentNode.getNode("js/default.js/jcr:content").getProperty("jcr:data").getString();  
   	// NOTE : You can use services if you're adding external css or js thru WebDAV. If not, direct access to the node is more efficient.
   	//def css = uicomponent.getApplicationComponent(XSkinService.class).getActiveStylesheet(currentNode);
@@ -80,7 +81,9 @@
 						}
 					%>
 				</div>
-				<%= html %>
+				<%
+          print uicomponent.getInlineEditingField(html, "WYSIWYG", "default.html/jcr:content/jcr:data", "Text", "Content", currentNode, true, cssOption, "toolbar=CompleteWCM");
+        %>          
 		    <% if (uicomponent.isEnableVote()) 
 	           _ctx.include(uicomponent.getViewTemplate("mix:votable", "view1"));
 	         if (uicomponent.isEnableComment())
@@ -89,7 +92,10 @@
 			</div>
 		<%
   } else {
-	  %><%= html %>
+	  %>
+    <%
+      print uicomponent.getInlineEditingField(html, "WYSIWYG", "default.html/jcr:content/jcr:data", "Text", "Content", currentNode, true, cssOption, "toolbar=CompleteWCM");
+    %>
     <% if (uicomponent.isEnableVote()) 
         _ctx.include(uicomponent.getViewTemplate("mix:votable", "view1"));
        if (uicomponent.isEnableComment())

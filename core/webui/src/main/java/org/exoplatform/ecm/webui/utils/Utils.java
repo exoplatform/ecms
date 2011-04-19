@@ -704,7 +704,7 @@ public class Utils {
    * @author 								vinh_nguyen
    */
   public static String getInlineEditingField(String defaultValue, String inputType, String propertyName, 
-  									String idGenerator, String cssClass, Node orgNode, boolean isGenericProperty) throws Exception {
+  									String idGenerator, String cssClass, Node orgNode, boolean isGenericProperty, String... arguments) throws Exception {
   	
   	if ( org.exoplatform.wcm.webui.Utils.getCurrentMode().equals(WCMComposer.MODE_LIVE)) {
   		if (orgNode.hasProperty(propertyName)) {
@@ -776,7 +776,7 @@ public class Utils {
   	sb.append("\t\t<a href=\"#\" class =\"AcceptButton\" onclick=\"").append(strAction).append("\">&nbsp;</a>\n");
   	sb.append("\t\t<div class=\"Edit").append(cssClass).append("Input\">\n");
   	if (inputType.equalsIgnoreCase(INPUT_WYSIWYG)) {
-  		sb.append(createCKEditorField(newValueInputId, "'98%'", "200", currentValue));
+  		sb.append(createCKEditorField(newValueInputId, currentValue, arguments));
   	}else if (inputType.equalsIgnoreCase(INPUT_TEXT_AREA)){
   		sb.append("\t\t<TEXTAREA ").append("\" name =\"");
   		sb.append(newValueInputId).append("\" id =\"").append(newValueInputId).append("\" >");
@@ -797,11 +797,17 @@ public class Utils {
    * @param value_
    * @return
    */
-  private static String createCKEditorField(String name, String width, String height, String value_) {	
-  	String toolbar = "Basic";
-
+  private static String createCKEditorField(String name, String value_, String... arguments) {
+    HashMap<String,String> parsedArguments = parseArguments(arguments) ;
+  	String toolbar = parsedArguments.get(TOOLBAR);
+  	
+  	String width = parsedArguments.get(WIDTH);
+  	String height = parsedArguments.get(HEIGHT);
+  	String passedCSS = parsedArguments.get(CSS);
+  	
   	if (width == null) width = "'100%'";
   	if (height == null) height = "200";
+  	if (toolbar == null) toolbar = "BasicWCM";
   	StringBuffer contentsCss = new StringBuffer();
   	contentsCss.append("[");
   	SkinService skinService = WCMCoreUtils.getService(SkinService.class);
@@ -820,6 +826,10 @@ public class Utils {
   	contentsCss.append("]");
 
   	StringBuffer buffer = new StringBuffer();
+  	if (passedCSS !=null) {
+  	  
+  	}
+  	buffer.append("<div style=\"display:none\"><textarea id='cssContent" + name + "' name='cssContent" + name + "'>" + passedCSS + "</textarea></div>\n");
   	if (value_!=null) {
   		buffer.append("<textarea id='" + name + "' name='" + name + "'>" + value_ + "</textarea>\n");
   	}else {
@@ -830,10 +840,39 @@ public class Utils {
   	buffer.append("    var instances = CKEDITOR.instances['" + name + "']; if (instances) instances.destroy(true);\n");
   	buffer.append("    CKEDITOR.replace('" + name + "', {toolbar:'" + toolbar + "', width:" + width
   			+ ", height:" + height + ", contentsCss:" + contentsCss + ", ignoreEmptyParagraph:true});\n");
+  	buffer.append("eXo.ecm.CKEditor.insertCSS('" + name + "', 'cssContent" + name + "')");
   	buffer.append("  //]]>\n");
   	
   	buffer.append("</script>\n");
-
+  	
   	return buffer.toString();
+  }
+  protected static final String SEPARATOR  = "=";
+  protected static final String TOOLBAR    = "toolbar";
+  protected static final String HEIGHT     = "height";
+  protected static final String WIDTH      = "width";
+  protected static final String CSS        = "CSSData";
+  private static HashMap<String,String> parseArguments(String... arguments) {
+    HashMap<String,String> map = new HashMap<String,String>() ;
+    for(String argument:arguments) {
+      String value = null;
+      if(argument.indexOf(SEPARATOR)>0) {
+        value = argument.substring(argument.indexOf(SEPARATOR)+1) ;
+      }else {
+        continue;
+      }
+      if (argument.startsWith(JCR_PATH)) {
+        map.put(JCR_PATH, value); continue;
+      } else if (argument.startsWith(TOOLBAR)) {
+        map.put(TOOLBAR, value); continue;
+      } else if (argument.startsWith(HEIGHT)) {
+        map.put(HEIGHT, value); continue;
+      } else if (argument.startsWith(WIDTH)) {
+        map.put(WIDTH, value); continue;
+      } else if (argument.startsWith(CSS)) {
+        map.put(CSS, value); continue;
+      }
+    }
+    return map;
   }
 }

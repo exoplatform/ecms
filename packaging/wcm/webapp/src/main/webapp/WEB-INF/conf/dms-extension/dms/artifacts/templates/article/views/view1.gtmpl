@@ -92,7 +92,7 @@
                             if(node.hasProperty("exo:text")) {
                               print uicomponent.getInlineEditingField(node.getProperty("exo:text").getString(), "WYSIWYG", "exo:text", "Text", "Content", node, true);
                             } else {
-                              print uicomponent.getInlineEditingField(_ctx.appRes("Article.view.label.none-content"), "WYSIWYG", "exo:text", "Text", "Content", node, true);
+                              print uicomponent.getInlineEditingField(_ctx.appRes("Article.view.label.none-content"), "WYSIWYG", "exo:text", "Text", "Content", node, true, "toolbar=CompleteWCM");
                             }
                         %>
 				                </div>
