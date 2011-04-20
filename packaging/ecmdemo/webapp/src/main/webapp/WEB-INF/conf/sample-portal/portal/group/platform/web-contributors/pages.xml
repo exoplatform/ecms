@@ -20,12 +20,12 @@
 
 -->
 
-<page-set>
+<page-set
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.gatein.org/xml/ns/gatein_objects_1_0 http://www.gatein.org/xml/ns/gatein_objects_1_0"
+    xmlns="http://www.gatein.org/xml/ns/gatein_objects_1_0">
 
   <page>
-    <page-id>group::platform/web-contributors::wcm</page-id>
-    <owner-type>group</owner-type>
-    <owner-id>platform/web-contributors</owner-id>
     <name>wcm</name>
     <title>Content Explorer</title>
     <access-permissions>*:/platform/web-contributors</access-permissions>
@@ -45,9 +45,6 @@
   </page>
 
   <page>
-    <page-id>group::platform/web-contributors::SiteExplorer</page-id>
-    <owner-type>group</owner-type>
-    <owner-id>platform/web-contributors</owner-id>
     <name>SiteExplorer</name>
     <title>Content Explorer</title>
     <access-permissions>*:/platform/web-contributors</access-permissions>
@@ -84,9 +81,6 @@
   </page>
 
   <page>
-    <page-id>group::platform/web-contributors::Editor</page-id>
-    <owner-type>group</owner-type>
-    <owner-id>platform/web-contributors</owner-id>
     <name>Editor</name>
     <title>Editor</title>
     <access-permissions>*:/platform/web-contributors</access-permissions>
@@ -138,9 +132,6 @@
   </page>
 
   <page>
-    <page-id>group::platform/web-contributors::WcmAdmin</page-id>
-    <owner-type>group</owner-type>
-    <owner-id>platform/web-contributors</owner-id>
     <name>WcmAdmin</name>
     <title>WCM Administration</title>
     <access-permissions>manager:/platform/web-contributors</access-permissions>
@@ -160,9 +151,6 @@
   </page>
 
   <page>
-    <page-id>group::platform/web-contributors::newslettermanager</page-id>
-    <owner-type>group</owner-type>
-    <owner-id>platform/web-contributors</owner-id>
     <name>newslettermanager</name>
     <title>Newsletter Manager Portlet</title>
     <access-permissions>*:/platform/web-contributors</access-permissions>
@@ -182,9 +170,6 @@
   </page>
 
   <page>
-    <page-id>group::platform/web-contributors::formgenerator</page-id>
-    <owner-type>group</owner-type>
-    <owner-id>platform/web-contributors</owner-id>
     <name>formgenerator</name>
     <title>Form Generator Portlet</title>
     <access-permissions>*:/platform/web-contributors</access-permissions>
