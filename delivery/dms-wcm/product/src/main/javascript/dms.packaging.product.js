@@ -47,10 +47,6 @@ function getProduct(version) {
   product.addServerPatch("jboss",  portal.server.jboss.patch) ;
   product.addServerPatch("jbossear",  portal.server.jbossear.patch) ;  
   
-  /* cleanup duplicated lib */
-  product.removeDependency(new Project("commons-collections", "commons-collections", "jar", "3.1"));
-  product.removeDependency(new Project("commons-lang", "commons-lang", "jar", "2.3"));
-
   product.module = dms ;
   product.dependencyModule = [kernel, core, ws, eXoJcr, portal];
 

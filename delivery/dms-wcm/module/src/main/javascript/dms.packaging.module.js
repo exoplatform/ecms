@@ -25,21 +25,17 @@ function getModule(params) {
     addDependency(new Project("org.exoplatform.ecms", "exo-ecms-core-webui", "jar", module.version)).
     addDependency(new Project("org.exoplatform.commons", "exo.platform.commons.webui.ext", "jar", "${org.exoplatform.commons.version}")).
     addDependency(new Project("org.exoplatform", "exo-jcr-services", "jar", "${org.exoplatform.jcr-services.version}")).
-    addDependency(new Project("rome", "rome", "jar", "0.9")) .
-    addDependency(new Project("com.totsp.feedpod", "itunes-com-podcast", "jar", "0.2")) .
-    addDependency(new Project("ical4j", "ical4j", "jar", "0.9.20")) .
-    addDependency(new Project("jdom", "jdom", "jar", "1.0")).
-    addDependency(new Project("org.apache.ws.commons", "ws-commons-util", "jar", "1.0.1")).
-  //addDependency(new Project("com.sun.xml.stream", "sjsxp", "jar", "1.0")).
-    addDependency(new Project("org.icepdf", "icepdf-core", "jar", "4.0.1")).
-    addDependency(new Project("org.icepdf", "icepdf-viewer", "jar", "4.0.1")).
-    addDependency(new Project("org.apache.pdfbox", "fontbox", "jar", "1.1.0")).
-    addDependency(new Project("com.artofsolving", "jodconverter", "jar", "2.2.2")).
-    addDependency(new Project("com.artofsolving", "jodconverter-cli", "jar", "2.2.2")).
-    addDependency(new Project("org.openoffice", "ridl", "jar", "3.0.1")).
-    addDependency(new Project("org.openoffice", "unoil", "jar", "3.0.1")).
-    addDependency(new Project("org.openoffice", "jurt", "jar", "3.0.1")).
-    addDependency(new Project("org.openoffice", "juh", "jar", "3.0.1"));
+    addDependency(new Project("rome", "rome", "jar", "${rome.version}")) .
+    addDependency(new Project("com.totsp.feedpod", "itunes-com-podcast", "jar", "${itunes.podcast.version}")) .
+    addDependency(new Project("org.icepdf", "icepdf-core", "jar", "${icepdf.version}")).
+    addDependency(new Project("org.icepdf", "icepdf-viewer", "jar", "${icepdf.version}")).
+    addDependency(new Project("org.apache.pdfbox", "fontbox", "jar", "${org.apache.pdfbox.version}")).
+    addDependency(new Project("com.artofsolving", "jodconverter", "jar", "${jodconverter.version}")).
+    addDependency(new Project("com.artofsolving", "jodconverter-cli", "jar", "${jodconverter.version}")).
+    addDependency(new Project("org.openoffice", "ridl", "jar", "${openoffice.version}")).
+    addDependency(new Project("org.openoffice", "unoil", "jar", "${openoffice.version}")).
+    addDependency(new Project("org.openoffice", "jurt", "jar", "${openoffice.version}")).
+    addDependency(new Project("org.openoffice", "juh", "jar", "${openoffice.version}"));
   module.portlet.ecmadmin.deployName = "ecmadmin";
   
   module.portlet.ecmexplorer = new Project("org.exoplatform.ecms", "exo-ecms-apps-portlet-explorer", "exo-portlet", module.version).
@@ -49,10 +45,7 @@ function getModule(params) {
   module.portlet.ecmbrowsecontent = new Project("org.exoplatform.ecms", "exo-ecms-ext-deprecated-portlet-browsecontent", "exo-portlet", module.version);
   module.portlet.ecmbrowsecontent.deployName = "ecmbrowsecontent";
 
-  module.portlet.jcr_console = new Project("org.exoplatform.ecms", "exo-ecms-ext-deprecated-portlet-jcrconsole", "exo-portlet", module.version).
-    addDependency(new Project("exo-weblogic", "exo-weblogic-authproviders", "jar", "1.0")).
-    addDependency(new Project("exo-weblogic", "exo-weblogic-loginmodule", "jar", "1.0")).  
-    addDependency(new Project("commons-logging", "commons-logging", "jar", "1.0.4"));
+  module.portlet.jcr_console = new Project("org.exoplatform.ecms", "exo-ecms-ext-deprecated-portlet-jcrconsole", "exo-portlet", module.version);
   module.portlet.jcr_console.deployName = "jcr_console";
   
   module.gadgets = new Project("org.exoplatform.ecms", "exo-ecms-apps-gadget-publication", "war", module.version).

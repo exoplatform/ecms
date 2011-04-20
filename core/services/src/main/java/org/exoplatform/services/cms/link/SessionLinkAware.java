@@ -90,7 +90,7 @@ public class SessionLinkAware implements ExtendedSession, NamespaceAccessor {
           sSessions.add(originalSession);
           sSessions.add(currentNodeSession);
           sSessions.add(getTargetSession());
-          sessions = (ExtendedSession[]) sSessions.toArray(new ExtendedSession[sSessions.size()]);
+          sessions = sSessions.toArray(new ExtendedSession[sSessions.size()]);
         }
       }
     }
@@ -116,9 +116,8 @@ public class SessionLinkAware implements ExtendedSession, NamespaceAccessor {
   private ExtendedSession getTargetSession(ItemLinkAware itemLA) throws RepositoryException {
     if (itemLA instanceof NodeLinkAware) {
       return (ExtendedSession) ((NodeLinkAware) itemLA).getTargetNode().getRealNode().getSession();
-    } else {
-      return (ExtendedSession) itemLA.item.getSession();
     }
+    return (ExtendedSession) itemLA.item.getSession();
   }
 
   private ExtendedSession getTargetSession(String absPath) throws RepositoryException {
@@ -543,8 +542,17 @@ public class SessionLinkAware implements ExtendedSession, NamespaceAccessor {
     return ((NamespaceAccessor) getTargetSession()).getNamespaceURIByPrefix(prefix);
   }
 
-public Node getNodeByIdentifier(String identifier)
-    throws ItemNotFoundException, RepositoryException {
-  return null;
-}
+  /**
+   * {@inheritDoc}}
+   */
+  public Node getNodeByIdentifier(String identifier) throws ItemNotFoundException, RepositoryException {
+    return getTargetSession().getNodeByIdentifier(identifier);
+  }
+
+  @Override
+  public void exportSystemView(String absPath, OutputStream out, boolean skipBinary, boolean noRecurse,
+      boolean exportChildVersionHisotry) throws IOException, PathNotFoundException, RepositoryException {
+    getTargetSession().exportSystemView(absPath, out, skipBinary, noRecurse, exportChildVersionHisotry);
+  }
+  
 }

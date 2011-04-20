@@ -61,19 +61,13 @@
     <dependency>
       <groupId>org.icepdf</groupId>
       <artifactId>icepdf-viewer</artifactId>
-      <version>4.0.1</version>
+      <version>${icepdf.version}</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>org.icepdf</groupId>
       <artifactId>icepdf-core</artifactId>
-      <version>4.0.1</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.codehaus.groovy</groupId>
-      <artifactId>groovy-all-minimal</artifactId>
-      <version>1.5.4</version>
+      <version>${icepdf.version}</version>
       <scope>compile</scope>
     </dependency>
   </dependencies>

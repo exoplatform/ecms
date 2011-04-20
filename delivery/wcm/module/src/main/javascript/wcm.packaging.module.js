@@ -13,8 +13,8 @@ function getModule(params) {
   var module = new Module();
 
   module.version = "${project.version}" ;
-  module.relativeMavenRepo =  "org/exoplatform/ecm/wcm" ;
-  module.relativeSRCRepo =  "ecm/wcm" ;
+  module.relativeMavenRepo =  "org/exoplatform/ecms" ;
+  module.relativeSRCRepo =  "ecms" ;
   module.name =  "wcm" ;
   
   module.portlet = {};
@@ -92,8 +92,6 @@ function getModule(params) {
 
   module.server.jboss = {};
   module.server.jboss.patch = new Project("org.exoplatform.ecms", "exo-ecms-delivery-wcm-server-jboss", "jar", module.version);	
- 
-	  
   
 
   return module;

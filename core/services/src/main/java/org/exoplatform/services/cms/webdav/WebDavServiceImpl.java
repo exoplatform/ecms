@@ -368,6 +368,16 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
     }
     return super.proppatch(repoName, repoPath, lockTokenHeader, ifHeader, uriInfo, body);
   }
+  
+  @Deprecated
+  public Response put(String repoName, String repoPath, String lockTokenHeader, String ifHeader,
+      String fileNodeTypeHeader, String contentNodeTypeHeader, String mixinTypes, MediaType mediatype,
+      InputStream inputStream)
+  {
+    return put(repoName, repoPath, lockTokenHeader, ifHeader, fileNodeTypeHeader, contentNodeTypeHeader, mixinTypes,
+        mediatype, inputStream, null);
+  }
+      
 
   @PUT
   @Path("/{repoName}/{repoPath:.*}/")
@@ -379,7 +389,8 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
                       @HeaderParam(ExtHttpHeaders.CONTENT_NODETYPE) String nodeTypeHeader,
                       @HeaderParam(ExtHttpHeaders.CONTENT_MIXINTYPES) String mixinTypes,
                       @HeaderParam(ExtHttpHeaders.CONTENTTYPE) MediaType mediaType,
-                      InputStream inputStream) {
+                      InputStream inputStream,
+                      @Context UriInfo uriInfo) {
 
     try {
       repoName = repositoryService.getCurrentRepository().getConfiguration().getName();
@@ -404,7 +415,8 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
                      nodeTypeHeader,
                      mixinTypes,
                      mediaType,
-                     inputStream);
+                     inputStream,
+                     uriInfo);
   }
 
   @REPORT
@@ -564,6 +576,17 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
                       body);
   }
 
+  @Deprecated
+  public Response mkcol(@PathParam("repoName") String repoName,
+      @PathParam("repoPath") String repoPath,
+      @HeaderParam(ExtHttpHeaders.LOCKTOKEN) String lockTokenHeader,
+      @HeaderParam(ExtHttpHeaders.IF) String ifHeader,
+      @HeaderParam(ExtHttpHeaders.CONTENT_NODETYPE) String nodeTypeHeader,
+      @HeaderParam(ExtHttpHeaders.CONTENT_MIXINTYPES) String mixinTypesHeader) {
+    return mkcol(repoName, repoPath, lockTokenHeader, ifHeader, nodeTypeHeader, mixinTypesHeader, null);
+
+  }
+  
   /**
    * {@inheritDoc}
    */
@@ -574,7 +597,8 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
                         @HeaderParam(ExtHttpHeaders.LOCKTOKEN) String lockTokenHeader,
                         @HeaderParam(ExtHttpHeaders.IF) String ifHeader,
                         @HeaderParam(ExtHttpHeaders.CONTENT_NODETYPE) String nodeTypeHeader,
-                        @HeaderParam(ExtHttpHeaders.CONTENT_MIXINTYPES) String mixinTypesHeader) {
+                        @HeaderParam(ExtHttpHeaders.CONTENT_MIXINTYPES) String mixinTypesHeader,
+                        @Context UriInfo uriInfo) {
     try {
       repoName = repositoryService.getCurrentRepository().getConfiguration().getName();
       Item item = nodeFinder.getItem(workspaceName(repoPath),
@@ -594,7 +618,8 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
                        lockTokenHeader,
                        ifHeader,
                        nodeTypeHeader,
-                       mixinTypesHeader);
+                       mixinTypesHeader,
+                       uriInfo);
   }
 
   @DELETE
