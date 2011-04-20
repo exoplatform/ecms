@@ -3,8 +3,8 @@
    xmlns="http://www.exoplaform.org/xml/ns/kernel_1_0.xsd">
 
    <component>
-      <key>org.exoplatform.services.document.DocumentReaderService</key>
-      <type>org.xcmis.spi.utils.CmisDocumentReaderService</type>
+     <key>org.xcmis.restatom.CmisRestApplication</key>
+     <type>org.xcmis.restatom.CmisRestApplicationSingle</type>
    </component>
    
    <component>

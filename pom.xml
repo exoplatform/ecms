@@ -38,7 +38,7 @@
     <org.exoplatform.commons.version>1.0.4</org.exoplatform.commons.version>
     <org.exoplatform.tool.version>1.0.0</org.exoplatform.tool.version>
     <chromattic.version>1.0.4</chromattic.version>
-    <xcmis.version>1.1.4</xcmis.version>
+    <xcmis.version>1.2.0-GA</xcmis.version>
     <xml.parser.version>3.1</xml.parser.version>
     <!-- workflow implementations -->
     <org.jbpm.jbpm3>3.2.8</org.jbpm.jbpm3>

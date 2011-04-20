@@ -149,7 +149,7 @@ public final class PropertyDefinitions
 
             add(objectType.value(), createPropertyDefinition(CmisConstants.CONTENT_STREAM_FILE_NAME,
                PropertyType.STRING, CmisConstants.CONTENT_STREAM_FILE_NAME, CmisConstants.CONTENT_STREAM_FILE_NAME,
-               null, CmisConstants.CONTENT_STREAM_FILE_NAME, false, false, false, false, false, Updatability.READONLY,
+               null, CmisConstants.CONTENT_STREAM_FILE_NAME, false, false, false, false, false, Updatability.READWRITE,
                "Document's content file name.", null, null, null));
 
             add(objectType.value(), createPropertyDefinition(CmisConstants.CONTENT_STREAM_ID, PropertyType.ID,
