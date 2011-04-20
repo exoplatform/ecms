@@ -8,14 +8,14 @@
   </parent>
   <groupId>org.exoplatform.ecms</groupId>
   <artifactId>exo-ecms</artifactId>
-  <version>2.1.4</version>
+  <version>2.1.4-bonita</version>
   <packaging>pom</packaging>
   <name>eXo ECM Suite</name>
   <description>eXo Entreprise Content Management Suite</description>
   <scm>
-    <connection>scm:svn:http://svn.exoplatform.org/projects/ecms/tags/2.1.4</connection>
-    <developerConnection>scm:svn:http://svn.exoplatform.org/projects/ecms/tags/2.1.4</developerConnection>
-    <url>http://fisheye.exoplatform.org/browse/ecms/tags/2.1.4</url>
+    <connection>scm:svn:http://svn.exoplatform.org/projects/ecms/tags/2.1.4-bonita</connection>
+    <developerConnection>scm:svn:http://svn.exoplatform.org/projects/ecms/tags/2.1.4-bonita</developerConnection>
+    <url>http://fisheye.exoplatform.org/browse/ecms/tags/2.1.4-bonita</url>
   </scm>
   <issueManagement>
     <system>jira</system>
@@ -33,6 +33,7 @@
     <org.exoplatform.jcr.version>1.12.8-GA</org.exoplatform.jcr.version>
     <org.exoplatform.jcr-services.version>1.12.8-GA</org.exoplatform.jcr-services.version>
     <org.exoplatform.portal.version>3.1.8-PLF</org.exoplatform.portal.version>
+    <org.exoplatform.ecms.version>2.1.4</org.exoplatform.ecms.version>
     <exo.tool.framework.junit.version>1.2.0</exo.tool.framework.junit.version>
     <org.exoplatform.commons.version>1.0.4</org.exoplatform.commons.version>
     <org.exoplatform.tool.version>1.0.0</org.exoplatform.tool.version>
@@ -409,13 +410,6 @@
     </profile>
   </profiles>
   <modules>
-    <module>core</module>
-    <module>apps</module>
-    <module>ext</module>
-    <module>delivery</module>
-    <module>packaging</module>
-    <module>examples</module>
-    <module>docs</module>
-    <module>testsuite</module>
+    <module>ext/xcmis/sp</module>
   </modules>
 </project>
