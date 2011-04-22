@@ -34,7 +34,7 @@
   			<td class="text"><%=_ctx.appRes("Sample.view.label.title")%></td>
   			<td class="TextDetail">  
           <% 
-            print uicomponent.getInlineEditingField("", "TEXT", "exo:title", "TdGtmplTitle", "TdGtmplTitle", node, true); 
+            print uicomponent.getInlineEditingField(node, "exo:title", "", "TEXT", "TdGtmplTitle", "TdGtmplTitle", true); 
           %>
   			</td>
 			</tr></table>
@@ -69,7 +69,7 @@
 				</div>
 				<div class="summary" >
 				  <%			  
-            print uicomponent.getInlineEditingField("", "TEXTAREA", "exo:description", "Description", "Content", node, true);
+            print uicomponent.getInlineEditingField(node, "exo:description", "", "TEXTAREA", "Description", "Content", true);
           %>
 				</div>
 			</div>
@@ -94,7 +94,7 @@
 				</div>
 				<div class="summary" >
 			   <%
-            print uicomponent.getInlineEditingField("", "TEXTAREA", "exo:summary", "Summary", "Content",node, true);
+            print uicomponent.getInlineEditingField(node, "exo:summary", "", "TEXTAREA", "Summary", "Content", true);
          %>
 				</div>
 			</div>
@@ -104,7 +104,7 @@
 				</div>
 				<div class="content">
 			   <%          
-            print uicomponent.getInlineEditingField("", "TEXTAREA", "exo:content", "Content", "Content", node, true);
+            print uicomponent.getInlineEditingField(node, "exo:content", "", "TEXTAREA", "Content", "Content", true);
          %>
 				</div>
 			</div>

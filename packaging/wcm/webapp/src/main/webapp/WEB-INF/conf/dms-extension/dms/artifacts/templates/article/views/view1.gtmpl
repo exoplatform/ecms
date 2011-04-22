@@ -29,7 +29,7 @@
 				<div class="ArticleTRDecorator">
 					<div class="ArticleTCDecorator">
 		        <div class="TitleLabel">
-		          <% print uicomponent.getInlineEditingField("", "TEXT", "exo:title", "GtmplTitle", "GtmplTitle", node, true); %>
+		          <% print uicomponent.getInlineEditingField(node, "exo:title", "", "TEXT", "GtmplTitle", "GtmplTitle", true); %>
 		        </div>
 	        </div>
 				</div>
@@ -57,9 +57,9 @@
 			              		<div class="LabelContent">
 					                <%
                             if(node.hasProperty("exo:summary")) {
-                              print uicomponent.getInlineEditingField("", "WYSIWYG", "exo:summary", "Summary", "Content", node, true);
+                              print uicomponent.getInlineEditingField(node, "exo:summary", "", "WYSIWYG", "Summary", "Content", true);
                             } else {
-                              print uicomponent.getInlineEditingField(_ctx.appRes("Article.view.label.none-summary"), "WYSIWYG", "exo:summary", "Summary", "Content", node, true);
+                              print uicomponent.getInlineEditingField(node, "exo:summary", _ctx.appRes("Article.view.label.none-summary"), "WYSIWYG", "Summary", "Content", true);
                             }
                           %>
 					              </div>
@@ -90,9 +90,9 @@
 			                	<div class="LabelContent">
 <%
                             if(node.hasProperty("exo:text")) {
-                              print uicomponent.getInlineEditingField(node.getProperty("exo:text").getString(), "WYSIWYG", "exo:text", "Text", "Content", node, true);
+                              print uicomponent.getInlineEditingField(node, "exo:text", node.getProperty("exo:text").getString(), "WYSIWYG", "Text", "Content", true);
                             } else {
-                              print uicomponent.getInlineEditingField(_ctx.appRes("Article.view.label.none-content"), "WYSIWYG", "exo:text", "Text", "Content", node, true, "toolbar=CompleteWCM");
+                              print uicomponent.getInlineEditingField(node, "exo:text", _ctx.appRes("Article.view.label.none-content"), "WYSIWYG", "Text", "Content", true);
                             }
                         %>
 				                </div>

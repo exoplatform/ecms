@@ -409,24 +409,13 @@ public class UIPresentationContainer extends UIContainer{
       Utils.createPopupWindow(presentationContainer, pcvConfigForm, UISingleContentViewerPortlet.UIPreferencesPopupID, 600);
     }
   }
-  /**
-   * 
-   * @param restPath				rest-service path to execute
-   * @param inputType				input type for editing: TEXT, TEXTAREA, WYSIWYG
-   * @param propertyName		which property used for editing
-   * @param cssClass				class name for CSS, should implement: cssClass, [cssClass]Title
-   * 												Edit[cssClass] as relative css
-   * 												Should create the function: InlineEditor.presentationRequestChange[cssClass] 
-   * 												to request the rest-service
-   * @return								String that can be put on groovy template
-   * @throws 								Exception
-   * @author 								vinh_nguyen
-   */
-  public String getInlineEditingField(String defaultValue, String inputType, String propertyName, 
-  										String idGenerator, String cssClass, Node orgNode, boolean isGenericProperty, String... arguments) throws Exception{
-  	UIPresentation presentation = getChild(UIPresentation.class);
-  	if (presentation == null) return null;  	
-  	return presentation.getInlineEditingField(defaultValue, inputType, propertyName, 
-  																						idGenerator, cssClass, orgNode, isGenericProperty, arguments);  
+  
+  public String getInlineEditingField(Node orgNode, String propertyName, String defaultValue, String inputType, 
+      String idGenerator, String cssClass, boolean isGenericProperty, String... arguments) throws Exception {
+    return org.exoplatform.ecm.webui.utils.Utils.getInlineEditingField(orgNode, propertyName, defaultValue, 
+                                                        inputType, idGenerator, cssClass, isGenericProperty, arguments);  	  
+  }
+  public String getInlineEditingField(Node orgNode, String propertyName) throws Exception{
+    return org.exoplatform.ecm.webui.utils.Utils.getInlineEditingField(orgNode, propertyName);
   }
 }

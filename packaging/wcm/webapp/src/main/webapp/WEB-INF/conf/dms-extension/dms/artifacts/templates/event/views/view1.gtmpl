@@ -61,7 +61,7 @@
       <%}%>     
       
       <%if(node.hasProperty("exo:location")) { %>
-      <div class="LocationLabel"><%=node.getProperty("exo:location").getString()%></div>
+      <div class="LocationLabel"><% print uicomponent.getInlineEditingField(node, "exo:location");%></div>
       <%}%>           
 
       <div class="TitleLabel">
@@ -80,14 +80,14 @@
         <% if(node.hasProperty("exo:summary")) { %>
           <div class="LabelContent">
             <%
-              print uicomponent.getInlineEditingField("", "WYSIWYG", "exo:summary", "Summary", "Content", node, true, "toolbar=SuperBasicWCM");
+              print uicomponent.getInlineEditingField(node, "exo:summary", "", "WYSIWYG", "Summary", "Content", true, "toolbar=SuperBasicWCM");
             %>
           </div>
         <% } %>
         <% if(node.hasProperty("exo:text")) { %>
           <div class="LabelContent">
             <%
-              print uicomponent.getInlineEditingField("", "WYSIWYG", "exo:text", "Text", "Content", node, true);
+              print uicomponent.getInlineEditingField(node, "exo:text", "", "WYSIWYG", "Text", "Content", true);
             %>
           </div>
         <% } %>

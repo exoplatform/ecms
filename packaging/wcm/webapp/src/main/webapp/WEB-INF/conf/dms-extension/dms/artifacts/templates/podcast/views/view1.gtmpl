@@ -29,7 +29,7 @@
 		  <table><tr>
   			<td class="text"><%=_ctx.appRes("Podcast.view.label.title")%>: </td>
   			<td class="TextDetail">
-  				<% print uicomponent.getInlineEditingField("", "TEXT", "exo:title", "TdGtmplTitle", "TdGtmplTitle", node, true); %>
+  				<% print uicomponent.getInlineEditingField(node, "exo:title", "", "TEXT", "TdGtmplTitle", "TdGtmplTitle", true); %>
   			</td>
 			</tr></table>
 		</div>
@@ -130,7 +130,7 @@
         if (org.exoplatform.wcm.webui.Utils.getCurrentMode().equals(WCMComposer.MODE_LIVE)) {
           print strTmpDescription;
         }else {
-          print uicomponent.getInlineEditingField(strTmpDescription, "TEXTAREA", "exo:description", "Description", "Content", node, true);
+          print uicomponent.getInlineEditingField(node, "exo:description", strTmpDescription, "TEXTAREA", "Description", "Content", true);
         }
       %>
 			</div>

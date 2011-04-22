@@ -507,9 +507,14 @@ public class UIDocumentDetail extends UIContainer implements NodePresentation, U
   }
 
   @Override
-  public String getInlineEditingField(String defaultValue, String inputType,String propertyName, 
-  										String idGenerator, String cssClass, Node orgNode, boolean isGenericProperty, String... arguments) throws Exception {
-		return org.exoplatform.ecm.webui.utils.Utils.getInlineEditingField(defaultValue, inputType, propertyName, 
-																																	idGenerator, cssClass, orgNode, isGenericProperty, arguments);
-	}
+  public String getInlineEditingField(Node orgNode, String propertyName, String defaultValue, String inputType, 
+                                      String idGenerator, String cssClass, boolean isGenericProperty, String... arguments) throws Exception{
+    return org.exoplatform.ecm.webui.utils.Utils.getInlineEditingField(orgNode, propertyName, defaultValue, inputType, 
+                                                                       idGenerator, cssClass, isGenericProperty, arguments);
+  }
+
+  @Override
+  public String getInlineEditingField(Node orgNode, String propertyName) throws Exception {
+    return org.exoplatform.ecm.webui.utils.Utils.getInlineEditingField(orgNode, propertyName);
+  }
 }

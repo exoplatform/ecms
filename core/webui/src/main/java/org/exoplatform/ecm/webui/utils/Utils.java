@@ -27,6 +27,8 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.zip.ZipInputStream;
 
 import javax.imageio.ImageIO;
@@ -188,7 +190,7 @@ public class Utils {
   final static public String EXO_SYMLINK = "exo:symlink";
   final static public String EXO_PRIMARYTYPE = "exo:primaryType";
 
-    final static public String EXO_SORTABLE = "exo:sortable";
+  final static public String EXO_SORTABLE = "exo:sortable";
 
   final static public String[] SPECIFIC_FOLDERS = { EXO_MUSICFOLDER,
       EXO_VIDEOFOLDER, EXO_PICTUREFOLDER, EXO_DOCUMENTFOLDER, EXO_SEARCHFOLDER };
@@ -222,7 +224,7 @@ public class Utils {
   public static final String INPUT_TEXT_AREA 			= "TEXTAREA".intern();
 	public static final String INPUT_WYSIWYG				= "WYSIWYG".intern();
 	public static final String INPUT_TEXT						= "TEXT".intern();
-
+	public static final String DEFAULT_CSS_NAME     = "InlineText".intern();
   public static String encodeHTML(String text) {
     return text.replaceAll("&", "&amp;").replaceAll("\"", "&quot;").replaceAll(
         "<", "&lt;").replaceAll(">", "&gt;");
@@ -690,22 +692,39 @@ public class Utils {
         getComponentInstance(PortalContainerConfig.class);
     return portalContainerConfig.getRestContextName(portalContainerName);
   }
+  
+  public static String getInlineEditingField(Node orgNode, String propertyName) throws Exception {
+    String defaultValue ="";
+    String idGenerator ="";
+    Pattern p = Pattern.compile("[^a-zA-Z0-9]");
+    Matcher m = p.matcher(propertyName);
+    if (orgNode.hasProperty(propertyName)) {
+      defaultValue = orgNode.getProperty(propertyName).getString();
+    }
+    idGenerator = m.replaceAll("_");
+    return getInlineEditingField(orgNode, propertyName, defaultValue, INPUT_TEXT, idGenerator
+                                  , DEFAULT_CSS_NAME, true);  
+  }
   /**
-   * 
-   * @param restPath				rest-service path to execute
+   *
+   * @param orgNode         Processed node
+   * @param propertyName    which property used for editing
    * @param inputType				input type for editing: TEXT, TEXTAREA, WYSIWYG
-   * @param propertyName		which property used for editing
    * @param cssClass				class name for CSS, should implement: cssClass, [cssClass]Title
    * 												Edit[cssClass] as relative css
    * 												Should create the function: InlineEditor.presentationRequestChange[cssClass] 
    * 												to request the rest-service
+   * @param isGenericProperty  set as true to use generic javascript function, other wise, must create 
+   *                        the correctspond function InlineEditor.presentationRequestChange[cssClass]
+   * @param arguments       Extra parameter for Input component (toolbar, width, height,.. for CKEditor/TextArea)
    * @return								String that can be put on groovy template
    * @throws 								Exception
    * @author 								vinh_nguyen
    */
-  public static String getInlineEditingField(String defaultValue, String inputType, String propertyName, 
-  									String idGenerator, String cssClass, Node orgNode, boolean isGenericProperty, String... arguments) throws Exception {
-  	
+  public static String getInlineEditingField(Node orgNode, String propertyName, String defaultValue, String inputType, 
+  									String idGenerator, String cssClass, boolean isGenericProperty, String... arguments) throws Exception {
+    HashMap<String,String> parsedArguments = parseArguments(arguments) ;
+    
   	if ( org.exoplatform.wcm.webui.Utils.getCurrentMode().equals(WCMComposer.MODE_LIVE)) {
   		if (orgNode.hasProperty(propertyName)) {
 				try {
@@ -731,7 +750,6 @@ public class Utils {
   			WebuiRequestContext.getCurrentInstance());
   	StringBuffer sb = new StringBuffer();
   	StringBuffer actionsb = new StringBuffer();
-//  	Node orgNode = getOriginalNode();
   	String repo = ((ManageableRepository)orgNode.getSession().getRepository()).getConfiguration().getName();
   	String workspace = orgNode.getSession().getWorkspace().getName();
   	String uuid = orgNode.getUUID();
@@ -756,14 +774,15 @@ public class Utils {
   	actionsb.append(currentValueID).append("', '").append(newValueInputId).append("', '").append(repo)
   	.append("', '").append(workspace).append("', '").append(uuid).append("', '")
   	.append(editBlockEditorID).append("', '").append(showBlockId).append("', '").append(siteName).append("', '").append(language);
-
+  	
   	if (inputType.equals(INPUT_WYSIWYG)) {
   		actionsb.append("', 1);");
   	}else {
   		actionsb.append("');");
   	}
   	String strAction = actionsb.toString();
-  	sb.append("<div class=\"InlineEditing\">\n");
+  	
+  	sb.append("<div class=\"InlineEditing\">\n");  	
   	sb.append("\n<div id=\"").append(showBlockId).append("\" Class=\"").append(cssClass).append("\"");
   	sb.append("title=\"").append(strSuggestion).append("\"");
   	sb.append(" onDblClick=\"InlineEditor.presentationSwitchBlock('").append(showBlockId).append("', '").append(editBlockEditorID).append("');\"");
@@ -774,9 +793,10 @@ public class Utils {
   	sb.append("\t\t<a href=\"#\" class =\"CancelButton\" ").append("onClick=\"InlineEditor.presentationSwitchBlock('");
   	sb.append(editBlockEditorID).append("', '").append(showBlockId).append("');\">&nbsp;</a>\n");
   	sb.append("\t\t<a href=\"#\" class =\"AcceptButton\" onclick=\"").append(strAction).append("\">&nbsp;</a>\n");
-  	sb.append("\t\t<div class=\"Edit").append(cssClass).append("Input\">\n");
+  	sb.append("\t\t<div class=\"Edit").append(cssClass).append("Input\">\n ");
+
   	if (inputType.equalsIgnoreCase(INPUT_WYSIWYG)) {
-  		sb.append(createCKEditorField(newValueInputId, currentValue, arguments));
+  		sb.append(createCKEditorField(newValueInputId, currentValue, parsedArguments));
   	}else if (inputType.equalsIgnoreCase(INPUT_TEXT_AREA)){
   		sb.append("\t\t<TEXTAREA ").append("\" name =\"");
   		sb.append(newValueInputId).append("\" id =\"").append(newValueInputId).append("\" >");
@@ -785,6 +805,7 @@ public class Utils {
   		sb.append("\t\t<input type=\"TEXT\" name =\"");
   		sb.append(newValueInputId).append("\" id =\"").append(newValueInputId).append("\" value=\"").append(currentValue).append("\"/>");
   	}
+  	
   	sb.append("\n\t\t</div>\n\t</form>\n</div>\n\n</div>");
   	return sb.toString();
   }
@@ -797,16 +818,9 @@ public class Utils {
    * @param value_
    * @return
    */
-  private static String createCKEditorField(String name, String value_, String... arguments) {
-    HashMap<String,String> parsedArguments = parseArguments(arguments) ;
-  	String toolbar = parsedArguments.get(TOOLBAR);
-  	
-  	String width = parsedArguments.get(WIDTH);
-  	String height = parsedArguments.get(HEIGHT);
-  	String passedCSS = parsedArguments.get(CSS);
-  	
-  	if (width == null) width = "'100%'";
-  	if (height == null) height = "200";
+  private static String createCKEditorField(String name, String value_, HashMap<String,String> arguments) {
+  	String toolbar = arguments.get(TOOLBAR);  	
+  	String passedCSS = arguments.get(CSS);
   	if (toolbar == null) toolbar = "BasicWCM";
   	StringBuffer contentsCss = new StringBuffer();
   	contentsCss.append("[");
@@ -826,31 +840,26 @@ public class Utils {
   	contentsCss.append("]");
 
   	StringBuffer buffer = new StringBuffer();
-  	if (passedCSS !=null) {
-  	  
-  	}
-  	buffer.append("<div style=\"display:none\"><textarea id='cssContent" + name + "' name='cssContent" + name + "'>" + passedCSS + "</textarea></div>\n");
+ 	  buffer.append("<div style=\"display:none\"><textarea id='cssContent" + name + "' name='cssContent" + name + "'>" + passedCSS + "</textarea></div>\n");
+  	
   	if (value_!=null) {
   		buffer.append("<textarea id='" + name + "' name='" + name + "'>" + value_ + "</textarea>\n");
   	}else {
   		buffer.append("<textarea id='" + name + "' name='" + name + "'></textarea>\n");
   	}
   	buffer.append("<script type='text/javascript'>\n");
-  	buffer.append("  //<![CDATA[\n");
+  	buffer.append("  //<![CDATA[ \n");
   	buffer.append("    var instances = CKEDITOR.instances['" + name + "']; if (instances) instances.destroy(true);\n");
-  	buffer.append("    CKEDITOR.replace('" + name + "', {toolbar:'" + toolbar + "', width:" + width
-  			+ ", height:" + height + ", contentsCss:" + contentsCss + ", ignoreEmptyParagraph:true});\n");
-  	buffer.append("eXo.ecm.CKEditor.insertCSS('" + name + "', 'cssContent" + name + "')");
-  	buffer.append("  //]]>\n");
-  	
+  	buffer.append("    CKEDITOR.replace('" + name + "', {toolbar:'" + toolbar + "', width:'98%', height: 200, contentsCss:" + contentsCss + ", ignoreEmptyParagraph:true});\n");
+    buffer.append("    CKEDITOR.instances['" + name + "'].on(\"instanceReady\", function(){  ");
+    buffer.append("       eXo.ecm.CKEditor.insertCSS('" + name + "', 'cssContent" + name + "');\n");      
+    buffer.append("       });");
+  	buffer.append("  //]]> \n");  	
   	buffer.append("</script>\n");
-  	
   	return buffer.toString();
   }
   protected static final String SEPARATOR  = "=";
   protected static final String TOOLBAR    = "toolbar";
-  protected static final String HEIGHT     = "height";
-  protected static final String WIDTH      = "width";
   protected static final String CSS        = "CSSData";
   private static HashMap<String,String> parseArguments(String... arguments) {
     HashMap<String,String> map = new HashMap<String,String>() ;
@@ -865,10 +874,6 @@ public class Utils {
         map.put(JCR_PATH, value); continue;
       } else if (argument.startsWith(TOOLBAR)) {
         map.put(TOOLBAR, value); continue;
-      } else if (argument.startsWith(HEIGHT)) {
-        map.put(HEIGHT, value); continue;
-      } else if (argument.startsWith(WIDTH)) {
-        map.put(WIDTH, value); continue;
       } else if (argument.startsWith(CSS)) {
         map.put(CSS, value); continue;
       }

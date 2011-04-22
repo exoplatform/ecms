@@ -44,6 +44,6 @@
 
 <div style="padding: 10px">  
 	#if($node.hasProperty("exo:content"))
-	  <td><% print uicomponent.getInlineEditingField("", "WYSIWYG", "exo:content", "Content", "Content", node, true);%></td>		  
+	  <td><% print uicomponent.getInlineEditingField(node, "exo:content", "", "WYSIWYG", "Content", "Content", true);%></td>		  
   #end
 </div>
