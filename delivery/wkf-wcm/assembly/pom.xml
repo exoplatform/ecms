@@ -139,7 +139,7 @@
 	<dependency><groupId>org.exoplatform.portal</groupId><artifactId>exo.portal.eXoGadgets</artifactId><version>${org.exoplatform.portal.version}</version><type>war</type></dependency><!-- 3.1.6-PLF-SNAPSHOT-->
 	<dependency><groupId>org.exoplatform.tool</groupId><artifactId>exo.tool.webunit</artifactId><version>${org.exoplatform.tool.version}</version><type>jar</type></dependency><!-- 1.0.0-->
 	<dependency><groupId>org.exoplatform.portal</groupId><artifactId>exo.portal.webui.dashboard</artifactId><version>${org.exoplatform.portal.version}</version><type>jar</type></dependency><!-- 3.1.6-PLF-SNAPSHOT-->
-	<dependency><groupId>javassist</groupId><artifactId>javassist</artifactId><version>${javassist.version}</version><type>jar</type></dependency><!-- 3.4.GA-->
+	<dependency><groupId>org.javassist</groupId><artifactId>javassist</artifactId><version>${org.javassist.version}</version><type>jar</type></dependency><!-- 3.4.GA-->
 	<dependency><groupId>html-parser</groupId><artifactId>html-parser</artifactId><version>${html-parser.version}</version><type>jar</type></dependency><!-- 1.6-->
 	<dependency><groupId>javax.mail</groupId><artifactId>mail</artifactId><version>${javax.mail.version}</version><type>jar</type></dependency><!-- 1.4.2-->
 	<dependency><groupId>org.jvnet.jaxb2.maven2</groupId><artifactId>maven-jaxb2-plugin</artifactId><version>${org.jvnet.jaxb2.maven2.version}</version><type>jar</type></dependency><!-- 0.1-->
@@ -150,7 +150,9 @@
 	<dependency><groupId>org.exoplatform.portal</groupId><artifactId>exo.portal.component.management</artifactId><version>${org.exoplatform.portal.version}</version><type>jar</type></dependency><!-- 3.1.6-PLF-SNAPSHOT-->
 	<dependency><groupId>org.gatein.pc</groupId><artifactId>pc-controller</artifactId><version>${org.gatein.pc.version}</version><type>jar</type></dependency><!-- 2.1.1-GA-->
 	<dependency><groupId>org.exoplatform.portal</groupId><artifactId>exo.portal.starter.war</artifactId><version>${org.exoplatform.portal.version}</version><type>war</type></dependency><!-- 3.1.6-PLF-SNAPSHOT-->
-
+    <dependency><groupId>org.hsqldb</groupId><artifactId>hsqldb</artifactId><version>${org.hsqldb.version}</version><type>jar</type></dependency>
+    <dependency><groupId>bouncycastle</groupId><artifactId>bcmail-jdk14</artifactId><version>${bouncycastle.version}</version><type>jar</type></dependency><!-- 136-->
+    <dependency><groupId>bouncycastle</groupId><artifactId>bcprov-jdk14</artifactId><version>${bouncycastle.version}</version><type>jar</type></dependency><!-- 136-->
   </dependencies>
   <build>
     <plugins>
