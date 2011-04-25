@@ -12,18 +12,17 @@ h1. Restful Web Service {anchor:id=CONTref.Extensions.RESTServices.RestfulWebSer
 h2. HTTP Methods {anchor:id=CONTref.Extensions.RESTServices.RestfulWebService.HTTPMethods}
 Here is the convention you should follow:
 || *Method* ||*Definition*||
-| *GET* | Get a Resource. It should never modify a state. |
-| *POST* | Create a Resource (or anything that does not fit elsewhere). |
-| *PUT* | Update a Resource. |
-| *DELETE* | Delete a Resource. |
+| *GET* | Gest a Resource. Its state should not be modified. |
+| *POST* | Creates a Resource (or anything that does not fit elsewhere). |
+| *PUT* | Updates a Resource. |
+| *DELETE* | Deletes a Resource. |
 
 h2. Formats {anchor:id=CONTref.Extensions.RESTServices.RestfulWebService.Formats}
-The followings are formats which need to be supported for all your APIs:
-* [Json|http://tools.ietf.org/html/rfc4627]: This format makes easy for developers to parse in a lot of languages, such as Javascript, Python or Ruby.
+The followings is formats which need to be supported for all your APIs:
+* [Json|http://tools.ietf.org/html/rfc4627]: This format makes developers easy to parse in a lot of languages, such as JavaScript, Python or Ruby.
 * [XML|http://www.w3.org/TR/xml/]: Most of Java developers like using this format.
-* [Atom|http://tools.ietf.org/html/rfc4287]: This is the standard format which can be used by many applications.
-listener
-h2. Parameters common to every APIs {anchor:id=CONTref.Extensions.RESTServices.RestfulWebService.ParametersCommonToEveryAPIs}
+* [Atom|http://tools.ietf.org/html/rfc4287]: This is a standard format which can be used by many applications.
+
 h2. Data Format {anchor:id=CONTref.Extensions.RESTServices.RestfulWebService.DataFormat}
 The default format is JSON.
 
@@ -64,6 +63,6 @@ public class GetEditedDocumentRESTService implements ResourceContainer {
 
 
 || *Parameters* ||*Definition*||
-| @Path("/presentation/document/edit/") | Specify the URI path which a resource or class method will serve requests for.|
-| @PathParam("repository") | Bind the value *repository* of a URI  parameter or a path segment containing the template parameter to a resource method parameter, resource class field, or resource class bean property. |
-| @QueryParam("showItems") | Bind the value *showItems* of a HTTP query parameter to a resource method parameter, resource class field, or resource class bean property. |
+| @Path("/presentation/document/edit/") | Specifies the URI path which a resource or class method will serve requests for.|
+| @PathParam("repository") | Binds the value *repository* of a URI  parameter or a path segment containing the template parameter to a resource method parameter, resource class field, or resource class bean property. |
+| @QueryParam("showItems") | Binds the value *showItems* of a HTTP query parameter to a resource method parameter, resource class field, or resource class bean property. |

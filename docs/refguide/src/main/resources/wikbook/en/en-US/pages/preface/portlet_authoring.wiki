@@ -1,0 +1,29 @@
+The Authoring portlet is packaged in the _{noformat}authoring-apps.war{noformat}_ file. The portlet allows users to manage contents in draft and contents needed to be approved or published.
+h1. Available preferences {anchor:id=CONTref.Portlets.Authoring.AvailablePreferences}
+
+|| *Preference* || *Type*|| *Default*|| *Description* ||
+| *repository* | {{String}} | {{Repository}} |The name of the repository.|
+| *workspace* | {{String}} | {{Collaboration}} |The name of the workspace.|
+| *drive* | {{String}} | {{Collaboration}} |The name of the drive.|
+
+
+h1. Sample Configuration {anchor:id=CONTref.Portlets.Authoring.SampleConfiguration}
+{code:language=xml|indent=2}
+<portlet-preferences>
+      <preference>
+        <name>repository</name>
+        <value>repository</value>
+        <read-only>true</read-only>
+      </preference>
+      <preference>
+        <name>workspace</name>
+        <value>collaboration</value>
+        <read-only>false</read-only>
+      </preference>
+      <preference>
+        <name>drive</name>
+        <value>collaboration</value>
+        <read-only>false</read-only>
+      </preference>s
+</portlet-preferences>
+{code}

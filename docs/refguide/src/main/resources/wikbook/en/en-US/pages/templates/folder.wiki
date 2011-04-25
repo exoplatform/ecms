@@ -1,0 +1,14 @@
+*Content List Template* allows you to view the content list with various templates. eXo Platform supports the following content list templates:
+||*Template* || *Description* ||
+|*BigHotNewsTemplateCLV.gtmpl*|Allows the contents to display under one column with a content list. The illustration image of each content is displayed above the content. |
+|*ContentListViewerDefault.gtmpl*|Its function is similar to *BigHotNewsTemplateCLV.gtmpl*. The illustration image of each content is bigger.|
+|*DocumentsTemplate.gtmpl*|Allows the contents to display under a content list with a NodeType icon or the illustration image on the left of the corresponding content.|
+|*EventsTemplateCLV.gtmpl*|Its function is similar to *BigHotNewsTemplateCLV.gtmpl*, but the illustration image of each content is smaller. |
+|*OneColumnCLVTemplate.gtmpl*|Allows the contents to display under one column.  The illustration image of each content is displayed on its left.|
+|*TwoColumnsCLVTemplate.gtmpl*|Allows the contents to display under two columns. The illustration image of each content is displayed on its left.|
+|*UIContentListPresentationBigImage.gtmpl*|Its function is similar to *BigHotNewsTemplateCLV.gtmpl*, but the illustration image of each content is bigger than the image displayed with *ContentListViewerDefault.gtmpl* and the text font is different.|
+|*UIContentListPresentationDefault.gtmpl*|Its function is similar to *BigHotNewsTemplateCLV.gtmpl*, but the illustration image of each content is smaller and the text font is different.|
+|*UIContentListPresentationSmall.gtmpl*|Allows the contents to display under one column with a content list. The images are displayed on the left of the corresponding content and smaller than the images of the other templates.|
+
+
+

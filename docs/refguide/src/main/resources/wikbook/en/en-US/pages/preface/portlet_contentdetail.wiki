@@ -1,3 +1,4 @@
+The Content Detail portlet is packaged in the _presentation.war_ file. The portlet allows users to view the detail of a specific content.
 h1. Available preferences  {anchor:id=CONTref.Portlets.ContentDetail.AvailablePreferences}
 
 || *Preference* || *Type* || *Default Value* || *Description* ||
@@ -70,5 +71,5 @@ h1. Sample configuration {anchor:id=CONTref.Portlets.ContentDetail.SampleConfigu
 {code}
 
 {note}
-In eXo Content 2.x, some preferences are no longer used, for example, the ShowPrintAction preference.
+In WCM 2.2.0, some preferences are no longer used, for example, the ShowPrintAction preference.
 {note}

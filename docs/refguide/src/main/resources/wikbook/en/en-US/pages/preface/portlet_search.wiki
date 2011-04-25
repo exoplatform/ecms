@@ -1,3 +1,4 @@
+The Search portlet is packaged in the _searches.war_ file. It allows users to do a search with any string. In WCM 2.2.0, there are three types of search: quick search, advanced search and search with saved queries.
 
 h1. Available preferences {anchor:id=CONTref.Portlets.Search.AvailablePreferences}
 
@@ -6,10 +7,10 @@ h1. Available preferences {anchor:id=CONTref.Portlets.Search.AvailablePreference
 | *workspace* | {{String}} | {{collaboration}} | The workspace where the content is stored. |
 | *searchFormTemplatePath* | {{String}} | {{/exo:ecm/views/templates/WCM Advance Search/search-form/UIDefaultSearchForm.gtmpl}} | The path to the search form template. |
 | *searchResultTemplatePath* | {{String}} |{{ /exo:ecm/views/templates/WCM Advance Search/search-result/UIDefaultSearchResult.gtmpl}} | The path to the search result template. |
-| *searchPaginatorTemplatePath* | {{String}} | {{/exo:ecm/views/templates/WCM Advance Search/search-paginator/UIDefaultSearchPaginator.gtmpl}} | The path to the search paginator templatel. |
+| *searchPaginatorTemplatePath* | {{String}} | {{/exo:ecm/views/templates/WCM Advance Search/search-paginator/UIDefaultSearchPaginator.gtmpl}} | The path to the search paginator template. |
 | *searchPageLayoutTemplatePath* | {{String}} |{{/exo:ecm/views/templates/WCM Advance Search/search-page-layout/UISearchPageLayoutDefault.gtmpl}} | The path to the search page template. |
 | *itemsPerPage* | {{Integer}} | 5 | The number of items for each page. |
-| *showQuickEditButton* | {{Boolean}} | {{true}} | Show or hide the quick edit icon (!) |
+| *showQuickEditButton* | {{Boolean}} | {{true}} | Show or hide the quick edit icon.|
 | *basePath* | {{String}} | {{parameterizedviewer}} | The page which is used to display the search result. |
 
 h1. Sample configuration {anchor:id=CONTref.Portlets.Search.SampleConfiguration}

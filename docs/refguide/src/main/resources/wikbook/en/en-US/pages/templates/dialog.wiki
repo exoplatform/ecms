@@ -13,28 +13,27 @@ These following parameters are common and can be used for all input fields.
 
 See also:
 
-* [Text field|#text-field]
-* [Hidden field|#hidden-field]
-* [Text area field|#textarea-field]
-* [Rich text field|#richtext-field]
-* [Calendar field|#calendar-field]
-* [Upload field|#upload-field]
-* [Radio field|#radio-field]
-* [Select box field|#selectbox-field]
-* [Checkbox field|#checkbox-field]
-* [Mixin field|#mixin-field]
-* [Action field|#action-field]
+* [Text field|#CONTref.InsideWCMTemplates.ContentTypes.Dialog.TextField]
+* [Hidden field|#CONTref.InsideWCMTemplates.ContentTypes.Dialog.HiddenField]
+* [Text area field|#CONTref.InsideWCMTemplates.ContentTypes.Dialog.TextAreaField]
+* [Rich text field|#CONTref.InsideWCMTemplates.ContentTypes.Dialog.RichTextField]
+* [Calendar field|#CONTref.InsideWCMTemplates.ContentTypes.Dialog.CalendarField]
+* [Upload field|#CONTref.InsideWCMTemplates.ContentTypes.Dialog.UploadField]
+* [Radio field|#CONTref.InsideWCMTemplates.ContentTypes.Dialog.RadioField]
+* [Select box field|#CONTref.InsideWCMTemplates.ContentTypes.Dialog.SelectBoxField]
+* [Checkbox field|#CONTref.InsideWCMTemplates.ContentTypes.Dialog.CheckBoxField]
+* [Mixin field|#CONTref.InsideWCMTemplates.ContentTypes.Dialog.MixinField]
+* [Action field|#CONTref.InsideWCMTemplates.ContentTypes.Dialog.ActionField]
 
-{warning}
-Note that {{mixintype}} can be used only in the root node field (commonly known as the name field).
-{warning}
+{note}
+{{mixintype}} can be used only in the root node field (commonly known as the name field).
+{note}
 
 h1. Text Field {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.TextField}
 
 h2. Additional parameters {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.TextField.AdditionParameters}
-_None_
 
-See also: [Common parameters|#common-params]
+See also: [Common parameters|#CONTref.InsideWCMTemplates.ContentTypes.Dialog.CommonParameters]
 
 h2. Example {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.TextField.Example}
 
@@ -48,20 +47,23 @@ h2. Example {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.TextField.
 h1. Hidden Field {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.HiddenField}
 
 h2. Additional parameters {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.HiddenField.AdditionParameters}
-_None_
 
-See also: [Common parameters|#common-params]
+See also: [Common parameters|#CONTref.InsideWCMTemplates.ContentTypes.Dialog.CommonParameters]
 
 h2. Example {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.HiddenField.Example}
 
+{code:language=java}
+String[] hiddenField5 = ["jcrPath=/node/jcr:content/dc:date", "visible=false"];  
+  uicomponent.addCalendarField("hiddenInput5", hiddenField5);
+{code}
 h1. Text Area Field {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.TextAreaField}
 
 h2. Additional parameters {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.TextAreaField.AdditionParameters}
 
 || *Parameter* || *Type* || *Required* || *Description* || *Example* ||
-| *rows* | {{Number}} | [image:error.gif] | The initial text area's number of rows. The value is {{10}} by default | {{rows=20}} |
-| *cols* | {{Number}} | [image:error.gif] | The initial text area's number of cols. The value is {{30}} by default | {{cols=50}} |
-See also: [Common parameters|#common-params]
+| *rows* | {{Number}} | [image:error.gif] | The initial text area's number of rows. The value is {{10}} by default. | {{rows=20}} |
+| *cols* | {{Number}} | [image:error.gif] | The initial text area's number of cols. The value is {{30}} by default .| {{cols=50}} |
+See also: [Common parameters|#CONTref.InsideWCMTemplates.ContentTypes.Dialog.CommonParameters]
 
 h2. Example {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.TextAreaField.Example}
 
@@ -80,9 +82,9 @@ h2. Additional parameters {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dia
 
 || *Parameter* || *Type* || *Required* || *Description* || *Example* ||
 | *toolbar* | {{String}} | [image:error.gif] | The predefined toolbar for CKEditor. The value can be: {{Default}}, {{Basic}}, {{CompleteWCM}}, {{BasicWCM}}, {{SuperBasicWCM}} | {{options=CompleteWCM}}. |
-| *width* | {{String}} | [image:error.gif] | The width of CKEditor. The value can be the percent of pixel. | {{options=width:'100%'}} |
-| *height* | {{String}} | [image:error.gif] | The height of CKEditor. The value can be the percent of pixel. | {{options=height:'200px'}} |
-See also: [Common parameters|#common-params]
+| *width* | {{String}} | [image:error.gif] | The width of CKEditor. Its value can be the percent of pixel. | {{options=width:'100%'}} |
+| *height* | {{String}} | [image:error.gif] | The height of CKEditor. Its value can be the percent of pixel. | {{options=height:'200px'}} |
+See also: [Common parameters|#CONTref.InsideWCMTemplates.ContentTypes.Dialog.CommonParameters]
 
 h2. Example {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.RichTextField.Example}
 
@@ -97,8 +99,8 @@ h1. Calendar Field {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.Cal
 
 h2. Additional parameters {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.CalendarField.AdditionParameters}
 || *Parameter* || *Type* || *Required* || *Description* || *Example* ||
-| *options* | {{String}} | [image:error.gif] | An option for calendar field: Display time | {{options=displaytime}} |
-See also: [Common parameters|#common-params]
+| *options* | {{String}} | [image:error.gif] | An option for the calendar field: Display time | {{options=displaytime}} |
+See also: [Common parameters|#CONTref.InsideWCMTemplates.ContentTypes.Dialog.CommonParameters]
 
 h2. Example {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.CalendarField.Example}
 
@@ -112,13 +114,12 @@ h2. Example {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.CalendarFi
 h1. Upload Field {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.UploadField}
 
 h2. Additional parameters {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.UploadField.AdditionParameters}
-_None_
 
-See also: [Common parameters|#common-params]
+See also: [Common parameters|#CONTref.InsideWCMTemplates.ContentTypes.Dialog.CommonParameters]
 
 h2. Example {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.UploadField.Example}
 
-When you create an upload form, there are two main ways to store the image:
+When you create an upload form, there are two main ways to store an image:
 * If you want to store as property, do as follows:
 
 {code:groovy}
@@ -190,7 +191,7 @@ h1. Radio Field {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.RadioF
 h2. Additional parameters {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.RadioField.AdditionParameters}
 || *Parameter* || *Type* || *Required* || *Description* || *Example* ||
 | *options* | {{String}} with comma {{,}} characters | [image:error.gif] | Some radio values | {{options=radio1,radio2,radio3}} |
-See also: [Common parameters|#common-params]
+See also: [Common parameters|#CONTref.InsideWCMTemplates.ContentTypes.Dialog.CommonParameters]
 
 h2. Example {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.RadioField.Example}
 
@@ -201,10 +202,10 @@ h2. Example {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.RadioField
 %>
 {code}
 
-h1. Selectbox Field {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.SelectBoxField}
+h1. Select box Field {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.SelectBoxField}
 || *Parameter* || *Type* || *Required* || *Description* || *Example* ||
 | *options* | {{String}} with comma {{,}} characters | [image:error.gif] | Some option values | {{options=option1,option2,option3}} |
-See also: [Common parameters|#common-params]
+See also: [Common parameters|#CONTref.InsideWCMTemplates.ContentTypes.Dialog.CommonParameters]
 
 h2. Example {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.SelectBoxField.Example}
 
@@ -220,7 +221,7 @@ h1. Checkbox Field {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.Che
 h2. Additional parameters {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.CheckBoxField.AdditionParameters}
 || *Parameter* || *Type* || *Required* || *Description* || *Example* ||
 | *options* | {{String}} with comma {{,}} characters | [image:error.gif] | Some checkbox values | {{options=checkbox1,checkbox2,checkbox3}} |
-See also: [Common parameters|#common-params]
+See also: [Common parameters|#CONTref.InsideWCMTemplates.ContentTypes.Dialog.CommonParameters]
 
 h2. Example {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.CheckBoxField.Example}
 
@@ -235,7 +236,7 @@ h1. Mixin Field {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.MixinF
 
 h2. Additional parameters {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.MixinField.AdditionParameters}
 
-See also: [Common parameters|#common-params]
+See also: [Common parameters|#CONTref.InsideWCMTemplates.ContentTypes.Dialog.CommonParameters]
 
 h2. Example {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.MixinField.Example}
 
@@ -264,7 +265,7 @@ The component {{org.exoplatform.ecm.webui.tree.selectone.UIOneNodePathSelector}}
 
 The component {{org.exoplatform.ecm.webui.selector.UIPermissionSelector}} does not need any special parameters.
 
-See also: [Common parameters|#common-params]
+See also: [Common parameters|#CONTref.InsideWCMTemplates.ContentTypes.Dialog.CommonParameters]
 
 h2. Example {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.ActionField.Example}
 

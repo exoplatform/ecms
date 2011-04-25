@@ -1,89 +1,141 @@
 h1. Preface {anchor:id=CONTref.Preface}
-h2. Getting started with eXo WCM {anchor:id=CONTref.Preface.GettingStartedWitheXoWCM}
+h2. Get Started with eXo Content  {anchor:id=CONTref.Preface.GetStarted}
   {include:document="pages/preface/start.wiki" /}
-h2. Packaging {anchor:id=CONTref.Preface.Packaging}
+h2. Package {anchor:id=CONTref.Preface.Package}
   {include:document="pages/preface/packaging.wiki" /}
-h1. Portlets {anchor:id=CONTref.Portlets}
-h2. Content Detail {anchor:id=CONTref.Portlets.ContentDetail}
+
+h1. Applications {anchor:id=CONTref.Applications}
+h2. Portlets {anchor:id=CONTref.Applications.Portlets}
+h3. Content Detail {anchor:id=CONTref.Portlets.ContentDetail}
   {include:document="pages/preface/portlet_contentdetail.wiki" /}
-h2. Content List {anchor:id=CONTref.Portlets.ContentList}
+h3. Content List {anchor:id=CONTref.Portlets.ContentList}
   {include:document="pages/preface/portlet_contentlist.wiki" /}
-h2. Search {anchor:id=CONTref.Portlets.Search}
+h3. Search {anchor:id=CONTref.Portlets.Search}
   {include:document="pages/preface/portlet_search.wiki" /}
-h2. Explorer {anchor:id=CONTref.Portlets.Explorer}
+h3. Content Explorer {anchor:id=CONTref.Portlets.Explorer}
   {include:document="pages/preface/portlet_explorer.wiki" /}
-h2. Administration {anchor:id=CONTref.Portlets.Administration}
+h3. Administration {anchor:id=CONTref.Portlets.Administration}
   {include:document="pages/preface/portlet_administration.wiki" /}
-h2. Fast Content Creator {anchor:id=CONTref.Portlets.FastContentCreator}
+h3. Fast Content Creator {anchor:id=CONTref.Portlets.FastContentCreator}
   {include:document="pages/preface/portlet_fastcontentcreator.wiki" /}
+h3. Form Builder {anchor:id=CONTref.Portlets.FormBuilder} 
+	{include:document="pages/preface/portlet_formgenerator.wiki" /}
+h3. Authoring {anchor:id=CONTref.Portlets.Authoring} 
+{include:document="pages/preface/portlet_authoring.wiki" /}
+h3. Newsletter {anchor:id=CONTref.Portlets.Newsletter} 
+{include:document="pages/preface/portlet_newsletter.wiki" /}
 
 h1. Configuration {anchor:id=CONTref.Configuration}
-h2. Drives {anchor:id=CONTref.Configuration.Drives}
-  {include:document="pages/configuration/drives.wiki" /}
-h2. Publication {anchor:id=CONTref.Configuration.Publication}
-  {include:document="pages/configuration/publication.wiki" /}
-h2. Deployment {anchor:id=CONTref.Configuration.Deployment}
-  {include:document="pages/configuration/deployment.wiki" /}
-h2. Taxonomies {anchor:id=CONTref.Configuration.Taxonomies}
-  {include:document="pages/configuration/taxonomies.wiki" /}
-h2. Nodetypes {anchor:id=CONTref.Configuration.Nodetypes}
-  {include:document="pages/configuration/nodetypes.wiki" /}
-h2. Views {anchor:id=CONTref.Configuration.Views}
-  {include:document="pages/configuration/views.wiki" /}
-h2. Templates {anchor:id=CONTref.Configuration.Templates}
-h3. Application template  {anchor:id=CONTref.Configuration.Templates.ApplicationTemplate}
-  {include:document="pages/configuration/template_application.wiki" /}
-h3. Nodetype template {anchor:id=CONTref.Configuration.Templates.NodetypeTemplate}
-  {include:document="pages/configuration/template_nodetype.wiki" /}
+h2. Components
+h3. ActionServiceContainer
+h3. ActionServiceContainer
+h3. ApplicationTemplateManagerService
+h3. FragmentCacheService
+h3. JodConverterServices
+h3. LiveLinkManagerService
+h3. LockService
+h3. MailService
+h3. NewsletterManagerService
+h3. QueryService
+h3. TaxonomyService
+h3. ThumbnailService
+h3. TimelineService
+h3. WatchDocumentService
+h3. WCMService
 
-h1. Inside WCM Templates {anchor:id=CONTref.InsideWCMTemplates}
-h2. Content types {anchor:id=CONTref.CONTref.InsideWCMTemplates.ContentTypes}
+h2. External Component Plugins
+h3. AuthoringPublicationPlugin
+h3. AddNameSpacesPlugin
+{include:document="pages/configuration/nodetypes.wiki" /}
+h3. BaseActionPlugin
+h3. BPActionPlugin
+h3. ContentTypeFilterPlugin
+h3. ContextPlugin
+h3. CreatePortalPlugin
+h3. CreatePortalPlugin
+h3. ExcludeIncludeDataTypePlugin
+h3. FriendlyPlugin
+h3. ImageThumnailPlugin
+h3. InitialNewsletterPlugin
+h3. InitialWebcontentPlugin
+h3. LinkDeploymentPlugin
+h3. LockGroupsOrUsersPlugin
+h3. ManageDrivePlugin
+{include:document="pages/configuration/drives.wiki" /}
+h3. ManageViewPlugin
+{include:document="pages/configuration/views.wiki" /}
+h3. PDFThumnailPlugin
+h3. PorletTemplatePlugin
+h3. predifinedProcessesPlugin
+h3. PublicationPlugin
+h3. QueryPlugin
+h3. RemovePortalPlugin
+h3. ScriptActionPlugin
+h3. ScriptPlugin
+h3. StageAndVersionPublicationPlugin
+h3. TagPermissionPlugin
+h3. TagStylePlugin
+h3. TaxonomyPlugin
+{include:document="pages/configuration/taxonomies.wiki" /}
+h3. TemplatePlugin
+{include:document="pages/configuration/template_application.wiki" /}
+{include:document="pages/configuration/template_nodetype.wiki" /}
+h3. ThumnailPlugin
+h3. WCMPublicationPlugin
+{include:document="pages/configuration/publication.wiki" /}
+h3. WebpagePublicationPlugin
+h3. WorkflowPublicationPlugin
+h3. XMLdeploymentPlugin
+{include:document="pages/configuration/deployment.wiki" /} 
+ 
+h1. Developer references
+h2. WCM Templates {anchor:id=CONTref.InsideWCMTemplates}
+h3. Content types {anchor:id=CONTref.CONTref.InsideWCMTemplates.ContentTypes}
   {include:document="pages/templates/content.wiki" /}
-h3. Dialog {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog}
+h4. Dialog {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog}
   {include:document="pages/templates/dialog.wiki" /}
-h3. View {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.View}
+h4. View {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.View}
   {include:document="pages/templates/view.wiki" /}
-h2. List of Contents {anchor:id=CONTref.InsideWCMTemplates.ListOfContents}
-  {include:document="pages/templates/clv.wiki" /}
-h3. Folder based Template {anchor:id=CONTref.InsideWCMTemplates.ListOfContents.FolderbasedTemplate}
+h3. List of Contents {anchor:id=CONTref.InsideWCMTemplates.ListOfContents}
+h4. Content List Template {anchor:id=CONTref.InsideWCMTemplates.ListOfContents.FolderbasedTemplate}
   {include:document="pages/templates/folder.wiki" /}
-h3. Category tree Template {anchor:id=CONTref.InsideWCMTemplates.ListOfContents.CategoryTreeTemplate}
+h4. Category Navigation Template {anchor:id=CONTref.InsideWCMTemplates.ListOfContents.CategoryTreeTemplate}
   {include:document="pages/templates/category.wiki" /}
 
-h1. Inside WCM Explorer {anchor:id=CONTref.InsideWCMExplorer}
-h2. CSS {anchor:id=CONTref.InsideWCMExplorer.CSS}
+h2. WCM Explorer {anchor:id=CONTref.InsideWCMExplorer}
+h3. CSS {anchor:id=CONTref.InsideWCMExplorer.CSS}
   {include:document="pages/explorer/css.wiki" /}
-h2. Javascript {anchor:id=CONTref.InsideWCMExplorer.Javascript}
-  {include:document="pages/explorer/javascript.wiki" /}
-h2. CKEditor {anchor:id=CONTref.InsideWCMExplorer.CKEditor}
+h3. CKEditor {anchor:id=CONTref.InsideWCMExplorer.CKEditor}
   {include:document="pages/explorer/ckeditor.wiki" /}
 
-h1. Extensions {anchor:id=CONTref.Extensions}
-h2. REST Services {anchor:id=CONTref.Extensions.RESTServices}
+h2. Extensions {anchor:id=CONTref.Extensions}
+h3. REST Services {anchor:id=CONTref.Extensions.RESTServices}
   {include:document="pages/extensions/rest.wiki" /}
-h2. UI Extensions {anchor:id=CONTref.Extensions.UIExtensions}
+h3. UI Extensions {anchor:id=CONTref.Extensions.UIExtensions}
   {include:document="pages/extensions/ui.wiki" /}
-h2. Authoring Extension {anchor:id=CONTref.Extensions.AuthoringExtension}
+h3. Authoring Extension {anchor:id=CONTref.Extensions.AuthoringExtension}
   {include:document="pages/extensions/authoring.wiki" /}
 
-h1. Java Services {anchor:id=CONTref.JavaServices}
-h2. TaxonomyService {anchor:id=CONTref.JavaServices.TaxonomyService}
+h2. Public REST APIs {anchor:id=CONTref.Devref.PublicRestAPIs}
+{include:document="pages/Rest-api.wiki" /}
+h2. Public Java APIs {anchor:id=CONTref.JavaServices}
+h3. TaxonomyService {anchor:id=CONTref.JavaServices.TaxonomyService}
   {include:document="pages/services/taxonomy.wiki" /}
-h2. LinkManager {anchor:id=CONTref.JavaServices.LinkManager}
+h3. LinkManager {anchor:id=CONTref.JavaServices.LinkManager}
   {include:document="pages/services/link.wiki" /}
-h2. PublicationManager {anchor:id=CONTref.JavaServices.PublicationManager}
+h3. PublicationManager {anchor:id=CONTref.JavaServices.PublicationManager}
   {include:document="pages/services/publication.wiki" /}
-h2. WCMComposer {anchor:id=CONTref.JavaServices.WCMComposer}
+h3. WCMComposer {anchor:id=CONTref.JavaServices.WCMComposer}
   {include:document="pages/services/composer.wiki" /}
-h2. NewFolksonomy {anchor:id=CONTref.JavaServices.NewFolksonomy}
+h3. NewFolksonomy {anchor:id=CONTref.JavaServices.NewFolksonomy}
   {include:document="pages/services/newFolksonomy.wiki" /}
-h2. ApplicationTemplateManager {anchor:id=CONTref.JavaServices.ApplicationTemplateManager}
+h3. ApplicationTemplateManager {anchor:id=CONTref.JavaServices.ApplicationTemplateManager}
   {include:document="pages/services/applicationTemplateManager.wiki" /}
-h2. NodeFinder {anchor:id=CONTref.JavaServices.NodeFinder}
+h3. NodeFinder {anchor:id=CONTref.JavaServices.NodeFinder}
   {include:document="pages/services/nodeFinder.wiki" /}
-h2. JodConverter {anchor:id=CONTref.JavaServices.JodConverter}
+h3. JodConverter {anchor:id=CONTref.JavaServices.JodConverter}
   {include:document="pages/services/jodConverter.wiki" /}
 
-h1. FAQ {anchor:id=CONTref.FAQ}
+h2. FAQ {anchor:id=CONTref.FAQ}
   {include:document="pages/faq/faq.wiki" /}
 

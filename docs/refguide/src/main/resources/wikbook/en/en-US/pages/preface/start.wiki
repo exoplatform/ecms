@@ -1,4 +1,4 @@
-eXo Content is a fully integrated content management solution inside eXo Platform. Basically, in eXo Platform, the extension mechanism is used to add content features. If you want more infomation about the extension mechanism, you can read the GateIn documentation:
+eXo Content is a fully integrated content management solution inside eXo Platform. Basically, in eXo Platform, the extension mechanism is used to add content features. If you want more information about the extension mechanism, you can read the GateIn documentation:
 
 [http://docs.jboss.com/gatein/portal/3.1.0-FINAL/reference-guide/en-US/html/index.html]
 

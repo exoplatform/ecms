@@ -3,7 +3,7 @@ When a site is created, most of end-users want to see something in the page inst
 There are two main cases to use:
 - The site is created only one time when the database is cleaned.
 
-- The site is created at runtime, when a user uses the core features of eXo GateIn portal.
+- The site is created at runtime, when a user uses the core features of the GateIn portal.
 h1. Fields {anchor:id=CONTref.Configuration.Deployment.Fields}
 
 *{{init-params}}*
