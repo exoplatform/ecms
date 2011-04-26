@@ -196,7 +196,7 @@ public class InlineEditingService implements ResourceContainer{
       Session session = sessionProvider.getSession(workspaceName, manageableRepository);		    
       try {
         localeMsg = document.createElement("bundle");
-        Node node = (Node)session.getNodeByUUID(nodeUIID);
+        Node node = session.getNodeByUUID(nodeUIID);
         node = (Node)session.getItem(node.getPath());
         if(canSetProperty(node)) {
           if (!sameValue(newValue, node, propertyName)) {
@@ -212,15 +212,12 @@ public class InlineEditingService implements ResourceContainer{
               }
               if (!propertyName.contains("/")) {
                 node.setProperty(propertyName, newValue);
-                node.save();
               }else {
                 int iSlash = propertyName.lastIndexOf("/");
                 String subnodePath = propertyName.substring(0, iSlash);
                 String subnodeProperty = propertyName.substring(iSlash+1);
                 Node subnode = node.getNode(subnodePath);
                 subnode.setProperty(subnodeProperty, newValue);
-                subnode.save();
-                node.save();
               }
               ConversationState conversationState = ConversationState.getCurrent();
               conversationState.setAttribute("siteName", siteName);
