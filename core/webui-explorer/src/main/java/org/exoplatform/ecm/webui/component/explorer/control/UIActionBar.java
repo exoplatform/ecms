@@ -339,7 +339,7 @@ public class UIActionBar extends UIForm {
             uiDocumentWorkspace.removeChild(UIDocumentFormController.class);
           } else
           uiExplorer.cancelAction();
-          event.getRequestContext().getJavascriptManager().addJavascript("location.href='" + backLink + "';");
+          event.getRequestContext().getJavascriptManager().addJavascript("ajaxRedirect('" + backLink + "');");
       }
     }
   static public class SavedQueriesActionListener extends EventListener<UIActionBar> {
