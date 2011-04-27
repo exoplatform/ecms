@@ -21,16 +21,22 @@ import java.util.Iterator;
 import javax.jcr.Node;
 import javax.jcr.Session;
 
+import org.exoplatform.container.ExoContainer;
+import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.container.xml.ObjectParameter;
+import org.exoplatform.container.xml.PortalContainerInfo;
+import org.exoplatform.services.cms.CmsService;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.cms.taxonomy.TaxonomyService;
 import org.exoplatform.services.deployment.DeploymentPlugin;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
  * Created by The eXo Platform SAS
@@ -51,6 +57,7 @@ public class LinkDeploymentPlugin extends DeploymentPlugin {
 
   /** The log. */
   private Log log = ExoLogger.getLogger(this.getClass());
+  public static final String UPDATE_EVENT = "WCMPublicationService.event.updateState";
 
   /**
    * Instantiates a new xML deployment plugin.
@@ -94,6 +101,12 @@ public class LinkDeploymentPlugin extends DeploymentPlugin {
           Node nodeSrc = session.getRootNode().getNode(src[2].substring(1));
           Node nodeTgt = session2.getRootNode().getNode(tgt[2].substring(1));
           linkManager.createLink(nodeTgt, "exo:taxonomyLink", nodeSrc);
+          ExoContainer container = ExoContainerContext.getCurrentContainer();
+          PortalContainerInfo containerInfo = (PortalContainerInfo)container.getComponentInstanceOfType(PortalContainerInfo.class);
+          String containerName = containerInfo.getContainerName();
+          ListenerService listenerService = WCMCoreUtils.getService(ListenerService.class, containerName);
+          CmsService cmsService = WCMCoreUtils.getService(CmsService.class, containerName);
+          listenerService.broadcast(UPDATE_EVENT, cmsService, nodeSrc);
         } finally {
           session.logout();
           session2.logout();
