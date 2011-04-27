@@ -491,7 +491,9 @@ public class UICLVPresentation extends UIContainer {
   public String getCreatedDate(Node node) throws Exception {
     if (node.hasProperty("exo:dateCreated")) {
       Calendar calendar = node.getProperty("exo:dateCreated").getValue().getDate();
-      return dateFormatter.format(calendar.getTime());
+      if (calendar!=null) {
+        return dateFormatter.format(calendar.getTime());
+      }
     }
     return null;
   }

@@ -293,21 +293,23 @@
                 println "<image src=\"\" w=\"300\" h=\"300\"/>";
               }
             %>
-            <script type="text/javascript">
-            //<![CDATA[
-	            if (window.addEventListener) {
-	              window.addEventListener('load', function(){
-	                var myShow = new Slideshow('show', ${data}, {controller: true, height: 300, hu: '', thumbnails: true, width: 400});
-	              }, false);
-	            } else if (window.attachEvent) {
-	            	window.attachEvent('onload', function(){
-	                var myShow = new Slideshow('show', ${data}, {controller: true, height: 300, hu: '', thumbnails: true, width: 400});
-	              });
-	            }
-            //]]>
-            
-            </script>
-            
+            <%
+            if(data.length() > 0) {
+            %>
+              <script type="text/javascript">            
+              //<![CDATA[
+  	            if (window.addEventListener) {
+  	              window.addEventListener('load', function(){
+  	                var myShow = new Slideshow('show', ${data}, {controller: true, height: 300, hu: '', thumbnails: true, width: 400});
+  	              }, false);
+  	            } else if (window.attachEvent) {
+  	            	window.attachEvent('onload', function(){
+  	                var myShow = new Slideshow('show', ${data}, {controller: true, height: 300, hu: '', thumbnails: true, width: 400});
+  	              });
+  	            }
+              //]]>
+              </script>
+            <%}%>
             </head>
             <body>
                <div id="show" class="slideshow">
