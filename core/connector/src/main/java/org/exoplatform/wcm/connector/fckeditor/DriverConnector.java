@@ -590,6 +590,8 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
 
         if(child.isNodeType("exo:symlink") && child.hasProperty("exo:uuid")) {
           sourceNode = session.getNodeByUUID(child.getProperty("exo:uuid").getString());
+        } else {
+          sourceNode = child;
         }
 
         checkNode = sourceNode != null ? sourceNode : child;
