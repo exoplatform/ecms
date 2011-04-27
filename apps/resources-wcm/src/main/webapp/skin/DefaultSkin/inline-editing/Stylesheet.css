@@ -18,7 +18,7 @@
   float: right;
 }
 .InlineEditing TEXTAREA{
-    width:99%;
+    width:98%;
     border:1px solid #BFD5ED;
     height:155px;
     font-size: small;
@@ -156,7 +156,7 @@
 } 
    
 .InlineEditing .EditContentInput TEXTAREA{
-    width:99%;
+    width:98%;
     border:1px solid #BFD5ED;
     height:155px;
     font-size: small;
@@ -190,7 +190,7 @@
     margin-right: 35px;    
 }
 .InlineEditing .EditCLV1ColumnPresentInput TEXTAREA{
-    width:99%;
+    width:98%;
     border:1px solid #BFD5ED;
     height:80px;
     font-size: small;
@@ -287,7 +287,7 @@
   display: inline-block;
   width: 16px; height: 22px;
   float: right; 
-  margin-right: 5px;
+  margin-right: 2px;
   margin-top: 65px;
 }
 
