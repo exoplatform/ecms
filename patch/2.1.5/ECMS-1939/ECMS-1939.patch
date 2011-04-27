@@ -1,0 +1,275 @@
+Index: apps/portlet-presentation/src/main/java/org/exoplatform/wcm/webui/clv/UICLVConfig.java
+===================================================================
+--- apps/portlet-presentation/src/main/java/org/exoplatform/wcm/webui/clv/UICLVConfig.java	(revision 68734)
++++ apps/portlet-presentation/src/main/java/org/exoplatform/wcm/webui/clv/UICLVConfig.java	(working copy)
+@@ -24,7 +24,6 @@
+ import javax.jcr.RepositoryException;
+ import javax.portlet.PortletPreferences;
+ 
+-import org.exoplatform.ecm.ProductVersions;
+ import org.exoplatform.ecm.utils.text.Text;
+ import org.exoplatform.ecm.webui.selector.UISelectable;
+ import org.exoplatform.services.cms.drives.DriveData;
+@@ -32,7 +31,6 @@
+ import org.exoplatform.services.cms.views.ApplicationTemplateManagerService;
+ import org.exoplatform.services.jcr.RepositoryService;
+ import org.exoplatform.services.jcr.core.ManageableRepository;
+-import org.exoplatform.services.migration.MigrationUtil;
+ import org.exoplatform.services.wcm.core.NodetypeConstant;
+ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+ import org.exoplatform.wcm.webui.Utils;
+@@ -776,8 +774,9 @@
+         multiContentSelector.setSourceComponent(clvConfig, new String[] { UICLVConfig.ITEM_PATH_FORM_STRING_INPUT });
+ //        String itemPath = clvConfig.getUIStringInput(UICLVConfig.ITEM_PATH_FORM_STRING_INPUT).getValue();
+         String itemPath = clvConfig.getSavedPath();
+-        if (itemPath != null && itemPath.contains(";"))
++        if (itemPath != null && itemPath.contains(";")) {
+           multiContentSelector.setItemPaths(itemPath);
++        }
+         contentSelector.init();
+         Utils.createPopupWindow(clvConfig, contentSelector, UIContentSelector.CORRECT_CONTENT_SELECTOR_POPUP_WINDOW, 800);
+         clvConfig.setPopupId(UIContentSelector.CORRECT_CONTENT_SELECTOR_POPUP_WINDOW);
+Index: apps/resources-wcm/src/main/webapp/javascript/eXo/wcm/frontoffice/private/ContentSelector.js
+===================================================================
+--- apps/resources-wcm/src/main/webapp/javascript/eXo/wcm/frontoffice/private/ContentSelector.js	(revision 68734)
++++ apps/resources-wcm/src/main/webapp/javascript/eXo/wcm/frontoffice/private/ContentSelector.js	(working copy)
+@@ -579,11 +579,12 @@
+ 		var clazzItem = eXo.ecm.ECS.getClazzIcon(list[i].getAttribute("nodeType"));
+ 		var url 			= list[i].getAttribute("url");
+ 		var path 			= eXo.ecm.ECS.repositoryName+":"+eXo.ecm.ECS.workspaceName+":"+list[i].getAttribute("path");
++		var linkTarget = list[i].getAttribute("linkTarget");
+ 		var nodeType	= list[i].getAttribute("nodeType");
+ 		var node = list[i].getAttribute("name");
+ 		var newRow = tblRWS.insertRow(i+1);
+ 		newRow.className = clazz;
+-		newRow.insertCell(0).innerHTML = '<a class="Item default16x16Icon '+clazzItem+'" url="'+url+'" path="'+path+'" nodeType="'+nodeType+'" onclick="eXo.ecm.ECS.addFile2ListContent(this);">'+node+'</a>';
++		newRow.insertCell(0).innerHTML = '<a class="Item default16x16Icon '+clazzItem+'" url="'+url+'" linkTarget ="' + linkTarget + '" path="'+path+'" nodeType="'+nodeType+'" onclick="eXo.ecm.ECS.addFile2ListContent(this);">'+node+'</a>';
+ 				
+ 	}
+ 	
+@@ -800,10 +801,11 @@
+ 	var url = objNode.getAttribute("url");
+ 	var nodeType	= objNode.getAttribute("nodeType");
+ 	var path = objNode.getAttribute("path");
++	var linkTarget = objNode.getAttribute("linkTarget");
+ 	var selectedNodeList = eXo.core.DOMUtil.findDescendantsByClass(tblListFilesContent, "a", "Item");
+ 	for(var i = 0; i < selectedNodeList.length; i++) {
+-		var selectedNodePath = selectedNodeList[i].getAttribute("path");
+-		if(path == selectedNodePath) {
++		var selectedNodePath = selectedNodeList[i].getAttribute("linkTarget");
++		if(linkTarget == selectedNodePath) {
+ 			alert("This content is already in the list content.");
+ 			return;
+ 		}
+@@ -811,7 +813,7 @@
+ 	var	clazzItem = objNode.className;
+ 	var newRow = tblListFilesContent.insertRow(tblListFilesContent.children[0].children.length);
+ 	newRow.className = "Item";
+-	newRow.insertCell(0).innerHTML = '<a class="Item" url="'+url+'" path="'+decodeURIComponent(path)+'" nodeType="'+nodeType+'">'+decodeURIComponent(path)+'</a>';
++	newRow.insertCell(0).innerHTML = '<a class="Item" url="'+url+'" linkTarget ="' + linkTarget +'" path="'+decodeURIComponent(path)+'" nodeType="'+nodeType+'">'+decodeURIComponent(path)+'</a>';
+ 	newRow.insertCell(1).innerHTML = '<div class="DeleteIcon" onclick="eXo.ecm.ECS.removeContent(this);"><span></span></div>';
+ 	this.insertMultiContent("SaveTemporary", path);	
+ };
+@@ -819,16 +821,20 @@
+ EcmContentSelector.prototype.addFileSearchListSearch = function() {
+ };
+ 
+-EcmContentSelector.prototype.loadListContent = function(strArray) {
++EcmContentSelector.prototype.loadListContent = function(strArray, strTargetArray) {
+ 	if(!strArray) return;
++	if (!strTargetArray) return;
+ 	var tblListFilesContent = document.getElementById("ListFilesContent");
+ 	var arrContent = strArray.split(";");
++	var arrTarget = strTargetArray.split(";");
++	if (arrContent.length>arrTarget.length) return;
+ 	if(arrContent.length > 0) {
+ 		var trNoContent = eXo.core.DOMUtil.findFirstDescendantByClass(tblListFilesContent, "td", "TRNoContent");
+ 		if(trNoContent) tblListFilesContent.deleteRow(trNoContent.parentNode.rowIndex);
+ 		var clazz = 'OddItem';
+ 		for(var i = 0; i < arrContent.length-1; i++) {
+ 			var path = arrContent[i];
++			var target = arrTarget[i];
+ 			var newRow = tblListFilesContent.insertRow(tblListFilesContent.children[0].children.length);
+ 			if(clazz == 'EventItem') {
+ 				clazz = 'OddItem';
+@@ -838,7 +844,7 @@
+ 			newRow.className = clazz;
+ 			var strTmpArr = arrContent[i].split('/');
+ 			var nodeName = strTmpArr[strTmpArr.length-1];
+-			newRow.insertCell(0).innerHTML = '<a class="Item" path="'+path+'">'+nodeName+'</a>';
++			newRow.insertCell(0).innerHTML = '<a class="Item" linkTarget ="'+ target+ '" path="'+path+'">'+nodeName+'</a>';
+ 			newRow.insertCell(1).innerHTML = '<div  class="DeleteIcon" onclick="eXo.ecm.ECS.removeContent(this);"><span></span></div>';
+ 		}
+ 	}
+@@ -1032,4 +1038,4 @@
+ 	}
+ };
+ 
+-eXo.ecm.ECS = new EcmContentSelector();
+\ No newline at end of file
++eXo.ecm.ECS = new EcmContentSelector();
+Index: core/connector/src/main/java/org/exoplatform/wcm/connector/fckeditor/DriverConnector.java
+===================================================================
+--- core/connector/src/main/java/org/exoplatform/wcm/connector/fckeditor/DriverConnector.java	(revision 68734)
++++ core/connector/src/main/java/org/exoplatform/wcm/connector/fckeditor/DriverConnector.java	(working copy)
+@@ -608,7 +608,7 @@
+ 	  		}
+ 
+ 	  		if (fileType != null) {
+-	  			Element file = FCKFileHandler.createFileElement(document, fileType, checkNode, child, currentPortal);
++	  			Element file = FCKFileHandler.createFileElement(document, fileType, checkNode, child, currentPortal, linkManager);
+ 	  			files.appendChild(file);
+ 	  		}
+ 	  	}
+Index: core/connector/src/main/java/org/exoplatform/wcm/connector/handler/FCKFileHandler.java
+===================================================================
+--- core/connector/src/main/java/org/exoplatform/wcm/connector/handler/FCKFileHandler.java	(revision 68734)
++++ core/connector/src/main/java/org/exoplatform/wcm/connector/handler/FCKFileHandler.java	(working copy)
+@@ -7,6 +7,7 @@
+ import org.exoplatform.container.ExoContainerContext;
+ import org.exoplatform.container.PortalContainer;
+ import org.exoplatform.ecm.connector.fckeditor.FCKUtils;
++import org.exoplatform.services.cms.link.LinkManager;
+ import org.exoplatform.services.jcr.access.AccessControlEntry;
+ import org.exoplatform.services.jcr.access.AccessControlList;
+ import org.exoplatform.services.jcr.access.PermissionType;
+@@ -15,6 +16,7 @@
+ import org.exoplatform.services.jcr.core.ManageableRepository;
+ import org.exoplatform.services.wcm.core.NodetypeConstant;
+ import org.exoplatform.services.wcm.core.WCMConfigurationService;
++import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+ import org.w3c.dom.Document;
+ import org.w3c.dom.Element;
+ 
+@@ -22,6 +24,10 @@
+ 
+   public static Element createFileElement(
+   		Document document, String fileType, Node sourceNode, Node displayNode, String currentPortal) throws Exception {   
++  	return createFileElement(document, fileType, sourceNode, displayNode, currentPortal, null);
++  }
++  public static Element createFileElement(
++  		Document document, String fileType, Node sourceNode, Node displayNode, String currentPortal, LinkManager linkManager) throws Exception {   
+   	Element file = document.createElement("File");
+     file.setAttribute("name", displayNode.getName());     
+     SimpleDateFormat formatter = (SimpleDateFormat) SimpleDateFormat.getDateTimeInstance(SimpleDateFormat.SHORT, SimpleDateFormat.SHORT);    
+@@ -33,6 +39,19 @@
+     }
+     file.setAttribute("creator", sourceNode.getProperty("exo:owner").getString());    
+     file.setAttribute("path", displayNode.getPath());
++    if (linkManager==null) {
++    	linkManager = WCMCoreUtils.getService(LinkManager.class) ;
++    }
++    if (linkManager.isLink(sourceNode)) {
++    	Node targetNode = linkManager.getTarget(sourceNode);
++    	if (targetNode!=null) {
++    		file.setAttribute("linkTarget", targetNode.getPath());
++    	}else {
++    		file.setAttribute("linkTarget", sourceNode.getPath());
++    	}
++    }else {
++    	file.setAttribute("linkTarget", sourceNode.getPath());
++    }
+     if (sourceNode.isNodeType("nt:file")) {
+     	Node content = sourceNode.getNode("jcr:content");
+     	file.setAttribute("nodeType", content.getProperty("jcr:mimeType").getString());
+@@ -55,7 +74,6 @@
+     }
+     return file;
+   }
+-  
+   /**
+    * Gets the file url.
+    * 
+Index: core/webui/src/main/java/org/exoplatform/wcm/webui/selector/content/multi/UIContentBrowsePanelMulti.java
+===================================================================
+--- core/webui/src/main/java/org/exoplatform/wcm/webui/selector/content/multi/UIContentBrowsePanelMulti.java	(revision 68734)
++++ core/webui/src/main/java/org/exoplatform/wcm/webui/selector/content/multi/UIContentBrowsePanelMulti.java	(working copy)
+@@ -21,8 +21,10 @@
+ import org.exoplatform.ecm.webui.selector.UISelectable;
+ import org.exoplatform.services.cms.drives.DriveData;
+ import org.exoplatform.services.cms.drives.ManageDriveService;
++import org.exoplatform.services.cms.link.LinkManager;
+ import org.exoplatform.services.jcr.core.ManageableRepository;
+ import org.exoplatform.services.wcm.publication.WCMComposer;
++import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+ import org.exoplatform.wcm.webui.selector.content.UIContentBrowsePanel;
+ import org.exoplatform.wcm.webui.selector.content.UIContentSelector;
+ import org.exoplatform.webui.config.annotation.ComponentConfig;
+@@ -50,6 +52,7 @@
+ 
+   /** The item paths. */
+   private String itemPaths;
++  private String itemTarget;
+   /** i18n Delete Confirmation message */
+   private String deleteConfirmationMsg = "UIBrowserPanel.Confirm.Delete";
+   /**
+@@ -78,9 +81,47 @@
+    */
+   public void setItemPaths(String itemPaths) {
+     this.itemPaths = itemPaths;
++    setItemTargetPath(getTargetPath(itemPaths));
+   }
+-
++  public void setItemTargetPath(String _itemTarget) {
++  	this.itemTarget = _itemTarget;
++  }
++  public String getItemTargetPath(){
++  	return this.itemTarget;
++  }
+   /**
++   * 
++   * @param savedItems
++   * @return
++   * @author vinh_nguyen
++   */
++  protected String getTargetPath(String savedItems) {
++  	int i, n;
++  	LinkManager linkManager;
++  	String[] savedItemList =savedItems.split(";");
++  	String savedItem;
++  	n = savedItemList.length;
++  	StringBuilder result = new StringBuilder("");
++  	linkManager = WCMCoreUtils.getService(LinkManager.class);
++  	for (i = 0; i<n; i++) {
++  		savedItem = savedItemList[i];
++      String[] locations = (savedItem == null) ? null : savedItem.split(":");
++      Node node = (locations != null && locations.length >= 3) ? Utils.getViewableNodeByComposer(locations[0], locations[1], locations[2]) : null;
++      savedItem="";
++      if (node!=null){
++        try {
++        	savedItem = node.getPath();
++        	if (linkManager.isLink(node)) {	        	
++        		node = linkManager.getTarget(node);
++        		savedItem = node.getPath();
++        	}
++        }catch (Exception e){}
++      }
++      result.append(savedItem).append(";");
++  	}
++  	return result.toString();
++  }
++  /**
+    * The listener interface for receiving selectAction events.
+    * The class that is interested in processing a selectAction
+    * event implements this interface, and the object created
+Index: core/webui/src/main/resources/groovy/wcm/webui/selector/content/multi/UIContentBrowsePanel.gtmpl
+===================================================================
+--- core/webui/src/main/resources/groovy/wcm/webui/selector/content/multi/UIContentBrowsePanel.gtmpl	(revision 68734)
++++ core/webui/src/main/resources/groovy/wcm/webui/selector/content/multi/UIContentBrowsePanel.gtmpl	(working copy)
+@@ -3,6 +3,7 @@
+ 	def rcontext = _ctx.getRequestContext();
+ 	def jsManager = rcontext.getJavascriptManager();
+   	def itemPaths = uicomponent.getItemPaths();
++  	def itemTargetPath = uicomponent.getItemTargetPath();
+ 	jsManager.importJavascript("eXo.wcm.backoffice.private.WCMUtils", "/eXoWCMResources/javascript");
+ 	jsManager.importJavascript("eXo.wcm.frontoffice.private.ContentSelector", "/eXoWCMResources/javascript");
+ 	if (uicomponent instanceof UIContentBrowsePanelMulti) {
+@@ -15,7 +16,7 @@
+ 	}else {
+ 		jsManager.addOnLoadJavascript("eXo.ecm.ECS.initRequestXmlTree('multi')");
+ 	}
+-	jsManager.addOnLoadJavascript("eXo.ecm.ECS.loadListContent('"+itemPaths+"')");%>
++	jsManager.addOnLoadJavascript("eXo.ecm.ECS.loadListContent('"+itemPaths+"', '" +itemTargetPath +"')");%>
+ <div id="$uicomponent.id" class="UIWCMSearchContainer $uicomponent.id">
+ 	<div class="ActionBar">
+ 		<div class="FilterTitle">Filter</div>

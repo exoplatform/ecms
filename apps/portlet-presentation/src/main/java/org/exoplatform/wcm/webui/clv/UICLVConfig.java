@@ -24,7 +24,6 @@ import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 import javax.portlet.PortletPreferences;
 
-import org.exoplatform.ecm.ProductVersions;
 import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.ecm.webui.selector.UISelectable;
 import org.exoplatform.services.cms.drives.DriveData;
@@ -32,7 +31,6 @@ import org.exoplatform.services.cms.drives.ManageDriveService;
 import org.exoplatform.services.cms.views.ApplicationTemplateManagerService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
-import org.exoplatform.services.migration.MigrationUtil;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.wcm.webui.Utils;
@@ -776,8 +774,9 @@ public class UICLVConfig extends UIForm  implements UISelectable {
         multiContentSelector.setSourceComponent(clvConfig, new String[] { UICLVConfig.ITEM_PATH_FORM_STRING_INPUT });
 //        String itemPath = clvConfig.getUIStringInput(UICLVConfig.ITEM_PATH_FORM_STRING_INPUT).getValue();
         String itemPath = clvConfig.getSavedPath();
-        if (itemPath != null && itemPath.contains(";"))
+        if (itemPath != null && itemPath.contains(";")) {
           multiContentSelector.setItemPaths(itemPath);
+        }
         contentSelector.init();
         Utils.createPopupWindow(clvConfig, contentSelector, UIContentSelector.CORRECT_CONTENT_SELECTOR_POPUP_WINDOW, 800);
         clvConfig.setPopupId(UIContentSelector.CORRECT_CONTENT_SELECTOR_POPUP_WINDOW);

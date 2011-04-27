@@ -21,8 +21,10 @@ import javax.jcr.Node;
 import org.exoplatform.ecm.webui.selector.UISelectable;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.drives.ManageDriveService;
+import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.wcm.publication.WCMComposer;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.wcm.webui.selector.content.UIContentBrowsePanel;
 import org.exoplatform.wcm.webui.selector.content.UIContentSelector;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -50,6 +52,7 @@ public class UIContentBrowsePanelMulti extends UIContentBrowsePanel {
 
   /** The item paths. */
   private String itemPaths;
+  private String itemTarget;
   /** i18n Delete Confirmation message */
   private String deleteConfirmationMsg = "UIBrowserPanel.Confirm.Delete";
   /**
@@ -78,8 +81,46 @@ public class UIContentBrowsePanelMulti extends UIContentBrowsePanel {
    */
   public void setItemPaths(String itemPaths) {
     this.itemPaths = itemPaths;
+    setItemTargetPath(getTargetPath(itemPaths));
   }
-
+  public void setItemTargetPath(String _itemTarget) {
+  	this.itemTarget = _itemTarget;
+  }
+  public String getItemTargetPath(){
+  	return this.itemTarget;
+  }
+  /**
+   * 
+   * @param savedItems
+   * @return
+   * @author vinh_nguyen
+   */
+  protected String getTargetPath(String savedItems) {
+  	int i, n;
+  	LinkManager linkManager;
+  	String[] savedItemList =savedItems.split(";");
+  	String savedItem;
+  	n = savedItemList.length;
+  	StringBuilder result = new StringBuilder("");
+  	linkManager = WCMCoreUtils.getService(LinkManager.class);
+  	for (i = 0; i<n; i++) {
+  		savedItem = savedItemList[i];
+      String[] locations = (savedItem == null) ? null : savedItem.split(":");
+      Node node = (locations != null && locations.length >= 3) ? Utils.getViewableNodeByComposer(locations[0], locations[1], locations[2]) : null;
+      savedItem="";
+      if (node!=null){
+        try {
+        	savedItem = node.getPath();
+        	if (linkManager.isLink(node)) {	        	
+        		node = linkManager.getTarget(node);
+        		savedItem = node.getPath();
+        	}
+        }catch (Exception e){}
+      }
+      result.append(savedItem).append(";");
+  	}
+  	return result.toString();
+  }
   /**
    * The listener interface for receiving selectAction events.
    * The class that is interested in processing a selectAction

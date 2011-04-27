@@ -608,7 +608,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
 	  		}
 
 	  		if (fileType != null) {
-	  			Element file = FCKFileHandler.createFileElement(document, fileType, checkNode, child, currentPortal);
+	  			Element file = FCKFileHandler.createFileElement(document, fileType, checkNode, child, currentPortal, linkManager);
 	  			files.appendChild(file);
 	  		}
 	  	}
