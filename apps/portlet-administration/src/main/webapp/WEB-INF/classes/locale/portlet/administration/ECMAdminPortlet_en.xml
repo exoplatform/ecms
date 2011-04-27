@@ -39,17 +39,17 @@
   -->
   <UITaxonomyWorkingArea>
     <msg>
-      <referential-integrity>Can not read from source file or destination category is subcategory</referential-integrity>
-      <no-taxonomy-selected>You must copy or cut at least one category</no-taxonomy-selected>
-      <node-is-cutting>You can not paste here. Maybe, the taxonomy node '{0}' is being cut.</node-is-cutting>
+      <referential-integrity>Cannot read from source file. or destination category is subcategory</referential-integrity>
+      <no-taxonomy-selected>You must copy or cut at least one category.</no-taxonomy-selected>
+      <node-is-cutting>You cannot paste here. The category node '{0}' might be being cut.</node-is-cutting>
       <can-not-paste>No data in clipboard to paste.</can-not-paste>
-      <reference-exception>Can not delete this taxonomy node because it is currently the target of a REFERENCE property.</reference-exception>
-      <path-error>Maybe, have problem when remove this taxonomy node.</path-error>
+      <reference-exception>Cannot delete this category node because it is currently the target of a REFERENCE property.</reference-exception>
+      <path-error>An error occured when removing this taxonomy node.</path-error>
     </msg>
   </UITaxonomyWorkingArea>
   <UITaxonomyManager>
     <msg>
-      <confirm-delete>Do you really want to delete ?</confirm-delete>
+      <confirm-delete>Do you really want to delete?</confirm-delete>
     </msg>
     <title>
       <add>Add</add>
@@ -68,14 +68,14 @@
 	<UITaxonomyTreeContainer>
 		<tab>
 			<info>
-				<UITaxonomyTreeMainForm>Input taxonomy name, choose workspace and taxonomy home path</UITaxonomyTreeMainForm>
-				<UIPermissionTreeManager>Select permission for taxonomy tree node</UIPermissionTreeManager>
-				<UIActionTaxonomyManager>After you have registered an action for this tree, the taxonomy tree will be created/updated.</UIActionTaxonomyManager>
+				<UITaxonomyTreeMainForm>Input category name, choose workspace and category home path</UITaxonomyTreeMainForm>
+				<UIPermissionTreeManager>Select permission for category tree node:</UIPermissionTreeManager>
+				<UIActionTaxonomyManager> The category tree will be created or updated after registering an action.</UIActionTaxonomyManager>
 				<UITaxonomyTreeCreateChild>Edit the taxonomy tree by adding, copying, cutting and selecting permissions.</UITaxonomyTreeCreateChild>
 			</info>
 		</tab>
 		<msg>
-  		<not-exist-tree>Tree does not exist yet</not-exist-tree>
+  		<not-exist-tree>The tree doesn't exist.</not-exist-tree>
 		</msg>
 	</UITaxonomyTreeContainer>
   
@@ -89,11 +89,11 @@
 			<Reset>Reset</Reset>
 		</action>
 		<msg>
-  		<name-not-allowed>Name forbidden</name-not-allowed>
-  		<name-emty>The name of the tree is empty</name-emty>
-  		<homePath-emty>The home path is empty</homePath-emty>
-  		<targetPath-emty>The target path is empty</targetPath-emty>
-  		<taxonomytree-existed>A taxonomy tree with the same name already exists</taxonomytree-existed>
+  		<name-not-allowed>Forbidden Name</name-not-allowed>
+  		<name-emty>The name of the tree is empty.</name-emty>
+  		<homePath-emty>The home path is empty.</homePath-emty>
+  		<targetPath-emty>The target path is empty.</targetPath-emty>
+  		<taxonomytree-existed>A taxonomy tree with the same name already exists.</taxonomytree-existed>
 		</msg>
 	</UITaxonomyTreeMainForm>
 	
@@ -139,7 +139,7 @@
 	##########################################################################################
 	-->
 	<UIPermissionTreeForm>
-		<title>Add a permission to that node</title>
+		<title>Add a permission to this node</title>
 		<label>
 			<userOrGroup>User or Group</userOrGroup>
 			<read>Read</read>
@@ -148,7 +148,7 @@
 			<remove>Remove</remove>
 		</label>
 		<msg>
-		  <have-not-any-permission>Add Permission to node</have-not-any-permission>
+		  <have-not-any-permission>Add Permission to this node</have-not-any-permission>
 		</msg>
 	</UIPermissionTreeForm>
 	
@@ -159,17 +159,17 @@
 	-->
 	
 	<UIActionForm>
-		<title>Add an action to the taxonomy tree</title>
+		<title>Add an action to the category tree</title>
 		<action>
 			<Save>Save</Save>
 		</action>
 		<msg>
-  		<name-not-allowed>Name forbidden</name-not-allowed>
-  		<path-invalid>Path is invalid</path-invalid>
-			<taxonomy-existed>Taxonomy tree already exists</taxonomy-existed>
-			<taxonomy-node-existed>Taxonomy node already exists</taxonomy-node-existed>
-			<no-permission-add>User has no add right</no-permission-add>
-			<not-created-tree>Taxonomy tree has not been created yet</not-created-tree>
+  		<name-not-allowed>Forbidden name.</name-not-allowed>
+  		<path-invalid>Path is invalid.</path-invalid>
+			<taxonomy-existed>Category tree already exists.</taxonomy-existed>
+			<taxonomy-node-existed>Category node already exists.</taxonomy-node-existed>
+			<no-permission-add>User has no add right.</no-permission-add>
+			<not-created-tree>Category tree hasn't been created yet.</not-created-tree>
 		</msg>
 	</UIActionForm>
 	
@@ -195,7 +195,7 @@
     </title>
   </NameSpacePopup>
   <UINamespaceForm>
-    <title>Register new Namespace</title>
+    <title>Register a New Namespace</title>
     <label>
       <namespace>Namespace Prefix</namespace>
       <uri>Uri</uri>
@@ -206,8 +206,8 @@
     </action>
     <msg>
       <register-unsuccessfull>Namespace or uri already exists!</register-unsuccessfull>
-      <prefix-null>You must enter namespace's prefix</prefix-null>
-      <uri-null>You must enter namespace's uri</uri-null>
+      <prefix-null>You must enter the namespace's prefix.</prefix-null>
+      <uri-null>You must enter the namespace's uri.</uri-null>
     </msg>
   </UINamespaceForm>
   <!--
@@ -227,7 +227,7 @@
   </UINamespaceList>
   <NamespacePopup>
     <title>
-      <UINamespaceForm>Register new Namespace</UINamespaceForm>
+      <UINamespaceForm>Register a New Namespace</UINamespaceForm>
     </title>
   </NamespacePopup>
   <!--
@@ -255,8 +255,8 @@
       <action>Template's actions</action>
     </header>
     <msg>
-      <confirm-delete>Do you really want to delete ?</confirm-delete>
-      <delete-successful>Templates of '{0}' has been deleted</delete-successful>
+      <confirm-delete>Do you really want to delete?</confirm-delete>
+      <delete-successful>Templates of '{0}' has been deleted.</delete-successful>
     </msg>
     <action>
       <Add>Add Metadata</Add>
@@ -275,7 +275,7 @@
   </MetadataPopupEdit>
   <PermissionPopup>
     <title>
-      <MetadataPermission>Select permission</MetadataPermission>
+      <MetadataPermission>Select Permission</MetadataPermission>
       <QueriesPermissionBrowse>Add Permissions</QueriesPermissionBrowse>
     </title>
   </PermissionPopup>
@@ -320,7 +320,7 @@
       <name>Element Name</name>
       <type>Type</type>
       <description>Description</description>
-      <isMixin>Is mixin types</isMixin>
+      <isMixin>Is Mixin Type</isMixin>
       <orderable>Orderable children</orderable>
     </header>
     <info>
@@ -539,16 +539,16 @@
     </action>
     <msg>
       <cannot-delete>Can not delete '{0}', it's maybe in used</cannot-delete>
-      <confirm-delete>Do you really want to delete ?</confirm-delete>
+      <confirm-delete>Do you really want to delete?</confirm-delete>
     </msg>
   </UIRepositoryList>
   <UIWorkspacePermissionForm>
     <label>
       <permission>Permission</permission>
-      <read>Read Right</read>
-      <add_node>Add Node Right</add_node>
-      <set_property>Set Property Right</set_property>
-      <remove>Remove Right</remove>
+      <read>Read</read>
+      <add_node>Add Node</add_node>
+      <set_property>Set Property</set_property>
+      <remove>Remove</remove>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -1366,34 +1366,34 @@
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
     </action>
-    <title>Add Taxonomy</title>
+    <title>Add Category</title>
     <label>
-      <taxonomyName>Taxonomy Name</taxonomyName>
+      <taxonomyName>Category Name</taxonomyName>
       <parentPath>Parent</parentPath>
     </label>
     <msg>
       <exist>The "{0}" category already exists!</exist>
-      <name-null>You must enter taxonomy name.</name-null>
+      <name-null>You must enter a category name.</name-null>
       <name-invalid>There are some invalid characters in name.</name-invalid>
-      <name-too-long>Taxonomy name must less than 30 characters</name-too-long>
+      <name-too-long>Category name must have less than 30 characters.</name-too-long>
     </msg>
   </UITaxonomyForm>
     
   <EditTaxonomyTreePopup>
     <title>
-      <UITaxonomyTreeContainer>Edit taxonomy tree</UITaxonomyTreeContainer>
+      <UITaxonomyTreeContainer>Edit Category Tree</UITaxonomyTreeContainer>
     </title>
   </EditTaxonomyTreePopup>
 
   <AddTaxonomyTreePopup>
     <title>
-      <UITaxonomyTreeContainer>Add taxonomy tree</UITaxonomyTreeContainer>
+      <UITaxonomyTreeContainer>Add Category Tree</UITaxonomyTreeContainer>
     </title>
   </AddTaxonomyTreePopup>
   
   <TaxonomyPopupCreateChild>
     <title>
-      <UITaxonomyTreeCreateChildForm>Edit taxonomy tree</UITaxonomyTreeCreateChildForm>
+      <UITaxonomyTreeCreateChildForm>Edit Category Tree</UITaxonomyTreeCreateChildForm>
     </title>
   </TaxonomyPopupCreateChild>
 
@@ -1404,7 +1404,7 @@
     </action>
     <label>
       <parentPath>Parent</parentPath>
-      <taxonomyName>Taxonomy name</taxonomyName>
+      <taxonomyName>Category name</taxonomyName>
     </label>
     <msg>
 			<name-null>Name is null</name-null>
@@ -1429,7 +1429,7 @@
 
   <TaxoTreeSelectUserOrGroupPopup>
 	  <title>
-      <TaxoTreeSelectUserOrGroup>Select membership</TaxoTreeSelectUserOrGroup>
+      <TaxoTreeSelectUserOrGroup>Select Membership</TaxoTreeSelectUserOrGroup>
     </title>
   </TaxoTreeSelectUserOrGroupPopup>
   
@@ -1442,8 +1442,8 @@
   
   <TaxoTreeSelectUserOrGroup>
     <label>
-      <selectGroup>Select group</selectGroup>
-      <selectMembership>Select membership</selectMembership>
+      <selectGroup>Select Group</selectGroup>
+      <selectMembership>Select Membership</selectMembership>
     </label>
   </TaxoTreeSelectUserOrGroup>
   
@@ -1461,15 +1461,15 @@
       <action>Action</action>
     </header>
     <action>
-      <AddTaxonomyTree>Add Taxonomy Tree</AddTaxonomyTree>
+      <AddTaxonomyTree>Add Category Tree</AddTaxonomyTree>
     </action>
     <tooltip>
-      <EditTaxonomyTree>Edit taxonomy Tree</EditTaxonomyTree>
-      <Delete>Delete taxonomy Tree</Delete>
+      <EditTaxonomyTree>Edit Category Tree</EditTaxonomyTree>
+      <Delete>Delete Category Tree</Delete>
     </tooltip>
-    <title>Browses Taxonomy Tree</title>
+    <title>Browse Category Tree</title>
     <msg>
-      <no-list>No taxonomy tree available</no-list>
+      <no-list>No category trees have been created.</no-list>
       <confirm-delete>Are you sure to delete?</confirm-delete>
     </msg>
   </UITaxonomyTreeList>
@@ -1508,22 +1508,22 @@
       <Reset>Reset</Reset>
     </action>
     <msg>
-      <checkbox-require>You must select at least one permission</checkbox-require>
-      <userOrGroup-required>You must select a user or a group before saving the permission</userOrGroup-required>
-      <not-change-permission>You have no right to add a permission</not-change-permission>
-      <access-denied>Access denied! You can not remove this permission.</access-denied>
+      <checkbox-require>You must select at least one permission.</checkbox-require>
+      <userOrGroup-required>You must select a user or a group before saving the permission.</userOrGroup-required>
+      <not-change-permission>You have no right to add a permission.</not-change-permission>
+      <access-denied>Access denied! You cannot remove this permission.</access-denied>
     </msg>
   </UIPermissionTreeForm>
   
   <PopupTaxonomyJCRBrowser>
 	  <title>
-      <UIOneNodePathSelector>Select home path</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Select Home Path</UIOneNodePathSelector>
     </title>
   </PopupTaxonomyJCRBrowser>
   
   <PopupTaxonomyTreePermission>
     <title>
-      <UIPermissionSelector>Select permissions</UIPermissionSelector>
+      <UIPermissionSelector>Select Permissions</UIPermissionSelector>
     </title>
    </PopupTaxonomyTreePermission>
    
@@ -1563,16 +1563,16 @@
     </header>
     <msg>
       <confirm-delete-permission>Do you want to remove this permission?</confirm-delete-permission>
-      <no-permission-tochange>You have no right to remove permission</no-permission-tochange>
-      <no-permission-remove>You can not remove the owner or system</no-permission-remove>
+      <no-permission-tochange>You have no right to remove permission.</no-permission-tochange>
+      <no-permission-remove>You can not remove the owner or system.</no-permission-remove>
       <access-denied>Access denied! You can not remove this permission.</access-denied>
     </msg>
   </UIPermissionInfo>
   <permission>
     <title>
-      <SelectUser>Select user</SelectUser>
-      <SelectMember>Select membership</SelectMember>
-      <AddAny>Select everyone</AddAny>
+      <SelectUser>Select User</SelectUser>
+      <SelectMember>Select Membership</SelectMember>
+      <AddAny>Select Everyone</AddAny>
     </title>
   </permission>
   <!--
@@ -1582,15 +1582,15 @@
   -->
   <SelectUserOrGroup>
     <title>
-      <UIGroupSelector>Select user</UIGroupSelector>
-      <UIPermissionSelector>Select member</UIPermissionSelector>
-      <UIGroupMemberSelector>Select membership</UIGroupMemberSelector>
+      <UIGroupSelector>Select User</UIGroupSelector>
+      <UIPermissionSelector>Select Member</UIPermissionSelector>
+      <UIGroupMemberSelector>Select Membership</UIGroupMemberSelector>
     </title>
   </SelectUserOrGroup>
   <UIGroupSelector>
     <label>
-      <selectGroup>Browse and select a group</selectGroup>
-      <selectUser>Select user</selectUser>
+      <selectGroup>Select Group</selectGroup>
+      <selectUser>Select User</selectUser>
     </label>
     <msg>
       <not-change-owner>'{0}' is owner of this node and have full control permission</not-change-owner>
@@ -1601,10 +1601,10 @@
       <UIPopupWindow>Select</UIPopupWindow>
       <permission>UIPermissionForm</permission>
       <userOrGroup>User Or Group</userOrGroup>
-      <read>Read Right</read>
-      <add_node>Add Node Right</add_node>
-      <set_property>Set Property Right</set_property>
-      <remove>Remove Right</remove>
+      <read>Read</read>
+      <add_node>Add Node</add_node>
+      <set_property>Set Property</set_property>
+      <remove>Remove</remove>
     </label>
     <title>Add a permission to that node</title>
     <action>
@@ -1613,16 +1613,16 @@
       <Reset>Reset</Reset>
     </action>
     <msg>
-      <checkbox-require>You must select at least one permission</checkbox-require>
-      <userOrGroup-required>You must select a user or a group before saving the permission</userOrGroup-required>
-      <not-change-permission>You have no right to add a permission</not-change-permission>
-      <access-denied>Access denied! You can not remove this permission.</access-denied>
+      <checkbox-require>You must select at least one permission.</checkbox-require>
+      <userOrGroup-required>You must select a user or a group before saving the permission.</userOrGroup-required>
+      <not-change-permission>You have no right to add a permission.</not-change-permission>
+      <access-denied>Access denied! You cannot remove this permission.</access-denied>
     </msg>
   </UIPermissionForm>
   
   <TaxonomyPopup>
     <title>
-      <UITaxonomyForm>Add Taxonomy</UITaxonomyForm>
+      <UITaxonomyForm>Add Category</UITaxonomyForm>
     </title>
   </TaxonomyPopup>
   
@@ -1726,7 +1726,7 @@
     <label>
       <name>Name</name>
       <label>Label</label>
-      <isDocumentTemplate>Is Document Template</isDocumentTemplate>
+      <isDocumentTemplate>is Document Template</isDocumentTemplate>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -1771,7 +1771,7 @@
     </header>
     <msg>
       <undeletable>'{0}' can not be deleted, it is the default one!</undeletable>
-      <confirm-delete>Do you really want to delete ?</confirm-delete>
+      <confirm-delete>Do you really want to delete?</confirm-delete>
     </msg>
     <action>
       <title>
@@ -1793,7 +1793,7 @@
       <Refresh>#{word.refresh}</Refresh>
     </action>
     <msg>
-      <name-invalid>Field name can not contain special characters</name-invalid>
+      <name-invalid>Field name cannot contain special characters.</name-invalid>
       <roles-invalid>The Permission field can not be empty.</roles-invalid>
       <version-restored>The version {0} was restored successfully.</version-restored>
       <name-exist>The name '{0}' already exists</name-exist>
@@ -1844,8 +1844,8 @@
       <AddQuery>Add Query</AddQuery>
     </action>
     <tooltip>
-      <Edit>Edit this query</Edit>
-      <Delete>Delete this query</Delete>
+      <Edit>Edit this Query</Edit>
+      <Delete>Delete this Query</Delete>
     </tooltip>
     <msg>
       <confirm-delete>Do you really want to delete?</confirm-delete>
@@ -1865,21 +1865,21 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <permission-require>You must select permissions</permission-require>
-      <name-invalid>Field name must not contain any special character</name-invalid>
-      <name-existing>This query name already exists. Choose another name, please!</name-existing>
+      <permission-require>You must select permissions.</permission-require>
+      <name-invalid>Field name cannot contain special characters.</name-invalid>
+      <name-existing>This query name already exists. Please choose another name.</name-existing>
       <invalid-query>Invalid query. Check your query statement, please!</invalid-query>
-      <access-denied>Access denied! You haven't got permission in this function.</access-denied>
+      <access-denied>Access denied! You don't have the permission to perform this operation.</access-denied>
     </msg>
   </UIQueriesForm>
   <AddQueryForm>
     <title>
-      <UIQueriesForm>Add query</UIQueriesForm>
+      <UIQueriesForm>Add Query</UIQueriesForm>
     </title>
   </AddQueryForm>
   <EditQueryForm>
     <title>
-      <UIQueriesForm>Edit query</UIQueriesForm>
+      <UIQueriesForm>Edit Query</UIQueriesForm>
     </title>
   </EditQueryForm>
   <!--
@@ -1889,9 +1889,9 @@
   -->
   <UITagManager>
     <header>
-      <name>Style name</name>
-      <documentRange>Document range</documentRange>
-      <tagHTML>Style of tag</tagHTML>
+      <name>Style Name</name>
+      <documentRange>Document Range</documentRange>
+      <tagHTML>Style of Tag</tagHTML>
       <action>Action</action>
     </header>
     <action>
@@ -1902,16 +1902,16 @@
   </UITagManager>
   <UITagStyleForm>
     <label>
-      <styleName>Style name</styleName>
-      <documentRange>Document range</documentRange>
-      <styleHTML>Html style</styleHTML>
+      <styleName>Style Name</styleName>
+      <documentRange>Document Range</documentRange>
+      <styleHTML>Html Style</styleHTML>
     </label>
     <action>
       <UpdateStyle>Update</UpdateStyle>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <range-validator>Invalid range. Format of valid range is: a..b with a, b is positive integer. You can use * instead of b to indicate that unlimited.</range-validator>
+      <range-validator>Invalid range. Format of valid range is: a..b with a, b positive integers. You can use * instead of b to indicate that range is unlimited.</range-validator>
       <error-update>Your information are not valid or service raised error.</error-update>
     </msg>
   </UITagStyleForm>
@@ -1933,7 +1933,7 @@
   </ECMNameValidator>
   <EmptyFieldValidator>
     <msg>
-      <empty-input>Type value into field '{0}' please</empty-input>
+      <empty-input>Type value into field '{0}' please.</empty-input>
     </msg>
   </EmptyFieldValidator>
   <!--
@@ -2028,9 +2028,9 @@
   </step3>
   <UIPermissionSelector>
     <label>
-      <selectGroup>Select group</selectGroup>
-      <selectUser>Select user</selectUser>
-      <selectMembership>Select membership</selectMembership>
+      <selectGroup>Select Group</selectGroup>
+      <selectUser>Select User</selectUser>
+      <selectMembership>Select Membership</selectMembership>
     </label>
   </UIPermissionSelector>
   <UIAnyPermission>
@@ -2040,17 +2040,17 @@
   </UIAnyPermission>
   <MetadataPermission>
     <label>
-      <selectGroup>Select group</selectGroup>
+      <selectGroup>Select Group</selectGroup>
     </label>
   </MetadataPermission>  
   <MetadataPermission>
     <label>
-      <selectMembership>Select membership</selectMembership>
+      <selectMembership>Select Membership</selectMembership>
     </label>
   </MetadataPermission>
   <anyPermission>
     <title>
-      <AddAnyPermission>Set any permission</AddAnyPermission>
+      <AddAnyPermission>Set any Permission</AddAnyPermission>
     </title>
   </anyPermission>
   <!--
@@ -2058,9 +2058,9 @@
   -->
   <QueriesPermissionBrowse>
     <label>
-      <selectGroup>Select group</selectGroup>
-      <selectUser>Select user</selectUser>
-      <selectMembership>Select membership</selectMembership>
+      <selectGroup>Select Group</selectGroup>
+      <selectUser>Select User</selectUser>
+      <selectMembership>Select Membership</selectMembership>
     </label>
   </QueriesPermissionBrowse>
   <!--
@@ -2090,8 +2090,8 @@
   
   <UITaxonomyTreeMainForm>
     <msg>
-      <homepath-emty>The Home path is empty</homepath-emty>
-      <targetpath-emty>The target path is empty</targetpath-emty>
+      <homepath-emty>The Home path is empty.</homepath-emty>
+      <targetpath-emty>The target path is empty.</targetpath-emty>
     </msg>
   </UITaxonomyTreeMainForm>
   <UITaxonomyWorkingArea>
@@ -2131,13 +2131,13 @@
   </DriveInputSet>
 		<UIDriveForm>
 			<label>
-  		<allowCreateFolders>Allowance to create folder</allowCreateFolders>	
+  		<allowCreateFolders>Allow to create folder</allowCreateFolders>	
   	</label>
   </UIDriveForm>  
   <UIPermissionTreeInfo>
   	<msg>
   		<confirm-delete-permission>Do you really want to delete this permission?</confirm-delete-permission>
-      <no-permission-remove>You can not remove the owner or system</no-permission-remove>  		
+      <no-permission-remove>You cannot remove the owner or system</no-permission-remove>  		
   	</msg>
   </UIPermissionTreeInfo>  
   <UITaxonomyTreeMainForm>
@@ -2167,7 +2167,7 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <permission-require>You must select permissions</permission-require>      
+      <permission-require>You must select permissions.</permission-require>      
     </msg>
   </UIUnLockForm>
   <UILockHolderList>
@@ -2348,18 +2348,18 @@
   
   <UIGroupMemberSelector>
     <label>
-      <selectGroup>Select group</selectGroup>
-      <selectMembership>Select membership</selectMembership>
+      <selectGroup>Select Group</selectGroup>
+      <selectMembership>Select Membership</selectMembership>
     </label>
   </UIGroupMemberSelector>
   
   <UIFolksonomyManager>
   	<msg>
-  		<confirm-delete>Do you want to delete this style ?</confirm-delete>
+  		<confirm-delete>Do you want to delete this style?</confirm-delete>
   	</msg>
     <action>
       <title>
-        <AddStyle>Add style</AddStyle>
+        <AddStyle>Add Style</AddStyle>
       </title>
     </action>
   </UIFolksonomyManager>  
@@ -2383,7 +2383,7 @@
   
   <UIWorkspaceWizard>
   		<msg>
-  				<name-not-allowed>Name forbidden</name-not-allowed>
+  				<name-not-allowed>Forbidden Name</name-not-allowed>
   		</msg>
   </UIWorkspaceWizard>
   <UIRepositoryForm>
@@ -2419,15 +2419,15 @@
 	</UIDriveForm>
 	<DriveInputSet>
 		<title>
-			<RemovePermission>Remove permission</RemovePermission>
-			<ChooseNodeType>Choose node types</ChooseNodeType>
+			<RemovePermission>Remove Permission</RemovePermission>
+			<ChooseNodeType>Choose Node Types</ChooseNodeType>
 			<RemoveNodeType>Remove</RemoveNodeType>
 		</title>
 	</DriveInputSet>
 	<PopupNodeTypeSelector>
 		<title>
-			<UINodeTypeSelector>Select node types</UINodeTypeSelector>
-			<PopupNodeTypeSelector>Select node types</PopupNodeTypeSelector>
+			<UINodeTypeSelector>Select Node Types</UINodeTypeSelector>
+			<PopupNodeTypeSelector>Select Node Types</PopupNodeTypeSelector>
 		</title>
 	</PopupNodeTypeSelector>	
 	<UINodeTypeSelector>
@@ -2442,12 +2442,12 @@
  </UIScriptForm>
  <UINodeTypeList>
    <msg>
-   		<no-list>There isn't any node type with condition search</no-list>
+   		<no-list>There isn't any node type with condition search.</no-list>
    </msg>
  </UINodeTypeList>
  <UIActionForm>
  	<msg>
- 			<canotChangeActionId>You can not change action id</canotChangeActionId>
+ 			<canotChangeActionId>You cannot change the Action Id</canotChangeActionId>
  	</msg>
  </UIActionForm>
  <PopupComponent>
