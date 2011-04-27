@@ -244,6 +244,8 @@ public class UIPermissionSelector extends UIGroupMembershipSelector implements C
       lockService.addGroupsOrUsersForLock(value);
       UIUnLockManager uiUnLockManager = uiPermissionSelector.getAncestorOfType(UIUnLockManager.class);
       uiUnLockManager.refresh();
+      uiUnLockManager.getChild(UILockNodeList.class).setRendered(false);
+      uiUnLockManager.getChild(UILockHolderContainer.class).setRendered(true);
     }
   }
 
