@@ -26,67 +26,112 @@ h3. Newsletter {anchor:id=CONTref.Portlets.Newsletter}
 {include:document="pages/preface/portlet_newsletter.wiki" /}
 
 h1. Configuration {anchor:id=CONTref.Configuration}
-h2. Components
-h3. ActionServiceContainer
-h3. ActionServiceContainer
-h3. ApplicationTemplateManagerService
-h3. FragmentCacheService
-h3. JodConverterServices
-h3. LiveLinkManagerService
-h3. LockService
-h3. MailService
-h3. NewsletterManagerService
-h3. QueryService
-h3. TaxonomyService
-h3. ThumbnailService
-h3. TimelineService
-h3. WatchDocumentService
-h3. WCMService
+h2. Components {anchor:id=CONTref.Configuration.Components}
+h3. ActionServiceContainer      {anchor:id=CONTref.Configuration.Components.ActionServiceContainer}
+{include:document="pages/configuration/components/config_ActionServiceContainer.wiki"/}
+h3. ApplicationTemplateManagerService   {anchor:id=CONTref.Configuration.Components.ApplicationTemplateManagerService}
+{include:document="pages/configuration/components/config_ApplicationTemplateManagerService.wiki"/}
+h3. FragmentCacheService  {anchor:id=CONTref.Configuration.Components.FragmentCacheService}
+{include:document="pages/configuration/components/config_FragmentCacheService.wiki"/}
+h3. JodConverterService   {anchor:id=CONTref.Configuration.Components.JodConverterService}
+{include:document="pages/configuration/components/config_JodConverterServices.wiki"/}
+h3. LiveLinkManagerService   {anchor:id=CONTref.Configuration.Components.LiveLinkManagerService}
+{include:document="pages/configuration/components/config_LiveLinkManagerService.wiki"/}
+h3. LockService   {anchor:id=CONTref.Configuration.Components.LockService}
+{include:document="pages/configuration/components/config_LockService.wiki"/}
+h3. NewsletterManagerService      {anchor:id=CONTref.Configuration.Components.NewsletterManagerService}
+{include:document="pages/configuration/components/config_NewsletterManagerService.wiki"/}
+h3. QueryService   {anchor:id=CONTref.Configuration.Components.QueryService}
+{include:document="pages/configuration/components/config_QueryService.wiki"/}
+h3. TaxonomyService     {anchor:id=CONTref.Configuration.Components.TaxonomyService}
+{include:document="pages/configuration/components/config_TaxonomyService.wiki"/}
+h3. ThumbnailService      {anchor:id=CONTref.Configuration.Components.ThumbnailService}
+{include:document="pages/configuration/components/config_ThumbnailService.wiki"/}
+h3. TimelineService       {anchor:id=CONTref.Configuration.Components.TimelineService}
+{include:document="pages/configuration/components/config_TimelineService.wiki"/}
+h3. WatchDocumentService   {anchor:id=CONTref.Configuration.Components.WatchDocumentService}
+{include:document="pages/configuration/components/config_WatchDocumentService.wiki"/}
+h3. WCMService    {anchor:id=CONTref.Configuration.Components.WCMService}
+{include:document="pages/configuration/components/config_WCMService.wiki"/}
 
-h2. External Component Plugins
-h3. AuthoringPublicationPlugin
-h3. AddNameSpacesPlugin
-{include:document="pages/configuration/nodetypes.wiki" /}
-h3. BaseActionPlugin
-h3. BPActionPlugin
-h3. ContentTypeFilterPlugin
-h3. ContextPlugin
-h3. CreatePortalPlugin
-h3. CreatePortalPlugin
-h3. ExcludeIncludeDataTypePlugin
-h3. FriendlyPlugin
-h3. ImageThumnailPlugin
-h3. InitialNewsletterPlugin
-h3. InitialWebcontentPlugin
-h3. LinkDeploymentPlugin
-h3. LockGroupsOrUsersPlugin
-h3. ManageDrivePlugin
-{include:document="pages/configuration/drives.wiki" /}
-h3. ManageViewPlugin
-{include:document="pages/configuration/views.wiki" /}
-h3. PDFThumnailPlugin
-h3. PorletTemplatePlugin
-h3. predifinedProcessesPlugin
-h3. PublicationPlugin
-h3. QueryPlugin
-h3. RemovePortalPlugin
-h3. ScriptActionPlugin
-h3. ScriptPlugin
-h3. StageAndVersionPublicationPlugin
-h3. TagPermissionPlugin
-h3. TagStylePlugin
-h3. TaxonomyPlugin
-{include:document="pages/configuration/taxonomies.wiki" /}
-h3. TemplatePlugin
-{include:document="pages/configuration/template_application.wiki" /}
-{include:document="pages/configuration/template_nodetype.wiki" /}
-h3. ThumnailPlugin
-h3. WCMPublicationPlugin
-{include:document="pages/configuration/publication.wiki" /}
-h3. WebpagePublicationPlugin
-h3. WorkflowPublicationPlugin
-h3. XMLdeploymentPlugin
-{include:document="pages/configuration/deployment.wiki" /} 
+h2. External Component Plugins   {anchor:id=CONTref.Configuration.Plugins}
+h3. AuthoringPublicationPlugin   {anchor:id=CONTref.Configuration.Plugins.AuthoringPublicationPlugin}
+
+h3. AddNameSpacesPlugin {anchor:id=CONTref.Configuration.Plugins.AddNameSpacesPlugin}
+
+{include:document="pages/configuration/plugins/plugin_AddNameSpacesPlugin.wiki" /}
+
+h3. BaseActionPlugin  {anchor:id=CONTref.Configuration.Plugins.BaseActionPlugin}
+
+h3. BPActionPlugin  {anchor:id=CONTref.Configuration.Plugins.BPActionPlugin}
+
+h3. ContentTypeFilterPlugin   {anchor:id=CONTref.Configuration.Plugins.ContentTypeFilterPlugin}
+
+h3. ContextPlugin  {anchor:id=CONTref.Configuration.Plugins.ContextPlugin}
+
+h3. CreatePortalPlugin    {anchor:id=CONTref.Configuration.Plugins.CreatePortalPlugin}
+
+h3. ExcludeIncludeDataTypePlugin  {anchor:id=CONTref.Configuration.Plugins.ExcludeIncludeDataTypePlugin}
+
+h3. FriendlyPlugin  {anchor:id=CONTref.Configuration.Plugins.FriendlyPlugin}
+
+h3. ImageThumnailPlugin  {anchor:id=CONTref.Configuration.Plugins.ImageThumnailPlugin}
+
+h3. InitialNewsletterPlugin {anchor:id=CONTref.Configuration.Plugins.InitialNewsletterPlugin}
+
+h3. InitialWebcontentPlugin  {anchor:id=CONTref.Configuration.Plugins.InitialWebcontentPlugin}
+
+h3. LinkDeploymentPlugin    {anchor:id=CONTref.Configuration.Plugins.LinkDeploymentPlugin}
+
+h3. LockGroupsOrUsersPlugin  {anchor:id=CONTref.Configuration.Plugins.LockGroupsOrUsersPlugin}
+
+h3. ManageDrivePlugin{anchor:id=CONTref.Configuration.Plugins.ManageDrivePlugin}
+{include:document="pages/configuration/plugins/plugin_ManageDrivePlugin.wiki"/}
+
+h3. ManageViewPlugin   {anchor:id=CONTref.Configuration.Plugins.ManageViewPlugin}
+{include:document="pages/configuration/plugins/plugin_ManageViewPlugin.wiki" /}
+
+h3. PDFThumnailPlugin   {anchor:id=CONTref.Configuration.Plugins.PDFThumnailPlugin}
+
+h3. PorletTemplatePlugin   {anchor:id=CONTref.Configuration.Plugins.PortetTemplatePlugin}
+
+h3. predifinedProcessesPlugin  {anchor:id=CONTref.Configuration.Plugins.predifinedProcessesPlugin}
+
+h3. PublicationPlugin  {anchor:id=CONTref.Configuration.Plugins.PublicationPlugin}
+
+h3. QueryPlugin     {anchor:id=CONTref.Configuration.Plugins.QueryPlugin}
+
+h3. RemovePortalPlugin   {anchor:id=CONTref.Configuration.Plugins.RemovePortalPlugin}
+
+h3. ScriptActionPlugin   {anchor:id=CONTref.Configuration.Plugins.ScriptActionPlugin}
+
+h3. ScriptPlugin        {anchor:id=CONTref.Configuration.Plugins.ScriptPlugin}
+
+h3. StageAndVersionPublicationPlugin  {anchor:id=CONTref.Configuration.Plugins.StageAndVersionPublicationPlugin}
+
+h3. TagPermissionPlugin  {anchor:id=CONTref.Configuration.Plugins.TagPermissionPlugin}
+
+h3. TagStylePlugin       {anchor:id=CONTref.Configuration.Plugins.TagStylePlugin}
+
+h3. TaxonomyPlugin     {anchor:id=CONTref.Configuration.Plugins.TaxonomyPlugin}
+{include:document="pages/configuration/plugins/plugin_TaxonomyPlugin.wiki"/}
+
+h3. TemplatePlugin     {anchor:id=CONTref.Configuration.Plugins.TemplatePlugin}
+{include:document="pages/configuration/plugins/plugin_TemplatePlugin.wiki" /}
+
+h3. ThumnailPlugin  {anchor:id=CONTref.Configuration.Plugins.ThumnailPlugin}
+
+h3. WCMPublicationPlugin   {anchor:id=CONTref.Configuration.Plugins.WCMPublicationPlugin}
+{include:document="pages/configuration/plugins/plugin_WCMPublicationPlugin.wiki" /}
+
+h3. WebpagePublicationPlugin    {anchor:id=CONTref.Configuration.Plugins.WebpagePublicationPlugin}
+
+h3. WorkflowPublicationPlugin   {anchor:id=CONTref.Configuration.Plugins.WorkflowPublicationPlugin}
+
+{include:document="pages/configuration/plugins/plugin_WorkflowPublicationPlugin.wiki" /}
+
+h3. XMLdeploymentPlugin{anchor:id=CONTref.Configuration.Plugins.XMLdeploymentPlugin}
+{include:document="pages/configuration/plugins/plugin_XMLdeploymentPlugin.wiki" /}
  
 h1. Developer references
 h2. WCM Templates {anchor:id=CONTref.InsideWCMTemplates}

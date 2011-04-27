@@ -1,0 +1,18 @@
+
+{code}
+<component>
+    <key>org.exoplatform.services.portletcache.FragmentCacheService</key>
+    <type>org.exoplatform.services.portletcache.FragmentCacheService</type>
+    <init-params>
+      <value-param>
+        <name>cleanup-cache</name>
+        <description>The cleanup cache period in seconds</description>
+        <value>300</value>
+      </value-param>
+    </init-params>
+</component>
+{code}
+
+*Details*:
+||Value-param || Possible value || Default value || Description ||
+|*cleanup-cache* |integer|300||

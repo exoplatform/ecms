@@ -1,0 +1,24 @@
+The _ActionServiceContainer_ component is used to manage actions (add actions, remove actions, execute actions and more) in the system.
+The configuration of this component is found in _/core/core-configuration/src/main/webapp/WEB-INF/conf/wcm-core/core-services-configuration.xml_.
+
+{code}
+<component>
+	  <key>org.exoplatform.services.cms.actions.ActionServiceContainer</key>
+	  <type>org.exoplatform.services.cms.actions.impl.ActionServiceContainerImpl</type>
+	  <init-params>
+      <value-param>
+        <name>workspace</name>
+        <value>system</value>
+      </value-param>
+      <value-param>
+        <name>repository</name>
+        <value>repository</value>
+      </value-param>
+    </init-params>
+</component>
+{code}
+
+*Details*:
+||value-param ||Possible value || Default value || Description ||
+|*workspace*|String |system|The workspace name.|
+|*repository*|String |repository|The repository name.|

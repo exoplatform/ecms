@@ -2,6 +2,16 @@ A template is a presentation to display the saved information.
 
 Template service is used to select the right template corresponding to the saved content.
 
+The node type template is used to edit and display the node content.
+Each node type has one _dialog1.gtmpl_ file (dialog template) for editing/creating a node and one _view1.gtmpl_ file (view template) for viewing the node content.
+Using the dialog template, you can specify a dialog whose fields correspond to the properties of the node you want to edit their values. When this template is rendered,
+each specified field will appear with a data input box for you to edit. Note that you do not have to
+design a dialog in which all data of the node are listed to be edited. You can just list the subset of node data you want to edit.
+Like the dialog template, the view template renders information of the node. You just need to create the template and specify which data fields to be displayed.
+With this kind of template, node information is only displayed but can not be edited.
+See details at[ContentType|#CONTref.CONTref.InsideWCMTemplates.ContentTypes].
+
+
 h1. Available configuration {anchor:id=CONTref.Configuration.Templates.ApplicationTemplate.AvailableConfiguration}
 
 h2. Init-params {anchor:id=CONTref.Configuration.Templates.ApplicationTemplate.Init-params}

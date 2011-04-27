@@ -1,0 +1,38 @@
+The ThumbnailService component is used to resize all the images into different sizes. Besides the default sizes, it also allows users to customize the images into the desired sizes.
+The configuration of this component is found in  _/core/core-configuration/src/main/webapp/WEB-INF/conf/wcm-core/core-services-configuration.xml_.
+{code}
+<component>
+	  <key>org.exoplatform.services.cms.thumbnail.ThumbnailService</key>
+	  <type>org.exoplatform.services.cms.thumbnail.impl.ThumbnailServiceImpl</type>
+	  <init-params>
+      <value-param>
+      	<name>smallSize</name>
+	      <value>32x32</value>
+      </value-param>
+      <value-param>
+      	<name>mediumSize</name>
+	      <value>64x64</value>
+      </value-param>
+      <value-param>
+      	<name>largeSize</name>
+	      <value>300x300</value>
+      </value-param>
+      <value-param>
+      	<name>enable</name>
+	      <value>false</value>
+      </value-param>
+      <value-param>
+        <name>mimetypes</name>
+        <value>image/jpeg;image/png;image/gif;image/bmp</value>
+      </value-param>
+    </init-params>
+</component>
+{code}
+
+*Details*:
+||Value-param|| Possible value || Default value || Description ||
+|*smallSize* |32x32|32x32| The small thumbnail size.|
+|*mediumSiz* |64x64|64x64|The medium thumbnail size.|
+|*largeSize* |300x300|300x300|The large thumbnail size.|
+|*enable* |boolean|false|Specify if the thumbnail is displayed or not.|
+|*mimetypes* |images formats|image/jpeg;image/png;image/gif;image/bmp|The image formats are supported.|
