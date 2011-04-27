@@ -184,7 +184,6 @@ public class NodeFinderImpl implements NodeFinder {
                            targetPath.substring(1).split("/").length, system);
           } 
           // The target cannot be found
-          session.logout();
           throw new PathNotFoundException("Can't reach the target of the link: " + link.getPath());
         }
         low = mid + 1;
@@ -193,7 +192,6 @@ public class NodeFinderImpl implements NodeFinder {
         high = mid - 1;
       }
     }
-    session.logout();
     throw new PathNotFoundException("Can't find path: " + absPath);
   }
 

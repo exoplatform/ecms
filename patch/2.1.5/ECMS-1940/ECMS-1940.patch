@@ -1,0 +1,33 @@
+Index: core/services/src/main/java/org/exoplatform/services/cms/link/impl/NodeFinderImpl.java
+===================================================================
+--- core/services/src/main/java/org/exoplatform/services/cms/link/impl/NodeFinderImpl.java	(revision 65139)
++++ core/services/src/main/java/org/exoplatform/services/cms/link/impl/NodeFinderImpl.java	(working copy)
+@@ -184,7 +184,6 @@
+                            targetPath.substring(1).split("/").length, system);
+           } 
+           // The target cannot be found
+-          session.logout();
+           throw new PathNotFoundException("Can't reach the target of the link: " + link.getPath());
+         }
+         low = mid + 1;
+@@ -193,7 +192,6 @@
+         high = mid - 1;
+       }
+     }
+-    session.logout();
+     throw new PathNotFoundException("Can't find path: " + absPath);
+   }
+ 
+Index: core/services/src/main/java/org/exoplatform/services/cms/link/impl/LinkManagerImpl.java
+===================================================================
+--- core/services/src/main/java/org/exoplatform/services/cms/link/impl/LinkManagerImpl.java	(revision 65139)
++++ core/services/src/main/java/org/exoplatform/services/cms/link/impl/LinkManagerImpl.java	(working copy)
+@@ -167,8 +167,6 @@
+       session.getNodeByUUID(link.getProperty(UUID).getString());
+     } catch (ItemNotFoundException e) {
+       return false;
+-    } finally {
+-      if(session != null) session.logout();
+     }
+     return true;
+   }  
