@@ -48,12 +48,13 @@
 				<%
 			} else {
 			  def currentPageData = uicomponent.getCurrentPageData();
+			  def i =0;
 			  %>
 			  	<div class="Contents">
 			  		<%
 							for (viewNode in currentPageData) {
 								if(!Utils.isViewable(viewNode)) continue;
-								
+								i++;
 								def isShowTitle = uicomponent.isShowField(UICLVPortlet.PREFERENCE_SHOW_TITLE);
 								def isShowDate = uicomponent.isShowField(UICLVPortlet.PREFERENCE_SHOW_DATE_CREATED);
 								def isShowLink = uicomponent.isShowField(UICLVPortlet.PREFERENCE_SHOW_LINK);
@@ -72,6 +73,7 @@
 									itemName = itemTitle;
 
 								def itemSummary = uicomponent.getSummary(viewNode);
+								def itemSummaryField = uicomponent.getSummaryField(viewNode);
 								def isShowSummary = uicomponent.isShowField(UICLVPortlet.PREFERENCE_SHOW_SUMMARY) && itemSummary != null;
 								
 								%>
@@ -88,7 +90,11 @@
 														if (isShowLink) {
 															%><div class="Title"><a href="$itemLink">$itemName</a></div><%
 														} else {
-															%><div class="Title">$itemName</div><%
+															%><div class="Title">
+															<%
+                                print uicomponent.getInlineEditingField(viewNode, "exo:title", itemName, "TEXT", "CLVTitle_"+String.valueOf(i), "GroovyCLVTitle", true, "button_direction=left-to-right");
+															%>
+															</div><%
 														}
 													}
 																										
@@ -96,7 +102,13 @@
 													  %><div class="DateAndMail">$itemDateCreated by $itemOwner</div><%
 													}
 													if (isShowSummary) { 
-														%><div class="Summary">$itemSummary</div><% 
+														%><div class="Summary">
+														<%
+												  		if (itemSummaryField!=null) {
+                                print uicomponent.getInlineEditingField(viewNode, itemSummaryField, itemSummary, "TEXTAREA", "Text_"+String.valueOf(i), "CLV1ColumnPresent", true);
+                              }
+                            %>
+														</div><% 
 													}
 													if (isShowReadmore) {
 													  %><div class="ReadLink"><a href="$itemLink"><%= _ctx.appRes("UICLVPresentation.label.readmore") %></a></div><%

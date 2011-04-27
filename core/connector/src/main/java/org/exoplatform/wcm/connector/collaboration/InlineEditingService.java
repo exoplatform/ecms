@@ -1,17 +1,25 @@
 package org.exoplatform.wcm.connector.collaboration;
 
 import java.io.FileNotFoundException;
+import java.security.AccessControlException;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 import javax.jcr.AccessDeniedException;
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
+import javax.jcr.Value;
 import javax.jcr.lock.LockException;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.CacheControl;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.transform.dom.DOMSource;
 
 import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
@@ -25,20 +33,12 @@ import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.resources.ResourceBundleService;
 import org.exoplatform.services.rest.resource.ResourceContainer;
 import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
-import org.exoplatform.services.resources.ResourceBundleService;
-import org.w3c.dom.Element;
-
-import java.security.AccessControlException;
-import java.util.Locale;
-import java.util.ResourceBundle;
 import org.w3c.dom.Document;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.ws.rs.core.CacheControl;
-import javax.xml.transform.dom.DOMSource;
-import javax.ws.rs.core.MediaType;
+import org.w3c.dom.Element;
 
 
 
@@ -211,13 +211,27 @@ public class InlineEditingService implements ResourceContainer{
                   node.addMixin(EXO_RSS_ENABLE);
               }
               if (!propertyName.contains("/")) {
-                node.setProperty(propertyName, newValue);
+                if (node.getProperty(propertyName).getDefinition().isMultiple()) {
+                  Value[] currentValue = node.getProperty(propertyName).getValues();
+                  if (currentValue==null) currentValue = new Value[1];
+                  currentValue[0] = session.getValueFactory().createValue(newValue);
+                  node.setProperty(propertyName, currentValue);
+                }else {
+                  node.setProperty(propertyName, newValue);
+                }
               }else {
                 int iSlash = propertyName.lastIndexOf("/");
                 String subnodePath = propertyName.substring(0, iSlash);
                 String subnodeProperty = propertyName.substring(iSlash+1);
                 Node subnode = node.getNode(subnodePath);
-                subnode.setProperty(subnodeProperty, newValue);
+                if (subnode.getProperty(subnodeProperty).getDefinition().isMultiple()) {
+                  Value[] currentValue = subnode.getProperty(subnodeProperty).getValues();
+                  if (currentValue==null) currentValue = new Value[1];
+                  currentValue[0] = session.getValueFactory().createValue(newValue);
+                  subnode.setProperty(subnodeProperty, currentValue);
+                }else {
+                  subnode.setProperty(subnodeProperty, newValue);
+                }
               }
               ConversationState conversationState = ConversationState.getCurrent();
               conversationState.setAttribute("siteName", siteName);
@@ -283,7 +297,15 @@ public class InlineEditingService implements ResourceContainer{
   private boolean sameValue(String newValue, Node node, String propertyName) throws Exception {	      
     if (!node.hasProperty(propertyName))
       return (newValue == null || newValue.length() == 0);
-    return node.getProperty(propertyName).getString().equals(newValue);
+    if (node.getProperty(propertyName).getDefinition().isMultiple()){
+      try {
+        return node.getProperty(propertyName).getValues()[0].getString().equals(newValue);
+      }catch (Exception e) {
+        return false;
+      }
+    }else {
+      return node.getProperty(propertyName).getString().equals(newValue);
+    }
   }
 
   /**

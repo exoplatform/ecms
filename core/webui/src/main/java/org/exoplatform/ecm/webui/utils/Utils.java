@@ -225,6 +225,9 @@ public class Utils {
 	public static final String INPUT_WYSIWYG				= "WYSIWYG".intern();
 	public static final String INPUT_TEXT						= "TEXT".intern();
 	public static final String DEFAULT_CSS_NAME     = "InlineText".intern();
+	public static final String LEFT2RIGHT           = "left-to-right";
+	public static final String RIGHT2LEFT           = "right-to-left";
+	
   public static String encodeHTML(String text) {
     return text.replaceAll("&", "&amp;").replaceAll("\"", "&quot;").replaceAll(
         "<", "&lt;").replaceAll(">", "&gt;");
@@ -724,7 +727,8 @@ public class Utils {
   public static String getInlineEditingField(Node orgNode, String propertyName, String defaultValue, String inputType, 
   									String idGenerator, String cssClass, boolean isGenericProperty, String... arguments) throws Exception {
     HashMap<String,String> parsedArguments = parseArguments(arguments) ;
-    
+    String height = parsedArguments.get(HEIGHT);
+    String bDirection = parsedArguments.get(BUTTON_DIR);
   	if ( org.exoplatform.wcm.webui.Utils.getCurrentMode().equals(WCMComposer.MODE_LIVE)) {
   		if (orgNode.hasProperty(propertyName)) {
 				try {
@@ -790,16 +794,31 @@ public class Utils {
   	sb.append("\t<div id=\"").append(editBlockEditorID).append("\" class=\"Edit").append(cssClass).append("\">\n");
   	sb.append("\t\t<form name=\"").append(editFormID).append("\" id=\"").append(editFormID).append("\" onSubmit=\"").append(strAction).append("\">\n");
   	sb.append("<DIV style=\"display:none; visible:hidden\" id=\"").append(currentValueID).append("\" name=\"").append(currentValueID).append("\">").append(currentValue).append("</DIV>");
-  	sb.append("\t\t<a href=\"#\" class =\"CancelButton\" ").append("onClick=\"InlineEditor.presentationSwitchBlock('");
-  	sb.append(editBlockEditorID).append("', '").append(showBlockId).append("');\">&nbsp;</a>\n");
-  	sb.append("\t\t<a href=\"#\" class =\"AcceptButton\" onclick=\"").append(strAction).append("\">&nbsp;</a>\n");
+  	
+  	if (bDirection!=null && bDirection.equals(LEFT2RIGHT)) {
+  	  sb.append("\t\t<a href=\"#\" class =\"AcceptButton\" style=\"float:left\" onclick=\"").append(strAction).append("\">&nbsp;</a>\n");
+  	  sb.append("\t\t<a href=\"#\" class =\"CancelButton\" style=\"float:left\" ").append("onClick=\"InlineEditor.presentationSwitchBlock('");
+      sb.append(editBlockEditorID).append("', '").append(showBlockId).append("');\">&nbsp;</a>\n");      
+  	} else {
+  	  sb.append("\t\t<a href=\"#\" class =\"CancelButton\" ").append("onClick=\"InlineEditor.presentationSwitchBlock('");
+      sb.append(editBlockEditorID).append("', '").append(showBlockId).append("');\">&nbsp;</a>\n");
+      sb.append("\t\t<a href=\"#\" class =\"AcceptButton\" onclick=\"").append(strAction).append("\">&nbsp;</a>\n");
+  	}
   	sb.append("\t\t<div class=\"Edit").append(cssClass).append("Input\">\n ");
 
   	if (inputType.equalsIgnoreCase(INPUT_WYSIWYG)) {
   		sb.append(createCKEditorField(newValueInputId, currentValue, parsedArguments));
   	}else if (inputType.equalsIgnoreCase(INPUT_TEXT_AREA)){
   		sb.append("\t\t<TEXTAREA ").append("\" name =\"");
-  		sb.append(newValueInputId).append("\" id =\"").append(newValueInputId).append("\" >");
+  		sb.append(newValueInputId).append("\" id =\"").append(newValueInputId).append("\"");
+  		if (height!=null && height.length()>0) {
+  		  sb.append(" style =\"height:").append(height);
+  		  if (!height.endsWith("px")) {
+  		    sb.append("px;");
+  		  }
+  		  sb.append("\"");
+  		}
+  		sb.append(">");
   		sb.append(currentValue).append("</TEXTAREA>");
   	}else if (inputType.equalsIgnoreCase(INPUT_TEXT)) {
   		sb.append("\t\t<input type=\"TEXT\" name =\"");
@@ -821,6 +840,7 @@ public class Utils {
   private static String createCKEditorField(String name, String value_, HashMap<String,String> arguments) {
   	String toolbar = arguments.get(TOOLBAR);  	
   	String passedCSS = arguments.get(CSS);
+  	
   	if (toolbar == null) toolbar = "BasicWCM";
   	StringBuffer contentsCss = new StringBuffer();
   	contentsCss.append("[");
@@ -861,12 +881,18 @@ public class Utils {
   protected static final String SEPARATOR  = "=";
   protected static final String TOOLBAR    = "toolbar";
   protected static final String CSS        = "CSSData";
+  protected static final String HEIGHT     = "height";
+  protected static final String BUTTON_DIR = "button_direction";
+  protected static final String PREV_HTML  = "prev_html";
+  protected static final String POST_HTML  = "post_html";
   private static HashMap<String,String> parseArguments(String... arguments) {
     HashMap<String,String> map = new HashMap<String,String>() ;
+    int sIndex =-1;
     for(String argument:arguments) {
       String value = null;
-      if(argument.indexOf(SEPARATOR)>0) {
-        value = argument.substring(argument.indexOf(SEPARATOR)+1) ;
+      sIndex = argument.indexOf(SEPARATOR);
+      if(sIndex>0) {
+        value = argument.substring(sIndex+1) ;
       }else {
         continue;
       }
@@ -876,6 +902,14 @@ public class Utils {
         map.put(TOOLBAR, value); continue;
       } else if (argument.startsWith(CSS)) {
         map.put(CSS, value); continue;
+      } else if (argument.startsWith(HEIGHT)) {
+        map.put(HEIGHT, value); continue;
+      } else if (argument.startsWith(BUTTON_DIR)) {
+        map.put(BUTTON_DIR, value); continue;
+      } else if (argument.startsWith(PREV_HTML)) {
+        map.put(PREV_HTML, value); continue;
+      } else if (argument.startsWith(POST_HTML)) {
+        map.put(POST_HTML, value); continue;
       }
     }
     return map;

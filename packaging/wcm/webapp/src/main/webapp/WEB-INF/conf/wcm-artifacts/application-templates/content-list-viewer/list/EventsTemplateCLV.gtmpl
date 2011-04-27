@@ -51,13 +51,15 @@
 						<%
 					} else {
 						def count = 0;
+						def i = 0;
 						def currentPageData = uicomponent.getCurrentPageData();
 						for (viewNode in currentPageData) {
 							if(!Utils.isViewable(viewNode)) continue;
-						
+						  i++;
 				    	def itemName = viewNode.getName();
 				    	def itemLink = uicomponent.getURL(viewNode);
 							def itemSummary = uicomponent.getSummary(viewNode);
+							def itemSummaryField = uicomponent.getSummaryField(viewNode);
 	        		def itemTitle = uicomponent.getTitle(viewNode);
 							def itemDateCreated = uicomponent.getCreatedDate(viewNode);
 							def imgSrc = uicomponent.getIllustrativeImage(viewNode);							
@@ -86,7 +88,7 @@
 																if (isShowLink) {
 																	%><a class="TitleContentNormalNews" href="$itemLink"><%= itemName %></a><%
 																} else {
-																		%><%= itemName %><%
+																		print uicomponent.getInlineEditingField(viewNode, "exo:title", itemTitle, "TEXT", "CLVTitle_"+String.valueOf(i), "GroovyCLVTitle", true, "button_direction=left-to-right");
 																} 
 															%>
 														</div>
@@ -94,7 +96,13 @@
 												}
 											
 												if (isShowSumary) {
-													%><div class="Summary">$itemSummary</div><%
+													%><div class="Summary">
+													<%
+                            if (itemSummaryField!=null) {
+                              print uicomponent.getInlineEditingField(viewNode, itemSummaryField, itemSummary, "TEXTAREA", "Text_"+String.valueOf(i), "CLV1ColumnPresent", true);
+                            }
+                          %>
+                          </div><%
 												} 
 												
 												if (isShowCreatedDate) {

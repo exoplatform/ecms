@@ -75,6 +75,7 @@
 						itemName = itemTitle;
 
 					def itemSummary = uicomponent.getSummary(viewNode);
+					def itemSummaryField = uicomponent.getSummaryField(viewNode);
 					def isShowSummary = uicomponent.isShowField(UICLVPortlet.PREFERENCE_SHOW_SUMMARY) && itemSummary != null;
 										
 					%>
@@ -92,7 +93,11 @@
 										if (isShowLink) {
 											%><div class="Title"><a href="$itemLink">$itemName</a></div><%
 										} else {
-											%><div class="Title">$itemName</div><%
+											%><div class="Title">
+											<%
+											   print uicomponent.getInlineEditingField(viewNode, "exo:title", itemName, "TEXT", "CLVTitle_"+String.valueOf(i), "GroovyCLVTitle", true, "button_direction=left-to-right");
+											%>
+											</div><%
 										}
 									}
 									
@@ -100,7 +105,11 @@
 	                  %><div class="DateAndMail">$itemDateCreated by $itemOwner</div><%
 	                }
 									if (isShowSummary) { 
-										%><div class="Summary">$itemSummary</div><% 
+										%><div class="Summary"> <%
+										  if (itemSummaryField!=null) {
+  										  print uicomponent.getInlineEditingField(viewNode, itemSummaryField, itemSummary, "TEXTAREA", "Text_"+String.valueOf(i), "CLV2ColSummary", true, "height=80px");
+  										}
+										%> </div><% 
 									}
 								%>
 							</div>

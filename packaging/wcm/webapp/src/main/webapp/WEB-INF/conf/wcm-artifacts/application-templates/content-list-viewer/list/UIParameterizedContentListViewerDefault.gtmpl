@@ -38,13 +38,15 @@
 						<%
 					} else {
 						def count = 0;
+						def i = 0;
 						def currentPageData = uicomponent.getCurrentPageData();
 						for (viewNode in currentPageData) {
 							if(!Utils.isViewable(viewNode)) continue;
-							
+							i++;
 						  	def itemName = viewNode.getName();
 						  	def itemLink = uicomponent.generateLink(viewNode);
 							def itemSummary = uicomponent.getSummary(viewNode);
+							def itemSummaryField = uicomponent.getSummaryField(viewNode);
 						    def itemTitle = uicomponent.getTitle(viewNode);
 							def itemDateCreated = uicomponent.getCreatedDate(viewNode);
 							def imgSrc = uicomponent.getIllustrativeImage(viewNode);
@@ -83,7 +85,15 @@
 															}
 														
 															if (isShowSumary) {
-																%><div><%=itemSummary%></div><%
+																%><div>
+																<% 
+                                  if (itemSummary != null && itemSummary.trim().length() != 0 && uicomponent.isShowField(UICLVPortlet.PREFERENCE_SHOW_SUMMARY)) {
+                                      if (itemSummaryField!=null) {
+                                        print uicomponent.getInlineEditingField(viewNode, itemSummaryField, itemSummary, "TEXTAREA", "Text_"+String.valueOf(i), "CLV1ColumnPresent", true);
+                                      }
+                                  } 
+                                %>
+                                </div><%
 															} 
 													
 															if (isShowCreatedDate) {
@@ -115,7 +125,7 @@
 																			if (isShowLink) {
 																				%><a class="TitleContentNormalNews" href="<%=itemLink%>"><%=itemName%></a><%
 																			} else {
-																					%><%=itemName%><%
+  																			print uicomponent.getInlineEditingField(viewNode, "exo:title", itemName, "TEXT", "CLVTitle_"+String.valueOf(i), "GroovyCLVTitle", true, "button_direction=left-to-right");
 																			} 
 																		%>
 																	</div>
@@ -123,7 +133,15 @@
 															}
 														
 															if (isShowSumary) {
-																%><div><%=itemSummary%></div><%
+																%><div>
+																<% 
+                                  if (itemSummary != null && itemSummary.trim().length() != 0 && uicomponent.isShowField(UICLVPortlet.PREFERENCE_SHOW_SUMMARY)) {
+                                      if (itemSummaryField!=null) {
+                                        print uicomponent.getInlineEditingField(viewNode, itemSummaryField, itemSummary, "TEXTAREA", "Text_"+String.valueOf(i), "CLV1ColumnPresent", true);
+                                      }
+                                  } 
+                                %>
+                                </div><%
 															} 
 															
 															if (isShowCreatedDate) {

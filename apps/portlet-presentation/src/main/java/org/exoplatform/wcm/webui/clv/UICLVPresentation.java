@@ -367,7 +367,28 @@ public class UICLVPresentation extends UIContainer {
     }
     return desc;
   }
-
+  public static String getInlineEditingField(Node orgNode, String propertyName, String defaultValue, String inputType, 
+      String idGenerator, String cssClass, boolean isGenericProperty, String... arguments) throws Exception {
+    return org.exoplatform.ecm.webui.utils.Utils.getInlineEditingField(orgNode, propertyName, 
+                                          defaultValue, inputType, idGenerator, cssClass, isGenericProperty, arguments);
+  }
+  public String getSummaryField(Node node) throws Exception {
+    String desc = null;
+    if (node.hasProperty("exo:summary")) {
+      return "exo:summary";
+    } else if (node.hasNode("jcr:content")) {
+      Node content = node.getNode("jcr:content");
+      if (content.hasProperty("dc:description")) {
+        try {
+          desc = content.getProperty("dc:description").getValues()[0].getString();
+          return "jcr:content/dc:description";
+        } catch (Exception ex) {
+          return null;
+        }
+      }
+    }
+    return desc;
+  }
   /**
    * Gets the uRL.
    *

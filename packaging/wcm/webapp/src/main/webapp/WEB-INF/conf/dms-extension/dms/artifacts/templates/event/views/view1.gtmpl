@@ -95,6 +95,7 @@
 
       <% if(node.hasProperty("exo:maps") && node.getProperty("exo:maps").getBoolean()) { %>
         <div class="MapsFrame">
+        <% System.out.println("http://maps.google.com/maps?q=" + node.getProperty("exo:location").getString() + "&output=embed"); %>
           <iframe width="425" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" 
           src="http://maps.google.com/maps?q=<%=node.getProperty("exo:location").getString()%>&output=embed">
           </iframe><br />
