@@ -569,7 +569,7 @@
       <MoveToTrash>Déplacer dans la poubelle</MoveToTrash>
       <RestoreFromTrash>Restaurer de la poubelle</RestoreFromTrash>
       <EmptyTrash>Vider la poubelle</EmptyTrash>      
-						<WebDavView>Download And Allow Edition</WebDavView>
+						<WebDavView>Télécharger pour éditer</WebDavView>
     </event>
   </ECMContextMenu>
   <!--
@@ -2645,7 +2645,7 @@
 	<Drives>
 		<label>
 			<Private>Privé</Private>
-			<Public>Publique</Public>
+			<Public>Public</Public>
 			<BackupCenter>Centre de Sauvegarder</BackupCenter>
 			<CategorizedDocumentsCenter>Centre Document des Catégories </CategorizedDocumentsCenter>
 			<CollaborationCenter>Centre de Collaboration</CollaborationCenter>
@@ -2843,7 +2843,7 @@
 
   <UIAllItems>
     <label>
-      <OwnedByMe>A moi</OwnedByMe>
+      <OwnedByMe>Créés par moi</OwnedByMe>
       <Favourites>Favoris</Favourites>
       <Hidden>Caché</Hidden>
       <Trash>Poubelle</Trash>
@@ -2897,18 +2897,21 @@
   </UISavedSearches>  
   <DocumentType>
     <label>
-    	 <Images>Images</Images>
+    	 <Images>Image</Images>
     	 <Video>Vidéo</Video>
     	 <Music>Musique</Music>
-    	 <Documents>Documents</Documents>
-    	 <Contents>Contenus</Contents>
+    	 <Documents>Document</Documents>
+    	 <Contents>Contenu</Contents>
     </label>
   </DocumentType>
   
   <UIDocumentFilterForm>
   	<label>
-    	<Images>Images</Images>
+    	<Images>Image</Images>
     	<Video>Vidéo</Video>
+    	<Music>Musique</Music>
+    	<Documents>Document</Documents>
+    	<Contents>Contenu</Contents>
     </label>
     <title>Configurer les filtres</title>
     <action>
@@ -2947,6 +2950,20 @@
       <UIDocumentFilterForm>Filtrer les types de documents</UIDocumentFilterForm>
     </title>
   </UIPopupWindow>
+  
+  <UIAllItemsPreferenceForm>
+    <label>
+      <showOwnedByUser>Créés par moi</showOwnedByUser>
+      <showFavourites>Favoris</showFavourites>
+      <showHiddens>Caché</showHiddens>
+      <showTrash>Poubelle</showTrash>
+    </label>
+    <title>Configurer les préférences</title>
+    <action>
+      <Save>#{word.save}</Save>
+      <Cancel>#{word.cancel}</Cancel>      
+    </action>
+  </UIAllItemsPreferenceForm>
 
   <UIAllItemsPreferenceForm>
     <label>
