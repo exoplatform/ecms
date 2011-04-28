@@ -32,6 +32,7 @@ import org.exoplatform.services.wcm.newsletter.NewsletterSubscriptionConfig;
 import org.exoplatform.services.wcm.newsletter.config.NewsletterManagerConfig;
 import org.exoplatform.services.wcm.newsletter.handler.NewsletterEntryHandler;
 import org.exoplatform.services.wcm.newsletter.handler.NewsletterTemplateHandler;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.wcm.webui.Utils;
 import org.exoplatform.wcm.webui.newsletter.UINewsletterConstant;
 import org.exoplatform.web.application.ApplicationMessage;
@@ -123,7 +124,7 @@ public class UINewsletterEntryManager extends UIForm {
     this.getChildren().clear();
     listNewsletterConfig = new ArrayList<NewsletterManagerConfig>();
     try {
-      listNewsletterConfig.addAll(newsletterEntryHandler.getNewsletterEntriesBySubscription(Utils.getSessionProvider(),
+      listNewsletterConfig.addAll(newsletterEntryHandler.getNewsletterEntriesBySubscription(WCMCoreUtils.getUserSessionProvider(),
                                                                                             NewsLetterUtil.getPortalName(),
                                                                                             categoryConfig.getName(),
                                                                                             subscriptionConfig.getName()));
@@ -406,7 +407,7 @@ public class UINewsletterEntryManager extends UIForm {
                                  ApplicationMessage.WARNING);
         return;
       }
-      uiNewsletterEntryManager.newsletterEntryHandler.delete(Utils.getSessionProvider(),
+      uiNewsletterEntryManager.newsletterEntryHandler.delete(WCMCoreUtils.getUserSessionProvider(),
                                                              NewsLetterUtil.getPortalName(),
                                                              uiNewsletterEntryManager.categoryConfig.getName(),
                                                              uiNewsletterEntryManager.subscriptionConfig.getName(),
@@ -449,7 +450,7 @@ public class UINewsletterEntryManager extends UIForm {
         return;
       } else {
         NewsletterManagerConfig newsletterName = uiNewsletterEntryManager.newsletterEntryHandler.
-            getNewsletterEntry(Utils.getSessionProvider(),
+            getNewsletterEntry(WCMCoreUtils.getUserSessionProvider(),
                                NewsLetterUtil.getPortalName(),
                                uiNewsletterEntryManager.categoryConfig.getName(),
                                uiNewsletterEntryManager.getSubscriptionConfig().getName(),
@@ -484,6 +485,7 @@ public class UINewsletterEntryManager extends UIForm {
       subscriptionSelectBox.setDisabled(true);
       UINewsletterEntryForm newsletterEntryForm = entryContainer.getChild(UINewsletterEntryForm.class);
       newsletterEntryForm.addNew(false);
+      entryContainer.setUpdated(true);
       Utils.createPopupWindow(uiNewsletterEntryManager,
                               entryContainer,
                               UINewsletterConstant.ENTRY_FORM_POPUP_WINDOW,
@@ -527,7 +529,7 @@ public class UINewsletterEntryManager extends UIForm {
               getApplicationComponent(NewsletterManagerService.class);
           RepositoryService repositoryService = newsletterEntryManager.getApplicationComponent(RepositoryService.class);
           ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
-          Session session = Utils.getSessionProvider()
+          Session session = WCMCoreUtils.getUserSessionProvider()
                                  .getSession(newsletterManagerService.getWorkspaceName(),
                                              manageableRepository);
           String newsletterPath = NewsletterConstant.generateNewsletterPath(NewsLetterUtil.getPortalName(),
@@ -536,7 +538,7 @@ public class UINewsletterEntryManager extends UIForm {
                                                                             newsletterName);
           Node newsletterNode = (Node) session.getItem(newsletterPath);
           NewsletterTemplateHandler newsletterTemplateHandler = newsletterManagerService.getTemplateHandler();
-          newsletterTemplateHandler.convertAsTemplate(Utils.getSessionProvider(),
+          newsletterTemplateHandler.convertAsTemplate(WCMCoreUtils.getUserSessionProvider(),
                                                       newsletterNode.getPath(),
                                                       NewsLetterUtil.getPortalName(),
                                                       categoryName);

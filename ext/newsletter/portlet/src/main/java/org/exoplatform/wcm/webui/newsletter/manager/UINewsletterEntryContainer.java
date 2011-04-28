@@ -115,6 +115,7 @@ public class UINewsletterEntryContainer extends UIContainer {
                                                .getNewsletterSentDate());
       dateTimeInput.setCalendar(calendar);
       newsletterEntryForm.addNew(false);
+      setUpdated(false);
     }
     newsletterEntryForm.setNodePath(newsletterPath);
     newsletterEntryForm.getChildren().clear();
