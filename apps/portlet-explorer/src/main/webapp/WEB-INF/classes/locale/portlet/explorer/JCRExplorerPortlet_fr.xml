@@ -350,6 +350,7 @@
       <keyword-not-allow>L'un des mots à chercher n'est pas autorisé.</keyword-not-allow>
       <is-not-referenable>Le noeud '{0}' ne supporte pas les références</is-not-referenable>
       <access-denied>Accès interdit. Vous n'avez pas les droits d'accès sur ce noeud.</access-denied>
+      <item-existed>Il existe déjà un noeud frère à ce nom.</item-existed>
       <access-add-denied>Vous n'avez pas les droits suffisants pour ajouter un document.</access-add-denied>
       <removed-hidden-mixin>Le noeud a été rendu visible!</removed-hidden-mixin>
       <added-hidden-mixin>Le noeud a été caché!</added-hidden-mixin>
