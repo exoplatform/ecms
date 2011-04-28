@@ -366,10 +366,10 @@
 		    }
 		    window.open(serverInfo + "/" + portalName + "/" + restContextName + "/lnkproducer/openit.lnk?path=/" + repository + "/" + workspace + path, '_new');
 	   	} else {
-	 	  	window.open(serverInfo + "/" + portalName + "/" + restContextName + "/jcr/" + repository + "/" +workspace + nodePath, '_new');
+	 	  	window.open(serverInfo + "/" + portalName + "/" + restContextName + "/private/jcr/" + repository + "/" +workspace + nodePath, '_new');
 	 	  } 	  
 	  } else {
-		  window.open(serverInfo+ "/" + portalName + "/" + restContextName + "/jcr/" + repository + "/" + workspace + nodePath, '_new');
+		  window.open(serverInfo+ "/" + portalName + "/" + restContextName + "/private/jcr/" + repository + "/" + workspace + nodePath, '_new');
 	  } 
 	} ;
 	
