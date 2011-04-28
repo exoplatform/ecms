@@ -63,6 +63,7 @@ public class UIActionListContainer extends UIContainer {
     uiActionForm.setIsUpdateSelect(false) ;
 //    uiActionForm.setNode(actionNode) ;
     uiActionForm.setNodePath(actionNode.getPath()) ;
+    uiActionForm.setCurrentAction(actionNode.getName());
     actionNode.refresh(true);
     // Check document is lock for editing
     uiActionForm.setIsKeepinglock(false);

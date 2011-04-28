@@ -55,8 +55,8 @@ import org.exoplatform.webui.core.UIPageIterator;
 import org.exoplatform.webui.core.UIPopupWindow;
 import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.event.Event;
-import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.event.Event.Phase;
+import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.form.UIFormInputBase;
 import org.exoplatform.webui.form.UIFormMultiValueInputSet;
 import org.exoplatform.webui.form.UIFormStringInput;
@@ -89,6 +89,7 @@ public class UIActionForm extends UIDialogForm implements UISelectable {
   private String scriptPath_ = null;
   private boolean isEditInList_ = false;
   private String rootPath_ = null;
+  private String currentAction = null;
 
 
   private static final String EXO_ACTIONS = "exo:actions".intern();
@@ -113,6 +114,20 @@ public class UIActionForm extends UIDialogForm implements UISelectable {
   }
 
   private Node getParentNode() throws Exception{ return (Node) getSession().getItem(parentPath_); }
+
+  /**
+   * @param currentAction the currentAction to set
+   */
+  public void setCurrentAction(String currentAction) {
+    this.currentAction = currentAction;
+  }
+
+  /**
+   * @return the currentAction
+   */
+  public String getCurrentAction() {
+    return currentAction;
+  }
 
   public void doSelect(String selectField, Object value) throws Exception {
     isUpdateSelect = true;
@@ -258,6 +273,7 @@ public class UIActionForm extends UIDialogForm implements UISelectable {
           return;
         }
       }
+         
       String actionName = (String)(sortedInputs.get("/node/exo:name")).getValue();
       String[] arrFilterChar = { "&", "$", "@", ":", "]", "[", "*", "%", "!", "+", "(", ")", "'",
           "#", ";", "}", "{", "/", "|", "\"" };
@@ -269,6 +285,33 @@ public class UIActionForm extends UIDialogForm implements UISelectable {
           return;
         }
       }
+      
+      Node parentNode = actionForm.getParentNode();
+      if (actionForm.isAddNew_) {
+        if (parentNode.hasNode(EXO_ACTIONS)) {
+          if (parentNode.getNode(EXO_ACTIONS).hasNode(actionName)) {
+            Object[] args = { actionName };
+            uiApp.addMessage(new ApplicationMessage("UIActionForm.msg.existed-action",
+                                                    args,
+                                                    ApplicationMessage.WARNING));
+            event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+            return;
+          }
+        }
+      } else if (actionForm.isEditInList_) {
+        if (parentNode.hasNode(EXO_ACTIONS)) {
+          if (parentNode.getNode(EXO_ACTIONS).hasNode(actionName)
+              && !actionName.equals(actionForm.currentAction)) {
+            Object[] args = { actionName };
+            uiApp.addMessage(new ApplicationMessage("UIActionForm.msg.existed-action",
+                                                    args,
+                                                    ApplicationMessage.WARNING));
+            event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+            return;
+          }
+        }
+      }
+      
       try{
         if (uiExplorer.nodeIsLocked(currentNode)) return;
         if (!actionForm.isAddNew_) {
@@ -315,26 +358,14 @@ public class UIActionForm extends UIDialogForm implements UISelectable {
         } else {
           rootProp.setValue((sortedInputs.get("/node/exo:name")).getValue());
         }
-
-        Node parentNode = actionForm.getParentNode();
-        if (actionForm.isAddNew_) {
-          if(parentNode.hasNode(EXO_ACTIONS)) {
-            if(parentNode.getNode(EXO_ACTIONS).hasNode(actionName)) {
-              Object[] args = {actionName};
-              uiApp.addMessage(new ApplicationMessage("UIActionForm.msg.existed-action", args,
-                  ApplicationMessage.WARNING));
-              event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
-              return;
-            }
-          }
-        }
+        
         if (parentNode.isNew()) {
           String[] args = { parentNode.getPath() };
           uiApp.addMessage(new ApplicationMessage("UIActionForm.msg.unable-add-action", args));
           event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
           return;
         }
-        actionServiceContainer.addAction(parentNode, repository, actionForm.nodeTypeName_, sortedInputs);
+        actionServiceContainer.addAction(parentNode, actionForm.nodeTypeName_, sortedInputs);
         actionForm.setIsOnchange(false);
         if (!uiExplorer.getPreference().isJcrEnable()) parentNode.getSession().save();
         UIActionManager uiActionManager = actionForm.getAncestorOfType(UIActionManager.class);
