@@ -4,8 +4,8 @@
   <div class="HorizontalLayout">	
   	<table class="UIFormGrid">
 				<tr>
-				  <td class="FieldLabel"><%=_ctx.appRes("SendMail.dialog.label.id")%></td>
-				  <td class="FieldComponent">
+				  <td class="FieldLabel" style="display:none"><%=_ctx.appRes("SendMail.dialog.label.id")%></td>
+				  <td class="FieldComponent" style="display:none">
 				  <%
 					 String[] fieldId = ["jcrPath=/node", "mixintype=mix:affectedNodeTypes", "editable=false", "visible=if-not-null"] ;
 					 uicomponent.addMixinField("id", fieldId) ;  
