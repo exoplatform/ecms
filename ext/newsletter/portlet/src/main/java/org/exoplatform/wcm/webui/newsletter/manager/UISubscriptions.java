@@ -318,6 +318,7 @@ public class UISubscriptions extends UIForm {
                              subsriptions.categoryConfig.getName());
       UINewsletterManagerPortlet newsletterManagerPortlet = subsriptions.getAncestorOfType(UINewsletterManagerPortlet.class);
       UICategories categories = newsletterManagerPortlet.getChild(UICategories.class);
+      subsriptions.setCategory(null);
       categories.setRendered(true);
       subsriptions.setRendered(false);
       event.getRequestContext().addUIComponentToUpdateByAjax(newsletterManagerPortlet);
