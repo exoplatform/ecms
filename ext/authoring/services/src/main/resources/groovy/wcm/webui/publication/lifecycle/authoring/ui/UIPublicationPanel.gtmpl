@@ -12,6 +12,7 @@
 	import org.exoplatform.services.wcm.extensions.publication.impl.PublicationManagerImpl;
 	import org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.LifecyclesConfig.Lifecycle;
 	import org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.LifecyclesConfig.State;
+	import org.exoplatform.ecm.utils.text.Text;
 
 	Node currentRevision = uicomponent.getCurrentRevision();
 	def context = _ctx.getRequestContext() ;
@@ -38,8 +39,10 @@
   <% } %>
 
   <fieldset class="StatusTable">
-    <% String versionName = currentRevision.getName();  %>
-    <legend class="Legend"> <%=_ctx.appRes("UIPublicationPanel.status.version")%> $versionName </legend>
+    <% String versionName = currentRevision.getName();
+       String verName = Text.unescapeIllegalJcrChars(versionName);
+    %>
+    <legend class="Legend"> <%=_ctx.appRes("UIPublicationPanel.status.version")%> $verName </legend>
     <div class="StatusAction">
       <div class="StatusTitle"><%=_ctx.appRes("UIPublicationPanel.status.title")%>: </div>
       <div class="StatusLink">
@@ -126,7 +129,7 @@
               <%
                 if (versionName.equals(revision.getName())) {
                   %>
-                    <a><%=_ctx.appRes("UIPublicationPanel.revisions.label")%>: <%= revision.getName() %></a>
+                    <a><%=_ctx.appRes("UIPublicationPanel.revisions.label")%>: <%= Text.unescapeIllegalJcrChars(revision.getName()) %></a>
                   <%
                 } else {
                   %>
