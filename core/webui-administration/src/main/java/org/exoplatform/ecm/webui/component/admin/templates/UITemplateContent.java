@@ -18,6 +18,7 @@ package org.exoplatform.ecm.webui.component.admin.templates;
 
 import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import javax.jcr.Node;
@@ -30,6 +31,8 @@ import org.exoplatform.ecm.webui.selector.UISelectable;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.services.cms.templates.TemplateService;
+import org.exoplatform.services.organization.MembershipType;
+import org.exoplatform.services.organization.OrganizationService;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -64,7 +67,8 @@ import org.exoplatform.webui.form.validator.MandatoryValidator;
       @EventConfig(phase=Phase.DECODE, listeners = UITemplateContent.CancelActionListener.class),
       @EventConfig(phase=Phase.DECODE, listeners = UITemplateContent.RestoreActionListener.class),
       @EventConfig(phase=Phase.DECODE, listeners = UITemplateContent.RefreshActionListener.class),
-      @EventConfig(phase=Phase.DECODE, listeners = UITemplateContent.AddPermissionActionListener.class)
+      @EventConfig(phase=Phase.DECODE, listeners = UITemplateContent.AddPermissionActionListener.class),
+      @EventConfig(phase=Phase.DECODE, listeners = UITemplateContent.RemovePermissionActionListener.class)
     }
 )
 public class UITemplateContent extends UIForm implements UISelectable {
@@ -101,7 +105,8 @@ public class UITemplateContent extends UIForm implements UISelectable {
                                                      FIELD_VIEWPERMISSION,
                                                      null).setEditable(false)
                                                           .addValidator(MandatoryValidator.class));
-    uiActionTab.setActionInfo(FIELD_VIEWPERMISSION, new String[] {"AddPermission"}) ;
+    uiActionTab.setActionInfo(FIELD_VIEWPERMISSION, new String[] { "AddPermission",
+        "RemovePermission" });
     addUIComponentInput(uiActionTab) ;
   }
 
@@ -258,12 +263,12 @@ public class UITemplateContent extends UIForm implements UISelectable {
       if(content == null) content = "" ;
       UIFormInputSetWithAction permField = uiForm.getChildById("UITemplateContent") ;
       String role = permField.getUIStringInput(FIELD_VIEWPERMISSION).getValue() ;
-      if((role == null) || (role.trim().length() == 0)) {
-        uiApp.addMessage(new ApplicationMessage("UITemplateContent.msg.roles-invalid", null,
-                                                ApplicationMessage.WARNING)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
-        return ;
-      }
+//      if((role == null) || (role.trim().length() == 0)) {
+//        uiApp.addMessage(new ApplicationMessage("UITemplateContent.msg.roles-invalid", null,
+//                                                ApplicationMessage.WARNING)) ;
+//        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+//        return ;
+//      }
       UIViewTemplate uiViewTemplate = uiForm.getAncestorOfType(UIViewTemplate.class) ;
       if(uiForm.getId().equals(UIDialogTab.DIALOG_FORM_NAME)) {
         UIDialogTab uiDialogTab = uiViewTemplate.getChild(UIDialogTab.class) ;
@@ -306,8 +311,17 @@ public class UITemplateContent extends UIForm implements UISelectable {
         if(isEnableVersioning && !node.isNodeType(Utils.MIX_VERSIONABLE)) {
           node.addMixin(Utils.MIX_VERSIONABLE) ;
         }
-        templateService.addTemplate(uiForm.getTemplateType(), uiForm.nodeTypeName_, null, false, name, new String[] {role},
-            new ByteArrayInputStream(content.getBytes()));
+        if (areValidPermissions(role, uiForm, event)) {
+          templateService.addTemplate(uiForm.getTemplateType(),
+                                      uiForm.nodeTypeName_,
+                                      null,
+                                      false,
+                                      name,
+                                      new String[] { role },
+                                      new ByteArrayInputStream(content.getBytes()));
+        } else {
+          return;
+        }
         node.save() ;
         if(isEnableVersioning) {
           node.checkin() ;
@@ -378,6 +392,14 @@ public class UITemplateContent extends UIForm implements UISelectable {
     }
   }
 
+  static public class RemovePermissionActionListener extends EventListener<UITemplateContent> {
+    public void execute(Event<UITemplateContent> event) throws Exception {
+      UITemplateContent uiTemplateContent = event.getSource();
+      uiTemplateContent.getUIStringInput(FIELD_VIEWPERMISSION).setValue(null);
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiTemplateContent);
+    }
+  }
+  
   static public class RefreshActionListener extends EventListener<UITemplateContent> {
     public void execute(Event<UITemplateContent> event) throws Exception {
       UITemplateContent uiForm = event.getSource() ;
@@ -404,5 +426,84 @@ public class UITemplateContent extends UIForm implements UISelectable {
       uiManager.removeChild(UIPopupWindow.class) ;
       event.getRequestContext().addUIComponentToUpdateByAjax(uiManager) ;
     }
+  }
+
+  private static boolean areValidPermissions(String permissions,
+                                             UITemplateContent uiTemplateContent,
+                                             Event event) throws Exception {
+    Boolean areValidPermissions = false;
+    UIApplication uiApp = uiTemplateContent.getAncestorOfType(UIApplication.class);
+    if (permissions == null || permissions.trim().length() == 0) {
+      uiApp.addMessage(new ApplicationMessage("UIDriveForm.msg.permission-null",
+                                              null,
+                                              ApplicationMessage.WARNING));
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+      areValidPermissions = false;
+      return areValidPermissions;
+    }
+
+    OrganizationService oservice = uiTemplateContent.getApplicationComponent(OrganizationService.class);
+    String[] arrPermissions = permissions.split(",");
+    List<String> listMemberhip;
+    Collection<?> collection = oservice.getMembershipTypeHandler().findMembershipTypes();
+    listMemberhip = new ArrayList<String>(5);
+    for (Object obj : collection) {
+      listMemberhip.add(((MembershipType) obj).getName());
+    }
+    listMemberhip.add("*");
+    for (String itemPermission : arrPermissions) {
+      if (itemPermission.length() == 0) {
+        uiApp.addMessage(new ApplicationMessage("UIDriveForm.msg.permission-path-invalid",
+                                                null,
+                                                ApplicationMessage.WARNING));
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        areValidPermissions = false;
+        return areValidPermissions;
+      }
+      if (itemPermission.contains(":")) {
+        String[] permission = itemPermission.split(":");
+        if ((permission[0] == null) || (permission[0].length() == 0)) {
+          uiApp.addMessage(new ApplicationMessage("UIDriveForm.msg.permission-path-invalid",
+                                                  null,
+                                                  ApplicationMessage.WARNING));
+          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          areValidPermissions = false;
+          return areValidPermissions;
+        } else if (!listMemberhip.contains(permission[0])) {
+          uiApp.addMessage(new ApplicationMessage("UIDriveForm.msg.permission-path-invalid",
+                                                  null,
+                                                  ApplicationMessage.WARNING));
+          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          areValidPermissions = false;
+          return areValidPermissions;
+        }
+        if ((permission[1] == null) || (permission[1].length() == 0)) {
+          uiApp.addMessage(new ApplicationMessage("UIDriveForm.msg.permission-path-invalid",
+                                                  null,
+                                                  ApplicationMessage.WARNING));
+          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          areValidPermissions = false;
+          return areValidPermissions;
+        } else if (oservice.getGroupHandler().findGroupById(permission[1]) == null) {
+          uiApp.addMessage(new ApplicationMessage("UIDriveForm.msg.permission-path-invalid",
+                                                  null,
+                                                  ApplicationMessage.WARNING));
+          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          areValidPermissions = false;
+          return areValidPermissions;
+        }
+      } else {
+        if (!itemPermission.equals("*")) {
+          uiApp.addMessage(new ApplicationMessage("UIDriveForm.msg.permission-path-invalid",
+                                                  null,
+                                                  ApplicationMessage.WARNING));
+          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          areValidPermissions = false;
+          return areValidPermissions;
+        }
+      }
+    }
+    areValidPermissions = true;
+    return areValidPermissions;
   }
 }

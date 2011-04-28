@@ -1800,6 +1800,7 @@
     </msg>
     <title>
       <AddPermission>Add Permission</AddPermission>
+      <RemovePermission>Remove Permission</RemovePermission>
     </title>
   </UITemplateContent>
   <!--
