@@ -21,70 +21,46 @@ import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.jcr.Node;
-import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 import javax.jcr.query.Query;
 import javax.jcr.query.QueryManager;
 
 import org.exoplatform.container.xml.InitParams;
-import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.jcr.RepositoryService;
+import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
-import org.exoplatform.services.log.ExoLogger;
-import org.exoplatform.services.log.Log;
 import org.exoplatform.services.organization.User;
 import org.exoplatform.services.organization.UserEventListener;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
  * @author Benjamin Mestrallet benjamin.mestrallet@exoplatform.com
  */
 public class NewUserListener extends UserEventListener {
   
-  private static Log log = ExoLogger.getLogger(NewUserListener.class);
-
   private NewUserConfig config_;
-  private RepositoryService jcrService_;
   private NodeHierarchyCreator nodeHierarchyCreator_;
+  private RepositoryService repositoryService_ ;
   private String relativePath_;
 
-  public NewUserListener(RepositoryService jcrService,
+  public NewUserListener(RepositoryService repositoryService,
                          NodeHierarchyCreator nodeHierarchyCreator,
                          InitParams params)    throws Exception {
-    jcrService_ = jcrService;
     nodeHierarchyCreator_ = nodeHierarchyCreator;
+    repositoryService_ = repositoryService;
     config_ = params.getObjectParamValues(NewUserConfig.class).get(0);
     relativePath_ = params.getValueParam("relativePath").getValue();
   }
 
   public void preSave(User user, boolean isNew)
       throws Exception {
-    String userName = user.getUserName();
-    prepareSystemWorkspace(userName);
+    initSystemData(user.getUserName());
   }
 
-  private void prepareSystemWorkspace(String userName) throws Exception {
-    Session session = null;
-    //Manage production workspace
-    try {
-      String defaultWorkspaceName = jcrService_.getCurrentRepository().getConfiguration().getDefaultWorkspaceName() ;
-      session = jcrService_.getCurrentRepository().getSystemSession(defaultWorkspaceName);
-      Node usersHome = (Node) session.getItem(
-          nodeHierarchyCreator_.getJcrPath(BasePath.CMS_USERS_PATH));
-      initSystemData(usersHome, userName) ;
-      session.save();
-      session.logout();
-    } catch (RepositoryException re) {
-      log.warn(re.getMessage(), re);
-    } finally {
-      if (session != null) {
-        session.logout();
-      }
-    }
-  }
-
-  private void initSystemData(Node usersHome, String userName) throws Exception{
-    Node userHome = usersHome.getNode(userName) ;
-    Node queriesHome =  userHome.getNode(relativePath_) ;
+  private void initSystemData(String userName) throws Exception{
+    SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
+    Node userNode = nodeHierarchyCreator_.getUserNode(sessionProvider, userName);
+    Node queriesHome =  userNode.getNode(relativePath_) ;
     boolean userFound = false;
     NewUserConfig.User templateConfig = null;
     for (NewUserConfig.User userConfig : config_.getUsers()) {
@@ -92,7 +68,7 @@ public class NewUserListener extends UserEventListener {
       if (config_.getTemplate().equals(currentName))  templateConfig = userConfig;
       if (currentName.equals(userName)) {
         List<NewUserConfig.Query> queries = userConfig.getQueries();
-        importQueries(queriesHome, queries);
+        importQueries(queriesHome, queries, userNode.getSession().getWorkspace().getName());
         userFound = true;
         break;
       }
@@ -102,11 +78,15 @@ public class NewUserListener extends UserEventListener {
       List<NewUserConfig.Query> queries = templateConfig.getQueries();
       importQueries(queriesHome, queries);
     }
-    usersHome.save();
   }
 
   public void importQueries(Node queriesHome, List<NewUserConfig.Query> queries) throws Exception {
-    QueryManager manager = queriesHome.getSession().getWorkspace().getQueryManager();
+    importQueries(queriesHome, queries, queriesHome.getSession().getWorkspace().getName());
+  }
+  
+  public void importQueries(Node queriesHome, List<NewUserConfig.Query> queries, 
+      String workspaceName) throws Exception {
+    QueryManager manager = getSession(workspaceName).getWorkspace().getQueryManager();
     for (NewUserConfig.Query query:queries) {
       String queryName = query.getQueryName();
       String language = query.getLanguage();
@@ -121,7 +101,10 @@ public class NewUserListener extends UserEventListener {
       node.getSession().save();
     }
   }
-
-  public void preDelete(User user) {
+  
+  private Session getSession(String workspaceName) throws Exception {
+    SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
+    return sessionProvider.getSession(workspaceName, repositoryService_.getCurrentRepository()) ;
   }
+
 }

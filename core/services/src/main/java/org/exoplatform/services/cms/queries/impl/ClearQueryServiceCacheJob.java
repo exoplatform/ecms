@@ -16,6 +16,8 @@
  */
 package org.exoplatform.services.cms.queries.impl;
 
+import javax.jcr.query.QueryResult;
+
 import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.services.cache.CacheService;
@@ -34,7 +36,7 @@ public class ClearQueryServiceCacheJob extends BaseJob {
     ExoContainer container = ExoContainerContext.getCurrentContainer();
     CacheService cacheService =
       (CacheService)container.getComponentInstanceOfType(CacheService.class) ;
-    ExoCache queryCache = cacheService.getCacheInstance(QueryServiceImpl.class.getName()) ;
+    ExoCache<String, QueryResult> queryCache = cacheService.getCacheInstance(QueryServiceImpl.class.getName()) ;
     queryCache.clearCache() ;
   }
 }

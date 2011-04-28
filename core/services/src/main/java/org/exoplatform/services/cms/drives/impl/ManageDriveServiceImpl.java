@@ -26,6 +26,7 @@ import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 
+import org.apache.commons.lang.StringUtils;
 import org.exoplatform.services.cache.CacheService;
 import org.exoplatform.services.cache.ExoCache;
 import org.exoplatform.services.cms.BasePath;
@@ -35,9 +36,11 @@ import org.exoplatform.services.cms.impl.DMSConfiguration;
 import org.exoplatform.services.cms.impl.DMSRepositoryConfiguration;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
+import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.picocontainer.Startable;
 
 /**
@@ -504,10 +507,9 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
       if (e.getMessage().equalsIgnoreCase("Repository 'null' not found.")) {
         String repositoryName = System.getProperty("gatein.tenant.repository.name");
         return repositoryName;
-      } else {
-        LOG.error("Repository exception occurs:", e);
-        return null;
       }
+      LOG.error("Repository exception occurs:", e);
+      return null;
     }
   }
 
@@ -769,14 +771,17 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
   
   @SuppressWarnings("unchecked")
   public List<DriveData> getPersonalDrives(String userId, List<String> userRoles) throws Exception {
+    SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
+    Node userNode = nodeHierarchyCreator_.getUserNode(sessionProvider, userId);
     Object drives = drivesCache_.get(getRepoName() + "_" + userId + ALL_PERSONAL_CACHED_DRIVE);
+    
     if(drives != null) return (List<DriveData>) drives;
     List<DriveData> personalDrives = new ArrayList<DriveData>();
-    String userPath = nodeHierarchyCreator_.getJcrPath(BasePath.CMS_USERS_PATH);
+    String userPath = userNode.getPath();
     for(DriveData drive : getDriveByUserRoles(userId, userRoles)) {
-      if(drive.getHomePath().startsWith(userPath + "/${userId}/")) {
+      if(drive.getHomePath().startsWith(StringUtils.replaceOnce(userPath, userId, "${userId}"))) {
         personalDrives.add(drive);
-      } else if(drive.getHomePath().startsWith(userPath + "/" + userId + "/")){
+      } else if(drive.getHomePath().startsWith(userPath + "/")) {
         personalDrives.add(drive);
       }
     }

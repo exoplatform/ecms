@@ -32,7 +32,8 @@ import org.exoplatform.container.xml.ValueParam;
 import org.exoplatform.services.cms.impl.DMSConfiguration;
 import org.exoplatform.services.cms.impl.DMSRepositoryConfiguration;
 import org.exoplatform.services.jcr.RepositoryService;
-import org.exoplatform.services.jcr.core.ManageableRepository;
+import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 public class QueryPlugin extends BaseComponentPlugin {
 
@@ -69,7 +70,6 @@ public class QueryPlugin extends BaseComponentPlugin {
       }
       queryHomeNode.save();
       session.save();
-      session.logout();
     } else {
       session = getSession() ;
       Node queryHomeNode = (Node)session.getItem(basedQueriesPath);
@@ -79,7 +79,6 @@ public class QueryPlugin extends BaseComponentPlugin {
       }
       queryHomeNode.save();
       session.save();
-      session.logout();
     }
   }
 
@@ -95,13 +94,13 @@ public class QueryPlugin extends BaseComponentPlugin {
     }
     queryHomeNode.save();
     session.save();
-    session.logout();
   } 
 
   private Session getSession() throws Exception {
-    ManageableRepository manageableRepository = repositoryService_.getCurrentRepository();
     DMSRepositoryConfiguration dmsRepoConfig = dmsConfiguration_.getConfig();
-    return manageableRepository.getSystemSession(dmsRepoConfig.getSystemWorkspace()) ;
+    SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
+    return sessionProvider.getSession(dmsRepoConfig.getSystemWorkspace(), 
+        repositoryService_.getCurrentRepository()) ;
   }
 
   private void addQuery(Node queryHome, QueryData data) throws Exception {

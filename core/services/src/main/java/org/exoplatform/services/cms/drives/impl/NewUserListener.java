@@ -16,13 +16,17 @@
  */
 package org.exoplatform.services.cms.drives.impl;
 
+import javax.jcr.Node;
+
+import org.apache.commons.lang.StringUtils;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.drives.ManageDriveService;
-import org.exoplatform.services.jcr.RepositoryService;
+import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.organization.User;
 import org.exoplatform.services.organization.UserEventListener;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
  * Created by The eXo Platform SARL
@@ -33,7 +37,6 @@ import org.exoplatform.services.organization.UserEventListener;
 public class NewUserListener extends UserEventListener {
 
   private ManageDriveService driveService_ ;
-  private RepositoryService jcrService_;
   private InitParams initParams_ ;
   private NodeHierarchyCreator nodeHierarchyCreator_ ;
   private String userPath_ ;
@@ -43,18 +46,15 @@ public class NewUserListener extends UserEventListener {
 
   /**
    *
-   * @param jcrService
    * @param driveService
    * @param nodeHierarchyCreatorService
    * @param params
    * @throws Exception
    */
-  public NewUserListener(RepositoryService jcrService,
-      ManageDriveService driveService,
+  public NewUserListener(ManageDriveService driveService,
       NodeHierarchyCreator nodeHierarchyCreatorService,
       InitParams params) throws Exception {
     nodeHierarchyCreator_ = nodeHierarchyCreatorService ;
-    jcrService_ = jcrService ;
     driveService_ = driveService ;
     initParams_ = params ;
     userPath_ = nodeHierarchyCreatorService.getJcrPath(BasePath.CMS_USERS_PATH) ;
@@ -63,12 +63,15 @@ public class NewUserListener extends UserEventListener {
   /**
    *
    */
-  @SuppressWarnings({"unused", "hiding"})
+  @SuppressWarnings({"unused"})
   public void preSave(User user, boolean isNew) throws Exception {
     String workspace = initParams_.getValueParam("workspace").getValue();
     String permissions = initParams_.getValueParam("permissions").getValue();
     permissions = permissions.concat(","+ user.getUserName());
-    String homePath = userPath_ + "/" + user.getUserName() ;
+    //Set personal drive home path 
+    SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
+    Node userNode = nodeHierarchyCreator_.getUserNode(sessionProvider, user.getUserName());
+    String homePath = userNode.getPath();
     String views = initParams_.getValueParam("views").getValue();
     String icon = initParams_.getValueParam("icon").getValue();
     boolean viewPreferences = Boolean.parseBoolean(initParams_.getValueParam("viewPreferences").getValue());
@@ -80,7 +83,10 @@ public class NewUserListener extends UserEventListener {
     //Only user can access private drive
     String publicPath = nodeHierarchyCreator_.getJcrPath(PUBLIC_ALIAS) ;
     String privatePath = nodeHierarchyCreator_.getJcrPath(PRIVATE_ALIAS) ;
-    driveService_.addDrive(user.getUserName() + "|" + privatePath,
+    //Get user relPath
+    String userRelPath = StringUtils.replaceOnce(userNode.getPath(), userPath_ + "/", "");
+    //add drive with user relPath
+    driveService_.addDrive(userRelPath + "|" + privatePath,
                            workspace,
                            user.getUserName(),
                            homePath + "/" + privatePath,
@@ -93,7 +99,7 @@ public class NewUserListener extends UserEventListener {
                            allowCreateFolder,
                            allowNodeTypesOnTree);
     //User and everyone can see public drive for user
-    driveService_.addDrive(user.getUserName() + "|" + publicPath,
+    driveService_.addDrive(userRelPath + "|" + publicPath,
                            workspace,
                            permissions,
                            homePath + "/" + publicPath,
@@ -111,9 +117,13 @@ public class NewUserListener extends UserEventListener {
    *
    */
   public void preDelete(User user) throws Exception {
-    driveService_.removeDrive(user.getUserName() + "|"
-        + nodeHierarchyCreator_.getJcrPath(PRIVATE_ALIAS));
-    driveService_.removeDrive(user.getUserName() + "|"
-        + nodeHierarchyCreator_.getJcrPath(PUBLIC_ALIAS));
+    SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
+    Node userNode = nodeHierarchyCreator_.getUserNode(sessionProvider, user.getUserName());
+    String userRelPath = StringUtils.replaceOnce(userNode.getPath(), userPath_ + "/", "");
+    //Remove private drive
+    driveService_.removeDrive(userRelPath + "|" + nodeHierarchyCreator_.getJcrPath(PRIVATE_ALIAS));
+    
+    //Remove public drive
+    driveService_.removeDrive(userRelPath + "|" + nodeHierarchyCreator_.getJcrPath(PUBLIC_ALIAS));
   }
 }

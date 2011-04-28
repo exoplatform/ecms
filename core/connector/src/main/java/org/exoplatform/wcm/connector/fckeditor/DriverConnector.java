@@ -200,7 +200,6 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
    */
   @GET
   @Path("/getFoldersAndFiles/")
-//  @OutputTransformer(XMLOutputTransformer.class)
   public Response getFoldersAndFiles(
       @QueryParam("driverName") String driverName,
       @QueryParam("currentFolder") String currentFolder,
@@ -445,15 +444,17 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
    * @param driveList the drive list
    *
    * @return the list< drive data>
+   * @throws Exception 
    */
-  private List<DriveData> personalDrivers(List<DriveData> driveList, String userId) {
+  private List<DriveData> personalDrivers(List<DriveData> driveList, String userId) throws Exception {
     List<DriveData> personalDrivers = new ArrayList<DriveData>();
     NodeHierarchyCreator nodeHierarchyCreator = (NodeHierarchyCreator)
       ExoContainerContext.getCurrentContainer().getComponentInstanceOfType(NodeHierarchyCreator.class);
-    String userPath = nodeHierarchyCreator.getJcrPath(BasePath.CMS_USERS_PATH);
+    SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
+    Node userNode = nodeHierarchyCreator.getUserNode(sessionProvider, userId);
     for(DriveData drive : driveList) {
       String driveHomePath = StringUtils.replaceOnce(drive.getHomePath(), "${userId}", userId);
-      if(driveHomePath.startsWith(userPath + "/" + userId)) {
+      if(driveHomePath.startsWith(userNode.getPath())) {
         drive.setHomePath(driveHomePath);
         personalDrivers.add(drive);
       }
