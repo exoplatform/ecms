@@ -98,6 +98,8 @@
 .Comments .CommentBox .CommentBoxCenterBG {
 	padding: 8px; 
 	background: white;
+	max-height: 200px;
+  overflow: auto;
 }
 
 .Comments .CommentBox .CommentBoxBottomLeft {

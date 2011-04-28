@@ -1,32 +1,27 @@
 <script type="text/javascript">  
   function setScrollBar()
   {     
-    try
-    {
+    try {      
+      var elementWorkingArea = document.getElementById('UIWorkingArea');          
       var parent = document.getElementById('TabContainerParent'); 
-      if(parent!=null)
-      {
+      if(parent!=null) {
         var elements  = eXo.core.DOMUtil.findDescendantsByClass(parent,"div", "UITabContent"); 
-        if(elements!=null)
-        {      
-	  for(i=0;i<elements.length;i++)
-	  {    
-	    var obj = elements[i];        
-	    if(obj.style.display!="none")
-	    {
-	      var height = obj.offsetHeight;           
-	      if(height>480)
-	      {
-	        obj.style.height="470px";
-	        obj.style.overflow="auto";
-	      }
-	  }
-	}
-	} 
+        if(elements!=null) {      
+	  			for(i=0;i<elements.length;i++) {    
+	    			var obj = elements[i];        
+	    			if(obj.style.display!="none") {
+	      			var height = obj.offsetHeight;           
+	      			if(height>430) {
+	      				//obj.style.height="470px";
+	      				obj.style.height=elementWorkingArea.offsetHeight-50+"px";
+	        			obj.style.overflow="auto";
+	     	      }
+	  				}
+					}
+				} 
       }     
     }
-    catch(err)
-    {}
+    catch(err) {}
   } 
   window.setTimeout('setScrollBar',1000); 
 </script>
