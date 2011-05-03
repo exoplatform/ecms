@@ -18,6 +18,7 @@ package org.exoplatform.services.deployment.plugins;
 
 import java.io.InputStream;
 import java.util.Iterator;
+import java.util.Map;
 
 import javax.jcr.ImportUUIDBehavior;
 import javax.jcr.Node;
@@ -29,6 +30,7 @@ import javax.jcr.query.QueryManager;
 import org.exoplatform.container.configuration.ConfigurationManager;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.container.xml.ObjectParameter;
+import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.services.deployment.DeploymentDescriptor;
 import org.exoplatform.services.deployment.DeploymentPlugin;
 import org.exoplatform.services.jcr.RepositoryService;
@@ -87,6 +89,7 @@ public class XMLDeploymentPlugin extends DeploymentPlugin {
       DeploymentDescriptor deploymentDescriptor = (DeploymentDescriptor)objectParameter.getObject();
       String sourcePath = deploymentDescriptor.getSourcePath();
       // sourcePath should start with: war:/, jar:/, classpath:/, file:/
+      String versionHistoryPath = deploymentDescriptor.getVersionHistoryPath();
       Boolean cleanupPublication = deploymentDescriptor.getCleanupPublication();
 
       InputStream inputStream = configurationManager.getInputStream(sourcePath);
@@ -121,6 +124,14 @@ public class XMLDeploymentPlugin extends DeploymentPlugin {
 
         }
 
+      }
+      
+      if (versionHistoryPath != null && versionHistoryPath.length() > 0) {
+        //process import version history
+        Node currentNode = (Node)session.getItem(deploymentDescriptor.getTarget().getNodePath());
+              
+        Map<String, String> mapHistoryValue = Utils.getMapImportHistory(configurationManager.getInputStream(versionHistoryPath));
+        Utils.processImportHistory(currentNode, configurationManager.getInputStream(versionHistoryPath), mapHistoryValue);
       }
 
       session.save();

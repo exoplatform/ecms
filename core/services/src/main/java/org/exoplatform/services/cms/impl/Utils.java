@@ -16,18 +16,36 @@
  */
 package org.exoplatform.services.cms.impl;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.HashMap;
 import java.util.Map;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
 
+import javax.jcr.ItemNotFoundException;
 import javax.jcr.Node;
 import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
 
 import org.exoplatform.services.jcr.core.ExtendedNode;
+import org.exoplatform.services.jcr.impl.core.NodeImpl;
+import org.exoplatform.services.jcr.util.VersionHistoryImporter;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 
 /**
  * @author benjaminmestrallet
  */
 public class Utils {
+  private final static Log   log          = ExoLogger.getLogger("org.exoplatform.services.cms.impl.Utils");
+  
+  public static final String MAPPING_FILE = "mapping.properties";
 
   public static Node makePath(Node rootNode, String path, String nodetype)
   throws PathNotFoundException, RepositoryException {
@@ -58,4 +76,139 @@ public class Utils {
     return node;
   }
 
+  /**
+   * this function used to process import version history for a node
+   * 
+   * @param currentNode
+   * @param versionHistorySourceStream
+   * @param mapHistoryValue
+   * @throws Exception
+   */
+  public static void processImportHistory(Node currentNode,
+                                          InputStream versionHistorySourceStream,
+                                          Map<String, String> mapHistoryValue) throws Exception {
+
+    for (String uuid : mapHistoryValue.keySet()) {
+      ZipInputStream zipInputStream = new ZipInputStream(new BufferedInputStream(versionHistorySourceStream));
+      byte[] data = new byte[1024];
+      ByteArrayOutputStream out = new ByteArrayOutputStream();
+      ZipEntry entry = zipInputStream.getNextEntry();
+      while (entry != null) {
+        int available = -1;
+        if (entry.getName().equals(uuid + ".xml")) {
+          while ((available = zipInputStream.read(data, 0, 1024)) > -1) {
+            out.write(data, 0, available);
+          }
+          try {
+            ByteArrayInputStream inputStream = new ByteArrayInputStream(out.toByteArray());
+            String value = mapHistoryValue.get(uuid);
+            Node versionableNode = currentNode.getSession().getNodeByUUID(uuid);
+            importHistory((NodeImpl) versionableNode,
+                          inputStream,
+                          getBaseVersionUUID(value),
+                          getPredecessors(value),
+                          getVersionHistory(value));
+            currentNode.getSession().save();
+          } catch (ItemNotFoundException item) {
+            currentNode.getSession().refresh(false);
+            log.error("Can not found versionable node" + item, item);
+          } catch (Exception e) {
+            currentNode.getSession().refresh(false);
+            log.error("Import version history failed " + e, e);
+          }
+          zipInputStream.closeEntry();
+          entry = zipInputStream.getNextEntry();
+        } else {
+          zipInputStream.closeEntry();
+          entry = zipInputStream.getNextEntry();
+        }
+      }
+      out.close();
+      zipInputStream.close();
+    }
+  }
+
+  /**
+   * do import a version into a node
+   * 
+   * @param versionableNode
+   * @param versionHistoryStream
+   * @param baseVersionUuid
+   * @param predecessors
+   * @param versionHistory
+   * @throws RepositoryException
+   * @throws IOException
+   */
+  private static void importHistory(NodeImpl versionableNode,
+                                    InputStream versionHistoryStream,
+                                    String baseVersionUuid,
+                                    String[] predecessors,
+                                    String versionHistory) throws RepositoryException, IOException {
+    VersionHistoryImporter versionHistoryImporter = new VersionHistoryImporter(versionableNode,
+                                                                               versionHistoryStream,
+                                                                               baseVersionUuid,
+                                                                               predecessors,
+                                                                               versionHistory);
+    versionHistoryImporter.doImport();
+  }
+
+  /**
+   * get data from the version history file
+   * 
+   * @param importHistorySourceStream
+   * @return
+   * @throws Exception
+   */
+  public static Map<String, String> getMapImportHistory(InputStream importHistorySourceStream) throws Exception {
+    ZipInputStream zipInputStream = new ZipInputStream(importHistorySourceStream);
+    ByteArrayOutputStream out = new ByteArrayOutputStream();
+    byte[] data = new byte[1024];
+    ZipEntry entry = zipInputStream.getNextEntry();
+    Map<String, String> mapHistoryValue = new HashMap<String, String>();
+    while (entry != null) {
+      int available = -1;
+      if (entry.getName().equals(MAPPING_FILE)) {
+        while ((available = zipInputStream.read(data, 0, 1024)) > -1) {
+          out.write(data, 0, available);
+        }
+        InputStream inputStream = new ByteArrayInputStream(out.toByteArray());
+        BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
+        String strLine;
+        // Read File Line By Line
+        while ((strLine = br.readLine()) != null) {
+          // Put the history information into list
+          if (strLine.indexOf("=") > -1) {
+            mapHistoryValue.put(strLine.split("=")[0], strLine.split("=")[1]);
+          }
+        }
+        // Close the input stream
+        inputStream.close();
+        zipInputStream.closeEntry();
+        break;
+      }
+      entry = zipInputStream.getNextEntry();
+    }
+    out.close();
+    zipInputStream.close();
+    return mapHistoryValue;
+  }
+
+  private static String getBaseVersionUUID(String valueHistory) {
+    String[] arrHistoryValue = valueHistory.split(";");
+    return arrHistoryValue[1];
+  }
+
+  private static String[] getPredecessors(String valueHistory) {
+    String[] arrHistoryValue = valueHistory.split(";");
+    String strPredecessors = arrHistoryValue[1];
+    if (strPredecessors.indexOf(",") > -1) {
+      return strPredecessors.split(",");
+    }
+    return new String[] { strPredecessors };
+  }
+
+  private static String getVersionHistory(String valueHistory) {
+    String[] arrHistoryValue = valueHistory.split(";");
+    return arrHistoryValue[0];
+  }  
 }

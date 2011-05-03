@@ -27,7 +27,8 @@ public class DeploymentDescriptor {
   private Target target;
   private String sourcePath;
   private Boolean cleanupPublication = false;
-
+  private String versionHistoryPath;
+  
   /**
    * @return the target where data will be stored
    */
@@ -75,6 +76,21 @@ public class DeploymentDescriptor {
     this.cleanupPublication = cleanupPublication;
   }
 
+  /**
+  * get the path of version history file which we want to import
+  * @return the path of version history file which we want to import
+  */
+  public String getVersionHistoryPath() {
+    return versionHistoryPath;
+  }
+   
+  /**
+  * set the path of version history file which we want to import
+  * @param versionhistoryPath the path of version history file which we want to import
+  */
+  public void setVersionHistoryPath(String versionHistoryPath) {
+    this.versionHistoryPath = versionHistoryPath;
+  }
 
 
 

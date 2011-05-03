@@ -17,14 +17,9 @@
 package org.exoplatform.ecm.webui.component.explorer.popup.admin;
 
 import java.io.BufferedInputStream;
-import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -33,17 +28,13 @@ import java.util.zip.ZipInputStream;
 
 import javax.jcr.AccessDeniedException;
 import javax.jcr.ImportUUIDBehavior;
-import javax.jcr.ItemNotFoundException;
 import javax.jcr.Node;
-import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 import javax.jcr.nodetype.ConstraintViolationException;
 
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.cms.mimetype.DMSMimeTypeResolver;
-import org.exoplatform.services.jcr.impl.core.NodeImpl;
-import org.exoplatform.services.jcr.util.VersionHistoryImporter;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.upload.UploadService;
@@ -152,111 +143,6 @@ public class UIImportNode extends UIForm implements UIPopupComponent {
     return false;
   }
 
-  private void importHistory(
-      NodeImpl versionableNode,
-      InputStream versionHistoryStream,
-      String baseVersionUuid,
-      String[] predecessors,
-      String versionHistory) throws RepositoryException, IOException {
-    VersionHistoryImporter versionHistoryImporter =
-      new VersionHistoryImporter(versionableNode, versionHistoryStream, baseVersionUuid, predecessors, versionHistory);
-    versionHistoryImporter.doImport();
-  }
-
-  private Map<String, String> getMapImportHistory() throws Exception  {
-    UIFormUploadInput inputHistory = getUIInput(VERSION_HISTORY_FILE_UPLOAD);
-    ZipInputStream zipInputStream = new ZipInputStream(inputHistory.getUploadDataAsStream());
-    ByteArrayOutputStream out= new ByteArrayOutputStream();
-    byte[] data  = new byte[1024];
-    ZipEntry entry = zipInputStream.getNextEntry();
-    Map<String, String> mapHistoryValue = new HashMap<String, String>();
-    while(entry != null) {
-      int available = -1;
-      if(entry.getName().equals(MAPPING_FILE)) {
-        while ((available = zipInputStream.read(data, 0, 1024)) > -1) {
-          out.write(data, 0, available);
-        }
-        InputStream inputStream = new ByteArrayInputStream(out.toByteArray());
-        BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
-        String strLine;
-        //Read File Line By Line
-        while ((strLine = br.readLine()) != null)   {
-          //Put the history information into list
-          if(strLine.indexOf("=") > -1) {
-            mapHistoryValue.put(strLine.split("=")[0], strLine.split("=")[1]);
-          }
-        }
-        //Close the input stream
-        inputStream.close();
-        zipInputStream.closeEntry();
-        break;
-      }
-      entry = zipInputStream.getNextEntry();
-    }
-    out.close();
-    zipInputStream.close();
-    return mapHistoryValue;
-  }
-
-  private String getBaseVersionUUID(String valueHistory) {
-    String[] arrHistoryValue = valueHistory.split(";");
-    return arrHistoryValue[1];
-  }
-
-  private String[] getPredecessors(String valueHistory) {
-    String[] arrHistoryValue = valueHistory.split(";");
-    String strPredecessors = arrHistoryValue[1];
-    if(strPredecessors.indexOf(",") > -1) {
-      return strPredecessors.split(",");
-    }
-    return new String[] { strPredecessors };
-  }
-
-  private String getVersionHistory(String valueHistory) {
-    String[] arrHistoryValue = valueHistory.split(";");
-    return arrHistoryValue[0];
-  }
-
-  private void processImportHistory(Node currentNode) throws Exception {
-    UIFormUploadInput inputHistory = getUIInput(VERSION_HISTORY_FILE_UPLOAD);
-    Map<String, String> mapHistoryValue = getMapImportHistory();
-    for(String uuid : mapHistoryValue.keySet()) {
-      ZipInputStream zipInputStream = new ZipInputStream(new BufferedInputStream(inputHistory.getUploadDataAsStream()));
-      byte[] data  = new byte[1024];
-      ByteArrayOutputStream out= new ByteArrayOutputStream();
-      ZipEntry entry = zipInputStream.getNextEntry();
-      while(entry != null) {
-        int available = -1;
-        if(entry.getName().equals(uuid + ".xml")) {
-          while ((available = zipInputStream.read(data, 0, 1024)) > -1) {
-            out.write(data, 0, available);
-          }
-          try {
-            ByteArrayInputStream inputStream = new ByteArrayInputStream(out.toByteArray());
-            String value = mapHistoryValue.get(uuid);
-            Node versionableNode = currentNode.getSession().getNodeByUUID(uuid);
-            importHistory((NodeImpl)versionableNode, inputStream,
-                getBaseVersionUUID(value), getPredecessors(value), getVersionHistory(value));
-            currentNode.getSession().save();
-          } catch(ItemNotFoundException item) {
-            currentNode.getSession().refresh(false);
-            log.error("Can not found versionable node" + item, item);
-          } catch(Exception e) {
-            currentNode.getSession().refresh(false);
-            log.error("Import version history failed " + e, e);
-          }
-          zipInputStream.closeEntry();
-          entry = zipInputStream.getNextEntry();
-        } else {
-          zipInputStream.closeEntry();
-          entry = zipInputStream.getNextEntry();
-        }
-      }
-      out.close();
-      zipInputStream.close();
-    }
-  }
-
   private String getMimeType(String fileName) throws IOException {
     DMSMimeTypeResolver resolver = DMSMimeTypeResolver.getInstance();
     return resolver.getMimeType(fileName);
@@ -322,7 +208,8 @@ public class UIImportNode extends UIForm implements UIPopupComponent {
 
         //Process import version history
         if(inputHistory.getUploadResource() != null) {
-          uiImport.processImportHistory(currentNode);
+          Map<String, String> mapHistoryValue = org.exoplatform.services.cms.impl.Utils.getMapImportHistory(inputHistory.getUploadDataAsStream());
+          org.exoplatform.services.cms.impl.Utils.processImportHistory(currentNode, inputHistory.getUploadDataAsStream(), mapHistoryValue);
         }
           // if an import fails, it's possible when source xml contains errors,
           // user may fix the fail caused items and save session (JSR-170, 7.3.7 Session Import Methods).
