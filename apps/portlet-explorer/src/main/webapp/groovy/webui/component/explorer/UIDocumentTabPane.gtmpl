@@ -7,18 +7,18 @@
       if(parent!=null) {
         var elements  = eXo.core.DOMUtil.findDescendantsByClass(parent,"div", "UITabContent"); 
         if(elements!=null) {      
-	  			for(i=0;i<elements.length;i++) {    
-	    			var obj = elements[i];        
-	    			if(obj.style.display!="none") {
-	      			var height = obj.offsetHeight;           
-	      			if(height>430) {
-	      				//obj.style.height="470px";
-	      				obj.style.height=elementWorkingArea.offsetHeight-50+"px";
-	        			obj.style.overflow="auto";
-	     	      }
-	  				}
-					}
-				} 
+	  			    for(i=0;i<elements.length;i++) {    
+	    			    var obj = elements[i];        
+	    			    if(obj.style.display!="none") {
+	      			    var height = obj.offsetHeight;           
+	      			    if(height>430) {
+	      			  	  //obj.style.height="470px";
+	      				     obj.style.height=elementWorkingArea.offsetHeight-50+"px";
+	        			    obj.style.overflow="auto";
+	     	       }
+	  				     }
+					     }
+				    } 
       }     
     }
     catch(err) {}
@@ -38,30 +38,30 @@
 	    <div class="WorkingAreaWithHelp">
 	      <div class="UIHorizontalTabs">
 	        <div class="LeftHorizontalTabs">
-		     	  <div class="RightHorizontalTabs">
-		     	    <div class="CenterHorizontalTabs">
-				        <div class="TabsContainer">
-				          <%
-				            for(uiChild in uicomponent.getChildren()) {
-				              String style = "NormalTab" ;
-				              String tabId = uiChild.getId();
-				              String paneId = uicomponent.getId();
-				              if(uiChild.isRendered()) style = "SelectedTab" ;
-				          %>
-				            <div class="UITab NormalTabStyle">
-				              <div class="$style">
-				                <div class="LeftTab">
-				                  <div class="RightTab">                
-				                  <div class="MiddleTab" onClick="<%=uicomponent.event("ChangeTab"  ,tabId)%>"><%=_ctx.appRes("UITabPane.title." + uiChild.getId());%></div>
+		     	   <div class="RightHorizontalTabs">
+		     	     <div class="CenterHorizontalTabs">
+				           <div class="TabsContainer">
+				           <%
+				              for(uiChild in uicomponent.getChildren()) {
+				                String style = "NormalTab" ;
+				                String tabId = uiChild.getId();
+				                String paneId = uicomponent.getId();
+				                if(uiChild.isRendered()) style = "SelectedTab" ;
+				            %>
+				                <div class="UITab NormalTabStyle">
+				                  <div class="$style">
+				                    <div class="LeftTab">
+				                      <div class="RightTab">                
+				                        <div class="MiddleTab" onClick="<%=uicomponent.event("ChangeTab"  ,tabId)%>"><%=_ctx.appRes("UITabPane.title." + uiChild.getId());%></div>
+				                      </div>
+				                    </div>
 				                  </div>
-				                </div>
-				              </div>
-				            </div>              
-				          <%}%>
-				        </div>
-				      </div>
-				    </div>
-				  </div>
+				                </div>              
+				            <%}%>
+				           </div>
+				         </div>
+				       </div>
+				     </div>
 	      </div>
 	      <div class="UITabContentContainer" id="TabContainerParent">
 	        <%
@@ -79,11 +79,41 @@
 	</div>  
 </div>
 <%
-  } else { %>
-  <div id="$uicomponent.id">
+
+  if(uicomponent.isDisplayOptionBlockPanel()) {
+    for(uiChild in uicomponent.getChildren()) { 
+      String width = "30%";	  
+      if(uiChild.getId().indexOf("OptionBlock")<0) continue;
+      String display = "block" ;	     	
+      println "<div style=\"display: $display;float:left; width: $width;\">" ;
+      uicomponent.renderUIComponent(uiChild) ;
+      println "</div>" ;
+    }
+    print "<div style=\"clear: both;\"><span></span></div>";
+  }
+%>
+
 <%
-	def uiDocumentInfo = uicomponent.getChildById("UIDocumentInfo") ;
-	uicomponent.renderChild("UIDocumentInfo") ;
-%>  
-  </div>
-<%}%>
+  } else { 
+    if(uicomponent.isDocumentNode() && uicomponent.isDisplayOptionBlockPanel()) {	
+      print "<div id=\"$uicomponent.id\" style=\"padding:8px;\">";	    
+      for(uiChild in uicomponent.getChildren()) {		      
+        if(uiChild.getId()=="UIDocumentWithTree") continue;
+        String width = "70%";	  
+        if(uiChild.getId() != "UIDocumentInfo") {
+          width = "30%";
+        }
+        String display = "none" ;		   		
+        if(uiChild.isRendered() || uiChild.getId().indexOf("OptionBlock")>=0) display="block" ;		     	
+        println "<div style=\"display: $display;float:left; width: $width;\">" ;
+        uicomponent.renderUIComponent(uiChild) ;
+        println "</div>" ;
+      }		
+      print "</div>"; 
+    } else {			
+      print "<div id=\"$uicomponent.id\">";	
+      uicomponent.renderChild("UIDocumentInfo") ;
+      print "</div>";
+    }
+  }
+%>	
