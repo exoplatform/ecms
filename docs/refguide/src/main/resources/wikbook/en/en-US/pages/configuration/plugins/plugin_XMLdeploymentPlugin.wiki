@@ -25,6 +25,7 @@ _*org.exoplatform.services.deployment.DeploymentDescriptor*_
 | *target* | {{Object}} | {{org.exoplatform.services.deployment.DeploymentDescriptor$Target (*)}} | The target node which will contain imported node. |
 | *sourcePath* | {{String}} | {{war:/conf/sample-portal/wcm/artifacts/site-resources/acme/Logo.xml<}} | The absolute path of the XML file. |
 | *cleanupPublication* | {{Boolean}} | {{false}} | Decide when the publication lifecycle is cleaned up in the target folder after importing the data.{example}{example}true: allow{example}{example}false:not allow |
+| *versionHistoryPath* | {{String}} | {{war:/conf/sample-portal/wcm/artifacts/site-resources/acme/Logo_versionHistory.zip<}} | The absolute path of the version history file. |
 
 *{{org.exoplatform.services.deployment.DeploymentDescriptor$Target}}*
 || *Field* || *Type* || *Default value* || *Description* ||
@@ -62,6 +63,9 @@ h1. Example of configuration {anchor:id=CONTref.Configuration.Deployment.Configu
             </field>
             <field name="sourcePath">
               <string>war:/conf/sample-portal/wcm/artifacts/site-resources/acme/Logo.xml</string>
+            </field>
+	    <field name="versionHistoryPath">
+              <string>war:/conf/sample-portal/wcm/artifacts/site-resources/acme/Logo_versionHistory.zip</string>
             </field>
             <field name="cleanupPublication">
               <boolean>true</boolean>
