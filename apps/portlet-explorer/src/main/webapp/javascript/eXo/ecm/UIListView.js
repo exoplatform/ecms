@@ -980,7 +980,7 @@ var ListView = function() {
 		var leftContainer = document.getElementById("LeftContainer");
 		var dynamicWidth = workingArea.offsetWidth - leftContainer.offsetWidth - 6 ;		
 		var listGrid = eXo.core.DOMUtil.findFirstDescendantByClass(root, "div", "UIListGrid");
-		root.style.overflow = "hidden";
+		root.style.overflow = "auto";
 		var rightContainer = DOM.findAncestorByClass(listGrid, "RightContainer");
 		if(eXo.ecm.UIListView.widthListView) {
 			
