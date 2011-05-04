@@ -21,6 +21,7 @@ import javax.jcr.RepositoryException;
 
 import org.exoplatform.ecm.webui.component.admin.UIECMAdminPortlet;
 import org.exoplatform.ecm.webui.component.admin.taxonomy.action.UIActionForm;
+import org.exoplatform.ecm.webui.component.admin.taxonomy.action.UIActionTaxonomyManager;
 import org.exoplatform.ecm.webui.selector.UIPermissionSelector;
 import org.exoplatform.ecm.webui.tree.selectone.UIOneNodePathSelector;
 import org.exoplatform.ecm.webui.utils.Utils;
@@ -153,6 +154,11 @@ public class UITaxonomyManagerTrees extends UIAbstractManager {
   }
 
   private void removePopup() {
+    UIActionTaxonomyManager uiManager = getAncestorOfType(UIActionTaxonomyManager.class);
+    if (uiManager != null) {
+      uiManager.removeChildById(UIActionForm.POPUP_COMPONENT);
+    }
+    
     removeChildById(UIActionForm.POPUP_COMPONENT);
     removeChildById(UITaxonomyTreeContainer.POPUP_PERMISSION);
     removeChildById(UITaxonomyTreeContainer.POPUP_TAXONOMYHOMEPATH);

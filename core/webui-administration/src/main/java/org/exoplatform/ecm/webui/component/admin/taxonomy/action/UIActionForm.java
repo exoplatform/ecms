@@ -41,7 +41,6 @@ import org.exoplatform.ecm.webui.utils.DialogFormUtil;
 import org.exoplatform.ecm.webui.utils.LockUtil;
 import org.exoplatform.ecm.webui.utils.PermissionUtil;
 import org.exoplatform.ecm.webui.utils.Utils;
-import org.exoplatform.webui.form.UIFormMultiValueInputSet;
 import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.resolver.ResourceResolver;
@@ -77,6 +76,7 @@ import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.event.Event.Phase;
 import org.exoplatform.webui.form.UIFormInputBase;
+import org.exoplatform.webui.form.UIFormMultiValueInputSet;
 import org.exoplatform.webui.form.UIFormStringInput;
 
 /**
@@ -137,8 +137,8 @@ public class UIActionForm extends UIDialogForm implements UISelectable {
     else if (UIFormMultiValueInputSet.class.isInstance(uicomponent)) {
       ((UIFormMultiValueInputSet)uicomponent).setValue((ArrayList<String>)value);
     }
-    UITaxonomyManagerTrees uiTaxoManageTree = getAncestorOfType(UITaxonomyManagerTrees.class);
-    uiTaxoManageTree.removeChildById(POPUP_COMPONENT);
+    UIActionTaxonomyManager uiManager = getAncestorOfType(UIActionTaxonomyManager.class);
+    uiManager.removeChildById(POPUP_COMPONENT);
   }
 
   public String getCurrentPath() throws Exception {
@@ -526,7 +526,7 @@ public class UIActionForm extends UIDialogForm implements UISelectable {
   public static class ShowComponentActionListener extends EventListener<UIActionForm> {
     public void execute(Event<UIActionForm> event) throws Exception {
       UIActionForm uiForm = event.getSource();
-      UITaxonomyManagerTrees uiManager = uiForm.getAncestorOfType(UITaxonomyManagerTrees.class);
+      UIActionTaxonomyManager uiManager = uiForm.getAncestorOfType(UIActionTaxonomyManager.class);
       uiForm.isShowingComponent = true;
       String fieldName = event.getRequestContext().getRequestParameter(OBJECTID);
       Map fieldPropertiesMap = uiForm.componentSelectors.get(fieldName);

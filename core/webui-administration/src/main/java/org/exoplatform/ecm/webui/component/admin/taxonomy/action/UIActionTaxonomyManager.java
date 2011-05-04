@@ -17,8 +17,12 @@
  **************************************************************************/
 package org.exoplatform.ecm.webui.component.admin.taxonomy.action;
 
+import org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyManagerTrees;
+import org.exoplatform.ecm.webui.component.admin.taxonomy.UITaxonomyTreeContainer;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
+import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.core.UIContainer;
+import org.exoplatform.webui.core.UIPopupWindow;
 import org.exoplatform.webui.core.lifecycle.UIContainerLifecycle;
 
 /**
@@ -47,5 +51,20 @@ public class UIActionTaxonomyManager extends UIContainer {
     uiActionType.setDefaultActionType(null);
     Class[] renderClasses = { UIActionTypeForm.class, UIActionForm.class };
     setRenderedChildrenOfTypes(renderClasses);
+  }
+  
+  public void initPopupComponent(UIComponent uiComp, String id) throws Exception {
+    UITaxonomyManagerTrees uiManagerTrees = getAncestorOfType(UITaxonomyManagerTrees.class);
+    if (uiManagerTrees != null) {
+      uiManagerTrees.removeChildById(UITaxonomyTreeContainer.POPUP_PERMISSION);
+      uiManagerTrees.removeChildById(UITaxonomyTreeContainer.POPUP_TAXONOMYHOMEPATH);
+    }
+
+    removeChildById(UIActionForm.POPUP_COMPONENT);
+    UIPopupWindow uiPopup = addChild(UIPopupWindow.class, null, id);
+    uiPopup.setUIComponent(uiComp);
+    uiPopup.setWindowSize(640, 300);
+    uiPopup.setShow(true);
+    uiPopup.setResizable(true);
   }
 }
