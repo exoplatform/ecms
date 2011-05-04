@@ -27,7 +27,7 @@
 	      <td class="FieldComponent">
 	      <% 
           String[] fieldLifecycle = ["jcrPath=/node/exo:lifecyclePhase", 
-                                     "options=read,schedule,node_added,node_removed,property_added,property_removed,property_changed",
+                                     "options=read,node_added,node_removed,property_added,property_removed,property_changed",
                                      "multiValues=true", "onchange=true","size=5","validate=empty"] ;
           uicomponent.addSelectBoxField("lifecycle", fieldLifecycle) ;
         %>
@@ -46,7 +46,7 @@
 	      <td class="FieldLabel"><%=_ctx.appRes("Getmail.dialog.label.host")%></td>
 	      <td class="FieldComponent">
 		      <% 
-		       	String[] fieldHost = ["jcrPath=/node/exo:host"] ;
+		       	String[] fieldHost = ["jcrPath=/node/exo:host", "validate=empty"] ;
 		        uicomponent.addTextField("host", fieldHost)  ;
 		      %>
 		    </td>
@@ -55,7 +55,7 @@
 	      <td class="FieldLabel"><%=_ctx.appRes("Getmail.dialog.label.port")%></td>
 	      <td class="FieldComponent">
 		      <% 
-		        String[] fieldPort = ["jcrPath=/node/exo:port", "validate=number"] ;
+		        String[] fieldPort = ["jcrPath=/node/exo:port", "validate=empty,number"] ;
 		        uicomponent.addTextField("port", fieldPort)  ;
 		      %>
 		    </td>

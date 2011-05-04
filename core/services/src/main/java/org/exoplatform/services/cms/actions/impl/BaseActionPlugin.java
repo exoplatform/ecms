@@ -86,6 +86,7 @@ abstract public class BaseActionPlugin implements ActionPlugin {
   final static String srcWorkspaceVar = "srcWorkspace".intern() ;
   final static String initiatorVar = "initiator".intern() ;
   final static String srcPathVar = "srcPath".intern() ;
+  final static String nodePath = "nodePath".intern() ;
   final static String executableVar = "executable".intern() ;
 
   final static String MIX_AFFECTED_NODETYPE  = "mix:affectedNodeTypes".intern();
@@ -678,7 +679,6 @@ abstract public class BaseActionPlugin implements ActionPlugin {
     Node actionNode = actionContainer.getAction(srcNode,actionName) ;
     if(!actionNode.isNodeType(SCHEDULABLE_INFO_MIXIN)) {
       actionNode.addMixin(SCHEDULABLE_INFO_MIXIN) ;
-      actionNode.save() ;
     }
     Class activationJob = createActivationJob() ;
     String jobName = JOB_NAME_PREFIX.concat(actionName) ;
@@ -725,6 +725,7 @@ abstract public class BaseActionPlugin implements ActionPlugin {
     variables.put(srcWorkspaceVar, srcWorkspace);
     variables.put(srcRepository, repository);
     variables.put(srcPathVar, srcPath);
+    variables.put(nodePath, srcPath);
     Map<String,Object> executionVariables = getExecutionVariables(mappings) ;
     JobDataMap jdatamap = new JobDataMap() ;
     jdatamap.putAll(variables) ;

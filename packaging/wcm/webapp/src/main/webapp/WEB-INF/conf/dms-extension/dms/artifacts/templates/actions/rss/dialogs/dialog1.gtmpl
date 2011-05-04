@@ -91,7 +91,7 @@
 					  <td class="FieldLabel"><%=_ctx.appRes("Rss.dialog.label.time-inteval")%></td>
 					  <td class="FieldComponent">
 						  <% 
-							String[] fieldTimeInterval = ["jcrPath=/node/exo:timeInterval", "validate=repeatIntervalValidator"] ;
+							String[] fieldTimeInterval = ["jcrPath=/node/exo:timeInterval", "1", "validate=repeatIntervalValidator"] ;
 							uicomponent.addTextField("timeInterval", fieldTimeInterval) ;
 						  %>
 						</td>
@@ -113,10 +113,16 @@
 					  uicomponent.removeChildById("repeatCount") ; 
 					  uicomponent.removeChildById("timeInterval") ; 
 					%>					
-				<%			}	
-					  }
-				  }
-				%>	
+				<%}	
+			} else {
+				uicomponent.removeChildById("startTime") ; 
+				uicomponent.removeChildById("endTime") ; 
+				uicomponent.removeChildById("repeatCount") ; 
+				uicomponent.removeChildById("timeInterval") ; 	
+				uicomponent.removeChildById("cronExpression") ;					  			    
+			}
+		}
+		%>	
 	    <tr>                        
 	      <td class="FieldLabel"><%=_ctx.appRes("Rss.dialog.label.feed-node-name")%></td>
 	      <td class="FieldComponent">
@@ -328,14 +334,6 @@
         uicomponent.addActionField("affectedNodetypes", fieldAffectedNodetypes);
         %>
       </tr> 
-	    <%
-	  		uicomponent.removeChildById("startTime") ; 
-				uicomponent.removeChildById("endTime") ; 
-				uicomponent.removeChildById("repeatCount") ; 
-		    uicomponent.removeChildById("timeInterval") ; 
-		    uicomponent.removeChildById("cronExpression") ;
-	    %>
-	    
 	  </table>
     <%/* start render action*/%>
 		<%uiform.processRenderAction()%>

@@ -85,6 +85,7 @@
 								  %>
 								</td>
 							</tr>
+							<% uicomponent.removeChildById("cronExpression") ; %>
 						<%} else {%>
 							<tr>		          					
 							  <td class="FieldLabel"><%=_ctx.appRes("EnableVersioning.dialog.label.cron-expression")%></td>
@@ -95,6 +96,12 @@
 								  %>
 								</td>
 							</tr>
+							<% 
+							  uicomponent.removeChildById("startTime") ; 
+							  uicomponent.removeChildById("endTime") ; 
+							  uicomponent.removeChildById("repeatCount") ; 
+							  uicomponent.removeChildById("timeInterval") ; 
+							%>
 		 <%			}	
 				  } else {
 					  uicomponent.removeChildById("startTime") ; 
