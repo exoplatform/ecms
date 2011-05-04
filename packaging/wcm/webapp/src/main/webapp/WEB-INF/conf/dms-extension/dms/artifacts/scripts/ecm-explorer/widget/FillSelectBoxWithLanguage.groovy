@@ -41,7 +41,12 @@ public class FillSelectBoxWithLanguage implements CmsScript {
 	         LocaleConfig localeConfig = (LocaleConfig)object;
 	         Locale locale = localeConfig.getLocale();
 	         String lang = locale.getLanguage();
-	 		 options.add(new SelectItemOption(lang, lang));
+	         String country = locale.getCountry();
+		     String optionLang = lang;
+		     if (country != null && country.length() > 0) {
+		        optionLang += "_" + country;
+		     }   
+	 		 options.add(new SelectItemOption(optionLang, optionLang));
 	 	}          
 	    selectBox.setOptions(options);
 	}
