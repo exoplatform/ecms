@@ -193,6 +193,13 @@ public class UIAddressBar extends UIForm {
         String nodePath = LinkUtils.evaluatePath(LinkUtils.createPath(prefix, path));
         uiExplorer.setSelectNode(nodePath) ;
         uiExplorer.setCurrentStatePath(nodePath) ;
+        UIWorkingArea uiWorkingArea = uiExplorer.getChild(UIWorkingArea.class);
+        UIDocumentWorkspace uiDocumentWorkspace = uiWorkingArea.getChild(UIDocumentWorkspace.class);
+        if(!uiDocumentWorkspace.isRendered()) {          
+          uiDocumentWorkspace.setRendered(true);
+        } else {
+          uiDocumentWorkspace.setRenderedChild(UIDocumentContainer.class);
+        }                      
       } catch(Exception e) {
         UIApplication uiApp = uiAddress.getAncestorOfType(UIApplication.class) ;
         uiApp.addMessage(new ApplicationMessage("UIAddressBar.msg.path-not-found", null,
