@@ -829,7 +829,7 @@ EcmContentSelector.prototype.insertContent = function(objNode) {
 				if(nodeType.indexOf("image") >=0) {
 					strHTML += "<img src=\""+url+"\" name=\""+name+"\" alt=\""+name+"\"/>";
 				} else {
-					strHTML += "<a href=\"" + url+"\" style='text-decoration:none;'>"+name+"</a>";		
+					strHTML += "<a href=\"" + url+"\">"+name+"</a>";		
 				}		    		    
 				editor.insertHtml(strHTML);
 				window.close();
