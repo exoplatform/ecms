@@ -17,9 +17,22 @@
 package org.exoplatform.wcm.webui.newsletter.manager;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
+import javax.jcr.Node;
+import javax.jcr.Session;
+
+import org.exoplatform.portal.config.DataStorage;
+import org.exoplatform.portal.config.model.Page;
+import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.organization.Group;
+import org.exoplatform.services.organization.MembershipHandler;
+import org.exoplatform.services.organization.MembershipType;
+import org.exoplatform.services.organization.Membership;
+import org.exoplatform.services.organization.OrganizationService;
+import org.exoplatform.services.wcm.core.WCMConfigurationService;
 import org.exoplatform.services.wcm.newsletter.NewsletterCategoryConfig;
 import org.exoplatform.services.wcm.newsletter.NewsletterManagerService;
 import org.exoplatform.services.wcm.newsletter.NewsletterSubscriptionConfig;
@@ -263,6 +276,7 @@ public class UISubscriptions extends UIForm {
       UISubscriptions subsriptions = event.getSource();
       UINewsletterManagerPortlet newsletterManagerPortlet = subsriptions.getAncestorOfType(UINewsletterManagerPortlet.class);
       UICategories categories = newsletterManagerPortlet.getChild(UICategories.class);
+      subsriptions.setCategory(null);
       categories.setRendered(true);
       subsriptions.setRendered(false);
       event.getRequestContext().addUIComponentToUpdateByAjax(newsletterManagerPortlet);
@@ -316,11 +330,33 @@ public class UISubscriptions extends UIForm {
       categoryHandler.delete(WCMCoreUtils.getUserSessionProvider(),
                              NewsLetterUtil.getPortalName(),
                              subsriptions.categoryConfig.getName());
+      OrganizationService organizationService = WCMCoreUtils.getService(OrganizationService.class) ;
+      WCMConfigurationService wcmConfigurationService = WCMCoreUtils.getService(WCMConfigurationService.class);
+      DataStorage dataStorage = WCMCoreUtils.getService(DataStorage.class);
+      Page page = dataStorage.getPage(Util.getUIPortal().getSelectedNode().getPageReference());
+      List<String> pageAccessPermissions = new ArrayList<String>(Arrays.asList(page.getAccessPermissions()));
+      
+      String membership = wcmConfigurationService.getRuntimeContextParam(WCMConfigurationService.NEWSLETTER_MANAGE_MEMBERSHIP);
+      Group group = organizationService.getGroupHandler().findGroupById(membership.split(":")[1]);
+      MembershipHandler membershipHandler = organizationService.getMembershipHandler();
+      MembershipType membershipType = organizationService.getMembershipTypeHandler().findMembershipType(membership.split(":")[0]);
+      for(String userName : subsriptions.categoryConfig.getModerator().split(","))
+      {
+        if(pageAccessPermissions.contains(userName))
+        {
+          //Remove a membership record with  - a relation of the user ,group and membership type
+          pageAccessPermissions.remove(userName);  
+          Membership member = membershipHandler.findMembershipByUserGroupAndType(userName,group.getId(),membershipType.getName());
+          if(member!=null)  membershipHandler.removeMembership(member.getId(), true);
+        }
+      }    
       UINewsletterManagerPortlet newsletterManagerPortlet = subsriptions.getAncestorOfType(UINewsletterManagerPortlet.class);
       UICategories categories = newsletterManagerPortlet.getChild(UICategories.class);
       subsriptions.setCategory(null);
       categories.setRendered(true);
       subsriptions.setRendered(false);
+      page.setAccessPermissions(pageAccessPermissions.toArray(new String[]{}));
+      dataStorage.save(page);
       event.getRequestContext().addUIComponentToUpdateByAjax(newsletterManagerPortlet);
     }
   }
@@ -429,6 +465,28 @@ public class UISubscriptions extends UIForm {
                                                     NewsLetterUtil.getPortalName(),
                                                     subsriptions.categoryConfig.getName(),
                                                     subscriptionConfig);
+            OrganizationService organizationService = WCMCoreUtils.getService(OrganizationService.class) ;
+            WCMConfigurationService wcmConfigurationService = WCMCoreUtils.getService(WCMConfigurationService.class);
+            DataStorage dataStorage = WCMCoreUtils.getService(DataStorage.class);
+            Page page = dataStorage.getPage(Util.getUIPortal().getSelectedNode().getPageReference());
+            List<String> pageAccessPermissions = new ArrayList<String>(Arrays.asList(page.getAccessPermissions()));
+            
+            String membership = wcmConfigurationService.getRuntimeContextParam(WCMConfigurationService.NEWSLETTER_MANAGE_MEMBERSHIP);
+            Group group = organizationService.getGroupHandler().findGroupById(membership.split(":")[1]);
+            MembershipHandler membershipHandler = organizationService.getMembershipHandler();
+            MembershipType membershipType = organizationService.getMembershipTypeHandler().findMembershipType(membership.split(":")[0]);
+            for(String userName : subscriptionConfig.getRedactor().split(","))
+            {
+              if(pageAccessPermissions.contains(userName))
+              {
+                pageAccessPermissions.remove(userName);
+                //Remove a membership record with  - a relation of the user ,group and membership type
+                Membership member = membershipHandler.findMembershipByUserGroupAndType(userName,group.getId(),membershipType.getName());
+                if(member!=null) membershipHandler.removeMembership(member.getId(), true);
+              }
+            }   
+            page.setAccessPermissions(pageAccessPermissions.toArray(new String[]{}));
+            dataStorage.save(page);
           } else {
             UIApplication uiApp = subsriptions.getAncestorOfType(UIApplication.class);
             uiApp.addMessage(new ApplicationMessage("UISubscription.msg.subscriptionNotfound",
