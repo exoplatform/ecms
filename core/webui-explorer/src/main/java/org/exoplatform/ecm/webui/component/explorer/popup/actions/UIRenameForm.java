@@ -205,7 +205,10 @@ public class UIRenameForm extends UIForm implements UIPopupComponent {
           if (destNode.isLocked())
             LockUtil.changeLockToken(uiRenameForm.renameNode_, destNode);
           uiRenameForm.changeLockForChild(srcPath, destNode);
-          destNode.setProperty(EXO_LASTMODIFIER, nodeSession.getUserID());
+          if(destNode.canAddMixin("exo:modify")) {
+              destNode.addMixin("exo:modify");            
+          }
+          destNode.setProperty(Utils.EXO_LASTMODIFIER, nodeSession.getUserID());
           currentNode = destNode;
         }
         //change title
@@ -253,6 +256,7 @@ public class UIRenameForm extends UIForm implements UIPopupComponent {
       } catch (Exception e) {
         JCRExceptionManager.process(uiApp, e);
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        LOG.error("Have an error when rename", e);
         return;
       } finally {
         if(nodeSession != null) nodeSession.logout();
