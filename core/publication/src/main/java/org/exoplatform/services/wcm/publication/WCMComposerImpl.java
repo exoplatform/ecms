@@ -261,7 +261,7 @@ public class WCMComposerImpl implements WCMComposer, Startable {
     NodeIterator nodeIterator = getViewableContents(workspace, path, filters, sessionProvider);
     List<Node> nodes = new ArrayList<Node>();
     Node node = null, viewNode = null;
-    while (nodeIterator.hasNext()) {
+    while (nodeIterator != null && nodeIterator.hasNext()) {
       node = nodeIterator.nextNode();
       viewNode = getViewableContent(node, filters);
       if (viewNode != null) {
@@ -302,9 +302,16 @@ public class WCMComposerImpl implements WCMComposer, Startable {
       addUsedPrimaryTypes(primaryType);
       if (primaryType == null) {
         primaryType = "nt:base";
-        Node currentFolder = "/".equals(path) ? session.getRootNode() :
-                                                session.getRootNode().getNode(path.substring(1));
-        if (currentFolder.isNodeType("exo:taxonomy")) {
+        Node currentFolder = null;
+        if ("/".equals(path)) {
+          currentFolder = session.getRootNode();
+        } else if (session.getRootNode().hasNode(path.substring(1))) {
+          currentFolder = session.getRootNode().getNode(path.substring(1));
+        } else {
+          return null;
+        }
+               
+        if (currentFolder != null && currentFolder.isNodeType("exo:taxonomy")) {
           primaryType = "exo:taxonomyLink";
         }
       } else {
