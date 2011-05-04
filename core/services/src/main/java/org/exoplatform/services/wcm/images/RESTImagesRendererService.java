@@ -18,6 +18,7 @@ package org.exoplatform.services.wcm.images;
 
 import java.io.InputStream;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -173,16 +174,19 @@ public class RESTImagesRendererService implements ResourceContainer{
      DateFormat dateFormat = new SimpleDateFormat(IF_MODIFIED_SINCE_DATE_FORMAT);
      if(ifModifiedSince == null || ifModifiedSince.length() == 0)
        return false;
-     Date ifModifiedSinceDate = dateFormat.parse(ifModifiedSince);
-
-     // get last modified date of node
-     Date lastModifiedDate = getLastModifiedDate(node);
-
-     // Check if cached resource has not been modifed, return 304 code
-     if (ifModifiedSinceDate.getTime() >= lastModifiedDate.getTime()) {
+     try {
+       Date ifModifiedSinceDate = dateFormat.parse(ifModifiedSince);
+       // get last modified date of node
+       Date lastModifiedDate = getLastModifiedDate(node);
+       // Check if cached resource has not been modifed, return 304 code
+       if (ifModifiedSinceDate.getTime() >= lastModifiedDate.getTime()) {
+         return false;
+       }
+       return true;  
+     } catch(ParseException pe) {
        return false;
      }
-     return true;
+     
   }
 
   /**
@@ -197,7 +201,7 @@ public class RESTImagesRendererService implements ResourceContainer{
    */
   public String generateImageURI(Node file, String propertyName) throws Exception {
     StringBuilder builder = new StringBuilder();
-    NodeLocation fileLocation = NodeLocation.make(file);
+    NodeLocation fileLocation = NodeLocation.getNodeLocationByNode(file);
     String repository = fileLocation.getRepository();
     String workspaceName = fileLocation.getWorkspace();
     String nodeIdentifiler = file.isNodeType("mix:referenceable") ? file.getUUID() : file.getPath().replaceFirst("/","");
@@ -217,16 +221,15 @@ public class RESTImagesRendererService implements ResourceContainer{
              .append(nodeIdentifiler)
              .append("?param=file");
       return builder.toString();
-    } else {
-      builder.append("/").append(portalName).append("/")
-             .append(restContextName).append("/")
-             .append("images/")
-             .append(repository).append("/")
-             .append(workspaceName).append("/")
-             .append(nodeIdentifiler)
-             .append("?param=").append(propertyName);
-      return builder.toString();
-    }
+    } 
+    builder.append("/").append(portalName).append("/")
+           .append(restContextName).append("/")
+           .append("images/")
+           .append(repository).append("/")
+           .append(workspaceName).append("/")
+           .append(nodeIdentifiler)
+           .append("?param=").append(propertyName);
+    return builder.toString();
   }
 
   @Deprecated
