@@ -7,6 +7,7 @@ import javax.jcr.Node;
 import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.container.PortalContainer;
 import org.exoplatform.ecm.connector.fckeditor.FCKUtils;
+import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.jcr.access.AccessControlEntry;
 import org.exoplatform.services.jcr.access.AccessControlList;
 import org.exoplatform.services.jcr.access.PermissionType;
@@ -15,16 +16,26 @@ import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.core.WCMConfigurationService;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 public class FCKFileHandler {
-
+  
+  public static Element createFileElement(Document document,
+      String fileType,
+      Node sourceNode,
+      Node displayNode,
+      String currentPortal) throws Exception {
+    return createFileElement(document, fileType, sourceNode, displayNode, currentPortal, null);    
+  }
+  
   public static Element createFileElement(Document document,
                                           String fileType,
                                           Node sourceNode,
                                           Node displayNode,
-                                          String currentPortal) throws Exception {
+                                          String currentPortal,
+                                          LinkManager linkManager) throws Exception {
     Element file = document.createElement("File");
     file.setAttribute("name", displayNode.getName());
     SimpleDateFormat formatter = (SimpleDateFormat) SimpleDateFormat.getDateTimeInstance(SimpleDateFormat.SHORT,
@@ -39,6 +50,19 @@ public class FCKFileHandler {
     }
     file.setAttribute("creator", sourceNode.getProperty("exo:owner").getString());
     file.setAttribute("path", displayNode.getPath());
+    if (linkManager==null) {
+     linkManager = WCMCoreUtils.getService(LinkManager.class) ;
+    }
+    if (linkManager.isLink(sourceNode)) {
+     Node targetNode = linkManager.getTarget(sourceNode);
+     if (targetNode!=null) {
+       file.setAttribute("linkTarget", targetNode.getPath());
+     }else {
+       file.setAttribute("linkTarget", sourceNode.getPath());
+     }
+    }else {
+     file.setAttribute("linkTarget", sourceNode.getPath());
+    }
     if (sourceNode.isNodeType("nt:file")) {
       Node content = sourceNode.getNode("jcr:content");
       file.setAttribute("nodeType", content.getProperty("jcr:mimeType").getString());

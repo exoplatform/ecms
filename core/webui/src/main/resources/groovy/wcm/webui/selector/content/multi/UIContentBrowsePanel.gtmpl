@@ -2,7 +2,8 @@
 	import org.exoplatform.wcm.webui.selector.content.multi.UIContentBrowsePanelMulti;
 	def rcontext = _ctx.getRequestContext();
 	def jsManager = rcontext.getJavascriptManager();
-  	def itemPaths = uicomponent.getItemPaths();
+  def itemPaths = uicomponent.getItemPaths();
+  def itemTargetPath = uicomponent.getItemTargetPath();
 	jsManager.importJavascript("eXo.wcm.backoffice.private.WCMUtils", "/eXoWCMResources/javascript");
 	jsManager.importJavascript("eXo.wcm.frontoffice.private.ContentSelector", "/eXoWCMResources/javascript");
 	if (uicomponent instanceof UIContentBrowsePanelMulti) {
@@ -15,7 +16,7 @@
 	}else {
 		jsManager.addOnLoadJavascript("eXo.ecm.ECS.initRequestXmlTree('multi')");
 	}
-	jsManager.addOnLoadJavascript("eXo.ecm.ECS.loadListContent('"+itemPaths+"')");%>
+	jsManager.addOnLoadJavascript("eXo.ecm.ECS.loadListContent('"+itemPaths+"', '" +itemTargetPath +"')");%>
 <div id="$uicomponent.id" class="UIWCMSearchContainer $uicomponent.id">
 	<div class="ActionBar">
 		<div class="FilterTitle">Filter</div>

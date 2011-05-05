@@ -29,8 +29,6 @@ import org.exoplatform.ecm.webui.selector.UISelectable;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.drives.ManageDriveService;
 import org.exoplatform.services.cms.views.ApplicationTemplateManagerService;
-import org.exoplatform.services.jcr.RepositoryService;
-import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.wcm.webui.Utils;

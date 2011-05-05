@@ -638,11 +638,12 @@ EcmContentSelector.prototype.listMutilFiles = function(list) {
 		var clazzItem = eXo.ecm.ECS.getClazzIcon(list[i].getAttribute("nodeType"));
 		var url 			= list[i].getAttribute("url");
 		var path 			= eXo.ecm.ECS.repositoryName+":"+eXo.ecm.ECS.workspaceName+":"+list[i].getAttribute("path");
+		var linkTarget = list[i].getAttribute("linkTarget");
 		var nodeType	= list[i].getAttribute("nodeType");
 		var node = list[i].getAttribute("name");
 		var newRow = tblRWS.insertRow(i+1);
 		newRow.className = clazz;
-		newRow.insertCell(0).innerHTML = '<a class="Item default16x16Icon '+clazzItem+'" url="'+url+'" path="'+path+'" nodeType="'+nodeType+'" style = "overflow:hidden;" title="'+decodeURIComponent(node)+'" onclick="eXo.ecm.ECS.addFile2ListContent(this);">'+node.trunc(15,false)+'</a>';
+		newRow.insertCell(0).innerHTML = '<a class="Item default16x16Icon '+clazzItem+'" url="'+url+'" linkTarget ="' + linkTarget + '" path="'+path+'" nodeType="'+nodeType+'" style = "overflow:hidden;" title="'+decodeURIComponent(node)+'" onclick="eXo.ecm.ECS.addFile2ListContent(this);">'+node.trunc(15,false)+'</a>';
 				
 	}
 	
@@ -900,10 +901,11 @@ EcmContentSelector.prototype.addFile2ListContent = function(objNode) {
 	var url = objNode.getAttribute("url");  
 	var nodeType	= objNode.getAttribute("nodeType");
 	var path = objNode.getAttribute("path");
+	var linkTarget = objNode.getAttribute("linkTarget");
 	var selectedNodeList = eXo.core.DOMUtil.findDescendantsByClass(tblListFilesContent, "a", "Item");
 	for(var i = 0; i < selectedNodeList.length; i++) {
-		var selectedNodePath = selectedNodeList[i].getAttribute("path");
-		if(path == selectedNodePath) {
+		var selectedNodePath = selectedNodeList[i].getAttribute("linkTarget");
+		if(linkTarget == selectedNodePath) {
 			alert("This content is already in the list content.");
 			return;
 		}
@@ -911,7 +913,7 @@ EcmContentSelector.prototype.addFile2ListContent = function(objNode) {
 	var	clazzItem = objNode.className;
 	var newRow = tblListFilesContent.insertRow(tblListFilesContent.children[0].children.length);
 	newRow.className = "Item";
-	newRow.insertCell(0).innerHTML = '<a class="Item" url="'+url+'" path="'+decodeURIComponent(path)+'" nodeType="'+nodeType+'style = "overflow:hidden" title="'+decodeURIComponent(objNode)+'">'+decodeURIComponent(path).trunc(15,false)+'</a>';
+	newRow.insertCell(0).innerHTML = '<a class="Item" url="'+url+'" linkTarget ="' + linkTarget +'" path="'+decodeURIComponent(path)+'" nodeType="'+nodeType+'style = "overflow:hidden" title="'+decodeURIComponent(objNode)+'">'+decodeURIComponent(path).trunc(15,false)+'</a>';
 	newRow.insertCell(1).innerHTML = '<div class="DeleteIcon" onclick="eXo.ecm.ECS.removeContent(this);"><span></span></div>';
 	this.insertMultiContent("SaveTemporary", path);	
 };
@@ -919,16 +921,20 @@ EcmContentSelector.prototype.addFile2ListContent = function(objNode) {
 EcmContentSelector.prototype.addFileSearchListSearch = function() {
 };
 
-EcmContentSelector.prototype.loadListContent = function(strArray) {
+EcmContentSelector.prototype.loadListContent = function(strArray, strTargetArray) {
 	if(!strArray) return;
+	if (!strTargetArray) return;
 	var tblListFilesContent = document.getElementById("ListFilesContent");
 	var arrContent = strArray.split(";");
+	var arrTarget = strTargetArray.split(";");
+	if (arrContent.length>arrTarget.length) return;
 	if(arrContent.length > 0) {
 		var trNoContent = eXo.core.DOMUtil.findFirstDescendantByClass(tblListFilesContent, "td", "TRNoContent");
 		if(trNoContent) tblListFilesContent.deleteRow(trNoContent.parentNode.rowIndex);
 		var clazz = 'OddItem';
 		for(var i = 0; i < arrContent.length-1; i++) {
 			var path = arrContent[i];
+			var target = arrTarget[i];
 			var newRow = tblListFilesContent.insertRow(tblListFilesContent.children[0].children.length);
 			if(clazz == 'EventItem') {
 				clazz = 'OddItem';
@@ -938,7 +944,7 @@ EcmContentSelector.prototype.loadListContent = function(strArray) {
 			newRow.className = clazz;
 			var strTmpArr = arrContent[i].split('/');
 			var nodeName = strTmpArr[strTmpArr.length-1];
-			newRow.insertCell(0).innerHTML = '<a class="Item" path="'+path+'">'+nodeName+'</a>';
+			newRow.insertCell(0).innerHTML = '<a class="Item" linkTarget ="'+ target+ '" path="'+path+'">'+nodeName+'</a>';
 			newRow.insertCell(1).innerHTML = '<div  class="DeleteIcon" onclick="eXo.ecm.ECS.removeContent(this);"><span></span></div>';
 		}
 	}
