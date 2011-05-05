@@ -173,15 +173,38 @@ background: url('background/ContextHelp/ShowHelpIcon.gif') no-repeat left center
     width: 16px; height:16px;
     float: left; margin: 0px 0px 0px 5px;
     cursor: pointer;
+	position: relative;
 }
+
+/********Thanh css********/
 
 .InContextHelpContent {
   position: absolute;
-  display:none;
+  width: 454px; 
+  left: -450px;
+  display: none;
   top: 8px;
-  left: 0px;
   z-index: 100;
 }
+
+.InContextHelpPopup  {
+  background: #fff;
+  -moz-border-radius: 8px;
+  -webkit-border-radius: 8px;
+  -moz-box-shadow: 3px 5px 13px 0;
+  -webkit-box-shadow: 3px 5px 13px 0;
+  border: 1px solid #7b7b7b;
+  margin-right: 17px;
+}
+
+.LeftInContextHelpPopup {
+  background: url('background/ContextHelp/TopRightLeft31x47.png') no-repeat top right;
+  padding: 10px 31px 10px 10px;
+  margin: -2px -19px 0px 0px;
+  min-height: 35px;
+}
+
+/********End Thanhcss********/
 
 .InContextHelpContentData {
     white-space:normal;
@@ -195,76 +218,7 @@ background: url('background/ContextHelp/ShowHelpIcon.gif') no-repeat left center
     background: #ffffff;
 }
 
-.LeftInContextHelpPopup .InContextHelpTL {
-background: url('background/ContextHelp/TopLeftLeft13x47.png') no-repeat top left;
-    padding-left:13px;
-}
-.LeftInContextHelpPopup .InContextHelpTR {
-background: url('background/ContextHelp/TopRightLeft31x47.png') no-repeat top right;
-    padding-right:31px;
-}
-.LeftInContextHelpPopup .InContextHelpTC {
-background: #ffffff url('background/ContextHelp/TopCenterLeft1x14.png') repeat-x top;
-    height:47px;
-}
 
-.LeftInContextHelpPopup .InContextHelpML {
-background: url('background/ContextHelp/LeftMiddleLeft13x1.png') repeat-y top left;
-    padding-left:13px;
-}
-.LeftInContextHelpPopup .InContextHelpMR {
-background: url('background/ContextHelp/MiddleRightLeft31x1.png') repeat-y top right;
-    padding-right:31px;
-}
-
-.LeftInContextHelpPopup .InContextHelpBL {
-background: url('background/ContextHelp/BottomLeftLeft13x17.png') no-repeat top left;
-    padding-left:13px;
-}
-.LeftInContextHelpPopup .InContextHelpBR {
-background: url('background/ContextHelp/BottomRightLeft31x17.png') no-repeat top right;
-    padding-right:31px;
-}
-.LeftInContextHelpPopup .InContextHelpBC {
-background: url('background/ContextHelp/BottomCenterLeft1x17.png') repeat-x top;
-    height:17px;
-}
-
-
-.RightInContextHelpPopup .InContextHelpTL {
-background: url('background/ContextHelp/TopLeft28x49.png') no-repeat top left;
-    padding-left:28px;
-}
-.RightInContextHelpPopup .InContextHelpTR {
-background: url('background/ContextHelp/TopRight15x49.png') no-repeat top right;
-    padding-right:15px;
-}
-.RightInContextHelpPopup .InContextHelpTC {
-background: #ffffff url('background/ContextHelp/TopCenter1x12.png') repeat-x top;
-    height:49px;
-}
-
-.RightInContextHelpPopup .InContextHelpML {
-background: url('background/ContextHelp/MiddleLeft28x1.png') repeat-y top left;
-    padding-left:28px;
-}
-.RightInContextHelpPopup .InContextHelpMR {
-background: url('background/ContextHelp/MiddleRight15x1.png') repeat-y top right;
-    padding-right:15px;
-}
-
-.RightInContextHelpPopup .InContextHelpBL {
-background: url('background/ContextHelp/BottomLeft28x20.png') no-repeat bottom left;
-    padding-left:28px;
-}
-.RightInContextHelpPopup .InContextHelpBR {
-background: url('background/ContextHelp/BottomRight16x20.png') no-repeat bottom right;
-    padding-right:16px;
-}
-.RightInContextHelpPopup .InContextHelpBC {
-background: url('background/ContextHelp/BottomCenter1x20.png') repeat-x bottom;
-    height:20px;
-}
 
 /* Context Help CSS END */
 

@@ -89,6 +89,19 @@
   text-align: center;
 }
 
+.UICLVPortlet .UICLVConfig .tdShowHelp {
+  width: 30px;
+}
+
+.UICLVPortlet .UICLVConfig .fieldsetPreferences{
+	margin: 10px;
+	border: 1px solid #b7b7b7;
+}
+
+.UICLVPortlet .UICLVConfig .UIFormGrid {
+	width: 100%;
+}
+
 .UICLVPortlet .UIStartEditionInPageWizard {
   text-align: center;
   padding: 20px;
