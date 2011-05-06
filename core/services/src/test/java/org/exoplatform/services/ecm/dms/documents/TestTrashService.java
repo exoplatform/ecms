@@ -314,5 +314,5 @@ public class TestTrashService extends BaseDMSTestCase {
     session.save();
     session.save();
   }
-
+  
 }
