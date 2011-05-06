@@ -174,7 +174,7 @@
 <tr>
 	<td>type</td>
 	<td>//html/body</td>
-	<td>Thap len rung ro mot troi may. Ngat ngay nang trong tinh yeu</td>
+	<td>Test_SNF_ECMS_45</td>
 </tr>
 <tr>
 	<td>selectFrame</td>
@@ -189,7 +189,7 @@
 <tr>
 	<td>type</td>
 	<td>//html/body</td>
-	<td>Vet nang chieu buong muon mang. Anh nho em nguoi yeu oi</td>
+	<td>Test_SNF_ECMS_45</td>
 </tr>
 <tr>
 	<td>selectFrame</td>
@@ -352,8 +352,13 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>//div[text()='View language']</td>
+	<td></td>
+</tr>
+<tr>
 	<td>click</td>
-	<td>//div[@id=&quot;UIMultiLanguageManager&quot;]/div/div/div[1]/div/div/div/div/div[1]/div/div/div/div</td>
+	<td>//div[text()='View language']</td>
 	<td></td>
 </tr>
 <tr>
@@ -409,7 +414,7 @@
 <tr>
 	<td>select</td>
 	<td>languages</td>
-	<td>label=English</td>
+	<td>label=English(default)</td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
@@ -437,23 +442,38 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>link=Delete</td>
+	<td></td>
+</tr>
+<tr>
 	<td>click</td>
 	<td>link=Delete</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@id='UIPopupWindow']/div/div[2]/div/div/div/div/div/div/div/div[2]/table/tbody/tr/td/div[1]/div/div/div/a</td>
+	<td>//div[@id='UIPopupWindow']//a[text()=&quot;OK&quot;]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[@id='UIPopupWindow']/div/div[2]/div/div/div/div/div/div/div/div[2]/table/tbody/tr/td/div[1]/div/div/div/a</td>
+	<td>//div[@id='UIPopupWindow']//a[text()=&quot;OK&quot;]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>pause</td>
 	<td>10000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextNotPresent</td>
+	<td>link=Test_SNF_ECMS_45</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>link=Test_SNF_ECMS_45</td>
 	<td></td>
 </tr>
 <tr>
