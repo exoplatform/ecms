@@ -1,8 +1,3 @@
-Title
-.UISingleContentViewerPortlet {
-  overflow: hidden;
-}
-
 .UISingleContentViewerPortlet .WebContentContainer {
   
 }
@@ -287,8 +282,12 @@ Title
   text-decoration: underline;
 }
 
-.UISingleContentViewerPortlet .UIFormGrid td {
-  padding: 0px;
+.UISingleContentViewerPortlet .UIFormGrid td.FieldLabel,.UISingleContentViewerPortlet .UIFormGrid td  {
+  vertical-align: middle;
+}
+
+.UISingleContentViewerPortlet .UIFormGrid td.AlignRight  {
+  text-align: right;
 }
 
 .UISingleContentViewerPortlet .UIContentDialogConfig .UIFormGrid td.FieldLabel {
@@ -321,7 +320,6 @@ Title
     line-height: 20px;
     padding: 2px 0 0;
     cursor: text;
-    over-flow: hidden;
 }
 
 .UIPresentationContainer .EditTitle {
@@ -379,6 +377,7 @@ Title
 .UISingleContentViewerPortlet .UIContainerConfigOptions .ContainerConfigOptions {
   line-height: 16px;
   border: 1px solid white;
+  width:auto;
 }
 
 .UISingleContentViewerPortlet .UIContainerConfigOptions .ContainerConfigOptions .DescripberStep {
@@ -391,9 +390,15 @@ Title
   margin-bottom: 1px solid #b7b7b7;
 }
 
-.UICategoriesSelector .UICategoriesSelectPanel .UIGrid { !
-  width: 95%;
+*+html .UICategoriesSelector .UICategoriesSelectPanel .UIGrid { 
+width: 95%;
 }
+
+* html .UICategoriesSelector .UICategoriesSelectPanel .UIGrid { 
+width: 95%;
+}
+
+
 
 .UISingleContentViewerPortlet .UIStartEditionInPageWizard {
   text-align: center;
@@ -470,6 +475,7 @@ Title
 }
 
 /*============================= UISCVPreferences ====================*/
+
 .UISingleContentViewerPortlet .UISCVPreferences .SelectFolderPathIcon {
   background: url('icons/16x16/AddPage.gif') no-repeat left center;
   width: 16px;
@@ -487,13 +493,9 @@ Title
 }
 
 .UISingleContentViewerPortlet .UISCVPreferences .tdShowHelp {
-  text-align: right;
   width: 30px;
 }
 
-.UISingleContentViewerPortlet .UISCVPreferences .UIFormInputSet {
-  padding:0px;
-}
 
 .UISingleContentViewerPortlet .UISCVPreferences a.AdvancePreferences {
   color:#1111CC;
@@ -502,11 +504,8 @@ Title
 }
 
 .UISingleContentViewerPortlet .UISCVPreferences .fieldsetPreferences{
- margin-right: 10px; 
- margin-left: 10px; 
- margin-bottom: 10px; 
- overflow: hidden; 
- border: 1px solid #b7b7b7;
+	margin:10px;
+	border: 1px solid #b7b7b7;
 }
 .UISingleContentViewerPortlet .UIPageSelector {
   margin: 0;
@@ -530,4 +529,16 @@ Title
   float: left;
   width: 49%;
   padding-left:10px;
+}
+
+.UIAction .ActionContainer a:hover {
+	color:#058ee6;
+}
+
+.UISingleContentViewerPortlet .UISCVPreferences #UISCVShowAdvanceOption {
+	margin-left:21px;
+}
+
+.UISingleContentViewerPortlet .UISCVPreferences a.AdvancePreferences {
+	outline: none;
 }
