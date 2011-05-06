@@ -258,8 +258,9 @@ public class UICLVPresentation extends UIContainer {
     String clvBy = Utils.getPortletPreference(UICLVPortlet.PREFERENCE_SHOW_CLV_BY);
     if (clvBy == null || clvBy.length() == 0)
       clvBy = UICLVPortlet.DEFAULT_SHOW_CLV_BY;
-    link = baseURI + portalURI + basePath + "?" + clvBy + "=" + nodeLocation.getRepository() + ":"
-        + nodeLocation.getWorkspace() + ":" + node.getPath();
+        
+    String params =  nodeLocation.getRepository() + ":" + nodeLocation.getWorkspace() +":"+ node.getPath();
+    link = baseURI + portalURI + basePath + "?" + clvBy + "=" + Text.escape(params);
 
     FriendlyService friendlyService = getApplicationComponent(FriendlyService.class);
     link = friendlyService.getFriendlyUri(link);
