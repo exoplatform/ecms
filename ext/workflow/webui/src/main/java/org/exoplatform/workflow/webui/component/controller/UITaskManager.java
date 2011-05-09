@@ -21,6 +21,7 @@ import javax.jcr.PathNotFoundException;
 import org.exoplatform.services.workflow.Task;
 import org.exoplatform.services.workflow.WorkflowServiceContainer;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
+import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.core.UIContainer;
 import org.exoplatform.webui.core.UIPopupComponent;
 import org.exoplatform.webui.core.UIPopupWindow;
@@ -87,4 +88,13 @@ public class UITaskManager extends UIContainer implements UIPopupComponent {
   }
 
   public void deActivate() throws Exception { }
+
+public void initPopup(UIComponent uiComp) throws Exception {
+	 removeChildById("PopupComponent") ;
+	 UIPopupWindow uiPopup = addChild(UIPopupWindow.class, null, "PopupComponent") ;
+	 uiPopup.setUIComponent(uiComp) ;
+	 uiPopup.setWindowSize(640, 300) ;
+	 uiPopup.setShow(true) ;
+	 uiPopup.setResizable(true) ;	
+}
 }

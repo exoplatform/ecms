@@ -111,5 +111,22 @@
       <rootNodeInfo>UITreeTaxonomyList</rootNodeInfo>
     </label>
   </UITreeTaxonomyList>  
+     <UIWorkspaceList>
+    <label>
+      <workspaceName>Workspace</workspaceName>
+      <rootNodeInfo>UIWorkspaceList</rootNodeInfo>
+      <rootNodePath>Root path</rootNodePath>
+    </label>
+  </UIWorkspaceList>
+  <rootNodeInfo>
+    <title>
+      <AddRootNode>Add root node</AddRootNode>
+    </title>
+  </rootNodeInfo> 
+  <PopupComponent>
+    <title>
+      <UIOneNodePathSelector>Select path</UIOneNodePathSelector>
+    </title>   
+  </PopupComponent>
 </bundle>
 

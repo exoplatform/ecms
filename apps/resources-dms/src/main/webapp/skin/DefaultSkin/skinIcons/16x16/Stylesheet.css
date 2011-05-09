@@ -933,3 +933,11 @@
   background: url('icons/Properties/jcr-versionLabels.gif') no-repeat left center; /* orientation=lt */
   background: url('icons/Properties/jcr-versionLabels.gif') no-repeat right center; /* orientation=rt */
 }
+
+.SelectPath24x24Icon {
+  float: left; /* orientation=lt */
+	float: right; /* orientation=rt */
+	width: 16px;	
+	height: 16px;
+  background: url('/ecmexplorer/skin/icons/24x24/DefaultSkin/MagnifierIconNews.png') no-repeat;
+}

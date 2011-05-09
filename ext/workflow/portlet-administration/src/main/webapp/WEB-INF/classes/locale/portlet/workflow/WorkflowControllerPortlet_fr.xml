@@ -111,4 +111,21 @@
       <rootNodeInfo>UITreeTaxonomyList</rootNodeInfo>
     </label>
   </UITreeTaxonomyList>
+     <UIWorkspaceList>
+    <label>
+      <workspaceName>Espace de travail</workspaceName>
+      <rootNodeInfo>UIWorkspaceList</rootNodeInfo>
+      <rootNodePath>Racine de l'arborescence</rootNodePath>
+    </label>
+  </UIWorkspaceList>
+  <rootNodeInfo>
+    <title>
+      <AddRootNode>Ajouter le noeud racine</AddRootNode>
+    </title>
+  </rootNodeInfo> 
+  <PopupComponent>
+    <title>
+      <UIOneNodePathSelector>Choisir un chemin</UIOneNodePathSelector>
+    </title>   
+  </PopupComponent>
 </bundle>
