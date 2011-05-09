@@ -21,6 +21,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.jcr.ItemExistsException;
 import javax.jcr.Node;
 
 import org.apache.commons.logging.Log;
@@ -65,6 +66,7 @@ import org.exoplatform.webui.form.UIFormDateTimeInput;
     @EventConfig(listeners = UIPublicationPanel.RestoreVersionActionListener.class),
     @EventConfig(listeners = UIPublicationPanel.SeeAllVersionActionListener.class),
     @EventConfig(listeners = UIPublicationPanel.SaveActionListener.class),
+    @EventConfig(listeners = UIPublicationPanel.ResetActionListener.class),
     @EventConfig(listeners = UIPublicationPanel.CloseActionListener.class) })
 public class UIPublicationPanel
                                extends
@@ -85,7 +87,7 @@ public class UIPublicationPanel
   public UIPublicationPanel() throws Exception {
     addUIFormInput(new UIFormDateTimeInput(START_PUBLICATION, START_PUBLICATION, null));
     addUIFormInput(new UIFormDateTimeInput(END_PUBLICATION, END_PUBLICATION, null));
-    setActions(new String[] { "Save", "Close" });
+    setActions(new String[] { "Save","Reset", "Close" });
   }
 
   public void init(Node node) throws Exception {
@@ -173,25 +175,43 @@ public class UIPublicationPanel
       Calendar endDate = endPublication.getCalendar();
       Node node = publicationPanel.getCurrentNode();
       try {
-        if (!"".equals(startPublication.getValue())) {
-          startDate.getTime();
-          node.setProperty(AuthoringPublicationConstant.START_TIME_PROPERTY, startDate);
+        if ((!"".equals(startPublication.getValue())) || (!"".equals(endPublication.getValue()))) {
+          if (!"".equals(startPublication.getValue()))
+            node.setProperty(AuthoringPublicationConstant.START_TIME_PROPERTY, startDate);
+          if (!"".equals(endPublication.getValue()))
+            node.setProperty(AuthoringPublicationConstant.END_TIME_PROPERTY, endDate);
           node.getSession().save();
-        }
-        if (!"".equals(endPublication.getValue())) {
-          endDate.getTime();
-          node.setProperty(AuthoringPublicationConstant.END_TIME_PROPERTY, endDate);
-          node.getSession().save();
-        }
+        }   
       } catch (NullPointerException e) {
         UIApplication uiApp = publicationPanel.getAncestorOfType(UIApplication.class);
         uiApp.addMessage(new ApplicationMessage("UIPublicationPanel.msg.invalid-format", null));
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
         return;
+      }catch (ItemExistsException iee){
+    	LOG.error("Error when adding properties to node");    	 
       }
       UIPopupContainer uiPopupContainer = (UIPopupContainer) publicationPanel.getAncestorOfType(UIPopupContainer.class);
       uiPopupContainer.deActivate();
       event.getRequestContext().addUIComponentToUpdateByAjax(uiPopupContainer);
+    }
+  }
+  
+  public static class ResetActionListener extends EventListener<UIPublicationPanel> {
+    public void execute(Event<UIPublicationPanel> event) throws Exception {
+      UIPublicationPanel publicationPanel = event.getSource();
+      Node node = publicationPanel.getCurrentNode();
+      UIFormDateTimeInput startPublication = publicationPanel.getChildById(START_PUBLICATION);
+      startPublication.setCalendar(null);
+      if (node.hasProperty(AuthoringPublicationConstant.START_TIME_PROPERTY)) {
+        node.getProperty(AuthoringPublicationConstant.START_TIME_PROPERTY).remove();
+        node.save();
+      }
+      UIFormDateTimeInput endPublication = publicationPanel.getChildById(END_PUBLICATION);
+      endPublication.setCalendar(null);
+      if (node.hasProperty(AuthoringPublicationConstant.END_TIME_PROPERTY)) {
+        node.getProperty(AuthoringPublicationConstant.END_TIME_PROPERTY).remove();
+        node.save();
+      }
     }
   }
 
