@@ -133,12 +133,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@id='UISelectPathPanel']/table/tbody/tr[4]/td[2]/a/div</td>
+	<td>//div[@id='UISelectPathPanel']//a[contains(@href,&quot;Documents&quot;)]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[@id='UISelectPathPanel']/table/tbody/tr[4]/td[2]/a/div</td>
+	<td>//div[@id='UISelectPathPanel']//a[contains(@href,&quot;Documents&quot;)]</td>
 	<td></td>
 </tr>
 <tr>
@@ -162,13 +162,23 @@
 	<td></td>
 </tr>
 <tr>
+	<td>verifyValue</td>
+	<td>homePath</td>
+	<td>/Documents</td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>-- Choose Show sidebae --</td>
+	<td></td>
+</tr>
+<tr>
 	<td>waitForElementPresent</td>
-	<td>//form[@id='UIDriveForm']/div[3]/div/div/div/div/div/div[8]/table/tbody/tr/td[2]//input[@class='checkbox']</td>
+	<td>//form[@id='UIDriveForm']//input[@name='viewSideBar']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//form[@id='UIDriveForm']/div[3]/div/div/div/div/div/div[8]/table/tbody/tr/td[2]//input[@class='checkbox']</td>
+	<td>//form[@id='UIDriveForm']//input[@name='viewSideBar']</td>
 	<td></td>
 </tr>
 <tr>
@@ -339,7 +349,7 @@
 <tr>
 	<td>typeKeys</td>
 	<td>//html/body</td>
-	<td>Manchester United</td>
+	<td>Test_SNF_ECMS_80</td>
 </tr>
 <tr>
 	<td>selectFrame</td>
@@ -354,7 +364,7 @@
 <tr>
 	<td>typeKeys</td>
 	<td>//html/body</td>
-	<td>Manchester United FC</td>
+	<td>Test_SNF_ECMS_80</td>
 </tr>
 <tr>
 	<td>selectFrame</td>
@@ -427,6 +437,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>link=Business Process Controller</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>link=Business Process Controller</td>
 	<td></td>
@@ -462,13 +477,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>link=Login</td>
+	<td>echo</td>
+	<td>-- Edit content of document</td>
 	<td></td>
 </tr>
 <tr>
-	<td>echo</td>
-	<td>-- Edit content of document</td>
+	<td>click</td>
+	<td>link=Login</td>
 	<td></td>
 </tr>
 <tr>
@@ -598,12 +613,22 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//table[@class='UIFormGrid']/tbody/tr[3]/td[@class='FieldComponent']/input[@type='text']</td>
+	<td>//input[@name='endDate']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//table[@class='UIFormGrid']/tbody/tr[3]/td[@class='FieldComponent']/input[@type='text']</td>
+	<td>//input[@name='endDate']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//a[@title=&quot;Next Month&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//a[@title=&quot;Next Month&quot;]</td>
 	<td></td>
 </tr>
 <tr>
@@ -743,12 +768,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@id='UIECMAdminPortlet']/div[1]/div[1]/div[2]/div/div[2]/div[1]/div/div/div/div[2]</td>
+	<td>//div[@id='UIECMAdminPortlet']//div[contains(text(),&quot;Content Presentation&quot;)]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[@id='UIECMAdminPortlet']/div[1]/div[1]/div[2]/div/div[2]/div[1]/div/div/div/div[2]</td>
+	<td>//div[@id='UIECMAdminPortlet']//div[contains(text(),&quot;Content Presentation&quot;)]</td>
 	<td></td>
 </tr>
 <tr>
@@ -778,12 +803,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//tr[10]/td[7]/div/img[2]</td>
+	<td>//img[contains(@onclick,&quot;Workflow&quot;) and @title=&quot;Delete&quot;]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//tr[10]/td[7]/div/img[2]</td>
+	<td>//img[contains(@onclick,&quot;Workflow&quot;) and @title=&quot;Delete&quot;]</td>
 	<td></td>
 </tr>
 <tr>

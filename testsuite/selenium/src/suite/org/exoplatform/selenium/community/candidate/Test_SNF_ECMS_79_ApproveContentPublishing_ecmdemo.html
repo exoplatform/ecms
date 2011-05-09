@@ -127,6 +127,11 @@
 	<td>label=collaboration</td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>//option[@value='collaboration']</td>
+	<td></td>
+</tr>
+<tr>
 	<td>click</td>
 	<td>//option[@value='collaboration']</td>
 	<td></td>
@@ -143,12 +148,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@id='UISelectPathPanel']/table/tbody/tr[4]/td[2]/a/div</td>
+	<td>//div[@id='UISelectPathPanel']//a[contains(@href,&quot;Documents&quot;)]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[@id='UISelectPathPanel']/table/tbody/tr[4]/td[2]/a/div</td>
+	<td>//div[@id='UISelectPathPanel']//a[contains(@href,&quot;Documents&quot;)]</td>
 	<td></td>
 </tr>
 <tr>
@@ -178,12 +183,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//form[@id='UIDriveForm']/div[3]/div/div/div/div/div/div[8]/table/tbody/tr/td[2]//input[@class='checkbox']</td>
+	<td>viewSideBar</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//form[@id='UIDriveForm']/div[3]/div/div/div/div/div/div[8]/table/tbody/tr/td[2]//input[@class='checkbox']</td>
+	<td>viewSideBar</td>
 	<td></td>
 </tr>
 <tr>
@@ -359,7 +364,7 @@
 <tr>
 	<td>type</td>
 	<td>//html/body</td>
-	<td>Manchester United</td>
+	<td>Test_SNF_ECMS_79</td>
 </tr>
 <tr>
 	<td>selectFrame</td>
@@ -374,7 +379,7 @@
 <tr>
 	<td>type</td>
 	<td>//html/body</td>
-	<td>Manchester United FC</td>
+	<td>Test_SNF_ECMS_79</td>
 </tr>
 <tr>
 	<td>selectFrame</td>
@@ -457,6 +462,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>link=Business Process Controller</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>link=Business Process Controller</td>
 	<td></td>
@@ -491,7 +501,11 @@
 	<td>//input[@name='endDate']</td>
 	<td></td>
 </tr>
-<!--days :(-->
+<tr>
+	<td>echo</td>
+	<td>-- Choose date time --</td>
+	<td></td>
+</tr>
 <tr>
 	<td>waitForElementPresent</td>
 	<td>//div[@id='BlockCaledar']/div/table/tbody/tr/td[5]/a</td>
@@ -504,12 +518,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//tr[5]/td[1]/a</td>
+	<td>link=27</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//tr[5]/td[1]/a</td>
+	<td>link=27</td>
 	<td></td>
 </tr>
 <tr>
@@ -519,12 +533,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//form[@id='UITask']/div[3]/div/div[1]/div/table/tbody/tr/td/div[1]/div/div/div/a</td>
+	<td>link=Approve</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//form[@id='UITask']/div[3]/div/div[1]/div/table/tbody/tr/td/div[1]/div/div/div/a</td>
+	<td>link=Approve</td>
 	<td></td>
 </tr>
 <tr>
@@ -573,6 +587,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>echo</td>
+	<td>-- Years-</td>
+	<td></td>
+</tr>
+<tr>
 	<td>waitForElementPresent</td>
 	<td>//div[2]/div[2]/div/div/div/div[1]/div[2]/div/div[1]/div</td>
 	<td></td>
@@ -583,6 +602,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>echo</td>
+	<td>-- Month --</td>
+	<td></td>
+</tr>
+<tr>
 	<td>waitForElementPresent</td>
 	<td>//div[2]/div/div[2]/div/div/div/div[2]/a</td>
 	<td></td>
@@ -590,6 +614,11 @@
 <tr>
 	<td>click</td>
 	<td>//div[2]/div/div[2]/div/div/div/div[2]/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>-- Days--</td>
 	<td></td>
 </tr>
 <tr>
@@ -629,12 +658,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@id='UIECMAdminPortlet']/div[1]/div[1]/div[2]/div/div[2]/div[1]/div/div/div/div[2]</td>
-	<td></td>
+	<td>//div[@id='UIECMAdminPortlet']//div[contains(text(),&quot;Content Presentation&quot;)]</td>
+	<td><br /></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[@id='UIECMAdminPortlet']/div[1]/div[1]/div[2]/div/div[2]/div[1]/div/div/div/div[2]</td>
+	<td>//div[@id='UIECMAdminPortlet']//div[contains(text(),&quot;Content Presentation&quot;)]</td>
 	<td></td>
 </tr>
 <tr>
@@ -659,12 +688,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@id='UIDriveList']/table/tbody/tr[10]/td[7]/div/img[2]</td>
+	<td>//div[@id='UIDriveList']//img[contains(@onclick,&quot;Workflow&quot;) and @title=&quot;Delete&quot;]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[@id='UIDriveList']/table/tbody/tr[10]/td[7]/div/img[2]</td>
+	<td>//div[@id='UIDriveList']//img[contains(@onclick,&quot;Workflow&quot;) and @title=&quot;Delete&quot;]</td>
 	<td></td>
 </tr>
 <tr>
