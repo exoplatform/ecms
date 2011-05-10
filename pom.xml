@@ -49,13 +49,13 @@
     <org.gatein.wci.version>2.0.2-GA</org.gatein.wci.version>
     <org.javassist.version>3.14.0-GA</org.javassist.version>
     <commons-collections.version>3.2.1</commons-collections.version>
-    <commons-pool.version>1.2</commons-pool.version>
+    <commons-pool.version>1.5.5</commons-pool.version>
     <html-parser.version>1.6</html-parser.version>
     <stax.version>1.0</stax.version>
     <org.jvnet.jaxb2.maven2.version>0.1</org.jvnet.jaxb2.maven2.version>
     <cglib.version>2.2</cglib.version>
     <antlr.version>2.7.6rc1</antlr.version>
-    <commons-dbcp.version>1.2.1</commons-dbcp.version>
+    <commons-dbcp.version>1.4</commons-dbcp.version>
     <jcr.version>1.0</jcr.version>
     <org.jsecurity.version>0.9.0</org.jsecurity.version>
     <javax.transaction.version>1.0.1B</javax.transaction.version>
