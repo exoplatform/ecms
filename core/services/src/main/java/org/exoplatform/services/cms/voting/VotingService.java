@@ -51,6 +51,15 @@ public interface VotingService {
    */
   public long getVoteTotal(Node node) throws Exception;
 
+  /**
+   * Check if user had already voted on the given node or not
+   * 
+   * @param node the node that will be voted
+   * @param userName the name of user had voted
+   * @param language language of to-be-voted node
+   * @return
+   * @throws Exception
+   */
   public boolean isVoted(Node node, String userName, String language) throws Exception;
 
 }

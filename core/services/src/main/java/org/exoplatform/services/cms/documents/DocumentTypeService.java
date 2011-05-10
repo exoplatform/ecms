@@ -47,7 +47,6 @@ public interface DocumentTypeService {
    * @param workspace The name of workspace will be used to get documents
    * @param repository The name of repository will be used to get documents
    * @param sessionProvider
-   * @param mimeType The mime type of node(For example: image/jpg)
    * @return List<Node> all documents by kind of document type
    * @throws Exception
    */

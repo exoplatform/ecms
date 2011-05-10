@@ -62,9 +62,7 @@ public interface TemplateService {
   public String getDefaultTemplatePath(boolean isDialog, String nodeTypeName) ;
 
   /**
-   * Return template home of repository.
-   * @param repository      String
-   *                        The name of repository
+   * Return template home of current repository.
    * @param provider        SessionProvider
    *                        The SessionProvider object is used to managed Sessions
    * @see                   Node
@@ -639,7 +637,7 @@ public interface TemplateService {
   public List<String> getCreationableContentTypes(Node node) throws Exception;
 
   /**
-   * Get all template that is configured in XML file of specified repository.
+   * Get all template that is configured in XML file of current repository.
    * @see                   TemplatePlugin
    * @throws Exception
    */
@@ -671,7 +669,7 @@ public interface TemplateService {
 
 
   /**
-   * Get All Document NodeTypes of the specified repository.
+   * Get All Document NodeTypes of the current repository.
    * @return  List<String>
    * @throws Exception
    */
@@ -721,45 +719,48 @@ public interface TemplateService {
 
   /**
    * Build string of dialog form template base on properties of nodetype.
-   * @param nodeType
+   * @param nodeTypeName
    * @return
    */
   public String buildDialogForm(String nodeTypeName) throws Exception;
 
   /**
-   * Build string of dialog form template base on properties of nodetype.
+   * Build string of dialog form template base on properties of nodetype and repository
    * @deprecated Since WCM 2.1-CLOUD-DEV you should use {@link #buildDialogForm(String)} instead.
-   * @param nodeType
+   * @param nodeTypeName
+   * @param repository
    * @return
    */
   public String buildDialogForm(String nodeTypeName, String repository) throws Exception;
 
   /**
    * Build string of view template form base on properties of nodetype.
-   * @param nodeType
+   * @param nodeTypeName
    * @return
    */
   public String buildViewForm(String nodeTypeName) throws Exception;
 
   /**
-   * Build string of view template form base on properties of nodetype.
+   * Build string of view template form base on properties of nodetype and repository
    * @deprecated Since WCM 2.1-CLOUD-DEV you should use {@link #buildViewForm(String)} instead.
-   * @param nodeType
+   * @param nodeTypeName
+   * @param repository
    * @return
    */
   public String buildViewForm(String nodeTypeName, String repository) throws Exception;
 
   /**
    * Build string of view template form base on properties of nodetype.
-   * @param nodeType
+   * @param nodeTypeName
    * @return
    */
   public String buildStyleSheet(String nodeTypeName) throws Exception;
 
   /**
-   * Build string of view template form base on properties of nodetype.
+   * Build string of view template form base on properties of nodetype and repository
    * @deprecated Since WCM 2.1-CLOUD-DEV you should use {@link #buildStyleSheet(String)} instead.
-   * @param nodeType
+   * @param nodeTypeName node's type
+   * @param repository
    * @return
    */
   public String buildStyleSheet(String nodeTypeName, String repository) throws Exception;

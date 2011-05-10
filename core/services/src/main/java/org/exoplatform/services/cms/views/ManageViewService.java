@@ -332,8 +332,6 @@ public interface ManageViewService {
    * Removes the template to the given node by specified the templatePath params
    * @param templatePath    String
    *                        The path of template
-   * @param repository      String
-   *                        The name of repository
    * @see                   Node
    * @see                   Session
    * @throws Exception
@@ -364,7 +362,7 @@ public interface ManageViewService {
   public void init(String repository) throws Exception ;
   
   /**
-   * Get all template that is configed in XML file of specified repository
+   * Get all template that is configed in XML file of current repository
    * @see                   ManageViewPlugin
    * @throws Exception
    */

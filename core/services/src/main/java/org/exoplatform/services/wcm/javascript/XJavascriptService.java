@@ -103,7 +103,7 @@ public class XJavascriptService implements Startable {
   /**
    * Get active java script.
    *
-   * @param home the home
+   * @param webcontent the webcontent's node
    * @return Code of all js file in home node.
    * @throws Exception the exception
    */

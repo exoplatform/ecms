@@ -55,15 +55,15 @@ public interface CommentsService {
 
   /**
    * Update comment for document: set new comment for node
-   * @param comment
-   * @param newComment
+   * @param commentNode the node that need to update comment
+   * @param newComment the new comment is set for node
    * @throws Exception
    */
   public void updateComment(Node commentNode, String newComment) throws Exception;
 
   /**
    * Delete comment of document by given comment node
-   * @param commentNode
+   * @param commentNode given comment node
    * @throws Exception
    */
   public void deleteComment(Node commentNode) throws Exception;

@@ -91,6 +91,7 @@ public class XSkinService implements Startable {
    * @param schemaConfigService the schema config service
    * @param configurationService the configuration service
    * @param servletContext the servlet context
+   * @param repositoryService the repository service
    * @throws Exception the exception
    */
   public XSkinService() throws Exception {
@@ -103,12 +104,10 @@ public class XSkinService implements Startable {
   }
 
   /**
-   * Gets the active stylesheet.
-   *
-   * @param home the home
-   *
-   * @return the active stylesheet
-   *
+   * Gets the active style sheet of the specified web content node
+   * 
+   * @param webcontent the web content node to get style sheet
+   * @return the active style sheet
    * @throws Exception the exception
    */
   public String getActiveStylesheet(Node webcontent) throws Exception {
@@ -148,8 +147,8 @@ public class XSkinService implements Startable {
   /**
    * Update portal skin on modify.
    *
-   * @param cssFile the css file
    * @param portal the portal
+   * @param cssFile the css file
    *
    * @throws Exception the exception
    */
@@ -165,10 +164,10 @@ public class XSkinService implements Startable {
   }
 
   /**
-   * Update portal skin on modify.
+   * Update portal skin on remove.
    *
-   * @param cssFile the css file
    * @param portal the portal
+   * @param cssFile the css file
    *
    * @throws Exception the exception
    */
@@ -186,11 +185,9 @@ public class XSkinService implements Startable {
   /**
    * Adds the portal skin.
    *
-   * @param portal the portal
-   * @param preStatement the pre statement
-   * @param exceptedPath the excepted path
-   * @param appendedCSS the appended css
-   * @param allowEmptyCSS the allow empty css
+   * @param portalNode the portal
+   * @param cssFile the css file
+   * @param isStartup the flag to decide whether this situation is startup or not
    *
    * @throws Exception the exception
    */
@@ -215,11 +212,9 @@ public class XSkinService implements Startable {
   /**
    * Adds the shared portal skin.
    *
-   * @param portal the portal
-   * @param preStatement the pre statement
-   * @param exceptedPath the excepted path
-   * @param appendedCSS the appended css
-   * @param allowEmptyCSS the allow empty css
+   * @param portalNode the portal
+   * @param cssFile the css file
+   * @param isAddNew flag to decide whether this situation is startup or not
    *
    * @throws Exception the exception
    */
@@ -236,14 +231,12 @@ public class XSkinService implements Startable {
   }
 
   /**
-   * Gets the cSS data by sql query.
-   *
-   * @param session the session
-   * @param statement the statement
-   * @param exceptedPath the excepted path
-   *
-   * @return the cSS data by sql query
-   *
+   * Merge the registered css and new css file
+   * 
+   * @param portalNode the portal
+   * @param newCSSFile new css file
+   * @param isStartup flag to decide whether this situation is startup or not
+   * @return the merged css data as result of registered css and new css
    * @throws Exception the exception
    */
   private String mergeCSSData(Node portalNode, Node newCSSFile, boolean isStartup) throws Exception {

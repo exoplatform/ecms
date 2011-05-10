@@ -65,11 +65,10 @@ public interface WatchDocumentService {
    * to user specified by the userName
    * @param documentNode      Specify the document for watching
    * @param userName          The username of current user is votting. It can't be <code>null<code>
-   * @param notifyType        Type of notification. Its can be 0, 1 or 2
+   * @param notificationType  Type of notification. Its can be 0, 1 or 2
    *                          0 : Notification by email
    *                          1 : Notification by rss
    *                          2 : Full notification
-   * @param sessionProvider   The sessionProvider object is userd to managed Sessions
    * @see                     Node
    * @throws Exception
    */

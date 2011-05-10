@@ -54,7 +54,7 @@ public interface ScriptService {
    * This method will get node for Content Browser Scripts by giving the following params: repository,
    * provider
    * @param repository    String
-   *                      The name of reporsitory
+   *                      The name of repository
    * @param provider
    * @see                 Node
    * @see                 NodeHierarchyCreator
@@ -80,7 +80,7 @@ public interface ScriptService {
    * This method will get all node for ECM Action Scripts by giving the following params: repository,
    * provider
    * @param repository    String
-   *                      The name of reporsitory
+   *                      The name of repository
    * @param provider
    * @see                 Node
    * @see                 NodeHierarchyCreator
@@ -106,7 +106,7 @@ public interface ScriptService {
    * This method will get all node for ECM Interceptor Scripts by giving the following params: repository,
    * provider
    * @param repository    String
-   *                      The name of reporsitory
+   *                      The name of repository
    * @param provider
    * @see                 Node
    * @see                 NodeHierarchyCreator
@@ -132,7 +132,7 @@ public interface ScriptService {
    * This method will get all node for ECM Widget Scripts by giving the following params: repository,
    * provider
    * @param repository    String
-   *                      The name of reporsitory
+   *                      The name of repository
    * @param provider
    * @see                 Node
    * @see                 NodeHierarchyCreator

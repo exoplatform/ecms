@@ -69,8 +69,7 @@ public interface TrashService {
   /**
    * Restore node from trash
    * @param trashHomeNode trash home node
-   * @param restorePath Restore path which will be used to restore
-   * @param restoreWorkspace The workspace name of node which moved to trash
+   * @param trashNodePath 
    * @param repository The repository name
    * @param sessionProvider User session provider which will be used to get session
    * @throws Exception
@@ -82,8 +81,7 @@ public interface TrashService {
   /**
    * Restore node from trash
    * @param trashHomeNode trash home node
-   * @param restorePath Restore path which will be used to restore
-   * @param restoreWorkspace The workspace name of node which moved to trash
+   * @param trashNodePath
    * @param repository The repository name
    * @throws Exception
    */

@@ -131,6 +131,7 @@ public interface MultiLanguageService {
    * @param language
    * @param isDefault
    * @param nodeType
+   * @param repositoryName
    * @throws Exception
    */
   public void addFolderLanguage(Node node,

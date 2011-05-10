@@ -29,42 +29,45 @@ import javax.jcr.Node;
  */
 public interface FavoriteService {
 
- /**
-  * Add favorite to node
-  * @param sessionProvider The session provider which will be used to get user node
-  * @param node Add favorite to this node
-  * @param userName The user added favorite
-  * @throws Exception The exception will be raised if the node can not add mixin
-  */
+  /**
+   * Add favorite to node
+   * 
+   * @param node Add favorite to this node
+   * @param userName The user added favorite
+   * @throws Exception The exception will be raised if the node can not add
+   *           mixin
+   */
  public void addFavorite(Node node, String userName) throws Exception;
 
 
- /**
-  * Remove favorite from node
-  * @param sessionProvider The session provider which will be used to get user node
-  * @param node Remove favourite out of this node
-  * @param userName Remove the name of current user out of property exo:favouriter
-  * @throws Exception
-  */
+  /**
+   * Remove favorite from node
+   * 
+   * @param node Remove favourite out of this node
+   * @param userName Remove the name of current user out of property
+   *          exo:favouriter
+   * @throws Exception
+   */
  public void removeFavorite(Node node, String userName) throws Exception;
 
- /**
-  * Get all favourite nodes by user
-  * @param workspace Get all favorite nodes from this workspace
-  * @param repository Get all favorite nodes from this repository
-  * @param sessionProvider The session provider which will be used to get session
-  * @param userName User added favorite to the node
-  * @return List<Node> All favorite node added by user
-  * @throws Exception
-  */
+  /**
+   * Get all favourite nodes by user
+   * 
+   * @param workspace Get all favorite nodes from this workspace
+   * @param repository Get all favorite nodes from this repository
+   * @param userName User added favorite to the node
+   * @return List<Node> All favorite node added by user
+   * @throws Exception
+   */
  public List<Node> getAllFavoriteNodesByUser(String workspace, String repository,
      String userName) throws Exception;
 
- /**
-  * Check if user is in favourite list of node
-  * @param node Node to check
-  * @param userName The user to check
-  */
+  /**
+   * Check if user is in favourite list of node
+   * 
+   * @param userName The user to check
+   * @param node Node to check
+   */
  public boolean isFavoriter(String userName, Node node) throws Exception ;
 
 }

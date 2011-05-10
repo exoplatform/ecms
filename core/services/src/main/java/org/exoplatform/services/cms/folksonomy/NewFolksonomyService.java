@@ -58,7 +58,7 @@ public interface NewFolksonomyService {
    * Add a private tag to a document. A folksonomy link will be created in a tag
    * node
    *
-   * @param tagNames Array of tag name as the children of tree
+   * @param tagsName Array of tag name as the children of tree
    * @param documentNode Tagging this node by create a folksonomy link to node
    *          in tag
    * @param repository Repository name
@@ -77,7 +77,7 @@ public interface NewFolksonomyService {
    * Add a private tag to a document. A folksonomy link will be created in a tag
    * node
    *
-   * @param tagNames Array of tag name as the children of tree
+   * @param tagsName Array of tag name as the children of tree
    * @param documentNode Tagging this node by create a folksonomy link to node
    *          in tag
    * @param workspace Workspace name
@@ -93,7 +93,7 @@ public interface NewFolksonomyService {
    * Add a group tag to a document. A folksonomy link will be created in a tag
    * node
    *
-   * @param tagNames Array of tag name as the children of tree
+   * @param tagsName Array of tag name as the children of tree
    * @param documentNode Tagging this node by create a folksonomy link to node
    *          in tag
    * @param repository Repository name
@@ -112,7 +112,7 @@ public interface NewFolksonomyService {
    * Add a group tag to a document. A folksonomy link will be created in a tag
    * node
    *
-   * @param tagNames Array of tag name as the children of tree
+   * @param tagsName Array of tag name as the children of tree
    * @param documentNode Tagging this node by create a folksonomy link to node
    *          in tag
    * @param workspace Workspace name
@@ -129,7 +129,7 @@ public interface NewFolksonomyService {
    * node
    *
    * @param treePath Path of folksonomy tree
-   * @param tagNames Array of tag name as the children of tree
+   * @param tagsName Array of tag name as the children of tree
    * @param documentNode Tagging this node by create a folksonomy link to node
    *          in tag
    * @param repository Repository name
@@ -148,7 +148,7 @@ public interface NewFolksonomyService {
    * node
    *
    * @param treePath Path of folksonomy tree
-   * @param tagNames Array of tag name as the children of tree
+   * @param tagsName Array of tag name as the children of tree
    * @param documentNode Tagging this node by create a folksonomy link to node
    *          in tag
    * @param workspace Workspace name
@@ -164,9 +164,8 @@ public interface NewFolksonomyService {
    * node
    *
    * @param siteName Portal name
-   * @param treePath Path of folksonomy tree
-   * @param tagNames Array of tag name as the children of tree
-   * @param documentNode Tagging this node by create a folksonomy link to node
+   * @param tagsName Array of tag name as the children of tree
+   * @param node Tagging this node by create a folksonomy link to node
    *          in tag
    * @param repository Repository name
    * @param workspace Workspace name
@@ -184,9 +183,8 @@ public interface NewFolksonomyService {
    * node
    *
    * @param siteName Portal name
-   * @param treePath Path of folksonomy tree
-   * @param tagNames Array of tag name as the children of tree
-   * @param documentNode Tagging this node by create a folksonomy link to node
+   * @param tagsName Array of tag name as the children of tree
+   * @param node Tagging this node by create a folksonomy link to node
    *          in tag
    * @param workspace Workspace name
    * @throws Exception
@@ -252,7 +250,7 @@ public interface NewFolksonomyService {
   /**
    * Get all tags by groups
    *
-   * @param roles Roles of user
+   * @param role Roles of user
    * @param workspace Workspace name
    * @return List<Node>
    * @throws Exception
@@ -286,7 +284,6 @@ public interface NewFolksonomyService {
    * Get all tags of Site
    *
    * @param siteName Portal name
-   * @param treePath Folksonomy tree path
    * @param repository Repository name
    * @param workspace Workspace name
    * @return List<Node>
@@ -299,22 +296,11 @@ public interface NewFolksonomyService {
    * Get all tags of Site
    *
    * @param siteName Portal name
-   * @param treePath Folksonomy tree path
    * @param workspace Workspace name
    * @return List<Node>
    * @throws Exception
    */
   public List<Node> getAllSiteTags(String siteName, String workspace) throws Exception;  
-
-  /**
-   * Get all document which storing in tag
-   *
-   * @param treeName Name of folksonomy tree
-   * @param tagName Name of tag
-   * @param repository Repository name
-   * @return List of documents in tag
-   * @throws Exception
-   */
 
   /**
    * Get all documents by tag
@@ -336,8 +322,8 @@ public interface NewFolksonomyService {
    * Get HTML_STYLE_PROP property in styleName node in repository
    *
    * @param tagPath Tag path
-   * @param workspace Workspace name
    * @param repository Repository name
+   * @param workspace Workspace name
    * @return value of property of styleName node
    * @throws Exception
    */
@@ -359,7 +345,7 @@ public interface NewFolksonomyService {
    * htmlStyle for node in tagPath in repository
    *
    * @param styleName Style name
-   * @param tagRate The range of tag numbers
+   * @param tagRange The range of tag numbers
    * @param htmlStyle Tag style
    * @param repository Repository name
    * @param workspace Workspace name
@@ -377,7 +363,7 @@ public interface NewFolksonomyService {
    * htmlStyle for node in tagPath in repository
    *
    * @param styleName Style name
-   * @param tagRate The range of tag numbers
+   * @param tagRange The range of tag numbers
    * @param htmlStyle Tag style
    * @param workspace Workspace name
    * @throws Exception
@@ -392,7 +378,7 @@ public interface NewFolksonomyService {
    * htmlStyle for node in tagPath in repository
    *
    * @param styleName Style name
-   * @param tagRate The range of tag numbers
+   * @param tagRange The range of tag numbers
    * @param htmlStyle Tag style
    * @param repository Repository name
    * @param workspace Workspace name
@@ -410,7 +396,7 @@ public interface NewFolksonomyService {
    * htmlStyle for node in tagPath in repository
    *
    * @param styleName Style name
-   * @param tagRate The range of tag numbers
+   * @param tagRange The range of tag numbers
    * @param htmlStyle Tag style
    * @param workspace Workspace name
    * @throws Exception
@@ -451,15 +437,13 @@ public interface NewFolksonomyService {
   /**
    * Init all TagStylePlugin with session in current repository
    *
-   * @param repository repository name
    */
   public void init() throws Exception;  
 
   /**
    * Remove tag of given document
    *
-   * @param treeName Name of folksonomy tree
-   * @param tagName Name of tag
+   * @param tagPath tag's path
    * @param document Document which added a link to tagName
    * @param repository Repository name
    * @return
@@ -471,8 +455,7 @@ public interface NewFolksonomyService {
   /**
    * Remove tag of given document
    *
-   * @param treeName Name of folksonomy tree
-   * @param tagName Name of tag
+   * @param tagPath tag's path
    * @param document Document which added a link to tagName
    * @return
    * @throws Exception
@@ -546,6 +529,8 @@ public interface NewFolksonomyService {
   /**
    * Get all tags linked to given document by scope
    *
+   * @param scope scope of tag
+   * @param value
    * @param documentNode Document node
    * @param repository Repository name
    * @param workspace Workspace name
@@ -562,6 +547,7 @@ public interface NewFolksonomyService {
   /**
    * Get all tags linked to given document by scope
    *
+   * @param scope scope of tag
    * @param documentNode Document node
    * @param workspace Workspace name
    * @return
@@ -578,6 +564,8 @@ public interface NewFolksonomyService {
    * @param node
    * @param repository
    * @param workspace
+   * @param username
+   * @param groups
    * @throws Exception
    */
   @Deprecated
@@ -592,6 +580,7 @@ public interface NewFolksonomyService {
    *
    * @param node
    * @param workspace
+   * @param username
    * @throws Exception
    */
   public void removeTagsOfNodeRecursively(Node node,
@@ -621,7 +610,7 @@ public interface NewFolksonomyService {
   /**
    * Can edit tag or not?
    *
-   * @param scope Scope
+   * @param scope Scope of tag
    * @param memberships Memberships
    * @return true If it is possible
    */

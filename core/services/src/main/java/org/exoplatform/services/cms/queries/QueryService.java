@@ -229,10 +229,10 @@ public interface QueryService {
                              SessionProvider provider) throws Exception;
 
   /**
-   * Get shared queries by giving the following params : userId, repository,
+   * Get shared queries by giving the following params : queryName, repository,
    * provider
    *
-   * @param userId String The id of current user
+   * @param queryName the name of query
    * @param repository String The name of repository
    * @param provider SessionProvider
    * @return sharedQueries List<Node>
@@ -244,10 +244,9 @@ public interface QueryService {
   public Node getSharedQuery(String queryName, String repository, SessionProvider provider) throws Exception;
   
   /**
-   * Get shared queries by giving the following params : userId, provider
+   * Get shared queries by giving the following params : queryName, provider
    *
-   * @param userId String The id of current user
-   * @param repository String The name of repository
+   * @param queryName the name of query 
    * @param provider SessionProvider
    * @return sharedQueries List<Node>
    * @see Node
@@ -382,7 +381,6 @@ public interface QueryService {
   
   /**
    * Init all query plugin in the current repository
-   * @param repository String The name of repository
    * @see QueryPlugin
    * @throws Exception
    */
