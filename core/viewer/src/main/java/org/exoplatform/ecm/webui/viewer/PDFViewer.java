@@ -52,6 +52,7 @@ import org.exoplatform.webui.form.UIFormSelectBox;
 import org.exoplatform.webui.form.UIFormStringInput;
 import org.icepdf.core.pobjects.Document;
 import org.icepdf.core.pobjects.PInfo;
+import javax.jcr.NodeIterator;
 
 /**
  * Created by The eXo Platform SARL
@@ -276,6 +277,7 @@ public class PDFViewer extends UIForm {
       UIComponent uiParent = pdfViewer.getParent();
       Method methodGetNode = pdfViewer.getMethod(uiParent, "getNode");
       Node node = (Node)methodGetNode.invoke(uiParent, (Object[]) null);
+      node = getFileLangNode(node);
       String repository = (String) pdfViewer.getMethod(uiParent, "getRepository").invoke(uiParent, (Object[]) null);
       PDFViewerRESTService pdfViewerService = pdfViewer.getApplicationComponent(PDFViewerRESTService.class);
       File file = pdfViewerService.getPDFDocumentFile(node, repository);
@@ -328,5 +330,20 @@ public class PDFViewer extends UIForm {
       }
       event.getRequestContext().addUIComponentToUpdateByAjax(pdfViewer);
     }
+  }
+  static public Node getFileLangNode(Node currentNode) throws Exception {
+    if(currentNode.isNodeType("nt:unstructured")) {
+      if(currentNode.getNodes().getSize() > 0) {
+        NodeIterator nodeIter = currentNode.getNodes() ;
+        while(nodeIter.hasNext()) {
+          Node ntFile = nodeIter.nextNode() ;
+          if(ntFile.getPrimaryNodeType().getName().equals("nt:file")) {
+            return ntFile ;
+          }
+        }
+        return currentNode ;
+      }
+    }
+    return currentNode ;
   }
 }

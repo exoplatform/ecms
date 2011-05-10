@@ -580,7 +580,6 @@ public class MultiLanguageServiceImpl implements MultiLanguageService {
             languagesNode.addMixin("exo:hiddenable");
         }
       }
-      node.save() ;
       try {
         ntFileLangNode = newLanguageNode.getNode(fileName) ;
       } catch(PathNotFoundException pe) {
@@ -598,7 +597,6 @@ public class MultiLanguageServiceImpl implements MultiLanguageService {
         }
       }
       Node newJcrContent = ntFileLangNode.getNode(JCRCONTENT) ;
-      if(isDefault) newJcrContent.setProperty(JCRDATA, oldValue);
       newJcrContent.setProperty(JCR_LASTMODIFIED, new GregorianCalendar());
       setMixin(node, ntFileLangNode) ;
     } else {
@@ -614,7 +612,6 @@ public class MultiLanguageServiceImpl implements MultiLanguageService {
       setCommentNode(node, ntFileLangNode, selectedFileLangeNode) ;
     }
     if(isDefault) node.setProperty(EXO_LANGUAGE, language) ;
-    node.save();
     node.getSession().save() ;
   }
 
@@ -625,7 +622,6 @@ public class MultiLanguageServiceImpl implements MultiLanguageService {
     Node newLanguageNode = null ;
     Node languagesNode = null ;
     String primaryNodeTypeName = node.getPrimaryNodeType().getName();
-    Workspace ws = node.getSession().getWorkspace() ;
     String defaultLanguage = getDefault(node) ;
     if(node.hasNode(LANGUAGES)) languagesNode = node.getNode(LANGUAGES) ;
     else  {

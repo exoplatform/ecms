@@ -14,26 +14,10 @@
 	
 	public boolean isVersionable(Node node) throws Exception {
     return node.isNodeType("mix:versionable");
-  }	
+  }		
 
-	public Node getFileLangNode(Node currentNode) throws Exception {
-    if(currentNode.isNodeType("nt:unstructured")) {
-      if(currentNode.getNodes().getSize() > 0) {
-        NodeIterator nodeIter = currentNode.getNodes() ;
-        while(nodeIter.hasNext()) {
-          Node ntFile = nodeIter.nextNode() ;
-          if(ntFile.getPrimaryNodeType().getName().equals("nt:file")) {
-            return ntFile ;
-          }
-        }
-        return currentNode ;
-      }
-    }
-    return currentNode ;
-  }
-
-  def originalNode = uiParent.getOriginalNode();
-  def currentNode = getFileLangNode(originalNode);
+  def originalNode = uiParent.getOriginalNode();  
+  def currentNode = uicomponent.getFileLangNode(uiParent.getNode());
   def contentNode = currentNode.getNode("jcr:content") ;
   def mimeType = contentNode.getProperty("jcr:mimeType").getString() ;
    public String formatNodeName(String text) {
@@ -239,7 +223,7 @@
 	<div class="PDFViewerContent">
   	<div class="ImageView" style="overflow:auto;height:375px;" id ="pdf_viewer_image" name="pdf_viewer_image">
 		<%
-			  String pdfPageImage = "/" + uiParent.getPortalName() + "/" + Utils.getRestContextName(uiParent.getPortalName()) + "/pdfviewer/" + repository + "/" + uiParent.getWorkspaceName() + "/${currentPage}/${currentRotation}/${currentScale}/" + currentNode.getUUID() + "/";
+			  String pdfPageImage = "/" + uiParent.getPortalName() + "/" + Utils.getRestContextName(uiParent.getPortalName()) + "/pdfviewer/" + repository + "/" + uiParent.getWorkspaceName() + "/${currentPage}/${currentRotation}/${currentScale}/" + currentNode.getUUID() + "/";			  
 		%>
 			  <a href="$pdfPageImage" title="<%=uicomponent.getResourceBundle("PDFViewer.label.viewFullPage")%>"><image src="$pdfPageImage"></a>
 		</div>
