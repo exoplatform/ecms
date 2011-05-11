@@ -1045,6 +1045,7 @@
       <view-name-invalid>U moet de naam</view-name-invalid>
       <fileName-invalid>Er zijn een aantal ongeldige tekens in de naam!</fileName-invalid>
       <permission-not-empty>Moet u een vergunning</permission-not-empty>
+      <permission-path-invalid>Permission '{0}' is invalid!</permission-path-invalid>
       <mustbe-add-tab>Moet je een tabblad</mustbe-add-tab>
       <view-exist>Bekijk de naam al bestaat</view-exist>
     </msg>

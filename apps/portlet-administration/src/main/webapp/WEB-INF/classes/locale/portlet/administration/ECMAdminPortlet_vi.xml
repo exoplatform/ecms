@@ -1045,6 +1045,7 @@
       <view-name-invalid>Bạn phải nhập têm</view-name-invalid>
       <fileName-invalid>Có một vài kí tự không hợp lệ trong tên!</fileName-invalid>
       <permission-not-empty>Bạn phải chọn quyền truy nhập</permission-not-empty>
+      <permission-path-invalid>Quyền '{0}' không đúng hoặc không tồn tại!</permission-path-invalid>
       <mustbe-add-tab>Bạn phải thêm tab</mustbe-add-tab>
       <view-exist>Tên của khung nhìn đã tồn tại.</view-exist>
     </msg>

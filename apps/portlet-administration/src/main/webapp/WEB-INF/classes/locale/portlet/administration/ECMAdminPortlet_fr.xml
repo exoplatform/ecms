@@ -1048,6 +1048,7 @@
       <view-name-invalid>Nom invalide</view-name-invalid>
       <fileName-invalid>Caractères invalides détectés dans le nom</fileName-invalid>
       <permission-not-empty>Veuillez sélectionner une permission</permission-not-empty>
+      <permission-path-invalid>La permission de '{0}' est invalide !</permission-path-invalid>
       <mustbe-add-tab>Vous devez ajouter au moins une barre d'outils</mustbe-add-tab>
       <view-exist>Ce nom de vue existe déjà</view-exist>
     </msg>
@@ -2090,7 +2091,7 @@
   
   <UIDriveForm>
 		<msg>
-  		<permission-path-invalid>La permission est invalide !</permission-path-invalid>	
+  		<permission-path-invalid>La permission de '{0}' est invalide !</permission-path-invalid>	
   	</msg>
   </UIDriveForm>
   

@@ -40,7 +40,7 @@ import org.exoplatform.webui.form.validator.MandatoryValidator;
 @ComponentConfig(
     lifecycle = UIFormLifecycle.class,
     template =  "system:/groovy/webui/form/UIFormTabPane.gtmpl",
-    events = {
+    events = {    	
       @EventConfig(listeners = UIViewFormTabPane.SaveActionListener.class),
       @EventConfig(listeners = UIViewFormTabPane.ResetActionListener.class, phase = Phase.DECODE),
       @EventConfig(listeners = UIViewFormTabPane.EditTabActionListener.class),
@@ -51,13 +51,14 @@ import org.exoplatform.webui.form.validator.MandatoryValidator;
       @EventConfig(listeners = UIViewFormTabPane.AddTabFormActionListener.class),
       @EventConfig(listeners = UIViewFormTabPane.BackViewFormActionListener.class, phase = Phase.DECODE),
       @EventConfig(listeners = UIViewForm.AddPermissionActionListener.class, phase = Phase.DECODE),
+      @EventConfig(listeners = UIViewForm.RemovePermissionActionListener.class, phase = Phase.DECODE),
       @EventConfig(listeners = UIViewForm.ChangeVersionActionListener.class, phase = Phase.DECODE),
       @EventConfig(listeners = UITabForm.AddTabActionListener.class, phase = Phase.DECODE)
     }
 )
 public class UIViewFormTabPane extends UIFormTabPane {
 
-  final static public String POPUP_PERMISSION = "PopupViewPermission" ;
+  final static public String POPUP_PERMISSION = "PopupViewPermission" ;  
 
   private UIViewForm uiViewForm ;
   private UITabForm uiTabForm ;

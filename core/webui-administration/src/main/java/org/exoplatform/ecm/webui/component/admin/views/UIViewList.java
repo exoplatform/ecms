@@ -190,7 +190,7 @@ public class UIViewList extends UIGrid {
         viewForm.getUIFormCheckBoxInput(UIViewForm.FIELD_ENABLEVERSION).setEnable(true);
         viewForm.setActions(new String[]{"Save", "Cancel", "AddTabForm"}, null) ;
       }
-      viewForm.setActionInfo(UIViewForm.FIELD_PERMISSION, new String[] {"AddPermission"}) ;
+      viewForm.setActionInfo(UIViewForm.FIELD_PERMISSION, new String[] {"AddPermission","RemovePermission"}) ;
       viewTabPane.getChild(UITabForm.class).setActions(new String[]{"Save"}, null) ;
       viewTabPane.setSelectedTab(viewForm.getId()) ;
       UIViewManager uiManager = uiViewList.getAncestorOfType(UIViewManager.class) ;

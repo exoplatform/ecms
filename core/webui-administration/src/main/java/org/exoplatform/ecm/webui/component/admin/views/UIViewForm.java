@@ -17,6 +17,8 @@
 package org.exoplatform.ecm.webui.component.admin.views;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 
@@ -28,6 +30,8 @@ import javax.jcr.version.VersionHistory;
 import javax.portlet.PortletPreferences;
 
 import org.exoplatform.ecm.jcr.model.VersionNode;
+import org.exoplatform.ecm.webui.component.admin.drives.UIDriveForm;
+import org.exoplatform.ecm.webui.component.admin.drives.UIDriveInputSet;
 import org.exoplatform.ecm.webui.form.UIFormInputSetWithAction;
 import org.exoplatform.ecm.webui.selector.UISelectable;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
@@ -37,6 +41,8 @@ import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.views.ManageViewService;
 import org.exoplatform.services.cms.views.ViewConfig;
 import org.exoplatform.services.cms.views.ViewConfig.Tab;
+import org.exoplatform.services.organization.MembershipType;
+import org.exoplatform.services.organization.OrganizationService;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.application.portlet.PortletRequestContext;
@@ -77,7 +83,7 @@ public class UIViewForm extends UIFormInputSetWithAction implements UISelectable
   private List<String> listVersion = new ArrayList<String>() ;
   private Version baseVersion_;
   private VersionNode selectedVersion_;
-  private VersionNode rootVersionNode;
+  private VersionNode rootVersionNode;  
 
   public String getViewName() {
     return viewName;
@@ -101,11 +107,10 @@ public class UIViewForm extends UIFormInputSetWithAction implements UISelectable
     versions.setOnChange("ChangeVersion");
     versions.setRendered(false) ;
     addUIFormInput(versions) ;
-    addUIFormInput(new UIFormStringInput(FIELD_NAME, FIELD_NAME, null).addValidator(MandatoryValidator.class)) ;
-    addUIFormInput(new UIFormStringInput(FIELD_PERMISSION, FIELD_PERMISSION, null).setEditable(false)
-                                                                                  .addValidator(MandatoryValidator.class));
+    addUIFormInput(new UIFormStringInput(FIELD_NAME, FIELD_NAME, null).addValidator(MandatoryValidator.class)) ;    
+    addUIFormInput(new UIFormStringInput(FIELD_PERMISSION, FIELD_PERMISSION, null).setEditable(true).addValidator(MandatoryValidator.class));                                                                             
     addUIFormInput(new UIFormInputInfo(FIELD_TABS, FIELD_TABS, null)) ;
-    setActionInfo(FIELD_PERMISSION, new String[] {"AddPermission"}) ;
+    setActionInfo(FIELD_PERMISSION, new String[] {"AddPermission","RemovePermission"}) ;
     vservice_ = getApplicationComponent(ManageViewService.class) ;
     Node ecmTemplateHome = vservice_.getTemplateHome(BasePath.ECM_EXPLORER_TEMPLATES,
                                                      SessionProviderFactory.createSessionProvider());
@@ -131,7 +136,33 @@ public class UIViewForm extends UIFormInputSetWithAction implements UISelectable
 
   @SuppressWarnings("unused")
   public void doSelect(String selectField, Object value) {
-    getUIStringInput(UIViewForm.FIELD_PERMISSION).setValue(value.toString()) ;
+  	UIFormStringInput uiStringInput = getUIStringInput(selectField);
+  	if (selectField.equals(UIViewForm.FIELD_PERMISSION)){
+  		String membership = value.toString();
+      String valuePermissions = uiStringInput.getValue();
+      List<String> permissionsList = new ArrayList<String>();
+      StringBuilder newsPermissions = new StringBuilder();
+      if(valuePermissions != null) {
+        String[] permissionsArray = valuePermissions.split(",");
+        permissionsList = Arrays.asList(permissionsArray);
+        if (permissionsList.size() > 0) {
+          for (String permission : permissionsList) {
+            if(newsPermissions.length() > 0) newsPermissions.append(",");
+            newsPermissions.append(permission.trim());
+          }
+        }
+        if(!permissionsList.contains(membership)) {
+          if(newsPermissions.length() > 0) {
+            newsPermissions.append(",").append(membership.trim());
+          } else {
+            newsPermissions.append(membership.trim());
+          }
+        }
+      }
+      uiStringInput.setValue(newsPermissions.toString());
+  	} else {
+  		uiStringInput.setValue(value.toString());
+  	}    
     UIViewContainer uiContainer = getAncestorOfType(UIViewContainer.class) ;
     uiContainer.removeChildById(UIViewFormTabPane.POPUP_PERMISSION) ;
   }
@@ -314,6 +345,47 @@ public class UIViewForm extends UIFormInputSetWithAction implements UISelectable
                                        ApplicationMessage.WARNING) ;
       throw new MessageException(message) ;
     }
+     
+    OrganizationService oservice = this.getApplicationComponent(OrganizationService.class);
+    String[] arrPermissions = permissions.split(",");
+    List<String> listMemberhip;
+    Collection<?> collection = oservice.getMembershipTypeHandler().findMembershipTypes();
+    listMemberhip  = new ArrayList<String>(5);
+    for(Object obj : collection){
+      listMemberhip.add(((MembershipType)obj).getName());
+    }
+    listMemberhip.add("*");
+    for(String itemPermission : arrPermissions) {
+      if(itemPermission.length() == 0) {
+      	message = new ApplicationMessage("UIViewForm.msg.permission-path-invalid", null,
+            ApplicationMessage.WARNING) ;      	
+      	throw new MessageException(message) ;        
+      }
+      if (itemPermission.contains(":")) {
+        String[] permission = itemPermission.split(":");
+        if((permission[0] == null) || (permission[0].length() == 0)){
+        	message = new ApplicationMessage("UIViewForm.msg.permission-path-invalid", null,
+              ApplicationMessage.WARNING) ;      	
+        	throw new MessageException(message) ;     
+        } else if(!listMemberhip.contains(permission[0])) {
+        	message = new ApplicationMessage("UIViewForm.msg.permission-path-invalid", null,
+              ApplicationMessage.WARNING) ;      	
+        	throw new MessageException(message) ;     
+        }
+        if((permission[1] == null) || (permission[1].length() == 0)) {
+        	message = new ApplicationMessage("UIViewForm.msg.permission-path-invalid", null,
+              ApplicationMessage.WARNING) ;      	
+        	throw new MessageException(message) ;     
+        } else if(oservice.getGroupHandler().findGroupById(permission[1]) == null){
+        	Object[] arg = { itemPermission };
+        	message = new ApplicationMessage("UIViewForm.msg.permission-path-invalid", arg,
+              ApplicationMessage.WARNING) ;        	
+        	throw new MessageException(message) ;     
+        }
+      }
+    }
+
+    
     if(tabMap_.size() < 1 ){
       message = new ApplicationMessage("UIViewForm.msg.mustbe-add-tab", null,
                                        ApplicationMessage.WARNING) ;
@@ -396,9 +468,18 @@ public class UIViewForm extends UIFormInputSetWithAction implements UISelectable
     public void execute(Event<UIViewFormTabPane> event) throws Exception {
       UIViewFormTabPane uiViewTabPane = event.getSource() ;
       UIViewContainer uiContainer = uiViewTabPane.getAncestorOfType(UIViewContainer.class) ;
-      String memberShip = uiViewTabPane.getUIStringInput(UIViewForm.FIELD_PERMISSION).getValue() ;
+      String memberShip = uiViewTabPane.getUIStringInput(UIViewForm.FIELD_PERMISSION).getValue() ;            
+      uiViewTabPane.getUIStringInput(UIViewForm.FIELD_PERMISSION).setValue(memberShip);
       uiContainer.initPopupPermission(memberShip) ;
       event.getRequestContext().addUIComponentToUpdateByAjax(uiContainer) ;
+    }
+  }
+  
+  static public class RemovePermissionActionListener extends EventListener<UIViewFormTabPane> {
+    public void execute(Event<UIViewFormTabPane> event) throws Exception {
+    	UIViewFormTabPane uiViewTabPane = event.getSource();    	
+    	uiViewTabPane.getUIStringInput(UIViewForm.FIELD_PERMISSION).setValue(null);
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiViewTabPane);
     }
   }
 

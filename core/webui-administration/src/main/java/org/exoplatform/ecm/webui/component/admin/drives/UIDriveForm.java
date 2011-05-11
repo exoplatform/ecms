@@ -301,7 +301,8 @@ public class UIDriveForm extends UIFormTabPane implements UISelectable {
             event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
             return ;
           } else if(oservice.getGroupHandler().findGroupById(permission[1]) == null){
-            uiApp.addMessage(new ApplicationMessage("UIDriveForm.msg.permission-path-invalid", null,
+          	Object[] arg = { itemPermission };
+            uiApp.addMessage(new ApplicationMessage("UIDriveForm.msg.permission-path-invalid", arg,
                 ApplicationMessage.WARNING)) ;
             event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
             return;
@@ -378,12 +379,7 @@ public class UIDriveForm extends UIFormTabPane implements UISelectable {
       UIDriveForm uiDriveForm = event.getSource();
       UIDriveManager uiManager = uiDriveForm.getAncestorOfType(UIDriveManager.class);
       String membership = uiDriveForm.getUIStringInput(UIDriveInputSet.FIELD_PERMISSION).getValue();
-      if ((membership != null) && (uiDriveForm.membershipString.indexOf(membership) < 0)){
-        if (uiDriveForm.membershipString.length() > 0)
-          uiDriveForm.membershipString += "," + membership;
-        else
-          uiDriveForm.membershipString += membership;
-      }
+      uiDriveForm.membershipString = membership;      
       uiDriveForm.getUIStringInput(UIDriveInputSet.FIELD_PERMISSION).setValue(uiDriveForm.membershipString);
 
       uiManager.initPopupPermission(uiDriveForm.membershipString);

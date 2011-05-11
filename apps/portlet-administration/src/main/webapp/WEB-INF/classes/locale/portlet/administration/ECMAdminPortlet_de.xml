@@ -1042,6 +1042,7 @@
       <view-name-invalid><![CDATA[Sie m&uuml;ssen einen Namen eingeben]]></view-name-invalid>
       <fileName-invalid><![CDATA[Es sind ung&uuml;ltige Symbole im Namen!]]></fileName-invalid>
       <permission-not-empty><![CDATA[Sie m&uuml;ssen eine Genehmigung ausw&auml;hlen]]></permission-not-empty>
+      <permission-path-invalid>Permission '{0}' is invalid!</permission-path-invalid>
       <mustbe-add-tab><![CDATA[Sie m&uuml;ssen ein Tab hinzuf&uuml;gen]]></mustbe-add-tab>
       <view-exist>Ansischtsname existiert schon.</view-exist>
     </msg>
@@ -2082,7 +2083,7 @@
   
   <UIDriveForm>
 		<msg>
-  		<permission-path-invalid>Permission is invalid!</permission-path-invalid>	
+  		<permission-path-invalid>Permission '{0}' is invalid!</permission-path-invalid>	
   	</msg>
   </UIDriveForm>
   

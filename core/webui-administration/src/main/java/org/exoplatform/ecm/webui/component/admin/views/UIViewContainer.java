@@ -16,6 +16,7 @@
  */
 package org.exoplatform.ecm.webui.component.admin.views;
 
+import org.exoplatform.ecm.webui.component.admin.drives.UIDriveInputSet;
 import org.exoplatform.ecm.webui.selector.UIPermissionSelector;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.core.UIContainer;
@@ -58,13 +59,13 @@ public class UIViewContainer extends UIContainer {
     UIPermissionSelector uiECMPermission =
       createUIComponent(UIPermissionSelector.class, null, null) ;
     uiECMPermission.setSelectedMembership(true);
-    uiPopup.setUIComponent(uiECMPermission);
-    UIViewForm uiViewForm = findFirstComponentOfType(UIViewForm.class) ;
     if(membership != null && membership.indexOf(":/") > -1) {
       String[] arrMember = membership.split(":/") ;
       uiECMPermission.setCurrentPermission("/" + arrMember[1]) ;
     }
-    uiECMPermission.setSourceComponent(uiViewForm, null) ;
+    uiPopup.setUIComponent(uiECMPermission);
+    UIViewForm uiViewForm = findFirstComponentOfType(UIViewForm.class) ;    
+    uiECMPermission.setSourceComponent(uiViewForm, new String[] {UIViewForm.FIELD_PERMISSION}) ;
     uiPopup.setShow(true) ;
     uiPopup.setResizable(true) ;
   }

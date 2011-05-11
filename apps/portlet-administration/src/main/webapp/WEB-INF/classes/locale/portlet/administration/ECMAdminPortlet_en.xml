@@ -1043,6 +1043,7 @@
       <view-name-invalid>You must enter name</view-name-invalid>
       <fileName-invalid>There are some invalid characters in name!</fileName-invalid>
       <permission-not-empty>You must select a permission</permission-not-empty>
+      <permission-path-invalid>Permission '{0}' is invalid!</permission-path-invalid>
       <mustbe-add-tab>You must add a tab</mustbe-add-tab>
       <view-exist>View name already exists.</view-exist>
     </msg>
@@ -2085,7 +2086,7 @@
   
   <UIDriveForm>
 		<msg>
-  		<permission-path-invalid>Permission is invalid!</permission-path-invalid>	
+  		<permission-path-invalid>Permission '{0}' is invalid!</permission-path-invalid>	
   	</msg>
   </UIDriveForm>
   
