@@ -56,7 +56,7 @@ public class TestRSSService extends BaseDMSTestCase {
     contextRss.put("exo:description", "Hello Description");
     contextRss.put("exo:storePath", "/Feeds");
     contextRss.put("exo:feedName", "feedName");
-    contextRss.put("exo:queryPath", "/jcr:root/Documents//element(*, exo:article)");
+    contextRss.put("exo:queryPath", "SELECT * FROM exo:article where jcr:path LIKE '/Documents/%'");
     contextRss.put("exo:title", "Hello Title");
     contextRss.put("exo:url", "http://www.facebook.com");
     rssService.generateFeed(contextRss);
@@ -96,7 +96,7 @@ public class TestRSSService extends BaseDMSTestCase {
     contextPodcast.put("exo:description", "Hello Description");
     contextPodcast.put("exo:storePath", "/Feeds");
     contextPodcast.put("exo:feedName", "podcastName");
-    contextPodcast.put("exo:queryPath", "/jcr:root/Documents//element(*, exo:article)");
+    contextPodcast.put("exo:queryPath", "SELECT * FROM exo:article where jcr:path LIKE '/Documents/%'");
     contextPodcast.put("exo:title", "Hello Title");
     contextPodcast.put("exo:url", "http://twitter.com");
     rssService.generateFeed(contextPodcast);

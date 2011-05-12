@@ -59,7 +59,7 @@ public class CommentsServiceImpl implements CommentsService {
   private static final String LANGUAGES = "languages".intern() ;
   private static final String ANONYMOUS = "anonymous".intern() ;
 
-  private ExoCache commentsCache_ ;
+  private ExoCache<String, List<Node>> commentsCache_ ;
   private MultiLanguageService multiLangService_ ;
 
   /**

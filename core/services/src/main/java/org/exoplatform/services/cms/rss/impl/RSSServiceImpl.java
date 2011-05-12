@@ -174,11 +174,6 @@ public class RSSServiceImpl implements RSSService{
       List<SyndEntry> entries = new ArrayList<SyndEntry>();
       SyndEntry entry;
       SyndContent description;
-//      ExoContainer container = ExoContainerContext.getCurrentContainer() ;
-//      PortalContainerInfo containerInfo =
-//        (PortalContainerInfo)container.getComponentInstanceOfType(PortalContainerInfo.class) ;
-//      String portalName = containerInfo.getContainerName() ;
-//      String wsName = session.getWorkspace().getName() ;
       NodeIterator iter = queryResult.getNodes() ;
       while (iter.hasNext()) {
         Node child = iter.nextNode();

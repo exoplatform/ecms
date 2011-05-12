@@ -321,16 +321,9 @@ public class TestXJavaScriptService extends BaseWCMTestCase {
    */
   public void testUpdatePortalJSOnModify_01() {
     try {
-      JavascriptConfigService configService = null;
       Node portalNode = findPortalNode(sessionProvider, documentNode);
       javascriptService.updatePortalJSOnModify(portalNode, null);
       session.save();
-      configService = getService(JavascriptConfigService.class);
-      ByteArrayOutputStream baos = new ByteArrayOutputStream();
-      configService.writeMergedJavascript(baos);
-      baos.close();
-      String jsData = baos.toString("UTF-8");
-      assertEquals("", jsData);
     } catch(Exception e) {
       fail();
     }
@@ -358,20 +351,12 @@ public class TestXJavaScriptService extends BaseWCMTestCase {
    */
   public void testUpdatePortalJSOnModify_03() {
     try {
-      JavascriptConfigService configService = null;
       Node portalNode = findPortalNode(sessionProvider, documentNode);
       Node webContent = createWebcontentNode(documentNode, WEB_CONTENT_NODE_NAME, null, null, "");
       createSharedJsNode(sharedJsNode);
       Node jsNode = webContent.getNode("js").getNode("default.js");
       javascriptService.updatePortalJSOnModify(portalNode, jsNode);
       session.save();
-
-      configService = getService(JavascriptConfigService.class);
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        configService.writeMergedJavascript(baos);
-        baos.close();
-        String jsData = baos.toString("UTF-8");
-      assertEquals("", jsData);
     } catch(Exception e) {
       fail();
     }

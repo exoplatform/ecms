@@ -203,7 +203,7 @@ public class TestDocumentTypeService extends BaseDMSTestCase {
     String username = "__system";
 
     List<Node> expectedList = documentTypeService_.getAllDocumentsByUser(COLLABORATION_WS,
-        REPO_NAME, createSessionProvider(), mimeTypes, username);
+        createSessionProvider(), mimeTypes, username);
     //TODO: Need to check why the list is empty
     //    assertEquals(3, expectedList.size());
     Iterator<Node> iterator = expectedList.iterator();
@@ -236,7 +236,7 @@ public class TestDocumentTypeService extends BaseDMSTestCase {
     String username = "jame";
 
     List<Node> expectedList = documentTypeService_.getAllDocumentsByUser(COLLABORATION_WS,
-        REPO_NAME, createSessionProvider(), mimeTypes, username);
+        createSessionProvider(), mimeTypes, username);
 
     assertEquals(0, expectedList.size());
     Iterator<Node> iterator = expectedList.iterator();

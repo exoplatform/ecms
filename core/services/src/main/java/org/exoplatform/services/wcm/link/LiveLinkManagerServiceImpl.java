@@ -247,10 +247,11 @@ public class LiveLinkManagerServiceImpl implements LiveLinkManagerService {
       if(httpClient.executeMethod(getMethod) == 200) {
         return LinkBean.STATUS_ACTIVE;
       }
+      return LinkBean.STATUS_BROKEN;
     } catch (Exception e) {
-      log.error("Exception when validate link:" + strUrl, e);
+      log.info("URL Link: \"" + strUrl + "\" is broken");
+      return LinkBean.STATUS_BROKEN;
     }
-    return LinkBean.STATUS_BROKEN;
   }
 
   /* (non-Javadoc)

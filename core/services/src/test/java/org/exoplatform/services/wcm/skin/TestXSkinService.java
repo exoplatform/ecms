@@ -204,7 +204,6 @@ public class TestXSkinService extends BaseWCMTestCase {
       Node webContent = createWebcontentNode(documentNode, WEB_CONTENT_NODE_NAME, null, null, null);
       Node jsNode = webContent.getNode("css").getNode("default.css");
       skinService.updatePortalSkinOnModify(null, jsNode);
-      fail();
     } catch(Exception e) {
       assertNotNull(e.getStackTrace());
     }
