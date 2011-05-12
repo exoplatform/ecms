@@ -33,6 +33,7 @@ import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.CanCutNodeFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotInTrashFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotLockedFilter;
+import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotRestrictedNodeFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotTrashHomeNodeFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.listener.UIWorkingAreaActionListener;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
@@ -65,7 +66,8 @@ public class CutManageComponent extends UIAbstractManagerComponent {
   private final static Log       LOG  = ExoLogger.getLogger(CutManageComponent.class);
 
   private static final List<UIExtensionFilter> FILTERS
-      = Arrays.asList(new UIExtensionFilter[] { new IsNotInTrashFilter(),
+      = Arrays.asList(new UIExtensionFilter[] { new IsNotRestrictedNodeFilter(),
+                                                new IsNotInTrashFilter(),
                                                 new CanCutNodeFilter(),
                                                 new IsNotLockedFilter(),
                                                 new IsNotTrashHomeNodeFilter() });

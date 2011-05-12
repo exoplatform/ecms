@@ -358,7 +358,8 @@
       <does-not-support-auditing>هذه العقدة لا يمكن فحصها</does-not-support-auditing>
       <can-not-rename-node>ليس لديك الصلاحية لإعادة تسمية هذه العقدة.  اتصل بخطط النظام للحصول على الصلاحية الصحيحة.</can-not-rename-node>
       <can-not-cut-node>ليس لديك الصلاحية لقص هذه العقدة.  اتصل بخطط النظام للحصول على الصلاحية الصحيحة</can-not-cut-node>
-      <can-not-remove-node>ليس لديك الصلاحية لحذف هذه العقدة.  اتصل بخطط النظام للحصول على الصلاحية الصحيحة</can-not-remove-node>
+      <is-restricted-node>This node is restricted, cannot change it</is-restricted-node>
+	  <can-not-remove-node>ليس لديك الصلاحية لحذف هذه العقدة.  اتصل بخطط النظام للحصول على الصلاحية الصحيحة</can-not-remove-node>
       <can-not-lock-node>ليس لديك الصلاحية لقفل هذه العقدة.  اتصل بخطط النظام للحصول على الصلاحية الصحيحة</can-not-lock-node>
       <can-not-unlock-node>ليس لديك الصلاحية لتحرير قفل هذه العقدة.  اتصل بخطط النظام للحصول على الصلاحية الصحيحة</can-not-unlock-node>
       <no-node>لم تختر عقدة بعد لإلصاقها</no-node>

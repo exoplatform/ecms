@@ -361,6 +361,7 @@
       <does-not-support-auditing>Sie können nicht aktiviert werden Rechnungsprüfung auf diesem Knoten</does-not-support-auditing>
       <can-not-rename-node><![CDATA[Sie haben keine Genegmigung diesen Knoten umzunennen. Bitte kontaktieren Sie den Administrator f&uuml;r das Recht.]]></can-not-rename-node>
       <can-not-cut-node><![CDATA[Sie haben keine Genegmigung diesen Knoten auszuschneiden. Bitte kontaktieren Sie den Administrator f&uuml;r das Recht.]]></can-not-cut-node>
+	  <is-restricted-node>This node is restricted, cannot change it</is-restricted-node>
       <can-not-remove-node><![CDATA[Sie haben keine Genegmigung diesen Knoten zu entfernen. Bitte kontaktieren Sie den Administrator f&uuml;r das Recht.]]></can-not-remove-node>
       <can-not-lock-node><![CDATA[Sie haben keine Genegmigung diesen Knoten zu sperren. Bitte kontaktieren Sie den Administrator f&uuml;r das Recht.]]></can-not-lock-node>
       <can-not-unlock-node><![CDATA[Sie haben keine Genegmigung diesen Knoten aufzusperren. Bitte kontaktieren Sie den Administrator f&uuml;r das Recht.]]></can-not-unlock-node>
