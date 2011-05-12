@@ -44,6 +44,7 @@ import org.xcmis.spi.model.PropertyType;
 import org.xcmis.spi.model.TypeDefinition;
 import org.xcmis.spi.model.Updatability;
 import org.xcmis.spi.model.VersioningState;
+import org.xcmis.spi.utils.CmisUtils;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -351,9 +352,7 @@ abstract class BaseJcrStorage implements TypeManager
     */
    private String createJcrDate(Calendar c)
    {
-      return String.format("%04d-%02d-%02dT%02d:%02d:%02d.%03dZ", c.get(Calendar.YEAR), c.get(Calendar.MONTH) + 1, c
-         .get(Calendar.DAY_OF_MONTH), c.get(Calendar.HOUR_OF_DAY), c.get(Calendar.MINUTE), c.get(Calendar.SECOND), c
-         .get(Calendar.MILLISECOND));
+      return CmisUtils.convertToString(c);
    }
 
    /**
