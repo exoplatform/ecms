@@ -87,14 +87,6 @@ public class UIImportNode extends UIForm implements UIPopupComponent {
       new UIFormUploadInput(VERSION_HISTORY_FILE_UPLOAD, VERSION_HISTORY_FILE_UPLOAD, 0);
     uiHistoryFileUpload.setAutoUpload(true);
     addUIFormInput(uiHistoryFileUpload);
-//    List<SelectItemOption<String>> formatItem = new ArrayList<SelectItemOption<String>>();
-//    RequestContext context = RequestContext.getCurrentInstance();
-//    ResourceBundle resourceBundle = context.getApplicationResourceBundle();
-//    formatItem.add(new SelectItemOption<String>(
-//        resourceBundle.getString("Import.label." + SYS_VIEW), SYS_VIEW));
-//    formatItem.add(new SelectItemOption<String>(
-//        resourceBundle.getString("Import.label." + DOC_VIEW), DOC_VIEW));
-//    addUIFormInput(new UIFormRadioBoxInput(FORMAT, SYS_VIEW, formatItem).setAlign(UIFormRadioBoxInput.VERTICAL_ALIGN));
   }
 
   public void activate() throws Exception {
@@ -208,8 +200,10 @@ public class UIImportNode extends UIForm implements UIPopupComponent {
 
         //Process import version history
         if(inputHistory.getUploadResource() != null) {
-          Map<String, String> mapHistoryValue = org.exoplatform.services.cms.impl.Utils.getMapImportHistory(inputHistory.getUploadDataAsStream());
-          org.exoplatform.services.cms.impl.Utils.processImportHistory(currentNode, inputHistory.getUploadDataAsStream(), mapHistoryValue);
+          Map<String, String> mapHistoryValue = 
+            org.exoplatform.services.cms.impl.Utils.getMapImportHistory(inputHistory.getUploadDataAsStream());
+          org.exoplatform.services.cms.impl.Utils.processImportHistory(
+              currentNode, inputHistory.getUploadDataAsStream(), mapHistoryValue);
         }
           // if an import fails, it's possible when source xml contains errors,
           // user may fix the fail caused items and save session (JSR-170, 7.3.7 Session Import Methods).
@@ -250,7 +244,6 @@ public class UIImportNode extends UIForm implements UIPopupComponent {
         uploadService.removeUploadResource(inputHistory.getUploadId());
         session.logout();
       }
-
       uiExplorer.updateAjax(event);
     }
   }

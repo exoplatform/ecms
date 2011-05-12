@@ -52,7 +52,6 @@ import org.exoplatform.resolver.ResourceResolver;
 import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.CmsService;
 import org.exoplatform.services.cms.impl.DMSConfiguration;
-import org.exoplatform.services.cms.impl.DMSRepositoryConfiguration;
 import org.exoplatform.services.cms.taxonomy.TaxonomyService;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
@@ -70,8 +69,8 @@ import org.exoplatform.webui.core.UIPopupComponent;
 import org.exoplatform.webui.core.UIPopupWindow;
 import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.event.Event;
-import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.event.Event.Phase;
+import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.form.UIFormInput;
 import org.exoplatform.webui.form.UIFormInputBase;
 import org.exoplatform.webui.form.UIFormMultiValueInputSet;
@@ -136,7 +135,6 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
   }
 
   public Node getRootPathTaxonomy(Node node) throws Exception {
-    UIJCRExplorer uiExplorer = getAncestorOfType(UIJCRExplorer.class);
     try {
       TaxonomyService taxonomyService = getApplicationComponent(TaxonomyService.class);
       List<Node> allTaxonomyTrees = taxonomyService.getAllTaxonomyTrees();
@@ -446,7 +444,6 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
       UIWorkingArea uiWorkingArea = uiExplorer.getChild(UIWorkingArea.class);
       UIDocumentWorkspace uiDocumentWorkspace = uiWorkingArea.getChild(UIDocumentWorkspace.class);
       uiDocumentWorkspace.removeChild(UIDocumentFormController.class);
-//      uiExplorer.setCurrentPath(uiExplorer.getPathBeforeEditing());
       documentForm.setIsUpdateSelect(false);
       uiExplorer.setCurrentPath(newNode.getPath());
       uiExplorer.setWorkspaceName(newNode.getSession().getWorkspace().getName());

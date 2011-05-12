@@ -20,17 +20,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import javax.jcr.Node;
-import javax.jcr.Session;
-
 import org.exoplatform.portal.config.DataStorage;
 import org.exoplatform.portal.config.model.Page;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.organization.Group;
+import org.exoplatform.services.organization.Membership;
 import org.exoplatform.services.organization.MembershipHandler;
 import org.exoplatform.services.organization.MembershipType;
-import org.exoplatform.services.organization.Membership;
 import org.exoplatform.services.organization.OrganizationService;
 import org.exoplatform.services.wcm.core.WCMConfigurationService;
 import org.exoplatform.services.wcm.newsletter.NewsletterCategoryConfig;
@@ -471,17 +468,20 @@ public class UISubscriptions extends UIForm {
             Page page = dataStorage.getPage(Util.getUIPortal().getSelectedNode().getPageReference());
             List<String> pageAccessPermissions = new ArrayList<String>(Arrays.asList(page.getAccessPermissions()));
             
-            String membership = wcmConfigurationService.getRuntimeContextParam(WCMConfigurationService.NEWSLETTER_MANAGE_MEMBERSHIP);
+            String membership = 
+              wcmConfigurationService.getRuntimeContextParam(WCMConfigurationService.NEWSLETTER_MANAGE_MEMBERSHIP);
             Group group = organizationService.getGroupHandler().findGroupById(membership.split(":")[1]);
             MembershipHandler membershipHandler = organizationService.getMembershipHandler();
-            MembershipType membershipType = organizationService.getMembershipTypeHandler().findMembershipType(membership.split(":")[0]);
+            MembershipType membershipType = 
+              organizationService.getMembershipTypeHandler().findMembershipType(membership.split(":")[0]);
             for(String userName : subscriptionConfig.getRedactor().split(","))
             {
               if(pageAccessPermissions.contains(userName))
               {
                 pageAccessPermissions.remove(userName);
                 //Remove a membership record with  - a relation of the user ,group and membership type
-                Membership member = membershipHandler.findMembershipByUserGroupAndType(userName,group.getId(),membershipType.getName());
+                Membership member = 
+                  membershipHandler.findMembershipByUserGroupAndType(userName,group.getId(),membershipType.getName());
                 if(member!=null) membershipHandler.removeMembership(member.getId(), true);
               }
             }   

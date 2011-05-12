@@ -129,8 +129,8 @@ public class JcrCmisRegistry extends CmisRegistry implements Startable, CmisRegi
       {
          try
          {
-            IndexConfiguration indexConfiguration = new IndexConfiguration(rootIndexDir, Constants.ROOT_PARENT_UUID, Constants.ROOT_UUID);
-
+            IndexConfiguration indexConfiguration = 
+              new IndexConfiguration(rootIndexDir, Constants.ROOT_PARENT_UUID, Constants.ROOT_UUID);
             String[] wsNames = getAffectedWorkspaceNames();
             String currentRepositoryName = repositoryService.getCurrentRepository().getConfiguration().getName();
             for (String wsName : wsNames)

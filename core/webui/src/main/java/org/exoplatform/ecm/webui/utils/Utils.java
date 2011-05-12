@@ -221,13 +221,13 @@ public class Utils {
   private static final Log LOG = ExoLogger.getLogger("webui.Utils");
   public Map<String, Object> maps_ = new HashMap<String, Object>();
 
-  public static final String INPUT_TEXT_AREA 			= "TEXTAREA".intern();
-	public static final String INPUT_WYSIWYG				= "WYSIWYG".intern();
-	public static final String INPUT_TEXT						= "TEXT".intern();
-	public static final String DEFAULT_CSS_NAME     = "InlineText".intern();
-	public static final String LEFT2RIGHT           = "left-to-right";
-	public static final String RIGHT2LEFT           = "right-to-left";
-	
+  public static final String INPUT_TEXT_AREA = "TEXTAREA".intern();
+  public static final String INPUT_WYSIWYG = "WYSIWYG".intern();
+  public static final String INPUT_TEXT	= "TEXT".intern();
+  public static final String DEFAULT_CSS_NAME = "InlineText".intern();
+  public static final String LEFT2RIGHT = "left-to-right";
+  public static final String RIGHT2LEFT = "right-to-left";
+
   public static String encodeHTML(String text) {
     return text.replaceAll("&", "&amp;").replaceAll("\"", "&quot;").replaceAll(
         "<", "&lt;").replaceAll(">", "&gt;");
@@ -294,55 +294,7 @@ public class Utils {
   public static List<String> getListAllowedFileType(Node currentNode,
                                                     String repository,
                                                     TemplateService templateService) throws Exception {
-    List<String> nodeTypes = new ArrayList<String>();
-    NodeTypeManager ntManager = currentNode.getSession().getWorkspace()
-        .getNodeTypeManager();
-    NodeType currentNodeType = currentNode.getPrimaryNodeType();
-    NodeDefinition[] childDefs = currentNodeType.getChildNodeDefinitions();
-    List<String> templates = templateService.getDocumentTemplates();
-    try {
-      for (int i = 0; i < templates.size(); i++) {
-        String nodeTypeName = templates.get(i).toString();
-        NodeType nodeType = ntManager.getNodeType(nodeTypeName);
-        NodeType[] superTypes = nodeType.getSupertypes();
-        boolean isCanCreateDocument = false;
-        for (NodeDefinition childDef : childDefs) {
-          NodeType[] requiredChilds = childDef.getRequiredPrimaryTypes();
-          for (NodeType requiredChild : requiredChilds) {
-            if (nodeTypeName.equals(requiredChild.getName())) {
-              isCanCreateDocument = true;
-              break;
-            }
-          }
-          if (nodeTypeName.equals(childDef.getName()) || isCanCreateDocument) {
-            if (!nodeTypes.contains(nodeTypeName))
-              nodeTypes.add(nodeTypeName);
-            isCanCreateDocument = true;
-          }
-        }
-        if (!isCanCreateDocument) {
-          for (NodeType superType : superTypes) {
-            for (NodeDefinition childDef : childDefs) {
-              for (NodeType requiredType : childDef.getRequiredPrimaryTypes()) {
-                if (superType.getName().equals(requiredType.getName())) {
-                  if (!nodeTypes.contains(nodeTypeName))
-                    nodeTypes.add(nodeTypeName);
-                  isCanCreateDocument = true;
-                  break;
-                }
-              }
-              if (isCanCreateDocument)
-                break;
-            }
-            if (isCanCreateDocument)
-              break;
-          }
-        }
-      }
-    } catch (Exception e) {
-      LOG.error("Unexpected error", e);
-    }
-    return nodeTypes;
+    return getListAllowedFileType(currentNode, templateService);
   }
   
   public static List<String> getListAllowedFileType(Node currentNode,
@@ -531,23 +483,7 @@ public class Utils {
   @Deprecated
   public static Node findNodeByUUID(String repository, String uuid)
       throws Exception {
-    RepositoryService repositoryService = Util.getUIPortal()
-        .getApplicationComponent(RepositoryService.class);
-    SessionProviderService sessionProviderService = Util.getUIPortal()
-        .getApplicationComponent(SessionProviderService.class);
-    SessionProvider sessionProvider = sessionProviderService
-        .getSessionProvider(null);
-    ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
-    Node node = null;
-    for (String wsName : manageableRepository.getWorkspaceNames()) {
-      try {
-        node = sessionProvider.getSession(wsName, manageableRepository)
-            .getNodeByUUID(uuid);
-      } catch (ItemNotFoundException e) {
-        continue;
-      }
-    }
-    return node;
+    return findNodeByUUID(uuid);
   }
   
   public static Node findNodeByUUID(String uuid) throws Exception {
@@ -736,7 +672,8 @@ public class Utils {
         } catch (Exception e) {
         	return defaultValue;
         }
-			} else return defaultValue;
+			} 
+  		return defaultValue;
   	}
   	String currentValue =defaultValue;
   	ResourceBundle resourceBundle;
@@ -789,15 +726,24 @@ public class Utils {
   	sb.append("<div class=\"InlineEditing\">\n");  	
   	sb.append("\n<div id=\"").append(showBlockId).append("\" Class=\"").append(cssClass).append("\"");
   	sb.append("title=\"").append(strSuggestion).append("\"");
-  	sb.append(" onDblClick=\"InlineEditor.presentationSwitchBlock('").append(showBlockId).append("', '").append(editBlockEditorID).append("');\"");
-  	sb.append("onmouseout=\"this.className='").append(cssClass).append("';\" onmouseover=\"this.className='").append(cssClass).append("Hover';\">").append(currentValue).append("</div>\n");
+  	sb.append(" onDblClick=\"InlineEditor.presentationSwitchBlock('").append(showBlockId).
+  	   append("', '").append(editBlockEditorID).append("');\"");
+  	sb.append("onmouseout=\"this.className='").append(cssClass).
+  	   append("';\" onmouseover=\"this.className='").
+  	   append(cssClass).append("Hover';\">").
+  	   append(currentValue).
+  	   append("</div>\n");
   	sb.append("\t<div id=\"").append(editBlockEditorID).append("\" class=\"Edit").append(cssClass).append("\">\n");
-  	sb.append("\t\t<form name=\"").append(editFormID).append("\" id=\"").append(editFormID).append("\" onSubmit=\"").append(strAction).append("\">\n");
-  	sb.append("<DIV style=\"display:none; visible:hidden\" id=\"").append(currentValueID).append("\" name=\"").append(currentValueID).append("\">").append(currentValue).append("</DIV>");
+  	sb.append("\t\t<form name=\"").append(editFormID).append("\" id=\"").append(editFormID).
+  	   append("\" onSubmit=\"").append(strAction).append("\">\n");
+  	sb.append("<DIV style=\"display:none; visible:hidden\" id=\"").append(currentValueID).
+  	   append("\" name=\"").append(currentValueID).append("\">").append(currentValue).append("</DIV>");
   	
   	if (bDirection!=null && bDirection.equals(LEFT2RIGHT)) {
-  	  sb.append("\t\t<a href=\"#\" class =\"AcceptButton\" style=\"float:left\" onclick=\"").append(strAction).append("\">&nbsp;</a>\n");
-  	  sb.append("\t\t<a href=\"#\" class =\"CancelButton\" style=\"float:left\" ").append("onClick=\"InlineEditor.presentationSwitchBlock('");
+  	  sb.append("\t\t<a href=\"#\" class =\"AcceptButton\" style=\"float:left\" onclick=\"").
+  	     append(strAction).append("\">&nbsp;</a>\n");
+  	  sb.append("\t\t<a href=\"#\" class =\"CancelButton\" style=\"float:left\" ").
+  	     append("onClick=\"InlineEditor.presentationSwitchBlock('");
       sb.append(editBlockEditorID).append("', '").append(showBlockId).append("');\">&nbsp;</a>\n");      
   	} else {
   	  sb.append("\t\t<a href=\"#\" class =\"CancelButton\" ").append("onClick=\"InlineEditor.presentationSwitchBlock('");
@@ -822,7 +768,8 @@ public class Utils {
   		sb.append(currentValue).append("</TEXTAREA>");
   	}else if (inputType.equalsIgnoreCase(INPUT_TEXT)) {
   		sb.append("\t\t<input type=\"TEXT\" name =\"");
-  		sb.append(newValueInputId).append("\" id =\"").append(newValueInputId).append("\" value=\"").append(currentValue).append("\"/>");
+  		sb.append(newValueInputId).append("\" id =\"").append(newValueInputId).
+  		   append("\" value=\"").append(currentValue).append("\"/>");
   	}
   	
   	sb.append("\n\t\t</div>\n\t</form>\n</div>\n\n</div>");
@@ -860,7 +807,8 @@ public class Utils {
   	contentsCss.append("]");
 
   	StringBuffer buffer = new StringBuffer();
- 	  buffer.append("<div style=\"display:none\"><textarea id='cssContent" + name + "' name='cssContent" + name + "'>" + passedCSS + "</textarea></div>\n");
+ 	  buffer.append("<div style=\"display:none\">" +
+ 	  		"<textarea id='cssContent" + name + "' name='cssContent" + name + "'>" + passedCSS + "</textarea></div>\n");
   	
   	if (value_!=null) {
   		buffer.append("<textarea id='" + name + "' name='" + name + "'>" + value_ + "</textarea>\n");
@@ -870,7 +818,8 @@ public class Utils {
   	buffer.append("<script type='text/javascript'>\n");
   	buffer.append("  //<![CDATA[ \n");
   	buffer.append("    var instances = CKEDITOR.instances['" + name + "']; if (instances) instances.destroy(true);\n");
-  	buffer.append("    CKEDITOR.replace('" + name + "', {toolbar:'" + toolbar + "', width:'98%', height: 200, contentsCss:" + contentsCss + ", ignoreEmptyParagraph:true});\n");
+  	buffer.append("    CKEDITOR.replace('" + name + "', {toolbar:'" + toolbar + "', width:'98%', height: 200, contentsCss:" + 
+  	    contentsCss + ", ignoreEmptyParagraph:true});\n");
     buffer.append("    CKEDITOR.instances['" + name + "'].on(\"instanceReady\", function(){  ");
     buffer.append("       eXo.ecm.CKEditor.insertCSS('" + name + "', 'cssContent" + name + "');\n");      
     buffer.append("       });");

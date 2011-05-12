@@ -18,6 +18,19 @@
  */
 package org.exoplatform.ecms.xcmis.sp.index;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.UUID;
+
+import javax.jcr.RepositoryException;
+
 import org.exoplatform.ecms.xcmis.sp.StorageConfiguration;
 import org.exoplatform.ecms.xcmis.sp.StorageImpl;
 import org.exoplatform.ecms.xcmis.sp.StorageProviderImpl;
@@ -44,24 +57,9 @@ import org.xcmis.search.config.IndexConfiguration;
 import org.xcmis.search.config.SearchServiceConfiguration;
 import org.xcmis.search.content.ContentEntry;
 import org.xcmis.search.content.IndexModificationException;
-import org.xcmis.search.content.command.InvocationContext;
-import org.xcmis.search.value.SlashSplitter;
 import org.xcmis.search.value.ToStringNameConverter;
 import org.xcmis.spi.ObjectNotFoundException;
 import org.xcmis.spi.PermissionService;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
-
-import javax.jcr.RepositoryException;
 
 /**
  * @author <a href="mailto:foo@bar.org">Foo Bar</a>
@@ -385,7 +383,8 @@ public class Jcr2XcmisChangesListener implements ItemsPersistenceListener
 	         File rootFolder = new File(readOnlyIndexConfiguration.getIndexDir());
 	         File indexFolder = new File(new File(rootFolder, currentRepositoryName), workspaceName);
 	         
-	         IndexConfiguration indexConfiguration = new IndexConfiguration(indexFolder.getPath(), Constants.ROOT_PARENT_UUID, Constants.ROOT_UUID);
+	         IndexConfiguration indexConfiguration = 
+	           new IndexConfiguration(indexFolder.getPath(), Constants.ROOT_PARENT_UUID, Constants.ROOT_UUID);
 	
 	         SearchServiceConfiguration configuration = new SearchServiceConfiguration(schema, tableResolver,
 	        		 new CmisContentReader(rootStorage), indexConfiguration);

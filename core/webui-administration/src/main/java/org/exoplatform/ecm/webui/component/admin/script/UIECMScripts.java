@@ -57,7 +57,8 @@ public class UIECMScripts extends UIContainer {
 
   private List<SelectItemOption<String>> getECMCategoryOptions() throws Exception {
     List<SelectItemOption<String>> ecmOptions = new ArrayList<SelectItemOption<String>>() ;
-    Node ecmScriptHome = getApplicationComponent(ScriptService.class).getECMScriptHome(SessionProviderFactory.createSystemProvider());
+    Node ecmScriptHome = 
+      getApplicationComponent(ScriptService.class).getECMScriptHome(SessionProviderFactory.createSystemProvider());
     NodeIterator categories = ecmScriptHome.getNodes() ;
     while(categories.hasNext()) {
       Node script = categories.nextNode() ;
@@ -86,7 +87,8 @@ public class UIECMScripts extends UIContainer {
     }else if(name.equals("widget")){
       scripts = getApplicationComponent(ScriptService.class).getECMWidgetScripts(SessionProviderFactory.createSessionProvider());
     }else if(name.equals("interceptor")) {
-      scripts = getApplicationComponent(ScriptService.class).getECMInterceptorScripts(SessionProviderFactory.createSystemProvider());
+      scripts = 
+        getApplicationComponent(ScriptService.class).getECMInterceptorScripts(SessionProviderFactory.createSystemProvider());
     }
     for(Node scriptNode : scripts) {
       String version = "" ;

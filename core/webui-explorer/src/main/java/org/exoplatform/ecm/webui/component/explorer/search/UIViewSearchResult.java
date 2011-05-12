@@ -134,7 +134,6 @@ public class UIViewSearchResult extends UIContainer implements NodePresentation 
     return attachments;
   }
 
-  @Override
   public String getAttachmentURL(Node attNode, Parameter[] params)
       throws Exception {
     return this.event("ChangeNode", Utils.formatNodeName(attNode.getPath()), params);
@@ -192,7 +191,7 @@ public class UIViewSearchResult extends UIContainer implements NodePresentation 
   public boolean isRssLink() { return false ; }
   public String getRssLink() { return null ; }
 
-  public List getSupportedLocalise() throws Exception {
+  public List<String> getSupportedLocalise() throws Exception {
     MultiLanguageService multiLanguageService = getApplicationComponent(MultiLanguageService.class) ;
     return multiLanguageService.getSupportedLanguages(node_) ;
   }
@@ -410,30 +409,29 @@ public class UIViewSearchResult extends UIContainer implements NodePresentation 
     return false;
   }
 
+  @SuppressWarnings("unused")
   public void setEnableComment(boolean value) {
   }
 
+  @SuppressWarnings("unused")
   public void setEnableVote(boolean value) {
   }
 
-
-	@Override
-  public String getInlineEditingField(Node orgNode, String propertyName, String defaultValue, String inputType, 
-                                      String idGenerator, String cssClass, boolean isGenericProperty, String... arguments) throws Exception {
+  @SuppressWarnings("unused")
+  public String getInlineEditingField(Node orgNode, String propertyName, 
+      String defaultValue, String inputType, String idGenerator, String cssClass, 
+      boolean isGenericProperty, String... arguments) throws Exception {
 	  if (orgNode.hasProperty(propertyName)) {
 	      return orgNode.getProperty(propertyName).getString();
-	  }else {
-	    return defaultValue;
 	  }
+	  return defaultValue;
   }
 
-  @Override
   public String getInlineEditingField(Node orgNode, String propertyName)
       throws Exception {
     if (orgNode.hasProperty(propertyName)) {
         return orgNode.getProperty(propertyName).getString();
-    }else {
-      return "";  
     }
+    return "";  
   }
 }

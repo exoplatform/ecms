@@ -191,7 +191,9 @@ public class InlineEditingService implements ResourceContainer{
     cacheControl.setNoStore(true);
     try {
       SessionProvider sessionProvider = WCMCoreUtils.getUserSessionProvider();
-      RepositoryService repositoryService = (RepositoryService)ExoContainerContext.getCurrentContainer().getComponentInstanceOfType(RepositoryService.class);
+      ExoContainer container = ExoContainerContext.getCurrentContainer();
+      RepositoryService repositoryService = 
+        (RepositoryService)container.getComponentInstanceOfType(RepositoryService.class);
       ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
       Session session = sessionProvider.getSession(workspaceName, manageableRepository);		    
       try {
@@ -202,8 +204,8 @@ public class InlineEditingService implements ResourceContainer{
           if (!sameValue(newValue, node, propertyName)) {
             if (newValue.length() > 0) {
               newValue = Text.unescapeIllegalJcrChars(newValue.trim());
-              ExoContainer container = ExoContainerContext.getCurrentContainer();
-              PortalContainerInfo containerInfo = (PortalContainerInfo)container.getComponentInstanceOfType(PortalContainerInfo.class);
+              PortalContainerInfo containerInfo = 
+                (PortalContainerInfo)container.getComponentInstanceOfType(PortalContainerInfo.class);
               String containerName = containerInfo.getContainerName();		    	    	    
               ListenerService listenerService = WCMCoreUtils.getService(ListenerService.class, containerName);
               if (propertyName.equals(EXO_TITLE)) {
@@ -219,7 +221,7 @@ public class InlineEditingService implements ResourceContainer{
                 }else {
                   node.setProperty(propertyName, newValue);
                 }
-              }else {
+              } else {
                 int iSlash = propertyName.lastIndexOf("/");
                 String subnodePath = propertyName.substring(0, iSlash);
                 String subnodeProperty = propertyName.substring(iSlash+1);
@@ -229,7 +231,7 @@ public class InlineEditingService implements ResourceContainer{
                   if (currentValue==null) currentValue = new Value[1];
                   currentValue[0] = session.getValueFactory().createValue(newValue);
                   subnode.setProperty(subnodeProperty, currentValue);
-                }else {
+                } else {
                   subnode.setProperty(subnodeProperty, newValue);
                 }
               }
@@ -239,7 +241,7 @@ public class InlineEditingService implements ResourceContainer{
               session.save();
             }
           }
-        }else {
+        } else {
           messageKey = "AccessDeniedException.msg";
           message = resourceBundle.getString(messageKey);
           localeMsg.setAttribute("message", message);
@@ -247,7 +249,6 @@ public class InlineEditingService implements ResourceContainer{
           return Response.ok(new DOMSource(document), MediaType.TEXT_XML).cacheControl(cacheControl).build();
         }				
       } catch (AccessDeniedException ace) {
-        ace.printStackTrace();
         log.error("AccessDeniedException: ", ace);
         messageKey = "AccessDeniedException.msg";
         message = resourceBundle.getString(messageKey);
@@ -255,7 +256,6 @@ public class InlineEditingService implements ResourceContainer{
         document.appendChild(localeMsg);
         return Response.ok(new DOMSource(document), MediaType.TEXT_XML).cacheControl(cacheControl).build();
       } catch (FileNotFoundException fie) {
-        fie.printStackTrace();
         log.error("FileNotFoundException: ", fie);
         messageKey = "ItemNotFoundException.msg";
         message = resourceBundle.getString(messageKey);
@@ -263,7 +263,6 @@ public class InlineEditingService implements ResourceContainer{
         document.appendChild(localeMsg);
         return Response.ok(new DOMSource(document), MediaType.TEXT_XML).cacheControl(cacheControl).build();	    
       }  catch (LockException lockex) {
-        lockex.printStackTrace();
         log.error("LockException", lockex);
         messageKey = "LockException.msg";
         message = resourceBundle.getString(messageKey);
@@ -272,7 +271,6 @@ public class InlineEditingService implements ResourceContainer{
         return Response.ok(new DOMSource(document), MediaType.TEXT_XML).cacheControl(cacheControl).build();
       }
     } catch (Exception e) {
-      e.printStackTrace();
       log.error("Error when perform edit title: ", e);
       messageKey = "UIPresentation.label.Exception";
       message = resourceBundle.getString(messageKey);
@@ -303,9 +301,8 @@ public class InlineEditingService implements ResourceContainer{
       }catch (Exception e) {
         return false;
       }
-    }else {
-      return node.getProperty(propertyName).getString().equals(newValue);
     }
+    return node.getProperty(propertyName).getString().equals(newValue);
   }
 
   /**

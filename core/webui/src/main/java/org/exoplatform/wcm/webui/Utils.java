@@ -573,18 +573,16 @@ public class Utils {
     if (node.isNodeType("nt:frozenNode")) {
       String uuid = node.getProperty("jcr:frozenUuid").getString();
       return node.getSession().getNodeByUUID(uuid);
-    } else {
-      return node;
     }
+    return node;
   }
 
   public static String getRealNodePath(Node node) throws Exception {
     if (node.isNodeType("nt:frozenNode")) {
       Node realNode = getRealNode(node);
       return realNode.getPath() + "?version=" + node.getParent().getName();
-    } else {
-      return node.getPath();
     }
+    return node.getPath();
   }
 
   public static String getWebdavURL(Node node) throws Exception {
@@ -658,23 +656,20 @@ public class Utils {
       return userACL.hasEditPermissionOnPage(uiPage.getOwnerType(),
                                              uiPage.getOwnerId(),
                                              uiPage.getEditPermission());
-    } else {
-      UIPortal currentUIPortal = portalApp.<UIWorkingWorkspace> findComponentById(UIPortalApplication.UI_WORKING_WS_ID)
-                                          .findFirstComponentOfType(UIPortal.class);
-      PageNode currentNode = currentUIPortal.getSelectedNode();
-      String pageReference = currentNode.getPageReference();
-      if (pageReference == null) {
-        return false;
-      } else {
-        DataStorage dataStorage = portalApp.getApplicationComponent(DataStorage.class);
-        Page page = dataStorage.getPage(pageReference);
-        if (page == null) {
-          return false;
-        } else {
-          return userACL.hasEditPermission(page);
-        }
-      }
     }
+    UIPortal currentUIPortal = portalApp.<UIWorkingWorkspace> findComponentById(UIPortalApplication.UI_WORKING_WS_ID)
+    .findFirstComponentOfType(UIPortal.class);
+    PageNode currentNode = currentUIPortal.getSelectedNode();
+    String pageReference = currentNode.getPageReference();
+    if (pageReference == null) {
+      return false;
+    }
+    DataStorage dataStorage = portalApp.getApplicationComponent(DataStorage.class);
+    Page page = dataStorage.getPage(pageReference);
+    if (page == null) {
+      return false;
+    }
+    return userACL.hasEditPermission(page);
   }
 
   public static boolean hasEditPermissionOnNavigation() throws Exception {
@@ -683,12 +678,11 @@ public class Utils {
     UserACL userACL = portalApp.getApplicationComponent(UserACL.class);
     if (selectedNavigation == null || userACL == null) {
       return false;
-    } else {
-      if (PortalConfig.PORTAL_TYPE.equals(selectedNavigation.getOwnerType())) {
-        return hasEditPermissionOnPortal();
-      }
-      return userACL.hasEditPermission(selectedNavigation);
     }
+    if (PortalConfig.PORTAL_TYPE.equals(selectedNavigation.getOwnerType())) {
+      return hasEditPermissionOnPortal();
+    }
+    return userACL.hasEditPermission(selectedNavigation);
   }
 
   public static boolean hasEditPermissionOnPortal() throws Exception {

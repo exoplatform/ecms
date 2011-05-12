@@ -91,7 +91,6 @@ import org.exoplatform.services.cms.thumbnail.ThumbnailService;
 import org.exoplatform.services.cms.timeline.TimelineService;
 import org.exoplatform.services.cms.voting.VotingService;
 import org.exoplatform.services.jcr.RepositoryService;
-import org.exoplatform.services.jcr.access.SystemIdentity;
 import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.audit.AuditHistory;
@@ -99,6 +98,7 @@ import org.exoplatform.services.jcr.ext.audit.AuditService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.web.application.Parameter;
 import org.exoplatform.webui.application.WebuiRequestContext;
@@ -443,7 +443,7 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
     if(node.hasProperty(Utils.EXO_OWNER)) {
       return node.getProperty(Utils.EXO_OWNER).getString();
     }
-    return SystemIdentity.ANONIM ;
+    return IdentityConstants.ANONIM ;
   }
 
   public Date getDateCreated(Node node) throws Exception{
@@ -500,9 +500,7 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
     return attachments;
   }
 
-  @Override
-  public String getAttachmentURL(Node attNode, Parameter[] params)
-      throws Exception {
+  public String getAttachmentURL(Node attNode, Parameter[] params) throws Exception {
     return this.event("ChangeNode", Utils.formatNodeName(attNode.getPath()), params);
   }
 
@@ -825,9 +823,7 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
     if (allItemsFilterSet.contains(UIAllItems.HIDDEN)) {
       if (!node.isNodeType(Utils.EXO_HIDDENABLE))
         return false;
-      else {
-        uiExplorer.getPreference().setShowHiddenNode(true);
-      }
+      uiExplorer.getPreference().setShowHiddenNode(true);
     }
 
     //By types
@@ -1264,14 +1260,13 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
   public void setEnableVote(boolean value) {
   }
 
-  @Override
-  public String getInlineEditingField(Node orgNode, String propertyName, String defaultValue, String inputType, 
-                                      String idGenerator, String cssClass, boolean isGenericProperty, String... arguments) throws Exception{
+  public String getInlineEditingField(Node orgNode, String propertyName, String defaultValue, 
+      String inputType, String idGenerator, String cssClass, 
+      boolean isGenericProperty, String... arguments) throws Exception {
 		return org.exoplatform.ecm.webui.utils.Utils.getInlineEditingField(orgNode, propertyName, defaultValue, inputType, 
 		                                                                   idGenerator, cssClass, isGenericProperty, arguments);
 	}
   
-  @Override
   public String getInlineEditingField(Node orgNode, String propertyName) throws Exception {
     return org.exoplatform.ecm.webui.utils.Utils.getInlineEditingField(orgNode, propertyName);
   }

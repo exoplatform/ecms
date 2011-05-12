@@ -28,7 +28,6 @@ import org.exoplatform.container.xml.ObjectParameter;
 import org.exoplatform.container.xml.PortalContainerInfo;
 import org.exoplatform.services.cms.CmsService;
 import org.exoplatform.services.cms.link.LinkManager;
-import org.exoplatform.services.cms.taxonomy.TaxonomyService;
 import org.exoplatform.services.deployment.DeploymentPlugin;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
@@ -69,8 +68,7 @@ public class LinkDeploymentPlugin extends DeploymentPlugin {
    */
   public LinkDeploymentPlugin(InitParams initParams,
                               RepositoryService repositoryService,
-                              LinkManager linkManager,
-                              TaxonomyService taxonomyService) {
+                              LinkManager linkManager) {
     this.initParams = initParams;
     this.repositoryService = repositoryService;
     this.linkManager = linkManager;
@@ -79,7 +77,6 @@ public class LinkDeploymentPlugin extends DeploymentPlugin {
   /* (non-Javadoc)
    * @see org.exoplatform.services.deployment.DeploymentPlugin#deploy(org.exoplatform.services.jcr.ext.common.SessionProvider)
    */
-  @SuppressWarnings("unchecked")
   public void deploy(SessionProvider sessionProvider) throws Exception {
     Iterator iterator = initParams.getObjectParamIterator();
     while(iterator.hasNext()) {
@@ -102,7 +99,8 @@ public class LinkDeploymentPlugin extends DeploymentPlugin {
           Node nodeTgt = session2.getRootNode().getNode(tgt[2].substring(1));
           linkManager.createLink(nodeTgt, "exo:taxonomyLink", nodeSrc);
           ExoContainer container = ExoContainerContext.getCurrentContainer();
-          PortalContainerInfo containerInfo = (PortalContainerInfo)container.getComponentInstanceOfType(PortalContainerInfo.class);
+          PortalContainerInfo containerInfo = 
+            (PortalContainerInfo)container.getComponentInstanceOfType(PortalContainerInfo.class);
           String containerName = containerInfo.getContainerName();
           ListenerService listenerService = WCMCoreUtils.getService(ListenerService.class, containerName);
           CmsService cmsService = WCMCoreUtils.getService(CmsService.class, containerName);

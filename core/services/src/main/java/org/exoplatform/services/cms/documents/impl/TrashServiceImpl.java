@@ -469,11 +469,7 @@ public class TrashServiceImpl implements TrashService {
   public List<Node> getAllNodeInTrash(String trashWorkspace, String repository,
       SessionProvider sessionProvider) throws Exception {
 
-    // String trashPathTail = (trashPath.endsWith("/"))? "" : "/";
-    StringBuilder query = new StringBuilder("SELECT * FROM nt:base WHERE exo:restorePath IS NOT NULL");
-
-    // System.out.println(query);
-    return selectNodesByQuery(trashWorkspace, sessionProvider, query.toString(), Query.SQL);
+    return getAllNodeInTrash(trashWorkspace, sessionProvider);
   }
   
   public List<Node> getAllNodeInTrash(String trashWorkspace,
@@ -489,45 +485,20 @@ public class TrashServiceImpl implements TrashService {
   @Deprecated
   public List<Node> getAllNodeInTrashByUser(String trashWorkspace, String repository,
       SessionProvider sessionProvider, String userName) throws Exception {
-    StringBuilder query = new StringBuilder(
-        "SELECT * FROM nt:base WHERE exo:restorePath IS NOT NULL AND exo:lastModifier='").append(userName).append("'");
-    return selectNodesByQuery(trashWorkspace, sessionProvider, query.toString(), Query.SQL);
+    return getAllNodeInTrashByUser(trashWorkspace, sessionProvider, userName);
   }
   
   public List<Node> getAllNodeInTrashByUser(String trashWorkspace,
                                             SessionProvider sessionProvider,
                                             String userName) throws Exception {
-    StringBuilder query = new StringBuilder("SELECT * FROM nt:base WHERE exo:restorePath IS NOT NULL AND exo:lastModifier='").append(userName)
-                                                                                                                             .append("'");
+    StringBuilder query = new StringBuilder(
+        "SELECT * FROM nt:base WHERE exo:restorePath IS NOT NULL AND exo:lastModifier='").append(userName).append("'");
     return selectNodesByQuery(trashWorkspace, sessionProvider, query.toString(), Query.SQL);
   }
 
   @Deprecated
   public void removeRelations(Node node, SessionProvider sessionProvider, String repository) throws Exception {
-    ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
-    String[] workspaces = manageableRepository.getWorkspaceNames();
-
-    String queryString = "SELECT * FROM exo:relationable WHERE exo:relation IS NOT NULL";
-    boolean error = false;
-
-    for (String ws : workspaces) {
-      Session session = sessionProvider.getSession(ws, manageableRepository);
-      QueryManager queryManager = session.getWorkspace().getQueryManager();
-      Query query = queryManager.createQuery(queryString, Query.SQL);
-      QueryResult queryResult = query.execute();
-
-      NodeIterator iter = queryResult.getNodes();
-      while (iter.hasNext()) {
-        try {
-          iter.nextNode().removeMixin("exo:relationable");
-          session.save();
-        } catch (Exception e) {
-          error = true;
-        }
-      }
-    }
-    if (error)
-      throw new Exception("Can't remove exo:relationable of all related nodes");
+    removeRelations(node, sessionProvider);
   }
 
   public void removeRelations(Node node, SessionProvider sessionProvider) throws Exception {

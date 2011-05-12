@@ -27,11 +27,8 @@ import javax.jcr.NodeIterator;
 import javax.jcr.RepositoryException;
 import javax.jcr.version.Version;
 import javax.jcr.version.VersionHistory;
-import javax.portlet.PortletPreferences;
 
 import org.exoplatform.ecm.jcr.model.VersionNode;
-import org.exoplatform.ecm.webui.component.admin.drives.UIDriveForm;
-import org.exoplatform.ecm.webui.component.admin.drives.UIDriveInputSet;
 import org.exoplatform.ecm.webui.form.UIFormInputSetWithAction;
 import org.exoplatform.ecm.webui.selector.UISelectable;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
@@ -45,7 +42,6 @@ import org.exoplatform.services.organization.MembershipType;
 import org.exoplatform.services.organization.OrganizationService;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.application.WebuiRequestContext;
-import org.exoplatform.webui.application.portlet.PortletRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.webui.core.UIPopupWindow;
@@ -93,12 +89,6 @@ public class UIViewForm extends UIFormInputSetWithAction implements UISelectable
     this.viewName = viewName;
   }
 
-//  public String getRepository() {
-//    PortletRequestContext pcontext = (PortletRequestContext)WebuiRequestContext.getCurrentInstance() ;
-//    PortletPreferences portletPref = pcontext.getRequest().getPreferences() ;
-//    return portletPref.getValue(Utils.REPOSITORY, "") ;
-//  }
-
   public UIViewForm(String name) throws Exception {
     super(name) ;
     setComponentConfig(getClass(), null) ;
@@ -108,7 +98,8 @@ public class UIViewForm extends UIFormInputSetWithAction implements UISelectable
     versions.setRendered(false) ;
     addUIFormInput(versions) ;
     addUIFormInput(new UIFormStringInput(FIELD_NAME, FIELD_NAME, null).addValidator(MandatoryValidator.class)) ;    
-    addUIFormInput(new UIFormStringInput(FIELD_PERMISSION, FIELD_PERMISSION, null).setEditable(true).addValidator(MandatoryValidator.class));                                                                             
+    addUIFormInput(
+        new UIFormStringInput(FIELD_PERMISSION, FIELD_PERMISSION, null).setEditable(true).addValidator(MandatoryValidator.class));                                                                             
     addUIFormInput(new UIFormInputInfo(FIELD_TABS, FIELD_TABS, null)) ;
     setActionInfo(FIELD_PERMISSION, new String[] {"AddPermission","RemovePermission"}) ;
     vservice_ = getApplicationComponent(ManageViewService.class) ;
@@ -134,7 +125,6 @@ public class UIViewForm extends UIFormInputSetWithAction implements UISelectable
     super.processRender(context) ;
   }
 
-  @SuppressWarnings("unused")
   public void doSelect(String selectField, Object value) {
   	UIFormStringInput uiStringInput = getUIStringInput(selectField);
   	if (selectField.equals(UIViewForm.FIELD_PERMISSION)){
@@ -312,11 +302,10 @@ public class UIViewForm extends UIFormInputSetWithAction implements UISelectable
     setActionInfo(FIELD_TABS, actionInfor) ;
   }
 
-  @SuppressWarnings("unchecked")
   public void save() throws Exception {
     String viewName = getUIStringInput(FIELD_NAME).getValue().trim();
     ApplicationMessage message ;
-    if(viewName == null || viewName.trim().length() == 0){
+    if(viewName == null || viewName.length() == 0){
       throw new MessageException(new ApplicationMessage("UIViewForm.msg.view-name-invalid", null,
                                                         ApplicationMessage.WARNING)) ;
     }

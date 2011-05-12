@@ -106,7 +106,8 @@ public class UIContentBrowsePanelMulti extends UIContentBrowsePanel {
    for (i = 0; i<n; i++) {
      savedItem = savedItemList[i];
       String[] locations = (savedItem == null) ? null : savedItem.split(":");
-      Node node = (locations != null && locations.length >= 3) ? Utils.getViewableNodeByComposer(locations[0], locations[1], locations[2]) : null;
+      Node node = (locations != null && locations.length >= 3) ? Utils.getViewableNodeByComposer(
+          locations[0], locations[1], locations[2]) : null;
       savedItem="";
       if (node!=null){
         try {

@@ -113,7 +113,7 @@ public class UINewsletterEntryForm extends UIDialogForm {
       if (resourceResolver == null) {
         DMSConfiguration dmsConfiguration = getApplicationComponent(DMSConfiguration.class);
         String workspace = dmsConfiguration.getConfig().getSystemWorkspace();
-        resourceResolver = new JCRResourceResolver(this.repositoryName, workspace);
+        resourceResolver = new JCRResourceResolver(workspace);
       }
     } catch (Exception e) {
       Utils.createPopupMessage(this,
@@ -310,7 +310,8 @@ public class UINewsletterEntryForm extends UIDialogForm {
           for (int i = 1; i < listEmailAddress.size(); i ++) {
             receiver += listEmailAddress.get(i) + ",";
           }
-          String content = newsletterManagerService.getEntryHandler().getContent(WCMCoreUtils.getUserSessionProvider(), newsletterNode);
+          String content = 
+            newsletterManagerService.getEntryHandler().getContent(WCMCoreUtils.getUserSessionProvider(), newsletterNode);
           String baseURI = portletRequest.getScheme() + "://" + portletRequest.getServerName()
               + ":" + String.format("%s", portletRequest.getServerPort());
           String data = newsletterNode.getNode("default.html").getNode("jcr:content").getProperty("jcr:data").getString();
@@ -349,10 +350,8 @@ public class UINewsletterEntryForm extends UIDialogForm {
           try {
             mailService.sendMessage(message);
           } catch (Exception e) {
-            Utils.createPopupMessage(newsletterEntryForm,
-                                     "UINewsletterEntryForm.msg.send-newsletter",
-                                     null,
-                                     ApplicationMessage.ERROR);
+            Utils.createPopupMessage(
+                newsletterEntryForm, "UINewsletterEntryForm.msg.send-newsletter", null, ApplicationMessage.ERROR);
           }
         }
         session.save();

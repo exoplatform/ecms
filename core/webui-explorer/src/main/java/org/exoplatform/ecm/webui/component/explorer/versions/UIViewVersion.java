@@ -204,7 +204,6 @@ public class UIViewVersion extends UIContainer implements NodePresentation {
     return attachments;
   }
 
-  @Override
   public String getAttachmentURL(Node attNode, Parameter[] params)
       throws Exception {
     return this.event("ChangeNode", Utils.formatNodeName(attNode.getPath()), params);
@@ -281,7 +280,7 @@ public class UIViewVersion extends UIContainer implements NodePresentation {
     return containerInfo.getContainerName();
   }
 
-  public List getSupportedLocalise() throws Exception {
+  public List<String> getSupportedLocalise() throws Exception {
     MultiLanguageService multiLanguageService = getApplicationComponent(MultiLanguageService.class) ;
     return multiLanguageService.getSupportedLanguages(node_) ;
   }
@@ -397,14 +396,12 @@ public class UIViewVersion extends UIContainer implements NodePresentation {
   public void setEnableVote(boolean value) {
   }
 
-  @Override
-  public String getInlineEditingField(Node orgNode, String propertyName, String defaultValue, String inputType, 
-                                      String idGenerator, String cssClass, boolean isGenericProperty, String... arguments) throws Exception{
+  public String getInlineEditingField(Node orgNode, String propertyName, String defaultValue, 
+      String inputType, String idGenerator, String cssClass, boolean isGenericProperty, String... arguments) throws Exception {
     return org.exoplatform.ecm.webui.utils.Utils.getInlineEditingField(orgNode, propertyName, defaultValue, inputType, 
                                                                        idGenerator, cssClass, isGenericProperty, arguments);
   }
 
-  @Override
   public String getInlineEditingField(Node orgNode, String propertyName) throws Exception {
     return org.exoplatform.ecm.webui.utils.Utils.getInlineEditingField(orgNode, propertyName);
   }

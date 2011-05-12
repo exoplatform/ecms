@@ -70,7 +70,8 @@ public class UIViewList extends UIGrid {
   }
 
   private String getBaseVersion(String name) throws Exception {
-    Node node = getApplicationComponent(ManageViewService.class).getViewByName(name, SessionProviderFactory.createSystemProvider());
+    Node node = 
+      getApplicationComponent(ManageViewService.class).getViewByName(name, SessionProviderFactory.createSystemProvider());
     if(node == null) return null ;
     if(!node.isNodeType(Utils.MIX_VERSIONABLE) || node.isNodeType(Utils.NT_FROZEN)) return "";
     return node.getBaseVersion().getName();
