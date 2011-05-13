@@ -63,12 +63,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@id='UIECMAdminPortlet']/div[1]/div[1]/div[2]/div/div[2]/div[1]/div/div/div/div[2]</td>
+	<td>//div[@id='UIECMAdminPortlet']//div[contains(text(),'Content Presentation')]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[@id='UIECMAdminPortlet']/div[1]/div[1]/div[2]/div/div[2]/div[1]/div/div/div/div[2]</td>
+	<td>//div[@id='UIECMAdminPortlet']//div[contains(text(),'Content Presentation')]</td>
 	<td></td>
 </tr>
 <tr>
@@ -104,7 +104,7 @@
 <tr>
 	<td>type</td>
 	<td>label</td>
-	<td>Test</td>
+	<td>Test_SNF_ECMS_69</td>
 </tr>
 <tr>
 	<td>echo</td>
@@ -132,8 +132,18 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>link=Save</td>
+	<td></td>
+</tr>
+<tr>
 	<td>click</td>
 	<td>link=Save</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>100</td>
 	<td></td>
 </tr>
 <tr>
@@ -157,18 +167,33 @@
 	<td></td>
 </tr>
 <tr>
-	<td>type</td>
+	<td>verifyValue</td>
 	<td>label</td>
-	<td>Test edit</td>
+	<td>Test_SNF_ECMS_69</td>
 </tr>
 <tr>
-	<td>click</td>
+	<td>echo</td>
+	<td>-- Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>label</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>label</td>
+	<td>Test_SNF_ECMS_69_edit</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
 	<td>link=Save</td>
 	<td></td>
 </tr>
 <tr>
-	<td>echo</td>
-	<td>--Delete Template</td>
+	<td>click</td>
+	<td>link=Save</td>
 	<td></td>
 </tr>
 <tr>
