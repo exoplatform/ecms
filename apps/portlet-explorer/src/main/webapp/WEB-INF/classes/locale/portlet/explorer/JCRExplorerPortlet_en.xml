@@ -387,7 +387,6 @@
       <does-not-support-auditing>You cannot activate auditing on this node</does-not-support-auditing>
       <can-not-rename-node>You don't have permission to rename this node. Please contact with administrator to get correct right.</can-not-rename-node>
       <can-not-cut-node>You don't have permission to cut this node. Please contact with administrator to get correct right.</can-not-cut-node>
-      <is-restricted-node>This node is restricted, cannot change it</is-restricted-node>
       <can-not-remove-node>You don't have permission to remove this node. Please contact with administrator to get correct right.</can-not-remove-node>
       <can-not-lock-node>You don't have permission to lock this node. Please contact with administrator to get correct right.</can-not-lock-node>
       <can-not-unlock-node>You don't have permission to unlock this node. Please contact with administrator to get correct right.</can-not-unlock-node>

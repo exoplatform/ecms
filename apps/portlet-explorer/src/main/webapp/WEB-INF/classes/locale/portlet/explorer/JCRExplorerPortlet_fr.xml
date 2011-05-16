@@ -388,7 +388,6 @@
       <can-not-rename-node>Vous n'avez pas les droits suffisants pour renommer ce noeud.</can-not-rename-node>
       <can-not-cut-node>Vous n'avez pas les droits suffisants pour couper ce noeud.</can-not-cut-node>
       <can-not-remove-node>Vous n'avez pas les droits suffisants pour supprimer ce noeud.</can-not-remove-node>
-	  <is-restricted-node>Ce noeud est réservé, ne peut pas le changer</is-restricted-node>
       <can-not-lock-node>Vous n'avez pas les droits suffisants pour verrouiller ce noeud.</can-not-lock-node>
       <can-not-unlock-node>Vous n'avez pas les droits suffisants pour déverrouiller ce noeud.</can-not-unlock-node>
       <no-node>Aucun noeud n'a été sélectionné.</no-node>

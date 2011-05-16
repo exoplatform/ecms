@@ -26,18 +26,17 @@ import javax.jcr.PathNotFoundException;
 import javax.jcr.Session;
 import javax.jcr.nodetype.ConstraintViolationException;
 
-import org.exoplatform.services.log.Log;
 import org.exoplatform.ecm.jcr.model.ClipboardCommand;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.CanCutNodeFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotInTrashFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotLockedFilter;
-import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotRestrictedNodeFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotTrashHomeNodeFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.listener.UIWorkingAreaActionListener;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -66,8 +65,7 @@ public class CutManageComponent extends UIAbstractManagerComponent {
   private final static Log       LOG  = ExoLogger.getLogger(CutManageComponent.class);
 
   private static final List<UIExtensionFilter> FILTERS
-      = Arrays.asList(new UIExtensionFilter[] { new IsNotRestrictedNodeFilter(),
-                                                new IsNotInTrashFilter(),
+      = Arrays.asList(new UIExtensionFilter[] { new IsNotInTrashFilter(),
                                                 new CanCutNodeFilter(),
                                                 new IsNotLockedFilter(),
                                                 new IsNotTrashHomeNodeFilter() });
