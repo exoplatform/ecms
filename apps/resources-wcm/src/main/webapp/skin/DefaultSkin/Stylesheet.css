@@ -41,6 +41,16 @@
 	padding-right: 20px;
 }
 
+.FormScrollLayout .HorizontalLayout {
+	height: 370px;
+	overflow: auto;
+}
+
+.UITabPane .UITabContentContainer .UITabContentScroll {
+	height: 320px;
+	overflow: auto;
+}
+
 /************ UIToolbarContainer **************/
 /**
 

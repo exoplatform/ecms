@@ -93,7 +93,7 @@
 			<%uiform.begin()%>
 			<div class="HorizontalLayout" style="border: none; margin:0px; background: none; padding: 0px">	  
 				<div class="UITabContentContainer">
-					<div class="UITabContent" style="display: block;">
+					<div class="UITabContent UITabContentScroll" style="display: block;">
 						<table class="UIFormGrid">
 		            		<tr>
 		        				<td class="FieldLabel"><%=_ctx.appRes("WebContent.dialog.label.name")%></td>
@@ -174,7 +174,7 @@
 						</table>
 					</div>  <!-- End of UITabContent -->
 					<!-- Start of Illustration tab -->
-					<div class="UITabContent" style="display: none;">
+					<div class="UITabContent UITabContentScroll" style="display: none;">
 						<div class="FormHint">
 							<%=_ctx.appRes("WebContent.dialog.label.hintIllustration")%>
 						</div>
@@ -225,7 +225,7 @@
 					</div>
 					<!-- End of Illustration tab -->		
 								
-					<div class="UITabContent" style="display: none;">
+					<div class="UITabContent UITabContentScroll" style="display: none;">
 						<table class="UIFormGrid">
 							<tr>
 								<td class="FieldLabel"><%=_ctx.appRes("WebContent.dialog.label.ContentCSS")%></td>

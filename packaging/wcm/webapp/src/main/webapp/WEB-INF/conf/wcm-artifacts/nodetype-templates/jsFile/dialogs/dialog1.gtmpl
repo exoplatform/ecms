@@ -17,7 +17,7 @@
 	  width:525px;
 	 }
 </style>
-<div class="UIForm">  
+<div class="UIForm FormScrollLayout">  
   <% uiform.begin() %>
   <div class="HorizontalLayout">
     <table class="UIFormGrid">
@@ -80,6 +80,7 @@
         </tr>
                
     </table>       
+  </div>
     <%/* start render action*/%>
     <div class="UIAction" style="display:block;"> 
       <table class="ActionContainer" align="center">
@@ -103,7 +104,6 @@
         </tr>
       </table>
     </div>
-    <%/* end render action*/%>
-  </div>
+    <%/* end render action*/%>  
   <%uiform.end()%>
 </div>

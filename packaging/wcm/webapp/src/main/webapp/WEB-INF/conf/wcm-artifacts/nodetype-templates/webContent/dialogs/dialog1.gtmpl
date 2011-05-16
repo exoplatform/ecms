@@ -97,7 +97,7 @@
 			<%/*Start UITabContentContainer*/%>
 				<div class="HorizontalLayout" style="border: none; margin:0px; background: none; padding: 0px">	  
 					<div class="UITabContentContainer">
-						<div class="UITabContent" style="<%=getDisplayTab("mainWebcontent")%>">
+						<div class="UITabContent UITabContentScroll" style="<%=getDisplayTab("mainWebcontent")%>">
 							<table class="UIFormGrid">
                 <tr>
                   <td class="FieldLabel"><%=_ctx.appRes("WebContent.dialog.label.title")%></td>
@@ -177,7 +177,7 @@
 							</table>
 						</div>  <!-- End of UITabContent -->
 						<!-- Start of Illustration tab -->
-						<div class="UITabContent" style="<%=getDisplayTab("illustrationWebcontent")%>">
+						<div class="UITabContent UITabContentScroll" style="<%=getDisplayTab("illustrationWebcontent")%>">
 							<div class="FormHint"><%=_ctx.appRes("WebContent.dialog.label.hintIllustration")%></div>
 							<table class="UIFormGrid">
 								<tr>
@@ -223,7 +223,7 @@
 								</tr>
 							</table>
 						</div><!-- End of Illustration tab -->		
-						<div class="UITabContent" style="<%=getDisplayTab("contentCSSWebcontent")%>">
+						<div class="UITabContent UITabContentScroll" style="<%=getDisplayTab("contentCSSWebcontent")%>">
 							<table class="UIFormGrid">
 								<tr>
 									<td class="FieldLabel"><%=_ctx.appRes("WebContent.dialog.label.ContentCSS")%></td>

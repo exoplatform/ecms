@@ -10,7 +10,7 @@
   uicomponent.addCalendarField("hiddenInput5", hiddenField5) ;
   uicomponent.addHiddenField("hiddenInput6", hiddenField6) ;
 %>
-<div class="UIForm">  
+<div class="UIForm FormScrollLayout">  
   <% uiform.begin() %>
   <div class="HorizontalLayout">
     <table class="UIFormGrid">
@@ -52,6 +52,7 @@
           </td>
         </tr>       
     </table>       
+  </div>
     <%/* start render action*/%>
     <div class="UIAction"> 
       <table class="ActionContainer" align="center">
@@ -75,7 +76,6 @@
         </tr>
       </table>
     </div>
-    <%/* end render action*/%>
-  </div>
+    <%/* end render action*/%>  
   <%uiform.end()%>
 </div>

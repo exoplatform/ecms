@@ -1,5 +1,5 @@
 <% uicomponent.addInterceptor("ecm-explorer/interceptor/PreNodeSaveInterceptor.groovy", "prev") ; %>
-<div class="UIForm FormLayout"> 
+<div class="UIForm FormLayout FormScrollLayout"> 
 	<% uiform.begin() %>
   <div class="HorizontalLayout">	  
    <table class="UIFormGrid">
@@ -67,9 +67,9 @@
         <td class="FieldComponent"><%=uicomponent.getLastModifiedDate()%></td>
       </tr>
 		</table>
-		<%/* start render action*/%>
-		<%uiform.processRenderAction()%>
-		<%/* end render action*/%>		
   </div>
+    <%/* start render action*/%>
+    <%uiform.processRenderAction()%>
+    <%/* end render action*/%>  
   <%uiform.end()%>
 </div>

@@ -6,7 +6,7 @@
   uicomponent.addHiddenField("hiddenInput2", hiddenField2) ;
   uicomponent.addHiddenField("hiddenInput3", hiddenField3) ;
 %>
-<div class="UIForm LayoutContent">
+<div class="UIForm LayoutContent FormScrollLayout">
 	<% uiform.begin() %>
   <div class="HorizontalLayout">
   	<table class="UIFormGrid">	  
@@ -140,9 +140,9 @@
 		    </td>
       </tr>
 	  </table>
-		<%/* start render action*/%>
-		<%uiform.processRenderAction()%>
-		<%/* end render action*/%>
   </div>
+    <%/* start render action*/%>
+    <%uiform.processRenderAction()%>
+    <%/* end render action*/%>  
   <% uiform.end() %>
 </div>

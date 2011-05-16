@@ -2,7 +2,7 @@
   def node = uicomponent.getCurrentNode() ;
   String namespace = "kfx:" ;
 %>
-<div class="UIForm FormLayout">  
+<div class="UIForm FormLayout FormScrollLayout">  
 	<% uiform.begin() %>
   <div class="HorizontalLayout">
 		<table class="UIFormGrid">			
@@ -56,9 +56,9 @@
 	      }
 	    %>
 		</table>	    
+  </div>		
 		<%/* start render action*/%>
 		<%uiform.processRenderAction()%>
 		<%/* end render action*/%>
-  </div>
   <%uiform.end()%>
 </div>
