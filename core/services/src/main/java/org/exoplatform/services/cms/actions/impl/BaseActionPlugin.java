@@ -174,91 +174,12 @@ abstract public class BaseActionPlugin implements ActionPlugin {
                         String[] uuid,
                         String[] nodeTypeNames,
                         Map mappings) throws Exception {
-    ExoContainer container = ExoContainerContext.getCurrentContainer();
-    RepositoryService repositoryService = (RepositoryService) container.getComponentInstanceOfType(RepositoryService.class);
-    String repoName = repositoryService.getCurrentRepository().getConfiguration().getName();
-    String actionName =
-      (String) ((JcrInputProperty) mappings.get("/node/exo:name")).getValue();
-    mappings.remove("/node/exo:name");
-    Object typeObj =
-      ((JcrInputProperty) mappings.get("/node/exo:lifecyclePhase")).getValue();
-    String[] type = (typeObj instanceof String) ? new String[] { (String)typeObj} :
-      (String[]) typeObj;
-    String actionExecutable = getActionExecutable(actionType);
-    if (DMSEvent.getEventTypes(type) == DMSEvent.READ) return;
-    if ((DMSEvent.getEventTypes(type) & DMSEvent.SCHEDULE) > 0) {
-      scheduleActionActivationJob(repoName, srcWorkspace, srcPath, actionName, actionType,
-          actionExecutable, mappings);
-    }
-    if (DMSEvent.getEventTypes(type) == DMSEvent.SCHEDULE)
-      return;
-    Map<String, Object> variables = getExecutionVariables(mappings);
-    ECMEventListener listener = createEventListener(actionName, actionExecutable, repoName,
-        srcWorkspace, srcPath, variables, actionType);
-    Session session = getSystemSession(srcWorkspace);
-    ObservationManager obsManager = session.getWorkspace().getObservationManager();
-    // TODO all actions are stored at srcNode/exo:actions node
-    String listenerKey = repoName + ":" + srcPath + "/exo:actions/" + actionName;
-    if (listeners_.containsKey(listenerKey)) {
-      obsManager.removeEventListener(listeners_.get(listenerKey));
-      listeners_.remove(listenerKey);
-    }
-    obsManager.addEventListener(listener, DMSEvent.getEventTypes(type), srcPath, isDeep, uuid,
-        nodeTypeNames, false);
-    session.logout();
-    listeners_.put(listenerKey, listener);
+    addAction(actionType, srcWorkspace, srcPath, isDeep, uuid, nodeTypeNames, mappings);
   }
 
   @Deprecated
   public void initiateActionObservation(Node storedActionNode, String repository) throws Exception {
-    String actionName = storedActionNode.getProperty("exo:name").getString() ;
-    String[] lifecyclePhase = storedActionNode.hasProperty("exo:lifecyclePhase") ? parseValuesToArray(storedActionNode
-        .getProperty("exo:lifecyclePhase").getValues())
-        : null;
-    if (DMSEvent.getEventTypes(lifecyclePhase) == DMSEvent.READ)
-      return;
-    String[] uuid = storedActionNode.hasProperty("exo:uuid") ?
-                     parseValuesToArray(storedActionNode.getProperty("exo:uuid").getValues())
-                     : null;
-    boolean isDeep = storedActionNode.hasProperty("exo:isDeep") ?
-                      storedActionNode.getProperty("exo:isDeep").getBoolean()
-                      : true;
-    String[] nodeTypeNames = storedActionNode.hasProperty("exo:nodeTypeName") ?
-                             parseValuesToArray(storedActionNode.getProperty("exo:nodeTypeName").getValues())
-                             : null;
-    String actionType = storedActionNode.getPrimaryNodeType().getName() ;
-    String srcWorkspace = storedActionNode.getSession().getWorkspace().getName() ;
-    //TODO all actions are stored in srcNode/exo:actions
-    String srcPath = storedActionNode.getParent().getParent().getPath() ;
-    Map<String,Object> variables = new HashMap<String,Object>() ;
-    NodeType nodeType = storedActionNode.getPrimaryNodeType() ;
-    PropertyDefinition[] defs = nodeType.getPropertyDefinitions() ;
-    for(PropertyDefinition propDef:defs) {
-      if(!propDef.isMultiple()) {
-        String key = propDef.getName() ;
-        try{
-          Object value = getPropertyValue(storedActionNode.getProperty(key)) ;
-          variables.put(key,value) ;
-        }catch(Exception e) {
-          variables.put(key,null) ;
-        }
-      }
-    }
-    String actionExecutable = getActionExecutable(actionType);
-    ECMEventListener listener =
-      createEventListener(actionName, actionExecutable, repository, srcWorkspace, srcPath, variables, actionType);
-    Session session = getSystemSession(srcWorkspace);
-    //TODO all actions are stored at srcNode/exo:actions node
-    String listenerKey = repository + ":" + srcPath + "/exo:actions/" +actionName;
-    ObservationManager obsManager = session.getWorkspace().getObservationManager();
-    if(listeners_.containsKey(listenerKey)){
-      obsManager.removeEventListener(listeners_.get(listenerKey));
-      listeners_.remove(listenerKey) ;
-    }
-    obsManager.addEventListener(listener, DMSEvent.getEventTypes(lifecyclePhase), srcPath, isDeep, uuid,
-        nodeTypeNames, false);
-    session.logout();
-    listeners_.put(listenerKey, listener);
+    initiateActionObservation(storedActionNode);
   }
   
   public void initiateActionObservation(Node storedActionNode) throws Exception {
@@ -319,68 +240,7 @@ abstract public class BaseActionPlugin implements ActionPlugin {
   
   @Deprecated
   public void reScheduleActivations(Node storedActionNode, String repository) throws Exception {
-    String jobClassName = storedActionNode.getProperty(JOB_CLASS_PROP).getString() ;
-    Class activationJobClass  = null ;
-    try {
-      activationJobClass = Class.forName(jobClassName) ;
-    }catch (Exception e) {
-      LOG.error("Unexpected error", e);
-      return ;
-    }
-    String actionName = storedActionNode.getProperty(NODE_NAME_PROP).getString() ;
-    String actionType = storedActionNode.getPrimaryNodeType().getName() ;
-    String srcWorkspace = storedActionNode.getSession().getWorkspace().getName() ;
-    String scheduleType = storedActionNode.getProperty(SCHEDULE_TYPE_PROP).getString() ;
-    String initiator = storedActionNode.getProperty(SCHEDULED_INITIATOR).getString() ;
-    //TODO all action node is stored in /exo:actions
-    String srcPath = storedActionNode.getParent().getParent().getPath() ;
-    String jobName = storedActionNode.getProperty(JOB_NAME_PROP).getString() ;
-    String jobGroup = storedActionNode.getProperty(JOB_GROUP_PROP).getString() ;
-    ExoContainer container = ExoContainerContext.getCurrentContainer() ;
-    JobSchedulerService schedulerService =
-      (JobSchedulerService)container.getComponentInstanceOfType(JobSchedulerService.class) ;
-    Map<String,Object> variables = new HashMap<String,Object>() ;
-    NodeType nodeType = storedActionNode.getPrimaryNodeType() ;
-    PropertyDefinition[] defs = nodeType.getPropertyDefinitions() ;
-    for(PropertyDefinition propDef:defs) {
-      if(!propDef.isMultiple()) {
-        String key = propDef.getName() ;
-        try{
-          Object value = getPropertyValue(storedActionNode.getProperty(key)) ;
-          variables.put(key,value) ;
-        }catch(Exception e) {
-          variables.put(key,null) ;
-        }
-      }
-    }
-    String actionExecutable = getActionExecutable(actionType);
-    variables.put(initiatorVar,initiator) ;
-    variables.put(actionNameVar, actionName);
-    variables.put(srcRepository, repository) ;
-    variables.put(executableVar,actionExecutable) ;
-    //variables.put("nodePath", path);
-    variables.put(srcWorkspaceVar, srcWorkspace);
-    variables.put(srcPathVar, srcPath);
-    JobDataMap jdatamap = new JobDataMap() ;
-    JobInfo jinfo = new JobInfo(jobName,jobGroup,activationJobClass) ;
-    jdatamap.putAll(variables) ;
-    if(CRON_JOB.equals(scheduleType)) {
-      String cronExpression = storedActionNode.getProperty(CRON_EXPRESSION_PROP).getString() ;
-      schedulerService.addCronJob(jinfo,cronExpression,jdatamap) ;
-    }else {
-      Calendar endTime = null ;
-      Date endDate = null ;
-      if(storedActionNode.hasProperty(END_TIME_PROP)) {
-        endTime = storedActionNode.getProperty(END_TIME_PROP).getDate() ;
-      }
-      if(endTime != null) endDate = endTime.getTime() ;
-      long timeInterval = storedActionNode.getProperty(TIME_INTERVAL_PROP).getLong() ;
-      Date startDate = new Date(System.currentTimeMillis()+BUFFER_TIME) ;
-      int repeatCount = (int)storedActionNode.getProperty(REPEAT_COUNT_PROP).getLong() ;
-      int counter = (int)storedActionNode.getProperty(COUNTER_PROP).getLong() ;
-      PeriodInfo pinfo = new PeriodInfo(startDate,endDate,repeatCount-counter,timeInterval) ;
-      schedulerService.addPeriodJob(jinfo,pinfo,jdatamap) ;
-    }
+    reScheduleActivations(storedActionNode);
   }
   
   public void reScheduleActivations(Node storedActionNode) throws Exception {

@@ -86,7 +86,7 @@ public class SmallPaginatedQueryResult extends WCMPaginatedQueryResult{
   /* (non-Javadoc)
    * @see org.exoplatform.services.wcm.utils.PaginatedNodeIterator#getPage(int)
    */
-  @SuppressWarnings({ "unchecked", "deprecation" })
+  @SuppressWarnings("deprecation")
   public List getPage(int page) throws Exception {
     checkAndSetPage(page);
     populateCurrentPage(page);

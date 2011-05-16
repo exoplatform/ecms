@@ -71,9 +71,7 @@ public class CategoriesServiceImpl implements CategoriesService,Startable {
 
   @Deprecated
   public void init(String repository) throws Exception {
-    for(TaxonomyPlugin plugin : plugins_) {
-      plugin.init(repository) ;
-    }
+    init();
   }
   
   public void init() throws Exception {
@@ -90,9 +88,7 @@ public class CategoriesServiceImpl implements CategoriesService,Startable {
 
   @Deprecated
   public Node getTaxonomyHomeNode (String repository,SessionProvider provider) throws Exception {
-    Session session = getSession(provider) ;
-    Node homeTaxonomy = (Node)session.getItem(baseTaxonomyPath_) ;
-    return homeTaxonomy ;
+    return getTaxonomyHomeNode(provider);
   }
   
   public Node getTaxonomyHomeNode(SessionProvider provider) throws Exception {
@@ -154,7 +150,6 @@ public class CategoriesServiceImpl implements CategoriesService,Startable {
     return false;
   }
 
-  @SuppressWarnings("unused")
   public List<Node> getCategories(Node node, String repository) throws Exception {
     List<Node> cats = new ArrayList<Node>();
     if (node.hasProperty("exo:category")) {

@@ -29,10 +29,10 @@ import org.exoplatform.services.cms.actions.ActionPlugin;
 import org.exoplatform.services.cms.actions.ActionServiceContainer;
 import org.exoplatform.services.cms.actions.impl.ScriptActionPlugin;
 import org.exoplatform.services.jcr.RepositoryService;
-import org.exoplatform.services.jcr.access.SystemIdentity;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.security.Identity;
+import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.services.security.IdentityRegistry;
 import org.exoplatform.services.security.MembershipEntry;
 import org.quartz.Job;
@@ -96,7 +96,7 @@ public class ScriptActionActivationJob implements Job {
   }
 
   private boolean checkExcetuteable(String userId,Value[] roles, IdentityRegistry identityRegistry) throws Exception {
-    if(SystemIdentity.SYSTEM.equalsIgnoreCase(userId)) {
+    if(IdentityConstants.SYSTEM.equalsIgnoreCase(userId)) {
       return true ;
     }
     Identity identity = identityRegistry.getIdentity(userId);

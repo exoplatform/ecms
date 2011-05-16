@@ -35,9 +35,6 @@ import javax.jcr.query.QueryResult;
 
 import org.apache.commons.lang.StringUtils;
 import org.exoplatform.commons.utils.MimeTypeResolver;
-import org.exoplatform.container.ExoContainer;
-import org.exoplatform.container.ExoContainerContext;
-import org.exoplatform.container.xml.PortalContainerInfo;
 import org.exoplatform.services.cms.rss.RSSService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
@@ -100,9 +97,7 @@ public class RSSServiceImpl implements RSSService{
   static private String NT_UNSTRUCTURED = "nt:unstructured".intern() ;
   static private String NT_FILE = "nt:file".intern() ;
   static private String NT_RESOURCE = "nt:resource".intern() ;
-  static private String RSS = "/rss".intern() ;
   static private String MIX_VERSIONABLE = "mix:versionable".intern() ;
-  static private String DATE_MODIFIED = "exo:dateModified".intern();
 
   private RepositoryService repositoryService_;
   private static final Log LOG  = ExoLogger.getLogger(RSSServiceImpl.class);

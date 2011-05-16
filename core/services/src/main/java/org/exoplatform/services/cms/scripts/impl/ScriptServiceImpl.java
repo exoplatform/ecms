@@ -162,23 +162,7 @@ public class ScriptServiceImpl extends BaseResourceLoaderService implements Scri
    */
   @Deprecated
   public void initRepo(String repository) throws Exception {
-    ManageableRepository mRepository = repositoryService_.getCurrentRepository();
-    String scriptsPath = getBasePath();
-    DMSRepositoryConfiguration dmsRepoConfig = dmsConfiguration_.getConfig();
-    Session session = mRepository.getSystemSession(dmsRepoConfig.getSystemWorkspace()) ;
-    for(ScriptPlugin plugin : plugins_) {
-      if(!plugin.getAutoCreateInNewRepository()) continue ;
-      String scriptsLocation = plugin.getPredefineScriptsLocation();
-      Iterator<ObjectParameter> iter = plugin.getScriptIterator() ;
-      while(iter.hasNext()) {
-        init(session,(ResourceConfig) iter.next().getObject(),scriptsLocation) ;
-      }
-      ObservationManager obsManager = session.getWorkspace().getObservationManager();
-      obsManager.addEventListener(this, Event.PROPERTY_CHANGED, scriptsPath, true, null, null, true);
-
-    }
-    session.save();
-    session.logout();
+    initRepo();
   }
   
   /**
@@ -209,8 +193,7 @@ public class ScriptServiceImpl extends BaseResourceLoaderService implements Scri
    */
   @Deprecated
   public Node getECMScriptHome(String repository,SessionProvider provider) throws Exception {
-    Session session = getSession(provider);
-    return getNodeByAlias(BasePath.ECM_EXPLORER_SCRIPTS,session);
+    return getECMScriptHome(provider);
   }
   
   /**
@@ -226,8 +209,7 @@ public class ScriptServiceImpl extends BaseResourceLoaderService implements Scri
    */
   @Deprecated
   public Node getCBScriptHome(String repository,SessionProvider provider) throws Exception {
-    Session session = getSession(provider);
-    return getNodeByAlias(BasePath.CONTENT_BROWSER_SCRIPTS,session);
+    return getCBScriptHome(provider);
   }
   
   /**
@@ -237,10 +219,6 @@ public class ScriptServiceImpl extends BaseResourceLoaderService implements Scri
     Session session = getSession(provider);
     return getNodeByAlias(BasePath.CONTENT_BROWSER_SCRIPTS,session);
   }  
-
-//  public boolean hasCBScript(String repository) throws Exception {
-//    return getCBScriptHome(repository).hasNodes();
-//  }
 
   /**
    * get CBSCcripts
@@ -253,12 +231,7 @@ public class ScriptServiceImpl extends BaseResourceLoaderService implements Scri
    */
   @Deprecated
   public List<Node> getCBScripts(String repository,SessionProvider provider) throws Exception {
-    List<Node> scriptList = new ArrayList<Node>() ;
-    Node cbScriptHome = getCBScriptHome(repository,provider) ;
-    for(NodeIterator iter = cbScriptHome.getNodes(); iter.hasNext() ;) {
-      scriptList.add(iter.nextNode()) ;
-    }
-    return scriptList;
+    return getCBScripts(provider);
   }
   
   /**
@@ -284,8 +257,7 @@ public class ScriptServiceImpl extends BaseResourceLoaderService implements Scri
    */
   @Deprecated
   public List<Node> getECMActionScripts(String repository,SessionProvider provider) throws Exception {
-    Session session = getSession(provider);
-    return getScriptList(BasePath.ECM_ACTION_SCRIPTS, session);
+    return getECMActionScripts(provider);
   }
   
   /**
@@ -301,8 +273,7 @@ public class ScriptServiceImpl extends BaseResourceLoaderService implements Scri
    */
   @Deprecated
   public List<Node> getECMInterceptorScripts(String repository,SessionProvider provider) throws Exception {
-    Session session = getSession(provider);
-    return getScriptList(BasePath.ECM_INTERCEPTOR_SCRIPTS, session);
+    return getECMInterceptorScripts(provider);
   }
   
   /**
@@ -318,8 +289,7 @@ public class ScriptServiceImpl extends BaseResourceLoaderService implements Scri
    */
   @Deprecated
   public List<Node> getECMWidgetScripts(String repository,SessionProvider provider) throws Exception {
-    Session session = getSession(provider);
-    return getScriptList(BasePath.ECM_WIDGET_SCRIPTS,session);
+    return getECMWidgetScripts(provider);
   }
   
   /**
@@ -367,7 +337,7 @@ public class ScriptServiceImpl extends BaseResourceLoaderService implements Scri
    */
   @Deprecated
   public String getScriptAsText(String scriptName, String repository) throws Exception {
-    return getResourceAsText(scriptName, repository);
+    return getResourceAsText(scriptName);
   }
 
   @Deprecated
@@ -381,27 +351,9 @@ public class ScriptServiceImpl extends BaseResourceLoaderService implements Scri
    * {@inheritDoc}
    */
   public CmsScript getScript(String scriptName, String repository) throws Exception {
-    CmsScript scriptObject = (CmsScript) resourceCache_.get(scriptName);
-    if (scriptObject != null) return scriptObject;
-    ExoContainer container = ExoContainerContext.getCurrentContainer() ;
-    try {
-      scriptObject = (CmsScript) container.getComponentInstance(scriptName);
-      if(scriptObject !=null ) {
-        resourceCache_.put(scriptName,scriptObject) ;
-        return scriptObject;
-      }
-    } catch (NoClassDefFoundError e) {}
-
-    groovyClassLoader_ = createGroovyClassLoader();
-    Class scriptClass = groovyClassLoader_.loadClass(scriptName) ;
-    container.registerComponentImplementation(scriptName, scriptClass);
-    scriptObject = (CmsScript) container.getComponentInstance(scriptName);
-    resourceCache_.put(scriptName, scriptObject) ;
-
-    return scriptObject;
+    return getScript(scriptName);
   }
   
-  @SuppressWarnings("unused")
   /**
    * {@inheritDoc}
    */
@@ -431,8 +383,7 @@ public class ScriptServiceImpl extends BaseResourceLoaderService implements Scri
    */
   @Deprecated
   public void addScript(String name, String text, String repository,SessionProvider provider) throws Exception {
-    addResource(name, text, repository,provider);
-    removeFromCache(name) ;
+    addScript(name, text, provider);
   }
   
   /**
@@ -448,8 +399,7 @@ public class ScriptServiceImpl extends BaseResourceLoaderService implements Scri
    */
   @Deprecated
   public void removeScript(String scriptName, String repository,SessionProvider provider) throws Exception {
-    removeResource(scriptName, repository,provider);
-    removeFromCache(scriptName) ;
+    removeScript(scriptName, provider);
   }
   
   /**
@@ -593,12 +543,7 @@ public class ScriptServiceImpl extends BaseResourceLoaderService implements Scri
    */
   @Deprecated
   public Node getScriptNode(String scriptName, String repository,SessionProvider provider) throws Exception {
-    try {
-      Node scriptHome = getResourcesHome(provider) ;
-      return scriptHome.getNode(scriptName) ;
-    }catch (Exception e) {
-      return null;
-    }
+    return getScriptNode(scriptName, provider);
   }
   
   /**

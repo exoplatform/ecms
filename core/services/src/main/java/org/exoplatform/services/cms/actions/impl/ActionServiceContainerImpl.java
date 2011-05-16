@@ -48,7 +48,6 @@ import org.exoplatform.services.cms.actions.ActionServiceContainer;
 import org.exoplatform.services.cms.actions.DMSEvent;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.config.RepositoryConfigurationException;
-import org.exoplatform.services.jcr.config.RepositoryEntry;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.core.nodetype.ExtendedNodeTypeManager;
 import org.exoplatform.services.jcr.core.nodetype.NodeTypeValue;
@@ -207,15 +206,7 @@ public class ActionServiceContainerImpl implements ActionServiceContainer, Start
    */
   @Deprecated
   public void init(String repository) {
-    try {
-      for (ComponentPlugin cPlungin : actionPlugins) {
-        BaseActionPlugin plugin = (BaseActionPlugin) cPlungin;
-        plugin.reImportPredefinedActionsInJcr();
-      }
-      reInitiateActionConfiguration();
-    } catch (Exception e) {
-      LOG.error("Cannot initialize the ActionServiceContainerImpl", e);
-    }
+    init();
   }
   
   /**
@@ -466,36 +457,7 @@ public class ActionServiceContainerImpl implements ActionServiceContainer, Start
                         String[] uuid,
                         String[] nodeTypeNames,
                         Map mappings) throws Exception {
-    Node actionsNode = null;
-    try {
-      actionsNode = storeActionNode.getNode(EXO_ACTIONS);
-    } catch (PathNotFoundException e) {
-      actionsNode = storeActionNode.addNode(EXO_ACTIONS,ACTION_STORAGE) ;
-      actionsNode.addMixin(EXO_HIDDENABLE) ;
-      storeActionNode.save();
-    }
-    if (!storeActionNode.isNodeType(ACTIONABLE)) {
-      storeActionNode.addMixin(ACTIONABLE);
-      storeActionNode.save();
-    }
-    String newActionPath = cmsService_.storeNode(actionType, actionsNode, mappings,true);
-    storeActionNode.save();
-    String srcWorkspace = storeActionNode.getSession().getWorkspace().getName();
-
-    String srcPath = storeActionNode.getPath();
-    ActionPlugin actionService = getActionPluginForActionType(actionType);
-    if (actionService == null)
-      throw new ClassNotFoundException("Not found any action's service compatible with action type "+actionType) ;
-    try {
-      actionService.addAction(actionType, repository, srcWorkspace, srcPath, isDeep, uuid, nodeTypeNames, mappings);
-    } catch (Exception e) {
-      if (LOG.isDebugEnabled()) LOG.error(e);
-      Session session = getSystemSession(storeActionNode.getSession().getWorkspace().getName());
-      Node actionNode = (Node) session.getItem(newActionPath);
-      actionNode.remove();
-      session.save();
-      session.logout();
-    }
+    addAction(storeActionNode, actionType, isDeep, uuid, nodeTypeNames, mappings);
   }
   
   public void addAction(Node storeActionNode,
@@ -538,25 +500,7 @@ public class ActionServiceContainerImpl implements ActionServiceContainer, Start
 
   @Deprecated
   public void addAction(Node storeActionNode, String repository, String actionType, Map mappings) throws Exception {
-    boolean isDeep = true;
-    String[] nodeTypeName = null;
-    String[] uuid = null;
-    if (mappings.containsKey("/node/exo:isDeep")) {
-      isDeep = (Boolean) ((JcrInputProperty) mappings.get("/node/exo:isDeep")).getValue();
-    }
-    if (mappings.containsKey("/node/exo:uuid")) {
-      uuid = (String[]) ((JcrInputProperty) mappings.get("/node/exo:uuid")).getValue();
-      if(uuid.length == 0) uuid = null;
-    }
-    if (mappings.containsKey("/node/exo:nodeTypeName")) {
-      nodeTypeName = (String[]) ((JcrInputProperty) mappings.get("/node/exo:nodeTypeName"))
-          .getValue();
-      if(nodeTypeName.length == 0) {
-        nodeTypeName = null;
-        mappings.remove("/node/exo:nodeTypeName");
-      }
-    }
-    addAction(storeActionNode, repository, actionType, isDeep, uuid, nodeTypeName, mappings);
+    addAction(storeActionNode, actionType, mappings);
   }
   
   public void addAction(Node storeActionNode, String actionType, Map mappings) throws Exception {
@@ -690,7 +634,6 @@ public class ActionServiceContainerImpl implements ActionServiceContainer, Start
    */
   private void initiateActionConfiguration() throws Exception {
     ManageableRepository jcrRepository = null ;
-      RepositoryEntry repository = repositoryService_.getCurrentRepository().getConfiguration();
       jcrRepository = repositoryService_.getCurrentRepository();
       String[] workspaces = jcrRepository.getWorkspaceNames();
       for (String workspace : workspaces) {
@@ -808,7 +751,7 @@ public class ActionServiceContainerImpl implements ActionServiceContainer, Start
             String actionServiceName = plugin.getName();
             ActionPlugin actionService = getActionPlugin(actionServiceName);
             if (actionService.isActionTypeSupported(actionType)) {
-              actionService.initiateActionObservation(actionNode, repository);
+              actionService.initiateActionObservation(actionNode);
             }
           }
         } catch (Exception e) {

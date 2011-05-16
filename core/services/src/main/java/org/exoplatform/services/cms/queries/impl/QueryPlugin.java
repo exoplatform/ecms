@@ -84,16 +84,7 @@ public class QueryPlugin extends BaseComponentPlugin {
 
   @Deprecated
   public void init(String repository,String baseQueriesPath) throws Exception {
-    if(!autoCreateInNewRepository_) return ;
-    Iterator<ObjectParameter> it = params_.getObjectParamIterator() ;
-    Session session = getSession() ;
-    Node queryHomeNode = (Node)session.getItem(baseQueriesPath) ;
-    while(it.hasNext()){
-      QueryData data = (QueryData)it.next().getObject() ;
-      addQuery(queryHomeNode, data) ;
-    }
-    queryHomeNode.save();
-    session.save();
+    init(baseQueriesPath);
   } 
 
   private Session getSession() throws Exception {

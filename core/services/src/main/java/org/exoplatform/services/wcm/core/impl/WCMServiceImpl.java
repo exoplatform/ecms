@@ -69,24 +69,7 @@ public class WCMServiceImpl implements WCMService {
                                    String repository,
                                    String workspace,
                                    String nodeIdentifier) throws Exception {
-    if(repository == null || workspace == null || nodeIdentifier == null) throw new ItemNotFoundException();
-    ExoContainer container = ExoContainerContext.getCurrentContainer();
-    RepositoryService repositoryService = (RepositoryService) container.getComponentInstanceOfType(RepositoryService.class);
-    ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
-    Session session = sessionProvider.getSession(workspace, manageableRepository);
-    Node content = null;
-    try {
-      content = session.getNodeByUUID(nodeIdentifier);
-    } catch (ItemNotFoundException itemNotFoundException) {
-      try {
-        content = (Node) session.getItem(nodeIdentifier);
-      } catch(Exception exception) {
-        content = null;
-      }
-    } finally {
-      if(session != null) session.logout();
-    }
-    return content;
+    return getReferencedContent(sessionProvider, workspace, nodeIdentifier);
   }
   
   /*

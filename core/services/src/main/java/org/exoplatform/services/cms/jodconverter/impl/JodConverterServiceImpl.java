@@ -1,7 +1,5 @@
 package org.exoplatform.services.cms.jodconverter.impl;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.ConnectException;
@@ -19,7 +17,7 @@ public class JodConverterServiceImpl implements JodConverterService {
   private OpenOfficeDocumentConverter converter;
   private DefaultDocumentFormatRegistry format;
 
-  public JodConverterServiceImpl(InitParams initParams) throws IOException, FileNotFoundException, Exception {
+  public JodConverterServiceImpl(InitParams initParams) throws Exception {
     String host = initParams.getValueParam("host").getValue();
     int port = Integer.parseInt(initParams.getValueParam("port").getValue());
     socketconnection = new SocketOpenOfficeConnection(host, port);
@@ -38,7 +36,7 @@ public class JodConverterServiceImpl implements JodConverterService {
    * @throws Exception
    */
   public void convert(InputStream input, String formatInput, OutputStream out,
-      String formatOutput) throws ConnectException, Exception {
+      String formatOutput) throws ConnectException {
     converter.convert(input, format.getFormatByFileExtension(formatInput), out,
         format.getFormatByFileExtension(formatOutput));
   }

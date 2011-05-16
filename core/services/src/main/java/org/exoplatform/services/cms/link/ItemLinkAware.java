@@ -56,9 +56,8 @@ public abstract class ItemLinkAware implements Item {
   public static ItemLinkAware newInstance(Session originalSession, String originalAbsPath, Item item) {
     if (item instanceof Node) {
       return new NodeLinkAware(originalSession, originalAbsPath, (Node) item);
-    } else {
-      return new PropertyLinkAware(originalSession, originalAbsPath, (Property) item);
-    }
+    } 
+    return new PropertyLinkAware(originalSession, originalAbsPath, (Property) item);
   }
 
   /**

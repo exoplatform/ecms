@@ -31,10 +31,10 @@ import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.services.cms.actions.ActionServiceContainer;
 import org.exoplatform.services.jcr.RepositoryService;
-import org.exoplatform.services.jcr.access.SystemIdentity;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.security.Identity;
+import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.services.security.IdentityRegistry;
 import org.exoplatform.services.security.MembershipEntry;
 
@@ -133,18 +133,17 @@ public abstract class BaseActionLauncherListener implements ECMEventListener {
 
   private boolean checkExcetuteable(String userId, Value[] roles,
                               IdentityRegistry identityRegistry) throws Exception {
-    if(SystemIdentity.SYSTEM.equalsIgnoreCase(userId)) {
+    if(IdentityConstants.SYSTEM.equalsIgnoreCase(userId)) {
       return true;
     }
 
     Identity identity;
-    if (SystemIdentity.ANONIM.equalsIgnoreCase(userId)) {
+    if (IdentityConstants.ANONIM.equalsIgnoreCase(userId)) {
       return true;
-    } else {
-      identity = identityRegistry.getIdentity(userId);
-      if(identity == null) {
-        return false ;
-      }
+    } 
+    identity = identityRegistry.getIdentity(userId);
+    if(identity == null) {
+      return false ;
     }
 
     for (int i = 0; i < roles.length; i++) {

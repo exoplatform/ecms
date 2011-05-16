@@ -197,8 +197,7 @@ public final class LinkUtils {
       for (int i = deep; i > 0; i-- ) {
         if (session.itemExists(path))
           break;
-        else
-          path = getParentPath(path);
+        path = getParentPath(path);
       }
     }
     return path;

@@ -42,13 +42,13 @@ import org.exoplatform.services.cms.link.NodeLinkAware;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.access.AccessControlEntry;
 import org.exoplatform.services.jcr.access.PermissionType;
-import org.exoplatform.services.jcr.access.SystemIdentity;
 import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.security.IdentityConstants;
 
 /**
  * Created by The eXo Platform SARL
@@ -270,7 +270,7 @@ public class LinkManagerImpl implements LinkManager {
   private boolean canRemovePermission(Node node, String identity) throws ValueFormatException,
         PathNotFoundException, RepositoryException {
     String owner = getNodeOwner(node);
-    if(identity.equals(SystemIdentity.SYSTEM)) return false;
+    if(identity.equals(IdentityConstants.SYSTEM)) return false;
     if(owner != null && owner.equals(identity)) return false;
     return true;
   }
@@ -287,7 +287,7 @@ public class LinkManagerImpl implements LinkManager {
     if(node.hasProperty("exo:owner")) {
       return node.getProperty("exo:owner").getString();
     }
-    return SystemIdentity.SYSTEM;
+    return IdentityConstants.SYSTEM;
   }
 
   /**
@@ -307,34 +307,7 @@ public class LinkManagerImpl implements LinkManager {
 
   @Deprecated
   public List<Node> getAllLinks(Node targetNode, String linkType, String repoName) throws Exception {
-    List<Node> result = new ArrayList<Node>();
-    ExoContainer myContainer = ExoContainerContext.getCurrentContainer();
-    RepositoryService repositoryService =(RepositoryService)myContainer.getComponentInstanceOfType(RepositoryService.class);
-    ManageableRepository repository  = repositoryService.getCurrentRepository();
-    String[] workspaces = repository.getWorkspaceNames();
-    String systemWS =
-      repository.getConfiguration().getSystemWorkspaceName();
-    String queryString = new StringBuilder().append("SELECT * FROM ").
-                                             append(linkType).
-                                             append(" WHERE exo:uuid='").
-                                             append(targetNode.getUUID()).append("'").
-                                             append(" AND exo:workspace='").
-                                             append(targetNode.getSession().getWorkspace().getName()).
-                                             append("'").toString();
-
-    for (String workspace : workspaces) {
-      SessionProvider sessionProvider = workspace.equals(systemWS) ? SessionProviderFactory.createSystemProvider()
-                                                                   : SessionProviderFactory.createSessionProvider();
-      Session session = sessionProvider.getSession(workspace, repository);
-      QueryManager queryManager = session.getWorkspace().getQueryManager();
-      Query query = queryManager.createQuery(queryString, Query.SQL);
-      QueryResult queryResult = query.execute();
-      NodeIterator iter = queryResult.getNodes();
-      while (iter.hasNext()) {
-        result.add(iter.nextNode());
-      }
-    }
-    return result;
+    return getAllLinks(targetNode, linkType);
   }
   
   public List<Node> getAllLinks(Node targetNode, String linkType) throws Exception {

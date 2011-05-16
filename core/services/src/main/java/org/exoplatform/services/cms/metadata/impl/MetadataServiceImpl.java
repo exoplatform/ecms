@@ -177,14 +177,7 @@ public class MetadataServiceImpl implements MetadataService, Startable{
    */
   @Deprecated
   public void init(String repository) throws Exception {
-    for(TemplatePlugin plugin : plugins_) {
-      try {
-        plugin.setBasePath(baseMetadataPath_);
-        plugin.init();
-      } catch(Exception e) {
-        LOG.error("Unexpected error", e);
-      }
-    }
+    init();
   }
 
   /**
@@ -197,27 +190,7 @@ public class MetadataServiceImpl implements MetadataService, Startable{
                             String content,
                             boolean isAddNew,
                             String repository) throws Exception {
-    Session session = getSession();
-    Node metadataHome = (Node)session.getItem(baseMetadataPath_);
-    String path = null;
-    if(!isAddNew) {
-      if(isDialog) {
-        Node dialog1 = metadataHome.getNode(nodetype).getNode(DIALOGS).getNode(DIALOG1);
-        path = templateService.updateTemplate(dialog1, new ByteArrayInputStream(content.getBytes()), role.split(";"));
-      } else {
-        Node view1 = metadataHome.getNode(nodetype).getNode(VIEWS).getNode(VIEW1);
-        path = templateService.updateTemplate(view1, new ByteArrayInputStream(content.getBytes()), role.split(";"));
-      }
-    } else {
-      Node metadata = null;
-      if(metadataHome.hasNode(nodetype)) metadata = metadataHome.getNode(nodetype);
-      else metadata = metadataHome.addNode(nodetype, NT_UNSTRUCTURED);
-      addTemplate(metadata, role, new ByteArrayInputStream(content.getBytes()), isDialog);
-      metadataHome.save();
-    }
-    session.save();
-    session.logout();
-    return path;
+    return addMetadata(nodetype, isDialog, role, content, isAddNew);
   }
   
   /**
@@ -277,13 +250,7 @@ public class MetadataServiceImpl implements MetadataService, Startable{
    */
   @Deprecated
   public void removeMetadata(String nodetype, String repository) throws Exception {
-    Session session = getSession();
-    Node metadataHome = (Node)session.getItem(baseMetadataPath_);
-    Node metadata = metadataHome.getNode(nodetype);
-    metadata.remove();
-    metadataHome.save();
-    session.save();
-    session.logout();
+    removeMetadata(nodetype);
   }
 
   /**
@@ -304,11 +271,7 @@ public class MetadataServiceImpl implements MetadataService, Startable{
    */
   @Deprecated
   public List<String> getMetadataList(String repository) throws Exception {
-    List<String> metadataTypes = new ArrayList<String>();
-    for(NodeType metadata:getAllMetadatasNodeType(repository)) {
-      metadataTypes.add(metadata.getName());
-    }
-    return metadataTypes;
+    return getMetadataList();
   }
 
   /**
@@ -327,14 +290,7 @@ public class MetadataServiceImpl implements MetadataService, Startable{
    */
   @Deprecated
   public List<NodeType> getAllMetadatasNodeType(String repository) throws Exception {
-    List<NodeType> metadataTypes = new ArrayList<NodeType>();
-    ExtendedNodeTypeManager ntManager = repositoryService_.getCurrentRepository().getNodeTypeManager();
-    NodeTypeIterator ntIter = ntManager.getMixinNodeTypes();
-    while(ntIter.hasNext()) {
-      NodeType nt = ntIter.nextNodeType();
-      if(nt.isNodeType(METADATA_TYPE) && !nt.getName().equals(METADATA_TYPE)) metadataTypes.add(nt);
-    }
-    return metadataTypes;
+    return getAllMetadatasNodeType();
   }
   
   /**
@@ -378,14 +334,7 @@ public class MetadataServiceImpl implements MetadataService, Startable{
    */
   @Deprecated
   public String getMetadataTemplate(String name, boolean isDialog, String repository) throws Exception {
-    Session session = getSession();
-    Node metadataHome = (Node)session.getItem(baseMetadataPath_);
-    Node template = null;
-    if(!hasMetadata(name, repository)) return null;
-    if(isDialog) template = metadataHome.getNode(name).getNode(DIALOGS).getNode(DIALOG1);
-    else template = metadataHome.getNode(name).getNode(VIEWS).getNode(VIEW1);
-    session.logout();
-    return templateService.getTemplate(template);
+    return getMetadataTemplate(name, isDialog);
   }
   
   /**
@@ -407,17 +356,7 @@ public class MetadataServiceImpl implements MetadataService, Startable{
    */
   @Deprecated
   public String getMetadataPath(String name, boolean isDialog, String repository) throws Exception {
-    Session session = getSession();
-    Node metadataHome = (Node)session.getItem(baseMetadataPath_);
-    if(!hasMetadata(name, repository)) return null;
-    Node template = null;
-    if(isDialog){
-      template = metadataHome.getNode(name).getNode(DIALOGS).getNode(DIALOG1);
-    } else {
-      template = metadataHome.getNode(name).getNode(VIEWS).getNode(VIEW1);
-    }
-    session.logout();
-    return template.getPath();
+    return getMetadataPath(name, isDialog);
   }
   
   /**
@@ -442,17 +381,7 @@ public class MetadataServiceImpl implements MetadataService, Startable{
    */
   @Deprecated
   public String getMetadataRoles(String name, boolean isDialog, String repository) throws Exception {
-    Session session = getSession();
-    Node metadataHome = (Node)session.getItem(baseMetadataPath_);
-    Node template = null;
-    if(!hasMetadata(name, repository)) return null;
-    if(isDialog){
-      template = metadataHome.getNode(name).getNode(DIALOGS).getNode(DIALOG1);
-    } else {
-      template = metadataHome.getNode(name).getNode(VIEWS).getNode(VIEW1);
-    }
-    session.logout();
-    return templateService.getTemplateRoles(template);
+    return getMetadataRoles(name, isDialog);
   }
   
   /**
@@ -477,14 +406,7 @@ public class MetadataServiceImpl implements MetadataService, Startable{
    */
   @Deprecated
   public boolean hasMetadata(String name, String repository) throws Exception {
-    Session session = getSession();
-    Node metadataHome = (Node)session.getItem(baseMetadataPath_);
-    if(metadataHome.hasNode(name)) {
-      session.logout();
-      return true;
-    }
-    session.logout();
-    return false;
+    return hasMetadata(name);
   }
   
   /**
@@ -506,18 +428,7 @@ public class MetadataServiceImpl implements MetadataService, Startable{
    */
   @Deprecated
   public List<String> getExternalMetadataType(String repository) throws Exception {
-    List<String> extenalMetaTypes = new ArrayList<String>();
-    for(NodeType metadata: getAllMetadatasNodeType(repository)) {
-      for(PropertyDefinition pro : metadata.getPropertyDefinitions()) {
-        if(pro.getName().equals(INTERNAL_USE)) {
-          if(!pro.getDefaultValues()[0].getBoolean() && !metadata.getName().equals(METADATA_TYPE))
-            extenalMetaTypes.add(metadata.getName());
-          break;
-        }
-      }
-    }
-
-    return extenalMetaTypes;
+    return getExternalMetadataType();
   }
   
   /**

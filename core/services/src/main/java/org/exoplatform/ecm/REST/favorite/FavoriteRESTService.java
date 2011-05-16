@@ -61,7 +61,7 @@ public class FavoriteRESTService implements ResourceContainer {
       @PathParam("workspaceName") String wsName,
       @PathParam("userName") String userName, @QueryParam("showItems") String showItems) throws Exception {
     List<FavoriteNode> listFavorites = new ArrayList<FavoriteNode>();
-    List<DriveData> listDrive = manageDriveService.getAllDrives(repoName);
+    List<DriveData> listDrive = manageDriveService.getAllDrives();
     if (showItems == null || showItems.trim().length() == 0) showItems = String.valueOf(NO_PER_PAGE);
     try {
       List<Node> listNodes = favoriteService.getAllFavoriteNodesByUser(wsName,
@@ -100,8 +100,7 @@ public class FavoriteRESTService implements ResourceContainer {
   private String getTitle(Node node) throws Exception {
     if (node.hasProperty(TITLE))
       return node.getProperty(TITLE).getString();
-    else
-      return node.getName();
+    return node.getName();
   }
 
   private String getDateFormat(Calendar date) {

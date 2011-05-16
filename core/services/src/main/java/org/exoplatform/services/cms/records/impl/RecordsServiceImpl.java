@@ -22,7 +22,6 @@ import org.apache.commons.lang.StringUtils;
 import org.exoplatform.services.cms.JcrInputProperty;
 import org.exoplatform.services.cms.actions.ActionServiceContainer;
 import org.exoplatform.services.cms.records.RecordsService;
-import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
@@ -74,11 +73,6 @@ public class RecordsServiceImpl implements RecordsService {
    */
   private AuditService auditService_;
 
-  /**
-   * RepositoryService object
-   */
-  private RepositoryService repositoryService_ ;
-
   private static final Log LOG  = ExoLogger.getLogger(RecordsServiceImpl.class);
 
   /**
@@ -90,11 +84,9 @@ public class RecordsServiceImpl implements RecordsService {
    */
   public RecordsServiceImpl(ActionServiceContainer actionServiceContainer,
                             SessionProviderService sessionProviderService,
-                            RepositoryService repositoryService,
                             AuditService auditService) {
     actionsService_ = actionServiceContainer;
     providerService_ = sessionProviderService;
-    repositoryService_ = repositoryService;
     auditService_ = auditService;
   }
 
@@ -146,7 +138,7 @@ public class RecordsServiceImpl implements RecordsService {
     .setValue("compute info such as holding dates on a new record added to that file plan");
     mappings.put("/node/exo:description", descriptionInputProperty);
 
-    actionsService_.addAction(filePlan, repository, "exo:processRecordAction", mappings);
+    actionsService_.addAction(filePlan, "exo:processRecordAction", mappings);
   }
 
   /**

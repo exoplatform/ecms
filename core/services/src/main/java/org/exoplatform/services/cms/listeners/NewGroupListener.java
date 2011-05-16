@@ -19,10 +19,17 @@
 
 package org.exoplatform.services.cms.listeners;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.jcr.Node;
+import javax.jcr.PathNotFoundException;
+import javax.jcr.Session;
+
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.access.PermissionType;
-import org.exoplatform.services.jcr.config.RepositoryEntry;
 import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
@@ -31,14 +38,6 @@ import org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig.JcrPath;
 import org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig.Permission;
 import org.exoplatform.services.organization.Group;
 import org.exoplatform.services.organization.GroupEventListener;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.jcr.Node;
-import javax.jcr.PathNotFoundException;
-import javax.jcr.Session;
 
 /**
  * Created by The eXo Platform SARL Author : Dang Van Minh minh.dang@exoplatform.com Nov 15, 2007
@@ -61,7 +60,7 @@ public class NewGroupListener extends GroupEventListener
       InitParams params) throws Exception
    {
       jcrService_ = jcrService;
-      config_ = (HierarchyConfig)params.getObjectParamValues(HierarchyConfig.class).get(0);
+      config_ = params.getObjectParamValues(HierarchyConfig.class).get(0);
       groupsPath_ = nodeHierarchyCreatorService.getJcrPath(GROUPS_PATH);
    }
 

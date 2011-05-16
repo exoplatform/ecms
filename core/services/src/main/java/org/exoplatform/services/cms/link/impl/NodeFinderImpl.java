@@ -53,7 +53,7 @@ public class NodeFinderImpl implements NodeFinder {
   @Deprecated
   public Item getItem(String repository, String workspace, String absPath, boolean giveTarget) throws PathNotFoundException,
                                                                                               RepositoryException {
-    return getItemGiveTargetSys(repository, workspace, absPath, giveTarget, false);
+    return getItem(workspace, absPath, giveTarget);
   }
 
   /**
@@ -74,10 +74,7 @@ public class NodeFinderImpl implements NodeFinder {
                                    boolean giveTarget,
                                    boolean system) throws PathNotFoundException,
                                                   RepositoryException {
-    if (!absPath.startsWith("/"))
-      throw new IllegalArgumentException(absPath + " isn't absolute path");
-    Session session = getSession(repositoryService_.getCurrentRepository(), workspace);
-    return getItemTarget(session, absPath, giveTarget, system);
+    return getItemGiveTargetSys(workspace, absPath, giveTarget, system);
   }
 
   /**
@@ -100,7 +97,7 @@ public class NodeFinderImpl implements NodeFinder {
   @Deprecated
   public Item getItem(String repository, String workspace, String absPath) throws PathNotFoundException,
                                                                           RepositoryException {
-    return getItem(repository, workspace, absPath, false);
+    return getItem(workspace, absPath);
   }
   
   /**
@@ -117,7 +114,7 @@ public class NodeFinderImpl implements NodeFinder {
   @Deprecated
   public Item getItemSys(String repository, String workspace, String absPath, boolean system) throws PathNotFoundException,
                                                                                              RepositoryException {
-    return getItemGiveTargetSys(repository, workspace, absPath, false, system);
+    return getItemSys(workspace, absPath, system);
   }
   
   /**

@@ -55,6 +55,7 @@ import org.exoplatform.services.log.Log;
 import org.exoplatform.services.resources.LocaleConfigService;
 import org.exoplatform.services.resources.Orientation;
 import org.exoplatform.services.security.Identity;
+import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.services.security.IdentityRegistry;
 import org.exoplatform.services.security.MembershipEntry;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
@@ -92,7 +93,6 @@ public class TemplateServiceImpl implements TemplateService, Startable {
 
   private static final String NODETYPE_LIST = "nodeTypeList";
 
-  @SuppressWarnings("unchecked")
   private ExoCache nodeTypeListCached ;
 
   /**
@@ -173,8 +173,7 @@ public class TemplateServiceImpl implements TemplateService, Startable {
     HashMap<String, List<String>> map = foldersFilterMap;
     if (map != null)
       return map.keySet();
-    else
-      return null;
+    return null;
   }
 
   /**
@@ -266,9 +265,9 @@ public class TemplateServiceImpl implements TemplateService, Startable {
     //In some cases, the child node is mixins type of a nt:file example
     if(childNodeType.isMixin()) return true;
     List<NodeType> allNodeTypes = new ArrayList<NodeType>();
-    allNodeTypes.add((NodeType)parent.getPrimaryNodeType());
+    allNodeTypes.add(parent.getPrimaryNodeType());
     for(NodeType mixin: parent.getMixinNodeTypes()) {
-      allNodeTypes.add((NodeType)mixin);
+      allNodeTypes.add(mixin);
     }
     for (NodeType nodetype:allNodeTypes) {
       if (((NodeTypeImpl)nodetype).isChildNodePrimaryTypeAllowed(childNodeTypeName)) {
@@ -376,7 +375,7 @@ public class TemplateServiceImpl implements TemplateService, Startable {
    * {@inheritDoc}
    */
   public String getTemplatePathByUser(boolean isDialog, String nodeTypeName, String userName) throws Exception {
-    if(SystemIdentity.ANONIM.equals(userName) || userName == null) {
+    if(IdentityConstants.ANONIM.equals(userName) || userName == null) {
       return getTemplatePathByAnonymous(isDialog, nodeTypeName);
     }
     Session session = getSession();
@@ -894,7 +893,7 @@ public class TemplateServiceImpl implements TemplateService, Startable {
    * @throws Exception
    */
   private boolean hasPermission(String userId, String roles, IdentityRegistry identityRegistry) throws Exception {
-    if(SystemIdentity.SYSTEM.equalsIgnoreCase(userId)) {
+    if(IdentityConstants.SYSTEM.equalsIgnoreCase(userId)) {
       return true ;
     }
     Identity identity = identityRegistry.getIdentity(userId) ;
@@ -1154,10 +1153,9 @@ public class TemplateServiceImpl implements TemplateService, Startable {
       if (e.getMessage().equalsIgnoreCase("Repository 'null' not found.")) {
         String repositoryName = System.getProperty("gatein.tenant.repository.name");
         return repositoryName;
-      } else {
-        LOG.error("Repository exception occurs:", e);
-        return null;
       }
+      LOG.error("Repository exception occurs:", e);
+      return null;
     }
   }
 

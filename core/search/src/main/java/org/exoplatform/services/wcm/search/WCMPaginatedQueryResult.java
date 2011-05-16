@@ -111,7 +111,7 @@ public class WCMPaginatedQueryResult extends PaginatedQueryResult {
     Node displayNode = getNodeToCheckState(node);
     if(displayNode == null) return null;
     if (isSearchContent) return displayNode;
-    NodeLocation nodeLocation = NodeLocation.make(displayNode);
+    NodeLocation nodeLocation = NodeLocation.getNodeLocationByNode(displayNode);
     WCMComposer wcmComposer = WCMCoreUtils.getService(WCMComposer.class);
     HashMap<String, String> filters = new HashMap<String, String>();
     filters.put(WCMComposer.FILTER_MODE, WCMComposer.MODE_LIVE);

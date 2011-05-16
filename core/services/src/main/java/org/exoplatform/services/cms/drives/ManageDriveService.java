@@ -128,7 +128,19 @@ public interface ManageDriveService {
    * @see DriveData
    * @throws Exception
    */
+  @Deprecated
   public List<DriveData> getAllDriveByPermission(String permission, String repository) throws Exception;
+  
+  /**
+   * Return the list of DriveData
+   * This method will look up in all workspaces of repository to find DriveData with
+   * specified permission
+   * @param permission  the string contain the permission
+   * @return  list of DriveData with specified repository and permission
+   * @see DriveData
+   * @throws Exception
+   */
+  public List<DriveData> getAllDriveByPermission(String permission) throws Exception;
 
   /**
    * Remove drive with specified drive name and repository

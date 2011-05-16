@@ -29,8 +29,6 @@ import javax.jcr.Value;
 import javax.jcr.nodetype.ConstraintViolationException;
 import javax.jcr.version.VersionException;
 
-import org.exoplatform.container.ExoContainer;
-import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.ecm.resolver.JCRResourceResolver;
 import org.exoplatform.ecm.webui.form.DialogFormActionListeners;
 import org.exoplatform.ecm.webui.form.UIDialogForm;
@@ -44,6 +42,7 @@ import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.resolver.ResourceResolver;
+import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.CmsService;
 import org.exoplatform.services.cms.impl.DMSConfiguration;
 import org.exoplatform.services.cms.impl.DMSRepositoryConfiguration;
@@ -51,6 +50,8 @@ import org.exoplatform.services.cms.taxonomy.TaxonomyService;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
+import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.web.application.ApplicationMessage;
@@ -64,18 +65,14 @@ import org.exoplatform.webui.core.UIPopupComponent;
 import org.exoplatform.webui.core.UIPopupWindow;
 import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.event.Event;
-import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.event.Event.Phase;
+import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.form.UIFormInput;
 import org.exoplatform.webui.form.UIFormInputBase;
 import org.exoplatform.webui.form.UIFormMultiValueInputSet;
 import org.exoplatform.webui.form.UIFormStringInput;
 import org.exoplatform.workflow.webui.component.controller.UITask;
 import org.exoplatform.workflow.webui.component.controller.UITaskManager;
-import org.exoplatform.services.cms.BasePath;
-import org.exoplatform.services.jcr.RepositoryService;
-import org.exoplatform.services.jcr.ext.common.SessionProvider;
-import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 
 /**
  * Created by The eXo Platform SARL
@@ -93,7 +90,8 @@ import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
         @EventConfig(listeners = UIDocumentForm.CancelActionListener.class, phase = Phase.DECODE),
         @EventConfig(listeners = UIDocumentForm.AddActionListener.class, phase = Phase.DECODE),
         @EventConfig(listeners = UIDocumentForm.ShowComponentActionListener.class, phase = Phase.DECODE),
-        @EventConfig(listeners = UIDocumentForm.RemoveReferenceActionListener.class, confirm = "DialogFormField.msg.confirm-delete", phase = Phase.DECODE),
+        @EventConfig(listeners = UIDocumentForm.RemoveReferenceActionListener.class, 
+            confirm = "DialogFormField.msg.confirm-delete", phase = Phase.DECODE),
         @EventConfig(listeners = UIDocumentForm.RemoveActionListener.class, phase = Phase.DECODE),
         @EventConfig(listeners = DialogFormActionListeners.RemoveDataActionListener.class, phase = Phase.DECODE),
         @EventConfig(listeners = DialogFormActionListeners.ChangeTabActionListener.class, phase = Phase.DECODE) }) })
@@ -509,8 +507,7 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
       } else if (uiComp instanceof UIOneTaxonomySelector) {
         NodeHierarchyCreator nodeHierarchyCreator = uiForm.getApplicationComponent(NodeHierarchyCreator.class);
         DMSConfiguration dmsConfig = uiForm.getApplicationComponent(DMSConfiguration.class);
-        String repositoryName = uiForm.getRepository();   
-        DMSRepositoryConfiguration dmsRepoConfig = dmsConfig.getConfig(repositoryName); 
+        DMSRepositoryConfiguration dmsRepoConfig = dmsConfig.getConfig(); 
         String workspaceName = dmsRepoConfig.getSystemWorkspace();
         ((UIOneTaxonomySelector)uiComp).setIsDisable(workspaceName, false);
         String rootTreePath = nodeHierarchyCreator.getJcrPath(BasePath.TAXONOMIES_TREE_STORAGE_PATH);      

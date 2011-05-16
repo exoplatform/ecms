@@ -52,21 +52,12 @@ public class ScriptActionPlugin extends BaseActionPlugin implements ComponentPlu
                             RepositoryService repositoryService) throws Exception {
     scriptService_ = scriptService;
     repositoryService_ = repositoryService;
-    config_ = (ActionConfig) params.getObjectParamValues(ActionConfig.class).get(0);
+    config_ = params.getObjectParamValues(ActionConfig.class).get(0);
   }
 
   @Deprecated
   public Collection<String> getActionExecutables(String repository) throws Exception {
-    Collection<String> actionScriptNames = new ArrayList<String>();
-    SessionProvider provider = SessionProvider.createSystemProvider();
-    List<Node> actionScriptList = scriptService_.getECMActionScripts(provider) ;
-    String baseScriptPath = scriptService_.getBaseScriptPath() ;
-    for(Node script:actionScriptList) {
-      String actionScriptName = StringUtils.substringAfter(script.getPath(),baseScriptPath + "/") ;
-      actionScriptNames.add(actionScriptName) ;
-    }
-    provider.close();
-    return actionScriptNames;
+    return getActionExecutables();
   }
   
   public Collection<String> getActionExecutables() throws Exception {
@@ -152,10 +143,7 @@ public class ScriptActionPlugin extends BaseActionPlugin implements ComponentPlu
 
   @Deprecated
   public void executeAction(String userId, String executable, Map variables, String repository) throws Exception {
-    ExoContainer container = ExoContainerContext.getCurrentContainer();
-    ScriptService scriptService =  (ScriptService)container.getComponentInstanceOfType(ScriptService.class);
-    CmsScript cmsScript = scriptService.getScript(executable);
-    cmsScript.execute(variables);
+    executeAction(userId, executable, variables);
   }
   
   public void executeAction(String userId, String executable, Map variables) throws Exception {

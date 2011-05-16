@@ -45,10 +45,10 @@ import org.exoplatform.services.cms.JcrInputProperty;
 import org.exoplatform.services.cms.i18n.MultiLanguageService;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.jcr.access.PermissionType;
-import org.exoplatform.services.jcr.access.SystemIdentity;
 import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.jcr.impl.core.value.DateValue;
 import org.exoplatform.services.jcr.impl.core.value.StringValue;
+import org.exoplatform.services.security.IdentityConstants;
 
 /**
  * @author Hung Nguyen Quang
@@ -465,7 +465,7 @@ public class MultiLanguageServiceImpl implements MultiLanguageService {
     LinkManager linkManager = (LinkManager) ExoContainerContext.getCurrentContainer()
                                                                .getComponentInstanceOfType(LinkManager.class);
     Node linkNode = linkManager.createLink(languagesNode, "exo:symlink", translationNode, lang);
-    ((ExtendedNode)linkNode).setPermission(SystemIdentity.ANY, new String[]{PermissionType.READ});
+    ((ExtendedNode)linkNode).setPermission(IdentityConstants.ANY, new String[]{PermissionType.READ});
     linkNode.getSession().save();
   }
 

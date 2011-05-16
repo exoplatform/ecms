@@ -137,10 +137,9 @@ public class NodeLocation {
     String[] temp = exp.split(":");
     if (temp.length == 3 && temp[2].indexOf("/") == 0) {
       return new NodeLocation(temp[0], temp[1], temp[2]);
-    } else {
-      throw new IllegalArgumentException("Invalid expression: " + exp
-          + ". An valid expression has pattern repository:workspace:path");
-    }
+    } 
+    throw new IllegalArgumentException("Invalid expression: " + exp
+        + ". An valid expression has pattern repository:workspace:path");
   }
 
   /**
@@ -184,10 +183,9 @@ public class NodeLocation {
       String workspace = temp[1];
       String nodepath = exp.substring(repository.length() + workspace.length() + 2);
       return new NodeLocation(repository, workspace, nodepath);
-    } else {
-      throw new IllegalArgumentException("Invalid expression: " + exp
-          + ". An valid expression has pattern repository:workspace:path");
-    }
+    } 
+    throw new IllegalArgumentException("Invalid expression: " + exp
+        + ". An valid expression has pattern repository:workspace:path");
   }
 
   /**
