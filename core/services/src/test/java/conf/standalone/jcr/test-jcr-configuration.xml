@@ -55,6 +55,22 @@
   <component>
     <type>org.exoplatform.services.jcr.impl.ext.action.SessionActionCatalog</type>
   </component>
+		
+  <component>
+    <key>org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator</key>
+    <type>org.exoplatform.services.jcr.ext.hierarchy.impl.NodeHierarchyCreatorImpl</type>
+    <init-params>
+      <value-param>
+        <name>old-user-distribution</name>
+        <value>true</value>
+      </value-param>
+    </init-params>           
+  </component>
+		
+  <component>
+    <key>org.exoplatform.services.jcr.ext.distribution.DataDistributionManager</key>
+    <type>org.exoplatform.services.jcr.ext.distribution.impl.DataDistributionManagerImpl</type>     
+  </component>
 
   <external-component-plugins>
  		<target-component>org.exoplatform.services.jcr.RepositoryService</target-component>

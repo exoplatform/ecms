@@ -26,7 +26,6 @@ import org.exoplatform.services.cms.folksonomy.NewFolksonomyService;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.ecm.dms.BaseDMSTestCase;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
-import org.exoplatform.services.jcr.impl.core.SessionImpl;
 
 /**
  * Created by The eXo Platform SARL
@@ -39,7 +38,6 @@ public class TestNewFolksonomyService extends BaseDMSTestCase {
 
   private static final String TEST = "test";
   private static final String TEST2 = "test2";
-  private static final String USER_FOLKSONOMY_ALIAS = "userPrivateFolksonomy".intern();
   private static final String EXO_TOTAL = "exo:total";
   private static final String[] groups = {"/platform/users", "/platform/guests"};
 
@@ -123,7 +121,7 @@ public class TestNewFolksonomyService extends BaseDMSTestCase {
    */
   public void testAddPrivateTag() throws Exception {
     String[] tags = { "sport", "weather" };
-    newFolksonomyService_.addPrivateTag(tags, test, REPO_NAME, COLLABORATION_WS, session.getUserID());
+    newFolksonomyService_.addPrivateTag(tags, test, COLLABORATION_WS, session.getUserID());
     assertTrue("testAddPrivateTag failed! ", folksonomyNode.hasNode("sport"));
     assertTrue("testAddPrivateTag failed! ", folksonomyNode.hasNode("weather"));
 
@@ -155,7 +153,7 @@ public class TestNewFolksonomyService extends BaseDMSTestCase {
    */
   public void testAddGroupsTag() throws Exception {
     String[] tags = { "sport", "weather" };
-    newFolksonomyService_.addGroupsTag(tags, test, REPO_NAME, COLLABORATION_WS, groups);
+    newFolksonomyService_.addGroupsTag(tags, test, COLLABORATION_WS, groups);
 
     System.out.println("Group A:" + groupAFolksonomyNode.getPath());
 
@@ -209,7 +207,6 @@ public class TestNewFolksonomyService extends BaseDMSTestCase {
     newFolksonomyService_.addPublicTag(publicFolksonomyTreePath,
                                        tags,
                                        test,
-                                       REPO_NAME,
                                        COLLABORATION_WS);
     assertTrue("testAddPublicTag failed! ", publicFolksonomyNode.hasNode("sport"));
     assertTrue("testAddPublicTag failed! ", publicFolksonomyNode.hasNode("weather"));
@@ -252,7 +249,6 @@ public class TestNewFolksonomyService extends BaseDMSTestCase {
     newFolksonomyService_.addSiteTag(site,
                                      tags,
                                      test,
-                                     REPO_NAME,
                                      COLLABORATION_WS);
     assertTrue("testAddSiteTag failed! ", siteFolksonomyNode.hasNode("sport"));
     assertTrue("testAddSiteTag failed! ", siteFolksonomyNode.hasNode("weather"));
@@ -291,12 +287,10 @@ public class TestNewFolksonomyService extends BaseDMSTestCase {
 //		}
     newFolksonomyService_.addPrivateTag(tags,
                                        test,
-                                       REPO_NAME,
                                        COLLABORATION_WS,
                                        user);
     newFolksonomyService_.addPrivateTag(tags,
                                        test2,
-                                       REPO_NAME,
                                        COLLABORATION_WS,
                                        user);
     assertTrue("testGetAllDocumentsByTag failed! ", folksonomyNode.hasNode("sport"));
@@ -306,7 +300,7 @@ public class TestNewFolksonomyService extends BaseDMSTestCase {
 
     int count = 0;
     SessionProvider sessionProvider = SessionProviderFactory.createSystemProvider();
-    List<Node> docs = newFolksonomyService_.getAllDocumentsByTag(sportTagNode.getPath(), REPO_NAME, COLLABORATION_WS, sessionProvider);
+    List<Node> docs = newFolksonomyService_.getAllDocumentsByTag(sportTagNode.getPath(), COLLABORATION_WS, sessionProvider);
     for(Node node : docs) {
       if (test.isSame(node)) count ++;
       else if (test2.isSame(node)) count ++;
@@ -329,10 +323,10 @@ public class TestNewFolksonomyService extends BaseDMSTestCase {
   public void testGetAllGroupTagsOfManyRoles() throws Exception {
     String[] tags = { "sport", "weather" };
     String[] tags2 = { "sport", "music" };
-    newFolksonomyService_.addGroupsTag(tags, test, REPO_NAME, COLLABORATION_WS, groups);
-    newFolksonomyService_.addGroupsTag(tags2, test2, REPO_NAME, COLLABORATION_WS, groups);
+    newFolksonomyService_.addGroupsTag(tags, test, COLLABORATION_WS, groups);
+    newFolksonomyService_.addGroupsTag(tags2, test2, COLLABORATION_WS, groups);
 
-    List<Node> groupTags = newFolksonomyService_.getAllGroupTags(groups, REPO_NAME, COLLABORATION_WS);
+    List<Node> groupTags = newFolksonomyService_.getAllGroupTags(groups, COLLABORATION_WS);
     int count = 0;
     for (Node tag : groupTags) {
       if ("sport".equals(tag.getName())) count ++;
@@ -356,10 +350,10 @@ public class TestNewFolksonomyService extends BaseDMSTestCase {
   public void testGetAllGroupTags() throws Exception {
     String[] tags = { "sport", "weather" };
     String[] tags2 = { "sport", "music" };
-    newFolksonomyService_.addGroupsTag(tags, test, REPO_NAME, COLLABORATION_WS, groups);
-    newFolksonomyService_.addGroupsTag(tags2, test2, REPO_NAME, COLLABORATION_WS, groups);
+    newFolksonomyService_.addGroupsTag(tags, test, COLLABORATION_WS, groups);
+    newFolksonomyService_.addGroupsTag(tags2, test2, COLLABORATION_WS, groups);
 
-    List<Node> groupTags = newFolksonomyService_.getAllGroupTags("/platform/users", REPO_NAME, COLLABORATION_WS);
+    List<Node> groupTags = newFolksonomyService_.getAllGroupTags("/platform/users", COLLABORATION_WS);
     int count = 0;
     for (Node tag : groupTags) {
       if ("sport".equals(tag.getName())) count ++;
@@ -382,11 +376,11 @@ public class TestNewFolksonomyService extends BaseDMSTestCase {
    */
   public void testGetAllPrivateTags() throws Exception {
     String[] tags = { "sport", "weather" };
-    newFolksonomyService_.addPrivateTag(tags, test, REPO_NAME, COLLABORATION_WS, session.getUserID());
+    newFolksonomyService_.addPrivateTag(tags, test, COLLABORATION_WS, session.getUserID());
     String[] tags2 = {"sport", "xyz"};
-    newFolksonomyService_.addPrivateTag(tags2, test2, REPO_NAME, COLLABORATION_WS, session.getUserID());
+    newFolksonomyService_.addPrivateTag(tags2, test2, COLLABORATION_WS, session.getUserID());
 
-    List<Node> tagList = newFolksonomyService_.getAllPrivateTags(session.getUserID(), REPO_NAME, COLLABORATION_WS);
+    List<Node> tagList = newFolksonomyService_.getAllPrivateTags(session.getUserID());
     int count = 0;
     for (Node node : tagList) {
       if ("sport".equals(node.getName())) count ++;
@@ -412,14 +406,12 @@ public class TestNewFolksonomyService extends BaseDMSTestCase {
     newFolksonomyService_.addPublicTag(publicFolksonomyTreePath,
                                        tags,
                                        test,
-                                       REPO_NAME,
                                        COLLABORATION_WS);
     newFolksonomyService_.addPublicTag(publicFolksonomyTreePath,
                                        tags2,
                                        test2,
-                                       REPO_NAME,
                                        COLLABORATION_WS);
-    List<Node> tagList = newFolksonomyService_.getAllPublicTags(publicFolksonomyTreePath, REPO_NAME, COLLABORATION_WS);
+    List<Node> tagList = newFolksonomyService_.getAllPublicTags(publicFolksonomyTreePath, COLLABORATION_WS);
     int count = 0;
     for (Node tag : tagList) {
       if ("sport".equals(tag.getName())) count ++;
@@ -448,14 +440,12 @@ public class TestNewFolksonomyService extends BaseDMSTestCase {
     newFolksonomyService_.addSiteTag(site,
                                        tags,
                                        test,
-                                       REPO_NAME,
                                        COLLABORATION_WS);
     newFolksonomyService_.addSiteTag(site,
                                        tags2,
                                        test2,
-                                       REPO_NAME,
                                        COLLABORATION_WS);
-    List<Node> tagList = newFolksonomyService_.getAllSiteTags(site, REPO_NAME, COLLABORATION_WS);
+    List<Node> tagList = newFolksonomyService_.getAllSiteTags(site, COLLABORATION_WS);
     int count = 0;
     for (Node tag : tagList) {
       if ("sport".equals(tag.getName())) count ++;
@@ -482,10 +472,9 @@ public class TestNewFolksonomyService extends BaseDMSTestCase {
     newFolksonomyService_.addPublicTag(publicFolksonomyTreePath,
                                        tags,
                                        test,
-                                       REPO_NAME,
                                        COLLABORATION_WS);
     Node sportNode = publicFolksonomyNode.getNode("sport");
-    Node football = newFolksonomyService_.modifyTagName(sportNode.getPath()	, "football", REPO_NAME, COLLABORATION_WS);
+    Node football = newFolksonomyService_.modifyTagName(sportNode.getPath()	, "football", COLLABORATION_WS);
 
     assertTrue("testModifyTagName failed! ", publicFolksonomyNode.hasNode("football"));
     assertTrue("testModifyTagName failed! ", publicFolksonomyNode.getNode("football").isSame(football));
@@ -510,14 +499,13 @@ public class TestNewFolksonomyService extends BaseDMSTestCase {
     newFolksonomyService_.addPublicTag(publicFolksonomyTreePath,
                                        tags,
                                        test,
-                                       REPO_NAME,
                                        COLLABORATION_WS);
     Node sportNode = publicFolksonomyNode.getNode("sport");
-    newFolksonomyService_.removeTag(sportNode.getPath(), REPO_NAME, COLLABORATION_WS);
+    newFolksonomyService_.removeTag(sportNode.getPath(), COLLABORATION_WS);
 
     assertFalse("testRemoveTag failed! ", publicFolksonomyNode.hasNode("sport"));
 
-    List<Node> tagList = newFolksonomyService_.getAllPublicTags(publicFolksonomyTreePath, REPO_NAME, COLLABORATION_WS);
+    List<Node> tagList = newFolksonomyService_.getAllPublicTags(publicFolksonomyTreePath, COLLABORATION_WS);
     int count = 0;
     for (Node tag : tagList) {
       if ("nobita".equals(tag.getName())) count ++;
@@ -537,12 +525,12 @@ public class TestNewFolksonomyService extends BaseDMSTestCase {
    */
   public void testRemoveTagOfDocument() throws Exception {
     String[] tags = { "sport", "weather" };
-    newFolksonomyService_.addPrivateTag(tags, test, REPO_NAME, COLLABORATION_WS, session.getUserID());
+    newFolksonomyService_.addPrivateTag(tags, test, COLLABORATION_WS, session.getUserID());
 
     Node sportTagNode = folksonomyNode.getNode("sport");
-    newFolksonomyService_.removeTagOfDocument(sportTagNode.getPath(), test, REPO_NAME, COLLABORATION_WS);
+    newFolksonomyService_.removeTagOfDocument(sportTagNode.getPath(), test, COLLABORATION_WS);
 
-    assertEquals("testRemoveTagOfDocument failed! ", 0, sportTagNode.getNodes().getSize());
+    assertFalse(test.hasNode("sport"));
   }
   /**
    * Clean data test

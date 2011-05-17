@@ -27,11 +27,11 @@
   </ciManagement>
   <properties>
     <!-- Dependencies versions -->
-    <org.exoplatform.kernel.version>2.3.0-CR1</org.exoplatform.kernel.version>
-    <org.exoplatform.core.version>2.4.0-CR1</org.exoplatform.core.version>
-    <org.exoplatform.ws.version>2.2.0-CR1</org.exoplatform.ws.version>
-    <org.exoplatform.jcr.version>1.14.0-CR1</org.exoplatform.jcr.version>
-    <org.exoplatform.jcr-services.version>1.14.0-CR1</org.exoplatform.jcr-services.version>
+    <org.exoplatform.kernel.version>2.3.0-CR2</org.exoplatform.kernel.version>
+    <org.exoplatform.core.version>2.4.0-CR2</org.exoplatform.core.version>
+    <org.exoplatform.ws.version>2.2.0-CR2</org.exoplatform.ws.version>
+    <org.exoplatform.jcr.version>1.14.0-CR2</org.exoplatform.jcr.version>
+    <org.exoplatform.jcr-services.version>1.14.0-CR2</org.exoplatform.jcr-services.version>
     <org.exoplatform.portal.version>3.2.0-PLF-SNAPSHOT</org.exoplatform.portal.version>
     <exo.tool.framework.junit.version>1.2.0</exo.tool.framework.junit.version>
     <org.exoplatform.commons.version>1.1.0-Beta02-SNAPSHOT</org.exoplatform.commons.version>
@@ -49,13 +49,13 @@
     <org.gatein.wci.version>2.0.2-GA</org.gatein.wci.version>
     <org.javassist.version>3.14.0-GA</org.javassist.version>
     <commons-collections.version>3.2.1</commons-collections.version>
-    <commons-pool.version>1.2</commons-pool.version>
+    <commons-pool.version>1.5.5</commons-pool.version>
     <html-parser.version>1.6</html-parser.version>
     <stax.version>1.0</stax.version>
     <org.jvnet.jaxb2.maven2.version>0.1</org.jvnet.jaxb2.maven2.version>
     <cglib.version>2.2</cglib.version>
     <antlr.version>2.7.6rc1</antlr.version>
-    <commons-dbcp.version>1.2.1</commons-dbcp.version>
+    <commons-dbcp.version>1.4</commons-dbcp.version>
     <jcr.version>1.0</jcr.version>
     <org.jsecurity.version>0.9.0</org.jsecurity.version>
     <javax.transaction.version>1.0.1B</javax.transaction.version>
@@ -72,7 +72,8 @@
     <javax.xml.bind.jaxb-api.version>2.1</javax.xml.bind.jaxb-api.version>
     <javax.ws.rs.jsr311-api.version>1.0</javax.ws.rs.jsr311-api.version>
     <javax.jcr.api.version>1.0</javax.jcr.api.version>
-    <org.slf4j.slf4j-simple.version>1.5.6</org.slf4j.slf4j-simple.version>
+    <org.slf4j.slf4j-simple.version>1.5.8</org.slf4j.slf4j-simple.version>
+    <org.slf4j.version>1.5.8</org.slf4j.version>
     <xml-apis.version>1.3.04</xml-apis.version>
     <quartz.version>1.5.2</quartz.version>
     <rome.version>0.9</rome.version>
@@ -96,7 +97,7 @@
     <exo.product.specification>2.0</exo.product.specification>
 
     <!-- exopackage -->
-    <org.exoplatform.exopackage.version>1.1.1</org.exoplatform.exopackage.version>
+    <org.exoplatform.exopackage.version>1.1.2</org.exoplatform.exopackage.version>
     <!-- We enforce Java 6 to build to use Chromattic and APT -->
     <jdk.min.version>1.6</jdk.min.version>
     <!-- maven-release-plugin -->

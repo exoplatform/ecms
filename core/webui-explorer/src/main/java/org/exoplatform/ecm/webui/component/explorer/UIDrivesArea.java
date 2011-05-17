@@ -42,6 +42,7 @@ import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.portal.webui.util.Util;
+import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.drives.ManageDriveService;
 import org.exoplatform.services.cms.views.ManageViewService;
@@ -49,6 +50,8 @@ import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.config.RepositoryEntry;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.web.application.RequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -213,7 +216,10 @@ public class UIDrivesArea extends UIContainer {
       }
       drive.setViews(viewListStr);
       String homePath = drive.getHomePath();
-      if(homePath.contains("${userId}")) homePath = homePath.replace("${userId}", userId);
+      NodeHierarchyCreator nodeHierarchyCreator = uiDrivesArea.getApplicationComponent(NodeHierarchyCreator.class);
+      String userPath = nodeHierarchyCreator.getUserNode(WCMCoreUtils.getUserSessionProvider(), userId).getPath();
+      if(homePath.contains("${userId}")) 
+        homePath = homePath.replace(nodeHierarchyCreator.getJcrPath(BasePath.CMS_USERS_PATH) + "/" + "${userId}", userPath);
       UIJCRExplorerPortlet uiParent = uiDrivesArea.getAncestorOfType(UIJCRExplorerPortlet.class);
       uiParent.setFlagSelect(true);
       UIJcrExplorerContainer explorerContainer = uiParent.getChild(UIJcrExplorerContainer.class);
@@ -225,7 +231,6 @@ public class UIDrivesArea extends UIContainer {
       pref.setShowPreferenceDocuments(drive.getViewPreferences());
       pref.setAllowCreateFoder(drive.getAllowCreateFolders());
       pref.setShowHiddenNode(drive.getShowHiddenNode());
-//      uiJCRExplorer.setPreferences(pref);
       uiJCRExplorer.setDriveData(drive);
       uiJCRExplorer.setIsReferenceNode(false);
       uiJCRExplorer.setPreferencesSaved(true);
@@ -259,7 +264,6 @@ public class UIDrivesArea extends UIContainer {
       uiJCRExplorer.setRootPath(homePath);
       uiJCRExplorer.setSelectNode(drive.getWorkspace(), homePath);
       uiJCRExplorer.refreshExplorer();
-//      uiJCRExplorer.setViewDocument(false);
       String selectedView = viewList.get(0);
       UIControl uiControl = uiJCRExplorer.getChild(UIControl.class).setRendered(true);
       UIActionBar uiActionbar = uiControl.getChild(UIActionBar.class);
