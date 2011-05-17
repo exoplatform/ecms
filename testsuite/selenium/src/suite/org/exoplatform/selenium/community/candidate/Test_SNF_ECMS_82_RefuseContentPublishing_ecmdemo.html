@@ -99,7 +99,7 @@
 <tr>
 	<td>type</td>
 	<td>name</td>
-	<td>Test_SNF_82</td>
+	<td>Test_SNF_ECMS_82</td>
 </tr>
 <tr>
 	<td>select</td>
@@ -107,8 +107,18 @@
 	<td>label=collaboration</td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>//option[@value='collaboration']</td>
+	<td></td>
+</tr>
+<tr>
 	<td>click</td>
 	<td>//option[@value='collaboration']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//img[@title='Add Path']</td>
 	<td></td>
 </tr>
 <tr>
@@ -118,12 +128,17 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@id='UISelectPathPanel']/table/tbody/tr[4]/td[2]/a/div</td>
+	<td>//div[@id='UISelectPathPanel']//a[contains(@href,&quot;Documents&quot;)]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[@id='UISelectPathPanel']/table/tbody/tr[4]/td[2]/a/div</td>
+	<td>//div[@id='UISelectPathPanel']//a[contains(@href,&quot;Documents&quot;)]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//img[@title='Add Permission']</td>
 	<td></td>
 </tr>
 <tr>
@@ -143,12 +158,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//form[@id='UIDriveForm']/div[3]/div/div/div/div/div/div[8]/table/tbody/tr/td[2]//input[@class='checkbox']</td>
+	<td>//form[@id='UIDriveForm']//input[@name='viewSideBar']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//form[@id='UIDriveForm']/div[3]/div/div/div/div/div/div[8]/table/tbody/tr/td[2]//input[@class='checkbox']</td>
+	<td>//form[@id='UIDriveForm']//input[@name='viewSideBar']</td>
 	<td></td>
 </tr>
 <tr>
@@ -167,8 +182,18 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>admin-view</td>
+	<td></td>
+</tr>
+<tr>
 	<td>click</td>
 	<td>admin-view</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>icon-view</td>
 	<td></td>
 </tr>
 <tr>
@@ -243,12 +268,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=Test_SNF_82</td>
+	<td>link=Test_SNF_ECMS_82</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>link=Test_SNF_82</td>
+	<td>link=Test_SNF_ECMS_82</td>
 	<td></td>
 </tr>
 <tr>
@@ -284,7 +309,7 @@
 <tr>
 	<td>type</td>
 	<td>title</td>
-	<td>article</td>
+	<td>Test_SNF_ECMS_82</td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
@@ -299,7 +324,7 @@
 <tr>
 	<td>type</td>
 	<td>//html/body</td>
-	<td>Manchester United</td>
+	<td>Test_SNF_ECMS_82</td>
 </tr>
 <tr>
 	<td>selectFrame</td>
@@ -314,7 +339,7 @@
 <tr>
 	<td>type</td>
 	<td>//html/body</td>
-	<td>Manchester United FC</td>
+	<td>Test_SNF_ECMS_69</td>
 </tr>
 <tr>
 	<td>selectFrame</td>
@@ -382,6 +407,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>link=Business Process Controller</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>link=Business Process Controller</td>
 	<td></td>
@@ -428,12 +458,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=Test_SNF_82</td>
+	<td>link=Test_SNF_ECMS_82</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>link=Test_SNF_82</td>
+	<td>link=Test_SNF_ECMS_82</td>
 	<td></td>
 </tr>
 <tr>
@@ -447,6 +477,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>echo</td>
+	<td>-- Year --</td>
+	<td></td>
+</tr>
+<tr>
 	<td>waitForElementPresent</td>
 	<td>//div[2]/div/div/div/div[2]/a</td>
 	<td></td>
@@ -454,6 +489,11 @@
 <tr>
 	<td>click</td>
 	<td>//div[2]/div/div/div/div[2]/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>-- Month --</td>
 	<td></td>
 </tr>
 <tr>
@@ -467,6 +507,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>echo</td>
+	<td>-- Day --</td>
+	<td></td>
+</tr>
+<tr>
 	<td>waitForElementPresent</td>
 	<td>//div[2]/div/div[2]/div/div[2]/div/div/div/div[2]/a</td>
 	<td></td>
@@ -474,16 +519,6 @@
 <tr>
 	<td>click</td>
 	<td>//div[2]/div/div[2]/div/div[2]/div/div/div/div[2]/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>article</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>article</td>
 	<td></td>
 </tr>
 <tr>
@@ -533,12 +568,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@id='UIDriveList']/table/tbody/tr[9]/td[7]/div/img[2]</td>
+	<td>//img[contains(@onclick,&quot;Test_SNF_ECMS_82&quot;) and @title=&quot;Delete&quot;]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[@id='UIDriveList']/table/tbody/tr[9]/td[7]/div/img[2]</td>
+	<td>//img[contains(@onclick,&quot;Test_SNF_ECMS_82&quot;) and @title=&quot;Delete&quot;]</td>
 	<td></td>
 </tr>
 <tr>
