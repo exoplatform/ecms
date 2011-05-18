@@ -31,19 +31,19 @@
      Select the 
      <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/addcategorybutton.png" format="PNG" width="27mm"/>
+              <imagedata width="27mm" fileref="images/addcategorybutton.png" format="PNG"/>
             </imageobject>
             <textobject>
-               <phrase>[ Add category ]</phrase>
+              <phrase>[ Add category ]</phrase>
             </textobject>
           </inlinemediaobject> button on the action bar and the Add Category form appears:
     </para>
         <mediaobject>
           <imageobject role="html">
-            <imagedata  align="center"  fileref="images/addcategoryform.png" format="PNG"/>
+            <imagedata align="center" fileref="images/addcategoryform.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata   align="center" fileref="images/addcategoryform.png" format="PNG" width="141mm"/>
+            <imagedata width="141mm" align="center" fileref="images/addcategoryform.png" format="PNG"/>
           </imageobject>
         </mediaobject>
       </step>
@@ -89,56 +89,56 @@
             <entry align="center">
               <inlinemediaobject>
                 <imageobject>
-                  <imagedata fileref="images/affirm.png" format="PNG" width="6mm"/>
+                  <imagedata width="6mm" fileref="images/affirm.png" format="PNG"/>
                 </imageobject>
               </inlinemediaobject>
             </entry>
             <entry align="center">
               <inlinemediaobject>
                 <imageobject>
-                  <imagedata fileref="images/affirm.png" format="PNG" width="6mm"/>
+                  <imagedata width="6mm" fileref="images/affirm.png" format="PNG"/>
                 </imageobject>
               </inlinemediaobject>
             </entry>
             <entry align="center">
               <inlinemediaobject>
                 <imageobject>
-                  <imagedata fileref="images/affirm.png" format="PNG" width="6mm"/>
+                  <imagedata width="6mm" fileref="images/affirm.png" format="PNG"/>
                 </imageobject>
               </inlinemediaobject>
             </entry>
             <entry align="center">
               <inlinemediaobject>
                 <imageobject>
-                  <imagedata fileref="images/affirm.png" format="PNG" width="6mm"/>
+                  <imagedata width="6mm" fileref="images/affirm.png" format="PNG"/>
                 </imageobject>
               </inlinemediaobject>
             </entry>
             <entry align="center">
               <inlinemediaobject>
                 <imageobject>
-                  <imagedata fileref="images/affirm.png" format="PNG" width="6mm"/>
+                  <imagedata width="6mm" fileref="images/affirm.png" format="PNG"/>
                 </imageobject>
               </inlinemediaobject>
             </entry>
             <entry align="center">
               <inlinemediaobject>
                 <imageobject>
-                  <imagedata fileref="images/affirm.png" format="PNG" width="6mm"/>
+                  <imagedata width="6mm" fileref="images/affirm.png" format="PNG"/>
                 </imageobject>
               </inlinemediaobject>
             </entry>
             <entry align="center">
               <inlinemediaobject>
                 <imageobject>
-                  <imagedata fileref="images/affirm.png" format="PNG" width="6mm"/>
+                  <imagedata width="6mm" fileref="images/affirm.png" format="PNG"/>
                 </imageobject>
               </inlinemediaobject>
             </entry>
             <entry align="center">
               <inlinemediaobject>
                 <imageobject>
-                  <imagedata fileref="images/affirm.png" format="PNG" width="6mm"/>
+                  <imagedata width="6mm" fileref="images/affirm.png" format="PNG"/>
                 </imageobject>
               </inlinemediaobject>
             </entry>
@@ -148,7 +148,7 @@
             <entry align="center">
               <inlinemediaobject>
                 <imageobject>
-                  <imagedata fileref="images/affirm.png" format="PNG" width="6mm"/>
+                  <imagedata width="6mm" fileref="images/affirm.png" format="PNG"/>
                 </imageobject>
               </inlinemediaobject>
             </entry>
@@ -156,7 +156,7 @@
             <entry align="center">
               <inlinemediaobject>
                 <imageobject>
-                  <imagedata fileref="images/affirm.png" format="PNG" width="6mm"/>
+                  <imagedata width="6mm" fileref="images/affirm.png" format="PNG"/>
                 </imageobject>
               </inlinemediaobject>
             </entry>
@@ -165,14 +165,14 @@
             <entry align="center">
               <inlinemediaobject>
                 <imageobject>
-                  <imagedata fileref="images/affirm.png" format="PNG" width="6mm"/>
+                  <imagedata width="6mm" fileref="images/affirm.png" format="PNG"/>
                 </imageobject>
               </inlinemediaobject>
             </entry>
             <entry align="center">
               <inlinemediaobject>
                 <imageobject>
-                  <imagedata fileref="images/affirm.png" format="PNG" width="6mm"/>
+                  <imagedata width="6mm" fileref="images/affirm.png" format="PNG"/>
                 </imageobject>
               </inlinemediaobject>
             </entry>
@@ -183,56 +183,56 @@
             <entry align="center">
               <inlinemediaobject>
                 <imageobject>
-                  <imagedata fileref="images/affirm.png" format="PNG" width="6mm"/>
+                  <imagedata width="6mm" fileref="images/affirm.png" format="PNG"/>
                 </imageobject>
               </inlinemediaobject>
             </entry>
             <entry align="center">
               <inlinemediaobject>
                 <imageobject>
-                  <imagedata fileref="images/affirm.png" format="PNG" width="6mm"/>
+                  <imagedata width="6mm" fileref="images/affirm.png" format="PNG"/>
                 </imageobject>
               </inlinemediaobject>
             </entry>
             <entry align="center">
               <inlinemediaobject>
                 <imageobject>
-                  <imagedata fileref="images/affirm.png" format="PNG" width="6mm"/>
+                  <imagedata width="6mm" fileref="images/affirm.png" format="PNG"/>
                 </imageobject>
               </inlinemediaobject>
             </entry>
             <entry align="center">
               <inlinemediaobject>
                 <imageobject>
-                  <imagedata fileref="images/affirm.png" format="PNG" width="6mm"/>
+                  <imagedata width="6mm" fileref="images/affirm.png" format="PNG"/>
                 </imageobject>
               </inlinemediaobject>
             </entry>
             <entry align="center">
               <inlinemediaobject>
                 <imageobject>
-                  <imagedata fileref="images/affirm.png" format="PNG" width="6mm"/>
+                  <imagedata width="6mm" fileref="images/affirm.png" format="PNG"/>
                 </imageobject>
               </inlinemediaobject>
             </entry>
             <entry align="center">
               <inlinemediaobject>
                 <imageobject>
-                  <imagedata fileref="images/affirm.png" format="PNG" width="6mm"/>
+                  <imagedata width="6mm" fileref="images/affirm.png" format="PNG"/>
                 </imageobject>
               </inlinemediaobject>
             </entry>
             <entry align="center">
               <inlinemediaobject>
                 <imageobject>
-                  <imagedata fileref="images/affirm.png" format="PNG" width="6mm"/>
+                  <imagedata width="6mm" fileref="images/affirm.png" format="PNG"/>
                 </imageobject>
               </inlinemediaobject>
             </entry>
             <entry align="center">
               <inlinemediaobject>
                 <imageobject>
-                  <imagedata fileref="images/affirm.png" format="PNG" width="6mm"/>
+                  <imagedata width="6mm" fileref="images/affirm.png" format="PNG"/>
                 </imageobject>
               </inlinemediaobject>
             </entry>
@@ -242,7 +242,7 @@
             <entry align="center">
               <inlinemediaobject>
                 <imageobject>
-                  <imagedata fileref="images/affirm.png" format="PNG" width="6mm"/>
+                  <imagedata width="6mm" fileref="images/affirm.png" format="PNG"/>
                 </imageobject>
               </inlinemediaobject>
             </entry>
@@ -250,7 +250,7 @@
             <entry align="center">
               <inlinemediaobject>
                 <imageobject>
-                  <imagedata fileref="images/affirm.png" format="PNG" width="6mm"/>
+                  <imagedata width="6mm" fileref="images/affirm.png" format="PNG"/>
                 </imageobject>
               </inlinemediaobject>
             </entry>
@@ -259,14 +259,14 @@
             <entry align="center">
               <inlinemediaobject>
                 <imageobject>
-                  <imagedata fileref="images/affirm.png" format="PNG" width="6mm"/>
+                  <imagedata width="6mm" fileref="images/affirm.png" format="PNG"/>
                 </imageobject>
               </inlinemediaobject>
             </entry>
             <entry align="center">
               <inlinemediaobject>
                 <imageobject>
-                  <imagedata fileref="images/affirm.png" format="PNG" width="6mm"/>
+                  <imagedata width="6mm" fileref="images/affirm.png" format="PNG"/>
                 </imageobject>
               </inlinemediaobject>
             </entry>
@@ -277,7 +277,7 @@
             <entry align="center">
               <inlinemediaobject>
                 <imageobject>
-                  <imagedata fileref="images/affirm.png" format="PNG" width="6mm"/>
+                  <imagedata width="6mm" fileref="images/affirm.png" format="PNG"/>
                 </imageobject>
               </inlinemediaobject>
             </entry>
@@ -285,7 +285,7 @@
             <entry align="center">
               <inlinemediaobject>
                 <imageobject>
-                  <imagedata fileref="images/affirm.png" format="PNG" width="6mm"/>
+                  <imagedata width="6mm" fileref="images/affirm.png" format="PNG"/>
                 </imageobject>
               </inlinemediaobject>
             </entry>
@@ -293,28 +293,28 @@
             <entry align="center">
               <inlinemediaobject>
                 <imageobject>
-                  <imagedata fileref="images/affirm.png" format="PNG" width="6mm"/>
+                  <imagedata width="6mm" fileref="images/affirm.png" format="PNG"/>
                 </imageobject>
               </inlinemediaobject>
             </entry>
             <entry align="center">
               <inlinemediaobject>
                 <imageobject>
-                  <imagedata fileref="images/affirm.png" format="PNG" width="6mm"/>
+                  <imagedata width="6mm" fileref="images/affirm.png" format="PNG"/>
                 </imageobject>
               </inlinemediaobject>
             </entry>
             <entry align="center">
               <inlinemediaobject>
                 <imageobject>
-                  <imagedata fileref="images/affirm.png" format="PNG" width="6mm"/>
+                  <imagedata width="6mm" fileref="images/affirm.png" format="PNG"/>
                 </imageobject>
               </inlinemediaobject>
             </entry>
             <entry align="center">
               <inlinemediaobject>
                 <imageobject>
-                  <imagedata fileref="images/affirm.png" format="PNG" width="6mm"/>
+                  <imagedata width="6mm" fileref="images/affirm.png" format="PNG"/>
                 </imageobject>
               </inlinemediaobject>
             </entry>
@@ -324,49 +324,49 @@
             <entry align="center">
               <inlinemediaobject>
                 <imageobject>
-                  <imagedata fileref="images/affirm.png" format="PNG" width="6mm"/>
+                  <imagedata width="6mm" fileref="images/affirm.png" format="PNG"/>
                 </imageobject>
               </inlinemediaobject>
             </entry>
             <entry align="center">
               <inlinemediaobject>
                 <imageobject>
-                  <imagedata fileref="images/affirm.png" format="PNG" width="6mm"/>
+                  <imagedata width="6mm" fileref="images/affirm.png" format="PNG"/>
                 </imageobject>
               </inlinemediaobject>
             </entry>
             <entry align="center">
               <inlinemediaobject>
                 <imageobject>
-                  <imagedata fileref="images/affirm.png" format="PNG" width="6mm"/>
+                  <imagedata width="6mm" fileref="images/affirm.png" format="PNG"/>
                 </imageobject>
               </inlinemediaobject>
             </entry>
             <entry align="center">
               <inlinemediaobject>
                 <imageobject>
-                  <imagedata fileref="images/affirm.png" format="PNG" width="6mm"/>
+                  <imagedata width="6mm" fileref="images/affirm.png" format="PNG"/>
                 </imageobject>
               </inlinemediaobject>
             </entry>
             <entry align="center">
               <inlinemediaobject>
                 <imageobject>
-                  <imagedata fileref="images/affirm.png" format="PNG" width="6mm"/>
+                  <imagedata width="6mm" fileref="images/affirm.png" format="PNG"/>
                 </imageobject>
               </inlinemediaobject>
             </entry>
             <entry align="center">
               <inlinemediaobject>
                 <imageobject>
-                  <imagedata fileref="images/affirm.png" format="PNG" width="6mm"/>
+                  <imagedata width="6mm" fileref="images/affirm.png" format="PNG"/>
                 </imageobject>
               </inlinemediaobject>
             </entry>
             <entry align="center">
               <inlinemediaobject>
                 <imageobject>
-                  <imagedata fileref="images/affirm.png" format="PNG" width="6mm"/>
+                  <imagedata width="6mm" fileref="images/affirm.png" format="PNG"/>
                 </imageobject>
               </inlinemediaobject>
             </entry>
@@ -377,56 +377,56 @@
             <entry align="center">
               <inlinemediaobject>
                 <imageobject>
-                  <imagedata fileref="images/affirm.png" format="PNG" width="6mm"/>
+                  <imagedata width="6mm" fileref="images/affirm.png" format="PNG"/>
                 </imageobject>
               </inlinemediaobject>
             </entry>
             <entry align="center">
               <inlinemediaobject>
                 <imageobject>
-                  <imagedata fileref="images/affirm.png" format="PNG" width="6mm"/>
+                  <imagedata width="6mm" fileref="images/affirm.png" format="PNG"/>
                 </imageobject>
               </inlinemediaobject>
             </entry>
             <entry align="center">
               <inlinemediaobject>
                 <imageobject>
-                  <imagedata fileref="images/affirm.png" format="PNG" width="6mm"/>
+                  <imagedata width="6mm" fileref="images/affirm.png" format="PNG"/>
                 </imageobject>
               </inlinemediaobject>
             </entry>
             <entry align="center">
               <inlinemediaobject>
                 <imageobject>
-                  <imagedata fileref="images/affirm.png" format="PNG" width="6mm"/>
+                  <imagedata width="6mm" fileref="images/affirm.png" format="PNG"/>
                 </imageobject>
               </inlinemediaobject>
             </entry>
             <entry align="center">
               <inlinemediaobject>
                 <imageobject>
-                  <imagedata fileref="images/affirm.png" format="PNG" width="6mm"/>
+                  <imagedata width="6mm" fileref="images/affirm.png" format="PNG"/>
                 </imageobject>
               </inlinemediaobject>
             </entry>
             <entry align="center">
               <inlinemediaobject>
                 <imageobject>
-                  <imagedata fileref="images/affirm.png" format="PNG" width="6mm"/>
+                  <imagedata width="6mm" fileref="images/affirm.png" format="PNG"/>
                 </imageobject>
               </inlinemediaobject>
             </entry>
             <entry align="center">
               <inlinemediaobject>
                 <imageobject>
-                  <imagedata fileref="images/affirm.png" format="PNG" width="6mm"/>
+                  <imagedata width="6mm" fileref="images/affirm.png" format="PNG"/>
                 </imageobject>
               </inlinemediaobject>
             </entry>
             <entry align="center">
               <inlinemediaobject>
                 <imageobject>
-                  <imagedata fileref="images/affirm.png" format="PNG" width="6mm"/>
+                  <imagedata width="6mm" fileref="images/affirm.png" format="PNG"/>
                 </imageobject>
               </inlinemediaobject>
             </entry>
@@ -436,28 +436,28 @@
             <entry align="center">
               <inlinemediaobject>
                 <imageobject>
-                  <imagedata fileref="images/affirm.png" format="PNG" width="6mm"/>
+                  <imagedata width="6mm" fileref="images/affirm.png" format="PNG"/>
                 </imageobject>
               </inlinemediaobject>
             </entry>
             <entry align="center">
               <inlinemediaobject>
                 <imageobject>
-                  <imagedata fileref="images/affirm.png" format="PNG" width="6mm"/>
+                  <imagedata width="6mm" fileref="images/affirm.png" format="PNG"/>
                 </imageobject>
               </inlinemediaobject>
             </entry>
             <entry align="center">
               <inlinemediaobject>
                 <imageobject>
-                  <imagedata fileref="images/affirm.png" format="PNG" width="6mm"/>
+                  <imagedata width="6mm" fileref="images/affirm.png" format="PNG"/>
                 </imageobject>
               </inlinemediaobject>
             </entry>
             <entry align="center">
               <inlinemediaobject>
                 <imageobject>
-                  <imagedata fileref="images/affirm.png" format="PNG" width="6mm"/>
+                  <imagedata width="6mm" fileref="images/affirm.png" format="PNG"/>
                 </imageobject>
               </inlinemediaobject>
             </entry>
@@ -465,14 +465,14 @@
             <entry align="center">
               <inlinemediaobject>
                 <imageobject>
-                  <imagedata fileref="images/affirm.png" format="PNG" width="6mm"/>
+                  <imagedata width="6mm" fileref="images/affirm.png" format="PNG"/>
                 </imageobject>
               </inlinemediaobject>
             </entry>
             <entry align="center">
               <inlinemediaobject>
                 <imageobject>
-                  <imagedata fileref="images/affirm.png" format="PNG" width="6mm"/>
+                  <imagedata width="6mm" fileref="images/affirm.png" format="PNG"/>
                 </imageobject>
               </inlinemediaobject>
             </entry>
@@ -483,7 +483,7 @@
             <entry align="center">
               <inlinemediaobject>
                 <imageobject>
-                  <imagedata fileref="images/affirm.png" format="PNG" width="6mm"/>
+                  <imagedata width="6mm" fileref="images/affirm.png" format="PNG"/>
                 </imageobject>
               </inlinemediaobject>
             </entry>
@@ -491,7 +491,7 @@
             <entry align="center">
               <inlinemediaobject>
                 <imageobject>
-                  <imagedata fileref="images/affirm.png" format="PNG" width="6mm"/>
+                  <imagedata width="6mm" fileref="images/affirm.png" format="PNG"/>
                 </imageobject>
               </inlinemediaobject>
             </entry>
@@ -499,28 +499,28 @@
             <entry align="center">
               <inlinemediaobject>
                 <imageobject>
-                  <imagedata fileref="images/affirm.png" format="PNG" width="6mm"/>
+                  <imagedata width="6mm" fileref="images/affirm.png" format="PNG"/>
                 </imageobject>
               </inlinemediaobject>
             </entry>
             <entry align="center">
               <inlinemediaobject>
                 <imageobject>
-                  <imagedata fileref="images/affirm.png" format="PNG" width="6mm"/>
+                  <imagedata width="6mm" fileref="images/affirm.png" format="PNG"/>
                 </imageobject>
               </inlinemediaobject>
             </entry>
             <entry align="center">
               <inlinemediaobject>
                 <imageobject>
-                  <imagedata fileref="images/affirm.png" format="PNG" width="6mm"/>
+                  <imagedata width="6mm" fileref="images/affirm.png" format="PNG"/>
                 </imageobject>
               </inlinemediaobject>
             </entry>
             <entry align="center">
               <inlinemediaobject>
                 <imageobject>
-                  <imagedata fileref="images/affirm.png" format="PNG" width="6mm"/>
+                  <imagedata width="6mm" fileref="images/affirm.png" format="PNG"/>
                 </imageobject>
               </inlinemediaobject>
             </entry>
@@ -528,17 +528,17 @@
         </tbody>
       </tgroup>
     </table>
-   <note>
+    <note>
       <itemizedlist>
         <listitem>
           <para>
              The 
       <inlinemediaobject>
               <imageobject>
-                <imagedata fileref="images/greentick.png" format="PNG" width="6mm"/>
+                <imagedata width="6mm" fileref="images/greentick.png" format="PNG"/>
               </imageobject>
               <textobject>
-                 <phrase>green tick</phrase>
+                <phrase>green tick</phrase>
               </textobject>
             </inlinemediaobject> icon indicates that the corresponding document can be added into.
      </para>
@@ -571,19 +571,19 @@
      Click the 
      <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/adddocumenticon.png" format="PNG" width="28mm"/>
+              <imagedata width="28mm" fileref="images/adddocumenticon.png" format="PNG"/>
             </imageobject>
             <textobject>
-               <phrase>[ Add Document ]</phrase>
+              <phrase>[ Add Document ]</phrase>
             </textobject>
           </inlinemediaobject> button on the <emphasis role="bold">Actions</emphasis> bar.
     </para>
-         <mediaobject>
+        <mediaobject>
           <imageobject role="html">
-            <imagedata align="center"  fileref="images/actionstab.png" format="PNG"/>
+            <imagedata align="center" fileref="images/actionstab.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata  align="center" fileref="images/actionstab.png" format="PNG" width="117mm"/>
+            <imagedata width="117mm" align="center" fileref="images/actionstab.png" format="PNG"/>
           </imageobject>
         </mediaobject>
       </step>
@@ -600,13 +600,13 @@
       <title>Attach files to a document</title>
       <step>
         <para>
-     Select a document that you want to attach files to and click the 
+     Select a document or a folder  that you want to attach files to and click the 
      <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/uploadicon2.png" format="PNG" width="17mm"/>
+              <imagedata width="17mm" fileref="images/uploadicon2.png" format="PNG"/>
             </imageobject>
             <textobject>
-               <phrase>[ Upload ]</phrase>
+              <phrase>[ Upload ]</phrase>
             </textobject>
           </inlinemediaobject> button on the <emphasis role="bold">Actions</emphasis> bar.
     </para>
@@ -615,10 +615,10 @@
     </para>
         <mediaobject>
           <imageobject role="html">
-            <imagedata  align="center"  fileref="images/uploadfilewindow.png" format="PNG"/>
+            <imagedata align="center" fileref="images/uploadfilewindow.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata   align="center" fileref="images/uploadfilewindow.png" format="PNG" width="141mm"/>
+            <imagedata width="141mm" align="center" fileref="images/uploadfilewindow.png" format="PNG"/>
           </imageobject>
         </mediaobject>
       </step>
@@ -632,10 +632,10 @@
      Click <emphasis role="bold">Browse</emphasis> to select the attachment file. You can click the 
      <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/addplusicon.png" format="PNG" width="8mm"/>
+              <imagedata width="8mm" fileref="images/addplusicon.png" format="PNG"/>
             </imageobject>
             <textobject>
-               <phrase>plus</phrase>
+              <phrase>plus</phrase>
             </textobject>
           </inlinemediaobject> icon to add multiple files.
     </para>
@@ -644,6 +644,15 @@
         <para>
      Click <emphasis role="bold">Save</emphasis> to attach the files or <emphasis role="bold">Cancel</emphasis> to to quit.
     </para>
+        <para>To view the attached file, click it and you can view it directly in the Content Explorer:</para>
+        <mediaobject>
+          <imageobject>
+            <imagedata align="center" fileref="images/pdf-viewer.png" format="PNG"/>
+          </imageobject>
+        </mediaobject>
+        <note>
+          <para>eXo Content enables you to view all types of documents, such as Open offices,  Microsoft office in the PDF format.</para>
+        </note>
       </step>
     </procedure>
     <procedure id="proc-User_Guide-Add_a_document-Create_a_new_File_document">
@@ -666,10 +675,10 @@
     Click the 
      <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/icon1.png" format="PNG" width="6mm"/>
+              <imagedata width="6mm" fileref="images/icon1.png" format="PNG"/>
             </imageobject>
             <textobject>
-               <phrase>scroll arrows</phrase>
+              <phrase>scroll arrows</phrase>
             </textobject>
           </inlinemediaobject> icon to see the <emphasis role="bold">Mime Type</emphasis> list and select one. There are two types of File document for you to choose:
     </para>
@@ -696,18 +705,18 @@
        <emphasis role="bold">text/html</emphasis>: If you want to create a File document with a source code and generated content, click the 
        <inlinemediaobject>
                 <imageobject>
-                  <imagedata fileref="images/sourceicon.png" format="PNG" width="21mm"/>
+                  <imagedata width="21mm" fileref="images/sourceicon.png" format="PNG"/>
                 </imageobject>
                 <textobject>
-                   <phrase>[ Source ]</phrase>
+                  <phrase>[ Source ]</phrase>
                 </textobject>
               </inlinemediaobject> button in the editor bar. In this mode, only Save, New Page, Preview icons in editor bar are visible for using. Click the 
        <inlinemediaobject>
                 <imageobject>
-                  <imagedata fileref="images/previewicon.png" format="PNG" width="7mm"/>
+                  <imagedata width="7mm" fileref="images/previewicon.png" format="PNG"/>
                 </imageobject>
                 <textobject>
-                   <phrase>magnifying glass</phrase>
+                  <phrase>magnifying glass</phrase>
                 </textobject>
               </inlinemediaobject> icon to preview the generated content.
       </para>
@@ -718,13 +727,13 @@
       </para>
             <mediaobject>
               <imageobject role="html">
-                <imagedata  align="center"  fileref="images/plaintextcontentform.png" format="PNG"/>
+                <imagedata align="center" fileref="images/plaintextcontentform.png" format="PNG"/>
               </imageobject>
               <imageobject role="fo">
-                <imagedata   align="center" fileref="images/plaintextcontentform.png" format="PNG" width="150mm"/>
+                <imagedata width="150mm" align="center" fileref="images/plaintextcontentform.png" format="PNG"/>
               </imageobject>
             </mediaobject>
-         </listitem>
+          </listitem>
         </itemizedlist>
       </step>
       <step>
@@ -744,18 +753,18 @@
     </para>
         <mediaobject>
           <imageobject role="html">
-            <imagedata  align="center"  fileref="images/htmltab.png" format="PNG"/>
+            <imagedata align="center" fileref="images/htmltab.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata   align="center" fileref="images/htmltab.png" format="PNG" width="150mm"/>
+            <imagedata width="150mm" align="center" fileref="images/htmltab.png" format="PNG"/>
           </imageobject>
         </mediaobject>
         <mediaobject>
           <imageobject role="html">
-            <imagedata  align="center"  fileref="images/texttab.png" format="PNG"/>
+            <imagedata align="center" fileref="images/texttab.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata   align="center" fileref="images/texttab.png" format="PNG" width="150mm"/>
+            <imagedata width="150mm" align="center" fileref="images/texttab.png" format="PNG"/>
           </imageobject>
         </mediaobject>
       </step>
@@ -791,10 +800,10 @@
   </para>
     <mediaobject>
       <imageobject role="html">
-        <imagedata  align="center"  fileref="images/newarticle.png" format="PNG"/>
+        <imagedata align="center" fileref="images/newarticle.png" format="PNG"/>
       </imageobject>
       <imageobject role="fo">
-        <imagedata   align="center" fileref="images/newarticle.png" format="PNG" width="150mm"/>
+        <imagedata width="150mm" align="center" fileref="images/newarticle.png" format="PNG"/>
       </imageobject>
     </mediaobject>
     <para>
@@ -804,19 +813,19 @@
    The Attachments is used to list all its uploaded files/documents that is attached with the Article. You can remove the attachments by clicking the 
    <inlinemediaobject>
         <imageobject>
-          <imagedata fileref="images/trashicon.png" format="PNG" width="5mm"/>
+          <imagedata width="5mm" fileref="images/trashicon.png" format="PNG"/>
         </imageobject>
         <textobject>
-           <phrase>trash can</phrase>
+          <phrase>trash can</phrase>
         </textobject>
       </inlinemediaobject> icon.
   </para>
     <mediaobject>
       <imageobject role="html">
-        <imagedata align="center"  fileref="images/attachments.png" format="PNG"/>
+        <imagedata align="center" fileref="images/attachments.png" format="PNG"/>
       </imageobject>
       <imageobject role="fo">
-        <imagedata  align="center" fileref="images/attachments.png" format="PNG" width="114mm"/>
+        <imagedata width="114mm" align="center" fileref="images/attachments.png" format="PNG"/>
       </imageobject>
     </mediaobject>
     <para>
@@ -924,10 +933,10 @@
   </para>
     <mediaobject>
       <imageobject role="html">
-        <imagedata  align="center"  fileref="images/podcastscreen.png" format="PNG"/>
+        <imagedata align="center" fileref="images/podcastscreen.png" format="PNG"/>
       </imageobject>
       <imageobject role="fo">
-        <imagedata   align="center" fileref="images/podcastscreen.png" format="PNG" width="150mm"/>
+        <imagedata width="150mm" align="center" fileref="images/podcastscreen.png" format="PNG"/>
       </imageobject>
     </mediaobject>
     <para>
@@ -963,10 +972,10 @@
   </para>
     <mediaobject>
       <imageobject role="html">
-        <imagedata  align="center"  fileref="images/samplenodeformcompleted.png" format="PNG"/>
+        <imagedata align="center" fileref="images/samplenodeformcompleted.png" format="PNG"/>
       </imageobject>
       <imageobject role="fo">
-        <imagedata   align="center" fileref="images/samplenodeformcompleted.png" format="PNG" width="150mm"/>
+        <imagedata width="150mm" align="center" fileref="images/samplenodeformcompleted.png" format="PNG"/>
       </imageobject>
     </mediaobject>
     <para>
@@ -997,18 +1006,17 @@
         <para>
      Click <emphasis role="bold">Save as Draft</emphasis> to accept creating a file plan.
     </para>
-<!--     Doc Note: The content from this point until the next comment 'END' should probably be moved to a breakout explanation. Having it in the middle of a procedure breaks the flow of the steps.     -->
-        <variablelist id="vari-User_Guide-Create_a_new_File_Plan-Tabs_in_the_Add_File_plan_form">
+<!--     Doc Note: The content from this point until the next comment 'END' should probably be moved to a breakout explanation. Having it in the middle of a procedure breaks the flow of the steps.     -->        <variablelist id="vari-User_Guide-Create_a_new_File_Plan-Tabs_in_the_Add_File_plan_form">
           <title>Tabs in the <emphasis role="bold">Add File plan</emphasis> form</title>
           <varlistentry>
             <term>The <emphasis role="bold">Name</emphasis> tab</term>
             <listitem>
               <mediaobject>
                 <imageobject role="html">
-                  <imagedata  align="center"  fileref="images/addfileplanform.png" format="PNG"/>
+                  <imagedata align="center" fileref="images/addfileplanform.png" format="PNG"/>
                 </imageobject>
                 <imageobject role="fo">
-                  <imagedata   align="center" fileref="images/addfileplanform.png" format="PNG" width="150mm"/>
+                  <imagedata width="150mm" align="center" fileref="images/addfileplanform.png" format="PNG"/>
                 </imageobject>
               </mediaobject>
               <table>
@@ -1029,13 +1037,12 @@
                       <entry> Categories </entry>
                       <entry> The categories of your file plan. Select the categories for your file plan by clicking the <inlinemediaobject>
                           <imageobject>
-                            <imagedata fileref="images/addplusicon.png" format="PNG" width="8mm"/>
+                            <imagedata width="8mm" fileref="images/addplusicon.png" format="PNG"/>
                           </imageobject>
-                           <textobject>
-                              <phrase>plus</phrase>
-                           </textobject>
-                        </inlinemediaobject> icon.
-                        </entry>
+                          <textobject>
+                            <phrase>plus</phrase>
+                          </textobject>
+                        </inlinemediaobject> icon. </entry>
                     </row>
                     <row>
                       <entry> File Plan note </entry>
@@ -1051,10 +1058,10 @@
             <listitem>
               <mediaobject>
                 <imageobject role="html">
-                  <imagedata  align="center"  fileref="images/recordpropertiestab.png" format="PNG"/>
+                  <imagedata align="center" fileref="images/recordpropertiestab.png" format="PNG"/>
                 </imageobject>
                 <imageobject role="fo">
-                  <imagedata   align="center" fileref="images/recordpropertiestab.png" format="PNG" width="150mm"/>
+                  <imagedata width="150mm" align="center" fileref="images/recordpropertiestab.png" format="PNG"/>
                 </imageobject>
               </mediaobject>
               <table>
@@ -1117,10 +1124,10 @@
             <listitem>
               <mediaobject>
                 <imageobject role="html">
-                  <imagedata  align="center"  fileref="images/processproperties.png" format="PNG"/>
+                  <imagedata align="center" fileref="images/processproperties.png" format="PNG"/>
                 </imageobject>
                 <imageobject role="fo">
-                  <imagedata   align="center" fileref="images/processproperties.png" format="PNG" width="150mm"/>
+                  <imagedata width="150mm" align="center" fileref="images/processproperties.png" format="PNG"/>
                 </imageobject>
               </mediaobject>
               <table>
@@ -1206,10 +1213,10 @@
   </para>
     <mediaobject>
       <imageobject role="html">
-        <imagedata  align="center"  fileref="images/fileplancontent.png" format="PNG"/>
+        <imagedata align="center" fileref="images/fileplancontent.png" format="PNG"/>
       </imageobject>
       <imageobject role="fo">
-        <imagedata   align="center" fileref="images/fileplancontent.png" format="PNG" width="146mm"/>
+        <imagedata width="146mm" align="center" fileref="images/fileplancontent.png" format="PNG"/>
       </imageobject>
     </mediaobject>
     <procedure id="proc-User_Guide-Add_a_document-Create_a_new_Kofax">
@@ -1221,12 +1228,12 @@
         <para>
      The <emphasis role="bold">Add New Kofax</emphasis> form will appear:
     </para>
-       <mediaobject>
+        <mediaobject>
           <imageobject role="html">
-            <imagedata  align="center"  fileref="images/addnewkofax.png" format="PNG"/>
+            <imagedata align="center" fileref="images/addnewkofax.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata   align="center" fileref="images/addnewkofax.png" format="PNG" width="150mm"/>
+            <imagedata width="150mm" align="center" fileref="images/addnewkofax.png" format="PNG"/>
           </imageobject>
         </mediaobject>
       </step>
@@ -1240,10 +1247,10 @@
      Select categories for a Kofax document by clicking the 
      <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/addplusicon.png" format="PNG" width="8mm"/>
+              <imagedata width="8mm" fileref="images/addplusicon.png" format="PNG"/>
             </imageobject>
             <textobject>
-               <phrase>plus</phrase>
+              <phrase>plus</phrase>
             </textobject>
           </inlinemediaobject> icon.
     </para>
@@ -1258,10 +1265,10 @@
   </para>
     <mediaobject>
       <imageobject role="html">
-        <imagedata  align="center"  fileref="images/kofaxdocument.png" format="PNG"/>
+        <imagedata align="center" fileref="images/kofaxdocument.png" format="PNG"/>
       </imageobject>
       <imageobject role="fo">
-        <imagedata   align="center" fileref="images/kofaxdocument.png" format="PNG" width="147mm"/>
+        <imagedata width="147mm" align="center" fileref="images/kofaxdocument.png" format="PNG"/>
       </imageobject>
     </mediaobject>
     <para>
@@ -1269,10 +1276,10 @@
   </para>
     <mediaobject>
       <imageobject role="html">
-        <imagedata  align="center"  fileref="images/kofaxdocumentview.png" format="PNG"/>
+        <imagedata align="center" fileref="images/kofaxdocumentview.png" format="PNG"/>
       </imageobject>
       <imageobject role="fo">
-        <imagedata   align="center" fileref="images/kofaxdocumentview.png" format="PNG" width="147mm"/>
+        <imagedata width="147mm" align="center" fileref="images/kofaxdocumentview.png" format="PNG"/>
       </imageobject>
     </mediaobject>
     <procedure id="proc-User_Guide-Add_a_document-Create_new_Event">
@@ -1286,10 +1293,10 @@
     </para>
         <mediaobject>
           <imageobject role="html">
-            <imagedata  align="center"  fileref="images/neweventform.png" format="PNG"/>
+            <imagedata align="center" fileref="images/neweventform.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata   align="center" fileref="images/neweventform.png" format="PNG" width="150mm"/>
+            <imagedata width="150mm" align="center" fileref="images/neweventform.png" format="PNG"/>
           </imageobject>
         </mediaobject>
       </step>
@@ -1323,10 +1330,10 @@
   </para>
     <mediaobject>
       <imageobject role="html">
-        <imagedata  align="center"  fileref="images/eventdisplay.png" format="PNG"/>
+        <imagedata align="center" fileref="images/eventdisplay.png" format="PNG"/>
       </imageobject>
       <imageobject role="fo">
-        <imagedata   align="center" fileref="images/eventdisplay.png" format="PNG" width="150mm"/>
+        <imagedata width="150mm" align="center" fileref="images/eventdisplay.png" format="PNG"/>
       </imageobject>
     </mediaobject>
     <para>
@@ -1334,10 +1341,10 @@
   </para>
     <mediaobject>
       <imageobject role="html">
-        <imagedata  align="center"  fileref="images/eventdisplayweb.png" format="PNG"/>
+        <imagedata align="center" fileref="images/eventdisplayweb.png" format="PNG"/>
       </imageobject>
       <imageobject role="fo">
-        <imagedata   align="center" fileref="images/eventdisplayweb.png" format="PNG" width="150mm"/>
+        <imagedata width="150mm" align="center" fileref="images/eventdisplayweb.png" format="PNG"/>
       </imageobject>
     </mediaobject>
   </section>
@@ -1361,10 +1368,10 @@
     </para>
         <mediaobject>
           <imageobject role="html">
-            <imagedata align="center"  fileref="images/documentfolder.png" format="PNG"/>
+            <imagedata align="center" fileref="images/documentfolder.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata  align="center" fileref="images/documentfolder.png" format="PNG" width="43mm"/>
+            <imagedata width="43mm" align="center" fileref="images/documentfolder.png" format="PNG"/>
           </imageobject>
         </mediaobject>
       </listitem>
@@ -1456,19 +1463,19 @@
      Click the 
      <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/addfolderbutton.png" format="PNG" width="24mm"/>
+              <imagedata width="24mm" fileref="images/addfolderbutton.png" format="PNG"/>
             </imageobject>
             <textobject>
-               <phrase>[ Add Folder ]</phrase>
+              <phrase>[ Add Folder ]</phrase>
             </textobject>
           </inlinemediaobject> button on the action bar. The <emphasis role="bold">Add a Folder</emphasis> form is displayed:
     </para>
         <mediaobject>
           <imageobject role="html">
-            <imagedata  align="center"  fileref="images/addfolderwindow.png" format="PNG"/>
+            <imagedata align="center" fileref="images/addfolderwindow.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata   align="center" fileref="images/addfolderwindow.png" format="PNG" width="150mm"/>
+            <imagedata width="150mm" align="center" fileref="images/addfolderwindow.png" format="PNG"/>
           </imageobject>
         </mediaobject>
       </step>
@@ -1477,10 +1484,10 @@
      Click the 
      <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/icon1.png" format="PNG" width="6mm"/>
+              <imagedata width="6mm" fileref="images/icon1.png" format="PNG"/>
             </imageobject>
             <textobject>
-               <phrase>scroll arrows</phrase>
+              <phrase>scroll arrows</phrase>
             </textobject>
           </inlinemediaobject> icon to see the type list and select a folder type.
     </para>
@@ -1528,10 +1535,10 @@
     </para>
         <mediaobject>
           <imageobject role="html">
-            <imagedata align="center"  fileref="images/selectarticle.png" format="PNG"/>
+            <imagedata align="center" fileref="images/selectarticle.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata  align="center" fileref="images/selectarticle.png" format="PNG" width="50mm"/>
+            <imagedata width="50mm" align="center" fileref="images/selectarticle.png" format="PNG"/>
           </imageobject>
         </mediaobject>
       </step>
@@ -1540,19 +1547,19 @@
      Click the 
      <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/addtranslationicon.png" format="PNG" width="31mm"/>
+              <imagedata width="31mm" fileref="images/addtranslationicon.png" format="PNG"/>
             </imageobject>
             <textobject>
-               <phrase>[ Add Translation ]</phrase>
+              <phrase>[ Add Translation ]</phrase>
             </textobject>
           </inlinemediaobject> button on the <emphasis role="bold">Action</emphasis> bar. The <emphasis role="bold">Symlink Manager</emphasis> will appear:
     </para>
         <mediaobject>
           <imageobject role="html">
-            <imagedata  align="center"  fileref="images/symlinkmanager2.png" format="PNG"/>
+            <imagedata align="center" fileref="images/symlinkmanager2.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata   align="center" fileref="images/symlinkmanager2.png" format="PNG" width="150mm"/>
+            <imagedata width="150mm" align="center" fileref="images/symlinkmanager2.png" format="PNG"/>
           </imageobject>
         </mediaobject>
       </step>
@@ -1561,19 +1568,19 @@
      Click the 
      <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/addplusicon.png" format="PNG" width="8mm"/>
+              <imagedata width="8mm" fileref="images/addplusicon.png" format="PNG"/>
             </imageobject>
             <textobject>
-               <phrase>plus</phrase>
+              <phrase>plus</phrase>
             </textobject>
           </inlinemediaobject> icon, then browse to the target document that has different language with the first document. For example, the <emphasis role="bold">Article</emphasis> version in French.
     </para>
         <mediaobject>
           <imageobject role="html">
-            <imagedata  align="center"  fileref="images/choosetargetnode.png" format="PNG"/>
+            <imagedata align="center" fileref="images/choosetargetnode.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata   align="center" fileref="images/choosetargetnode.png" format="PNG" width="150mm"/>
+            <imagedata width="150mm" align="center" fileref="images/choosetargetnode.png" format="PNG"/>
           </imageobject>
         </mediaobject>
       </step>
@@ -1583,10 +1590,10 @@
     </para>
         <mediaobject>
           <imageobject role="html">
-            <imagedata  align="center"  fileref="images/symlinkmanagersave.png" format="PNG"/>
+            <imagedata align="center" fileref="images/symlinkmanagersave.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata   align="center" fileref="images/symlinkmanagersave.png" format="PNG" width="150mm"/>
+            <imagedata width="150mm" align="center" fileref="images/symlinkmanagersave.png" format="PNG"/>
           </imageobject>
         </mediaobject>
       </step>
@@ -1599,10 +1606,10 @@
     </para>
         <mediaobject>
           <imageobject role="html">
-            <imagedata align="center"  fileref="images/availablelanguages.png" format="PNG"/>
+            <imagedata align="center" fileref="images/availablelanguages.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata  align="center" fileref="images/availablelanguages.png" format="PNG" width="51mm"/>
+            <imagedata width="51mm" align="center" fileref="images/availablelanguages.png" format="PNG"/>
           </imageobject>
         </mediaobject>
       </step>
@@ -1628,19 +1635,19 @@
      Click the 
      <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/addsymlinkbutton.png" format="PNG" width="27mm"/>
+              <imagedata width="27mm" fileref="images/addsymlinkbutton.png" format="PNG"/>
             </imageobject>
             <textobject>
-               <phrase>[ Add Sym Link ]</phrase>
+              <phrase>[ Add Sym Link ]</phrase>
             </textobject>
           </inlinemediaobject> button on the action bar. The Sym Link Manager pop-up will appear:
     </para>
         <mediaobject>
           <imageobject role="html">
-            <imagedata  align="center"  fileref="images/symlinkmanager.png" format="PNG"/>
+            <imagedata align="center" fileref="images/symlinkmanager.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata   align="center" fileref="images/symlinkmanager.png" format="PNG" width="150mm"/>
+            <imagedata width="150mm" align="center" fileref="images/symlinkmanager.png" format="PNG"/>
           </imageobject>
         </mediaobject>
         <table>
@@ -1670,10 +1677,10 @@
      Click the 
      <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/addplusicon.png" format="PNG" width="8mm"/>
+              <imagedata width="8mm" fileref="images/addplusicon.png" format="PNG"/>
             </imageobject>
             <textobject>
-               <phrase>plus</phrase>
+              <phrase>plus</phrase>
             </textobject>
           </inlinemediaobject> icon to open the <emphasis role="bold">Choose Target Node</emphasis> form.
     </para>
@@ -1684,10 +1691,10 @@
     </para>
         <mediaobject>
           <imageobject role="html">
-            <imagedata align="center"  fileref="images/workspacelist.png" format="PNG"/>
+            <imagedata align="center" fileref="images/workspacelist.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata  align="center" fileref="images/workspacelist.png" format="PNG" width="61mm"/>
+            <imagedata width="61mm" align="center" fileref="images/workspacelist.png" format="PNG"/>
           </imageobject>
         </mediaobject>
       </step>
@@ -1696,19 +1703,19 @@
      Click the 
      <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/greentick.png" format="PNG" width="6mm"/>
+              <imagedata width="6mm" fileref="images/greentick.png" format="PNG"/>
             </imageobject>
             <textobject>
-               <phrase>green tick</phrase>
+              <phrase>green tick</phrase>
             </textobject>
           </inlinemediaobject> icon in the row of the node that you want to add, the path that the node will appear in the <emphasis role="bold">Path Node</emphasis> field and the name of the node is set by the name of the selected node. You can also edit this name.
     </para>
         <mediaobject>
           <imageobject role="html">
-            <imagedata  align="center"  fileref="images/symlinkmanagercompleted.png" format="PNG"/>
+            <imagedata align="center" fileref="images/symlinkmanagercompleted.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata   align="center" fileref="images/symlinkmanagercompleted.png" format="PNG" width="150mm"/>
+            <imagedata width="150mm" align="center" fileref="images/symlinkmanagercompleted.png" format="PNG"/>
           </imageobject>
         </mediaobject>
       </step>
@@ -1718,10 +1725,10 @@
     </para>
         <mediaobject>
           <imageobject role="html">
-            <imagedata  align="center"  fileref="images/symlinkadded.png" format="PNG"/>
+            <imagedata align="center" fileref="images/symlinkadded.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata   align="center" fileref="images/symlinkadded.png" format="PNG" width="150mm"/>
+            <imagedata width="150mm" align="center" fileref="images/symlinkadded.png" format="PNG"/>
           </imageobject>
         </mediaobject>
       </step>
@@ -1744,10 +1751,10 @@
      Click the 
      <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/commentdocumentbutton.png" format="PNG" width="39mm"/>
+              <imagedata width="39mm" fileref="images/commentdocumentbutton.png" format="PNG"/>
             </imageobject>
             <textobject>
-               <phrase>[ Comment this document ]</phrase>
+              <phrase>[ Comment this document ]</phrase>
             </textobject>
           </inlinemediaobject> button on the action bar.
     </para>
@@ -1756,10 +1763,10 @@
     </para>
         <mediaobject>
           <imageobject role="html">
-            <imagedata  align="center"  fileref="images/addcommentform.png" format="PNG"/>
+            <imagedata align="center" fileref="images/addcommentform.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata   align="center" fileref="images/addcommentform.png" format="PNG" width="150mm"/>
+            <imagedata width="150mm" align="center" fileref="images/addcommentform.png" format="PNG"/>
           </imageobject>
         </mediaobject>
       </step>
@@ -1779,39 +1786,39 @@
   </para>
     <mediaobject>
       <imageobject role="html">
-        <imagedata  align="center"  fileref="images/commentdisplay.png" format="PNG"/>
+        <imagedata align="center" fileref="images/commentdisplay.png" format="PNG"/>
       </imageobject>
       <imageobject role="fo">
-        <imagedata   align="center" fileref="images/commentdisplay.png" format="PNG" width="150mm"/>
+        <imagedata width="150mm" align="center" fileref="images/commentdisplay.png" format="PNG"/>
       </imageobject>
     </mediaobject>
     <para>
    To view your comment click the <emphasis role="bold">Show Comments</emphasis> link:
   </para>
-     <mediaobject>
+    <mediaobject>
       <imageobject role="html">
-        <imagedata align="center"  fileref="images/commentview.png" format="PNG"/>
+        <imagedata align="center" fileref="images/commentview.png" format="PNG"/>
       </imageobject>
       <imageobject role="fo">
-        <imagedata  align="center" fileref="images/commentview.png" format="PNG" width="110mm"/>
+        <imagedata width="110mm" align="center" fileref="images/commentview.png" format="PNG"/>
       </imageobject>
     </mediaobject>
     <para>
    You can edit your comment by clicking the 
    <inlinemediaobject>
         <imageobject>
-          <imagedata fileref="images/editicon2.png" format="PNG" width="5mm"/>
+          <imagedata width="5mm" fileref="images/editicon2.png" format="PNG"/>
         </imageobject>
         <textobject>
-           <phrase>pencil</phrase>
+          <phrase>pencil</phrase>
         </textobject>
       </inlinemediaobject> icon or delete it by clicking the 
    <inlinemediaobject>
         <imageobject>
-          <imagedata fileref="images/trashicon.png" format="PNG" width="5mm"/>
+          <imagedata width="5mm" fileref="images/trashicon.png" format="PNG"/>
         </imageobject>
         <textobject>
-           <phrase>trash can</phrase>
+          <phrase>trash can</phrase>
         </textobject>
       </inlinemediaobject> icon.
   </para>
@@ -1833,10 +1840,10 @@
      Click the 
      <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/editdocumenticon.png" format="PNG" width="38mm"/>
+              <imagedata width="38mm" fileref="images/editdocumenticon.png" format="PNG"/>
             </imageobject>
             <textobject>
-               <phrase>[ Edit Document ]</phrase>
+              <phrase>[ Edit Document ]</phrase>
             </textobject>
           </inlinemediaobject> button on the Action bar.
     </para>
@@ -1884,19 +1891,19 @@
      Click the 
      <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/exportnode.png" format="PNG" width="39mm"/>
+              <imagedata width="39mm" fileref="images/exportnode.png" format="PNG"/>
             </imageobject>
             <textobject>
-               <phrase>[ Export Node ]</phrase>
+              <phrase>[ Export Node ]</phrase>
             </textobject>
           </inlinemediaobject> button on the Action bar to show the <emphasis role="bold">Export Node</emphasis> form:
     </para>
         <mediaobject>
           <imageobject role="html">
-            <imagedata  align="center"  fileref="images/exportnodeform.png" format="PNG"/>
+            <imagedata align="center" fileref="images/exportnodeform.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata   align="center" fileref="images/exportnodeform.png" format="PNG" width="150mm"/>
+            <imagedata width="150mm" align="center" fileref="images/exportnodeform.png" format="PNG"/>
           </imageobject>
         </mediaobject>
         <table>
@@ -1966,19 +1973,19 @@
      Click the 
      <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/importnodebutton.png" format="PNG" width="25mm"/>
+              <imagedata width="25mm" fileref="images/importnodebutton.png" format="PNG"/>
             </imageobject>
             <textobject>
-               <phrase>[ Import Node ]</phrase>
+              <phrase>[ Import Node ]</phrase>
             </textobject>
           </inlinemediaobject> button on the action bar . The <emphasis role="bold">Import Node</emphasis> form appears.
     </para>
         <mediaobject>
           <imageobject role="html">
-            <imagedata  align="center"  fileref="images/importnodeform.png" format="PNG"/>
+            <imagedata align="center" fileref="images/importnodeform.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata   align="center" fileref="images/importnodeform.png" format="PNG" width="150mm"/>
+            <imagedata width="150mm" align="center" fileref="images/importnodeform.png" format="PNG"/>
           </imageobject>
         </mediaobject>
       </step>
@@ -2059,10 +2066,10 @@
       Click the 
       <inlinemediaobject>
               <imageobject>
-                <imagedata fileref="images/manageactionsbutton.png" format="PNG" width="31mm"/>
+                <imagedata width="31mm" fileref="images/manageactionsbutton.png" format="PNG"/>
               </imageobject>
               <textobject>
-                 <phrase>[ Manage Actions ]</phrase>
+                <phrase>[ Manage Actions ]</phrase>
               </textobject>
             </inlinemediaobject> button on the action bar.
      </para>
@@ -2076,10 +2083,10 @@
      </para>
           <mediaobject>
             <imageobject role="html">
-              <imagedata  align="center"  fileref="images/addactionstab.png" format="PNG"/>
+              <imagedata align="center" fileref="images/addactionstab.png" format="PNG"/>
             </imageobject>
             <imageobject role="fo">
-              <imagedata   align="center" fileref="images/addactionstab.png" format="PNG" width="150mm"/>
+              <imagedata width="150mm" align="center" fileref="images/addactionstab.png" format="PNG"/>
             </imageobject>
           </mediaobject>
         </step>
@@ -2088,21 +2095,21 @@
       Click the 
       <inlinemediaobject>
               <imageobject>
-                <imagedata fileref="images/icon1.png" format="PNG" width="6mm"/>
+                <imagedata width="6mm" fileref="images/icon1.png" format="PNG"/>
               </imageobject>
               <textobject>
-                 <phrase>scroll arrows</phrase>
+                <phrase>scroll arrows</phrase>
               </textobject>
             </inlinemediaobject> icon and select the type of action from the drop-down menu.
          </para>
-            <mediaobject>
-              <imageobject role="html">
-                <imagedata align="center"  fileref="images/typeactions.png" format="PNG"/>
-              </imageobject>
-              <imageobject role="fo">
-                <imagedata  align="center" fileref="images/typeactions.png" format="PNG" width="64mm"/>
-              </imageobject>
-            </mediaobject>
+          <mediaobject>
+            <imageobject role="html">
+              <imagedata align="center" fileref="images/typeactions.png" format="PNG"/>
+            </imageobject>
+            <imageobject role="fo">
+              <imagedata width="64mm" align="center" fileref="images/typeactions.png" format="PNG"/>
+            </imageobject>
+          </mediaobject>
           <table>
             <title/>
             <tgroup cols="2">
@@ -2252,10 +2259,10 @@
       Click the 
       <inlinemediaobject>
               <imageobject>
-                <imagedata fileref="images/previewicon.png" format="PNG" width="7mm"/>
+                <imagedata width="7mm" fileref="images/previewicon.png" format="PNG"/>
               </imageobject>
               <textobject>
-                 <phrase>magnifying glass</phrase>
+                <phrase>magnifying glass</phrase>
               </textobject>
             </inlinemediaobject> icon that corresponds to the action you want to view.
      </para>
@@ -2264,10 +2271,10 @@
      </para>
           <mediaobject>
             <imageobject role="html">
-              <imagedata  align="center"  fileref="images/actionsinfotab.png" format="PNG"/>
+              <imagedata align="center" fileref="images/actionsinfotab.png" format="PNG"/>
             </imageobject>
             <imageobject role="fo">
-              <imagedata   align="center" fileref="images/actionsinfotab.png" format="PNG" width="150mm"/>
+              <imagedata width="150mm" align="center" fileref="images/actionsinfotab.png" format="PNG"/>
             </imageobject>
           </mediaobject>
         </step>
@@ -2283,10 +2290,10 @@
      </para>
           <mediaobject>
             <imageobject role="html">
-              <imagedata  align="center"  fileref="images/availableactions.png" format="PNG"/>
+              <imagedata align="center" fileref="images/availableactions.png" format="PNG"/>
             </imageobject>
             <imageobject role="fo">
-              <imagedata   align="center" fileref="images/availableactions.png" format="PNG" width="150mm"/>
+              <imagedata width="150mm" align="center" fileref="images/availableactions.png" format="PNG"/>
             </imageobject>
           </mediaobject>
         </step>
@@ -2295,10 +2302,10 @@
       Click the  
       <inlinemediaobject>
               <imageobject>
-                <imagedata fileref="images/editicon4.png" format="PNG" width="6mm"/>
+                <imagedata width="6mm" fileref="images/editicon4.png" format="PNG"/>
               </imageobject>
               <textobject>
-                 <phrase>pencil</phrase>
+                <phrase>pencil</phrase>
               </textobject>
             </inlinemediaobject> icon that corresponds to the action you want to modify.
      </para>
@@ -2309,10 +2316,10 @@
      </para>
           <mediaobject>
             <imageobject role="html">
-              <imagedata  align="center"  fileref="images/editactionform.png" format="PNG"/>
+              <imagedata align="center" fileref="images/editactionform.png" format="PNG"/>
             </imageobject>
             <imageobject role="fo">
-              <imagedata   align="center" fileref="images/editactionform.png" format="PNG" width="150mm"/>
+              <imagedata width="150mm" align="center" fileref="images/editactionform.png" format="PNG"/>
             </imageobject>
           </mediaobject>
         </step>
@@ -2333,10 +2340,10 @@
      </para>
           <mediaobject>
             <imageobject role="html">
-              <imagedata  align="center"  fileref="images/availableactions.png" format="PNG"/>
+              <imagedata align="center" fileref="images/availableactions.png" format="PNG"/>
             </imageobject>
             <imageobject role="fo">
-              <imagedata   align="center" fileref="images/availableactions.png" format="PNG" width="150mm"/>
+              <imagedata width="150mm" align="center" fileref="images/availableactions.png" format="PNG"/>
             </imageobject>
           </mediaobject>
         </step>
@@ -2345,10 +2352,10 @@
       Click the  
       <inlinemediaobject>
               <imageobject>
-                <imagedata fileref="images/trashicon.png" format="PNG" width="5mm"/>
+                <imagedata width="5mm" fileref="images/trashicon.png" format="PNG"/>
               </imageobject>
               <textobject>
-                 <phrase>trash can</phrase>
+                <phrase>trash can</phrase>
               </textobject>
             </inlinemediaobject> icon that corresponds to the action you want to modify.
      </para>
@@ -2377,19 +2384,19 @@
      Click the 
      <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/manageauditing.png" format="PNG" width="30mm"/>
+              <imagedata width="30mm" fileref="images/manageauditing.png" format="PNG"/>
             </imageobject>
             <textobject>
-               <phrase>[ Manage Auditing ]</phrase>
+              <phrase>[ Manage Auditing ]</phrase>
             </textobject>
           </inlinemediaobject> button on the action bar. The <emphasis role="bold">Activate Auditing</emphasis> message appears.
     </para>
         <mediaobject>
           <imageobject role="html">
-            <imagedata align="center"  fileref="images/auditingactivated.png" format="PNG"/>
+            <imagedata align="center" fileref="images/auditingactivated.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata  align="center" fileref="images/auditingactivated.png" format="PNG" width="103mm"/>
+            <imagedata width="103mm" align="center" fileref="images/auditingactivated.png" format="PNG"/>
           </imageobject>
         </mediaobject>
       </step>
@@ -2403,10 +2410,10 @@
      Click the 
      <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/manageauditing.png" format="PNG" width="30mm"/>
+              <imagedata width="30mm" fileref="images/manageauditing.png" format="PNG"/>
             </imageobject>
             <textobject>
-               <phrase>[ Manage Auditing ]</phrase>
+              <phrase>[ Manage Auditing ]</phrase>
             </textobject>
           </inlinemediaobject> button again to view audit information for the selected node.
     </para>
@@ -2415,10 +2422,10 @@
     </para>
         <mediaobject>
           <imageobject role="html">
-            <imagedata  align="center"  fileref="images/auditinformation.png" format="PNG"/>
+            <imagedata align="center" fileref="images/auditinformation.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata   align="center" fileref="images/auditinformation.png" format="PNG" width="150mm"/>
+            <imagedata width="150mm" align="center" fileref="images/auditinformation.png" format="PNG"/>
           </imageobject>
         </mediaobject>
         <para>
@@ -2426,10 +2433,10 @@
     </para>
         <mediaobject>
           <imageobject role="html">
-            <imagedata  align="center"  fileref="images/noauditinformation.png" format="PNG"/>
+            <imagedata align="center" fileref="images/noauditinformation.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata   align="center" fileref="images/noauditinformation.png" format="PNG" width="150mm"/>
+            <imagedata width="150mm" align="center" fileref="images/noauditinformation.png" format="PNG"/>
           </imageobject>
         </mediaobject>
       </step>
@@ -2454,10 +2461,10 @@
       Click the 
       <inlinemediaobject>
               <imageobject>
-                <imagedata fileref="images/managecategoriesicon.png" format="PNG" width="33mm"/>
+                <imagedata width="33mm" fileref="images/managecategoriesicon.png" format="PNG"/>
               </imageobject>
               <textobject>
-                 <phrase>[ Manage Categories ]</phrase>
+                <phrase>[ Manage Categories ]</phrase>
               </textobject>
             </inlinemediaobject> button on the action bar.
      </para>
@@ -2471,10 +2478,10 @@
      </para>
           <mediaobject>
             <imageobject role="html">
-              <imagedata  align="center"  fileref="images/showcategoriestab.png" format="PNG"/>
+              <imagedata align="center" fileref="images/showcategoriestab.png" format="PNG"/>
             </imageobject>
             <imageobject role="fo">
-              <imagedata   align="center" fileref="images/showcategoriestab.png" format="PNG" width="150mm"/>
+              <imagedata width="150mm" align="center" fileref="images/showcategoriestab.png" format="PNG"/>
             </imageobject>
           </mediaobject>
         </step>
@@ -2483,10 +2490,10 @@
       Click the 
       <inlinemediaobject>
               <imageobject>
-                <imagedata fileref="images/greentick.png" format="PNG" width="6mm"/>
+                <imagedata width="6mm" fileref="images/greentick.png" format="PNG"/>
               </imageobject>
               <textobject>
-                 <phrase>green tick</phrase>
+                <phrase>green tick</phrase>
               </textobject>
             </inlinemediaobject> icon to add the corresponding category to the node.
      </para>
@@ -2521,10 +2528,10 @@
     </para>
         <mediaobject>
           <imageobject role="html">
-            <imagedata align="center"  fileref="images/categoryreferencednodes.png" format="PNG"/>
+            <imagedata align="center" fileref="images/categoryreferencednodes.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata  align="center" fileref="images/categoryreferencednodes.png" format="PNG" width="105mm"/>
+            <imagedata width="105mm" align="center" fileref="images/categoryreferencednodes.png" format="PNG"/>
           </imageobject>
         </mediaobject>
       </note>
@@ -2543,10 +2550,10 @@
        Click the 
       <inlinemediaobject>
               <imageobject>
-                <imagedata fileref="images/managecategoriesicon.png" format="PNG" width="33mm"/>
+                <imagedata width="33mm" fileref="images/managecategoriesicon.png" format="PNG"/>
               </imageobject>
               <textobject>
-                 <phrase>[ Manage Categories ]</phrase>
+                <phrase>[ Manage Categories ]</phrase>
               </textobject>
             </inlinemediaobject> button.
      </para>
@@ -2561,10 +2568,10 @@
       Click the 
       <inlinemediaobject>
               <imageobject>
-                <imagedata fileref="images/trashicon.png" format="PNG" width="5mm"/>
+                <imagedata width="5mm" fileref="images/trashicon.png" format="PNG"/>
               </imageobject>
               <textobject>
-                 <phrase>trash can</phrase>
+                <phrase>trash can</phrase>
               </textobject>
             </inlinemediaobject> icon that corresponds to the category you want to delete.
      </para>
@@ -2589,10 +2596,10 @@
      Click the 
      <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/hideshowcontentbutton.png" format="PNG" width="35mm"/>
+              <imagedata width="35mm" fileref="images/hideshowcontentbutton.png" format="PNG"/>
             </imageobject>
             <textobject>
-               <phrase>[ Hide/Show content ]</phrase>
+              <phrase>[ Hide/Show content ]</phrase>
             </textobject>
           </inlinemediaobject> button on the Action bar to hide the node.
     </para>
@@ -2609,7 +2616,7 @@
               <imagedata fileref="images/hideshowcontentbutton.png" format="PNG"/>
             </imageobject>
             <textobject>
-               <phrase>[ Hide/Show content ]</phrase>
+              <phrase>[ Hide/Show content ]</phrase>
             </textobject>
           </inlinemediaobject> button again.
     </para>
@@ -2633,10 +2640,10 @@
      Click the 
      <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/managepublicationsbutton.png" format="PNG" width="34mm"/>
+              <imagedata width="34mm" fileref="images/managepublicationsbutton.png" format="PNG"/>
             </imageobject>
             <textobject>
-               <phrase>[ Manage Publications ]</phrase>
+              <phrase>[ Manage Publications ]</phrase>
             </textobject>
           </inlinemediaobject> button on the actions bar.
     </para>
@@ -2645,10 +2652,10 @@
     </para>
         <mediaobject>
           <imageobject role="html">
-            <imagedata  align="center"  fileref="images/managepublicationsform.png" format="PNG"/>
+            <imagedata align="center" fileref="images/managepublicationsform.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata   align="center" fileref="images/managepublicationsform.png" format="PNG" width="150mm"/>
+            <imagedata width="150mm" align="center" fileref="images/managepublicationsform.png" format="PNG"/>
           </imageobject>
         </mediaobject>
         <para>
@@ -2660,20 +2667,20 @@
      Click the 
      <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/previewicon2.png" format="PNG" width="7mm"/>
+              <imagedata width="7mm" fileref="images/previewicon2.png" format="PNG"/>
             </imageobject>
             <textobject>
-               <phrase>magnifying glass</phrase>
+              <phrase>magnifying glass</phrase>
             </textobject>
           </inlinemediaobject> icon to view the content of the node or click the 
      <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/restoreversionicon.png" format="PNG" width="10mm"/>
+              <imagedata width="10mm" fileref="images/restoreversionicon.png" format="PNG"/>
             </imageobject>
             <textobject>
-               <phrase>[ Restore Version ]</phrase>
+              <phrase>[ Restore Version ]</phrase>
             </textobject>
-            </inlinemediaobject> icon to restore a version (refer to <xref linkend="sect-User_Guide-Actions-Manage_Versions"/> for information about versioning).
+          </inlinemediaobject> icon to restore a version (refer to <xref linkend="sect-User_Guide-Actions-Manage_Versions"/> for information about versioning).
          </para>
       </step>
       <step>
@@ -2711,10 +2718,10 @@
       Click the 
       <inlinemediaobject>
               <imageobject>
-                <imagedata fileref="images/managerelationsicon.png" format="PNG" width="31mm"/>
+                <imagedata width="31mm" fileref="images/managerelationsicon.png" format="PNG"/>
               </imageobject>
               <textobject>
-                 <phrase>[ Manage Relations ]</phrase>
+                <phrase>[ Manage Relations ]</phrase>
               </textobject>
             </inlinemediaobject> button on the action bar.
      </para>
@@ -2732,14 +2739,14 @@
       Click the 
       <inlinemediaobject>
               <imageobject>
-                <imagedata fileref="images/greentick.png" format="PNG" width="6mm"/>
+                <imagedata width="6mm" fileref="images/greentick.png" format="PNG"/>
               </imageobject>
               <textobject>
-                 <phrase>green tick</phrase>
+                <phrase>green tick</phrase>
               </textobject>
             </inlinemediaobject> that corresponds to the document(s) that relate to the document selected in the <emphasis role="bold">Step 1</emphasis>.
      </para>
-    <para>
+          <para>
       Documents linked to the original via a relation will be listed in the <emphasis role="bold">Relation List</emphasis> tab.
      </para>
         </step>
@@ -2774,10 +2781,10 @@
       Click the 
       <inlinemediaobject>
               <imageobject>
-                <imagedata fileref="images/managerelationsicon.png" format="PNG" width="31mm"/>
+                <imagedata width="31mm" fileref="images/managerelationsicon.png" format="PNG"/>
               </imageobject>
               <textobject>
-                 <phrase>[ Manage Relations ]</phrase>
+                <phrase>[ Manage Relations ]</phrase>
               </textobject>
             </inlinemediaobject> button on the action bar.
      </para>
@@ -2792,10 +2799,10 @@
       Click the 
       <inlinemediaobject>
               <imageobject>
-                <imagedata fileref="images/trashicon.png" format="PNG" width="5mm"/>
+                <imagedata width="5mm" fileref="images/trashicon.png" format="PNG"/>
               </imageobject>
               <textobject>
-                 <phrase>trash can</phrase>
+                <phrase>trash can</phrase>
               </textobject>
             </inlinemediaobject> corresponding to the relation you want to remove.
      </para>
@@ -2825,10 +2832,10 @@
      </para>
           <mediaobject>
             <imageobject role="html">
-              <imagedata align="center"  fileref="images/relationsbutton.png" format="PNG"/>
+              <imagedata align="center" fileref="images/relationsbutton.png" format="PNG"/>
             </imageobject>
             <imageobject role="fo">
-              <imagedata  align="center" fileref="images/relationsbutton.png" format="PNG" width="67mm"/>
+              <imagedata width="67mm" align="center" fileref="images/relationsbutton.png" format="PNG"/>
             </imageobject>
           </mediaobject>
           <para>
@@ -2836,10 +2843,10 @@
      </para>
           <mediaobject>
             <imageobject role="html">
-              <imagedata align="center"  fileref="images/relationslist.png" format="PNG"/>
+              <imagedata align="center" fileref="images/relationslist.png" format="PNG"/>
             </imageobject>
             <imageobject role="fo">
-              <imagedata  align="center" fileref="images/relationslist.png" format="PNG" width="62mm"/>
+              <imagedata width="62mm" align="center" fileref="images/relationslist.png" format="PNG"/>
             </imageobject>
           </mediaobject>
         </step>
@@ -2867,10 +2874,10 @@
       Click the 
       <inlinemediaobject>
               <imageobject>
-                <imagedata fileref="images/manageversionsbutton.png" format="PNG" width="30mm"/>
+                <imagedata width="30mm" fileref="images/manageversionsbutton.png" format="PNG"/>
               </imageobject>
               <textobject>
-                 <phrase>[ Manage Relations ]</phrase>
+                <phrase>[ Manage Relations ]</phrase>
               </textobject>
             </inlinemediaobject> button on the action bar.
      </para>
@@ -2879,10 +2886,10 @@
      </para>
           <mediaobject>
             <imageobject role="html">
-              <imagedata align="center"  fileref="images/activateversionmessage.png" format="PNG"/>
+              <imagedata align="center" fileref="images/activateversionmessage.png" format="PNG"/>
             </imageobject>
             <imageobject role="fo">
-              <imagedata  align="center" fileref="images/activateversionmessage.png" format="PNG" width="103mm"/>
+              <imagedata width="103mm" align="center" fileref="images/activateversionmessage.png" format="PNG"/>
             </imageobject>
           </mediaobject>
         </step>
@@ -2897,10 +2904,10 @@
      </para>
           <mediaobject>
             <imageobject role="html">
-              <imagedata align="center"  fileref="images/versionmenu.png" format="PNG"/>
+              <imagedata align="center" fileref="images/versionmenu.png" format="PNG"/>
             </imageobject>
             <imageobject role="fo">
-              <imagedata  align="center" fileref="images/versionmenu.png" format="PNG" width="61mm"/>
+              <imagedata width="61mm" align="center" fileref="images/versionmenu.png" format="PNG"/>
             </imageobject>
           </mediaobject>
         </step>
@@ -2909,19 +2916,19 @@
       Click the 
       <inlinemediaobject>
               <imageobject>
-                <imagedata fileref="images/manageversionsbutton.png" format="PNG" width="30mm"/>
+                <imagedata width="30mm" fileref="images/manageversionsbutton.png" format="PNG"/>
               </imageobject>
               <textobject>
-                 <phrase>[ Manage Versions ]</phrase>
+                <phrase>[ Manage Versions ]</phrase>
               </textobject>
             </inlinemediaobject> button again to open the <emphasis role="bold">Version Info</emphasis> window.
      </para>
           <mediaobject>
             <imageobject role="html">
-              <imagedata  align="center"  fileref="images/versioninfo.png" format="PNG"/>
+              <imagedata align="center" fileref="images/versioninfo.png" format="PNG"/>
             </imageobject>
             <imageobject role="fo">
-              <imagedata   align="center" fileref="images/versioninfo.png" format="PNG" width="150mm"/>
+              <imagedata width="150mm" align="center" fileref="images/versioninfo.png" format="PNG"/>
             </imageobject>
           </mediaobject>
           <para>
@@ -2957,10 +2964,10 @@
       Click the 
       <inlinemediaobject>
               <imageobject>
-                <imagedata fileref="images/manageversionsbutton.png" format="PNG" width="30mm"/>
+                <imagedata width="30mm" fileref="images/manageversionsbutton.png" format="PNG"/>
               </imageobject>
               <textobject>
-                 <phrase>[ Manage Versions ]</phrase>
+                <phrase>[ Manage Versions ]</phrase>
               </textobject>
             </inlinemediaobject> button on the action bar.
      </para>
@@ -2970,19 +2977,19 @@
       Click the 
       <inlinemediaobject>
               <imageobject>
-                <imagedata fileref="images/versionplusicon.png" format="PNG" width="9mm"/>
+                <imagedata width="9mm" fileref="images/versionplusicon.png" format="PNG"/>
               </imageobject>
               <textobject>
-                 <phrase>plus</phrase>
+                <phrase>plus</phrase>
               </textobject>
             </inlinemediaobject> icon on the <emphasis role="bold">Version Info</emphasis> window to show the <emphasis role="bold">Add label</emphasis> field under the version list.
      </para>
           <mediaobject>
             <imageobject role="html">
-              <imagedata  align="center"  fileref="images/addlabelform.png" format="PNG"/>
+              <imagedata align="center" fileref="images/addlabelform.png" format="PNG"/>
             </imageobject>
             <imageobject role="fo">
-              <imagedata   align="center" fileref="images/addlabelform.png" format="PNG" width="150mm"/>
+              <imagedata width="150mm" align="center" fileref="images/addlabelform.png" format="PNG"/>
             </imageobject>
           </mediaobject>
         </step>
@@ -3012,10 +3019,10 @@
       Click the 
       <inlinemediaobject>
               <imageobject>
-                <imagedata fileref="images/manageversionsbutton.png" format="PNG" width="30mm"/>
+                <imagedata width="30mm" fileref="images/manageversionsbutton.png" format="PNG"/>
               </imageobject>
               <textobject>
-                 <phrase>[ Manage Versions ]</phrase>
+                <phrase>[ Manage Versions ]</phrase>
               </textobject>
             </inlinemediaobject> button on the action bar.
      </para>
@@ -3025,19 +3032,19 @@
       Click the 
       <inlinemediaobject>
               <imageobject>
-                <imagedata fileref="images/versionminusicon.png" format="PNG" width="8mm"/>
+                <imagedata width="8mm" fileref="images/versionminusicon.png" format="PNG"/>
               </imageobject>
               <textobject>
-                 <phrase>minus</phrase>
+                <phrase>minus</phrase>
               </textobject>
             </inlinemediaobject> icon on the <emphasis role="bold">Version Info</emphasis> window to show the <emphasis role="bold">Remove label</emphasis> field under the version list.
      </para>
           <mediaobject>
             <imageobject role="html">
-              <imagedata  align="center"  fileref="images/removelabelform.png" format="PNG"/>
+              <imagedata align="center" fileref="images/removelabelform.png" format="PNG"/>
             </imageobject>
             <imageobject role="fo">
-              <imagedata   align="center" fileref="images/removelabelform.png" format="PNG" width="150mm"/>
+              <imagedata width="150mm" align="center" fileref="images/removelabelform.png" format="PNG"/>
             </imageobject>
           </mediaobject>
         </step>
@@ -3047,10 +3054,10 @@
      </para>
           <mediaobject>
             <imageobject role="html">
-              <imagedata  align="center"  fileref="images/labellist.png" format="PNG"/>
+              <imagedata align="center" fileref="images/labellist.png" format="PNG"/>
             </imageobject>
             <imageobject role="fo">
-              <imagedata   align="center" fileref="images/labellist.png" format="PNG" width="150mm"/>
+              <imagedata width="150mm" align="center" fileref="images/labellist.png" format="PNG"/>
             </imageobject>
           </mediaobject>
         </step>
@@ -3075,10 +3082,10 @@
       Click the 
       <inlinemediaobject>
               <imageobject>
-                <imagedata fileref="images/manageversionsbutton.png" format="PNG" width="30mm"/>
+                <imagedata width="30mm" fileref="images/manageversionsbutton.png" format="PNG"/>
               </imageobject>
               <textobject>
-                 <phrase>[ Manage Versions ]</phrase>
+                <phrase>[ Manage Versions ]</phrase>
               </textobject>
             </inlinemediaobject> button.
      </para>
@@ -3088,19 +3095,19 @@
       Click the 
       <inlinemediaobject>
               <imageobject>
-                <imagedata fileref="images/previewicon2.png" format="PNG" width="7mm"/>
+                <imagedata width="7mm" fileref="images/previewicon2.png" format="PNG"/>
               </imageobject>
               <textobject>
-                 <phrase>magnifying glass</phrase>
+                <phrase>magnifying glass</phrase>
               </textobject>
             </inlinemediaobject> icon to see the current versions of the selected node.
      </para>
           <mediaobject>
             <imageobject role="html">
-              <imagedata  align="center"  fileref="images/versionviewlist.png" format="PNG"/>
+              <imagedata align="center" fileref="images/versionviewlist.png" format="PNG"/>
             </imageobject>
             <imageobject role="fo">
-              <imagedata   align="center" fileref="images/versionviewlist.png" format="PNG" width="150mm"/>
+              <imagedata width="150mm" align="center" fileref="images/versionviewlist.png" format="PNG"/>
             </imageobject>
           </mediaobject>
         </step>
@@ -3114,10 +3121,10 @@
      If you click the 
      <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/previewicon2.png" format="PNG" width="7mm"/>
+              <imagedata width="7mm" fileref="images/previewicon2.png" format="PNG"/>
             </imageobject>
             <textobject>
-               <phrase>magnifying glass</phrase>
+              <phrase>magnifying glass</phrase>
             </textobject>
           </inlinemediaobject> icon while the selected node is a folder, a message to this effect will appear.
     </para>
@@ -3137,19 +3144,19 @@
       Click the 
       <inlinemediaobject>
               <imageobject>
-                <imagedata fileref="images/manageversionsbutton.png" format="PNG" width="30mm"/>
+                <imagedata width="30mm" fileref="images/manageversionsbutton.png" format="PNG"/>
               </imageobject>
               <textobject>
-                 <phrase>[ Manage Versions ]</phrase>
+                <phrase>[ Manage Versions ]</phrase>
               </textobject>
             </inlinemediaobject> button.
      </para>
           <mediaobject>
             <imageobject role="html">
-              <imagedata  align="center"  fileref="images/versionlist.png" format="PNG"/>
+              <imagedata align="center" fileref="images/versionlist.png" format="PNG"/>
             </imageobject>
             <imageobject role="fo">
-              <imagedata   align="center" fileref="images/versionlist.png" format="PNG" width="150mm"/>
+              <imagedata width="150mm" align="center" fileref="images/versionlist.png" format="PNG"/>
             </imageobject>
           </mediaobject>
         </step>
@@ -3163,10 +3170,10 @@
       Click the 
       <inlinemediaobject>
               <imageobject>
-                <imagedata fileref="images/restoreversionicon.png" format="PNG" width="10mm"/>
+                <imagedata width="10mm" fileref="images/restoreversionicon.png" format="PNG"/>
               </imageobject>
               <textobject>
-                 <phrase>"Restore Version"</phrase>
+                <phrase>&quot;Restore Version&quot;</phrase>
               </textobject>
             </inlinemediaobject> icon to restore the selected version
      </para>
@@ -3183,10 +3190,10 @@
      </para>
           <mediaobject>
             <imageobject role="html">
-              <imagedata  align="center"  fileref="images/versionlist.png" format="PNG"/>
+              <imagedata align="center" fileref="images/versionlist.png" format="PNG"/>
             </imageobject>
             <imageobject role="fo">
-              <imagedata   align="center" fileref="images/versionlist.png" format="PNG" width="150mm"/>
+              <imagedata width="150mm" align="center" fileref="images/versionlist.png" format="PNG"/>
             </imageobject>
           </mediaobject>
         </step>
@@ -3195,10 +3202,10 @@
       Click the 
       <inlinemediaobject>
               <imageobject>
-                <imagedata fileref="images/manageversionsbutton.png" format="PNG" width="30mm"/>
+                <imagedata width="30mm" fileref="images/manageversionsbutton.png" format="PNG"/>
               </imageobject>
               <textobject>
-                 <phrase>[ Manage Versions ]</phrase>
+                <phrase>[ Manage Versions ]</phrase>
               </textobject>
             </inlinemediaobject> button.
      </para>
@@ -3208,10 +3215,10 @@
       Click the 
       <inlinemediaobject>
               <imageobject>
-                <imagedata fileref="images/trashicon.png" format="PNG" width="5mm"/>
+                <imagedata width="5mm" fileref="images/trashicon.png" format="PNG"/>
               </imageobject>
               <textobject>
-                 <phrase>trash can</phrase>
+                <phrase>trash can</phrase>
               </textobject>
             </inlinemediaobject> icon corresponding to the version you want to delete.
      </para>
@@ -3250,10 +3257,10 @@
      Click the 
      <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/localisedcontents.png" format="PNG" width="59mm"/>
+              <imagedata width="59mm" fileref="images/localisedcontents.png" format="PNG"/>
             </imageobject>
             <textobject>
-               <phrase>[ Add/Edit localized contents ]</phrase>
+              <phrase>[ Add/Edit localized contents ]</phrase>
             </textobject>
           </inlinemediaobject> button on the <emphasis role="bold">Action</emphasis> bar.
     </para>
@@ -3262,10 +3269,10 @@
     </para>
         <mediaobject>
           <imageobject role="html">
-            <imagedata  align="center"  fileref="images/multi-language.png" format="PNG"/>
+            <imagedata align="center" fileref="images/multi-language.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata   align="center" fileref="images/multi-language.png" format="PNG" width="150mm"/>
+            <imagedata width="150mm" align="center" fileref="images/multi-language.png" format="PNG"/>
           </imageobject>
         </mediaobject>
         <para>
@@ -3278,10 +3285,10 @@
     </para>
         <mediaobject>
           <imageobject role="html">
-            <imagedata  align="center"  fileref="images/addlanguageform.png" format="PNG"/>
+            <imagedata align="center" fileref="images/addlanguageform.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata   align="center" fileref="images/addlanguageform.png" format="PNG" width="150mm"/>
+            <imagedata width="150mm" align="center" fileref="images/addlanguageform.png" format="PNG"/>
           </imageobject>
         </mediaobject>
       </step>
@@ -3294,10 +3301,10 @@
     </para>
         <mediaobject>
           <imageobject role="html">
-            <imagedata align="center"  fileref="images/selectlanguage.png" format="PNG"/>
+            <imagedata align="center" fileref="images/selectlanguage.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata  align="center" fileref="images/selectlanguage.png" format="PNG" width="91mm"/>
+            <imagedata width="91mm" align="center" fileref="images/selectlanguage.png" format="PNG"/>
           </imageobject>
         </mediaobject>
         <para>
@@ -3324,10 +3331,10 @@
     </para>
         <mediaobject>
           <imageobject role="html">
-            <imagedata align="center"  fileref="images/relationbutton.png" format="PNG"/>
+            <imagedata align="center" fileref="images/relationbutton.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata  align="center" fileref="images/relationbutton.png" format="PNG" width="67mm"/>
+            <imagedata width="67mm" align="center" fileref="images/relationbutton.png" format="PNG"/>
           </imageobject>
         </mediaobject>
       </step>
@@ -3337,10 +3344,10 @@
     </para>
         <mediaobject>
           <imageobject role="html">
-            <imagedata align="center"  fileref="images/languagelist.png" format="PNG"/>
+            <imagedata align="center" fileref="images/languagelist.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata  align="center" fileref="images/languagelist.png" format="PNG" width="62mm"/>
+            <imagedata width="62mm" align="center" fileref="images/languagelist.png" format="PNG"/>
           </imageobject>
         </mediaobject>
         <para>
@@ -3380,10 +3387,10 @@
         <para>
      Click the <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/overloadthumbnail.png" format="PNG" width="34mm"/>
+              <imagedata width="34mm" fileref="images/overloadthumbnail.png" format="PNG"/>
             </imageobject>
             <textobject>
-               <phrase>[ Overload thumbnail ]</phrase>
+              <phrase>[ Overload thumbnail ]</phrase>
             </textobject>
           </inlinemediaobject> button on the Action Bar.
     </para>
@@ -3392,10 +3399,10 @@
     </para>
         <mediaobject>
           <imageobject role="html">
-            <imagedata  align="center"  fileref="images/addthumbnail.png" format="PNG"/>
+            <imagedata align="center" fileref="images/addthumbnail.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata   align="center" fileref="images/addthumbnail.png" format="PNG" width="129mm"/>
+            <imagedata width="129mm" align="center" fileref="images/addthumbnail.png" format="PNG"/>
           </imageobject>
         </mediaobject>
       </step>
@@ -3410,10 +3417,10 @@
     </para>
         <mediaobject>
           <imageobject role="html">
-            <imagedata  align="center"  fileref="images/exothumbnailsfolder.png" format="PNG"/>
+            <imagedata align="center" fileref="images/exothumbnailsfolder.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata   align="center" fileref="images/exothumbnailsfolder.png" format="PNG" width="150mm"/>
+            <imagedata width="150mm" align="center" fileref="images/exothumbnailsfolder.png" format="PNG"/>
           </imageobject>
         </mediaobject>
       </step>
@@ -3516,10 +3523,10 @@
    To show drives, click the 
    <inlinemediaobject>
         <imageobject>
-          <imagedata fileref="images/showhidedrives.png" format="PNG" width="44mm"/>
+          <imagedata width="44mm" fileref="images/showhidedrives.png" format="PNG"/>
         </imageobject>
         <textobject>
-           <phrase>[ Show/Hide Drives ]</phrase>
+          <phrase>[ Show/Hide Drives ]</phrase>
         </textobject>
       </inlinemediaobject> button on the action bar.
   </para>
@@ -3527,10 +3534,10 @@
    To hide drives, click the  
    <inlinemediaobject>
         <imageobject>
-          <imagedata fileref="images/showhidedrives.png" format="PNG" width="44mm"/>
+          <imagedata width="44mm" fileref="images/showhidedrives.png" format="PNG"/>
         </imageobject>
         <textobject>
-           <phrase>[ Show/Hide Drives ]</phrase>
+          <phrase>[ Show/Hide Drives ]</phrase>
         </textobject>
       </inlinemediaobject> button again.
   </para>
@@ -3557,10 +3564,10 @@
      Click the 
      <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/jcrstructure.png" format="PNG" width="46mm"/>
+              <imagedata width="46mm" fileref="images/jcrstructure.png" format="PNG"/>
             </imageobject>
             <textobject>
-               <phrase>[ Show/Hide Like JCR Structure ]</phrase>
+              <phrase>[ Show/Hide Like JCR Structure ]</phrase>
             </textobject>
           </inlinemediaobject> button.
     </para>
@@ -3570,10 +3577,10 @@
      Click the 
      <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/discsave.png" format="PNG" width="8mm"/>
+              <imagedata width="8mm" fileref="images/discsave.png" format="PNG"/>
             </imageobject>
             <textobject>
-               <phrase>disk</phrase>
+              <phrase>disk</phrase>
             </textobject>
           </inlinemediaobject> icon to save the view.
     </para>
@@ -3582,10 +3589,10 @@
     </para>
         <mediaobject>
           <imageobject role="html">
-            <imagedata  align="center"  fileref="images/savemessage.png" format="PNG"/>
+            <imagedata align="center" fileref="images/savemessage.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata   align="center" fileref="images/savemessage.png" format="PNG" width="142mm"/>
+            <imagedata width="142mm" align="center" fileref="images/savemessage.png" format="PNG"/>
           </imageobject>
         </mediaobject>
       </step>
@@ -3600,10 +3607,10 @@
      Click the 
      <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/jcrstructure.png" format="PNG" width="46mm"/>
+              <imagedata width="46mm" fileref="images/jcrstructure.png" format="PNG"/>
             </imageobject>
             <textobject>
-               <phrase>[ Show/Hide Like JCR Structure ]</phrase>
+              <phrase>[ Show/Hide Like JCR Structure ]</phrase>
             </textobject>
           </inlinemediaobject> button again.
     </para>
@@ -3627,19 +3634,19 @@
      Click the 
      <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/taggingdocument.png" format="PNG" width="51mm"/>
+              <imagedata width="51mm" fileref="images/taggingdocument.png" format="PNG"/>
             </imageobject>
             <textobject>
-               <phrase>[ Tagging this document ]</phrase>
+              <phrase>[ Tagging this document ]</phrase>
             </textobject>
           </inlinemediaobject> button on the Action bar. The <emphasis role="bold">Tag Manager</emphasis> will be displayed:
     </para>
         <mediaobject>
           <imageobject role="html">
-            <imagedata  align="center"  fileref="images/tagmanager.png" format="PNG"/>
+            <imagedata align="center" fileref="images/tagmanager.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata align="center" fileref="images/tagmanager.png" format="PNG" width="150mm"/>
+            <imagedata width="150mm" align="center" fileref="images/tagmanager.png" format="PNG"/>
           </imageobject>
         </mediaobject>
         <table>
@@ -3688,10 +3695,10 @@
      Click the 
      <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/trashicon.png" format="PNG" width="5mm"/>
+              <imagedata width="5mm" fileref="images/trashicon.png" format="PNG"/>
             </imageobject>
             <textobject>
-               <phrase>trash can</phrase>
+              <phrase>trash can</phrase>
             </textobject>
           </inlinemediaobject> icon to delete tags.
     </para>
@@ -3709,10 +3716,10 @@
      Click the 
      <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/taggingdocument.png" format="PNG" width="51mm"/>
+              <imagedata width="51mm" fileref="images/taggingdocument.png" format="PNG"/>
             </imageobject>
             <textobject>
-               <phrase>[ Tagging this document ]</phrase>
+              <phrase>[ Tagging this document ]</phrase>
             </textobject>
           </inlinemediaobject> button on the action bar to open the Tag Manager form.
     </para>
@@ -3722,10 +3729,10 @@
      Click the 
      <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/trashicon.png" format="PNG" width="5mm"/>
+              <imagedata width="5mm" fileref="images/trashicon.png" format="PNG"/>
             </imageobject>
             <textobject>
-               <phrase>trash can</phrase>
+              <phrase>trash can</phrase>
             </textobject>
           </inlinemediaobject> corresponding to the tags you want to delete.
     </para>
@@ -3759,19 +3766,19 @@
      Click the 
      <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/uploadicon2.png" format="PNG" width="17mm"/>
+              <imagedata width="17mm" fileref="images/uploadicon2.png" format="PNG"/>
             </imageobject>
             <textobject>
-               <phrase>[ Upload ]</phrase>
+              <phrase>[ Upload ]</phrase>
             </textobject>
           </inlinemediaobject> button on the Action bar to open the Upload a file form:
     </para>
         <mediaobject>
           <imageobject role="html">
-            <imagedata  align="center"  fileref="images/uploadfilewindow.png" format="PNG"/>
+            <imagedata align="center" fileref="images/uploadfilewindow.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata   align="center" fileref="images/uploadfilewindow.png" format="PNG" width="141mm"/>
+            <imagedata width="141mm" align="center" fileref="images/uploadfilewindow.png" format="PNG"/>
           </imageobject>
         </mediaobject>
       </step>
@@ -3783,29 +3790,29 @@
      If you want to upload multi files at the same time, click the 
      <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/addplusicon.png" format="PNG" width="8mm"/>
+              <imagedata width="8mm" fileref="images/addplusicon.png" format="PNG"/>
             </imageobject>
             <textobject>
-               <phrase>plus</phrase>
+              <phrase>plus</phrase>
             </textobject>
           </inlinemediaobject> icon to open more forms to upload more files:
     </para>
         <mediaobject>
           <imageobject role="html">
-            <imagedata  align="center"  fileref="images/multipleuploadform.png" format="PNG"/>
+            <imagedata align="center" fileref="images/multipleuploadform.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata   align="center" fileref="images/multipleuploadform.png" format="PNG" width="150mm"/>
+            <imagedata width="150mm" align="center" fileref="images/multipleuploadform.png" format="PNG"/>
           </imageobject>
         </mediaobject>
         <para>
      The 
      <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/trashicon.png" format="PNG" width="5mm"/>
+              <imagedata width="5mm" fileref="images/trashicon.png" format="PNG"/>
             </imageobject>
             <textobject>
-               <phrase>trash can</phrase>
+              <phrase>trash can</phrase>
             </textobject>
           </inlinemediaobject> icon closes the upload file form.
     </para>
@@ -3815,10 +3822,10 @@
      You can change the uploaded file by clicking the 
      <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/trashicon.png" format="PNG" width="5mm"/>
+              <imagedata width="5mm" fileref="images/trashicon.png" format="PNG"/>
             </imageobject>
             <textobject>
-               <phrase>trash can</phrase>
+              <phrase>trash can</phrase>
             </textobject>
           </inlinemediaobject> icon and select <emphasis role="bold">Browse</emphasis>... again to select another one.
     </para>
@@ -3833,19 +3840,19 @@
      You can click the 
      <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/addplusicon.png" format="PNG" width="8mm"/>
+              <imagedata width="8mm" fileref="images/addplusicon.png" format="PNG"/>
             </imageobject>
             <textobject>
-               <phrase>plus</phrase>
+              <phrase>plus</phrase>
             </textobject>
           </inlinemediaobject> icon next to the List Taxonomy field to add categories for this file:
     </para>
         <mediaobject>
           <imageobject role="html">
-            <imagedata  align="center"  fileref="images/addcategories.png" format="PNG"/>
+            <imagedata align="center" fileref="images/addcategories.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata   align="center" fileref="images/addcategories.png" format="PNG" width="150mm"/>
+            <imagedata width="150mm" align="center" fileref="images/addcategories.png" format="PNG"/>
           </imageobject>
         </mediaobject>
       </step>
@@ -3854,40 +3861,40 @@
      Select categories by clicking the 
      <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/greentick.png" format="PNG" width="6mm"/>
+              <imagedata width="6mm" fileref="images/greentick.png" format="PNG"/>
             </imageobject>
             <textobject>
-               <phrase>green tick</phrase>
+              <phrase>green tick</phrase>
             </textobject>
           </inlinemediaobject> icon. Click the <emphasis role="bold">plus</emphasis> to open child nodes of categories.
     </para>
         <mediaobject>
           <imageobject role="html">
-            <imagedata  align="center"  fileref="images/addcategoriesexpanded.png" format="PNG"/>
+            <imagedata align="center" fileref="images/addcategoriesexpanded.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata   align="center" fileref="images/addcategoriesexpanded.png" format="PNG" width="150mm"/>
+            <imagedata width="150mm" align="center" fileref="images/addcategoriesexpanded.png" format="PNG"/>
           </imageobject>
         </mediaobject>
         <note>
           <para>
       You can add more categories for a file by clicking the  <inlinemediaobject>
               <imageobject>
-                <imagedata fileref="images/addplusicon.png" format="PNG" width="8mm"/>
+                <imagedata width="8mm" fileref="images/addplusicon.png" format="PNG"/>
               </imageobject>
               <textobject>
-               <phrase>plus</phrase>
-            </textobject>
+                <phrase>plus</phrase>
+              </textobject>
             </inlinemediaobject> icon again to open the Add Categories form.
      </para>
           <para>
       Click the 
       <inlinemediaobject>
               <imageobject>
-                <imagedata fileref="images/trashicon.png" format="PNG" width="5mm"/>
+                <imagedata width="5mm" fileref="images/trashicon.png" format="PNG"/>
               </imageobject>
               <textobject>
-                 <phrase>trash can</phrase>
+                <phrase>trash can</phrase>
               </textobject>
             </inlinemediaobject> icon to delete a category in <emphasis role="bold">Upload a file</emphasis> form.
      </para>
@@ -3907,10 +3914,10 @@
     </para>
         <mediaobject>
           <imageobject role="html">
-            <imagedata  align="center"  fileref="images/uploadedfileview.png" format="PNG"/>
+            <imagedata align="center" fileref="images/uploadedfileview.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata   align="center" fileref="images/uploadedfileview.png" format="PNG" width="150mm"/>
+            <imagedata width="150mm" align="center" fileref="images/uploadedfileview.png" format="PNG"/>
           </imageobject>
         </mediaobject>
       </step>
@@ -3919,19 +3926,19 @@
      Click the 
      <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/editicon4.png" format="PNG"  width="6mm"/>
+              <imagedata width="6mm" fileref="images/editicon4.png" format="PNG"/>
             </imageobject>
             <textobject>
-               <phrase>pencil</phrase>
+              <phrase>pencil</phrase>
             </textobject>
           </inlinemediaobject> icon to see more details of its external metadata information. The <emphasis role="bold"> List external metadata</emphasis> tab will be enable and you can input value in this tab.
     </para>
         <mediaobject>
           <imageobject role="html">
-            <imagedata  align="center"  fileref="images/externalmetadata.png" format="PNG"/>
+            <imagedata align="center" fileref="images/externalmetadata.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata   align="center" fileref="images/externalmetadata.png" format="PNG" width="150mm"/>
+            <imagedata width="150mm" align="center" fileref="images/externalmetadata.png" format="PNG"/>
           </imageobject>
         </mediaobject>
       </step>
@@ -3946,10 +3953,10 @@
     </para>
         <mediaobject>
           <imageobject role="html">
-            <imagedata align="center"  fileref="images/addexternalmetadata.png" format="PNG"/>
+            <imagedata align="center" fileref="images/addexternalmetadata.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata  align="center" fileref="images/addexternalmetadata.png" format="PNG" width="103mm"/>
+            <imagedata width="103mm" align="center" fileref="images/addexternalmetadata.png" format="PNG"/>
           </imageobject>
         </mediaobject>
       </step>
@@ -3957,10 +3964,10 @@
         <para>
      New metadata is displayed in the External Metadatas list and you also can edit it by clicking the <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/editicon4.png" format="PNG" width="6mm"/>
+              <imagedata width="6mm" fileref="images/editicon4.png" format="PNG"/>
             </imageobject>
             <textobject>
-               <phrase>pencil</phrase>
+              <phrase>pencil</phrase>
             </textobject>
           </inlinemediaobject>.
     </para>
@@ -3976,10 +3983,10 @@
     </para>
         <mediaobject>
           <imageobject role="html">
-            <imagedata align="center"  fileref="images/uploadtree.png" format="PNG"/>
+            <imagedata align="center" fileref="images/uploadtree.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata  align="center" fileref="images/uploadtree.png" format="PNG" width="50mm"/>
+            <imagedata width="50mm" align="center" fileref="images/uploadtree.png" format="PNG"/>
           </imageobject>
         </mediaobject>
         <note>
@@ -4008,19 +4015,19 @@
      Click the 
      <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/viewmetadatasbutton.png" format="PNG" width="28mm"/>
+              <imagedata width="28mm" fileref="images/viewmetadatasbutton.png" format="PNG"/>
             </imageobject>
             <textobject>
-               <phrase>[ View Metadatas ]</phrase>
+              <phrase>[ View Metadatas ]</phrase>
             </textobject>
           </inlinemediaobject> button. The <emphasis role="bold">View Metadata</emphasis> form appears:
     </para>
         <mediaobject>
           <imageobject role="html">
-            <imagedata  align="center"  fileref="images/viewmetadatasform.png" format="PNG"/>
+            <imagedata align="center" fileref="images/viewmetadatasform.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata   align="center" fileref="images/viewmetadatasform.png" format="PNG" width="150mm"/>
+            <imagedata width="150mm" align="center" fileref="images/viewmetadatasform.png" format="PNG"/>
           </imageobject>
         </mediaobject>
       </step>
@@ -4033,19 +4040,19 @@
         <para>
      Complete the desired fields in the <emphasis role="bold">Add/Edit Properties</emphasis> form. Click the <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/addplusicon.png" format="PNG" width="8mm"/>
+              <imagedata width="8mm" fileref="images/addplusicon.png" format="PNG"/>
             </imageobject>
             <textobject>
-               <phrase>plus</phrase>
+              <phrase>plus</phrase>
             </textobject>
           </inlinemediaobject> icon to add further metadata.
     </para>
         <mediaobject>
           <imageobject role="html">
-            <imagedata  align="center"  fileref="images/addeditpropertiesform.png" format="PNG"/>
+            <imagedata align="center" fileref="images/addeditpropertiesform.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata   align="center" fileref="images/addeditpropertiesform.png" format="PNG" width="150mm"/>
+            <imagedata width="150mm" align="center" fileref="images/addeditpropertiesform.png" format="PNG"/>
           </imageobject>
         </mediaobject>
       </step>
@@ -4073,19 +4080,19 @@
      Click the 
      <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/viewnodetypesbutton.png" format="PNG" width="30mm"/>
+              <imagedata width="30mm" fileref="images/viewnodetypesbutton.png" format="PNG"/>
             </imageobject>
             <textobject>
-               <phrase>[ View Node Types ]</phrase>
+              <phrase>[ View Node Types ]</phrase>
             </textobject>
           </inlinemediaobject> button to view detailed information about the selected node.
     </para>
         <mediaobject>
           <imageobject role="html">
-            <imagedata  align="center"  fileref="images/nodetypesinformation.png" format="PNG"/>
+            <imagedata align="center" fileref="images/nodetypesinformation.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata   align="center" fileref="images/nodetypesinformation.png" format="PNG" width="150mm"/>
+            <imagedata width="150mm" align="center" fileref="images/nodetypesinformation.png" format="PNG"/>
           </imageobject>
         </mediaobject>
       </step>
@@ -4113,19 +4120,19 @@
      Click the 
      <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/viewpermissionsbutton.png" format="PNG" width="30mm"/>
+              <imagedata width="30mm" fileref="images/viewpermissionsbutton.png" format="PNG"/>
             </imageobject>
             <textobject>
-               <phrase>[ View Permissions ]</phrase>
+              <phrase>[ View Permissions ]</phrase>
             </textobject>
           </inlinemediaobject> button. The <emphasis role="bold">Permissions Management</emphasis> form appears.
     </para>
         <mediaobject>
           <imageobject role="html">
-            <imagedata  align="center"  fileref="images/permissionsmanagementform.png" format="PNG"/>
+            <imagedata align="center" fileref="images/permissionsmanagementform.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata   align="center" fileref="images/permissionsmanagementform.png" format="PNG" width="150mm"/>
+            <imagedata width="150mm" align="center" fileref="images/permissionsmanagementform.png" format="PNG"/>
           </imageobject>
         </mediaobject>
       </step>
@@ -4141,10 +4148,10 @@
      Click the 
      <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/usericon.png" format="PNG" width="5mm"/>
+              <imagedata width="5mm" fileref="images/usericon.png" format="PNG"/>
             </imageobject>
             <textobject>
-               <phrase>"Select user"</phrase>
+              <phrase>&quot;Select user&quot;</phrase>
             </textobject>
           </inlinemediaobject> icon next to the <emphasis role="bold">User Or Group</emphasis> field.
     </para>
@@ -4152,10 +4159,10 @@
      Click the 
      <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/greentick.png" format="PNG" width="6mm"/>
+              <imagedata width="6mm" fileref="images/greentick.png" format="PNG"/>
             </imageobject>
             <textobject>
-               <phrase>green tick</phrase>
+              <phrase>green tick</phrase>
             </textobject>
           </inlinemediaobject> beside the users you want to grant permissions to.
     </para>
@@ -4172,19 +4179,19 @@
      Click the 
      <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/magnifyingglassicon.png" format="PNG" width="7mm"/>
+              <imagedata width="7mm" fileref="images/magnifyingglassicon.png" format="PNG"/>
             </imageobject>
             <textobject>
-               <phrase>magnifying glass</phrase>
+              <phrase>magnifying glass</phrase>
             </textobject>
           </inlinemediaobject> icon beside the <emphasis role="bold">Group</emphasis> field to open a form that lists groups and their sub-groups. Select a sub-group to add all users in that sub-group.
     </para>
         <mediaobject>
           <imageobject role="html">
-            <imagedata  align="center"  fileref="images/groupssubgroups.png" format="PNG"/>
+            <imagedata align="center" fileref="images/groupssubgroups.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata   align="center" fileref="images/groupssubgroups.png" format="PNG" width="140mm"/>
+            <imagedata width="140mm" align="center" fileref="images/groupssubgroups.png" format="PNG"/>
           </imageobject>
         </mediaobject>
       </step>
@@ -4193,10 +4200,10 @@
         <para>
      Select an information parameter (User Name, First Name, Last Name, Email) from the drop down menu in the other field at the top of the page and enter the information into the text box. Click the <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/magnifyingglassicon.png" format="PNG" width="7mm"/>
+              <imagedata width="7mm" fileref="images/magnifyingglassicon.png" format="PNG"/>
             </imageobject>
             <textobject>
-               <phrase>magnifying glass</phrase>
+              <phrase>magnifying glass</phrase>
             </textobject>
           </inlinemediaobject> to search for users that match that information.
     </para>
@@ -4207,10 +4214,10 @@
      Click the 
      <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/userpermissionbutton.png" format="PNG" width="6mm"/>
+              <imagedata width="6mm" fileref="images/userpermissionbutton.png" format="PNG"/>
             </imageobject>
             <textobject>
-               <phrase>"Select membership"</phrase>
+              <phrase>&quot;Select membership&quot;</phrase>
             </textobject>
           </inlinemediaobject>
       icon next to the <emphasis role="bold">User Or Group</emphasis> field.
@@ -4225,10 +4232,10 @@
          Click the 
      <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/grouppermission.png" format="PNG" width="6mm"/>
+              <imagedata width="6mm" fileref="images/grouppermission.png" format="PNG"/>
             </imageobject>
             <textobject>
-               <phrase>"Select everyone"</phrase>
+              <phrase>&quot;Select everyone&quot;</phrase>
             </textobject>
           </inlinemediaobject> icon next to the <emphasis role="bold">User Or Group</emphasis> field.
     </para>
@@ -4256,10 +4263,10 @@
      Click the 
      <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/editicon4.png" format="PNG" width="6mm"/>
+              <imagedata width="6mm" fileref="images/editicon4.png" format="PNG"/>
             </imageobject>
             <textobject>
-               <phrase>pencil</phrase>
+              <phrase>pencil</phrase>
             </textobject>
           </inlinemediaobject> icon.
     </para>
@@ -4287,10 +4294,10 @@
      Click the 
      <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/trashicon.png" format="PNG" width="5mm"/>
+              <imagedata width="5mm" fileref="images/trashicon.png" format="PNG"/>
             </imageobject>
             <textobject>
-               <phrase>trash can</phrase>
+              <phrase>trash can</phrase>
             </textobject>
           </inlinemediaobject> icon.
     </para>
@@ -4318,10 +4325,10 @@
      Click the 
      <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/viewnodepropertiesbutton.png" format="PNG" width="48mm"/>
+              <imagedata width="48mm" fileref="images/viewnodepropertiesbutton.png" format="PNG"/>
             </imageobject>
             <textobject>
-               <phrase>[ View Node Properties ]</phrase>
+              <phrase>[ View Node Properties ]</phrase>
             </textobject>
           </inlinemediaobject> button to show the <emphasis role="bold">Properties Management</emphasis> form:
     </para>
@@ -4337,10 +4344,10 @@
        </para>
               <mediaobject>
                 <imageobject role="html">
-                  <imagedata  align="center"  fileref="images/propertiesmanagement.png" format="PNG"/>
+                  <imagedata align="center" fileref="images/propertiesmanagement.png" format="PNG"/>
                 </imageobject>
                 <imageobject role="fo">
-                  <imagedata   align="center" fileref="images/propertiesmanagement.png" format="PNG" width="150mm"/>
+                  <imagedata width="150mm" align="center" fileref="images/propertiesmanagement.png" format="PNG"/>
                 </imageobject>
               </mediaobject>
               <para>
@@ -4356,10 +4363,10 @@
        </para>
               <mediaobject>
                 <imageobject role="html">
-                  <imagedata  align="center"  fileref="images/addnewproperties.png" format="PNG"/>
+                  <imagedata align="center" fileref="images/addnewproperties.png" format="PNG"/>
                 </imageobject>
                 <imageobject role="fo">
-                  <imagedata   align="center" fileref="images/addnewproperties.png" format="PNG" width="150mm"/>
+                  <imagedata width="150mm" align="center" fileref="images/addnewproperties.png" format="PNG"/>
                 </imageobject>
               </mediaobject>
               <para>
@@ -4395,10 +4402,10 @@
      To add multiple new values, click the 
      <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/addplusicon.png" format="PNG" width="8mm"/>
+              <imagedata width="8mm" fileref="images/addplusicon.png" format="PNG"/>
             </imageobject>
             <textobject>
-               <phrase>plus</phrase>
+              <phrase>plus</phrase>
             </textobject>
           </inlinemediaobject> icon and repeat the above steps.
     </para>
@@ -4406,10 +4413,10 @@
      To remove a value, click the
      <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/trashicon.png" format="PNG" width="5mm"/>
+              <imagedata width="5mm" fileref="images/trashicon.png" format="PNG"/>
             </imageobject>
             <textobject>
-               <phrase>trash can</phrase>
+              <phrase>trash can</phrase>
             </textobject>
           </inlinemediaobject>.
     </para>
@@ -4425,28 +4432,28 @@
   </para>
     <mediaobject>
       <imageobject role="html">
-        <imagedata  align="center"  fileref="images/newpropertiesmanagement.png" format="PNG"/>
+        <imagedata align="center" fileref="images/newpropertiesmanagement.png" format="PNG"/>
       </imageobject>
       <imageobject role="fo">
-        <imagedata   align="center" fileref="images/newpropertiesmanagement.png" format="PNG" width="150mm"/>
+        <imagedata width="150mm" align="center" fileref="images/newpropertiesmanagement.png" format="PNG"/>
       </imageobject>
     </mediaobject>
     <para>
    In this form you can edit a property by clicking the 
    <inlinemediaobject>
         <imageobject>
-          <imagedata fileref="images/editicon4.png" format="PNG" width="6mm"/>
+          <imagedata width="6mm" fileref="images/editicon4.png" format="PNG"/>
         </imageobject>
         <textobject>
-           <phrase>pencil</phrase>
+          <phrase>pencil</phrase>
         </textobject>
       </inlinemediaobject> icon or delete it by clicking the 
    <inlinemediaobject>
         <imageobject>
-          <imagedata fileref="images/trashicon.png" format="PNG" width="5mm"/>
+          <imagedata width="5mm" fileref="images/trashicon.png" format="PNG"/>
         </imageobject>
         <textobject>
-           <phrase>trash can</phrase>
+          <phrase>trash can</phrase>
         </textobject>
       </inlinemediaobject>.
   </para>
@@ -4463,19 +4470,19 @@
      Select a node then click the 
      <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/showhiderelations.png" format="PNG" width="34mm"/>
+              <imagedata width="34mm" fileref="images/showhiderelations.png" format="PNG"/>
             </imageobject>
             <textobject>
-               <phrase>[ Show/Hide Relations ]</phrase>
+              <phrase>[ Show/Hide Relations ]</phrase>
             </textobject>
           </inlinemediaobject> button. Documents related to the selected node will be shown in the sidebar.
     </para>
         <mediaobject>
           <imageobject role="html">
-            <imagedata align="center"  fileref="images/relationssidebar.png" format="PNG"/>
+            <imagedata align="center" fileref="images/relationssidebar.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata  align="center" fileref="images/relationssidebar.png" format="PNG" width="53mm"/>
+            <imagedata width="53mm" align="center" fileref="images/relationssidebar.png" format="PNG"/>
           </imageobject>
         </mediaobject>
         <para>
@@ -4483,10 +4490,10 @@
     </para>
         <mediaobject>
           <imageobject role="html">
-            <imagedata align="center"  fileref="images/norelateddocument.png" format="PNG"/>
+            <imagedata align="center" fileref="images/norelateddocument.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata  align="center" fileref="images/norelateddocument.png" format="PNG" width="53mm"/>
+            <imagedata width="53mm" align="center" fileref="images/norelateddocument.png" format="PNG"/>
           </imageobject>
         </mediaobject>
       </step>
@@ -4496,10 +4503,10 @@
      Click the 
      <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/showhiderelations.png" format="PNG" width="34mm"/>
+              <imagedata width="34mm" fileref="images/showhiderelations.png" format="PNG"/>
             </imageobject>
             <textobject>
-               <phrase>[ Show/Hide Relations ]</phrase>
+              <phrase>[ Show/Hide Relations ]</phrase>
             </textobject>
           </inlinemediaobject> button again to hide relations.
     </para>
@@ -4523,21 +4530,21 @@
      Click the 
      <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/votefordocument.png" format="PNG" width="44mm"/>
+              <imagedata width="44mm" fileref="images/votefordocument.png" format="PNG"/>
             </imageobject>
             <textobject>
-               <phrase>[ Vote for document ]</phrase>
+              <phrase>[ Vote for document ]</phrase>
             </textobject>
           </inlinemediaobject> button on the action bar.</para>
         <para>
      The <emphasis role="bold">Vote Document</emphasis> form will appear:
     </para>
-       <mediaobject>
+        <mediaobject>
           <imageobject role="html">
-            <imagedata align="center"  fileref="images/votedocumentform.png" format="PNG"/>
+            <imagedata align="center" fileref="images/votedocumentform.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata  align="center" fileref="images/votedocumentform.png" format="PNG" width="77mm"/>
+            <imagedata width="77mm" align="center" fileref="images/votedocumentform.png" format="PNG"/>
           </imageobject>
         </mediaobject>
       </step>
@@ -4545,12 +4552,12 @@
         <para>
      Rate the document by clicking on the appropriate star level for your vote:
     </para>
-       <mediaobject>
+        <mediaobject>
           <imageobject role="html">
-            <imagedata align="center"  fileref="images/votestars.png" format="PNG"/>
+            <imagedata align="center" fileref="images/votestars.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata  align="center" fileref="images/votestars.png" format="PNG" width="82mm"/>
+            <imagedata width="82mm" align="center" fileref="images/votestars.png" format="PNG"/>
           </imageobject>
         </mediaobject>
       </step>
@@ -4560,10 +4567,10 @@
   </para>
     <mediaobject>
       <imageobject role="html">
-        <imagedata align="center"  fileref="images/voteinfo.png" format="PNG"/>
+        <imagedata align="center" fileref="images/voteinfo.png" format="PNG"/>
       </imageobject>
       <imageobject role="fo">
-        <imagedata  align="center" fileref="images/voteinfo.png" format="PNG" width="112mm"/>
+        <imagedata width="112mm" align="center" fileref="images/voteinfo.png" format="PNG"/>
       </imageobject>
     </mediaobject>
   </section>
@@ -4585,10 +4592,10 @@
     </para>
         <mediaobject>
           <imageobject role="html">
-            <imagedata  align="center"  fileref="images/watchingdocumentform.png" format="PNG"/>
+            <imagedata align="center" fileref="images/watchingdocumentform.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata   align="center" fileref="images/watchingdocumentform.png" format="PNG" width="150mm"/>
+            <imagedata width="150mm" align="center" fileref="images/watchingdocumentform.png" format="PNG"/>
           </imageobject>
         </mediaobject>
       </step>
@@ -4596,10 +4603,10 @@
     <para>
        To stop watching a document, select the document and click the <inlinemediaobject>
         <imageobject>
-          <imagedata fileref="images/watchicon.png" format="PNG" width="8mm"/>
+          <imagedata width="8mm" fileref="images/watchicon.png" format="PNG"/>
         </imageobject>
         <textobject>
-           <phrase>eye</phrase>
+          <phrase>eye</phrase>
         </textobject>
       </inlinemediaobject> icon.
   </para>
