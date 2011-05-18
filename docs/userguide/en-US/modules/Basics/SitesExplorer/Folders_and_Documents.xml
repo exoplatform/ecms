@@ -1,11 +1,10 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<!-- This document was created with Syntext Serna Free. -->
-<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!-- This document was created with Syntext Serna Free. --><!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
 <!ENTITY % BOOK_ENTITIES SYSTEM "../../../User_Guide.ent">
 %BOOK_ENTITIES;
 ]>
 <section id="sect-User_Guide-Actions_on_Folders_and_Documents">
- <title>Actions on Folders and Documents</title>
+  <title>Actions on Folders and Documents</title>
   <para>
   In this section, we will present the actions on folders and document in the right-click menu (Add to favorites, copy, cut, paste, add Symlink, lock/unlock, view document, rename, download and allow edition and copy URL to clipboard) and other actions (drag and drop folders or documents).
  </para>
@@ -16,23 +15,23 @@
   The actions in the right-click menu for documents:
  </para>
   <mediaobject>
-     <imageobject role="html">
-        <imagedata fileref="images/documentactions.png" format="PNG" align="center"/>
-     </imageobject>
-     <imageobject role="fo">
-        <imagedata fileref="images/documentactions.png" format="PNG" align="center" width="68mm" />
-     </imageobject>
+    <imageobject role="html">
+      <imagedata align="center" fileref="images/documentactions.png" format="PNG"/>
+    </imageobject>
+    <imageobject role="fo">
+      <imagedata width="68mm" align="center" fileref="images/documentactions.png" format="PNG"/>
+    </imageobject>
   </mediaobject>
   <para>
   The actions in the right-click menu for folders:
  </para>
   <mediaobject>
-     <imageobject role="html">
-        <imagedata fileref="images/folderactions.png" format="PNG" align="center"/>
-     </imageobject>
-     <imageobject role="fo">
-        <imagedata fileref="images/folderactions.png" format="PNG" align="center" width="65mm" />
-     </imageobject>
+    <imageobject role="html">
+      <imagedata align="center" fileref="images/folderactions.png" format="PNG"/>
+    </imageobject>
+    <imageobject role="fo">
+      <imagedata width="65mm" align="center" fileref="images/folderactions.png" format="PNG"/>
+    </imageobject>
   </mediaobject>
   <section id="sect-User_Guide-Actions_on_Folders_and_Documents-Add_to_favorites">
     <title>Add to favorites</title>
@@ -51,10 +50,10 @@
      Click the 
      <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/addfavorite.png" format="PNG" width="27mm"/>
+              <imagedata width="27mm" fileref="images/addfavorite.png" format="PNG"/>
             </imageobject>
             <textobject>
-               <phrase>[ Add to favorite ]</phrase>
+              <phrase>[ Add to favorite ]</phrase>
             </textobject>
           </inlinemediaobject> entry in the drop-down menu.</para>
       </step>
@@ -112,10 +111,10 @@
     </para>
         <mediaobject>
           <imageobject role="html">
-            <imagedata align="center"  fileref="images/clipboarditem.png" format="PNG"/>
+            <imagedata align="center" fileref="images/clipboarditem.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata  align="center" fileref="images/clipboarditem.png" format="PNG" width="60mm"/>
+            <imagedata width="60mm" align="center" fileref="images/clipboarditem.png" format="PNG"/>
           </imageobject>
         </mediaobject>
       </step>
@@ -125,10 +124,10 @@
     </para>
         <mediaobject>
           <imageobject role="html">
-            <imagedata align="center"  fileref="images/clipboarditemlist.png" format="PNG"/>
+            <imagedata align="center" fileref="images/clipboarditemlist.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata  align="center" fileref="images/clipboarditemlist.png" format="PNG" width="61mm"/>
+            <imagedata width="61mm" align="center" fileref="images/clipboarditemlist.png" format="PNG"/>
           </imageobject>
         </mediaobject>
       </step>
@@ -137,10 +136,10 @@
      Click the 
      <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/clipboardicon.png" format="PNG" width="6mm"/>
+              <imagedata width="6mm" fileref="images/clipboardicon.png" format="PNG"/>
             </imageobject>
             <textobject>
-               <phrase>clipboard</phrase>
+              <phrase>clipboard</phrase>
             </textobject>
           </inlinemediaobject> icon in the clipboard window to paste the copied node into the selected destination node in step 3.
     </para>
@@ -150,10 +149,10 @@
      You can click the 
      <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/trashicon.png" format="PNG" width="5mm"/>
+              <imagedata width="5mm" fileref="images/trashicon.png" format="PNG"/>
             </imageobject>
             <textobject>
-               <phrase>trash can</phrase>
+              <phrase>trash can</phrase>
             </textobject>
           </inlinemediaobject> icon to delete a specific waiting statement.
     </para>
@@ -250,10 +249,10 @@
     </para>
         <mediaobject>
           <imageobject role="html">
-            <imagedata align="center"  fileref="images/clipboarditem.png" format="PNG"/>
+            <imagedata align="center" fileref="images/clipboarditem.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata  align="center" fileref="images/clipboarditem.png" format="PNG" width="60mm"/>
+            <imagedata width="60mm" align="center" fileref="images/clipboarditem.png" format="PNG"/>
           </imageobject>
         </mediaobject>
       </step>
@@ -263,10 +262,10 @@
     </para>
         <mediaobject>
           <imageobject role="html">
-            <imagedata align="center"  fileref="images/clipboarditemlist.png" format="PNG"/>
+            <imagedata align="center" fileref="images/clipboarditemlist.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata  align="center" fileref="images/clipboarditemlist.png" format="PNG" width="61mm"/>
+            <imagedata width="61mm" align="center" fileref="images/clipboarditemlist.png" format="PNG"/>
           </imageobject>
         </mediaobject>
       </step>
@@ -275,10 +274,10 @@
      Click the 
      <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/clipboardicon.png" format="PNG" width="6mm"/>
+              <imagedata width="6mm" fileref="images/clipboardicon.png" format="PNG"/>
             </imageobject>
             <textobject>
-               <phrase>clipboard</phrase>
+              <phrase>clipboard</phrase>
             </textobject>
           </inlinemediaobject> icon in the clipboard window to paste the copied node into the selected destination node in step 3.
     </para>
@@ -288,10 +287,10 @@
      You can click the 
      <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/trashicon.png" format="PNG" width="5mm"/>
+              <imagedata width="5mm" fileref="images/trashicon.png" format="PNG"/>
             </imageobject>
             <textobject>
-               <phrase>trash can</phrase>
+              <phrase>trash can</phrase>
             </textobject>
           </inlinemediaobject> icon to delete a specific waiting statement.
     </para>
@@ -338,7 +337,7 @@
   </section>
   <section id="sect-User_Guide-Actions_on_Folders_and_Documents-Delete_folders_and_documents">
     <title>Delete folders and documents</title>
-       <para>
+    <para>
       This function helps you remove folders/documents from theirs location easily. Do the same steps as <xref linkend="sect-User_Guide-Manage_Content_In_Content_Explorer-Delete_a_web_content"/>
      </para>
     <note>
@@ -359,7 +358,7 @@
   </section>
   <section id="sect-User_Guide-Actions_on_Folders_and_Documents-Drag_and_drop_folders_and_documents">
     <title>Drag and drop folders and documents</title>
-      <para>
+    <para>
       This function allows you to move folders/documents from a current location to another one by using the drag and drop feature.
      </para>
     <procedure>
@@ -369,19 +368,19 @@
      Move the cursor on a folder/document or folders/documents on the right panel (hold the <emphasis role="bold">Ctrl</emphasis> or <emphasis role="bold">Shift</emphasis> key to select multiple folders/documents at once) until the cursor changes to 
      <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/handcursor.png" format="PNG" width="9mm"/>
+              <imagedata width="9mm" fileref="images/handcursor.png" format="PNG"/>
             </imageobject>
             <textobject>
-               <phrase>a pointing hand</phrase>
+              <phrase>a pointing hand</phrase>
             </textobject>
           </inlinemediaobject>.
     </para>
         <mediaobject>
           <imageobject role="html">
-            <imagedata  align="center"  fileref="images/selectfolders.png" format="PNG"/>
+            <imagedata align="center" fileref="images/selectfolders.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata   align="center" fileref="images/selectfolders.png" format="PNG" width="150mm"/>
+            <imagedata width="150mm" align="center" fileref="images/selectfolders.png" format="PNG"/>
           </imageobject>
         </mediaobject>
       </step>
@@ -391,10 +390,10 @@
     </para>
         <mediaobject>
           <imageobject role="html">
-            <imagedata  align="center"  fileref="images/draggingfolders.png" format="PNG"/>
+            <imagedata align="center" fileref="images/draggingfolders.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata   align="center" fileref="images/draggingfolders.png" format="PNG" width="150mm"/>
+            <imagedata width="150mm" align="center" fileref="images/draggingfolders.png" format="PNG"/>
           </imageobject>
         </mediaobject>
       </step>
@@ -462,25 +461,16 @@
       <title/>
       <step>
         <para>
-     Right-click a folder/document that you want to rename then select <emphasis role="bold">Rename</emphasis> from the menu:
-    </para>
-        <mediaobject>
-          <imageobject role="html">
-            <imagedata align="center"  fileref="images/renameoption.png" format="PNG"/>
-          </imageobject>
-          <imageobject role="fo">
-            <imagedata  align="center" fileref="images/renameoption.png" format="PNG" width="62mm"/>
-          </imageobject>
-        </mediaobject>
+     Right-click a folder/document that you want to rename then select <emphasis role="bold">Rename</emphasis> from the menu.</para>
         <para>
      The rename form will appear:
     </para>
         <mediaobject>
           <imageobject role="html">
-            <imagedata  align="center"  fileref="images/renameform.png" format="PNG"/>
+            <imagedata align="center" fileref="images/renameform.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata   align="center" fileref="images/renameform.png" format="PNG" width="150mm"/>
+            <imagedata width="150mm" align="center" fileref="images/renameform.png" format="PNG"/>
           </imageobject>
         </mediaobject>
       </step>
@@ -581,6 +571,27 @@
       </step>
     </procedure>
   </section>
+  <section>
+    <title>View Information</title>
+    <para>eXo Content 2.2.0 supports you to view all information of a document, such as the name, the title, the creator, the publication state of the document and more.</para>
+    <para>Do the following to view the information of a document:</para>
+    <procedure>
+      <title>View Information</title>
+      <step>
+        <para>
+     Right-click a document that you want to view <emphasis role="bold">&gt;</emphasis> Select<emphasis role="bold"> View Information</emphasis> in the drop menu.</para>
+        <para>The <emphasis role="bold">View Information</emphasis> form appears like this:</para>
+	<mediaobject>
+          <imageobject role="html">
+            <imagedata align="center" fileref="images/view-information1.png" format="PNG"/>
+          </imageobject>
+          <imageobject role="fo">
+            <imagedata width="150mm" align="center" fileref="images/view-information1.png" format="PNG"/>
+          </imageobject>
+        </mediaobject>
+        </step>
+    </procedure>
+  </section>
   <section id="sect-User_Guide-Actions_on_Folders_and_Documents-View_Document">
     <title>View Document</title>
     <para>
@@ -599,12 +610,12 @@
      The document is opened in another browser:
     </para>
         <mediaobject>
-           <imageobject role="html">
-              <imagedata fileref="images/viewdocument.png" format="PNG" align="center"/>
-           </imageobject>
-           <imageobject role="fo">
-              <imagedata fileref="images/viewdocument.png" format="PNG" align="center" width="150mm"/>
-           </imageobject>
+          <imageobject role="html">
+            <imagedata align="center" fileref="images/viewdocument.png" format="PNG"/>
+          </imageobject>
+          <imageobject role="fo">
+            <imagedata width="150mm" align="center" fileref="images/viewdocument.png" format="PNG"/>
+          </imageobject>
         </mediaobject>
         <para>
      The URL of the document is like the following:
@@ -630,12 +641,12 @@
      Right-click a folder/document <emphasis role="bold">&gt; </emphasis>Select <emphasis role="bold">Copy URL to Clipboard</emphasis>.
     </para>
         <mediaobject>
-           <imageobject role="html">
-              <imagedata fileref="images/copyurl.png" format="PNG" align="center"/>
-           </imageobject>
-           <imageobject role="fo">
-              <imagedata fileref="images/copyurl.png" format="PNG" align="center" width="104mm" />
-           </imageobject>
+          <imageobject role="html">
+            <imagedata align="center" fileref="images/copyurl.png" format="PNG"/>
+          </imageobject>
+          <imageobject role="fo">
+            <imagedata width="104mm" align="center" fileref="images/copyurl.png" format="PNG"/>
+          </imageobject>
         </mediaobject>
       </step>
       <step>
@@ -643,23 +654,23 @@
      Paste the URL on another browser.
     </para>
         <mediaobject>
-           <imageobject role="html">
-              <imagedata fileref="images/webdavurl.png" format="PNG" align="center"/>
-           </imageobject>
-           <imageobject role="fo">
-              <imagedata fileref="images/webdavurl.png" format="PNG" align="center" width="150mm"/>
-           </imageobject>
+          <imageobject role="html">
+            <imagedata align="center" fileref="images/webdavurl.png" format="PNG"/>
+          </imageobject>
+          <imageobject role="fo">
+            <imagedata width="150mm" align="center" fileref="images/webdavurl.png" format="PNG"/>
+          </imageobject>
         </mediaobject>
         <para>
      You can view the folders of the node you copied its URL or download documents to your computer. You also view other nodes by clicking ... above the current folder to go up the root node . See the below illustration:
     </para>
         <mediaobject>
-           <imageobject role="html">
-              <imagedata fileref="images/webdavurl1.png" format="PNG" align="center"/>
-           </imageobject>
-           <imageobject role="fo">
-              <imagedata fileref="images/webdavurl1.png" format="PNG" align="center" width="150mm"/>
-           </imageobject>
+          <imageobject role="html">
+            <imagedata align="center" fileref="images/webdavurl1.png" format="PNG"/>
+          </imageobject>
+          <imageobject role="fo">
+            <imagedata width="150mm" align="center" fileref="images/webdavurl1.png" format="PNG"/>
+          </imageobject>
         </mediaobject>
       </step>
     </procedure>
@@ -676,19 +687,19 @@
      Click the 
      <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/cloudicon.png" format="PNG" width="8mm"/>
+              <imagedata width="8mm" fileref="images/cloudicon.png" format="PNG"/>
             </imageobject>
             <textobject>
-               <phrase>tag</phrase>
+              <phrase>tag</phrase>
             </textobject>
           </inlinemediaobject> icon at the upper-right corner of the tags panel.
     </para>
         <mediaobject>
           <imageobject role="html">
-            <imagedata align="center"  fileref="images/taglistiediticon.png" format="PNG"/>
+            <imagedata align="center" fileref="images/taglistiediticon.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata  align="center" fileref="images/taglistiediticon.png" format="PNG" width="65mm"/>
+            <imagedata width="65mm" align="center" fileref="images/taglistiediticon.png" format="PNG"/>
           </imageobject>
         </mediaobject>
         <para>
@@ -696,10 +707,10 @@
     </para>
         <mediaobject>
           <imageobject role="html">
-            <imagedata  align="center"  fileref="images/tageditform.png" format="PNG"/>
+            <imagedata align="center" fileref="images/tageditform.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata   align="center" fileref="images/tageditform.png" format="PNG" width="150mm"/>
+            <imagedata width="150mm" align="center" fileref="images/tageditform.png" format="PNG"/>
           </imageobject>
         </mediaobject>
       </step>
@@ -708,10 +719,10 @@
      Click the 
      <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/editicon4.png" format="PNG" width="6mm"/>
+              <imagedata width="6mm" fileref="images/editicon4.png" format="PNG"/>
             </imageobject>
             <textobject>
-               <phrase>pencil</phrase>
+              <phrase>pencil</phrase>
             </textobject>
           </inlinemediaobject> icon that corresponds to the tag you want to edit.
     </para>
@@ -722,10 +733,10 @@
     </para>
         <mediaobject>
           <imageobject role="html">
-            <imagedata  align="center"  fileref="images/tagform.png" format="PNG"/>
+            <imagedata align="center" fileref="images/tagform.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata   align="center" fileref="images/tagform.png" format="PNG" width="150mm"/>
+            <imagedata width="150mm" align="center" fileref="images/tagform.png" format="PNG"/>
           </imageobject>
         </mediaobject>
       </step>
@@ -747,10 +758,10 @@
      Click the 
      <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/trashicon.png" format="PNG" width="5mm"/>
+              <imagedata width="5mm" fileref="images/trashicon.png" format="PNG"/>
             </imageobject>
             <textobject>
-               <phrase>trash can</phrase>
+              <phrase>trash can</phrase>
             </textobject>
           </inlinemediaobject> icon.
 
@@ -760,10 +771,10 @@
     </para>
         <mediaobject>
           <imageobject role="html">
-            <imagedata align="center"  fileref="images/tagdelete.png" format="PNG"/>
+            <imagedata align="center" fileref="images/tagdelete.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata  align="center" fileref="images/tagdelete.png" format="PNG" width="105mm"/>
+            <imagedata width="105mm" align="center" fileref="images/tagdelete.png" format="PNG"/>
           </imageobject>
         </mediaobject>
         <para>
@@ -778,19 +789,19 @@
      Click the  
      <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/cloudicon.png" format="PNG" width="8mm"/>
+              <imagedata width="8mm" fileref="images/cloudicon.png" format="PNG"/>
             </imageobject>
             <textobject>
-               <phrase>tag</phrase>
+              <phrase>tag</phrase>
             </textobject>
           </inlinemediaobject> icon. You will see all existing tags. All existing tags are listed and classified by private or public tags.
     </para>
         <mediaobject>
           <imageobject role="html">
-            <imagedata align="center"  fileref="images/taglistiediticon.png" format="PNG"/>
+            <imagedata align="center" fileref="images/taglistiediticon.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
-            <imagedata  align="center" fileref="images/taglistiediticon.png" format="PNG" width="65mm"/>
+            <imagedata width="65mm" align="center" fileref="images/taglistiediticon.png" format="PNG"/>
           </imageobject>
         </mediaobject>
         <para>
