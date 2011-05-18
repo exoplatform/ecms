@@ -617,6 +617,99 @@
       </procedure>
     </section>
   </section>
+  <section id="sect-User_Guide-Contribute_Content-Inline_Editing">
+    <title>Inline Editing</title>
+    <para>The Inline Editing allows users to edit directly on the page without going to a separate one. 
+    Now, your interaction will become more intuitive as you can edit the text right at the shown same location. 
+    </para>
+    <para>
+    To do the inline editing, do as follows:
+    </para>
+    <procedure>
+    <step>
+    <para>Select the page you want to edit. For example, "acme".</para>
+      <mediaobject>
+                <imageobject role="html">
+                  <imagedata  align="center"  fileref="images/acme_inline_editing.png" format="PNG"/>
+                </imageobject>
+                <imageobject role="fo">
+                  <imagedata   align="center" fileref="images/acme_inline_editing.png" format="PNG" width="150mm"/>
+                </imageobject>
+              </mediaobject>
+    
+    </step>
+    <step>
+    <para>Select the <emphasis role="bold">Edit</emphasis> mode on the administration bar.
+    </para>
+      <mediaobject>
+                <imageobject role="html">
+                  <imagedata  align="center"  fileref="images/Edit_mode_Inline.png" format="PNG"/>
+                </imageobject>
+                <imageobject role="fo">
+                  <imagedata   align="center" fileref="images/Edit_mode_Inline.png" format="PNG" width="150mm"/>
+                </imageobject>
+              </mediaobject>
+    <para>You will be directed to the edit mode of your selected page.</para>
+    </step>
+    
+    <step>
+    <para>Hover your cursor over the area you want to edit.
+    </para>
+    <para>The editable area will be highlighted as below.</para>
+          <mediaobject>
+                <imageobject role="html">
+                  <imagedata  align="center"  fileref="images/Highlighted_Edit_Area.png" format="PNG"/>
+                </imageobject>
+                <imageobject role="fo">
+                  <imagedata   align="center" fileref="images/Highlighted_Edit_Area.png" format="PNG" width="150mm"/>
+                </imageobject>
+              </mediaobject>
+    </step>
+    <step>
+    <para>Double-click the area until the Edit area is shown as below.
+    </para>
+ 
+       <mediaobject>
+                <imageobject role="html">
+                  <imagedata  align="center"  fileref="images/edit_area_Inline.png" format="PNG"/>
+                </imageobject>
+                <imageobject role="fo">
+                  <imagedata   align="center" fileref="images/edit_area_Inline.png" format="PNG" width="150mm"/>
+                </imageobject>
+              </mediaobject>
+    <para> In case the hovered area is in the Rich Text format, the Edit area will be displayed with the CKEditor as below:</para>
+    
+               <mediaobject>
+                <imageobject role="html">
+                  <imagedata  align="center"  fileref="images/CKEditor_Inline.png" format="PNG"/>
+                </imageobject>
+                <imageobject role="fo">
+                  <imagedata   align="center" fileref="images/CKEditor_Inline.png" format="PNG" width="150mm"/>
+                </imageobject>
+              </mediaobject>
+    </step>
+    <step>
+    <para>Make changes in the Edit area, then click
+     <inlinemediaobject>
+                  <imageobject>
+                    <imagedata fileref="images/Accepticon.png" format="PNG" width="5mm"/>
+                  </imageobject>
+    
+     </inlinemediaobject>
+     to accept;</para>
+    <para> Or click 
+        <inlinemediaobject>
+                  <imageobject>
+                    <imagedata fileref="images/Cancelicon.png" format="PNG" width="5mm"/>
+                  </imageobject>
+    
+     </inlinemediaobject>
+     to discard changes.
+      </para>
+    </step>
+    </procedure>
+  </section>
+    
   <section id="sect-User_Guide-Contribute_Content-Publication_Process">
     <title>Publication Process</title>
     <para>
