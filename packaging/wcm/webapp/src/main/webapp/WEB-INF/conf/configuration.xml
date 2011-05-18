@@ -49,6 +49,7 @@
   <import>war:/conf/dms-extension/dms/dms-thumbnail-configuration.xml</import>
   <import>war:/conf/dms-extension/dms/dms-common-configuration.xml</import>
   <import>war:/conf/dms-extension/dms/dms-document-type-configuration.xml</import>  
+  <import>war:/conf/dms-extension/dms/dms-session-providers-configuration.xml</import>
   
   <import>war:/conf/wcm-extension/kernel/schedule-configuration.xml</import>
   <import>war:/conf/wcm-extension/jcr/jcr-configuration.xml</import>

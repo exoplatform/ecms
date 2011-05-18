@@ -193,10 +193,8 @@
       	%>
         <fieldset class="fieldsetPreferences" style="display: $advancedBlockDisplay;>
           <legend class="StyleLegend"><a style="text-align:center; color: #0000FF; text-decoration:underline;" href="<%=uicomponent.event("ShowAdvancedBlock", "false")%>" title="<%=_ctx.appRes("UICLVConfig.label.AdvancedBlock")%>"><%=_ctx.appRes("UICLVConfig.label.AdvancedBlock")%></a></legend>
+          <div class="FieldLabel"><%=uicomponent.getLabel(uicomponent.DYNAMIC_NAVIGATION_LABEL) %></div>
           <table class="UIFormGrid">
-          	<tr>
-          		<td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.DYNAMIC_NAVIGATION_LABEL) %></td>
-          	</tr>
           	<tr>
           		<td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.CONTEXTUAL_FOLDER_RADIOBOX_INPUT) %></td>
           		<td class="FieldComponent ContextualRadio" colspan="2">
@@ -259,6 +257,15 @@
                 </div>
                </div>
             </td>
+            </tr>
+          </table>
+          <div class="FieldLabel"><%=uicomponent.getLabel(uicomponent.CACHE_MANAGEMENT_LABEL)%></div>
+          <table class="UIFormGrid" style="width:100%;">
+            <tr>
+              <td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.CACHE_ENABLE_RADIOBOX_INPUT) %></td>
+              <td class="FieldComponent ContextualRadio" colspan="2">
+                <% uiform.renderField(uicomponent.CACHE_ENABLE_RADIOBOX_INPUT) %>
+              </td>
             </tr>
           </table>
         </fieldset>

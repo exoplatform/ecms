@@ -68,6 +68,8 @@ public class UISCVPreferences extends UIForm implements UISelectable{
   public static final String CONTEXTUAL_SELECT_RADIO_BOX  = "UISCVContextualRadioBox";
 
   public static final String PARAMETER_INPUT_BOX          = "UISCVParameterInputBox";
+  
+  public static final String CACHE_ENABLE_SELECT_RADIO_BOX = "UISCVCacheRadioBox";
 
   public final static String PRINT_PAGE_FORM_INPUT_SET    = "UISCVConfigPrintPageFormInputSet";
   public static final String PRINT_VIEW_PAGE_INPUT        = "UISCVPrintViewPageInput";
@@ -94,6 +96,7 @@ public class UISCVPreferences extends UIForm implements UISelectable{
   private UIFormCheckBoxInput<Boolean>  chkShowDate;
   private UIFormCheckBoxInput<Boolean>  chkShowOptionBar;
   private UIFormRadioBoxInput           contextOptionsRadioInputBox;
+  private UIFormRadioBoxInput           cacheOptionsRadioInputBox;
 
   public UISCVPreferences() throws Exception{
     portletPreferences = ((PortletRequestContext) WebuiRequestContext.getCurrentInstance()).getRequest().getPreferences();
@@ -149,7 +152,20 @@ public class UISCVPreferences extends UIForm implements UISelectable{
 
     String strParameterName = portletPreferences.getValue(UISingleContentViewerPortlet.PARAMETER, null);
     UIFormStringInput txtParameterName = new UIFormStringInput(PARAMETER_INPUT_BOX, strParameterName);
-
+    
+    /** CACHE MANAGEMENT */
+    boolean isCacheEnabled = Boolean.parseBoolean(portletPreferences.getValue(UISingleContentViewerPortlet.ENABLE_CACHE, 
+                                                                                    "false"));
+    
+    List<SelectItemOption<String>> cacheOptions = new ArrayList<SelectItemOption<String>>();
+    cacheOptions.add(new SelectItemOption<String>(ENABLE_STRING, ENABLE_STRING));
+    cacheOptions.add(new SelectItemOption<String>(DISABLE_STRING, DISABLE_STRING));
+    cacheOptionsRadioInputBox = new UIFormRadioBoxInput(CACHE_ENABLE_SELECT_RADIO_BOX, 
+                                                        CACHE_ENABLE_SELECT_RADIO_BOX, 
+                                                        cacheOptions);
+    cacheOptionsRadioInputBox.setValue(isCacheEnabled ? ENABLE_STRING : DISABLE_STRING);
+    
+    /** PRINT PAGE */
     String strPrintParameterName = portletPreferences.getValue(UISingleContentViewerPortlet.PRINT_PARAMETER, null);
     txtPrintPageParameter = new UIFormStringInput(PRINT_PAGE_PARAMETER_INPUT, strPrintParameterName);
 
@@ -171,7 +187,7 @@ public class UISCVPreferences extends UIForm implements UISelectable{
     addChild(txtParameterName);
     addChild(targetPageInputSet);
     addChild(txtPrintPageParameter);
-
+    addChild(cacheOptionsRadioInputBox);
   }
 
   /**
@@ -196,6 +212,8 @@ public class UISCVPreferences extends UIForm implements UISelectable{
       String strParameterName = uiSCVPref.getUIStringInput(PARAMETER_INPUT_BOX).getValue();
       String strPrintPageName = uiSCVPref.getUIStringInput(PRINT_VIEW_PAGE_INPUT).getValue();
       String strPrintParameterName  = uiSCVPref.getUIStringInput(PRINT_PAGE_PARAMETER_INPUT).getValue();
+      String strIsCacheEnabled = ((UIFormRadioBoxInput) uiSCVPref.getChildById(CACHE_ENABLE_SELECT_RADIO_BOX)).getValue();
+      strIsCacheEnabled = ENABLE_STRING.equals(strIsCacheEnabled) ? "true" : "false";
 
       if (!Boolean.parseBoolean(strIsContextEnable)) {
         if (uiSCVPref.getSelectedNodeUUID() != null) {
@@ -226,6 +244,7 @@ public class UISCVPreferences extends UIForm implements UISelectable{
       portletPreferences.setValue(UISingleContentViewerPortlet.PARAMETER, strParameterName);
       portletPreferences.setValue(UISingleContentViewerPortlet.PRINT_PAGE, strPrintPageName);
       portletPreferences.setValue(UISingleContentViewerPortlet.PRINT_PARAMETER, strPrintParameterName);
+      portletPreferences.setValue(UISingleContentViewerPortlet.ENABLE_CACHE, strIsCacheEnabled);
       portletPreferences.store();
       if (uiSCVPref.getInternalPreferencesMode()) {
         if (!Utils.isPortalEditMode()) {

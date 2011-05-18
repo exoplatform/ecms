@@ -27,7 +27,9 @@ import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.portal.webui.application.UIPortlet;
 import org.exoplatform.resolver.ResourceResolver;
 import org.exoplatform.services.wcm.core.NodeLocation;
+import org.exoplatform.services.wcm.publication.WCMComposer;
 import org.exoplatform.wcm.webui.Utils;
+import org.exoplatform.wcm.webui.scv.UISingleContentViewerPortlet;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.lifecycle.Lifecycle;
@@ -54,6 +56,9 @@ public class UICLVManualMode extends UICLVContainer {
   @SuppressWarnings("unchecked")
   public void init() throws Exception {
     PortletPreferences portletPreferences = Utils.getAllPortletPreferences();
+    String sharedCache = portletPreferences.getValue(UISingleContentViewerPortlet.ENABLE_CACHE, "true");
+    sharedCache = "true".equals(sharedCache) ? WCMComposer.VISIBILITY_PUBLIC:WCMComposer.VISIBILITY_USER;    
+
     String[] listContent = portletPreferences.getValue(UICLVPortlet.PREFERENCE_ITEM_PATH, null).split(";");
     int itemsPerPage = Integer.parseInt(portletPreferences.getValue(UICLVPortlet.PREFERENCE_ITEMS_PER_PAGE, null));
     List<Node> nodes = new ArrayList<Node>();
@@ -61,7 +66,10 @@ public class UICLVManualMode extends UICLVContainer {
       for (String itemPath : listContent) {
         NodeLocation nodeLocation = NodeLocation.getNodeLocationByExpression(itemPath);
         Node viewNode = Utils.getViewableNodeByComposer(nodeLocation.getRepository(),
-            Text.escapeIllegalJcrChars(nodeLocation.getWorkspace()), Text.escapeIllegalJcrChars(nodeLocation.getPath()));
+                                                        Text.escapeIllegalJcrChars(nodeLocation.getWorkspace()), 
+                                                        Text.escapeIllegalJcrChars(nodeLocation.getPath()),
+                                                        null,
+                                                        sharedCache);
         if (viewNode != null) nodes.add(viewNode);
       }
     }

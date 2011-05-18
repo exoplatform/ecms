@@ -61,6 +61,8 @@
       <ContentPath>Content path</ContentPath>
       <Up>Up</Up>
       <Down>Down</Down>
+      <UICLVConfigCacheManagementLabel>Cache Management</UICLVConfigCacheManagementLabel>
+	  <UICLVConfigCacheEnableRadioBoxInput>Share contents between users</UICLVConfigCacheEnableRadioBoxInput>      
     </label>
     <help>
     	<ModeSelectionHelp>Two modes are available to show contents. "By folder" will take all the contents available in the folder/category you choose ; "By Contents" lets you manually choose the contents you want to show</ModeSelectionHelp>
@@ -169,4 +171,10 @@
     <published>Published</published>
   </PublicationStates>  
   
+  <UICLVConfigCacheEnableRadioBoxInput>
+  	<label>
+	  <ENABLE>Enabled</ENABLE>
+	  <DISABLE>Disabled</DISABLE>
+  	</label>
+  </UICLVConfigCacheEnableRadioBoxInput>  
 </bundle>

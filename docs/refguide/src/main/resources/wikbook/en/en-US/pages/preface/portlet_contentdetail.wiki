@@ -12,6 +12,7 @@ h1. Available preferences  {anchor:id=CONTref.Portlets.ContentDetail.AvailablePr
 | *ParameterName* | {{String}} | {{content-id}} | Define which parameter will be used to get the content's path. |
 | *ShowVote* | {{Boolean}} | {{false}} | Show the result of voting for the displayed content. |
 | *ShowComments* | {{Boolean}} | {{false}} | Show the existing comments of this content (if any). |
+| *sharedCache* | {{Boolean}} | {{true}} | Define if the portlet will cache the displayed contents. |
 
 h1. Sample configuration {anchor:id=CONTref.Portlets.ContentDetail.SampleConfiguration}
 
@@ -65,6 +66,11 @@ h1. Sample configuration {anchor:id=CONTref.Portlets.ContentDetail.SampleConfigu
   <preference>
     <name>ParameterName</name>
     <value>content-id</value>
+    <read-only>false</read-only>
+  </preference>
+  <preference>
+    <name>sharedCache</name>
+    <value>true</value>
     <read-only>false</read-only>
   </preference>
 </portlet-preferences>

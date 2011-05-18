@@ -40,6 +40,7 @@ import javax.portlet.filter.RenderFilter;
 
 import org.exoplatform.container.PortalContainer;
 import org.exoplatform.portal.application.PortalRequestContext;
+import org.exoplatform.portal.webui.util.Util;
 
 /**
  * @author <a href="mailto:julien.viet@exoplatform.com">Julien Viet</a>
@@ -48,6 +49,13 @@ import org.exoplatform.portal.application.PortalRequestContext;
 public class PortletCacheFilter implements PortletFilter, ActionFilter, RenderFilter, EventFilter
 {
 
+  private static final String EXO_CACHE = "exo.cache";
+  private static final String TRUE = "true";
+  private static final String FALSE = "false";
+  private static final String SHARED_CACHE = "sharedCache";
+  private static final String TURN_ON_QUICK_EDIT = "turnOnQuickEdit";
+  private static final String NO_CACHE = "nocache";
+  
   public PortletCacheFilter()
   {
   }
@@ -72,14 +80,15 @@ public class PortletCacheFilter implements PortletFilter, ActionFilter, RenderFi
 
   public void doFilter(RenderRequest req, RenderResponse resp, FilterChain chain) throws IOException, PortletException
   {
-    if (req.getRemoteUser() == null)
-    {
-      PortalRequestContext ctx = (PortalRequestContext)PortalRequestContext.getCurrentInstance();
+    String exoCacheUsageRequestParam = Util.getPortalRequestContext().getRequestParameter(EXO_CACHE);
+    PortalRequestContext ctx = (PortalRequestContext)PortalRequestContext.getCurrentInstance();
+    Boolean quickEdit = (Boolean) ctx.getRequest().getSession().getAttribute(TURN_ON_QUICK_EDIT);
+    if (quickEdit==null) quickEdit=false;
+    Boolean sharedCache = TRUE.equals(req.getPreferences().getValue(SHARED_CACHE, FALSE));
+    if (!NO_CACHE.equals(exoCacheUsageRequestParam) && (req.getRemoteUser() == null || (!quickEdit && sharedCache))) {
       Map<String, String[]> query = (Map<String, String[]>)ctx.getRequest().getParameterMap();
-
       //
       Locale locale = ctx.getLocale();
-
       //
       WindowKey key = new WindowKey(
           req.getWindowID(),

@@ -167,6 +167,12 @@ public class UICLVConfig extends UIForm  implements UISelectable {
 
   /** The Constant PAGINATOR_TEMPLATE_CATEGORY. */
   public final static String PAGINATOR_TEMPLATE_CATEGORY             = "paginators";
+  
+  /** The Constant CACHE_ENABLE_RADIOBOX_INPUT */
+  public static final String CACHE_ENABLE_RADIOBOX_INPUT             = "UICLVConfigCacheEnableRadioBoxInput";
+  
+  /** The Constant CACHE_MANAGEMENT_LABEL */
+  public static final String CACHE_MANAGEMENT_LABEL                  = "UICLVConfigCacheManagementLabel";
 
   /**
    * TODO: Need to improve, we should get portlet's name by API, not hardcode
@@ -188,6 +194,10 @@ public class UICLVConfig extends UIForm  implements UISelectable {
   public final static String CATEGORIES_CONTENT_TYPE                 = "CategoryContents";
 
   public final static String CATOGORIES_NAVIGATION_TYPE              = "CategoryNavigation";
+  
+  /** The constant values for cache */
+  public static final String ENABLE_CACHE                            = "ENABLE";
+  public static final String DISABLE_CACHE                           = "DISABLE";
 
   /** The popup id. */
   private String popupId;
@@ -279,9 +289,11 @@ public class UICLVConfig extends UIForm  implements UISelectable {
     String itemsPerPage = portletPreferences.getValue(UICLVPortlet.PREFERENCE_ITEMS_PER_PAGE, null);
 
     String contextualFolderMode = portletPreferences.getValue(UICLVPortlet.PREFERENCE_CONTEXTUAL_FOLDER, null);
+    
     String showClvBy = portletPreferences.getValue(UICLVPortlet.PREFERENCE_SHOW_CLV_BY, null);
     String targetPage = portletPreferences.getValue(UICLVPortlet.PREFERENCE_TARGET_PAGE, null);
     String showScvWith = portletPreferences.getValue(UICLVPortlet.PREFERENCE_SHOW_SCV_WITH, null);
+    String isCacheEnabled = portletPreferences.getValue(UICLVPortlet.PREFERENCE_CACHE_ENABLED, null);
 
     boolean showAutomaticDetection = Boolean.parseBoolean(portletPreferences.getValue(UICLVPortlet.PREFERENCE_AUTOMATIC_DETECTION,
                                                                                       null));
@@ -456,7 +468,16 @@ public class UICLVConfig extends UIForm  implements UISelectable {
     basePathInput.setEditable(false);
     targetPageInputSet.setActionInfo(TARGET_PAGE_FORM_STRING_INPUT, new String[] {"SelectTargetPage"}) ;
     targetPageInputSet.addUIFormInput(basePathInput);
-
+    
+    /** CACHE MODE */
+    List<SelectItemOption<String>> cacheOptions = new ArrayList<SelectItemOption<String>>();
+    cacheOptions.add(new SelectItemOption<String>(ENABLE_CACHE, ENABLE_CACHE));
+    cacheOptions.add(new SelectItemOption<String>(DISABLE_CACHE, DISABLE_CACHE));
+    UIFormRadioBoxInput cacheEnableRadioBoxInput = new UIFormRadioBoxInput(CACHE_ENABLE_RADIOBOX_INPUT,
+                                                                           CACHE_ENABLE_RADIOBOX_INPUT,
+                                                                           cacheOptions);
+    cacheEnableRadioBoxInput.setValue("true".equals(isCacheEnabled)? ENABLE_CACHE : DISABLE_CACHE);
+    
     /** ALLOW DYNAMIC URL */
     UIFormStringInput showScvWithInput = new UIFormStringInput(SHOW_SCV_WITH_STRING_INPUT,
                                                                SHOW_SCV_WITH_STRING_INPUT,
@@ -504,6 +525,7 @@ public class UICLVConfig extends UIForm  implements UISelectable {
     addChild(showClvByInput);
     addChild(targetPageInputSet);
     addChild(showScvWithInput);
+    addChild(cacheEnableRadioBoxInput);
 
     if (contextualFolderMode != null && contextualFolderMode.equals(UICLVPortlet.PREFERENCE_CONTEXTUAL_FOLDER_ENABLE))
       isShowAdvancedBlock_ = true;
@@ -711,6 +733,9 @@ public class UICLVConfig extends UIForm  implements UISelectable {
       if (showScvWith == null || showScvWith.length() == 0)
         showScvWith = UICLVPortlet.DEFAULT_SHOW_SCV_WITH;
 
+      String cacheEnabled = ((UIFormRadioBoxInput) clvConfig.
+          getChildById(UICLVConfig.CACHE_ENABLE_RADIOBOX_INPUT)).getValue();
+      
       /** SET VALUES TO PREFERENCES */
       PortletRequestContext portletRequestContext = (PortletRequestContext) event.getRequestContext();
       PortletPreferences portletPreferences = portletRequestContext.getRequest().getPreferences();
@@ -744,6 +769,7 @@ public class UICLVConfig extends UIForm  implements UISelectable {
       portletPreferences.setValue(UICLVPortlet.PREFERENCE_SHOW_CLV_BY, showClvBy);
       portletPreferences.setValue(UICLVPortlet.PREFERENCE_TARGET_PAGE, targetPage);
       portletPreferences.setValue(UICLVPortlet.PREFERENCE_SHOW_SCV_WITH, showScvWith);
+      portletPreferences.setValue(UICLVPortlet.PREFERENCE_CACHE_ENABLED, ENABLE_CACHE.equals(cacheEnabled)?"true":"false");
       portletPreferences.store();
 
       UICLVPortlet portlet = clvConfig.getAncestorOfType(UICLVPortlet.class);

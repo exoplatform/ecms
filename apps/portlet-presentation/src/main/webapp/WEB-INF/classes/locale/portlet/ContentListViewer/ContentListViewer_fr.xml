@@ -132,8 +132,10 @@
 	  <UICLVConfigContextualFolderRadioBoxInput>Répertoire contextuel</UICLVConfigContextualFolderRadioBoxInput> 	
 	  <UICLVConfigShowCLVByStringInput>par</UICLVConfigShowCLVByStringInput>
 	  <UICLVConfigshowSCVWithStringInput>avec</UICLVConfigshowSCVWithStringInput>
-    <UICLVConfigTargetPageFormInputSet>Afficher dans la page</UICLVConfigTargetPageFormInputSet>
-    <content-not-found>Le contenu n'a pas été trouvé</content-not-found>
+   	  <UICLVConfigTargetPageFormInputSet>Afficher dans la page</UICLVConfigTargetPageFormInputSet>
+      <content-not-found>Le contenu n'a pas été trouvé</content-not-found>
+      <UICLVConfigCacheManagementLabel>Gestion de cache</UICLVConfigCacheManagementLabel>
+      <UICLVConfigCacheEnableRadioBoxInput>Contenus partagés entre utilisateurs</UICLVConfigCacheEnableRadioBoxInput>
     </label>
     <help>
       <ModeSelectionHelp>Deux modes sont disponibles pour affichers les contenus. "Par répertoire" affichage tous les contenus présents dans le répertoire (ou catégorie) sélectionné ; "Par contenus" vous permet de choisir manuellement les contenus à afficher.</ModeSelectionHelp>
@@ -177,5 +179,11 @@
     <staged>Prêt à publier</staged>
     <published>Publié</published>
   </PublicationStates>
-
+  
+  <UICLVConfigCacheEnableRadioBoxInput>
+  	<label>
+	  <ENABLE>Activé</ENABLE>
+	  <DISABLE>Désactivé</DISABLE>
+  	</label>
+  </UICLVConfigCacheEnableRadioBoxInput>
 </bundle>

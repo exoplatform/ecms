@@ -212,7 +212,7 @@ public class Utils {
                                                String nodeIdentifier) {
     return getViewableNodeByComposer(repository, workspace, nodeIdentifier, null);
   }
-
+  
   /**
    * Gets the viewable node by WCMComposer (depends on site mode)
    *
@@ -231,6 +231,30 @@ public class Utils {
                                                String workspace,
                                                String nodeIdentifier,
                                                String version) {
+    return getViewableNodeByComposer(repository, workspace, nodeIdentifier, version, WCMComposer.VISIBILITY_USER);
+  }  
+
+  /**
+   * Gets the viewable node by WCMComposer (depends on site mode)
+   *
+   * @param repository the repository's name
+   * @param workspace the workspace's name
+   * @param nodeIdentifier the node's path or node's UUID
+   * @param version the base version (e.g. <code>WCMComposer.BASE_VERSION</code>
+   *          )
+   * @param cacheVisibility the visibility of cache
+   *                    
+   * @return the viewable node. Return <code>null</code> if
+   *         <code>nodeIdentifier</code> is invalid
+   * @see #getViewableNodeByComposer(String repository, String workspace, String
+   *      nodeIdentifier) getViewableNodeByComposer()
+   * @see WCMComposer
+   */
+  public static Node getViewableNodeByComposer(String repository,
+                                               String workspace,
+                                               String nodeIdentifier,
+                                               String version,
+                                               String cacheVisibility) {
     try {
       HashMap<String, String> filters = new HashMap<String, String>();
       String filterLang = Util.getPortalRequestContext().getLocale().getLanguage();
@@ -245,6 +269,7 @@ public class Utils {
       filters.put(WCMComposer.PORTLET_MODE, portletMode.toString());
       if (version != null)
         filters.put(WCMComposer.FILTER_VERSION, version);
+      filters.put(WCMComposer.FILTER_VISIBILITY, cacheVisibility);
       return WCMCoreUtils.getService(WCMComposer.class)
                          .getContent(repository,
                                      workspace,
@@ -618,15 +643,36 @@ public class Utils {
                                  String strWorkspace,
                                  String strIdentifier,
                                  boolean isWCMBase) throws RepositoryException {
+    return getRealNode(strRepository, strWorkspace, strIdentifier, isWCMBase, WCMComposer.VISIBILITY_USER);
+  }
+  
+  /**
+   * GetRealNode
+   *
+   * @param strRepository
+   * @param strWorkspace
+   * @param strIdentifier
+   * @param cacheVisibility the visibility of cache
+   *  
+   * @return the required node/ the target of a symlink node / null if node was
+   *         in trash.
+   * @throws RepositoryException
+   */
+  public static Node getRealNode(String strRepository,
+                                 String strWorkspace,
+                                 String strIdentifier,
+                                 boolean isWCMBase,
+                                 String cacheVisibility) throws RepositoryException {
     LinkManager linkManager = WCMCoreUtils.getService(LinkManager.class);
     Node selectedNode;
     if (isWCMBase) {
       selectedNode = getViewableNodeByComposer(strRepository,
                                                strWorkspace,
                                                strIdentifier,
-                                               WCMComposer.BASE_VERSION);
+                                               WCMComposer.BASE_VERSION,
+                                               cacheVisibility);
     } else {
-      selectedNode = getViewableNodeByComposer(strRepository, strWorkspace, strIdentifier);
+      selectedNode = getViewableNodeByComposer(strRepository, strWorkspace, strIdentifier, null, cacheVisibility);
     }
     if (selectedNode != null) {
       if (!org.exoplatform.ecm.webui.utils.Utils.isInTrash(selectedNode)) {

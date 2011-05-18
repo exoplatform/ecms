@@ -65,7 +65,9 @@
    	  <PrintSettingBlock>Tùy chọn xem bản in</PrintSettingBlock>
    	  <UISCVPrintPageParameter>Tham số URL</UISCVPrintPageParameter>
    	  <UISCVConfigPrintPageFormInputSet>Xem bản in tại</UISCVConfigPrintPageFormInputSet>
-						<LockStatus>Khóa</LockStatus>	
+	  <LockStatus>Khóa</LockStatus>
+	  <CacheManagement>Quản lý cache</CacheManagement>
+	  <UISCVCacheRadioBox>Chia sẻ nội dung giữa người sử dụng</UISCVCacheRadioBox>
 	</label>
     <help>
    	  <ContentPathBlock>Vui lòng lựa chọn dữ liệu nguồn để hiển thị</ContentPathBlock>
@@ -87,4 +89,11 @@
   		<SelectTargetPage>Xem bản in tại</SelectTargetPage>
   	</title>  	
   </UISCVConfigPrintPageFormInputSet>
+  
+  <UISCVCacheRadioBox>
+  	<label>
+	  <Enable>Cho phép</Enable>
+	  <Disable>Vô hiệu</Disable>
+  	</label>
+  </UISCVCacheRadioBox>
 </bundle>

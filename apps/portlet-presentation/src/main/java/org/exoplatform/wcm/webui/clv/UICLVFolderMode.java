@@ -102,11 +102,13 @@ public class UICLVFolderMode extends UICLVContainer {
     filters.put(WCMComposer.FILTER_MODE, Utils.getCurrentMode());
     String orderBy = preferences.getValue(UICLVPortlet.PREFERENCE_ORDER_BY, null);
     String orderType = preferences.getValue(UICLVPortlet.PREFERENCE_ORDER_TYPE, null);
+    String sharedCache = preferences.getValue(UICLVPortlet.PREFERENCE_SHARED_CACHE, "true");
     if (orderType == null) orderType = "DESC";
     if (orderBy == null) orderBy = "exo:title";
     filters.put(WCMComposer.FILTER_ORDER_BY, orderBy);
     filters.put(WCMComposer.FILTER_ORDER_TYPE, orderType);
     filters.put(WCMComposer.FILTER_LANGUAGE, Util.getPortalRequestContext().getLocale().getLanguage());
+    filters.put(WCMComposer.FILTER_VISIBILITY, ("true".equals(sharedCache))?WCMComposer.VISIBILITY_PUBLIC:WCMComposer.VISIBILITY_USER);
 
     String folderPath = this.getAncestorOfType(UICLVPortlet.class).getFolderPath();
 

@@ -93,6 +93,9 @@ public class UISingleContentViewerPortlet extends UIPortletApplication {
   public final static String PREFERENCE_SHOW_SCV_WITH               = "showScvWith";
 
   public static final String DEFAULT_SHOW_SCV_WITH                  = "content-id";
+  
+  /** The Cache */
+  public static final String ENABLE_CACHE = "sharedCache";
 
   private PortletMode mode = null;//PortletMode.VIEW ;
 
@@ -153,8 +156,11 @@ public class UISingleContentViewerPortlet extends UIPortletApplication {
   public void processRender(WebuiApplication app, WebuiRequestContext context) throws Exception {
     PortletRequestContext pContext = (PortletRequestContext) context ;
     PortletMode newMode = pContext.getApplicationMode() ;
+    PortletPreferences preferences = pContext.getRequest().getPreferences();
+    Boolean sharedCache = "true".equals(preferences.getValue(ENABLE_CACHE, "true"));
 
-    if (context.getRemoteUser()==null) {
+    if (context.getRemoteUser()==null ||
+          (!"Edit".equals(Utils.getCurrentMode()) && sharedCache)) {
       WCMService wcmService = getApplicationComponent(WCMService.class);
       pContext.getResponse().setProperty(MimeResponse.EXPIRATION_CACHE, ""+wcmService.getPortletExpirationCache());
       if (log.isTraceEnabled())
@@ -174,7 +180,7 @@ public class UISingleContentViewerPortlet extends UIPortletApplication {
         uiPresentation.getChild(UIPresentation.class).setTemplatePath(templateService.getTemplatePath(nodeView, false));
       }
     }
-
+    
     if (uiPresentation!=null && uiPresentation.isContextual() && nodeView!=null) {
       RenderResponse response = context.getResponse();
       Element title = response.createElement("title");

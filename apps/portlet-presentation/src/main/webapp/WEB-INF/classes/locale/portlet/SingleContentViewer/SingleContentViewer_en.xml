@@ -66,7 +66,9 @@
    	  <PrintSettingBlock>Print settings</PrintSettingBlock>
    	  <UISCVPrintPageParameter>with</UISCVPrintPageParameter>
    	  <UISCVConfigPrintPageFormInputSet>Show in page</UISCVConfigPrintPageFormInputSet>
-						<LockStatus>Lock</LockStatus>						
+	  <LockStatus>Lock</LockStatus>
+	  <CacheManagement>Cache Management</CacheManagement>
+	  <UISCVCacheRadioBox>Share contents between users</UISCVCacheRadioBox>						
     </label>
     <help>
    	  <ContentPathBlock>Select the content you want to show. This default content will be replaced dynamically if you activate the Dynamic navigation (Advanced mode, see below).</ContentPathBlock>
@@ -101,5 +103,12 @@
     <staged>Staged</staged>
     <published>Published</published>
   </PublicationStates>
+  
+  <UISCVCacheRadioBox>
+  	<label>
+	  <Enable>Enabled</Enable>
+	  <Disable>Disabled</Disable>
+  	</label>
+  </UISCVCacheRadioBox>
     
 </bundle>

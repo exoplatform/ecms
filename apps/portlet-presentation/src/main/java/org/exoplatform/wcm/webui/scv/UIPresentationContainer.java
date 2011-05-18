@@ -199,7 +199,9 @@ public class UIPresentationContainer extends UIContainer{
     String repository = portletPreferences.getValue(UISingleContentViewerPortlet.REPOSITORY, null);
     String workspace = portletPreferences.getValue(UISingleContentViewerPortlet.WORKSPACE, null);
     String nodeIdentifier = portletPreferences.getValue(UISingleContentViewerPortlet.IDENTIFIER, null);
-    viewNode = Utils.getRealNode(repository, workspace, nodeIdentifier, false);
+    String sharedCache = portletPreferences.getValue(UISingleContentViewerPortlet.ENABLE_CACHE, "true");
+    sharedCache = "true".equals(sharedCache) ? WCMComposer.VISIBILITY_PUBLIC:WCMComposer.VISIBILITY_USER;    
+    viewNode = Utils.getRealNode(repository, workspace, nodeIdentifier, false, sharedCache);
     if (viewNode!=null) {
         boolean isDocumentType = false;
         if (viewNode.isNodeType("nt:frozenNode")) isDocumentType = true;
@@ -235,7 +237,11 @@ public class UIPresentationContainer extends UIContainer{
    * @throws Exception the exception
    */
   public Node getParameterizedNode() throws Exception {
-
+    PortletRequestContext portletRequestContext = WebuiRequestContext.getCurrentInstance();
+    PortletPreferences preferences = portletRequestContext.getRequest().getPreferences();
+    String sharedCache = preferences.getValue(UISingleContentViewerPortlet.ENABLE_CACHE, "false");
+    sharedCache = "true".equals(sharedCache) ? WCMComposer.VISIBILITY_PUBLIC:WCMComposer.VISIBILITY_USER;
+    
     PortalRequestContext preq = Util.getPortalRequestContext();
     if (!preq.useAjax()) {
       contentParameter = getRequestParameters();
@@ -243,7 +249,7 @@ public class UIPresentationContainer extends UIContainer{
 
     if (contentParameter == null) return null;
     UIPresentation presentation = getChild(UIPresentation.class);
-    Node nodeView = Utils.getViewableNodeByComposer(null, null, contentParameter);
+    Node nodeView = Utils.getViewableNodeByComposer(null, null, contentParameter, null, sharedCache);
     if (nodeView!=null) {
       boolean isDocumentType = false;
       if (nodeView.isNodeType("nt:frozenNode")) isDocumentType = true;
