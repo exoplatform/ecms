@@ -126,9 +126,11 @@ public class UIViewFormTabPane extends UIFormTabPane {
       uiViewTabPane.uiViewForm.setRendered(false);
       uiViewTabPane.setSelectedTab(uiViewTabPane.uiTabForm.getId());
       ((UIFormStringInput) uiViewTabPane.uiTabForm.
-          getChildById(UITabForm.FIELD_NAME)).addValidator(MandatoryValidator.class);
+          getChildById(UITabForm.FIELD_NAME)).addValidator(MandatoryValidator.class);      
       uiViewTabPane.uiViewForm.setViewName(((UIFormStringInput)
           uiViewTabPane.uiViewForm.getChildById(UIViewForm.FIELD_NAME)).getValue());
+      uiViewTabPane.uiViewForm.setPermission(((UIFormStringInput)
+          uiViewTabPane.uiViewForm.getChildById(UIViewForm.FIELD_PERMISSION)).getValue());
       UIViewContainer uiViewContainer = uiViewTabPane.getAncestorOfType(UIViewContainer.class);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiViewContainer);
     }
@@ -145,6 +147,7 @@ public class UIViewFormTabPane extends UIFormTabPane {
       }
       ((UIFormStringInput)uiTabForm.getChildById(UITabForm.FIELD_NAME)).getValidators().clear();
       ((UIFormStringInput)uiViewForm.getChildById(UIViewForm.FIELD_NAME)).setValue(uiViewForm.getViewName());
+      ((UIFormStringInput)uiViewForm.getChildById(UIViewForm.FIELD_PERMISSION)).setValue(uiViewForm.getPermission());
       uiTabForm.setRendered(false);
       uiViewForm.setRendered(true);
       uiViewTabPane.setSelectedTab(uiViewForm.getId());
@@ -176,6 +179,8 @@ public class UIViewFormTabPane extends UIFormTabPane {
       ((UIFormStringInput)uiTabForm.getChildById(UITabForm.FIELD_NAME)).addValidator(MandatoryValidator.class);
       uiViewTabPane.uiViewForm.setViewName(((UIFormStringInput) uiViewTabPane.
           uiViewForm.getChildById(UIViewForm.FIELD_NAME)).getValue());
+      uiViewTabPane.uiViewForm.setPermission(((UIFormStringInput) uiViewTabPane.
+          uiViewForm.getChildById(UIViewForm.FIELD_PERMISSION)).getValue());
       uiViewTabPane.setSelectedTab(uiTabForm.getId()) ;
       uiViewTabPane.uiViewForm.editTab(tabName);
       uiViewTabPane.uiViewForm.setRendered(false);

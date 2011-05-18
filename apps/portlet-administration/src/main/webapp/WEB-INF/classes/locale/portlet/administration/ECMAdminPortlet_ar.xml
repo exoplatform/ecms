@@ -921,6 +921,7 @@
     </label>
     <title>
       <AddPermission>إضافة صلاحية</AddPermission>
+      <RemovePermission>Remove Permission</RemovePermission>
       <AddIcon>إضافة ايقونة</AddIcon>
       <AddPath>إضافة مسار</AddPath>
     </title>
@@ -1037,12 +1038,12 @@
     <title>
      إضافة/تغيير مشهد 
       <AddPermission>إضافة صلاحية</AddPermission>
+      <RemovePermission>Remove Permission</RemovePermission>
     </title>
     <msg>
       <view-name-invalid>يجب أن تضع الإسم</view-name-invalid>
       <fileName-invalid> هناك بعض الأحرف غير متاحة في هذا الإسم!</fileName-invalid>
-      <permission-not-empty>يجب أن تختار الصلاحية</permission-not-empty>
-      <permission-path-invalid>إذن غير صالح</permission-path-invalid>
+      <permission-not-empty>يجب أن تختار الصلاحية</permission-not-empty>      
       <mustbe-add-tab>يجب أن تضيف تبويبة</mustbe-add-tab>
       <view-exist>إسم المشهد موجود.</view-exist>
     </msg>
@@ -1934,6 +1935,16 @@
       <empty-input> أدخل قيمة في المجال '{0}' أرجوك.</empty-input>
     </msg>
   </EmptyFieldValidator>
+  <!--
+  ###################################################################################
+  # org.exoplatform.ecm.jcr.PermissionValidator																			  #
+  ###################################################################################
+  -->
+  <PermissionValidator>
+  	<msg>
+  		<permission-path-invalid>Permission '{0}' is invalid !</permission-path-invalid>
+  	</msg>
+  </PermissionValidator>
   <!--
   ###################################################################################
   # Repository #

@@ -30,6 +30,7 @@ import javax.jcr.version.VersionHistory;
 
 import org.exoplatform.ecm.jcr.model.VersionNode;
 import org.exoplatform.ecm.webui.form.UIFormInputSetWithAction;
+import org.exoplatform.ecm.webui.form.validator.PermissionValidator;
 import org.exoplatform.ecm.webui.selector.UISelectable;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.ecm.webui.utils.Utils;
@@ -76,6 +77,7 @@ public class UIViewForm extends UIFormInputSetWithAction implements UISelectable
   private HashMap<String, Tab> tabMap_ = new HashMap<String, Tab>() ;
   private ManageViewService vservice_ = null ;
   private String viewName = null;
+  private String permission = null;
   private List<String> listVersion = new ArrayList<String>() ;
   private Version baseVersion_;
   private VersionNode selectedVersion_;
@@ -88,6 +90,14 @@ public class UIViewForm extends UIFormInputSetWithAction implements UISelectable
   public void setViewName(String viewName) {
     this.viewName = viewName;
   }
+  
+  public String getPermission() {
+  	return permission;
+  }
+  
+  public void setPermission(String permission) {
+  	this.permission = permission;
+  }
 
   public UIViewForm(String name) throws Exception {
     super(name) ;
@@ -99,7 +109,7 @@ public class UIViewForm extends UIFormInputSetWithAction implements UISelectable
     addUIFormInput(versions) ;
     addUIFormInput(new UIFormStringInput(FIELD_NAME, FIELD_NAME, null).addValidator(MandatoryValidator.class)) ;    
     addUIFormInput(new UIFormStringInput(
-        FIELD_PERMISSION, FIELD_PERMISSION, null).setEditable(true).addValidator(MandatoryValidator.class));                                                                             
+        FIELD_PERMISSION, FIELD_PERMISSION, null).setEditable(true).addValidator(MandatoryValidator.class).addValidator(PermissionValidator.class));                                                                             
     addUIFormInput(new UIFormInputInfo(FIELD_TABS, FIELD_TABS, null)) ;
     setActionInfo(FIELD_PERMISSION, new String[] {"AddPermission","RemovePermission"}) ;
     vservice_ = getApplicationComponent(ManageViewService.class) ;
@@ -148,8 +158,8 @@ public class UIViewForm extends UIFormInputSetWithAction implements UISelectable
             newsPermissions.append(membership.trim());
           }
         }
-      }
-      uiStringInput.setValue(newsPermissions.toString());
+        uiStringInput.setValue(newsPermissions.toString());
+      } else uiStringInput.setValue(value.toString());
   	} else {
   		uiStringInput.setValue(value.toString());
   	}    
@@ -329,51 +339,15 @@ public class UIViewForm extends UIFormInputSetWithAction implements UISelectable
       }
     }
     String permissions = getUIStringInput(FIELD_PERMISSION).getValue() ;
-    if(permissions == null || permissions.length() < 1){
-      message = new ApplicationMessage("UIViewForm.msg.permission-not-empty", null,
-                                       ApplicationMessage.WARNING) ;
-      throw new MessageException(message) ;
-    }
-     
-    OrganizationService oservice = this.getApplicationComponent(OrganizationService.class);
+    if(permissions.subSequence(permissions.length()-1, permissions.length()).equals(","))
+    	permissions = permissions.substring(0,permissions.length()-1);
     String[] arrPermissions = permissions.split(",");
-    List<String> listMemberhip;
-    Collection<?> collection = oservice.getMembershipTypeHandler().findMembershipTypes();
-    listMemberhip  = new ArrayList<String>(5);
-    for(Object obj : collection){
-      listMemberhip.add(((MembershipType)obj).getName());
-    }
-    listMemberhip.add("*");
-    for(String itemPermission : arrPermissions) {
-      if(itemPermission.length() == 0) {
-      	message = new ApplicationMessage("UIViewForm.msg.permission-path-invalid", null,
-            ApplicationMessage.WARNING) ;      	
-      	throw new MessageException(message) ;        
-      }
-      if (itemPermission.contains(":")) {
-        String[] permission = itemPermission.split(":");
-        if((permission[0] == null) || (permission[0].length() == 0)){
-        	message = new ApplicationMessage("UIViewForm.msg.permission-path-invalid", null,
-              ApplicationMessage.WARNING) ;      	
-        	throw new MessageException(message) ;     
-        } else if(!listMemberhip.contains(permission[0])) {
-        	message = new ApplicationMessage("UIViewForm.msg.permission-path-invalid", null,
-              ApplicationMessage.WARNING) ;      	
-        	throw new MessageException(message) ;     
-        }
-        if((permission[1] == null) || (permission[1].length() == 0)) {
-        	message = new ApplicationMessage("UIViewForm.msg.permission-path-invalid", null,
-              ApplicationMessage.WARNING) ;      	
-        	throw new MessageException(message) ;     
-        } else if(oservice.getGroupHandler().findGroupById(permission[1]) == null){
-        	Object[] arg = { itemPermission };
-        	message = new ApplicationMessage("UIViewForm.msg.permission-path-invalid", arg,
-              ApplicationMessage.WARNING) ;        	
-        	throw new MessageException(message) ;     
-        }
-      }
-    }
-
+  	for(String itemPermission : arrPermissions) {  		
+  		if(itemPermission!=null && itemPermission.trim().equals("*")) {
+  			permissions = "*";
+  			break;
+  		}  			
+  	}
     
     if(tabMap_.size() < 1 ){
       message = new ApplicationMessage("UIViewForm.msg.mustbe-add-tab", null,

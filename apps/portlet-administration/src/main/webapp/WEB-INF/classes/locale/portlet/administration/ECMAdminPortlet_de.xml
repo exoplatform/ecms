@@ -921,6 +921,7 @@
     </label>
     <title>
       <AddPermission><![CDATA[Genehmigung hinzuf&uuml;gen]]></AddPermission>
+      <RemovePermission>Remove Permission</RemovePermission>
       <AddIcon><![CDATA[Piktogramm hinzuf&uuml;gen]]></AddIcon>
       <AddPath><![CDATA[Pfad hinzuf&uuml;gen]]></AddPath>
     </title>
@@ -1037,12 +1038,12 @@
     <title>
       <![CDATA[Ansicht hinzuf&uuml;gen/&auml;ndern]]>
       <AddPermission><![CDATA[Genehmigung hinzuf&uuml;gen]]></AddPermission>
+      <RemovePermission>Remove Permission</RemovePermission>
     </title>
     <msg>
       <view-name-invalid><![CDATA[Sie m&uuml;ssen einen Namen eingeben]]></view-name-invalid>
       <fileName-invalid><![CDATA[Es sind ung&uuml;ltige Symbole im Namen!]]></fileName-invalid>
-      <permission-not-empty><![CDATA[Sie m&uuml;ssen eine Genehmigung ausw&auml;hlen]]></permission-not-empty>
-      <permission-path-invalid>Permission '{0}' is invalid!</permission-path-invalid>
+      <permission-not-empty><![CDATA[Sie m&uuml;ssen eine Genehmigung ausw&auml;hlen]]></permission-not-empty>      
       <mustbe-add-tab><![CDATA[Sie m&uuml;ssen ein Tab hinzuf&uuml;gen]]></mustbe-add-tab>
       <view-exist>Ansischtsname existiert schon.</view-exist>
     </msg>
@@ -1934,6 +1935,16 @@
       <empty-input>Geben Sie den Wert in das Feld '{0}' ein</empty-input>
     </msg>
   </EmptyFieldValidator>
+  <!--
+  ###################################################################################
+  # org.exoplatform.ecm.jcr.PermissionValidator																			  #
+  ###################################################################################
+  -->
+  <PermissionValidator>
+  	<msg>
+  		<permission-path-invalid>Permission '{0}' is invalid !</permission-path-invalid>
+  	</msg>
+  </PermissionValidator>
   <!--
   ###################################################################################
   # Repository																			  #

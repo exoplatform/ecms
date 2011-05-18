@@ -124,8 +124,9 @@ public class UITabForm extends UIFormInputSetWithAction {
       }
       uiViewForm.setRendered(true);
       uiTabForm.setRendered(false);
-      ((UIFormStringInput)uiTabForm.getChildById(UITabForm.FIELD_NAME)).getValidators().clear();
+      ((UIFormStringInput)uiTabForm.getChildById(UITabForm.FIELD_NAME)).getValidators().clear();      
       ((UIFormStringInput)uiViewForm.getChildById(UIViewForm.FIELD_NAME)).setValue(uiViewForm.getViewName());
+      ((UIFormStringInput)uiViewForm.getChildById(UIViewForm.FIELD_PERMISSION)).setValue(uiViewForm.getPermission());
       viewFormTabPane.setSelectedTab(uiViewForm.getId()) ;
       uiViewForm.addTab(tabName, selectedButton.toString()) ;
       uiViewForm.update(null, false, null) ;

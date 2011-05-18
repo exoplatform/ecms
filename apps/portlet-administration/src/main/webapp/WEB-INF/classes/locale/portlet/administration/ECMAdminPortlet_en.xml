@@ -922,6 +922,7 @@
     </label>
     <title>
       <AddPermission>Add Permission</AddPermission>
+      <RemovePermission>Remove Permission</RemovePermission>
       <AddIcon>Add Icon</AddIcon>
       <AddPath>Add Path</AddPath>
     </title>
@@ -1038,12 +1039,12 @@
     <title>
       Add/Edit View
       <AddPermission>Add Permission</AddPermission>
+      <RemovePermission>Remove Permission</RemovePermission>
     </title>
     <msg>
       <view-name-invalid>You must enter name</view-name-invalid>
       <fileName-invalid>There are some invalid characters in name!</fileName-invalid>
-      <permission-not-empty>You must select a permission</permission-not-empty>
-      <permission-path-invalid>Permission '{0}' is invalid!</permission-path-invalid>
+      <permission-not-empty>You must select a permission</permission-not-empty>      
       <mustbe-add-tab>You must add a tab</mustbe-add-tab>
       <view-exist>View name already exists.</view-exist>
     </msg>
@@ -1938,6 +1939,16 @@
       <empty-input>Type value into field '{0}' please.</empty-input>
     </msg>
   </EmptyFieldValidator>
+  <!--
+  ###################################################################################
+  # org.exoplatform.ecm.jcr.PermissionValidator																			  #
+  ###################################################################################
+  -->
+  <PermissionValidator>
+  	<msg>
+  		<permission-path-invalid>Permission '{0}' is invalid !</permission-path-invalid>
+  	</msg>
+  </PermissionValidator>
   <!--
   ###################################################################################
   # Repository																			  #

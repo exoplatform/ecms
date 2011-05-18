@@ -924,6 +924,7 @@
     </label>
     <title>
       <AddPermission>Rechten toevoegen</AddPermission>
+      <RemovePermission>Remove Permission</RemovePermission>
       <AddIcon>Icoon toevoegen</AddIcon>
       <AddPath>Pad toevoegen</AddPath>
     </title>
@@ -1040,12 +1041,12 @@
     <title>
       Toevoegen/Wijzigen zicht
       <AddPermission>Rechten toevoegen</AddPermission>
+      <RemovePermission>Remove Permission</RemovePermission>
     </title>
     <msg>
       <view-name-invalid>U moet de naam</view-name-invalid>
       <fileName-invalid>Er zijn een aantal ongeldige tekens in de naam!</fileName-invalid>
-      <permission-not-empty>Moet u een vergunning</permission-not-empty>
-      <permission-path-invalid>Permission '{0}' is invalid!</permission-path-invalid>
+      <permission-not-empty>Moet u een vergunning</permission-not-empty>      
       <mustbe-add-tab>Moet je een tabblad</mustbe-add-tab>
       <view-exist>Bekijk de naam al bestaat</view-exist>
     </msg>
@@ -1938,6 +1939,16 @@
       <empty-input>Typ de waarde in het veld '{0}' alstublieft</empty-input>
     </msg>
   </EmptyFieldValidator>
+  <!--
+  ###################################################################################
+  # org.exoplatform.ecm.jcr.PermissionValidator																			  #
+  ###################################################################################
+  -->
+  <PermissionValidator>
+  	<msg>
+  		<permission-path-invalid>Permission '{0}' is invalid !</permission-path-invalid>
+  	</msg>
+  </PermissionValidator>
   <!--
   ###################################################################################
   # Repository																			  #

@@ -131,8 +131,8 @@ public class UIDriveForm extends UIFormTabPane implements UISelectable {
             newsPermissions.append(membership.trim());
           }
         }
-      }
-      uiStringInput.setValue(newsPermissions.toString());
+        uiStringInput.setValue(newsPermissions.toString());
+      } else uiStringInput.setValue(value.toString());
     } else {
       uiStringInput.setValue(value.toString());
     }
@@ -259,56 +259,16 @@ public class UIDriveForm extends UIFormTabPane implements UISelectable {
       UIViewsInputSet viewsInputSet = uiDriveForm.getChild(UIViewsInputSet.class);
       String views = viewsInputSet.getViewsSelected();
       String permissions = driveInputSet.getUIStringInput(UIDriveInputSet.FIELD_PERMISSION).getValue();
-      if(permissions == null || permissions.trim().length() == 0) {
-        uiApp.addMessage(new ApplicationMessage("UIDriveForm.msg.permission-null", null,
-                                                ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
-        return;
-      }
-
-      OrganizationService oservice = uiDriveForm.getApplicationComponent(OrganizationService.class);
+      
+      if(permissions.subSequence(permissions.length()-1, permissions.length()).equals(","))
+      	permissions = permissions.substring(0,permissions.length()-1);
       String[] arrPermissions = permissions.split(",");
-      List<String> listMemberhip;
-      Collection<?> collection = oservice.getMembershipTypeHandler().findMembershipTypes();
-      listMemberhip  = new ArrayList<String>(5);
-      for(Object obj : collection){
-        listMemberhip.add(((MembershipType)obj).getName());
-      }
-      listMemberhip.add("*");
-      for(String itemPermission : arrPermissions) {
-        if(itemPermission.length() == 0) {
-          uiApp.addMessage(new ApplicationMessage("UIDriveForm.msg.permission-path-invalid", null,
-              ApplicationMessage.WARNING)) ;
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
-          return;
-        }
-        if (itemPermission.contains(":")) {
-          String[] permission = itemPermission.split(":");
-          if((permission[0] == null) || (permission[0].length() == 0)){
-            uiApp.addMessage(new ApplicationMessage("UIDriveForm.msg.permission-path-invalid", null,
-                ApplicationMessage.WARNING)) ;
-            event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
-            return ;
-          } else if(!listMemberhip.contains(permission[0])) {
-            uiApp.addMessage(new ApplicationMessage("UIDriveForm.msg.permission-path-invalid", null,
-                ApplicationMessage.WARNING)) ;
-            event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
-            return ;
-          }
-          if((permission[1] == null) || (permission[1].length() == 0)) {
-            uiApp.addMessage(new ApplicationMessage("UIDriveForm.msg.permission-path-invalid", null,
-                ApplicationMessage.WARNING)) ;
-            event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
-            return ;
-          } else if(oservice.getGroupHandler().findGroupById(permission[1]) == null){
-          	Object[] arg = { itemPermission };
-            uiApp.addMessage(new ApplicationMessage("UIDriveForm.msg.permission-path-invalid", arg,
-                ApplicationMessage.WARNING)) ;
-            event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
-            return;
-          }
-        }
-      }
+    	for(String itemPermission : arrPermissions) {  		
+    		if(itemPermission!=null && itemPermission.trim().equals("*")) {
+    			permissions = "*";
+    			break;
+    		}  			
+    	}
 
       ManageDriveService dservice_ = uiDriveForm.getApplicationComponent(ManageDriveService.class);
       if(uiDriveForm.isAddNew_ && (dservice_.getDriveByName(name) != null)) {

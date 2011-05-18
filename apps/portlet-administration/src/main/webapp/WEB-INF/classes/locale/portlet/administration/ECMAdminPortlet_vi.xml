@@ -924,6 +924,7 @@
     </label>
     <title>
       <AddPermission>Thêm quyền truy nhập</AddPermission>
+      <RemovePermission>Xóa quyền truy nhập</RemovePermission>
       <AddIcon>Thêm biểu tượng</AddIcon>
       <AddPath>Thêm đường dẫn</AddPath>
     </title>
@@ -1040,12 +1041,12 @@
     <title>
       Thêm/Sửa khung nhìn
       <AddPermission>Thêm quyền truy nhập</AddPermission>
+      <RemovePermission>Xóa quyền truy nhập</RemovePermission>
     </title>
     <msg>
       <view-name-invalid>Bạn phải nhập têm</view-name-invalid>
       <fileName-invalid>Có một vài kí tự không hợp lệ trong tên!</fileName-invalid>
-      <permission-not-empty>Bạn phải chọn quyền truy nhập</permission-not-empty>
-      <permission-path-invalid>Quyền '{0}' không đúng hoặc không tồn tại!</permission-path-invalid>
+      <permission-not-empty>Bạn phải chọn quyền truy nhập</permission-not-empty>      
       <mustbe-add-tab>Bạn phải thêm tab</mustbe-add-tab>
       <view-exist>Tên của khung nhìn đã tồn tại.</view-exist>
     </msg>
@@ -1934,6 +1935,16 @@
       <empty-input>Hãy nhập giá trị cho trường'{0}'</empty-input>
     </msg>
   </EmptyFieldValidator>
+  <!--
+  ###################################################################################
+  # org.exoplatform.ecm.jcr.PermissionValidator																			  #
+  ###################################################################################
+  -->
+  <PermissionValidator>
+  	<msg>
+  		<permission-path-invalid>Quyền '{0}' không đúng hoặc không tồn tại !</permission-path-invalid>
+  	</msg>
+  </PermissionValidator>
   <!--
   ###################################################################################
   # Repository																			  #
