@@ -66,17 +66,7 @@
 	margin: 10px;	
 }
 
-.UIECMAdminPortlet .UINodeTypeManager .HorizontalLayout .UIFormInputSet {
-  width: auto;
-  padding-left: 10px;
-}
 
-.UIECMAdminPortlet .UINodeTypeManager .UIFormInputSet .UIFormInputSetWithAction .UIFormGrid td {	
-	padding: 4px;
-}
 
-.UIECMAdminPortlet .UINodeTypeManager .FormContainer .UIFormGrid .FieldComponent a:hover {
-	color: #058EE6;
-}
 
 /*############################## -- End UINodeTypeManager-- ########################*/

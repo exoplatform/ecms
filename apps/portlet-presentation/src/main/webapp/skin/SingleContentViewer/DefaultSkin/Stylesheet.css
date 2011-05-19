@@ -2,6 +2,7 @@
   
 }
 
+
 .UISingleContentViewerPortlet .Message {
   border: 1px solid #b7b7b7;
   height: 55px;
@@ -447,7 +448,7 @@ width: 95%;
 
 .HorizontalLayout .UIForm input {
   font-size: 11px;
-  width: auto;
+   width:auto;
 }
 
 .UIPresentationContainer .ActionContainer {
@@ -542,3 +543,12 @@ width: 95%;
 .UISingleContentViewerPortlet .UISCVPreferences a.AdvancePreferences {
 	outline: none;
 }
+
+.UISingleContentViewerPortlet .UISCVPreferences .UIFormInputSet {
+  padding:0px;
+}
+
+.UISingleContentViewerPortlet .UIFormInputSetWithAction input {
+	width:220px;
+}
+

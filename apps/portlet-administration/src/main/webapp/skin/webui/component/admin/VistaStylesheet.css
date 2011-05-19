@@ -603,11 +603,11 @@
 	padding: 4px 4px 4px 0px;
 }
 
-.UITemplatesManager .UITemplateContent .UIFormInputSet .UIFormInputSetWithAction .FormContainer { 
+.UITemplatesManager .UITemplateContent  .UIFormInputSetWithAction .FormContainer { 
 	padding: 10px 10px 10px 0px;
 }
 
-.UIECMAdminPortlet .UITemplateContent .UIFormInputSet .UIFormInputSetWithAction .FormContainer .UIFormGrid td.FieldLabel{
+.UIECMAdminPortlet .UITemplateContent  .UIFormInputSetWithAction  .UIFormGrid td.FieldLabel{
   width: 110px;
 }
 
@@ -666,20 +666,20 @@
 
 /************************* UIFormInputSet ***********************************/
 
-.UIECMAdminPortlet .UIFormInputSet .UIFormInputSetWithAction input.radio {
+.UIECMAdminPortlet  .UIFormInputSetWithAction input.radio {
   float: none;
 }
 
-.UIECMAdminPortlet .UIFormInputSet .UIFormInputSetWithAction .ActionField {
+.UIECMAdminPortlet  .UIFormInputSetWithAction .ActionField {
   margin: 0px 0px 5px 0px ;
   line-height: 20px;
 }
 
-.UIECMAdminPortlet .UIFormInputSet .UIFormInputSetWithAction .ActionField a {
+.UIECMAdminPortlet  .UIFormInputSetWithAction .ActionField a {
   color: blue;
 }
 
-.UIECMAdminPortlet .UIFormInputSet .UIFormInputSetWithAction .ActionField a:hover {
+.UIECMAdminPortlet  .UIFormInputSetWithAction .ActionField a:hover {
   color: orange;
 }
 

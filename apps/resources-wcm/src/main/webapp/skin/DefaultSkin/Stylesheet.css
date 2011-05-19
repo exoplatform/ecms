@@ -32,6 +32,29 @@
 
 @import url('wcm-publication/Stylesheet.css');
 
+.FL {
+	float: left;
+}
+
+.FR {
+	float: right;
+}
+
+.ClearFix:after {
+ content: ".";
+ display: block;
+ height: 0;
+ clear: both;
+ visibility: hidden;
+}
+
+.ClearFix {
+ !display: inline-block;
+ !zoom: 1;
+ !display: block; 
+}
+
+
 .cke_show_borders {
 	background:#fff;
 }

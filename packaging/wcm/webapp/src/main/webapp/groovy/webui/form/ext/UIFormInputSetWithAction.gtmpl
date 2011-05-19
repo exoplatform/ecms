@@ -13,9 +13,7 @@
 <%
 	import org.exoplatform.webui.form.UIFormRadioBoxInput;
 %>
-<div class="$uicomponent.id">
-	<div class="UIFormInputSet">
-		<div class="UIFormInputSetWithAction">
+<div class="$uicomponent.id UIFormInputSetWithAction"  >
 			<%
 				def formName = uicomponent.getFormName();
 				def actions = uicomponent.getInputSetActions();
@@ -25,11 +23,7 @@
 				for(inputEntry in uicomponent.getChildren()) {
 					if(inputEntry.isRendered()) {
 			%>
-					<div class="FormContainer">
-						<table class="UIFormGrid">
-							<tbody>
-								<tr>									
-									<td class="FieldComponent">
+					
 									<% 
 										if(inputEntry instanceof UIFormRadioBoxInput) {
 											println "<div class=\"MultiRadioInput\">";
@@ -59,7 +53,7 @@
 										if(infor != null && actionInfo != null) {
 											def arrInfor = infor.split(",");
 											if(arrInfor.length > 0) {
-											println "<div style=\"overflow:hidden; float:left;\">";
+											println "<div class=\"FL\" >";
 												for(i in 0..arrInfor.length -1) {
 													if(arrInfor[i].length() > 0) { 
 														if(!isView) { 
@@ -75,7 +69,7 @@
 																	</a> ]
 																</div>
 																	<img onclick="if(confirm('<%=confirm%>')) eXo.webui.UIForm.submitEvent('<%=formName%>', '<%=actionInfo[1]%>', '&objectId=<%=arrInfor[i]%>');" alt="" class="DeleteIconInfo" src="/eXoResources/skin/DefaultSkin/background/Blank.gif"/>								
-																<div class="ClearLeft"><span></span></div>
+																
 														<%
 															}
 														} else {
@@ -92,21 +86,21 @@
 													}
 												}
 											 println "</div>";
-											 println "<div class=\"ClearLeft\"><span></span></div>";
+											
 											}
 										} else if(infor != null && uicomponent.isShowOnly()) {
 											def arrInfor = infor.split(",");
 											if(arrInfor.length > 0) {
-												println "<div style=\"float:left;overflow:hidden;\">";
+												println "<div class=\"FL\" >";
 													for(i in 0..arrInfor.length -1) { 
 														if(arrInfor[i].length() > 0) { %>
 															<div class="ActionField">[ <%=arrInfor[i]%> ]</div>	
-															<div class="ClearLeft"><span></span></div>
+															
 														<%
 														}								
 													}
 											 	println "</div>";
-											 	println "<div class=\"ClearLeft\"><span></span></div>";
+											 	
 											}
 										} 
 										if(infor == null && listInfor == null) {
@@ -128,11 +122,7 @@
 										if(uicomponent.getMsgKey(inputEntry.getName()) != null) { %>
 											<span class="Introduction"><%=_ctx.appRes(uicomponent.getMsgKey(inputEntry.getName()))%></span>											
 										<%}%>
-									</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
+									
 			<%
 					}
 				}
@@ -168,6 +158,6 @@
 					</table>
 				</div>
 			<%} %>
-		</div>
-	</div>
+		
+	
 </div>		

@@ -68,9 +68,13 @@
     padding: 0px;
 }
 
-.UICLVPortlet .UICLVConfig input,select {
+.UICLVPortlet .UICLVConfig input,.UICLVPortlet .UICLVConfig select {
     font-size: 11px;
     width: auto;
+}
+
+.UICLVPortlet .UIFormInputSetWithAction input,.HorizontalLayout .UICLVPortlet .UIFormInputSetWithAction input  {
+	width:220px;
 }
 
 .UICLVPortlet .UICLVConfig .FieldLabel {

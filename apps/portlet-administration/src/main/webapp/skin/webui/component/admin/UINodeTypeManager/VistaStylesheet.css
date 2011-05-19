@@ -131,7 +131,7 @@
   margin: 1px;
 }
 
-.UIECMAdminPortlet .UINodeTypeManager .UIFormInputSet .UIFormInputSetWithActions .checkbox {
+.UIECMAdminPortlet .UINodeTypeManager  .UIFormInputSetWithActions .checkbox {
   width: 45px;
 }
 
@@ -140,8 +140,5 @@
 	margin: 15px auto;
 }
 
-.UIECMAdminPortlet .UINodeTypeManager .FormContainer .UIFormGrid .FieldComponent a:hover {
-	color: #058EE6;
-}
 
 /*############################## -- End UINodeTypeManager-- ########################*/

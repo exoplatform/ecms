@@ -404,7 +404,7 @@
   width: 140px;
 }
 
-.UIECMAdminPortlet .UIDriveManager .UIFormInputSet .UIFormInputSetWithAction .radio {
+.UIECMAdminPortlet .UIDriveManager  .UIFormInputSetWithAction .radio {
   width: 20px;
   margin: 0px;
   float: none;

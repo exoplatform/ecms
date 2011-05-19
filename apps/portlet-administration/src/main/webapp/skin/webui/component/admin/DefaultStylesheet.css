@@ -412,16 +412,16 @@
 	padding: 0px;
 }
 
-.UIECMAdminPortlet .UIFormInputSet .UIFormInputSetWithAction .ActionField {
+.UIECMAdminPortlet  .UIFormInputSetWithAction .ActionField {
   margin-bottom: 5px ;
   line-height: 20px;
 }
 
-.UIECMAdminPortlet .UIFormInputSet .UIFormInputSetWithAction .ActionField a {
+.UIECMAdminPortlet  .UIFormInputSetWithAction .ActionField a {
   color: blue;
 }
 
-.UIECMAdminPortlet .UIFormInputSet .UIFormInputSetWithAction .ActionField a:hover {
+.UIECMAdminPortlet  .UIFormInputSetWithAction .ActionField a:hover {
   color: orange;
 }
 
@@ -705,15 +705,15 @@
 	margin:5px 0px;
 }
 
-..UINamespaceManager UINamespaceList .UIPageIterator .PageIteratorContainer{
+.UINamespaceManager UINamespaceList .UIPageIterator .PageIteratorContainer{
 float: left;
 }
-.FormContainer .UIFormGrid .MultiRadioInput{
+ .UIFormGrid .MultiRadioInput{
 	float: lef; /* orientation=lt */
 	float: right; /* orientation=rt */
 	line-height: 16px;
 }
-.FormContainer .UIFormGrid .MultiRadioInput input{
+ .UIFormGrid .MultiRadioInput input{
 	float: lef; /* orientation=lt */ 
 	float: right; /* orientation=rt */
 	clear: both;
