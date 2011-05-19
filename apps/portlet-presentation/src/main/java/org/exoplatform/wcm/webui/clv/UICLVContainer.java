@@ -82,9 +82,9 @@ public abstract class UICLVContainer extends UIContainer {
   }
 
   public String getEditLink(boolean isEditable, boolean isNew) {
-    String itemPath = Utils.getPortletPreference(UICLVPortlet.PREFERENCE_ITEM_PATH);
-    if (itemPath==null) itemPath="";
-    return Utils.getEditLink(correctPath(itemPath), isEditable, isNew);
+    String folderPath = this.getAncestorOfType(UICLVPortlet.class).getFolderPath();
+    if (folderPath==null) folderPath="";
+    return Utils.getEditLink(correctPath(folderPath), isEditable, isNew);
   }
 
   public Node getFolderNode() {
