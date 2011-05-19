@@ -647,9 +647,12 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
    * @throws RepositoryException the repository exception
    */
   private boolean isFolder(Node checkNode) throws RepositoryException {
+    try {
+      if ( isDMSDocument(checkNode) ) return false;
+    }catch (Exception e) {}
     return
-        checkNode.isNodeType(FCKUtils.NT_UNSTRUCTURED)
-        || checkNode.isNodeType(FCKUtils.NT_FOLDER)
+        checkNode.isNodeType(NodetypeConstant.NT_UNSTRUCTURED)
+        || checkNode.isNodeType(NodetypeConstant.NT_FOLDER)
         || checkNode.isNodeType(NodetypeConstant.EXO_TAXONOMY);
   }
 
