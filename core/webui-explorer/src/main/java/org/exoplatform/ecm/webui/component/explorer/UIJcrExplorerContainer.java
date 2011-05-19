@@ -28,7 +28,6 @@ import javax.jcr.Session;
 import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
 
-import org.exoplatform.services.log.Log;
 import org.exoplatform.ecm.jcr.model.Preference;
 import org.exoplatform.ecm.webui.component.explorer.control.UIActionBar;
 import org.exoplatform.ecm.webui.component.explorer.control.UIAddressBar;
@@ -45,6 +44,7 @@ import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.application.portlet.PortletRequestContext;
@@ -122,7 +122,8 @@ public class UIJcrExplorerContainer extends UIContainer {
       }
       drive.setViews(viewListStr);
       String homePath = drive.getHomePath();
-      if (homePath.contains("${userId}")) homePath = homePath.replace("${userId}", userId);
+      if (homePath.contains("${userId}")) 
+        homePath = org.exoplatform.services.cms.impl.Utils.getPersonalDrivePath(homePath, userId);
       if (nodePath!=null && nodePath.length()>0 && !nodePath.equals("/"))
         homePath = homePath+"/"+nodePath;
       UIJCRExplorer uiJCRExplorer = getChild(UIJCRExplorer.class);

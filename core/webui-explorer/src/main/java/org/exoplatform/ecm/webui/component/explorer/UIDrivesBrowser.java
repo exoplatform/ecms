@@ -166,7 +166,8 @@ public class UIDrivesBrowser extends UIContainer {
       }
       drive.setViews(viewListStr);
       String homePath = drive.getHomePath();
-      if(homePath.contains("${userId}")) homePath = homePath.replace("${userId}", userId);
+      if(homePath.contains("${userId}")) 
+        homePath = org.exoplatform.services.cms.impl.Utils.getPersonalDrivePath(homePath, userId);
       UIJCRExplorerPortlet uiParent = uiDrive.getAncestorOfType(UIJCRExplorerPortlet.class);
       uiParent.setFlagSelect(true);
       UIJcrExplorerContainer explorerContainer = uiParent.getChild(UIJcrExplorerContainer.class);

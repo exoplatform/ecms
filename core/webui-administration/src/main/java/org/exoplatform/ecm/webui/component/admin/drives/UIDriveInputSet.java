@@ -24,8 +24,8 @@ import java.util.ResourceBundle;
 import java.util.Set;
 
 import org.exoplatform.ecm.webui.form.UIFormInputSetWithAction;
+import org.exoplatform.ecm.webui.form.validator.DrivePermissionValidator;
 import org.exoplatform.ecm.webui.form.validator.ECMNameValidator;
-import org.exoplatform.ecm.webui.form.validator.PermissionValidator;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.templates.TemplateService;
@@ -79,7 +79,7 @@ public class UIDriveInputSet extends UIFormInputSetWithAction {
     addUIFormInput(new UIFormStringInput(FIELD_WORKSPACEICON, FIELD_WORKSPACEICON, null).setEditable(false));
     UIFormStringInput permissonSelectField = new UIFormStringInput(FIELD_PERMISSION , FIELD_PERMISSION , null);
     permissonSelectField.addValidator(MandatoryValidator.class);
-    permissonSelectField.addValidator(PermissionValidator.class);
+    permissonSelectField.addValidator(DrivePermissionValidator.class);
     permissonSelectField.setEditable(true);
     addUIFormInput(permissonSelectField);
     addUIFormInput(new UIFormCheckBoxInput<String>(FIELD_VIEWPREFERENCESDOC, FIELD_VIEWPREFERENCESDOC, null));
@@ -132,7 +132,6 @@ public class UIDriveInputSet extends UIFormInputSetWithAction {
       // End of update
 
       invokeGetBindingField(drive);
-
       //Set value for multi-value select box
       String foldertypes = drive.getAllowCreateFolders();
       String selectedFolderTypes[];

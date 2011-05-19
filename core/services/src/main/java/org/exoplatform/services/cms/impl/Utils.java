@@ -33,11 +33,16 @@ import javax.jcr.Node;
 import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
 
+import org.apache.commons.lang.StringUtils;
+import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.jcr.core.ExtendedNode;
+import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.jcr.impl.core.NodeImpl;
 import org.exoplatform.services.jcr.util.VersionHistoryImporter;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
  * @author benjaminmestrallet
@@ -210,5 +215,15 @@ public class Utils {
   private static String getVersionHistory(String valueHistory) {
     String[] arrHistoryValue = valueHistory.split(";");
     return arrHistoryValue[0];
-  }  
+  }
+  
+  public static String getPersonalDrivePath(String parameterizedDrivePath, String userId) throws Exception {
+    SessionProvider sessionProvider = WCMCoreUtils.getUserSessionProvider();
+    NodeHierarchyCreator nodeHierarchyCreator = WCMCoreUtils.getService(NodeHierarchyCreator.class);
+    Node userNode = nodeHierarchyCreator.getUserNode(sessionProvider, userId);
+    return StringUtils.replaceOnce(parameterizedDrivePath, 
+                                   nodeHierarchyCreator.getJcrPath(BasePath.CMS_USERS_PATH) + "/${userId}", 
+                                   userNode.getPath());
+  }
+  
 }

@@ -27,6 +27,7 @@ import org.exoplatform.ecm.webui.component.explorer.control.filter.IsDocumentFil
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotInTrashFilter;
 import org.exoplatform.portal.application.PortalRequestContext;
 import org.exoplatform.portal.webui.util.Util;
+import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.core.lifecycle.UIContainerLifecycle;
 import org.exoplatform.webui.ext.filter.UIExtensionFilter;
@@ -61,7 +62,9 @@ public class PermlinkActionComponent extends UIAbstractManagerComponent {
     String drivename = uiExplorer.getDriveData().getName();
     String drivePath = uiExplorer.getDriveData().getHomePath();
     String userId = Util.getPortalRequestContext().getRemoteUser();
-    if (drivePath.contains("${userId}")) drivePath = drivePath.replace("${userId}", userId);
+    if (drivePath.contains("${userId}")) {
+      drivePath = Utils.getPersonalDrivePath(drivePath, userId);
+    }
     String nodePath = node.getPath().replace(drivePath, "/").replaceAll("/+", "/");
     String repository = uiExplorer.getRepositoryName();
     StringBuffer bf = new StringBuffer(1024);

@@ -18,7 +18,6 @@ package org.exoplatform.ecm.webui.component.admin.drives;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
@@ -34,8 +33,6 @@ import org.exoplatform.services.cms.drives.ManageDriveService;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.config.WorkspaceEntry;
-import org.exoplatform.services.organization.MembershipType;
-import org.exoplatform.services.organization.OrganizationService;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.web.application.RequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -46,8 +43,8 @@ import org.exoplatform.webui.core.UIPopupWindow;
 import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.core.model.SelectItemOption;
 import org.exoplatform.webui.event.Event;
-import org.exoplatform.webui.event.Event.Phase;
 import org.exoplatform.webui.event.EventListener;
+import org.exoplatform.webui.event.Event.Phase;
 import org.exoplatform.webui.form.UIFormInputSet;
 import org.exoplatform.webui.form.UIFormSelectBox;
 import org.exoplatform.webui.form.UIFormStringInput;
@@ -223,7 +220,7 @@ public class UIDriveForm extends UIFormTabPane implements UISelectable {
       try {
         session = rservice.getCurrentRepository().getSystemSession(workspace);
         String userId = Util.getPortalRequestContext().getRemoteUser();
-        String pathReal = path.replace("${userId}", userId);
+        String pathReal = org.exoplatform.services.cms.impl.Utils.getPersonalDrivePath(path, userId);
         session.getItem(pathReal);
         session.logout();
       } catch(Exception e) {

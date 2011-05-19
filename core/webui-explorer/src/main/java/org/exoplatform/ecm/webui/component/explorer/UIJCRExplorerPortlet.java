@@ -414,8 +414,8 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
     }
     driveData.setViews(viewListStr);
     String homePath = driveData.getHomePath();
-    if (homePath.contains("${userId}")) homePath = homePath.replace("${userId}", userId);
-
+    if (homePath.contains("${userId}")) 
+      homePath = org.exoplatform.services.cms.impl.Utils.getPersonalDrivePath(homePath, userId);
     setFlagSelect(true);
     UIJCRExplorer uiExplorer = findFirstComponentOfType(UIJCRExplorer.class);
 //    String mode = getPortletPreferences().getValue(UIJCRExplorerPortlet.MODE, "");

@@ -42,7 +42,6 @@ import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.portal.webui.util.Util;
-import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.drives.ManageDriveService;
 import org.exoplatform.services.cms.views.ManageViewService;
@@ -50,8 +49,6 @@ import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.config.RepositoryEntry;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
-import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
-import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.web.application.RequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -216,10 +213,9 @@ public class UIDrivesArea extends UIContainer {
       }
       drive.setViews(viewListStr);
       String homePath = drive.getHomePath();
-      NodeHierarchyCreator nodeHierarchyCreator = uiDrivesArea.getApplicationComponent(NodeHierarchyCreator.class);
-      String userPath = nodeHierarchyCreator.getUserNode(WCMCoreUtils.getUserSessionProvider(), userId).getPath();
-      if(homePath.contains("${userId}")) 
-        homePath = homePath.replace(nodeHierarchyCreator.getJcrPath(BasePath.CMS_USERS_PATH) + "/" + "${userId}", userPath);
+      if(homePath.contains("${userId}")) {
+        homePath = org.exoplatform.services.cms.impl.Utils.getPersonalDrivePath(homePath, userId);
+      }
       UIJCRExplorerPortlet uiParent = uiDrivesArea.getAncestorOfType(UIJCRExplorerPortlet.class);
       uiParent.setFlagSelect(true);
       UIJcrExplorerContainer explorerContainer = uiParent.getChild(UIJcrExplorerContainer.class);

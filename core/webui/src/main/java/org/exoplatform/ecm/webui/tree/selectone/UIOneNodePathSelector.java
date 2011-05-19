@@ -108,7 +108,8 @@ public class UIOneNodePathSelector extends UIBaseNodeTreeSelector {
       NodeFinder nodeFinder = getApplicationComponent(NodeFinder.class);
       if (rootTreePath.indexOf("${userId}") > -1) {
         String userId = Util.getPortalRequestContext().getRemoteUser();
-        String rootTreeOfSpecialDriver = rootTreePath.replace("${userId}", userId);
+        String rootTreeOfSpecialDriver = 
+          org.exoplatform.services.cms.impl.Utils.getPersonalDrivePath(rootTreePath , userId);
         rootTreePath = rootTreeOfSpecialDriver;
       }
       rootNode = (Node) nodeFinder.getItem(workspaceName, rootTreePath);

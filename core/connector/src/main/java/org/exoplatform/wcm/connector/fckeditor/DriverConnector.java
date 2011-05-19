@@ -58,6 +58,7 @@ import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.drives.ManageDriveService;
+import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
@@ -224,7 +225,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
                         + currentFolder;
       ConversationState conversationState = ConversationState.getCurrent();
       String userId = conversationState.getIdentity().getUserId();
-      itemPath = StringUtils.replaceOnce(itemPath, "${userId}", userId);
+      itemPath = Utils.getPersonalDrivePath(itemPath, userId);
       Node node = (Node)session.getItem(Text.escapeIllegalJcrChars(itemPath));
       return buildXMLResponseForChildren(node,
                                          null,
@@ -453,7 +454,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
     SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
     Node userNode = nodeHierarchyCreator.getUserNode(sessionProvider, userId);
     for(DriveData drive : driveList) {
-      String driveHomePath = StringUtils.replaceOnce(drive.getHomePath(), "${userId}", userId);
+      String driveHomePath = Utils.getPersonalDrivePath(drive.getHomePath(), userId);
       if(driveHomePath.startsWith(userNode.getPath())) {
         drive.setHomePath(driveHomePath);
         personalDrivers.add(drive);
