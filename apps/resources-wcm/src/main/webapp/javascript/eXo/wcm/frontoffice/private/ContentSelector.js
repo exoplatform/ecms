@@ -643,7 +643,7 @@ EcmContentSelector.prototype.listMutilFiles = function(list) {
 		var node = list[i].getAttribute("name");
 		var newRow = tblRWS.insertRow(i+1);
 		newRow.className = clazz;
-		newRow.insertCell(0).innerHTML = '<a class="Item default16x16Icon '+clazzItem+'" url="'+url+'" linkTarget ="' + linkTarget + '" path="'+path+'" nodeType="'+nodeType+'" style = "overflow:hidden;" title="'+decodeURIComponent(node)+'" onclick="eXo.ecm.ECS.addFile2ListContent(this);">'+node.trunc(15,false)+'</a>';
+		newRow.insertCell(0).innerHTML = '<a class="Item default16x16Icon '+clazzItem+'" url="'+url+'" linkTarget ="' + linkTarget + '" path="'+path+'" nodeType="'+nodeType+'" style = "overflow:hidden;" title="'+decodeURIComponent(node)+'" onclick="eXo.ecm.ECS.addFile2ListContent(this);">'+decodeURIComponent(node).trunc(15,false)+'</a>';
 				
 	}
 	

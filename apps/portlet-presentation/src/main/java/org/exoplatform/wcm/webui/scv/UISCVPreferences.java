@@ -425,6 +425,7 @@ public class UISCVPreferences extends UIForm implements UISelectable{
       strWorkspace = splits[driveIndex + 1];
       strIdentifier = splits[driveIndex + 2];
       strDrive=  (driveIndex == 1) ? splits[0] : "";
+      strIdentifier = Text.escapeIllegalJcrChars(strIdentifier);
       Node selectedNode = Utils.getRealNode(strRepository, strWorkspace, strIdentifier, false);
       if (selectedNode==null) return;
       strNodeUUID = selectedNode.getUUID();

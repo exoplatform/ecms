@@ -22,6 +22,7 @@ import org.exoplatform.ecm.webui.selector.UISelectable;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.drives.ManageDriveService;
 import org.exoplatform.services.cms.link.LinkManager;
+import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.services.wcm.publication.WCMComposer;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.wcm.webui.Utils;
@@ -171,9 +172,9 @@ public class UIContentBrowsePanelMulti extends UIContentBrowsePanel {
       String[] locations = (iPath == null) ? null : iPath.split(":");
       if (iDriver != null && iDriver.length() > 0) {
         if (locations != null && locations.length > 2)
-          node = Utils.getViewableNodeByComposer(locations[0],
-                                                 locations[1],
-                                                 locations[2],
+          node = Utils.getViewableNodeByComposer(Text.escapeIllegalJcrChars(locations[0]),
+                                                 Text.escapeIllegalJcrChars(locations[1]),
+                                                 Text.escapeIllegalJcrChars(locations[2]),
                                                  WCMComposer.BASE_VERSION);
         if (node != null) {
           iPath = fixPath(iDriver, node.getPath(), contentBrowsePanelMulti);
@@ -194,7 +195,7 @@ public class UIContentBrowsePanelMulti extends UIContentBrowsePanel {
                            UIContentBrowsePanelMulti uiBrowser) throws Exception {
       if (path == null || path.length() == 0)
         return "";
-
+      path = Text.escapeIllegalJcrChars(path);
       ManageDriveService managerDriveService = uiBrowser.getApplicationComponent(ManageDriveService.class);
       DriveData driveData = managerDriveService.getDriveByName(driveName);
       if (!path.startsWith(driveData.getHomePath()))
