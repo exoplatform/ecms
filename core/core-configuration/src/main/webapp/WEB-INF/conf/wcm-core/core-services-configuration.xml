@@ -15,9 +15,9 @@
     <type>org.exoplatform.services.deployment.ContentInitializerService</type>
   </component>
 
-  <component>
+  <!--component>
     <type>org.exoplatform.services.migration.TemplateMigrationService</type>
-  </component>
+  </component-->
   
   <!--component>
     <type>org.exoplatform.services.migration.SCVPortletPreferenceMigrationService</type>
