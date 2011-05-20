@@ -345,7 +345,7 @@
         <portlet-application>
           <portlet>
             <application-ref>presentation</application-ref>
-            <portlet-ref>ContentListViewerPortlet</portlet-ref>
+            <portlet-ref>CategoryNavigationPortlet</portlet-ref>
             <preferences>
               <preference>
                 <name>folderPath</name>
