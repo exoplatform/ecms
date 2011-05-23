@@ -1,0 +1,521 @@
+
+Property changes on: .
+___________________________________________________________________
+Added: svn:mergeinfo
+   Merged /ecms/trunk:r67935-67936,68020,68144,68209,68215
+
+
+Property changes on: ext/xcmis/sp/src
+___________________________________________________________________
+Modified: svn:mergeinfo
+   Merged /ecms/trunk/ext/xcmis/sp/src:r67935-67936,68020,68144,68209,68215
+
+Index: ext/xcmis/sp/src/test/java/org/exoplatform/ecms/xcmis/sp/StorageTest.java
+===================================================================
+--- ext/xcmis/sp/src/test/java/org/exoplatform/ecms/xcmis/sp/StorageTest.java	(revision 68305)
++++ ext/xcmis/sp/src/test/java/org/exoplatform/ecms/xcmis/sp/StorageTest.java	(working copy)
+@@ -442,10 +442,15 @@
+ 
+    public void testCreateDocument() throws Exception
+    {
+-      PropertyDefinition<?> def = PropertyDefinitions.getPropertyDefinition("cmis:document", CmisConstants.NAME);
++      PropertyDefinition<?> nameDef = PropertyDefinitions.getPropertyDefinition("cmis:document", CmisConstants.NAME);
+       Map<String, Property<?>> properties = new HashMap<String, Property<?>>();
+-      properties.put(CmisConstants.NAME, new StringProperty(def.getId(), def.getQueryName(), def.getLocalName(), def
+-         .getDisplayName(), "createDocumentTest"));
++      properties.put(CmisConstants.NAME, new StringProperty(nameDef.getId(), nameDef.getQueryName(),
++         nameDef.getLocalName(), nameDef.getDisplayName(), "createDocumentTest"));
++      PropertyDefinition<?> contentNameDef = PropertyDefinitions.getPropertyDefinition("cmis:document",
++         CmisConstants.CONTENT_STREAM_FILE_NAME);
++      properties.put(CmisConstants.CONTENT_STREAM_FILE_NAME, new StringProperty(contentNameDef.getId(),
++         contentNameDef.getQueryName(), contentNameDef.getLocalName(), contentNameDef.getDisplayName(),
++         "createDocumentTest_ContentFile.txt"));
+ 
+       ContentStream cs =
+          new BaseContentStream("to be or not to be".getBytes(), /*"createDocumentTest"*/null, new MimeType("text",
+@@ -484,7 +489,7 @@
+       assertFalse(document.isVersionSeriesCheckedOut());
+       assertEquals("latest", document.getVersionLabel());
+       assertEquals("text/plain", document.getContentStreamMimeType());
+-      assertEquals("createDocumentTest", document.getContentStream().getFileName());
++      assertEquals("createDocumentTest_ContentFile.txt", document.getContentStream().getFileName());
+    }
+ 
+    public void testCreateDocumentFromSource() throws Exception
+@@ -1121,6 +1126,26 @@
+          + ((DocumentDataImpl)document).getNodeEntry().getNode().getPath());
+    }
+ 
++
++
++
++
++
++   public void testGetMultifiledByPath() throws Exception
++   {
++      ContentStream cs = new BaseContentStream("to be or not to be".getBytes(), null, new MimeType("text", "plain"));
++      DocumentData document = createDocument(rootFolder, "multifiledByPathTest", "cmis:document", cs, null);
++      FolderData folder1 = createFolder(rootFolder, "multifiledByPathTest1", "cmis:folder");
++      FolderData folder2 = createFolder(rootFolder, "multifiledByPathTest2", "cmis:folder");
++      folder1.addObject(document);
++      folder2.addObject(document);
++
++      DocumentData doc = (DocumentData)storageA.getObjectByPath("/multifiledByPathTest2/multifiledByPathTest");
++      assertEquals(cs.length(), doc.getContentStream().length());
++
++   }
++
++
+    public void testRenameDocument() throws Exception
+    {
+       ContentStream cs = new BaseContentStream("to be or not to be".getBytes(), null, new MimeType("text", "plain"));
+Index: ext/xcmis/sp/src/test/resources/conf/standalone/test-configuration.xml
+===================================================================
+--- ext/xcmis/sp/src/test/resources/conf/standalone/test-configuration.xml	(revision 68305)
++++ ext/xcmis/sp/src/test/resources/conf/standalone/test-configuration.xml	(working copy)
+@@ -156,11 +156,6 @@
+    </component>
+ 
+    <component>
+-      <key>org.exoplatform.services.document.DocumentReaderService</key>
+-      <type>org.xcmis.spi.utils.CmisDocumentReaderService</type>
+-   </component>
+-
+-   <component>
+       <type>org.xcmis.spi.PermissionService</type>
+    </component>
+ 
+Index: ext/xcmis/sp/src/main/java/org/exoplatform/ecms/xcmis/sp/tck/tck-configuration.xml
+===================================================================
+--- ext/xcmis/sp/src/main/java/org/exoplatform/ecms/xcmis/sp/tck/tck-configuration.xml	(revision 68305)
++++ ext/xcmis/sp/src/main/java/org/exoplatform/ecms/xcmis/sp/tck/tck-configuration.xml	(working copy)
+@@ -79,9 +79,6 @@
+       <type>org.exoplatform.services.idgenerator.impl.IDGeneratorServiceImpl</type>
+    </component>
+ 
+-   <component>
+-      <type>org.xcmis.spi.deploy.ExoContainerCmisRegistry</type>
+-   </component>
+ 
+    <component>
+       <type>org.exoplatform.ecms.xcmis.sp.StorageProviderImpl</type>
+@@ -121,10 +118,6 @@
+       </init-params>
+    </component>
+ 
+-   <component>
+-      <key>org.exoplatform.services.document.DocumentReaderService</key>
+-      <type>org.xcmis.spi.utils.CmisDocumentReaderService</type>
+-   </component>
+ 
+    <component>
+       <type>org.xcmis.spi.PermissionService</type>
+Index: ext/xcmis/sp/src/main/java/org/exoplatform/ecms/xcmis/sp/JcrNodeEntry.java
+===================================================================
+--- ext/xcmis/sp/src/main/java/org/exoplatform/ecms/xcmis/sp/JcrNodeEntry.java	(revision 68305)
++++ ext/xcmis/sp/src/main/java/org/exoplatform/ecms/xcmis/sp/JcrNodeEntry.java	(working copy)
+@@ -205,7 +205,7 @@
+     * @param storage CMIS storage
+     * @throws RepositoryException if any JCR repository error occurs
+     * @throws NotSupportedNodeTypeException if specified <code>node</code> has
+-    *         node-type which is unsupported by xCMIS
++    *            node-type which is unsupported by xCMIS
+     * @see Node#getPrimaryNodeType()
+     * @see Workspace#getNodeTypeManager()
+     * @see RepositoryException
+@@ -217,8 +217,8 @@
+       if (node.isNodeType(JcrCMIS.NT_FROZEN_NODE))
+       {
+          nodeType =
+-            session.getWorkspace().getNodeTypeManager().getNodeType(
+-               node.getProperty(JcrCMIS.JCR_FROZEN_PRIMARY_TYPE).getString());
++            session.getWorkspace().getNodeTypeManager()
++               .getNodeType(node.getProperty(JcrCMIS.JCR_FROZEN_PRIMARY_TYPE).getString());
+       }
+       else
+       {
+@@ -491,7 +491,7 @@
+ 
+    /**
+     * Create permission map which can be passed to JCR node.
+-    *
++    * 
+     * @param source source ACL
+     * @return permission map
+     */
+@@ -629,6 +629,21 @@
+       return null;
+    }
+ 
++   String getContentStreamFileName()
++   {
++      if (getBaseType() == BaseType.DOCUMENT)
++      {
++         String contentFileName = getString(CmisConstants.CONTENT_STREAM_FILE_NAME);
++         if (contentFileName == null)
++         {
++            // Use name of Document if content not empty. 
++            contentFileName = getName();
++         }
++         return contentFileName;
++      }
++      return null;
++   }
++
+    ContentStream getContentStream(String streamId)
+    {
+       try
+@@ -652,7 +667,7 @@
+                   contentNode.getProperty(JcrCMIS.JCR_ENCODING).getString());
+             }
+             return new BaseContentStream(contentNode.getProperty(JcrCMIS.JCR_DATA).getStream(), contentLength,
+-               getName(), mimeType);
++               getContentStreamFileName(), mimeType);
+          }
+          else
+          {
+@@ -685,7 +700,7 @@
+ 
+    /**
+     * Set new or remove (if <code>content == null</code>) content stream.
+-    *
++    * 
+     * @param content content
+     * @throws IOException if any i/o error occurs
+     */
+@@ -1633,8 +1648,8 @@
+          try
+          {
+             relationships =
+-               getRelationships(RelationshipDirection.EITHER, storage.getTypeDefinition(CmisConstants.RELATIONSHIP,
+-                  true), true);
++               getRelationships(RelationshipDirection.EITHER,
++                  storage.getTypeDefinition(CmisConstants.RELATIONSHIP, true), true);
+          }
+          catch (TypeNotFoundException ignore)
+          {
+Index: ext/xcmis/sp/src/main/java/org/exoplatform/ecms/xcmis/sp/PropertyDefinitions.java
+===================================================================
+--- ext/xcmis/sp/src/main/java/org/exoplatform/ecms/xcmis/sp/PropertyDefinitions.java	(revision 68305)
++++ ext/xcmis/sp/src/main/java/org/exoplatform/ecms/xcmis/sp/PropertyDefinitions.java	(working copy)
+@@ -149,7 +149,7 @@
+ 
+             add(objectType.value(), createPropertyDefinition(CmisConstants.CONTENT_STREAM_FILE_NAME,
+                PropertyType.STRING, CmisConstants.CONTENT_STREAM_FILE_NAME, CmisConstants.CONTENT_STREAM_FILE_NAME,
+-               null, CmisConstants.CONTENT_STREAM_FILE_NAME, false, false, false, false, false, Updatability.READONLY,
++               null, CmisConstants.CONTENT_STREAM_FILE_NAME, false, false, false, false, false, Updatability.READWRITE,
+                "Document's content file name.", null, null, null));
+ 
+             add(objectType.value(), createPropertyDefinition(CmisConstants.CONTENT_STREAM_ID, PropertyType.ID,
+Index: ext/xcmis/sp/src/main/java/org/exoplatform/ecms/xcmis/sp/JcrCmisRegistry.java
+===================================================================
+--- ext/xcmis/sp/src/main/java/org/exoplatform/ecms/xcmis/sp/JcrCmisRegistry.java	(revision 68305)
++++ ext/xcmis/sp/src/main/java/org/exoplatform/ecms/xcmis/sp/JcrCmisRegistry.java	(working copy)
+@@ -11,6 +11,7 @@
+ import org.exoplatform.services.jcr.core.WorkspaceContainerFacade;
+ import org.exoplatform.services.jcr.dataflow.PersistentDataManager;
+ import org.exoplatform.services.jcr.ext.app.SessionProviderService;
++import org.exoplatform.services.jcr.impl.Constants;
+ import org.picocontainer.Startable;
+ import org.xcmis.search.SearchService;
+ import org.xcmis.search.SearchServiceException;
+@@ -126,11 +127,10 @@
+       //initialize search services
+       if (rootIndexDir != null)
+       {
+-         IndexConfiguration indexConfiguration = new IndexConfiguration();
+-         indexConfiguration.setIndexDir(rootIndexDir);
+-
+          try
+          {
++            IndexConfiguration indexConfiguration = new IndexConfiguration(rootIndexDir, Constants.ROOT_PARENT_UUID, Constants.ROOT_UUID);
++
+             String[] wsNames = getAffectedWorkspaceNames();
+             String currentRepositoryName = repositoryService.getCurrentRepository().getConfiguration().getName();
+             for (String wsName : wsNames)
+@@ -150,9 +150,7 @@
+                changesListener.onRegistryStart(indexConfiguration);
+                dm.addItemPersistenceListener(changesListener);
+                addSearchService(currentRepositoryName, wsName, changesListener.getSearchService());
+-
+             }
+-
+          }
+          catch (RepositoryException e)
+          {
+@@ -162,6 +160,14 @@
+          {
+             throw new CmisRuntimeException(e.getLocalizedMessage(), e);
+          }
++         catch (org.apache.tika.mime.MimeTypeException e)
++         {
++            throw new CmisRuntimeException(e.getLocalizedMessage(), e);
++         }
++         catch (java.io.IOException e)
++         {
++            throw new CmisRuntimeException(e.getLocalizedMessage(), e);
++         }
+       }
+    }
+ 
+Index: ext/xcmis/sp/src/main/java/org/exoplatform/ecms/xcmis/sp/StorageImpl.java
+===================================================================
+--- ext/xcmis/sp/src/main/java/org/exoplatform/ecms/xcmis/sp/StorageImpl.java	(revision 68305)
++++ ext/xcmis/sp/src/main/java/org/exoplatform/ecms/xcmis/sp/StorageImpl.java	(working copy)
+@@ -140,8 +140,7 @@
+       }
+    }
+ 
+-   private static final Comparator<ObjectData> CREATION_DATE_COMPARATOR = new Comparator<ObjectData>()
+-   {
++   private static final Comparator<ObjectData> CREATION_DATE_COMPARATOR = new Comparator<ObjectData>() {
+       public int compare(ObjectData object1, ObjectData object2)
+       {
+          Calendar c1 = object1.getCreationDate();
+@@ -183,7 +182,7 @@
+    {
+       ConversationState state = ConversationState.getCurrent();
+       AllowableActions actions =
+-         permissionService.calculateAllowableActions(object, state != null ? state.getIdentity() : null,
++         permissionService.calculateAllowableActions(object, state != null ? state.getIdentity().getUserId() : null,
+             getRepositoryInfo());
+ 
+       if (object instanceof JcrFile)
+@@ -221,9 +220,9 @@
+       {
+          name = source.getName();
+          PropertyDefinition<?> namePropertyDefinition = typeDefinition.getPropertyDefinition(CmisConstants.NAME);
+-         properties.put(namePropertyDefinition.getId(), new StringProperty(namePropertyDefinition.getId(),
+-            namePropertyDefinition.getQueryName(), namePropertyDefinition.getLocalName(), namePropertyDefinition
+-               .getDisplayName(), name));
++         properties.put(namePropertyDefinition.getId(),
++            new StringProperty(namePropertyDefinition.getId(), namePropertyDefinition.getQueryName(),
++               namePropertyDefinition.getLocalName(), namePropertyDefinition.getDisplayName(), name));
+       }
+ 
+       try
+@@ -259,6 +258,7 @@
+       {
+          throw new NameConstraintViolationException("Name for new document must be provided.");
+       }
++      
+       JcrNodeEntry documentEntry =
+          createDocumentEntry(parent != null ? ((FolderDataImpl)parent).getNodeEntry() : null, name, typeDefinition,
+             versioningState);
+@@ -273,6 +273,16 @@
+       // TODO : support for checked-out initial state
+       documentEntry.setValue(CmisConstants.VERSION_LABEL, LATEST_LABEL);
+ 
++      Property<?> contentFileNameProperty = properties.get(CmisConstants.CONTENT_STREAM_FILE_NAME);
++      if (content != null && (contentFileNameProperty == null || contentFileNameProperty.getValues().isEmpty()))
++      {
++         String contentFileName = content.getFileName();
++         if (contentFileName != null)
++         {
++            documentEntry.setValue(CmisConstants.CONTENT_STREAM_FILE_NAME, contentFileName);
++         }
++      }
++
+       for (Property<?> property : properties.values())
+       {
+          PropertyDefinition<?> definition = typeDefinition.getPropertyDefinition(property.getId());
+@@ -920,6 +930,10 @@
+             {
+                return new PWC(entry);
+             }
++            if (node.isNodeType(JcrCMIS.NT_FROZEN_NODE))
++            {
++               return new DocumentVersion(entry);
++            }
+             if (!node.isNodeType(JcrCMIS.CMIS_MIX_DOCUMENT))
+             {
+                // Has not required mixin 'cmis:document'. Some operation for
+@@ -931,10 +945,6 @@
+                }
+                return new JcrFile(entry);
+             }
+-            if (node.isNodeType(JcrCMIS.NT_FROZEN_NODE))
+-            {
+-               return new DocumentVersion(entry);
+-            }
+             return new DocumentDataImpl(entry);
+          }
+          else if (typeDefinition.getBaseId() == BaseType.FOLDER)
+@@ -978,8 +988,7 @@
+    }
+ 
+    /**
+-    * @param searchService
+-    *           the searchService to set
++    * @param searchService the searchService to set
+     */
+    public void setSearchService(SearchService searchService)
+    {
+Index: ext/xcmis/sp/src/main/java/org/exoplatform/ecms/xcmis/sp/index/Jcr2XcmisChangesListener.java
+===================================================================
+--- ext/xcmis/sp/src/main/java/org/exoplatform/ecms/xcmis/sp/index/Jcr2XcmisChangesListener.java	(revision 68305)
++++ ext/xcmis/sp/src/main/java/org/exoplatform/ecms/xcmis/sp/index/Jcr2XcmisChangesListener.java	(working copy)
+@@ -368,49 +368,36 @@
+       if (readOnlyIndexConfiguration != null && rootStorage == null)
+       {
+ 
+-         StorageConfiguration rootStorageConfiguration =
+-            new StorageConfiguration(UUID.randomUUID().toString(), currentRepositoryName, workspaceName, "/",
+-               Collections.EMPTY_MAP, "Virtual root storage");
+-         SessionProvider sessionProvider = sessionProviderService.getSystemSessionProvider(null);
+-         rootStorage =
+-            new StorageImpl(sessionProvider.getSession(workspaceName, repository), rootStorageConfiguration, null,
+-               new PermissionService(), StorageProviderImpl.DEFAULT_NODETYPE_MAPPING);
+-
+-         //prepare search service
+-         CmisSchema schema = new CmisSchema(rootStorage);
+-         CmisSchemaTableResolver tableResolver =
+-            new CmisSchemaTableResolver(new ToStringNameConverter(), schema, rootStorage);
+-
+-         IndexConfiguration indexConfiguration = new IndexConfiguration();
+-
+-         File rootFolder = new File(readOnlyIndexConfiguration.getIndexDir());
+-         File indexFolder = new File(new File(rootFolder, currentRepositoryName), workspaceName);
+-
+-         indexConfiguration.setIndexDir(indexFolder.getPath());
+-         indexConfiguration.setDocumentReaderService(documentReaderService);
+-         indexConfiguration.setRootUuid(Constants.ROOT_UUID);
+-
+-         //if list of root parents is empty it will be indexed as empty string
+-         indexConfiguration.setRootParentUuid("");
+-
+-         //default invocation context
+-         InvocationContext invocationContext = new InvocationContext();
+-         invocationContext.setNameConverter(new ToStringNameConverter());
+-         invocationContext.setSchema(schema);
+-         invocationContext.setPathSplitter(new SlashSplitter());
+-         invocationContext.setTableResolver(tableResolver);
+-
+-         SearchServiceConfiguration configuration = new SearchServiceConfiguration();
+-         configuration.setIndexConfiguration(indexConfiguration);
+-         configuration.setContentReader(new CmisContentReader(rootStorage));
+-         configuration.setNameConverter(new ToStringNameConverter());
+-         configuration.setDefaultInvocationContext(invocationContext);
+-         configuration.setTableResolver(tableResolver);
+-         configuration.setPathSplitter(new SlashSplitter());
+-
+-         searchService = new SearchService(configuration);
+-         searchService.start();
+-
++         try {
++	         StorageConfiguration rootStorageConfiguration =
++	            new StorageConfiguration(UUID.randomUUID().toString(), currentRepositoryName, workspaceName, "/",
++	               Collections.EMPTY_MAP, "Virtual root storage");
++	         SessionProvider sessionProvider = sessionProviderService.getSystemSessionProvider(null);
++	         rootStorage =
++	            new StorageImpl(sessionProvider.getSession(workspaceName, repository), rootStorageConfiguration, null,
++	               new PermissionService(), StorageProviderImpl.DEFAULT_NODETYPE_MAPPING);
++	
++	         //prepare search service
++	         CmisSchema schema = new CmisSchema(rootStorage);
++	         CmisSchemaTableResolver tableResolver =
++	            new CmisSchemaTableResolver(new ToStringNameConverter(), schema, rootStorage);
++	
++	         File rootFolder = new File(readOnlyIndexConfiguration.getIndexDir());
++	         File indexFolder = new File(new File(rootFolder, currentRepositoryName), workspaceName);
++	         
++	         IndexConfiguration indexConfiguration = new IndexConfiguration(indexFolder.getPath(), Constants.ROOT_PARENT_UUID, Constants.ROOT_UUID);
++	
++	         SearchServiceConfiguration configuration = new SearchServiceConfiguration(schema, tableResolver,
++	        		 new CmisContentReader(rootStorage), indexConfiguration);
++	
++	         searchService = new SearchService(configuration);
++	         searchService.start();
++	         
++    	 } catch (org.apache.tika.mime.MimeTypeException e) {
++    	    throw new SearchServiceException(e.getLocalizedMessage(), e);
++	     } catch (java.io.IOException e) {
++		    throw new SearchServiceException(e.getLocalizedMessage(), e);
++	     }
+       }
+    }
+ 
+Index: ext/xcmis/sp/src/main/java/org/exoplatform/ecms/xcmis/sp/DocumentDataImpl.java
+===================================================================
+--- ext/xcmis/sp/src/main/java/org/exoplatform/ecms/xcmis/sp/DocumentDataImpl.java	(revision 68305)
++++ ext/xcmis/sp/src/main/java/org/exoplatform/ecms/xcmis/sp/DocumentDataImpl.java	(working copy)
+@@ -428,6 +428,16 @@
+    }
+ 
+    /**
++    * @return content stream file name if document has content and
++    *         <code>null</code> otherwise
++    */
++   public String getContentStreamFileName()
++   {
++      String contentFileName = entry.getContentStreamFileName();
++      return contentFileName;
++   }
++
++   /**
+     * {@inheritDoc}
+     */
+    @Override
+@@ -435,5 +445,4 @@
+    {
+       entry.delete();
+    }
+-
+ }
+Index: ext/xcmis/sp/src/main/java/org/exoplatform/ecms/xcmis/sp/BaseObjectData.java
+===================================================================
+--- ext/xcmis/sp/src/main/java/org/exoplatform/ecms/xcmis/sp/BaseObjectData.java	(revision 68305)
++++ ext/xcmis/sp/src/main/java/org/exoplatform/ecms/xcmis/sp/BaseObjectData.java	(working copy)
+@@ -446,7 +446,7 @@
+          if (((DocumentData)this).hasContent())
+          {
+             return new StringProperty(definition.getId(), definition.getQueryName(), definition.getLocalName(),
+-               definition.getDisplayName(), getName());
++               definition.getDisplayName(), ((DocumentDataImpl)this).getContentStreamFileName());
+          }
+       }
+       else if (definition.getId().equals(CmisConstants.CONTENT_STREAM_MIME_TYPE))
+Index: ext/xcmis/sp/src/main/java/org/exoplatform/ecms/xcmis/sp/BaseJcrStorage.java
+===================================================================
+--- ext/xcmis/sp/src/main/java/org/exoplatform/ecms/xcmis/sp/BaseJcrStorage.java	(revision 68305)
++++ ext/xcmis/sp/src/main/java/org/exoplatform/ecms/xcmis/sp/BaseJcrStorage.java	(working copy)
+@@ -1201,6 +1201,11 @@
+             }
+             return new SymLinkNodeEntry(link, node, this);
+          }
++         else if (node.isNodeType("nt:linkedFile"))
++         {
++            Node target = node.getProperty("jcr:content").getNode();
++            return new JcrNodeEntry(target, this);
++         }
+          return new JcrNodeEntry(node, this);
+       }
+       catch (RepositoryException re)
+Index: ext/xcmis/sp/src/main/resources/conf/portal/configuration.xml
+===================================================================
+--- ext/xcmis/sp/src/main/resources/conf/portal/configuration.xml	(revision 68305)
++++ ext/xcmis/sp/src/main/resources/conf/portal/configuration.xml	(working copy)
+@@ -3,8 +3,8 @@
+    xmlns="http://www.exoplaform.org/xml/ns/kernel_1_0.xsd">
+ 
+    <component>
+-      <key>org.exoplatform.services.document.DocumentReaderService</key>
+-      <type>org.xcmis.spi.utils.CmisDocumentReaderService</type>
++     <key>org.xcmis.restatom.CmisRestApplication</key>
++     <type>org.xcmis.restatom.CmisRestApplicationSingle</type>
+    </component>
+    
+    <component>
+Index: pom.xml
+===================================================================
+--- pom.xml	(revision 68305)
++++ pom.xml	(working copy)
+@@ -37,7 +37,7 @@
+     <org.exoplatform.commons.version>1.0.5-SNAPSHOT</org.exoplatform.commons.version>
+     <org.exoplatform.tool.version>1.0.0</org.exoplatform.tool.version>
+     <chromattic.version>1.0.4</chromattic.version>
+-    <xcmis.version>1.1.5-SNAPSHOT</xcmis.version>
++    <xcmis.version>1.2-beta1</xcmis.version>
+     <xml.parser.version>3.1</xml.parser.version>
+     <!-- workflow implementations -->
+     <org.jbpm.jbpm3>3.2.8</org.jbpm.jbpm3>
