@@ -58,7 +58,7 @@ h3. Using java.
 
 h3. Using javascript.
 
-Creating an URL to make a request (consists of repository name, the method name, e.g. "/children/", and folderID to get childrens from):
+Creating an URL to make a request (consists of repository name, the method name, e.g. "/children/", and folderID to get children from):
 
 {code:language=java}
  var url = "http://localhost:8080/rest/private/cmisatom/";
@@ -157,7 +157,7 @@ renditions. If no stream ID is specified, a default stream will be returned.
 
 h3. Using javascript.
 
-Creating an URL to make a request (consists of repository name, method name, e.g. "/children/", and folder ID to get the childrens from):
+Creating an URL to make a request (consists of repository name, method name, e.g. "/children/", and folder ID to get the children from):
 
 {code:language=java}
  var url = "http://localhost:8080/rest/private/cmisatom/";
