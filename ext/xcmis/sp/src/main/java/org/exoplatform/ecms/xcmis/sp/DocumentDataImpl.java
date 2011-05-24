@@ -428,6 +428,16 @@ class DocumentDataImpl extends BaseObjectData implements DocumentData
    }
 
    /**
+    * @return content stream file name if document has content and
+    *         <code>null</code> otherwise
+    */
+   public String getContentStreamFileName()
+   {
+      String contentFileName = entry.getContentStreamFileName();
+      return contentFileName;
+   }
+
+   /**
     * {@inheritDoc}
     */
    @Override
@@ -435,5 +445,4 @@ class DocumentDataImpl extends BaseObjectData implements DocumentData
    {
       entry.delete();
    }
-
 }

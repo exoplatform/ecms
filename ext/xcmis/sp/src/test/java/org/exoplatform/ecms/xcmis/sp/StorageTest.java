@@ -442,10 +442,15 @@ public class StorageTest extends BaseTest
 
    public void testCreateDocument() throws Exception
    {
-      PropertyDefinition<?> def = PropertyDefinitions.getPropertyDefinition("cmis:document", CmisConstants.NAME);
+      PropertyDefinition<?> nameDef = PropertyDefinitions.getPropertyDefinition("cmis:document", CmisConstants.NAME);
       Map<String, Property<?>> properties = new HashMap<String, Property<?>>();
-      properties.put(CmisConstants.NAME, new StringProperty(def.getId(), def.getQueryName(), def.getLocalName(), def
-         .getDisplayName(), "createDocumentTest"));
+      properties.put(CmisConstants.NAME, new StringProperty(nameDef.getId(), nameDef.getQueryName(),
+         nameDef.getLocalName(), nameDef.getDisplayName(), "createDocumentTest"));
+      PropertyDefinition<?> contentNameDef = PropertyDefinitions.getPropertyDefinition("cmis:document",
+         CmisConstants.CONTENT_STREAM_FILE_NAME);
+      properties.put(CmisConstants.CONTENT_STREAM_FILE_NAME, new StringProperty(contentNameDef.getId(),
+         contentNameDef.getQueryName(), contentNameDef.getLocalName(), contentNameDef.getDisplayName(),
+         "createDocumentTest_ContentFile.txt"));
 
       ContentStream cs =
          new BaseContentStream("to be or not to be".getBytes(), /*"createDocumentTest"*/null, new MimeType("text",
@@ -484,7 +489,7 @@ public class StorageTest extends BaseTest
       assertFalse(document.isVersionSeriesCheckedOut());
       assertEquals("latest", document.getVersionLabel());
       assertEquals("text/plain", document.getContentStreamMimeType());
-      assertEquals("createDocumentTest", document.getContentStream().getFileName());
+      assertEquals("createDocumentTest_ContentFile.txt", document.getContentStream().getFileName());
    }
 
    public void testCreateDocumentFromSource() throws Exception
@@ -1120,6 +1125,26 @@ public class StorageTest extends BaseTest
       System.out.println(" StorageTest.testMultifiling > new location: "
          + ((DocumentDataImpl)document).getNodeEntry().getNode().getPath());
    }
+
+
+
+
+
+
+   public void testGetMultifiledByPath() throws Exception
+   {
+      ContentStream cs = new BaseContentStream("to be or not to be".getBytes(), null, new MimeType("text", "plain"));
+      DocumentData document = createDocument(rootFolder, "multifiledByPathTest", "cmis:document", cs, null);
+      FolderData folder1 = createFolder(rootFolder, "multifiledByPathTest1", "cmis:folder");
+      FolderData folder2 = createFolder(rootFolder, "multifiledByPathTest2", "cmis:folder");
+      folder1.addObject(document);
+      folder2.addObject(document);
+
+      DocumentData doc = (DocumentData)storageA.getObjectByPath("/multifiledByPathTest2/multifiledByPathTest");
+      assertEquals(cs.length(), doc.getContentStream().length());
+
+   }
+
 
    public void testRenameDocument() throws Exception
    {

@@ -11,6 +11,7 @@ import org.exoplatform.services.jcr.core.NamespaceAccessor;
 import org.exoplatform.services.jcr.core.WorkspaceContainerFacade;
 import org.exoplatform.services.jcr.dataflow.PersistentDataManager;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
+import org.exoplatform.services.jcr.impl.Constants;
 import org.picocontainer.Startable;
 import org.xcmis.search.SearchService;
 import org.xcmis.search.SearchServiceException;
@@ -126,11 +127,10 @@ public class JcrCmisRegistry extends CmisRegistry implements Startable, CmisRegi
       //initialize search services
       if (rootIndexDir != null)
       {
-         IndexConfiguration indexConfiguration = new IndexConfiguration();
-         indexConfiguration.setIndexDir(rootIndexDir);
-
          try
          {
+            IndexConfiguration indexConfiguration = new IndexConfiguration(rootIndexDir, Constants.ROOT_PARENT_UUID, Constants.ROOT_UUID);
+
             String[] wsNames = getAffectedWorkspaceNames();
             String currentRepositoryName = repositoryService.getCurrentRepository().getConfiguration().getName();
             for (String wsName : wsNames)
@@ -150,15 +150,21 @@ public class JcrCmisRegistry extends CmisRegistry implements Startable, CmisRegi
                changesListener.onRegistryStart(indexConfiguration);
                dm.addItemPersistenceListener(changesListener);
                addSearchService(currentRepositoryName, wsName, changesListener.getSearchService());
-
             }
-
          }
          catch (RepositoryException e)
          {
             throw new CmisRuntimeException(e.getLocalizedMessage(), e);
          }
          catch (SearchServiceException e)
+         {
+            throw new CmisRuntimeException(e.getLocalizedMessage(), e);
+         }
+         catch (org.apache.tika.mime.MimeTypeException e)
+         {
+            throw new CmisRuntimeException(e.getLocalizedMessage(), e);
+         }
+         catch (java.io.IOException e)
          {
             throw new CmisRuntimeException(e.getLocalizedMessage(), e);
          }

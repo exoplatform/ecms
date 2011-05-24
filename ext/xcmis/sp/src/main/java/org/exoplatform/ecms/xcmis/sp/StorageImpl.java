@@ -140,8 +140,7 @@ public class StorageImpl extends BaseJcrStorage implements Storage
       }
    }
 
-   private static final Comparator<ObjectData> CREATION_DATE_COMPARATOR = new Comparator<ObjectData>()
-   {
+   private static final Comparator<ObjectData> CREATION_DATE_COMPARATOR = new Comparator<ObjectData>() {
       public int compare(ObjectData object1, ObjectData object2)
       {
          Calendar c1 = object1.getCreationDate();
@@ -183,7 +182,7 @@ public class StorageImpl extends BaseJcrStorage implements Storage
    {
       ConversationState state = ConversationState.getCurrent();
       AllowableActions actions =
-         permissionService.calculateAllowableActions(object, state != null ? state.getIdentity() : null,
+         permissionService.calculateAllowableActions(object, state != null ? state.getIdentity().getUserId() : null,
             getRepositoryInfo());
 
       if (object instanceof JcrFile)
@@ -221,9 +220,9 @@ public class StorageImpl extends BaseJcrStorage implements Storage
       {
          name = source.getName();
          PropertyDefinition<?> namePropertyDefinition = typeDefinition.getPropertyDefinition(CmisConstants.NAME);
-         properties.put(namePropertyDefinition.getId(), new StringProperty(namePropertyDefinition.getId(),
-            namePropertyDefinition.getQueryName(), namePropertyDefinition.getLocalName(), namePropertyDefinition
-               .getDisplayName(), name));
+         properties.put(namePropertyDefinition.getId(),
+            new StringProperty(namePropertyDefinition.getId(), namePropertyDefinition.getQueryName(),
+               namePropertyDefinition.getLocalName(), namePropertyDefinition.getDisplayName(), name));
       }
 
       try
@@ -259,6 +258,7 @@ public class StorageImpl extends BaseJcrStorage implements Storage
       {
          throw new NameConstraintViolationException("Name for new document must be provided.");
       }
+      
       JcrNodeEntry documentEntry =
          createDocumentEntry(parent != null ? ((FolderDataImpl)parent).getNodeEntry() : null, name, typeDefinition,
             versioningState);
@@ -272,6 +272,16 @@ public class StorageImpl extends BaseJcrStorage implements Storage
       documentEntry.setValue(CmisConstants.IS_MAJOR_VERSION, versioningState == VersioningState.MAJOR);
       // TODO : support for checked-out initial state
       documentEntry.setValue(CmisConstants.VERSION_LABEL, LATEST_LABEL);
+
+      Property<?> contentFileNameProperty = properties.get(CmisConstants.CONTENT_STREAM_FILE_NAME);
+      if (content != null && (contentFileNameProperty == null || contentFileNameProperty.getValues().isEmpty()))
+      {
+         String contentFileName = content.getFileName();
+         if (contentFileName != null)
+         {
+            documentEntry.setValue(CmisConstants.CONTENT_STREAM_FILE_NAME, contentFileName);
+         }
+      }
 
       for (Property<?> property : properties.values())
       {
@@ -920,6 +930,10 @@ public class StorageImpl extends BaseJcrStorage implements Storage
             {
                return new PWC(entry);
             }
+            if (node.isNodeType(JcrCMIS.NT_FROZEN_NODE))
+            {
+               return new DocumentVersion(entry);
+            }
             if (!node.isNodeType(JcrCMIS.CMIS_MIX_DOCUMENT))
             {
                // Has not required mixin 'cmis:document'. Some operation for
@@ -930,10 +944,6 @@ public class StorageImpl extends BaseJcrStorage implements Storage
                      + " has not 'cmis:document' mixin type. Some operations may be disabled.");
                }
                return new JcrFile(entry);
-            }
-            if (node.isNodeType(JcrCMIS.NT_FROZEN_NODE))
-            {
-               return new DocumentVersion(entry);
             }
             return new DocumentDataImpl(entry);
          }
@@ -978,8 +988,7 @@ public class StorageImpl extends BaseJcrStorage implements Storage
    }
 
    /**
-    * @param searchService
-    *           the searchService to set
+    * @param searchService the searchService to set
     */
    public void setSearchService(SearchService searchService)
    {
