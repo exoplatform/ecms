@@ -70,6 +70,7 @@ public class QueryPlugin extends BaseComponentPlugin {
       }
       queryHomeNode.save();
       session.save();
+      session.logout();
     } else {
       session = getSession() ;
       Node queryHomeNode = (Node)session.getItem(basedQueriesPath);
@@ -79,6 +80,7 @@ public class QueryPlugin extends BaseComponentPlugin {
       }
       queryHomeNode.save();
       session.save();
+      session.logout();
     }
   }
 
@@ -89,7 +91,7 @@ public class QueryPlugin extends BaseComponentPlugin {
 
   private Session getSession() throws Exception {
     DMSRepositoryConfiguration dmsRepoConfig = dmsConfiguration_.getConfig();
-    SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
+    SessionProvider sessionProvider = SessionProvider.createSystemProvider();
     return sessionProvider.getSession(dmsRepoConfig.getSystemWorkspace(), 
         repositoryService_.getCurrentRepository()) ;
   }
