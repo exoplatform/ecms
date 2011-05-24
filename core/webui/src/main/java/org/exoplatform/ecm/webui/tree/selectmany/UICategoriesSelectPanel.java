@@ -22,7 +22,9 @@ import java.util.List;
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
 
-import org.exoplatform.commons.utils.ObjectPageList;
+import org.exoplatform.commons.utils.LazyPageList;
+import org.exoplatform.commons.utils.ListAccess;
+import org.exoplatform.commons.utils.ListAccessImpl;
 import org.exoplatform.portal.webui.container.UIContainer;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -62,8 +64,9 @@ public class UICategoriesSelectPanel extends UIContainer{
   }
 
   public void updateGrid() throws Exception {
-    ObjectPageList objPageList = 
-      new ObjectPageList(NodeLocation.getLocationsByNodeList(getListSelectableNodes()), 4);
+    ListAccess<Object> selectableNodeList = new ListAccessImpl<Object>(Object.class,
+                                                                       NodeLocation.getLocationsByNodeList(getListSelectableNodes()));
+    LazyPageList<Object> objPageList = new LazyPageList<Object>(selectableNodeList, 4);
     uiPageIterator_.setPageList(objPageList);
   }
 

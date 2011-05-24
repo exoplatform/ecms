@@ -25,7 +25,9 @@ import javax.jcr.AccessDeniedException;
 import javax.jcr.Node;
 import javax.jcr.nodetype.NodeType;
 
-import org.exoplatform.commons.utils.ObjectPageList;
+import org.exoplatform.commons.utils.LazyPageList;
+import org.exoplatform.commons.utils.ListAccess;
+import org.exoplatform.commons.utils.ListAccessImpl;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.cms.templates.TemplateService;
@@ -200,9 +202,10 @@ public class UICBSearchResults extends UIContainer {
 
   public String[] getActions() { return new String[] {"Close"};}
 
-  public void updateGrid(List<ResultData> result) throws Exception {
-    ObjectPageList objPageList = new ObjectPageList(result, 10);
-    uiPageIterator_.setPageList(objPageList);
+  public void updateGrid(List<ResultData> rsult) throws Exception {
+    ListAccess<ResultData> resultData = new ListAccessImpl<ResultData>(ResultData.class, rsult);
+    LazyPageList<ResultData> dataPageList = new LazyPageList<ResultData>(resultData, 10);
+    uiPageIterator_.setPageList(dataPageList);
   }
 
   public static class ResultData {

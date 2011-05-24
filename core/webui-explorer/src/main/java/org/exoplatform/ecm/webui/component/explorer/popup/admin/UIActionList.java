@@ -23,7 +23,9 @@ import javax.jcr.AccessDeniedException;
 import javax.jcr.Node;
 import javax.jcr.PathNotFoundException;
 
-import org.exoplatform.commons.utils.ObjectPageList;
+import org.exoplatform.commons.utils.LazyPageList;
+import org.exoplatform.commons.utils.ListAccess;
+import org.exoplatform.commons.utils.ListAccessImpl;
 import org.exoplatform.ecm.webui.component.explorer.UIDocumentContainer;
 import org.exoplatform.ecm.webui.component.explorer.UIDocumentInfo;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
@@ -70,10 +72,12 @@ public class UIActionList extends UIContainer {
   @SuppressWarnings("unchecked")
 public void updateGrid(Node node, int currentPage) throws Exception {
     UIPageIterator uiIterator = getChild(UIPageIterator.class) ;
-    ObjectPageList objPageList = new ObjectPageList(NodeLocation.getLocationsByNodeList(getAllActions(node)), 10);
+    ListAccess<Object> actionList = new ListAccessImpl<Object>(Object.class,
+                                                               NodeLocation.getLocationsByNodeList(getAllActions(node)));
+    LazyPageList<Object> objPageList = new LazyPageList<Object>(actionList, 10);
     uiIterator.setPageList(objPageList);
     if(currentPage > uiIterator.getAvailablePage())
-      uiIterator.setCurrentPage(currentPage-1);
+      uiIterator.setCurrentPage(uiIterator.getAvailablePage());
     else
       uiIterator.setCurrentPage(currentPage);
   }

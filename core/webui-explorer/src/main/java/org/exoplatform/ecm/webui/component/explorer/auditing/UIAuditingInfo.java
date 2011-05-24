@@ -7,7 +7,9 @@ import java.util.List;
 
 import javax.jcr.Node;
 
-import org.exoplatform.commons.utils.ObjectPageList;
+import org.exoplatform.commons.utils.LazyPageList;
+import org.exoplatform.commons.utils.ListAccess;
+import org.exoplatform.commons.utils.ListAccessImpl;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.jcr.ext.audit.AuditHistory;
@@ -54,8 +56,10 @@ public class UIAuditingInfo extends UIContainer implements UIPopupComponent {
 
   @SuppressWarnings("unchecked")
   public void updateGrid() throws Exception {
-    ObjectPageList objPageList = new ObjectPageList(getRecords(), 10);
-    uiPageIterator_.setPageList(objPageList);
+    ListAccess<AuditRecordData> recordList = new ListAccessImpl<AuditRecordData>(AuditRecordData.class,
+                                                                                 getRecords());
+    LazyPageList<AuditRecordData> dataPageList = new LazyPageList<AuditRecordData>(recordList, 10);
+    uiPageIterator_.setPageList(dataPageList);
   }
 
   public List<AuditRecordData> getRecords() throws Exception {

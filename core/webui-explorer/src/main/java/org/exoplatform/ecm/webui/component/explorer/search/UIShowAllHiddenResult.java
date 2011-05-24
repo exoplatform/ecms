@@ -37,9 +37,9 @@ import javax.jcr.query.Query;
 import javax.jcr.query.QueryManager;
 import javax.jcr.query.QueryResult;
 
-import org.exoplatform.services.log.Log;
-import org.exoplatform.commons.utils.ObjectPageList;
-import org.exoplatform.commons.utils.PageList;
+import org.exoplatform.commons.utils.LazyPageList;
+import org.exoplatform.commons.utils.ListAccess;
+import org.exoplatform.commons.utils.ListAccessImpl;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
@@ -49,6 +49,7 @@ import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.portal.webui.workspace.UIPortalApplication;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -138,7 +139,8 @@ public class UIShowAllHiddenResult extends UIComponentDecorator {
 
   public void updateList() throws Exception {
     List<Node> nodeList = getNewHiddenNodeList();
-    PageList pageList = new ObjectPageList(nodeList, FILE_PER_PAGE);
+    ListAccess<Node> hiddenNodeList = new ListAccessImpl<Node>(Node.class, nodeList);
+    LazyPageList<Node> pageList = new LazyPageList<Node>(hiddenNodeList, FILE_PER_PAGE);
     uiPageIterator_.setPageList(pageList);
     hiddenNodes_ = nodeList;
   }
@@ -150,7 +152,8 @@ public class UIShowAllHiddenResult extends UIComponentDecorator {
       nodeListChange = false;
     }
     Collections.sort(hiddenNodes_, new SearchComparator());
-    PageList pageList = new ObjectPageList(hiddenNodes_, FILE_PER_PAGE);
+    ListAccess<Node> hiddenNodeList = new ListAccessImpl<Node>(Node.class, hiddenNodes_);
+    LazyPageList<Node> pageList = new LazyPageList<Node>(hiddenNodeList, FILE_PER_PAGE);
 
     UIPageIterator uiPageIterator = uiPageIterator_;
     uiPageIterator.setPageList(pageList);
@@ -158,8 +161,7 @@ public class UIShowAllHiddenResult extends UIComponentDecorator {
     if (uiPageIterator.getAvailablePage() >= currentPage)
       uiPageIterator.setCurrentPage(currentPage);
     else {
-      uiPageIterator.setCurrentPage(
-        uiPageIterator.getAvailablePage());
+      uiPageIterator.setCurrentPage(uiPageIterator.getAvailablePage());
     }
     event.getRequestContext().addUIComponentToUpdateByAjax(this.getParent());
   }
@@ -182,12 +184,10 @@ public class UIShowAllHiddenResult extends UIComponentDecorator {
     }
   }
 
-  public static class SortDESCActionListener extends
-      EventListener<UIShowAllHiddenResult> {
+  public static class SortDESCActionListener extends EventListener<UIShowAllHiddenResult> {
     @Override
     public void execute(Event<UIShowAllHiddenResult> event) throws Exception {
-      UIShowAllHiddenResult uiShowAllHiddenResult
-          = event.getSource();
+      UIShowAllHiddenResult uiShowAllHiddenResult = event.getSource();
       String objectId = event.getRequestContext().getRequestParameter(OBJECTID);
       if (objectId.equals("type")) {
         iconType = "BlueUpArrow";
@@ -201,133 +201,148 @@ public class UIShowAllHiddenResult extends UIComponentDecorator {
     }
   }
 
-  static  public class RemoveHiddenAttributeActionListener extends EventListener<UIShowAllHiddenResult> {
-      public void execute(Event<UIShowAllHiddenResult> event) throws Exception {
-          //final String virtualNodePath = nodePath;
-          String srcPath = event.getRequestContext().getRequestParameter(OBJECTID);
-          UIShowAllHiddenResult uiShowAllHiddenResult = event.getSource();
-          UIJCRExplorer uiExplorer = uiShowAllHiddenResult.getAncestorOfType(UIJCRExplorer.class);
-        UIApplication uiApp = uiShowAllHiddenResult.getAncestorOfType(UIApplication.class);
+  static public class RemoveHiddenAttributeActionListener extends
+                                                         EventListener<UIShowAllHiddenResult> {
+    public void execute(Event<UIShowAllHiddenResult> event) throws Exception {
+      // final String virtualNodePath = nodePath;
+      String srcPath = event.getRequestContext().getRequestParameter(OBJECTID);
+      UIShowAllHiddenResult uiShowAllHiddenResult = event.getSource();
+      UIJCRExplorer uiExplorer = uiShowAllHiddenResult.getAncestorOfType(UIJCRExplorer.class);
+      UIApplication uiApp = uiShowAllHiddenResult.getAncestorOfType(UIApplication.class);
 
-        Matcher matcher = UIWorkingArea.FILE_EXPLORER_URL_SYNTAX.matcher(srcPath);
-        String wsName = null;
-        Node node = null;
-        if (matcher.find()) {
-          wsName = matcher.group(1);
-          srcPath = matcher.group(2);
-        } else {
-          throw new IllegalArgumentException("The ObjectId is invalid '"+ srcPath + "'");
-        }
-
-        Session session = uiExplorer.getSessionByWorkspace(wsName);
-        try {
-          // Use the method getNodeByPath because it is link aware
-          node = uiExplorer.getNodeByPath(srcPath, session, false);
-          // Reset the path to manage the links that potentially create virtual path
-          //srcPath = node.getPath();
-          // Reset the session to manage the links that potentially change of workspace
-          session = node.getSession();
-          // Reset the workspace name to manage the links that potentially change of workspace
-          //wsName = session.getWorkspace().getName();
-        } catch(PathNotFoundException path) {
-          uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.path-not-found-exception",
-              null,ApplicationMessage.WARNING));
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
-          return;
-        }
-
-        try {
-          uiExplorer.addLockToken(node);
-        } catch (Exception e) {
-          JCRExceptionManager.process(uiApp, e);
-          return;
-        }
-
-        try {
-          if (PermissionUtil.canRemoveNode(node)) {
-            uiShowAllHiddenResult.nodeListChange = true;
-            node.removeMixin(Utils.EXO_HIDDENABLE);
-            node.save();
-          uiShowAllHiddenResult.updateTable(event);
-          } else {
-            throw new AccessDeniedException();
-          }
-        } catch (LockException e) {
-          LOG.error("node is locked, can't remove hidden property of node :" + node.getPath());
-          JCRExceptionManager.process(uiApp, e);
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
-          uiExplorer.updateAjax(event);
-        } catch (AccessDeniedException e) {
-          LOG.error("Access denied! No permission for modifying property " +
-                Utils.EXO_HIDDENABLE + " of node: " + node.getPath());
-          uiApp.addMessage(new ApplicationMessage("UIShowAllHiddenResult.msg.accessDenied", null, ApplicationMessage.WARNING));
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
-          } catch (Exception e) {
-            LOG.error("an unexpected error occurs while removing the node", e);
-            JCRExceptionManager.process(uiApp, e);
-            event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
-            return;
-          }
+      Matcher matcher = UIWorkingArea.FILE_EXPLORER_URL_SYNTAX.matcher(srcPath);
+      String wsName = null;
+      Node node = null;
+      if (matcher.find()) {
+        wsName = matcher.group(1);
+        srcPath = matcher.group(2);
+      } else {
+        throw new IllegalArgumentException("The ObjectId is invalid '" + srcPath + "'");
       }
-  }
 
-  static  public class ViewActionListener extends EventListener<UIShowAllHiddenResult> {
-      public void execute(Event<UIShowAllHiddenResult> event) throws Exception {
-        UIShowAllHiddenResult uiShowAllHiddenResult = event.getSource();
-        UIJCRExplorer uiExplorer = uiShowAllHiddenResult.getAncestorOfType(UIJCRExplorer.class);
-        String path = event.getRequestContext().getRequestParameter(OBJECTID);
-        UIApplication uiApp = uiShowAllHiddenResult.getAncestorOfType(UIApplication.class);
-        Node node;
-        try {
-          node = uiExplorer.getNodeByPath(path, uiExplorer.getTargetSession());
-        } catch(AccessDeniedException ace) {
-          uiApp.addMessage(new ApplicationMessage("UIShowAllHiddenResult.msg.access-denied", null,
-                                                  ApplicationMessage.WARNING));
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
-          return;
-        }
-        TemplateService templateService = uiShowAllHiddenResult.getApplicationComponent(TemplateService.class);
-        if (!templateService.isManagedNodeType(node.getPrimaryNodeType().getName())) {
-          uiApp.addMessage(new ApplicationMessage("UIShowAllHiddenResult.msg.not-support", null,
-                                                  ApplicationMessage.WARNING));
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
-          return;
-        }
-        UIPopupWindow uiPopup = uiExplorer.getChildById("ViewSearch");
-        if (uiPopup == null) {
-          uiPopup = uiExplorer.addChild(UIPopupWindow.class, null, "ViewSearch");
-        }
-        uiPopup.setResizable(true);
-        UIViewSearchResult uiViewSearch = uiPopup.createUIComponent(UIViewSearchResult.class, null, null);
-        uiViewSearch.setNode(node);
-
-        uiPopup.setWindowSize(600,750);
-        uiPopup.setUIComponent(uiViewSearch);
-        uiPopup.setRendered(true);
-        uiPopup.setShow(true);
+      Session session = uiExplorer.getSessionByWorkspace(wsName);
+      try {
+        // Use the method getNodeByPath because it is link aware
+        node = uiExplorer.getNodeByPath(srcPath, session, false);
+        // Reset the path to manage the links that potentially create virtual
+        // path
+        // srcPath = node.getPath();
+        // Reset the session to manage the links that potentially change of
+        // workspace
+        session = node.getSession();
+        // Reset the workspace name to manage the links that potentially change
+        // of workspace
+        // wsName = session.getWorkspace().getName();
+      } catch (PathNotFoundException path) {
+        uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.path-not-found-exception",
+                                                null,
+                                                ApplicationMessage.WARNING));
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
         return;
       }
+
+      try {
+        uiExplorer.addLockToken(node);
+      } catch (Exception e) {
+        JCRExceptionManager.process(uiApp, e);
+        return;
+      }
+
+      try {
+        if (PermissionUtil.canRemoveNode(node)) {
+          uiShowAllHiddenResult.nodeListChange = true;
+          node.removeMixin(Utils.EXO_HIDDENABLE);
+          node.save();
+          uiShowAllHiddenResult.updateTable(event);
+        } else {
+          throw new AccessDeniedException();
+        }
+      } catch (LockException e) {
+        LOG.error("node is locked, can't remove hidden property of node :" + node.getPath());
+        JCRExceptionManager.process(uiApp, e);
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        uiExplorer.updateAjax(event);
+      } catch (AccessDeniedException e) {
+        LOG.error("Access denied! No permission for modifying property " + Utils.EXO_HIDDENABLE
+            + " of node: " + node.getPath());
+        uiApp.addMessage(new ApplicationMessage("UIShowAllHiddenResult.msg.accessDenied",
+                                                null,
+                                                ApplicationMessage.WARNING));
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+      } catch (Exception e) {
+        LOG.error("an unexpected error occurs while removing the node", e);
+        JCRExceptionManager.process(uiApp, e);
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        return;
+      }
+    }
+  }
+
+  static public class ViewActionListener extends EventListener<UIShowAllHiddenResult> {
+    public void execute(Event<UIShowAllHiddenResult> event) throws Exception {
+      UIShowAllHiddenResult uiShowAllHiddenResult = event.getSource();
+      UIJCRExplorer uiExplorer = uiShowAllHiddenResult.getAncestorOfType(UIJCRExplorer.class);
+      String path = event.getRequestContext().getRequestParameter(OBJECTID);
+      UIApplication uiApp = uiShowAllHiddenResult.getAncestorOfType(UIApplication.class);
+      Node node;
+      try {
+        node = uiExplorer.getNodeByPath(path, uiExplorer.getTargetSession());
+      } catch (AccessDeniedException ace) {
+        uiApp.addMessage(new ApplicationMessage("UIShowAllHiddenResult.msg.access-denied",
+                                                null,
+                                                ApplicationMessage.WARNING));
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        return;
+      }
+      TemplateService templateService = uiShowAllHiddenResult.getApplicationComponent(TemplateService.class);
+      if (!templateService.isManagedNodeType(node.getPrimaryNodeType().getName())) {
+        uiApp.addMessage(new ApplicationMessage("UIShowAllHiddenResult.msg.not-support",
+                                                null,
+                                                ApplicationMessage.WARNING));
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        return;
+      }
+      UIPopupWindow uiPopup = uiExplorer.getChildById("ViewSearch");
+      if (uiPopup == null) {
+        uiPopup = uiExplorer.addChild(UIPopupWindow.class, null, "ViewSearch");
+      }
+      uiPopup.setResizable(true);
+      UIViewSearchResult uiViewSearch = uiPopup.createUIComponent(UIViewSearchResult.class,
+                                                                  null,
+                                                                  null);
+      uiViewSearch.setNode(node);
+
+      uiPopup.setWindowSize(600, 750);
+      uiPopup.setUIComponent(uiViewSearch);
+      uiPopup.setRendered(true);
+      uiPopup.setShow(true);
+      return;
+    }
   }
 
   private static class SearchComparator implements Comparator<Node> {
-      public int compare(Node node1, Node node2) {
-        try {
-          if (iconType.equals("BlueUpArrow") || iconType.equals("BlueDownArrow")) {
-            String s1 = node1.getProperty("jcr:primaryType").getString();
-            String s2 = node2.getProperty("jcr:primaryType").getString();
-            if (iconType.trim().equals("BlueUpArrow")) { return s2.compareTo(s1); }
-            return s1.compareTo(s2);
-          } else if (iconName.equals("BlueUpArrow") || iconName.equals("BlueDownArrow")) {
-            String name1 = node1.getName();
-            String name2 = node2.getName();
-            if (iconName.trim().equals("BlueUpArrow")) { return name2.compareTo(name1); }
-            return name1.compareTo(name2);
+    public int compare(Node node1, Node node2) {
+      try {
+        if (iconType.equals("BlueUpArrow") || iconType.equals("BlueDownArrow")) {
+          String s1 = node1.getProperty("jcr:primaryType").getString();
+          String s2 = node2.getProperty("jcr:primaryType").getString();
+          if (iconType.trim().equals("BlueUpArrow")) {
+            return s2.compareTo(s1);
           }
-        } catch (Exception e) {
-          LOG.error("Cannot compare nodes", e);
+          return s1.compareTo(s2);
+        } else if (iconName.equals("BlueUpArrow") || iconName.equals("BlueDownArrow")) {
+          String name1 = node1.getName();
+          String name2 = node2.getName();
+          if (iconName.trim().equals("BlueUpArrow")) {
+            return name2.compareTo(name1);
+          }
+          return name1.compareTo(name2);
         }
-        return 0;
+      } catch (Exception e) {
+        LOG.error("Cannot compare nodes", e);
       }
+      return 0;
+    }
   }
 
 }

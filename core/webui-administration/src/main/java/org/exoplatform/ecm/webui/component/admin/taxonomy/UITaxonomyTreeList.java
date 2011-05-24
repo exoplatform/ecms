@@ -25,7 +25,9 @@ import javax.jcr.RepositoryException;
 import javax.jcr.Value;
 import javax.jcr.ValueFormatException;
 
-import org.exoplatform.commons.utils.ObjectPageList;
+import org.exoplatform.commons.utils.LazyPageList;
+import org.exoplatform.commons.utils.ListAccess;
+import org.exoplatform.commons.utils.ListAccessImpl;
 import org.exoplatform.ecm.webui.component.admin.UIECMAdminPortlet;
 import org.exoplatform.services.cms.actions.ActionServiceContainer;
 import org.exoplatform.services.cms.taxonomy.TaxonomyService;
@@ -83,10 +85,13 @@ public class UITaxonomyTreeList extends UIComponentDecorator {
   }
 
   public void updateTaxonomyTreeListGrid(int currentPage) throws Exception {
-    ObjectPageList objPageList = new ObjectPageList(getAllTaxonomyTreeList(), 10);
-    uiPageIterator_.setPageList(objPageList);
+    ListAccess<TaxonomyTreeData> taxonomyTreeList = new ListAccessImpl<TaxonomyTreeData>(TaxonomyTreeData.class,
+                                                                                         getAllTaxonomyTreeList());
+    LazyPageList<TaxonomyTreeData> dataPageList = new LazyPageList<TaxonomyTreeData>(taxonomyTreeList,
+                                                                                     10);
+    uiPageIterator_.setPageList(dataPageList);
     if (currentPage > getUIPageIterator().getAvailablePage())
-      uiPageIterator_.setCurrentPage(currentPage - 1);
+      uiPageIterator_.setCurrentPage(getUIPageIterator().getAvailablePage());
     else
       uiPageIterator_.setCurrentPage(currentPage);
   }

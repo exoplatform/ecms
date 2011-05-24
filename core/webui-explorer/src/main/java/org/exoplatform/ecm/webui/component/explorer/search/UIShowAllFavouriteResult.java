@@ -32,9 +32,9 @@ import javax.jcr.AccessDeniedException;
 import javax.jcr.Node;
 import javax.jcr.lock.LockException;
 
-import org.exoplatform.services.log.Log;
-import org.exoplatform.commons.utils.ObjectPageList;
-import org.exoplatform.commons.utils.PageList;
+import org.exoplatform.commons.utils.LazyPageList;
+import org.exoplatform.commons.utils.ListAccess;
+import org.exoplatform.commons.utils.ListAccessImpl;
 import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
@@ -47,6 +47,7 @@ import org.exoplatform.services.cms.documents.FavoriteService;
 import org.exoplatform.services.cms.link.LinkUtils;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -143,7 +144,8 @@ public class UIShowAllFavouriteResult extends UIComponentDecorator {
 
   public void updateList() throws Exception {
     List<Node> nodeList = getNewFavouriteNodeList();
-    PageList pageList = new ObjectPageList(nodeList, FILE_PER_PAGE);
+    ListAccess<Node> favorNodeList = new ListAccessImpl<Node>(Node.class, nodeList);
+    LazyPageList<Node> pageList = new LazyPageList<Node>(favorNodeList, FILE_PER_PAGE);
     uiPageIterator_.setPageList(pageList);
 
     favouriteNodes_ = nodeList;
@@ -171,7 +173,9 @@ public class UIShowAllFavouriteResult extends UIComponentDecorator {
         uiShowAllFavouriteResult.favouriteChange = false;
       }
       Collections.sort(uiShowAllFavouriteResult.favouriteNodes_, new SearchComparator());
-      PageList pageList = new ObjectPageList(uiShowAllFavouriteResult.favouriteNodes_, FILE_PER_PAGE);
+      ListAccess<Node> favorNodeList = new ListAccessImpl<Node>(Node.class,
+                                                                uiShowAllFavouriteResult.favouriteNodes_);
+      LazyPageList<Node> pageList = new LazyPageList<Node>(favorNodeList, FILE_PER_PAGE);
 
       UIPageIterator uiPageIterator = uiShowAllFavouriteResult.uiPageIterator_;
       uiPageIterator.setPageList(pageList);
@@ -206,7 +210,9 @@ public class UIShowAllFavouriteResult extends UIComponentDecorator {
       }
 
       Collections.sort(uiShowAllFavouriteResult.favouriteNodes_, new SearchComparator());
-      PageList pageList = new ObjectPageList(uiShowAllFavouriteResult.favouriteNodes_, FILE_PER_PAGE);
+      ListAccess<Node> favorNodeList = new ListAccessImpl<Node>(Node.class,
+                                                                uiShowAllFavouriteResult.favouriteNodes_);
+      LazyPageList<Node> pageList = new LazyPageList<Node>(favorNodeList, FILE_PER_PAGE);
 
       UIPageIterator uiPageIterator = uiShowAllFavouriteResult.uiPageIterator_;
       uiPageIterator.setPageList(pageList);

@@ -27,7 +27,9 @@ import javax.jcr.AccessDeniedException;
 import javax.jcr.Node;
 import javax.jcr.Session;
 
-import org.exoplatform.commons.utils.ObjectPageList;
+import org.exoplatform.commons.utils.LazyPageList;
+import org.exoplatform.commons.utils.ListAccess;
+import org.exoplatform.commons.utils.ListAccessImpl;
 import org.exoplatform.ecm.webui.form.UIFormInputSetWithAction;
 import org.exoplatform.ecm.webui.selector.UIGroupMemberSelector;
 import org.exoplatform.ecm.webui.selector.UISelectable;
@@ -188,9 +190,12 @@ public class UIPermissionManager extends UIForm implements UISelectable {
       }
       permissionConfigs.add(permBean);
     }
-    ObjectPageList objPageList = new ObjectPageList(permissionConfigs, 10);
+    ListAccess<UIPermissionConfig> permConfigList = new ListAccessImpl<UIPermissionConfig>(UIPermissionConfig.class,
+                                                                                           permissionConfigs);
+    LazyPageList<UIPermissionConfig> dataPageList = new LazyPageList<UIPermissionConfig>(permConfigList,
+                                                                                         10);
     UIGrid uiGrid = getChildById(PERMISSION_MANAGER_GRID);
-    uiGrid.getUIPageIterator().setPageList(objPageList);
+    uiGrid.getUIPageIterator().setPageList(dataPageList);
   }
 
   /* (non-Javadoc)
