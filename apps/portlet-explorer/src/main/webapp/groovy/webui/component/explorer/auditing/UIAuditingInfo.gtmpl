@@ -25,7 +25,7 @@
   	 	      if (even) rowClass = "EvenRow";  
 	  	      else rowClass = "OddRow"; 
 	  	      even = !even;
-	  	      String versionName = uicomponent.getVersionName(ar);
+	  	      String versionName = ar.getVersionName();
 	  	      String labelName = "UIAuditingInfo.eventName.e_" + ar.getEventType();
 	     %>
 	          <tr class="$rowClass">

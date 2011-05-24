@@ -98,7 +98,7 @@ public class UISearchResult extends UIContainer {
   private boolean flag_ = false;
   private UIQueryResultPageIterator uiPageIterator_;
   private List<Node> currentListNodes_ = new ArrayList<Node>();
-  private List<Row> currentListRows_ = new ArrayList<Row>();
+  private List<RowData> currentListRows_ = new ArrayList<RowData>();
   private int currentAvailablePage_ = 0;
   private boolean isEndOfIterator_ = false;
   private static String iconType = "";
@@ -141,18 +141,18 @@ public class UISearchResult extends UIContainer {
     return SimpleDateFormat.getDateTimeInstance(SimpleDateFormat.SHORT, SimpleDateFormat.SHORT, locale);
   }
 
-  private void addNode(List<Node> listNodes, Node node, List<Row> listRows, Row r) throws Exception {
+  private void addNode(List<Node> listNodes, Node node, List<RowData> listRows, Row r) throws Exception {
     List<Node> checkList = new ArrayList<Node>();
     if (flag_) checkList = currentListNodes_;
     else checkList = listNodes;
     if (node.getName().equals(Utils.JCR_CONTENT)) {
       if (!checkList.contains(node.getParent())) {
         listNodes.add(node.getParent());
-        listRows.add(r);
+        listRows.add(new RowData(r));
       }
     } else if (!checkList.contains(node)) {
       listNodes.add(node);
-      listRows.add(r);
+      listRows.add(new RowData(r));
     }
   }
 
@@ -176,14 +176,14 @@ public class UISearchResult extends UIContainer {
     }
   }
 
-  public List<Row> getResultList() throws Exception {
+  public List<RowData> getResultList() throws Exception {
     TaxonomyService taxonomyService = getApplicationComponent(TaxonomyService.class);
     NodeHierarchyCreator nodeHierarchyCreator = getApplicationComponent(NodeHierarchyCreator.class);
     String rootTreePath = nodeHierarchyCreator.getJcrPath(BasePath.TAXONOMIES_TREE_STORAGE_PATH);
     List<Node> listNodes = new ArrayList<Node>();
-    List<Row> listRows = new ArrayList<Row>();
+    List<RowData> listRows = new ArrayList<RowData>();
     Node resultNode = null;
-    if (queryResult_ == null) return new ArrayList<Row>();
+    if (queryResult_ == null) return new ArrayList<RowData>();
     long resultListSize = queryResult_.getNodes().getSize();
     if (!queryResult_.getRows().hasNext()) return currentListRows_;
     if (resultListSize > 100) {
@@ -302,17 +302,17 @@ public class UISearchResult extends UIContainer {
 
   public int getCurrentAvaiablePage() { return currentAvailablePage_; }
 
-  private static class SearchComparator implements Comparator<Row> {
-    public int compare(Row row1, Row row2) {
+  private static class SearchComparator implements Comparator<RowData> {
+    public int compare(RowData row1, RowData row2) {
       try {
         if (iconType.equals("BlueUpArrow") || iconType.equals("BlueDownArrow")) {
-          String s1 = row1.getValue("jcr:primaryType").getString();
-          String s2 = row2.getValue("jcr:primaryType").getString();
+          String s1 = row1.getJcrPrimaryType();
+          String s2 = row2.getJcrPrimaryType();
           if (iconType.trim().equals("BlueUpArrow")) { return s2.compareTo(s1); }
           return s1.compareTo(s2);
         } else if (iconScore.equals("BlueUpArrow") || iconScore.equals("BlueDownArrow")) {
-          Long l1 = row1.getValue("jcr:score").getLong();
-          Long l2 = row2.getValue("jcr:score").getLong();
+          Long l1 = row1.getJcrScore();
+          Long l2 = row2.getJcrScore();
           if (iconScore.trim().equals("BlueUpArrow")) { return l2.compareTo(l1); }
           return l1.compareTo(l2);
         }
@@ -453,6 +453,60 @@ public class UISearchResult extends UIContainer {
       uiSearchResult.uiPageIterator_.setSearchResultPageList(pageList);
       uiSearchResult.uiPageIterator_.setPageList(pageList);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiSearchResult.getParent());
+    }
+  }
+  
+  public static class RowData {
+    private String jcrPath = "";
+    private String repExcerpt = "";
+    private long jcrScore = 0;
+    private String jcrPrimaryType = "";
+    
+    public RowData(Row row) {
+      try {
+        jcrPath = row.getValue("jcr:path").getString();
+      } catch (Exception e) {}
+      try {
+        repExcerpt = row.getValue("rep:excerpt(.)").getString();
+      } catch (Exception e) {}
+      try {
+        jcrScore = row.getValue("jcr:score").getLong();
+      } catch (Exception e) {}
+      try {
+        jcrPrimaryType = row.getValue("jcr:primaryType").getString();
+      } catch (Exception e) {}
+    }
+
+    public String getJcrPath() {
+      return jcrPath;
+    }
+
+    public void setJcrPath(String jcrPath) {
+      this.jcrPath = jcrPath;
+    }
+
+    public String getRepExcerpt() {
+      return repExcerpt;
+    }
+
+    public void setRepExcerpt(String repExcerpt) {
+      this.repExcerpt = repExcerpt;
+    }
+
+    public long getJcrScore() {
+      return jcrScore;
+    }
+
+    public void setJcrScore(long jcrScore) {
+      this.jcrScore = jcrScore;
+    }
+    
+    public String getJcrPrimaryType() {
+      return jcrPrimaryType;
+    }
+    
+    public void setJcrPrimaryType(String value) {
+      jcrPrimaryType = value;
     }
   }
 }

@@ -32,6 +32,7 @@ import org.exoplatform.portal.webui.container.UIContainer;
 import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.ecm.publication.PublicationService;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
+import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIBreadcumbs;
@@ -129,10 +130,12 @@ public class UISelectPathPanel extends UIContainer {
   public String[] getAcceptedMimeTypes() { return acceptedMimeTypes; }
   public void setAcceptedMimeTypes(String[] acceptedMimeTypes) { this.acceptedMimeTypes = acceptedMimeTypes; }
 
-  public List getSelectableNodes() throws Exception { return uiPageIterator_.getCurrentPageData(); }
+  public List getSelectableNodes() throws Exception { 
+    return NodeLocation.getNodeListByLocationList(uiPageIterator_.getCurrentPageData()); 
+  }
 
   public void updateGrid() throws Exception {
-    ObjectPageList objPageList = new ObjectPageList(getListSelectableNodes(), 10);
+    ObjectPageList objPageList = new ObjectPageList(NodeLocation.getLocationsByNodeList(getListSelectableNodes()), 10);
     uiPageIterator_.setPageList(objPageList);
   }
 

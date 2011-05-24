@@ -579,7 +579,7 @@ public class UICLVPresentation extends UIContainer {
 
   @SuppressWarnings("unchecked")
   public List getCurrentPageData() throws Exception {
-    return uiPaginator.getCurrentPageData();
+    return NodeLocation.getNodeListByLocationList(uiPaginator.getCurrentPageData());
   }
 
   public void setDateTimeFormat(String format) {

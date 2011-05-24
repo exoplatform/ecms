@@ -19,6 +19,7 @@ package org.exoplatform.ecm.webui.nodetype.selector;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -80,7 +81,7 @@ public class UINodeTypeSelector extends UIForm implements ComponentSelector {
 
   private static final String ALL_DOCUMENT_TYPES = "ALL_DOCUMENT_TYPES";
 
-  private List<NodeType> lstNodetype;
+  private List<NodeTypeBean> lstNodetype;
 
   private String[] actions_ = {"Save", "Refresh", "Close"};
 
@@ -104,11 +105,11 @@ public class UINodeTypeSelector extends UIForm implements ComponentSelector {
     }
   }
 
-  public List<NodeType> getLSTNodetype() {
+  public List<NodeTypeBean> getLSTNodetype() {
     return lstNodetype;
   }
 
-  public void setLSTNodetype(List<NodeType> lstNodetype) {
+  public void setLSTNodetype(List<NodeTypeBean> lstNodetype) {
     this.lstNodetype = lstNodetype;
   }
 
@@ -155,19 +156,19 @@ public class UINodeTypeSelector extends UIForm implements ComponentSelector {
     return uiPageIterator_;
   }
 
-  public List<NodeType> getNodeTypeList() throws Exception {
+  public List<NodeTypeBean> getNodeTypeList() throws Exception {
     return uiPageIterator_.getCurrentPageData();
   }
 
-  public List<NodeType> getAllNodeTypes() throws Exception{
-    List<NodeType> nodeList = new ArrayList<NodeType>();
+  public List<NodeTypeBean> getAllNodeTypes() throws Exception{
+    List<NodeTypeBean> nodeList = new ArrayList<NodeTypeBean>();
     ManageableRepository mRepository = getApplicationComponent(RepositoryService.class).getCurrentRepository() ;
     NodeTypeManager ntManager = mRepository.getNodeTypeManager() ;
     NodeTypeIterator nodeTypeIter = ntManager.getAllNodeTypes() ;
     while(nodeTypeIter.hasNext()) {
-      nodeList.add(nodeTypeIter.nextNodeType()) ;
+      nodeList.add(new NodeTypeBean(nodeTypeIter.nextNodeType())) ;
     }
-    Collections.sort(nodeList, new Utils.NodeTypeNameComparator()) ;
+    Collections.sort(nodeList, new NodeTypeNameComparator()) ;
     return nodeList ;
   }
 
@@ -185,7 +186,7 @@ public class UINodeTypeSelector extends UIForm implements ComponentSelector {
     init(currentPage, values, lstNodetype);
   }
 
-  protected void init(int currentPage, List<String> values, List<NodeType> lstNodetype) throws Exception {
+  protected void init(int currentPage, List<String> values, List<NodeTypeBean> lstNodetype) throws Exception {
     if (lstNodetype == null) return;
     PageList pageList = new ObjectPageList(lstNodetype, 5);
     uiPageIterator_.setPageList(pageList);
@@ -207,7 +208,7 @@ public class UINodeTypeSelector extends UIForm implements ComponentSelector {
     }
 
     addChild(uiCheckbox);
-    for(NodeType nt : lstNodetype) {
+    for(NodeTypeBean nt : lstNodetype) {
       String ntName = nt.getName();
       uiCheckbox = new UIFormCheckBoxInput<String>(ntName, ntName, ntName);
       uiCheckbox.setOnChange("OnChange");
@@ -242,8 +243,8 @@ public class UINodeTypeSelector extends UIForm implements ComponentSelector {
       if (uiNodeTypeSelect.lstNodetype == null) {
         uiNodeTypeSelect.lstNodetype = uiNodeTypeSelect.getAllNodeTypes();
       }
-      List<NodeType> lstNodetype = new ArrayList<NodeType>();
-      for (NodeType nodeType : uiNodeTypeSelect.lstNodetype) {
+      List<NodeTypeBean> lstNodetype = new ArrayList<NodeTypeBean>();
+      for (NodeTypeBean nodeType : uiNodeTypeSelect.lstNodetype) {
         if (p.matcher(nodeType.getName()).find()) {
           lstNodetype.add(nodeType);
         }
@@ -315,10 +316,10 @@ public class UINodeTypeSelector extends UIForm implements ComponentSelector {
       List<String> selectedNodetypes = uiNodeTypeSelect.getSelectedNodetypes();
       List<String> preSelectedNodetypes = new ArrayList<String>();
       preSelectedNodetypes.addAll(selectedNodetypes);
-      List<NodeType> lstNodeType = uiNodeTypeSelect.getNodeTypeList();
+      List<NodeTypeBean> lstNodeType = uiNodeTypeSelect.getNodeTypeList();
       UIFormCheckBoxInput uiCheckBox = (UIFormCheckBoxInput)uiNodeTypeSelect.getChildById(ALL_DOCUMENT_TYPES);
       updateCheckBox(selectedNodetypes, uiCheckBox);
-      for (NodeType nodetype : lstNodeType) {
+      for (NodeTypeBean nodetype : lstNodeType) {
         uiCheckBox = (UIFormCheckBoxInput) uiNodeTypeSelect.getChildById(nodetype.getName());
         updateCheckBox(selectedNodetypes, uiCheckBox);
       }
@@ -367,4 +368,38 @@ public class UINodeTypeSelector extends UIForm implements ComponentSelector {
       event.getRequestContext().addUIComponentToUpdateByAjax(uiPopup);
     }
   }
+  
+  public static class NodeTypeBean {
+    private String nodeTypeName_;
+    private boolean isMixin_;
+    
+    public NodeTypeBean(NodeType nodeType) {
+      this.nodeTypeName_ = nodeType.getName();
+      this.isMixin_ = nodeType.isMixin();
+    }
+
+    public String getName() {
+      return nodeTypeName_;
+    }
+
+    public void setName(String nodeTypeName) {
+      nodeTypeName_ = nodeTypeName;
+    }
+
+    public boolean isMixin() {
+      return isMixin_;
+    }
+
+    public void setMixin(boolean isMixin) {
+      isMixin_ = isMixin;
+    }
+  }
+  
+  static public class NodeTypeNameComparator implements Comparator<NodeTypeBean> {
+    public int compare(NodeTypeBean n1, NodeTypeBean n2) throws ClassCastException {
+      String name1 = n1.getName();
+      String name2 = n2.getName();
+      return name1.compareToIgnoreCase(name2);
+    }
+  }  
 }

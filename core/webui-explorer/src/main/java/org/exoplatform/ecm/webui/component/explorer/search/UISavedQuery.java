@@ -20,7 +20,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.jcr.AccessDeniedException;
+import javax.jcr.ItemNotFoundException;
 import javax.jcr.Node;
+import javax.jcr.RepositoryException;
 import javax.jcr.query.Query;
 import javax.jcr.query.QueryResult;
 
@@ -35,6 +37,7 @@ import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.queries.QueryService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.application.portlet.PortletRequestContext;
@@ -68,8 +71,6 @@ public class UISavedQuery extends UIContainer implements UIPopupComponent {
   final static public String EDIT_FORM = "EditSavedQueryForm";
 
   private UIPageIterator uiPageIterator_;
-  private List<Node> sharedQueries_ = new ArrayList<Node>();
-  private List<Query> privateQueries = new ArrayList<Query>();
 
   private boolean isQuickSearch_ = false;
   private String repositoryName_;
@@ -79,7 +80,7 @@ public class UISavedQuery extends UIContainer implements UIPopupComponent {
   }
 
   public void updateGrid(int currentPage) throws Exception {
-    PageList pageList = new ObjectPageList(queryList(), 10);
+    PageList pageList = new ObjectPageList(NodeLocation.getLocationsByNodeList(queryList()), 10);
     uiPageIterator_.setPageList(pageList);
     if(currentPage > uiPageIterator_.getAvailablePage())
       uiPageIterator_.setCurrentPage(currentPage-1);
@@ -89,14 +90,16 @@ public class UISavedQuery extends UIContainer implements UIPopupComponent {
 
   public List<Object> queryList() throws Exception {
     List<Object> objectList = new ArrayList<Object>();
-    if(hasSharedQueries()) {
-      for(Node node : getSharedQueries()) {
+    List<Node> sharedQueries = getSharedQueries();
+    if(!sharedQueries.isEmpty()) {
+      for(Node node : sharedQueries) {
         objectList.add(node);
       }
     }
-    if(hasQueries()) {
-      for(Query query : getQueries()) {
-        objectList.add(query);
+    List<Query> queries = getQueries();
+    if(!queries.isEmpty()) {
+      for(Query query : queries) {
+        objectList.add(new QueryData(query));
       }
     }
     return objectList;
@@ -104,7 +107,7 @@ public class UISavedQuery extends UIContainer implements UIPopupComponent {
 
   public UIPageIterator getUIPageIterator() { return uiPageIterator_; }
 
-  public List getQueryList() throws Exception { return uiPageIterator_.getCurrentPageData(); }
+  public List getQueryList() throws Exception { return NodeLocation.getNodeListByLocationList(uiPageIterator_.getCurrentPageData()); }
 
   public void initPopupEditForm(Query query) throws Exception {
     removeChildById(EDIT_FORM);
@@ -122,31 +125,27 @@ public class UISavedQuery extends UIContainer implements UIPopupComponent {
     uiPopup.setResizable(true);
   }
 
-  public boolean hasQueries() throws Exception {
+  public List<Query> getQueries() throws Exception {
     QueryService queryService = getApplicationComponent(QueryService.class);
     try {
-      privateQueries = queryService.getQueries(getCurrentUserId(),
+      return queryService.getQueries(getCurrentUserId(),
                                                SessionProviderFactory.createSessionProvider());
-      return !privateQueries.isEmpty();
     } catch(AccessDeniedException ace) {
-      return privateQueries.isEmpty();
+      return new ArrayList<Query>();
     }
   }
 
-  public List<Query> getQueries() throws Exception { return privateQueries; }
-
   public String getCurrentUserId() { return Util.getPortalRequestContext().getRemoteUser();}
 
-  public boolean hasSharedQueries() throws Exception {
+  public List<Node> getSharedQueries() throws Exception {
     PortletRequestContext pcontext = (PortletRequestContext)WebuiRequestContext.getCurrentInstance();
     QueryService queryService = getApplicationComponent(QueryService.class);
     String userId = pcontext.getRemoteUser();
     SessionProvider provider = SessionProviderFactory.createSystemProvider();
-    sharedQueries_ = queryService.getSharedQueries(userId, repositoryName_,provider);
-    return !sharedQueries_.isEmpty();
+    return queryService.getSharedQueries(userId, repositoryName_,provider);
   }
 
-  public List<Node> getSharedQueries() { return sharedQueries_; }
+  //public List<Node> getSharedQueries() { return sharedQueries_; }
 
   public void setRepositoryName(String repositoryName) { repositoryName_ = repositoryName; }
 
@@ -233,6 +232,47 @@ public class UISavedQuery extends UIContainer implements UIPopupComponent {
       queryService.removeQuery(path, userName);
       uiQuery.updateGrid(uiQuery.getUIPageIterator().getCurrentPage());
       event.getRequestContext().addUIComponentToUpdateByAjax(uiQuery);
+    }
+  }
+  
+  public class QueryData {
+
+    private String language_;
+    private String statement_;
+    private String storedQueryPath_;
+    
+    public QueryData(Query query) {
+      language_ = query.getLanguage();
+      statement_ = query.getStatement();
+      try {
+        storedQueryPath_ = query.getStoredQueryPath();
+      } catch (RepositoryException e) {
+        storedQueryPath_ = "";
+      }
+    }
+
+    public String getLanguage() {
+      return language_;
+    }
+
+    public void setLanguage(String language) {
+      language_ = language;
+    }
+
+    public String getStatement() {
+      return statement_;
+    }
+
+    public void setStatement(String statement) {
+      statement_ = statement;
+    }
+
+    public String getStoredQueryPath() {
+      return storedQueryPath_;
+    }
+
+    public void setStoredQueryPath(String storedQueryPath) {
+      storedQueryPath_ = storedQueryPath;
     }
   }
 }

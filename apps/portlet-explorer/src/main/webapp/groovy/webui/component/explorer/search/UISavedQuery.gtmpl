@@ -11,7 +11,8 @@
   import org.exoplatform.webui.core.UIPopupWindow;
   import javax.jcr.query.Query;
   import javax.jcr.Node;
-  import org.exoplatform.ecm.webui.utils.Utils ;
+  import org.exoplatform.ecm.webui.utils.Utils;
+  import org.exoplatform.ecm.webui.component.explorer.search.UISavedQuery.QueryData;
   int totalPages = uicomponent.getUIPageIterator().getAvailablePage() ;
 %>
 <div class="UISavedQuery" id="UISavedQuery">
@@ -26,23 +27,22 @@
       </tr>
     </thead>
     <%
-    	def hasPrivateQueries = uicomponent.hasQueries() ;
-	    def hasSharedQueries = uicomponent.hasSharedQueries() ;
+    	def queryListData = uicomponent.getQueryList();
     %>
     <tbody>
-      <%if(!hasPrivateQueries && !hasSharedQueries) { %>
+      <%if(queryListData.size() == 0) { %>
 	        <tr class="EvenRow">
 		        <td colspan="5"><%=_ctx.appRes("UISavedQuery.label.no-children")%></td>
 		      </tr>
       <%} else {   
 	        def rowClass = null ;
 	  	    boolean even = true ;
-	  	    for(object in uicomponent.getQueryList()) {
+	  	    for(object in queryListData) {
 	  	      if(even) rowClass = "EvenRow" ;  
 	  	      else rowClass =  "OddRow" ; 
 	  	      even = !even ;
       %>
-	          <%if(object instanceof Query) { %>
+	          <%if(object instanceof QueryData) { %>
 		          <tr class="$rowClass">
 		            <%
 		              String storedQueryPath = object.getStoredQueryPath() ;

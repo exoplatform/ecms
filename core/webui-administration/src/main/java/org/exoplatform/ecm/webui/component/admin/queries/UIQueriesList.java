@@ -32,6 +32,7 @@ import org.exoplatform.services.cms.queries.QueryService;
 import org.exoplatform.services.jcr.access.PermissionType;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -70,7 +71,7 @@ public class UIQueriesList extends UIComponentDecorator {
   public String[] getActions() { return ACTIONS ; }
 
   public void updateQueriesGrid(int currentPage) throws Exception {
-    PageList pageList = new ObjectPageList(getAllSharedQueries(), 10) ;
+    PageList pageList = new ObjectPageList(NodeLocation.getLocationsByNodeList(getAllSharedQueries()), 10);
     uiPageIterator_.setPageList(pageList) ;
     if(currentPage > getUIPageIterator().getAvailablePage())
       uiPageIterator_.setCurrentPage(currentPage-1);
@@ -101,7 +102,9 @@ public class UIQueriesList extends UIComponentDecorator {
     }
     return true;
   }
-  public List getQueryList() throws Exception { return uiPageIterator_.getCurrentPageData() ; }
+  public List getQueryList() throws Exception { 
+    return NodeLocation.getNodeListByLocationList(uiPageIterator_.getCurrentPageData()); 
+  }
 
   @SuppressWarnings("unchecked")
   public List<Node> getAllSharedQueries() throws Exception {

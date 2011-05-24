@@ -2,6 +2,7 @@ package org.exoplatform.ecm.webui.component.explorer.auditing;
 
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.jcr.Node;
@@ -57,25 +58,17 @@ public class UIAuditingInfo extends UIContainer implements UIPopupComponent {
     uiPageIterator_.setPageList(objPageList);
   }
 
-  public String getVersionName(AuditRecord ar) {
-    String versionName;
-    try {
-      versionName = ar.getVersionName();
-    } catch (Exception e) {
-      versionName = null;
-    }
-    return versionName;
-  }
-
-  public List<AuditRecord> getRecords() throws Exception {
-     List<AuditRecord> listRec = new ArrayList<AuditRecord>();
+  public List<AuditRecordData> getRecords() throws Exception {
+     List<AuditRecordData> listRec = new ArrayList<AuditRecordData>();
      Node currentNode = getCurrentNode();
      try {
       AuditService auditService = getApplicationComponent(AuditService.class);
       if(Utils.isAuditable(currentNode)){
         if (auditService.hasHistory(currentNode)){
           AuditHistory auHistory = auditService.getHistory(currentNode);
-          listRec = auHistory.getAuditRecords();
+          for(AuditRecord auditRecord : auHistory.getAuditRecords()) {
+            listRec.add(new AuditRecordData(auditRecord));
+          }
         }
       }
     } catch(Exception e){
@@ -90,5 +83,56 @@ public class UIAuditingInfo extends UIContainer implements UIPopupComponent {
       UIJCRExplorer uiExplorer = uiAuditingInfo.getAncestorOfType(UIJCRExplorer.class);
       uiExplorer.cancelAction();
     }
+  }
+  
+  public static class AuditRecordData {
+    private String versionName_;
+    private String eventType_;
+    private String userId_;
+    private Calendar date_;
+    
+    public AuditRecordData(AuditRecord auditRecord) {
+      versionName_ = null;
+      try {
+        versionName_ = auditRecord.getVersionName();
+      } catch (Exception e) {}
+      eventType_ = String.valueOf(auditRecord.getEventType());
+      userId_ = auditRecord.getUserId();
+      date_ = auditRecord.getDate();
+    }
+
+    public String getVersionName() {
+      return versionName_;
+    }
+
+    public void setVersionName(String versionName) {
+      versionName_ = versionName;
+    }
+
+    public String getEventType() {
+      return eventType_;
+    }
+
+    public void setEventType(String eventType) {
+      eventType_ = eventType;
+    }
+
+    public String getUserId() {
+      return userId_;
+    }
+
+    public void setUserId(String userId) {
+      userId_ = userId;
+    }
+
+    public Calendar getDate() {
+      return date_;
+    }
+
+    public void setDate(Calendar date) {
+      date_ = date;
+    }
+    
+    
   }
 }

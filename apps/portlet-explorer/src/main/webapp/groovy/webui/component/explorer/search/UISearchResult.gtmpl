@@ -93,7 +93,7 @@
           if (even) rowClass = "EvenRow";  
           else rowClass =  "OddRow"; 
           even = !even;
-          String nodePath = row.getValue("jcr:path").getString();
+          String nodePath = row.getJcrPath();
           try {
             node = uicomponent.getNodeByPath(nodePath);
           } catch(Exception e) {
@@ -104,11 +104,11 @@
             nodePath = node.getPath();
           }
          
-          String excerpt = row.getValue("rep:excerpt(.)")== null ? "" : row.getValue("rep:excerpt(.)").getString();
+          String excerpt = row.getRepExcerpt();
           excerpt = StringEscapeUtils.unescapeHtml(excerpt);
 //          excerpt += row.getValue("rep:spellcheck()") == null ? "NNUULLLL" : 
 //          	row.getValue("rep:spellcheck()").getString();
-          String score = row.getValue("jcr:score")== null ? "" : row.getValue("jcr:score").getString();
+          String score = row.getJcrScore();
           String s = ""; 
 		  def linkNode = null;
 		  if(uicomponent.isTaxonomyNode()) {

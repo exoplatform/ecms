@@ -31,6 +31,7 @@ import org.exoplatform.ecm.webui.component.explorer.sidebar.UITreeExplorer;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.services.cms.actions.ActionServiceContainer;
 import org.exoplatform.services.cms.templates.TemplateService;
+import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -66,9 +67,10 @@ public class UIActionList extends UIContainer {
     addChild(UIPageIterator.class, null, "ActionListIterator");
   }
 
-  public void updateGrid(Node node, int currentPage) throws Exception {
+  @SuppressWarnings("unchecked")
+public void updateGrid(Node node, int currentPage) throws Exception {
     UIPageIterator uiIterator = getChild(UIPageIterator.class) ;
-    ObjectPageList objPageList = new ObjectPageList(getAllActions(node), 10) ;
+    ObjectPageList objPageList = new ObjectPageList(NodeLocation.getLocationsByNodeList(getAllActions(node)), 10);
     uiIterator.setPageList(objPageList);
     if(currentPage > uiIterator.getAvailablePage())
       uiIterator.setCurrentPage(currentPage-1);
@@ -95,7 +97,7 @@ public class UIActionList extends UIContainer {
 
   public List getListActions() throws Exception {
     UIPageIterator uiIterator = getChild(UIPageIterator.class) ;
-    return uiIterator.getCurrentPageData() ;
+    return NodeLocation.getNodeListByLocationList(uiIterator.getCurrentPageData());
   }
 
   static public class ViewActionListener extends EventListener<UIActionList> {

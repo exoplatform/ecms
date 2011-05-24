@@ -68,10 +68,10 @@ public class UINodeTypeSearchForm extends UIForm {
                                                                                    : nodeTypeName;
         Pattern p = Pattern.compile(".*".concat(nodeTypeName.trim()).concat(".*"), Pattern.CASE_INSENSITIVE);
         List lstAllNodetype = uiNodeTypeList.getAllNodeTypes();
-        List lstNodetype = new ArrayList<NodeType>();
+        List lstNodetype = new ArrayList<UINodeTypeList.NodeTypeBean>();
         for (Object nodeType : lstAllNodetype) {
-          if (nodeType instanceof NodeType) {
-            if (p.matcher(((NodeType) nodeType).getName()).find()) {
+          if (nodeType instanceof UINodeTypeList.NodeTypeBean) {
+            if (p.matcher(((UINodeTypeList.NodeTypeBean) nodeType).getName()).find()) {
               lstNodetype.add(nodeType);
             }
           } else if (nodeType instanceof Node) {
@@ -83,7 +83,7 @@ public class UINodeTypeSearchForm extends UIForm {
         uiNodeTypeList.refresh(null, 1, lstNodetype);
         event.getRequestContext().addUIComponentToUpdateByAjax(uiNodeTypeManager) ;
       } catch (PatternSyntaxException pSyntaxException) {
-        uiNodeTypeList.refresh(null, 1, new ArrayList<NodeType>());
+        uiNodeTypeList.refresh(null, 1, new ArrayList<UINodeTypeList.NodeTypeBean>());
         event.getRequestContext().addUIComponentToUpdateByAjax(uiNodeTypeManager) ;
       }
     }

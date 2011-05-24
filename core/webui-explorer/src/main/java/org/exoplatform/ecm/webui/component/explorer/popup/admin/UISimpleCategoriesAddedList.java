@@ -28,6 +28,7 @@ import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.services.cms.categories.CategoriesService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -61,10 +62,12 @@ public class UISimpleCategoriesAddedList extends UIContainer implements UISelect
 
   public UIPageIterator getUIPageIterator() { return uiPageIterator_; }
 
-  public List getListCategories() throws Exception { return uiPageIterator_.getCurrentPageData(); }
+  public List getListCategories() throws Exception { 
+  	return NodeLocation.getNodeListByLocationList(uiPageIterator_.getCurrentPageData()); 
+	}
 
   public void updateGrid(int currentPage) throws Exception {
-    ObjectPageList objPageList = new ObjectPageList(getCategories(), 10);
+    ObjectPageList objPageList = new ObjectPageList(NodeLocation.getLocationsByNodeList(getCategories()), 10);
     uiPageIterator_.setPageList(objPageList);
     if(currentPage > getUIPageIterator().getAvailablePage())
       getUIPageIterator().setCurrentPage(currentPage-1);

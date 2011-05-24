@@ -8,8 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import javax.jcr.nodetype.NodeType;
-
 import org.exoplatform.ecm.webui.selector.ComponentSelector;
 import org.exoplatform.ecm.webui.selector.UISelectable;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -68,8 +66,8 @@ public class UINodeTypeSelector extends
                                   Pattern.CASE_INSENSITIVE);
       if (uiNodeTypeSelector.getLSTNodetype() == null)
         uiNodeTypeSelector.setLSTNodetype(uiNodeTypeSelector.getAllNodeTypes());
-      List<NodeType> lstNodetype = new ArrayList<NodeType>();
-      for (NodeType nodeType : uiNodeTypeSelector.getLSTNodetype()) {
+      List<NodeTypeBean> lstNodetype = new ArrayList<NodeTypeBean>();
+      for (NodeTypeBean nodeType : uiNodeTypeSelector.getLSTNodetype()) {
         if (p.matcher(nodeType.getName()).find()) {
           lstNodetype.add(nodeType);
         }
@@ -97,10 +95,10 @@ public class UINodeTypeSelector extends
       List<String> selectedNodetypes = uiNodeTypeSelect.getSelectedNodetypes();
       List<String> preSelectedNodetypes = new ArrayList<String>();
       preSelectedNodetypes.addAll(selectedNodetypes);
-      List<NodeType> lstNodeType = uiNodeTypeSelect.getNodeTypeList();
+      List<NodeTypeBean> lstNodeType = uiNodeTypeSelect.getNodeTypeList();
       UIFormCheckBoxInput uiCheckBox = (UIFormCheckBoxInput)uiNodeTypeSelect.getChildById(ALL_DOCUMENT_TYPES);
       updateCheckBox(selectedNodetypes, uiCheckBox);
-      for (NodeType nodetype : lstNodeType) {
+      for (NodeTypeBean nodetype : lstNodeType) {
         uiCheckBox = (UIFormCheckBoxInput) uiNodeTypeSelect.getChildById(nodetype.getName());
         updateCheckBox(selectedNodetypes, uiCheckBox);
       }

@@ -16,12 +16,17 @@
  */
 package org.exoplatform.services.wcm.core;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.jcr.Node;
+import javax.jcr.NodeIterator;
 import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 
 import org.exoplatform.services.jcr.core.ManageableRepository;
+import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
@@ -46,6 +51,12 @@ public class NodeLocation {
 
   /** The path. */
   private String path;
+  
+  /** The UUID. */
+  private String uuid;
+  
+  /** If session is system */
+  private boolean isSystemSession;
 
   /**
    * Instantiates a new node location.
@@ -58,12 +69,41 @@ public class NodeLocation {
    * @param repository the repository
    * @param workspace the workspace
    * @param path the path
+   * @param uuid the uuid
+   * @param isSystem if the node session is system 
    */
-  public NodeLocation(final String repository, final String workspace, final String path) {
+  public NodeLocation(final String repository, final String workspace, final String path, final String uuid, 
+      final boolean isSystem) {
     this.repository = repository;
     this.workspace = workspace;
     this.path = path;
+    this.uuid = uuid;
+    this.isSystemSession = isSystem;
   }
+
+  /**
+   * Instantiates a new node location.
+   *
+   * @param repository the repository
+   * @param workspace the workspace
+   * @param path the path
+   * @param uuid the uuid
+   */
+  public NodeLocation(final String repository, final String workspace, final String path, final String uuid ) {
+    this(repository, workspace, path, uuid, false);
+  }
+  
+  /**
+   * Instantiates a new node location.
+   *
+   * @param repository the repository
+   * @param workspace the workspace
+   * @param path the path
+   */
+  public NodeLocation(final String repository, final String workspace, final String path) {
+	  this(repository, workspace, path, null, false);
+  }
+
 
   /**
    * Gets the repository.
@@ -110,6 +150,7 @@ public class NodeLocation {
     return path;
   }
 
+
   /**
    * Sets the path.
    *
@@ -118,6 +159,43 @@ public class NodeLocation {
   public void setPath(String path) {
     this.path = path;
   }
+  
+  /**
+   * Sets the uuid.
+   *
+   * @param uuid the new uuid
+   */
+  public void setUUID(String uuid) {
+    this.uuid = uuid;
+  }
+
+  /**
+   * Gets the uuid.
+   *
+   * @return the uuid
+   */
+  public String getUUID() {
+    return uuid;
+  }
+  
+  /**
+   * Sets the isSystemSession.
+   *
+   * @param value isSysstemSession
+   */
+  public void setSystemSession(boolean value) {
+    this.isSystemSession = value;
+  }
+
+  /**
+   * Gets the isSystemSession.
+   *
+   * @return true if node session is system, false if not
+   */
+  public boolean isSystemSession() {
+    return this.isSystemSession;
+  }
+  
 
   /**
    * Parses the.
@@ -202,7 +280,11 @@ public class NodeLocation {
       String repository = ((ManageableRepository)session.getRepository()).getConfiguration().getName();
       String workspace = session.getWorkspace().getName();
       String path = node.getPath();
-      return new NodeLocation(repository, workspace, path);
+      String uuid = null;
+      try {
+    	  uuid = node.getUUID();
+      } catch (Exception e) {}
+      return new NodeLocation(repository, workspace, path, uuid);
     } catch (RepositoryException e) {
       log.error("getNodeLocationByNode() failed because of ", e);
     }
@@ -221,8 +303,12 @@ public class NodeLocation {
     try {
       ManageableRepository repository = WCMCoreUtils.getRepository();
       session = WCMCoreUtils.getSystemSessionProvider().getSession(nodeLocation.getWorkspace(), repository);
-      Node node = (Node)session.getItem(nodeLocation.getPath());
-      return node;
+      if (nodeLocation.getUUID() != null)
+    	  return session.getNodeByUUID(nodeLocation.getUUID());
+      else {
+    	  Node node = (Node)session.getItem(nodeLocation.getPath());
+    	  return node;
+      }
     } catch(PathNotFoundException pne) {
       return null;
     } catch (Exception e) {
@@ -231,6 +317,78 @@ public class NodeLocation {
     }
   }
 
+  /**
+   * gets a Node list from a NodeLocation list
+   * @param locationList NodeLocation list
+   * @return the Node list
+   */
+  @SuppressWarnings("unchecked")
+  public static final List getNodeListByLocationList(final List locationList) {
+	  List ret = new ArrayList();
+	  try {	  
+		  ManageableRepository repository = WCMCoreUtils.getRepository(null);
+		  SessionProvider systemSessionProvider = WCMCoreUtils.getSystemSessionProvider();
+		  SessionProvider sessionProvider = WCMCoreUtils.getUserSessionProvider();
+		  String systemWorkspace = repository.getConfiguration().getSystemWorkspaceName();
+		  Session session = null;
+		  Node node;
+		  for (Object obj : locationList) 
+			  if (obj instanceof NodeLocation) {
+				  node = null;
+				  try {
+					 NodeLocation location = (NodeLocation)obj;
+					 session = (systemWorkspace.equals(location.getWorkspace()))? 
+							  			systemSessionProvider.getSession(location.getWorkspace(), repository) : 
+							  			sessionProvider.getSession(location.getWorkspace(), repository);
+							  			
+					 node = location.getUUID() != null ? session.getNodeByUUID(location.getUUID()) :
+					  															(Node)session.getItem(location.getPath());
+					 ret.add(node);
+				  } catch (Exception e) {}
+			  } else {
+			  	ret.add(obj);
+			  }
+	  } catch (Exception e) {
+		  return ret;
+	  }
+	  return ret;
+  }
+  
+  /**
+   * returns the list of node location from the node list 
+   * @param nodeList the node list
+   * @return node location list
+   */
+  @SuppressWarnings("unchecked")
+  public static final List getLocationsByNodeList(final List nodeList) {
+	  List ret = new ArrayList();
+	  for(Object obj : nodeList)
+		  if (obj instanceof Node) {
+			  NodeLocation location = getNodeLocationByNode((Node)obj);
+			  if (location != null)
+				  ret.add(location);
+		  } else {
+		  	ret.add(obj);
+		  }
+	  return ret;
+  }
+  
+  /**
+   * returns the list of node location from the node iterator
+   * @param nodeIterator the Node iterator
+   * @return node location list
+   */
+  public static final List<NodeLocation> getLocationsByIterator(final NodeIterator nodeIterator) {
+	  List<NodeLocation> ret = new ArrayList<NodeLocation>();
+	  while (nodeIterator.hasNext()) {
+		  NodeLocation location = getNodeLocationByNode(nodeIterator.nextNode());
+		  if (location != null)
+			  ret.add(location);
+	  }
+	  return ret;
+  }
+  
+  
   /**
    * Get a node by an expression.
    *
@@ -285,5 +443,13 @@ public class NodeLocation {
     buffer.append(":");
     buffer.append(path);
     return buffer.toString();
+  }
+  
+  public boolean equals(Object obj) {
+    if (!(obj instanceof NodeLocation)) return false;
+    NodeLocation location2 = (NodeLocation)obj;
+    return this.repository.equals(location2.getRepository()) &&
+                this.getWorkspace().equals(location2.getWorkspace()) &&
+                (this.getPath().equals(location2.getPath()) || this.getUUID().equals(location2.getUUID()));
   }
 }

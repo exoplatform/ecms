@@ -47,6 +47,7 @@ import org.exoplatform.services.jcr.config.WorkspaceEntry;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.organization.Membership;
 import org.exoplatform.services.organization.OrganizationService;
+import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -87,7 +88,7 @@ public class UILockNodeList extends UIComponentDecorator {
   public String[] getActions() { return ACTIONS ; }
 
   public void updateLockedNodesGrid(int currentPage) throws Exception {
-    PageList pageList = new ObjectPageList(getAllLockedNodes(), 10);
+    PageList pageList = new ObjectPageList(NodeLocation.getLocationsByNodeList(getAllLockedNodes()), 10);
     uiPageIterator_.setPageList(pageList) ;
     if(currentPage > getUIPageIterator().getAvailablePage())
       uiPageIterator_.setCurrentPage(currentPage-1);
@@ -97,7 +98,9 @@ public class UILockNodeList extends UIComponentDecorator {
 
   public UIPageIterator getUIPageIterator() { return uiPageIterator_ ; }
 
-  public List getLockedNodeList() throws Exception { return uiPageIterator_.getCurrentPageData(); }
+  public List getLockedNodeList() throws Exception { 
+    return NodeLocation.getNodeListByLocationList(uiPageIterator_.getCurrentPageData()); 
+  }
 
   public List<Node> getAllLockedNodes() throws Exception {
     RepositoryService repositoryService = getApplicationComponent(RepositoryService.class);

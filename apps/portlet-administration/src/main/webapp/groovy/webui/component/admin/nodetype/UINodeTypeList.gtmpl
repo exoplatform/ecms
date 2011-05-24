@@ -7,7 +7,9 @@
  * 3:28:26 PM 
  */
 %>
-<% 
+<%
+  import javax.jcr.Node;
+
   def nodeTypes = uicomponent.getNodeTypeList() ; 
   if(nodeTypes == null) return ;
   int totalPages = uicomponent.getUIPageIterator().getAvailablePage() ;
@@ -45,7 +47,7 @@
               <div class="default16x16Icon ${nodeType}16x16Icon" style="margin:auto"><span></span></div>
             </td>
             <td><div class="Text"><%=node.getName()%></div></td>
-            <% if(node.isNodeType(node.getName())) { %>
+            <% if (!(node instanceof Node)) { %>
               <td>
                 <%
                   String booleanText ;

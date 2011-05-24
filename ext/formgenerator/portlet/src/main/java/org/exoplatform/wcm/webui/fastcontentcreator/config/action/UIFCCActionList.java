@@ -24,6 +24,7 @@ import javax.jcr.Node;
 
 import org.exoplatform.commons.utils.ObjectPageList;
 import org.exoplatform.services.cms.actions.ActionServiceContainer;
+import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.wcm.webui.Utils;
 import org.exoplatform.wcm.webui.fastcontentcreator.UIFCCConstant;
 import org.exoplatform.wcm.webui.fastcontentcreator.UIFCCPortlet;
@@ -93,9 +94,10 @@ public class UIFCCActionList extends UIContainer {
    *
    * @throws Exception the exception
    */
+  @SuppressWarnings("unchecked")
   public void updateGrid(Node node, int currentPage) throws Exception {
     UIPageIterator uiIterator = getChild(UIGrid.class).getUIPageIterator();
-    ObjectPageList objPageList = new ObjectPageList(getAllActions(node), 10) ;
+    ObjectPageList objPageList = new ObjectPageList(NodeLocation.getLocationsByNodeList(getAllActions(node)), 10) ;
     uiIterator.setPageList(objPageList);
     if(currentPage > uiIterator.getAvailablePage())
       uiIterator.setCurrentPage(currentPage-1);
@@ -151,7 +153,7 @@ public class UIFCCActionList extends UIContainer {
   @SuppressWarnings("unchecked")
   public List getListActions() throws Exception {
     UIPageIterator uiIterator = getChild(UIGrid.class).getUIPageIterator();
-    return uiIterator.getCurrentPageData() ;
+    return NodeLocation.getNodeListByLocationList(uiIterator.getCurrentPageData());
   }
 
   public String getMode() {

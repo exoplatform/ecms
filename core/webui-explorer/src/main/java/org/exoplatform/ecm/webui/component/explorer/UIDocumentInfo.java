@@ -98,6 +98,7 @@ import org.exoplatform.services.jcr.ext.audit.AuditService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.web.application.Parameter;
@@ -642,12 +643,12 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
       nodeList = uiExplorer.getDocumentByTag();
     }
 
-    pageIterator_.setPageList(new ObjectPageList(nodeList,nodesPerPage));
+    pageIterator_.setPageList(new ObjectPageList(NodeLocation.getLocationsByNodeList(nodeList),nodesPerPage));
   }
 
   @SuppressWarnings("unchecked")
   public List<Node> getChildrenList() throws Exception {
-    return pageIterator_.getCurrentPageData();
+    return NodeLocation.getNodeListByLocationList(pageIterator_.getCurrentPageData());
   }
 
   public String getTypeSort() { return typeSort_; }

@@ -18,6 +18,7 @@ package org.exoplatform.ecm.webui.component.admin.nodetype;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.jcr.Node;
@@ -30,9 +31,9 @@ import javax.jcr.nodetype.NodeTypeManager;
 import org.exoplatform.commons.utils.ObjectPageList;
 import org.exoplatform.commons.utils.PageList;
 import org.exoplatform.ecm.webui.form.UIFormInputSetWithAction;
-import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
+import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIComponent;
@@ -77,14 +78,14 @@ public class UINodeTypeList extends UIComponentDecorator {
 
   @SuppressWarnings("unchecked")
   public List getAllNodeTypes() throws Exception{
-    List nodeList = new ArrayList<NodeType>();
+    List nodeList = new ArrayList<NodeTypeBean>();
     ManageableRepository mRepository = getApplicationComponent(RepositoryService.class).getCurrentRepository() ;
     NodeTypeManager ntManager = mRepository.getNodeTypeManager() ;
     NodeTypeIterator nodeTypeIter = ntManager.getAllNodeTypes() ;
     while(nodeTypeIter.hasNext()) {
-      nodeList.add(nodeTypeIter.nextNodeType()) ;
+      nodeList.add(new NodeTypeBean(nodeTypeIter.nextNodeType())) ;
     }
-    Collections.sort(nodeList, new Utils.NodeTypeNameComparator()) ;
+    Collections.sort(nodeList, new NodeTypeNameComparator()) ;
     Session session = mRepository.getSystemSession(mRepository.getConfiguration().getSystemWorkspaceName()) ;
     if(session.getRootNode().hasNode(DRAFTNODETYPE)) {
       Node draftNode = session.getRootNode().getNode(DRAFTNODETYPE) ;
@@ -99,12 +100,14 @@ public class UINodeTypeList extends UIComponentDecorator {
 
   public UIPageIterator  getUIPageIterator() {  return uiPageIterator_ ; }
 
-  public List getNodeTypeList() throws Exception { return uiPageIterator_.getCurrentPageData() ; }
+  public List getNodeTypeList() throws Exception { 
+    return NodeLocation.getNodeListByLocationList(uiPageIterator_.getCurrentPageData()); 
+  }
 
   public String[] getActions() { return ACTIONS ; }
 
-  public void refresh(String name, int currentPage, List<NodeType> nodeType) throws Exception {
-    PageList pageList = new ObjectPageList(nodeType, 10) ;
+  public void refresh(String name, int currentPage, List<NodeTypeBean> nodeType) throws Exception {
+    PageList pageList = new ObjectPageList(NodeLocation.getLocationsByNodeList(nodeType), 10) ;
     uiPageIterator_.setPageList(pageList);
     if(currentPage > uiPageIterator_.getAvailablePage())
       uiPageIterator_.setCurrentPage(currentPage-1);
@@ -235,6 +238,50 @@ public class UINodeTypeList extends UIComponentDecorator {
         event.getRequestContext().addUIComponentToUpdateByAjax(uiNodeList.getParent()) ;
       }
       session.logout() ;
+    }
+  }
+
+  public static class NodeTypeBean {
+    private String nodeTypeName_;
+    private boolean isMixin_;
+    private boolean hasOrderableChildNodes_;
+    
+    public NodeTypeBean(NodeType nodeType) {
+      this.nodeTypeName_ = nodeType.getName();
+      this.isMixin_ = nodeType.isMixin();
+      this.hasOrderableChildNodes_ = nodeType.hasOrderableChildNodes();
+    }
+
+    public String getName() {
+      return nodeTypeName_;
+    }
+
+    public void setName(String nodeTypeName) {
+      nodeTypeName_ = nodeTypeName;
+    }
+
+    public boolean isMixin() {
+      return isMixin_;
+    }
+
+    public void setMixin(boolean isMixin) {
+      isMixin_ = isMixin;
+    }
+    
+    public boolean hasOrderableChildNodes() {
+      return hasOrderableChildNodes_;
+    }
+    
+    public void setOrderableChildNodes(boolean value) {
+      hasOrderableChildNodes_ = value;
+    }
+  }
+  
+  static public class NodeTypeNameComparator implements Comparator<NodeTypeBean> {
+    public int compare(NodeTypeBean n1, NodeTypeBean n2) throws ClassCastException {
+      String name1 = n1.getName();
+      String name2 = n2.getName();
+      return name1.compareToIgnoreCase(name2);
     }
   }
 }

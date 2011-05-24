@@ -72,10 +72,12 @@ public class UICategoriesAddedList extends UIContainer implements UISelectable {
 
   public UIPageIterator getUIPageIterator() { return uiPageIterator_; }
 
-  public List getListCategories() throws Exception { return uiPageIterator_.getCurrentPageData(); }
+  public List getListCategories() throws Exception { 
+    return NodeLocation.getNodeListByLocationList(uiPageIterator_.getCurrentPageData()); 
+	}
 
   public void updateGrid(int currentPage) throws Exception {
-    ObjectPageList objPageList = new ObjectPageList(getCategories(), 10);
+    ObjectPageList objPageList = new ObjectPageList(NodeLocation.getLocationsByNodeList(getCategories()), 10);
     uiPageIterator_.setPageList(objPageList);
     if(currentPage > getUIPageIterator().getAvailablePage())
       getUIPageIterator().setCurrentPage(currentPage-1);

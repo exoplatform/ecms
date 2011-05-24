@@ -31,6 +31,7 @@ import org.exoplatform.ecm.webui.component.admin.taxonomy.info.UIPermissionManag
 import org.exoplatform.services.cms.categories.CategoriesService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -62,7 +63,7 @@ import org.exoplatform.webui.event.EventListener;
 
 public class UITaxonomyWorkingArea extends UIContainer {
   private UIPageIterator uiPageIterator_;
-  private List<Node> taxonomyNodes_ ;
+  private List taxonomyNodes_ ;
   private ClipboardCommand clipboard_ = new ClipboardCommand() ;
   private String selectedPath_ ;
   private static final Log LOG  = ExoLogger.getLogger("admin.UITaxonomyWorkingArea");
@@ -77,10 +78,14 @@ public class UITaxonomyWorkingArea extends UIContainer {
     uiPageIterator_.setPageList(objPageList);
   }
 
-  public List getListNodes() throws Exception { return uiPageIterator_.getCurrentPageData(); }
+  public List getListNodes() throws Exception { 
+    return NodeLocation.getNodeListByLocationList(uiPageIterator_.getCurrentPageData()); 
+  }
 
-  public void setNodeList(List<Node> nodes) { taxonomyNodes_ = nodes ;  }
-  public List<Node> getNodeList() {return taxonomyNodes_; } ;
+  public void setNodeList(List<Node> nodes) { 
+    taxonomyNodes_ = NodeLocation.getLocationsByNodeList(nodes);  
+  }
+  public List getNodeList() {return taxonomyNodes_; } ;
 
   private String getRepository() throws Exception {
     UITaxonomyManager uiManager = getParent();
