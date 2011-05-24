@@ -94,21 +94,16 @@ public class LinkDeploymentPlugin extends DeploymentPlugin {
         Session session = sessionProvider.getSession(src[1], repository);
         ManageableRepository repository2 = repositoryService.getCurrentRepository();
         Session session2 = sessionProvider.getSession(tgt[1], repository2);
-        try {
-          Node nodeSrc = session.getRootNode().getNode(src[2].substring(1));
-          Node nodeTgt = session2.getRootNode().getNode(tgt[2].substring(1));
-          linkManager.createLink(nodeTgt, "exo:taxonomyLink", nodeSrc);
-          ExoContainer container = ExoContainerContext.getCurrentContainer();
-          PortalContainerInfo containerInfo = 
-            (PortalContainerInfo)container.getComponentInstanceOfType(PortalContainerInfo.class);
-          String containerName = containerInfo.getContainerName();
-          ListenerService listenerService = WCMCoreUtils.getService(ListenerService.class, containerName);
-          CmsService cmsService = WCMCoreUtils.getService(CmsService.class, containerName);
-          listenerService.broadcast(UPDATE_EVENT, cmsService, nodeSrc);
-        } finally {
-          session.logout();
-          session2.logout();
-        }
+        Node nodeSrc = session.getRootNode().getNode(src[2].substring(1));
+        Node nodeTgt = session2.getRootNode().getNode(tgt[2].substring(1));
+        linkManager.createLink(nodeTgt, "exo:taxonomyLink", nodeSrc);
+        ExoContainer container = ExoContainerContext.getCurrentContainer();
+        PortalContainerInfo containerInfo = 
+        	(PortalContainerInfo)container.getComponentInstanceOfType(PortalContainerInfo.class);
+        String containerName = containerInfo.getContainerName();
+        ListenerService listenerService = WCMCoreUtils.getService(ListenerService.class, containerName);
+        CmsService cmsService = WCMCoreUtils.getService(CmsService.class, containerName);
+        listenerService.broadcast(UPDATE_EVENT, cmsService, nodeSrc);
       }
       if(log.isInfoEnabled()) {
         log.info(sourcePath + " has a link into "+targetPath);

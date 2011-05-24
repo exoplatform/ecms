@@ -224,8 +224,6 @@ public class NewsletterSubscriptionHandler {
     } catch (Exception e) {
       log.error("Add subcription " + subscription.getName() + " failed because of ", e);
       throw e;
-    } finally {
-      if (session != null) session.logout();
     }
   }
 

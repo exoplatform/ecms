@@ -81,7 +81,6 @@ public class PostCreateNodeTypeEventListener extends Listener<CmsService, String
       tmpValues.add(valueFactory.createValue(nodetypeName));
       action.setProperty("exo:affectedNodeTypeNames", tmpValues.toArray(new Value[tmpValues.size()]));
       session.save();
-      session.logout();
     }
   }
 }

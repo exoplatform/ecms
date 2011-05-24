@@ -532,7 +532,6 @@ public class UITask extends UIForm implements UISelectable {
                 Node destNode = (Node)desSession.getItem(destPath);
                 LockUtil.changeLockToken(nodePath, destNode);
               }
-              session.logout();
             }
             Map variables = maps.getWorkflowVariables();
             uiTask.serviceContainer.endTask(uiTask.identification_, variables, transition);

@@ -143,9 +143,6 @@ public class PDFViewerRESTService implements ResourceContainer {
       return Response.ok(is, "image").header(LASTMODIFIED, lastModified).build();
     } catch (Exception e) {
       LOG.error(e);
-    } finally {
-        if (session != null)
-          session.logout();
     }
     return Response.ok().build();
   }

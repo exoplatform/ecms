@@ -220,7 +220,6 @@ public class CategoriesServiceImpl implements CategoriesService,Startable {
       vals.add(value2add);
       node.setProperty(CATEGORY_PROP, vals.toArray(new Value[vals.size()]));
       node.save();
-      systemSession.logout();
     }
   }
 

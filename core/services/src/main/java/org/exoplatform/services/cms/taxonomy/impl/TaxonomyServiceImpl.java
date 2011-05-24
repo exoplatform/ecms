@@ -327,8 +327,6 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
       }
     } catch (RepositoryConfigurationException e) {
       throw new RepositoryException(e);
-    } finally {
-      if(session != null) session.logout();
     }
   }
 
@@ -365,8 +363,6 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
       systemSession.save();
     } catch (PathNotFoundException e2) {
       throw new RepositoryException(e2);
-    } finally {
-      if(systemSession != null) systemSession.logout();
     }
   }
   
@@ -404,8 +400,6 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
       systemSession.save();
     } catch (PathNotFoundException e2) {
       throw new RepositoryException(e2);
-    } finally {
-      if(systemSession != null) systemSession.logout();
     }
   }  
 
@@ -432,8 +426,6 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
       systemSession.save();
     } catch (PathNotFoundException e2) {
       throw new RepositoryException(e2);
-    } finally {
-      if(systemSession != null) systemSession.logout();
     }
   }
   
@@ -450,9 +442,6 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
       systemSession.save();
     } catch (PathNotFoundException e2) {
       throw new RepositoryException(e2);
-    } finally {
-      if (systemSession != null)
-        systemSession.logout();
     }
   }  
 
@@ -611,7 +600,6 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
       } else
         throw new UnsupportedRepositoryOperationException();
     } finally {
-      if(systemSession != null) systemSession.logout();
     }
   }
   
@@ -630,8 +618,6 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
       } else
         throw new UnsupportedRepositoryOperationException();
     } finally {
-      if (systemSession != null)
-        systemSession.logout();
     }
   }
 
@@ -706,7 +692,6 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
     String taxonomiesTreeDef = nodeHierarchyCreator_
         .getJcrPath(BasePath.TAXONOMIES_TREE_DEFINITION_PATH);
     Node taxonomyRootDef = (Node) systemSession.getItem(taxonomiesTreeDef);
-    systemSession.logout();
     return taxonomyRootDef;
   }
 

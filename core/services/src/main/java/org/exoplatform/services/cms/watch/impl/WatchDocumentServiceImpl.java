@@ -128,7 +128,6 @@ public class WatchDocumentServiceImpl implements WatchDocumentService, Startable
         documentNode.save() ;
       }
       session.save() ;
-      session.logout() ;
     }
   }
 
@@ -150,7 +149,6 @@ public class WatchDocumentServiceImpl implements WatchDocumentService, Startable
     }
     documentNode.save() ;
     session.save() ;
-    session.logout() ;
   }
 
   /**

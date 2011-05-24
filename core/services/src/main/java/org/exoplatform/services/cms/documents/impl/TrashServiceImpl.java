@@ -190,16 +190,10 @@ public class TrashServiceImpl implements TrashService {
           }
         }
       }
-
       trashSession.save();
-      trashSession.logout();
-
     }
 
     nodeSession.save();
-    if (deep == 0) {
-      nodeSession.logout();
-    }
   }
   
   public void moveToTrash(Node node,
@@ -305,16 +299,9 @@ public class TrashServiceImpl implements TrashService {
           }
         }
       }
-
       trashSession.save();
-      trashSession.logout();
-
     }
-
     nodeSession.save();
-    if (deep == 0) {
-      nodeSession.logout();
-    }
   }
 
   private boolean isInTaxonomyTree(Node taxonomyNode, Node targetNode) {
@@ -457,12 +444,6 @@ public class TrashServiceImpl implements TrashService {
 
     trashNodeSession.save();
     restoreSession.save();
-
-    if (deep == 0) {
-      trashNodeSession.logout();
-    }
-    if (!restoreWorkspace.equals(trashWorkspace))
-      restoreSession.logout();
   }
 
   @Deprecated

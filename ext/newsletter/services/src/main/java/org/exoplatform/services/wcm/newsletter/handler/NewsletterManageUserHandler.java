@@ -234,8 +234,6 @@ public class NewsletterManageUserHandler {
       session.save();
     } catch (Exception e) {
       log.error("Add user " + userMail + " failed because of ", e);
-    } finally {
-      if (session != null) session.logout();
     }
     if(userNode == null){
       throw new Exception("Can not add new user");

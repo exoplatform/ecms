@@ -246,7 +246,7 @@ public class XSkinService implements Startable {
     Node cssFolder = schemaConfigService.getWebSchemaHandlerByType(PortalFolderSchemaHandler.class)
                                         .getCSSFolder(portalNode);
     String statement = StringUtils.replaceOnce(SHARED_CSS_QUERY, "{path}", cssFolder.getPath());
-    SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
+    SessionProvider sessionProvider = SessionProvider.createSystemProvider();
     NodeLocation portalNodeLocation = NodeLocation.make(portalNode);
     ManageableRepository repository = repositoryService.getCurrentRepository();
     Session session = sessionProvider.getSession(portalNodeLocation.getWorkspace(), repository);
@@ -290,7 +290,7 @@ public class XSkinService implements Startable {
     } catch(Exception e) {
       log.error("Unexpected problem happen when merge CSS data", e);
     } finally {
-      session.logout();
+      sessionProvider.close();
     }
     return buffer.toString();
   }
@@ -299,7 +299,7 @@ public class XSkinService implements Startable {
    * @see org.picocontainer.Startable#start()
    */
   public void start() {
-    SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
+    SessionProvider sessionProvider = SessionProvider.createSystemProvider();
     try {
       LivePortalManagerService livePortalManagerService = WCMCoreUtils.getService(LivePortalManagerService.class);
       Node sharedPortal = livePortalManagerService.getLiveSharedPortal(sessionProvider);
@@ -310,6 +310,8 @@ public class XSkinService implements Startable {
       }
     } catch (Exception e) {
       log.error("Exception when start XSkinService", e);
+    } finally {
+      sessionProvider.close();
     }
   }
 

@@ -62,9 +62,6 @@ public class MigrationUtil {
         } else {
           if (log.isInfoEnabled()) log.info("Cannot locate in new location : "+strTemplatePath);
         }
-        session.logout();
-
-
       } catch (LoginException le) {
       } catch (NoSuchWorkspaceException nswe) {
       } catch (RepositoryException re) {

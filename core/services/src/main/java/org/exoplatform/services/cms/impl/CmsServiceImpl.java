@@ -199,7 +199,6 @@ public class CmsServiceImpl implements CmsService {
     }
     //add lastModified property to jcr:content
     session.save();
-    session.logout();
     return currentNode.getPath();
   }
   
@@ -238,7 +237,6 @@ public class CmsServiceImpl implements CmsService {
     listenerService.broadcast(POST_EDIT_CONTENT_EVENT, this, storeNode);
     //add lastModified property to jcr:content
     session.save();
-    session.logout();
     return storeNode.getPath();
   }
 
@@ -1153,7 +1151,6 @@ public class CmsServiceImpl implements CmsService {
       rootNode = rootNode.getNode(splittedName[i]) ;
     }
     session.save() ;
-    session.logout();
   }
 
   /**

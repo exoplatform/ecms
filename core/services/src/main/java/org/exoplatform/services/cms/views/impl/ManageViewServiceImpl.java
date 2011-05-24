@@ -273,7 +273,6 @@ public class ManageViewServiceImpl implements ManageViewService, Startable {
     try {
       return (Node) session.getItem(baseViewPath_ + "/" + name);
     } catch (AccessDeniedException ace) {
-      session.logout();
       return null;
     }
   }
@@ -286,7 +285,6 @@ public class ManageViewServiceImpl implements ManageViewService, Startable {
     try {
       return (Node) session.getItem(baseViewPath_ + "/" + name);
     } catch (AccessDeniedException ace) {
-      session.logout();
       return null;
     }
   }  
@@ -418,7 +416,6 @@ public class ManageViewServiceImpl implements ManageViewService, Startable {
     try {
       return (Node)session.getItem(homePath);
     } catch(AccessDeniedException ace) {
-      session.logout();
       return null ;
     }
   }
@@ -432,7 +429,6 @@ public class ManageViewServiceImpl implements ManageViewService, Startable {
     try {
       return (Node)session.getItem(homePath);
     } catch(AccessDeniedException ace) {
-      session.logout();
       return null ;
     }
   }  

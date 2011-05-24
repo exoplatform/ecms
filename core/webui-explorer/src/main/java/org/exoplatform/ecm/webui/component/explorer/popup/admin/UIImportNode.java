@@ -242,7 +242,6 @@ public class UIImportNode extends UIForm implements UIPopupComponent {
         UploadService uploadService = uiImport.getApplicationComponent(UploadService.class) ;
         uploadService.removeUploadResource(input.getUploadId());
         uploadService.removeUploadResource(inputHistory.getUploadId());
-        session.logout();
       }
       uiExplorer.updateAjax(event);
     }

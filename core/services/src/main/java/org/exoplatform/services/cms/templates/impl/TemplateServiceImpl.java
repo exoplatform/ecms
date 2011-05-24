@@ -380,22 +380,25 @@ public class TemplateServiceImpl implements TemplateService, Startable {
       return getTemplatePathByAnonymous(isDialog, nodeTypeName);
     }
     Session session = getSession();
-    Node templateHomeNode = (Node) session.getItem(cmsTemplatesBasePath_);
-    String type = DIALOGS;
-    if (!isDialog)
-      type = VIEWS;
-    Node nodeTypeNode = templateHomeNode.getNode(nodeTypeName);
-    NodeIterator templateIter = nodeTypeNode.getNode(type).getNodes();
-    while (templateIter.hasNext()) {
-      Node node = templateIter.nextNode();
-      String roles = getTemplateRoles(node);
-      if(hasPermission(userName, roles, identityRegistry_)) {
-        String templatePath = node.getPath() ;
-        session.logout();
-        return templatePath ;
+    try {
+      Node templateHomeNode = (Node) session.getItem(cmsTemplatesBasePath_);
+      String type = DIALOGS;
+      if (!isDialog)
+        type = VIEWS;
+      Node nodeTypeNode = templateHomeNode.getNode(nodeTypeName);
+      NodeIterator templateIter = nodeTypeNode.getNode(type).getNodes();
+      while (templateIter.hasNext()) {
+        Node node = templateIter.nextNode();
+        String roles = getTemplateRoles(node);
+        if(hasPermission(userName, roles, identityRegistry_)) {
+          String templatePath = node.getPath() ;
+          session.logout();
+          return templatePath ;
+        }
       }
+    } finally {
+      session.logout();
     }
-    session.logout();
     throw new AccessControlException("You don't have permission to access any template");
   }
 

@@ -144,21 +144,26 @@ public class WebSchemaConfigServiceImpl implements WebSchemaConfigService, Start
     ExoContainer container = ExoContainerContext.getCurrentContainer();
     RepositoryService repositoryService =
       (RepositoryService)container.getComponentInstanceOfType(RepositoryService.class);
-    SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
-    for (NodeLocation locationEntry: wcmConfigService.getAllLivePortalsLocation()) {
-      String repoName = locationEntry.getRepository();
-      try {
-        ManageableRepository repository = repositoryService.getCurrentRepository();
-        Session session = sessionProvider.getSession(locationEntry.getWorkspace(), repository);
-        Node livePortalsStorage = (Node)session.getItem(locationEntry.getPath());
-        String liveSharedPortalName = wcmConfigService.getSharedPortalName(repoName);
-        if(!livePortalsStorage.hasNode(liveSharedPortalName)) {
-          livePortalsStorage.addNode(liveSharedPortalName, "exo:portalFolder");
-          session.save();
+    SessionProvider sessionProvider = null;
+    try {
+      sessionProvider = SessionProvider.createSystemProvider();
+      for (NodeLocation locationEntry: wcmConfigService.getAllLivePortalsLocation()) {
+        String repoName = locationEntry.getRepository();
+        try {
+          ManageableRepository repository = repositoryService.getCurrentRepository();
+          Session session = sessionProvider.getSession(locationEntry.getWorkspace(), repository);
+          Node livePortalsStorage = (Node)session.getItem(locationEntry.getPath());
+          String liveSharedPortalName = wcmConfigService.getSharedPortalName(repoName);
+          if(!livePortalsStorage.hasNode(liveSharedPortalName)) {
+            livePortalsStorage.addNode(liveSharedPortalName, "exo:portalFolder");
+            session.save();
+          }
+        } catch (Exception e) {
+          log.error("Error when try to create share portal folder for repository: "+ repoName, e);
         }
-      } catch (Exception e) {
-        log.error("Error when try to create share portal folder for repository: "+ repoName, e);
       }
+    } finally {
+      sessionProvider.close();
     }
   }
 

@@ -105,7 +105,6 @@ public class UIContentPropertySelector extends UIForm{
         this.properties.add(new SelectItemOption<String>(name,name));
       }
     }
-    session.logout();
   }
 
   static  public class CancelActionListener extends EventListener<UIContentPropertySelector> {

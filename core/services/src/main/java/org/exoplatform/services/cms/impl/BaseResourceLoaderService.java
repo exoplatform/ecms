@@ -36,6 +36,7 @@ import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.picocontainer.Startable;
 
 public abstract class BaseResourceLoaderService implements Startable{
@@ -215,12 +216,15 @@ public abstract class BaseResourceLoaderService implements Startable{
    * @throws Exception
    */
   public String getResourceAsText(String resourceName) throws Exception {
-    SessionProvider sessionProvider = SessionProvider.createSystemProvider() ;
-    Node resourcesHome = getResourcesHome(sessionProvider);
-    Node resourceNode = resourcesHome.getNode(resourceName);
-    String text = resourceNode.getNode("jcr:content").getProperty("jcr:data").getString();
-    sessionProvider.close();
-    return text;
+    SessionProvider sessionProvider = SessionProvider.createSystemProvider();
+    try {
+      Node resourcesHome = getResourcesHome(sessionProvider);
+      Node resourceNode = resourcesHome.getNode(resourceName);
+      String text = resourceNode.getNode("jcr:content").getProperty("jcr:data").getString();
+      return text;
+    } finally {
+      sessionProvider.close();
+    }
   }  
 
   /**
@@ -245,11 +249,10 @@ public abstract class BaseResourceLoaderService implements Startable{
    * @throws Exception
    */
   public InputStream getResourceAsStream(String resourceName) throws Exception {
-    SessionProvider sessionProvider = SessionProvider.createSystemProvider() ;
+    SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
     Node resourcesHome = getResourcesHome(sessionProvider);
     Node resourceNode = resourcesHome.getNode(resourceName);
     InputStream stream = resourceNode.getNode("jcr:content").getProperty("jcr:data").getStream();
-    sessionProvider.close();
     return stream;
   }  
 

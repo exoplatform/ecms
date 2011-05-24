@@ -264,7 +264,6 @@ public class UIActionForm extends UIDialogForm implements UISelectable {
       ((ExtendedNode) exoActionNode).setPermissions(perMap);
       currentNode.save();
       session.save();
-      session.logout();
     }
   }
 

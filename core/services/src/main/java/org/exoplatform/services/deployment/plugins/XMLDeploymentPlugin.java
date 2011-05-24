@@ -135,7 +135,6 @@ public class XMLDeploymentPlugin extends DeploymentPlugin {
       }
 
       session.save();
-      session.logout();
       if (log.isInfoEnabled()) {
         log.info(deploymentDescriptor.getSourcePath() + " is deployed succesfully into "
             + deploymentDescriptor.getTarget().getNodePath());

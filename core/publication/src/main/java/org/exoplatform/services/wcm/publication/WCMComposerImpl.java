@@ -515,6 +515,7 @@ public class WCMComposerImpl implements WCMComposer, Startable {
           }
         }
       }
+      sessionProvider.close();
     }
 
     return true;

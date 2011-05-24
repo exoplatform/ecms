@@ -58,7 +58,6 @@ public class MockCmsServiceImpl extends CmsServiceImpl {
     String path = storeNode(nodeTypeName, storeHomeNode, mappings, true);
     storeHomeNode.save();
     session.save();
-    session.logout();
     return path;
   }
 

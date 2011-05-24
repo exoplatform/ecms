@@ -309,7 +309,6 @@ public class UIAddressBar extends UIForm {
                 uiSearchResult.setSearchTime(time);
                 uiDocumentWorkspace.setRenderedChild(UISearchResult.class);
                 event.getRequestContext().addUIComponentToUpdateByAjax(uiDocumentWorkspace);
-                if (session != null) session.logout();
                 return;
               }
             }
@@ -351,7 +350,6 @@ public class UIAddressBar extends UIForm {
       if(!uiDocumentWorkspace.isRendered()) {
         event.getRequestContext().addUIComponentToUpdateByAjax(uiDocumentWorkspace);
       }
-      if (session != null) session.logout();
     }
   }
 

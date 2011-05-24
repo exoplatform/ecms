@@ -89,8 +89,9 @@ public class NewsletterInitializationService implements Startable {
    */
   public void start() {
     log.info("Starting NewsletterInitializationService ... ");
+    SessionProvider sessionProvider = null;
     try {
-      SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
+      sessionProvider = SessionProvider.createSystemProvider();
       Node dummyNode = livePortalManagerService.getLivePortal(sessionProvider, portalNames.get(0));
       Session session = dummyNode.getSession();
       Node serviceFolder = session.getRootNode().getNode("exo:services");
@@ -136,6 +137,8 @@ public class NewsletterInitializationService implements Startable {
       }
     } catch (Throwable e) {
       log.info("Starting NewsletterInitializationService fail because of ", e);
+    } finally {
+      sessionProvider.close(); 
     }
   }
 

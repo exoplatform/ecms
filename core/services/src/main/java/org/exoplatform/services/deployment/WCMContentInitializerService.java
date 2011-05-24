@@ -74,8 +74,9 @@ public class WCMContentInitializerService implements Startable{
    * @see org.picocontainer.Startable#start()
    */
   public void start() {
+    SessionProvider sessionProvider = null;
     try {
-      SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
+      sessionProvider = SessionProvider.createSystemProvider();
       ManageableRepository repository = repositoryService.getCurrentRepository();
       Session session = sessionProvider.getSession(repository.getConfiguration().getDefaultWorkspaceName(), repository);
       Node serviceFolder = session.getRootNode().getNode("exo:services");
@@ -116,6 +117,8 @@ public class WCMContentInitializerService implements Startable{
       }
     } catch (Exception e) {
       log.error("Error when start WCMContentInitializerService: ", e);
+    } finally {
+      sessionProvider.close();
     }
   }
 

@@ -121,7 +121,6 @@ public class FCKCoreRESTConnector implements ResourceContainer {
     root.appendChild(files);
     CacheControl cacheControl = new CacheControl();
     cacheControl.setNoCache(true);
-    session.logout();
 
     DateFormat dateFormat = new SimpleDateFormat(FCKUtils.IF_MODIFIED_SINCE_DATE_FORMAT);
     return Response.ok(document, new MediaType("text", "xml"))
@@ -190,7 +189,6 @@ public class FCKCoreRESTConnector implements ResourceContainer {
     if(FileUploadHandler.SAVE_ACTION.equals(action)) {
       Session session = getSession(workspaceName);
       Node currentNode = (Node)session.getItem(currentFolder);
-      session.logout();
       return fileUploadHandler.saveAsNTFile(currentNode, uploadId, fileName, language);
     }
     return fileUploadHandler.control(uploadId,action);

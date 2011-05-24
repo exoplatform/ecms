@@ -258,8 +258,6 @@ public class UIRenameForm extends UIForm implements UIPopupComponent {
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
         LOG.error("Have an error when rename", e);
         return;
-      } finally {
-        if(nodeSession != null) nodeSession.logout();
       }
     }
 

@@ -253,7 +253,6 @@ public class ApplicationTemplateManagerServiceImpl implements ApplicationTemplat
     Session session = templateNode.getSession();
     templateNode.remove();
     session.save();
-    session.logout();
   }
   
   /**
@@ -265,7 +264,6 @@ public class ApplicationTemplateManagerServiceImpl implements ApplicationTemplat
     Session session = templateNode.getSession();
     templateNode.remove();
     session.save();
-    session.logout();
   }  
 
   /**
@@ -284,7 +282,6 @@ public class ApplicationTemplateManagerServiceImpl implements ApplicationTemplat
     Session session =
       sessionProvider.getSession(dmsRepoConfig.getSystemWorkspace(),manageableRepository);
     Node basedTemplateHome = (Node)session.getItem(basedApplicationTemplatesPath);
-    session.logout();
     return basedTemplateHome;
   }
 

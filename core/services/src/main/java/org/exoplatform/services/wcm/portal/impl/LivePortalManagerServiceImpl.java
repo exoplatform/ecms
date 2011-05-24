@@ -250,9 +250,10 @@ public class LivePortalManagerServiceImpl implements LivePortalManagerService, S
 
   public void start() {
     log.info("Start LivePortalManagementService....");
+    SessionProvider sessionProvider = null;
     Session session = null;
     try {
-      SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
+      sessionProvider = SessionProvider.createSystemProvider();
       ManageableRepository repository = repositoryService.getCurrentRepository();
       NodeLocation nodeLocation = wcmConfigService.getLivePortalsLocation(repository.getConfiguration().getName());
       session = sessionProvider.getSession(nodeLocation.getWorkspace(),repository);
@@ -266,9 +267,8 @@ public class LivePortalManagerServiceImpl implements LivePortalManagerService, S
     } catch (Exception e) {
       log.error("Error when starting LivePortalManagerService: ", e);
     } finally {
-      if(session != null) session.logout();
+      sessionProvider.close();
     }
-
   }
 
   public void stop() {

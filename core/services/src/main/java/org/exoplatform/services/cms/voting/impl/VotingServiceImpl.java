@@ -130,7 +130,6 @@ public class VotingServiceImpl implements VotingService {
     languageNode.setProperty(VOTER_PROP,newVoterList.toArray(new Value[newVoterList.size()])) ;
     node.save() ;
     session.save() ;
-    session.logout();
   }
 
   public boolean isVoted(Node node, String userName, String language) throws Exception {

@@ -758,7 +758,6 @@ public class ActionServiceContainerImpl implements ActionServiceContainer, Start
           LOG.error("Can not launch action listeners named is " + actionNode.getPath(), e);
         }
       }
-      session.logout();
     } catch (Exception ex) {
       LOG.error("Can not launch action listeners inside " + node.getPath() + " node.", ex);
     }

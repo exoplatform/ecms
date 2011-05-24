@@ -252,7 +252,6 @@ public class FavouriteServiceImpl implements FavouriteService {
     while (nodeIter.hasNext()) {
       ret.add(nodeIter.nextNode());
     }
-    session.logout();
     return ret;
   }
 

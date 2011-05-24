@@ -151,7 +151,6 @@ public class DocumentTypeServiceImpl implements DocumentTypeService {
     try {
       results = executeQuery(session, buildQueryByMimeTypes(mimeTypes, userName), SQL);
     } catch (Exception e) {
-      session.logout();
       LOG.error(e.getMessage());
     }
     NodeIterator iterator = results.getNodes();
@@ -230,7 +229,6 @@ public class DocumentTypeServiceImpl implements DocumentTypeService {
         // Execute sql query and return a results
         results = executeQuery(session, buildQueryByContentsType(userName), SQL);
       } catch (Exception e) {
-        session.logout();
         LOG.error("An unexpected exception appear", e);
       }
       NodeIterator iterator = results.getNodes();

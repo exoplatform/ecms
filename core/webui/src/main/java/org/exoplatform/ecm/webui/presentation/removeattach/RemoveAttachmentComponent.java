@@ -102,7 +102,6 @@ public class RemoveAttachmentComponent extends AbstractActionComponent {
         } // end of modification.
 
         session.save();
-        session.logout();
         uicomponent.updateAjax(requestcontext);
         return;
       } catch (Exception e) {

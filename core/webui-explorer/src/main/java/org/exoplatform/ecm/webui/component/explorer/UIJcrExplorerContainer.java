@@ -152,8 +152,6 @@ public class UIJcrExplorerContainer extends UIContainer {
       } catch(Exception e) {
         JCRExceptionManager.process(uiApp, e);
         return;
-      } finally {
-        if(session != null) session.logout();
       }
       uiJCRExplorer.getAllClipBoard().clear();
       uiJCRExplorer.setRepositoryName(repoName);

@@ -218,8 +218,6 @@ public class CreateTaxonomyPlugin extends CreatePortalPlugin {
       return;
     } catch (Exception e) {
       init();
-    } finally {
-      if (session != null) session.logout();
     }
   }
 

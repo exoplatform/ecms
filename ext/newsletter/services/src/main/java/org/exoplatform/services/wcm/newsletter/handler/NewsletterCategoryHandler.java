@@ -270,7 +270,6 @@ public class NewsletterCategoryHandler {
         NewsletterConstant.removeAccessPermission(ableToRemove.toArray(removePer));
       }
       session.save();
-      session.logout();
     } catch(ItemNotFoundException ie) {
       log.info("Edit category " + categoryConfig.getName() + " failed because of ", ie);
     } catch (Exception e) {

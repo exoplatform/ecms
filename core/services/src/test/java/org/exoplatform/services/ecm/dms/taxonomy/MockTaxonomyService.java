@@ -99,8 +99,6 @@ public class MockTaxonomyService extends TaxonomyServiceImpl {
       }
     } catch (Exception e) {
       throw new RepositoryException(e);
-    } finally {
-      if(session != null) session.logout();
     }
     return listCate;
   }

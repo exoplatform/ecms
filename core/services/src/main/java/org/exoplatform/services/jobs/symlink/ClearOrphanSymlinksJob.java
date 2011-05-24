@@ -54,6 +54,7 @@ public class ClearOrphanSymlinksJob implements Job {
     NodeHierarchyCreator nodeHierarchyCreator = (NodeHierarchyCreator) exoContainer.
         getComponentInstanceOfType(NodeHierarchyCreator.class);
 
+    SessionProvider sessionProvider = null;
     Session session = null;
     try {
       ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
@@ -66,7 +67,7 @@ public class ClearOrphanSymlinksJob implements Job {
             break;
           }
       if (trashWorkspace == null) return;
-      SessionProvider sessionProvider = SessionProviderFactory.createSystemProvider();
+      sessionProvider = SessionProvider.createSystemProvider();
       String[] workspaces = manageableRepository.getWorkspaceNames();
 
       for (String workspace : workspaces) {
@@ -82,13 +83,19 @@ public class ClearOrphanSymlinksJob implements Job {
             if (symlinkNode.isNodeType(EXO_RESTORELOCATION))
               continue;
             //get list of node to delete
+            Node targetNode = null;
             try {
-              Node targetNode = linkManager.getTarget(symlinkNode, true);
+              targetNode = linkManager.getTarget(symlinkNode, true);
               if (targetNode.isNodeType(EXO_RESTORELOCATION))
                 deleteNodeList.add(symlinkNode);
             } catch (ItemNotFoundException e) {
               deleteNodeList.add(symlinkNode);
-            } catch (RepositoryException e) {}
+            } catch (RepositoryException e) {
+            } finally {
+              if (targetNode != null && targetNode.getSession().isLive()) {
+                targetNode.getSession().logout();
+              }
+            }
             //move the nodes in list to trash
           }
           for (Node node : deleteNodeList) {
@@ -109,6 +116,7 @@ public class ClearOrphanSymlinksJob implements Job {
       }
     } catch (Exception e) {
       log.error("Error occurs in ClearOrphanSymlinksJob", e);
+      sessionProvider.close();
     }
   }
 

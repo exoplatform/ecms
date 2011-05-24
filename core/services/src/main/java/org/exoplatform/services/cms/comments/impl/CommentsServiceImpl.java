@@ -132,7 +132,6 @@ public class CommentsServiceImpl implements CommentsService {
     } catch(Exception e) {
       LOG.error("Unexpected problem happen when try to add comment", e);
     } finally {
-      session.logout();
       systemSession.logout();
     }
 
@@ -198,7 +197,6 @@ public class CommentsServiceImpl implements CommentsService {
     } catch(Exception e) {
       LOG.error("Unexpected problem happen when try to get comments", e);
     } finally {
-      session.logout();
       systemSession.logout();
     }
     return list;

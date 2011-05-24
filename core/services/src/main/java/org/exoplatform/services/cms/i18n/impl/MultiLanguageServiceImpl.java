@@ -236,7 +236,6 @@ public class MultiLanguageServiceImpl implements MultiLanguageService {
             }
             node.setProperty(propertyName, convertedCalendarValues);
           }
-          session.logout();
         } else {
           if(value instanceof String) {
             node.setProperty(propertyName, ISO8601.parse(value.toString()));
@@ -284,7 +283,6 @@ public class MultiLanguageServiceImpl implements MultiLanguageService {
             node.setProperty(propertyName, value.toString());
           }
         }
-        session.logout();
       }
       break ;
     }

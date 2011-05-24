@@ -526,11 +526,9 @@ public class StaticAndDirectPublicationPlugin extends PublicationPlugin {
       } else {
         result += resourceBundle.getString("PublicationService.StaticAndDirectPublicationPlugin.visibilityPrivate");
       }
-      session.logout();
       return result;
     } else {
       //should not append : unknown state
-      session.logout();
       throw new Exception("StaticAndDirectPublicationPlugin.getUserInfo : Unknown state : "
           + node.getProperty(CURRENT_STATE).getString());
     }
