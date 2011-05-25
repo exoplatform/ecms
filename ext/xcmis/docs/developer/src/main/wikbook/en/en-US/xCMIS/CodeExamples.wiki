@@ -1,11 +1,12 @@
 The following examples of CMIS usage may be useful for developers who needs to access a repository. 
-CMIS access code snippets build using Apache HTTP Client for Java or using Google gadets (gadgets.io) for JavaScript examples.
+CMIS access code snippets build using Apache HTTP Client for Java or using Google gadgets (gadgets.io) for JavaScript examples.
+For the cURL examples look at http://code.google.com/p/xcmis/wiki/xCMISusesWithCurl.
 
 h2. Login to repository.
 
 {note}
-CMIS service uses default authenticaton in general case, but it can be overriden in case of embedding CMIS into an Application Service. 
-In these examples only Basic HTTP authenticaton covered.
+CMIS service uses default authentication in general case, but it can be overridden in case of embedding CMIS into an Application Service. 
+In these examples only Basic HTTP authentication covered.
 {note}
 
 h3. Using java.
@@ -28,7 +29,7 @@ h2. Listing of documents (folder, files).
 
 There are a several methods to get the documents listings, such as getChildren(), getFolderTree() and getDescentants(), their usage will be described below.
 The difference between them is in usage of different URL segments to get a data ("/children" for getChildren(), "/foldertree" for getFolderTree(), "/descendants" for getDescentants()),
-and a different kind of results (getChildren() returns a flat structure, while a getFolderTree() and getDescentants() has a tree of items in responce).
+and a different kind of results (getChildren() returns a flat structure, while a getFolderTree() and getDescentants() has a tree of items in response).
 
 h3. Using java.
 
@@ -49,14 +50,14 @@ h3. Using java.
  GetMethod get = new GetMethod(url); 
  try {
  int result = client.executeMethod(get);
- final String strResponce = get.getResponseBodyAsString(); 
+ final String strResponse = get.getResponseBodyAsString(); 
  } finally {
    get.releaseConnection();
  }
 {code}
 
 
-h3. Using javascript.
+h3. Using JavaScript.
 
 Creating an URL to make a request (consists of repository name, the method name, e.g. "/children/", and folderID to get children from):
 
@@ -96,6 +97,8 @@ Getting of content stream is possible after the properties set have been read an
 
 h3. Using java.
 
+Get document properties.
+
 {code:language=java}
  import org.apache.commons.httpclient.HttpClient;
  import org.apache.commons.httpclient.methods.GetMethod;
@@ -113,12 +116,14 @@ h3. Using java.
  GetMethod get = new GetMethod(url); 
  try {
    int result = client.executeMethod(get);
-   final String strResponce = get.getResponseBodyAsString(); 
+   final String strResponse = get.getResponseBodyAsString(); 
    // use response...
  } finally {
    get.releaseConnection();
  }
 {code}
+
+Get document content-stream.
 
 To get a Document's content stream, an URL must contain "/file" part, object ID, and optionally the content stream ID, which can be used, for example, to obtain 
 renditions. If no stream ID is specified, a default stream will be returned.
@@ -140,10 +145,10 @@ renditions. If no stream ID is specified, a default stream will be returned.
  client.getHttpConnectionManager().
  getParams().setConnectionTimeout(10000);
 
- PostMethod post = new PostMethod(url);
+ GetMethod get = new GetMethod(url);
  try { 
-   int result = client.executeMethod(post);
-   final InputStream stream = post.getResponseBodyAsStream(); 
+   int result = client.executeMethod(get);
+   final InputStream stream = get.getResponseBodyAsStream(); 
    try { 
    // use stream... 
    int dataByte = stream.read(); 
@@ -151,11 +156,13 @@ renditions. If no stream ID is specified, a default stream will be returned.
      stream.close();
    }
  } finally {   
-   post.releaseConnection();
+   get.releaseConnection();
  }
 {code}
 
-h3. Using javascript.
+h3. Using JavaScript.
+
+Get document properties.
 
 Creating an URL to make a request (consists of repository name, method name, e.g. "/children/", and folder ID to get the children from):
 
@@ -177,13 +184,27 @@ performing request:
 
 You can also use the ContentType.DOM parameter to parse the feed in your application (Using DOMParser for example).
 
+Get document content-stream.
+
 {note}
-Perfoming a content stream request in javascript will cause the browser dialog for a file download.
+Performing a content stream request in JavaScript will cause the browser dialog for a file download.
 {note}
+
+{code:language=java}
+ var url = "http://localhost:8080/rest/private/cmisatom/";
+ url += repository;
+ url += "/file/";
+ url += obj_id;
+ //Optionally
+ url += "?";
+ url += "streamid=";
+ url += streamID;
+{code}
+
 
 h2. Search of data and syntax examples.
 
-CMIS suports SQL queries for more handful content search. Query service can handle both GET and POST requests. URL for query consists of repository name and method name "/query".
+CMIS supports SQL queries for more handful content search. Query service can handle both GET and POST requests. URL for query consists of repository name and method name "/query".
 GET request must contain query as a parameter named "q", in case of POST request query must be located in a request body.
 
 For more detailed instructions how to construct queries please refer to "Query examples" chapter.
@@ -217,7 +238,7 @@ h3. Using java.
  try { 
    post.setRequestEntity(entity);
    int result = client.executeMethod(post);
-   final String strResponce = post.getResponseBodyAsString(); 
+   final String strResponse = post.getResponseBodyAsString(); 
    // use response...
  } finally {
    post.releaseConnection();
@@ -225,7 +246,7 @@ h3. Using java.
 {code}
 
 
-h3. Using javascript.
+h3. Using JavaScript.
 
 {code:language=java}
  var url = "http://localhost:8080/rest/private/cmisatom/";
@@ -271,22 +292,22 @@ String atomDoc = "<?xml version='1.0' encoding='utf-8'?>"
          + "<entry xmlns='http://www.w3.org/2005/Atom'"
          + " xmlns:cmis='http://docs.oasis-open.org/ns/cmis/core/200908/'"
          + " xmlns:cmisra='http://docs.oasis-open.org/ns/cmis/restatom/200908/'>"
-         + "<title>title</title><summary>summary</summary>"
          + "<cmisra:object><cmis:properties>"
-         + "<cmis:propertyId queryName='cmis:objectId' localName='rep-cmis:objectId' propertyDefinitionId='cmis:objectId'>"
-         + "<cmis:value>a3386ea0-0477-4a74-96bd-70d3da1c483a</cmis:value>"
-         + "</cmis:propertyId>"
-         + "</cmis:properties></cmisra:object></entry>";
+         + "<cmis:propertyString queryName='cmis:name' localName='cmis:name' propertyDefinitionId='cmis:name'>"
+         + "<cmis:value>newName</cmis:value>"
+         + "</cmis:propertyString>"
+         + "</cmis:properties></cmisra:object>"
+         + "</entry>";
 
- PostMethod post = new PostMethod(url);
+ PutMethod put = new PutMethod(url);
  RequestEntity entity = new StringRequestEntity(atomDoc, "text/xml", "utf-8");
- post.setRequestEntity(entity); 
+ put.setRequestEntity(entity); 
 
  try { 
-   int result = client.executeMethod(post);
-   final String strResponce = post.getResponseBodyAsString(); 
+   int result = client.executeMethod(put);
+   final String strResponse = put.getResponseBodyAsString(); 
  } finally {
-   post.releaseConnection();
+   put.releaseConnection();
  }
 {code}
 
@@ -314,13 +335,13 @@ Set content stream:
 
  try { 
    int result = client.executeMethod(post);
-   final String strResponce = post.getResponseBodyAsString(); 
+   final String strResponse = post.getResponseBodyAsString(); 
  } finally {
    post.releaseConnection();
  }
 {code}
 
-h3. Using javascript.
+h3. Using JavaScript.
 
 Update properties:
 
@@ -337,11 +358,10 @@ Update properties:
        atomDoc += "<entry xmlns='http://www.w3.org/2005/Atom'";
        atomDoc += " xmlns:cmis='http://docs.oasis-open.org/ns/cmis/core/200908/'";
        atomDoc += " xmlns:cmisra='http://docs.oasis-open.org/ns/cmis/restatom/200908/'>";
-       atomDoc += "<title>title</title><summary>summary</summary>";
        atomDoc += "<cmisra:object><cmis:properties>";
-       atomDoc += "<cmis:propertyId queryName='cmis:objectId' localName='rep-cmis:objectId' propertyDefinitionId='cmis:objectId'>";
-       atomDoc += "<cmis:value>a3386ea0-0477-4a74-96bd-70d3da1c483a</cmis:value>";
-       atomDoc += "</cmis:propertyId>";
+       atomDoc += "<cmis:propertyString queryName='cmis:name' localName='cmis:name' propertyDefinitionId='cmis:name'>";
+       atomDoc += "<cmis:value>newName</cmis:value>";
+       atomDoc += "</cmis:propertyString>";
        atomDoc += "</cmis:properties></cmisra:object></entry>";
 
  var params = {};
@@ -363,7 +383,7 @@ Set content stream:
  var params = {};
  params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
  params[gadgets.io.RequestParameters.CONTENT_TYPE] = "multipart/form-data";
- params[gadgets.io.RequestParameters.POST_DATA] = contestStream;
+ params[gadgets.io.RequestParameters.POST_DATA] = contentStream;
  gadgets.io.makeRequest(url, handler, params);
 {code}
 
