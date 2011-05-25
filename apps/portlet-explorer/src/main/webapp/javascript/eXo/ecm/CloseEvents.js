@@ -3,8 +3,6 @@
  * - true if some content has changed
  **/
 var b_changed = false;
-var document_closing_confirm_msg = "";
-var document_navigating_confirm_msg = "";
 
 /**
  * Change the current state to inform some content has changed
@@ -21,7 +19,7 @@ function changed() {
 function ajaxGet(url, callback) {
   var bypassActionbar= -1; //url.indexOf("uicomponent=UIActionBar_");
   if (b_changed && bypassActionbar<=0) {
-    var answer = confirm(document_navigating_confirm_msg);
+    var answer = confirm(document.getElementById("NavigateConfirmationMsg").innerHTML);
     if (answer) {
       b_changed = false;
     } else {
@@ -40,16 +38,16 @@ function ajaxGet(url, callback) {
  * - manage CKeditor update in textareas
  **/
 function setClosingConfirmationMsg(msg) {
-  document_closing_confirm_msg = msg;
+  document.getElementById("CloseConfirmationMsg").innerHTML = msg;
 }
 
 function setNavigatingConfirmationMsg(msg) {
-  document_navigating_confirm_msg = msg;
+  document.getElementById("NavigateConfirmationMsg").innerHTML = msg;
 }
 UIForm.prototype.submitForm = function(formId, action, useAjax, callback) {
  if(action.toLowerCase() == "close") {
    if (b_changed) {      
-			var answer = confirm(document_closing_confirm_msg);
+			var answer = confirm(document.getElementById("CloseConfirmationMsg").innerHTML);
     	if (answer) {
       	b_changed = false;
     	} 
