@@ -21,7 +21,9 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import org.exoplatform.commons.utils.ObjectPageList;
+import org.exoplatform.commons.utils.LazyPageList;
+import org.exoplatform.commons.utils.ListAccess;
+import org.exoplatform.commons.utils.ListAccessImpl;
 import org.exoplatform.services.workflow.Task;
 import org.exoplatform.services.workflow.WorkflowServiceContainer;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -75,13 +77,14 @@ public class UITaskListOfProcess extends UIContainer {
       haveEndDateList.add(task);
     }
     Collections.sort(haveEndDateList, new TaskIdComparator());
-    uiGrid.getUIPageIterator().setPageList(new ObjectPageList(haveEndDateList, 10)) ;
+    ListAccess<Task> taskList = new ListAccessImpl<Task>(Task.class, haveEndDateList);
+    uiGrid.getUIPageIterator().setPageList(new LazyPageList<Task>(taskList, 10));
   }
 
-  static public class TaskIdComparator implements Comparator {
-    public int compare(Object o1, Object o2) throws ClassCastException {
-      String id1 = ((Task) o1).getId();
-      String id2 = ((Task) o2).getId();
+  static public class TaskIdComparator implements Comparator<Task> {
+    public int compare(Task o1, Task o2) throws ClassCastException {
+      String id1 = o1.getId();
+      String id2 = o2.getId();
       return id1.compareTo(id2);
     }
   }

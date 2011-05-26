@@ -27,7 +27,9 @@ import javax.jcr.AccessDeniedException;
 import javax.jcr.Node;
 import javax.jcr.Session;
 
-import org.exoplatform.commons.utils.ObjectPageList;
+import org.exoplatform.commons.utils.LazyPageList;
+import org.exoplatform.commons.utils.ListAccess;
+import org.exoplatform.commons.utils.ListAccessImpl;
 import org.exoplatform.ecm.webui.utils.PermissionUtil;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.portal.webui.util.SessionProviderFactory;
@@ -136,8 +138,10 @@ public class UIPermissionInfo extends UIContainer {
     }
     sizeOfListPermission = permBeans.size() + iSystemOwner;
     UIGrid uiGrid = findFirstComponentOfType(UIGrid.class) ;
-    ObjectPageList objPageList = new ObjectPageList(permBeans, 10) ;
-    uiGrid.getUIPageIterator().setPageList(objPageList) ;
+    ListAccess<PermissionBean> permList = new ListAccessImpl<PermissionBean>(PermissionBean.class,
+                                                                             permBeans);
+    LazyPageList<PermissionBean> dataPageList = new LazyPageList<PermissionBean>(permList, 10);
+    uiGrid.getUIPageIterator().setPageList(dataPageList);
   }
   private Session getSession() throws Exception {
     RepositoryService repositoryService  = getApplicationComponent(RepositoryService.class) ;

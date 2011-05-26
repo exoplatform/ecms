@@ -19,7 +19,9 @@ package org.exoplatform.ecm.webui.component.admin.folksonomy;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.exoplatform.commons.utils.ObjectPageList;
+import org.exoplatform.commons.utils.LazyPageList;
+import org.exoplatform.commons.utils.ListAccess;
+import org.exoplatform.commons.utils.ListAccessImpl;
 import org.exoplatform.services.cms.folksonomy.NewFolksonomyService;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -51,8 +53,6 @@ public class UITagPermissionInfo extends UIContainer {
 
   private static String[] PERMISSION_ACTION = {"Delete"};
 
-  private int sizeOfListPermission = 0;
-
   public UITagPermissionInfo() throws Exception {
     UIGrid uiGrid = createUIComponent(UIGrid.class, null, "TagPermissionInfo");
     addChild(uiGrid);
@@ -74,8 +74,10 @@ public class UITagPermissionInfo extends UIContainer {
     }
     UIGrid uiGrid = findFirstComponentOfType(UIGrid.class);
     int currentPage = uiGrid.getUIPageIterator().getCurrentPage();
-    ObjectPageList objPageList = new ObjectPageList(tagPermissions, 10);
-    uiGrid.getUIPageIterator().setPageList(objPageList);
+    ListAccess<TagPermissionData> tagPermList = new ListAccessImpl<TagPermissionData>(TagPermissionData.class,
+                                                                                      tagPermissions);
+    LazyPageList<TagPermissionData> dataPageList = new LazyPageList<TagPermissionData>(tagPermList, 10);
+    uiGrid.getUIPageIterator().setPageList(dataPageList);
     int total = uiGrid.getUIPageIterator().getAvailablePage();
     uiGrid.getUIPageIterator().setCurrentPage(currentPage < total ? currentPage : total);
   }

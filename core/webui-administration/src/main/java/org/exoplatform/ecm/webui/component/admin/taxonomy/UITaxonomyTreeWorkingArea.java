@@ -25,7 +25,9 @@ import javax.jcr.NodeIterator;
 import javax.jcr.PathNotFoundException;
 import javax.jcr.ReferentialIntegrityException;
 
-import org.exoplatform.commons.utils.ObjectPageList;
+import org.exoplatform.commons.utils.LazyPageList;
+import org.exoplatform.commons.utils.ListAccess;
+import org.exoplatform.commons.utils.ListAccessImpl;
 import org.exoplatform.ecm.jcr.model.ClipboardCommand;
 import org.exoplatform.ecm.webui.component.admin.taxonomy.action.UIActionForm;
 import org.exoplatform.ecm.webui.component.admin.taxonomy.action.UIActionTaxonomyManager;
@@ -87,8 +89,9 @@ public class UITaxonomyTreeWorkingArea extends UIContainer {
   public UIPageIterator getUIPageIterator() { return uiPageIterator_; }
 
   public void updateGrid() throws Exception {
-    ObjectPageList objPageList = new ObjectPageList(getNodeList(), 10);
-    uiPageIterator_.setPageList(objPageList);
+    ListAccess<Node> nodeList = new ListAccessImpl<Node>(Node.class, getNodeList());
+    LazyPageList<Node> dataPageList = new LazyPageList<Node>(nodeList, 10);
+    uiPageIterator_.setPageList(dataPageList);
   }
 
   public String[] getActions() {return actions_;}

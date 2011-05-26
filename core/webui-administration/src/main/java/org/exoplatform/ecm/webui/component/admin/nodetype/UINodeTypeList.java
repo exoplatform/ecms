@@ -28,8 +28,9 @@ import javax.jcr.nodetype.NodeType;
 import javax.jcr.nodetype.NodeTypeIterator;
 import javax.jcr.nodetype.NodeTypeManager;
 
-import org.exoplatform.commons.utils.ObjectPageList;
-import org.exoplatform.commons.utils.PageList;
+import org.exoplatform.commons.utils.LazyPageList;
+import org.exoplatform.commons.utils.ListAccess;
+import org.exoplatform.commons.utils.ListAccessImpl;
 import org.exoplatform.ecm.webui.form.UIFormInputSetWithAction;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
@@ -107,10 +108,12 @@ public class UINodeTypeList extends UIComponentDecorator {
   public String[] getActions() { return ACTIONS ; }
 
   public void refresh(String name, int currentPage, List<NodeTypeBean> nodeType) throws Exception {
-    PageList pageList = new ObjectPageList(NodeLocation.getLocationsByNodeList(nodeType), 10) ;
+    ListAccess<Object> nodeTypeList = new ListAccessImpl<Object>(Object.class,
+                                                                 NodeLocation.getLocationsByNodeList(nodeType));
+    LazyPageList<Object> pageList = new LazyPageList<Object>(nodeTypeList, 10);
     uiPageIterator_.setPageList(pageList);
-    if(currentPage > uiPageIterator_.getAvailablePage())
-      uiPageIterator_.setCurrentPage(currentPage-1);
+    if (currentPage > uiPageIterator_.getAvailablePage())
+      uiPageIterator_.setCurrentPage(uiPageIterator_.getAvailablePage());
     else
       uiPageIterator_.setCurrentPage(currentPage);
   }

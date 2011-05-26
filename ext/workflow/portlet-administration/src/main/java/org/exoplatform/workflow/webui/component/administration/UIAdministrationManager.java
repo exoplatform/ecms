@@ -16,7 +16,11 @@
  */
 package org.exoplatform.workflow.webui.component.administration ;
 
-import org.exoplatform.commons.utils.ObjectPageList;
+import org.exoplatform.commons.utils.LazyPageList;
+import org.exoplatform.commons.utils.ListAccess;
+import org.exoplatform.commons.utils.ListAccessImpl;
+import org.exoplatform.services.workflow.Process;
+import org.exoplatform.services.workflow.Timer;
 import org.exoplatform.services.workflow.WorkflowServiceContainer;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.ComponentConfigs;
@@ -73,15 +77,19 @@ public class UIAdministrationManager extends UIContainer {
   public String[] getActions() { return ACTIONS ; }
 
   public void updateMonitorGrid() throws Exception {
-    UIGrid uiMonitorGrid = getChildById("UIMonitor") ;
+    UIGrid uiMonitorGrid = getChildById("UIMonitor");
     WorkflowServiceContainer workflowServiceContainer = getApplicationComponent(WorkflowServiceContainer.class);
-    uiMonitorGrid.getUIPageIterator().setPageList(new ObjectPageList(workflowServiceContainer.getProcesses(), 10)) ;
+    ListAccess<Process> processList = new ListAccessImpl<Process>(Process.class,
+                                                                  workflowServiceContainer.getProcesses());
+    uiMonitorGrid.getUIPageIterator().setPageList(new LazyPageList<Process>(processList, 10));
   }
 
   public void updateTimersGrid() throws Exception {
     WorkflowServiceContainer workflowServiceContainer = getApplicationComponent(WorkflowServiceContainer.class);
-    UIGrid uiGrid = getChildById("UITimers") ;
-    uiGrid.getUIPageIterator().setPageList(new ObjectPageList(workflowServiceContainer.getTimers(), 10)) ;
+    UIGrid uiGrid = getChildById("UITimers");
+    ListAccess<Timer> timerList = new ListAccessImpl<Timer>(Timer.class,
+                                                            workflowServiceContainer.getTimers());
+    uiGrid.getUIPageIterator().setPageList(new LazyPageList<Timer>(timerList, 10));
   }
 
   static  public class ViewActionListener extends EventListener<UIAdministrationManager> {

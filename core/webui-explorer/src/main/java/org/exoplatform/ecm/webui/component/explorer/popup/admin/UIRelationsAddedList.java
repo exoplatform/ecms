@@ -21,7 +21,9 @@ import java.util.List;
 
 import javax.jcr.Node;
 
-import org.exoplatform.commons.utils.ObjectPageList;
+import org.exoplatform.commons.utils.LazyPageList;
+import org.exoplatform.commons.utils.ListAccess;
+import org.exoplatform.commons.utils.ListAccessImpl;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.selector.UISelectable;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
@@ -65,13 +67,15 @@ public class UIRelationsAddedList extends UIContainer implements UISelectable {
     uiGrid.configure("path", RELATE_BEAN_FIELD, ACTION) ;
   }
 
-  public void updateGrid (List<Node> nodes, int currentPage) throws Exception {
-    UIGrid uiGrid = getChildById("RelateAddedList") ;
-    if(nodes == null) nodes = new ArrayList<Node>() ;
-    ObjectPageList objPageList = new ObjectPageList(nodes, 10);
+  public void updateGrid(List<Node> nodes, int currentPage) throws Exception {
+    UIGrid uiGrid = getChildById("RelateAddedList");
+    if (nodes == null)
+      nodes = new ArrayList<Node>();
+    ListAccess<Node> nodeList = new ListAccessImpl<Node>(Node.class, nodes);
+    LazyPageList<Node> objPageList = new LazyPageList<Node>(nodeList, 10);
     uiGrid.getUIPageIterator().setPageList(objPageList);
-    if(currentPage > uiGrid.getUIPageIterator().getAvailablePage())
-      uiGrid.getUIPageIterator().setCurrentPage(currentPage-1);
+    if (currentPage > uiGrid.getUIPageIterator().getAvailablePage())
+      uiGrid.getUIPageIterator().setCurrentPage(uiGrid.getUIPageIterator().getAvailablePage());
     else
       uiGrid.getUIPageIterator().setCurrentPage(currentPage);
   }

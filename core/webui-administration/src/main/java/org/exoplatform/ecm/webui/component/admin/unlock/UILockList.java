@@ -18,8 +18,9 @@ package org.exoplatform.ecm.webui.component.admin.unlock;
 
 import java.util.List;
 
-import org.exoplatform.commons.utils.ObjectPageList;
-import org.exoplatform.commons.utils.PageList;
+import org.exoplatform.commons.utils.LazyPageList;
+import org.exoplatform.commons.utils.ListAccess;
+import org.exoplatform.commons.utils.ListAccessImpl;
 import org.exoplatform.services.cms.lock.LockService;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -43,28 +44,38 @@ import org.exoplatform.webui.event.EventListener;
 )
 public class UILockList extends UIComponentDecorator {
   final static public String[] ACTIONS = {};
-  final static public String ST_EDIT = "EditUnLockForm";
-  private UIPageIterator uiPageIterator_;
+
+  final static public String   ST_EDIT = "EditUnLockForm";
+
+  private UIPageIterator       uiPageIterator_;
 
   public UILockList() throws Exception {
     uiPageIterator_ = createUIComponent(UIPageIterator.class, null, "LockListIterator");
-    setUIComponent(uiPageIterator_) ;
+    setUIComponent(uiPageIterator_);
   }
 
-  public String[] getActions() { return ACTIONS ; }
+  public String[] getActions() {
+    return ACTIONS;
+  }
 
   public void updateLockedNodesGrid(int currentPage) throws Exception {
-    PageList pageList = new ObjectPageList(getAllGroupsOrUsersForLock(), 10);
+    ListAccess<String> groupsAndUsersForLockList = new ListAccessImpl<String>(String.class,
+                                                                              getAllGroupsOrUsersForLock());
+    LazyPageList<String> pageList = new LazyPageList<String>(groupsAndUsersForLockList, 10);
     uiPageIterator_.setPageList(pageList);
-    if(currentPage > getUIPageIterator().getAvailablePage())
-      uiPageIterator_.setCurrentPage(currentPage-1);
+    if (currentPage > getUIPageIterator().getAvailablePage())
+      uiPageIterator_.setCurrentPage(getUIPageIterator().getAvailablePage());
     else
       uiPageIterator_.setCurrentPage(currentPage);
   }
 
-  public UIPageIterator getUIPageIterator() { return uiPageIterator_ ; }
+  public UIPageIterator getUIPageIterator() {
+    return uiPageIterator_;
+  }
 
-  public List getGroupsOrUsersForLock() throws Exception { return uiPageIterator_.getCurrentPageData(); }
+  public List getGroupsOrUsersForLock() throws Exception {
+    return uiPageIterator_.getCurrentPageData();
+  }
 
   public List<String> getAllGroupsOrUsersForLock() throws Exception {
     LockService lockService = getApplicationComponent(LockService.class);

@@ -18,8 +18,9 @@ package org.exoplatform.ecm.webui.component.admin.unlock;
 
 import java.util.List;
 
-import org.exoplatform.commons.utils.ObjectPageList;
-import org.exoplatform.commons.utils.PageList;
+import org.exoplatform.commons.utils.LazyPageList;
+import org.exoplatform.commons.utils.ListAccess;
+import org.exoplatform.commons.utils.ListAccessImpl;
 import org.exoplatform.services.cms.lock.LockService;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -56,10 +57,12 @@ public class UILockHolderList extends UIComponentDecorator {
   public String[] getActions() { return ACTIONS ; }
 
   public void updateLockedNodesGrid(int currentPage) throws Exception {
-    PageList pageList = new ObjectPageList(getAllGroupsOrUsersForLock(), 10);
+    ListAccess<String> groupsAndUsersForLockList = new ListAccessImpl<String>(String.class,
+                                                                              getAllGroupsOrUsersForLock());
+    LazyPageList<String> pageList = new LazyPageList<String>(groupsAndUsersForLockList, 10);
     uiPageIterator_.setPageList(pageList);
-    if(currentPage > getUIPageIterator().getAvailablePage())
-      uiPageIterator_.setCurrentPage(currentPage-1);
+    if (currentPage > getUIPageIterator().getAvailablePage())
+      uiPageIterator_.setCurrentPage(getUIPageIterator().getAvailablePage());
     else
       uiPageIterator_.setCurrentPage(currentPage);
   }

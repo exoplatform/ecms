@@ -18,12 +18,14 @@ package org.exoplatform.ecm.webui.component.admin.repository;
 
 import java.util.List;
 
-import org.exoplatform.commons.utils.ObjectPageList;
-import org.exoplatform.webui.core.UIPopupComponent;
-import org.exoplatform.webui.core.UIPopupContainer;
+import org.exoplatform.commons.utils.LazyPageList;
+import org.exoplatform.commons.utils.ListAccess;
+import org.exoplatform.commons.utils.ListAccessImpl;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIGrid;
+import org.exoplatform.webui.core.UIPopupComponent;
+import org.exoplatform.webui.core.UIPopupContainer;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
 
@@ -57,9 +59,11 @@ public class UIRepositoryValueSelect  extends UIGrid implements UIPopupComponent
   public String[] getActions() {
     return new String[] {"Close"} ;
   }
+
   public void updateGrid(List<ClassData> datas) throws Exception {
-    ObjectPageList objPageList = new ObjectPageList(datas, 10) ;
-    getUIPageIterator().setPageList(objPageList) ;
+    ListAccess<ClassData> classList = new ListAccessImpl<ClassData>(ClassData.class, datas);
+    LazyPageList<ClassData> dataPageList = new LazyPageList<ClassData>(classList, 10);
+    getUIPageIterator().setPageList(dataPageList);
   }
 
   static public class SelectActionListener extends EventListener<UIRepositoryValueSelect> {

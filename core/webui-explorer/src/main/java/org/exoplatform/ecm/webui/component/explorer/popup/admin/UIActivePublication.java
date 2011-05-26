@@ -22,7 +22,9 @@ import java.util.List;
 
 import javax.jcr.Node;
 
-import org.exoplatform.commons.utils.ObjectPageList;
+import org.exoplatform.commons.utils.LazyPageList;
+import org.exoplatform.commons.utils.ListAccess;
+import org.exoplatform.commons.utils.ListAccessImpl;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.ecm.publication.AlreadyInPublicationLifecycleException;
@@ -101,17 +103,22 @@ import org.exoplatform.webui.form.UIForm;
   public void updateLifecyclesGrid() throws Exception {
     List<PublicationLifecycleBean> publicationLifecycleBeans = new ArrayList<PublicationLifecycleBean>();
     PublicationService publicationService = getApplicationComponent(PublicationService.class);
-    Collection<PublicationPlugin> publicationPlugins = publicationService.getPublicationPlugins().values();
+    Collection<PublicationPlugin> publicationPlugins = publicationService.getPublicationPlugins()
+                                                                         .values();
     if (publicationPlugins.size() != 0) {
-      for (PublicationPlugin publicationPlugin: publicationPlugins) {
+      for (PublicationPlugin publicationPlugin : publicationPlugins) {
         PublicationLifecycleBean lifecycleBean = new PublicationLifecycleBean();
         lifecycleBean.setLifecycleName(publicationPlugin.getLifecycleName());
         lifecycleBean.setLifecycleDesc(publicationPlugin.getDescription());
         publicationLifecycleBeans.add(lifecycleBean);
       }
     }
-    ObjectPageList objectPageList = new ObjectPageList(publicationLifecycleBeans, 5);
-    getUIPageIterator().setPageList(objectPageList);
+
+    ListAccess<PublicationLifecycleBean> beanList = new ListAccessImpl<PublicationLifecycleBean>(PublicationLifecycleBean.class,
+                                                                                                 publicationLifecycleBeans);
+    LazyPageList<PublicationLifecycleBean> dataPageList = new LazyPageList<PublicationLifecycleBean>(beanList,
+                                                                                                     5);
+    getUIPageIterator().setPageList(dataPageList);
   }
 
   public void enrolNodeInLifecycle(Node currentNode, String lifecycleName, WebuiRequestContext requestContext) throws Exception {

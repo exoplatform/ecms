@@ -24,7 +24,9 @@ import javax.jcr.NodeIterator;
 import javax.jcr.RepositoryException;
 import javax.jcr.nodetype.NodeType;
 
-import org.exoplatform.commons.utils.ObjectPageList;
+import org.exoplatform.commons.utils.LazyPageList;
+import org.exoplatform.commons.utils.ListAccess;
+import org.exoplatform.commons.utils.ListAccessImpl;
 import org.exoplatform.ecm.webui.selector.UISelectable;
 import org.exoplatform.ecm.webui.tree.UIBaseNodeTreeSelector;
 import org.exoplatform.ecm.webui.utils.Utils;
@@ -36,10 +38,10 @@ import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIBreadcumbs;
+import org.exoplatform.webui.core.UIBreadcumbs.LocalPath;
 import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.core.UIPageIterator;
 import org.exoplatform.webui.core.UIPopupWindow;
-import org.exoplatform.webui.core.UIBreadcumbs.LocalPath;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
 
@@ -135,7 +137,9 @@ public class UISelectPathPanel extends UIContainer {
   }
 
   public void updateGrid() throws Exception {
-    ObjectPageList objPageList = new ObjectPageList(NodeLocation.getLocationsByNodeList(getListSelectableNodes()), 10);
+    ListAccess<Object> selectableNodeList = new ListAccessImpl<Object>(Object.class,
+                                                                       NodeLocation.getLocationsByNodeList(getListSelectableNodes()));
+    LazyPageList<Object> objPageList = new LazyPageList<Object>(selectableNodeList, 10);
     uiPageIterator_.setPageList(objPageList);
   }
 

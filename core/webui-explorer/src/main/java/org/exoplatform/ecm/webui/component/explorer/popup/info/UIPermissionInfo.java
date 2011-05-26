@@ -26,7 +26,9 @@ import java.util.Set;
 import javax.jcr.AccessDeniedException;
 import javax.jcr.Node;
 
-import org.exoplatform.commons.utils.ObjectPageList;
+import org.exoplatform.commons.utils.LazyPageList;
+import org.exoplatform.commons.utils.ListAccess;
+import org.exoplatform.commons.utils.ListAccessImpl;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorerPortlet;
 import org.exoplatform.ecm.webui.utils.PermissionUtil;
@@ -125,25 +127,31 @@ public class UIPermissionInfo extends UIContainer {
       permBeans.add(permOwnerBean);
     }
 
-    while(keysIter.hasNext()) {
+    while (keysIter.hasNext()) {
       String userOrGroup = keysIter.next();
       List<String> permissions = permsMap.get(userOrGroup);
       PermissionBean permBean = new PermissionBean();
       permBean.setUsersOrGroups(userOrGroup);
-      for(String perm : permissions) {
-        if(PermissionType.READ.equals(perm)) permBean.setRead(true);
-        else if(PermissionType.ADD_NODE.equals(perm)) permBean.setAddNode(true);
-        else if(PermissionType.SET_PROPERTY.equals(perm)) permBean.setSetProperty(true);
-        else if(PermissionType.REMOVE.equals(perm)) permBean.setRemove(true);
+      for (String perm : permissions) {
+        if (PermissionType.READ.equals(perm))
+          permBean.setRead(true);
+        else if (PermissionType.ADD_NODE.equals(perm))
+          permBean.setAddNode(true);
+        else if (PermissionType.SET_PROPERTY.equals(perm))
+          permBean.setSetProperty(true);
+        else if (PermissionType.REMOVE.equals(perm))
+          permBean.setRemove(true);
       }
       permBeans.add(permBean);
       sizeOfListPermission = permBeans.size() + iSystemOwner;
     }
-    UIGrid uiGrid = findFirstComponentOfType(UIGrid.class) ;
-    ObjectPageList objPageList = new ObjectPageList(permBeans, 10) ;
-    uiGrid.getUIPageIterator().setPageList(objPageList);
-    if(currentPage > uiGrid.getUIPageIterator().getAvailablePage())
-      uiGrid.getUIPageIterator().setCurrentPage(currentPage-1);
+    UIGrid uiGrid = findFirstComponentOfType(UIGrid.class);
+    ListAccess<PermissionBean> permList = new ListAccessImpl<PermissionBean>(PermissionBean.class,
+                                                                             permBeans);
+    LazyPageList<PermissionBean> dataPageList = new LazyPageList<PermissionBean>(permList, 10);
+    uiGrid.getUIPageIterator().setPageList(dataPageList);
+    if (currentPage > uiGrid.getUIPageIterator().getAvailablePage())
+      uiGrid.getUIPageIterator().setCurrentPage(uiGrid.getUIPageIterator().getAvailablePage());
     else
       uiGrid.getUIPageIterator().setCurrentPage(currentPage);
   }

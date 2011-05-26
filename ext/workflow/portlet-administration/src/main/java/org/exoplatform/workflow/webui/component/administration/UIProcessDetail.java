@@ -21,7 +21,9 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import org.exoplatform.commons.utils.ObjectPageList;
+import org.exoplatform.commons.utils.LazyPageList;
+import org.exoplatform.commons.utils.ListAccess;
+import org.exoplatform.commons.utils.ListAccessImpl;
 import org.exoplatform.services.workflow.ProcessInstance;
 import org.exoplatform.services.workflow.Task;
 import org.exoplatform.services.workflow.WorkflowServiceContainer;
@@ -83,33 +85,40 @@ public class UIProcessDetail extends UIContainer {
     completedProcessInstanceList.clear();
     runningProcessInstanceList.clear();
     WorkflowServiceContainer workflowServiceContainer = getApplicationComponent(WorkflowServiceContainer.class);
-    if(id != null) processInstanceId = id;
+    if (id != null)
+      processInstanceId = id;
     List<ProcessInstance> processInstanceList = workflowServiceContainer.getProcessInstances(processInstanceId);
-    for (ProcessInstance processInstance : processInstanceList){
-      if(processInstance.getEndDate() != null)
+    for (ProcessInstance processInstance : processInstanceList) {
+      if (processInstance.getEndDate() != null)
         completedProcessInstanceList.add(processInstance);
       else
         runningProcessInstanceList.add(processInstance);
     }
 
     UIGrid uiCompletedProcess = getChildById("UICompletedProcessGrid");
-    uiCompletedProcess.getUIPageIterator().setPageList(new ObjectPageList(completedProcessInstanceList, 10));
+    ListAccess<ProcessInstance> completedProcessList = new ListAccessImpl<ProcessInstance>(ProcessInstance.class,
+                                                                                           completedProcessInstanceList);
+    uiCompletedProcess.getUIPageIterator()
+                      .setPageList(new LazyPageList<ProcessInstance>(completedProcessList, 10));
 
     UIGrid uiRunningProcess = getChildById("UIRunningProcessGrid");
-    uiRunningProcess.getUIPageIterator().setPageList(new ObjectPageList(runningProcessInstanceList, 10));
+    ListAccess<ProcessInstance> runningProcessList = new ListAccessImpl<ProcessInstance>(ProcessInstance.class,
+                                                                                         runningProcessInstanceList);
+    uiRunningProcess.getUIPageIterator()
+                    .setPageList(new LazyPageList<ProcessInstance>(runningProcessList, 10));
   }
 
   @SuppressWarnings("unchecked")
   public void updateTasksGrid(String id) throws Exception {
-    WorkflowServiceContainer workflowServiceContainer =
-      getApplicationComponent(WorkflowServiceContainer.class);
+    WorkflowServiceContainer workflowServiceContainer = getApplicationComponent(WorkflowServiceContainer.class);
     UIGrid uiGrid = getChildById("UIRunningProcessGrid");
     List<Task> haveEndDateList = new ArrayList<Task>();
-    for(Task task : workflowServiceContainer.getTasks(id)) {
+    for (Task task : workflowServiceContainer.getTasks(id)) {
       haveEndDateList.add(task);
     }
     Collections.sort(haveEndDateList, new TaskIdComparator());
-    uiGrid.getUIPageIterator().setPageList(new ObjectPageList(haveEndDateList, 10));
+    ListAccess<Task> haveEndDateTaskList = new ListAccessImpl<Task>(Task.class, haveEndDateList);
+    uiGrid.getUIPageIterator().setPageList(new LazyPageList<Task>(haveEndDateTaskList, 10));
   }
 
   /*

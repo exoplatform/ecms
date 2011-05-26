@@ -23,9 +23,10 @@ import java.util.List;
 
 import javax.jcr.Node;
 
-import org.exoplatform.commons.utils.ObjectPageList;
+import org.exoplatform.commons.utils.LazyPageList;
+import org.exoplatform.commons.utils.ListAccess;
+import org.exoplatform.commons.utils.ListAccessImpl;
 import org.exoplatform.ecm.webui.utils.Utils;
-import org.exoplatform.ecm.webui.component.admin.UIECMAdminPortlet;
 import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.drives.ManageDriveService;
@@ -74,25 +75,29 @@ public class UIECMTemplateList extends UIGrid {
 
   @SuppressWarnings("unchecked")
   public void updateTempListGrid(int currentPage) throws Exception {
-    List<Node> nodes = getApplicationComponent(ManageViewService.class).
-      getAllTemplates(BasePath.ECM_EXPLORER_TEMPLATES, SessionProviderFactory.createSessionProvider()) ;
-    List<TemplateBean> tempBeans = new ArrayList<TemplateBean>() ;
-    for(Node node : nodes) {
-      tempBeans.add(new TemplateBean(node.getName(), node.getPath(), getBaseVersion(node))) ;
+    List<Node> nodes = getApplicationComponent(ManageViewService.class)
+                                               .getAllTemplates(
+                                                                BasePath.ECM_EXPLORER_TEMPLATES, 
+                                                                SessionProviderFactory.createSessionProvider());
+    List<TemplateBean> tempBeans = new ArrayList<TemplateBean>();
+    for (Node node : nodes) {
+      tempBeans.add(new TemplateBean(node.getName(), node.getPath(), getBaseVersion(node)));
     }
-    Collections.sort(tempBeans, new ECMViewComparator()) ;
-    getUIPageIterator().setPageList(new ObjectPageList(tempBeans, 10)) ;
-    if(currentPage > getUIPageIterator().getAvailablePage())
-      getUIPageIterator().setCurrentPage(currentPage-1);
+    Collections.sort(tempBeans, new ECMViewComparator());
+    ListAccess<TemplateBean> tmplBeanList = new ListAccessImpl<TemplateBean>(TemplateBean.class,
+                                                                             tempBeans);
+    getUIPageIterator().setPageList(new LazyPageList<TemplateBean>(tmplBeanList, 10));
+    if (currentPage > getUIPageIterator().getAvailablePage())
+      getUIPageIterator().setCurrentPage(getUIPageIterator().getAvailablePage());
     else
       getUIPageIterator().setCurrentPage(currentPage);
   }
 
-  static public class ECMViewComparator implements Comparator {
-    public int compare(Object o1, Object o2) throws ClassCastException {
-      String name1 = ((TemplateBean) o1).getName() ;
-      String name2 = ((TemplateBean) o2).getName() ;
-      return name1.compareToIgnoreCase(name2) ;
+  static public class ECMViewComparator implements Comparator<TemplateBean> {
+    public int compare(TemplateBean o1, TemplateBean o2) throws ClassCastException {
+      String name1 = o1.getName();
+      String name2 = o2.getName();
+      return name1.compareToIgnoreCase(name2);
     }
   }
 
@@ -107,11 +112,13 @@ public class UIECMTemplateList extends UIGrid {
       Node ecmTemplateHome = uiECMTempList.getApplicationComponent(ManageViewService.class)
                                           .getTemplateHome(BasePath.ECM_EXPLORER_TEMPLATES,
                                                            provider);
-      if(ecmTemplateHome == null) {
-        UIApplication uiApp = event.getSource().getAncestorOfType(UIApplication.class) ;
-        uiApp.addMessage(new ApplicationMessage("UIECMTemplateList.msg.access-denied", null, ApplicationMessage.WARNING)) ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
-        return ;
+      if (ecmTemplateHome == null) {
+        UIApplication uiApp = event.getSource().getAncestorOfType(UIApplication.class);
+        uiApp.addMessage(new ApplicationMessage("UIECMTemplateList.msg.access-denied",
+                                                null,
+                                                ApplicationMessage.WARNING));
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        return;
       }
       UIViewManager uiViewManager = uiECMTempList.getAncestorOfType(UIViewManager.class) ;
       UITemplateContainer uiECMTempContainer = uiViewManager.getChildById(UIECMTemplateList.ST_ECMTemp) ;
@@ -130,11 +137,11 @@ public class UIECMTemplateList extends UIGrid {
       uiViewManager.setRenderedChild(UIECMTemplateList.ST_ECMTemp) ;
       String templatePath = event.getRequestContext().getRequestParameter(OBJECTID) ;
       String templateName = templatePath.substring(templatePath.lastIndexOf("/") + 1) ;
-      if(uiECMTemp.getApplicationComponent(ManageDriveService.class).isUsedView(templateName)) {
-        UIApplication app = uiECMTemp.getAncestorOfType(UIApplication.class) ;
-        Object[] args = {templateName} ;
-        app.addMessage(new ApplicationMessage("UIECMTemplateList.msg.template-in-use", args)) ;
-        return ;
+      if (uiECMTemp.getApplicationComponent(ManageDriveService.class).isUsedView(templateName)) {
+        UIApplication app = uiECMTemp.getAncestorOfType(UIApplication.class);
+        Object[] args = { templateName };
+        app.addMessage(new ApplicationMessage("UIECMTemplateList.msg.template-in-use", args));
+        return;
       }
       vservice.removeTemplate(templatePath) ;
       uiECMTemp.updateTempListGrid(uiECMTemp.getUIPageIterator().getCurrentPage()) ;

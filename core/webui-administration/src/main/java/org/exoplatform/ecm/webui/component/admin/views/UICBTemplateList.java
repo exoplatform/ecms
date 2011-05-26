@@ -23,9 +23,11 @@ import java.util.List;
 
 import javax.jcr.Node;
 
-import org.exoplatform.commons.utils.ObjectPageList;
-import org.exoplatform.ecm.webui.utils.Utils;
+import org.exoplatform.commons.utils.LazyPageList;
+import org.exoplatform.commons.utils.ListAccess;
+import org.exoplatform.commons.utils.ListAccessImpl;
 import org.exoplatform.ecm.webui.component.admin.UIECMAdminPortlet;
+import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.views.ManageViewService;
@@ -87,24 +89,26 @@ public class UICBTemplateList extends UIGrid {
 
   @SuppressWarnings("unchecked")
   public void updateCBTempListGrid(int currentPage) throws Exception {
-    List<Node> nodes = getAllTemplates() ;
-    List<TemplateBean> tempBeans = new ArrayList<TemplateBean>() ;
-    for(Node node : nodes) {
-      tempBeans.add(new TemplateBean(node.getName(), node.getPath(), getBaseVersion(node))) ;
+    List<Node> nodes = getAllTemplates();
+    List<TemplateBean> tempBeans = new ArrayList<TemplateBean>();
+    for (Node node : nodes) {
+      tempBeans.add(new TemplateBean(node.getName(), node.getPath(), getBaseVersion(node)));
     }
-    Collections.sort(tempBeans, new CBViewComparator()) ;
-    getUIPageIterator().setPageList(new ObjectPageList(tempBeans, 10)) ;
-    if(currentPage > getUIPageIterator().getAvailablePage())
-      getUIPageIterator().setCurrentPage(currentPage-1);
+    Collections.sort(tempBeans, new CBViewComparator());
+    ListAccess<TemplateBean> tmplBeanList = new ListAccessImpl<TemplateBean>(TemplateBean.class,
+                                                                             tempBeans);
+    getUIPageIterator().setPageList(new LazyPageList<TemplateBean>(tmplBeanList, 10));
+    if (currentPage > getUIPageIterator().getAvailablePage())
+      getUIPageIterator().setCurrentPage(getUIPageIterator().getAvailablePage());
     else
       getUIPageIterator().setCurrentPage(currentPage);
   }
 
-  static public class CBViewComparator implements Comparator {
-    public int compare(Object o1, Object o2) throws ClassCastException {
-      String name1 = ((TemplateBean) o1).getName() ;
-      String name2 = ((TemplateBean) o2).getName() ;
-      return name1.compareToIgnoreCase(name2) ;
+  static public class CBViewComparator implements Comparator<TemplateBean> {
+    public int compare(TemplateBean t1, TemplateBean t2) throws ClassCastException {
+      String name1 = t1.getName();
+      String name2 = t2.getName();
+      return name1.compareToIgnoreCase(name2);
     }
   }
 

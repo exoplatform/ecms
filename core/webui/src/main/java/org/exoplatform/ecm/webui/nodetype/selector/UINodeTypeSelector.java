@@ -27,8 +27,9 @@ import javax.jcr.nodetype.NodeType;
 import javax.jcr.nodetype.NodeTypeIterator;
 import javax.jcr.nodetype.NodeTypeManager;
 
-import org.exoplatform.commons.utils.ObjectPageList;
-import org.exoplatform.commons.utils.PageList;
+import org.exoplatform.commons.utils.LazyPageList;
+import org.exoplatform.commons.utils.ListAccess;
+import org.exoplatform.commons.utils.ListAccessImpl;
 import org.exoplatform.ecm.webui.selector.ComponentSelector;
 import org.exoplatform.ecm.webui.selector.UISelectable;
 import org.exoplatform.ecm.webui.utils.Utils;
@@ -42,8 +43,8 @@ import org.exoplatform.webui.core.UIPageIterator;
 import org.exoplatform.webui.core.UIPopupWindow;
 import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.event.Event;
-import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.event.Event.Phase;
+import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.form.UIForm;
 import org.exoplatform.webui.form.UIFormCheckBoxInput;
 import org.exoplatform.webui.form.UIFormStringInput;
@@ -188,10 +189,12 @@ public class UINodeTypeSelector extends UIForm implements ComponentSelector {
 
   protected void init(int currentPage, List<String> values, List<NodeTypeBean> lstNodetype) throws Exception {
     if (lstNodetype == null) return;
-    PageList pageList = new ObjectPageList(lstNodetype, 5);
+    ListAccess<NodeTypeBean> nodeTypeList = new ListAccessImpl<NodeTypeBean>(NodeTypeBean.class,
+                                                                             lstNodetype);
+    LazyPageList<NodeTypeBean> pageList = new LazyPageList<NodeTypeBean>(nodeTypeList, 5);
     uiPageIterator_.setPageList(pageList);
     if (currentPage > uiPageIterator_.getAvailablePage())
-      uiPageIterator_.setCurrentPage(currentPage - 1);
+      uiPageIterator_.setCurrentPage(uiPageIterator_.getAvailablePage());
     else
       uiPageIterator_.setCurrentPage(currentPage);
 

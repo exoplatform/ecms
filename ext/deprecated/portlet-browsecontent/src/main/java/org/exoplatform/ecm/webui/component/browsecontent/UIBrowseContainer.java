@@ -44,7 +44,9 @@ import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
 import javax.portlet.WindowState;
 
-import org.exoplatform.commons.utils.ObjectPageList;
+import org.exoplatform.commons.utils.LazyPageList;
+import org.exoplatform.commons.utils.ListAccess;
+import org.exoplatform.commons.utils.ListAccessImpl;
 import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.container.xml.PortalContainerInfo;
@@ -1342,9 +1344,10 @@ public class UIBrowseContainer extends UIContainer {
   }
 
   public void setPageIterator(List<Node> data) throws Exception {
-    if(!isSetted_) {
-      ObjectPageList objPageList = new ObjectPageList(data, getItemPerPage());
-      uiPageIterator_.setPageList(objPageList);
+    if (!isSetted_) {
+      ListAccess<Node> nodeList = new ListAccessImpl<Node>(Node.class, data);
+      LazyPageList<Node> dataPageList = new LazyPageList<Node>(nodeList, getItemPerPage());
+      uiPageIterator_.setPageList(dataPageList);
     }
   }
 

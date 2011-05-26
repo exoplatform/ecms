@@ -18,18 +18,20 @@ package org.exoplatform.ecm.webui.component.admin.repository;
 
 import java.util.ArrayList;
 
-import org.exoplatform.commons.utils.ObjectPageList;
+import org.exoplatform.commons.utils.LazyPageList;
+import org.exoplatform.commons.utils.ListAccess;
+import org.exoplatform.commons.utils.ListAccessImpl;
 import org.exoplatform.ecm.webui.component.admin.UIECMAdminPortlet;
-import org.exoplatform.webui.core.UIPopupComponent;
-import org.exoplatform.webui.core.UIPopupContainer;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.config.RepositoryEntry;
 import org.exoplatform.services.jcr.config.WorkspaceEntry;
+import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
-import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.webui.core.UIGrid;
+import org.exoplatform.webui.core.UIPopupComponent;
+import org.exoplatform.webui.core.UIPopupContainer;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
 
@@ -73,8 +75,9 @@ public class UIRepositoryList extends UIGrid  implements UIPopupComponent {
     String sessionTime = String.valueOf(repo.getSessionTimeOut()) ;
     String workspace = sb.toString() ;
     repos.add(new RepoData(name, workspace, isDefault, accessControl, sessionTime)) ;
-    ObjectPageList objPageList = new ObjectPageList(repos, 10) ;
-    getUIPageIterator().setPageList(objPageList) ;
+    ListAccess<RepoData> repoList = new ListAccessImpl<RepoData>(RepoData.class, repos);
+    LazyPageList<RepoData> dataPageList = new LazyPageList<RepoData>(repoList, 10);
+    getUIPageIterator().setPageList(dataPageList);
   }
   public void activate() throws Exception {}
   public void deActivate() throws Exception {}
