@@ -27,9 +27,7 @@ import java.util.Set;
 import javax.jcr.AccessDeniedException;
 import javax.jcr.Node;
 
-import org.exoplatform.commons.utils.LazyPageList;
-import org.exoplatform.commons.utils.ListAccess;
-import org.exoplatform.commons.utils.ListAccessImpl;
+import org.exoplatform.commons.utils.ObjectPageList;
 import org.exoplatform.ecm.permission.PermissionBean;
 import org.exoplatform.ecm.webui.utils.PermissionUtil;
 import org.exoplatform.ecm.webui.utils.Utils;
@@ -158,10 +156,8 @@ public class UIPermissionTreeInfo extends UIContainer {
     }
     sizeOfListPermission = permBeans.size() + iSystemOwner;
     UIGrid uiGrid = findFirstComponentOfType(UIGrid.class);
-    ListAccess<PermissionBean> permList = new ListAccessImpl<PermissionBean>(PermissionBean.class,
-                                                                             permBeans);
-    LazyPageList<PermissionBean> dataPageList = new LazyPageList<PermissionBean>(permList, 10);
-    uiGrid.getUIPageIterator().setPageList(dataPageList);
+    ObjectPageList objPageList = new ObjectPageList(permBeans, 10);
+    uiGrid.getUIPageIterator().setPageList(objPageList);
   }
 
   public static class EditActionListener extends EventListener<UIPermissionTreeInfo> {

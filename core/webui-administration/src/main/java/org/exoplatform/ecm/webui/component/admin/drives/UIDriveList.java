@@ -24,8 +24,7 @@ import java.util.List;
 import javax.jcr.PathNotFoundException;
 import javax.jcr.Session;
 
-import org.exoplatform.commons.utils.LazyPageList;
-import org.exoplatform.commons.utils.ListAccessImpl;
+import org.exoplatform.commons.utils.ObjectPageList;
 import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.container.xml.PortalContainerInfo;
@@ -72,12 +71,10 @@ public class UIDriveList extends UIComponentDecorator {
 
   @SuppressWarnings("unchecked")
   public void updateDriveListGrid(int currentPage) throws Exception {
-    LazyPageList<DriveData> dataPageList = new LazyPageList<DriveData>(new ListAccessImpl<DriveData>(DriveData.class,
-                                                                                                     getDrives()),
-                                                                       10);
-    uiPageIterator_.setPageList(dataPageList);
-    if (currentPage > getUIPageIterator().getAvailablePage())
-      uiPageIterator_.setCurrentPage(getUIPageIterator().getAvailablePage());
+    ObjectPageList objPageList = new ObjectPageList(getDrives(), 10) ;
+    uiPageIterator_.setPageList(objPageList) ;
+    if(currentPage > getUIPageIterator().getAvailablePage())
+      uiPageIterator_.setCurrentPage(currentPage-1);
     else
       uiPageIterator_.setCurrentPage(currentPage);
   }

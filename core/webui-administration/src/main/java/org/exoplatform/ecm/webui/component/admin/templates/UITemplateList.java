@@ -27,9 +27,7 @@ import javax.jcr.nodetype.NodeType;
 import javax.jcr.nodetype.NodeTypeIterator;
 import javax.jcr.nodetype.NodeTypeManager;
 
-import org.exoplatform.commons.utils.LazyPageList;
-import org.exoplatform.commons.utils.ListAccess;
-import org.exoplatform.commons.utils.ListAccessImpl;
+import org.exoplatform.commons.utils.ObjectPageList;
 import org.exoplatform.ecm.webui.component.admin.UIECMAdminPortlet;
 import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.services.cms.templates.TemplateService;
@@ -93,21 +91,19 @@ public class UITemplateList extends UIGrid {
       }
       Collections.sort(templateData, new TemplateComparator()) ;
     }
-    ListAccess<TemplateData> dataList = new ListAccessImpl<TemplateData>(TemplateData.class,
-                                                                         templateData);
-    LazyPageList<TemplateData> pageList = new LazyPageList<TemplateData>(dataList, 10);
-    getUIPageIterator().setPageList(pageList);
-    if (currentPage > getUIPageIterator().getAvailablePage())
-      getUIPageIterator().setCurrentPage(getUIPageIterator().getAvailablePage());
+    ObjectPageList objPageList = new ObjectPageList(templateData, 10) ;
+    getUIPageIterator().setPageList(objPageList) ;
+    if(currentPage > getUIPageIterator().getAvailablePage())
+      getUIPageIterator().setCurrentPage(currentPage-1);
     else
       getUIPageIterator().setCurrentPage(currentPage);
   }
 
-  static public class TemplateComparator implements Comparator<TemplateData> {
-    public int compare(TemplateData t1, TemplateData t2) throws ClassCastException {
-      String name1 = t1.getName();
-      String name2 = t2.getName();
-      return name1.compareToIgnoreCase(name2);
+  static public class TemplateComparator implements Comparator {
+    public int compare(Object o1, Object o2) throws ClassCastException {
+      String name1 = ((TemplateData) o1).getName() ;
+      String name2 = ((TemplateData) o2).getName() ;
+      return name1.compareToIgnoreCase(name2) ;
     }
   }
 

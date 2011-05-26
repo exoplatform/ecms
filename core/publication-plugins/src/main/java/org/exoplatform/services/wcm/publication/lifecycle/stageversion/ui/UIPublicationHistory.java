@@ -22,9 +22,7 @@ import java.util.List;
 import javax.jcr.Node;
 import javax.jcr.Value;
 
-import org.exoplatform.commons.utils.LazyPageList;
-import org.exoplatform.commons.utils.ListAccess;
-import org.exoplatform.commons.utils.ListAccessImpl;
+import org.exoplatform.commons.utils.ObjectPageList;
 import org.exoplatform.services.ecm.publication.NotInPublicationLifecycleException;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.publication.lifecycle.stageversion.StageAndVersionPublicationConstant;
@@ -107,9 +105,8 @@ public class UIPublicationHistory extends UIComponentDecorator {
    */
   @SuppressWarnings("unchecked")
   public void updateGrid() throws Exception {
-    ListAccess<VersionLog> verLogList = new ListAccessImpl<VersionLog>(VersionLog.class, getLog());
-    LazyPageList<VersionLog> dataPageList = new LazyPageList<VersionLog>(verLogList, 10);
-    uiPageIterator_.setPageList(dataPageList);
+    ObjectPageList objPageList = new ObjectPageList(getLog(), 10) ;
+    uiPageIterator_.setPageList(objPageList) ;
   }
 
   /**

@@ -31,9 +31,7 @@ import javax.jcr.Session;
 import javax.portlet.PortletPreferences;
 
 import org.apache.ws.commons.util.Base64;
-import org.exoplatform.commons.utils.LazyPageList;
-import org.exoplatform.commons.utils.ListAccess;
-import org.exoplatform.commons.utils.ListAccessImpl;
+import org.exoplatform.commons.utils.ObjectPageList;
 import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.container.xml.PortalContainerInfo;
@@ -235,7 +233,7 @@ public class UITreeExplorer extends UIContainer {
   }
 
   private void addTreeNodePageIteratorAsChild(String id,
-                                              LazyPageList<TreeNode> pageList,
+                                              ObjectPageList pageList,
                                               String selectedPath,
                                               String currentPath) throws Exception {
     if (findComponentById(id) == null) {
@@ -298,10 +296,8 @@ public class UITreeExplorer extends UIContainer {
       temp.setChildren(jcrExplorer.getChildrenList(rootPath, false));
     }
     if (temp.getChildrenSize() > nodePerPages) {
-      ListAccess<TreeNode> childList = new ListAccessImpl<TreeNode>(TreeNode.class,
-                                                                    temp.getChildren());
-      LazyPageList<TreeNode> pageList = new LazyPageList<TreeNode>(childList, nodePerPages);
-      addTreeNodePageIteratorAsChild(temp.getPath(), pageList, rootPath, path);
+      ObjectPageList list = new ObjectPageList(temp.getChildren(), nodePerPages);
+      addTreeNodePageIteratorAsChild(temp.getPath(), list, rootPath, path);
     }
     for (String nodeName : arr) {
       if (nodeName.length() == 0)
@@ -323,10 +319,8 @@ public class UITreeExplorer extends UIContainer {
       }
 
       if (temp.getChildrenSize() > nodePerPages) {
-        ListAccess<TreeNode> childNodeList = new ListAccessImpl<TreeNode>(TreeNode.class,
-                                                                          temp.getChildren());
-        LazyPageList<TreeNode> pageList = new LazyPageList<TreeNode>(childNodeList, nodePerPages);
-        addTreeNodePageIteratorAsChild(temp.getPath(), pageList, subPath, path);
+        ObjectPageList list = new ObjectPageList(temp.getChildren(), nodePerPages);
+        addTreeNodePageIteratorAsChild(temp.getPath(), list, subPath, path);
       }
     }
     treeRoot_ = treeRoot;

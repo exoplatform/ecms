@@ -22,9 +22,7 @@ import java.util.List;
 import javax.jcr.Node;
 import javax.jcr.Session;
 
-import org.exoplatform.commons.utils.LazyPageList;
-import org.exoplatform.commons.utils.ListAccess;
-import org.exoplatform.commons.utils.ListAccessImpl;
+import org.exoplatform.commons.utils.ObjectPageList;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.wcm.newsletter.NewsletterCategoryConfig;
@@ -111,13 +109,10 @@ public class UINewsletterEntryManager extends UIForm {
    */
   @SuppressWarnings("unchecked")
   public void init() throws Exception {
-    ListAccess<NewsletterManagerConfig> newsletterList = new ListAccessImpl<NewsletterManagerConfig>(NewsletterManagerConfig.class,
-                                                                                                     setListNewsletterEntries());
-    LazyPageList<NewsletterManagerConfig> dataPageList = new LazyPageList<NewsletterManagerConfig>(newsletterList,
-                                                                                                   10);
+    ObjectPageList objPageList = new ObjectPageList(setListNewsletterEntries(), 10);
     uiPageIterator_ = createUIComponent(UIPageIterator.class, null, PAGEITERATOR_ID);
     addChild(uiPageIterator_);
-    uiPageIterator_.setPageList(dataPageList);
+    uiPageIterator_.setPageList(objPageList);
   }
 
   /**

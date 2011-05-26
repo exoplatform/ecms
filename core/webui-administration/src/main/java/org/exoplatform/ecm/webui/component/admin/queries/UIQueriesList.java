@@ -23,9 +23,9 @@ import java.util.List;
 import javax.jcr.Node;
 import javax.jcr.Session;
 
-import org.exoplatform.commons.utils.LazyPageList;
-import org.exoplatform.commons.utils.ListAccess;
-import org.exoplatform.commons.utils.ListAccessImpl;
+import org.exoplatform.commons.utils.ObjectPageList;
+import org.exoplatform.commons.utils.PageList;
+import org.exoplatform.ecm.webui.component.admin.UIECMAdminPortlet;
 import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.queries.QueryService;
@@ -71,12 +71,10 @@ public class UIQueriesList extends UIComponentDecorator {
   public String[] getActions() { return ACTIONS ; }
 
   public void updateQueriesGrid(int currentPage) throws Exception {
-    ListAccess<Object> sharedQueryList = new ListAccessImpl<Object>(Object.class,
-                                                                    NodeLocation.getLocationsByNodeList(getAllSharedQueries()));
-    LazyPageList<Object> pageList = new LazyPageList<Object>(sharedQueryList, 10);
-    uiPageIterator_.setPageList(pageList);
-    if (currentPage > getUIPageIterator().getAvailablePage())
-      uiPageIterator_.setCurrentPage(getUIPageIterator().getAvailablePage());
+    PageList pageList = new ObjectPageList(NodeLocation.getLocationsByNodeList(getAllSharedQueries()), 10);
+    uiPageIterator_.setPageList(pageList) ;
+    if(currentPage > getUIPageIterator().getAvailablePage())
+      uiPageIterator_.setCurrentPage(currentPage-1);
     else
       uiPageIterator_.setCurrentPage(currentPage);
   }

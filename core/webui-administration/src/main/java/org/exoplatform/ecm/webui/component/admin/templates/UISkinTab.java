@@ -24,9 +24,7 @@ import javax.jcr.NodeIterator;
 import javax.jcr.Value;
 import javax.portlet.PortletPreferences;
 
-import org.exoplatform.commons.utils.LazyPageList;
-import org.exoplatform.commons.utils.ListAccess;
-import org.exoplatform.commons.utils.ListAccessImpl;
+import org.exoplatform.commons.utils.ObjectPageList;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.services.cms.templates.TemplateService;
@@ -105,9 +103,8 @@ public class UISkinTab extends UIContainer {
       data.add(item) ;
     }
     UIGrid uiGrid = getChild(UIGrid.class) ;
-    ListAccess<SkinData> skinDataList = new ListAccessImpl<SkinData>(SkinData.class, data);
-    LazyPageList<SkinData> dataPageList = new LazyPageList<SkinData>(skinDataList, 4);
-    uiGrid.getUIPageIterator().setPageList(dataPageList);
+    ObjectPageList objDPageList = new ObjectPageList(data, 4) ;
+    uiGrid.getUIPageIterator().setPageList(objDPageList) ;
   }
 
   static public class EditActionListener extends EventListener<UISkinTab> {

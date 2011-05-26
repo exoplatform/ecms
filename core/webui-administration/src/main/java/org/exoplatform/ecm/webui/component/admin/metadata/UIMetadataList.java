@@ -23,9 +23,8 @@ import java.util.List;
 import javax.jcr.nodetype.NodeType;
 import javax.jcr.nodetype.PropertyDefinition;
 
-import org.exoplatform.commons.utils.LazyPageList;
-import org.exoplatform.commons.utils.ListAccess;
-import org.exoplatform.commons.utils.ListAccessImpl;
+import org.exoplatform.commons.utils.ObjectPageList;
+import org.exoplatform.ecm.webui.component.admin.UIECMAdminPortlet;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.cms.metadata.MetadataService;
 import org.exoplatform.web.application.ApplicationMessage;
@@ -61,11 +60,9 @@ public class UIMetadataList extends UIContainer {
   }
 
   public void updateGrid() throws Exception {
-    UIPageIterator uiPageIterator = getChild(UIPageIterator.class);
-    ListAccess<Metadata> metaDataList = new ListAccessImpl<Metadata>(Metadata.class,
-                                                                     getAllMetadatas());
-    LazyPageList<Metadata> pageList = new LazyPageList<Metadata>(metaDataList, 10);
-    uiPageIterator.setPageList(pageList);
+    UIPageIterator uiPageIterator = getChild(UIPageIterator.class) ;
+    ObjectPageList pageList = new ObjectPageList(getAllMetadatas(), 10) ;
+    uiPageIterator.setPageList(pageList) ;
   }
 
   @SuppressWarnings("unchecked")

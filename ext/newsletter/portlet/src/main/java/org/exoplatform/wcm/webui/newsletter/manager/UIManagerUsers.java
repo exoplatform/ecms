@@ -23,9 +23,7 @@ import java.util.List;
 import javax.jcr.Node;
 import javax.jcr.Session;
 
-import org.exoplatform.commons.utils.LazyPageList;
-import org.exoplatform.commons.utils.ListAccess;
-import org.exoplatform.commons.utils.ListAccessImpl;
+import org.exoplatform.commons.utils.ObjectPageList;
 import org.exoplatform.container.PortalContainer;
 import org.exoplatform.portal.config.UserACL;
 import org.exoplatform.portal.config.UserPortalConfigService;
@@ -39,7 +37,6 @@ import org.exoplatform.services.wcm.newsletter.NewsletterCategoryConfig;
 import org.exoplatform.services.wcm.newsletter.NewsletterConstant;
 import org.exoplatform.services.wcm.newsletter.NewsletterManagerService;
 import org.exoplatform.services.wcm.newsletter.NewsletterUserInfor;
-import org.exoplatform.services.wcm.newsletter.config.NewsletterUserConfig;
 import org.exoplatform.services.wcm.newsletter.handler.NewsletterCategoryHandler;
 import org.exoplatform.services.wcm.newsletter.handler.NewsletterManageUserHandler;
 import org.exoplatform.services.wcm.portal.LivePortalManagerService;
@@ -116,23 +113,17 @@ public class UIManagerUsers extends UITabPane {
    * @return the list public user
    */
   @SuppressWarnings("unchecked")
-  public void getListPublicUser() {
-    try {
+  public void getListPublicUser(){
+    try{
       UIGrid uiGrid = getChildById(UIGRID_MANAGER_USERS);
-      List<NewsletterUserConfig> userList = managerUserHandler.getUsers(WCMCoreUtils.getUserSessionProvider(),
-                                                                        NewsLetterUtil.getPortalName(),
-                                                                        categoryName,
-                                                                        subscriptionName);
-      ListAccess<NewsletterUserConfig> userConfigList = new ListAccessImpl<NewsletterUserConfig>(NewsletterUserConfig.class,
-                                                                                                 userList);
-      LazyPageList<NewsletterUserConfig> dataPageList = new LazyPageList<NewsletterUserConfig>(userConfigList,
-                                                                                               5);
-      uiGrid.getUIPageIterator().setPageList(dataPageList);
-    } catch (Exception ex) {
-      Utils.createPopupMessage(this,
-                               "UIManagerUsers.msg.get-list-users",
-                               null,
-                               ApplicationMessage.ERROR);
+      ObjectPageList objPageList = new ObjectPageList(managerUserHandler.getUsers(Utils.getSessionProvider(),
+                                                                                  NewsLetterUtil.getPortalName(),
+                                                                                  categoryName,
+                                                                                  subscriptionName),
+                                                      5);
+      uiGrid.getUIPageIterator().setPageList(objPageList);
+    }catch(Exception ex){
+      Utils.createPopupMessage(this, "UIManagerUsers.msg.get-list-users", null, ApplicationMessage.ERROR);
     }
   }
 
@@ -288,14 +279,11 @@ public class UIManagerUsers extends UITabPane {
     updateListUserInfor(userHandler, userInfors, listUserAccess, permissions[3]);
 
     // set all user into grid
-    ListAccess<NewsletterUserInfor> userInfoList = new ListAccessImpl<NewsletterUserInfor>(NewsletterUserInfor.class,
-                                                                                           userInfors);
-    LazyPageList<NewsletterUserInfor> dataPageList = new LazyPageList<NewsletterUserInfor>(userInfoList,
-                                                                                          5);
+    ObjectPageList objPageList = new ObjectPageList(userInfors, 5) ;
     UIGrid uiGrid = this.getChildById(UIGRID_MANAGER_MODERATOR);
     UIPageIterator uiIterator_ = uiGrid.getUIPageIterator();
     uiIterator_.setPageList(null);
-    uiIterator_.setPageList(dataPageList);
+    uiIterator_.setPageList(objPageList) ;
 
     this.setSelectedTab(UIGRID_MANAGER_USERS);
   }

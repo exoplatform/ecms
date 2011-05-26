@@ -19,9 +19,7 @@ package org.exoplatform.wcm.webui.selector.page;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.exoplatform.commons.utils.LazyPageList;
-import org.exoplatform.commons.utils.ListAccess;
-import org.exoplatform.commons.utils.ListAccessImpl;
+import org.exoplatform.commons.utils.ObjectPageList;
 import org.exoplatform.ecm.webui.selector.UISelectable;
 import org.exoplatform.portal.config.model.PageNavigation;
 import org.exoplatform.portal.config.model.PageNode;
@@ -78,8 +76,7 @@ public class UIPageSelectorPanel extends UIContainer {
       children = selectedPage.getChildren();
       if (children == null) children = new ArrayList<PageNode>();
     }
-    ListAccess<PageNode> pageNodeList = new ListAccessImpl<PageNode>(PageNode.class, children);
-    LazyPageList<PageNode> pageList = new LazyPageList<PageNode>(pageNodeList, 10);
+    ObjectPageList pageList = new ObjectPageList(children, 10);
     pageIterator.setPageList(pageList);
   }
 

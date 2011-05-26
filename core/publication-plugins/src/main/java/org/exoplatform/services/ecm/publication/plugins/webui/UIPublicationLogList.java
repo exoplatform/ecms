@@ -21,9 +21,7 @@ import java.util.List;
 
 import javax.jcr.Node;
 
-import org.exoplatform.commons.utils.LazyPageList;
-import org.exoplatform.commons.utils.ListAccess;
-import org.exoplatform.commons.utils.ListAccessImpl;
+import org.exoplatform.commons.utils.ObjectPageList;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.portal.webui.workspace.UIPortalApplication;
 import org.exoplatform.services.ecm.publication.NotInPublicationLifecycleException;
@@ -82,10 +80,8 @@ public class UIPublicationLogList extends UIComponentDecorator {
 
   @SuppressWarnings("unchecked")
   public void updateGrid() throws Exception {
-    ListAccess<HistoryBean> historyList = new ListAccessImpl<HistoryBean>(HistoryBean.class,
-                                                                          getLog());
-    LazyPageList<HistoryBean> dataPageList = new LazyPageList<HistoryBean>(historyList, 10);
-    uiPageIterator_.setPageList(dataPageList);
+    ObjectPageList objPageList = new ObjectPageList(getLog(), 10) ;
+    uiPageIterator_.setPageList(objPageList) ;
   }
 
   public UIPageIterator getUIPageIterator() { return uiPageIterator_ ; }

@@ -23,16 +23,14 @@ import javax.jcr.Node;
 import javax.jcr.PropertyIterator;
 import javax.jcr.Session;
 
-import org.exoplatform.commons.utils.LazyPageList;
-import org.exoplatform.commons.utils.ListAccess;
-import org.exoplatform.commons.utils.ListAccessImpl;
+import org.exoplatform.commons.utils.ObjectPageList;
+import org.exoplatform.webui.core.UIPopupComponent;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIGrid;
-import org.exoplatform.webui.core.UIPopupComponent;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
 
@@ -65,10 +63,8 @@ public class UIReferencesList extends UIGrid implements UIPopupComponent{
   public void deActivate() {}
 
   public void updateGrid() throws Exception {
-    ListAccess<ReferenceBean> referenceList = new ListAccessImpl<ReferenceBean>(ReferenceBean.class,
-                                                                                getReferences());
-    LazyPageList<ReferenceBean> dataPageList = new LazyPageList<ReferenceBean>(referenceList, 10);
-    getUIPageIterator().setPageList(dataPageList);
+    ObjectPageList objPageList = new ObjectPageList(getReferences(), 10) ;
+    getUIPageIterator().setPageList(objPageList) ;
   }
 
   private List<ReferenceBean> getReferences() throws Exception {

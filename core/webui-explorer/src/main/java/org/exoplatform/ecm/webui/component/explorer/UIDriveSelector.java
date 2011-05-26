@@ -20,9 +20,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import org.exoplatform.commons.utils.LazyPageList;
-import org.exoplatform.commons.utils.ListAccess;
-import org.exoplatform.commons.utils.ListAccessImpl;
+import org.exoplatform.commons.utils.ObjectPageList;
 import org.exoplatform.ecm.webui.form.UIFormInputSetWithAction;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.portal.webui.util.Util;
@@ -64,9 +62,8 @@ public class UIDriveSelector extends UIContainer {
   public List getListDrive() throws Exception { return uiPageIterator_.getCurrentPageData(); }
 
   public void updateGrid() throws Exception {
-    ListAccess<DriveData> driveList = new ListAccessImpl<DriveData>(DriveData.class, getDrives());
-    LazyPageList<DriveData> dataPageList = new LazyPageList<DriveData>(driveList, 10);
-    uiPageIterator_.setPageList(dataPageList);
+    ObjectPageList objPageList = new ObjectPageList(getDrives("repository"), 10);
+    uiPageIterator_.setPageList(objPageList);
   }
 
   @Deprecated

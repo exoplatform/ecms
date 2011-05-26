@@ -21,9 +21,7 @@ import java.util.List;
 
 import javax.jcr.Node;
 
-import org.exoplatform.commons.utils.LazyPageList;
-import org.exoplatform.commons.utils.ListAccess;
-import org.exoplatform.commons.utils.ListAccessImpl;
+import org.exoplatform.commons.utils.ObjectPageList;
 import org.exoplatform.ecm.webui.component.admin.UIECMAdminPortlet;
 import org.exoplatform.services.cms.folksonomy.NewFolksonomyService;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -58,16 +56,12 @@ public class UITagStyleList extends UIGrid {
     String repository = getAncestorOfType(UIECMAdminPortlet.class).getPreferenceRepository() ;
     String workspace = getAncestorOfType(UIECMAdminPortlet.class).getDMSSystemWorkspace(repository);
     TagStyleData tagStyleData = null ;
-    for (Node node : newFolksonomyService.getAllTagStyle(workspace)) {
-      tagStyleData = new TagStyleData(node.getName(),
-                                      getRangeOfStyle(node),
-                                      getHtmlStyleOfStyle(node));
-      tagStyleList.add(tagStyleData);
+    for(Node node : newFolksonomyService.getAllTagStyle(repository, workspace)) {
+      tagStyleData = new TagStyleData(node.getName(), getRangeOfStyle(node), getHtmlStyleOfStyle(node)) ;
+      tagStyleList.add(tagStyleData) ;
     }
-    ListAccess<TagStyleData> tagStyleListAccess = new ListAccessImpl<TagStyleData>(TagStyleData.class,
-                                                                                   tagStyleList);
-    LazyPageList<TagStyleData> dataPageList = new LazyPageList<TagStyleData>(tagStyleListAccess, 10);
-    getUIPageIterator().setPageList(dataPageList);
+    ObjectPageList objPageList = new ObjectPageList(tagStyleList, 10) ;
+    getUIPageIterator().setPageList(objPageList) ;
   }
 
   public String getRangeOfStyle(Node tagStyle) throws Exception {

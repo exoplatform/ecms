@@ -21,9 +21,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import org.exoplatform.commons.utils.LazyPageList;
-import org.exoplatform.commons.utils.ListAccess;
-import org.exoplatform.commons.utils.ListAccessImpl;
+import org.exoplatform.commons.utils.ObjectPageList;
 import org.exoplatform.ecm.webui.selector.UISelectable;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
@@ -81,13 +79,11 @@ public class UISelectedCategoriesGrid extends UIGrid {
       bean.setCategoryPath(categoryPath);
       categoryDataList.add(bean);
     }
-    Collections.sort(categoryDataList, new CategoryComparator());
-    ListAccess<CategoryData> categoryList = new ListAccessImpl<CategoryData>(CategoryData.class,
-                                                                             categoryDataList);
-    LazyPageList<CategoryData> dataPageList = new LazyPageList<CategoryData>(categoryList, 5);
-    getUIPageIterator().setPageList(dataPageList);
-    if (currentPage > getUIPageIterator().getAvailablePage())
-      getUIPageIterator().setCurrentPage(getUIPageIterator().getAvailablePage());
+    Collections.sort(categoryDataList,new CategoryComparator());
+    ObjectPageList objPageList = new ObjectPageList(categoryDataList, 5) ;
+    getUIPageIterator().setPageList(objPageList) ;
+    if(currentPage > getUIPageIterator().getAvailablePage())
+      getUIPageIterator().setCurrentPage(currentPage-1);
     else
       getUIPageIterator().setCurrentPage(currentPage);
   }

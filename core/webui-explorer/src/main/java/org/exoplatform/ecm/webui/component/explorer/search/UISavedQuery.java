@@ -20,17 +20,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.jcr.AccessDeniedException;
+import javax.jcr.ItemNotFoundException;
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 import javax.jcr.query.Query;
 import javax.jcr.query.QueryResult;
 
-import org.exoplatform.commons.utils.LazyPageList;
-import org.exoplatform.commons.utils.ListAccess;
-import org.exoplatform.commons.utils.ListAccessImpl;
+import org.exoplatform.commons.utils.ObjectPageList;
+import org.exoplatform.commons.utils.PageList;
 import org.exoplatform.ecm.webui.component.explorer.UIDocumentWorkspace;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
+import org.exoplatform.webui.core.UIPopupComponent;
+import org.exoplatform.webui.core.UIPopupContainer;
 import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.queries.QueryService;
@@ -45,8 +47,6 @@ import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.core.UIContainer;
 import org.exoplatform.webui.core.UIPageIterator;
-import org.exoplatform.webui.core.UIPopupComponent;
-import org.exoplatform.webui.core.UIPopupContainer;
 import org.exoplatform.webui.core.UIPopupWindow;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
@@ -80,12 +80,10 @@ public class UISavedQuery extends UIContainer implements UIPopupComponent {
   }
 
   public void updateGrid(int currentPage) throws Exception {
-    ListAccess<Object> queryList = new ListAccessImpl<Object>(Object.class,
-                                                              NodeLocation.getLocationsByNodeList(queryList()));
-    LazyPageList<Object> pageList = new LazyPageList<Object>(queryList, 10);
+    PageList pageList = new ObjectPageList(NodeLocation.getLocationsByNodeList(queryList()), 10);
     uiPageIterator_.setPageList(pageList);
-    if (currentPage > uiPageIterator_.getAvailablePage())
-      uiPageIterator_.setCurrentPage(uiPageIterator_.getAvailablePage());
+    if(currentPage > uiPageIterator_.getAvailablePage())
+      uiPageIterator_.setCurrentPage(currentPage-1);
     else
       uiPageIterator_.setCurrentPage(currentPage);
   }

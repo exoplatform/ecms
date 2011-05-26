@@ -51,9 +51,7 @@ import javax.jcr.lock.LockException;
 import javax.jcr.nodetype.ConstraintViolationException;
 import javax.jcr.version.VersionException;
 
-import org.exoplatform.commons.utils.LazyPageList;
-import org.exoplatform.commons.utils.ListAccess;
-import org.exoplatform.commons.utils.ListAccessImpl;
+import org.exoplatform.commons.utils.ObjectPageList;
 import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.container.component.ComponentPlugin;
@@ -645,9 +643,7 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
       nodeList = uiExplorer.getDocumentByTag();
     }
 
-    ListAccess<Object> nodeAccList = new ListAccessImpl<Object>(Object.class,
-                                                                NodeLocation.getLocationsByNodeList(nodeList));
-    pageIterator_.setPageList(new LazyPageList<Object>(nodeAccList, nodesPerPage));
+    pageIterator_.setPageList(new ObjectPageList(NodeLocation.getLocationsByNodeList(nodeList),nodesPerPage));
   }
 
   @SuppressWarnings("unchecked")

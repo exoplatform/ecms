@@ -23,9 +23,7 @@ import java.util.List;
 import javax.jcr.AccessDeniedException;
 import javax.jcr.Node;
 
-import org.exoplatform.commons.utils.LazyPageList;
-import org.exoplatform.commons.utils.ListAccess;
-import org.exoplatform.commons.utils.ListAccessImpl;
+import org.exoplatform.commons.utils.ObjectPageList;
 import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.services.cms.scripts.ScriptService;
 import org.exoplatform.web.application.ApplicationMessage;
@@ -67,11 +65,10 @@ public class UIScriptList extends UIComponentDecorator {
   @SuppressWarnings("unchecked")
   public void updateGrid(List<ScriptData> scriptData, int currentPage) throws Exception {
     Collections.sort(scriptData, new ScriptComparator());
-    ListAccess<ScriptData> scriptList = new ListAccessImpl<ScriptData>(ScriptData.class, scriptData);
-    LazyPageList<ScriptData> dataPageList = new LazyPageList<ScriptData>(scriptList, 10);
-    uiPageIterator_.setPageList(dataPageList);
-    if (currentPage > uiPageIterator_.getAvailablePage())
-      uiPageIterator_.setCurrentPage(uiPageIterator_.getAvailablePage());
+    ObjectPageList objPageList = new ObjectPageList(scriptData, 10);
+    uiPageIterator_.setPageList(objPageList);
+    if(currentPage > uiPageIterator_.getAvailablePage())
+      uiPageIterator_.setCurrentPage(currentPage-1);
     else
       uiPageIterator_.setCurrentPage(currentPage);
   }

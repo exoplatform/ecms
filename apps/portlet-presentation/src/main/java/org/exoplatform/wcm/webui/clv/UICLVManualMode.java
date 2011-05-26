@@ -22,9 +22,7 @@ import java.util.List;
 import javax.jcr.Node;
 import javax.portlet.PortletPreferences;
 
-import org.exoplatform.commons.utils.LazyPageList;
-import org.exoplatform.commons.utils.ListAccess;
-import org.exoplatform.commons.utils.ListAccessImpl;
+import org.exoplatform.commons.utils.ObjectPageList;
 import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.portal.webui.application.UIPortlet;
 import org.exoplatform.resolver.ResourceResolver;
@@ -79,8 +77,7 @@ public class UICLVManualMode extends UICLVContainer {
       messageKey = "UICLVContainer.msg.non-contents";
     }
     getChildren().clear();
-    ListAccess<Node> nodeList = new ListAccessImpl<Node>(Node.class, nodes);
-    LazyPageList<Node> pageList = new LazyPageList<Node>(nodeList, itemsPerPage);
+    ObjectPageList pageList = new ObjectPageList(nodes, itemsPerPage);
     ResourceResolver resourceResolver = getTemplateResourceResolver();
     UICLVPresentation clvPresentation = addChild(UICLVPresentation.class, null, null);
     clvPresentation.init(resourceResolver, pageList);

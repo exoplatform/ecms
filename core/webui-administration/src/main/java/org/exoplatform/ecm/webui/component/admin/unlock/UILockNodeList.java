@@ -31,9 +31,8 @@ import javax.jcr.query.QueryManager;
 import javax.jcr.query.QueryResult;
 import javax.jcr.version.VersionException;
 
-import org.exoplatform.commons.utils.LazyPageList;
-import org.exoplatform.commons.utils.ListAccess;
-import org.exoplatform.commons.utils.ListAccessImpl;
+import org.exoplatform.commons.utils.ObjectPageList;
+import org.exoplatform.commons.utils.PageList;
 import org.exoplatform.container.PortalContainer;
 import org.exoplatform.container.component.ComponentRequestLifecycle;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
@@ -89,12 +88,10 @@ public class UILockNodeList extends UIComponentDecorator {
   public String[] getActions() { return ACTIONS ; }
 
   public void updateLockedNodesGrid(int currentPage) throws Exception {
-    ListAccess<Object> lockedNodeList = new ListAccessImpl<Object>(Object.class,
-                                                                   NodeLocation.getLocationsByNodeList(getAllLockedNodes()));
-    LazyPageList<Object> pageList = new LazyPageList<Object>(lockedNodeList, 10);
-    uiPageIterator_.setPageList(pageList);
-    if (currentPage > getUIPageIterator().getAvailablePage())
-      uiPageIterator_.setCurrentPage(getUIPageIterator().getAvailablePage());
+    PageList pageList = new ObjectPageList(NodeLocation.getLocationsByNodeList(getAllLockedNodes()), 10);
+    uiPageIterator_.setPageList(pageList) ;
+    if(currentPage > getUIPageIterator().getAvailablePage())
+      uiPageIterator_.setCurrentPage(currentPage-1);
     else
       uiPageIterator_.setCurrentPage(currentPage);
   }

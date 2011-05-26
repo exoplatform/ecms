@@ -23,11 +23,9 @@ import java.util.List;
 
 import javax.jcr.Node;
 
-import org.exoplatform.commons.utils.LazyPageList;
-import org.exoplatform.commons.utils.ListAccess;
-import org.exoplatform.commons.utils.ListAccessImpl;
-import org.exoplatform.ecm.webui.component.admin.UIECMAdminPortlet;
+import org.exoplatform.commons.utils.ObjectPageList;
 import org.exoplatform.ecm.webui.utils.Utils;
+import org.exoplatform.ecm.webui.component.admin.UIECMAdminPortlet;
 import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.drives.ManageDriveService;
@@ -59,17 +57,12 @@ import org.exoplatform.webui.event.EventListener;
 
 public class UIViewList extends UIGrid {
 
-  final static public String[] ACTIONS         = { "AddView" };
-
-  final static public String   ST_VIEW         = "ViewPopup";
-
-  final static public String   ST_EDIT         = "EditPopup";
-
-  final static public String   ST_ADD          = "AddPopup";
-
-  private static String[]      VIEW_BEAN_FIELD = { "name", "permissions", "tabList", "baseVersion" };
-
-  private static String[]      VIEW_ACTION     = { "View", "EditInfo", "Delete" };
+  final static public String[] ACTIONS = {"AddView"} ;
+  final static public String ST_VIEW = "ViewPopup" ;
+  final static public String ST_EDIT = "EditPopup" ;
+  final static public String ST_ADD = "AddPopup" ;
+  private static String[] VIEW_BEAN_FIELD = {"name", "permissions", "tabList", "baseVersion"} ;
+  private static String[] VIEW_ACTION = {"View","EditInfo","Delete"} ;
 
   public UIViewList() throws Exception {
     getUIPageIterator().setId("UIViewsGrid") ;
@@ -88,38 +81,36 @@ public class UIViewList extends UIGrid {
 
   @SuppressWarnings("unchecked")
   public void updateViewListGrid(int currentPage) throws Exception {
-    List<ViewBean> viewBean = getViewsBean();
-    Collections.sort(viewBean, new ViewComparator());
-    ListAccess<ViewBean> viewBeanList = new ListAccessImpl<ViewBean>(ViewBean.class, viewBean);
-    getUIPageIterator().setPageList(new LazyPageList<ViewBean>(viewBeanList, 10));
-    if (currentPage > getUIPageIterator().getAvailablePage())
-      getUIPageIterator().setCurrentPage(getUIPageIterator().getAvailablePage());
+    Collections.sort(getViewsBean(), new ViewComparator()) ;
+    getUIPageIterator().setPageList(new ObjectPageList(getViewsBean(), 10)) ;
+    if(currentPage > getUIPageIterator().getAvailablePage())
+      getUIPageIterator().setCurrentPage(currentPage-1);
     else
       getUIPageIterator().setCurrentPage(currentPage);
   }
 
   private List<ViewBean> getViewsBean() throws Exception {
-    List<ViewConfig> views = getApplicationComponent(ManageViewService.class).getAllViews();
-    List<ViewBean> viewBeans = new ArrayList<ViewBean>();
-    for (ViewConfig view : views) {
-      List<String> tabsName = new ArrayList<String>();
-      for (ViewConfig.Tab tab : view.getTabList()) {
-        tabsName.add(tab.getTabName());
+    List<ViewConfig> views =
+      getApplicationComponent(ManageViewService.class).getAllViews() ;
+    List<ViewBean> viewBeans = new ArrayList<ViewBean>() ;
+    for(ViewConfig view:views) {
+      List<String>tabsName = new ArrayList<String>() ;
+      for(ViewConfig.Tab tab:view.getTabList()) {
+        tabsName.add(tab.getTabName()) ;
       }
-      ViewBean bean = new ViewBean(view.getName(), view.getPermissions(), tabsName);
-      if (getBaseVersion(view.getName()) == null)
-        continue;
-      bean.setBaseVersion(getBaseVersion(view.getName()));
-      viewBeans.add(bean);
+      ViewBean bean = new ViewBean(view.getName(),view.getPermissions(),tabsName) ;
+      if(getBaseVersion(view.getName()) == null) continue ;
+      bean.setBaseVersion(getBaseVersion(view.getName())) ;
+      viewBeans.add(bean) ;
     }
-    return viewBeans;
+    return viewBeans ;
   }
 
-  static public class ViewComparator implements Comparator<ViewBean> {
-    public int compare(ViewBean v1, ViewBean v2) throws ClassCastException {
-      String name1 = v1.getName();
-      String name2 = v2.getName();
-      return name1.compareToIgnoreCase(name2);
+  static public class ViewComparator implements Comparator {
+    public int compare(Object o1, Object o2) throws ClassCastException {
+      String name1 = ((ViewBean) o1).getName() ;
+      String name2 = ((ViewBean) o2).getName() ;
+      return name1.compareToIgnoreCase(name2) ;
     }
   }
 

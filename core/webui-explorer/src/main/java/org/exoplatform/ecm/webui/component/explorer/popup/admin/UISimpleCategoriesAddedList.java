@@ -21,9 +21,7 @@ import java.util.List;
 import javax.jcr.AccessDeniedException;
 import javax.jcr.Node;
 
-import org.exoplatform.commons.utils.LazyPageList;
-import org.exoplatform.commons.utils.ListAccess;
-import org.exoplatform.commons.utils.ListAccessImpl;
+import org.exoplatform.commons.utils.ObjectPageList;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.selector.UISelectable;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
@@ -69,12 +67,10 @@ public class UISimpleCategoriesAddedList extends UIContainer implements UISelect
 	}
 
   public void updateGrid(int currentPage) throws Exception {
-    ListAccess<Object> categoryList = new ListAccessImpl<Object>(Object.class,
-                                                                 NodeLocation.getLocationsByNodeList(getCategories()));
-    LazyPageList<Object> objPageList = new LazyPageList<Object>(categoryList, 10);
+    ObjectPageList objPageList = new ObjectPageList(NodeLocation.getLocationsByNodeList(getCategories()), 10);
     uiPageIterator_.setPageList(objPageList);
-    if (currentPage > getUIPageIterator().getAvailablePage())
-      getUIPageIterator().setCurrentPage(getUIPageIterator().getAvailablePage());
+    if(currentPage > getUIPageIterator().getAvailablePage())
+      getUIPageIterator().setCurrentPage(currentPage-1);
     else
       getUIPageIterator().setCurrentPage(currentPage);
   }

@@ -37,9 +37,8 @@ import javax.jcr.query.Query;
 import javax.jcr.query.QueryManager;
 import javax.jcr.query.QueryResult;
 
-import org.exoplatform.commons.utils.LazyPageList;
-import org.exoplatform.commons.utils.ListAccess;
-import org.exoplatform.commons.utils.ListAccessImpl;
+import org.exoplatform.commons.utils.ObjectPageList;
+import org.exoplatform.commons.utils.PageList;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.portal.webui.util.Util;
@@ -141,8 +140,7 @@ public class UIShowAllOwnedByUserResult extends UIComponentDecorator {
 
   public void updateList() throws Exception {
     List<Node> nodeList = getNewOwnedByUserNodeList();
-    ListAccess<Node> ownedByUserNodeLiist = new ListAccessImpl<Node>(Node.class, nodeList);
-    LazyPageList<Node> pageList = new LazyPageList<Node>(ownedByUserNodeLiist, FILE_PER_PAGE);
+    PageList pageList = new ObjectPageList(nodeList, FILE_PER_PAGE);
     uiPageIterator_.setPageList(pageList);
     ownedByUserNodes_ = nodeList;
   }
@@ -151,8 +149,7 @@ public class UIShowAllOwnedByUserResult extends UIComponentDecorator {
     int currentPage = uiPageIterator_.getCurrentPage();
 
     Collections.sort(ownedByUserNodes_, new SearchComparator());
-    ListAccess<Node> ownedByUserNodeLiist = new ListAccessImpl<Node>(Node.class, ownedByUserNodes_);
-    LazyPageList<Node> pageList = new LazyPageList<Node>(ownedByUserNodeLiist, FILE_PER_PAGE);
+    PageList pageList = new ObjectPageList(ownedByUserNodes_, FILE_PER_PAGE);
 
     UIPageIterator uiPageIterator = uiPageIterator_;
     uiPageIterator.setPageList(pageList);
@@ -160,7 +157,8 @@ public class UIShowAllOwnedByUserResult extends UIComponentDecorator {
     if (uiPageIterator.getAvailablePage() >= currentPage)
       uiPageIterator.setCurrentPage(currentPage);
     else {
-      uiPageIterator.setCurrentPage(uiPageIterator.getAvailablePage());
+      uiPageIterator.setCurrentPage(
+        uiPageIterator.getAvailablePage());
     }
     event.getRequestContext().addUIComponentToUpdateByAjax(this.getParent());
   }

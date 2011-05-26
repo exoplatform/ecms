@@ -22,9 +22,7 @@ import java.util.List;
 import javax.jcr.AccessDeniedException;
 import javax.jcr.Node;
 
-import org.exoplatform.commons.utils.LazyPageList;
-import org.exoplatform.commons.utils.ListAccess;
-import org.exoplatform.commons.utils.ListAccessImpl;
+import org.exoplatform.commons.utils.ObjectPageList;
 import org.exoplatform.services.cms.actions.ActionServiceContainer;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.wcm.webui.Utils;
@@ -99,12 +97,10 @@ public class UIFCCActionList extends UIContainer {
   @SuppressWarnings("unchecked")
   public void updateGrid(Node node, int currentPage) throws Exception {
     UIPageIterator uiIterator = getChild(UIGrid.class).getUIPageIterator();
-    ListAccess<Object> actionNodeList = new ListAccessImpl<Object>(Object.class,
-                                                                   NodeLocation.getLocationsByNodeList(getAllActions(node)));
-    LazyPageList<Object> dataPageList = new LazyPageList<Object>(actionNodeList, 10);
-    uiIterator.setPageList(dataPageList);
-    if (currentPage > uiIterator.getAvailablePage())
-      uiIterator.setCurrentPage(uiIterator.getAvailablePage());
+    ObjectPageList objPageList = new ObjectPageList(NodeLocation.getLocationsByNodeList(getAllActions(node)), 10) ;
+    uiIterator.setPageList(objPageList);
+    if(currentPage > uiIterator.getAvailablePage())
+      uiIterator.setCurrentPage(currentPage-1);
     else
       uiIterator.setCurrentPage(currentPage);
   }

@@ -38,9 +38,8 @@ import javax.jcr.nodetype.NodeType;
 import javax.jcr.version.VersionException;
 import javax.portlet.PortletPreferences;
 
-import org.exoplatform.commons.utils.LazyPageList;
-import org.exoplatform.commons.utils.ListAccess;
-import org.exoplatform.commons.utils.ListAccessImpl;
+import org.exoplatform.commons.utils.ObjectPageList;
+import org.exoplatform.commons.utils.PageList;
 import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
@@ -162,8 +161,7 @@ public class UIShowAllTrashResult extends UIComponentDecorator {
 
   public void updateList() throws Exception {
     List<Node> nodeList = getNewTrashNodeList();
-    ListAccess<Node> newTrashNodeList = new ListAccessImpl<Node>(Node.class, nodeList);
-    LazyPageList<Node> pageList = new LazyPageList<Node>(newTrashNodeList, FILE_PER_PAGE);
+    PageList pageList = new ObjectPageList(nodeList, FILE_PER_PAGE);
     uiPageIterator_.setPageList(pageList);
     trashNodes_ = nodeList;
   }
@@ -175,8 +173,7 @@ public class UIShowAllTrashResult extends UIComponentDecorator {
       nodeListChange = false;
     }
     Collections.sort(trashNodes_, new SearchComparator());
-    ListAccess<Node> trashNodeList = new ListAccessImpl<Node>(Node.class, trashNodes_);
-    LazyPageList<Node> pageList = new LazyPageList<Node>(trashNodeList, FILE_PER_PAGE);
+    PageList pageList = new ObjectPageList(trashNodes_, FILE_PER_PAGE);
 
     UIPageIterator uiPageIterator = uiPageIterator_;
     uiPageIterator.setPageList(pageList);
@@ -184,7 +181,8 @@ public class UIShowAllTrashResult extends UIComponentDecorator {
     if (uiPageIterator.getAvailablePage() >= currentPage)
       uiPageIterator.setCurrentPage(currentPage);
     else {
-      uiPageIterator.setCurrentPage(uiPageIterator.getAvailablePage());
+      uiPageIterator.setCurrentPage(
+        uiPageIterator.getAvailablePage());
     }
     event.getRequestContext().addUIComponentToUpdateByAjax(this.getParent());
   }

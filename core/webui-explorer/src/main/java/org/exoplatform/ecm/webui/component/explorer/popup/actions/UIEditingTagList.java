@@ -21,9 +21,7 @@ import java.util.List;
 
 import javax.jcr.Node;
 
-import org.exoplatform.commons.utils.LazyPageList;
-import org.exoplatform.commons.utils.ListAccess;
-import org.exoplatform.commons.utils.ListAccessImpl;
+import org.exoplatform.commons.utils.ObjectPageList;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.services.cms.folksonomy.NewFolksonomyService;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
@@ -70,9 +68,8 @@ public class UIEditingTagList extends UIGrid {
       tagDataList.add(new TagData(tag.getName()));
     }
 
-    ListAccess<TagData> tagList = new ListAccessImpl<TagData>(TagData.class, tagDataList);
-    LazyPageList<TagData> dataPageList = new LazyPageList<TagData>(tagList, 10);
-    getUIPageIterator().setPageList(dataPageList);
+    ObjectPageList objPageList = new ObjectPageList(tagDataList, 10) ;
+    getUIPageIterator().setPageList(objPageList) ;
   }
 
 

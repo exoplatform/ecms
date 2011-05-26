@@ -23,9 +23,7 @@ import java.util.List;
 
 import javax.jcr.NamespaceRegistry;
 
-import org.exoplatform.commons.utils.LazyPageList;
-import org.exoplatform.commons.utils.ListAccess;
-import org.exoplatform.commons.utils.ListAccessImpl;
+import org.exoplatform.commons.utils.ObjectPageList;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -67,10 +65,8 @@ public class UINamespaceList extends UIGrid {
       nspBeans.add(bean) ;
     }
     Collections.sort(nspBeans, new NameSpaceComparator()) ;
-    ListAccess<NamespaceBean> namespaceList = new ListAccessImpl<NamespaceBean>(NamespaceBean.class,
-                                                                                nspBeans);
-    LazyPageList<NamespaceBean> dataPageList = new LazyPageList<NamespaceBean>(namespaceList, 10);
-    getUIPageIterator().setPageList(dataPageList);
+    ObjectPageList objPageList = new ObjectPageList(nspBeans, 10) ;
+    getUIPageIterator().setPageList(objPageList) ;
   }
 
   static public class NameSpaceComparator implements Comparator {

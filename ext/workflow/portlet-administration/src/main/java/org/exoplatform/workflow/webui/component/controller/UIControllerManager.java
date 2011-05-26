@@ -8,9 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import org.exoplatform.commons.utils.LazyPageList;
-import org.exoplatform.commons.utils.ListAccess;
-import org.exoplatform.commons.utils.ListAccessImpl;
+import org.exoplatform.commons.utils.ObjectPageList;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.portal.webui.workspace.UIPortalApplication;
 import org.exoplatform.services.workflow.Form;
@@ -59,36 +57,34 @@ public class UIControllerManager extends UIContainer {
   }
 
   public void processRender(WebuiRequestContext context) throws Exception {
-    Locale locale = Util.getUIPortal().getAncestorOfType(UIPortalApplication.class).getLocale();
-    WorkflowFormsService workflowFormsService = getApplicationComponent(WorkflowFormsService.class);
-    List<Process> processes = service_.getProcesses();
+    Locale locale = Util.getUIPortal().getAncestorOfType(UIPortalApplication.class).getLocale() ;
+    WorkflowFormsService workflowFormsService = getApplicationComponent(WorkflowFormsService.class) ;
+    List<Process> processes = service_.getProcesses() ;
 
-    List<Process> visibleDefinitions = new ArrayList<Process>();
-    for (Process process : processes) {
-      workflowFormsService.removeForms(process.getId());
-      Form form = workflowFormsService.getForm(process.getId(), process.getStartStateName(), locale);
-      if (form != null && !form.isDelegatedView())
-        visibleDefinitions.add(process);
+    List<Process> visibleDefinitions = new ArrayList<Process>() ;
+    for(Process process : processes) {
+      workflowFormsService.removeForms(process.getId()) ;
+      Form form = workflowFormsService.getForm(process.getId(), process.getStartStateName(), locale) ;
+      if (form != null && !form.isDelegatedView()) visibleDefinitions.add(process) ;
     }
-    UIGrid uiBPDefinitionGrid = getChild(UIGrid.class);
-    ListAccess<Process> processList = new ListAccessImpl<Process>(Process.class, visibleDefinitions);
-    uiBPDefinitionGrid.getUIPageIterator().setPageList(new LazyPageList<Process>(processList, 10));
+    UIGrid uiBPDefinitionGrid = getChild(UIGrid.class) ;
+    uiBPDefinitionGrid.getUIPageIterator().setPageList(new ObjectPageList(visibleDefinitions, 10)) ;
     super.processRender(context);
   }
 
-  static public class ManageStartActionListener extends EventListener<UIControllerManager> {
+  static  public class ManageStartActionListener extends EventListener<UIControllerManager> {
     public void execute(Event<UIControllerManager> event) throws Exception {
-      UIControllerManager uiControllerManager = event.getSource();
-      uiControllerManager.setRenderedChild(UIGrid.class);
+      UIControllerManager uiControllerManager = event.getSource() ;
+      uiControllerManager.setRenderedChild(UIGrid.class) ;
       String processId = event.getRequestContext().getRequestParameter(OBJECTID);
-      if (uiControllerManager.service_.hasStartTask(processId)) {
-        UIWorkflowControllerPortlet portlet = uiControllerManager.getParent();
-        UIPopupContainer uiPopup = portlet.getChild(UIPopupContainer.class);
-        UITaskManager uiTaskManager = portlet.createUIComponent(UITaskManager.class, null, null);
-        uiTaskManager.setTokenId(processId);
+      if(uiControllerManager.service_.hasStartTask(processId)) {
+        UIWorkflowControllerPortlet portlet = uiControllerManager.getParent() ;
+        UIPopupContainer uiPopup = portlet.getChild(UIPopupContainer.class) ;
+        UITaskManager uiTaskManager = portlet.createUIComponent(UITaskManager.class, null, null) ;
+        uiTaskManager.setTokenId(processId) ;
         uiTaskManager.setIsStart(true);
         uiTaskManager.checkBeforeActive();
-        uiPopup.activate(uiTaskManager, 600, 500);
+        uiPopup.activate(uiTaskManager, 600, 500) ;
       } else {
         uiControllerManager.service_.startProcess(processId);
       }

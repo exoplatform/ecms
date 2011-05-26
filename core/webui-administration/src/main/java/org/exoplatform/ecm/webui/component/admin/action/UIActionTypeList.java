@@ -23,8 +23,7 @@ import java.util.List;
 
 import javax.jcr.nodetype.NodeType;
 
-import org.exoplatform.commons.utils.LazyPageList;
-import org.exoplatform.commons.utils.ListAccessImpl;
+import org.exoplatform.commons.utils.ObjectPageList;
 import org.exoplatform.ecm.webui.component.admin.UIECMAdminPortlet;
 import org.exoplatform.services.cms.actions.ActionServiceContainer;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -78,17 +77,15 @@ public class UIActionTypeList extends UIGrid {
       actions.add(bean) ;
     }
     Collections.sort(actions, new ActionComparator()) ;
-    LazyPageList<ActionData> dataPageList = new LazyPageList<ActionData>(new ListAccessImpl<ActionData>(ActionData.class,
-                                                                                                        actions),
-                                                                         10);
-    getUIPageIterator().setPageList(dataPageList);
+    ObjectPageList objPageList = new ObjectPageList(actions, 10) ;
+    getUIPageIterator().setPageList(objPageList) ;
   }
 
-  static public class ActionComparator implements Comparator<ActionData> {
-    public int compare(ActionData a1, ActionData a2) throws ClassCastException {
-      String name1 = a1.getName();
-      String name2 = a2.getName();
-      return name1.compareToIgnoreCase(name2);
+  static public class ActionComparator implements Comparator {
+    public int compare(Object o1, Object o2) throws ClassCastException {
+      String name1 = ((ActionData) o1).getName() ;
+      String name2 = ((ActionData) o2).getName() ;
+      return name1.compareToIgnoreCase(name2) ;
     }
   }
 

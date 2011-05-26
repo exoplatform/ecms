@@ -23,9 +23,7 @@ import javax.jcr.Node;
 import javax.jcr.NodeIterator;
 import javax.jcr.Value;
 
-import org.exoplatform.commons.utils.LazyPageList;
-import org.exoplatform.commons.utils.ListAccess;
-import org.exoplatform.commons.utils.ListAccessImpl;
+import org.exoplatform.commons.utils.ObjectPageList;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.services.cms.templates.TemplateService;
@@ -97,9 +95,8 @@ public class UIViewTab extends UIContainer {
       data.add(item);
     }
     UIGrid uiGrid = getChild(UIGrid.class) ;
-    ListAccess<ViewData> viewDataList = new ListAccessImpl<ViewData>(ViewData.class, data);
-    LazyPageList<ViewData> dataPageList = new LazyPageList<ViewData>(viewDataList, 4);
-    uiGrid.getUIPageIterator().setPageList(dataPageList);
+    ObjectPageList objDPageList = new ObjectPageList(data, 4) ;
+    uiGrid.getUIPageIterator().setPageList(objDPageList) ;
   }
 
   public void setTabRendered() {
