@@ -75,12 +75,12 @@ import org.exoplatform.services.cms.views.ManageViewService;
 import org.exoplatform.services.ecm.publication.PublicationService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.access.PermissionType;
-import org.exoplatform.services.jcr.access.SystemIdentity;
 import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.application.portlet.PortletRequestContext;
@@ -562,7 +562,7 @@ public class UIBrowseContainer extends UIContainer {
     if(node.hasProperty("exo:owner")) {
       return node.getProperty("exo:owner").getString();
     }
-    return SystemIdentity.ANONIM;
+    return IdentityConstants.ANONIM;
   }
   @SuppressWarnings("unchecked")
   public Map getPathContent() throws Exception {

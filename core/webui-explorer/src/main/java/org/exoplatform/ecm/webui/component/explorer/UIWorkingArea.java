@@ -40,10 +40,10 @@ import org.exoplatform.services.cms.actions.ActionServiceContainer;
 import org.exoplatform.services.cms.link.NodeFinder;
 import org.exoplatform.services.cms.link.NodeLinkAware;
 import org.exoplatform.services.jcr.RepositoryService;
-import org.exoplatform.services.jcr.access.SystemIdentity;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.security.Identity;
+import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.services.security.IdentityRegistry;
 import org.exoplatform.services.security.MembershipEntry;
 import org.exoplatform.webui.application.WebuiRequestContext;
@@ -304,7 +304,7 @@ public class UIWorkingArea extends UIContainer {
 
   private boolean hasPermission(String userName, Value[] roles) throws Exception {
     IdentityRegistry identityRegistry = getApplicationComponent(IdentityRegistry.class);
-    if (SystemIdentity.SYSTEM.equalsIgnoreCase(userName)) {
+    if (IdentityConstants.SYSTEM.equalsIgnoreCase(userName)) {
       return true;
     }
     Identity identity = identityRegistry.getIdentity(userName);

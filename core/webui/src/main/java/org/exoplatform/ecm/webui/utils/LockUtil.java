@@ -29,10 +29,10 @@ import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cache.CacheService;
 import org.exoplatform.services.cache.ExoCache;
-import org.exoplatform.services.jcr.access.SystemIdentity;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.impl.core.lock.LockManagerImpl;
 import org.exoplatform.services.organization.OrganizationService;
+import org.exoplatform.services.security.IdentityConstants;
 
 /**
  * Created by The eXo Platform SARL
@@ -53,7 +53,7 @@ public class LockUtil {
     ExoCache lockcache = getLockCache();
     String key = createLockKey(lock.getNode());
     String userId = Util.getPortalRequestContext().getRemoteUser();
-    if(userId == null) userId = SystemIdentity.ANONIM;
+    if(userId == null) userId = IdentityConstants.ANONIM;
     Map<String,String> lockedNodesInfo = (Map<String,String>)lockcache.get(userId);
     if(lockedNodesInfo == null) {
       lockedNodesInfo = new HashMap<String,String>();
@@ -89,7 +89,7 @@ public class LockUtil {
     ExoCache lockcache = getLockCache();
     String key = createLockKey(node);
     String userId = Util.getPortalRequestContext().getRemoteUser();
-    if(userId == null) userId = SystemIdentity.ANONIM;
+    if(userId == null) userId = IdentityConstants.ANONIM;
     Map<String,String> lockedNodesInfo = (Map<String,String>)lockcache.get(userId);
     if(lockedNodesInfo == null) return;
     lockedNodesInfo.remove(key);
@@ -101,7 +101,7 @@ public class LockUtil {
     String newKey = createLockKey(newNode);
     String oldKey = createLockKey(oldNode);
     String userId = Util.getPortalRequestContext().getRemoteUser();
-    if(userId == null) userId = SystemIdentity.ANONIM;
+    if(userId == null) userId = IdentityConstants.ANONIM;
     Map<String,String> lockedNodesInfo = (Map<String,String>)lockcache.get(userId);
     if(lockedNodesInfo == null) {
       lockedNodesInfo = new HashMap<String,String>();
@@ -117,7 +117,7 @@ public class LockUtil {
     String newKey = createLockKey(newNode);
     String oldKey = getOldLockKey(srcPath, newNode);
     String userId = Util.getPortalRequestContext().getRemoteUser();
-    if(userId == null) userId = SystemIdentity.ANONIM;
+    if(userId == null) userId = IdentityConstants.ANONIM;
     Map<String,String> lockedNodesInfo = (Map<String,String>)lockcache.get(userId);
     if(lockedNodesInfo == null) {
       lockedNodesInfo = new HashMap<String,String>();
@@ -134,7 +134,7 @@ public class LockUtil {
     ExoCache lockcache = getLockCache();
     String key = createLockKey(node);
     String userId = Util.getPortalRequestContext().getRemoteUser();
-    if(userId == null) userId = SystemIdentity.ANONIM;
+    if(userId == null) userId = IdentityConstants.ANONIM;
     Map<String,String> lockedNodesInfo = (Map<String,String>)lockcache.get(userId);
     if ((lockedNodesInfo != null) && (lockedNodesInfo.get(key) != null)) {
       return lockedNodesInfo.get(key);
@@ -147,7 +147,7 @@ public class LockUtil {
     ExoCache lockcache = getLockCache();
     String key = createLockKey(node);
     String userId = Util.getPortalRequestContext().getRemoteUser();
-    if(userId == null) userId = SystemIdentity.ANONIM;
+    if(userId == null) userId = IdentityConstants.ANONIM;
     Map<String,String> lockedNodesInfo = (Map<String,String>)lockcache.get(userId);
     if ((lockedNodesInfo != null) && (lockedNodesInfo.get(key) != null)) {
       return lockedNodesInfo.get(key);
@@ -187,7 +187,7 @@ public class LockUtil {
     Session session = node.getSession();
     String repositoryName = ((ManageableRepository)session.getRepository()).getConfiguration().getName();
     String userId = Util.getPortalRequestContext().getRemoteUser();
-    if(userId == null) userId = SystemIdentity.ANONIM;
+    if(userId == null) userId = IdentityConstants.ANONIM;
     buffer.append(repositoryName).append("/::/")
           .append(session.getWorkspace().getName()).append("/::/")
           .append(userId).append(":/:")
@@ -199,7 +199,7 @@ public class LockUtil {
     StringBuffer buffer = new StringBuffer();
     Session session = node.getSession();
     String repositoryName = ((ManageableRepository)session.getRepository()).getConfiguration().getName();
-    if(userId == null) userId = SystemIdentity.ANONIM;
+    if(userId == null) userId = IdentityConstants.ANONIM;
     buffer.append(repositoryName).append("/::/")
           .append(session.getWorkspace().getName()).append("/::/")
           .append(userId).append(":/:")

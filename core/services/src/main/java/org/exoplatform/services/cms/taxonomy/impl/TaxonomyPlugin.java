@@ -49,12 +49,12 @@ import org.exoplatform.services.cms.taxonomy.impl.TaxonomyConfig.Taxonomy;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.access.AccessControlEntry;
 import org.exoplatform.services.jcr.access.PermissionType;
-import org.exoplatform.services.jcr.access.SystemIdentity;
 import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.security.IdentityConstants;
 
 /**
  * Created by The eXo Platform SARL Author : Ly Dinh Quang
@@ -178,7 +178,7 @@ public class TaxonomyPlugin extends BaseComponentPlugin {
     Iterator<ObjectParameter> it = params_.getObjectParamIterator();
     Node taxonomyStorageNodeSystem = Utils.makePath(taxonomyStorageNode, treeName, "exo:taxonomy",
             null);
-    String systemUser = SystemIdentity.SYSTEM;
+    String systemUser = IdentityConstants.SYSTEM;
 
     while (it.hasNext()) {
       ObjectParameter objectParam = it.next();

@@ -36,9 +36,9 @@ import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.access.AccessControlEntry;
 import org.exoplatform.services.jcr.access.PermissionType;
-import org.exoplatform.services.jcr.access.SystemIdentity;
 import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.jcr.core.ManageableRepository;
+import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -110,10 +110,10 @@ public class UIPermissionInfo extends UIContainer {
     Set keys = permsMap.keySet();
     Iterator keysIter = keys.iterator() ;
     //TODO Utils.getExoOwner(node) has exception return SystemIdentity.SYSTEM
-    String owner = SystemIdentity.SYSTEM ;
+    String owner = IdentityConstants.SYSTEM ;
     int iSystemOwner = 0;
     if (getExoOwner(node) != null) owner = getExoOwner(node);
-    if (owner.equals(SystemIdentity.SYSTEM)) iSystemOwner = -1;
+    if (owner.equals(IdentityConstants.SYSTEM)) iSystemOwner = -1;
     PermissionBean permOwnerBean = new PermissionBean();
     if(!permsMap.containsKey(owner)) {
       permOwnerBean.setUsersOrGroups(owner);
@@ -166,10 +166,10 @@ public class UIPermissionInfo extends UIContainer {
       UIPermissionInfo uicomp = event.getSource() ;
       Node currentNode = uicomp.getCurrentNode();
       ExtendedNode node = (ExtendedNode)currentNode;
-      String owner = SystemIdentity.SYSTEM ;
+      String owner = IdentityConstants.SYSTEM ;
       int iSystemOwner = 0;
       if (uicomp.getExoOwner(node) != null) owner = uicomp.getExoOwner(node);
-      if (owner.equals(SystemIdentity.SYSTEM)) iSystemOwner = -1;
+      if (owner.equals(IdentityConstants.SYSTEM)) iSystemOwner = -1;
       String name = event.getRequestContext().getRequestParameter(OBJECTID) ;
       UIApplication uiApp = uicomp.getAncestorOfType(UIApplication.class) ;
       if (uicomp.getSizeOfListPermission() < 2 + iSystemOwner) {

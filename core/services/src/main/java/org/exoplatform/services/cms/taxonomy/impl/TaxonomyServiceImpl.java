@@ -47,7 +47,6 @@ import org.exoplatform.services.cms.taxonomy.TaxonomyService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.access.AccessControlEntry;
 import org.exoplatform.services.jcr.access.PermissionType;
-import org.exoplatform.services.jcr.access.SystemIdentity;
 import org.exoplatform.services.jcr.config.RepositoryConfigurationException;
 import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.jcr.core.ManageableRepository;
@@ -55,6 +54,7 @@ import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.security.IdentityConstants;
 import org.picocontainer.Startable;
 
 /**
@@ -365,7 +365,7 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
         }
         if (!node.isNodeType("exo:privilegeable"))
           node.addMixin("exo:privilegeable");
-        String systemUser = SystemIdentity.SYSTEM;
+        String systemUser = IdentityConstants.SYSTEM;
         if (!containsUser(node.getACL().getPermissionEntries(), systemUser))
           node.setPermission(systemUser, PermissionType.ALL);
       }
@@ -402,7 +402,7 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
         }
         if (!node.isNodeType("exo:privilegeable"))
           node.addMixin("exo:privilegeable");
-        String systemUser = SystemIdentity.SYSTEM;
+        String systemUser = IdentityConstants.SYSTEM;
         if (!containsUser(node.getACL().getPermissionEntries(), systemUser))
           node.setPermission(systemUser, PermissionType.ALL);
       }

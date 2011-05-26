@@ -23,9 +23,9 @@ import org.exoplatform.ecm.connector.fckeditor.FCKFileHandler;
 import org.exoplatform.services.jcr.access.AccessControlEntry;
 import org.exoplatform.services.jcr.access.AccessControlList;
 import org.exoplatform.services.jcr.access.PermissionType;
-import org.exoplatform.services.jcr.access.SystemIdentity;
 import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.jcr.core.ManageableRepository;
+import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.core.WCMConfigurationService;
 
@@ -69,7 +69,7 @@ public class DocumentLinkHandler extends FCKFileHandler {
     String accessMode = "private";
     AccessControlList acl = ((ExtendedNode) node).getACL();
     for (AccessControlEntry entry : acl.getPermissionEntries()) {
-      if (entry.getIdentity().equalsIgnoreCase(SystemIdentity.ANY)
+      if (entry.getIdentity().equalsIgnoreCase(IdentityConstants.ANY)
           && entry.getPermission().equalsIgnoreCase(PermissionType.READ)) {
         accessMode = "public";
         break;

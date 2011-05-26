@@ -35,8 +35,8 @@ import org.exoplatform.ecm.webui.utils.PermissionUtil;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.jcr.access.AccessControlEntry;
 import org.exoplatform.services.jcr.access.PermissionType;
-import org.exoplatform.services.jcr.access.SystemIdentity;
 import org.exoplatform.services.jcr.core.ExtendedNode;
+import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -112,10 +112,10 @@ public class UIPermissionTreeInfo extends UIContainer {
       }
       Set keys = permsMap.keySet();
       Iterator keysIter = keys.iterator();
-      String owner = SystemIdentity.SYSTEM;
+      String owner = IdentityConstants.SYSTEM;
 
       if (getExoOwner(node) != null) owner = getExoOwner(node);
-      if (owner.equals(SystemIdentity.SYSTEM)) iSystemOwner = -1;
+      if (owner.equals(IdentityConstants.SYSTEM)) iSystemOwner = -1;
       PermissionBean permOwnerBean = new PermissionBean();
       if(!permsMap.containsKey(owner)) {
         permOwnerBean.setUsersOrGroups(owner);
@@ -183,10 +183,10 @@ public class UIPermissionTreeInfo extends UIContainer {
       UIPermissionTreeManager uiParent = uicomp.getParent();
       Node currentNode = uicomp.getCurrentNode();
       ExtendedNode node = (ExtendedNode)currentNode;
-      String owner = SystemIdentity.SYSTEM;
+      String owner = IdentityConstants.SYSTEM;
       int iSystemOwner = 0;
       if (uicomp.getExoOwner(node) != null) owner = uicomp.getExoOwner(node);
-      if (owner.equals(SystemIdentity.SYSTEM)) iSystemOwner = -1;
+      if (owner.equals(IdentityConstants.SYSTEM)) iSystemOwner = -1;
       String name = event.getRequestContext().getRequestParameter(OBJECTID);
       UIApplication uiApp = uicomp.getAncestorOfType(UIApplication.class);
       UIPopupContainer uiPopup = uicomp.getAncestorOfType(UIPopupContainer.class);

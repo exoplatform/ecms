@@ -22,9 +22,9 @@ import java.util.GregorianCalendar;
 import javax.jcr.Node;
 
 import org.exoplatform.services.jcr.access.PermissionType;
-import org.exoplatform.services.jcr.access.SystemIdentity;
 import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.services.wcm.core.BaseWebSchemaHandler;
 
 /**
@@ -200,7 +200,7 @@ public class PortalFolderSchemaHandler extends BaseWebSchemaHandler {
       addMixin(document,"exo:datetime");
       document.setProperty("exo:dateCreated",calendar);
       document.addMixin("exo:privilegeable");
-      ((ExtendedNode)document).setPermission(SystemIdentity.ANY, PermissionType.ALL);
+      ((ExtendedNode)document).setPermission(IdentityConstants.ANY, PermissionType.ALL);
     }
 
     if (!portalFolder.hasNode("web contents")) {

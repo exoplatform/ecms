@@ -42,9 +42,9 @@ import org.exoplatform.services.cms.taxonomy.TaxonomyService;
 import org.exoplatform.services.cms.taxonomy.TaxonomyTreeData;
 import org.exoplatform.services.jcr.access.AccessControlEntry;
 import org.exoplatform.services.jcr.access.PermissionType;
-import org.exoplatform.services.jcr.access.SystemIdentity;
 import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -340,7 +340,7 @@ public class UIPermissionTreeForm extends UIForm implements UISelectable {
       UIPermissionTreeForm uiForm = event.getSource();
       UIPermissionInputSet uiInputSet = uiForm.getChildById(UIPermissionForm.PERMISSION);
       uiInputSet.getUIStringInput(UIPermissionInputSet.FIELD_USERORGROUP).setValue(
-          SystemIdentity.ANY);
+          IdentityConstants.ANY);
       uiForm.checkAll(false);
       uiInputSet.getUIFormCheckBoxInput(PermissionType.READ).setChecked(true);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiForm.getParent());

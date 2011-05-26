@@ -45,12 +45,12 @@ import org.exoplatform.services.ecm.publication.PublicationPlugin;
 import org.exoplatform.services.ecm.publication.PublicationService;
 import org.exoplatform.services.ecm.publication.plugins.webui.VersionNode;
 import org.exoplatform.services.jcr.access.PermissionType;
-import org.exoplatform.services.jcr.access.SystemIdentity;
 import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.resources.ResourceBundleService;
+import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.form.UIForm;
 
@@ -543,9 +543,9 @@ public class StaticAndDirectPublicationPlugin extends PublicationPlugin {
       //add any
 
       String[] arrayPermission = {PermissionType.READ} ;
-      extNode.setPermission(SystemIdentity.ANY, arrayPermission);
+      extNode.setPermission(IdentityConstants.ANY, arrayPermission);
     } else {
-      extNode.removePermission(SystemIdentity.ANY);
+      extNode.removePermission(IdentityConstants.ANY);
     }
   }
 

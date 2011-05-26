@@ -20,9 +20,9 @@ import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.portal.webui.workspace.UIPortalApplication;
 import org.exoplatform.services.ecm.publication.PublicationService;
 import org.exoplatform.services.jcr.RepositoryService;
-import org.exoplatform.services.jcr.access.SystemIdentity;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.security.Identity;
+import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.services.security.IdentityRegistry;
 import org.exoplatform.services.security.MembershipEntry;
 import org.exoplatform.web.application.ApplicationMessage;
@@ -118,7 +118,7 @@ public class UIWorkflowPublicationViewForm extends UIForm {
   }
 
   private boolean checkExcetuteable(String userId, Value roles) throws Exception {
-    if (SystemIdentity.SYSTEM.equalsIgnoreCase(userId)) {
+    if (IdentityConstants.SYSTEM.equalsIgnoreCase(userId)) {
       return true;
     }
     Identity identity = identityRegistry.getIdentity(userId);

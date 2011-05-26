@@ -22,8 +22,8 @@ import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 
 import org.exoplatform.services.jcr.access.PermissionType;
-import org.exoplatform.services.jcr.access.SystemIdentity;
 import org.exoplatform.services.jcr.core.ExtendedNode;
+import org.exoplatform.services.security.IdentityConstants;
 
 /**
  * The Class PermissionUtil use to check permission for a node
@@ -71,7 +71,7 @@ public class PermissionUtil {
    * @throws RepositoryException the repository exception
    */
   public static boolean isAnyRole(Node node)throws RepositoryException {
-    return checkPermission(node,SystemIdentity.ANY);
+    return checkPermission(node,IdentityConstants.ANY);
   }
 
   /**

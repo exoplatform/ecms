@@ -34,10 +34,10 @@ import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.jcr.access.AccessControlEntry;
 import org.exoplatform.services.jcr.access.PermissionType;
-import org.exoplatform.services.jcr.access.SystemIdentity;
 import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -283,7 +283,7 @@ public class UIPermissionForm extends UIForm implements UISelectable {
     public void execute(Event<UIPermissionForm> event) throws Exception {
       UIPermissionForm uiForm = event.getSource();
       UIPermissionInputSet uiInputSet = uiForm.getChildById(UIPermissionForm.PERMISSION);
-      uiInputSet.getUIStringInput(UIPermissionInputSet.FIELD_USERORGROUP).setValue(SystemIdentity.ANY);
+      uiInputSet.getUIStringInput(UIPermissionInputSet.FIELD_USERORGROUP).setValue(IdentityConstants.ANY);
       uiForm.checkAll(false);
       uiInputSet.getUIFormCheckBoxInput(PermissionType.READ).setChecked(true);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiForm.getParent());

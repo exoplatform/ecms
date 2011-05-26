@@ -21,11 +21,11 @@ import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.drives.ManageDriveService;
 import org.exoplatform.services.jcr.RepositoryService;
-import org.exoplatform.services.jcr.access.SystemIdentity;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.security.Identity;
+import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.services.security.MembershipEntry;
 import org.xcmis.spi.CmisRuntimeException;
 import org.xcmis.spi.Connection;
@@ -140,7 +140,7 @@ public class DriveCmisRegistry extends JcrCmisRegistry
       }
       if (userId == null)
       {
-         userId = SystemIdentity.ANONIM;
+         userId = IdentityConstants.ANONIM;
       }
       if (memberships == null)
       {

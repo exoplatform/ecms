@@ -57,12 +57,12 @@ import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.access.AccessControlEntry;
 import org.exoplatform.services.jcr.access.PermissionType;
-import org.exoplatform.services.jcr.access.SystemIdentity;
 import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -250,7 +250,7 @@ public class UIActionForm extends UIDialogForm implements UISelectable {
         if (!idList.contains(identity)) {
           idList.add(identity);
           permsList = ((ExtendedNode) currentNode).getACL().getPermissions(identity);
-          if (SystemIdentity.SYSTEM.equals(identity)) {
+          if (IdentityConstants.SYSTEM.equals(identity)) {
             if (!permsList.contains(PermissionType.REMOVE)) {
               permsList.add(PermissionType.REMOVE);
             }

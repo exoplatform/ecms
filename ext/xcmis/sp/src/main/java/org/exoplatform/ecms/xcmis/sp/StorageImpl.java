@@ -17,12 +17,12 @@
 
 package org.exoplatform.ecms.xcmis.sp;
 
-import org.exoplatform.services.jcr.access.SystemIdentity;
 import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.jcr.core.ExtendedSession;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.security.ConversationState;
+import org.exoplatform.services.security.IdentityConstants;
 import org.xcmis.search.InvalidQueryException;
 import org.xcmis.search.SearchService;
 import org.xcmis.search.Visitors;
@@ -824,8 +824,8 @@ public class StorageImpl extends BaseJcrStorage implements Storage
                   CapabilityContentStreamUpdatable.ANYTIME, CapabilityJoin.NONE, queryCapability,
                   CapabilityRendition.READ, false, true, true, true, true, true, false, false), new ACLCapability(
                   permissionMapping, Collections.unmodifiableList(permissions),
-                  AccessControlPropagation.REPOSITORYDETERMINED, SupportedPermissions.BASIC), SystemIdentity.ANONIM,
-               SystemIdentity.ANY, null, null, true, REPOSITORY_DESCRIPTION, VENDOR_NAME, PRODUCT_NAME,
+                  AccessControlPropagation.REPOSITORYDETERMINED, SupportedPermissions.BASIC), IdentityConstants.ANONIM,
+                  IdentityConstants.ANY, null, null, true, REPOSITORY_DESCRIPTION, VENDOR_NAME, PRODUCT_NAME,
                PRODUCT_VERSION, null);
       }
 

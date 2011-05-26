@@ -32,12 +32,12 @@ import org.exoplatform.services.ecm.publication.IncorrectStateUpdateLifecycleExc
 import org.exoplatform.services.ecm.publication.PublicationPlugin;
 import org.exoplatform.services.ecm.publication.PublicationService;
 import org.exoplatform.services.jcr.RepositoryService;
-import org.exoplatform.services.jcr.access.SystemIdentity;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.resources.ResourceBundleService;
 import org.exoplatform.services.resources.XMLResourceBundleParser;
 import org.exoplatform.services.security.Identity;
+import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.services.security.IdentityRegistry;
 import org.exoplatform.services.security.MembershipEntry;
 import org.exoplatform.services.workflow.WorkflowServiceContainer;
@@ -290,7 +290,7 @@ public class WorkflowPublicationPlugin extends PublicationPlugin {
   }
 
   private boolean checkExcetuteable(String userId, Value roles, IdentityRegistry identityRegistry) throws Exception {
-    if (SystemIdentity.SYSTEM.equalsIgnoreCase(userId)) {
+    if (IdentityConstants.SYSTEM.equalsIgnoreCase(userId)) {
       return true;
     }
     Identity identity = identityRegistry.getIdentity(userId);

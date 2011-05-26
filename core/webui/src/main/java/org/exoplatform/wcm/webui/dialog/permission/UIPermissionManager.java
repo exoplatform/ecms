@@ -35,8 +35,8 @@ import org.exoplatform.ecm.webui.selector.UIGroupMemberSelector;
 import org.exoplatform.ecm.webui.selector.UISelectable;
 import org.exoplatform.services.jcr.access.AccessControlEntry;
 import org.exoplatform.services.jcr.access.PermissionType;
-import org.exoplatform.services.jcr.access.SystemIdentity;
 import org.exoplatform.services.jcr.core.ExtendedNode;
+import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.wcm.webui.Utils;
 import org.exoplatform.wcm.webui.dialog.UIContentDialogForm;
@@ -159,7 +159,7 @@ public class UIPermissionManager extends UIForm implements UISelectable {
     }
 
     // Add owner's permission
-    String owner = SystemIdentity.SYSTEM;
+    String owner = IdentityConstants.SYSTEM;
     if (webcontent.hasProperty("exo:owner"))
       owner = webcontent.getProperty("exo:owner").getString();
     UIPermissionConfig permissionConfig = new UIPermissionConfig();
@@ -531,7 +531,7 @@ public class UIPermissionManager extends UIForm implements UISelectable {
     public void execute(Event<UIPermissionManager> event) throws Exception {
       UIPermissionManager permissionManager = event.getSource();
       UIFormInputSetWithAction permisionInputSet = permissionManager.getChildById(PERMISSION_INPUT_SET);
-      ((UIFormStringInput) permisionInputSet.getChildById(PERMISSION_STRING_INPUT)).setValue(SystemIdentity.ANY);
+      ((UIFormStringInput) permisionInputSet.getChildById(PERMISSION_STRING_INPUT)).setValue(IdentityConstants.ANY);
       permissionManager.getUIFormCheckBoxInput(ACCESSIBLE_CHECKBOX_INPUT).setChecked(true);
       permissionManager.getUIFormCheckBoxInput(EDITABLE_CHECKBOX_INPUT).setChecked(false);
     }

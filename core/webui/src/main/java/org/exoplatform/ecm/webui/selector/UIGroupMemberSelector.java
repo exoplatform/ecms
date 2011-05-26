@@ -8,19 +8,19 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import org.exoplatform.services.jcr.access.SystemIdentity;
 import org.exoplatform.services.organization.Group;
 import org.exoplatform.services.organization.MembershipType;
 import org.exoplatform.services.organization.OrganizationService;
+import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.ComponentConfigs;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIBreadcumbs;
+import org.exoplatform.webui.core.UIBreadcumbs.LocalPath;
 import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.core.UIContainer;
 import org.exoplatform.webui.core.UIPopupWindow;
 import org.exoplatform.webui.core.UITree;
-import org.exoplatform.webui.core.UIBreadcumbs.LocalPath;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.form.UIForm;
@@ -81,7 +81,6 @@ public class UIGroupMemberSelector extends UIContainer implements ComponentSelec
 
   private List<String> listMemberhip;
 
-  @SuppressWarnings("unchecked")
   public UIGroupMemberSelector() throws Exception {
     addChild(UIAnyPermission.class, null, null);
     UIBreadcumbs uiBreadcumbs = addChild(UIBreadcumbs.class, "BreadcumbMembershipSelector", "BreadcumbMembershipSelector") ;
@@ -108,7 +107,6 @@ public class UIGroupMemberSelector extends UIContainer implements ComponentSelec
 
   public List<String> getListMemberhip() { return listMemberhip; }
 
-  @SuppressWarnings("unchecked")
   public void changeGroup(String groupId) throws Exception {
     OrganizationService service = getApplicationComponent(OrganizationService.class) ;
     UIBreadcumbs uiBreadcumb = getChild(UIBreadcumbs.class);
@@ -316,7 +314,7 @@ public class UIGroupMemberSelector extends UIContainer implements ComponentSelec
       UIAnyPermission uiAnyPermission = event.getSource();
       UIGroupMemberSelector uiGroupMemberSelector = uiAnyPermission.getParent();
       String returnField = uiGroupMemberSelector.getReturnField();
-      String value = SystemIdentity.ANY;
+      String value = IdentityConstants.ANY;
       ((UISelectable)uiGroupMemberSelector.getSourceComponent()).doSelect(returnField, value);
       if (uiGroupMemberSelector.isUsePopup()) {
         UIPopupWindow uiPopup = uiGroupMemberSelector.getParent();
