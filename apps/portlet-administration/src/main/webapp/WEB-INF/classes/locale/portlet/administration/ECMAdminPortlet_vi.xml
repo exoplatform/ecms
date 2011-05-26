@@ -1413,7 +1413,7 @@
     <msg>
 			<name-null>Tên danh mục trống</name-null>
 			<name-invalid>Tên danh mục không hợp lệ</name-invalid>
-			<name-too-long>Tên danh mục quá dài</name-too-long>
+			<name-too-long>Tên Taxonomy phải nhỏ hơn hoặc bằng '{0}' kí tự</name-too-long>
 			<exist>Tên danh mục đã tồn tại</exist>
 		</msg>
 	</UITaxonomyTreeCreateChildForm>

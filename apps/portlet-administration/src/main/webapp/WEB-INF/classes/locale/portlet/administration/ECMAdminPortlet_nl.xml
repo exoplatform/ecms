@@ -1413,7 +1413,7 @@
     <msg>
 			<name-null>Naam is null</name-null>
 			<name-invalid>Naam is ongeldig</name-invalid>
-			<name-too-long>Naam is te lang</name-too-long>
+			<name-too-long>Taxonomie naam dient minder dan '{0}' tekens</name-too-long>
 			<exist>Naam bestaat al</exist>
 		</msg>
 	</UITaxonomyTreeCreateChildForm>
