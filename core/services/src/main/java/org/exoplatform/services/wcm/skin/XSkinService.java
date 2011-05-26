@@ -113,7 +113,6 @@ public class XSkinService implements Startable {
   public String getActiveStylesheet(Node webcontent) throws Exception {
     StringBuffer buffer = new StringBuffer();
     String cssQuery = StringUtils.replaceOnce(WEBCONTENT_CSS_QUERY, "{path}", webcontent.getPath());
-
     // Need re-login to get session because this node is get from template and the session is not live anymore.
     // If node is version (which is stored in system workspace) we have to login to system workspace to get data
     NodeLocation webcontentLocation = NodeLocation.make(webcontent);
@@ -263,35 +262,24 @@ public class XSkinService implements Startable {
                                          .getProperty(NodetypeConstant.JCR_DATA)
                                          .getString());
         }
-      } else {
-        boolean isAdded = false;
+      } else {        
+        String cssContent = newCSSFile.getNode(NodetypeConstant.JCR_CONTENT).getProperty(NodetypeConstant.JCR_DATA).getString();
+        long newCSSFilePriority = newCSSFile.getProperty(NodetypeConstant.EXO_PRIORITY).getLong();
         while(iterator.hasNext()) {
           Node registeredCSSFile = iterator.nextNode();
-          // Add new
-          long newCSSFilePriority = newCSSFile.getProperty(NodetypeConstant.EXO_PRIORITY).getLong();
-          long registeredCSSFilePriority = registeredCSSFile.getProperty(NodetypeConstant.EXO_PRIORITY).getLong();
-          if (!isAdded && newCSSFilePriority < registeredCSSFilePriority) {
-            buffer.append(newCSSFile.getNode(NodetypeConstant.JCR_CONTENT).getProperty(NodetypeConstant.JCR_DATA).getString());
-            isAdded = true;
-            continue;
-          }
-          // Modify
-          if (newCSSFile.getPath().equals(registeredCSSFile.getPath())) {
-            buffer.append(newCSSFile.getNode(NodetypeConstant.JCR_CONTENT)
-                                    .getProperty(NodetypeConstant.JCR_DATA)
-                                    .getString());
-            continue;
-          }
-          buffer.append(registeredCSSFile.getNode(NodetypeConstant.JCR_CONTENT)
-                                         .getProperty(NodetypeConstant.JCR_DATA)
-                                         .getString());
+          if (!newCSSFile.getPath().equals(registeredCSSFile.getPath())) {
+          	long registeredCSSFilePriority = registeredCSSFile.getProperty(NodetypeConstant.EXO_PRIORITY).getLong();
+          	if(registeredCSSFilePriority<newCSSFilePriority)
+          		cssContent = registeredCSSFile.getNode(NodetypeConstant.JCR_CONTENT).getProperty(NodetypeConstant.JCR_DATA).getString();
+          }         
         }
+        buffer.append(cssContent);
       }
     } catch(Exception e) {
       log.error("Unexpected problem happen when merge CSS data", e);
     } finally {
       sessionProvider.close();
-    }
+    }   
     return buffer.toString();
   }
 

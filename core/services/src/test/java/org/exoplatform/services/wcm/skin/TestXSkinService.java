@@ -379,7 +379,7 @@ public class TestXSkinService extends BaseWCMTestCase {
       session.save();
 
       String cssData = configService.getMergedCSS("/portal/css/jcr/classic/Default/Stylesheet.css");
-      assertEquals("This is the default.css file.", cssData);
+      assertEquals("Test XSkin Service", cssData);
     } catch(Exception e) {
       fail();
     }
