@@ -82,28 +82,7 @@
     </table>       
   </div>
     <%/* start render action*/%>
-    <div class="UIAction" style="display:block;"> 
-      <table class="ActionContainer" align="center">
-        <tr>
-          <td align="center">
-            <% for(action in uicomponent.getActions()) { 
-                 String actionLabel = _ctx.appRes(uicomponent.getName() + ".action." + action) ;
-                 String link = uicomponent.event(action) ;
-            %>
-              <a href="$link" class="ActionButton LightBlueStyle">
-                <div class="ButtonLeft">
-                  <div class="ButtonRight">
-                    <div class="ButtonMiddle">
-                      $actionLabel
-                    </div>
-                  </div>
-                </div>
-              </a>
-            <%}%>          
-          </td>
-        </tr>
-      </table>
-    </div>
-    <%/* end render action*/%>  
+    <%uiform.processRenderAction()%>
+	<%/* end render action*/%>
   <%uiform.end()%>
 </div>
