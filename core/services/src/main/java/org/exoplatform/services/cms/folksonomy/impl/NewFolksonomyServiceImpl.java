@@ -42,7 +42,6 @@ import org.exoplatform.container.component.ComponentPlugin;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.services.cms.folksonomy.NewFolksonomyService;
 import org.exoplatform.services.cms.link.LinkManager;
-import org.exoplatform.services.cms.link.NodeFinder;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
@@ -82,7 +81,7 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
 
   private InitParams                initParams_;
 
-  private SessionProvider           sessionProvider;
+  private SessionProviderService    sessionProviderService;
 
   private List<TagStylePlugin>      plugin_                = new ArrayList<TagStylePlugin>();
 
@@ -100,9 +99,7 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
     this.initParams_ = initParams;
 
     ExoContainer myContainer = ExoContainerContext.getCurrentContainer();
-    SessionProviderService sessionProviderService = (SessionProviderService) myContainer.
-        getComponentInstanceOfType(SessionProviderService.class);
-    this.sessionProvider = sessionProviderService.getSystemSessionProvider(null);
+    sessionProviderService = (SessionProviderService) myContainer.getComponentInstanceOfType(SessionProviderService.class);
   }
 
   /**
@@ -444,6 +441,7 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
 
   private String getRepoName() {
     try {
+      SessionProvider sessionProvider = sessionProviderService.getSystemSessionProvider(null);
       String repositoryName = sessionProvider.getCurrentRepository().getConfiguration().getName();
       if (LOG.isDebugEnabled()) {
         LOG.debug("The repository name is: " + repositoryName);
@@ -558,6 +556,7 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
     RepositoryService repositoryService = (RepositoryService) myContainer.getComponentInstanceOfType(RepositoryService.class);
     ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
 
+    SessionProvider sessionProvider = sessionProviderService.getSystemSessionProvider(null);
     Session session = sessionProvider.getSession(workspace, manageableRepository);
     session.move(tagPath, newPath.toString());
     session.save();
@@ -735,6 +734,7 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
 
   private Node getUserFolksonomyFolder(String userName) throws Exception {
     // code for running
+    SessionProvider sessionProvider = sessionProviderService.getSystemSessionProvider(null);
     Node userNode = nodeHierarchyCreator.getUserNode(sessionProvider, userName);
     String folksonomyPath = nodeHierarchyCreator.getJcrPath(USER_FOLKSONOMY_ALIAS);
     return userNode.getNode(folksonomyPath);
@@ -745,6 +745,7 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
     RepositoryService repositoryService = (RepositoryService) myContainer.getComponentInstanceOfType(RepositoryService.class);
     ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
 
+    SessionProvider sessionProvider = sessionProviderService.getSystemSessionProvider(null);
     return (Node) sessionProvider.getSession(workspace, manageableRepository).getItem(path);
   }
 
@@ -801,6 +802,7 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
     RepositoryService repositoryService = (RepositoryService) myContainer.getComponentInstanceOfType(RepositoryService.class);
     ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
 
+    SessionProvider sessionProvider = sessionProviderService.getSystemSessionProvider(null);
     QueryManager queryManager = sessionProvider.getSession(workspace, manageableRepository)
                                                .getWorkspace()
                                                .getQueryManager();
@@ -959,6 +961,7 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
       RepositoryService repositoryService = (RepositoryService) myContainer.getComponentInstanceOfType(RepositoryService.class);
       ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
 
+      SessionProvider sessionProvider = sessionProviderService.getSystemSessionProvider(null);
       Session session = sessionProvider.getSession(initParams_.getValueParam("workspace")
                                                               .getValue(), manageableRepository);
 
