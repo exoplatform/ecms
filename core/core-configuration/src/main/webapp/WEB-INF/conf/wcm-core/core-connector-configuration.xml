@@ -47,6 +47,9 @@
       </value-param>
     </init-params>
   </component>
+   <component>
+    <type>org.exoplatform.ecm.connector.platform.ManageDocumentService</type>
+  </component>
   <component>
     <type>org.exoplatform.wcm.connector.fckeditor.GadgetConnector</type>
     <init-params>
