@@ -116,7 +116,7 @@
                     <imagedata fileref="images/rulesrequiredbox.png" format="PNG" width="39mm"/>
                   </imageobject>
                   <textobject>
-                     <phrase>[ Rules: ]</phrase>
+                     <phrase>Rules:</phrase>
                   </textobject>
                 </inlinemediaobject> checkbox is marked, the <inlinemediaobject>
                   <imageobject>

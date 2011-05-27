@@ -28,15 +28,15 @@
       </step>
       <step>
         <para>
-     Select the 
+     Select the
      <inlinemediaobject>
             <imageobject>
               <imagedata fileref="images/addcategorybutton.png" format="PNG" width="27mm"/>
             </imageobject>
             <textobject>
-               <phrase>[ Add category ]</phrase>
+               <phrase>Add category</phrase>
             </textobject>
-          </inlinemediaobject> button on the action bar and the Add Category form appears:
+          </inlinemediaobject> button on the Action bar and the Add Category form appears:
     </para>
         <mediaobject>
           <imageobject role="html">
@@ -532,7 +532,7 @@
       <itemizedlist>
         <listitem>
           <para>
-             The 
+             The
       <inlinemediaobject>
               <imageobject>
                 <imagedata fileref="images/greentick.png" format="PNG" width="6mm"/>
@@ -560,7 +560,7 @@
    Do the following to add a new document:
   </para>
     <procedure id="proc-User_Guide-Add_a_document-Add_a_new_document">
-      <title>Add a new document:</title>
+      <title>Add a new document</title>
       <step>
         <para>
      Select a folder from the left panel where you want to add a new document.
@@ -568,13 +568,13 @@
       </step>
       <step>
         <para>
-     Click the 
+     Click the
      <inlinemediaobject>
             <imageobject>
               <imagedata fileref="images/adddocumenticon.png" format="PNG" width="28mm"/>
             </imageobject>
             <textobject>
-               <phrase>[ Add Document ]</phrase>
+               <phrase>Add Document</phrase>
             </textobject>
           </inlinemediaobject> button on the <emphasis role="bold">Actions</emphasis> bar.
     </para>
@@ -600,13 +600,13 @@
       <title>Attach files to a document</title>
       <step>
         <para>
-     Select a document that you want to attach files to and click the 
+     Select a document that you want to attach files to and click the
      <inlinemediaobject>
             <imageobject>
               <imagedata fileref="images/uploadicon2.png" format="PNG" width="17mm"/>
             </imageobject>
             <textobject>
-               <phrase>[ Upload ]</phrase>
+               <phrase>Upload</phrase>
             </textobject>
           </inlinemediaobject> button on the <emphasis role="bold">Actions</emphasis> bar.
     </para>
@@ -629,7 +629,7 @@
       </step>
       <step>
         <para>
-     Click <emphasis role="bold">Browse</emphasis> to select the attachment file. You can click the 
+     Click <emphasis role="bold">Browse</emphasis> to select the attachment file. You can click the
      <inlinemediaobject>
             <imageobject>
               <imagedata fileref="images/addplusicon.png" format="PNG" width="8mm"/>
@@ -663,7 +663,7 @@
       </step>
       <step>
         <para>
-    Click the 
+    Click the
      <inlinemediaobject>
             <imageobject>
               <imagedata fileref="images/icon1.png" format="PNG" width="6mm"/>
@@ -693,15 +693,15 @@
         <itemizedlist>
           <listitem>
             <para>
-       <emphasis role="bold">text/html</emphasis>: If you want to create a File document with a source code and generated content, click the 
+       <emphasis role="bold">text/html</emphasis>: If you want to create a File document with a source code and generated content, click the
        <inlinemediaobject>
                 <imageobject>
                   <imagedata fileref="images/sourceicon.png" format="PNG" width="21mm"/>
                 </imageobject>
                 <textobject>
-                   <phrase>[ Source ]</phrase>
+                   <phrase>Source</phrase>
                 </textobject>
-              </inlinemediaobject> button in the editor bar. In this mode, only Save, New Page, Preview icons in editor bar are visible for using. Click the 
+              </inlinemediaobject> button in the editor bar. In this mode, only Save, New Page, Preview icons in editor bar are visible for using. Click the
        <inlinemediaobject>
                 <imageobject>
                   <imagedata fileref="images/previewicon.png" format="PNG" width="7mm"/>
@@ -801,7 +801,7 @@
    The Links is used to list all its related documents. After adding relations for a document, Article will be displayed. You can click these links to view the content of the related documents.
   </para>
     <para>
-   The Attachments is used to list all its uploaded files/documents that is attached with the Article. You can remove the attachments by clicking the 
+   The Attachments is used to list all its uploaded files/documents that is attached with the Article. You can remove the attachments by clicking the
    <inlinemediaobject>
         <imageobject>
           <imagedata fileref="images/trashicon.png" format="PNG" width="5mm"/>
@@ -982,7 +982,7 @@
       <title>Create a new File Plan</title>
       <step>
         <para>
-     Follow the instructions in <xref linkend="proc-User_Guide-Add_a_document-Add_a_new_document"/> to open the <emphasis role="bold">Add New Document</emphasis> window and select <emphasis role="bold">File plan</emphasis> from the drop-down lis for the field <emphasis role="bold">Select Template</emphasis>.
+     Follow the instructions in <xref linkend="proc-User_Guide-Add_a_document-Add_a_new_document"/> to open the <emphasis role="bold">Add New Document</emphasis> window and select <emphasis role="bold">File plan</emphasis> from the drop-down list for the field <emphasis role="bold">Select Template</emphasis>.
     </para>
         <para>
      The <emphasis role="bold">Add File plan</emphasis> form will appear.
@@ -1216,7 +1216,7 @@
       <title>Create a new Kofax</title>
       <step>
         <para>
-     Follow the instructions in <xref linkend="proc-User_Guide-Add_a_document-Add_a_new_document"/> to open the <emphasis role="bold">Add New Kofax</emphasis> form and select <emphasis role="bold">Add New Kofax</emphasis> from the drop-down list for the field <emphasis role="bold">Select Template</emphasis>.
+     Follow the instructions in <xref linkend="proc-User_Guide-Add_a_document-Add_a_new_document"/> to open the <emphasis role="bold">Add New Document</emphasis> form and select <emphasis role="bold">Add New Kofax</emphasis> from the drop-down list for the field <emphasis role="bold">Select Template</emphasis>.
     </para>
         <para>
      The <emphasis role="bold">Add New Kofax</emphasis> form will appear:
@@ -1237,7 +1237,7 @@
       </step>
       <step>
         <para>
-     Select categories for a Kofax document by clicking the 
+     Select categories for a Kofax document by clicking the
      <inlinemediaobject>
             <imageobject>
               <imagedata fileref="images/addplusicon.png" format="PNG" width="8mm"/>
@@ -1279,7 +1279,7 @@
       <title>Create new Event</title>
       <step>
         <para>
-     Follow the instructions in <xref linkend="proc-User_Guide-Add_a_document-Add_a_new_document"/> to open the <emphasis role="bold">Add New Event</emphasis> form and select <emphasis role="bold">Event</emphasis> from the drop-down list for the field <emphasis role="bold">Select Template</emphasis>e.
+     Follow the instructions in <xref linkend="proc-User_Guide-Add_a_document-Add_a_new_document"/> to open the <emphasis role="bold">Add New Document</emphasis> form and select <emphasis role="bold">Event</emphasis> from the drop-down list for the field <emphasis role="bold">Select Template</emphasis>e.
     </para>
         <para>
      The <emphasis role="bold">Add New Event</emphasis> window will appear:
@@ -1453,15 +1453,15 @@
       </step>
       <step>
         <para>
-     Click the 
+     Click the
      <inlinemediaobject>
             <imageobject>
               <imagedata fileref="images/addfolderbutton.png" format="PNG" width="24mm"/>
             </imageobject>
             <textobject>
-               <phrase>[ Add Folder ]</phrase>
+               <phrase>Add Folder</phrase>
             </textobject>
-          </inlinemediaobject> button on the action bar. The <emphasis role="bold">Add a Folder</emphasis> form is displayed:
+          </inlinemediaobject> button on the Action bar. The <emphasis role="bold">Add a Folder</emphasis> form is displayed:
     </para>
         <mediaobject>
           <imageobject role="html">
@@ -1474,7 +1474,7 @@
       </step>
       <step>
         <para>
-     Click the 
+     Click the
      <inlinemediaobject>
             <imageobject>
               <imagedata fileref="images/icon1.png" format="PNG" width="6mm"/>
@@ -1515,10 +1515,10 @@
    This function enables users to add multiple languages for a document. This action is similar to adding a language.
   </para>
     <para>
-   By default, the <emphasis role="bold">Add translation</emphasis> button is not displayed on the action bar.
+   By default, the <emphasis role="bold">Add translation</emphasis> button is not displayed on the Action bar.
   </para>
     <para>
-   Enable this function by navigating to <emphasis role="bold">Administration</emphasis> &gt; <emphasis role="bold">Content Presentation &gt;</emphasis><emphasis role="bold">Manage Views</emphasis>. See <xref linkend="sect-User_Guide-Content_Presentation_Manager-Manage_Views"/> to know how to add the Add translation button to the tabs on the action bar in Content Explorer.
+   Enable this function by navigating to <emphasis role="bold">Administration</emphasis> &gt; <emphasis role="bold">Content Presentation &gt;</emphasis><emphasis role="bold">Manage Views</emphasis>. See <xref linkend="sect-User_Guide-Content_Presentation_Manager-Manage_Views"/> to know how to add the Add translation button to the tabs on the Action bar in Content Explorer.
   </para>
     <procedure>
       <title/>
@@ -1537,13 +1537,13 @@
       </step>
       <step>
         <para>
-     Click the 
+     Click the
      <inlinemediaobject>
             <imageobject>
               <imagedata fileref="images/addtranslationicon.png" format="PNG" width="31mm"/>
             </imageobject>
             <textobject>
-               <phrase>[ Add Translation ]</phrase>
+               <phrase>Add Translation</phrase>
             </textobject>
           </inlinemediaobject> button on the <emphasis role="bold">Action</emphasis> bar. The <emphasis role="bold">Symlink Manager</emphasis> will appear:
     </para>
@@ -1558,7 +1558,7 @@
       </step>
       <step>
         <para>
-     Click the 
+     Click the
      <inlinemediaobject>
             <imageobject>
               <imagedata fileref="images/addplusicon.png" format="PNG" width="8mm"/>
@@ -1625,15 +1625,15 @@
       </step>
       <step>
         <para>
-     Click the 
+     Click the
      <inlinemediaobject>
             <imageobject>
               <imagedata fileref="images/addsymlinkbutton.png" format="PNG" width="27mm"/>
             </imageobject>
             <textobject>
-               <phrase>[ Add Sym Link ]</phrase>
+               <phrase>Add Sym Link</phrase>
             </textobject>
-          </inlinemediaobject> button on the action bar. The Sym Link Manager pop-up will appear:
+          </inlinemediaobject> button on the Action bar. The Sym Link Manager pop-up will appear:
     </para>
         <mediaobject>
           <imageobject role="html">
@@ -1667,7 +1667,7 @@
       </step>
       <step>
         <para>
-     Click the 
+     Click the
      <inlinemediaobject>
             <imageobject>
               <imagedata fileref="images/addplusicon.png" format="PNG" width="8mm"/>
@@ -1693,7 +1693,7 @@
       </step>
       <step>
         <para>
-     Click the 
+     Click the
      <inlinemediaobject>
             <imageobject>
               <imagedata fileref="images/greentick.png" format="PNG" width="6mm"/>
@@ -1741,15 +1741,15 @@
       </step>
       <step>
         <para>
-     Click the 
+     Click the
      <inlinemediaobject>
             <imageobject>
               <imagedata fileref="images/commentdocumentbutton.png" format="PNG" width="39mm"/>
             </imageobject>
             <textobject>
-               <phrase>[ Comment this document ]</phrase>
+               <phrase>Comment this document</phrase>
             </textobject>
-          </inlinemediaobject> button on the action bar.
+          </inlinemediaobject> button on the Action bar.
     </para>
         <para>
      The <emphasis role="bold">Add Comment</emphasis> form appears:
@@ -1797,7 +1797,7 @@
       </imageobject>
     </mediaobject>
     <para>
-   You can edit your comment by clicking the 
+   You can edit your comment by clicking the
    <inlinemediaobject>
         <imageobject>
           <imagedata fileref="images/editicon2.png" format="PNG" width="5mm"/>
@@ -1805,7 +1805,7 @@
         <textobject>
            <phrase>pencil</phrase>
         </textobject>
-      </inlinemediaobject> icon or delete it by clicking the 
+      </inlinemediaobject> icon or delete it by clicking the
    <inlinemediaobject>
         <imageobject>
           <imagedata fileref="images/trashicon.png" format="PNG" width="5mm"/>
@@ -1830,13 +1830,13 @@
       </step>
       <step>
         <para>
-     Click the 
+     Click the
      <inlinemediaobject>
             <imageobject>
               <imagedata fileref="images/editdocumenticon.png" format="PNG" width="38mm"/>
             </imageobject>
             <textobject>
-               <phrase>[ Edit Document ]</phrase>
+               <phrase>Edit Document</phrase>
             </textobject>
           </inlinemediaobject> button on the Action bar.
     </para>
@@ -1881,13 +1881,13 @@
       </step>
       <step>
         <para>
-     Click the 
+     Click the
      <inlinemediaobject>
             <imageobject>
               <imagedata fileref="images/exportnode.png" format="PNG" width="39mm"/>
             </imageobject>
             <textobject>
-               <phrase>[ Export Node ]</phrase>
+               <phrase>Export Node</phrase>
             </textobject>
           </inlinemediaobject> button on the Action bar to show the <emphasis role="bold">Export Node</emphasis> form:
     </para>
@@ -1963,15 +1963,15 @@
       </step>
       <step>
         <para>
-     Click the 
+     Click the
      <inlinemediaobject>
             <imageobject>
               <imagedata fileref="images/importnodebutton.png" format="PNG" width="25mm"/>
             </imageobject>
             <textobject>
-               <phrase>[ Import Node ]</phrase>
+               <phrase>Import Node</phrase>
             </textobject>
-          </inlinemediaobject> button on the action bar . The <emphasis role="bold">Import Node</emphasis> form appears.
+          </inlinemediaobject> button on the Action bar. The <emphasis role="bold">Import Node</emphasis> form appears.
     </para>
         <mediaobject>
           <imageobject role="html">
@@ -2056,15 +2056,15 @@
         </step>
         <step>
           <para>
-      Click the 
+      Click the
       <inlinemediaobject>
               <imageobject>
                 <imagedata fileref="images/manageactionsbutton.png" format="PNG" width="31mm"/>
               </imageobject>
               <textobject>
-                 <phrase>[ Manage Actions ]</phrase>
+                 <phrase>Manage Actions</phrase>
               </textobject>
-            </inlinemediaobject> button on the action bar.
+            </inlinemediaobject> button on the Action bar.
      </para>
           <para>
       The <emphasis role="bold">Manage Actions</emphasis> form will appear.
@@ -2085,7 +2085,7 @@
         </step>
         <step>
           <para>
-      Click the 
+      Click the
       <inlinemediaobject>
               <imageobject>
                 <imagedata fileref="images/icon1.png" format="PNG" width="6mm"/>
@@ -2249,7 +2249,7 @@
         </step>
         <step>
           <para>
-      Click the 
+      Click the
       <inlinemediaobject>
               <imageobject>
                 <imagedata fileref="images/previewicon.png" format="PNG" width="7mm"/>
@@ -2292,7 +2292,7 @@
         </step>
         <step>
           <para>
-      Click the  
+      Click the
       <inlinemediaobject>
               <imageobject>
                 <imagedata fileref="images/editicon4.png" format="PNG" width="6mm"/>
@@ -2342,7 +2342,7 @@
         </step>
         <step>
           <para>
-      Click the  
+      Click the
       <inlinemediaobject>
               <imageobject>
                 <imagedata fileref="images/trashicon.png" format="PNG" width="5mm"/>
@@ -2374,15 +2374,15 @@
       </step>
       <step>
         <para>
-     Click the 
+     Click the
      <inlinemediaobject>
             <imageobject>
               <imagedata fileref="images/manageauditing.png" format="PNG" width="30mm"/>
             </imageobject>
             <textobject>
-               <phrase>[ Manage Auditing ]</phrase>
+               <phrase>Manage Auditing</phrase>
             </textobject>
-          </inlinemediaobject> button on the action bar. The <emphasis role="bold">Activate Auditing</emphasis> message appears.
+          </inlinemediaobject> button on the Action bar. The <emphasis role="bold">Activate Auditing</emphasis> message appears.
     </para>
         <mediaobject>
           <imageobject role="html">
@@ -2400,13 +2400,13 @@
       </step>
       <step>
         <para>
-     Click the 
+     Click the
      <inlinemediaobject>
             <imageobject>
               <imagedata fileref="images/manageauditing.png" format="PNG" width="30mm"/>
             </imageobject>
             <textobject>
-               <phrase>[ Manage Auditing ]</phrase>
+               <phrase>Manage Auditing</phrase>
             </textobject>
           </inlinemediaobject> button again to view audit information for the selected node.
     </para>
@@ -2451,15 +2451,15 @@
         </step>
         <step>
           <para>
-      Click the 
+      Click the
       <inlinemediaobject>
               <imageobject>
                 <imagedata fileref="images/managecategoriesicon.png" format="PNG" width="33mm"/>
               </imageobject>
               <textobject>
-                 <phrase>[ Manage Categories ]</phrase>
+                 <phrase>Manage Categories</phrase>
               </textobject>
-            </inlinemediaobject> button on the action bar.
+            </inlinemediaobject> button on the Action bar.
      </para>
           <para>
       The <emphasis role="bold">Add category</emphasis> form appears.
@@ -2480,7 +2480,7 @@
         </step>
         <step>
           <para>
-      Click the 
+      Click the
       <inlinemediaobject>
               <imageobject>
                 <imagedata fileref="images/greentick.png" format="PNG" width="6mm"/>
@@ -2540,13 +2540,13 @@
         </step>
         <step>
           <para>
-       Click the 
+       Click the
       <inlinemediaobject>
               <imageobject>
                 <imagedata fileref="images/managecategoriesicon.png" format="PNG" width="33mm"/>
               </imageobject>
               <textobject>
-                 <phrase>[ Manage Categories ]</phrase>
+                 <phrase>Manage Categories</phrase>
               </textobject>
             </inlinemediaobject> button.
      </para>
@@ -2558,7 +2558,7 @@
         </step>
         <step>
           <para>
-      Click the 
+      Click the
       <inlinemediaobject>
               <imageobject>
                 <imagedata fileref="images/trashicon.png" format="PNG" width="5mm"/>
@@ -2586,13 +2586,13 @@
       </step>
       <step>
         <para>
-     Click the 
+     Click the
      <inlinemediaobject>
             <imageobject>
               <imagedata fileref="images/hideshowcontentbutton.png" format="PNG" width="35mm"/>
             </imageobject>
             <textobject>
-               <phrase>[ Hide/Show content ]</phrase>
+               <phrase>Hide/Show content</phrase>
             </textobject>
           </inlinemediaobject> button on the Action bar to hide the node.
     </para>
@@ -2603,13 +2603,13 @@
       <step id="step-User_Guide-Hide_a_Node-Show_a_Node">
         <title>Show a Node</title>
         <para>
-     To reveal a hidden node, click the 
+     To reveal a hidden node, click the
      <inlinemediaobject>
             <imageobject>
               <imagedata fileref="images/hideshowcontentbutton.png" format="PNG"/>
             </imageobject>
             <textobject>
-               <phrase>[ Hide/Show content ]</phrase>
+               <phrase>Hide/Show content</phrase>
             </textobject>
           </inlinemediaobject> button again.
     </para>
@@ -2630,13 +2630,13 @@
       </step>
       <step>
         <para>
-     Click the 
+     Click the
      <inlinemediaobject>
             <imageobject>
               <imagedata fileref="images/managepublicationsbutton.png" format="PNG" width="34mm"/>
             </imageobject>
             <textobject>
-               <phrase>[ Manage Publications ]</phrase>
+               <phrase>Manage Publications</phrase>
             </textobject>
           </inlinemediaobject> button on the actions bar.
     </para>
@@ -2657,7 +2657,7 @@
       </step>
       <step>
         <para>
-     Click the 
+     Click the
      <inlinemediaobject>
             <imageobject>
               <imagedata fileref="images/previewicon2.png" format="PNG" width="7mm"/>
@@ -2665,13 +2665,13 @@
             <textobject>
                <phrase>magnifying glass</phrase>
             </textobject>
-          </inlinemediaobject> icon to view the content of the node or click the 
+          </inlinemediaobject> icon to view the content of the node or click the
      <inlinemediaobject>
             <imageobject>
               <imagedata fileref="images/restoreversionicon.png" format="PNG" width="10mm"/>
             </imageobject>
             <textobject>
-               <phrase>[ Restore Version ]</phrase>
+               <phrase>Restore Version</phrase>
             </textobject>
             </inlinemediaobject> icon to restore a version (refer to <xref linkend="sect-User_Guide-Actions-Manage_Versions"/> for information about versioning).
          </para>
@@ -2708,15 +2708,15 @@
         </step>
         <step>
           <para>
-      Click the 
+      Click the
       <inlinemediaobject>
               <imageobject>
                 <imagedata fileref="images/managerelationsicon.png" format="PNG" width="31mm"/>
               </imageobject>
               <textobject>
-                 <phrase>[ Manage Relations ]</phrase>
+                 <phrase>Manage Relations</phrase>
               </textobject>
-            </inlinemediaobject> button on the action bar.
+            </inlinemediaobject> button on the Action bar.
      </para>
           <para>
       The <emphasis role="bold">Add relation</emphasis> form appears.
@@ -2729,7 +2729,7 @@
         </step>
         <step>
           <para>
-      Click the 
+      Click the
       <inlinemediaobject>
               <imageobject>
                 <imagedata fileref="images/greentick.png" format="PNG" width="6mm"/>
@@ -2771,15 +2771,15 @@
         </step>
         <step>
           <para>
-      Click the 
+      Click the
       <inlinemediaobject>
               <imageobject>
                 <imagedata fileref="images/managerelationsicon.png" format="PNG" width="31mm"/>
               </imageobject>
               <textobject>
-                 <phrase>[ Manage Relations ]</phrase>
+                 <phrase>Manage Relations</phrase>
               </textobject>
-            </inlinemediaobject> button on the action bar.
+            </inlinemediaobject> button on the Action bar.
      </para>
         </step>
         <step>
@@ -2789,7 +2789,7 @@
         </step>
         <step>
           <para>
-      Click the 
+      Click the
       <inlinemediaobject>
               <imageobject>
                 <imagedata fileref="images/trashicon.png" format="PNG" width="5mm"/>
@@ -2864,15 +2864,15 @@
         </step>
         <step>
           <para>
-      Click the 
+      Click the
       <inlinemediaobject>
               <imageobject>
                 <imagedata fileref="images/manageversionsbutton.png" format="PNG" width="30mm"/>
               </imageobject>
               <textobject>
-                 <phrase>[ Manage Relations ]</phrase>
+                 <phrase>Manage Relations</phrase>
               </textobject>
-            </inlinemediaobject> button on the action bar.
+            </inlinemediaobject> button on the Action bar.
      </para>
           <para>
       The following message box will appear:
@@ -2906,13 +2906,13 @@
         </step>
         <step>
           <para>
-      Click the 
+      Click the
       <inlinemediaobject>
               <imageobject>
                 <imagedata fileref="images/manageversionsbutton.png" format="PNG" width="30mm"/>
               </imageobject>
               <textobject>
-                 <phrase>[ Manage Versions ]</phrase>
+                 <phrase>Manage Versions</phrase>
               </textobject>
             </inlinemediaobject> button again to open the <emphasis role="bold">Version Info</emphasis> window.
      </para>
@@ -2954,20 +2954,20 @@
         </step>
         <step>
           <para>
-      Click the 
+      Click the
       <inlinemediaobject>
               <imageobject>
                 <imagedata fileref="images/manageversionsbutton.png" format="PNG" width="30mm"/>
               </imageobject>
               <textobject>
-                 <phrase>[ Manage Versions ]</phrase>
+                 <phrase>Manage Versions</phrase>
               </textobject>
-            </inlinemediaobject> button on the action bar.
+            </inlinemediaobject> button on the Action bar.
      </para>
         </step>
         <step>
           <para>
-      Click the 
+      Click the
       <inlinemediaobject>
               <imageobject>
                 <imagedata fileref="images/versionplusicon.png" format="PNG" width="9mm"/>
@@ -3009,20 +3009,20 @@
         </step>
         <step>
           <para>
-      Click the 
+      Click the
       <inlinemediaobject>
               <imageobject>
                 <imagedata fileref="images/manageversionsbutton.png" format="PNG" width="30mm"/>
               </imageobject>
               <textobject>
-                 <phrase>[ Manage Versions ]</phrase>
+                 <phrase>Manage Versions</phrase>
               </textobject>
-            </inlinemediaobject> button on the action bar.
+            </inlinemediaobject> button on the Action bar.
      </para>
         </step>
         <step>
           <para>
-      Click the 
+      Click the
       <inlinemediaobject>
               <imageobject>
                 <imagedata fileref="images/versionminusicon.png" format="PNG" width="8mm"/>
@@ -3072,20 +3072,20 @@
         </step>
         <step>
           <para>
-      Click the 
+      Click the
       <inlinemediaobject>
               <imageobject>
                 <imagedata fileref="images/manageversionsbutton.png" format="PNG" width="30mm"/>
               </imageobject>
               <textobject>
-                 <phrase>[ Manage Versions ]</phrase>
+                 <phrase>Manage Versions</phrase>
               </textobject>
             </inlinemediaobject> button.
      </para>
         </step>
         <step>
           <para>
-      Click the 
+      Click the
       <inlinemediaobject>
               <imageobject>
                 <imagedata fileref="images/previewicon2.png" format="PNG" width="7mm"/>
@@ -3111,7 +3111,7 @@
      Version viewing is not supported on folder nodes.
     </para>
         <para>
-     If you click the 
+     If you click the
      <inlinemediaobject>
             <imageobject>
               <imagedata fileref="images/previewicon2.png" format="PNG" width="7mm"/>
@@ -3134,13 +3134,13 @@
         </step>
         <step>
           <para>
-      Click the 
+      Click the
       <inlinemediaobject>
               <imageobject>
                 <imagedata fileref="images/manageversionsbutton.png" format="PNG" width="30mm"/>
               </imageobject>
               <textobject>
-                 <phrase>[ Manage Versions ]</phrase>
+                 <phrase>Manage Versions</phrase>
               </textobject>
             </inlinemediaobject> button.
      </para>
@@ -3160,7 +3160,7 @@
         </step>
         <step>
           <para>
-      Click the 
+      Click the
       <inlinemediaobject>
               <imageobject>
                 <imagedata fileref="images/restoreversionicon.png" format="PNG" width="10mm"/>
@@ -3192,20 +3192,20 @@
         </step>
         <step>
           <para>
-      Click the 
+      Click the
       <inlinemediaobject>
               <imageobject>
                 <imagedata fileref="images/manageversionsbutton.png" format="PNG" width="30mm"/>
               </imageobject>
               <textobject>
-                 <phrase>[ Manage Versions ]</phrase>
+                 <phrase>Manage Versions</phrase>
               </textobject>
             </inlinemediaobject> button.
      </para>
         </step>
         <step>
           <para>
-      Click the 
+      Click the
       <inlinemediaobject>
               <imageobject>
                 <imagedata fileref="images/trashicon.png" format="PNG" width="5mm"/>
@@ -3247,13 +3247,13 @@
       </step>
       <step>
         <para>
-     Click the 
+     Click the
      <inlinemediaobject>
             <imageobject>
               <imagedata fileref="images/localisedcontents.png" format="PNG" width="59mm"/>
             </imageobject>
             <textobject>
-               <phrase>[ Add/Edit localized contents ]</phrase>
+               <phrase>Add/Edit localized contents</phrase>
             </textobject>
           </inlinemediaobject> button on the <emphasis role="bold">Action</emphasis> bar.
     </para>
@@ -3383,9 +3383,9 @@
               <imagedata fileref="images/overloadthumbnail.png" format="PNG" width="34mm"/>
             </imageobject>
             <textobject>
-               <phrase>[ Overload thumbnail ]</phrase>
+               <phrase>Overload thumbnail</phrase>
             </textobject>
-          </inlinemediaobject> button on the Action Bar.
+          </inlinemediaobject> button on the Action bar.
     </para>
         <para>
      The <emphasis role="bold">Add thumbnail image</emphasis> form appears:
@@ -3436,7 +3436,7 @@
       </step>
       <step>
         <para>
-     Click the <emphasis role="bold">Request Approval</emphasis> button on the action bar.
+     Click the <emphasis role="bold">Request Approval</emphasis> button on the Action bar.
     </para>
         <para>
      The content is displayed at the bottom of the Content Explorer of the people who have the right to approve contents.
@@ -3458,17 +3458,17 @@
       </step>
       <step>
         <para>
-     Click the <emphasis role="bold">Approve Content</emphasis> button on the action bar and the content is ready to be published.
+     Click the <emphasis role="bold">Approve Content</emphasis> button on the Action bar and the content is ready to be published.
     </para>
         <note>
           <para>
       The Approve Content button is only invisible for users who have the right to approve contents.
      </para>
           <para>
-       By default, the button is not displayed on the action bar.
+       By default, the button is not displayed on the Action bar.
       </para>
           <para>
-       Enable this function by navigating to <emphasis role="bold">Administration</emphasis> &gt; <emphasis role="bold">Content Presentation &gt;</emphasis><emphasis role="bold">Manage Views</emphasis>. See <xref linkend="sect-User_Guide-Content_Presentation_Manager-Manage_Views"/> to know how to add the Approve Content button to the tabs on the action bar in Content Explorer.
+       Enable this function by navigating to <emphasis role="bold">Administration</emphasis> &gt; <emphasis role="bold">Content Presentation &gt;</emphasis><emphasis role="bold">Manage Views</emphasis>. See <xref linkend="sect-User_Guide-Content_Presentation_Manager-Manage_Views"/> to know how to add the Approve Content button to the tabs on the Action bar in Content Explorer.
      </para>
         </note>
       </step>
@@ -3491,17 +3491,17 @@
       </step>
       <step>
         <para>
-     Click the <emphasis role="bold">Publish Content</emphasis> button on the action bar. The content will be published as the schedule that you set up.
+     Click the <emphasis role="bold">Publish Content</emphasis> button on the Action bar. The content will be published as the schedule that you set up.
     </para>
         <note>
           <para>
       The Publish Content button is only invisible for users who have the right to publish contents.
      </para>
           <para>
-      By default, the button is not displayed on the action bar.
+      By default, the button is not displayed on the Action bar.
      </para>
           <para>
-      Enable this function by navigating to <emphasis role="bold">Administration</emphasis> &gt; <emphasis role="bold">Content Presentation &gt;</emphasis><emphasis role="bold">Manage Views</emphasis>. See <xref linkend="sect-User_Guide-Content_Presentation_Manager-Manage_Views"/> to know how to add the Publish Content button to the tabs on the action bar in Content Explorer.
+      Enable this function by navigating to <emphasis role="bold">Administration</emphasis> &gt; <emphasis role="bold">Content Presentation &gt;</emphasis><emphasis role="bold">Manage Views</emphasis>. See <xref linkend="sect-User_Guide-Content_Presentation_Manager-Manage_Views"/> to know how to add the Publish Content button to the tabs on the Action bar in Content Explorer.
      </para>
         </note>
       </step>
@@ -3513,24 +3513,24 @@
    This function enables you to show or hide all the drives in Content Explorer.
   </para>
     <para>
-   To show drives, click the 
+   To show drives, click the
    <inlinemediaobject>
         <imageobject>
           <imagedata fileref="images/showhidedrives.png" format="PNG" width="44mm"/>
         </imageobject>
         <textobject>
-           <phrase>[ Show/Hide Drives ]</phrase>
+           <phrase>Show/Hide Drives</phrase>
         </textobject>
-      </inlinemediaobject> button on the action bar.
+      </inlinemediaobject> button on the Action bar.
   </para>
     <para>
-   To hide drives, click the  
+   To hide drives, click the
    <inlinemediaobject>
         <imageobject>
           <imagedata fileref="images/showhidedrives.png" format="PNG" width="44mm"/>
         </imageobject>
         <textobject>
-           <phrase>[ Show/Hide Drives ]</phrase>
+           <phrase>Show/Hide Drives</phrase>
         </textobject>
       </inlinemediaobject> button again.
   </para>
@@ -3540,10 +3540,10 @@
     <para>
    This function allows you to view nodes in documents in a tree structure.
   </para>
+   <para><emphasis role="bold">Show the JCR structure</emphasis></para>
     <procedure>
-      <step id="step-User_Guide-Show_JCR_Structure-Show_the_JCR_structure">
-        <title>Show the JCR structure</title>
-        <para>
+      <step>
+      <para>
      Select a document.
     </para>
       </step>
@@ -3554,20 +3554,20 @@
       </step>
       <step>
         <para>
-     Click the 
+     Click the
      <inlinemediaobject>
             <imageobject>
               <imagedata fileref="images/jcrstructure.png" format="PNG" width="46mm"/>
             </imageobject>
             <textobject>
-               <phrase>[ Show/Hide Like JCR Structure ]</phrase>
+               <phrase>Show/Hide Like JCR Structure</phrase>
             </textobject>
           </inlinemediaobject> button.
     </para>
       </step>
       <step>
         <para>
-     Click the 
+     Click the
      <inlinemediaobject>
             <imageobject>
               <imagedata fileref="images/discsave.png" format="PNG" width="8mm"/>
@@ -3589,26 +3589,17 @@
           </imageobject>
         </mediaobject>
       </step>
-      <step id="step-User_Guide-Show_JCR_Structure-Hide_the_JCR_structure">
-        <title>Hide the JCR structure</title>
-        <para>
-     Select a document that is showing the JCR structure.
-    </para>
-      </step>
-      <step>
-        <para>
-     Click the 
+      </procedure>
+      <para><emphasis role="bold">Hide the JCR structure</emphasis>: select a document is showing the JCR structure, then click the
      <inlinemediaobject>
             <imageobject>
               <imagedata fileref="images/jcrstructure.png" format="PNG" width="46mm"/>
             </imageobject>
             <textobject>
-               <phrase>[ Show/Hide Like JCR Structure ]</phrase>
+               <phrase>Show/Hide Like JCR Structure</phrase>
             </textobject>
-          </inlinemediaobject> button again.
-    </para>
-      </step>
-    </procedure>
+         </inlinemediaobject> button again. </para>
+
   </section>
   <section id="sect-User_Guide-Actions-Tag_Documents">
     <title>Tag Documents</title>
@@ -3624,13 +3615,13 @@
       </step>
       <step>
         <para>
-     Click the 
+     Click the
      <inlinemediaobject>
             <imageobject>
               <imagedata fileref="images/taggingdocument.png" format="PNG" width="51mm"/>
             </imageobject>
             <textobject>
-               <phrase>[ Tagging this document ]</phrase>
+               <phrase>Tagging this document</phrase>
             </textobject>
           </inlinemediaobject> button on the Action bar. The <emphasis role="bold">Tag Manager</emphasis> will be displayed:
     </para>
@@ -3685,7 +3676,7 @@
       </step>
       <step>
         <para>
-     Click the 
+     Click the
      <inlinemediaobject>
             <imageobject>
               <imagedata fileref="images/trashicon.png" format="PNG" width="5mm"/>
@@ -3706,20 +3697,20 @@
       </step>
       <step>
         <para>
-     Click the 
+     Click the
      <inlinemediaobject>
             <imageobject>
               <imagedata fileref="images/taggingdocument.png" format="PNG" width="51mm"/>
             </imageobject>
             <textobject>
-               <phrase>[ Tagging this document ]</phrase>
+               <phrase>Tagging this document</phrase>
             </textobject>
-          </inlinemediaobject> button on the action bar to open the Tag Manager form.
+          </inlinemediaobject> button on the Action bar to open the Tag Manager form.
     </para>
       </step>
       <step>
         <para>
-     Click the 
+     Click the
      <inlinemediaobject>
             <imageobject>
               <imagedata fileref="images/trashicon.png" format="PNG" width="5mm"/>
@@ -3756,13 +3747,13 @@
       </step>
       <step>
         <para>
-     Click the 
+     Click the
      <inlinemediaobject>
             <imageobject>
               <imagedata fileref="images/uploadicon2.png" format="PNG" width="17mm"/>
             </imageobject>
             <textobject>
-               <phrase>[ Upload ]</phrase>
+               <phrase>Upload</phrase>
             </textobject>
           </inlinemediaobject> button on the Action bar to open the Upload a file form:
     </para>
@@ -3777,10 +3768,10 @@
       </step>
       <step>
         <para>
-     Browse and select a file on your computer by clicking the <emphasis role="bold">Browse</emphasis>... button. The selected file name will be displayed in the <emphasis role="bold">Select a file</emphasis> field.
+     Browse and select a file on your computer by clicking the <emphasis role="bold">Browse...</emphasis> button. The selected file name will be displayed in the <emphasis role="bold">Select a file</emphasis> field.
     </para>
         <para>
-     If you want to upload multi files at the same time, click the 
+     If you want to upload multi files at the same time, click the
      <inlinemediaobject>
             <imageobject>
               <imagedata fileref="images/addplusicon.png" format="PNG" width="8mm"/>
@@ -3799,7 +3790,7 @@
           </imageobject>
         </mediaobject>
         <para>
-     The 
+     The
      <inlinemediaobject>
             <imageobject>
               <imagedata fileref="images/trashicon.png" format="PNG" width="5mm"/>
@@ -3812,7 +3803,7 @@
       </step>
       <step>
         <para>
-     You can change the uploaded file by clicking the 
+     You can change the uploaded file by clicking the
      <inlinemediaobject>
             <imageobject>
               <imagedata fileref="images/trashicon.png" format="PNG" width="5mm"/>
@@ -3820,7 +3811,7 @@
             <textobject>
                <phrase>trash can</phrase>
             </textobject>
-          </inlinemediaobject> icon and select <emphasis role="bold">Browse</emphasis>... again to select another one.
+          </inlinemediaobject> icon and select <emphasis role="bold">Browse...</emphasis> again to select another one.
     </para>
       </step>
       <step>
@@ -3830,7 +3821,7 @@
       </step>
       <step>
         <para>
-     You can click the 
+     You can click the
      <inlinemediaobject>
             <imageobject>
               <imagedata fileref="images/addplusicon.png" format="PNG" width="8mm"/>
@@ -3851,7 +3842,7 @@
       </step>
       <step>
         <para>
-     Select categories by clicking the 
+     Select categories by clicking the
      <inlinemediaobject>
             <imageobject>
               <imagedata fileref="images/greentick.png" format="PNG" width="6mm"/>
@@ -3881,7 +3872,7 @@
             </inlinemediaobject> icon again to open the Add Categories form.
      </para>
           <para>
-      Click the 
+      Click the
       <inlinemediaobject>
               <imageobject>
                 <imagedata fileref="images/trashicon.png" format="PNG" width="5mm"/>
@@ -3916,7 +3907,7 @@
       </step>
       <step>
         <para>
-     Click the 
+     Click the
      <inlinemediaobject>
             <imageobject>
               <imagedata fileref="images/editicon4.png" format="PNG"  width="6mm"/>
@@ -3924,7 +3915,7 @@
             <textobject>
                <phrase>pencil</phrase>
             </textobject>
-          </inlinemediaobject> icon to see more details of its external metadata information. The <emphasis role="bold"> List external metadata</emphasis> tab will be enable and you can input value in this tab.
+          </inlinemediaobject> icon to see more details of its external metadata information. The <emphasis role="bold"> List external metadata</emphasis> tab will be enabled and you can input value in this tab.
     </para>
         <mediaobject>
           <imageobject role="html">
@@ -4005,13 +3996,13 @@
       </step>
       <step>
         <para>
-     Click the 
+     Click the
      <inlinemediaobject>
             <imageobject>
               <imagedata fileref="images/viewmetadatasbutton.png" format="PNG" width="28mm"/>
             </imageobject>
             <textobject>
-               <phrase>[ View Metadatas ]</phrase>
+               <phrase>View Metadatas</phrase>
             </textobject>
           </inlinemediaobject> button. The <emphasis role="bold">View Metadata</emphasis> form appears:
     </para>
@@ -4065,18 +4056,18 @@
       <title/>
       <step>
         <para>
-     Select a node that you want to view its detailed information.
+     Select a node that you want to view the detailed information for.
     </para>
       </step>
       <step>
         <para>
-     Click the 
+     Click the
      <inlinemediaobject>
             <imageobject>
               <imagedata fileref="images/viewnodetypesbutton.png" format="PNG" width="30mm"/>
             </imageobject>
             <textobject>
-               <phrase>[ View Node Types ]</phrase>
+               <phrase>View Node Types</phrase>
             </textobject>
           </inlinemediaobject> button to view detailed information about the selected node.
     </para>
@@ -4110,13 +4101,13 @@
       </step>
       <step>
         <para>
-     Click the 
+     Click the
      <inlinemediaobject>
             <imageobject>
               <imagedata fileref="images/viewpermissionsbutton.png" format="PNG" width="30mm"/>
             </imageobject>
             <textobject>
-               <phrase>[ View Permissions ]</phrase>
+               <phrase>View Permissions</phrase>
             </textobject>
           </inlinemediaobject> button. The <emphasis role="bold">Permissions Management</emphasis> form appears.
     </para>
@@ -4138,7 +4129,7 @@
       <step id="step-User_Guide-Add_Permissions-To_add_permission_for_specific_users">
         <title>To add permission for specific users</title>
         <para>
-     Click the 
+     Click the
      <inlinemediaobject>
             <imageobject>
               <imagedata fileref="images/usericon.png" format="PNG" width="5mm"/>
@@ -4149,7 +4140,7 @@
           </inlinemediaobject> icon next to the <emphasis role="bold">User Or Group</emphasis> field.
     </para>
         <para>
-     Click the 
+     Click the
      <inlinemediaobject>
             <imageobject>
               <imagedata fileref="images/greentick.png" format="PNG" width="6mm"/>
@@ -4169,7 +4160,7 @@
      Or;
     </para>
         <para>
-     Click the 
+     Click the
      <inlinemediaobject>
             <imageobject>
               <imagedata fileref="images/magnifyingglassicon.png" format="PNG" width="7mm"/>
@@ -4204,7 +4195,7 @@
       <step id="step-User_Guide-Add_Permissions-To_add_permissions_based_on_memberships">
         <title>To add permissions based on memberships</title>
         <para>
-     Click the 
+     Click the
      <inlinemediaobject>
             <imageobject>
               <imagedata fileref="images/userpermissionbutton.png" format="PNG" width="6mm"/>
@@ -4222,7 +4213,7 @@
       <step id="step-User_Guide-Add_Permissions-To_add_all_usersgroups_with_read_access">
         <title>To add all users/groups with read access</title>
         <para>
-         Click the 
+         Click the
      <inlinemediaobject>
             <imageobject>
               <imagedata fileref="images/grouppermission.png" format="PNG" width="6mm"/>
@@ -4253,7 +4244,7 @@
       </step>
       <step>
         <para>
-     Click the 
+     Click the
      <inlinemediaobject>
             <imageobject>
               <imagedata fileref="images/editicon4.png" format="PNG" width="6mm"/>
@@ -4284,7 +4275,7 @@
       </step>
       <step>
         <para>
-     Click the 
+     Click the
      <inlinemediaobject>
             <imageobject>
               <imagedata fileref="images/trashicon.png" format="PNG" width="5mm"/>
@@ -4315,13 +4306,13 @@
       </step>
       <step>
         <para>
-     Click the 
+     Click the
      <inlinemediaobject>
             <imageobject>
               <imagedata fileref="images/viewnodepropertiesbutton.png" format="PNG" width="48mm"/>
             </imageobject>
             <textobject>
-               <phrase>[ View Node Properties ]</phrase>
+               <phrase>View Node Properties</phrase>
             </textobject>
           </inlinemediaobject> button to show the <emphasis role="bold">Properties Management</emphasis> form:
     </para>
@@ -4392,7 +4383,7 @@
       </step>
       <step>
         <para>
-     To add multiple new values, click the 
+     To add multiple new values, click the
      <inlinemediaobject>
             <imageobject>
               <imagedata fileref="images/addplusicon.png" format="PNG" width="8mm"/>
@@ -4432,7 +4423,7 @@
       </imageobject>
     </mediaobject>
     <para>
-   In this form you can edit a property by clicking the 
+   In this form you can edit a property by clicking the
    <inlinemediaobject>
         <imageobject>
           <imagedata fileref="images/editicon4.png" format="PNG" width="6mm"/>
@@ -4440,7 +4431,7 @@
         <textobject>
            <phrase>pencil</phrase>
         </textobject>
-      </inlinemediaobject> icon or delete it by clicking the 
+      </inlinemediaobject> icon or delete it by clicking the
    <inlinemediaobject>
         <imageobject>
           <imagedata fileref="images/trashicon.png" format="PNG" width="5mm"/>
@@ -4460,13 +4451,13 @@
       <step id="step-User_Guide-View_Relations-To_View_Relations">
         <title>To View Relations</title>
         <para>
-     Select a node then click the 
+     Select a node then click the
      <inlinemediaobject>
             <imageobject>
               <imagedata fileref="images/showhiderelations.png" format="PNG" width="34mm"/>
             </imageobject>
             <textobject>
-               <phrase>[ Show/Hide Relations ]</phrase>
+               <phrase>Show/Hide Relations</phrase>
             </textobject>
           </inlinemediaobject> button. Documents related to the selected node will be shown in the sidebar.
     </para>
@@ -4493,13 +4484,13 @@
       <step id="step-User_Guide-View_Relations-To_Hide_Relations">
         <title>To Hide Relations</title>
         <para>
-     Click the 
+     Click the
      <inlinemediaobject>
             <imageobject>
               <imagedata fileref="images/showhiderelations.png" format="PNG" width="34mm"/>
             </imageobject>
             <textobject>
-               <phrase>[ Show/Hide Relations ]</phrase>
+               <phrase>Show/Hide Relations</phrase>
             </textobject>
           </inlinemediaobject> button again to hide relations.
     </para>
@@ -4520,15 +4511,15 @@
       </step>
       <step>
         <para>
-     Click the 
+     Click the
      <inlinemediaobject>
             <imageobject>
               <imagedata fileref="images/votefordocument.png" format="PNG" width="44mm"/>
             </imageobject>
             <textobject>
-               <phrase>[ Vote for document ]</phrase>
+               <phrase>Vote for document</phrase>
             </textobject>
-          </inlinemediaobject> button on the action bar.</para>
+          </inlinemediaobject> button on the Action bar.</para>
         <para>
      The <emphasis role="bold">Vote Document</emphasis> form will appear:
     </para>

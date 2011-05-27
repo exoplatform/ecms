@@ -9,7 +9,7 @@
 		There are many drives in the Content Explorer. Each drive has some views that enable you to look at data in the drive in a particular way. Each view has some tabs and each tab contains some functions (or called actions).
 	</para>
 	 <para>
-		&PRODUCT; supports you four ways to view nodes in a specific folder and show actions of corresponding tab on the Actions bar.
+		&PRODUCT; supports you four ways to view nodes in a specific folder and show actions of corresponding tab on the Action bar.
 	</para>
 	 <note>
 		<title>View Types</title>
@@ -115,7 +115,7 @@
 							<imagedata fileref="images/overloadthumbnail.png" format="PNG" />
 						</imageobject>
                   <textobject>
-                     <phrase>[ Overload Thumbnail ]</phrase>
+                     <phrase>Overload Thumbnail</phrase>
                   </textobject>
 					</inlinemediaobject> icon to open the <emphasis role="bold">Add thumbnail image</emphasis> form.
 				</para>

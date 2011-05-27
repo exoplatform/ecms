@@ -596,7 +596,7 @@
               <imagedata fileref="images/site-config.png" format="PNG" width="34mm"/>
             </imageobject>
             <textobject>
-               <phrase>[ Site's Config ]</phrase>
+               <phrase>Site's Config</phrase>
             </textobject>
           </inlinemediaobject> button to open the same form as the form to add a new portal.
          </para>
@@ -886,7 +886,7 @@
               <imagedata fileref="images/deletebutton.png" format="PNG" width="23mm"/>
             </imageobject>
             <textobject>
-               <phrase>[ Delete ]</phrase>
+               <phrase>Delete</phrase>
             </textobject>
           </inlinemediaobject> button in the row of the portal that you want to delete.
     </para>

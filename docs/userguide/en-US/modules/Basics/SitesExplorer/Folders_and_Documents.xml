@@ -54,7 +54,7 @@
               <imagedata fileref="images/addfavorite.png" format="PNG" width="27mm"/>
             </imageobject>
             <textobject>
-               <phrase>[ Add to favorite ]</phrase>
+               <phrase>Add to favorite</phrase>
             </textobject>
           </inlinemediaobject> entry in the drop-down menu.</para>
       </step>

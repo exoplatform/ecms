@@ -149,7 +149,7 @@
         <title>Edit a content</title>
         <step>
           <para>
-      Turn on the <emphasis role="bold">Edit Mode</emphasis> &gt; Hover the mouse over  the content you want to edit.
+      Turn on the <emphasis role="bold">Edit Mode</emphasis> &gt; Hover the mouse over the content you want to edit.
      </para>
         </step>
         <step>
@@ -248,7 +248,7 @@
         </step>
         <step>
           <para>
-      To add a new document to the CLV, click <emphasis role="bold">Add Document</emphasis> on the action bar and do the same steps as <xref linkend="sect-User_Guide-InContext_Editing-Add_Content"/>.
+      To add a new document to the CLV, click <emphasis role="bold">Add Document</emphasis> on the Action bar and do the same steps as <xref linkend="sect-User_Guide-InContext_Editing-Add_Content"/>.
      </para>
           <para>To take other actions on a specific content in the CLV, right-click it to open a drop-down menu. See more details how to takes the actions in <xref linkend="sect-User_Guide-Actions_on_Folders_and_Documents" /> </para>
         </step>
@@ -340,7 +340,7 @@
             </listitem>
           </itemizedlist>
           <para>
-      <emphasis role="bold">Advanced</emphasis> link: When clicking on this link, the Advanced pane will be shown. If <emphasis role="bold">Contextual Content</emphasis> property is set as &quot;Disable&quot;, the Advanced pane is closed by default .The content should enable “dynamic navigation” that interprets the URL and shows a content.
+      <emphasis role="bold">Advanced</emphasis> link: When clicking on this link, the Advanced pane will be shown. If <emphasis role="bold">Contextual Content</emphasis> property is set as &quot;Disable&quot;, the Advanced pane is closed by default. The content should enable “dynamic navigation” that interprets the URL and shows a content.
      </para>
           <note>
             <para>
@@ -634,7 +634,7 @@
     <itemizedlist>
       <listitem>
         <para>
-     <emphasis role="bold">Request approval</emphasis>: When a new content is created, it must be approved before publishing by clicking <emphasis role="bold">Request Approval</emphasis> on the action bar of the Content Explorer or clicking <emphasis role="bold">Pending</emphasis> in the Manage Publication form:
+     <emphasis role="bold">Request approval</emphasis>: When a new content is created, it must be approved before publishing by clicking <emphasis role="bold">Request Approval</emphasis> on the Action bar of the Content Explorer or clicking <emphasis role="bold">Pending</emphasis> in the Manage Publication form:
     </para>
         <mediaobject>
            <imageobject role="html">
@@ -647,7 +647,7 @@
       </listitem>
       <listitem>
         <para>
-     <emphasis role="bold">Approve</emphasis>: To approve a content, click <emphasis role="bold">Approve </emphasis>on the action bar of the Content Explorer or click <emphasis role="bold">Approved</emphasis> in the Manage Publication.
+     <emphasis role="bold">Approve</emphasis>: To approve a content, click <emphasis role="bold">Approve </emphasis>on the Action bar of the Content Explorer or click <emphasis role="bold">Approved</emphasis> in the Manage Publication.
     </para>
       </listitem>
       <listitem>

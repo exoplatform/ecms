@@ -100,7 +100,7 @@
           <title>Add a new category</title>
           <step>
             <para>
-       Click <emphasis role="bold">New Category</emphasis> on the action bar of the Newsletters page. The Category form will appear.
+       Click <emphasis role="bold">New Category</emphasis> on the Aion bar of the Newsletters page. The Category form will appear.
       </para>
             <mediaobject>
                <imageobject role="html">
@@ -583,7 +583,7 @@
                 <imagedata fileref="images/newsletters_moderation_icon.png" format="PNG" width="32mm"/>
               </imageobject>
               <textobject>
-                 <phrase>[ Moderation ]</phrase>
+                 <phrase>Moderation</phrase>
               </textobject>
             </inlinemediaobject> button, then select <emphasis role="bold">Open</emphasis> in the menu:
      </para>
@@ -634,7 +634,7 @@
                 <imagedata fileref="images/moderationbutton.png" format="PNG" width="31mm"/>
               </imageobject>
               <textobject>
-                 <phrase>[ Moderation ]</phrase>
+                 <phrase>Moderation</phrase>
               </textobject>
             </inlinemediaobject> button then select <emphasis role="bold">Edit</emphasis> in the menu.
      </para>
@@ -708,7 +708,7 @@
                 <imagedata fileref="images/moderationbutton.png" format="PNG" width="31mm"/>
               </imageobject>
               <textobject>
-                 <phrase>[ Moderation ]</phrase>
+                 <phrase>Moderation</phrase>
               </textobject>
             </inlinemediaobject> button then click <emphasis role="bold">Delete</emphasis> in the menu.
      </para>
@@ -751,7 +751,7 @@
                 <imagedata fileref="images/moderationbutton.png" format="PNG" width="31mm"/>
               </imageobject>
               <textobject>
-                 <phrase>[ Moderation ]</phrase>
+                 <phrase>Moderation</phrase>
               </textobject>
             </inlinemediaobject> button then select <emphasis role="bold">Convert as Template</emphasis> in the menu. The next time when you create a newsletter, this template will be listed in the <emphasis role="bold">Template</emphasis> field in the <emphasis role="bold">Newsletter entry form</emphasis>.
      </para>
@@ -778,7 +778,7 @@
                 <imagedata fileref="images/newletterbutton.png" format="PNG" width="35mm"/>
               </imageobject>
               <textobject>
-                 <phrase>[ New Letter ]</phrase>
+                 <phrase>New Letter</phrase>
               </textobject>
             </inlinemediaobject> button on the action bar. The <emphasis role="bold">Newsletter entry form</emphasis>appears:
      </para>
