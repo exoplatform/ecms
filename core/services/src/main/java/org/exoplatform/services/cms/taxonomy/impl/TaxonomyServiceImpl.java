@@ -107,6 +107,8 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
     ValueParam valueParam = initParams.getValueParam("categoryNameLength");
     if(valueParam!=null)
     	categoryNameLength_ = valueParam.getValue();
+    else
+    	categoryNameLength_ = "150";
     ObjectParameter objectParam = initParams.getObjectParam("defaultPermission.configuration");    
     if (objectParam != null)
       taxonomyTreeDefaultUserPermissions_
