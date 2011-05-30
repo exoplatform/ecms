@@ -170,10 +170,10 @@ public class TaxonomyPlugin extends BaseComponentPlugin {
     }
     Session session = manageableRepository.getSystemSession(getWorkspace());
     Node taxonomyStorageNode = (Node) session.getItem(path);
-//    if (taxonomyStorageNode.hasProperty("exo:isImportedChildren")) {
-//      session.logout();
-//      return;
-//    }
+    if (taxonomyStorageNode.hasNode(treeName)) {
+      session.logout();
+      return;
+    }
     taxonomyStorageNode.setProperty("exo:isImportedChildren", true);
     Iterator<ObjectParameter> it = params_.getObjectParamIterator();
     Node taxonomyStorageNodeSystem = Utils.makePath(taxonomyStorageNode, treeName, "exo:taxonomy",
