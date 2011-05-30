@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UIPCLVContainer>
+    <title>
+      <QuickEdit>クイック編集</QuickEdit>
+    </title>
+  </UIPCLVContainer>
+
+  <UIParameterizedManagerPopupWindow>
+    <title>
+      <UIPCLVConfig>パラメタライズドコンテンツリストビューア設定</UIPCLVConfig>
+    </title>
+  </UIParameterizedManagerPopupWindow>
+
+  <UIPCLVConfig>
+    <label>
+      <Title>パラメタライズドコンテンツリストビューア設定</Title>
+      <ContentSelectionBlock>コンテンツ選択</ContentSelectionBlock>
+      <OrderBy>Order by</OrderBy>
+      <option>
+        <exo:title>タイトル</exo:title>
+        <exo:dateCreated>作成日</exo:dateCreated>
+        <exo:dateModified>修正日</exo:dateModified>
+        <publication:liveDate>公開日</publication:liveDate>
+        <exo:startEvent>イベント日</exo:startEvent>
+      </option>
+      <DisplaySettingBlock>表示設定</DisplaySettingBlock>
+      <Header>ヘッダ</Header>
+      <AutomaticDetection>自動検知</AutomaticDetection>
+      <FormViewTemplate>ビューアテンプレート</FormViewTemplate>
+      <PaginatorTemplate>ページングテンプレート</PaginatorTemplate>
+      <UICategoryNavigationTreeNameFormSelectBox>分類ツリー</UICategoryNavigationTreeNameFormSelectBox>
+      <ItemsPerPage>ページ毎アイテム数</ItemsPerPage>
+      <ViewerTitle>タイトル表示</ViewerTitle>
+      <ViewerHeader>ヘッダの表示</ViewerHeader>
+      <ViewerButtonRefresh>リフレッシュボタンの表示</ViewerButtonRefresh>
+      <ViewerThumbnailsView>イラストレーションの表示</ViewerThumbnailsView>
+      <ViewerDateCreated>作成日の表示</ViewerDateCreated>
+      <ShowReadMore>もっと読むの表示</ShowReadMore>
+      <ViewerSummary>サマリーの表示</ViewerSummary>
+      <ShowRSSLink>RSS リンクの表示</ShowRSSLink>
+      <ShowLink>リンクの表示</ShowLink>
+      <LinkFormatBlock>リンクフォーマット</LinkFormatBlock>
+      <UIParameterizedTagetPageInputSetAction>ターゲットページ</UIParameterizedTagetPageInputSetAction>
+      <content-not-found>コンテンツがありません</content-not-found>
+    </label>
+    <action>
+      <Save>保存</Save>
+      <Cancel>キャンセル</Cancel>
+    </action>
+  </UIPCLVConfig>
+
+  <OrderTypes>
+    <label>
+      <OrderDesc>降順</OrderDesc>
+      <OrderAsc>昇順</OrderAsc>
+    </label>
+  </OrderTypes>
+
+  <UIParameterizedTagetPageInputSetAction>
+    <title>
+      <SelectTargetPage>ターゲットページの選択</SelectTargetPage>
+    </title>
+  </UIParameterizedTagetPageInputSetAction>
+</bundle>

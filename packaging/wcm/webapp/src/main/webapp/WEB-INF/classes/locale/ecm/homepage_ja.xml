@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <Homepage>
+    <ecm>
+      <label>
+        <slogan>"コラボレーティブかつ先進的な機能で</slogan>
+        <productIntro>活きたドキュメントに！"</productIntro>
+        <FE>
+			<name>ファイルエクスプローラ</name>
+			<bullet1>スマートで拡張可能なユーザインターフェース</bullet1>
+			<bullet2>右クリック、ドラッグ＆ドロップ</bullet2>
+			<bullet3>分類ツリー</bullet3>
+			<bullet4>シンボリックリンク</bullet4>
+			<bullet5>アクション、監査、タグ、その他様々な機能！</bullet5>
+		</FE>
+		<CB>
+			<name>コンテンツブラウザ</name>
+			<bullet1>ドキュメントを簡単に検索、表示</bullet1>
+			<bullet2>タグマップ</bullet2>
+			<bullet3>コメント、投票</bullet3>
+			<bullet4>クイックサーチ</bullet4>
+			<bullet5>カスタマイズ可能なビュー</bullet5>
+		</CB>
+		<ECMA>
+			<name>ECM管理</name>
+			<bullet1>拡張可能なユーザインターフェース</bullet1>
+			<bullet2>分類の管理</bullet2>
+			<bullet3>ビューの管理</bullet3>
+			<bullet4>フォームの管理</bullet4>
+			<bullet5>スクリプトの管理、その他様々な機能！</bullet5>
+		</ECMA>
+      </label>
+    </ecm>
+  </Homepage>
+</bundle>

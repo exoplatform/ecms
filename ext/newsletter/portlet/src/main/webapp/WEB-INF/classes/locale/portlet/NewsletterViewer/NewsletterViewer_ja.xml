@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UINewsletterViewerForm>
+    <msg>
+      <updateSuccess>購読が更新されました。</updateSuccess>
+      <subcribed>選択したニュースレターを購読しています。</subcribed>
+      <email-not-empty>メールは空にできません</email-not-empty>
+      <checkSubscriptionToProcess>送信前にひとつ以上の購読をチェックしてください！</checkSubscriptionToProcess>
+      <alreadyExistedEmail>このメールは既に存在しています。別のメールを入力してください</alreadyExistedEmail>
+      <canNotSubcribed>購読できません。もう一度試してください。</canNotSubcribed>
+      <get-checked>チェックされた購読を取得する際にエラー</get-checked>
+    </msg>
+    <action>
+      <Subcribe>購読</Subcribe>
+      <ForgetEmail>このメールを忘れる</ForgetEmail>
+      <ChangeSubcriptions>購読の変更</ChangeSubcriptions>
+    </action>
+    <title>
+      <userEmail>あなたのメール</userEmail>
+      <subscription>購読</subscription>
+      <yourStatus>購読のためにチェック</yourStatus>
+    </title>
+    <Email>
+      <ConfirmUser>
+        <Subject>ニュースレター確認リクエスト</Subject>
+        <Content>購読の確認のため #ここ# をクリックしてください。</Content>
+      </ConfirmUser>
+    </Email>
+  </UINewsletterViewerForm>
+</bundle>

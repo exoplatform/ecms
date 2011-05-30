@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <!--
+  #####################################################################
+  # org.exoplatform.ecm.webui.tree.selectmany.UICategoriesSelectPanel #
+  #####################################################################
+  -->
+  <UITreeList>
+    <header>
+      <name>名前</name>
+      <action>追加</action>
+    </header>
+    <action />
+    <info>
+      <child-not-found>子要素が見つかりません！</child-not-found>
+    </info>
+  </UITreeList>
+  <!--
+  ######################################################################
+  # org.exoplatform.ecm.webui.tree.selectmany.UISelectedCategoriesGrid #
+  ######################################################################
+  -->
+  <UISelectedCategoriesGrid>
+    <header>
+      <categoryName>カテゴリ名</categoryName>
+      <categoryPath>カテゴリパス</categoryPath>
+      <action>アクション</action>
+    </header>
+    <action>
+      <SaveCategories>保存</SaveCategories>
+      <Cancel>キャンセル</Cancel>
+    </action>
+    <msg>
+      <cannot-save>カテゴリは保存されていません。</cannot-save>
+      <have-saved>カテゴリが保存されました。</have-saved>
+      <non-categories>カテゴリが間違っています。正しいカテゴリを選んでください。</non-categories>
+      <confirm-delete>カテゴリを削除しますか</confirm-delete>
+    </msg>
+  </UISelectedCategoriesGrid>
+  <!--
+  ######################################################################
+  #	 org.exoplatform.ecm.webui.selector.UIPermissionSelector           #
+  ######################################################################
+  -->
+  <SelectUserOrGroup>
+    <title>
+      <UIPermissionUser>ユーザの選択</UIPermissionUser>
+      <UIPermissionMembership>メンバシップの選択</UIPermissionMembership>
+    </title>
+  </SelectUserOrGroup>
+  <UIPermissionUser>
+    <label>
+      <selectUser>ユーザの選択</selectUser>
+      <selectGroup>グループの閲覧と選択</selectGroup>
+    </label>
+  </UIPermissionUser>
+  <UIPermissionMembership>
+    <label>
+      <selectUser>メンバシップの選択</selectUser>
+      <selectGroup>グループの閲覧と選択</selectGroup>
+    </label>
+  </UIPermissionMembership>
+</bundle>

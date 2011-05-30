@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Copyright (C) 2009 eXo Platform SAS.
+    
+    This is free software; you can redistribute it and/or modify it
+    under the terms of the GNU Lesser General Public License as
+    published by the Free Software Foundation; either version 2.1 of
+    the License, or (at your option) any later version.
+    
+    This software is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+    Lesser General Public License for more details.
+    
+    You should have received a copy of the GNU Lesser General Public
+    License along with this software; if not, write to the Free
+    Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
+    02110-1301 USA, or see the FSF site: http://www.fsf.org.
+
+-->
+
+<bundle>
+  <WebContent>
+    <dialog>
+      <label>
+        <MainContent>メインコンテンツ</MainContent>
+        <cssFile>default.css</cssFile>
+        <jsFile>default.js</jsFile>
+        <Advanced>詳細</Advanced>
+        <Summary>サマリー</Summary>
+        <name>名前</name>
+        <title>タイトル</title>
+        <ContentCSS>CSS データ</ContentCSS>
+        <hintCSS>このパネルで、Webコンテンツのメインスタイルシートを指定できます。このスタイルはサイトレベル、共有レベルのスタイルを上書きします。</hintCSS>
+        <ContentJS>JS データ</ContentJS>
+        <hintJS>このパネルで、Webコンテンツがレンダリングされる前に実行される Java Script を指定できます。</hintJS>
+        <WebContentHtml>メインコンテンツ</WebContentHtml>
+        <Illustration>イラストレーション</Illustration>
+        <hintIllustration>このパネルで、Webコンテンツがリストに表示される際に使用される画像を指定できます。また、この画像に付記される要約テキストも指定できます。</hintIllustration>
+        <confirm-delete>削除しますか？</confirm-delete>
+        <illustrationImage>イラストレーション画像</illustrationImage>
+        <imageMimeType>画像タイプ</imageMimeType>
+        <image>画像のアップロード</image>
+        <imageWidth>画像幅</imageWidth>
+        <imageHeight>画像高さ</imageHeight>
+        <Synchronize>CSS、HTMLと同期</Synchronize>
+      </label>
+    </dialog>
+  </WebContent>
+
+  <CSSFile>
+    <dialog>
+      <label>
+        <name>名前</name>
+        <active>アクティブ</active>
+        <priority>優先度</priority>
+        <content>CSS データ</content>
+      </label>
+    </dialog>
+  </CSSFile>
+
+  <JSFile>
+    <dialog>
+      <label>
+        <name>名前</name>
+        <active>アクティブ</active>
+        <priority>優先度</priority>
+        <content>JS データ</content>
+      </label>
+    </dialog>
+  </JSFile>
+
+  <WebLink>
+    <dialog>
+      <label>
+        <name>名前</name>
+        <url>URL</url>
+        <description>説明</description>
+      </label>
+    </dialog>
+  </WebLink>
+
+  <SiteMetadata>
+    <dialog>
+      <label>
+        <title>サイトタイトル</title>
+        <description>サイト説明</description>
+        <keywords>サイトキーワード</keywords>
+        <robots>サーチエンジンの動作</robots>
+      </label>
+    </dialog>
+  </SiteMetadata>
+</bundle>
