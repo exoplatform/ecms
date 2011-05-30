@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UICNContainer>
+    <title>
+      <QuickEdit>クイック編集</QuickEdit>
+    </title>
+  </UICNContainer>
+
+  <UICNConfigPopupWindow>
+    <title>
+      <UICategoryNavigationConfig>カテゴリリスト設定</UICategoryNavigationConfig>
+    </title>
+  </UICNConfigPopupWindow>
+
+  <UICategoryNavigationTargetPathFormInputSet>
+    <title>
+      <SelectTargetPath></SelectTargetPath>
+    </title>
+  </UICategoryNavigationTargetPathFormInputSet>
+
+  <UICategoryNavigationConfig>
+    <label>
+      <UICategoryNavigationRepositoryFormSelectBox>リポジトリ</UICategoryNavigationRepositoryFormSelectBox>
+      <UICategoryNavigationTreeNameSelectBox>分類ツリー</UICategoryNavigationTreeNameSelectBox>
+      <UICategoryNavigationTreeTitleFormStringInput>タイトル</UICategoryNavigationTreeTitleFormStringInput>
+  
+      <UICategoryNavigationTreeNameFormSelectBox>ツリー名</UICategoryNavigationTreeNameFormSelectBox>
+      <UICategoryNavigationTemplateFormSelectBox>ツリービューアテンプレート</UICategoryNavigationTemplateFormSelectBox>
+      
+      <UICategoryNavigationTargetPathFormInputSet>ページで見る</UICategoryNavigationTargetPathFormInputSet>      
+      <TreeSelectionBlock>ツリー選択</TreeSelectionBlock>
+      <DisplaySettingBlock>表示設定</DisplaySettingBlock>
+      <AdvancedBlock>詳細</AdvancedBlock>
+  
+	  <UICategoryNavigationTreePathFormInputSet>ツリーパス</UICategoryNavigationTreePathFormInputSet>
+	  <UICategoryNavigationTreePathFormStringInput>ツリーパス</UICategoryNavigationTreePathFormStringInput>
+	  <UICategoryNavigationHeaderFormStringInput>ヘッダ</UICategoryNavigationHeaderFormStringInput>
+	  <UICategoryNavigationAutomaticDetectionCheckBoxInput>オート</UICategoryNavigationAutomaticDetectionCheckBoxInput>
+	  <UICategoryNavigationDynamicNavigationLabel>ダイナミックナビゲーション</UICategoryNavigationDynamicNavigationLabel>
+	  <UICategoryNavigationWithClvFormStringInput>with</UICategoryNavigationWithClvFormStringInput>
+	  <UICategoryNavigationTreepathPopupWindow>ツリーパス</UICategoryNavigationTreepathPopupWindow>    
+      
+    </label>
+    <msg>
+      <not-support-encoding>エンコーディングはサポートされません。</not-support-encoding>
+      <render>プロセスのレンダ時にエラー</render>
+      <saving-success>このポートレットが更新されました。</saving-success>
+    </msg>
+    <action>
+      <Save>保存</Save>
+    </action>
+  </UICategoryNavigationConfig>
+  <UICategoryNavigationTreeBase>
+    <msg>
+      <not-existed-category>このカテゴリは存在しません</not-existed-category>
+    </msg>
+  </UICategoryNavigationTreeBase>
+</bundle>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UIFormGeneratorTabPane>
+    <label>
+      <UIFormGeneratorGeneralTab>一般</UIFormGeneratorGeneralTab>
+      <FormGeneratorName>名前</FormGeneratorName>
+      <UIFormGeneratorNodetypeFormSelectBox>ベースノードタイプ</UIFormGeneratorNodetypeFormSelectBox>
+      <UIFormGeneratorJsonObjectStringInput></UIFormGeneratorJsonObjectStringInput>
+      <UIFormGeneratorDescriptionFormWYSIWYGInput>説明</UIFormGeneratorDescriptionFormWYSIWYGInput>
+      <UIFormGeneratorIconFormUploadInput>アイコン</UIFormGeneratorIconFormUploadInput>
+      <UIFormGeneratorDnDTab>フォームビルダ</UIFormGeneratorDnDTab>
+      <UIFormGeneratorOptionsTab>オプション</UIFormGeneratorOptionsTab>
+      <UIFormGeneratorVoteFormCheckboxInput>投票の許可</UIFormGeneratorVoteFormCheckboxInput>
+      <UIFormGeneratorCommentFormCheckboxInput>コメントの許可</UIFormGeneratorCommentFormCheckboxInput>
+    </label>
+    <action>
+      <Save>保存</Save>
+      <Reset>リセット</Reset>
+    </action>
+    <msg>
+      <register-failed>ノードタイプの登録に失敗。既に存在する、またはスーパータイプが不正です。</register-failed>
+      <AddNewsSuccessful>ノードタイプ {0} のテンプレートが生成されました。</AddNewsSuccessful>
+      <duplicate-name>フィールドラベルの名前が重複しています。別の名前を入力してください。</duplicate-name>
+      <select-value-empty>セレクトボックスのデフォルト値のいくつかのフィールドは空にできません。値を入力してください。</select-value-empty>
+    </msg>
+  </UIFormGeneratorTabPane>
+  <FormGeneratorDialog>
+    <label>
+      <Download>ドキュメントをダウンロードする</Download>
+    </label>
+  </FormGeneratorDialog>
+  <ECMNameValidator>
+    <msg>
+      <Invalid-char>フィールド '{0}' に不正な文字があります。他の値を入力してください。</Invalid-char>
+    </msg>
+  </ECMNameValidator>
+</bundle>

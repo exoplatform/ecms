@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UIFCCForm>
+    <msg>
+      <name-not-allowed>この名前は許可されません。</name-not-allowed>
+      <in-versioning>ノードを追加する前に現在のノードをチェックアウトする必要があります。</in-versioning>
+      <cannot-save>アクション中に制約が破られました。</cannot-save>
+      <saved-successfully>{0}</saved-successfully>
+      <not-support>'{0}' のテンプレートがロードできません。</not-support>
+      <not-add-folder>nt:file のみがこのフォルダに追加できます。</not-add-folder>
+      <access-denied>アクセスが拒否されました！ '{0}' への権限がありません。</access-denied>
+      <path-not-found>パス '{0}' は削除されたか、不正なパスです。</path-not-found>
+      <node-locked>ノード '{0}' はロックされています。ドキュメントを作成する前にアンロックしてください。</node-locked>
+      <node-isExist>このノードは既に '{0}' に存在しています。同じ名前の兄弟要素は許可されません</node-isExist>
+      <get-dialog-path>ダイアログパスを得る際にエラー</get-dialog-path>
+      <new-jcr-template>新しい newJCRTemplateResourceResolver を作成する際にエラー</new-jcr-template>
+    </msg>
+    <action>
+      <Save>保存</Save>
+      <Cancel>キャンセル</Cancel>
+    </action>
+  </UIFCCForm>
+
+  <UIFCCConfig>
+    <label>
+      <select-repository>リポジトリの選択</select-repository>
+      <UIFCCSaveLocationField>場所の選択</UIFCCSaveLocationField>
+      <UIFCCRepositoryFormSelectBox>リポジトリの選択</UIFCCRepositoryFormSelectBox>
+      <UIFCCWorkspaceFormSelectBox>ワークスペースの選択</UIFCCWorkspaceFormSelectBox>
+      <UIFCCTemplateField>テンプレートオプション</UIFCCTemplateField>
+      <UIFCCLocationFormInputAction>保存先</UIFCCLocationFormInputAction>
+      <UIFCCLocationFormStringInput></UIFCCLocationFormStringInput>
+      <UIFCCTemplateFormSelectBox>テンプレートの選択</UIFCCTemplateFormSelectBox>
+      <UIFCCSaveFormStringInput>カスタム保存ボタン</UIFCCSaveFormStringInput>
+      <UIFCCMessageFormTextareaInput>カスタム保存メッセージ</UIFCCMessageFormTextareaInput>
+      <UIFCCRedirectFormCheckboxInput>リダイレクト</UIFCCRedirectFormCheckboxInput>
+      <UIFCCRedirectPathFormStringInput>リダイレクトパス</UIFCCRedirectPathFormStringInput>
+      <UIFCCActionField>アクション</UIFCCActionField>
+      <UIFCCActionList></UIFCCActionList>
+    </label>
+    <msg>
+      <save-successfully>ポートレット設定に保存しました</save-successfully>
+      <item-not-found>パスが不正です！</item-not-found>
+      <fileType-empty>この設定を保存する前にファイルタイプを選択する必要があります。</fileType-empty>
+      <ws-empty>ワークスペースを選択してください。</ws-empty>
+      <action-empty>アクションと共にフォルダを選択してください。</action-empty>
+      <message-empty>リダイレクトオプションを選択しなかった場合、またはパスが空の場合、メッセージは空にできません。</message-empty>
+      <get-template>テンプレートを取得する際にエラー</get-template>
+      <set-template-option>テンプレートオプションを設定する際にエラー</set-template-option>
+      <do-select>選択の際にエラー</do-select>
+      </msg>
+    <action>
+      <Save>保存</Save>
+    </action>
+  </UIFCCConfig>
+
+  <UIFCCLocationFormInputAction>
+    <title>
+      <SelectPath>パスの選択</SelectPath>
+    </title>
+  </UIFCCLocationFormInputAction>
+
+  <UIFCCActionList>
+    <header>
+      <name>名前</name>
+      <description>説明</description>
+      <instanceOf>インスタンス</instanceOf>
+      <action>アクション</action>
+    </header>
+    <action>
+      <Add>追加</Add>
+    </action>
+    <msg>
+      <empty>アクションがありません</empty>
+      <remove-popup-first>このノードを削除する前に編集ポップアップを閉じてください。</remove-popup-first>
+      <confirm-delete-action>本当にこのアクションを削除しますか？</confirm-delete-action>
+      <template-empty>'{0}' のテンプレートが null または空です。</template-empty>
+      <template-null>テンプレートが null またはこのテンプレートへのアクセス権がありません。</template-null>
+      <access-denied>アクセスが拒否されました！このアクションを実行するための権限がありません。</access-denied>
+    </msg>
+  </UIFCCActionList>
+
+  <UIFCCSelectorPopupWindow>
+    <title>
+      <UIOneNodePathSelector>場所の選択</UIOneNodePathSelector>
+    </title>
+  </UIFCCSelectorPopupWindow>
+
+  <UIWorkspaceList>
+    <label>
+      <workspaceName>ワークスペース</workspaceName>
+      <rootNodePath>ルートパス</rootNodePath>
+      <rootNodeInfo></rootNodeInfo>
+    </label>
+  </UIWorkspaceList>
+
+  <rootNodeInfo>
+    <title>
+      <AddRootNode>ルートノードの追加</AddRootNode>
+    </title>
+  </rootNodeInfo>
+
+  <UITreeList>
+    <info>
+      <child-not-found>このノードには子ノードがありません。</child-not-found>
+    </info>
+    <header>
+      <name>名前</name>
+      <action>アクション</action>
+    </header>
+  </UITreeList>
+
+  <UIFCCActionPopupWindow>
+    <title>
+      <UIFCCActionContainer>アクションフォームの追加</UIFCCActionContainer>
+    </title>
+  </UIFCCActionPopupWindow>
+
+  <UIFCCActionForm>
+    <title>アクションの追加/編集</title>
+    <action>
+      <Save>保存</Save>
+      <Close>閉じる</Close>
+    </action>
+    <msg>
+      <repository-exception>アクションを保存できません。名前の最後の要素にインデックスを付けないでください。</repository-exception>
+      <numberformat-exception>アクションを保存できません。名前には '[' や ']' を含まないでください。</numberformat-exception>
+      <existed-action>アクション名 '{0}' は既に存在します。別の名前を選んでください！</existed-action>
+      <unable-add-action>アクションを追加することができません。</unable-add-action>
+      <unable-add>アクションを追加することができません！ ルートノードである、もしくは権限が不足しています。</unable-add>
+      <not-support>ダイアログ '{0}' はサポートされません。</not-support>
+      <no-permission-add>アクセスが拒否されました！ アクションを追加する権限がありません。</no-permission-add>
+      <access-denied>アクセスが拒否されました！ このテンプレートにアクセスする権限がありません。</access-denied>
+    </msg>
+    <validator>
+      <validator>バリデータ</validator>
+      <destPath>パス</destPath>
+    </validator>
+  </UIFCCActionForm>
+
+  <UIFCCActionTypeForm>
+    <label>
+      <actionType>タイプのアクションの作成</actionType>
+    </label>
+    <msg>
+      <not-support>'{0}' のテンプレートがロードできません。</not-support>
+      <do-not-permission>'{0}' のテンプレートをロードする権限がありません。</do-not-permission>
+    </msg>
+  </UIFCCActionTypeForm>
+
+  <PopupComponent>
+    <title>
+      <UIOneNodePathSelector>場所の選択</UIOneNodePathSelector>
+      <UIPermissionSelector>パーミッションブラウザ</UIPermissionSelector>
+      <UICategoriesSelector>カテゴリの追加</UICategoriesSelector>
+    </title>
+  </PopupComponent>
+
+  <DateTimeValidator>
+    <msg>
+      <Invalid-input>フィールド '{0}' の値 '{1}' は不正です</Invalid-input>
+    </msg>
+  </DateTimeValidator>
+
+  <UITabPane>
+    <title>
+      <UICategoriesSelectPanel>カテゴリの選択</UICategoriesSelectPanel>
+      <UISelectedCategoriesGrid>参照されるカテゴリ</UISelectedCategoriesGrid>
+    </title>
+  </UITabPane>
+
+  <PopupComponent>
+    <title>
+      <UICategoriesSelector>カテゴリの追加</UICategoriesSelector>
+    </title>
+  </PopupComponent>
+
+  <UICategoriesSelector>
+    <action>
+      <close>閉じる</close>
+    </action>
+  </UICategoriesSelector>
+
+  <PopupComponent>
+    <title>
+      <UIOneTaxonomySelector>カテゴリの追加</UIOneTaxonomySelector>
+    </title>
+  </PopupComponent>
+
+  <UITreeTaxonomyList>
+    <label>
+      <taxonomyTree>分類ツリー</taxonomyTree>
+    </label>
+  </UITreeTaxonomyList>
+
+  <UIFCCTaxonomyPopupWindow>
+    <title>
+      <UIOneTaxonomySelector>分類セレクタ</UIOneTaxonomySelector>
+    </title>
+  </UIFCCTaxonomyPopupWindow>
+</bundle>
