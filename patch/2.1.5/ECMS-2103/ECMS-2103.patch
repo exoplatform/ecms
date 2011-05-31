@@ -1,0 +1,110 @@
+Index: apps/portlet-explorer/src/main/webapp/WEB-INF/classes/locale/portlet/explorer/JCRExplorerPortlet_fr.xml
+===================================================================
+--- apps/portlet-explorer/src/main/webapp/WEB-INF/classes/locale/portlet/explorer/JCRExplorerPortlet_fr.xml	(revision 69344)
++++ apps/portlet-explorer/src/main/webapp/WEB-INF/classes/locale/portlet/explorer/JCRExplorerPortlet_fr.xml	(working copy)
+@@ -565,7 +565,7 @@
+       <MoveToTrash>Déplacer dans la poubelle</MoveToTrash>
+       <RestoreFromTrash>Restaurer de la poubelle</RestoreFromTrash>
+       <EmptyTrash>Vider la poubelle</EmptyTrash>      
+-						<WebDavView>Download And Allow Edition</WebDavView>
++						<WebDavView>Télécharger pour éditer</WebDavView>
+     </event>
+   </ECMContextMenu>
+   <!--
+@@ -2833,9 +2833,9 @@
+ 
+   <UIAllItems>
+     <label>
+-      <OwnedByMe>A moi</OwnedByMe>
++      <OwnedByMe>Créés par moi</OwnedByMe>
+       <Favourites>Favoris</Favourites>
+-      <Hidden>Caché</Hidden>
++      <Hidden>Cachés</Hidden>
+       <Trash>Poubelle</Trash>
+       <Configuration>Configurer les préférences</Configuration>      
+     </label>
+@@ -2887,18 +2887,22 @@
+   </UISavedSearches>  
+   <DocumentType>
+     <label>
+-    	 <Images>Images</Images>
++    	 <Images>Image</Images>
+     	 <Video>Vidéo</Video>
+     	 <Music>Musique</Music>
+-    	 <Documents>Documents</Documents>
+-    	 <Contents>Contenus</Contents>
++    	 <Documents>Document</Documents>
++    	 <Contents>Contenu</Contents>
++
+     </label>
+   </DocumentType>
+   
+   <UIDocumentFilterForm>
+   	<label>
+-    	<Images>Images</Images>
++    	<Images>Image</Images>
+     	<Video>Vidéo</Video>
++    	<Music>Musique</Music>
++    	<Documents>Document</Documents>
++    	<Contents>Contenu</Contents>
+     </label>
+     <title>Configurer les filtres</title>
+     <action>
+@@ -2937,12 +2941,26 @@
+       <UIDocumentFilterForm>Filtrer les types de documents</UIDocumentFilterForm>
+     </title>
+   </UIPopupWindow>
++  
++  <UIAllItemsPreferenceForm>
++    <label>
++      <showOwnedByUser>Créés par moi</showOwnedByUser>
++      <showFavourites>Favoris</showFavourites>
++      <showHiddens>Cachés</showHiddens>
++      <showTrash>Poubelle</showTrash>
++    </label>
++    <title>Configurer les préférences</title>
++    <action>
++      <Save>#{word.save}</Save>
++      <Cancel>#{word.cancel}</Cancel>      
++    </action>
++  </UIAllItemsPreferenceForm>
+ 
+   <UIAllItemsPreferenceForm>
+     <label>
+       <OwnedByMe>A moi</OwnedByMe>
+       <Favourites>Favoris</Favourites>
+-      <Hidden>Caché</Hidden>
++      <Hidden>Cachés</Hidden>
+       <Trash>Poubelle</Trash>
+     </label>
+     <title>Configurer les filtres</title>
+Index: apps/portlet-explorer/src/main/webapp/WEB-INF/classes/locale/portlet/explorer/JCRExplorerPortlet_en.xml
+===================================================================
+--- apps/portlet-explorer/src/main/webapp/WEB-INF/classes/locale/portlet/explorer/JCRExplorerPortlet_en.xml	(revision 69344)
++++ apps/portlet-explorer/src/main/webapp/WEB-INF/classes/locale/portlet/explorer/JCRExplorerPortlet_en.xml	(working copy)
+@@ -2890,18 +2890,21 @@
+   </UISavedSearches>
+   <DocumentType>
+     <label>
+-       <Images>Images</Images>
++       <Images>Image</Images>
+        <Video>Video</Video>
+        <Music>Music</Music>
+-       <Documents>Documents</Documents>
+-       <Contents>Contents</Contents>
++       <Documents>Document</Documents>
++       <Contents>Content</Contents>
+     </label>
+   </DocumentType>
+   
+   <UIDocumentFilterForm>
+     <label>
+-      <Images>Images</Images>
++      <Images>Image</Images>
+       <Video>Video</Video>
++      <Music>Music</Music>
++      <Documents>Document</Documents>
++      <Contents>Content</Contents>      
+     </label>
+     <title>Set up filter preferences</title>
+     <action>

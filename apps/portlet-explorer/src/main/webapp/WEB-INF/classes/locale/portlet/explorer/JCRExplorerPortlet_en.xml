@@ -2890,18 +2890,21 @@
   </UISavedSearches>
   <DocumentType>
     <label>
-       <Images>Images</Images>
+       <Images>Image</Images>
        <Video>Video</Video>
        <Music>Music</Music>
-       <Documents>Documents</Documents>
-       <Contents>Contents</Contents>
+       <Documents>Document</Documents>
+       <Contents>Content</Contents>
     </label>
   </DocumentType>
   
   <UIDocumentFilterForm>
     <label>
-      <Images>Images</Images>
+      <Images>Image</Images>
       <Video>Video</Video>
+      <Music>Music</Music>
+      <Documents>Document</Documents>
+      <Contents>Content</Contents>      
     </label>
     <title>Set up filter preferences</title>
     <action>
