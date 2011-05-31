@@ -574,16 +574,14 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
             if ((clickedField != null) && (clickedField.equals(FIELD_TAXONOMY))){
               UIJCRExplorer uiExplorer = uiDocumentForm.getAncestorOfType(UIJCRExplorer.class);
               String repository = uiExplorer.getRepositoryName();
-              DMSConfiguration dmsConfig = uiDocumentForm.getApplicationComponent(DMSConfiguration.class);
-              DMSRepositoryConfiguration dmsRepoConfig = dmsConfig.getConfig(repository);
-              String workspaceName = dmsRepoConfig.getSystemWorkspace();            
               if(uiSet.getValue().size() == 0) uiSet.setValue(new ArrayList<Value>());            
               UIOneTaxonomySelector uiOneTaxonomySelector = 
                 uiFormController.createUIComponent(UIOneTaxonomySelector.class, null, null);
-              uiOneTaxonomySelector.setIsDisable(workspaceName, false);
               TaxonomyService taxonomyService = uiDocumentForm.getApplicationComponent(TaxonomyService.class);
               List<Node> lstTaxonomyTree = taxonomyService.getAllTaxonomyTrees(repository);
               if (lstTaxonomyTree.size() == 0) throw new AccessDeniedException();
+              String workspaceName = lstTaxonomyTree.get(0).getSession().getWorkspace().getName();
+              uiOneTaxonomySelector.setIsDisable(workspaceName, false);
               uiOneTaxonomySelector.setRootNodeLocation(repository, workspaceName, lstTaxonomyTree.get(0).getPath());
               uiOneTaxonomySelector.setExceptedNodeTypesInPathPanel(new String[] {Utils.EXO_SYMLINK});
               uiOneTaxonomySelector.init(uiExplorer.getSystemProvider());
