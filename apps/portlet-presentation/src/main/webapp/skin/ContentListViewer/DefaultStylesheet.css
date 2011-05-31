@@ -250,7 +250,7 @@
 
 .UICLVPortlet #UIPageNodeSelector {
   float: left;
-  width: 49%;
+  width: 48%;
 }
 
 .UICLVPortlet .MiddleRightContainerOptions {
@@ -263,7 +263,7 @@
 
 .UICLVPortlet #UIPageSelectorPanel {
   float: left;
-  width: 49%;
+  width: 48%;
   padding-left:10px;
 }
 

@@ -80,7 +80,7 @@
 
 .UIPCVPortlet #UIPageNodeSelector {
   float: left;
-  width: 49%;
+  width: 48%;
 }
 
 .UIPCVPortlet .MiddleRightContainerOptions {
@@ -93,7 +93,7 @@
 
 .UIPCVPortlet #UIPageSelectorPanel {
   float: left;
-  width: 49%;
+  width: 48%;
   padding-left:10px;
 }
 

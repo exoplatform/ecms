@@ -515,7 +515,7 @@ width: 95%;
 
 .UISingleContentViewerPortlet #UIPageNodeSelector {
   float: left;
-  width: 49%;
+  width: 48%;
 }
 
 .UISingleContentViewerPortlet .MiddleRightContainerOptions {
@@ -528,7 +528,7 @@ width: 95%;
 
 .UISingleContentViewerPortlet #UIPageSelectorPanel {
   float: left;
-  width: 49%;
+  width: 48%;
   padding-left:10px;
 }
 

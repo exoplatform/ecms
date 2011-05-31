@@ -33,7 +33,7 @@ td {
 
 .UIWCMSearchPortlet #UIPageNodeSelector {
   float: left;
-  width: 49%;
+  width: 48%;
 }
 
 .UIWCMSearchPortlet .MiddleRightContainerOptions {
@@ -46,7 +46,7 @@ td {
 
 .UIWCMSearchPortlet #UIPageSelectorPanel {
   float: left;
-  width: 49%;
+  width: 48%;
   padding-left:10px;
 }
 
