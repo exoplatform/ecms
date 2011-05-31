@@ -218,7 +218,14 @@ public class Utils {
 	public static Node getViewableNodeByComposer(String repository, String workspace, String nodeIdentifier, String version) {
 		try {
 			HashMap<String, String> filters = new HashMap<String, String>();
-		    filters.put(WCMComposer.FILTER_LANGUAGE, Util.getPortalRequestContext().getLocale().getLanguage());
+			
+			String filterLang = Util.getPortalRequestContext().getLocale().getLanguage();
+			String country = Util.getPortalRequestContext().getLocale().getCountry();
+			if (country != null && country.length() > 0) {
+			  filterLang += "_" + country;
+			}
+			
+		  filters.put(WCMComposer.FILTER_LANGUAGE, filterLang);
 			filters.put(WCMComposer.FILTER_MODE, Utils.getCurrentMode());
 			PortletRequestContext portletRequestContext = WebuiRequestContext.getCurrentInstance();
 			PortletMode portletMode = portletRequestContext.getApplicationMode();
