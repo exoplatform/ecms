@@ -37,14 +37,18 @@ public class UpdatePageEventListener extends Listener<DataStorageImpl, Page> {
 
   /** The log. */
   private static Log log = ExoLogger.getLogger(UpdatePageEventListener.class);
-
+  WCMPublicationService publicationService = null;
+  public UpdatePageEventListener(WCMPublicationService publicationService){
+    this.publicationService = publicationService;
+  }
   /* (non-Javadoc)
    * @see org.exoplatform.services.listener.Listener#onEvent(org.exoplatform.services.listener.Event)
    */
   public void onEvent(Event<DataStorageImpl, Page> event) throws Exception {
-    ExoContainer container = ExoContainerContext.getCurrentContainer();
-    WCMPublicationService publicationService =
-      (WCMPublicationService)container.getComponentInstanceOfType(WCMPublicationService.class);
+    if (publicationService ==null) {    
+      ExoContainer container = ExoContainerContext.getCurrentContainer();
+      publicationService = (WCMPublicationService)container.getComponentInstanceOfType(WCMPublicationService.class);
+    }
     try {
       if (ConversationState.getCurrent() == null)
         publicationService.updateLifecyleOnChangePage(event.getData(), null);
