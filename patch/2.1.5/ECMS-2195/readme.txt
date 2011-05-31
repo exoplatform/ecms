@@ -49,7 +49,7 @@ How is the problem fixed?
     * Modified PropertyDefinitions for CONTENT_STREAM_FILE_NAME - READWRITE (was: READONLY)
     * Modified index configuration within JcrCmisRegistry and Jcr2XcmisChangesListener
 
-Patch files: ECMS-2195.patch
+Patch files:ECMS-2195.patch
 
 Tests to perform
 
