@@ -362,16 +362,16 @@ public class UIWorkingArea extends UIContainer {
    */
   public String getTitle(Node node) throws Exception {
 	  String title = null;
-	  if (node.hasNode("jcr:content")) {
+	  if (node.hasProperty("exo:title")) {
+		  title = node.getProperty("exo:title").getValue().getString();
+	  } else if (node.hasNode("jcr:content")) {
 		  Node content = node.getNode("jcr:content");
 		  if (content.hasProperty("dc:title")) {
 		    try {
 		      title = content.getProperty("dc:title").getValues()[0].getString();
 		    } catch(Exception ex) {}
 		  }
-	  } else if (node.hasProperty("exo:title")) {
-		  title = node.getProperty("exo:title").getValue().getString();
-	  }
+	  } 
 	  if ((title==null) || ((title!=null) && (title.trim().length()==0))) {
   		title = node.getName();
 	  }
