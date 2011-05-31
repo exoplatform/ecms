@@ -43,8 +43,11 @@ import org.xcmis.spi.model.VersioningState;
 import org.xcmis.spi.model.impl.StringProperty;
 import org.xcmis.spi.utils.MimeType;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -482,6 +485,15 @@ public class StorageTest extends BaseTest
       assertEquals("root", document.getCreatedBy());
       assertEquals("root", document.getLastModifiedBy());
       assertNotNull(document.getCreationDate());
+
+      Calendar c = document.getCreationDate();
+      DateFormat ISO_8601_DATE_TIME = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
+      String creationDate = ISO_8601_DATE_TIME.format(c.getTime());
+      c = Calendar.getInstance();
+      String expectedDate = ISO_8601_DATE_TIME.format(c.getTime());
+      
+      assertEquals(expectedDate, creationDate);
+      
       assertNotNull(document.getLastModificationDate());
       assertEquals(documentNode.getVersionHistory().getUUID(), document.getVersionSeriesId());
       assertNull(document.getVersionSeriesCheckedOutBy());
