@@ -216,7 +216,12 @@ UploadForm.prototype.uploadFileSave = function() {
 		}
 		var iFrameUpload = eXo.core.DOMUtil.findFirstDescendantByClass(popupContainer, "iframe", "iFrameUpload");
 		var formUpload = iFrameUpload.contentWindow.document.getElementsByTagName("form")[0];
-		if ((!nodeName && eXo.ecm.UploadForm.isInvalidName(formUpload.file.value)) || eXo.ecm.UploadForm.isInvalidName(nodeName)) {
+		var filename = formUpload.file.value;
+    try {
+    	var m = filename.match(/(.*)[\/\\]([^\/\\]+\.\w+)$/);        
+    	if(m[1]&&m[2]) filename = m[2];  
+		} catch(e) {}         
+		if ((!nodeName && eXo.ecm.UploadForm.isInvalidName(filename)) || eXo.ecm.UploadForm.isInvalidName(nodeName)) {
 			alert('Invalid file name!');
 			return;
 		}
@@ -238,22 +243,27 @@ UploadForm.prototype.uploadFileSave = function() {
 		var connector = strConnector + eXo.ecm.ECS.cmdEcmDriver + eXo.ecm.ECS.controlUpload + "?"+ strParam + "&language="+eXo.ecm.ECS.userLanguage;
 //		eXp.sendRequest(connector);
 		var mXML = eXo.ecm.WCMUtils.request(connector);
-		var message = mXML.getElementsByTagName("Message")[0];
-		if(message) {
-			var intNumber = message.getAttribute("number");
-			var strText  	= message.getAttribute("text");
-			if(parseInt(intNumber) - 200) {
-				alert(strText);
-				eXo.ecm.UploadForm.updateFiles(eXo.ecm.ECS.currentNode);
-			} else {
-				alert(strText);
-				eXo.ecm.ECS.currentNode =	eXo.ecm.ECS.temporaryNode;
-				eXo.ecm.UploadForm.updateFiles(eXo.ecm.ECS.currentNode);
+    try {      
+			var message = mXML.getElementsByTagName("Message")[0];
+			if(message) {
+				var intNumber = message.getAttribute("number");
+				var strText  	= message.getAttribute("text");
+				if(parseInt(intNumber) - 200) {
+					alert(strText);
+					eXo.ecm.UploadForm.updateFiles(eXo.ecm.ECS.currentNode);
+				} else {
+					alert(strText);
+					eXo.ecm.ECS.currentNode =	eXo.ecm.ECS.temporaryNode;
+					eXo.ecm.UploadForm.updateFiles(eXo.ecm.ECS.currentNode);
+				}
+				eXo.ecm.UploadForm.removeMask();
+			} else {        
+		 		eXo.ecm.UploadForm.removeMask();
+			 	eXo.ecm.UploadForm.updateFiles(eXo.ecm.ECS.currentNode.id);
 			}
+		} catch(e) {      
 			eXo.ecm.UploadForm.removeMask();
-		} else {
-	 		eXo.ecm.UploadForm.removeMask();
-		 	eXo.ecm.UploadForm.updateFiles(eXo.ecm.ECS.currentNode.id);
+			eXo.ecm.UploadForm.updateFiles(eXo.ecm.ECS.currentNode.id);
 		}
 };
 
