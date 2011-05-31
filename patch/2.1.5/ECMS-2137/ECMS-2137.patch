@@ -1,0 +1,40 @@
+Index: apps/resources-wcm/src/main/webapp/javascript/eXo/wcm/frontoffice/private/CKEditorUtil.js
+===================================================================
+--- apps/resources-wcm/src/main/webapp/javascript/eXo/wcm/frontoffice/private/CKEditorUtil.js	(revision 68234)
++++ apps/resources-wcm/src/main/webapp/javascript/eXo/wcm/frontoffice/private/CKEditorUtil.js	(working copy)
+@@ -1,15 +1,16 @@
+ function CKEditor() {
+ }
+ 
+-CKEditor.prototype.insertCSS = function(Instance, ContentCSS) {
++CKEditor.prototype.insertCSS = function(Instance, ContentCSS) {  
+ 	if (!Instance) return;
+ 	var eContentCSS = document.getElementById(ContentCSS);
+ 	var sContentCSSId = ContentCSS + "_Inline";
+ 	var count = 1;
+-	eContentCSS.onblur = updateStyle;
++  eContentCSS.onblur = updateStyle;
++	updateStyle;
+ 	
+ 	function updateStyle() {
+-		var sValue = eContentCSS.value;
++		var sValue = eContentCSS.value;    
+ 		if(!sValue)	return;
+ 		var iDoc = CKEDITOR.instances[Instance].document.$;
+ 		var eHead = iDoc.getElementsByTagName("head")[0];
+@@ -19,11 +20,11 @@
+ 		}
+ 		eStyle = iDoc.createElement("style");
+ 		eStyle.setAttribute("type", "text/css");
+-		eStyle.setAttribute("id", sContentCSSId);
+-		if (eXo.core.Browser.isFF()) { //for FF			
++		eStyle.setAttribute("id", sContentCSSId);    
++		if (eXo.core.Browser.isIE6() || eXo.core.Browser.isIE7()) { //for IE6 and IE7		
++			eStyle.styleSheet.cssText = sValue;						
++    } else {
+ 			eStyle.innerHTML = sValue;
+-		} else {
+-			eStyle.styleSheet.cssText = sValue;
+ 		}
+ 		eHead.appendChild(eStyle);
+ 	};
