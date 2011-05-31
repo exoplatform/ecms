@@ -1,0 +1,118 @@
+Index: packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/dms-extension/dms/artifacts/templates/comment/skins/Stylesheet-lt.css
+===================================================================
+--- packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/dms-extension/dms/artifacts/templates/comment/skins/Stylesheet-lt.css	(revision 68323)
++++ packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/dms-extension/dms/artifacts/templates/comment/skins/Stylesheet-lt.css	(working copy)
+@@ -98,6 +98,8 @@
+ .Comments .CommentBox .CommentBoxCenterBG {
+ 	padding: 8px; 
+ 	background: white;
++	max-height: 200px;
++  overflow: auto;
+ }
+ 
+ .Comments .CommentBox .CommentBoxBottomLeft {
+@@ -136,4 +138,4 @@
+ 	padding: 2px;
+ 	height: 16px;
+ 	cursor: pointer;
+-}
+\ No newline at end of file
++}
+Index: packaging/wcm/webapp/src/main/webapp/javascript/eXo/ecm/ECMUtils.js
+===================================================================
+--- packaging/wcm/webapp/src/main/webapp/javascript/eXo/ecm/ECMUtils.js	(revision 68323)
++++ packaging/wcm/webapp/src/main/webapp/javascript/eXo/ecm/ECMUtils.js	(working copy)
+@@ -171,6 +171,7 @@
+ 			elemtClicked.childNodes[0].style.display = 'none' ;
+ 			elemtClicked.childNodes[1].style.display = 'block' ;
+ 			elemt.style.display = 'block' ;
++			eXo.ecm.ECMUtils.setScrollBar();
+ 		} else {			
+ 			elemtClicked.childNodes[0].style.display = 'block' ;
+ 			elemtClicked.childNodes[1].style.display = 'none' ;
+@@ -178,6 +179,31 @@
+ 		}
+ 	};
+ 	
++	ECMUtils.prototype.setScrollBar = function()  {     
++    try	{
++      var elementWorkingArea = document.getElementById('UIWorkingArea');
++      var parent = document.getElementById('TabContainerParent'); 
++      if(parent!=null)	{
++        var elements  = eXo.core.DOMUtil.findDescendantsByClass(parent,"div", "UITabContent"); 
++        if(elements!=null)	{      
++					for(i=0;i<elements.length;i++)
++					{    
++						var obj = elements[i];        
++						if(obj.style.display!="none")	{
++							var height = obj.offsetHeight;   							
++							if(height>430)	{
++							  //obj.style.height="470px";                
++								obj.style.height=elementWorkingArea.offsetHeight-50+"px";
++							  obj.style.overflow="auto";
++							}
++						}
++					}
++				} 
++      }     
++    }
++    catch(err){}
++  } 
++	
+ 	ECMUtils.prototype.showHideContentOnRow = function(elemtClicked) {
+ 		
+ 		var nodeReference = DOM.findAncestorByClass(elemtClicked,  "Text");
+Index: apps/portlet-explorer/src/main/webapp/groovy/webui/component/explorer/UIDocumentTabPane.gtmpl
+===================================================================
+--- apps/portlet-explorer/src/main/webapp/groovy/webui/component/explorer/UIDocumentTabPane.gtmpl	(revision 68323)
++++ apps/portlet-explorer/src/main/webapp/groovy/webui/component/explorer/UIDocumentTabPane.gtmpl	(working copy)
+@@ -1,32 +1,27 @@
+ <script type="text/javascript">  
+   function setScrollBar()
+   {     
+-    try
+-    {
++    try {      
++      var elementWorkingArea = document.getElementById('UIWorkingArea');          
+       var parent = document.getElementById('TabContainerParent'); 
+-      if(parent!=null)
+-      {
++      if(parent!=null) {
+         var elements  = eXo.core.DOMUtil.findDescendantsByClass(parent,"div", "UITabContent"); 
+-        if(elements!=null)
+-        {      
+-	  for(i=0;i<elements.length;i++)
+-	  {    
+-	    var obj = elements[i];        
+-	    if(obj.style.display!="none")
+-	    {
+-	      var height = obj.offsetHeight;           
+-	      if(height>480)
+-	      {
+-	        obj.style.height="470px";
+-	        obj.style.overflow="auto";
+-	      }
+-	  }
+-	}
+-	} 
++        if(elements!=null) {      
++	  			for(i=0;i<elements.length;i++) {    
++	    			var obj = elements[i];        
++	    			if(obj.style.display!="none") {
++	      			var height = obj.offsetHeight;           
++	      			if(height>430) {
++	      				//obj.style.height="470px";
++	      				obj.style.height=elementWorkingArea.offsetHeight-50+"px";
++	        			obj.style.overflow="auto";
++	     	      }
++	  				}
++					}
++				} 
+       }     
+     }
+-    catch(err)
+-    {}
++    catch(err) {}
+   } 
+   window.setTimeout('setScrollBar',1000); 
+ </script>

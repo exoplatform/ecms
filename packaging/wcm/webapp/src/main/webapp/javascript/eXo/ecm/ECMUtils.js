@@ -171,12 +171,38 @@
 			elemtClicked.childNodes[0].style.display = 'none' ;
 			elemtClicked.childNodes[1].style.display = 'block' ;
 			elemt.style.display = 'block' ;
+			eXo.ecm.ECMUtils.setScrollBar();
 		} else {			
 			elemtClicked.childNodes[0].style.display = 'block' ;
 			elemtClicked.childNodes[1].style.display = 'none' ;
 			elemt.style.display = 'none' ;
 		}
 	};
+	
+	ECMUtils.prototype.setScrollBar = function()  {     
+    try	{
+      var elementWorkingArea = document.getElementById('UIWorkingArea');
+      var parent = document.getElementById('TabContainerParent'); 
+      if(parent!=null)	{
+        var elements  = eXo.core.DOMUtil.findDescendantsByClass(parent,"div", "UITabContent"); 
+        if(elements!=null)	{      
+					for(i=0;i<elements.length;i++)
+					{    
+						var obj = elements[i];        
+						if(obj.style.display!="none")	{
+							var height = obj.offsetHeight;   							
+							if(height>430)	{
+							  //obj.style.height="470px";                
+								obj.style.height=elementWorkingArea.offsetHeight-50+"px";
+							  obj.style.overflow="auto";
+							}
+						}
+					}
+				} 
+      }     
+    }
+    catch(err){}
+  } 
 	
 	ECMUtils.prototype.showHideContentOnRow = function(elemtClicked) {
 		
