@@ -1,0 +1,20 @@
+Index: core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/control/UIActionBar.java
+===================================================================
+--- core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/control/UIActionBar.java	(revision 69976)
++++ core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/control/UIActionBar.java	(working copy)
+@@ -333,7 +333,7 @@
+ 	          uiDocumentWorkspace.removeChild(UIDocumentFormController.class);
+ 	        } else    
+ 	        uiExplorer.cancelAction();
+-	        event.getRequestContext().getJavascriptManager().addJavascript("location.href='" + backLink + "';");
++	        event.getRequestContext().getJavascriptManager().addJavascript("ajaxRedirect('" + backLink + "');");
+ 	    }
+ 	  }
+   static public class SavedQueriesActionListener extends EventListener<UIActionBar> {
+@@ -380,4 +380,4 @@
+     }
+   }
+   
+-}
+\ No newline at end of file
++}
