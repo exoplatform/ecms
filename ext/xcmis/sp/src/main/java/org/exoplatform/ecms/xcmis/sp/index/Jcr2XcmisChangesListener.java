@@ -256,7 +256,7 @@ public class Jcr2XcmisChangesListener implements ItemsPersistenceListener
             {
                String linkedUUid = new String(((PropertyData)content).getValues().get(0).getAsByteArray());
                addEntry(linkedUUid, addedEntries, removedNodes);
-               removedNodes.remove(linkedUUid);
+               removedNodes.add(linkedUUid);
             }
          }
       }

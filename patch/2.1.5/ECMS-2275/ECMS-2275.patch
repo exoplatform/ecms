@@ -1,0 +1,63 @@
+Index: ext/xcmis/sp/src/test/java/org/exoplatform/ecms/xcmis/sp/query/MultifilingUnfilingTest.java
+===================================================================
+--- ext/xcmis/sp/src/test/java/org/exoplatform/ecms/xcmis/sp/query/MultifilingUnfilingTest.java	(revision 68553)
++++ ext/xcmis/sp/src/test/java/org/exoplatform/ecms/xcmis/sp/query/MultifilingUnfilingTest.java	(working copy)
+@@ -72,17 +72,32 @@
+          new ObjectData[]{doc1});
+       checkResult(storageA, "SELECT * FROM " + NASA_DOCUMENT + " WHERE IN_TREE('" + folder2.getObjectId() + "')",
+          new ObjectData[]{});
++      checkResult(storageA, "SELECT * FROM " + NASA_DOCUMENT + " WHERE IN_TREE('" + folder3.getObjectId() + "')",
++         new ObjectData[]{});
+ 
+       folder2.addObject(doc1);
+       folder3.addObject(doc1);
+ 
+       assertEquals(3, doc1.getParents().size());
+ 
++      checkResult(storageA, "SELECT * FROM " + NASA_DOCUMENT + " WHERE IN_TREE('" + folder1.getObjectId() + "')",
++         new ObjectData[]{doc1});
++
+       checkResult(storageA, "SELECT * FROM " + NASA_DOCUMENT + " WHERE IN_TREE('" + folder2.getObjectId() + "')",
+          new ObjectData[]{doc1});
+ 
+       checkResult(storageA, "SELECT * FROM " + NASA_DOCUMENT + " WHERE IN_TREE('" + folder3.getObjectId() + "')",
+          new ObjectData[]{doc1});
++
++      checkResult(storageA, "SELECT * FROM " + NASA_DOCUMENT + " WHERE IN_FOLDER('" + folder1.getObjectId() + "')",
++          new ObjectData[]{doc1});
++
++      checkResult(storageA, "SELECT * FROM " + NASA_DOCUMENT + " WHERE IN_FOLDER('" + folder2.getObjectId() + "')",
++          new ObjectData[]{doc1});
++
++      checkResult(storageA, "SELECT * FROM " + NASA_DOCUMENT + " WHERE IN_FOLDER('" + folder3.getObjectId() + "')",
++          new ObjectData[]{doc1});
++
+       storageA.deleteTree(testRoot, true, null, true);
+    }
+ 
+Index: ext/xcmis/sp/src/test/java/org/exoplatform/ecms/xcmis/sp/query/BaseQueryTest.java
+===================================================================
+--- ext/xcmis/sp/src/test/java/org/exoplatform/ecms/xcmis/sp/query/BaseQueryTest.java	(revision 68553)
++++ ext/xcmis/sp/src/test/java/org/exoplatform/ecms/xcmis/sp/query/BaseQueryTest.java	(working copy)
+@@ -185,6 +185,8 @@
+ 
+    protected void checkResult(StorageImpl storage, ItemsIterator<Result> result, ObjectData[] nodes)
+    {
++      assertEquals(nodes.length, result.size());
++
+       // collect rows
+       Set<String> expectedPaths = new HashSet<String>();
+       if (LOG.isDebugEnabled())
+Index: ext/xcmis/sp/src/main/java/org/exoplatform/ecms/xcmis/sp/index/Jcr2XcmisChangesListener.java
+===================================================================
+--- ext/xcmis/sp/src/main/java/org/exoplatform/ecms/xcmis/sp/index/Jcr2XcmisChangesListener.java	(revision 68553)
++++ ext/xcmis/sp/src/main/java/org/exoplatform/ecms/xcmis/sp/index/Jcr2XcmisChangesListener.java	(working copy)
+@@ -256,7 +256,7 @@
+             {
+                String linkedUUid = new String(((PropertyData)content).getValues().get(0).getAsByteArray());
+                addEntry(linkedUUid, addedEntries, removedNodes);
+-               removedNodes.remove(linkedUUid);
++               removedNodes.add(linkedUUid);
+             }
+          }
+       }
