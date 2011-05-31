@@ -28,6 +28,7 @@ import javax.jcr.PathNotFoundException;
 import javax.jcr.Property;
 import javax.jcr.PropertyType;
 
+import org.exoplatform.commons.utils.IOUtil;
 import org.exoplatform.ecm.webui.form.validator.CronExpressionValidator;
 import org.exoplatform.ecm.webui.form.validator.ECMNameValidator;
 import org.exoplatform.ecm.webui.form.validator.RepeatCountValidator;
@@ -108,8 +109,9 @@ public class DialogFormUtil {
           if (input instanceof UIFormUploadInput) {
         	  UploadResource uploadResource = ((UIFormUploadInput) input).getUploadResource();
         	  if (uploadResource == null) continue;
-        	    inputStream = ((UIFormUploadInput) input).getUploadDataAsStream();
-              property.setValue(inputStream);
+        	  String location = uploadResource.getStoreLocation();
+      	      byte[] uploadData = IOUtil.getFileContentAsBytes(location);
+      	      property.setValue(uploadData);
 
               mimeTypeJcrPath = property.getJcrPath().replace("jcr:data", "jcr:mimeType");
               JcrInputProperty mimeTypeInputPropertyTmp = new JcrInputProperty();
