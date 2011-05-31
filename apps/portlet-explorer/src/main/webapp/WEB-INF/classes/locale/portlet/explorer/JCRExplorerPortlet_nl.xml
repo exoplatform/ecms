@@ -1905,6 +1905,7 @@
 				toe te voegen</no-permission-add>
 			<access-denied>toegang geweigerd! U hebt geen toegang op deze
 				template</access-denied>
+			<lifecycle-invalid>Unable add this action. The lifecycle phase of action is invalid.</lifecycle-invalid>
 		</msg>
 		<title>Actie toevoegen/wijzigen</title>
 		<validator>

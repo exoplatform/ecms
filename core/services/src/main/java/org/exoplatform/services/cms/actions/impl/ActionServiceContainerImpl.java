@@ -495,6 +495,7 @@ public class ActionServiceContainerImpl implements ActionServiceContainer, Start
       actionNode.remove();
       session.save();
       session.logout();
+      throw e;
     }
   }  
 

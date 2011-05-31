@@ -1880,6 +1880,7 @@
       <not-support>Hộp thoại '{0}' không được hỗ trợ</not-support>
       <no-permission-add>Truy nhập bị hủy bỏ!Bạn không có quyền thêm một thao tác ở đây.</no-permission-add>
       <access-denied>Truy nhập bị hủy bỏ!Bạn không có quyền truy cập mẫu này.</access-denied>
+	  <lifecycle-invalid>Không thể thêm thao tác này. Vòng đời của thao tác không hợp lệ</lifecycle-invalid>
     </msg>
     <title>Thêm mới/Sửa một thao tác</title>
     <validator>

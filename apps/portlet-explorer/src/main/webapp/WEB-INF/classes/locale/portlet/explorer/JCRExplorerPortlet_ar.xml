@@ -1694,6 +1694,7 @@
       <not-support>المشهد '{0}' غير متاح</not-support>
       <no-permission-add>غير مسموح ! ليس لك الحق في إضافة أعمال هنا</no-permission-add>
       <access-denied>غير مسموح! ليست لك التصاريح الكفاية للدخول إلى هذا القالب.</access-denied>
+	  <lifecycle-invalid>Unable add this action. The lifecycle phase of action is invalid.</lifecycle-invalid>
     </msg>
     <title>إضافة/تغيير عمل</title>
     <validator>

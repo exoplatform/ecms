@@ -1873,6 +1873,7 @@
       <not-support>Le formulaire d'édition '{0}' n'est pas supporté</not-support>
       <no-permission-add>Accès interdit ! Vous n'avez pas les droits suffisants pou ajouter une action ici</no-permission-add>
       <access-denied>Accès interdit! Vous n'avez pas les droits suffisants pour ouvrir ce formulaire.</access-denied>
+	  <lifecycle-invalid>Impossible d'ajouter cette action. La phase du cycle de vie de l'action est invalide.</lifecycle-invalid>
     </msg>
     <title>Ajouter/Editer une action</title>
     <validator>

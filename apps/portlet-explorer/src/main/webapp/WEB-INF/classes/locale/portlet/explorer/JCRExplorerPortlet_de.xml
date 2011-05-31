@@ -1701,6 +1701,7 @@
       <not-support><![CDATA[Der Dialog '{0}' wird nicht unterst&uuml;tzt]]></not-support>
       <no-permission-add><![CDATA[Zugang verweigert ! Sie haben kein Recht die Aktion hier hinzuzuf&uuml;gen]]></no-permission-add>
       <access-denied><![CDATA[Zugang verweigert! Sie haben keine Zugangsgenehmigung f&uuml;r diese Vorlage.]]></access-denied>
+	  <lifecycle-invalid>Unable add this action. The lifecycle phase of action is invalid.</lifecycle-invalid>
     </msg>
     <title><![CDATA[Aktion hinzuf&uuml;gen/&auml;ndern]]></title>
     <validator>

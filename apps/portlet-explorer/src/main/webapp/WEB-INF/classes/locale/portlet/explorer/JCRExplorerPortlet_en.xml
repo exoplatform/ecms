@@ -1869,6 +1869,7 @@
       <not-support>The dialog '{0}' is not supported</not-support>
       <no-permission-add>Access denied ! You have no right to add action here</no-permission-add>
       <access-denied>Access denied! You haven't got permission to access this template.</access-denied>
+	  <lifecycle-invalid>Unable add this action. The lifecycle phase of action is invalid.</lifecycle-invalid>
     </msg>
     <title>Add/Edit an Action</title>
     <validator>
