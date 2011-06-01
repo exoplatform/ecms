@@ -28,6 +28,7 @@ import org.exoplatform.container.xml.ObjectParameter;
 import org.exoplatform.container.xml.PortalContainerInfo;
 import org.exoplatform.services.cms.CmsService;
 import org.exoplatform.services.cms.link.LinkManager;
+import org.exoplatform.services.cms.taxonomy.TaxonomyService;
 import org.exoplatform.services.deployment.DeploymentPlugin;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
@@ -68,7 +69,8 @@ public class LinkDeploymentPlugin extends DeploymentPlugin {
    */
   public LinkDeploymentPlugin(InitParams initParams,
                               RepositoryService repositoryService,
-                              LinkManager linkManager) {
+                              LinkManager linkManager,
+                              TaxonomyService taxonomyService) {
     this.initParams = initParams;
     this.repositoryService = repositoryService;
     this.linkManager = linkManager;
