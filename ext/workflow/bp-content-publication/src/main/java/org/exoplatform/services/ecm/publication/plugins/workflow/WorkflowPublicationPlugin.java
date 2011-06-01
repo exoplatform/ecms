@@ -63,9 +63,7 @@ public class WorkflowPublicationPlugin extends PublicationPlugin {
   public static final String CURRENT_STATE = "publication:currentState".intern();
   public static final String HISTORY = "publication:history".intern();
   public static final String VALIDATOR = "publication:validator".intern();
-  /*public static final String DEST_WORKSPACE = "exo:destWorkspace".intern();
-  public static final String DESTPATH = "exo:destPath".intern();
-  public static final String BACUP_PATH = "publication:backupPath".intern();*/
+  public static final String PUBLICATION_BACKUP_PATH = "publication:backupPath".intern();
   public static final String PUBLISH_MIXIN_TYPE = "exo:publishLocation".intern();
 
   public static final String PENDING_MIXIN_TYPE = "exo:pendingLocation".intern();
@@ -147,6 +145,9 @@ public class WorkflowPublicationPlugin extends PublicationPlugin {
   @Override
   public void addMixin(Node node) throws Exception {
     node.addMixin(MIXIN_TYPE) ;
+    if (!node.hasProperty(PUBLICATION_BACKUP_PATH)) {
+      node.setProperty(PUBLICATION_BACKUP_PATH, "");
+    }
   }
 
   @Override
@@ -180,10 +181,6 @@ public class WorkflowPublicationPlugin extends PublicationPlugin {
                                                  .getConfiguration()
                                                  .getName();
         String workspaceName = node.getSession().getWorkspace().getName();
-        if (node.canAddMixin(MIXIN_MOVE)) {
-          node.addMixin(MIXIN_MOVE);
-          node.getSession().save();
-        }
         if (node.canAddMixin(PUBLISH_MIXIN_TYPE)) {
           node.addMixin(PUBLISH_MIXIN_TYPE);
           node.getSession().save();

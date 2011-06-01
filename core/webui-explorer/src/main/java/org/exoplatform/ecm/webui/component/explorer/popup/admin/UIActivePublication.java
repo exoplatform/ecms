@@ -34,6 +34,7 @@ import org.exoplatform.services.ecm.publication.PublicationService;
 import org.exoplatform.services.ecm.publication.plugins.webui.UIPublicationLogList;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.wcm.extensions.publication.lifecycle.authoring.AuthoringPublicationConstant;
 import org.exoplatform.services.wcm.publication.WCMPublicationService;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.application.WebuiRequestContext;
@@ -140,7 +141,11 @@ import org.exoplatform.webui.form.UIForm;
       }
       String siteName = Util.getPortalRequestContext().getPortalOwner();
       String remoteUser = Util.getPortalRequestContext().getRemoteUser();
-      wcmPublicationService.enrollNodeInLifecycle(currentNode, siteName, remoteUser);
+      if (AuthoringPublicationConstant.LIFECYCLE_NAME.equals(lifecycleName)) {
+        wcmPublicationService.enrollNodeInLifecycle(currentNode, siteName, remoteUser);
+      } else {
+        wcmPublicationService.enrollNodeInLifecycle(currentNode, lifecycleName);
+      }
     } catch (AlreadyInPublicationLifecycleException e) {
       uiApp.addMessage(new ApplicationMessage("UIActivePublication.msg.already-enroled", null,
           ApplicationMessage.ERROR));

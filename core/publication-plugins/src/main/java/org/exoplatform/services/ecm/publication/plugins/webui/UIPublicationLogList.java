@@ -43,7 +43,7 @@ import org.exoplatform.webui.event.EventListener;
  * Jun 26, 2008 1:16:08 AM
  */
 @ComponentConfig(
-    template = "classpath:resources/templates/webui/UIPublicationLogList.gtmpl",
+    template = "classpath:groovy/workflow/webui/UIPublicationLogList.gtmpl",
     events = {
         @EventConfig(listeners = UIPublicationLogList.CloseActionListener.class)
     }
@@ -71,7 +71,7 @@ public class UIPublicationLogList extends UIComponentDecorator {
       bean.setNewState(currentLog[1]);
       bean.setUser(currentLog[2]);
       String[] values = new String[currentLog.length - 4];
-      System.arraycopy(currentLog, 4, values, 0, currentLog.length);
+      System.arraycopy(currentLog, 4, values, 0, currentLog.length-4);
       String description = publicationService.getLocalizedAndSubstituteLog(currentNode_,
           Util.getUIPortal().getAncestorOfType(UIPortalApplication.class).getLocale(), currentLog[3], values);
       bean.setDescription(description);

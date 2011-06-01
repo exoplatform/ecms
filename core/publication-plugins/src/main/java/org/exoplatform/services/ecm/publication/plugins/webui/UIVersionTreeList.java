@@ -33,7 +33,7 @@ import org.exoplatform.webui.event.EventListener;
  * Jun 26, 2008 9:22:51 AM
  */
 @ComponentConfig(
-    template = "classpath:resources/templates/webui/UIVersionTreeList.gtmpl",
+    template = "classpath:groovy/workflow/webui/UIVersionTreeList.gtmpl",
     events = {
         @EventConfig(listeners = UIVersionTreeList.SelectActionListener.class)
     }
