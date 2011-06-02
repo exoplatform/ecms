@@ -195,6 +195,7 @@
       <invalid-format>Invalid format datetime in field '{0}'</invalid-format>
       <invalid-date>"To Date" have to greater than "From Date"</invalid-date>
       <invalid-nodeType>Node type "{0}" is invalid! Please check again.</invalid-nodeType>
+      <name-not-allowed>There are some invalid characters in this field. Type another value, please! </name-not-allowed>
     </msg>
   </UIContentSearchForm>
 

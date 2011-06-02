@@ -1,0 +1,107 @@
+Index: packaging/wcm/webapp/src/main/webapp/WEB-INF/classes/locale/wcm/webui_fr.xml
+===================================================================
+--- packaging/wcm/webapp/src/main/webapp/WEB-INF/classes/locale/wcm/webui_fr.xml	(revision 67322)
++++ packaging/wcm/webapp/src/main/webapp/WEB-INF/classes/locale/wcm/webui_fr.xml	(working copy)
+@@ -195,6 +195,7 @@
+       <invalid-date>"To Date" have to greater than "From Date"</invalid-date>
+       <invalid-nodeType>Type de noeud "(0)" n'est pas valide! S'il vous plaît vérifiez à nouveau.</invalid-nodeType>
+       <invalid-format>Blancs datetime format dans le champ '{0}'</invalid-format>
++      <name-not-allowed>Il y a des caractères invalides dans ce champ. Insérez une autre valeur ! </name-not-allowed>
+     </msg>
+   </UIContentSearchForm>
+ 
+Index: packaging/wcm/webapp/src/main/webapp/WEB-INF/classes/locale/wcm/webui_vi.xml
+===================================================================
+--- packaging/wcm/webapp/src/main/webapp/WEB-INF/classes/locale/wcm/webui_vi.xml	(revision 67322)
++++ packaging/wcm/webapp/src/main/webapp/WEB-INF/classes/locale/wcm/webui_vi.xml	(working copy)
+@@ -195,6 +195,7 @@
+       <invalid-format>Định dạng ngày tháng không đúng ở trường '{0}'</invalid-format>
+       <invalid-date>"Đến ngày" phải lớn hơn "Từ ngày"</invalid-date>
+       <invalid-nodeType>Kiểu nội dung "{0}" không đúng. Hãy kiểm tra lại.</invalid-nodeType>
++      <name-not-allowed>Bạn vừa nhập một số kí tự không hợp lệ. Xin vui lòng nhập lại !</name-not-allowed>
+     </msg>
+   </UIContentSearchForm>
+ 
+Index: packaging/wcm/webapp/src/main/webapp/WEB-INF/classes/locale/wcm/webui_en.xml
+===================================================================
+--- packaging/wcm/webapp/src/main/webapp/WEB-INF/classes/locale/wcm/webui_en.xml	(revision 67322)
++++ packaging/wcm/webapp/src/main/webapp/WEB-INF/classes/locale/wcm/webui_en.xml	(working copy)
+@@ -195,6 +195,7 @@
+       <invalid-format>Invalid format datetime in field '{0}'</invalid-format>
+       <invalid-date>"To Date" have to greater than "From Date"</invalid-date>
+       <invalid-nodeType>Node type "{0}" is invalid! Please check again.</invalid-nodeType>
++      <name-not-allowed>There are some invalid characters in this field. Type another value, please! </name-not-allowed>
+     </msg>
+   </UIContentSearchForm>
+ 
+Index: core/webui/src/main/java/org/exoplatform/wcm/webui/selector/content/UIContentSearchForm.java
+===================================================================
+--- core/webui/src/main/java/org/exoplatform/wcm/webui/selector/content/UIContentSearchForm.java	(revision 67322)
++++ core/webui/src/main/java/org/exoplatform/wcm/webui/selector/content/UIContentSearchForm.java	(working copy)
+@@ -101,7 +101,7 @@
+     addUIFormInput(new UIFormStringInput(SEARCH_BY_NAME,SEARCH_BY_NAME,null));
+     addUIFormInput(new UIFormStringInput(SEARCH_BY_CONTENT, SEARCH_BY_CONTENT, null));
+ 
+-    addUIFormInput(new UIFormStringInput(PROPERTY, PROPERTY, null));
++    addUIFormInput(new UIFormStringInput(PROPERTY, PROPERTY, null).setEditable(false));
+     addUIFormInput(new UIFormStringInput(CONTAIN, CONTAIN, null));
+ 
+     List<SelectItemOption<String>> dateOptions = new ArrayList<SelectItemOption<String>>();
+@@ -112,8 +112,7 @@
+     addUIFormInput(startTime);
+     UIFormDateTimeInput endTime = new UIFormDateTimeInput(END_TIME, END_TIME, null, true);
+     addUIFormInput(endTime);
+-    addUIFormInput(new UIFormStringInput(DOC_TYPE, DOC_TYPE, null));
+-//  addUIFormInput(new UIFormStringInput(CATEGORY, CATEGORY, null));
++    addUIFormInput(new UIFormStringInput(DOC_TYPE, DOC_TYPE, null).setEditable(false));
+ 
+     setActions(new String[] {"SearchWebContent"} );
+   }
+@@ -164,6 +163,7 @@
+     qCriteria.setFulltextSearchProperty(QueryCriteria.ALL_PROPERTY_SCOPE);
+     qCriteria.setKeyword(keyword);
+     SiteSearchService siteSearch = getApplicationComponent(SiteSearchService.class);
++
+     return siteSearch.searchSiteContents(Utils.getSessionProvider(), qCriteria, pageSize, true);
+   }
+ 
+@@ -294,6 +294,19 @@
+       if(typeSearch.equals(UIContentBrowsePanel.WEBCONTENT) || typeSearch.equals(UIContentBrowsePanel.MEDIA)){
+         if(UIContentSearchForm.SEARCH_BY_NAME.equals(radioValue)) {
+           String keyword = uiWCSearch.getUIStringInput(radioValue).getValue();
++		if (keyword != null && keyword.length() > 0) {
++            String[] arrFilterChar = { "&", "$", "@", ":", "]", "[", "*", "%", "!", "+", "(", ")",
++                "'", "#", ";", "}", "{", "/", "|", "\"" };
++            for (String filterChar : arrFilterChar) {
++              if (keyword.indexOf(filterChar) > -1) {
++                uiApp.addMessage(new ApplicationMessage("UIContentSearchForm.msg.name-not-allowed",
++                                                        null,
++                                                        ApplicationMessage.WARNING));
++                event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
++                return;
++              }
++            }
++          }
+           if(uiWCSearch.haveEmptyField(uiApp, event, keyword)) return;
+           pagResult = uiWCSearch.searchWebContentByName(keyword.trim(), qCriteria, pageSize);
+         } else if(UIContentSearchForm.SEARCH_BY_CONTENT.equals(radioValue)) {
+@@ -352,6 +365,19 @@
+       }else if(typeSearch.equals(UIContentBrowsePanel.DMSDOCUMENT)){
+         if(UIContentSearchForm.SEARCH_BY_NAME.equals(radioValue)) {
+           String keyword = uiWCSearch.getUIStringInput(radioValue).getValue();
++		 if (keyword != null && keyword.length() > 0) {
++            String[] arrFilterChar = { "&", "$", "@", ":", "]", "[", "*", "%", "!", "+", "(", ")",
++                "'", "#", ";", "}", "{", "/", "|", "\"" };
++            for (String filterChar : arrFilterChar) {
++              if (keyword.indexOf(filterChar) > -1) {
++                uiApp.addMessage(new ApplicationMessage("UIContentSearchForm.msg.name-not-allowed",
++                                                        null,
++                                                        ApplicationMessage.WARNING));
++                event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
++                return;
++              }
++            }
++          }    
+           if(uiWCSearch.haveEmptyField(uiApp, event, keyword)) return;
+           pagResult = uiWCSearch.searchDocumentByName(keyword.trim(), qCriteria, pageSize);
+         } else if(UIContentSearchForm.SEARCH_BY_CONTENT.equals(radioValue)) {
