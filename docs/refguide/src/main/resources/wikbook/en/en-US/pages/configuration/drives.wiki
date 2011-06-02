@@ -7,7 +7,7 @@ A drive is the combination of:
 * Role: visible to everybody, a group or a single user.
 * Options: allow us to specify whether to see hidden nodes or not and to create folders in this drive or not.
 
-h1. Fields
+h1. Fields {anchor:id=CONTref.Configuration.Drives.Fields}
 
 Object type: _org.exoplatform.services.cms.drives.*DriveData*_
 
@@ -49,7 +49,7 @@ The file that contains the structure above will be configured in the configurati
 	<import>war:/conf/wcm-extension/dms/drives-configuration.xml</import>			
 {code}
 
-h1. Example of configuration
+h1. Example of configuration {anchor:id=CONTref.Configuration.Drives.Example_configuration}
 {code:language=xml|indent=2}
   <external-component-plugins>
     <target-component>org.exoplatform.services.cms.drives.ManageDriveService</target-component>

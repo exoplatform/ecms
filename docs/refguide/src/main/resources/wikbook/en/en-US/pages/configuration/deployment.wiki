@@ -4,7 +4,7 @@ There are two main cases to use:
 - The site is created only one time when the database is clean.
 - The site is created at runtime, when a user uses the core feature of GateIn portal.
 
-h1. Fields
+h1. Fields {anchor:id=CONTref.Configuration.Deployment.Fields}
 
 *{{init-params}}*
 || *Element* || *Type* || *Description* ||
@@ -32,7 +32,7 @@ _*org.exoplatform.services.deployment.DeploymentDescriptor*_
 | *workspace* | {{String}} | {{collaboration}}  | The workspace of the target node |
 | *nodePath* | {{String}} | {{/sites content/live/acme/web contents/site artifacts}} | The path of the target node |
 
-h1. Example of configuration
+h1. Example of configuration {anchor:id=CONTref.Configuration.Deployment.Example_configuration}
 {code:language=xml|indent=2}
   <external-component-plugins>
     <target-component>org.exoplatform.services.deployment.WCMContentInitializerService</target-component>

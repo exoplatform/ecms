@@ -2,7 +2,7 @@ A view can include many object parameters. Parameters are used to create default
 
 
 
-h1. Fields
+h1. Fields {anchor:id=CONTref.Configuration.Views.Fields}
 
 - *target-component*: _org.exoplatform.services.cms.views.ManageViewService</target-component-
 - *Name*: {{manage.view.plugin}}
@@ -37,7 +37,7 @@ h1. Fields
 | *warPath*| {{String}} |{{/ecm-explorer/SystemView.gtmpl}}| Specify a template location to view.|
 
 
-h1. Example of configuration
+h1. Example of configuration {anchor:id=CONTref.Configuration.Views.Example_configuration}
 {code:language=xml|indent=2}
 <external-component-plugins>
     <target-component>org.exoplatform.services.cms.views.ManageViewService</target-component>

@@ -1,5 +1,5 @@
 
-h1. Available preferences
+h1. Available preferences {anchor:id=CONTref.Portlets.FastContentCreator.AvailablePreferences}
 
 || *Preference* || *Type*|| *Default Value* || *Description* ||
 | *mode* | {{String}} | {{basic}} | The default mode for *fast content creator* portlet |
@@ -13,7 +13,7 @@ h1. Available preferences
 | *redirectPath* | {{String}} | {{http://www.google.com.vn}} | The path that the page will redirect to |
 | *isActionNeeded* | {{Boolean}} | {{true}} | Is an action needed to save the configuration |
 
-h1. Example Configuration
+h1. Sample Configuration {anchor:id=CONTref.Portlets.FastContentCreator.SampleConfiguration}
 {code:language=xml|indent=2}
 		<portlet-preferences>      
 			<preference>

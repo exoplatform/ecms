@@ -1,4 +1,4 @@
-h1. Available preferences
+h1. Available preferences {anchor:id=CONTref.Portlets.ContentDetail.AvailablePreferences}
 
 || *Preference* || *Type* || *Default Value* || *Description* ||
 | *repository* | {{String}} | {{repository}} | Repository is a place where data are stored and maintained |
@@ -12,7 +12,7 @@ h1. Available preferences
 | *ShowVote* | {{Boolean}} | {{false}} | Show the result of voting for the displayed content |
 | *ShowComments* | {{Boolean}} | {{false}} | Show the existing comments of this content (if any) |
 
-h1. Sample configuration
+h1. Sample configuration {anchor:id=CONTref.Portlets.ContentDetail.SampleConfiguration}
 {code:language=xml|indent=2}
 		<portlet-preferences>
 			<preference>

@@ -1,6 +1,6 @@
 Dialogs are groovy templates that generate forms by mixing static HTML fragments and groovy calls to the components responsible for building the UI at runtime. The result is a simple but powerful syntax.
 
-h1. Common parameters {anchor:id=common-params}
+h1. Common parameters {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.CommonParameters}
 
 These following parameters are common and can be used for every input fields.
 || *Parameter* || *Type* || *Required* || *Description* || *Example* ||
@@ -28,14 +28,13 @@ See also:
 Note that {{mixintype}} can be used only in the root node  field (commonly known as the name field)
 {warning}
 
-h1. Text Field {anchor:id=text-field}
+h1. Text Field {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.TextField}
 
-h2. Addition parameters
-_None_
+h2. Additional parameters {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.TextField.AdditionParameters}
 
 See also: [Common parameters|#common-params]
 
-h2. Example
+h2. Example {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.TextField.Example}
 {code:language=java}
 <%
   String[] fieldTitle = ["jcrPath=/node/exo:title", "validate=empty"] ;
@@ -43,24 +42,23 @@ h2. Example
 %>
 {code}
 
-h1. Hidden Field {anchor:id=hidden-field}
+h1. Hidden Field {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.HiddenField}
 
-h2. Addition parameters
-_None_
+h2. Additional parameters {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.HiddenField.AdditionParameters}
 
 See also: [Common parameters|#common-params]
 
-h2. Example
+h2. Example {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.HiddenField.Example}
 
-h1. Text Area Field {anchor:id=textarea-field}
+h1. Text Area Field {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.TextAreaField}
 
-h2. Addition parameters
+h2. Additional parameters {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.TextAreaField.AdditionParameters}
 || *Parameter* || *Type* || *Required* || *Description* || *Example* ||
 | *rows* | {{Number}} | [image:error.gif] | The initial textarea's number of rows. The value is {{10}} by default | {{rows=20}} |
 | *cols* | {{Number}} | [image:error.gif] | The initial textarea's number of cols. The value is {{30}} by default | {{cols=50}} |
 See also: [Common parameters|#common-params]
 
-h2. Example
+h2. Example {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.TextAreaField.Example}
 {code:language=java}
 <%
 	String[] fieldDescription = ["jcrPath=/node/exo:description", "validate=empty"] ;
@@ -68,9 +66,9 @@ h2. Example
 %>
 {code}
 
-h1. Rich Text Field {anchor:id=richtext-field}
+h1. Rich Text Field {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.RichTextField}
 
-h2. Addition parameters
+h2. Additional parameters {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.RichTextField.AdditionParameters}
 || *Parameter* || *Type* || *Required* || *Description* || *Example* ||
 | *options* | {{String}} with semicolon {{;}} character | [image:error.gif] | Some options for CKEditor field: toolbar, width and height | {{options=CompleteWCM;width:'100%';height:'200px';}} |
 
@@ -80,7 +78,7 @@ h2. Addition parameters
 | *height* | {{String}} | [image:error.gif] | The height of CKEditor. The value can be the percent of pixel | {{options=height:'200px'}} |
 See also: [Common parameters|#common-params]
 
-h2. Example
+h2. Example {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.RichTextField.Example}
 {code:language=java}
 <%
 	String[] fieldSummary = ["jcrPath=/node/exo:summary", "options=toolbar:CompleteWCM,width:'100%',height:'200px'", "validate=empty"] ;
@@ -88,14 +86,14 @@ h2. Example
 %>
 {code}
 
-h1. Calendar Field {anchor:id=calendar-field}
+h1. Calendar Field {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.CalendarField}
 
-h2. Addition parameters
+h2. Additional parameters {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.CalendarField.AdditionParameters}
 || *Parameter* || *Type* || *Required* || *Description* || *Example* ||
 | *options* | {{String}} | [image:error.gif] | An option for calendar field: Display time | {{options=displaytime}} |
 See also: [Common parameters|#common-params]
 
-h2. Example
+h2. Example {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.CalendarField.Example}
 {code:language=java}
 <%
 	String[] fieldPublishedDate = ["jcrPath=/node/exo:publishedDate", "options=displaytime", "validate=datetime", "visible=true"] ;
@@ -103,15 +101,14 @@ h2. Example
 %>
 {code}
 
-h1. Upload Field {anchor:id=upload-field}
+h1. Upload Field {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.UploadField}
 
-h2. Addition parameters
-_None_
+h2. Additional parameters {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.UploadField.AdditionParameters}
 
 See also: [Common parameters|#common-params]
 
-h2. Example
-There are 2 main cases when create an upload form: You want to store the image as a property OR as a node.
+h2. Example {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.UploadField.Example}
+There are 2 main cases when creating an upload form: You want to store the image as a property OR as a node.
 * If you want to use property so you can do as follow:
 {code:language=java}
 <%
@@ -176,14 +173,14 @@ There are 2 main cases when create an upload form: You want to store the image a
 %>
 {code}
 
-h1. Radio Field {anchor:id=radio-field}
+h1. Radio Field {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.RadioField}
 
-h2. Addition parameters
+h2.  Additional parameters {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.RadioField.AdditionParameters}
 || *Parameter* || *Type* || *Required* || *Description* || *Example* ||
 | *options* | {{String}} with comma {{,}} characters | [image:error.gif] | Some radio values | {{options=radio1,radio2,radio3}} |
 See also: [Common parameters|#common-params]
 
-h2. Example
+h2. Example {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.RadioField.Example}
 {code:language=java}
 <%
 	String[] fieldDeep = ["jcrPath=/node/exo:isDeep", "defaultValues=true", "options=radio1,radio2,radio3"];		 
@@ -191,12 +188,12 @@ h2. Example
 %>
 {code}
 
-h1. SelectBox Field {anchor:id=selectbox-field}
+h1. SelectBox Field {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.SelectBoxField}
 || *Parameter* || *Type* || *Required* || *Description* || *Example* ||
 | *options* | {{String}} with comma {{,}} characters | [image:error.gif] | Some option values | {{options=option1,option2,option3}} |
 See also: [Common parameters|#common-params]
 
-h2. Example
+h2. Example {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.SelectBoxField.Example}
 {code:language=java}
 <%
 	String[] fieldDeep = ["jcrPath=/node/exo:isDeep", "defaultValues=true", "options=checkbox1,checkbox2,checkbox3"];
@@ -204,14 +201,14 @@ h2. Example
 %>
 {code}
 
-h1. CheckBox Field {anchor:id=checkbox-field}
+h1. CheckBox Field {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.CheckBoxField}
 
-h2. Addition parameters
+h2. Additional parameters {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.CheckBoxField.AdditionParameters}
 || *Parameter* || *Type* || *Required* || *Description* || *Example* ||
 | *options* | {{String}} with comma {{,}} characters | [image:error.gif] | Some checkbox values | {{options=checkbox1,checkbox2,checkbox3}} |
 See also: [Common parameters|#common-params]
 
-h2. Example
+h2. Example {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.CheckBoxField.Example}
 {code:language=java}
 <%
 	String[] fieldDeep = ["jcrPath=/node/exo:isDeep", "defaultValues=true", "options=checkbox1,checkbox2,checkbox3"];
@@ -219,14 +216,13 @@ h2. Example
 %>
 {code}
   
-h1. Mixin Field {anchor:id=mixin-field}
+h1. Mixin Field {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.MixinField}
 
-h2. Addition parameters
-_None_
+h2. Additional parameters {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.MixinField.AdditionParameters}
 
 See also: [Common parameters|#common-params]
 
-h2. Example 
+h2. Example {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.MixinField.Example}
 {code:language=java}
 <%
 	String[] fieldId = ["jcrPath=/node", "editable=false", "visible=if-not-null"] ;
@@ -234,15 +230,16 @@ h2. Example
 %>
 {code}
 
-h1. Action Field {anchor:id=action-field}
+h1. Action Field {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.ActionField}
 
-h2. Addition parameters
+h2. Additional parameters {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.ActionField.AdditionParameters}
 || *Parameter* || *Type* || *Required* || *Description* || *Example* ||
 | *selectorClass* | {{String}} | [image:check.gif] | The component to display | {{selectorClass=org.exoplatform.ecm.webui.tree.selectone.UIOneNodePathSelector}} |
 | *selectorIcon* | {{String}} | [image:check.gif] | The action icon | {{selectorIcon=SelectPath24x24Icon}} |
 
-Depends on the {{selectorClass}}, some other parameters can be added
-For example 
+Depending on the {{selectorClass}}, some other parameters can be added.
+
+For example:
 The component {{org.exoplatform.ecm.webui.tree.selectone.UIOneNodePathSelector}} need these parameters
 || *Parameter* || *Type* || *Required* || *Description* || *Example* ||
 | *workspaceField* | {{String}} | [image:error.gif] | The field which allow to select a workspace | {{workspaceField=targetWorkspace}} |
@@ -251,7 +248,7 @@ The component {{org.exoplatform.ecm.webui.selector.UIPermissionSelector}} does n
 
 See also: [Common parameters|#common-params]
 
-h2. Example 
+h2. Example {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.ActionField.Example}
 {code:language=java}
 <% 
 	String[] fieldPath = ["jcrPath=/node/exo:targetPath", "selectorClass=org.exoplatform.ecm.webui.tree.selectone.UIOneNodePathSelector", "workspaceField=targetWorkspace", "selectorIcon=SelectPath24x24Icon"] ;
@@ -259,20 +256,20 @@ h2. Example
 %>
 {code}
 
-h1. Interceptors
+h1. Interceptors {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.Interceptors}
 To add an intercepter into a dialog, we can use this method {{*uicomponent.addInterceptor(String scriptPath, String type)*}}
 || || || *Parameters* ||
 | *scriptPath* | {{String}} | The relative path to the script file |
 | *type* | {{String}} | The type of intercepter: {{prev}} or {{post}} |
 
-h2. Example
+h2. Example {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.Interceptors.Example}
 {code:language=java}
 <%
 	uicomponent.addInterceptor("ecm-explorer/interceptor/PreNodeSaveInterceptor.groovy", "prev");
 %>
 {code}
 
-h1. How to add new ECM template with tabs.
+h1. How to add new ECM template with tabs {anchor:id=CONTref.InsideWCMTemplates.ContentTypes.Dialog.HowToAddNewECMTemplateWithTabs}
 
 To avoid refreshing the first tab for every action execution, we add a new private function to the template with tabs.
 In the template, we must insert new piece of code like the following:

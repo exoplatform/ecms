@@ -1,5 +1,5 @@
 This class is used to get contents inside the WCM product.
-We should not access contents directly from the jcr on the front side.
+You should not access contents directly from the jcr on the front side.
 
 In generall, this service stands between publication and cache.
 

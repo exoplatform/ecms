@@ -1,8 +1,8 @@
 Publication addons for WCM 2.1.0
 
-h1. Extended Publication Plugin
+h1. Extended Publication Plugin {anchor:id=CONTref.Extensions.AuthoringExtension.ExtendedPublicationPlugin}
 
-h2. States
+h2. States {anchor:id=CONTref.Extensions.AuthoringExtension.ExtendedPublicationPlugin.States}
 
 In this extended publication, we will allow new states and new profiles. These states already exist in WCM but not used and we will enable them.
 
@@ -23,7 +23,7 @@ In this extended publication, we will allow new states and new profiles. These s
 #* obsolete : Content can still be published but we consider it's not in an editing lifecycle anymore
 #* archived (Automatic) : Content is archived and ready to be moved in archive workspace if enabled.
 
-h2. Start/End publication dates
+h2. Start/End publication dates {anchor:id=CONTref.Extensions.AuthoringExtension.ExtendedPublicationPlugin.StarEndPublicationDates}
 
 In most cases, Customers don't want to publish directly a content but at a defined date and they also want to unpublish automatically the content after that.
 In the new publication plugin, we add new properties to manage this:
@@ -38,7 +38,7 @@ Because of that, publication dates are not mandatory and a content can go to:
 * staged : in multi-server mode, publisher can only put the content to staged and wait for auto-publication
 * published : in single-server mode, publisher can directly publish a content (with or without publication dates).
 
-h2. New Publication Mixin
+h2. New Publication Mixin {anchor:id=CONTref.Extensions.AuthoringExtension.ExtendedPublicationPlugin.NewPublicationMixin}
 
 {code:xml}<nodeType name="publication:authoringPublication" isMixin="true" hasOrderableChildNodes="false" primaryItemName="">
   <supertypes>
@@ -55,7 +55,7 @@ h2. New Publication Mixin
 </nodeType>
 {code}
 
-h3. Publication plugin UI
+h3. Publication plugin UI {anchor:id=CONTref.Extensions.AuthoringExtension.ExtendedPublicationPlugin.PublicationPluginUI}
 
 Note that some labels like "Prêt à publier" could be not well displayed in the publication UI.
 You can extend the current UI State button width by adding :
@@ -71,7 +71,7 @@ The publishing and unpublish cron jobs will do this :
 
 See export section for more info about cron jobs.
 
-h1. Publication Manager
+h1. Publication Manager {anchor:id=CONTref.Extensions.AuthoringExtension.PublicationManager}
 
 The Publication Manager manages lifecycles and contexts in the WCM Platform. It allows to manages different lifecycles based on different publication plugin in the platform.
 
@@ -94,7 +94,7 @@ The Publication Manager manages lifecycles and contexts in the WCM Platform. It 
 * getLifecycle : return a lifecycle by its name
 * getLifecycleFromUser : returns a list of Lifecycles in which the user has rights (based on membership property)
 
-h2. Lifecycle
+h2. Lifecycle {anchor:id=CONTref.Extensions.AuthoringExtension.PublicationManager.Lifecycle}
 
 A lifecycle is defined by a simple vertical workflow with steps (states) and profiles (membership). Each lifecycle is related to a Publication plugin (to be compliant with JBPM or Bonita business processes).
 +Example :+ _Two lifecycles with/without states_
@@ -200,7 +200,7 @@ A lifecycle is defined by a simple vertical workflow with steps (states) and pro
   </component-plugin>
 </external-component-plugins>
 {code}
-In the last example, we have two lifecycles :
+In the last example, we have two lifecycles:
 # lifecycle 1 : based on _States and versions based publication_\#\* This allows to be backward compliant with older WCM releases. If all your site contents are using an existing plugin, you can create a lifecycle for it and it will work.
 #* For new instances, we recommend to use the new plugin with dynamic states capabilities
 # lifecycle 2 : based on new _Authoring publication_\#\* Visibility : we define only the "visible" steps. In this example, there's no step for 'enrolled'. Even if this step exists, it will not be displayed in the UI.
@@ -208,14 +208,14 @@ In the last example, we have two lifecycles :
 # lifecycle 3 : simulates the _States and versions based publication_ plugin
 #* Note that this simple lifecycle will work in a single server configuration
 
-h3. Listening to a lifecycle
+h3. Listening to a lifecycle {anchor:id=CONTref.Extensions.AuthoringExtension.PublicationManager.ListenToLifecycle}
 
-When we change state, we broadcast an event in order for partners to add features if they want to.
-Event could look like this :
+When we change state, we broadcast an event in order for partners to add features if they want.
+Event could look like this:
 {code}
 listenerService.broadcast(AuthoringPlugin.POST_UPDATE_STATE_EVENT, null, node);
 {code}
-Listener declaration could look like this :
+Listener declaration could look like this:
 {code:xml}<external-component-plugins>
   <target-component>org.exoplatform.services.listener.ListenerService</target-component>
   <component-plugin>
@@ -227,7 +227,7 @@ Listener declaration could look like this :
 </external-component-plugins>
 {code}
 
-h2. Context
+h2. Context {anchor:id=CONTref.Extensions.AuthoringExtension.PublicationManager.Context}
 
 A context is defined by simple rules. In WCM 2.1+, we can choose to enroll the content in a specific lifecycle (i.e. publication plugin) based on context parameters.
 We have 3 parameters we can use to define contexts :
@@ -323,7 +323,7 @@ We can see that _context1_ and _context2_ have the same priority. We can do that
 Once we have the corresponding lifecycle, we will set the lifecycle inside the content (see New authoring Mixin) and the context service will not be called again for this content.
 {note}
 
-h2. New Authoring Mixin
+h2. New Authoring Mixin {anchor:id=CONTref.Extensions.AuthoringExtension.PublicationManager.NewAuthoringMixin}
 
 {code:xml}<nodeType name="publication:authoring" isMixin="true" hasOrderableChildNodes="false" primaryItemName="">
   <propertyDefinitions>
@@ -341,7 +341,7 @@ When adding the content in a lifecycle, we set the _publication:lifecycle_ prope
 {note:title=one lifecycle only}A content can be in one lifecycle only.
 {note}Each time, we change from one state to another, we set the user who changed the state in _publication:lastUser_.
 
-h3. Querying based on publication status
+h3. Querying based on publication status {anchor:id=CONTref.Extensions.AuthoringExtension.PublicationManager.QueryBaseOnPublicationStatus}
 
 By adding this mixin to contents, we can access contents by simple queries based on the current user profile.
 For example:

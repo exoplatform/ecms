@@ -1,12 +1,12 @@
-This part describes how to create an sample of UI extension.
+This part describes how to create a sample UI extension.
 
-h1. Overview
+h1. Overview {anchor:id=CONTref.Extensions.UIExtensions.Overview}
 
 Since DMS 2.5, it is possible to extend the *File  Explorer* and the *ECM Administration* with the *UI   Extension Framework*.  Indeed, you can add your own action buttons to the *File Explorer* and/or add your own  managers to the *ECM Administration*.
 
-h1. How to add your own tab in ECM Administration
+h1. How to add your own tab in ECM Administration {anchor:id=CONTref.Extensions.UIExtensions.AddOwnTabInECMAdministration}
 
-h2. Add your own UIAction
+h2. Add your own UIAction {anchor:id=CONTref.Extensions.UIExtensions.AddOwnTabInECMAdministration.AddOwnUIAction}
 
 * Create a pom.xml from the following content:
 
@@ -78,7 +78,7 @@ h2. Add your own UIAction
 
 * Create a new class called *_org.exoplatform.wcm.component.cache.UIWCMCacheComponent_* that extends *org.exoplatform.ecm.webui.component.admin.manager.UIAbstractManagerComponent*.
 
-h2. Add your own ActionListener
+h2. Add your own ActionListener {anchor:id=CONTref.Extensions.UIExtensions.AddOwnTabInECMAdministration.AddOwnActionListener}
 
 The webui framework allows you to be notified when a given action has  been triggered, you just need to call your own action listener as follows (_ACTION_NAME) *ActionListener*.
 For example: You create your own action listener name *CacheView*, so your action listener then will be named as *CacheViewActionListener*.
@@ -100,7 +100,7 @@ public static class CacheViewActionListener extends UIECMAdminControlPanelAction
 
 * Create a new configuration file _conf/portal/configuration.xml_ to register your action (see [6.2.2.3|#6.2.2.3]) with the service _org.exoplatform.webui.ext.UIExtensionManager_.
 
-h2. Register your UI Action {anchor:id=6.2.2.3}
+h2. Register your UI Action {anchor:id=CONTref.Extensions.UIExtensions.AddOwnTabInECMAdministration.RegisterUIAction}
 
 {code:lang=xml}<?xml version="1.0" encoding="ISO-8859-1"?>
 <configuration
@@ -140,7 +140,7 @@ h2. Register your UI Action {anchor:id=6.2.2.3}
 	{code}
 Launch *mvn clean install* and copy the file _target/exo-ecms-examples-webui-2.1.0-SNAPSHOT.jar_ into _(TOMCAT_HOME)/lib_
 
-h2. Define label for your actions and register the resource bundle
+h2. Define label for your actions and register the resource bundle {anchor:id=CONTref.Extensions.UIExtensions.AddOwnTabInECMAdministration.Define_label}
 {note}
 All resources can be located in the _src/main/resource_ package because the resources ({{{*.xml, images, conf file}}}) and the code are separated. This is very useful in a hierarchical structure. 
 {note}
@@ -245,7 +245,7 @@ By being added this configuration, the resource bundle has been completely separ
   </external-component-plugins>
 {code}
 
-h2. Run your own UI extension sample
+h2. Run your own UI extension sample {anchor:id=CONTref.Extensions.UIExtensions.AddOwnTabInECMAdministration.RunUIExtensionSample}
 
 
 * Run tomcat

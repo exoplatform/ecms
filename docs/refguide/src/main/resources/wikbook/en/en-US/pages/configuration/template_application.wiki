@@ -2,10 +2,10 @@ A template is a presentation while displaying the saved information.
 
 Template service is used to select the right template corresponding to the saved content.
 
-h1. Available configuration
+h1. Available configuration {anchor:id=CONTref.Configuration.Templates.Application_template.Available_configuration}
 
 
-h2. Init-params
+h2. Init-params {anchor:id=CONTref.Configuration.Templates.Application_template.Available_configuration.Init-params}
 
 || *Configuration name* || *Data type* || *Default Value* || *Description* ||
 | *autoCreateInNewRepository* | {{Boolean}} | {{true}} | Enable the application to import predefined templates at the start-up of template service automatically.|
@@ -14,7 +14,7 @@ h2. Init-params
 | object-param | {{Structure}} | | Configuration for each instance. |
 
 
-h2. Object-param
+h2. Object-param {anchor:id=CONTref.Configuration.Templates.Application_template.Available_configuration.Object-param}
 
 || *Configuration name* || *Data type* || *Default Value* || *Description* ||
 | *name* | {{String}} | {{template.configuration}} | The name of this configuration |
@@ -24,7 +24,7 @@ h2. Object-param
 
 *Object-type* defines all available template files, using the "collection type" configuration*
 
-h2. Object
+h2. Object {anchor:id=CONTref.Configuration.Templates.Application_template.Available_configuration.Object}
 
 *type*: It is the name of each object type. It means the type of template, the further configurations for this type are defined by some specified fields.
 || *Field name* || *Data type* || *Description* ||
@@ -46,7 +46,7 @@ Each type includes some definitions as an ﻿{{object type="org.exoplatform.serv
 | *templateFile* | {{String}} | The location of the file store for the template's presentation |
 | *roles* | {{String}} | Determine who can access this object (View/Dialog/CSS) |
 
-h1. Example of template configuration
+h1. Example of template configuration {anchor:id=CONTref.Configuration.Templates.Application_template.Example}
 
 This below example is configuration for the _nt:file_ template, any other template will be put in the same level with this template start from the line
 {{<object type="org.exoplatform.services.cms.templates.impl.TemplateConfig$NodeType">}}

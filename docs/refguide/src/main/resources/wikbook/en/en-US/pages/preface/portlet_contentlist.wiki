@@ -1,4 +1,4 @@
-h1. Available preferences
+h1. Available preferences {anchor:id=CONTref.Portlets.ContentList.AvailablePreferences}
 
 || *Preference* || *Type* || *Default Value* || *Description* ||
 | *mode* | {{String}} | {{AutoViewerMode}} | The mode that the portlet uses to display content: all contents in a specific folder or all specific contents in the portlet. |
@@ -24,7 +24,7 @@ h1. Available preferences
 | *showScvWith* | {{String}} | {{content-id}} | The name of the parameter shows the path of content in url to display when clicking the "Read more" button of this content. |
 | *showClvBy* | {{String}} | {{folder-id}} | The name of the parameter shows the path of the folder in url to display its contents. |
 
-h1. Sample Configuration
+h1. Sample Configuration {anchor:id=CONTref.Portlets.ContentList.SampleConfiguration}
 {code:language=xml|indent=2}
     <portlet-preferences>
       <preference>

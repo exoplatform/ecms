@@ -1,6 +1,6 @@
 Every node has a type. Node types can be used to define complex storage objects consisting of multiple sub-nodes and properties, possibly many deep layers.
 
-h1. Fields
+h1. Fields {anchor:id=CONTref.Configuration.Nodetypes.Fields}
 
 *{{org.exoplatform.services.jcr.core.nodetype.ExtendedNodeTypeManager}}*
 || *Node Type*|| *Type* || *Description* ||
@@ -12,7 +12,7 @@ h1. Fields
 | *propertyDefinition* | {{Object}} | Define properties of node type |
 
 
-h1. Examples Nodetype configuration
+h1. Examples Nodetype configuration {anchor:id=CONTref.Configuration.Nodetypes.Example_nodetype_configuration}
 
 The node definition should be placed in a special XML file (see DTD below) and declared in the service's configuration file to eXo component plugin mechanism, described as follows:
 {code}
