@@ -216,6 +216,7 @@ public class UICLVPortlet extends UIPortletApplication {
     	try {
     		NodeLocation folderLocation = NodeLocation.getNodeLocationByExpression(folderPath);
     		folderNode = NodeLocation.getNodeByLocation(folderLocation);
+    		if (folderNode == null) return null;
     	}
     	catch (Exception e) {
     		folderNode = null;

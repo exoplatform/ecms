@@ -1,0 +1,42 @@
+Index: apps/portlet-presentation/src/main/java/org/exoplatform/wcm/webui/clv/UICLVFolderMode.java
+===================================================================
+--- apps/portlet-presentation/src/main/java/org/exoplatform/wcm/webui/clv/UICLVFolderMode.java	(revision 67171)
++++ apps/portlet-presentation/src/main/java/org/exoplatform/wcm/webui/clv/UICLVFolderMode.java	(working copy)
+@@ -115,8 +115,7 @@
+     }      
+     NodeLocation nodeLocation = NodeLocation.getNodeLocationByExpression(
+     		(folderPath != null) ? folderPath : preferences.getValue(UICLVPortlet.PREFERENCE_ITEM_PATH, null));
+-    //encoding
+-    String nPath  = new String(nodeLocation.getPath().getBytes("ISO-8859-1"), "UTF-8");
++    String nPath  = nodeLocation.getPath();
+     return wcmComposer.getContents(nodeLocation.getRepository(), Text.escapeIllegalJcrChars(nodeLocation.getWorkspace()), 
+         Text.escapeIllegalJcrChars(nPath), filters, WCMCoreUtils.getUserSessionProvider());
+   }
+Index: apps/portlet-presentation/src/main/java/org/exoplatform/wcm/webui/clv/UICLVPortlet.java
+===================================================================
+--- apps/portlet-presentation/src/main/java/org/exoplatform/wcm/webui/clv/UICLVPortlet.java	(revision 67171)
++++ apps/portlet-presentation/src/main/java/org/exoplatform/wcm/webui/clv/UICLVPortlet.java	(working copy)
+@@ -216,6 +216,7 @@
+     	try {
+     		NodeLocation folderLocation = NodeLocation.getNodeLocationByExpression(folderPath);
+     		folderNode = NodeLocation.getNodeByLocation(folderLocation);
++    		if (folderNode == null) return null;
+     	}
+     	catch (Exception e) {
+     		folderNode = null;
+Index: apps/portlet-presentation/src/main/java/org/exoplatform/wcm/webui/clv/UICLVPresentation.java
+===================================================================
+--- apps/portlet-presentation/src/main/java/org/exoplatform/wcm/webui/clv/UICLVPresentation.java	(revision 67171)
++++ apps/portlet-presentation/src/main/java/org/exoplatform/wcm/webui/clv/UICLVPresentation.java	(working copy)
+@@ -249,8 +249,10 @@
+     String clvBy = Utils.getPortletPreference(UICLVPortlet.PREFERENCE_SHOW_CLV_BY);
+     if (clvBy == null || clvBy.length() == 0)
+     	clvBy = UICLVPortlet.DEFAULT_SHOW_CLV_BY;
+-    link = baseURI + portalURI + basePath + "?" + clvBy + "=" + nodeLocation.getRepository() + ":" + nodeLocation.getWorkspace() +":"+ node.getPath();
+     
++    String params =  nodeLocation.getRepository() + ":" + nodeLocation.getWorkspace() +":"+ node.getPath();
++    link = baseURI + portalURI + basePath + "?" + clvBy + "=" + Text.escape(params);
++    
+     FriendlyService friendlyService = getApplicationComponent(FriendlyService.class);
+     link = friendlyService.getFriendlyUri(link);
+     
