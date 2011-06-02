@@ -255,7 +255,10 @@ public class UISymLinkForm extends UIForm implements UIPopupComponent, UISelecta
       if (uiComponent instanceof UISymLinkForm) {
         UISymLinkForm uiSymLinkForm = (UISymLinkForm)uiComponent;
         String id = event.getRequestContext().getRequestParameter(OBJECTID);
-        uiSymLinkForm.getUIStringInput(FIELD_NAME).setValue("");
+        UIFormStringInput uiFormStringInput = uiSymLinkForm.getUIStringInput(FIELD_NAME);
+        if (uiFormStringInput != null) {
+        	uiFormStringInput.setValue("");
+        }
         uiSet.removeChildById(id);
         event.getRequestContext().addUIComponentToUpdateByAjax(uiSymLinkForm);
       }

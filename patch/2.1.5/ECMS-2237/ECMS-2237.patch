@@ -1,0 +1,16 @@
+Index: core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/symlink/UISymLinkForm.java
+===================================================================
+--- core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/symlink/UISymLinkForm.java	(revision 69324)
++++ core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/symlink/UISymLinkForm.java	(working copy)
+@@ -255,7 +255,10 @@
+       if (uiComponent instanceof UISymLinkForm) {
+         UISymLinkForm uiSymLinkForm = (UISymLinkForm)uiComponent;
+         String id = event.getRequestContext().getRequestParameter(OBJECTID);
+-        uiSymLinkForm.getUIStringInput(FIELD_NAME).setValue("");
++        UIFormStringInput uiFormStringInput = uiSymLinkForm.getUIStringInput(FIELD_NAME);
++        if (uiFormStringInput != null) {
++        	uiFormStringInput.setValue("");
++        }
+         uiSet.removeChildById(id);
+         event.getRequestContext().addUIComponentToUpdateByAjax(uiSymLinkForm);
+       }
