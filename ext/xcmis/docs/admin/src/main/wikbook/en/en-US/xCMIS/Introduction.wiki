@@ -47,4 +47,4 @@ The CMIS features are implemented as a set of components deployed on the eXo Con
 Figure: how eXo CMIS works
 
 WCM drives exposure is implemented as WCM storage provider to xCMIS SPI. 
-Storage provider uses mappings from WCM's _ManageDriveService_ to actual JCR nodes. And _AtomPub_ bindings makes WCM structure available via CMIS standart API.
+Storage provider uses mappings from WCM's _ManageDriveService_ to actual JCR nodes. And _AtomPub_ bindings makes WCM structure available via CMIS standard API.

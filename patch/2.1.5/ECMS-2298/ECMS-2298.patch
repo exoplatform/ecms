@@ -1,0 +1,332 @@
+
+Property changes on: .
+___________________________________________________________________
+Added: svn:mergeinfo
+   Merged /ecms/trunk:r69706,69791
+
+
+Property changes on: ext/xcmis/sp/src
+___________________________________________________________________
+Modified: svn:mergeinfo
+   Merged /ecms/trunk/ext/xcmis/sp/src:r69706,69791
+
+Index: ext/xcmis/docs/developer/src/main/wikbook/en/en-US/xCMIS/Links.wiki
+===================================================================
+--- ext/xcmis/docs/developer/src/main/wikbook/en/en-US/xCMIS/Links.wiki	(revision 69791)
++++ ext/xcmis/docs/developer/src/main/wikbook/en/en-US/xCMIS/Links.wiki	(working copy)
+@@ -1,6 +1,7 @@
+ 
+ xCMIS project links:
+ * Community site [http://xcmis.org/].
++* JIRA site [https://jira.exoplatform.org/browse/CMIS].
+ * Forum [http://groups.google.com/group/xcmis].
+ * xCMIS latest news [http://gazarenkov.blogspot.com/].
+ * eXo Platform blog [http://blog.exoplatform.org/].
+Index: ext/xcmis/docs/developer/src/main/wikbook/en/en-US/xCMIS/Introduction.wiki
+===================================================================
+--- ext/xcmis/docs/developer/src/main/wikbook/en/en-US/xCMIS/Introduction.wiki	(revision 69791)
++++ ext/xcmis/docs/developer/src/main/wikbook/en/en-US/xCMIS/Introduction.wiki	(working copy)
+@@ -31,7 +31,7 @@
+ Figure: how eXo CMIS works
+ 
+ WCM drives exposure is implemented as WCM storage provider to xCMIS SPI. 
+-Storage provider uses mappings from WCM's _ManageDriveService_ to actual JCR nodes. And _AtomPub_ bindings makes WCM structure available via CMIS standart API.
++Storage provider uses mappings from WCM's _ManageDriveService_ to actual JCR nodes. And _AtomPub_ bindings makes WCM structure available via CMIS standard API.
+ 
+ 
+ 
+Index: ext/xcmis/docs/developer/src/main/wikbook/en/en-US/xCMIS/WCMfeatures.wiki
+===================================================================
+--- ext/xcmis/docs/developer/src/main/wikbook/en/en-US/xCMIS/WCMfeatures.wiki	(revision 69791)
++++ ext/xcmis/docs/developer/src/main/wikbook/en/en-US/xCMIS/WCMfeatures.wiki	(working copy)
+@@ -163,7 +163,7 @@
+ 
+ The requested file (products.xml) contains the entry with information about the folder.
+ * The list of properties for the object (such as node Id or type).
+-* Allowable Actions can be performed on the document; for example, requesting the childrens list.
++* Allowable Actions can be performed on the document; for example, requesting the children list.
+ * ACL and policies information.
+ {code:language=xml}
+ <entry xmlns="http://www.w3.org/2005/Atom" xmlns:cmisra="http://docs.oasis-open.org/ns/cmis/restatom/200908/">
+Index: ext/xcmis/docs/developer/src/main/wikbook/en/en-US/xCMIS/CodeExamples.wiki
+===================================================================
+--- ext/xcmis/docs/developer/src/main/wikbook/en/en-US/xCMIS/CodeExamples.wiki	(revision 69791)
++++ ext/xcmis/docs/developer/src/main/wikbook/en/en-US/xCMIS/CodeExamples.wiki	(working copy)
+@@ -1,11 +1,12 @@
+ The following examples of CMIS usage may be useful for developers who needs to access a repository. 
+-CMIS access code snippets build using Apache HTTP Client for Java or using Google gadets (gadgets.io) for JavaScript examples.
++CMIS access code snippets build using Apache HTTP Client for Java or using Google gadgets (gadgets.io) for JavaScript examples.
++For the cURL examples look at http://code.google.com/p/xcmis/wiki/xCMISusesWithCurl.
+ 
+ h2. Login to repository.
+ 
+ {note}
+-CMIS service uses default authenticaton in general case, but it can be overriden in case of embedding CMIS into an Application Service. 
+-In these examples only Basic HTTP authenticaton covered.
++CMIS service uses default authentication in general case, but it can be overridden in case of embedding CMIS into an Application Service. 
++In these examples only Basic HTTP authentication covered.
+ {note}
+ 
+ h3. Using java.
+@@ -28,7 +29,7 @@
+ 
+ There are a several methods to get the documents listings, such as getChildren(), getFolderTree() and getDescentants(), their usage will be described below.
+ The difference between them is in usage of different URL segments to get a data ("/children" for getChildren(), "/foldertree" for getFolderTree(), "/descendants" for getDescentants()),
+-and a different kind of results (getChildren() returns a flat structure, while a getFolderTree() and getDescentants() has a tree of items in responce).
++and a different kind of results (getChildren() returns a flat structure, while a getFolderTree() and getDescentants() has a tree of items in response).
+ 
+ h3. Using java.
+ 
+@@ -49,16 +50,16 @@
+  GetMethod get = new GetMethod(url); 
+  try {
+  int result = client.executeMethod(get);
+- final String strResponce = get.getResponseBodyAsString(); 
++ final String strResponse = get.getResponseBodyAsString(); 
+  } finally {
+    get.releaseConnection();
+  }
+ {code}
+ 
+ 
+-h3. Using javascript.
++h3. Using JavaScript.
+ 
+-Creating an URL to make a request (consists of repository name, the method name, e.g. "/children/", and folderID to get childrens from):
++Creating an URL to make a request (consists of repository name, the method name, e.g. "/children/", and folderID to get children from):
+ 
+ {code:language=java}
+  var url = "http://localhost:8080/rest/private/cmisatom/";
+@@ -96,6 +97,8 @@
+ 
+ h3. Using java.
+ 
++Get document properties.
++
+ {code:language=java}
+  import org.apache.commons.httpclient.HttpClient;
+  import org.apache.commons.httpclient.methods.GetMethod;
+@@ -113,13 +116,15 @@
+  GetMethod get = new GetMethod(url); 
+  try {
+    int result = client.executeMethod(get);
+-   final String strResponce = get.getResponseBodyAsString(); 
++   final String strResponse = get.getResponseBodyAsString(); 
+    // use response...
+  } finally {
+    get.releaseConnection();
+  }
+ {code}
+ 
++Get document content-stream.
++
+ To get a Document's content stream, an URL must contain "/file" part, object ID, and optionally the content stream ID, which can be used, for example, to obtain 
+ renditions. If no stream ID is specified, a default stream will be returned.
+ 
+@@ -140,10 +145,10 @@
+  client.getHttpConnectionManager().
+  getParams().setConnectionTimeout(10000);
+ 
+- PostMethod post = new PostMethod(url);
++ GetMethod get = new GetMethod(url);
+  try { 
+-   int result = client.executeMethod(post);
+-   final InputStream stream = post.getResponseBodyAsStream(); 
++   int result = client.executeMethod(get);
++   final InputStream stream = get.getResponseBodyAsStream(); 
+    try { 
+    // use stream... 
+    int dataByte = stream.read(); 
+@@ -151,14 +156,16 @@
+      stream.close();
+    }
+  } finally {   
+-   post.releaseConnection();
++   get.releaseConnection();
+  }
+ {code}
+ 
+-h3. Using javascript.
++h3. Using JavaScript.
+ 
+-Creating an URL to make a request (consists of repository name, method name, e.g. "/children/", and folder ID to get the childrens from):
++Get document properties.
+ 
++Creating an URL to make a request (consists of repository name, method name, e.g. "/children/", and folder ID to get the children from):
++
+ {code:language=java}
+  var url = "http://localhost:8080/rest/private/cmisatom/";
+  url += repository;
+@@ -177,13 +184,27 @@
+ 
+ You can also use the ContentType.DOM parameter to parse the feed in your application (Using DOMParser for example).
+ 
++Get document content-stream.
++
+ {note}
+-Perfoming a content stream request in javascript will cause the browser dialog for a file download.
++Performing a content stream request in JavaScript will cause the browser dialog for a file download.
+ {note}
+ 
++{code:language=java}
++ var url = "http://localhost:8080/rest/private/cmisatom/";
++ url += repository;
++ url += "/file/";
++ url += obj_id;
++ //Optionally
++ url += "?";
++ url += "streamid=";
++ url += streamID;
++{code}
++
++
+ h2. Search of data and syntax examples.
+ 
+-CMIS suports SQL queries for more handful content search. Query service can handle both GET and POST requests. URL for query consists of repository name and method name "/query".
++CMIS supports SQL queries for more handful content search. Query service can handle both GET and POST requests. URL for query consists of repository name and method name "/query".
+ GET request must contain query as a parameter named "q", in case of POST request query must be located in a request body.
+ 
+ For more detailed instructions how to construct queries please refer to "Query examples" chapter.
+@@ -217,7 +238,7 @@
+  try { 
+    post.setRequestEntity(entity);
+    int result = client.executeMethod(post);
+-   final String strResponce = post.getResponseBodyAsString(); 
++   final String strResponse = post.getResponseBodyAsString(); 
+    // use response...
+  } finally {
+    post.releaseConnection();
+@@ -225,7 +246,7 @@
+ {code}
+ 
+ 
+-h3. Using javascript.
++h3. Using JavaScript.
+ 
+ {code:language=java}
+  var url = "http://localhost:8080/rest/private/cmisatom/";
+@@ -271,22 +292,22 @@
+          + "<entry xmlns='http://www.w3.org/2005/Atom'"
+          + " xmlns:cmis='http://docs.oasis-open.org/ns/cmis/core/200908/'"
+          + " xmlns:cmisra='http://docs.oasis-open.org/ns/cmis/restatom/200908/'>"
+-         + "<title>title</title><summary>summary</summary>"
+          + "<cmisra:object><cmis:properties>"
+-         + "<cmis:propertyId queryName='cmis:objectId' localName='rep-cmis:objectId' propertyDefinitionId='cmis:objectId'>"
+-         + "<cmis:value>a3386ea0-0477-4a74-96bd-70d3da1c483a</cmis:value>"
+-         + "</cmis:propertyId>"
+-         + "</cmis:properties></cmisra:object></entry>";
++         + "<cmis:propertyString queryName='cmis:name' localName='cmis:name' propertyDefinitionId='cmis:name'>"
++         + "<cmis:value>newName</cmis:value>"
++         + "</cmis:propertyString>"
++         + "</cmis:properties></cmisra:object>"
++         + "</entry>";
+ 
+- PostMethod post = new PostMethod(url);
++ PutMethod put = new PutMethod(url);
+  RequestEntity entity = new StringRequestEntity(atomDoc, "text/xml", "utf-8");
+- post.setRequestEntity(entity); 
++ put.setRequestEntity(entity); 
+ 
+  try { 
+-   int result = client.executeMethod(post);
+-   final String strResponce = post.getResponseBodyAsString(); 
++   int result = client.executeMethod(put);
++   final String strResponse = put.getResponseBodyAsString(); 
+  } finally {
+-   post.releaseConnection();
++   put.releaseConnection();
+  }
+ {code}
+ 
+@@ -314,13 +335,13 @@
+ 
+  try { 
+    int result = client.executeMethod(post);
+-   final String strResponce = post.getResponseBodyAsString(); 
++   final String strResponse = post.getResponseBodyAsString(); 
+  } finally {
+    post.releaseConnection();
+  }
+ {code}
+ 
+-h3. Using javascript.
++h3. Using JavaScript.
+ 
+ Update properties:
+ 
+@@ -337,11 +358,10 @@
+        atomDoc += "<entry xmlns='http://www.w3.org/2005/Atom'";
+        atomDoc += " xmlns:cmis='http://docs.oasis-open.org/ns/cmis/core/200908/'";
+        atomDoc += " xmlns:cmisra='http://docs.oasis-open.org/ns/cmis/restatom/200908/'>";
+-       atomDoc += "<title>title</title><summary>summary</summary>";
+        atomDoc += "<cmisra:object><cmis:properties>";
+-       atomDoc += "<cmis:propertyId queryName='cmis:objectId' localName='rep-cmis:objectId' propertyDefinitionId='cmis:objectId'>";
+-       atomDoc += "<cmis:value>a3386ea0-0477-4a74-96bd-70d3da1c483a</cmis:value>";
+-       atomDoc += "</cmis:propertyId>";
++       atomDoc += "<cmis:propertyString queryName='cmis:name' localName='cmis:name' propertyDefinitionId='cmis:name'>";
++       atomDoc += "<cmis:value>newName</cmis:value>";
++       atomDoc += "</cmis:propertyString>";
+        atomDoc += "</cmis:properties></cmisra:object></entry>";
+ 
+  var params = {};
+@@ -363,7 +383,7 @@
+  var params = {};
+  params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
+  params[gadgets.io.RequestParameters.CONTENT_TYPE] = "multipart/form-data";
+- params[gadgets.io.RequestParameters.POST_DATA] = contestStream;
++ params[gadgets.io.RequestParameters.POST_DATA] = contentStream;
+  gadgets.io.makeRequest(url, handler, params);
+ {code}
+ 
+Index: ext/xcmis/docs/admin/src/main/wikbook/en/en-US/xCMIS/Introduction.wiki
+===================================================================
+--- ext/xcmis/docs/admin/src/main/wikbook/en/en-US/xCMIS/Introduction.wiki	(revision 69791)
++++ ext/xcmis/docs/admin/src/main/wikbook/en/en-US/xCMIS/Introduction.wiki	(working copy)
+@@ -47,4 +47,4 @@
+ Figure: how eXo CMIS works
+ 
+ WCM drives exposure is implemented as WCM storage provider to xCMIS SPI. 
+-Storage provider uses mappings from WCM's _ManageDriveService_ to actual JCR nodes. And _AtomPub_ bindings makes WCM structure available via CMIS standart API.
++Storage provider uses mappings from WCM's _ManageDriveService_ to actual JCR nodes. And _AtomPub_ bindings makes WCM structure available via CMIS standard API.
+Index: ext/xcmis/docs/admin/src/main/wikbook/en/en-US/xCMIS/xCMISfiles.wiki
+===================================================================
+--- ext/xcmis/docs/admin/src/main/wikbook/en/en-US/xCMIS/xCMISfiles.wiki	(revision 69791)
++++ ext/xcmis/docs/admin/src/main/wikbook/en/en-US/xCMIS/xCMISfiles.wiki	(working copy)
+@@ -6,7 +6,7 @@
+ 
+ eXo CMIS consists of JAR files:
+ 
+-xCMIS project files (actual for the xCMIS 1.1.x versions):
++xCMIS project files (actual for the xCMIS 1.2.x versions):
+ * xcmis-renditions-X.X.X.jar
+ * xcmis-restatom-X.X.X.jar
+ * xcmis-search-model-X.X.X.jar
+@@ -17,7 +17,7 @@
+ eXo WCM Storage Provider for xCMIS SPI (uses the same version as WCM/ECMS system):
+ * exo-ecms-ext-xcmis-sp-Y.Y.Y.jar 
+ 
+-Third-party dependencies (of xCMIS 1.1.x):
++Third-party dependencies (of xCMIS 1.2.x):
+ * _abdera-client-0.4.0-incubating.jar_
+ * _abdera-core-0.4.0-incubating.jar_
+ * _abdera-i18n-0.4.0-incubating.jar_
+@@ -28,5 +28,6 @@
+ * _axiom-impl-1.2.5.jar_
+ * _jaxen-1.1.1.jar_
+ * _lucene-regex-2.4.1.jar_
++etc.
+ 
+ 
+Index: ext/xcmis/docs/admin/src/main/wikbook/en/en-US/xCMIS/Index.wiki
+===================================================================
+--- ext/xcmis/docs/admin/src/main/wikbook/en/en-US/xCMIS/Index.wiki	(revision 69791)
++++ ext/xcmis/docs/admin/src/main/wikbook/en/en-US/xCMIS/Index.wiki	(working copy)
+@@ -46,7 +46,7 @@
+ 
+ * Write-ahead logging
+ 
+-To be able to provide index consistency and recoverability in the case of unexpected crashes or damages, XCMIS uses&nbsp;[write-ahead logging|http://en.wikipedia.org/wiki/Write-ahead_logging]&nbsp;(WAL) technique. Write-Ahead Logging is a standard approach to transaction logging. Briefly, WAL's central concept is that changes to data files (indexes) must be written only after those changes have been logged, that is, when log records describing the changes have been flushed to permanent storage. If we follow this procedure, we do not need to flush data pages to disk on every transaction commit, because we know that in the event of a crash we will be able to recover the index using the log: any changes that have not been applied to the data pages can be redone from the log records. (This is roll-forward recovery, also known as REDO.)
++To be able to provide index consistency and recoverability in the case of unexpected crashes or damages, XCMIS uses [write-ahead logging|http://en.wikipedia.org/wiki/Write-ahead_logging] (WAL) technique. Write-Ahead Logging is a standard approach to transaction logging. Briefly, WAL's central concept is that changes to data files (indexes) must be written only after those changes have been logged, that is, when log records describing the changes have been flushed to permanent storage. If we follow this procedure, we do not need to flush data pages to disk on every transaction commit, because we know that in the event of a crash we will be able to recover the index using the log: any changes that have not been applied to the data pages can be redone from the log records. (This is roll-forward recovery, also known as REDO.)
+ 
+ A major benefit of using WAL is a significantly reduced number of disk writes, because only the log file needs to be flushed to disk at the time of transaction commit, rather than every data file changed by the transaction.
+ 

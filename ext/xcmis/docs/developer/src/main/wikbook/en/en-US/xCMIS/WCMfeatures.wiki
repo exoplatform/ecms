@@ -163,7 +163,7 @@ curl -o news.xml -u root:gtn http://localhost:8080/rest/private/cmisatom/Managed
 
 The requested file (products.xml) contains the entry with information about the folder.
 * The list of properties for the object (such as node Id or type).
-* Allowable Actions can be performed on the document; for example, requesting the childrens list.
+* Allowable Actions can be performed on the document; for example, requesting the children list.
 * ACL and policies information.
 {code:language=xml}
 <entry xmlns="http://www.w3.org/2005/Atom" xmlns:cmisra="http://docs.oasis-open.org/ns/cmis/restatom/200908/">
