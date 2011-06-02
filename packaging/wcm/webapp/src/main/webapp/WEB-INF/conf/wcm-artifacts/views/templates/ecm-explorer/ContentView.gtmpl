@@ -5,7 +5,7 @@
    *           chuong_phan@exoplatform.com, phan.le.thanh.chuong@gmail.com
    * May 27, 2009
    */
-  
+
   import java.util.ArrayList;
   import java.net.URLEncoder;
   import org.exoplatform.ecm.webui.utils.Utils ;
@@ -16,16 +16,16 @@
   import org.exoplatform.ecm.webui.component.explorer.DocumentProviderUtils;
   import org.exoplatform.ecm.jcr.model.Preference;
   import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
-  
+
   import javax.jcr.Value;
   import javax.jcr.PathNotFoundException;
-  
+
   // Content view
   import java.util.Date;
   import javax.jcr.Node;
   import org.exoplatform.services.wcm.publication.WCMPublicationService;
   // Content view
-  
+
    /**
     * Finds and returns the date information of the given node.
     *
@@ -38,7 +38,7 @@
        if("live".equals(status)) {
          date = node.getProperty("publication:liveDate").getDate().getTime();
        } else if ("draft".equals(status) || "obsolete".equals(status)) {
-         date = uicomponent.getDateModified(node); 
+         date = uicomponent.getDateModified(node);
        } else {
          date = uicomponent.getDateCreated(node);
        }
@@ -47,7 +47,7 @@
      }
      return date;
    }
-  
+
   def uiWorkingArea = uicomponent.getAncestorOfType(UIWorkingArea.class);
   def uiExplorer = uicomponent.getAncestorOfType(UIJCRExplorer.class);
   def pref = uiExplorer.getPreference();
@@ -57,7 +57,7 @@
   def managersGroundContext = uiWorkingArea.getGroundActionsExtensionList();
   def action = "";
   def permLinkComponent = null;
-  
+
   UIRightClickPopupMenu contextMenu = uicomponent.getContextMenu() ;
   String componentId = uicomponent.getId();
   java.text.DateFormat dateFormat = uicomponent.getSimpleDateFormat();
@@ -68,9 +68,9 @@
   rcontext.getJavascriptManager().addOnLoadJavascript("eXo.ecm.UIListView.setHeight");
   rcontext.getJavascriptManager().addOnLoadJavascript("eXo.ecm.ECMUtils.initClipboard('clip_button','1','$size')");
   rcontext.getJavascriptManager().addOnLoadJavascript('eXo.ecm.UIListView.loadEffectedWidthColumn');
-  
+
   //Config to display columns with format: ["${column};${width}"]
-  //Default 
+  //Default
   String[] arrColumns = ["exo:dateCreated;123px", "exo:owner;123px"];
 %>
 <div id="$componentId">
@@ -78,7 +78,7 @@
     <div class="UIListGrid">
       <div class="TitleTable">
         <%
-          String selectedSortType = uicomponent.getTypeSort() ;   
+          String selectedSortType = uicomponent.getTypeSort() ;
           String sortOrder = uicomponent.getSortOrder();
           String typeActionLink = "";
           if (sortOrder.equals("BlueDownArrow")) {
@@ -104,9 +104,9 @@
               %>
                 <div class="SortButton ${sortOrder}16x16Icon" style="width: auto; padding-left: 20px;"><%=_ctx.appRes("WCMContentView.header.title")%></div>
               <%
-            } else { 
+            } else {
               %><%=_ctx.appRes("WCMContentView.header.title")%><%
-            } 
+            }
           %>
         </div>
         <div class="LineLeft" onmousedown="eXo.ecm.UIListView.resizeColumn(this, event);"><span></span></div>
@@ -117,35 +117,35 @@
               %>
                 <div class="SortButton ${sortOrder}16x16Icon" style="width: auto; padding-left: 20px;"><%=_ctx.appRes("WCMContentView.header.date")%></div>
               <%
-            } else { 
+            } else {
               %><%=_ctx.appRes("WCMContentView.header.date")%><%
-            } 
+            }
           %>
         </div>
         <div class="LineLeft" onmousedown="eXo.ecm.UIListView.resizeColumn(this, event);"><span></span></div>
-<!-- Author --> 
+<!-- Author -->
         <div class="ColumnAuthor Column" style="width: 93px;" onclick="<%=uicomponent.event("Sort", typeActionLink + "exo:owner")%>">
           <%
             if (selectedSortType.equals("Author")) {
               %>
                 <div class="SortButton ${sortOrder}16x16Icon" style="width: auto; padding-left: 20px;"><%=_ctx.appRes("WCMContentView.header.author")%></div>
               <%
-            } else { 
+            } else {
               %><%=_ctx.appRes("WCMContentView.header.author")%><%
-            } 
+            }
           %>
         </div>
         <div class="LineLeft" onmousedown="eXo.ecm.UIListView.resizeColumn(this, event);"><span></span></div>
-<!-- Last User --> 
+<!-- Last User -->
         <div class="ColumnAuthor Column" style="width: 93px;" onclick="<%=uicomponent.event("Sort", typeActionLink + "publication:lastUser")%>">
           <%
             if (selectedSortType.equals("LastUser")) {
               %>
                 <div class="SortButton ${sortOrder}16x16Icon" style="width: auto; padding-left: 20px;">Last User</div>
               <%
-            } else { 
+            } else {
               %>Last User<%
-            } 
+            }
           %>
         </div>
         <div class="LineLeft" onmousedown="eXo.ecm.UIListView.resizeColumn(this, event);"><span></span></div>
@@ -156,9 +156,9 @@
               %>
                 <div class="SortButton ${sortOrder}16x16Icon" style="width: auto; padding-left: 20px;"><%=_ctx.appRes("WCMContentView.header.status")%></div>
               <%
-            } else { 
+            } else {
               %><%=_ctx.appRes("WCMContentView.header.status")%><%
-            } 
+            }
           %>
         </div>
         <div class="LineLeft" onmousedown="eXo.ecm.UIListView.resizeColumn(this, event);"><span></span></div>
@@ -191,7 +191,7 @@
                     %>
                       <a class="MenuItem" href="<%=itemGroundContext.event(action)%>" style="display: block;">
                         <div class="MenuIcon ${action}16x16Icon"><%=_ctx.appRes("ECMContextMenu.event." + action)%></div>
-                      </a> 
+                      </a>
                     <%
                   }
                 %>
@@ -200,7 +200,7 @@
           </div>
         </div>
       </div> <!-- End TitleTable -->
-      
+
       <%
         String serverUrl = uicomponent.getWebDAVServerPrefix();
         String portalName = uicomponent.getPortalName() ;
@@ -219,24 +219,24 @@
           def isPreferenceNode = uicomponent.isPreferenceNode(data) ;
           def preferenceWS = data.getSession().getWorkspace().getName() ;
           String nodePath = data.getPath() ;
-          
+
           // Content view
           //   Status
           def status = wcmPublicationService.getContentState(data);
           if (status == null) status = "";
-          
+
           //   Title
           def title = uiWorkingArea.getTitle(data);
           title = Text.unescapeIllegalJcrChars(title);
-          
+
           //   Name
           def name = nodePath.substring(nodePath.lastIndexOf("/") + 1, nodePath.length()) ;
           name = Text.unescapeIllegalJcrChars(name);
-          
+
           //   Datetime
           def date = getDate(data, status);
           def datetime = dateFormat.format(date);
-          
+
           //   Author
           def author = uicomponent.getNodeOwner(data);
           if ("__system".equals(author) || "__anonim".equals(author)) author = "";
@@ -246,9 +246,9 @@
           if (data.hasProperty("publication:lastUser")) {
             lastUser = data.getProperty("publication:lastUser").getValue().getString();
           }
-          
+
           // Content view
-          
+
           String subName ;
           String actionLink = uicomponent.event("ChangeNode",Utils.formatNodeName(data.path), new Parameter("workspaceName", preferenceWS)) ;
           //Begin permlink
@@ -262,47 +262,47 @@
             strActs +=  " </div>";
             strActs +=  "</a>";
           }
-          
+
           //Begin WebDav Action
           if (!data.isNodeType(Utils.EXO_RESTORELOCATION) && !Utils.isTrashHomeNode(data)) {
             if (data.getPrimaryNodeType().getName().equals("nt:file")) {
               String mimeType="";
 							try {
 								mimeType=data.getNode("jcr:content").getProperty("jcr:mimeType").getString();
-							} catch (Exception e) {											
+							} catch (Exception e) {
 							}
 							// This escape "'" for js
 	    		  	String webDavPath = data.getPath().contains("%27") ? data.getPath().replaceAll("%27","%2527") : data.getPath();
-              String link ="javascript:eXo.ecm.ECMUtils.generateWebDAVLink('"+serverUrl+"','"+ portalName +"','"+ restContextName +"','"+repository+"','"+ preferenceWS+ "','" + webDavPath +"','"+mimeType+"')";                                   
-              strActs +=    "<a class=\"MenuItem\" onclick=\"return eXo.webui.UIRightClickPopupMenu.prepareObjectId(event, this);\" href=\"" + link + "\" >" ;          
+              String link ="javascript:eXo.ecm.ECMUtils.generateWebDAVLink('"+serverUrl+"','"+ portalName +"','"+ restContextName +"','"+repository+"','"+ preferenceWS+ "','" + webDavPath +"','"+mimeType+"')";
+              strActs +=    "<a class=\"MenuItem\" onclick=\"return eXo.webui.UIRightClickPopupMenu.prepareObjectId(event, this);\" href=\"" + link + "\" >" ;
               strActs +=    "  <div class=\"ItemIcon WebDAV16x16Icon\">" + _ctx.appRes("ECMContextMenu.event.WebDavView") + "</div>" ;
-              strActs +=    "</a>" ;            
+              strActs +=    "</a>" ;
             } else {
               def dataTarget = data;
               if(uicomponent.isSymLink(data)) dataTarget = Utils.getNodeSymLink(data);
               if (dataTarget != null) {
-                String link = serverUrl + "/" + portalName + "/" + restContextName + "/jcr/" + repository+ "/" + preferenceWS + Utils.formatNodeName(dataTarget.getPath()); 
-                strActs +=    "<a class=\"MenuItem\" onclick=\"return eXo.webui.UIRightClickPopupMenu.prepareObjectId(event, this);\" style=\"{behavior: url(#default#AnchorClick);}\" href=\"" +link + "\" target='_new' folder=\"" + link +"\">" ;          
+                String link = serverUrl + "/" + portalName + "/" + restContextName + "/jcr/" + repository+ "/" + preferenceWS + Utils.formatNodeName(dataTarget.getPath());
+                strActs +=    "<a class=\"MenuItem\" onclick=\"return eXo.webui.UIRightClickPopupMenu.prepareObjectId(event, this);\" style=\"{behavior: url(#default#AnchorClick);}\" href=\"" +link + "\" target='_new' folder=\"" + link +"\">" ;
                 strActs +=    "  <div class=\"ItemIcon WebDAV16x16Icon\">" + _ctx.appRes("ECMContextMenu.event.WebDavView") + "</div>" ;
                 strActs +=    "</a>" ;
               }
             }
           } //End WebDav Action
-          
-          List customActs = uicomponent.getCustomActions(data);  
+
+          List customActs = uicomponent.getCustomActions(data);
           Parameter[] params ;
-          if (customActs.size() > 0) {            
+          if (customActs.size() > 0) {
             for (act in customActs) {
               String actName = act.getProperty("exo:name").getValue().getString() ;
               params = [new Parameter("workspaceName", preferenceWS), new Parameter("actionName",Utils.formatNodeName(act.getName()))] ;
               strActs += "<a class=\"MenuItem\" onclick=\"return eXo.webui.UIRightClickPopupMenu.prepareObjectId(event, this);\" href=\"" + uiCustomActionComponent.event("Custom",Utils.formatNodeName(nodePath),params) + "\">" ;
               strActs += "  <div class=\"ItemIcon " + Utils.getNodeTypeIcon(act, "16x16Icon") + "\">$actName</div>" ;
               strActs += "</a>" ;
-            }            
+            }
           }
-          
+
           if (!data.isNodeType(Utils.EXO_RESTORELOCATION) && !Utils.isTrashHomeNode(data)) {
-          	String clipboardLink = serverUrl + "/" + portalName + "/rest-ecmdemo/private/jcr/" + repository + "/" + preferenceWS + data.getPath();
+          	String clipboardLink = serverUrl + "/" + portalName + "/" + restContextName + "/jcr/" + repository + "/" + preferenceWS + data.getPath();
             strActs +=  "<a class='MenuItem' style='display: block;' id='clip_button1$i' path='$clipboardLink' onclick=\"eXo.ecm.ECMUtils.pushToClipboard(event,'$clipboardLink');\">" ;
             strActs +=  " <div class='MenuURLIcon GetURL16x16Icon'>" ;
             strActs +=    _ctx.appRes("ECMContextMenu.event.GetURL");
@@ -325,7 +325,7 @@
           if (data.isNodeType("exo:restoreLocation")) isInTrash = "true";
           if (uicomponent.isMediaType(data)) isMediaType = "true";
           if (Utils.isTrashHomeNode(data)) isTrashHome = "true"
-          if (!uicomponent.isSystemWorkspace()) rightClickMenu = contextMenu.getJSOnclickShowPopup(preferenceWS + ":" + Utils.formatNodeName(nodePath), uiWorkingArea.getActionsExtensionList(data)) ;            
+          if (!uicomponent.isSystemWorkspace()) rightClickMenu = contextMenu.getJSOnclickShowPopup(preferenceWS + ":" + Utils.formatNodeName(nodePath), uiWorkingArea.getActionsExtensionList(data)) ;
           %>
             <div <%=rightClickMenu%> class="RowView Normal" trashHome="$isTrashHome" locked="$isLocked" mediaType="$isMediaType" removeFavourite="$isFavourite" inTrash="$isInTrash" workspacename="$preferenceWS" objectId="<%=URLEncoder.encode(Utils.formatNodeName(nodePath), "utf-8")%>" ondblclick="$actionLink">$strActs
               <div class="ColumnIcon" style="padding: 2px 0px; border-right: none; width: 30px;">
@@ -376,11 +376,11 @@
         }
       %>
     </div>
-    <% 
+    <%
       //re-initialize action
       uiWorkingArea.initialize();
       int availablePage = uicomponent.getContentPageIterator().getAvailablePage();
-      if (availablePage > 1) { 
+      if (availablePage > 1) {
         %>
           <div class="PageAvailable" pageAvailable='$availablePage'>
             <%_ctx.renderUIComponent(uicomponent.getContentPageIterator())%>

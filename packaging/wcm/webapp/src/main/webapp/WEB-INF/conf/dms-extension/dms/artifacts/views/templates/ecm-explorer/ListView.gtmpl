@@ -19,10 +19,10 @@
   import org.exoplatform.ecm.webui.component.explorer.DocumentProviderUtils;
   import org.exoplatform.ecm.jcr.model.Preference;
   import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
-  
+
   import javax.jcr.Value;
   import javax.jcr.PathNotFoundException;
-  
+
   def linkManager = uicomponent.getComponentInstanceOfType("org.exoplatform.services.cms.link.LinkManager");
   def uiWorkingArea = uicomponent.getAncestorOfType(UIWorkingArea.class);
   def uiExplorer = uicomponent.getAncestorOfType(UIJCRExplorer.class);
@@ -41,18 +41,18 @@
   def size = uicomponent.getChildrenList().size();
   rcontext.getJavascriptManager().importJavascript('eXo.ecm.ECMUtils', '/ecm-wcm-extension/javascript/');
   rcontext.getJavascriptManager().importJavascript('eXo.ecm.UIListView','/ecmexplorer/javascript/');
-  rcontext.getJavascriptManager().importJavascript('eXo.ecm.DMSBrowser','/ecm-wcm-extension/javascript/');  
+  rcontext.getJavascriptManager().importJavascript('eXo.ecm.DMSBrowser','/ecm-wcm-extension/javascript/');
   rcontext.getJavascriptManager().addJavascript("eXo.ecm.UIListView.initAllEvent('${componentId}-$viewComponentId', '$enableDragAndDrop');");
   rcontext.getJavascriptManager().addOnLoadJavascript("eXo.ecm.UIListView.setHeight");
   rcontext.getJavascriptManager().addOnLoadJavascript("eXo.ecm.ECMUtils.initClipboard('clip_button','1','$size')");
 	rcontext.getJavascriptManager().addOnLoadJavascript('eXo.ecm.UIListView.loadEffectedWidthColumn');
-	
+
 	//Config to display columns with format: ["${column};${width}"]
-	//Default 
+	//Default
 	String[] arrColumns = ["exo:owner;123px","exo:dateModified;123px","exo:dateCreated;121px"];
 %>
 <div id="$componentId">
-	<div id="${componentId}-$viewComponentId" class="UIListView">	
+	<div id="${componentId}-$viewComponentId" class="UIListView">
 		<div class="UIListGrid">
 				<div class="TitleTable">
 			    <%
@@ -65,7 +65,7 @@
 		          typeActionLink = "Ascending;";
 		        }
 			    %>
-			    
+
 				    <div class="ColumnIcon" style="width: 20px;" onclick="<%= uicomponent.event("Sort", typeActionLink + "Type")%>" style="cursor:pointer;" >
 			        <%
 			          if (selectedSortType.equals("Type")) {
@@ -119,7 +119,7 @@
 			    %>
 						<div class="LineLeft" onmousedown="eXo.ecm.UIListView.resizeColumn(this, event);"><span></span></div>
               <div class="Column<%=uicomponent.getPropertyNameWithoutNamespace(arrColumn[0])%>" style="width: ${arrColumn[1]}" onclick="<%= uicomponent.event("Sort", typeActionLink + arrColumn[0])%>">
-			       <%  
+			       <%
 			       if (arrColumn[0].equals(selectedSortType)) {
              %>
 				        <div class="SortButton ${sortOrder}16x16Icon" style="width: auto; padding-left: 20px;">
@@ -137,21 +137,21 @@
 			    <div style="clear: left"><span></span></div>
 			    <div style="position: relative; top: 0px; left: 0px; width: 0px; height: 0px">
 						<div class="Mask" style="position: absolute; top: 0px; left: 0px; width: 0px; height: 0px"></div>
-						
-						<div class="JCRMoveAction" 
-								 style="display: none;" 
-								 request="<%=uiWorkingArea.getJCRMoveAction().event(UIWorkingArea.MOVE_NODE, 'MultiSelection')%>" 
+
+						<div class="JCRMoveAction"
+								 style="display: none;"
+								 request="<%=uiWorkingArea.getJCRMoveAction().event(UIWorkingArea.MOVE_NODE, 'MultiSelection')%>"
 								 symlink="<%=uiWorkingArea.getCreateLinkAction().event(UIWorkingArea.CREATE_LINK, 'MultiSelection')%>">
 						</div>
-						
+
 						<div class="ItemContextMenu" style="position: absolute; top: 0px; left: 0px; display: none;">
 							<div class="UIRightClickPopupMenu" style="display: block;">
-								<div class="UIRightPopupMenuContainer" onmousedown="event.cancelBubble = true;" style="border: 2px solid #b7b7b7">									
+								<div class="UIRightPopupMenuContainer" onmousedown="event.cancelBubble = true;" style="border: 2px solid #b7b7b7">
 											<%
 												for(itemContext in managersMultiItemContext) {
 													action = itemContext.getUIExtensionName();
 											%>
-													<a class="MenuItem" style="display: block;" onclick=eXo.ecm.UIListView.postGroupAction("<%=itemContext.event(action, 'MultiSelection')%>")> 	
+													<a class="MenuItem" style="display: block;" onclick=eXo.ecm.UIListView.postGroupAction("<%=itemContext.event(action, 'MultiSelection')%>")>
 													<div class="ItemIcon ${action}16x16Icon">
 													<%=_ctx.appRes("ECMContextMenu.event." + action)%>
 													</div>
@@ -159,25 +159,25 @@
 											<%
 												}
 											%>
-										
-								 </div>	
-							 </div> 
+
+								 </div>
+							 </div>
 						</div>
 						<div class="GroundContextMenu" style="position: absolute;
 											 top: 0px; left: 0px; display: none;">
 								<div class="UIRightClickPopupMenu" style="display: block;">
-									<div class="UIRightPopupMenuContainer" onmousedown="event.cancelBubble = true;" style="border: 2px solid #b7b7b7">					
+									<div class="UIRightPopupMenuContainer" onmousedown="event.cancelBubble = true;" style="border: 2px solid #b7b7b7">
 										<%
 													for(itemGroundContext in managersGroundContext) {
 													action = itemGroundContext.getUIExtensionName();
 										%>
-									<a class="MenuItem" href="<%=itemGroundContext.event(action)%>" style="display: block;"> 	
+									<a class="MenuItem" href="<%=itemGroundContext.event(action)%>" style="display: block;">
 											<div class="MenuIcon ${action}16x16Icon">
 												<%=_ctx.appRes("ECMContextMenu.event." + action)%>
 											</div>
 									 	</a>
-									<%}%>			
-									 </div>	
+									<%}%>
+									 </div>
 								 </div>
 						</div>
 					</div>
@@ -199,7 +199,7 @@
           def isPreferenceNode = uicomponent.isPreferenceNode(data) ;
           def preferenceWS = data.getSession().getWorkspace().getName() ;
           String nodePath = data.getPath() ;
-          String name = nodePath.substring(nodePath.lastIndexOf("/") + 1, nodePath.length()) ;   
+          String name = nodePath.substring(nodePath.lastIndexOf("/") + 1, nodePath.length()) ;
           String title = uiWorkingArea.getTitle(data);
           String subName ;
           String actionLink = uicomponent.event("ChangeNode",Utils.formatNodeName(data.path), new Parameter("workspaceName", preferenceWS)) ;
@@ -213,48 +213,48 @@
             strActs +=    _ctx.appRes("ECMContextMenu.event." + permlink);
             strActs +=  " </div>";
             strActs +=  "</a>";
-          }      
+          }
           //Begin WebDav Action
           if (!data.isNodeType(Utils.EXO_RESTORELOCATION) && !Utils.isTrashHomeNode(data)) {
             if ((!linkManager.isLink(data) || linkManager.isTargetReachable(data)) && data.getPrimaryNodeType().getName().equals("nt:file")) {
 	    		  	String mimeType="";
 							try {
 								mimeType=data.getNode("jcr:content").getProperty("jcr:mimeType").getString();
-							} catch (Exception e) {											
+							} catch (Exception e) {
 							}
 							// This escape "'" for js
 	    		  	String webDavPath = nodePath.contains("%27") ? nodePath.replaceAll("%27","%2527") : nodePath;
 	    		  	String link ="javascript:eXo.ecm.ECMUtils.generateWebDAVLink('"+serverUrl+"','"+ portalName +"','"+ restContextName +"','"+repository+"','"+ preferenceWS+ "','" + webDavPath +"','"+mimeType+"')";
-	    		  	strActs +=		"<a class=\"MenuItem\" onclick=\"return eXo.webui.UIRightClickPopupMenu.prepareObjectId(event, this);\" href=\"" + link + "\" >" ;	        
+	    		  	strActs +=		"<a class=\"MenuItem\" onclick=\"return eXo.webui.UIRightClickPopupMenu.prepareObjectId(event, this);\" href=\"" + link + "\" >" ;
 	    		  	strActs += 		"  <div class=\"ItemIcon WebDAV16x16Icon\">" + _ctx.appRes("UITreeExplorer.label.webDavView") + "</div>" ;
-	    			  strActs += 		"</a>" ;				  	
+	    			  strActs += 		"</a>" ;
 	    		  } else {
 							//data = Utils.getNodeSymLink(data);
 							def dataTarget = data;
 					  	if(uicomponent.isSymLink(data)) dataTarget = Utils.getNodeSymLink(data);
 					  	if (dataTarget != null) {
-  	    		  	String link = serverUrl + "/" + portalName + "/" + restContextName + "/jcr/" + repository+ "/" + preferenceWS + Utils.formatNodeName(dataTarget.getPath()); 
-  	    		  	strActs +=		"<a class=\"MenuItem\" onclick=\"return eXo.webui.UIRightClickPopupMenu.prepareObjectId(event, this);\" style=\"{behavior: url(#default#AnchorClick);}\" href=\"" +link + "\" target='_new' folder=\"" + link +"\">" ;	        
+  	    		  	String link = serverUrl + "/" + portalName + "/" + restContextName + "/jcr/" + repository+ "/" + preferenceWS + Utils.formatNodeName(dataTarget.getPath());
+  	    		  	strActs +=		"<a class=\"MenuItem\" onclick=\"return eXo.webui.UIRightClickPopupMenu.prepareObjectId(event, this);\" style=\"{behavior: url(#default#AnchorClick);}\" href=\"" +link + "\" target='_new' folder=\"" + link +"\">" ;
   	    		  	strActs += 		"  <div class=\"ItemIcon WebDAV16x16Icon\">" + _ctx.appRes("UITreeExplorer.label.webDavView") + "</div>" ;
   	    			  strActs += 		"</a>" ;
 					  	}
 	    		  }
           }
     		  //End WebDav Action
-	        List customActs = uicomponent.getCustomActions(data);  
+	        List customActs = uicomponent.getCustomActions(data);
 	        Parameter[] params ;
-	        if (customActs.size() > 0) {            
+	        if (customActs.size() > 0) {
 	          for (act in customActs) {
 	            String actName = act.getProperty("exo:name").getValue().getString() ;
 	            params = [new Parameter("workspaceName", preferenceWS), new Parameter("actionName",Utils.formatNodeName(act.getName()))] ;
 	            strActs += "<a class=\"MenuItem\" onclick=\"return eXo.webui.UIRightClickPopupMenu.prepareObjectId(event, this);\" href=\"" + uiCustomActionComponent.event("Custom",Utils.formatNodeName(nodePath),params) + "\">" ;
 	            strActs += "  <div class=\"ItemIcon " + Utils.getNodeTypeIcon(act, "16x16Icon") + "\">$actName</div>" ;
 	            strActs += "</a>" ;
-	          }            
+	          }
 	        }
-	        
+
 	        if (!data.isNodeType(Utils.EXO_RESTORELOCATION) && !Utils.isTrashHomeNode(data)) {
-	        	String clipboardLink = serverUrl + "/" + portalName + "/rest-ecmdemo/private/jcr/" + repository + "/" + preferenceWS + data.getPath();
+	        	String clipboardLink = serverUrl + "/" + portalName + "/" + restContextName + "/jcr/" + repository + "/" + preferenceWS + data.getPath();
 		        strActs +=	"<a class='MenuItem' style='display: block;' id='clip_button1$i' path='$clipboardLink' onclick=\"eXo.ecm.ECMUtils.pushToClipboard(event,'$clipboardLink');\">" ;
 		  			strActs +=  "	<div class='MenuURLIcon GetURL16x16Icon'>" ;
 		  			strActs +=	  _ctx.appRes("ECMContextMenu.event.GetURL");
@@ -277,7 +277,7 @@
 	        if (data.isNodeType("exo:restoreLocation")) isInTrash = "true";
 	        if (uicomponent.isMediaType(data)) isMediaType = "true";
 	        if (Utils.isTrashHomeNode(data)) isTrashHome = "true"
-	        if (!uicomponent.isSystemWorkspace()) rightClickMenu = contextMenu.getJSOnclickShowPopup(preferenceWS + ":" + Utils.formatNodeName(nodePath), uiWorkingArea.getActionsExtensionList(data)) ;	          
+	        if (!uicomponent.isSystemWorkspace()) rightClickMenu = contextMenu.getJSOnclickShowPopup(preferenceWS + ":" + Utils.formatNodeName(nodePath), uiWorkingArea.getActionsExtensionList(data)) ;
 	      %>
 		      <div <%=rightClickMenu%> class="RowView Normal" trashHome="$isTrashHome" locked="$isLocked" mediaType="$isMediaType" removeFavourite="$isFavourite" inTrash="$isInTrash" workspacename="$preferenceWS" objectId="<%=URLEncoder.encode(Utils.formatNodeName(nodePath), "utf-8")%>" ondblclick="$actionLink">
 			      $strActs
@@ -299,10 +299,10 @@
 		        <!--
 						<div class="ColumnAuditing" style="border: none; width: 108px;">
 		           <%= Utils.isAuditable(data)%>
-		           <% if (Utils.isAuditable(data)&& uicomponent.hasAuditHistory(data)) 
+		           <% if (Utils.isAuditable(data)&& uicomponent.hasAuditHistory(data))
 		                println "("+ uicomponent.getNumAuditHistory(data)+")";
 		              else
-		                println ""; 
+		                println "";
 		            %>
 		        </div>
 						-->
@@ -318,28 +318,28 @@
 							for(column in arrColumns) {
 								def arrColumn = column.split(";");
 								def arrColumnValue = uicomponent.getPropertyValue(data, arrColumn[0]);
-								if ("exo:owner".equals(arrColumn[0]) && "__system".equals(arrColumnValue) ) arrColumnValue = ""; 
+								if ("exo:owner".equals(arrColumn[0]) && "__system".equals(arrColumnValue) ) arrColumnValue = "";
 						%>
 			        <div class="Column<%=uicomponent.getPropertyNameWithoutNamespace(arrColumn[0])%>" style="width: ${arrColumn[1]}">
 				        <%=arrColumnValue%>
 			        </div>
 		        <%}%>
-		        
+
 		        <div style="clear: both"><span></span></div>
 			    </div>
 	      <%}%>
-	      
+
 	      </div>
-	 <% 
+	 <%
 	 //re-initialize action
 	 	uiWorkingArea.initialize();
 	  int availablePage = uicomponent.getContentPageIterator().getAvailablePage();
-	  if (availablePage > 1) { 
-	%>	
+	  if (availablePage > 1) {
+	%>
 			<div class="PageAvailable" pageAvailable='$availablePage'>
 				<%_ctx.renderUIComponent(uicomponent.getContentPageIterator())%>
 			</div>
 	<% } %>
 		</div>
 
-</div>	
+</div>
