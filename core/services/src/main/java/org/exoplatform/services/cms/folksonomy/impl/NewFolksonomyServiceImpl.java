@@ -75,7 +75,7 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
   private LinkManager linkManager;
   private NodeFinder nodeFinder;
   private InitParams initParams_;
-  private SessionProvider sessionProvider;
+  private SessionProviderService sessionProviderService;
   private List<TagStylePlugin> plugin_ = new ArrayList<TagStylePlugin>();
   private List<TagPermissionPlugin> tagPermissionPlugin_ = new ArrayList<TagPermissionPlugin>();
   private Set<String> tagPermissionList = new HashSet<String>();
@@ -89,10 +89,7 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
     this.initParams_ = initParams;
     
     ExoContainer myContainer = ExoContainerContext.getCurrentContainer();
-    SessionProviderService sessionProviderService
-    		=	(SessionProviderService) myContainer.getComponentInstanceOfType(SessionProviderService.class);
-    //this.sessionProvider = sessionProviderService.getSessionProvider(null);
-    this.sessionProvider = sessionProviderService.getSystemSessionProvider(null);
+    sessionProviderService =	(SessionProviderService) myContainer.getComponentInstanceOfType(SessionProviderService.class);
   }
   
   /**
@@ -393,6 +390,7 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
 				= (RepositoryService) myContainer.getComponentInstanceOfType(RepositoryService.class);
 		ManageableRepository	manageableRepository = repositoryService.getRepository(repository);
   	
+		SessionProvider sessionProvider = sessionProviderService.getSystemSessionProvider(null);
 		Session session = sessionProvider.getSession(workspace, manageableRepository);
 		session.move(tagPath, newPath.toString());
   	session.save();
@@ -532,6 +530,7 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
   
   private Node getUserFolksonomyFolder(String userName) throws Exception {
   	// code for running
+    SessionProvider sessionProvider = sessionProviderService.getSystemSessionProvider(null);
   	Node userNode = nodeHierarchyCreator.getUserNode(sessionProvider, userName);
   	String folksonomyPath = nodeHierarchyCreator.getJcrPath(USER_FOLKSONOMY_ALIAS);
   	return userNode.getNode(folksonomyPath);
@@ -561,6 +560,7 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
 		= (RepositoryService) myContainer.getComponentInstanceOfType(RepositoryService.class);
 		ManageableRepository	manageableRepository = repositoryService.getRepository(repository);
   	
+		SessionProvider sessionProvider = sessionProviderService.getSystemSessionProvider(null);
   	return (Node) sessionProvider.getSession(workspace, manageableRepository).getItem(path);
   }
 
@@ -615,6 +615,7 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
 		= (RepositoryService) myContainer.getComponentInstanceOfType(RepositoryService.class);
 		ManageableRepository	manageableRepository = repositoryService.getRepository(repository);
   	
+		SessionProvider sessionProvider = sessionProviderService.getSystemSessionProvider(null);
 		QueryManager queryManager =
 			sessionProvider.getSession(workspace, manageableRepository).getWorkspace().getQueryManager();
 		Query query = queryManager.createQuery(queryStr.toString(), Query.SQL);
@@ -752,6 +753,7 @@ public class NewFolksonomyServiceImpl implements NewFolksonomyService, Startable
   		ManageableRepository	manageableRepository 
   		= repositoryService.getRepository(initParams_.getValueParam("repository").getValue());
       
+  		SessionProvider sessionProvider = sessionProviderService.getSystemSessionProvider(null);
       Session session = sessionProvider.getSession(initParams_.getValueParam("workspace").getValue(), 
       																						 manageableRepository);
 
