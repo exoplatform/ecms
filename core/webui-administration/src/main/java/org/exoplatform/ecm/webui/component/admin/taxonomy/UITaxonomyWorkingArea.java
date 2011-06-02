@@ -76,8 +76,8 @@ public class UITaxonomyWorkingArea extends UIContainer {
   public UIPageIterator getUIPageIterator() { return uiPageIterator_; }
 
   public void updateGrid() throws Exception {
-    ListAccess<Node> nodeList = new ListAccessImpl<Node>(Node.class, getNodeList());
-    LazyPageList<Node> dataPageList = new LazyPageList<Node>(nodeList, 10);
+    ListAccess<Object> nodeList = new ListAccessImpl<Object>(Object.class, getNodeList());
+    LazyPageList<Object> dataPageList = new LazyPageList<Object>(nodeList, 10);
     uiPageIterator_.setPageList(dataPageList);
   }
 
