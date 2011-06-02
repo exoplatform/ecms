@@ -577,11 +577,13 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
                         @Context UriInfo uriInfo) {
     try {
       repoName = repositoryService.getCurrentRepository().getConfiguration().getName();
-      repoPath = convertRepoPath(repoPath, true);
+      Item item = nodeFinder.getItem(workspaceName(repoPath), LinkUtils.getParentPath(path(normalizePath(repoPath))), true);
+      repoPath = 
+        item.getSession().getWorkspace().getName() + LinkUtils.createPath(item.getPath(), LinkUtils.getItemName(path(repoPath)));
     } catch (PathNotFoundException exc) {
-      return Response.status(HTTPStatus.NOT_FOUND).entity(exc.getMessage()).build();
+      return Response.status(HTTPStatus.CONFLICT).entity(exc.getMessage()).build();
     } catch (NoSuchWorkspaceException exc) {
-      return Response.status(HTTPStatus.NOT_FOUND).entity(exc.getMessage()).build();
+      return Response.status(HTTPStatus.CONFLICT).entity(exc.getMessage()).build();
     } catch (Exception e) {
       log.warn("Cannot find the item at " + repoName + "/" + repoPath, e);
       return Response.serverError().build();
