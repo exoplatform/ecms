@@ -9,7 +9,7 @@
 %>
 <div class="$uicomponent.id">
 	<% uiform.begin() %>
-	  <div class="ConstraintOption">Operator : <%uiform.renderField(uicomponent.getChildById("operator"))%></div>
+	  <div class="ConstraintOption"><%=_ctx.appRes("UIConstraintForm.label.operator")%> : <%uiform.renderField(uicomponent.getChildById("operator"))%></div>
 	  <div class="ConstraintOption">
 	    <div class="FloatLeft"><%uiform.renderField(uicomponent.getChildById("exactlyPro"))%></div>
 	    <div class="FloatLeft"><label class="Label"><%=_ctx.appRes("UIConstraintForm.label.exactlyPro-properties")%></label>:<%uiform.renderField(uicomponent.getChildById("property1"))%></div>
@@ -21,7 +21,7 @@
 	    <div class="FloatLeft"><%uiform.renderField(uicomponent.getChildById("containPro"))%></div>
 	    <div class="FloatLeft"><label class="Label"><%=_ctx.appRes("UIConstraintForm.label.exactlyPro-properties")%></label> : <%uiform.renderField(uicomponent.getChildById("property2"))%> </div>
 	    <img class="IconConstraint AddMetadataTypeIcon FloatLeft" onclick="<%=uicomponent.event("AddMetadataType", "1")%>" src="/eXoResources/skin/DefaultSkin/background/Blank.gif" alt="" title="<%=_ctx.appRes("UIConstraintForm.tooltip.AddMetadataType")%>" />
-	    <div class="FloatLeft"><%=_ctx.appRes("UIConstraintForm.label.Contain")%> : <%uiform.renderField(uicomponent.getChildById("contain"))%></div>
+	    <div class="FloatLeft"><%=_ctx.appRes("UIConstraintForm.label.containPro-Contain")%> : <%uiform.renderField(uicomponent.getChildById("contain"))%></div>
 	  </div>
 	  <div class="ConstraintOption">
 	    <div class="FloatLeft"><%uiform.renderField(uicomponent.getChildById("notContainPro"))%></div>
