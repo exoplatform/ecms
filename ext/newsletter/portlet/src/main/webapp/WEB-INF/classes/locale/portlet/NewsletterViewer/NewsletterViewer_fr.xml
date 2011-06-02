@@ -13,7 +13,7 @@
     <action>
       <Subcribe>Je m'inscris</Subcribe>
       <ForgetEmail>Oublier cet email</ForgetEmail>
-      <ChangeSubcribe>Modifier mon Abonnement</ChangeSubcribe>
+      <ChangeSubcriptions>Modifier mon Abonnement</ChangeSubcriptions>
     </action>
     <title>
       <userEmail>Email</userEmail>

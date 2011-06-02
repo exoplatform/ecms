@@ -1,0 +1,13 @@
+Index: ext/newsletter/portlet/src/main/webapp/WEB-INF/classes/locale/portlet/NewsletterViewer/NewsletterViewer_fr.xml
+===================================================================
+--- ext/newsletter/portlet/src/main/webapp/WEB-INF/classes/locale/portlet/NewsletterViewer/NewsletterViewer_fr.xml	(revision 67233)
++++ ext/newsletter/portlet/src/main/webapp/WEB-INF/classes/locale/portlet/NewsletterViewer/NewsletterViewer_fr.xml	(working copy)
+@@ -13,7 +13,7 @@
+     <action>
+       <Subcribe>Je m'inscris</Subcribe>
+       <ForgetEmail>Oublier cet email</ForgetEmail>
+-      <ChangeSubcribe>Modifier mon Abonnement</ChangeSubcribe>
++      <ChangeSubcriptions>Modifier mon Abonnement</ChangeSubcriptions>
+     </action>
+     <title>
+       <userEmail>Email</userEmail>
