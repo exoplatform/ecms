@@ -299,10 +299,6 @@ public class PortalLinkConnector implements ResourceContainer {
                                Element filesElement,
                                String userId,
                                UserPortalConfigService portalConfigService) throws Exception {
-    if (!pageNode.isDisplay()) {
-      return;
-    }
-    
     String pageId = pageNode.getPageReference();
     Page page = portalConfigService.getPage(pageId, userId);
     String pageUri = "";

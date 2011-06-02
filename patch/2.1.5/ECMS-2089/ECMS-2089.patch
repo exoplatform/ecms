@@ -1,0 +1,15 @@
+Index: core/connector/src/main/java/org/exoplatform/wcm/connector/fckeditor/PortalLinkConnector.java
+===================================================================
+--- core/connector/src/main/java/org/exoplatform/wcm/connector/fckeditor/PortalLinkConnector.java	(revision 67260)
++++ core/connector/src/main/java/org/exoplatform/wcm/connector/fckeditor/PortalLinkConnector.java	(working copy)
+@@ -299,10 +299,6 @@
+                                Element filesElement,
+                                String userId,
+                                UserPortalConfigService portalConfigService) throws Exception {
+-    if (!pageNode.isDisplay()) {
+-      return;
+-    }
+-    
+     String pageId = pageNode.getPageReference();
+     Page page = portalConfigService.getPage(pageId, userId);
+     String pageUri = "";
