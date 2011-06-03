@@ -4,7 +4,7 @@
  * Author : Tran The Trong
  *          trong.tran@exoplatform.com
  * @version: $Id$
- * Oct 6, 2006  
+ * Oct 6, 2006
  */
 %>
 <div class="UIForm $uicomponent.id">
@@ -16,7 +16,7 @@
         	<tr>
 	  	      <td class="FieldLabel"> <%=_ctx.appRes("UICompareExactlyForm.label.filter")%></td>
 	  	      <td class="FieldComponent"><%uiform.renderField(uicomponent.getChild(0))%>
-	          	<img class="AddMetadataTypeIcon" onclick="javascript:eXo.ecm.ECMUtils.filterValue('$uicomponent.id')" src="/eXoResources/skin/DefaultSkin/background/Blank.gif" alt="" title="<%=_ctx.appRes("UICompareExactlyForm.title.result")%>">
+	          	<img class="AddMetadataTypeIcon" onclick="javascript:eXo.ecm.ECMUtils.filterValue('$uicomponent.id')" src="/eXoResources/skin/DefaultSkin/background/Blank.gif" alt="" title="<%=_ctx.appRes("UICompareExactlyForm.title.result")%>" />
 	          </td>
 	        </tr>
 	        <tr>
@@ -29,12 +29,12 @@
 	    </table>
 	  </div>
 	</div>
-  <div class="UIAction"> 
+  <div class="UIAction">
     <table class="ActionContainer">
     	<tr>
     		<td>
 	          <% for(action in uicomponent.getActions()) {
-	          		 String actionLabel = _ctx.appRes(uicomponent.getName() + ".action." + action) 
+	          		 String actionLabel = _ctx.appRes(uicomponent.getName() + ".action." + action)
 	               String link = uicomponent.event(action) ;
 	          		 //System.out.println("\n\n" + uicomponent.getName()+ ".button.label-" + actionLabel + "\n\n");
 	          %>
@@ -47,9 +47,9 @@
 	                  </div>
 	                </div>
 	              </div>
-	          <%}%>   
+	          <%}%>
       	</td>
-      </tr>       
+      </tr>
     </table>
   </div>
   <%/* end render action */%>

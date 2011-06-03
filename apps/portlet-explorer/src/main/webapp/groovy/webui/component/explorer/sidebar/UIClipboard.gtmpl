@@ -6,10 +6,10 @@
  * September 13, 2006
  * 10:07:15 AM
  **/
- 
+
   import org.exoplatform.webui.core.UIComponent ;
   import org.exoplatform.ecm.jcr.model.ClipboardCommand ;
-  
+
   String[] beanFields =  uicomponent.getBeanFields() ;
   String[] beanActions =  uicomponent.getBeanActions() ;
   String name = uicomponent.getName() ;
@@ -50,15 +50,15 @@
 				        <%=_ctx.appRes(name+".label.nocommand")%>
 				      </div>
 			      </td>
-			    </tr>  
+			    </tr>
 		    <%} else {
 				    def rowClass = null ;
 				    boolean even = true ;
 				    String path, fullPath ;
 				    int index = 1 ;
 				    for(item in uicomponent.getClipboardData()) {
-				      if(even) rowClass = "EvenRow";  
-				      else rowClass =  "OddRow"; 
+				      if(even) rowClass = "EvenRow";
+				      else rowClass =  "OddRow";
 				      even = !even ;
 				      path = fullPath = (item.getWorkspace()+ ":" + item.getSrcPath());
 				      if (path.length() > 20 ) path = "..." + path.substring(path.length() - 20, path.length());
@@ -66,11 +66,11 @@
 				    <tr class="$rowClass">
 				      <td class="Text" title="<%=fullPath%>"><%=path%></td>
 				    	<td class="Text"><%=item.getType()%></td>
-				      <td>         
+				      <td>
 				        <div class="ActionContainer">
 				          <%for(action in beanActions) { %>
-		                <img onclick="<%=uicomponent.event(action, index.toString())%>" title = "$action" alt="" src="/eXoResources/skin/sharedImages/Blank.gif" class="${action}Icon" >
-				          <%}%>        
+		                <img onclick="<%=uicomponent.event(action, index.toString())%>" title = "$action" alt="" src="/eXoResources/skin/sharedImages/Blank.gif" class="${action}Icon" />
+				          <%}%>
 				        </div>
 				      </td>
 				    </tr>
@@ -85,10 +85,10 @@
 							  <div style="clear: both"><span></span></div>
 							</div>
 			      </td>
-			    </tr>  
+			    </tr>
 			  <%}%>
 			  </tbody>
-			</table> <!--End UIGrid-->  
+			</table> <!--End UIGrid-->
 		</div>
   </div>
 </div>

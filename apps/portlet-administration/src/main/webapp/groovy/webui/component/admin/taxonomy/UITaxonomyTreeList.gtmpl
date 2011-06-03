@@ -8,7 +8,7 @@
 %>
 <%
   import org.exoplatform.ecm.webui.utils.Utils;
-  
+
   private String pathTitle(String inputStr, int defauLength) {
     String sortName = inputStr ;
     if(inputStr.length() > defauLength) {
@@ -34,8 +34,8 @@
         boolean even = true;
         if (uicomponent.getTaxonomyTreeList().size() > 0) {
           for (taxonomyTree in uicomponent.getTaxonomyTreeList()) {
-            if(even) rowClass = "EvenRow";  
-            else rowClass =  "OddRow"; 
+            if(even) rowClass = "EvenRow";
+            else rowClass =  "OddRow";
             even = !even;
         %>
             <tr class="$rowClass">
@@ -48,20 +48,20 @@
                     <div class="ShortContentPermission"><a><%=pathTitle(taxonomyTree.taxoTreePermissions, 20)%></a></div>
                     <div class="FullContentPermission" style="display: none"><a>$taxonomyTree.taxoTreePermissions</a></div>
                     <div style="clear: both;"><span></span></div>
-                  </div>                  
-                </div>                
-              </td>             
+                  </div>
+                </div>
+              </td>
               <td>
                 <div class="ActionContainer">
-                  <img src="/eXoResources/skin/sharedImages/Blank.gif" onclick="<%=uicomponent.event("EditTaxonomyTree", Utils.formatNodeName(taxonomyTree.getTaxoTreeName()))%>" title="<%=_ctx.appRes("UITaxonomyTreeList.tooltip.EditTaxonomyTree")%>" alt="" class="Edit16x16Icon">
-                  <img src="/eXoResources/skin/sharedImages/Blank.gif" onclick="<%=uicomponent.event("Delete", Utils.formatNodeName(taxonomyTree.getTaxoTreeName()))%>" title="<%=_ctx.appRes("UITaxonomyTreeList.tooltip.Delete")%>" alt="" class="Delete16x16Icon">
+                  <img src="/eXoResources/skin/sharedImages/Blank.gif" onclick="<%=uicomponent.event("EditTaxonomyTree", Utils.formatNodeName(taxonomyTree.getTaxoTreeName()))%>" title="<%=_ctx.appRes("UITaxonomyTreeList.tooltip.EditTaxonomyTree")%>" alt="" class="Edit16x16Icon" />
+                  <img src="/eXoResources/skin/sharedImages/Blank.gif" onclick="<%=uicomponent.event("Delete", Utils.formatNodeName(taxonomyTree.getTaxoTreeName()))%>" title="<%=_ctx.appRes("UITaxonomyTreeList.tooltip.Delete")%>" alt="" class="Delete16x16Icon" />
                 </div>
-              </td>                     
+              </td>
             </tr>
         <%
           }
         } else {%>
-          <tr class="$rowClass"> 
+          <tr class="$rowClass">
             <td colspan="5" style="text-align:center;font-style:italic; color: #EF5604;"><%=_ctx.appRes("UITaxonomyTreeList.msg.no-list")%></td>
           </tr>
         <%}%>
@@ -72,7 +72,7 @@
     <%_ctx.renderUIComponent(uicomponent.getUIPageIterator())%>
   </div>
   <% } %>
-  <div class="UIAction"> 
+  <div class="UIAction">
     <table class="ActionContainer">
       <tr>
         <td>

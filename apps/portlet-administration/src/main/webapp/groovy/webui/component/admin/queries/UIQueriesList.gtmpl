@@ -4,11 +4,11 @@
  * Author : Dang Van Minh
  *          minh.dang@exoplatform.com
  * Dec 29, 2006
- * 3:28:26 PM 
+ * 3:28:26 PM
  */
 %>
-<% 
-  def sharedQueries = uicomponent.getQueryList() ; 
+<%
+  def sharedQueries = uicomponent.getQueryList() ;
   if(sharedQueries == null) return ;
   int totalPages = uicomponent.getUIPageIterator().getAvailablePage() ;
 %>
@@ -29,8 +29,8 @@
   	    boolean even = true ;
   	    for (node in sharedQueries) {
   	      def right=true;
-  	      if(even) rowClass = "EvenRow" ;  
-  	      else rowClass =  "OddRow" ; 
+  	      if(even) rowClass = "EvenRow" ;
+  	      else rowClass =  "OddRow" ;
   	      even = !even ;
       %>
           <tr class="$rowClass">
@@ -52,18 +52,18 @@
 	          	  <%
 	          	  if (uicomponent.canEditNode(node)) {
 	          	  %>
-			          <img onclick="<%=uicomponent.event("Edit", node.getPath())%>" title="<%=_ctx.appRes("UIQueriesList.tooltip.Edit")%>" alt="" src="/eXoResources/skin/sharedImages/Blank.gif" class="Edit16x16Icon">
+			          <img onclick="<%=uicomponent.event("Edit", node.getPath())%>" title="<%=_ctx.appRes("UIQueriesList.tooltip.Edit")%>" alt="" src="/eXoResources/skin/sharedImages/Blank.gif" class="Edit16x16Icon" />
 			      <%
 	          	  }
 	          	  if (uicomponent.canRemoveNode(node)) {
-	          	  %>	          	
-	                <img onclick="<%=uicomponent.event("Delete", node.getPath())%>" title="<%=_ctx.appRes("UIQueriesList.tooltip.Delete")%>" alt="" src="/eXoResources/skin/sharedImages/Blank.gif" class="Delete16x16Icon">
-	              <%  
+	          	  %>
+	                <img onclick="<%=uicomponent.event("Delete", node.getPath())%>" title="<%=_ctx.appRes("UIQueriesList.tooltip.Delete")%>" alt="" src="/eXoResources/skin/sharedImages/Blank.gif" class="Delete16x16Icon" />
+	              <%
 	          	  }%>
 		          </div>
-	          </td>	                    
+	          </td>
           </tr>
-      <%}%>  
+      <%}%>
     </tbody>
   </table>
   <% if(totalPages>1){ %>

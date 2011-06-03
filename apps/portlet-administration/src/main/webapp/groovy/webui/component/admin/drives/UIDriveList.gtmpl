@@ -4,7 +4,7 @@
  * Author : Dang Van Minh
  *          minh.dang@exoplatform.com
  * Aug 30, 2007
- * 9:21:26 AM 
+ * 9:21:26 AM
  */
 %>
 <%
@@ -28,8 +28,8 @@
         def rowClass = null ;
   	    boolean even = true ;
   	    for (drive in uicomponent.getDriveList()) {
-  	      if(even) rowClass = "EvenRow" ;  
-  	      else rowClass =  "OddRow" ; 
+  	      if(even) rowClass = "EvenRow" ;
+  	      else rowClass =  "OddRow" ;
   	      even = !even ;
       %>
           <tr class="$rowClass">
@@ -50,12 +50,12 @@
             <td><div class="Text" title="$drive.views">$drive.views</div></td>
 	          <td>
 	          	<div class="ActionContainer">
-	              <img src="/eXoResources/skin/sharedImages/Blank.gif" onclick="<%=uicomponent.event("EditInfo", Utils.formatNodeName(drive.getName()))%>" title="<%=_ctx.appRes("UIDriveList.tooltip.EditInfo")%>" alt="" class="Edit16x16Icon">
-	              <img src="/eXoResources/skin/sharedImages/Blank.gif" onclick="<%=uicomponent.event("Delete", Utils.formatNodeName(drive.getName()))%>" title="<%=_ctx.appRes("UIDriveList.tooltip.Delete")%>" alt="" class="Delete16x16Icon">
+	              <img src="/eXoResources/skin/sharedImages/Blank.gif" onclick="<%=uicomponent.event("EditInfo", Utils.formatNodeName(drive.getName()))%>" title="<%=_ctx.appRes("UIDriveList.tooltip.EditInfo")%>" alt="" class="Edit16x16Icon" />
+	              <img src="/eXoResources/skin/sharedImages/Blank.gif" onclick="<%=uicomponent.event("Delete", Utils.formatNodeName(drive.getName()))%>" title="<%=_ctx.appRes("UIDriveList.tooltip.Delete")%>" alt="" class="Delete16x16Icon" />
 			        </div>
-	          </td>	                    
+	          </td>
           </tr>
-      <%}%>  
+      <%}%>
     </tbody>
   </table>
   <%if(uicomponent.getUIPageIterator().getAvailablePage() > 1) {%>
@@ -63,7 +63,7 @@
     <%_ctx.renderUIComponent(uicomponent.getUIPageIterator())%>
   </div>
   <% } %>
-  <div class="UIAction"> 
+  <div class="UIAction">
     <table class="ActionContainer">
     	<tr>
     		<td>

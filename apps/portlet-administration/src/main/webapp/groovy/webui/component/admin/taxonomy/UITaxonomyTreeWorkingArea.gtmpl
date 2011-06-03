@@ -23,8 +23,8 @@
 		    boolean even = true ;
 		    if(nodes.size() > 0) {
 			    for(node in nodes) {
-			      if(even) rowClass = "EvenRow" ;  
-			      else rowClass =  "OddRow" ; 
+			      if(even) rowClass = "EvenRow" ;
+			      else rowClass =  "OddRow" ;
 			      even = !even ;
       %>
 			      <tr class="$rowClass">
@@ -40,15 +40,15 @@
 		              <%
 		                if(uicomponent.isRootNode()) {
 		              %>
-		                <img onclick="<%=uicomponent.event("Add", node.getPath())%>" alt="" src="/eXoResources/skin/sharedImages/Blank.gif" class="Icon16x16 Add16x16Icon" title="<%=_ctx.appRes("UITaxonomyManager.title.add")%>">
-		                <img onclick="<%=uicomponent.event("Paste", node.getPath())%>" alt="" src="/eXoResources/skin/sharedImages/Blank.gif" class="Icon16x16 Paste16x16Icon" title="<%=_ctx.appRes("UITaxonomyManager.title.paste")%>">
+		                <img onclick="<%=uicomponent.event("Add", node.getPath())%>" alt="" src="/eXoResources/skin/sharedImages/Blank.gif" class="Icon16x16 Add16x16Icon" title="<%=_ctx.appRes("UITaxonomyManager.title.add")%>" />
+		                <img onclick="<%=uicomponent.event("Paste", node.getPath())%>" alt="" src="/eXoResources/skin/sharedImages/Blank.gif" class="Icon16x16 Paste16x16Icon" title="<%=_ctx.appRes("UITaxonomyManager.title.paste")%>" />
 		              <%} else {%>
-			              <img onclick="<%=uicomponent.event("Add", node.getPath())%>" alt="" src="/eXoResources/skin/sharedImages/Blank.gif" class="Icon16x16 Add16x16Icon" title="<%=_ctx.appRes("UITaxonomyManager.title.add")%>">
-		                <img onclick="<%=uicomponent.event("Copy", node.getPath())%>" alt="" src="/eXoResources/skin/sharedImages/Blank.gif" class="Icon16x16 Copy16x16Icon" title="<%=_ctx.appRes("UITaxonomyManager.title.copy")%>">
-			              <img onclick="<%=uicomponent.event("Cut", node.getPath())%>" alt="" src="/eXoResources/skin/sharedImages/Blank.gif" class="Icon16x16 Cut16x16Icon" title="<%=_ctx.appRes("UITaxonomyManager.title.cut")%>">
-		                <img onclick="<%=uicomponent.event("Paste", node.getPath())%>" alt="" src="/eXoResources/skin/sharedImages/Blank.gif" class="Icon16x16 Paste16x16Icon" title="<%=_ctx.appRes("UITaxonomyManager.title.paste")%>">
-		                <img onclick="<%=uicomponent.event("ViewPermission", node.getPath())%>" alt="" src="/eXoResources/skin/sharedImages/Blank.gif" class="Icon16x16 Permission16x16Icon" title="<%=_ctx.appRes("UITaxonomyManager.title.permission")%>">
-		                <img onclick="<%=uicomponent.event("Remove", node.getPath())%>" alt="" src="/eXoResources/skin/sharedImages/Blank.gif" class="Icon16x16 Remove16x16Icon" title="<%=_ctx.appRes("UITaxonomyManager.title.remove")%>">
+			              <img onclick="<%=uicomponent.event("Add", node.getPath())%>" alt="" src="/eXoResources/skin/sharedImages/Blank.gif" class="Icon16x16 Add16x16Icon" title="<%=_ctx.appRes("UITaxonomyManager.title.add")%>" />
+		                <img onclick="<%=uicomponent.event("Copy", node.getPath())%>" alt="" src="/eXoResources/skin/sharedImages/Blank.gif" class="Icon16x16 Copy16x16Icon" title="<%=_ctx.appRes("UITaxonomyManager.title.copy")%>" />
+			              <img onclick="<%=uicomponent.event("Cut", node.getPath())%>" alt="" src="/eXoResources/skin/sharedImages/Blank.gif" class="Icon16x16 Cut16x16Icon" title="<%=_ctx.appRes("UITaxonomyManager.title.cut")%>" />
+		                <img onclick="<%=uicomponent.event("Paste", node.getPath())%>" alt="" src="/eXoResources/skin/sharedImages/Blank.gif" class="Icon16x16 Paste16x16Icon" title="<%=_ctx.appRes("UITaxonomyManager.title.paste")%>" />
+		                <img onclick="<%=uicomponent.event("ViewPermission", node.getPath())%>" alt="" src="/eXoResources/skin/sharedImages/Blank.gif" class="Icon16x16 Permission16x16Icon" title="<%=_ctx.appRes("UITaxonomyManager.title.permission")%>" />
+		                <img onclick="<%=uicomponent.event("Remove", node.getPath())%>" alt="" src="/eXoResources/skin/sharedImages/Blank.gif" class="Icon16x16 Remove16x16Icon" title="<%=_ctx.appRes("UITaxonomyManager.title.remove")%>" />
 		              <%}%>
 		            </div>
 			        </td>
@@ -60,12 +60,12 @@
 		  		<tr class="EvenRow">
 		  			<td colspan="2"><div class="Text"><%=_ctx.appRes("UITreeList.info.child-not-found")%></div></td>
 		  		</tr>
-		  <%  	
+		  <%
 		    }
 			%>
     </tbody>
   </table>
-  
+
   <% if (uicomponent.getUIPageIterator().getAvailablePage() > 1) { %>
   <div style="margin:1px 0px 5px 0px;">
     <%_ctx.renderUIComponent(uicomponent.getUIPageIterator())%>
@@ -76,7 +76,7 @@
 	  <table class="ActionContainer">
 	  	<tr>
 	  		<td>
-	          <%for(action in uicomponent.getActions()) { 
+	          <%for(action in uicomponent.getActions()) {
 	          		String actionLabel = _ctx.appRes(uicomponent.getName() + ".action." + action);
 								String link = uicomponent.event(action) ;
 	          %>

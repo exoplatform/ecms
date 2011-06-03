@@ -1,0 +1,595 @@
+Index: apps/portlet-explorer/src/main/webapp/groovy/webui/component/explorer/popup/info/UIPropertyTab.gtmpl
+===================================================================
+--- apps/portlet-explorer/src/main/webapp/groovy/webui/component/explorer/popup/info/UIPropertyTab.gtmpl	(revision 67323)
++++ apps/portlet-explorer/src/main/webapp/groovy/webui/component/explorer/popup/info/UIPropertyTab.gtmpl	(working copy)
+@@ -12,10 +12,10 @@
+ 	  <thead>
+ 			<tr>
+ 			  <%
+-			    String[] beanFields =  uicomponent.getBeanFields() ;  
++			    String[] beanFields =  uicomponent.getBeanFields() ;
+ 			    for(int i = 0; i < beanFields.size(); i++) {%>
+ 			    <th class="Field<%=(i+1)%>"><%=_ctx.appRes("UIPropertyTab.header." + beanFields[i])%></th>
+-			  <%}%>  
++			  <%}%>
+ 			</tr>
+ 	  </thead>
+ 	  <tbody>
+@@ -33,12 +33,12 @@
+ 		    } catch(Exception e) {
+ 		    }
+ 		    value = uicomponent.getPropertyValue(bean) ;
+-	      if(even) rowClass = "EvenRow" ;  
+-	      else rowClass =  "OddRow" ; 
++	      if(even) rowClass = "EvenRow" ;
++	      else rowClass =  "OddRow" ;
+ 	      even = !even ; %>
+ 		    <tr class="$rowClass">
+ 		      <td style="width: 20px;">
+-		        <div style="margin: auto" class="Icon16x16 default16x16Icon ${nodeIcon}16x16Icon"><span></span></div>					        
++		        <div style="margin: auto" class="Icon16x16 default16x16Icon ${nodeIcon}16x16Icon"><span></span></div>
+ 		      </td>
+ 			    <td>$bean.name</td>
+ 			    <td>
+@@ -47,43 +47,43 @@
+ 		            String multiType = "False" ;
+ 		            if(multiValue) multiType = "True" ;
+ 		          %>
+-					    <div class="Icon16x16 ${multiType}16x16Icon">$multiValue</div>					  	
++					    <div class="Icon16x16 ${multiType}16x16Icon">$multiValue</div>
+ 			      </div>
+ 			    </td>
+ 			    <td>
+ 				    <%if ((value == "binary")||(value == "notavailable")||(value == "cannotget")) {%>
+ 			    	<div class="Text" title="<%=_ctx.appRes("UIPropertyTab.label." + value)%>">
+ 				      <%=_ctx.appRes("UIPropertyTab.label." + value)%>
+-				    </div>  
++				    </div>
+ 				    <%} else {%>
+ 				    <div class="Text" title="<%=value%>">
+ 				      <%=value%>
+ 				   	</div>
+-				    <%}%>  
++				    <%}%>
+ 			    </td>
+ 			    <td>
+ 			    	<div class="ActionContainer">
+ 					    <%
+-					    if(uicomponent.isCanbeEdit(bean)) {%> 			    
+-					      <img onclick="<%=uicomponent.event("Edit", bean.getName())%>" alt="" title="<%=_ctx.appRes("UIPropertyTab.title.edit")%>" alt="" src="/eXoResources/skin/sharedImages/Blank.gif" class="EditIcon">
++					    if(uicomponent.isCanbeEdit(bean)) {%>
++					      <img onclick="<%=uicomponent.event("Edit", bean.getName())%>" alt="" title="<%=_ctx.appRes("UIPropertyTab.title.edit")%>" alt="" src="/eXoResources/skin/sharedImages/Blank.gif" class="EditIcon" />
+ 					    <%}%>
+ 					    <%if(uicomponent.addedByUser(bean.getName())) {%>
+-					      <img onclick="<%=uicomponent.event("Delete", bean.getName())%>" alt="" title="<%=_ctx.appRes("UIPropertyTab.title.delete")%>" src="/eXoResources/skin/sharedImages/Blank.gif" class="DeleteIcon">
+-					    <%}%>  
++					      <img onclick="<%=uicomponent.event("Delete", bean.getName())%>" alt="" title="<%=_ctx.appRes("UIPropertyTab.title.delete")%>" src="/eXoResources/skin/sharedImages/Blank.gif" class="DeleteIcon" />
++					    <%}%>
+ 				    </div>
+ 			    </td>
+-			  </tr>    
++			  </tr>
+ 	    <%}%>
+ 	  </tbody>
+   </table>
+ 
+   <%/* start render action*/%>
+-	<div class="UIAction"> 
++	<div class="UIAction">
+     <table class="ActionContainer">
+     	<tr>
+     		<td>
+ 		      <% for(action in uicomponent.getActions()) {
+-		      		 String actionLabel = _ctx.appRes(uicomponent.getName() + ".action." + action) 
++		      		 String actionLabel = _ctx.appRes(uicomponent.getName() + ".action." + action)
+ 							 String link = uicomponent.event(action) ;
+ 		      %>
+ 	          <div onclick="$link" class="ActionButton LightBlueStyle">
+@@ -95,7 +95,7 @@
+ 						    </div>
+ 					    </div>
+ 						</div>
+-		      <%}%>          
++		      <%}%>
+       	</td>
+       </tr>
+     </table>
+Index: apps/portlet-explorer/src/main/webapp/groovy/webui/component/explorer/search/UICompareExactlyForm.gtmpl
+===================================================================
+--- apps/portlet-explorer/src/main/webapp/groovy/webui/component/explorer/search/UICompareExactlyForm.gtmpl	(revision 67323)
++++ apps/portlet-explorer/src/main/webapp/groovy/webui/component/explorer/search/UICompareExactlyForm.gtmpl	(working copy)
+@@ -4,7 +4,7 @@
+  * Author : Tran The Trong
+  *          trong.tran@exoplatform.com
+  * @version: $Id$
+- * Oct 6, 2006  
++ * Oct 6, 2006
+  */
+ %>
+ <div class="UIForm $uicomponent.id">
+@@ -16,7 +16,7 @@
+         	<tr>
+ 	  	      <td class="FieldLabel"> <%=_ctx.appRes("UICompareExactlyForm.label.filter")%></td>
+ 	  	      <td class="FieldComponent"><%uiform.renderField(uicomponent.getChild(0))%>
+-	          	<img class="AddMetadataTypeIcon" onclick="javascript:eXo.ecm.ECMUtils.filterValue('$uicomponent.id')" src="/eXoResources/skin/DefaultSkin/background/Blank.gif" alt="" title="<%=_ctx.appRes("UICompareExactlyForm.title.result")%>">
++	          	<img class="AddMetadataTypeIcon" onclick="javascript:eXo.ecm.ECMUtils.filterValue('$uicomponent.id')" src="/eXoResources/skin/DefaultSkin/background/Blank.gif" alt="" title="<%=_ctx.appRes("UICompareExactlyForm.title.result")%>" />
+ 	          </td>
+ 	        </tr>
+ 	        <tr>
+@@ -29,12 +29,12 @@
+ 	    </table>
+ 	  </div>
+ 	</div>
+-  <div class="UIAction"> 
++  <div class="UIAction">
+     <table class="ActionContainer">
+     	<tr>
+     		<td>
+ 	          <% for(action in uicomponent.getActions()) {
+-	          		 String actionLabel = _ctx.appRes(uicomponent.getName() + ".action." + action) 
++	          		 String actionLabel = _ctx.appRes(uicomponent.getName() + ".action." + action)
+ 	               String link = uicomponent.event(action) ;
+ 	          		 //System.out.println("\n\n" + uicomponent.getName()+ ".button.label-" + actionLabel + "\n\n");
+ 	          %>
+@@ -47,9 +47,9 @@
+ 	                  </div>
+ 	                </div>
+ 	              </div>
+-	          <%}%>   
++	          <%}%>
+       	</td>
+-      </tr>       
++      </tr>
+     </table>
+   </div>
+   <%/* end render action */%>
+Index: apps/portlet-explorer/src/main/webapp/groovy/webui/component/explorer/sidebar/UIClipboard.gtmpl
+===================================================================
+--- apps/portlet-explorer/src/main/webapp/groovy/webui/component/explorer/sidebar/UIClipboard.gtmpl	(revision 67323)
++++ apps/portlet-explorer/src/main/webapp/groovy/webui/component/explorer/sidebar/UIClipboard.gtmpl	(working copy)
+@@ -6,10 +6,10 @@
+  * September 13, 2006
+  * 10:07:15 AM
+  **/
+- 
++
+   import org.exoplatform.webui.core.UIComponent ;
+   import org.exoplatform.ecm.jcr.model.ClipboardCommand ;
+-  
++
+   String[] beanFields =  uicomponent.getBeanFields() ;
+   String[] beanActions =  uicomponent.getBeanActions() ;
+   String name = uicomponent.getName() ;
+@@ -50,15 +50,15 @@
+ 				        <%=_ctx.appRes(name+".label.nocommand")%>
+ 				      </div>
+ 			      </td>
+-			    </tr>  
++			    </tr>
+ 		    <%} else {
+ 				    def rowClass = null ;
+ 				    boolean even = true ;
+ 				    String path, fullPath ;
+ 				    int index = 1 ;
+ 				    for(item in uicomponent.getClipboardData()) {
+-				      if(even) rowClass = "EvenRow";  
+-				      else rowClass =  "OddRow"; 
++				      if(even) rowClass = "EvenRow";
++				      else rowClass =  "OddRow";
+ 				      even = !even ;
+ 				      path = fullPath = (item.getWorkspace()+ ":" + item.getSrcPath());
+ 				      if (path.length() > 20 ) path = "..." + path.substring(path.length() - 20, path.length());
+@@ -66,11 +66,11 @@
+ 				    <tr class="$rowClass">
+ 				      <td class="Text" title="<%=fullPath%>"><%=path%></td>
+ 				    	<td class="Text"><%=item.getType()%></td>
+-				      <td>         
++				      <td>
+ 				        <div class="ActionContainer">
+ 				          <%for(action in beanActions) { %>
+-		                <img onclick="<%=uicomponent.event(action, index.toString())%>" title = "$action" alt="" src="/eXoResources/skin/sharedImages/Blank.gif" class="${action}Icon" >
+-				          <%}%>        
++		                <img onclick="<%=uicomponent.event(action, index.toString())%>" title = "$action" alt="" src="/eXoResources/skin/sharedImages/Blank.gif" class="${action}Icon" />
++				          <%}%>
+ 				        </div>
+ 				      </td>
+ 				    </tr>
+@@ -85,10 +85,10 @@
+ 							  <div style="clear: both"><span></span></div>
+ 							</div>
+ 			      </td>
+-			    </tr>  
++			    </tr>
+ 			  <%}%>
+ 			  </tbody>
+-			</table> <!--End UIGrid-->  
++			</table> <!--End UIGrid-->
+ 		</div>
+   </div>
+ </div>
+\ No newline at end of file
+Index: apps/portlet-administration/src/main/webapp/groovy/webui/component/admin/drives/UIDriveList.gtmpl
+===================================================================
+--- apps/portlet-administration/src/main/webapp/groovy/webui/component/admin/drives/UIDriveList.gtmpl	(revision 67323)
++++ apps/portlet-administration/src/main/webapp/groovy/webui/component/admin/drives/UIDriveList.gtmpl	(working copy)
+@@ -4,7 +4,7 @@
+  * Author : Dang Van Minh
+  *          minh.dang@exoplatform.com
+  * Aug 30, 2007
+- * 9:21:26 AM 
++ * 9:21:26 AM
+  */
+ %>
+ <%
+@@ -28,8 +28,8 @@
+         def rowClass = null ;
+   	    boolean even = true ;
+   	    for (drive in uicomponent.getDriveList()) {
+-  	      if(even) rowClass = "EvenRow" ;  
+-  	      else rowClass =  "OddRow" ; 
++  	      if(even) rowClass = "EvenRow" ;
++  	      else rowClass =  "OddRow" ;
+   	      even = !even ;
+       %>
+           <tr class="$rowClass">
+@@ -50,12 +50,12 @@
+             <td><div class="Text" title="$drive.views">$drive.views</div></td>
+ 	          <td>
+ 	          	<div class="ActionContainer">
+-	              <img src="/eXoResources/skin/sharedImages/Blank.gif" onclick="<%=uicomponent.event("EditInfo", Utils.formatNodeName(drive.getName()))%>" title="<%=_ctx.appRes("UIDriveList.tooltip.EditInfo")%>" alt="" class="Edit16x16Icon">
+-	              <img src="/eXoResources/skin/sharedImages/Blank.gif" onclick="<%=uicomponent.event("Delete", Utils.formatNodeName(drive.getName()))%>" title="<%=_ctx.appRes("UIDriveList.tooltip.Delete")%>" alt="" class="Delete16x16Icon">
++	              <img src="/eXoResources/skin/sharedImages/Blank.gif" onclick="<%=uicomponent.event("EditInfo", Utils.formatNodeName(drive.getName()))%>" title="<%=_ctx.appRes("UIDriveList.tooltip.EditInfo")%>" alt="" class="Edit16x16Icon" />
++	              <img src="/eXoResources/skin/sharedImages/Blank.gif" onclick="<%=uicomponent.event("Delete", Utils.formatNodeName(drive.getName()))%>" title="<%=_ctx.appRes("UIDriveList.tooltip.Delete")%>" alt="" class="Delete16x16Icon" />
+ 			        </div>
+-	          </td>	                    
++	          </td>
+           </tr>
+-      <%}%>  
++      <%}%>
+     </tbody>
+   </table>
+   <%if(uicomponent.getUIPageIterator().getAvailablePage() > 1) {%>
+@@ -63,7 +63,7 @@
+     <%_ctx.renderUIComponent(uicomponent.getUIPageIterator())%>
+   </div>
+   <% } %>
+-  <div class="UIAction"> 
++  <div class="UIAction">
+     <table class="ActionContainer">
+     	<tr>
+     		<td>
+Index: apps/portlet-administration/src/main/webapp/groovy/webui/component/admin/queries/UIQueriesList.gtmpl
+===================================================================
+--- apps/portlet-administration/src/main/webapp/groovy/webui/component/admin/queries/UIQueriesList.gtmpl	(revision 67323)
++++ apps/portlet-administration/src/main/webapp/groovy/webui/component/admin/queries/UIQueriesList.gtmpl	(working copy)
+@@ -4,11 +4,11 @@
+  * Author : Dang Van Minh
+  *          minh.dang@exoplatform.com
+  * Dec 29, 2006
+- * 3:28:26 PM 
++ * 3:28:26 PM
+  */
+ %>
+-<% 
+-  def sharedQueries = uicomponent.getQueryList() ; 
++<%
++  def sharedQueries = uicomponent.getQueryList() ;
+   if(sharedQueries == null) return ;
+   int totalPages = uicomponent.getUIPageIterator().getAvailablePage() ;
+ %>
+@@ -29,8 +29,8 @@
+   	    boolean even = true ;
+   	    for (node in sharedQueries) {
+   	      def right=true;
+-  	      if(even) rowClass = "EvenRow" ;  
+-  	      else rowClass =  "OddRow" ; 
++  	      if(even) rowClass = "EvenRow" ;
++  	      else rowClass =  "OddRow" ;
+   	      even = !even ;
+       %>
+           <tr class="$rowClass">
+@@ -52,18 +52,18 @@
+ 	          	  <%
+ 	          	  if (uicomponent.canEditNode(node)) {
+ 	          	  %>
+-			          <img onclick="<%=uicomponent.event("Edit", node.getPath())%>" title="<%=_ctx.appRes("UIQueriesList.tooltip.Edit")%>" alt="" src="/eXoResources/skin/sharedImages/Blank.gif" class="Edit16x16Icon">
++			          <img onclick="<%=uicomponent.event("Edit", node.getPath())%>" title="<%=_ctx.appRes("UIQueriesList.tooltip.Edit")%>" alt="" src="/eXoResources/skin/sharedImages/Blank.gif" class="Edit16x16Icon" />
+ 			      <%
+ 	          	  }
+ 	          	  if (uicomponent.canRemoveNode(node)) {
+-	          	  %>	          	
+-	                <img onclick="<%=uicomponent.event("Delete", node.getPath())%>" title="<%=_ctx.appRes("UIQueriesList.tooltip.Delete")%>" alt="" src="/eXoResources/skin/sharedImages/Blank.gif" class="Delete16x16Icon">
+-	              <%  
++	          	  %>
++	                <img onclick="<%=uicomponent.event("Delete", node.getPath())%>" title="<%=_ctx.appRes("UIQueriesList.tooltip.Delete")%>" alt="" src="/eXoResources/skin/sharedImages/Blank.gif" class="Delete16x16Icon" />
++	              <%
+ 	          	  }%>
+ 		          </div>
+-	          </td>	                    
++	          </td>
+           </tr>
+-      <%}%>  
++      <%}%>
+     </tbody>
+   </table>
+   <% if(totalPages>1){ %>
+Index: apps/portlet-administration/src/main/webapp/groovy/webui/component/admin/taxonomy/UITaxonomyTreeWorkingArea.gtmpl
+===================================================================
+--- apps/portlet-administration/src/main/webapp/groovy/webui/component/admin/taxonomy/UITaxonomyTreeWorkingArea.gtmpl	(revision 67323)
++++ apps/portlet-administration/src/main/webapp/groovy/webui/component/admin/taxonomy/UITaxonomyTreeWorkingArea.gtmpl	(working copy)
+@@ -23,8 +23,8 @@
+ 		    boolean even = true ;
+ 		    if(nodes.size() > 0) {
+ 			    for(node in nodes) {
+-			      if(even) rowClass = "EvenRow" ;  
+-			      else rowClass =  "OddRow" ; 
++			      if(even) rowClass = "EvenRow" ;
++			      else rowClass =  "OddRow" ;
+ 			      even = !even ;
+       %>
+ 			      <tr class="$rowClass">
+@@ -40,15 +40,15 @@
+ 		              <%
+ 		                if(uicomponent.isRootNode()) {
+ 		              %>
+-		                <img onclick="<%=uicomponent.event("Add", node.getPath())%>" alt="" src="/eXoResources/skin/sharedImages/Blank.gif" class="Icon16x16 Add16x16Icon" title="<%=_ctx.appRes("UITaxonomyManager.title.add")%>">
+-		                <img onclick="<%=uicomponent.event("Paste", node.getPath())%>" alt="" src="/eXoResources/skin/sharedImages/Blank.gif" class="Icon16x16 Paste16x16Icon" title="<%=_ctx.appRes("UITaxonomyManager.title.paste")%>">
++		                <img onclick="<%=uicomponent.event("Add", node.getPath())%>" alt="" src="/eXoResources/skin/sharedImages/Blank.gif" class="Icon16x16 Add16x16Icon" title="<%=_ctx.appRes("UITaxonomyManager.title.add")%>" />
++		                <img onclick="<%=uicomponent.event("Paste", node.getPath())%>" alt="" src="/eXoResources/skin/sharedImages/Blank.gif" class="Icon16x16 Paste16x16Icon" title="<%=_ctx.appRes("UITaxonomyManager.title.paste")%>" />
+ 		              <%} else {%>
+-			              <img onclick="<%=uicomponent.event("Add", node.getPath())%>" alt="" src="/eXoResources/skin/sharedImages/Blank.gif" class="Icon16x16 Add16x16Icon" title="<%=_ctx.appRes("UITaxonomyManager.title.add")%>">
+-		                <img onclick="<%=uicomponent.event("Copy", node.getPath())%>" alt="" src="/eXoResources/skin/sharedImages/Blank.gif" class="Icon16x16 Copy16x16Icon" title="<%=_ctx.appRes("UITaxonomyManager.title.copy")%>">
+-			              <img onclick="<%=uicomponent.event("Cut", node.getPath())%>" alt="" src="/eXoResources/skin/sharedImages/Blank.gif" class="Icon16x16 Cut16x16Icon" title="<%=_ctx.appRes("UITaxonomyManager.title.cut")%>">
+-		                <img onclick="<%=uicomponent.event("Paste", node.getPath())%>" alt="" src="/eXoResources/skin/sharedImages/Blank.gif" class="Icon16x16 Paste16x16Icon" title="<%=_ctx.appRes("UITaxonomyManager.title.paste")%>">
+-		                <img onclick="<%=uicomponent.event("ViewPermission", node.getPath())%>" alt="" src="/eXoResources/skin/sharedImages/Blank.gif" class="Icon16x16 Permission16x16Icon" title="<%=_ctx.appRes("UITaxonomyManager.title.permission")%>">
+-		                <img onclick="<%=uicomponent.event("Remove", node.getPath())%>" alt="" src="/eXoResources/skin/sharedImages/Blank.gif" class="Icon16x16 Remove16x16Icon" title="<%=_ctx.appRes("UITaxonomyManager.title.remove")%>">
++			              <img onclick="<%=uicomponent.event("Add", node.getPath())%>" alt="" src="/eXoResources/skin/sharedImages/Blank.gif" class="Icon16x16 Add16x16Icon" title="<%=_ctx.appRes("UITaxonomyManager.title.add")%>" />
++		                <img onclick="<%=uicomponent.event("Copy", node.getPath())%>" alt="" src="/eXoResources/skin/sharedImages/Blank.gif" class="Icon16x16 Copy16x16Icon" title="<%=_ctx.appRes("UITaxonomyManager.title.copy")%>" />
++			              <img onclick="<%=uicomponent.event("Cut", node.getPath())%>" alt="" src="/eXoResources/skin/sharedImages/Blank.gif" class="Icon16x16 Cut16x16Icon" title="<%=_ctx.appRes("UITaxonomyManager.title.cut")%>" />
++		                <img onclick="<%=uicomponent.event("Paste", node.getPath())%>" alt="" src="/eXoResources/skin/sharedImages/Blank.gif" class="Icon16x16 Paste16x16Icon" title="<%=_ctx.appRes("UITaxonomyManager.title.paste")%>" />
++		                <img onclick="<%=uicomponent.event("ViewPermission", node.getPath())%>" alt="" src="/eXoResources/skin/sharedImages/Blank.gif" class="Icon16x16 Permission16x16Icon" title="<%=_ctx.appRes("UITaxonomyManager.title.permission")%>" />
++		                <img onclick="<%=uicomponent.event("Remove", node.getPath())%>" alt="" src="/eXoResources/skin/sharedImages/Blank.gif" class="Icon16x16 Remove16x16Icon" title="<%=_ctx.appRes("UITaxonomyManager.title.remove")%>" />
+ 		              <%}%>
+ 		            </div>
+ 			        </td>
+@@ -60,12 +60,12 @@
+ 		  		<tr class="EvenRow">
+ 		  			<td colspan="2"><div class="Text"><%=_ctx.appRes("UITreeList.info.child-not-found")%></div></td>
+ 		  		</tr>
+-		  <%  	
++		  <%
+ 		    }
+ 			%>
+     </tbody>
+   </table>
+-  
++
+   <% if (uicomponent.getUIPageIterator().getAvailablePage() > 1) { %>
+   <div style="margin:1px 0px 5px 0px;">
+     <%_ctx.renderUIComponent(uicomponent.getUIPageIterator())%>
+@@ -76,7 +76,7 @@
+ 	  <table class="ActionContainer">
+ 	  	<tr>
+ 	  		<td>
+-	          <%for(action in uicomponent.getActions()) { 
++	          <%for(action in uicomponent.getActions()) {
+ 	          		String actionLabel = _ctx.appRes(uicomponent.getName() + ".action." + action);
+ 								String link = uicomponent.event(action) ;
+ 	          %>
+Index: apps/portlet-administration/src/main/webapp/groovy/webui/component/admin/taxonomy/UITaxonomyWorkingArea.gtmpl
+===================================================================
+--- apps/portlet-administration/src/main/webapp/groovy/webui/component/admin/taxonomy/UITaxonomyWorkingArea.gtmpl	(revision 67323)
++++ apps/portlet-administration/src/main/webapp/groovy/webui/component/admin/taxonomy/UITaxonomyWorkingArea.gtmpl	(working copy)
+@@ -4,7 +4,7 @@
+  * Author : Dang Van Minh
+  *          minhdv@exoplatform.com
+  * April 10, 2008
+- * 4:56:56 PM 
++ * 4:56:56 PM
+  */
+ %>
+ <div class="$uicomponent.id UITreeList" id="$uicomponent.id">
+@@ -24,8 +24,8 @@
+ 		    boolean even = true ;
+ 		    if(nodes.size() > 0) {
+ 			    for(node in nodes) {
+-			      if(even) rowClass = "EvenRow" ;  
+-			      else rowClass =  "OddRow" ; 
++			      if(even) rowClass = "EvenRow" ;
++			      else rowClass =  "OddRow" ;
+ 			      even = !even ;
+       %>
+ 			      <tr class="$rowClass">
+@@ -41,15 +41,15 @@
+ 		              <%
+ 		                if(uicomponent.isRootNode()) {
+ 		              %>
+-		                <img onclick="<%=uicomponent.event("Add", node.getPath())%>" alt="" src="/eXoResources/skin/sharedImages/Blank.gif" class="Icon16x16 Add16x16Icon" title="<%=_ctx.appRes("UITaxonomyManager.title.add")%>">
+-		                <img onclick="<%=uicomponent.event("Paste", node.getPath())%>" alt="" src="/eXoResources/skin/sharedImages/Blank.gif" class="Icon16x16 Paste16x16Icon" title="<%=_ctx.appRes("UITaxonomyManager.title.paste")%>">
++		                <img onclick="<%=uicomponent.event("Add", node.getPath())%>" alt="" src="/eXoResources/skin/sharedImages/Blank.gif" class="Icon16x16 Add16x16Icon" title="<%=_ctx.appRes("UITaxonomyManager.title.add")%>" />
++		                <img onclick="<%=uicomponent.event("Paste", node.getPath())%>" alt="" src="/eXoResources/skin/sharedImages/Blank.gif" class="Icon16x16 Paste16x16Icon" title="<%=_ctx.appRes("UITaxonomyManager.title.paste")%>" />
+ 		              <%} else {%>
+-			              <img onclick="<%=uicomponent.event("Add", node.getPath())%>" alt="" src="/eXoResources/skin/sharedImages/Blank.gif" class="Icon16x16 Add16x16Icon" title="<%=_ctx.appRes("UITaxonomyManager.title.add")%>">
+-		                <img onclick="<%=uicomponent.event("Copy", node.getPath())%>" alt="" src="/eXoResources/skin/sharedImages/Blank.gif" class="Icon16x16 Copy16x16Icon" title="<%=_ctx.appRes("UITaxonomyManager.title.copy")%>">
+-			              <img onclick="<%=uicomponent.event("Cut", node.getPath())%>" alt="" src="/eXoResources/skin/sharedImages/Blank.gif" class="Icon16x16 Cut16x16Icon" title="<%=_ctx.appRes("UITaxonomyManager.title.cut")%>">
+-		                <img onclick="<%=uicomponent.event("Paste", node.getPath())%>" alt="" src="/eXoResources/skin/sharedImages/Blank.gif" class="Icon16x16 Paste16x16Icon" title="<%=_ctx.appRes("UITaxonomyManager.title.paste")%>">
+-		                <img onclick="<%=uicomponent.event("ViewPermission", node.getPath())%>" alt="" src="/eXoResources/skin/sharedImages/Blank.gif" class="Icon16x16 Permission16x16Icon" title="<%=_ctx.appRes("UITaxonomyManager.title.permission")%>">
+-		                <img onclick="<%=uicomponent.event("Remove", node.getPath())%>" alt="" src="/eXoResources/skin/sharedImages/Blank.gif" class="Icon16x16 Remove16x16Icon" title="<%=_ctx.appRes("UITaxonomyManager.title.remove")%>">
++			              <img onclick="<%=uicomponent.event("Add", node.getPath())%>" alt="" src="/eXoResources/skin/sharedImages/Blank.gif" class="Icon16x16 Add16x16Icon" title="<%=_ctx.appRes("UITaxonomyManager.title.add")%>" />
++		                <img onclick="<%=uicomponent.event("Copy", node.getPath())%>" alt="" src="/eXoResources/skin/sharedImages/Blank.gif" class="Icon16x16 Copy16x16Icon" title="<%=_ctx.appRes("UITaxonomyManager.title.copy")%>" />
++			              <img onclick="<%=uicomponent.event("Cut", node.getPath())%>" alt="" src="/eXoResources/skin/sharedImages/Blank.gif" class="Icon16x16 Cut16x16Icon" title="<%=_ctx.appRes("UITaxonomyManager.title.cut")%>" />
++		                <img onclick="<%=uicomponent.event("Paste", node.getPath())%>" alt="" src="/eXoResources/skin/sharedImages/Blank.gif" class="Icon16x16 Paste16x16Icon" title="<%=_ctx.appRes("UITaxonomyManager.title.paste")%>" />
++		                <img onclick="<%=uicomponent.event("ViewPermission", node.getPath())%>" alt="" src="/eXoResources/skin/sharedImages/Blank.gif" class="Icon16x16 Permission16x16Icon" title="<%=_ctx.appRes("UITaxonomyManager.title.permission")%>" />
++		                <img onclick="<%=uicomponent.event("Remove", node.getPath())%>" alt="" src="/eXoResources/skin/sharedImages/Blank.gif" class="Icon16x16 Remove16x16Icon" title="<%=_ctx.appRes("UITaxonomyManager.title.remove")%>" />
+ 		              <%}%>
+ 		            </div>
+ 			        </td>
+@@ -61,12 +61,12 @@
+ 		  		<tr class="EvenRow">
+ 		  			<td colspan="2"><div class="Text"><%=_ctx.appRes("UITreeList.info.child-not-found")%></div></td>
+ 		  		</tr>
+-		  <%  	
++		  <%
+ 		    }
+ 			%>
+     </tbody>
+   </table>
+-  
++
+   <% if (uicomponent.getUIPageIterator().getAvailablePage() > 1) { %>
+   <div style="margin:1px 0px 5px 0px;">
+     <%_ctx.renderUIComponent(uicomponent.getUIPageIterator())%>
+Index: apps/portlet-administration/src/main/webapp/groovy/webui/component/admin/taxonomy/UITaxonomyTreeList.gtmpl
+===================================================================
+--- apps/portlet-administration/src/main/webapp/groovy/webui/component/admin/taxonomy/UITaxonomyTreeList.gtmpl	(revision 67323)
++++ apps/portlet-administration/src/main/webapp/groovy/webui/component/admin/taxonomy/UITaxonomyTreeList.gtmpl	(working copy)
+@@ -8,7 +8,7 @@
+ %>
+ <%
+   import org.exoplatform.ecm.webui.utils.Utils;
+-  
++
+   private String pathTitle(String inputStr, int defauLength) {
+     String sortName = inputStr ;
+     if(inputStr.length() > defauLength) {
+@@ -34,8 +34,8 @@
+         boolean even = true;
+         if (uicomponent.getTaxonomyTreeList().size() > 0) {
+           for (taxonomyTree in uicomponent.getTaxonomyTreeList()) {
+-            if(even) rowClass = "EvenRow";  
+-            else rowClass =  "OddRow"; 
++            if(even) rowClass = "EvenRow";
++            else rowClass =  "OddRow";
+             even = !even;
+         %>
+             <tr class="$rowClass">
+@@ -48,20 +48,20 @@
+                     <div class="ShortContentPermission"><a><%=pathTitle(taxonomyTree.taxoTreePermissions, 20)%></a></div>
+                     <div class="FullContentPermission" style="display: none"><a>$taxonomyTree.taxoTreePermissions</a></div>
+                     <div style="clear: both;"><span></span></div>
+-                  </div>                  
+-                </div>                
+-              </td>             
++                  </div>
++                </div>
++              </td>
+               <td>
+                 <div class="ActionContainer">
+-                  <img src="/eXoResources/skin/sharedImages/Blank.gif" onclick="<%=uicomponent.event("EditTaxonomyTree", Utils.formatNodeName(taxonomyTree.getTaxoTreeName()))%>" title="<%=_ctx.appRes("UITaxonomyTreeList.tooltip.EditTaxonomyTree")%>" alt="" class="Edit16x16Icon">
+-                  <img src="/eXoResources/skin/sharedImages/Blank.gif" onclick="<%=uicomponent.event("Delete", Utils.formatNodeName(taxonomyTree.getTaxoTreeName()))%>" title="<%=_ctx.appRes("UITaxonomyTreeList.tooltip.Delete")%>" alt="" class="Delete16x16Icon">
++                  <img src="/eXoResources/skin/sharedImages/Blank.gif" onclick="<%=uicomponent.event("EditTaxonomyTree", Utils.formatNodeName(taxonomyTree.getTaxoTreeName()))%>" title="<%=_ctx.appRes("UITaxonomyTreeList.tooltip.EditTaxonomyTree")%>" alt="" class="Edit16x16Icon" />
++                  <img src="/eXoResources/skin/sharedImages/Blank.gif" onclick="<%=uicomponent.event("Delete", Utils.formatNodeName(taxonomyTree.getTaxoTreeName()))%>" title="<%=_ctx.appRes("UITaxonomyTreeList.tooltip.Delete")%>" alt="" class="Delete16x16Icon" />
+                 </div>
+-              </td>                     
++              </td>
+             </tr>
+         <%
+           }
+         } else {%>
+-          <tr class="$rowClass"> 
++          <tr class="$rowClass">
+             <td colspan="5" style="text-align:center;font-style:italic; color: #EF5604;"><%=_ctx.appRes("UITaxonomyTreeList.msg.no-list")%></td>
+           </tr>
+         <%}%>
+@@ -72,7 +72,7 @@
+     <%_ctx.renderUIComponent(uicomponent.getUIPageIterator())%>
+   </div>
+   <% } %>
+-  <div class="UIAction"> 
++  <div class="UIAction">
+     <table class="ActionContainer">
+       <tr>
+         <td>
+Index: apps/portlet-administration/src/main/webapp/groovy/webui/component/UIECMGrid.gtmpl
+===================================================================
+--- apps/portlet-administration/src/main/webapp/groovy/webui/component/UIECMGrid.gtmpl	(revision 67323)
++++ apps/portlet-administration/src/main/webapp/groovy/webui/component/UIECMGrid.gtmpl	(working copy)
+@@ -2,11 +2,11 @@
+   import org.exoplatform.webui.core.UIComponent ;
+   import org.exoplatform.webui.form.UIForm;
+ 
+-  String[] beanFields =  uicomponent.getBeanFields() ;  
++  String[] beanFields =  uicomponent.getBeanFields() ;
+   String[] beanActions =  uicomponent.getBeanActions() ;
+   UIComponent uiParent = uicomponent.getParent() ;
+   String name = uicomponent.getLabel() ;
+-  UIForm uiForm = uicomponent.getAncestorOfType(UIForm.class); 
++  UIForm uiForm = uicomponent.getAncestorOfType(UIForm.class);
+ %>
+ <div id="$uicomponent.id">
+ 	<table class="UIGrid" cellspacing="0" borderspacing="0">
+@@ -38,18 +38,18 @@
+ 	        	<%=_ctx.appRes(uicomponent.getId() + ".msg.empty")%>
+ 	        </div>
+ 	      </td>
+-	    </tr>  
+-	  <%} else { 
++	    </tr>
++	  <%} else {
+ 		    def rowClass = null ;
+ 		    boolean even = true ;
+ 		    for (bean in uicomponent.getBeans())  {
+-		      if(even) rowClass = "EvenRow" ;  
+-		      else rowClass =  "OddRow" ; 
++		      if(even) rowClass = "EvenRow" ;
++		      else rowClass =  "OddRow" ;
+ 		      even = !even ;
+ 	  %>
+ 		      <tr class="$rowClass">
+ 	  <%
+-			    for(field in beanFields) { 
++			    for(field in beanFields) {
+ 			       def fieldValue = uicomponent.getFieldValue(bean, field) ;
+ 			      def cssClass = "" ;
+ 			      if(fieldValue != null) {
+@@ -61,17 +61,17 @@
+ 			      	fieldValue = "";
+ 			      }
+ 			      println "<td><div class=\""+cssClass+"\">"+fieldValue+"</div></td>";
+-		    
+-		      }  
+-	        if(beanActions != null && beanActions.length > 0) { 
++
++		      }
++	        if(beanActions != null && beanActions.length > 0) {
+ 	  %>
+-				  <td>         
++				  <td>
+ 		        <div class="ActionContainer">
+-		          <%	          
+-		            def beanIdField = uicomponent.getBeanIdField() ;           
+-		            for(action in beanActions) { 
++		          <%
++		            def beanIdField = uicomponent.getBeanIdField() ;
++		            for(action in beanActions) {
+ 		              def beanId = uicomponent.getFieldValue(bean, beanIdField)  ;
+-			            if(action == null) continue;           
++			            if(action == null) continue;
+ 		              String title = _ctx.appRes(uicomponent.getParent().getName() + ".action.title." + action);
+ 		              String actionLink = "";
+ 		              if(uiForm != null){
+@@ -79,19 +79,19 @@
+ 		              } else {
+ 		                actionLink = uiParent.event(action, beanId);
+ 		              }
+-			        %>	           
+-			            <img onclick="$actionLink" title="$title" alt="" src="/eXoResources/skin/sharedImages/Blank.gif" class="${action}Icon">
+-		          <%}%>                 
++			        %>
++			            <img onclick="$actionLink" title="$title" alt="" src="/eXoResources/skin/sharedImages/Blank.gif" class="${action}Icon" />
++		          <%}%>
+ 		        </div>
+ 		      </td>
+ 	  <%
+ 	        }
+-	  %>  
++	  %>
+ 			    </tr>
+ 		<%
+ 		    }
+ 		  }
+-		%> 
++		%>
+ 	  </tbody>
+ 	</table> <!--End UIGrid-->
+ </div>
