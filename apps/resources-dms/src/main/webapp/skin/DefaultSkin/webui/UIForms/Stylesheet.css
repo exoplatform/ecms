@@ -1,4 +1,11 @@
 
+/******************************* UIForm **************************/
+.UIForm .UIFormGrid .parentPath {
+    display: block;
+    width: 400px;
+    word-wrap: break-word;
+}
+
 /******************************* UIFormWithoutAction **************************/
 .UIFormWithoutAction {
   margin: 0px 0px 10px 0px;
