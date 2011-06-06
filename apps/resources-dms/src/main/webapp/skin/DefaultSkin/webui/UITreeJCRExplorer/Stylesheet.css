@@ -14,6 +14,14 @@
   padding: 10px;
 }
 
+.UITaxonomyTreeCreateChild .UITreeList .Text {
+  background-position: left top; /* orientation=lt */
+  background-position: right top; /* orientation=rt */
+  padding-left: 10px; /* orientation=lt */
+  padding-right: 10px; /* orientation=rt */
+  width: 100%;
+}
+
 .UITreeList {
   margin-left: 240px; /* orientation=lt */
   margin-right: 240px; /* orientation=rt */

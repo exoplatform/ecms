@@ -1,0 +1,51 @@
+Index: apps/resources-dms/src/main/webapp/skin/DefaultSkin/webui/UITreeJCRExplorer/Stylesheet.css
+===================================================================
+--- apps/resources-dms/src/main/webapp/skin/DefaultSkin/webui/UITreeJCRExplorer/Stylesheet.css	(revision 70177)
++++ apps/resources-dms/src/main/webapp/skin/DefaultSkin/webui/UITreeJCRExplorer/Stylesheet.css	(working copy)
+@@ -14,6 +14,14 @@
+   padding: 10px;
+ }
+ 
++.UITaxonomyTreeCreateChild .UITreeList .Text {
++  background-position: left top; /* orientation=lt */
++  background-position: right top; /* orientation=rt */
++  padding-left: 10px; /* orientation=lt */
++  padding-right: 10px; /* orientation=rt */
++  width: 100%;
++}
++
+ .UITreeList {
+   margin-left: 240px; /* orientation=lt */
+   margin-right: 240px; /* orientation=rt */
+@@ -85,4 +93,4 @@
+ 
+ .UITaxonomyManager .UIBreadcumbs {
+ 	padding-bottom: 10px;
+-}
+\ No newline at end of file
++}
+Index: apps/portlet-administration/src/main/webapp/groovy/webui/component/admin/taxonomy/UITaxonomyTreeWorkingArea.gtmpl
+===================================================================
+--- apps/portlet-administration/src/main/webapp/groovy/webui/component/admin/taxonomy/UITaxonomyTreeWorkingArea.gtmpl	(revision 70177)
++++ apps/portlet-administration/src/main/webapp/groovy/webui/component/admin/taxonomy/UITaxonomyTreeWorkingArea.gtmpl	(working copy)
+@@ -32,8 +32,12 @@
+ 			          <%
+ 			            String path = node.getPath() ;
+ 			            String nodeName = path.substring(path.lastIndexOf("/") + 1, path.length()) ;
++				    String sNodeName = nodeName;
++			            if (nodeName.length() > 18) {
++			              sNodeName = nodeName.substring(0, 15) + "...";
++			            }
+ 			           %>
+-			          <div class="Text">$nodeName</div>
++			          <div class="Text" title="$nodeName">$sNodeName</div>
+ 			        </td>
+ 			        <td>
+ 			        	<div class="ActionContainer">
+@@ -94,4 +98,4 @@
+ 			</tr>
+ 	  </table>
+   </div>
+-<div class="ClearLeft"><span></span></div>
+\ No newline at end of file
++<div class="ClearLeft"><span></span></div>
