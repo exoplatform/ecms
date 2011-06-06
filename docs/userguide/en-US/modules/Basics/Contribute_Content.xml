@@ -1,24 +1,23 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<!-- This document was created with Syntext Serna Free. -->
-<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!-- This document was created with Syntext Serna Free. --><!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
 <!ENTITY % BOOK_ENTITIES SYSTEM "../../User_Guide.ent">
 %BOOK_ENTITIES;
 ]>
 <section id="sect-User_Guide-Contribute_Content">
- <title>Contribute Content</title>
+  <title>Contribute Content</title>
   <section id="sect-User_Guide-Contribute_Content-Edit_Mode">
     <title>Edit Mode</title>
     <para>
    A site in &PRODUCT; has two modes (Published mode and Edit mode) which are specific for editing site and viewing site. You can easily switch between these modes by selecting in the drop-down list at the top left corner.
   </para>
-     <mediaobject>
-        <imageobject role="html">
-           <imagedata fileref="images/twomodes.png" format="PNG" align="center"/>
-        </imageobject>
-        <imageobject role="fo">
-           <imagedata fileref="images/twomodes.png" format="PNG" align="center" width="148mm"/>
-        </imageobject>
-     </mediaobject>
+    <mediaobject>
+      <imageobject role="html">
+        <imagedata align="center" fileref="images/twomodes.png" format="PNG"/>
+      </imageobject>
+      <imageobject role="fo">
+        <imagedata width="148mm" align="center" fileref="images/twomodes.png" format="PNG"/>
+      </imageobject>
+    </mediaobject>
     <itemizedlist>
       <listitem>
         <para>
@@ -35,12 +34,12 @@
    When you login to a site, by default, the page is in the published mode, you cannot see any quick edit icon and cannot edit site contents at this time:
   </para>
     <mediaobject>
-       <imageobject role="html">
-          <imagedata fileref="images/publishedmode.png" format="PNG" align="center"/>
-       </imageobject>
-       <imageobject role="fo">
-          <imagedata fileref="images/publishedmode.png" format="PNG" align="center" width="150mm" />
-       </imageobject>
+      <imageobject role="html">
+        <imagedata align="center" fileref="images/publishedmode.png" format="PNG"/>
+      </imageobject>
+      <imageobject role="fo">
+        <imagedata width="150mm" align="center" fileref="images/publishedmode.png" format="PNG"/>
+      </imageobject>
     </mediaobject>
     <para>
    When a page is switched to the Edit mode, you can see quick edit icons on the site contents when mousing over them.
@@ -49,23 +48,23 @@
    For Single Content Viewer (SCV), you can see the current state of the content, the Edit Content icon and References icon.
   </para>
     <mediaobject>
-       <imageobject role="html">
-          <imagedata fileref="images/singlecontentviewer1.png" format="PNG" align="center"/>
-       </imageobject>
-       <imageobject role="fo">
-          <imagedata fileref="images/singlecontentviewer1.png" format="PNG" align="center" width="150mm"/>
-       </imageobject>
+      <imageobject role="html">
+        <imagedata align="center" fileref="images/singlecontentviewer1.png" format="PNG"/>
+      </imageobject>
+      <imageobject role="fo">
+        <imagedata width="150mm" align="center" fileref="images/singlecontentviewer1.png" format="PNG"/>
+      </imageobject>
     </mediaobject>
     <para>
    For Content List Viewer (CLV), you can see the current state of the content, the Edit Content, References icon, the Add Content icon and the Management Content icon.
   </para>
     <mediaobject>
-       <imageobject role="html">
-          <imagedata  align="center" fileref="images/lcv.png" format="PNG"/>
-       </imageobject>
-       <imageobject role="fo">
-          <imagedata  align="center" fileref="images/lcv.png" format="PNG" width="150mm"/>
-       </imageobject>
+      <imageobject role="html">
+        <imagedata align="center" fileref="images/lcv.png" format="PNG"/>
+      </imageobject>
+      <imageobject role="fo">
+        <imagedata width="150mm" align="center" fileref="images/lcv.png" format="PNG"/>
+      </imageobject>
     </mediaobject>
   </section>
   <section id="sect-User_Guide-Contribute_Content-InContext_Editing">
@@ -99,12 +98,12 @@
       You will be redirected to the <emphasis role="bold">Content Explorer </emphasis>with a new document form for you to write a document.
      </para>
           <mediaobject>
-             <imageobject role="html">
-                <imagedata fileref="images/documentform.png" format="PNG" align="center"/>
-             </imageobject>
-             <imageobject role="fo">
-                <imagedata fileref="images/documentform.png" format="PNG" align="center" width="150mm" />
-             </imageobject>
+            <imageobject role="html">
+              <imagedata align="center" fileref="images/documentform.png" format="PNG"/>
+            </imageobject>
+            <imageobject role="fo">
+              <imagedata width="150mm" align="center" fileref="images/documentform.png" format="PNG"/>
+            </imageobject>
           </mediaobject>
         </step>
         <step>
@@ -112,10 +111,10 @@
       Click the
       <inlinemediaobject>
               <imageobject>
-                <imagedata fileref="images/icon1.png" format="PNG" width="6mm"/>
+                <imagedata width="6mm" fileref="images/icon1.png" format="PNG"/>
               </imageobject>
               <textobject>
-                 <phrase>scroll arrows</phrase>
+                <phrase>scroll arrows</phrase>
               </textobject>
             </inlinemediaobject> icon to open the template list and select one.
      </para>
@@ -157,20 +156,20 @@
       Click the 
       <inlinemediaobject>
               <imageobject>
-                <imagedata fileref="images/editicon4.png" format="PNG" width="6mm"/>
+                <imagedata width="6mm" fileref="images/editicon4.png" format="PNG"/>
               </imageobject>
               <textobject>
-                 <phrase>pencil</phrase>
+                <phrase>pencil</phrase>
               </textobject>
             </inlinemediaobject> icon at the right corner of the content you want to edit. You will be redirected to the <emphasis role="bold">Content Explorer </emphasis>with the document form for you to edit.
      </para>
           <mediaobject>
-             <imageobject role="html">
-                <imagedata fileref="images/editform.png" format="PNG" align="center"/>
-             </imageobject>
-             <imageobject role="fo">
-                <imagedata fileref="images/editform.png" format="PNG" align="center" width="150mm" />
-             </imageobject>
+            <imageobject role="html">
+              <imagedata align="center" fileref="images/editform.png" format="PNG"/>
+            </imageobject>
+            <imageobject role="fo">
+              <imagedata width="150mm" align="center" fileref="images/editform.png" format="PNG"/>
+            </imageobject>
           </mediaobject>
         </step>
         <step>
@@ -178,12 +177,12 @@
       Edit the content &gt; Click <emphasis role="bold">Save as Draft</emphasis> to save the content.
      </para>
           <mediaobject>
-             <imageobject role="html">
-                <imagedata fileref="images/modification.png" format="PNG" align="center"/>
-             </imageobject>
-             <imageobject role="fo">
-                <imagedata fileref="images/modification.png" format="PNG" align="center" width="138mm" />
-             </imageobject>
+            <imageobject role="html">
+              <imagedata align="center" fileref="images/modification.png" format="PNG"/>
+            </imageobject>
+            <imageobject role="fo">
+              <imagedata width="138mm" align="center" fileref="images/modification.png" format="PNG"/>
+            </imageobject>
           </mediaobject>
         </step>
         <step>
@@ -191,20 +190,20 @@
       Click the 
       <inlinemediaobject>
               <imageobject>
-                <imagedata fileref="images/backicon.png" format="PNG" width="9mm"/>
+                <imagedata width="9mm" fileref="images/backicon.png" format="PNG"/>
               </imageobject>
               <textobject>
-                 <phrase>green reverse arrow</phrase>
+                <phrase>green reverse arrow</phrase>
               </textobject>
             </inlinemediaobject> icon to return to the site and in the <emphasis role="bold">Edit Mode</emphasis>, the content in the state &quot;draft&quot; with its modification is visible.
      </para>
           <mediaobject>
-             <imageobject role="html">
-                <imagedata fileref="images/draftcontent.png" format="PNG" align="center"/>
-             </imageobject>
-             <imageobject role="fo">
-                <imagedata fileref="images/draftcontent.png" format="PNG" align="center" width="150mm" />
-             </imageobject>
+            <imageobject role="html">
+              <imagedata align="center" fileref="images/draftcontent.png" format="PNG"/>
+            </imageobject>
+            <imageobject role="fo">
+              <imagedata width="150mm" align="center" fileref="images/draftcontent.png" format="PNG"/>
+            </imageobject>
           </mediaobject>
         </step>
       </procedure>
@@ -227,30 +226,30 @@
       Turn on the <emphasis role="bold">Edit Mode &gt;</emphasis> the <emphasis role="bold">Manage Content</emphasis> icon of the Content List Viewer that you want to manage on the homepage.
      </para>
           <mediaobject>
-             <imageobject role="html">
-                <imagedata fileref="images/managecontent.png" format="PNG" align="center"/>
-             </imageobject>
-             <imageobject role="fo">
-                <imagedata fileref="images/managecontent.png" format="PNG" align="center" width="150mm" />
-             </imageobject>
+            <imageobject role="html">
+              <imagedata align="center" fileref="images/managecontent.png" format="PNG"/>
+            </imageobject>
+            <imageobject role="fo">
+              <imagedata width="150mm" align="center" fileref="images/managecontent.png" format="PNG"/>
+            </imageobject>
           </mediaobject>
           <para>
       The browser will redirect to <emphasis role="bold">Content Explorer</emphasis>:
      </para>
           <mediaobject>
-             <imageobject role="html">
-                <imagedata fileref="images/managecontent1.png" format="PNG" align="center"/>
-             </imageobject>
-             <imageobject role="fo">
-                <imagedata fileref="images/managecontent1.png" format="PNG" align="center" width="150mm" />
-             </imageobject>
+            <imageobject role="html">
+              <imagedata align="center" fileref="images/managecontent1.png" format="PNG"/>
+            </imageobject>
+            <imageobject role="fo">
+              <imagedata width="150mm" align="center" fileref="images/managecontent1.png" format="PNG"/>
+            </imageobject>
           </mediaobject>
         </step>
         <step>
           <para>
       To add a new document to the CLV, click <emphasis role="bold">Add Document</emphasis> on the action bar and do the same steps as <xref linkend="sect-User_Guide-InContext_Editing-Add_Content"/>.
      </para>
-          <para>To take other actions on a specific content in the CLV, right-click it to open a drop-down menu. See more details how to takes the actions in <xref linkend="sect-User_Guide-Actions_on_Folders_and_Documents" /> </para>
+          <para>To take other actions on a specific content in the CLV, right-click it to open a drop-down menu. See more details how to take the actions in <xref linkend="sect-User_Guide-Actions_on_Folders_and_Documents"/> </para>
         </step>
       </procedure>
     </section>
@@ -272,23 +271,23 @@
       Turn on the <emphasis role="bold">Edit Mode &gt;</emphasis> Select the <emphasis role="bold">Preferences</emphasis> icon of a Single Content Viewer.
      </para>
           <mediaobject>
-             <imageobject role="html">
-                <imagedata fileref="images/scvpreferences.png" format="PNG" align="center"/>
-             </imageobject>
-             <imageobject role="fo">
-                <imagedata fileref="images/scvpreferences.png" format="PNG" align="center" width="150mm" />
-             </imageobject>
+            <imageobject role="html">
+              <imagedata align="center" fileref="images/scvpreferences.png" format="PNG"/>
+            </imageobject>
+            <imageobject role="fo">
+              <imagedata width="150mm" align="center" fileref="images/scvpreferences.png" format="PNG"/>
+            </imageobject>
           </mediaobject>
           <para>
       The Content Detail Preferences dialog appears:
      </para>
           <mediaobject>
-             <imageobject role="html">
-                <imagedata fileref="images/scvpreferences1.png" format="PNG" align="center"/>
-             </imageobject>
-             <imageobject role="fo">
-                <imagedata fileref="images/scvpreferences1.png" format="PNG" align="center" width="150mm" />
-             </imageobject>
+            <imageobject role="html">
+              <imagedata align="center" fileref="images/scvpreferences1.png" format="PNG"/>
+            </imageobject>
+            <imageobject role="fo">
+              <imagedata width="150mm" align="center" fileref="images/scvpreferences1.png" format="PNG"/>
+            </imageobject>
           </mediaobject>
           <para>
       Details:
@@ -297,10 +296,10 @@
       <emphasis role="bold">Content Selection</emphasis>: Select the path of the content that you want to show by clicking the 
       <inlinemediaobject>
               <imageobject>
-                <imagedata fileref="images/blueplusicon.png" format="PNG" width="7mm"/>
+                <imagedata width="7mm" fileref="images/blueplusicon.png" format="PNG"/>
               </imageobject>
               <textobject>
-                 <phrase>blue plus</phrase>
+                <phrase>blue plus</phrase>
               </textobject>
             </inlinemediaobject> icon.
      </para>
@@ -347,10 +346,10 @@
        Click the 
        <inlinemediaobject>
                 <imageobject>
-                  <imagedata fileref="images/questionicon.png" format="PNG" width="6mm"/>
+                  <imagedata width="6mm" fileref="images/questionicon.png" format="PNG"/>
                 </imageobject>
                 <textobject>
-                   <phrase>question mark</phrase>
+                  <phrase>question mark</phrase>
                 </textobject>
               </inlinemediaobject> icon to see a quick help pane for each section.
       </para>
@@ -361,12 +360,12 @@
       Click the plus icon next to the <emphasis role="bold">Content Path</emphasis> to re-select another content. The Select Content dialog appears:
      </para>
           <mediaobject>
-             <imageobject role="html">
-                <imagedata fileref="images/selectcontent.png" format="PNG" align="center"/>
-             </imageobject>
-             <imageobject role="fo">
-                <imagedata fileref="images/selectcontent.png" format="PNG" align="center" width="150mm"/>
-             </imageobject>
+            <imageobject role="html">
+              <imagedata align="center" fileref="images/selectcontent.png" format="PNG"/>
+            </imageobject>
+            <imageobject role="fo">
+              <imagedata width="150mm" align="center" fileref="images/selectcontent.png" format="PNG"/>
+            </imageobject>
           </mediaobject>
         </step>
         <step>
@@ -379,12 +378,12 @@
             Tick the checkboxes, including the <emphasis role="bold">Show Title</emphasis> box, the <emphasis role="bold">Show Date</emphasis> and the <emphasis role="bold">Show Option bar</emphasis> box if you want to display the content title, the publication date and the print button like the illustration below:
            </para>
           <mediaobject>
-             <imageobject role="html">
-                <imagedata fileref="images/editedscv.png" format="PNG" align="center"/>
-             </imageobject>
-             <imageobject role="fo">
-                <imagedata fileref="images/editedscv.png" format="PNG" align="center" width="150mm" />
-             </imageobject>
+            <imageobject role="html">
+              <imagedata align="center" fileref="images/editedscv.png" format="PNG"/>
+            </imageobject>
+            <imageobject role="fo">
+              <imagedata width="150mm" align="center" fileref="images/editedscv.png" format="PNG"/>
+            </imageobject>
           </mediaobject>
         </step>
         <step>
@@ -392,10 +391,10 @@
       In the <emphasis role="bold">Print Setting</emphasis> part, click the 
       <inlinemediaobject>
               <imageobject>
-                <imagedata fileref="images/previewicon2.png" format="PNG" width="7mm"/>
+                <imagedata width="7mm" fileref="images/previewicon2.png" format="PNG"/>
               </imageobject>
               <textobject>
-                 <phrase>magnifying glass</phrase>
+                <phrase>magnifying glass</phrase>
               </textobject>
             </inlinemediaobject> icon to open the <emphasis role="bold">UIPageselector</emphasis> dialog, you will see <emphasis role="bold">Printviewer.</emphasis>
      </para>
@@ -403,12 +402,12 @@
       Click the <emphasis role="bold">Print</emphasis> button, the content is opened in the print viewer page.
      </para>
           <mediaobject>
-             <imageobject role="html">
-                <imagedata fileref="images/printreview.png" format="PNG" align="center"/>
-             </imageobject>
-             <imageobject role="fo">
-                <imagedata fileref="images/printreview.png" format="PNG" align="center" width="150mm" />
-             </imageobject>
+            <imageobject role="html">
+              <imagedata align="center" fileref="images/printreview.png" format="PNG"/>
+            </imageobject>
+            <imageobject role="fo">
+              <imagedata width="150mm" align="center" fileref="images/printreview.png" format="PNG"/>
+            </imageobject>
           </mediaobject>
           <para>
       <emphasis role="bold">URL</emphasis>: http://localhost:8080/ecmdemo/private/acme/<emphasis role="bold">printviewer?content-id</emphasis>=/repository/collaboration/sites%20content/live/acme/web%20contents/site%20artifacts/Introduce&amp;isPrint=true
@@ -448,23 +447,23 @@
       Turn on the <emphasis role="bold">Edit Mode &gt;</emphasis> Select the <emphasis role="bold">Preferences</emphasis> icon of a Content List Viewer.
      </para>
           <mediaobject>
-             <imageobject role="html">
-                <imagedata fileref="images/clvpreferences.png" format="PNG" align="center"/>
-             </imageobject>
-             <imageobject role="fo">
-                <imagedata fileref="images/clvpreferences.png" format="PNG" align="center" width="150mm" />
-             </imageobject>
+            <imageobject role="html">
+              <imagedata align="center" fileref="images/clvpreferences.png" format="PNG"/>
+            </imageobject>
+            <imageobject role="fo">
+              <imagedata width="150mm" align="center" fileref="images/clvpreferences.png" format="PNG"/>
+            </imageobject>
           </mediaobject>
           <para>
       The Content List Preferences dialog appears:
      </para>
           <mediaobject>
-             <imageobject role="html">
-                <imagedata fileref="images/clvpreferences1.png" format="PNG" align="center"/>
-             </imageobject>
-             <imageobject role="fo">
-                <imagedata fileref="images/clvpreferences1.png" format="PNG" align="center" width="150mm" />
-             </imageobject>
+            <imageobject role="html">
+              <imagedata align="center" fileref="images/clvpreferences1.png" format="PNG"/>
+            </imageobject>
+            <imageobject role="fo">
+              <imagedata width="150mm" align="center" fileref="images/clvpreferences1.png" format="PNG"/>
+            </imageobject>
           </mediaobject>
           <para>
       Details:
@@ -581,7 +580,7 @@
                 <imagedata fileref="images/plusicon.png" format="PNG"/>
               </imageobject>
               <textobject>
-                 <phrase>blue plus</phrase>
+                <phrase>blue plus</phrase>
               </textobject>
             </inlinemediaobject> icon next to the<emphasis role="bold"> folder path</emphasis> field.
      </para>
@@ -626,90 +625,147 @@
     To do the inline editing, do as follows:
     </para>
     <procedure>
-    <step>
-    <para>Select the page you want to edit. For example, "acme".</para>
-      <mediaobject>
-                <imageobject role="html">
-                  <imagedata  align="center"  fileref="images/acme_inline_editing.png" format="PNG"/>
-                </imageobject>
-                <imageobject role="fo">
-                  <imagedata   align="center" fileref="images/acme_inline_editing.png" format="PNG" width="150mm"/>
-                </imageobject>
-              </mediaobject>
-    
-    </step>
-    <step>
-    <para>Select the <emphasis role="bold">Edit</emphasis> mode on the administration bar.
+      <step>
+        <para>Select the page you want to edit. For example, &quot;acme&quot;.</para>
+        <mediaobject>
+          <imageobject role="html">
+            <imagedata align="center" fileref="images/acme_inline_editing.png" format="PNG"/>
+          </imageobject>
+          <imageobject role="fo">
+            <imagedata width="150mm" align="center" fileref="images/acme_inline_editing.png" format="PNG"/>
+          </imageobject>
+        </mediaobject>
+      </step>
+      <step>
+        <para>Select the <emphasis role="bold">Edit</emphasis> mode on the administration bar.
     </para>
-      <mediaobject>
-                <imageobject role="html">
-                  <imagedata  align="center"  fileref="images/Edit_mode_Inline.png" format="PNG"/>
-                </imageobject>
-                <imageobject role="fo">
-                  <imagedata   align="center" fileref="images/Edit_mode_Inline.png" format="PNG" width="150mm"/>
-                </imageobject>
-              </mediaobject>
-    <para>You will be directed to the edit mode of your selected page.</para>
-    </step>
-    
-    <step>
-    <para>Hover your cursor over the area you want to edit.
+        <mediaobject>
+          <imageobject role="html">
+            <imagedata align="center" fileref="images/Edit_mode_Inline.png" format="PNG"/>
+          </imageobject>
+          <imageobject role="fo">
+            <imagedata width="150mm" align="center" fileref="images/Edit_mode_Inline.png" format="PNG"/>
+          </imageobject>
+        </mediaobject>
+        <para>You will be directed to the edit mode of your selected page.</para>
+      </step>
+      <step>
+        <para>Hover your cursor over the area you want to edit.
     </para>
-    <para>The editable area will be highlighted as below.</para>
-          <mediaobject>
-                <imageobject role="html">
-                  <imagedata  align="center"  fileref="images/Highlighted_Edit_Area.png" format="PNG"/>
-                </imageobject>
-                <imageobject role="fo">
-                  <imagedata   align="center" fileref="images/Highlighted_Edit_Area.png" format="PNG" width="150mm"/>
-                </imageobject>
-              </mediaobject>
-    </step>
-    <step>
-    <para>Double-click the area until the Edit area is shown as below.
+        <para>The editable area will be highlighted as below.</para>
+        <mediaobject>
+          <imageobject role="html">
+            <imagedata align="center" fileref="images/Highlighted_Edit_Area.png" format="PNG"/>
+          </imageobject>
+          <imageobject role="fo">
+            <imagedata width="150mm" align="center" fileref="images/Highlighted_Edit_Area.png" format="PNG"/>
+          </imageobject>
+        </mediaobject>
+      </step>
+      <step>
+        <para>Double-click the area until the Edit area is shown as below.
     </para>
- 
-       <mediaobject>
-                <imageobject role="html">
-                  <imagedata  align="center"  fileref="images/edit_area_Inline.png" format="PNG"/>
-                </imageobject>
-                <imageobject role="fo">
-                  <imagedata   align="center" fileref="images/edit_area_Inline.png" format="PNG" width="150mm"/>
-                </imageobject>
-              </mediaobject>
-    <para> In case the hovered area is in the Rich Text format, the Edit area will be displayed with the CKEditor as below:</para>
-    
-               <mediaobject>
-                <imageobject role="html">
-                  <imagedata  align="center"  fileref="images/CKEditor_Inline.png" format="PNG"/>
-                </imageobject>
-                <imageobject role="fo">
-                  <imagedata   align="center" fileref="images/CKEditor_Inline.png" format="PNG" width="150mm"/>
-                </imageobject>
-              </mediaobject>
-    </step>
-    <step>
-    <para>Make changes in the Edit area, then click
+        <mediaobject>
+          <imageobject role="html">
+            <imagedata align="center" fileref="images/edit_area_Inline.png" format="PNG"/>
+          </imageobject>
+          <imageobject role="fo">
+            <imagedata width="150mm" align="center" fileref="images/edit_area_Inline.png" format="PNG"/>
+          </imageobject>
+        </mediaobject>
+        <para> In case the hovered area is in the Rich Text format, the Edit area will be displayed with the <ulink url="http://docs.cksource.com/CKEditor_3.x/Users_Guide">CKEditor</ulink> as below:</para>
+        <mediaobject>
+          <imageobject role="html">
+            <imagedata align="center" fileref="images/CKEditor_Inline.png" format="PNG"/>
+          </imageobject>
+          <imageobject role="fo">
+            <imagedata width="150mm" align="center" fileref="images/CKEditor_Inline.png" format="PNG"/>
+          </imageobject>
+        </mediaobject>
+      </step>
+      <step>
+        <para>Make changes on the Edit area, then click
      <inlinemediaobject>
-                  <imageobject>
-                    <imagedata fileref="images/Accepticon.png" format="PNG" width="5mm"/>
-                  </imageobject>
-    
-     </inlinemediaobject>
+            <imageobject>
+              <imagedata width="5mm" fileref="images/Accepticon.png" format="PNG"/>
+            </imageobject>
+          </inlinemediaobject>
      to accept;</para>
-    <para> Or click 
+        <para> Or click 
         <inlinemediaobject>
-                  <imageobject>
-                    <imagedata fileref="images/Cancelicon.png" format="PNG" width="5mm"/>
-                  </imageobject>
-    
-     </inlinemediaobject>
+            <imageobject>
+              <imagedata width="5mm" fileref="images/Cancelicon.png" format="PNG"/>
+            </imageobject>
+          </inlinemediaobject>
      to discard changes.
       </para>
-    </step>
+        <note>
+          <title>CKEditor</title>
+          <para>When using CKEditor to write/edit a document, you can also:</para>
+          <itemizedlist>
+            <listitem>
+              <para>Insert a portal link: allows inserting a portal link to the document. </para>
+            </listitem>
+            <listitem>
+              <para>Insert a content link: allows inserting a content as a link to the document.</para>
+            </listitem>
+          </itemizedlist>
+          <procedure>
+            <title>Insert a portal link</title>
+            <step>
+              <para>Click <inlinemediaobject>
+                  <imageobject>
+                    <imagedata fileref="images/insert_portal_link.png" format="PNG"/>
+                  </imageobject>
+                </inlinemediaobject> to open the <emphasis role="bold">InsertPortalLink</emphasis> form:</para>
+              <mediaobject>
+                <imageobject>
+                  <imagedata align="center" fileref="images/insert_portal_link_form.png" format="PNG"/>
+                </imageobject>
+              </mediaobject>
+            </step>
+            <step>
+              <para>Enter the title of the portal in the <emphasis role="bold">Title</emphasis> field.</para>
+            </step>
+            <step>
+              <para>Enter the portal URL manually, or you can also click <emphasis role="bold">Get portal link</emphasis> to open a page including all the portals in the same server, then select one that you want.</para>
+            </step>
+            <step>
+              <para>Click <emphasis role="bold">Preview</emphasis> to view the portal.</para>
+            </step>
+            <step>
+              <para>Click <emphasis role="bold">Save</emphasis> to accept inserting the portal to the document.</para>
+            </step>
+          </procedure>
+          <procedure>
+            <title>Insert a content link</title>
+            <step>
+              <para>Click <inlinemediaobject>
+                  <imageobject>
+                    <imagedata fileref="images/insert_content.png"/>
+                  </imageobject>
+                </inlinemediaobject> to open a page:</para>
+              <mediaobject>
+                <imageobject role="html">
+                  <imagedata fileref="images/content_selector.png" format="PNG" align="center"/>
+                </imageobject>
+              </mediaobject>
+            </step>
+            <step>
+              <para>Click + in the left panel to list the contents in the right panel or click <inlinemediaobject>
+                  <imageobject>
+                    <imagedata fileref="images/upload_file.png" format="PNG"/>
+                  </imageobject>
+                </inlinemediaobject> to upload a file from your local device.</para>
+            </step>
+            <step>
+              <para>Click a content that you want to insert to the document.</para>
+            </step>
+          </procedure>
+        </note>
+      </step>
     </procedure>
   </section>
-    
   <section id="sect-User_Guide-Contribute_Content-Publication_Process">
     <title>Publication Process</title>
     <para>
@@ -730,12 +786,12 @@
      <emphasis role="bold">Request approval</emphasis>: When a new content is created, it must be approved before publishing by clicking <emphasis role="bold">Request Approval</emphasis> on the action bar of the Content Explorer or clicking <emphasis role="bold">Pending</emphasis> in the Manage Publication form:
     </para>
         <mediaobject>
-           <imageobject role="html">
-              <imagedata fileref="images/managepublication.png" format="PNG" align="center"/>
-           </imageobject>
-           <imageobject role="fo">
-              <imagedata fileref="images/managepublication.png" format="PNG" align="center" width="150mm" />
-           </imageobject>
+          <imageobject role="html">
+            <imagedata align="center" fileref="images/managepublication.png" format="PNG"/>
+          </imageobject>
+          <imageobject role="fo">
+            <imagedata width="150mm" align="center" fileref="images/managepublication.png" format="PNG"/>
+          </imageobject>
         </mediaobject>
       </listitem>
       <listitem>
@@ -754,12 +810,12 @@
      To publish your content forever, you should not set time in the <emphasis role="bold">To</emphasis> field.
     </para>
         <mediaobject>
-           <imageobject role="html">
-              <imagedata fileref="images/stage.png" format="PNG" align="center"/>
-           </imageobject>
-           <imageobject role="fo">
-              <imagedata fileref="images/stage.png" format="PNG" align="center" width="150mm"/>
-           </imageobject>
+          <imageobject role="html">
+            <imagedata align="center" fileref="images/stage.png" format="PNG"/>
+          </imageobject>
+          <imageobject role="fo">
+            <imagedata width="150mm" align="center" fileref="images/stage.png" format="PNG"/>
+          </imageobject>
         </mediaobject>
       </listitem>
       <listitem>
@@ -772,14 +828,81 @@
      </para>
         </note>
         <mediaobject>
-           <imageobject role="html">
-              <imagedata fileref="images/bottombar.png" format="PNG" align="center"/>
-           </imageobject>
-           <imageobject role="fo">
-              <imagedata fileref="images/bottombar.png" format="PNG" align="center" width="150mm" />
-           </imageobject>
+          <imageobject role="html">
+            <imagedata align="center" fileref="images/bottombar.png" format="PNG"/>
+          </imageobject>
+          <imageobject role="fo">
+            <imagedata width="150mm" align="center" fileref="images/bottombar.png" format="PNG"/>
+          </imageobject>
         </mediaobject>
       </listitem>
     </itemizedlist>
   </section>
-</section>
+  
+<!-- remove
+<section>
+    CKEditor</title>
+    <para>eXo Content offers CKEditor to allow you to write/edit documents easily. Refer <ulink url="http://docs.cksource.com/FCKeditor_2.x/Users_Guide"/>  to know how to use CKEditor.</para>
+    <para>Moreover, when use CKEditor in eXo Content,  you can also:</para>
+    <itemizedlist>
+      <listitem>
+        <para>Insert a portal link: allows inserting a portal link to the document. </para>
+      </listitem>
+      <listitem>
+        <para>Insert a content link: allows inserting a content as a link to the document.</para>
+      </listitem>
+    </itemizedlist>
+    <procedure>
+      <title>Insert a portal link</title>
+      <step>
+        <para>Click <inlinemediaobject>
+            <imageobject>
+              <imagedata fileref="images/insert_portal_link.png" format="PNG"/>
+            </imageobject>
+          </inlinemediaobject> to open the <emphasis role="bold">InsertPortalLink</emphasis> form:</para>
+        <mediaobject>
+          <imageobject>
+            <imagedata align="center" fileref="images/insert_portal_link_form.png" format="PNG"/>
+          </imageobject>
+        </mediaobject>
+      </step>
+      <step>
+        <para>Enter the title of the portal in the Title field.</para>
+      </step>
+      <step>
+        <para>Enter the portal URL manually, or you can also click <emphasis role="bold">Get portal link</emphasis> to open a page including all the portals in the same server, then select one that you want.</para>
+      </step>
+      <step>
+        <para>Click <emphasis role="bold">Preview</emphasis> to view the portal.</para>
+      </step>
+      <step>
+        <para>Click <emphasis role="bold">Save</emphasis> to accept inserting the portal link to the document.</para>
+      </step>
+    </procedure>
+    <procedure>
+      <title>Insert a content link</title>
+      <step>
+        <para>Click <inlinemediaobject>
+            <imageobject>
+              <imagedata fileref="images/insert_content.png"/>
+            </imageobject>
+          </inlinemediaobject> to open a page:</para>
+        <mediaobject>
+          <imageobject role="html">
+            <imagedata fileref="images/content_selector.png" format="PNG"/>
+          </imageobject>
+        </mediaobject>
+      </step>
+      <step>
+        <para>Click +  in the left panel to list the contents in the right panel or click <inlinemediaobject>
+            <imageobject>
+              <imagedata fileref="images/upload_file.png" format="PNG"/>
+            </imageobject>
+          </inlinemediaobject> to upload a file from your local machine.</para>
+      </step>
+      <step>
+        <para>Click a content that you want to insert to the document.</para>
+      </step>
+    </procedure>
+  </section>-->
+</section> 
