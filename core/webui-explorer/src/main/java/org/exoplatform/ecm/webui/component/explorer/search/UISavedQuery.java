@@ -144,7 +144,7 @@ public class UISavedQuery extends UIContainer implements UIPopupComponent {
     QueryService queryService = getApplicationComponent(QueryService.class);
     String userId = pcontext.getRemoteUser();
     SessionProvider provider = SessionProviderFactory.createSystemProvider();
-    return queryService.getSharedQueries(userId, repositoryName_,provider);
+    return queryService.getSharedQueries(userId, provider);
   }
 
   //public List<Node> getSharedQueries() { return sharedQueries_; }

@@ -32,6 +32,7 @@ import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.organization.Membership;
+import org.exoplatform.services.organization.MembershipHandler;
 import org.exoplatform.services.organization.OrganizationService;
 import org.quartz.JobExecutionContext;
 
@@ -125,7 +126,8 @@ public class WCMCoreUtils {
       String permissionTmp = "";
       for (String permission : permissions) {
         if (!permissionTmp.equals(permission)) count = 0;
-        memberships = organizationService.getMembershipHandler().findMembershipsByUser(userId);
+        MembershipHandler mhandler = organizationService.getMembershipHandler(); 
+        memberships = mhandler.findMembershipsByUser(userId);
         Iterator<?> membershipIterator = memberships.iterator();
         while (membershipIterator.hasNext()) {
           userMembership = (Membership)membershipIterator.next();

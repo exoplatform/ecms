@@ -178,25 +178,31 @@ public class QueryServiceImpl implements QueryService, Startable{
       usersHome = (Node)getSession(provider, false).getItem(baseUserPath_);
     }
     Node userHome = null;
-    if(usersHome.hasNode(userName)) {
-      userHome = usersHome.getNode(userName);
-    } else{
-      userHome = usersHome.addNode(userName);
-      if(userHome.canAddMixin("exo:privilegeable")){
-        userHome.addMixin("exo:privilegeable");
+    try {
+      userHome = nodeHierarchyCreator_.getUserNode(provider, userName);
+    }catch(Exception e) {}
+    if (userHome == null) {
+      if(usersHome.hasNode(userName)) {
+        userHome = usersHome.getNode(userName);
+      } else{
+        userHome = usersHome.addNode(userName);
+        if(userHome.canAddMixin("exo:privilegeable")){
+          userHome.addMixin("exo:privilegeable");
+          
+        }
+        ((ExtendedNode)userHome).setPermissions(getPermissions(userName));
+        Node query = null;
+        if(userHome.hasNode(relativePath_)) {
+          query = userHome.getNode(relativePath_);
+        } else {
+          query = getNodeByRelativePath(userHome, relativePath_);
+        }
+        if (query.canAddMixin("exo:privilegeable")){
+          query.addMixin("exo:privilegeable");
+        }
+        ((ExtendedNode)query).setPermissions(getPermissions(userName));
+        usersHome.save();
       }
-      ((ExtendedNode)userHome).setPermissions(getPermissions(userName));
-      Node query = null;
-      if(userHome.hasNode(relativePath_)) {
-        query = userHome.getNode(relativePath_);
-      } else {
-        query = getNodeByRelativePath(userHome, relativePath_);
-      }
-      if (query.canAddMixin("exo:privilegeable")){
-        query.addMixin("exo:privilegeable");
-      }
-      ((ExtendedNode)query).setPermissions(getPermissions(userName));
-      usersHome.save();
     }
     Node queriesHome = null;
     if(userHome.hasNode(relativePath_)) {
@@ -220,7 +226,15 @@ public class QueryServiceImpl implements QueryService, Startable{
    * @throws Exception
    */
   private Node getNodeByRelativePath(Node userHome, String relativePath) throws Exception {
-    return userHome.addNode(relativePath);
+    String[] paths = relativePath.split("/");
+    String relPath = null;
+    Node queriesHome = null;
+    for(String path : paths) {
+      if(relPath == null) relPath = path;
+      else relPath = relPath + "/" + path;
+      if(!userHome.hasNode(relPath)) queriesHome = userHome.addNode(relPath);
+    }
+    return queriesHome;
   }
 
   /**
