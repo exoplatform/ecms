@@ -1,6 +1,6 @@
 The eXo Platform provides CMIS support using the xCMIS project and the WCM Storage provider.
 
-h1. About CMIS
+h1. About CMIS {anchor:id=Dev_CMIS.Introduction.About_CMIS}
 
 The CMIS standard aims at defining a common content management web services interface that can be applied in content repositories and bring about the interoperability across repositories. The formal specification of CMIS standard is approved by the Organization for the Advancement of Structured Information Standards (OASIS) technical committee who drives the development, convergence and adoption of global information society. With CMIS, enterprises now can deploy systems independently, and create specialized applications running over a variety of content management systems.
 
@@ -9,7 +9,7 @@ To see the advantages of content interoperability and the significance of CMIS a
 # Access unification: CMIS enables different applications and manufacturers to be connected to a CMIS-enabled content repository simply. With CMIS, a business application's developer can focus on the application's business logic, rather than issues related to the compatibility or content migration. 
 
 
-h1. About xCMIS
+h1. About xCMIS {anchor:id=Dev_CMIS.Introduction.About_xCMIS}
 xCMIS project, which is initially contributed to the Open Source community by eXo Platform, is an Open Source implementation of the Content Management Interoperability Services (CMIS) specification. xCMIS supports all the features stated in the CMIS core definition and both REST AtomPub and Web Services (SOAP/WSDL) protocol bindings. 
 
 {tip:title=Intro in xCMIS basis}  
@@ -18,7 +18,7 @@ To learn more about xCMIS, visit:
 * [http://code.google.com/p/xcmis/]
 {tip}
 
-h1. About eXo CMIS
+h1. About eXo CMIS {anchor:id=Dev_CMIS.Introduction.About_eXo_CMIS}
 
 eXo CMIS is built on the top of xCMIS embedded in Platform to expose the WCM drives as the CMIS repositories. 
 The CMIS features are implemented as a set of components deployed on the eXo Container using XML files to describe the service configuration.
@@ -32,9 +32,3 @@ Figure: how eXo CMIS works
 
 WCM drives exposure is implemented as WCM storage provider to xCMIS SPI. 
 Storage provider uses mappings from WCM's _ManageDriveService_ to actual JCR nodes. And _AtomPub_ bindings makes WCM structure available via CMIS standard API.
-
-
-
-
-
-

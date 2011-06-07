@@ -1,18 +1,16 @@
-h1. Introduction
+h1. Introduction {anchor:id=Adm_CMIS.Introduction}
 {include:document="xCMIS/Introduction.wiki" /}
 
-h1. Configuration
+h1. Configuration {anchor:id=Adm_CMIS.Configuration}
 {include:document="xCMIS/Configure.wiki" /}
 {include:document="xCMIS/Authentication.wiki" /}
 {include:document="xCMIS/Index.wiki" /}
 
-h1. Service JARs
+h1. Service JARs {anchor:id=Adm_CMIS.ServiceJARs}
 {include:document="xCMIS/xCMISfiles.wiki" /}
 
-h1. Miscellaneous and Tips
+h1. Miscellaneous and Tips {anchor:id=Adm_CMIS.Miscellaneous_tips}
 {include:document="xCMIS/Miscellaneous.wiki" /}
 
-h1. Links
+h1. Links {anchor:id=Adm_CMIS.Links}
 {include:document="xCMIS/Links.wiki" /}
-
-

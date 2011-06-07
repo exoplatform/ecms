@@ -2,14 +2,13 @@ The following examples of CMIS usage may be useful for developers who needs to a
 CMIS access code snippets build using Apache HTTP Client for Java or using Google gadgets (gadgets.io) for JavaScript examples.
 For the cURL examples look at http://code.google.com/p/xcmis/wiki/xCMISusesWithCurl.
 
-h2. Login to repository.
+h2. Login to repository {anchor:id=Dev_CMIS.Usage_code_examples.Login_to_repository}
 
 {note}
 CMIS service uses default authentication in general case, but it can be overridden in case of embedding CMIS into an Application Service. 
 In these examples only Basic HTTP authentication covered.
 {note}
-
-h3. Using java.
+h3. Using java {anchor:id=Dev_CMIS.Usage_code_examples.Use_java}
 
 {code:language=java}
  import org.apache.commons.httpclient.HttpClient;
@@ -25,13 +24,13 @@ h3. Using java.
 {code}
 
 
-h2. Listing of documents (folder, files).
+h2. Listing of documents (folder, files) {anchor:id=Dev_CMIS.Usage_code_examples.List_of_documents}
 
 There are a several methods to get the documents listings, such as getChildren(), getFolderTree() and getDescentants(), their usage will be described below.
 The difference between them is in usage of different URL segments to get a data ("/children" for getChildren(), "/foldertree" for getFolderTree(), "/descendants" for getDescentants()),
 and a different kind of results (getChildren() returns a flat structure, while a getFolderTree() and getDescentants() has a tree of items in response).
 
-h3. Using java.
+h3. Using java {anchor:id=Dev_CMIS.Usage_code_examples.List_of_documents.Use_java}
 
 {code:language=java}
  import org.apache.commons.httpclient.HttpClient;
@@ -57,7 +56,7 @@ h3. Using java.
 {code}
 
 
-h3. Using JavaScript.
+h3. Using JavaScript {anchor:id=Dev_CMIS.Usage_code_examples.List_of_document.Use_Javascript}
 
 Creating an URL to make a request (consists of repository name, the method name, e.g. "/children/", and folderID to get children from):
 
@@ -90,12 +89,12 @@ var handler = function(resp) {
 }
 {code}
 
-h2. Read document properties and content-stream.
+h2. Read document properties and content-stream {anchor:id=Dev_CMIS.Usage_code_examples.Read_document_properties_contentstream}
 
 Reading of Document properties and content stream it are two separate operations. 
 Getting of content stream is possible after the properties set have been read and the content stream ID extracted from it.
 
-h3. Using java.
+h3. Using java {anchor:id=Dev_CMIS.Usage_code_examples.Read_document_properties_contentstream.Use_java}
 
 Get document properties.
 
@@ -160,7 +159,7 @@ renditions. If no stream ID is specified, a default stream will be returned.
  }
 {code}
 
-h3. Using JavaScript.
+h3. Using JavaScript {anchor:id=Dev_CMIS.Usage_code_examples.Read_document_properties_contentstream.Use_Javascript}
 
 Get document properties.
 
@@ -202,16 +201,16 @@ Performing a content stream request in JavaScript will cause the browser dialog 
 {code}
 
 
-h2. Search of data and syntax examples.
+h2. Search of data and syntax examples {anchor:id=Dev_CMIS.Usage_code_examples.Search_data_syntax_example}
 
 CMIS supports SQL queries for more handful content search. Query service can handle both GET and POST requests. URL for query consists of repository name and method name "/query".
 GET request must contain query as a parameter named "q", in case of POST request query must be located in a request body.
 
 For more detailed instructions how to construct queries please refer to "Query examples" chapter.
 
-h3. Using java.
+h3. Using java {anchor:id=Dev_CMIS.Usage_code_examples.Search_data_syntax_example.Use_Java}
 
-{code:language=java}
+{code:java}
  import org.apache.commons.httpclient.HttpClient;
  import org.apache.commons.httpclient.methods.PostMethod;
  import org.apache.commons.httpclient.methods.StringRequestEntity;
@@ -246,9 +245,9 @@ h3. Using java.
 {code}
 
 
-h3. Using JavaScript.
+h3. Using JavaScript {anchor:id=Dev_CMIS.Usage_code_examples.Search_data_syntax_example.Use_Javascript}
 
-{code:language=java}
+{code:java}
  var url = "http://localhost:8080/rest/private/cmisatom/";
  url += repository;
  url += "/query/";
@@ -262,18 +261,18 @@ h3. Using JavaScript.
 {code}
 
 
-h2. Modification of document properties or content.
+h2. Modification of document properties or content {anchor:id=Dev_CMIS.Usage_code_examples.Modification_of_document_properties_or_content}
 
 Command of property update uses PUT method. The URL is the same as for a reading of properties, the difference is only in HTTP method used.
 Body of the request must be an Atom document with the properties specified (see spec. 2.2.4.12 for details constructing document).
 
 Sending of content stream can be executed via PUT or POST requests. Content-type of the request must be an "multipart/form-data".
 
-h3. Using java.
+h3. Using java {anchor:id=Dev_CMIS.Usage_code_examples.Modification_of_document_properties_or_content.Use_java}
 
 Update properties:
 
-{code:language=java}
+{code:java}
  import org.apache.commons.httpclient.HttpClient;
  import org.apache.commons.httpclient.methods.StringRequestEntity;
  import org.apache.commons.httpclient.methods.PostMethod;
@@ -314,7 +313,7 @@ String atomDoc = "<?xml version='1.0' encoding='utf-8'?>"
 
 Set content stream:
 
-{code:language=java}
+{code:java}
  import org.apache.commons.httpclient.HttpClient;
  import org.apache.commons.httpclient.methods.InputStreamRequestEntity;
  import org.apache.commons.httpclient.methods.PostMethod;
@@ -341,7 +340,7 @@ Set content stream:
  }
 {code}
 
-h3. Using JavaScript.
+h3. Using JavaScript {anchor:id=Dev_CMIS.Usage_code_examples.Modification_of_document_properties_or_content.Use_javascript}
 
 Update properties:
 
@@ -352,7 +351,7 @@ Update properties:
  url += obj_id;
 {code}
 
-{code:language=java}
+{code:java}
 //constructing document
  String atomDoc = "<?xml version='1.0' encoding='utf-8'?>";
        atomDoc += "<entry xmlns='http://www.w3.org/2005/Atom'";
@@ -372,14 +371,14 @@ Update properties:
 
 Set content stream:
 
-{code:language=java}
+{code:java}
  var url = "http://localhost:8080/rest/private/cmisatom/";
  url += repository;
  url += "/file/";
  url += obj_id;
 {code}
 
-{code:language=java}
+{code:java}
  var params = {};
  params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
  params[gadgets.io.RequestParameters.CONTENT_TYPE] = "multipart/form-data";

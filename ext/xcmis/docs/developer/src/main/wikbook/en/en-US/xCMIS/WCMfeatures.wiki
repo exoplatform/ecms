@@ -1,4 +1,4 @@
-h1. Integration with eXo WCM
+h1. Integration with eXo WCM {anchor:id=Dev_CMIS.features.Integration_with_eXoWCM}
 
 eXo Web Content Management (WCM) system provides CMIS access to its content storage features:
 * WCM drives
@@ -21,7 +21,7 @@ CMIS AtomPub binding which is based upon the Atom (RFC4287) and Atom Publishing 
 SOAP binding is not implemented in the eXo Platform 3.x.
 {info}
 
-h2. JCR namespaces and nodetypes
+h2. JCR namespaces and nodetypes {anchor:id=Dev_CMIS.features.JCR_namespaces_nodetypes}
 
 eXo CMIS uses special JCR namespaces _cmis_ and _xcmis_ internally. 
 
@@ -43,7 +43,7 @@ In other words only nodetypes extending nt:file, nt:folder, nt:unstructured and 
   WCM's nodetype exo:article isn't supported by eXo CMIS due to not compliant structure to nt:file.
 {warning}
 
-h2. WCM drives as CMIS Repositories
+h2. WCM drives as CMIS Repositories {anchor:id=Dev_CMIS.features.WCM_drives_as_CMIS_repositories}
 
 The WCM drive is used to expose as an isolated repository via the CMIS service. Operations on the repository will reflect the drive immediately. 
 
@@ -53,7 +53,7 @@ The WCM drive is used to expose as an isolated repository via the CMIS service. 
   Consult with WCM drives mappings to know actual location of a content you'll access or change.
 {tip}
 
-h3. Use Case: Browse Drives via _getRepository_
+h3. Use Case: Browse Drives via _getRepository_ {anchor:id=Dev_CMIS.features.Use_case_browse_drives_via_getRepositort}
 
 * Login to the website as a user with the developer role.
 * Open *Group | Sites Explorer*, you can see the drives set of WCM, such as *Sites Management*, *DMS Administration*.
@@ -65,7 +65,7 @@ curl -o getrepos.xml -u root:gtn http://localhost:8080/rest/private/cmisatom/
 The requested file (getrepos.xml) contains the set of Repositories in the AtomPub format.
 The root element represents the set of *workspaces* representing *WCM drives* related to resources, 
 for example for *DMS Administration* the response will contains data like:
-{code:language=xml}
+{code:xml}
    <service xmlns="http://www.w3.org/2007/app" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:cmisra="http://docs.oasis-open.org/ns/cmis/restatom/200908/">
    <workspace>
       <atom:title type="text">DMS Administration</atom:title>
@@ -143,14 +143,14 @@ where parameters include:
   Find full description of all sepcefied services in the CMIS specefication.
 {note}
 
-h2. WCM Symlinks
+h2. WCM Symlinks {anchor:id=Dev_CMIS.features.WCM_symlinks}
 
 Symlinks are used to organize the virtual access to documents in WCM, which is implemented like links in Unix/Linux/Mac OS (refer to ln command for more details).
 {note}
 JCR exo:symlink nodetype used for such type nodes.
 {note}
 
-h3. Use Case: Follow Symlinks
+h3. Use Case: Follow Symlinks {anchor:id=Dev_CMIS.features.Use_case_follow_symlinks}
 
 * Login to the acme website as a user with the developer role.
 * Open *Group | Sites Explorer*, select *Sites Management*, go to folder /acme/documents.
@@ -165,7 +165,7 @@ The requested file (products.xml) contains the entry with information about the 
 * The list of properties for the object (such as node Id or type).
 * Allowable Actions can be performed on the document; for example, requesting the children list.
 * ACL and policies information.
-{code:language=xml}
+{code:xml}
 <entry xmlns="http://www.w3.org/2005/Atom" xmlns:cmisra="http://docs.oasis-open.org/ns/cmis/restatom/200908/">
    <id>f59a3539c0a80003625790bdadf566c5</id>
    <published>2010-09-09T18:11:57.707Z</published>
@@ -258,7 +258,7 @@ curl -o childs.xml -u root:gtn http://localhost:8080/rest/private/cmisatom/Manag
 {screen}
 
 In the requested file (childs.xml), find the entry related to *test.txt* file uploaded via *Sites Explorer*. Find by title for name "test.txt".
-{code:language=xml}
+{code:xml}
    <entry xmlns:cmisra="http://docs.oasis-open.org/ns/cmis/restatom/200908/">
       <id>f708e208c0a80003554babb97bd934ba</id>
       <published>2010-09-09T18:06:31.987Z</published>
@@ -407,7 +407,7 @@ In this way we got file stored in *Sites Explorer* to folder /acme/documents/tes
 As it seen file's actual content referenced by id in CMIS. Path has no matter for content read or change.
 
 
-h2. Modify WCM via CMIS
+h2. Modify WCM via CMIS {anchor:id=Dev_CMIS.features.Modify_WCM_via_CMIS}
 
 {note}
 Upload the modified local file using the command with id of the file stored in WCM (it's jcr:uuid of the file in JCR Workspace). Note that you should run this command from the folder where the local file is stored.
@@ -421,7 +421,7 @@ curl -T test.txt -X PUT -H "Content-Type:text/plain; charset=UTF-8" -u root:gtn 
 
 Go to the *Sites Explorer* and see changes applied from the local file in /acme/documents/test.txt.
 
-h2. CMIS search 
+h2. CMIS search {anchor:id=Dev_CMIS.features.Search}
 CMIS provides a type-based query service for discovering objects that match specified criteria, by defining a read-only projection of the CMIS data model into a Relational View.
 
 CMIS query languages is based on a subset of the SQL-92 grammar. CMIS-specific language extensions to SQL-92 are called out explicitly. 
@@ -442,8 +442,8 @@ Each CMIS ObjectType definition has next query attributes:
 
 Property definition also contains queryName and queriable attributes with same usage.
 
-h3. Query examples.
-h4. Simple query.
+h3. Query examples {anchor:id=Dev_CMIS.features.Query_examples}
+h4. Simple query {anchor:id=Dev_CMIS.features.Simple_query}
 
 Query : Select all {{{cmis:document}}}.
 
@@ -455,7 +455,7 @@ Query result:
 * All documents from Apollo program.
 
 
-h4. Find document by several constraints:
+h4. Find document by several constraints {anchor:id=Dev_CMIS.features.Find_document_by_several_constraints}
 
 Query : Select all documents where apollo:propertyBooster is 'Saturn V' and apollo:propertyCommander is Frank F. Borman, II or James A. Lovell, Jr.
 
@@ -471,7 +471,7 @@ SELECT * FROM cmis:document WHERE apollo:propertyBooster = 'Saturn V' AND (apoll
 Query result:
 * document2 and document3.
 
-h4. Full-text search:
+h4. Full-text search {anchor:id=Dev_CMIS.features.Fulltext_search}
 
 Query : Select all documents that contains "here" word.
 
@@ -486,9 +486,9 @@ SELECT * FROM cmis:document WHERE CONTAINS('here')
 Query result:
 * document2.
 
-h4. Extended full-text search:
+h4. Extended full-text search {anchor:id=Dev_CMIS.features.Extended_fulltext_search}
 
-Query : Select all documents that contains "There must" phrase and do not contain "check-word" word.
+Query: Select all documents that contains "There must" phrase and do not contain "check-word" word.
 
 Initial data:
 * document1: content - "There must be test word."
@@ -503,9 +503,9 @@ Query result:
 * document1.
 
 
-h4. Date property comparison:
+h4. Date property comparison {anchor:id=Dev_CMIS.features.Data_property_comparison}
 
-Query : Select all documents where cmis:lastModificationDate more than 2007-01-01.
+Query: Select all documents where cmis:lastModificationDate more than 2007-01-01.
 
 Initial data:
 * document1: cmis:lastModificationDate - 2006-08-08
@@ -518,9 +518,9 @@ SELECT * FROM cmis:document WHERE (cmis:lastModificationDate >= TIMESTAMP '2007-
 Query result:
 * document2.
 
-h4. Boolean property comparison:
+h4. Boolean property comparison {anchor:id=Dev_CMIS.features.Boolean_property_comparison}
 
-Query : Select all documents where property {{{apollo:someProperty}}} equals to false.
+Query: Select all documents where property {{{apollo:someProperty}}} equals to false.
 
 Initial data:
 * document1: {{{apollo:someProperty}}} - true
@@ -533,7 +533,7 @@ SELECT * FROM cmis:document WHERE (apollo:someProperty = FALSE)
 Query result:
 * document2.
 
-h4. IN Constraint:
+h4. IN Constraint {anchor:id=Dev_CMIS.features.In_constraint}
 
 Query : Select all documents where {{{apollo:propertyCommander}}} is in set {'Virgil I. Grissom', 'Frank F. Borman, II', 'James A. Lovell, Jr.'}.
 
@@ -550,7 +550,7 @@ SELECT * FROM cmis:document WHERE apollo:propertyCommander IN ('Virgil I. Grisso
 Query result:
 * document2 and document3.
 
-h4. Select all documents where longprop property NOT IN set:
+h4. Select all documents where longprop property NOT IN set {anchor:id=Dev_CMIS.features.Select_all_documents_where_longprop_NOTIN_set}
 
 Query : Select all documents where {{{apollo:propertyCommander}}} property not in set {'Walter M. Schirra', 'James A. Lovell, Jr.'}.
 
@@ -567,9 +567,9 @@ SELECT * FROM cmis:document WHERE apollo:PropertyCommander NOT IN ('Walter M. Sc
 Query result:
 * document2,document4.
 
-h4. Select all documents where longprop property NOT NOT IN set:
+h4. Select all documents where longprop property NOT NOT IN set {anchor:id=Dev_CMIS.features.Select_all_documents_where_longprop_property_NOTNOTIN_set}
 
-Query : Select all documents where apollo:propertyCommander property NOT IN set {'James A. Lovell, Jr.'}.
+Query: Select all documents where apollo:propertyCommander property NOT IN set {'James A. Lovell, Jr.'}.
 
 Initial data:
 * document1: {{{apollo:propertyCommander}}} - Walter M. Schirra
@@ -584,9 +584,9 @@ SELECT * FROM cmis:document WHERE  NOT (apollo:propertyCommander NOT IN ('James 
 Query result:
 * document3.
 
-h4. {{{IN_FOLDER}}} constarint.
+h4. {{{IN_FOLDER}}} constarint {anchor:id=Dev_CMIS.features.INFOLDER_constraint}
 
-Query : Select all folders that are in folder1.
+Query: Select all folders that are in folder1.
 
 Initial data:
 * folder1: id - 123456789
@@ -603,9 +603,9 @@ SELECT * FROM cmis:folder WHERE IN_FOLDER('123456789')
 Query result:
 * folder3.
 
-h4. Select all documents that are in specified folder:
+h4. Select all documents that are in specified folder {anchor:id=Dev_CMIS.features.Select_all_documents_in_specified_folder}
 
-Query : Select all documents that are in folder1.
+Query: Select all documents that are in folder1.
 
 Initial data:
 * folder1: id - 123456789
@@ -620,7 +620,7 @@ SELECT * FROM cmis:document WHERE IN_FOLDER('123456789')
 Query result:
 * document1.
 
-h4. Select all documents where query supertype is cmis:article:
+h4. Select all documents where query supertype is cmis:article {anchor:id=Dev_CMIS.features.Select_all_documents_where_query_supertype_cmisArticle}
 
 Initial data:
 * testRoot:  id - 123456789
@@ -634,9 +634,9 @@ SELECT * FROM cmis:article WHERE IN_FOLDER('123456789')
 Query result:
 * document1,document2.
 
-h4. {{{IN_TREE}}} constraint:
+h4. {{{IN_TREE}}} constraint {anchor:id=Dev_CMIS.features.INTREE_constraint}
 
-Query : Select all documents that are in tree of folder1.
+Query: Select all documents that are in tree of folder1.
 
 Initial data:
 * folder1: id - 123456789
@@ -651,9 +651,9 @@ SELECT * FROM cmis:document WHERE IN_TREE('123456789')
 Query result:
 * document1,document2.
 
-h4. LIKE Comparison:
+h4. LIKE Comparison {anchor:id=Dev_CMIS.features.LIKE_comparison}
 
-Query : Select all documents where {{{apollo:propertyCommander}}} begins with "James".
+Query: Select all documents where {{{apollo:propertyCommander}}} begins with "James".
 
 Initial data:
 * document1: {{{apollo:propertyCommander}}} - Walter M. Schirra
@@ -669,7 +669,7 @@ SELECT * FROM cmis:document AS doc WHERE apollo:PropertyCommander LIKE 'James%'
 Query result:
 * document3.
 
-h4. Test LIKE constraint with escape symbols:
+h4. Test LIKE constraint with escape symbols {anchor:id=Dev_CMIS.features.Test_LIKE_constraint_with_escape_symbols}
 
 Query : Select all documents where apollo:someProperty like 'ad\%min%'.
 
@@ -685,9 +685,9 @@ SELECT * FROM cmis:document AS doc WHERE apollo:someProperty  LIKE 'ad\\%min%'
 Query result:
 * document1.
 
-h4. NOT constraint:
+h4. NOT constraint {anchor:id=Dev_CMIS.features.NOT_constraint}
 
-Query : Select all documents that not contains "world" word.
+Query: Select all documents that not contains "world" word.
 
 Initial data:
 * document1: Title - node1, content - hello world
@@ -700,9 +700,9 @@ SELECT * FROM cmis:document WHERE NOT CONTAINS('world')
 Query result:
 * document2.
 
-h4. Property existanse:
+h4. Property existence {anchor:id=Dev_CMIS.features.Property_existence}
 
-Query : Select all documents that has apollo:propertyCommander property IS NOT NULL.
+Query: Select all documents that has apollo:propertyCommander property IS NOT NULL.
 
 Initial data:
 * document1: {{{apollo:propertyCommander}}} - Walter M. Schirra
@@ -717,9 +717,9 @@ SELECT * FROM cmis:document WHERE apollo:propertyCommander IS NOT NULL
 Query result:
 * document1,document3.
 
-h4. ORDER BY:
+h4. ORDER BY {anchor:id=Dev_CMIS.features.ORDERBY}
 
-Query : Select all documents in default order (by document name).
+Query: Select all documents in default order (by document name).
 
 Initial data:
 * document1: Title - Apollo 7
@@ -734,9 +734,9 @@ SELECT cmis:lastModifiedBy, cmis:objectId, cmis:lastModificationDate FROM cmis:d
 Query result:
 * document3,document4,document1,document2.
 
-h4. ORDER BY ASC:
+h4. ORDER BY ASC {anchor:id=Dev_CMIS.features.ORDER_BY_ASC}
 
-Query : Order by {{{apollo:propertyCommander}}} property value (in ascending order).
+Query: Order by {{{apollo:propertyCommander}}} property value (in ascending order).
 
 Initial data:
 * document1: {{{apollo:propertyCommander}}} - Walter M. Schirra
@@ -752,9 +752,9 @@ Query result:
 * document4,document2,document3,document1.
 
 
-h4. ORDER BY DESC:
+h4. ORDER BY DESC {anchor:id=Dev_CMIS.features.ORDER_BY_DESC}
 
-Query : Order by {{{apollo:propertyCommander}}} property value (in decending order).
+Query: Order by {{{apollo:propertyCommander}}} property value (in decending order).
 
 Initial data:
 * document1: {{{apollo:propertyCommander}}} - Walter M. Schirra
@@ -769,9 +769,9 @@ SELECT cmis:lastModifiedBy, cmis:objectId, cmis:lastModificationDate FROM cmis:d
 Query result:
 * document1,document3,document2,document4.
 
-h4. ORDER BY SCORE (as columns):
+h4. ORDER BY SCORE (as columns) {anchor:id=Dev_CMIS.features.ORDER_BY_SCORE}
 
-Query : Select all documents which contains word "moon" ordered by score.
+Query: Select all documents which contains word "moon" ordered by score.
 
 Initial data:
 * document1: content - "Earth-orbital mission, the first manned launch"
@@ -787,9 +787,9 @@ Query result:
 * document2,document3.
 
 
-h4. Not equal comparison (decimal):
+h4. Not equal comparison (decimal) {anchor:id=Dev_CMIS.features.Not_equal_comparison_decimal}
 
-Query : Select all documents property {{{apollo:propertyBooster}}} not equal to 3.
+Query: Select all documents property {{{apollo:propertyBooster}}} not equal to 3.
 
 Initial data:
 * document1: Title - node1, {{{apollo:propertyBooster}}} - 3
@@ -802,9 +802,9 @@ SELECT * FROM cmis:document WHERE apollo:propertyBooster <> 3
 Query result:
 * document2.
 
-h4. Not equal comparison (string):
+h4. Not equal comparison (string) {anchor:id=Dev_CMIS.features.Not_equal_comparison_string}
 
-Query : Select all documents property apollo:someProperty not equals to "test word second".
+Query: Select all documents property apollo:someProperty not equals to "test word second".
 
 Initial data:
 * document1: apollo:someProperty - "test word first"
@@ -817,9 +817,9 @@ SELECT * FROM cmis:document WHERE apollo:someProperty <> 'test word second'
 Query result:
 * document1.
 
-h4. More than comparison (>):
+h4. More than comparison (>) {anchor:id=Dev_CMIS.features.More_than_comparison}
 
-Query : Select all documents property apollo:propertyBooster more than 5.
+Query: Select all documents property apollo:propertyBooster more than 5.
 
 Initial data:
 * document1: {{{apollo:propertyBooster}}} - 3

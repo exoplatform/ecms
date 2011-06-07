@@ -1,9 +1,10 @@
-h1. CMIS Configuration
+h1. CMIS Configuration {anchor:id=Adm_CMIS.Configuration.CMIS_configuration}
 
 To expose WCM drives to the CMIS repositories, you must make a special extension of _CmisRegistry_.
 
 To make a typical component _org.exoplatform.ecms.xcmis.sp.jcr.exo.DriveCmisRegistry_, do as follows:
-{code:language=xml}
+
+{code:xml}
 <component>
    <type>org.exoplatform.ecms.xcmis.sp.jcr.exo.DriveCmisRegistry</type>
    <init-params>
@@ -36,10 +37,10 @@ Where configuration parameters include:
   In case of any change of the indexer storage location, do not comment the indexDir value parameter and point it to the actual location.
 {info}
 
-h1. Required nodetypes and namespaces in JCR
+h1. Required nodetypes and namespaces in JCR {anchor:id=Adm_CMIS.Configuration.Required_nodetypes_namespaces_in_JCR}
 
 The following configuration is mandatory for JCR to work correctly:
-{code:language=xml}
+{code:xml}
 <external-component-plugins>
    <target-component>org.exoplatform.services.jcr.RepositoryService</target-component>
    <component-plugin>
