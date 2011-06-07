@@ -9,10 +9,10 @@
 		Users can easily print any content in a site by following these steps:
 	</para>
 	 <procedure>
-		<title></title>
+		<title>Printing content</title>
 		 <step>
 			<para>
-				Click <emphasis role="bold">Read more</emphasis> to read all the content of a document or an article in a site.
+				Click <guilabel>Read more</guilabel> to read all the content of a document or an article in a site.
 			</para>
 			 <mediaobject>
 				<imageobject role="html">
@@ -21,13 +21,11 @@
 				 <imageobject role="fo">
                <imagedata align="center"  fileref="images/readmore.png" format="PNG" width="150mm" />
 				</imageobject>
-
 			</mediaobject>
-
 		</step>
 		 <step>
 			<para>
-				Click the<emphasis role="bold"> Print</emphasis> button, the Print Preview page will be displayed on another tab.
+            Click the <guilabel>Print</guilabel> button, the <guilabel>Print Preview</guilabel> page will be displayed on another tab.
 			</para>
 			 <mediaobject>
 				<imageobject role="html">
@@ -36,19 +34,12 @@
 				 <imageobject role="fo">
                <imagedata align="center"  fileref="images/printpreview.png" format="PNG" width="150mm" />
 				</imageobject>
-
 			</mediaobject>
-
 		</step>
 		 <step>
 			<para>
-				Click <emphasis role="bold">Print</emphasis> to print the content of this page or <emphasis role="bold">Close</emphasis> to close this tab without printing.
+				Click <guilabel>Print</guilabel> to print the content of this page or <guilabel>Close</guilabel> to close this tab without printing.
 			</para>
-
 		</step>
-
 	</procedure>
-
 </section>
-
-

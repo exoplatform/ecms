@@ -1,24 +1,27 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<!-- This document was created with Syntext Serna Free. --><!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!-- This document was created with Syntext Serna Free. -->
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
 <!ENTITY % BOOK_ENTITIES SYSTEM "../../User_Guide.ent">
 %BOOK_ENTITIES;
 ]>
 <section id="sect-User_Guide-Newsletters">
   <title>Newsletters</title>
   <para>
-  &PRODUCT; provides a newsletter service aiming at helping users quickly get the updated newsletters from a website.
+  &PRODUCT; provides a newsletter service aimed at helping users quickly get updated news from a website.
  </para>
   <section id="sect-User_Guide-Newsletters-Newsletter_Viewer">
     <title>Newsletter Viewer</title>
-    <para>With Newsletters, you can instantly get newsletters from your email to update the last information about categories and subscriptions.</para>
     <para>
-   Do the following to subscribe to newsletters from eXo Service:
+       With <emphasis>Newsletters</emphasis>, you can instantly get newsletters from your email to update the last information about categories and subscription.
+   </para>
+    <para>
+   Do the following to subscribe to newsletters:
   </para>
     <procedure>
       <step>
         <para>
-     Go to <emphasis role="bold">Newsletters</emphasis> on the navigation bar. The Newsletters page will appear:
-    </para>
+           Go to <menuchoice><guimenu>Newsletters</guimenu></menuchoice> on the navigation bar. The Newsletters page will appear:
+          </para>
         <mediaobject>
            <imageobject role="html">
               <imagedata fileref="images/newsletters-newsletter_viewer.png" format="PNG" align="center"/>
@@ -30,7 +33,7 @@
       </step>
       <step>
         <para>
-     Enter your email address in the <emphasis role="bold">Your Email</emphasis> field.
+     Enter your email address in the <guilabel>Your Email</guilabel> field.
     </para>
       </step>
       <step>
@@ -48,12 +51,12 @@
       </step>
       <step>
         <para>
-     Click<emphasis role="bold"> Subscribe</emphasis>. A message informing that you have just subscribed to the selected newsletter will appear.
+     Click <guilabel>Subscribe</guilabel>. A message informs that you have just subscribed to the selected newsletter will appear.
     </para>
       </step>
       <step>
         <para>
-     Click <emphasis role="bold">OK</emphasis> in the confirmation message. You can reselect the subscription that you want or do not want to receive newsletters by re-selecting the checkbox in the<emphasis role="bold"> Check to subscribe</emphasis> column.
+     Click <guilabel>OK</guilabel> in the confirmation message. You can reselect the subscription that you want or do not want to receive newsletters by re-selecting the checkbox in the <guilabel>Check to subscribe</guilabel> column.
     </para>
         <mediaobject>
            <imageobject role="html">
@@ -66,12 +69,12 @@
       </step>
       <step>
         <para>
-     Click <emphasis role="bold">Change </emphasis><emphasis role="bold">your subscriptions</emphasis> to update your changes.
+     Click <guilabel>Change your subscriptions</guilabel> to update your changes.
     </para>
       </step>
       <step>
         <para>
-     Click<emphasis role="bold"> Forget this email</emphasis> if you want to unsubscribe from newsletters.
+     Click <guilabel>Forget this email</guilabel> if you want to unsubscribe from newsletters.
     </para>
       </step>
     </procedure>
@@ -79,7 +82,10 @@
   <section id="sect-User_Guide-Newsletters-Manage_Newsletters">
     <title>Manage Newsletters</title>
     <para>
-   &PRODUCT; facilitates administrators to easily and quickly manage newsletters. Go to<emphasis role="bold"> Group &gt; Newsletters</emphasis> on the administration bar to access Newsletters.
+   &PRODUCT; allows administrators to easily and quickly manage newsletters. Go to <menuchoice>
+      <guimenu>Group</guimenu>
+      <guimenuitem>Newsletters</guimenuitem>
+   </menuchoice> on the administration bar to access the Newsletters functionality.
   </para>
     <mediaobject>
        <imageobject role="html">
@@ -92,7 +98,7 @@
     <section id="sect-User_Guide-Manage_Newsletters-Category_Management">
       <title>Category Management</title>
       <para>
-    This section details category management.
+    Administrators can manage the <emphasis>categories</emphasis> that newsletters are distributed under.
    </para>
       <section id="sect-User_Guide-Category_Management-Add_a_new_category">
         <title>Add a new category</title>
@@ -100,7 +106,7 @@
           <title>Add a new category</title>
           <step>
             <para>
-       Click <emphasis role="bold">New Category</emphasis> on the Aion bar of the Newsletters page. The Category form will appear.
+       Click <guilabel>New Category</guilabel> on the action bar of the Newsletters page. The Category form will appear.
       </para>
             <mediaobject>
                <imageobject role="html">
@@ -121,27 +127,27 @@
                 </thead>
                 <tbody>
                   <row>
-                    <entry> Name </entry>
+                    <entry> <guilabel>Name</guilabel> </entry>
                     <entry> The name of a category. This field is required. </entry>
                   </row>
                   <row>
-                    <entry> Title </entry>
+                    <entry> <guilabel>Title</guilabel> </entry>
                     <entry> The title of a category. This field is required. </entry>
                   </row>
                   <row>
-                    <entry> Description </entry>
+                    <entry> <guilabel>Description</guilabel> </entry>
                     <entry> A brief description of the category. </entry>
                   </row>
                   <row>
-                    <entry> Moderator </entry>
+                    <entry> <guilabel>Moderator</guilabel> </entry>
                     <entry> Select users/groups who have rights to manage this category.</entry>
                   </row>
                   <row>
-                    <entry> Save </entry>
+                    <entry> <guilabel>Save</guilabel> </entry>
                     <entry> Accepts the addition of a new category. </entry>
                   </row>
                   <row>
-                    <entry> Cancel </entry>
+                    <entry> <guilabel>Cancel</guilabel> </entry>
                     <entry> Quits the category form without adding a category. </entry>
                   </row>
                 </tbody>
@@ -158,21 +164,9 @@
                       <imagedata fileref="images/usericon.png" format="PNG" width="5mm"/>
                     </imageobject>
                     <textobject>
-                       <phrase>"Select user"</phrase>
+                       <phrase>Select user</phrase>
                     </textobject>
-                  </inlinemediaobject> icon next to the Moderator field to select a user. The <emphasis role="bold">User selector</emphasis> form will appear <emphasis role="bold">&gt;</emphasis>
-               </para>
-            </step>
-            <step>
-               <para>
-                  Click the <inlinemediaobject>
-                    <imageobject>
-                      <imagedata fileref="images/greentick.png" format="PNG" width="6mm"/>
-                    </imageobject>
-                    <textobject>
-                       <phrase>green tick</phrase>
-                    </textobject>
-                  </inlinemediaobject>  corresponding to a user in the list that you want to select.
+                  </inlinemediaobject> icon next to the Moderator field to select a user. The form to selet users will appear.
                </para>
                <mediaobject>
                <imageobject role="html">
@@ -183,6 +177,18 @@
                </imageobject>
             </mediaobject>
             </step>
+            <step>
+               <para>
+                  Click the <inlinemediaobject>
+                    <imageobject>
+                      <imagedata fileref="images/greentick.png" format="PNG" width="6mm"/>
+                    </imageobject>
+                    <textobject>
+                       <phrase>green tick</phrase>
+                    </textobject>
+                  </inlinemediaobject> corresponding to the user in the list that you want to select.
+               </para>
+            </step>
               <step>
                 <para>
                      Click the 
@@ -191,9 +197,9 @@
                       <imagedata fileref="images/grouppermission.png" format="PNG" width="6mm"/>
                     </imageobject>
                     <textobject>
-                       <phrase>"Select membership"</phrase>
+                       <phrase>Select membership</phrase>
                     </textobject>
-                  </inlinemediaobject> icon to select users in a specific group. The Group selector will appear</para>
+                  </inlinemediaobject> icon to select users in a specific group. The <guilabel>Group selector</guilabel> will appear.</para>
                 <mediaobject>
                    <imageobject role="html">
                       <imagedata fileref="images/newsletters-group_selector_form.png" format="PNG" align="center"/>
@@ -203,12 +209,16 @@
                    </imageobject>
                 </mediaobject>
                 <para>
-                   Select a group from the left panel and a membership type in the right panel. The membership and group selected will be displayed in the Moderator field. After adding new categories, they will be added in the list of categories.
+                   Select a group from the left panel and a membership type in the right panel. The membership and group selected will be displayed in the <guilabel>Moderator</guilabel> field. After adding new categories, they will be added in the list of categories.
                </para>
               </step>
             </substeps>
-            <para>After creating a category, you can create new subscriptions or newsletters for this category.</para>
-            <para>When clicking the <emphasis role="bold">Administration</emphasis> button, you see a drop-down menu consisting of all actions on this category.</para>
+            <para>
+               After creating a category, you can create new subscriptions or newsletters for this category.
+            </para>
+            <para>
+               When you click the <guilabel>Administration</guilabel> button, you will see a drop-down menu consisting of all actions on this category.
+            </para>
           </step>
         </procedure>
       </section>
@@ -217,7 +227,10 @@
         <procedure>
           <step>
             <para>
-       Select a category that you want to edit<emphasis role="bold"> &gt;</emphasis> Click <emphasis role="bold">Administration &gt; Edit Category</emphasis> in the drop-down menu to bring up the Category form.
+       Select a category that you want to edit and click <menuchoice>
+          <guimenu>Administration</guimenu>
+          <guimenuitem>Edit Category</guimenuitem>
+       </menuchoice> in the drop-down menu to bring up the Category form.
       </para>
          <mediaobject>
             <imageobject role="html">
@@ -230,12 +243,12 @@
           </step>
           <step>
             <para>
-       Change the values in the Title and Description fields as required.
-      (Note: You cannot change the name of the category).</para>
+       Change the values in the <guilabel>Title</guilabel> and <guilabel>Description</guilabel> fields as required (Note that you cannot change the name of the category).
+       </para>
           </step>
           <step>
             <para>
-       Click <emphasis role="bold">Save </emphasis>to save all changes.
+       Click <guilabel>Save</guilabel> to save all changes.
       </para>
           </step>
         </procedure>
@@ -246,7 +259,7 @@
           <title>Delete a category</title>
           <step>
             <para>
-       Click <emphasis role="bold">Delete category</emphasis> in the menu. A confirmation will appear:
+       Click <guilabel>Delete category</guilabel> in the menu. A confirmation will appear:
       </para>
             <mediaobject>
               <imageobject role="html">
@@ -259,7 +272,7 @@
           </step>
           <step>
             <para>
-       Click <emphasis role="bold">OK</emphasis> to delete the category or <emphasis role="bold">Cancel</emphasis> to exit without deleting.
+       Click <guilabel>OK</guilabel> to delete the category or <guilabel>Cancel</guilabel> to exit without deleting.
       </para>
           </step>
         </procedure>
@@ -273,7 +286,10 @@
           <title/>
           <step>
             <para>
-       Click <emphasis role="bold">Administration &gt; Manage Users</emphasis> in the menu. The <emphasis role="bold">Manage Users</emphasis> form will appear:
+       Click <menuchoice>
+          <guimenu>Administration</guimenu>
+          <guimenuitem>Manage Users</guimenuitem>
+       </menuchoice> in the menu. The <guilabel>Manage Users</guilabel> form will appear:
       </para>
             <mediaobject>
               <imageobject role="html">
@@ -288,17 +304,17 @@
               <tgroup cols="2">
                 <thead>
                   <row>
-                    <entry> Field </entry>
+                    <entry> <guilabel>Field</guilabel> </entry>
                     <entry> Details </entry>
                   </row>
                 </thead>
                 <tbody>
                   <row>
-                    <entry> Email </entry>
+                    <entry> <guilabel>Email</guilabel> </entry>
                     <entry> The email address of user who has subscribed this subscription. </entry>
                   </row>
                   <row>
-                    <entry> Banned </entry>
+                    <entry> <guilabel>Banned</guilabel> </entry>
                     <entry>
                       <para>
             This field has two values:
@@ -359,7 +375,7 @@
           </step>
           <step>
             <para>
-       Click <emphasis role="bold">Close</emphasis> to close the form.
+       Click <guilabel>Close</guilabel> to close the form.
       </para>
           </step>
         </procedure>
@@ -371,13 +387,13 @@
     An administrator can add more subscriptions to any category. There are two ways to do this:
    </para>
       <procedure id="proc-User_Guide-Subscriptions-Method_One">
-        <title>Method One</title>
+        <title>Method One:</title>
         <step>
           <para>
-      Click <emphasis role="bold">New Subscriptions</emphasis> on the Action bar.
+      Click <guilabel>New Subscriptions</guilabel> on the action bar.
      </para>
           <para>
-      The <emphasis role="bold">Subscription form</emphasis> will appear:
+      The <guilabel>Subscription</guilabel> form will appear:
      </para>
           <mediaobject>
             <imageobject role="html">
@@ -392,29 +408,29 @@
             <tgroup cols="2">
               <thead>
                 <row>
-                  <entry> Field </entry>
+                  <entry> <guilabel>Field</guilabel> </entry>
                   <entry> Details </entry>
                 </row>
               </thead>
               <tbody>
                 <row>
-                  <entry> Category </entry>
+                  <entry> <guilabel>Category</guilabel> </entry>
                   <entry> The category that contains this subscription. </entry>
                 </row>
                 <row>
-                  <entry> Name </entry>
+                  <entry> <guilabel>Name</guilabel> </entry>
                   <entry> The name of the subscription. This field is required. </entry>
                 </row>
                 <row>
-                  <entry> Title </entry>
+                  <entry> <guilabel>Title</guilabel> </entry>
                   <entry> The title of the subscription. This field is required. </entry>
                 </row>
                 <row>
-                  <entry> Description </entry>
+                  <entry> <guilabel>Description</guilabel> </entry>
                   <entry> The brief description about the subscription. This field is not required. </entry>
                 </row>
                 <row>
-                  <entry> Redactor </entry>
+                  <entry> <guilabel>Redactor</guilabel> </entry>
                   <entry> Select users/groups who have rights to manage this subscription This field is required. </entry>
                 </row>
               </tbody>
@@ -441,15 +457,15 @@
         </step>
         <step>
           <para>
-      Click <emphasis role="bold">Save</emphasis> to create the new subscription or <emphasis role="bold">Cancel</emphasis> to quit without creating a new subscription.
+      Click <guilabel>Save</guilabel> to create the new subscription or <guilabel>Cancel</guilabel> to quit without creating a new subscription.
      </para>
         </step>
       </procedure>
       <procedure id="proc-User_Guide-Subscriptions-Method_Two">
-        <title>Method Two</title>
+        <title>Method Two:</title>
         <step>
           <para>
-      Click directly  the category to which you want to create a new subscription:
+      Click directly on the category to which you want to create a new subscription:
      </para>
           <mediaobject>
             <imageobject role="html">
@@ -462,10 +478,10 @@
         </step>
         <step>
           <para>
-      Click <emphasis role="bold">New Subscriptions</emphasis> on the Action bar.
+      Click <guilabel>New Subscriptions</guilabel> on the action bar.
      </para>
           <para>
-      The <emphasis role="bold">Subscription form</emphasis> pops    up:
+      The <guilabel>Subscription</guilabel> form appears:
      </para>
           <mediaobject>
             <imageobject role="html">
@@ -478,9 +494,11 @@
         </step>
       </procedure>
       <para>
-    Do the same steps as <emphasis role="bold">Method One</emphasis>.</para>
-      <para>Administrators can create newsletters for each subscriptions.
-   </para>
+      Follow the same steps as <emphasis role="bold">Method One</emphasis>.
+      </para>
+      <para>
+         Administrators can create newsletters for each subscription.
+      </para>
       <para>
     These Newsletters can be opened, edited, deleted or converted to a template for reuse.
    </para>
@@ -551,7 +569,10 @@
         <title/>
         <step>
           <para>
-      Choose a category by left-clicking it or checking the box and then selecting <emphasis role="bold">Administration &gt; Open</emphasis>.
+      Choose a category by clicking it or checking the box and then selecting <menuchoice>
+         <guimenu>Administration</guimenu>
+         <guimenuitem>Open</guimenuitem>
+      </menuchoice>.
      </para>
           <mediaobject>
             <imageobject role="html">
@@ -564,7 +585,7 @@
         </step>
         <step>
           <para>
-      Select the newsletter that you want to open by left-clicking it, or selecting the checkbox.
+      Select the newsletter that you want to open by clicking it or selecting the checkbox.
      </para>
           <mediaobject>
             <imageobject role="html">
@@ -585,7 +606,7 @@
               <textobject>
                  <phrase>Moderation</phrase>
               </textobject>
-            </inlinemediaobject> button, then select <emphasis role="bold">Open</emphasis> in the menu:
+            </inlinemediaobject> button then select <guilabel>Open</guilabel> in the menu:
      </para>
           <mediaobject>
             <imageobject role="html">
@@ -596,7 +617,7 @@
             </imageobject>
           </mediaobject>
           <para>
-      The <emphasis role="bold">View Newsletter&apos;s Content</emphasis> form pops up:
+      The <guilabel>View Newsletter&apos;s Content</guilabel> form appears:
      </para>
           <mediaobject>
             <imageobject role="html">
@@ -609,7 +630,7 @@
         </step>
         <step>
           <para>
-      Click <emphasis role="bold">Close</emphasis> to exit.
+      Click <guilabel>Close</guilabel> to exit.
      </para>
         </step>
       </procedure>
@@ -636,7 +657,7 @@
               <textobject>
                  <phrase>Moderation</phrase>
               </textobject>
-            </inlinemediaobject> button then select <emphasis role="bold">Edit</emphasis> in the menu.
+            </inlinemediaobject> button then select <guilabel>Edit</guilabel> in the menu.
      </para>
          <mediaobject>
             <imageobject role="html">
@@ -647,7 +668,7 @@
             </imageobject>
          </mediaobject>
           <para>
-      The <emphasis role="bold">Newsletter entry form</emphasis> pops up:
+      The <guilabel>Newsletter entry form</guilabel> appears:
      </para>
           <mediaobject>
              <imageobject role="html">
@@ -660,22 +681,22 @@
         </step>
         <step>
           <para>
-      Change the values in the fields that you want to edit: <emphasis role="bold">Template</emphasis>, <emphasis role="bold">Send date</emphasis>, <emphasis role="bold">Category</emphasis>, <emphasis role="bold">Subscription</emphasis>.
+      Change the values in the fields that you want to edit: <guilabel>Template</guilabel>, <guilabel>Send date</guilabel>, <guilabel>Category</guilabel>, <guilabel>Subscription</guilabel>.
      </para>
         </step>
         <step>
           <para>
-      Click the <emphasis role="bold">Update a Newsletter&apos;s info</emphasis> button.
+      Click the <guilabel>Update a Newsletter&apos;s info</guilabel> button.
      </para>
         </step>
         <step>
           <para>
-      Change the values in the fields <emphasis role="bold">Title</emphasis> and <emphasis role="bold">Main content</emphasis>.
+      Change the values in the fields <guilabel>Title</guilabel> and <guilabel>Main content</guilabel>.
      </para>
         </step>
         <step>
           <para>
-      Click <emphasis role="bold">Save</emphasis> to save as draft, or click <emphasis role="bold">Send</emphasis>.
+      Click <guilabel>Save</guilabel> to save as a draft or click <guilabel>Send</guilabel>.
      </para>
         </step>
       </procedure>
@@ -683,7 +704,7 @@
     <section id="sect-User_Guide-Manage_Newsletters-Delete_a_newsletter">
       <title>Delete a newsletter</title>
       <para>
-    Administrator can delete obsolete newsletters.
+    Administrators can delete obsolete newsletters.
    </para>
       <procedure id="proc-User_Guide-Delete_a_newsletter-Delete_a_newsletter">
         <title>Delete a newsletter</title>
@@ -710,10 +731,10 @@
               <textobject>
                  <phrase>Moderation</phrase>
               </textobject>
-            </inlinemediaobject> button then click <emphasis role="bold">Delete</emphasis> in the menu.
+            </inlinemediaobject> button then click <guilabel>Delete</guilabel> in the menu.
      </para>
           <para>
-      The confirmation message will be displayed:
+      A confirmation message will be displayed:
      </para>
           <mediaobject>
              <imageobject role="html">
@@ -726,7 +747,7 @@
         </step>
         <step>
           <para>
-      Click <emphasis role="bold">OK</emphasis> to accept deleting this newsletter, or <emphasis role="bold">Cancel</emphasis> to quit without deleting.
+      Click <guilabel>OK</guilabel> to accept deleting this newsletter or <guilabel>Cancel</guilabel> to quit without deleting.
      </para>
         </step>
       </procedure>
@@ -734,7 +755,7 @@
     <section id="sect-User_Guide-Manage_Newsletters-Convert_as_Template">
       <title>Convert as Template</title>
       <para>
-    The administrator can reuse the template of the frequently used newsletter template.
+    Administrators can reuse a popular newsletter template.
    </para>
       <procedure id="proc-User_Guide-Convert_as_Template-Convert_to_template">
         <title>Convert to template</title>
@@ -753,7 +774,7 @@
               <textobject>
                  <phrase>Moderation</phrase>
               </textobject>
-            </inlinemediaobject> button then select <emphasis role="bold">Convert as Template</emphasis> in the menu. The next time when you create a newsletter, this template will be listed in the <emphasis role="bold">Template</emphasis> field in the <emphasis role="bold">Newsletter entry form</emphasis>.
+            </inlinemediaobject> button then select <guilabel>Convert as Template</guilabel> in the menu. The next time when you create a newsletter, this template will be listed in the <guilabel>Template</guilabel> field of the <guilabel>Newsletter entry form</guilabel>.
      </para>
         </step>
       </procedure>
@@ -761,13 +782,16 @@
     <section id="sect-User_Guide-Manage_Newsletters-Newsletters">
       <title>Newsletters</title>
       <para>
-    Each subscription consists of many newsletters. <emphasis role="bold">&PRODUCT;</emphasis> helps you easily create newsletters by following these steps.
+    Each subscription consists of many newsletters. &PRODUCT; helps you easily create newsletters by following these steps.
    </para>
       <procedure id="proc-User_Guide-Newsletters-Creating_Newsletters">
         <title>Creating Newsletters</title>
         <step>
           <para>
-      Go to <emphasis role="bold">Group &gt; Newsletters </emphasis> on the administration bar. The eXo Newsletter appears.
+      Go to <menuchoice>
+         <guimenu>Group</guimenu>
+         <guimenuitem>Newsletters</guimenuitem>
+      </menuchoice> on the administration bar. The <guilabel>Newsletter</guilabel> portlet appears.
      </para>
         </step>
         <step>
@@ -780,8 +804,8 @@
               <textobject>
                  <phrase>New Letter</phrase>
               </textobject>
-            </inlinemediaobject> button on the action bar. The <emphasis role="bold">Newsletter entry form</emphasis>appears:
-     </para>
+            </inlinemediaobject> button on the action bar. The <guilabel>Newsletter entry form</guilabel> appears:
+         </para>
           <mediaobject>
             <imageobject>
               <imagedata  align="center" fileref="images/newsletterentryform.png" format="PNG" width="150mm"/>
@@ -795,29 +819,29 @@
             <tgroup cols="2">
               <thead>
                 <row>
-                  <entry> Field </entry>
+                  <entry> <guilabel>Field</guilabel> </entry>
                   <entry> Details </entry>
                 </row>
               </thead>
               <tbody>
                 <row>
-                  <entry> Template </entry>
-                  <entry> The template for your newsletter form. <emphasis role="bold">Basic Template</emphasis> is set by default.. </entry>
+                  <entry> <guilabel>Template</guilabel> </entry>
+                  <entry> The template for your newsletter form. <emphasis role="bold">Basic Template</emphasis> is set by default. </entry>
                 </row>
                 <row>
-                  <entry> Send date </entry>
+                  <entry> <guilabel>Send date</guilabel> </entry>
                   <entry> The date and time to send the newsletter.</entry>
                 </row>
                 <row>
-                  <entry> Category </entry>
+                  <entry> <guilabel>Category</guilabel> </entry>
                   <entry> The category contains this newsletter. </entry>
                 </row>
                 <row>
-                  <entry> Subscription </entry>
+                  <entry> <guilabel>Subscription</guilabel> </entry>
                   <entry> The subscription contains this newsletter. </entry>
                 </row>
                 <row>
-                  <entry> Update sending parameters </entry>
+                  <entry> <guilabel>Update sending parameters</guilabel> </entry>
                   <entry> This button allows you to update information about this newsletter. </entry>
                 </row>
               </tbody>
@@ -839,7 +863,7 @@
         </step>
         <step>
           <para>
-      Click the <emphasis role="bold">Send Date</emphasis> field. The calendar will appear to allow you to choose the date and time when you want to send the newsletter.
+      Click the <guilabel>Send Date</guilabel> field. The calendar will appear to allow you to choose the date and time when you want to send the newsletter.
      </para>
           <mediaobject>
              <imageobject role="html">
@@ -865,27 +889,31 @@
         </step>
         <step>
           <para>
-      Click the <emphasis role="bold">Update sending parameters</emphasis> button to update information about this newsletter. A message pops up and informs you that you have updated information successfully.
+      Click the <guilabel>Update sending parameters</guilabel> button to update information about this newsletter. A message pops up and informs you that you have updated information successfully.
      </para>
         </step>
         <step>
           <para>
-      Input a title of a newsletter into the <emphasis role="bold">Title</emphasis> field.
+      Input a title for the newsletter into the <guilabel>Title</guilabel> field.
      </para>
         </step>
         <step>
           <para>
-      Create a content for a newsletter by inputting information into the <emphasis role="bold">Main content</emphasis> text box.
+      Create a content for a newsletter by inputting information into the <guilabel>Main content</guilabel> text box.
      </para>
         </step>
         <step>
           <para>
-      Click <emphasis role="bold">Save</emphasis> to save this newsletter as draft, or click <emphasis role="bold">Send</emphasis> to send this newsletter.
+      Click <guilabel>Save</guilabel> to save this newsletter as a draft or click <guilabel>Send</guilabel> to send this newsletter.
      </para>
         </step>
         <step>
           <para>
-      Select <emphasis role="bold">Contact Us</emphasis> on the navigation bar, or go to <emphasis role="bold">Site &gt; Acme &gt; Contact Us</emphasis>.
+      Select <guilabel>Contact Us</guilabel> on the navigation bar or go to <menuchoice>
+         <guimenu>Site</guimenu>
+         <guimenuitem>Acme</guimenuitem>
+         <guimenuitem>Contact Us</guimenuitem>
+      </menuchoice>.
      </para>
           <mediaobject>
              <imageobject role="html">
@@ -896,7 +924,7 @@
              </imageobject>
           </mediaobject>
           <para>
-      The <emphasis role="bold">Contact Us</emphasis> page  appears:
+      The <guilabel>Contact Us</guilabel> page appears:
      </para>
           <mediaobject>
              <imageobject role="html">
@@ -911,33 +939,33 @@
             <tgroup cols="2">
               <thead>
                 <row>
-                  <entry> Field </entry>
+                  <entry> <guilabel>Field</guilabel> </entry>
                   <entry> Details </entry>
                 </row>
               </thead>
               <tbody>
                 <row>
-                  <entry> Select a recipient </entry>
+                  <entry> <guilabel>Select a recipient</guilabel> </entry>
                   <entry> The recipient who will receive a message </entry>
                 </row>
                 <row>
-                  <entry> Your name </entry>
+                  <entry> <guilabel>Your name</guilabel> </entry>
                   <entry> The name of a person who leaves a message </entry>
                 </row>
                 <row>
-                  <entry> Your address </entry>
+                  <entry> <guilabel>Your address</guilabel> </entry>
                   <entry> The address of a person who leaves a message </entry>
                 </row>
                 <row>
-                  <entry> Your Email Address </entry>
+                  <entry> <guilabel>Your Email Address</guilabel> </entry>
                   <entry> The email address of a person who leaves a message </entry>
                 </row>
                 <row>
-                  <entry> Your Phone Number </entry>
+                  <entry> <guilabel>Your Phone Number</guilabel> </entry>
                   <entry> The phone number of a person who leaves a message </entry>
                 </row>
                 <row>
-                  <entry> Your message </entry>
+                  <entry> <guilabel>Your message</guilabel> </entry>
                   <entry> Write a message that you want to leave </entry>
                 </row>
               </tbody>
@@ -951,7 +979,7 @@
         </step>
         <step>
           <para>
-      Click <emphasis role="bold">Save</emphasis> to save a message.
+      Click <guilabel>Save</guilabel> to save a message.
      </para>
         </step>
       </procedure>

@@ -6,13 +6,16 @@
 <section id="sect-User_Guide-Change_the_skin_of_the_current_site">
   <title>Change the skin of the current site</title>
   <para>
-  The eXo skins are attractive user interface styles for displaying a portal. Each skin has its own characteristics with different backgrounds, icons, and more. To use the portal easily and effectively, you are allowed to change the skin of the current site.
+  <emphasis>Skins</emphasis> are attractive user interface styles for displaying a portal. Each skin has its own characteristics with different backgrounds, icons and more. Changing the skin of the current site can make use of the portal more easy and effective.
  </para>
   <procedure>
     <title/>
     <step>
       <para>
-    Move the cursor to <emphasis role="bold">eXo &gt; Change Skin</emphasis> item in the drop-down menu:
+    Hover the mouse pointer over the <menuchoice>
+       <guimenu>Start Logo</guimenu></menuchoice> then click on the <menuchoice>
+       <guimenuitem>Change Skin</guimenuitem>
+    </menuchoice> item in the drop-down menu:
    </para>
       <mediaobject>
         <imageobject role="html">
@@ -23,7 +26,7 @@
         </imageobject>
       </mediaobject>
       <para>
-    The <emphasis role="bold">Skin Setting</emphasis> form appears.
+    The <guilabel>Skin Setting</guilabel> form appears:
    </para>
       <mediaobject>
         <imageobject role="html">
@@ -41,11 +44,11 @@
     </step>
     <step>
       <para>
-    Click <emphasis role="bold">Apply</emphasis> and wait a few seconds to take affect.
+    Click <guilabel>Apply</guilabel> and wait a few seconds to take affect.
    </para>
     </step>
   </procedure>
   <para>
-  These actions can be done by users who have the right to use the administration bar with a personal preferences menu.
+  This action can be performed by users who have the right to use the administration bar with a personal preferences menu.
  </para>
 </section>

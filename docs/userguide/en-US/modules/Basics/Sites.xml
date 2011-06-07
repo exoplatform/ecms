@@ -11,11 +11,11 @@
    </para>
     <note>
       <para>
-   In <emphasis role="bold">&PRODUCT;</emphasis>, only Administrators have  right to  create a new site.
+    Only administrators have the authorization rights required to create a new site in &PRODUCT;.
   </para>
     </note>
     <para>
-       This function enables you to create a site (portal) to meet your own needs.
+       &PRODUCT; administrators can create a site (portal) to meet their specific needs.
   </para>
     <para>
    Do the following:
@@ -23,7 +23,7 @@
     <procedure>
       <step>
         <para>
-     Click <emphasis role="bold">Site</emphasis> on the administration bar. A list of existing portals is listed.
+     Click <guilabel>Site</guilabel> on the administration bar to see a list of existing portals.
     </para>
         <mediaobject>
           <imageobject role="html">
@@ -36,11 +36,14 @@
       </step>
       <step>
         <para>
-     Click the <emphasis role="bold">Add New Portal</emphasis> button to open the form to add a new portal.</para>
-        <para> In the <emphasis role="bold">Portal Setting </emphasis> tab, set some properties for this site, including the portal name, locale and skin.</para>
+        Click the <guilabel>Add New Portal</guilabel> button to open the form to add a new portal.
+        </para>
+        <para>
+           In the <guilabel>Portal Setting</guilabel> tab, set some properties for this site including the portal name, locale and skin.
+        </para>
         <mediaobject>
           <imageobject role="html">
-            <imagedata  align="center"  fileref="images/newportal.png" format="PNG"/>
+            <imagedata  align="center" fileref="images/newportal.png" format="PNG"/>
           </imageobject>
           <imageobject role="fo">
             <imagedata   align="center" fileref="images/newportal.png" format="PNG" width="150mm"/>
@@ -51,21 +54,21 @@
           <tgroup cols="2">
             <thead>
               <row>
-                <entry> Field </entry>
+                <entry> <guilabel>Field</guilabel> </entry>
                 <entry> Information </entry>
               </row>
             </thead>
             <tbody>
               <row>
-                <entry> Portal name </entry>
+                <entry> <guilabel>Portal name</guilabel> </entry>
                 <entry> The name of the portal. This field is required and must be unique. Only alphabet, numbers and underscore characters are allowed. The Portal name must be at least 3 characters. </entry>
               </row>
               <row>
-                <entry> Locale </entry>
+                <entry> <guilabel>Locale</guilabel> </entry>
                 <entry> The interface language of the portal. This field is required. </entry>
               </row>
               <row>
-                <entry> Skin </entry>
+                <entry> <guilabel>Skin</guilabel> </entry>
                 <entry> The skin of the portal. </entry>
               </row>
             </tbody>
@@ -73,11 +76,12 @@
         </table>
       </step>
       <step>
-        <para>Select  the <emphasis role="bold">Properties</emphasis> tab to 
-     keep session alive.</para>
         <para>
-     The Keep session alive option means keeping the working session for a long time to avoid the working time out. There are 3 options:
-    </para>
+           Select the <guilabel>Properties</guilabel> tab to keep sessions alive.
+         </para>
+        <para>
+         The <guilabel>Keep session alive</guilabel> option defines the working session so as to avoid timeouts. There are three options available:
+      </para>
         <variablelist>
           <varlistentry>
             <term>never:</term>
@@ -115,10 +119,11 @@
       </step>
       <step>
         <para>
-     Select the <emphasis role="bold">Permission Setting</emphasis> tab to set access and edit permission for this portal.
+     Select the <guilabel>Permission Setting</guilabel> tab to set access and edit permission for this portal.
     </para>
-<!--   Doc Note: The content from this point until the next comment 'END' should probably be moved to a breakout explanation. Having it in the middle of a procedure breaks the flow of the steps.                           -->        <para>
-     The <emphasis role="bold">Permission Setting</emphasis> tab includes two sub-tabs: <emphasis role="bold">Access Permission Setting</emphasis> and <emphasis role="bold">Edit Permission Setting</emphasis>.
+<!--   Doc Note: The content from this point until the next comment 'END' should probably be moved to a breakout explanation. Having it in the middle of a procedure breaks the flow of the steps.                           -->
+        <para>
+     The <guilabel>Permission Setting</guilabel> tab includes two sub-tabs: <guilabel>Access Permission Setting</guilabel> and <guilabel>Edit Permission Setting</guilabel>.
     </para>
         <mediaobject>
           <imageobject role="html">
@@ -133,21 +138,21 @@
             <term>Access Permission Setting tab</term>
             <listitem>
               <para>
-        By default, the access permission list of the portal is empty:
+        The access permission list of the portal is empty by default:
        </para>
-              <mediaobject>
-                <imageobject role="html">
-                  <imagedata  align="center"  fileref="images/accesspermission.png" format="PNG"/>
-                </imageobject>
-                <imageobject role="fo">
-                  <imagedata   align="center" fileref="images/accesspermission.png" format="PNG" width="150mm"/>
-                </imageobject>
-              </mediaobject>
-              <para>
-        Check the <emphasis role="bold"> Make it public </emphasis> check box to assign the access permission to everyone, or click the <emphasis role="bold">Add Permission </emphasis> button to assign the access permission to a specific group which is selected from the <emphasis role="bold"> Select Permissions</emphasis> form (By selecting a group on the left and a corresponding membership on the right):
-       </para>
-              <para>
-        After selecting groups, the access permission list is displayed:
+        <mediaobject>
+          <imageobject role="html">
+            <imagedata  align="center"  fileref="images/accesspermission.png" format="PNG"/>
+          </imageobject>
+          <imageobject role="fo">
+            <imagedata   align="center" fileref="images/accesspermission.png" format="PNG" width="150mm"/>
+          </imageobject>
+        </mediaobject>
+        <para>
+         Check the <guilabel>Make it public</guilabel> check box to assign the access permission to everyone or click the <guilabel>Add Permission</guilabel> button to assign access permissions to a specific group (select the group you want to grant permission to from the <guilabel>Select Permissions</guilabel> form by selecting a group on the left and a corresponding membership on the right).
+         </para>
+      <para>
+        Once the desired groups have been selected the access permission list is displayed:
        </para>
               <mediaobject>
                 <imageobject role="html">
@@ -158,15 +163,14 @@
                 </imageobject>
               </mediaobject>
               <para>
-        In which, the 
-        <inlinemediaobject>
+        Groups can be removed from the <guilabel>Access Permission</guilabel> list by clicking the <inlinemediaobject>
                   <imageobject>
                     <imagedata fileref="images/trashicon.png" format="PNG" width="5mm"/>
                   </imageobject>
                   <textobject>
                      <phrase>trash can</phrase>
                   </textobject>
-                </inlinemediaobject> icon is to remove its corresponding group from the Access Permission list.
+                </inlinemediaobject> icon.
        </para>
             </listitem>
           </varlistentry>
@@ -174,7 +178,7 @@
             <term>Edit Permission Setting</term>
             <listitem>
               <para>
-        By default, it is also empty and you have to assign the edit permission to a specific group.
+        The <guilabel>Edit Permission Setting</guilabel> tab is also empty by default. You must assign the edit permission to a specific group.
        </para>
               <mediaobject>
                 <imageobject role="html">
@@ -184,8 +188,8 @@
                   <imagedata   align="center" fileref="images/editpermission.png" format="PNG" width="150mm"/>
                 </imageobject>
               </mediaobject>
-              <para>
-        You can assign the edit permission to a group with a specific membership by clicking the <emphasis role="bold">Select Permission </emphasis> button in the <emphasis role="bold">Edit Permission Setting</emphasis> tab to open the Permission Selector form. Select a group on the left panel and a corresponding membership on the right panel:
+         <para>
+         You can assign the edit permission to a group with a specific membership by clicking the <guilabel>Select Permission</guilabel> button to open the <guilabel>Permission Selector</guilabel> form. Select a group on the left panel and a corresponding membership on the right panel:
        </para>
               <mediaobject>
                 <imageobject role="html">
@@ -196,10 +200,10 @@
                 </imageobject>
               </mediaobject>
               <para>
-        The (<emphasis role="bold">*</emphasis>) from the Select a Membership panel means that you assign the right for everyone in the selected group from left panel.
+        The asterix (<guilabel>*</guilabel>) in the <guilabel>Select a Membership</guilabel> panel is used to assign the right to everyone in the group selected in the left panel.
        </para>
-              <para>
-        After selecting a group, the Current Permission will be displayed with detailed information:
+      <para>
+        After selecting a group, the <guilabel>Current Permission</guilabel> will be displayed with detailed information:
        </para>
               <mediaobject>
                 <imageobject role="html">
@@ -210,23 +214,30 @@
                 </imageobject>
               </mediaobject>
               <para>
-        The edit permission is assigned for only one group at one time. You can click the Delete Permission button to remove the current edit permission of the selected group or re–assign the edit permission to  another group by clicking the Select Permission button again and select another group.
-       </para>
+              The edit permission is assigned for only one group at one time. You can click the <guilabel>Delete Permission</guilabel> button to remove the current edit permission of the selected group or re–assign the edit permission to another group by clicking the <guilabel>Select Permission</guilabel> button again and selecting another group.
+             </para>
             </listitem>
           </varlistentry>
         </variablelist>
-<!--                          END                          -->      </step>
+<!--                          END                          -->
+      </step>
       <step>
         <para>
-     Click <emphasis role="bold">Save</emphasis> to create a new portal.
+     Click <guilabel>Save</guilabel> to create the new portal.
     </para>
       </step>
     </procedure>
     <para>
-   After creating a new site, a list of the existing sites will be displayed on the screen. This new site will be added to the exiting site list in <emphasis role="bold">Site </emphasis> on the administration bar and to  a  drive list that includes all its default files.
+   After creating a new site, the list of the existing sites will be displayed on the screen.
+   </para>
+   <para>
+      The new site will be added to the site list in <guilabel>Site</guilabel> on the administration bar and to a drive list that includes all its default files.
   </para>
     <para>
-   To see it in the drive list, click <emphasis role="bold">Group &gt; Content Explorer</emphasis> on the administrator bar.
+   To see it in the drive list, click <menuchoice>
+      <guimenu>Group</guimenu>
+      <guimenuitem>Content Explorer</guimenuitem>
+   </menuchoice> on the administrator bar.
   </para>
     <mediaobject>
       <imageobject role="html">
@@ -237,7 +248,7 @@
       </imageobject>
     </mediaobject>
     <para>
-   For example, after creating a portal named <literal>eXo</literal>, there is a drive named <literal>eXo</literal> in Content Explorer:
+   For example, after creating a portal named <literal>eXo</literal> there is a drive named <literal>eXo</literal> in <guilabel>Content Explorer</guilabel>:
   </para>
     <mediaobject>
       <imageobject role="html">
@@ -251,20 +262,28 @@
   <section id="sect-User_Guide-Manage_a_site-Edit_a_Site">
     <title>Edit a site</title>
     <para>
-   This function enables you to edit a site, including   the configuration (setting,  permission), the navigation and the layout components of the site.</para>
-    <para>There are two ways to approach a site that you want to edit:</para>
-    <itemizedlist>
+   This function enables you to edit a site, including the settings, permissions and other configuration options as well as the navigation and the layout components.
+   </para>
+    <para>
+       There are two ways to approach a site that you want to edit:
+   </para>
+    <orderedlist>
       <listitem>
-        <para>The first way: Edit the site that you are browsing by accessing to <emphasis role="bold">Site Editor</emphasis>.</para>
+        <para>Edit the site that you are browsing through the <guilabel>Site Editor</guilabel> menu on the administration bar.</para>
       </listitem>
       <listitem>
-        <para>The second way: Edit the site by accessing  to <emphasis role="bold">Sites.</emphasis></para>
+        <para>Edit another site by accessing it through the <guilabel>Sites</guilabel> menu on the administration bar.</para>
       </listitem>
-    </itemizedlist>
+    </orderedlist>
 
       <section id="sect-User_Guide-Edit_a_Site-How_to_edit_the_current_Site">
       <title>By accessing to Site Editor</title>
-      <para>Directly edit the site you are browsing by going to <emphasis role="bold">Site Editor &gt; Edit Layout</emphasis> </para>
+      <para>
+         Directly edit the site you are browsing by navigating to <menuchoice>
+            <guimenu>Site Editor</guimenu>
+            <guimenuitem>Edit Layout</guimenuitem>
+         </menuchoice>.
+      </para>
       <mediaobject>
             <imageobject role="html">
               <imagedata  align="center"  fileref="images/editlayout.png" format="PNG"/>
@@ -274,7 +293,7 @@
             </imageobject>
           </mediaobject>
       <para>
-         The form to edit the  site appears.
+         An editable layout of the site appears:
       </para>
       <mediaobject>
             <imageobject role="html">
@@ -284,71 +303,83 @@
               <imagedata   align="center" fileref="images/editportalform.png" format="PNG" width="150mm"/>
             </imageobject>
           </mediaobject>
-      <para>
-       Details:
-      </para>
       <table>
         <title/>
         <tgroup cols="2">
           <thead>
             <row>
-              <entry> Indicator </entry>
-              <entry> Meaning </entry>
+              <entry> Field </entry>
+              <entry> Details </entry>
             </row>
           </thead>
           <tbody>
             <row>
               <entry>
+                 <para>
+                    <guilabel>Site&apos;s config</guilabel>
+                 </para>
                 <mediaobject>
                       <imageobject>
                         <imagedata align="center"  fileref="images/site-config.png" format="PNG" width="34mm"/>
                       </imageobject>
                     </mediaobject>
               </entry>
-              <entry><emphasis role="bold">Site&apos;s config</emphasis>: allows editing the site&apos;s configuration. </entry>
+              <entry>Allows editing the site&apos;s configuration.</entry>
             </row>
             <row>
               <entry>
+                 <para>
+                    <guilabel>Switch View Mode</guilabel>
+                 </para>
                 <mediaobject>
                       <imageobject>
                         <imagedata align="center"  fileref="images/switchviewbutton.png" format="PNG" width="44mm"/>
                       </imageobject>
                     </mediaobject>
               </entry>
-              <entry><emphasis role="bold">Switch View Mode</emphasis>: shows how the current layout looks like with real content.</entry>
+              <entry>Displays a view of the current layout with content.</entry>
             </row>
             <row>
               <entry>
+                 <para>
+                     <guilabel>Finish</guilabel>
+                 </para>
                 <mediaobject>
                       <imageobject>
                         <imagedata align="center"  fileref="images/finishbutton.png" format="PNG" width="9mm"/>
                       </imageobject>
                </mediaobject>
               </entry>
-              <entry><emphasis role="bold">Finish</emphasis>: allows saving all changes and escaping the Edit page </entry>
+              <entry>Saves all changes and exits the Edit page. </entry>
             </row>
             <row>
               <entry>
+                 <para>
+                    <guilabel>Abort</guilabel>
+                 </para>
                 <mediaobject>
                       <imageobject>
                         <imagedata align="center"  fileref="images/abortbutton.png" format="PNG" width="7mm"/>
                       </imageobject>
                     </mediaobject>
               </entry>
-              <entry><emphasis role="bold">Abort</emphasis>: allows canceling all changes that have not been saved and quitting the Edit page </entry>
+              <entry>Cancels all changes that have not been saved and quits the edit page. </entry>
             </row>
           </tbody>
         </tgroup>
       </table>
       <para>
-         With this way, you  can only edit the layout and the configuration of site.
+         Using this method you can only edit the layout and the configuration of site.
       </para>
       <formalpara id="form-User_Guide-How_to_edit_the_current_Site-Edit_layout">
         <title>Edit layout</title>
         <para>
-     Editing the layout means editing a banner, a navigation bar, a breadcrumb bar, a homepage and a footer of a website. You can  also add more portlets to the site by dragging and dropping from the <emphasis role="bold">Applications t</emphasis>ab of the <emphasis role="bold">Edit Inline Composer form</emphasis> to the main pane. Moreover, you can move a portlet from a location to another location.
-    </para>
+            Editing the layout allows more aspects of a site, including the banner, navigation bar, breadcrumb bar, homepage or footer to be edited.
+         </para>
       </formalpara>
+         <para>
+            You can add more portlets to the site by dragging and dropping them from the <guilabel>Applications</guilabel> tab of the <guilabel>Edit Inline Composer form</guilabel> to the main pane. Portlets can also be moved within the main content pane by dragging them from one location to another.
+      </para>
       <mediaobject>
          <imageobject role="html">
             <imagedata fileref="images/moveportlet.png" format="PNG" align="center"/>
@@ -357,20 +388,24 @@
             <imagedata fileref="images/moveportlet.png" format="PNG" align="center" width="150mm" />
          </imageobject>
       </mediaobject>
-      <para>
-            Editing the banner portlet is similar to editing the Sign-in portlet and the footer portlet so in this guide, we only show how to edit the banner of the  site as an example of editing the layout.</para>
+      <note>
+         <title>Editing Portlets</title>
+            <para>
+               The editing process is similar for all portlets, therefore this guide will outline how to edit the site banner portlet as an example.
+            </para>
+      </note>
       <procedure id="proc-User_Guide-How_to_edit_the_current_Site-Edit_Banner">
-        <title>Edit Banner</title>
+        <title>Edit Banner Portlet</title>
         <step>
           <para>
-                  Show the form to edit a banner by clicking the <inlinemediaobject>
+               Open the form to edit a banner by clicking the <inlinemediaobject>
               <imageobject>
                 <imagedata fileref="images/editicon3.png" format="PNG" width="13mm"/>
               </imageobject>
               <textobject>
                  <phrase>pencil</phrase>
               </textobject>
-            </inlinemediaobject> icon of the banner portlet in the Edit Portal form like the illustration below.
+            </inlinemediaobject> icon of the portlet in the <guilabel>Edit Portal</guilabel> form:
                </para>
           <mediaobject>
             <imageobject role="html">
@@ -394,67 +429,104 @@
         </step>
         <step>
           <para>
-      Select <emphasis role="bold">Edit Mode</emphasis> tab:
-     </para>
-          <para>
-      <emphasis role="bold">Content Selection</emphasis>: Select the path of the content that you want to show by clicking .
-     </para>
-          <para>
-      <emphasis role="bold">Display Settings:</emphasis>
-      <itemizedlist>
-              <listitem>
-                <para>
-                           <emphasis role="bold">Show Title</emphasis>: Specify whether the title of the content is displayed or not.
-                        </para>
-              </listitem>
-              <listitem>
-                <para>
-                           <emphasis role="bold">Show Date</emphasis>: Specify whether the date of the content publication is displayed or not.
-                        </para>
-              </listitem>
-              <listitem>
-                <para>
-                           <emphasis role="bold">Show Option Bar:</emphasis>Show or hide the Option bar used to show the print link.
-                        </para>
-              </listitem>
-            </itemizedlist>
-     </para>
-          <para>
-      <emphasis role="bold">Print Setting:</emphasis>
-      <itemizedlist>
-              <listitem>
-                <para>
-                           <emphasis role="bold">Show in page</emphasis>: Choose a page for the print review.
-                        </para>
-              </listitem>
-              <listitem>
-                <para>
-                           <emphasis role="bold">with</emphasis>: Parameters contains the content path.
-                        </para>
-              </listitem>
-            </itemizedlist>
-     </para>
-          <para>
-      <emphasis role="bold">Advanced</emphasis>: The content should enable “dynamic navigation” that interprets the URL and shows a content.
-     </para>
-          <note>
-            <para>
-       Click the 
-       <inlinemediaobject>
-                <imageobject>
-                  <imagedata fileref="images/questionicon.png" format="PNG" width="6mm"/>
-                </imageobject>
-                <textobject>
-                   <phrase>question mark</phrase>
-                </textobject>
-              </inlinemediaobject> icon to see more explanation for each section.
-      </para>
-          </note>
+            Select the <guilabel>Edit Mode</guilabel> tab:
+           </para>
+           <table>
+           <title></title>
+                 <tgroup cols="2">
+                    <thead>
+                       <row>
+                          <entry>
+                             Field
+                          </entry>
+                          <entry>
+                             Details
+                          </entry>
+                       </row>
+                    </thead>
+                    <tbody>
+                       <row>
+                          <entry>
+                             <guilabel>Content Selection</guilabel>
+                          </entry>
+                          <entry>
+                             Select the path of the content that you want to show by clicking the <guilabel>plus</guilabel> icon.
+                          </entry>
+                       </row>
+                       <row>
+                          <entry>
+                             <guilabel>Display Settings</guilabel>
+                          </entry>
+                          <entry>
+                             <itemizedlist>
+                                <listitem>
+                                  <para>
+                                       <guilabel>Show Title</guilabel>: specify whether the title of the content is displayed or not.
+                                    </para>
+                                </listitem>
+                                <listitem>
+                                  <para>
+                                       <guilabel>Show Date</guilabel>: specify whether the date of the content publication is displayed or not.
+                                    </para>
+                                </listitem>
+                                <listitem>
+                                  <para>
+                                       <guilabel>Show Option Bar:</guilabel> show or hide the Option bar used to show the print link.
+                                    </para>
+                                </listitem>
+                              </itemizedlist>
+                          </entry>
+                       </row>
+                       <row>
+                          <entry>
+                             <guilabel>Print Setting</guilabel>
+                          </entry>
+                          <entry>
+                             <itemizedlist>
+                                <listitem>
+                                  <para>
+                                       <guilabel>Show in page</guilabel>: choose a page for the print review.
+                                    </para>
+                                </listitem>
+                                <listitem>
+                                  <para>
+                                       <guilabel>with</guilabel>: parameters contain the content path.
+                                    </para>
+                                </listitem>
+                              </itemizedlist>
+                          </entry>
+                       </row>
+                       <row>
+                          <entry>
+                             <guilabel>Advanced</guilabel>
+                          </entry>
+                          <entry>
+                             <para>
+                                The content should enable <guilabel>Dynamic Navigation</guilabel> that interprets the URL and shows a content.
+                             </para>
+                          </entry>
+                       </row>
+                    </tbody>
+                 </tgroup>
+           </table>
+            <note>
+               <title>More Info</title>
+               <para>
+                  Click the <inlinemediaobject>
+                   <imageobject>
+                     <imagedata fileref="images/questionicon.png" format="PNG" width="6mm"/>
+                   </imageobject>
+                   <textobject>
+                      <phrase>question mark</phrase>
+                   </textobject>
+                 </inlinemediaobject> icon to see more information about each field.
+               </para>
+            </note>
         </step>
         <step>
           <para>
-      Select the <emphasis role="bold">Portlet Setting</emphasis> tab:
-     </para>
+            Select the <guilabel>Portlet Setting</guilabel> tab:
+           </para>
           <mediaobject>
              <imageobject role="html">
                 <imagedata fileref="images/portletsettingtab.png" format="PNG" align="center"/>
@@ -463,94 +535,99 @@
                 <imagedata fileref="images/portletsettingtab.png" format="PNG" align="center" width="150mm" />
              </imageobject>
           </mediaobject>
-          <para>
-      Details:
       <table frame="all">
               <title/>
               <tgroup cols="2">
-                <colspec colname="c1"/>
-                <colspec colname="c2"/>
+                    <thead>
+                       <row>
+                          <entry>
+                             Field
+                          </entry>
+                          <entry>
+                             Details
+                          </entry>
+                       </row>
+                    </thead>
                 <tbody>
                   <row>
                     <entry>
-                      <emphasis role="bold">Display name </emphasis>
+                      <guilabel>Display name</guilabel>
                     </entry>
-                    <entry> The display name of the portlet. You cannot change it. </entry>
+                    <entry> The display name of the portlet (not editable).</entry>
                   </row>
                   <row>
                     <entry>
-                      <emphasis role="bold">Portlet Title </emphasis>
+                      <guilabel>Portlet Title</guilabel>
                     </entry>
-                    <entry> The title of the portlet. You can change it. </entry>
+                    <entry> The title of the portlet (editable). </entry>
                   </row>
                   <row>
                     <entry>
-                      <emphasis role="bold">Width </emphasis>
+                      <guilabel>Width</guilabel>
                     </entry>
-                    <entry> The width of the portlet. </entry>
+                    <entry> The display width of the portlet. </entry>
                   </row>
                   <row>
                     <entry>
-                      <emphasis role="bold"> Height </emphasis>
+                      <guilabel>Height</guilabel>
                     </entry>
-                    <entry> The height of the portlet. </entry>
+                    <entry> The display height of the portlet. </entry>
                   </row>
                   <row>
                     <entry>
-                      <emphasis role="bold">Show info bar </emphasis>
+                      <guilabel>Show info bar.</guilabel>
                     </entry>
                     <entry> Tick the check box if you want to show the info bar of the portlet. </entry>
                   </row>
                   <row>
                     <entry>
-                      <emphasis role="bold">Show Portlet mode </emphasis>
+                      <guilabel>Show Portlet mode</guilabel>
                     </entry>
                     <entry> Tick the check box if you want to show the portlet mode. </entry>
                   </row>
                   <row>
                     <entry>
-                      <emphasis role="bold"> Show window state </emphasis>
+                      <guilabel> Show window state</guilabel>
                     </entry>
                     <entry> Tick the check box if you want to show the window state. </entry>
                   </row>
                   <row>
                     <entry>
-                      <emphasis role="bold"> Description </emphasis>
+                      <guilabel>Description</guilabel>
                     </entry>
                     <entry> Enter a description about the portlet. </entry>
                   </row>
                 </tbody>
               </tgroup>
             </table>
+         </step>
+        <step>
+          <para>
+      Switch to the <guilabel>Icon</guilabel> tab and designate an icon for the portlet by clicking it.
      </para>
         </step>
         <step>
           <para>
-      Select<emphasis role="bold"> Icon</emphasis> tab: Select an icon for the portlet by clicking it.
+      Switch to the <guilabel>Decoration Theme</guilabel> tab and chose a decoration theme for the portlet.
      </para>
         </step>
         <step>
           <para>
-      Select <emphasis role="bold">Decoration Theme</emphasis> tab: Select a decoration theme for the portlet.
-     </para>
-        </step>
-        <step>
-          <para>
-      Select <emphasis role="bold">Access Permission</emphasis> tab:
+      Select the <guilabel>Access Permission</guilabel> tab and set the access permissions for the portlet.
      </para>
           <para>
       By default, all users can access the portlet:
      </para>
-          <mediaobject>
+      <mediaobject>
         <imageobject role="html">
-           <imagedata fileref="images/.png" format="PNG" align="center"/>
+           <imagedata fileref="images/accesspermission.png" format="PNG" align="center"/>
         </imageobject>
         <imageobject role="fo">
            <imagedata fileref="images/accesspermission.png" format="PNG" align="center" width="150mm"/>
         </imageobject>
      </mediaobject>
           <para>
-      However, you can edit the access permission by unticking the checkbox &gt; click <emphasis role="bold">Add Permission</emphasis>:
+      However, you can edit the access permission by clearing the checkbox and clicking <guilabel>Add Permission</guilabel>:
      </para>
           <mediaobject>
         <imageobject role="html">
@@ -561,17 +638,17 @@
         </imageobject>
      </mediaobject>
           <para>
-      The <emphasis role="bold">ListPermissionSelector</emphasis> form appears. Select a group on the left pane and a membership on the right pane.
+      The <guilabel>ListPermissionSelector</guilabel> form appears. Select a group on the left pane and a membership on the right pane.
      </para>
           <note>
             <para>
-       The * on the right pane means all members in the group.
+       The asterix (*) on the right pane denotes all members in the group.
       </para>
           </note>
         </step>
         <step>
           <para>
-      Click <emphasis role="bold">Save and Close</emphasis> to commit.
+      Click <guilabel>Save and Close</guilabel> to commit.
      </para>
         </step>
         <step>
@@ -590,8 +667,7 @@
       <formalpara>
         <title>Edit Configuration</title>
         <para>
-    To edit the configuration (  including   language, skin and permissions) of the site, click the 
-         <inlinemediaobject>
+    To edit the configuration (including language, skin and permissions) of the site, click the <inlinemediaobject>
             <imageobject>
               <imagedata fileref="images/site-config.png" format="PNG" width="34mm"/>
             </imageobject>
@@ -602,8 +678,8 @@
          </para>
       </formalpara>
       <para>
-            Do the same steps as in <xref linkend="sect-User_Guide-Manage_a_site-Create_a_new_site"/>.
-   </para>
+            Follow the same steps as in <xref linkend="sect-User_Guide-Manage_a_site-Create_a_new_site"/>.
+      </para>
       <note>
         <para>
      You cannot change the name of the site.
@@ -611,9 +687,10 @@
       </note>
     </section>
     <section id="sect-User_Guide-Edit_a_Site-How_to_edit_an_existing_site">
-      <title>By accessing to Site</title>
+      <title>By accessing the Site</title>
       <para>
-    This approach way enables you to edit the layout, configuration and navigation bar of a site by going to <emphasis role="bold"><emphasis role="bold">Sites &gt; </emphasis>select the site</emphasis> in the existing site list. </para>
+    This approach way enables you to edit the layout, configuration and navigation bar of a site by going to <guilabel>Sites</guilabel> and selecting the site from the existing site list.
+    </para>
       <mediaobject>
          <imageobject role="html">
             <imagedata fileref="images/existingsites.png" format="PNG" align="center"/>
@@ -639,7 +716,7 @@
         </step>
         <step>
           <para>
-      Do the same steps as the part <xref linkend="form-User_Guide-How_to_edit_the_current_Site-Edit_layout"/> of the current site.
+      Follow the steps in the <xref linkend="form-User_Guide-How_to_edit_the_current_Site-Edit_layout"/> process.
      </para>
         </step>
       </procedure>
@@ -655,7 +732,7 @@
       Click <menuchoice>
          <guimenu>Site</guimenu>
          <guimenuitem>Edit Navigation</guimenuitem>
-      </menuchoice> to open the <emphasis role="bold">Navigation Management</emphasis> form.</para>
+      </menuchoice> to open the <guilabel>Navigation Management</guilabel> form.</para>
           <mediaobject>
             <imageobject role="html">
                <imagedata fileref="images/navigationmanagement.png" format="PNG" align="center"/>
@@ -667,12 +744,13 @@
         </step>
         <step>
           <para>
-      Click <emphasis role="bold">Add Node</emphasis> to open the <emphasis role="bold">ADD/EDIT PAGE NODE</emphasis> form.
-      (For more details, refer to the Section 5.3.1, Add a new node, GateIn User Guide 3.1.)</para>
+      Click <guilabel>Add Node</guilabel> to open the <guilabel>ADD/EDIT PAGE NODE</guilabel> form.
+      <!-- (For more details, refer to the Section 5.3.1, Add a new node, GateIn User Guide 3.1.). Commentted reference to Gatein User Guide as not cross-product compatible-->
+     </para>
         </step>
         <step>
           <para>
-      In the <emphasis role="bold">Page Node Setting</emphasis> tab, enter a name for the node. It is required.
+      In the <guilabel>Page Node Setting</guilabel> tab, enter a name for the node. This is a required value.
      </para>
           <mediaobject>
              <imageobject role="html">
@@ -682,48 +760,51 @@
                 <imagedata fileref="images/add-editnode.png" format="PNG" align="center" width="150mm" />
              </imageobject>
           </mediaobject>
-          <para>
-      Details:
-     </para>
-          <para>
       <table frame="all">
               <title/>
               <tgroup cols="2">
-                <colspec colname="c1"/>
-                <colspec colname="c2"/>
+                <thead>
+                  <row>
+                     <entry>
+                        Field
+                     </entry>
+                     <entry>
+                        Details
+                     </entry>
+                  </row>
+               </thead>
                 <tbody>
                   <row>
-                    <entry> Uri: </entry>
+                    <entry><guilabel>Uri</guilabel></entry>
                     <entry> The node&apos;s identification. The Uri is automatically created once a new node has been created. </entry>
                   </row>
                   <row>
-                    <entry> Label: </entry>
+                    <entry><guilabel>Label</guilabel></entry>
                     <entry> The node&apos;s display name on the screen. This field may be changed and its length must be between 3 and 60 characters. </entry>
                   </row>
                   <row>
-                    <entry> Visible: </entry>
+                    <entry><guilabel>Visible</guilabel></entry>
                     <entry> This checkbox allows the page and its node to be shown or hidden on the navigation bar, the page navigation bar and the sitemap. See above for more details. </entry>
                   </row>
                   <row>
-                    <entry> Publication date &amp; time: </entry>
+                    <entry><guilabel>Publication date &amp; time</guilabel></entry>
                     <entry> This option allows this node to be published for a period of time. Two fields, including <literal>Start Publication Date</literal> and <literal>End Publication Date</literal> only display when this option is checked. </entry>
                   </row>
                   <row>
-                    <entry> Start Publication Date: </entry>
+                    <entry><guilabel>Start Publication Date</guilabel></entry>
                     <entry> The start date and time to publish the node. </entry>
                   </row>
                   <row>
-                    <entry> End Publication Date: </entry>
+                    <entry><guilabel>End Publication Date</guilabel></entry>
                     <entry> The end date and time to publish the node. </entry>
                   </row>
                 </tbody>
               </tgroup>
             </table>
-     </para>
         </step>
         <step>
           <para>
-      Select the <emphasis role="bold">Page Selector</emphasis> tab:
+      Select the <guilabel>Page Selector</guilabel> tab:
      </para>
           <mediaobject>
              <imageobject role="html">
@@ -733,37 +814,42 @@
                 <imagedata fileref="images/pageselector.png" format="PNG" align="center" width="150mm" />
              </imageobject>
           </mediaobject>
-          <para>
-      Details:
-     </para>
           <table frame="all">
             <title/>
             <tgroup cols="2">
-              <colspec colname="c1"/>
-              <colspec colname="c2"/>
+              <thead>
+                 <row>
+                    <entry>
+                       Field
+                    </entry>
+                    <entry>
+                       Details
+                    </entry>
+                 </row>
+               </thead>
               <tbody>
                 <row>
-                  <entry> Page Id:</entry>
+                  <entry><guilabel>Page Id</guilabel></entry>
                   <entry> The identification string of the page. It is created automatically when the page is created. </entry>
                 </row>
                 <row>
-                  <entry> Name: </entry>
+                  <entry><guilabel>Name</guilabel></entry>
                   <entry> The selected page&apos;s name. </entry>
                 </row>
                 <row>
-                  <entry> Title: </entry>
+                  <entry><guilabel>Title</guilabel></entry>
                   <entry> The selected page&apos;s title. </entry>
                 </row>
                 <row>
-                  <entry> Clear Page: </entry>
+                  <entry><guilabel>Clear Page</guilabel></entry>
                   <entry> To remove the input page information in the fields </entry>
                 </row>
                 <row>
-                  <entry> Create Page: </entry>
+                  <entry><guilabel>Create Page</guilabel></entry>
                   <entry> To create a new page with the input name and the title. </entry>
                 </row>
                 <row>
-                  <entry> Search and Select Page: </entry>
+                  <entry><guilabel>Search and Select Page</guilabel></entry>
                   <entry> To search and select an existing page. </entry>
                 </row>
               </tbody>
@@ -777,25 +863,26 @@
             </listitem>
             <listitem>
               <para>
-        Click <emphasis role="bold">Create Page</emphasis> to create a new page or <emphasis role="bold">Search and Select Page</emphasis> to select an existing page for the node.
+        Click <guilabel>Create Page</guilabel> to create a new page or <guilabel>Search and Select Page</guilabel> to select an existing page for the node.
        </para>
             </listitem>
           </itemizedlist>
         </step>
         <step>
           <para>
-      Select the <emphasis role="bold">Icon</emphasis> tab to choose an icon for the node. It is not required.
+      Select the <guilabel>Icon</guilabel> tab to choose an icon for the node. This is optional.
      </para>
         </step>
         <step>
           <para>
-      Click <emphasis role="bold">Save</emphasis> to create a node for the navigation.
+      Click <guilabel>Save</guilabel> to create a node for the navigation.
      </para>
         </step>
       </procedure>
       <note>
+         <title>Editing via Navigation Management</title>
         <para>
-     You can edit/delete a node, edit a node&apos;s page, copy/cut a node and more by right-clicking the node in the form Navigation Management form.
+     You can edit/delete a node, edit a node&apos;s page, copy/cut a node and more by right-clicking the node in the <guilabel>Navigation Management</guilabel> form.
     </para>
       </note>
       <formalpara id="form-User_Guide-How_to_edit_an_existing_site-Edit_Properties">
@@ -815,23 +902,23 @@
         </step>
         <step>
           <para>
-      Do the same steps as in <xref linkend="sect-User_Guide-Manage_a_site-Create_a_new_site"/>.
+      Follow the steps in <xref linkend="sect-User_Guide-Manage_a_site-Create_a_new_site"/>.
      </para>
         </step>
       </procedure>
     </section>
   </section>
-<!-- </section>-->  
+
    <section id="sect-User_Guide-Manage_a_site-Switch_between_sites">
     <title>Switch between sites</title>
     <para>
-   This function is used to change the current web site by another one.
+   This function is used to move from the current web site to another one.
   </para>
     <procedure>
       <title/>
       <step>
         <para>
-     Just select a site in the site list that appears when you move the cursor to Sites on the Administration bar:
+     Hover your mouse cursor over <guilabel>Sites</guilabel> on the administration bar and choose a new site from the site list that appears:
     </para>
         <mediaobject>
           <imageobject role="html">
@@ -842,7 +929,7 @@
           </imageobject>
         </mediaobject>
         <para>
-     Your current site will be switched to the selected site, and you will see all the child pages that displays on the Navigation bar of the selected site.
+     The child pages of the new site will now be available in the site's entry under <guilabel>Site</guilabel> on the administration bar:
     </para>
         <mediaobject>
            <imageobject role="html">
@@ -867,7 +954,7 @@
       <title/>
       <step>
         <para>
-     Show a portal list by clicking <emphasis role="bold">Site</emphasis> on the administration bar:
+     Show the portal list by clicking <guilabel>Site</guilabel> on the administration bar:
     </para>
         <mediaobject>
           <imageobject role="html">
@@ -896,7 +983,7 @@
      Click <guibutton>OK</guibutton> in the confirmation message to accept deleting.
     </para>
         <note>
-          <para>You cannot delete the <emphasis role="bold">Classic</emphasis> site by default.</para>
+          <para>You cannot delete the <guilabel>Classic</guilabel> site by default.</para>
         </note>
       </step>
     </procedure>

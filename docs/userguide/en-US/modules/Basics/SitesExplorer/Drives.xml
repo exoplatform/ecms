@@ -8,7 +8,7 @@
 	 <section id="sect-User_Guide-Drives-Private_drive">
 		<title>Private drive</title>
 		 <para>
-			Private drive contains personal data of registered users. Hence, only these individuals can access data in this drive type.
+         <emphasis role="bold">Private drives</emphasis> contain personal data of registered users. Hence, only these individuals can access data in this drive type.
 		</para>
 		 <mediaobject>
 			<imageobject role="html">
@@ -17,10 +17,9 @@
 			 <imageobject role="fo">
             <imagedata align="center"  fileref="images/privatedrive.png" format="PNG" width="150mm" />
 			</imageobject>
-
 		</mediaobject>
 		 <para>
-			By default, there are some initialized folders to store private user's resources.
+			There are some default folders set up to store a user's private resources.
 		</para>
 		 <itemizedlist>
 			<listitem>
@@ -31,45 +30,37 @@
 					 <imageobject role="fo">
                   <imagedata align="center"  fileref="images/actionstab.png" format="PNG" width="117mm"/>
 					</imageobject>
-
 				</mediaobject>
 				 <para>
-					By selecting the Actions tab, you can:
+               By selecting the <guilabel>Actions</guilabel> tab, you can:
 				</para>
 				 <itemizedlist>
 					<listitem>
 						<para>
-							Create a new folder
+							Create a new folder.
 						</para>
-
 					</listitem>
 					 <listitem>
 						<para>
-							Create a new document
+							Create a new document.
 						</para>
-
 					</listitem>
 					 <listitem>
 						<para>
-							Upload file from your computer
+							Upload file from your devicef.
 						</para>
-
 					</listitem>
 					 <listitem>
 						<para>
-							Add Symlinks
+							Add Symlinks.
 						</para>
-
 					</listitem>
 					 <listitem>
 						<para>
-							Overload Thumbnails
+							Overload Thumbnails.
 						</para>
-
 					</listitem>
-
 				</itemizedlist>
-
 			</listitem>
 			 <listitem>
 				<para>
@@ -82,42 +73,34 @@
 					 <imageobject role="fo">
                   <imagedata align="center"  fileref="images/collaborationtab.png" format="PNG" width="150mm" />
 					</imageobject>
-
 				</mediaobject>
 				 <itemizedlist>
 					<listitem>
 						<para>
 							Watch/Unwatch a document.
 						</para>
-
 					</listitem>
 					 <listitem>
 						<para>
 							Add tags for a document.
 						</para>
-
 					</listitem>
 					 <listitem>
 						<para>
 							Set multi-display languages for document.
 						</para>
-
 					</listitem>
 					 <listitem>
 						<para>
 							Vote for a document.
 						</para>
-
 					</listitem>
 					 <listitem>
 						<para>
 							Comment for a document.
 						</para>
-
 					</listitem>
-
 				</itemizedlist>
-
 			</listitem>
 			 <listitem>
 				<para>
@@ -126,25 +109,20 @@
 				 <itemizedlist>
 					<listitem>
 						<para>
-							Do the simple search
+							Perform a simple search.
 						</para>
-
 					</listitem>
 					 <listitem>
 						<para>
-							Do the advanced search with more constraints, add new query to search
+							Perform an advanced search with more constraints, add new query to search.
 						</para>
-
 					</listitem>
 					 <listitem>
 						<para>
-							Do search by existing queries.
+							Search by existing queries.
 						</para>
-
 					</listitem>
-
 				</itemizedlist>
-
 			</listitem>
 			 <listitem>
 				<para>
@@ -153,49 +131,39 @@
 				 <itemizedlist>
 					<listitem>
 						<para>
-							Set up your browsing preferences
+							Set up your browsing preferences.
 						</para>
-
 					</listitem>
 					 <listitem>
 						<para>
-							Cut/paste, Copy/paste, Delete a node
+							Cut/paste, Copy/paste, Delete a node.
 						</para>
-
 					</listitem>
 					 <listitem>
 						<para>
-							Lock a node
+							Lock a node.
 						</para>
-
 					</listitem>
 					 <listitem>
 						<para>
-							Rename a node
+							Rename a node.
 						</para>
-
 					</listitem>
 					 <listitem>
 						<para>
 							Use the view WebDAV function to view document content.
 						</para>
-
 					</listitem>
 					 <listitem>
 						<para>
 							Download documents (folders) to your machine.
 						</para>
-
 					</listitem>
-
 				</itemizedlist>
-
 			</listitem>
-
 		</itemizedlist>
-
 	</section>
-	
+
 	 <section id="sect-User_Guide-Drives-Public_drive">
 		<title>Public drive</title>
 		 <mediaobject>
@@ -208,18 +176,17 @@
 
 		</mediaobject>
 		 <para>
-			With the Public drive, there is no initialized folder but you can create by yourself.
+			There are no default folders in a Public drive, but users can create any folders they require.
 		</para>
 		 <para>
-			In the Public drive, you also can take actions like in the Private drive.
+			All actions available to users in Private drives are also available in Public drives.
 		</para>
-
 	</section>
-	
+
 	 <section id="sect-User_Guide-Drives-Drive_of_a_specific_group">
 		<title>Drive of a specific group</title>
 		 <para>
-			By default, there are two initialized folders but you also can add more and take actions like in Private drives. Only users in a specific group can access its drive.
+			Group drives have two default folders, but others can be added as needed. Users can utilize the same actions as in Private drives, the only difference being that only users in the drive's owner group can access the drive.
 		</para>
 		 <mediaobject>
 			<imageobject role="html">
@@ -228,9 +195,7 @@
 			 <imageobject role="fo">
             <imagedata align="center"  fileref="images/groupdrive.png" format="PNG" width="150mm" />
 			</imageobject>
-
 		</mediaobject>
-
 	</section>
 	
 	 <section id="sect-User_Guide-Drives-Shared_Users_Space_drive">
@@ -242,10 +207,9 @@
 			 <imageobject role="fo">
             <imagedata align="center"  fileref="images/shareddrive.png" format="PNG" width="150mm" />
 			</imageobject>
-
 		</mediaobject>
 		 <para>
-			By default, there will be a list of all existing users, each user has a folder named as his username, that includes two sub-folders (private and public). You can see both your private and public folders here but you only can see the public folder of other users.
+			By default, there will be a list of all existing users, each user has a folder with their username. Each user's folder includes two sub-folders (private and public). You can see both your private and public folders here but you only can see the public folder of other users.
 		</para>
 		 <itemizedlist>
 			<listitem>
@@ -257,68 +221,54 @@
 						<para>
 							Perform all actions that you can do in your private drive.
 						</para>
-
 					</listitem>
 					 <listitem>
 						<para>
 							View nodes from public folder of others.
 						</para>
-
 					</listitem>
-
 				</itemizedlist>
-
 			</listitem>
 			 <listitem>
 				<para>
-					In this drive, you cannot:
+               In this drive, you <emphasis role="bold">cannot</emphasis>:
 				</para>
 				 <itemizedlist>
 					<listitem>
 						<para>
 							Add a folder/document in a root node.
 						</para>
-
 					</listitem>
 					 <listitem>
 						<para>
-							Add a folder/document in a folder named as other users' username and to child nodes of this folder.
+							Add a folder/document in another users' folder or to child nodes of this folder.
 						</para>
-
 					</listitem>
 					 <listitem>
 						<para>
-							Add folders/documents in a folder named as your username (e.g, you cannot add a folder/document in the folder "root"), but you can do in its child nodes "public" and "private".
+                     Add folders/documents to the top-level folder (the one bearing your username), only in its child nodes <emphasis>public</emphasis> and <emphasis>private</emphasis>.
 						</para>
-
 					</listitem>
 					 <listitem>
 						<para>
 							Rename a default folder.
 						</para>
-
 					</listitem>
 					 <listitem>
 						<para>
-							Lock folders named by a user.
+							Lock folders belonging to another user.
 						</para>
-
 					</listitem>
 					 <listitem>
 						<para>
 							Delete a default folder.
 						</para>
-
 					</listitem>
-
 				</itemizedlist>
-
 			</listitem>
-
 		</itemizedlist>
-
 	</section>
-	
+
 	 <section id="sect-User_Guide-Drives-Showhide_the_sidebar_in_a_drive">
 		<title>Show/hide the sidebar in a drive</title>
 		 <para>
@@ -333,8 +283,7 @@
 					<title>Method 1</title>
 					 <step>
 						<para>
-							Click the 
-							<inlinemediaobject>
+							Click the <inlinemediaobject>
 								<imageobject>
                            <imagedata fileref="images/preferencesettingicon.png" format="PNG" width="10mm" />
 								</imageobject>
@@ -354,7 +303,7 @@
 					</step>
 					 <step>
 						<para>
-							Untick the <emphasis role="bold">Show sidebar</emphasis> checkbox <emphasis role="bold">&gt;</emphasis> <emphasis role="bold">Save</emphasis>.
+                     Untick the <guilabel>Show sidebar</guilabel> checkbox then click <guilabel>Save</guilabel>.
 						</para>
 						 <para>
 							The drive will be displayed like the illustration below:
@@ -366,27 +315,21 @@
 							 <imageobject role="fo">
                         <imagedata align="center"  fileref="images/hidesidebar.png" format="PNG" width="150mm" />
 							</imageobject>
-
 						</mediaobject>
-
 					</step>
 					 <step>
 						<para>
-							To show the sidebar, tick the <emphasis role="bold">Show sidebar</emphasis> checkbox in the '<emphasis role="bold">Preferences</emphasis>'.
+                     To show the sidebar, tick the <guilabel>Show sidebar</guilabel> checkbox in <guilabel>Preferences</guilabel>.
 						</para>
-
 					</step>
-
 				</procedure>
-				
-
 			</listitem>
 			 <listitem>
 				<procedure id="proc-User_Guide-Showhide_the_sidebar_in_a_drive-Method_2">
 					<title>Method 2</title>
 					 <step>
 						<para>
-							Simply click the Expand icon to hide the sidebar as the illustration below:
+                     Click the <guilabel>Expand</guilabel> icon to hide the sidebar:
 						</para>
 						 <mediaobject>
 							<imageobject role="html">
@@ -395,26 +338,15 @@
 							 <imageobject role="fo">
                         <imagedata align="center"  fileref="images/sidebarborder.png" format="PNG" width="150mm" />
 							</imageobject>
-
 						</mediaobject>
-
 					</step>
 					 <step>
 						<para>
-							Click the Collapse icon to show the sidebar back.
+                     Click the <guilabel>Collapse</guilabel> icon to reveal the sidebar again.
 						</para>
-
 					</step>
-
 				</procedure>
-				
-
 			</listitem>
-
 		</orderedlist>
-
 	</section>
-
 </section>
-
-

@@ -9,10 +9,10 @@
   <section id="sect-User_Guide-Overall_Introduction-Overview">
     <title>Overview</title>
     <para>
-   Beginning as an Open Source project in the year 2002, eXo is well-known as the industry&apos;s first Java portlet container. With the aim of dominating the potential portal market through robust and easy-to-use applications, eXo Project has succeeded in attracting consumers in the whole world. eXo has actually opened the floodgates to various options in many markets, and customers have been choosing eXo as the best method for their success.
+   Beginning as an Open Source project in the year 2002, eXo is well-known as the industry&apos;s first Java portlet container. With the aim of dominating the potential portal market through robust and easy-to-use applications, eXo Project has succeeded in attracting consumers from across the globe. eXo has actually opened the floodgates to various options in many markets, and customers have been choosing eXo as the best method for their success.
   </para>
     <para>
-   The eXo Platform™ software is a powerful Open Source that corporates portal and content management system. Users of the platform have a customized single point of access to the company&apos;s information system and resources.
+   The eXo Platform™ software is a powerful Open Source application that incorporates portal and content management systems. Users of the platform have a customized single point of access to their company&apos;s information system and resources.
   </para>
     <mediaobject>
       <imageobject role="html">
@@ -26,13 +26,13 @@
    The foundation for eXo Platform 3.0 is eXo Core Services, a powerful set of REST-based services for rapid website development, content management and gadget-based development. eXo Extended Services are also a part of the eXo Platform 3.0, running on the top of eXo Core Services to enable easy development of rich, user-centric web applications.
   </para>
     <para>
-   eXo Content is one of eXo Core services. It provides a set of services to extend portal-based applications with Enterprise Content Management (ECM) capabilities. Document Management System (DMS) features make it easy to catalog and organize enterprise content and with powerful Web Content Management (WCM) services to quickly build dynamic, content-rich websites.
+   eXo Content is one such eXo Core service. It provides a set of services to extend portal-based applications with Enterprise Content Management (ECM) capabilities. Document Management System (DMS) features make it easy to catalog and organize enterprise content and with powerful Web Content Management (WCM) services to quickly build dynamic, content-rich websites.
   </para>
   </section>
   <section id="sect-User_Guide-Overall_Introduction-Why_Use_eXo_Content">
     <title>Why Use eXo Content</title>
     <para>
-   If you are looking for a powerful tool and strategies in managing website and contents, eXo Content is what you need. eXo Content is designed to provide webmasters who manage websites the way to maintain, control, modify and reassemble the content of a web-page easily and effectively. All components of your website can be organized, reconstructed easily, which helps you keep your website under the control. eXo Content really brings interesting experience for all users and changes their way of thinking about website. The followings are key features of eXo Content:
+   If you are looking for a powerful tool and strategies in managing website and contents, eXo Content is what you need. eXo Content is designed to provide webmasters who manage websites the way to maintain, control, modify and reassemble the content of a web-page easily and effectively. All components of your website can be organized, or easily reconstructed, which helps you keep your website under control. eXo Content really brings an interesting experience for all users and changes their way of thinking about website management. The followings are key features of eXo Content:
   </para>
     <variablelist id="vari-User_Guide-Why_Use_eXo_Content-Website_Creation">
       <title>Website Creation</title>
@@ -209,7 +209,7 @@
     <formalpara id="form-User_Guide-Why_Use_eXo_Content-And_More...">
       <title>And More...</title>
       <para>
-    eXo Content also provides other powerful tools to manage an build content-rich websites such as CSS, Java Script and RSS support, advanced document management tool, collaboration tools, etc. All features is to meet your requirements for the purpose of easy site management, cost reduction in managing multiple sites in only one place.
+    eXo Content also provides other powerful tools to manage and build content-rich websites such as CSS, Java Script and RSS support, advanced document management tools, collaboration tools and more. All eXo Content features are designed to meet your requirements in site management and maximise the cost reduction that comes of managing multiple sites from only one place.
    </para>
     </formalpara>
   </section>
@@ -224,35 +224,38 @@
     <itemizedlist>
       <listitem>
         <para>
-     learn the basic terminologies used in eXo Content.
+     Learn the basic terminologies used in eXo Content.
     </para>
       </listitem>
       <listitem>
         <para>
-     know how to create, manage and publish Site content.
+     Know how to create, manage and publish Site content.
     </para>
       </listitem>
       <listitem>
         <para>
-     know how to manage Web pages, set up a website, etc.
+     Know how to manage Web pages, set up a website, etc.
     </para>
       </listitem>
     </itemizedlist>
-    <para>
-   In this guide, we will use the following accounts (username/ password) throughout the guide:
-  </para>
-    <itemizedlist>
-      <listitem>
-        <para>
-     <emphasis role="bold">root/ gtn</emphasis>: This account is for users as Administrators who have the highest right on the platform.
-    </para>
-      </listitem>
-      <listitem>
-        <para>
-     <emphasis role="bold">mary/ gtn</emphasis>: This account is for a publisher who can write contents but also can create new pages or edit them in the current site.
-    </para>
-      </listitem>
-    </itemizedlist>
+    <note>
+       <title>Default Accounts</title>
+         <para>
+         The following accounts (username/ password) will be used throughout this guide:
+        </para>
+          <itemizedlist>
+            <listitem>
+              <para>
+           <emphasis role="bold">root/ gtn</emphasis>: This account is for users as Administrators who have the highest right on the platform.
+          </para>
+            </listitem>
+            <listitem>
+              <para>
+           <emphasis role="bold">mary/ gtn</emphasis>: This account is for a publisher who can write contents but also can create new pages or edit them in the current site.
+          </para>
+            </listitem>
+          </itemizedlist>
+        </note>
   </section>
   <section id="sect-User_Guide-Overall_Introduction-References_and_Related_Sources">
     <title>References and Related Sources</title>

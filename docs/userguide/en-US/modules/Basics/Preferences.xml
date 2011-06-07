@@ -23,7 +23,7 @@
         </inlinemediaobject> icon on the right side of the <emphasis role="bold">Content Explorer</emphasis> portlet.
    </para>
       <para>
-    The <emphasis role="bold">Preference Setting</emphasis> window will appear:
+    The <guilabel>Preference Setting</guilabel> window will appear:
    </para>
       <mediaobject>
         <imageobject role="html">
@@ -44,39 +44,39 @@
           </thead>
           <tbody>
             <row>
-              <entry> Sort by </entry>
+              <entry> <guilabel>Sort by</guilabel> </entry>
               <entry> To sort nodes in the nodes list by Alphabetic, Type, Created Date, or Modified Date</entry>
             </row>
             <row>
-              <entry> Show sidebar </entry>
+              <entry> <guilabel>Show sidebar</guilabel> </entry>
               <entry> To display/hide the sidebar. </entry>
             </row>
             <row>
-              <entry> Enable drag and drop </entry>
+              <entry> <guilabel>Enable drag and drop</guilabel> </entry>
               <entry> To enable/disable the “drag and drop” action. </entry>
             </row>
             <row>
-              <entry> Nodes per page </entry>
+              <entry> <guilabel>Nodes per page</guilabel> </entry>
               <entry> This number of nodes that will be displayed per page. </entry>
             </row>
             <row>
-              <entry> Show non document nodes </entry>
+              <entry> <guilabel>Show non document nodes</guilabel> </entry>
               <entry> To display/hide nodes that are non–documents. </entry>
             </row>
             <row>
-              <entry> Show referenced documents </entry>
+              <entry> <guilabel>Show referenced documents</guilabel> </entry>
               <entry> To display/hide referenced documents. </entry>
             </row>
             <row>
-              <entry> Show hidden nodes </entry>
+              <entry> <guilabel>Show hidden nodes</guilabel> </entry>
               <entry>To display/hide hidden nodes. </entry>
             </row>
             <row>
-              <entry> Query Type </entry>
+              <entry> <guilabel>Query Type</guilabel> </entry>
               <entry> This query type. </entry>
             </row>
             <row>
-              <entry> Enable DMS structure. </entry>
+              <entry> <guilabel>Enable DMS structure</guilabel> </entry>
               <entry>To display/hide nodes in a document in tree structure. </entry>
             </row>
           </tbody>
@@ -85,10 +85,10 @@
     </step>
     <step>
       <para>
-    Configure the preferences as required and click <emphasis role="bold">Save</emphasis> to set them.
+    Configure the preferences as required and click <guilabel>Save</guilabel> to set them.
    </para>
       <para>
-    Or click <emphasis role="bold">Back</emphasis> to quit without submitting changes.
+    Or click <guilabel>Back</guilabel> to quit without submitting changes.
    </para>
     </step>
   </procedure>

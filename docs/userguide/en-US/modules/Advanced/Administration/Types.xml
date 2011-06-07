@@ -8,12 +8,20 @@
   <title>Content Types</title>
   <section id="sect-User_Guide-Content_Types-The_Namespace_Registry">
     <title>The Namespace Registry</title>
-    <para>The namespace is a prefix in the node type name. It enables you to create node types without fearing any conflict with existing node types.
-The registry helps you manage the namespaces used in the system.</para>
     <para>
-   Go to <emphasis role="bold">
-        <emphasis><guimenuitem>Administration &gt; Content Types &gt; Namespace Registry</guimenuitem> to open the Namespace Registry form.</emphasis>
-      </emphasis><!--   Go to Administration | Content Types | Namespace Registry    -->
+       The namespace is a prefix in the node type name. It allows you to create node types without potentially conflicting with existing node types.
+      </para>
+      <para>
+         The registry helps you manage the namespaces used in the system.
+      </para>
+    <para>
+   Go to <menuchoice>
+      <guimenu>Groups</guimenu>
+      <guimenuitem>Administration</guimenuitem>
+   </menuchoice> the click on <menuchoice>
+      <guimenu>Content Types</guimenu>
+      <guimenuitem>Namespace Registry</guimenuitem>
+   </menuchoice> to open the Namespace Registry form.
   </para>
     <mediaobject>
        <imageobject role="html">
@@ -27,7 +35,7 @@ The registry helps you manage the namespaces used in the system.</para>
       <title>Registering a Namespace</title>
       <step>
         <para>
-     Click the <guibutton>Register</guibutton> button on the Namespace Registry form to register a new namespace.
+     Click the <guibutton>Register</guibutton> button on the <guilabel>Namespace Registry</guilabel> form to register a new namespace.
     </para>
         <mediaobject>
            <imageobject role="html">
@@ -40,14 +48,15 @@ The registry helps you manage the namespaces used in the system.</para>
       </step>
       <step>
         <para>
-     Enter the value for the Namespace Prefix field. (* Required).
+     Enter a value for the <guilabel>Namespace Prefix</guilabel> field. This field is required (*).
     </para>
       </step>
       <step>
         <para>
-     Enter the value for the URI field. This field must be unique. (*Required).
+     Enter a value for the URI field. This field must be unique. This field is required (*).
     </para>
         <important>
+           <title>Special Characters</title>
           <para>
       The namespace must not contain special characters like !,@,#,$,%,&amp;,*,(,).
      </para>
@@ -74,7 +83,7 @@ The registry helps you manage the namespaces used in the system.</para>
     <procedure>
       <step>
         <para>
-     Click the icon that corresponds to the node to be reviewed. The <emphasis role="bold">View Node Type Information</emphasis> form will appear.
+     Click the icon that corresponds to the node to be reviewed. The <guilabel>View Node Type Information</guilabel> form will appear.
     </para>
         <mediaobject>
            <imageobject role="html">
@@ -95,7 +104,7 @@ The registry helps you manage the namespaces used in the system.</para>
       <title>Add Node Type</title>
       <step>
         <para>
-     Open the Add/Edit Node Type Definitions form by clicking the <guibutton>Add</guibutton> button on the Manage Node Type Form.
+     Open the <guilabel>Add/Edit Node Type Definitions</guilabel> form by clicking the <guibutton>Add</guibutton> button on the <guilabel>Manage Node Type</guilabel> form.
     </para>
         <figure id="figu-User_Guide-Add_Node_Type-Add_Node_Type_Form">
           <title>Add Node Type Form</title>
@@ -117,6 +126,7 @@ The registry helps you manage the namespaces used in the system.</para>
       <step>
         <para>Enter a name in the Node type name field. This field is mandatory and its value must be unique.</para>
         <important>
+           <title>Special Characters</title>
           <para>
       The name must not contain special characters like !,@,#,$,%,&amp;,*,(,).
      </para>
@@ -124,56 +134,63 @@ The registry helps you manage the namespaces used in the system.</para>
       </step>
       <step>
         <para>
-     Select a value for the &quot;Is mixin type&quot; field.
+     Select a value for the <guilabel>Is mixin type</guilabel> field.
     </para>
         <itemizedlist>
           <listitem>
             <para>
-       True: this node is mixin type.
+       <parameter>True</parameter>: this node is <systemitem>mixin</systemitem> type.
       </para>
           </listitem>
           <listitem>
             <para>
-       False: this node is not mixin type.
+       <parameter>False</parameter>: this node is not <systemitem>mixin</systemitem> type.
       </para>
           </listitem>
         </itemizedlist>
       </step>
       <step>
         <para>
-     Select a value for the &quot;Orderable child nodes&quot; field:
+     Select a value for the <guilabel>Orderable child nodes</guilabel> field:
     </para>
         <itemizedlist>
           <listitem>
             <para>
-       True: child nodes are ordered.
+       <parameter>True</parameter>: child nodes are ordered.
       </para>
           </listitem>
           <listitem>
             <para>
-       False: child nodes are not ordered.
+       <parameter>False</parameter>: child nodes are not ordered.
       </para>
           </listitem>
         </itemizedlist>
       </step>
       <step>
         <para>
-     Enter a value for the Primary item name field.
+     Enter a value for the <guilabel>Primary item name</guilabel> field.
     </para>
       </step>
       <step>
         <para>
-     Super Types: Click the <guibutton>+</guibutton> button to add more parent types.
+     <parameter>Super Types</parameter>: Click the <inlinemediaobject>
+              <imageobject>
+                <imagedata fileref="images/addplusicon.png" format="PNG" width="8mm"/>
+              </imageobject>
+              <textobject>
+                 <phrase>plus</phrase>
+              </textobject>
+            </inlinemediaobject> button to add more parent types.
     </para>
       </step>
       <step>
         <para>
-     Property definitions: lists all definition names of Property tab.
+     <parameter>Property definitions</parameter>: lists all definition names of <guilabel>Property</guilabel> tab.
     </para>
       </step>
       <step>
         <para>
-     Child node definitions: lists all definition names of Child node tab.
+     <parameter>Child node definitions</parameter>: lists all definition names of <guilabel>Child node</guilabel> tab.
     </para>
       </step>
       <step>
@@ -186,7 +203,7 @@ The registry helps you manage the namespaces used in the system.</para>
       <title>Export Node Types</title>
       <step>
         <para>
-     Open the Export Node Types form by clicking the <guibutton>Export</guibutton> button on the Manage Node Type Form.
+     Open the Export Node Types form by clicking the <guibutton>Export</guibutton> button on the <guilabel>Manage Node Type</guilabel> Form.
     </para>
       <mediaobject>
          <imageobject role="html">
@@ -196,11 +213,6 @@ The registry helps you manage the namespaces used in the system.</para>
             <imagedata fileref="images/exportnodetypes.png" format="PNG" align="center" width="130mm" />
          </imageobject>
       </mediaobject>
-          <mediaobject>
-            <imageobject>
-              <imagedata  align="center" fileref="images/exportnodetypes.png" format="PNG"/>
-            </imageobject>
-          </mediaobject>
       </step>
       <step>
         <para>
@@ -223,7 +235,7 @@ The registry helps you manage the namespaces used in the system.</para>
     </para>
         <important>
           <para>
-      You must select at least 1 node type to be exported. If you do not want to export the node, click <guibutton>Cancel</guibutton> to quit this pop-up.
+      You must select at least one node type to be exported. If you do not want to export the node, click <guibutton>Cancel</guibutton> to quit this pop-up.
      </para>
         </important>
       </step>
@@ -232,7 +244,7 @@ The registry helps you manage the namespaces used in the system.</para>
       <title>Import Node Types</title>
       <step>
         <para>
-     Open the Import Node Type from XML file form by clicking the <guibutton>Import</guibutton> button on the Manage Node Type Form.
+     Open the <guilabel>Import Node Type from XML</guilabel> file form by clicking the <guibutton>Import</guibutton> button on the <guilabel>Manage Node Type</guilabel> form.
     </para>
         <mediaobject>
            <imageobject role="html">
@@ -267,7 +279,14 @@ The registry helps you manage the namespaces used in the system.</para>
     </para>
         <note>
           <para>
-      If you want to upload a different file, click the <guibutton>trash </guibutton>icon to delete the file which has just been uploaded, then upload other files.
+      If you want to upload a different file, click the <inlinemediaobject>
+            <imageobject>
+              <imagedata fileref="images/trashicon.png" format="PNG" width="5mm"/>
+            </imageobject>
+            <textobject>
+               <phrase>trash can</phrase>
+            </textobject>
+          </inlinemediaobject> icon to delete the file which has just been uploaded, then upload other files.
      </para>
         </note>
       </step>
@@ -278,7 +297,7 @@ The registry helps you manage the namespaces used in the system.</para>
       </step>
       <step>
         <para>
-     Click the <emphasis role="bold">Import </emphasis>button to complete importing a node type.
+     Click the <guilabel>Import</guilabel> button to complete importing a node type.
     </para>
       </step>
     </procedure>

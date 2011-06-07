@@ -10,16 +10,14 @@
   You can easily manage all the site resources in Content Explorer.
  </para>
   <para>
-  Chose 
-  <inlinemediaobject>
+  Chose <inlinemediaobject>
       <imageobject>
         <imagedata fileref="images/sitesmanagementicon.png" format="PNG" width="43mm"/>
       </imageobject>
       <textobject>
          <phrase>Sites Management</phrase>
       </textobject>
-    </inlinemediaobject>
-   in General drive. All of your created sites and their resources will be listed in the left panel.
+    </inlinemediaobject> in a <guilabel>General</guilabel> drive. All of your created sites and their resources will be listed in the left panel.
  </para>
   <mediaobject>
     <imageobject role="html">
@@ -43,12 +41,12 @@
   <section id="sect-User_Guide-Manage_Site_Resources_in_one_place-CSS_Folder">
     <title>CSS Folder</title>
     <para>
-   CSS is one of the default files of a site. This folder contains CSS data that is used to present data in a site and increase that site&apos;s content accessibility.
+   CSS is one of the default files of a site. This folder contains CSS data that is used to present content data in a site and increase that site&apos;s accessibility.
   </para>
     <note>
       <title>CSS</title>
       <para>
-    Once a new CSS file is created in a site, it will affect how the site is displayed. For example, if your new CSS file is created with the red background color, the site background will then turn into red.</para>
+    Once a new CSS file is created in a site, it will affect how the site is displayed. For example, if your new CSS file is created with a red background color, the site background will then turn to red.</para>
     </note>
   </section>
   <section id="sect-User_Guide-Manage_Site_Resources_in_one_place-Document_Folder">
@@ -119,7 +117,7 @@
   <section id="sect-User_Guide-Manage_Site_Resources_in_one_place-Web_Content_Folders">
     <title>Web Content Folders</title>
     <para>
-   This folder contains all web content used in sites. It is recommended to put all the web contents files here, to manage them more easily, or in case you want to reuse them in another site.</para>
+   This folder contains all web content used in sites. It is recommended to put all the web contents files here to manage them more easily, or for easy reuse in another site.</para>
     <mediaobject>
       <imageobject role="html">
         <imagedata align="center"  fileref="images/webcontentfiles.png" format="PNG"/>

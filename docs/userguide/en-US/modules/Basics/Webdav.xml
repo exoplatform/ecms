@@ -9,7 +9,7 @@
   <section id="sect-User_Guide-Manage_Site_Content_with_WebDAV-What_is_WebDAV">
     <title>What is WebDAV?</title>
     <para>
-   <emphasis role="bold">WebDAV</emphasis> is an abbreviation of <emphasis role="bold">Web</emphasis>-based <emphasis role="bold">D</emphasis>istributed <emphasis role="bold">A</emphasis>uthoring and <emphasis role="bold">V</emphasis>ersioning. It is used to publish and manage files and directories on a remote server. It also enables  users to perform these functions on a website.
+   <emphasis>WebDAV</emphasis> is an abbreviation of <emphasis role="bold">Web</emphasis>-based <emphasis role="bold">D</emphasis>istributed <emphasis role="bold">A</emphasis>uthoring and <emphasis role="bold">V</emphasis>ersioning. It is used to publish and manage files and directories on a remote server. It also enables  users to perform these functions on a website.
   </para>
     <para>
    WebDAV provides the following features:
@@ -27,7 +27,7 @@
         <term>Site Manipulation</term>
         <listitem>
           <para>
-      WebDAV supports copy and move actions and the creation of <emphasis>collections</emphasis> (file system directories)
+      WebDAV supports the <emphasis>copy</emphasis> and <emphasis>move</emphasis> actions and the creation of <emphasis>collections</emphasis> (file system directories).
      </para>
         </listitem>
       </varlistentry>
@@ -44,7 +44,7 @@
   <section id="sect-User_Guide-Manage_Site_Content_with_WebDAV-Why_use_WebDAV">
     <title>Why use WebDAV?</title>
     <para>
-   With WebDAV, you can manage content efficiently with the following actions:
+   With WebDAV, you can manage content efficiently. You can:
   </para>
     <itemizedlist>
       <listitem>
@@ -54,7 +54,7 @@
       </listitem>
       <listitem>
         <para>
-     Easily, quickly and flexibly manipulate actions on a website without having to access it directly with web-browsers. Files can be accessed from anywhere and are stored as in local directories.
+     Easily and quickly manipulate actions on a website without having to access it directly. Files can be accessed from anywhere and are treated as if they were in local directories.
     </para>
       </listitem>
       <listitem>
@@ -67,13 +67,13 @@
   <section id="sect-User_Guide-Manage_Site_Content_with_WebDAV-How_to_Use_WebDAV_With_eXo_Content">
     <title>How to Use WebDAV With &PRODUCT;</title>
     <para>To use WebDAV with
-   &PRODUCT;,  you first need to have the Internet or Intranet connected. Next, you can follow one of the two following ways:</para>
+   &PRODUCT;,  you first need to have an active network connection. Next, you can follow one of the two following ways:</para>
     <procedure id="proc-User_Guide-How_to_Use_WebDAV_With_eXo_Content-Method_One">
-      <title>Method One:</title>
-      <para>With this method, you will need to connect to the WebDAV server. For example, for Windows XP, do the following steps:</para>
+      <title>Method One: WebDAV server</title>
+      <para>This procedure uses Windows XP as an example. Please modify the following steps to suit your operating environment:</para>
       <step>
         <para>
-     Navigate to the <emphasis role="bold">My Network Places</emphasis> on your local computer. You will see all shared files and folders:
+     Navigate to <menuchoice><guimenu>My Network Places</guimenu></menuchoice> on your local computer. You will see all shared files and folders:
     </para>
         <mediaobject>
           <imageobject role="html">
@@ -86,7 +86,7 @@
       </step>
       <step>
         <para>
-     Click the <emphasis role="bold">Add a network place</emphasis> link on the left to open the <emphasis role="bold">Add Network Place Wizard</emphasis>:
+     Click the <guilabel>Add a network place</guilabel> link on the left to open the <guilabel>Add Network Place Wizard</guilabel>:
     </para>
         <mediaobject>
           <imageobject role="html">
@@ -99,7 +99,7 @@
       </step>
       <step>
         <para>
-     Click <emphasis role="bold">Next</emphasis> to choose a network location:
+     Click <guilabel>Next</guilabel> to choose a network location:
     </para>
         <mediaobject>
           <imageobject role="html">
@@ -112,17 +112,17 @@
       </step>
       <step>
         <para>
-     Select <emphasis role="bold">Choose another network location</emphasis> to create a shortcut.
+     Select <guilabel>Choose another network location</guilabel> to create a shortcut.
     </para>
       </step>
       <step>
         <para>
-     Enter an address into the <emphasis role="bold">Internet or network address</emphasis> field; for  example, the address of the demonstration site <emphasis>Acme</emphasis> is <emphasis role="bold"> http://localhost:8080/portal/rest/private/jcr/repository/collaboration/sites/content/live/acme</emphasis>
+     Enter an address into the <guilabel>Internet or network address</guilabel> field. For example, the address of the demonstration site <emphasis>Acme</emphasis> is <ulink type="http" url="http://localhost:8080/portal/rest/private/jcr/repository/collaboration/sites/content/live/acme"></ulink>.
     </para>
       </step>
       <step>
         <para>
-     Click <emphasis role="bold">Next</emphasis>. After a few moments,  a folder named <emphasis role="bold">acme on localhost</emphasis> appears in the <emphasis role="bold">My Network Places</emphasis> directory.
+     Click <guilabel>Next</guilabel>. After a few moments,  a folder named <filename>acme on localhost</filename> appears in the <menuchoice><guimenu>My Network Places</guimenu></menuchoice> directory.
     </para>
         <mediaobject>
           <imageobject role="html">
@@ -138,13 +138,13 @@
       </step>
       <step>
         <para>
-     Take actions on the content in this folder to administrate the site content remotely.
+     You can take actions on the content in this folder to administrate the site content remotely.
     </para>
       </step>
     </procedure>
     <procedure id="proc-User_Guide-How_to_Use_WebDAV_With_eXo_Content-Method_Two">
-      <title>Method Two:</title>
-      <para>This method can be done through<emphasis role="bold"> Sites Management</emphasis>:</para>
+      <title>Method Two: Sites Management</title>
+      <para>This method can be done using the <emphasis>Sites Management</emphasis> functionality of &PRODUCT;:</para>
       <step>
         <para>
      Navigate to <ulink url="http://localhost:8080/portal" type="http"/> in your web browser.
@@ -152,12 +152,15 @@
       </step>
       <step>
         <para>
-     Click <emphasis role="bold">Group &gt; Content Explorer</emphasis> in the administration bar.
+     Click <menuchoice>
+        <guimenu>Group</guimenu>
+        <guimenuitem>Content Explorer</guimenuitem>
+     </menuchoice> in the administration bar.
     </para>
       </step>
       <step>
         <para>
-     Click the <emphasis role="bold">Drives</emphasis> button<emphasis role="bold"> &gt;</emphasis> select <emphasis role="bold">Sites Management</emphasis>.
+     Click the <guilabel>Drives</guilabel> button then select <guilabel>Sites Management</guilabel>.
     </para>
         <mediaobject>
           <imageobject role="html">
@@ -181,7 +184,7 @@
       </step>
       <step>
         <para>
-     Right-click the site you want to view with WebDAV and select the <emphasis role="bold">Download and Allow Edition</emphasis> item in the menu.
+     Right-click the site you want to view with WebDAV and select the <guilabel>Download and Allow Edition</guilabel> item in the menu.
     </para>
         <mediaobject>
           <imageobject role="html">
@@ -208,24 +211,24 @@
       </step>
     </procedure>
   </section>
+
   <section id="sect-User_Guide-Manage_Site_Content_with_WebDAV-Actions">
     <title>Actions</title>
     <para>
-   You see all <emphasis>default folders</emphasis> of a site when accessing it via WebDAV. Manipulating content through WebDAV is the same as working on it in local folders.
+   You see all the default folders of a site when accessing it via WebDAV. Manipulating their content through WebDAV is the same as working on it in local folders.
   </para>
     <para>
-   This means you can copy/paste files, list folders, rename, and more in system directories.
+   This allows you to copy or paste files, list folders, rename, and more in system directories.
   </para>
     <section id="sect-User_Guide-Actions-Add_new_content_to_a_specific_site">
       <title>Add new content to a specific site</title>
       <para>
-    This function enables you to copy web content (such as an <emphasis role="bold">.html</emphasis> file) from your local computer to a <emphasis>web content</emphasis> folder of a site.
+    This function enables you to copy web content (such as <filename>.html</filename> files) from your local computer to a web content folder of a site.
    </para>
       <procedure>
-        <title/>
         <step>
           <para>
-      Access a site via WebDAV (refer to <xref linkend="sect-User_Guide-Manage_Site_Content_with_WebDAV-How_to_Use_WebDAV_With_eXo_Content"/>), then go to a <emphasis role="bold">web content</emphasis> folder of the site.
+      Access a site via WebDAV (refer to <xref linkend="sect-User_Guide-Manage_Site_Content_with_WebDAV-How_to_Use_WebDAV_With_eXo_Content"/>), then go to a web content folder within the site.
      </para>
         </step>
         <step>
@@ -238,7 +241,7 @@
         </step>
       </procedure>
       <para>
-    After a new content is added, it can be viewed as a folder in WebDAV or as a page content using a web browser.
+    After new content is added, it can be viewed as a folder in WebDAV or as page content using a web browser.
    </para>
     </section>
     <section id="sect-User_Guide-Actions-Delete_a_web_content">
@@ -255,7 +258,7 @@
         </step>
         <step>
           <para>
-      Right-click the content files or directories (hold the <emphasis>Ctrl</emphasis> key to select multiple files at once) and select <emphasis role="bold">Delete</emphasis> from the context menu.
+      Right-click the content files or directories (hold the <keycombo><keycap>Ctrl</keycap></keycombo> key to select multiple files at once) and select <guilabel>Delete</guilabel> from the context menu.
      </para>
           <mediaobject>
             <imageobject role="html">

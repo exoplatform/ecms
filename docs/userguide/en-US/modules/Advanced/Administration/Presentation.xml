@@ -6,12 +6,13 @@
 <section id="sect-User_Guide-Content_Presentation_Manager">
 <!--    This document was created with Syntext Serna Free.    -->
   <title>Content Presentation Manager</title>
-  <para>
- </para>
   <section id="sect-User_Guide-Content_Presentation_Manager-Manage_a_Template">
     <title>Manage a Template</title>
     <para>
-   When creating a node in &PRODUCT;, you must set its properties. Thus, each node needs to have a form to enter data for their properties (called the dialog template), and display the existing values (called the view template). The template management allows users to view, delete and modify the predefined templates or to add a new template.
+   When creating a node in &PRODUCT;, you must set its properties. Therefore, each node needs to have a form to enter data for their properties (called the <systemitem>dialog template</systemitem>), and display the existing values (called the <systemitem>view template</systemitem>).
+   </para>
+   <para>
+      The <emphasis>Template Management</emphasis> system allows users to view, delete or modify the predefined templates or to add a new template.
   </para>
       <mediaobject>
        <imageobject role="html">
@@ -25,21 +26,23 @@
       <title>Add a New Template</title>
       <step>
         <para>
-     Click <menuchoice>
-            <guimenu>Administration</guimenu>
-            <guimenuitem>Content Presentation</guimenuitem>
+     Go to <menuchoice>
+        <guimenu>Group</guimenu>
+        <guimenuitem>Administration</guimenuitem>
+     </menuchoice> then click <menuchoice>
+            <guimenu>Content Presentation</guimenu>
             <guimenuitem>Manage Templates</guimenuitem>
-          </menuchoice>
+          </menuchoice>.
     </para>
       </step>
       <step id="step-User_Guide-Add_a_New_Template-Open_a_new_template_form">
         <para>
-     Click the <guibutton>Add</guibutton> button in the Manage Templates form to open the Template form.
+     Click the <guibutton>Add</guibutton> button in the <guilabel>Manage Templates</guilabel> form to open the <guilabel>Template</guilabel> form.
     </para>
       </step>
       <step id="step-User_Guide-Add_a_New_Template-Select_the_template_type">
         <para>
-     In the <guilabel>Name</guilabel> drop-down box, select the template type you require.
+     Select the template type you require from the <guilabel>Name</guilabel> drop-down menu.
     </para>
       </step>
       <step id="step-User_Guide-Add_a_New_Template-Label_the_template">
@@ -54,12 +57,12 @@
       </step>
       <step id="step-User_Guide-Add_a_New_Template-Open_Permissions_dialog.">
         <para>
-     Click the icon next to the <emphasis role="bold">Permissions</emphasis> field to open the <emphasis role="bold">Select Permission</emphasis> dialog.
+     Click the icon next to the <guilabel>Permissions</guilabel> field to open the <guilabel>Select Permission</guilabel> dialog.
     </para>
       </step>
       <step id="step-User_Guide-Add_a_New_Template-Assign_memberships_to_the_group">
         <para>
-     Select the group from the left panel and the membership from the right panel. Or you can set permission for everyone by clicking the  icon next to <emphasis role="bold">Any Permission.</emphasis>
+     Select a group from the left panel and the membership from the right panel. Alternatively you can set permission for everyone by clicking the  icon next to <guilabel>Any Permission</guilabel>
     </para>
         <mediaobject>
           <imageobject role="html">
@@ -111,21 +114,30 @@
       <title>Edit a Template</title>
       <step id="step-User_Guide-Edit_a_Template-Go_to_the_Manage_Templates_form">
         <para>
-     Click <menuchoice>
-            <guimenu>Administration</guimenu>
-            <guimenuitem>Content Presentation</guimenuitem>
+     Go to <menuchoice>
+        <guimenu>Group</guimenu>
+        <guimenuitem>Administration</guimenuitem>
+     </menuchoice> then click on <menuchoice>
+            <guimenu>Content Presentation</guimenu>
             <guimenuitem>Manage Templates</guimenuitem>
-          </menuchoice>
+          </menuchoice>.
     </para>
       </step>
       <step id="step-User_Guide-Edit_a_Template-Open_the_View_and_Edit_Template_form">
         <para>
-     Click the <guiicon>Pencil</guiicon> icon in the Action column corresponding to the template you want to edit.
+     Click the <inlinemediaobject>
+              <imageobject>
+                <imagedata fileref="images/editicon4.png" format="PNG" width="6mm"/>
+              </imageobject>
+              <textobject>
+                 <phrase>pencil</phrase>
+              </textobject>
+            </inlinemediaobject> icon in the Action column corresponding to the template you want to edit.
     </para>
       </step>
       <step id="step-User_Guide-Edit_a_Template-Edit_the_Template_tab">
         <para>
-     In the <guilabel>Template</guilabel> tab, you can edit the Label of the Template.
+     In the <guilabel>Template</guilabel> tab, you can edit the <guilabel>Label</guilabel> of the <guilabel>Template</guilabel>.
     </para>
       </step>
       <step performance="optional" id="step-User_Guide-Edit_a_Template-Add_a_dialog_to_the_Dialog_tab">
@@ -135,17 +147,17 @@
         <substeps>
           <step>
             <para>
-       Input content for this dialog in the <guilabel>Content</guilabel> field.
+       Enter content for this dialog in the <guilabel>Content</guilabel> field.
       </para>
           </step>
           <step>
             <para>
-       Input name for this dialog. (*Required).
+       Enter a name for this dialog. This value is required (*).
       </para>
           </step>
           <step>
             <para>
-       Select permissions for a group that can use this dialog. (*Required).
+       Select permissions for a group that can use this dialog. This value is required (*).
       </para>
           </step>
         </substeps>
@@ -157,7 +169,14 @@
         <substeps>
           <step>
             <para>
-       Click the <guiicon>pencil</guiicon> icon in the dialog row you want to edit.
+       Click the <inlinemediaobject>
+              <imageobject>
+                <imagedata fileref="images/editicon4.png" format="PNG" width="6mm"/>
+              </imageobject>
+              <textobject>
+                 <phrase>pencil</phrase>
+              </textobject>
+            </inlinemediaobject> icon in the dialog row you want to edit.
       </para>
           </step>
           <step>
@@ -179,7 +198,14 @@
         <substeps>
           <step>
             <para>
-       Click the <guiicon>trash can</guiicon> icon in the dialog row you want to edit.
+       Click the <inlinemediaobject>
+            <imageobject>
+              <imagedata fileref="images/trashicon.png" format="PNG" width="5mm"/>
+            </imageobject>
+            <textobject>
+               <phrase>trash can</phrase>
+            </textobject>
+          </inlinemediaobject> icon in the dialog row you want to edit.
       </para>
           </step>
           <step>
@@ -190,7 +216,7 @@
         </substeps>
         <note>
           <para>
-      You can not delete the default dialog. You must create a new one before you can delete the current default dialog.
+      You cannot delete the default dialog. You must create a new one before you can delete the current default dialog.
      </para>
         </note>
       </step>
@@ -206,12 +232,12 @@
           </step>
           <step>
             <para>
-       Input name for this view. (*Required).
+       Enter a name for this view. This field is required (*).
       </para>
           </step>
           <step>
             <para>
-       Select permissions for a group that can use this view. (*Required).
+       Select permissions for a group that can use this view. This field is required (*).
       </para>
           </step>
         </substeps>
@@ -223,7 +249,14 @@
         <substeps>
           <step>
             <para>
-       Click the <guiicon>pencil</guiicon> icon in the view row you want to edit.
+       Click the <inlinemediaobject>
+              <imageobject>
+                <imagedata fileref="images/editicon4.png" format="PNG" width="6mm"/>
+              </imageobject>
+              <textobject>
+                 <phrase>pencil</phrase>
+              </textobject>
+            </inlinemediaobject> icon in the view row you want to edit.
       </para>
           </step>
           <step>
@@ -257,7 +290,14 @@
         <substeps>
           <step>
             <para>
-       Click the <guiicon>trash can</guiicon> icon in the dialog row you want to edit.
+       Click the <inlinemediaobject>
+            <imageobject>
+              <imagedata fileref="images/trashicon.png" format="PNG" width="5mm"/>
+            </imageobject>
+            <textobject>
+               <phrase>trash can</phrase>
+            </textobject>
+          </inlinemediaobject> icon in the dialog row you want to edit.
       </para>
           </step>
           <step>
@@ -277,8 +317,7 @@
       <title>Delete a Template</title>
       <step>
         <para>
-     Click the 
-     <inlinemediaobject>
+     Click the <inlinemediaobject>
             <imageobject>
               <imagedata fileref="images/trashicon.png" format="PNG" width="5mm"/>
             </imageobject>
@@ -290,7 +329,7 @@
       </step>
       <step>
         <para>
-     Click <emphasis role="bold">OK</emphasis> on the confirmation message to delete the template or <emphasis role="bold">Cancel</emphasis> to abort the operation.
+     Click <guilabel>OK</guilabel> on the confirmation message to delete the template or <guilabel>Cancel</guilabel> to abort the operation.
     </para>
       </step>
     </procedure>
@@ -298,25 +337,37 @@
   <section id="sect-User_Guide-Content_Presentation_Manager-Metadata_Management">
     <title>Metadata Management</title>
     <para>
-   Metadata in its simplest form is &quot;data about data&quot;. Generally, it may be understood as information that describes, or supplements the central data. The metadata management allows managing nodes in the metadata format in the &PRODUCT; system. The metadata may be considered as information used to describe the data. When data are provided to the end users, the metadata allow users to understand about information in more details. All metadata nodes can combine with other nodes to create a new node (add mix).
+   Metadata in its simplest form is &quot;data about data&quot;. Generally, it may be understood as information that describes, or supplements the central data.
+   </para>
+   <para>
+      Metadata management allows managing nodes in the metadata format in the &PRODUCT; system. The metadata may be considered as information used to describe the data. When data are provided to the end users, the metadata allow users to understand about information in more details. All metadata nodes can combine with other nodes to create a new node (add mix).
   </para>
     <procedure id="proc-User_Guide-Metadata_Management-View_Metadata">
       <title>View Metadata</title>
       <step id="step-User_Guide-View_Metadata-Go_to_the_Manage_Metadata_form">
         <para>
-     Click <menuchoice>
-            <guimenu>Administration</guimenu>
-            <guimenuitem>Content Presentation</guimenuitem>
+     Go to <menuchoice>
+        <guimenu>Group</guimenu>
+        <guimenuitem>Administration</guimenuitem>
+     </menuchoice> then click <menuchoice>
+            <guimenu>Content Presentation</guimenu>
             <guimenuitem>Manage Metadata</guimenuitem>
-          </menuchoice>
+          </menuchoice>.
     </para>
       </step>
       <step id="step-User_Guide-View_Metadata-Open_the_Metadata_Information_form">
         <para>
-     Click the magnifying glass icon corresponding to the metadata you want to view.
+     Click the <inlinemediaobject>
+            <imageobject>
+              <imagedata fileref="images/magnifyingglassicon.png" format="PNG" width="7mm"/>
+            </imageobject>
+            <textobject>
+               <phrase>magnifying glass</phrase>
+            </textobject>
+          </inlinemediaobject> icon corresponding to the metadata you want to view.
     </para>
         <para>
-     The Metadata Information Form opens.
+     The <guilabel>Metadata Information</guilabel> Form opens.
     </para>
         <mediaobject>
             <imageobject role="html">
@@ -332,7 +383,14 @@
       <title>Edit Metadata</title>
       <step id="step-User_Guide-Edit_Metadata-Open_the_Edit_Metadatas_Template_form">
         <para>
-     Click the <guiicon>Pencil</guiicon> icon in the metadata row you want to edit.
+     Click the <inlinemediaobject>
+              <imageobject>
+                <imagedata fileref="images/editicon4.png" format="PNG" width="6mm"/>
+              </imageobject>
+              <textobject>
+                 <phrase>pencil</phrase>
+              </textobject>
+            </inlinemediaobject> icon in the metadata row you want to edit.
     </para>
         <para>
      The <guilabel>Edit Metadata&apos;s Template</guilabel> form opens.
@@ -343,6 +401,7 @@
      Change the required properties of the metadata.
     </para>
         <note>
+           <title>Metadata Name</title>
           <para>
       You cannot edit the metadata name.
      </para>
@@ -350,7 +409,7 @@
       </step>
       <step id="step-User_Guide-Edit_Metadata-Save_changes">
         <para>
-     Click <emphasis role="bold">Apply </emphasis>to save all metadata changes.
+     Click <guilabel>Apply</guilabel> to save all metadata changes.
     </para>
       </step>
     </procedure>
@@ -358,7 +417,14 @@
       <title>Delete Metadata</title>
       <step id="step-User_Guide-Delete_Metadata-Click_the_Trash_Can_button">
         <para>
-     Click the <guiicon>trash can</guiicon> icon corresponding to the metadata you want to delete.
+     Click the <inlinemediaobject>
+            <imageobject>
+              <imagedata fileref="images/trashicon.png" format="PNG" width="5mm"/>
+            </imageobject>
+            <textobject>
+               <phrase>trash can</phrase>
+            </textobject>
+          </inlinemediaobject> icon corresponding to the metadata you want to delete.
     </para>
         <para>
      A confirmation message appears.
@@ -374,14 +440,16 @@
   <section id="sect-User_Guide-Content_Presentation_Manager-Manage_Views">
     <title>Manage Views</title>
     <para>
-   The function <emphasis role="bold"><function>Manage View</function></emphasis> is used to control view ways of a user. It has three tabs: <guilabel>View</guilabel>, <guilabel>ECM Templates</guilabel> and <guilabel>BC Templates</guilabel> tabs.
+   The <emphasis>Manage Views</emphasis> function is used to control view ways of a user. It has three tabs: <guilabel>View</guilabel>, <guilabel>ECM Templates</guilabel> and <guilabel>BC Templates</guilabel> tabs.
   </para>
     <para>
-   To open the <emphasis role="bold">Manage View</emphasis> function, click <menuchoice>
-        <guimenu>Administration</guimenu>
-        <guimenuitem>Content Presentation</guimenuitem>
+   To open the <emphasis role="bold">Manage View</emphasis> function, go to <menuchoice>
+      <guimenu>Group</guimenu>
+      <guimenuitem>Administration</guimenuitem>
+   </menuchoice> then click on <menuchoice>
+        <guimenu>Content Presentation</guimenu>
         <guimenuitem>Manage View</guimenuitem>
-      </menuchoice>. The <emphasis role="bold">Manage View </emphasis>form displays.
+      </menuchoice>. The <guilabel>Manage View</guilabel> form opens.
   </para>
     <mediaobject>
          <imageobject role="html">
@@ -394,7 +462,7 @@
     <formalpara id="form-User_Guide-Manage_Views-Views_Tab">
       <title>Views Tab</title>
       <para>
-    The procedures that describe how to Add, Edit, Delete, and Preview views.
+    On the <guilabel>Views</guilabel> tab you can add, edit, delete or preview views.
    </para>
     </formalpara>
     <procedure id="proc-User_Guide-Manage_Views-Add_View">
@@ -404,12 +472,12 @@
      Click the <guibutton>Add View</guibutton> button located at the bottom of the <guilabel>Manage View</guilabel> form.
     </para>
         <para>
-     The Add View form opens.
+     The <guilabel>Add View</guilabel> form opens.
     </para>
       </step>
       <step id="step-User_Guide-Add_View-Define_View_Name">
         <para>
-     In the Name field, specify the name of the view you are creating. The name must be unique, and must only contain standard alphanumeric characters.
+     Specify the name of the view you are creating in the <guilabel>Name</guilabel> field. The name must be unique, and must only contain standard alphanumeric characters.
     </para>
       </step>
       <step id="step-User_Guide-Add_View-Assign_memberships_to_the_group">
@@ -440,7 +508,14 @@
       <title>Edit a View</title>
       <step>
         <para>
-     Click the <guiicon>Pencil</guiicon> icon in the view row you want to edit.
+     Click the <inlinemediaobject>
+              <imageobject>
+                <imagedata fileref="images/editicon4.png" format="PNG" width="6mm"/>
+              </imageobject>
+              <textobject>
+                 <phrase>pencil</phrase>
+              </textobject>
+            </inlinemediaobject> icon in the view row you want to edit.
     </para>
       </step>
       <step>
@@ -453,7 +528,7 @@
       You cannot change the view name.
      </para>
           <para>
-      If you click the<emphasis role="bold"> Enable Version</emphasis> checkbox, this view automatically increments one version after you click <guibutton>Save</guibutton>. It is displayed at <guilabel>version</guilabel> column in the <guilabel>View</guilabel> tab.
+      If you click the <guilabel>Enable Version</guilabel> checkbox, this view automatically increments one version after you click <guibutton>Save</guibutton>. It is displayed at <guilabel>version</guilabel> column in the <guilabel>View</guilabel> tab.
      </para>
           <para>
       If the dialog has at least two versions, in the <guilabel>View</guilabel> tab, it displays the <guibutton>Restore</guibutton> button. You can use <guibutton>Restore</guibutton> to roll back to the previous View.
@@ -492,7 +567,14 @@
       <title>Delete Views</title>
       <step id="step-User_Guide-Delete_Views-Click_the_Trash_Can_button">
         <para>
-     Click the <guiicon>trash can</guiicon> icon corresponding to the view you want to delete.
+     Click the <inlinemediaobject>
+            <imageobject>
+              <imagedata fileref="images/trashicon.png" format="PNG" width="5mm"/>
+            </imageobject>
+            <textobject>
+               <phrase>trash can</phrase>
+            </textobject>
+          </inlinemediaobject> icon corresponding to the view you want to delete.
     </para>
         <para>
      A confirmation message is displayed.
@@ -503,8 +585,9 @@
      Click <guibutton>OK</guibutton> to delete the view.
     </para>
         <note>
+           <title>Deleting the Current View</title>
           <para>
-      You can not delete a view that is in use.
+      You cannot delete a view that is currently in use.
      </para>
         </note>
       </step>
@@ -513,10 +596,17 @@
       <title>Preview a View</title>
       <step>
         <para>
-     Click the Magnifying Glass icon in the Action column of the view you want to preview.
+     Click the <inlinemediaobject>
+            <imageobject>
+              <imagedata fileref="images/magnifyingglassicon.png" format="PNG" width="7mm"/>
+            </imageobject>
+            <textobject>
+               <phrase>magnifying glass</phrase>
+            </textobject>
+          </inlinemediaobject> icon in the <guilabel>Action</guilabel> column of the view you want to preview.
     </para>
         <para>
-     The View form opens.
+     The <guilabel>View Form</guilabel> opens:
     </para>
         <mediaobject>
            <imageobject role="html">
@@ -529,7 +619,7 @@
       </step>
       <step>
         <para>
-     Click Close to exit the View Form.
+     Click <guilabel>Close</guilabel> to exit the <guilabel>View Form</guilabel>.
     </para>
       </step>
     </procedure>
@@ -547,12 +637,12 @@
         <title>Add a new ECM Template</title>
         <step>
           <para>
-      Select the ECM Templates tab.
+      Select the <guilabel>ECM Templates</guilabel> tab.
      </para>
         </step>
         <step>
           <para>
-      Click the <guibutton>Add</guibutton> button to open the Add ECM Template form.
+      Click the <guibutton>Add</guibutton> button to open the <guilabel>Add ECM Template</guilabel> form.
      </para>
          <mediaobject>
             <imageobject role="html">
@@ -565,17 +655,17 @@
         </step>
         <step>
           <para>
-      Input the content of the template in the <emphasis role="bold">Content</emphasis> field.
+      Enter the content of the template in the <guilabel>Content</guilabel> field.
      </para>
         </step>
         <step>
           <para>
-      Input a name for the template in the <emphasis role="bold">Name</emphasis> field.
+      Enter a name for the template in the <guilabel>Name</guilabel> field.
      </para>
         </step>
         <step>
           <para>
-      Select a type for the template in the <emphasis role="bold">Template Type</emphasis> field.
+      Select a type for the template in the <guilabel>Template Type</guilabel> field.
      </para>
         </step>
         <step>
@@ -588,7 +678,14 @@
         <title>Edit a Template</title>
         <step>
           <para>
-      Click the <guibutton>Pencil</guibutton> icon next to the template you want to edit.
+      Click the <inlinemediaobject>
+              <imageobject>
+                <imagedata fileref="images/editicon4.png" format="PNG" width="6mm"/>
+              </imageobject>
+              <textobject>
+                 <phrase>pencil</phrase>
+              </textobject>
+            </inlinemediaobject> icon next to the template you want to edit.
      </para>
          <mediaobject>
                <imageobject role="html">
@@ -609,14 +706,15 @@
       Click <guibutton>Save</guibutton> to accept all changes.
      </para>
           <note>
+             <title>Template Names</title>
             <para>
        You cannot edit the template name.
       </para>
             <para>
-       If you tick the <guilabel>Enable Version</guilabel> checkbox, this template will automatically increase to 1 version after you have clicked <guilabel>Save</guilabel>. It is displayed at the <guilabel>Base version</guilabel> column in <guilabel>ECM template</guilabel> tab.
+       If you tick the <guilabel>Enable Version</guilabel> checkbox, this template will automatically increase to one version after you have clicked <guilabel>Save</guilabel>. It is displayed at the <guilabel>Base version</guilabel> column in <guilabel>ECM template</guilabel> tab.
       </para>
             <para>
-       If the template has at least two versions, in the <guilabel>Edit ECM Template</guilabel> form, it displays the Restore button that allows restoring the template version.
+       If the template has at least two versions, in the <guilabel>Edit ECM Template</guilabel> form, it displays the <guilabel>Restore</guilabel> button that allows restoring the template version.
       </para>
           </note>
         </step>
@@ -625,7 +723,14 @@
         <title>Delete a Template</title>
         <step>
           <para>
-      Click the <guibutton>Trash</guibutton> icon corresponding with the template you want to edit. A confirmation message will appear.
+      Click the <inlinemediaobject>
+            <imageobject>
+              <imagedata fileref="images/trashicon.png" format="PNG" width="5mm"/>
+            </imageobject>
+            <textobject>
+               <phrase>trash can</phrase>
+            </textobject>
+          </inlinemediaobject> icon corresponding with the template you want to edit. A confirmation message will appear.
      </para>
         </step>
         <step>
@@ -662,17 +767,17 @@
         </step>
         <step>
           <para>
-      Input the content for the template in the <emphasis role="bold">Content</emphasis> text box. (*Required).
+      Enter the content for the template in the <guilabel>Content</guilabel> text box. This field is required (*).
      </para>
         </step>
         <step>
           <para>
-      Input the name for the template in the <emphasis role="bold">Name</emphasis> field. (*Required).
+      Enter the name for the template in the <guilabel>Name</guilabel> field. This field is required (*).
      </para>
         </step>
         <step>
           <para>
-      Select the template type from the drop-down box in the <emphasis role="bold">Template Type</emphasis> form.
+      Select the template type from the drop-down box in the <guilabel>Template Type</guilabel> form.
      </para>
           <mediaobject>
              <imageobject role="html">
@@ -701,7 +806,14 @@
         <title>Edit a BC Template</title>
         <step>
           <para>
-      Click the <guibutton>pencil</guibutton> icon on a template that you want to edit.
+      Click the <inlinemediaobject>
+              <imageobject>
+                <imagedata fileref="images/editicon4.png" format="PNG" width="6mm"/>
+              </imageobject>
+              <textobject>
+                 <phrase>pencil</phrase>
+              </textobject>
+            </inlinemediaobject> icon on a template that you want to edit.
      </para>
           <mediaobject>
              <imageobject role="html">
@@ -721,6 +833,7 @@
           <para>
       Click <guibutton>Save</guibutton> to accept all changes.</para>
           <note>
+             <title>Uneditable Fields</title>
             <para>
        You cannot edit the template name.
       </para>
@@ -728,10 +841,10 @@
        You cannot edit the template type.
       </para>
             <para>
-       If you tick the <guilabel>Enable Version</guilabel> checkbox, this template will automatically increase by 1 version after you have clicked <guilabel>Save</guilabel>. It is displayed at the <guilabel>Base Version</guilabel> column in <guilabel>ECM Template</guilabel> tab.
+       If you tick the <guilabel>Enable Version</guilabel> checkbox, this template will automatically increase by one version after you have clicked <guilabel>Save</guilabel>. It is displayed at the <guilabel>Base Version</guilabel> column in <guilabel>ECM Template</guilabel> tab.
       </para>
             <para>
-       If the template has at least 2 versions, in the <guilabel>Edit ECM Template</guilabel> form, it displays the <guilabel>Restore</guilabel> button that allows restoring the template version.
+       If the template has at least two versions, in the <guilabel>Edit ECM Template</guilabel> form, it displays the <guilabel>Restore</guilabel> button that allows restoring the template version.
       </para>
           </note>
         </step>
@@ -740,7 +853,14 @@
         <title>Delete a Template</title>
         <step>
           <para>
-      Click the <guibutton>trash can</guibutton> icon corresponding with the template you want to edit. A confirmation message will appear.
+      Click the <inlinemediaobject>
+            <imageobject>
+              <imagedata fileref="images/trashicon.png" format="PNG" width="5mm"/>
+            </imageobject>
+            <textobject>
+               <phrase>trash can</phrase>
+            </textobject>
+          </inlinemediaobject> icon corresponding with the template you want to edit. A confirmation message will appear.
      </para>
         </step>
         <step>
@@ -758,8 +878,10 @@
   </para>
     <para>
    Go to <menuchoice>
-      <guimenu>Administration</guimenu>
-      <guimenuitem>Content Presentation</guimenuitem>
+      <guimenu>Group</guimenu>
+      <guimenuitem>Administration</guimenuitem>
+   </menuchoice> the go to <menuchoice>
+      <guimenu>Content Presentation</guimenu>
       <guimenuitem>Manage Drives</guimenuitem>
    </menuchoice>.
   </para>
@@ -790,12 +912,12 @@
         </step>
         <step>
           <para>
-      Input a name for the new drive in the <guibutton>Name</guibutton> field. (*Required).
+      Enter a name for the new drive in the <guibutton>Name</guibutton> field. This field is required (*).
      </para>
         </step>
         <step>
           <para>
-      Select a workspace for the drive. There are 4 available workspaces: system, collaboration, backup, and dms-system.
+      Select a workspace for the drive. There are four available workspaces: <systemitem>system</systemitem>, <systemitem>collaboration</systemitem>, <systemitem>backup</systemitem>, and <systemitem>dms-system</systemitem>.
      </para>
           <mediaobject>
             <imageobject role="html">
@@ -828,8 +950,7 @@
         </step>
         <step>
           <para>
-      Browse for an icon for the workspace by clicking the 
-      <inlinemediaobject>
+      Browse for an icon for the workspace by clicking the <inlinemediaobject>
               <imageobject>
                 <imagedata fileref="images/addplusicon.png" format="PNG" width="8mm"/>
               </imageobject>
@@ -841,8 +962,7 @@
         </step>
         <step>
           <para>
-      Select an icon by clicking the 
-      <inlinemediaobject>
+      Select an icon by clicking the <inlinemediaobject>
               <imageobject>
                 <imagedata fileref="images/greentick.png" format="PNG" width="6mm"/>
               </imageobject>
@@ -863,7 +983,7 @@
         </step>
         <step>
           <para>
-      Select permissions for groups that have access rights to this drive by clicking the  <inlinemediaobject>
+      Select permissions for groups that have access rights to this drive by clicking the <inlinemediaobject>
               <imageobject>
                 <imagedata fileref="images/pluspermissionbutton.png" format="PNG" width="8mm"/>
               </imageobject>
@@ -950,7 +1070,7 @@
         </step>
         <step>
           <para>
-      Click <emphasis role="bold">Save</emphasis> to commit the details and create the new drive, <emphasis role="bold">Refresh</emphasis> to clear the form or <emphasis role="bold">Cancel</emphasis> to abort the operation.
+      Click <guilabel>Save</guilabel> to commit the details and create the new drive, <guilabel>Refresh</guilabel> to clear the form or <guilabel>Cancel</guilabel> to abort the operation.
      </para>
         </step>
       </procedure>
@@ -963,16 +1083,14 @@
         <title>Edit a drive</title>
         <step>
           <para>
-      Click the 
-      <inlinemediaobject>
+      Click the <inlinemediaobject>
               <imageobject>
                 <imagedata fileref="images/editicon4.png" format="PNG" width="6mm"/>
               </imageobject>
               <textobject>
                  <phrase>pencil</phrase>
               </textobject>
-            </inlinemediaobject>
-       icon that corresponds to the drive you want to edit. The <emphasis role="bold">Edit drive</emphasis> form will appear:
+            </inlinemediaobject> icon that corresponds to the drive you want to edit. The <guilabel>Edit drive</guilabel> form will appear:
      </para>
           <mediaobject>
             <imageobject role="html">
@@ -990,39 +1108,38 @@
         </step>
         <step>
           <para>
-      Click <emphasis role="bold">Save</emphasis> to commit the changes.
+      Click <guilabel>Save</guilabel> to commit the changes.
      </para>
         </step>
       </procedure>
       <note>
         <title>Drive Name</title>
         <para>
-     The drive name can not be edited in this form.
+     The drive name cannot be edited in this form.
     </para>
       </note>
     </section>
     <section>
       <title>Delete a drive</title>
-      <para>To delete a drive, do the following:</para>
+      <para>
+         To delete a drive, do the following:
+      </para>
       <procedure id="proc-User_Guide-Add_a_new_drive-Delete_a_drive">
-        <title>Delete a drive</title>
         <step>
           <para>
-      Click the 
-      <inlinemediaobject>
+      Click the <inlinemediaobject>
               <imageobject>
                 <imagedata fileref="images/trashicon.png" format="PNG" width="5mm"/>
               </imageobject>
               <textobject>
                  <phrase>trash can</phrase>
               </textobject>
-            </inlinemediaobject>
-       that corresponds to the drive you want to delete.
+            </inlinemediaobject> that corresponds to the drive you want to delete.
      </para>
         </step>
         <step>
           <para>
-      Click <emphasis role="bold">OK</emphasis> on the confirmation message to delete the drive or click <emphasis role="bold">Cancel</emphasis> to abort the operation.
+      Click <guilabel>OK</guilabel> on the confirmation message to delete the drive or click <guilabel>Cancel</guilabel> to abort the operation.
          </para>
         </step>
       </procedure>

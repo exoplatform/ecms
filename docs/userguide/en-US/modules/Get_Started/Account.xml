@@ -12,10 +12,9 @@
    To register a new account on the portal, do as follows:
   </para>
     <procedure>
-      <title/>
       <step>
         <para>
-     Go to the portal by inputting the URL in the address bar (e.g: <ulink url="http://localhost:8080/portal/public/classic" type="http"/>).
+     Go to the portal by entering the URL in the address bar (e.g: <ulink url="http://localhost:8080/portal/public/classic" type="http"/>).
     </para>
         <para>
      The anonymous homepage will appear:
@@ -31,7 +30,7 @@
       </step>
       <step>
         <para>
-     Click the <emphasis role="bold">Register</emphasis> link on the top of the site, the Register form will be displayed:
+     Click the <guilabel>Register</guilabel> link on the top of the site. The <guilabel>Register</guilabel> form will be displayed:
     </para>
         <mediaobject>
           <imageobject role="html">
@@ -40,12 +39,10 @@
           <imageobject role="fo">
             <imagedata   align="center" fileref="images/register.png" format="PNG" width="150mm"/>
           </imageobject>
+          <caption>An asterix (*) indicates a required field.</caption>
         </mediaobject>
         <para>
-     (*) required
-    </para>
-        <para>
-     The <emphasis role="bold">Account Setting</emphasis> information includes:
+     The <guilabel>Account Setting</guilabel> information includes:
     </para>
         <table>
           <title/>
@@ -58,27 +55,27 @@
             </thead>
             <tbody>
               <row>
-                <entry> User Name </entry>
+                <entry> <guilabel>User Name</guilabel> </entry>
                 <entry> The user name that is used to login into the system. It must be unique. The user name must be started with a character. </entry>
               </row>
               <row>
-                <entry> Password </entry>
+                <entry> <guilabel>Password</guilabel> </entry>
                 <entry> The security characters are used to login. It must have at least 6 characters. </entry>
               </row>
               <row>
-                <entry> Confirm Password </entry>
+                <entry> <guilabel>Confirm Password</guilabel> </entry>
                 <entry> The re-typed password above. The password in Password field and this field must be the same. </entry>
               </row>
               <row>
-                <entry> First Name </entry>
+                <entry> <guilabel>First Name</guilabel> </entry>
                 <entry> Your first name </entry>
               </row>
               <row>
-                <entry> Last Name </entry>
+                <entry> <guilabel>Last Name</guilabel> </entry>
                 <entry> Your last name </entry>
               </row>
               <row>
-                <entry> Email Address </entry>
+                <entry> <guilabel>Email Address</guilabel> </entry>
                 <entry> Your email address. It must have a right format: <replaceable>username@abc.com</replaceable></entry>
               </row>
             </tbody>
@@ -87,26 +84,24 @@
       </step>
       <step>
         <para>
-     Input values for the fields in this form.
+     Enter the appropriate values for the fields in this form.
     </para>
       </step>
       <step>
         <para>
-     Click the 
-     <inlinemediaobject>
+     Click the <inlinemediaobject>
             <imageobject>
               <imagedata fileref="images/magnifyingglassicon.png" format="PNG" width="7mm"/>
             </imageobject>
             <textobject>
                <phrase>magnifying glass</phrase>
             </textobject>
-          </inlinemediaobject>
-      icon to search and check if the inputted user name is available or not.
-    </para>
+          </inlinemediaobject> icon to search and check if the chosen user name is available or not.
+         </para>
       </step>
       <step>
         <para>
-     Input values in the fields of<emphasis role="bold"> User Profile </emphasis>tab, including: Profile information, Home information and Business information.
+     Enter values in the fields of <guilabel>User Profile</guilabel> tab, including: <guilabel>Profile information</guilabel>, <guilabel>Home information</guilabel> and <guilabel>Business information</guilabel>.
     </para>
         <mediaobject>
           <imageobject role="html">
@@ -119,51 +114,54 @@
       </step>
       <step>
         <para>
-     Click <emphasis role="bold">Save </emphasis>to register a new account, or <emphasis role="bold">Reset</emphasis> to renew all inputted values. There is an alert message, and you cannot add a new account successfully if at least one of these cases occurs:
+     Click <guilabel>Save</guilabel> to register a new account, or <guilabel>Reset</guilabel> to revert all completed fields.
+     </para>
+     <para>
+        You will see an alert message and be unable to add a new account if any of the following occurs:
     </para>
         <itemizedlist>
           <listitem>
             <para>
-       User name is existing or invalid.
+       The <guilabel>User name</guilabel> already exists or is invalid.
       </para>
           </listitem>
           <listitem>
             <para>
-       Password has less than 6 characters.
+       The <guilabel>Password</guilabel> has less than six (6) or more than thirty 30 characters.
       </para>
           </listitem>
           <listitem>
             <para>
-       Password and Confirm Password are not the same.
+       <guilabel>Password</guilabel> and <guilabel>Confirm Password</guilabel> are not the same.
       </para>
           </listitem>
           <listitem>
             <para>
-       Email Address has invalid format.
+       The <guilabel>Email Address</guilabel> is not a invalid format.
       </para>
           </listitem>
           <listitem>
             <para>
-       Required fields are empty.
+       Any of the required fields are empty.
       </para>
           </listitem>
         </itemizedlist>
       </step>
     </procedure>
     <para>
-   After adding a new account, contact with the administrator to get the confirmation.
+   After adding a new account, contact the administrator to get a confirmation.
   </para>
     <note>
-      <title>Email </title>
+      <title>Email</title>
       <para>
-    You should enter your email address exactly because when you forget username or password, you can recover it by using this email address.
+    Ensure you enter your email address correctly at this stage, as it is used in the recovery process if you forget username or password.
    </para>
     </note>
   </section>
   <section id="sect-User_Guide-Account-Sign_In">
     <title>Sign In</title>
     <para>
-   This function enables you to go into &PRODUCT; in the private mode.
+   This function logs you into &PRODUCT; in the private mode.
   </para>
     <procedure id="proc-User_Guide-Sign_In-Sign_in">
       <title>Sign in</title>
@@ -174,7 +172,7 @@
       </step>
       <step>
         <para>
-     Click the <emphasis role="bold">Login</emphasis> link at the top of the home page. The <emphasis role="bold">Sign in</emphasis> form will appear:
+     Click the <guilabel>Login</guilabel> link at the top of the home page. The <guilabel>Sign in</guilabel> form will appear:
     </para>
         <mediaobject>
           <imageobject role="html">
@@ -187,12 +185,12 @@
       </step>
       <step>
         <para>
-     Input your registered User name and Password.
+     Enter your registered User name and Password.
     </para>
       </step>
       <step>
         <para>
-     Click <emphasis role="bold">Sign in </emphasis>to accept, or <emphasis role="bold">Discard</emphasis> to exit from the <emphasis role="bold">Sign in</emphasis> form.
+     Click <guilabel>Sign in</guilabel> to submit your details or <guilabel>Discard</guilabel> to exit the form.
     </para>
         <table id="tabl-User_Guide-Sign_in-Options">
           <title>Options</title>
@@ -205,38 +203,38 @@
             </thead>
             <tbody>
               <row>
-                <entry> User name </entry>
+                <entry> <guilabel>User name</guilabel> </entry>
                 <entry> To input the registered username. </entry>
               </row>
               <row>
-                <entry> Password </entry>
+                <entry> <guilabel>Password</guilabel> </entry>
                 <entry> To input the password of your username. </entry>
               </row>
               <row>
-                <entry> Forgot your User Name/Password </entry>
+                <entry> <guilabel>Forgot your User Name/Password</guilabel> </entry>
                 <entry> To retrieve the forgotten user name or password when you forget. </entry>
               </row>
               <row>
-                <entry> Sign in </entry>
+                <entry> <guilabel>Sign in</guilabel> </entry>
                 <entry> To sign into the eXo Portal with the inputted user name and password. </entry>
               </row>
               <row>
-                <entry> Discard </entry>
+                <entry> <guilabel>Discard</guilabel> </entry>
                 <entry> To close the Sign In form without any changes. </entry>
               </row>
             </tbody>
           </tgroup>
         </table>
         <para>
-     If the User Name does not exist or the inputted User name/Password is invalid, there will be an alert message that requires users to input right values. The page will be redirected to the private security checking mode.
+     If the User Name does not exist or the submitted User name/Password set is invalid, an alert message will appear that requires users to re-submit the correct values. The page will be redirected to the private security checking mode.
     </para>
         <para>
-     To login again, enter User Name and Password again.
+     To login again, enter your <guilabel>User Name</guilabel> and <guilabel>Password</guilabel> again.
     </para>
       </step>
     </procedure>
     <para>
-   After signing in, you will be redirected to the authenticated homepage like the illustration.
+   After signing in, you will be redirected to the authenticated homepage:
   </para>
    <mediaobject>
       <imageobject role="html">
@@ -250,10 +248,10 @@
   <section id="sect-User_Guide-Account-Sign_Out">
     <title>Sign Out</title>
     <para>
-   The function lets you get back to the anonymous portal. It ends your current portal session.
+   The function ends your authenticated session and redirects you back to the anonymous portal.
   </para>
     <para>
-   To sign out, click the <emphasis role="bold">Logout</emphasis> link on the right access banner:
+   To sign out, click the <guilabel>Logout</guilabel> link on the right access banner:
   </para>
     <mediaobject>
       <imageobject role="html">
@@ -287,10 +285,12 @@
       <title/>
       <step>
         <para>
-     Click the link <emphasis role="bold">Forgot your User Name/Password?</emphasis> in the Sign in form.
+     Click the link <guilabel>Forgot your User Name/Password?</guilabel> in the <guilabel>Sign in</guilabel> form.
     </para>
+    </step>
+    <step>
         <para>
-     This form offers two options:
+     Select one of the two options:
     </para>
         <mediaobject>
           <imageobject role="html">
@@ -321,10 +321,7 @@
       </step>
       <step>
         <para>
-     Select one of these two options in this form. The selected option will be shown:
-    </para>
-        <para>
-     If the <emphasis role="bold">Forgot my password</emphasis> option is selected the form to recover the password appears:
+     If the <guilabel>Forgot my password</guilabel> option is selected the password recovery form appears:
     </para>
         <mediaobject>
           <imageobject role="html">
@@ -335,7 +332,7 @@
           </imageobject>
         </mediaobject>
         <para>
-     If the <emphasis role="bold">Forgot my username</emphasis> option is selected, the form to recover the user name appears:
+     If the <guilabel>Forgot my username</guilabel> option is selected, the username recovery form appears:
     </para>
         <mediaobject>
           <imageobject role="html">
@@ -348,25 +345,25 @@
       </step>
       <step>
         <para>
-     Enter your username or email in the corresponding form.
+     Enter either your username or email address, as appropriate, in the corresponding form.
     </para>
       </step>
       <step>
         <para>
-     Click <emphasis role="bold">Send</emphasis> to send the inputted values.
+     Click <guilabel>Send</guilabel> to submit the recovery request.
     </para>
         <para>
-     Once information has been sent, you will receive an email with your User name/ Password in your email address that you registered.
+     Once the request has been sent, you will receive an email with the requested information, (either your <systemitem>User name</systemitem> or <systemitem>Password</systemitem> at the email address that you registered.
     </para>
         <itemizedlist>
           <listitem>
             <para>
-       If you forget User Name: when a username is retrieved, your old username is restored and can be reused and a new password is also sent to your email with the old username.
+       If you forget you username, an old username is restored and can be reused. A new password will be sent to your email with the old username.
       </para>
           </listitem>
           <listitem>
             <para>
-       If you forget old password: a new password will be set (as temporary, then you will be directed to change the password for the next time you sign in).
+       If you forget your password: a new, temporary password will be set and sent to you. You will be directed to change the password the next time you sign in.
       </para>
           </listitem>
         </itemizedlist>
@@ -382,7 +379,7 @@
       <title/>
       <step>
         <para>
-     The first thing to do is to directly click your own account name.
+     To begin, click your username name in the top toolbar.
     </para>
         <mediaobject>
           <imageobject role="html">
@@ -393,7 +390,7 @@
           </imageobject>
         </mediaobject>
         <para>
-     The <emphasis role="bold">Account Profiles</emphasis> tab will appear:
+     The <guilabel>Account Profiles</guilabel> form will appear:
     </para>
         <mediaobject>
           <imageobject role="html">
@@ -409,7 +406,7 @@
       <title>To Change Account Profiles</title>
       <step>
         <para>
-     Select the<emphasis role="bold"> Account Profiles</emphasis> tab.
+     Select the <guilabel>Account Profiles</guilabel> tab.
     </para>
         <para>
      This tab displays your current basic information.
@@ -417,12 +414,12 @@
       </step>
       <step>
         <para>
-     Change your First Name, Last Name and Email. You cannot change your User Name.
+     Change your <systemitem>First Name</systemitem>, <systemitem>Last Name</systemitem> or <systemitem>Email</systemitem>. You cannot change your <systemitem>User Name</systemitem>.
     </para>
       </step>
       <step>
         <para>
-     Click <emphasis role="bold">Save</emphasis> to accept changes.
+     Click <guilabel>Save</guilabel> to accept changes.
     </para>
       </step>
     </procedure>
@@ -430,7 +427,7 @@
       <title>To change your Password</title>
       <step>
         <para>
-     Select the<emphasis role="bold"> Change Password</emphasis> tab.
+     Select the <guilabel> Change Password</guilabel> tab.
     </para>
        <mediaobject>
           <imageobject role="html">
@@ -443,22 +440,22 @@
       </step>
       <step>
         <para>
-     Input your current password to identify that you are the owner of this account.
+     Enter your current password to identify that you are the owner of this account.
     </para>
       </step>
       <step>
         <para>
-     Input your new password, it must have at least 6 characters.
+     Enter your new password. The new password must be between six (6) and thirty (30) characters long.
     </para>
       </step>
       <step>
         <para>
-     Input your password again in the <emphasis role="bold">Confirm New Password</emphasis> field.
+     Enter the new password again in the <guilabel>Confirm New Password</guilabel> field.
     </para>
       </step>
       <step>
         <para>
-     Click <emphasis role="bold">Save</emphasis> to accept changes.
+     Click <guilabel>Save</guilabel> to submit the changes.
     </para>
       </step>
     </procedure>

@@ -1,19 +1,22 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<!-- This document was created with Syntext Serna Free. --><!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!-- This document was created with Syntext Serna Free. -->
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
 <!ENTITY % BOOK_ENTITIES SYSTEM "../../User_Guide.ent">
 %BOOK_ENTITIES;
 ]>
 <section id="sect-User_Guide-Category_Navigation">
-<!--  This document was created with Syntext Serna Free.  -->
   <title>Category Navigation</title>
   <para>
-  Category Navigation Portlet and Parameterized Content List Viewer portlet get rid of long URLs when you view a content and enable users to see published documents or web contents in specific categories in one page. Thanks to the symbolic link, no matter where the object physically resides, the database can retrieve it. In addition, the relations amongst shortcuts can be managed. Now, you can view documents or web content in the Parameterized Content List Viewer easily.
+      The <emphasis>Category Navigation Portlet</emphasis> and <emphasis>Parameterized Content List Viewer</emphasis> portlets avoid the need for long URLs when viewing a content and enable users to see published documents or web contents in specific categories in one page.
+  </para>
+  <para>
+     Using symbolic links, the database can retrieve the content no matter where the object physically resides. The relations between shortcuts can also be managed in this way.
  </para>
   <procedure id="proc-User_Guide-Category_Navigation-Access_to_Category_Navigation_Portlet">
     <title>Access to Category Navigation Portlet</title>
     <step>
       <para>
-    Go to <emphasis role="bold">News</emphasis> on the navigation bar:
+    Go to <guilabel>News</guilabel> on the navigation bar:
    </para>
       <mediaobject>
         <imageobject role="html">
@@ -27,12 +30,12 @@
     The left panel lists all the categories containing documents or web contents.
    </para>
       <para>
-    The right panel displays the documents selected in the left pane.
+    The right panel displays any documents selected in the left pane.
    </para>
     </step>
     <step>
       <para>
-    Select a category that you want to view on the left, it will be shown on the right (only documents or web content published are shown).
+    Select a category that you want to view on the left, it will be shown on the right (only published documents or web content are shown).
    </para>
       <mediaobject>
         <imageobject role="html">
@@ -47,13 +50,18 @@
   <formalpara>
     <title>The Edit Mode of the Category Navigation Portlet</title>
     <para>
-   Administrators can edit the Category Navigation portlet with the following procedure:</para>
+   Administrators can edit the Category Navigation portlet with the following procedure:
+   </para>
   </formalpara>
   <procedure>
     <title/>
     <step>
       <para>
-     Go to <emphasis role="bold">Group &gt; Administration &gt; Manage Pages</emphasis> on the administration bar. The Manage Pages will appear:
+     Go to <menuchoice>
+        <guimenu>Group</guimenu>
+        <guimenuitem>Administration</guimenuitem>
+        <guimenuitem>Manage Pages</guimenuitem>
+     </menuchoice> on the administration bar. The <guilabel>Manage Pages</guilabel> list will appear:
     </para>
       <mediaobject>
            <imageobject role="html">
@@ -66,13 +74,14 @@
     </step>
     <step>
       <para>
-     Click 
-     <inlinemediaobject>
+     Click the <inlinemediaobject>
           <imageobject>
             <imagedata fileref="images/editicon2.png" format="PNG"/>
           </imageobject>
-        </inlinemediaobject>
-      in the <emphasis role="bold">Manage Pages</emphasis> that corresponds with the Category navigation portlet to open the page to edit this portlet.
+          <textobject>
+             <phrase>pencil</phrase>
+          </textobject>
+        </inlinemediaobject> icon in the <emphasis>Category navigation portlet</emphasis> entry to open the page to edit this portlet.
     </para>
       <mediaobject>
            <imageobject role="html">
@@ -85,15 +94,14 @@
     </step>
     <step>
       <para>
-     Click the 
-     <inlinemediaobject>
+     Click the <inlinemediaobject>
             <imageobject>
               <imagedata fileref="images/editicon4.png" format="PNG" width="6mm"/>
             </imageobject>
             <textobject>
                <phrase>pencil</phrase>
             </textobject>
-          </inlinemediaobject> icon to open a form with the Edit Mode to edit the portlet.
+          </inlinemediaobject> icon to open a form to edit the portlet settings.
     </para>
       <mediaobject>
            <imageobject role="html">
@@ -119,7 +127,7 @@
     </step>
     <step>
       <para>
-     Input the name of a category in the Title field.
+     Enter the name of a category in the <guilabel>Title</guilabel> field.
     </para>
     </step>
     <step>
@@ -134,15 +142,14 @@
     </step>
     <step>
       <para>
-     Click the 
-     <inlinemediaobject>
+     Click the <inlinemediaobject>
             <imageobject>
               <imagedata fileref="images/magnifyingglassicon.png" format="PNG" width="7mm"/>
             </imageobject>
             <textobject>
                <phrase>magnifying glass</phrase>
             </textobject>
-          </inlinemediaobject> icon to select the target path. The Page selector form will appear:
+          </inlinemediaobject> icon to select the target path. The <guilabel>Page Selector</guilabel> form will appear:
     </para>
          <mediaobject>
              <imageobject role="html">
@@ -155,8 +162,7 @@
     </step>
     <step>
       <para>
-     Click the 
-     <inlinemediaobject>
+     Click the <inlinemediaobject>
             <imageobject>
               <imagedata fileref="images/bluedroparrow.png" format="PNG" width="6mm"/>
             </imageobject>
@@ -175,12 +181,12 @@
             <textobject>
                <phrase>green tick</phrase>
             </textobject>
-          </inlinemediaobject> icon to select the path. This path will be displayed in the Show in page field.
+          </inlinemediaobject> icon to select the path. This path will be displayed in the <guilabel>Show in Page</guilabel> field of the <guilabel>Edit Mode</guilabel> tab.
     </para>
     </step>
     <step>
       <para>
-     Click <emphasis role="bold">Save</emphasis> to accept saving the configuration for the Category Navigation portlet.</para>
+     Click <guilabel>Save</guilabel> to accept saving the configuration for the Category Navigation portlet.</para>
     </step>
   </procedure>
 </section>

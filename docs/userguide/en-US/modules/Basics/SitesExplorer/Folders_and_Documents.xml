@@ -7,13 +7,13 @@
 <section id="sect-User_Guide-Actions_on_Folders_and_Documents">
  <title>Actions on Folders and Documents</title>
   <para>
-  In this section, we will present the actions on folders and document in the right-click menu (Add to favorites, copy, cut, paste, add Symlink, lock/unlock, view document, rename, download and allow edition and copy URL to clipboard) and other actions (drag and drop folders or documents).
+  This section will discuss actions that can be performed on folders and document, both from the right-click menu (<emphasis>Cut</emphasis> and <emphasis>Paste</emphasis> for example) and manual actions (like dragging and dropping).
  </para>
   <para>
-  Depend on the actions on folders or documents, the right-click menu (drop-down menu) is different.
+  The actions available in the right-click menu are different for folders and documents.
  </para>
   <para>
-  The actions in the right-click menu for documents:
+  The actions available for documents are:
  </para>
   <mediaobject>
      <imageobject role="html">
@@ -24,7 +24,7 @@
      </imageobject>
   </mediaobject>
   <para>
-  The actions in the right-click menu for folders:
+  The actions available for folders are:
  </para>
   <mediaobject>
      <imageobject role="html">
@@ -60,13 +60,13 @@
       </step>
     </procedure>
     <para>
-   A symlink of your favorite nodes (folders, documents, files) will be created in the <emphasis role="bold">Favorite</emphasis> folder.
+   A symlink of your favorite nodes will be created in the <guilabel>Favorite</guilabel> folder.
   </para>
   </section>
   <section id="sect-User_Guide-Actions_on_Folders_and_Documents-CopyPaste">
     <title>Copy/Paste</title>
     <para>
-   This function is used to make a copy of a node (including sub-nodes) to other places.
+   This function is used to make a copy of a node (including subnodes) in other places.
   </para>
     <para>
    There are two ways to cut/copy/paste the node:
@@ -75,7 +75,7 @@
       <title>Method One</title>
       <step>
         <para>
-     Right-click the node <emphasis role="bold">&gt;</emphasis> select <emphasis role="bold">Copy</emphasis> from the drop-down menu (or called &quot;the right-click menu&quot;).
+     Right-click the node then select <guilabel>Copy</guilabel> from the drop-down menu.
     </para>
       </step>
       <step>
@@ -85,12 +85,18 @@
       </step>
       <step>
         <para>
-     Right-click the destination node <emphasis role="bold">&gt;</emphasis> select <emphasis role="bold">Paste</emphasis> in the drop-down menu. Note that the <emphasis role="bold">Paste</emphasis> function is enabled in the menu only after selecting the <emphasis role="bold">Copy</emphasis> action.
+     Right-click the destination node and select <guilabel>Paste</guilabel> from the drop-down menu.
+     <note>
+        <title>Pasting Content</title>
+           <para>
+              The <guilabel>Paste</guilabel> function is only enabled after some form of data (a document, for example) has been added to the Clipboard through the <guilabel>Copy</guilabel> or <guilabel>Cut</guilabel> action.
+           </para>
+     </note>
     </para>
       </step>
       <step>
         <para>
-     The copied folder (and its sub-folders) will be pasted to the new selected path.
+     The copied folder (and any sub-folders) will be pasted to the new selected path.
     </para>
       </step>
     </procedure>
@@ -98,7 +104,7 @@
       <title>Method Two</title>
       <step>
         <para>
-     Right-click the node and select the <emphasis role="bold">Copy </emphasis>from the drop-down menu.
+     Right-click the node and select the <guilabel>Copy</guilabel> from the drop-down menu.
     </para>
       </step>
       <step>
@@ -108,7 +114,7 @@
       </step>
       <step>
         <para>
-     Select the Clipboard icon on the sidebar:
+     Select the <guilabel>Clipboard</guilabel> icon on the sidebar:
     </para>
         <mediaobject>
           <imageobject role="html">
@@ -121,7 +127,7 @@
       </step>
       <step>
         <para>
-     Click the Clipboard window will appear:
+     Click the clipboard window will appear:
     </para>
         <mediaobject>
           <imageobject role="html">
@@ -142,7 +148,7 @@
             <textobject>
                <phrase>clipboard</phrase>
             </textobject>
-          </inlinemediaobject> icon in the clipboard window to paste the copied node into the selected destination node in step 3.
+          </inlinemediaobject> icon in the clipboard window to paste the copied node into the selected destination node in <emphasis role="bold">Step 3</emphasis>.
     </para>
       </step>
       <step>
@@ -160,7 +166,7 @@
       </step>
       <step>
         <para>
-     You can also click the <emphasis role="bold">Clear All</emphasis> link to delete all waiting statements in the list.
+     You can also click the <guilabel>Clear All</guilabel> link to delete all waiting statements in the list.
     </para>
       </step>
     </procedure>
@@ -168,21 +174,24 @@
    After the action has been taken, a confirmation message will appear with detailed information about the destination path.
   </para>
     <note>
-      <title>Copy/Paste Information</title>
+      <title>Copy/Paste Considerations</title>
       <itemizedlist>
         <listitem>
           <para>
-      You only can take the Copy action if you have a right on the source node.
+      You only can use the <guilabel>Copy</guilabel> action if you have the appropriate permissions on the source node.
      </para>
         </listitem>
         <listitem>
           <para>
-      You only can take the Paste action if you have a right on the destination node.
+      You only can use the <guilabel>Paste</guilabel> action if you have a right on the destination node.
      </para>
         </listitem>
         <listitem>
           <para>
-      If the destination node has the same name with the copied node, after being pasted, the pasted node will be added an index with its name. For example, in this case, if “new folder” contains a node with name “Live”, then after the paste action, in “new folder” there are two nodes with name <emphasis>Live</emphasis> and <emphasis>Live[2]</emphasis>.
+      If the destination node contains a file with the same name as the copied file, the pasted file will have an index integer added to its name.
+      </para>
+      <para>
+         For example; <emphasis>New Folder</emphasis> contains a node named <filename>Live</filename> which is copied and pasted into a location that already contains a node named <filename>Live</filename>. After the paste action the new file will be named  <filename>Live[2]</filename>. The original <filename>Live</filename> file will be unchanged.
      </para>
         </listitem>
         <listitem>
@@ -192,7 +201,7 @@
         </listitem>
         <listitem>
           <para>
-      After taking the Copy action, you can take the Paste action on different nodes before taking another Copy action.
+      <emphasis>Pasting</emphasis> a node does not remove it from the Clipboard. Therefore, after using the <guilabel>Copy</guilabel> action you can use <guilabel>Paste</guilabel> to copy the node into multiple nodes without needing to use the <guilabel>Copy</guilabel> action again.
      </para>
         </listitem>
       </itemizedlist>
@@ -201,19 +210,19 @@
   <section id="sect-User_Guide-Actions_on_Folders_and_Documents-Edit_documents">
     <title>Edit documents</title>
     <para>
-   To edit a document, refer to this part <xref linkend="sect-User_Guide-Manage_Content_In_Content_Explorer-Edit_a_web_content"/>.
+   To edit a document, refer to <xref linkend="sect-User_Guide-Manage_Content_In_Content_Explorer-Edit_a_web_content"/>.
   </para>
   </section>
   <section id="sect-User_Guide-Actions_on_Folders_and_Documents-CutPaste">
     <title>Cut/Paste</title>
     <para>
-   This function is used to move a node (include sub nodes) to other places. There are two ways to cut/paste documents:
+   This function is used to move a node (include subnodes) to other places. There are two ways to cut/paste documents:
   </para>
     <procedure id="proc-User_Guide-CutPaste-Method_One">
       <title>Method One</title>
       <step>
         <para>
-     Right-click a node <emphasis role="bold">&gt;</emphasis> Select <emphasis role="bold">Cut</emphasis> from the drop-down menu.
+     Right-click a node and select <guilabel>Cut</guilabel> from the drop-down menu.
     </para>
       </step>
       <step>
@@ -223,12 +232,18 @@
       </step>
       <step>
         <para>
-     Right-click the destination node <emphasis role="bold">&gt;</emphasis> select <emphasis role="bold">Paste</emphasis> in the drop-down menu. Note that the <emphasis role="bold">Paste</emphasis> function is enabled in the menu only after selecting the <emphasis role="bold">Cut</emphasis> action.
+     Right-click the destination node and select <guilabel>Paste</guilabel> in the drop-down menu.
     </para>
+    <note>
+        <title>Pasting Content</title>
+           <para>
+              The <guilabel>Paste</guilabel> function is only enabled after some form of data (a document, for example) has been added to the Clipboard through the <guilabel>Copy</guilabel> or <guilabel>Cut</guilabel> action.
+           </para>
+     </note>
       </step>
       <step>
         <para>
-     The cut node (and its sub-nodes) will be pasted to the new selected path.
+     The cut node (and its subnodes) will be pasted to the new selected path.
     </para>
       </step>
     </procedure>
@@ -236,7 +251,7 @@
       <title>Method Two</title>
       <step>
         <para>
-     Right-click a node <emphasis role="bold">&gt;</emphasis> Select <emphasis role="bold">Cut</emphasis> from the drop-down menu.
+     Right-click a node and select <guilabel>Cut</guilabel> from the drop-down menu.
     </para>
       </step>
       <step>
@@ -280,7 +295,7 @@
             <textobject>
                <phrase>clipboard</phrase>
             </textobject>
-          </inlinemediaobject> icon in the clipboard window to paste the copied node into the selected destination node in step 3.
+          </inlinemediaobject> icon in the clipboard window to paste the copied node into the selected destination node in <emphasis role="bold">Step 3</emphasis>.
     </para>
       </step>
       <step>
@@ -298,29 +313,32 @@
       </step>
       <step>
         <para>
-     You can also click the <emphasis role="bold">Clear All</emphasis> link to delete all waiting statements in the list.
+     You can also click the <guilabel>Clear All</guilabel> link to delete all waiting statements in the list.
     </para>
       </step>
     </procedure>
     <para>
    After the action has been taken, a confirmation message will appear with detailed information about the destination path.
   </para>
-    <note>
-      <title>Cut/Paste Information</title>
+  <note>
+      <title>Cut/Paste Considerations</title>
       <itemizedlist>
         <listitem>
           <para>
-      You only can take the Cut action if you have a right on the source node.
+      You only can use the <guilabel>Cut</guilabel> action if you have the appropriate permissions on the source node.
      </para>
         </listitem>
         <listitem>
           <para>
-      You only can take the Paste action if you have a right on the destination node.
+      You only can use the <guilabel>Paste</guilabel> action if you have a right on the destination node.
      </para>
         </listitem>
         <listitem>
           <para>
-      If the destination node has the same name with the cut/copied node, after being pasted, the pasted node will be added an index with its name. For example, in this case, if “new folder” contains a node with name “Live”, then after the paste action, in “new folder” there are two nodes with name Live and Live[2].
+      If the destination node contains a file with the same name as the copied file, the pasted file will have an index integer added to its name.
+      </para>
+      <para>
+         For example; <emphasis>New Folder</emphasis> contains a node named <filename>Live</filename> which is cut and pasted into a location that already contains a node named <filename>Live</filename>. After the paste action the new file will be named  <filename>Live[2]</filename>. The original <filename>Live</filename> file will be unchanged.
      </para>
         </listitem>
         <listitem>
@@ -330,7 +348,7 @@
         </listitem>
         <listitem>
           <para>
-      After taking the Cut action, you can take the Paste action on different nodes before taking another Cut action.
+      <emphasis>Pasting</emphasis> a node does not remove it from the Clipboard. Therefore, after using the <guilabel>Cut</guilabel> action you can use <guilabel>Paste</guilabel> to copy the node into multiple nodes without needing to use the <guilabel>Cut</guilabel> action again.
      </para>
         </listitem>
       </itemizedlist>
@@ -339,19 +357,19 @@
   <section id="sect-User_Guide-Actions_on_Folders_and_Documents-Delete_folders_and_documents">
     <title>Delete folders and documents</title>
        <para>
-      This function helps you remove folders/documents from theirs location easily. Do the same steps as <xref linkend="sect-User_Guide-Manage_Content_In_Content_Explorer-Delete_a_web_content"/>
+      This function helps you remove folders/documents from theirs location easily. Follow the steps in <xref linkend="sect-User_Guide-Manage_Content_In_Content_Explorer-Delete_a_web_content"/>
      </para>
     <note>
       <title>Delete Rights</title>
       <itemizedlist>
         <listitem>
           <para>
-      You can only take the <emphasis role="bold">Delete</emphasis> action if you have the right on a node.
+      You can only use the <guilabel>Delete</guilabel> action if you have the appropriate permissions on the node.
      </para>
         </listitem>
         <listitem>
           <para>
-      If the deleted node also contains sub-nodes, these will be deleted also.
+      If the deleted node contains subnodes, these will also be deleted.
      </para>
         </listitem>
       </itemizedlist>
@@ -360,21 +378,20 @@
   <section id="sect-User_Guide-Actions_on_Folders_and_Documents-Drag_and_drop_folders_and_documents">
     <title>Drag and drop folders and documents</title>
       <para>
-      This function allows you to move folders/documents from a current location to another one by using the drag and drop feature.
+      This function allows you to move folders or documents from their current location to another by using the drag and drop feature.
      </para>
     <procedure>
       <title/>
       <step>
         <para>
-     Move the cursor on a folder/document or folders/documents on the right panel (hold the <emphasis role="bold">Ctrl</emphasis> or <emphasis role="bold">Shift</emphasis> key to select multiple folders/documents at once) until the cursor changes to 
-     <inlinemediaobject>
+     Move the cursor to the folder(s) or document(s) in the right panel until the cursor changes to <inlinemediaobject>
             <imageobject>
               <imagedata fileref="images/handcursor.png" format="PNG" width="9mm"/>
             </imageobject>
             <textobject>
                <phrase>a pointing hand</phrase>
             </textobject>
-          </inlinemediaobject>.
+          </inlinemediaobject>. You can hold the <keycombo><keycap>Shift</keycap></keycombo> key to select multiple contiguous folders/documents at once or the <keycombo><keycap>Ctrl</keycap></keycombo> key to select multiple non-contiguous files.
     </para>
         <mediaobject>
           <imageobject role="html">
@@ -387,7 +404,7 @@
       </step>
       <step>
         <para>
-     Press the left mouse button and then drag the selected folder(s)/document(s) to another folder on either the right or left panes.
+     Hold the left mouse button and then <emphasis>drag</emphasis> the selected folder(s)/document(s) to another folder on either the right or left panes.
     </para>
         <mediaobject>
           <imageobject role="html">
@@ -400,7 +417,7 @@
       </step>
       <step>
         <para>
-     Drop them into the selected folder (by releasing the left mouse button). All dragged folders/documents will be relocated to the destination folder.
+     <emphasis>Drop</emphasis> them into the selected folder by releasing the left mouse button. All dragged folders/documents will be relocated to the destination folder.
     </para>
       </step>
     </procedure>
@@ -408,12 +425,12 @@
   <section id="sect-User_Guide-Actions_on_Folders_and_Documents-LockUnlock_folders_and_Documents">
     <title>Lock/Unlock folders and Documents</title>
     <para>
-   This function enables you to avoid changes to specific folders/documents, actioned by others, during a specific time.
+   This function prevents other users from changing specific folders/documents for a specific period.
   </para>
     <formalpara id="form-User_Guide-LockUnlock_folders_and_Documents-Lock_foldersdocuments">
       <title>Lock folders/documents</title>
       <para>
-    Just right-click a folder/document (on either the right or left window pane) and select <emphasis role="bold">Lock</emphasis> from the menu. The selected folder/document will be locked.
+    Right-click a folder or document (on either the right or left window pane) and select <guilabel>Lock</guilabel> from the menu. The selected node will be locked.
    </para>
     </formalpara>
     <note>
@@ -421,27 +438,22 @@
       <itemizedlist>
         <listitem>
           <para>
-      Only users with appropriate rights can lock folders/documents.
+      Only users with appropriate rights can lock folders or documents.
      </para>
         </listitem>
         <listitem>
           <para>
-      After locking, other users can only view the folders/documents.
+      After a node is locked, other users can view the locked node, but cannot alter or remove it. They can, however, create and edit a <emphasis>copy</emphasis> of the locked node (using the Copy/Paste functions outlined above).
      </para>
         </listitem>
         <listitem>
           <para>
-      The lock will be kept current for a session only. if the locking user signs out, the node will be unlocked
+      A lock will be kept on a node for the current session only. The lock will be automatically removed when the user who locked the node signs out.
      </para>
         </listitem>
         <listitem>
           <para>
-      Other users can create a copy of the locked node (by using the <emphasis role="bold">Copy/Paste</emphasis> functions outlined above), however the original node cannot be removed or altered.
-     </para>
-        </listitem>
-        <listitem>
-          <para>
-      If no action is taken on a locked node within 30 minutes, the lock will be automatically removed.
+      A lock will also be automatically removed if no action is taken on the locked node for thirty (30) minutes.
      </para>
         </listitem>
       </itemizedlist>
@@ -449,7 +461,7 @@
     <formalpara id="form-User_Guide-LockUnlock_folders_and_Documents-Unlock_foldersdocuments">
       <title>Unlock folders/documents</title>
       <para>
-    To unlock a folder/document, right-click a locked folder/document and select the <emphasis role="bold">Unlock</emphasis> item on the menu. The folder/document will then be unlocked and other users can take actions on it.
+    To unlock a node you have locked, right-click it and select <guilabel>Unlock</guilabel> from the menu. The folder/document will then be unlocked and other users can take actions on it.
    </para>
     </formalpara>
   </section>
@@ -462,7 +474,7 @@
       <title/>
       <step>
         <para>
-     Right-click a folder/document that you want to rename then select <emphasis role="bold">Rename</emphasis> from the menu:
+     Right-click a folder/document that you want to rename then select <guilabel>Rename</guilabel> from the menu:
     </para>
         <mediaobject>
           <imageobject role="html">
@@ -486,12 +498,12 @@
       </step>
       <step>
         <para>
-     Input a new name in the <emphasis role="bold">Name</emphasis> field. You can also change the title of this folder by entering a new one in the <emphasis role="bold">Title</emphasis> field.
+     Enter a new name in the <guilabel>Name</guilabel> field. You can also change the title of this folder by entering a new one in the <guilabel>Title</guilabel> field.
     </para>
       </step>
       <step>
         <para>
-     Click<emphasis role="bold"> Save</emphasis> to commit the new details.
+     Click <guilabel>Save</guilabel> to commit the new details.
     </para>
       </step>
     </procedure>
@@ -499,23 +511,18 @@
   <section id="sect-User_Guide-Actions_on_Folders_and_Documents-Add_a_symlink">
     <title>Add a symlink</title>
     <para>
-   For the purpose of fast accessing the node that you want to look for in other nodes, adding a symlink for a node is an effective way to meet this need.
+   Creating a symbolic link (<emphasis>symlink</emphasis>) to a node is an effective way to quickly access that node from other nodes without having to navigate through the content structure manually.
   </para>
     <procedure>
       <title/>
       <step>
         <para>
-     Select a document that you want to add a symlink.
+     Right-click a document that you want to add a symlink to (in this instance the term <emphasis>to</emphasis> is used to describe the node as the target of the symlink, not an addition to the original node itself) and select <guilabel>Add SymLink</guilabel> from the menu.
     </para>
       </step>
       <step>
         <para>
-     Right-click that document and select <emphasis role="bold">Add SymLink</emphasis> from the menu.
-    </para>
-      </step>
-      <step>
-        <para>
-     The selected document will be added a symlink immediately. You now can click the symlink to view its content.
+     A symlink to the selected document will be created immediately. You can click the symlink to view its content.
     </para>
       </step>
     </procedure>
@@ -523,68 +530,104 @@
   <section id="sect-User_Guide-Actions_on_Folders_and_Documents-View_WebDAV">
     <title>View WebDAV</title>
     <para>
-   WebDAV enables people to access files, folders and read and write documents over the web. Due to its benefits of easy, quick and flexible manipulations and time saving, WebDAV is used to view nodes.
+   WebDAV allows users to access (read and write) files and folders over the web. WebDAV is used to view nodes because it offers easy, quick, flexible and efficient data manipulation.
   </para>
     <procedure>
       <title/>
       <step>
         <para>
-     Select the path of node you want to view webDAV or open that folder from the left/right panel.
+     Select the path of node you want to view via webDAV or open that folder from the left/right panel.
     </para>
       </step>
       <step>
         <para>
-     Right-click the node and select the Download and Allow Edition item in the menu.
+     Right-click the node and select the <guilabel>Download and Allow Edition</guilabel> item in the menu.
     </para>
       </step>
       <step>
         <para>
-     With each type of node, form to view in WebDAV will be different:
+     The view in WebDAV form will be different for different node types:
     </para>
-        <itemizedlist>
-          <listitem>
-            <para>
-       <emphasis role="bold">Folder</emphasis>: The sub-nodes list of the current folder will be displayed in WebDAV.
-      </para>
-          </listitem>
-          <listitem>
-            <para>
-       <emphasis role="bold">nt:file</emphasis>: The content of the document will be shown.
-      </para>
-          </listitem>
-          <listitem>
-            <para>
-       <emphasis role="bold">Article</emphasis>: This node type does not, by default, list any folders. However, if the Article includes actions, added language or other data, all folders will be listed and named; <emphasis>exo:actions</emphasis>, <emphasis>exo:language</emphasis> and so on.
-      </para>
-          </listitem>
-          <listitem>
-            <para>
-       <emphasis role="bold">Podcast</emphasis>: Viewed in WebDAV, this node type will be attached a form that users have to complete to download this document.
-      </para>
-          </listitem>
-          <listitem>
-            <para>
-       <emphasis role="bold">Sample node</emphasis>: This node lists folder names as <emphasis>exo:images</emphasis>. Like <emphasis role="bold">Article</emphasis>, if the <emphasis role="bold">Sample</emphasis> node contains actions or added languages, folders will be named <emphasis>exo:actions</emphasis>, <emphasis>exo:language</emphasis> and so on.
-      </para>
-          </listitem>
-          <listitem>
-            <para>
-       <emphasis role="bold">File Plan</emphasis>: This node behaves the same way as <emphasis role="bold">Article</emphasis> and <emphasis role="bold">Sample node</emphasis>.
-      </para>
-          </listitem>
-          <listitem>
-            <para>
-       <emphasis role="bold">Kofax</emphasis>: This node behaves the same way as <emphasis role="bold">Article</emphasis> and <emphasis role="bold">Sample node</emphasis>
-      </para>
-          </listitem>
-        </itemizedlist>
+    <table>
+    <title></title>
+          <tgroup cols="2">
+             <thead>
+                <row>
+                   <entry>
+                      Node Type
+                   </entry>
+                   <entry>
+                      WebDAV Details
+                   </entry>
+                </row>
+             </thead>
+             <tbody>
+                <row>
+                   <entry>
+                      <emphasis role="bold">Folder</emphasis>
+                   </entry>
+                   <entry>
+                      The subnodes list of the current folder will be displayed in WebDAV.
+                   </entry>
+                </row>
+                <row>
+                   <entry>
+                      <emphasis role="bold">nt:file</emphasis>
+                   </entry>
+                   <entry>
+                      The content of the document will be shown.
+                   </entry>
+                </row>
+                <row>
+                   <entry>
+                      <emphasis role="bold">Article</emphasis>
+                   </entry>
+                   <entry>
+                      This node type does not, by default, list any folders. However, if the Article includes actions, added language or other data, all folders will be listed and named; <emphasis>exo:actions</emphasis>, <emphasis>exo:language</emphasis> and so on.
+                   </entry>
+                </row>
+                <row>
+                   <entry>
+                      <emphasis role="bold">Podcast</emphasis>
+                   </entry>
+                   <entry>
+                      Viewed in WebDAV, this node type will have a form attached that users have to complete to download this document.
+                   </entry>
+                </row>
+                <row>
+                   <entry>
+                      <emphasis role="bold">Sample node</emphasis>
+                   </entry>
+                   <entry>
+                      This node lists folder names as <emphasis>exo:images</emphasis>. Like Article nodes, if the Sample node contains actions or added languages, folders will be named <emphasis>exo:actions</emphasis>, <emphasis>exo:language</emphasis> and so on.
+                   </entry>
+                </row>
+                <row>
+                   <entry>
+                      <emphasis role="bold">File Plan</emphasis>
+                   </entry>
+                   <entry>
+                      This node behaves the same way as Article and Sample node.
+                   </entry>
+                </row>
+                <row>
+                   <entry>
+                      <emphasis role="bold">Kofax</emphasis>
+                   </entry>
+                   <entry>
+                      This node behaves the same way as Article and Sample node.
+                   </entry>
+                </row>
+             </tbody>
+          </tgroup>
+       </table>
       </step>
     </procedure>
   </section>
   <section id="sect-User_Guide-Actions_on_Folders_and_Documents-View_Document">
     <title>View Document</title>
     <para>
-   The <emphasis role="bold">View Document</emphasis> item is visible in the drop-menu when you right-click a document. This function enables you to view the document on another tab with the link containing the document path.
+  This function opens a document on another tab with a link containing the document path.
   </para>
     <para>
    Do the following to view a document.
@@ -593,7 +636,7 @@
       <title>View a document</title>
       <step>
         <para>
-     Right-click a document that you want to view <emphasis role="bold">&gt;</emphasis> Select<emphasis role="bold"> View Document</emphasis> in the drop menu.
+     Right-click the document that you want to view and select <guilabel>View Document</guilabel> in the drop menu.
     </para>
         <para>
      The document is opened in another browser:
@@ -607,10 +650,10 @@
            </imageobject>
         </mediaobject>
         <para>
-     The URL of the document is like the following:
+     The URL of the document is structured like so:
     </para>
         <para>
-     URL: ...ecmdemo/private/acme/siteExplorer/repository/Private/User guide
+     <emphasis>http://example.com:8080/ecmdemo/private/acme/siteExplorer/repository/path/to/document</emphasis>
     </para>
       </step>
     </procedure>
@@ -627,7 +670,7 @@
       <title>Copy URL to Clipboard</title>
       <step>
         <para>
-     Right-click a folder/document <emphasis role="bold">&gt; </emphasis>Select <emphasis role="bold">Copy URL to Clipboard</emphasis>.
+     Right-click a folder/document and select <guilabel>Copy URL to Clipboard</guilabel>.
     </para>
         <mediaobject>
            <imageobject role="html">
@@ -640,7 +683,7 @@
       </step>
       <step>
         <para>
-     Paste the URL on another browser.
+     Paste the URL into another browser window (or another tab in the same browser window).
     </para>
         <mediaobject>
            <imageobject role="html">
@@ -651,7 +694,7 @@
            </imageobject>
         </mediaobject>
         <para>
-     You can view the folders of the node you copied its URL or download documents to your computer. You also view other nodes by clicking ... above the current folder to go up the root node . See the below illustration:
+     You can view the folders of the node or download documents to your device. You also view other nodes by clicking the folder named <guilabel>..</guilabel> to go up to the parent node. See the below illustration:
     </para>
         <mediaobject>
            <imageobject role="html">
@@ -667,7 +710,7 @@
   <section id="sect-User_Guide-Actions_on_Folders_and_Documents-Manage_Tags">
     <title>Manage Tags</title>
     <para>
-   Tags are easily managed by editing or deleting them with the <emphasis role="bold">Tag Manager</emphasis>.
+   Tags are easily managed by editing or deleting them with the <guilabel>Tag Manager</guilabel>.
   </para>
     <procedure id="proc-User_Guide-Manage_Tags-Edit_a_tag">
       <title>Edit a tag</title>
@@ -731,7 +774,7 @@
       </step>
       <step>
         <para>
-     Click <emphasis role="bold">Save</emphasis> button to commit the change or <emphasis role="bold">Cancel</emphasis> to quit without changes.
+     Click <guilabel>Save</guilabel> button to commit the change or <guilabel>Cancel</guilabel> to quit without changes.
     </para>
       </step>
     </procedure>
@@ -767,7 +810,7 @@
           </imageobject>
         </mediaobject>
         <para>
-     Click <emphasis role="bold">OK</emphasis> button to delete the tag or <emphasis role="bold">Cancel</emphasis> to quit.
+     Click <guilabel>OK</guilabel> button to delete the tag or <guilabel>Cancel</guilabel> to quit.
     </para>
       </step>
     </procedure>
@@ -794,12 +837,15 @@
           </imageobject>
         </mediaobject>
         <para>
-     Depending on the popularity of tag, the displaying of each tag will be different from others by: font-size, font-weight, color, font-family, text-decoration. For example, when a tag is added for over 10 documents, it will be displayed in red color, size:20px, bold. This is also can be configured in the Administration portlet.
+     Tags will be displayed differently depending on popularity. The font-size, font-weight, color, font-family, text-decoration will change to visually represent popularity.
+     </para>
+     <para>
+        For example, when a tag is added to more than ten documents it will be displayed in red with in a 20px size, bold font. These details can be configured in the Administration portlet.
     </para>
       </step>
       <step>
         <para>
-     Each tag is also like a link used list all documents that it is added. Click a tag name, documents list will be displayed in the right panel.
+     Each tag is also like a link used list all documents that it is added. Click a tag name to see a list of documents with that tag displayed in the right panel.
     </para>
       </step>
     </procedure>

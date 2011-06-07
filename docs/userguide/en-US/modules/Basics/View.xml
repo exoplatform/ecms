@@ -6,7 +6,7 @@
 <section id="sect-User_Guide-View_a_site">
 	<title>View a site</title>
 	 <para>
-		In &PRODUCT;, we use the 'Website' term which is equivalent to the 'Portal' term. So, viewing a portal means viewing a website. You can select the site that you want to view by selecting the site name in the drop-down menu on the Administration bar:
+      In &PRODUCT;, the term <emphasis role="bold">Website</emphasis> is used interchangeably with the term <emphasis role="bold">Portal</emphasis>. So, "<emphasis>Viewing a portal...</emphasis>" means the same as "<emphasis>Viewing a website...</emphasis>". You can select the website that you want to view by selecting its name in the drop-down menu on the administration bar:
 	</para>
 	 <mediaobject>
 		<imageobject role="html">
@@ -18,9 +18,11 @@
 
 	</mediaobject>
 	 <para>
-		The main screen of the site will appear like the illustration below:
+		The main screen of the site will appear. The illustration below highlights some important components of the web page:
 	</para>
-	 <mediaobjectco> <imageobjectco> <areaspec>
+	 <mediaobjectco>
+       <imageobjectco>
+      <areaspec>
 		<area coords="" id="area-User_Guide-View_a_site-admin" />
 		 <area coords="" id="area-User_Guide-View_a_site-banner" />
 		 <area coords="" id="area-User_Guide-View_a_site-navigation" />
@@ -34,31 +36,31 @@
 	 <calloutlist>
 		<callout arearefs="area-User_Guide-View_a_site-admin">
 			<para>
-				Administration bar which contains administration functions related to portals (websites).
+            The <emphasis role="bold">Administration bar</emphasis> contains administration functions related to portals (websites).
 			</para>
 
 		</callout>
 		 <callout arearefs="area-User_Guide-View_a_site-banner">
 			<para>
-				Banner which contains slogan, logo, icon used in the website.
+            The <emphasis role="bold">Banner</emphasis> portlet contains things like the company name and logo used throughout the website.
 			</para>
 
 		</callout>
 		 <callout arearefs="area-User_Guide-View_a_site-navigation">
 			<para>
-				Navigation bar which helps users to visualize the structure of the website and provide quick links to different pages.
+            The <emphasis role="bold">Navigation bar</emphasis> helps users to visualize the structure of the website and provide quick links to different pages.
 			</para>
 
 		</callout>
 		 <callout arearefs="area-User_Guide-View_a_site-home">
 			<para>
-				Home page which is the main page of the website. This is the default page that is displayed first when you visit the website.
+            The <emphasis role="bold">Home page</emphasis> is the main page of the website. This is the default page that is displayed first when you visit the website.
 			</para>
 
 		</callout>
 		 <callout arearefs="area-User_Guide-View_a_site-footer">
 			<para>
-				Footer of the website. It can be texts, or image that is displayed at the bottom of the website. It provides information about author/institutional sponsor, revision date, copyright and more.
+            The <emphasis role="bold">Footer</emphasis> is any texts, or image that is displayed at the bottom of the website. It provides information about author/institutional sponsor, revision date, copyright and more.
 			</para>
 
 		</callout>

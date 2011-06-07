@@ -6,38 +6,33 @@
 <section id="sect-User_Guide-Dynamic_Navigation">
 	<title>Dynamic Navigation</title>
 	 <para>
-		Dynamic Navigation enables you to get a parameter to configure the portlet by URL. It means that the URL containing the content path can be dynamically changed.
+      <emphasis>Dynamic Navigation</emphasis> enables you to set a parameter to configure the portlet by URL. This means that the URL containing the content path can be dynamically changed.
 	</para>
 	 <para>
 		This section shows you how to use Dynamic Navigation in &PRODUCT;.
-	</para>
-	 <para>
-		Do the following to access Dynamic Navigation:
 	</para>
 	 <procedure id="proc-User_Guide-Dynamic_Navigation-Access_Dynamic_Navigation">
 		<title>Access Dynamic Navigation</title>
 		 <step>
 			<para>
-				Turn on the <emphasis role="bold">Edit Mode &gt;</emphasis> hover the mouse over SCV or CLV and select the <emphasis role="bold">Preferences </emphasis>icon.
+            Turn on the <emphasis role="bold">Edit Mode</emphasis> and hover the mouse cursor over either an <emphasis role="bold">SCV</emphasis> content element or a <emphasis role="bold">CLV</emphasis> content element. Click the <guilabel>Preferences</guilabel> icon that appears.
 			</para>
-			 <para>
-				If you select the Preferences icon of SCV, the Content Detail Preferences form displays.
-			</para>
-			 <para>
-				If you select the Preferences icon of CLV, the Content List Preferences form displays.
-			</para>
-
+         <mediaobject>
+             <imageobject role="html">
+                <imagedata fileref="images/scvpreferences1.png" format="PNG" align="center"/>
+             </imageobject>
+             <imageobject role="fo">
+                <imagedata fileref="images/scvpreferences1.png" format="PNG" align="center" width="150mm" />
+             </imageobject>
+          </mediaobject>
 		</step>
 		 <step>
 			<para>
-				Click the <emphasis role="bold">Advanced</emphasis> link in the Content Detail Preferences form/ the Content List Preferences form.
+            Show the Dynamic Navigation pane by clicking the <guilabel>Advanced</guilabel> link at the bottom of the preferences window.
 			</para>
-			 <para>
-				The Dynamic Navigation will display.
-			</para>
-			 <para>
-				<emphasis role="bold">Dynamic Navigation in SCV</emphasis>
-            <mediaobject>
+            <example>
+               <title>Dynamic Navigation in SCV</title>
+               <mediaobject>
                <imageobject role="html">
                   <imagedata fileref="images/dynamicnavigationscv.png" format="PNG" align="center"/>
                </imageobject>
@@ -45,69 +40,63 @@
                   <imagedata fileref="images/dynamicnavigationscv.png" format="PNG" align="center" width="150mm" />
                </imageobject>
             </mediaobject>
-			</para>
-			 <para>
-				Details:
-			</para>
-			 <para>
+            </example>
 				<table frame="all">
 					<title></title>
 					 <tgroup cols="2">
-						<colspec colname="c1"></colspec>
-						 <colspec colname="c2"></colspec>
+						<thead>
+                     <row>
+                        <entry>
+                           Field
+                        </entry>
+                        <entry>
+                           Details
+                        </entry>
+                     </row>
+                   </thead>
 						 <tbody>
 							<row>
 								<entry>
-									<emphasis role="bold">Contextual Content</emphasis>
+                           <guilabel>Contextual Content</guilabel>
 								</entry>
 								 <entry>
 									<itemizedlist>
 										<listitem>
 											<para>
-												Disable: It means a single content will be opened by an URL containing the Content Path.
+                                    <guilabel>Disable</guilabel>: Means a single content will be opened by an URL containing the Content Path.
 											</para>
-
 										</listitem>
-
 									</itemizedlist>
 									 <itemizedlist>
 										<listitem>
 											<para>
-												Enable: This portlet is configured with the provided parameter (content-id by default).
+                                    <guilabel>Enable</guilabel>: This portlet is configured with the provided parameter (content-id by default).
 											</para>
-
 										</listitem>
-
 									</itemizedlist>
-
 								</entry>
-
 							</row>
 							 <row>
 								<entry>
-									<emphasis role="bold">By</emphasis>
+									<guilabel>By</guilabel>
 								</entry>
 								 <entry>
-									This parameter is the key in the URL to let SCV know which really is the path in the current URL. It is editable when Contextual Content is Enable.
+									This parameter is the key in the URL to let SCV know which is the path in the current URL. It is editable when Contextual Content is enabled.
 								</entry>
-
 							</row>
-
 						</tbody>
-
 					</tgroup>
-
 				</table>
+			 <para>
+            For example, open a single content with the Content Path <emphasis role="bold">ACME Introduce</emphasis>. The URL of the content is the following:
 			</para>
 			 <para>
-				For example, open a single content with the Content Path "ACME Introduce". The URL of the content is the following:
+            <emphasis>http://example.com:8080/ecmdemo/private/acme/printviewer?<emphasis role="bold">content-id</emphasis>=/repository/collaboration/sites content/live/acme/web contents/site artifacts/<emphasis role="bold">Introduce</emphasis>&amp;isPrint=true</emphasis>
 			</para>
 			 <para>
-				URL: ... <emphasis role="italic">/ecmdemo/private/acme/printviewer?content-id=/repository/collaboration/sites content/live/acme/web contents/site artifacts/Introduce&amp;isPrint=true</emphasis>
-			</para>
-			 <para>
-				<emphasis role="bold">Dynamic Navigation in CLV</emphasis>
-            <mediaobject>
+            <example>
+               <title>Dynamic Navigation in CLV</title>
+                  <mediaobject>
                <imageobject role="html">
                   <imagedata fileref="images/dynamicnavigation-clv.png" format="PNG" align="center"/>
                </imageobject>
@@ -115,49 +104,50 @@
                   <imagedata fileref="images/dynamicnavigation-clv.png" format="PNG" align="center" width="150mm"  />
                </imageobject>
             </mediaobject>
-			</para>
-			 <para>
-				Details:
+            </example>
 			</para>
 			 <para>
 				<table frame="all">
 					<title></title>
 					 <tgroup cols="2">
-						<colspec colname="c1"></colspec>
-						 <colspec colname="c2"></colspec>
-						 <tbody>
+						<thead>
+                     <row>
+                        <entry>
+                           Field
+                        </entry>
+                        <entry>
+                           Details
+                        </entry>
+                     </row>
+                  </thead>
+                  <tbody>
 							<row>
 								<entry>
-									<emphasis role="bold">Contextual Folder</emphasis>
+                           <guilabel>Contextual Folder</guilabel>
 								</entry>
 								 <entry>
 									<itemizedlist>
 										<listitem>
 											<para>
-												Disable: It means a single content will be opened by an URL containing the Folder Path (for CLV)
+                                    <guilabel>Disable</guilabel>: A single content will be opened by an URL containing the Folder Path (for CLV)
 											</para>
 
 										</listitem>
 										 <listitem>
 											<para>
-												Enable: It means the path of content list (Folder Path in the Content Selection path) can be dynamically changed by URL.
+                                    <guilabel>Enable</guilabel>: The path of content list (<guilabel>Folder Path</guilabel> in the <guilabel>Content Selection</guilabel> path) can be dynamically changed by URL.
 											</para>
-
 										</listitem>
-
 									</itemizedlist>
-
 								</entry>
-
 							</row>
 							 <row>
 								<entry>
-									<emphasis role="bold">By</emphasis>
+                           <guilabel>By</guilabel>
 								</entry>
 								 <entry>
-									This parameter is the key in the URL to let CLV know which really is the path in the current URL.
+									This parameter is the key in the URL to let CLV know which is the actual path in the current URL.
 								</entry>
-
 							</row>
 							 <row>
 								<entry>

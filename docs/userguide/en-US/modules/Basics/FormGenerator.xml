@@ -7,13 +7,16 @@
 <section id="sect-User_Guide-Form_Builder">
    <title>Form Builder</title>
   <para>
-  The <emphasis role="bold">Form Builder</emphasis> portlet enables users to create and to edit template of document types. Documents are stored in the so-called node; therefore, the term “node” and node types are often applied.
+  The <emphasis>Form Builder</emphasis> portlet enables users to create and to edit various document type templates. Documents are stored in a node; therefore, the term <emphasis>node</emphasis> and node types are often applied.
  </para>
   <procedure>
     <title/>
     <step>
       <para>
-    Go to <emphasis role="bold">Group &gt; Form Builder</emphasis> on the <emphasis role="bold">administration</emphasis> bar. The <emphasis role="bold">Form Builder</emphasis> will appear:
+    Go to <menuchoice>
+       <guimenu>Group</guimenu>
+       <guimenuitem>Form Builder</guimenuitem>
+    </menuchoice> on the administration bar. The <emphasis>Form Builder</emphasis> will appear:
    </para>
       <mediaobject>
         <imageobject role="html">
@@ -26,17 +29,17 @@
     </step>
     <step>
       <para>
-    Enter the node name into the <emphasis role="bold">Name</emphasis> field. (* Required)
+    Enter the node name into the <emphasis role="bold">Name</emphasis> field (an asterix [*] indicates that this a required value).
    </para>
     </step>
     <step>
       <para>
-    Enter a brief description about the node.
+    Enter a brief description of the node.
    </para>
     </step>
     <step>
       <para>
-    Click the <emphasis role="bold">Form Builder</emphasis> tab that allows you to set properties for a node. Available components are displayed on the left pane.
+    Click the <guilabel>Form Builder</guilabel> tab. Items on this tab allow you to set properties for a node. Available components are displayed on the left pane.
    </para>
       <mediaobject>
         <imageobject role="html">
@@ -164,7 +167,7 @@
         </inlinemediaobject> icon again to hide the form to edit the properties.
    </para>
       <para>
-    After editing the properties of the components, the components look like the below illustration:
+    After editing the properties of the components, the components will appear similar to the illustration below:
    </para>
       <mediaobject>
         <imageobject role="html">
@@ -177,7 +180,8 @@
     </step>
     <step>
       <para>
-    Click <emphasis role="bold">Save</emphasis> to accept creating a new node, or <emphasis role="bold">Reset</emphasis> to edit this node again before saving.</para>
+    Click <guilabel>Save</guilabel> to create the new node, or <guilabel>Reset</guilabel> to edit the node again before saving.
+    </para>
       <para>
     A message will inform that you created a node successfully.
    </para>
