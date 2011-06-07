@@ -130,17 +130,19 @@ public class UINewsletterViewerForm extends UIForm {
         this.userMail = useraccount.getEmail();
         this.inputEmail.setRendered(false);
         this.setActionAgain();
-      } else {
-        this.userMail = useraccount.getEmail();
-        this.inputEmail.setRendered(false);
+      } else {        
         boolean isExistedEmail = this.managerUserHandler.checkExistedEmail(WCMCoreUtils.getUserSessionProvider(),
                                                                            NewsLetterUtil.getPortalName(),
                                                                            useraccount.getEmail());
-        if (isExistedEmail)
-          this.setActionAgain();
-        else {
-          this.setActions(new String[] { "ForgetEmail", "Subcribe" });
-          this.isUpdated = true;
+        if(isExistedEmail) {
+          this.userMail = useraccount.getEmail();
+          this.inputEmail.setRendered(false);
+          this.setActionAgain();       
+        } else {
+          this.inputEmail.setRendered(true);
+          this.inputEmail.setValue(useraccount.getEmail());
+          this.setActions(new String[] { "Subcribe" });  
+        	this.isUpdated = false;
         }
       }
 
@@ -298,7 +300,6 @@ public class UINewsletterViewerForm extends UIForm {
                                                    NewsLetterUtil.getPortalName(),
                                                    newsletterForm.userMail);
 
-      newsletterForm.isUpdated = true;
       newsletterForm.setListIds(null);
       newsletterForm.inputEmail.setValue("");
       newsletterForm.inputEmail.setRendered(true);
@@ -314,6 +315,7 @@ public class UINewsletterViewerForm extends UIForm {
         }
       }
       newsletterForm.setActions(new String[] {"Subcribe"});
+      newsletterForm.isUpdated = false;
       event.getRequestContext().addUIComponentToUpdateByAjax(newsletterForm);
     }
   }
