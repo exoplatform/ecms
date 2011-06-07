@@ -23,6 +23,12 @@
     <type>org.exoplatform.wcm.connector.collaboration.VoteConnector</type>
   </component>
   <component>
+    <type>org.exoplatform.wcm.connector.collaboration.TagConnector</type>
+  </component>
+  <component>
+    <type>org.exoplatform.wcm.connector.collaboration.CommentConnector</type>
+  </component>
+  <component>
     <type>org.exoplatform.wcm.connector.collaboration.RssConnector</type>
   </component>
   <component>

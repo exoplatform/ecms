@@ -16,14 +16,16 @@
  */
 package org.exoplatform.wcm.connector.collaboration;
 
+import java.net.URLDecoder;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Map;
 
 import javax.jcr.Node;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.QueryParam;
+import javax.servlet.http.HttpServletRequest;
+import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -48,10 +50,54 @@ public class VoteConnector extends BaseConnector implements ResourceContainer {
 
   /**
    * Instantiates a new vote connector.
-   *
-   * @param container the container
    */
   public VoteConnector() {}
+
+
+  /**
+   * post a Vote for a content
+   *
+   * @param jcrPath the jcr path
+   *
+   * @return http code
+   *
+   * @throws Exception the exception
+   */
+  @POST
+  @Path("/star/")
+//  @InputTransformer(PassthroughInputTransformer.class)
+  public Response postStarVote(
+          @FormParam("jcrPath") String jcrPath,
+          @FormParam("vote") String vote
+          ) throws Exception {
+
+    if (jcrPath.contains("%20")) jcrPath = URLDecoder.decode(jcrPath, "UTF-8");
+
+    return postVote(null, null,  jcrPath,  vote,  "en" );
+  }
+
+    /**
+   * get a Vote for a content
+   *
+   * @param repositoryName the repository name
+   * @param workspaceName the workspace name
+   * @param jcrPath the jcr path
+   *
+   * @return http code
+   *
+   * @throws Exception the exception
+   */
+  @GET
+  @Path("/star/")
+//  @OutputTransformer(XMLOutputTransformer.class)
+  public Response getStarVote(
+      @QueryParam("repositoryName") String repositoryName,
+      @QueryParam("workspaceName") String workspaceName,
+      @QueryParam("jcrPath") String jcrPath) throws Exception {
+
+    return getVote(repositoryName,  workspaceName,  jcrPath);
+  }
+
 
   /**
    * post a Vote for a content
@@ -75,7 +121,15 @@ public class VoteConnector extends BaseConnector implements ResourceContainer {
       @QueryParam("lang") String lang
       ) throws Exception {
     try {
-      Node content = getContent(workspaceName, jcrPath);
+
+      if (repositoryName==null && workspaceName==null) {
+        String[] path = jcrPath.split("/");
+        repositoryName = path[1];
+        workspaceName = path[2];
+        jcrPath = jcrPath.substring(repositoryName.length()+workspaceName.length()+2);
+        if (jcrPath.charAt(1)=='/') jcrPath.substring(1);
+      }
+      Node content = getContent(repositoryName, workspaceName, jcrPath, null, false);
       if (content.isNodeType("mix:votable")) {
         String userName = content.getSession().getUserID();
         votingService.vote(content, Double.parseDouble(vote), userName, lang);
@@ -107,7 +161,15 @@ public class VoteConnector extends BaseConnector implements ResourceContainer {
       @QueryParam("workspaceName") String workspaceName,
       @QueryParam("jcrPath") String jcrPath) throws Exception {
     try {
-      Node content = getContent(workspaceName, jcrPath);
+
+      if (repositoryName==null && workspaceName==null) {
+        String[] path = jcrPath.split("/");
+        repositoryName = path[1];
+        workspaceName = path[2];
+        jcrPath = jcrPath.substring(repositoryName.length()+workspaceName.length()+2);
+        if (jcrPath.charAt(1)=='/') jcrPath.substring(1);
+      }
+      Node content = getContent(repositoryName, workspaceName, jcrPath);
       if (content.isNodeType("mix:votable")) {
         String votingRate = "";
         if (content.hasProperty("exo:votingRate"))

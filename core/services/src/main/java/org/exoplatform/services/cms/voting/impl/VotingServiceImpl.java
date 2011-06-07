@@ -169,13 +169,15 @@ public class VotingServiceImpl implements VotingService {
             languageNode = getFileLangNode(languageNode) ;
           }
         }
-      }
+      } else {
+	    languageNode = node;
+	  }
     }
     return languageNode;
   }
 
   private Node handleUser(Session session, Node node, String userName) throws Exception {
-    if (userName == null) {
+    if (userName == null || "__anonim".equals(userName)) {
       String strWorkspaceName = node.getSession().getWorkspace().getName();
       ExoContainer eXoContainer = ExoContainerContext.getCurrentContainer();
       RepositoryService repositoryService = (RepositoryService) eXoContainer
