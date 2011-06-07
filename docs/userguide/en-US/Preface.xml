@@ -6,15 +6,6 @@
 <preface id="pref-User_Guide-Preface">
 	<title>Preface</title>
    
-   <xi:include href="rh_Feedback.xml" xmlns:xi="http://www.w3.org/2001/XInclude" >
-      <xi:fallback xmlns:xi="http://www.w3.org/2001/XInclude">
-         <xi:include href="exo_Feedback.xml" xmlns:xi="http://www.w3.org/2001/XInclude">
-            <xi:fallback xmlns:xi="http://www.w3.org/2001/XInclude">
-               <xi:include href="rh_Feedback.xml" xmlns:xi="http://www.w3.org/2001/XInclude" >
-            </xi:include>
-         </xi:fallback>
-         </xi:include>
-      </xi:fallback> 
-   </xi:include>
+   <xi:include href="Feedback.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
 </preface>
 
