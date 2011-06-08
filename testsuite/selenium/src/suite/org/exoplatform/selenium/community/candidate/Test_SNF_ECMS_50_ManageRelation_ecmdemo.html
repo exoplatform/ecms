@@ -53,7 +53,7 @@
 </tr>
 <tr>
 	<td>echo</td>
-	<td>--Go to Sites Explorer</td>
+	<td>--Go to Content Explorer</td>
 	<td></td>
 </tr>
 <tr>
@@ -174,7 +174,7 @@
 <tr>
 	<td>type</td>
 	<td>//html/body</td>
-	<td>Lam Y khue, Em yeu chi</td>
+	<td>Test_SNF_ECMS_50</td>
 </tr>
 <tr>
 	<td>selectFrame</td>
@@ -189,7 +189,7 @@
 <tr>
 	<td>type</td>
 	<td>//html/body</td>
-	<td>Tai sao chi lai tu` choi em chu', Em muon het len. EM YEU CHI. Minh bi dien mia roi</td>
+	<td>Test_SNF_ECMS_50</td>
 </tr>
 <tr>
 	<td>selectFrame</td>
@@ -393,12 +393,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@id='UIRelationManager']/div/div/div[1]/div[1]/div/div/div/div/div[2]/div/div/div/div</td>
+	<td>//div[text()='Select relation']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[@id='UIRelationManager']/div/div/div[1]/div[1]/div/div/div/div/div[2]/div/div/div/div</td>
+	<td>//div[text()='Select relation']</td>
 	<td></td>
 </tr>
 <tr>
@@ -419,6 +419,36 @@
 <tr>
 	<td>click</td>
 	<td>//div[text()='Users']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[text()='r___']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[text()='r___']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[text()='ro___']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[text()='ro___']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[text()='roo___']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[text()='roo___']</td>
 	<td></td>
 </tr>
 <tr>
@@ -458,22 +488,22 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@id='UISelectPathPanel']/table/tbody/tr[2]/td[2]/a/div</td>
+	<td>//div[@id='UISelectPathPanel']//a[contains(@href,&quot;Kofax&quot;)]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[@id='UISelectPathPanel']/table/tbody/tr[2]/td[2]/a/div</td>
+	<td>//div[@id='UISelectPathPanel']//a[contains(@href,&quot;Kofax&quot;)]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForTextPresent</td>
-	<td>/Users/root/Private/Kofax</td>
+	<td>/Users/r___/ro___/roo___/root/Private/Kofax</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>/Users/root/Private/Kofax</td>
+	<td>/Users/r___/ro___/roo___/root/Private/Kofax</td>
 	<td></td>
 </tr>
 <tr>
@@ -682,6 +712,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>link=Delete</td>
+	<td></td>
+</tr>
+<tr>
 	<td>click</td>
 	<td>link=Delete</td>
 	<td></td>
@@ -729,6 +764,11 @@
 <tr>
 	<td>mouseDownRight</td>
 	<td>link=Kofax</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Delete</td>
 	<td></td>
 </tr>
 <tr>

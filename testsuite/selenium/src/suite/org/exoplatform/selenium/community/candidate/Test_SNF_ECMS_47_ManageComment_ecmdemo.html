@@ -158,6 +158,41 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
+	<td>//td[@id='cke_contents_summary']/iframe</td>
+	<td></td>
+</tr>
+<tr>
+	<td>selectFrame</td>
+	<td>//td[@id='cke_contents_summary']/iframe</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>//html/body</td>
+	<td>Test_SNF_ECMS_47</td>
+</tr>
+<tr>
+	<td>selectFrame</td>
+	<td>relative=top</td>
+	<td></td>
+</tr>
+<tr>
+	<td>selectFrame</td>
+	<td>//td[@id='cke_contents_content']/iframe</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>//html/body</td>
+	<td>Test_SNF_ECMS_47</td>
+</tr>
+<tr>
+	<td>selectFrame</td>
+	<td>relative=top</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
 	<td>link=Save as Draft</td>
 	<td></td>
 </tr>
@@ -213,16 +248,6 @@
 </tr>
 <tr>
 	<td>click</td>
-	<td>IconListHideElement</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>link=Comment this document</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
 	<td>link=Comment this document</td>
 	<td></td>
 </tr>
@@ -244,7 +269,7 @@
 <tr>
 	<td>type</td>
 	<td>//html/body</td>
-	<td>I love eXo</td>
+	<td>Test_SNF_ECMS_47</td>
 </tr>
 <tr>
 	<td>selectFrame</td>
@@ -282,26 +307,6 @@
 	<td></td>
 </tr>
 <tr>
-	<td>pause</td>
-	<td>10000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>I love eXo</td>
-	<td></td>
-</tr>
-<tr>
-	<td>verifyTextPresent</td>
-	<td>I love eXo</td>
-	<td></td>
-</tr>
-<tr>
-	<td>echo</td>
-	<td>--Open form to edit</td>
-	<td></td>
-</tr>
-<tr>
 	<td>waitForElementPresent</td>
 	<td>//img[@title='Edit this comment']</td>
 	<td></td>
@@ -309,6 +314,26 @@
 <tr>
 	<td>click</td>
 	<td>//img[@title='Edit this comment']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>10000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Test_SNF_ECMS_47</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Test_SNF_ECMS_47</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>--Open form to edit</td>
 	<td></td>
 </tr>
 <tr>
@@ -324,11 +349,16 @@
 <tr>
 	<td>type</td>
 	<td>//html/body</td>
-	<td>I love eXo and I love her, My baby</td>
+	<td>Test_SNF_ECMS_47_edit</td>
 </tr>
 <tr>
 	<td>selectFrame</td>
 	<td>relative=top</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Save</td>
 	<td></td>
 </tr>
 <tr>
@@ -358,12 +388,12 @@
 </tr>
 <tr>
 	<td>waitForTextPresent</td>
-	<td>I love eXo and I love her, My baby</td>
+	<td>Test_SNF_ECMS_47_edit</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>I love eXo and I love her, My baby</td>
+	<td>Test_SNF_ECMS_47_edit</td>
 	<td></td>
 </tr>
 <tr>
@@ -383,12 +413,12 @@
 </tr>
 <tr>
 	<td>waitForTextNotPresent</td>
-	<td>I love eXo and I love her, My baby</td>
+	<td>Test_SNF_ECMS_47_edit</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextNotPresent</td>
-	<td>I love eXo and I love her, My baby</td>
+	<td>Test_SNF_ECMS_47_edit</td>
 	<td></td>
 </tr>
 <tr>
@@ -428,12 +458,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@id='UIPopupWindow']/div/div[2]/div/div/div/div/div/div/div/div[2]/table/tbody/tr/td/div[1]/div/div/div/a</td>
+	<td>//div[@id='UIPopupWindow']//a[text()=&quot;OK&quot;]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[@id='UIPopupWindow']/div/div[2]/div/div/div/div/div/div/div/div[2]/table/tbody/tr/td/div[1]/div/div/div/a</td>
+	<td>//div[@id='UIPopupWindow']//a[text()=&quot;OK&quot;]</td>
 	<td></td>
 </tr>
 <tr>
