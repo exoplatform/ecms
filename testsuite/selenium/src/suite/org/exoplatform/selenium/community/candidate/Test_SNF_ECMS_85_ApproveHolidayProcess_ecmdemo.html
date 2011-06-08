@@ -103,22 +103,22 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//table[@class='UIFormGrid']/tbody/tr[2]/td[@class='FieldComponent']/input[@type='text']</td>
+	<td>end</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//table[@class='UIFormGrid']/tbody/tr[2]/td[@class='FieldComponent']/input[@type='text']</td>
+	<td>end</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//tr[5]/td[3]/a</td>
+	<td>link=26</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//tr[5]/td[3]/a</td>
+	<td>link=26</td>
 	<td></td>
 </tr>
 <tr>
@@ -228,32 +228,32 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@id='UIOrganizationPortlet']/div[2]/div[1]/div/div/div/div/div/div/a[2]/div[2]</td>
+	<td>link=Group Management</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[@id='UIOrganizationPortlet']/div[2]/div[1]/div/div/div/div/div/div/a[2]/div[2]</td>
+	<td>link=Group Management</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@id='UIOrganizationPortlet']/div[2]/div[2]/div[1]/div[2]/div[1]/div[2]/div/div/div/div[3]/div</td>
+	<td>//a[@title=&quot;Organization&quot;]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[@id='UIOrganizationPortlet']/div[2]/div[2]/div[1]/div[2]/div[1]/div[2]/div/div/div/div[3]/div</td>
+	<td>//a[@title=&quot;Organization&quot;]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@id='UIOrganizationPortlet']/div[2]/div[2]/div[1]/div[2]/div[1]/div[2]/div/div/div/div[3]/div[2]/div[2]/div</td>
+	<td>//a[@title=&quot;Management&quot;]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[@id='UIOrganizationPortlet']/div[2]/div[2]/div[1]/div[2]/div[1]/div[2]/div/div/div/div[3]/div[2]/div[2]/div</td>
+	<td>//a[@title=&quot;Management&quot;]</td>
 	<td></td>
 </tr>
 <tr>
@@ -268,12 +268,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//form[@id='UIGroupMembershipForm']/div[2]/div/table/tbody/tr[1]/td[2]/a</td>
+	<td>//a[@title=&quot;Select User&quot;]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//form[@id='UIGroupMembershipForm']/div[2]/div/table/tbody/tr[1]/td[2]/a</td>
+	<td>//a[@title=&quot;Select User&quot;]</td>
 	<td></td>
 </tr>
 <tr>
@@ -288,12 +288,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//form[@id='UIUserSelector']/div[2]/div[2]/table/tbody/tr/td/a[1]/div/div/div</td>
+	<td>//div[contains(text(),'Add')]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//form[@id='UIUserSelector']/div[2]/div[2]/table/tbody/tr/td/a[1]/div/div/div</td>
+	<td>//div[contains(text(),'Add')]</td>
 	<td></td>
 </tr>
 <tr>
@@ -305,6 +305,11 @@
 	<td>select</td>
 	<td>membership</td>
 	<td>label=author</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Save</td>
+	<td></td>
 </tr>
 <tr>
 	<td>click</td>
@@ -387,18 +392,23 @@
 	<td></td>
 </tr>
 <tr>
+	<td>pause</td>
+	<td>10000</td>
+	<td></td>
+</tr>
+<tr>
 	<td>echo</td>
 	<td>-- read</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//form[@id='UITask']/div[3]/div/div[1]/div/table/tbody/tr/td/div[1]/div/div/div/a</td>
+	<td>//form[@id='UITask']//a[contains(text(),&quot; Read&quot;)]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//form[@id='UITask']/div[3]/div/div[1]/div/table/tbody/tr/td/div[1]/div/div/div/a</td>
+	<td>//form[@id='UITask']//a[contains(text(),&quot; Read&quot;)]</td>
 	<td></td>
 </tr>
 <tr>
@@ -463,32 +473,32 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@id='UIOrganizationPortlet']/div[2]/div[1]/div/div/div/div/div/div/a[2]/div[2]</td>
+	<td>link=Group Management</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[@id='UIOrganizationPortlet']/div[2]/div[1]/div/div/div/div/div/div/a[2]/div[2]</td>
+	<td>link=Group Management</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@id='UIOrganizationPortlet']/div[2]/div[2]/div[1]/div[2]/div[1]/div[2]/div/div/div/div[3]/div</td>
+	<td>//a[@title=&quot;Organization&quot;]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[@id='UIOrganizationPortlet']/div[2]/div[2]/div[1]/div[2]/div[1]/div[2]/div/div/div/div[3]/div</td>
+	<td>//a[@title=&quot;Organization&quot;]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@id='UIOrganizationPortlet']/div[2]/div[2]/div[1]/div[2]/div[1]/div[2]/div/div/div/div[3]/div[2]/div[2]/div</td>
+	<td>link=Management</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[@id='UIOrganizationPortlet']/div[2]/div[2]/div[1]/div[2]/div[1]/div[2]/div/div/div/div[3]/div[2]/div[2]/div</td>
+	<td>link=Management</td>
 	<td></td>
 </tr>
 <tr>
@@ -499,6 +509,11 @@
 <tr>
 	<td>click</td>
 	<td>link=Human Resources</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//img[@alt='DeleteUser']</td>
 	<td></td>
 </tr>
 <tr>
