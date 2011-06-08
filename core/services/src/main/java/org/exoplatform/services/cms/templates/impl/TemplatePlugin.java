@@ -114,7 +114,11 @@ public class TemplatePlugin extends BaseComponentPlugin {
   private static final String  END_JAVA;
 
   private static final String  DEFAULT_CSS;
-
+  
+  private static final String  JCR_PRIMARY_TYPE = "jcr:primaryType";
+  
+  private static final String  JCR_MIXIN_TYPES = "jcr:mixinTypes";
+  
   private RepositoryService repositoryService_;
   private ConfigurationManager  configManager_;
   private NodeHierarchyCreator nodeHierarchyCreator_;
@@ -396,9 +400,10 @@ public class TemplatePlugin extends BaseComponentPlugin {
     PropertyDefinition[] prodefs = nodeType.getPropertyDefinitions();
     for (PropertyDefinition prodef : prodefs) {
       // Dismiss all auto created property
-      if (prodef.isAutoCreated() || prodef.getName().equals("*")) continue;
-      propertyNameFormat = prodef.getName().replace(":", "_");
-      propertyPath = jcrPath.concat(prodef.getName());
+      String propertyName = prodef.getName();
+      if (prodef.isAutoCreated() || "*".equals(propertyName) || JCR_PRIMARY_TYPE.equals(propertyName) || JCR_MIXIN_TYPES.equals(propertyName)) continue;
+      propertyNameFormat = propertyName.replace(":", "_");
+      propertyPath = jcrPath.concat(propertyName);
       propertyId = propertyPath.replace(":", "_");
       componentField = new StringBuilder("\n\t\t\t\t\t\tuicomponent.addTextField(\"").append(propertyId)
                                                                                      .append("\", ");
