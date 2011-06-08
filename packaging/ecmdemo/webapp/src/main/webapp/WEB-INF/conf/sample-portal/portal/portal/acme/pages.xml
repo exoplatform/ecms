@@ -201,6 +201,11 @@
                 <value>false</value>
                 <read-only>false</read-only>
               </preference>
+              <preference>
+                <name>showLink</name>
+                <value>false</value>
+                <read-only>false</read-only>
+              </preference>
             </preferences>
           </portlet>
           <title>News</title>
