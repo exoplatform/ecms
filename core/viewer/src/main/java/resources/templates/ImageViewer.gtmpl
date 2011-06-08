@@ -8,6 +8,9 @@
   import org.exoplatform.services.jcr.util.Text;
   import org.exoplatform.container.PortalContainer;
   import org.exoplatform.wcm.webui.Utils;
+  import javax.imageio.ImageIO;
+  import javax.imageio.stream.ImageInputStream;
+  import javax.imageio.ImageReader;
 
 	UIComponent uiParent = uicomponent.getParent();
 	
@@ -62,7 +65,24 @@
 		}
 	  dcTitle=sB.toString();
   }
+
+  String imageWidthStr = "610";
+  try {
+  	ImageReader reader = ImageIO.getImageReadersByMIMEType(mimeType).next();
+  	ImageInputStream iis = ImageIO.createImageInputStream(contentNode.getProperty("jcr:data").getStream());
+  	reader.setInput(iis, true);
+  	def imageWidth = reader.getWidth(0);
+  	iis.close();
+  	reader.dispose();
+  	
+  	if (imageWidth < 40)
+  	  imageWidthStr = "40";
+  	else if (imageWidth < 610)
+  	  imageWidthStr = imageWidth + "";
+  	
+  } catch (Exception e) {}
   
 %>
-
-  <a href="$binarySrc" title="$dcTitle" target="_new"><image src="$binarySrc" width="610"/></a>              
+  <div style="text-align:center">
+    <a href="$binarySrc" title="$dcTitle" target="_new"><image src="$binarySrc" width="$imageWidthStr"/></a>
+  </div>
