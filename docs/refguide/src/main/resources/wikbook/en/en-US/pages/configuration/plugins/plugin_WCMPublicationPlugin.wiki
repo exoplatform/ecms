@@ -72,7 +72,7 @@ h2. Component with init-params example {anchor:id=CONTref.Configuration.Publicat
 </component>
 {code}
 
-h2. External-component-plugins configuration example {anchor:id=CONTref.Configuration.Publication.Externalcomponentpluginsexample}
+h2. Sample configuration {anchor:id=CONTref.Configuration.Publication.Externalcomponentpluginsexample}
 {code:xml}
 <external-component-plugins>
     <target-component>org.exoplatform.services.cache.CacheService</target-component>

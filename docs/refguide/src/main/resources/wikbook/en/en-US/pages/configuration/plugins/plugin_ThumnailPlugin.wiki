@@ -1,0 +1,60 @@
+h1. Fields
+*Object type*: _org.exoplatform.services.cms.thumbnail.impl.ThumbnailType_
+||  *Name*  ||  *Type*  ||  *Default Value*   ||  *Description*  ||
+| *mimeTypes* |  |  |  |
+
+
+h1. Sample configuration
+{code:xml}
+<external-component-plugins>
+    <target-component>org.exoplatform.services.cms.thumbnail.ThumbnailService</target-component>
+	  <component-plugin>
+	    <name>ImageThumbnailPlugin</name>
+	    <set-method>addPlugin</set-method>
+	    <type>org.exoplatform.services.cms.thumbnail.impl.ImageThumbnailPlugin</type>
+	    <init-params>
+	      <object-param>
+	        <name>thumbnailType</name>
+	        <description>Thumbnail types</description>
+	        <object type="org.exoplatform.services.cms.thumbnail.impl.ThumbnailType">
+				<field name="mimeTypes">
+					<collection type="java.util.ArrayList">
+						<value><string>image/jpeg</string></value>
+						<value><string>image/png</string></value>
+						<value><string>image/gif</string></value>
+						<value><string>image/bmp</string></value>
+						<value><string>image/tiff</string></value>
+					</collection>
+				</field>
+	        </object>
+	      </object-param>
+	    </init-params>
+	  </component-plugin>
+      <component-plugin>
+	    <name>PDFThumbnailPlugin</name>   
+	    <set-method>addPlugin</set-method>
+	    <type>org.exoplatform.services.cms.thumbnail.impl.PDFThumbnailPlugin</type>
+	    <init-params>
+	      <object-param>
+	        <name>thumbnailType</name>
+	        <description>Thumbnail types</description>
+	        <object type="org.exoplatform.services.cms.thumbnail.impl.ThumbnailType">
+				<field name="mimeTypes">
+					<collection type="java.util.ArrayList">
+					    <value><string>application/pdf</string></value>
+					</collection>
+				</field>
+	        </object>
+	      </object-param>
+	    </init-params>
+	  </component-plugin>
+  </external-component-plugins>  	  
+
+{code}
+
+In which: 
+* *Target-component*: {{org.exoplatform.services.cms.thumbnail.ThumbnailService}}
+* *Name*: {{ImageThumbnailPlugin}}
+* *Set-method*: {{addPlugin}}
+* *Type*: {{org.exoplatform.services.cms.thumbnail.impl.ImageThumbnailPlugin}}
+

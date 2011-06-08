@@ -12,7 +12,7 @@ With this kind of template, node information is only displayed but can not be ed
 See details at[ContentType|#CONTref.CONTref.InsideWCMTemplates.ContentTypes].
 
 
-h1. Available configuration {anchor:id=CONTref.Configuration.Templates.ApplicationTemplate.AvailableConfiguration}
+h1. Fields {anchor:id=CONTref.Configuration.Templates.ApplicationTemplate.Fields}
 
 h2. Init-params {anchor:id=CONTref.Configuration.Templates.ApplicationTemplate.Init-params}
 
@@ -20,15 +20,14 @@ h2. Init-params {anchor:id=CONTref.Configuration.Templates.ApplicationTemplate.I
 | *autoCreateInNewRepository* | {{Boolean}} | {{true}} | Enable the application to import predefined templates at the start-up of template service automatically.|
 | storedLocation | {{String}} | {{war:/conf/dms-extension/dms/artifacts/templates}} | Location of stored templates. |
 | repository | {{String}} | {{repository}} | Location of stored templates. |
-| object-param | {{Structure}} | | Configuration for each instance. |
-
+| object-param | {{Structure}} | {{N/A}}| Configuration for each instance. |
 
 h2. Object-param {anchor:id=CONTref.Configuration.Templates.ApplicationTemplate.Objectparams}
 
 || *Configuration name* || *Data type* || *Default Value* || *Description* ||
 | *name* | {{String}} | {{template.configuration}} | The name of this configuration. |
 | *description* | {{String}} | {{configuration for the location of templates to inject in jcr}} | Description of template instance. |
-| *object-type* | {{Structure}} | | Details configuration for each instance type. |
+| *object-type* | {{Structure}} | {{N/A}} | Details configuration for each instance type. |
 
 
 *Object-type* defines all available template files, using the "collection type" configuration*.
@@ -55,7 +54,7 @@ Each type includes some definitions as the {{object type="org.exoplatform.servic
 | *templateFile* | {{String}} | The location of the file store for the template's presentation. |
 | *roles* | {{String}} | Determine who can access this object (View/Dialog/CSS). |
 
-h1. Example of template configuration {anchor:id=CONTref.Configuration.Templates.ApplicationTemplate.TemplateConfigurationExample}
+h1. Sample configuration {anchor:id=CONTref.Configuration.Templates.ApplicationTemplate.TemplateConfigurationExample}
 
 This below example is configuration for the _nt:file_ template, any other template will be put in the same level with this template start from the line
 {{<object type="org.exoplatform.services.cms.templates.impl.TemplateConfig$NodeType">}} as the another node type.

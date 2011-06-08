@@ -1,0 +1,1 @@
+This is an abstract class and the parent of *ScriptActionPlugin*. You can create a link from this plugin to its children. 

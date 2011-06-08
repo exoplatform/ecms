@@ -1,0 +1,2 @@
+This is an abstract class and the parent of [*StageAndVersionPublicationPlugin*|#CONTref.Configuration.Plugins.StageAndVersionPublicationPlugin] 
+and [*AuthoringPublicationPlugin*|#CONTref.Configuration.Plugins.AuthoringPublicationPlugin]. You can create a link from this plugin to its childrens.

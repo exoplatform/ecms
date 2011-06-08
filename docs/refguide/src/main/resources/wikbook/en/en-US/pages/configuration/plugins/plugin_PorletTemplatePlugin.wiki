@@ -1,0 +1,204 @@
+This plugin is used to import the view templates for Content List Viewer.
+h1. Fields
+*Object type*: _org.exoplatform.services.cms.views.PortletTemplatePlugin$PortletTemplateConfig_
+||  *Name*  ||  *Type*  ||  *Default Value*   ||  *Description*  ||
+| *templateName* | {{string}} | {{UIContentListPresentationDefault.gtmpl}} | The name of the groovy template. |
+
+h1. Sample configuration
+{code:xml}
+<external-component-plugins>
+    <target-component>org.exoplatform.services.cms.views.ApplicationTemplateManagerService</target-component>
+    <component-plugin>
+      <name>clv.templates.plugin</name>
+      <set-method>addPlugin</set-method>
+      <type>org.exoplatform.services.cms.views.PortletTemplatePlugin</type>
+      <description>This plugin is used to import views templates for Content List Viewer</description>
+      <init-params>
+        <value-param>
+          <name>portletName</name>
+          <value>content-list-viewer</value>
+        </value-param>
+        <value-param>
+          <name>portlet.template.path</name>
+          <value>war:/conf/wcm-artifacts/application-templates/content-list-viewer</value>
+        </value-param>
+        <object-param>
+          <name>default.folder.list.viewer</name>
+          <description>Default folder list viewer groovy template</description>
+          <object type="org.exoplatform.services.cms.views.PortletTemplatePlugin$PortletTemplateConfig">
+            <field name="templateName">
+              <string>UIContentListPresentationDefault.gtmpl</string>
+            </field>
+            <field name="category">
+              <string>list</string>
+            </field>
+          </object>
+        </object-param>
+        <object-param>
+          <name>big.folder.list.viewer</name>
+          <description>Default folder list viewer groovy template with Big Image</description>
+          <object type="org.exoplatform.services.cms.views.PortletTemplatePlugin$PortletTemplateConfig">
+            <field name="templateName">
+              <string>UIContentListPresentationBigImage.gtmpl</string>
+            </field>
+            <field name="category">
+              <string>list</string>
+            </field>
+          </object>
+        </object-param>
+        <object-param>
+          <name>small.folder.list.viewer</name>
+          <description>Default folder list viewer groovy template with Small Image</description>
+          <object type="org.exoplatform.services.cms.views.PortletTemplatePlugin$PortletTemplateConfig">
+            <field name="templateName">
+              <string>UIContentListPresentationSmall.gtmpl</string>
+            </field>
+            <field name="category">
+              <string>list</string>
+            </field>
+          </object>
+        </object-param>
+        <object-param>
+          <name>Two columns CLV template</name>
+          <description>Two columns CLV template</description>
+          <object type="org.exoplatform.services.cms.views.PortletTemplatePlugin$PortletTemplateConfig">
+            <field name="templateName">
+              <string>TwoColumnsCLVTemplate.gtmpl</string>
+            </field>
+            <field name="category">
+              <string>list</string>
+            </field>
+          </object>
+        </object-param>
+        <object-param>
+          <name>One column CLV template</name>
+          <description>One column CLV template</description>
+          <object type="org.exoplatform.services.cms.views.PortletTemplatePlugin$PortletTemplateConfig">
+            <field name="templateName">
+              <string>OneColumnCLVTemplate.gtmpl</string>
+            </field>
+            <field name="category">
+              <string>list</string>
+            </field>
+          </object>
+        </object-param>
+        <object-param>
+          <name>Category Tree</name>
+          <description>Category Tree</description>
+          <object type="org.exoplatform.services.cms.views.PortletTemplatePlugin$PortletTemplateConfig">
+            <field name="templateName">
+              <string>CategoryTree.gtmpl</string>
+            </field>
+            <field name="category">
+              <string>navigation</string>
+            </field>
+          </object>
+        </object-param>
+        <object-param>
+          <name>Category List</name>
+          <description>Category List</description>
+          <object type="org.exoplatform.services.cms.views.PortletTemplatePlugin$PortletTemplateConfig">
+            <field name="templateName">
+              <string>CategoryList.gtmpl</string>
+            </field>
+            <field name="category">
+              <string>navigation</string>
+            </field>
+          </object>
+        </object-param>
+        <object-param>
+          <name>Tags Cloud</name>
+          <description>Tags Cloud</description>
+          <object type="org.exoplatform.services.cms.views.PortletTemplatePlugin$PortletTemplateConfig">
+            <field name="templateName">
+              <string>TagsCloud.gtmpl</string>
+            </field>
+            <field name="category">
+              <string>navigation</string>
+            </field>
+          </object>
+        </object-param>
+        <object-param>
+          <name>Documents template</name>
+          <description>Documents template</description>
+          <object type="org.exoplatform.services.cms.views.PortletTemplatePlugin$PortletTemplateConfig">
+            <field name="templateName">
+              <string>DocumentsTemplate.gtmpl</string>
+            </field>
+            <field name="category">
+              <string>list</string>
+            </field>
+          </object>
+        </object-param>
+        <object-param>
+          <name>folder.list.viewer</name>
+          <description>Default folder list viewer groovy template</description>
+          <object type="org.exoplatform.services.cms.views.PortletTemplatePlugin$PortletTemplateConfig">
+            <field name="templateName">
+              <string>ContentListViewerDefault.gtmpl</string>
+            </field>
+            <field name="category">
+              <string>list</string>
+            </field>
+          </object>
+        </object-param>
+        <object-param>
+          <name>Big hot news template</name>
+          <description>Big hot news template</description>
+          <object type="org.exoplatform.services.cms.views.PortletTemplatePlugin$PortletTemplateConfig">
+            <field name="templateName">
+              <string>BigHotNewsTemplateCLV.gtmpl</string>
+            </field>
+            <field name="category">
+              <string>list</string>
+            </field>
+          </object>
+        </object-param>
+        <object-param>
+          <name>Events template</name>
+          <description>Events template</description>
+          <object type="org.exoplatform.services.cms.views.PortletTemplatePlugin$PortletTemplateConfig">
+            <field name="templateName">
+              <string>EventsTemplateCLV.gtmpl</string>
+            </field>
+            <field name="category">
+              <string>list</string>
+            </field>
+          </object>
+        </object-param>
+        <object-param>
+          <name>default.paginator</name>
+          <description>Default paginator groovy template</description>
+          <object type="org.exoplatform.services.cms.views.PortletTemplatePlugin$PortletTemplateConfig">
+            <field name="templateName">
+              <string>UIPaginatorDefault.gtmpl</string>
+            </field>
+            <field name="category">
+              <string>paginators</string>
+            </field>
+          </object>
+        </object-param>
+        <object-param>
+          <name>empty.paginator</name>
+          <description>Empty paginator groovy template</description>
+          <object type="org.exoplatform.services.cms.views.PortletTemplatePlugin$PortletTemplateConfig">
+            <field name="templateName">
+              <string>UIPaginatorEmpty.gtmpl</string>
+            </field>
+            <field name="category">
+              <string>paginators</string>
+            </field>
+          </object>
+        </object-param>
+      </init-params>
+    </component-plugin>
+  </external-component-plugins>
+{code}
+
+
+In which:
+* *Target-component*: {{org.exoplatform.services.cms.views.ApplicationTemplateManagerService}}
+* *Name*: {{clv.templates.plugin}}
+* *Set-method*: {{addPlugin}}
+* *Type*: {{org.exoplatform.services.wcm.webcontent.InitialWebContentPlugin}}
+

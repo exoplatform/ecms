@@ -1,0 +1,64 @@
+
+h1. Fields
+*Object type*: _org.exoplatform.services.deployment.plugins.LinkDeploymentDescriptor_
+||  *Name*  ||  *Type*  ||  *Default Value*   ||  *Description*  ||
+| *sourcePath* | {{string}} | {{repository:collaboration:/sites content/live/acme/web contents/News/News1}} | The path to the source where this plugin will get data. |
+| *targetPath* | {{string}} | {{repository:collaboration:/sites content/live/acme/categories/acme}} | The path to the target where this plugin will deploy. |
+
+h1. Sample configuration
+{code:xml}
+<external-component-plugins>
+    <target-component>org.exoplatform.services.deployment.WCMContentInitializerService</target-component>
+    <component-plugin>
+      <name>Content Initializer Service</name>
+      <set-method>addPlugin</set-method>
+      <type>org.exoplatform.services.deployment.plugins.LinkDeploymentPlugin</type>
+      <description>Link Deployment Plugin</description>
+      <init-params>
+        <object-param>
+          <name>link01</name>
+          <description>Deployment Descriptor</description>
+          <object type="org.exoplatform.services.deployment.plugins.LinkDeploymentDescriptor">
+            <field name="sourcePath">
+              <string>repository:collaboration:/sites content/live/acme/web contents/News/News1</string>
+            </field>
+            <field name="targetPath">
+              <string>repository:collaboration:/sites content/live/acme/categories/acme</string>
+            </field>
+          </object>
+        </object-param>
+        <object-param>
+          <name>link02</name>
+          <description>Deployment Descriptor</description>
+          <object type="org.exoplatform.services.deployment.plugins.LinkDeploymentDescriptor">
+            <field name="sourcePath">
+              <string>repository:collaboration:/sites content/live/acme/web contents/News/News2</string>
+            </field>
+            <field name="targetPath">
+              <string>repository:collaboration:/sites content/live/acme/categories/acme</string>
+            </field>
+          </object>
+        </object-param>
+        <object-param>
+          <name>link03</name>
+          <description>Deployment Descriptor</description>
+          <object type="org.exoplatform.services.deployment.plugins.LinkDeploymentDescriptor">
+            <field name="sourcePath">
+              <string>repository:collaboration:/sites content/live/acme/web contents/News/News3</string>
+            </field>
+            <field name="targetPath">
+              <string>repository:collaboration:/sites content/live/acme/categories/acme</string>
+            </field>
+          </object>
+        </object-param>
+      </init-params>
+    </component-plugin>
+  </external-component-plugins>
+{code}
+
+
+In which:
+* *Target-component*: {{org.exoplatform.services.deployment.WCMContentInitializerService}}
+* *Name*: {{Content Initializer Service}}
+* *Set-method*: {{addPlugin}}
+* *Type*: {{org.exoplatform.services.wcm.webcontent.InitialWebContentPlugin}}

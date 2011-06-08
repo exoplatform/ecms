@@ -1,0 +1,37 @@
+h1. Fields
+*object type* _org.exoplatform.services.cms.folksonomy.impl.TagPermissionConfig_
+||  *Name*  ||  *Type*  ||  *Default Value*   ||  *Description*  ||
+| *tagPermissionList* | {{array list}} | {{*:/platform/administrators}} | The users of groups that have the permission. |
+
+h1. Sample configuration
+{code:xml}
+
+  <external-component-plugins>
+    <target-component>org.exoplatform.services.cms.folksonomy.NewFolksonomyService</target-component>     
+      <component-plugin>
+        <name>predefinedTagPermissionPlugin</name>
+        <set-method>addTagPermissionPlugin</set-method>
+        <type>org.exoplatform.services.cms.folksonomy.impl.TagPermissionPlugin</type>
+        <init-params>
+          <object-param>
+            <name>TagPermission.configuration</name>
+            <description>configuration predefined permission for tag to inject in jcr</description>
+            <object type="org.exoplatform.services.cms.folksonomy.impl.TagPermissionConfig">
+              <field  name="tagPermissionList">
+                <collection type="java.util.ArrayList">                 
+			        <value><string>*:/platform/administrators</string></value>
+                </collection>
+              </field>
+            </object>
+          </object-param>  
+        </init-params>                  
+      </component-plugin>
+  </external-component-plugins>
+{code}
+
+In which:
+
+* *Target-component*: {{org.exoplatform.services.cms.folksonomy.NewFolksonomyService}}
+* *Name*: {{predefinedTagPermissionPlugin}}
+* *Set-method*: {{addTagPermissionPlugin}}
+* *Type*: {{org.exoplatform.services.cms.folksonomy.impl.TagPermissionPlugin}}

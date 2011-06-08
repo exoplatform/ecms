@@ -1,0 +1,14 @@
+h1. Fields
+
+|| Name || Possible value || Default value || Description ||
+|  |  |  |  |
+|  |  |  |  |
+|  |  |  |  |
+|  |  |  |  |
+|  |  |  |  |
+
+
+h1.Sample configuration
+
+{code}
+{code}

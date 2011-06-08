@@ -6,17 +6,17 @@ There are two main cases to use:
 - The site is created at runtime, when a user uses the core features of the GateIn portal.
 h1. Fields {anchor:id=CONTref.Configuration.Deployment.Fields}
 
-*{{init-params}}*
+*init-params*
 || *Element* || *Type* || *Description* ||
 | *object-param* | {{Object}} | The parameter which is an Object. |
 
-*{{object-param}}*
+*object-param*
 || *Element* || *Type* || *Default value* || *object-param* ||
 | *name* | {{String}} |{{ACME Logo data}} | The name of this object parameter. |
 | *description* | {{String}} |{{Deployment Descriptor}} | The description of this object parameter. |
 | *object* | {{Class}} | {{org.exoplatform.services.deployment.DeploymentDescriptor}} | The object of this object parameter. |
 
-*{{object}}*
+*object*
 || *Attribute* || *Type* || *Default value* || *Description* ||
 | *type* | {{String}} | {{org.exoplatform.services.deployment.DeploymentDescriptor (*)}} | The type of this object. |
 
@@ -34,7 +34,7 @@ _*org.exoplatform.services.deployment.DeploymentDescriptor*_
 | *workspace* | {{String}} | {{collaboration}}  | The workspace of the target node. |
 | *nodePath* | {{String}} | {{/sites content/live/acme/web contents/site artifacts}} | The path of the target node. |
 
-h1. Example of configuration {anchor:id=CONTref.Configuration.Deployment.ConfigurationExample}
+h1. Sample configuration {anchor:id=CONTref.Configuration.Deployment.ConfigurationExample}
 {code:xml}
   <external-component-plugins>
     <target-component>org.exoplatform.services.deployment.WCMContentInitializerService</target-component>

@@ -1,4 +1,4 @@
-
+h1. Fields 
 *Target Component*: {{org.exoplatform.services.cms.taxonomy.TaxonomyService}}
 
 *Name*: {{predefinedTaxonomyPlugin}}
@@ -51,7 +51,7 @@
 
 
 
-* The sample configuration {anchor:id=CONTref.Configuration.Taxonomies.SampleConfiguration}
+h1. Sample configuration
 
 {code:xml}
 	<external-component-plugins>

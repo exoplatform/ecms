@@ -1,0 +1,1 @@
+This is an abstract class and the parent of [*CreateTaxonomyPlugin*|#CONTref.Configuration.Plugins.TaxonomyPlugin]. You can create a link from this plugin to its children. 
