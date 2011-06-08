@@ -1,6 +1,6 @@
 It is to introduce about basic knowledge of eXo CMIS, working principles and how to configure it.
 
-h1. CMIS Specification
+h1. CMIS Specification {anchor:id=Adm_CMIS.Introduction.CMIS_specification}
 
 {info}
 Content Management Interoperability Services (CMIS) Version 1.0
@@ -22,7 +22,7 @@ The CMIS specification provides a Web services interface that:
 * Supports the composite application development and mash-up by the business or IT analysts.
 
 
-h1. xCMIS project
+h1. xCMIS project {anchor:id=Adm_CMIS.Introduction.xCMIS_project}
 
 The xCMIS project [http://xcmis.org/], initially contributed to the Open Source community by [http://www.exoplatform.com|eXo Platform], is an implementation of the full stack of Java-based CMIS services. 
 xCMIS also includes the client side frameworks for integrating content from different enterprise repositories, according to the [http://www.oasis-open.org/committees/tc_home.php?wg_abbrev=cmis|CMIS standard]. 
@@ -31,7 +31,7 @@ The project is distributed under the LGPL license.
 You can download sources at [http://code.google.com/p/xcmis/source/checkout|Google code],
 or visit [http://code.google.com/p/xcmis/w/list|Community Wiki] for more information. 
 
-h1. eXo CMIS 
+h1. eXo CMIS {anchor:id=Adm_CMIS.Introduction.eXo_CMIS} 
 
 eXo CMIS is one eXo Platform service exposing eXo Content via CMIS.
 eXo CMIS offers the way to access the eXo ECMS content from the CMIS 1.0 compatible Web client using the REST Atom protocol.

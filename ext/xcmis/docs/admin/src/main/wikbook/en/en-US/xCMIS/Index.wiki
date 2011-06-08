@@ -1,4 +1,4 @@
-h1. CMIS search and index
+h1. CMIS search and index {anchor:id=Adm_CMIS.Configuration.CMIS_search_index}
 
 The CMIS standard defines a query language based on on a subset of the SQL-92 grammar (ISO/IEC 9075: 1992 -- Database Language SQL), with a few extensions to enhance its filtering capability for the CMIS data model, such as existential quantification for multi-valued property, full-text search, and folder membership.
 
@@ -7,11 +7,11 @@ The CMIS standard defines a query language based on on a subset of the SQL-92 gr
   To discover search capability check capabilityQuery property (see table below). 
 {warning}
 
-h2. The CMIS Relational View
+h2. The CMIS Relational View {anchor:id=Adm_CMIS.Configuration.CMIS_relational_view}
 
 The relational view of a CMIS repository consists of a collection of virtual tables that are defined on top of the CMIS data model. A virtual table exists for every queryable object type (content type if you prefer) in the repository. Each row in these virtual tables correspond to an instance of the corresponding object type (or of one of its subtypes). A column exists for every property that the object type has.
 
-h2. Query Capabilities
+h2. Query Capabilities {anchor:id=Adm_CMIS.Configuration.Query_capabilities}
 
 | *Capability* | *Value* |
 | _capabilityQuery_ | {{bothcombined}} (if indexDir configured, otherwise {{none}}) |
@@ -20,7 +20,7 @@ h2. Query Capabilities
 | _capabilityAllVersionsSearchable_ | {{false}} |
 \\
 
-h2. Configuration
+h2. Configuration {anchor:id=Adm_CMIS.Configuration.CMIS_search_index.configuration}
 
 To be able to provide full-text search capabilities xCMIS uses its own index. There is configuration parameter:
 | *Parameter* | *Default* | *Description* |
@@ -42,7 +42,7 @@ How to set up the index directory.
    </init-params>
 </component>{code}
 
-h2. Index atomicity and durability
+h2. Index atomicity and durability {anchor:id=Adm_CMIS.Configuration.Index_atomicity_durability}
 
 * Write-ahead logging
 

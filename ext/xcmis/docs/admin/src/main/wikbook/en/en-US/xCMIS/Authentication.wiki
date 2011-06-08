@@ -1,4 +1,4 @@
-h1. Authenticator and organization service configuration
+h1. Authenticator and organization service configuration {anchor:id=Adm_CMIS.Configuration.Authentication_organization_service_configuration}
 
 An Authenticator is responsible for creating Identity [Security Service Authenticator|#Core.Security.Service]
 
