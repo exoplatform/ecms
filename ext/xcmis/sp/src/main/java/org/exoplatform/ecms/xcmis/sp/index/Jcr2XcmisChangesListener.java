@@ -18,6 +18,7 @@
  */
 package org.exoplatform.ecms.xcmis.sp.index;
 
+import org.exoplatform.ecms.xcmis.sp.StorageClosableImpl;
 import org.exoplatform.ecms.xcmis.sp.StorageConfiguration;
 import org.exoplatform.ecms.xcmis.sp.StorageImpl;
 import org.exoplatform.ecms.xcmis.sp.StorageProviderImpl;
@@ -49,6 +50,7 @@ import org.xcmis.search.value.SlashSplitter;
 import org.xcmis.search.value.ToStringNameConverter;
 import org.xcmis.spi.ObjectNotFoundException;
 import org.xcmis.spi.PermissionService;
+import org.xcmis.spi.Storage;
 
 import java.io.File;
 import java.io.IOException;
@@ -62,10 +64,11 @@ import java.util.Set;
 import java.util.UUID;
 
 import javax.jcr.RepositoryException;
+import javax.jcr.Session;
 
 /**
  * @author <a href="mailto:foo@bar.org">Foo Bar</a>
- * @version $Id: exo-jboss-codetemplates.xml 34360 2009-07-22 23:58:59Z
+ * @version $Id: Jcr2XcmisChangesListener.java 34360 2009-07-22 23:58:59Z
  *          aheritier $
  *
  */
@@ -86,7 +89,7 @@ public class Jcr2XcmisChangesListener implements ItemsPersistenceListener
 
    private final PersistentDataManager dataManager;
 
-   private StorageImpl rootStorage;
+   private Storage rootStorage;
 
    private final LocationFactory locationFactory;
 
@@ -241,7 +244,7 @@ public class Jcr2XcmisChangesListener implements ItemsPersistenceListener
       {
 
          String nodeTypeName = locationFactory.createJCRName(((NodeData)data).getPrimaryTypeName()).getAsString();
-         if (rootStorage.isSupportedNodeType(nodeTypeName))
+         if (((StorageClosableImpl)rootStorage).isSupportedNodeType(nodeTypeName))
          {
 
             addedEntries.add(contentEntryAdapter.createEntry(rootStorage.getObjectById(uuid)));
@@ -373,9 +376,20 @@ public class Jcr2XcmisChangesListener implements ItemsPersistenceListener
 	            new StorageConfiguration(UUID.randomUUID().toString(), currentRepositoryName, workspaceName, "/",
 	               Collections.EMPTY_MAP, "Virtual root storage");
 	         SessionProvider sessionProvider = sessionProviderService.getSystemSessionProvider(null);
-	         rootStorage =
-	            new StorageImpl(sessionProvider.getSession(workspaceName, repository), rootStorageConfiguration, null,
-	               new PermissionService(), StorageProviderImpl.DEFAULT_NODETYPE_MAPPING);
+	         
+	      // to session check
+            Session session = null;
+            try
+            {
+               session = sessionProvider.getSession(workspaceName, repository);
+            }
+            finally
+            {
+               session.logout();
+            }
+            rootStorage =
+             new StorageClosableImpl(sessionProvider, workspaceName, repository, rootStorageConfiguration, new PermissionService(),
+                StorageProviderImpl.DEFAULT_NODETYPE_MAPPING);
 	
 	         //prepare search service
 	         CmisSchema schema = new CmisSchema(rootStorage);
