@@ -37,6 +37,9 @@ import org.xcmis.spi.query.Result;
 import org.xcmis.spi.utils.MimeType;
 
 import java.math.BigDecimal;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -1024,6 +1027,40 @@ public class QueryUsecasesTest extends BaseQueryTest
       ItemsIterator<Result> result = storageA.query(query);
 
       checkResult(storageA, result, new DocumentData[]{doc2});
+   }
+   
+   /**
+    * Same as testSimpleFulltext.
+    * @throws Exception
+    */
+   public void testSearchOnDate() throws Exception
+   {
+      String name1 = "fileFirst";
+
+      FolderData folder = createFolder(storageA, testRoot, "SimpleFullTextTest", folderTypeDefinition);
+      DocumentData doc1 =
+         createDocument(storageA, folder, name1, nasaDocumentTypeDefinition, new byte[0], new MimeType("text", "plain"));
+      setProperty(doc1, new StringProperty(PROPERTY_COMMANDER, PROPERTY_COMMANDER, PROPERTY_COMMANDER,
+         PROPERTY_COMMANDER, "There must be test word"));
+      
+      Calendar c = doc1.getCreationDate();
+      DateFormat ISO_8601_DATE_TIME = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ");
+      
+      c.add(Calendar.MILLISECOND, -1);
+      String beforeDate = ISO_8601_DATE_TIME.format(c.getTime());
+      beforeDate = beforeDate.substring(0, 26) + ":" + beforeDate.substring(26); 
+      
+      c.add(Calendar.MILLISECOND, 2);
+      String afterDate = ISO_8601_DATE_TIME.format(c.getTime());
+      afterDate = afterDate.substring(0, 26) + ":" + afterDate.substring(26); 
+      
+      String statement = "SELECT * FROM cmis:document WHERE cmis:creationDate>=TIMESTAMP '" + beforeDate + "' AND cmis:creationDate<=TIMESTAMP '" + afterDate + "'";
+      Query query = new Query(statement, true);
+      ItemsIterator<Result> result = storageA.query(query);
+      
+      assertEquals("Search resuls with the query \n '" + statement + "'.", 1, result.size());
+
+      checkResult(storageA, result, new DocumentData[]{doc1});
    }
 
    /**
