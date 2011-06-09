@@ -8,17 +8,6 @@
     
    <xi:include condition="exo" href="eXo_Content.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
 
-    <!--<xi:include href="Site_Publisher.xml" xmlns:xi="http://www.w3.org/2001/XInclude" >
-      <xi:fallback xmlns:xi="http://www.w3.org/2001/XInclude">
-         <xi:include href="eXo_Content.xml" xmlns:xi="http://www.w3.org/2001/XInclude">
-          <xi:fallback xmlns:xi="http://www.w3.org/2001/XInclude">
-             <xi:include href="Site_Publisher.xml" xmlns:xi="http://www.w3.org/2001/XInclude" >
-             </xi:include>
-          </xi:fallback>
-         </xi:include>
-    </xi:fallback> 
-    </xi:include>-->
-	
 	 <section id="sect-User_Guide-Product_Introduction-Site_Content_Structure">
 		<title>Site Content Structure</title>
 		 <para>
