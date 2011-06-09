@@ -1,3 +1,7 @@
+<%
+  import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+  import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
+%>
 
 <div class="UIFormWithTitle">
   <div class="TitleBar"><%=_ctx.appRes(uicomponent.getId() + ".title")%></div>
@@ -118,7 +122,11 @@
 	      <td class="FieldLabel"><%=_ctx.appRes("Getmail.dialog.label.stote-path")%></td>
 	      <td class="FieldComponent">
 		      <% 
-		        def storePath = "Users/" + uicomponent.getSesssion().getUserID() + "/Private/Mail";
+  		      def sessionProvider = WCMCoreUtils.getUserSessionProvider();
+  		      def nodeHierarchyCreator = WCMCoreUtils.getService(NodeHierarchyCreator.class);
+  		      def userNode = nodeHierarchyCreator.getUserNode(sessionProvider, 
+  		                                                      uicomponent.getSession().getUserID());
+		        def storePath = userNode.getPath() + "/Private/Mail";
 		        String[] fieldStorePath = ["jcrPath=/node/exo:storePath", storePath] ;
 		        uicomponent.addTextField("storePath", fieldStorePath)  ;
 		      %>
