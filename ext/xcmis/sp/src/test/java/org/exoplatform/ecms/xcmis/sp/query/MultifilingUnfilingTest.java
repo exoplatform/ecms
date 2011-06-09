@@ -72,17 +72,32 @@ public class MultifilingUnfilingTest extends BaseQueryTest
          new ObjectData[]{doc1});
       checkResult(storageA, "SELECT * FROM " + NASA_DOCUMENT + " WHERE IN_TREE('" + folder2.getObjectId() + "')",
          new ObjectData[]{});
+      checkResult(storageA, "SELECT * FROM " + NASA_DOCUMENT + " WHERE IN_TREE('" + folder3.getObjectId() + "')",
+         new ObjectData[]{});
 
       folder2.addObject(doc1);
       folder3.addObject(doc1);
 
       assertEquals(3, doc1.getParents().size());
 
+      checkResult(storageA, "SELECT * FROM " + NASA_DOCUMENT + " WHERE IN_TREE('" + folder1.getObjectId() + "')",
+         new ObjectData[]{doc1});
+
       checkResult(storageA, "SELECT * FROM " + NASA_DOCUMENT + " WHERE IN_TREE('" + folder2.getObjectId() + "')",
          new ObjectData[]{doc1});
 
       checkResult(storageA, "SELECT * FROM " + NASA_DOCUMENT + " WHERE IN_TREE('" + folder3.getObjectId() + "')",
          new ObjectData[]{doc1});
+
+      checkResult(storageA, "SELECT * FROM " + NASA_DOCUMENT + " WHERE IN_FOLDER('" + folder1.getObjectId() + "')",
+          new ObjectData[]{doc1});
+
+      checkResult(storageA, "SELECT * FROM " + NASA_DOCUMENT + " WHERE IN_FOLDER('" + folder2.getObjectId() + "')",
+          new ObjectData[]{doc1});
+
+      checkResult(storageA, "SELECT * FROM " + NASA_DOCUMENT + " WHERE IN_FOLDER('" + folder3.getObjectId() + "')",
+          new ObjectData[]{doc1});
+
       storageA.deleteTree(testRoot, true, null, true);
    }
 

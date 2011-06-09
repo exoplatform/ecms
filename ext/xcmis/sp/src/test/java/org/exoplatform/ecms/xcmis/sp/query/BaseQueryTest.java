@@ -185,6 +185,8 @@ public abstract class BaseQueryTest extends BaseTest
 
    protected void checkResult(StorageImpl storage, ItemsIterator<Result> result, ObjectData[] nodes)
    {
+      assertEquals(nodes.length, result.size());
+
       // collect rows
       Set<String> expectedPaths = new HashSet<String>();
       if (LOG.isDebugEnabled())
