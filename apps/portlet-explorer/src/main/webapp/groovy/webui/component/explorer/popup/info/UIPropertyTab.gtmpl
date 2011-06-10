@@ -65,10 +65,10 @@
 			    	<div class="ActionContainer">
 					    <%
 					    if(uicomponent.isCanbeEdit(bean)) {%> 			    
-					      <img onclick="<%=uicomponent.event("Edit", bean.getName())%>" alt="" title="<%=_ctx.appRes("UIPropertyTab.title.edit")%>" alt="" src="/eXoResources/skin/sharedImages/Blank.gif" class="EditIcon">
+					      <img onclick="<%=uicomponent.event("Edit", bean.getName())%>" alt="" title="<%=_ctx.appRes("UIPropertyTab.title.edit")%>" alt="" src="/eXoResources/skin/sharedImages/Blank.gif" class="EditIcon" />
 					    <%}%>
 					    <%if(uicomponent.addedByUser(bean.getName())) {%>
-					      <img onclick="<%=uicomponent.event("Delete", bean.getName())%>" alt="" title="<%=_ctx.appRes("UIPropertyTab.title.delete")%>" src="/eXoResources/skin/sharedImages/Blank.gif" class="DeleteIcon">
+					      <img onclick="<%=uicomponent.event("Delete", bean.getName())%>" alt="" title="<%=_ctx.appRes("UIPropertyTab.title.delete")%>" src="/eXoResources/skin/sharedImages/Blank.gif" class="DeleteIcon" />
 					    <%}%>  
 				    </div>
 			    </td>

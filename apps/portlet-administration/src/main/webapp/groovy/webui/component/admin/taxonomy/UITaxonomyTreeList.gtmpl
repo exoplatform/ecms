@@ -53,8 +53,8 @@
               </td>             
               <td>
                 <div class="ActionContainer">
-                  <img src="/eXoResources/skin/sharedImages/Blank.gif" onclick="<%=uicomponent.event("EditTaxonomyTree", Utils.formatNodeName(taxonomyTree.getTaxoTreeName()))%>" title="<%=_ctx.appRes("UITaxonomyTreeList.tooltip.EditTaxonomyTree")%>" alt="" class="Edit16x16Icon">
-                  <img src="/eXoResources/skin/sharedImages/Blank.gif" onclick="<%=uicomponent.event("Delete", Utils.formatNodeName(taxonomyTree.getTaxoTreeName()))%>" title="<%=_ctx.appRes("UITaxonomyTreeList.tooltip.Delete")%>" alt="" class="Delete16x16Icon">
+                  <img src="/eXoResources/skin/sharedImages/Blank.gif" onclick="<%=uicomponent.event("EditTaxonomyTree", Utils.formatNodeName(taxonomyTree.getTaxoTreeName()))%>" title="<%=_ctx.appRes("UITaxonomyTreeList.tooltip.EditTaxonomyTree")%>" alt="" class="Edit16x16Icon" />
+                  <img src="/eXoResources/skin/sharedImages/Blank.gif" onclick="<%=uicomponent.event("Delete", Utils.formatNodeName(taxonomyTree.getTaxoTreeName()))%>" title="<%=_ctx.appRes("UITaxonomyTreeList.tooltip.Delete")%>" alt="" class="Delete16x16Icon" />
                 </div>
               </td>                     
             </tr>
