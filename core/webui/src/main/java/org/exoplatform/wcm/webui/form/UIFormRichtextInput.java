@@ -95,20 +95,26 @@ public class UIFormRichtextInput extends UIFormInputBase<String> {
     contentsCss.append("]");
 
     StringBuffer buffer = new StringBuffer();
+    buffer.append("<div>");
+    buffer.append("<span style='float:left; width:98%;'>");
     if (value_!=null) {
       buffer.append("<textarea id='" + name + "' name='" + name + "'>" + value_ + "</textarea>\n");
     }else {
       buffer.append("<textarea id='" + name + "' name='" + name + "'></textarea>\n");
     }
+    
     buffer.append("<script type='text/javascript'>\n");
     buffer.append("  //<![CDATA[\n");
     buffer.append("    var instances = CKEDITOR.instances['" + name + "']; if (instances) instances.destroy(true);\n");
-    buffer.append("    CKEDITOR.replace('" + name + "', {toolbar:'" + toolbar + "', width:" + width
-        + ", height:" + height + ", contentsCss:" + contentsCss + "});\n");
+    buffer.append("    CKEDITOR.replace('" + name + "', {toolbar:'" + toolbar + "', height:" + height + ", contentsCss:" + contentsCss + "});\n");
     buffer.append("  //]]>\n");
     buffer.append("</script>\n");
-    if (isMandatory())
-      buffer.append(" *");
+    buffer.append("</span>");
+    if (isMandatory()){      
+      buffer.append("<span style='float:left'> &nbsp;*</span>");
+    } 
+    
+    buffer.append("</div>");    
     context.getWriter().write(buffer.toString());
   }
 
