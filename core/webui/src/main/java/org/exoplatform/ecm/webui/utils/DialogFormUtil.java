@@ -48,6 +48,7 @@ import org.exoplatform.webui.form.validator.MandatoryValidator;
 import org.exoplatform.webui.form.validator.NullFieldValidator;
 import org.exoplatform.webui.form.validator.NumberFormatValidator;
 import org.exoplatform.webui.form.validator.StringLengthValidator;
+import org.exoplatform.wcm.webui.Utils;
 
 /*
  * Created by The eXo Platform SAS
@@ -130,7 +131,12 @@ public class DialogFormUtil {
           } else if(input instanceof UIFormCheckBoxInput) {
             property.setValue(((UIFormCheckBoxInput)input).isChecked()) ;
           } else {
-            property.setValue(input.getValue()) ;
+          	if(input.getValue()!=null) {
+          		String inputValue = input.getValue().toString();          		
+          		property.setValue(Utils.sanitize(inputValue));
+          	} else {
+          		property.setValue(input.getValue());
+          	}
           }
         }
       }

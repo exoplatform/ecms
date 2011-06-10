@@ -643,6 +643,13 @@ public class Utils {
   {
      return Util.getUIPortal().getSelectedNavigation();
   }
+  
+  public static String sanitize(String string) {
+    return string
+       .replaceAll("(?i)<script.*?>.*?</script.*?>", "")   // case 1 : <script> are removed 
+       .replaceAll("(?i)<.*?javascript:.*?>.*?</.*?>", "") // case 2 : javascript: call are removed
+       .replaceAll("(?i)<.*?\\s+on.*?>.*?</.*?>", "");     // case 3: remove on* attributes like onLoad or onClick
+  }
 
   
 }
