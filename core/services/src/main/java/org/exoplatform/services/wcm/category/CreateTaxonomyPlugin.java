@@ -217,6 +217,7 @@ public class CreateTaxonomyPlugin extends CreatePortalPlugin {
       session.save();
       return;
     } catch (Exception e) {
+      log.error("CreateTaxonomyPlugin fail because of ", e);
       init();
     }
   }

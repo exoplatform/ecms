@@ -17,6 +17,7 @@
 package org.exoplatform.services.wcm.webcontent;
 
 import java.io.InputStream;
+import java.util.Date;
 import java.util.Iterator;
 
 import javax.jcr.ImportUUIDBehavior;
@@ -87,28 +88,45 @@ public class InitialWebContentPlugin extends CreatePortalPlugin {
   @SuppressWarnings("unchecked")
   public void deployToPortal(SessionProvider sessionProvider, String portalName) throws Exception {
     Iterator iterator = initParams.getObjectParamIterator();
-    while(iterator.hasNext()) {
-      ObjectParameter objectParameter = (ObjectParameter)iterator.next();
-      DeploymentDescriptor deploymentDescriptor = (DeploymentDescriptor)objectParameter.getObject();
-      String sourcePath = deploymentDescriptor.getSourcePath();
-      // sourcePath should start with: war:/, jar:/, classpath:/, file:/
-      String xmlData = (String)artifactsCache.get(sourcePath);
-      if(xmlData == null) {
-        InputStream stream = configurationManager.getInputStream(sourcePath);
-        xmlData = IOUtil.getStreamContentAsString(stream);
-        artifactsCache.put(sourcePath,xmlData);
+    DeploymentDescriptor deploymentDescriptor = null;
+    try {
+      while (iterator.hasNext()) {
+        ObjectParameter objectParameter = (ObjectParameter) iterator.next();
+        deploymentDescriptor = (DeploymentDescriptor) objectParameter.getObject();
+        String sourcePath = deploymentDescriptor.getSourcePath();
+        // sourcePath should start with: war:/, jar:/, classpath:/, file:/
+        String xmlData = (String) artifactsCache.get(sourcePath);
+        if (xmlData == null) {
+          InputStream stream = configurationManager.getInputStream(sourcePath);
+          xmlData = IOUtil.getStreamContentAsString(stream);
+          artifactsCache.put(sourcePath, xmlData);
+        }
+        ManageableRepository repository = repositoryService.getCurrentRepository();
+        Session session = sessionProvider.getSession(deploymentDescriptor.getTarget()
+                                                                         .getWorkspace(),
+                                                     repository);
+        String targetPath = deploymentDescriptor.getTarget().getNodePath();
+        String realTargetFolder = StringUtils.replace(targetPath, "{portalName}", portalName);
+        InputStream inputStream = configurationManager.getInputStream(sourcePath);
+        session.importXML(realTargetFolder, inputStream, ImportUUIDBehavior.IMPORT_UUID_CREATE_NEW);
+        session.save();
       }
-      ManageableRepository repository = repositoryService.getCurrentRepository();
-      Session session = sessionProvider.getSession(deploymentDescriptor.getTarget().getWorkspace(), repository);
-      String targetPath = deploymentDescriptor.getTarget().getNodePath();
-      String realTargetFolder = StringUtils.replace(targetPath,"{portalName}",portalName);
-      InputStream inputStream = configurationManager.getInputStream(sourcePath);
-      session.importXML(realTargetFolder, inputStream, ImportUUIDBehavior.IMPORT_UUID_CREATE_NEW);
-      session.save();
+      Node portalNode = livePortalManagerService.getLivePortal(sessionProvider, portalName);
+      configure(portalNode, portalName);
+      portalNode.getSession().save();
+    } catch (Exception ex) {
+      log.error("deploy the portal "
+                    + portalName
+                    + " from "
+                    + deploymentDescriptor.getSourcePath()
+                    + " into "
+                    + StringUtils.replace(deploymentDescriptor.getTarget().getNodePath(),
+                                          "{portalName}",
+                                          portalName) + " is FAILURE at " + new Date().toString()
+                    + "\n",
+                ex);
+      throw ex;
     }
-    Node portalNode = livePortalManagerService.getLivePortal(sessionProvider, portalName);
-    configure(portalNode,portalName);
-    portalNode.getSession().save();
   }
 
   /**

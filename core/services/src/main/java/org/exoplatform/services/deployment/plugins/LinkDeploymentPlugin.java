@@ -16,6 +16,7 @@
  */
 package org.exoplatform.services.deployment.plugins;
 
+import java.util.Date;
 import java.util.Iterator;
 
 import javax.jcr.Node;
@@ -81,35 +82,45 @@ public class LinkDeploymentPlugin extends DeploymentPlugin {
    */
   public void deploy(SessionProvider sessionProvider) throws Exception {
     Iterator iterator = initParams.getObjectParamIterator();
-    while(iterator.hasNext()) {
-      ObjectParameter objectParameter = (ObjectParameter)iterator.next();
-      LinkDeploymentDescriptor deploymentDescriptor = (LinkDeploymentDescriptor)objectParameter.getObject();
-      String sourcePath = deploymentDescriptor.getSourcePath();
-      String targetPath = deploymentDescriptor.getTargetPath();
-      // sourcePath should looks like : repository:collaboration:/sites content/live/acme
+    LinkDeploymentDescriptor deploymentDescriptor = null;
+    try {
+      while (iterator.hasNext()) {
+        ObjectParameter objectParameter = (ObjectParameter) iterator.next();
+        deploymentDescriptor = (LinkDeploymentDescriptor) objectParameter.getObject();
+        String sourcePath = deploymentDescriptor.getSourcePath();
+        String targetPath = deploymentDescriptor.getTargetPath();
+        // sourcePath should looks like : repository:collaboration:/sites
+        // content/live/acme
 
-      String[] src = sourcePath.split(":");
-      String[] tgt = targetPath.split(":");
+        String[] src = sourcePath.split(":");
+        String[] tgt = targetPath.split(":");
 
-      if (src.length==3 && tgt.length==3) {
-        ManageableRepository repository = repositoryService.getCurrentRepository();
-        Session session = sessionProvider.getSession(src[1], repository);
-        ManageableRepository repository2 = repositoryService.getCurrentRepository();
-        Session session2 = sessionProvider.getSession(tgt[1], repository2);
-        Node nodeSrc = session.getRootNode().getNode(src[2].substring(1));
-        Node nodeTgt = session2.getRootNode().getNode(tgt[2].substring(1));
-        linkManager.createLink(nodeTgt, "exo:taxonomyLink", nodeSrc);
-        ExoContainer container = ExoContainerContext.getCurrentContainer();
-        PortalContainerInfo containerInfo = 
-        	(PortalContainerInfo)container.getComponentInstanceOfType(PortalContainerInfo.class);
-        String containerName = containerInfo.getContainerName();
-        ListenerService listenerService = WCMCoreUtils.getService(ListenerService.class, containerName);
-        CmsService cmsService = WCMCoreUtils.getService(CmsService.class, containerName);
-        listenerService.broadcast(UPDATE_EVENT, cmsService, nodeSrc);
+        if (src.length == 3 && tgt.length == 3) {
+          ManageableRepository repository = repositoryService.getCurrentRepository();
+          Session session = sessionProvider.getSession(src[1], repository);
+          ManageableRepository repository2 = repositoryService.getCurrentRepository();
+          Session session2 = sessionProvider.getSession(tgt[1], repository2);
+          Node nodeSrc = session.getRootNode().getNode(src[2].substring(1));
+          Node nodeTgt = session2.getRootNode().getNode(tgt[2].substring(1));
+          linkManager.createLink(nodeTgt, "exo:taxonomyLink", nodeSrc);
+          ExoContainer container = ExoContainerContext.getCurrentContainer();
+          PortalContainerInfo containerInfo = (PortalContainerInfo) container.getComponentInstanceOfType(PortalContainerInfo.class);
+          String containerName = containerInfo.getContainerName();
+          ListenerService listenerService = WCMCoreUtils.getService(ListenerService.class,
+                                                                    containerName);
+          CmsService cmsService = WCMCoreUtils.getService(CmsService.class, containerName);
+          listenerService.broadcast(UPDATE_EVENT, cmsService, nodeSrc);
+        }
+        if (log.isInfoEnabled()) {
+          log.info(sourcePath + " has a link into " + targetPath);
+        }
       }
-      if(log.isInfoEnabled()) {
-        log.info(sourcePath + " has a link into "+targetPath);
-      }
+    } catch (Exception ex) {
+      log.error("create link from " + deploymentDescriptor.getSourcePath() + " to "
+                    + deploymentDescriptor.getTargetPath() + " is FAILURE at "
+                    + new Date().toString() + "\n",
+                ex);
+      throw ex;
     }
   }
 }

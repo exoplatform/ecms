@@ -17,6 +17,7 @@
 package org.exoplatform.services.deployment.plugins;
 
 import java.io.InputStream;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -84,61 +85,73 @@ public class XMLDeploymentPlugin extends DeploymentPlugin {
   @SuppressWarnings("unchecked")
   public void deploy(SessionProvider sessionProvider) throws Exception {
     Iterator iterator = initParams.getObjectParamIterator();
-    while(iterator.hasNext()) {
-      ObjectParameter objectParameter = (ObjectParameter)iterator.next();
-      DeploymentDescriptor deploymentDescriptor = (DeploymentDescriptor)objectParameter.getObject();
-      String sourcePath = deploymentDescriptor.getSourcePath();
-      // sourcePath should start with: war:/, jar:/, classpath:/, file:/
-      String versionHistoryPath = deploymentDescriptor.getVersionHistoryPath();
-      Boolean cleanupPublication = deploymentDescriptor.getCleanupPublication();
+    DeploymentDescriptor deploymentDescriptor = null;
+    try {
+      while (iterator.hasNext()) {
+        ObjectParameter objectParameter = (ObjectParameter) iterator.next();
+        deploymentDescriptor = (DeploymentDescriptor) objectParameter.getObject();
+        String sourcePath = deploymentDescriptor.getSourcePath();
+        // sourcePath should start with: war:/, jar:/, classpath:/, file:/
+        String versionHistoryPath = deploymentDescriptor.getVersionHistoryPath();
+        Boolean cleanupPublication = deploymentDescriptor.getCleanupPublication();
 
-      InputStream inputStream = configurationManager.getInputStream(sourcePath);
-      ManageableRepository repository = repositoryService.getCurrentRepository();
-      Session session = sessionProvider.getSession(deploymentDescriptor.getTarget().getWorkspace(),
-                                                   repository);
-      session.importXML(deploymentDescriptor.getTarget().getNodePath(),
-                        inputStream,
-                        ImportUUIDBehavior.IMPORT_UUID_CREATE_NEW);
+        InputStream inputStream = configurationManager.getInputStream(sourcePath);
+        ManageableRepository repository = repositoryService.getCurrentRepository();
+        Session session = sessionProvider.getSession(deploymentDescriptor.getTarget()
+                                                                         .getWorkspace(),
+                                                     repository);
+        session.importXML(deploymentDescriptor.getTarget().getNodePath(),
+                          inputStream,
+                          ImportUUIDBehavior.IMPORT_UUID_CREATE_NEW);
 
-      if (cleanupPublication) {
-        /**
-         * This code allows to cleanup the publication lifecycle in the target
-         * folder after importing the data. By using this, the publication live
-         * revision property will be re-initialized and the content will be set
-         * as published directly. Thus, the content will be visible in front
-         * side.
-         */
-        QueryManager manager = session.getWorkspace().getQueryManager();
-        String statement = "select * from nt:base where jcr:path LIKE '"
-            + deploymentDescriptor.getTarget().getNodePath() + "/%'";
-        Query query = manager.createQuery(statement.toString(), Query.SQL);
-        NodeIterator iter = query.execute().getNodes();
-        while (iter.hasNext()) {
-          Node node = iter.nextNode();
-          if (node.hasProperty("publication:liveRevision")
-              && node.hasProperty("publication:currentState")) {
-            log.info("\"" + node.getName() + "\" publication lifecycle has been cleaned up");
-            node.setProperty("publication:liveRevision", "");
-            node.setProperty("publication:currentState", "published");
+        if (cleanupPublication) {
+          /**
+           * This code allows to cleanup the publication lifecycle in the target
+           * folder after importing the data. By using this, the publication
+           * live revision property will be re-initialized and the content will
+           * be set as published directly. Thus, the content will be visible in
+           * front side.
+           */
+          QueryManager manager = session.getWorkspace().getQueryManager();
+          String statement = "select * from nt:base where jcr:path LIKE '"
+              + deploymentDescriptor.getTarget().getNodePath() + "/%'";
+          Query query = manager.createQuery(statement.toString(), Query.SQL);
+          NodeIterator iter = query.execute().getNodes();
+          while (iter.hasNext()) {
+            Node node = iter.nextNode();
+            if (node.hasProperty("publication:liveRevision")
+                && node.hasProperty("publication:currentState")) {
+              log.info("\"" + node.getName() + "\" publication lifecycle has been cleaned up");
+              node.setProperty("publication:liveRevision", "");
+              node.setProperty("publication:currentState", "published");
+            }
+
           }
 
         }
 
-      }
-      
-      if (versionHistoryPath != null && versionHistoryPath.length() > 0) {
-        //process import version history
-        Node currentNode = (Node)session.getItem(deploymentDescriptor.getTarget().getNodePath());
-              
-        Map<String, String> mapHistoryValue = Utils.getMapImportHistory(configurationManager.getInputStream(versionHistoryPath));
-        Utils.processImportHistory(currentNode, configurationManager.getInputStream(versionHistoryPath), mapHistoryValue);
-      }
+        if (versionHistoryPath != null && versionHistoryPath.length() > 0) {
+          // process import version history
+          Node currentNode = (Node) session.getItem(deploymentDescriptor.getTarget().getNodePath());
 
-      session.save();
-      if (log.isInfoEnabled()) {
-        log.info(deploymentDescriptor.getSourcePath() + " is deployed succesfully into "
-            + deploymentDescriptor.getTarget().getNodePath());
+          Map<String, String> mapHistoryValue = Utils.getMapImportHistory(configurationManager.getInputStream(versionHistoryPath));
+          Utils.processImportHistory(currentNode,
+                                     configurationManager.getInputStream(versionHistoryPath),
+                                     mapHistoryValue);
+        }
+
+        session.save();
+        if (log.isInfoEnabled()) {
+          log.info(deploymentDescriptor.getSourcePath() + " is deployed succesfully into "
+              + deploymentDescriptor.getTarget().getNodePath());
+        }
       }
+    } catch (Exception ex) {
+      log.error("deploy " + deploymentDescriptor.getSourcePath() + " into "
+                    + deploymentDescriptor.getTarget().getNodePath() + " is FAILURE at "
+                    + new Date().toString() + "\n",
+                ex);
+      throw ex;
     }
   }
 }
