@@ -1109,6 +1109,7 @@
       <manageSimpleCategories>シンプルカテゴリの管理</manageSimpleCategories>
     </label>
   </UIViewFormTabPane>
+
   <PopupViewPermission>
     <title>
       <UIPermissionSelector>権限の選択</UIPermissionSelector>
@@ -1887,6 +1888,12 @@
   ######################################################################################
   -->
   <UITagManager>
+    <title>
+      <EditStyle>編集</EditStyle>
+      <RemoveStyle>削除</RemoveStyle>
+    </title>    
+  </UITagManager>
+  <UITagStyleList>
     <header>
       <name>スタイル名</name>
       <documentRange>ドキュメント幅</documentRange>
@@ -1894,11 +1901,9 @@
       <action>アクション</action>
     </header>
     <action>
-      <title>
-        <EditStyle>編集</EditStyle>
-      </title>
+      <AddStyle>追加</AddStyle>
     </action>
-  </UITagManager>
+  </UITagStyleList>
   <UITagStyleForm>
     <label>
       <styleName>スタイル名</styleName>
@@ -2454,5 +2459,10 @@
  	 <UINodeTypeSelector>ノードタイプセレクター</UINodeTypeSelector>
  	</title>
  </PopupComponent>
+ <UIPageIterator>
+  <label>
+    <maxPageSize>最大ページサイズ</maxPageSize>
+  </label>
+ </UIPageIterator> 
 </bundle>
 

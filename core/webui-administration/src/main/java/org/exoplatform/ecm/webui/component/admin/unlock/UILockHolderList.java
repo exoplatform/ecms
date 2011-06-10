@@ -21,13 +21,12 @@ import java.util.List;
 import org.exoplatform.commons.utils.LazyPageList;
 import org.exoplatform.commons.utils.ListAccess;
 import org.exoplatform.commons.utils.ListAccessImpl;
+import org.exoplatform.ecm.webui.core.UIPagingGridDecorator;
 import org.exoplatform.services.cms.lock.LockService;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIApplication;
-import org.exoplatform.webui.core.UIComponentDecorator;
-import org.exoplatform.webui.core.UIPageIterator;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
 
@@ -44,32 +43,32 @@ import org.exoplatform.webui.event.EventListener;
         @EventConfig(listeners = UILockHolderList.DeleteLockActionListener.class)
     }
 )
-public class UILockHolderList extends UIComponentDecorator {
+public class UILockHolderList extends UIPagingGridDecorator {
   final static public String[] ACTIONS = {};
   final static public String ST_EDIT = "EditUnLockForm";
-  private UIPageIterator uiPageIterator_;
 
   public UILockHolderList() throws Exception {
-    uiPageIterator_ = createUIComponent(UIPageIterator.class, null, "LockHolderListIterator");
-    setUIComponent(uiPageIterator_);
+    getUIPageIterator().setId("LockHolderListIterator");
   }
 
   public String[] getActions() { return ACTIONS ; }
 
-  public void updateLockedNodesGrid(int currentPage) throws Exception {
+  public void refresh(int currentPage) throws Exception {
     ListAccess<String> groupsAndUsersForLockList = new ListAccessImpl<String>(String.class,
                                                                               getAllGroupsOrUsersForLock());
-    LazyPageList<String> pageList = new LazyPageList<String>(groupsAndUsersForLockList, 10);
-    uiPageIterator_.setPageList(pageList);
+    LazyPageList<String> pageList = new LazyPageList<String>(groupsAndUsersForLockList,
+                                                             getUIPageIterator().getItemsPerPage());
+    getUIPageIterator().setPageList(pageList);
     if (currentPage > getUIPageIterator().getAvailablePage())
-      uiPageIterator_.setCurrentPage(getUIPageIterator().getAvailablePage());
+      getUIPageIterator().setCurrentPage(getUIPageIterator().getAvailablePage());
     else
-      uiPageIterator_.setCurrentPage(currentPage);
+      getUIPageIterator().setCurrentPage(currentPage);
   }
 
-  public UIPageIterator getUIPageIterator() { return uiPageIterator_ ; }
 
-  public List getGroupsOrUsersForLock() throws Exception { return uiPageIterator_.getCurrentPageData(); }
+  public List getGroupsOrUsersForLock() throws Exception {
+    return getUIPageIterator().getCurrentPageData();
+  }
 
   public List<String> getAllGroupsOrUsersForLock() throws Exception {
     LockService lockService = getApplicationComponent(LockService.class);
@@ -94,7 +93,7 @@ public class UILockHolderList extends UIComponentDecorator {
         event.getRequestContext().addUIComponentToUpdateByAjax(uiLockHolderContainer.getParent());
       }
       UILockHolderList uiHolderList = uiLockHolderContainer.getChild(UILockHolderList.class);
-      uiHolderList.updateLockedNodesGrid(uiHolderList.uiPageIterator_.getCurrentPage());
+      uiHolderList.refresh(uiHolderList.getUIPageIterator().getCurrentPage());
       UIUnLockManager uiUnLockManager = uiLockHolderContainer.getParent();
       uiUnLockManager.getChild(UILockNodeList.class).setRendered(false);
       uiLockHolderContainer.setRendered(true);

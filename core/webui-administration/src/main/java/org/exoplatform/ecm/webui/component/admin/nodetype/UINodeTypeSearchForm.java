@@ -23,7 +23,6 @@ import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
 import javax.jcr.Node;
-import javax.jcr.nodetype.NodeType;
 
 import org.exoplatform.ecm.webui.nodetype.selector.UINodeTypeSearch;
 import org.exoplatform.webui.config.annotation.ComponentConfig;

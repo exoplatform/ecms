@@ -46,9 +46,9 @@ public class UIViewManager extends UIAbstractManager {
   public void update() throws Exception {
     getChild(UIViewContainer.class).update() ;
     UIECMTemplateList uiECMTemplateList = ((UITemplateContainer)getChildById("ECMTemplate")).getChild(UIECMTemplateList.class);
-    uiECMTemplateList.updateTempListGrid(uiECMTemplateList.getUIPageIterator().getCurrentPage());
+    uiECMTemplateList.refresh(uiECMTemplateList.getUIPageIterator().getCurrentPage());
     UICBTemplateList uiCBTemplateList = ((UITemplateContainer)getChildById("CBTemplate")).getChild(UICBTemplateList.class);
-    uiCBTemplateList.updateCBTempListGrid(uiCBTemplateList.getUIPageIterator().getCurrentPage());
+    uiCBTemplateList.refresh(uiCBTemplateList.getUIPageIterator().getCurrentPage());
   }
 }
 

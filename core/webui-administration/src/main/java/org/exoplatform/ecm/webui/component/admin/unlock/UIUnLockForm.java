@@ -103,7 +103,7 @@ public class UIUnLockForm extends UIForm implements UISelectable {
       lockService.addGroupsOrUsersForLock(groupsOrUsers);
       UILockNodeList uiLockList = uiManager.getChild(UILockNodeList.class);
       uiUnLockForm.update();
-      uiLockList.updateLockedNodesGrid(1);
+      uiLockList.refresh(1);
       uiLockList.setRendered(true);
       uiManager.removeChildById("PermissionPopup");
       event.getRequestContext().addUIComponentToUpdateByAjax(uiManager);

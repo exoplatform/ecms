@@ -25,7 +25,6 @@ import javax.jcr.Value;
 import javax.jcr.query.InvalidQueryException;
 import javax.jcr.query.Query;
 
-import org.exoplatform.ecm.webui.component.admin.UIECMAdminPortlet;
 import org.exoplatform.ecm.webui.form.UIFormInputSetWithAction;
 import org.exoplatform.ecm.webui.form.validator.ECMNameValidator;
 import org.exoplatform.ecm.webui.selector.UISelectable;
@@ -40,8 +39,8 @@ import org.exoplatform.webui.core.UIPopupWindow;
 import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.core.model.SelectItemOption;
 import org.exoplatform.webui.event.Event;
-import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.event.Event.Phase;
+import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.form.UIForm;
 import org.exoplatform.webui.form.UIFormCheckBoxInput;
 import org.exoplatform.webui.form.UIFormSelectBox;
@@ -216,7 +215,7 @@ public class UIQueriesForm extends UIForm implements UISelectable {
         return ;
       }
       UIQueriesManager uiManager = uiForm.getAncestorOfType(UIQueriesManager.class) ;
-      uiManager.getChild(UIQueriesList.class).updateQueriesGrid(1);
+      uiManager.getChild(UIQueriesList.class).refresh(1);
       uiManager.removeChildById(UIQueriesList.ST_ADD) ;
       uiManager.removeChildById(UIQueriesList.ST_EDIT) ;
       event.getRequestContext().addUIComponentToUpdateByAjax(uiManager) ;

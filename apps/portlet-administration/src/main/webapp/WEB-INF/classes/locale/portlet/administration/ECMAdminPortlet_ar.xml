@@ -2393,5 +2393,10 @@
 		  <namespace-invalid> '{0}' : بيانات غير صالحة : مساحة الاسم غير معروف :</namespace-invalid>
 	    </msg>
 	 </UINodeTypeUpload>
+ <UIPageIterator>
+  <label>
+    <maxPageSize>Maximum page size</maxPageSize>
+  </label>
+ </UIPageIterator>	 
 </bundle>
   

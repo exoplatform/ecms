@@ -36,7 +36,7 @@ public class UINamespaceManager extends UIAbstractManager {
 
   public void refresh ()throws Exception {
     UINamespaceList list = getChild(UINamespaceList.class) ;
-    list.updateGrid() ;
+    list.refresh(1);
   }
 
   public void initPopup() throws Exception {

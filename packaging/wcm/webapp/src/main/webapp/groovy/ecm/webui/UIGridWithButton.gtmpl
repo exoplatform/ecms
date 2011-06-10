@@ -7,6 +7,12 @@
 %>
 
 <div id="$uicomponent.id">
+  <%
+    if (uicomponent.getUIPageIterator().getTotalItems() > 5) {
+      uicomponent.getUIPageIterator().setUseMaxSizeSetting(true);
+      _ctx.renderUIComponent(uicomponent.getUIPageIterator());
+    }
+  %>
 	<table class="UIGrid">
 	  <thead>
 	    <tr>
@@ -88,9 +94,12 @@
 	  </tbody>
 	</table> 
 	<!--End UIGrid-->
-	<% if(uicomponent.getUIPageIterator().getAvailablePage() > 1){ %>
-	<%_ctx.renderUIComponent(uicomponent.getUIPageIterator())%>
-	<% } %>
+  <%
+    if (uicomponent.getUIPageIterator().getTotalItems() > 5) {
+      uicomponent.getUIPageIterator().setUseMaxSizeSetting(false);
+      _ctx.renderUIComponent(uicomponent.getUIPageIterator());
+    }
+  %>
 </div>
 
 <% if(uicomponent.getActions() != null) { %>

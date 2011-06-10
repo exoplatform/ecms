@@ -86,6 +86,6 @@ public class UITemplatesManager extends UIAbstractManager {
   }
 
   public void refresh() throws Exception {
-    getChild(UITemplateList.class).updateGrid(1);
+    getChild(UITemplateList.class).refresh(1);
   }
 }

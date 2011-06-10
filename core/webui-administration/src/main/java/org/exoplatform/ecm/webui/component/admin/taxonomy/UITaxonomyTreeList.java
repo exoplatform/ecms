@@ -29,6 +29,7 @@ import org.exoplatform.commons.utils.LazyPageList;
 import org.exoplatform.commons.utils.ListAccess;
 import org.exoplatform.commons.utils.ListAccessImpl;
 import org.exoplatform.ecm.webui.component.admin.UIECMAdminPortlet;
+import org.exoplatform.ecm.webui.core.UIPagingGridDecorator;
 import org.exoplatform.services.cms.actions.ActionServiceContainer;
 import org.exoplatform.services.cms.taxonomy.TaxonomyService;
 import org.exoplatform.services.cms.taxonomy.TaxonomyTreeData;
@@ -36,8 +37,6 @@ import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIApplication;
-import org.exoplatform.webui.core.UIComponentDecorator;
-import org.exoplatform.webui.core.UIPageIterator;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
 
@@ -55,7 +54,7 @@ import org.exoplatform.webui.event.EventListener;
     }
 )
 
-public class UITaxonomyTreeList extends UIComponentDecorator {
+public class UITaxonomyTreeList extends UIPagingGridDecorator {
 
   public static final String[] ACTIONS           = { "AddTaxonomyTree" };
 
@@ -65,35 +64,29 @@ public class UITaxonomyTreeList extends UIComponentDecorator {
 
   public static final String   ACCESS_PERMISSION = "exo:accessPermissions";
 
-  private UIPageIterator       uiPageIterator_;
-
   public UITaxonomyTreeList() throws Exception {
-    uiPageIterator_ = createUIComponent(UIPageIterator.class, null, "UITaxonomyTreeListIterator");
-    setUIComponent(uiPageIterator_);
+    getUIPageIterator().setId("UITaxonomyTreeListIterator");
   }
 
-  public UIPageIterator getUIPageIterator() {
-    return uiPageIterator_;
-  }
 
   public String[] getActions() {
     return ACTIONS;
   }
 
   public List getTaxonomyTreeList() throws Exception {
-    return uiPageIterator_.getCurrentPageData();
+    return getUIPageIterator().getCurrentPageData();
   }
 
-  public void updateTaxonomyTreeListGrid(int currentPage) throws Exception {
+  public void refresh(int currentPage) throws Exception {
     ListAccess<TaxonomyTreeData> taxonomyTreeList = new ListAccessImpl<TaxonomyTreeData>(TaxonomyTreeData.class,
                                                                                          getAllTaxonomyTreeList());
     LazyPageList<TaxonomyTreeData> dataPageList = new LazyPageList<TaxonomyTreeData>(taxonomyTreeList,
-                                                                                     10);
-    uiPageIterator_.setPageList(dataPageList);
+                                                                                     getUIPageIterator().getItemsPerPage());
+    getUIPageIterator().setPageList(dataPageList);
     if (currentPage > getUIPageIterator().getAvailablePage())
-      uiPageIterator_.setCurrentPage(getUIPageIterator().getAvailablePage());
+      getUIPageIterator().setCurrentPage(getUIPageIterator().getAvailablePage());
     else
-      uiPageIterator_.setCurrentPage(currentPage);
+      getUIPageIterator().setCurrentPage(currentPage);
   }
 
   private List<TaxonomyTreeData> getAllTaxonomyTreeList() throws RepositoryException {

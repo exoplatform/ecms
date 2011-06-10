@@ -72,7 +72,7 @@ public class UITaxonomyManagerTrees extends UIAbstractManager {
 
   public void update() throws Exception {
     UITaxonomyTreeList uiTaxonomyTreeList = getChild(UITaxonomyTreeList.class);
-    uiTaxonomyTreeList.updateTaxonomyTreeListGrid(uiTaxonomyTreeList.getUIPageIterator().getCurrentPage());
+    uiTaxonomyTreeList.refresh(uiTaxonomyTreeList.getUIPageIterator().getCurrentPage());
   }
 
   public void initPopupPermission(String membership) throws Exception {

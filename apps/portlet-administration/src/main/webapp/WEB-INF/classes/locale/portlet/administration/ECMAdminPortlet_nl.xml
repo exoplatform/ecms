@@ -2415,5 +2415,10 @@
  	 <UINodeTypeSelector>NodeType Selector</UINodeTypeSelector>
  	</title>
  </PopupComponent>
+ <UIPageIterator>
+  <label>
+    <maxPageSize>Maximum page size</maxPageSize>
+  </label>
+ </UIPageIterator> 
 </bundle>
 

@@ -26,6 +26,7 @@ import org.exoplatform.commons.utils.LazyPageList;
 import org.exoplatform.commons.utils.ListAccess;
 import org.exoplatform.commons.utils.ListAccessImpl;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
+import org.exoplatform.ecm.webui.core.UIPagingGrid;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.ecm.publication.AlreadyInPublicationLifecycleException;
 import org.exoplatform.services.ecm.publication.PublicationPlugin;
@@ -60,7 +61,7 @@ import org.exoplatform.webui.form.UIForm;
 @ComponentConfig(template = "system:/groovy/ecm/webui/UIGridWithButton.gtmpl", events = {
     @EventConfig(listeners = UIActivePublication.EnrolActionListener.class),
     @EventConfig(listeners = UIActivePublication.CancelActionListener.class) })
-    public class UIActivePublication extends UIGrid implements UIPopupComponent {
+    public class UIActivePublication extends UIPagingGrid implements UIPopupComponent {
 
   /** The Constant LIFECYCLE_NAME. */
   public final static String LIFECYCLE_NAME     = "LifecycleName";
@@ -101,7 +102,7 @@ import org.exoplatform.webui.form.UIForm;
    *
    * @throws Exception the exception
    */
-  public void updateLifecyclesGrid() throws Exception {
+  public void refresh(int currentPage) throws Exception {
     List<PublicationLifecycleBean> publicationLifecycleBeans = new ArrayList<PublicationLifecycleBean>();
     PublicationService publicationService = getApplicationComponent(PublicationService.class);
     Collection<PublicationPlugin> publicationPlugins = publicationService.getPublicationPlugins()
@@ -117,12 +118,19 @@ import org.exoplatform.webui.form.UIForm;
 
     ListAccess<PublicationLifecycleBean> beanList = new ListAccessImpl<PublicationLifecycleBean>(PublicationLifecycleBean.class,
                                                                                                  publicationLifecycleBeans);
-    LazyPageList<PublicationLifecycleBean> dataPageList = new LazyPageList<PublicationLifecycleBean>(beanList,
-                                                                                                     5);
+    LazyPageList<PublicationLifecycleBean> dataPageList = 
+      new LazyPageList<PublicationLifecycleBean>(beanList, getUIPageIterator().getItemsPerPage());
     getUIPageIterator().setPageList(dataPageList);
+    getUIPageIterator().setTotalItems(publicationLifecycleBeans.size());
+    if (currentPage > getUIPageIterator().getAvailablePage())
+      getUIPageIterator().setCurrentPage(getUIPageIterator().getAvailablePage());
+    else
+      getUIPageIterator().setCurrentPage(currentPage);    
   }
 
-  public void enrolNodeInLifecycle(Node currentNode, String lifecycleName, WebuiRequestContext requestContext) throws Exception {
+  public void enrolNodeInLifecycle(Node currentNode,
+                                   String lifecycleName,
+                                   WebuiRequestContext requestContext) throws Exception {
     UIJCRExplorer uiJCRExplorer = getAncestorOfType(UIJCRExplorer.class);
     UIApplication uiApp = getAncestorOfType(UIApplication.class);
     UIPublicationManager uiPublicationManager = uiJCRExplorer.createUIComponent(

@@ -27,6 +27,7 @@ import org.exoplatform.commons.utils.LazyPageList;
 import org.exoplatform.commons.utils.ListAccess;
 import org.exoplatform.commons.utils.ListAccessImpl;
 import org.exoplatform.ecm.webui.component.admin.UIECMAdminPortlet;
+import org.exoplatform.ecm.webui.core.UIPagingGrid;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.services.cms.drives.DriveData;
@@ -37,7 +38,6 @@ import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIApplication;
-import org.exoplatform.webui.core.UIGrid;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
 /**
@@ -57,7 +57,7 @@ import org.exoplatform.webui.event.EventListener;
     }
 )
 
-public class UIViewList extends UIGrid {
+public class UIViewList extends UIPagingGrid {
 
   final static public String[] ACTIONS         = { "AddView" };
 
@@ -87,11 +87,13 @@ public class UIViewList extends UIGrid {
   public String[] getActions() { return ACTIONS ; }
 
   @SuppressWarnings("unchecked")
-  public void updateViewListGrid(int currentPage) throws Exception {
+  public void refresh(int currentPage) throws Exception {
     List<ViewBean> viewBean = getViewsBean();
     Collections.sort(viewBean, new ViewComparator());
     ListAccess<ViewBean> viewBeanList = new ListAccessImpl<ViewBean>(ViewBean.class, viewBean);
-    getUIPageIterator().setPageList(new LazyPageList<ViewBean>(viewBeanList, 10));
+    getUIPageIterator().setPageList(new LazyPageList<ViewBean>(viewBeanList,
+                                                               getUIPageIterator().getItemsPerPage()));
+    getUIPageIterator().setTotalItems(viewBean.size());
     if (currentPage > getUIPageIterator().getAvailablePage())
       getUIPageIterator().setCurrentPage(getUIPageIterator().getAvailablePage());
     else
@@ -173,7 +175,7 @@ public class UIViewList extends UIGrid {
         return ;
       }
       viewList.getApplicationComponent(ManageViewService.class).removeView(viewName) ;
-      viewList.updateViewListGrid(viewList.getUIPageIterator().getCurrentPage()) ;
+      viewList.refresh(viewList.getUIPageIterator().getCurrentPage()) ;
       event.getRequestContext().addUIComponentToUpdateByAjax(viewList.getParent()) ;
     }
   }

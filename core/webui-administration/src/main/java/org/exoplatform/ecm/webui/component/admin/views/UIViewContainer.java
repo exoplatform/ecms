@@ -49,7 +49,7 @@ public class UIViewContainer extends UIContainer {
 
   public void update() throws Exception {
     UIViewList uiViewList = getChild(UIViewList.class);
-    uiViewList.updateViewListGrid(uiViewList.getUIPageIterator().getCurrentPage());
+    uiViewList.refresh(uiViewList.getUIPageIterator().getCurrentPage());
   }
 
   public void initPopupPermission(String membership) throws Exception {

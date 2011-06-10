@@ -16,6 +16,7 @@
  */
 package org.exoplatform.ecm.webui.component.admin.nodetype;
 
+import org.exoplatform.ecm.webui.nodetype.selector.UINodeTypeSearch;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.core.UIPopupWindow;
 import org.exoplatform.webui.core.lifecycle.UIContainerLifecycle;
@@ -46,8 +47,10 @@ public class UINodeTypeManager extends UIAbstractManager {
   }
 
   public void update() throws Exception {
+    UINodeTypeSearch uiNodeTypeSearch = getChild(UINodeTypeSearchForm.class).getChild(UINodeTypeSearch.class);
+    uiNodeTypeSearch.init();
     UINodeTypeList uiNodeTypeList = getChild(UINodeTypeList.class);
-    uiNodeTypeList.refresh(null, uiNodeTypeList.getUIPageIterator().getCurrentPage());
+    uiNodeTypeList.refresh(uiNodeTypeList.getUIPageIterator().getCurrentPage());
   }
   public void setExportPopup() throws Exception {
     removeChildById(EXPORT_POPUP) ;

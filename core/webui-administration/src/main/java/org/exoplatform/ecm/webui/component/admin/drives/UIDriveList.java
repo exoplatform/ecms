@@ -30,14 +30,13 @@ import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.container.xml.PortalContainerInfo;
 import org.exoplatform.ecm.webui.component.admin.UIECMAdminPortlet;
+import org.exoplatform.ecm.webui.core.UIPagingGridDecorator;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.drives.ManageDriveService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
-import org.exoplatform.webui.core.UIComponentDecorator;
-import org.exoplatform.webui.core.UIPageIterator;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
 
@@ -56,35 +55,31 @@ import org.exoplatform.webui.event.EventListener;
         @EventConfig(listeners = UIDriveList.AddDriveActionListener.class)
     }
 )
-public class UIDriveList extends UIComponentDecorator {
+public class UIDriveList extends UIPagingGridDecorator {
 
   final static public String[] ACTIONS = {"AddDrive"} ;
   final  static public String ST_ADD = "AddDriveManagerPopup" ;
   final  static public String ST_EDIT = "EditDriveManagerPopup" ;
-  private UIPageIterator uiPageIterator_ ;
 
   public UIDriveList() throws Exception {
-    uiPageIterator_ = createUIComponent(UIPageIterator.class, null, "UIDriveListIterator");
-    setUIComponent(uiPageIterator_) ;
+    getUIPageIterator().setId("UIDriveListIterator");
   }
 
   public String[] getActions() { return ACTIONS ; }
 
   @SuppressWarnings("unchecked")
-  public void updateDriveListGrid(int currentPage) throws Exception {
+  public void refresh(int currentPage) throws Exception {
     LazyPageList<DriveData> dataPageList = new LazyPageList<DriveData>(new ListAccessImpl<DriveData>(DriveData.class,
                                                                                                      getDrives()),
-                                                                       10);
-    uiPageIterator_.setPageList(dataPageList);
+                                                                       getUIPageIterator().getItemsPerPage());
+    getUIPageIterator().setPageList(dataPageList);
     if (currentPage > getUIPageIterator().getAvailablePage())
-      uiPageIterator_.setCurrentPage(getUIPageIterator().getAvailablePage());
+      getUIPageIterator().setCurrentPage(getUIPageIterator().getAvailablePage());
     else
-      uiPageIterator_.setCurrentPage(currentPage);
+      getUIPageIterator().setCurrentPage(currentPage);
   }
 
-  public UIPageIterator  getUIPageIterator() {  return uiPageIterator_ ; }
-
-  public List getDriveList() throws Exception { return uiPageIterator_.getCurrentPageData() ; }
+  public List getDriveList() throws Exception { return getUIPageIterator().getCurrentPageData() ; }
 
   @SuppressWarnings("unchecked")
   @Deprecated
@@ -183,7 +178,7 @@ public class UIDriveList extends UIComponentDecorator {
       UIDriveList uiDriveList = event.getSource();
       ManageDriveService driveService = uiDriveList.getApplicationComponent(ManageDriveService.class) ;
       driveService.removeDrive(name) ;
-      uiDriveList.updateDriveListGrid(uiDriveList.getUIPageIterator().getCurrentPage()) ;
+      uiDriveList.refresh(uiDriveList.getUIPageIterator().getCurrentPage()) ;
       event.getRequestContext().addUIComponentToUpdateByAjax(uiDriveList.getParent()) ;
     }
   }

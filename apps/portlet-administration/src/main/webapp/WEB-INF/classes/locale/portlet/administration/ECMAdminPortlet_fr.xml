@@ -1896,6 +1896,12 @@
   ######################################################################################
   -->
   <UITagManager>
+    <title>
+      <EditStyle>Editer le style</EditStyle>
+      <RemoveStyle>Supprimer le style</RemoveStyle>
+    </title>    
+  </UITagManager>
+  <UITagStyleList>
     <header>
       <name>Nom du style</name>
       <documentRange>Nombre de références</documentRange>
@@ -1903,11 +1909,9 @@
       <action>Action</action>
     </header>
     <action>
-      <title>
-        <EditStyle>Editer</EditStyle>
-      </title>
+      <AddStyle>Ajouter un style</AddStyle>
     </action>
-  </UITagManager>
+  </UITagStyleList>  
   <UITagStyleForm>
     <label>
       <styleName>Nom du style</styleName>
@@ -2477,5 +2481,10 @@
       <no-permission-remove>You can not remove the owner or system</no-permission-remove>  		
   	</msg>
   </UIPermissionTreeInfo> 
+ <UIPageIterator>
+  <label>
+    <maxPageSize>Taille maximale de la page</maxPageSize>
+  </label>
+ </UIPageIterator>  
 </bundle>
 

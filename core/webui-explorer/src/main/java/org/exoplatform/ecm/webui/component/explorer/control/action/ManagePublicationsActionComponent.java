@@ -91,7 +91,7 @@ public class ManagePublicationsActionComponent extends UIComponent {
           return;
         }
         activePublication.setRendered(true);
-        activePublication.updateLifecyclesGrid();
+        activePublication.refresh(activePublication.getUIPageIterator().getCurrentPage());
         UIPopupContainer.activate(activePublication, 600, 300);
         event.getRequestContext().addUIComponentToUpdateByAjax(UIPopupContainer);
         return;

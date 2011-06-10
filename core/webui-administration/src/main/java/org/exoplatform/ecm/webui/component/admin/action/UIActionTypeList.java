@@ -26,10 +26,10 @@ import javax.jcr.nodetype.NodeType;
 import org.exoplatform.commons.utils.LazyPageList;
 import org.exoplatform.commons.utils.ListAccessImpl;
 import org.exoplatform.ecm.webui.component.admin.UIECMAdminPortlet;
+import org.exoplatform.ecm.webui.core.UIPagingGrid;
 import org.exoplatform.services.cms.actions.ActionServiceContainer;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
-import org.exoplatform.webui.core.UIGrid;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
 
@@ -47,7 +47,7 @@ import org.exoplatform.webui.event.EventListener;
     }
 )
 
-public class UIActionTypeList extends UIGrid {
+public class UIActionTypeList extends UIPagingGrid {
 
   private static String[] ACTIONTYPE_BEAN_FIELD = {"name", "extendType"} ;
 
@@ -59,7 +59,7 @@ public class UIActionTypeList extends UIGrid {
   public String[] getActions() { return new String[] {"AddAction"} ;}
 
   @SuppressWarnings("unchecked")
-  public void updateGrid () throws Exception {
+  public void refresh(int currentPage) throws Exception {
     ActionServiceContainer actionsServiceContainer =
       getApplicationComponent(ActionServiceContainer.class) ;
     String repository = getAncestorOfType(UIECMAdminPortlet.class).getPreferenceRepository() ;
@@ -80,8 +80,13 @@ public class UIActionTypeList extends UIGrid {
     Collections.sort(actions, new ActionComparator()) ;
     LazyPageList<ActionData> dataPageList = new LazyPageList<ActionData>(new ListAccessImpl<ActionData>(ActionData.class,
                                                                                                         actions),
-                                                                         10);
+                                                                         getUIPageIterator().getItemsPerPage());
+    getUIPageIterator().setTotalItems(actions.size());
     getUIPageIterator().setPageList(dataPageList);
+    if (currentPage > getUIPageIterator().getAvailablePage())
+      getUIPageIterator().setCurrentPage(getUIPageIterator().getAvailablePage());
+    else
+      getUIPageIterator().setCurrentPage(currentPage);    
   }
 
   static public class ActionComparator implements Comparator<ActionData> {

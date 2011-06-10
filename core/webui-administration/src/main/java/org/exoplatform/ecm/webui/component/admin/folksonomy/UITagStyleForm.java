@@ -19,10 +19,10 @@ package org.exoplatform.ecm.webui.component.admin.folksonomy;
 import javax.jcr.Node;
 
 import org.apache.commons.lang.StringUtils;
-import org.exoplatform.services.log.Log;
 import org.exoplatform.ecm.webui.component.admin.UIECMAdminPortlet;
 import org.exoplatform.services.cms.folksonomy.NewFolksonomyService;
 import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -30,8 +30,8 @@ import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.webui.core.UIPopupWindow;
 import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.event.Event;
-import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.event.Event.Phase;
+import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.form.UIForm;
 import org.exoplatform.webui.form.UIFormStringInput;
 import org.exoplatform.webui.form.UIFormTextAreaInput;
@@ -126,8 +126,8 @@ public class UITagStyleForm extends UIForm {
         if (uiForm.getTagStyle() == null) {
           String tagStyleName = uiForm.getUIStringInput(STYLE_NAME).getValue().trim();
           NewFolksonomyService newFolksonomyService = uiForm.getApplicationComponent(NewFolksonomyService.class) ;
-          newFolksonomyService.addTagStyle(tagStyleName, "", "", repository, workspace);
-          for(Node tagStyle: newFolksonomyService.getAllTagStyle(repository, workspace))
+          newFolksonomyService.addTagStyle(tagStyleName, "", "", workspace);
+          for(Node tagStyle: newFolksonomyService.getAllTagStyle(workspace))
             if(tagStyle.getName().equals(tagStyleName)) {
               uiForm.selectedTagStyle_ = tagStyle ;
               break;
@@ -138,7 +138,7 @@ public class UITagStyleForm extends UIForm {
         uiForm.getTagStyle().save() ;
         uiForm.getTagStyle().getSession().save() ;
         UITagStyleList uiTagList = uiManager.getChild(UITagStyleList.class) ;
-        uiTagList.updateGrid() ;
+        uiTagList.refresh(uiTagList.getUIPageIterator().getCurrentPage());
       } catch(Exception e) {
         String key = "UITagStyleForm.msg.error-update" ;
         uiApp.addMessage(new ApplicationMessage(key, null, ApplicationMessage.WARNING)) ;

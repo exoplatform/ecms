@@ -49,7 +49,7 @@ public class UIMetadataManager extends UIAbstractManager {
   }
 
   public void update() throws Exception {
-    getChild(UIMetadataList.class).updateGrid() ;
+    getChild(UIMetadataList.class).refresh(1);
   }
   public void initPopup() throws Exception {
     removeChildById(METADATA_POPUP) ;

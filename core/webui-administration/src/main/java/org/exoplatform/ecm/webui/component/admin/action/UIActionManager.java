@@ -41,7 +41,7 @@ public class UIActionManager extends UIAbstractManager {
 
   public void refresh() throws Exception {
     UIActionTypeList list = getChild(UIActionTypeList.class) ;
-    list.updateGrid() ;
+    list.refresh(1);
   }
 
   public void initPopup(UIComponent uiActionForm, int width) throws Exception {

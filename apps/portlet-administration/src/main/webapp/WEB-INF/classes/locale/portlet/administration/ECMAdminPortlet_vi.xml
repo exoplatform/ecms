@@ -1887,6 +1887,12 @@
   ######################################################################################
   -->
   <UITagManager>
+    <title>
+      <EditStyle>Sửa style</EditStyle>
+      <RemoveStyle>Xóa style</RemoveStyle>
+    </title>    
+  </UITagManager>
+  <UITagStyleList>
     <header>
       <name>Tên kiểu</name>
       <documentRange>Số lượng tài liệu</documentRange>
@@ -1894,11 +1900,9 @@
       <action>Hành động</action>
     </header>
     <action>
-      <title>
-        <EditStyle>Sửa</EditStyle>
-      </title>
+      <AddStyle>Thêm style</AddStyle>
     </action>
-  </UITagManager>
+  </UITagStyleList>
   <UITagStyleForm>
     <label>
       <styleName>Tên kiểu</styleName>
@@ -2481,5 +2485,10 @@
  	 <UINodeTypeSelector>Chọn NodeType</UINodeTypeSelector>
  	</title>
  </PopupComponent>
+ <UIPageIterator>
+  <label>
+    <maxPageSize>Số lượng hiển thị tối đa</maxPageSize>
+  </label>
+ </UIPageIterator>   
 </bundle>
 

@@ -24,7 +24,6 @@ import javax.jcr.NodeIterator;
 import javax.jcr.RepositoryException;
 import javax.jcr.version.Version;
 import javax.jcr.version.VersionHistory;
-import javax.portlet.PortletPreferences;
 
 import org.exoplatform.ecm.jcr.model.VersionNode;
 import org.exoplatform.ecm.resolver.JCRResourceResolver;
@@ -38,16 +37,14 @@ import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
-import org.exoplatform.webui.application.WebuiRequestContext;
-import org.exoplatform.webui.application.portlet.PortletRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.core.model.SelectItemOption;
 import org.exoplatform.webui.event.Event;
-import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.event.Event.Phase;
+import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.form.UIForm;
 import org.exoplatform.webui.form.UIFormCheckBoxInput;
 import org.exoplatform.webui.form.UIFormSelectBox;
@@ -327,12 +324,12 @@ public class UITemplateForm extends UIForm {
       uiForm.refresh();
       if (uiForm.getId().equalsIgnoreCase(UIECMTemplateList.ST_ECMTempForm)) {
         UIECMTemplateList uiECMTempList = uiTempContainer.getChild(UIECMTemplateList.class);
-        uiECMTempList.updateTempListGrid(uiECMTempList.getUIPageIterator().getCurrentPage());
+        uiECMTempList.refresh(uiECMTempList.getUIPageIterator().getCurrentPage());
         uiECMTempList.setRenderSibling(UIECMTemplateList.class);
       }
       if (uiForm.getId().equalsIgnoreCase(UICBTemplateList.ST_CBTempForm)) {
         UICBTemplateList uiCBTempList = uiTempContainer.getChild(UICBTemplateList.class);
-        uiCBTempList.updateCBTempListGrid(uiCBTempList.getUIPageIterator().getCurrentPage());
+        uiCBTempList.refresh(uiCBTempList.getUIPageIterator().getCurrentPage());
         uiCBTempList.setRenderSibling(UICBTemplateList.class);
       }
       event.getRequestContext().addUIComponentToUpdateByAjax(uiTempContainer);
@@ -368,11 +365,11 @@ public class UITemplateForm extends UIForm {
       uiForm.refresh();
       if (uiForm.getId().equalsIgnoreCase(UIECMTemplateList.ST_ECMTempForm)) {
         UIECMTemplateList uiECMTempList = uiTempContainer.getChild(UIECMTemplateList.class);
-        uiECMTempList.updateTempListGrid(uiECMTempList.getUIPageIterator().getCurrentPage());
+        uiECMTempList.refresh(uiECMTempList.getUIPageIterator().getCurrentPage());
       }
       if (uiForm.getId().equalsIgnoreCase(UICBTemplateList.ST_CBTempForm)) {
         UICBTemplateList uiCBTempList = uiTempContainer.getChild(UICBTemplateList.class);
-        uiCBTempList.updateCBTempListGrid(uiCBTempList.getUIPageIterator().getCurrentPage());
+        uiCBTempList.refresh(uiCBTempList.getUIPageIterator().getCurrentPage());
       }
     }
   }
@@ -389,11 +386,11 @@ public class UITemplateForm extends UIForm {
       UITemplateContainer uiTempContainer = uiForm.getAncestorOfType(UITemplateContainer.class);
       if (uiForm.getId().equalsIgnoreCase(UIECMTemplateList.ST_ECMTempForm)) {
         UIECMTemplateList uiECMTempList = uiTempContainer.getChild(UIECMTemplateList.class);
-        uiECMTempList.updateTempListGrid(uiECMTempList.getUIPageIterator().getCurrentPage());
+        uiECMTempList.refresh(uiECMTempList.getUIPageIterator().getCurrentPage());
       }
       if (uiForm.getId().equalsIgnoreCase(UICBTemplateList.ST_CBTempForm)) {
         UICBTemplateList uiCBTempList = uiTempContainer.getChild(UICBTemplateList.class);
-        uiCBTempList.updateCBTempListGrid(uiCBTempList.getUIPageIterator().getCurrentPage());
+        uiCBTempList.refresh(uiCBTempList.getUIPageIterator().getCurrentPage());
       }
     }
   }
@@ -410,11 +407,11 @@ public class UITemplateForm extends UIForm {
       UITemplateContainer uiTempContainer = uiForm.getAncestorOfType(UITemplateContainer.class);
       if (uiForm.getId().equalsIgnoreCase(UIECMTemplateList.ST_ECMTempForm)) {
         UIECMTemplateList uiECMTempList = uiTempContainer.getChild(UIECMTemplateList.class);
-        uiECMTempList.updateTempListGrid(uiECMTempList.getUIPageIterator().getCurrentPage());
+        uiECMTempList.refresh(uiECMTempList.getUIPageIterator().getCurrentPage());
       }
       if (uiForm.getId().equalsIgnoreCase(UICBTemplateList.ST_CBTempForm)) {
         UICBTemplateList uiCBTempList = uiTempContainer.getChild(UICBTemplateList.class);
-        uiCBTempList.updateCBTempListGrid(uiCBTempList.getUIPageIterator().getCurrentPage());
+        uiCBTempList.refresh(uiCBTempList.getUIPageIterator().getCurrentPage());
       }
 
       uiForm.refresh();

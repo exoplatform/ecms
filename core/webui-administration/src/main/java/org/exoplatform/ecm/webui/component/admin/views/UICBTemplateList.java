@@ -27,6 +27,7 @@ import org.exoplatform.commons.utils.LazyPageList;
 import org.exoplatform.commons.utils.ListAccess;
 import org.exoplatform.commons.utils.ListAccessImpl;
 import org.exoplatform.ecm.webui.component.admin.UIECMAdminPortlet;
+import org.exoplatform.ecm.webui.core.UIPagingGrid;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.services.cms.BasePath;
@@ -36,7 +37,6 @@ import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIApplication;
-import org.exoplatform.webui.core.UIGrid;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
 
@@ -55,7 +55,7 @@ import org.exoplatform.webui.event.EventListener;
         @EventConfig (listeners = UICBTemplateList.AddActionListener.class)
     }
 )
-public class UICBTemplateList extends UIGrid {
+public class UICBTemplateList extends UIPagingGrid {
   private static String[] VIEW_BEAN_FIELD = {"name", "path", "baseVersion"} ;
   private static String[] VIEW_ACTION = {"EditInfo","Delete"} ;
   public static String ST_CBTempForm = "CBTempForm" ;
@@ -88,7 +88,7 @@ public class UICBTemplateList extends UIGrid {
   }
 
   @SuppressWarnings("unchecked")
-  public void updateCBTempListGrid(int currentPage) throws Exception {
+  public void refresh(int currentPage) throws Exception {
     List<Node> nodes = getAllTemplates();
     List<TemplateBean> tempBeans = new ArrayList<TemplateBean>();
     for (Node node : nodes) {
@@ -97,7 +97,9 @@ public class UICBTemplateList extends UIGrid {
     Collections.sort(tempBeans, new CBViewComparator());
     ListAccess<TemplateBean> tmplBeanList = new ListAccessImpl<TemplateBean>(TemplateBean.class,
                                                                              tempBeans);
-    getUIPageIterator().setPageList(new LazyPageList<TemplateBean>(tmplBeanList, 10));
+    getUIPageIterator().setPageList(new LazyPageList<TemplateBean>(tmplBeanList,
+                                                                   getUIPageIterator().getItemsPerPage()));
+    getUIPageIterator().setTotalItems(tempBeans.size());
     if (currentPage > getUIPageIterator().getAvailablePage())
       getUIPageIterator().setCurrentPage(getUIPageIterator().getAvailablePage());
     else
@@ -138,7 +140,7 @@ public class UICBTemplateList extends UIGrid {
       UICBTemplateList uiCBTemp = event.getSource() ;
       String templatePath = event.getRequestContext().getRequestParameter(OBJECTID) ;
       uiCBTemp.getApplicationComponent(ManageViewService.class).removeTemplate(templatePath);
-      uiCBTemp.updateCBTempListGrid(uiCBTemp.getUIPageIterator().getCurrentPage());
+      uiCBTemp.refresh(uiCBTemp.getUIPageIterator().getCurrentPage());
       uiCBTemp.setRenderSibling(UICBTemplateList.class);
       UIViewManager uiViewManager = uiCBTemp.getAncestorOfType(UIViewManager.class) ;
       uiViewManager.setRenderedChild(UICBTemplateList.ST_CBTemp) ;

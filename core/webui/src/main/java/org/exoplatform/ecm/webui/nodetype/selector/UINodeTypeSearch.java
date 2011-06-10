@@ -38,6 +38,9 @@ import org.exoplatform.webui.form.UIFormStringInput;
 public class UINodeTypeSearch extends UIFormInputContainer<String> {
 
   public void init() throws Exception {
+    if (getChild(UIFormStringInput.class) != null) {
+      removeChild(UIFormStringInput.class);
+    }
     addChild(new UIFormStringInput("NodeTypeText", "NodeTypeText", "*"));
     addValidator(NodeTypeNameValidator.class);
   }

@@ -31,6 +31,7 @@ import javax.jcr.nodetype.NodeTypeManager;
 import org.exoplatform.commons.utils.LazyPageList;
 import org.exoplatform.commons.utils.ListAccess;
 import org.exoplatform.commons.utils.ListAccessImpl;
+import org.exoplatform.ecm.webui.core.UIPagingGridDecorator;
 import org.exoplatform.ecm.webui.form.UIFormInputSetWithAction;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
@@ -38,8 +39,6 @@ import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIComponent;
-import org.exoplatform.webui.core.UIComponentDecorator;
-import org.exoplatform.webui.core.UIPageIterator;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.form.UIFormInputInfo;
@@ -62,9 +61,8 @@ import org.exoplatform.webui.form.UIFormInputInfo;
       @EventConfig(listeners = UINodeTypeList.ExportActionListener.class)
     }
 )
-public class UINodeTypeList extends UIComponentDecorator {
+public class UINodeTypeList extends UIPagingGridDecorator {
 
-  private UIPageIterator uiPageIterator_ ;
   final static public String DRAFTNODETYPE = "jcr:system/jcr:nodetypesDraft" ;
   final static public String[] ACTIONS = {"Add", "Import", "Export"} ;
   final static public String[] CANCEL = {"Cancel"} ;
@@ -73,8 +71,7 @@ public class UINodeTypeList extends UIComponentDecorator {
     UINodeTypeForm.REQUIRED_PRIMARY_TYPE_TAB} ;
 
   public UINodeTypeList() throws Exception {
-    uiPageIterator_ = createUIComponent(UIPageIterator.class, null, "UINodeTypeListIterator");
-    setUIComponent(uiPageIterator_) ;
+    getUIPageIterator().setId("UINodeTypeListIterator") ;
   }
 
   @SuppressWarnings("unchecked")
@@ -99,10 +96,8 @@ public class UINodeTypeList extends UIComponentDecorator {
     return nodeList ;
   }
 
-  public UIPageIterator  getUIPageIterator() {  return uiPageIterator_ ; }
-
   public List getNodeTypeList() throws Exception { 
-    return NodeLocation.getNodeListByLocationList(uiPageIterator_.getCurrentPageData()); 
+    return NodeLocation.getNodeListByLocationList(getUIPageIterator().getCurrentPageData()); 
   }
 
   public String[] getActions() { return ACTIONS ; }
@@ -110,12 +105,12 @@ public class UINodeTypeList extends UIComponentDecorator {
   public void refresh(String name, int currentPage, List<NodeTypeBean> nodeType) throws Exception {
     ListAccess<Object> nodeTypeList = new ListAccessImpl<Object>(Object.class,
                                                                  NodeLocation.getLocationsByNodeList(nodeType));
-    LazyPageList<Object> pageList = new LazyPageList<Object>(nodeTypeList, 10);
-    uiPageIterator_.setPageList(pageList);
-    if (currentPage > uiPageIterator_.getAvailablePage())
-      uiPageIterator_.setCurrentPage(uiPageIterator_.getAvailablePage());
+    LazyPageList<Object> pageList = new LazyPageList<Object>(nodeTypeList, getUIPageIterator().getItemsPerPage());
+    getUIPageIterator().setPageList(pageList);
+    if (currentPage > getUIPageIterator().getAvailablePage())
+      getUIPageIterator().setCurrentPage(getUIPageIterator().getAvailablePage());
     else
-      uiPageIterator_.setCurrentPage(currentPage);
+      getUIPageIterator().setCurrentPage(currentPage);
   }
 
   public void refresh(String name, int currentPage) throws Exception {
@@ -286,5 +281,9 @@ public class UINodeTypeList extends UIComponentDecorator {
       String name2 = n2.getName();
       return name1.compareToIgnoreCase(name2);
     }
+  }
+
+  public void refresh(int currentPage) throws Exception {
+    refresh(null, currentPage);
   }
 }

@@ -139,7 +139,7 @@ public class UIMetadataForm extends UIFormTabPane implements UISelectable {
       if (path != null)
         templateService.invalidateTemplate(path, resourceResolver);
       uiForm.reset() ;
-      uiMetaManager.getChild(UIMetadataList.class).updateGrid() ;
+      uiMetaManager.getChild(UIMetadataList.class).refresh(1);
       uiMetaManager.removeChildById(UIMetadataManager.METADATA_POPUP) ;
       event.getRequestContext().addUIComponentToUpdateByAjax(uiMetaManager) ;
     }

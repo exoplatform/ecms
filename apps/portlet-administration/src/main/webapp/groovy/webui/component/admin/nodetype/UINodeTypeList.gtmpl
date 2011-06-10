@@ -10,11 +10,20 @@
 <%
   import javax.jcr.Node;
 
-  def nodeTypes = uicomponent.getNodeTypeList() ; 
-  if(nodeTypes == null) return ;
-  int totalPages = uicomponent.getUIPageIterator().getAvailablePage() ;
+  def nodeTypes = uicomponent.getNodeTypeList();
+  def allNodeTypes = uicomponent.getAllNodeTypes();
+  if(nodeTypes == null) return;
+  int totalPages = uicomponent.getUIPageIterator().getAvailablePage();
 %>
 <div class="UINodeTypeList" id="$uicomponent.id">
+  <% if (allNodeTypes.size() > 5) {%>
+  <div style="margin:1px 0px 20px 0px;">
+    <%
+      uicomponent.getUIPageIterator().setUseMaxSizeSetting(false);
+      _ctx.renderUIComponent(uicomponent.getUIPageIterator());
+    %>
+  </div>
+  <%}%>
   <table class="UIGrid">
     <thead>
       <tr>
@@ -138,11 +147,14 @@
       <%}%>
     </tbody>
   </table>
-  <% if(totalPages>1){ %>
+  <% if (allNodeTypes.size() > 5) {%>
   <div style="margin:1px 0px 20px 0px;">
-    <%_ctx.renderUIComponent(uicomponent.getUIPageIterator())%>
+    <%
+      uicomponent.getUIPageIterator().setUseMaxSizeSetting(false);
+      _ctx.renderUIComponent(uicomponent.getUIPageIterator());
+    %>
   </div>
-  <% } %>
+  <%}%>
 	<div class="UIAction">
     <table class="ActionContainer">
     	<tr>

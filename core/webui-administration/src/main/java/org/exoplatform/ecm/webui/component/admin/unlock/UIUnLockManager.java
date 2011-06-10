@@ -41,11 +41,11 @@ public class UIUnLockManager extends UIAbstractManager {
 
   public void update() throws Exception {
     UILockNodeList uiLockNodeList = getChild(UILockNodeList.class);
-    uiLockNodeList.updateLockedNodesGrid(uiLockNodeList.getUIPageIterator().getCurrentPage());
+    uiLockNodeList.refresh(uiLockNodeList.getUIPageIterator().getCurrentPage());
     UILockHolderContainer uiHolderContainer = getChild(UILockHolderContainer.class);
     if (uiHolderContainer != null) {
       UILockHolderList uiLockHolderList = uiHolderContainer.getChild(UILockHolderList.class);
-      uiLockHolderList.updateLockedNodesGrid(uiLockHolderList.getUIPageIterator().getCurrentPage());
+      uiLockHolderList.refresh(uiLockHolderList.getUIPageIterator().getCurrentPage());
     }
   }
 

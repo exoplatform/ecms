@@ -1887,6 +1887,12 @@
   ######################################################################################
   -->
   <UITagManager>
+    <title>
+      <EditStyle><![CDATA[&Auml;ndern]]></EditStyle>
+      <RemoveStyle>Remove Style</RemoveStyle>
+    </title>    
+  </UITagManager>
+  <UITagStyleList>
     <header>
       <name>Stilname</name>
       <documentRange>Dokumentspas</documentRange>
@@ -1894,11 +1900,9 @@
       <action>Aktion</action>
     </header>
     <action>
-      <title>
-        <EditStyle><![CDATA[&Auml;ndern]]></EditStyle>
-      </title>
+      <AddStyle>Add Style</AddStyle>
     </action>
-  </UITagManager>
+  </UITagStyleList>
   <UITagStyleForm>
     <label>
       <styleName>Stilname</styleName>
@@ -2482,5 +2486,10 @@
  	 <UINodeTypeSelector>NodeType Selector</UINodeTypeSelector>
  	</title>
  </PopupComponent>
+ <UIPageIterator>
+  <label>
+    <maxPageSize>Maximum page size</maxPageSize>
+  </label>
+ </UIPageIterator> 
 </bundle>
 

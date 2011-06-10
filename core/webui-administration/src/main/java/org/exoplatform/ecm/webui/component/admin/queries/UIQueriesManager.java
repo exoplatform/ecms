@@ -41,7 +41,7 @@ public class UIQueriesManager extends UIAbstractManager {
   }
 
   public void update() throws Exception {
-    getChild(UIQueriesList.class).updateQueriesGrid(1) ;
+    getChild(UIQueriesList.class).refresh(1) ;
   }
   public void initFormPopup(String id) throws Exception {
     removeChildById(id) ;

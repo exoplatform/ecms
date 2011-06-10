@@ -13,8 +13,17 @@
   
   RepositoryService rService = uicomponent.getApplicationComponent(RepositoryService.class) ;
   String repository = rService.getCurrentRepository().getConfiguration().getName() ;    
+  int totalItems = uicomponent.getDrives().size();
 %>
 <div class="UIDriveList" id="$uicomponent.id">
+  <% if (totalItems > 5) { %>
+  <div style="margin:1px 0px 5px 0px;">
+    <%
+      uicomponent.getUIPageIterator().setUseMaxSizeSetting(true);
+      _ctx.renderUIComponent(uicomponent.getUIPageIterator());
+    %>
+  </div>
+  <% } %>
   <table class="UIGrid">
     <thead>
       <tr>
@@ -62,9 +71,12 @@
       <%}%>  
     </tbody>
   </table>
-  <%if(uicomponent.getUIPageIterator().getAvailablePage() > 1) {%>
+  <% if (totalItems > 5) { %>
   <div style="margin:1px 0px 5px 0px;">
-    <%_ctx.renderUIComponent(uicomponent.getUIPageIterator())%>
+    <%
+      uicomponent.getUIPageIterator().setUseMaxSizeSetting(false);
+      _ctx.renderUIComponent(uicomponent.getUIPageIterator());
+    %>
   </div>
   <% } %>
   <div class="UIAction"> 

@@ -31,13 +31,13 @@ import org.exoplatform.commons.utils.LazyPageList;
 import org.exoplatform.commons.utils.ListAccess;
 import org.exoplatform.commons.utils.ListAccessImpl;
 import org.exoplatform.ecm.webui.component.admin.UIECMAdminPortlet;
+import org.exoplatform.ecm.webui.core.UIPagingGrid;
 import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIApplication;
-import org.exoplatform.webui.core.UIGrid;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
 
@@ -57,11 +57,11 @@ import org.exoplatform.webui.event.EventListener;
     }
 )
 
-public class UITemplateList extends UIGrid {
+public class UITemplateList extends UIPagingGrid {
 
   private static String[] NODETYPE_BEAN_FIELD = {"name"} ;
   private static String[] NODETYPE_ACTION = {"Edit", "Delete"} ;
-
+  
   public UITemplateList() throws Exception {
     getUIPageIterator().setId("NodeTypeListIterator") ;
     configure("name", NODETYPE_BEAN_FIELD, NODETYPE_ACTION) ;
@@ -69,38 +69,6 @@ public class UITemplateList extends UIGrid {
 
   public String[] getActions() {
     return new String[] {"AddNew"} ;
-  }
-
-  @SuppressWarnings("unchecked")
-  public void updateGrid(int currentPage) throws Exception {
-    TemplateService templateService = getApplicationComponent(TemplateService.class) ;
-    Node templatesHome = templateService.getTemplatesHome(SessionProviderFactory.createSessionProvider()) ;
-    List<TemplateData> templateData = new ArrayList<TemplateData>() ;
-    if(templatesHome != null) {
-      NodeTypeManager ntManager = templatesHome.getSession().getWorkspace().getNodeTypeManager();
-      NodeTypeIterator nodetypeIter = ntManager.getAllNodeTypes();
-      List<String> listNodeTypeName = new ArrayList<String>();
-      while (nodetypeIter.hasNext()) {
-        NodeType n1 = nodetypeIter.nextNodeType();
-        listNodeTypeName.add(n1.getName());
-      }
-      NodeIterator nodes = templatesHome.getNodes() ;
-      while (nodes.hasNext()) {
-        Node node  = nodes.nextNode();
-        if (listNodeTypeName.contains(node.getName())) {
-          templateData.add(new TemplateData(node.getName()));
-        }
-      }
-      Collections.sort(templateData, new TemplateComparator()) ;
-    }
-    ListAccess<TemplateData> dataList = new ListAccessImpl<TemplateData>(TemplateData.class,
-                                                                         templateData);
-    LazyPageList<TemplateData> pageList = new LazyPageList<TemplateData>(dataList, 10);
-    getUIPageIterator().setPageList(pageList);
-    if (currentPage > getUIPageIterator().getAvailablePage())
-      getUIPageIterator().setCurrentPage(getUIPageIterator().getAvailablePage());
-    else
-      getUIPageIterator().setCurrentPage(currentPage);
   }
 
   static public class TemplateComparator implements Comparator<TemplateData> {
@@ -139,6 +107,7 @@ public class UITemplateList extends UIGrid {
       uiTemplatesManager.initPopup(uiViewTemplate, UITemplatesManager.EDIT_TEMPLATE) ;
       event.getRequestContext().addUIComponentToUpdateByAjax(uiTemplatesManager) ;
     }
+ 
   }
 
   static public class DeleteActionListener extends EventListener<UITemplateList> {
@@ -154,7 +123,7 @@ public class UITemplateList extends UIGrid {
       String nodeType = event.getRequestContext().getRequestParameter(OBJECTID) ;
       TemplateService templateService = nodeTypeList.getApplicationComponent(TemplateService.class) ;
       templateService.removeManagedNodeType(nodeType) ;
-      nodeTypeList.updateGrid(nodeTypeList.getUIPageIterator().getCurrentPage()) ;
+      nodeTypeList.refresh(nodeTypeList.getUIPageIterator().getCurrentPage()) ;
       event.getRequestContext().addUIComponentToUpdateByAjax(nodeTypeList.getParent()) ;
     }
   }
@@ -181,5 +150,40 @@ public class UITemplateList extends UIGrid {
 
     public TemplateData(String temp ) { name = temp ;}
     public String getName() { return name ;}
+  }
+
+  @Override
+  public void refresh(int currentPage) throws Exception {
+    TemplateService templateService = getApplicationComponent(TemplateService.class);
+    Node templatesHome = templateService.getTemplatesHome(SessionProviderFactory.createSessionProvider());
+    List<TemplateData> templateData = new ArrayList<TemplateData>();
+    if (templatesHome != null) {
+      NodeTypeManager ntManager = templatesHome.getSession().getWorkspace().getNodeTypeManager();
+      NodeTypeIterator nodetypeIter = ntManager.getAllNodeTypes();
+      List<String> listNodeTypeName = new ArrayList<String>();
+      while (nodetypeIter.hasNext()) {
+        NodeType n1 = nodetypeIter.nextNodeType();
+        listNodeTypeName.add(n1.getName());
+      }
+      NodeIterator nodes = templatesHome.getNodes();
+      while (nodes.hasNext()) {
+        Node node = nodes.nextNode();
+        if (listNodeTypeName.contains(node.getName())) {
+          templateData.add(new TemplateData(node.getName()));
+        }
+      }
+      Collections.sort(templateData, new TemplateComparator());
+    }
+    ListAccess<TemplateData> dataList = new ListAccessImpl<TemplateData>(TemplateData.class,
+                                                                         templateData);
+    LazyPageList<TemplateData> pageList = new LazyPageList<TemplateData>(dataList,
+                                                                         getUIPageIterator().getItemsPerPage());
+    getUIPageIterator().setTotalItems(templateData.size());
+    getUIPageIterator().setPageList(pageList);
+    if (currentPage > getUIPageIterator().getAvailablePage())
+      getUIPageIterator().setCurrentPage(getUIPageIterator().getAvailablePage());
+    else
+      getUIPageIterator().setCurrentPage(currentPage);
+
   }
 }

@@ -46,7 +46,7 @@ public class UIMetadataManagerComponent extends UIAbstractManagerComponent {
       UIECMAdminWorkingArea uiWorkingArea = portlet.getChild(UIECMAdminWorkingArea.class);
       uiWorkingArea.setChild(UIMetadataManager.class) ;
       UIMetadataManager uiManager = uiWorkingArea.getChild(UIMetadataManager.class) ;
-      uiManager.getChild(UIMetadataList.class).updateGrid() ;
+      uiManager.getChild(UIMetadataList.class).refresh(1);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiWorkingArea) ;
     }
   }

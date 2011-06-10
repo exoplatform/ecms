@@ -1891,6 +1891,12 @@
   ######################################################################################
   -->
   <UITagManager>
+    <title>
+      <EditStyle>Edit Style</EditStyle>
+      <RemoveStyle>Remove Style</RemoveStyle>
+    </title>    
+  </UITagManager>
+  <UITagStyleList>
     <header>
       <name>Style Name</name>
       <documentRange>Document Range</documentRange>
@@ -1898,11 +1904,9 @@
       <action>Action</action>
     </header>
     <action>
-      <title>
-        <EditStyle>Edit</EditStyle>
-      </title>
+      <AddStyle>Add Style</AddStyle>
     </action>
-  </UITagManager>
+  </UITagStyleList>
   <UITagStyleForm>
     <label>
       <styleName>Style Name</styleName>
@@ -2468,5 +2472,10 @@
  	 <UINodeTypeSelector>NodeType Selector</UINodeTypeSelector>
  	</title>
  </PopupComponent>
+ <UIPageIterator>
+  <label>
+    <maxPageSize>Maximum page size</maxPageSize>
+  </label>
+ </UIPageIterator>
 </bundle>
 

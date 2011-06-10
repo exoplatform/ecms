@@ -21,12 +21,9 @@ import javax.jcr.Node;
 import org.exoplatform.ecm.webui.component.admin.UIECMAdminPortlet;
 import org.exoplatform.services.cms.folksonomy.NewFolksonomyService;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
-import org.exoplatform.webui.config.annotation.EventConfig;
-import org.exoplatform.webui.core.lifecycle.UIContainerLifecycle;
 import org.exoplatform.webui.core.UIContainer;
 import org.exoplatform.webui.core.UIPopupWindow;
-import org.exoplatform.webui.event.Event;
-import org.exoplatform.webui.event.EventListener;
+import org.exoplatform.webui.core.lifecycle.UIContainerLifecycle;
 
 /**
  * Created by The eXo Platform SARL
@@ -35,17 +32,11 @@ import org.exoplatform.webui.event.EventListener;
  * Dec 11, 2009
  * 4:31:33 PM
  */
-@ComponentConfig(lifecycle = UIContainerLifecycle.class,
-events = {
-    @EventConfig(listeners = UITagManager.EditStyleActionListener.class),
-    @EventConfig(listeners = UITagManager.AddStyleActionListener.class),
-    @EventConfig(listeners = UITagManager.RemoveStyleActionListener.class,
-                 confirm = "UIFolksonomyManager.msg.confirm-delete") })
+@ComponentConfig(lifecycle = UIContainerLifecycle.class)
 public class UITagManager extends UIContainer {
 
   public UITagManager() throws Exception {
     addChild(UITagStyleList.class, null, null);
-    addChild(UITagStyleAddAction.class, null, null);
   }
 
   public void refresh() throws Exception {
@@ -53,7 +44,7 @@ public class UITagManager extends UIContainer {
   }
 
   public void update() throws Exception {
-    getChild(UITagStyleList.class).updateGrid() ;
+    getChild(UITagStyleList.class).refresh(1);
   }
 
   public void initTaggingFormPopup(Node selectedTagStyle) throws Exception {
@@ -72,42 +63,12 @@ public class UITagManager extends UIContainer {
     NewFolksonomyService newFolksonomyService = getApplicationComponent(NewFolksonomyService.class) ;
     String repository = getAncestorOfType(UIECMAdminPortlet.class).getPreferenceRepository() ;
     String workspace = getAncestorOfType(UIECMAdminPortlet.class).getDMSSystemWorkspace(repository);
-    for(Node tagStyle: newFolksonomyService.getAllTagStyle(repository, workspace)) {
+    for(Node tagStyle: newFolksonomyService.getAllTagStyle(workspace)) {
       if(tagStyle.getName().equals(tagStyleName)) return tagStyle ;
     }
     return null ;
   }
 
-  static public class EditStyleActionListener extends EventListener<UITagManager> {
-    public void execute(Event<UITagManager> event) throws Exception {
-      UITagManager uiManager = event.getSource() ;
-      String selectedName = event.getRequestContext().getRequestParameter(OBJECTID) ;
-      Node selectedTagStyle = uiManager.getSelectedTagStyle(selectedName) ;
-      uiManager.initTaggingFormPopup(selectedTagStyle) ;
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiManager) ;
-    }
-  }
 
-  static public class RemoveStyleActionListener extends EventListener<UITagManager> {
-    public void execute(Event<UITagManager> event) throws Exception {
-      UITagManager uiManager = event.getSource();
-      String selectedName = event.getRequestContext().getRequestParameter(OBJECTID);
-      Node selectedTagStyle = uiManager.getSelectedTagStyle(selectedName);
-      Node parentNode = selectedTagStyle.getParent();
-      selectedTagStyle.remove();
-      parentNode.getSession().save();
-      uiManager.getChild(UITagStyleList.class).updateGrid();
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiManager);
-    }
-  }
-
-  static public class AddStyleActionListener extends EventListener<UITagManager> {
-    public void execute(Event<UITagManager> event) throws Exception {
-      UITagManager uiManager = event.getSource() ;
-      String selectedName = event.getRequestContext().getRequestParameter(OBJECTID) ;
-      uiManager.initTaggingFormPopup(null) ;
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiManager) ;
-    }
-  }
 
 }

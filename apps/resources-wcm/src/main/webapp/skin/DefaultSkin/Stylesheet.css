@@ -54,6 +54,15 @@
  !display: block; 
 }
 
+.ClearLeft {
+  clear: left;
+}
+
+.selectbox {
+  display:block; 
+  float:left; 
+  font-size: 11px;
+}
 
 .cke_show_borders {
 	background:#fff;

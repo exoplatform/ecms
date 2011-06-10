@@ -390,7 +390,7 @@ public class UIViewForm extends UIFormInputSetWithAction implements UISelectable
       }
     }
     UIViewList uiViewList = getAncestorOfType(UIViewContainer.class).getChild(UIViewList.class);
-    uiViewList.updateViewListGrid(uiViewList.getUIPageIterator().getCurrentPage());
+    uiViewList.refresh(uiViewList.getUIPageIterator().getCurrentPage());
     refresh(true) ;
   }
 
@@ -409,7 +409,7 @@ public class UIViewForm extends UIFormInputSetWithAction implements UISelectable
     getUIStringInput(FIELD_PERMISSION).setValue(permLastest);
     UIViewContainer uiViewContainer = getAncestorOfType(UIViewContainer.class) ;
     UIViewList uiViewList = uiViewContainer.getChild(UIViewList.class) ;
-    uiViewList.updateViewListGrid(uiViewList.getUIPageIterator().getCurrentPage());
+    uiViewList.refresh(uiViewList.getUIPageIterator().getCurrentPage());
     UIViewForm uiViewForm = viewTabPane.getChild(UIViewForm.class) ;
     viewTabPane.setSelectedTab(uiViewForm.getId()) ;
   }

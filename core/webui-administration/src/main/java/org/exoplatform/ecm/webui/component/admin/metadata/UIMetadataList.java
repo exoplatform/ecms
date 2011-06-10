@@ -26,14 +26,13 @@ import javax.jcr.nodetype.PropertyDefinition;
 import org.exoplatform.commons.utils.LazyPageList;
 import org.exoplatform.commons.utils.ListAccess;
 import org.exoplatform.commons.utils.ListAccessImpl;
+import org.exoplatform.ecm.webui.core.UIPagingGridDecorator;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.cms.metadata.MetadataService;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIApplication;
-import org.exoplatform.webui.core.UIContainer;
-import org.exoplatform.webui.core.UIPageIterator;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
 
@@ -52,20 +51,23 @@ import org.exoplatform.webui.event.EventListener;
       @EventConfig(listeners = UIMetadataList.DeleteActionListener.class, confirm="UIMetadataList.msg.confirm-delete")
     }
 )
-public class UIMetadataList extends UIContainer {
+public class UIMetadataList extends UIPagingGridDecorator {
 
   final static public String INTERNAL_USE = "exo:internalUse".intern() ;
 
   public UIMetadataList() throws Exception {
-    addChild(UIPageIterator.class, null, "MetaDataListIterator") ;
+    getUIPageIterator().setId("MetaDataListIterator");
   }
 
-  public void updateGrid() throws Exception {
-    UIPageIterator uiPageIterator = getChild(UIPageIterator.class);
+  public void refresh(int currentPage) throws Exception {
     ListAccess<Metadata> metaDataList = new ListAccessImpl<Metadata>(Metadata.class,
                                                                      getAllMetadatas());
-    LazyPageList<Metadata> pageList = new LazyPageList<Metadata>(metaDataList, 10);
-    uiPageIterator.setPageList(pageList);
+    LazyPageList<Metadata> pageList = new LazyPageList<Metadata>(metaDataList, getUIPageIterator().getItemsPerPage());
+    getUIPageIterator().setPageList(pageList);
+    if (currentPage > getUIPageIterator().getAvailablePage())
+      getUIPageIterator().setCurrentPage(getUIPageIterator().getAvailablePage());
+    else
+      getUIPageIterator().setCurrentPage(currentPage);    
   }
 
   @SuppressWarnings("unchecked")
@@ -97,7 +99,7 @@ public class UIMetadataList extends UIContainer {
   }
 
   public List getListMetadata() throws Exception {
-    return getChild(UIPageIterator.class).getCurrentPageData() ;
+    return getUIPageIterator().getCurrentPageData() ;
   }
 
   static public class ViewActionListener extends EventListener<UIMetadataList> {
@@ -130,7 +132,7 @@ public class UIMetadataList extends UIContainer {
       UIMetadataManager uiManager = uiMetaList.getParent() ;
       MetadataService metadataService = uiMetaList.getApplicationComponent(MetadataService.class) ;
       metadataService.removeMetadata(metadataName);
-      uiMetaList.updateGrid() ;
+      uiMetaList.refresh(uiMetaList.getUIPageIterator().getCurrentPage());
       event.getRequestContext().addUIComponentToUpdateByAjax(uiManager) ;
       UIApplication uiApp = uiMetaList.getAncestorOfType(UIApplication.class) ;
       Object[] args = {metadataName} ;
