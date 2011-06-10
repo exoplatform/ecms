@@ -30,7 +30,7 @@ public class NewsLetterUtil {
    * @return the portal name
    */
   public static String getPortalName() {
-    return Util.getUIPortalApplication().getOwner();
+    return Util.getPortalRequestContext().getPortalOwner();
   }
 
   /**

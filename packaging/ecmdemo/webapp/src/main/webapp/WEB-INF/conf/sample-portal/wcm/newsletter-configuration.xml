@@ -34,6 +34,10 @@
         <value>classic</value>
         <value>acme</value>
       </values-param>
+	  <values-param>
+        <name>administrators</name>
+        <value>root</value>
+      </values-param>
       <object-param>
         <name>marketing</name>
         <description>marketing</description>

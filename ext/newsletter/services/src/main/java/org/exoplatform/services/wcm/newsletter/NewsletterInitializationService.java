@@ -47,6 +47,9 @@ public class NewsletterInitializationService implements Startable {
 
   /** The portal names. */
   private List<String> portalNames;
+  
+  /** administrators */
+  private List<String> administrators;
 
   /** The category configs. */
   private List<NewsletterCategoryConfig> categoryConfigs;
@@ -79,6 +82,7 @@ public class NewsletterInitializationService implements Startable {
     this.livePortalManagerService = WCMCoreUtils.getService(LivePortalManagerService.class);
     this.newsletterManagerService = WCMCoreUtils.getService(NewsletterManagerService.class);
     portalNames = initParams.getValuesParam("portalNames").getValues();
+    administrators = initParams.getValuesParam("administrators").getValues();
     categoryConfigs = initParams.getObjectParamValues(NewsletterCategoryConfig.class);
     subscriptionConfigs = initParams.getObjectParamValues(NewsletterSubscriptionConfig.class);
     userConfigs = initParams.getObjectParamValues(NewsletterUserConfig.class);
@@ -117,6 +121,12 @@ public class NewsletterInitializationService implements Startable {
           NewsletterManageUserHandler manageUserHandler = newsletterManagerService.getManageUserHandler();
           for (NewsletterUserConfig userConfig : userConfigs) {
             manageUserHandler.add(sessionProvider, portalName, userConfig.getMail());
+          }
+          
+          for (String admin : administrators) {
+            if (admin != null && admin.length() > 0) {
+              manageUserHandler.addAdministrator(sessionProvider, portalName, admin);
+            }
           }
           ExtendedNode userFolderNode = (ExtendedNode)((Node)session.getItem(NewsletterConstant.generateUserPath(portalName)));
           if(userFolderNode.canAddMixin("exo:privilegeable"))
