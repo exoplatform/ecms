@@ -1579,6 +1579,7 @@
 			<constraint-violation-exception>Kan niet importeren. Node type '{0}'
 				is niet toegelaten, child's node type is '{0}'
 			</constraint-violation-exception>
+			<item-exists-exception>An incoming referenceable node has the same UUID as a node existing in the workspace!</item-exists-exception>
 		</msg>
 	</UIImportNode>
 	<!--

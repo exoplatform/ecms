@@ -28,6 +28,7 @@ import java.util.zip.ZipInputStream;
 
 import javax.jcr.AccessDeniedException;
 import javax.jcr.ImportUUIDBehavior;
+import javax.jcr.ItemExistsException;
 import javax.jcr.Node;
 import javax.jcr.Session;
 import javax.jcr.nodetype.ConstraintViolationException;
@@ -47,8 +48,8 @@ import org.exoplatform.webui.core.UIPopupComponent;
 import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.core.model.SelectItemOption;
 import org.exoplatform.webui.event.Event;
-import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.event.Event.Phase;
+import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.form.UIForm;
 import org.exoplatform.webui.form.UIFormSelectBox;
 import org.exoplatform.webui.form.UIFormUploadInput;
@@ -139,7 +140,7 @@ public class UIImportNode extends UIForm implements UIPopupComponent {
     DMSMimeTypeResolver resolver = DMSMimeTypeResolver.getInstance();
     return resolver.getMimeType(fileName);
   }
-
+  
   static public class ImportActionListener extends EventListener<UIImportNode> {
     public void execute(Event<UIImportNode> event) throws Exception {
       UIImportNode uiImport = event.getSource();
@@ -231,6 +232,14 @@ public class UIImportNode extends UIForm implements UIPopupComponent {
                                                 ApplicationMessage.WARNING));
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
         return;
+      } catch (ItemExistsException iee) {
+        log.error("XML Import error " + iee, iee);
+        session.refresh(false);
+        uiApp.addMessage(new ApplicationMessage("UIImportNode.msg.item-exists-exception",
+                                                null,
+                                                ApplicationMessage.WARNING));
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        return;      
       } catch (Exception ise) {
         log.error("XML Import error " + ise, ise);
         session.refresh(false);

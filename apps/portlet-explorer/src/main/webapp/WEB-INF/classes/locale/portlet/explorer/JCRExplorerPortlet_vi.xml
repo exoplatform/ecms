@@ -1586,6 +1586,7 @@
       <mimetype-invalid>Chỉ những tệp tin xml hoặc zip được hỗ trợ để nhập vào.</mimetype-invalid>
       <access-denied>Truy nhập bị hủy bỏ!Bạn không được phép nhập ở đây.</access-denied>
       <constraint-violation-exception>Không thể nhập. Kiểu node '{0}' không được phép có kiểu node con là '{0}'</constraint-violation-exception>
+      <item-exists-exception>Một node được import có UUID trùng với node trong không gian làm việc!</item-exists-exception>
     </msg>
   </UIImportNode>
   <!--

@@ -1407,6 +1407,7 @@
       <mimetype-invalid><![CDATA[Nur xml oder zip Dateien sind f&uuml;r den Import unterst&uuml;tzt.]]></mimetype-invalid>
       <access-denied>Zugang verweigert! Sie haben kein Recht hier zu Importieren.</access-denied>
       <constraint-violation-exception>Kann nicht importieren. Knotentyp '{0}' ist nicht erlaubt Nachfolgeknotentyp ist '{0}'</constraint-violation-exception>
+      <item-exists-exception>An incoming referenceable node has the same UUID as a node existing in the workspace!</item-exists-exception>
     </msg>
   </UIImportNode>
   <!--
