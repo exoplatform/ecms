@@ -49,6 +49,7 @@ import org.exoplatform.webui.event.Event.Phase;
 import org.exoplatform.webui.form.UIForm;
 import org.exoplatform.webui.form.UIFormCheckBoxInput;
 import org.exoplatform.webui.form.UIFormDateTimeInput;
+import org.exoplatform.webui.form.UIFormInputBase;
 import org.exoplatform.webui.form.UIFormMultiValueInputSet;
 import org.exoplatform.webui.form.UIFormSelectBox;
 import org.exoplatform.webui.form.UIFormStringInput;
@@ -501,8 +502,18 @@ public class UIPropertyForm extends UIForm {
 
   static public class RemoveActionListener extends EventListener<UIPropertyForm> {
     public void execute(Event<UIPropertyForm> event) throws Exception {
-      UIPropertyForm uiForm = event.getSource();
+      UIPropertyForm uiForm = event.getSource();      
+      UIFormMultiValueInputSet uiSet = uiForm.findFirstComponentOfType(UIFormMultiValueInputSet.class);
+      List<UIComponent> children = uiSet.getChildren();      
+      if(children != null && children.size() > 0) {
+      	for(int i = 0; i < children.size(); i ++) {      		
+      		UIFormInputBase uiInput = (UIFormInputBase)children.get(i);      		
+      		uiInput.setId(FIELD_VALUE + String.valueOf(i));
+      		uiInput.setName(FIELD_VALUE + String.valueOf(i));
+      	}
+      }
       UIPropertiesManager uiPropertiesManager = uiForm.getAncestorOfType(UIPropertiesManager.class);
+      
       uiPropertiesManager.setRenderedChild(UIPropertyForm.class);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiForm.getParent());
     }
