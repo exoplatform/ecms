@@ -16,6 +16,7 @@
     padding-left: 10px;
     height: 22px; line-height: 22px;
     color: #058ee6; font-weight: bold; 
+    overflow: hidden;
   }
   
   .FileContent .ECMIframe {

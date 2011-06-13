@@ -63,7 +63,7 @@
 	      <div class="UITabContentContainer">
 	        <div class="UITabContent" style="display: block;"> 
 		        <div class="NavigationContainer">       
-	    				<div class="TopTitle"><%=Text.unescapeIllegalJcrChars(originalNode.getName())%></div>
+	    				<div class="TopTitle" title="<%=Text.unescapeIllegalJcrChars(originalNode.getName())%>"><%=Text.unescapeIllegalJcrChars(originalNode.getName())%></div>
 			        <%
 			        	if(contentNode.hasProperty("jcr:data")){
 			        	  String iframeId = uiParent.getId() + "ifame" ;
@@ -78,7 +78,7 @@
 	        </div>
 	        <div class="UITabContent" style="display: none;"> 
 	        	<div class="NavigationContainer">       
-						<div class="TopTitle">$originalNode.name</div>
+						<div class="TopTitle" title="$originalNode.name">$originalNode.name</div>
 		        	<div class="Content">
 		        		<div class="TextContent">
 					        <%

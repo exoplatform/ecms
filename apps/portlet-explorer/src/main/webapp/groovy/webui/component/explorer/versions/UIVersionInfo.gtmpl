@@ -79,7 +79,7 @@
 <div class="UIVersionInfo" id="$uicomponent.id">
   <div class="HomeNode">
     <div class="Icon24x24 HomeIcon"><span></span></div>
-    <div class="NodeLabel"><%=uicomponent.getCurrentNode().getName()%></div>
+    <div class="NodeLabel" title="<%=uicomponent.getCurrentNode().getName()%>" style="overflow:hidden;"><%=uicomponent.getCurrentNode().getName()%></div>
   </div>
   <%
 		String clazz = "" ;

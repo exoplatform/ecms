@@ -27,6 +27,7 @@
 	font: normal bold 16px Arial;
 	color: #0467e2;
 	text-align: right;
+	overflow: hidden;
 }
 
 .UIArticle .ArticleMLDecorator {
