@@ -46,7 +46,7 @@
          <object type="org.exoplatform.services.cms.queries.impl.QueryData">              
            <field  name="name"><string>Created Documents</string></field>
            <field  name="language"><string>xpath</string></field>
-           <field  name="statement"><string>//*[(@jcr:primaryType = 'exo:article' or @jcr:primaryType = 'nt:file') and @exo:owner='${UserId}$'] order by @exo:dateCreated descending</string></field>
+           <field  name="statement"><string>//*[(@jcr:primaryType = 'exo:article' or @jcr:primaryType = 'nt:file') and @exo:owner='${UserId}$' and not(@jcr:mixinTypes = 'exo:restoreLocation')] order by @exo:dateCreated descending</string></field>
            <field  name="permissions">
              <collection type="java.util.ArrayList">
                <value><string>*:/platform/users</string></value>
@@ -62,7 +62,7 @@
          <object type="org.exoplatform.services.cms.queries.impl.QueryData">              
            <field  name="name"><string>CreatedDocumentDayBefore</string></field>
            <field  name="language"><string>xpath</string></field>
-           <field  name="statement"><string>//element(*,exo:article)[@exo:dateCreated &lt; xs:dateTime('${Date}$')] order by @exo:dateCreated descending</string></field>
+           <field  name="statement"><string>//element(*,exo:article)[(@exo:dateCreated &lt; xs:dateTime('${Date}$')) and not(@jcr:mixinTypes = 'exo:restoreLocation')] order by @exo:dateCreated descending</string></field>
            <field  name="permissions">
              <collection type="java.util.ArrayList">
                <value><string>*:/platform/users</string></value>
@@ -78,7 +78,7 @@
          <object type="org.exoplatform.services.cms.queries.impl.QueryData">              
            <field  name="name"><string>All Articles</string></field>
            <field  name="language"><string>xpath</string></field>
-           <field  name="statement"><string>//element(*,exo:article) order by @exo:dateCreated descending</string></field>
+           <field  name="statement"><string>//element(*,exo:article)[not(@jcr:mixinTypes = 'exo:restoreLocation')] order by @exo:dateCreated descending</string></field>
            <field  name="permissions">
              <collection type="java.util.ArrayList">
                <value><string>*:/platform/users</string></value>
