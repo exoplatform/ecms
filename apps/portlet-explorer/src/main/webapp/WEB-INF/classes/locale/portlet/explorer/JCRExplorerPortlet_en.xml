@@ -714,7 +714,7 @@
       <unable-create>Can't add properties !</unable-create>
       <value-invalid>You must enter value !</value-invalid>
       <node-checkedin>You must checkout this node before add property</node-checkedin>
-      <can-not-add>You can not add properties for this node. Only for node's type is nt:unstructured</can-not-add>
+      <can-not-add>You can not add properties for this node. This is only allowed for the node type nt:unstructured</can-not-add>
       <propertyName-invalid>Property name must include namespace (ex: namespace:name)</propertyName-invalid>
       <propertyName-exist>The property '{0}' is existing.</propertyName-exist>
       <propertyValu-null>Maybe, have some values are null</propertyValu-null>
