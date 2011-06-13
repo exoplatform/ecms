@@ -457,12 +457,13 @@
 		var uiTabs = DOM.findDescendantsByClass(prtNode, "div", "SubTabItem");
 		var listHideIcon = document.getElementById('IconListHideElement');
 		var viewBarContainer = document.getElementById("UIViewBarContainer");
-		var elementSpace = 0;
+		var elementSpace = 6;
 		var portletFrag = DOM.findAncestorByClass(actionBar, "PORTLET-FRAGMENT");
+		var maxSpace = 0;
 		if(eXo.core.Browser.browserType == 'ie') {
 			maxSpace = parseInt(actionBar.offsetWidth) - parseInt(viewBarContainer.offsetWidth);
 		} else {
-			var maxSpace = parseInt(portletFrag.offsetWidth) - parseInt(viewBarContainer.offsetWidth);
+			maxSpace = parseInt(portletFrag.offsetWidth) - parseInt(viewBarContainer.offsetWidth);
 		}
     
 		for(var i = 0; i <  uiTabs.length; i++){
