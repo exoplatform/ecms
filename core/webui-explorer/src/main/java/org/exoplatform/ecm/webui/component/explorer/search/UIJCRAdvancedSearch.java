@@ -77,7 +77,8 @@ public class UIJCRAdvancedSearch extends UIForm implements UIPopupComponent {
   private static final String CHANGE_OPTION = "ChangeOption" ;
   private boolean isEdit_ = false ;
   private String queryPath_ ;
-  private Query query_ = null ;
+  private String queryStatement_;
+  private String queryLanguage_;
 
   public UIJCRAdvancedSearch() throws Exception  {
     addUIFormInput(new UIFormStringInput(FIELD_NAME, FIELD_NAME, null).addValidator(MandatoryValidator.class)) ;
@@ -115,7 +116,15 @@ public class UIJCRAdvancedSearch extends UIForm implements UIPopupComponent {
     }
   }
 
-  public void setQuery(Query query) { query_ = query ; }
+  public void setQuery(Query query) {
+    if (query != null) {
+      queryLanguage_ = query.getLanguage();
+      queryStatement_ = query.getStatement();
+    } else {
+      queryLanguage_ = null;
+      queryStatement_ = null;
+    }
+  }
 
   public void setIsEdit(boolean isEdit) { isEdit_ = isEdit ; }
   public boolean isEdit() { return isEdit_ ; }
@@ -192,9 +201,9 @@ public class UIJCRAdvancedSearch extends UIForm implements UIPopupComponent {
         else queryText = StringUtils.replace(XPATH_QUERY, "$0", currentPath) ;
         uiForm.getUIFormTextAreaInput(FIELD_QUERY).setValue(queryText) ;
       }
-      if(uiForm.isEdit_ && uiForm.query_ != null) {
-        if(searchType.equals(uiForm.query_.getLanguage())) {
-          uiForm.getUIFormTextAreaInput(FIELD_QUERY).setValue(uiForm.query_.getStatement()) ;
+      if(uiForm.isEdit_ && uiForm.queryLanguage_ != null) {
+        if(searchType.equals(uiForm.queryLanguage_)) {
+          uiForm.getUIFormTextAreaInput(FIELD_QUERY).setValue(uiForm.queryStatement_) ;
         }
       }
       event.getRequestContext().addUIComponentToUpdateByAjax(uiForm) ;

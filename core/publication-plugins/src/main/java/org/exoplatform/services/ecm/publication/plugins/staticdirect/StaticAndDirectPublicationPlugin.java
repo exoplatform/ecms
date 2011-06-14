@@ -40,10 +40,11 @@ import javax.jcr.version.Version;
 
 import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
+import org.exoplatform.ecm.jcr.model.VersionNode;
 import org.exoplatform.services.ecm.publication.IncorrectStateUpdateLifecycleException;
 import org.exoplatform.services.ecm.publication.PublicationPlugin;
 import org.exoplatform.services.ecm.publication.PublicationService;
-import org.exoplatform.services.ecm.publication.plugins.webui.VersionNode;
+
 import org.exoplatform.services.jcr.access.PermissionType;
 import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.jcr.core.ManageableRepository;
@@ -602,7 +603,7 @@ public class StaticAndDirectPublicationPlugin extends PublicationPlugin {
     for (VersionNode version : list) {
       String state = getStateByVersion(version, currentNode);
       if (state.equals(PUBLISHED)) {
-        return version.getVersion().getNode("jcr:frozenNode");
+        return version.getNode("jcr:frozenNode");
       }
       if (version.getChildren().size() > 0) {
         Node node = getVerionNodePublish(version.getChildren(), currentNode);
@@ -618,7 +619,7 @@ public class StaticAndDirectPublicationPlugin extends PublicationPlugin {
     for (Value value : publicationStates) {
       String[] arrPublicationState = value.getString().split(",");
       for (int i=0; i < arrPublicationState.length; i++) {
-        if (arrPublicationState[0].equals(versionNode.getVersion().getUUID())) {
+        if (arrPublicationState[0].equals(versionNode.getUUID())) {
           return arrPublicationState[1];
         }
       }

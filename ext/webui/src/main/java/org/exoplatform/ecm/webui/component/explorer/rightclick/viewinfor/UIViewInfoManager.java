@@ -18,6 +18,7 @@ package org.exoplatform.ecm.webui.component.explorer.rightclick.viewinfor;
 
 import javax.jcr.Node;
 
+import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.core.UIContainer;
 import org.exoplatform.webui.core.UIPopupComponent;
@@ -35,7 +36,7 @@ public class UIViewInfoManager extends UIContainer implements UIPopupComponent {
   /**
    * the node that is selected by right clicking
    */
-  private Node selectedNode;
+  private NodeLocation selectedNode;
 
   /**
    * the constructor
@@ -50,7 +51,7 @@ public class UIViewInfoManager extends UIContainer implements UIPopupComponent {
    * @return selected node
    */
   public Node getSelectedNode() {
-    return selectedNode;
+    return NodeLocation.getNodeByLocation(selectedNode);
   }
 
   /**
@@ -58,7 +59,7 @@ public class UIViewInfoManager extends UIContainer implements UIPopupComponent {
    * @param selectedNode
    */
   public void setSelectedNode(Node selectedNode) {
-    this.selectedNode = selectedNode;
+    this.selectedNode = NodeLocation.getNodeLocationByNode(selectedNode);
   }
 
   public void activate() throws Exception {

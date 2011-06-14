@@ -61,7 +61,7 @@ import org.exoplatform.webui.event.EventListener;
 public class UISelectPathPanel extends UIContainer {
   private UIPageIterator uiPageIterator_;
   public String[] acceptedMimeTypes = {};
-  protected Node parentNode;
+  protected NodeLocation parentNode;
   private String[] acceptedNodeTypes = {};
   private String[] exceptedNodeTypes = {};
   private String[] defaultExceptedNodeTypes = {};
@@ -106,9 +106,13 @@ public class UISelectPathPanel extends UIContainer {
     }
   }
 
-  public void setParentNode(Node node) { this.parentNode = node; }
+  public void setParentNode(Node node) { 
+    this.parentNode = NodeLocation.getNodeLocationByNode(node); 
+  }
 
-  public Node getParentNode() { return parentNode; }
+  public Node getParentNode() { 
+    return NodeLocation.getNodeByLocation(parentNode); 
+  }
 
   public String[] getAcceptedNodeTypes() { return acceptedNodeTypes; }
 
@@ -146,7 +150,7 @@ public class UISelectPathPanel extends UIContainer {
   public List<Node> getListSelectableNodes() throws Exception {
     List<Node> list = new ArrayList<Node>();
     if (parentNode == null) return list;
-    Node realNode = Utils.getNodeSymLink(parentNode);
+    Node realNode = Utils.getNodeSymLink(NodeLocation.getNodeByLocation(parentNode));
     for (NodeIterator iterator = realNode.getNodes();iterator.hasNext();) {
       Node child = iterator.nextNode();
       if(child.isNodeType("exo:hiddenable")) continue;

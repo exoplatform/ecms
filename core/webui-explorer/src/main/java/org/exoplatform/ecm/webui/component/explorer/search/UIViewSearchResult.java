@@ -55,6 +55,7 @@ import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.web.application.Parameter;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.application.portlet.PortletRequestContext;
@@ -83,7 +84,7 @@ import org.exoplatform.webui.ext.UIExtensionManager;
 )
 public class UIViewSearchResult extends UIContainer implements NodePresentation {
 
-  private Node node_ ;
+  private NodeLocation node_ ;
   private String language_ ;
   final private static String COMMENT_COMPONENT = "Comment".intern();
   /**
@@ -99,7 +100,7 @@ public class UIViewSearchResult extends UIContainer implements NodePresentation 
     TemplateService templateService = getApplicationComponent(TemplateService.class) ;
     String userName = Util.getPortalRequestContext().getRemoteUser() ;
     try {
-      String nodeType = node_.getPrimaryNodeType().getName() ;
+      String nodeType = getOriginalNode().getPrimaryNodeType().getName() ;
       return templateService.getTemplatePathByUser(false, nodeType, userName) ;
     } catch(Exception e) {
       LOG.error(e);
@@ -109,14 +110,15 @@ public class UIViewSearchResult extends UIContainer implements NodePresentation 
 
   public List<Node> getAttachments() throws Exception {
     List<Node> attachments = new ArrayList<Node>() ;
-    NodeIterator childrenIterator = node_.getNodes();;
+    Node originalNode = getOriginalNode();
+    NodeIterator childrenIterator = originalNode.getNodes();;
     TemplateService templateService = getApplicationComponent(TemplateService.class) ;
     int attachData = 0 ;
     while(childrenIterator.hasNext()) {
       Node childNode = childrenIterator.nextNode();
       String nodeType = childNode.getPrimaryNodeType().getName();
       List<String> listCanCreateNodeType =
-        Utils.getListAllowedFileType(node_, templateService) ;
+        Utils.getListAllowedFileType(originalNode, templateService) ;
       if(listCanCreateNodeType.contains(nodeType)) {
 
         // Case of childNode has jcr:data property
@@ -154,20 +156,23 @@ public class UIViewSearchResult extends UIContainer implements NodePresentation 
   }
 
   public Node getNode() throws ValueFormatException, PathNotFoundException, RepositoryException {
-    if(node_.hasProperty(Utils.EXO_LANGUAGE)) {
-      String defaultLang = node_.getProperty(Utils.EXO_LANGUAGE).getString() ;
+    Node originalNode = getOriginalNode();
+    if(originalNode.hasProperty(Utils.EXO_LANGUAGE)) {
+      String defaultLang = originalNode.getProperty(Utils.EXO_LANGUAGE).getString() ;
       if(language_ == null) language_ =  defaultLang ;
-      if(node_.hasNode(Utils.LANGUAGES)) {
+      if(originalNode.hasNode(Utils.LANGUAGES)) {
         if(!language_.equals(defaultLang)) {
-          Node curNode = node_.getNode(Utils.LANGUAGES + Utils.SLASH + language_) ;
+          Node curNode = originalNode.getNode(Utils.LANGUAGES + Utils.SLASH + language_) ;
           return curNode ;
         }
       }
-      return node_ ;
+      return originalNode ;
     }
-    return node_ ;
+    return originalNode ;
   }
-  public Node getOriginalNode() throws Exception {return node_;}
+  public Node getOriginalNode(){
+    return NodeLocation.getNodeByLocation(node_);
+  }
 
   public String getIcons(Node node, String size) throws Exception {
     return Utils.getNodeTypeIcon(node, size) ;
@@ -177,8 +182,9 @@ public class UIViewSearchResult extends UIContainer implements NodePresentation 
 
   public List<Node> getRelations() throws Exception {
     List<Node> relations = new ArrayList<Node>() ;
-    if (node_.hasProperty(Utils.EXO_RELATION)) {
-      Value[] vals = node_.getProperty(Utils.EXO_RELATION).getValues();
+    Node originalNode = getOriginalNode();
+    if (originalNode.hasProperty(Utils.EXO_RELATION)) {
+      Value[] vals = originalNode.getProperty(Utils.EXO_RELATION).getValues();
       for (int i = 0; i < vals.length; i++) {
         String uuid = vals[i].getString();
         Node node = getNodeByUUID(uuid);
@@ -193,7 +199,7 @@ public class UIViewSearchResult extends UIContainer implements NodePresentation 
 
   public List<String> getSupportedLocalise() throws Exception {
     MultiLanguageService multiLanguageService = getApplicationComponent(MultiLanguageService.class) ;
-    return multiLanguageService.getSupportedLanguages(node_) ;
+    return multiLanguageService.getSupportedLanguages(getOriginalNode()) ;
   }
 
   public String getTemplatePath() throws Exception { return null; }
@@ -234,7 +240,9 @@ public class UIViewSearchResult extends UIContainer implements NodePresentation 
     return false ;
   }
 
-  public void setNode(Node node) { node_ = node ; }
+  public void setNode(Node node) { 
+    node_ = NodeLocation.getNodeLocationByNode(node); 
+  }
 
   public Node getNodeByUUID(String uuid) throws Exception{
     ManageableRepository manageRepo = getApplicationComponent(RepositoryService.class).getCurrentRepository();
@@ -256,7 +264,7 @@ public class UIViewSearchResult extends UIContainer implements NodePresentation 
   }
 
   public List<Node> getComments() throws Exception {
-    return getApplicationComponent(CommentsService.class).getComments(node_, language_) ;
+    return getApplicationComponent(CommentsService.class).getComments(getOriginalNode(), language_) ;
   }
 
   public String getViewTemplate(String nodeTypeName, String templateName) throws Exception {
@@ -309,7 +317,7 @@ public class UIViewSearchResult extends UIContainer implements NodePresentation 
   }
 
   public String getRepository() throws Exception {
-    return ((ManageableRepository)node_.getSession().getRepository()).getConfiguration().getName() ;
+    return ((ManageableRepository)getOriginalNode().getSession().getRepository()).getConfiguration().getName() ;
   }
 
   public String getWebDAVServerPrefix() throws Exception {
@@ -321,7 +329,7 @@ public class UIViewSearchResult extends UIContainer implements NodePresentation 
   }
 
   public String getWorkspaceName() throws Exception {
-    return node_.getSession().getWorkspace().getName() ;
+    return getOriginalNode().getSession().getWorkspace().getName() ;
   }
   static public class ChangeLanguageActionListener extends EventListener<UIViewSearchResult> {
     public void execute(Event<UIViewSearchResult> event) throws Exception {

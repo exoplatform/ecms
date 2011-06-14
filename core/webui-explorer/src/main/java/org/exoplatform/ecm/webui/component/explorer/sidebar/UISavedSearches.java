@@ -21,6 +21,7 @@ import java.util.List;
 
 import javax.jcr.AccessDeniedException;
 import javax.jcr.Node;
+import javax.jcr.RepositoryException;
 import javax.jcr.query.Query;
 import javax.jcr.query.QueryResult;
 
@@ -75,53 +76,47 @@ public class UISavedSearches extends UIComponent {
   public final static String EXO_TARGETPATH = "exo:targetPath";
   public final static String EXO_TARGETWORKSPACE = "exo:targetWorkspace";
 
-  private List<Node> sharedQueries_ = new ArrayList<Node>();
-  private List<Query> privateQueries = new ArrayList<Query>();
   private String queryPath;
+  
   public UISavedSearches() throws Exception {
   }
 
   public List<Object> queryList() throws Exception {
     List<Object> objectList = new ArrayList<Object>();
-    if(hasSharedQueries()) {
-      for(Node node : getSharedQueries()) {
-        objectList.add(node);
+    List<Node> sharedQueries = getSharedQueries();
+    if(!sharedQueries.isEmpty()) {
+      for(Node node : sharedQueries) {
+        objectList.add(new NodeData(node));
       }
     }
-    if(hasQueries()) {
-      for(Query query : getQueries()) {
-        objectList.add(query);
+    List<Query> queries = getQueries();
+    if(!queries.isEmpty()) {
+      for(Query query : queries) {
+        objectList.add(new QueryData(query));
       }
     }
     return objectList;
   }
 
-
   public String getCurrentUserId() { return Util.getPortalRequestContext().getRemoteUser();}
 
-  public boolean hasQueries() throws Exception {
+  public List<Query> getQueries() throws Exception { 
     QueryService queryService = getApplicationComponent(QueryService.class);
     try {
-      privateQueries = queryService.getQueries(getCurrentUserId(),
+      return  queryService.getQueries(getCurrentUserId(),
                                                SessionProviderFactory.createSessionProvider());
-      return !privateQueries.isEmpty();
     } catch(AccessDeniedException ace) {
-      return privateQueries.isEmpty();
+      return new ArrayList<Query>();
     }
   }
 
-  public List<Query> getQueries() throws Exception { return privateQueries; }
-
-  public boolean hasSharedQueries() throws Exception {
+  public List<Node> getSharedQueries() throws Exception { 
     PortletRequestContext pcontext = (PortletRequestContext)WebuiRequestContext.getCurrentInstance();
     QueryService queryService = getApplicationComponent(QueryService.class);
     String userId = pcontext.getRemoteUser();
     SessionProvider provider = SessionProviderFactory.createSystemProvider();
-    sharedQueries_ = queryService.getSharedQueries(userId, provider);
-    return !sharedQueries_.isEmpty();
+    return queryService.getSharedQueries(userId, provider);
   }
-
-  public List<Node> getSharedQueries() { return sharedQueries_; }
 
   public void setQueryPath(String queryPath) throws Exception {
     this.queryPath = queryPath;
@@ -129,10 +124,6 @@ public class UISavedSearches extends UIComponent {
 
   public String getQueryPath() throws Exception {
     return this.queryPath;
-  }
-
-  private String getRepositoryName() {
-    return getAncestorOfType(UIJCRExplorer.class).getRepositoryName();
   }
 
   static public class ExecuteActionListener extends EventListener<UISavedSearches> {
@@ -237,4 +228,51 @@ public class UISavedSearches extends UIComponent {
     }
   }
 
+  public class QueryData {
+
+    private String storedQueryPath_;
+    
+    public QueryData(Query query) {
+      try {
+        storedQueryPath_ = query.getStoredQueryPath();
+      } catch (RepositoryException e) {
+        storedQueryPath_ = "";
+      }
+    }
+
+    public String getStoredQueryPath() {
+      return storedQueryPath_;
+    }
+
+    public void setStoredQueryPath(String storedQueryPath) {
+      storedQueryPath_ = storedQueryPath;
+    }
+  }
+  
+  public class NodeData {
+    private String path_;
+    private String name_;
+    
+    public NodeData(Node node) throws RepositoryException {
+      this.path_ = node.getPath();
+      this.name_ = node.getName();
+    }
+
+    public String getPath() {
+      return path_;
+    }
+
+    public void setPath(String path) {
+      path_ = path;
+    }
+
+    public String getName() {
+      return name_;
+    }
+
+    public void setName(String name) {
+      name_ = name;
+    }
+    
+  }
 }

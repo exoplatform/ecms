@@ -83,7 +83,7 @@ public class UIPublicationPanel extends UIForm {
   private Map<String,VersionData> revisionsDataMap = new HashMap<String,VersionData>();
 
   /** The viewed revisions. */
-  private List<Node> viewedRevisions = new ArrayList<Node>(3);
+  private List<NodeLocation> viewedRevisions = new ArrayList<NodeLocation>(3);
 
   private WCMPublicationService wcmPublicationService;
 
@@ -112,7 +112,7 @@ public class UIPublicationPanel extends UIForm {
   public void init(Node node) throws Exception {
     currentNodeLocation = NodeLocation.make(node);
     currentRevisionLocation = NodeLocation.make(node);
-    this.viewedRevisions = getLatestRevisions(3,node);
+    this.viewedRevisions = NodeLocation.getLocationsByNodeList(getLatestRevisions(3,node));
     this.revisionsDataMap = getRevisionData(node);
     //In some cases as copy a a node, we will lost all version of the node
     //So we will clean all publication data
@@ -239,7 +239,7 @@ public class UIPublicationPanel extends UIForm {
    * @return the revisions
    */
   public List<Node> getRevisions() {
-    return viewedRevisions;
+    return NodeLocation.getNodeListByLocationList(viewedRevisions);
   }
 
   /**
@@ -277,7 +277,7 @@ public class UIPublicationPanel extends UIForm {
    * @param revisions the new revisions
    */
   public void setRevisions(List<Node> revisions) {
-    this.viewedRevisions = revisions;
+    this.viewedRevisions = NodeLocation.getLocationsByNodeList(revisions);
   }
 
   /**
@@ -291,7 +291,7 @@ public class UIPublicationPanel extends UIForm {
     publicationHistory.updateGrid();
     Node currentNode = getCurrentNode();
     this.revisionsDataMap = getRevisionData(currentNode);
-    this.viewedRevisions = getLatestRevisions(3,currentNode);
+    this.viewedRevisions = NodeLocation.getLocationsByNodeList(getLatestRevisions(3,currentNode));
   }
 
   /**

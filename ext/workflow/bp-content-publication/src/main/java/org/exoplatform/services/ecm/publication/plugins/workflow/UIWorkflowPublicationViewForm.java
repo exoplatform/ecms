@@ -25,6 +25,7 @@ import org.exoplatform.services.security.Identity;
 import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.services.security.IdentityRegistry;
 import org.exoplatform.services.security.MembershipEntry;
+import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -54,7 +55,7 @@ import org.exoplatform.webui.form.UIForm;
     @EventConfig(listeners = UIWorkflowPublicationViewForm.UnsubcriberLifeCycleActionListener.class) })
 public class UIWorkflowPublicationViewForm extends UIForm {
   private String repositoryName = "";
-  private Node currentNode = null;
+  private NodeLocation currentNode = null;
   private final String EXO_PUBLISH = "exo:published";
   private IdentityRegistry identityRegistry;
   private static final Log LOG  = ExoLogger.getLogger(UIWorkflowPublicationViewForm.class);
@@ -67,23 +68,23 @@ public class UIWorkflowPublicationViewForm extends UIForm {
   }
 
   public void setCurrentNode(Node node) throws Exception {
-    currentNode = node;
-    String userId = currentNode.getSession().getUserID();
-    Property rolesProp = currentNode.getProperty(WorkflowPublicationPlugin.VALIDATOR);
+    currentNode = NodeLocation.getNodeLocationByNode(node);
+    String userId = node.getSession().getUserID();
+    Property rolesProp = node.getProperty(WorkflowPublicationPlugin.VALIDATOR);
     Value roles = rolesProp.getValue();
-    if (currentNode.isNodeType(EXO_PUBLISH)) {
-      if (currentNode.getProperty(WorkflowPublicationPlugin.CURRENT_STATE)
+    if (node.isNodeType(EXO_PUBLISH)) {
+      if (node.getProperty(WorkflowPublicationPlugin.CURRENT_STATE)
                      .getString()
                      .equals(WorkflowPublicationPlugin.CONTENT_VALIDATION)
           && checkExcetuteable(userId, roles)) {
         PublicationService publicationService = getApplicationComponent(PublicationService.class);
         publicationService.getPublicationPlugins()
                           .get(WorkflowPublicationPlugin.WORKFLOW)
-                          .changeState(currentNode,
+                          .changeState(node,
                                        WorkflowPublicationPlugin.PUBLISHED,
                                        new HashMap<String, String>());
         setActions(new String[]{"Unpublish", "Cancel"});
-      } else if (currentNode.getProperty(WorkflowPublicationPlugin.CURRENT_STATE).
+      } else if (node.getProperty(WorkflowPublicationPlugin.CURRENT_STATE).
           getString().equals(WorkflowPublicationPlugin.PUBLISHED) && checkExcetuteable(userId, roles)) {
         setActions(new String[]{"Unpublish", "Cancel"});
       } else {
@@ -110,7 +111,7 @@ public class UIWorkflowPublicationViewForm extends UIForm {
   }
 
   public Node getCurrentNode() {
-    return currentNode;
+    return NodeLocation.getNodeByLocation(currentNode);
   }
 
   public String getRepositoryName() {

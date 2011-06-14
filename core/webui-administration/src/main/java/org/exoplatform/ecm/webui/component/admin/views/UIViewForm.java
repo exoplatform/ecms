@@ -18,14 +18,12 @@ package org.exoplatform.ecm.webui.component.admin.views;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
 import javax.jcr.RepositoryException;
-import javax.jcr.version.Version;
 import javax.jcr.version.VersionHistory;
 
 import org.exoplatform.ecm.jcr.model.VersionNode;
@@ -39,8 +37,7 @@ import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.views.ManageViewService;
 import org.exoplatform.services.cms.views.ViewConfig;
 import org.exoplatform.services.cms.views.ViewConfig.Tab;
-import org.exoplatform.services.organization.MembershipType;
-import org.exoplatform.services.organization.OrganizationService;
+import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -73,13 +70,13 @@ public class UIViewForm extends UIFormInputSetWithAction implements UISelectable
   final static public String FIELD_ENABLEVERSION = "enableVersion" ;
 
   private boolean isView_ = true ;
-  private Node views_;
+  private NodeLocation views_;
   private HashMap<String, Tab> tabMap_ = new HashMap<String, Tab>() ;
   private ManageViewService vservice_ = null ;
   private String viewName = null;
   private String permission = null;
   private List<String> listVersion = new ArrayList<String>() ;
-  private Version baseVersion_;
+  private String baseVersionName_;
   private VersionNode selectedVersion_;
   private VersionNode rootVersionNode;  
 
@@ -169,7 +166,9 @@ public class UIViewForm extends UIFormInputSetWithAction implements UISelectable
 
   public boolean isView() { return isView_ ; }
 
-  public Node getViews() { return views_; }
+  public Node getViews() { 
+    return NodeLocation.getNodeByLocation(views_); 
+  }
 
   public boolean canEnableVersionning(Node node) throws Exception {
     return node.canAddMixin(Utils.MIX_VERSIONABLE);
@@ -250,16 +249,16 @@ public class UIViewForm extends UIFormInputSetWithAction implements UISelectable
       setActionInfo(FIELD_TABS, null) ;
     }
     selectedVersion_ = null ;
-    baseVersion_ = null ;
+    baseVersionName_ = null ;
   }
 
   public void update(Node viewNode, boolean isView, VersionNode selectedVersion) throws Exception {
     isView_ = isView ;
     if(viewNode != null) {
-      views_ = viewNode ;
-      if(isVersioned(views_)) baseVersion_ = views_.getBaseVersion();
+      views_ = NodeLocation.getNodeLocationByNode(viewNode);
+      if(isVersioned(viewNode)) baseVersionName_ = viewNode.getBaseVersion().getName();
       tabMap_.clear() ;
-      for(NodeIterator iter = views_.getNodes(); iter.hasNext(); ) {
+      for(NodeIterator iter = viewNode.getNodes(); iter.hasNext(); ) {
         Node tab = iter.nextNode() ;
         String buttons = tab.getProperty("exo:buttons").getString() ;
         Tab tabObj = new Tab() ;
@@ -269,23 +268,24 @@ public class UIViewForm extends UIFormInputSetWithAction implements UISelectable
       }
 
       getUIFormCheckBoxInput(FIELD_ENABLEVERSION).setRendered(true) ;
-      if (isVersioned(views_)) {
-        rootVersionNode = getRootVersion(views_);
-        getUIFormSelectBox(FIELD_VERSION).setOptions(getVersionValues(views_)).setRendered(true) ;
-        getUIFormSelectBox(FIELD_VERSION).setValue(baseVersion_.getName()) ;
+      if (isVersioned(viewNode)) {
+        rootVersionNode = getRootVersion(viewNode);
+        getUIFormSelectBox(FIELD_VERSION).setOptions(getVersionValues(viewNode)).setRendered(true) ;
+        getUIFormSelectBox(FIELD_VERSION).setValue(baseVersionName_) ;
         getUIFormCheckBoxInput(FIELD_ENABLEVERSION).setChecked(true) ;
         getUIFormCheckBoxInput(FIELD_ENABLEVERSION).setEnable(true) ;
-      } else if (!isVersioned(views_)) {
+      } else if (!isVersioned(viewNode)) {
         getUIFormSelectBox(FIELD_VERSION).setRendered(false) ;
         getUIFormCheckBoxInput(FIELD_ENABLEVERSION).setChecked(false) ;
         getUIFormCheckBoxInput(FIELD_ENABLEVERSION).setEnable(true) ;
       }
     }
+    Node viewsNode = NodeLocation.getNodeByLocation(views_);    
     if (selectedVersion != null) {
-      views_.restore(selectedVersion.getVersion(), false) ;
-      views_.checkout() ;
+      viewsNode.restore(selectedVersion.getName(), false) ;
+      viewsNode.checkout() ;
       tabMap_.clear() ;
-      for(NodeIterator iter = views_.getNodes(); iter.hasNext(); ) {
+      for(NodeIterator iter = viewsNode.getNodes(); iter.hasNext(); ) {
         Node tab = iter.nextNode() ;
         String buttons = tab.getProperty("exo:buttons").getString() ;
         Tab tabObj = new Tab() ;
@@ -295,10 +295,10 @@ public class UIViewForm extends UIFormInputSetWithAction implements UISelectable
       }
       selectedVersion_ = selectedVersion;
     }
-    if(views_ != null) {
-      getUIStringInput(FIELD_NAME).setEditable(false).setValue(views_.getName()) ;
-      getUIStringInput(FIELD_PERMISSION).setValue(views_.getProperty("exo:accessPermissions").getString()) ;
-      getUIFormSelectBox(FIELD_TEMPLATE).setValue(views_.getProperty("exo:template").getString()) ;
+    if(viewsNode != null) {
+      getUIStringInput(FIELD_NAME).setEditable(false).setValue(viewsNode.getName()) ;
+      getUIStringInput(FIELD_PERMISSION).setValue(viewsNode.getProperty("exo:accessPermissions").getString()) ;
+      getUIFormSelectBox(FIELD_TEMPLATE).setValue(viewsNode.getProperty("exo:template").getString()) ;
     }
     setInfoField(FIELD_TABS, getTabList()) ;
     String[] actionInfor ;
@@ -357,30 +357,31 @@ public class UIViewForm extends UIFormInputSetWithAction implements UISelectable
     String template = getUIFormSelectBox(FIELD_TEMPLATE).getValue() ;
 
     List<Tab> tabList = new ArrayList<Tab>(tabMap_.values());
+    Node viewNode = NodeLocation.getNodeByLocation(views_);
     if(views_ == null || !isEnableVersioning) {
       vservice_.addView(viewName, permissions, template, tabList) ;
-      if(views_ != null) {
-        for(NodeIterator iter = views_.getNodes(); iter.hasNext(); ) {
+      if(viewNode != null) {
+        for(NodeIterator iter = viewNode.getNodes(); iter.hasNext(); ) {
           Node tab = iter.nextNode() ;
           if(!tabMap_.containsKey(tab.getName())) tab.remove() ;
         }
-        views_.save() ;
+        viewNode.save() ;
       }
     } else {
-      if (!isVersioned(views_)) {
-        views_.addMixin(Utils.MIX_VERSIONABLE);
-        views_.save();
+      if (!isVersioned(viewNode)) {
+        viewNode.addMixin(Utils.MIX_VERSIONABLE);
+        viewNode.save();
       } else {
-        views_.checkout() ;
+        viewNode.checkout() ;
       }
-      for(NodeIterator iter = views_.getNodes(); iter.hasNext(); ) {
+      for(NodeIterator iter = viewNode.getNodes(); iter.hasNext(); ) {
         Node tab = iter.nextNode() ;
         if(!tabMap_.containsKey(tab.getName())) tab.remove() ;
       }
       vservice_.addView(viewName, permissions, template, tabList) ;
       try {
-        views_.save() ;
-        views_.checkin();
+        viewNode.save() ;
+        viewNode.checkin();
       } catch (Exception e) {
         UIApplication uiApp = getAncestorOfType(UIApplication.class) ;
         JCRExceptionManager.process(uiApp, e);
@@ -416,14 +417,14 @@ public class UIViewForm extends UIFormInputSetWithAction implements UISelectable
 
   public void changeVersion() throws Exception {
     String path =
-      views_.getVersionHistory().getVersion(getUIFormSelectBox(FIELD_VERSION).getValue()).getPath();
+      NodeLocation.getNodeByLocation(views_).getVersionHistory().getVersion(getUIFormSelectBox(FIELD_VERSION).getValue()).getPath();
     VersionNode selectedVesion = rootVersionNode.findVersionNode(path);
     update(null, false, selectedVesion) ;
   }
 
   public void revertVersion() throws Exception {
-    if (selectedVersion_ != null && !selectedVersion_.equals(baseVersion_)) {
-      views_.restore(baseVersion_, true);
+    if (selectedVersion_ != null && !selectedVersion_.getName().equals(baseVersionName_)) {
+      NodeLocation.getNodeByLocation(views_).restore(baseVersionName_, true);
     }
   }
 

@@ -27,12 +27,13 @@ import javax.jcr.Session;
 import javax.jcr.Value;
 import javax.servlet.http.HttpSession;
 
+import org.exoplatform.ecm.jcr.model.VersionNode;
 import org.exoplatform.portal.application.PortalRequestContext;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.ecm.publication.PublicationService;
-import org.exoplatform.services.ecm.publication.plugins.webui.VersionNode;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.impl.core.lock.LockManagerImpl;
+import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.web.application.RequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -68,7 +69,7 @@ public class UIPublicationForm extends UIForm {
 
   private VersionNode curentVersion_;
   private VersionNode rootVersion_;
-  private Node currentNode_;
+  private NodeLocation currentNode_;
   private String visibility_;
   private String state_;
 
@@ -103,12 +104,12 @@ public class UIPublicationForm extends UIForm {
   }
 
   public String getStateByVersion(VersionNode versionNode) throws Exception {
-    Value[] publicationStates = currentNode_.getProperty(StaticAndDirectPublicationPlugin.VERSIONS_PUBLICATION_STATES)
+    Value[] publicationStates = getRealCurrentNode().getProperty(StaticAndDirectPublicationPlugin.VERSIONS_PUBLICATION_STATES)
                                             .getValues();
     for(Value value : publicationStates) {
       String[] arrPublicationState = value.getString().split(",");
       for(int i=0; i < arrPublicationState.length; i++) {
-        if(arrPublicationState[0].equals(versionNode.getVersion().getUUID())) {
+        if(arrPublicationState[0].equals(versionNode.getUUID())) {
           return arrPublicationState[1];
         }
       }
@@ -117,10 +118,10 @@ public class UIPublicationForm extends UIForm {
   }
 
   public void initForm(Node currentNode) throws Exception {
-    currentNode_ = currentNode;
-    rootVersion_ = new VersionNode(currentNode_.getVersionHistory().getRootVersion());
-    curentVersion_ = new VersionNode(currentNode_.getBaseVersion());
-    visibility_ = currentNode_.getProperty(StaticAndDirectPublicationPlugin.VISIBILITY).getString();
+    currentNode_ = NodeLocation.getNodeLocationByNode(currentNode);
+    rootVersion_ = new VersionNode(currentNode.getVersionHistory().getRootVersion());
+    curentVersion_ = new VersionNode(currentNode.getBaseVersion());
+    visibility_ = currentNode.getProperty(StaticAndDirectPublicationPlugin.VISIBILITY).getString();
 
     state_ = getStateByVersion(curentVersion_);
     resetCurrentState(state_, visibility_);
@@ -150,6 +151,10 @@ public class UIPublicationForm extends UIForm {
           .append(node.getPath());
     return buffer.toString();
   }
+  
+  private Node getRealCurrentNode() {
+    return NodeLocation.getNodeByLocation(currentNode_); 
+  }
 
   static public class SaveActionListener extends EventListener<UIPublicationForm> {
     public void execute(Event<UIPublicationForm> event) throws Exception {
@@ -157,13 +162,13 @@ public class UIPublicationForm extends UIForm {
       String visibility = uiForm.<UIFormRadioBoxInput>getUIInput(VISIBILITY).getValue();
       String state = uiForm.<UIFormRadioBoxInput>getUIInput(STATE).getValue();
       UIApplication uiApp = uiForm.getAncestorOfType(UIApplication.class);
-      if (uiForm.currentNode_.isLocked()) {
-        String lockToken = getLockToken(uiForm.currentNode_);
+      if (uiForm.getRealCurrentNode().isLocked()) {
+        String lockToken = getLockToken(uiForm.getRealCurrentNode());
         if(lockToken != null) {
-          uiForm.currentNode_.getSession().addLockToken(lockToken);
+          uiForm.getRealCurrentNode().getSession().addLockToken(lockToken);
         }
       }
-      if(!uiForm.currentNode_.isCheckedOut()) {
+      if(!uiForm.getRealCurrentNode().isCheckedOut()) {
         uiApp.addMessage(new ApplicationMessage("UIActionBar.msg.node-checkedin", null,
             ApplicationMessage.WARNING));
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
@@ -171,9 +176,9 @@ public class UIPublicationForm extends UIForm {
       }
       PublicationService publicationService = uiForm.getApplicationComponent(PublicationService.class);
       HashMap<String,String> context = new HashMap<String,String>();
-      context.put("nodeVersionUUID", uiForm.curentVersion_.getVersion().getUUID());
+      context.put("nodeVersionUUID", uiForm.curentVersion_.getUUID());
       context.put("visibility", visibility);
-      publicationService.changeState(uiForm.currentNode_, state, context);
+      publicationService.changeState(uiForm.getRealCurrentNode(), state, context);
       UIPopupWindow uiPopup = uiForm.getAncestorOfType(UIPopupWindow.class);
       uiPopup.setRendered(false);
       uiPopup.setShow(false);
@@ -186,7 +191,7 @@ public class UIPublicationForm extends UIForm {
   static public class UnsubcriberLifeCycleActionListener extends EventListener<UIPublicationForm> {
     public void execute(Event<UIPublicationForm> event) throws Exception {
       UIPublicationForm uiPublicationForm = event.getSource();
-      Node selectedNode = uiPublicationForm.currentNode_;
+      Node selectedNode = uiPublicationForm.getRealCurrentNode();
       UIApplication uiApp = uiPublicationForm.getAncestorOfType(UIApplication.class);
       if(!selectedNode.isCheckedOut()) {
         uiApp.addMessage(new ApplicationMessage("UIActionBar.msg.node-checkedin", null,

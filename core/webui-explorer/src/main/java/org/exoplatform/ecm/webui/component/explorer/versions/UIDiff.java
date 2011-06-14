@@ -25,6 +25,7 @@ import javax.jcr.Node;
 import javax.jcr.version.Version;
 
 import org.apache.commons.lang.StringUtils;
+import org.exoplatform.services.cms.impl.DMSConfiguration;
 import org.exoplatform.services.document.DocumentReaderService;
 import org.exoplatform.services.document.diff.AddDelta;
 import org.exoplatform.services.document.diff.ChangeDelta;
@@ -32,6 +33,9 @@ import org.exoplatform.services.document.diff.DeleteDelta;
 import org.exoplatform.services.document.diff.Delta;
 import org.exoplatform.services.document.diff.DiffService;
 import org.exoplatform.services.document.diff.Revision;
+import org.exoplatform.services.jcr.core.ManageableRepository;
+import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.core.UIComponent;
 
@@ -46,14 +50,43 @@ import org.exoplatform.webui.core.UIComponent;
 
 public class UIDiff extends UIComponent {
 
-  private Version baseVersion_ ;
-  private Version version_ ;
+  //name, date, ws, path
+  private String baseVersionName_;
+  private String baseVersionDate_;
+  private String baseVersionWs_;
+  private String baseVersionPath_;
+  
+  private String versionName_;
+  private String versionDate_;
+  private String versionWs_;
+  private String versionPath_;
+  
   private boolean versionCompareable_ = true ;
 
   public void setVersions(Version baseVersion, Version version)
   throws Exception {
-    baseVersion_ = baseVersion ;
-    version_ = version ;
+    baseVersionName_ = baseVersion.getName();
+    baseVersionDate_ = formatDate(baseVersion.getCreated());
+    baseVersionWs_ = baseVersion.getSession().getWorkspace().getName();
+    baseVersionPath_ = baseVersion.getPath();
+    
+    versionName_ = version.getName();
+    versionDate_ = formatDate(version.getCreated());
+    versionWs_ = version.getSession().getWorkspace().getName();
+    versionPath_ = version.getPath();
+  }
+  
+  public void setVersions(Version baseVersion, String versionName, 
+                          Calendar versionCalendar, String versionWs, String versionPath) throws Exception {
+    baseVersionName_ = baseVersion.getName();
+    baseVersionDate_ = formatDate(baseVersion.getCreated());
+    baseVersionWs_ = baseVersion.getSession().getWorkspace().getName();
+    baseVersionPath_ = baseVersion.getPath();
+    
+    versionName_ = versionName;
+    versionDate_ = formatDate(versionCalendar);
+    versionWs_ = versionWs;
+    versionPath_ = versionPath;
   }
 
   public String getText(Node node) throws Exception {
@@ -78,15 +111,15 @@ public class UIDiff extends UIComponent {
     return null ;
   }
 
-  public String getBaseVersionNum() throws Exception {return  baseVersion_.getName() ;}
-  public String getCurrentVersionNum() throws Exception {return version_.getName() ;}
+  public String getBaseVersionNum() throws Exception { return  baseVersionName_; }
+  public String getCurrentVersionNum() throws Exception {return versionName_; }
 
   public String getBaseVersionDate() throws Exception {
-    return formatDate(baseVersion_.getCreated()) ;
+    return baseVersionDate_;
   }
 
   public String getCurrentVersionDate() throws Exception {
-    return formatDate(version_.getCreated()) ;
+    return versionDate_;
   }
 
   private String formatDate(Calendar calendar) {
@@ -98,8 +131,8 @@ public class UIDiff extends UIComponent {
 
   public List<Delta> getDeltas() throws Exception {
     List<Delta> deltas = new ArrayList<Delta>();
-    String previousText = getText(version_.getNode("jcr:frozenNode"));
-    String currentText = getText(baseVersion_.getNode("jcr:frozenNode"));
+    String previousText = getText(getNode(versionWs_, versionPath_).getNode("jcr:frozenNode"));
+    String currentText = getText(getNode(baseVersionWs_, baseVersionPath_).getNode("jcr:frozenNode"));
     if((previousText != null)&&(currentText != null)) {
       String lineSeparator = DiffService.NL;
       Object[] orig = StringUtils.split(previousText, lineSeparator);
@@ -126,5 +159,14 @@ public class UIDiff extends UIComponent {
   public boolean isChangeDelta(Delta delta) {
     if (delta instanceof ChangeDelta) return true;
     return false;
+  }
+  
+  private Node getNode(String ws, String path) throws Exception {
+    DMSConfiguration dmsConf = WCMCoreUtils.getService(DMSConfiguration.class);
+    String systemWS = dmsConf.getConfig().getSystemWorkspace();
+    ManageableRepository repo = WCMCoreUtils.getRepository(); 
+    SessionProvider provider = systemWS.equals(ws) ? WCMCoreUtils.getSystemSessionProvider() :
+                                                     WCMCoreUtils.getUserSessionProvider();
+    return (Node)provider.getSession(ws, repo).getItem(path);
   }
 }

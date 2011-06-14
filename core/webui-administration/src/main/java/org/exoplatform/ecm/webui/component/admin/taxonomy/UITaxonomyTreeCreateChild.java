@@ -27,6 +27,7 @@ import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
+import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.ComponentConfigs;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -65,7 +66,7 @@ public class UITaxonomyTreeCreateChild extends UIContainer {
 
   private String selectedPath_ = null ;
 
-  private Node taxonomyTreeNode = null;
+  private NodeLocation taxonomyTreeNode = null;
 
   public UITaxonomyTreeCreateChild() throws Exception {
     addChild(UIBreadcumbs.class, "BreadcumbTaxonomyTreeECMAdmin", "BreadcumbTaxonomyTreeECMAdmin");
@@ -97,7 +98,7 @@ public class UITaxonomyTreeCreateChild extends UIContainer {
   }
 
   public Node getTaxonomyTreeNode() {
-    return taxonomyTreeNode;
+    return NodeLocation.getNodeByLocation(taxonomyTreeNode);
   }
 
   public void setSelectedPath(String selectedPath) {
@@ -203,7 +204,7 @@ public class UITaxonomyTreeCreateChild extends UIContainer {
   }
 
   public void setTaxonomyTreeNode(Node taxonomyTreeNode) {
-    this.taxonomyTreeNode = taxonomyTreeNode;
+    this.taxonomyTreeNode = NodeLocation.getNodeLocationByNode(taxonomyTreeNode);
   }
 
   public static class SelectPathActionListener extends EventListener<UIBreadcumbs> {

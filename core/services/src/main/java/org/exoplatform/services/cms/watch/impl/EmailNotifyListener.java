@@ -33,6 +33,7 @@ import org.exoplatform.services.mail.MailService;
 import org.exoplatform.services.mail.Message;
 import org.exoplatform.services.organization.OrganizationService;
 import org.exoplatform.services.organization.User;
+import org.exoplatform.services.wcm.core.NodeLocation;
 
 /**
  * Created by The eXo Platform SAS
@@ -43,12 +44,12 @@ import org.exoplatform.services.organization.User;
  */
 public class EmailNotifyListener implements EventListener {
 
-  private Node observedNode_ ;
+  private NodeLocation observedNode_ ;
   final public static String EMAIL_WATCHERS_PROP = "exo:emailWatcher".intern() ;
   private static final Log LOG  = ExoLogger.getLogger(EmailNotifyListener.class);
 
   public EmailNotifyListener(Node oNode) {
-    observedNode_ = oNode ;
+    observedNode_ = NodeLocation.getNodeLocationByNode(oNode);
   }
 
   /**
@@ -63,7 +64,7 @@ public class EmailNotifyListener implements EventListener {
     WatchDocumentServiceImpl watchService=
       (WatchDocumentServiceImpl)container.getComponentInstanceOfType(WatchDocumentService.class) ;
     MessageConfig messageConfig = watchService.getMessageConfig() ;
-    List<String> emailList = getEmailList(observedNode_) ;
+    List<String> emailList = getEmailList(NodeLocation.getNodeByLocation(observedNode_));
     for(String receiver: emailList) {
       Message message = createMessage(receiver,messageConfig) ;
       try {

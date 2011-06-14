@@ -58,6 +58,7 @@ import org.exoplatform.services.jcr.impl.core.JCRPath;
 import org.exoplatform.services.jcr.impl.core.SessionImpl;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -97,7 +98,7 @@ public class UISearchResult extends UIContainer {
   private long searchTime_ = 0;
   private boolean flag_ = false;
   private UIQueryResultPageIterator uiPageIterator_;
-  private List<Node> currentListNodes_ = new ArrayList<Node>();
+  private List<NodeLocation> currentListNodes_ = new ArrayList<NodeLocation>();
   private List<RowData> currentListRows_ = new ArrayList<RowData>();
   private int currentAvailablePage_ = 0;
   private boolean isEndOfIterator_ = false;
@@ -143,16 +144,28 @@ public class UISearchResult extends UIContainer {
 
   private void addNode(List<Node> listNodes, Node node, List<RowData> listRows, Row r) throws Exception {
     List<Node> checkList = new ArrayList<Node>();
-    if (flag_) checkList = currentListNodes_;
-    else checkList = listNodes;
-    if (node.getName().equals(Utils.JCR_CONTENT)) {
-      if (!checkList.contains(node.getParent())) {
-        listNodes.add(node.getParent());
+    if (flag_) {
+      if (node.getName().equals(Utils.JCR_CONTENT)) {
+        if (!currentListNodes_.contains(NodeLocation.getNodeLocationByNode(node.getParent()))) {
+          listNodes.add(node.getParent());
+          listRows.add(new RowData(r));
+        }
+      } else if (!currentListNodes_.contains(NodeLocation.getNodeLocationByNode(node))) {
+        listNodes.add(node);
         listRows.add(new RowData(r));
       }
-    } else if (!checkList.contains(node)) {
-      listNodes.add(node);
-      listRows.add(new RowData(r));
+    }
+    else {
+      checkList = listNodes;
+      if (node.getName().equals(Utils.JCR_CONTENT)) {
+        if (!checkList.contains(node.getParent())) {
+          listNodes.add(node.getParent());
+          listRows.add(new RowData(r));
+        }
+      } else if (!checkList.contains(node)) {
+        listNodes.add(node);
+        listRows.add(new RowData(r));
+      }
     }
   }
 
@@ -214,12 +227,12 @@ public class UISearchResult extends UIContainer {
         }
         if (!iter.hasNext()) isEndOfIterator_ = true;
         if (listNodes.size() == 100) {
-          currentListNodes_.addAll(listNodes);
+          currentListNodes_.addAll(NodeLocation.getLocationsByNodeList(listNodes));
           currentListRows_.addAll(listRows);
           break;
         }
         if (listNodes.size() < 100 && iter.hasNext()) {
-          currentListNodes_.addAll(listNodes);
+          currentListNodes_.addAll(NodeLocation.getLocationsByNodeList(listNodes));
           currentListRows_.addAll(listRows);
           flag_ = true;
         }
@@ -252,7 +265,7 @@ public class UISearchResult extends UIContainer {
           }
         }
       }
-      currentListNodes_= listNodes;
+      currentListNodes_= NodeLocation.getLocationsByNodeList(listNodes);
       currentListRows_ = listRows;
     }
     return currentListRows_;

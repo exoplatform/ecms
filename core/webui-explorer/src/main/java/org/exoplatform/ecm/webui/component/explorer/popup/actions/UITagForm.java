@@ -25,6 +25,7 @@ import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.sidebar.UISideBar;
 import org.exoplatform.services.cms.folksonomy.NewFolksonomyService;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
+import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -58,7 +59,7 @@ public class UITagForm extends UIForm {
   final static public String TAG_NAME = "tagName" ;
   final static public String PUBLIC_TAG_NODE_PATH = "exoPublicTagNode";
 
-  private Node selectedTag_ ;
+  private NodeLocation selectedTag_ ;
   private String oldTagPath_;
   private String oldName_;
 
@@ -66,13 +67,15 @@ public class UITagForm extends UIForm {
     addUIFormInput(new UIFormStringInput(TAG_NAME, TAG_NAME, null).addValidator(MandatoryValidator.class)) ;
   }
 
-  public Node getTag() { return selectedTag_; }
+  public Node getTag() { 
+    return NodeLocation.getNodeByLocation(selectedTag_); 
+  }
 
   public void setTag(Node selectedTag) throws Exception {
-    selectedTag_ = selectedTag;
+    selectedTag_ = NodeLocation.getNodeLocationByNode(selectedTag);
     if (selectedTag != null) {
       oldTagPath_ = selectedTag_.getPath();
-      oldName_ = selectedTag_.getName();
+      oldName_ = NodeLocation.getNodeByLocation(selectedTag_).getName();
       getUIStringInput(TAG_NAME).setValue(oldName_);
     }
   }

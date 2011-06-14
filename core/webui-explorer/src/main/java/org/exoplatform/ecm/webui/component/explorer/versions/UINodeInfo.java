@@ -19,6 +19,7 @@ package org.exoplatform.ecm.webui.component.explorer.versions;
 import javax.jcr.Node;
 import javax.jcr.version.Version;
 
+import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.form.UIForm;
@@ -35,8 +36,8 @@ import org.exoplatform.webui.form.UIForm;
 )
 public class UINodeInfo extends UIForm {
 
-  private Node node_ ;
-  private Version version_ ;
+  private NodeLocation node_ ;
+  private String versionCreatedDate_ ;
 
   public UINodeInfo() {
 
@@ -44,16 +45,16 @@ public class UINodeInfo extends UIForm {
 
   public void update() throws Exception {
     UIVersionInfo uiVersionInfo = getAncestorOfType(UIVersionInfo.class) ;
-    node_ = uiVersionInfo.getCurrentNode() ;
-    version_ = uiVersionInfo.getCurrentVersionNode().getVersion() ;
+    node_ = NodeLocation.getNodeLocationByNode(uiVersionInfo.getCurrentNode());
+    versionCreatedDate_ = uiVersionInfo.getCurrentVersionNode().getCreatedTime().getTime().toString();
   }
 
   public String getNodeType() throws Exception {
-    return node_.getPrimaryNodeType().getName() ;
+    return NodeLocation.getNodeByLocation(node_).getPrimaryNodeType().getName();
   }
 
-  public String getNodeName () throws Exception {
-    return node_.getName();
+  public String getNodeName() throws Exception {
+    return NodeLocation.getNodeByLocation(node_).getName();
   }
 
   public String getVersionName() throws Exception {
@@ -72,6 +73,6 @@ public class UINodeInfo extends UIForm {
   }
 
   public String getVersionCreatedDate() throws Exception {
-    return version_.getCreated().getTime().toString();
+    return versionCreatedDate_;
   }
 }

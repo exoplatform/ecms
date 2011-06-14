@@ -31,6 +31,7 @@ import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.portal.webui.container.UIContainer;
 import org.exoplatform.services.cms.link.NodeFinder;
 import org.exoplatform.services.ecm.publication.PublicationService;
+import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -59,10 +60,10 @@ public class UINodeTreeBuilder extends UIContainer {
   private String[] defaultExceptedNodeTypes = {};
 
   /** The root tree node. */
-  protected Node rootTreeNode;
+  protected NodeLocation rootTreeNode;
 
   /** The current node. */
-  protected Node currentNode;
+  protected NodeLocation currentNode;
 
   public boolean isAllowPublish() {
     return allowPublish;
@@ -90,7 +91,9 @@ public class UINodeTreeBuilder extends UIContainer {
    *
    * @return the root tree node
    */
-  public Node getRootTreeNode() { return rootTreeNode; }
+  public Node getRootTreeNode() { 
+    return NodeLocation.getNodeByLocation(rootTreeNode); 
+  }
 
   /**
    * Sets the root tree node.
@@ -99,8 +102,8 @@ public class UINodeTreeBuilder extends UIContainer {
    * @throws Exception the exception
    */
   public final void setRootTreeNode(Node node) throws Exception {
-    this.rootTreeNode = node;
-    this.currentNode = node;
+    this.rootTreeNode = NodeLocation.getNodeLocationByNode(node);
+    this.currentNode = NodeLocation.getNodeLocationByNode(node);
     broadcastOnChange(node,null);
   }
 
@@ -109,14 +112,18 @@ public class UINodeTreeBuilder extends UIContainer {
    *
    * @return the current node
    */
-  public Node getCurrentNode() { return currentNode; }
+  public Node getCurrentNode() { 
+    return NodeLocation.getNodeByLocation(currentNode); 
+  }
 
   /**
    * Sets the current node.
    *
    * @param currentNode the new current node
    */
-  public void setCurrentNode(Node currentNode) { this.currentNode = currentNode; }
+  public void setCurrentNode(Node currentNode) { 
+    this.currentNode = NodeLocation.getNodeLocationByNode(currentNode); 
+  }
 
   /**
    * Gets the accepted node types.
@@ -202,7 +209,7 @@ public class UINodeTreeBuilder extends UIContainer {
     if (!path.startsWith(rootPath)) path = rootPath + path;
     if (path.endsWith("/")) path = path.substring(0, path.length() - 1);
     if (path.length() == 0) path = "/";
-    if (buffer.length() == 0) return currentNode;
+    if (buffer.length() == 0) return NodeLocation.getNodeByLocation(currentNode);
     NodeFinder nodeFinder_ = getApplicationComponent(NodeFinder.class);
     return (Node)nodeFinder_.getItem(uiOneNodePathSelector.getWorkspaceName(), path);
   }
@@ -283,9 +290,10 @@ public class UINodeTreeBuilder extends UIContainer {
     }else {
       if (path.startsWith(rootPath)) path = path.substring(rootPath.length());
       if (path.startsWith("/")) path = path.substring(1);
-      currentNode = nodeFinder_.getNode(rootTreeNode, path);
+      currentNode = NodeLocation.getNodeLocationByNode(nodeFinder_.getNode(
+                                  NodeLocation.getNodeByLocation(rootTreeNode), path));
     }
-    broadcastOnChange(currentNode,context);
+    broadcastOnChange(NodeLocation.getNodeByLocation(currentNode),context);
   }
 
   /**

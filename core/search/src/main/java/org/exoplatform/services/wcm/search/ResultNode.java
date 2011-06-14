@@ -49,6 +49,8 @@ import javax.jcr.version.Version;
 import javax.jcr.version.VersionException;
 import javax.jcr.version.VersionHistory;
 
+import org.exoplatform.services.wcm.core.NodeLocation;
+
 /**
  * Created by The eXo Platform SAS
  * Author : Hoa Pham
@@ -58,7 +60,7 @@ import javax.jcr.version.VersionHistory;
 public class ResultNode implements Node{
 
   /** The node. */
-  private Node node;
+  private NodeLocation nodeLocation;
 
   /** The score. */
   private float score;
@@ -75,10 +77,16 @@ public class ResultNode implements Node{
    * @throws RepositoryException the repository exception
    */
   public ResultNode(Node node, Row row) throws RepositoryException{
-    this.node = node;
+    this.nodeLocation = NodeLocation.getNodeLocationByNode(node);
     Value excerpt = row.getValue("rep:excerpt(.)");
     this.excerpt = excerpt == null ? "" : excerpt.getString();
     this.score = row.getValue("jcr:score").getLong();
+  }
+  
+  public ResultNode(Node node, float score, String excerpt) {
+  	this.nodeLocation = NodeLocation.getNodeLocationByNode(node);
+  	this.excerpt = excerpt;
+  	this.score = score;
   }
 
   /**
@@ -86,14 +94,14 @@ public class ResultNode implements Node{
    *
    * @return the node
    */
-  public Node getNode() { return node; }
+  public Node getNode() { return NodeLocation.getNodeByLocation(nodeLocation); }
 
   /**
    * Sets the node.
    *
    * @param node the new node
    */
-  public void setNode(Node node) { this.node = node; }
+  public void setNode(Node node) { this.nodeLocation = NodeLocation.getNodeLocationByNode(node); }
 
   /**
    * Gets the score.
@@ -120,8 +128,8 @@ public class ResultNode implements Node{
 
   public String getEditor(){
     try{
-    if(node.hasProperty("exo:owner"))
-      return node.getProperty("exo:owner").getString();
+    if(getNode().hasProperty("exo:owner"))
+      return getNode().getProperty("exo:owner").getString();
     }catch(Exception ex){}
     return null;
   }
@@ -143,10 +151,10 @@ public class ResultNode implements Node{
    * @throws Exception the exception
    */
   public String getTitle() throws Exception {
-    if(node.hasProperty("exo:title")) {
-      return node.getProperty("exo:title").getString();
+    if(getNode().hasProperty("exo:title")) {
+      return getNode().getProperty("exo:title").getString();
     }
-    return node.getName();
+    return getNode().getName();
   }
 
   /**
@@ -157,8 +165,8 @@ public class ResultNode implements Node{
    * @throws Exception the exception
    */
   public String getSummary() throws Exception {
-    if(node.hasProperty("exo:summary")) {
-      return node.getProperty("exo:summary").getString();
+    if(getNode().hasProperty("exo:summary")) {
+      return getNode().getProperty("exo:summary").getString();
     }
     return null;
   }
@@ -232,7 +240,7 @@ public class ResultNode implements Node{
    */
   public Version getBaseVersion() throws UnsupportedRepositoryOperationException,
   RepositoryException {
-    return node.getBaseVersion();
+    return getNode().getBaseVersion();
   }
 
   /* (non-Javadoc)
@@ -240,21 +248,21 @@ public class ResultNode implements Node{
    */
   public String getCorrespondingNodePath(String nodePath) throws ItemNotFoundException,
   NoSuchWorkspaceException, AccessDeniedException, RepositoryException {
-    return node.getCorrespondingNodePath(nodePath);
+    return getNode().getCorrespondingNodePath(nodePath);
   }
 
   /* (non-Javadoc)
    * @see javax.jcr.Node#getDefinition()
    */
   public NodeDefinition getDefinition() throws RepositoryException {
-    return node.getDefinition();
+    return getNode().getDefinition();
   }
 
   /* (non-Javadoc)
    * @see javax.jcr.Node#getIndex()
    */
   public int getIndex() throws RepositoryException {
-    return node.getIndex();
+    return getNode().getIndex();
   }
 
   /* (non-Javadoc)
@@ -262,77 +270,77 @@ public class ResultNode implements Node{
    */
   public Lock getLock() throws UnsupportedRepositoryOperationException, LockException,
   AccessDeniedException, RepositoryException {
-    return node.getLock();
+    return getNode().getLock();
   }
 
   /* (non-Javadoc)
    * @see javax.jcr.Node#getMixinNodeTypes()
    */
   public NodeType[] getMixinNodeTypes() throws RepositoryException {
-    return node.getMixinNodeTypes();
+    return getNode().getMixinNodeTypes();
   }
 
   /* (non-Javadoc)
    * @see javax.jcr.Node#getNode(java.lang.String)
    */
   public Node getNode(String name) throws PathNotFoundException, RepositoryException {
-    return node.getNode(name);
+    return getNode().getNode(name);
   }
 
   /* (non-Javadoc)
    * @see javax.jcr.Node#getNodes()
    */
   public NodeIterator getNodes() throws RepositoryException {
-    return node.getNodes();
+    return getNode().getNodes();
   }
 
   /* (non-Javadoc)
    * @see javax.jcr.Node#getNodes(java.lang.String)
    */
   public NodeIterator getNodes(String name) throws RepositoryException {
-    return node.getNodes(name);
+    return getNode().getNodes(name);
   }
 
   /* (non-Javadoc)
    * @see javax.jcr.Node#getPrimaryItem()
    */
   public Item getPrimaryItem() throws ItemNotFoundException, RepositoryException {
-    return node.getPrimaryItem();
+    return getNode().getPrimaryItem();
   }
 
   /* (non-Javadoc)
    * @see javax.jcr.Node#getPrimaryNodeType()
    */
   public NodeType getPrimaryNodeType() throws RepositoryException {
-    return node.getPrimaryNodeType();
+    return getNode().getPrimaryNodeType();
   }
 
   /* (non-Javadoc)
    * @see javax.jcr.Node#getProperties()
    */
   public PropertyIterator getProperties() throws RepositoryException {
-    return node.getProperties();
+    return getNode().getProperties();
   }
 
   /* (non-Javadoc)
    * @see javax.jcr.Node#getProperties(java.lang.String)
    */
   public PropertyIterator getProperties(String name) throws RepositoryException {
-    return node.getProperties(name);
+    return getNode().getProperties(name);
   }
 
   /* (non-Javadoc)
    * @see javax.jcr.Node#getReferences()
    */
   public PropertyIterator getReferences() throws RepositoryException {
-    return node.getReferences();
+    return getNode().getReferences();
   }
 
   /* (non-Javadoc)
    * @see javax.jcr.Node#getUUID()
    */
   public String getUUID() throws UnsupportedRepositoryOperationException, RepositoryException {
-    return node.getUUID();
+    return getNode().getUUID();
   }
 
   /* (non-Javadoc)
@@ -340,63 +348,63 @@ public class ResultNode implements Node{
    */
   public VersionHistory getVersionHistory() throws UnsupportedRepositoryOperationException,
   RepositoryException {
-    return node.getVersionHistory();
+    return getNode().getVersionHistory();
   }
 
   /* (non-Javadoc)
    * @see javax.jcr.Node#hasNode(java.lang.String)
    */
   public boolean hasNode(String name) throws RepositoryException {
-    return node.hasNode(name);
+    return getNode().hasNode(name);
   }
 
   /* (non-Javadoc)
    * @see javax.jcr.Node#hasNodes()
    */
   public boolean hasNodes() throws RepositoryException {
-    return node.hasNodes();
+    return getNode().hasNodes();
   }
 
   /* (non-Javadoc)
    * @see javax.jcr.Node#hasProperties()
    */
   public boolean hasProperties() throws RepositoryException {
-    return node.hasProperties();
+    return getNode().hasProperties();
   }
 
   /* (non-Javadoc)
    * @see javax.jcr.Node#hasProperty(java.lang.String)
    */
   public boolean hasProperty(String name) throws RepositoryException {
-    return node.hasProperty(name);
+    return getNode().hasProperty(name);
   }
 
   /* (non-Javadoc)
    * @see javax.jcr.Node#holdsLock()
    */
   public boolean holdsLock() throws RepositoryException {
-    return node.holdsLock();
+    return getNode().holdsLock();
   }
 
   /* (non-Javadoc)
    * @see javax.jcr.Node#isCheckedOut()
    */
   public boolean isCheckedOut() throws RepositoryException {
-    return node.isCheckedOut();
+    return getNode().isCheckedOut();
   }
 
   /* (non-Javadoc)
    * @see javax.jcr.Node#isLocked()
    */
   public boolean isLocked() throws RepositoryException {
-    return node.isLocked();
+    return getNode().isLocked();
   }
 
   /* (non-Javadoc)
    * @see javax.jcr.Node#isNodeType(java.lang.String)
    */
   public boolean isNodeType(String type) throws RepositoryException {
-    return node.isNodeType(type);
+    return getNode().isNodeType(type);
   }
 
   /* (non-Javadoc)
@@ -422,7 +430,7 @@ public class ResultNode implements Node{
   public void orderBefore(String arg0, String arg1)
   throws UnsupportedRepositoryOperationException, VersionException,
   ConstraintViolationException, ItemNotFoundException, LockException, RepositoryException {
-    node.orderBefore(arg0, arg1);
+    getNode().orderBefore(arg0, arg1);
   }
 
   /* (non-Javadoc)
@@ -601,7 +609,7 @@ public class ResultNode implements Node{
    * @see javax.jcr.Item#accept(javax.jcr.ItemVisitor)
    */
   public void accept(ItemVisitor arg0) throws RepositoryException {
-    node.accept(arg0);
+    getNode().accept(arg0);
   }
 
   /* (non-Javadoc)
@@ -609,56 +617,56 @@ public class ResultNode implements Node{
    */
   public Item getAncestor(int arg0) throws ItemNotFoundException, AccessDeniedException,
   RepositoryException {
-    return node.getAncestor(arg0);
+    return getNode().getAncestor(arg0);
   }
 
   /* (non-Javadoc)
    * @see javax.jcr.Item#getDepth()
    */
   public int getDepth() throws RepositoryException {
-    return node.getDepth();
+    return getNode().getDepth();
   }
 
   /* (non-Javadoc)
    * @see javax.jcr.Item#getName()
    */
   public String getName() throws RepositoryException {
-    return node.getName();
+    return getNode().getName();
   }
 
   /* (non-Javadoc)
    * @see javax.jcr.Item#isModified()
    */
   public boolean isModified() {
-    return node.isModified();
+    return getNode().isModified();
   }
 
   /* (non-Javadoc)
    * @see javax.jcr.Item#isNew()
    */
   public boolean isNew() {
-    return node.isNew();
+    return getNode().isNew();
   }
 
   /* (non-Javadoc)
    * @see javax.jcr.Item#isNode()
    */
   public boolean isNode() {
-    return node.isNode();
+    return getNode().isNode();
   }
 
   /* (non-Javadoc)
    * @see javax.jcr.Item#isSame(javax.jcr.Item)
    */
   public boolean isSame(Item arg0) throws RepositoryException {
-    return node.isSame(arg0);
+    return getNode().isSame(arg0);
   }
 
   /* (non-Javadoc)
    * @see javax.jcr.Item#refresh(boolean)
    */
   public void refresh(boolean arg0) throws InvalidItemStateException, RepositoryException {
-    node.refresh(arg0);
+    getNode().refresh(arg0);
   }
 
   /* (non-Javadoc)
@@ -682,7 +690,7 @@ public class ResultNode implements Node{
    * @see javax.jcr.Node#getProperty(java.lang.String)
    */
   public Property getProperty(String arg0) throws PathNotFoundException, RepositoryException {
-    return node.getProperty(arg0);
+    return getNode().getProperty(arg0);
   }
 
   /* (non-Javadoc)
@@ -690,21 +698,21 @@ public class ResultNode implements Node{
    */
   public Node getParent() throws ItemNotFoundException, AccessDeniedException,
   RepositoryException {
-    return node.getParent();
+    return getNode().getParent();
   }
 
   /* (non-Javadoc)
    * @see javax.jcr.Item#getPath()
    */
   public String getPath() throws RepositoryException {
-    return node.getPath();
+    return getNode().getPath();
   }
 
   /* (non-Javadoc)
    * @see javax.jcr.Item#getSession()
    */
   public Session getSession() throws RepositoryException {
-    return node.getSession();
+    return getNode().getSession();
   }
 
   /* (non-Javadoc)
@@ -714,7 +722,7 @@ public class ResultNode implements Node{
   public boolean equals(Object obj) {
     try {
       ResultNode resNode = (ResultNode)obj;
-      if(node.getPath().equals(resNode.getNode().getPath())) return true;
+      if(getNode().getPath().equals(resNode.getNode().getPath())) return true;
     } catch(Exception e) {
       return false;
     }

@@ -25,6 +25,7 @@ import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.resolver.ResourceResolver;
 import org.exoplatform.services.cms.templates.TemplateService;
+import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.core.UIContainer;
@@ -41,10 +42,10 @@ import org.exoplatform.webui.core.UIContainer;
 public class UIActionViewTemplate extends UIContainer {
 
   private String documentType_ ;
-  private Node node_ ;
+  private NodeLocation node_ ;
 
   public void setTemplateNode(Node node) throws Exception {
-    node_ = node ;
+    node_ = NodeLocation.getNodeLocationByNode(node);
     documentType_ = node.getPrimaryNodeType().getName() ;
   }
 
@@ -66,7 +67,7 @@ public class UIActionViewTemplate extends UIContainer {
   }
 
   public String getWorkspaceName() throws Exception {
-    return node_.getSession().getWorkspace().getName() ;
+    return NodeLocation.getNodeByLocation(node_).getSession().getWorkspace().getName() ;
   }
 
   public String getTemplate() { return getViewTemplatePath() ;}
@@ -76,5 +77,7 @@ public class UIActionViewTemplate extends UIContainer {
     return getAncestorOfType(UIJCRExplorer.class).getJCRTemplateResourceResolver() ;
   }
 
-  public Node getNode() {return node_ ;}
+  public Node getNode() {
+    return NodeLocation.getNodeByLocation(node_);
+  }
 }

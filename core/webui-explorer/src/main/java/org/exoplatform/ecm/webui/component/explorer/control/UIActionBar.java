@@ -56,6 +56,7 @@ import org.exoplatform.services.cms.queries.QueryService;
 import org.exoplatform.services.cms.views.ManageViewService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -100,7 +101,7 @@ public class UIActionBar extends UIForm {
    */
   private static final Log LOG  = ExoLogger.getLogger(UIActionBar.class);
 
-  private Node view_ ;
+  private NodeLocation view_ ;
   private String templateName_ ;
   //private List<SelectItemOption<String>> tabOptions = new ArrayList<SelectItemOption<String>>() ;
   private List<String> tabList_ = new ArrayList<String>();
@@ -138,16 +139,17 @@ public class UIActionBar extends UIForm {
 
   public void setTabOptions(String viewName) throws Exception {
     tabList_ = new ArrayList<String>();
-    view_ = getApplicationComponent(ManageViewService.class).getViewByName(viewName,
+    Node viewNode = getApplicationComponent(ManageViewService.class).getViewByName(viewName,
         SessionProviderFactory.createSystemProvider());
-    NodeIterator tabs = view_.getNodes();
+    view_ = NodeLocation.getNodeLocationByNode(viewNode);
+    NodeIterator tabs = viewNode.getNodes();
     while (tabs.hasNext()) {
       Node tab = tabs.nextNode();
       if(!tabList_.contains(tab.getName())) tabList_.add(tab.getName());
       setListButton(tab.getName());
     }
     setSelectedTab(tabList_.get(0));
-    String template = view_.getProperty("exo:template").getString();
+    String template = viewNode.getProperty("exo:template").getString();
     templateName_ = template.substring(template.lastIndexOf("/") + 1);
     UIJCRExplorer uiExplorer = getAncestorOfType(UIJCRExplorer.class);
     uiExplorer.setRenderTemplate(template);
@@ -171,7 +173,7 @@ public class UIActionBar extends UIForm {
   public String getTemplateName() { return templateName_;  }
 
   private void setListButton(String tabName) throws PathNotFoundException, RepositoryException {
-    Node tabNode = view_.getNode(tabName);
+    Node tabNode = NodeLocation.getNodeByLocation(view_).getNode(tabName);
     if(tabNode.hasProperty("exo:buttons")) {
       String buttons = tabNode.getProperty("exo:buttons").getString();
       String[] buttonsInTab = StringUtils.split(buttons, ";");

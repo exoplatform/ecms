@@ -23,6 +23,7 @@ import org.exoplatform.ecm.webui.component.admin.UIECMAdminPortlet;
 import org.exoplatform.services.cms.folksonomy.NewFolksonomyService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -30,8 +31,8 @@ import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.webui.core.UIPopupWindow;
 import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.event.Event;
-import org.exoplatform.webui.event.Event.Phase;
 import org.exoplatform.webui.event.EventListener;
+import org.exoplatform.webui.event.Event.Phase;
 import org.exoplatform.webui.form.UIForm;
 import org.exoplatform.webui.form.UIFormStringInput;
 import org.exoplatform.webui.form.UIFormTextAreaInput;
@@ -59,7 +60,7 @@ public class UITagStyleForm extends UIForm {
   final static public String DOCUMENT_RANGE = "documentRange" ;
   final static public String STYLE_HTML = "styleHTML" ;
   private static final Log LOG  = ExoLogger.getLogger("admin.UITagStyleForm");
-  private Node selectedTagStyle_ ;
+  private NodeLocation selectedTagStyle_ ;
 
   public UITagStyleForm() throws Exception {
     addUIFormInput(new UIFormStringInput(STYLE_NAME, STYLE_NAME, null).addValidator(MandatoryValidator.class)) ;
@@ -67,16 +68,18 @@ public class UITagStyleForm extends UIForm {
     addUIFormInput(new UIFormTextAreaInput(STYLE_HTML, STYLE_HTML, null).addValidator(MandatoryValidator.class)) ;
   }
 
-  public Node getTagStyle() { return selectedTagStyle_ ; }
+  public Node getTagStyle() { 
+    return NodeLocation.getNodeByLocation(selectedTagStyle_); 
+  }
 
   public void setTagStyle(Node selectedTagStyle) throws Exception {
-    selectedTagStyle_ = selectedTagStyle ;
+    selectedTagStyle_ = NodeLocation.getNodeLocationByNode(selectedTagStyle);
     if (selectedTagStyle != null) {
-      getUIStringInput(STYLE_NAME).setValue(selectedTagStyle_.getName()) ;
+      getUIStringInput(STYLE_NAME).setValue(selectedTagStyle.getName()) ;
       getUIStringInput(STYLE_NAME).setEditable(false) ;
-      String range = selectedTagStyle_.getProperty(UITagStyleList.RANGE_PROP).getValue().getString() ;
+      String range = selectedTagStyle.getProperty(UITagStyleList.RANGE_PROP).getValue().getString() ;
       getUIStringInput(DOCUMENT_RANGE).setValue(range) ;
-      String htmlStyle = selectedTagStyle_.getProperty(UITagStyleList.HTML_STYLE_PROP).getValue().getString() ;
+      String htmlStyle = selectedTagStyle.getProperty(UITagStyleList.HTML_STYLE_PROP).getValue().getString() ;
       getUIFormTextAreaInput(STYLE_HTML).setValue(htmlStyle) ;
     }
   }
@@ -129,7 +132,7 @@ public class UITagStyleForm extends UIForm {
           newFolksonomyService.addTagStyle(tagStyleName, "", "", workspace);
           for(Node tagStyle: newFolksonomyService.getAllTagStyle(workspace))
             if(tagStyle.getName().equals(tagStyleName)) {
-              uiForm.selectedTagStyle_ = tagStyle ;
+              uiForm.selectedTagStyle_ = NodeLocation.getNodeLocationByNode(tagStyle);
               break;
             }
         }

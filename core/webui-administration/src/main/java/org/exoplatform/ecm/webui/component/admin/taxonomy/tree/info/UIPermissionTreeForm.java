@@ -45,6 +45,7 @@ import org.exoplatform.services.jcr.access.PermissionType;
 import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.security.IdentityConstants;
+import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -86,7 +87,7 @@ public class UIPermissionTreeForm extends UIForm implements UISelectable {
 
   public static final String SELECT_GROUP_ID = "TaxoTreeSelectUserOrGroup";
   private static final Log LOG  = ExoLogger.getLogger("admin.UIPermissionTreeForm");
-  private Node               currentNode;
+  private NodeLocation  currentNode;
 
   private PermissionBean     permBean;
 
@@ -170,11 +171,11 @@ public class UIPermissionTreeForm extends UIForm implements UISelectable {
   }
 
   public Node getCurrentNode() {
-    return currentNode;
+    return NodeLocation.getNodeByLocation(currentNode);
   }
 
   public void setCurrentNode(Node currentNode) {
-    this.currentNode = currentNode;
+    this.currentNode = NodeLocation.getNodeLocationByNode(currentNode);
   }
 
   public PermissionBean getPermBean() {

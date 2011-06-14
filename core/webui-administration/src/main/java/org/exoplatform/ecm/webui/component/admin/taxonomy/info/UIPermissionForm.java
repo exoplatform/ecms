@@ -35,6 +35,7 @@ import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.security.IdentityConstants;
+import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -72,7 +73,7 @@ public class UIPermissionForm extends UIForm implements UISelectable {
 
   public static final String SELECT_GROUP_ID = "TaxoSelectUserOrGroup";
   private static final Log LOG  = ExoLogger.getLogger("admin.UIPermissionForm");
-  private Node               currentNode;
+  private NodeLocation  currentNode;
 
   public UIPermissionForm() throws Exception {
     addChild(new UIPermissionInputSet(PERMISSION));
@@ -284,10 +285,10 @@ public class UIPermissionForm extends UIForm implements UISelectable {
   }
 
   public Node getCurrentNode() {
-    return currentNode;
+    return NodeLocation.getNodeByLocation(currentNode);
   }
 
   public void setCurrentNode(Node currentNode) {
-    this.currentNode = currentNode;
+    this.currentNode = NodeLocation.getNodeLocationByNode(currentNode);
   }
 }

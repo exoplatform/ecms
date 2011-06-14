@@ -35,6 +35,7 @@ import org.exoplatform.resolver.ResourceResolver;
 import org.exoplatform.services.cms.impl.DMSConfiguration;
 import org.exoplatform.services.cms.taxonomy.TaxonomyService;
 import org.exoplatform.services.jcr.RepositoryService;
+import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.publication.WCMComposer;
 import org.exoplatform.services.wcm.utils.PaginatedNodeIterator;
 import org.exoplatform.wcm.webui.Utils;
@@ -65,7 +66,7 @@ public class UIPCLVContainer extends UIContainer {
   /** The boolean isError. */
   private boolean isError;
 
-  private Node categoryNode;
+  private NodeLocation categoryNode;
 
   private String taxonomyTreeName;
 
@@ -120,11 +121,11 @@ public class UIPCLVContainer extends UIContainer {
   }
 
   public void setCategoryNode(Node categoryNode) {
-    this.categoryNode = categoryNode;
+    this.categoryNode = NodeLocation.getNodeLocationByNode(categoryNode);
   }
 
   public Node getCategoryNode() {
-    return categoryNode;
+    return NodeLocation.getNodeByLocation(categoryNode);
   }
 
   public void setTaxonomyTreeName(String taxonomyTreeName) {

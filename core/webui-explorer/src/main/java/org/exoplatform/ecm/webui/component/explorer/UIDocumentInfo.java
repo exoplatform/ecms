@@ -102,6 +102,7 @@ import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.security.IdentityConstants;
+import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.web.application.Parameter;
 import org.exoplatform.webui.application.WebuiRequestContext;
@@ -153,15 +154,15 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
 
   private String typeSort_ = Preference.SORT_BY_NODETYPE;
   private String sortOrder_ = Preference.BLUE_DOWN_ARROW;
-  private Node currentNode_ ;
+  private NodeLocation currentNode_ ;
 
   private UIPageIterator pageIterator_ ;
 
-  private List<Node> todayNodes;
-  private List<Node> yesterdayNodes;
-  private List<Node> earlierThisWeekNodes;
-  private List<Node> earlierThisMonthNodes;
-  private List<Node> earlierThisYearNodes;
+  private List<NodeLocation> todayNodes;
+  private List<NodeLocation> yesterdayNodes;
+  private List<NodeLocation> earlierThisWeekNodes;
+  private List<NodeLocation> earlierThisMonthNodes;
+  private List<NodeLocation> earlierThisYearNodes;
 
   private String timeLineSortByFavourite = Preference.BLUE_DOWN_ARROW;
   private String timeLineSortByName = "";
@@ -194,29 +195,24 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
   }
 
 
-  public List<Node> getTodayNodes() throws Exception { return filterNodeList(todayNodes); }
-  public void setTodayNodes(List<Node> todayNodes) {
-    this.todayNodes = todayNodes;
+  public List<Node> getTodayNodes() throws Exception { 
+    return filterNodeList(NodeLocation.getNodeListByLocationList(todayNodes)); 
   }
 
-  public List<Node> getYesterdayNodes() throws Exception { return filterNodeList(yesterdayNodes); }
-  public void setYesterdayNodes(List<Node> yesterdayNodes) {
-    this.yesterdayNodes = yesterdayNodes;
+  public List<Node> getYesterdayNodes() throws Exception { 
+    return filterNodeList(NodeLocation.getNodeListByLocationList(yesterdayNodes)); 
   }
 
-  public List<Node> getEarlierThisWeekNodes() throws Exception { return filterNodeList(earlierThisWeekNodes); }
-  public void setEarlierThisWeekNodes(List<Node> earlierThisWeekNodes) {
-    this.earlierThisWeekNodes = earlierThisWeekNodes;
+  public List<Node> getEarlierThisWeekNodes() throws Exception { 
+    return filterNodeList(NodeLocation.getNodeListByLocationList(earlierThisWeekNodes)); 
   }
 
-  public List<Node> getEarlierThisMonthNodes() throws Exception { return filterNodeList(earlierThisMonthNodes); }
-  public void setEarlierThisMonthNodes(List<Node> earlierThisMonthNodes) {
-    this.earlierThisMonthNodes = earlierThisMonthNodes;
+  public List<Node> getEarlierThisMonthNodes() throws Exception { 
+    return filterNodeList(NodeLocation.getNodeListByLocationList(earlierThisMonthNodes)); 
   }
 
-  public List<Node> getEarlierThisYearNodes() throws Exception { return filterNodeList(earlierThisYearNodes); }
-  public void setEarlierThisYearNodes(List<Node> earlierThisYearNodes) {
-    this.earlierThisYearNodes = earlierThisYearNodes;
+  public List<Node> getEarlierThisYearNodes() throws Exception { 
+    return filterNodeList(NodeLocation.getNodeListByLocationList(earlierThisYearNodes)); 
   }
 
   public void updateNodeLists() throws Exception {
@@ -229,16 +225,16 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
     String userName = session.getUserID();
     String nodePath = uiExplorer.getCurrentPath();
 //    boolean byUser = uiExplorer.getPreference().isShowItemsByUser();
-    todayNodes = timelineService.
-          getDocumentsOfToday(nodePath, workspace, sessionProvider, userName, false);
-    yesterdayNodes = timelineService.
-          getDocumentsOfYesterday(nodePath, workspace, sessionProvider, userName, false);
-    earlierThisWeekNodes = timelineService.
-          getDocumentsOfEarlierThisWeek(nodePath, workspace, sessionProvider, userName, false);
-    earlierThisMonthNodes = timelineService.
-          getDocumentsOfEarlierThisMonth(nodePath, workspace, sessionProvider, userName, false);
-    earlierThisYearNodes = timelineService.
-          getDocumentsOfEarlierThisYear(nodePath, workspace, sessionProvider, userName, false);
+    todayNodes = NodeLocation.getLocationsByNodeList(timelineService.
+          getDocumentsOfToday(nodePath, workspace, sessionProvider, userName, false));
+    yesterdayNodes = NodeLocation.getLocationsByNodeList(timelineService.
+          getDocumentsOfYesterday(nodePath, workspace, sessionProvider, userName, false));
+    earlierThisWeekNodes = NodeLocation.getLocationsByNodeList(timelineService.
+          getDocumentsOfEarlierThisWeek(nodePath, workspace, sessionProvider, userName, false));
+    earlierThisMonthNodes = NodeLocation.getLocationsByNodeList(timelineService.
+          getDocumentsOfEarlierThisMonth(nodePath, workspace, sessionProvider, userName, false));
+    earlierThisYearNodes = NodeLocation.getLocationsByNodeList(timelineService.
+          getDocumentsOfEarlierThisYear(nodePath, workspace, sessionProvider, userName, false));
 
     Collections.sort(todayNodes, new SearchComparator());
     Collections.sort(yesterdayNodes, new SearchComparator());
@@ -465,8 +461,9 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
 
   public List<Node> getRelations() throws Exception {
     List<Node> relations = new ArrayList<Node>() ;
-    if (currentNode_.hasProperty(Utils.EXO_RELATION)) {
-      Value[] vals = currentNode_.getProperty(Utils.EXO_RELATION).getValues();
+    Node currentNode = getCurrentNode();
+    if (currentNode.hasProperty(Utils.EXO_RELATION)) {
+      Value[] vals = currentNode.getProperty(Utils.EXO_RELATION).getValues();
       for (int i = 0; i < vals.length; i++) {
         String uuid = vals[i].getString();
         Node node = getNodeByUUID(uuid);
@@ -479,13 +476,14 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
 
   public List<Node> getAttachments() throws Exception {
     List<Node> attachments = new ArrayList<Node>() ;
-    NodeIterator childrenIterator = currentNode_.getNodes();
+    Node currentNode = getCurrentNode();
+    NodeIterator childrenIterator = currentNode.getNodes();
     int attachData =0 ;
     while (childrenIterator.hasNext()) {
       Node childNode = childrenIterator.nextNode();
       String nodeType = childNode.getPrimaryNodeType().getName();
       List<String> listCanCreateNodeType =
-                Utils.getListAllowedFileType(currentNode_, templateService) ;
+        Utils.getListAllowedFileType(currentNode, templateService) ;
       if(listCanCreateNodeType.contains(nodeType) ) {
 
         // Case of childNode has jcr:data property
@@ -519,7 +517,7 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
 
   public List<String> getSupportedLocalise() throws Exception {
     MultiLanguageService multiLanguageService = getApplicationComponent(MultiLanguageService.class) ;
-    return multiLanguageService.getSupportedLanguages(currentNode_) ;
+    return multiLanguageService.getSupportedLanguages(getCurrentNode());
   }
 
   public String getTemplatePath() throws Exception { return null; }
@@ -556,7 +554,9 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
     return 0;
   }
 
-  public void setNode(Node node) { currentNode_ = node ; }
+  public void setNode(Node node) { 
+    currentNode_ = NodeLocation.getNodeLocationByNode(node); 
+  }
 
   public boolean isRssLink() { return false ; }
   public String getRssLink() { return null ; }
@@ -576,21 +576,26 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
     if(currentNode_ == null) {
       return getOriginalNode().getSession().getWorkspace().getName();
     }
-    return currentNode_.getSession().getWorkspace().getName();
+    return getCurrentNode().getSession().getWorkspace().getName();
   }
 
   public Node getNode() throws Exception {
-    currentNode_ = getAncestorOfType(UIJCRExplorer.class).getCurrentNode() ;
-    if(currentNode_.hasProperty(Utils.EXO_LANGUAGE)) {
-      String defaultLang = currentNode_.getProperty(Utils.EXO_LANGUAGE).getString() ;
+    Node currentNode = getAncestorOfType(UIJCRExplorer.class).getCurrentNode() ;
+    currentNode_ = NodeLocation.getNodeLocationByNode(currentNode);
+    if(currentNode.hasProperty(Utils.EXO_LANGUAGE)) {
+      String defaultLang = currentNode.getProperty(Utils.EXO_LANGUAGE).getString() ;
       if(getLanguage() == null) setLanguage(defaultLang) ;
       if(!getLanguage().equals(defaultLang)) {
         MultiLanguageService multiServ = getApplicationComponent(MultiLanguageService.class);
-        Node curNode = multiServ.getLanguage(currentNode_, getLanguage());
+        Node curNode = multiServ.getLanguage(currentNode, getLanguage());
         return curNode ;
       }
     }
-    return currentNode_;
+    return currentNode;
+  }
+  
+  public Node getCurrentNode() {
+    return NodeLocation.getNodeByLocation(currentNode_);
   }
 
   public Node getOriginalNode() throws Exception {return getAncestorOfType(UIJCRExplorer.class).getCurrentNode() ;}
@@ -600,7 +605,7 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
   }
 
   public List<Node> getComments() throws Exception {
-    return getApplicationComponent(CommentsService.class).getComments(currentNode_, getLanguage()) ;
+    return getApplicationComponent(CommentsService.class).getComments(getCurrentNode(), getLanguage()) ;
   }
 
   public String getViewTemplate(String nodeTypeName, String templateName) throws Exception {
@@ -1008,7 +1013,7 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
         String userName = Util.getPortalRequestContext().getRemoteUser() ;
         double objId = Double.parseDouble(event.getRequestContext().getRequestParameter(OBJECTID)) ;
         VotingService votingService = uiComp.getApplicationComponent(VotingService.class) ;
-        votingService.vote(uiComp.currentNode_, objId, userName, uiComp.getLanguage()) ;
+        votingService.vote(uiComp.getCurrentNode(), objId, userName, uiComp.getLanguage()) ;
       } catch(RepositoryException e) {
          LOG.error("Repository cannot be found");
         uiApp.addMessage(new ApplicationMessage("UIDocumentInfo.msg.repository-error", null,
@@ -1223,9 +1228,11 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
     }
   }
 
-  private class SearchComparator implements Comparator<Node> {
-    public int compare(Node node1, Node node2) {
+  private class SearchComparator implements Comparator<NodeLocation> {
+    public int compare(NodeLocation nodeA, NodeLocation nodeB) {
       try {
+        Node node1 = NodeLocation.getNodeByLocation(nodeA);
+        Node node2 = NodeLocation.getNodeByLocation(nodeB);
         if (timeLineSortByFavourite.length() != 0) {
           int factor = (timeLineSortByFavourite.equals(Preference.BLUE_DOWN_ARROW)) ? 1 : -1;
           if (isFavouriter(node1)) return -1 * factor;

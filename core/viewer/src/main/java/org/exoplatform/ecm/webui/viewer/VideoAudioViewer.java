@@ -26,6 +26,7 @@ import javax.jcr.Node;
 import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.container.xml.PortalContainerInfo;
+import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.core.UIComponent;
 
@@ -42,7 +43,7 @@ import org.exoplatform.webui.core.UIComponent;
 
 public class VideoAudioViewer extends UIComponent {
 
-  private List<Node> presentNodes = new ArrayList<Node>();
+  private List<NodeLocation> presentNodes = new ArrayList<NodeLocation>();
 
   private String repository;
 
@@ -51,12 +52,12 @@ public class VideoAudioViewer extends UIComponent {
 
   public List<Node> getPresentNodes() {
     List<Node> result = new ArrayList<Node>();
-    result.addAll(presentNodes);
+    result.addAll(NodeLocation.getNodeListByLocationList(presentNodes));
     return result;
   }
 
   public void setPresentNodes(List<Node> presentNodes) {
-    this.presentNodes = presentNodes;
+    this.presentNodes = NodeLocation.getLocationsByNodeList(presentNodes);
   }
 
   public void setRepository(String repository) {
@@ -74,6 +75,5 @@ public class VideoAudioViewer extends UIComponent {
       (PortalContainerInfo)container.getComponentInstanceOfType(PortalContainerInfo.class) ;
     return containerInfo.getContainerName() ;
   }
-
 
 }

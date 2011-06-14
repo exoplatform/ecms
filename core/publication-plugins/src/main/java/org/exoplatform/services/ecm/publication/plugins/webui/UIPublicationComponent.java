@@ -27,6 +27,7 @@ import org.exoplatform.download.InputStreamDownloadResource;
 import org.exoplatform.services.ecm.publication.PublicationService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.core.lifecycle.UIApplicationLifecycle;
@@ -44,26 +45,26 @@ import org.exoplatform.webui.core.lifecycle.UIApplicationLifecycle;
 
 public class UIPublicationComponent extends UIComponent {
 
-  private Node node_;
+  private NodeLocation node_;
   private static final Log LOG  = ExoLogger.getLogger("component.UIPublicationComponent");
   public UIPublicationComponent() throws Exception {
   }
 
   public UIPublicationComponent(Node node) throws Exception {
-    this.node_=node;
+    this.node_= NodeLocation.getNodeLocationByNode(node);
   }
 
   public Node getNode() {
-    return this.node_;
+    return NodeLocation.getNodeByLocation(this.node_);
   }
 
   public void setNode(Node node) {
-    this.node_=node;
+    this.node_= NodeLocation.getNodeLocationByNode(node);
   }
 
   public String getNodeName() {
     try {
-      return node_.getName();
+      return getNode().getName();
     } catch (Exception e) {
       LOG.error("Unexpected error", e);
       return "Error in getNodeName";
@@ -73,7 +74,7 @@ public class UIPublicationComponent extends UIComponent {
   public String getLifeCycleName () {
     try {
       PublicationService service = getApplicationComponent(PublicationService.class) ;
-      return service.getNodeLifecycleName(node_);
+      return service.getNodeLifecycleName(getNode());
     } catch (Exception e) {
       LOG.error("Unexpected error", e);
       return "Error in getLifeCycleName";
@@ -83,7 +84,7 @@ public class UIPublicationComponent extends UIComponent {
   public String getStateName () {
     try {
       PublicationService service = getApplicationComponent(PublicationService.class) ;
-      return service.getCurrentState(node_);
+      return service.getCurrentState(getNode());
     } catch (Exception e) {
       LOG.error("Unexpected error", e);
       return "Error in getStateName";
@@ -95,7 +96,7 @@ public class UIPublicationComponent extends UIComponent {
       DownloadService dS = getApplicationComponent(DownloadService.class);
       PublicationService service = getApplicationComponent(PublicationService.class) ;
 
-      byte[] bytes=service.getStateImage(node_,locale);
+      byte[] bytes=service.getStateImage(getNode(),locale);
       InputStream iS = new ByteArrayInputStream(bytes);
       String id = dS.addDownloadResource(new InputStreamDownloadResource(iS, "image/gif"));
       return dS.getDownloadLink(id);

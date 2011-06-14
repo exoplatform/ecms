@@ -285,10 +285,9 @@ public class NodeLocation {
     	  uuid = node.getUUID();
       } catch (Exception e) {}
       return new NodeLocation(repository, workspace, path, uuid);
-    } catch (RepositoryException e) {
-      log.error("getNodeLocationByNode() failed because of ", e);
+    } catch (Exception e) {
+      return null;
     }
-    return null;
   }
 
   /**
@@ -312,7 +311,6 @@ public class NodeLocation {
     } catch(PathNotFoundException pne) {
       return null;
     } catch (Exception e) {
-      log.error("getNodeByNodeLocation() failed because of ", e);
       return null;
     }
   }
@@ -446,7 +444,7 @@ public class NodeLocation {
   }
   
   public boolean equals(Object obj) {
-    if (!(obj instanceof NodeLocation)) return false;
+    if (obj == null || !(obj instanceof NodeLocation)) return false;
     NodeLocation location2 = (NodeLocation)obj;
     return this.repository.equals(location2.getRepository()) &&
                 this.getWorkspace().equals(location2.getWorkspace()) &&

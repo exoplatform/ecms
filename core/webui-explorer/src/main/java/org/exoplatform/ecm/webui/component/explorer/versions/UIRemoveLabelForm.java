@@ -62,8 +62,8 @@ public class UIRemoveLabelForm extends UIForm {
   public void update() throws Exception {
     List<SelectItemOption<String>> options = new ArrayList<SelectItemOption<String>>()  ;
     UIVersionInfo uiVersionInfo = getParent();
-    Version version = uiVersionInfo.getCurrentVersionNode().getVersion();
     VersionHistory versionHistory = uiVersionInfo.getCurrentNode().getVersionHistory() ;
+    Version version = versionHistory.getVersion(uiVersionInfo.getCurrentVersionNode().getName());
     String[] strOptions = versionHistory.getVersionLabels(version);
     if (strOptions.length <= 0) this.setRendered(false) ;
     else {

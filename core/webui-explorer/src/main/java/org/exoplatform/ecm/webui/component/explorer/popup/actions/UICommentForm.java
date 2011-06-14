@@ -31,6 +31,7 @@ import org.exoplatform.services.organization.User;
 import org.exoplatform.services.organization.UserHandler;
 import org.exoplatform.services.organization.UserProfile;
 import org.exoplatform.services.organization.UserProfileHandler;
+import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.wcm.webui.form.UIFormRichtextInput;
 import org.exoplatform.wcm.webui.validator.FckMandatoryValidator;
 import org.exoplatform.web.application.ApplicationMessage;
@@ -93,7 +94,7 @@ public class UICommentForm extends UIForm implements UIPopupComponent {
     this.nodeCommentPath = nodeCommentPath;
   }
 
-  private Node document_ ;
+  private NodeLocation document_ ;
   public UICommentForm() throws Exception {
 
   }
@@ -107,7 +108,7 @@ public class UICommentForm extends UIForm implements UIPopupComponent {
     }
     addUIFormInput(new UIFormRichtextInput(FIELD_COMMENT, FIELD_COMMENT, "").addValidator(FckMandatoryValidator.class)) ;
     if (isEdit()) {
-      Node comment = getAncestorOfType(UIJCRExplorer.class).getNodeByPath(nodeCommentPath, document_.getSession());
+      Node comment = getAncestorOfType(UIJCRExplorer.class).getNodeByPath(nodeCommentPath, NodeLocation.getNodeByLocation(document_).getSession());
       if(comment.hasProperty("exo:commentContent")){
         getChild(UIFormRichtextInput.class).setValue(comment.getProperty("exo:commentContent").getString());
       }
@@ -115,7 +116,7 @@ public class UICommentForm extends UIForm implements UIPopupComponent {
   }
 
   public void activate() throws Exception {
-    document_ = getAncestorOfType(UIJCRExplorer.class).getCurrentNode() ;
+    document_ = NodeLocation.getNodeLocationByNode(getAncestorOfType(UIJCRExplorer.class).getCurrentNode());
     prepareFields();
   }
 
@@ -123,8 +124,12 @@ public class UICommentForm extends UIForm implements UIPopupComponent {
     document_ = null ;
   }
 
-  public Node getDocument() { return document_ ; }
-  public void setDocument(Node doc) { document_ = doc ; }
+  public Node getDocument() { return 
+    NodeLocation.getNodeByLocation(document_); 
+  }
+  public void setDocument(Node doc) { 
+    document_ = NodeLocation.getNodeLocationByNode(doc); 
+  }
 
   public static class CancelActionListener extends EventListener<UICommentForm>{
     public void execute(Event<UICommentForm> event) throws Exception {
@@ -143,7 +148,8 @@ public class UICommentForm extends UIForm implements UIPopupComponent {
       }
       if (uiForm.isEdit()) {
         try {
-          Node commentNode = uiExplorer.getNodeByPath(uiForm.getNodeCommentPath(), uiForm.document_.getSession());
+          Node commentNode = uiExplorer.getNodeByPath(uiForm.getNodeCommentPath(), 
+              NodeLocation.getNodeByLocation(uiForm.document_).getSession());
           commentsService.updateComment(commentNode, comment);
         } catch (Exception e) {
         }
@@ -168,7 +174,8 @@ public class UICommentForm extends UIForm implements UIPopupComponent {
         try {
           String language = uiExplorer.getChild(UIWorkingArea.class).getChild(UIDocumentWorkspace.class).
           getChild(UIDocumentContainer.class).getChild(UIDocumentInfo.class).getLanguage() ;
-          commentsService.addComment(uiForm.document_, userName, email, website, comment, language);
+          commentsService.addComment(NodeLocation.getNodeByLocation(uiForm.document_), 
+              userName, email, website, comment, language);
         } catch (Exception e) {
           LOG.error(e);
         }

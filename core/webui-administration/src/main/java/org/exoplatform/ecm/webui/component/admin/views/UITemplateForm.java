@@ -35,6 +35,7 @@ import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.views.ManageViewService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -74,11 +75,11 @@ public class UITemplateForm extends UIForm {
 
   final static private String FIELD_ENABLEVERSION = "enableVersion";
 
-  private Node                template_           = null;
+  private NodeLocation      template_           = null;
 
   private List<String>        listVersion         = new ArrayList<String>();
 
-  private Version             baseVersion_;
+  private String               baseVersionName_;
 
   private VersionNode         selectedVersion_;
 
@@ -200,7 +201,7 @@ public class UITemplateForm extends UIForm {
       getUIFormCheckBoxInput(FIELD_ENABLEVERSION).setRendered(false);
       template_ = null;
       selectedVersion_ = null;
-      baseVersion_ = null;
+      baseVersionName_ = null;
       return;
     }
     update(template_.getPath(), null);
@@ -209,38 +210,39 @@ public class UITemplateForm extends UIForm {
   public void update(String templatePath, VersionNode selectedVersion) throws Exception {
     if (templatePath != null) {
       templatePath_ = templatePath;
-      template_ = getApplicationComponent(ManageViewService.class).getTemplate(templatePath,
-                                                                               SessionProviderFactory.createSessionProvider());
-      getUIStringInput(FIELD_NAME).setValue(template_.getName());
+      Node templateNode = getApplicationComponent(ManageViewService.class).
+              getTemplate(templatePath, SessionProviderFactory.createSessionProvider());
+      template_ = NodeLocation.getNodeLocationByNode(templateNode);
+      getUIStringInput(FIELD_NAME).setValue(templateNode.getName());
       getUIStringInput(FIELD_NAME).setEditable(false);
       String value = templatePath.substring(0, templatePath.lastIndexOf("/"));
       getUIFormSelectBox(FIELD_HOMETEMPLATE).setValue(value);
       getUIFormSelectBox(FIELD_HOMETEMPLATE).setDisabled(false);
       getUIFormCheckBoxInput(FIELD_ENABLEVERSION).setRendered(true);
-      if (isVersioned(template_)) {
-        rootVersionNode = getRootVersion(template_);
-        baseVersion_ = template_.getBaseVersion();
-        List<SelectItemOption<String>> options = getVersionValues(template_);
+      if (isVersioned(templateNode)) {
+        rootVersionNode = getRootVersion(templateNode);
+        baseVersionName_ = templateNode.getBaseVersion().getName();
+        List<SelectItemOption<String>> options = getVersionValues(templateNode);
         getUIFormSelectBox(FIELD_VERSION).setOptions(options).setRendered(true);
-        getUIFormSelectBox(FIELD_VERSION).setValue(baseVersion_.getName());
+        getUIFormSelectBox(FIELD_VERSION).setValue(baseVersionName_);
         getUIFormCheckBoxInput(FIELD_ENABLEVERSION).setChecked(true).setEnable(false);
         if (options.size() > 1)
           setActions(new String[] { "Save", "Reset", "Restore", "Cancel" });
         else
           setActions(new String[] { "Save", "Reset", "Cancel" });
-      } else if (canEnableVersionning(template_)) {
+      } else if (canEnableVersionning(templateNode)) {
         getUIFormSelectBox(FIELD_VERSION).setRendered(false);
         getUIFormCheckBoxInput(FIELD_ENABLEVERSION).setChecked(false).setEditable(true);
       }
     }
     if (selectedVersion != null) {
-      template_.restore(selectedVersion.getVersion(), false);
+      NodeLocation.getNodeByLocation(template_).restore(selectedVersion.getName(), false);
       selectedVersion_ = selectedVersion;
       Object[] args = { getUIStringInput(FIELD_VERSION).getValue() };
       UIApplication app = getAncestorOfType(UIApplication.class);
       app.addMessage(new ApplicationMessage("UITemplateForm.msg.version-restored", args));
     }
-    String content = templateService.getTemplate(template_);
+    String content = templateService.getTemplate(NodeLocation.getNodeByLocation(template_));
     getUIFormTextAreaInput(FIELD_CONTENT).setValue(Utils.encodeHTML(content));
   }
 
@@ -299,24 +301,25 @@ public class UITemplateForm extends UIForm {
           }
         }
         path = manageViewService.addTemplate(templateName, content, homeTemplate);
-        uiForm.template_ = manageViewService.getTemplate(path, SessionProviderFactory
-            .createSessionProvider());
+        uiForm.template_ = NodeLocation.getNodeLocationByNode(manageViewService.
+                            getTemplate(path, SessionProviderFactory.createSessionProvider()));
       } else {
+        Node templateNode = NodeLocation.getNodeByLocation(uiForm.template_);
         if (isEnableVersioning) {
-          if (!uiForm.template_.isNodeType(Utils.MIX_VERSIONABLE)) {
-            uiForm.template_.addMixin(Utils.MIX_VERSIONABLE);
-            uiForm.template_.save();
+          if (!templateNode.isNodeType(Utils.MIX_VERSIONABLE)) {
+            templateNode.addMixin(Utils.MIX_VERSIONABLE);
+            templateNode.save();
           } else {
-            uiForm.template_.checkout();
+            templateNode.checkout();
           }
         }
         path = manageViewService.updateTemplate(templateName, content, homeTemplate);
-        uiForm.template_.save();
+        templateNode.save();
         if (isEnableVersioning) {
-          uiForm.template_.checkin();
+          templateNode.checkin();
         }
       }
-      String workspaceName = uiForm.template_.getSession().getWorkspace().getName();
+      String workspaceName = NodeLocation.getNodeByLocation(uiForm.template_).getSession().getWorkspace().getName();
       JCRResourceResolver resourceResolver = new JCRResourceResolver(workspaceName);
       TemplateService templateService = uiForm.getApplicationComponent(TemplateService.class);
       if (path != null)
@@ -357,9 +360,10 @@ public class UITemplateForm extends UIForm {
       UITemplateForm uiForm = event.getSource();
       UITemplateContainer uiTempContainer = uiForm.getAncestorOfType(UITemplateContainer.class);
       if (uiForm.selectedVersion_ != null) {
-        if (!uiForm.selectedVersion_.equals(uiForm.baseVersion_)) {
-          uiForm.template_.restore(uiForm.baseVersion_, true);
-          uiForm.template_.checkout();
+        if (!uiForm.selectedVersion_.getName().equals(uiForm.baseVersionName_)) {
+          Node templateNode = NodeLocation.getNodeByLocation(uiForm.template_);
+          templateNode.restore(uiForm.baseVersionName_, true);
+          templateNode.checkout();
         }
       }
       uiForm.refresh();
@@ -378,9 +382,9 @@ public class UITemplateForm extends UIForm {
     public void execute(Event<UITemplateForm> event) throws Exception {
       UITemplateForm uiForm = event.getSource();
       String version = uiForm.getUIFormSelectBox(FIELD_VERSION).getValue();
-      String path = uiForm.template_.getVersionHistory().getVersion(version).getPath();
+      String path = NodeLocation.getNodeByLocation(uiForm.template_).getVersionHistory().getVersion(version).getPath();
       VersionNode versionNode = uiForm.rootVersionNode.findVersionNode(path);
-      Node frozenNode = versionNode.getVersion().getNode(Utils.JCR_FROZEN);
+      Node frozenNode = versionNode.getNode(Utils.JCR_FROZEN);
       String content = uiForm.templateService.getTemplate(frozenNode);
       uiForm.getUIFormTextAreaInput(FIELD_CONTENT).setValue(content);
       UITemplateContainer uiTempContainer = uiForm.getAncestorOfType(UITemplateContainer.class);
@@ -399,9 +403,9 @@ public class UITemplateForm extends UIForm {
     public void execute(Event<UITemplateForm> event) throws Exception {
       UITemplateForm uiForm = event.getSource();
       String version = uiForm.getUIFormSelectBox(FIELD_VERSION).getValue();
-      String path = uiForm.template_.getVersionHistory().getVersion(version).getPath();
+      String path = NodeLocation.getNodeByLocation(uiForm.template_).getVersionHistory().getVersion(version).getPath();
       VersionNode selectedVesion = uiForm.rootVersionNode.findVersionNode(path);
-      if (uiForm.baseVersion_.getName().equals(selectedVesion.getName()))
+      if (uiForm.baseVersionName_.equals(selectedVesion.getName()))
         return;
       uiForm.update(null, selectedVesion);
       UITemplateContainer uiTempContainer = uiForm.getAncestorOfType(UITemplateContainer.class);

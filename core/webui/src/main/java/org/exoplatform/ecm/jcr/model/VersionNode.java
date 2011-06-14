@@ -17,10 +17,13 @@
 package org.exoplatform.ecm.jcr.model;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.jcr.Node;
 import javax.jcr.NodeIterator;
+import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 import javax.jcr.query.Query;
@@ -28,18 +31,37 @@ import javax.jcr.query.QueryManager;
 import javax.jcr.query.QueryResult;
 import javax.jcr.version.Version;
 
-import org.exoplatform.services.log.Log;
+import org.exoplatform.services.cms.impl.DMSConfiguration;
+import org.exoplatform.services.jcr.core.ManageableRepository;
+import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 public class VersionNode {
 
   private boolean isExpanded = true ;
-  private Version version_ ;
+//  protected Version version_ ;
   private List<VersionNode> children_ = new ArrayList<VersionNode>() ;
   private static final Log LOG  = ExoLogger.getLogger("model.VersionNode");
+  private Calendar createdTime_;
+  private String name_ = "";
+  private String path_ = "";
+  private String ws_ = "";
+  private String uuid_;
+  private String[] versionLabels_ = new String[]{};
+  
   public VersionNode(Version version, Session session) {
-    version_ = version;
     try {
+      try {
+        createdTime_ = version.getCreated();
+        name_ = version.getName();
+        path_ = version.getPath();
+        ws_ = version.getSession().getWorkspace().getName();
+        uuid_ = version.getUUID();
+        versionLabels_ = version.getVersionHistory().getVersionLabels(version);
+      } catch (Exception e) {}
+      
       String uuid = version.getUUID();
       QueryManager queryManager = session.getWorkspace().getQueryManager();
       Query query = queryManager.createQuery("//element(*, nt:version)[@jcr:predecessors='" + uuid + "']", Query.XPATH);
@@ -53,25 +75,60 @@ public class VersionNode {
       LOG.error("Unexpected error", e);
     }
   }
+  
+  public VersionNode(Version version) throws RepositoryException {
+    try {
+      createdTime_ = version.getCreated();
+      name_ = version.getName();
+      path_ = version.getPath();
+      ws_ = version.getSession().getWorkspace().getName();
+      uuid_ = version.getUUID();
+      versionLabels_ = version.getVersionHistory().getVersionLabels(version);
+    } catch (Exception e) {}
+    
+    try {
+      Version[] versions = version.getSuccessors() ;
+      if(versions == null || versions.length == 0) isExpanded = false;
+      for (Version versionChild : versions) {
+        children_.add(new VersionNode(versionChild)) ;
+      }
+    } catch (PathNotFoundException e) {
+    }
+  }
 
   public boolean isExpanded() { return isExpanded ; }
 
   public void setExpanded(boolean isExpanded) { this.isExpanded = isExpanded ; }
 
-  public Version getVersion() { return version_; }
+  public String getName() throws RepositoryException { return name_; }
+  
+  public String getWs() { return ws_; }
 
-  public void setVersion(Version version) { this.version_ = version ; }
-
-  public String getName() throws RepositoryException { return version_.getName() ; }
-
-  public String getPath() throws RepositoryException { return version_.getPath() ; }
+  public String getPath() throws RepositoryException { return path_; }
 
   public int getChildrenSize() { return children_.size() ; }
 
   public List<VersionNode> getChildren() { return children_; }
 
+  public Calendar getCreatedTime() { return createdTime_; }
+  
+  public String[] getVersionLabels() {
+    return versionLabels_;
+  }
+  
+  public Node getNode(String nodeName) throws Exception {
+    DMSConfiguration dmsConf = WCMCoreUtils.getService(DMSConfiguration.class);
+    String systemWS = dmsConf.getConfig().getSystemWorkspace();
+    ManageableRepository repo = WCMCoreUtils.getRepository(); 
+    SessionProvider provider = systemWS.equals(ws_) ? WCMCoreUtils.getSystemSessionProvider() :
+                                                     WCMCoreUtils.getUserSessionProvider();
+    return ((Node)provider.getSession(ws_, repo).getItem(path_)).getNode(nodeName);
+  }
+  
+  public String getUUID() { return uuid_; }
+  
   public VersionNode findVersionNode(String path) throws RepositoryException {
-    if(version_.getPath().equals(path)) return this ;
+    if(path_.equals(path)) return this ;
     VersionNode node = null ;
     Iterator iter = children_.iterator() ;
     while (iter.hasNext()) {
@@ -90,4 +147,5 @@ public class VersionNode {
       }
     }
   }
+  
 }

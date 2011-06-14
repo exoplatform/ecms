@@ -65,7 +65,7 @@
    label.append("</label>") ;
       
 			String show = "Version: " + node.getName() + " " + label.toString() + baseVersion;
-			String dateCreated = node.getVersion().getCreated().getTime().toString() ;
+			String dateCreated = node.getCreatedTime().getTime().toString();
 			String titleLable = displayLabel.toString();
 			println """
 				    <div class="NodeLabel" title="$dateCreated : $titleLable">$show</div>

@@ -35,6 +35,7 @@ import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.config.RepositoryConfigurationException;
 import org.exoplatform.services.jcr.config.RepositoryEntry;
 import org.exoplatform.services.jcr.core.ManageableRepository;
+import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.wcm.webui.Utils;
 import org.exoplatform.wcm.webui.container.UIFormFieldSet;
 import org.exoplatform.wcm.webui.fastcontentcreator.UIFCCConstant;
@@ -77,7 +78,7 @@ import org.exoplatform.webui.form.ext.UIFormInputSetWithAction;
 public class UIFCCConfig extends UIForm implements UISelectable {
 
   /** The saved location node. */
-  private Node savedLocationNode;
+  private NodeLocation savedLocationNode;
 
   /**
    * Instantiates a new uIFCC config.
@@ -352,7 +353,7 @@ public class UIFCCConfig extends UIForm implements UISelectable {
    * @return the saved location node
    */
   public Node getSavedLocationNode() {
-    return savedLocationNode;
+    return NodeLocation.getNodeByLocation(savedLocationNode);
   }
 
   /**
@@ -361,7 +362,7 @@ public class UIFCCConfig extends UIForm implements UISelectable {
    * @param savedLocationNode the new saved location node
    */
   public void setSavedLocationNode(Node savedLocationNode) {
-    this.savedLocationNode = savedLocationNode;
+    this.savedLocationNode = NodeLocation.getNodeLocationByNode(savedLocationNode);
   }
 
   /**

@@ -34,6 +34,7 @@ import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.link.NodeFinder;
 import org.exoplatform.services.cms.taxonomy.TaxonomyService;
 import org.exoplatform.services.ecm.publication.PublicationService;
+import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.wcm.webui.category.config.UICategoryNavigationConfig;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.application.WebuiRequestContext;
@@ -73,10 +74,10 @@ public class UICategoryNavigationTree extends UIContainer {
   private String[]           acceptedNodeTypes   = {};
 
   /** The root tree node. */
-  protected Node             rootTreeNode;
+  protected NodeLocation rootTreeNode;
 
   /** The current node. */
-  protected Node             currentNode;
+  protected NodeLocation currentNode;
 
   /**
    * Checks if is allow publish.
@@ -132,7 +133,7 @@ public class UICategoryNavigationTree extends UIContainer {
    * @return the root tree node
    */
   public Node getRootTreeNode() {
-    return rootTreeNode;
+    return NodeLocation.getNodeByLocation(rootTreeNode);
   }
 
   /**
@@ -143,8 +144,8 @@ public class UICategoryNavigationTree extends UIContainer {
    * @throws Exception the exception
    */
   public final void setRootTreeNode(Node node) throws Exception {
-    this.rootTreeNode = node;
-    this.currentNode = node;
+    this.rootTreeNode = NodeLocation.getNodeLocationByNode(node);
+    this.currentNode = NodeLocation.getNodeLocationByNode(node);
   }
 
   /**
@@ -153,7 +154,7 @@ public class UICategoryNavigationTree extends UIContainer {
    * @return the current node
    */
   public Node getCurrentNode() {
-    return currentNode;
+    return NodeLocation.getNodeByLocation(currentNode);
   }
 
   /**
@@ -162,7 +163,7 @@ public class UICategoryNavigationTree extends UIContainer {
    * @param currentNode the new current node
    */
   public void setCurrentNode(Node currentNode) {
-    this.currentNode = currentNode;
+    this.currentNode = NodeLocation.getNodeLocationByNode(currentNode);
   }
 
   /**
@@ -217,7 +218,7 @@ public class UICategoryNavigationTree extends UIContainer {
     String categoryPath = parameters.substring(parameters.indexOf("/") + 1);
     if (preferenceTreeName.equals(categoryPath)) categoryPath = "";
     try {
-      currentNode = treeNode.getNode(categoryPath);
+      currentNode = NodeLocation.getNodeLocationByNode(treeNode.getNode(categoryPath));
     } catch (Exception e) {}
     super.processRender(context);
   }
@@ -231,7 +232,7 @@ public class UICategoryNavigationTree extends UIContainer {
     NodeIterator sibbling = null;
     NodeIterator children = null;
     UICategoryNavigationTreeBase tree = getChild(UICategoryNavigationTreeBase.class);
-    Node selectedNode = currentNode;
+    Node selectedNode = NodeLocation.getNodeByLocation(currentNode);
     tree.setSelected(selectedNode);
     if (selectedNode == null) {
       return;
@@ -338,7 +339,7 @@ public class UICategoryNavigationTree extends UIContainer {
         path = path.substring(rootPath.length());
       if (path.startsWith("/"))
         path = path.substring(1);
-      currentNode = nodeFinder_.getNode(rootTreeNode, path);
+      currentNode = NodeLocation.getNodeLocationByNode(nodeFinder_.getNode(NodeLocation.getNodeByLocation(rootTreeNode), path));
     }
   }
 

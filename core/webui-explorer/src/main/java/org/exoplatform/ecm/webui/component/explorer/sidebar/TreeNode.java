@@ -22,6 +22,8 @@ import java.util.List;
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 
+import org.exoplatform.services.wcm.core.NodeLocation;
+
 /**
  * Created by The eXo Platform SARL
  * Author : Tran The Trong
@@ -33,7 +35,8 @@ public class TreeNode {
   //TODO Need use this class for BC TreeNode
   private boolean isExpanded_ ;
   private String path_;
-  private Node node_ ;
+  private NodeLocation node_ ;
+  private String name_;
   private List<TreeNode> children_ = new ArrayList<TreeNode>() ;
 
   public TreeNode(Node node) throws RepositoryException {
@@ -41,7 +44,8 @@ public class TreeNode {
   }
 
   private TreeNode(Node node, String path) {
-    node_ = node ;
+    node_ = NodeLocation.getNodeLocationByNode(node);
+    name_ = getName(node);
     isExpanded_ = false ;
     path_ = path;
   }
@@ -50,26 +54,28 @@ public class TreeNode {
   public void setExpanded(boolean isExpanded) { isExpanded_ = isExpanded; }
 
   public String getName() throws RepositoryException {
-    return getName(node_);
+    return name_;
   }
 
-  private String getName(Node node) throws RepositoryException {
+  private String getName(Node node) {
     StringBuilder buffer = new StringBuilder(128);
-    buffer.append(node.getName());
-    int index = node.getIndex();
-    if (index > 1) {
-      buffer.append('[');
-      buffer.append(index);
-      buffer.append(']');
-    }
+    try {
+      buffer.append(node.getName());
+      int index = node.getIndex();
+      if (index > 1) {
+        buffer.append('[');
+        buffer.append(index);
+        buffer.append(']');
+      }
+    } catch (RepositoryException e) {}
     return buffer.toString();
   }
 
   public String getPath() { return path_; }
   public String getNodePath() throws RepositoryException { return node_.getPath(); }
 
-  public Node getNode() { return node_ ; }
-  public void setNode(Node node) { node_ = node ; }
+  public Node getNode() { return NodeLocation.getNodeByLocation(node_); }
+  public void setNode(Node node) { node_ = NodeLocation.getNodeLocationByNode(node); }
 
   public List<TreeNode> getChildren() { return children_ ; }
   public int getChildrenSize() { return children_.size() ; }

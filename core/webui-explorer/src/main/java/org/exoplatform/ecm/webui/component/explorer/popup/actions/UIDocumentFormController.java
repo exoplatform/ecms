@@ -30,6 +30,7 @@ import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.web.application.RequestContext;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -59,7 +60,7 @@ public class UIDocumentFormController extends UIContainer implements UIPopupComp
 
   private String defaultDocument_ ;
   private static String DEFAULT_VALUE = "exo:article" ;
-  private Node currentNode_ ;
+  private NodeLocation currentNode_ ;
   private String repository_ ;
 
   private String OPTION_BLOCK_EXTENSION_TYPE = "org.exoplatform.ecm.dms.UIOptionBlockPanel";
@@ -74,7 +75,9 @@ public class UIDocumentFormController extends UIContainer implements UIPopupComp
     addChild(uiDocumentForm);
   }
 
-  public void setCurrentNode(Node node) { currentNode_ = node ; }
+  public void setCurrentNode(Node node) { 
+    currentNode_ = NodeLocation.getNodeLocationByNode(node); 
+  }
 
   public void setRepository(String repository) { repository_ = repository ; }
 
@@ -90,7 +93,8 @@ public class UIDocumentFormController extends UIContainer implements UIPopupComp
   public List<SelectItemOption<String>> getListFileType() throws Exception {
     List<SelectItemOption<String>> options = new ArrayList<SelectItemOption<String>>();
     TemplateService templateService = getApplicationComponent(TemplateService.class) ;
-    List<String> acceptableContentTypes = templateService.getCreationableContentTypes(currentNode_);
+    List<String> acceptableContentTypes = 
+      templateService.getCreationableContentTypes(NodeLocation.getNodeByLocation(currentNode_));
     if(acceptableContentTypes.size() == 0) return options;
     String userName = Util.getPortalRequestContext().getRemoteUser();
     for(String contentType: acceptableContentTypes) {
@@ -123,7 +127,7 @@ public class UIDocumentFormController extends UIContainer implements UIPopupComp
   public void init() throws Exception {
     getChild(UIDocumentForm.class).setRepositoryName(repository_) ;
     getChild(UIDocumentForm.class).setContentType(defaultDocument_);
-    getChild(UIDocumentForm.class).setWorkspace(currentNode_.getSession().getWorkspace().getName()) ;
+    getChild(UIDocumentForm.class).setWorkspace(currentNode_.getWorkspace()) ;
     getChild(UIDocumentForm.class).setStoredPath(currentNode_.getPath()) ;
     getChild(UIDocumentForm.class).resetProperties();
   }

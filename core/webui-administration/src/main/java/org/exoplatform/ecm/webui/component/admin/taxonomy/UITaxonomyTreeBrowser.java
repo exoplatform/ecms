@@ -26,6 +26,7 @@ import javax.jcr.NodeIterator;
 
 import org.exoplatform.ecm.webui.tree.UINodeTree;
 import org.exoplatform.ecm.webui.utils.PermissionUtil;
+import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIContainer;
@@ -45,8 +46,8 @@ import org.exoplatform.webui.event.EventListener;
 )
 public class UITaxonomyTreeBrowser extends UIContainer {
 
-  private Node currentNode_;
-  private Node rootNode_ = null;
+  private NodeLocation currentNode_;
+  private NodeLocation rootNode_ = null;
   private String rootPath_;
   private String[] acceptedNodeTypes = {};
 
@@ -58,11 +59,13 @@ public class UITaxonomyTreeBrowser extends UIContainer {
 
   public void update() throws Exception {
     UITaxonomyTreeCreateChild uiManager = getParent();
-    rootNode_ = uiManager.getRootNode();
+    rootNode_ = NodeLocation.getNodeLocationByNode(uiManager.getRootNode());
     rootPath_ = rootNode_.getPath();
   }
 
-  public Node getRootNode() throws Exception { return rootNode_;  }
+  public Node getRootNode() { 
+    return NodeLocation.getNodeByLocation(rootNode_);  
+  }
 
   public String[] getAcceptedNodeTypes() {
     return acceptedNodeTypes;
@@ -88,8 +91,8 @@ public class UITaxonomyTreeBrowser extends UIContainer {
     if(rootNode_ == null ) {
       update();
       currentNode_ = rootNode_;
-      children = rootNode_.getNodes();
-      changeNode(rootNode_);
+      children = getRootNode().getNodes();
+      changeNode(getRootNode());
     }
     UINodeTree tree = getChildById("UITaxonomyTreeBrowser");
     Node nodeSelected = getSelectedNode();
@@ -145,12 +148,12 @@ public class UITaxonomyTreeBrowser extends UIContainer {
 
   public void setNodeSelect(String path) throws Exception {
     UITaxonomyTreeCreateChild uiManager = getParent();
-    currentNode_ = uiManager.getNodeByPath(path);
+    currentNode_ = NodeLocation.getNodeLocationByNode(uiManager.getNodeByPath(path));
     if (!rootNode_.getPath().equals("/"))
-      if (rootNode_.getParent().getPath().equals(path))
+      if (getRootNode().getParent().getPath().equals(path))
         currentNode_ = rootNode_;
     uiManager.setSelectedPath(currentNode_.getPath());
-    changeNode(currentNode_);
+    changeNode(NodeLocation.getNodeByLocation(currentNode_));
   }
 
   public void changeNode(Node nodeSelected) throws Exception {
@@ -178,8 +181,8 @@ public class UITaxonomyTreeBrowser extends UIContainer {
   }
 
   public Node getSelectedNode() {
-    if(currentNode_ == null) return rootNode_;
-    return currentNode_;
+    if(currentNode_ == null) return getRootNode();
+    return NodeLocation.getNodeByLocation(currentNode_);
   }
 
   public static class ChangeNodeActionListener extends EventListener<UITaxonomyTreeBrowser> {

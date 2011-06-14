@@ -65,6 +65,7 @@ import org.exoplatform.services.jcr.impl.core.value.ValueFactoryImpl;
 import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.upload.UploadResource;
 import org.exoplatform.upload.UploadService;
 import org.exoplatform.web.application.ApplicationMessage;
@@ -141,7 +142,7 @@ public class UIUploadForm extends UIForm implements UIPopupComponent, UISelectab
 
   private int numberUploadFile = 1;
   private HashMap<String, List<String>> mapTaxonomies = new HashMap<String, List<String>>();
-  private List<Node> listUploadedNodes = new ArrayList<Node>();
+  private List<NodeLocation> listUploadedNodes = new ArrayList<NodeLocation>();
   private boolean taxonomyMandatory = false;
 
   public UIUploadForm() throws Exception {
@@ -386,8 +387,8 @@ public class UIUploadForm extends UIForm implements UIPopupComponent, UISelectab
           }
           if(uiFormUploadInput.getUploadResource() == null) {
             if ((listUploadedNodes != null) && (listUploadedNodes.size() > 0)) {
-              for (Node uploadedNode : listUploadedNodes) {
-                uploadedNode.remove();
+              for (Object uploadedNode : NodeLocation.getNodeListByLocationList(listUploadedNodes)) {
+                ((Node)uploadedNode).remove();
               }
               uiExplorer.getCurrentNode().save();
               listUploadedNodes.clear();
@@ -402,8 +403,8 @@ public class UIUploadForm extends UIForm implements UIPopupComponent, UISelectab
 
           if(fileName == null || fileName.length() == 0) {
             if ((listUploadedNodes != null) && (listUploadedNodes.size() > 0)) {
-              for (Node uploadedNode : listUploadedNodes) {
-                uploadedNode.remove();
+              for (Object uploadedNode : NodeLocation.getNodeListByLocationList(listUploadedNodes)) {
+                ((Node)uploadedNode).remove();
               }
               uiExplorer.getCurrentNode().save();
               listUploadedNodes.clear();
@@ -632,7 +633,7 @@ public class UIUploadForm extends UIForm implements UIPopupComponent, UISelectab
           String iconUpload = Utils.getNodeTypeIcon(uploadedNode, "16x16Icon").replaceAll("nt_file16x16Icon ", "");
           String[] arrValues = {iconUpload, Text.unescapeIllegalJcrChars(fileName),
               Text.unescapeIllegalJcrChars(name), fileSize, mimeType, uploadedNode.getPath()};
-          listUploadedNodes.add(uploadedNode);
+          listUploadedNodes.add(NodeLocation.getNodeLocationByNode(uploadedNode));
           listArrValues.add(arrValues);
           inputStream.close();
         }

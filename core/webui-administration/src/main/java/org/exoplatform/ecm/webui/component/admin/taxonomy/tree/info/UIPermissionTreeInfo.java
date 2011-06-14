@@ -37,6 +37,7 @@ import org.exoplatform.services.jcr.access.AccessControlEntry;
 import org.exoplatform.services.jcr.access.PermissionType;
 import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.security.IdentityConstants;
+import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -70,7 +71,7 @@ public class UIPermissionTreeInfo extends UIContainer {
 
   private static String[] PERMISSION_ACTION     = { "Edit", "Delete" };
 
-  private Node            currentNode           = null;
+  private NodeLocation            currentNode           = null;
 
   private int             sizeOfListPermission  = 0;
 
@@ -92,7 +93,7 @@ public class UIPermissionTreeInfo extends UIContainer {
     int iSystemOwner = 0;
     if (currentNode != null) {
       permBeans = new ArrayList<PermissionBean>();
-      ExtendedNode node = (ExtendedNode) currentNode;
+      ExtendedNode node = (ExtendedNode) getCurrentNode();
       List permsList = node.getACL().getPermissionEntries();
       Iterator perIter = permsList.iterator();
       while (perIter.hasNext()) {
@@ -253,11 +254,11 @@ public class UIPermissionTreeInfo extends UIContainer {
   }
 
   public Node getCurrentNode() {
-    return currentNode;
+    return NodeLocation.getNodeByLocation(currentNode);
   }
 
   public void setCurrentNode(Node currentNode) {
-    this.currentNode = currentNode;
+    this.currentNode = NodeLocation.getNodeLocationByNode(currentNode);
   }
 
   public int getSizeOfListPermission() {

@@ -23,6 +23,7 @@ import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.popup.actions.UILanguageTypeForm;
 import org.exoplatform.ecm.webui.component.explorer.popup.actions.UIMultiLanguageForm;
 import org.exoplatform.ecm.webui.component.explorer.popup.actions.UIMultiLanguageManager;
+import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIContainer;
@@ -44,7 +45,7 @@ import org.exoplatform.webui.event.EventListener;
 )
 public class UISingleUploadContainer extends UIContainer {
 
-  private Node uploadedNode_ ;
+  private NodeLocation uploadedNode_ ;
 
   public UISingleUploadContainer() throws Exception {
     addChild(UISingleUploadContent.class, null, null) ;
@@ -53,19 +54,24 @@ public class UISingleUploadContainer extends UIContainer {
   public String[] getActions() {return new String[] {"AddMetadata","Close"} ;}
 
   public Node getEditNode(String nodeType) throws Exception {
+    Node uploadNode = getUploadedNode();
     try {
-      Item primaryItem = uploadedNode_.getPrimaryItem() ;
-      if (primaryItem == null || !primaryItem.isNode()) return uploadedNode_ ;
+      Item primaryItem = uploadNode.getPrimaryItem() ;
+      if (primaryItem == null || !primaryItem.isNode()) return uploadNode ;
       if (primaryItem != null && primaryItem.isNode()) {
         Node primaryNode = (Node) primaryItem ;
         if (primaryNode.isNodeType(nodeType)) return primaryNode ;
       }
     } catch(Exception e) { }
-    return uploadedNode_ ;
+    return uploadNode ;
   }
 
-  public void setUploadedNode(Node node) throws Exception { uploadedNode_ = node ; }
-  public Node getUploadedNode() { return uploadedNode_ ; }
+  public void setUploadedNode(Node node) throws Exception { 
+    uploadedNode_ = NodeLocation.getNodeLocationByNode(node); 
+  }
+  public Node getUploadedNode() { 
+    return NodeLocation.getNodeByLocation(uploadedNode_); 
+  }
 
   static public class CloseActionListener extends EventListener<UISingleUploadContainer> {
     public void execute(Event<UISingleUploadContainer> event) throws Exception {

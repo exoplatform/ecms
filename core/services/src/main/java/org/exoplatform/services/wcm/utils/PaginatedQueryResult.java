@@ -26,6 +26,7 @@ import javax.jcr.query.Row;
 import javax.jcr.query.RowIterator;
 
 import org.exoplatform.services.jcr.impl.core.query.lucene.TwoWayRangeIterator;
+import org.exoplatform.services.wcm.core.NodeLocation;
 
 /**
  * Created by The eXo Platform SAS
@@ -111,8 +112,8 @@ public class PaginatedQueryResult extends PaginatedNodeIterator {
    */
   public static class ResultNode {
 
-    /** The node. */
-    private Node node;
+    /** The node location. */
+    private NodeLocation node;
 
     /** The score. */
     private float score;
@@ -132,7 +133,7 @@ public class PaginatedQueryResult extends PaginatedNodeIterator {
      * @throws RepositoryException the repository exception
      */
     public ResultNode(Node node, Row row) throws RepositoryException{
-      this.node = node;
+      this.node = NodeLocation.getNodeLocationByNode(node);
       Value excerpt = row.getValue("rep:excerpt(.)");
       this.excerpt = excerpt == null ? "" : excerpt.getString();
       this.spellSuggestion = row.getValue("rep:spellcheck()").getString();
@@ -144,14 +145,15 @@ public class PaginatedQueryResult extends PaginatedNodeIterator {
      *
      * @return the node
      */
-    public Node getNode() { return node; }
+    public Node getNode() { return NodeLocation.getNodeByLocation(node); }
 
     /**
      * Sets the node.
      *
      * @param node the new node
      */
-    public void setNode(Node node) { this.node = node; }
+    public void setNode(Node node) { 
+      this.node = NodeLocation.getNodeLocationByNode(node); }
 
     /**
      * Gets the score.

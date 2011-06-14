@@ -1,5 +1,5 @@
 <%	
-	import org.exoplatform.services.ecm.publication.plugins.webui.VersionNode;
+	import org.exoplatform.ecm.jcr.model.VersionNode;
 
 	VersionNode rootNode = uicomponent.getRootVersionNode() ;  
   public void writeNodes(List nodes, int level) {

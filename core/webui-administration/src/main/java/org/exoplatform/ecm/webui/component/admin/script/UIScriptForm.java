@@ -317,8 +317,8 @@ public class UIScriptForm extends UIForm implements UIPopupComponent {
       String version = uiForm.getUIFormSelectBox(FIELD_SELECT_VERSION).getValue() ;
       String path = node.getVersionHistory().getVersion(version).getPath() ;
       VersionNode versionNode = uiForm.getRootVersion(node).findVersionNode(path) ;
-      Node frozenNode = versionNode.getVersion().getNode(Utils.JCR_FROZEN) ;
-      String scriptContent = frozenNode.getProperty(Utils.JCR_DATA).getString() ;
+      Node frozenNode = versionNode.getNode(Utils.JCR_FROZEN) ;
+      String scriptContent = frozenNode.getNode(Utils.JCR_CONTENT).getProperty(Utils.JCR_DATA).getString() ;
       uiForm.getUIFormTextAreaInput(FIELD_SCRIPT_CONTENT).setValue(scriptContent) ;
       event.getRequestContext().addUIComponentToUpdateByAjax(uiForm.getAncestorOfType(UIPopupContainer.class)) ;
     }

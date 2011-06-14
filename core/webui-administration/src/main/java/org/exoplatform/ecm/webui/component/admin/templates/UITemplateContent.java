@@ -345,7 +345,7 @@ public class UITemplateContent extends UIForm implements UISelectable {
       String version = uiForm.getUIFormSelectBox(FIELD_SELECT_VERSION).getValue() ;
       String path = node.getVersionHistory().getVersion(version).getPath() ;
       VersionNode versionNode = uiForm.getRootVersion(node).findVersionNode(path) ;
-      Node frozenNode = versionNode.getVersion().getNode(Utils.JCR_FROZEN) ;
+      Node frozenNode = versionNode.getNode(Utils.JCR_FROZEN) ;
       String content = templateService.getTemplate(frozenNode);
       uiForm.getUIFormTextAreaInput(FIELD_CONTENT).setValue(content) ;
       if (frozenNode.hasProperty(Utils.EXO_ROLES)) {

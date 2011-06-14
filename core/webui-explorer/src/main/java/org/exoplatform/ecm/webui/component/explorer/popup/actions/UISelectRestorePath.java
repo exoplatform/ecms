@@ -37,6 +37,7 @@ import org.exoplatform.services.jcr.config.RepositoryConfigurationException;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIApplication;
@@ -82,15 +83,18 @@ public class UISelectRestorePath extends UIForm implements UIPopupComponent, UIS
 
   private final static Log   LOG                         = ExoLogger.getLogger(UISelectRestorePath.class);
 
-  private Node               trashHomeNode;
+  private NodeLocation               trashHomeNode;
 
   private String             repository;
 
   private String             srcPath;
 
-  public Node getTrashHomeNode() { return trashHomeNode;}
+  public Node getTrashHomeNode() { 
+    return NodeLocation.getNodeByLocation(trashHomeNode);
+  }
+  
   public void setTrashHomeNode(Node trashHomeNode) {
-    this.trashHomeNode = trashHomeNode;
+    this.trashHomeNode = NodeLocation.getNodeLocationByNode(trashHomeNode);
   }
 
   public String getRepository() { return repository; }

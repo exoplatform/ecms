@@ -48,10 +48,12 @@ import org.exoplatform.webui.event.EventListener;
 )
 
 public class UICategoriesSelectPanel extends UIContainer{
-  private Node parentNode;
+  private NodeLocation parentNode;
   private UIPageIterator uiPageIterator_;
 
-  public void setParentNode(Node node) { this.parentNode = node; }
+  public void setParentNode(Node node) { 
+    this.parentNode = NodeLocation.getNodeLocationByNode(node); 
+  }
 
   public UICategoriesSelectPanel() throws Exception {
     uiPageIterator_ = addChild(UIPageIterator.class, null, "UICategoriesSelect");
@@ -73,7 +75,7 @@ public class UICategoriesSelectPanel extends UIContainer{
   public List<Node> getListSelectableNodes() throws Exception {
     List<Node> list = new ArrayList<Node>();
     if(parentNode == null) return list;
-    for(NodeIterator iterator = parentNode.getNodes();iterator.hasNext();) {
+    for(NodeIterator iterator = getParentNode().getNodes();iterator.hasNext();) {
       Node child = iterator.nextNode();
       if(child.isNodeType("exo:hiddenable")) continue;
       list.add(child);
@@ -97,6 +99,6 @@ public class UICategoriesSelectPanel extends UIContainer{
   }
 
   public Node getParentNode() {
-    return parentNode;
+    return NodeLocation.getNodeByLocation(parentNode);
   }
 }

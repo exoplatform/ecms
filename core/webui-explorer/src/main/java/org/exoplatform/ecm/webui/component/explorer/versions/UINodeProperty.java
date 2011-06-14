@@ -64,8 +64,7 @@ public class UINodeProperty extends UIForm{
     NodeType ntVersionHistory = nodeTypeManager.getNodeType("nt:versionHistory") ;
     NodeType mixVersionable = nodeTypeManager.getNodeType("mix:versionable") ;
     UIVersionInfo uiVersionInfo = getAncestorOfType(UIVersionInfo.class) ;
-    Version version_ = uiVersionInfo.getCurrentVersionNode().getVersion() ;
-    Node frozenNode = version_.getNode("jcr:frozenNode") ;
+    Node frozenNode = uiVersionInfo.getCurrentVersionNode().getNode("jcr:frozenNode") ;
     for(PropertyIterator propertyIter = frozenNode.getProperties(); propertyIter.hasNext() ;) {
       Property property = propertyIter.nextProperty() ;
       boolean isDefinition = false ;

@@ -28,6 +28,7 @@ import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.newsletter.NewsletterCategoryConfig;
 import org.exoplatform.services.wcm.newsletter.NewsletterConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
@@ -50,7 +51,7 @@ public class NewsletterTemplateHandler {
   private String workspace;
 
   /** The templates. */
-  private List<Node> templates = null;
+  private List<NodeLocation> templates = null;
 
   /**
    * Instantiates a new newsletter template handler.
@@ -108,7 +109,7 @@ public class NewsletterTemplateHandler {
           templates.add(categoryTemplates.nextNode());
         }
       }
-      this.templates = templates;
+      this.templates = NodeLocation.getLocationsByNodeList(templates);
       return templates;
     } catch (Exception e) {
       log.error("Get templates of category " + categoryConfig + " failed because of ", e);
@@ -125,18 +126,20 @@ public class NewsletterTemplateHandler {
    *
    * @return the template
    */
+  @SuppressWarnings("unchecked")
   public Node getTemplate(SessionProvider sessionProvider,
                           String portalName,
                           NewsletterCategoryConfig categoryConfig,
                           String templateName) {
     log.info("Trying to get template " + templateName);
     try {
-      if (templates == null || templates.size() == 0)
-        templates = getTemplates(sessionProvider, portalName, categoryConfig);
-      if (templateName == null && templates.size() > 0) return templates.get(0);
-      for (Node template : templates) {
-        if (templateName.equals(template.getName())) {
-          return template;
+      if (templates == null || templates.size() == 0) 
+        templates = NodeLocation.getLocationsByNodeList(getTemplates(sessionProvider, portalName, categoryConfig));
+      if (templateName == null && templates.size() > 0) 
+        return NodeLocation.getNodeByLocation(templates.get(0));
+      for (NodeLocation template : templates) {
+        if (templateName.equals(NodeLocation.getNodeByLocation(template).getName())) {
+          return NodeLocation.getNodeByLocation(template);
         }
       }
     } catch (Exception e) {

@@ -25,6 +25,7 @@ import javax.jcr.Session;
 
 import org.exoplatform.ecm.webui.component.explorer.UIDocumentInfo;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
+import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
@@ -59,8 +60,8 @@ public class UIResourceForm extends UIForm {
   final static public String FIElD_TEXTTOMODIFY = "textToModify" ;
   final static public String FIElD_FILETOUPLOAD = "fileToUpload" ;
 
-  private Node contentNode_ ;
-  private Property mime_ ;
+  private NodeLocation contentNode_ ;
+  private boolean isText_;
   private Session session_ ;
 
   public UIResourceForm() throws Exception {
@@ -70,11 +71,11 @@ public class UIResourceForm extends UIForm {
 
   public void setContentNode(Node node, Session session) throws RepositoryException {
     session_ = session ;
-    contentNode_ = node ;
-    mime_ = node.getProperty("jcr:mimeType") ;
+    contentNode_ = NodeLocation.getNodeLocationByNode(node);
+    isText_ = node.getProperty("jcr:mimeType").getString().startsWith("text");
     String name = node.getParent().getName() ;
     getUIStringInput(FIElD_NAME).setValue(name) ;
-    if(mime_.getString().startsWith("text")) {
+    if(isText_) {
       String contentText = node.getProperty("jcr:data").getString() ;
       addUIFormInput(new UIFormTextAreaInput(FIElD_TEXTTOMODIFY, FIElD_TEXTTOMODIFY, contentText)) ;
     }else {
@@ -85,21 +86,24 @@ public class UIResourceForm extends UIForm {
     }
   }
 
-  public boolean isText() throws RepositoryException {return (mime_.getString().startsWith("text")) ;}
+  public boolean isText() throws RepositoryException {
+    return isText_;
+  }
 
   static  public class SaveActionListener extends EventListener<UIResourceForm> {
     public void execute(Event<UIResourceForm> event) throws Exception {
       UIResourceForm uiResourceForm = event.getSource() ;
-      Property prop = uiResourceForm.contentNode_.getProperty("jcr:mimeType") ;
+      Node contentNode = NodeLocation.getNodeByLocation(uiResourceForm.contentNode_);
+      Property prop = contentNode.getProperty("jcr:mimeType") ;
       UIJCRExplorer uiJCRExplorer = uiResourceForm.getAncestorOfType(UIJCRExplorer.class) ;
       if(prop.getString().startsWith("text")) {
         String text = uiResourceForm.getUIFormTextAreaInput(FIElD_TEXTTOMODIFY).getValue() ;
-        uiResourceForm.contentNode_.setProperty("jcr:data", text) ;
+        contentNode.setProperty("jcr:data", text) ;
       }else {
         UIFormUploadInput  fileUpload =
           (UIFormUploadInput)uiResourceForm.getUIInput(FIElD_FILETOUPLOAD) ;
         InputStream content =  fileUpload.getUploadDataAsStream() ;
-        uiResourceForm.contentNode_.setProperty("jcr:data", content) ;
+        contentNode.setProperty("jcr:data", content) ;
       }
       if(uiResourceForm.session_ != null) uiResourceForm.session_.save() ;
       else uiJCRExplorer.getSession().save() ;

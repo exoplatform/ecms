@@ -39,6 +39,7 @@ import org.exoplatform.services.jcr.access.PermissionType;
 import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.security.IdentityConstants;
+import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -76,7 +77,7 @@ public class UIPermissionInfo extends UIContainer {
     "setProperty", "remove"} ;
   private static String[] PERMISSION_ACTION = {"Edit", "Delete"} ;
 
-  private Node currentNode = null;
+  private NodeLocation currentNode = null;
   private int sizeOfListPermission = 0;
   public UIPermissionInfo() throws Exception {
     UIGrid uiGrid = createUIComponent(UIGrid.class, null, "PermissionInfo") ;
@@ -89,7 +90,7 @@ public class UIPermissionInfo extends UIContainer {
   }
   public void updateGrid() throws Exception {
     List<PermissionBean> permBeans = new ArrayList<PermissionBean>();
-    ExtendedNode node = (ExtendedNode) currentNode;
+    ExtendedNode node = (ExtendedNode) getCurrentNode();
     List permsList = node.getACL().getPermissionEntries() ;
     Map<String, List<String>> permsMap = new HashMap<String, List<String>>() ;
     Iterator perIter = permsList.iterator() ;
@@ -252,10 +253,10 @@ public class UIPermissionInfo extends UIContainer {
   }
 
   public Node getCurrentNode() {
-    return currentNode;
+    return NodeLocation.getNodeByLocation(currentNode);
   }
   public void setCurrentNode(Node currentNode) {
-    this.currentNode = currentNode;
+    this.currentNode = NodeLocation.getNodeLocationByNode(currentNode);
   }
   public int getSizeOfListPermission() {
     return sizeOfListPermission;

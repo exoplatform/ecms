@@ -28,6 +28,7 @@ import org.exoplatform.webui.core.UIPopupComponent;
 import org.exoplatform.webui.core.UIPopupContainer;
 import org.exoplatform.services.jcr.impl.storage.JCRInvalidItemStateException;
 import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -64,7 +65,7 @@ public class UIVersionInfo extends UIContainer implements UIPopupComponent {
 
   protected VersionNode rootVersion_ ;
   protected VersionNode curentVersion_;
-  protected Node node_ ;
+  protected NodeLocation node_ ;
   private static final Log LOG  = ExoLogger.getLogger("explorer.UIVersionInfo");
   public UIVersionInfo() throws Exception {
     addChild(UILabelForm.class, null, null).setRendered(false);
@@ -74,12 +75,13 @@ public class UIVersionInfo extends UIContainer implements UIPopupComponent {
   }
 
   public String[] getVersionLabels(VersionNode version) throws Exception {
-    VersionHistory vH = node_.getVersionHistory();
-    return vH.getVersionLabels(version.getVersion());
+    VersionHistory vH = NodeLocation.getNodeByLocation(node_).getVersionHistory();
+    Version versionNode = vH.getVersion(version.getName());
+    return vH.getVersionLabels(versionNode);
   }
 
   public boolean isBaseVersion(VersionNode versionNode) throws Exception {
-    if( node_.getBaseVersion().getName().equals(versionNode.getVersion().getName())) return true ;
+    if (NodeLocation.getNodeByLocation(node_).getBaseVersion().getName().equals(versionNode.getName())) return true ;
     return false ;
   }
 
@@ -87,8 +89,8 @@ public class UIVersionInfo extends UIContainer implements UIPopupComponent {
 
   public void activate() throws Exception {
     UIJCRExplorer uiExplorer = getAncestorOfType(UIJCRExplorer.class) ;
-    node_ = uiExplorer.getCurrentNode() ;
-    rootVersion_ = new VersionNode(node_.getVersionHistory().getRootVersion(), uiExplorer.getSession()) ;
+    node_ = NodeLocation.getNodeLocationByNode(uiExplorer.getCurrentNode());
+    rootVersion_ = new VersionNode(NodeLocation.getNodeByLocation(node_).getVersionHistory().getRootVersion(), uiExplorer.getSession()) ;
     curentVersion_ = rootVersion_ ;
     getChild(UIViewVersion.class).update() ;
   }
@@ -96,7 +98,9 @@ public class UIVersionInfo extends UIContainer implements UIPopupComponent {
   public void deActivate() throws Exception {}
 
   public VersionNode getCurrentVersionNode() { return curentVersion_ ;}
-  public Node getCurrentNode() { return node_ ; }
+  public Node getCurrentNode() { 
+    return NodeLocation.getNodeByLocation(node_);
+  }
 
   public boolean isViewVersion() {
     UIViewVersion uiViewVersion = getChild(UIViewVersion.class);
@@ -113,8 +117,7 @@ public class UIVersionInfo extends UIContainer implements UIPopupComponent {
       String objectId = event.getRequestContext().getRequestParameter(OBJECTID) ;
       uiVersionInfo.curentVersion_  = uiVersionInfo.rootVersion_.findVersionNode(objectId) ;
       UIViewVersion uiViewVersion = uiVersionInfo.getChild(UIViewVersion.class) ;
-      Version version_ = uiVersionInfo.curentVersion_.getVersion() ;
-      Node frozenNode = version_.getNode("jcr:frozenNode") ;
+      Node frozenNode = uiVersionInfo.curentVersion_.getNode("jcr:frozenNode") ;
       uiViewVersion.setNode(frozenNode) ;
       if(uiViewVersion.getTemplate() == null || uiViewVersion.getTemplate().trim().length() == 0) {
         UIApplication uiApp = uiVersionInfo.getAncestorOfType(UIApplication.class) ;
@@ -163,9 +166,9 @@ public class UIVersionInfo extends UIContainer implements UIPopupComponent {
       String objectId = event.getRequestContext().getRequestParameter(OBJECTID) ;
       uiVersionInfo.curentVersion_  = uiVersionInfo.rootVersion_.findVersionNode(objectId) ;
       UIApplication uiApp = uiVersionInfo.getAncestorOfType(UIApplication.class) ;
-      uiExplorer.addLockToken(uiVersionInfo.node_);
+      uiExplorer.addLockToken(NodeLocation.getNodeByLocation(uiVersionInfo.node_));
       try {
-        uiVersionInfo.node_.restore(uiVersionInfo.curentVersion_.getVersion(), true);
+        NodeLocation.getNodeByLocation(uiVersionInfo.node_).restore(uiVersionInfo.curentVersion_.getName(), true);
       } catch(JCRInvalidItemStateException invalid) {
         uiApp.addMessage(new ApplicationMessage("UIVersionInfo.msg.invalid-item-state", null,
             ApplicationMessage.WARNING)) ;
@@ -235,7 +238,8 @@ public class UIVersionInfo extends UIContainer implements UIPopupComponent {
       String objectId = event.getRequestContext().getRequestParameter(OBJECTID) ;
       VersionNode node = uiVersionInfo.rootVersion_.findVersionNode(objectId) ;
       UIDiff uiDiff = uiVersionInfo.getChild(UIDiff.class) ;
-      uiDiff.setVersions(uiVersionInfo.getCurrentNode().getBaseVersion(), node.getVersion()) ;
+      uiDiff.setVersions(uiVersionInfo.getCurrentNode().getBaseVersion(), 
+                         node.getName(), node.getCreatedTime(), node.getWs(), node.getPath());
       uiDiff.setRendered(true) ;
       event.getRequestContext().addUIComponentToUpdateByAjax(uiVersionInfo) ;
     }

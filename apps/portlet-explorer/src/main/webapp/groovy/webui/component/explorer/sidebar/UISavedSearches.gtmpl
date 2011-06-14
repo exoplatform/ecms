@@ -1,11 +1,10 @@
 <%
-	import javax.jcr.query.Query;
-  import javax.jcr.Node;
   import org.exoplatform.ecm.webui.utils.Utils ;
+  import org.exoplatform.ecm.webui.component.explorer.sidebar.UISavedSearches.QueryData;
+  import org.exoplatform.ecm.webui.component.explorer.sidebar.UISavedSearches.NodeData;
   
   def rcontext = _ctx.getRequestContext() ;
-	def hasPrivateQueries = uicomponent.hasQueries() ;
-  def hasSharedQueries = uicomponent.hasSharedQueries() ;
+	def queryListData = uicomponent.queryList();
   rcontext.getJavascriptManager().addOnLoadJavascript("eXo.ecm.UIListView.setHeight()");
 %>
 <div class="SideBarContent">
@@ -21,19 +20,19 @@
 		</div>
 	</div>
   <div class="SideContent">
-    <%if(!hasPrivateQueries && !hasSharedQueries) { %>
+    <%if(queryListData.size() == 0) { %>
         <div><span>No query found</span></div>
     <%} else {
-        for(object in uicomponent.queryList()) {
+        for(object in queryListData) {
           String selectedCss;
-          if(object instanceof Query) {
+          if(object instanceof QueryData) {
             def storedQueryPath = object.getStoredQueryPath() ;
 	          def queryName =  storedQueryPath.substring(storedQueryPath.lastIndexOf("/") + 1) ;
 	          selectedCss = (storedQueryPath.equals(uicomponent.getQueryPath()) ? "SelectedNode" : "");
 			  		println("<a class=\"$selectedCss\" href=\"" + uicomponent.event("Execute", Utils.formatNodeName(storedQueryPath)) + "\" title=\"" + _ctx.appRes("UISavedQuery.tooltip.Execute") + "\">");			  			  
 	          println("  <div class=\"ArrowSidContent TextSiderContent\">" + queryName +"</div>");			  			  
 	          println("</a>");
-          } else if(object instanceof Node) {			
+          } else if(object instanceof NodeData) {			
 						selectedCss = object.getPath().equals(uicomponent.getQueryPath()) ? "SelectedNode" : "";	          
             println("<a class=\"$selectedCss\" href=\"" + uicomponent.event("Execute", object.getPath()) + "\" title=\"" + _ctx.appRes("UISavedQuery.tooltip.Execute") + "\">");						
 			  		println("<div class=\"ArrowSidContent TextSiderContent\">" +object.getName()+ "</div>");			  

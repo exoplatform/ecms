@@ -19,7 +19,9 @@ package org.exoplatform.services.ecm.publication.plugins.webui;
 import javax.jcr.Node;
 import javax.jcr.Value;
 
+import org.exoplatform.ecm.jcr.model.VersionNode;
 import org.exoplatform.services.ecm.publication.plugins.staticdirect.StaticAndDirectPublicationPlugin;
+import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIContainer;
@@ -42,7 +44,7 @@ public abstract class UIVersionTreeList extends UIContainer {
 
   protected VersionNode rootVersion_ ;
   protected VersionNode curentVersion_;
-  protected Node node_ ;
+  protected NodeLocation node_ ;
   protected boolean isSelectedBaseVersion_ = true ;
 
   public UIVersionTreeList() throws Exception {
@@ -52,16 +54,18 @@ public abstract class UIVersionTreeList extends UIContainer {
 
   public VersionNode getCurrentVersionNode() { return curentVersion_ ; }
 
-  public Node getCurrentNode() { return node_ ; }
+  public Node getCurrentNode() { 
+    return NodeLocation.getNodeByLocation(node_); 
+  }
 
   public void initVersion(Node currentNode) throws Exception {
-    node_ = currentNode;
-    rootVersion_ = new VersionNode(node_.getVersionHistory().getRootVersion());
-    curentVersion_ = new VersionNode(node_.getBaseVersion());
+    node_ = NodeLocation.getNodeLocationByNode(currentNode);
+    rootVersion_ = new VersionNode(currentNode.getVersionHistory().getRootVersion());
+    curentVersion_ = new VersionNode(currentNode.getBaseVersion());
   }
 
   public boolean isBaseVersion(VersionNode versionNode) throws Exception {
-    if (node_.getBaseVersion().getName().equals(versionNode.getVersion().getName())) return true ;
+    if (NodeLocation.getNodeByLocation(node_).getBaseVersion().getName().equals(versionNode.getName())) return true;
     return false ;
   }
 
@@ -72,11 +76,12 @@ public abstract class UIVersionTreeList extends UIContainer {
   }
 
   public boolean isPublised(VersionNode versionNode) throws Exception {
-    Value[] publicationStates =  node_.getProperty(StaticAndDirectPublicationPlugin.VERSIONS_PUBLICATION_STATES).getValues() ;
+    Value[] publicationStates =  
+      NodeLocation.getNodeByLocation(node_).getProperty(StaticAndDirectPublicationPlugin.VERSIONS_PUBLICATION_STATES).getValues() ;
     for(Value value : publicationStates) {
       String[] arrPublicationState = value.getString().split(",") ;
       for(int i=0; i < arrPublicationState.length; i++) {
-        if(arrPublicationState[0].equals(versionNode.getVersion().getUUID())) {
+        if(arrPublicationState[0].equals(versionNode.getUUID())) {
           if(arrPublicationState[1].equals(StaticAndDirectPublicationPlugin.PUBLISHED)) return true ;
 
         }

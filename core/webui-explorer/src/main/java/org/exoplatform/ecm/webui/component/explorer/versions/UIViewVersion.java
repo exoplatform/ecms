@@ -50,6 +50,7 @@ import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.web.application.Parameter;
 import org.exoplatform.webui.application.WebuiRequestContext;
@@ -84,8 +85,8 @@ import org.exoplatform.webui.ext.UIExtensionManager;
 )
 
 public class UIViewVersion extends UIContainer implements NodePresentation {
-  private Node node_ ;
-  protected Node originalNode_ ;
+  private NodeLocation node_ ;
+  protected NodeLocation originalNode_ ;
   private String language_ ;
   private static final Log LOG  = ExoLogger.getLogger("explorer.UIViewVersion");
   final private static String COMMENT_COMPONENT = "Comment".intern();
@@ -100,7 +101,7 @@ public class UIViewVersion extends UIContainer implements NodePresentation {
     String userName = Util.getPortalRequestContext().getRemoteUser() ;
     try {
       Node node = getAncestorOfType(UIJCRExplorer.class).getCurrentNode() ;
-      originalNode_ = node ;
+      originalNode_ = NodeLocation.getNodeLocationByNode(node);
       String nodeType = node.getPrimaryNodeType().getName();
       if(isNodeTypeSupported(node)) return templateService.getTemplatePathByUser(false, nodeType, userName) ;
     } catch (Exception e) {
@@ -145,11 +146,17 @@ public class UIViewVersion extends UIContainer implements NodePresentation {
     }
   }
 
-  public Node getNode() throws RepositoryException { return node_; }
+  public Node getNode() throws RepositoryException { 
+    return NodeLocation.getNodeByLocation(node_); 
+  }
 
-  public Node getOriginalNode() throws Exception {return  originalNode_ ;}
+  public Node getOriginalNode() throws Exception {
+    return  NodeLocation.getNodeByLocation(originalNode_);
+  }
 
-  public void setNode(Node node) {node_ = node ;}
+  public void setNode(Node node) {
+    node_ = NodeLocation.getNodeLocationByNode(node);
+  }
 
   public Node getNodeByUUID(String uuid) throws Exception{
     ManageableRepository manageRepo = getApplicationComponent(RepositoryService.class).getCurrentRepository();
@@ -166,12 +173,13 @@ public class UIViewVersion extends UIContainer implements NodePresentation {
 
   public List<Node> getRelations() throws Exception {
     List<Node> relations = new ArrayList<Node>() ;
-    if (node_.hasProperty(Utils.EXO_RELATION)) {
-      Value[] vals = node_.getProperty(Utils.EXO_RELATION).getValues();
+    Node node = getNode();
+    if (node.hasProperty(Utils.EXO_RELATION)) {
+      Value[] vals = node.getProperty(Utils.EXO_RELATION).getValues();
       for (int i = 0; i < vals.length; i++) {
         String uuid = vals[i].getString();
-        Node node = getNodeByUUID(uuid);
-        relations.add(node);
+        Node nodeToAdd = getNodeByUUID(uuid);
+        relations.add(nodeToAdd);
       }
     }
     return relations;
@@ -179,14 +187,15 @@ public class UIViewVersion extends UIContainer implements NodePresentation {
 
   public List<Node> getAttachments() throws Exception {
     List<Node> attachments = new ArrayList<Node>() ;
-    NodeIterator childrenIterator = node_.getNodes();
+    Node node = getNode();
+    NodeIterator childrenIterator = node.getNodes();
     TemplateService templateService = getApplicationComponent(TemplateService.class) ;
     int attachData = 0 ;
     while(childrenIterator.hasNext()) {
       Node childNode = childrenIterator.nextNode();
       String nodeType = childNode.getPrimaryNodeType().getName();
       List<String> listCanCreateNodeType =
-        Utils.getListAllowedFileType(node_, templateService) ;
+        Utils.getListAllowedFileType(node, templateService) ;
       if(listCanCreateNodeType.contains(nodeType)) {
 
         // Case of childNode has jcr:data property
@@ -230,7 +239,7 @@ public class UIViewVersion extends UIContainer implements NodePresentation {
   }
 
   public List<Node> getComments() throws Exception {
-    return getApplicationComponent(CommentsService.class).getComments(node_, getLanguage()) ;
+    return getApplicationComponent(CommentsService.class).getComments(getNode(), getLanguage()) ;
   }
 
   @SuppressWarnings("unchecked")
@@ -249,7 +258,9 @@ public class UIViewVersion extends UIContainer implements NodePresentation {
   public String getDownloadLink(Node node) throws Exception {
     DownloadService dservice = getApplicationComponent(DownloadService.class) ;
     InputStreamDownloadResource dresource ;
-    if(!node.getPrimaryNodeType().getName().equals(Utils.NT_FILE)) node = originalNode_;
+    if(!node.getPrimaryNodeType().getName().equals(Utils.NT_FILE)) { 
+      node = NodeLocation.getNodeByLocation(originalNode_);
+    }
     Node jcrContentNode = node.getNode(Utils.JCR_CONTENT) ;
     InputStream input = jcrContentNode.getProperty(Utils.JCR_DATA).getStream() ;
     dresource = new InputStreamDownloadResource(input, "image") ;
@@ -271,7 +282,7 @@ public class UIViewVersion extends UIContainer implements NodePresentation {
   public String getLanguage() { return language_ ; }
 
   public String getNodeType() throws Exception {
-    return node_.getPrimaryNodeType().getName() ;
+    return getNode().getPrimaryNodeType().getName() ;
   }
 
   public String getPortalName() {
@@ -282,7 +293,7 @@ public class UIViewVersion extends UIContainer implements NodePresentation {
 
   public List<String> getSupportedLocalise() throws Exception {
     MultiLanguageService multiLanguageService = getApplicationComponent(MultiLanguageService.class) ;
-    return multiLanguageService.getSupportedLanguages(node_) ;
+    return multiLanguageService.getSupportedLanguages(getNode()) ;
   }
 
   public String getTemplatePath() throws Exception {
@@ -308,7 +319,7 @@ public class UIViewVersion extends UIContainer implements NodePresentation {
   }
 
   public String getWorkspaceName() throws Exception {
-    return node_.getSession().getWorkspace().getName();
+    return getNode().getSession().getWorkspace().getName();
   }
 
   public boolean isNodeTypeSupported() {

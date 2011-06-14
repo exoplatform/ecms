@@ -30,6 +30,7 @@ import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.config.RepositoryConfigurationException;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -66,7 +67,7 @@ import org.exoplatform.webui.form.UIFormStringInput;
 )
 public class UIWorkflowPublicationActionForm extends UIForm implements UISelectable {
 
-  private Node currentNode;
+  private NodeLocation currentNode;
   private boolean isEdit = false;
   private String repositoryName;
   private String workspaceName;
@@ -110,7 +111,7 @@ public class UIWorkflowPublicationActionForm extends UIForm implements UISelecta
   }
 
   public Node getCurrentNode() {
-    return currentNode;
+    return NodeLocation.getNodeByLocation(currentNode);
   }
 
   public void setIsEdit(boolean isEdit_) { isEdit = isEdit_; }
@@ -148,13 +149,13 @@ public class UIWorkflowPublicationActionForm extends UIForm implements UISelecta
 
   public void createNewAction(Node node, String lifecycle_, boolean isEdit_) throws Exception {
     reset();
-    currentNode = node;
+    currentNode = NodeLocation.getNodeLocationByNode(node);
     lifecycle = lifecycle_;
     isEdit = isEdit_;
     setActions(new String[]{"Save", "Back"});
 
     if (WorkflowPublicationPlugin.config.isDestPath_currentFolder()) {
-      WorkflowPublicationPlugin.config.setDestPath(currentNode.getParent().getPath());
+      WorkflowPublicationPlugin.config.setDestPath(node.getParent().getPath());
     }
 
     if (WorkflowPublicationPlugin.config.isEditable()) {

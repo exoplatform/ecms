@@ -39,6 +39,7 @@ import org.exoplatform.services.jcr.access.AccessControlEntry;
 import org.exoplatform.services.jcr.access.PermissionType;
 import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.security.IdentityConstants;
+import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -75,7 +76,7 @@ public class UIPermissionInfo extends UIContainer {
 
   private int sizeOfListPermission = 0;
 
-  private Node currentNode;
+  private NodeLocation currentNode;
 
   public UIPermissionInfo() throws Exception {
     UIGrid uiGrid = createUIComponent(UIGrid.class, null, "PermissionInfo") ;
@@ -282,10 +283,10 @@ public class UIPermissionInfo extends UIContainer {
     PERMISSION_ACTION = permission_action;
   }
   public Node getCurrentNode() {
-    return currentNode;
+    return NodeLocation.getNodeByLocation(currentNode);
   }
   public void setCurrentNode(Node currentNode) {
-    this.currentNode = currentNode;
+    this.currentNode = NodeLocation.getNodeLocationByNode(currentNode);
   }
   public int getSizeOfListPermission() {
     return sizeOfListPermission;

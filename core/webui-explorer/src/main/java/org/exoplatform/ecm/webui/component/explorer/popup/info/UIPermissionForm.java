@@ -38,6 +38,7 @@ import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.security.IdentityConstants;
+import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -73,7 +74,7 @@ public class UIPermissionForm extends UIForm implements UISelectable {
   final static public String POPUP_SELECT = "SelectUserOrGroup";
   final static public String SYMLINK = "exo:symlink";
 
-  private Node               currentNode;
+  private NodeLocation               currentNode;
   private static final Log LOG  = ExoLogger.getLogger("explorer.UIPermissionForm");
 
   public UIPermissionForm() throws Exception {
@@ -308,10 +309,10 @@ public class UIPermissionForm extends UIForm implements UISelectable {
   }
 
   public Node getCurrentNode() {
-    return currentNode;
+    return NodeLocation.getNodeByLocation(currentNode);
   }
 
   public void setCurrentNode(Node currentNode) {
-    this.currentNode = currentNode;
+    this.currentNode = NodeLocation.getNodeLocationByNode(currentNode);
   }
 }

@@ -21,14 +21,16 @@ import java.util.List;
 
 import javax.jcr.Node;
 
+import org.exoplatform.services.wcm.core.NodeLocation;
+
 public class DataTransfer {
 
   private String repository_ ;
   private String workspace_ ;
   private String path_ ;
-  private Node node_ ;
+  private NodeLocation node_ ;
 
-  private List<Node> contentList_ = new ArrayList<Node> () ;
+  private List<NodeLocation> contentList_ = new ArrayList<NodeLocation> () ;
 
   public DataTransfer() {}
 
@@ -41,10 +43,19 @@ public class DataTransfer {
   public void setPath( String path ) { path_ = path ; }
   public String getPath() { return path_ ; }
 
-  public Node getNode() { return node_ ; }
-  public void setNode( Node node ) { node_ = node ; }
+  public Node getNode() { 
+    return NodeLocation.getNodeByLocation(node_); 
+  }
+  public void setNode( Node node ) { 
+    node_ = NodeLocation.getNodeLocationByNode(node); 
+  }
 
-  public List<Node> getContentList() { return contentList_ ; }
-  public void setContentList( List<Node> content ) { contentList_ = content ; }
+  public List<Node> getContentList() { 
+    return NodeLocation.getNodeListByLocationList(contentList_); 
+  }
+  
+  public void setContentList( List<Node> content ) { 
+    contentList_ = NodeLocation.getLocationsByNodeList(content); 
+  }
 
 }

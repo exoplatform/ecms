@@ -28,6 +28,7 @@ import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.portal.webui.workspace.UIPortalApplication;
 import org.exoplatform.services.ecm.publication.NotInPublicationLifecycleException;
 import org.exoplatform.services.ecm.publication.PublicationService;
+import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIComponentDecorator;
@@ -51,18 +52,22 @@ import org.exoplatform.webui.event.EventListener;
 public class UIPublicationLogList extends UIComponentDecorator {
 
   private UIPageIterator uiPageIterator_ ;
-  private Node currentNode_ ;
+  private NodeLocation currentNode_ ;
 
   public UIPublicationLogList() throws Exception {
     uiPageIterator_ = createUIComponent(UIPageIterator.class, null, "PublicationLogListIterator");
     setUIComponent(uiPageIterator_) ;
   }
 
-  public void setNode(Node node) throws Exception { currentNode_ = node ; }
+  public void setNode(Node node) throws Exception { currentNode_ = NodeLocation.getNodeLocationByNode(node); }
+  
+  private Node getCurrentNode() {
+    return NodeLocation.getNodeByLocation(currentNode_);
+  }
 
   public List<HistoryBean> getLog() throws NotInPublicationLifecycleException, Exception {
     PublicationService publicationService = getApplicationComponent(PublicationService.class);
-    String[][] array = publicationService.getLog(currentNode_);
+    String[][] array = publicationService.getLog(getCurrentNode());
     List<HistoryBean> list = new ArrayList<HistoryBean>();
     for (int i = 0; i < array.length; i++) {
       HistoryBean bean = new HistoryBean();
@@ -72,7 +77,7 @@ public class UIPublicationLogList extends UIComponentDecorator {
       bean.setUser(currentLog[2]);
       String[] values = new String[currentLog.length - 4];
       System.arraycopy(currentLog, 4, values, 0, currentLog.length-4);
-      String description = publicationService.getLocalizedAndSubstituteLog(currentNode_,
+      String description = publicationService.getLocalizedAndSubstituteLog(getCurrentNode(),
           Util.getUIPortal().getAncestorOfType(UIPortalApplication.class).getLocale(), currentLog[3], values);
       bean.setDescription(description);
       list.add(bean);

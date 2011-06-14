@@ -15,7 +15,7 @@
 <% uicomponent.begin(); %>
 <div class="UIPublicationPanel" id="$uicomponent.id">
   <fieldset class="StatusTable">
-    <% String versionName = (currentRevision.getName();
+    <% String versionName = currentRevision.getName();
        String verName = Text.unescapeIllegalJcrChars(versionName);
     %>
     <legend class="Legend"> <%=_ctx.appRes("UIPublicationPanel.status.version")%> $verName </legend>
@@ -98,7 +98,7 @@
               <%
                 if (versionName.equals(revision.getName())) {
                   %>
-                    <a><%=_ctx.appRes("UIPublicationPanel.revisions.label")%>: <%= Text.unescapeIllegalJcrChars(revision.getName() %></a>
+                    <a><%=_ctx.appRes("UIPublicationPanel.revisions.label")%>: <%= Text.unescapeIllegalJcrChars(revision.getName()) %></a>
                   <%
                 } else {
                   %>

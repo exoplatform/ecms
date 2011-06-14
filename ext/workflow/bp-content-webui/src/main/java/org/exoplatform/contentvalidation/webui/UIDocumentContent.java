@@ -54,6 +54,7 @@ import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.web.application.Parameter;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.application.portlet.PortletRequestContext;
@@ -84,30 +85,33 @@ import org.exoplatform.workflow.webui.component.controller.UITaskManager;
     }
 )
 public class UIDocumentContent extends UIContainer implements NodePresentation {
-  private Node node_ ;
+  private NodeLocation node_ ;
   public static final String DEFAULT_LANGUAGE = "default".intern() ;
   private String language_ = DEFAULT_LANGUAGE ;
   private static final Log LOG  = ExoLogger.getLogger(UIDocumentContent.class);
   public UIDocumentContent() throws Exception {}
 
   public void setNode(Node node)  {
-    this.node_ = node;
+    this.node_ = NodeLocation.getNodeLocationByNode(node);
   }
 
   public Node getNode() throws Exception {
-    if(node_.hasProperty(Utils.EXO_LANGUAGE)) {
-      String defaultLang = node_.getProperty(Utils.EXO_LANGUAGE).getString() ;
+    Node node = getOriginalNode();
+    if(node.hasProperty(Utils.EXO_LANGUAGE)) {
+      String defaultLang = node.getProperty(Utils.EXO_LANGUAGE).getString() ;
       if(!language_.equals(DEFAULT_LANGUAGE) && !language_.equals(defaultLang)) {
-        Node curNode = node_.getNode(Utils.LANGUAGES + "/" + language_) ;
+        Node curNode = node.getNode(Utils.LANGUAGES + "/" + language_) ;
         language_ = defaultLang ;
         return curNode ;
       }
     }
-    return node_;
+    return node;
   }
-  public Node getOriginalNode() throws Exception {return node_;}
+  public Node getOriginalNode() throws Exception {
+    return NodeLocation.getNodeByLocation(node_);
+  }
 
-  public String getNodeType() throws Exception { return node_.getPrimaryNodeType().getName() ; }
+  public String getNodeType() throws Exception { return getOriginalNode().getPrimaryNodeType().getName() ; }
 
   public String getTemplate() {
     try {
@@ -133,7 +137,7 @@ public class UIDocumentContent extends UIContainer implements NodePresentation {
   public boolean isNodeTypeSupported() {
     try {
       TemplateService templateService = getApplicationComponent(TemplateService.class) ;
-      String nodeTypeName = node_.getPrimaryNodeType().getName();
+      String nodeTypeName = getOriginalNode().getPrimaryNodeType().getName();
 
       return templateService.isManagedNodeType(nodeTypeName);
     } catch (Exception e) {
@@ -169,7 +173,7 @@ public class UIDocumentContent extends UIContainer implements NodePresentation {
   public List<Node> getRelations() throws Exception {
     List<Node> relations = new ArrayList<Node>();
     try {
-      Value[] vals = node_.getProperty(Utils.EXO_RELATION).getValues();
+      Value[] vals = getOriginalNode().getProperty(Utils.EXO_RELATION).getValues();
       for (Value val : vals) {
         String uuid = val.getString();
         Node relationNode = getNodeByUUID(uuid);
@@ -180,7 +184,7 @@ public class UIDocumentContent extends UIContainer implements NodePresentation {
   }
 
   public Node getNodeByUUID(String uuid) throws Exception{
-    ManageableRepository manageRepo = (ManageableRepository) node_.getSession().getRepository();
+    ManageableRepository manageRepo = (ManageableRepository)getOriginalNode().getSession().getRepository();
     SessionProvider sessionProvider = SessionProviderFactory.createSessionProvider();
     for(String ws : manageRepo.getWorkspaceNames()) {
       try{
@@ -274,12 +278,13 @@ public class UIDocumentContent extends UIContainer implements NodePresentation {
     List<Node> attachments = new ArrayList<Node>();
     String nodeType = "";
     NodeIterator childrenIterator;
-    childrenIterator = node_.getNodes();
+    Node node = getOriginalNode();
+    childrenIterator = node.getNodes();
     while (childrenIterator.hasNext()) {
       Node childNode = childrenIterator.nextNode();
       try {
         nodeType = childNode.getPrimaryNodeType().getName();
-        List<String> listCanCreateNodeType = getListAllowedFileType(node_);
+        List<String> listCanCreateNodeType = getListAllowedFileType(node) ;
         if(listCanCreateNodeType.contains(nodeType)) attachments.add(childNode);
       } catch (Exception e) {}
     }
@@ -295,20 +300,21 @@ public class UIDocumentContent extends UIContainer implements NodePresentation {
   public boolean isRssLink() { return false ; }
 
   public List<String> getSupportedLocalise() throws Exception {
-    List<String> local = new ArrayList<String>() ;
-    if(node_.hasNode(Utils.LANGUAGES)){
-      Node languages = node_.getNode(Utils.LANGUAGES) ;
+    List<String> local = new ArrayList<String>();
+    Node node = getOriginalNode();
+    if(node.hasNode(Utils.LANGUAGES)){
+      Node languages = node.getNode(Utils.LANGUAGES) ;
       NodeIterator iter = languages.getNodes() ;
       while(iter.hasNext()) {
         local.add(iter.nextNode().getName()) ;
       }
-      local.add(node_.getProperty(Utils.EXO_LANGUAGE).getString()) ;
+      local.add(node.getProperty(Utils.EXO_LANGUAGE).getString()) ;
     }
     return local ;
   }
 
   public String getTemplatePath() throws Exception {
-    String nodeTypeName = node_.getPrimaryNodeType().getName();
+    String nodeTypeName = getOriginalNode().getPrimaryNodeType().getName();
     String userName = Util.getPortalRequestContext().getRemoteUser() ;
     TemplateService templateService = getApplicationComponent(TemplateService.class);
     return templateService.getTemplatePathByUser(false, nodeTypeName, userName);
@@ -325,7 +331,7 @@ public class UIDocumentContent extends UIContainer implements NodePresentation {
   }
 
   public List<Node> getComments() throws Exception {
-    return getApplicationComponent(CommentsService.class).getComments(node_, "default") ;
+    return getApplicationComponent(CommentsService.class).getComments(getOriginalNode(), "default") ;
   }
 
   public String getIcons(Node node, String appended) throws Exception {
@@ -390,11 +396,11 @@ public class UIDocumentContent extends UIContainer implements NodePresentation {
   }
 
   public String getWorkspaceName() throws Exception {
-    return node_.getSession().getWorkspace().getName();
+    return getOriginalNode().getSession().getWorkspace().getName();
   }
 
   public String getRepository() throws Exception {
-    ManageableRepository manaRepo = (ManageableRepository)node_.getSession().getRepository() ;
+    ManageableRepository manaRepo = (ManageableRepository)getOriginalNode().getSession().getRepository() ;
     return manaRepo.getConfiguration().getName() ;
   }
 
