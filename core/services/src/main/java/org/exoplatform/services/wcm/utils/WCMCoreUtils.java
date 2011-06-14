@@ -25,6 +25,7 @@ import org.exoplatform.commons.utils.ListAccess;
 import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.container.RootContainer;
+import org.exoplatform.container.component.ComponentRequestLifecycle;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
@@ -32,7 +33,6 @@ import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.organization.Membership;
-import org.exoplatform.services.organization.MembershipHandler;
 import org.exoplatform.services.organization.OrganizationService;
 import org.quartz.JobExecutionContext;
 
@@ -45,7 +45,7 @@ import org.quartz.JobExecutionContext;
 public class WCMCoreUtils {
 
   private static Log log = ExoLogger.getLogger("wcm.WCMCoreUtils");
-
+  
   /**
    * Gets the service.
    *
@@ -119,6 +119,7 @@ public class WCMCoreUtils {
   public static boolean hasPermission(String userId, List<String> permissions, boolean isNeedFullAccess) {
     try {
       OrganizationService organizationService = WCMCoreUtils.getService(OrganizationService.class);
+      startRequest(organizationService);
       Collection<?> memberships = null;
       Membership userMembership = null;
       String userMembershipTmp = null;
@@ -126,8 +127,7 @@ public class WCMCoreUtils {
       String permissionTmp = "";
       for (String permission : permissions) {
         if (!permissionTmp.equals(permission)) count = 0;
-        MembershipHandler mhandler = organizationService.getMembershipHandler(); 
-        memberships = mhandler.findMembershipsByUser(userId);
+        memberships = organizationService.getMembershipHandler().findMembershipsByUser(userId);
         Iterator<?> membershipIterator = memberships.iterator();
         while (membershipIterator.hasNext()) {
           userMembership = (Membership)membershipIterator.next();
@@ -158,6 +158,7 @@ public class WCMCoreUtils {
         }
         permissionTmp = permission;
       }
+      endRequest(organizationService);
     } catch (Exception e) {
       log.error("hasPermission() failed because of ", e);
     }
@@ -205,5 +206,19 @@ public class WCMCoreUtils {
     }
     return null;
   }  
+  
+  public static void startRequest(OrganizationService orgService) throws Exception
+  {
+    if(orgService instanceof ComponentRequestLifecycle) {
+      ((ComponentRequestLifecycle) orgService).startRequest(ExoContainerContext.getCurrentContainer());
+    }
+  }
 
+  public static void endRequest(OrganizationService orgService) throws Exception
+  {
+    if(orgService instanceof ComponentRequestLifecycle) {
+	  ((ComponentRequestLifecycle) orgService).endRequest(ExoContainerContext.getCurrentContainer());
+    }
+  }
+  
 }
