@@ -40,7 +40,7 @@
 		      <td style="width: 20px;">
 		        <div style="margin: auto" class="Icon16x16 default16x16Icon ${nodeIcon}16x16Icon"><span></span></div>					        
 		      </td>
-			    <td>$bean.name</td>
+			    <td style="overflow: hidden;" title="$bean.name">$bean.name</td>
 			    <td>
 		        <div class="MultiValue">
 		          <%
