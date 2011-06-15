@@ -457,7 +457,7 @@
 		var uiTabs = DOM.findDescendantsByClass(prtNode, "div", "SubTabItem");
 		var listHideIcon = document.getElementById('IconListHideElement');
 		var viewBarContainer = document.getElementById("UIViewBarContainer");
-		var elementSpace = 6;
+		var elementSpace = 9;
 		var portletFrag = DOM.findAncestorByClass(actionBar, "PORTLET-FRAGMENT");
 		var maxSpace = 0;
 		if(eXo.core.Browser.browserType == 'ie') {
