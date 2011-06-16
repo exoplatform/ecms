@@ -60,12 +60,10 @@
     <org.jsecurity.version>0.9.0</org.jsecurity.version>
     <javax.transaction.version>1.0.1B</javax.transaction.version>
     <net.oauth.version>20080621</net.oauth.version>
-    <net.sourceforge.nekohtml.version>1.9.9</net.sourceforge.nekohtml.version>
-    <org.gatein.shindig.version>1.0-r790473-Patch05</org.gatein.shindig.version>
     <org.gatein.pc.version>2.2.0-GA</org.gatein.pc.version>
     <commons-lang.version>2.6</commons-lang.version>
+    <org.gatein.shindig.version>1.0-r790473-Patch05</org.gatein.shindig.version>
     <javax.mail.version>1.4.4</javax.mail.version>
-    <org.shindig.version>SNAPSHOT-r790473</org.shindig.version>
     <javax.servlet.servlet-api.version>2.5</javax.servlet.servlet-api.version>
     <javax.portlet.portlet-api.version>2.0</javax.portlet.portlet-api.version>
     <javax.mail.mail.version>1.4.1</javax.mail.mail.version>

@@ -16,12 +16,6 @@
       <version>${org.exoplatform.portal.version}</version>
       <scope>provided</scope>
     </dependency>
-    <dependency>
-      <groupId>org.apache.shindig</groupId>
-      <artifactId>shindig-common</artifactId>
-      <version>${org.shindig.version}</version>
-      <scope>provided</scope>
-    </dependency>
   </dependencies>
   <build>
     <finalName>favorites</finalName>
