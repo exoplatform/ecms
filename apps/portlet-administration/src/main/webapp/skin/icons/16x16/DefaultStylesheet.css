@@ -374,7 +374,7 @@
 }
 
 .DeleteIconInfo {
-  width: 16px; height: 20px;
+  width: 16px; height: 16px;
   background: url('DefaultSkin/DustBin.gif') no-repeat center; 
   cursor: pointer;
   margin-left: 3px;
