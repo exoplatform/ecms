@@ -118,7 +118,6 @@
 	<dependency><groupId>org.gatein.wci</groupId><artifactId>wci-exo</artifactId><version>${org.gatein.wci.version}</version><type>jar</type></dependency><!-- 2.0.1-GA-->
 	<dependency><groupId>org.exoplatform.jcr</groupId><artifactId>exo.jcr.framework.web</artifactId><version>${org.exoplatform.jcr.version}</version><type>jar</type></dependency><!-- 1.12.6-GA-SNAPSHOT-->
 	<dependency><groupId>org.gatein.wci</groupId><artifactId>wci-tomcat</artifactId><version>${org.gatein.wci.version}</version><type>jar</type></dependency><!-- 2.0.1-GA-->
-	<dependency><groupId>net.sourceforge.nekohtml</groupId><artifactId>nekohtml</artifactId><version>${net.sourceforge.nekohtml.version}</version><type>jar</type></dependency><!-- 1.9.9-->
 	<dependency><groupId>org.exoplatform.portal</groupId><artifactId>exo.portal.portlet.dashboard</artifactId><version>${org.exoplatform.portal.version}</version><type>war</type></dependency><!-- 3.1.6-PLF-SNAPSHOT-->
 	<dependency><groupId>org.exoplatform.portal</groupId><artifactId>exo.portal.web.portal</artifactId><version>${org.exoplatform.portal.version}</version><type>war</type></dependency><!-- 3.1.6-PLF-SNAPSHOT-->
 	<dependency><groupId>net.oauth</groupId><artifactId>core</artifactId><version>${net.oauth.version}</version><type>jar</type></dependency><!-- 20080621-->
