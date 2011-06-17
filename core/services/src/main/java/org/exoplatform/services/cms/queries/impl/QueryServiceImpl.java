@@ -294,12 +294,12 @@ public class QueryServiceImpl implements QueryService, Startable{
     if (userName == null)
       return;
     Session session = getSession();
-
+    
     Node queryNode = null;
     try {
       queryNode = (Node) session.getItem(queryPath);
     } catch (PathNotFoundException pe) {
-      queryNode = (Node) getSession(SessionProviderFactory.createSessionProvider(), true).getItem(queryPath);
+      queryNode = (Node) getSession(SessionProviderFactory.createSystemProvider(), true).getItem(queryPath);
     }
     queryNode.remove();
     session.save();
