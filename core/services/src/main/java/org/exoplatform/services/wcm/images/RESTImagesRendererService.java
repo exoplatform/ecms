@@ -69,6 +69,12 @@ public class RESTImagesRendererService implements ResourceContainer{
 
   /** The Constant IF_MODIFIED_SINCE_DATE_FORMAT. */
   private static final String IF_MODIFIED_SINCE_DATE_FORMAT = "EEE, dd MMM yyyy HH:mm:ss z";
+  
+  /** Default mime type **/
+  private static String DEFAULT_MIME_TYPE = "image/jpg";
+  
+  /** Mime type property **/
+  private static String PROPERTY_MIME_TYPE = "jcr:mimeType";
 
   /**
    * Instantiates a new rEST images renderer service.
@@ -122,8 +128,14 @@ public class RESTImagesRendererService implements ResourceContainer{
         }
 
         DateFormat dateFormat = new SimpleDateFormat(IF_MODIFIED_SINCE_DATE_FORMAT);
-        InputStream jcrData = dataNode.getNode("jcr:content").getProperty("jcr:data").getStream();
-        return Response.ok(jcrData, "image").header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
+
+        Node jcrContentNode = dataNode.getNode("jcr:content");
+        String mimeType = DEFAULT_MIME_TYPE;
+        if (jcrContentNode.hasProperty(PROPERTY_MIME_TYPE)) {
+          mimeType = jcrContentNode.getProperty(PROPERTY_MIME_TYPE).getString();
+        }
+        InputStream jcrData = jcrContentNode.getProperty("jcr:data").getStream(); 
+        return Response.ok(jcrData, mimeType).header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
       }
 
       if (ifModifiedSince != null && isModified(ifModifiedSince, node) == false) {
@@ -132,7 +144,7 @@ public class RESTImagesRendererService implements ResourceContainer{
 
       DateFormat dateFormat = new SimpleDateFormat(IF_MODIFIED_SINCE_DATE_FORMAT);
       InputStream jcrData = node.getProperty(param).getStream();
-      return Response.ok(jcrData, "image").header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
+      return Response.ok(jcrData, DEFAULT_MIME_TYPE).header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
 
     } catch (PathNotFoundException e) {
       return Response.status(HTTPStatus.NOT_FOUND).build();
