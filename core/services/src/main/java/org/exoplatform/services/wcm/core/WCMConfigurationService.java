@@ -64,6 +64,8 @@ public class WCMConfigurationService {
   public static final String FORM_VIEW_TEMPLATE_PATH        = "formViewTemplatePath";
 
   public static final String PAGINATOR_TEMPLAET_PATH        = "paginatorTemplatePath";
+  
+  private String defaultRepo = null;
 
   @SuppressWarnings("unchecked")
   public WCMConfigurationService(InitParams initParams) throws Exception {
@@ -72,6 +74,7 @@ public class WCMConfigurationService {
       PropertiesParam param = iterator.next();
       if ("share.portal.config".endsWith(param.getName())) {
         String repository = param.getProperty("repository");
+        defaultRepo = repository;
         String portalName = param.getProperty("portalName");
         sharedPortals.put(repository, portalName);
         log.info("Name of shared portal to share resources for all portals in repository: "+ repository + " is: "+ portalName);
@@ -97,7 +100,10 @@ public class WCMConfigurationService {
 
   public DriveData getSiteDriveConfig() {return this.siteDriveConfig; }
   public NodeLocation getLivePortalsLocation(final String repository) {
-    return livePortalsLocations.get(repository);
+    NodeLocation nodeLocation = livePortalsLocations.get(repository);
+    //Check if the current tenant doesn't contains the live portal then get the default one.
+    if(nodeLocation == null) nodeLocation = livePortalsLocations.get(defaultRepo);
+    return nodeLocation;
   }
 
   public String getRuntimeContextParam(String paramName) {
