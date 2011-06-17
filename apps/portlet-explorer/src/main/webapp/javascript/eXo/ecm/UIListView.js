@@ -850,11 +850,17 @@ var ListView = function() {
 			resizeSizeBar.style.height = workingArea.offsetHeight + 'px';
 		
 		if (documentWorkspace)									
-	 		documentWorkspace.style.height = workingArea.offsetHeight + 'px';									
+	 		documentWorkspace.style.height = workingArea.offsetHeight + 'px';
 	 if (page) {
 			if (parseInt(page.getAttribute('pageAvailable')) > 1) {
-				if (view)
-					view.style.height = workingContainer.offsetHeight - page.offsetHeight + 'px';							
+				if (view) {
+  				if (documentWorkspace) {
+  				  view.style.height = (documentWorkspace.offsetHeight - page.offsetHeight) + 'px';
+  				}else {
+  				  view.style.height = (workingContainer.offsetHeight - page.offsetHeight) + 'px';
+  				}
+  				view.style.overflow = "auto";
+  			}
 			}
 		} else {
 			  if (view) 
