@@ -460,7 +460,7 @@ exo-ecms-packaging-ecmdemo-webapp
                     <include name="exo.jcr.component.ftp-*.jar" />
                     <include name="exo.jcr.framework.command-*.jar" />
                     <include name="exo.jcr.framework.web-*.jar" />
-                    <include name="exo-jcr-services-*.jar" />
+                    <!--include name="exo-jcr-services-*.jar" /-->
                     <include name="exo.kernel.commons-*.jar" />
                     <include name="exo.kernel.component.*.jar" />
                     <include name="exo.kernel.container-*.jar" />
