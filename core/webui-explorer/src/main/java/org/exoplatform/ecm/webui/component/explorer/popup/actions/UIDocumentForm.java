@@ -209,7 +209,7 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
     return getLastModifiedDate(getCurrentNode());
   }
 
-  public void renderField(String name) throws Exception {
+  public synchronized void renderField(String name) throws Exception {
     if (FIELD_TAXONOMY.equals(name)) {
       if (!isAddNew && !isUpdateSelect) {
         TaxonomyService taxonomyService = getApplicationComponent(TaxonomyService.class);
@@ -252,204 +252,206 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
     @SuppressWarnings("unchecked")
     public void execute(Event<UIDocumentForm> event) throws Exception {
       UIDocumentForm documentForm = event.getSource();
-      UIJCRExplorer uiExplorer = documentForm.getAncestorOfType(UIJCRExplorer.class);
-      List inputs = documentForm.getChildren();
-      UIApplication uiApp = documentForm.getAncestorOfType(UIApplication.class);
-      boolean hasCategories = false;
-      String categoriesPath = "";
-      TaxonomyService taxonomyService = documentForm.getApplicationComponent(TaxonomyService.class);
-      if (documentForm.isAddNew()) {
-        for (int i = 0; i < inputs.size(); i++) {
-          UIFormInput input = (UIFormInput) inputs.get(i);
-          if ((input.getName() != null) && input.getName().equals("name")) {
-            String[] arrFilterChar = {"]", "["};
-            String valueName = input.getValue().toString();
-            if (!Utils.isNameValid(valueName, arrFilterChar)) {
-              uiApp.addMessage(new ApplicationMessage("UIFolderForm.msg.name-not-allowed", null,
-                  ApplicationMessage.WARNING));
-              event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
-              return;
-            }
-          }
-        }
-      }
-
-      int index = 0;
-      List<String> listTaxonomy = documentForm.getListTaxonomy();
-      if (documentForm.isReference) {
-        UIFormMultiValueInputSet uiSet = documentForm.getChildById(FIELD_TAXONOMY);
-        if((uiSet != null) && (uiSet.getName() != null) && uiSet.getName().equals(FIELD_TAXONOMY)) {
-          hasCategories = true;
-          listTaxonomy = (List<String>) uiSet.getValue();
-          for (String category : listTaxonomy) {
-            categoriesPath.concat(category).concat(",");
-          }
-
-          if (listTaxonomy != null && listTaxonomy.size() > 0) {
-            try {
-              for (String categoryPath : listTaxonomy) {
-                index = categoryPath.indexOf("/");
-                if (index < 0) {
-                  taxonomyService.getTaxonomyTree(categoryPath);
-                } else {
-                  taxonomyService.getTaxonomyTree(categoryPath.substring(0, index))
-                                 .getNode(categoryPath.substring(index + 1));
-                }
-              }
-            } catch (Exception e) {
-              uiApp.addMessage(new ApplicationMessage("UISelectedCategoriesGrid.msg.non-categories",
-                                                      null,
-                                                      ApplicationMessage.WARNING));
-              event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
-              return;
-            }
-          }
-        }
-      }
-      Map inputProperties = DialogFormUtil.prepareMap(inputs, documentForm.getInputProperties());
-      Node newNode = null;
-      String nodeType;
-      Node homeNode;
-      Node currentNode = uiExplorer.getCurrentNode();
-      if(documentForm.isAddNew()) {
-        UIDocumentFormController uiDFController = documentForm.getParent();
-        homeNode = currentNode;
-        UISelectDocumentForm uiSelectDocumentForm = uiDFController.getChild(UISelectDocumentForm.class);
-        if (uiSelectDocumentForm != null) {
-          nodeType = uiSelectDocumentForm.getSelectValue();                           // Exist select box, get selected value
-        } else {
-          nodeType = uiDFController.getChild(UIDocumentForm.class).getContentType();  // Not exist select box, get default value
-        }
-        if(homeNode.isLocked()) {
-          homeNode.getSession().addLockToken(LockUtil.getLockToken(homeNode));
-        }
-      } else {
-        Node documentNode = documentForm.getNode();
-        homeNode = documentNode.getParent();
-        nodeType = documentNode.getPrimaryNodeType().getName();
-        if(documentNode.isLocked()) {
-          documentNode.getSession().addLockToken(LockUtil.getLockToken(documentNode));
-        }
-      }
-      try {
-        CmsService cmsService = documentForm.getApplicationComponent(CmsService.class);
-        String addedPath = cmsService.storeNode(nodeType, homeNode, inputProperties, documentForm.isAddNew());
-        try {
-          newNode = (Node)homeNode.getSession().getItem(addedPath);
-          if(newNode.isLocked()) {
-            newNode.getSession().addLockToken(LockUtil.getLockToken(newNode));
-          }
-          List<Node> listTaxonomyTrees = taxonomyService.getAllTaxonomyTrees();
-          List<Node> listExistedTaxonomy = taxonomyService.getAllCategories(newNode);
-          List<String> listExistingTaxonomy = new ArrayList<String>();
-
-          for (Node existedTaxonomy : listExistedTaxonomy) {
-            for (Node taxonomyTrees : listTaxonomyTrees) {
-              if (existedTaxonomy.getPath().contains(taxonomyTrees.getPath())) {
-                listExistingTaxonomy.add(taxonomyTrees.getName()
-                    + existedTaxonomy.getPath().substring(taxonomyTrees.getPath().length()));
-                break;
-              }
-            }
-          }
-          if (hasCategories && !homeNode.isNodeType("exo:taxonomy")) {
-            for(String removedCate : documentForm.getRemovedListCategory(listTaxonomy, listExistingTaxonomy)) {
-              index = removedCate.indexOf("/");
-              if (index != -1) {
-                taxonomyService.removeCategory(newNode, removedCate.substring(0, index), removedCate.substring(index + 1));
-              } else {
-                taxonomyService.removeCategory(newNode, removedCate, "");
-              }
-            }
-          }
-          if (hasCategories && (newNode != null) && ((listTaxonomy != null) && (listTaxonomy.size() > 0))){
-            documentForm.releaseLock();
-            for(String categoryPath : documentForm.getAddedListCategory(listTaxonomy, listExistingTaxonomy)) {
-              index = categoryPath.indexOf("/");
-              try {
-                if (index != -1) {
-                  taxonomyService.addCategory(newNode, categoryPath.substring(0, index), categoryPath.substring(index + 1));
-                } else {
-                  taxonomyService.addCategory(newNode, categoryPath, "");
-                }
-              } catch(AccessDeniedException accessDeniedException) {
-                uiApp.addMessage(new ApplicationMessage("AccessControlException.msg", null,
+      synchronized (documentForm) {
+        UIJCRExplorer uiExplorer = documentForm.getAncestorOfType(UIJCRExplorer.class);
+        List inputs = documentForm.getChildren();
+        UIApplication uiApp = documentForm.getAncestorOfType(UIApplication.class);
+        boolean hasCategories = false;
+        String categoriesPath = "";
+        TaxonomyService taxonomyService = documentForm.getApplicationComponent(TaxonomyService.class);
+        if (documentForm.isAddNew()) {
+          for (int i = 0; i < inputs.size(); i++) {
+            UIFormInput input = (UIFormInput) inputs.get(i);
+            if ((input.getName() != null) && input.getName().equals("name")) {
+              String[] arrFilterChar = {"]", "["};
+              String valueName = input.getValue().toString();
+              if (!Utils.isNameValid(valueName, arrFilterChar)) {
+                uiApp.addMessage(new ApplicationMessage("UIFolderForm.msg.name-not-allowed", null,
                     ApplicationMessage.WARNING));
                 event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
-              } catch (Exception e) {
-                continue;
+                return;
               }
             }
-          } else {
-            List<Value> vals = new ArrayList<Value>();
-            if (newNode.hasProperty("exo:category")) newNode.setProperty("exo:category", vals.toArray(new Value[vals.size()]));
-            newNode.save();
           }
-        } catch(Exception e) {
+        }
+  
+        int index = 0;
+        List<String> listTaxonomy = documentForm.getListTaxonomy();
+        if (documentForm.isReference) {
+          UIFormMultiValueInputSet uiSet = documentForm.getChildById(FIELD_TAXONOMY);
+          if((uiSet != null) && (uiSet.getName() != null) && uiSet.getName().equals(FIELD_TAXONOMY)) {
+            hasCategories = true;
+            listTaxonomy = (List<String>) uiSet.getValue();
+            for (String category : listTaxonomy) {
+              categoriesPath.concat(category).concat(",");
+            }
+  
+            if (listTaxonomy != null && listTaxonomy.size() > 0) {
+              try {
+                for (String categoryPath : listTaxonomy) {
+                  index = categoryPath.indexOf("/");
+                  if (index < 0) {
+                    taxonomyService.getTaxonomyTree(categoryPath);
+                  } else {
+                    taxonomyService.getTaxonomyTree(categoryPath.substring(0, index))
+                                   .getNode(categoryPath.substring(index + 1));
+                  }
+                }
+              } catch (Exception e) {
+                uiApp.addMessage(new ApplicationMessage("UISelectedCategoriesGrid.msg.non-categories",
+                                                        null,
+                                                        ApplicationMessage.WARNING));
+                event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+                return;
+              }
+            }
+          }
+        }
+        Map inputProperties = DialogFormUtil.prepareMap(inputs, documentForm.getInputProperties());
+        Node newNode = null;
+        String nodeType;
+        Node homeNode;
+        Node currentNode = uiExplorer.getCurrentNode();
+        if(documentForm.isAddNew()) {
+          UIDocumentFormController uiDFController = documentForm.getParent();
+          homeNode = currentNode;
+          UISelectDocumentForm uiSelectDocumentForm = uiDFController.getChild(UISelectDocumentForm.class);
+          if (uiSelectDocumentForm != null) {
+            nodeType = uiSelectDocumentForm.getSelectValue();                           // Exist select box, get selected value
+          } else {
+            nodeType = uiDFController.getChild(UIDocumentForm.class).getContentType();  // Not exist select box, get default value
+          }
+          if(homeNode.isLocked()) {
+            homeNode.getSession().addLockToken(LockUtil.getLockToken(homeNode));
+          }
+        } else {
+          Node documentNode = documentForm.getNode();
+          homeNode = documentNode.getParent();
+          nodeType = documentNode.getPrimaryNodeType().getName();
+          if(documentNode.isLocked()) {
+            documentNode.getSession().addLockToken(LockUtil.getLockToken(documentNode));
+          }
+        }
+        try {
+          CmsService cmsService = documentForm.getApplicationComponent(CmsService.class);
+          String addedPath = cmsService.storeNode(nodeType, homeNode, inputProperties, documentForm.isAddNew());
+          try {
+            newNode = (Node)homeNode.getSession().getItem(addedPath);
+            if(newNode.isLocked()) {
+              newNode.getSession().addLockToken(LockUtil.getLockToken(newNode));
+            }
+            List<Node> listTaxonomyTrees = taxonomyService.getAllTaxonomyTrees();
+            List<Node> listExistedTaxonomy = taxonomyService.getAllCategories(newNode);
+            List<String> listExistingTaxonomy = new ArrayList<String>();
+  
+            for (Node existedTaxonomy : listExistedTaxonomy) {
+              for (Node taxonomyTrees : listTaxonomyTrees) {
+                if (existedTaxonomy.getPath().contains(taxonomyTrees.getPath())) {
+                  listExistingTaxonomy.add(taxonomyTrees.getName()
+                      + existedTaxonomy.getPath().substring(taxonomyTrees.getPath().length()));
+                  break;
+                }
+              }
+            }
+            if (hasCategories && !homeNode.isNodeType("exo:taxonomy")) {
+              for(String removedCate : documentForm.getRemovedListCategory(listTaxonomy, listExistingTaxonomy)) {
+                index = removedCate.indexOf("/");
+                if (index != -1) {
+                  taxonomyService.removeCategory(newNode, removedCate.substring(0, index), removedCate.substring(index + 1));
+                } else {
+                  taxonomyService.removeCategory(newNode, removedCate, "");
+                }
+              }
+            }
+            if (hasCategories && (newNode != null) && ((listTaxonomy != null) && (listTaxonomy.size() > 0))){
+              documentForm.releaseLock();
+              for(String categoryPath : documentForm.getAddedListCategory(listTaxonomy, listExistingTaxonomy)) {
+                index = categoryPath.indexOf("/");
+                try {
+                  if (index != -1) {
+                    taxonomyService.addCategory(newNode, categoryPath.substring(0, index), categoryPath.substring(index + 1));
+                  } else {
+                    taxonomyService.addCategory(newNode, categoryPath, "");
+                  }
+                } catch(AccessDeniedException accessDeniedException) {
+                  uiApp.addMessage(new ApplicationMessage("AccessControlException.msg", null,
+                      ApplicationMessage.WARNING));
+                  event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+                } catch (Exception e) {
+                  continue;
+                }
+              }
+            } else {
+              List<Value> vals = new ArrayList<Value>();
+              if (newNode.hasProperty("exo:category")) newNode.setProperty("exo:category", vals.toArray(new Value[vals.size()]));
+              newNode.save();
+            }
+          } catch(Exception e) {
+            if(!uiExplorer.getPreference().isJcrEnable()) uiExplorer.getSession().save();
+            uiExplorer.updateAjax(event);
+          }
           if(!uiExplorer.getPreference().isJcrEnable()) uiExplorer.getSession().save();
           uiExplorer.updateAjax(event);
+        } catch (AccessControlException ace) {
+          throw new AccessDeniedException(ace.getMessage());
+        } catch(VersionException ve) {
+          uiApp.addMessage(new ApplicationMessage("UIDocumentForm.msg.in-versioning", null,
+              ApplicationMessage.WARNING));
+          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          return;
+        } catch(ItemNotFoundException item) {
+          uiApp.addMessage(new ApplicationMessage("UIDocumentForm.msg.item-not-found", null,
+              ApplicationMessage.WARNING));
+          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          return;
+        } catch(AccessDeniedException accessDeniedException) {
+          uiApp.addMessage(new ApplicationMessage("UIDocumentForm.msg.repository-exception-permission", null,
+              ApplicationMessage.WARNING));
+          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          return;
+        } catch(ItemExistsException existedex) {
+          uiApp.addMessage(new ApplicationMessage("UIDocumentForm.msg.not-allowed-same-name-sibling",
+                                                  null,
+                                                  ApplicationMessage.WARNING));
+          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          return;
+        } catch(ConstraintViolationException constraintViolationException) {
+        LOG.error("Unexpected error occurrs", constraintViolationException);
+          uiApp.addMessage(new ApplicationMessage("UIDocumentForm.msg.constraintviolation-exception",
+                                                  null,
+                                                  ApplicationMessage.WARNING));
+          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          return;
+        } catch(RepositoryException repo) {
+          LOG.error("Unexpected error occurrs", repo);
+          uiApp.addMessage(new ApplicationMessage("UIDocumentForm.msg.repository-exception", null, ApplicationMessage.WARNING));
+          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          return;
+        } catch(NumberFormatException nume) {
+          String key = "UIDocumentForm.msg.numberformat-exception";
+          uiApp.addMessage(new ApplicationMessage(key, null, ApplicationMessage.WARNING));
+          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          return;
+        } catch(Exception e) {
+          LOG.error("Unexpected error occurs", e);
+          String key = "UIDocumentForm.msg.cannot-save";
+          uiApp.addMessage(new ApplicationMessage(key, null, ApplicationMessage.WARNING));
+          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          return;
+        } finally {
+           documentForm.releaseLock();
         }
-        if(!uiExplorer.getPreference().isJcrEnable()) uiExplorer.getSession().save();
+        event.getRequestContext().setAttribute("nodePath",newNode.getPath());
+        UIWorkingArea uiWorkingArea = uiExplorer.getChild(UIWorkingArea.class);
+        UIDocumentWorkspace uiDocumentWorkspace = uiWorkingArea.getChild(UIDocumentWorkspace.class);
+        uiDocumentWorkspace.removeChild(UIDocumentFormController.class);
+        documentForm.setIsUpdateSelect(false);
+        uiExplorer.setCurrentPath(newNode.getPath());
+        uiExplorer.setWorkspaceName(newNode.getSession().getWorkspace().getName());
+        uiExplorer.refreshExplorer(newNode, true);
         uiExplorer.updateAjax(event);
-      } catch (AccessControlException ace) {
-        throw new AccessDeniedException(ace.getMessage());
-      } catch(VersionException ve) {
-        uiApp.addMessage(new ApplicationMessage("UIDocumentForm.msg.in-versioning", null,
-            ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
-        return;
-      } catch(ItemNotFoundException item) {
-        uiApp.addMessage(new ApplicationMessage("UIDocumentForm.msg.item-not-found", null,
-            ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
-        return;
-      } catch(AccessDeniedException accessDeniedException) {
-        uiApp.addMessage(new ApplicationMessage("UIDocumentForm.msg.repository-exception-permission", null,
-            ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
-        return;
-      } catch(ItemExistsException existedex) {
-        uiApp.addMessage(new ApplicationMessage("UIDocumentForm.msg.not-allowed-same-name-sibling",
-                                                null,
-                                                ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
-        return;
-      } catch(ConstraintViolationException constraintViolationException) {
-      LOG.error("Unexpected error occurrs", constraintViolationException);
-        uiApp.addMessage(new ApplicationMessage("UIDocumentForm.msg.constraintviolation-exception",
-                                                null,
-                                                ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
-        return;
-      } catch(RepositoryException repo) {
-        LOG.error("Unexpected error occurrs", repo);
-        uiApp.addMessage(new ApplicationMessage("UIDocumentForm.msg.repository-exception", null, ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
-        return;
-      } catch(NumberFormatException nume) {
-        String key = "UIDocumentForm.msg.numberformat-exception";
-        uiApp.addMessage(new ApplicationMessage(key, null, ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
-        return;
-      } catch(Exception e) {
-        LOG.error("Unexpected error occurs", e);
-        String key = "UIDocumentForm.msg.cannot-save";
-        uiApp.addMessage(new ApplicationMessage(key, null, ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
-        return;
-      } finally {
-         documentForm.releaseLock();
+        EditDocumentActionComponent.editDocument(event, null, uiExplorer, uiExplorer, uiExplorer.getCurrentNode(), uiApp);
       }
-      event.getRequestContext().setAttribute("nodePath",newNode.getPath());
-      UIWorkingArea uiWorkingArea = uiExplorer.getChild(UIWorkingArea.class);
-      UIDocumentWorkspace uiDocumentWorkspace = uiWorkingArea.getChild(UIDocumentWorkspace.class);
-      uiDocumentWorkspace.removeChild(UIDocumentFormController.class);
-      documentForm.setIsUpdateSelect(false);
-      uiExplorer.setCurrentPath(newNode.getPath());
-      uiExplorer.setWorkspaceName(newNode.getSession().getWorkspace().getName());
-      uiExplorer.refreshExplorer(newNode, true);
-      uiExplorer.updateAjax(event);
-      EditDocumentActionComponent.editDocument(event, null, uiExplorer, uiExplorer, uiExplorer.getCurrentNode(), uiApp);
     }
   }
 
