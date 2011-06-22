@@ -195,6 +195,7 @@
       <invalid-date>"To Date" have to greater than "From Date"</invalid-date>
       <invalid-nodeType>Type de noeud "(0)" n'est pas valide! S'il vous plaît vérifiez à nouveau.</invalid-nodeType>
       <invalid-format>Blancs datetime format dans le champ '{0}'</invalid-format>
+      <name-not-allowed>Il y a des caractères invalides dans ce champ. Insérez une autre valeur ! </name-not-allowed>
     </msg>
   </UIContentSearchForm>
 
