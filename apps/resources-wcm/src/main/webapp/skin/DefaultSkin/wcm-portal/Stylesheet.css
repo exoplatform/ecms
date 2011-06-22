@@ -159,10 +159,6 @@ td {
   color: #0068FF;
 }
 
-.UIPresentationContainer a:hover {
-  text-decoration: underline;
-}
-
 /* Context Help CSS START */
 .ShowHelpIcon {
 background: url('background/ContextHelp/ShowHelpIcon.gif') no-repeat left center;
