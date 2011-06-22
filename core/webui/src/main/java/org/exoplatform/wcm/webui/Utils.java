@@ -271,8 +271,7 @@ public class Utils {
         filters.put(WCMComposer.FILTER_VERSION, version);
       filters.put(WCMComposer.FILTER_VISIBILITY, cacheVisibility);
       return WCMCoreUtils.getService(WCMComposer.class)
-                         .getContent(repository,
-                                     workspace,
+                         .getContent(workspace,
                                      nodeIdentifier,
                                      filters,
                                      WCMCoreUtils.getUserSessionProvider());

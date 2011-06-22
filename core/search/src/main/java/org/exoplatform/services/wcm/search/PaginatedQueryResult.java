@@ -18,10 +18,12 @@ package org.exoplatform.services.wcm.search;
 
 import java.util.HashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
+
 import javax.jcr.Node;
 import javax.jcr.query.QueryResult;
 import javax.jcr.query.Row;
 import javax.jcr.query.RowIterator;
+
 import org.apache.commons.lang.ArrayUtils;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.publication.WCMComposer;
@@ -121,8 +123,7 @@ public class PaginatedQueryResult extends PaginatedNodeIterator {
     WCMComposer wcmComposer = WCMCoreUtils.getService(WCMComposer.class);
     HashMap<String, String> filters = new HashMap<String, String>();
     filters.put(WCMComposer.FILTER_MODE, WCMComposer.MODE_LIVE);
-    return wcmComposer.getContent(nodeLocation.getRepository(),
-                                  nodeLocation.getWorkspace(),
+    return wcmComposer.getContent(nodeLocation.getWorkspace(),
                                   nodeLocation.getPath(),
                                   filters,
                                   WCMCoreUtils.getSystemSessionProvider());

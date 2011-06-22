@@ -24,7 +24,6 @@ import org.exoplatform.management.annotations.ManagedName;
 import org.exoplatform.management.jmx.annotations.NameTemplate;
 import org.exoplatform.management.jmx.annotations.Property;
 import org.exoplatform.management.rest.annotations.RESTEndpoint;
-import org.exoplatform.portal.config.UserACL;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cache.CacheService;
 import org.exoplatform.services.cache.ExoCache;
@@ -38,12 +37,9 @@ import org.exoplatform.services.ecm.publication.PublicationService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.access.AccessControlEntry;
 import org.exoplatform.services.jcr.access.PermissionType;
-import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
-import org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig.Permission;
 import org.exoplatform.services.jcr.sessions.ACLSessionProviderService;
-import org.exoplatform.services.jcr.sessions.impl.ACLSessionProviderServiceThreadLocalImpl;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.core.WCMService;
@@ -146,9 +142,23 @@ public class WCMComposerImpl implements WCMComposer, Startable {
    * @see
    * org.exoplatform.services.wcm.publication.WCMComposer#getContent(java.lang
    * .String, java.lang.String, java.lang.String, java.util.HashMap)
-   */
+   */  
+  @Deprecated
   public Node getContent(String repository,
                          String workspace,
+                         String nodeIdentifier,
+                         HashMap<String, String> filters,
+                         SessionProvider sessionProvider) throws Exception {
+    return getContent(workspace, nodeIdentifier, filters, sessionProvider);
+  }
+  
+  /*
+   * (non-Javadoc)
+   * @see
+   * org.exoplatform.services.wcm.publication.WCMComposer#getContent(java.lang
+   * .String, java.lang.String, java.lang.String, java.util.HashMap)
+   */
+  public Node getContent(String workspace,
                          String nodeIdentifier,
                          HashMap<String, String> filters,
                          SessionProvider sessionProvider) throws Exception {
@@ -157,16 +167,17 @@ public class WCMComposerImpl implements WCMComposer, Startable {
     String language = filters.get(FILTER_LANGUAGE);
     String visibility = filters.get(FILTER_VISIBILITY);
     String remoteUser = null;
+    String repository = null;
     try {
       remoteUser = Util.getPortalRequestContext().getRemoteUser();
+      repository = ((ManageableRepository)repositoryService.getCurrentRepository()).getConfiguration().getName();
     } catch (Exception e) {}
 
-    if (repository==null && workspace==null) {
+    if (workspace==null) {
+      if (nodeIdentifier.lastIndexOf("/") == 0) nodeIdentifier = nodeIdentifier.substring(1);
       String[] params = nodeIdentifier.split("/");
-      repository = params[0];
       workspace = params[1];
       try {
-//        TODO MTN: for what it here??? repositoryService.getRepository(repository);
         nodeIdentifier = nodeIdentifier.substring(repository.length()+workspace.length()+1);
       } catch (Exception e) {}
     }
