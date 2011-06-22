@@ -20,6 +20,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
@@ -29,11 +30,14 @@ import javax.jcr.RepositoryException;
 import javax.portlet.PortletPreferences;
 
 import org.apache.commons.lang.StringUtils;
+import org.exoplatform.container.PortalContainer;
 import org.exoplatform.ecm.utils.text.Text;
+import org.exoplatform.ecm.webui.utils.LockUtil;
 import org.exoplatform.portal.application.PortalRequestContext;
 import org.exoplatform.portal.webui.application.UIPortlet;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.templates.TemplateService;
+import org.exoplatform.services.ecm.publication.PublicationService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.wcm.publication.WCMComposer;
 import org.exoplatform.wcm.webui.Utils;
@@ -55,7 +59,8 @@ import org.exoplatform.webui.event.EventListener;
     lifecycle=Lifecycle.class,
     template="app:/groovy/SingleContentViewer/UIPresentationContainer.gtmpl",
     events = {
-        @EventConfig(listeners=UIPresentationContainer.PreferencesActionListener.class)
+        @EventConfig(listeners=UIPresentationContainer.PreferencesActionListener.class),
+        @EventConfig(listeners=UIPresentationContainer.FastPublishActionListener.class)
     }
 )
 public class UIPresentationContainer extends UIContainer{
@@ -414,6 +419,29 @@ public class UIPresentationContainer extends UIContainer{
       UISCVPreferences pcvConfigForm = presentationContainer.createUIComponent(UISCVPreferences.class, null, null);
       Utils.createPopupWindow(presentationContainer, pcvConfigForm, UISingleContentViewerPortlet.UIPreferencesPopupID, 600);
     }
+  }
+  
+  public static class FastPublishActionListener extends EventListener<UIPresentationContainer> {
+
+    /*
+     * (non-Javadoc)
+     * @see
+     * org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui
+     * .event.Event)
+     */
+    public void execute(Event<UIPresentationContainer> event) throws Exception {
+      UIPresentationContainer uiContainer = event.getSource();
+      PublicationService publicationService = (PublicationService) PortalContainer.getInstance()
+        .getComponentInstanceOfType(PublicationService.class);
+      Node node = uiContainer.getNodeView();
+      if (node.isLocked()) {
+        node.getSession().addLockToken(LockUtil.getLockToken(node));
+      }
+      HashMap<String, String> context = new HashMap<String, String>();
+      
+      publicationService.changeState(node, "published", context);
+    }
+
   }
   
   public String getInlineEditingField(Node orgNode, String propertyName, String defaultValue, String inputType, 

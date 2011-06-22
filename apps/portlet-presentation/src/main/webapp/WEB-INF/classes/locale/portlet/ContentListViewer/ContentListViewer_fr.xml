@@ -88,8 +88,9 @@
     </label>
     <action>
       <refresh>Rafraîchir</refresh>
-      <edit>Modifier</edit>
+      <edit>Modifier dans l'explorateur de contenu</edit>
       <delete>Effacer</delete>
+      <publish>Publier</publish>
     </action>
     <label>
       <draft>Brouillon</draft>

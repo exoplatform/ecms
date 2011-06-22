@@ -24,8 +24,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.MissingResourceException;
 import java.util.Map.Entry;
+import java.util.MissingResourceException;
 
 import javax.jcr.Node;
 import javax.jcr.PathNotFoundException;
@@ -42,6 +42,7 @@ import org.exoplatform.portal.webui.container.UIContainer;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.resolver.ResourceResolver;
 import org.exoplatform.services.cms.folksonomy.NewFolksonomyService;
+import org.exoplatform.services.ecm.publication.PublicationService;
 import org.exoplatform.services.jcr.access.PermissionType;
 import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.log.ExoLogger;
@@ -77,7 +78,8 @@ import org.exoplatform.webui.event.EventListener;
 @ComponentConfigs( {
     @ComponentConfig(lifecycle = Lifecycle.class, events = {
         @EventConfig(listeners = UICLVPresentation.RefreshActionListener.class),
-        @EventConfig(listeners = UICLVPresentation.DeleteContentActionListener.class) }),
+        @EventConfig(listeners = UICLVPresentation.DeleteContentActionListener.class),
+        @EventConfig(listeners = UICLVPresentation.FastPublishActionListener.class) }),
     @ComponentConfig(type = UICustomizeablePaginator.class,
                      events = @EventConfig(listeners = UICustomizeablePaginator.ShowPageActionListener.class)) })
 public class UICLVPresentation extends UIContainer {
@@ -216,7 +218,7 @@ public class UICLVPresentation extends UIContainer {
       NewFolksonomyService folksonomyService = getApplicationComponent(NewFolksonomyService.class);
       String workspace = "dms-system";
       tagStyles = new HashMap<String, String>();
-      for (Node tag : folksonomyService.getAllTagStyle("repository", workspace)) {
+      for (Node tag : folksonomyService.getAllTagStyle(workspace)) {
         tagStyles.put(tag.getProperty("exo:styleRange").getValue().getString(),
                       tag.getProperty("exo:htmlStyle").getValue().getString());
       }
@@ -679,6 +681,7 @@ public class UICLVPresentation extends UIContainer {
     StringBuffer sb = new StringBuffer();
     String contentEditLink = getEditLink(viewNode, true, false);
     String contentDeleteLink = event("DeleteContent", NodeLocation.getExpressionByNode(viewNode));
+    String fastPublishLink = event("FastPublish", NodeLocation.getExpressionByNode(viewNode));
     String hoverClass = Utils.isShowQuickEdit() ? " ContainerHoverClassInner" : "";
     PortletRequestContext portletRequestContext = WebuiRequestContext.getCurrentInstance();
     sb.append("<div class=\"" + cssClass + "\" onmouseover=\"this.className  = '" + cssClass + " "
@@ -704,7 +707,7 @@ public class UICLVPresentation extends UIContainer {
       }
 
       if (isShowEdit(viewNode) && !LockUtil.isLocked(viewNode)) {
-        String strEditBundle = "Delete";
+        String strEditBundle = "Edit in the Content Explorer";
         try {
           strEditBundle = portletRequestContext.getApplicationResourceBundle()
                                                .getString("UICLVPresentation.action.edit");
@@ -716,6 +719,20 @@ public class UICLVPresentation extends UIContainer {
         sb.append("            &nbsp;");
         sb.append("            </a>");
         sb.append("          </div>");
+        if (org.exoplatform.wcm.webui.utils.Utils.isShowFastPublish(viewNode)) {
+          String strFastPublishBundle = "Publish";
+          try {
+            strFastPublishBundle = portletRequestContext.getApplicationResourceBundle()
+                                                 .getString("UICLVPresentation.action.publish");
+          } catch (MissingResourceException e) {
+          }
+          sb.append("          <div style=\"float: right\">");
+          sb.append("            <a href=\"" + fastPublishLink + "\" title=\""
+              + strFastPublishBundle + "\"class=\"FastPublishIcon\" >");
+          sb.append("              &nbsp;");
+          sb.append("            </a>");
+          sb.append("          </div>");          
+        }
       } else {
         sb.append("          <div style=\"float: right\">");
         sb.append("            <div title=\"lock\" class=\"IconLocked\" >");
@@ -785,6 +802,30 @@ public class UICLVPresentation extends UIContainer {
                                "UICLVPresentation.msg.delete-content-successfull",
                                null,
                                ApplicationMessage.INFO);
+    }
+  }
+  
+  public static class FastPublishActionListener extends EventListener<UICLVPresentation> {
+
+    /*
+     * (non-Javadoc)
+     * @see
+     * org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui
+     * .event.Event)
+     */
+    public void execute(Event<UICLVPresentation> event) throws Exception {
+      UICLVPresentation contentListPresentation = event.getSource();
+      String nodePath = event.getRequestContext().getRequestParameter(OBJECTID);
+      Node node = NodeLocation.getNodeByExpression(nodePath);
+      PublicationService publicationService = (PublicationService) PortalContainer.getInstance()
+          .getComponentInstanceOfType(PublicationService.class);
+      if (node.isLocked()) {
+        node.getSession().addLockToken(LockUtil.getLockToken(node));
+      }
+      HashMap<String, String> context = new HashMap<String, String>();
+
+      publicationService.changeState(node, "published", context);
+      event.getRequestContext().addUIComponentToUpdateByAjax(contentListPresentation);
     }
   }
 

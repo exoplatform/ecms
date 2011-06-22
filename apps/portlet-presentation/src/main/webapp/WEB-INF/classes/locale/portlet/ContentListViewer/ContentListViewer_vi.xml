@@ -109,6 +109,7 @@
       <refresh>Làm mới</refresh>
       <edit>Chỉnh sửa</edit>
       <delete>Xóa</delete>
+      <publish>Công khai</publish>
     </action>
     <label>
       <draft>Bản nháp</draft>

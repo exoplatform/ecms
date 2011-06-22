@@ -127,6 +127,7 @@
       <refresh>リフレッシュ</refresh>
       <edit>編集</edit>
       <delete>削除</delete>
+      <publish>Publish</publish>
     </action>
     <label>
       <draft>ドラフト</draft>

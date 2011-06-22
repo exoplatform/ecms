@@ -12,6 +12,7 @@
 		def quickEditingBlockId = portletId + "-QuickEditingBlock";
 		def hoverClass = Utils.isShowQuickEdit() ? " ContainerHoverClass" : "";
 		def node = uicomponent.getNodeView();
+		def currentState = uicomponent.getCurrentState();
 		if (node != null) {
 			def isShowOptionBar = uicomponent.isShowOptionBar(); 
 			def isShowTitle = uicomponent.isShowTitle();
@@ -50,8 +51,17 @@
 										  &nbsp;
 										</a>           
 									</div>
+									<%
+									  if (org.exoplatform.wcm.webui.utils.Utils.isShowFastPublish(node)) {
+									%>
+									<div style="float: right">
+                    <a href="<%= uicomponent.event("FastPublish")%>" title="<%= _ctx.appRes("UIPresentationContainer.title.FastPublish")%>" class="FastPublishIcon" >
+                      &nbsp;
+                    </a>
+									</div>
+									<%}%>
 									<div class="EdittingCurrentState" style="float: right">
-                    <%=uicomponent.getCurrentState() %>
+                    ${currentState}
                   </div>
 								</div>
 							</div>

@@ -2,8 +2,9 @@
 <bundle>
  <UIPresentationContainer>
   <title>
-   <QuickEdit>Quick edit</QuickEdit>
+   <QuickEdit>Edit in the Content Explorer</QuickEdit>
    <print>Print this page</print>
+   <FastPublish>Publish</FastPublish>
   </title>
   <label>
    <draft>Draft</draft>

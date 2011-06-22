@@ -2,8 +2,9 @@
 <bundle>
  <UIPresentationContainer>
   <title>
-   <QuickEdit>Éditer rapidement</QuickEdit>
+   <QuickEdit>Modifier dans l'explorateur de contenu</QuickEdit>
    <print>Imprimer cette page</print>
+   <FastPublish>Publier</FastPublish>
   </title>
   <label>
    <draft>brouillon</draft>

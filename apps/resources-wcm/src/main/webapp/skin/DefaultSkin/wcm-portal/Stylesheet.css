@@ -327,6 +327,13 @@ background: url('background/ContextHelp/ShowHelpIcon.gif') no-repeat left center
   display: block;
 }
 
+.FastPublishIcon {
+  background: url('icons/FastPublishIcon.png') no-repeat left center;
+  margin-left: 6px;
+  width: 16px;
+  display: block;
+}
+
 .CloseContentIcon {
   background: url('icons/CloseContentIcon.png') no-repeat center center;
   margin-left:6px;

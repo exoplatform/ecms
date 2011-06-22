@@ -131,8 +131,9 @@
     </label>
     <action>
       <refresh>Refresh</refresh>
-      <edit>Edit</edit>
+      <edit>Edit in the Content Explorer</edit>
       <delete>Delete</delete>
+      <publish>Publish</publish>
     </action>
     <label>
       <draft>Draft</draft>
