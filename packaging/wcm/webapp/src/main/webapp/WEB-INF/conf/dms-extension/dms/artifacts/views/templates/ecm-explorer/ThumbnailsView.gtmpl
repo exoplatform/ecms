@@ -145,7 +145,7 @@
                   }            
                 }
               if (!data.isNodeType(Utils.EXO_RESTORELOCATION) && !Utils.isTrashHomeNode(data)) {  
-              	String clipboardLink = serverUrl + "/" + portalName + "/" + restContextName + "/private/jcr/" + repository + "/" + preferenceWS + data.getPath();
+              	String clipboardLink = serverUrl + "/" + restContextName + "/private/jcr/" + repository + "/" + preferenceWS + data.getPath();
 	               strActs +=	"<a class='MenuItem' style='display: block;' id='clip_button1$i' path='$clipboardLink' onclick=\"eXo.ecm.ECMUtils.pushToClipboard(event,'$clipboardLink');\">" ;
 	               strActs +=  "	<div class='MenuURLIcon GetURL16x16Icon'>" ;
 	               strActs +=	  _ctx.appRes("ECMContextMenu.event.GetURL");

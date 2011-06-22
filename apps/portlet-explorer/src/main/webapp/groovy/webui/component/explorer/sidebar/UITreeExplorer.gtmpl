@@ -131,7 +131,7 @@
   			  }				    
   	    }
   		
-  			String clipboardLink = serverPath + "/" + portalName + "/" + restContextName + "/private/jcr/" + repository + "/" + preferenceWS + node.getPath();
+  			String clipboardLink = serverPath + "/" + restContextName + "/private/jcr/" + repository + "/" + preferenceWS + node.getPath();
   			int depthChild = node.getDepth();
         if (!node.isNodeType(Utils.EXO_RESTORELOCATION) && !Utils.isTrashHomeNode(node)) {  			
 	  			strActs +=	"<a class='MenuItem' style='display: block;' id='${drive}_treeclip_button$depthChild$counter' path='$clipboardLink' onclick=\"eXo.ecm.ECMUtils.pushToClipboard(event,'$clipboardLink');\">" ;        
