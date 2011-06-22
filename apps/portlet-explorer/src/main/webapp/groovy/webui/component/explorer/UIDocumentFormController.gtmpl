@@ -1,3 +1,7 @@
+<%  
+  def messageClose = uicomponent.getClosingConfirmMsg("UIDocumentForm.msg.confirm-close") ;
+  def messageNavigate = uicomponent.getClosingConfirmMsg("UIDocumentForm.msg.confirm-navigate") ;
+%>
 <div class="UIDocumentFormController" id="$uicomponent.id" >	
 	<%
 	  if(uicomponent.isDisplayOptionBlockPanel()) {
@@ -27,17 +31,7 @@
 	   		}
 		%>	
 	<% } %>
-	<div id="CloseConfirmationMsg" style="display:none"></div>
-	<div id="NavigateConfirmationMsg" style="display:none"></div>
+	<div id="CloseConfirmationMsg" style="display:none">${messageClose}</div>
+	<div id="NavigateConfirmationMsg" style="display:none">${messageNavigate}</div>
 </div>
 <script type="text/javascript" src="/ecmexplorer/javascript/eXo/ecm/CloseEvents.js"></script>
-<%  
-	String closeConfirmationMsg = "UIDocumentForm.msg.confirm-close";
-	String navigateConfirmationMsg = "UIDocumentForm.msg.confirm-navigate";
-	def messageClose = uicomponent.getClosingConfirmMsg(closeConfirmationMsg) ;
-	def messageNavigate = uicomponent.getClosingConfirmMsg(navigateConfirmationMsg) ;
-%>
-<script type="text/javascript"> 
-	setClosingConfirmationMsg('<%=messageClose%>');
-	setNavigatingConfirmationMsg('<%=messageNavigate%>');
-</script>

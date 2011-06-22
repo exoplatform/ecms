@@ -37,13 +37,6 @@ function ajaxGet(url, callback) {
  * - manage changes popup
  * - manage CKeditor update in textareas
  **/
-function setClosingConfirmationMsg(msg) {
-  document.getElementById("CloseConfirmationMsg").innerHTML = msg;
-}
-
-function setNavigatingConfirmationMsg(msg) {
-  document.getElementById("NavigateConfirmationMsg").innerHTML = msg;
-}
 UIForm.prototype.submitForm = function(formId, action, useAjax, callback) {
  if(action.toLowerCase() == "close") {
    if (b_changed) {      
