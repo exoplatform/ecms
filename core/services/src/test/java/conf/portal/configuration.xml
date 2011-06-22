@@ -27,16 +27,6 @@
   <component>
 	  <key>org.exoplatform.services.cms.actions.ActionServiceContainer</key>  
 	  <type>org.exoplatform.services.cms.actions.impl.ActionServiceContainerImpl</type>
-	  <init-params>
-      <value-param>
-        <name>workspace</name>
-        <value>system</value>
-      </value-param>
-      <value-param>
-        <name>repository</name>
-        <value>repository</value>
-      </value-param>            
-    </init-params>    
   </component>  
     
   <component>
@@ -72,12 +62,6 @@
   <component>
 	  <key>org.exoplatform.services.cms.relations.RelationsService</key>  
 	  <type>org.exoplatform.services.cms.relations.impl.RelationsServiceImpl</type>
-	  <init-params>
-	    <value-param>
-	      <name>repositories</name>
-	      <value>repository</value>
-	    </value-param>
-	  </init-params>
 	</component>	
   
   <component>
@@ -120,10 +104,6 @@
 	  <key>org.exoplatform.services.cms.queries.QueryService</key>  
 	  <type>org.exoplatform.services.cms.queries.impl.QueryServiceImpl</type>
 	  <init-params>
-	    <value-param>
-	      <name>workspace</name>
-	      <value>system</value>
-	    </value-param>   
 	    <value-param>
 	      <name>relativePath</name>
 	      <value>Private/Queries</value>
@@ -223,12 +203,6 @@
 	<component>
     <key>org.exoplatform.services.cms.views.ApplicationTemplateManagerService</key>
     <type>org.exoplatform.services.cms.views.impl.ApplicationTemplateManagerServiceImpl</type>
-    <init-params>
-        <properties-param>
-        <name>storedLocations</name>
-        	<property name="repository" value="system"/>
-        </properties-param>
-      </init-params>
   </component>
   
 	<component>

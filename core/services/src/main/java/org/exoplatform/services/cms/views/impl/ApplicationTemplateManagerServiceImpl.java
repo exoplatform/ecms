@@ -29,7 +29,6 @@ import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 
 import org.exoplatform.container.xml.InitParams;
-import org.exoplatform.container.xml.PropertiesParam;
 import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.impl.DMSConfiguration;
 import org.exoplatform.services.cms.impl.DMSRepositoryConfiguration;
@@ -68,8 +67,6 @@ public class ApplicationTemplateManagerServiceImpl implements ApplicationTemplat
 
   private NodeHierarchyCreator hierarchyCreator;
 
-  private InitParams params;
-
   private TemplateService templateService;
 
   /**
@@ -90,7 +87,6 @@ public class ApplicationTemplateManagerServiceImpl implements ApplicationTemplat
       DMSConfiguration dmsConfiguration) throws Exception{
     this.repositoryService = repositoryService;
     dmsConfiguration_ = dmsConfiguration;
-    this.params = params;
     this.hierarchyCreator = hierarchyCreator;
     templateService = WCMCoreUtils.getService(TemplateService.class);
   }
@@ -330,7 +326,6 @@ public class ApplicationTemplateManagerServiceImpl implements ApplicationTemplat
    * {@inheritDoc}
    */
   public void start() {
-    PropertiesParam propertiesParam = params.getPropertiesParam("storedLocations");
     RepositoryEntry repositoryEntry = null;
     try {
       repositoryEntry = repositoryService.getCurrentRepository().getConfiguration();
@@ -339,10 +334,7 @@ public class ApplicationTemplateManagerServiceImpl implements ApplicationTemplat
     }
 
     String repoName = repositoryEntry.getName();
-    String workspaceName = propertiesParam.getProperty(repoName);
-    if(workspaceName != null) {
-      workspaceName = repositoryEntry.getSystemWorkspaceName();
-    }
+    String workspaceName = repositoryEntry.getSystemWorkspaceName();
     storedWorkspaces.put(repoName,workspaceName);
     basedApplicationTemplatesPath = hierarchyCreator.getJcrPath(BasePath.CMS_VIEWTEMPLATES_PATH);
 
