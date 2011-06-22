@@ -242,6 +242,7 @@ public class UICLVPortlet extends UIPortletApplication {
   public void processRender(WebuiApplication app, WebuiRequestContext context) throws Exception {
     PortletRequestContext pContext = (PortletRequestContext) context;
     PortletPreferences preferences = pContext.getRequest().getPreferences();
+    
     Boolean sharedCache = "true".equals(preferences.getValue(PREFERENCE_SHARED_CACHE, "true"));    
 
     if (context.getRemoteUser()==null ||
@@ -285,14 +286,19 @@ public class UICLVPortlet extends UIPortletApplication {
       manualMode = getChild(UICLVManualMode.class);
       if (manualMode != null)
         removeChild(UICLVManualMode.class);
-      if (nDisplayMode.equals(DISPLAY_MODE_AUTOMATIC)) {
-        folderMode = addChild(UICLVFolderMode.class, null, null);
-        folderMode.init();
-        folderMode.setRendered(true);
-      } else {
-        manualMode = addChild(UICLVManualMode.class, null, null);
-        manualMode.init();
-        manualMode.setRendered(true);
+      if (Utils.isPortalEditMode()){
+        clvConfig = addChild(UICLVConfig.class, null, null);
+        clvConfig.setModeInternal(false);
+      }else {
+        if (nDisplayMode.equals(DISPLAY_MODE_AUTOMATIC)) {
+          folderMode = addChild(UICLVFolderMode.class, null, null);
+          folderMode.init();
+          folderMode.setRendered(true);
+        } else {
+          manualMode = addChild(UICLVManualMode.class, null, null);
+          manualMode.init();
+          manualMode.setRendered(true);
+        }
       }
     } else {
       if (npMode.equals(PortletMode.VIEW)) {
