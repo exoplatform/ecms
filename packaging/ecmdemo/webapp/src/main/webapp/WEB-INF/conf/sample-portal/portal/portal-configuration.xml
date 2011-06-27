@@ -25,11 +25,6 @@
 	xsi:schemaLocation="http://www.exoplaform.org/xml/ns/kernel_1_1.xsd http://www.exoplaform.org/xml/ns/kernel_1_1.xsd"
 	xmlns="http://www.exoplaform.org/xml/ns/kernel_1_1.xsd">
 
-  <component>
-    <key>org.exoplatform.portal.mop.description.DescriptionService</key>
-    <type>org.exoplatform.portal.mop.description.DescriptionServiceImpl</type>
-  </component>
-
   <external-component-plugins>
     <!-- The full qualified name of the UserPortalConfigService -->  
     <target-component>org.exoplatform.portal.config.UserPortalConfigService</target-component>
