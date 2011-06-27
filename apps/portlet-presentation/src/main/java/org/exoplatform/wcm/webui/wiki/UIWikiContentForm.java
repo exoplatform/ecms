@@ -151,7 +151,14 @@ public class UIWikiContentForm extends UIForm {
       }
     }
     PageNode newPageNode = createNewPageNode(parentPageNode, page.getPageId());
-    portalCfgService.update(pageNavigation);
+    /**
+     * TODO: the API for loading navigations was changed 
+     * it's required to use [UserNavigation, UserNode] instead of using [PageNavigation, PageNode]
+     * 
+     * UIWikiContentForm class is useless in ECMS project now, 
+     * so we've temporarily commented this lines and we will refactor them later
+     */
+    //portalCfgService.update(pageNavigation);
     return newPageNode.getUri();
   }
 
@@ -396,15 +403,24 @@ public class UIWikiContentForm extends UIForm {
     String[] parameterArr = queryString.split("&");
     String parentUri = parameterArr[0].split("=")[1];
     String pageUri = parameterArr[1].split("=")[1];
-    UIPortal uiPortal = Util.getUIPortal();
-    List<PageNavigation> navigations = uiPortal.getNavigations();
+    
     PageNavigation pageNavigation = null;
-    for (PageNavigation paNavigation: navigations) {
-      if (PortalConfig.PORTAL_TYPE.equals(paNavigation.getOwnerType())) {
-        pageNavigation = paNavigation;
-        break;
-      }
-    }
+    /**
+    * TODO: the API for loading navigations was changed 
+    * it's required to use [UserNavigation, UserNode] instead of using [PageNavigation, PageNode]
+    * 
+    * UIWikiContentForm class is useless in ECMS project now, 
+    * so we've temporarily commented this lines and we will refactor them later
+    */
+    //  UIPortal uiPortal = Util.getUIPortal();
+    //  List<PageNavigation> navigations = uiPortal.getNavigations();
+    //  PageNavigation pageNavigation = null;
+    //  for (PageNavigation paNavigation: navigations) {
+    //    if (PortalConfig.PORTAL_TYPE.equals(paNavigation.getOwnerType())) {
+    //      pageNavigation = paNavigation;
+    //      break;
+    //    }
+    //  }
     setPageNavigation(pageNavigation);
     setParentUri(parentUri);
     setPageUri(pageUri);

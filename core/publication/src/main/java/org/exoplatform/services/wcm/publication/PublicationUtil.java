@@ -36,6 +36,10 @@ import org.exoplatform.portal.config.model.Page;
 import org.exoplatform.portal.config.model.PageNavigation;
 import org.exoplatform.portal.config.model.PageNode;
 import org.exoplatform.portal.config.model.PortalConfig;
+import org.exoplatform.portal.mop.Visibility;
+import org.exoplatform.portal.mop.user.UserNode;
+import org.exoplatform.portal.mop.user.UserNodeFilterConfig;
+import org.exoplatform.portal.mop.user.UserPortal;
 import org.exoplatform.portal.pom.spi.portlet.Portlet;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.jcr.RepositoryService;
@@ -91,7 +95,7 @@ public class PublicationUtil {
   public static void findPageNodeByPageId(PageNode node, String pageId, List<PageNode> allPageNode)
       throws Exception {
     if (pageId.equals(node.getPageReference())) {
-      allPageNode.add(node.clone());
+      allPageNode.add(node);
     }
     List<PageNode> children = node.getChildren();
     if (children == null)
@@ -352,25 +356,27 @@ public class PublicationUtil {
    * @throws Exception the exception
    */
   public static boolean isNodeContentPublishedToPageNode(Node contentNode, String navNodeURI) throws Exception {
-    DataStorage dataStorage = WCMCoreUtils.getService(DataStorage.class);
-    PageNavigation pageNavigation = dataStorage.getPageNavigation(PortalConfig.PORTAL_TYPE,
-                                                                  Util.getUIPortalApplication()
-                                                                      .getOwner());
-    ArrayList<PageNode> lisPageNodes = PublicationUtil.getAllPageNodeFromPageNavigation(pageNavigation);
-    PageNode pageNode = null;
+    
+    UserPortal userPortal = Util.getUIPortalApplication().getUserPortalConfig().getUserPortal();
 
-    for (PageNode tempPageNode : lisPageNodes) {
-      if (tempPageNode.getUri().equals(navNodeURI.replace("/"
-          + Util.getUIPortalApplication().getOwner() + "/", ""))) {
-        pageNode = tempPageNode;
-        break;
-      }
+    // make filter
+    UserNodeFilterConfig.Builder filterConfigBuilder = UserNodeFilterConfig.builder();
+    filterConfigBuilder.withAuthorizationCheck().withVisibility(Visibility.DISPLAYED, Visibility.TEMPORAL);
+    filterConfigBuilder.withTemporalCheck();
+    UserNodeFilterConfig filterConfig = filterConfigBuilder.build();
+
+    // get user node
+    String nodeURI = navNodeURI.replace("/" + Util.getUIPortalApplication().getOwner() + "/", "");
+    UserNode userNode;
+    if (Util.getUIPortal().getUserNavigation() != null) {
+      userNode = userPortal.resolvePath(Util.getUIPortal().getUserNavigation(), filterConfig, nodeURI);
+    } else {
+      userNode = userPortal.resolvePath(filterConfig, nodeURI);
     }
-
-    if (pageNode == null || pageNode.getPageReference() == null) return false;
-
-    return
-      PublicationUtil.getValuesAsString(contentNode, "publication:webPageIDs").contains(pageNode.getPageReference());
+    
+    if (userNode == null || userNode.getPageRef() == null) return false;
+    
+    return PublicationUtil.getValuesAsString(contentNode, "publication:webPageIDs").contains(userNode.getPageRef());
   }
 
   /**

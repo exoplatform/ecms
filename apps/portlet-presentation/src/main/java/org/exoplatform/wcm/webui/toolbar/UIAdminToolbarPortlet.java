@@ -19,7 +19,7 @@
 
 package org.exoplatform.wcm.webui.toolbar;
 
-import org.exoplatform.portal.config.model.PageNavigation;
+import org.exoplatform.portal.mop.user.UserNavigation;
 import org.exoplatform.wcm.webui.Utils;
 import org.exoplatform.webui.application.WebuiApplication;
 import org.exoplatform.webui.application.WebuiRequestContext;
@@ -38,7 +38,7 @@ public class UIAdminToolbarPortlet extends UIPortletApplication
    {
    }
 
-   public PageNavigation getSelectedNavigation() throws Exception {
+   public UserNavigation getSelectedNavigation() throws Exception {
      return Utils.getSelectedNavigation();
    }
 

@@ -181,7 +181,7 @@ public class UICategoryNavigationTreeBase extends UITree {
     String preferenceTargetPage = portletPreferences.getValue(UICategoryNavigationConstant.PREFERENCE_TARGET_PAGE, "");
     String backPath = requestURI.substring(0, requestURI.lastIndexOf("/"));
     if (backPath.endsWith(preferenceTargetPage)
-        || requestURI.endsWith(Util.getUIPortal().getSelectedNode().getUri()))
+        || requestURI.endsWith(Util.getUIPortal().getSelectedUserNode().getURI()))
       backPath = "javascript:void(0)";
     else if (backPath.endsWith(preferenceTreeName))
       backPath = backPath.substring(0, backPath.lastIndexOf("/"));
@@ -239,8 +239,8 @@ public class UICategoryNavigationTreeBase extends UITree {
       parameters = URLDecoder.decode(StringUtils.substringAfter(Util.getPortalRequestContext()
                                                                     .getNodePath(),
                                                                 Util.getUIPortal()
-                                                                    .getSelectedNode()
-                                                                    .getUri()), "UTF-8");
+                                                                    .getSelectedUserNode()
+                                                                    .getURI()), "UTF-8");
     } catch (UnsupportedEncodingException e) {
     }
 

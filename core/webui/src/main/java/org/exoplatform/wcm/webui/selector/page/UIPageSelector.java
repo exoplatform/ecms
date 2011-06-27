@@ -61,7 +61,7 @@ public class UIPageSelector extends UIForm {
     uiTree.setUIRightClickPopupMenu(null);
 
     UIPageSelectorPanel pageSelectorPanel = addChild(UIPageSelectorPanel.class, null, null);
-    pageSelectorPanel.setSelectedPage(pageNodeSelector.getSelectedNode().getNode());
+    pageSelectorPanel.setSelectedNode(pageNodeSelector.getSelectedNode().getNode());
     pageSelectorPanel.updateGrid();
   }
 
@@ -137,13 +137,13 @@ public class UIPageSelector extends UIForm {
       String uri  = event.getRequestContext().getRequestParameter(OBJECTID) ;
       UITree tree = pageNodeSelector.getChild(UITree.class) ;
       if(tree.getParentSelected() == null && (uri == null || uri.length() < 1)){
-        pageNodeSelector.selectNavigation(pageNodeSelector.getSelectedNavigation().getId()) ;
+        pageNodeSelector.selectNavigation(pageNodeSelector.getId(pageNodeSelector.getSelectedNavigation()));
       } else {
-        pageNodeSelector.selectPageNodeByUri(uri) ;
+        pageNodeSelector.selectUserNodeByUri(uri);
       }
 
       UIPageSelectorPanel pageSelectorPanel = pageSelector.getChild(UIPageSelectorPanel.class);
-      pageSelectorPanel.setSelectedPage(pageNodeSelector.getSelectedNode().getNode());
+      pageSelectorPanel.setSelectedNode(pageNodeSelector.getSelectedNode().getNode());
       pageSelectorPanel.updateGrid();
 
       event.getRequestContext().addUIComponentToUpdateByAjax(pageSelector) ;

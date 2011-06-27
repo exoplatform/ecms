@@ -16,17 +16,11 @@
  */
 package org.exoplatform.services.wcm.publication.lifecycle.stageversion.ui;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import org.apache.commons.lang.StringUtils;
-import org.exoplatform.portal.config.UserPortalConfigService;
-import org.exoplatform.portal.config.model.Page;
 import org.exoplatform.portal.config.model.PageNavigation;
 import org.exoplatform.portal.config.model.PageNode;
-import org.exoplatform.portal.webui.navigation.PageNavigationUtils;
-import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.core.UITree;
@@ -160,11 +154,18 @@ public class UIPublicationTree extends UITree {
      * @param pageNode the new page node
      */
     public void setPageNode(PageNode pageNode) {
-      this.pageNode = pageNode;
-      this.pageNode.setResolvedLabel(resourceBundle);
-      if(pageNode.getChildren() == null) {
-        children = null;
-      }
+      /**
+       * TODO: the API for loading navigations was changed (replaced [PageNavigation, PageNode] by [UserNavigation, UserNode])
+       * after refactoring, PageNavigationUtils class was removed from inside API so we can't use this class any more
+       * 
+       * UIPublicationTree class is useless in ECMS project now, 
+       * so we've temporarily commented some lines below and we will refactor them later
+       */      
+//      this.pageNode = pageNode;
+//      this.pageNode.setResolvedLabel(resourceBundle);
+//      if(pageNode.getChildren() == null) {
+//        children = null;
+//      }
     }
 
     /**
@@ -197,8 +198,16 @@ public class UIPublicationTree extends UITree {
      * @return the resolved label
      */
     public String getResolvedLabel() {
-      if(isPageNode) return pageNode.getResolvedLabel();
-      return portalName;
+      /**
+       * TODO: the API for loading navigations was changed (replaced [PageNavigation, PageNode] by [UserNavigation, UserNode])
+       * after refactoring, PageNavigationUtils class was removed from inside API so we can't use this class any more
+       * 
+       * UIPublicationTree class is useless in ECMS project now, 
+       * so we've temporarily commented some lines below and we will refactor them later
+       */  
+//      if(isPageNode) return pageNode.getResolvedLabel();
+//      return portalName;
+      return "";
     }
 
     /**
@@ -223,23 +232,30 @@ public class UIPublicationTree extends UITree {
      * @throws Exception the exception
      */
     public void setChildrenByPageNodes(List<PageNode> pagesNodes) throws Exception {
-      if(pagesNodes == null) return;
-      List<TreeNode> list = new ArrayList<TreeNode>();
-      UserPortalConfigService userPortalConfigService = WCMCoreUtils.getService(UserPortalConfigService.class);
-      for(PageNode pNode: pagesNodes) {
-        if (pNode.getPageReference() == null) continue;
-        Page page = userPortalConfigService.getPage(pNode.getPageReference(),
-                                                    org.exoplatform.portal.webui.util.Util.getPortalRequestContext()
-                                                                                          .getRemoteUser());
-        if (page == null) continue;
-        if (!pNode.isDisplay())
-          continue;
-        TreeNode treeNode = new TreeNode(portalName, navigation, resourceBundle, true);
-        treeNode.setPageNode(pNode);
-        treeNode.setChildrenByPageNodes(pNode.getChildren());
-        list.add(treeNode);
-      }
-      setTreeNodeChildren(list);
+      /**
+       * TODO: the API for loading navigations was changed (replaced [PageNavigation, PageNode] by [UserNavigation, UserNode])
+       * after refactoring, PageNavigationUtils class was removed from inside API so we can't use this class any more
+       * 
+       * UIPublicationTree class is useless in ECMS project now, 
+       * so we've temporarily commented some lines below and we will refactor them later
+       */  
+//      if(pagesNodes == null) return;
+//      List<TreeNode> list = new ArrayList<TreeNode>();
+//      UserPortalConfigService userPortalConfigService = WCMCoreUtils.getService(UserPortalConfigService.class);
+//      for(PageNode pNode: pagesNodes) {
+//        if (pNode.getPageReference() == null) continue;
+//        Page page = userPortalConfigService.getPage(pNode.getPageReference(),
+//                                                    org.exoplatform.portal.webui.util.Util.getPortalRequestContext()
+//                                                                                          .getRemoteUser());
+//        if (page == null) continue;
+//        if (!pNode.isDisplay())
+//          continue;
+//        TreeNode treeNode = new TreeNode(portalName, navigation, resourceBundle, true);
+//        treeNode.setPageNode(pNode);
+//        treeNode.setChildrenByPageNodes(pNode.getChildren());
+//        list.add(treeNode);
+//      }
+//      setTreeNodeChildren(list);
     }
 
     /**
@@ -256,14 +272,21 @@ public class UIPublicationTree extends UITree {
         TreeNode treeNode = new TreeNode(portalName, navigation, resourceBundle, false);
         treeNode.setChildrenByPageNodes(navigation.getNodes());
         return treeNode;
-      }
-      String pageNodeURI = StringUtils.substringAfter(uri, "/" + portalName + "/");
-      PageNode other = PageNavigationUtils.searchPageNodeByUri(this.navigation, pageNodeURI);
-      if (other == null)
-        return null;
-      TreeNode treeNode = new TreeNode(portalName, navigation, resourceBundle, true);
-      treeNode.setPageNode(other);
-      treeNode.setChildrenByPageNodes(other.getChildren());
+      }      
+      /**
+      * TODO: the API for loading navigations was changed (replaced [PageNavigation, PageNode] by [UserNavigation, UserNode])
+      * after refactoring, PageNavigationUtils class was removed from inside API so we can't use this class any more
+      * 
+      * UIPublicationTree class is useless in ECMS project now, 
+      * so we've temporarily commented some lines below and we will refactor them later
+      */      
+      //      String pageNodeURI = StringUtils.substringAfter(uri, "/" + portalName + "/");
+      //      PageNode other = PageNavigationUtils.searchPageNodeByUri(this.navigation, pageNodeURI);
+      //      if(other == null) return null;
+      //      TreeNode treeNode = new TreeNode(portalName,navigation,resourceBundle, true);
+      //      treeNode.setPageNode(other);
+      //      treeNode.setChildrenByPageNodes(other.getChildren());
+      TreeNode treeNode = new TreeNode(portalName,navigation,resourceBundle, true);
       return treeNode;
     }
 

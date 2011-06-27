@@ -26,7 +26,7 @@ import org.exoplatform.portal.config.model.Application;
 import org.exoplatform.portal.config.model.Container;
 import org.exoplatform.portal.config.model.ModelObject;
 import org.exoplatform.portal.config.model.Page;
-import org.exoplatform.portal.config.model.PageNode;
+import org.exoplatform.portal.mop.user.UserNode;
 import org.exoplatform.portal.webui.page.UIPage;
 import org.exoplatform.portal.webui.portal.UIPortal;
 import org.exoplatform.portal.webui.util.PortalDataMapper;
@@ -135,9 +135,9 @@ public class UIWelcomeScreen extends UIForm {
     public void execute(Event<UIWelcomeScreen> event) throws Exception {
       UIWelcomeScreen welcomeScreen = event.getSource();
       UIPortal portal = Util.getUIPortal();
-      PageNode currentPageNode = portal.getSelectedNode();
+      UserNode currentPageNode = portal.getSelectedUserNode();
       DataStorage dataStorage = welcomeScreen.getApplicationComponent(DataStorage.class);
-      Page currentPage = dataStorage.getPage(currentPageNode.getPageReference());
+      Page currentPage = dataStorage.getPage(currentPageNode.getPageRef());
       ArrayList<Object> applications = new ArrayList<Object>();
       applications.addAll(currentPage.getChildren());
       ArrayList<ModelObject> applicationsTmp = currentPage.getChildren();

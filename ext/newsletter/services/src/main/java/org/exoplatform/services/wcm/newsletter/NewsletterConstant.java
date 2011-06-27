@@ -345,7 +345,7 @@ public class NewsletterConstant {
     List<User> users = new ArrayList<User>();
 
     DataStorage dataStorage = WCMCoreUtils.getService(DataStorage.class);
-    Page page = dataStorage.getPage(Util.getUIPortal().getSelectedNode().getPageReference());
+    Page page = dataStorage.getPage(Util.getUIPortal().getSelectedUserNode().getPageRef());
     List<String> pageAccessPermissions = new ArrayList<String>(Arrays.asList(page.getAccessPermissions()));
 
     UserHandler userHandler = organizationService.getUserHandler();
@@ -386,7 +386,7 @@ public class NewsletterConstant {
     MembershipHandler memberShipHandler = organizationService.getMembershipHandler();
 
     DataStorage dataStorage = WCMCoreUtils.getService(DataStorage.class);
-    Page page = dataStorage.getPage(Util.getUIPortal().getSelectedNode().getPageReference());
+    Page page = dataStorage.getPage(Util.getUIPortal().getSelectedUserNode().getPageRef());
     List<String> pageAccessPermissions = new ArrayList<String>(Arrays.asList(page.getAccessPermissions()));
     for (String removedPermission : removedPermissions) {
       if (pageAccessPermissions.contains(removedPermission)) {

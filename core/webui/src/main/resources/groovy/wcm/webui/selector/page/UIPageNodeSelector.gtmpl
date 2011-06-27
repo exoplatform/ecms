@@ -4,7 +4,7 @@
   import org.exoplatform.webui.core.UIRightClickPopupMenu ;
   import org.exoplatform.web.application.JavascriptManager;
 
-  navigations = uicomponent.getPageNavigations();
+  navigations = uicomponent.getUserNavigations();
   def selectedNav = null;
   try {
   	selectedNav =  uicomponent.getSelectedNavigation();

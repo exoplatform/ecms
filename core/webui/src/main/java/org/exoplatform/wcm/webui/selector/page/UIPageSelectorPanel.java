@@ -23,8 +23,7 @@ import org.exoplatform.commons.utils.LazyPageList;
 import org.exoplatform.commons.utils.ListAccess;
 import org.exoplatform.commons.utils.ListAccessImpl;
 import org.exoplatform.ecm.webui.selector.UISelectable;
-import org.exoplatform.portal.config.model.PageNavigation;
-import org.exoplatform.portal.config.model.PageNode;
+import org.exoplatform.portal.mop.user.UserNode;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIContainer;
@@ -53,7 +52,7 @@ public class UIPageSelectorPanel extends UIContainer {
   private UIPageIterator pageIterator;
 
   /** The selected page. */
-  private PageNode selectedPage;
+  private UserNode selectedNode;
 
   /**
    * Instantiates a new uI page selector panel.
@@ -68,18 +67,17 @@ public class UIPageSelectorPanel extends UIContainer {
    * Update grid.
    */
   public void updateGrid() {
-    List<PageNode> children = null;
-    if (selectedPage == null) {
+    List<UserNode> children = null;
+    if (selectedNode == null) {
       UIPageSelector pageSelector = getAncestorOfType(UIPageSelector.class);
       UIPageNodeSelector pageNodeSelector = pageSelector.getChild(UIPageNodeSelector.class);
-      PageNavigation pageNavigation = pageNodeSelector.getSelectedNavigation();
-      children = new ArrayList<PageNode>(pageNavigation.getNodes());
+      UserNode rootNode = pageNodeSelector.getRootNodeOfSelectedNav();
+      children = new ArrayList<UserNode>(rootNode.getChildren());
     } else {
-      children = selectedPage.getChildren();
-      if (children == null) children = new ArrayList<PageNode>();
+      children = new ArrayList<UserNode>(selectedNode.getChildren());
     }
-    ListAccess<PageNode> pageNodeList = new ListAccessImpl<PageNode>(PageNode.class, children);
-    LazyPageList<PageNode> pageList = new LazyPageList<PageNode>(pageNodeList, 10);
+    ListAccess<UserNode> pageNodeList = new ListAccessImpl<UserNode>(UserNode.class, children);
+    LazyPageList<UserNode> pageList = new LazyPageList<UserNode>(pageNodeList, 10);
     pageIterator.setPageList(pageList);
   }
 
@@ -96,21 +94,21 @@ public class UIPageSelectorPanel extends UIContainer {
   }
 
   /**
-   * Gets the selected page.
+   * Gets the selected node.
    *
-   * @return the selected page
+   * @return the selected node
    */
-  public PageNode getSelectedPage() {
-    return selectedPage;
+  public UserNode getSelectedNode() {
+    return selectedNode;
   }
 
   /**
-   * Sets the selected page.
+   * Sets the selected node.
    *
-   * @param selectedPage the new selected page
+   * @param selectedNode the new selected node
    */
-  public void setSelectedPage(PageNode selectedPage) {
-    this.selectedPage = selectedPage;
+  public void setSelectedNode(UserNode selectedNode) {
+    this.selectedNode = selectedNode;
   }
 
   /**

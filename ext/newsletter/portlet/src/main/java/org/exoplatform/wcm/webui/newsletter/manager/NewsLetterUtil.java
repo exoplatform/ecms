@@ -44,7 +44,7 @@ public class NewsLetterUtil {
     String link = url.replaceFirst("Subcribe", "ConfirmUserCode")
                       .replaceFirst("UINewsletterViewerForm", "UINewsletterViewerPortlet")
                       .replaceAll("&amp;", "&");
-    String selectedNode = Util.getUIPortal().getSelectedNode().getUri() ;
+    String selectedNode = Util.getUIPortal().getSelectedUserNode().getURI();
     String portalName = "/" + getPortalName() ;
     if(link.indexOf(portalName) > 0) {
       if(link.indexOf(portalName + "/" + selectedNode) < 0){

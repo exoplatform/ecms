@@ -330,7 +330,7 @@ public class UISubscriptions extends UIForm {
       OrganizationService organizationService = WCMCoreUtils.getService(OrganizationService.class) ;
       WCMConfigurationService wcmConfigurationService = WCMCoreUtils.getService(WCMConfigurationService.class);
       DataStorage dataStorage = WCMCoreUtils.getService(DataStorage.class);
-      Page page = dataStorage.getPage(Util.getUIPortal().getSelectedNode().getPageReference());
+      Page page = dataStorage.getPage(Util.getUIPortal().getSelectedUserNode().getPageRef());
       List<String> pageAccessPermissions = new ArrayList<String>(Arrays.asList(page.getAccessPermissions()));
       
       String membership = wcmConfigurationService.getRuntimeContextParam(WCMConfigurationService.NEWSLETTER_MANAGE_MEMBERSHIP);
@@ -465,7 +465,7 @@ public class UISubscriptions extends UIForm {
             OrganizationService organizationService = WCMCoreUtils.getService(OrganizationService.class) ;
             WCMConfigurationService wcmConfigurationService = WCMCoreUtils.getService(WCMConfigurationService.class);
             DataStorage dataStorage = WCMCoreUtils.getService(DataStorage.class);
-            Page page = dataStorage.getPage(Util.getUIPortal().getSelectedNode().getPageReference());
+            Page page = dataStorage.getPage(Util.getUIPortal().getSelectedUserNode().getPageRef());
             List<String> pageAccessPermissions = new ArrayList<String>(Arrays.asList(page.getAccessPermissions()));
             
             String membership = 

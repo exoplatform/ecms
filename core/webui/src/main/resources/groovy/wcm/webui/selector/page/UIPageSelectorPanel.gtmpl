@@ -37,10 +37,10 @@
 	      				%>
 				      		<tr class="$rowClass">
 				        		<td>
-				          			<div class=""><%= page.getUri() %></div>
+				          			<div class=""><%= page.getURI() %></div>
 				        		</td>
 				        		<td>
-			              			<a href="<%=uicomponent.event("Select", page.getUri())%>">
+			              			<a href="<%=uicomponent.event("Select", page.getURI())%>">
 			                			<div class="Select16x16Icon" style="margin: auto;"></div>
 			              			</a>
 				        		</td>

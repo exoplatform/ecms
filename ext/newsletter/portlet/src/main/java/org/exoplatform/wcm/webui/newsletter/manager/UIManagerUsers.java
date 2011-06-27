@@ -164,7 +164,7 @@ public class UIManagerUsers extends UITabPane {
 
   private List<String> getAllAccesPermissions() throws Exception{
     UserPortalConfigService userService = (UserPortalConfigService) this.getApplicationComponent(UserPortalConfigService.class);
-    Page page = userService.getPage(Util.getUIPortal().getSelectedNode().getPageReference());
+    Page page = userService.getPage(Util.getUIPortal().getSelectedUserNode().getPageRef());
     List<String> userGroupMembership = new ArrayList<String>();
     userGroupMembership.add(page.getOwnerId());
     addArrayToList(userGroupMembership, new String[]{page.getEditPermission()});

@@ -299,8 +299,8 @@ public class UIPresentationContainer extends UIContainer{
       parameters = URLDecoder.decode(StringUtils.substringAfter(Util.getPortalRequestContext()
                                                                     .getNodePath(),
                                                                 Util.getUIPortal()
-                                                                    .getSelectedNode()
-                                                                    .getUri()
+                                                                    .getSelectedUserNode()
+                                                                    .getURI()
                                                                     + "/"), "UTF-8");
     } catch (UnsupportedEncodingException e) {
       return null;

@@ -16,6 +16,7 @@
  */
 package org.exoplatform.wcm.webui.scv;
 
+import java.util.Collection;
 import java.util.Date;
 
 import javax.jcr.Node;
@@ -23,10 +24,20 @@ import javax.portlet.MimeResponse;
 import javax.portlet.PortletMode;
 import javax.portlet.PortletPreferences;
 import javax.portlet.RenderResponse;
+import javax.portlet.ResourceRequest;
+import javax.portlet.ResourceURL;
 
+import org.exoplatform.portal.mop.Visibility;
+import org.exoplatform.portal.mop.user.UserNode;
+import org.exoplatform.portal.mop.user.UserNodeFilterConfig;
+import org.exoplatform.portal.mop.user.UserPortal;
+import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.templates.TemplateService;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.core.WCMService;
-import org.exoplatform.services.wcm.publication.WCMComposer;
+import org.exoplatform.services.wcm.navigation.NavigationUtils;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.wcm.webui.Utils;
 import org.exoplatform.webui.application.WebuiApplication;
 import org.exoplatform.webui.application.WebuiRequestContext;
@@ -35,9 +46,9 @@ import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.core.UIPopupContainer;
 import org.exoplatform.webui.core.UIPortletApplication;
 import org.exoplatform.webui.core.lifecycle.UIApplicationLifecycle;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.w3c.dom.Element;
-import org.exoplatform.services.log.ExoLogger;
-import org.exoplatform.services.log.Log;
 
 /**
  * Created by The eXo Platform SAS
@@ -197,13 +208,91 @@ public class UISingleContentViewerPortlet extends UIPortletApplication {
   }
   public Node getNodeByPreference() {
     try {
-      String repository = preferences.getValue(REPOSITORY, null);
+      //String repository = preferences.getValue(REPOSITORY, null);
       String workspace = preferences.getValue(WORKSPACE, null);
       String nodeIdentifier = preferences.getValue(IDENTIFIER, null) ;
       WCMService wcmService = getApplicationComponent(WCMService.class);
-      return wcmService.getReferencedContent(Utils.getSessionProvider(), repository, workspace, nodeIdentifier);
+      return wcmService.getReferencedContent(WCMCoreUtils.getUserSessionProvider(), workspace, nodeIdentifier);
     } catch (Exception e) {
       return null;
     }
+  }
+  
+  @Override
+  public void serveResource(WebuiRequestContext context) throws Exception {
+    super.serveResource(context);
+
+    ResourceRequest req = context.getRequest();
+    String nodeURI = req.getResourceID();
+
+    JSONArray jsChilds = getChildrenAsJSON(nodeURI);
+    if (jsChilds == null) {
+      return;
+    }
+
+    MimeResponse res = context.getResponse();
+    res.setContentType("text/json");
+    res.getWriter().write(jsChilds.toString());
+  }   
+
+  public JSONArray getChildrenAsJSON(String nodeURI) throws Exception {
+    WebuiRequestContext context = WebuiRequestContext.getCurrentInstance();
+    Collection<UserNode> children = null;
+
+    UserPortal userPortal = Util.getUIPortalApplication().getUserPortalConfig().getUserPortal();
+
+    // make filter
+    UserNodeFilterConfig.Builder filterConfigBuilder = UserNodeFilterConfig.builder();
+    filterConfigBuilder.withAuthorizationCheck().withVisibility(Visibility.DISPLAYED, Visibility.TEMPORAL);
+    filterConfigBuilder.withTemporalCheck();
+    UserNodeFilterConfig filterConfig = filterConfigBuilder.build();
+
+    // get user node & update children
+    UserNode userNode;
+    if (context.getRemoteUser() != null) {
+      userNode = userPortal.resolvePath(Util.getUIPortal().getUserNavigation(), filterConfig, nodeURI);
+    } else {
+      userNode = userPortal.resolvePath(filterConfig, nodeURI);
+    }
+
+    if (userNode != null) {
+      userPortal.updateNode(userNode, NavigationUtils.ECMS_NAVIGATION_SCOPE, null);
+      children = userNode.getChildren();
+    }
+
+    // build JSON result
+    JSONArray jsChildren = new JSONArray();
+    if (children == null) {
+      return null;
+    }
+    MimeResponse res = context.getResponse();
+    for (UserNode child : children) {
+      jsChildren.put(toJSON(child, res));
+    }
+    return jsChildren;
+  }
+  
+  private JSONObject toJSON(UserNode node, MimeResponse res) throws Exception {
+    JSONObject json = new JSONObject();
+    String nodeId = node.getId();
+
+    json.put("label", node.getEncodedResolvedLabel());
+    json.put("hasChild", node.getChildrenCount() > 0);
+
+    UserNode selectedNode = Util.getUIPortal().getNavPath();
+    json.put("isSelected", nodeId.equals(selectedNode.getId()));
+    json.put("icon", node.getIcon());
+    json.put("uri", node.getURI());
+
+    ResourceURL rsURL = res.createResourceURL();
+    rsURL.setResourceID(res.encodeURL(node.getURI()));
+    json.put("getNodeURL", rsURL.toString());
+
+    JSONArray jsonChildren = new JSONArray();
+    for (UserNode child : node.getChildren()) {
+      jsonChildren.put(toJSON(child, res));
+    }
+    json.put("childs", jsonChildren);
+    return json;
   }
 }

@@ -28,8 +28,6 @@ import javax.servlet.http.HttpServletRequest;
 import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.portal.application.PortalRequestContext;
 import org.exoplatform.portal.config.model.PageNavigation;
-import org.exoplatform.portal.config.model.PageNode;
-import org.exoplatform.portal.webui.navigation.PageNavigationUtils;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.wcm.core.WCMConfigurationService;
 
@@ -86,13 +84,21 @@ public class WikiLinkParser {
    * @throws Exception the exception
    */
   protected static List<PageNavigation> getNavigations() throws Exception {
-    List<PageNavigation> allNav = Util.getUIPortal().getNavigations();
-    String remoteUser = Util.getPortalRequestContext().getRemoteUser();
-    List<PageNavigation> result = new ArrayList<PageNavigation>();
-    for (PageNavigation nav : allNav) {
-      result.add(PageNavigationUtils.filter(nav, remoteUser));
-    }
-    return result;
+    /**
+    * TODO: the API for loading navigations was changed (replaced [PageNavigation, PageNode] by [UserNavigation, UserNode])
+    * after refactoring, PageNavigationUtils class was removed from inside API so we can't use this class any more
+    * 
+    * WikiLinkParser class is useless in ECMS project now, 
+    * so we've temporarily commented this method and we will refactor it later
+    */  
+    //    List<PageNavigation> allNav = Util.getUIPortal().getNavigations();
+    //    String remoteUser = Util.getPortalRequestContext().getRemoteUser();
+    //    List<PageNavigation> result = new ArrayList<PageNavigation>();
+    //    for (PageNavigation nav : allNav) {      
+    //      result.add(PageNavigationUtils.filter(nav, remoteUser));
+    //    }    
+    //    return result;
+    return new ArrayList<PageNavigation>();
   }
 
   /**
@@ -131,16 +137,24 @@ public class WikiLinkParser {
     String parent = "";
     String newURI = "";
     String correctLink = "";
-    List<PageNavigation> navs = getNavigations();
-    PageNode pageNode = null;
-    for (PageNavigation navigation : navs) {
-      pageNode = PageNavigationUtils.searchPageNodeByUri(navigation, uri);
-      while (pageNode == null) {
-        uri = uri.substring(0, uri.lastIndexOf('/'));
-        pageNode = PageNavigationUtils.searchPageNodeByUri(navigation, uri);
-      }
-      if (pageNode != null) break;
-    }
+    
+    /**
+    * TODO: the API for loading navigations was changed (replaced [PageNavigation, PageNode] by [UserNavigation, UserNode])
+    * after refactoring, PageNavigationUtils class was removed from inside API so we can't use this class any more
+    * 
+    * WikiLinkParser class is useless in ECMS project now, 
+    * so we've temporarily commented this method and we will refactor it later
+    */   
+    //    List<PageNavigation> navs = getNavigations();
+    //    PageNode pageNode = null;
+    //    for (PageNavigation navigation : navs) {
+    //      pageNode = PageNavigationUtils.searchPageNodeByUri(navigation, uri);      
+    //      while (pageNode == null) {
+    //        uri = uri.substring(0, uri.lastIndexOf('/'));
+    //        pageNode = PageNavigationUtils.searchPageNodeByUri(navigation, uri);
+    //      }
+    //      if (pageNode != null) break;
+    //    }
     if (uri.length() != temp.length()) {
       parent = uri;
       newURI = temp.substring(uri.length() + 1);

@@ -35,7 +35,7 @@ import org.exoplatform.portal.config.model.Application;
 import org.exoplatform.portal.config.model.Container;
 import org.exoplatform.portal.config.model.ModelObject;
 import org.exoplatform.portal.config.model.Page;
-import org.exoplatform.portal.config.model.PageNode;
+import org.exoplatform.portal.mop.user.UserNode;
 import org.exoplatform.portal.webui.page.UIPage;
 import org.exoplatform.portal.webui.portal.UIPortal;
 import org.exoplatform.portal.webui.util.PortalDataMapper;
@@ -47,6 +47,7 @@ import org.exoplatform.services.wcm.core.WebSchemaConfigService;
 import org.exoplatform.services.wcm.portal.LivePortalManagerService;
 import org.exoplatform.services.wcm.portal.PortalFolderSchemaHandler;
 import org.exoplatform.services.wcm.publication.WCMPublicationService;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.services.wcm.webcontent.WebContentSchemaHandler;
 import org.exoplatform.wcm.webui.Utils;
 import org.exoplatform.wcm.webui.dialog.UIContentDialogForm;
@@ -156,7 +157,7 @@ public class UINameWebContentForm extends UIForm {
       String portalName = Util.getUIPortalApplication().getOwner();
       LivePortalManagerService livePortalManagerService = uiNameWebContentForm.
           getApplicationComponent(LivePortalManagerService.class);
-      Node portalNode = livePortalManagerService.getLivePortal(Utils.getSessionProvider(), portalName);
+      Node portalNode = livePortalManagerService.getLivePortal(WCMCoreUtils.getUserSessionProvider(), portalName);
       WebSchemaConfigService webSchemaConfigService = uiNameWebContentForm.
           getApplicationComponent(WebSchemaConfigService.class);
       PortalFolderSchemaHandler handler = webSchemaConfigService.
@@ -188,7 +189,7 @@ public class UINameWebContentForm extends UIForm {
         webContentNode.addMixin("mix:commentable");
       webContentStorage.getSession().save();
 
-      NodeLocation webcontentNodeLocation = NodeLocation.make(webContentNode);
+      NodeLocation webcontentNodeLocation = NodeLocation.getNodeLocationByNode(webContentNode);
       PortletRequestContext context = (PortletRequestContext) event.getRequestContext();
       PortletPreferences prefs = context.getRequest().getPreferences();
       prefs.setValue(UISingleContentViewerPortlet.REPOSITORY, webcontentNodeLocation.getRepository());
@@ -204,7 +205,7 @@ public class UINameWebContentForm extends UIForm {
                                                               .getRemoteUser(),
                                                           null);
       if (!Utils.isEditPortletInCreatePageWizard()) {
-        String pageId = Util.getUIPortal().getSelectedNode().getPageReference();
+        String pageId = Util.getUIPortal().getSelectedUserNode().getPageRef();
         UserPortalConfigService upcService = uiNameWebContentForm.getApplicationComponent(UserPortalConfigService.class);
         wcmPublicationService.updateLifecyleOnChangePage(upcService.getPage(pageId), event.getRequestContext().getRemoteUser());
       }
@@ -232,9 +233,9 @@ public class UINameWebContentForm extends UIForm {
     public void execute(Event<UINameWebContentForm> event) throws Exception {
       UINameWebContentForm nameWebcontentForm = event.getSource();
       UIPortal uiPortal = Util.getUIPortal();
-      PageNode currentPageNode = uiPortal.getSelectedNode();
+      UserNode currentPageNode = uiPortal.getSelectedUserNode();
       DataStorage dataStorage = nameWebcontentForm.getApplicationComponent(DataStorage.class);
-      Page currentPage = dataStorage.getPage(currentPageNode.getPageReference());
+      Page currentPage = dataStorage.getPage(currentPageNode.getPageRef());
       ArrayList<Object> applications = new ArrayList<Object>();
       applications.addAll(currentPage.getChildren());
       ArrayList<ModelObject> applicationsTmp = currentPage.getChildren();

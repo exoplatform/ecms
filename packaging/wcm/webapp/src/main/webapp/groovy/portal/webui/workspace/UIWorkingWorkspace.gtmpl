@@ -2,21 +2,12 @@
   import org.exoplatform.container.PortalContainer;
   import org.exoplatform.web.application.JavascriptManager;
   import org.exoplatform.portal.webui.util.Util;  
-  import org.exoplatform.portal.webui.navigation.PageNavigationUtils;
-  import org.exoplatform.services.wcm.navigation.NavigationService;
-  import org.exoplatform.portal.config.model.PageNavigation;
   import javax.servlet.http.HttpSession;
 
   def rcontext = _ctx.getRequestContext() ;
   def userName = rcontext.getRemoteUser();
   
-  List<PageNavigation>  navigations = new ArrayList<PageNavigation>();
-  for(PageNavigation nav: Util.getUIPortal().getNavigations()){
-    navigations.add(PageNavigationUtils.filter(nav, userName ));
-  }
-  def navigationService = uicomponent.getApplicationComponent(NavigationService.class);
-  def JSONnavigation = navigationService.getNavigationsAsJSON(navigations);
-  def selectedNodeUri = Util.getUIPortal().getSelectedNode().getUri();
+  def selectedNodeUri = Util.getUIPortal().getSelectedUserNode().getURI();
   def session = _ctx.getRequestContext().getRequest().getSession();
   def previousURI = session.getAttribute("previousURI");
   session.setAttribute("previousURI", selectedNodeUri);
@@ -36,7 +27,6 @@
 <script type="text/javascript">
   eXo.env.portal.userName='<%= userName %>';
   eXo.env.portal.language='<%= language %>'
-  eXo.env.portal.navigations = <%= JSONnavigation %> ;
   eXo.env.portal.selectedNodeUri = '<%= selectedNodeUri %>';
   eXo.env.portal.wcmContentTitle = '<%= _ctx.getRequestContext().getRequest().getAttribute("WCM.Content.Title") %>';
   eXo.env.portal.previousURI = '<%= previousURI %>';

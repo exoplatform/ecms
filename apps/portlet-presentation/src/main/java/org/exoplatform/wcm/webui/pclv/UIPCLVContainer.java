@@ -38,6 +38,7 @@ import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.publication.WCMComposer;
 import org.exoplatform.services.wcm.utils.PaginatedNodeIterator;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.wcm.webui.Utils;
 import org.exoplatform.wcm.webui.pclv.config.UIPCLVConfig;
 import org.exoplatform.web.application.ApplicationMessage;
@@ -154,8 +155,8 @@ public class UIPCLVContainer extends UIContainer {
       categoryPath = URLDecoder.decode(StringUtils.substringAfter(Util.getPortalRequestContext()
                                                                       .getNodePath(),
                                                                   Util.getUIPortal()
-                                                                      .getSelectedNode()
-                                                                      .getUri()
+                                                                      .getSelectedUserNode()
+                                                                      .getURI()
                                                                       + "/"), "UTF-8");
     } catch (Exception e) {
       Utils.createPopupMessage(this, "UIPCLVConfig.msg.decode", null, ApplicationMessage.ERROR);
@@ -270,7 +271,7 @@ public class UIPCLVContainer extends UIContainer {
    * @throws Exception the exception
    */
   public ResourceResolver getTemplateResourceResolver() throws Exception {
-    DMSConfiguration dmsConfiguration = Utils.getService(DMSConfiguration.class);
+    DMSConfiguration dmsConfiguration = WCMCoreUtils.getService(DMSConfiguration.class);
     String workspace = dmsConfiguration.getConfig().getSystemWorkspace();
 
     return new JCRResourceResolver(workspace);
@@ -356,7 +357,7 @@ public class UIPCLVContainer extends UIContainer {
     List<Node> nodes = wcmComposer.getContents(workspace,
                                                categoryPath,
                                                filters,
-                                               Utils.getSessionProvider());
+                                               WCMCoreUtils.getUserSessionProvider());
     return nodes;
   }
 

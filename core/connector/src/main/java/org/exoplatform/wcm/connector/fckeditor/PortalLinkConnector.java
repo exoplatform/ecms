@@ -20,7 +20,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Comparator;
 import java.util.Date;
-import java.util.List;
+import java.util.Iterator;
 
 import javax.servlet.ServletContext;
 import javax.ws.rs.GET;
@@ -42,15 +42,21 @@ import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.portal.config.DataStorage;
 import org.exoplatform.portal.config.Query;
 import org.exoplatform.portal.config.UserACL;
+import org.exoplatform.portal.config.UserPortalConfig;
 import org.exoplatform.portal.config.UserPortalConfigService;
 import org.exoplatform.portal.config.model.Page;
-import org.exoplatform.portal.config.model.PageNavigation;
-import org.exoplatform.portal.config.model.PageNode;
 import org.exoplatform.portal.config.model.PortalConfig;
+import org.exoplatform.portal.mop.SiteKey;
+import org.exoplatform.portal.mop.Visibility;
+import org.exoplatform.portal.mop.user.UserNavigation;
+import org.exoplatform.portal.mop.user.UserNode;
+import org.exoplatform.portal.mop.user.UserNodeFilterConfig;
+import org.exoplatform.portal.mop.user.UserPortal;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.rest.resource.ResourceContainer;
 import org.exoplatform.services.security.ConversationState;
+import org.exoplatform.services.wcm.navigation.NavigationUtils;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -234,27 +240,53 @@ public class PortalLinkConnector implements ResourceContainer {
   private Document buildNavigationXMLResponse(String currentFolder, String command, String userId) throws Exception {
     PortalContainer container = PortalContainer.getInstance();
     RequestLifeCycle.begin(container);
-    Element rootElement = initRootElement(command, currentFolder);
     String portalName = currentFolder.substring(1, currentFolder.indexOf('/', 1));
     String pageNodeUri = currentFolder.substring(portalName.length() + 1);
-    UserPortalConfigService pConfig = WCMCoreUtils.getService(UserPortalConfigService.class);
-    List<PageNavigation> navigations = pConfig.getUserPortalConfig(portalName, userId).getNavigations();
+
+    // init the return value
+    Element rootElement = initRootElement(command, currentFolder);
     Element foldersElement = rootElement.getOwnerDocument().createElement("Folders");
     Element filesElement = rootElement.getOwnerDocument().createElement("Files");
     rootElement.appendChild(foldersElement);
     rootElement.appendChild(filesElement);
-    for (PageNavigation navigation : navigations) {
-      for (PageNode pageNode : navigation.getNodes()) {
-        if ("/".equalsIgnoreCase(pageNodeUri)) {
-          processPageNode(portalName, pageNode, foldersElement, filesElement, userId, pConfig);
-        } else {
-          PageNode node = getPageNode(pageNode, pageNodeUri);
-          if (node != null && node.getChildren() != null) {
-            for (PageNode child : node.getChildren()) {
-              processPageNode(portalName, child, foldersElement, filesElement, userId, pConfig);
-            }
-          }
-        }
+
+    // get navigation data
+    UserPortalConfigService pConfig = WCMCoreUtils.getService(UserPortalConfigService.class);
+    UserPortalConfig userPortalCfg = pConfig.getUserPortalConfig(portalName,
+                                                                 userId,
+                                                                 null);
+    UserPortal userPortal = userPortalCfg.getUserPortal();
+    UserNavigation navigation = userPortal.getNavigation(SiteKey.portal(portalName));
+    UserNode userNode = null;
+
+    if (pageNodeUri == null) {
+      RequestLifeCycle.end();
+      return rootElement.getOwnerDocument();
+    }
+    
+    //filter nodes
+    UserNodeFilterConfig.Builder filterConfigBuilder = UserNodeFilterConfig.builder();
+    filterConfigBuilder.withAuthorizationCheck().withVisibility(Visibility.DISPLAYED, Visibility.TEMPORAL);
+    filterConfigBuilder.withTemporalCheck();
+    UserNodeFilterConfig filterConfig = filterConfigBuilder.build();
+
+    if ("/".equals(pageNodeUri)) {
+      userNode = userPortal.getNode(navigation, NavigationUtils.ECMS_NAVIGATION_SCOPE, filterConfig, null);
+    } else {
+      pageNodeUri = pageNodeUri.substring(1, pageNodeUri.length() - 1);
+      userNode = userPortal.resolvePath(navigation, filterConfig, pageNodeUri);
+
+      if (userNode != null) {
+        userPortal.updateNode(userNode, NavigationUtils.ECMS_NAVIGATION_SCOPE, null);
+      }
+    }
+
+    if (userNode != null) {
+      // expand root node
+      Iterator<UserNode> childrenIter = userNode.getChildren().iterator();
+      while (childrenIter.hasNext()) {
+        UserNode child = childrenIter.next();
+        processPageNode(portalName, child, foldersElement, filesElement, userId, pConfig);
       }
     }
     RequestLifeCycle.end();
@@ -291,7 +323,7 @@ public class PortalLinkConnector implements ResourceContainer {
    * Process page node.
    *
    * @param portalName the portal name
-   * @param pageNode the page node
+   * @param userNode the user node
    * @param foldersElement the root element
    * @param filesElement
    * @param userId the user id
@@ -300,22 +332,18 @@ public class PortalLinkConnector implements ResourceContainer {
    * @throws Exception the exception
    */
   private void processPageNode(String portalName,
-                               PageNode pageNode,
+                               UserNode userNode,
                                Element foldersElement,
                                Element filesElement,
                                String userId,
                                UserPortalConfigService portalConfigService) throws Exception {
-    if (!pageNode.isDisplay()) {
-      return;
-    }
-
-    String pageId = pageNode.getPageReference();
+    String pageId = userNode.getPageRef();
     Page page = portalConfigService.getPage(pageId, userId);
     String pageUri = "";
     if (page == null) {
     pageUri = "/";
     Element folderElement = foldersElement.getOwnerDocument().createElement("Folder");
-      folderElement.setAttribute("name", pageNode.getName());
+      folderElement.setAttribute("name", userNode.getName());
       folderElement.setAttribute("folderType", "");
       folderElement.setAttribute("url", pageUri);
       foldersElement.appendChild(folderElement);
@@ -327,10 +355,10 @@ public class PortalLinkConnector implements ResourceContainer {
           break;
         }
       }
-      pageUri = "/" + servletContext.getServletContextName() + "/" + accessMode + "/" + portalName + "/" + pageNode.getUri();
+      pageUri = "/" + servletContext.getServletContextName() + "/" + accessMode + "/" + portalName + "/" + userNode.getURI();
 
       Element folderElement = foldersElement.getOwnerDocument().createElement("Folder");
-      folderElement.setAttribute("name", pageNode.getName());
+      folderElement.setAttribute("name", userNode.getName());
       folderElement.setAttribute("folderType", "");
       folderElement.setAttribute("url", pageUri);
       foldersElement.appendChild(folderElement);
@@ -338,7 +366,7 @@ public class PortalLinkConnector implements ResourceContainer {
       SimpleDateFormat formatter = new SimpleDateFormat(ISO8601.SIMPLE_DATETIME_FORMAT);
       String datetime = formatter.format(new Date());
       Element fileElement = filesElement.getOwnerDocument().createElement("File");
-      fileElement.setAttribute("name", pageNode.getName());
+      fileElement.setAttribute("name", userNode.getName());
       fileElement.setAttribute("dateCreated", datetime);
       fileElement.setAttribute("fileType", "page node");
       fileElement.setAttribute("url", pageUri);
@@ -355,19 +383,20 @@ public class PortalLinkConnector implements ResourceContainer {
    *
    * @return the page node
    */
-  private PageNode getPageNode(PageNode root, String uri) {
-    if (uri.equals("/" + root.getUri() + "/")) {
+  private UserNode getUserNode(UserNode root, String uri) {
+    if (uri.equals("/" + root.getURI() + "/")) {
       return root;
     }
-    List<PageNode> list = root.getChildren();
-    if (list == null) {
+    Iterator<UserNode> childrenIter = root.getChildren().iterator();
+    if (childrenIter == null) {
       return null;
     }
-    for (PageNode child : list) {
-      if (uri.equals("/" + child.getUri() + "/")) {
+    while (childrenIter.hasNext()) {
+      UserNode child = childrenIter.next();
+      if (uri.equals("/" + child.getURI() + "/")) {
         return child;
       }
-      PageNode deepChild = getPageNode(child, uri);
+      UserNode deepChild = getUserNode(child, uri);
       if (deepChild != null) {
         return deepChild;
       }

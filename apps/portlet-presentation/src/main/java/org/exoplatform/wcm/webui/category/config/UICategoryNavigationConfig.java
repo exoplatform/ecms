@@ -32,6 +32,7 @@ import org.exoplatform.services.cms.views.ApplicationTemplateManagerService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.config.RepositoryEntry;
 import org.exoplatform.services.wcm.portal.LivePortalManagerService;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.wcm.webui.Utils;
 import org.exoplatform.wcm.webui.category.UICategoryNavigationConstant;
 import org.exoplatform.wcm.webui.category.UICategoryNavigationPortlet;
@@ -165,7 +166,7 @@ public class UICategoryNavigationConfig extends UIForm implements UISelectable {
     ApplicationTemplateManagerService appTemplateMngService = getApplicationComponent(ApplicationTemplateManagerService.class);
     List<Node> templateNodes = appTemplateMngService.getTemplatesByCategory(portletName,
                                                                             templateCategory,
-                                                                            Utils.getSessionProvider());
+                                                                            WCMCoreUtils.getUserSessionProvider());
     for (Node templateNode : templateNodes) {
       String templateName = templateNode.getName();
       String templatePath = templateNode.getPath();
@@ -250,7 +251,7 @@ public class UICategoryNavigationConfig extends UIForm implements UISelectable {
         PortalRequestContext portalRequestContext = Util.getPortalRequestContext();
         UIPortal uiPortal = Util.getUIPortal();
 
-        String pageNodeSelected = uiPortal.getSelectedNode().getName();
+        String pageNodeSelected = uiPortal.getSelectedUserNode().getName();
         String portalURI = portalRequestContext.getPortalURI();
 
         ((PortletRequestContext)event.getRequestContext()).setApplicationMode(PortletMode.VIEW);

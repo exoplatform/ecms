@@ -1986,7 +1986,15 @@ public class UIBrowseContainer extends UIContainer {
       PageNodeEvent<UIPortal> pnevent;
       pnevent = new PageNodeEvent<UIPortal>(uiPortal, PageNodeEvent.CHANGE_PAGE_NODE, uri);
       uiPortal.broadcast(pnevent, Event.Phase.PROCESS);
-      uiPortal.getSelectedNode().setUri(uri);
+      /**
+      * TODO: the API for loading navigations was changed 
+      * (replaced [PageNavigation, PageNode] by [UserNavigation, UserNode])
+      * it's required to use setName() for nodes instead of setUri()
+      * 
+      * UIBrowseContainer class is useless in ECMS project now, 
+      * so we've temporarily commented this method and we will refactor it later
+      */
+      //uiPortal.getSelectedNode().setUri(uri);
     }
   }
 
