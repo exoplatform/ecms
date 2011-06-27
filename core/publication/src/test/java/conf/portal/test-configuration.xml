@@ -36,6 +36,11 @@
   </component>
 
   <component>
+    <key>org.exoplatform.portal.mop.description.DescriptionService</key>
+    <type>org.exoplatform.portal.mop.description.DescriptionServiceImpl</type>
+  </component>
+
+  <component>
     <key>org.exoplatform.portal.config.UserPortalConfigService</key>
     <type>org.exoplatform.portal.config.UserPortalConfigService</type>
     <component-plugins>
@@ -122,12 +127,12 @@
   </component>
 
   <component>
-    <type>org.exoplatform.groovyscript.text.TemplateService</type>
-  </component>
+ ï¿½ ï¿½<type>org.exoplatform.groovyscript.text.TemplateService</type>
+ ï¿½</component>
  
   <component>
-    <type>org.exoplatform.groovyscript.text.TemplateStatisticService</type>
-  </component>
+ ï¿½ ï¿½<type>org.exoplatform.groovyscript.text.TemplateStatisticService</type>
+ ï¿½</component>
 
   <component>
     <key>org.exoplatform.services.organization.idm.PicketLinkIDMService</key>

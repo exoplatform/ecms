@@ -35,6 +35,11 @@
   </component>
 
   <component>
+    <key>org.exoplatform.portal.mop.description.DescriptionService</key>
+    <type>org.exoplatform.portal.mop.description.DescriptionServiceImpl</type>
+  </component>
+
+  <component>
     <key>org.exoplatform.portal.config.UserPortalConfigService</key>
     <type>org.exoplatform.portal.config.UserPortalConfigService</type>
     <component-plugins>
