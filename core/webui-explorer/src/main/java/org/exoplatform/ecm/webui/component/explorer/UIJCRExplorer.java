@@ -55,7 +55,6 @@ import org.exoplatform.ecm.webui.component.explorer.control.UIAddressBar;
 import org.exoplatform.ecm.webui.component.explorer.control.UIControl;
 import org.exoplatform.ecm.webui.component.explorer.popup.actions.UIDocumentForm;
 import org.exoplatform.ecm.webui.component.explorer.popup.actions.UIDocumentFormController;
-import org.exoplatform.ecm.webui.component.explorer.popup.actions.UISelectDocumentForm;
 import org.exoplatform.ecm.webui.component.explorer.sidebar.UISideBar;
 import org.exoplatform.ecm.webui.component.explorer.sidebar.UITreeExplorer;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
@@ -167,17 +166,17 @@ public class UIJCRExplorer extends UIContainer {
     UIWorkingArea uiWorkingArea = this.getChild(UIWorkingArea.class);
     UIDocumentWorkspace uiDocumentWorkspace = uiWorkingArea.getChild(UIDocumentWorkspace.class);
     //check if edit with popup
-//    UIComponent uiComp = uiPopup.getUIComponent();
-//    if (uiComp instanceof UIDocumentFormController && ((UIDocumentFormController)uiComp).isRendered()) {
-//      return ((UIDocumentFormController)uiComp).getChild(UIDocumentForm.class).isAddNew();
-//    }
-//     //check if edit without popup
-//    if (uiDocumentWorkspace.isRendered()) {
-//      UIDocumentFormController controller = uiDocumentWorkspace.getChild(UIDocumentFormController.class);
-//      if (controller != null && controller.isRendered()) {
-//        return controller.getChild(UIDocumentForm.class).isAddNew();
-//      }
-//    }
+    UIComponent uiComp = uiPopup.getUIComponent();
+    if (uiComp instanceof UIDocumentFormController && ((UIDocumentFormController)uiComp).isRendered()) {
+      return ((UIDocumentFormController)uiComp).getChild(UIDocumentForm.class).isAddNew();
+    }
+     //check if edit without popup
+    if (uiDocumentWorkspace.isRendered()) {
+      UIDocumentFormController controller = uiDocumentWorkspace.getChild(UIDocumentFormController.class);
+      if (controller != null && controller.isRendered()) {
+        return controller.getChild(UIDocumentForm.class).isAddNew();
+      }
+    }
     return false;
   }
 
@@ -519,12 +518,6 @@ public class UIJCRExplorer extends UIContainer {
         if(getCurrentNode().isNodeType(Utils.NT_FOLDER) || getCurrentNode().isNodeType(Utils.NT_UNSTRUCTURED))
           uiDocumentWithTree.updatePageListData();
         uiDocumentWorkspace.setRenderedChild(UIDocumentContainer.class) ;
-      } else {
-        UIDocumentFormController uiDocController = uiDocumentWorkspace.getChild(UIDocumentFormController.class);
-        UISelectDocumentForm uiSelectDoc = uiDocController.getChild(UISelectDocumentForm.class);
-        if (uiSelectDoc != null && uiSelectDoc.isRendered()) {
-          uiSelectDoc.updatePageListData();
-        }
       }
     }
     UISideBar uiSideBar = uiWorkingArea.findFirstComponentOfType(UISideBar.class);
@@ -674,13 +667,7 @@ public class UIJCRExplorer extends UIContainer {
         if(getCurrentNode().isNodeType(Utils.NT_FOLDER) || getCurrentNode().isNodeType(Utils.NT_UNSTRUCTURED))
           uiDocumentWithTree.updatePageListData();
         uiDocWorkspace.setRenderedChild(UIDocumentContainer.class) ;
-      } else {
-        UIDocumentFormController uiDocController = uiDocWorkspace.getChild(UIDocumentFormController.class);
-        UISelectDocumentForm uiSelectDoc = uiDocController.getChild(UISelectDocumentForm.class);
-        if (uiSelectDoc != null && uiSelectDoc.isRendered()) {
-          uiSelectDoc.updatePageListData();
         }
-      }
     }
     uiActionBar.setRendered(uiPortlet.isShowActionBar());
     uiAddressBar.setRendered(uiPortlet.isShowTopBar());

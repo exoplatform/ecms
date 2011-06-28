@@ -22,10 +22,6 @@
 
 @import url('wcm-nodetypes/16x16/Stylesheet.css');
 
-@import url('wcm-nodetypes/20x20/Stylesheet.css');
-
-@import url('wcm-nodetypes/70x80/Stylesheet.css');
-
 @import url('wcm-nodetypes/277x182/Stylesheet.css');
 
 @import url('wcm-nodetypes/48x48/Stylesheet.css');
@@ -79,6 +75,7 @@
 }
 
 .FormScrollLayout .HorizontalLayout {
+	height: 370px;
 	overflow: auto;
 }
 

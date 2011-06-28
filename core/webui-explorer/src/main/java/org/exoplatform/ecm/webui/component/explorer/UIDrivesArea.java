@@ -276,9 +276,9 @@ public class UIDrivesArea extends UIContainer {
       }
       UIDocumentWorkspace uiDocumentWorkspace = uiWorkingArea.getChild(UIDocumentWorkspace.class);
       UIDocumentFormController controller = uiDocumentWorkspace.removeChild(UIDocumentFormController.class);
-//      if (controller != null) {
-//        controller.getChild(UIDocumentForm.class).releaseLock();
-//      }
+      if (controller != null) {
+        controller.getChild(UIDocumentForm.class).releaseLock();
+      }
       uiParent.setRenderedChild(UIJcrExplorerContainer.class);
       uiJCRExplorer.updateAjax(event);
     }

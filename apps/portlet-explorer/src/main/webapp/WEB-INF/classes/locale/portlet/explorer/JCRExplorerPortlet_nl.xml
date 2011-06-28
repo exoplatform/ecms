@@ -1767,7 +1767,7 @@
 	-->
 	<UISelectDocumentForm>
 		<label>
-			<selectTemplate>Select your template in the list below</selectTemplate>
+			<selectTemplate>selecteer Template</selectTemplate>
 		</label>
 	</UISelectDocumentForm>
 	<!--
@@ -1779,16 +1779,10 @@
 	<UIDocumentForm>
 		<title>Nieuw Document toevoegen</title>
 		<action>
-			<Save>Save</Save>
-			<SaveAndClose>Save &amp; Close</SaveAndClose>
-		    <ChangeType>change content type</ChangeType>
-		    <Fullscreen>Fullscreen</Fullscreen>
+			<Save>#{word.save}</Save>
 			<Cancel>#{word.cancel}</Cancel>
       <Close>#{word.close}</Close>
 		</action>
-		<tooltip>
-			<FullScreen>Maximize/Minimize</FullScreen>
-		</tooltip>
 		<msg>
 			<cannot-save>Sommige beperkingen werden overtreden tijdens die actie
 			</cannot-save>

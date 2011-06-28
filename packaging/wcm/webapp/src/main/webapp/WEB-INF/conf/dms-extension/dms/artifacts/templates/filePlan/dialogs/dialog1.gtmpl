@@ -1,23 +1,15 @@
 <%
 	uicomponent.addInterceptor("ecm-explorer/interceptor/PostFilePlanInterceptor.groovy", "post") ;
   def rcontext = _ctx.getRequestContext() ;
-  rcontext.getJavascriptManager().addOnLoadJavascript("eXo.webui.UIDocForm.AdjustHeight");
-  rcontext.getJavascriptManager().addOnLoadJavascript("eXo.webui.UIDocForm.UpdateGUI");
 %>
 
 <%/*Begin UITabPane*/%>
-<div class="UITabPane">	
+<div class="UITabPane">
   <%/*Begin TabPaneContent*/%>
   <div class="TabPaneContent"> 
     <%/*Begin WorkingArea*/%>
-    <div class="WorkingAreaWithHelp">		
-	
-	<%uiform.begin()%>
-	<%/* start render action*/%>
-	<%uiform.processRenderAction()%>
-	<%/* end render action*/%>
-    
-	<%/*Begin Tabs*/%>
+    <div class="WorkingAreaWithHelp">
+    	<%/*Begin Tabs*/%>
       <div class="UIHorizontalTabs" style="margin-top:5px;">
         <div class="LeftHorizontalTabs">
 	     	  <div class="RightHorizontalTabs">
@@ -60,12 +52,13 @@
 			  </div>
       </div>
       <%/*End UIHorizontalTabs*/%>
-      <%/*Start UITabContentContainer*/%>   
-							
-				<div class="HorizontalLayout" style="overflow:auto; border-bottom:1px solid #AEAEAE">	  
+      <%/*Start UITabContentContainer*/%>
+      
+			<%uiform.begin()%>
+				<div class="HorizontalLayout">	  
       
 		      <div class="UITabContentContainer">
-		      	<div class="UITabContent" style="display: block;">
+		      	<div class="UITabContent UITabContentScroll" style="display: block;">
 						    <table class="UIFormGrid">
 									<tr>
 									  <td class="FieldLabel"><%=_ctx.appRes("FilePlan.dialog.label.name")%></td>
@@ -109,7 +102,7 @@
 								</table>
 		      	</div> 
 		      	
-		      	<div class="UITabContent" style="display: none;">
+		      	<div class="UITabContent UITabContentScroll" style="display: none;">
 		      		  <table class="UIFormGrid">
 									<tr>
 									  <td class="FieldLabel"><%=_ctx.appRes("FilePlan.dialog.label.record-category-identifier")%></td>
@@ -204,7 +197,7 @@
 								</table>
 		      	</div> 
 		      	
-		        <div class="UITabContent" style="display: none;">
+		        <div class="UITabContent UITabContentScroll" style="display: none;">
 		        	<table class="UIFormGrid">
 									<tr>
 									  <td class="FieldLabel"><%=_ctx.appRes("FilePlan.dialog.label.process-cutoff")%></td>
@@ -344,10 +337,14 @@
 							</table>							
 		      	</div> 	
 		      		        
-		      </div>        	      		      	
-      	</div>        						 
+		      </div>        	
+      		<%/* start render action*/%>
+		      <%uiform.processRenderAction()%>
+          <%/* end render action*/%>      	
+      	</div>  
+      <%uiform.end()%>						 
       <%/*End UITabContentContainer*/%>
-      <%uiform.end()%>
+      
     </div>  
     <%/*End WorkingArea*/%>
   </div>  

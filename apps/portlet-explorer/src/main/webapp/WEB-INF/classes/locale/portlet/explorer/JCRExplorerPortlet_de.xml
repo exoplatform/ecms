@@ -1583,7 +1583,7 @@
   -->
   <UISelectDocumentForm>
     <label>
-      <selectTemplate>Select your template in the list below</selectTemplate>
+      <selectTemplate><![CDATA[Vorlage w&auml;hlen]]></selectTemplate>
     </label>
   </UISelectDocumentForm>
   <!--
@@ -1594,16 +1594,10 @@
   <UIDocumentForm>
     <title><![CDATA[Neues Dokument hinzuf&uuml;gen]]></title>
     <action>
-      <Save>Save</Save>
-	  <SaveAndClose>Save &amp; Close</SaveAndClose>
-	  <ChangeType>change content type</ChangeType>
-	  <Fullscreen>Fullscreen</Fullscreen>
+      <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
       <Close>#{word.close}</Close>
     </action>
-	<tooltip>
-		<FullScreen>Maximize/Minimize</FullScreen>
-	</tooltip>
     <msg>
       <cannot-save><![CDATA[Einige Einschr&auml;nkung wurden w&auml;hrend der Aktion gebrochen.]]></cannot-save>
       <in-versioning><![CDATA[Momentanen Knoten auschecken bevor neuer hinzugef&uuml;gt werden kann]]></in-versioning>

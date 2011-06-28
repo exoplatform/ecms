@@ -35,4 +35,3 @@
 	<div id="NavigateConfirmationMsg" style="display:none">${messageNavigate}</div>
 </div>
 <script type="text/javascript" src="/ecmexplorer/javascript/eXo/ecm/CloseEvents.js"></script>
-<script type="text/javascript" src="/ecmexplorer/javascript/eXo/ecm/UIDocumentForm.js"></script>

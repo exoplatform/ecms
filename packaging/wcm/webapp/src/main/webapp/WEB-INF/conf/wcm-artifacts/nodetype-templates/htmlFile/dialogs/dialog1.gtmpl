@@ -9,15 +9,9 @@
   uicomponent.addCalendarField("hiddenInput4", hiddenField4) ;
   uicomponent.addCalendarField("hiddenInput5", hiddenField5) ;
   uicomponent.addHiddenField("hiddenInput6", hiddenField6) ;
-  def rcontext = _ctx.getRequestContext() ;
-  rcontext.getJavascriptManager().addOnLoadJavascript("eXo.webui.UIDocForm.AdjustHeight");
-  rcontext.getJavascriptManager().addOnLoadJavascript("eXo.webui.UIDocForm.UpdateGUI");
 %>
 <div class="UIForm FormScrollLayout">  
   <% uiform.begin() %>
-  <%/* start render action*/%>
-  <%uiform.processRenderAction()%>
-  <%/* end render action*/%> 
   <div class="HorizontalLayout">
     <table class="UIFormGrid">
         <tr>
@@ -59,5 +53,8 @@
         </tr>       
     </table>       
   </div>
+    <%/* start render action*/%>
+    <%uiform.processRenderAction()%>
+	<%/* end render action*/%>
   <%uiform.end()%>
 </div>

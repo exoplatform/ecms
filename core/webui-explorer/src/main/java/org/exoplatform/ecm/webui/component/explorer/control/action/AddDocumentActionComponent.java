@@ -96,7 +96,6 @@ public class AddDocumentActionComponent extends UIAbstractManagerComponent {
     if (uiExplorer.getAncestorOfType(UIJCRExplorerPortlet.class).isEditInNewWindow()) {
       UIPopupContainer UIPopupContainer = uiExplorer.getChild(UIPopupContainer.class);
       UIPopupContainer.activate(uiController, 800, 600);
-      uiController.bindContentType();
       context.addUIComponentToUpdateByAjax(UIPopupContainer);
     } else {
       UIWorkingArea uiWorkingArea = uiExplorer.getChild(UIWorkingArea.class);
@@ -108,11 +107,10 @@ public class AddDocumentActionComponent extends UIAbstractManagerComponent {
       UIDocumentContainer uiDocumentContainer = uiDocumentWorkspace.getChild(UIDocumentContainer.class);
       uiDocumentContainer.setRendered(false);
       UIDocumentFormController controller = uiDocumentWorkspace.removeChild(UIDocumentFormController.class);
-//      if (controller != null) {
-//        controller.getChild(UIDocumentForm.class).releaseLock();
-//      }
+      if (controller != null) {
+        controller.getChild(UIDocumentForm.class).releaseLock();
+      }
       uiDocumentWorkspace.addChild(uiController);
-      uiController.bindContentType();
       uiController.setRendered(true);
       context.addUIComponentToUpdateByAjax(uiWorkingArea);
       if (event != null)

@@ -38,7 +38,7 @@ function ajaxGet(url, callback) {
  * - manage CKeditor update in textareas
  **/
 UIForm.prototype.submitForm = function(formId, action, useAjax, callback) {
- if(action.toLowerCase() == "close" || action.toLowerCase() == "back") {
+ if(action.toLowerCase() == "close") {
    if (b_changed) {      
 			var answer = confirm(document.getElementById("CloseConfirmationMsg").innerHTML);
     	if (answer) {

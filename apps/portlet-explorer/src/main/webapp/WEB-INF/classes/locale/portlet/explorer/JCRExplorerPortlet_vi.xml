@@ -1762,7 +1762,7 @@
   -->
   <UISelectDocumentForm>
     <label>
-      <selectTemplate>Select your template in the list below</selectTemplate>
+      <selectTemplate>Chọn mẫu</selectTemplate>
     </label>
   </UISelectDocumentForm>
   <!--
@@ -1774,15 +1774,9 @@
     <title>Thêm tài liệu mới.</title>
     <action>
       <Save>Lưu</Save>
-	  <SaveAndClose>Save &amp; Close</SaveAndClose>
-	  <ChangeType>change content type</ChangeType>
-	  <Fullscreen>Fullscreen</Fullscreen>
       <Cancel>Hủy bỏ</Cancel>
       <Close>#{word.close}</Close>
     </action>
-	<tooltip>
-		<FullScreen>Maximize/Minimize</FullScreen>
-	</tooltip>
     <msg>
       <cannot-save>Một số ràng buộc bị vi phạm trong quá trình thực hiện thao tác đó.</cannot-save>
       <in-versioning>Cần checkout node hiện thời trước khi thêm node mới.</in-versioning>

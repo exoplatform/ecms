@@ -6,15 +6,7 @@
 	 }
 </style>
 <div class="UIForm FormScrollLayout">  
-  <% 
-  	def rcontext = _ctx.getRequestContext() ;
-	rcontext.getJavascriptManager().addOnLoadJavascript("eXo.webui.UIDocForm.AdjustHeight");
-	rcontext.getJavascriptManager().addOnLoadJavascript("eXo.webui.UIDocForm.UpdateGUI");
-	uiform.begin() 
-  %>
-  <%/* start render action*/%>
-  <%uiform.processRenderAction()%>
-  <%/* end render action*/%>  
+  <% uiform.begin() %>
   <div class="HorizontalLayout">
     <table class="UIFormGrid">
         <tr>
@@ -67,6 +59,9 @@
         </tr>
                
     </table>       
-  </div>  
+  </div>
+  <%/* start render action*/%>
+  <%uiform.processRenderAction()%>
+  <%/* end render action*/%>  
   <%uiform.end()%>
 </div>

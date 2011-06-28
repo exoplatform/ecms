@@ -17,20 +17,16 @@
 package org.exoplatform.ecm.webui.component.explorer.popup.actions;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
-import org.exoplatform.commons.utils.LazyPageList;
-import org.exoplatform.commons.utils.ListAccess;
-import org.exoplatform.commons.utils.ListAccessImpl;
-import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
-import org.exoplatform.webui.core.UIContainer;
-import org.exoplatform.webui.core.UIPageIterator;
+import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
+import org.exoplatform.webui.core.model.SelectItemOption;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
+import org.exoplatform.webui.form.UIForm;
+import org.exoplatform.webui.form.UIFormSelectBox;
 
 /**
  * Created by The eXo Platform SARL
@@ -39,87 +35,39 @@ import org.exoplatform.webui.event.EventListener;
  * Nov 8, 2006 10:06:40 AM
  */
 @ComponentConfig(
-    template = "app:/groovy/webui/component/explorer/UISelectDocumentForm.gtmpl",
+    lifecycle = UIFormLifecycle.class,
+    template = "app:/groovy/webui/component/explorer/UIFormWithoutAction.gtmpl",
     events = {
-      @EventConfig(listeners = UISelectDocumentForm.SelectTemplateActionListener.class)
+      @EventConfig(listeners = UISelectDocumentForm.ChangeActionListener.class)
     }
 )
-public class UISelectDocumentForm extends UIContainer {
+public class UISelectDocumentForm extends UIForm {
 
-  private final static String DOCUMENT_TEMPLATE_ITERATOR_ID = "DocumentTemplateIterator".intern();
-  
-  private Map<String, String> templates;
-  
-  private String repository;
-  
-  private UIPageIterator pageIterator;
+  final static public String FIELD_SELECT = "selectTemplate" ;
 
-  public UISelectDocumentForm() throws Exception {
-    pageIterator = addChild(UIPageIterator.class, null, DOCUMENT_TEMPLATE_ITERATOR_ID);
-  } 
-
-  public Map<String, String> getTemplates() {
-    return templates;
-  }
-  
-  public void setDocumentTemplates(Map<String, String> templates) {
-    this.templates = templates;       
-  }
-  
-  public void updatePageListData() throws Exception {
-    List<String> templateList = new ArrayList<String>();
-    Iterator<String> iter = templates.keySet().iterator();
-    while (iter.hasNext()) {
-      String key = iter.next();
-      templateList.add(key);
-    }
-        
-    ListAccess<String> nodeAccList = new ListAccessImpl<String>(String.class, templateList);
-    UIJCRExplorer uiExplorer = getAncestorOfType(UIJCRExplorer.class);
-    int nodesPerPage = uiExplorer.getPreference().getNodesPerPage();
-    pageIterator.setPageList(new LazyPageList<String>(nodeAccList, nodesPerPage));
-  }
-  
-  public String getContentType (String label) {
-    return templates.get(label);
-  }
-  
-  public String getTemplateIconStylesheet(String contentType) {
-    return contentType.replace(":", "_") + "70x80Icon";
-  }
-  
-  public List<?> getChildrenList() throws Exception {
-    return pageIterator.getCurrentPageData();
+  public UISelectDocumentForm() {
+    List<SelectItemOption<String>> options = new ArrayList<SelectItemOption<String>>() ;
+    UIFormSelectBox templateSelect = new UIFormSelectBox(FIELD_SELECT, FIELD_SELECT, options) ;
+    templateSelect.setOnChange("Change") ;
+    addUIFormInput(templateSelect) ;
   }
 
-  public String getRepository() {
-    return repository;
-  }
-
-  public void setRepository(String repository) {
-    this.repository = repository;
-  }
-  
-  public UIPageIterator getContentPageIterator() {
-    return pageIterator;
-  }
-
-  static public class SelectTemplateActionListener extends EventListener<UISelectDocumentForm> {
+  static public class ChangeActionListener extends EventListener<UISelectDocumentForm> {
     public void execute(Event<UISelectDocumentForm> event) throws Exception {
-      String contentType = event.getRequestContext().getRequestParameter(OBJECTID);
       UISelectDocumentForm uiSelectForm = event.getSource() ;
-      UIDocumentFormController uiDCFormController = uiSelectForm.getParent() ;            
+      UIDocumentFormController uiDCFormController = uiSelectForm.getParent() ;
       UIDocumentForm documentForm = uiDCFormController.getChild(UIDocumentForm.class) ;
-      documentForm.addNew(true);      
       documentForm.getChildren().clear() ;
+      //  reset the interceptors
       documentForm.resetInterceptors();
-      documentForm.resetProperties();            
-      documentForm.setContentType(contentType);
-      
-      uiSelectForm.setRendered(false);
-      documentForm.setRendered(true);
-      
+      documentForm.resetProperties() ;
+      // set path to DocumentForm
+      documentForm.setContentType(uiSelectForm.getUIFormSelectBox(UISelectDocumentForm.FIELD_SELECT).getValue()) ;
       event.getRequestContext().addUIComponentToUpdateByAjax(uiDCFormController) ;
     }
+  }
+
+  public String getSelectValue() {
+    return getUIFormSelectBox(FIELD_SELECT).getValue();
   }
 }

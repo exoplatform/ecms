@@ -8,8 +8,7 @@
 	def String jsFormId = "ContentJS[" + uicomponent.hashCode() + "]";
 	def jsManager = rcontext.getJavascriptManager();
 	jsManager.addOnLoadJavascript("eXo.ecm.CKEditor.insertCSS('" + htmlWYSIWYGFormId + "', '" + cssFormId + "')");
-	jsManager.addOnLoadJavascript("eXo.webui.UIDocForm.AdjustHeight");
-	jsManager.addOnLoadJavascript("eXo.webui.UIDocForm.UpdateGUI");
+	
 	private String getDisplayTab(String selectedTab) {
 		if ((uicomponent.getSelectedTab() == null && selectedTab.equals("mainWebcontent"))
 				|| selectedTab.equals(uicomponent.getSelectedTab())) {
@@ -58,9 +57,6 @@
 <%uiform.begin()%>
 	<div class="TabPaneContent"> 
 		<div class="WorkingAreaWithHelp">
-			<%/* start render action*/%>
-    		<%uiform.processRenderAction()%>
-			<%/* end render action*/%> 
 			<div class="UIHorizontalTabs" style="margin-top:5px;">
 				<div class="LeftHorizontalTabs">
 					<div class="RightHorizontalTabs">
@@ -98,10 +94,10 @@
 					</div>
 				</div>
 			</div> <!-- End of UIHorizontalTabs -->
-			<%/*Start UITabContentContainer*/%>				
-				<div class="HorizontalLayout" style="border: none; margin:0px; background: none; padding: 0px; overflow:auto; border-bottom:1px solid #AEAEAE">	  
+			<%/*Start UITabContentContainer*/%>
+				<div class="HorizontalLayout" style="border: none; margin:0px; background: none; padding: 0px">	  
 					<div class="UITabContentContainer">
-						<div class="UITabContent" style="<%=getDisplayTab("mainWebcontent")%>">
+						<div class="UITabContent UITabContentScroll" style="<%=getDisplayTab("mainWebcontent")%>">
 							<table class="UIFormGrid">
                 <tr>
                   <td class="FieldLabel"><%=_ctx.appRes("WebContent.dialog.label.title")%></td>
@@ -181,7 +177,7 @@
 							</table>
 						</div>  <!-- End of UITabContent -->
 						<!-- Start of Illustration tab -->
-						<div class="UITabContent" style="<%=getDisplayTab("illustrationWebcontent")%>">
+						<div class="UITabContent UITabContentScroll" style="<%=getDisplayTab("illustrationWebcontent")%>">
 							<div class="FormHint"><%=_ctx.appRes("WebContent.dialog.label.hintIllustration")%></div>
 							<table class="UIFormGrid">
 								<tr>
@@ -227,7 +223,7 @@
 								</tr>
 							</table>
 						</div><!-- End of Illustration tab -->		
-						<div class="UITabContent" style="<%=getDisplayTab("contentCSSWebcontent")%>">
+						<div class="UITabContent UITabContentScroll" style="<%=getDisplayTab("contentCSSWebcontent")%>">
 							<table class="UIFormGrid">
 								<tr>
 									<td class="FieldLabel"><%=_ctx.appRes("WebContent.dialog.label.ContentCSS")%></td>
@@ -291,7 +287,10 @@
 								</tr>
 							</table>
 						</div>
-					</div>   <!-- End of UITabContentContainer -->     						   	
+					</div>   <!-- End of UITabContentContainer -->     	
+					<%/* start render action*/%>
+    				<%uiform.processRenderAction()%>
+					<%/* end render action*/%>    	
 				</div>  
 		</div>   <!-- End of WorkingAreaWithHelp -->
 	</div>  <!-- End of TabPaneContent -->

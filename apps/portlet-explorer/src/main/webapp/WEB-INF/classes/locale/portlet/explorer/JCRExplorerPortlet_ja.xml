@@ -1749,7 +1749,7 @@
   -->
   <UISelectDocumentForm>
     <label>
-      <selectTemplate>Select your template in the list below</selectTemplate>
+      <selectTemplate>テンプレートを選択</selectTemplate>
     </label>
   </UISelectDocumentForm>
   <!--
@@ -1761,15 +1761,9 @@
     <title>新しいドキュメントの追加</title>
     <action>
       <Save>ドラフトとして保存</Save>
-	  <SaveAndClose>Save &amp; Close</SaveAndClose>
-	  <ChangeType>change content type</ChangeType>
-	  <Fullscreen>Fullscreen</Fullscreen>
       <Cancel>#{word.cancel}</Cancel>
       <Close>#{word.close}</Close>
     </action>
-	<tooltip>
-		<FullScreen>Maximize/Minimize</FullScreen>
-	</tooltip>
     <msg>
       <cannot-save>制約はアクションの最中に破棄されました。</cannot-save>
       <in-versioning>新しいノードを追加する前に現在のノードをチェックアウトする必要</in-versioning>
