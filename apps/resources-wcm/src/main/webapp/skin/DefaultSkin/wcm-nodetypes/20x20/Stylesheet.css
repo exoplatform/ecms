@@ -1,0 +1,15 @@
+.MaximizeScreen20x20Icon {
+  height: 20px;
+  background: url('icons/fullscreen.png') no-repeat;
+  line-height: 20px;
+  cursor: pointer;
+  width: 20px;
+}
+
+.MinimizeScreen20x20Icon {
+  height: 20px;
+  background: url('icons/collapse.png') no-repeat;
+  line-height: 20px;
+  cursor: pointer;
+  width: 20px;
+}

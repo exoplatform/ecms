@@ -1755,7 +1755,7 @@
   -->
   <UISelectDocumentForm>
     <label>
-      <selectTemplate>Sélectionner un formulaire</selectTemplate>
+      <selectTemplate>Sélectionner votre template dans la liste en dessous</selectTemplate>
     </label>
   </UISelectDocumentForm>
   <!--
@@ -1766,10 +1766,16 @@
   <UIDocumentForm>
     <title>Ajout d'un document</title>
     <action>
-      <Save>Sauver comme brouillon</Save>
+	  <Save>Sauver</Save>
+	  <SaveAndClose>Sauver &amp; Fermer</SaveAndClose>
+	  <ChangeType>changer le type de contenu</ChangeType>
+	  <Fullscreen>Ecran plein</Fullscreen>
       <Cancel>#{word.cancel}</Cancel>
       <Close>#{word.close}</Close>
     </action>
+	<tooltip>
+		<FullScreen>Maximiser/Minimiser</FullScreen>
+	</tooltip>
     <msg>
       <cannot-save>Sauvegarde impossible. Des contraintes ne sont pas respectées.</cannot-save>
       <in-versioning>Vous devez effectuer un checkout sur ce noeud avant de pouvoir lui en ajouter un autre</in-versioning>

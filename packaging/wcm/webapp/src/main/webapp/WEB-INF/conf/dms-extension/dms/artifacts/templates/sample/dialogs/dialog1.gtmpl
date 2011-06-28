@@ -5,9 +5,15 @@
   uicomponent.addHiddenField("hiddenInput1", hiddenField1) ;
   uicomponent.addHiddenField("hiddenInput2", hiddenField2) ;
   uicomponent.addHiddenField("hiddenInput3", hiddenField3) ;
+  def rcontext = _ctx.getRequestContext() ;
+  rcontext.getJavascriptManager().addOnLoadJavascript("eXo.webui.UIDocForm.AdjustHeight");
+  rcontext.getJavascriptManager().addOnLoadJavascript("eXo.webui.UIDocForm.UpdateGUI");
 %>
 <div class="UIForm LayoutContent FormScrollLayout">
 	<% uiform.begin() %>
+	<%/* start render action*/%>
+    <%uiform.processRenderAction()%>
+    <%/* end render action*/%> 
   <div class="HorizontalLayout">
   	<table class="UIFormGrid">	  
       <tr>                        
@@ -140,9 +146,6 @@
 		    </td>
       </tr>
 	  </table>
-  </div>
-    <%/* start render action*/%>
-    <%uiform.processRenderAction()%>
-    <%/* end render action*/%>  
+  </div>     
   <% uiform.end() %>
 </div>

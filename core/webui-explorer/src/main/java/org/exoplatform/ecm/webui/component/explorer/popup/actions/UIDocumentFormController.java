@@ -18,13 +18,14 @@ package org.exoplatform.ecm.webui.component.explorer.popup.actions;
 
 import java.security.AccessControlException;
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.TreeMap;
 
 import javax.jcr.Node;
 
-import org.exoplatform.ecm.webui.comparator.ItemOptionNameComparator;
 import org.exoplatform.ecm.webui.component.explorer.optionblocks.UIOptionBlockPanel;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.templates.TemplateService;
@@ -38,10 +39,8 @@ import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.core.UIContainer;
 import org.exoplatform.webui.core.UIPopupComponent;
 import org.exoplatform.webui.core.UIPopupWindow;
-import org.exoplatform.webui.core.model.SelectItemOption;
 import org.exoplatform.webui.ext.UIExtension;
 import org.exoplatform.webui.ext.UIExtensionManager;
-import org.exoplatform.webui.form.UIFormSelectBox;
 
 /**
  * Created by The eXo Platform SARL
@@ -58,8 +57,6 @@ public class UIDocumentFormController extends UIContainer implements UIPopupComp
 
   private static final Log LOG  = ExoLogger.getLogger("UIDocumentFormController");
 
-  private String defaultDocument_ ;
-  private static String DEFAULT_VALUE = "exo:article" ;
   private NodeLocation currentNode_ ;
   private String repository_ ;
 
@@ -70,16 +67,17 @@ public class UIDocumentFormController extends UIContainer implements UIPopupComp
   public UIDocumentFormController() throws Exception {
     addChild(UISelectDocumentForm.class, null, null);
     UIDocumentForm uiDocumentForm = createUIComponent(UIDocumentForm.class, null, null) ;
-    uiDocumentForm.setContentType(DEFAULT_VALUE);
     uiDocumentForm.addNew(true);
     addChild(uiDocumentForm);
   }
 
   public void setCurrentNode(Node node) { 
     currentNode_ = NodeLocation.getNodeLocationByNode(node); 
+  }  
+  
+  public void setRepository(String repository) {
+    repository_ = repository;
   }
-
-  public void setRepository(String repository) { repository_ = repository ; }
 
   public void initPopup(UIComponent uiComp) throws Exception {
     removeChildById("PopupComponent") ;
@@ -90,43 +88,47 @@ public class UIDocumentFormController extends UIContainer implements UIPopupComp
     uiPopup.setResizable(true) ;
   }
 
-  public List<SelectItemOption<String>> getListFileType() throws Exception {
-    List<SelectItemOption<String>> options = new ArrayList<SelectItemOption<String>>();
+  public List<String> getListFileType() throws Exception {    
+    TemplateService templateService = getApplicationComponent(TemplateService.class) ;
+    return templateService.getCreationableContentTypes(NodeLocation.getNodeByLocation(currentNode_));    
+  }
+  
+  public void bindContentType() throws Exception {
+    Comparator<String> ascComparator = new Comparator<String>() {
+      @Override
+      public int compare(String s1, String s2) {
+        return s1.compareTo(s2) ;
+      }      
+    };
+    Map<String, String> templates = new TreeMap <String, String>(ascComparator);
     TemplateService templateService = getApplicationComponent(TemplateService.class) ;
     List<String> acceptableContentTypes = 
       templateService.getCreationableContentTypes(NodeLocation.getNodeByLocation(currentNode_));
-    if(acceptableContentTypes.size() == 0) return options;
+    if(acceptableContentTypes.size() == 0) return;
     String userName = Util.getPortalRequestContext().getRemoteUser();
     for(String contentType: acceptableContentTypes) {
       String label = templateService.getTemplateLabel(contentType);
       try {
         String templatePath = templateService.getTemplatePathByUser(true, contentType, userName);
         if ((templatePath != null) && (templatePath.length() > 0)) {
-          options.add(new SelectItemOption<String>(label, contentType));
+          templates.put(label, contentType);
         }
       } catch (AccessControlException e) {
       } catch (Exception e) {
       }
     }
-    Collections.sort(options, new ItemOptionNameComparator()) ;
-    if(options.size()>0) {
-      defaultDocument_ = options.get(0).getValue();
-      if (options.size() > 1) {
+    if(templates.size()>0) {
+      if (templates.size() > 1) {
         UISelectDocumentForm uiSelectForm = getChild(UISelectDocumentForm.class) ;
-        UIFormSelectBox uiSelectBox = uiSelectForm.getUIFormSelectBox(UISelectDocumentForm.FIELD_SELECT) ;
-        uiSelectBox.setValue(defaultDocument_);
-        uiSelectBox.setOptions(options);
+        uiSelectForm.setDocumentTemplates(templates);
       } else {
         this.removeChild(UISelectDocumentForm.class);
       }
-
     }
-    return options ;
   }
 
   public void init() throws Exception {
     getChild(UIDocumentForm.class).setRepositoryName(repository_) ;
-    getChild(UIDocumentForm.class).setContentType(defaultDocument_);
     getChild(UIDocumentForm.class).setWorkspace(currentNode_.getWorkspace()) ;
     getChild(UIDocumentForm.class).setStoredPath(currentNode_.getPath()) ;
     getChild(UIDocumentForm.class).resetProperties();
