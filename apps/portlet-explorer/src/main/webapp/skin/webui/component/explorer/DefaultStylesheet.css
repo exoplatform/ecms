@@ -135,7 +135,72 @@
 /*******************************UIDocumentFormController****************************************/
 
 .UIDocumentFormController {
-	padding: 10px;
+	padding: 0px 10px 0px 10px;
+}
+
+.ChangeTypeLink {
+	color: #058EE6;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.SelectTemplateTitle {
+	color: #666666;
+	font-weight: bold;
+	line-height: 24px;	
+	margin-top: 10px;
+}
+
+.SelectTemplateArea{
+	width:100%;
+}
+
+.SelectTemplateArea a{
+	text-decoration:none;
+	color: #0467E2;
+}
+
+.SelectTemplateArea a:hover{
+	text-decoration:underline;
+}
+
+.SelectTemplateThumbnailView {
+	overflow-x:hidden;
+	overflow-y:auto;
+}
+
+.SelectTemplateArea .TemplateBox {
+	padding-top: 4px; 
+	padding-right: 0px; 
+	padding-bottom: 4px; 
+	padding-left: 0px; 
+	height: auto; 
+	width: 100px; 
+	float: left; 
+	margin: 5px; 
+	overflow: hidden;
+}
+
+.SelectTemplateArea .TemplateIconContainer {
+	width: 75px; 
+	height: 83px; 
+	margin: 9px auto 0px auto;
+}
+
+.SelectTemplateArea .TemplateIcon {
+	width: 70px; 
+	height: 80px; 
+	margin: auto; 
+	cursor: pointer; 
+	position: relative; 
+}
+
+.SelectTemplateArea .TemplateLabel {
+	width: auto; 
+	line-height: 15px; 
+	margin: auto; 
+	height: 30px; 
+	text-align: center;
 }
 
 .EditFormController {

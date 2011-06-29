@@ -6,7 +6,16 @@
 	 }
 </style>
 <div class="UIForm FormScrollLayout">  
-  <% uiform.begin() %>
+  <% 
+	uiform.begin() 
+  %>
+  <%/* start render action*/%>
+  <% if (uiform.isShowActionsOnTop()) {
+            uiform.processRenderAction()
+         }
+  %>
+
+  <%/* end render action*/%>  
   <div class="HorizontalLayout">
     <table class="UIFormGrid">
         <tr>
@@ -60,8 +69,9 @@
                
     </table>       
   </div>
-  <%/* start render action*/%>
-  <%uiform.processRenderAction()%>
-  <%/* end render action*/%>  
+  <% if (!uiform.isShowActionsOnTop()) {
+            uiform.processRenderAction()
+         }
+  %>
   <%uiform.end()%>
 </div>

@@ -1755,7 +1755,7 @@
   -->
   <UISelectDocumentForm>
     <label>
-      <selectTemplate>Select Template</selectTemplate>
+      <selectTemplate>Select your template in the list below</selectTemplate>
     </label>
   </UISelectDocumentForm>
   <!--
@@ -1766,10 +1766,16 @@
   <UIDocumentForm>
     <title>Add New Document</title>
     <action>
-      <Save>Save as Draft</Save>
+      <Save>Save</Save>
+	  <SaveAndClose>Save &amp; Close</SaveAndClose>
+	  <ChangeType>change content type</ChangeType>
+	  <Fullscreen>Fullscreen</Fullscreen>
       <Cancel>#{word.cancel}</Cancel>
       <Close>#{word.close}</Close>
     </action>
+	<tooltip>
+		<FullScreen>Maximize/Minimize</FullScreen>
+	</tooltip>
     <msg>
       <cannot-save>Some constraints were violated during that action.</cannot-save>
       <in-versioning>Need to checkout current node before add new node</in-versioning>

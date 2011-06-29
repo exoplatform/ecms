@@ -335,9 +335,9 @@ public class UIActionBar extends UIForm {
           String backLink = event.getSource().getBackLink();
           if (uiDocumentFormController != null) {
             UIDocumentForm uiDocument = uiDocumentFormController.getChild(UIDocumentForm.class);
-        if (uiDocument!=null) {
-          uiDocument.releaseLock();
-        }
+          if (uiDocument!=null) {
+            uiDocument.releaseLock();
+          }
             uiDocumentWorkspace.removeChild(UIDocumentFormController.class);
           } else
           uiExplorer.cancelAction();

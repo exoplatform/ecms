@@ -34,6 +34,7 @@ import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotTrashHom
 import org.exoplatform.ecm.webui.component.explorer.control.listener.UIActionBarActionListener;
 import org.exoplatform.ecm.webui.component.explorer.popup.actions.UIDocumentForm;
 import org.exoplatform.ecm.webui.component.explorer.popup.actions.UIDocumentFormController;
+import org.exoplatform.ecm.webui.component.explorer.popup.actions.UISelectDocumentForm;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -96,6 +97,11 @@ public class AddDocumentActionComponent extends UIAbstractManagerComponent {
     if (uiExplorer.getAncestorOfType(UIJCRExplorerPortlet.class).isEditInNewWindow()) {
       UIPopupContainer UIPopupContainer = uiExplorer.getChild(UIPopupContainer.class);
       UIPopupContainer.activate(uiController, 800, 600);
+      uiController.bindContentType();
+      UISelectDocumentForm uiSelectDoc = uiController.getChild(UISelectDocumentForm.class);
+      if (uiSelectDoc != null && uiSelectDoc.isRendered()) {
+        uiSelectDoc.updatePageListData();
+      }
       context.addUIComponentToUpdateByAjax(UIPopupContainer);
     } else {
       UIWorkingArea uiWorkingArea = uiExplorer.getChild(UIWorkingArea.class);
@@ -111,6 +117,7 @@ public class AddDocumentActionComponent extends UIAbstractManagerComponent {
         controller.getChild(UIDocumentForm.class).releaseLock();
       }
       uiDocumentWorkspace.addChild(uiController);
+      uiController.bindContentType();
       uiController.setRendered(true);
       context.addUIComponentToUpdateByAjax(uiWorkingArea);
       if (event != null)

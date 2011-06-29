@@ -4,12 +4,21 @@
 %>
 
 <%/*Begin UITabPane*/%>
-<div class="UITabPane">
+<div class="UITabPane">	
   <%/*Begin TabPaneContent*/%>
   <div class="TabPaneContent"> 
     <%/*Begin WorkingArea*/%>
-    <div class="WorkingAreaWithHelp">
-    	<%/*Begin Tabs*/%>
+    <div class="WorkingAreaWithHelp">		
+	
+	<%uiform.begin()%>
+	<%/* start render action*/%>
+  <% if (uiform.isShowActionsOnTop()) {
+            uiform.processRenderAction()
+         }
+  %>
+	<%/* end render action*/%>
+    
+	<%/*Begin Tabs*/%>
       <div class="UIHorizontalTabs" style="margin-top:5px;">
         <div class="LeftHorizontalTabs">
 	     	  <div class="RightHorizontalTabs">
@@ -52,13 +61,12 @@
 			  </div>
       </div>
       <%/*End UIHorizontalTabs*/%>
-      <%/*Start UITabContentContainer*/%>
-      
-			<%uiform.begin()%>
-				<div class="HorizontalLayout">	  
+      <%/*Start UITabContentContainer*/%>   
+							
+				<div class="HorizontalLayout" style="overflow:auto; border-bottom:1px solid #AEAEAE">	  
       
 		      <div class="UITabContentContainer">
-		      	<div class="UITabContent UITabContentScroll" style="display: block;">
+		      	<div class="UITabContent" style="display: block;">
 						    <table class="UIFormGrid">
 									<tr>
 									  <td class="FieldLabel"><%=_ctx.appRes("FilePlan.dialog.label.name")%></td>
@@ -102,7 +110,7 @@
 								</table>
 		      	</div> 
 		      	
-		      	<div class="UITabContent UITabContentScroll" style="display: none;">
+		      	<div class="UITabContent" style="display: none;">
 		      		  <table class="UIFormGrid">
 									<tr>
 									  <td class="FieldLabel"><%=_ctx.appRes("FilePlan.dialog.label.record-category-identifier")%></td>
@@ -197,7 +205,7 @@
 								</table>
 		      	</div> 
 		      	
-		        <div class="UITabContent UITabContentScroll" style="display: none;">
+		        <div class="UITabContent" style="display: none;">
 		        	<table class="UIFormGrid">
 									<tr>
 									  <td class="FieldLabel"><%=_ctx.appRes("FilePlan.dialog.label.process-cutoff")%></td>
@@ -337,14 +345,14 @@
 							</table>							
 		      	</div> 	
 		      		        
-		      </div>        	
-      		<%/* start render action*/%>
-		      <%uiform.processRenderAction()%>
-          <%/* end render action*/%>      	
-      	</div>  
-      <%uiform.end()%>						 
+		      </div>
+		      <% if (!uiform.isShowActionsOnTop()) {
+                    uiform.processRenderAction()
+                 }
+	        %>
+      	</div>        						 
       <%/*End UITabContentContainer*/%>
-      
+      <%uiform.end()%>
     </div>  
     <%/*End WorkingArea*/%>
   </div>  

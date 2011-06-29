@@ -160,6 +160,7 @@ public class UIDialogForm extends UIForm {
 
   protected String workspaceName;
   protected boolean isReference;
+  protected boolean isShowActionsOnTop_ = false;
 
   /** Selected Tab id */
   private String selectedTab;
@@ -189,6 +190,12 @@ public class UIDialogForm extends UIForm {
 
   public void setIsKeepinglock(boolean isKeepinglock) {
     this.isKeepinglock = isKeepinglock;
+  }
+  
+  public boolean isShowActionsOnTop() { return isShowActionsOnTop_; }
+  
+  public void setShowActionsOnTop(boolean isShowActionsOnTop) {
+    this.isShowActionsOnTop_ = isShowActionsOnTop;
   }
 
   public void releaseLock() throws Exception {

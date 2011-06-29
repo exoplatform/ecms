@@ -1577,7 +1577,7 @@
   -->
   <UISelectDocumentForm>
     <label>
-      <selectTemplate>اختر قالب</selectTemplate>
+      <selectTemplate>Select your template in the list below</selectTemplate>
     </label>
   </UISelectDocumentForm>
   <!--
@@ -1588,9 +1588,15 @@
   <UIDocumentForm>
     <title>إضافة وثيقة </title>
     <action>
-      <Save>#{word.save}</Save>
+	  <Save>Save</Save>
+	  <SaveAndClose>Save &amp; Close</SaveAndClose>
+	  <ChangeType>change content type</ChangeType>
+	  <Fullscreen>Fullscreen</Fullscreen>
       <Cancel>#{word.cancel}</Cancel>
     </action>
+	<tooltip>
+		<FullScreen>Maximize/Minimize</FullScreen>
+	</tooltip>
     <msg>
       <cannot-save>لم يتم الحفظ لأن بعض الشروط لم يمكن تخطيها.</cannot-save>
       <in-versioning>يجب إنهاء معالجة  هذه العقدة قبل إضافة أخرى.</in-versioning>
