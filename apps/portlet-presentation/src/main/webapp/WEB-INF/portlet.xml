@@ -798,4 +798,14 @@
      <portlet-name>ContentListViewerPortlet</portlet-name>
    </filter-mapping>
    
+   <filter-mapping>
+     <filter-name>PortletFilterCache</filter-name>
+     <portlet-name>CategoryNavigationPortlet</portlet-name>
+   </filter-mapping>
+
+   <filter-mapping>
+     <filter-name>PortletFilterCache</filter-name>
+     <portlet-name>ParameterizedContentListViewerPortlet</portlet-name>
+   </filter-mapping>
+
 </portlet-app>

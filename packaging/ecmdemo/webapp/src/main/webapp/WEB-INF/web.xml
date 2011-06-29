@@ -146,7 +146,7 @@
 
   <filter-mapping>
     <filter-name>ThreadLocalACLSessionProviderInitializedFilter</filter-name>
-    <url-pattern>/*</url-pattern>
+    <url-pattern>/private/*</url-pattern>
   </filter-mapping>   
 
   <filter-mapping>
