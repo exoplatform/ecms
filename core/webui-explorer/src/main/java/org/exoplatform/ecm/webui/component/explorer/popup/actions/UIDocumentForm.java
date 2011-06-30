@@ -452,6 +452,10 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
           if (newNode.hasProperty("exo:category")) newNode.setProperty("exo:category", vals.toArray(new Value[vals.size()]));
           newNode.save();
         }
+        uiExplorer.setCurrentPath(newNode.getPath());
+        uiExplorer.setWorkspaceName(newNode.getSession().getWorkspace().getName());
+        uiExplorer.refreshExplorer(newNode, true);
+        uiExplorer.updateAjax(event);
         return newNode;
       } catch(Exception e) {
         if(!uiExplorer.getPreference().isJcrEnable()) uiExplorer.getSession().save();
@@ -532,17 +536,12 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
         UIApplication uiApp = documentForm.getAncestorOfType(UIApplication.class);
         
         Node newNode = UIDocumentForm.saveDocument(event);
-        
         if (newNode != null) {
           event.getRequestContext().setAttribute("nodePath",newNode.getPath());
           UIWorkingArea uiWorkingArea = uiExplorer.getChild(UIWorkingArea.class);
           UIDocumentWorkspace uiDocumentWorkspace = uiWorkingArea.getChild(UIDocumentWorkspace.class);
           uiDocumentWorkspace.removeChild(UIDocumentFormController.class);
           documentForm.setIsUpdateSelect(false);
-          uiExplorer.setCurrentPath(newNode.getPath());
-          uiExplorer.setWorkspaceName(newNode.getSession().getWorkspace().getName());
-          uiExplorer.refreshExplorer(newNode, true);
-          uiExplorer.updateAjax(event);
           EditDocumentActionComponent.editDocument(event, null, uiExplorer, uiExplorer, uiExplorer.getCurrentNode(), uiApp);
         }
       }
