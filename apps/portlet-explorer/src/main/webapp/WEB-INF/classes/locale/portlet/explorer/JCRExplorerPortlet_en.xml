@@ -964,6 +964,9 @@
         <UIOneNodePathSelector>Choose category</UIOneNodePathSelector>
       </label>
     </tab>
+    <action>
+      <Close>Close</Close>
+    </action>
   </UICategoryManagerSearch>
   <UIContentNameSearch>
     <label>
@@ -1214,6 +1217,10 @@
       <ConstraintOption-To>To</ConstraintOption-To>
       <DocumentType-label>Document Type</DocumentType-label>
       <Category-label>Category</Category-label>
+      <created>Created</created>
+      <modified>Modified</modified>
+      <and>And</and>
+      <or>Or</or>      
     </label>
   </UIConstraintForm>
   <NodeTypePopup>
@@ -1319,6 +1326,11 @@
     <label>
       <metadataType>Metadata type</metadataType>
     </label>
+    <pLabel>Properties:</pLabel>
+    <action>
+      <Add>Add</Add>
+      <Cancel>Cancel</Cancel>
+    </action>
   </UISelectPropertyForm>
   <ExactlyFormPopup>
     <title>

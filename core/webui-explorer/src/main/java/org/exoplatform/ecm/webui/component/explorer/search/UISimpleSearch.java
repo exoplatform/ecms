@@ -18,6 +18,7 @@ package org.exoplatform.ecm.webui.component.explorer.search;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 
 import javax.jcr.Node;
 import javax.jcr.query.Query;
@@ -25,20 +26,21 @@ import javax.jcr.query.QueryManager;
 import javax.jcr.query.QueryResult;
 
 import org.apache.commons.lang.StringUtils;
-import org.exoplatform.services.log.Log;
 import org.exoplatform.ecm.jcr.model.Preference;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.form.UIFormInputSetWithAction;
 import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.web.application.ApplicationMessage;
+import org.exoplatform.web.application.RequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.core.model.SelectItemOption;
 import org.exoplatform.webui.event.Event;
-import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.event.Event.Phase;
+import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.form.UIForm;
 import org.exoplatform.webui.form.UIFormInputInfo;
 import org.exoplatform.webui.form.UIFormSelectBox;
@@ -81,16 +83,27 @@ public class UISimpleSearch extends UIForm {
   }
 
   private static final String ROOT_XPATH_QUERY = "//*";
-  private static final String XPATH_QUERY = "/jcr:root$0//*";
-  private static final String ROOT_SQL_QUERY = "SELECT * FROM nt:base WHERE jcr:path LIKE '/%' ";
-  private static final String SQL_QUERY = "SELECT * FROM nt:base WHERE jcr:path LIKE '$0/%' ";
+
+  private static final String XPATH_QUERY      = "/jcr:root$0//*";
+
+  private static final String ROOT_SQL_QUERY   = "SELECT * FROM nt:base WHERE jcr:path LIKE '/%' ";
+
+  private static final String SQL_QUERY        = "SELECT * FROM nt:base WHERE jcr:path LIKE '$0/%' ";
+
+  private String              _OR;
+
+  private String              _AND;
 
   public UISimpleSearch() throws Exception {
     addUIFormInput(new UIFormInputInfo(NODE_PATH, NODE_PATH, null));
     addUIFormInput(new UIFormStringInput(INPUT_SEARCH, INPUT_SEARCH, null));
     List<SelectItemOption<String>> operators = new ArrayList<SelectItemOption<String>>();
-    operators.add(new SelectItemOption<String>(AND, AND));
-    operators.add(new SelectItemOption<String>(OR, OR));
+    RequestContext context = RequestContext.getCurrentInstance();
+    ResourceBundle res = context.getApplicationResourceBundle();
+    _AND = res.getString("UIConstraintForm.label.and");
+    _OR = res.getString("UIConstraintForm.label.or");
+    operators.add(new SelectItemOption<String>(_AND, AND));
+    operators.add(new SelectItemOption<String>(_OR, OR));
     addUIFormInput(new UIFormSelectBox(FIRST_OPERATOR, FIRST_OPERATOR, operators));
     UIFormInputSetWithAction uiInputAct = new UIFormInputSetWithAction("moreConstraints");
     uiInputAct.addUIFormInput(new UIFormInputInfo(CONSTRAINTS, CONSTRAINTS, null));

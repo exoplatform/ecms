@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.ResourceBundle;
 
 import javax.jcr.query.Query;
 import javax.jcr.query.QueryManager;
@@ -30,6 +31,7 @@ import org.exoplatform.ecm.jcr.model.Preference;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.selector.UISelectable;
 import org.exoplatform.web.application.ApplicationMessage;
+import org.exoplatform.web.application.RequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIApplication;
@@ -39,8 +41,8 @@ import org.exoplatform.webui.core.UIPopupWindow;
 import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.core.model.SelectItemOption;
 import org.exoplatform.webui.event.Event;
-import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.event.Event.Phase;
+import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.form.UIForm;
 import org.exoplatform.webui.form.UIFormCheckBoxInput;
 import org.exoplatform.webui.form.UIFormDateTimeInput;
@@ -94,13 +96,27 @@ public class UIConstraintsForm extends UIForm implements UISelectable{
   final static private String DATETIME_REGEX =
     "^(\\d{1,2}\\/\\d{1,2}\\/\\d{1,4})\\s*(\\s+\\d{1,2}:\\d{1,2}:\\d{1,2})?$" ;
 
-  private String virtualDateQuery_ ;
+  private String              virtualDateQuery_;
+
+  private String              _CREATED_DATE;
+
+  private String              _MODIFIED_DATE;
+
+  private String              _AND_OPERATION;
+
+  private String              _OR_OPERATION;
 
   public UIConstraintsForm() throws Exception {
+    RequestContext context = RequestContext.getCurrentInstance();
+    ResourceBundle res = context.getApplicationResourceBundle();
+    _AND_OPERATION = res.getString("UIConstraintForm.label.and");
+    _OR_OPERATION = res.getString("UIConstraintForm.label.or");
+    _CREATED_DATE = res.getString("UIConstraintForm.label.created"); 
+    _MODIFIED_DATE = res.getString("UIConstraintForm.label.modified");    
     setActions(new String[] {"Add", "Cancel"}) ;
     List<SelectItemOption<String>> typeOperation = new ArrayList<SelectItemOption<String>>() ;
-    typeOperation.add(new SelectItemOption<String>(AND_OPERATION, AND_OPERATION));
-    typeOperation.add(new SelectItemOption<String>(OR_OPERATION, OR_OPERATION));
+    typeOperation.add(new SelectItemOption<String>(_AND_OPERATION, AND_OPERATION));
+    typeOperation.add(new SelectItemOption<String>(_OR_OPERATION, OR_OPERATION));
     addUIFormInput(new UIFormSelectBox(OPERATOR, OPERATOR, typeOperation)) ;
 
     addUIFormInput(new UIFormCheckBoxInput<Boolean>(EXACTLY_PROPERTY, EXACTLY_PROPERTY, null)) ;
@@ -118,8 +134,8 @@ public class UIConstraintsForm extends UIForm implements UISelectable{
 
     addUIFormInput(new UIFormCheckBoxInput<Boolean>(DATE_PROPERTY, DATE_PROPERTY, null)) ;
     List<SelectItemOption<String>> dateOperation = new ArrayList<SelectItemOption<String>>() ;
-    dateOperation.add(new SelectItemOption<String>(CREATED_DATE, CREATED_DATE));
-    dateOperation.add(new SelectItemOption<String>(MODIFIED_DATE, MODIFIED_DATE));
+    dateOperation.add(new SelectItemOption<String>(_CREATED_DATE, CREATED_DATE));
+    dateOperation.add(new SelectItemOption<String>(_MODIFIED_DATE, MODIFIED_DATE));
     addUIFormInput(new UIFormSelectBox(TIME_OPTION, TIME_OPTION, dateOperation)) ;
     UIFormDateTimeInput uiFromDate = new UIFormDateTimeInput(START_TIME, START_TIME, null) ;
     uiFromDate.setDisplayTime(false) ;
