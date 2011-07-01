@@ -21,6 +21,8 @@ import java.text.SimpleDateFormat;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 import javax.servlet.ServletContext;
 import javax.ws.rs.GET;
@@ -47,11 +49,10 @@ import org.exoplatform.portal.config.UserPortalConfigService;
 import org.exoplatform.portal.config.model.Page;
 import org.exoplatform.portal.config.model.PortalConfig;
 import org.exoplatform.portal.mop.SiteKey;
-import org.exoplatform.portal.mop.Visibility;
 import org.exoplatform.portal.mop.user.UserNavigation;
 import org.exoplatform.portal.mop.user.UserNode;
-import org.exoplatform.portal.mop.user.UserNodeFilterConfig;
 import org.exoplatform.portal.mop.user.UserPortal;
+import org.exoplatform.portal.mop.user.UserPortalContext;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.rest.resource.ResourceContainer;
@@ -252,9 +253,20 @@ public class PortalLinkConnector implements ResourceContainer {
 
     // get navigation data
     UserPortalConfigService pConfig = WCMCoreUtils.getService(UserPortalConfigService.class);
+    UserPortalContext NULL_CONTEXT = new UserPortalContext()
+    {
+       public ResourceBundle getBundle(UserNavigation navigation)
+       {
+          return null;
+       }
+       public Locale getUserLocale()
+       {
+          return Locale.ENGLISH;
+       }
+    };
     UserPortalConfig userPortalCfg = pConfig.getUserPortalConfig(portalName,
                                                                  userId,
-                                                                 null);
+                                                                 NULL_CONTEXT);
     UserPortal userPortal = userPortalCfg.getUserPortal();
     UserNavigation navigation = userPortal.getNavigation(SiteKey.portal(portalName));
     UserNode userNode = null;
@@ -264,17 +276,11 @@ public class PortalLinkConnector implements ResourceContainer {
       return rootElement.getOwnerDocument();
     }
     
-    //filter nodes
-    UserNodeFilterConfig.Builder filterConfigBuilder = UserNodeFilterConfig.builder();
-    filterConfigBuilder.withAuthorizationCheck().withVisibility(Visibility.DISPLAYED, Visibility.TEMPORAL);
-    filterConfigBuilder.withTemporalCheck();
-    UserNodeFilterConfig filterConfig = filterConfigBuilder.build();
-
     if ("/".equals(pageNodeUri)) {
-      userNode = userPortal.getNode(navigation, NavigationUtils.ECMS_NAVIGATION_SCOPE, filterConfig, null);
+      userNode = userPortal.getNode(navigation, NavigationUtils.ECMS_NAVIGATION_SCOPE, null, null);
     } else {
       pageNodeUri = pageNodeUri.substring(1, pageNodeUri.length() - 1);
-      userNode = userPortal.resolvePath(navigation, filterConfig, pageNodeUri);
+      userNode = userPortal.resolvePath(navigation, null, pageNodeUri);
 
       if (userNode != null) {
         userPortal.updateNode(userNode, NavigationUtils.ECMS_NAVIGATION_SCOPE, null);

@@ -21,10 +21,8 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
-import org.exoplatform.portal.mop.Visibility;
 import org.exoplatform.portal.mop.user.UserNavigation;
 import org.exoplatform.portal.mop.user.UserNode;
-import org.exoplatform.portal.mop.user.UserNodeFilterConfig;
 import org.exoplatform.portal.mop.user.UserPortal;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.wcm.navigation.NavigationUtils;
@@ -40,8 +38,8 @@ import org.exoplatform.webui.core.UIRightClickPopupMenu;
 import org.exoplatform.webui.core.UITree;
 import org.exoplatform.webui.core.model.SelectItemOption;
 import org.exoplatform.webui.event.Event;
-import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.event.Event.Phase;
+import org.exoplatform.webui.event.EventListener;
 
 /**
  * Created by The eXo Platform SARL
@@ -84,21 +82,14 @@ public class UIPageNodeSelector extends UIContainer {
   /** the user portal  */
   private UserPortal userPortal;
   
-  /** the filter of the navigation  */
-  private final UserNodeFilterConfig NAVIGATION_FILTER_CONFIG;
   /**
    * Instantiates a new uI page node selector.
    *
    * @throws Exception the exception
    */
   public UIPageNodeSelector() throws Exception {    
-    userPortal = Util.getUIPortalApplication().getUserPortalConfig().getUserPortal();
+    userPortal = Util.getUIPortalApplication().getUserPortalConfig().getUserPortal();    
     
-    UserNodeFilterConfig.Builder filterConfigBuilder = UserNodeFilterConfig.builder();
-    filterConfigBuilder.withAuthorizationCheck().withVisibility(Visibility.DISPLAYED, Visibility.TEMPORAL);
-    filterConfigBuilder.withTemporalCheck();
-    NAVIGATION_FILTER_CONFIG = filterConfigBuilder.build();
-
     UIDropDownControl uiDopDownControl = addChild(UIDropDownControl.class, "UIDropDown", "UIDropDown");
     uiDopDownControl.setParent(this);
 
@@ -159,8 +150,7 @@ public class UIPageNodeSelector extends UIContainer {
     selectNavigation(getId(firstNav));
     UserNode rootNode = userPortal.getNode(firstNav,
                                            NavigationUtils.ECMS_NAVIGATION_SCOPE,
-                                           NAVIGATION_FILTER_CONFIG,
-                                           null);
+                                           null, null);
     Iterator<UserNode> childrenIter = rootNode.getChildren().iterator();
     if (childrenIter.hasNext()) {
       selectUserNodeByUri(childrenIter.next().getURI());
@@ -226,7 +216,7 @@ public class UIPageNodeSelector extends UIContainer {
 
     UserNode rootNode = userPortal.getNode(selectedNav,
                                            NavigationUtils.ECMS_NAVIGATION_SCOPE,
-                                           NAVIGATION_FILTER_CONFIG,
+                                           null,
                                            null);
     selectedNode = new SelectedNode(selectedNav, rootNode, null, null);
     selectUserNodeByUri(null);
@@ -253,14 +243,8 @@ public class UIPageNodeSelector extends UIContainer {
     tree.setSibbling(null);
     tree.setParentSelected(null);
 
-    // filter nodes
-    UserNodeFilterConfig.Builder filterConfigBuilder = UserNodeFilterConfig.builder();
-    filterConfigBuilder.withAuthorizationCheck().withVisibility(Visibility.DISPLAYED, Visibility.TEMPORAL);
-    filterConfigBuilder.withTemporalCheck();
-    UserNodeFilterConfig filterConfig = filterConfigBuilder.build();
-
     UserNavigation selectedNav = selectedNode.getUserNavigation();
-    UserNode userNode = userPortal.resolvePath(selectedNav, filterConfig, uri);
+    UserNode userNode = userPortal.resolvePath(selectedNav, null, uri);
 
     if (userNode != null) {
       userPortal.updateNode(userNode, NavigationUtils.ECMS_NAVIGATION_SCOPE, null);
