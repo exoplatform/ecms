@@ -32,9 +32,9 @@
     <org.exoplatform.ws.version>2.2.0-CR2</org.exoplatform.ws.version>
     <org.exoplatform.jcr.version>1.14.0-CR2</org.exoplatform.jcr.version>
     <org.exoplatform.jcr-services.version>1.14.0-CR2</org.exoplatform.jcr-services.version>
-    <org.exoplatform.portal.version>3.2.0-PLF-SNAPSHOT</org.exoplatform.portal.version>
+    <org.exoplatform.portal.version>3.2.0-PLF-Beta3</org.exoplatform.portal.version>
     <exo.tool.framework.junit.version>1.2.0</exo.tool.framework.junit.version>
-    <org.exoplatform.commons.version>1.1.0-Beta02-SNAPSHOT</org.exoplatform.commons.version>
+    <org.exoplatform.commons.version>1.1.0-Beta02</org.exoplatform.commons.version>
     <org.exoplatform.tool.version>1.0.0</org.exoplatform.tool.version>
     <chromattic.version>1.1.0-beta6</chromattic.version>
     <xcmis.version>1.2.1</xcmis.version>
