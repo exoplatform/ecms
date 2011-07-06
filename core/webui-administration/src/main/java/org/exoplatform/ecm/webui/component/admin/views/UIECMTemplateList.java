@@ -28,11 +28,11 @@ import org.exoplatform.commons.utils.ListAccess;
 import org.exoplatform.commons.utils.ListAccessImpl;
 import org.exoplatform.ecm.webui.core.UIPagingGrid;
 import org.exoplatform.ecm.webui.utils.Utils;
-import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.drives.ManageDriveService;
 import org.exoplatform.services.cms.views.ManageViewService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -73,12 +73,11 @@ public class UIECMTemplateList extends UIPagingGrid {
     return node.getBaseVersion().getName();
   }
 
-  @SuppressWarnings("unchecked")
   public void refresh(int currentPage) throws Exception {
     List<Node> nodes = getApplicationComponent(ManageViewService.class)
                                                .getAllTemplates(
                                                                 BasePath.ECM_EXPLORER_TEMPLATES, 
-                                                                SessionProviderFactory.createSessionProvider());
+                                                                WCMCoreUtils.getUserSessionProvider());
     List<TemplateBean> tempBeans = new ArrayList<TemplateBean>();
     for (Node node : nodes) {
       tempBeans.add(new TemplateBean(node.getName(), node.getPath(), getBaseVersion(node)));
@@ -110,7 +109,7 @@ public class UIECMTemplateList extends UIPagingGrid {
   static  public class AddActionListener extends EventListener<UIECMTemplateList> {
     public void execute(Event<UIECMTemplateList> event) throws Exception {
       UIECMTemplateList uiECMTempList = event.getSource() ;
-      SessionProvider provider = SessionProviderFactory.createSessionProvider() ;
+      SessionProvider provider = WCMCoreUtils.getUserSessionProvider();
       Node ecmTemplateHome = uiECMTempList.getApplicationComponent(ManageViewService.class)
                                           .getTemplateHome(BasePath.ECM_EXPLORER_TEMPLATES,
                                                            provider);

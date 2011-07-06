@@ -35,7 +35,6 @@ import javax.jcr.query.QueryResult;
 import org.exoplatform.commons.utils.ISO8601;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.container.xml.PortalContainerInfo;
-import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.services.cache.CacheService;
 import org.exoplatform.services.cache.ExoCache;
 import org.exoplatform.services.cms.BasePath;
@@ -299,7 +298,7 @@ public class QueryServiceImpl implements QueryService, Startable{
     try {
       queryNode = (Node) session.getItem(queryPath);
     } catch (PathNotFoundException pe) {
-      queryNode = (Node) getSession(SessionProviderFactory.createSystemProvider(), true).getItem(queryPath);
+      queryNode = (Node) getSession(WCMCoreUtils.getSystemSessionProvider(), true).getItem(queryPath);
     }
     queryNode.remove();
     session.save();
@@ -332,7 +331,7 @@ public class QueryServiceImpl implements QueryService, Startable{
                    language,
                    permissions,
                    cachedResult,
-                   SessionProviderFactory.createSessionProvider());
+                   WCMCoreUtils.getUserSessionProvider());
   }
 
   @Deprecated

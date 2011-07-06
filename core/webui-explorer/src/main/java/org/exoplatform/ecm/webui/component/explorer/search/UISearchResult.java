@@ -19,7 +19,6 @@ package org.exoplatform.ecm.webui.component.explorer.search;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -35,9 +34,7 @@ import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 import javax.jcr.query.Query;
 import javax.jcr.query.QueryManager;
-import javax.jcr.query.QueryResult;
 import javax.jcr.query.Row;
-import javax.jcr.query.RowIterator;
 
 import org.exoplatform.ecm.webui.component.explorer.UIDocumentWorkspace;
 import org.exoplatform.ecm.webui.component.explorer.UIDrivesArea;
@@ -45,7 +42,6 @@ import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.ecm.webui.utils.Utils;
-import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.portal.webui.workspace.UIPortalApplication;
 import org.exoplatform.services.cms.BasePath;
@@ -58,7 +54,6 @@ import org.exoplatform.services.jcr.impl.core.JCRPath;
 import org.exoplatform.services.jcr.impl.core.SessionImpl;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
-import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.search.base.AbstractPageList;
 import org.exoplatform.services.wcm.search.base.NodeSearchFilter;
 import org.exoplatform.services.wcm.search.base.PageListFactory;
@@ -103,7 +98,6 @@ public class UISearchResult extends UIContainer {
 
   private QueryData queryData_;
   private long searchTime_ = 0;
-  private boolean flag_ = false;
   private UIPageIterator uiPageIterator_;
   private static String iconType = "";
   private static String iconScore = "";
@@ -178,8 +172,7 @@ public class UISearchResult extends UIContainer {
 
   public Node getSymlinkNode(Node targetNode) throws Exception {
     RepositoryService repositoryService = getApplicationComponent(RepositoryService.class);
-    Session session =
-      SessionProviderFactory.createSessionProvider().getSession(workspaceName, repositoryService.getCurrentRepository());
+    Session session = WCMCoreUtils.getUserSessionProvider().getSession(workspaceName, repositoryService.getCurrentRepository());
     String queryStatement =
       "select * from exo:taxonomyLink where jcr:path like '" + currentPath + "/%' " +
           "and exo:uuid='"+targetNode.getUUID()+"' " +
@@ -346,12 +339,6 @@ public class UISearchResult extends UIContainer {
       uiSearchResult.pageList.setComparator(comparator);
       uiSearchResult.pageList.setOrder("ASC");
       uiSearchResult.pageList.sortData();
-//      Collections.sort(uiSearchResult.currentListRows_, new SearchComparator());
-//      SearchResultPageList pageList = new SearchResultPageList(uiSearchResult.queryResult_,
-//          uiSearchResult.currentListRows_, PAGE_SIZE, uiSearchResult.isEndOfIterator_);
-//      uiSearchResult.currentAvailablePage_ = uiSearchResult.currentListNodes_.size()/PAGE_SIZE;
-//      uiSearchResult.uiPageIterator_.setSearchResultPageList(pageList);
-//      uiSearchResult.uiPageIterator_.setPageList(pageList);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiSearchResult.getParent());
     }
   }
@@ -400,7 +387,6 @@ public class UISearchResult extends UIContainer {
       categoryPathList = categories;
     }
     
-    @Override
     public Node filterNodeToDisplay(Node node) {
       try {
         if (node != null) {
@@ -428,7 +414,6 @@ public class UISearchResult extends UIContainer {
   
   public static class RowDataCreator implements SearchDataCreator<RowData> {
 
-    @Override
     public RowData createData(Node node, Row row) {
       return new RowData(row);
     }

@@ -31,9 +31,9 @@ import javax.jcr.nodetype.NodeTypeManager;
 import org.exoplatform.ecm.webui.form.UIFormInputSetWithAction;
 import org.exoplatform.ecm.webui.selector.UISelectable;
 import org.exoplatform.ecm.webui.utils.Utils;
-import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.jcr.RepositoryService;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -41,14 +41,14 @@ import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.core.model.SelectItemOption;
 import org.exoplatform.webui.event.Event;
-import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.event.Event.Phase;
-import org.exoplatform.webui.form.UIFormCheckBoxInput;
+import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.form.UIFormInputSet;
 import org.exoplatform.webui.form.UIFormSelectBox;
 import org.exoplatform.webui.form.UIFormStringInput;
 import org.exoplatform.webui.form.UIFormTabPane;
 import org.exoplatform.webui.form.UIFormTextAreaInput;
+import org.exoplatform.webui.form.input.UIFormCheckBoxInput;
 import org.exoplatform.webui.form.validator.MandatoryValidator;
 
 /**
@@ -91,7 +91,7 @@ public class UITemplateForm extends UIFormTabPane implements UISelectable {
     templateTab.addUIFormInput(new UIFormStringInput(FIELD_LABEL, FIELD_LABEL, null).
                                addValidator(MandatoryValidator.class)) ;
 
-    templateTab.addUIFormInput(new UIFormCheckBoxInput<Boolean>(FIELD_ISTEMPLATE,
+    templateTab.addUIFormInput(new UIFormCheckBoxInput(FIELD_ISTEMPLATE,
                                                                 FIELD_ISTEMPLATE,
                                                                 null).setChecked(true));
     templateTab.addUIFormInput(new UIFormStringInput(FIELD_PERMISSION, FIELD_PERMISSION,
@@ -161,7 +161,7 @@ public class UITemplateForm extends UIFormTabPane implements UISelectable {
     NodeTypeManager nodeTypeManager =
         getApplicationComponent(RepositoryService.class).getCurrentRepository().getNodeTypeManager() ;
     Node templatesHome = getApplicationComponent(TemplateService.class).
-        getTemplatesHome(SessionProviderFactory.createSessionProvider());
+        getTemplatesHome(WCMCoreUtils.getUserSessionProvider());
     if(templatesHome != null) {
       NodeIterator templateIter = templatesHome.getNodes() ;
       List<String> templates = new ArrayList<String>() ;

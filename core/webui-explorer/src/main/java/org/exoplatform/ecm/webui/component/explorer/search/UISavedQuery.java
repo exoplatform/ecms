@@ -31,11 +31,10 @@ import org.exoplatform.commons.utils.ListAccessImpl;
 import org.exoplatform.ecm.webui.component.explorer.UIDocumentWorkspace;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
-import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.queries.QueryService;
-import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.wcm.core.NodeLocation;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.application.portlet.PortletRequestContext;
@@ -73,7 +72,6 @@ public class UISavedQuery extends UIContainer implements UIPopupComponent {
   private UIPageIterator uiPageIterator_;
 
   private boolean isQuickSearch_ = false;
-  private String repositoryName_;
 
   public UISavedQuery() throws Exception {
     uiPageIterator_ = addChild(UIPageIterator.class, null, "SavedQueryIterator");
@@ -130,8 +128,7 @@ public class UISavedQuery extends UIContainer implements UIPopupComponent {
   public List<Query> getQueries() throws Exception {
     QueryService queryService = getApplicationComponent(QueryService.class);
     try {
-      return queryService.getQueries(getCurrentUserId(),
-                                               SessionProviderFactory.createSessionProvider());
+      return queryService.getQueries(getCurrentUserId(), WCMCoreUtils.getUserSessionProvider());
     } catch(AccessDeniedException ace) {
       return new ArrayList<Query>();
     }
@@ -143,13 +140,10 @@ public class UISavedQuery extends UIContainer implements UIPopupComponent {
     PortletRequestContext pcontext = (PortletRequestContext)WebuiRequestContext.getCurrentInstance();
     QueryService queryService = getApplicationComponent(QueryService.class);
     String userId = pcontext.getRemoteUser();
-    SessionProvider provider = SessionProviderFactory.createSystemProvider();
-    return queryService.getSharedQueries(userId, provider);
+    return queryService.getSharedQueries(userId, WCMCoreUtils.getSystemSessionProvider());
   }
 
   //public List<Node> getSharedQueries() { return sharedQueries_; }
-
-  public void setRepositoryName(String repositoryName) { repositoryName_ = repositoryName; }
 
   public void activate() throws Exception { }
 
@@ -180,7 +174,7 @@ public class UISavedQuery extends UIContainer implements UIPopupComponent {
       try {
         query = queryService.getQuery(queryPath,
                                        wsName,
-                                       SessionProviderFactory.createSystemProvider(),
+                                       WCMCoreUtils.getSystemSessionProvider(),
                                        uiQuery.getCurrentUserId());
         queryResult = query.execute();
       } catch(Exception e) {
@@ -214,7 +208,7 @@ public class UISavedQuery extends UIContainer implements UIPopupComponent {
       String queryPath = event.getRequestContext().getRequestParameter(OBJECTID);
       Query query = queryService.getQueryByPath(queryPath,
                                                 userName,
-                                                SessionProviderFactory.createSystemProvider());
+                                                WCMCoreUtils.getSystemSessionProvider());
       uiQuery.initPopupEditForm(query);
       if(!uiQuery.isQuickSearch_) {
         UIECMSearch uiECSearch = uiQuery.getParent();

@@ -40,7 +40,6 @@ import org.exoplatform.ecm.webui.component.explorer.popup.actions.UIDocumentForm
 import org.exoplatform.ecm.webui.component.explorer.sidebar.UISideBar;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.ecm.webui.utils.Utils;
-import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.drives.ManageDriveService;
@@ -48,7 +47,7 @@ import org.exoplatform.services.cms.views.ManageViewService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.config.RepositoryEntry;
 import org.exoplatform.services.jcr.core.ManageableRepository;
-import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.web.application.RequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -190,8 +189,7 @@ public class UIDrivesArea extends UIContainer {
         for(String viewName : drive.getViews().split(",")) {
           if (!viewList.contains(viewName.trim())) {
             Node viewNode = uiDrivesArea.getApplicationComponent(ManageViewService.class)
-                                        .getViewByName(viewName.trim(),
-                                                       SessionProviderFactory.createSystemProvider());
+                                        .getViewByName(viewName.trim(), WCMCoreUtils.getSystemSessionProvider());
             String permiss = viewNode.getProperty("exo:accessPermissions").getString();
             if(permiss.contains("${userId}")) permiss = permiss.replace("${userId}", userId);
             String[] viewPermissions = permiss.split(",");
@@ -231,12 +229,12 @@ public class UIDrivesArea extends UIContainer {
       uiJCRExplorer.setIsReferenceNode(false);
       uiJCRExplorer.setPreferencesSaved(true);
 
-      SessionProvider provider = SessionProviderFactory.createSessionProvider();
       ManageableRepository repository = rservice.getCurrentRepository();
       try {
-        Session session = provider.getSession(drive.getWorkspace(), repository);
-        // check if it exists
-        // we assume that the path is a real path
+        Session session = WCMCoreUtils.getUserSessionProvider().getSession(drive.getWorkspace(), repository);
+        /**
+         *  check if it exists. we assume that the path is a real path
+         */
         session.getItem(homePath);
       } catch(AccessDeniedException ace) {
         Object[] args = { driveName };

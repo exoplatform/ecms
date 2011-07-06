@@ -29,15 +29,14 @@ import org.exoplatform.ecm.webui.form.UIFormInputSetWithAction;
 import org.exoplatform.ecm.webui.selector.UISelectable;
 import org.exoplatform.ecm.webui.tree.UIBaseNodeTreeSelector;
 import org.exoplatform.ecm.webui.tree.UITreeTaxonomyBuilder;
-import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.taxonomy.TaxonomyService;
 import org.exoplatform.services.jcr.RepositoryService;
-import org.exoplatform.services.jcr.config.RepositoryConfigurationException;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.web.application.RequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -113,14 +112,7 @@ public class UITreeTaxonomyList extends UIForm {
 
   @Deprecated
   public void setTaxonomyTreeList(String repository) throws Exception {
-    TaxonomyService taxonomyService = getApplicationComponent(TaxonomyService.class);
-    List<Node> listNode = taxonomyService.getAllTaxonomyTrees();
-    List<SelectItemOption<String>> taxonomyTree = new ArrayList<SelectItemOption<String>>();
-    for(Node itemNode : listNode) {
-      taxonomyTree.add(new SelectItemOption<String>(getTaxonomyLabel(itemNode.getName()), itemNode.getName()));
-    }
-    UIFormSelectBox uiTreeTaxonomyList = getUIFormSelectBox(TAXONOMY_TREE);
-    uiTreeTaxonomyList.setOptions(taxonomyTree);
+    setTaxonomyTreeList();
   }
   
   public void setTaxonomyTreeList() throws Exception {
@@ -134,12 +126,11 @@ public class UITreeTaxonomyList extends UIForm {
     uiTreeTaxonomyList.setOptions(taxonomyTree);
   }  
 
-  private Node getRootNode(String workspaceName, String pathNode) throws
-    RepositoryException, RepositoryConfigurationException {
-      RepositoryService repositoryService = getApplicationComponent(RepositoryService.class);
-      ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
-      SessionProvider sessionProvider =  SessionProviderFactory.createSessionProvider();
-      return (Node) sessionProvider.getSession(workspaceName, manageableRepository).getItem(pathNode);
+  private Node getRootNode(String workspaceName, String pathNode) throws RepositoryException {
+    RepositoryService repositoryService = getApplicationComponent(RepositoryService.class);
+    ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
+    SessionProvider sessionProvider = WCMCoreUtils.getUserSessionProvider();
+    return (Node) sessionProvider.getSession(workspaceName, manageableRepository).getItem(pathNode);
   }
 
   static public class ChangeTaxonomyTreeActionListener extends EventListener<UITreeTaxonomyList> {
@@ -195,17 +186,15 @@ public class UITreeTaxonomyList extends UIForm {
       UIOneTaxonomySelector uiTaxonomySelector = uiTreeTaxonomyList.getParent();
       String returnField = ((UIBaseNodeTreeSelector) uiTaxonomySelector).getReturnFieldName();
       ((UISelectable)((UIBaseNodeTreeSelector) uiTaxonomySelector).getSourceComponent()).doSelect(returnField, taxoTreeName) ;
-      if (uiTaxonomySelector instanceof UIOneTaxonomySelector) {
-        UIComponent uiComponent = uiTaxonomySelector.getParent();
-        if (uiComponent instanceof UIPopupWindow) {
-          ((UIPopupWindow)uiComponent).setShow(false);
-          ((UIPopupWindow)uiComponent).setRendered(false);
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiComponent);
-        }
-        UIComponent component = ((UIOneTaxonomySelector) uiTaxonomySelector).getSourceComponent().getParent();
-        if (component != null) {
-          event.getRequestContext().addUIComponentToUpdateByAjax(component);
-        }
+      UIComponent uiComponent = uiTaxonomySelector.getParent();
+      if (uiComponent instanceof UIPopupWindow) {
+        ((UIPopupWindow)uiComponent).setShow(false);
+        ((UIPopupWindow)uiComponent).setRendered(false);
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiComponent);
+      }
+      UIComponent component = uiTaxonomySelector.getSourceComponent().getParent();
+      if (component != null) {
+        event.getRequestContext().addUIComponentToUpdateByAjax(component);
       }
     }
   }

@@ -28,13 +28,11 @@ import javax.jcr.Value;
 import javax.jcr.nodetype.NodeType;
 import javax.jcr.nodetype.NodeTypeManager;
 import javax.jcr.nodetype.PropertyDefinition;
-import javax.jcr.version.Version;
 
 import org.exoplatform.container.PortalContainer;
-import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
-import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.form.UIForm;
@@ -146,7 +144,7 @@ public class UINodeProperty extends UIForm{
   private Session getSystemSession() throws Exception {
     ManageableRepository manageableRepository = getApplicationComponent(RepositoryService.class).getCurrentRepository();
     String systemWorksapce = manageableRepository.getConfiguration().getDefaultWorkspaceName();
-    Session session = SessionProviderFactory.createSystemProvider().getSession(systemWorksapce, manageableRepository) ;
+    Session session = WCMCoreUtils.getSystemSessionProvider().getSession(systemWorksapce, manageableRepository) ;
     return session ;
   }
 }

@@ -23,7 +23,6 @@ import javax.jcr.AccessDeniedException;
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 import javax.jcr.query.Query;
-import javax.jcr.query.QueryResult;
 
 import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.ecm.webui.component.explorer.UIDocumentWorkspace;
@@ -36,14 +35,13 @@ import org.exoplatform.ecm.webui.component.explorer.search.UISavedQuery;
 import org.exoplatform.ecm.webui.component.explorer.search.UISearchResult;
 import org.exoplatform.ecm.webui.component.explorer.search.UISimpleSearch;
 import org.exoplatform.ecm.webui.utils.Utils;
-import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.actions.ActionServiceContainer;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.drives.ManageDriveService;
 import org.exoplatform.services.cms.queries.QueryService;
 import org.exoplatform.services.cms.taxonomy.TaxonomyService;
-import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.application.portlet.PortletRequestContext;
@@ -103,8 +101,7 @@ public class UISavedSearches extends UIComponent {
   public List<Query> getQueries() throws Exception { 
     QueryService queryService = getApplicationComponent(QueryService.class);
     try {
-      return  queryService.getQueries(getCurrentUserId(),
-                                               SessionProviderFactory.createSessionProvider());
+      return  queryService.getQueries(getCurrentUserId(), WCMCoreUtils.getUserSessionProvider());
     } catch(AccessDeniedException ace) {
       return new ArrayList<Query>();
     }
@@ -114,8 +111,7 @@ public class UISavedSearches extends UIComponent {
     PortletRequestContext pcontext = (PortletRequestContext)WebuiRequestContext.getCurrentInstance();
     QueryService queryService = getApplicationComponent(QueryService.class);
     String userId = pcontext.getRemoteUser();
-    SessionProvider provider = SessionProviderFactory.createSystemProvider();
-    return queryService.getSharedQueries(userId, provider);
+    return queryService.getSharedQueries(userId, WCMCoreUtils.getSystemSessionProvider());
   }
 
   public void setQueryPath(String queryPath) throws Exception {
@@ -143,23 +139,16 @@ public class UISavedSearches extends UIComponent {
       UIDrivesArea uiDrivesArea = uiWorkingArea.getChild(UIDrivesArea.class);
       UISearchResult uiSearchResult = ((UIDocumentWorkspace)uiSearch).getChild(UISearchResult.class);
       Query query = null;
-      QueryResult queryResult = null;
       try {
         query = queryService.getQuery(queryPath,
                                        wsName,
-                                       SessionProviderFactory.createSystemProvider(),
+                                       WCMCoreUtils.getSystemSessionProvider(),
                                        uiSavedSearches.getCurrentUserId());
-        queryResult = query.execute();
+        query.execute();
       } catch(Exception e) {
         uiApp.addMessage(new ApplicationMessage("UISearchResult.msg.query-invalid", null,
                                                 ApplicationMessage.WARNING));
-        // return;
       } finally {
-        if(queryResult == null || queryResult.getNodes().getSize() ==0) {
-          // uiApp.addMessage(new ApplicationMessage("UISavedQuery.msg.not-result-found", null));
-          // event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
-          // return;
-        }
         uiSearchResult.setQuery(query.getStatement(), wsName, query.getLanguage(), true);
         uiSearchResult.updateGrid();
       }   
@@ -222,7 +211,6 @@ public class UISavedSearches extends UIComponent {
       UIPopupContainer UIPopupContainer = uiJCRExplorer.getChild(UIPopupContainer.class);
       UISavedQuery uiSavedQuery = event.getSource().createUIComponent(UISavedQuery.class, null, null);
       uiSavedQuery.setIsQuickSearch(true);
-      uiSavedQuery.setRepositoryName(uiJCRExplorer.getRepositoryName());
       uiSavedQuery.updateGrid(1);
       UIPopupContainer.activate(uiSavedQuery, 700, 400);
       event.getRequestContext().addUIComponentToUpdateByAjax(UIPopupContainer);

@@ -62,7 +62,6 @@ import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.ecm.webui.utils.LockUtil;
 import org.exoplatform.ecm.webui.utils.PermissionUtil;
 import org.exoplatform.ecm.webui.utils.Utils;
-import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.folksonomy.NewFolksonomyService;
@@ -80,6 +79,7 @@ import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.application.portlet.PortletRequestContext;
@@ -128,7 +128,6 @@ public class UIJCRExplorer extends UIContainer {
   private String language_ ;
   private String tagPath_ ;
   private String referenceWorkspace_ ;
-  private String pathBeforeEditing;
 
   private boolean isViewTag_;
   private boolean isHidePopup_;
@@ -343,11 +342,11 @@ public class UIJCRExplorer extends UIContainer {
   @Deprecated
   public Set<String> getAddressPath() { return addressPath_.keySet() ; }
   @Deprecated
-  public void setAddressPath(Set<String> s) {/*addressPath_ = s;*/} ;
+  public void setAddressPath(Set<String> s) {} ;
 
-  public SessionProvider getSessionProvider() { return SessionProviderFactory.createSessionProvider(); }
+  public SessionProvider getSessionProvider() { return WCMCoreUtils.getUserSessionProvider(); }
 
-  public SessionProvider getSystemProvider() { return SessionProviderFactory.createSystemProvider(); }
+  public SessionProvider getSystemProvider() { return WCMCoreUtils.getSystemSessionProvider(); }
 
   /**
    * @return the session of the current node (= UIJCRExplorer.getCurrentNode())
@@ -417,8 +416,7 @@ public class UIJCRExplorer extends UIContainer {
       String repoName = System.getProperty("gatein.tenant.repository.name");
       if (repoName!=null)
         return repoName;
-      else
-        return currentDriveRepositoryName_;
+      return currentDriveRepositoryName_;
     }
   }
 
@@ -723,15 +721,14 @@ public class UIJCRExplorer extends UIContainer {
   }
 
   public void record(String str, String ws) {
-    //Uncomment this line if you have problem with the history
+    /**
+     * Uncomment this line if you have problem with the history
+     * 
+     */
     //LOG.info("record(" + str + ", " + ws + ")", new Exception());
     nodesHistory_.add(str);
     wsHistory_.add(ws);
     addressPath_.put(str, new HistoryEntry(ws, str));
-
-    UIWorkingArea uiWorkingArea = getChild(UIWorkingArea.class);
-    UIDocumentWorkspace uiDocWorkspace = uiWorkingArea.getChild(UIDocumentWorkspace.class);
-    UIDocumentContainer uiDocumentContainer = uiDocWorkspace.getChild(UIDocumentContainer.class) ;
   }
 
   public void clearNodeHistory(String currentPath) {
@@ -837,7 +834,7 @@ public class UIJCRExplorer extends UIContainer {
     }
     if(isReferenceableNode(getCurrentNode()) && isReferences) {
       ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
-      SessionProvider sessionProvider = SessionProviderFactory.createSystemProvider();
+      SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
       for(String workspace:manageableRepository.getWorkspaceNames()) {
         Session session = sessionProvider.getSession(workspace,manageableRepository) ;
         try {
@@ -982,8 +979,8 @@ public class UIJCRExplorer extends UIContainer {
     List<Node> documentsOnTag = new ArrayList<Node>() ;
     WebuiRequestContext ctx = WebuiRequestContext.getCurrentInstance();
     SessionProvider sessionProvider = (ctx.getRemoteUser() == null) ?
-                                      SessionProviderFactory.createAnonimProvider() :
-                                      SessionProviderFactory.createSessionProvider();
+                                      WCMCoreUtils.createAnonimProvider() :
+                                      WCMCoreUtils.getUserSessionProvider();
     for (Node node : newFolksonomyService.getAllDocumentsByTag(tagPath_,
                                                                getRepository().getConfiguration().getDefaultWorkspaceName(),
                                                                sessionProvider)) {

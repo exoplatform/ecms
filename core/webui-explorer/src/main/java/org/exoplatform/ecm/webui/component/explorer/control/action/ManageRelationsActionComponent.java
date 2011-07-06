@@ -25,17 +25,17 @@ import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.control.UIActionBar;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.CanSetPropertyFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsCheckedOutFilter;
-import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotRootNodeFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotLockedFilter;
+import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotRootNodeFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.listener.UIActionBarActionListener;
 import org.exoplatform.ecm.webui.component.explorer.popup.admin.UIRelationManager;
 import org.exoplatform.ecm.webui.component.explorer.popup.admin.UIRelationsAddedList;
 import org.exoplatform.ecm.webui.tree.selectone.UIOneNodePathSelector;
 import org.exoplatform.ecm.webui.utils.Utils;
-import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.services.cms.relations.RelationsService;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.jcr.RepositoryService;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIComponent;
@@ -78,8 +78,7 @@ public class ManageRelationsActionComponent extends UIComponent {
         uiActionBar.getApplicationComponent(RelationsService.class);
       UIRelationsAddedList uiRelateAddedList =
         uiRelationManager.getChild(UIRelationsAddedList.class);
-      List<Node> relations = relateService.getRelations(uiExplorer.getCurrentNode(),
-                                                        SessionProviderFactory.createSessionProvider());
+      List<Node> relations = relateService.getRelations(uiExplorer.getCurrentNode(), WCMCoreUtils.getUserSessionProvider());
       uiRelateAddedList.updateGrid(relations, 1);
       String repository = uiActionBar.getAncestorOfType(UIJCRExplorer.class).getRepositoryName();
       String defaultWsName = repoService.getCurrentRepository().getConfiguration().getDefaultWorkspaceName();

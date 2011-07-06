@@ -27,7 +27,6 @@ import org.exoplatform.commons.utils.LazyPageList;
 import org.exoplatform.commons.utils.ListAccess;
 import org.exoplatform.commons.utils.ListAccessImpl;
 import org.exoplatform.ecm.webui.core.UIPagingGridDecorator;
-import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.queries.QueryService;
 import org.exoplatform.services.jcr.access.PermissionType;
@@ -108,7 +107,7 @@ public class UIQueriesList extends UIPagingGridDecorator {
   @SuppressWarnings("unchecked")
   public List<Node> getAllSharedQueries() throws Exception {
     QueryService queryService = getApplicationComponent(QueryService.class) ;
-    List<Node> queries = queryService.getSharedQueries(SessionProviderFactory.createSystemProvider()) ;
+    List<Node> queries = queryService.getSharedQueries(WCMCoreUtils.getSystemSessionProvider()) ;
     Collections.sort(queries, new QueryComparator()) ;
     return queries ;
   }

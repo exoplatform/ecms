@@ -30,10 +30,10 @@ import javax.jcr.Value;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.ecm.webui.utils.Utils;
-import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.services.cms.i18n.MultiLanguageService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -68,7 +68,7 @@ public class UIViewRelationList extends UIContainer{
     ManageableRepository repository = repositoryService.getCurrentRepository() ;
     String[] wsNames = repository.getWorkspaceNames() ;
     for(String wsName : wsNames) {
-      Session session = SessionProviderFactory.createSystemProvider().getSession(wsName, repository) ;
+      Session session = WCMCoreUtils.getUserSessionProvider().getSession(wsName, repository) ;
       for(Value val : vals) {
         String uuid = val.getString();
         try {

@@ -41,7 +41,6 @@ import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.ecm.webui.utils.LockUtil;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.portal.config.UserACL;
-import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.services.cms.lock.LockService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.config.RepositoryEntry;
@@ -116,7 +115,7 @@ public class UILockNodeList extends UIPagingGridDecorator {
     QueryResult queryResult = null;
 
     for(WorkspaceEntry ws : repo.getWorkspaceEntries()) {
-      session = SessionProviderFactory.createSystemProvider().getSession(ws.getName(), manageRepository);
+      session = WCMCoreUtils.getSystemSessionProvider().getSession(ws.getName(), manageRepository);
       queryManager = session.getWorkspace().getQueryManager();
       query = queryManager.createQuery(queryStatement, Query.SQL);
       queryResult = query.execute();
@@ -156,7 +155,7 @@ public class UILockNodeList extends UIPagingGridDecorator {
       Node lockedNode = null;
       RepositoryEntry repo = repositoryService.getCurrentRepository().getConfiguration();
       for(WorkspaceEntry ws : repo.getWorkspaceEntries()) {
-        session = SessionProviderFactory.createSessionProvider().getSession(ws.getName(), manageRepository);
+        session = WCMCoreUtils.getUserSessionProvider().getSession(ws.getName(), manageRepository);
         try {
           lockedNode = (Node) session.getItem(nodePath);
           if ((lockedNode != null) && !lockedNode.isNodeType(Utils.EXO_RESTORELOCATION)) break;

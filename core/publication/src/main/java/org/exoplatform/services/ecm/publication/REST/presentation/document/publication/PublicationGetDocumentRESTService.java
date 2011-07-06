@@ -41,7 +41,6 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import org.exoplatform.commons.utils.ISO8601;
-import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.drives.ManageDriveService;
 import org.exoplatform.services.ecm.publication.PublicationService;
@@ -51,6 +50,7 @@ import org.exoplatform.services.jcr.impl.core.query.QueryImpl;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.rest.resource.ResourceContainer;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
  * Created by The eXo Platform SARL Author : Ly Dinh Quang
@@ -136,7 +136,7 @@ public class PublicationGetDocumentRESTService implements ResourceContainer {
     if(itemPage == null) itemPage = DEFAULT_ITEM;
     int item = Integer.parseInt(itemPage);
     String queryStatement = "select * from publication:publication order by exo:dateModified ASC";
-    SessionProvider provider = SessionProviderFactory.createAnonimProvider();
+    SessionProvider provider = WCMCoreUtils.createAnonimProvider();
     Session session = provider.getSession(wsName, repositoryService_.getCurrentRepository());
     QueryManager queryManager = session.getWorkspace().getQueryManager();
     QueryImpl query = (QueryImpl) queryManager.createQuery(queryStatement, Query.SQL);

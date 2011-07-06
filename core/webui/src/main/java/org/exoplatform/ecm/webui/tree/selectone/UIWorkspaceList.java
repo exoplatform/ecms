@@ -24,16 +24,14 @@ import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 
-import org.exoplatform.services.log.Log;
 import org.exoplatform.ecm.webui.form.UIFormInputSetWithAction;
 import org.exoplatform.ecm.webui.selector.UISelectable;
 import org.exoplatform.ecm.webui.tree.UINodeTreeBuilder;
-import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.services.jcr.RepositoryService;
-import org.exoplatform.services.jcr.config.RepositoryConfigurationException;
 import org.exoplatform.services.jcr.core.ManageableRepository;
-import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -97,32 +95,7 @@ public class UIWorkspaceList extends UIForm {
 
   @Deprecated
   public void setWorkspaceList(String repository) throws Exception {
-    wsList_ = new ArrayList<String>();
-    RepositoryService repositoryService = getApplicationComponent(RepositoryService.class);
-    String[] wsNames = repositoryService.getCurrentRepository().getWorkspaceNames();
-    String systemWsName = repositoryService.getCurrentRepository()
-                                           .getConfiguration()
-                                           .getSystemWorkspaceName();
-    List<SelectItemOption<String>> workspace = new ArrayList<SelectItemOption<String>>();
-    for (String wsName : wsNames) {
-      if (!isShowSystem_) {
-        if (!wsName.equals(systemWsName)) {
-          workspace.add(new SelectItemOption<String>(wsName, wsName));
-          wsList_.add(wsName);
-        }
-      } else {
-        workspace.add(new SelectItemOption<String>(wsName, wsName));
-        wsList_.add(wsName);
-      }
-    }
-    UIFormSelectBox uiWorkspaceList = getUIFormSelectBox(WORKSPACE_NAME);
-    uiWorkspaceList.setOptions(workspace);
-    UIOneNodePathSelector uiBrowser = getParent();
-    if (uiBrowser.getWorkspaceName() != null) {
-      if (wsList_.contains(uiBrowser.getWorkspaceName())) {
-        uiWorkspaceList.setValue(uiBrowser.getWorkspaceName());
-      }
-    }
+    setWorkspaceList();
   }
   
   public void setWorkspaceList() throws Exception {
@@ -159,12 +132,10 @@ public class UIWorkspaceList extends UIForm {
     getUIFormSelectBox(WORKSPACE_NAME).setDisabled(isDisable);
   }
 
-  private Node getRootNode(String workspaceName) throws RepositoryException,
-                                                                       RepositoryConfigurationException {
+  private Node getRootNode(String workspaceName) throws RepositoryException {
     RepositoryService repositoryService = getApplicationComponent(RepositoryService.class);
     ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
-    SessionProvider sessionProvider =  SessionProviderFactory.createSessionProvider();
-    return sessionProvider.getSession(workspaceName, manageableRepository).getRootNode();
+    return WCMCoreUtils.getUserSessionProvider().getSession(workspaceName, manageableRepository).getRootNode();
   }
 
   static public class ChangeWorkspaceActionListener extends EventListener<UIWorkspaceList> {
@@ -204,7 +175,7 @@ public class UIWorkspaceList extends UIForm {
       String workspaceName = uiJBrowser.getWorkspaceName();
       RepositoryService repositoryService = uiWorkspaceList.getApplicationComponent(RepositoryService.class);
       ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
-      Session session = SessionProviderFactory.createSystemProvider().getSession(workspaceName, manageableRepository);
+      Session session = WCMCoreUtils.getSystemSessionProvider().getSession(workspaceName, manageableRepository);
       String value = session.getRootNode().getPath();
       if(!uiJBrowser.isDisable()) value = uiJBrowser.getWorkspaceName() + ":" + value;
       ((UISelectable)uiJBrowser.getSourceComponent()).doSelect(returnField, value);

@@ -42,7 +42,6 @@ import javax.ws.rs.core.Response;
 
 import org.apache.commons.lang.StringUtils;
 import org.exoplatform.ecm.utils.comparator.PropertyValueComparator;
-import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.drives.ManageDriveService;
 import org.exoplatform.services.cms.folksonomy.NewFolksonomyService;
@@ -54,6 +53,7 @@ import org.exoplatform.services.jcr.impl.core.query.QueryImpl;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.rest.resource.ResourceContainer;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
  * Created by The eXo Platform SARL
@@ -109,7 +109,6 @@ public class GetEditedDocumentRESTService implements ResourceContainer {
 
   @Path("/{repository}/")
   @GET
-//  @OutputTransformer(Bean2JsonOutputTransformer.class)
   public Response getLastEditedDoc(@PathParam("repository") String repository,
       @QueryParam("showItems") String showItems, @QueryParam("showGadgetWs") String showGadgetWs) throws Exception {
     List<Node> lstLastEditedNode = getLastEditedNode(showItems, showGadgetWs);
@@ -152,7 +151,7 @@ public class GetEditedDocumentRESTService implements ResourceContainer {
       if (!show_gadget && lstWorkspace.contains(GADGET)) {
         lstWorkspace.remove(GADGET);
       }
-      SessionProvider provider = SessionProviderFactory.createAnonimProvider();
+      SessionProvider provider = WCMCoreUtils.createAnonimProvider();
       QueryImpl query = null;
       Session session = null;
       QueryResult queryResult = null;

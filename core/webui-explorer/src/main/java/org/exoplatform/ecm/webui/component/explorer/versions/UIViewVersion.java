@@ -28,7 +28,6 @@ import javax.jcr.NodeIterator;
 import javax.jcr.RepositoryException;
 import javax.jcr.Value;
 
-import org.exoplatform.services.log.Log;
 import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.container.xml.PortalContainerInfo;
@@ -41,7 +40,6 @@ import org.exoplatform.ecm.webui.presentation.NodePresentation;
 import org.exoplatform.ecm.webui.presentation.removeattach.RemoveAttachmentComponent;
 import org.exoplatform.ecm.webui.presentation.removecomment.RemoveCommentComponent;
 import org.exoplatform.ecm.webui.utils.Utils;
-import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.resolver.ResourceResolver;
 import org.exoplatform.services.cms.comments.CommentsService;
@@ -50,7 +48,9 @@ import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.core.NodeLocation;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.web.application.Parameter;
 import org.exoplatform.webui.application.WebuiRequestContext;
@@ -163,7 +163,7 @@ public class UIViewVersion extends UIContainer implements NodePresentation {
     String[] workspaces = manageRepo.getWorkspaceNames() ;
     for(String ws : workspaces) {
       try{
-        return SessionProviderFactory.createSystemProvider().getSession(ws, manageRepo).getNodeByUUID(uuid) ;
+        return WCMCoreUtils.getSystemSessionProvider().getSession(ws, manageRepo).getNodeByUUID(uuid) ;
       } catch(Exception e) {
         continue;
       }

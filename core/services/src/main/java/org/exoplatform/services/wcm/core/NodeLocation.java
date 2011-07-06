@@ -206,7 +206,7 @@ public class NodeLocation extends ItemLocation {
   public static final List getNodeListByLocationList(final List locationList) {
 	  List ret = new ArrayList();
 	  try {	  
-		  ManageableRepository repository = WCMCoreUtils.getRepository(null);
+		  ManageableRepository repository = WCMCoreUtils.getRepository();
 		  SessionProvider systemSessionProvider = WCMCoreUtils.getSystemSessionProvider();
 		  SessionProvider sessionProvider = WCMCoreUtils.getUserSessionProvider();
 		  String systemWorkspace = repository.getConfiguration().getSystemWorkspaceName();
@@ -319,11 +319,11 @@ public class NodeLocation extends ItemLocation {
    */
   private static String mergeString(String repository, String workspace, String path) {
     StringBuffer buffer = new StringBuffer();
-    buffer.append(repository);
-    buffer.append(":");
-    buffer.append(workspace);
-    buffer.append(":");
-    buffer.append(path);
+    buffer.append(repository)
+          .append(":")
+          .append(workspace)
+          .append(":")
+          .append(path);
     return buffer.toString();
   }
   

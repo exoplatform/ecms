@@ -29,10 +29,10 @@ import org.exoplatform.commons.utils.ListAccessImpl;
 import org.exoplatform.ecm.webui.component.admin.UIECMAdminPortlet;
 import org.exoplatform.ecm.webui.core.UIPagingGrid;
 import org.exoplatform.ecm.webui.utils.Utils;
-import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.views.ManageViewService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -75,7 +75,7 @@ public class UICBTemplateList extends UIPagingGrid {
   public List<Node> getAllTemplates() throws Exception {
     ManageViewService viewService = getApplicationComponent(ManageViewService.class);
     List<Node> templateList = new ArrayList<Node>();
-    SessionProvider provider = SessionProviderFactory.createSessionProvider();
+    SessionProvider provider = WCMCoreUtils.getUserSessionProvider();
     templateList.addAll(viewService.getAllTemplates(BasePath.CB_DETAIL_VIEW_TEMPLATES, provider));
     templateList.addAll(viewService.getAllTemplates(BasePath.CB_PATH_TEMPLATES, provider));
     templateList.addAll(viewService.getAllTemplates(BasePath.CB_QUERY_TEMPLATES, provider));
@@ -87,7 +87,6 @@ public class UICBTemplateList extends UIPagingGrid {
     return getAncestorOfType(UIECMAdminPortlet.class).getPreferenceRepository() ;
   }
 
-  @SuppressWarnings("unchecked")
   public void refresh(int currentPage) throws Exception {
     List<Node> nodes = getAllTemplates();
     List<TemplateBean> tempBeans = new ArrayList<TemplateBean>();
@@ -117,7 +116,7 @@ public class UICBTemplateList extends UIPagingGrid {
   static  public class AddActionListener extends EventListener<UICBTemplateList> {
     public void execute(Event<UICBTemplateList> event) throws Exception {
       UICBTemplateList uiCBTemp = event.getSource() ;
-      SessionProvider provider = SessionProviderFactory.createSessionProvider() ;
+      SessionProvider provider = WCMCoreUtils.getUserSessionProvider();
       Node cbTemplateHome = uiCBTemp.getApplicationComponent(ManageViewService.class)
       .getTemplateHome(BasePath.CONTENT_BROWSER_TEMPLATES, provider) ;
       if(cbTemplateHome == null) {

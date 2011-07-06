@@ -31,12 +31,12 @@ import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.sidebar.UISideBar;
 import org.exoplatform.ecm.webui.form.UIFormInputSetWithAction;
 import org.exoplatform.ecm.webui.utils.Utils;
-import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.services.cms.folksonomy.NewFolksonomyService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.web.application.RequestContext;
 import org.exoplatform.webui.application.WebuiRequestContext;
@@ -46,8 +46,8 @@ import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.core.model.SelectItemOption;
 import org.exoplatform.webui.event.Event;
-import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.event.Event.Phase;
+import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.form.UIForm;
 import org.exoplatform.webui.form.UIFormInputInfo;
 import org.exoplatform.webui.form.UIFormSelectBox;
@@ -304,8 +304,6 @@ public class UITaggingForm extends UIForm {
           }
         }
       }
-      // String tagScope =
-      // uiForm.getChild(UIFormInputSetWithAction.class).getChild(UIFormSelectBox.class).getValue();
       addTagToNode(tagScope, currentNode, fitlerTagNames, uiForm);
       uiForm.activate();
 
@@ -384,8 +382,6 @@ public class UITaggingForm extends UIForm {
         return;
       }
       removeTagFromNode(tagScope, currentNode, tagName, uiForm);
-      // newFolksonomyService.removeTagOfDocument(currentNode, tagName,
-      // uiExplorer.getRepositoryName());
       uiForm.activate();
 
       Preference preferences = uiExplorer.getPreference();
@@ -434,15 +430,13 @@ public class UITaggingForm extends UIForm {
       ExoContainer myContainer = ExoContainerContext.getCurrentContainer();
       RepositoryService repositoryService = (RepositoryService) myContainer.getComponentInstanceOfType(RepositoryService.class);
       ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
-      SessionProvider sessionProvider = SessionProviderFactory.createSessionProvider();
+      SessionProvider sessionProvider = WCMCoreUtils.getUserSessionProvider();
       return (Node) sessionProvider.getSession(workspace, manageableRepository).getItem(path);
     }
 
     private Node getUserFolksonomyFolder(String userName, UITaggingForm uiForm) throws Exception {
-      // code for running
       NodeHierarchyCreator nodeHierarchyCreator = uiForm.getApplicationComponent(NodeHierarchyCreator.class);
-      SessionProvider sessionProvider = SessionProviderFactory.createSessionProvider();
-      Node userNode = nodeHierarchyCreator.getUserNode(sessionProvider, userName);
+      Node userNode = nodeHierarchyCreator.getUserNode(WCMCoreUtils.getUserSessionProvider(), userName);
       String folksonomyPath = nodeHierarchyCreator.getJcrPath(USER_FOLKSONOMY_ALIAS);
       return userNode.getNode(folksonomyPath);
     }

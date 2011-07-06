@@ -26,8 +26,8 @@ import javax.jcr.Node;
 import org.exoplatform.commons.utils.LazyPageList;
 import org.exoplatform.commons.utils.ListAccess;
 import org.exoplatform.commons.utils.ListAccessImpl;
-import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.services.cms.scripts.ScriptService;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -88,10 +88,9 @@ public class UIScriptList extends UIComponentDecorator {
       UIECMFilterForm filterForm = parent.findFirstComponentOfType(UIECMFilterForm.class) ;
       String categoryName =
         filterForm.getUIFormSelectBox(UIECMFilterForm.FIELD_SELECT_SCRIPT).getValue() ;
-      script = scriptService.getECMScriptHome(SessionProviderFactory.createSystemProvider())
-                            .getNode(categoryName);
+      script = scriptService.getECMScriptHome(WCMCoreUtils.getSystemSessionProvider()).getNode(categoryName);
     } else {
-      script = scriptService.getCBScriptHome(SessionProviderFactory.createSystemProvider());
+      script = scriptService.getCBScriptHome(WCMCoreUtils.getSystemSessionProvider());
     }
     String basePath = scriptService.getBaseScriptPath() + "/" ;
     return script.getPath().substring(basePath.length()) ;
@@ -117,11 +116,11 @@ public class UIScriptList extends UIComponentDecorator {
       UIECMFilterForm filterForm = parent.findFirstComponentOfType(UIECMFilterForm.class) ;
       String categoryName =
         filterForm.getUIFormSelectBox(UIECMFilterForm.FIELD_SELECT_SCRIPT).getValue() ;
-      Node category = scriptService.getECMScriptHome(SessionProviderFactory.createSessionProvider())
+      Node category = scriptService.getECMScriptHome(WCMCoreUtils.getUserSessionProvider())
                                    .getNode(categoryName);
       script = category.getNode(nodeName) ;
     } else {
-      Node cbScript = scriptService.getCBScriptHome(SessionProviderFactory.createSystemProvider());
+      Node cbScript = scriptService.getCBScriptHome(WCMCoreUtils.getSystemSessionProvider());
       script = cbScript.getNode(nodeName) ;
     }
     return script ;
@@ -191,17 +190,16 @@ public class UIScriptList extends UIComponentDecorator {
       String scriptName = event.getRequestContext().getRequestParameter(OBJECTID) ;
       String namePrefix = uiScriptList.getScriptCategory() ;
       try {
-        scriptService.removeScript(namePrefix + "/" + scriptName,
-                                   SessionProviderFactory.createSessionProvider());
+        scriptService.removeScript(namePrefix + "/" + scriptName, WCMCoreUtils.getUserSessionProvider());
       } catch(AccessDeniedException ace) {
         throw new MessageException(new ApplicationMessage("UIECMAdminControlPanel.msg.access-denied",
                                                           null, ApplicationMessage.WARNING)) ;
       }
       uiScriptList.refresh(uiScriptList.uiPageIterator_.getCurrentPage());
       UIScriptManager uiManager = uiScriptList.getAncestorOfType(UIScriptManager.class) ;
-      if((UIComponent)uiScriptList.getParent() instanceof UIECMScripts) {
+      if(uiScriptList.getParent() instanceof UIECMScripts) {
         uiManager.setRenderedChild(UIECMScripts.class) ;
-      } else  if((UIComponent)uiScriptList.getParent() instanceof UICBScripts){
+      } else  if(uiScriptList.getParent() instanceof UICBScripts){
         uiManager.setRenderedChild(UICBScripts.class) ;
       }
       event.getRequestContext().addUIComponentToUpdateByAjax(uiScriptList.getParent()) ;

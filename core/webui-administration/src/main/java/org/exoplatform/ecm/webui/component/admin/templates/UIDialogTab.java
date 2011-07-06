@@ -22,17 +22,14 @@ import java.util.List;
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
 import javax.jcr.Value;
-import javax.portlet.PortletPreferences;
 
 import org.exoplatform.commons.utils.LazyPageList;
 import org.exoplatform.commons.utils.ListAccess;
 import org.exoplatform.commons.utils.ListAccessImpl;
 import org.exoplatform.ecm.webui.utils.Utils;
-import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.services.cms.templates.TemplateService;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
-import org.exoplatform.webui.application.WebuiRequestContext;
-import org.exoplatform.webui.application.portlet.PortletRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIApplication;
@@ -77,10 +74,14 @@ public class UIDialogTab extends UIContainer {
 
   public List<String> getListDialog() { return listDialog_ ; }
 
+  @Deprecated
   public void updateGrid(String nodeName, String repository) throws Exception {
+    updateGrid(nodeName);
+  }
+  
+  public void updateGrid(String nodeName) throws Exception {
     TemplateService tempService = getApplicationComponent(TemplateService.class) ;
-    NodeIterator iter = tempService.getAllTemplatesOfNodeType(true, nodeName,
-        SessionProviderFactory.createSystemProvider()) ;
+    NodeIterator iter = tempService.getAllTemplatesOfNodeType(true, nodeName, WCMCoreUtils.getSystemSessionProvider()) ;
     List<DialogData> data = new ArrayList<DialogData>() ;
     DialogData item  ;
     if(iter == null) return;
@@ -139,14 +140,11 @@ public class UIDialogTab extends UIContainer {
           return ;
         }
       }
-      PortletRequestContext pcontext = (PortletRequestContext)WebuiRequestContext.getCurrentInstance() ;
-      PortletPreferences portletPref = pcontext.getRequest().getPreferences() ;
-      String repository = portletPref.getValue(Utils.REPOSITORY, "") ;
       templateService.removeTemplate(TemplateService.DIALOGS, nodeTypeName, templateName) ;
       uiForm.update(null);
       uiForm.reset();
 
-      dialogTab.updateGrid(nodeTypeName, repository) ;
+      dialogTab.updateGrid(nodeTypeName) ;
       dialogTab.setTabRendered() ;
       UITemplatesManager uiManager = dialogTab.getAncestorOfType(UITemplatesManager.class) ;
       event.getRequestContext().addUIComponentToUpdateByAjax(uiManager) ;

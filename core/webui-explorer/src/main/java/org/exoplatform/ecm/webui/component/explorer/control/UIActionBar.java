@@ -31,8 +31,6 @@ import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
 import javax.jcr.nodetype.NodeType;
 import javax.jcr.query.Query;
-import javax.jcr.query.QueryManager;
-import javax.jcr.query.QueryResult;
 
 import org.apache.commons.lang.StringUtils;
 import org.exoplatform.ecm.jcr.SearchValidator;
@@ -49,7 +47,6 @@ import org.exoplatform.ecm.webui.component.explorer.search.UIECMSearch;
 import org.exoplatform.ecm.webui.component.explorer.search.UISavedQuery;
 import org.exoplatform.ecm.webui.component.explorer.search.UISearchResult;
 import org.exoplatform.ecm.webui.component.explorer.search.UISimpleSearch;
-import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.metadata.MetadataService;
 import org.exoplatform.services.cms.queries.QueryService;
@@ -58,6 +55,7 @@ import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.services.wcm.core.NodeLocation;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -67,8 +65,8 @@ import org.exoplatform.webui.core.UIPopupContainer;
 import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.core.model.SelectItemOption;
 import org.exoplatform.webui.event.Event;
-import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.event.Event.Phase;
+import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.ext.UIExtensionManager;
 import org.exoplatform.webui.form.UIForm;
 import org.exoplatform.webui.form.UIFormSelectBox;
@@ -141,7 +139,7 @@ public class UIActionBar extends UIForm {
   public void setTabOptions(String viewName) throws Exception {
     tabList_ = new ArrayList<String>();
     Node viewNode = getApplicationComponent(ManageViewService.class).getViewByName(viewName,
-        SessionProviderFactory.createSystemProvider());
+        WCMCoreUtils.getSystemSessionProvider());
     view_ = NodeLocation.getNodeLocationByNode(viewNode);
     NodeIterator tabs = viewNode.getNodes();
     while (tabs.hasNext()) {
@@ -211,7 +209,7 @@ public class UIActionBar extends UIForm {
 
   public List<Query> getSavedQueries() throws Exception {
     String userName = Util.getPortalRequestContext().getRemoteUser();
-    return getApplicationComponent(QueryService.class).getQueries(userName, SessionProviderFactory.createSystemProvider());
+    return getApplicationComponent(QueryService.class).getQueries(userName, WCMCoreUtils.getSystemSessionProvider());
   }
 
   public Hashtable<String, String> getMetadataTemplates() throws Exception {
@@ -350,7 +348,6 @@ public class UIActionBar extends UIForm {
       UIPopupContainer UIPopupContainer = uiJCRExplorer.getChild(UIPopupContainer.class);
       UISavedQuery uiSavedQuery = event.getSource().createUIComponent(UISavedQuery.class, null, null);
       uiSavedQuery.setIsQuickSearch(true);
-      uiSavedQuery.setRepositoryName(uiJCRExplorer.getRepositoryName());
       uiSavedQuery.updateGrid(1);
       UIPopupContainer.activate(uiSavedQuery, 700, 400);
       event.getRequestContext().addUIComponentToUpdateByAjax(UIPopupContainer);

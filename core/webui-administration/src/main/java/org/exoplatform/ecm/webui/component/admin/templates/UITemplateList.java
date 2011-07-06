@@ -30,10 +30,9 @@ import javax.jcr.nodetype.NodeTypeManager;
 import org.exoplatform.commons.utils.LazyPageList;
 import org.exoplatform.commons.utils.ListAccess;
 import org.exoplatform.commons.utils.ListAccessImpl;
-import org.exoplatform.ecm.webui.component.admin.UIECMAdminPortlet;
 import org.exoplatform.ecm.webui.core.UIPagingGrid;
-import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.services.cms.templates.TemplateService;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -82,14 +81,13 @@ public class UITemplateList extends UIPagingGrid {
   static public class EditActionListener extends EventListener<UITemplateList> {
     public void execute(Event<UITemplateList> event) throws Exception {
       UITemplateList nodeTypeList = event.getSource() ;
-      String repository = nodeTypeList.getAncestorOfType(UIECMAdminPortlet.class).getPreferenceRepository() ;
       String nodeType = event.getRequestContext().getRequestParameter(OBJECTID) ;
       UITemplatesManager uiTemplatesManager = nodeTypeList.getParent() ;
       UIViewTemplate uiViewTemplate = uiTemplatesManager.createUIComponent(UIViewTemplate.class, null, null) ;
       uiViewTemplate.getChild(UITemplateEditForm.class).update(nodeType) ;
       uiViewTemplate.setNodeTypeName(nodeType) ;
       UIDialogTab uiDialogTab = uiViewTemplate.findFirstComponentOfType(UIDialogTab.class) ;
-      uiDialogTab.updateGrid(nodeType, repository) ;
+      uiDialogTab.updateGrid(nodeType) ;
       UITemplateContent uiDialogTabForm = uiViewTemplate.findComponentById(UIDialogTab.DIALOG_FORM_NAME) ;
       uiDialogTabForm.setNodeTypeName(nodeType) ;
       uiDialogTabForm.update(null) ;
@@ -99,7 +97,7 @@ public class UITemplateList extends UIPagingGrid {
       uiViewTabForm.setNodeTypeName(nodeType) ;
       uiViewTabForm.update(null) ;
       UISkinTab uiSkinTab = uiViewTemplate.findFirstComponentOfType(UISkinTab.class) ;
-      uiSkinTab.updateGrid(nodeType, repository) ;
+      uiSkinTab.updateGrid(nodeType) ;
       UITemplateContent uiSkinTabForm = uiViewTemplate.findComponentById(UISkinTab.SKIN_FORM_NAME) ;
       uiSkinTabForm.setNodeTypeName(nodeType) ;
       uiSkinTabForm.update(null) ;
@@ -155,7 +153,7 @@ public class UITemplateList extends UIPagingGrid {
   @Override
   public void refresh(int currentPage) throws Exception {
     TemplateService templateService = getApplicationComponent(TemplateService.class);
-    Node templatesHome = templateService.getTemplatesHome(SessionProviderFactory.createSessionProvider());
+    Node templatesHome = templateService.getTemplatesHome(WCMCoreUtils.getUserSessionProvider());
     List<TemplateData> templateData = new ArrayList<TemplateData>();
     if (templatesHome != null) {
       NodeTypeManager ntManager = templatesHome.getSession().getWorkspace().getNodeTypeManager();

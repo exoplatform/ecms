@@ -61,7 +61,6 @@ import org.exoplatform.ecm.webui.utils.DialogFormUtil;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.ecm.webui.utils.LockUtil;
 import org.exoplatform.ecm.webui.utils.Utils;
-import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.JcrInputProperty;
 import org.exoplatform.services.cms.impl.DMSConfiguration;
@@ -76,6 +75,7 @@ import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.jcr.util.Text;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.wcm.webui.form.UIFormRichtextInput;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.web.application.RequestContext;
@@ -87,13 +87,13 @@ import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.core.model.SelectItemOption;
 import org.exoplatform.webui.event.Event;
-import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.event.Event.Phase;
+import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.form.UIForm;
 import org.exoplatform.webui.form.UIFormCheckBoxInput;
 import org.exoplatform.webui.form.UIFormDateTimeInput;
-import org.exoplatform.webui.form.UIFormInputBase;
 import org.exoplatform.webui.form.UIFormInput;
+import org.exoplatform.webui.form.UIFormInputBase;
 import org.exoplatform.webui.form.UIFormMultiValueInputSet;
 import org.exoplatform.webui.form.UIFormRadioBoxInput;
 import org.exoplatform.webui.form.UIFormSelectBox;
@@ -233,9 +233,7 @@ public class UIDialogForm extends UIForm {
 
   @Deprecated
   public void setStoredLocation(String repository, String workspace, String storedPath) {
-    this.repositoryName = repository;
-    setWorkspace(workspace);
-    setStoredPath(storedPath);
+    setStoredLocation(workspace, storedPath);
   }
   
   public void setStoredLocation(String workspace, String storedPath) {
@@ -589,7 +587,6 @@ public class UIDialogForm extends UIForm {
     addRadioBoxField(name, null, arguments);
   }
 
-  @SuppressWarnings("unchecked")
   public void addSelectBoxField(String name, String label, String[] arguments) throws Exception {
     UIFormSelectBoxField formSelectBoxField = new UIFormSelectBoxField(name,label,arguments);
     String jcrPath = formSelectBoxField.getJcrPath();
@@ -608,10 +605,6 @@ public class UIDialogForm extends UIForm {
       if (script != null) {
         try {
           String[] scriptParams = formSelectBoxField.getScriptParams();
-          // TODO: ECMS-2132 Why check the param as below???
-//          if (scriptParams != null && scriptParams.length > 0
-//              && "repository".equals(scriptParams[0]))
-//            scriptParams[0] = repositoryName;
           executeScript(script, uiSelectBox, scriptParams, true);
         } catch (Exception e) {
           LOG.error("An unexpected error occurs", e);
@@ -1016,9 +1009,9 @@ public class UIDialogForm extends UIForm {
     String userName = Util.getPortalRequestContext().getRemoteUser();
     Session session;
     if (userName != null)
-      session = SessionProviderFactory.createSessionProvider().getSession(workspace, getRepository());
+      session = WCMCoreUtils.getUserSessionProvider().getSession(workspace, getRepository());
     else
-      session = SessionProviderFactory.createAnonimProvider().getSession(workspace, getRepository());
+      session = WCMCoreUtils.createAnonimProvider().getSession(workspace, getRepository());
     return ((Node)session.getItem(nodeHierarchyCreator.getJcrPath(TAXONOMIES_ALIAS))).getPath();
   }
 
@@ -1491,7 +1484,7 @@ public class UIDialogForm extends UIForm {
   }
 
   public Session getSession() throws Exception {
-    return SessionProviderFactory.createSessionProvider().getSession(workspaceName, getRepository());
+    return WCMCoreUtils.getUserSessionProvider().getSession(workspaceName, getRepository());
   }
 
   public String getTemplate() {
@@ -1540,7 +1533,6 @@ public class UIDialogForm extends UIForm {
     }
   }
 
-  //update by quangld
   public void removeComponent(String name) {
     if (!properties.isEmpty() && properties.containsKey(name)) {
       properties.remove(name);
@@ -1564,6 +1556,7 @@ public class UIDialogForm extends UIForm {
       return key;
     }
   }
+  
   public void renderField(String name) throws Exception {
     UIComponent uiInput = findComponentById(name);
     WebuiRequestContext context = WebuiRequestContext.getCurrentInstance();
@@ -1593,7 +1586,7 @@ public class UIDialogForm extends UIForm {
             + "onclick=\"javascript:eXo.webui.UIForm.submitEvent('" + "" + getId()
             + "','ShowComponent','&objectId=" + fieldName + "' )\"><img class='ActionIcon "
             + iconClass + "' src=\"/eXoResources/skin/DefaultSkin/background/Blank.gif\" /></a>");
-        /* Not need Remove action if uiInput is UIFormMultiValueInputSet */
+        /* No need Remove action if uiInput is UIFormMultiValueInputSet */
         if (!UIFormMultiValueInputSet.class.isInstance(uiInput))
           w.write("<a style=\"cursor:pointer;\" title=\""
               + removeReference
@@ -1723,8 +1716,6 @@ public class UIDialogForm extends UIForm {
     try {
       CmsScript dialogScript = scriptService.getScript(script);
       if (params != null) {
-//        if (params.length > 0 && REPOSITORY.equals(params[0]))
-//          params = new String[] { repositoryName };
         dialogScript.setParams(params);
       }
       dialogScript.execute(o);
@@ -1751,7 +1742,7 @@ public class UIDialogForm extends UIForm {
     Node node = null;
     for(String ws : workspaces) {
       try{
-        node = SessionProviderFactory.createSystemProvider().getSession(ws, getRepository()).getNodeByUUID(uuid);
+        node = WCMCoreUtils.getSystemSessionProvider().getSession(ws, getRepository()).getNodeByUUID(uuid);
         return ws + ":" + node.getPath();
       } catch(ItemNotFoundException e) {
         // do nothing
@@ -1766,14 +1757,12 @@ public class UIDialogForm extends UIForm {
     return repositoryService.getCurrentRepository();
   }
 
-  @SuppressWarnings("unchecked")
- private void renderMultiValuesInput(Class type, String name,String label) throws Exception{
+  private void renderMultiValuesInput(Class type, String name,String label) throws Exception{
     addMultiValuesInput(type, name, label);
     renderField(name);
   }
 
-  @SuppressWarnings({ "unchecked", "unchecked" })
- private UIFormMultiValueInputSet addMultiValuesInput(Class type, String name,String label) throws Exception{
+  private UIFormMultiValueInputSet addMultiValuesInput(Class type, String name,String label) throws Exception{
     UIFormMultiValueInputSet uiMulti = createUIComponent(UIFormMultiValueInputSet.class, null, null);
     uiMulti.setId(name);
     uiMulti.setName(name);

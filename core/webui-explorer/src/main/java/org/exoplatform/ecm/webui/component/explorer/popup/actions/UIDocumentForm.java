@@ -49,7 +49,6 @@ import org.exoplatform.ecm.webui.utils.DialogFormUtil;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.ecm.webui.utils.LockUtil;
 import org.exoplatform.ecm.webui.utils.Utils;
-import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.resolver.ResourceResolver;
 import org.exoplatform.services.cms.BasePath;
@@ -61,6 +60,7 @@ import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -72,8 +72,8 @@ import org.exoplatform.webui.core.UIPopupComponent;
 import org.exoplatform.webui.core.UIPopupWindow;
 import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.event.Event;
-import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.event.Event.Phase;
+import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.form.UIFormInput;
 import org.exoplatform.webui.form.UIFormInputBase;
 import org.exoplatform.webui.form.UIFormMultiValueInputSet;
@@ -528,7 +528,6 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
   }
 
   static  public class SaveActionListener extends EventListener<UIDocumentForm> {
-    @SuppressWarnings("unchecked")
     public void execute(Event<UIDocumentForm> event) throws Exception {
       UIDocumentForm documentForm = event.getSource();
       synchronized (documentForm) {
@@ -548,7 +547,6 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
     }
   }
 
-  @SuppressWarnings("unchecked")
   static public class ShowComponentActionListener extends EventListener<UIDocumentForm> {
     public void execute(Event<UIDocumentForm> event) throws Exception {
       UIDocumentForm uiForm = event.getSource();
@@ -557,8 +555,6 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
       String fieldName = event.getRequestContext().getRequestParameter(OBJECTID);
       Map fieldPropertiesMap = uiForm.componentSelectors.get(fieldName);
 
-      // get Param = fieldPropertiesMap.get("selectorParams");
-      // Param = Param.split("'");
       String classPath = (String)fieldPropertiesMap.get("selectorClass");
       ClassLoader cl = Thread.currentThread().getContextClassLoader();
       Class clazz = Class.forName(classPath, true, cl);
@@ -617,7 +613,7 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
         ((UIOneTaxonomySelector) uiComp).setRootNodeLocation(uiForm.repositoryName,
                                                              workspaceName,
                                                              rootTreePath);
-        ((UIOneTaxonomySelector) uiComp).init(SessionProviderFactory.createSystemProvider());
+        ((UIOneTaxonomySelector) uiComp).init(WCMCoreUtils.getSystemSessionProvider());
       }
       uiContainer.initPopup(uiComp);
       String param = "returnField=" + fieldName;

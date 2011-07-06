@@ -48,16 +48,14 @@ import org.exoplatform.ecm.webui.component.explorer.sidebar.UITreeExplorer;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.portal.application.PortalRequestContext;
-import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.drives.ManageDriveService;
 import org.exoplatform.services.cms.views.ManageViewService;
 import org.exoplatform.services.jcr.RepositoryService;
-import org.exoplatform.services.jcr.core.ManageableRepository;
-import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.application.WebuiApplication;
 import org.exoplatform.webui.application.WebuiRequestContext;
@@ -206,24 +204,8 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
   public void initwhenDirect(UIJcrExplorerContainer explorerContainer,
       UIJcrExplorerEditContainer editContainer) throws Exception {
     if (editContainer.getChild(UIJcrExplorerEditForm.class).isFlagSelectRender()) {
-      PortletPreferences portletPref = getPortletPreferences();
-//      String driveName = portletPref.getValue("driveName", "").trim();
-//      String repository = portletPref.getValue("repository", "").trim();
-//      String userId = Util.getPortalRequestContext().getRemoteUser();
-//      UIJCRExplorer uiJCRExplorer = explorerContainer.getChild(UIJCRExplorer.class);
       explorerContainer.initExplorer();
       editContainer.getChild(UIJcrExplorerEditForm.class).setFlagSelectRender(false);
-//      ManageDriveService driveService = getApplicationComponent(ManageDriveService.class);
-//      DriveData driveData = driveService.getDriveByName(driveName, repository);
-//      String nodePath = portletPref.getValue("nodePath", "").trim();
-//      if (!nodePath.startsWith("/")) nodePath = "/" + nodePath;
-//      String homePath = (driveData.getHomePath().concat(nodePath)).replaceAll("/+", "/");
-//      if(!canUseConfigDrive(repository, driveName)) {
-//        homePath = getUserDrive(repository, "private").getHomePath();
-//      }
-//      if (homePath.contains("${userId}")) homePath = homePath.replace("${userId}", userId);
-//      uiJCRExplorer.setSelectNode(driveData.getWorkspace(), homePath);
-//      uiJCRExplorer.refreshExplorer();
     }
   }
 
@@ -257,15 +239,7 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
 
   @Deprecated
   public DriveData getUserDrive(String repoName, String userType) throws Exception {
-    ManageDriveService manageDriveService = getApplicationComponent(ManageDriveService.class);
-    List<String> userRoles = Utils.getMemberships();
-    String userId = Util.getPortalRequestContext().getRemoteUser();
-    for(DriveData userDrive : manageDriveService.getPersonalDrives(userId, userRoles)) {
-      if(userDrive.getName().equalsIgnoreCase(userType)) {
-        return userDrive;
-      }
-    }
-    return null;
+    return getUserDrive(userType);
   }
   
   public DriveData getUserDrive(String userType) throws Exception {
@@ -282,13 +256,7 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
 
   @Deprecated
   public boolean canUseConfigDrive(String repoName, String driveName) throws Exception {
-    ManageDriveService dservice = getApplicationComponent(ManageDriveService.class);
-    String userId = Util.getPortalRequestContext().getRemoteUser();
-    List<String> userRoles = Utils.getMemberships();
-    for(DriveData drive : dservice.getDriveByUserRoles(userId, userRoles)) {
-      if(drive.getName().equals(driveName)) return true;
-    }
-    return false;
+    return canUseConfigDrive(driveName);
   }
   
   public boolean canUseConfigDrive(String driveName) throws Exception {
@@ -389,7 +357,7 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
         if (!viewList.contains(viewName.trim())) {
           Node viewNode =
             getApplicationComponent(ManageViewService.class).getViewByName(viewName.trim(),
-                SessionProviderFactory.createSystemProvider());
+                WCMCoreUtils.getSystemSessionProvider());
           String permiss = viewNode.getProperty("exo:accessPermissions").getString();
           if (permiss.contains("${userId}")) permiss = permiss.replace("${userId}", userId);
           String[] viewPermissions = permiss.split(",");
@@ -418,16 +386,13 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
       homePath = org.exoplatform.services.cms.impl.Utils.getPersonalDrivePath(homePath, userId);
     setFlagSelect(true);
     UIJCRExplorer uiExplorer = findFirstComponentOfType(UIJCRExplorer.class);
-//    String mode = getPortletPreferences().getValue(UIJCRExplorerPortlet.MODE, "");
-//    setStandardMode(UIJCRExplorerPortlet.STANDARD_MODE.equals(mode));
 
     uiExplorer.setDriveData(driveData);
     uiExplorer.setIsReferenceNode(false);
 
-    SessionProvider provider = SessionProviderFactory.createSessionProvider();
-    ManageableRepository repository = rservice.getCurrentRepository();
     try {
-      Session session = provider.getSession(driveData.getWorkspace(),repository);
+      Session session = 
+        WCMCoreUtils.getUserSessionProvider().getSession(driveData.getWorkspace(), rservice.getCurrentRepository());
       // check if it exists
       // we assume that the path is a real path
       session.getItem(homePath);

@@ -23,10 +23,10 @@ import javax.jcr.Session;
 
 import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
-import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
  * Created by The eXo Platform SAS.
@@ -72,7 +72,7 @@ public class NTFileResourceResolver extends JCRResourceResolver {
     RepositoryService repositoryService =
       (RepositoryService)container.getComponentInstanceOfType(RepositoryService.class) ;
     ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
-    SessionProvider provider = SessionProviderFactory.createSystemProvider();
+    SessionProvider provider = WCMCoreUtils.getSystemSessionProvider();
     Session session = provider.getSession(workspace,manageableRepository);
     String fileUUID = removeScheme(url);
     Node node = session.getNodeByUUID(fileUUID);

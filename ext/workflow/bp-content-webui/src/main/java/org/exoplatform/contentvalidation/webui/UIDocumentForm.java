@@ -39,7 +39,6 @@ import org.exoplatform.ecm.webui.tree.selectone.UIOneTaxonomySelector;
 import org.exoplatform.ecm.webui.utils.DialogFormUtil;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.ecm.webui.utils.Utils;
-import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.resolver.ResourceResolver;
 import org.exoplatform.services.cms.BasePath;
@@ -54,6 +53,7 @@ import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -264,7 +264,6 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
   }
 
   static  public class SaveActionListener extends EventListener<UIDocumentForm> {
-    @SuppressWarnings("unchecked")
     public void execute(Event<UIDocumentForm> event) throws Exception {
       UIDocumentForm uiForm = event.getSource();
       List inputs = uiForm.getChildren();
@@ -425,7 +424,7 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
               if (lstTaxonomyTree.size() == 0) throw new AccessDeniedException();
               uiOneTaxonomySelector.setRootNodeLocation(repository, workspaceName, lstTaxonomyTree.get(0).getPath());
               uiOneTaxonomySelector.setExceptedNodeTypesInPathPanel(new String[] {Utils.EXO_SYMLINK});
-              uiOneTaxonomySelector.init(SessionProviderFactory.createSystemProvider());
+              uiOneTaxonomySelector.init(WCMCoreUtils.getSystemSessionProvider());
               String param = "returnField=" + FIELD_TAXONOMY;
               uiOneTaxonomySelector.setSourceComponent(uiDocumentForm, new String[]{param});
               UIPopupWindow uiPopupWindow = uiTaskManager.getChildById(POPUP_TAXONOMY);
@@ -472,7 +471,7 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
       UIComponent uiComp = uiContainer.createUIComponent(clazz, null, null);
       String selectorParams = (String)fieldPropertiesMap.get("selectorParams");
       if(uiComp instanceof UIOneNodePathSelector) {
-     	SessionProvider sessionProvider = SessionProviderFactory.createSessionProvider();   
+     	SessionProvider sessionProvider = WCMCoreUtils.getUserSessionProvider();   
     	String repositoryName = uiForm.getRepository(); 
     	String wsFieldName = (String)fieldPropertiesMap.get("workspaceField");
         String wsName = "";
@@ -521,7 +520,7 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
         }
         
         ((UIOneTaxonomySelector)uiComp).setRootNodeLocation(uiForm.repositoryName, workspaceName, rootTreePath);
-        ((UIOneTaxonomySelector)uiComp).init(SessionProviderFactory.createSystemProvider());
+        ((UIOneTaxonomySelector)uiComp).init(WCMCoreUtils.getSystemSessionProvider());
       }
       uiContainer.initPopup(uiComp);
       String param = "returnField=" + fieldName;

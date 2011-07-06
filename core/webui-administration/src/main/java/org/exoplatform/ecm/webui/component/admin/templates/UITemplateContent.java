@@ -29,10 +29,10 @@ import org.exoplatform.ecm.jcr.model.VersionNode;
 import org.exoplatform.ecm.webui.form.UIFormInputSetWithAction;
 import org.exoplatform.ecm.webui.selector.UISelectable;
 import org.exoplatform.ecm.webui.utils.Utils;
-import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.organization.MembershipType;
 import org.exoplatform.services.organization.OrganizationService;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -122,8 +122,7 @@ public class UITemplateContent extends UIForm implements UISelectable {
       TemplateService templateService = getApplicationComponent(TemplateService.class) ;
       String templateContent = templateService.getTemplate(templateType, nodeTypeName_, templateName) ;
       Node template =
-        templateService.getTemplateNode(templateType, nodeTypeName_, templateName,
-            SessionProviderFactory.createSystemProvider()) ;
+        templateService.getTemplateNode(templateType, nodeTypeName_, templateName, WCMCoreUtils.getSystemSessionProvider()) ;
       getUIFormCheckBoxInput(FIELD_ENABLE_VERSION).setRendered(true) ;
       String templateRole =
         templateService.getTemplateRoles(template) ;
@@ -225,7 +224,7 @@ public class UITemplateContent extends UIForm implements UISelectable {
       String name = uiForm.getUIStringInput(FIELD_NAME).getValue() ;
       TemplateService templateService = uiForm.getApplicationComponent(TemplateService.class) ;
       Node node = templateService.getTemplateNode(uiForm.getTemplateType(),  uiForm.nodeTypeName_,
-          name, SessionProviderFactory.createSystemProvider()) ;
+          name, WCMCoreUtils.getSystemSessionProvider()) ;
       String vesion = uiForm.getUIFormSelectBox(FIELD_SELECT_VERSION).getValue() ;
       String baseVesion = node.getBaseVersion().getName() ;
       UIApplication app = uiForm.getAncestorOfType(UIApplication.class) ;
@@ -263,12 +262,6 @@ public class UITemplateContent extends UIForm implements UISelectable {
       if(content == null) content = "" ;
       UIFormInputSetWithAction permField = uiForm.getChildById("UITemplateContent") ;
       String role = permField.getUIStringInput(FIELD_VIEWPERMISSION).getValue() ;
-//      if((role == null) || (role.trim().length() == 0)) {
-//        uiApp.addMessage(new ApplicationMessage("UITemplateContent.msg.roles-invalid", null,
-//                                                ApplicationMessage.WARNING)) ;
-//        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
-//        return ;
-//      }
       UIViewTemplate uiViewTemplate = uiForm.getAncestorOfType(UIViewTemplate.class) ;
       if(uiForm.getId().equals(UIDialogTab.DIALOG_FORM_NAME)) {
         UIDialogTab uiDialogTab = uiViewTemplate.getChild(UIDialogTab.class) ;
@@ -307,7 +300,7 @@ public class UITemplateContent extends UIForm implements UISelectable {
       } else {
         Node node =
           templateService.getTemplateNode(uiForm.getTemplateType(), uiForm.nodeTypeName_, name,
-              SessionProviderFactory.createSystemProvider()) ;
+              WCMCoreUtils.getSystemSessionProvider()) ;
         if(isEnableVersioning && !node.isNodeType(Utils.MIX_VERSIONABLE)) {
           node.addMixin(Utils.MIX_VERSIONABLE) ;
         }
@@ -341,7 +334,7 @@ public class UITemplateContent extends UIForm implements UISelectable {
       String name = uiForm.getUIStringInput(FIELD_NAME).getValue() ;
       TemplateService templateService = uiForm.getApplicationComponent(TemplateService.class) ;
       Node node = templateService.getTemplateNode(uiForm.getTemplateType(), uiForm.nodeTypeName_,
-          name, SessionProviderFactory.createSystemProvider()) ;
+          name, WCMCoreUtils.getSystemSessionProvider()) ;
       String version = uiForm.getUIFormSelectBox(FIELD_SELECT_VERSION).getValue() ;
       String path = node.getVersionHistory().getVersion(version).getPath() ;
       VersionNode versionNode = uiForm.getRootVersion(node).findVersionNode(path) ;

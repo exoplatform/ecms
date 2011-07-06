@@ -32,7 +32,6 @@ import org.exoplatform.commons.utils.ListAccess;
 import org.exoplatform.commons.utils.ListAccessImpl;
 import org.exoplatform.ecm.webui.utils.PermissionUtil;
 import org.exoplatform.ecm.webui.utils.Utils;
-import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.access.AccessControlEntry;
 import org.exoplatform.services.jcr.access.PermissionType;
@@ -40,6 +39,7 @@ import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.services.wcm.core.NodeLocation;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -148,7 +148,7 @@ public class UIPermissionInfo extends UIContainer {
     RepositoryService repositoryService  = getApplicationComponent(RepositoryService.class) ;
     String systemWorkspace = repositoryService.getCurrentRepository().getConfiguration().getSystemWorkspaceName();
     ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
-    Session session = SessionProviderFactory.createSystemProvider().getSession(systemWorkspace, manageableRepository);
+    Session session = WCMCoreUtils.getSystemSessionProvider().getSession(systemWorkspace, manageableRepository);
     return session;
   }
   static public class EditActionListener extends EventListener<UIPermissionInfo> {

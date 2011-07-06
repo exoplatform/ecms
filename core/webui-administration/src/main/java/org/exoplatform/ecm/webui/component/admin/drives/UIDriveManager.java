@@ -26,10 +26,9 @@ import org.exoplatform.ecm.webui.component.admin.UIECMAdminPortlet;
 import org.exoplatform.ecm.webui.selector.UIPermissionSelector;
 import org.exoplatform.ecm.webui.tree.selectone.UIOneNodePathSelector;
 import org.exoplatform.ecm.webui.utils.Utils;
-import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.services.jcr.RepositoryService;
-import org.exoplatform.services.jcr.config.RepositoryConfigurationException;
 import org.exoplatform.services.jcr.core.ManageableRepository;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.core.UIPopupWindow;
 import org.exoplatform.webui.core.lifecycle.UIContainerLifecycle;
@@ -108,7 +107,7 @@ public class UIDriveManager extends UIAbstractManager {
     uiPopup.setShow(true) ;
   }
 
-  private String getSystemWorkspaceName() throws RepositoryException, RepositoryConfigurationException {
+  private String getSystemWorkspaceName() throws RepositoryException {
     RepositoryService repositoryService = getApplicationComponent(RepositoryService.class);
     ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
     return manageableRepository.getConfiguration().getSystemWorkspaceName();
@@ -125,12 +124,12 @@ public class UIDriveManager extends UIAbstractManager {
     uiOneNodePathSelector.setIsDisable(workspace, isDisable) ;
     uiOneNodePathSelector.setShowRootPathSelect(true) ;
     uiOneNodePathSelector.setRootNodeLocation(repository, workspace, "/");
-    if(SessionProviderFactory.isAnonim()) {
-      uiOneNodePathSelector.init(SessionProviderFactory.createAnonimProvider()) ;
+    if(WCMCoreUtils.isAnonim()) {
+      uiOneNodePathSelector.init(WCMCoreUtils.createAnonimProvider()) ;
     } else if(workspace.equals(getSystemWorkspaceName())){
-      uiOneNodePathSelector.init(SessionProviderFactory.createSystemProvider()) ;
+      uiOneNodePathSelector.init(WCMCoreUtils.getSystemSessionProvider()) ;
     } else {
-      uiOneNodePathSelector.init(SessionProviderFactory.createSessionProvider()) ;
+      uiOneNodePathSelector.init(WCMCoreUtils.getUserSessionProvider()) ;
     }
     uiPopup.setUIComponent(uiOneNodePathSelector);
     UIDriveForm uiDriveForm = findFirstComponentOfType(UIDriveForm.class) ;
@@ -151,12 +150,12 @@ public class UIDriveManager extends UIAbstractManager {
     uiOneNodePathSelector.setAcceptedNodeTypesInTree(new String[] {Utils.NT_UNSTRUCTURED, Utils.NT_FOLDER});
     uiOneNodePathSelector.setAcceptedMimeTypes(new String[] {"image/jpeg", "image/gif", "image/png"}) ;
     uiOneNodePathSelector.setRootNodeLocation(repository, workspace, "/");
-    if(SessionProviderFactory.isAnonim()) {
-      uiOneNodePathSelector.init(SessionProviderFactory.createAnonimProvider()) ;
+    if(WCMCoreUtils.isAnonim()) {
+      uiOneNodePathSelector.init(WCMCoreUtils.createAnonimProvider()) ;
     } else if(workspace.equals(getSystemWorkspaceName())){
-      uiOneNodePathSelector.init(SessionProviderFactory.createSystemProvider()) ;
+      uiOneNodePathSelector.init(WCMCoreUtils.getSystemSessionProvider()) ;
     } else {
-      uiOneNodePathSelector.init(SessionProviderFactory.createSessionProvider()) ;
+      uiOneNodePathSelector.init(WCMCoreUtils.getUserSessionProvider()) ;
     }
     uiOneNodePathSelector.setSourceComponent(uiDriveForm, new String[] {UIDriveInputSet.FIELD_WORKSPACEICON}) ;
     uiPopup.setUIComponent(uiOneNodePathSelector);

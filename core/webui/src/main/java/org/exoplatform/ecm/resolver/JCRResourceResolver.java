@@ -25,7 +25,6 @@ import java.util.List;
 import javax.jcr.Node;
 import javax.jcr.Session;
 
-import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.resolver.ResourceKey;
 import org.exoplatform.resolver.ResourceResolver;
 import org.exoplatform.services.cms.templates.TemplateService;
@@ -98,7 +97,7 @@ public class JCRResourceResolver extends ResourceResolver {
    * @see org.exoplatform.resolver.ResourceResolver#getInputStream(java.lang.String)
    */
   public InputStream getInputStream(String url) throws Exception  {
-    SessionProvider provider = SessionProviderFactory.createSystemProvider();
+    SessionProvider provider = WCMCoreUtils.getSystemSessionProvider();
     Session session = provider.getSession(workspace, WCMCoreUtils.getRepository());
     ByteArrayInputStream inputStream = null;
     try {

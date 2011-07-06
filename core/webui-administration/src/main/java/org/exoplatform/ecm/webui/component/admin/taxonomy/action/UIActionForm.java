@@ -41,7 +41,6 @@ import org.exoplatform.ecm.webui.utils.DialogFormUtil;
 import org.exoplatform.ecm.webui.utils.LockUtil;
 import org.exoplatform.ecm.webui.utils.PermissionUtil;
 import org.exoplatform.ecm.webui.utils.Utils;
-import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.resolver.ResourceResolver;
 import org.exoplatform.services.cms.BasePath;
@@ -63,6 +62,7 @@ import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.security.IdentityConstants;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -73,8 +73,8 @@ import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.core.UIContainer;
 import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.event.Event;
-import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.event.Event.Phase;
+import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.form.UIFormInputBase;
 import org.exoplatform.webui.form.UIFormMultiValueInputSet;
 import org.exoplatform.webui.form.UIFormStringInput;
@@ -432,7 +432,7 @@ public class UIActionForm extends UIDialogForm implements UISelectable {
             return;
           }
           boolean alreadyExistEXO_ACTION = currentNode.hasNode(Utils.EXO_ACTIONS);
-          actionServiceContainer.addAction(currentNode, repository, uiActionForm.nodeTypeName_, sortedInputs);
+          actionServiceContainer.addAction(currentNode, uiActionForm.nodeTypeName_, sortedInputs);
           session.save();
           // Set permission for action node
           uiActionForm.setPermissionAction(currentNode);
@@ -540,7 +540,7 @@ public class UIActionForm extends UIDialogForm implements UISelectable {
                                     .getName();
       String selectorParams = (String) fieldPropertiesMap.get("selectorParams");
       if (uiComp instanceof UIOneNodePathSelector) {
-        SessionProvider provider = SessionProviderFactory.createSessionProvider();
+        SessionProvider provider = WCMCoreUtils.getUserSessionProvider();
         String wsFieldName = (String) fieldPropertiesMap.get("workspaceField");
         String wsName = "";
         if (wsFieldName != null && wsFieldName.length() > 0) {

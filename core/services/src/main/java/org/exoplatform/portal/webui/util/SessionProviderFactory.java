@@ -15,8 +15,13 @@ import org.exoplatform.services.jcr.ext.common.SessionProvider;
  *          minh.dang@exoplatform.com
  * Jan 21, 2010
  */
+/**
+ * Use org.exoplatform.services.wcm.utils.WCMCoreUtils instead
+ */
+@Deprecated
 public class SessionProviderFactory {
 
+  @Deprecated
   public static boolean isAnonim()
   {
     String userId = Util.getPortalRequestContext().getRemoteUser();
@@ -25,6 +30,10 @@ public class SessionProviderFactory {
     return false;
   }
 
+  @Deprecated
+  /**
+   * Deprecated by org.exoplatform.services.wcm.utils.WCMCoreUtils.getSystemSessionProvider()
+   */  
   public static SessionProvider createSystemProvider()
   {
     ExoContainer container = ExoContainerContext.getCurrentContainer();
@@ -33,6 +42,10 @@ public class SessionProviderFactory {
     return service.getSystemSessionProvider(null);
   }
 
+  @Deprecated
+  /**
+   * Deprecated by org.exoplatform.services.wcm.utils.WCMCoreUtils.getUserSessionProvider()
+   */
   public static SessionProvider createSessionProvider()
   {
     ExoContainer container = ExoContainerContext.getCurrentContainer();
@@ -41,6 +54,10 @@ public class SessionProviderFactory {
     return service.getSessionProvider(null);
   }
 
+  @Deprecated
+  /**
+   * Deprecated by org.exoplatform.services.wcm.utils.WCMCoreUtils.createAnonimProvider()
+   */  
   public static SessionProvider createAnonimProvider()
   {
     return SessionProvider.createAnonimProvider();

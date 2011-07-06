@@ -27,8 +27,8 @@ import org.exoplatform.commons.utils.LazyPageList;
 import org.exoplatform.commons.utils.ListAccess;
 import org.exoplatform.commons.utils.ListAccessImpl;
 import org.exoplatform.ecm.webui.utils.Utils;
-import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.services.cms.templates.TemplateService;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -76,8 +76,7 @@ public class UIViewTab extends UIContainer {
 
   public void updateGrid(String nodeName) throws Exception {
     TemplateService tempService = getApplicationComponent(TemplateService.class) ;
-    NodeIterator iter = tempService.getAllTemplatesOfNodeType(false, nodeName,
-        SessionProviderFactory.createSystemProvider()) ;
+    NodeIterator iter = tempService.getAllTemplatesOfNodeType(false, nodeName, WCMCoreUtils.getSystemSessionProvider()) ;
     List<ViewData> data = new ArrayList<ViewData>() ;
     ViewData item  ;
     if(iter == null) return;

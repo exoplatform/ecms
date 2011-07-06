@@ -16,7 +16,6 @@
  */
 package org.exoplatform.ecm.webui.component.admin.templates;
 
-import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.core.UIContainer;
 
@@ -40,15 +39,9 @@ public class UIViewTemplate extends UIContainer {
   }
 
   public void refresh() throws Exception {
-    getChild(UIDialogTab.class).updateGrid(nodeTypeName_,
-                                           getApplicationComponent(RepositoryService.class).getCurrentRepository()
-                                                                                           .getConfiguration()
-                                                                                           .getName());
+    getChild(UIDialogTab.class).updateGrid(nodeTypeName_);
     getChild(UIViewTab.class).updateGrid(nodeTypeName_);
-    getChild(UISkinTab.class).updateGrid(nodeTypeName_,
-                                         getApplicationComponent(RepositoryService.class).getCurrentRepository()
-                                                                                         .getConfiguration()
-                                                                                         .getName());
+    getChild(UISkinTab.class).updateGrid(nodeTypeName_);
   }
   public void setNodeTypeName(String nodeType) { nodeTypeName_ = nodeType ; }
 

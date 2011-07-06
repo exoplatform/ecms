@@ -24,10 +24,10 @@ import javax.jcr.Node;
 import javax.jcr.Session;
 
 import org.exoplatform.ecm.webui.utils.Utils;
-import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.wcm.core.NodeLocation;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.ComponentConfigs;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -114,13 +114,12 @@ public class UITaxonomyTreeCreateChild extends UIContainer {
   }
 
   Session getSession() throws Exception {
-    return SessionProviderFactory.createSystemProvider().getSession(workspace, getRepository());
+    return WCMCoreUtils.getSystemSessionProvider().getSession(workspace, getRepository());
   }
 
   @Deprecated
   public ManageableRepository getRepository(String repositoryName) throws Exception{
-    RepositoryService repositoryService = getApplicationComponent(RepositoryService.class);
-    return repositoryService.getCurrentRepository();
+    return getRepository();
   }
   
   public ManageableRepository getRepository() throws Exception {
@@ -185,7 +184,7 @@ public class UITaxonomyTreeCreateChild extends UIContainer {
       uiBreadcumb.setPath(listLocalPath);
       for (int i = 0; i < listLocalPathString.size(); i++) {
         String pathName = listLocalPathString.get(i);
-        if (pathName != null || !pathName.equals("")) {
+        if (pathName != null && pathName.length() > 0) {
           stringPath += pathName.trim();
           if (i < listLocalPathString.size() - 1) stringPath += "/";
         }

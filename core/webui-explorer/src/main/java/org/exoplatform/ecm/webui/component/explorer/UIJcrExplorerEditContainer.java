@@ -18,9 +18,9 @@ package org.exoplatform.ecm.webui.component.explorer;
 
 import org.exoplatform.ecm.webui.tree.selectone.UIOneNodePathSelector;
 import org.exoplatform.ecm.webui.tree.selectone.UIWorkspaceList;
-import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.drives.ManageDriveService;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.core.UIContainer;
 import org.exoplatform.webui.core.UIPopupWindow;
@@ -60,9 +60,9 @@ public class UIJcrExplorerEditContainer extends UIContainer {
     uiOneNodePathSelector.setShowRootPathSelect(true);
     uiWorkspaceList.getChild(UIFormSelectBox.class).setRendered(false);
     ManageDriveService manageDrive = getApplicationComponent(ManageDriveService.class);
-    DriveData driveData = manageDrive.getDriveByName(driveName, repository);
+    DriveData driveData = manageDrive.getDriveByName(driveName);
     uiOneNodePathSelector.setRootNodeLocation(repository, driveData.getWorkspace(), driveData.getHomePath());
-    uiOneNodePathSelector.init(SessionProviderFactory.createSessionProvider());
+    uiOneNodePathSelector.init(WCMCoreUtils.getUserSessionProvider());
     uiPopup.setUIComponent(uiOneNodePathSelector);
     uiOneNodePathSelector.setSourceComponent(this.getChild(UIJcrExplorerEditForm.class),
         new String[] { UIJcrExplorerEditForm.PARAM_PATH_INPUT });

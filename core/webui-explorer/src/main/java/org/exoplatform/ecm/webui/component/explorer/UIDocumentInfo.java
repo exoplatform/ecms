@@ -72,7 +72,6 @@ import org.exoplatform.ecm.webui.presentation.removecomment.RemoveCommentCompone
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.ecm.webui.utils.PermissionUtil;
 import org.exoplatform.ecm.webui.utils.Utils;
-import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.portal.webui.workspace.UIPortalApplication;
 import org.exoplatform.resolver.ResourceResolver;
@@ -102,7 +101,7 @@ import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.security.IdentityConstants;
-import org.exoplatform.services.wcm.core.NodeLocation;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.web.application.Parameter;
 import org.exoplatform.webui.application.WebuiRequestContext;
@@ -292,7 +291,7 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
     String[] workspaces = manageRepo.getWorkspaceNames() ;
     for(String ws : workspaces) {
       try{
-        return SessionProviderFactory.createSystemProvider().getSession(ws, manageRepo).getNodeByUUID(uuid) ;
+        return WCMCoreUtils.getSystemSessionProvider().getSession(ws, manageRepo).getNodeByUUID(uuid) ;
       } catch(Exception e) {
         continue;
       }
@@ -405,7 +404,7 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
 
   public Node getNodeByPath(String nodePath, String workspace) throws Exception {
     ManageableRepository manageRepo = getApplicationComponent(RepositoryService.class).getCurrentRepository();
-    Session session = SessionProviderFactory.createSystemProvider().getSession(workspace, manageRepo) ;
+    Session session = WCMCoreUtils.getUserSessionProvider().getSession(workspace, manageRepo) ;
     return getAncestorOfType(UIJCRExplorer.class).getNodeByPath(nodePath, session) ;
   }
 

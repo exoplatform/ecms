@@ -30,14 +30,12 @@ import org.exoplatform.ecm.webui.selector.UISelectable;
 import org.exoplatform.ecm.webui.tree.selectone.UIOneNodePathSelector;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.ecm.webui.utils.Utils;
-import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.services.cms.documents.TrashService;
 import org.exoplatform.services.jcr.RepositoryService;
-import org.exoplatform.services.jcr.config.RepositoryConfigurationException;
-import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.core.NodeLocation;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIApplication;
@@ -46,8 +44,8 @@ import org.exoplatform.webui.core.UIPopupContainer;
 import org.exoplatform.webui.core.UIPopupWindow;
 import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.event.Event;
-import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.event.Event.Phase;
+import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.form.UIForm;
 import org.exoplatform.webui.form.UIFormInputSet;
 import org.exoplatform.webui.form.UIFormStringInput;
@@ -141,20 +139,6 @@ public class UISelectRestorePath extends UIForm implements UIPopupComponent, UIS
     }
   }
 
-//  static  public class RemoveActionListener extends EventListener<UISelectRestorePath> {
-//    public void execute(Event<UISelectRestorePath> event) throws Exception {
-//      UIFormInputWithActions uiSet = event.getSource();
-//      UIComponent uiComponent = uiSet.getParent();
-//      if (uiComponent instanceof UISelectRestorePath) {
-//        UISelectRestorePath uiSelectRestorePath = (UISelectRestorePath)uiComponent;
-//        String id = event.getRequestContext().getRequestParameter(OBJECTID);
-////        uiSymLinkForm.getUIStringInput(FIELD_NAME).setValue("");
-//        uiSet.removeChildById(id);
-//        event.getRequestContext().addUIComponentToUpdateByAjax(uiSelectRestorePath);
-//      }
-//    }
-//  }
-
   static  public class AddActionListener extends EventListener<UISelectRestorePath> {
     public void execute(Event<UISelectRestorePath> event) throws Exception {
       UISelectRestorePath uiSelectRestorePath =  event.getSource();
@@ -174,13 +158,12 @@ public class UISelectRestorePath extends UIForm implements UIPopupComponent, UIS
       uiNodePathSelector.setAcceptedNodeTypesInTree(new String[] {Utils.NT_UNSTRUCTURED, Utils.NT_FOLDER});
       uiNodePathSelector.setExceptedNodeTypesInPathPanel(new String[] {Utils.EXO_TRASH_FOLDER});
       uiNodePathSelector.setExceptedNodeTypesInTree(new String[] {Utils.EXO_TRASH_FOLDER});
-//      uiNodePathSelector.setIsShowSystem(false);
-      if(SessionProviderFactory.isAnonim()) {
-        uiNodePathSelector.init(SessionProviderFactory.createAnonimProvider()) ;
+      if(WCMCoreUtils.isAnonim()) {
+        uiNodePathSelector.init(WCMCoreUtils.createAnonimProvider()) ;
       } else if(workspaceName.equals(getSystemWorkspaceName(uiExplorer))){
-        uiNodePathSelector.init(SessionProviderFactory.createSystemProvider()) ;
+        uiNodePathSelector.init(WCMCoreUtils.getSystemSessionProvider()) ;
       } else {
-        uiNodePathSelector.init(SessionProviderFactory.createSessionProvider()) ;
+        uiNodePathSelector.init(WCMCoreUtils.getUserSessionProvider()) ;
       }
       String param = "returnField=" + FIELD_PATH;
       uiNodePathSelector.setSourceComponent(uiSelectRestorePath, new String[]{param});
@@ -190,11 +173,9 @@ public class UISelectRestorePath extends UIForm implements UIPopupComponent, UIS
       event.getRequestContext().addUIComponentToUpdateByAjax(uiPopupContainer);
     }
 
-    private String getSystemWorkspaceName(UIJCRExplorer uiExplorer) throws RepositoryException,
-                                                                                      RepositoryConfigurationException {
+    private String getSystemWorkspaceName(UIJCRExplorer uiExplorer) throws RepositoryException {
       RepositoryService repositoryService = uiExplorer.getApplicationComponent(RepositoryService.class);
-      ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
-      return manageableRepository.getConfiguration().getSystemWorkspaceName();
+      return repositoryService.getCurrentRepository().getConfiguration().getSystemWorkspaceName();
     }
 
     private UIPopupWindow initPopup(UIPopupContainer uiPopupContainer, String id) throws Exception {

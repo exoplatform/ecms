@@ -22,17 +22,14 @@ import java.util.List;
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
 import javax.jcr.Value;
-import javax.portlet.PortletPreferences;
 
 import org.exoplatform.commons.utils.LazyPageList;
 import org.exoplatform.commons.utils.ListAccess;
 import org.exoplatform.commons.utils.ListAccessImpl;
 import org.exoplatform.ecm.webui.utils.Utils;
-import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.services.cms.templates.TemplateService;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
-import org.exoplatform.webui.application.WebuiRequestContext;
-import org.exoplatform.webui.application.portlet.PortletRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIApplication;
@@ -81,9 +78,14 @@ public class UISkinTab extends UIContainer {
 
   public List<String> getListSkin() { return listSkin_ ; }
 
+  @Deprecated
   public void updateGrid(String nodeName, String repository) throws Exception {
+    updateGrid(nodeName);
+  }
+  
+  public void updateGrid(String nodeName) throws Exception {
     TemplateService tempService = getApplicationComponent(TemplateService.class) ;
-    Node templateHome = tempService.getTemplatesHome(SessionProviderFactory.createSystemProvider()).getNode(nodeName);
+    Node templateHome = tempService.getTemplatesHome(WCMCoreUtils.getSystemSessionProvider()).getNode(nodeName);
     if(!templateHome.hasNode(TemplateService.SKINS)) return;
     NodeIterator iter = templateHome.getNode(TemplateService.SKINS).getNodes();
     List<SkinData> data = new ArrayList<SkinData>() ;
@@ -108,7 +110,7 @@ public class UISkinTab extends UIContainer {
     ListAccess<SkinData> skinDataList = new ListAccessImpl<SkinData>(SkinData.class, data);
     LazyPageList<SkinData> dataPageList = new LazyPageList<SkinData>(skinDataList, 4);
     uiGrid.getUIPageIterator().setPageList(dataPageList);
-  }
+  }  
 
   static public class EditActionListener extends EventListener<UISkinTab> {
     public void execute(Event<UISkinTab> event) throws Exception {
@@ -139,14 +141,11 @@ public class UISkinTab extends UIContainer {
           return ;
         }
       }
-      PortletRequestContext pcontext = (PortletRequestContext)WebuiRequestContext.getCurrentInstance() ;
-      PortletPreferences portletPref = pcontext.getRequest().getPreferences() ;
-      String repository = portletPref.getValue(Utils.REPOSITORY, "") ;
       templateService.removeTemplate(TemplateService.SKINS, nodeTypeName, templateName) ;
       uiForm.update(null);
       uiForm.reset();
 
-      skinTab.updateGrid(nodeTypeName, repository) ;
+      skinTab.updateGrid(nodeTypeName) ;
       skinTab.setTabRendered() ;
       UITemplatesManager uiManager = skinTab.getAncestorOfType(UITemplatesManager.class) ;
       event.getRequestContext().addUIComponentToUpdateByAjax(uiManager) ;

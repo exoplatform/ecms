@@ -24,8 +24,8 @@ import javax.jcr.NodeIterator;
 
 import org.exoplatform.ecm.webui.component.admin.script.UIScriptList.ScriptData;
 import org.exoplatform.ecm.webui.utils.Utils;
-import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.services.cms.scripts.ScriptService;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.core.UIContainer;
 import org.exoplatform.webui.core.UIPopupContainer;
@@ -58,7 +58,7 @@ public class UIECMScripts extends UIContainer {
   private List<SelectItemOption<String>> getECMCategoryOptions() throws Exception {
     List<SelectItemOption<String>> ecmOptions = new ArrayList<SelectItemOption<String>>() ;
     Node ecmScriptHome = 
-      getApplicationComponent(ScriptService.class).getECMScriptHome(SessionProviderFactory.createSystemProvider());
+      getApplicationComponent(ScriptService.class).getECMScriptHome(WCMCoreUtils.getSystemSessionProvider());
     NodeIterator categories = ecmScriptHome.getNodes() ;
     while(categories.hasNext()) {
       Node script = categories.nextNode() ;
@@ -83,12 +83,12 @@ public class UIECMScripts extends UIContainer {
     List <ScriptData> scriptData = new ArrayList <ScriptData>() ;
     List<Node> scripts = new ArrayList<Node> () ;
     if(name.equals("action")) {
-      scripts = getApplicationComponent(ScriptService.class).getECMActionScripts(SessionProviderFactory.createSystemProvider());
+      scripts = getApplicationComponent(ScriptService.class).getECMActionScripts(WCMCoreUtils.getSystemSessionProvider());
     }else if(name.equals("widget")){
-      scripts = getApplicationComponent(ScriptService.class).getECMWidgetScripts(SessionProviderFactory.createSessionProvider());
+      scripts = getApplicationComponent(ScriptService.class).getECMWidgetScripts(WCMCoreUtils.getUserSessionProvider());
     }else if(name.equals("interceptor")) {
       scripts = 
-        getApplicationComponent(ScriptService.class).getECMInterceptorScripts(SessionProviderFactory.createSystemProvider());
+        getApplicationComponent(ScriptService.class).getECMInterceptorScripts(WCMCoreUtils.getSystemSessionProvider());
     }
     for(Node scriptNode : scripts) {
       String version = "" ;

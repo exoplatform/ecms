@@ -22,7 +22,6 @@ import java.util.List;
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
 import javax.jcr.RepositoryException;
-import javax.jcr.version.Version;
 import javax.jcr.version.VersionHistory;
 
 import org.exoplatform.ecm.jcr.model.VersionNode;
@@ -30,7 +29,6 @@ import org.exoplatform.ecm.resolver.JCRResourceResolver;
 import org.exoplatform.ecm.webui.form.validator.ECMNameValidator;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.groovyscript.text.TemplateService;
-import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.views.ManageViewService;
 import org.exoplatform.services.jcr.RepositoryService;
@@ -126,7 +124,7 @@ public class UITemplateForm extends UIForm {
 
   public List<SelectItemOption<String>> getOptionList() throws Exception {
     List<SelectItemOption<String>> typeList = new ArrayList<SelectItemOption<String>>();
-    SessionProvider provider = SessionProviderFactory.createSessionProvider();
+    SessionProvider provider = WCMCoreUtils.getUserSessionProvider();
     if (getId().equalsIgnoreCase("ECMTempForm")) {
       Node ecmTemplateHome = getApplicationComponent(ManageViewService.class).getTemplateHome(
           BasePath.ECM_EXPLORER_TEMPLATES, provider);
@@ -211,7 +209,7 @@ public class UITemplateForm extends UIForm {
     if (templatePath != null) {
       templatePath_ = templatePath;
       Node templateNode = getApplicationComponent(ManageViewService.class).
-              getTemplate(templatePath, SessionProviderFactory.createSessionProvider());
+              getTemplate(templatePath, WCMCoreUtils.getUserSessionProvider());
       template_ = NodeLocation.getNodeLocationByNode(templateNode);
       getUIStringInput(FIELD_NAME).setValue(templateNode.getName());
       getUIStringInput(FIELD_NAME).setEditable(false);
@@ -263,7 +261,7 @@ public class UITemplateForm extends UIForm {
       String path = null;
       if (uiForm.getId().equalsIgnoreCase(UIECMTemplateList.ST_ECMTempForm)) {
         List<Node> ecmTemps = manageViewService.getAllTemplates(BasePath.ECM_EXPLORER_TEMPLATES,
-                                                                SessionProviderFactory.createSessionProvider());
+            WCMCoreUtils.getUserSessionProvider());
         for (Node temp : ecmTemps) {
           if (temp.getName().equals(templateName) && uiForm.isAddNew_) {
             Object[] args = { templateName };
@@ -293,16 +291,14 @@ public class UITemplateForm extends UIForm {
           String oldHomeTemplate = uiForm.templatePath_.substring(0, uiForm.templatePath_
               .lastIndexOf("/"));
           if (!oldHomeTemplate.equals(homeTemplate)) {
-            Node oldNode = manageViewService.getTemplate(uiForm.templatePath_,
-                                                         SessionProviderFactory.createSessionProvider());
+            Node oldNode = manageViewService.getTemplate(uiForm.templatePath_, WCMCoreUtils.getUserSessionProvider());
             oldNode.remove();
-            manageViewService.getTemplate(oldHomeTemplate,
-                                          SessionProviderFactory.createSessionProvider()).save();
+            manageViewService.getTemplate(oldHomeTemplate, WCMCoreUtils.getUserSessionProvider()).save();
           }
         }
         path = manageViewService.addTemplate(templateName, content, homeTemplate);
         uiForm.template_ = NodeLocation.getNodeLocationByNode(manageViewService.
-                            getTemplate(path, SessionProviderFactory.createSessionProvider()));
+                            getTemplate(path, WCMCoreUtils.getUserSessionProvider()));
       } else {
         Node templateNode = NodeLocation.getNodeByLocation(uiForm.template_);
         if (isEnableVersioning) {

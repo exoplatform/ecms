@@ -26,6 +26,7 @@ import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.container.RootContainer;
 import org.exoplatform.container.component.ComponentRequestLifecycle;
+import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
@@ -78,6 +79,19 @@ public class WCMCoreUtils {
     SessionProvider sessionProvider = sessionProviderService.getSessionProvider(null);
     return sessionProvider;
   }
+  
+  public static boolean isAnonim()
+  {
+    String userId = Util.getPortalRequestContext().getRemoteUser();
+    if (userId == null)
+      return true;
+    return false;
+  }
+
+  public static SessionProvider createAnonimProvider()
+  {
+    return SessionProvider.createAnonimProvider();
+  }  
 
   /**
    * Gets the service.
@@ -178,13 +192,7 @@ public class WCMCoreUtils {
    */
   @Deprecated
   public static ManageableRepository getRepository(String repository) {
-    try {
-      RepositoryService repositoryService = getService(RepositoryService.class);
-      return repositoryService.getCurrentRepository();
-    } catch (Exception e) {
-      log.error("getRepository(" + repository + ") failed because of ", e);
-    }
-    return null;
+    return getRepository();
   }
   
   /**
@@ -212,7 +220,7 @@ public class WCMCoreUtils {
   public static void endRequest(OrganizationService orgService) throws Exception
   {
     if(orgService instanceof ComponentRequestLifecycle) {
-	  ((ComponentRequestLifecycle) orgService).endRequest(ExoContainerContext.getCurrentContainer());
+      ((ComponentRequestLifecycle) orgService).endRequest(ExoContainerContext.getCurrentContainer());
     }
   }
   

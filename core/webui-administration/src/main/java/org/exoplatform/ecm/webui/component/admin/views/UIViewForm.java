@@ -32,12 +32,12 @@ import org.exoplatform.ecm.webui.form.validator.PermissionValidator;
 import org.exoplatform.ecm.webui.selector.UISelectable;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.ecm.webui.utils.Utils;
-import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.views.ManageViewService;
 import org.exoplatform.services.cms.views.ViewConfig;
 import org.exoplatform.services.cms.views.ViewConfig.Tab;
 import org.exoplatform.services.wcm.core.NodeLocation;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -110,8 +110,7 @@ public class UIViewForm extends UIFormInputSetWithAction implements UISelectable
     addUIFormInput(new UIFormInputInfo(FIELD_TABS, FIELD_TABS, null)) ;
     setActionInfo(FIELD_PERMISSION, new String[] {"AddPermission","RemovePermission"}) ;
     vservice_ = getApplicationComponent(ManageViewService.class) ;
-    Node ecmTemplateHome = vservice_.getTemplateHome(BasePath.ECM_EXPLORER_TEMPLATES,
-                                                     SessionProviderFactory.createSessionProvider());
+    Node ecmTemplateHome = vservice_.getTemplateHome(BasePath.ECM_EXPLORER_TEMPLATES, WCMCoreUtils.getUserSessionProvider());
     List<SelectItemOption<String>> temp = new ArrayList<SelectItemOption<String>>() ;
     if(ecmTemplateHome != null) {
       NodeIterator iter = ecmTemplateHome.getNodes() ;

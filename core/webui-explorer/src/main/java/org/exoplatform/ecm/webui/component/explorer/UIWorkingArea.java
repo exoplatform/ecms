@@ -30,22 +30,22 @@ import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 import javax.jcr.Value;
 
-import org.exoplatform.services.log.Log;
 import org.exoplatform.ecm.jcr.model.ClipboardCommand;
 import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.ecm.webui.component.explorer.sidebar.UISideBar;
 import org.exoplatform.ecm.webui.utils.Utils;
-import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.services.cms.actions.ActionServiceContainer;
 import org.exoplatform.services.cms.link.NodeFinder;
 import org.exoplatform.services.cms.link.NodeLinkAware;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.services.security.Identity;
 import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.services.security.IdentityRegistry;
 import org.exoplatform.services.security.MembershipEntry;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.ComponentConfigs;
@@ -173,10 +173,14 @@ public class UIWorkingArea extends UIContainer {
   }
 
   public Node getNodeByUUID(String uuid) throws Exception {
-    String repository = getAncestorOfType(UIJCRExplorer.class).getRepositoryName();
     ManageableRepository repo = getApplicationComponent(RepositoryService.class).getCurrentRepository();
     String workspace = repo.getConfiguration().getDefaultWorkspaceName();
-    Session session = SessionProviderFactory.createSystemProvider().getSession(workspace, repo);
+    return getNodeByUUID(uuid, workspace);
+  }
+  
+  public Node getNodeByUUID(String uuid, String workspaceName) throws Exception {
+    ManageableRepository repo = getApplicationComponent(RepositoryService.class).getCurrentRepository();
+    Session session = WCMCoreUtils.getSystemSessionProvider().getSession(workspaceName, repo);
     return session.getNodeByUUID(uuid);
   }
 

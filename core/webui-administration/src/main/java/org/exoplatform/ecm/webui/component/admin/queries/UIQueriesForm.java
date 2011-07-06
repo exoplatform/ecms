@@ -29,8 +29,8 @@ import org.exoplatform.ecm.webui.form.UIFormInputSetWithAction;
 import org.exoplatform.ecm.webui.form.validator.ECMNameValidator;
 import org.exoplatform.ecm.webui.selector.UISelectable;
 import org.exoplatform.ecm.webui.utils.Utils;
-import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.services.cms.queries.QueryService;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -120,8 +120,7 @@ public class UIQueriesForm extends UIForm implements UISelectable {
       reset() ;
       return ;
     }
-    Node query = queryService.getSharedQuery(queryName,
-                                             SessionProviderFactory.createSystemProvider());
+    Node query = queryService.getSharedQuery(queryName, WCMCoreUtils.getSystemSessionProvider());
     getUIStringInput(QUERY_NAME).setValue(queryName) ;
     getUIStringInput(QUERY_NAME).setEditable(false) ;
     if(query.hasProperty("exo:cachedResult")) {
@@ -163,7 +162,7 @@ public class UIQueriesForm extends UIForm implements UISelectable {
       UIApplication uiApp = uiForm.getAncestorOfType(UIApplication.class) ;
       String queryName = uiForm.getUIStringInput(QUERY_NAME).getValue().trim();
       if(uiForm.isAddNew_) {
-        for(Node queryNode : queryService.getSharedQueries(SessionProviderFactory.createSystemProvider())) {
+        for(Node queryNode : queryService.getSharedQueries(WCMCoreUtils.getSystemSessionProvider())) {
           if(queryNode.getName().equals(queryName)) {
             uiApp.addMessage(new ApplicationMessage("UIQueriesForm.msg.name-existing", null,
                 ApplicationMessage.WARNING)) ;

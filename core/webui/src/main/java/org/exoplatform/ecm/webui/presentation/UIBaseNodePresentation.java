@@ -31,7 +31,6 @@ import org.exoplatform.download.DownloadService;
 import org.exoplatform.download.InputStreamDownloadResource;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.portal.webui.container.UIContainer;
-import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.services.cms.comments.CommentsService;
 import org.exoplatform.services.cms.folksonomy.NewFolksonomyService;
 import org.exoplatform.services.cms.i18n.MultiLanguageService;
@@ -43,6 +42,7 @@ import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.Parameter;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.application.portlet.PortletRequestContext;
@@ -111,9 +111,7 @@ public abstract class UIBaseNodePresentation extends UIContainer implements Node
     return attachments;
   }
 
-  @Override
-  public String getAttachmentURL(Node attNode, Parameter[] params)
-      throws Exception {
+  public String getAttachmentURL(Node attNode, Parameter[] params) throws Exception {
     return "";
   }
 
@@ -127,7 +125,6 @@ public abstract class UIBaseNodePresentation extends UIContainer implements Node
   /* (non-Javadoc)
    * @see org.exoplatform.ecm.webui.presentation.NodePresentation#getComponentInstanceOfType(java.lang.String)
    */
-  @SuppressWarnings("unchecked")
   public Object getComponentInstanceOfType(String className) {
     Object service = null;
     try {
@@ -271,10 +268,10 @@ public abstract class UIBaseNodePresentation extends UIContainer implements Node
     ManageableRepository manageRepo = getApplicationComponent(RepositoryService.class).getCurrentRepository();
     String[] workspaces = manageRepo.getWorkspaceNames() ;
     //TODO: SystemProvider or SessionProvider
-    SessionProvider provider = SessionProviderFactory.createSystemProvider() ;
+    SessionProvider provider = WCMCoreUtils.getSystemSessionProvider();
     for(String ws : workspaces) {
       try{
-        return provider.getSession(ws,manageRepo).getNodeByUUID(uuid) ;
+        return provider.getSession(ws, manageRepo).getNodeByUUID(uuid) ;
       }catch(Exception e) { }
     }
     return null;

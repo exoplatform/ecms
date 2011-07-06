@@ -18,18 +18,18 @@ package org.exoplatform.ecm.webui.component.admin.templates;
 
 import javax.jcr.Node;
 
-import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.services.cms.templates.TemplateService;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIPopupWindow;
 import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.event.Event;
-import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.event.Event.Phase;
+import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.form.UIForm;
-import org.exoplatform.webui.form.UIFormCheckBoxInput;
 import org.exoplatform.webui.form.UIFormStringInput;
+import org.exoplatform.webui.form.input.UIFormCheckBoxInput;
 
 /**
  * Created by The eXo Platform SARL
@@ -57,7 +57,7 @@ public class UITemplateEditForm extends UIForm {
   public UITemplateEditForm() {
     addChild(new UIFormStringInput(FIELD_NAME, null)) ;
     addChild(new UIFormStringInput(FIELD_LABEL, null)) ;
-    addChild(new UIFormCheckBoxInput<Boolean>(FIELD_ISTEMPLATE, null, null)) ;
+    addChild(new UIFormCheckBoxInput(FIELD_ISTEMPLATE, null, null)) ;
   }
 
   private boolean isDocumentTemplate(String nodeType)throws Exception {
@@ -67,7 +67,7 @@ public class UITemplateEditForm extends UIForm {
 
   public void update(String nodeType) throws Exception {
     TemplateService tempService = getApplicationComponent(TemplateService.class) ;
-    Node node = tempService.getTemplatesHome(SessionProviderFactory.createSessionProvider()).getNode(nodeType) ;
+    Node node = tempService.getTemplatesHome(WCMCoreUtils.getUserSessionProvider()).getNode(nodeType) ;
     String label = null ;
     if(node.hasProperty(TemplateService.TEMPLATE_LABEL)) {
       label = node.getProperty(TemplateService.TEMPLATE_LABEL).getString() ;
@@ -84,7 +84,7 @@ public class UITemplateEditForm extends UIForm {
     public void execute(Event<UITemplateEditForm> event) throws Exception {
       UITemplateEditForm uiForm = event.getSource() ;
       TemplateService tempService = uiForm.getApplicationComponent(TemplateService.class) ;
-      Node node = tempService.getTemplatesHome(SessionProviderFactory.createSessionProvider()).getNode(nodeType_) ;
+      Node node = tempService.getTemplatesHome(WCMCoreUtils.getUserSessionProvider()).getNode(nodeType_) ;
       node.setProperty(TemplateService.TEMPLATE_LABEL,uiForm.getUIStringInput(FIELD_LABEL).getValue()) ;
       node.save() ;
       uiForm.reset() ;

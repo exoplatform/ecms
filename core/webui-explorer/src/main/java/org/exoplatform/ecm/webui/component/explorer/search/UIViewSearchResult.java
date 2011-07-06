@@ -32,7 +32,6 @@ import javax.jcr.Value;
 import javax.jcr.ValueFormatException;
 import javax.portlet.PortletRequest;
 
-import org.exoplatform.services.log.Log;
 import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.container.xml.PortalContainerInfo;
@@ -44,7 +43,6 @@ import org.exoplatform.ecm.webui.presentation.NodePresentation;
 import org.exoplatform.ecm.webui.presentation.removeattach.RemoveAttachmentComponent;
 import org.exoplatform.ecm.webui.presentation.removecomment.RemoveCommentComponent;
 import org.exoplatform.ecm.webui.utils.Utils;
-import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.resolver.ResourceResolver;
 import org.exoplatform.services.cms.comments.CommentsService;
@@ -55,7 +53,9 @@ import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.core.NodeLocation;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.Parameter;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.application.portlet.PortletRequestContext;
@@ -247,10 +247,10 @@ public class UIViewSearchResult extends UIContainer implements NodePresentation 
   public Node getNodeByUUID(String uuid) throws Exception{
     ManageableRepository manageRepo = getApplicationComponent(RepositoryService.class).getCurrentRepository();
     String[] workspaces = manageRepo.getWorkspaceNames() ;
-    SessionProvider sessionProvider = SessionProviderFactory.createSessionProvider() ;
+    SessionProvider sessionProvider = WCMCoreUtils.getUserSessionProvider();
     for(String ws : workspaces) {
       try{
-        return sessionProvider.getSession(ws,manageRepo).getNodeByUUID(uuid) ;
+        return sessionProvider.getSession(ws,manageRepo).getNodeByUUID(uuid);
       }catch(Exception e) {
 
       }

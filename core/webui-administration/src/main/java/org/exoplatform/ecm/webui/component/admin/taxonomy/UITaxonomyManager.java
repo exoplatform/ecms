@@ -22,12 +22,12 @@ import java.util.List;
 import javax.jcr.Node;
 import javax.jcr.Session;
 
-import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.services.cms.impl.DMSConfiguration;
 import org.exoplatform.services.cms.impl.DMSRepositoryConfiguration;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.ComponentConfigs;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -110,13 +110,6 @@ public class UITaxonomyManager extends UIAbstractManager {
     return (Node) getSession().getItem(path) ;
   }
 
-//  public String getRepository() throws Exception {
-//    PortletRequestContext pcontext = (PortletRequestContext)WebuiRequestContext.getCurrentInstance() ;
-//    PortletPreferences pref = pcontext.getRequest().getPreferences() ;
-//    String repository = pref.getValue(Utils.REPOSITORY, "") ;
-//    return repository ;
-//  }
-
   private String getDmsSystemWorkspaceName() {
     DMSConfiguration dmsConfiguration = getApplicationComponent(DMSConfiguration.class);
     DMSRepositoryConfiguration dmsRepoConfig = dmsConfiguration.getConfig();
@@ -125,13 +118,12 @@ public class UITaxonomyManager extends UIAbstractManager {
 
   public Session getSession() throws Exception {
     String workspace = getDmsSystemWorkspaceName();
-    return SessionProviderFactory.createSystemProvider().getSession(workspace, getRepository());
+    return WCMCoreUtils.getSystemSessionProvider().getSession(workspace, getRepository());
   }
 
   @Deprecated
   public ManageableRepository getRepository(String repositoryName) throws Exception{
-    RepositoryService repositoryService = getApplicationComponent(RepositoryService.class) ;
-    return repositoryService.getCurrentRepository();
+    return getRepository();
   }
   
   public ManageableRepository getRepository() throws Exception{

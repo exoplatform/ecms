@@ -25,12 +25,11 @@ import org.exoplatform.ecm.webui.component.admin.taxonomy.action.UIActionTaxonom
 import org.exoplatform.ecm.webui.selector.UIPermissionSelector;
 import org.exoplatform.ecm.webui.tree.selectone.UIOneNodePathSelector;
 import org.exoplatform.ecm.webui.utils.Utils;
-import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.services.cms.impl.DMSConfiguration;
 import org.exoplatform.services.cms.impl.DMSRepositoryConfiguration;
 import org.exoplatform.services.jcr.RepositoryService;
-import org.exoplatform.services.jcr.config.RepositoryConfigurationException;
 import org.exoplatform.services.jcr.core.ManageableRepository;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.core.UIPopupWindow;
@@ -92,13 +91,11 @@ public class UITaxonomyManagerTrees extends UIAbstractManager {
   }
 
   @Deprecated
-  public String getSystemWorkspaceName(String repository) throws RepositoryException, RepositoryConfigurationException {
-    RepositoryService repositoryService = getApplicationComponent(RepositoryService.class);
-    ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
-    return manageableRepository.getConfiguration().getSystemWorkspaceName();
+  public String getSystemWorkspaceName(String repository) throws RepositoryException {
+    return getSystemWorkspaceName();
   }
   
-  public String getSystemWorkspaceName() throws RepositoryException, RepositoryConfigurationException {
+  public String getSystemWorkspaceName() throws RepositoryException {
     RepositoryService repositoryService = getApplicationComponent(RepositoryService.class);
     ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
     return manageableRepository.getConfiguration().getSystemWorkspaceName();
@@ -107,9 +104,7 @@ public class UITaxonomyManagerTrees extends UIAbstractManager {
 
   @Deprecated
   public String getDmsSystemWorkspaceName(String repository) {
-    DMSConfiguration dmsConfiguration = getApplicationComponent(DMSConfiguration.class);
-    DMSRepositoryConfiguration dmsRepoConfig = dmsConfiguration.getConfig();
-    return dmsRepoConfig.getSystemWorkspace();
+    return getDmsSystemWorkspaceName();
   }
   
   public String getDmsSystemWorkspaceName() {
@@ -130,12 +125,12 @@ public class UITaxonomyManagerTrees extends UIAbstractManager {
     uiOneNodePathSelector.setAcceptedNodeTypesInTree(filterType);
     uiOneNodePathSelector.setAcceptedNodeTypesInPathPanel(filterType);
     uiOneNodePathSelector.setRootNodeLocation(repository, workspace, "/");
-    if (SessionProviderFactory.isAnonim()) {
-      uiOneNodePathSelector.init(SessionProviderFactory.createAnonimProvider());
+    if (WCMCoreUtils.isAnonim()) {
+      uiOneNodePathSelector.init(WCMCoreUtils.createAnonimProvider());
     } else if (workspace.equals(getSystemWorkspaceName())) {
-      uiOneNodePathSelector.init(SessionProviderFactory.createSystemProvider());
+      uiOneNodePathSelector.init(WCMCoreUtils.getSystemSessionProvider());
     } else {
-      uiOneNodePathSelector.init(SessionProviderFactory.createSessionProvider());
+      uiOneNodePathSelector.init(WCMCoreUtils.getUserSessionProvider());
     }
     uiPopup.setUIComponent(uiOneNodePathSelector);
     UITaxonomyTreeContainer uiTaxonomyTreeContainer = findFirstComponentOfType(UITaxonomyTreeContainer.class);

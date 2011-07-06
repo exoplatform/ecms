@@ -27,10 +27,10 @@ import org.exoplatform.commons.utils.ListAccessImpl;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.selector.UISelectable;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
-import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.services.cms.relations.RelationsService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -95,7 +95,7 @@ public class UIRelationsAddedList extends UIContainer implements UISelectable {
       Node currentNode = uiJCRExplorer.getCurrentNode();
       uiJCRExplorer.addLockToken(currentNode);
       relateService.addRelation(currentNode, path, wsName) ;
-      updateGrid(relateService.getRelations(currentNode, SessionProviderFactory.createSessionProvider()), 1);
+      updateGrid(relateService.getRelations(currentNode, WCMCoreUtils.getUserSessionProvider()), 1);
       setRenderSibling(UIRelationsAddedList.class) ;
     } catch(Exception e) {
       LOG.error("Unexpected error", e);
@@ -116,8 +116,7 @@ public class UIRelationsAddedList extends UIContainer implements UISelectable {
       try {
         relationService.removeRelation(uiExplorer.getCurrentNode(), nodePath);
         UIGrid uiGrid = uiAddedList.getChildById("RelateAddedList");
-        uiAddedList.updateGrid(relationService.getRelations(uiExplorer.getCurrentNode(),
-                                                            SessionProviderFactory.createSessionProvider()),
+        uiAddedList.updateGrid(relationService.getRelations(uiExplorer.getCurrentNode(), WCMCoreUtils.getUserSessionProvider()),
                                uiGrid.getUIPageIterator().getCurrentPage());
       } catch(Exception e) {
         JCRExceptionManager.process(uiApp, e) ;

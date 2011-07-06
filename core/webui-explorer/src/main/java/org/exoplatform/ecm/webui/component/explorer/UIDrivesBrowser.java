@@ -34,7 +34,6 @@ import org.exoplatform.ecm.webui.component.explorer.control.UIAddressBar;
 import org.exoplatform.ecm.webui.component.explorer.control.UIControl;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.ecm.webui.utils.Utils;
-import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.drives.ManageDriveService;
@@ -43,6 +42,7 @@ import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.config.RepositoryEntry;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -143,8 +143,7 @@ public class UIDrivesBrowser extends UIContainer {
         for(String viewName : drive.getViews().split(",")) {
           if(!viewList.contains(viewName.trim())) {
             Node viewNode = uiDrive.getApplicationComponent(ManageViewService.class)
-                                   .getViewByName(viewName.trim(),
-                                                  SessionProviderFactory.createSystemProvider());
+                                   .getViewByName(viewName.trim(), WCMCoreUtils.getSystemSessionProvider());
             String permiss = viewNode.getProperty("exo:accessPermissions").getString();
             if(permiss.contains("${userId}")) permiss = permiss.replace("${userId}", userId);
             String[] viewPermissions = permiss.split(",");
@@ -179,11 +178,10 @@ public class UIDrivesBrowser extends UIContainer {
       pref.setShowPreferenceDocuments(drive.getViewPreferences());
       pref.setAllowCreateFoder(drive.getAllowCreateFolders());
       pref.setShowHiddenNode(drive.getShowHiddenNode());
-//      uiJCRExplorer.setPreferences(pref);
       uiJCRExplorer.setDriveData(drive);
       uiJCRExplorer.setIsReferenceNode(false);
 
-      SessionProvider provider = SessionProviderFactory.createSessionProvider();
+      SessionProvider provider = WCMCoreUtils.getUserSessionProvider();
       ManageableRepository repository = rservice.getCurrentRepository();
       try {
         Session session = provider.getSession(drive.getWorkspace(),repository);

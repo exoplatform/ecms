@@ -24,8 +24,8 @@ import javax.jcr.NodeIterator;
 
 import org.exoplatform.ecm.webui.component.admin.script.UIScriptList.ScriptData;
 import org.exoplatform.ecm.webui.utils.Utils;
-import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.services.cms.scripts.ScriptService;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.core.UIContainer;
 import org.exoplatform.webui.core.UIPopupContainer;
@@ -62,7 +62,7 @@ public class UICBScripts extends UIContainer {
   public List<ScriptData> getCBScript() throws Exception {
     List <ScriptData> scriptData = new ArrayList <ScriptData>() ;
     ScriptService scriptService = getApplicationComponent(ScriptService.class) ;
-    Node cbScripts = scriptService.getCBScriptHome(SessionProviderFactory.createSystemProvider()) ;
+    Node cbScripts = scriptService.getCBScriptHome(WCMCoreUtils.getSystemSessionProvider()) ;
     NodeIterator nodeList = cbScripts.getNodes() ;
     ScriptData script ;
     while(nodeList.hasNext()) {

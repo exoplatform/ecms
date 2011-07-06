@@ -32,7 +32,6 @@ import org.exoplatform.ecm.webui.tree.selectone.UIOneNodePathSelector;
 import org.exoplatform.ecm.webui.tree.selectone.UIOneTaxonomySelector;
 import org.exoplatform.ecm.webui.utils.DialogFormUtil;
 import org.exoplatform.ecm.webui.utils.Utils;
-import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.resolver.ResourceResolver;
 import org.exoplatform.services.cms.BasePath;
@@ -41,6 +40,7 @@ import org.exoplatform.services.cms.impl.DMSConfiguration;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -51,8 +51,8 @@ import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.core.UIPopupComponent;
 import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.event.Event;
-import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.event.Event.Phase;
+import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.form.UIFormInput;
 import org.exoplatform.webui.form.UIFormInputBase;
 import org.exoplatform.webui.form.UIFormMultiValueInputSet;
@@ -336,7 +336,7 @@ public class UILanguageDialogForm extends UIDialogForm implements UIPopupCompone
 
         ((UIOneTaxonomySelector)uiComp).setRootNodeLocation(uiForm.repositoryName, workspaceName, rootTreePath);
         ((UIOneTaxonomySelector)uiComp).setExceptedNodeTypesInPathPanel(new String[] {Utils.EXO_SYMLINK});
-        ((UIOneTaxonomySelector)uiComp).init(SessionProviderFactory.createSystemProvider());
+        ((UIOneTaxonomySelector)uiComp).init(WCMCoreUtils.getSystemSessionProvider());
 
       }
       uiContainer.initPopup(uiComp);

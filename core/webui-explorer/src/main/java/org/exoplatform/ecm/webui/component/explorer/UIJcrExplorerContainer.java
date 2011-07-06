@@ -35,16 +35,14 @@ import org.exoplatform.ecm.webui.component.explorer.control.UIControl;
 import org.exoplatform.ecm.webui.component.explorer.sidebar.UISideBar;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.ecm.webui.utils.Utils;
-import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.drives.ManageDriveService;
 import org.exoplatform.services.cms.views.ManageViewService;
 import org.exoplatform.services.jcr.RepositoryService;
-import org.exoplatform.services.jcr.core.ManageableRepository;
-import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.application.portlet.PortletRequestContext;
@@ -84,7 +82,7 @@ public class UIJcrExplorerContainer extends UIContainer {
       DriveData drive = dservice.getDriveByName(driveName);
       String userId = Util.getPortalRequestContext().getRemoteUser();
       List<String> userRoles = Utils.getMemberships();
-      if(!uiFEPortlet.canUseConfigDrive(repoName, driveName)) {
+      if(!uiFEPortlet.canUseConfigDrive(driveName)) {
         drive = getAncestorOfType(UIJCRExplorerPortlet.class).getUserDrive("private");
       }
       UIApplication uiApp = getApplicationComponent(UIApplication.class);
@@ -93,7 +91,7 @@ public class UIJcrExplorerContainer extends UIContainer {
         for (String viewName : drive.getViews().split(",")) {
           if (!viewList.contains(viewName.trim())) {
             Node viewNode = getApplicationComponent(ManageViewService.class)
-                .getViewByName(viewName.trim(),SessionProviderFactory.createSystemProvider());
+                .getViewByName(viewName.trim(), WCMCoreUtils.getSystemSessionProvider());
             String permiss = viewNode.getProperty("exo:accessPermissions").getString();
             if (permiss.contains("${userId}")) permiss = permiss.replace("${userId}", userId);
             String[] viewPermissions = permiss.split(",");
@@ -131,9 +129,7 @@ public class UIJcrExplorerContainer extends UIContainer {
       uiJCRExplorer.setDriveData(drive);
       uiJCRExplorer.setIsReferenceNode(false);
 
-      SessionProvider provider = SessionProviderFactory.createSessionProvider();
-      ManageableRepository repository = rservice.getCurrentRepository();
-      Session session = provider.getSession(drive.getWorkspace(),repository);
+      Session session = WCMCoreUtils.getUserSessionProvider().getSession(drive.getWorkspace(), rservice.getCurrentRepository());
       try {
         // we assume that the path is a real path
         session.getItem(homePath);

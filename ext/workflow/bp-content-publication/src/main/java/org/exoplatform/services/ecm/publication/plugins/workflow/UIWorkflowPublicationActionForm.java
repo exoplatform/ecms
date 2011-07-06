@@ -15,22 +15,21 @@ import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 
-import org.exoplatform.services.log.Log;
 import org.exoplatform.download.DownloadService;
 import org.exoplatform.download.InputStreamDownloadResource;
 import org.exoplatform.ecm.webui.form.UIFormInputSetWithAction;
 import org.exoplatform.ecm.webui.selector.UIPermissionSelector;
 import org.exoplatform.ecm.webui.selector.UISelectable;
 import org.exoplatform.ecm.webui.tree.selectone.UIOneNodePathSelector;
-import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.portal.webui.workspace.UIPortalApplication;
 import org.exoplatform.services.ecm.publication.PublicationService;
 import org.exoplatform.services.jcr.RepositoryService;
-import org.exoplatform.services.jcr.config.RepositoryConfigurationException;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.core.NodeLocation;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -41,8 +40,8 @@ import org.exoplatform.webui.core.UIPopupWindow;
 import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.core.model.SelectItemOption;
 import org.exoplatform.webui.event.Event;
-import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.event.Event.Phase;
+import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.form.UIForm;
 import org.exoplatform.webui.form.UIFormSelectBox;
 import org.exoplatform.webui.form.UIFormStringInput;
@@ -270,7 +269,7 @@ public class UIWorkflowPublicationActionForm extends UIForm implements UISelecta
     uiPopup.setShow(true);
   }
 
-  private String getSystemWorkspaceName() throws RepositoryException, RepositoryConfigurationException {
+  private String getSystemWorkspaceName() throws RepositoryException {
     ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
     return manageableRepository.getConfiguration().getSystemWorkspaceName();
   }
@@ -302,12 +301,12 @@ public class UIWorkflowPublicationActionForm extends UIForm implements UISelecta
     uiOneNodePathSelector.setIsDisable(workspace, isDisable) ;
     uiOneNodePathSelector.setShowRootPathSelect(true) ;
     uiOneNodePathSelector.setRootNodeLocation(repository, workspace, "/");
-    if (SessionProviderFactory.isAnonim()) {
-      uiOneNodePathSelector.init(SessionProviderFactory.createAnonimProvider()) ;
+    if (WCMCoreUtils.isAnonim()) {
+      uiOneNodePathSelector.init(WCMCoreUtils.createAnonimProvider()) ;
     } else if (workspace.equals(getSystemWorkspaceName())){
-      uiOneNodePathSelector.init(SessionProviderFactory.createSystemProvider()) ;
+      uiOneNodePathSelector.init(WCMCoreUtils.getSystemSessionProvider()) ;
     } else {
-      uiOneNodePathSelector.init(SessionProviderFactory.createSessionProvider()) ;
+      uiOneNodePathSelector.init(WCMCoreUtils.getUserSessionProvider()) ;
     }
     uiPopup.setUIComponent(uiOneNodePathSelector);
     UIWorkflowPublicationActionForm workflowForm = findFirstComponentOfType(UIWorkflowPublicationActionForm.class);
@@ -377,7 +376,6 @@ public class UIWorkflowPublicationActionForm extends UIForm implements UISelecta
     }
   }
 
-  @SuppressWarnings("unchecked")
   static public class AddPermissionActionListener extends EventListener<UIWorkflowPublicationActionForm> {
     public void execute(Event<UIWorkflowPublicationActionForm> event) throws Exception {
       UIWorkflowPublicationActionForm workflowForm = event.getSource();

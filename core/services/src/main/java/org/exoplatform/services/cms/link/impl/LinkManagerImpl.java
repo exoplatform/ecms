@@ -36,7 +36,6 @@ import javax.jcr.query.QueryResult;
 
 import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
-import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.cms.link.NodeLinkAware;
 import org.exoplatform.services.jcr.RepositoryService;
@@ -49,6 +48,7 @@ import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.security.IdentityConstants;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
  * Created by The eXo Platform SARL
@@ -327,8 +327,8 @@ public class LinkManagerImpl implements LinkManager {
                                              append("'").toString();
 
     for (String workspace : workspaces) {
-      SessionProvider sessionProvider = workspace.equals(systemWS) ? SessionProviderFactory.createSystemProvider()
-                                                                   : SessionProviderFactory.createSessionProvider();
+      SessionProvider sessionProvider = workspace.equals(systemWS) ? WCMCoreUtils.getSystemSessionProvider()
+                                                                   : WCMCoreUtils.getUserSessionProvider();
       Session session = sessionProvider.getSession(workspace, repository);
       QueryManager queryManager = session.getWorkspace().getQueryManager();
       Query query = queryManager.createQuery(queryString, Query.SQL);

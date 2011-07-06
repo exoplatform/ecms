@@ -24,15 +24,15 @@ import javax.jcr.Node;
 import org.exoplatform.ecm.webui.popup.UIPopupComponent;
 import org.exoplatform.ecm.webui.tree.UIBaseNodeTreeSelector;
 import org.exoplatform.ecm.webui.tree.UINodeTreeBuilder;
-import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.services.cms.categories.CategoriesService;
 import org.exoplatform.services.jcr.RepositoryService;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.ComponentConfigs;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIBreadcumbs;
-import org.exoplatform.webui.core.UIPopupWindow;
 import org.exoplatform.webui.core.UIBreadcumbs.LocalPath;
+import org.exoplatform.webui.core.UIPopupWindow;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
 
@@ -71,7 +71,7 @@ public class UICategoriesSelector extends UIBaseNodeTreeSelector implements UIPo
   public void init() throws Exception {
     CategoriesService categoriesService = getApplicationComponent(CategoriesService.class) ;
     RepositoryService repositoryService = getApplicationComponent(RepositoryService.class) ;
-    Node rootCategories = categoriesService.getTaxonomyHomeNode(SessionProviderFactory.createSessionProvider()) ;
+    Node rootCategories = categoriesService.getTaxonomyHomeNode(WCMCoreUtils.getUserSessionProvider()) ;
     Node rootCategoryTree = rootCategories ;
     if (rootCategories != null) pathTaxonomy = rootCategories.getPath() + "/" ;
     UINodeTreeBuilder builder = getChild(UINodeTreeBuilder.class) ;

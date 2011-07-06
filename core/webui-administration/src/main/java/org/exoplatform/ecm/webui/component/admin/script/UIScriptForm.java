@@ -25,10 +25,8 @@ import javax.jcr.PathNotFoundException;
 import javax.jcr.version.VersionHistory;
 
 import org.exoplatform.ecm.jcr.model.VersionNode;
-import org.exoplatform.ecm.webui.component.admin.UIECMAdminPortlet;
 import org.exoplatform.ecm.webui.component.admin.script.UIScriptList.ScriptData;
 import org.exoplatform.ecm.webui.utils.Utils;
-import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.services.cms.scripts.ScriptService;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
@@ -40,8 +38,8 @@ import org.exoplatform.webui.core.UIPopupContainer;
 import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.core.model.SelectItemOption;
 import org.exoplatform.webui.event.Event;
-import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.event.Event.Phase;
+import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.form.UIForm;
 import org.exoplatform.webui.form.UIFormCheckBoxInput;
 import org.exoplatform.webui.form.UIFormSelectBox;
@@ -232,7 +230,7 @@ public class UIScriptForm extends UIForm implements UIPopupComponent {
         try {
           scriptService.addScript(namePrefix + "/" + name,
                                   content,
-                                  SessionProviderFactory.createSessionProvider());
+                                  WCMCoreUtils.getUserSessionProvider());
         } catch(AccessDeniedException ace) {
           uiApp.addMessage(new ApplicationMessage("UIECMAdminControlPanel.msg.access-denied", null,
                                                   ApplicationMessage.WARNING)) ;
@@ -246,7 +244,7 @@ public class UIScriptForm extends UIForm implements UIPopupComponent {
           else node.checkout() ;
           scriptService.addScript(namePrefix + "/" + name,
                                   content,
-                                  SessionProviderFactory.createSessionProvider());
+                                  WCMCoreUtils.getUserSessionProvider());
           node.save() ;
           node.checkin() ;
         } catch (PathNotFoundException pathNotFoundException) {
