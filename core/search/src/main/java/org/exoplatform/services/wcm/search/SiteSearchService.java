@@ -17,6 +17,7 @@
 package org.exoplatform.services.wcm.search;
 
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.wcm.search.base.AbstractPageList;
 
 /**
  * Created by The eXo Platform SAS
@@ -52,7 +53,7 @@ public interface SiteSearchService {
    *
    * @throws Exception the exception
    */
-  public WCMPaginatedQueryResult searchSiteContents(SessionProvider sessionProvider,
+  public AbstractPageList<ResultNode> searchSiteContents(SessionProvider sessionProvider,
                                                     QueryCriteria queryCriteria,
                                                     int pageSize,
                                                     boolean isSearchContent) throws Exception;

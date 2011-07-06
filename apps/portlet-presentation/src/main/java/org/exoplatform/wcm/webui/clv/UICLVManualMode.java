@@ -30,7 +30,10 @@ import org.exoplatform.portal.webui.application.UIPortlet;
 import org.exoplatform.resolver.ResourceResolver;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.publication.WCMComposer;
+import org.exoplatform.services.wcm.search.base.AbstractPageList;
+import org.exoplatform.services.wcm.search.base.PageListFactory;
 import org.exoplatform.wcm.webui.Utils;
+import org.exoplatform.wcm.webui.clv.UICLVContainer.CLVNodeCreator;
 import org.exoplatform.wcm.webui.scv.UISingleContentViewerPortlet;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -79,8 +82,9 @@ public class UICLVManualMode extends UICLVContainer {
       messageKey = "UICLVContainer.msg.non-contents";
     }
     getChildren().clear();
-    ListAccess<Node> nodeList = new ListAccessImpl<Node>(Node.class, nodes);
-    LazyPageList<Node> pageList = new LazyPageList<Node>(nodeList, itemsPerPage);
+    AbstractPageList<NodeLocation> pageList = 
+      PageListFactory.createPageList(nodes, itemsPerPage, null, 
+                                     new CLVNodeCreator());
     ResourceResolver resourceResolver = getTemplateResourceResolver();
     UICLVPresentation clvPresentation = addChild(UICLVPresentation.class, null, null);
     clvPresentation.init(resourceResolver, pageList);

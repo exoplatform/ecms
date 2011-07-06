@@ -73,7 +73,8 @@ public class UIPresentation extends UIBaseNodePresentation {
    * @see org.exoplatform.ecm.webui.presentation.UIBaseNodePresentation#getOriginalNode()
    */
   public Node getOriginalNode() throws Exception {
-    return Utils.getViewableNodeByComposer(originalNodeLocation.getRepository(),
+    return originalNodeLocation == null ? null :
+           Utils.getViewableNodeByComposer(originalNodeLocation.getRepository(),
                                            originalNodeLocation.getWorkspace(),
                                            originalNodeLocation.getPath(),
                                            WCMComposer.BASE_VERSION);
@@ -90,6 +91,7 @@ public class UIPresentation extends UIBaseNodePresentation {
    * @see org.exoplatform.ecm.webui.presentation.UIBaseNodePresentation#getNode()
    */
   public Node getNode() throws Exception {
+    if (viewNodeLocation == null) return null;
     PortletRequestContext portletRequestContext = WebuiRequestContext.getCurrentInstance();
     PortletPreferences preferences = portletRequestContext.getRequest().getPreferences();
     String sharedCache = preferences.getValue(UISingleContentViewerPortlet.ENABLE_CACHE, "true");

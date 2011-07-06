@@ -56,6 +56,7 @@ import org.exoplatform.services.cms.queries.QueryService;
 import org.exoplatform.services.cms.views.ManageViewService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -299,14 +300,13 @@ public class UIActionBar extends UIForm {
       }
       UISearchResult uiSearchResult =
         uiDocumentWorkspace.getChildById(UIDocumentWorkspace.SIMPLE_SEARCH_RESULT);
-      QueryManager queryManager = currentNode.getSession().getWorkspace().getQueryManager();
+      
       long startTime = System.currentTimeMillis();
-      Query query = queryManager.createQuery(queryStatement, Query.SQL);
-      QueryResult queryResult = query.execute();
-      uiSearchResult.clearAll();
-      uiSearchResult.setQueryResults(queryResult);
-      uiSearchResult.updateGrid(true);
+      uiSearchResult.setQuery(queryStatement, currentNode.getSession().getWorkspace().getName(), Query.SQL, 
+                              IdentityConstants.SYSTEM.equals(currentNode.getSession().getUserID()));
+      uiSearchResult.updateGrid();
       long time = System.currentTimeMillis() - startTime;
+      
       uiSearchResult.setSearchTime(time);
       uiDocumentWorkspace.setRenderedChild(UISearchResult.class);
     }

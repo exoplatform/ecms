@@ -37,9 +37,11 @@ import org.exoplatform.services.cms.taxonomy.TaxonomyService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.publication.WCMComposer;
-import org.exoplatform.services.wcm.utils.PaginatedNodeIterator;
+import org.exoplatform.services.wcm.search.base.AbstractPageList;
+import org.exoplatform.services.wcm.search.base.PageListFactory;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.wcm.webui.Utils;
+import org.exoplatform.wcm.webui.clv.UICLVContainer.CLVNodeCreator;
 import org.exoplatform.wcm.webui.pclv.config.UIPCLVConfig;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.application.WebuiRequestContext;
@@ -202,13 +204,16 @@ public class UIPCLVContainer extends UIContainer {
     setCategoryNode(categoryNode);
     this.setListNode(nodes);
     int itemsPerPage = Integer.parseInt(portletPreferences.getValue(UIPCLVPortlet.ITEMS_PER_PAGE, null));
-    PaginatedNodeIterator paginatedNodeIterator = new PaginatedNodeIterator(nodes, itemsPerPage);
+    AbstractPageList<NodeLocation> pageList = 
+      PageListFactory.createPageList(nodes, itemsPerPage, null, 
+                                     new CLVNodeCreator());
+
     getChildren().clear();
 
     UIPCLVForm parameterizedContentListViewer = addChild(UIPCLVForm.class, null, null);
     String templatePath = getFormViewTemplatePath();
     ResourceResolver resourceResolver = getTemplateResourceResolver();
-    parameterizedContentListViewer.init(templatePath, resourceResolver, paginatedNodeIterator);
+    parameterizedContentListViewer.init(templatePath, resourceResolver, pageList);
     parameterizedContentListViewer.setContentColumn(portletPreferences.getValue(UIPCLVPortlet.HEADER, null));
     parameterizedContentListViewer.setShowLink(Boolean.parseBoolean(portletPreferences.getValue(UIPCLVPortlet.SHOW_LINK,
                                                                                                 null)));

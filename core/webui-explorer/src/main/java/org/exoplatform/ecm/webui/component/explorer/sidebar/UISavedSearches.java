@@ -142,12 +142,14 @@ public class UISavedSearches extends UIComponent {
       UIComponent uiSearch = uiWorkingArea.getChild(UIDocumentWorkspace.class);
       UIDrivesArea uiDrivesArea = uiWorkingArea.getChild(UIDrivesArea.class);
       UISearchResult uiSearchResult = ((UIDocumentWorkspace)uiSearch).getChild(UISearchResult.class);
+      Query query = null;
       QueryResult queryResult = null;
       try {
-        queryResult = queryService.execute(queryPath,
-                                           wsName,
-                                           SessionProviderFactory.createSystemProvider(),
-                                           uiSavedSearches.getCurrentUserId());
+        query = queryService.getQuery(queryPath,
+                                       wsName,
+                                       SessionProviderFactory.createSystemProvider(),
+                                       uiSavedSearches.getCurrentUserId());
+        queryResult = query.execute();
       } catch(Exception e) {
         uiApp.addMessage(new ApplicationMessage("UISearchResult.msg.query-invalid", null,
                                                 ApplicationMessage.WARNING));
@@ -158,9 +160,8 @@ public class UISavedSearches extends UIComponent {
           // event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
           // return;
         }
-        uiSearchResult.clearAll();
-        uiSearchResult.setQueryResults(queryResult);
-        uiSearchResult.updateGrid(true);
+        uiSearchResult.setQuery(query.getStatement(), wsName, query.getLanguage(), true);
+        uiSearchResult.updateGrid();
       }   
       if (uiDrivesArea != null) uiDrivesArea.setRendered(false);
       uiWorkingArea.getChild(UIDocumentWorkspace.class).setRendered(true);      

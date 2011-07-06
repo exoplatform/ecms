@@ -59,11 +59,18 @@ import org.exoplatform.services.jcr.impl.core.SessionImpl;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.core.NodeLocation;
+import org.exoplatform.services.wcm.search.base.AbstractPageList;
+import org.exoplatform.services.wcm.search.base.NodeSearchFilter;
+import org.exoplatform.services.wcm.search.base.PageListFactory;
+import org.exoplatform.services.wcm.search.base.QueryData;
+import org.exoplatform.services.wcm.search.base.SearchDataCreator;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.webui.core.UIContainer;
+import org.exoplatform.webui.core.UIPageIterator;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
 
@@ -94,14 +101,10 @@ public class UISearchResult extends UIContainer {
    */
   private static final Log LOG  = ExoLogger.getLogger("explorer.search.UISearchResult");
 
-  private QueryResult queryResult_;
+  private QueryData queryData_;
   private long searchTime_ = 0;
   private boolean flag_ = false;
-  private UIQueryResultPageIterator uiPageIterator_;
-  private List<NodeLocation> currentListNodes_ = new ArrayList<NodeLocation>();
-  private List<RowData> currentListRows_ = new ArrayList<RowData>();
-  private int currentAvailablePage_ = 0;
-  private boolean isEndOfIterator_ = false;
+  private UIPageIterator uiPageIterator_;
   private static String iconType = "";
   private static String iconScore = "";
   static private int PAGE_SIZE = 10;
@@ -111,6 +114,7 @@ public class UISearchResult extends UIContainer {
   private boolean isTaxonomyNode = false;
   private String workspaceName = null;
   private String currentPath = null;
+  private AbstractPageList<RowData> pageList;
 
   public List<String> getCategoryPathList() { return categoryPathList; }
   public void setCategoryPathList(List<String> categoryPathListItem) {
@@ -123,13 +127,13 @@ public class UISearchResult extends UIContainer {
   }
 
   public UISearchResult() throws Exception {
-    uiPageIterator_ = addChild(UIQueryResultPageIterator.class, null, null);
+    uiPageIterator_ = addChild(UIPageIterator.class, null, null);
   }
 
-  public void setQueryResults(QueryResult queryResult) throws Exception {
-    queryResult_ = queryResult;
+  public void setQuery(String queryStatement, String workspaceName, String language, boolean isSystemSession) {
+    queryData_ = new QueryData(queryStatement, workspaceName, language, isSystemSession);
   }
-
+  
   public long getSearchTime() { return searchTime_; }
   public void setSearchTime(long time) { this.searchTime_ = time; }
 
@@ -140,33 +144,6 @@ public class UISearchResult extends UIContainer {
   public DateFormat getSimpleDateFormat() {
     Locale locale = Util.getUIPortal().getAncestorOfType(UIPortalApplication.class).getLocale();
     return SimpleDateFormat.getDateTimeInstance(SimpleDateFormat.SHORT, SimpleDateFormat.SHORT, locale);
-  }
-
-  private void addNode(List<Node> listNodes, Node node, List<RowData> listRows, Row r) throws Exception {
-    List<Node> checkList = new ArrayList<Node>();
-    if (flag_) {
-      if (node.getName().equals(Utils.JCR_CONTENT)) {
-        if (!currentListNodes_.contains(NodeLocation.getNodeLocationByNode(node.getParent()))) {
-          listNodes.add(node.getParent());
-          listRows.add(new RowData(r));
-        }
-      } else if (!currentListNodes_.contains(NodeLocation.getNodeLocationByNode(node))) {
-        listNodes.add(node);
-        listRows.add(new RowData(r));
-      }
-    }
-    else {
-      checkList = listNodes;
-      if (node.getName().equals(Utils.JCR_CONTENT)) {
-        if (!checkList.contains(node.getParent())) {
-          listNodes.add(node.getParent());
-          listRows.add(new RowData(r));
-        }
-      } else if (!checkList.contains(node)) {
-        listNodes.add(node);
-        listRows.add(new RowData(r));
-      }
-    }
   }
 
   public Session getSession() throws Exception {
@@ -189,95 +166,7 @@ public class UISearchResult extends UIContainer {
     }
   }
 
-  public List<RowData> getResultList() throws Exception {
-    TaxonomyService taxonomyService = getApplicationComponent(TaxonomyService.class);
-    NodeHierarchyCreator nodeHierarchyCreator = getApplicationComponent(NodeHierarchyCreator.class);
-    String rootTreePath = nodeHierarchyCreator.getJcrPath(BasePath.TAXONOMIES_TREE_STORAGE_PATH);
-    List<Node> listNodes = new ArrayList<Node>();
-    List<RowData> listRows = new ArrayList<RowData>();
-    Node resultNode = null;
-    if (queryResult_ == null) return new ArrayList<RowData>();
-    long resultListSize = queryResult_.getNodes().getSize();
-    if (!queryResult_.getRows().hasNext()) return currentListRows_;
-    if (resultListSize > 100) {
-      for (RowIterator iter = queryResult_.getRows(); iter.hasNext();) {
-        Row r = iter.nextRow();
-        String path = r.getValue("jcr:path").getString();
-        try {
-          resultNode = getNodeByPath(path);
-        } catch (Exception e) {
-          LOG.warn("Can't get node by path " + path, e);
-          continue;
-        }
-        if (resultNode != null) {
-          if ((categoryPathList != null) && (categoryPathList.size() > 0)){
-            for (String categoryPath : categoryPathList) {
-              int index = categoryPath.indexOf("/");
-              List<String> pathCategoriesList = new ArrayList<String>();
-              String searchCategory = rootTreePath + "/" + categoryPath;
-              List<Node> listCategories = taxonomyService.getCategories(resultNode, categoryPath.substring(0, index));
-              for (Node category : listCategories) {
-                pathCategoriesList.add(category.getPath());
-              }
-              if (pathCategoriesList.contains(searchCategory)) addNode(listNodes, resultNode, listRows, r);
-            }
-          } else {
-            addNode(listNodes, resultNode, listRows, r);
-          }
-        }
-        if (!iter.hasNext()) isEndOfIterator_ = true;
-        if (listNodes.size() == 100) {
-          currentListNodes_.addAll(NodeLocation.getLocationsByNodeList(listNodes));
-          currentListRows_.addAll(listRows);
-          break;
-        }
-        if (listNodes.size() < 100 && iter.hasNext()) {
-          currentListNodes_.addAll(NodeLocation.getLocationsByNodeList(listNodes));
-          currentListRows_.addAll(listRows);
-          flag_ = true;
-        }
-      }
-    } else {
-      for (RowIterator iter = queryResult_.getRows(); iter.hasNext();) {
-        Row r = iter.nextRow();
-        if (!iter.hasNext()) isEndOfIterator_ = true;
-        String path = r.getValue("jcr:path").getString();
-        try {
-          resultNode = getNodeByPath(path);
-        } catch (Exception e) {
-          LOG.warn("Can't get node by path " + path, e);
-          continue;
-        }
-        if (resultNode != null) {
-          if ((categoryPathList != null) && (categoryPathList.size() > 0)){
-            for (String categoryPath : categoryPathList) {
-              int index = categoryPath.indexOf("/");
-              List<String> pathCategoriesList = new ArrayList<String>();
-              String searchCategory = rootTreePath + "/" + categoryPath;
-              List<Node> listCategories = taxonomyService.getCategories(resultNode, categoryPath.substring(0, index));
-              for (Node category : listCategories) {
-                pathCategoriesList.add(category.getPath());
-              }
-              if (pathCategoriesList.contains(searchCategory)) addNode(listNodes, resultNode, listRows, r);
-            }
-          } else {
-            addNode(listNodes, resultNode, listRows, r);
-          }
-        }
-      }
-      currentListNodes_= NodeLocation.getLocationsByNodeList(listNodes);
-      currentListRows_ = listRows;
-    }
-    return currentListRows_;
-  }
-
-  public void clearAll() {
-    flag_ = false;
-    isEndOfIterator_ = false;
-    currentListNodes_.clear();
-  }
-
-  public UIQueryResultPageIterator getUIPageIterator() { return uiPageIterator_; }
+  public UIPageIterator getUIPageIterator() { return uiPageIterator_; }
 
   public void setTaxonomyNode(boolean isTaxonomyNode, String workspaceName, String currentPath) {
     this.isTaxonomyNode = isTaxonomyNode;
@@ -301,32 +190,43 @@ public class UISearchResult extends UIContainer {
     return null;
   }
 
-  public void updateGrid(boolean flagCheck) throws Exception {
-    SearchResultPageList pageList;
-    if (flagCheck) {
-      pageList = new SearchResultPageList(queryResult_, getResultList(), PAGE_SIZE, isEndOfIterator_);
-    } else {
-      pageList = new SearchResultPageList(queryResult_, currentListRows_, PAGE_SIZE, isEndOfIterator_);
-    }
-    currentAvailablePage_ = currentListNodes_.size()/PAGE_SIZE;
-    uiPageIterator_.setSearchResultPageList(pageList);
+  public void updateGrid() throws Exception {
+     pageList = 
+      PageListFactory.createPageList(queryData_.getQueryStatement(), 
+                             queryData_.getWorkSpace(),
+                             queryData_.getLanguage_(), 
+                             queryData_.isSystemSession(), 
+                             new NodeFilter(categoryPathList), 
+                             new RowDataCreator(),
+                             PAGE_SIZE,
+                             0);
     uiPageIterator_.setPageList(pageList);
   }
 
-  public int getCurrentAvaiablePage() { return currentAvailablePage_; }
-
   private static class SearchComparator implements Comparator<RowData> {
+    
+    public static final String SORT_TYPE = "NODE_TYPE";
+    public static final String SORT_SCORE = "JCR_SCORE";
+    public static final String ASC = "ASC";
+    public static final String DESC = "DECS";
+    
+    private String sortType;
+    private String orderType;
+    
+    public void setSortType(String value) { sortType = value; }
+    public void setOrderType(String value) { orderType = value; }
+    
     public int compare(RowData row1, RowData row2) {
       try {
-        if (iconType.equals("BlueUpArrow") || iconType.equals("BlueDownArrow")) {
+        if (SORT_TYPE.equals(sortType.trim())) {
           String s1 = row1.getJcrPrimaryType();
           String s2 = row2.getJcrPrimaryType();
-          if (iconType.trim().equals("BlueUpArrow")) { return s2.compareTo(s1); }
+          if (DESC.equals(orderType.trim())) { return s2.compareTo(s1); }
           return s1.compareTo(s2);
-        } else if (iconScore.equals("BlueUpArrow") || iconScore.equals("BlueDownArrow")) {
+        } else if (SORT_SCORE.equals(sortType.trim())) {
           Long l1 = row1.getJcrScore();
           Long l2 = row2.getJcrScore();
-          if (iconScore.trim().equals("BlueUpArrow")) { return l2.compareTo(l1); }
+          if (DESC.equals(orderType.trim())) { return l2.compareTo(l1); }
           return l1.compareTo(l2);
         }
       } catch (Exception e) {
@@ -402,7 +302,6 @@ public class UISearchResult extends UIContainer {
     }
   }
 
-
   static public class OpenFolderActionListener extends EventListener<UISearchResult> {
     public void execute(Event<UISearchResult> event) throws Exception {
       UISearchResult uiSearchResult = event.getSource();
@@ -431,19 +330,28 @@ public class UISearchResult extends UIContainer {
     public void execute(Event<UISearchResult> event) throws Exception {
       UISearchResult uiSearchResult = event.getSource();
       String objectId = event.getRequestContext().getRequestParameter(OBJECTID);
+      SearchComparator comparator = new SearchComparator();
       if (objectId.equals("type")) {
+        uiSearchResult.pageList.setSortByField(Utils.JCR_PRIMARYTYPE);
+        comparator.setSortType(SearchComparator.SORT_TYPE);
         iconType = "BlueDownArrow";
         iconScore = "";
       } else if (objectId.equals("score")) {
+        uiSearchResult.pageList.setSortByField(Utils.JCR_SCORE);
+        comparator.setSortType(SearchComparator.SORT_SCORE);
         iconScore = "BlueDownArrow";
         iconType = "";
       }
-      Collections.sort(uiSearchResult.currentListRows_, new SearchComparator());
-      SearchResultPageList pageList = new SearchResultPageList(uiSearchResult.queryResult_,
-          uiSearchResult.currentListRows_, PAGE_SIZE, uiSearchResult.isEndOfIterator_);
-      uiSearchResult.currentAvailablePage_ = uiSearchResult.currentListNodes_.size()/PAGE_SIZE;
-      uiSearchResult.uiPageIterator_.setSearchResultPageList(pageList);
-      uiSearchResult.uiPageIterator_.setPageList(pageList);
+      comparator.setOrderType(SearchComparator.ASC);
+      uiSearchResult.pageList.setComparator(comparator);
+      uiSearchResult.pageList.setOrder("ASC");
+      uiSearchResult.pageList.sortData();
+//      Collections.sort(uiSearchResult.currentListRows_, new SearchComparator());
+//      SearchResultPageList pageList = new SearchResultPageList(uiSearchResult.queryResult_,
+//          uiSearchResult.currentListRows_, PAGE_SIZE, uiSearchResult.isEndOfIterator_);
+//      uiSearchResult.currentAvailablePage_ = uiSearchResult.currentListNodes_.size()/PAGE_SIZE;
+//      uiSearchResult.uiPageIterator_.setSearchResultPageList(pageList);
+//      uiSearchResult.uiPageIterator_.setPageList(pageList);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiSearchResult.getParent());
     }
   }
@@ -452,21 +360,79 @@ public class UISearchResult extends UIContainer {
     public void execute(Event<UISearchResult> event) throws Exception {
       UISearchResult uiSearchResult = event.getSource() ;
       String objectId = event.getRequestContext().getRequestParameter(OBJECTID);
+      SearchComparator comparator = new SearchComparator();
       if (objectId.equals("type")) {
+        uiSearchResult.pageList.setSortByField(Utils.JCR_PRIMARYTYPE);
+        comparator.setSortType(SearchComparator.SORT_TYPE);
         iconType = "BlueUpArrow";
         iconScore = "";
       } else if (objectId.equals("score")) {
+        uiSearchResult.pageList.setSortByField(Utils.JCR_SCORE);        
+        comparator.setSortType(SearchComparator.SORT_SCORE);
         iconScore = "BlueUpArrow";
         iconType = "";
       }
-      Collections.sort(uiSearchResult.currentListRows_, new SearchComparator());
-      SearchResultPageList pageList = new SearchResultPageList(uiSearchResult.queryResult_,
-          uiSearchResult.currentListRows_, PAGE_SIZE, uiSearchResult.isEndOfIterator_);
-      uiSearchResult.currentAvailablePage_ = uiSearchResult.currentListNodes_.size()/PAGE_SIZE;
-      uiSearchResult.uiPageIterator_.setSearchResultPageList(pageList);
-      uiSearchResult.uiPageIterator_.setPageList(pageList);
+      comparator.setOrderType(SearchComparator.DESC);
+      uiSearchResult.pageList.setComparator(comparator);
+      uiSearchResult.pageList.setOrder("DESC");
+      uiSearchResult.pageList.sortData();
+//      Collections.sort(uiSearchResult.currentListRows_, new SearchComparator());
+//      SearchResultPageList pageList = new SearchResultPageList(uiSearchResult.queryResult_,
+//          uiSearchResult.currentListRows_, PAGE_SIZE, uiSearchResult.isEndOfIterator_);
+//      uiSearchResult.currentAvailablePage_ = uiSearchResult.currentListNodes_.size()/PAGE_SIZE;
+//      uiSearchResult.uiPageIterator_.setSearchResultPageList(pageList);
+//      uiSearchResult.uiPageIterator_.setPageList(pageList);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiSearchResult.getParent());
     }
+  }
+  
+  public static class NodeFilter implements NodeSearchFilter {
+
+    private List<String> categoryPathList; 
+    private TaxonomyService taxonomyService;
+    private NodeHierarchyCreator nodeHierarchyCreator;
+    private String rootTreePath;
+    
+    public NodeFilter(List<String> categories) {
+      taxonomyService = WCMCoreUtils.getService(TaxonomyService.class);
+      nodeHierarchyCreator = WCMCoreUtils.getService(NodeHierarchyCreator.class);
+      rootTreePath = nodeHierarchyCreator.getJcrPath(BasePath.TAXONOMIES_TREE_STORAGE_PATH);
+      categoryPathList = categories;
+    }
+    
+    @Override
+    public Node filterNodeToDisplay(Node node) {
+      try {
+        if (node != null) {
+          if ((categoryPathList != null) && (categoryPathList.size() > 0)){
+            for (String categoryPath : categoryPathList) {
+              int index = categoryPath.indexOf("/");
+              List<String> pathCategoriesList = new ArrayList<String>();
+              String searchCategory = rootTreePath + "/" + categoryPath;
+              List<Node> listCategories = taxonomyService.getCategories(node, categoryPath.substring(0, index));
+              for (Node category : listCategories) {
+                pathCategoriesList.add(category.getPath());
+              }
+              if (pathCategoriesList.contains(searchCategory)) 
+                return node;
+            }
+          } else {
+            return node;
+          }
+        }
+      } catch (RepositoryException e) {}
+      return null;
+    }
+    
+  }
+  
+  public static class RowDataCreator implements SearchDataCreator<RowData> {
+
+    @Override
+    public RowData createData(Node node, Row row) {
+      return new RowData(row);
+    }
+    
   }
   
   public static class RowData {
@@ -520,6 +486,23 @@ public class UISearchResult extends UIContainer {
     
     public void setJcrPrimaryType(String value) {
       jcrPrimaryType = value;
+    }
+    
+    public int hashCode() {
+      return (jcrPath == null ? 0 : jcrPath.hashCode()) + 
+             (repExcerpt == null ? 0 : repExcerpt.hashCode()) + 
+             (int)jcrScore + 
+             (jcrPrimaryType == null ? 0 : jcrPrimaryType.hashCode());
+    }
+    
+    public boolean equals(Object o) {
+      if (o == null) return false;
+      if (! (o instanceof RowData)) return false;
+      RowData data = (RowData) o;
+      return (jcrPath == null && data.jcrPath == null || jcrPath.equals(data.jcrPath)) &&
+             (repExcerpt == null && data.repExcerpt == null || repExcerpt.equals(data.repExcerpt)) &&
+             (jcrScore == data.jcrScore) &&
+             (jcrPrimaryType == null && data.jcrPrimaryType == null || jcrPrimaryType.equals(data.jcrPrimaryType));
     }
   }
 }

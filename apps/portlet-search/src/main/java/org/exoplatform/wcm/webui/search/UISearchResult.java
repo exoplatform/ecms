@@ -34,8 +34,9 @@ import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.resolver.ResourceResolver;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.wcm.search.QueryCriteria;
+import org.exoplatform.services.wcm.search.ResultNode;
 import org.exoplatform.services.wcm.search.SiteSearchService;
-import org.exoplatform.services.wcm.search.WCMPaginatedQueryResult;
+import org.exoplatform.services.wcm.search.base.AbstractPageList;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.wcm.webui.Utils;
 import org.exoplatform.wcm.webui.paginator.UICustomizeablePaginator;
@@ -167,15 +168,16 @@ public class UISearchResult extends UIContainer {
       int itemsPerPage = Integer.parseInt(portletPreferences.getValue(UIWCMSearchPortlet.ITEMS_PER_PAGE,
                                                                       null));
       try {
-        WCMPaginatedQueryResult paginatedQueryResult = siteSearchService.searchSiteContents(
-
-        Utils.getSessionProvider(), queryCriteria, itemsPerPage, false);
-        setSearchTime(paginatedQueryResult.getQueryTimeInSecond());
-        setSuggestion(paginatedQueryResult.getSpellSuggestion());
+        AbstractPageList<ResultNode> pageList = 
+          siteSearchService.searchSiteContents(WCMCoreUtils.getUserSessionProvider(), 
+                                               queryCriteria, itemsPerPage, false);
+        
+        setSearchTime(pageList.getQueryTime() / 1000);
+        setSuggestion(pageList.getSpellSuggestion());
         String suggestionURL = Util.getPortalRequestContext().getRequestURI();
         suggestionURL += "?portal=" + portal + "&keyword=" + getSuggestion();
         setSuggestionURL(suggestionURL);
-        setPageList(paginatedQueryResult);
+        setPageList(pageList);
         searchForm.setSubmitAction(suggestionURL);
       } catch (Exception e) {
         UIApplication uiApp = getAncestorOfType(UIApplication.class);

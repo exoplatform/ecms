@@ -306,7 +306,7 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
     super.renderField(name);
   }
 
-  private List<String> getAddedListCategory(List<String> taxonomyList, List<String> existingList) {
+  private synchronized List<String> getAddedListCategory(List<String> taxonomyList, List<String> existingList) {
     List<String> addedList = new ArrayList<String>();
     for(String addedCategory : taxonomyList) {
       if(!existingList.contains(addedCategory)) addedList.add(addedCategory);
@@ -314,7 +314,7 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
     return addedList;
   }
 
-  private List<String> getRemovedListCategory(List<String> taxonomyList, List<String> existingList) {
+  private synchronized List<String> getRemovedListCategory(List<String> taxonomyList, List<String> existingList) {
     List<String> removedList = new ArrayList<String>();
     for(String existedCategory : existingList) {
       if(!taxonomyList.contains(existedCategory)) removedList.add(existedCategory);

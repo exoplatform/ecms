@@ -31,6 +31,7 @@ import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.form.UIFormInputSetWithAction;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.web.application.RequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -270,7 +271,6 @@ public class UISimpleSearch extends UIForm {
       String text = uiSimpleSearch.getUIStringInput(INPUT_SEARCH).getValue();
       UIJCRExplorer uiExplorer = uiSimpleSearch.getAncestorOfType(UIJCRExplorer.class);
       Node currentNode = uiExplorer.getCurrentNode();
-      QueryManager queryManager = currentNode.getSession().getWorkspace().getQueryManager();
       UIECMSearch uiECMSearch = uiSimpleSearch.getAncestorOfType(UIECMSearch.class);
       UISearchResult uiSearchResult = uiECMSearch.getChild(UISearchResult.class);
       UIApplication uiApp = uiSimpleSearch.getAncestorOfType(UIApplication.class);
@@ -318,15 +318,10 @@ public class UISimpleSearch extends UIForm {
       }
       long startTime = System.currentTimeMillis();
       try {
-        Query query;
-        if (queryType.equals(Preference.XPATH_QUERY))
-          query = queryManager.createQuery(statement, Query.XPATH);
-        else
-          query = queryManager.createQuery(statement, Query.SQL);
-        QueryResult queryResult = query.execute();
-        uiSearchResult.clearAll();
-        uiSearchResult.setQueryResults(queryResult);
-        uiSearchResult.updateGrid(true);
+        uiSearchResult.setQuery(statement, currentNode.getSession().getWorkspace().getName(), 
+                                queryType.equals(Preference.XPATH_QUERY) ? Query.XPATH : Query.SQL, 
+                                IdentityConstants.SYSTEM.equals(currentNode.getSession().getUserID()));
+        uiSearchResult.updateGrid();
       } catch(Exception e) {
         LOG.error("Unexpected error", e);
         uiApp.addMessage(new ApplicationMessage("UISimpleSearch.msg.query-invalid", null,

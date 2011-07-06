@@ -384,5 +384,24 @@ public interface QueryService {
    * @see QueryPlugin
    * @throws Exception
    */
-  public void init() throws Exception;  
+  public void init() throws Exception;
+
+  /**
+   * Returns Query object by giving the following params : queryPath, workspace,
+   * provider, userId
+   *
+   * @param queryPath String The path of query
+   * @param workspace String The name of workspace
+   * @param provider SessionProvider
+   * @param userId String The id of current user
+   * @return queries QueryResult
+   * @see QueryResult
+   * @see SessionProvider
+   * @throws Exception
+   */  
+  public Query getQuery(String queryPath,
+                         String workspace,
+                         SessionProvider provider,
+                         String userId) throws Exception;
+
 }

@@ -17,9 +17,11 @@
 package org.exoplatform.services.wcm.search;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArraySet;
 
+import javax.jcr.Node;
 import javax.jcr.Session;
 import javax.jcr.Value;
 import javax.jcr.nodetype.NodeType;
@@ -27,21 +29,29 @@ import javax.jcr.nodetype.NodeTypeIterator;
 import javax.jcr.nodetype.NodeTypeManager;
 import javax.jcr.query.Query;
 import javax.jcr.query.QueryManager;
-import javax.jcr.query.QueryResult;
+import javax.jcr.query.Row;
 import javax.jcr.query.RowIterator;
 
+import org.apache.commons.lang.ArrayUtils;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.core.WCMConfigurationService;
 import org.exoplatform.services.wcm.portal.LivePortalManagerService;
+import org.exoplatform.services.wcm.publication.WCMComposer;
 import org.exoplatform.services.wcm.search.QueryCriteria.DATE_RANGE_SELECTED;
 import org.exoplatform.services.wcm.search.QueryCriteria.DatetimeRange;
 import org.exoplatform.services.wcm.search.QueryCriteria.QueryProperty;
+import org.exoplatform.services.wcm.search.base.AbstractPageList;
+import org.exoplatform.services.wcm.search.base.NodeSearchFilter;
+import org.exoplatform.services.wcm.search.base.PageListFactory;
+import org.exoplatform.services.wcm.search.base.SearchDataCreator;
 import org.exoplatform.services.wcm.utils.SQLQueryBuilder;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.services.wcm.utils.AbstractQueryBuilder.LOGICAL;
 import org.exoplatform.services.wcm.utils.AbstractQueryBuilder.ORDERBY;
 import org.exoplatform.services.wcm.utils.AbstractQueryBuilder.PATH_TYPE;
@@ -119,7 +129,7 @@ public class SiteSearchServiceImpl implements SiteSearchService {
    * (org.exoplatform.services.wcm.search.QueryCriteria,
    * org.exoplatform.services.jcr.ext.common.SessionProvider, int)
    */
-  public WCMPaginatedQueryResult searchSiteContents(SessionProvider sessionProvider,
+  public AbstractPageList<ResultNode> searchSiteContents(SessionProvider sessionProvider,
                                                     QueryCriteria queryCriteria,
                                                     int pageSize,
                                                     boolean isSearchContent) throws Exception {
@@ -128,24 +138,23 @@ public class SiteSearchServiceImpl implements SiteSearchService {
     Session session = sessionProvider.getSession(location.getWorkspace(),currentRepository);
     QueryManager queryManager = session.getWorkspace().getQueryManager();
     long startTime = System.currentTimeMillis();
-    QueryResult queryResult = searchSiteContent(queryCriteria, queryManager);
+    Query query = createQuery(queryCriteria, queryManager);
     String suggestion = getSpellSuggestion(queryCriteria.getKeyword(),currentRepository);
+    
+    AbstractPageList<ResultNode> pageList = 
+      PageListFactory.createPageList(query.getStatement(), 
+                                     session.getWorkspace().getName(), 
+                                     query.getLanguage(), 
+                                     IdentityConstants.SYSTEM.equals(session.getUserID()), 
+                                     new NodeFilter(isSearchContent, queryCriteria), 
+                                     new DataCreator(),
+                                     pageSize,
+                                     0);
+    
     long queryTime = System.currentTimeMillis() - startTime;
-    WCMPaginatedQueryResult paginatedQueryResult = null;
-    if (queryResult.getNodes().getSize() > 250) {
-      paginatedQueryResult = new WCMPaginatedQueryResult(queryResult,
-                                                         queryCriteria,
-                                                         pageSize,
-                                                         isSearchContent);
-    } else {
-      paginatedQueryResult = new SmallPaginatedQueryResult(queryResult,
-                                                           queryCriteria,
-                                                           pageSize,
-                                                           isSearchContent);
-    }
-    paginatedQueryResult.setQueryTime(queryTime);
-    paginatedQueryResult.setSpellSuggestion(suggestion);
-    return paginatedQueryResult;
+    pageList.setQueryTime(queryTime);
+    pageList.setSpellSuggestion(suggestion);
+    return pageList;
   }
 
   /**
@@ -191,7 +200,7 @@ public class SiteSearchServiceImpl implements SiteSearchService {
    *
    * @throws Exception the exception
    */
-  private QueryResult searchSiteContent(QueryCriteria queryCriteria, QueryManager queryManager) throws Exception {
+  private Query createQuery(QueryCriteria queryCriteria, QueryManager queryManager) throws Exception {
     SQLQueryBuilder queryBuilder = new SQLQueryBuilder();
     mapQueryTypes(queryCriteria, queryBuilder);
     if (queryCriteria.isFulltextSearch()) {
@@ -206,7 +215,7 @@ public class SiteSearchServiceImpl implements SiteSearchService {
     orderBy(queryCriteria, queryBuilder);
     String queryStatement = queryBuilder.createQueryStatement();
     Query query = queryManager.createQuery(queryStatement, Query.SQL);
-    return query.execute();
+    return query;
   }
 
   /**
@@ -466,5 +475,93 @@ public class SiteSearchServiceImpl implements SiteSearchService {
    */
   private void orderBy(final QueryCriteria queryCriteria, final SQLQueryBuilder queryBuilder) {
     queryBuilder.orderBy("jcr:score", ORDERBY.DESC);
+  }
+  
+  public static class NodeFilter implements NodeSearchFilter {
+
+    private boolean isSearchContent;
+    private QueryCriteria queryCriteria;
+    
+    public NodeFilter(boolean isSearchContent, QueryCriteria queryCriteria) {
+      this.isSearchContent = isSearchContent;
+      this.queryCriteria = queryCriteria;
+    }
+    
+    @Override
+    public Node filterNodeToDisplay(Node node) {
+      try {
+        Node displayNode = getNodeToCheckState(node);
+        if(displayNode == null) return null;
+        if (isSearchContent) return displayNode;
+        NodeLocation nodeLocation = NodeLocation.getNodeLocationByNode(displayNode);
+        WCMComposer wcmComposer = WCMCoreUtils.getService(WCMComposer.class);
+        HashMap<String, String> filters = new HashMap<String, String>();
+        filters.put(WCMComposer.FILTER_MODE, WCMComposer.MODE_LIVE);
+        return wcmComposer.getContent(nodeLocation.getRepository(),
+                                      nodeLocation.getWorkspace(),
+                                      nodeLocation.getPath(),
+                                      filters,
+                                      WCMCoreUtils.getSystemSessionProvider());
+      } catch (Exception e) {
+        return null;
+      }
+    }
+    
+    protected Node getNodeToCheckState(Node node)throws Exception{
+      Node displayNode = node;
+      if (node.getPath().contains("web contents/site artifacts")) {
+        return null;
+      }
+      if (displayNode.isNodeType("nt:resource")) {
+        displayNode = node.getParent();
+      }
+      if (displayNode.isNodeType("exo:htmlFile")) {
+        Node parent = displayNode.getParent();
+        if (queryCriteria.isSearchWebContent()) {
+          if (parent.isNodeType("exo:webContent")) return parent;
+          return null;
+        }
+        if (parent.isNodeType("exo:webContent")) return null;
+        return displayNode;
+      }
+      /*
+      if(queryCriteria.isSearchWebContent()) {
+        if(!queryCriteria.isSearchDocument()) {
+          if(!displayNode.isNodeType("exo:webContent"))
+            return null;
+        }
+        if(queryCriteria.isSearchWebpage()) {
+          if (!displayNode.isNodeType("publication:webpagesPublication"))
+            return null;
+        }
+      } else if(queryCriteria.isSearchWebpage()) {
+          if (queryCriteria.isSearchDocument()) {
+            return displayNode;
+          } else if (!displayNode.isNodeType("publication:webpagesPublication"))
+            return null;
+      }
+      */
+      String[] contentTypes = queryCriteria.getContentTypes();
+      if(contentTypes != null && contentTypes.length>0) {
+        String primaryNodeType = displayNode.getPrimaryNodeType().getName();
+        if(!ArrayUtils.contains(contentTypes,primaryNodeType))
+          return null;
+      }
+      return displayNode;
+    }
+    
+  }
+  
+  public static class DataCreator implements SearchDataCreator<ResultNode> {
+
+    @Override
+    public ResultNode createData(Node node, Row row) {
+      try {
+        return new ResultNode(node, row);
+      } catch (Exception e) {
+        return null;
+      }
+    }
+    
   }
 }

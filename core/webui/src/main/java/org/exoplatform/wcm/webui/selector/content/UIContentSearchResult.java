@@ -17,7 +17,9 @@ import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.core.WCMConfigurationService;
 import org.exoplatform.services.wcm.publication.WCMComposer;
-import org.exoplatform.services.wcm.search.PaginatedQueryResult;
+import org.exoplatform.services.wcm.search.ResultNode;
+import org.exoplatform.services.wcm.search.base.AbstractPageList;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.wcm.webui.Utils;
 import org.exoplatform.wcm.webui.viewer.UIContentViewer;
 import org.exoplatform.webui.application.WebuiRequestContext;
@@ -96,8 +98,8 @@ public class UIContentSearchResult extends UIGrid {
    *
    * @throws Exception the exception
    */
-  public void updateGrid(PaginatedQueryResult paginatedResult) throws Exception {
-    getUIPageIterator().setPageList(paginatedResult);
+  public void updateGrid(AbstractPageList<ResultNode> pageList) throws Exception {
+    getUIPageIterator().setPageList(pageList);
   }
 
 
@@ -178,7 +180,7 @@ public class UIContentSearchResult extends UIGrid {
       NodeLocation nodeLocation = wcmConfService.getLivePortalsLocation(repository);
       workspace = nodeLocation.getWorkspace();
     }
-    Session session = Utils.getSessionProvider().getSession(workspace, maRepository);
+    Session session = WCMCoreUtils.getUserSessionProvider().getSession(workspace, maRepository);
     return session;
   }
 

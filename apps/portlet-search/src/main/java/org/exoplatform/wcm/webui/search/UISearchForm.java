@@ -24,8 +24,9 @@ import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.resolver.ResourceResolver;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.wcm.search.QueryCriteria;
+import org.exoplatform.services.wcm.search.ResultNode;
 import org.exoplatform.services.wcm.search.SiteSearchService;
-import org.exoplatform.services.wcm.search.WCMPaginatedQueryResult;
+import org.exoplatform.services.wcm.search.base.AbstractPageList;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.wcm.webui.Utils;
 import org.exoplatform.web.application.ApplicationMessage;
@@ -251,13 +252,14 @@ public class UISearchForm extends UIForm {
       int itemsPerPage = Integer.parseInt(portletPreferences.getValue(UIWCMSearchPortlet.ITEMS_PER_PAGE,
                                                                       null));
       try {
-        WCMPaginatedQueryResult paginatedQueryResult = siteSearchService.searchSiteContents(Utils.getSessionProvider(),
-                                                                                            queryCriteria,
-                                                                                            itemsPerPage,
-                                                                                            false);
+
+        AbstractPageList<ResultNode> pageList = 
+          siteSearchService.searchSiteContents(WCMCoreUtils.getUserSessionProvider(), 
+                                               queryCriteria, itemsPerPage, false);
+        
         uiSearchResult.setKeyword(keyword);
-        uiSearchResult.setPageList(paginatedQueryResult);
-        float timeSearch = paginatedQueryResult.getQueryTimeInSecond();
+        uiSearchResult.setPageList(pageList);
+        float timeSearch = pageList.getQueryTime() / 1000;
         uiSearchResult.setSearchTime(timeSearch);
         String suggestionURL = Util.getPortalRequestContext().getRequestURI();
         suggestionURL += "?portal=" + selectedPortal + "&keyword=" + keyword;

@@ -79,11 +79,6 @@ public class WCMCoreUtils {
     return sessionProvider;
   }
 
-
-
-
-
-
   /**
    * Gets the service.
    *

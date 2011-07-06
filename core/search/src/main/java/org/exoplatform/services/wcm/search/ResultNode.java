@@ -728,4 +728,10 @@ public class ResultNode implements Node{
     }
     return false;
   }
+  
+  @Override
+  public int hashCode() {
+    return nodeLocation.hashCode() + (int)score +
+           (excerpt == null ? 0 : excerpt.hashCode());
+  }
 }

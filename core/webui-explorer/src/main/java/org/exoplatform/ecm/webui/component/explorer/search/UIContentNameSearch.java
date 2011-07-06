@@ -23,6 +23,7 @@ import javax.jcr.query.QueryResult;
 import org.apache.commons.lang.StringUtils;
 import org.exoplatform.ecm.jcr.SearchValidator;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
+import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -103,21 +104,17 @@ public class UIContentNameSearch extends UIForm {
           statement = StringUtils.replace(PATH_SQL_QUERY,"$0",currentNodePath);
           statement = StringUtils.replace(statement,"$1",keyword);
         }
-        QueryManager queryManager = explorer.getTargetSession().getWorkspace().getQueryManager();
-        Query query = queryManager.createQuery(statement,Query.SQL);
         long startTime = System.currentTimeMillis();
-        QueryResult queryResult = query.execute();
-        uiSearchResult.clearAll();
-        uiSearchResult.setQueryResults(queryResult);
-        uiSearchResult.updateGrid(true);
+        uiSearchResult.setQuery(statement, explorer.getTargetSession().getWorkspace().getName(), Query.SQL, 
+                                IdentityConstants.SYSTEM.equals(explorer.getTargetSession()));
+        uiSearchResult.updateGrid();
         long time = System.currentTimeMillis() - startTime;
         uiSearchResult.setSearchTime(time);
         uiECMSearch.setRenderedChild(UISearchResult.class);
         contentNameSearch.getUIFormInputInfo(SEARCH_LOCATION).setValue(currentNodePath);
       } catch (Exception e) {
-        uiSearchResult.clearAll();
-        uiSearchResult.setQueryResults(null);
-        uiSearchResult.updateGrid(true);
+        uiSearchResult.setQuery(null, null, null, false);
+        uiSearchResult.updateGrid();
         uiECMSearch.setRenderedChild(UISearchResult.class);
       }
     }

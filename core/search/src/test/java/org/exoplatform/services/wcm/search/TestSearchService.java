@@ -36,6 +36,7 @@ import org.exoplatform.services.wcm.publication.WCMPublicationService;
 import org.exoplatform.services.wcm.publication.WebpagePublicationPlugin;
 import org.exoplatform.services.wcm.search.QueryCriteria.DatetimeRange;
 import org.exoplatform.services.wcm.search.QueryCriteria.QueryProperty;
+import org.exoplatform.services.wcm.search.base.AbstractPageList;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
@@ -157,8 +158,9 @@ public class TestSearchService extends BaseWCMTestCase {
     pomSession.close();
   }
 
-  private WCMPaginatedQueryResult getSearchResult() throws Exception{
-    return siteSearchService.searchSiteContents(WCMCoreUtils.getSystemSessionProvider(), queryCriteria, seachItemsPerPage, false);
+  private AbstractPageList<ResultNode> getSearchResult() throws Exception{
+    return siteSearchService.searchSiteContents(WCMCoreUtils.getSystemSessionProvider(), 
+                                                queryCriteria, seachItemsPerPage, false);
   }
 
   /**
@@ -172,8 +174,8 @@ public class TestSearchService extends BaseWCMTestCase {
    * @throws Exception the exception
    */
   public void testSearchSharedPortalNotLiveMode() throws Exception {
-    WCMPaginatedQueryResult paginatedQueryResult = getSearchResult();
-    assertEquals(5, paginatedQueryResult.getPage(1).size());
+    AbstractPageList<ResultNode> pageList = getSearchResult();
+    assertEquals(5, pageList.getPage(1).size());
   }
 
   /**
@@ -188,9 +190,9 @@ public class TestSearchService extends BaseWCMTestCase {
    */
   public void testSearchSharedPortalLiveMode() throws Exception {
     searchIsLiveMode = true;
-    WCMPaginatedQueryResult paginatedQueryResult = getSearchResult();
-    assertEquals(5, paginatedQueryResult.getPage(1).size());
-    assertEquals(10, paginatedQueryResult.getTotalNodes());
+    AbstractPageList<ResultNode> pageList = getSearchResult();
+    assertEquals(5, pageList.getPage(1).size());
+    assertEquals(10, pageList.getTotalNodes());
   }
 
   /**
@@ -205,9 +207,9 @@ public class TestSearchService extends BaseWCMTestCase {
    */
   public void testSearchAllPortalNotLiveMode() throws Exception {
     searchSelectedPortal = null;
-    WCMPaginatedQueryResult paginatedQueryResult = getSearchResult();
-    assertEquals(10, paginatedQueryResult.getTotalNodes());
-    assertEquals(5, paginatedQueryResult.getPage(1).size());
+    AbstractPageList<ResultNode> pageList = getSearchResult();
+    assertEquals(10, pageList.getTotalNodes());
+    assertEquals(5, pageList.getPage(1).size());
   }
 
   /**
@@ -223,9 +225,9 @@ public class TestSearchService extends BaseWCMTestCase {
   public void testSearchAllPortalLiveMode() throws Exception {
     searchSelectedPortal = null;
     searchIsLiveMode = true;
-    WCMPaginatedQueryResult paginatedQueryResult = getSearchResult();
-    assertEquals(5, paginatedQueryResult.getPage(1).size());
-    assertEquals(10, paginatedQueryResult.getTotalNodes());
+    AbstractPageList<ResultNode> pageList = getSearchResult();
+    assertEquals(5, pageList.getPage(1).size());
+    assertEquals(10, pageList.getTotalNodes());
   }
 
   //---------------------------------------------- Test search document -----------------------------------------------------------
@@ -242,8 +244,8 @@ public class TestSearchService extends BaseWCMTestCase {
     this.searchDocumentChecked = true;
     this.searchIsLiveMode = true;
     this.searchSelectedPortal = null;
-    WCMPaginatedQueryResult paginatedQueryResult = getSearchResult();
-    assertEquals(5, paginatedQueryResult.getPage(1).size());
+    AbstractPageList<ResultNode> pageList = getSearchResult();
+    assertEquals(5, pageList.getPage(1).size());
   }
 
   /**
@@ -257,8 +259,8 @@ public class TestSearchService extends BaseWCMTestCase {
   public void testSearchDocumentNotLiveMode() throws Exception {
     this.searchPageChecked = false;
     this.searchSelectedPortal = null;
-    WCMPaginatedQueryResult paginatedQueryResult = getSearchResult();
-    assertEquals(10, paginatedQueryResult.getTotalNodes());
+    AbstractPageList<ResultNode> pageList = getSearchResult();
+    assertEquals(10, pageList.getTotalNodes());
   }
 
   /**
@@ -271,8 +273,8 @@ public class TestSearchService extends BaseWCMTestCase {
    */
   public void testSearchDocumentOfSharedPortal() throws Exception {
     this.searchPageChecked = false;
-    WCMPaginatedQueryResult paginatedQueryResult = getSearchResult();
-    assertEquals(10, paginatedQueryResult.getTotalNodes());
+    AbstractPageList<ResultNode> pageList = getSearchResult();
+    assertEquals(10, pageList.getTotalNodes());
   }
 
   /**
@@ -286,9 +288,9 @@ public class TestSearchService extends BaseWCMTestCase {
   public void testSearchDocumentOfSharedPortalLiveMode() throws Exception {
     this.searchPageChecked = false;
     this.searchIsLiveMode = true;
-    WCMPaginatedQueryResult paginatedQueryResult = getSearchResult();
-    assertEquals(5, paginatedQueryResult.getPage(1).size());
-    assertEquals(10, paginatedQueryResult.getTotalNodes());
+    AbstractPageList<ResultNode> pageList = getSearchResult();
+    assertEquals(5, pageList.getPage(1).size());
+    assertEquals(10, pageList.getTotalNodes());
   }
 
   //------------------------------------------- Test search pages ------------------------------------------------------------------
@@ -304,8 +306,8 @@ public class TestSearchService extends BaseWCMTestCase {
     this.searchDocumentChecked = false;
     this.searchIsLiveMode = true;
     this.searchSelectedPortal = null;
-    WCMPaginatedQueryResult paginatedQueryResult = getSearchResult();
-    assertEquals(5, paginatedQueryResult.getPage(1).size());
+    AbstractPageList<ResultNode> pageList = getSearchResult();
+    assertEquals(5, pageList.getPage(1).size());
   }
 
   /**
@@ -319,8 +321,8 @@ public class TestSearchService extends BaseWCMTestCase {
   public void testSearchPages() throws Exception {
     this.searchDocumentChecked = false;
     this.searchSelectedPortal = null;
-    WCMPaginatedQueryResult paginatedQueryResult = getSearchResult();
-    assertEquals(10, paginatedQueryResult.getTotalNodes());
+    AbstractPageList<ResultNode> pageList = getSearchResult();
+    assertEquals(10, pageList.getTotalNodes());
   }
 
   /**
@@ -334,9 +336,9 @@ public class TestSearchService extends BaseWCMTestCase {
   public void testSearchPagesSharedLiveMode() throws Exception {
     this.searchDocumentChecked = false;
     this.searchIsLiveMode = true;
-    WCMPaginatedQueryResult paginatedQueryResult = getSearchResult();
-    assertEquals(5, paginatedQueryResult.getPage(1).size());
-    assertEquals(10, paginatedQueryResult.getTotalNodes());
+    AbstractPageList<ResultNode> pageList = getSearchResult();
+    assertEquals(5, pageList.getPage(1).size());
+    assertEquals(10, pageList.getTotalNodes());
   }
 
   /**
@@ -349,9 +351,9 @@ public class TestSearchService extends BaseWCMTestCase {
    */
   public void testSearchPagesShared() throws Exception {
     this.searchDocumentChecked = false;
-    WCMPaginatedQueryResult paginatedQueryResult = getSearchResult();
-    assertEquals(5, paginatedQueryResult.getPage(1).size());
-    assertEquals(10, paginatedQueryResult.getTotalNodes());
+    AbstractPageList<ResultNode> pageList = getSearchResult();
+    assertEquals(5, pageList.getPage(1).size());
+    assertEquals(10, pageList.getTotalNodes());
   }
 
   //------------------------------------- test with not document or page --------------------------------------------------------------------
@@ -369,9 +371,9 @@ public class TestSearchService extends BaseWCMTestCase {
     this.searchPageChecked = false;
     this.searchIsLiveMode = true;
     this.searchSelectedPortal = null;
-    WCMPaginatedQueryResult paginatedQueryResult = getSearchResult();
-    assertEquals(5, paginatedQueryResult.getPage(1).size());
-    assertEquals(10, paginatedQueryResult.getTotalNodes());
+    AbstractPageList<ResultNode> pageList = getSearchResult();
+    assertEquals(5, pageList.getPage(1).size());
+    assertEquals(10, pageList.getTotalNodes());
   }
 
   /**
@@ -386,9 +388,9 @@ public class TestSearchService extends BaseWCMTestCase {
     this.searchDocumentChecked = false;
     this.searchPageChecked = false;
     this.searchSelectedPortal = null;
-    WCMPaginatedQueryResult paginatedQueryResult = getSearchResult();
-    assertEquals(5, paginatedQueryResult.getPage(1).size());
-    assertEquals(10, paginatedQueryResult.getTotalNodes());
+    AbstractPageList<ResultNode> pageList = getSearchResult();
+    assertEquals(5, pageList.getPage(1).size());
+    assertEquals(10, pageList.getTotalNodes());
   }
 
   /**
@@ -403,9 +405,9 @@ public class TestSearchService extends BaseWCMTestCase {
     this.searchDocumentChecked = false;
     this.searchPageChecked = false;
     this.searchIsLiveMode = true;
-    WCMPaginatedQueryResult paginatedQueryResult = getSearchResult();
-    assertEquals(5, paginatedQueryResult.getPage(1).size());
-    assertEquals(10, paginatedQueryResult.getTotalNodes());
+    AbstractPageList<ResultNode> pageList = getSearchResult();
+    assertEquals(5, pageList.getPage(1).size());
+    assertEquals(10, pageList.getTotalNodes());
   }
 
   /**
@@ -419,9 +421,9 @@ public class TestSearchService extends BaseWCMTestCase {
   public void testSearchNotPagesDocument_SharedNoLiveMode() throws Exception {
     this.searchDocumentChecked = false;
     this.searchPageChecked = false;
-    WCMPaginatedQueryResult paginatedQueryResult = getSearchResult();
-    assertEquals(5, paginatedQueryResult.getPage(1).size());
-    assertEquals(10, paginatedQueryResult.getTotalNodes());
+    AbstractPageList<ResultNode> pageList = getSearchResult();
+    assertEquals(5, pageList.getPage(1).size());
+    assertEquals(10, pageList.getTotalNodes());
   }
 
   /**
@@ -445,9 +447,9 @@ public class TestSearchService extends BaseWCMTestCase {
     calTo.setTime(date);
     DatetimeRange datetimeRange = new DatetimeRange(calFrom, calTo);
     queryCriteria.setCreatedDateRange(datetimeRange);
-    WCMPaginatedQueryResult paginatedQueryResult = getSearchResult();
-    assertEquals(5, paginatedQueryResult.getPage(1).size());
-    assertEquals(10, paginatedQueryResult.getTotalNodes());
+    AbstractPageList<ResultNode> pageList = getSearchResult();
+    assertEquals(5, pageList.getPage(1).size());
+    assertEquals(10, pageList.getTotalNodes());
   }
 
   /**
@@ -463,8 +465,8 @@ public class TestSearchService extends BaseWCMTestCase {
     this.searchIsLiveMode = true;
     this.searchSelectedPortal = null;
     queryCriteria.setFulltextSearch(false);
-    WCMPaginatedQueryResult paginatedQueryResult = getSearchResult();
-    assertEquals(0, paginatedQueryResult.getPage(1).size());
+    AbstractPageList<ResultNode> pageList = getSearchResult();
+    assertEquals(0, pageList.getPage(1).size());
   }
 
   /**
@@ -482,8 +484,8 @@ public class TestSearchService extends BaseWCMTestCase {
     this.searchSelectedPortal = null;
     this.searchKeyword = null;
     queryCriteria.setContentTypes(new String[]{"exo:webContent", "exo:htmlFile"});
-    WCMPaginatedQueryResult paginatedQueryResult = getSearchResult();
-    assertEquals(5, paginatedQueryResult.getPage(1).size());
+    AbstractPageList<ResultNode> pageList = getSearchResult();
+    assertEquals(5, pageList.getPage(1).size());
   }
 
   /**
@@ -507,8 +509,8 @@ public class TestSearchService extends BaseWCMTestCase {
     queryProperty2.setName("jcr:data");
     queryProperty2.setValue("the default.css file");
     queryCriteria.setQueryMetadatas(new QueryProperty[]{queryProperty1, queryProperty2});
-    WCMPaginatedQueryResult paginatedQueryResult = getSearchResult();
-    assertEquals(0, paginatedQueryResult.getPage(1).size());
+    AbstractPageList<ResultNode> pageList = getSearchResult();
+    assertEquals(0, pageList.getPage(1).size());
   }
 
   /**
@@ -529,10 +531,8 @@ public class TestSearchService extends BaseWCMTestCase {
     Node documentNode = ((Node)session.getItem("/sites content/live/shared/documents")).getNode("webcontent0");
     Node livenode = ((Node)session.getItem("/sites content/live/classic/web contents")).getNode("webcontent0");
     queryCriteria.setCategoryUUIDs(new String[]{documentNode.getUUID(), livenode.getUUID()});
-    WCMPaginatedQueryResult paginatedQueryResult = new WCMPaginatedQueryResult(20);
-    paginatedQueryResult.setQueryCriteria(this.queryCriteria);
-    paginatedQueryResult = getSearchResult();
-    assertEquals(0, paginatedQueryResult.getTotalNodes());
+    AbstractPageList<ResultNode> pageList = getSearchResult();
+    assertEquals(0, pageList.getAvailable());
   }
 
   public void testSearchByProperty()throws Exception{

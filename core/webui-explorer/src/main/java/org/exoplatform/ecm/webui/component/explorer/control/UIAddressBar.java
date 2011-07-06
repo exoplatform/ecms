@@ -50,6 +50,7 @@ import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.security.ConversationState;
+import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -294,18 +295,16 @@ public class UIAddressBar extends UIForm {
                 Session session = sessionProvider.getSession(searchWorkspace,
                                                              repositoryService.getCurrentRepository());
                 UISearchResult uiSearchResult = uiDocumentWorkspace.getChildById(UIDocumentWorkspace.SIMPLE_SEARCH_RESULT);
-                QueryManager queryManager =session.getWorkspace().getQueryManager();
 
                 long startTime = System.currentTimeMillis();
-                Query query = queryManager.createQuery(queryStatement, Query.SQL);
-                QueryResult queryResult = query.execute();
-                uiSearchResult.clearAll();
-                uiSearchResult.setQueryResults(queryResult);
-                uiSearchResult.updateGrid(true);
                 uiSearchResult.setTaxonomyNode(isTaxonomyNode,
                                                currentNode.getSession().getWorkspace().getName(),
                                                currentNode.getPath());
+                uiSearchResult.setQuery(queryStatement, session.getWorkspace().getName(), Query.SQL, 
+                                        IdentityConstants.SYSTEM.equals(session.getUserID()));
                 long time = System.currentTimeMillis() - startTime;
+                
+                uiSearchResult.updateGrid();
                 uiSearchResult.setSearchTime(time);
                 uiDocumentWorkspace.setRenderedChild(UISearchResult.class);
                 event.getRequestContext().addUIComponentToUpdateByAjax(uiDocumentWorkspace);
@@ -334,18 +333,17 @@ public class UIAddressBar extends UIForm {
       Session session = sessionProvider.getSession(currentNode.getSession().getWorkspace().getName(),
           (ManageableRepository)currentNode.getSession().getRepository());
       UISearchResult uiSearchResult = uiDocumentWorkspace.getChildById(UIDocumentWorkspace.SIMPLE_SEARCH_RESULT);
-      QueryManager queryManager = session.getWorkspace().getQueryManager();
       long startTime = System.currentTimeMillis();
-      Query query = queryManager.createQuery(queryStatement, Query.SQL);
-      QueryResult queryResult = query.execute();
-      uiSearchResult.clearAll();
-      uiSearchResult.setQueryResults(queryResult);
+      
       uiSearchResult.setTaxonomyNode(isTaxonomyNode, currentNode.getSession()
                                                                 .getWorkspace()
                                                                 .getName(), currentNode.getPath());
-      uiSearchResult.updateGrid(true);
+      uiSearchResult.setQuery(queryStatement, session.getWorkspace().getName(), Query.SQL, 
+                              IdentityConstants.SYSTEM.equals(session.getUserID()));
+      uiSearchResult.updateGrid();
       long time = System.currentTimeMillis() - startTime;
       uiSearchResult.setSearchTime(time);
+      
       uiDocumentWorkspace.setRenderedChild(UISearchResult.class);
       if(!uiDocumentWorkspace.isRendered()) {
         event.getRequestContext().addUIComponentToUpdateByAjax(uiDocumentWorkspace);

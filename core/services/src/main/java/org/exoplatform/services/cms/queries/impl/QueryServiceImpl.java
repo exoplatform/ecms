@@ -551,10 +551,7 @@ public class QueryServiceImpl implements QueryService, Startable{
    * @throws Exception
    */
   private QueryResult execute(Session session, Node queryNode, String userId) throws Exception {
-    String statement = this.computeStatement(queryNode.getProperty("jcr:statement").getString(), userId);
-    String language = queryNode.getProperty("jcr:language").getString();
-    Query query = session.getWorkspace().getQueryManager().createQuery(statement,language);
-    return query.execute();
+    return createQuery(session, queryNode, userId).execute();
   }
 
   /**
@@ -681,4 +678,36 @@ public class QueryServiceImpl implements QueryService, Startable{
     }
     return false;
   }
+
+  /**
+   * {@inheritDoc}
+   */
+  public Query getQuery(String queryPath, String workspace, SessionProvider provider, String userId) throws Exception {
+    Session session = getSession(provider, true);
+    Session querySession = getSession(workspace, provider);
+    Node queryNode = null;
+    try {
+      queryNode = (Node) session.getItem(queryPath);
+    } catch (PathNotFoundException e) {
+      LOG.warn("Can not find node by path " + queryPath + " in dms-system workspace");
+      queryNode = (Node) querySession.getItem(queryPath);
+    }
+    return createQuery(querySession, queryNode, userId);
+  }
+  
+  /**
+   * Creates the Query object by giving the session, query node and userid
+   * @param session     The Session
+   * @param queryNode   The node of query
+   * @param userId      The userid
+   * @return
+   * @throws Exception
+   */
+  private Query createQuery(Session session, Node queryNode, String userId) throws Exception {
+    String statement = this.computeStatement(queryNode.getProperty("jcr:statement").getString(), userId);
+    String language = queryNode.getProperty("jcr:language").getString();
+    Query query = session.getWorkspace().getQueryManager().createQuery(statement,language);
+    return query;
+  }
+  
 }

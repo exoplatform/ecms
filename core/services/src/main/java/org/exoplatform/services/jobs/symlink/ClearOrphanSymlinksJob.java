@@ -1,7 +1,9 @@
 package org.exoplatform.services.jobs.symlink;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.jcr.ItemNotFoundException;
 import javax.jcr.Node;
@@ -69,7 +71,7 @@ public class ClearOrphanSymlinksJob implements Job {
       if (trashWorkspace == null) return;
       sessionProvider = SessionProvider.createSystemProvider();
       String[] workspaces = manageableRepository.getWorkspaceNames();
-
+      Set<Session> sessionSet = new HashSet<Session>();
       for (String workspace : workspaces) {
         try {
           session = sessionProvider.getSession(workspace, manageableRepository);
@@ -92,9 +94,7 @@ public class ClearOrphanSymlinksJob implements Job {
               deleteNodeList.add(symlinkNode);
             } catch (RepositoryException e) {
             } finally {
-              if (targetNode != null && targetNode.getSession().isLive()) {
-                targetNode.getSession().logout();
-              }
+              sessionSet.add(targetNode.getSession());
             }
             //move the nodes in list to trash
           }
@@ -113,6 +113,10 @@ public class ClearOrphanSymlinksJob implements Job {
           if (session != null && session.isLive())
             session.logout();
         }
+      }
+      for (Session targetSession : sessionSet) {
+        if (targetSession != null && targetSession.isLive())
+          targetSession.logout();
       }
     } catch (Exception e) {
       log.error("Error occurs in ClearOrphanSymlinksJob", e);

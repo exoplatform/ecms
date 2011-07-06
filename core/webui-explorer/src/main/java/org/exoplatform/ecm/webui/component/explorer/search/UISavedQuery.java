@@ -175,12 +175,14 @@ public class UISavedQuery extends UIContainer implements UIPopupComponent {
         ((UIECMSearch)uiSearch).setRenderedChild(UISearchResult.class);
         uiSearchResult = ((UIECMSearch)uiSearch).getChild(UISearchResult.class);
       }
+      Query query = null;
       QueryResult queryResult = null;
       try {
-        queryResult = queryService.execute(queryPath,
-                                           wsName,
-                                           SessionProviderFactory.createSystemProvider(),
-                                           uiQuery.getCurrentUserId());
+        query = queryService.getQuery(queryPath,
+                                       wsName,
+                                       SessionProviderFactory.createSystemProvider(),
+                                       uiQuery.getCurrentUserId());
+        queryResult = query.execute();
       } catch(Exception e) {
         uiApp.addMessage(new ApplicationMessage("UISearchResult.msg.query-invalid", null,
                                                 ApplicationMessage.WARNING));
@@ -193,9 +195,8 @@ public class UISavedQuery extends UIContainer implements UIPopupComponent {
           if(!uiQuery.isQuickSearch_) ((UIECMSearch)uiSearch).setRenderedChild(UISavedQuery.class);
           return;
         }
-        uiSearchResult.clearAll();
-        uiSearchResult.setQueryResults(queryResult);
-        uiSearchResult.updateGrid(true);
+        uiSearchResult.setQuery(query.getStatement(), wsName, query.getLanguage(), true);
+        uiSearchResult.updateGrid();
       }
       if(uiQuery.isQuickSearch_) {
         ((UIDocumentWorkspace)uiSearch).setRenderedChild(UISearchResult.class);

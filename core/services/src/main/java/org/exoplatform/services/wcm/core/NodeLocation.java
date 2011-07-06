@@ -450,4 +450,11 @@ public class NodeLocation {
                 this.getWorkspace().equals(location2.getWorkspace()) &&
                 (this.getPath().equals(location2.getPath()) || this.getUUID().equals(location2.getUUID()));
   }
+  
+  public int hashCode() {
+    return (repository == null ? 0 : repository.hashCode()) +
+           (workspace == null ? 0 : workspace.hashCode()) + 
+           (uuid == null ? 0 : uuid.hashCode()) +
+           (path == null ? 0 : path.hashCode());
+  }
 }

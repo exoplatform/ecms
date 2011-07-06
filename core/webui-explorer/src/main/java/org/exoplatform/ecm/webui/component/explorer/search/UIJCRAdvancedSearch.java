@@ -33,6 +33,7 @@ import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.queries.QueryService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
+import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -155,7 +156,6 @@ public class UIJCRAdvancedSearch extends UIForm implements UIPopupComponent {
       String queryS = uiForm.getUIFormTextAreaInput(FIELD_QUERY).getValue() ;
       String searchType = uiForm.getUIFormSelectBox(FIELD_SELECT_BOX).getValue() ;
       UIECMSearch uiSearch = uiForm.getParent() ;
-      QueryManager queryManager = uiExplorer.getTargetSession().getWorkspace().getQueryManager() ;
       long startTime = System.currentTimeMillis();
       try {
         if(queryS.toLowerCase().indexOf("order by") < 0) {
@@ -165,13 +165,10 @@ public class UIJCRAdvancedSearch extends UIForm implements UIPopupComponent {
             queryS = queryS + " order by @exo:dateCreated descending" ;
           }
         }
-        Query query = queryManager.createQuery(queryS, searchType);
-        QueryResult queryResult = null ;
-        queryResult = query.execute();
         UISearchResult uiSearchResult = uiSearch.getChild(UISearchResult.class) ;
-        uiSearchResult.clearAll() ;
-        uiSearchResult.setQueryResults(queryResult) ;
-        uiSearchResult.updateGrid(true) ;
+        uiSearchResult.setQuery(queryS, uiExplorer.getTargetSession().getWorkspace().getName(), searchType, 
+                                IdentityConstants.SYSTEM.equals(uiExplorer.getTargetSession().getUserID()));
+        uiSearchResult.updateGrid() ;
         long time = System.currentTimeMillis() - startTime;
         uiSearchResult.setSearchTime(time);
         uiSearch.setRenderedChild(UIECMSearch.ADVANCED_RESULT) ;

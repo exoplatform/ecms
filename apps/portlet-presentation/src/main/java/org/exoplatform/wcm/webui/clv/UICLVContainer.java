@@ -17,6 +17,7 @@
 package org.exoplatform.wcm.webui.clv;
 
 import javax.jcr.Node;
+import javax.jcr.query.Row;
 import javax.portlet.PortletPreferences;
 
 import org.exoplatform.ecm.resolver.JCRResourceResolver;
@@ -31,6 +32,7 @@ import org.exoplatform.webui.application.portlet.PortletRequestContext;
 import org.exoplatform.webui.core.UIContainer;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
+import org.exoplatform.services.wcm.search.base.SearchDataCreator;
 
 /**
  * Created by The eXo Platform SAS
@@ -175,4 +177,12 @@ public abstract class UICLVContainer extends UIContainer {
     }
   }
 
+  public static class CLVNodeCreator implements SearchDataCreator<NodeLocation> {
+
+    @Override
+    public NodeLocation createData(Node node, Row row) {
+      return NodeLocation.getNodeLocationByNode(node);
+    }
+  }
+  
 }
