@@ -45,6 +45,7 @@ import javax.jcr.lock.LockException;
 import javax.jcr.nodetype.ConstraintViolationException;
 import javax.jcr.nodetype.NoSuchNodeTypeException;
 import javax.jcr.version.VersionException;
+import javax.transaction.xa.XAResource;
 
 import org.exoplatform.services.jcr.core.ExtendedSession;
 import org.exoplatform.services.jcr.core.NamespaceAccessor;
@@ -556,4 +557,37 @@ public class SessionLinkAware implements ExtendedSession, NamespaceAccessor {
     getTargetSession().exportSystemView(absPath, out, skipBinary, noRecurse, exportChildVersionHisotry);
   }
   
+  @Override
+  public XAResource getXAResource() {
+    try {
+      return getTargetSession().getXAResource();
+    } catch (RepositoryException e) {
+      return null;
+    }
+  }
+  
+  @Override
+  public boolean hasExpired() {
+    try {
+      return getTargetSession().hasExpired();
+    } catch (RepositoryException e) {
+      return true;
+    }
+  }
+  
+  @Override
+  public void setTimeout(long timeout) {
+    try {
+      getTargetSession().setTimeout(timeout);
+    } catch (RepositoryException e) {}
+  }
+  
+  @Override
+  public long getTimeout() {
+    try {
+      return getTargetSession().getTimeout();
+    } catch (RepositoryException e) {
+      return 0;
+    }
+  }
 }

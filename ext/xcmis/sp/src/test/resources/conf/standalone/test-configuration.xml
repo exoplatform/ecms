@@ -122,6 +122,11 @@
       </init-params>
    </component>
 
+  <component>
+    <key>org.exoplatform.services.jdbc.DataSourceProvider</key>
+    <type>org.exoplatform.services.jdbc.impl.DataSourceProviderImpl</type>
+   </component>
+
    <component>
       <key>org.exoplatform.services.jcr.config.RepositoryServiceConfiguration</key>
       <type>org.exoplatform.services.jcr.impl.config.RepositoryServiceConfigurationImpl</type>

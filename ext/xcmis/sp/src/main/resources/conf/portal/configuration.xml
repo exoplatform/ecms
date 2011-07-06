@@ -7,6 +7,11 @@
      <type>org.xcmis.restatom.CmisRestApplicationSingle</type>
    </component>
    
+  <component>
+    <key>org.exoplatform.services.jdbc.DataSourceProvider</key>
+    <type>org.exoplatform.services.jdbc.impl.DataSourceProviderImpl</type>
+   </component>
+   
    <component>
       <type>org.exoplatform.ecms.xcmis.sp.DriveCmisRegistry</type>
       <init-params>
