@@ -22,13 +22,14 @@ import java.util.Calendar;
 import javax.jcr.Node;
 import javax.jcr.Property;
 import javax.jcr.RepositoryException;
-import javax.jcr.Session;
 import javax.jcr.Value;
 import javax.jcr.ValueFormatException;
 import javax.jcr.lock.LockException;
 import javax.jcr.nodetype.ConstraintViolationException;
 import javax.jcr.nodetype.PropertyDefinition;
 import javax.jcr.version.VersionException;
+
+import org.exoplatform.services.wcm.core.PropertyLocation;
 
 /**
  * Created by The eXo Platform SAS
@@ -38,106 +39,106 @@ import javax.jcr.version.VersionException;
  */
 public class PropertyLinkAware extends ItemLinkAware implements Property {
 
-  private final Property property;
+  private final PropertyLocation propertyLocation;
 
-  public PropertyLinkAware(Session originalSession, String virtualPath, Property property) {
-    super(originalSession, virtualPath, property);
-    this.property = property;
+  public PropertyLinkAware(String virtualPath, Property property) {
+    super(virtualPath, property);
+    this.propertyLocation = PropertyLocation.getPropertyLocationByProperty(property);
   }
 
   public Property getRealProperty() {
-    return property;
+    return PropertyLocation.getPropertyByLocation(propertyLocation);
   }
 
   /**
    * {@inheritDoc}
    */
   public boolean getBoolean() throws ValueFormatException, RepositoryException {
-    return property.getBoolean();
+    return getRealProperty().getBoolean();
   }
 
   /**
    * {@inheritDoc}
    */
   public Calendar getDate() throws ValueFormatException, RepositoryException {
-    return property.getDate();
+    return getRealProperty().getDate();
   }
 
   /**
    * {@inheritDoc}
    */
   public PropertyDefinition getDefinition() throws RepositoryException {
-    return property.getDefinition();
+    return getRealProperty().getDefinition();
   }
 
   /**
    * {@inheritDoc}
    */
   public double getDouble() throws ValueFormatException, RepositoryException {
-    return property.getDouble();
+    return getRealProperty().getDouble();
   }
 
   /**
    * {@inheritDoc}
    */
   public long getLength() throws ValueFormatException, RepositoryException {
-    return property.getLength();
+    return getRealProperty().getLength();
   }
 
   /**
    * {@inheritDoc}
    */
   public long[] getLengths() throws ValueFormatException, RepositoryException {
-    return property.getLengths();
+    return getRealProperty().getLengths();
   }
 
   /**
    * {@inheritDoc}
    */
   public long getLong() throws ValueFormatException, RepositoryException {
-    return property.getLong();
+    return getRealProperty().getLong();
   }
 
   /**
    * {@inheritDoc}
    */
   public Node getNode() throws ValueFormatException, RepositoryException {
-    return property.getNode();
+    return getRealProperty().getNode();
   }
 
   /**
    * {@inheritDoc}
    */
   public InputStream getStream() throws ValueFormatException, RepositoryException {
-    return property.getStream();
+    return getRealProperty().getStream();
   }
 
   /**
    * {@inheritDoc}
    */
   public String getString() throws ValueFormatException, RepositoryException {
-    return property.getString();
+    return getRealProperty().getString();
   }
 
   /**
    * {@inheritDoc}
    */
   public int getType() throws RepositoryException {
-    return property.getType();
+    return getRealProperty().getType();
   }
 
   /**
    * {@inheritDoc}
    */
   public Value getValue() throws ValueFormatException, RepositoryException {
-    return property.getValue();
+    return getRealProperty().getValue();
   }
 
   /**
    * {@inheritDoc}
    */
   public Value[] getValues() throws ValueFormatException, RepositoryException {
-    return property.getValues();
+    return getRealProperty().getValues();
   }
 
   /**
@@ -148,7 +149,7 @@ public class PropertyLinkAware extends ItemLinkAware implements Property {
                                   LockException,
                                   ConstraintViolationException,
                                   RepositoryException {
-    property.setValue(value);
+    getRealProperty().setValue(value);
   }
 
   /**
@@ -159,7 +160,7 @@ public class PropertyLinkAware extends ItemLinkAware implements Property {
                                     LockException,
                                     ConstraintViolationException,
                                     RepositoryException {
-    property.setValue(values);
+    getRealProperty().setValue(values);
   }
 
   /**
@@ -170,7 +171,7 @@ public class PropertyLinkAware extends ItemLinkAware implements Property {
                                    LockException,
                                    ConstraintViolationException,
                                    RepositoryException {
-    property.setValue(value);
+    getRealProperty().setValue(value);
   }
 
   /**
@@ -181,7 +182,7 @@ public class PropertyLinkAware extends ItemLinkAware implements Property {
                                      LockException,
                                      ConstraintViolationException,
                                      RepositoryException {
-    property.setValue(values);
+    getRealProperty().setValue(values);
   }
 
   /**
@@ -192,7 +193,7 @@ public class PropertyLinkAware extends ItemLinkAware implements Property {
                                         LockException,
                                         ConstraintViolationException,
                                         RepositoryException {
-    property.setValue(value);
+    getRealProperty().setValue(value);
   }
 
   /**
@@ -203,7 +204,7 @@ public class PropertyLinkAware extends ItemLinkAware implements Property {
                                  LockException,
                                  ConstraintViolationException,
                                  RepositoryException {
-    property.setValue(value);
+    getRealProperty().setValue(value);
   }
 
   /**
@@ -214,7 +215,7 @@ public class PropertyLinkAware extends ItemLinkAware implements Property {
                                    LockException,
                                    ConstraintViolationException,
                                    RepositoryException {
-    property.setValue(value);
+    getRealProperty().setValue(value);
   }
 
   /**
@@ -225,7 +226,7 @@ public class PropertyLinkAware extends ItemLinkAware implements Property {
                                      LockException,
                                      ConstraintViolationException,
                                      RepositoryException {
-    property.setValue(value);
+    getRealProperty().setValue(value);
   }
 
   /**
@@ -236,7 +237,7 @@ public class PropertyLinkAware extends ItemLinkAware implements Property {
                                     LockException,
                                     ConstraintViolationException,
                                     RepositoryException {
-    property.setValue(value);
+    getRealProperty().setValue(value);
   }
 
   /**
@@ -247,6 +248,6 @@ public class PropertyLinkAware extends ItemLinkAware implements Property {
                                  LockException,
                                  ConstraintViolationException,
                                  RepositoryException {
-    property.setValue(value);
+    getRealProperty().setValue(value);
   }
 }

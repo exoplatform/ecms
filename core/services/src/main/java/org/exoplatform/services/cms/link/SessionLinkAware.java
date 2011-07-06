@@ -70,16 +70,10 @@ public class SessionLinkAware implements ExtendedSession, NamespaceAccessor {
 
   private ItemLinkAware itemLA;
 
-  private final ExtendedSession originalSession;
-  private final ExtendedSession currentNodeSession;
-
-  private volatile ExtendedSession targetNodeSession;
   private volatile ExtendedSession[] sessions;
 
   SessionLinkAware (ItemLinkAware itemLA) throws RepositoryException {
     this.itemLA = itemLA;
-    this.originalSession = (ExtendedSession) itemLA.originalSession;
-    this.currentNodeSession = (ExtendedSession) itemLA.item.getSession();
   }
 
   private ExtendedSession[] getSessions() throws RepositoryException {
@@ -87,8 +81,7 @@ public class SessionLinkAware implements ExtendedSession, NamespaceAccessor {
       synchronized (this) {
         if (sessions == null) {
           Set<ExtendedSession> sSessions = new HashSet<ExtendedSession>(3, 1f);
-          sSessions.add(originalSession);
-          sSessions.add(currentNodeSession);
+          sSessions.add((ExtendedSession)itemLA.getItemSession());
           sSessions.add(getTargetSession());
           sessions = sSessions.toArray(new ExtendedSession[sSessions.size()]);
         }
@@ -96,28 +89,24 @@ public class SessionLinkAware implements ExtendedSession, NamespaceAccessor {
     }
     return sessions;
   }
+  
+  private ExtendedSession getSession() throws RepositoryException {
+    return (ExtendedSession)itemLA.getItemSession();
+  }
 
   private ExtendedSession getTargetSession() throws RepositoryException {
-    if (targetNodeSession == null) {
-      synchronized (this) {
-        if (targetNodeSession == null) {
-          targetNodeSession = getTargetSession(itemLA);
-          itemLA = null;
-        }
-      }
-    }
-    return targetNodeSession;
+    return getTargetSession(itemLA);
   }
 
   private ExtendedSession getTargetSession(String absPath, Item item) throws RepositoryException {
-    return getTargetSession(ItemLinkAware.newInstance(originalSession, absPath, item));
+    return getTargetSession(ItemLinkAware.newInstance(absPath, item));
   }
 
   private ExtendedSession getTargetSession(ItemLinkAware itemLA) throws RepositoryException {
     if (itemLA instanceof NodeLinkAware) {
       return (ExtendedSession) ((NodeLinkAware) itemLA).getTargetNode().getRealNode().getSession();
     }
-    return (ExtendedSession) itemLA.item.getSession();
+    return (ExtendedSession) itemLA.getItemSession();
   }
 
   private ExtendedSession getTargetSession(String absPath) throws RepositoryException {
@@ -232,7 +221,7 @@ public class SessionLinkAware implements ExtendedSession, NamespaceAccessor {
    */
   public Item getItem(String absPath) throws PathNotFoundException, RepositoryException {
     NodeFinder nodeFinder = LinkUtils.getNodeFinder();
-    return nodeFinder.getItem(originalSession, absPath);
+    return nodeFinder.getItem(getSession(), absPath);
   }
 
   /**
@@ -288,21 +277,29 @@ public class SessionLinkAware implements ExtendedSession, NamespaceAccessor {
    * {@inheritDoc}
    */
   public Repository getRepository() {
-    return originalSession.getRepository();
+    try {
+      return getSession().getRepository();
+    } catch (Exception e) {
+      return null;
+    }
   }
 
   /**
    * {@inheritDoc}
    */
   public Node getRootNode() throws RepositoryException {
-    return originalSession.getRootNode();
+    return getSession().getRootNode();
   }
 
   /**
    * {@inheritDoc}
    */
   public String getUserID() {
-    return originalSession.getUserID();
+    try {
+      return getSession().getUserID();
+    } catch (Exception e) {
+      return null;
+    }
   }
 
   /**
@@ -310,14 +307,18 @@ public class SessionLinkAware implements ExtendedSession, NamespaceAccessor {
    */
   public ValueFactory getValueFactory() throws UnsupportedRepositoryOperationException,
                                        RepositoryException {
-    return originalSession.getValueFactory();
+    return getSession().getValueFactory();
   }
 
   /**
    * {@inheritDoc}
    */
   public Workspace getWorkspace() {
-    return originalSession.getWorkspace();
+    try {
+      return getSession().getWorkspace();
+    } catch (Exception e) {
+      return null;
+    }
   }
 
   /**
@@ -338,7 +339,7 @@ public class SessionLinkAware implements ExtendedSession, NamespaceAccessor {
    * {@inheritDoc}
    */
   public Session impersonate(Credentials credentials) throws LoginException, RepositoryException {
-    return originalSession.impersonate(credentials);
+    return getSession().impersonate(credentials);
   }
 
   /**
@@ -380,7 +381,7 @@ public class SessionLinkAware implements ExtendedSession, NamespaceAccessor {
    */
   public boolean itemExists(String absPath) throws RepositoryException {
     NodeFinder nodeFinder = LinkUtils.getNodeFinder();
-    return nodeFinder.itemExists(originalSession, absPath);
+    return nodeFinder.itemExists(getSession(), absPath);
   }
 
   /**

@@ -820,7 +820,7 @@ public class UIJCRExplorer extends UIContainer {
   public List<Node> getChildrenList(String path, boolean isReferences) throws Exception {
     RepositoryService repositoryService = getApplicationComponent(RepositoryService.class) ;
     TemplateService templateService = getApplicationComponent(TemplateService.class) ;
-    Node node = (Node) ItemLinkAware.newInstance(getSession(), path, getNodeByPath(path, getSession()));
+    Node node = (Node) ItemLinkAware.newInstance(path, getNodeByPath(path, getSession()));
     NodeIterator childrenIterator = node.getNodes();
     List<Node> childrenList  = new ArrayList<Node>() ;
     NodeType nodeType = node.getPrimaryNodeType();

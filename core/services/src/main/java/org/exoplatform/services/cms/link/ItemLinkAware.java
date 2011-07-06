@@ -32,6 +32,8 @@ import javax.jcr.nodetype.ConstraintViolationException;
 import javax.jcr.nodetype.NoSuchNodeTypeException;
 import javax.jcr.version.VersionException;
 
+import org.exoplatform.services.wcm.core.ItemLocation;
+
 /**
  * Created by The eXo Platform SAS
  * Author : eXoPlatform
@@ -40,31 +42,37 @@ import javax.jcr.version.VersionException;
  */
 public abstract class ItemLinkAware implements Item {
 
-  protected final Item item;
+  protected final ItemLocation itemLocation;
   protected final String virtualPath;
-  protected final Session originalSession;
 
-  protected ItemLinkAware(Session originalSession, String virtualPath, Item item) {
-    this.originalSession = originalSession;
-    this.item = item;
+  protected ItemLinkAware(String virtualPath, Item item) {
+    this.itemLocation = ItemLocation.getItemLocationByItem(item);
     if (!virtualPath.startsWith("/")) {
       throw new IllegalArgumentException("The path '" + virtualPath +  "' must be an absolute path");
     }
     this.virtualPath = virtualPath;
   }
 
-  public static ItemLinkAware newInstance(Session originalSession, String originalAbsPath, Item item) {
+  public static ItemLinkAware newInstance(String originalAbsPath, Item item) {
     if (item instanceof Node) {
-      return new NodeLinkAware(originalSession, originalAbsPath, (Node) item);
+      return new NodeLinkAware(originalAbsPath, (Node) item);
     } 
-    return new PropertyLinkAware(originalSession, originalAbsPath, (Property) item);
+    return new PropertyLinkAware(originalAbsPath, (Property) item);
   }
-
+  
+  public Item getItem() {
+    return ItemLocation.getItemByLocation(itemLocation);
+  }
+  
+  public Session getItemSession() throws RepositoryException {
+    return getItem().getSession();
+  }
+  
   /**
    * {@inheritDoc}
    */
   public void accept(ItemVisitor visitor) throws RepositoryException {
-    item.accept(visitor);
+    getItem().accept(visitor);
   }
 
   /**
@@ -73,7 +81,7 @@ public abstract class ItemLinkAware implements Item {
   public Item getAncestor(int depth) throws ItemNotFoundException,
                                    AccessDeniedException,
                                    RepositoryException {
-    return LinkUtils.getNodeFinder().getItem(originalSession, LinkUtils.getAncestorPath(virtualPath, depth));
+    return LinkUtils.getNodeFinder().getItem(getItemSession(), LinkUtils.getAncestorPath(virtualPath, depth));
   }
 
   /**
@@ -87,14 +95,14 @@ public abstract class ItemLinkAware implements Item {
    * {@inheritDoc}
    */
   public String getName() throws RepositoryException {
-    return item.getName();
+    return getItem().getName();
   }
 
   /**
    * {@inheritDoc}
    */
   public Node getParent() throws ItemNotFoundException, AccessDeniedException, RepositoryException {
-    return (Node) LinkUtils.getNodeFinder().getItem(originalSession, LinkUtils.getParentPath(virtualPath));
+    return (Node) LinkUtils.getNodeFinder().getItem(getItemSession(), LinkUtils.getParentPath(virtualPath));
   }
 
   /**
@@ -115,35 +123,35 @@ public abstract class ItemLinkAware implements Item {
    * {@inheritDoc}
    */
   public boolean isModified() {
-    return item.isModified();
+    return getItem().isModified();
   }
 
   /**
    * {@inheritDoc}
    */
   public boolean isNew() {
-    return item.isNew();
+    return getItem().isNew();
   }
 
   /**
    * {@inheritDoc}
    */
   public boolean isNode() {
-    return item.isNode();
+    return getItem().isNode();
   }
 
   /**
    * {@inheritDoc}
    */
   public boolean isSame(Item otherItem) throws RepositoryException {
-    return item.isSame(otherItem);
+    return getItem().isSame(otherItem);
   }
 
   /**
    * {@inheritDoc}
    */
   public void refresh(boolean keepChanges) throws InvalidItemStateException, RepositoryException {
-    item.refresh(keepChanges);
+    getItem().refresh(keepChanges);
   }
 
   /**
@@ -153,7 +161,7 @@ public abstract class ItemLinkAware implements Item {
                       LockException,
                       ConstraintViolationException,
                       RepositoryException {
-    item.remove();
+    getItem().remove();
   }
 
   /**
@@ -168,6 +176,6 @@ public abstract class ItemLinkAware implements Item {
                     LockException,
                     NoSuchNodeTypeException,
                     RepositoryException {
-    item.save();
+    getItem().save();
   }
 }

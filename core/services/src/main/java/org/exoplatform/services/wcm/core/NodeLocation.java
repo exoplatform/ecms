@@ -19,12 +19,13 @@ package org.exoplatform.services.wcm.core;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.jcr.Item;
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
-import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 
+import org.exoplatform.services.cms.link.ItemLinkAware;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
@@ -38,30 +39,17 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
  * hoa.pham@exoplatform.com
  * Jun 20, 2008
  */
-public class NodeLocation {
+public class NodeLocation extends ItemLocation {
 
   /** The log. */
   private static Log log = ExoLogger.getLogger("wcm:NodeLocation");
 
-  /** The repository. */
-  private String repository;
-
-  /** The workspace. */
-  private String workspace;
-
-  /** The path. */
-  private String path;
-  
-  /** The UUID. */
-  private String uuid;
-  
-  /** If session is system */
-  private boolean isSystemSession;
-
   /**
    * Instantiates a new node location.
    */
-  public NodeLocation() { }
+  public NodeLocation() {
+    super();
+  }
 
   /**
    * Instantiates a new node location.
@@ -74,11 +62,7 @@ public class NodeLocation {
    */
   public NodeLocation(final String repository, final String workspace, final String path, final String uuid, 
       final boolean isSystem) {
-    this.repository = repository;
-    this.workspace = workspace;
-    this.path = path;
-    this.uuid = uuid;
-    this.isSystemSession = isSystem;
+    super(repository, workspace, path, uuid, isSystem);
   }
 
   /**
@@ -90,7 +74,7 @@ public class NodeLocation {
    * @param uuid the uuid
    */
   public NodeLocation(final String repository, final String workspace, final String path, final String uuid ) {
-    this(repository, workspace, path, uuid, false);
+    super(repository, workspace, path, uuid, false);
   }
   
   /**
@@ -101,102 +85,17 @@ public class NodeLocation {
    * @param path the path
    */
   public NodeLocation(final String repository, final String workspace, final String path) {
-	  this(repository, workspace, path, null, false);
-  }
-
-
-  /**
-   * Gets the repository.
-   *
-   * @return the repository
-   */
-  public String getRepository() {
-    return repository;
-  }
-
-  /**
-   * Sets the repository.
-   *
-   * @param repository the new repository
-   */
-  public void setRepository(String repository) {
-    this.repository = repository;
-  }
-
-  /**
-   * Gets the workspace.
-   *
-   * @return the workspace
-   */
-  public String getWorkspace() {
-    return workspace;
-  }
-
-  /**
-   * Sets the workspace.
-   *
-   * @param workspace the new workspace
-   */
-  public void setWorkspace(String workspace) {
-    this.workspace = workspace;
-  }
-
-  /**
-   * Gets the path.
-   *
-   * @return the path
-   */
-  public String getPath() {
-    return path;
-  }
-
-
-  /**
-   * Sets the path.
-   *
-   * @param path the new path
-   */
-  public void setPath(String path) {
-    this.path = path;
+	  super(repository, workspace, path, null, false);
   }
   
   /**
-   * Sets the uuid.
+   * Instantiates a new node location.
    *
-   * @param uuid the new uuid
    */
-  public void setUUID(String uuid) {
-    this.uuid = uuid;
-  }
-
-  /**
-   * Gets the uuid.
-   *
-   * @return the uuid
-   */
-  public String getUUID() {
-    return uuid;
+  public NodeLocation(ItemLocation location) {
+    super(location);
   }
   
-  /**
-   * Sets the isSystemSession.
-   *
-   * @param value isSysstemSession
-   */
-  public void setSystemSession(boolean value) {
-    this.isSystemSession = value;
-  }
-
-  /**
-   * Gets the isSystemSession.
-   *
-   * @return true if node session is system, false if not
-   */
-  public boolean isSystemSession() {
-    return this.isSystemSession;
-  }
-  
-
   /**
    * Parses the.
    *
@@ -274,17 +173,9 @@ public class NodeLocation {
    * @return a NodeLocation object
    */
   public static final NodeLocation getNodeLocationByNode(final Node node) {
-    Session session = null;
     try {
-      session = node.getSession();
-      String repository = ((ManageableRepository)session.getRepository()).getConfiguration().getName();
-      String workspace = session.getWorkspace().getName();
-      String path = node.getPath();
-      String uuid = null;
-      try {
-    	  uuid = node.getUUID();
-      } catch (Exception e) {}
-      return new NodeLocation(repository, workspace, path, uuid);
+      ItemLocation itemLocation = ItemLocation.getItemLocationByItem(node);
+      return new NodeLocation(itemLocation);
     } catch (Exception e) {
       return null;
     }
@@ -298,18 +189,9 @@ public class NodeLocation {
    * @return a node
    */
   public static final Node getNodeByLocation(final NodeLocation nodeLocation) {
-    Session session = null;
     try {
-      ManageableRepository repository = WCMCoreUtils.getRepository();
-      session = WCMCoreUtils.getSystemSessionProvider().getSession(nodeLocation.getWorkspace(), repository);
-      if (nodeLocation.getUUID() != null)
-    	  return session.getNodeByUUID(nodeLocation.getUUID());
-      else {
-    	  Node node = (Node)session.getItem(nodeLocation.getPath());
-    	  return node;
-      }
-    } catch(PathNotFoundException pne) {
-      return null;
+      Item item = ItemLocation.getItemByLocation(nodeLocation);
+      return (Node)item;
     } catch (Exception e) {
       return null;
     }
@@ -335,7 +217,7 @@ public class NodeLocation {
 				  node = null;
 				  try {
 					 NodeLocation location = (NodeLocation)obj;
-					 session = (systemWorkspace.equals(location.getWorkspace()))? 
+					 session = (systemWorkspace.equals(location.getWorkspace()) || location.isSystemSession)? 
 							  			systemSessionProvider.getSession(location.getWorkspace(), repository) : 
 							  			sessionProvider.getSession(location.getWorkspace(), repository);
 							  			
@@ -361,7 +243,9 @@ public class NodeLocation {
   public static final List getLocationsByNodeList(final List nodeList) {
 	  List ret = new ArrayList();
 	  for(Object obj : nodeList)
-		  if (obj instanceof Node) {
+	    if (obj instanceof ItemLinkAware) {
+	      ret.add(obj);
+	    } else if (obj instanceof Node) {
 			  NodeLocation location = getNodeLocationByNode((Node)obj);
 			  if (location != null)
 				  ret.add(location);
@@ -446,9 +330,16 @@ public class NodeLocation {
   public boolean equals(Object obj) {
     if (obj == null || !(obj instanceof NodeLocation)) return false;
     NodeLocation location2 = (NodeLocation)obj;
-    return this.repository.equals(location2.getRepository()) &&
-                this.getWorkspace().equals(location2.getWorkspace()) &&
-                (this.getPath().equals(location2.getPath()) || this.getUUID().equals(location2.getUUID()));
+    return equalsString(this.repository, location2.getRepository()) &&
+                equalsString(this.getWorkspace(), location2.getWorkspace()) &&
+                (equalsString(this.getPath(), location2.getPath()) || 
+                    equalsString(this.getUUID(), location2.getUUID()));
+  }
+  
+  public boolean equalsString(String st1, String st2) {
+    if (st1 == null && st2 == null) return true;
+    if (st1 == null || st2 == null) return false;
+    return st1.equals(st2);
   }
   
   public int hashCode() {

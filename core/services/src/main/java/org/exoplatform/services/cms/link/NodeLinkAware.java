@@ -54,6 +54,7 @@ import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.jcr.datamodel.InternalQName;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.wcm.core.NodeLocation;
 
 /**
  * Created by The eXo Platform SAS
@@ -70,32 +71,38 @@ public class NodeLinkAware extends ItemLinkAware implements ExtendedNode {
    */
   private static final Log LOG  = ExoLogger.getLogger("services.cms.link.NodeLinkAware");
 
-  private final Node node;
+  private final NodeLocation nodeLocation;
 
-  private volatile Node targetNode;
+  private volatile NodeLocation targetNodeLocation;
 
-  public NodeLinkAware(Session originalSession, String virtualPath, Node node) {
-    super(originalSession, virtualPath, node);
-    this.node = node;
+  public NodeLinkAware(String virtualPath, Node node) {
+    super(virtualPath, node);
+    this.nodeLocation = NodeLocation.getNodeLocationByNode(node);
   }
-
+  
   public String getRealPath() throws RepositoryException {
-    return node.getPath();
+    return nodeLocation.getPath();
   }
 
   public Node getRealNode() {
-    return node;
+    return NodeLocation.getNodeByLocation(nodeLocation);
   }
 
   public NodeLinkAware getTargetNode() throws RepositoryException {
-    return new NodeLinkAware(originalSession, virtualPath, getTarget());
+    return new NodeLinkAware(virtualPath, getTarget());
+  }
+  
+  public Session getNodeSession() throws RepositoryException {
+    return getRealNode().getSession();
   }
 
   Node getTarget() throws RepositoryException {
-    if (targetNode == null) {
+    Node targetNode = null;
+    if (targetNodeLocation == null) {
       synchronized (this) {
-        if (targetNode == null) {
+        if (targetNodeLocation == null) {
           LinkManager linkManager = LinkUtils.getLinkManager();
+          Node node = getRealNode();
           if (linkManager.isLink(node)) {
             targetNode = linkManager.getTarget(node);
           } else {
@@ -111,9 +118,9 @@ public class NodeLinkAware extends ItemLinkAware implements ExtendedNode {
     try {
       return getTarget();
     } catch (AccessDeniedException e) {
-      LOG.warn("Cannot access to the target of the node " + node.getPath());
+      LOG.warn("Cannot access to the target of the node " + nodeLocation.getPath());
     } catch (ItemNotFoundException e) {
-      LOG.warn("The target of the node " + node.getPath() + " doesn't exist anymore");
+      LOG.warn("The target of the node " + nodeLocation.getPath() + " doesn't exist anymore");
     }
     return null;
   }
@@ -150,7 +157,7 @@ public class NodeLinkAware extends ItemLinkAware implements ExtendedNode {
                                   ConstraintViolationException,
                                   LockException,
                                   RepositoryException {
-    return new NodeLinkAware(originalSession, getVirtualPath(relPath), getTarget().addNode(relPath));
+    return new NodeLinkAware(getVirtualPath(relPath), getTarget().addNode(relPath));
   }
 
   /**
@@ -163,7 +170,7 @@ public class NodeLinkAware extends ItemLinkAware implements ExtendedNode {
                                                VersionException,
                                                ConstraintViolationException,
                                                RepositoryException {
-    return new NodeLinkAware(originalSession, getVirtualPath(relPath), getTarget().addNode(relPath, primaryNodeTypeName));
+    return new NodeLinkAware(getVirtualPath(relPath), getTarget().addNode(relPath, primaryNodeTypeName));
   }
 
   /**
@@ -242,7 +249,7 @@ public class NodeLinkAware extends ItemLinkAware implements ExtendedNode {
    * {@inheritDoc}
    */
   public int getIndex() throws RepositoryException {
-    return node.getIndex();
+    return getRealNode().getIndex();
   }
 
   /**
@@ -266,9 +273,9 @@ public class NodeLinkAware extends ItemLinkAware implements ExtendedNode {
    * {@inheritDoc}
    */
   public Node getNode(String relPath) throws PathNotFoundException, RepositoryException {
-    return new NodeLinkAware(originalSession,
+    return new NodeLinkAware(
                              getVirtualPath(relPath),
-                             (Node) LinkUtils.getNodeFinder().getItem(originalSession,
+                             (Node) LinkUtils.getNodeFinder().getItem(getNodeSession(),
                                                                       getVirtualPath(relPath)));
   }
 
@@ -276,21 +283,21 @@ public class NodeLinkAware extends ItemLinkAware implements ExtendedNode {
    * {@inheritDoc}
    */
   public NodeIterator getNodes() throws RepositoryException {
-    return new NodeIteratorLinkAware(originalSession, virtualPath, getTarget().getNodes());
+    return new NodeIteratorLinkAware(virtualPath, getTarget().getNodes());
   }
 
   /**
    * {@inheritDoc}
    */
   public NodeIterator getNodes(String namePattern) throws RepositoryException {
-    return new NodeIteratorLinkAware(originalSession, virtualPath, getTarget().getNodes(namePattern));
+    return new NodeIteratorLinkAware(virtualPath, getTarget().getNodes(namePattern));
   }
 
   /**
    * {@inheritDoc}
    */
   public Item getPrimaryItem() throws ItemNotFoundException, RepositoryException {
-    return ItemLinkAware.newInstance(originalSession, getVirtualPath(item.getName()), getTarget().getPrimaryItem());
+    return ItemLinkAware.newInstance(getVirtualPath(super.getName()), getTarget().getPrimaryItem());
   }
 
   /**
@@ -304,14 +311,14 @@ public class NodeLinkAware extends ItemLinkAware implements ExtendedNode {
    * {@inheritDoc}
    */
   public PropertyIterator getProperties() throws RepositoryException {
-    return new PropertyIteratorLinkAware(originalSession, virtualPath, getTarget().getProperties());
+    return new PropertyIteratorLinkAware(virtualPath, getTarget().getProperties());
   }
 
   /**
    * {@inheritDoc}
    */
   public PropertyIterator getProperties(String namePattern) throws RepositoryException {
-    return new PropertyIteratorLinkAware(originalSession, virtualPath, getTarget().getProperties(namePattern));
+    return new PropertyIteratorLinkAware(virtualPath, getTarget().getProperties(namePattern));
   }
 
   /**
@@ -319,7 +326,7 @@ public class NodeLinkAware extends ItemLinkAware implements ExtendedNode {
    */
   public Property getProperty(String relPath) throws PathNotFoundException, RepositoryException {
     String path = getVirtualPath(relPath);
-    return new PropertyLinkAware(originalSession, path, (Property) LinkUtils.getNodeFinder().getItem(originalSession, path));
+    return new PropertyLinkAware(path, (Property) LinkUtils.getNodeFinder().getItem(getNodeSession(), path));
   }
 
   /**
@@ -349,7 +356,7 @@ public class NodeLinkAware extends ItemLinkAware implements ExtendedNode {
    */
   public boolean hasNode(String relPath) throws RepositoryException {
     try {
-      return LinkUtils.getNodeFinder().getItem(originalSession, getVirtualPath(relPath)) instanceof Node;
+      return LinkUtils.getNodeFinder().getItem(getNodeSession(), getVirtualPath(relPath)) instanceof Node;
     } catch (PathNotFoundException e) {
       return false;
     }
@@ -374,7 +381,7 @@ public class NodeLinkAware extends ItemLinkAware implements ExtendedNode {
    */
   public boolean hasProperty(String relPath) throws RepositoryException {
     try {
-      return LinkUtils.getNodeFinder().getItem(originalSession, getVirtualPath(relPath)) instanceof Property;
+      return LinkUtils.getNodeFinder().getItem(getNodeSession(), getVirtualPath(relPath)) instanceof Property;
     } catch (PathNotFoundException e) {
       return false;
     }
@@ -409,7 +416,7 @@ public class NodeLinkAware extends ItemLinkAware implements ExtendedNode {
    */
   public boolean isNodeType(String nodeTypeName) throws RepositoryException {
     if (EXO_RESTORE_LOCATION.equals(nodeTypeName))
-      return this.node.isNodeType(nodeTypeName);
+      return this.getRealNode().isNodeType(nodeTypeName);
     Node node = getTargetReachable();
     return node == null ? false : node.isNodeType(nodeTypeName);
   }

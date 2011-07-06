@@ -632,6 +632,7 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
     return false;
   }
 
+  @SuppressWarnings("unchecked")
   public void updatePageListData() throws Exception {
     UIJCRExplorer uiExplorer = this.getAncestorOfType(UIJCRExplorer.class);
 

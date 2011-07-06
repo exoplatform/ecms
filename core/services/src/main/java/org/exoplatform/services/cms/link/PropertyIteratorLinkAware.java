@@ -19,7 +19,6 @@ package org.exoplatform.services.cms.link;
 import javax.jcr.Property;
 import javax.jcr.PropertyIterator;
 import javax.jcr.RepositoryException;
-import javax.jcr.Session;
 
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
@@ -37,10 +36,10 @@ public class PropertyIteratorLinkAware extends RangeIteratorLinkAware implements
    */
   private static final Log LOG  = ExoLogger.getLogger("cms.PropertyIteratorLinkAware");
 
-  public PropertyIteratorLinkAware(Session originalSession,
+  public PropertyIteratorLinkAware(
                                    String virtualPath,
                                    PropertyIterator propertyIterator) {
-    super(originalSession, virtualPath, propertyIterator);
+    super(virtualPath, propertyIterator);
   }
 
   /**
@@ -49,7 +48,7 @@ public class PropertyIteratorLinkAware extends RangeIteratorLinkAware implements
   public Property nextProperty() {
     Property property = (Property) iterator.next();
     try {
-      return new PropertyLinkAware(originalSession, LinkUtils.createPath(virtualPath, property.getName()), property);
+      return new PropertyLinkAware(LinkUtils.createPath(virtualPath, property.getName()), property);
     } catch (RepositoryException e) {
       LOG.error("Cannot create an instance of PropertyLinkAware", e);
     }

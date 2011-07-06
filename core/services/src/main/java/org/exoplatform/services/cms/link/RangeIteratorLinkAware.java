@@ -17,7 +17,6 @@
 package org.exoplatform.services.cms.link;
 
 import javax.jcr.RangeIterator;
-import javax.jcr.Session;
 
 /**
  * Created by The eXo Platform SAS
@@ -27,13 +26,11 @@ import javax.jcr.Session;
  */
 public abstract class RangeIteratorLinkAware implements RangeIterator {
 
-  protected final Session originalSession;
   protected final String virtualPath;
   protected final RangeIterator iterator;
 
-  public RangeIteratorLinkAware(Session originalSession, String virtualPath, RangeIterator iterator) {
+  public RangeIteratorLinkAware(String virtualPath, RangeIterator iterator) {
     this.iterator = iterator;
-    this.originalSession = originalSession;
     if (!virtualPath.startsWith("/")) {
       throw new IllegalArgumentException("The path '" + virtualPath +  "' must be an absolute path");
     }

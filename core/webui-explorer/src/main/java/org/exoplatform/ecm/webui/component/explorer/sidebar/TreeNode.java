@@ -22,6 +22,7 @@ import java.util.List;
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 
+import org.exoplatform.services.cms.link.NodeLinkAware;
 import org.exoplatform.services.wcm.core.NodeLocation;
 
 /**
@@ -36,6 +37,7 @@ public class TreeNode {
   private boolean isExpanded_ ;
   private String path_;
   private NodeLocation node_ ;
+  private NodeLinkAware node;
   private String name_;
   private List<TreeNode> children_ = new ArrayList<TreeNode>() ;
 
@@ -44,7 +46,11 @@ public class TreeNode {
   }
 
   private TreeNode(Node node, String path) {
-    node_ = NodeLocation.getNodeLocationByNode(node);
+    if (node instanceof NodeLinkAware) {
+      this.node = (NodeLinkAware)node;
+    } else {
+      node_ = NodeLocation.getNodeLocationByNode(node);
+    }
     name_ = getName(node);
     isExpanded_ = false ;
     path_ = path;
@@ -72,10 +78,20 @@ public class TreeNode {
   }
 
   public String getPath() { return path_; }
-  public String getNodePath() throws RepositoryException { return node_.getPath(); }
+  public String getNodePath() throws RepositoryException { 
+    return node != null ? node.getPath() : node_.getPath(); 
+  }
 
-  public Node getNode() { return NodeLocation.getNodeByLocation(node_); }
-  public void setNode(Node node) { node_ = NodeLocation.getNodeLocationByNode(node); }
+  public Node getNode() { 
+    return node != null ? node : NodeLocation.getNodeByLocation(node_); 
+  }
+  public void setNode(Node node) {
+    if (node instanceof NodeLinkAware) {
+      this.node = (NodeLinkAware)node;
+    } else {
+      node_ = NodeLocation.getNodeLocationByNode(node);
+    }
+  }
 
   public List<TreeNode> getChildren() { return children_ ; }
   public int getChildrenSize() { return children_.size() ; }
