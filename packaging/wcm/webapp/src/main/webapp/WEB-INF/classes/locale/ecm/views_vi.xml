@@ -628,6 +628,7 @@
      		<isDeep>Độ sâu</isDeep>
 							<nodetypes>Kiểu node</nodetypes> 
 							<affectedNodeTypeNames>Các kiểu node bị tác động</affectedNodeTypeNames>
+							<nodeTypeName>Tên kiểu node</nodeTypeName>
      </label>  
    </view>
   </SendMail>
@@ -638,6 +639,7 @@
      		<isDeep>Độ sâu</isDeep>
 							<nodetypes>Kiểu node</nodetypes> 
 							<affectedNodeTypeNames>Các kiểu node bị tác động</affectedNodeTypeNames>
+							<nodeTypeName>Tên kiểu node</nodeTypeName>
      </label> 
    </view>
   </ScriptAction>
@@ -648,6 +650,7 @@
      		<isDeep>Độ sâu</isDeep>
 							<nodetypes>Kiểu node</nodetypes> 
 							<affectedNodeTypeNames>Các kiểu node bị tác động</affectedNodeTypeNames>
+							<nodeTypeName>Tên kiểu node</nodeTypeName>
      </label> 
    </view>
   </Getmail>
@@ -658,6 +661,7 @@
      		<isDeep>Độ sâu</isDeep>
 							<nodetypes>Kiểu node</nodetypes> 
 							<affectedNodeTypeNames>Các kiểu node bị tác động</affectedNodeTypeNames>
+							<nodeTypeName>Tên kiểu node</nodeTypeName>
      </label> 
    </view>
   </Rss>
@@ -668,6 +672,7 @@
      		<isDeep>Độ sâu</isDeep>
 							<nodetypes>Kiểu node</nodetypes> 
 							<affectedNodeTypeNames>Các kiểu node bị tác động</affectedNodeTypeNames>
+							<nodeTypeName>Tên kiểu node</nodeTypeName>
      </label> 
    </view>
   </AddMetadata>
@@ -678,6 +683,7 @@
      		<isDeep>Độ sâu</isDeep>
 							<nodetypes>Kiểu node</nodetypes> 
 							<affectedNodeTypeNames>Các kiểu node bị tác động</affectedNodeTypeNames>
+							<nodeTypeName>Tên kiểu node</nodeTypeName>
      </label> 
    </view>
   </ReloadAction>
@@ -688,6 +694,7 @@
      		<isDeep>Độ sâu</isDeep>
 							<nodetypes>Kiểu node</nodetypes> 
 							<affectedNodeTypeNames>Các kiểu node bị tác động</affectedNodeTypeNames>
+							<nodeTypeName>Tên kiểu node</nodeTypeName>
      </label>  
    </view>
   </Transform>
@@ -698,6 +705,7 @@
      		<isDeep>Độ sâu</isDeep>
 							<nodetypes>Kiểu node</nodetypes> 
 							<affectedNodeTypeNames>Các kiểu node bị tác động</affectedNodeTypeNames>
+							<nodeTypeName>Tên kiểu node</nodeTypeName>
      </label> 
    </view>
   </EnableVersioning>

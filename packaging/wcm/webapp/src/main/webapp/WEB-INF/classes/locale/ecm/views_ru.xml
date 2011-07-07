@@ -625,8 +625,9 @@
    <view>
      <label> 
 							<isDeep>Is deep</isDeep>
-							<nodetypes>NodeTypes</nodetypes>
-							<affectedNodeTypeNames>Affected NodeTypes</affectedNodeTypeNames>
+							<nodetypes>Node types</nodetypes>
+							<affectedNodeTypeNames>Affected node types</affectedNodeTypeNames>
+							<nodeTypeName>Node type names</nodeTypeName>
      </label> 
    </view>
   </SendMail>
@@ -635,8 +636,9 @@
    <view>
      <label> 
 							<isDeep>Is deep</isDeep>
-							<nodetypes>NodeTypes</nodetypes>
-							<affectedNodeTypeNames>Affected NodeTypes</affectedNodeTypeNames>
+							<nodetypes>Node types</nodetypes>
+							<affectedNodeTypeNames>Affected node types</affectedNodeTypeNames>
+							<nodeTypeName>Node type names</nodeTypeName>
      </label> 
    </view>
   </ScriptAction>
@@ -645,8 +647,9 @@
    <view>
      <label>
      		<isDeep>Is deep</isDeep>
-							<nodetypes>NodeTypes</nodetypes> 
-							<affectedNodeTypeNames>Affected NodeTypes</affectedNodeTypeNames>
+							<nodetypes>Node types</nodetypes> 
+							<affectedNodeTypeNames>Affected node types</affectedNodeTypeNames>
+							<nodeTypeName>Node type names</nodeTypeName>
      </label> 
    </view>
   </Getmail>
@@ -655,8 +658,9 @@
    <view>
      <label> 
 							<isDeep>Is deep</isDeep>
-							<nodetypes>NodeTypes</nodetypes>
-							<affectedNodeTypeNames>Affected NodeTypes</affectedNodeTypeNames>
+							<nodetypes>Node types</nodetypes>
+							<affectedNodeTypeNames>Affected node types</affectedNodeTypeNames>
+							<nodeTypeName>Node type names</nodeTypeName>
      </label> 
    </view>
   </Rss>
@@ -665,8 +669,9 @@
    <view>
      <label>
      		<isDeep>Is deep</isDeep>
-							<nodetypes>NodeTypes</nodetypes> 
-							<affectedNodeTypeNames>Affected NodeTypes</affectedNodeTypeNames>
+							<nodetypes>Node types</nodetypes> 
+							<affectedNodeTypeNames>Affected node types</affectedNodeTypeNames>
+							<nodeTypeName>Node type names</nodeTypeName>
      </label> 
    </view>
   </AddMetadata>
@@ -675,8 +680,9 @@
    <view>
      <label>
      		<isDeep>Is deep</isDeep>
-							<nodetypes>NodeTypes</nodetypes> 
-							<affectedNodeTypeNames>Affected NodeTypes</affectedNodeTypeNames>
+							<nodetypes>Node types</nodetypes> 
+							<affectedNodeTypeNames>Affected node types</affectedNodeTypeNames>
+							<nodeTypeName>Node type names</nodeTypeName>
      </label> 
    </view>
   </ReloadAction>
@@ -685,8 +691,9 @@
    <view>
      <label> 
 							<isDeep>Is deep</isDeep>
-							<nodetypes>NodeTypes</nodetypes>
-							<affectedNodeTypeNames>Affected NodeTypes</affectedNodeTypeNames>
+							<nodetypes>Node types</nodetypes>
+							<affectedNodeTypeNames>Affected node types</affectedNodeTypeNames>
+							<nodeTypeName>Node type names</nodeTypeName>
      </label> 
    </view>
   </Transform>
@@ -695,8 +702,9 @@
    <view>
      <label>
      		<isDeep>Is deep</isDeep>
-							<nodetypes>NodeTypes</nodetypes> 
-							<affectedNodeTypeNames>Affected NodeTypes</affectedNodeTypeNames>
+							<nodetypes>Node types</nodetypes> 
+							<affectedNodeTypeNames>Affected node types</affectedNodeTypeNames>
+							<nodeTypeName>Node type names</nodeTypeName>
      </label> 
    </view>
   </EnableVersioning>
@@ -704,9 +712,9 @@
    <view>
      <label>
      		<isDeep>Is deep</isDeep>
-							<nodetypes>NodeTypes</nodetypes> 
-							<affectedNodeTypeNames>Affected NodeTypes</affectedNodeTypeNames>
-							<nodeTypeName>NodeType Name</nodeTypeName>
+							<nodetypes>Node types</nodetypes> 
+							<affectedNodeTypeNames>Affected node types</affectedNodeTypeNames>
+							<nodeTypeName>Node type names</nodeTypeName>
      </label> 
    </view>
   </AutoVersioning>

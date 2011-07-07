@@ -629,6 +629,7 @@
 							<isDeep>Récursif</isDeep>
 							<nodetypes>Types de noeuds</nodetypes>
 							<affectedNodeTypeNames>Types de noeuds affectés</affectedNodeTypeNames>
+              <nodeTypeName>Types de noeuds</nodeTypeName>							
      </label> 
    </view>
   </SendMail>
@@ -639,6 +640,7 @@
 							<isDeep>Récursif</isDeep>
 							<nodetypes>Types de noeuds</nodetypes>
 							<affectedNodeTypeNames>Types de noeuds affectés</affectedNodeTypeNames>
+              <nodeTypeName>Types de noeuds</nodeTypeName>							
      </label> 
    </view>
   </ScriptAction>
@@ -649,6 +651,7 @@
 							<isDeep>Récursif</isDeep>
 							<nodetypes>Types de noeuds</nodetypes>
 							<affectedNodeTypeNames>Types de noeuds affectés</affectedNodeTypeNames>
+              <nodeTypeName>Types de noeuds</nodeTypeName>							
      </label> 
    </view>
   </Getmail>
@@ -659,6 +662,7 @@
 							<isDeep>Récursif</isDeep>
 							<nodetypes>Types de noeuds</nodetypes>
 							<affectedNodeTypeNames>Types de noeuds affectés</affectedNodeTypeNames>
+              <nodeTypeName>Types de noeuds</nodeTypeName>							
      </label> 
    </view>
   </Rss>
@@ -669,6 +673,7 @@
 							<isDeep>Récursif</isDeep>
 							<nodetypes>Types de noeuds</nodetypes>
 							<affectedNodeTypeNames>Types de noeuds affectés</affectedNodeTypeNames>
+              <nodeTypeName>Types de noeuds</nodeTypeName>							
      </label> 
    </view>
   </AddMetadata>
@@ -679,6 +684,7 @@
 							<isDeep>Récursif</isDeep>
 							<nodetypes>Types de noeuds</nodetypes>
 							<affectedNodeTypeNames>Types de noeuds affectés</affectedNodeTypeNames>
+              <nodeTypeName>Types de noeuds</nodeTypeName>							
      </label> 
    </view>
   </ReloadAction>
@@ -689,6 +695,7 @@
 							<isDeep>Récursif</isDeep>
 							<nodetypes>Types de noeuds</nodetypes>
 							<affectedNodeTypeNames>Types de noeuds affectés</affectedNodeTypeNames>
+              <nodeTypeName>Types de noeuds</nodeTypeName>							
      </label> 
    </view>
   </Transform>
@@ -699,6 +706,7 @@
 							<isDeep>Récursif</isDeep>
 							<nodetypes>Types de noeuds</nodetypes>
 							<affectedNodeTypeNames>Types de noeuds affectés</affectedNodeTypeNames>
+              <nodeTypeName>Types de noeuds</nodeTypeName>							
      </label> 
    </view>
   </EnableVersioning>
@@ -708,7 +716,7 @@
      		<isDeep>Récursif</isDeep>
 							<nodetypes>Types de noeuds</nodetypes>
 							<affectedNodeTypeNames>Types de noeuds affectés</affectedNodeTypeNames>
-							<nodeTypeName>NodeType Name</nodeTypeName>
+              <nodeTypeName>Types de noeuds</nodeTypeName>
      </label> 
    </view>
   </AutoVersioning>

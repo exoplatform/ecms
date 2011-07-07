@@ -731,8 +731,8 @@
    <dialog>
      <label> 
 							<isDeep>Is deep</isDeep>
-							<nodetypes>NodeTypes</nodetypes>
-							<affectedNodeTypeNames>Affected NodeTypes</affectedNodeTypeNames>
+							<nodetypes>Node types</nodetypes>
+							<affectedNodeTypeNames>Affected node types</affectedNodeTypeNames>
      </label> 
    </dialog>
   </SendMail>
@@ -741,8 +741,8 @@
    <dialog>
      <label> 
 							<isDeep>Is deep</isDeep>
-							<nodetypes>NodeTypes</nodetypes>
-							<affectedNodeTypeNames>Affected NodeTypes</affectedNodeTypeNames>
+							<nodetypes>Node types</nodetypes>
+							<affectedNodeTypeNames>Affected node types</affectedNodeTypeNames>
      </label> 
    </dialog>
   </ScriptAction>
@@ -751,8 +751,8 @@
    <dialog>
      <label>
      		<isDeep>Is deep</isDeep>
-							<nodetypes>NodeTypes</nodetypes> 
-							<affectedNodeTypeNames>Affected NodeTypes</affectedNodeTypeNames>
+							<nodetypes>Node types</nodetypes> 
+							<affectedNodeTypeNames>Affected node types</affectedNodeTypeNames>
      </label> 
    </dialog>
   </Getmail>
@@ -761,8 +761,8 @@
    <dialog>
      <label> 
 							<isDeep>Is deep</isDeep>
-							<nodetypes>NodeTypes</nodetypes>
-							<affectedNodeTypeNames>Affected NodeTypes</affectedNodeTypeNames>
+							<nodetypes>Node types</nodetypes>
+							<affectedNodeTypeNames>Affected node types</affectedNodeTypeNames>
      </label> 
    </dialog>
   </Rss>
@@ -771,8 +771,8 @@
    <dialog>
      <label>
      		<isDeep>Is deep</isDeep>
-							<nodetypes>NodeTypes</nodetypes> 
-							<affectedNodeTypeNames>Affected NodeTypes</affectedNodeTypeNames>
+							<nodetypes>Node types</nodetypes> 
+							<affectedNodeTypeNames>Affected node types</affectedNodeTypeNames>
      </label> 
    </dialog>
   </AddMetadata>
@@ -781,8 +781,8 @@
    <dialog>
      <label>
      		<isDeep>Is deep</isDeep>
-							<nodetypes>NodeTypes</nodetypes> 
-							<affectedNodeTypeNames>Affected NodeTypes</affectedNodeTypeNames>
+							<nodetypes>Node types</nodetypes> 
+							<affectedNodeTypeNames>Affected node types</affectedNodeTypeNames>
      </label> 
    </dialog>
   </ReloadAction>
@@ -791,8 +791,8 @@
    <dialog>
      <label> 
 							<isDeep>Is deep</isDeep>
-							<nodetypes>NodeTypes</nodetypes>
-							<affectedNodeTypeNames>Affected NodeTypes</affectedNodeTypeNames>
+							<nodetypes>Node types</nodetypes>
+							<affectedNodeTypeNames>Affected node types</affectedNodeTypeNames>
      </label> 
    </dialog>
   </Transform>
@@ -801,8 +801,8 @@
    <dialog>
      <label>
      		<isDeep>Is deep</isDeep>
-							<nodetypes>NodeTypes</nodetypes> 
-							<affectedNodeTypeNames>Affected NodeTypes</affectedNodeTypeNames>
+							<nodetypes>Node types</nodetypes> 
+							<affectedNodeTypeNames>Affected node types</affectedNodeTypeNames>
      </label> 
    </dialog>
   </EnableVersioning>
@@ -810,8 +810,8 @@
    <dialog>
      <label>
      		<isDeep>Is deep</isDeep>
-							<nodetypes>NodeTypes</nodetypes> 
-							<affectedNodeTypeNames>Affected NodeTypes</affectedNodeTypeNames>
+							<nodetypes>Node types</nodetypes> 
+							<affectedNodeTypeNames>Affected node types</affectedNodeTypeNames>
      </label> 
    </dialog>
   </AutoVersioning>

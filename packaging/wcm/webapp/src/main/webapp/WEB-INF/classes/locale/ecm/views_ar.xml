@@ -627,6 +627,7 @@
 							<isDeep>عميق</isDeep>
 							<nodetypes>نوع العقدة</nodetypes>
 							<affectedNodeTypeNames>أنواع العقد المعنية بالأمر</affectedNodeTypeNames>
+              <nodeTypeName>Node type names</nodeTypeName>
      </label> 
    </view>
   </SendMail>
@@ -637,6 +638,7 @@
 							<isDeep>عميق</isDeep>
 							<nodetypes>نوع العقدة</nodetypes>
 							<affectedNodeTypeNames>أنواع العقد المعنية بالأمر</affectedNodeTypeNames>
+              <nodeTypeName>Node type names</nodeTypeName>
      </label> 
    </view>
   </ScriptAction>
@@ -647,6 +649,7 @@
      		<isDeep>عميق</isDeep>
 							<nodetypes>نوع العقدة</nodetypes> 
 							<affectedNodeTypeNames>أنواع العقد المعنية بالأمر</affectedNodeTypeNames>
+              <nodeTypeName>Node type names</nodeTypeName>
      </label> 
    </view>
   </Getmail>
@@ -657,6 +660,7 @@
 							<isDeep>عميق</isDeep>
 							<nodetypes>نوع العقدة</nodetypes>
 							<affectedNodeTypeNames>أنواع العقد المعنية بالأمر</affectedNodeTypeNames>
+              <nodeTypeName>Node type names</nodeTypeName>
      </label> 
    </view>
   </Rss>
@@ -667,6 +671,7 @@
      		<isDeep>عميق</isDeep>
 							<nodetypes>نوع العقدة</nodetypes> 
 							<affectedNodeTypeNames>أنواع العقد المعنية بالأمر</affectedNodeTypeNames>
+              <nodeTypeName>Node type names</nodeTypeName>
      </label> 
    </view>
   </AddMetadata>
@@ -677,6 +682,7 @@
      		<isDeep>عميق</isDeep>
 							<nodetypes>نوع العقدة</nodetypes> 
 							<affectedNodeTypeNames>أنواع العقد المعنية بالأمر</affectedNodeTypeNames>
+              <nodeTypeName>Node type names</nodeTypeName>
      </label> 
    </view>
   </ReloadAction>
@@ -687,6 +693,7 @@
 							<isDeep>عميق</isDeep>
 							<nodetypes>نوع العقدة</nodetypes>
 							<affectedNodeTypeNames>أنواع العقد المعنية بالأمر</affectedNodeTypeNames>
+              <nodeTypeName>Node type names</nodeTypeName>
      </label> 
    </view>
   </Transform>
@@ -697,6 +704,7 @@
      		<isDeep>عميق</isDeep>
 							<nodetypes>نوع العقدة</nodetypes> 
 							<affectedNodeTypeNames>أنواع العقد المعنية بالأمر</affectedNodeTypeNames>
+              <nodeTypeName>Node type names</nodeTypeName>
      </label> 
    </view>
   </EnableVersioning>
