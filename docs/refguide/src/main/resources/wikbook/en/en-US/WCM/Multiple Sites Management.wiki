@@ -1,9 +1,0 @@
-h1. Multiple Sites Management
-
-WCM(Web content management)can be used to manage multiple sites. This comfortable feature is very useful for webmasters who want to know about total sites of system, version of sites, permission of sites, publication, categories, and all information of sites. Thus, WCM allows webmasters to manage multiple sites in only one place.
-
-!F2.gif!
-
-h2. Reference
-----
-# We can see how to use this function on [How to manage multiple site|WCM:Creating Web Content using the Sites Explorer]

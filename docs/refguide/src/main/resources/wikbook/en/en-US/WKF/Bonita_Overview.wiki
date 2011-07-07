@@ -1,9 +1,0 @@
-h1. Bonita Overview
-
-eXo and Bonita team are working closely to deploy Bonita v4 - code name Nova Bonita - into eXo Platform Portal and WebOS.
-
-Actually, this incoming Bonita version has its monitoring Console based on eXo WebOS:
-
-<object width="425" height="344"><param name="movie" value="http://www.youtube.com/v/YV5qBblfCKw&hl=en&fs=1"></param><param name="allowFullScreen" value="true"></param><embed src="http://www.youtube.com/v/YV5qBblfCKw&hl=en&fs=1" type="application/x-shockwave-flash" allowfullscreen="true" width="425" height="344"></embed></object>
-
-For the philosophy, please read this [article|http://www.theserverside.com/tt/articles/article.tss?l=BonitaPart3], it is a bit old but the idea behind it is still true these days.
