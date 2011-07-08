@@ -22,11 +22,8 @@ import java.util.List;
 import javax.jcr.Node;
 import javax.jcr.Value;
 
-import org.exoplatform.portal.webui.util.SessionProviderFactory;
-import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.relations.RelationsService;
 import org.exoplatform.services.ecm.dms.BaseDMSTestCase;
-import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 
 /**
  * Created by The eXo Platform SARL
@@ -35,8 +32,6 @@ import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 public class TestRelationsService extends BaseDMSTestCase {
 
   private RelationsService relationsService;
-  private NodeHierarchyCreator nodeHierarchyCreator;
-  private String cmsPublicationsPath;
 
   private static final String RELATION_MIXIN = "exo:relationable";
   private static final String RELATION_PROP = "exo:relation";
@@ -44,8 +39,6 @@ public class TestRelationsService extends BaseDMSTestCase {
   public void setUp() throws Exception {
     super.setUp();
     relationsService = (RelationsService)container.getComponentInstanceOfType(RelationsService.class);
-    nodeHierarchyCreator = (NodeHierarchyCreator)container.getComponentInstanceOfType(NodeHierarchyCreator.class);
-    cmsPublicationsPath = nodeHierarchyCreator.getJcrPath(BasePath.CMS_PUBLICATIONS_PATH);
   }
 
   /**

@@ -21,13 +21,11 @@ import java.util.List;
 
 import javax.jcr.ItemNotFoundException;
 import javax.jcr.Node;
-import javax.jcr.NodeIterator;
 import javax.jcr.Property;
 import javax.jcr.Session;
 import javax.jcr.Value;
 
 import org.exoplatform.container.xml.InitParams;
-import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.relations.RelationsService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
@@ -202,26 +200,6 @@ public class RelationsServiceImpl implements RelationsService, Startable {
    * {@inheritDoc}
    */
   public void start() {
-    Session session = null;
-    Node relationsHome = null;
-    try {
-      String relationPath = nodeHierarchyCreator_.getJcrPath(BasePath.CMS_PUBLICATIONS_PATH);
-      if (relationPath == null) throw new IllegalArgumentException();
-      session = getSession();
-      relationsHome = (Node) session.getItem(relationPath);
-      for (NodeIterator iterator = relationsHome.getNodes(); iterator.hasNext();) {
-        Node rel = iterator.nextNode();
-        rel.addMixin("mix:referenceable");
-      }
-      relationsHome.save();
-      session.save();
-    } catch (IllegalArgumentException e) {
-      LOG.error("Cannot find path by alias " + BasePath.CMS_PUBLICATIONS_PATH);
-    } catch (Exception e) {
-      if(session !=null && session.isLive()) session.logout();
-    } finally {
-      if(session != null) session.logout();
-    }
   }
 
   /**
@@ -242,23 +220,6 @@ public class RelationsServiceImpl implements RelationsService, Startable {
    * {@inheritDoc}
    */
   public void init() throws Exception {
-    Session session = getSession();
-    String relationPath = nodeHierarchyCreator_.getJcrPath(BasePath.CMS_PUBLICATIONS_PATH);
-    if (relationPath == null) throw new IllegalArgumentException();
-    try {
-      Node relationsHome = (Node) session.getItem(relationPath);
-      for (NodeIterator iterator = relationsHome.getNodes(); iterator.hasNext();) {
-        Node rel = iterator.nextNode();
-        rel.addMixin("mix:referenceable");
-      }
-      relationsHome.save();
-    } catch (IllegalArgumentException e) {
-      LOG.error("Cannot find path by alias " + BasePath.CMS_PUBLICATIONS_PATH);
-    } catch (Exception e) {
-      LOG.error("Unexpected error", e);
-    } finally {
-      if(session != null) session.logout();
-    }
   }
 
   /**

@@ -25,7 +25,6 @@ public interface BasePath {
   public static final String CMS_HOME_PATH = "homePath";
   public static final String CMS_USERS_PATH = "usersPath";
   public static final String CMS_GROUPS_PATH = "groupsPath";
-  public static final String CMS_PUBLICATIONS_PATH = "cmsPublicationsPath";
   public static final String CMS_RULES_PATH = "cmsRulesPath";
   public static final String CMS_VIEWTEMPLATES_PATH = "viewTemplatesPath" ;
   public static final String CMS_VIEWS_PATH = "userViewsPath" ;
