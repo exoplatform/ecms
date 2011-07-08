@@ -130,27 +130,27 @@
 				    		<%
 				  		}
 				  	%>
+					<div class="CaptionFunc">
+					<%
+		  				String labelRefreshAction = _ctx.appRes("UICLVPresentation.action.refresh");
+		  				def isShowRefresh = uicomponent.isShowField(UICLVPortlet.PREFERENCE_SHOW_REFRESH_BUTTON);
+      					if (isShowRefresh) { 
+							String link = uicomponent.event("Refresh");
+					%>				
+							<div class="CaptionRefresh">
+								<a href="$link">$labelRefreshAction</a>
+							</div>
+						<% 
+						}
+						if (uicomponent.showPaginator()) {
+							uicomponent.renderChild(UICustomizeablePaginator.class);
+						} 
+					%>
+						<div style="clear: both"><span></span></div>
+					</div>				  	
 			  	</div>
 			  <%	
 			}
 		%>
-	</div>
-	<div class="CaptionFunc">
-		<% 
-		  String labelRefreshAction = _ctx.appRes("UICLVPresentation.action.refresh");
-		  def isShowRefresh = uicomponent.isShowField(UICLVPortlet.PREFERENCE_SHOW_REFRESH_BUTTON);
-      if (isShowRefresh) { 
-				String link = uicomponent.event("Refresh");
-				%>				
-					<div class="CaptionRefresh">
-						<a href="$link">$labelRefreshAction</a>
-					</div>
-				<% 
-			}
-			if (uicomponent.showPaginator()) {
-				uicomponent.renderChild(UICustomizeablePaginator.class);
-			} 
-		%>
-		<div style="clear: left"><span></span></div>
 	</div>
 </div>

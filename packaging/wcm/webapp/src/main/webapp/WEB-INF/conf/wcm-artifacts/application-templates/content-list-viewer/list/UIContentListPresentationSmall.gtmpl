@@ -115,6 +115,7 @@
 						uicomponent.renderChild(UICustomizeablePaginator.class);
 				} 
 			%>
+			<div style="clear: both;"><span></span></div>
 		</div>
 	</div>
 </div>
