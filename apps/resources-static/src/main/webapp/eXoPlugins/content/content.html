@@ -22,7 +22,9 @@
 			var CKEDITOR = window.opener.CKEDITOR || {};
 			eXp.init();      
 			eXp.userLanguage = eXo.ecm.ECS.userLanguage || "en";
-			window.onload = eXp.loadScript(window, "lang/" + eXp.userLanguage + ".js"); 
+			window.onload = function() {
+				eXp.loadScript(window, "lang/" + eXp.userLanguage + ".js"); 
+			}
 			var strHTML = "";   
 			if(eXo.ecm.ECS.insertContentType=="Image") {
 				strHTML = "<input type=\"hidden\" name=\"Filter\" id=\"Filter\" value=\"Image\">";
