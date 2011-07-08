@@ -333,7 +333,6 @@ EcmContentSelector.prototype.renderSubTrees = function(currentNode, event, conne
 				tmpNode.style.display = "block";
 			} else if(nextElementNode && nextElementNode.className == "ChildrenContainer"){				
 				eXo.ecm.ECS.actionColExp(parentNode);
-				if(nodeIcon) nodeIcon.className = 'ExpandIcon';
 			} else {				
 				var cldrContainer = eXo.core.DOMUtil.findAncestorByClass(currentNode, "ChildrenContainer");
 				nodeIcon.className = 'CollapseIcon';
@@ -362,12 +361,16 @@ EcmContentSelector.prototype.actionColExp = function(objNode) {
 			eXo.ecm.ECS.getDir(currentNode, false);
 		} else return;
 	}
-	if(nextElt.style.display != 'block') {    
-		nextElt.style.display = 'block';
+	if(iconElt.className != 'CollapseIcon') {
+		if (nextElt.className == "ChildrenContainer") {
+			nextElt.style.display = 'block';	
+		}
 		iconElt.className = 'CollapseIcon';
 	} else if(!eXo.ecm.ECS.switchView) {
-    eXo.ecm.ECS.switchView = false;
-    nextElt.style.display = 'none';
+		eXo.ecm.ECS.switchView = false;
+		if (nextElt.className == "ChildrenContainer") {
+			nextElt.style.display = 'none';
+		}
 		iconElt.className = 'ExpandIcon';
 	}
 };
