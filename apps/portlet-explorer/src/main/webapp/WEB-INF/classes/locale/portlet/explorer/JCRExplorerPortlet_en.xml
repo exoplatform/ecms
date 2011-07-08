@@ -827,7 +827,7 @@
       <checkbox-require>You must select at least one permission</checkbox-require>
       <userOrGroup-required>You must select user or group before save this permission</userOrGroup-required>
       <not-change-permission>You have no right to add permission</not-change-permission>
-      <access-denied>Access denied! You can not remove this right permission.</access-denied>
+      <access-denied>Access denied! You can not remove this permission.</access-denied>
     </msg>
   </UIPermissionForm>
   <!--
