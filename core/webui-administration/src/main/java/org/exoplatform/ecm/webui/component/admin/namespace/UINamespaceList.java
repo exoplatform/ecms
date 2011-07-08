@@ -62,8 +62,12 @@ public class UINamespaceList extends UIPagingGrid {
                                                                                           .getNamespaceRegistry();
     List<NamespaceBean> nspBeans = new ArrayList<NamespaceBean>();
     String[] prefixs = namespaceRegistry.getPrefixes();
-    for (int i = 0; i < prefixs.length - 1; i++) {
-      NamespaceBean bean = new NamespaceBean(prefixs[i], namespaceRegistry.getURI(prefixs[i]));
+    for (int i = 0; i < prefixs.length; i++) {
+      String prefix = prefixs[i];
+      if (prefix == null || prefix.trim().length() == 0) {
+        continue;
+      }
+      NamespaceBean bean = new NamespaceBean(prefix, namespaceRegistry.getURI(prefix));
       nspBeans.add(bean);
     }
     Collections.sort(nspBeans, new NameSpaceComparator());
