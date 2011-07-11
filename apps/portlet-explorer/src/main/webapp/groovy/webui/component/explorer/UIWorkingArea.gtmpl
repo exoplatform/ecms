@@ -19,14 +19,18 @@
   def rcontext = _ctx.getRequestContext() ;
   UITreeExplorer uiTreeExplorer = uicomponent.findFirstComponentOfType(UITreeExplorer.class);
   def focusNode = uiTreeExplorer.getEncodeCurrentPath();
+  def expandNode = uiTreeExplorer.getEncodeExpandPath();
+  def isExpand = uiTreeExplorer.getIsExpand();
   def uiExplorer = uicomponent.getAncestorOfType(UIJCRExplorer.class);
   def pref = uiExplorer.getPreference();
   def enableDragAndDrop = pref.isEnableDragAndDrop();
   
   String componentId = uicomponent.getId();
-  
   rcontext.getJavascriptManager().addJavascript("eXo.ecm.UIListView.initDragDropForTreeEvent('$componentId', '$enableDragAndDrop');");
-  rcontext.getJavascriptManager().addJavascript("eXo.ecm.ECMUtils.loadEffectedSideBar('$focusNode');") ;
+  if(!isExpand && focusNode != null)
+  	rcontext.getJavascriptManager().addJavascript("eXo.ecm.ECMUtils.loadEffectedSideBar('$focusNode');") ;
+  else if(isExpand && expandNode != null)
+  	rcontext.getJavascriptManager().addJavascript("eXo.ecm.ECMUtils.loadEffectedSideBar('$expandNode');") ;
   rcontext.getJavascriptManager().addOnLoadJavascript('eXo.ecm.ECMUtils.loadEffectedItemsInSideBar');
   rcontext.getJavascriptManager().addOnLoadJavascript("eXo.ecm.UIListView.setHeight");
   rcontext.getJavascriptManager().addOnResizeJavascript("eXo.ecm.UIListView.setHeight");

@@ -88,6 +88,8 @@ public class UITreeExplorer extends UIContainer {
   private static final Log LOG  = ExoLogger.getLogger("dms.UIJCRExplorer");
   private static final String EXO_RESTORE_LOCATION = "exo:restoreLocation";
   private TreeNode treeRoot_ ;
+  private String expandPath = null;
+  private boolean isExpand = false;
   public UITreeExplorer() throws Exception {
   }
 
@@ -228,6 +230,16 @@ public class UITreeExplorer extends UIContainer {
   public String getEncodeCurrentPath() {
     return encodeBase64(getAncestorOfType(UIJCRExplorer.class).getCurrentPath());
   }
+  
+  public String getEncodeExpandPath() {
+    if(expandPath != null)
+      return encodeBase64(expandPath);
+    else return null;
+  }
+  
+  public boolean getIsExpand() {
+    return isExpand;
+  }
 
   public static String encodeBase64(String value) {
     value = value == null ? "" : value;
@@ -346,11 +358,13 @@ public class UITreeExplorer extends UIContainer {
     UIJCRExplorer uiExplorer = getAncestorOfType(UIJCRExplorer.class) ;
     return encodeBase64(uiExplorer.getCurrentPath());
   }
-
+  
+  
   static public class ExpandActionListener extends EventListener<UITreeExplorer> {
     public void execute(Event<UITreeExplorer> event) throws Exception {
       UITreeExplorer uiTreeExplorer = event.getSource();
       String path = event.getRequestContext().getRequestParameter(OBJECTID) ;
+      uiTreeExplorer.isExpand = false;
       UIJCRExplorer uiExplorer = uiTreeExplorer.getAncestorOfType(UIJCRExplorer.class) ;
       UIApplication uiApp = uiTreeExplorer.getAncestorOfType(UIApplication.class) ;
       String workspaceName = event.getRequestContext().getRequestParameter("workspaceName");
@@ -414,6 +428,8 @@ public class UITreeExplorer extends UIContainer {
     public void execute(Event<UITreeExplorer> event) throws Exception {
       UITreeExplorer uiTreeExplorer = event.getSource();
       String path = event.getRequestContext().getRequestParameter(OBJECTID);
+      uiTreeExplorer.expandPath = path;
+      uiTreeExplorer.isExpand = true;
       UIJCRExplorer uiExplorer = uiTreeExplorer.getAncestorOfType(UIJCRExplorer.class);
       UIApplication uiApp = uiTreeExplorer.getAncestorOfType(UIApplication.class);
       String workspaceName = event.getRequestContext().getRequestParameter("workspaceName");
@@ -452,8 +468,7 @@ public class UITreeExplorer extends UIContainer {
         return;
       }
       if (isInTrash(item))
-        return;
-
+        return;      
       if (uiExplorer.getPreference().isShowSideBar()
           && uiExplorer.getAncestorOfType(UIJCRExplorerPortlet.class).isShowSideBar()) {
         uiTreeExplorer.buildTree(path);
