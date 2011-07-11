@@ -195,7 +195,7 @@
       <invalid-format>Định dạng ngày tháng không đúng ở trường '{0}'</invalid-format>
       <invalid-date>"Đến ngày" phải lớn hơn "Từ ngày"</invalid-date>
       <invalid-nodeType>Kiểu nội dung "{0}" không đúng. Hãy kiểm tra lại.</invalid-nodeType>
-      <name-not-allowed>Bạn vừa nhập một số kí tự không hợp lệ. Xin vui lòng nhập lại !</name-not-allowed>
+      <invalid-keyword>Từ khóa tìm kiếm không hợp lệ hoặc không được hỗ trợ</invalid-keyword>
     </msg>
   </UIContentSearchForm>
 

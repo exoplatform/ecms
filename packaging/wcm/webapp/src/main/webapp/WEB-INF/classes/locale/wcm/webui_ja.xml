@@ -195,7 +195,7 @@
       <invalid-format>不正な日時フォーマットです '{0}'</invalid-format>
       <invalid-date>終了日は開始日より大きい必要があります</invalid-date>
       <invalid-nodeType>ノードタイプ "{0}" が不正です。確認してください</invalid-nodeType>
-      <name-not-allowed>There are some invalid characters in this field. Type another value, please! </name-not-allowed>
+      <invalid-keyword>The keyword is invalid. Some characters are not supported.</invalid-keyword>
     </msg>
   </UIContentSearchForm>
 

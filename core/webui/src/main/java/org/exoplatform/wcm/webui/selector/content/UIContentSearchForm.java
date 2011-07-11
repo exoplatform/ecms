@@ -22,14 +22,17 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import javax.jcr.RepositoryException;
+import javax.jcr.query.InvalidQueryException;
+
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.wcm.core.WCMConfigurationService;
 import org.exoplatform.services.wcm.search.QueryCriteria;
-import org.exoplatform.services.wcm.search.ResultNode;
-import org.exoplatform.services.wcm.search.SiteSearchService;
 import org.exoplatform.services.wcm.search.QueryCriteria.DATE_RANGE_SELECTED;
 import org.exoplatform.services.wcm.search.QueryCriteria.DatetimeRange;
+import org.exoplatform.services.wcm.search.ResultNode;
+import org.exoplatform.services.wcm.search.SiteSearchService;
 import org.exoplatform.services.wcm.search.base.AbstractPageList;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
@@ -280,9 +283,6 @@ public class UIContentSearchForm extends UIForm {
 
   static public class SearchWebContentActionListener extends EventListener<UIContentSearchForm> {
     
-    private static final String[] FILTER_CHARS = { "&", "$", "@", ":", "]", "[", "*", "%", "!", "", "(",
-                                           ")", "'", "#", ";", "}", "{", "/", "|", "\"" };
-    
     public void execute(Event<UIContentSearchForm> event) throws Exception {
       UIContentSearchForm uiWCSearch = event.getSource();
       String typeSearch = uiWCSearch.getAncestorOfType(UIContentSelector.class)
@@ -295,150 +295,181 @@ public class UIContentSearchForm extends UIForm {
       QueryCriteria qCriteria = uiWCSearch.getInitialQueryCriteria(siteName);
       AbstractPageList<ResultNode> pagResult = null;
 
-      if(typeSearch.equals(UIContentBrowsePanel.WEBCONTENT) || typeSearch.equals(UIContentBrowsePanel.MEDIA)){
-        if(UIContentSearchForm.SEARCH_BY_NAME.equals(radioValue)) {
-          String keyword = uiWCSearch.getUIStringInput(radioValue).getValue();
-          if (keyword != null && keyword.length() > 0) {
-
-            for (String filterChar : FILTER_CHARS) {
-              if (keyword.indexOf(filterChar) > -1) {
-                uiApp.addMessage(new ApplicationMessage("UIContentSearchForm.msg.name-not-allowed",
-                                                        null,
-                                                        ApplicationMessage.WARNING));
-                event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
-                return;
+      try {
+        if (typeSearch.equals(UIContentBrowsePanel.WEBCONTENT)
+            || typeSearch.equals(UIContentBrowsePanel.MEDIA)) {
+          if (UIContentSearchForm.SEARCH_BY_NAME.equals(radioValue)) {
+            String keyword = uiWCSearch.getUIStringInput(radioValue).getValue();
+            if (uiWCSearch.haveEmptyField(uiApp, event, keyword))
+              return;
+            pagResult = uiWCSearch.searchWebContentByName(keyword.trim(), qCriteria, pageSize);
+          } else if (UIContentSearchForm.SEARCH_BY_CONTENT.equals(radioValue)) {
+            String keyword = uiWCSearch.getUIStringInput(radioValue).getValue();
+            if (uiWCSearch.haveEmptyField(uiApp, event, keyword))
+              return;
+            pagResult = uiWCSearch.searchWebContentByFulltext(keyword, qCriteria, pageSize);
+          } else if (UIContentSearchForm.PROPERTY.equals(radioValue)) {
+            String property = uiWCSearch.getUIStringInput(UIContentSearchForm.PROPERTY).getValue();
+            String keyword = uiWCSearch.getUIStringInput(UIContentSearchForm.CONTAIN).getValue();
+            if (uiWCSearch.haveEmptyField(uiApp, event, property, keyword))
+              return;
+            pagResult = uiWCSearch.searchWebContentByProperty(property,
+                                                              keyword,
+                                                              qCriteria,
+                                                              pageSize);
+          } else if (UIContentSearchForm.TIME_OPTION.equals(radioValue)) {
+            UIFormDateTimeInput startDateInput = uiWCSearch.getUIFormDateTimeInput(UIContentSearchForm.START_TIME);
+            UIFormDateTimeInput endDateInput = uiWCSearch.getUIFormDateTimeInput(UIContentSearchForm.END_TIME);
+            try {
+              new SimpleDateFormat("MM/dd/yyyy HH:mm:ss").parse(startDateInput.getValue());
+            } catch (ParseException e) {
+              uiApp.addMessage(new ApplicationMessage("UIContentSearchForm.msg.invalid-format",
+                                                      null,
+                                                      ApplicationMessage.WARNING));
+              event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+              return;
+            }
+            Calendar startDate = startDateInput.getCalendar();
+            Calendar endDate = endDateInput.getCalendar();
+            if (uiWCSearch.haveEmptyField(uiApp, event, startDateInput.getValue()))
+              return;
+            if (endDate == null) {
+              if (startDate.getTimeInMillis() > Calendar.getInstance().getTimeInMillis()) {
+                endDate = startDate;
+              } else {
+                endDate = Calendar.getInstance();
               }
             }
-          }         
-          if(uiWCSearch.haveEmptyField(uiApp, event, keyword)) return;
-          pagResult = uiWCSearch.searchWebContentByName(keyword.trim(), qCriteria, pageSize);
-        } else if(UIContentSearchForm.SEARCH_BY_CONTENT.equals(radioValue)) {
-          String keyword = uiWCSearch.getUIStringInput(radioValue).getValue();
-          if(uiWCSearch.haveEmptyField(uiApp, event, keyword)) return;
-          pagResult =  uiWCSearch.searchWebContentByFulltext(keyword, qCriteria, pageSize);
-        } else if(UIContentSearchForm.PROPERTY.equals(radioValue)) {
-          String property = uiWCSearch.getUIStringInput(UIContentSearchForm.PROPERTY).getValue();
-          String keyword = uiWCSearch.getUIStringInput(UIContentSearchForm.CONTAIN).getValue();
-          if(uiWCSearch.haveEmptyField(uiApp, event, property, keyword)) return;
-          pagResult = uiWCSearch.searchWebContentByProperty(property, keyword, qCriteria, pageSize);
-        } else if(UIContentSearchForm.TIME_OPTION.equals(radioValue)) {
-          UIFormDateTimeInput startDateInput = uiWCSearch.getUIFormDateTimeInput(UIContentSearchForm.START_TIME);
-          UIFormDateTimeInput endDateInput = uiWCSearch.getUIFormDateTimeInput(UIContentSearchForm.END_TIME);
-          try {
-            new SimpleDateFormat("MM/dd/yyyy HH:mm:ss").parse(startDateInput.getValue());
-          } catch (ParseException e) {
-            uiApp.addMessage(new ApplicationMessage("UIContentSearchForm.msg.invalid-format", null, ApplicationMessage.WARNING));
-            event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
-            return;
-          }
-          Calendar startDate = startDateInput.getCalendar();
-          Calendar endDate = endDateInput.getCalendar();
-          if(uiWCSearch.haveEmptyField(uiApp, event, startDateInput.getValue())) return;
-          if(endDate == null) {
-            if (startDate.getTimeInMillis() > Calendar.getInstance().getTimeInMillis()) {
-              endDate = startDate;
+            if (startDate.getTimeInMillis() > endDate.getTimeInMillis()) {
+              uiApp.addMessage(new ApplicationMessage("UIContentSearchForm.msg.invalid-date",
+                                                      null,
+                                                      ApplicationMessage.WARNING));
+              event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+              return;
+            }
+            String dateRangeSelected = uiWCSearch.getUIStringInput(UIContentSearchForm.TIME_OPTION)
+                                                 .getValue();
+            if (UIContentSearchForm.CREATED_DATE.equals(dateRangeSelected)) {
+              pagResult = uiWCSearch.searchWebContentByDate(DATE_RANGE_SELECTED.CREATED,
+                                                            startDate,
+                                                            endDate,
+                                                            qCriteria,
+                                                            pageSize);
             } else {
-              endDate = Calendar.getInstance();
+              pagResult = uiWCSearch.searchWebContentByDate(DATE_RANGE_SELECTED.MODIFIDED,
+                                                            startDate,
+                                                            endDate,
+                                                            qCriteria,
+                                                            pageSize);
+            }
+          } else if (UIContentSearchForm.DOC_TYPE.equals(radioValue)) {
+            String documentType = uiWCSearch.getUIStringInput(UIContentSearchForm.DOC_TYPE)
+                                            .getValue();
+            if (uiWCSearch.haveEmptyField(uiApp, event, documentType))
+              return;
+            try {
+              pagResult = uiWCSearch.searchWebContentByDocumentType(documentType,
+                                                                    qCriteria,
+                                                                    pageSize);
+            } catch (Exception ex) {
+              uiApp.addMessage(new ApplicationMessage("UIContentSearchForm.msg.invalid-nodeType",
+                                                      new Object[] { documentType },
+                                                      ApplicationMessage.ERROR));
+              event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+              return;
             }
           }
-          if (startDate.getTimeInMillis() > endDate.getTimeInMillis()) {
-            uiApp.addMessage(new ApplicationMessage("UIContentSearchForm.msg.invalid-date", null, ApplicationMessage.WARNING));
-            event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
-            return;
-          }
-          String dateRangeSelected = uiWCSearch.getUIStringInput(UIContentSearchForm.TIME_OPTION).getValue();
-          if(UIContentSearchForm.CREATED_DATE.equals(dateRangeSelected)) {
-            pagResult =  uiWCSearch.searchWebContentByDate(DATE_RANGE_SELECTED.CREATED,
-                                                           startDate, endDate, qCriteria, pageSize);
-          } else {
-            pagResult = uiWCSearch.searchWebContentByDate(DATE_RANGE_SELECTED.MODIFIDED,
-                                                          startDate, endDate, qCriteria, pageSize);
-          }
-        } else if(UIContentSearchForm.DOC_TYPE.equals(radioValue)) {
-          String documentType = uiWCSearch.getUIStringInput(UIContentSearchForm.DOC_TYPE).getValue();
-          if(uiWCSearch.haveEmptyField(uiApp, event, documentType)) return;
-          try{
-            pagResult = uiWCSearch.searchWebContentByDocumentType(documentType, qCriteria, pageSize);
-          }catch(Exception ex){
-            uiApp.addMessage(new ApplicationMessage("UIContentSearchForm.msg.invalid-nodeType",
-                                                    new Object[] { documentType },
-                                                    ApplicationMessage.ERROR));
-            event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
-            return;
-          }
-        }
-      }else if(typeSearch.equals(UIContentBrowsePanel.DMSDOCUMENT)){
-        if(UIContentSearchForm.SEARCH_BY_NAME.equals(radioValue)) {
-          String keyword = uiWCSearch.getUIStringInput(radioValue).getValue();
-          if (keyword != null && keyword.length() > 0) {
-            for (String filterChar : FILTER_CHARS) {
-              if (keyword.indexOf(filterChar) > -1) {
-                uiApp.addMessage(new ApplicationMessage("UIContentSearchForm.msg.name-not-allowed",
-                                                        null,
-                                                        ApplicationMessage.WARNING));
-                event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
-                return;
+        } else if (typeSearch.equals(UIContentBrowsePanel.DMSDOCUMENT)) {
+          if (UIContentSearchForm.SEARCH_BY_NAME.equals(radioValue)) {
+            String keyword = uiWCSearch.getUIStringInput(radioValue).getValue();
+            if (uiWCSearch.haveEmptyField(uiApp, event, keyword))
+              return;
+            pagResult = uiWCSearch.searchDocumentByName(keyword.trim(), qCriteria, pageSize);
+          } else if (UIContentSearchForm.SEARCH_BY_CONTENT.equals(radioValue)) {
+            String keyword = uiWCSearch.getUIStringInput(radioValue).getValue();
+            if (uiWCSearch.haveEmptyField(uiApp, event, keyword))
+              return;
+            pagResult = uiWCSearch.searchDocumentByFulltext(keyword, qCriteria, pageSize);
+          } else if (UIContentSearchForm.PROPERTY.equals(radioValue)) {
+            String property = uiWCSearch.getUIStringInput(UIContentSearchForm.PROPERTY).getValue();
+            String keyword = uiWCSearch.getUIStringInput(UIContentSearchForm.CONTAIN).getValue();
+            if (uiWCSearch.haveEmptyField(uiApp, event, property, keyword))
+              return;
+            pagResult = uiWCSearch.searchDocumentByProperty(property, keyword, qCriteria, pageSize);
+          } else if (UIContentSearchForm.TIME_OPTION.equals(radioValue)) {
+            UIFormDateTimeInput startDateInput = uiWCSearch.getUIFormDateTimeInput(UIContentSearchForm.START_TIME);
+            UIFormDateTimeInput endDateInput = uiWCSearch.getUIFormDateTimeInput(UIContentSearchForm.END_TIME);
+            try {
+              new SimpleDateFormat(startDateInput.getDatePattern_()).parse(startDateInput.getValue());
+              new SimpleDateFormat(endDateInput.getDatePattern_()).parse(endDateInput.getValue());
+            } catch (Exception e) {
+              uiApp.addMessage(new ApplicationMessage("UIContentSearchForm.msg.invalid-format",
+                                                      null,
+                                                      ApplicationMessage.WARNING));
+              event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+              return;
+            }
+            Calendar startDate = startDateInput.getCalendar();
+            Calendar endDate = endDateInput.getCalendar();
+            if (uiWCSearch.haveEmptyField(uiApp, event, startDateInput.getValue()))
+              return;
+            if (endDate == null) {
+              if (startDate.getTimeInMillis() > Calendar.getInstance().getTimeInMillis()) {
+                endDate = startDate;
+              } else {
+                endDate = Calendar.getInstance();
               }
             }
-          }         
-          if(uiWCSearch.haveEmptyField(uiApp, event, keyword)) return;
-          pagResult = uiWCSearch.searchDocumentByName(keyword.trim(), qCriteria, pageSize);
-        } else if(UIContentSearchForm.SEARCH_BY_CONTENT.equals(radioValue)) {
-          String keyword = uiWCSearch.getUIStringInput(radioValue).getValue();
-          if(uiWCSearch.haveEmptyField(uiApp, event, keyword)) return;
-          pagResult =  uiWCSearch.searchDocumentByFulltext(keyword, qCriteria, pageSize);
-        } else if(UIContentSearchForm.PROPERTY.equals(radioValue)) {
-          String property = uiWCSearch.getUIStringInput(UIContentSearchForm.PROPERTY).getValue();
-          String keyword = uiWCSearch.getUIStringInput(UIContentSearchForm.CONTAIN).getValue();
-          if(uiWCSearch.haveEmptyField(uiApp, event, property, keyword)) return;
-          pagResult = uiWCSearch.searchDocumentByProperty(property, keyword, qCriteria, pageSize);
-        } else if(UIContentSearchForm.TIME_OPTION.equals(radioValue)) {
-          UIFormDateTimeInput startDateInput = uiWCSearch.getUIFormDateTimeInput(UIContentSearchForm.START_TIME);
-          UIFormDateTimeInput endDateInput = uiWCSearch.getUIFormDateTimeInput(UIContentSearchForm.END_TIME);
-          try {
-            new SimpleDateFormat(startDateInput.getDatePattern_()).parse(startDateInput.getValue());
-            new SimpleDateFormat(endDateInput.getDatePattern_()).parse(endDateInput.getValue());
-          } catch (Exception e) {
-            uiApp.addMessage(new ApplicationMessage("UIContentSearchForm.msg.invalid-format", null, ApplicationMessage.WARNING));
-            event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
-            return;
-          }
-          Calendar startDate = startDateInput.getCalendar();
-          Calendar endDate = endDateInput.getCalendar();
-          if(uiWCSearch.haveEmptyField(uiApp, event, startDateInput.getValue())) return;
-          if(endDate == null) {
-            if (startDate.getTimeInMillis() > Calendar.getInstance().getTimeInMillis()) {
-              endDate = startDate;
+            if (startDate.getTimeInMillis() > endDate.getTimeInMillis()) {
+              uiApp.addMessage(new ApplicationMessage("UIContentSearchForm.msg.invalid-date",
+                                                      null,
+                                                      ApplicationMessage.WARNING));
+              event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+              return;
+            }
+            String dateRangeSelected = uiWCSearch.getUIStringInput(UIContentSearchForm.TIME_OPTION)
+                                                 .getValue();
+            if (UIContentSearchForm.CREATED_DATE.equals(dateRangeSelected)) {
+              pagResult = uiWCSearch.searchDocumentByDate(DATE_RANGE_SELECTED.CREATED,
+                                                          startDate,
+                                                          endDate,
+                                                          qCriteria,
+                                                          pageSize);
             } else {
-              endDate = Calendar.getInstance();
+              pagResult = uiWCSearch.searchDocumentByDate(DATE_RANGE_SELECTED.MODIFIDED,
+                                                          startDate,
+                                                          endDate,
+                                                          qCriteria,
+                                                          pageSize);
+            }
+          } else if (UIContentSearchForm.DOC_TYPE.equals(radioValue)) {
+            String documentType = uiWCSearch.getUIStringInput(UIContentSearchForm.DOC_TYPE)
+                                            .getValue();
+            if (uiWCSearch.haveEmptyField(uiApp, event, documentType))
+              return;
+            try {
+              pagResult = uiWCSearch.searchDocumentByType(documentType, qCriteria, pageSize);
+            } catch (Exception exception) {
+              uiApp.addMessage(new ApplicationMessage("UIContentSearchForm.msg.invalid-nodeType",
+                                                      new Object[] { documentType },
+                                                      ApplicationMessage.ERROR));
+              event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+              return;
             }
           }
-          if (startDate.getTimeInMillis() > endDate.getTimeInMillis()) {
-            uiApp.addMessage(new ApplicationMessage("UIContentSearchForm.msg.invalid-date", null, ApplicationMessage.WARNING));
-            event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
-            return;
-          }
-          String dateRangeSelected = uiWCSearch.getUIStringInput(UIContentSearchForm.TIME_OPTION).getValue();
-          if(UIContentSearchForm.CREATED_DATE.equals(dateRangeSelected)) {
-            pagResult =  uiWCSearch.searchDocumentByDate(DATE_RANGE_SELECTED.CREATED,
-                                                         startDate, endDate, qCriteria, pageSize);
-          } else {
-            pagResult = uiWCSearch.searchDocumentByDate(DATE_RANGE_SELECTED.MODIFIDED,
-                                                        startDate, endDate, qCriteria, pageSize);
-          }
-        } else if(UIContentSearchForm.DOC_TYPE.equals(radioValue)) {
-          String documentType = uiWCSearch.getUIStringInput(UIContentSearchForm.DOC_TYPE).getValue();
-          if(uiWCSearch.haveEmptyField(uiApp, event, documentType)) return;
-          try{
-            pagResult = uiWCSearch.searchDocumentByType(documentType, qCriteria, pageSize);
-          }catch(Exception exception){
-            uiApp.addMessage(new ApplicationMessage("UIContentSearchForm.msg.invalid-nodeType",
-                                                    new Object[] { documentType },
-                                                    ApplicationMessage.ERROR));
-            event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
-            return;
-          }
         }
+      } catch (InvalidQueryException iqe) {
+        uiApp.addMessage(new ApplicationMessage("UIContentSearchForm.msg.invalid-keyword",
+                                                null,
+                                                ApplicationMessage.WARNING));
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        return;
+      } catch (RepositoryException re) {
+        uiApp.addMessage(new ApplicationMessage("UIContentSearchForm.msg.invalid-keyword",
+                                                null,
+                                                ApplicationMessage.WARNING));
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+        return;
       }
       UIContentSearchResult uiWCSearchResult = uiWCTabSelector.getChild(UIContentSearchResult.class);
       uiWCSearchResult.updateGrid(pagResult);
