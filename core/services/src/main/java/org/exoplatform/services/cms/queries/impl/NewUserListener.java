@@ -31,6 +31,7 @@ import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.organization.User;
 import org.exoplatform.services.organization.UserEventListener;
+import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
@@ -96,6 +97,14 @@ public class NewUserListener extends UserEventListener {
       Node node = queryNode.storeAsNode(absPath);
       if (!node.isNodeType("exo:datetime")) {
         node.addMixin("exo:datetime");
+      }
+      
+      if (!node.isNodeType(NodetypeConstant.EXO_HIDDENABLE)) {
+        node.addMixin(NodetypeConstant.EXO_HIDDENABLE);
+      }
+      
+      if (!node.isNodeType("exo:owneable")) {
+        node.addMixin("exo:owneable");
       }
       node.setProperty("exo:dateCreated",new GregorianCalendar()) ;
       node.getSession().save();
