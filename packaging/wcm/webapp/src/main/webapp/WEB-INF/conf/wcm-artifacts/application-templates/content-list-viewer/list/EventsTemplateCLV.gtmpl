@@ -34,7 +34,7 @@
 					if (isShowRSSLink) {
 						%>
             <div class="RssBar">
-	  					<a class="RssIcon" href="$rssLink" target="_newrss"><%= _ctx.appRes("UICLVPresentation.label.rssFeed") %></a>
+	  					<a class="RssIcon" onclick="javascript:window.open('$rssLink');" style="cursor:pointer"><%= _ctx.appRes("UICLVPresentation.label.rssFeed") %></a>
             </div>
 						<%
 					}

@@ -25,7 +25,7 @@
 					</div>
 					<%
 						if (isShowRSSLink) {
-							%><a class="RssIcon" href="$rssLink" target="_newrss">RSS Feed</a><%
+							%><a class="RssIcon" onclick="javascript:window.open('$rssLink');" style="cursor:pointer">RSS Feed</a><%
 						}
 					%>
 					<div class="ClearBoth"><span></span></div>

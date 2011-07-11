@@ -32,7 +32,7 @@
 							<div class="TitleBarR">
                 <div class="TitleBarM">
                   <%if (isShowRssLink) {
-                    %><a class="RssIcon" href="$rssLink" target="_newrss" title="<%= _ctx.appRes("UICLVPresentation.label.rssFeed") %>">&nbsp;</a><%
+                    %><a class="RssIcon" onclick="javascript:window.open('$rssLink');" style="cursor:pointer" title="<%= _ctx.appRes("UICLVPresentation.label.rssFeed") %>">&nbsp;</a><%
                   }%>
                   $header                  
                 </div>
@@ -96,7 +96,7 @@
 													if (isShowTitle) {
 														%><div title="$itemName" class="FloatLeft $itemIcon"></div><%
 														if (isShowLink) {
-															%><div class="Title"><a href="$itemWebdavLink" target="_newdoc" title="$itemName">$itemName</a></div><%
+															%><div class="Title"><a onclick="javascript:window.open('$itemWebdavLink');" style="cursor:pointer" title="$itemName">$itemName</a></div><%
 														} else {
 															%><div class="Title">
 															<%

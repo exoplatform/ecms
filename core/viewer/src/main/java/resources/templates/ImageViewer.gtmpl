@@ -84,5 +84,5 @@
   
 %>
   <div style="text-align:center">
-    <a href="$binarySrc" title="$dcTitle" target="_new"><image src="$binarySrc" width="$imageWidthStr"/></a>
+    <a title="$dcTitle" onclick="javascript:window.open('$binarySrc');" style="cursor:pointer"><image src="$binarySrc" width="$imageWidthStr"/></a>
   </div>

@@ -60,7 +60,7 @@
 			  		if(comment.hasProperty("exo:commentorSite")) {
 			  		  String site = comment.getProperty("exo:commentorSite").getString() ;
 		  		%>
-		  			  (<%=_ctx.appRes("Comment.view.label.site")%>: <a href="$site" target="_blank">$site</a>) - <%=_ctx.appRes("Comment.view.label.at")%>
+		  			  (<%=_ctx.appRes("Comment.view.label.site")%>: <a onclick="javascript:window.open('$site');" style="cursor:pointer">$site</a>) - <%=_ctx.appRes("Comment.view.label.at")%>
 		  		<%}%>
 		  		<%if(comment.hasProperty("exo:commentDate")){%>
 		  			<%=commentDateFormat.format(comment.getProperty("exo:commentDate").getDate().getTime())%>

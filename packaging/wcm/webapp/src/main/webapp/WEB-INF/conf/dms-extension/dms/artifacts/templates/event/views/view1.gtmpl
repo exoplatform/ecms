@@ -65,8 +65,10 @@
       <%}%>           
 
       <div class="TitleLabel">
-        <%if(node.hasProperty("exo:url")) { %>
-        <a href="<%=node.getProperty("exo:url").getString()%>" target="_newPage">
+        <%if(node.hasProperty("exo:url")) { 
+        	def strURL = node.getProperty("exo:url").getString();
+        %>
+        <a onclick="javascript:window.open('$strURL');" style="cursor:pointer">
         <%}%>
         <%=node.getProperty("exo:title").getString()%>
         <%if(node.hasProperty("exo:url")) { %>
