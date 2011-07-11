@@ -40,6 +40,7 @@ import org.exoplatform.services.jcr.access.PermissionType;
 import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.services.wcm.core.NodeLocation;
+import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -245,6 +246,16 @@ public class UIPermissionInfo extends UIContainer {
         // Reset the permissions
         linkManager.updateLink(realNode, currentNode);
       }
+      
+      if(currentNode.isNodeType(NodetypeConstant.MIX_REFERENCEABLE)){
+        List<Node> symlinks = linkManager.getAllLinks(currentNode, "exo:symlink");
+        for (Node symlink : symlinks) {
+          try {
+            linkManager.updateLink(symlink, currentNode);
+          } catch (Exception e) {}
+        }
+      }
+      currentNode.getSession().save();
 
       uiJCRExplorer.setIsHidePopup(true) ;
       event.getRequestContext().addUIComponentToUpdateByAjax(uiPopup) ;
