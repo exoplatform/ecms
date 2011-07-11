@@ -17,12 +17,14 @@
 package org.exoplatform.ecm.webui.component.explorer.control.action;
 
 import javax.jcr.Node;
+import javax.jcr.nodetype.NodeType;
 
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.control.listener.UIActionBarActionListener;
 import org.exoplatform.ecm.webui.component.explorer.popup.admin.UIPropertiesManager;
 import org.exoplatform.ecm.webui.component.explorer.popup.admin.UIPropertyForm;
 import org.exoplatform.ecm.webui.utils.PermissionUtil;
+import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIComponent;
@@ -49,8 +51,16 @@ public class ViewPropertiesActionComponent extends UIComponent {
       UIPropertiesManager uiPropertiesManager =
         uiJCRExplorer.createUIComponent(UIPropertiesManager.class, null, null);
       UIPropertyForm uiForm = uiPropertiesManager.getChild(UIPropertyForm.class);
+      uiForm.init(node);
       uiForm.setRepositoryName(uiJCRExplorer.getRepositoryName());
-      uiForm.getUIFormSelectBox(UIPropertyForm.FIELD_NAMESPACE).setOptions(uiForm.getNamespaces());
+      try{
+    	  if (node.isNodeType(Utils.NT_UNSTRUCTURED)){
+              uiForm.getUIFormSelectBox(UIPropertyForm.FIELD_NAMESPACE).setOptions(uiForm.getNamespaces());    	  
+          }else{
+        	  uiForm.getUIFormSelectBox(UIPropertyForm.PROPERTY_SELECT).setOptions(uiForm.renderProperties(node));
+          } 
+      }catch (NullPointerException npe){}
+      
       UIPopupContainer UIPopupContainer = uiJCRExplorer.getChild(UIPopupContainer.class);
       UIPopupContainer.activate(uiPropertiesManager, 700, 0);
       if(uiJCRExplorer.nodeIsLocked(node)){

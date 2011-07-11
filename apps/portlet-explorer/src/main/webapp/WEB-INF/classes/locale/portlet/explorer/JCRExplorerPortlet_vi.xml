@@ -710,6 +710,7 @@
       <upload>Tải</upload>
       <namespace>Namespace</namespace>
       <multiple>Đa giá trị</multiple>
+      <property_select>Thêm thuộc tính mới</property_select>
     </label>
     <action>
       <Save>Lưu</Save>
@@ -725,6 +726,7 @@
       <propertyName-invalid>Tên của thuộc tính phải bao gồm namespace (ví dụ: namespace:name)</propertyName-invalid>
       <propertyName-exist>Thuộc tính '{0}' đã tồn tại.</propertyName-exist>
       <propertyValu-null>Có thể có một số giá trị là null</propertyValu-null>
+      <valueFormatEx>Không thể gán đa giá trị đối với thuộc tính có giá trị duy nhất </valueFormatEx>
       <number-format-exception>Giá trị nhập vào của bạn sai định dạng</number-format-exception>
     </msg>
   </UIPropertyForm>

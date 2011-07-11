@@ -268,6 +268,8 @@
       <UIThumbnailForm>Add thumbnail image</UIThumbnailForm>
       <UIAllItemsPreferenceForm>Preference setting</UIAllItemsPreferenceForm>
       <UISelectRestorePath>Select Restore Path</UISelectRestorePath>
+      <UISEOForm>Manage SEO</UISEOForm>
+      <UISEOToolbarForm>Manage SEO</UISEOToolbarForm>
     </title>
     <header>
       <workspace>Workspace</workspace>
@@ -703,6 +705,7 @@
       <upload>Upload</upload>
       <namespace>Namespace</namespace>
       <multiple>Multiple</multiple>
+      <property_select>Add new Property</property_select>
     </label>
     <action>
       <Save>#{word.save}</Save>
@@ -718,6 +721,7 @@
       <propertyName-invalid>Property name must include namespace (ex: namespace:name)</propertyName-invalid>
       <propertyName-exist>The property '{0}' is existing.</propertyName-exist>
       <propertyValu-null>Maybe, have some values are null</propertyValu-null>
+      <valueFormatEx>Can not assign multiple-values Value to a single-valued property</valueFormatEx>
       <number-format-exception>Your input value has a wrong format</number-format-exception>
     </msg>
   </UIPropertyForm>
