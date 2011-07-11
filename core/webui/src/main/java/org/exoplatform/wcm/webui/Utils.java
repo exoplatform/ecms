@@ -24,6 +24,7 @@ import javax.portlet.PortletMode;
 import javax.portlet.PortletPreferences;
 
 import org.exoplatform.container.PortalContainer;
+import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.portal.application.PortalRequestContext;
 import org.exoplatform.portal.config.DataStorage;
 import org.exoplatform.portal.config.UserACL;
@@ -271,7 +272,7 @@ public class Utils {
       filters.put(WCMComposer.FILTER_VISIBILITY, cacheVisibility);
       return WCMCoreUtils.getService(WCMComposer.class)
                          .getContent(workspace,
-                                     nodeIdentifier,
+                        		     Text.escapeIllegalJcrChars(nodeIdentifier),
                                      filters,
                                      WCMCoreUtils.getUserSessionProvider());
     } catch (Exception e) {

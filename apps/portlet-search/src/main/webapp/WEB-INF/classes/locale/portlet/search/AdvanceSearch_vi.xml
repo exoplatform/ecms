@@ -50,6 +50,8 @@
   </UISearchPageLayoutManager>
   <UISearchForm>
   	 <message>
+  	   <keyword-not-support>The keyword is invalid. Some characters are not supported.</keyword-not-support>
+  	   <not-checked>Search type is not checked. Choose a search type, please.</not-checked>
   	   <keyword-not-empty>Giá trị của khóa tìm kiếm không được rỗng hoặc trống!</keyword-not-empty>
   	 </message>
   </UISearchForm>

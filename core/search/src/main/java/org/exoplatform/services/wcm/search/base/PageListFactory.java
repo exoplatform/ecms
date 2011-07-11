@@ -18,7 +18,10 @@ package org.exoplatform.services.wcm.search.base;
 
 import java.util.List;
 
+import javax.jcr.LoginException;
+import javax.jcr.NoSuchWorkspaceException;
 import javax.jcr.Node;
+import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 import javax.jcr.query.Query;
 import javax.jcr.query.QueryManager;
@@ -42,30 +45,26 @@ public class PageListFactory {
                                                 NodeSearchFilter filter,
                                                 SearchDataCreator<E> dataCreator,
                                                 int pageSize,
-                                                int bufferSize) {
+                                                int bufferSize) throws LoginException, NoSuchWorkspaceException, RepositoryException {
     if (pageSize == 0) {
       pageSize = AbstractPageList.DEFAULT_PAGE_SIZE;
     }
     if (bufferSize < pageSize) {
       bufferSize = Math.max(pageSize, AbstractPageList.DEAFAULT_BUFFER_SIZE);
     }
-    try {
-      SessionProvider sessionProvider = isSystemSession ? WCMCoreUtils.getSystemSessionProvider() :
+    SessionProvider sessionProvider = isSystemSession ? WCMCoreUtils.getSystemSessionProvider() :
                                                           WCMCoreUtils.getUserSessionProvider();
-      Session session = sessionProvider.getSession(workspace, WCMCoreUtils.getRepository());
-      QueryManager queryManager = session.getWorkspace().getQueryManager();
-      Query query = queryManager.createQuery(queryStatement, language);
-      QueryResult result = query.execute();
-      int totalNodes = (int)result.getNodes().getSize();
-      if (totalNodes <= AbstractPageList.RESULT_SIZE_SEPARATOR) {
-        return new ArrayNodePageList<E>(result, pageSize, filter, dataCreator);
-      } else {
-        QueryData queryData = new QueryData(queryStatement, workspace, language, isSystemSession);
-        QueryResultPageList<E> ret = new QueryResultPageList<E>(pageSize, queryData, totalNodes, bufferSize, filter, dataCreator);
-        return ret;        
-      }
-    } catch (Exception e) {
-      return null;
+    Session session = sessionProvider.getSession(workspace, WCMCoreUtils.getRepository());
+    QueryManager queryManager = session.getWorkspace().getQueryManager();
+    Query query = queryManager.createQuery(queryStatement, language);
+    QueryResult result = query.execute();
+    int totalNodes = (int)result.getNodes().getSize();
+    if (totalNodes <= AbstractPageList.RESULT_SIZE_SEPARATOR) {
+      return new ArrayNodePageList<E>(result, pageSize, filter, dataCreator);
+    } else {
+      QueryData queryData = new QueryData(queryStatement, workspace, language, isSystemSession);
+      QueryResultPageList<E> ret = new QueryResultPageList<E>(pageSize, queryData, totalNodes, bufferSize, filter, dataCreator);
+      return ret;        
     }
   }
   
@@ -74,7 +73,7 @@ public class PageListFactory {
                                                 String language,
                                                 boolean isSystemSession, 
                                                 NodeSearchFilter filter,
-                                                SearchDataCreator<E> dataCreator) {
+                                                SearchDataCreator<E> dataCreator) throws LoginException, NoSuchWorkspaceException, RepositoryException {
     return createPageList(queryStatement, workspace, language,
                           isSystemSession, filter, dataCreator,
                           AbstractPageList.DEFAULT_PAGE_SIZE, AbstractPageList.DEAFAULT_BUFFER_SIZE);

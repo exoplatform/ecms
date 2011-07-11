@@ -1930,6 +1930,7 @@
     <msg>
       <path-not-found>Répertoire introuvable</path-not-found>
       <access-denied>Accès interdit ! Vous n'avez pas les droits suffisants pour consulter ce noeud.</access-denied>
+      <keyword-not-support>Le mot clé est invalide. Certains caractères ne sont pas autorisés.</keyword-not-support>
     </msg>
     <label>
       <exeButton>OK</exeButton>

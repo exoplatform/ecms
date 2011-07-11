@@ -50,7 +50,9 @@
   </UISearchPageLayoutManager>
   <UISearchForm>
   	 <message>
-  	   <keyword-not-empty>The value of keyword is not null or empty!</keyword-not-empty>
+  	    <keyword-not-support>Le mot clé est invalide. Certains caractères ne sont pas autorisés.</keyword-not-support>
+        <keyword-not-empty>La valeur de ce mot clé ne peut pas être nul ou vide</keyword-not-empty>
+        <not-checked>Le type de recherche n'est pas sélectionné. Veuillez en choisir un.</not-checked>
   	 </message>
   </UISearchForm>
 </bundle>

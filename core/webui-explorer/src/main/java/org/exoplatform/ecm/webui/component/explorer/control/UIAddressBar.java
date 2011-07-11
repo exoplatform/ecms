@@ -25,20 +25,20 @@ import java.util.regex.Pattern;
 
 import javax.jcr.AccessDeniedException;
 import javax.jcr.Node;
+import javax.jcr.RepositoryException;
 import javax.jcr.Session;
+import javax.jcr.query.InvalidQueryException;
 import javax.jcr.query.Query;
-import javax.jcr.query.QueryManager;
-import javax.jcr.query.QueryResult;
 
 import org.apache.commons.lang.StringUtils;
-import org.exoplatform.ecm.jcr.SearchValidator;
+import org.exoplatform.ecm.jcr.SimpleSearchValidator;
 import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.ecm.webui.component.explorer.UIDocumentContainer;
 import org.exoplatform.ecm.webui.component.explorer.UIDocumentWorkspace;
 import org.exoplatform.ecm.webui.component.explorer.UIDrivesArea;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
-import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer.HistoryEntry;
+import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
 import org.exoplatform.ecm.webui.component.explorer.search.UISearchResult;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.portal.webui.util.Util;
@@ -57,8 +57,8 @@ import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.event.Event;
-import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.event.Event.Phase;
+import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.form.UIForm;
 import org.exoplatform.webui.form.UIFormStringInput;
 
@@ -98,6 +98,9 @@ public class UIAddressBar extends UIForm {
   private String              selectedViewName_;
 
   private String[]            arrView_                 = {};
+  
+  /** The Constant MESSAGE_NOT_SUPPORT_KEYWORD. */
+  private final static String MESSAGE_NOT_SUPPORT_KEYWORD = "UIAddressBar.msg.keyword-not-support".intern();
 
   final static private String FIELD_SIMPLE_SEARCH      = "simpleSearch";
 
@@ -112,7 +115,7 @@ public class UIAddressBar extends UIForm {
 
   public UIAddressBar() throws Exception {
     addUIFormInput(new UIFormStringInput(FIELD_ADDRESS, FIELD_ADDRESS, null));
-    addUIFormInput(new UIFormStringInput(FIELD_SIMPLE_SEARCH, FIELD_SIMPLE_SEARCH, null).addValidator(SearchValidator.class));
+    addUIFormInput(new UIFormStringInput(FIELD_SIMPLE_SEARCH, FIELD_SIMPLE_SEARCH, null).addValidator(SimpleSearchValidator.class));
   }
 
   public void setViewList(List<String> viewList) {
@@ -259,6 +262,7 @@ public class UIAddressBar extends UIForm {
   static public class SimpleSearchActionListener extends EventListener<UIAddressBar> {
     public void execute(Event<UIAddressBar> event) throws Exception {
       UIAddressBar uiAddressBar = event.getSource();
+      UIApplication uiApp = uiAddressBar.getAncestorOfType(UIApplication.class);
       UIJCRExplorer uiExplorer = uiAddressBar.getAncestorOfType(UIJCRExplorer.class);
       String text = uiAddressBar.getUIStringInput(FIELD_SIMPLE_SEARCH).getValue();
       Node currentNode = uiExplorer.getCurrentNode();
@@ -304,7 +308,15 @@ public class UIAddressBar extends UIForm {
                                         IdentityConstants.SYSTEM.equals(session.getUserID()));
                 long time = System.currentTimeMillis() - startTime;
                 
-                uiSearchResult.updateGrid();
+                try {
+                	uiSearchResult.updateGrid();
+                } catch (InvalidQueryException invalidEx) {
+                  uiApp.addMessage(new ApplicationMessage(MESSAGE_NOT_SUPPORT_KEYWORD, null, ApplicationMessage.WARNING));
+                  return;
+                } catch (RepositoryException reEx) {
+                  uiApp.addMessage(new ApplicationMessage(MESSAGE_NOT_SUPPORT_KEYWORD, null, ApplicationMessage.WARNING));
+                  return;
+                }
                 uiSearchResult.setSearchTime(time);
                 uiDocumentWorkspace.setRenderedChild(UISearchResult.class);
                 event.getRequestContext().addUIComponentToUpdateByAjax(uiDocumentWorkspace);
@@ -340,7 +352,15 @@ public class UIAddressBar extends UIForm {
                                                                 .getName(), currentNode.getPath());
       uiSearchResult.setQuery(queryStatement, session.getWorkspace().getName(), Query.SQL, 
                               IdentityConstants.SYSTEM.equals(session.getUserID()));
-      uiSearchResult.updateGrid();
+      try {
+      	uiSearchResult.updateGrid();
+      } catch (InvalidQueryException invalidEx) {
+        uiApp.addMessage(new ApplicationMessage(MESSAGE_NOT_SUPPORT_KEYWORD, null, ApplicationMessage.WARNING));
+        return;
+      } catch (RepositoryException reEx) {
+        uiApp.addMessage(new ApplicationMessage(MESSAGE_NOT_SUPPORT_KEYWORD, null, ApplicationMessage.WARNING));
+        return;
+      }
       long time = System.currentTimeMillis() - startTime;
       uiSearchResult.setSearchTime(time);
       

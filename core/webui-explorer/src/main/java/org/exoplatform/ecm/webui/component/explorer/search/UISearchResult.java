@@ -28,6 +28,8 @@ import java.util.Locale;
 import javax.jcr.AccessDeniedException;
 import javax.jcr.Item;
 import javax.jcr.ItemNotFoundException;
+import javax.jcr.LoginException;
+import javax.jcr.NoSuchWorkspaceException;
 import javax.jcr.Node;
 import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
@@ -183,7 +185,7 @@ public class UISearchResult extends UIContainer {
     return null;
   }
 
-  public void updateGrid() throws Exception {
+  public void updateGrid() throws LoginException, NoSuchWorkspaceException, RepositoryException {
      pageList = 
       PageListFactory.createPageList(queryData_.getQueryStatement(), 
                              queryData_.getWorkSpace(),
