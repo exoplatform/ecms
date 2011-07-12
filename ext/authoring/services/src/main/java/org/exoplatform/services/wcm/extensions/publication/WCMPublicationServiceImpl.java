@@ -218,9 +218,9 @@ public class WCMPublicationServiceImpl
 
     publicationPlugin.updateLifecyleOnChangeContent(node, remoteUser, newState);
 
-    wcmComposer.updateContent(node.getSession().getRepository().toString(),
-                              node.getSession().getWorkspace().getName(),
+    wcmComposer.updateContent(node.getSession().getWorkspace().getName(),
                               node.getPath(),
                               new HashMap<String, String>());
+    listenerService.broadcast(UPDATE_EVENT, cmsService, node);
   }
 }
