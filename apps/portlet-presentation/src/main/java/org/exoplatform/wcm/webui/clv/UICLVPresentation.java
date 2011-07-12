@@ -646,6 +646,8 @@ public class UICLVPresentation extends UIContainer {
     String portal = PortalContainer.getCurrentPortalContainerName();
     String rest = PortalContainer.getCurrentRestContextName();
     String server = Util.getPortalRequestContext().getRequest().getRequestURL().toString();
+    int lastIndex = server.indexOf(portal);
+    server = server.substring(0, lastIndex-1) + Util.getPortalRequestContext().getPortalURI();
     String fullPath = this.getAncestorOfType(UICLVPortlet.class).getFolderPathParamValue();
     if (fullPath == null || fullPath.length() == 0)
       fullPath = Utils.getPortletPreference(UICLVPortlet.PREFERENCE_ITEM_PATH);
