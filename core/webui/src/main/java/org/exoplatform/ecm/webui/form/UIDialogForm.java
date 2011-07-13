@@ -1786,10 +1786,7 @@ public class UIDialogForm extends UIForm {
   public void processRenderAction() throws Exception {
     WebuiRequestContext context = WebuiRequestContext.getCurrentInstance();
     Writer writer = context.getWriter();
-    writer.append("<div class=\"UIAction\">");
-    writer.append("<table class=\"ActionContainer\">");
-    writer.append("<tr>");
-    writer.append("<td>");
+    writer.append("<div class=\"UIAction\">");   
     String[] listAction = getActions();
     ResourceBundle res = context.getApplicationResourceBundle();
     String actionLabel;
@@ -1801,19 +1798,8 @@ public class UIDialogForm extends UIForm {
         actionLabel = action;
       }
       link = event(action);
-      writer.append("<div onclick=\"").append(link).append("\" class=\"ActionButton LightBlueStyle\">");
-      writer.append("<div class=\"ButtonLeft\">");
-      writer.append("<div class=\"ButtonRight\">");
-      writer.append("<div class=\"ButtonMiddle\">");
-      writer.append("<a href=\"javascript:void(0);\">").append(actionLabel).append("</a>");
-      writer.append("</div>");
-      writer.append("</div>");
-      writer.append("</div>");
-      writer.append("</div>");
+      writer.append("<a class=\"ActionButton LightBlueStyle\" onclick =\"").append(link).append("\"  href=\"javascript:void(0);\">").append(actionLabel).append("</a>");
     }
-    writer.append("</td>");
-    writer.append("</tr>");
-    writer.append("</table>");
     writer.append("</div>");
   }
 

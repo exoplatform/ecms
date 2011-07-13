@@ -30,28 +30,14 @@
  				</table>
  				<div style="margin: auto;width:427px;"><img src="<%=uicomponent.getLinkStateImage(Util.getUIPortal().getAncestorOfType(UIPortalApplication.class).getLocale())%>" height="46" width="472" border="0" alt=""/><br /></div>
  				
- 				<div class="UIAction"> 
-        <table class="ActionContainer" align="center">
-        	<tr>
-        		<td align="center">
+ 				<div class="UIAction">
 		          <% for(action in uicomponent.getActions()) { 
                 	 String actionLabel = _ctx.appRes(uicomponent.getName() + ".action." + action) ;
                    String link = uicomponent.event(action) ;
           		%>
-          		<a href="$link" class="ActionButton LightBlueStyle">
-                <div class="ButtonLeft">
-                  <div class="ButtonRight">
-                    <div class="ButtonMiddle">
-                      $actionLabel
-                    </div>
-                  </div>
-                </div>
-           		</a>
-          		<%}%>        
-          	</td>
-          </tr>  
-        </table>
-      </div>
+          		<a href="$link" class="ActionButton LightBlueStyle">$actionLabel</a>
+          		<%}%> 
+         </div>
 			</div>
 		</div>
 	</div>

@@ -73,30 +73,8 @@
   </div>
 </div>
 <%/* start render action*/%>
-<div class="UIAction"> 
-  <table class="ActionContainer">
-  	<tr>
-  		<td>
-		  	<div onclick="<%=uicomponent.event("EditProperty", "rma:destroyable")%>" class="ActionButton LightBlueStyle">
-					<div class="ButtonLeft">
-						 <div class="ButtonRight">
-						  <div class="ButtonMiddle" title="<%=_ctx.appRes("Destroyable.view.tooltip.add-edit")%>">
-						    <a href="javascript:void(0);"><%=_ctx.appRes("Destroyable.view.action.add-edit")%></a>
-					    </div>
-				    </div>
-				  </div>
-				</div>
-		  	<div onclick="<%=uicomponent.event("Cancel")%>" class="ActionButton LightBlueStyle">
-					<div class="ButtonLeft">
-					  <div class="ButtonRight">
-						  <div class="ButtonMiddle" title="<%=_ctx.appRes("Destroyable.view.tooltip.cancel")%>">
-						    <a href="javascript:void(0);"><%=_ctx.appRes("Destroyable.view.action.cancel")%></a>
-				      </div>
-				    </div>
-			    </div>
-				</div>
-  		</td>
-  	</tr>
-  </table>
+<div class="UIAction">
+	<a onclick="<%=uicomponent.event("EditProperty", "rma:destroyable")%>" class="ActionButton LightBlueStyle" title="<%=_ctx.appRes("Destroyable.view.tooltip.add-edit")%>" href="javascript:void(0);"><%=_ctx.appRes("Destroyable.view.action.add-edit")%></a>
+	<a onclick="<%=uicomponent.event("Cancel")%>" class="ActionButton LightBlueStyle" title="<%=_ctx.appRes("Destroyable.view.tooltip.cancel")%>" href="javascript:void(0);"><%=_ctx.appRes("Destroyable.view.action.cancel")%></a>
 </div>
 <%/* end render action*/%>

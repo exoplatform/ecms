@@ -29,29 +29,15 @@
 	    </table>
 	  </div>
 	</div>
-  <div class="UIAction"> 
-    <table class="ActionContainer">
-    	<tr>
-    		<td>
-	          <% for(action in uicomponent.getActions()) {
-	          		 String actionLabel = _ctx.appRes(uicomponent.getName() + ".action." + action) 
-	               String link = uicomponent.event(action) ;
-	          		 //System.out.println("\n\n" + uicomponent.getName()+ ".button.label-" + actionLabel + "\n\n");
-	          %>
-	              <div onclick="$link" class="ActionButton LightBlueStyle" >
-	                <div class="ButtonLeft">
-	                  <div class="ButtonRight">
-	                    <div class="ButtonMiddle">
-	                    	<a href="javascript:void(0);">$actionLabel</a>
-	                    </div>
-	                  </div>
-	                </div>
-	              </div>
-	          <%}%>   
-      	</td>
-      </tr>       
-    </table>
-  </div>
+  <div class="UIAction">
+	<% for(action in uicomponent.getActions()) {
+	String actionLabel = _ctx.appRes(uicomponent.getName() + ".action." + action) 
+	String link = uicomponent.event(action) ;
+	//System.out.println("\n\n" + uicomponent.getName()+ ".button.label-" + actionLabel + "\n\n");
+	%>
+		<a onclick="$link" class="ActionButton LightBlueStyle" href="javascript:void(0);">$actionLabel</a>
+	<%}%>   
+	</div>
   <%/* end render action */%>
 <%uiform.end()%>
 </div>

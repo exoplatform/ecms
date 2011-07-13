@@ -188,10 +188,10 @@
             </tr>
           </table>
         </fieldset>
-        <% advancedBlockDisplay = uicomponent.isShowAdvancedBlock() ? "block" : "none" 
+        <% advancedBlockDisplay = uicomponent.isShowAdvancedBlock() ? "block" : "none"
         	 advancedLinkDisplay = uicomponent.isShowAdvancedBlock()? "none" : "block";
       	%>
-        <fieldset class="fieldsetPreferences" style="display: $advancedBlockDisplay;>
+        <fieldset class="fieldsetPreferences" style="display: $advancedBlockDisplay;">
           <legend class="StyleLegend"><a style="text-align:center; color: #0000FF; text-decoration:underline;" href="<%=uicomponent.event("ShowAdvancedBlock", "false")%>" title="<%=_ctx.appRes("UICLVConfig.label.AdvancedBlock")%>"><%=_ctx.appRes("UICLVConfig.label.AdvancedBlock")%></a></legend>
           <div class="FieldLabel"><%=uicomponent.getLabel(uicomponent.DYNAMIC_NAVIGATION_LABEL) %></div>
           <table class="UIFormGrid">
@@ -272,31 +272,15 @@
       	<a style="display: $advancedLinkDisplay; text-align:left; color: #0000FF; text-decoration:underline;" href="<%=uicomponent.event("ShowAdvancedBlock", "true")%>" title="<%=_ctx.appRes("UICLVConfig.label.AdvancedBlock")%>">
       		<%=_ctx.appRes("UICLVConfig.label.AdvancedBlock")%>
     		</a>
-        <div class="UIAction"> 
-          <table class="ActionContainer">
-            <tr>
-              <td>
-                <% 
-                  for(action in uicomponent.getActions()) { 
-                    String actionLabel = _ctx.appRes(uicomponent.getName() + ".action." + action) ;
-                    String link = uicomponent.event(action) ;
-                    %>
-                      <div onclick="$link" class="ActionButton LightBlueStyle" onmouseover="this.style.color = '#058ee6'" onmouseout="this.style.color='black'">
-                        <div class="ButtonLeft">
-                          <div class="ButtonRight">
-                            <div class="ButtonMiddle">
-                              <a href="javascript:void(0);">$actionLabel</a>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    <%
-                  }
-                %>
-              </td>
-            </tr>
-          </table>
-        </div>
+	 		  <div class="UIAction">
+				<% 
+				  for(action in uicomponent.getActions()) { 
+					String actionLabel = _ctx.appRes(uicomponent.getName() + ".action." + action) ;
+					String link = uicomponent.event(action) ;
+					%>
+					<a onclick="$link" class="ActionButton LightBlueStyle" href="javascript:void(0);">$actionLabel</a>
+					<%}%>
+			  </div>
       </div>
       <%
     uiform.end()

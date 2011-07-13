@@ -29,31 +29,16 @@
 						<td class="FieldComponent"><% uiform.renderField(uicomponent.EDITABLE_CHECKBOX_INPUT); %></td>
 					</tr>
 				</table>
-				<div class="UIAction"> 
-					<table class="ActionContainer">
-						<tr>
-							<td>
-								<% 
+				<div class="UIAction"><% 
 									for(action in uicomponent.getActions()) { 
 										String actionLabel = _ctx.appRes(uicomponent.getName() + ".action." + action);
 										String link = uicomponent.event(action);
 										%>
-											<div onclick="$link" class="ActionButton LightBlueStyle" >
-												<div class="ButtonLeft">
-													<div class="ButtonRight">
-														<div class="ButtonMiddle">
-															<a href="javascript:void(0);">$actionLabel</a>
-														</div>
-													</div>
-												</div>
-											</div>
+											<a onclick="$link" class="ActionButton LightBlueStyle" href="javascript:void(0);">$actionLabel</a>
 										<%
 									}
 								%>
-							</td>
-						</tr>
-					</table>
-				</div>
+						</div>
 			</div>
 		</div>
 	<% uiform.end(); %>

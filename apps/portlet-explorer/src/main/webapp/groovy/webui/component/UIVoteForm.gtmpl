@@ -23,22 +23,8 @@
 		      <div class="NormalVote" onclick="<%=uicomponent.event("Vote", "5");%>" title="<%=_ctx.appRes("UIVoteForm.title.best")%>"><span></span></div>
 		    </div>
 		</div>
-	  <div class="UIAction"> 								
-	    <table class="ActionContainer">								       
-	    	<tr>
-	    		<td>
-			      <div onclick="<%=uicomponent.event("Cancel")%>" class="ActionButton LightBlueStyle">
-			      	<div class="ButtonLeft">
-			      		<div class="ButtonRight">
-			      			<div class="ButtonMiddle">
-			      				<a href="javascript:void(0);"><%=_ctx.appRes("UIVoteForm.button.label.cancel")%></a>
-			      			</div>
-			      		</div>
-			      	</div>	              
-			      </div>
-		  		</td>
-		  	</tr>
-		  </table>
+	  <div class="UIAction"> 
+			<a onclick="<%=uicomponent.event("Cancel")%>" class="ActionButton LightBlueStyle" href="javascript:void(0);"><%=_ctx.appRes("UIVoteForm.button.label.cancel")%></a>
 		</div>
 	</div>
 </div>

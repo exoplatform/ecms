@@ -40,22 +40,10 @@
 		<div style="clear: both;"></div>
 	</div>
 	<% uicomponent.begin(); %>
-		<div class="UIAction"> 
-	    	<table align="center" class="ActionContainer">
-		      	<tr>
-		        	<td align="center">
-		            	<a href="<%= uicomponent.event("Close") %>" class="ActionButton LightBlueStyle">
-		              		<div class="ButtonLeft">
-		                		<div class="ButtonRight">
-		                  			<div class="ButtonMiddle">
-		                    			<%=_ctx.appRes("UIPublicationPanel.button.close")%>
-		                  			</div>
-		                		</div>
-		              		</div>
-		            	</a>
-		        	</td>
-		      	</tr>
-	    	</table>
-	  	</div>
+		<div class="UIAction">
+        	<a href="<%= uicomponent.event("Close") %>" class="ActionButton LightBlueStyle">          		
+             <%=_ctx.appRes("UIPublicationPanel.button.close")%>              		
+        	</a>
+    </div>
 	<% uicomponent.end(); %>
 </div>

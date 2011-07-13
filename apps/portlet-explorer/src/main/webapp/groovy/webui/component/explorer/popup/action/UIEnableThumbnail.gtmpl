@@ -12,29 +12,7 @@
   <div style="text-align: center; margin: 10px;"><%=_ctx.appRes("UIEnableThumbnail.label.note")%></div>
   <div style="text-align: center; margin: 10px;"><%=_ctx.appRes("UIEnableThumbnail.label.question")%></div>
 	<div class="UIAction">
-	  <table class="ActionContainer"> 
-	    <tr>
-	    	<td>
-		      <div onclick="<%=uicomponent.event("EnableThumbnail")%>" class="ActionButton LightBlueStyle">
-		        <div class="ButtonLeft">
-		          <div class="ButtonRight">
-		            <div class="ButtonMiddle">
-		              <a href="javascript:void(0);"><%=_ctx.appRes("UIEnableThumbnail.action.enable")%></a>
-		            </div>
-		          </div>
-		        </div>
-		      </div>
-		      <div onclick="<%=uicomponent.event("Cancel")%>" class="ActionButton LightBlueStyle">
-		        <div class="ButtonLeft">
-		          <div class="ButtonRight">
-		            <div class="ButtonMiddle">
-		              <a href="javascript:void(0);"><%=_ctx.appRes("UIEnableThumbnail.action.cancel")%> </a>
-		            </div>
-		          </div>
-		        </div>
-		      </div>
-	  		</td>
-	  	</tr>
-	  </table>
-	</div>  
+	  <a onclick="<%=uicomponent.event("EnableThumbnail")%>" class="ActionButton LightBlueStyle" href="javascript:void(0);"><%=_ctx.appRes("UIEnableThumbnail.action.enable")%></a>
+	  <a onclick="<%=uicomponent.event("Cancel")%>" class="ActionButton LightBlueStyle" href="javascript:void(0);"><%=_ctx.appRes("UIEnableThumbnail.action.cancel")%> </a>
+	</div>   
 </div>

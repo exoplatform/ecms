@@ -213,29 +213,7 @@
 </div>
 <%/* start render action*/%>
 <div class="UIAction"> 
-  <table class="ActionContainer">
-  	<tr>
-  		<td>
-		  	<div onclick="<%=uicomponent.event("EditProperty", "rma:record")%>" class="ActionButton LightBlueStyle">
-					<div class="ButtonLeft">
-						<div class="ButtonRight">
-						  <div class="ButtonMiddle" title="<%=_ctx.appRes("Record.view.tooltip.add-edit")%>">
-						    <a href="javascript:void(0);"><%=_ctx.appRes("Record.view.action.add-edit")%></a>
-					    </div>
-				    </div>
-				  </div>
-				</div>
-		  	<div onclick="<%=uicomponent.event("Cancel")%>" class="ActionButton LightBlueStyle">
-					<div class="ButtonLeft">
-					  <div class="ButtonRight">
-						  <div class="ButtonMiddle" title="<%=_ctx.appRes("Record.view.tooltip.cancel")%>">
-						    <a href="javascript:void(0);"><%=_ctx.appRes("Record.view.action.cancel")%></a>
-				      </div>
-				    </div>
-			    </div>
-				</div>
-  		</td>
-  	</tr>
-  </table>
+    <a onclick="<%=uicomponent.event("EditProperty", "rma:record")%>" title="<%=_ctx.appRes("Record.view.tooltip.add-edit")%>" class="ActionButton LightBlueStyle" href="javascript:void(0);"><%=_ctx.appRes("Record.view.action.add-edit")%></a>
+	<a onclick="<%=uicomponent.event("Cancel")%>" title="<%=_ctx.appRes("Record.view.tooltip.cancel")%>" class="ActionButton LightBlueStyle" href="javascript:void(0);"><%=_ctx.appRes("Record.view.action.cancel")%></a>
 </div>
 <%/* end render action*/%>

@@ -75,32 +75,10 @@
 			</table>
 			<%// start render action%>
 			<div class="UIAction"> 
-				<table class="ActionContainer">
-					<tr>
-						<td>
-						 <%String saveLink = uicomponent.event("Save");%>
-							<div onclick="$saveLink" class="ActionButton LightBlueStyle">
-								<div class="ButtonLeft">
-									<div class="ButtonRight">
-										<div class="ButtonMiddle">
-											<a href="javascript:window.scroll(0,0);"><%=_ctx.appRes(uicomponent.getName() + ".action.Save")%></a>
-										</div>
-									</div>
-								</div>
-							</div>
-							<%String backLink = uicomponent.event("Back");%>
-							<div onclick="$backLink" class="ActionButton LightBlueStyle">
-								<div class="ButtonLeft">
-									<div class="ButtonRight">
-										<div class="ButtonMiddle">
-											<a href="javascript:window.scroll(0,0);"><%=_ctx.appRes(uicomponent.getName() + ".action.Back")%></a>
-										</div>
-									</div>
-								</div>
-							</div>
-						</td>
-					</tr>					
-				</table>
+				<%String saveLink = uicomponent.event("Save");%>
+				<a onclick="$saveLink" class="ActionButton LightBlueStyle" href="javascript:window.scroll(0,0);"><%=_ctx.appRes(uicomponent.getName() + ".action.Save")%></a>
+				<%String backLink = uicomponent.event("Back");%>
+				<a onclick="$backLink" class="ActionButton LightBlueStyle" href="javascript:window.scroll(0,0);"><%=_ctx.appRes(uicomponent.getName() + ".action.Back")%></a>
 			</div>
 			<%// end render action%>
 		</div>
