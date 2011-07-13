@@ -72,29 +72,11 @@
     </div>  
   </div> 
   <div class="UIAction">                                          
-	  <table align="center" class="ActionContainer">  
-	  	<tr>
-	  		<td align="center">
-		      <a href="javascript:eXo.ecm.ECMUtils.generateWebDAVLink('<%=uicomponent.getWebDAVServerPrefix()%>','<%=uicomponent.getPortalName()%>','<%=restContextName%>','${repository}','<%=uicomponent.getWorkspaceName()%>','<%=formatNodeName(originalNode.getPath())%>','<%=mimeType%>')" class="ActionButton LightBlueStyle">
-		        <div class="ButtonLeft">
-		          <div class="ButtonRight">
-		            <div class="ButtonMiddle">
-		              <%=_ctx.appRes("File.view.label.webDAV")%>
-		            </div>
-		          </div>
-		        </div>
-		      </a>
-		      <a href="<%=uicomponent.getDownloadLink(currentNode)%>" class="ActionButton LightBlueStyle">
-		        <div class="ButtonLeft">
-		          <div class="ButtonRight">
-		            <div class="ButtonMiddle" title="<%=_ctx.appRes("File.view.label.download")%>">
-		              <%=_ctx.appRes("File.view.label.download")%>
-		            </div>
-		          </div>
-		        </div>
-		      </a>
-	  		</td>
-	  	</tr>          
-	  </table>
+      <a href="javascript:eXo.ecm.ECMUtils.generateWebDAVLink('<%=uicomponent.getWebDAVServerPrefix()%>','<%=uicomponent.getPortalName()%>','<%=restContextName%>','${repository}','<%=uicomponent.getWorkspaceName()%>','<%=formatNodeName(originalNode.getPath())%>','<%=mimeType%>')" class="ActionButton LightBlueStyle">
+              <%=_ctx.appRes("File.view.label.webDAV")%>
+      </a>
+      <a href="<%=uicomponent.getDownloadLink(currentNode)%>" title="<%=_ctx.appRes("File.view.label.download")%>" class="ActionButton LightBlueStyle">
+              <%=_ctx.appRes("File.view.label.download")%>
+      </a>
 	</div>  
 </div>

@@ -5,14 +5,8 @@
 				else
 		  		println " <a href=\"" + uicomponent.event(action) + "\" class=\"ActionButton LightBlueStyle\">" ;
     println """
-					<div class="ButtonLeft">
-					  <div class="ButtonRight">
-						  <div class="ButtonMiddle">
-							    $label
-				      </div>
-				    </div>
-			    </div>
-				</a>
+		    	$label
+			</a>
 		""" ;
   }
 %>
@@ -41,18 +35,12 @@
 			<%}%>
 		</table>
 	  <div class="UIAction"> 
-	    <table class="ActionContainer">
-	    	<tr>
-	    		<td>
-			  <%
-			  	finishit = resWorkflow.getString("finish-it");
-			  	cancel = resWorkflow.getString("cancel");
-			  	writeAction(finishit, "EndOfState", null) ;
-			    writeAction(cancel, "Cancel", null) ;
-		    %>
-	        </td>
-				</tr>
-			</table>
+ 		<%
+		  	finishit = resWorkflow.getString("finish-it");
+		  	cancel = resWorkflow.getString("cancel");
+		  	writeAction(finishit, "EndOfState", null) ;
+		    writeAction(cancel, "Cancel", null) ;
+		%>
 	  </div>
   </div>
   <%uiform.end()%>

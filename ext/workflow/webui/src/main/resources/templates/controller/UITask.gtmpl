@@ -5,18 +5,12 @@
 <%
   public void writeAction(String label, String action, String param) {
 				if(param != null)
-				  println " <div onclick=\"" + uicomponent.event(action, param) + "\" class=\"ActionButton LightBlueStyle\">" ;
+				  println " <a href=\"javascript:void(0);\" onclick=\"" + uicomponent.event(action, param) + "\" class=\"ActionButton LightBlueStyle\">" ;
 				else
-		  		println " <div onclick=\"" + uicomponent.event(action) + "\" class=\"ActionButton LightBlueStyle\">" ;
+		  		  println " <a href=\"javascript:void(0);\" onclick=\"" + uicomponent.event(action) + "\" class=\"ActionButton LightBlueStyle\">" ;
     println """
-					<div class="ButtonLeft">
-					  <div class="ButtonRight">
-						  <div class="ButtonMiddle">
-							   <a href="javascript:void(0);"> $label</a>
-				      </div>
-				    </div>
-			    </div>
-				</div>
+				 $label
+				</a>
 		""" ;
   }
 %>
@@ -51,9 +45,6 @@
 					<%}%>
 				</table>
 			  <div class="UIAction"> 
-			    <table class="ActionContainer">
-			    	<tr>
-			    		<td>
 							  <%
 							  def buttons = uicomponent.getSubmitButtons() ;
 					      if(buttons.isEmpty()) {
@@ -85,9 +76,6 @@
 						    cancel = resWorkflow.getString("cancel");
 						    writeAction(cancel, "Cancel", null);
 						    %>
-							</td>
-						</tr>
-					</table>
 			  </div>
 		  </div>
 		  <%

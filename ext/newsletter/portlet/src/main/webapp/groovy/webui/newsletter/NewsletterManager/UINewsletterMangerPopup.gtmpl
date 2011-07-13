@@ -7,24 +7,10 @@
 		</div>
 		
 		<div class="UIAction"> 
-			<table class="ActionContainer" style="text-align:center">
-				<tr>
-					<td>
 	        <%String actionLabel = "Close"; 
 	          String link = uicomponent.event("Close") ;
 	        %>
-						<div onclick="$link" class="ActionButton LightBlueStyle">
-		      	  	<div class="ButtonLeft">
-		        	  	<div class="ButtonRight">
-		          	  	<div class="ButtonMiddle">
-		          	  		<a href="javascript:void(0);">$actionLabel</a>
-		          	  	</div>
-		            	</div>
-		          	</div>
-						</div>
-	      	</td>
-				</tr>
-		  </table> 
+  	  			<a href="javascript:void(0);" onclick="$link" class="ActionButton LightBlueStyle">$actionLabel</a>
 		</div>
 	<%uiform.end()%>
 </div>

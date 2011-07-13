@@ -11,27 +11,13 @@ import java.util.List;
 			<%}%>
 		</div>
 		<div class="UIAction"> 
-				<table class="ActionContainer" style="text-align:center">
-					<tr>
-						<td>
-		        <%
-		        	for(String action : uicomponent.getActions()){
-		        	 String actionLabel = _ctx.appRes("NewsletterPortlet.action." + action); 
-		           String link = uicomponent.event(action) ;
-		        %>
-		        		<div onclick="$link" class="ActionButton LightBlueStyle">
-			      	  	<div class="ButtonLeft">
-			        	  	<div class="ButtonRight">
-			          	  	<div class="ButtonMiddle">
-			          	  		<a href="javascript:void(0);">$actionLabel</a>
-			          	  	</div>
-			            	</div>
-			          	</div>
-			        	</div>
-	        	<%}%>
-		      	</td>
-					</tr>
-			  </table> 
-			</div>
+	        <%
+	        	for(String action : uicomponent.getActions()){
+	        	 String actionLabel = _ctx.appRes("NewsletterPortlet.action." + action); 
+	           String link = uicomponent.event(action) ;
+	        %>
+      	  		<a href="javascript:void(0);" onclick="$link" class="ActionButton LightBlueStyle">$actionLabel</a>
+        	<%}%>
+		</div>
 	<%uiform.end()%>
 </div>

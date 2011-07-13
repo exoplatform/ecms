@@ -117,22 +117,8 @@
           <div class="LoadingProgressBar"><span></span></div>
           
           <div class="UIAction"> 
-				    <table class="ActionContainer">
-					    <tr>
-					    	<td>
-						      <div onclick="javascript:ajaxAbort();" class="ActionButton LightBlueStyle">
-						        <div class="ButtonLeft">
-						          <div class="ButtonRight">
-						            <div class="ButtonMiddle">
-						              <a href="javascript:void(0);"><%=_ctx.appRes("UIPortalApplication.label.Abort")%></a>
-						            </div>
-						          </div>
-						        </div>
-						      </div>
-						    </td>
-				      </tr>
-				 	  </table>
-					</div>
+              <a href="javascript:void(0);" onclick="javascript:ajaxAbort();" class="ActionButton LightBlueStyle"><%=_ctx.appRes("UIPortalApplication.label.Abort")%></a>
+			</div>
           
         </div>
       </div>

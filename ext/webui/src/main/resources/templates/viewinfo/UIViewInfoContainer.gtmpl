@@ -27,20 +27,6 @@
 		</tbody>
 	</table>
 	<div class="UIAction"> 
-    <table class="ActionContainer">
-    	<tr>
-    		<td>
-				<div onclick="<%=uicomponent.event("Close")%>" class="ActionButton LightBlueStyle">
-					<div class="ButtonLeft">
-						<div class="ButtonRight">
-							<div class="ButtonMiddle">
-								<a href="javascript:void(0);"><%=_ctx.appRes("UIViewInfoContainer.action.Close")%></a>
-						    </div>
-						</div>
-					</div>
-				</div>
-			</td>
-		</tr>
-    </table>
+		<a href="javascript:void(0);" onclick="<%=uicomponent.event("Close")%>" class="ActionButton LightBlueStyle"><%=_ctx.appRes("UIViewInfoContainer.action.Close")%></a>
   </div>
 </div>

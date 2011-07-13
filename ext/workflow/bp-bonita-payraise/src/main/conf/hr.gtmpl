@@ -1,24 +1,14 @@
 <%
   public void writeAction(String label, String action, String param) {
     println """
-	    <div class="ActionButton">
-	      <div class="LightBlueStyle" >
-					<div class="ButtonLeft">
-					  <div class="ButtonRight">
-						  <div class="ButtonMiddle">
 	  """;
 		if(param != null)
-		  println " <a href=\"" + uicomponent.event(action, param) + "\">" ;
+		  println " <a href=\"" + uicomponent.event(action, param) + "\" class=\"ActionButton LightBlueStyle\">" ;
 		else
-  		println " <a href=\"" + uicomponent.event(action) + "\">" ;
+  		  println " <a href=\"" + uicomponent.event(action) + "\" class=\"ActionButton LightBlueStyle\">" ;
     println """
-							    $label
-							  </a>
-				      </div>
-				    </div>
-			    </div>
-				</div>
-			</div>
+		    $label
+		  </a>
 		""" ;
   }
 %>
@@ -45,18 +35,12 @@
 			<%}%>
 		</table>
 	  <div class="UIAction"> 
-	     <table class="ActionContainer">
-	    	<tr>
-	    		<td>
-			  <%
-			  	finishit = resWorkflow.getString("finish-it");
-			  	cancel = resWorkflow.getString("cancel");
-			  	writeAction(finishit, "EndOfState", null);
-			    writeAction(cancel, "Cancel", null);
-		    %>
-	      </td>
-				</tr>
-			</table>
+ 	 	<%
+		  	finishit = resWorkflow.getString("finish-it");
+		  	cancel = resWorkflow.getString("cancel");
+		  	writeAction(finishit, "EndOfState", null);
+		    writeAction(cancel, "Cancel", null);
+		%>
 	  </div>
   </div>
   <%uiform.end()%>

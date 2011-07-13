@@ -232,8 +232,8 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
     ResourceBundle res = context.getApplicationResourceBundle();
     Writer writer = context.getWriter();
     writer.append("<div class=\"UIAction\" style=\"background: #F7F7F7; border: 1px solid #AEAEAE; margin-top: 10px; margin-bottom: 10px;\">");
-    writer.append("<div style='float: left; margin: 5px 10px;'>" + getTemplateLabel() + " " + getChangeTypeActionLink () + "</div>"); 
-    writer.append("<table class=\"ActionContainer\" style=\"margin-right:5px\">");
+    writer.append("<div style='text-align: left; margin: 5px 10px;'>" + getTemplateLabel() + " " + getChangeTypeActionLink () + "</div>"); 
+    writer.append("<table style=\"margin-right:5px\">");
     writer.append("<tr>");
     writer.append("<td>");
     String[] listAction = getActions();
@@ -247,20 +247,14 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
         actionLabel = action;
       }
       link = event(action);
-      writer.append("<div onclick=\"").append(link).append("\" class=\"ActionButton LightBlueStyle\">");
-      writer.append("<div class=\"ButtonLeft\">");
-      writer.append("<div class=\"ButtonRight\">");
-      writer.append("<div class=\"ButtonMiddle\">");
-      writer.append("<a href=\"javascript:void(0);\">").append(actionLabel).append("</a>");
-      writer.append("</div>");
-      writer.append("</div>");
-      writer.append("</div>");
-      writer.append("</div>");
+      writer.append("<a href=\"javascript:void(0);\"").
+		  	append("onclick=\"").append(link).append("\" class=\"ActionButton LightBlueStyle\">").
+		  	append(actionLabel).append("</a>");
     }    
     String fullscreen = res.getString(getName() + ".tooltip.FullScreen");
     writer.append("</td>");
-    writer.append("<td style=\"border-left:1px solid #AEAEAE; padding-left:5px;\">");
-    writer.append("<div title=\"").append(fullscreen).append("\" class=\"MaximizeScreen20x20Icon\" onclick='eXo.webui.UIDocForm.FullScreenToggle(this)'></div>");
+    writer.append("<td style=\"border-left:1px solid #AEAEAE; padding-left:5px; text-align: left;\">");
+    writer.append("<a href=\"javascript:void(0);\"").append(fullscreen).append("\" class=\"MaximizeScreen20x20Icon\" onclick='eXo.webui.UIDocForm.FullScreenToggle(this)'></a>");
     writer.append("</td>");
     writer.append("</tr>");
     writer.append("</table>");

@@ -19,27 +19,13 @@ import org.exoplatform.services.wcm.newsletter.NewsletterCategoryConfig;
 		 </div>
 		
 		 <div class="UIAction" style="float:left; margin-left: 20px; height: 35px;"> 
-				<table class="ActionContainer" style="text-align:center">
-					<tr>
-						<td>
-	        		<div onclick="javaScript:void(0);" class="ActionButton LightBlueStyle">
-		      	  	<div class="ButtonLeft">
-		        	  	<div class="ButtonRight">
-		          	  	<div class="ButtonMiddle">
-											<div class="ContentAction ActionTitle" style="float:left;">
-												<div class="Name" style="float:none; cursor:pointer;">
-				          	  		<a href="javascript:void(0);">
-				          	  			<%=_ctx.appRes("NewsletterPortlet.action.CreateLetter")%>
-				          	  		</a>
-												</div>
-		          	  		</div>
-		            		</div>
-		          		</div>
-		        		</div>
-		      		</div>
-		      	</td>
-					</tr>
-			  </table> 
+			<div class="ContentAction ActionTitle" style="float:left;">
+				<div class="Name" style="float:none; cursor:pointer;">
+          	  		<a href="javascript:void(0);" onclick="javaScript:void(0);" class="ActionButton LightBlueStyle">
+          	  			<%=_ctx.appRes("NewsletterPortlet.action.CreateLetter")%>
+          	  		</a>
+				</div>
+  	  		</div>
 		</div>
 		<div style="clear:left"><span></span></div>
 		<div class="UICategories">
@@ -52,77 +38,63 @@ import org.exoplatform.services.wcm.newsletter.NewsletterCategoryConfig;
 					</div>
 					
 					<!-- ----------------------------------- Button -------------------------------------------------- -->
-					<div class="UIAction" style="float:right;"> 
-						<table class="ActionContainer" style="text-align:center">
-							<tr>
-								<td>
-			        		<div onclick="javaScript:void(0);" class="ActionButton LightBlueStyle">
-				      	  	<div class="ButtonLeft">
-				        	  	<div class="ButtonRight">
-				          	  	<div class="ButtonMiddle">
+					<div class="UIAction" style="float:right; padding:0px 0px 0px 10px;"> 
 				          	  	
-													<div class="ContentAction ActionTitle" style="float:right;" onclick="eXo.webui.UIPopupSelectCategory.show(this, event);">
-														<div class="Name" style="float:none; cursor:pointer;">
-						          	  		<a href="javascript:void(0);">
-						          	  			<%=_ctx.appRes("NewsletterPortlet.action.Moderation")%>
-						          	  		</a>
-														</div>
-														<!-- ----------------------------------- Menu popup -------------------------------------- -->
-														<div style="position:relative;float:left;">
-															<div class="UIPopupCategory" style="display:none;left:-40px;top:-2px; ">
-																<div class="UIRightClickPopupMenu" style="display:block;">
-																	<div class="UIContextMenuContainer">											
-																		<div class="TopLeftRightClickPopupMenu">
-																			<div class="TopRightRightClickPopupMenu">
-																				<div class="TopCenterRightClickPopupMenu"><span></span></div>
-																			</div>
-																		</div>
-																		<div class="MiddleLeftRightClickPopupMenu">
-																			<div class="MiddleRightRightClickPopupMenu">
-																				<div class="UIRightPopupMenuContainer">
-																					<!-- Detail action -->
-																					<div class="MenuItem" onclick="javaScript:void(0)">
-																						<div class="ItemIcon IconsView" style="padding-left:18px;">
-																							<a href="<%=uicomponent.event("OpenNewsletter")%>">Open</a>
-																						</div>
-																					</div>
-																					<div class="MenuItem" onclick="javaScript:void(0)">
-																						<div class="ItemIcon IconsView" style="padding-left:18px;">
-																							<a href="<%=uicomponent.event("EditSubscription")%>">Edit</a>
-																						</div>
-																					</div>
-																					<div class="MenuItem" onclick="javaScript:void(0)">
-																						<div class="ItemIcon IconsView" style="padding-left:18px;">
-																							<a href="<%=uicomponent.event("DeleteSubscription")%>">Delete</a>
-																						</div>
-																					</div>
-																					<hr style="width:90%"/>
-																					<div class="MenuItem" onclick="javaScript:void(0)">
-																						<div class="ItemIcon IconsView" style="padding-left:18px;">
-																							<a href="<%=uicomponent.event("AddCategory")%>">Manager Uers</a>
-																						</div>
-																					</div>
-																					<!-- Finish detail action -->
-																				</div>
-																			</div>
-																		</div>
-																		<div class="BottomLeftRightClickPopupMenu">
-																			<div class="BottomRightRightClickPopupMenu">
-																				<div class="BottomCenterRightClickPopupMenu"><span></span></div>
-																			</div>
-																		</div>
-																	</div>
-																</div>
+						<div class="ContentAction ActionTitle" style="float:right;" onclick="eXo.webui.UIPopupSelectCategory.show(this, event);">
+							<div class="Name" style="float:none; cursor:pointer;">
+			          	  		<a href="javascript:void(0);" onclick="javaScript:void(0);" class="ActionButton LightBlueStyle">
+			          	  			<%=_ctx.appRes("NewsletterPortlet.action.Moderation")%>
+			          	  		</a>
+							</div>
+							<!-- ----------------------------------- Menu popup -------------------------------------- -->
+							<div style="position:relative;float:left;">
+								<div class="UIPopupCategory" style="display:none;left:-40px;top:-2px; ">
+									<div class="UIRightClickPopupMenu" style="display:block;">
+										<div class="UIContextMenuContainer">											
+											<div class="TopLeftRightClickPopupMenu">
+												<div class="TopRightRightClickPopupMenu">
+													<div class="TopCenterRightClickPopupMenu"><span></span></div>
+												</div>
+											</div>
+											<div class="MiddleLeftRightClickPopupMenu">
+												<div class="MiddleRightRightClickPopupMenu">
+													<div class="UIRightPopupMenuContainer">
+														<!-- Detail action -->
+														<div class="MenuItem" onclick="javaScript:void(0)">
+															<div class="ItemIcon IconsView" style="padding-left:18px;">
+																<a href="<%=uicomponent.event("OpenNewsletter")%>">Open</a>
 															</div>
 														</div>
-				          	  		</div>
-				            		</div>
-				          		</div>
-				        		</div>
-				      		</div>
-				      	</td>
-							</tr>
-					  </table> 
+														<div class="MenuItem" onclick="javaScript:void(0)">
+															<div class="ItemIcon IconsView" style="padding-left:18px;">
+																<a href="<%=uicomponent.event("EditSubscription")%>">Edit</a>
+															</div>
+														</div>
+														<div class="MenuItem" onclick="javaScript:void(0)">
+															<div class="ItemIcon IconsView" style="padding-left:18px;">
+																<a href="<%=uicomponent.event("DeleteSubscription")%>">Delete</a>
+															</div>
+														</div>
+														<hr style="width:90%"/>
+														<div class="MenuItem" onclick="javaScript:void(0)">
+															<div class="ItemIcon IconsView" style="padding-left:18px;">
+																<a href="<%=uicomponent.event("AddCategory")%>">Manager Uers</a>
+															</div>
+														</div>
+														<!-- Finish detail action -->
+													</div>
+												</div>
+											</div>
+											<div class="BottomLeftRightClickPopupMenu">
+												<div class="BottomRightRightClickPopupMenu">
+													<div class="BottomCenterRightClickPopupMenu"><span></span></div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+	          	  		</div>
 					</div>
 						
 					<!-- end action of this category -->

@@ -92,21 +92,7 @@
 	%>
 	<% if (!"basic".equals(uicomponent.getMode())) { %>
   	<div class="UIAction"> 
-    	<table class="ActionContainer">
-    		<tr>
-    			<td>
-		      		<div onclick="<%=uicomponent.event("Add")%>" class="ActionButton LightBlueStyle" >
-						<div class="ButtonLeft">
-						  	<div class="ButtonRight">
-							  	<div class="ButtonMiddle">
-									<a href="javascript:void(0);"><%=_ctx.appRes("UIFCCActionList.action.Add")%></a>
-					      		</div>
-					    	</div>
-				    	</div>
-					</div>
-    			</td>
-    		</tr>
-    	</table>
+		<a href="javascript:void(0);" onclick="<%=uicomponent.event("Add")%>" class="ActionButton LightBlueStyle"><%=_ctx.appRes("UIFCCActionList.action.Add")%></a>
   	</div>
   	<% } %>
 </div>
