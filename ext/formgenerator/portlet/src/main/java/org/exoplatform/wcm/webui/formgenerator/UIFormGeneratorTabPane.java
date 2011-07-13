@@ -455,16 +455,13 @@ public class UIFormGeneratorTabPane extends UIFormTabPane {
     }
     dialogTemplate.append("      </table>\n");
     dialogTemplate.append("      <div class=\"UIAction\">\n");
-    dialogTemplate.append("              <%\n");
-    dialogTemplate.append("                for(action in uicomponent.getActions()) {\n");
+    dialogTemplate.append("                <% for(action in uicomponent.getActions()) {\n");
     dialogTemplate.append("                  String actionLabel = _ctx.appRes(uicomponent.getName() + \".action.\" + action);\n");
     dialogTemplate.append("                  if(action.equals(\"RemoveData\")) continue;\n");
     dialogTemplate.append("                  String link = uicomponent.event(action);\n");
     dialogTemplate.append("                  %>\n");
     dialogTemplate.append("                            <a href=\"javascript:void(0);\" onclick=\"$link\" class=\"ActionButton LightBlueStyle\" >$actionLabel</a>\n");
-    dialogTemplate.append("                  <%\n");
-    dialogTemplate.append("                }\n");
-    dialogTemplate.append("              %>\n");
+    dialogTemplate.append("                <%}%>\n");
     dialogTemplate.append("      </div>\n");
     dialogTemplate.append("    </div>\n");
     dialogTemplate.append("  <% uiform.end() %>\n");
