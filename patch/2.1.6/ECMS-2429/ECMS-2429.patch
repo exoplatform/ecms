@@ -1,0 +1,40 @@
+Index: ext/xcmis/sp/src/main/java/org/exoplatform/ecms/xcmis/sp/JcrFile.java
+===================================================================
+--- ext/xcmis/sp/src/main/java/org/exoplatform/ecms/xcmis/sp/JcrFile.java	(revision 71095)
++++ ext/xcmis/sp/src/main/java/org/exoplatform/ecms/xcmis/sp/JcrFile.java	(working copy)
+@@ -44,20 +44,21 @@
+    public JcrFile(JcrNodeEntry jcrEntry)
+    {
+       super(jcrEntry);
+-      try
+-      {
+-         Node node = entry.getNode();
+-         Session session = node.getSession();
+-         if (entry.getType().isVersionable() && node.canAddMixin(JcrCMIS.MIX_VERSIONABLE))
+-         {
+-            node.addMixin(JcrCMIS.MIX_VERSIONABLE);
+-            session.save();
+-         }
+-      }
+-      catch (RepositoryException e)
+-      {
+-         throw new CmisRuntimeException(e.getMessage(), e);
+-      }
++      
++//      try
++//      {
++//         Node node = entry.getNode();
++//         Session session = node.getSession();
++//         if (entry.getType().isVersionable() && node.canAddMixin(JcrCMIS.MIX_VERSIONABLE))
++//         {
++//            node.addMixin(JcrCMIS.MIX_VERSIONABLE);
++//            session.save();
++//         }
++//      }
++//      catch (RepositoryException e)
++//      {
++//         throw new CmisRuntimeException(e.getMessage(), e);
++//      }
+    }
+ 
+    /**
