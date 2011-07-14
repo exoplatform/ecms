@@ -719,7 +719,7 @@
       <propertyName-invalid>le nom de la propriété doit un inclure l'espace de nommage (ex: espace-nommage:ma_propriété)</propertyName-invalid>
       <propertyName-exist>La propriété '{0}' existe déjà.</propertyName-exist>
       <propertyValu-null>Certaines valeurs sont probablement nulles ou vides</propertyValu-null>
-      <valueFormatEx>Impossible d'attribuer une valeur de plusieurs valeurs à une propriété à valeur unique<valueFormatEx>
+      <valueFormatEx>Impossible d'attribuer une valeur de plusieurs valeurs à une propriété à valeur unique</valueFormatEx>
       <number-format-exception>La valeur saisie ne respecte pas le format attendu</number-format-exception>
     </msg>
   </UIPropertyForm>
