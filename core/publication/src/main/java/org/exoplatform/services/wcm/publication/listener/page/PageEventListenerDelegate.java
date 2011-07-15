@@ -232,7 +232,7 @@ public class PageEventListenerDelegate {
 
     List<String> listExistedNavigationNodeUri = PublicationUtil.getValuesAsString(content,
                                                                                   "publication:navigationNodeURIs");
-    List<String> listPageNavigationUri = plugin.getListPageNavigationUri(page, remoteUser);
+    List<String> listPageNavigationUri = plugin.getListUserNavigationUri(page, remoteUser);
     if (listPageNavigationUri.isEmpty())  {
       return ;
     }
@@ -277,7 +277,7 @@ public class PageEventListenerDelegate {
     listExistedPageId.remove(page.getPageId());
     content.setProperty("publication:webPageIDs", PublicationUtil.toValues(valueFactory, listExistedPageId));
 
-    List<String> listPageNavigationUri = plugin.getListPageNavigationUri(page, remoteUser);
+    List<String> listPageNavigationUri = plugin.getListUserNavigationUri(page, remoteUser);
     List<String> listExistedNavigationNodeUri = PublicationUtil.getValuesAsString(content,
                                                                                   "publication:navigationNodeURIs");
     List<String> listExistedNavigationNodeUriTmp = new ArrayList<String>();

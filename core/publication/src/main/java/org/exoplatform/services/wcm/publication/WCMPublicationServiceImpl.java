@@ -22,7 +22,7 @@ import java.util.Map;
 import javax.jcr.Node;
 
 import org.exoplatform.portal.config.model.Page;
-import org.exoplatform.portal.config.model.PageNavigation;
+import org.exoplatform.portal.mop.navigation.NavigationContext;
 import org.exoplatform.services.cms.CmsService;
 import org.exoplatform.services.ecm.publication.NotInPublicationLifecycleException;
 import org.exoplatform.services.ecm.publication.PublicationPlugin;
@@ -168,10 +168,10 @@ public class WCMPublicationServiceImpl implements WCMPublicationService, Startab
    * #updateLifecycleOnChangeNavigation
    * (org.exoplatform.portal.config.model.PageNavigation)
    */
-  public void updateLifecycleOnChangeNavigation(PageNavigation navigation, String remoteUser) {
+  public void updateLifecycleOnChangeNavigation(NavigationContext navigationContext, String remoteUser) {
     for(WebpagePublicationPlugin publicationPlugin: publicationPlugins.values()) {
       try {
-        publicationPlugin.updateLifecycleOnChangeNavigation(navigation, remoteUser);
+        publicationPlugin.updateLifecycleOnChangeNavigation(navigationContext, remoteUser);
       } catch(Exception e) {
         continue;
       }
@@ -217,10 +217,10 @@ public class WCMPublicationServiceImpl implements WCMPublicationService, Startab
    * #updateLifecyleOnCreateNavigation
    * (org.exoplatform.portal.config.model.PageNavigation)
    */
-  public void updateLifecyleOnCreateNavigation(PageNavigation navigation) {
+  public void updateLifecyleOnCreateNavigation(NavigationContext navigationContext) {
     for(WebpagePublicationPlugin publicationPlugin: publicationPlugins.values()) {
       try {
-        publicationPlugin.updateLifecyleOnCreateNavigation(navigation);
+        publicationPlugin.updateLifecyleOnCreateNavigation(navigationContext);
       } catch(Exception e) {
         continue;
       }
@@ -250,10 +250,10 @@ public class WCMPublicationServiceImpl implements WCMPublicationService, Startab
    * #updateLifecyleOnRemoveNavigation
    * (org.exoplatform.portal.config.model.PageNavigation)
    */
-  public void updateLifecyleOnRemoveNavigation(PageNavigation navigation) {
+  public void updateLifecyleOnRemoveNavigation(NavigationContext navigationContext) {
     for(WebpagePublicationPlugin publicationPlugin: publicationPlugins.values()) {
       try {
-        publicationPlugin.updateLifecyleOnRemoveNavigation(navigation);
+        publicationPlugin.updateLifecyleOnRemoveNavigation(navigationContext);
       } catch (Exception e) {
         continue;
       }

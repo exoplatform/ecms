@@ -130,13 +130,13 @@
       <description>this listener update publication state of content when page is removed</description>
     </component-plugin>
     <component-plugin>
-      <name>org.exoplatform.portal.config.DataStorage.navigationUpdated</name>
+      <name>org.exoplatform.portal.mop.navigation.navigation_updated</name>
       <set-method>addListener</set-method>
       <type>org.exoplatform.services.wcm.publication.listener.navigation.UpdateNavigationEventListener</type>
       <description>this listener update publication state of content when navigation is updated</description>
     </component-plugin>
     <component-plugin>
-      <name>org.exoplatform.portal.config.DataStorage.navigationRemoved</name>
+      <name>org.exoplatform.portal.mop.navigation.navigation_destroyed</name>
       <set-method>addListener</set-method>
       <type>org.exoplatform.services.wcm.publication.listener.navigation.RemoveNavigationEventListener</type>
       <description>this listener update publication state of content when navigation is removed</description>

@@ -21,11 +21,10 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import org.apache.commons.lang.StringUtils;
-import org.exoplatform.commons.utils.ListAccess;
-import org.exoplatform.portal.config.DataStorage;
-import org.exoplatform.portal.config.Query;
-import org.exoplatform.portal.config.model.PageNavigation;
-import org.exoplatform.portal.config.model.PortalConfig;
+import org.exoplatform.portal.mop.SiteKey;
+import org.exoplatform.portal.mop.user.UserNavigation;
+import org.exoplatform.portal.mop.user.UserNode;
+import org.exoplatform.portal.mop.user.UserPortal;
 import org.exoplatform.portal.webui.container.UIContainer;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.portal.webui.workspace.UIPortalApplication;
@@ -33,6 +32,7 @@ import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.resources.LocaleConfig;
 import org.exoplatform.services.resources.LocaleConfigService;
 import org.exoplatform.services.wcm.core.WCMService;
+import org.exoplatform.services.wcm.navigation.NavigationUtils;
 import org.exoplatform.services.wcm.publication.lifecycle.stageversion.ui.UIPublicationTree.TreeNode;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -88,12 +88,14 @@ public class UIPortalNavigationExplorer extends UIContainer {
     if (wcmService.isSharedPortal(sessionProvider, portalName)) {
       UIPublicationTree tree = addChild(UIPublicationTree.class, null, "UIPortalTree");
       for (String portal : this.runningPortals) {
-        PageNavigation pageNavigation = getPortalNavigation(portal);
-        ResourceBundle res = localeConfig.getNavigationResourceBundle(pageNavigation.getOwnerType(),
-                                                                      pageNavigation.getOwnerId());
-        TreeNode treeNode = new TreeNode(portal, pageNavigation, res, false);
-        if (pageNavigation.getNodes() != null)
-          treeNode.setChildrenByPageNodes(pageNavigation.getNodes());
+        UserPortal userPortal = Util.getUIPortalApplication().getUserPortalConfig().getUserPortal();
+        UserNavigation userNavigation = userPortal.getNavigation(SiteKey.portal(portalName));
+        UserNode userNode = userPortal.getNode(userNavigation, NavigationUtils.ECMS_NAVIGATION_SCOPE, null, null);
+        ResourceBundle res = localeConfig.getNavigationResourceBundle(userNavigation.getKey().getTypeName(),
+                                                                      userNavigation.getKey().getName());
+        TreeNode treeNode = new TreeNode(portal, userNavigation, res, false);
+        if (userNode != null)
+          treeNode.setChildrenByUserNodes(userNode.getChildren());
         list.add(treeNode);
       }
       tree.setSibbling(list);
@@ -103,12 +105,14 @@ public class UIPortalNavigationExplorer extends UIContainer {
       tree.setSelectedIcon("DefaultPageIcon");
     } else {
       UIPublicationTree tree = addChild(UIPublicationTree.class, null, "UIPageNodeTree");
-      PageNavigation navigation = getPortalNavigation(portalName);
-      ResourceBundle res = localeConfig.getNavigationResourceBundle(navigation.getOwnerType(),
-                                                                    navigation.getOwnerId());
-      TreeNode treeNode = new TreeNode(portalName, navigation, res, true);
-      if(navigation.getNodes()!= null)
-        treeNode.setChildrenByPageNodes(navigation.getNodes());
+      UserPortal userPortal = Util.getUIPortalApplication().getUserPortalConfig().getUserPortal();
+      UserNavigation userNavigation = userPortal.getNavigation(SiteKey.portal(portalName));
+      UserNode userNode = userPortal.getNode(userNavigation, NavigationUtils.ECMS_NAVIGATION_SCOPE, null, null);
+      ResourceBundle res = localeConfig.getNavigationResourceBundle(userNavigation.getKey().getTypeName(),
+                                                                    userNavigation.getKey().getName());
+      TreeNode treeNode = new TreeNode(portalName, userNavigation, res, true);
+      if(userNode != null)
+        treeNode.setChildrenByUserNodes(userNode.getChildren());
       tree.setSibbling(treeNode.getTreeNodeChildren());
       tree.setBeanIdField("uri");
       tree.setBeanLabelField("resolvedLabel");
@@ -116,29 +120,7 @@ public class UIPortalNavigationExplorer extends UIContainer {
       tree.setSelectedIcon("DefaultPageIcon");
     }
   }
-
-  /**
-   * Gets the portal navigation.
-   *
-   * @param portalName the portal name
-   *
-   * @return the portal navigation
-   *
-   * @throws Exception the exception
-   */
-  private PageNavigation getPortalNavigation(String portalName) throws Exception {
-    DataStorage dataStorage = getApplicationComponent(DataStorage.class);
-    Query<PageNavigation> query = new Query<PageNavigation>(PortalConfig.PORTAL_TYPE,
-                                                            portalName,
-                                                            PageNavigation.class);
-    ListAccess<PageNavigation> list = dataStorage.find2(query);
-    List<PageNavigation> pageNavigations = WCMCoreUtils.getAllElementsOfListAccess(list);
-    for (PageNavigation pageNavigation : pageNavigations) {
-      return pageNavigation;
-    }
-    return null;
-  }
-
+  
   /**
    * Select tree node by uri.
    *
@@ -190,15 +172,17 @@ public class UIPortalNavigationExplorer extends UIContainer {
         return;
       List<TreeNode> list = new ArrayList<TreeNode>();
       for (String portal : this.runningPortals) {
-        PageNavigation pageNavigation = getPortalNavigation(portal);
+        UserPortal userPortal = Util.getUIPortalApplication().getUserPortalConfig().getUserPortal();
+        UserNavigation userNavigation = userPortal.getNavigation(SiteKey.portal(portalName));
+        UserNode userNode = userPortal.getNode(userNavigation, NavigationUtils.ECMS_NAVIGATION_SCOPE, null, null);
         UIPortalApplication portalApplication = Util.getUIPortalApplication();
         LocaleConfig localeConfig = getApplicationComponent(LocaleConfigService.class).
             getLocaleConfig(portalApplication.getLocale().getLanguage());
-        ResourceBundle res = localeConfig.getNavigationResourceBundle(pageNavigation.getOwnerType(),
-                                                                      pageNavigation.getOwnerId());
-        TreeNode treeNode = new TreeNode(portal, pageNavigation, res, false);
-        if (pageNavigation.getNodes() != null)
-          treeNode.setChildrenByPageNodes(pageNavigation.getNodes());
+        ResourceBundle res = localeConfig.getNavigationResourceBundle(userNavigation.getKey().getTypeName(),
+                                                                      userNavigation.getKey().getName());
+        TreeNode treeNode = new TreeNode(portal, userNavigation, res, false);
+        if(userNode != null)
+          treeNode.setChildrenByUserNodes(userNode.getChildren());
         list.add(treeNode);
       }
       tree.setSibbling(list);

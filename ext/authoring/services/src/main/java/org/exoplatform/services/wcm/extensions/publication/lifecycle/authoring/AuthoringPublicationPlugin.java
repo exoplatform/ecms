@@ -16,7 +16,7 @@ import javax.portlet.PortletMode;
 
 import org.exoplatform.container.PortalContainer;
 import org.exoplatform.portal.config.model.Page;
-import org.exoplatform.portal.config.model.PageNavigation;
+import org.exoplatform.portal.mop.navigation.NavigationContext;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.ecm.publication.IncorrectStateUpdateLifecycleException;
 import org.exoplatform.services.listener.ListenerService;
@@ -400,8 +400,8 @@ public class AuthoringPublicationPlugin extends StageAndVersionPublicationPlugin
    * updateLifecycleOnChangeNavigation
    * (org.exoplatform.portal.config.model.PageNavigation, java.lang.String)
    */
-  public void updateLifecycleOnChangeNavigation(PageNavigation pageNavigation, String remoteUser) throws Exception {
-    navigationEventListenerDelegate.updateLifecycleOnChangeNavigation(pageNavigation,
+  public void updateLifecycleOnChangeNavigation(NavigationContext navigationContext, String remoteUser) throws Exception {
+    navigationEventListenerDelegate.updateLifecycleOnChangeNavigation(navigationContext,
                                                                       remoteUser,
                                                                       this);
   }
@@ -432,8 +432,8 @@ public class AuthoringPublicationPlugin extends StageAndVersionPublicationPlugin
    * updateLifecyleOnCreateNavigation
    * (org.exoplatform.portal.config.model.PageNavigation)
    */
-  public void updateLifecyleOnCreateNavigation(PageNavigation pageNavigation) throws Exception {
-    navigationEventListenerDelegate.updateLifecyleOnCreateNavigation(pageNavigation);
+  public void updateLifecyleOnCreateNavigation(NavigationContext navigationContext) throws Exception {
+    navigationEventListenerDelegate.updateLifecyleOnCreateNavigation(navigationContext);
   }
 
   /*
@@ -452,8 +452,8 @@ public class AuthoringPublicationPlugin extends StageAndVersionPublicationPlugin
    * updateLifecyleOnRemoveNavigation
    * (org.exoplatform.portal.config.model.PageNavigation)
    */
-  public void updateLifecyleOnRemoveNavigation(PageNavigation pageNavigation) throws Exception {
-    navigationEventListenerDelegate.updateLifecyleOnRemoveNavigation(pageNavigation);
+  public void updateLifecyleOnRemoveNavigation(NavigationContext navigationContext) throws Exception {
+    navigationEventListenerDelegate.updateLifecyleOnRemoveNavigation(navigationContext);
   }
 
   /**

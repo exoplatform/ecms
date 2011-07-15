@@ -21,7 +21,7 @@ import java.util.Map;
 import javax.jcr.Node;
 
 import org.exoplatform.portal.config.model.Page;
-import org.exoplatform.portal.config.model.PageNavigation;
+import org.exoplatform.portal.mop.navigation.NavigationContext;
 import org.exoplatform.services.ecm.publication.NotInPublicationLifecycleException;
 
 /**
@@ -184,7 +184,7 @@ public interface WCMPublicationService {
   *
   * @throws Exception the exception
   */
-  public void updateLifecyleOnCreateNavigation(PageNavigation navigation) throws Exception;
+  public void updateLifecyleOnCreateNavigation(NavigationContext navigationContext) throws Exception;
 
  /**
   * Retrieves all web page lifecycles and update the publication lifecycle when a navigation is changed.
@@ -194,7 +194,7 @@ public interface WCMPublicationService {
   *
   * @throws Exception the exception
   */
-  public void updateLifecycleOnChangeNavigation(PageNavigation navigation, String remoteUser) throws Exception;
+  public void updateLifecycleOnChangeNavigation(NavigationContext navigationContext, String remoteUser) throws Exception;
 
  /**
   * Retrieves all web page lifecycles and update the publication lifecycle when a navigation is removed.
@@ -203,7 +203,7 @@ public interface WCMPublicationService {
   *
   * @throws Exception the exception
   */
-  public void updateLifecyleOnRemoveNavigation(PageNavigation navigation) throws Exception;
+  public void updateLifecyleOnRemoveNavigation(NavigationContext navigationContext) throws Exception;
 
   /**
    * Called by create and edit listeners. It allows to update the lifecycle of

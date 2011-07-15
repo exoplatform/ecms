@@ -112,15 +112,15 @@ public class UIPublishClvChooser extends UIForm implements UIPopupComponent {
    *
    * @throws Exception the exception
    */
-  public List<Application<Portlet>> getClvPortlets() throws Exception {
+  public List<Application<?>> getClvPortlets() throws Exception {
     WCMConfigurationService wcmConfigurationService = WCMCoreUtils.getService(WCMConfigurationService.class);
     String portletName = wcmConfigurationService.getRuntimeContextParam(WCMConfigurationService.CLV_PORTLET);
     DataStorage dataStorage = WCMCoreUtils.getService(DataStorage.class);
     List<String> clvPortletsId = PublicationUtil.findAppInstancesByName(page, portletName);
-    List<Application<Portlet>> applications = new ArrayList<Application<Portlet>>();
+    List<Application<?>> applications = new ArrayList<Application<?>>();
     for (String clvPortletId : clvPortletsId) {
       boolean isManualViewerMode = false;
-      Application<Portlet> application = PublicationUtil.findAppInstancesById(page, clvPortletId);
+      Application<?> application = PublicationUtil.findAppInstancesById(page, clvPortletId);
       PortletPreferences portletPreferences = dataStorage.getPortletPreferences(clvPortletId);
       if (portletPreferences != null) {
         for (Object object : portletPreferences.getPreferences()) {

@@ -17,7 +17,6 @@
 package org.exoplatform.wcm.webui.wiki;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.jcr.Node;
 import javax.jcr.Session;
@@ -32,8 +31,6 @@ import org.exoplatform.portal.config.DataStorage;
 import org.exoplatform.portal.config.UserACL;
 import org.exoplatform.portal.config.UserPortalConfigService;
 import org.exoplatform.portal.config.model.Page;
-import org.exoplatform.portal.config.model.PageNavigation;
-import org.exoplatform.portal.config.model.PageNode;
 import org.exoplatform.portal.config.model.PortalConfig;
 import org.exoplatform.portal.webui.application.UIPortlet;
 import org.exoplatform.portal.webui.page.UIPage;
@@ -95,7 +92,14 @@ public class UIWikiContentForm extends UIForm {
   private String pageUri;
 
   /** The page navigation. */
-  private PageNavigation pageNavigation;
+  /**
+   * TODO: the API for loading navigations was changed 
+   * it's required to use [UserNavigation, UserNode] instead of using [PageNavigation, PageNode]
+   * 
+   * UIWikiContentForm class is useless in ECMS project now, 
+   * so we've temporarily commented this lines and we will refactor them later
+   */
+//  private PageNavigation pageNavigation;
 
   /**
    * Instantiates a new uI wiki content form.
@@ -142,15 +146,6 @@ public class UIWikiContentForm extends UIForm {
     // Step 3: add new UIPortlet into new Page
     addSCVPortletIntoPage(scvPortlet, uiPage, page, portalCfgService);
     //Step 4 : add the new page into parentPageNode
-    PageNavigation pageNavigation = getPageNavigation();
-    PageNode parentPageNode = null;
-    for (PageNode pageNode: pageNavigation.getNodes()) {
-      if (pageNode.getUri().equals(getParentUri())) {
-        parentPageNode = pageNode;
-        break;
-      }
-    }
-    PageNode newPageNode = createNewPageNode(parentPageNode, page.getPageId());
     /**
      * TODO: the API for loading navigations was changed 
      * it's required to use [UserNavigation, UserNode] instead of using [PageNavigation, PageNode]
@@ -158,8 +153,18 @@ public class UIWikiContentForm extends UIForm {
      * UIWikiContentForm class is useless in ECMS project now, 
      * so we've temporarily commented this lines and we will refactor them later
      */
-    //portalCfgService.update(pageNavigation);
-    return newPageNode.getUri();
+//    PageNavigation pageNavigation = getPageNavigation();
+//    PageNode parentPageNode = null;
+//    for (PageNode pageNode: pageNavigation.getNodes()) {
+//      if (pageNode.getUri().equals(getParentUri())) {
+//        parentPageNode = pageNode;
+//        break;
+//      }
+//    }
+//    PageNode newPageNode = createNewPageNode(parentPageNode, page.getPageId());
+//    portalCfgService.update(pageNavigation);
+//    return newPageNode.getUri();
+    return "";
   }
 
   /**
@@ -172,7 +177,14 @@ public class UIWikiContentForm extends UIForm {
    *
    * @throws Exception the exception
    */
-  private PageNode createNewPageNode(PageNode parentPageNode, String pageId) throws Exception {
+  /**
+   * TODO: the API for loading navigations was changed 
+   * it's required to use [UserNavigation, UserNode] instead of using [PageNavigation, PageNode]
+   * 
+   * UIWikiContentForm class is useless in ECMS project now, 
+   * so we've temporarily commented this lines and we will refactor them later
+   */
+  /*private PageNode createNewPageNode(PageNode parentPageNode, String pageId) throws Exception {
     PageNode newPageNode = null;
     if (getPageUri().indexOf("/") > 0) {
       String[] pageNodeNames = getPageUri().split("/");
@@ -184,7 +196,7 @@ public class UIWikiContentForm extends UIForm {
       newPageNode = createNewPageNode(parentPageNode, getPageUri(), pageId);
     }
     return newPageNode;
-  }
+  }*/
 
   /**
    * Creates the scv portlet.
@@ -317,7 +329,14 @@ public class UIWikiContentForm extends UIForm {
    *
    * @throws Exception the exception
    */
-  private PageNode createNewPageNode(PageNode parentPageNode, String newPageNodeName, String pageID) throws Exception {
+  /**
+   * TODO: the API for loading navigations was changed 
+   * it's required to use [UserNavigation, UserNode] instead of using [PageNavigation, PageNode]
+   * 
+   * UIWikiContentForm class is useless in ECMS project now, 
+   * so we've temporarily commented this lines and we will refactor them later
+   */
+  /*private PageNode createNewPageNode(PageNode parentPageNode, String newPageNodeName, String pageID) throws Exception {
     PageNode newPageNode = new PageNode();
     newPageNode.setName(newPageNodeName);
     newPageNode.setLabel(newPageNodeName);
@@ -336,7 +355,7 @@ public class UIWikiContentForm extends UIForm {
     children.add(newPageNode);
     parentPageNode.setChildren((ArrayList<PageNode>)children);
     return newPageNode;
-  }
+  }*/
 
   /**
    * The listener interface for receiving saveAction events.
@@ -404,7 +423,7 @@ public class UIWikiContentForm extends UIForm {
     String parentUri = parameterArr[0].split("=")[1];
     String pageUri = parameterArr[1].split("=")[1];
     
-    PageNavigation pageNavigation = null;
+    
     /**
     * TODO: the API for loading navigations was changed 
     * it's required to use [UserNavigation, UserNode] instead of using [PageNavigation, PageNode]
@@ -412,6 +431,7 @@ public class UIWikiContentForm extends UIForm {
     * UIWikiContentForm class is useless in ECMS project now, 
     * so we've temporarily commented this lines and we will refactor them later
     */
+    //  PageNavigation pageNavigation = null;
     //  UIPortal uiPortal = Util.getUIPortal();
     //  List<PageNavigation> navigations = uiPortal.getNavigations();
     //  PageNavigation pageNavigation = null;
@@ -421,7 +441,7 @@ public class UIWikiContentForm extends UIForm {
     //      break;
     //    }
     //  }
-    setPageNavigation(pageNavigation);
+    //  setPageNavigation(pageNavigation);
     setParentUri(parentUri);
     setPageUri(pageUri);
 
@@ -454,18 +474,32 @@ public class UIWikiContentForm extends UIForm {
    *
    * @return the page navigation
    */
-  public PageNavigation getPageNavigation() {
-    return pageNavigation;
-  }
+  /**
+   * TODO: the API for loading navigations was changed 
+   * it's required to use [UserNavigation, UserNode] instead of using [PageNavigation, PageNode]
+   * 
+   * UIWikiContentForm class is useless in ECMS project now, 
+   * so we've temporarily commented this lines and we will refactor them later
+   */
+//  public PageNavigation getPageNavigation() {
+//    return pageNavigation;
+//  }
 
   /**
    * Sets the page navigation.
    *
    * @param pageNavigation the new page navigation
    */
-  public void setPageNavigation(PageNavigation pageNavigation) {
-    this.pageNavigation = pageNavigation;
-  }
+  /**
+   * TODO: the API for loading navigations was changed 
+   * it's required to use [UserNavigation, UserNode] instead of using [PageNavigation, PageNode]
+   * 
+   * UIWikiContentForm class is useless in ECMS project now, 
+   * so we've temporarily commented this lines and we will refactor them later
+   */
+//  public void setPageNavigation(PageNavigation pageNavigation) {
+//    this.pageNavigation = pageNavigation;
+//  }
 
   /**
    * Gets the parent uri.

@@ -38,17 +38,23 @@ import javax.jcr.version.VersionException;
 
 import org.exoplatform.commons.utils.ListAccess;
 import org.exoplatform.container.ExoContainerContext;
+import org.exoplatform.portal.application.PortalRequestContext;
 import org.exoplatform.portal.application.PortletPreferences;
 import org.exoplatform.portal.application.Preference;
 import org.exoplatform.portal.config.DataStorage;
 import org.exoplatform.portal.config.Query;
 import org.exoplatform.portal.config.UserACL;
+import org.exoplatform.portal.config.UserPortalConfig;
+import org.exoplatform.portal.config.UserPortalConfigService;
 import org.exoplatform.portal.config.model.Application;
 import org.exoplatform.portal.config.model.ApplicationType;
 import org.exoplatform.portal.config.model.Page;
-import org.exoplatform.portal.config.model.PageNavigation;
-import org.exoplatform.portal.config.model.PageNode;
 import org.exoplatform.portal.config.model.PortalConfig;
+import org.exoplatform.portal.mop.navigation.NavigationContext;
+import org.exoplatform.portal.mop.navigation.Scope;
+import org.exoplatform.portal.mop.user.UserNavigation;
+import org.exoplatform.portal.mop.user.UserNode;
+import org.exoplatform.portal.mop.user.UserPortal;
 import org.exoplatform.portal.pom.config.POMSession;
 import org.exoplatform.portal.pom.config.POMSessionManager;
 import org.exoplatform.portal.pom.spi.portlet.Portlet;
@@ -397,17 +403,23 @@ public class SimplePublicationPlugin extends WebpagePublicationPlugin{
    *
    * @throws Exception the exception
    */
-  public List<String> getListPageNavigationUri(Page page, String remoteUser) throws Exception {
+  public List<String> getListUserNavigationUri(Page page, String remoteUser) throws Exception {
     List<String> listPageNavigationUri = new ArrayList<String>();
-    DataStorage dataStorage = WCMCoreUtils.getService(DataStorage.class);
     for (String portalName : getRunningPortals(remoteUser)) {
-      Query<PageNavigation> query = new Query<PageNavigation>(PortalConfig.PORTAL_TYPE,portalName,PageNavigation.class);
-      ListAccess<PageNavigation> list = dataStorage.find2(query);
-      List<PageNavigation> pageNavigations = WCMCoreUtils.getAllElementsOfListAccess(list);
-      for(PageNavigation pageNavigation : pageNavigations) {
-        List<PageNode> listPageNode = PublicationUtil.findPageNodeByPageId(pageNavigation, page.getPageId());
-        for (PageNode pageNode : listPageNode) {
-          listPageNavigationUri.add(PublicationUtil.setMixedNavigationUri(portalName, pageNode.getUri()));
+
+      UserPortalConfigService userPortalConfigService = WCMCoreUtils.getService(UserPortalConfigService.class);
+      UserPortalConfig userPortalCfg = userPortalConfigService.getUserPortalConfig(portalName,
+                                                                                   remoteUser,
+                                                                                   PortalRequestContext.USER_PORTAL_CONTEXT);
+      UserPortal userPortal = userPortalCfg.getUserPortal();
+
+      // get nodes
+      List<UserNavigation> navigationList = userPortal.getNavigations();
+      for (UserNavigation nav : navigationList) {
+        UserNode root = userPortal.getNode(nav, Scope.ALL, null, null);
+        List<UserNode> userNodeList = PublicationUtil.findUserNodeByPageId(root, page.getPageId());
+        for (UserNode node : userNodeList) {
+          listPageNavigationUri.add(PublicationUtil.setMixedNavigationUri(portalName, node.getURI()));
         }
       }
     }
@@ -459,8 +471,8 @@ public class SimplePublicationPlugin extends WebpagePublicationPlugin{
    * updateLifecycleOnChangeNavigation
    * (org.exoplatform.portal.config.model.PageNavigation)
    */
-  public void updateLifecycleOnChangeNavigation(PageNavigation navigation, String remoteUser) throws Exception {
-    navigationEventListenerDelegate.updateLifecycleOnChangeNavigation(navigation, remoteUser, this);
+  public void updateLifecycleOnChangeNavigation(NavigationContext navigationContext, String remoteUser) throws Exception {
+    navigationEventListenerDelegate.updateLifecycleOnChangeNavigation(navigationContext, remoteUser, this);
   }
 
   /*
@@ -487,8 +499,8 @@ public class SimplePublicationPlugin extends WebpagePublicationPlugin{
    * updateLifecyleOnCreateNavigation
    * (org.exoplatform.portal.config.model.PageNavigation)
    */
-  public void updateLifecyleOnCreateNavigation(PageNavigation navigation) throws Exception {
-    navigationEventListenerDelegate.updateLifecyleOnCreateNavigation(navigation);
+  public void updateLifecyleOnCreateNavigation(NavigationContext navigationContext) throws Exception {
+    navigationEventListenerDelegate.updateLifecyleOnCreateNavigation(navigationContext);
   }
 
   /*
@@ -506,8 +518,8 @@ public class SimplePublicationPlugin extends WebpagePublicationPlugin{
    * updateLifecyleOnRemoveNavigation
    * (org.exoplatform.portal.config.model.PageNavigation)
    */
-  public void updateLifecyleOnRemoveNavigation(PageNavigation navigation) throws Exception {
-    navigationEventListenerDelegate.updateLifecyleOnRemoveNavigation(navigation);
+  public void updateLifecyleOnRemoveNavigation(NavigationContext navigationContext) throws Exception {
+    navigationEventListenerDelegate.updateLifecyleOnRemoveNavigation(navigationContext);
   }
 
   /*

@@ -22,16 +22,15 @@ import java.util.List;
 import javax.jcr.Node;
 import javax.jcr.Value;
 
-import org.exoplatform.commons.utils.PageList;
 import org.exoplatform.portal.application.PortletPreferences;
 import org.exoplatform.portal.application.Preference;
 import org.exoplatform.portal.config.DataStorage;
-import org.exoplatform.portal.config.Query;
 import org.exoplatform.portal.config.UserPortalConfigService;
 import org.exoplatform.portal.config.model.Page;
-import org.exoplatform.portal.config.model.PageNavigation;
-import org.exoplatform.portal.config.model.PageNode;
-import org.exoplatform.portal.config.model.PortalConfig;
+import org.exoplatform.portal.mop.SiteKey;
+import org.exoplatform.portal.mop.user.UserNavigation;
+import org.exoplatform.portal.mop.user.UserNode;
+import org.exoplatform.portal.mop.user.UserPortal;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.wcm.core.WCMConfigurationService;
 import org.exoplatform.services.wcm.publication.PublicationUtil;
@@ -42,9 +41,9 @@ import org.exoplatform.services.wcm.publication.lifecycle.stageversion.ui.UIPort
 import org.exoplatform.services.wcm.publication.lifecycle.stageversion.ui.UIPublicationHistory;
 import org.exoplatform.services.wcm.publication.lifecycle.stageversion.ui.UIPublicationPages;
 import org.exoplatform.services.wcm.publication.lifecycle.stageversion.ui.UIPublicationPagesContainer;
+import org.exoplatform.services.wcm.publication.lifecycle.stageversion.ui.UIPublicationTree.TreeNode;
 import org.exoplatform.services.wcm.publication.lifecycle.stageversion.ui.UIPublishClvChooser;
 import org.exoplatform.services.wcm.publication.lifecycle.stageversion.ui.UIPublishedPages;
-import org.exoplatform.services.wcm.publication.lifecycle.stageversion.ui.UIPublicationTree.TreeNode;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -148,8 +147,8 @@ public class UIPublicationAction extends UIForm {
         }
       }
 
-      PageNode pageNode = selectedNode.getPageNode();
-      if (pageNode == null) {
+      UserNode userNode = selectedNode.getUserNode();
+      if (userNode == null) {
         application.addMessage(new ApplicationMessage("UIPublicationAction.msg.wrongNode",
                                                       null,
                                                       ApplicationMessage.WARNING));
@@ -162,7 +161,7 @@ public class UIPublicationAction extends UIForm {
       UIPublicationPagesContainer publicationPagesContainer = publicationPages.
           getAncestorOfType(UIPublicationPagesContainer.class);
       UserPortalConfigService userPortalConfigService = publicationAction.getApplicationComponent(UserPortalConfigService.class);
-      Page page = userPortalConfigService.getPage(pageNode.getPageReference(),
+      Page page = userPortalConfigService.getPage(userNode.getPageRef(),
                                                   event.getRequestContext().getRemoteUser());
       List<String> clvPortletIds = getManualModeCLVPortletIDs(page);
       if (clvPortletIds.isEmpty()) {
@@ -222,7 +221,6 @@ public class UIPublicationAction extends UIForm {
       UserPortalConfigService userPortalConfigService = publicationAction.getApplicationComponent(UserPortalConfigService.class);
 
       UIPublishedPages publishedPages = publicationPages.getChild(UIPublishedPages.class);
-      DataStorage dataStorage = publicationAction.getApplicationComponent(DataStorage.class);
       String selectedNavigationNodeURI = publishedPages.getSelectedNavigationNodeURI();
 
       if (selectedNavigationNodeURI == null) {
@@ -237,21 +235,16 @@ public class UIPublicationAction extends UIForm {
                                                               selectedNavigationNodeURI.indexOf("/",
                                                                                                 1));
       String pageNodeUri = selectedNavigationNodeURI.replaceFirst("/\\w+/", "");
-      PageNavigation pageNavigation = null;
+      UserPortal userPortal = Util.getUIPortalApplication().getUserPortalConfig().getUserPortal();
+      UserNavigation navigation = userPortal.getNavigation(SiteKey.portal(portalName));
+      
       Page page = null;
-      Query<PageNavigation> query = new Query<PageNavigation>(PortalConfig.PORTAL_TYPE,
-                                                              portalName,
-                                                              PageNavigation.class);
-      PageList list = dataStorage.find(query);
-      for (Object object : list.getAll()) {
-        pageNavigation = PageNavigation.class.cast(object);
-      }
       Node contentNode = null;
-      if (pageNavigation != null) {
+      if (navigation != null) {
         contentNode = publicationPages.getNode();
         if (contentNode.hasProperty("publication:applicationIDs")) {
-          PageNode pageNode = getPageNodeByUri(pageNavigation, pageNodeUri);
-          page = userPortalConfigService.getPage(pageNode.getPageReference(),
+          UserNode userNode = getUserNodeByUri(navigation, pageNodeUri);
+          page = userPortalConfigService.getPage(userNode.getPageRef(),
                                                  event.getRequestContext().getRemoteUser());
         }
       }
@@ -268,52 +261,16 @@ public class UIPublicationAction extends UIForm {
       publicationContainer.setActiveTab(publicationPagesContainer, event.getRequestContext());
     }
 
-  /**
-   * Gets the page node by uri.
-   *
-   * @param pageNav
-   *            the page nav
-   * @param uri
-   *            the uri
-   *
-   * @return the page node by uri
-   */
-    private PageNode getPageNodeByUri(PageNavigation pageNav, String uri) {
-      if (pageNav == null || uri == null)
-        return null;
-      List<PageNode> pageNodes = pageNav.getNodes();
-      for (PageNode pageNode : pageNodes) {
-        PageNode returnPageNode = getPageNodeByUri(pageNode, uri);
-        if (returnPageNode == null)
-          continue;
-        return returnPageNode;
-      }
-      return null;
-    }
-
-  /**
-   * Gets the page node by uri.
-   *
-   * @param pageNode
-   *            the page node
-   * @param uri
-   *            the uri
-   *
-   * @return the page node by uri
-   */
-    private PageNode getPageNodeByUri(PageNode pageNode, String uri) {
-      if (pageNode.getUri().equals(uri))
-        return pageNode;
-      List<PageNode> children = pageNode.getChildren();
-      if (children == null)
-        return null;
-      for (PageNode ele : children) {
-        PageNode returnPageNode = getPageNodeByUri(ele, uri);
-        if (returnPageNode == null)
-          continue;
-        return returnPageNode;
-      }
-      return null;
+    /**
+     * Gets the user node by uri.
+     * @param pageNav
+     * @param uri
+     * @return
+     */
+    private UserNode getUserNodeByUri(UserNavigation pageNav, String uri) {
+      if(pageNav == null || uri == null) return null;      
+      UserPortal userPortal = Util.getUIPortalApplication().getUserPortalConfig().getUserPortal();
+      return userPortal.resolvePath(pageNav, null, uri);     
     }
   }
 

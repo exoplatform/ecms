@@ -17,6 +17,7 @@
 package org.exoplatform.services.wcm.publication;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.jcr.ItemNotFoundException;
@@ -32,15 +33,13 @@ import org.exoplatform.portal.application.Preference;
 import org.exoplatform.portal.config.DataStorage;
 import org.exoplatform.portal.config.model.Application;
 import org.exoplatform.portal.config.model.Container;
+import org.exoplatform.portal.config.model.ModelObject;
 import org.exoplatform.portal.config.model.Page;
-import org.exoplatform.portal.config.model.PageNavigation;
-import org.exoplatform.portal.config.model.PageNode;
-import org.exoplatform.portal.config.model.PortalConfig;
 import org.exoplatform.portal.mop.Visibility;
+import org.exoplatform.portal.mop.navigation.NodeContext;
 import org.exoplatform.portal.mop.user.UserNode;
 import org.exoplatform.portal.mop.user.UserNodeFilterConfig;
 import org.exoplatform.portal.mop.user.UserPortal;
-import org.exoplatform.portal.pom.spi.portlet.Portlet;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
@@ -62,46 +61,38 @@ public class PublicationUtil {
 
   /** The Constant URI_SEPARATOR. */
   public static final String URI_SEPARATOR = "/";
-
+ 
   /**
-   * Find page node by page id.
-   *
-   * @param nav the nav
-   * @param pageId the page id
-   *
-   * @return the list< page node>
-   *
-   * @throws Exception the exception
+   * Find user node by page id.
+   * @param rootNode
+   * @param pageId
+   * @return
+   * @throws Exception
    */
-  public static List<PageNode> findPageNodeByPageId(PageNavigation nav, String pageId) throws Exception {
-    List<PageNode> list = new ArrayList<PageNode>();
-    if (nav.getOwnerType().equals(PortalConfig.PORTAL_TYPE)) {
-      for (PageNode node : nav.getNodes()) {
-        findPageNodeByPageId(node, pageId, list);
-      }
-    }
-    return list;
+  public static List<UserNode> findUserNodeByPageId(UserNode rootNode, String pageId) throws Exception {
+    List<UserNode> allUserNodes = new ArrayList<UserNode>();
+    findUserNodeByPageId(rootNode, pageId, allUserNodes);
+    return allUserNodes;
   }
-
+  
   /**
-   * Find page node by page id.
-   *
-   * @param node the node
-   * @param pageId the page id
-   * @param allPageNode the all page node
-   *
-   * @throws Exception the exception
+   * Find user node by page id.
+   * @param userNode
+   * @param pageId
+   * @param allUserNodes
+   * @throws Exception
    */
-  public static void findPageNodeByPageId(PageNode node, String pageId, List<PageNode> allPageNode)
-      throws Exception {
-    if (pageId.equals(node.getPageReference())) {
-      allPageNode.add(node);
-    }
-    List<PageNode> children = node.getChildren();
-    if (children == null)
-      return;
-    for (PageNode child : children) {
-      findPageNodeByPageId(child, pageId, allPageNode);
+  public static void findUserNodeByPageId(UserNode userNode,
+                                          String pageId,
+                                          List<UserNode> allUserNodes) throws Exception {
+    Iterator<UserNode> childrenNodeIter = userNode.getChildren().iterator();
+    while (childrenNodeIter.hasNext()) {
+      UserNode node = childrenNodeIter.next();
+      if (node.getPageRef().equals(pageId)) {
+        allUserNodes.add(node);
+      } else {
+        findUserNodeByPageId(node, pageId, allUserNodes);
+      }
     }
   }
 
@@ -127,23 +118,23 @@ public class PublicationUtil {
    * @param results the results
    */
   private static void findAppInstancesByContainerAndName(Container container, String applicationName, List<String> results) {
-//    ArrayList<Object> chidren = container.getChildren();
-//    if(chidren == null) return ;
-//    for(Object object: chidren) {
-//      if(object instanceof Application) {
-//        Application application = Application.class.cast(object);
-//        if(application.getInstanceId().contains(applicationName)) {
-//          results.add(application.getInstanceId());
-//        }
-//      } else if(object instanceof Container) {
-//        Container child = Container.class.cast(object);
-//        findAppInstancesByContainerAndName(child, applicationName, results);
-//      }
-//    }
+    ArrayList<ModelObject> chidren = container.getChildren();
+    if(chidren == null) return ;
+    for(ModelObject object: chidren) {
+      if(object instanceof Application) {
+        Application<?> application = Application.class.cast(object);
+        if(application.getId().contains(applicationName)) {
+          results.add(application.getId());
+        }
+      } else if(object instanceof Container) {
+        Container child = Container.class.cast(object);
+        findAppInstancesByContainerAndName(child, applicationName, results);
+      }
+    }
   }
 
   /** The application. */
-  private static Application<Portlet> application = null;
+  private static Application<?> application = null;
 
   /**
    * Find app instances by id.
@@ -153,20 +144,20 @@ public class PublicationUtil {
    *
    * @return the application
    */
-  public static Application<Portlet> findAppInstancesById(Container container, String applicationId) {
-//    ArrayList<Object> chidren = container.getChildren();
-//    if(chidren == null) return null;
-//    for(Object object: chidren) {
-//      if(object instanceof Application) {
-//        Application app = Application.class.cast(object);
-//        if(app.getInstanceId().equals(applicationId)) {
-//          application = app;
-//        }
-//      } else if(object instanceof Container) {
-//        Container child = Container.class.cast(object);
-//        findAppInstancesById(child, applicationId);
-//      }
-//    }
+  public static Application<?> findAppInstancesById(Container container, String applicationId) {
+    ArrayList<ModelObject> chidren = container.getChildren();
+    if(chidren == null) return null;
+    for(ModelObject object: chidren) {
+      if(object instanceof Application) {
+        Application<?> app = Application.class.cast(object);
+        if(app.getId().equals(applicationId)) {
+          application = app;
+        }
+      } else if(object instanceof Container) {
+        Container child = Container.class.cast(object);
+        findAppInstancesById(child, applicationId);
+      }
+    }
     return application;
   }
 
@@ -176,15 +167,18 @@ public class PublicationUtil {
    * @param container the container
    * @param removingApplicationIds the removing application ids
    */
-  @SuppressWarnings("unchecked")
   private static void removedAppInstancesInContainerByNames(Container container,
                                                             List<String> removingApplicationIds) {
-    ArrayList<Object> childrenTmp = new ArrayList<Object>();
-    ArrayList<Object> chidren = null;
+    ArrayList<ModelObject> childrenTmp = new ArrayList<ModelObject>();
+    ArrayList<ModelObject> chidren = container.getChildren();
     if (chidren == null)
       return;
-    for (Object object : chidren) {
+    for (ModelObject object : chidren) {
       if (object instanceof Application) {
+        Application<?> application = Application.class.cast(object);
+        if(!removingApplicationIds.contains(application.getId())) {
+          childrenTmp.add(object);
+        }      
       } else if (object instanceof Container) {
         Container child = Container.class.cast(object);
         removedAppInstancesInContainerByNames(child, removingApplicationIds);
@@ -379,48 +373,37 @@ public class PublicationUtil {
     return PublicationUtil.getValuesAsString(contentNode, "publication:webPageIDs").contains(userNode.getPageRef());
   }
 
-  /**
-   * Gets the all page node from page navigation.
-   *
-   * @param pageNavigation the page navigation
-   *
-   * @return the all page node from page navigation
-   */
-  public static ArrayList<PageNode> getAllPageNodeFromPageNavigation(PageNavigation pageNavigation){
-    ArrayList<PageNode> pageNodeList = new ArrayList<PageNode>();
-
-    if (pageNavigation == null || pageNavigation.getNodes() == null)
+  public static ArrayList<NodeContext<?>> convertAllNodeContextToList(NodeContext<?> rootNodeContext){
+    
+    if (rootNodeContext == null || rootNodeContext.getNodes() == null){
       return null;
-
-    for (PageNode pageNode : pageNavigation.getNodes()) {
-      pageNodeList.add(pageNode);
-      pageNodeList.addAll(getChildrenPageNodes(pageNode));
     }
 
-    return pageNodeList;
-  }
-
-  /**
-   * Gets the children page nodes.
-   *
-   * @param parentPageNode the parent page node
-   *
-   * @return the children page nodes
-   */
-  private static ArrayList<PageNode> getChildrenPageNodes(PageNode parentPageNode){
-    ArrayList<PageNode> pageNodeList = new ArrayList<PageNode>();
-
-    if (parentPageNode == null || parentPageNode.getChildren() == null)
-      return pageNodeList;
-
-    for (PageNode pageNode : parentPageNode.getChildren()) {
-      pageNodeList.add(pageNode);
-      if(pageNode.getChildren() != null && pageNode.getChildren().size() > 0) {
-        pageNodeList.addAll(getChildrenPageNodes(pageNode));
-      }
+    ArrayList<NodeContext<?>> nodeContextList = new ArrayList<NodeContext<?>>();
+    Iterator<?> iter = rootNodeContext.getNodes().iterator();
+    while (iter.hasNext()){
+      NodeContext<?> context = (NodeContext<?>) iter.next();
+      nodeContextList.add(context);
+      nodeContextList.addAll(convertAllNodeContextToList(context));
     }
 
-    return pageNodeList;
+    return nodeContextList;
   }
-
+  
+  public static StringBuilder buildUserNodeURI(NodeContext<?> context) {
+    NodeContext<?> parent = (NodeContext<?>) context.getParentNode();
+     if (parent != null)
+     {
+        StringBuilder builder = buildUserNodeURI(parent);
+        if (builder.length() > 0)
+        {
+           builder.append('/');
+        }
+        return builder.append(context.getName());
+     }
+     else
+     {
+        return new StringBuilder();
+     }
+  }
 }

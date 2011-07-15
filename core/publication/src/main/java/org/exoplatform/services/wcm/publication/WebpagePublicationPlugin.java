@@ -21,8 +21,10 @@ import java.util.List;
 import javax.jcr.Node;
 
 import org.exoplatform.portal.config.model.Page;
-import org.exoplatform.portal.config.model.PageNavigation;
+import org.exoplatform.portal.mop.navigation.NavigationContext;
 import org.exoplatform.services.ecm.publication.PublicationPlugin;
+import org.exoplatform.services.wcm.publication.listener.post.PostCreateContentEventListener;
+import org.exoplatform.services.wcm.publication.listener.post.PostEditContentEventListener;
 
 /**
  * Created by The eXo Platform SAS
@@ -119,7 +121,7 @@ public abstract class WebpagePublicationPlugin extends PublicationPlugin {
    *
    * @throws Exception the exception
    */
-  public abstract void updateLifecyleOnCreateNavigation(PageNavigation navigation) throws Exception;
+  public abstract void updateLifecyleOnCreateNavigation(NavigationContext navigationContext) throws Exception;
 
   /**
    * Update lifecyle state of the any content relates to a navigation when the navigation is changed.
@@ -129,7 +131,7 @@ public abstract class WebpagePublicationPlugin extends PublicationPlugin {
    *
    * @throws Exception the exception
    */
-  public abstract void updateLifecycleOnChangeNavigation(PageNavigation navigation, String remoteUser) throws Exception;
+  public abstract void updateLifecycleOnChangeNavigation(NavigationContext navigationContext, String remoteUser) throws Exception;
 
   /**
    * Update lifecyle state of the any content relates to a navigation when the navigation is removed.
@@ -138,7 +140,7 @@ public abstract class WebpagePublicationPlugin extends PublicationPlugin {
    *
    * @throws Exception the exception
    */
-  public abstract void updateLifecyleOnRemoveNavigation(PageNavigation navigation) throws Exception;
+  public abstract void updateLifecyleOnRemoveNavigation(NavigationContext navigationContext) throws Exception;
 
   /**
    * Update the lifecycle of the content depending of its current state.
@@ -186,5 +188,5 @@ public abstract class WebpagePublicationPlugin extends PublicationPlugin {
    *
    * @throws Exception the exception
    */
-  public abstract List<String> getListPageNavigationUri(Page page, String remoteUser) throws Exception;
+  public abstract List<String> getListUserNavigationUri(Page page, String remoteUser) throws Exception;
 }

@@ -18,8 +18,9 @@ package org.exoplatform.services.wcm.publication.listener.navigation;
 
 import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
-import org.exoplatform.portal.config.DataStorageImpl;
-import org.exoplatform.portal.config.model.PageNavigation;
+import org.exoplatform.portal.mop.SiteKey;
+import org.exoplatform.portal.mop.navigation.NavigationContext;
+import org.exoplatform.portal.mop.navigation.NavigationServiceWrapper;
 import org.exoplatform.services.listener.Event;
 import org.exoplatform.services.listener.Listener;
 import org.exoplatform.services.log.ExoLogger;
@@ -33,7 +34,7 @@ import org.exoplatform.services.wcm.publication.WCMPublicationService;
  * hoa.pham@exoplatform.com
  * Sep 24, 2008
  */
-public class UpdateNavigationEventListener extends Listener<DataStorageImpl, PageNavigation>{
+public class UpdateNavigationEventListener extends Listener<NavigationServiceWrapper, SiteKey>{
 
   /** The log. */
   private static Log log = ExoLogger.getLogger(UpdateNavigationEventListener.class);
@@ -41,15 +42,17 @@ public class UpdateNavigationEventListener extends Listener<DataStorageImpl, Pag
   /* (non-Javadoc)
    * @see org.exoplatform.services.listener.Listener#onEvent(org.exoplatform.services.listener.Event)
    */
-  public void onEvent(Event<DataStorageImpl, PageNavigation> event) throws Exception {
+  public void onEvent(Event<NavigationServiceWrapper, SiteKey> event) throws Exception {
     ExoContainer container = ExoContainerContext.getCurrentContainer();
-    WCMPublicationService publicationService =
-      (WCMPublicationService)container.getComponentInstanceOfType(WCMPublicationService.class);
+    WCMPublicationService publicationService = (WCMPublicationService) container.getComponentInstanceOfType(WCMPublicationService.class);
+    NavigationServiceWrapper navigationWrapper = event.getSource();
+    SiteKey key = event.getData();
+    NavigationContext navigationContext = navigationWrapper.loadNavigation(key);
     try {
       if (ConversationState.getCurrent() == null)
-        publicationService.updateLifecycleOnChangeNavigation(event.getData(), null);
+        publicationService.updateLifecycleOnChangeNavigation(navigationContext, null);
       else
-        publicationService.updateLifecycleOnChangeNavigation(event.getData(),
+        publicationService.updateLifecycleOnChangeNavigation(navigationContext,
                                                              ConversationState.getCurrent()
                                                                               .getIdentity()
                                                                               .getUserId());
