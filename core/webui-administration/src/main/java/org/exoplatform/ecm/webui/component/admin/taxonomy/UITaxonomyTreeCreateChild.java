@@ -71,9 +71,9 @@ public class UITaxonomyTreeCreateChild extends UIContainer {
   public UITaxonomyTreeCreateChild() throws Exception {
     addChild(UIBreadcumbs.class, "BreadcumbTaxonomyTreeECMAdmin", "BreadcumbTaxonomyTreeECMAdmin");
     UITaxonomyTreeBrowser uiTaxonomyTreeBrowser = addChild(UITaxonomyTreeBrowser.class, null, null);
-    uiTaxonomyTreeBrowser.setAcceptedNodeTypes(new String[] {Utils.EXO_TAXANOMY});
+    uiTaxonomyTreeBrowser.setAcceptedNodeTypes(new String[] {Utils.EXO_TAXONOMY});
     UITaxonomyTreeWorkingArea uiTaxonomyTreeWorkingArea = addChild(UITaxonomyTreeWorkingArea.class, null, null);
-    uiTaxonomyTreeWorkingArea.setAcceptedNodeTypes(new String[] {Utils.EXO_TAXANOMY});
+    uiTaxonomyTreeWorkingArea.setAcceptedNodeTypes(new String[] {Utils.EXO_TAXONOMY});
   }
 
   public void update() throws Exception {

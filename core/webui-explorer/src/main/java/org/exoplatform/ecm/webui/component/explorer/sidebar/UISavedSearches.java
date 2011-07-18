@@ -166,7 +166,7 @@ public class UISavedSearches extends UIComponent {
       UIContentNameSearch contentNameSearch = uiECMSearch.findFirstComponentOfType(UIContentNameSearch.class);
       String currentNodePath = uiJCRExplorer.getCurrentNode().getPath();
       Node currentNode = uiJCRExplorer.getCurrentNode();
-      if (currentNode.isNodeType(Utils.EXO_TAXANOMY)) {
+      if (currentNode.isNodeType(Utils.EXO_TAXONOMY)) {
         TaxonomyService taxonomyService = uiJCRExplorer.getApplicationComponent(TaxonomyService.class);
         List<Node> TaxonomyTrees = taxonomyService.getAllTaxonomyTrees();
         for (Node taxonomyNode : TaxonomyTrees) {

@@ -674,7 +674,7 @@ public class UIUploadForm extends UIForm implements UIPopupComponent, UISelectab
   private boolean isTaxonomyChildNode(Node node) throws RepositoryException {
     Node parrentNode = node.getParent();
     while (!((NodeImpl) parrentNode).isRoot()) {
-      if (parrentNode.isNodeType(Utils.EXO_TAXANOMY)) {
+      if (parrentNode.isNodeType(Utils.EXO_TAXONOMY)) {
         return true;
       }
       parrentNode = parrentNode.getParent();

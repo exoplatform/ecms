@@ -92,8 +92,7 @@ public class Utils {
   final public static String CB_VIEW_COMMENT = "viewComment".intern();
   final public static String CB_VIEW_VOTE = "viewVote".intern();
   final public static String CB_SEARCH_LOCATION = "searchLocation".intern();
-  final public static String CB_ENABLE_SEARCH_LOCATION = "enableSearch"
-      .intern();
+  final public static String CB_ENABLE_SEARCH_LOCATION = "enableSearch".intern();
   final public static String CB_FILTER_CATEGORY = "filterCategory".intern();
   final static public String EXO_AUDITABLE = "exo:auditable";
   final public static String CB_BOX_TEMPLATE = "boxTemplate".intern();
@@ -138,7 +137,9 @@ public class Utils {
   final static public String EXO_TITLE = "exo:title";
   final static public String EXO_SUMMARY = "exo:summary";
   final static public String EXO_RELATION = "exo:relation";
-  final static public String EXO_TAXANOMY = "exo:taxonomy";
+  @Deprecated
+  final static public String EXO_TAXANOMY = "exo:taxonomy";  
+  final static public String EXO_TAXONOMY = "exo:taxonomy";
   final static public String EXO_IMAGE = "exo:image";
   final static public String EXO_ARTICLE = "exo:article";
   final static public String EXO_LANGUAGE = "exo:language";
@@ -199,7 +200,7 @@ public class Utils {
   final static public String[] NON_EDITABLE_NODETYPES = { NT_UNSTRUCTURED,
       NT_FOLDER, NT_RESOURCE };
   final public static String[] CATEGORY_NODE_TYPES = { NT_FOLDER,
-      NT_UNSTRUCTURED, EXO_TAXANOMY };
+      NT_UNSTRUCTURED, EXO_TAXONOMY };
   final static public String CATEGORY_MANDATORY = "categoryMandatoryWhenFileUpload";
   final static public String UPLOAD_SIZE_LIMIT_MB = "uploadFileSizeLimitMB";
   final static public String FILE_VIEWER_EXTENSION_TYPE = "org.exoplatform.ecm.dms.FileViewer";

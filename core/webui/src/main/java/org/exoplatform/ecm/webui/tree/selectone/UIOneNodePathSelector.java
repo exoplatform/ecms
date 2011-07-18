@@ -126,8 +126,8 @@ public class UIOneNodePathSelector extends UIBaseNodeTreeSelector {
         nodeTypesInTree.add(Utils.NT_UNSTRUCTURED);
       if (!nodeTypesInTree.contains(Utils.NT_FOLDER))
         nodeTypesInTree.add(Utils.NT_FOLDER);
-      if (!nodeTypesInTree.contains(Utils.EXO_TAXANOMY))
-        nodeTypesInTree.add(Utils.EXO_TAXANOMY);
+      if (!nodeTypesInTree.contains(Utils.EXO_TAXONOMY))
+        nodeTypesInTree.add(Utils.EXO_TAXONOMY);
       this.acceptedNodeTypesInTree = nodeTypesInTree.toArray(new String[]{});
     }
     builder.setAcceptedNodeTypes(acceptedNodeTypesInTree);
