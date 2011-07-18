@@ -224,6 +224,7 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
     context.getJavascriptManager().importJavascript("eXo.ecm.UIDocumentForm", "/ecmexplorer/javascript/");
     context.getJavascriptManager().addOnLoadJavascript("eXo.webui.UIDocForm.AdjustHeight");
     context.getJavascriptManager().addOnLoadJavascript("eXo.webui.UIDocForm.UpdateGUI");
+    context.getJavascriptManager().addOnLoadJavascript("eXo.webui.UIDocForm.AutoFocus");
     super.processRender(context);
   }
   

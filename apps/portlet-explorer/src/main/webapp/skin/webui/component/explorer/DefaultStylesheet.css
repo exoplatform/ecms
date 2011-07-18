@@ -151,6 +151,38 @@
 	margin-top: 10px;
 }
 
+.ChangeThumbnailViewIcon {
+	float: right; 
+	width: 23px; 
+	height: 21px; 
+	background: url('/ecmexplorer/skin/webui/component/explorer/control/DefaultSkin/background/IconView.gif');
+	cursor: pointer;
+}
+
+.SelectedThumbnailViewIcon {
+	float: right; 
+	width: 23px; 
+	height: 21px; 
+	background: url('/ecmexplorer/skin/webui/component/explorer/control/DefaultSkin/background/IconViewSelected.gif');
+	cursor: pointer;
+}
+
+.ChangeListViewIcon {
+	float: right; 
+	width: 23px; 
+	height: 21px; 
+	background: url('/ecmexplorer/skin/webui/component/explorer/control/DefaultSkin/background/DetailView.gif');
+	cursor: pointer;
+}
+
+.SelectedListViewIcon {
+	float: right; 
+	width: 23px; 
+	height: 21px; 
+	background: url('/ecmexplorer/skin/webui/component/explorer/control/DefaultSkin/background/DetailViewSelected.gif');
+	cursor: pointer;
+}
+
 .SelectTemplateArea{
 	width:100%;
 }

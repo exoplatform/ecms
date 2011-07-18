@@ -39,8 +39,9 @@ import org.exoplatform.webui.event.EventListener;
  * Nov 8, 2006 10:06:40 AM
  */
 @ComponentConfig(
-    template = "app:/groovy/webui/component/explorer/UISelectDocumentForm.gtmpl",
+    template = "app:/groovy/webui/component/explorer/UISelectDocumentFormThumbnailView.gtmpl",
     events = {
+      @EventConfig(listeners = UISelectDocumentForm.ChangeViewActionListener.class),
       @EventConfig(listeners = UISelectDocumentForm.SelectTemplateActionListener.class)
     }
 )
@@ -48,7 +49,13 @@ public class UISelectDocumentForm extends UIContainer {
 
   private final static String DOCUMENT_TEMPLATE_ITERATOR_ID = "DocumentTemplateIterator".intern();
   
-  private Map<String, String> templates;
+  private final static String THUMBNAIL_VIEW_TEMPLATE = "app:/groovy/webui/component/explorer/UISelectDocumentFormThumbnailView.gtmpl".intern();
+  
+  private final static String LIST_VIEW_TEMPLATE = "app:/groovy/webui/component/explorer/UISelectDocumentFormListView.gtmpl".intern();
+  
+  private String uiComponentTemplate;
+  
+  private Map<String, String> documentTemplates;
   
   private String repository;
   
@@ -58,17 +65,17 @@ public class UISelectDocumentForm extends UIContainer {
     pageIterator = addChild(UIPageIterator.class, null, DOCUMENT_TEMPLATE_ITERATOR_ID);
   } 
 
-  public Map<String, String> getTemplates() {
-    return templates;
+  public Map<String, String> getDocumentTemplates() {
+    return documentTemplates;
   }
   
   public void setDocumentTemplates(Map<String, String> templates) {
-    this.templates = templates;       
+    this.documentTemplates = templates;       
   }
   
   public void updatePageListData() throws Exception {
     List<String> templateList = new ArrayList<String>();
-    Iterator<String> iter = templates.keySet().iterator();
+    Iterator<String> iter = getDocumentTemplates().keySet().iterator();
     while (iter.hasNext()) {
       String key = iter.next();
       templateList.add(key);
@@ -81,7 +88,7 @@ public class UISelectDocumentForm extends UIContainer {
   }
   
   public String getContentType (String label) {
-    return templates.get(label);
+    return getDocumentTemplates().get(label);
   }
   
   public String getTemplateIconStylesheet(String contentType) {
@@ -103,6 +110,14 @@ public class UISelectDocumentForm extends UIContainer {
   public UIPageIterator getContentPageIterator() {
     return pageIterator;
   }
+  
+  public String getTemplate() {
+	  return uiComponentTemplate != null ? uiComponentTemplate : super.getTemplate();
+  }
+  
+  public void setTemplate(String template) {
+	  this.uiComponentTemplate = template;
+  }
 
   static public class SelectTemplateActionListener extends EventListener<UISelectDocumentForm> {
     public void execute(Event<UISelectDocumentForm> event) throws Exception {
@@ -120,6 +135,22 @@ public class UISelectDocumentForm extends UIContainer {
       documentForm.setRendered(true);
       
       event.getRequestContext().addUIComponentToUpdateByAjax(uiDCFormController) ;
+    }
+  }
+  
+  static public class ChangeViewActionListener extends EventListener<UISelectDocumentForm> {
+    private static final String THUMBNAIL_VIEW_TYPE = "ThumbnailView";
+
+	public void execute(Event<UISelectDocumentForm> event) throws Exception {
+      String viewType = event.getRequestContext().getRequestParameter(OBJECTID);
+      UISelectDocumentForm uiSelectForm = event.getSource() ;
+      UIJCRExplorer uiExplorer = uiSelectForm.getAncestorOfType(UIJCRExplorer.class);
+      if (viewType.equals(THUMBNAIL_VIEW_TYPE)) {
+    	uiSelectForm.setTemplate(THUMBNAIL_VIEW_TEMPLATE);
+      } else {
+    	uiSelectForm.setTemplate(LIST_VIEW_TEMPLATE);
+      }
+      uiExplorer.updateAjax(event);
     }
   }
 }

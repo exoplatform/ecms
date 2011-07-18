@@ -1578,6 +1578,8 @@
   <UISelectDocumentForm>
     <label>
       <selectTemplate>Select your template in the list below</selectTemplate>
+      <ThumbnailView>Thumbnail View</ThumbnailView>
+      <ListView>List View</ListView>
     </label>
   </UISelectDocumentForm>
   <!--

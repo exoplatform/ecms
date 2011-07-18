@@ -1,6 +1,5 @@
 var UIDocumentForm = function() {
 	this.Name = 'UIDocumentForm';
-	this.IsMaximized = false;
 	this.SavedStyle = "";
 	
 }
@@ -14,6 +13,7 @@ UIDocumentForm.prototype.AdjustHeight = function() {
 	
 	var uiActionHeight = 0;
 	var uiHorizontalTabsHeight = 0;
+	horizontalLayout.style.height = 'auto';
 	if (uiAction) {
 		uiActionHeight = uiAction.offsetHeight;
 	}
@@ -91,6 +91,7 @@ UIDocumentForm.prototype.FullScreenToggle = function(element) {
 		UIDocumentForm.RestoreStyles( uiDocumentWorkspace , this.SavedStyle ) ;
 	}
 	eXo.webui.UIDocForm.AdjustHeight();
+	eXo.webui.UIDocForm.AutoFocus();
 }
 
 UIDocumentForm.SaveStyles = function( element ) {
@@ -126,5 +127,18 @@ UIDocumentForm.GetViewPaneSize = function( win )
 {
 	return { Width : win.clientWidth, Height : win.clientHeight } ;
 }
+
+
+//focus to the first element in the form after loading successfuly
+UIDocumentForm.prototype.AutoFocus = function() {
+  var uiDocumentForm = document.getElementById("UIDocumentForm");
+  for (var i = 0; uiDocumentForm.elements[i].type == 'hidden'; i++);
+		  
+  setTimeout(function() {
+    try {
+      uiDocumentForm.elements[i].focus();
+    } catch(err){}
+  }, 200);
+};
 
 eXo.webui.UIDocForm = new UIDocumentForm();
