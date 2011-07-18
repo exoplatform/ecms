@@ -48,7 +48,6 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.dom.DOMSource;
 
-import org.apache.commons.lang.StringUtils;
 import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.container.PortalContainer;
 import org.exoplatform.container.component.ComponentRequestLifecycle;
@@ -122,12 +121,12 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
 
   private PortalContainer manager;
 
-  private OrganizationService organizationService;
+  private OrganizationService organizationService=null;
 
-  private ResourceBundleService resourceBundleService;
+  private ResourceBundleService resourceBundleService=null;
 
   private String resourceBundleNames[];
-  private ResourceBundle sharedResourceBundle;
+  private ResourceBundle sharedResourceBundle=null;
 
   private Locale lang = Locale.ENGLISH;
   /**
@@ -139,10 +138,6 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
   public DriverConnector(InitParams params) {
     limit = Integer.parseInt(params.getValueParam("upload.limit.size").getValue());
     manager = PortalContainer.getInstance() ;
-    organizationService = WCMCoreUtils.getService(OrganizationService.class);
-    resourceBundleService = WCMCoreUtils.getService(ResourceBundleService.class);
-    resourceBundleNames = resourceBundleService.getSharedResourceBundleNames();
-    sharedResourceBundle = resourceBundleService.getResourceBundle(resourceBundleNames, lang);
   }
 
   /**
@@ -429,6 +424,11 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
   }
 
   private String resolveDriveLabel(String name, String lang) {
+    if (resourceBundleService ==null) {
+      resourceBundleService = WCMCoreUtils.getService(ResourceBundleService.class);
+      resourceBundleNames = resourceBundleService.getSharedResourceBundleNames();
+      sharedResourceBundle = resourceBundleService.getResourceBundle(resourceBundleNames, this.lang);
+    }
     try {
       if(!this.lang.getLanguage().equals(lang)){
         this.lang = new Locale(lang);
@@ -528,6 +528,9 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
    * @throws Exception the exception
    */
   private List<String> getMemberships(String userId) throws Exception {
+    if (organizationService ==null ) {
+      organizationService = WCMCoreUtils.getService(OrganizationService.class);
+    }
     ((ComponentRequestLifecycle) organizationService).startRequest(manager);
     List<String> userMemberships = new ArrayList<String> ();
     userMemberships.add(userId);
@@ -553,6 +556,9 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
    * @throws Exception the exception
    */
   private List<String> getGroups(String userId) throws Exception {
+    if (organizationService ==null ) {
+      organizationService = WCMCoreUtils.getService(OrganizationService.class);
+    }
     ((ComponentRequestLifecycle) organizationService).startRequest(manager);
     List<String> groupList = new ArrayList<String> ();
     Collection<?> groups = organizationService.getGroupHandler().findGroupsOfUser(userId);
