@@ -16,6 +16,7 @@
  */
 package org.exoplatform.ecm.webui.component.admin.folksonomy;
 
+import javax.jcr.ItemNotFoundException;
 import javax.jcr.Node;
 
 import org.apache.commons.lang.StringUtils;
@@ -142,6 +143,10 @@ public class UITagStyleForm extends UIForm {
         uiForm.getTagStyle().getSession().save() ;
         UITagStyleList uiTagList = uiManager.getChild(UITagStyleList.class) ;
         uiTagList.refresh(uiTagList.getUIPageIterator().getCurrentPage());
+      } catch (ItemNotFoundException ie) {
+        String key = "UITagStyleForm.msg.item-not-existing" ;
+        uiApp.addMessage(new ApplicationMessage(key, null, ApplicationMessage.WARNING)) ;
+        return ;
       } catch(Exception e) {
         String key = "UITagStyleForm.msg.error-update" ;
         uiApp.addMessage(new ApplicationMessage(key, null, ApplicationMessage.WARNING)) ;

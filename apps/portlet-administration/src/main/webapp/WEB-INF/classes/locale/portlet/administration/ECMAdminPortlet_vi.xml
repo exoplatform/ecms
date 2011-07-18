@@ -1916,6 +1916,7 @@
     <msg>
       <range-validator>Phạm vi lựa chọn không hợp lệ. Phải chọn khoảng a...b với a, b là các số nguyên không âm. Bạn có thể dùng * thay thế cho b với nghĩa là không hạn chế.</range-validator>
       <error-update>Thông tin của bạn là không hợp lệ hoặc dịch vụ đưa ra lỗi.</error-update>
+      <item-not-existing>Không thể lưu lại thay đổi vì thông tin gốc không còn tồn tại</item-not-existing>
     </msg>
   </UITagStyleForm>
   <FolksonomyPopup>

@@ -1916,6 +1916,7 @@
     <msg>
       <range-validator>Ongeldige bereik. Formaat van geldige bereik is: a.. B met a, b is positief getal. Je kunt * in plaats van B om aan te geven dat onbeperkt.</range-validator>
       <error-update>Uw gegevens zijn niet geldig of dienst verhoogd fout.</error-update>
+      <item-not-existing>You cannot save changes to this tag that no longer exist in database</item-not-existing>
     </msg>
   </UITagStyleForm>
   <FolksonomyPopup>

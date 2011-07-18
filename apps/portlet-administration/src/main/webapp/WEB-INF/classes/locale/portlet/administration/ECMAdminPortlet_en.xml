@@ -1920,6 +1920,7 @@
     <msg>
       <range-validator>Invalid range. Format of valid range is: a..b with a, b positive integers. You can use * instead of b to indicate that range is unlimited.</range-validator>
       <error-update>Your information are not valid or service raised error.</error-update>
+      <item-not-existing>You cannot save changes to this tag that no longer exist in database</item-not-existing>
     </msg>
   </UITagStyleForm>
   <FolksonomyPopup>

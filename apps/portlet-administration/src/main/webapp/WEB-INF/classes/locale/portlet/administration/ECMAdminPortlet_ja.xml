@@ -1917,6 +1917,7 @@
     <msg>
       <range-validator>無効なレンジです。正しいレンジのフォーマットは a..b with a, b is positive integer. You can use * instead of b to indicate that unlimited.</range-validator>
       <error-update>情報は正しくありません。</error-update>
+      <item-not-existing>You cannot save changes to this tag that no longer exist in database</item-not-existing>
     </msg>
   </UITagStyleForm>
   <FolksonomyPopup>

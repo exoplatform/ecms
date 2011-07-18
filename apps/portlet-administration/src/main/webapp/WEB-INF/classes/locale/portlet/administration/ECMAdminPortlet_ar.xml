@@ -1912,6 +1912,7 @@
     <msg>
       <range-validator>عدد الوصلات غير صحيح. الشكل الصحيح هو: أ..ب، أ و ب أعداد صحيحة موجبة.يمكن إستعمال '*' للإشارة بأنه غيرمحدود</range-validator>
       <error-update>خطأ في التحديث.</error-update>
+      <item-not-existing>You cannot save changes to this tag that no longer exist in database</item-not-existing>
     </msg>
   </UITagStyleForm>
   <FolksonomyPopup>

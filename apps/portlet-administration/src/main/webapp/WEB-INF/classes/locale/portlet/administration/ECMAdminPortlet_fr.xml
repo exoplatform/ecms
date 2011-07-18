@@ -1925,6 +1925,7 @@
     <msg>
       <range-validator>Nombre de références invalide. Le format est le suivant : a..b (a et b entiers positifs). Utiliser '*' à la place de b pour indiquer un nombre illimité.</range-validator>
       <error-update>Erreur lors de la mise à jour.</error-update>
+      <item-not-existing>Vous ne pouvez pas enregistrer les modifications à cette étiquette qui n'existent plus dans la base de données</item-not-existing>
     </msg>
   </UITagStyleForm>
   <FolksonomyPopup>
