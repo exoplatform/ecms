@@ -1792,6 +1792,7 @@
       <name-exist>اسم علامة '{0}' مستخدم</name-exist>
       <tagName-invalid>هناك بعض الحروف غير متاحة في هذا الإسم.</tagName-invalid>
       <tag-name-empty>اسم العلامة فارغ</tag-name-empty>
+      <tag-name-duplicate>Input tag names are duplicate.</tag-name-duplicate>
       <tagName-too-long>واحدة من العلامات ذات اسم طويل جدا. أسماء العلامات يجب أن تكون أقل من 20 حرفا</tagName-too-long>
     </msg>
     <introduction>

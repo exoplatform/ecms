@@ -1799,6 +1799,7 @@
       <name-exist>Tag Name '{0}' existiert schon</name-exist>
       <tagName-invalid><![CDATA[Ung&uuml;ltige Symbole in Tag Namen.]]></tagName-invalid>
       <tag-name-empty>Ihr Tag Name ist leer</tag-name-empty>
+      <tag-name-duplicate>Input tag names are duplicate.</tag-name-duplicate>
       <tagName-too-long><![CDATA[Einer der eingegebenen Tags war zu lang. Tags m&uuml;ssen k&uuml;rzer als 30 Buchstaben sein.]]></tagName-too-long>
     </msg>
     <introduction>

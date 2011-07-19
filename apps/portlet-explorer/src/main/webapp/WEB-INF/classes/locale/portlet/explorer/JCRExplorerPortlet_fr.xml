@@ -1985,6 +1985,7 @@
       <name-exist>Le tag existe déjà ou est invalide</name-exist>
       <tagName-invalid>Caractères invalides détectés dans le nom du tag.</tagName-invalid>
       <tag-name-empty>Nom du tag requis</tag-name-empty>
+      <tag-name-duplicate>Les noms du tag sont dupliqués.</tag-name-duplicate>
       <tagName-too-long>Nom du tag trop long (doit être inférieur à 30 caractères)</tagName-too-long>
     </msg>
     <introduction>

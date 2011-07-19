@@ -1960,7 +1960,8 @@
       <name-exist>タグ名 '{0}' は存在します。</name-exist>
       <tagName-invalid>タグ名は無効な文字を含みます。</tagName-invalid>
       <tag-name-empty>タグ名は空です。</tag-name-empty>
-      <tagName-too-long>入力されたタグの一つは長過ぎます。タグは長さ20文字未満でなければなりません。</tagName-too-long>
+      <tag-name-duplicate>入力されたタグ名が重複しています。</tag-name-duplicate>
+      <tagName-too-long>入力されたタグの一つは長過ぎます。タグは長さ30文字未満でなければなりません。</tagName-too-long>
     </msg>
     <introduction>
       <tagName>(複数のタグを追加する為に","をセパレータとして利用)</tagName>
