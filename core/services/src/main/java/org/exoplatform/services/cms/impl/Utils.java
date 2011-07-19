@@ -23,7 +23,11 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
@@ -32,6 +36,8 @@ import javax.jcr.ItemNotFoundException;
 import javax.jcr.Node;
 import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
+import javax.jcr.nodetype.NodeType;
+import javax.jcr.nodetype.PropertyDefinition;
 
 import org.apache.commons.lang.StringUtils;
 import org.exoplatform.services.cms.BasePath;
@@ -224,6 +230,24 @@ public class Utils {
     return StringUtils.replaceOnce(parameterizedDrivePath, 
                                    nodeHierarchyCreator.getJcrPath(BasePath.CMS_USERS_PATH) + "/${userId}", 
                                    userNode.getPath());
+  }
+  
+  public static List<PropertyDefinition> getProperties(Node node) throws Exception {
+    List<PropertyDefinition> properties = new ArrayList<PropertyDefinition>();      
+    NodeType nodetype = node.getPrimaryNodeType() ;
+    Collection<NodeType> types = new ArrayList<NodeType>() ;
+    types.add(nodetype) ;
+    NodeType[] mixins = node.getMixinNodeTypes() ;
+    if (mixins != null) types.addAll(Arrays.asList(mixins)) ;
+    for(NodeType nodeType : types) {
+        for(PropertyDefinition property : nodeType.getPropertyDefinitions()) {
+          String name = property.getName();
+          if(!name.equals("exo:internalUse")&& !property.isProtected()&& !node.hasProperty(name)) {
+            properties.add(property);
+          }
+        }
+    } 
+    return properties;
   }
   
 }

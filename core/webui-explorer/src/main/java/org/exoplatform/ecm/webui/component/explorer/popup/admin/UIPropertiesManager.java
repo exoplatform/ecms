@@ -16,15 +16,24 @@
  */
 package org.exoplatform.ecm.webui.component.explorer.popup.admin;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
+
 import javax.jcr.Node;
+import javax.jcr.nodetype.NodeType;
+import javax.jcr.nodetype.PropertyDefinition;
 
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
+import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.core.UIPopupComponent;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIContainer;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
+import org.exoplatform.ecm.webui.utils.Utils;
 
 /**
  * Created by The eXo Platform SARL
@@ -44,18 +53,30 @@ public class UIPropertiesManager extends UIContainer implements UIPopupComponent
 
   private String selectedPath_ = null;
   private String wsName_ = null;
+  private List<PropertyDefinition> properties = null;
 
   public UIPropertiesManager() throws Exception {
     addChild(UIPropertyTab.class, null, null)  ;
     addChild(UIPropertyForm.class, null, null).setRendered(false) ;
   }
-
+  
+  public void processRender(WebuiRequestContext context) throws Exception {
+    Node currentNode = getCurrentNode();
+    properties = org.exoplatform.services.cms.impl.Utils.getProperties(currentNode);
+    
+    if(currentNode != null && !currentNode.isNodeType(Utils.NT_UNSTRUCTURED) && (properties == null || properties.size() == 0))
+      removeChild(UIPropertyForm.class);
+    super.processRender(context);
+  }
+  
   public Node getCurrentNode() throws Exception {
     UIJCRExplorer uiExplorer = getAncestorOfType(UIJCRExplorer.class) ;
-    if(selectedPath_ != null) {
-      return uiExplorer.getNodeByPath(selectedPath_, uiExplorer.getSessionByWorkspace(wsName_));
-    }
-    return uiExplorer.getCurrentNode();
+    if(uiExplorer != null) {
+      if(selectedPath_ != null) {
+        return uiExplorer.getNodeByPath(selectedPath_, uiExplorer.getSessionByWorkspace(wsName_));
+      }
+      return uiExplorer.getCurrentNode();
+    } else return null;
   }
 
   public void setSelectedPath(String selectedPath, String wsName) {

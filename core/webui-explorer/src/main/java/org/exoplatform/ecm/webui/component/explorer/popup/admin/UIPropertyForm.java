@@ -32,7 +32,6 @@ import javax.jcr.ValueFactory;
 import javax.jcr.ValueFormatException;
 import javax.jcr.nodetype.NodeType;
 import javax.jcr.nodetype.PropertyDefinition;
-import javax.jcr.ValueFormatException;
 
 import org.exoplatform.ecm.webui.form.validator.ECMNameValidator;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
@@ -90,7 +89,6 @@ public class UIPropertyForm extends UIForm {
   final static private String TRUE = "true";
   final static public String PROPERTY_SELECT = "property_select" ;
   private static final Log LOG  = ExoLogger.getLogger("explorer.UIPropertyForm");
-  private String repositoryName_;
   private String propertyName_;
   private boolean isAddNew_ = true;
   private boolean isMultiple_ = false;
@@ -135,8 +133,7 @@ public class UIPropertyForm extends UIForm {
     UIFormSelectBox uiMultiSelectBox = new UIFormSelectBox(FIELD_MULTIPLE,FIELD_MULTIPLE, multipleOpt);
       uiMultiSelectBox.setOnChange("ChangeType");
       addUIFormInput(uiMultiSelectBox);
-    }       
-    
+    }    
     initValueField(currentNode);   
     setActions(new String[]{"Save", "Reset", "Cancel"});
   }
@@ -171,8 +168,6 @@ public class UIPropertyForm extends UIForm {
     initValueField(currentNode);
   }
 
-  public void setRepositoryName(String repositoryName) { repositoryName_ = repositoryName; }
-
   private void initValueField(Node currentNode) throws Exception {
     if(currentNode.isNodeType(Utils.NT_UNSTRUCTURED)){
         UIFormMultiValueInputSet uiFormMValue = 
@@ -184,32 +179,35 @@ public class UIPropertyForm extends UIForm {
         addUIFormInput(uiFormMValue);
     }
     else{
-      List<PropertyDefinition> properties = getProperties(currentNode);
+      List<PropertyDefinition> properties = org.exoplatform.services.cms.impl.Utils.getProperties(currentNode);
       getUIFormSelectBox(PROPERTY_SELECT).setOptions(renderProperties(currentNode));
-          if(properties.get(0).isMultiple()){
-             UIFormMultiValueInputSet uiFormMValue = 
-           createUIComponent(UIFormMultiValueInputSet.class, null, null);
-           uiFormMValue.addValidator(MandatoryValidator.class);
-           uiFormMValue.setId(FIELD_VALUE);
-           uiFormMValue.setName(FIELD_VALUE);
-           changeMultipleType(uiFormMValue, properties.get(0).getRequiredType());
-           addUIFormInput(uiFormMValue);
-          }else{
-            changeSingleType(properties.get(0).getRequiredType());
-          }       
-    }
-    
+      if(properties!= null && properties.size() > 0) {
+        if(properties.get(0).isMultiple()){
+          UIFormMultiValueInputSet uiFormMValue = 
+          createUIComponent(UIFormMultiValueInputSet.class, null, null);
+          uiFormMValue.addValidator(MandatoryValidator.class);
+          uiFormMValue.setId(FIELD_VALUE);
+          uiFormMValue.setName(FIELD_VALUE);
+          changeMultipleType(uiFormMValue, properties.get(0).getRequiredType());
+          addUIFormInput(uiFormMValue);
+        }else{
+          changeSingleType(properties.get(0).getRequiredType());
+        }  
+      }
+    }    
   }
 
   private Value createValue(Object value, int type, ValueFactory valueFactory) throws Exception {
-    switch (type) {
-    case 2:  return valueFactory.createValue((InputStream)value);
-    case 3:  return valueFactory.createValue(Long.parseLong(value.toString()));
-    case 4:  return valueFactory.createValue(Double.parseDouble(value.toString()));
-    case 5:  return valueFactory.createValue((GregorianCalendar)value);
-    case 6:  return valueFactory.createValue(Boolean.parseBoolean(value.toString()));
-    default: return valueFactory.createValue(value.toString(), type);
-    }
+    if(value != null) {
+      switch (type) {
+        case 2:  return valueFactory.createValue((InputStream)value);
+        case 3:  return valueFactory.createValue(Long.parseLong(value.toString()));
+        case 4:  return valueFactory.createValue(Double.parseDouble(value.toString()));
+        case 5:  return valueFactory.createValue((GregorianCalendar)value);
+        case 6:  return valueFactory.createValue(Boolean.parseBoolean(value.toString()));
+        default: return valueFactory.createValue(value.toString(), type);
+      }
+    } else return null;
   }
 
   private Value[] createValues(List valueList, int type, ValueFactory valueFactory) throws Exception {
@@ -250,106 +248,193 @@ public class UIPropertyForm extends UIForm {
     Node currentNode = getCurrentNode();
     propertyName_ = propertyName;
     isAddNew_ = false;
-    String[] propertyInfo = propertyName.split(":");
-    if(propertyInfo.length == 1){
-      getUIFormSelectBox(FIELD_NAMESPACE).setDisabled(true).setValue("");
-      getUIStringInput(FIELD_PROPERTY).setEditable(false).setValue(propertyInfo[0]);
-    } else{
-      getUIFormSelectBox(FIELD_NAMESPACE).setDisabled(true).setValue(propertyInfo[0]);
-      getUIStringInput(FIELD_PROPERTY).setEditable(false).setValue(propertyInfo[1]);
-    }
-    Property property = currentNode.getProperty(propertyName);
-    isMultiple_ = property.getDefinition().isMultiple();
-    if (property.getType() == 0){
-      getUIFormSelectBox(FIELD_TYPE).setDisabled(true).setValue("1");
-    } else {
-      getUIFormSelectBox(FIELD_TYPE).setDisabled(true).setValue(Integer.toString(property.getType()));
-    }
-    getUIFormSelectBox(FIELD_MULTIPLE).setDisabled(true).setValue(Boolean.toString(isMultiple_));
-    if(isMultiple_) {
-      UIFormMultiValueInputSet multiValueInputSet = getUIInput(FIELD_VALUE);
-      List listValue = new ArrayList();
-      for(Value value : property.getValues()) {
+    if(!currentNode.isNodeType(Utils.NT_UNSTRUCTURED)) {
+      List<SelectItemOption<String>> propertySelected = new ArrayList<SelectItemOption<String>>();
+      propertySelected.add(new SelectItemOption<String>(propertyName,propertyName));
+      getUIFormSelectBox(PROPERTY_SELECT).setDisabled(true).setOptions(propertySelected);
+      Property property = currentNode.getProperty(propertyName);
+      isMultiple_ = property.getDefinition().isMultiple();
+      if(isMultiple_) {
+        removeChildById(FIELD_VALUE);
+        UIFormMultiValueInputSet uiFormMValue = 
+        createUIComponent(UIFormMultiValueInputSet.class, null, null);
+        uiFormMValue.addValidator(MandatoryValidator.class);
+        uiFormMValue.setId(FIELD_VALUE);
+        uiFormMValue.setName(FIELD_VALUE);        
+        addUIFormInput(uiFormMValue);
+        
+        List listValue = new ArrayList();
+        for(Value value : property.getValues()) {
+          switch (property.getType()) {
+            case 2:  break;
+            case 3:  {
+              listValue.add(Long.toString(value.getLong()));
+              break;
+            }
+            case 4:  {
+              listValue.add(Double.toString(value.getDouble()));
+              break;
+            }
+            case 5:  {
+              SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+              listValue.add(dateFormat.format(value.getDate().getTime()));
+              break;
+            }
+            case 6: {
+              listValue.add(Boolean.toString(value.getBoolean()));
+              break;
+            }
+            default: {
+              listValue.add(value.getString());
+              break;
+            }
+          }
+        }
+        changeMultipleType(uiFormMValue, property.getType());
+        uiFormMValue.setValue(listValue);
+      } else {
+        Value value = property.getValue();
+        changeSingleType(property.getType());
         switch (property.getType()) {
           case 2:  break;
           case 3:  {
-            listValue.add(Long.toString(value.getLong()));
+            UIFormStringInput uiForm = getUIStringInput(FIELD_VALUE);
+            uiForm.setValue(Long.toString(value.getLong()));
             break;
           }
           case 4:  {
-            listValue.add(Double.toString(value.getDouble()));
+            UIFormStringInput uiForm = getUIStringInput(FIELD_VALUE);
+            uiForm.setValue(Double.toString(value.getDouble()));
             break;
           }
           case 5:  {
-            SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
-            listValue.add(dateFormat.format(value.getDate().getTime()));
+            UIFormDateTimeInput uiFormDateTimeInput = getUIFormDateTimeInput(FIELD_VALUE);
+            SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+            uiFormDateTimeInput.setValue(dateFormat.format(value.getDate().getTime()));
             break;
           }
           case 6: {
-            listValue.add(Boolean.toString(value.getBoolean()));
+            UIFormCheckBoxInput uiFormCheckBoxInput = getUIFormCheckBoxInput(FIELD_VALUE);
+            uiFormCheckBoxInput.setValue(Boolean.toString(value.getBoolean()));
             break;
           }
           default: {
-            listValue.add(value.getString());
+            UIFormStringInput uiForm = getUIStringInput(FIELD_VALUE);
+            uiForm.setValue(value.getString());
+            break;
+          }
+        }
+      }      
+    } else {
+      String[] propertyInfo = propertyName.split(":");
+      if(propertyInfo.length == 1){
+        getUIFormSelectBox(FIELD_NAMESPACE).setDisabled(true).setValue("");
+        getUIStringInput(FIELD_PROPERTY).setEditable(false).setValue(propertyInfo[0]);
+      } else{
+        getUIFormSelectBox(FIELD_NAMESPACE).setDisabled(true).setValue(propertyInfo[0]);
+        getUIStringInput(FIELD_PROPERTY).setEditable(false).setValue(propertyInfo[1]);
+      }
+      Property property = currentNode.getProperty(propertyName);
+      isMultiple_ = property.getDefinition().isMultiple();
+      if (property.getType() == 0){
+        getUIFormSelectBox(FIELD_TYPE).setDisabled(true).setValue("1");
+      } else {
+        getUIFormSelectBox(FIELD_TYPE).setDisabled(true).setValue(Integer.toString(property.getType()));
+      }
+      getUIFormSelectBox(FIELD_MULTIPLE).setDisabled(true).setValue(Boolean.toString(isMultiple_));
+      if(isMultiple_) {
+        removeChildById(FIELD_VALUE);
+        UIFormMultiValueInputSet uiFormMValue = 
+        createUIComponent(UIFormMultiValueInputSet.class, null, null);
+        uiFormMValue.addValidator(MandatoryValidator.class);
+        uiFormMValue.setId(FIELD_VALUE);
+        uiFormMValue.setName(FIELD_VALUE);        
+        addUIFormInput(uiFormMValue);        
+        List listValue = new ArrayList();
+        for(Value value : property.getValues()) {
+          switch (property.getType()) {
+            case 2:  break;
+            case 3:  {
+              listValue.add(Long.toString(value.getLong()));
+              break;
+            }
+            case 4:  {
+              listValue.add(Double.toString(value.getDouble()));
+              break;
+            }
+            case 5:  {
+              SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+              listValue.add(dateFormat.format(value.getDate().getTime()));
+              break;
+            }
+            case 6: {
+              listValue.add(Boolean.toString(value.getBoolean()));
+              break;
+            }
+            default: {
+              listValue.add(value.getString());
+              break;
+            }
+          }
+        }
+        changeMultipleType(uiFormMValue, property.getType());
+        uiFormMValue.setValue(listValue);
+      } else {
+        Value value = property.getValue();
+        changeSingleType(property.getType());
+        switch (property.getType()) {
+          case 2:  break;
+          case 3:  {
+            UIFormStringInput uiForm = getUIStringInput(FIELD_VALUE);
+            uiForm.setValue(Long.toString(value.getLong()));
+            break;
+          }
+          case 4:  {
+            UIFormStringInput uiForm = getUIStringInput(FIELD_VALUE);
+            uiForm.setValue(Double.toString(value.getDouble()));
+            break;
+          }
+          case 5:  {
+            UIFormDateTimeInput uiFormDateTimeInput = getUIFormDateTimeInput(FIELD_VALUE);
+            SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+            uiFormDateTimeInput.setValue(dateFormat.format(value.getDate().getTime()));
+            break;
+          }
+          case 6: {
+            UIFormCheckBoxInput uiFormCheckBoxInput = getUIFormCheckBoxInput(FIELD_VALUE);
+            uiFormCheckBoxInput.setValue(Boolean.toString(value.getBoolean()));
+            break;
+          }
+          default: {
+            UIFormStringInput uiForm = getUIStringInput(FIELD_VALUE);
+            uiForm.setValue(value.getString());
             break;
           }
         }
       }
-      changeMultipleType(multiValueInputSet, property.getType());
-      multiValueInputSet.setValue(listValue);
-    } else {
-      Value value = property.getValue();
-      changeSingleType(property.getType());
-      switch (property.getType()) {
-        case 2:  break;
-        case 3:  {
-          UIFormStringInput uiForm = getUIStringInput(FIELD_VALUE);
-          uiForm.setValue(Long.toString(value.getLong()));
-          break;
-        }
-        case 4:  {
-          UIFormStringInput uiForm = getUIStringInput(FIELD_VALUE);
-          uiForm.setValue(Double.toString(value.getDouble()));
-          break;
-        }
-        case 5:  {
-          UIFormDateTimeInput uiFormDateTimeInput = getUIFormDateTimeInput(FIELD_VALUE);
-          SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
-          uiFormDateTimeInput.setValue(dateFormat.format(value.getDate().getTime()));
-          break;
-        }
-        case 6: {
-          UIFormCheckBoxInput uiFormCheckBoxInput = getUIFormCheckBoxInput(FIELD_VALUE);
-          uiFormCheckBoxInput.setValue(Boolean.toString(value.getBoolean()));
-          break;
-        }
-        default: {
-          UIFormStringInput uiForm = getUIStringInput(FIELD_VALUE);
-          uiForm.setValue(value.getString());
-          break;
-        }
-      }
-    }
+    }     
   }
 
   @SuppressWarnings("unchecked")
   private Object processValue(int type) throws Exception {
     Object value = null;
     UIComponent uiChild = getChildById(FIELD_VALUE);
-    if(type == 6) {
-      UIFormCheckBoxInput checkbox = (UIFormCheckBoxInput)uiChild;
-      value = checkbox.isChecked();
-    } else if(type == 5) {
-        UIFormDateTimeInput dateInput = (UIFormDateTimeInput)uiChild;
-        value = dateInput.getCalendar();
-    } else if(type == 2) {
-        UIFormUploadInput binaryInput = (UIFormUploadInput)uiChild;
-        if(binaryInput.getUploadDataAsStream() != null) {
-          value = binaryInput.getUploadDataAsStream();
-        }
-    } else {
-      UIFormStringInput uiStringInput = (UIFormStringInput)uiChild;
-      value = uiStringInput.getValue();
+    if(uiChild != null) {
+      if(type == 6) {
+        UIFormCheckBoxInput checkbox = (UIFormCheckBoxInput)uiChild;
+        value = checkbox.isChecked();
+      } else if(type == 5) {
+          UIFormDateTimeInput dateInput = (UIFormDateTimeInput)uiChild;
+          value = dateInput.getCalendar();
+      } else if(type == 2) {
+          UIFormUploadInput binaryInput = (UIFormUploadInput)uiChild;
+          if(binaryInput.getUploadDataAsStream() != null) {
+            value = binaryInput.getUploadDataAsStream();
+          }
+      } else {
+        UIFormStringInput uiStringInput = (UIFormStringInput)uiChild;
+        value = uiStringInput.getValue();
+      }
     }
     return value;
   }
@@ -430,7 +515,7 @@ public class UIPropertyForm extends UIForm {
             uiForm.changeSingleType(type);
           }
      }else{      
-       for(PropertyDefinition property : uiForm.getProperties(currentNode)) {
+       for(PropertyDefinition property : org.exoplatform.services.cms.impl.Utils.getProperties(currentNode)) {
           if (property.getName().equals(uiForm.getUIFormSelectBox(PROPERTY_SELECT).getValue())){
             isMultiple = property.isMultiple();
               int type = property.getRequiredType();
@@ -481,27 +566,29 @@ public class UIPropertyForm extends UIForm {
           String namespace = uiForm.getUIFormSelectBox(FIELD_NAMESPACE).getValue();
             name = namespace + ":" + uiForm.getUIStringInput(FIELD_PROPERTY).getValue();
         }
-        if(currentNode.hasProperty(name)) {
-          Object[] args = { name };
-          uiApp.addMessage(new ApplicationMessage("UIPropertyForm.msg.propertyName-exist", args,
-              ApplicationMessage.WARNING));
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
-          UIPropertiesManager uiPropertiesManager = uiForm.getAncestorOfType(UIPropertiesManager.class);
-          uiPropertiesManager.setRenderedChild(UIPropertyForm.class);
-          return;
-        }
-        if(nodeType.isNodeType(Utils.NT_UNSTRUCTURED)) {
-          type = Integer.parseInt(uiForm.getUIFormSelectBox(FIELD_TYPE).getValue()); 
-          isMultiple = Boolean.parseBoolean(uiForm.getUIFormSelectBox(FIELD_MULTIPLE).getValue());
-        }else{
-          String propertyName = uiForm.getUIFormSelectBox(PROPERTY_SELECT).getValue();          
-          for(PropertyDefinition property : uiForm.getProperties(currentNode)) {                
-            if (property.getName().equals(propertyName)){
-              type = property.getRequiredType();    
-              isMultiple = property.isMultiple();                       
-              break;
-            }             
-          }         
+        if(name != null && name.length() > 0) {
+          if(currentNode.hasProperty(name)) {
+            Object[] args = { name };
+            uiApp.addMessage(new ApplicationMessage("UIPropertyForm.msg.propertyName-exist", args,
+                ApplicationMessage.WARNING));
+            event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+            UIPropertiesManager uiPropertiesManager = uiForm.getAncestorOfType(UIPropertiesManager.class);
+            uiPropertiesManager.setRenderedChild(UIPropertyForm.class);
+            return;
+          }
+          if(nodeType.isNodeType(Utils.NT_UNSTRUCTURED)) {
+            type = Integer.parseInt(uiForm.getUIFormSelectBox(FIELD_TYPE).getValue()); 
+            isMultiple = Boolean.parseBoolean(uiForm.getUIFormSelectBox(FIELD_MULTIPLE).getValue());
+          }else{
+            String propertyName = uiForm.getUIFormSelectBox(PROPERTY_SELECT).getValue();          
+            for(PropertyDefinition property : org.exoplatform.services.cms.impl.Utils.getProperties(currentNode)) {                
+              if (property.getName().equals(propertyName)){
+                type = property.getRequiredType();    
+                isMultiple = property.isMultiple();                       
+                break;
+              }             
+            }         
+          }
         }
       } else {
         name = uiForm.propertyName_;
@@ -510,20 +597,22 @@ public class UIPropertyForm extends UIForm {
         isMultiple = currentNode.getProperty(name).getDefinition().isMultiple();
       }
       try {
-        if(isMultiple) {
-          Value[] values = {};
-          List valueList = uiForm.processValues(type);
-          values = uiForm.createValues(valueList, type, currentNode.getSession().getValueFactory());
-          // if(currentNode.hasProperty(name)) {
-          currentNode.setProperty(name, values);
-          //}
-        } else {
-          Object objValue = uiForm.processValue(type);
-          Value value = uiForm.createValue(objValue, type, currentNode.getSession().getValueFactory());
-          //  if(currentNode.hasProperty(name)) {
-          //setProperty already checks whether the property exists if not it will create a new one as in the description
-          currentNode.setProperty(name, value);
-          //  }
+        if(name != null) {
+          if(isMultiple) {
+            Value[] values = {};
+            List valueList = uiForm.processValues(type);
+            values = uiForm.createValues(valueList, type, currentNode.getSession().getValueFactory());
+            // if(currentNode.hasProperty(name)) {
+            currentNode.setProperty(name, values);
+            //}
+          } else {
+            Object objValue = uiForm.processValue(type);
+            Value value = uiForm.createValue(objValue, type, currentNode.getSession().getValueFactory());
+            //  if(currentNode.hasProperty(name)) {
+            //setProperty already checks whether the property exists if not it will create a new one as in the description
+            currentNode.setProperty(name, value);
+            //  }
+          }
         }
         currentNode.save();
         currentNode.getSession().save();
@@ -617,25 +706,8 @@ public class UIPropertyForm extends UIForm {
     for(NodeType nodeType : types) {
         for(PropertyDefinition property : nodeType.getPropertyDefinitions()) {
           String name = property.getName();
-          if(!name.equals("exo:internalUse")&& !property.isProtected()&& !node.hasProperty(name)) {
+          if(!name.equals("exo:internalUse") && !property.isProtected() && !node.hasProperty(name)) {
             properties.add(new SelectItemOption<String>(name,name));
-          }
-        }
-    } 
-    return properties;
-  }
-  public List<PropertyDefinition> getProperties(Node node) throws Exception {
-    List<PropertyDefinition> properties = new ArrayList<PropertyDefinition>();      
-    NodeType nodetype = node.getPrimaryNodeType() ;
-    Collection<NodeType> types = new ArrayList<NodeType>() ;
-    types.add(nodetype) ;
-    NodeType[] mixins = node.getMixinNodeTypes() ;
-    if (mixins != null) types.addAll(Arrays.asList(mixins)) ;
-    for(NodeType nodeType : types) {
-        for(PropertyDefinition property : nodeType.getPropertyDefinitions()) {
-          String name = property.getName();
-          if(!name.equals("exo:internalUse")&& !property.isProtected()&& !node.hasProperty(name)) {
-            properties.add(property);
           }
         }
     } 

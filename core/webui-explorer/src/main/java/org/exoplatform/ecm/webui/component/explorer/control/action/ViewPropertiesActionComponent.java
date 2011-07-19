@@ -17,7 +17,6 @@
 package org.exoplatform.ecm.webui.component.explorer.control.action;
 
 import javax.jcr.Node;
-import javax.jcr.nodetype.NodeType;
 
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.control.listener.UIActionBarActionListener;
@@ -49,25 +48,29 @@ public class ViewPropertiesActionComponent extends UIComponent {
       UIJCRExplorer uiJCRExplorer = event.getSource().getAncestorOfType(UIJCRExplorer.class);
       Node node = uiJCRExplorer.getCurrentNode();
       UIPropertiesManager uiPropertiesManager =
-        uiJCRExplorer.createUIComponent(UIPropertiesManager.class, null, null);
-      UIPropertyForm uiForm = uiPropertiesManager.getChild(UIPropertyForm.class);
-      uiForm.init(node);
-      uiForm.setRepositoryName(uiJCRExplorer.getRepositoryName());
-      try{
-    	  if (node.isNodeType(Utils.NT_UNSTRUCTURED)){
-              uiForm.getUIFormSelectBox(UIPropertyForm.FIELD_NAMESPACE).setOptions(uiForm.getNamespaces());    	  
-          }else{
-        	  uiForm.getUIFormSelectBox(UIPropertyForm.PROPERTY_SELECT).setOptions(uiForm.renderProperties(node));
-          } 
-      }catch (NullPointerException npe){}
+        uiJCRExplorer.createUIComponent(UIPropertiesManager.class, null, null);      
+      try {
+        if (node.isNodeType(Utils.NT_UNSTRUCTURED)){
+          UIPropertyForm uiForm = uiPropertiesManager.getChild(UIPropertyForm.class);
+          uiForm.init(node);
+          uiForm.getUIFormSelectBox(UIPropertyForm.FIELD_NAMESPACE).setOptions(uiForm.getNamespaces());
+        } else {
+          if(org.exoplatform.services.cms.impl.Utils.getProperties(node) != null && org.exoplatform.services.cms.impl.Utils.getProperties(node).size() > 0) {
+            UIPropertyForm uiForm = uiPropertiesManager.getChild(UIPropertyForm.class);
+            uiForm.init(node);
+            uiForm.getUIFormSelectBox(UIPropertyForm.PROPERTY_SELECT).setOptions(uiForm.renderProperties(node));
+            
+            if(uiJCRExplorer.nodeIsLocked(node)){
+              uiPropertiesManager.setLockForm(true);
+            } else {
+              uiPropertiesManager.setLockForm(!PermissionUtil.canSetProperty(node));
+            }
+          }
+        }
+      } catch (NullPointerException npe){}    
       
       UIPopupContainer UIPopupContainer = uiJCRExplorer.getChild(UIPopupContainer.class);
       UIPopupContainer.activate(uiPropertiesManager, 700, 0);
-      if(uiJCRExplorer.nodeIsLocked(node)){
-        uiPropertiesManager.setLockForm(true);
-      } else {
-        uiPropertiesManager.setLockForm(!PermissionUtil.canSetProperty(node));
-      }
       event.getRequestContext().addUIComponentToUpdateByAjax(UIPopupContainer);
     }
   }
