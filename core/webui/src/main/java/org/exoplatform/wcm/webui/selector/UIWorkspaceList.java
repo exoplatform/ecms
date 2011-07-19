@@ -33,7 +33,6 @@ import org.exoplatform.services.jcr.config.RepositoryConfigurationException;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
-import org.exoplatform.wcm.webui.Utils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -129,31 +128,7 @@ public class UIWorkspaceList extends UIForm {
    */
   @Deprecated
   public void setWorkspaceList(String repository) throws Exception {
-    wsList_ = new ArrayList<String>();
-    RepositoryService repositoryService = getApplicationComponent(RepositoryService.class);
-    ManageableRepository mrepository= repositoryService.getCurrentRepository();
-    String[] wsNames = mrepository.getWorkspaceNames();
-    String systemWsName = mrepository.getConfiguration().getSystemWorkspaceName();
-    List<SelectItemOption<String>> workspace = new ArrayList<SelectItemOption<String>>();
-    for(String wsName : wsNames) {
-      if(!isShowSystem_) {
-        if(!wsName.equals(systemWsName)) {
-          workspace.add(new SelectItemOption<String>(wsName,  wsName));
-          wsList_.add(wsName);
-        }
-      } else {
-        workspace.add(new SelectItemOption<String>(wsName,  wsName));
-        wsList_.add(wsName);
-      }
-    }
-    UIFormSelectBox uiWorkspaceList = getUIFormSelectBox(WORKSPACE_NAME);
-    uiWorkspaceList.setOptions(workspace);
-    UIOneNodePathSelector uiBrowser = getParent();
-    if(uiBrowser.getWorkspaceName() != null) {
-      if(wsList_.contains(uiBrowser.getWorkspaceName())) {
-        uiWorkspaceList.setValue(uiBrowser.getWorkspaceName());
-      }
-    }
+    setWorkspaceList();
   }
   
   /**
@@ -282,7 +257,7 @@ public class UIWorkspaceList extends UIForm {
       String workspaceName = uiJBrowser.getWorkspaceName();
       RepositoryService repositoryService = uiWorkspaceList.getApplicationComponent(RepositoryService.class);
       ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
-      SessionProvider sessionProvider = Utils.getSessionProvider();
+      SessionProvider sessionProvider = WCMCoreUtils.getUserSessionProvider();
       Session session = sessionProvider.getSession(workspaceName, manageableRepository);
       String value = session.getRootNode().getPath();
       if(!uiJBrowser.isDisable()) value = uiJBrowser.getWorkspaceName() + ":" + value;

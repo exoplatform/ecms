@@ -162,26 +162,8 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
   @Deprecated
   public List<Node> getAllTaxonomyTrees(String repository, boolean system)
       throws RepositoryException {
-    List<Node> listNode = new ArrayList<Node>();
-    try {
-      Node taxonomyDef = getRootTaxonomyDef();
-      NodeIterator nodeIter = taxonomyDef.getNodes();
-      while (nodeIter.hasNext()) {
-        Node node = (Node) nodeIter.next();
-        if (node.isNodeType(EXOSYMLINK_LINK)) {
-          try {
-            Node target = linkManager_.getTarget(node, system);
-            if (target != null)
-              listNode.add(target);
-          } catch (ItemNotFoundException ex) {}
-          catch (AccessDeniedException adex) {}
-        }
-      }
-    } catch (RepositoryConfigurationException e) {
-      throw new RepositoryException(e);
-    }
-    return listNode;
-  }  
+    return getAllTaxonomyTrees(system);
+  }
   
   /**
    * {@inheritDoc}
@@ -230,17 +212,7 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
   @Deprecated
   public Node getTaxonomyTree(String repository, String taxonomyName, boolean system)
       throws RepositoryException {
-    try {
-      Node taxonomyDef = getRootTaxonomyDef();
-      Node taxonomyTree = taxonomyDef.getNode(taxonomyName);
-      if (taxonomyTree.isNodeType(EXOSYMLINK_LINK))
-        return linkManager_.getTarget(taxonomyTree, system);
-    } catch (RepositoryConfigurationException e1) {
-      throw new RepositoryException(e1);
-    } catch (PathNotFoundException e2) {
-      throw new RepositoryException(e2);
-    }
-    return null;
+    return getTaxonomyTree(taxonomyName, system);
   }
   
   /**
@@ -280,14 +252,7 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
    */
   @Deprecated
   public boolean hasTaxonomyTree(String repository, String taxonomyName) throws RepositoryException {
-    try {
-      Node taxonomyTree = getRootTaxonomyDef().getNode(taxonomyName);
-      return taxonomyTree.isNodeType(EXOSYMLINK_LINK);
-    } catch (RepositoryConfigurationException e1) {
-      throw new RepositoryException(e1);
-    } catch (PathNotFoundException e2) {
-    }
-    return false;
+    return hasTaxonomyTree(taxonomyName);
   }  
 
   /**
@@ -383,35 +348,7 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
   @Deprecated
   public void addTaxonomyNode(String repository, String workspace, String parentPath, String taxoNodeName,
       String creatorUser) throws RepositoryException, TaxonomyNodeAlreadyExistsException {
-    Session systemSession = null;
-    try {
-      ManageableRepository manaRepo = repositoryService_.getCurrentRepository();
-      systemSession = getSession(manaRepo, workspace, true);
-      Node parentNode = (Node) systemSession.getItem(parentPath);
-      if (parentNode.hasNode(taxoNodeName))
-        throw new TaxonomyNodeAlreadyExistsException();
-      ExtendedNode node = (ExtendedNode) parentNode.addNode(taxoNodeName, "exo:taxonomy");
-      if (node.canAddMixin("exo:privilegeable")) {
-        if(node.hasProperty("exo:owner")) {
-          String owner = node.getProperty("exo:owner").getString();
-          node.addMixin("exo:privilegeable");
-          node.setPermission(owner, PermissionType.ALL);
-          if (creatorUser != null)
-            node.setPermission(creatorUser, PermissionType.ALL);
-          for(Map.Entry<String, String[]> entry : taxonomyTreeDefaultUserPermissions_.entrySet()) {
-            node.setPermission(entry.getKey(), entry.getValue());
-          }
-        }
-        if (!node.isNodeType("exo:privilegeable"))
-          node.addMixin("exo:privilegeable");
-        String systemUser = IdentityConstants.SYSTEM;
-        if (!containsUser(node.getACL().getPermissionEntries(), systemUser))
-          node.setPermission(systemUser, PermissionType.ALL);
-      }
-      systemSession.save();
-    } catch (PathNotFoundException e2) {
-      throw new RepositoryException(e2);
-    }
+    addTaxonomyNode(workspace, parentPath, taxoNodeName, creatorUser);
   }  
 
   private boolean containsUser(List<AccessControlEntry> entries, String userName) {
@@ -428,16 +365,7 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
   @Deprecated
   public void removeTaxonomyNode(String repository, String workspace, String absPath)
       throws RepositoryException {
-    Session systemSession = null;
-    try {
-      ManageableRepository manaRepo = repositoryService_.getCurrentRepository();
-      systemSession = getSession(manaRepo, workspace, true);
-      Node taxonomyNode = (Node) systemSession.getItem(absPath);
-      taxonomyNode.remove();
-      systemSession.save();
-    } catch (PathNotFoundException e2) {
-      throw new RepositoryException(e2);
-    }
+    removeTaxonomyNode(workspace, absPath);
   }
   
   /**
@@ -597,21 +525,7 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
   @Deprecated
   public void moveTaxonomyNode(String repository, String workspace, String srcPath,
       String destPath, String type) throws RepositoryException {
-    Session systemSession = null;
-    try {
-      ManageableRepository manaRepo = repositoryService_.getCurrentRepository();
-      systemSession = getSession(manaRepo, workspace, true);
-      if ("cut".equals(type)) {
-        systemSession.move(srcPath, destPath);
-        systemSession.save();
-      } else if ("copy".equals(type)) {
-        Workspace wspace = systemSession.getWorkspace();
-        wspace.copy(srcPath, destPath);
-        systemSession.save();
-      } else
-        throw new UnsupportedRepositoryOperationException();
-    } finally {
-    }
+    moveTaxonomyNode(workspace, srcPath, destPath, type);
   }
   
   public void moveTaxonomyNode(String workspace, String srcPath, String destPath, String type) throws RepositoryException {

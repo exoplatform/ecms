@@ -147,8 +147,7 @@ public class ApplicationTemplateManagerServiceImpl implements ApplicationTemplat
   public Node getApplicationTemplateHome(String repository,
                                          String portletName,
                                          SessionProvider provider) throws Exception {
-    Node basedApplicationTemplateHome = getBasedApplicationTemplatesHome(provider);
-    return basedApplicationTemplateHome.getNode(portletName);
+    return getApplicationTemplateHome(portletName, provider);
   }
   
   /**
@@ -178,8 +177,7 @@ public class ApplicationTemplateManagerServiceImpl implements ApplicationTemplat
   @Deprecated
   public Node getTemplateByName(String repository, String portletName, String category,
       String templateName, SessionProvider sessionProvider) throws Exception {
-    Node basedApplicationTemplateHome = getBasedApplicationTemplatesHome(sessionProvider);
-    return basedApplicationTemplateHome.getNode(portletName + "/" + category + "/" + templateName);
+    return getTemplateByName(portletName, category, templateName, sessionProvider);
   }
   
   /**
@@ -197,14 +195,7 @@ public class ApplicationTemplateManagerServiceImpl implements ApplicationTemplat
   @Deprecated
   public List<Node> getTemplatesByCategory(String repository, String portletName, String category,
       SessionProvider sessionProvider) throws Exception {
-    Node basedApplicationTemplateHome = getBasedApplicationTemplatesHome(sessionProvider);
-    Node applicationHome = basedApplicationTemplateHome.getNode(portletName);
-    Node categoryNode = applicationHome.getNode(category);
-    List<Node> templateNodes = new ArrayList<Node>();
-    for(NodeIterator iterator = categoryNode.getNodes();iterator.hasNext();) {
-      templateNodes.add(iterator.nextNode());
-    }
-    return templateNodes;
+    return getTemplatesByCategory(portletName, category, sessionProvider);
   }
   
   /**
@@ -226,37 +217,35 @@ public class ApplicationTemplateManagerServiceImpl implements ApplicationTemplat
    * {@inheritDoc}
    */
   @Deprecated
-  public Node getTemplateByPath(String repository, String templatePath, SessionProvider sessionProvider) throws Exception {
-   Node basedTemplateNode = getBasedApplicationTemplatesHome(sessionProvider);
-   return (Node)basedTemplateNode.getSession().getItem(templatePath);
+  public Node getTemplateByPath(String repository,
+                                String templatePath,
+                                SessionProvider sessionProvider) throws Exception {
+    return getTemplateByPath(templatePath, sessionProvider);
   }
   
   /**
    * {@inheritDoc}
    */
   public Node getTemplateByPath(String templatePath, SessionProvider sessionProvider) throws Exception {
-   Node basedTemplateNode = getBasedApplicationTemplatesHome(sessionProvider);
-   return (Node)basedTemplateNode.getSession().getItem(templatePath);
-  }  
+    Node basedTemplateNode = getBasedApplicationTemplatesHome(sessionProvider);
+    return (Node) basedTemplateNode.getSession().getItem(templatePath);
+  }
 
   /**
    * {@inheritDoc}
    */
   @Deprecated
-  public void removeTemplate(String repository, String portletName, String catgory,
+  public void removeTemplate(String repository, String portletName, String category,
       String templateName, SessionProvider sessionProvider) throws Exception {
-    Node templateNode = getTemplateByName(portletName,catgory,templateName, sessionProvider );
-    Session session = templateNode.getSession();
-    templateNode.remove();
-    session.save();
+    removeTemplate(portletName, category, templateName, sessionProvider);
   }
   
   /**
    * {@inheritDoc}
    */
-  public void removeTemplate(String portletName, String catgory,
+  public void removeTemplate(String portletName, String category,
       String templateName, SessionProvider sessionProvider) throws Exception {
-    Node templateNode = getTemplateByName(portletName,catgory,templateName, sessionProvider );
+    Node templateNode = getTemplateByName(portletName,category,templateName, sessionProvider );
     Session session = templateNode.getSession();
     templateNode.remove();
     session.save();

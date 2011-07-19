@@ -84,29 +84,7 @@ public class UIDriveList extends UIPagingGridDecorator {
   @SuppressWarnings("unchecked")
   @Deprecated
   public List<DriveData> getDrives(String repoName) throws Exception {
-    RepositoryService rservice = getApplicationComponent(RepositoryService.class) ;
-    ManageDriveService driveService = getApplicationComponent(ManageDriveService.class) ;
-    ManageableRepository repository = rservice.getCurrentRepository() ;
-    List<DriveData> driveList = new ArrayList<DriveData>() ;
-    Session session = null ;
-    List<DriveData> drives = driveService.getAllDrives() ;
-    if(drives != null && drives.size() > 0) {
-      for(DriveData drive : drives) {
-        if(drive.getIcon() != null && drive.getIcon().length() > 0) {
-          try {
-            String[] iconPath = drive.getIcon().split(":/") ;
-            session = repository.getSystemSession(iconPath[0]) ;
-            session.getItem("/" + iconPath[1]) ;
-            session.logout() ;
-          } catch(PathNotFoundException pnf) {
-            drive.setIcon("") ;
-          }
-        }
-        if(isExistWorspace(repository, drive)) driveList.add(drive) ;
-      }
-    }
-    Collections.sort(driveList) ;
-    return driveList ;
+    return getDrives();
   }
   
   @SuppressWarnings("unchecked")

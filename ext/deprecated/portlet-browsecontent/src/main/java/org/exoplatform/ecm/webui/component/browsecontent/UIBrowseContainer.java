@@ -81,6 +81,7 @@ import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.security.IdentityConstants;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.application.portlet.PortletRequestContext;
@@ -806,22 +807,7 @@ public class UIBrowseContainer extends UIContainer {
 
   @Deprecated
   public Session getSession(String repository, String workspace) throws Exception{
-    Session session = null;
-    ManageableRepository manageableRepository = getRepositoryService().getCurrentRepository();
-    if(categoryPath_ != null && categoryPath_.startsWith("/jcr:system")) {
-      if(!Boolean.parseBoolean(getPortletPreferences().getValue(Utils.CB_FILTER_CATEGORY, ""))){
-        session = getSystemProvider().getSession(workspace,manageableRepository);
-      } else {
-        session = getSessionProvider().getSession(workspace,manageableRepository);
-      }
-    } else {
-      if(SessionProviderFactory.isAnonim()) {
-        session = getAnonimProvider().getSession(workspace,manageableRepository);
-      } else {
-        session = getSessionProvider().getSession(workspace,manageableRepository);
-      }
-    }
-    return session;
+    return getSession(workspace);
   }
   
   public Session getSession(String workspace) throws Exception{
@@ -834,7 +820,7 @@ public class UIBrowseContainer extends UIContainer {
         session = getSessionProvider().getSession(workspace,manageableRepository);
       }
     } else {
-      if(SessionProviderFactory.isAnonim()) {
+      if(WCMCoreUtils.isAnonim()) {
         session = getAnonimProvider().getSession(workspace,manageableRepository);
       } else {
         session = getSessionProvider().getSession(workspace,manageableRepository);
@@ -1671,7 +1657,7 @@ public class UIBrowseContainer extends UIContainer {
     List<Node> refDocuments = new ArrayList<Node>();
     ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
     SessionProvider provider = null;
-    if (SessionProviderFactory.isAnonim()) {
+    if (WCMCoreUtils.isAnonim()) {
       provider = getSystemProvider();
     } else {
       provider = getSessionProvider();

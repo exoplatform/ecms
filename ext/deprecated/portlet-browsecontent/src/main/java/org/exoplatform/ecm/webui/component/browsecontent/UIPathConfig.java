@@ -306,16 +306,7 @@ public class UIPathConfig extends UIForm implements UISelectable{
   @SuppressWarnings("unchecked")
   @Deprecated
   public List<SelectItemOption<String>> getTemplateOption(String repository) throws Exception {
-    List<SelectItemOption<String>> options = new ArrayList<SelectItemOption<String>>();
-    ManageViewService viewService =
-      (ManageViewService)PortalContainer.getComponent(ManageViewService.class);
-    List<Node> scriptTemplates = viewService.getAllTemplates(BasePath.CB_PATH_TEMPLATES,
-          SessionProviderFactory.createSystemProvider());
-    for(Node template:scriptTemplates) {
-      options.add(new SelectItemOption<String>(template.getName(),template.getName()));
-    }
-    Collections.sort(options, new ItemOptionNameComparator());
-    return options;
+    return getTemplateOption();
   }
   
   @SuppressWarnings("unchecked")
