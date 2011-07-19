@@ -79,9 +79,13 @@ public class UITaskList extends UIContainer {
     try {
       Locale locale = Util.getUIPortal().getAncestorOfType(UIPortalApplication.class).getLocale() ;
       Form form = workflowFormsService_.getForm(task.getProcessId(), task.getTaskName(), locale);
-      return form.getIconURL();
-    } catch(Exception e) {
-      return "" ;
+      String iconURL = form.getIconURL();
+      if (iconURL == null || iconURL.trim().length() == 0) {
+        return "/workflow/skin/webui/component/DefaultSkin/icons/DefaultTaskIcon.gif";
+      }
+      return iconURL;
+    } catch (Exception e) {
+      return "/workflow/skin/webui/component/DefaultSkin/icons/DefaultTaskIcon.gif";
     }
   }
 
