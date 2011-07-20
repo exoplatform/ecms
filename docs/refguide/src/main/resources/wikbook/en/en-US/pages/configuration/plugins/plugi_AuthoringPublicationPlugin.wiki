@@ -1,7 +1,7 @@
 h1. Fields
 *Object type*: _org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.LifecyclesConfig_
 ||  *Name*  ||  *Type*  ||  *Default Value*   ||  *Description*  ||
-| *lifecycles* | {{array list}} | {{java.util.ArrayList}} | The list of life cycles. |
+| *lifecycles* | {{array list}} | {{java.util.ArrayList}} | The list of lifecycles. |
 
 
 *Object type*: _org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.LifecyclesConfig$Lifecycle_
@@ -13,7 +13,7 @@ h1. Fields
 
 *Object type*: _org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.LifecyclesConfig$State_
 ||  *Name*  ||  *Type*  ||  *Default Value*   ||  *Description*  ||
-| *state* | {{string}} | {{N/A}} | The publiccation states: draft, pending, staged, approved or published. |
+| *state* | {{string}} | {{N/A}} | The publication states: draft, pending, staged, approved or published. |
 | *membership* | {{string}} | {{N/A}} | The user or group. |
 
 *Object type*: _org.exoplatform.services.wcm.extensions.publication.context.impl.ContextConfig_
@@ -23,8 +23,8 @@ h1. Fields
 *Object type*: _org.exoplatform.services.wcm.extensions.publication.context.impl.ContextConfig$Context_
 ||  *Name*  ||  *Type*  ||  *Default Value*   ||  *Description*  ||
 | *name* | {{string}} | {{contextdefault}} | The context name.|
-| *priority* | {{string}} | {{200}} | The context priority, the higher number indicates higher priority. Because a site may have several life cycles so the life cycle with higher priority will be excuted.|
-| *lifecycle* | {{string}} | {{lifecycle1}} | The name of the life cycle.|
+| *priority* | {{string}} | {{200}} | The context priority, the higher number indicates higher priority. Because a site may have several life cycles so the life cycle with higher priority will be executed.|
+| *lifecycle* | {{string}} | {{lifecycle1}} | The name of lifecycle.|
 
 
 h1. Sample configuration

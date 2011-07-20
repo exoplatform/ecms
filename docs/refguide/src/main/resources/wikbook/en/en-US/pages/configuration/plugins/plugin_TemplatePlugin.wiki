@@ -27,7 +27,7 @@ h2. Object-param {anchor:id=CONTref.Configuration.Templates.ApplicationTemplate.
 || *Configuration name* || *Data type* || *Default Value* || *Description* ||
 | *name* | {{String}} | {{template.configuration}} | The name of this configuration. |
 | *description* | {{String}} | {{configuration for the location of templates to inject in jcr}} | Description of template instance. |
-| *object-type* | {{Structure}} | {{N/A}} | Details configuration for each instance type. |
+| *object-type* | {{Structure}} | {{N/A}} | Detailed configuration for each instance type. |
 
 
 *Object-type* defines all available template files, using the "collection type" configuration*.

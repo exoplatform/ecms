@@ -1,4 +1,4 @@
-The LiveLinkManagerService component is used to check broken links, update links when the links are edited and extract links to returns a list of all links.
+The LiveLinkManagerService component is used to check broken links, update links when the links are edited and extract links to return a list of all links.
 The configuration of this component is found in _/core/core-configuration/src/main/webapp/WEB-INF/conf/wcm-core/wcm-configuration.xml_.
 {code}
 <component>

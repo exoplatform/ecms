@@ -1,4 +1,4 @@
-When a site is created, most of end-users want to see something in the page instead of a blank page, so we need this service for deploying some "default" contents, such as Banner, Footer, Navigation, Breadcrumb.
+When a site is created, most of end-users want to see something in the page instead of a blank page, so you need this service for deploying some "default" contents, such as Banner, Footer, Navigation, Breadcrumb.
 
 There are two main cases to use:
 - The site is created only one time when the database is cleaned.
@@ -22,7 +22,7 @@ h1. Fields {anchor:id=CONTref.Configuration.Deployment.Fields}
 
 _*org.exoplatform.services.deployment.DeploymentDescriptor*_
 || *Name* || *Type* || *Default value* || *Description* ||
-| *target* | {{Object}} | {{org.exoplatform.services.deployment.DeploymentDescriptor$Target (*)}} | The target node which will contain imported node. |
+| *target* | {{Object}} | {{org.exoplatform.services.deployment.DeploymentDescriptor$Target (*)}} | The target node which will contain the imported node. |
 | *sourcePath* | {{String}} | {{war:/conf/sample-portal/wcm/artifacts/site-resources/acme/Logo.xml<}} | The absolute path of the XML file. |
 | *cleanupPublication* | {{Boolean}} | {{false}} | Decide when the publication lifecycle is cleaned up in the target folder after importing the data.{example}{example}true: allow{example}{example}false:not allow |
 | *versionHistoryPath* | {{String}} | {{war:/conf/sample-portal/wcm/artifacts/site-resources/acme/Logo_versionHistory.zip<}} | The absolute path of the version history file. |

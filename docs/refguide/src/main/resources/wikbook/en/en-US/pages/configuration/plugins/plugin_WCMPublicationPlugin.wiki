@@ -37,6 +37,9 @@ h1. external-component-plugins configuration {anchor:id=CONTref.Configuration.Pu
 h1. Example {anchor:id=CONTref.Configuration.Publication.Example}
 
 h2. Component that use plugins example {anchor:id=CONTref.Configuration.Publication.ComponentUsePluginsExamples}
+
+Example of component using plugins.
+
 {code:xml}
 <component>
     <key>org.exoplatform.services.wcm.publication.WCMPublicationService</key>

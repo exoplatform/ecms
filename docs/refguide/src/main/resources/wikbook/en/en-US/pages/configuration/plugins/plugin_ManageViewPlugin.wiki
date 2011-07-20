@@ -6,7 +6,7 @@ h1. Fields {anchor:id=CONTref.Configuration.Views.Fields}
 - *Name*: {{manage.view.plugin}}
 - *Set-method*: {{setManageViewPlugin}}
 - *Type*: {{org.exoplatform.services.cms.views.impl.ManageViewPlugin}}
-- *Description*: This plugin manages user views
+- *Description*: This plugin manages user views.
 
 
 *Object type*: _org.exoplatform.services.cms.views.ViewConfig_
@@ -23,7 +23,7 @@ h1. Fields {anchor:id=CONTref.Configuration.Views.Fields}
 
 || *Name* || *Type* ||*Default value*||  *Description* ||
 | *tabName* | {{String}} | {{Info}}|The name of tab which must be unique.  |
-| *button* | {{String}} | {{viewNodeType; viewPermissions; viewProperties; showJCRStructure}}| Specify a set of view component names.|
+| *button* | {{String}} | {{viewNodeType; viewPermissions; viewProperties; showJCRStructure}}| Specify a set of view component names. |
 
 
 

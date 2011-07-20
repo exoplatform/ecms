@@ -2,7 +2,7 @@ This plugin is to set the supported file types of PDF thumbnail. See also [*Imag
 h1. Fields
 *Object type*: _org.exoplatform.services.cms.thumbnail.impl.ThumbnailType_
 ||  *Name*  ||  *Type*  ||  *Default Value*   ||  *Description*  ||
-| *mimeTypes* | {{array list}} | {{java.util.ArrayList}} | The mime type of the pdf thumbnail. |
+| *mimeTypes* | {{array list}} | {{java.util.ArrayList}} | The MIME type of the pdf thumbnail. |
 h1. Sample configuration
 {code:xml}
 <external-component-plugins>

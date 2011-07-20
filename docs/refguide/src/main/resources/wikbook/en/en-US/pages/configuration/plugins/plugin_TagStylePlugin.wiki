@@ -2,7 +2,7 @@ h1. Fields
 
 *Object type*: _org.exoplatform.services.cms.folksonomy.impl.TagStyleConfig_
 ||  *Name*  ||  *Type*  ||  *Default Value*   ||  *Description*  ||
-| *autoCreatedInNewRepository* | {{boolean}} | {{true}} | Specify whether the tag style is add automactically in new reposistory or not.|
+| *autoCreatedInNewRepository* | {{boolean}} | {{true}} | Specify whether the tag style is added automactically in new reposistory or not.|
 | *repository* | {{string}} | {{repository}} | Name of the repository where the tag style is added. |
 | *tagStyleList* | {{array list}} | {{Array list}} | The list of tag styles. |
 
@@ -10,7 +10,7 @@ h1. Fields
 ||  *Name*  ||  *Type*  ||  *Default Value*   ||  *Description*  ||
 | *name* | {{string}} | - | The name of the tag.|
 | *tagRate* | {{string}} | - |  The number of times that a tag is used which will decide the respective tag style.|
-| *htmlStyle* | {{string}} | - | The html code that defines the style.|
+| *htmlStyle* | {{string}} | - | The HTML code that defines the style.|
 
 h1. Sample configuration
 {code:xml}
@@ -90,5 +90,5 @@ h1. Sample configuration
 
 * *target component*: {{org.exoplatform.services.cache.CacheService}}
 * *name*: {{addExoCacheConfig}}
-* *set method*: {{addExoCacheConfig}}
+* *set-method*: {{addExoCacheConfig}}
 * *type*: {{org.exoplatform.services.cache.ExoCacheConfigPlugin}}

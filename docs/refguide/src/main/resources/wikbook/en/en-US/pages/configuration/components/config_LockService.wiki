@@ -1,4 +1,4 @@
-The LockService component is used to mange all locked nodes and allows unlocking the locked nodes in the system. It is also used to assign the Lock right for a user or a user group or a membership.
+The LockService component is used to manage all locked nodes and allows unlocking the locked nodes in the system. It is also used to assign the Lock right to a user or a user group or a membership.
 The configuration of this component is found in _/core/core-configuration/src/main/webapp/WEB-INF/conf/wcm-core/core-services-configuration.xml_.
 
 {code}

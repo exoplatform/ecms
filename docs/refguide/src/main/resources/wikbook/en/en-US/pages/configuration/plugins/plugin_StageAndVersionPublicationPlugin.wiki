@@ -1,10 +1,10 @@
 h1. Fields
 *object type*: _org.exoplatform.services.cache.ExoCacheConfig_
 ||  *Name*  ||  *Type*  ||  *Default Value*   ||  *Description*  ||
-| *name* | {{string}} | {{wcm.compose}} | The name of the cache which must be unique .|
+| *name* | {{string}} | {{wcm.compose}} | The name of the cache which must be unique	.|
 | *maxSize* | {{string}} | {{200}} | The max size of the cache object. |
 | *liveTime* | {{string}} | {{600}} | The time interval. | 
-| *implementation* | {{string}} | {{org.exoplatform.services.cache.concurrent.ConcurrentFIFOExoCache}} | The algorithm that is used to hande the cache . |
+| *implementation* | {{string}} | {{org.exoplatform.services.cache.concurrent.ConcurrentFIFOExoCache}} | The algorithm that is used to hande the cache. |
 
 
 h1. Sample configuration

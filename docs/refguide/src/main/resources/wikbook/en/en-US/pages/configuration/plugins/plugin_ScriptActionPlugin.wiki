@@ -2,7 +2,7 @@ h1. Fields
 *Object type*: _org.exoplatform.services.cms.actions.impl.ActionConfig_
 ||  *Name*  ||  *Type*  ||  *Default Value*   ||  *Description*  ||
 | *repository* | {{string}} | {{repository}} | The name of the repository. |
-| *workspace* | {{string}} | {{collaboration}} | The name of the work space. |
+| *workspace* | {{string}} | {{collaboration}} | The name of the workspace. |
 | *actions* | {{array list}} | {{java.util.ArrayList}} | The list of the actions. |
 
 *Object type*: _org.exoplatform.services.cms.actions.impl.ActionConfig$Action_
@@ -10,10 +10,10 @@ h1. Fields
 | *type* | {{string}} | {{exo:sendMailAction}} | The type of the action.|
 | *name* | {{string}} | {{sendMail}} | The name of the action.|
 | *description* | {{string}} | {{send a notification mail}} | The description of the action.|
-| *srcWorkspace* | {{string}} | {{collaboration}} | The source work pace of the action.|
+| *srcWorkspace* | {{string}} | {{collaboration}} | The source workspace of the action.|
 | *isDeep* | {{boolean}} | {{N/A}} | Specify the depth of node that the action script will affect.|
 | *srcPath* | {{string}} | {{N/A}} | The path to the source. |
-| *lifecyclePhase* | {{string}} | {{N/A}} | Specify the life cycle phase that the action will take place.|
+| *lifecyclePhase* | {{string}} | {{N/A}} | Specify the lifecycle phase that the action will take place.|
 
 
 h1. Sample configuration

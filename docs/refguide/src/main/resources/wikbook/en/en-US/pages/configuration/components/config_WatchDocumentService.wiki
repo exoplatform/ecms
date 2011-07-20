@@ -29,4 +29,4 @@ The configuration of this component is found in _/core/core-configuration/src/ma
 ||Field name||Type|| Default value || Description ||
 |*sender* |string|support@exoplatform.com|The sender who sends the notification mail.|
 |*subject* |string|Your watching document is changed.|The subject of the notification mail.|
-|*content* |string|The document that you are watching is changed.Please go to ecm to see this change.|The content of the notification mail. |
+|*content* |string|The document that you are watching is changed. Please go to ecm to see this change.|The content of the notification mail. |

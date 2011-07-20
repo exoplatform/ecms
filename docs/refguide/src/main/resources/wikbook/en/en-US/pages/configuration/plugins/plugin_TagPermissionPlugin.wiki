@@ -1,7 +1,7 @@
 h1. Fields
 *object type* _org.exoplatform.services.cms.folksonomy.impl.TagPermissionConfig_
 ||  *Name*  ||  *Type*  ||  *Default Value*   ||  *Description*  ||
-| *tagPermissionList* | {{array list}} | {{*:/platform/administrators}} | The users of groups that have the permission. |
+| *tagPermissionList* | {{array list}} | {{*:/platform/administrators}} | The users/groups that have the permission. |
 
 h1. Sample configuration
 {code:xml}

@@ -1,4 +1,4 @@
-The ApplicationTemplateManagerService component is used to manage dynamic groovy templates for WCM-based products.
+The ApplicationTemplateManagerService component is used to manage dynamic Groovy templates for WCM-based products.
 The configuration of this component is found in _/core/core-configuration/src/main/webapp/WEB-INF/conf/wcm-core/core-services-configuration.xml_.
 
 {code}

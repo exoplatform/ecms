@@ -2,7 +2,7 @@ This plugin is used to import the view templates for Content List Viewer.
 h1. Fields
 *Object type*: _org.exoplatform.services.cms.views.PortletTemplatePlugin$PortletTemplateConfig_
 ||  *Name*  ||  *Type*  ||  *Default Value*   ||  *Description*  ||
-| *templateName* | {{string}} | {{UIContentListPresentationDefault.gtmpl}} | The name of the groovy template. |
+| *templateName* | {{string}} | {{UIContentListPresentationDefault.gtmpl}} | The name of the GROOVY template. |
 
 h1. Sample configuration
 {code:xml}

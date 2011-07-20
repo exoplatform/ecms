@@ -2,7 +2,7 @@ h1. Fields
 *Objectype*: _org.exoplatform.services.wcm.extensions.publication.context.impl.ContextConfig_
 ||  *Name*  ||  *Type*  ||  *Default Value*   ||  *Description*  ||
 | *name* | {{string}} | context2 | The name of the context. |  
-| *priority* | {{string}} | {{100}} | The context priority, the higher number indicates higher priority. Because a site may have several life cycles so the life cycle with higher priority will be excuted priorly.|
+| *priority* | {{string}} | {{100}} | The context priority, the higher number indicates higher priority. Because a site may have several life cycles, the life cycle with higher priority will be excuted priorly.|
 | *lifecycle* | {{string}} | {{lifecycle2}} | The name of the life cycle. |
 | *site* | {{string}} | {{acme}} | The site that will apply the context configuration. |
 

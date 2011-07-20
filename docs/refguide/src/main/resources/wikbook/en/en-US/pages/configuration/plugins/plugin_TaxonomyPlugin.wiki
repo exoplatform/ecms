@@ -7,16 +7,16 @@ h1. Fields
 
 *Type*: _org.exoplatform.services.cms.taxonomy.impl.TaxonomyPlugin_
 
-|| *value param*|| *Type* || *Default value* || *Description*||
+|| *Value param*|| *Type* || *Default value* || *Description*||
 | *autoCreateInNewRepository* | {{Boolean}} |{{true}}| Enable/Disable the creation of the taxonomies in the newly created repository. |
 | *repository* | {{String}} |{{repository}}| Name of the repository where taxonomies are created. |
 | *workspace* | {{String}} |{{dms-system}}| Name of the workspace where taxonomies are created. |
 | *treeName* | {{String}} | {{system}}| Name of the taxonomy tree to be created. |
 
 || *Object param*|| *Type* || *Default value* || *Description*||
-| *permission.configuration* | {{String}}|{{org.exoplatform.services.cms.taxonomy.impl.TaxonomyConfig}} | access permission for the whole taxonomy tree. |
-| *predefined.actions* | {{string}}| {{org.exoplatform.services.cms.actions.impl.ActionConfig}} | predefined actions for the taxonomy tree root node. |
-| *taxonomy.configuration* | {{String}}| {{org.exoplatform.services.cms.taxonomy.impl.TaxonomyConfig}} | access permissions for each taxonomy in tree. |
+| *permission.configuration* | {{String}}|{{org.exoplatform.services.cms.taxonomy.impl.TaxonomyConfig}} | Access permission for the whole taxonomy tree. |
+| *predefined.actions* | {{string}}| {{org.exoplatform.services.cms.actions.impl.ActionConfig}} | Predefined actions for the taxonomy tree root node. |
+| *taxonomy.configuration* | {{String}}| {{org.exoplatform.services.cms.taxonomy.impl.TaxonomyConfig}} | Access permissions for each taxonomy in tree. |
 
 *Object type*: _org.exoplatform.services.cms.taxonomy.impl.TaxonomyConfig_
 ||*Name* || *Type*|| *Description*  ||
@@ -30,7 +30,7 @@ h1. Fields
 
 *Object type*: _org.exoplatform.services.cms.actions.impl.ActionConfig_
 ||*Name* || *Type*|| *Default value*|| *Description*  ||
-| *actions* || {{Arraylist}}|{{java.util.ArrayList<ActionConfig$TaxonomyAction>}} | List of actions which are created for the taxonomy tree root node. |
+| *actions* || {{Arraylist}}|{{java.util.ArrayList<ActionConfig$TaxonomyAction>}} | List of actions created for the taxonomy tree root node. |
 
 *Object type*: _org.exoplatform.services.cms.actions.impl.ActionConfig$TaxonomyAction_
 || *Field name* || *Type* ||*Default value*||  *Description* ||
@@ -46,7 +46,7 @@ h1. Fields
 
 *Object type*: _org.exoplatform.services.cms.actions.impl.ActionConfig$Mixin_
 || *Field name* || *Type* || *Default value*||  *Description* ||
-| *name* | {{String}} |{{mix:affectedNodeTypes}}| Mixin node type name that will be added, whose responsibility is to store the affected node types. |
+| *name* | {{String}} |{{mix:affectedNodeTypes}}| Mixin node type name that will be added. The node type is used to store the affected node types. |
 | *properties* || {{String}} | {{exo:affectedNodeTypeNames=exo:article,exo:podcast,exo:sample,kfx:document,nt:file,rma:filePlan}} | the name of the properties that store all the node types affected by the action. |
 
 

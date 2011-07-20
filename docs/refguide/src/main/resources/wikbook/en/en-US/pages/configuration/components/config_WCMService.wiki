@@ -17,5 +17,5 @@ The configuration of this component is found in _/core/core-configuration/src/ma
 
 *Details*:
 ||*Properties-param* ||*Property name*|| *Possible value* || *Default value* || *Description* ||
-|*server.config*| expirationCache|integer|30| The time period in which the cache is clear in second. By default, the cache is clear every 30 seconds.|
+|*server.config*| expirationCache|integer|30| The period in which the cache is clear in second. By default, the cache is cleared every 30 seconds.|
 

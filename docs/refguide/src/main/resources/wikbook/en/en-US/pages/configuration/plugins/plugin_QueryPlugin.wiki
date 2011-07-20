@@ -74,12 +74,12 @@
 
 || *Value param* || *Possible value* || *Default value* || *Description* ||
 | {{autoCreateInNewRepository}} | {{boolean}} | {{true}} |  |
-| {{repository}} | {{string}} | {{repository}} | repository to the target node |
+| {{repository}} | {{string}} | {{repository}} | repository to the target node. |
 
 
 || *Object param* || *Possible value* || *Default value* || *Description* ||
-| {{CreatedDocuments}} | {{string}} | {{*:/platform/users}} | documents created by the current user |
-| {{AllArticles}} | {{string}} | {{*:/platform/users}} | All articles |
-| {{CreatedDocumentsDayBefore}} | {{string}} | {{*:/platform/users}} | documents created the day before |
+| {{CreatedDocuments}} | {{string}} | {{*:/platform/users}} | documents created by the current user. |
+| {{AllArticles}} | {{string}} | {{*:/platform/users}} | All articles. |
+| {{CreatedDocumentsDayBefore}} | {{string}} | {{*:/platform/users}} | documents created on the day before. |
 
 

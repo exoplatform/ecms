@@ -1,4 +1,4 @@
-The QueryService component is used to many queries, including adding a query, removing a query and executing a query.
+The QueryService component is used to manage many queries, including adding a query, removing a query and executing a query.
 The configuration of this component is found in _/core/core-configuration/src/main/webapp/WEB-INF/conf/wcm-core/core-services-configuration.xml_.
 {code}
 <component>
