@@ -55,7 +55,6 @@ import org.exoplatform.download.InputStreamDownloadResource;
 import org.exoplatform.ecm.resolver.JCRResourceResolver;
 import org.exoplatform.ecm.webui.utils.PermissionUtil;
 import org.exoplatform.ecm.webui.utils.Utils;
-import org.exoplatform.portal.webui.portal.PageNodeEvent;
 import org.exoplatform.portal.webui.portal.UIPortal;
 import org.exoplatform.portal.webui.util.SessionProviderFactory;
 import org.exoplatform.portal.webui.util.Util;
@@ -1969,9 +1968,7 @@ public class UIBrowseContainer extends UIContainer {
     public void execute(Event<UIBrowseContainer> event) throws Exception {
       UIPortal uiPortal = Util.getUIPortal();
       String uri  = event.getRequestContext().getRequestParameter(OBJECTID);
-      PageNodeEvent<UIPortal> pnevent;
-      pnevent = new PageNodeEvent<UIPortal>(uiPortal, PageNodeEvent.CHANGE_PAGE_NODE, uri);
-      uiPortal.broadcast(pnevent, Event.Phase.PROCESS);
+      
       /**
       * TODO: the API for loading navigations was changed 
       * (replaced [PageNavigation, PageNode] by [UserNavigation, UserNode])
@@ -1980,6 +1977,9 @@ public class UIBrowseContainer extends UIContainer {
       * UIBrowseContainer class is useless in ECMS project now, 
       * so we've temporarily commented this method and we will refactor it later
       */
+//      PageNodeEvent<UIPortal> pnevent;
+//      pnevent = new PageNodeEvent<UIPortal>(uiPortal, PageNodeEvent.CHANGE_PAGE_NODE, uri);
+//      uiPortal.broadcast(pnevent, Event.Phase.PROCESS);
       //uiPortal.getSelectedNode().setUri(uri);
     }
   }
