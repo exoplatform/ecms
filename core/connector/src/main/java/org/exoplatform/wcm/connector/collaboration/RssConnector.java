@@ -36,7 +36,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.dom.DOMSource;
 
 import org.apache.commons.lang.StringUtils;
-import org.exoplatform.ecm.ProductVersions;
+import org.exoplatform.container.configuration.ConfigurationManager;
 import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
@@ -100,7 +100,6 @@ public class RssConnector extends BaseConnector implements ResourceContainer {
 
   /** The wcm configuration service. */
   private WCMConfigurationService wcmConfigurationService;
-
   /** The log. */
   private static Log log = ExoLogger.getLogger(RssConnector.class);
 
@@ -110,8 +109,8 @@ public class RssConnector extends BaseConnector implements ResourceContainer {
    * @param container the container
    */
   public RssConnector() {
-    wcmConfigurationService = WCMCoreUtils.getService(WCMConfigurationService.class);
-    wcmComposer = WCMCoreUtils.getService(WCMComposer.class);
+    this.wcmConfigurationService = WCMCoreUtils.getService(WCMConfigurationService.class);    
+    this.wcmComposer = WCMCoreUtils.getService(WCMComposer.class);
   }
 
   /**
@@ -149,7 +148,7 @@ public class RssConnector extends BaseConnector implements ResourceContainer {
     contextRss.put(RSS_VERSION, "rss_2.0");
     contextRss.put(FEED_TITLE, title);
     if (desc == null)
-      desc = "Powered by eXo " + ProductVersions.getCurrentVersion();
+      desc = "Powered by eXo WCM-" + WCMCoreUtils.getProjectVersion();
     contextRss.put(DESCRIPTION, desc);
 
     contextRss.put(LINK, server);
@@ -194,6 +193,8 @@ public class RssConnector extends BaseConnector implements ResourceContainer {
                                 .build();
     return response;
   }
+  
+  
 
   /**
    * Generate rss.

@@ -16,16 +16,20 @@
  */
 package org.exoplatform.services.wcm.utils;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Properties;
 
 import org.exoplatform.commons.utils.ListAccess;
 import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.container.RootContainer;
 import org.exoplatform.container.component.ComponentRequestLifecycle;
+import org.exoplatform.container.configuration.ConfigurationManager;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
@@ -224,4 +228,24 @@ public class WCMCoreUtils {
     }
   }
   
+  public static String getProjectVersion() throws Exception {
+    String filePath = "jar:/conf/projectInfo.properties";
+    Properties productInformationProperties = new Properties();
+    try {
+      ConfigurationManager configManager = WCMCoreUtils.getService(ConfigurationManager.class);
+      log.info("Read products versions from " + filePath);
+      InputStream inputStream = configManager.getInputStream(filePath);
+      
+      productInformationProperties.load(inputStream);
+    } catch (IOException exception) {
+      throw new RuntimeException("Couldn't parse the file " + filePath, exception);
+    } catch (Exception exception) {
+      throw new RuntimeException("Error occured while reading the file " + filePath, exception);
+    }
+    
+    if (!productInformationProperties.containsKey("project.current.version")) {
+      throw new RuntimeException("Missing product information.");
+    }
+    return productInformationProperties.getProperty("project.current.version");
+  }
 }
