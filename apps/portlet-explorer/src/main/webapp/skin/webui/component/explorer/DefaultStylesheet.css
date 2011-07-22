@@ -132,6 +132,20 @@
   text-align: right; /* orientation=rt */
 }
 
+/*******************************UIDocumentForm****************************************/
+.UIDialogAction {
+	background: #F7F7F7; 
+	border: 1px solid #AEAEAE; 
+	margin-top: 10px; 
+	margin-bottom: 10px; 
+	height: 21px;
+}
+
+.UIDialogTitle {
+	float: left; 
+	margin: 5px 10px;
+}
+
 /*******************************UIDocumentFormController****************************************/
 
 .UIDocumentFormController {

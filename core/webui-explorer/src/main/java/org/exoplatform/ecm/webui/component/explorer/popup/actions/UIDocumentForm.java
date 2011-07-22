@@ -232,9 +232,9 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
     WebuiRequestContext context = WebuiRequestContext.getCurrentInstance();
     ResourceBundle res = context.getApplicationResourceBundle();
     Writer writer = context.getWriter();
-    writer.append("<div class=\"UIAction\" style=\"background: #F7F7F7; border: 1px solid #AEAEAE; margin-top: 10px; margin-bottom: 10px;\">");
-    writer.append("<div style='text-align: left; margin: 5px 10px;'>" + getTemplateLabel() + " " + getChangeTypeActionLink () + "</div>"); 
-    writer.append("<table style=\"margin-right:5px\">");
+    writer.append("<div class=\"UIAction UIDialogAction\" >");
+    writer.append("<span class='UIDialogTitle'>" + getTemplateLabel() + " " + getChangeTypeActionLink () + "</span>"); 
+    writer.append("<table style=\"margin-right:5px; width:auto; float:right\">");
     writer.append("<tr>");
     writer.append("<td>");
     String[] listAction = getActions();
