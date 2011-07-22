@@ -41,8 +41,8 @@ public class PropertyLinkAware extends ItemLinkAware implements Property {
 
   private final PropertyLocation propertyLocation;
 
-  public PropertyLinkAware(String virtualPath, Property property) {
-    super(virtualPath, property);
+  public PropertyLinkAware(String originalWorkspace, String virtualPath, Property property) {
+    super(originalWorkspace, virtualPath, property);
     this.propertyLocation = PropertyLocation.getPropertyLocationByProperty(property);
   }
 

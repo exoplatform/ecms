@@ -33,6 +33,7 @@ import javax.jcr.nodetype.NoSuchNodeTypeException;
 import javax.jcr.version.VersionException;
 
 import org.exoplatform.services.wcm.core.ItemLocation;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
  * Created by The eXo Platform SAS
@@ -43,9 +44,11 @@ import org.exoplatform.services.wcm.core.ItemLocation;
 public abstract class ItemLinkAware implements Item {
 
   protected final ItemLocation itemLocation;
+  protected final String originalWorkspaceName;
   protected final String virtualPath;
 
-  protected ItemLinkAware(String virtualPath, Item item) {
+  protected ItemLinkAware(String originalWorkspaceName, String virtualPath, Item item) {
+    this.originalWorkspaceName = originalWorkspaceName;
     this.itemLocation = ItemLocation.getItemLocationByItem(item);
     if (!virtualPath.startsWith("/")) {
       throw new IllegalArgumentException("The path '" + virtualPath +  "' must be an absolute path");
@@ -53,11 +56,11 @@ public abstract class ItemLinkAware implements Item {
     this.virtualPath = virtualPath;
   }
 
-  public static ItemLinkAware newInstance(String originalAbsPath, Item item) {
+  public static ItemLinkAware newInstance(String originalWorkspaceName, String originalAbsPath, Item item) {
     if (item instanceof Node) {
-      return new NodeLinkAware(originalAbsPath, (Node) item);
+      return new NodeLinkAware(originalWorkspaceName, originalAbsPath, (Node) item);
     } 
-    return new PropertyLinkAware(originalAbsPath, (Property) item);
+    return new PropertyLinkAware(originalWorkspaceName, originalAbsPath, (Property) item);
   }
   
   public Item getItem() {
@@ -66,6 +69,11 @@ public abstract class ItemLinkAware implements Item {
   
   public Session getItemSession() throws RepositoryException {
     return getItem().getSession();
+  }
+  
+  public Session getOriginalSession() throws RepositoryException {
+    return WCMCoreUtils.getUserSessionProvider().
+                                        getSession(originalWorkspaceName, WCMCoreUtils.getRepository());
   }
   
   /**
@@ -81,7 +89,7 @@ public abstract class ItemLinkAware implements Item {
   public Item getAncestor(int depth) throws ItemNotFoundException,
                                    AccessDeniedException,
                                    RepositoryException {
-    return LinkUtils.getNodeFinder().getItem(getItemSession(), LinkUtils.getAncestorPath(virtualPath, depth));
+    return LinkUtils.getNodeFinder().getItem(getOriginalSession(), LinkUtils.getAncestorPath(virtualPath, depth));
   }
 
   /**
@@ -102,7 +110,7 @@ public abstract class ItemLinkAware implements Item {
    * {@inheritDoc}
    */
   public Node getParent() throws ItemNotFoundException, AccessDeniedException, RepositoryException {
-    return (Node) LinkUtils.getNodeFinder().getItem(getItemSession(), LinkUtils.getParentPath(virtualPath));
+    return (Node) LinkUtils.getNodeFinder().getItem(getOriginalSession(), LinkUtils.getParentPath(virtualPath));
   }
 
   /**

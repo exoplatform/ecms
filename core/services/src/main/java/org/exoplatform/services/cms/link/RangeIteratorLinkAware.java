@@ -26,11 +26,13 @@ import javax.jcr.RangeIterator;
  */
 public abstract class RangeIteratorLinkAware implements RangeIterator {
 
+  protected final String originalWorkspace;
   protected final String virtualPath;
   protected final RangeIterator iterator;
 
-  public RangeIteratorLinkAware(String virtualPath, RangeIterator iterator) {
+  public RangeIteratorLinkAware(String originalWorkspace, String virtualPath, RangeIterator iterator) {
     this.iterator = iterator;
+    this.originalWorkspace = originalWorkspace;
     if (!virtualPath.startsWith("/")) {
       throw new IllegalArgumentException("The path '" + virtualPath +  "' must be an absolute path");
     }

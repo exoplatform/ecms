@@ -37,9 +37,10 @@ public class PropertyIteratorLinkAware extends RangeIteratorLinkAware implements
   private static final Log LOG  = ExoLogger.getLogger("cms.PropertyIteratorLinkAware");
 
   public PropertyIteratorLinkAware(
+                                   String originalWorkspace,
                                    String virtualPath,
                                    PropertyIterator propertyIterator) {
-    super(virtualPath, propertyIterator);
+    super(originalWorkspace, virtualPath, propertyIterator);
   }
 
   /**
@@ -48,7 +49,7 @@ public class PropertyIteratorLinkAware extends RangeIteratorLinkAware implements
   public Property nextProperty() {
     Property property = (Property) iterator.next();
     try {
-      return new PropertyLinkAware(LinkUtils.createPath(virtualPath, property.getName()), property);
+      return new PropertyLinkAware(originalWorkspace, LinkUtils.createPath(virtualPath, property.getName()), property);
     } catch (RepositoryException e) {
       LOG.error("Cannot create an instance of PropertyLinkAware", e);
     }

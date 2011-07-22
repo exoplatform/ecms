@@ -75,8 +75,8 @@ public class NodeLinkAware extends ItemLinkAware implements ExtendedNode {
 
   private volatile NodeLocation targetNodeLocation;
 
-  public NodeLinkAware(String virtualPath, Node node) {
-    super(virtualPath, node);
+  public NodeLinkAware(String originalWorkspace, String virtualPath, Node node) {
+    super(originalWorkspace, virtualPath, node);
     this.nodeLocation = NodeLocation.getNodeLocationByNode(node);
   }
   
@@ -89,7 +89,7 @@ public class NodeLinkAware extends ItemLinkAware implements ExtendedNode {
   }
 
   public NodeLinkAware getTargetNode() throws RepositoryException {
-    return new NodeLinkAware(virtualPath, getTarget());
+    return new NodeLinkAware(originalWorkspaceName, virtualPath, getTarget());
   }
   
   public Session getNodeSession() throws RepositoryException {
@@ -157,7 +157,7 @@ public class NodeLinkAware extends ItemLinkAware implements ExtendedNode {
                                   ConstraintViolationException,
                                   LockException,
                                   RepositoryException {
-    return new NodeLinkAware(getVirtualPath(relPath), getTarget().addNode(relPath));
+    return new NodeLinkAware(originalWorkspaceName, getVirtualPath(relPath), getTarget().addNode(relPath));
   }
 
   /**
@@ -170,7 +170,7 @@ public class NodeLinkAware extends ItemLinkAware implements ExtendedNode {
                                                VersionException,
                                                ConstraintViolationException,
                                                RepositoryException {
-    return new NodeLinkAware(getVirtualPath(relPath), getTarget().addNode(relPath, primaryNodeTypeName));
+    return new NodeLinkAware(originalWorkspaceName, getVirtualPath(relPath), getTarget().addNode(relPath, primaryNodeTypeName));
   }
 
   /**
@@ -273,9 +273,9 @@ public class NodeLinkAware extends ItemLinkAware implements ExtendedNode {
    * {@inheritDoc}
    */
   public Node getNode(String relPath) throws PathNotFoundException, RepositoryException {
-    return new NodeLinkAware(
+    return new NodeLinkAware(originalWorkspaceName,
                              getVirtualPath(relPath),
-                             (Node) LinkUtils.getNodeFinder().getItem(getNodeSession(),
+                             (Node) LinkUtils.getNodeFinder().getItem(getOriginalSession(),
                                                                       getVirtualPath(relPath)));
   }
 
@@ -283,21 +283,21 @@ public class NodeLinkAware extends ItemLinkAware implements ExtendedNode {
    * {@inheritDoc}
    */
   public NodeIterator getNodes() throws RepositoryException {
-    return new NodeIteratorLinkAware(virtualPath, getTarget().getNodes());
+    return new NodeIteratorLinkAware(originalWorkspaceName, virtualPath, getTarget().getNodes());
   }
 
   /**
    * {@inheritDoc}
    */
   public NodeIterator getNodes(String namePattern) throws RepositoryException {
-    return new NodeIteratorLinkAware(virtualPath, getTarget().getNodes(namePattern));
+    return new NodeIteratorLinkAware(originalWorkspaceName, virtualPath, getTarget().getNodes(namePattern));
   }
 
   /**
    * {@inheritDoc}
    */
   public Item getPrimaryItem() throws ItemNotFoundException, RepositoryException {
-    return ItemLinkAware.newInstance(getVirtualPath(super.getName()), getTarget().getPrimaryItem());
+    return ItemLinkAware.newInstance(originalWorkspaceName, getVirtualPath(super.getName()), getTarget().getPrimaryItem());
   }
 
   /**
@@ -311,14 +311,14 @@ public class NodeLinkAware extends ItemLinkAware implements ExtendedNode {
    * {@inheritDoc}
    */
   public PropertyIterator getProperties() throws RepositoryException {
-    return new PropertyIteratorLinkAware(virtualPath, getTarget().getProperties());
+    return new PropertyIteratorLinkAware(originalWorkspaceName, virtualPath, getTarget().getProperties());
   }
 
   /**
    * {@inheritDoc}
    */
   public PropertyIterator getProperties(String namePattern) throws RepositoryException {
-    return new PropertyIteratorLinkAware(virtualPath, getTarget().getProperties(namePattern));
+    return new PropertyIteratorLinkAware(originalWorkspaceName, virtualPath, getTarget().getProperties(namePattern));
   }
 
   /**
@@ -326,7 +326,7 @@ public class NodeLinkAware extends ItemLinkAware implements ExtendedNode {
    */
   public Property getProperty(String relPath) throws PathNotFoundException, RepositoryException {
     String path = getVirtualPath(relPath);
-    return new PropertyLinkAware(path, (Property) LinkUtils.getNodeFinder().getItem(getNodeSession(), path));
+    return new PropertyLinkAware(originalWorkspaceName, path, (Property) LinkUtils.getNodeFinder().getItem(getOriginalSession(), path));
   }
 
   /**
@@ -356,7 +356,7 @@ public class NodeLinkAware extends ItemLinkAware implements ExtendedNode {
    */
   public boolean hasNode(String relPath) throws RepositoryException {
     try {
-      return LinkUtils.getNodeFinder().getItem(getNodeSession(), getVirtualPath(relPath)) instanceof Node;
+      return LinkUtils.getNodeFinder().getItem(getOriginalSession(), getVirtualPath(relPath)) instanceof Node;
     } catch (PathNotFoundException e) {
       return false;
     }
@@ -381,7 +381,7 @@ public class NodeLinkAware extends ItemLinkAware implements ExtendedNode {
    */
   public boolean hasProperty(String relPath) throws RepositoryException {
     try {
-      return LinkUtils.getNodeFinder().getItem(getNodeSession(), getVirtualPath(relPath)) instanceof Property;
+      return LinkUtils.getNodeFinder().getItem(getOriginalSession(), getVirtualPath(relPath)) instanceof Property;
     } catch (PathNotFoundException e) {
       return false;
     }

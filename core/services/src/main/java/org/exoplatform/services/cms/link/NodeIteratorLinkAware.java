@@ -36,8 +36,8 @@ public class NodeIteratorLinkAware extends RangeIteratorLinkAware implements Nod
    */
   private static final Log LOG  = ExoLogger.getLogger("cms.NodeIteratorLinkAware");
 
-  public NodeIteratorLinkAware(String virtualPath, NodeIterator nodeIterator) {
-    super(virtualPath, nodeIterator);
+  public NodeIteratorLinkAware(String originalWorkspace, String virtualPath, NodeIterator nodeIterator) {
+    super(originalWorkspace, virtualPath, nodeIterator);
   }
 
   /**
@@ -46,7 +46,7 @@ public class NodeIteratorLinkAware extends RangeIteratorLinkAware implements Nod
   public Node nextNode() {
     Node node = (Node) iterator.next();
     try {
-      return new NodeLinkAware(LinkUtils.createPath(virtualPath, node.getName()
+      return new NodeLinkAware(originalWorkspace, LinkUtils.createPath(virtualPath, node.getName()
           + (node.getIndex() > 1 ? "[" + node.getIndex() + "]" : "")), node);
     } catch (RepositoryException e) {
       LOG.error("Cannot create an instance of NodeLinkAware", e);

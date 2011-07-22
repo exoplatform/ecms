@@ -359,6 +359,10 @@ public class UIJCRExplorer extends UIContainer {
     if(isReferenceNode_) return getSessionProvider().getSession(referenceWorkspace_, getRepository()) ;
     return getSessionProvider().getSession(currentDriveWorkspaceName_, getRepository()) ;
   }
+  
+  public String getWorkspaceName() {
+    return (isReferenceNode_ ? referenceWorkspace_ : currentDriveWorkspaceName_);
+  }
 
   public Session getSystemSession() throws Exception {
     if(isReferenceNode_) return getSystemProvider().getSession(referenceWorkspace_, getRepository()) ;
@@ -817,7 +821,7 @@ public class UIJCRExplorer extends UIContainer {
   public List<Node> getChildrenList(String path, boolean isReferences) throws Exception {
     RepositoryService repositoryService = getApplicationComponent(RepositoryService.class) ;
     TemplateService templateService = getApplicationComponent(TemplateService.class) ;
-    Node node = (Node) ItemLinkAware.newInstance(path, getNodeByPath(path, getSession()));
+    Node node = (Node) ItemLinkAware.newInstance(getWorkspaceName(), path, getNodeByPath(path, getSession()));
     NodeIterator childrenIterator = node.getNodes();
     List<Node> childrenList  = new ArrayList<Node>() ;
     NodeType nodeType = node.getPrimaryNodeType();
