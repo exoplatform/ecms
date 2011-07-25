@@ -78,7 +78,7 @@
     <section id="sect-User_Guide-InContext_Editing-Add_Content">
       <title>Add Content</title>
       <para>
-    Adding a new content by InContext Editing is enabled for the Content List Viewer.
+    Adding a new content by InContext Editing is enabled for the Content List Viewer (CLV).
    </para>
       <para>
     Do the following:
@@ -87,7 +87,7 @@
         <title>Add a new content</title>
         <step>
           <para>
-      Turn on the <emphasis role="bold">Edit Mode &gt;</emphasis> hover the mouse over the CLV that you want to add a new content in.
+      Turn on the <emphasis role="bold">Edit Mode</emphasis>, and then hover the mouse over the CLV that you want to add a new content in.
      </para>
         </step>
         <step>
@@ -95,9 +95,9 @@
       Click the <emphasis role="bold">Add Content</emphasis> icon on the CLV.
      </para>
           <para>
-      You will be redirected to the <emphasis role="bold">Content Explorer </emphasis>with a new document form for you to write a document.
+      You will be redirected to the <emphasis role="bold">Content Explorer </emphasis>with a list of content templates for you to select.
      </para>
-          <mediaobject>
+          <mediaobject id="proc-User_Guide-Add_Content-Add_a_new_content-Content_Types">
             <imageobject role="html">
               <imagedata align="center" fileref="images/documentform.png" format="PNG"/>
             </imageobject>
@@ -106,33 +106,61 @@
             </imageobject>
           </mediaobject>
         </step>
-        <step>
-          <para>
-      Click the
-      <inlinemediaobject>
-              <imageobject>
-                <imagedata width="6mm" fileref="images/icon1.png" format="PNG"/>
-              </imageobject>
-              <textobject>
-                <phrase>scroll arrows</phrase>
-              </textobject>
-            </inlinemediaobject> icon to open the template list and select one.
-     </para>
+        <step id="proc-User_Guide-Add_Content-Add_a_new_content-step3">
+            <para>
+                Select a template for your content by clicking it and the corresponding template is opened. Each template has an Info bar on the top of the template:
+            </para>
+            <mediaobject>
+            <imageobject role="html">
+              <imagedata align="center" fileref="images/info_bar.png" format="PNG"/>
+            </imageobject>
+            <imageobject role="fo">
+              <imagedata width="150mm" align="center" fileref="images/info_bar.png" format="PNG"/>
+            </imageobject>
+          </mediaobject>
+            <para>Details:</para>
+            <itemizedlist>
+                <listitem>
+                    <para><guilabel>Change content type</guilabel>: this link allows you to select another content type.</para>
+                </listitem>
+                <listitem>
+                    <para><guilabel>Save</guilabel>: this button allows you to save the content without closing the content form.</para>
+                </listitem>
+                <listitem>
+                    <para><guilabel>Save &amp; Close</guilabel>: this button allows you to save the content and close the content form.</para>
+                </listitem>
+                <listitem>
+                    <para><guilabel>Close</guilabel>: this button allows you close the content form without saving the content.</para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <inlinemediaobject>
+                            <imageobject>
+                                <imagedata width="6mm" fileref="images/fullscreen_option.png" format="PNG"/>
+                            </imageobject>
+                        </inlinemediaobject>: this option allows you to witch on/off the fullscreen mode.
+                    </para>
+                </listitem>
+            </itemizedlist>
         </step>
         <step>
-          <para>
-      Fulfill all the fields in the form. See <xref linkend="sect-User_Guide-Actions-Add_a_document"/> to know how to add types of document.
-     </para>
+            <para>
+                Fulfill all the fields in the form. See
+                <xref linkend="sect-User_Guide-Actions-Add_a_document"/>
+                to know how to create the different content types.
+            </para>
         </step>
         <step>
-          <para>
-      Click <emphasis role="bold">Save as Draft</emphasis> to save the document in a folder of the Collaboration drive.
-     </para>
+            <para>
+                Click
+                <guilabel>Save</guilabel>
+                or <guilabel>Save and Close</guilabel> to save the document.
+            </para>
         </step>
       </procedure>
       <note>
         <para>
-     Saving a document in which folder of the Collaboration drive depends on the path you choose in <xref linkend="sect-User_Guide-InContext_Editing-Preferences"/>.
+     Saving a document in which folder depends on the path you choose in <xref linkend="sect-User_Guide-InContext_Editing-Preferences"/>.
     </para>
       </note>
     </section>
@@ -148,7 +176,7 @@
         <title>Edit a content</title>
         <step>
           <para>
-      Turn on the <emphasis role="bold">Edit Mode</emphasis> &gt; Hover the mouse over  the content you want to edit.
+      Turn on the <emphasis role="bold">Edit Mode</emphasis> &gt; Hover the mouse over the content you want to edit.
      </para>
         </step>
         <step>
@@ -161,7 +189,7 @@
               <textobject>
                 <phrase>pencil</phrase>
               </textobject>
-            </inlinemediaobject> icon at the right corner of the content you want to edit. You will be redirected to the <emphasis role="bold">Content Explorer </emphasis>with the document form for you to edit.
+            </inlinemediaobject> icon at the right corner of the content you want to edit. You will be redirected to <emphasis role="bold">Content Explorer </emphasis> with the document form for you to edit.
      </para>
           <mediaobject>
             <imageobject role="html">
@@ -174,16 +202,8 @@
         </step>
         <step>
           <para>
-      Edit the content &gt; Click <emphasis role="bold">Save as Draft</emphasis> to save the content.
+      Edit the content, and then click <emphasis role="bold">Save</emphasis> or <emphasis role="bold">Save &amp; Close</emphasis> to save your changes.
      </para>
-          <mediaobject>
-            <imageobject role="html">
-              <imagedata align="center" fileref="images/modification.png" format="PNG"/>
-            </imageobject>
-            <imageobject role="fo">
-              <imagedata width="138mm" align="center" fileref="images/modification.png" format="PNG"/>
-            </imageobject>
-          </mediaobject>
         </step>
         <step>
           <para>

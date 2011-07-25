@@ -560,7 +560,7 @@
    Do the following to add a new document:
   </para>
     <procedure id="proc-User_Guide-Add_a_document-Add_a_new_document">
-      <title>Add a new document:</title>
+      <title>Add a new document</title>
       <step>
         <para>
      Select a folder from the left panel where you want to add a new document.
@@ -576,7 +576,7 @@
             <textobject>
               <phrase>[ Add Document ]</phrase>
             </textobject>
-          </inlinemediaobject> button on the <emphasis role="bold">Actions</emphasis> bar.
+          </inlinemediaobject> button on the <emphasis role="bold">Actions</emphasis> bar to open a list of content templates:
     </para>
         <mediaobject>
           <imageobject role="html">
@@ -588,12 +588,12 @@
         </mediaobject>
       </step>
       <step>
-        <para>
-     Select the document type (template) that you want to create from the drop-down list (Article is selected by default).
-    </para>
-        <para>
-     Each document (except Article) must be added to categories when being created.
-    </para>
+          <para>
+              Select a template by clicking it and the corresponding form appears. See more details at <xref linkend="proc-User_Guide-Add_Content-Add_a_new_content-step3"/> of the <emphasis role="bold"> add a new content</emphasis>procedure.
+          </para>
+          <para>
+              Each document (except Article) must be added to categories when being created.
+          </para>
       </step>
     </procedure>
 <!-- DOC NOTE: The procedure  below was not in the 2.1.1 .odt. It has been re-included as is it linked to in "Create a new Article"  -->    <procedure id="proc-User_Guide-Add_a_document-Attach_files_to_a_document">
@@ -746,7 +746,7 @@
       </step>
       <step>
         <para>
-     Click<emphasis role="bold"> Save as Draft</emphasis> to accept creating a new file document.
+     Click <guilabel>Save</guilabel> or <guilabel>Save &amp; Close</guilabel> to accept creating a new file document.
     </para>
         <para>
      After being created successfully, a file document with type text/html will be displayed like the illustration below:
@@ -791,7 +791,7 @@
       </step>
       <step>
         <para>
-     Click <emphasis role="bold">Save as Draft</emphasis> to accept the inputted values, or <emphasis role="bold">Cancel</emphasis> to quit.
+     Click <guilabel>Save</guilabel> or <guilabel>Save &amp; Close</guilabel> to accept the inputted values, or <guilabel>Close</guilabel> to quit.
     </para>
       </step>
     </procedure>
@@ -919,7 +919,7 @@
       </step>
       <step>
         <para>
-     Click <emphasis role="bold">Save as Draft</emphasis> to finish.</para>
+     Click <guilabel>Save</guilabel> or <guilabel>Save &amp; Close</guilabel> to finish.</para>
       </step>
     </procedure>
     <note>
@@ -963,8 +963,13 @@
     </para>
       </step>
       <step>
-        <para>
-     Click <emphasis role="bold">Save as Draft</emphasis> to accept.    </para>
+          <para>
+              Click
+              <guilabel>Save</guilabel>
+              or
+              <guilabel>Save &amp; Close</guilabel>
+              to accept.
+          </para>
       </step>
     </procedure>
     <para>
@@ -1003,9 +1008,14 @@
     </para>
       </step>
       <step>
-        <para>
-     Click <emphasis role="bold">Save as Draft</emphasis> to accept creating a file plan.
-    </para>
+          <para>
+              Click Click
+              <guilabel>Save</guilabel>
+              or
+              <guilabel>Save &amp; Close</guilabel>
+              to accept. to accept creating a file plan.
+          </para>
+      </step>
 <!--     Doc Note: The content from this point until the next comment 'END' should probably be moved to a breakout explanation. Having it in the middle of a procedure breaks the flow of the steps.     -->        <variablelist id="vari-User_Guide-Create_a_new_File_Plan-Tabs_in_the_Add_File_plan_form">
           <title>Tabs in the <emphasis role="bold">Add File plan</emphasis> form</title>
           <varlistentry>
@@ -1206,7 +1216,7 @@
             </listitem>
           </varlistentry>
         </variablelist>
-<!--     END     -->      </step>
+<!--     END     -->
     </procedure>
     <para>
    After being created, the new File Plan will be displayed:
@@ -1256,8 +1266,13 @@
     </para>
       </step>
       <step>
-        <para>
-     Click <emphasis role="bold">Save as Draft</emphasis> to accept creating a document.</para>
+          <para>
+              Click
+              <guilabel>Save</guilabel>
+              or
+              <guilabel>Save &amp; Close</guilabel>
+              to accept creating a document.
+          </para>
       </step>
     </procedure>
     <para>
@@ -1793,7 +1808,7 @@
       </imageobject>
     </mediaobject>
     <para>
-   To view your comment click the <emphasis role="bold">Show Comments</emphasis> link:
+   To view your comment, click the <emphasis role="bold">Show Comments</emphasis> link:
   </para>
     <mediaobject>
       <imageobject role="html">
@@ -3962,14 +3977,14 @@
       </step>
       <step>
         <para>
-     New metadata is displayed in the External Metadatas list and you also can edit it by clicking the <inlinemediaobject>
+    The new metadata are displayed in the External Metadatas list and you also can edit it by clicking the <inlinemediaobject>
             <imageobject>
               <imagedata width="6mm" fileref="images/editicon4.png" format="PNG"/>
             </imageobject>
             <textobject>
               <phrase>pencil</phrase>
             </textobject>
-          </inlinemediaobject>.
+          </inlinemediaobject> icon.
     </para>
       </step>
       <step>

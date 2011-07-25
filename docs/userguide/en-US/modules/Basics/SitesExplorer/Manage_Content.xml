@@ -26,23 +26,13 @@
 			<title>Add new content</title>
 			 <step>
 				<para>
-					Go to <emphasis role="bold">Sites Management</emphasis> drive <emphasis role="bold">&gt;</emphasis> select a site that you want to add a web content.
+					Go to <emphasis role="bold">Sites Management</emphasis> drive, and then select a site that you want to add a web content.
 				</para>
-
 			</step>
 			 <step>
 				<para>
-					Select the web content folder on the left:
+					Select the web content folder on the left.
 				</para>
-				 <mediaobject>
-					<imageobject role="html">
-						<imagedata align="center" fileref="images/webcontentfolder.png" format="PNG"   />
-					</imageobject>
-					 <imageobject role="fo">
-                  <imagedata align="center"  fileref="images/webcontentfolder.png" format="PNG" width="150mm" />
-					</imageobject>
-
-				</mediaobject>
 				 <note>
 					<para>
 						In this step, you also can add a new web content into another folders (documents and media folder) of a site but you are recommended to select the web content folder because:
@@ -68,7 +58,7 @@
 			</step>
 			 <step>
 				<para>
-					Open the Add New Document form by clicking the 
+					Open a list of content templates by clicking the
 					<inlinemediaobject>
 						<imageobject>
                      <imagedata fileref="images/adddocumenticon.png" format="PNG" width="28mm"/>
@@ -78,60 +68,53 @@
                   </textobject>
 					</inlinemediaobject> icon on the Action bar.
 				</para>
-
+                 <mediaobject>
+                     <imageobject role="html">
+                         <imagedata align="center" fileref="images/webcontentfolder.png" format="PNG"/>
+                     </imageobject>
+                     <imageobject role="fo">
+                         <imagedata align="center" fileref="images/webcontentfolder.png" format="PNG" width="150mm"/>
+                     </imageobject>
+                 </mediaobject>
 			</step>
 			 <step>
-				<para>
-					Select a template in the Select Template field to present web content:
-				</para>
-				 <mediaobject>
-					<imageobject role="html">
-						<imagedata align="center" fileref="images/maincontenttab.png" format="PNG"   />
-					</imageobject>
-					 <imageobject role="fo">
-                  <imagedata align="center"  fileref="images/maincontenttab.png" format="PNG" width="150mm" />
-					</imageobject>
-
-				</mediaobject>
-				 <para>
-					The Select Template field has two options:
-				</para>
-				 <itemizedlist>
-					<listitem>
-						<para>
-							<emphasis role="bold">Picture on head layout web content:</emphasis>The site's content is presented in two spaces. One for inserting an image and one for editing the site's content. In which, the image is put at the head of a site.
-						</para>
-
-					</listitem>
-					 <listitem>
-						<para>
-							<emphasis role="bold">Free layout web content:</emphasis>This template is a free layout.
-						</para>
-
-					</listitem>
-
-				</itemizedlist>
+                 <para>
+                     Select a template to present the web content by clicking one.
+                 </para>
+                 <itemizedlist>
+                     <listitem>
+                         <para>
+                             <emphasis role="bold">Picture on head layout web content:</emphasis>The site's content is
+                             presented in two spaces. One for inserting an image and one for editing the site's content.
+                             In which, the image is put at the head of a site.
+                         </para>
+                     </listitem>
+                     <listitem>
+                         <para>
+                             <emphasis role="bold">Free layout web content:</emphasis>This template is a free layout.
+                         </para>
+                     </listitem>
+                 </itemizedlist>
 				<!--  Doc Note: The content from this point until the next comment 'END' should probably be moved to a breakout explanation. Having it in the middle of a procedure breaks the flow of the steps.                          -->
 			</step>
 			 <step>
 				<para>
-					Enter values in fields of the Add New Document form.
+					Enter values in the fields of the Add New Document form.
 				</para>
 
 			</step>
 			 <step>
 				<para>
-					Click <emphasis role="bold">Save as Draft</emphasis> to save the content or <emphasis role="bold">Cancel</emphasis> to quit the Add New Document form.
+					Click <guilabel>Save</guilabel> or <guilabel>Save &amp; Close</guilabel> to save the content or <guilabel>Close</guilabel> to quit the Add New Document form.
 				</para>
 
 			</step>
-			 <step>
-            <title>Tabs in the Add New Document form</title>
-				 <para>
-					The <emphasis role="bold">Main Content</emphasis>Tab includes:
-				</para>
+			<formalpara>
+                <title>Tabs in the Add New Document form</title>
+                <para>
+                    The<emphasis role="bold">Main Content</emphasis> tab includes:
+                </para>
 				 <table>
-					<title></title>
 					 <tgroup cols="2">
 						<thead>
 							<row>
@@ -173,24 +156,7 @@
 								</entry>
 
 							</row>
-							 <row>
-								<entry>
-									Save button
-								</entry>
-								 <entry>
-									To accept saving the inputted values
-								</entry>
 
-							</row>
-							 <row>
-								<entry>
-									Cancel button
-								</entry>
-								 <entry>
-									To exit the current form
-								</entry>
-
-							</row>
 
 						</tbody>
 
@@ -198,7 +164,7 @@
 
 				</table>
 				 <para>
-					The <emphasis role="bold">Illustration Tab:</emphasis> enables you to upload an illustration that makes the site's content more attractive
+					The <emphasis role="bold">Illustration</emphasis> tab: enables you to upload an illustration that makes the site's content more attractive
 				</para>
 				 <mediaobject>
 					<imageobject role="html">
@@ -210,7 +176,6 @@
 
 				</mediaobject>
 				 <table>
-					<title></title>
 					 <tgroup cols="2">
 						<thead>
 							<row>
@@ -231,15 +196,6 @@
 								</entry>
 								 <entry>
 									The path to an image that you want to upload into a site. This image will be used like an illustration of that site.
-								</entry>
-
-							</row>
-							 <row>
-								<entry>
-									Image Type
-								</entry>
-								 <entry>
-									The image format that you want to upload to the site. It can be: image/gif; image/png; image/jpg; image/jpeg.
 								</entry>
 
 							</row>
@@ -334,7 +290,7 @@
 
 				</table>
 				<!--                         END                         -->
-			</step>
+			</formalpara>
 
 		</procedure>
 		
@@ -373,19 +329,19 @@
                   <textobject>
                      <phrase>[ Edit Document ]</phrase>
                   </textobject>
-					</inlinemediaobject> icon on the action bar to show the edit form of the selected web content as the Add New Document form.
+					</inlinemediaobject> icon on the action bar to show the form to edit the selected web content. This form is like the form to create a new document.
 				</para>
 
 			</step>
 			 <step>
 				<para>
-					Change the current values in the fields of this edit form.
+					Change the current values in the fields of this form.
 				</para>
 
 			</step>
 			 <step>
 				<para>
-					Complete editing the selected web content by clicking Save.
+					Complete editing the selected web content by clicking <guilabel>Save</guilabel> or <guilabel>Save &amp; Close</guilabel>.
 				</para>
 
 			</step>
