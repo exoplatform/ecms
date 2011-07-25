@@ -6,6 +6,11 @@
     word-wrap: break-word;
 }
 
+.UIForm .UIFormGrid td.FieldLabel {
+  max-width: 500px;
+  overflow: hidden;
+}
+
 /******************************* UIFormWithoutAction **************************/
 .UIFormWithoutAction {
   margin: 0px 0px 10px 0px;
