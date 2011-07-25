@@ -430,6 +430,7 @@ public class UICLVPresentation extends UIContainer {
 
     FriendlyService friendlyService = getApplicationComponent(FriendlyService.class);
     link = friendlyService.getFriendlyUri(link);
+    link = link.replaceAll("%27", "%2527");
 
     return link;
   }
@@ -818,7 +819,7 @@ public class UICLVPresentation extends UIContainer {
     public void execute(Event<UICLVPresentation> event) throws Exception {
       UICLVPresentation contentListPresentation = event.getSource();
       String nodePath = event.getRequestContext().getRequestParameter(OBJECTID);
-      Node node = NodeLocation.getNodeByExpression(nodePath);
+      Node node = NodeLocation.getNodeByExpression(Text.escapeIllegalJcrChars(nodePath));
       PublicationService publicationService = (PublicationService) PortalContainer.getInstance()
           .getComponentInstanceOfType(PublicationService.class);
       if (node.isLocked()) {
