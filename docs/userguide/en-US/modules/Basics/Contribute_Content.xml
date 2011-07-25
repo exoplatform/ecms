@@ -184,7 +184,7 @@
       Click the 
       <inlinemediaobject>
               <imageobject>
-                <imagedata width="6mm" fileref="images/editicon4.png" format="PNG"/>
+                <imagedata width="6mm" fileref="images/inline_edit_icon.png" format="PNG"/>
               </imageobject>
               <textobject>
                 <phrase>pencil</phrase>
@@ -215,7 +215,7 @@
               <textobject>
                 <phrase>green reverse arrow</phrase>
               </textobject>
-            </inlinemediaobject> icon to return to the site and in the <emphasis role="bold">Edit Mode</emphasis>, the content in the state &quot;draft&quot; with its modification is visible.
+            </inlinemediaobject> icon to return to the site and in the <emphasis role="bold">Edit Mode</emphasis>, the content in the &quot;Draft&quot; state with its visible modification.
      </para>
           <mediaobject>
             <imageobject role="html">
@@ -226,12 +226,29 @@
             </imageobject>
           </mediaobject>
         </step>
+          <step>
+              <para>To publish the edited content, click the
+                  <inlinemediaobject>
+                      <imageobject>
+                          <imagedata width="5mm" fileref="images/publish-icon.png" format="PNG"/>
+                      </imageobject>
+                  </inlinemediaobject>
+                  icon, or click
+                  <inlinemediaobject>
+                      <imageobject>
+                          <imagedata width="5mm" fileref="images/ publish_icon1.png" format="PNG"/>
+                      </imageobject>
+                  </inlinemediaobject>
+                  on the action bar and it is now in the published state.
+              </para>
+          </step>
       </procedure>
-      <note>
-        <para>
-     When you turn on the Published Mode, you cannot see the edited content. To see it in the Published Mode, you must publish it. See <xref linkend="sect-User_Guide-Contribute_Content-Publication_Process"/> to know how to publish a content.
-    </para>
-      </note>
+        <note>
+            <para>
+                You cannot see the edited content in the Publish mode. To know more about the Publication process of a
+                content, see <xref linkend="sect-User_Guide-Contribute_Content-Publication_Process"/>.
+            </para>
+        </note>
     </section>
     <section id="sect-User_Guide-InContext_Editing-Manage_Content">
       <title>Manage Content</title>
@@ -719,6 +736,36 @@
           </inlinemediaobject>
      to discard changes.
       </para>
+      </step>
+        <step>
+            <para>Publish the edited content:</para>
+            <para>After the content is changed, it is in the Draft state:</para>
+            <mediaobject>
+                <imageobject role="html">
+                    <imagedata align="center" fileref="images/publish_Inline.png" format="PNG"/>
+                </imageobject>
+                <imageobject role="fo">
+                    <imagedata width="150mm" align="center" fileref="images/publish_Inline.png" format="PNG"/>
+                </imageobject>
+            </mediaobject>
+            <para>Click the
+                <inlinemediaobject>
+                    <imageobject>
+                        <imagedata width="5mm" fileref="images/publish-icon.png" format="PNG"/>
+                    </imageobject>
+                </inlinemediaobject>
+               icon to publish the content, and it is now in the Published state:
+            </para>
+            <mediaobject>
+                <imageobject role="html">
+                    <imagedata align="center" fileref="images/publish-state.png" format="PNG"/>
+                </imageobject>
+                <imageobject role="fo">
+                    <imagedata width="150mm" align="center" fileref="images/publish-state.png" format="PNG"/>
+                </imageobject>
+            </mediaobject>
+        </step>
+      </procedure>
         <note>
           <title>CKEditor</title>
           <para>When using CKEditor to write/edit a document, you can also:</para>
@@ -783,8 +830,6 @@
             </step>
           </procedure>
         </note>
-      </step>
-    </procedure>
   </section>
   <section id="sect-User_Guide-Contribute_Content-Publication_Process">
     <title>Publication Process</title>
