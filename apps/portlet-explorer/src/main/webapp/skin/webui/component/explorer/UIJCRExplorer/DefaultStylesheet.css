@@ -1092,6 +1092,7 @@
 	padding-left: 10px; /* orientation=lt */
 	padding-right: 10px; /* orientation=rt */
 	width: 90%;
+  overflow: hidden;
 }
 
 .UIJCRExplorer .UIUploadBehaviorWithSameName .RecycleBinFull {
