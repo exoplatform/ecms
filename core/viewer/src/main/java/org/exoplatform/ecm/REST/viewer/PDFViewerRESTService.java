@@ -250,7 +250,7 @@ public class PDFViewerRESTService implements ResourceContainer {
       String mimeType = contentNode.getProperty("jcr:mimeType").getString();
       InputStream input = new BufferedInputStream(contentNode.getProperty("jcr:data").getStream());
       // Create temp file to store data of nt:file node
-      if (name.indexOf(".") > 0) name = name.substring(0, name.indexOf("."));
+      if (name.indexOf(".") > 0) name = name.substring(0, name.lastIndexOf("."));
       content = File.createTempFile(name, ".pdf");
       content.deleteOnExit();
       // Convert to pdf if need
