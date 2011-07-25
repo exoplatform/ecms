@@ -7,6 +7,14 @@
 import org.exoplatform.services.wcm.newsletter.NewsletterSubscriptionConfig;
 import org.exoplatform.services.wcm.newsletter.config.NewsletterManagerConfig;
 import org.exoplatform.services.wcm.newsletter.NewsletterCategoryConfig;
+
+def categoryTitle = uicomponent.categoryConfig.getTitle();
+if(categoryTitle != null && categoryTitle.length() > 30)
+  categoryTitle = categoryTitle.substring(0,30);
+	
+def subscriptionTitle = uicomponent.subscriptionConfig.getTitle();
+if(subscriptionTitle != null && subscriptionTitle.length() > 100)
+  subscriptionTitle = subscriptionTitle.substring(0,30);
 %>
 
 <div class="UINewsletterPortlet $uicomponent.id">
@@ -17,11 +25,11 @@ import org.exoplatform.services.wcm.newsletter.NewsletterCategoryConfig;
 				<%=_ctx.appRes("NewsletterPortlet.title.newsletter")%>
 			</a>
 			>
-			<a class="Selected" style="color:blue;" href="<%=uicomponent.event("BackToSubcriptions")%>">
-				<%=uicomponent.categoryConfig.getTitle()%>
+			<a title="<%=uicomponent.categoryConfig.getTitle()%>" class="Selected" style="color:blue;" href="<%=uicomponent.event("BackToSubcriptions")%>">
+				<%=categoryTitle%>
 			</a>
 			>
-			<a class="UnSelected"><%=uicomponent.subscriptionConfig.getTitle()%></a>
+			<a title="<%=uicomponent.subscriptionConfig.getTitle()%>" class="UnSelected"><%=subscriptionTitle%></a>
 		</div>
 		
 		<div class="LeftActionBar">
@@ -45,18 +53,16 @@ import org.exoplatform.services.wcm.newsletter.NewsletterCategoryConfig;
 					<div class="LeftTitle">
 						<div class="RightTitle">
 							<div class="CenterTitle">
-								<div class="IconCategory"><%=uicomponent.subscriptionConfig.getTitle()%></div>
+								<div class="IconCategory" style="max-width:350px; overflow:hidden;" title="<%=uicomponent.subscriptionConfig.getTitle()%>"><%=uicomponent.subscriptionConfig.getTitle()%></div>
 							</div>
 						</div>
-					</div>
-					<div style="float:left;line-height:26px;padding-left:10px">
+					</div>					
 						<%
 							def subscriptionDescription = uicomponent.subscriptionConfig.getDescription();
 							if (subscriptionDescription == null) subscriptionDescription = "";
-							if (subscriptionDescription.length() > 60) subscriptionDescription = subscriptionDescription.substring(0, 60) + " ...";
+							if (subscriptionDescription.length() > 30) subscriptionDescription = subscriptionDescription.substring(0, 30) + " ...";
 						%>
-						$subscriptionDescription
-					</div>
+					<div title="<%=uicomponent.subscriptionConfig.getDescription()%>" style="float:left;line-height:26px;padding-left:10px"><%=subscriptionDescription%></div>
 					
 					<!-- ----------------------------------- Button -------------------------------------------------- -->
 					<div class="UIAction" style="float:right; padding:0 0 0 10px;"> 
@@ -133,7 +139,7 @@ import org.exoplatform.services.wcm.newsletter.NewsletterCategoryConfig;
 				<div class="Subscriptions">
 					<table cellpadding="5" cellspacing="0" border="0">
 						<tr>
-							<th class="Title" style="width:auto;">
+							<th class="Title" style="width:auto; overflow: hidden; max-width: 500px;" title="<%=_ctx.appRes("UINewsletterEntryManager.title.Letter")%>">
 								<%=_ctx.appRes("UINewsletterEntryManager.title.Letter")%>
 							</th>
 							<th class="thContent Title">
@@ -158,8 +164,8 @@ import org.exoplatform.services.wcm.newsletter.NewsletterCategoryConfig;
 								else color="background:white;";
 							%>
 								<tr style="$color">
-									<td style="width:auto;">
-										<a href="<%=uicomponent.event("SelectNewsletter", newsletter.getNewsletterName())%>">
+									<td style="width:auto; overflow: hidden; max-width: 500px;">
+										<a title="<%=newsletter.getNewsletterTitle()%>" href="<%=uicomponent.event("SelectNewsletter", newsletter.getNewsletterName())%>">
 											<%=newsletter.getNewsletterTitle()%>
 										</a>
 									</td>

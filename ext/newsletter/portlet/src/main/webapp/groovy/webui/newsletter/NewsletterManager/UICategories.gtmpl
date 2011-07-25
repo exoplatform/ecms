@@ -113,24 +113,24 @@ import java.util.List;
 						<div class="CategoryTitle">
 							<div class="LeftTitle">
 								<div class="RightTitle">
-									<div class="CenterTitle">
-										<a class="IconCategory" href="<%=uicomponent.event("OpenCategory", category.getName())%>"><%=category.getTitle()%></a>
+									<div class="CenterTitle" style="max-width:350px; overflow:hidden;">
+										<a title="<%=category.getTitle()%>" class="IconCategory" href="<%=uicomponent.event("OpenCategory", category.getName())%>"><%=category.getTitle()%></a>
 									</div>
 								</div>
 							</div>
 							<%
 								def categoryDescription = category.getDescription();
 								if (categoryDescription == null) categoryDescription = "";
-								if (categoryDescription.length() > 60) categoryDescription = categoryDescription.substring(0, 60) + " ...";
+								if (categoryDescription.length() > 30) categoryDescription = categoryDescription.substring(0, 30) + " ...";
 							%>
-							<span style="line-height:26px;padding-left:10px">$categoryDescription</span>
+							<span title="<%=category.getDescription()%>" style="line-height:26px;padding-left:10px">$categoryDescription</span>
 							<div class="ClearLeft"><span></span></div>
 						</div>
 						<!-- All subscriptions -->
 						<div class="Subscriptions">
 							<table cellpadding="5" cellspacing="0" border="0">
 								<tr>
-									<th class="Title" style="width:auto;">
+									<th class="Title" style="width:auto; overflow: hidden; max-width: 350px;" title="<%=_ctx.appRes("UICategories.title.SubScription")%>">
 										<%=_ctx.appRes("UICategories.title.SubScription")%>
 									</th>
 									<th class="thContent Title">
@@ -150,7 +150,7 @@ import java.util.List;
 											i ++;
 										%>
 											<tr class="$classTr">
-												<td style="width:auto;"><a href="<%=uicomponent.event("SelectSubscription", category.getName() + "/" + subScription.getName())%>"><%=subScription.getTitle()%></a></td>
+												<td style="width:auto; overflow: hidden; max-width: 350px;"><a title="<%=subScription.getTitle()%>" href="<%=uicomponent.event("SelectSubscription", category.getName() + "/" + subScription.getName())%>"><%=subScription.getTitle()%></a></td>
 												<td class="tdContent">
 													<%=uicomponent.getNumberOfUser(category.getName(), subScription.getName())%>
 												</td>

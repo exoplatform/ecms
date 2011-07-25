@@ -9,6 +9,9 @@ import org.exoplatform.webui.core.UIComponent;
 %>
 <%
 if(uicomponent.categoryConfig != null){
+def categoryTitle = uicomponent.categoryConfig.getTitle();
+if(categoryTitle != null && categoryTitle.length() > 30)
+  categoryTitle = categoryTitle.substring(0,30);
 %>
 <%uiform.begin()%>
 <div class="UINewsletterPortlet" id="$uicomponent.id">
@@ -18,7 +21,7 @@ if(uicomponent.categoryConfig != null){
 				<%=_ctx.appRes("NewsletterPortlet.title.newsletter")%>
 			</a>
 			>
-			<a class="UnSelected"><%=uicomponent.categoryConfig.getTitle()%></a>
+			<a title="<%=uicomponent.categoryConfig.getTitle()%>" class="UnSelected"><%=categoryTitle%></a>
 		</div>
 		
 		<%
@@ -54,16 +57,16 @@ if(uicomponent.categoryConfig != null){
 					<div class="LeftTitle">
 						<div class="RightTitle">
 							<div class="CenterTitle">
-								<div class="IconCategory"><%=uicomponent.categoryConfig.getTitle()%></div>
+								<div class="IconCategory" style="max-width:350px; overflow:hidden;" title="<%=uicomponent.categoryConfig.getTitle()%>"><%=uicomponent.categoryConfig.getTitle()%></div>
 							</div>
 						</div>
 					</div>
 					<%
 						def categoryDescription = uicomponent.categoryConfig.getDescription();
 						if (categoryDescription == null) categoryDescription = "";
-						if (categoryDescription.length() > 60) categoryDescription = categoryDescription.substring(0, 60) + " ...";
+						if (categoryDescription.length() > 30) categoryDescription = categoryDescription.substring(0, 30) + " ...";
 					%>
-					<div style="float:left;line-height:26px;padding-left:10px">$categoryDescription</div>
+					<div title="<%=uicomponent.categoryConfig.getDescription()%>" style="float:left;line-height:26px;padding-left:10px">$categoryDescription</div>
 						<!-- ----------------------------------- Button -------------------------------------------------- -->
 						<div class="UIAction" style="float:right; padding:0px 10px; width: 120px;"> 
 					          	  	
@@ -163,7 +166,7 @@ if(uicomponent.categoryConfig != null){
 				<div class="Subscriptions">
 					<table cellpadding="5" cellspacing="0" border="0">
 						<tr>
-							<th class="Title" style="width:auto;">
+							<th class="Title" style="width:auto; overflow: hidden; max-width: 500px;" title="<%=_ctx.appRes("UICategories.title.SubScription")%>">
 								<%=_ctx.appRes("UICategories.title.SubScription")%>
 							</th>
 							<th class="thContent Title">
@@ -191,8 +194,8 @@ if(uicomponent.categoryConfig != null){
 										i ++;
 								%>
 									<tr class="$classTr">
-										<td style="width:auto;">
-											<a href="<%=uicomponent.event("SelectSubscription", subScription.getName())%>">
+										<td style="width:auto; overflow: hidden; max-width: 500px;">
+											<a href="<%=uicomponent.event("SelectSubscription", subScription.getName())%>" title="<%=subScription.getTitle()%>">
 												<%=subScription.getTitle()%>
 											</a>
 										</td>
