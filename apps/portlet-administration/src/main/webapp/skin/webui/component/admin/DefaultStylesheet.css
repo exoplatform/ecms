@@ -412,8 +412,10 @@
 	padding: 0px;
 }
 
-.UIECMAdminPortlet  .UIFormInputSetWithAction .ActionField {
+.UIECMAdminPortlet .UIFormInputSetWithAction .ActionField {
   margin-bottom: 5px ;
+  max-width: 400px;
+  overflow: hidden;
 }
 
 .UIECMAdminPortlet  .UIFormInputSetWithAction .ActionField a {

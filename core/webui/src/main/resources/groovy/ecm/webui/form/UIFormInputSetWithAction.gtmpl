@@ -75,7 +75,7 @@
 	                      </a>
                      <%} else { %>
                           <div class="ActionField FL" >
-                            <a href="javascript:eXo.webui.UIForm.submitEvent('<%=formName%>', '<%=actionInfo[0]%>', '&objectId=<%=arrInfor[i]%>');">
+                            <a title="<%=arrInfor[i].trim()%>" href="javascript:eXo.webui.UIForm.submitEvent('<%=formName%>', '<%=actionInfo[0]%>', '&objectId=<%=arrInfor[i]%>');">
                               <%=arrInfor[i].trim()%>
                           </a>
                         </div>
