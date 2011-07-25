@@ -27,6 +27,7 @@ import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 import javax.jcr.nodetype.ConstraintViolationException;
 import javax.jcr.nodetype.NodeDefinition;
+import javax.jcr.nodetype.NodeTypeManager;
 
 import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.ecm.webui.comparator.ItemOptionNameComparator;
@@ -43,8 +44,8 @@ import org.exoplatform.webui.core.UIPopupComponent;
 import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.core.model.SelectItemOption;
 import org.exoplatform.webui.event.Event;
-import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.event.Event.Phase;
+import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.exception.MessageException;
 import org.exoplatform.webui.form.UIForm;
 import org.exoplatform.webui.form.UIFormSelectBox;
@@ -73,19 +74,25 @@ public class UIFolderForm extends UIForm implements UIPopupComponent {
     RequestContext context = RequestContext.getCurrentInstance() ;
     ResourceBundle res = context.getApplicationResourceBundle() ;
     UIJCRExplorer uiExplorer = getAncestorOfType(UIJCRExplorer.class);
+    Node currentNode = uiExplorer.getCurrentNode();
     List<SelectItemOption<String>> options = new ArrayList<SelectItemOption<String>>();
     String foldertypes = uiExplorer.getDriveData().getAllowCreateFolders();
     if (foldertypes.contains(",")) {
       addUIFormInput(new UIFormSelectBox(FIELD_TYPE, FIELD_TYPE, null));
       String[] arrFoldertypes = foldertypes.split(",");
       String label = "";
+      NodeTypeManager ntManager = currentNode.getSession().getWorkspace().getNodeTypeManager();
       for (String foldertype : arrFoldertypes) {
+        if (currentNode.isNodeType(Utils.NT_FOLDER)
+            && !ntManager.getNodeType(foldertype).isNodeType(Utils.NT_FOLDER)) {
+          continue;
+        }
         try {
           label = res.getString(getId() + ".label." + foldertype.replace(":", "_"));
-        } catch(MissingResourceException e) {
+        } catch (MissingResourceException e) {
           label = foldertype;
         }
-        options.add(new SelectItemOption<String>(label,  foldertype));
+        options.add(new SelectItemOption<String>(label, foldertype));
       }
       Collections.sort(options, new ItemOptionNameComparator());
       getUIFormSelectBox(FIELD_TYPE).setOptions(options);
@@ -99,17 +106,6 @@ public class UIFolderForm extends UIForm implements UIPopupComponent {
     setActions(new String[]{"Save", "Cancel"}) ;
     getUIStringInput(FIELD_NAME).setValue(null) ;
     getUIStringInput(FIELD_TITLE).setValue(null) ;
-    //TODO: This block code was hardcoded for nt:folder type. Impossible to do like that.
-    //Because may have a lot of folders type has super type is nt:folder and it must be exist in list options
-    if (getUIFormSelectBox(FIELD_TYPE) != null) {
-      if (uiExplorer.getCurrentNode().isNodeType(Utils.NT_FOLDER)) {
-          options.clear();
-          options.add(new SelectItemOption<String>(res.getString(getId() + ".label."
-              + Utils.NT_FOLDER.replace(":", "_")), Utils.NT_FOLDER));
-          Collections.sort(options, new ItemOptionNameComparator());
-          getUIFormSelectBox(FIELD_TYPE).setOptions(options);
-      }
-    }
   }
   public void deActivate() throws Exception {}
 

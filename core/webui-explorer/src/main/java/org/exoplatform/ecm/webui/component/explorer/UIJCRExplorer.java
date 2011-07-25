@@ -866,7 +866,7 @@ public class UIJCRExplorer extends UIContainer {
           if(typeName.equals(Utils.EXO_SYMLINK)) {
             primaryTypeName = child.getProperty(Utils.EXO_PRIMARYTYPE).getString();
           }
-          if(Utils.NT_UNSTRUCTURED.equals(primaryTypeName) || Utils.NT_FOLDER.equals(primaryTypeName)) {
+          if(child.isNodeType(Utils.NT_UNSTRUCTURED) || child.isNodeType(Utils.NT_FOLDER)) {
             childrenList.add(child) ;
           } else if(typeName.equals(Utils.EXO_SYMLINK) &&
               documentTypes.contains(primaryTypeName)) {
