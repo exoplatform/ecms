@@ -449,11 +449,13 @@
     <label>
       <type>Loại</type>
       <name>Tên</name>
+      <title>Tiêu đề</title>
     </label>
     <title>Thêm/Sửa đổi thư mục</title>
     <msg>
       <addFolder-successful>Thêm thư mục mới '{0}' thành công</addFolder-successful>
       <name-invalid>Vui lòng nhập tên của thư mục!</name-invalid>
+      <title-invalid>Vui lòng nhập tiêu đề của thư mục!</title-invalid>
       <name-not-allowed>Tên này không hợp lệ.</name-not-allowed>
       <fileName-error>Tên file không hợp lệ.</fileName-error>
       <constraint-violation>Node Hiển thị không được phép thêm kiểu node '{0}'.</constraint-violation>

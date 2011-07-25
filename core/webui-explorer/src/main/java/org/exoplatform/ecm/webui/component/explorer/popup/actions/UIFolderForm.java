@@ -53,7 +53,7 @@ import org.exoplatform.webui.form.validator.MandatoryValidator;
 
 @ComponentConfig(
     lifecycle = UIFormLifecycle.class,
-    template =  "system:/groovy/webui/form/UIForm.gtmpl",
+    template =  "app:/groovy/webui/component/explorer/popup/action/UIAddFolder.gtmpl",
     events = {
       @EventConfig(listeners = UIFolderForm.SaveActionListener.class),
       @EventConfig(listeners = UIFolderForm.CancelActionListener.class, phase=Phase.DECODE)
@@ -62,6 +62,7 @@ import org.exoplatform.webui.form.validator.MandatoryValidator;
 
 public class UIFolderForm extends UIForm implements UIPopupComponent {
   final static public String FIELD_NAME = "name" ;
+  final static public String FIELD_TITLE = "title" ;
   final static public String FIELD_TYPE = "type" ;
   private String allowCreateFolder_ ;
 
@@ -91,22 +92,22 @@ public class UIFolderForm extends UIForm implements UIPopupComponent {
     } else {
       allowCreateFolder_ = foldertypes;
     }
-    addUIFormInput(new UIFormStringInput(FIELD_NAME, FIELD_NAME, null).
-        addValidator(MandatoryValidator.class).
-        addValidator(IllegalDMSCharValidator.class));
+    addUIFormInput(new UIFormStringInput(FIELD_TITLE, FIELD_TITLE, null).addValidator(MandatoryValidator.class)
+                                                                        .addValidator(IllegalDMSCharValidator.class));
+    addUIFormInput(new UIFormStringInput(FIELD_NAME, FIELD_NAME, null).addValidator(MandatoryValidator.class)
+                                                                      .addValidator(IllegalDMSCharValidator.class));
     setActions(new String[]{"Save", "Cancel"}) ;
     getUIStringInput(FIELD_NAME).setValue(null) ;
+    getUIStringInput(FIELD_TITLE).setValue(null) ;
     //TODO: This block code was hardcoded for nt:folder type. Impossible to do like that.
     //Because may have a lot of folders type has super type is nt:folder and it must be exist in list options
     if (getUIFormSelectBox(FIELD_TYPE) != null) {
       if (uiExplorer.getCurrentNode().isNodeType(Utils.NT_FOLDER)) {
-        if (getAncestorOfType(UIJCRExplorer.class).getCurrentNode().isNodeType(Utils.NT_FOLDER)) {
           options.clear();
           options.add(new SelectItemOption<String>(res.getString(getId() + ".label."
               + Utils.NT_FOLDER.replace(":", "_")), Utils.NT_FOLDER));
           Collections.sort(options, new ItemOptionNameComparator());
           getUIFormSelectBox(FIELD_TYPE).setOptions(options);
-        }
       }
     }
   }
@@ -118,6 +119,7 @@ public class UIFolderForm extends UIForm implements UIPopupComponent {
       UIJCRExplorer uiExplorer = uiFolderForm.getAncestorOfType(UIJCRExplorer.class) ;
       UIApplication uiApp = uiFolderForm.getAncestorOfType(UIApplication.class);
       String name = uiFolderForm.getUIStringInput(FIELD_NAME).getValue() ;
+      String title = uiFolderForm.getUIStringInput(FIELD_TITLE).getValue() ;
       Node node = uiExplorer.getCurrentNode() ;
       if (uiExplorer.nodeIsLocked(node)) {
         uiApp.addMessage(new ApplicationMessage("UIPopupMenu.msg.node-locked", null)) ;
@@ -129,6 +131,11 @@ public class UIFolderForm extends UIForm implements UIPopupComponent {
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
         return ;
       }
+      if (title == null || title.length() == 0) {
+        uiApp.addMessage(new ApplicationMessage("UIFolderForm.msg.title-invalid", null)) ;
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+        return ;        
+      }
 
       String type = null ;
       if(uiFolderForm.getUIFormSelectBox(FIELD_TYPE) != null) {
@@ -137,9 +144,13 @@ public class UIFolderForm extends UIForm implements UIPopupComponent {
         type = uiFolderForm.allowCreateFolder_ ;
       }
       name = name.trim();
+      title = title.trim();
       try {
-        node.addNode(Text.escapeIllegalJcrChars(name), type);
-        node.save();
+        Node addedNode = node.addNode(Text.escapeIllegalJcrChars(name), type);
+        if (!addedNode.hasProperty(Utils.EXO_TITLE)) {
+          addedNode.addMixin(Utils.EXO_RSS_ENABLE);
+        }
+        addedNode.setProperty(Utils.EXO_TITLE, title);
         node.getSession().save();
         if(!uiExplorer.getPreference().isJcrEnable())  { node.getSession().save() ; }
         uiExplorer.updateAjax(event) ;

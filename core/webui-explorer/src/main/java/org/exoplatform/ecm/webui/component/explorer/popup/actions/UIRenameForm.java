@@ -84,15 +84,13 @@ public class UIRenameForm extends UIForm implements UIPopupComponent {
 
   final static private String RELATION_PROP     = "exo:relation";
 
-  final static private String EXO_LASTMODIFIER = "exo:lastModifier";
-
   private NodeLocation               renameNode_;
 
   public UIRenameForm() throws Exception {
-    addUIFormInput(new UIFormStringInput(FIELD_NAME, FIELD_NAME)
-        .addValidator(MandatoryValidator.class).addValidator(IllegalDMSCharValidator.class));
-    addUIFormInput(new UIFormStringInput(FIELD_TITLE, FIELD_TITLE)
-        .addValidator(IllegalDMSCharValidator.class));
+    addUIFormInput(new UIFormStringInput(FIELD_TITLE, FIELD_TITLE).addValidator(MandatoryValidator.class)
+                                                                  .addValidator(IllegalDMSCharValidator.class));
+    addUIFormInput(new UIFormStringInput(FIELD_NAME, FIELD_NAME).addValidator(MandatoryValidator.class)
+                                                                .addValidator(IllegalDMSCharValidator.class));
   }
 
   public void update(Node renameNode) throws Exception {
@@ -102,12 +100,16 @@ public class UIRenameForm extends UIForm implements UIPopupComponent {
         renamePath.substring(renamePath.lastIndexOf("/") + 1, renamePath.length())) ;
     getUIStringInput(FIELD_NAME).setValue(oldName);
     UIFormStringInput titleInput = getUIStringInput(FIELD_TITLE);
-    if (renameNode.hasProperty(Utils.EXO_TITLE))
-      titleInput.setValue(renameNode.getProperty(Utils.EXO_TITLE).getString());
-    else
-      titleInput.setValue("");
-    if (renameNode.hasProperty(Utils.EXO_TITLE))
-      titleInput.addValidator(MandatoryValidator.class);
+    if (renameNode.hasProperty(Utils.EXO_TITLE)) {
+      String oldTitle = renameNode.getProperty(Utils.EXO_TITLE).getString();
+      if (oldTitle != null && oldTitle.trim().length() > 0) {
+        titleInput.setValue(oldTitle);
+      } else {
+        titleInput.setValue(oldName);
+      }
+    } else {
+      titleInput.setValue(oldName);
+    }
   }
 
   private void changeLockForChild(String srcPath, Node parentNewNode) throws Exception {

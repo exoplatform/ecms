@@ -406,11 +406,13 @@
     <label>
       <type>نوعال</type>
       <name>الاسم</name>
+      <title>Title</title>
     </label>
     <title>إضافة/تغيير المجلد</title>
     <msg>
       <addFolder-successful>تمت إضافة المجلد '{0}' بنجاح</addFolder-successful>
       <name-invalid>أدخل اسم المجلد!</name-invalid>
+      <title-invalid>Please enter folder's title!</title-invalid>
       <name-not-allowed>هذا الاسم غير متاح.</name-not-allowed>
       <fileName-error>اسم الملف خاطئ</fileName-error>
       <constraint-violation>العقدة المختارة لا تسمح بهذا النوع من العقد: '{0}'.</constraint-violation>

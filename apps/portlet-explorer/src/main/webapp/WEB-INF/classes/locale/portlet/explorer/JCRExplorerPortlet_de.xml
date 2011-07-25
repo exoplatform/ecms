@@ -409,11 +409,13 @@
     <label>
       <type>Typ</type>
       <name>Name</name>
+      <title>Title</title>
     </label>
     <title><![CDATA[Ordner hinzuf&uuml;gen/&auml;ndern]]></title>
     <msg>
       <addFolder-successful><![CDATA[Neuen Ordner erfolgreich '{0}' hinzugef&uuml;gt]]></addFolder-successful>
       <name-invalid>Bitte Ordner namen angeben !</name-invalid>
+      <title-invalid>Please enter folder's title!</title-invalid>
       <name-not-allowed>Dieser Name ist nicht erlaubt.</name-not-allowed>
       <fileName-error><![CDATA[Ung&uuml;ltiger Dateiname]]></fileName-error>
       <constraint-violation><![CDATA[Momentaner Knoten erlaubt kein Hinzuf&uuml;gen von '{0}' Knotentypen]]></constraint-violation>

@@ -433,11 +433,13 @@
     <label>
       <type>タイプ</type>
       <name>名前</name>
+      <title>タイトル</title>
     </label>
     <title>フォルダの追加/編集</title>
     <msg>
       <addFolder-successful>新しいフォルダ '{0}' の追加に成功</addFolder-successful>
       <name-invalid>フォルダ名を入力してください!</name-invalid>
+      <title-invalid>タイトルを入力してください!</title-invalid>
       <name-not-allowed>この名前は許されていません。</name-not-allowed>
       <fileName-error>無効なファイル名</fileName-error>
       <constraint-violation>現在のノードは '{0}' ノードタイプを追加することが許されていません。</constraint-violation>

@@ -502,12 +502,14 @@
 		<label>
 			<type>Type</type>
 			<name>naam</name>
+			<title>Title</title>
 		</label>
 		<title>Folder toevoegen/wijzigen</title>
 		<msg>
 			<addFolder-successful>Nieuw Folder '{0}' Successvol toegevoegd
 			</addFolder-successful>
 			<name-invalid>Geef foldersnaam !</name-invalid>
+			<title-invalid>Please enter folder's title!</title-invalid>
 			<name-not-allowed>This name is not allowed.</name-not-allowed>
 			<fileName-error>Ongeldig bestandsnaam</fileName-error>
 			<constraint-violation>Huidig node laat niet toe '{0}' node type toe

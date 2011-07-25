@@ -435,11 +435,13 @@
     <label>
       <type>Type</type>
       <name>Nom</name>
+      <title>Titre</title>
     </label>
     <title>Ajouter/Editer un répertoire</title>
     <msg>
       <addFolder-successful>'{0}' ajouté avec succès</addFolder-successful>
       <name-invalid>Entrez un nom de répertoire !</name-invalid>
+      <title-invalid>Veuillez entrer le titre de dossier !</title-invalid>
       <name-not-allowed>Ce nom n'est pas autorisé.</name-not-allowed>
       <fileName-error>Nom de fichier invalide</fileName-error>
       <constraint-violation>Le noeud courant n'autorise pas l'ajout d'un noeud du type '{0}'</constraint-violation>
