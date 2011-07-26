@@ -52,9 +52,13 @@
   <procedure>
     <title/>
     <step>
-      <para>
-     Go to <emphasis role="bold">Group &gt; Administration &gt; Manage Pages</emphasis> on the administration bar. The Manage Pages will appear:
-    </para>
+        <para>
+            Go to
+            <emphasis role="bold">News &gt; Site Editor &gt; Edit Page</emphasis>
+            on the administration bar:
+        </para>
+        <para>The page for you to edit the Category Navigation portlet will appear:
+        </para>
       <mediaobject>
            <imageobject role="html">
               <imagedata fileref="images/categorynavigation.png" format="PNG" align="center"/>
@@ -66,29 +70,10 @@
     </step>
     <step>
       <para>
-     Click 
-     <inlinemediaobject>
-          <imageobject>
-            <imagedata fileref="images/editicon2.png" format="PNG"/>
-          </imageobject>
-        </inlinemediaobject>
-      in the <emphasis role="bold">Manage Pages</emphasis> that corresponds with the Category navigation portlet to open the page to edit this portlet.
-    </para>
-      <mediaobject>
-           <imageobject role="html">
-              <imagedata fileref="images/editcn.png" format="PNG" align="center"/>
-           </imageobject>
-           <imageobject role="fo">
-              <imagedata fileref="images/editcn.png" format="PNG" align="center" width="150mm" />
-           </imageobject>
-        </mediaobject>
-    </step>
-    <step>
-      <para>
      Click the 
      <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/editicon4.png" format="PNG" width="6mm"/>
+              <imagedata fileref="images/editicon5.png" format="PNG" width="6mm"/>
             </imageobject>
             <textobject>
                <phrase>pencil</phrase>
@@ -102,85 +87,53 @@
            <imageobject role="fo">
               <imagedata fileref="images/cneditmode.png" format="PNG" align="center" width="150mm" />
            </imageobject>
-        </mediaobject>
+      </mediaobject>
     </step>
     <step>
       <para>
     Click the 
      <inlinemediaobject>
             <imageobject>
-              <imagedata fileref="images/icon1.png" format="PNG" width="6mm"/>
+              <imagedata fileref="images/plusicon.png" format="PNG" width="6mm"/>
             </imageobject>
             <textobject>
-               <phrase>scroll arrows</phrase>
+               <phrase>plus icon</phrase>
             </textobject>
-          </inlinemediaobject> to select the repository for documents in the Repository field.
+          </inlinemediaobject> icon to select the folder path, that restores contents you want do display.
     </para>
     </step>
     <step>
       <para>
-     Input the name of a category in the Title field.
+     Edit some fields in the <guilabel>Display settings</guilabel> part as you want. See more details in <xref
+              linkend="form-User_Guide-Preferences-Content_List_Preferences."/>.
     </para>
     </step>
     <step>
-      <para>
-     Select the tree name for a category.
-    </para>
+        <para>
+            Click the
+            <guilabel>Advanced</guilabel>
+            link to set up some properties for the portlet. See more details in <xref
+                linkend="sect-User_Guide-Dynamic_Navigation"/>.
+        </para>
     </step>
     <step>
       <para>
-     Select the template for displaying categories.
-    </para>
+     Click <guibutton>Save</guibutton> to accept saving the configuration for the Category Navigation portlet.</para>
     </step>
     <step>
-      <para>
-     Click the 
-     <inlinemediaobject>
-            <imageobject>
-              <imagedata fileref="images/magnifyingglassicon.png" format="PNG" width="7mm"/>
-            </imageobject>
-            <textobject>
-               <phrase>magnifying glass</phrase>
-            </textobject>
-          </inlinemediaobject> icon to select the target path. The Page selector form will appear:
-    </para>
-         <mediaobject>
-             <imageobject role="html">
-                <imagedata fileref="images/pageselector.png" format="PNG" align="center"/>
-             </imageobject>
-             <imageobject role="fo">
-                <imagedata fileref="images/pageselector.png" format="PNG" align="center" width="150mm" />
-             </imageobject>
-          </mediaobject>
+        <para>Click <guibutton>Close</guibutton> to quit the form.</para>
     </step>
     <step>
-      <para>
-     Click the 
-     <inlinemediaobject>
-            <imageobject>
-              <imagedata fileref="images/bluedroparrow.png" format="PNG" width="6mm"/>
-            </imageobject>
-            <textobject>
-               <phrase>down arrow</phrase>
-            </textobject>
-          </inlinemediaobject> to select the navigation on the left pane. The corresponding pages will be displayed on the left pane and the corresponding paths will be displayed on the right pane.
-    </para>
-    </step>
-    <step>
-      <para>
-     Click the <inlinemediaobject>
-            <imageobject>
-              <imagedata fileref="images/greentick.png" format="PNG" width="6mm"/>
-            </imageobject>
-            <textobject>
-               <phrase>green tick</phrase>
-            </textobject>
-          </inlinemediaobject> icon to select the path. This path will be displayed in the Show in page field.
-    </para>
-    </step>
-    <step>
-      <para>
-     Click <emphasis role="bold">Save</emphasis> to accept saving the configuration for the Category Navigation portlet.</para>
+        <para>Click
+            <inlinemediaobject>
+                <imageobject>
+                    <imagedata fileref="images/finishbutton.png" format="PNG" width="6mm"/>
+                </imageobject>
+            </inlinemediaobject>
+        on the <guilabel>Page Editor</guilabel> to finish editing the Category Navigation portlet. </para>
     </step>
   </procedure>
+    <note>
+        <para>In the Edit Mode tab, some options are disable.</para>
+    </note>
 </section>
