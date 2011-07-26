@@ -320,7 +320,7 @@ public class UISimpleSearch extends UIForm {
       try {
         uiSearchResult.setQuery(statement, currentNode.getSession().getWorkspace().getName(), 
                                 queryType.equals(Preference.XPATH_QUERY) ? Query.XPATH : Query.SQL, 
-                                IdentityConstants.SYSTEM.equals(currentNode.getSession().getUserID()));
+                                IdentityConstants.SYSTEM.equals(currentNode.getSession().getUserID()), null);
         uiSearchResult.updateGrid();
       } catch(Exception e) {
         LOG.error("Unexpected error", e);

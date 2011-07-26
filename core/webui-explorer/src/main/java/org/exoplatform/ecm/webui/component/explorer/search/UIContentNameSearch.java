@@ -106,14 +106,14 @@ public class UIContentNameSearch extends UIForm {
         }
         long startTime = System.currentTimeMillis();
         uiSearchResult.setQuery(statement, explorer.getTargetSession().getWorkspace().getName(), Query.SQL, 
-                                IdentityConstants.SYSTEM.equals(explorer.getTargetSession()));
+                                IdentityConstants.SYSTEM.equals(explorer.getTargetSession()), null);
         uiSearchResult.updateGrid();
         long time = System.currentTimeMillis() - startTime;
         uiSearchResult.setSearchTime(time);
         uiECMSearch.setRenderedChild(UISearchResult.class);
         contentNameSearch.getUIFormInputInfo(SEARCH_LOCATION).setValue(currentNodePath);
       } catch (Exception e) {
-        uiSearchResult.setQuery(null, null, null, false);
+        uiSearchResult.setQuery(null, null, null, false, null);
         uiSearchResult.updateGrid();
         uiECMSearch.setRenderedChild(UISearchResult.class);
       }

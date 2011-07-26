@@ -149,7 +149,7 @@ public class UISavedSearches extends UIComponent {
         uiApp.addMessage(new ApplicationMessage("UISearchResult.msg.query-invalid", null,
                                                 ApplicationMessage.WARNING));
       } finally {
-        uiSearchResult.setQuery(query.getStatement(), wsName, query.getLanguage(), true);
+        uiSearchResult.setQuery(query.getStatement(), wsName, query.getLanguage(), true, null);
         uiSearchResult.updateGrid();
       }   
       if (uiDrivesArea != null) uiDrivesArea.setRendered(false);

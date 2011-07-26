@@ -28,16 +28,17 @@ import java.util.Locale;
 import javax.jcr.AccessDeniedException;
 import javax.jcr.Item;
 import javax.jcr.ItemNotFoundException;
-import javax.jcr.LoginException;
-import javax.jcr.NoSuchWorkspaceException;
 import javax.jcr.Node;
 import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 import javax.jcr.query.Query;
 import javax.jcr.query.QueryManager;
+import javax.jcr.query.QueryResult;
 import javax.jcr.query.Row;
 
+import org.apache.commons.lang.StringUtils;
+import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.ecm.webui.component.explorer.UIDocumentWorkspace;
 import org.exoplatform.ecm.webui.component.explorer.UIDrivesArea;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
@@ -47,15 +48,18 @@ import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.portal.webui.workspace.UIPortalApplication;
 import org.exoplatform.services.cms.BasePath;
+import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.cms.link.LinkUtils;
 import org.exoplatform.services.cms.link.NodeFinder;
 import org.exoplatform.services.cms.taxonomy.TaxonomyService;
+import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.jcr.impl.core.JCRPath;
 import org.exoplatform.services.jcr.impl.core.SessionImpl;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.search.base.AbstractPageList;
 import org.exoplatform.services.wcm.search.base.NodeSearchFilter;
 import org.exoplatform.services.wcm.search.base.PageListFactory;
@@ -107,11 +111,13 @@ public class UISearchResult extends UIContainer {
   private List<String> categoryPathList = new ArrayList<String>();
   private String constraintsCondition;
   private static final String EXO_RESTORE_LOCATION = "exo:restoreLocation";
+  @Deprecated
   private boolean isTaxonomyNode = false;
   private String workspaceName = null;
   private String currentPath = null;
+  private String keyword ="";
   private AbstractPageList<RowData> pageList;
-
+  
   public List<String> getCategoryPathList() { return categoryPathList; }
   public void setCategoryPathList(List<String> categoryPathListItem) {
     categoryPathList = categoryPathListItem;
@@ -126,8 +132,9 @@ public class UISearchResult extends UIContainer {
     uiPageIterator_ = addChild(UIPageIterator.class, null, null);
   }
 
-  public void setQuery(String queryStatement, String workspaceName, String language, boolean isSystemSession) {
+  public void setQuery(String queryStatement, String workspaceName, String language, boolean isSystemSession, String keyword) {
     queryData_ = new QueryData(queryStatement, workspaceName, language, isSystemSession);
+    this.keyword = keyword;
   }
   
   public long getSearchTime() { return searchTime_; }
@@ -163,15 +170,15 @@ public class UISearchResult extends UIContainer {
   }
 
   public UIPageIterator getUIPageIterator() { return uiPageIterator_; }
-
+  @Deprecated
   public void setTaxonomyNode(boolean isTaxonomyNode, String workspaceName, String currentPath) {
     this.isTaxonomyNode = isTaxonomyNode;
     this.workspaceName = workspaceName;
     this.currentPath = currentPath;
   }
-
+  @Deprecated
   public boolean isTaxonomyNode() { return isTaxonomyNode; }
-
+  @Deprecated
   public Node getSymlinkNode(Node targetNode) throws Exception {
     RepositoryService repositoryService = getApplicationComponent(RepositoryService.class);
     Session session = WCMCoreUtils.getUserSessionProvider().getSession(workspaceName, repositoryService.getCurrentRepository());
@@ -185,13 +192,16 @@ public class UISearchResult extends UIContainer {
     return null;
   }
 
-  public void updateGrid() throws LoginException, NoSuchWorkspaceException, RepositoryException {
+  public void updateGrid() throws Exception {
+    TemplateService templateService = (TemplateService) ExoContainerContext.getCurrentContainer()
+    .getComponentInstanceOfType(TemplateService.class);
+    List<String> documentList = templateService.getDocumentTemplates();
      pageList = 
       PageListFactory.createPageList(queryData_.getQueryStatement(), 
                              queryData_.getWorkSpace(),
                              queryData_.getLanguage_(), 
                              queryData_.isSystemSession(), 
-                             new NodeFilter(categoryPathList), 
+                             new NodeFilter(categoryPathList, keyword, documentList), 
                              new RowDataCreator(),
                              PAGE_SIZE,
                              0);
@@ -381,14 +391,20 @@ public class UISearchResult extends UIContainer {
     private TaxonomyService taxonomyService;
     private NodeHierarchyCreator nodeHierarchyCreator;
     private String rootTreePath;
+    private LinkManager linkManager = null;
+    private String keyword ="";
+    private List<String> documentTypes;
+    final static private String  CHECK_LINK_MATCH_QUERY1= "select * from nt:base where jcr:path = '$0' and ( contains(*, '$1') or lower(exo:name) like '%$2%' or lower(exo:title) like '%$2%')";
+    final static private String  CHECK_LINK_MATCH_QUERY2= "select * from nt:base where jcr:path like '$0/%' and ( contains(*, '$1') or lower(exo:name) like '%$2%' or lower(exo:title) like '%$2%')";
     
-    public NodeFilter(List<String> categories) {
+    public NodeFilter(List<String> categories, String keyword, List<String> documentTypes) {
       taxonomyService = WCMCoreUtils.getService(TaxonomyService.class);
       nodeHierarchyCreator = WCMCoreUtils.getService(NodeHierarchyCreator.class);
       rootTreePath = nodeHierarchyCreator.getJcrPath(BasePath.TAXONOMIES_TREE_STORAGE_PATH);
       categoryPathList = categories;
+      this.keyword = keyword;
+      this.documentTypes = documentTypes;
     }
-    
     public Node filterNodeToDisplay(Node node) {
       try {
         if (node != null) {
@@ -402,16 +418,76 @@ public class UISearchResult extends UIContainer {
                 pathCategoriesList.add(category.getPath());
               }
               if (pathCategoriesList.contains(searchCategory)) 
-                return node;
+              {
+                if (node.isNodeType(Utils.EXO_SYMLINK)) {
+                  if (checkTargetMatch(node, keyword)) return node;
+                }else {
+                  return node;
+                }
+              }
             }
-          } else {
-            return node;
+            return null;
+          } else {            
+            if (node.isNodeType(Utils.EXO_SYMLINK)) {
+              if (checkTargetMatch(node, keyword)) return node;
+            }else {
+              return node;
+            }
           }
         }
       } catch (RepositoryException e) {}
       return null;
     }
-    
+    /**
+     * Check a symlink/taxonomylink if its target matches with keyword for searching ...link
+     * @param linkPath
+     * @param keyword
+     * @return
+     * @Author Nguyen The Vinh from ExoPlatform
+     */
+    protected boolean checkTargetMatch(Node symlinkNode, String keyword) {
+      String queryStatement = CHECK_LINK_MATCH_QUERY1;
+      Session targetSession;
+      Node target=null;
+      if (keyword ==null || keyword.length()==0 ) return true;
+      if (linkManager==null) {
+        linkManager = WCMCoreUtils.getService(LinkManager.class);
+      }
+      try {
+        if (!linkManager.isLink(symlinkNode)) return true;
+        target = linkManager.getTarget(symlinkNode);
+        if (target == null) return false;
+        targetSession = target.getSession();      
+        queryStatement = StringUtils.replace(queryStatement,"$0", target.getPath());
+        queryStatement = StringUtils.replace(queryStatement,"$1", keyword.replaceAll("'", "''"));
+        queryStatement = StringUtils.replace(queryStatement,"$2", keyword.replaceAll("'", "''").toLowerCase());
+        QueryManager queryManager = targetSession.getWorkspace().getQueryManager();
+        Query query = queryManager.createQuery(queryStatement, Query.SQL);
+        QueryResult queryResult = query.execute();
+        if ( queryResult.getNodes().getSize()>0 ) return true;
+        if (isFodlderDocument(target)||target.hasNode("jcr:content") ) {
+          queryStatement = CHECK_LINK_MATCH_QUERY2;
+          queryStatement = StringUtils.replace(queryStatement,"$0", target.getPath());      
+          queryStatement = StringUtils.replace(queryStatement,"$1", keyword.replaceAll("'", "''"));
+          queryStatement = StringUtils.replace(queryStatement,"$2", keyword.replaceAll("'", "''").toLowerCase());
+          query = queryManager.createQuery(queryStatement, Query.SQL);
+          queryResult = query.execute();
+          return queryResult.getNodes().getSize()>0;
+        }else {
+          return false;
+        }
+      } catch (RepositoryException e) {
+        return false;
+      }
+    }
+    private boolean isFodlderDocument(Node node) throws RepositoryException{
+      if (!node.isNodeType(NodetypeConstant.NT_UNSTRUCTURED)) return false; 
+      for (String documentType : documentTypes) {
+        if (node.getPrimaryNodeType().isNodeType(documentType))  
+          return true;
+      }
+      return false;
+    }
   }
   
   public static class RowDataCreator implements SearchDataCreator<RowData> {

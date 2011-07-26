@@ -56,6 +56,7 @@ import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.jcr.util.Text;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.organization.Group;
@@ -864,4 +865,60 @@ public class Utils {
     }
     return map;
   }
+  /**
+   * 
+   * @param node
+   * @return
+   * @throws Exception
+   * @Author Nguyen The Vinh from ExoPlatform
+   */
+  public static String getTitleWithSymlink(Node node) throws Exception {
+    String title = null;
+    Node nProcessNode = node;
+    if (title==null) {
+      nProcessNode = node;
+      if (nProcessNode.hasProperty("exo:title")) {
+        title = nProcessNode.getProperty("exo:title").getValue().getString();
+      }
+      if (nProcessNode.hasNode("jcr:content")) {
+        Node content = nProcessNode.getNode("jcr:content");
+        if (content.hasProperty("dc:title")) {
+          try {
+            title = content.getProperty("dc:title").getValues()[0].getString();
+          } catch (Exception e) {
+            title = null;
+          }
+        }
+      }
+      if (title != null) title = title.trim();
+    }
+    if (title !=null && title.length()>0) return Text.unescapeIllegalJcrChars(title);
+    if (isSymLink(node)) {
+      nProcessNode = getNodeSymLink(nProcessNode);
+      if (nProcessNode == null ) {
+        nProcessNode = node;
+      }
+      if (nProcessNode.hasProperty("exo:title")) {
+        title = nProcessNode.getProperty("exo:title").getValue().getString();
+      }
+      if (nProcessNode.hasNode("jcr:content")) {
+        Node content = nProcessNode.getNode("jcr:content");
+        if (content.hasProperty("dc:title")) {
+          try {
+            title = content.getProperty("dc:title").getValues()[0].getString();
+          } catch (Exception e) {
+            title = null;
+          }
+        }
+      }
+      if (title != null) { 
+        title = title.trim();
+        if (title.length()==0) title = null;
+      }
+    }   
+    
+    if (title ==null) title = nProcessNode.getName();
+    return Text.unescapeIllegalJcrChars(title);
+  }
+
 }
