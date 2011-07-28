@@ -10,7 +10,8 @@
   def advancedLinkDispplay = "none";
   jsManager.importJavascript("eXo.wcm.frontoffice.private.CLV", "/eXoWCMResources/javascript");
   jsManager.addJavascript("eXo.ecm.CLV.checkModeViewer();");
-  jsManager.addJavascript("eXo.ecm.CLV.checkContextualFolderInput();");  
+  jsManager.addJavascript("eXo.ecm.CLV.checkContextualFolderInput();");
+  def showFolderContexttual = "";
 %>
 <div class="UIForm $uicomponent.id">
   <%
@@ -212,31 +213,62 @@
                 </div>
               </div>
             </td>
-          	</tr>
-          	<tr>
-				<td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.SHOW_CLV_BY_STRING_INPUT) %></td>
-				<td class="FieldComponent" colspan="2"><% uiform.renderField(uicomponent.SHOW_CLV_BY_STRING_INPUT) %></td>
-				<td class="tdShowHelp">
-					<div class="IconInContextHelp ShowHelpIcon" id="ParameterHelp" onmouseover="eXo.ecm.WCMUtils.showInContextHelp('ParameterHelp', 'true')" onmouseout="eXo.ecm.WCMUtils.showInContextHelp('ParameterHelp', 'false')">
-						<div class="InContextHelpContent">                    
-						  <div class="InContextHelpPopup">
-							<div id="ParameterHelpID" class="LeftInContextHelpPopup">
-								<%= _ctx.appRes("UICLVConfig.help.ParameterHelp") %>
-							</div>
-						  </div>                      
-						</div>
-					 </div>
-				</td>
-			</tr>
+          </tr>
+          <% if (uicomponent.isContentListByQuery()) {
+              showFolderContexttual = "style=\"display:none\""; 
+             }
+          %>
+          <tr "$showFolderContexttual">
+              <td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.SHOW_CLV_BY_STRING_INPUT) %></td>
+              <td class="FieldComponent" colspan="2"><% uiform.renderField(uicomponent.SHOW_CLV_BY_STRING_INPUT) %></td>
+              <td class="tdShowHelp">
+                <div class="IconInContextHelp ShowHelpIcon" id="ParameterHelp" onmouseover="eXo.ecm.WCMUtils.showInContextHelp('ParameterHelp', 'true')" onmouseout="eXo.ecm.WCMUtils.showInContextHelp('ParameterHelp', 'false')">
+                  <div class="InContextHelpContent">                    
+                    <div class="InContextHelpPopup">
+                    <div id="ParameterHelpID" class="LeftInContextHelpPopup">
+                      <%= _ctx.appRes("UICLVConfig.help.ParameterHelp") %>
+                    </div>
+                    </div>                      
+                  </div>
+                 </div>
+              </td>
+            </tr>
+        <% if (uicomponent.isContentListByQuery()) {	%>
+          <tr>
+            <td class="FieldLabel" colspan="3" style="text-align:left;"><%=uicomponent.getLabel(uicomponent.CONTENT_BY_QUERY_LABEL)%></td>
+            <td class="tdShowHelp">
+            <div class="IconInContextHelp ShowHelpIcon" id="ContentByQueryHelp" onmouseover="eXo.ecm.WCMUtils.showInContextHelp('ContentByQueryHelp', 'true')" onmouseout="eXo.ecm.WCMUtils.showInContextHelp('ContentByQueryHelp', 'false')">
+              <div class="InContextHelpContent">                    
+                  <div class="InContextHelpPopup">
+                    <div id="ContentByQueryHelpID" class="LeftInContextHelpPopup">
+                      <%= _ctx.appRes("UICLVConfig.help.ContentByQueryHelp") %>
+                    </div>
+                  </div>
+              </div>
+             </div>
+            </td>            
+          </tr>          
+          <tr>
+            <td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.CONTENT_BY_QUERY_TEXT_AREA) %></td>         
+            <td class="FieldComponent" colspan="2">
+              <% uiform.renderField(uicomponent.CONTENT_BY_QUERY_TEXT_AREA) %>
+            </td>
+          </tr>
+          <tr>
+            <td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.WORKSPACE_FORM_SELECT_BOX) %></td>
+            <td class="FieldComponent" colspan="2"><% uiform.renderField(uicomponent.WORKSPACE_FORM_SELECT_BOX) %></td>
+          </tr>
+        <% } %> 
+          	
             <tr>
               <td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.TARGET_PAGE_FORM_INPUT_SET) %></td>
               <td class="FieldComponent" colspan="2"><% uiform.renderField(uicomponent.TARGET_PAGE_FORM_INPUT_SET) %></td>
               <td class="tdShowHelp">
                 <div class="IconInContextHelp ShowHelpIcon" id="ShowDetailInPageHelp" onmouseover="eXo.ecm.WCMUtils.showInContextHelp('ShowDetailInPageHelp', 'true')" onmouseout="eXo.ecm.WCMUtils.showInContextHelp('ShowDetailInPageHelp', 'false')">
-					<div class="InContextHelpContent">                    
+					         <div class="InContextHelpContent">                    
                       <div class="InContextHelpPopup">
                         <div id="ShowDetailInPageHelpID" class="LeftInContextHelpPopup">
-							<%= _ctx.appRes("UICLVConfig.help.ShowDetailInPageHelp") %>
+							             <%= _ctx.appRes("UICLVConfig.help.ShowDetailInPageHelp") %>
                         </div>
                       </div>                      
                     </div>
@@ -252,7 +284,7 @@
                 <div class="InContextHelpContent">                    
                     <div class="InContextHelpPopup">
                       <div id="DetailParameterHelpID" class="LeftInContextHelpPopup">
-						<%= _ctx.appRes("UICLVConfig.help.DetailParameterHelp") %>
+						            <%= _ctx.appRes("UICLVConfig.help.DetailParameterHelp") %>
                       </div>
                     </div>
                 </div>
@@ -260,15 +292,30 @@
             </td>
             </tr>
           </table>
-          <div class="FieldLabel"><%=uicomponent.getLabel(uicomponent.CACHE_MANAGEMENT_LABEL)%></div>
+          <table class="UIFormGrid" style="width:100%;">
+          <tr>
+            <td class="FieldLabel" colspan="2" style="text-align:left;"><%=uicomponent.getLabel(uicomponent.CACHE_MANAGEMENT_LABEL)%></td>
+            <td class="tdShowHelp">
+            <div class="IconInContextHelp ShowHelpIcon" id="ContentsVisibilityHelp" onmouseover="eXo.ecm.WCMUtils.showInContextHelp('ContentsVisibilityHelp', 'true')" onmouseout="eXo.ecm.WCMUtils.showInContextHelp('ContentsVisibilityHelp', 'false')">
+              <div class="InContextHelpContent">                    
+                  <div class="InContextHelpPopup">
+                    <div id="ContentsVisibilityHelpID" class="LeftInContextHelpPopup">
+                      <%= _ctx.appRes("UICLVConfig.help.ContentsVisibilityHelp") %>
+                    </div>
+                  </div>
+              </div>
+             </div>
+            </td>
+          </tr>
+          </table>
           <table class="UIFormGrid" style="width:100%;">
             <tr>
-              <td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.CACHE_ENABLE_RADIOBOX_INPUT) %></td>
               <td class="FieldComponent ContextualRadio" colspan="2">
                 <% uiform.renderField(uicomponent.CACHE_ENABLE_RADIOBOX_INPUT) %>
               </td>
             </tr>
           </table>
+          
         </fieldset>
       	<a style="display: $advancedLinkDisplay; text-align:left; color: #0000FF; text-decoration:underline;" href="<%=uicomponent.event("ShowAdvancedBlock", "true")%>" title="<%=_ctx.appRes("UICLVConfig.label.AdvancedBlock")%>">
       		<%=_ctx.appRes("UICLVConfig.label.AdvancedBlock")%>

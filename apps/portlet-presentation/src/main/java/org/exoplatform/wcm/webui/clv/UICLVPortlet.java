@@ -150,6 +150,12 @@ public class UICLVPortlet extends UIPortletApplication {
   
   /** The Constant PREFERENCE_CACHE_ENABLED. */
   public final static String PREFERENCE_CACHE_ENABLED             = "sharedCache";
+  
+  /** The Constant CONTENT_BY_QUERY. */
+  public final static String PREFERENCE_CONTENT_BY_QUERY          = "contentByQuery";
+  
+  /** The Constant PREFERENCE_WORKSPACE. */
+  public final static String PREFERENCE_WORKSPACE                 = "workspace";
 
   /** The Constant DISPLAY_MODE_MANUAL. */
   public static final String DISPLAY_MODE_MANUAL                  = "ManualViewerMode";
@@ -163,19 +169,33 @@ public class UICLVPortlet extends UIPortletApplication {
 
   public static final String PREFERENCE_APPLICATION_TYPE          = "application";
   
-  public static final String PREFERENCE_SHARED_CACHE     = "sharedCache";  
-
+  public static final String APPLICATION_CLV_BY_QUERY             = "ContentListByQuery";
+  
+  public static final String PREFERENCE_SHARED_CACHE              = "sharedCache";
+  /* Dynamic parameter for CLV by query */
+  public static final String QUERY_USER_PARAMETER                 = "${user}";
+  public static final String QUERY_FOLDER_ID_PARAMETER            = "${folder-id}";
+  public static final String QUERY_LANGUAGE_PARAMETER             = "${language}";
+  
+  public final static String CONTENT_LIST_BY_QUERY_TYPE           = "ContentListByQuery";
+  public final static String CATEGORIES_CONTENT_BY_QUERY_TYPE     = "CategoryContentsByQuery";
+  public final static String CATOGORIES_NAVIGATION_BY_QUERY_TYPE  = "CategoryNavigationByQuery";
+  
   private PortletMode        cpMode;
 
   private UICLVFolderMode    folderMode;
 
   private UICLVManualMode    manualMode;
+  
+  private UICLVQueryMode     queryMode;
 
   private UICLVConfig        clvConfig;
 
   private String             currentFolderPath;
 
   private String             currentDisplayMode;
+  
+  private String             currentApplicationMode;
 
   private static final Log   log                                  = ExoLogger.getLogger(UICLVPortlet.class);
 
@@ -254,6 +274,7 @@ public class UICLVPortlet extends UIPortletApplication {
         log.trace("CLV rendering : cache set to " + wcmService.getPortletExpirationCache());
     }
     String nDisplayMode = preferences.getValue(PREFERENCE_DISPLAY_MODE, null);
+    currentApplicationMode = preferences.getValue(PREFERENCE_APPLICATION_TYPE, null);
     PortletMode npMode = pContext.getApplicationMode();
     if (!nDisplayMode.equals(currentDisplayMode)) {
       activateMode(npMode, nDisplayMode);
@@ -277,67 +298,70 @@ public class UICLVPortlet extends UIPortletApplication {
   private void activateMode(PortletMode npMode, String nDisplayMode) throws Exception {
     if (npMode.equals(cpMode)) {
       // Switch manual/auto
-      clvConfig = getChild(UICLVConfig.class);
-      if (clvConfig != null)
-        removeChild(UICLVConfig.class);
-      folderMode = getChild(UICLVFolderMode.class);
-      if (folderMode != null)
-        removeChild(UICLVFolderMode.class);
-      manualMode = getChild(UICLVManualMode.class);
-      if (manualMode != null)
-        removeChild(UICLVManualMode.class);
+      // Not reach in the case of queryMode.
+      removeChildren();
       if (Utils.isPortalEditMode()){
         clvConfig = addChild(UICLVConfig.class, null, null);
         clvConfig.setModeInternal(false);
       }else {
-        if (nDisplayMode.equals(DISPLAY_MODE_AUTOMATIC)) {
-          folderMode = addChild(UICLVFolderMode.class, null, null);
-          folderMode.init();
-          folderMode.setRendered(true);
-        } else {
-          manualMode = addChild(UICLVManualMode.class, null, null);
-          manualMode.init();
-          manualMode.setRendered(true);
+        if (currentApplicationMode.equals(APPLICATION_CLV_BY_QUERY)) {
+          queryMode  = addChild(UICLVQueryMode.class, null, null);
+          queryMode.init();
+          queryMode.setRendered(true);
+        }else {
+          if (nDisplayMode.equals(DISPLAY_MODE_AUTOMATIC)) {
+            folderMode = addChild(UICLVFolderMode.class, null, null);
+            folderMode.init();
+            folderMode.setRendered(true);
+          } else {
+            manualMode = addChild(UICLVManualMode.class, null, null);
+            manualMode.init();
+            manualMode.setRendered(true);
+          }
         }
       }
     } else {
-      if (npMode.equals(PortletMode.VIEW)) {
-        clvConfig = getChild(UICLVConfig.class);
-        if (clvConfig != null)
-          removeChild(UICLVConfig.class);
-        folderMode = getChild(UICLVFolderMode.class);
-        if (folderMode != null)
-          removeChild(UICLVFolderMode.class);
-        manualMode = getChild(UICLVManualMode.class);
-        if (manualMode != null)
-          removeChild(UICLVManualMode.class);
-        if (nDisplayMode.equals(DISPLAY_MODE_AUTOMATIC)) {
-          folderMode = addChild(UICLVFolderMode.class, null, null);
-          folderMode.init();
-          folderMode.setRendered(true);
-        } else {
-          manualMode = addChild(UICLVManualMode.class, null, null);
-          manualMode.init();
-          manualMode.setRendered(true);
+      if (npMode.equals(PortletMode.VIEW)) { //Change from edit to iew
+        removeChildren();
+        if (currentApplicationMode.equals(APPLICATION_CLV_BY_QUERY)) {
+          queryMode  = addChild(UICLVQueryMode.class, null, null);
+          queryMode.init();
+          queryMode.setRendered(true);
+        }else {
+          if (nDisplayMode.equals(DISPLAY_MODE_AUTOMATIC)) {
+            folderMode = addChild(UICLVFolderMode.class, null, null);
+            folderMode.init();
+            folderMode.setRendered(true);
+          } else {
+            manualMode = addChild(UICLVManualMode.class, null, null);
+            manualMode.init();
+            manualMode.setRendered(true);
+          }
         }
       } else {
         // Change from view to edit
-        folderMode = getChild(UICLVFolderMode.class);
-        if (folderMode != null)
-          removeChild(UICLVFolderMode.class);
-        manualMode = getChild(UICLVManualMode.class);
-        if (manualMode != null)
-          removeChild(UICLVManualMode.class);
-        clvConfig = getChild(UICLVConfig.class);
-        if (clvConfig == null)
-          clvConfig = addChild(UICLVConfig.class, null, null);
+        removeChildren();
+        clvConfig = addChild(UICLVConfig.class, null, null);
         clvConfig.setModeInternal(true);
       }
     }
     cpMode = npMode;
     currentDisplayMode = nDisplayMode;
   }
-
+  private void removeChildren() {
+    clvConfig = getChild(UICLVConfig.class);
+    if (clvConfig != null)
+      removeChild(UICLVConfig.class);
+    folderMode = getChild(UICLVFolderMode.class);
+    if (folderMode != null)
+      removeChild(UICLVFolderMode.class);
+    manualMode = getChild(UICLVManualMode.class);
+    if (manualMode != null)
+      removeChild(UICLVManualMode.class);
+    queryMode = getChild(UICLVQueryMode.class);
+    if (queryMode != null) 
+      removeChild(UICLVQueryMode.class);
+  }
   /**
    * @function changeToViewMode
    * @purpose force porlet to change to ViewMode

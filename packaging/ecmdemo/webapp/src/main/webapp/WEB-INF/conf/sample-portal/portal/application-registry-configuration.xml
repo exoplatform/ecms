@@ -111,6 +111,32 @@
                       <string>Contents</string>
                     </field>
                     <field name="applicationName">
+                      <string>ContentListViewerByQueryPortlet</string>
+                    </field>
+                    <field name="displayName">
+                      <string>Content List By Query</string>
+                    </field>
+                    <field name="type">
+                      <string>portlet</string>
+                    </field>
+                    <field name="contentId">
+                      <string>presentation/ContentListViewerByQueryPortlet</string>
+                    </field>
+                    <field name="accessPermissions">
+                      <collection type="java.util.ArrayList" item-type="java.lang.String">
+                        <value>
+                          <string>*:/platform/administrators</string>
+                        </value>
+                      </collection>
+                    </field>
+                  </object>
+                </value>                
+                <value>
+                  <object type="org.exoplatform.application.registry.Application">
+                    <field name="categoryName">
+                      <string>Contents</string>
+                    </field>
+                    <field name="applicationName">
                       <string>ParameterizedContentViewerPortlet</string>
                     </field>
                     <field name="displayName">
@@ -163,6 +189,32 @@
                       <string>Contents</string>
                     </field>
                     <field name="applicationName">
+                      <string>CategoryNavigationByQueryPortlet</string>
+                    </field>
+                    <field name="displayName">
+                      <string>Category Navigation By Query</string>
+                    </field>
+                    <field name="type">
+                      <string>portlet</string>
+                    </field>
+                    <field name="contentId">
+                      <string>presentation/CategoryNavigationByQueryPortlet</string>
+                    </field>
+                    <field name="accessPermissions">
+                      <collection type="java.util.ArrayList" item-type="java.lang.String">
+                        <value>
+                          <string>*:/platform/administrators</string>
+                        </value>
+                      </collection>
+                    </field>
+                  </object>
+                </value>                
+                <value>
+                  <object type="org.exoplatform.application.registry.Application">
+                    <field name="categoryName">
+                      <string>Contents</string>
+                    </field>
+                    <field name="applicationName">
                       <string>ParameterizedContentListViewerPortlet</string>
                     </field>
                     <field name="displayName">
@@ -183,6 +235,32 @@
                     </field>
                   </object>
                 </value>
+                <value>
+                  <object type="org.exoplatform.application.registry.Application">
+                    <field name="categoryName">
+                      <string>Contents</string>
+                    </field>
+                    <field name="applicationName">
+                      <string>CategoryContentsByQueryPortlet</string>
+                    </field>
+                    <field name="displayName">
+                      <string>Category Contents By Query</string>
+                    </field>
+                    <field name="type">
+                      <string>portlet</string>
+                    </field>
+                    <field name="contentId">
+                      <string>presentation/CategoryContentsByQueryPortlet</string>
+                    </field>
+                    <field name="accessPermissions">
+                      <collection type="java.util.ArrayList" item-type="java.lang.String">
+                        <value>
+                          <string>*:/platform/administrators</string>
+                        </value>
+                      </collection>
+                    </field>
+                  </object>
+                </value>                
               </collection>
             </field>
           </object>

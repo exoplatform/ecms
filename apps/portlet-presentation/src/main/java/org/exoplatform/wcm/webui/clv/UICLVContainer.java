@@ -146,6 +146,13 @@ public abstract class UICLVContainer extends UIContainer {
   }
 
   public boolean isModeByFolder() {
+    PortletPreferences portletPreferences = Utils.getAllPortletPreferences();
+    String currentApplicationMode = portletPreferences.getValue(UICLVPortlet.PREFERENCE_APPLICATION_TYPE, null);
+    
+      if (currentApplicationMode.equals(UICLVPortlet.CONTENT_LIST_BY_QUERY_TYPE)
+          || currentApplicationMode.equals(UICLVPortlet.CATEGORIES_CONTENT_BY_QUERY_TYPE)
+          || currentApplicationMode.equals(UICLVPortlet.CATOGORIES_NAVIGATION_BY_QUERY_TYPE) ) return false;
+    
     return UICLVPortlet.DISPLAY_MODE_AUTOMATIC.equals(
               Utils.getPortletPreference(UICLVPortlet.PREFERENCE_DISPLAY_MODE));
   }

@@ -30,6 +30,7 @@ import java.util.MissingResourceException;
 import javax.jcr.Node;
 import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
+import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
 
 import org.apache.commons.lang.StringUtils;
@@ -633,6 +634,12 @@ public class UICLVPresentation extends UIContainer {
   }
 
   public boolean isShowRssLink() {
+    PortletPreferences portletPreferences = Utils.getAllPortletPreferences();
+    String currentApplicationMode = portletPreferences.getValue(UICLVPortlet.PREFERENCE_APPLICATION_TYPE, null);    
+    if (currentApplicationMode.equals(UICLVPortlet.CONTENT_LIST_BY_QUERY_TYPE)
+        || currentApplicationMode.equals(UICLVPortlet.CATEGORIES_CONTENT_BY_QUERY_TYPE)
+        || currentApplicationMode.equals(UICLVPortlet.CATOGORIES_NAVIGATION_BY_QUERY_TYPE) ) return false;
+    
     return isShowField(UICLVPortlet.PREFERENCE_SHOW_RSSLINK)
         && (this.getAncestorOfType(UICLVPortlet.class).getFolderPathParamValue() != null
             || UICLVPortlet.DISPLAY_MODE_AUTOMATIC.equals(Utils.getPortletPreference(UICLVPortlet.PREFERENCE_DISPLAY_MODE)));

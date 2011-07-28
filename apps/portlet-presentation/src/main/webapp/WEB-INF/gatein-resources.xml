@@ -71,6 +71,13 @@
     <css-path>/skin/ContentListViewer/DefaultStylesheet.css</css-path>
   </portlet-skin>
   
+  <portlet-skin>
+    <application-name>presentation</application-name>
+    <portlet-name>ContentListViewerByQueryPortlet</portlet-name>
+    <skin-name>Default</skin-name>
+    <css-path>/skin/ContentListViewer/DefaultStylesheet.css</css-path>
+  </portlet-skin>
+  
   <!-- javascript>
     <param>
       <js-module>eXo.SiteAdministration.ShowAdminToolbar</js-module>

@@ -314,6 +314,165 @@
 		</security-role-ref>
 	</portlet>
 	
+	 <portlet>
+    <description xml:lang="EN">Content List Viewer By Query</description>
+    <portlet-name>ContentListViewerByQueryPortlet</portlet-name>
+    <display-name>Contents By Query</display-name>
+    <portlet-class>org.exoplatform.webui.application.portlet.PortletApplicationController</portlet-class>
+    <init-param>
+      <name>webui.configuration</name>
+      <value>/WEB-INF/conf/portlet/ContentListViewer/webui/configuration.xml</value>
+    </init-param>
+    <expiration-cache>0</expiration-cache>
+    <supports>
+      <mime-type>text/html</mime-type>
+      <portlet-mode>edit</portlet-mode>
+    </supports>
+    <supported-locale>en</supported-locale>
+    <resource-bundle>locale.portlet.ContentListViewer.ContentListViewer</resource-bundle>
+    <portlet-info>
+      <title>Contents By Query</title>
+      <short-title>Contents By Query</short-title>
+      <keywords>Contents</keywords>
+    </portlet-info>
+    <portlet-preferences>
+      <preference>
+        <name>mode</name>
+        <value>AutoViewerMode</value>
+        <read-only>false</read-only>
+      </preference>
+      <preference>
+        <name>folderPath</name>
+        <value></value>
+        <read-only>false</read-only>
+      </preference>
+      <preference>
+        <name>orderBy</name>
+        <value>publication:liveDate</value>
+        <read-only>false</read-only>
+      </preference>
+      <preference>
+        <name>orderType</name>
+        <value>DESC</value>
+        <read-only>false</read-only>
+      </preference>
+      <preference>
+        <name>header</name>
+        <value></value>
+        <read-only>false</read-only>
+      </preference>
+      <preference>
+        <name>automaticDetection</name>
+        <value>true</value>
+        <read-only>false</read-only>
+      </preference>      
+      <preference>
+        <name>formViewTemplatePath</name>
+        <value>/exo:ecm/views/templates/content-list-viewer/list/UIContentListPresentationDefault.gtmpl</value>
+        <read-only>false</read-only>
+      </preference>
+      <preference>
+        <name>paginatorTemplatePath</name>
+        <value>/exo:ecm/views/templates/content-list-viewer/paginators/UIPaginatorDefault.gtmpl</value>
+        <read-only>false</read-only>
+      </preference>
+      <preference>
+        <name>itemsPerPage</name>
+        <value>10</value>
+        <read-only>false</read-only>
+      </preference>
+      <preference>
+        <name>showThumbnailsView</name>
+        <value>true</value>
+        <read-only>false</read-only>
+      </preference>
+      <preference>
+        <name>showTitle</name>
+        <value>true</value>
+        <read-only>false</read-only>
+      </preference>
+      <preference>
+        <name>showHeader</name>
+        <value>true</value>
+        <read-only>false</read-only>
+      </preference>
+      <preference>
+        <name>showRefreshButton</name>
+        <value>false</value>
+        <read-only>false</read-only>
+      </preference>
+      <preference>
+        <name>showDateCreated</name>
+        <value>true</value>
+        <read-only>false</read-only>
+      </preference>
+      <preference>
+        <name>showReadmore</name>
+        <value>true</value>
+        <read-only>false</read-only>
+      </preference>
+      <preference>
+        <name>showSummary</name>
+        <value>true</value>
+        <read-only>false</read-only>
+      </preference>
+      <preference>
+        <name>showLink</name>
+        <value>true</value>
+        <read-only>false</read-only>
+      </preference>
+      <preference>
+        <name>showRssLink</name>
+        <value>true</value>
+        <read-only>false</read-only>
+      </preference>
+      <preference>
+        <name>basePath</name>
+        <value>detail</value>
+        <read-only>false</read-only>
+      </preference>
+      <preference>
+        <name>contextualFolder</name>
+        <value>contextualDisable</value>
+        <read-only>false</read-only>
+      </preference>      
+      <preference>
+        <name>showScvWith</name>
+        <value>content-id</value>
+        <read-only>false</read-only>
+      </preference>      
+      <preference>
+        <name>showClvBy</name>
+        <value>folder-id</value>
+        <read-only>false</read-only>
+      </preference>
+      <preference>
+        <name>application</name>
+        <value>ContentListByQuery</value>
+        <read-only>true</read-only>
+      </preference>
+      <preference>
+        <name>sharedCache</name>
+        <value>true</value>
+        <read-only>false</read-only>
+      </preference>
+      <preference>
+        <name>workspace</name>
+        <value>collaboration</value>
+        <read-only>false</read-only>
+      </preference>      
+      <preference>
+        <name>contentByQuery</name>
+        <value></value>
+        <read-only>false</read-only>
+      </preference>      
+    </portlet-preferences>
+    <security-role-ref>
+      <role-name>admin</role-name>
+      <role-link>admin</role-link>
+    </security-role-ref>
+  </portlet>
+	
 	<portlet>
 		<description xml:lang="EN">Content by URL</description>
 		<portlet-name>ParameterizedContentViewerPortlet</portlet-name>
@@ -458,6 +617,7 @@
 	</portlet-->
 	
 	<portlet>
+	
 		<description xml:lang="EN">Category Navigation</description>
 		<portlet-name>CategoryNavigationPortlet</portlet-name>
 		<display-name xml:lang="EN">Category Navigation</display-name>
@@ -603,10 +763,165 @@
         <name>sharedCache</name>
         <value>true</value>
         <read-only>false</read-only>
-      </preference>
+      </preference>   
 	</portlet-preferences>
 	</portlet>
 	
+	 <portlet>
+    <description xml:lang="EN">Category Navigation By Query</description>
+    <portlet-name>CategoryNavigationByQueryPortlet</portlet-name>
+    <display-name xml:lang="EN">Category Navigation By Query</display-name>
+    <portlet-class>org.exoplatform.webui.application.portlet.PortletApplicationController</portlet-class>
+    <init-param>
+      <name>webui.configuration</name>
+      <value>/WEB-INF/conf/portlet/ContentListViewer/webui/configuration.xml</value>
+    </init-param>
+    <expiration-cache>0</expiration-cache>
+    <supports>
+      <mime-type>text/html</mime-type>
+      <portlet-mode>edit</portlet-mode>
+    </supports>
+    <supported-locale>en</supported-locale>
+    <resource-bundle>locale.portlet.ContentListViewer.ContentListViewer</resource-bundle>
+    <portlet-info>
+      <title>Category Navigation By Query</title>
+      <short-title>Category Navigation By Query</short-title>
+      <keywords>Contents</keywords>
+    </portlet-info>
+    <portlet-preferences>
+      <preference>
+       <name>mode</name>
+       <value>AutoViewerMode</value>
+       <read-only>false</read-only>
+   </preference>
+   <preference>
+        <name>folderPath</name>
+        <value></value>
+      <read-only>false</read-only>
+    </preference>
+    <preference>
+        <name>orderBy</name>
+    <value>exo:title</value>
+    <read-only>false</read-only>
+      </preference>
+   <preference>
+    <name>orderType</name>
+    <value>ASC</value>
+    <read-only>false</read-only>
+   </preference>
+   <preference>
+    <name>header</name>
+    <value></value>
+    <read-only>false</read-only>
+   </preference>
+   <preference>
+    <name>automaticDetection</name>
+    <value>false</value>
+    <read-only>false</read-only>
+   </preference>
+   <preference>
+        <name>formViewTemplatePath</name>         
+        <value>/exo:ecm/views/templates/content-list-viewer/navigation/CategoryTree.gtmpl</value>
+      <read-only>false</read-only>
+    </preference>
+   <preference>       
+        <name>paginatorTemplatePath</name>
+        <value>/exo:ecm/views/templates/content-list-viewer/paginator/UIPaginatorEmpty.gtmpl</value>
+      <read-only>false</read-only>
+    </preference>
+    <preference>
+        <name>itemsPerPage</name>
+        <value>20</value>
+      <read-only>false</read-only>
+    </preference>
+    <preference>
+      <name>showThumbnailsView</name>
+      <value>false</value>
+      <read-only>false</read-only>
+    </preference>
+    <preference>
+      <name>showTitle</name>
+      <value>true</value>
+      <read-only>false</read-only>
+    </preference>
+    <preference>
+      <name>showHeader</name>
+      <value>true</value>
+      <read-only>false</read-only>
+    </preference>
+    <preference>
+        <name>showRefreshButton</name>
+        <value>false</value>
+      <read-only>false</read-only>
+    </preference>
+    <preference>
+      <name>showDateCreated</name>
+      <value>false</value>
+      <read-only>false</read-only>
+    </preference>
+    <preference>
+      <name>showReadmore</name>
+      <value>false</value>
+      <read-only>false</read-only>
+    </preference>
+    <preference>
+      <name>showSummary</name>
+      <value>false</value>
+      <read-only>false</read-only>
+    </preference>
+    <preference>
+     <name>showLink</name>
+     <value>true</value>
+     <read-only>false</read-only>
+    </preference>
+    <preference>
+     <name>showRssLink</name>
+     <value>false</value>
+     <read-only>false</read-only>
+    </preference>
+    <preference>
+      <name>basePath</name>
+      <value></value>
+      <read-only>false</read-only>
+    </preference>
+    <preference>
+      <name>contextualFolder</name>
+      <value>contextualDisable</value>
+      <read-only>false</read-only>
+    </preference>      
+    <preference>
+      <name>showScvWith</name>
+      <value></value>
+      <read-only>false</read-only>
+    </preference>      
+    <preference>
+      <name>showClvBy</name>
+      <value>folder-id</value>
+      <read-only>false</read-only>
+    </preference>
+    <preference>
+      <name>application</name>
+      <value>CategoryNavigationByQuery</value>
+      <read-only>true</read-only>
+    </preference>
+    <preference>
+      <name>sharedCache</name>
+      <value>true</value>
+      <read-only>false</read-only>
+    </preference>
+      <preference>
+        <name>workspace</name>
+        <value>collaboration</value>
+        <read-only>false</read-only>
+      </preference>    
+    <preference>
+      <name>contentByQuery</name>
+      <value></value>
+      <read-only>false</read-only>
+    </preference>         
+  </portlet-preferences>
+  </portlet>
+  
 	<portlet>
 		<description xml:lang="EN">Category Contents</description>
 		<portlet-name>ParameterizedContentListViewerPortlet</portlet-name>
@@ -752,6 +1067,161 @@
 		</portlet-preferences>
 	</portlet>
 
+  <portlet>
+    <description xml:lang="EN">Category Contents By Query</description>
+    <portlet-name>CategoryContentsByQueryPortlet</portlet-name>
+    <display-name xml:lang="EN">Category Contents By Query</display-name>
+    <portlet-class>org.exoplatform.webui.application.portlet.PortletApplicationController</portlet-class>
+    <init-param>
+      <name>webui.configuration</name>
+      <value>/WEB-INF/conf/portlet/ContentListViewer/webui/configuration.xml</value>
+    </init-param>
+    <expiration-cache>0</expiration-cache>
+    <supports>
+      <mime-type>text/html</mime-type>
+      <portlet-mode>edit</portlet-mode>
+    </supports>
+    <supported-locale>en</supported-locale>
+    <resource-bundle>locale.portlet.ContentListViewer.ContentListViewer</resource-bundle>
+    <portlet-info>
+      <title>Category Contents By Query</title>
+      <short-title>Category Contents By Query</short-title>
+      <keywords>Contents</keywords>
+    </portlet-info>
+    <portlet-preferences>
+      <preference>
+        <name>mode</name>
+        <value>AutoViewerMode</value>
+        <read-only>false</read-only>
+      </preference>
+      <preference>
+        <name>folderPath</name>
+        <value></value>
+        <read-only>false</read-only>
+      </preference>
+      <preference>
+        <name>orderBy</name>
+        <value>publication:liveDate</value>
+        <read-only>false</read-only>
+      </preference>
+      <preference>
+        <name>orderType</name>
+        <value>DESC</value>
+        <read-only>false</read-only>
+      </preference>     
+      <preference>
+        <name>header</name>
+        <value></value>
+        <read-only>false</read-only>
+      </preference>
+      <preference>
+        <name>automaticDetection</name>
+        <value>true</value>
+        <read-only>false</read-only>
+      </preference>
+      <preference>
+        <name>formViewTemplatePath</name>
+        <value>/exo:ecm/views/templates/content-list-viewer/list/OneColumnCLVTemplate.gtmpl</value>
+        <read-only>false</read-only>
+      </preference>
+      <preference>
+        <name>paginatorTemplatePath</name>
+        <value>/exo:ecm/views/templates/content-list-viewer/paginators/UIPaginatorDefault.gtmpl</value>
+        <read-only>false</read-only>
+      </preference>     
+      <preference>
+        <name>itemsPerPage</name>
+        <value>5</value>
+        <read-only>false</read-only>
+      </preference>
+      <preference>
+        <name>showThumbnailsView</name>
+        <value>true</value>
+        <read-only>false</read-only>
+      </preference>
+      <preference>
+        <name>showTitle</name>
+        <value>true</value>
+        <read-only>false</read-only>
+      </preference>
+      <preference>
+        <name>showHeader</name>
+        <value>true</value>
+        <read-only>false</read-only>
+      </preference>
+      <preference>
+        <name>showRefreshButton</name>
+        <value>false</value>
+        <read-only>false</read-only>
+      </preference>     
+      <preference>
+        <name>showDateCreated</name>
+        <value>true</value>
+        <read-only>false</read-only>
+      </preference>
+      <preference>
+        <name>showReadMore</name>
+        <value>false</value>
+        <read-only>false</read-only>
+      </preference>     
+      <preference>
+        <name>showSummary</name>
+        <value>true</value>
+        <read-only>false</read-only>
+      </preference>     
+      <preference>
+        <name>showLink</name>
+        <value>true</value>
+        <read-only>false</read-only>
+      </preference>     
+      <preference>
+        <name>showRssLink</name>
+        <value>true</value>
+        <read-only>false</read-only>
+      </preference>
+      <preference>
+        <name>basePath</name>
+        <value>detail</value>
+        <read-only>false</read-only>
+      </preference>
+      <preference>
+        <name>contextualFolder</name>
+        <value>contextualEnable</value>
+        <read-only>false</read-only>
+      </preference>
+      <preference>
+        <name>showScvWith</name>
+        <value>content-id</value>
+        <read-only>false</read-only>
+      </preference>      
+      <preference>
+        <name>showClvBy</name>
+        <value>folder-id</value>
+        <read-only>false</read-only>
+      </preference>
+      <preference>
+        <name>application</name>
+        <value>CategoryContentsByQuery</value>
+        <read-only>true</read-only>
+      </preference>
+      <preference>
+        <name>sharedCache</name>
+        <value>true</value>
+        <read-only>false</read-only>
+      </preference>
+      <preference>
+        <name>workspace</name>
+        <value>collaboration</value>
+        <read-only>false</read-only>
+      </preference>
+      <preference>
+        <name>contentByQuery</name>
+        <value></value>
+        <read-only>false</read-only>
+      </preference>   
+    </portlet-preferences>
+  </portlet>
+  
    <portlet>
       <description xml:lang="EN">Administration Toolbar Portlet</description>
       <portlet-name>WCMAdminToolbarPortlet</portlet-name>
@@ -807,5 +1277,20 @@
      <filter-name>PortletFilterCache</filter-name>
      <portlet-name>ParameterizedContentListViewerPortlet</portlet-name>
    </filter-mapping>
+   
+   <filter-mapping>
+     <filter-name>PortletFilterCache</filter-name>
+     <portlet-name>ContentListViewerByQueryPortlet</portlet-name>
+   </filter-mapping>
+   
+   <filter-mapping>
+     <filter-name>PortletFilterCache</filter-name>
+     <portlet-name>CategoryNavigationByQueryPortlet</portlet-name>
+   </filter-mapping>
+
+   <filter-mapping>
+     <filter-name>PortletFilterCache</filter-name>
+     <portlet-name>CategoryContentsByQueryPortlet</portlet-name>
+   </filter-mapping>   
 
 </portlet-app>

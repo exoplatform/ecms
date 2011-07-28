@@ -61,8 +61,10 @@
       <ContentPath>Content path</ContentPath>
       <Up>Up</Up>
       <Down>Down</Down>
-      <UICLVConfigCacheManagementLabel>Cache Management</UICLVConfigCacheManagementLabel>
-	  <UICLVConfigCacheEnableRadioBoxInput>Share contents between users</UICLVConfigCacheEnableRadioBoxInput>      
+      <UICLVConfigCacheManagementLabel>Contents Visibility</UICLVConfigCacheManagementLabel>
+      <UICLVContentByQueryLabel>Contents by Query</UICLVContentByQueryLabel>
+      <UICLVConfigWorkspaceFormSelectBox>Workspace</UICLVConfigWorkspaceFormSelectBox>
+      <UICLVConfigContentByQueryTextArea>SQL Query</UICLVConfigContentByQueryTextArea>
     </label>
     <help>
     	<ModeSelectionHelp>Two modes are available to show contents. "By folder" will take all the contents available in the folder/category you choose ; "By Contents" lets you manually choose the contents you want to show</ModeSelectionHelp>
@@ -73,6 +75,8 @@
        	<ParameterHelp>This parameter will be used to get the contents if Dynamic Navigation is activated</ParameterHelp>
        	<ShowDetailInPageHelp>Clicking on a content redirects to a Detail page. You must have a "Content by URL" portlet with Dynamic navigation enabled on the target page to show the content</ShowDetailInPageHelp>    	
        	<DetailParameterHelp>This parameter will contain the path to the content in the link to the Detail page. This parameter must match the parameter used in the "Content by URL" portlet of the page.</DetailParameterHelp>
+       	<ContentByQueryHelp><![CDATA[You can set a SQL Query to get contents dynamically. The following parameters are allowed : ${user}, ${lang} or any get parameter (PARAM) surrounded by ${PARAM}.]]></ContentByQueryHelp>
+       	<ContentsVisibilityHelp>Restricted by Authentication will filter the contents based on the authentication. If you are logged out, you see public contents only. If you're logged in, you see all the contents visible by intranet users (but shared by all). Restricted by User roles means you will see the contents depending on your rights. In most cases, this option has no meaning and shouldn't be used as it reduces the overall performance.</ContentsVisibilityHelp>
     </help>
     <action>
       <Save>Save</Save>
@@ -174,8 +178,8 @@
   
   <UICLVConfigCacheEnableRadioBoxInput>
   	<label>
-	  <ENABLE>Enabled</ENABLE>
-	  <DISABLE>Disabled</DISABLE>
+	    <ENABLE>Restricted by Authentication</ENABLE>
+	    <DISABLE>Restricted by User roles</DISABLE>
   	</label>
   </UICLVConfigCacheEnableRadioBoxInput>  
 </bundle>
