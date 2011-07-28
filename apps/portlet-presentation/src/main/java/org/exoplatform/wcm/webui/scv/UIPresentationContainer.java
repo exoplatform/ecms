@@ -346,7 +346,7 @@ public class UIPresentationContainer extends UIContainer{
     String printPageUrl = portletPreferences.getValue(UISingleContentViewerPortlet.PRINT_PAGE, "");
     printParameterName = portletPreferences.getValue(UISingleContentViewerPortlet.PRINT_PARAMETER, "");
     String printUrl = portalURI + printPageUrl + "?" + printParameterName + "=/" + repository + "/"
-        + workspace + strPath + "&isPrint=true";
+        + workspace + strPath + "&isPrint=true&noadminbar=true";
     return printUrl;
   }
 
