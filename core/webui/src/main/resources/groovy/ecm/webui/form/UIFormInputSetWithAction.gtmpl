@@ -9,6 +9,7 @@
 %>
 <%
   import org.exoplatform.webui.form.UIFormRadioBoxInput ;
+  import org.exoplatform.webui.form.UIFormCheckBoxInput;
 %>
 <div class="$uicomponent.id UIFormInputSetWithAction  UIFormInputSet">
   <table class="UIFormGrid FormContainer">
@@ -27,7 +28,7 @@
           <tr >
                <%
                 String label = _ctx.appRes(formName + ".label." + inputEntry.getId()) ;
-                if(!label.equals(inputEntry.getId())) {
+                if(!label.equals(inputEntry.getId()) || inputEntry instanceof UIFormCheckBoxInput) {
               %>
                   <td class="FieldLabel"><%=label%></td>
                <%}%>
