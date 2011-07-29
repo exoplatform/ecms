@@ -111,7 +111,7 @@ public class NodeLocation extends ItemLocation {
    * @return a NodeLocation object
    */
   public static final NodeLocation parse(final String exp) {
-    String[] temp = exp.split(":");
+    String[] temp = split(exp, ":");
     if (temp.length == 3 && temp[2].indexOf("/") == 0) {
       return new NodeLocation(temp[0], temp[1], temp[2]);
     } 
@@ -154,7 +154,7 @@ public class NodeLocation extends ItemLocation {
    * @return a NodeLocation object
    */
   public static final NodeLocation getNodeLocationByExpression(final String exp) {
-    String[] temp = exp.split(":");
+    String[] temp = split(exp, ":");
     if (temp.length >= 3 && temp[2].indexOf("/") == 0) {
       String repository = temp[0];
       String workspace = temp[1];
@@ -347,5 +347,22 @@ public class NodeLocation extends ItemLocation {
            (workspace == null ? 0 : workspace.hashCode()) + 
            (uuid == null ? 0 : uuid.hashCode()) +
            (path == null ? 0 : path.hashCode());
+  }
+  
+  private static final String[] split(String s, String ch) {
+    String[] ss = new String[3];
+    int prev = 0;
+    int i=0;
+    while(true) {
+      int next = s.indexOf(ch, prev);
+      if (next==-1) {
+        ss[i] = s.substring(prev);
+        break;
+      }
+      ss[i++] = s.substring(prev, next);
+      prev = next+1;
+    }
+
+    return ss;
   }
 }
