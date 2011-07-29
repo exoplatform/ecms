@@ -94,6 +94,9 @@ public class NewUserListener extends UserEventListener {
       String statement = query.getQuery();
       Query queryNode = manager.createQuery(statement, language);
       String absPath = queriesHome.getPath() + "/" + queryName;
+      if (queriesHome.getSession().itemExists(absPath)) {
+        continue;
+      }
       Node node = queryNode.storeAsNode(absPath);
       if (!node.isNodeType("exo:datetime")) {
         node.addMixin("exo:datetime");
