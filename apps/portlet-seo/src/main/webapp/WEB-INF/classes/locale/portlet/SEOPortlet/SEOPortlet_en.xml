@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bundle>
   <UISEOForm>
-    <label>
-	  <title>Title: </title>
+    <label>	  
       <description>Description: </description>
       <keywords>Keywords: </keywords>
       <language>Language: </language>
@@ -44,6 +43,11 @@
       <UISEOForm>SEO Management</UISEOForm>
   	</title>
   </UISEOPopupWindow>    
+  <UISEOToolbarForm>
+  	<title>
+      <seo>SEO Management</seo>
+  	</title>
+  </UISEOToolbarForm>  
   <FloatNumberValidator>
     <msg>
       <Invalid-number>The field Priority is invalid float number.</Invalid-number>

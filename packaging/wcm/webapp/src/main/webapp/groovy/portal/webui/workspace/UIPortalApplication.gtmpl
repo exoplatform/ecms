@@ -56,7 +56,7 @@
   SEOService seoService = (SEOService)container.getComponentInstanceOfType(SEOService.class);
   if(seoService != null) {
 	  if(paramArray != null) {
-		  metaModel = seoService.getContentMetadata(paramArray, lang);
+		  metaModel = seoService.getContentMetadata(paramArray);
 		  if(metaModel != null) {
 		  	hasMetadata = true;
 		  	if(metaModel.getKeywords() != null && metaModel.getKeywords().length() > 0)
@@ -65,7 +65,7 @@
 		      description = metaModel.getDescription();	    
 		  }
 	  } else if(pageReference != null && pageReference.length() > 0) {
-	    metaModel = seoService.getPageMetadata(pageReference, lang);
+	    metaModel = seoService.getPageMetadata(pageReference);
 			if(metaModel != null) {
 			  hasMetadata = true;
 			  if(metaModel.getKeywords() != null && metaModel.getKeywords().length() > 0 && !metaModel.getKeywords().equals("null"))
@@ -73,9 +73,7 @@
 			  if(metaModel.getDescription() != null && metaModel.getDescription().length() > 0)
 			    description = metaModel.getDescription();
 			  if(metaModel.getRobotsContent() != null && metaModel.getRobotsContent().length() > 0)
-			    robots = metaModel.getRobotsContent();
-			  if(metaModel.getTitle() != null && metaModel.getTitle().length() > 0)
-			    title = metaModel.getTitle();
+			    robots = metaModel.getRobotsContent();			  
 			}
 	  }
   }

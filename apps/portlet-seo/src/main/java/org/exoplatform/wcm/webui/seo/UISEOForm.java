@@ -36,15 +36,12 @@ import org.exoplatform.webui.core.model.SelectItemOption;
 import org.exoplatform.portal.application.PortalRequestContext;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.wcm.webui.validator.FloatNumberValidator;
-import org.exoplatform.services.resources.LocaleConfig;
-import org.exoplatform.services.resources.LocaleConfigService;
 import org.exoplatform.services.seo.PageMetadataModel;
 import org.exoplatform.services.seo.SEOService;
 import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
-import java.util.Locale;
 import javax.jcr.Node;
 
 
@@ -61,12 +58,10 @@ import javax.jcr.Node;
                     @EventConfig(listeners = UISEOForm.SaveActionListener.class),
                     @EventConfig(phase=Phase.DECODE, listeners = UISEOForm.CancelActionListener.class) })
                  
-public class UISEOForm extends UIForm{
+public class UISEOForm extends UIForm{ 
   
-  public static final String TITLE                   = "title";
   public static final String DESCRIPTION             = "description";
-  public static final String KEYWORDS                = "keywords";
-  public static final String LANGUAGE                = "language";
+  public static final String KEYWORDS                = "keywords";  
   public static final String ROBOTS                  = "robots";
   public static final String SITEMAP                 = "sitemap";
   public static final String SITEMAP_VISIBLE         = "sitemapvisible";
@@ -74,10 +69,8 @@ public class UISEOForm extends UIForm{
   public static final String FREQUENCY               = "frequency";
   public static final String ROBOTS_INDEX            = "index";
   public static final String ROBOTS_FOLLOW           = "follow";
-  public static final String FREQUENCY_DEFAULT_VALUE = "Always";
-    
-  String title = "";
-  String lang = "";
+  public static final String FREQUENCY_DEFAULT_VALUE = "Always";    
+  
   String description = "";
   String keywords = "";
   String priority = "";
@@ -86,8 +79,7 @@ public class UISEOForm extends UIForm{
   String follow = "";
   boolean sitemap = true;
   
-  private static String contentPath = null;
-  private String contentParam = null;
+  private static String contentPath = null;  
   private boolean onContent = false;
   private ArrayList paramsArray = null;
   
@@ -117,17 +109,13 @@ public class UISEOForm extends UIForm{
     this.paramsArray = params;
   }
       
-  public UISEOForm() throws Exception {
-    PortalRequestContext context = Util.getPortalRequestContext();        
-    lang = context.getLocale().getLanguage();
+  public UISEOForm() throws Exception {    
     setActions(new String[]{"Save", "Cancel"});
   }
   
   public void initSEOForm(PageMetadataModel pageModel) throws Exception{
     
-    if(pageModel != null) {
-      title = pageModel.getTitle();
-      lang = pageModel.getLanguage();
+    if(pageModel != null) {      
       description = pageModel.getDescription();
       keywords = pageModel.getKeywords();
       frequency = pageModel.getFrequency();
@@ -142,11 +130,7 @@ public class UISEOForm extends UIForm{
     
     ExoContainer container = ExoContainerContext.getCurrentContainer() ;
     SEOService seoService = (SEOService)container.getComponentInstanceOfType(SEOService.class);
-        
-    UIFormStringInput uiTitle = new UIFormStringInput(TITLE, TITLE, null);
-    uiTitle.setValue(title);
-    addUIFormInput(uiTitle);
-    
+       
     UIFormTextAreaInput uiDescription = new UIFormTextAreaInput(DESCRIPTION, DESCRIPTION, null);
     uiDescription.setValue(description);
     addUIFormInput(uiDescription);
@@ -155,11 +139,6 @@ public class UISEOForm extends UIForm{
     uiKeywords.setValue(keywords);
     addUIFormInput(uiKeywords); 
     
-    List<SelectItemOption<String>> languageItemOptions = new ArrayList<SelectItemOption<String>>();
-    languageItemOptions = this.getLanguages();    
-    UIFormSelectBox languageSelectbox = new UIFormSelectBox(LANGUAGE, null, languageItemOptions);
-    languageSelectbox.setValue(lang);
-    addUIFormInput(languageSelectbox);
     if(!onContent) {
       List<SelectItemOption<String>> robotIndexItemOptions = new ArrayList<SelectItemOption<String>>();
       String robotsindexOptions = seoService.getRobotsIndexOptions();
@@ -218,33 +197,14 @@ public class UISEOForm extends UIForm{
     }
   }
   
-  public List<SelectItemOption<String>> getLanguages() {
-    List<SelectItemOption<String>> options = new ArrayList<SelectItemOption<String>>();
-    LocaleConfigService configService = getApplicationComponent(LocaleConfigService.class) ;
-    for (Object object : configService.getLocalConfigs())
-    {
-       LocaleConfig localeConfig = (LocaleConfig)object;
-       Locale locale = localeConfig.getLocale();
-       String lang = locale.getLanguage();
-       String country = locale.getCountry();
-       String optionLang = lang;
-       if (country != null && country.length() > 0) {
-          optionLang += "_" + country;
-       }          
-       options.add(new SelectItemOption<String>(optionLang, optionLang));
-    }
-    return options;
-  }
- 
+   
   public static class SaveActionListener extends EventListener<UISEOForm> {
  
     public void execute(Event<UISEOForm> event) throws Exception {
       UISEOForm uiForm = event.getSource();
-      UIApplication uiApp = uiForm.getAncestorOfType(UIApplication.class) ;
-      String title = uiForm.getUIStringInput(TITLE).getValue() ;
+      UIApplication uiApp = uiForm.getAncestorOfType(UIApplication.class) ;      
       String description = uiForm.getUIFormTextAreaInput(DESCRIPTION).getValue();      
-      String keywords = uiForm.getUIFormTextAreaInput(KEYWORDS).getValue() ;
-      String language = uiForm.getUIStringInput(LANGUAGE).getValue() ;
+      String keywords = uiForm.getUIFormTextAreaInput(KEYWORDS).getValue() ;      
       PortalRequestContext portalRequestContext = Util.getPortalRequestContext();
       String portalName = portalRequestContext.getPortalOwner();
       String uri = portalRequestContext.getRequestURI();
@@ -268,26 +228,22 @@ public class UISEOForm extends UIForm{
         String frequency = uiForm.getUIFormSelectBox(FREQUENCY).getValue() ;
         try {          
           PageMetadataModel metaModel = new PageMetadataModel();
-          metaModel.setTitle(title);
           metaModel.setDescription(description);
           metaModel.setFrequency(frequency);
-          metaModel.setKeywords(keywords);
-          metaModel.setLanguage(language);
+          metaModel.setKeywords(keywords);          
           metaModel.setPriority(priority);
           metaModel.setRobotsContent(rebots_content);
           metaModel.setSiteMap(isVisibleSitemap);
-          metaModel.setTitle(title);
           metaModel.setUri(uri);
           metaModel.setPageReference(pageReference);
-          if(title != null && description!= null && keywords != null && priority != -1)
+          if(description!= null && keywords != null && priority != -1)
             fullStatus = "Full";
           else fullStatus = "Partial";
           metaModel.setFullStatus(fullStatus);
           SEOService seoService = uiForm.getApplicationComponent(SEOService.class);
           seoService.storePageMetadata(metaModel, portalName,uiForm.onContent);
           UISEOToolbarPortlet uiSEOToolbar = uiForm.getAncestorOfType(UISEOToolbarPortlet.class);          
-          if(uiSEOToolbar != null) {
-            event.getRequestContext().addUIComponentToUpdateByAjax(uiSEOToolbar);
+          if(uiSEOToolbar != null) {            
             Utils.closePopupWindow(uiSEOToolbar, UISEOToolbarForm.SEO_POPUP_WINDOW);
           }         
         } catch (Exception ex) {   
@@ -299,14 +255,11 @@ public class UISEOForm extends UIForm{
       } else {
         try {                    
           PageMetadataModel metaModel = new PageMetadataModel();
-          metaModel.setTitle(title);
           metaModel.setDescription(description);          
           metaModel.setKeywords(keywords);
-          metaModel.setLanguage(language);          
-          metaModel.setTitle(title);
           metaModel.setUri(uri); 
           metaModel.setPageReference(pageReference);
-          if(title != null && description != null && keywords != null)
+          if(description != null && keywords != null)
             fullStatus = "Full";
           else fullStatus = "Partial";
           metaModel.setFullStatus(fullStatus);
@@ -320,8 +273,7 @@ public class UISEOForm extends UIForm{
           metaModel.setUri(contentNode.getUUID());
           seoService.storePageMetadata(metaModel, portalName, uiForm.onContent);
           UISEOToolbarPortlet uiSEOToolbar = uiForm.getAncestorOfType(UISEOToolbarPortlet.class);          
-          if(uiSEOToolbar != null) {
-            event.getRequestContext().addUIComponentToUpdateByAjax(uiSEOToolbar);
+          if(uiSEOToolbar != null) {            
             Utils.closePopupWindow(uiSEOToolbar, UISEOToolbarForm.SEO_POPUP_WINDOW);
           }          
         } catch (Exception ex) {

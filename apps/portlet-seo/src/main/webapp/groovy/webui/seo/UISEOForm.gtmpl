@@ -9,20 +9,12 @@
 		<div class="FormContainer">
 			<table class="UIFormGrid">
 			    <tr>
-			    	<td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.TITLE) %></td>
-			    	<td class="FieldComponent" colspan="2"><% uiform.renderField(uicomponent.TITLE) %></td>
-			    </tr>
-			    <tr>
 			    	<td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.DESCRIPTION) %></td>
 			    	<td class="FieldComponent" colspan="2"><% uiform.renderField(uicomponent.DESCRIPTION) %></td>
 			    </tr>
 			    <tr>
 			    	<td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.KEYWORDS) %></td>
 			    	<td class="FieldComponent" colspan="2"><% uiform.renderField(uicomponent.KEYWORDS) %></td>
-			    </tr>
-			    <tr>
-			    	<td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.LANGUAGE) %></td>
-			    	<td class="FieldComponent" colspan="2"><% uiform.renderField(uicomponent.LANGUAGE) %></td>
 			    </tr>
 			    <%if(!uicomponent.getOnContent()) {%>
 			    <tr>

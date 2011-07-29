@@ -74,41 +74,40 @@ public class UISEOToolbarForm extends UIForm {
   }
   
   public void processRender(WebuiRequestContext context) throws Exception {
-    super.processRender(context);
-    fullStatus = "Empty";    
-    metaModel = null;        
-    String contentParam = null;
-    onContent = false;  
-    paramsArray = null; 
-    PortalRequestContext pcontext = Util.getPortalRequestContext();
-    String portalName = pcontext.getPortalOwner();
-    if (!pcontext.useAjax()) {
-      Enumeration params = pcontext.getRequest().getParameterNames();   
-      Map paramsMap = pcontext.getRequest().getParameterMap();
-      if(params.hasMoreElements()) {
-        paramsArray = new ArrayList();
-        while(params.hasMoreElements()) {
-          contentParam = params.nextElement().toString(); 
-          paramsArray.add(pcontext.getRequestParameter(contentParam));          
-        }
-      } 
-    } 
-    String lang = pcontext.getLocale().getLanguage();
+		PortalRequestContext pcontext = Util.getPortalRequestContext();
+		String portalName = pcontext.getPortalOwner();
+		if (!pcontext.useAjax()) {
+			fullStatus = "Empty";
+			paramsArray = null;
+	    String contentParam = null;
+	      Enumeration params = pcontext.getRequest().getParameterNames();   
+	      Map paramsMap = pcontext.getRequest().getParameterMap();
+	      if(params.hasMoreElements()) {
+	        paramsArray = new ArrayList();
+	        while(params.hasMoreElements()) {
+	          contentParam = params.nextElement().toString(); 
+	          paramsArray.add(pcontext.getRequestParameter(contentParam));          
+	        }
+	      } 
+		}    
     ExoContainer container = ExoContainerContext.getCurrentContainer() ;
     SEOService seoService = (SEOService)container.getComponentInstanceOfType(SEOService.class);
     if(paramsArray != null) {
       onContent = true;
-      metaModel = seoService.getContentMetadata(paramsArray, lang);
+      metaModel = seoService.getContentMetadata(paramsArray);
     }
     else {
+    	onContent = false;
       pageReference = Util.getUIPortal().getSelectedUserNode().getPageRef(); 
       SiteKey siteKey = Util.getUIPortal().getSelectedUserNode().getNavigation().getKey();
       SiteKey portalKey = SiteKey.portal(portalName);
-      if(siteKey != null && siteKey.equals(portalKey)) metaModel = seoService.getPageMetadata(pageReference, lang);
+      if(siteKey != null && siteKey.equals(portalKey)) metaModel = seoService.getPageMetadata(pageReference);
       else fullStatus = "Disabled";
     }       
     if(metaModel != null) 
         fullStatus = metaModel.getFullStatus();  
+    
+    super.processRender(context);
   }
   
   public String getFullStatus() {

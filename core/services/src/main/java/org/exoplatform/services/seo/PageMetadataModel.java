@@ -23,10 +23,6 @@ package org.exoplatform.services.seo;
  * Jun 17, 2011  
  */
 public class PageMetadataModel {
-  
-  private String title = null;
- 
-  private String language = null;
  
   private String uri = null;
  
@@ -45,20 +41,6 @@ public class PageMetadataModel {
   private String fullStatus = null;
   
   private String pageReference = null;
-  
-  public String getLanguage() { 
-    if(language != null && language.length() > 0)
-      return language.trim();
-    return language;
-  }
-  public void setLanguage(String language) { this.language = language; }
- 
-  public String getTitle() {
-    if(title != null && title.length() > 0)
-      return title.trim();
-    return title; 
-  }
-  public void setTitle(String title) { this.title = title; }
  
   public String getUri() { 
     if(uri != null && uri.length() > 0)

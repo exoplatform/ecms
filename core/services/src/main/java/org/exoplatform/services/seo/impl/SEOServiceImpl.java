@@ -140,9 +140,7 @@ public class SEOServiceImpl implements SEOService {
     Session session = null;
     Node dummyNode = livePortalManagerService.getLivePortal(sessionProvider, portalName);
     String uri = metaModel.getUri(); 
-    String pageReference = metaModel.getPageReference();
-    String title = metaModel.getTitle();
-    String language = metaModel.getLanguage();
+    String pageReference = metaModel.getPageReference();   
     String keyword = metaModel.getKeywords();
     String description = metaModel.getDescription();
     String robots = metaModel.getRobotsContent();
@@ -164,8 +162,7 @@ public class SEOServiceImpl implements SEOService {
       seoNode = session.getNodeByUUID(uuid);
     }    
     if (seoNode.hasNode("exo:pageMetadata")) {      
-        Node node = seoNode.getNode("exo:pageMetadata");        
-        node.setProperty("exo:metaTitle", title);
+        Node node = seoNode.getNode("exo:pageMetadata");  
         node.setProperty("exo:metaKeywords", keyword);
         node.setProperty("exo:metaDescription", description);  
         node.setProperty("exo:metaFully", fullStatus);
@@ -176,19 +173,17 @@ public class SEOServiceImpl implements SEOService {
           node.setProperty("exo:metaFrequency", frequency);
           updateSiteMap(uri, priority, frequency, sitemap, portalName);
         }
-        String hash = getHash(pageReference, language);
+        String hash = getHash(pageReference);
         cache.put(hash, metaModel);     
     } else {      
       String hash = null;       
-      seoNode.addMixin("exo:pageMetadata");            
-      seoNode.setProperty("exo:metaTitle", title);
+      seoNode.addMixin("exo:pageMetadata");       
       seoNode.setProperty("exo:metaKeywords", keyword);
-      seoNode.setProperty("exo:metaDescription", description);
-      seoNode.setProperty("exo:metaLanguage", language);
+      seoNode.setProperty("exo:metaDescription", description);      
       seoNode.setProperty("exo:metaFully", fullStatus);        
       if(onContent) {
         seoNode.setProperty("exo:metaUri", seoNode.getUUID());
-        hash = getHash(seoNode.getUUID(), language);
+        hash = getHash(seoNode.getUUID());
       }
       else {
         seoNode.setProperty("exo:metaUri", pageReference);
@@ -197,7 +192,7 @@ public class SEOServiceImpl implements SEOService {
         seoNode.setProperty("exo:metaPriority", priority);
         seoNode.setProperty("exo:metaFrequency", frequency);  
         updateSiteMap(uri, priority, frequency, sitemap, portalName);
-        hash = getHash(pageReference, language);
+        hash = getHash(pageReference);
       }
       cache.put(hash, metaModel);  
     }
@@ -206,7 +201,7 @@ public class SEOServiceImpl implements SEOService {
   /**
    * {@inheritDoc}
    */
-  public PageMetadataModel getContentMetadata(ArrayList params, String pageLanguage) throws Exception {      
+  public PageMetadataModel getContentMetadata(ArrayList params) throws Exception {      
     PageMetadataModel metaModel = null; 
     String pageUri = null;
     Node contentNode = null;
@@ -214,23 +209,20 @@ public class SEOServiceImpl implements SEOService {
       contentNode = this.getContentNode(params.get(i).toString());
       if(contentNode != null) break;
     }     
-    String hash = getHash(contentNode.getUUID(), pageLanguage);    
+    if(contentNode == null)
+    	return null;
+    String hash = getHash(contentNode.getUUID());    
     if(cache.get(hash) != null) 
       metaModel = (PageMetadataModel)cache.get(hash);     
     if(metaModel == null) {
       if(contentNode.hasNode("exo:pageMetadata")) {
-        metaModel = new PageMetadataModel();   
-        metaModel.setLanguage(pageLanguage);
+        metaModel = new PageMetadataModel(); 
         metaModel.setUri(pageUri);
-        Node currentNode = contentNode.getNode("exo:pageMetadata");
-        if (currentNode.hasProperty("exo:metaTitle"))       
-          metaModel.setTitle((currentNode.getProperty("exo:metaTitle")).getString());      
+        Node currentNode = contentNode.getNode("exo:pageMetadata");             
         if (currentNode.hasProperty("exo:metaKeywords"))       
           metaModel.setKeywords((currentNode.getProperty("exo:metaKeywords")).getString());
         if (currentNode.hasProperty("exo:metaDescription"))       
-          metaModel.setDescription((currentNode.getProperty("exo:metaDescription")).getString());
-        if (currentNode.hasProperty("exo:metaLanguage"))       
-          metaModel.setLanguage((currentNode.getProperty("exo:metaLanguage")).getString());        
+          metaModel.setDescription((currentNode.getProperty("exo:metaDescription")).getString());                
         if (currentNode.hasProperty("exo:metaRobots"))       
           metaModel.setRobotsContent((currentNode.getProperty("exo:metaRobots")).getString());      
         if (currentNode.hasProperty("exo:metaSitemap"))       
@@ -249,9 +241,9 @@ public class SEOServiceImpl implements SEOService {
   /**
    * {@inheritDoc}
    */
-  public PageMetadataModel getPageMetadata(String pageUri, String pageLanguage) throws Exception {      
+  public PageMetadataModel getPageMetadata(String pageUri) throws Exception {      
     PageMetadataModel metaModel = null;     
-    String hash = getHash(pageUri, pageLanguage);    
+    String hash = getHash(pageUri);    
     if(cache.get(hash) != null) 
       metaModel = (PageMetadataModel)cache.get(hash);     
     if(metaModel == null) {
@@ -262,15 +254,11 @@ public class SEOServiceImpl implements SEOService {
       
       if(pageNode.hasNode("exo:pageMetadata")) {
         Node currentNode = pageNode.getNode("exo:pageMetadata");
-        metaModel = new PageMetadataModel();
-        if (currentNode.hasProperty("exo:metaTitle"))       
-          metaModel.setTitle((currentNode.getProperty("exo:metaTitle")).getString());      
+        metaModel = new PageMetadataModel();        
         if (currentNode.hasProperty("exo:metaKeywords"))       
           metaModel.setKeywords((currentNode.getProperty("exo:metaKeywords")).getString());
         if (currentNode.hasProperty("exo:metaDescription"))       
-          metaModel.setDescription((currentNode.getProperty("exo:metaDescription")).getString());
-        if (currentNode.hasProperty("exo:metaLanguage"))       
-          metaModel.setLanguage((currentNode.getProperty("exo:metaLanguage")).getString());        
+          metaModel.setDescription((currentNode.getProperty("exo:metaDescription")).getString());         
         if (currentNode.hasProperty("exo:metaRobots"))       
           metaModel.setRobotsContent((currentNode.getProperty("exo:metaRobots")).getString());      
         if (currentNode.hasProperty("exo:metaSitemap"))       
@@ -294,10 +282,9 @@ public class SEOServiceImpl implements SEOService {
     Session session = this.getSession(sessionProvider);
     String pageUri = "";
     if(onContent) pageUri = getStandardURL(metaModel.getUri());
-    else pageUri = metaModel.getPageReference();       
-    String language = metaModel.getLanguage();    
+    else pageUri = metaModel.getPageReference();  
     String query = "select * from exo:pageMetadata  WHERE exo:metaUri LIKE '"
-      + pageUri + " AND exo:metaLanguage LIKE " + "'" + language + "'";
+      + pageUri + "'";
     QueryManager queryManager = session.getWorkspace()
     .getQueryManager();
     QueryImpl queryImp = (QueryImpl) queryManager.createQuery(query,
@@ -313,7 +300,7 @@ public class SEOServiceImpl implements SEOService {
       session.save();
     }
     //Remove metadata for this uri from cache
-    String hash = getHash(pageUri, language);
+    String hash = getHash(pageUri);
     cache.remove(hash);
   }  
   
@@ -487,7 +474,7 @@ public class SEOServiceImpl implements SEOService {
     }
     
     if(sitemapData != null && sitemapData.length() > 0) {
-      String hash = getHash(portalName, null);
+      String hash = getHash(portalName);
       cache.put(hash, sitemapData);
     }
     session.save();
@@ -497,7 +484,7 @@ public class SEOServiceImpl implements SEOService {
    */
   public String getSitemap(String portalName) throws Exception {
     String sitemapContent = null;
-    String hash = getHash(portalName, null);
+    String hash = getHash(portalName);
     if(cache.get(hash) != null)     
       sitemapContent = (String)cache.get(hash);   
         
@@ -543,9 +530,8 @@ public class SEOServiceImpl implements SEOService {
    * @return
    * @throws Exception
    */
-  private String getHash(String uri,  String language) throws Exception{
-    String key = uri;
-    if(language != null) key += "&&" + language;
+  private String getHash(String uri) throws Exception{
+    String key = uri;    
     return MessageDigester.getHash(key);
   }
   

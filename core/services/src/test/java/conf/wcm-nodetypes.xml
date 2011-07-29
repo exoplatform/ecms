@@ -264,9 +264,6 @@
       <supertype>nt:base</supertype>
     </supertypes>
     <propertyDefinitions>
-      <propertyDefinition name="exo:metaTitle" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
-        <valueConstraints />
-      </propertyDefinition>
       <propertyDefinition name="exo:metaKeywords" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
         <valueConstraints />
       </propertyDefinition>
@@ -275,10 +272,7 @@
       </propertyDefinition>
       <propertyDefinition name="exo:metaUri" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
         <valueConstraints />
-      </propertyDefinition>
-      <propertyDefinition name="exo:metaLanguage" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
-        <valueConstraints />
-      </propertyDefinition>
+      </propertyDefinition>      
       <propertyDefinition name="exo:metaRobots" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
         <valueConstraints />
       </propertyDefinition>

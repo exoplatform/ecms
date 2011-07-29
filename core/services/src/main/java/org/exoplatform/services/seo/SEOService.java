@@ -23,7 +23,7 @@ public interface SEOService {
    * @return
    * @throws Exception
    */  
-  public PageMetadataModel getPageMetadata(String pageUri, String pageLanguage) throws Exception;
+  public PageMetadataModel getPageMetadata(String pageUri) throws Exception;
   /**
    * Returns metadata by language of a content page 
    * 
@@ -32,7 +32,7 @@ public interface SEOService {
    * @return
    * @throws Exception
    */  
-  public PageMetadataModel getContentMetadata(ArrayList params, String pageLanguage) throws Exception;
+  public PageMetadataModel getContentMetadata(ArrayList params) throws Exception;
   /**
    * Remove metadata of page
    * 
