@@ -97,7 +97,17 @@
 		  </portlet-application>
 		</container>
 		
-	</container>
-	
+		<container id="SEOToolbarPortlet" template="system:/groovy/portal/webui/container/UIContainer.gtmpl">
+  	      <portlet-application>
+        	  <portlet>
+                <application-ref>seo</application-ref>
+                <portlet-ref>SEOToolbarPortlet</portlet-ref>
+              </portlet>
+              <access-permissions>*:/platform/administrators; editor:/platform/web-contributors</access-permissions>
+              <show-info-bar>false</show-info-bar>
+          </portlet-application>
+        </container>
+		
+	</container>	
 	<site-body/>
 </container>

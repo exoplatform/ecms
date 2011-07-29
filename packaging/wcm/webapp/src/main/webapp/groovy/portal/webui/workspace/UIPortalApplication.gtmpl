@@ -3,10 +3,21 @@
            "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <%
   import org.exoplatform.portal.application.PortalRequestContext ;
-	import org.exoplatform.webui.core.UIComponent;
-	import java.util.Iterator;
-	import org.exoplatform.portal.webui.portal.UIPortal ;
-	import org.exoplatform.portal.config.model.PortalProperties ;
+  import org.exoplatform.webui.core.UIComponent;
+  import java.util.Iterator;
+  import org.exoplatform.portal.config.model.PortalProperties ;
+  import org.exoplatform.services.seo.SEOService;
+  import org.exoplatform.services.seo.PageMetadataModel;
+  import org.exoplatform.container.ExoContainer;
+  import org.exoplatform.container.ExoContainerContext;
+  import java.util.Enumeration;
+  import java.util.Map; 
+   import java.util.ArrayList;  
+  import org.exoplatform.portal.mop.user.UserNode;
+  import org.exoplatform.portal.webui.portal.UIPortal;
+  import org.exoplatform.portal.webui.util.Util;
+  import org.exoplatform.portal.webui.workspace.UIPortalApplication;
+  import org.exoplatform.portal.webui.workspace.UIWorkingWorkspace;
 		
   def rcontext = _ctx.getRequestContext() ;
   String docBase =  rcontext.getRequestContextPath() ;  
@@ -17,6 +28,57 @@
   def lang = uicomponent.getLocale().getLanguage();
   def title = rcontext.getTitle();
   def metaInformation = rcontext.getMetaInformation();
+  def pcontext = (PortalRequestContext)rcontext;  
+  
+  UserNode currentNode = Util.getUIPortal().getSelectedUserNode();
+  String pageReference = currentNode.getPageRef();
+  ExoContainer container = ExoContainerContext.getCurrentContainer() ;
+  
+  def contentParam = "";
+  def contentPath = "";
+  ArrayList paramArray = null;
+  if (!pcontext.useAjax()) {
+  	Enumeration params = pcontext.getRequest().getParameterNames();   
+  	Map paramsMap = pcontext.getRequest().getParameterMap();
+  	if(params.hasMoreElements()) {
+  		paramArray = new ArrayList();
+    	while(params.hasMoreElements()) {
+      		contentParam = params.nextElement().toString();
+      		paramArray.add(pcontext.getRequestParameter(contentParam)); 
+    	}
+  	} 
+  }    
+  boolean hasMetadata = false;
+  def keywords = "";
+  def description = "";
+  def robots = "";
+  PageMetadataModel metaModel = null;
+  SEOService seoService = (SEOService)container.getComponentInstanceOfType(SEOService.class);
+  if(seoService != null) {
+	  if(paramArray != null) {
+		  metaModel = seoService.getContentMetadata(paramArray, lang);
+		  if(metaModel != null) {
+		  	hasMetadata = true;
+		  	if(metaModel.getKeywords() != null && metaModel.getKeywords().length() > 0)
+		  	  keywords = metaModel.getKeywords();
+		    if(metaModel.getDescription() !=null && metaModel.getDescription().length() > 0)
+		      description = metaModel.getDescription();	    
+		  }
+	  } else if(pageReference != null && pageReference.length() > 0) {
+	    metaModel = seoService.getPageMetadata(pageReference, lang);
+			if(metaModel != null) {
+			  hasMetadata = true;
+			  if(metaModel.getKeywords() != null && metaModel.getKeywords().length() > 0 && !metaModel.getKeywords().equals("null"))
+			    keywords = metaModel.getKeywords();
+			  if(metaModel.getDescription() != null && metaModel.getDescription().length() > 0)
+			    description = metaModel.getDescription();
+			  if(metaModel.getRobotsContent() != null && metaModel.getRobotsContent().length() > 0)
+			    robots = metaModel.getRobotsContent();
+			  if(metaModel.getTitle() != null && metaModel.getTitle().length() > 0)
+			    title = metaModel.getTitle();
+			}
+	  }
+  }
 %>
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="$lang" lang="$lang" dir="$dir">
@@ -24,7 +86,20 @@
     <title><%=title%></title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <%
-    	if(metaInformation!= null) {
+        if(hasMetadata) {
+          if(keywords != null && keywords.length() >0) {
+	        %>
+	          <meta name="keywords" content="<%=keywords%>" />
+	        <% }
+          if(description != null && description.length() >0) {
+          %>
+          	<meta name="description" content="<%=description%>" />
+          <% }
+          if(robots != null && robots.length() >0) {
+          %>
+          	<meta name="robots" content="<%=robots%>" />
+          <% }
+        } else if(metaInformation!= null) {
 	    	Iterator<String> keys = metaInformation.keySet().iterator();
 	    	while(keys.hasNext()) {
 	    		String metaName = keys.next();

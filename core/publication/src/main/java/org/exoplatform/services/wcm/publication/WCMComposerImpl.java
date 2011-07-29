@@ -45,6 +45,7 @@ import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.core.WCMService;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.picocontainer.Startable;
+import org.exoplatform.ecm.utils.MessageDigester;
 
 /**
  * The Class WCMComposerImpl.

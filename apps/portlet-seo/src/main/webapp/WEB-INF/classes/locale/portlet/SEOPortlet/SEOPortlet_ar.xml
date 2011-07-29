@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UISEOForm>
+    <label>
+	  <title>Title: </title>
+      <description>Description: </description>
+      <keywords>Keywords: </keywords>
+      <language>Language: </language>
+      <robots>Robots: </robots>
+      <sitemap>Sitemap: </sitemap>
+      <sitemapvisible>Visible in sitemap</sitemapvisible>
+      <priority>Priority: </priority>
+      <frequency>Frequency: </frequency>  
+      <option>
+        <Always>Always</Always>
+        <Hourly>Hourly</Hourly>
+        <Daily>Daily</Daily>
+        <Weekly>Weekly</Weekly>
+        <Monthly>Monthly</Monthly>
+        <Yearly>Yearly</Yearly>
+        <Never>Never</Never>
+      </option>    
+      <option>
+      	<en>English</en>
+        <fr>French</fr>
+        <ru>Russian</ru>
+        <vi>Vietnamese</vi>
+        <nl>Dutch</nl>
+        <de>German</de>
+        <uk>Ukrainian</uk>
+        <ar>Arabic</ar>
+      </option>
+    </label>
+    <action>
+      <Save>Save</Save>
+      <Cancel>Cancel</Cancel>
+    </action>
+    <msg>
+      <repository-exception>An unexpected error occurred! Cannot save page meta data.</repository-exception>	
+    </msg>
+  </UISEOForm>
+  <UISEOPopupWindow>
+  	<title>
+      <UISEOForm>SEO Management</UISEOForm>
+  	</title>
+  </UISEOPopupWindow>  
+  <FloatNumberValidator>
+    <msg>
+      <Invalid-number>The field '{0}' is invalid float number.</Invalid-number>
+    </msg>
+  </FloatNumberValidator>
+</bundle>

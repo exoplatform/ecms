@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bundle>
+  <UISEOForm>
+    <label>
+	  <title>Tiêu đề: </title>
+      <description>Mô tả: </description>
+      <keywords>Từ khóa: </keywords>
+      <language>Ngôn ngữ: </language>
+      <robots>Robots: </robots>
+      <sitemap>Sitemap: </sitemap>
+      <sitemapvisible>Hiển thị trên sitemap</sitemapvisible>
+      <priority>Độ ưu tiên: </priority>
+      <frequency>Tần suất: </frequency>  
+      <option>
+        <Always>Luôn luôn</Always>
+        <Hourly>Hàng giờ</Hourly>
+        <Daily>Hàng ngày</Daily>
+        <Weekly>Hàng tuần</Weekly>
+        <Monthly>Hàng tháng</Monthly>
+        <Yearly>Hàng năm</Yearly>
+        <Never>Không bao giờ</Never>        
+      </option>    
+      <option>
+      	<en>Tiếng Anh</en>
+        <fr>Tiếng Pháp</fr>
+        <ru>Tiếng Nga</ru>
+        <vi>Tiếng Việt Nam</vi>
+        <nl>Dutch</nl>
+        <de>German</de>
+        <uk>Ukrainian</uk>
+        <ar>Arabic</ar>
+      </option>
+    </label>
+    <action>
+      <Save>Save</Save>
+      <Cancel>Cancel</Cancel>
+    </action>
+    <msg>
+      <repository-exception>An unexpected error occurred! Cannot save page meta data.</repository-exception>	
+    </msg>
+  </UISEOForm>
+  <UISEOPopupWindow>
+  	<title>
+      <UISEOForm>SEO Management</UISEOForm>
+  	</title>
+  </UISEOPopupWindow> 
+  <FloatNumberValidator>
+    <msg>
+      <Invalid-number>The field '{0}' is invalid float number.</Invalid-number>
+    </msg>
+  </FloatNumberValidator> 
+</bundle>

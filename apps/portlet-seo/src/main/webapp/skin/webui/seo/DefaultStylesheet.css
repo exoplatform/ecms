@@ -1,0 +1,18 @@
+.UIForm .UIFormGrid td.FieldComponent {
+  padding: 4px;
+  text-align: left;
+  vertical-align: middle;
+}
+.UIForm .HorizontalLayout input {
+  width: 235px;
+}
+.UIForm .HorizontalLayout select {
+  width: auto;
+  min-width: 100px;
+}
+.UIForm .HorizontalLayout selectbox {
+  width: auto;
+}
+.UIForm .HorizontalLayout a {
+  padding: 0px;
+}

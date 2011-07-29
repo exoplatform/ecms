@@ -20,5 +20,6 @@
     <module>portlet-search</module>
     <module>resources-wcm</module>
     <module>resources-static</module>
+    <module>portlet-seo</module>
   </modules>
 </project>

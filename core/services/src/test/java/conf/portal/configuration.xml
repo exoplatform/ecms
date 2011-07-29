@@ -259,6 +259,25 @@
       </value-param>            
     </init-params>    
   </component> 
+	
+  <component>
+    <key>org.exoplatform.services.seo.SEOService</key>  
+    <type>org.exoplatform.services.seo.impl.SEOServiceImpl</type>
+    <init-params>
+      <value-param>
+        <name>robotsindex</name>
+        <value>index, noindex</value>
+      </value-param>
+      <value-param>
+        <name>robotsfollow</name>
+        <value>follow, nofollow</value>
+      </value-param>
+      <value-param>
+        <name>frequency</name>
+        <value>Always, Hourly, Daily, Weekly, Monthly, Yearly, Never</value>
+      </value-param>	
+    </init-params>
+  </component>	
 	  
   <external-component-plugins>
     <target-component>org.exoplatform.services.cms.lock.LockService</target-component>     

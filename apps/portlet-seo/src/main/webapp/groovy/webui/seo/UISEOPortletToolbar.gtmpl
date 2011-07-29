@@ -1,0 +1,24 @@
+<div class="UISEOToolbarPorlet">
+<%
+	def seo_icon = "seo_red.png";
+	def fullStatus = uicomponent.getFullStatus();
+	
+	if(fullStatus.equals("Full"))
+	  seo_icon = "seo_green.png";
+	else if(fullStatus.equals("Partial"))
+	  seo_icon = "seo_orange.png";
+	else if(fullStatus.equals("Empty"))
+	  seo_icon = "seo_red.png";
+	else if(fullStatus.equals("Disabled"))
+	  seo_icon = "seo_gray.png";
+%>
+<% uiform.begin() %>
+	<div class="SEO">	
+	  <%if(fullStatus.equals("Disabled")) {%>
+		<a style="cursor: pointer; display: block;line-height: 32px; padding: 0 10px 0 25px;"><img src="/seo/skin/webui/seo/DefaultSkin/icons/${seo_icon}" width="16" height="16" border="0"></a>
+	  <%} else {%>	
+	    <a onclick="<%=uicomponent.event("AddSEO")%>" style="cursor: pointer; display: block;line-height: 32px; padding: 0 10px 0 25px;"><img src="/seo/skin/webui/seo/DefaultSkin/icons/${seo_icon}" width="16" height="16" border="0"></a>
+	  <%}%>  
+	</div>
+<% uiform.end() %>
+</div>

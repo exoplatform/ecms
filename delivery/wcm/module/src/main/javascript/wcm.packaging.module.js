@@ -46,6 +46,10 @@ function getModule(params) {
     addDependency(new Project("org.exoplatform.ecms", "exo-ecms-core-services", "jar",  module.version));
   module.portlet.formgenerator.deployName = "formgenerator";
 
+	module.portlet.seo = new Project("org.exoplatform.ecms", "exo-ecms-apps-portlet-seo", "exo-portlet", module.version).
+    addDependency(new Project("org.exoplatform.ecms", "exo-ecms-core-services", "jar",  module.version));
+  module.portlet.seo.deployName = "seo";      
+
   module.gadget = {};
   module.gadget.favorites = new Project("org.exoplatform.ecms", "exo-ecms-apps-gadget-favorites", "war", module.version);    
   module.gadget.favorites.deployName = "favorites";
@@ -71,7 +75,7 @@ function getModule(params) {
 
   module.extension = {};
   
-  module.extension.war = new Project("org.exoplatform.ecms", "exo-ecms-packaging-wcm-webapp", "war", module.version);
+  module.extension.war = new Project("org.exoplatform.ecms", "exo-ecms-packaging-wcm-webapp", "war", module.version);  
   module.extension.war.deployName = "ecm-wcm-extension";	      	    
 
   module.demo = {};
@@ -81,7 +85,7 @@ function getModule(params) {
   module.demo.portal.deployName = "ecmdemo";	      
     
   module.demo.rest = new Project("org.exoplatform.ecms", "exo-ecms-packaging-ecmdemo-rest-webapp", "war", module.version);
-  module.demo.rest.deployName = "rest-ecmdemo";	      
+  module.demo.rest.deployName = "rest-ecmdemo";		
 
   module.server = {};
   module.server.tomcat = {};
