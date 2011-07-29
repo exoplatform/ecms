@@ -375,9 +375,28 @@
        </para>
             </listitem>
           </itemizedlist>
-          <para>
-      <emphasis role="bold">Advanced</emphasis> link: When clicking on this link, the Advanced pane will be shown. If <emphasis role="bold">Contextual Content</emphasis> property is set as &quot;Disable&quot;, the Advanced pane is closed by default .The content should enable “dynamic navigation” that interprets the URL and shows a content.
-     </para>
+            <para>
+                <emphasis role="bold">Advanced</emphasis>
+                link: When clicking on this link, the Advanced pane will be shown.
+            </para>
+            <itemizedlist>
+                <listitem>
+                    <para><guilabel>Contextual Content</guilabel>: If
+                        <emphasis role="bold">Contextual Content</emphasis>
+                        property is set as &quot;Disable&quot;, the Advanced pane is closed by default. The content
+                        should
+                        enable “dynamic navigation” that interprets the URL and shows a content.
+                    </para>
+                </listitem>
+                <listitem>
+                    <para>
+                        <guilabel>Cache Management</guilabel>: By default, the
+                        <guilabel>Share contents between users</guilabel>
+                        property is set as &quot;Enable&quot;, it means that the contents displayed in CLV or SCV are
+                        got from one cache shared between all users.
+                    </para>
+                </listitem>
+            </itemizedlist>
           <note>
             <para>
        Click the 
