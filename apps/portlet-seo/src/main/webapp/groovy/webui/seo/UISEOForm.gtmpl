@@ -3,7 +3,7 @@
   def rcontext = _ctx.getRequestContext();  
   def jsManager = rcontext.getJavascriptManager();  
 %>
-<div class="UIForm $uicomponent.id">
+<div class="$uicomponent.id">
 	<%uiform.begin()%>
 	<div class="HorizontalLayout">
 		<div class="FormContainer">

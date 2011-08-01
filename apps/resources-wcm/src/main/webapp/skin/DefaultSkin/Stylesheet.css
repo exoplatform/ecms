@@ -35,6 +35,8 @@
 @import url('inline-editing/Stylesheet.css');
 
 @import url('wcm-publication/Stylesheet.css');
+@import url('seo/Stylesheet.css');
+
 
 .FL {
 	float: left;
