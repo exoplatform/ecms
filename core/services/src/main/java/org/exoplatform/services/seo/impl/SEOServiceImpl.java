@@ -36,6 +36,7 @@ import org.exoplatform.services.seo.PageMetadataModel;
 import org.exoplatform.services.seo.SEOService;
 import org.exoplatform.services.wcm.portal.LivePortalManagerService;
 import org.exoplatform.services.jcr.RepositoryService;
+import org.exoplatform.services.jcr.config.WorkspaceEntry;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.impl.core.query.QueryImpl;
@@ -197,6 +198,15 @@ public class SEOServiceImpl implements SEOService {
       cache.put(hash, metaModel);  
     }
     session.save();
+  }
+  public PageMetadataModel getMetadata(ArrayList params, String pageReference) throws Exception {
+  	PageMetadataModel metaModel = null; 
+  	if(params != null) {
+  		metaModel = getContentMetadata(params);
+  	} else {
+  		metaModel = getPageMetadata(pageReference);
+  	}
+  	return metaModel;
   }
   /**
    * {@inheritDoc}
@@ -552,15 +562,29 @@ public class SEOServiceImpl implements SEOService {
         String repo = arrPath[0];
         String ws = arrPath[1];
         if(repo != null && ws != null) {
+        	boolean isWs = false;
           String nodePath = tmpPath.substring(tmpPath.indexOf(ws) + ws.length(),tmpPath.length());
           if(nodePath != null && nodePath.length() > 0) {
-            ManageableRepository manageRepo = WCMCoreUtils.getRepository();
-            Session session = WCMCoreUtils.getUserSessionProvider().getSession(ws, manageRepo) ;            
-            if(session.getItem(nodePath).isNode()) {
-              seoNode = (Node)session.getItem(nodePath);
+            ManageableRepository manageRepo = WCMCoreUtils.getRepository();      
+            ArrayList wsList = manageRepo.getConfiguration().getWorkspaceEntries();
+            for(int i = 0; i< wsList.size(); i++) {
+            	WorkspaceEntry wsEntry = (WorkspaceEntry)wsList.get(i);
+            	if(wsEntry.getName().equals(ws)) {
+            		isWs = true;
+            		break;
+            	}
             }
-          }
-        }
+            if(isWs) {
+              Session session = WCMCoreUtils.getUserSessionProvider().getSession(ws, manageRepo) ;
+              nodePath = nodePath.replaceAll("//", "/");
+              if(session.getItem(nodePath) != null) {
+	              if(session.getItem(nodePath).isNode()) {
+	                seoNode = (Node)session.getItem(nodePath);
+	              }
+              }
+            }
+          } 
+        } 
       }
     }      
     return seoNode;

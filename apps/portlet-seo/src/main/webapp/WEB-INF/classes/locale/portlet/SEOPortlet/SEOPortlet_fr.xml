@@ -44,6 +44,11 @@
       <UISEOForm>SEO Management</UISEOForm>
   	</title>
   </UISEOPopupWindow>
+  <UISEOToolbarForm>
+  	<title>
+      <seo>SEO Management</seo>
+  	</title>
+  </UISEOToolbarForm>
   <FloatNumberValidator>
     <msg>
       <Invalid-number>The field '{0}' is invalid float number.</Invalid-number>

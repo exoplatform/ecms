@@ -1,24 +1,14 @@
 <div class="UISEOToolbarPorlet">
-<%
-	def seo_icon = "seo_red.png";
-	def fullStatus = uicomponent.getFullStatus();
-	
-	if(fullStatus.equals("Full"))
-	  seo_icon = "seo_green.png";
-	else if(fullStatus.equals("Partial"))
-	  seo_icon = "seo_orange.png";
-	else if(fullStatus.equals("Empty"))
-	  seo_icon = "seo_red.png";
-	else if(fullStatus.equals("Disabled"))
-	  seo_icon = "seo_gray.png";
+<%	
+	def fullStatus = uicomponent.getFullStatus() + ".png";	
 	def seo_title = (String)_ctx.appRes(uicomponent.getId() + ".title.seo");
 %>
 <% uiform.begin() %>
 	<div class="SEO">	
 	  <%if(fullStatus.equals("Disabled")) {%>
-		<a title="<%=seo_title%>" style="cursor: pointer; display: block;line-height: 32px; padding: 0 20px 0 5px;"><img src="/seo/skin/webui/seo/DefaultSkin/icons/${seo_icon}" width="16" height="16" border="0"></a>
+		<a style="cursor: pointer; display: auto; line-height: 32px; padding: 0 20px 0 5px;" title="<%=seo_title%>"><img src="/seo/skin/webui/seo/DefaultSkin/icons/${fullStatus}"></a>
 	  <%} else {%>	
-	    <a title="<%=seo_title%>" onclick="<%=uicomponent.event("AddSEO")%>" style="cursor: pointer; display: block;line-height: 32px; padding: 0 20px 0 5px;"><img src="/seo/skin/webui/seo/DefaultSkin/icons/${seo_icon}" width="16" height="16" border="0"></a>
+	    <a style="cursor: pointer; display: auto; line-height: 32px; padding: 0 20px 0 5px;" title="<%=seo_title%>" onclick="<%=uicomponent.event("AddSEO")%>"><img src="/seo/skin/webui/seo/DefaultSkin/icons/${fullStatus}"></a>
 	  <%}%>  
 	</div>
 <% uiform.end() %>

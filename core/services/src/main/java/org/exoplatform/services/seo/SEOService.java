@@ -15,6 +15,7 @@ public interface SEOService {
    * @throws Exception
    */
   public void storePageMetadata(PageMetadataModel metaModel, String portalName, boolean onContent) throws Exception;
+  public PageMetadataModel getMetadata(ArrayList params, String pageReference) throws Exception;
   /**
    * Returns metadata by language of a portal page 
    * 
@@ -23,7 +24,7 @@ public interface SEOService {
    * @return
    * @throws Exception
    */  
-  public PageMetadataModel getPageMetadata(String pageUri) throws Exception;
+  public PageMetadataModel getPageMetadata(String pageReference) throws Exception;
   /**
    * Returns metadata by language of a content page 
    * 

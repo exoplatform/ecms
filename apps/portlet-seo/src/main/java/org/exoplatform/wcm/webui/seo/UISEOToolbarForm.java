@@ -37,6 +37,7 @@ import org.exoplatform.webui.form.UIForm;
 import org.exoplatform.wcm.webui.seo.UISEOForm;
 import org.exoplatform.portal.mop.SiteKey;
 import java.util.ArrayList;
+import javax.jcr.Node;
 /**
  * Created by The eXo Platform SAS
  * Author : eXoPlatform
@@ -65,8 +66,18 @@ public class UISEOToolbarForm extends UIForm {
   public static class AddSEOActionListener extends EventListener<UISEOToolbarForm> {
     public void execute(Event<UISEOToolbarForm> event) throws Exception {
       UISEOToolbarForm uiSEOToolbar = event.getSource();
-      UISEOForm uiSEOForm = uiSEOToolbar.createUIComponent(UISEOForm.class, null, null);            
-      uiSEOForm.setOnContent(onContent);
+      UISEOForm uiSEOForm = uiSEOToolbar.createUIComponent(UISEOForm.class, null, null);
+      ExoContainer container = ExoContainerContext.getCurrentContainer() ;
+      SEOService seoService = (SEOService)container.getComponentInstanceOfType(SEOService.class);
+      if(paramsArray != null) {
+      	for(int i = 0;i < paramsArray.size();i++) {
+          Node contentNode = seoService.getContentNode(paramsArray.get(i).toString());
+          if(contentNode != null) {
+          	uiSEOForm.setOnContent(true);
+          	break;
+          }
+        }     
+      } else uiSEOForm.setOnContent(false);
       uiSEOForm.setParamsArray(paramsArray);
       uiSEOForm.initSEOForm(uiSEOToolbar.metaModel);      
       Utils.createPopupWindow(uiSEOToolbar, uiSEOForm, SEO_POPUP_WINDOW, 500);
@@ -76,6 +87,7 @@ public class UISEOToolbarForm extends UIForm {
   public void processRender(WebuiRequestContext context) throws Exception {
 		PortalRequestContext pcontext = Util.getPortalRequestContext();
 		String portalName = pcontext.getPortalOwner();
+		metaModel = null;
 		if (!pcontext.useAjax()) {
 			fullStatus = "Empty";
 			paramsArray = null;
@@ -92,7 +104,24 @@ public class UISEOToolbarForm extends UIForm {
 		}    
     ExoContainer container = ExoContainerContext.getCurrentContainer() ;
     SEOService seoService = (SEOService)container.getComponentInstanceOfType(SEOService.class);
-    if(paramsArray != null) {
+    pageReference = Util.getUIPortal().getSelectedUserNode().getPageRef();
+    
+    if(pageReference != null) {
+    	SiteKey siteKey = Util.getUIPortal().getSelectedUserNode().getNavigation().getKey();
+      SiteKey portalKey = SiteKey.portal(portalName);
+      if(siteKey != null && siteKey.equals(portalKey)) {
+      	metaModel = seoService.getPageMetadata(pageReference);
+      	if(paramsArray != null) {
+      		PageMetadataModel tmpModel = seoService.getContentMetadata(paramsArray);
+      		if(tmpModel != null) {
+            metaModel = tmpModel;
+      		}
+      	}
+      }
+      else fullStatus = "Disabled";
+    }
+    
+    /*if(paramsArray != null) {
       onContent = true;
       metaModel = seoService.getContentMetadata(paramsArray);
     }
@@ -103,10 +132,10 @@ public class UISEOToolbarForm extends UIForm {
       SiteKey portalKey = SiteKey.portal(portalName);
       if(siteKey != null && siteKey.equals(portalKey)) metaModel = seoService.getPageMetadata(pageReference);
       else fullStatus = "Disabled";
-    }       
-    if(metaModel != null) 
-        fullStatus = metaModel.getFullStatus();  
+    }*/
     
+    if(metaModel != null) 
+        fullStatus = metaModel.getFullStatus();    
     super.processRender(context);
   }
   
