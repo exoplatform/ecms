@@ -160,6 +160,21 @@ To register your UI Action, do as follows:
             <field name="component">
               <string>org.exoplatform.wcm.manager.cache.UIWCMCacheManagerComponent</string>
             </field>
+            <field name="extendedFilters">
+               <collection type="java.util.ArrayList">
+                  <value>
+                    <object type="org.exoplatform.webui.ext.filter.impl.UserACLFilter">
+                       <field name="permissions">
+                          <collection type="java.util.ArrayList" item-type="java.lang.String">
+                             <value>
+                                <string>*:/platform/administrators</string>
+                              </value>
+                          </collection>
+                       </field>
+                    </object>
+                  </value>
+               </collection>
+            </field>
           </object>
         </object-param>
       </init-params>
@@ -167,6 +182,7 @@ To register your UI Action, do as follows:
   </external-component-plugins>
 </configuration>
 {code}
+{note}With this configuration, only the users with the _{noformat}*:/platform/administrators{noformat}_ membership have the right to access the CacheView item.{note}
 
 *2.* Launch *mvn clean install*.
 
