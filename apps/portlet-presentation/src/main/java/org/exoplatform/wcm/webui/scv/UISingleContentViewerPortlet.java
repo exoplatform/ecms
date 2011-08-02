@@ -243,7 +243,7 @@ public class UISingleContentViewerPortlet extends UIPortletApplication {
 
     // make filter
     UserNodeFilterConfig.Builder filterConfigBuilder = UserNodeFilterConfig.builder();
-    filterConfigBuilder.withAuthorizationCheck().withVisibility(Visibility.DISPLAYED, Visibility.TEMPORAL);
+    filterConfigBuilder.withReadWriteCheck().withVisibility(Visibility.DISPLAYED, Visibility.TEMPORAL);
     filterConfigBuilder.withTemporalCheck();
     UserNodeFilterConfig filterConfig = filterConfigBuilder.build();
 
