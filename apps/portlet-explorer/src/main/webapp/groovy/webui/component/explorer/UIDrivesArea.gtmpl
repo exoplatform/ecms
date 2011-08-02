@@ -34,7 +34,7 @@
 				<%
 				    } else {
 				%>
-				      <div class="IconDrives${drive.workspace} DriveIcon" onclick="<%=uicomponent.event("SelectDrive","${drive.name}")%>"><span></span></div>
+				      <div class="IconDrivesDefault IconDrives${drive.workspace} DriveIcon" onclick="<%=uicomponent.event("SelectDrive","${drive.name}")%>"><span></span></div>
  				      <a class="DriveLabel" href="<%=uicomponent.event("SelectDrive", Utils.formatNodeName(drive.getName()))%>"><%=uicomponent.getLabel(drive.getName())%></a>
 				<%      
 				    }

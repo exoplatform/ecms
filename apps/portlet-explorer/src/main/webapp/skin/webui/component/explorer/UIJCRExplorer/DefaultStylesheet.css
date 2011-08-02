@@ -1288,6 +1288,11 @@
 	cursor: pointer;
 }
 
+.UIJCRExplorer .UIDrivesArea .IconDrivesDefault{
+	background: url('DefaultSkin/background/DefaultDriveIcon.gif') no-repeat;
+	height: 23px;
+}
+
 .UIJCRExplorer .UIDrivesArea .IconDrivessystem{
 	background: url('DefaultSkin/background/IconDrivesArea.gif') no-repeat left top;
 	height: 23px;
