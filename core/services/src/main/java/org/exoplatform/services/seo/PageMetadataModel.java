@@ -25,6 +25,8 @@ package org.exoplatform.services.seo;
 public class PageMetadataModel {
  
   private String uri = null;
+  
+  //private String pageParent = null;
  
   private String rbcontent = null;
  
@@ -48,6 +50,13 @@ public class PageMetadataModel {
     return uri; 
   }
   public void setUri(String uri) { this.uri = uri; }
+  
+  /*public String getPageParent() { 
+    if(pageParent != null && pageParent.length() > 0)
+      return pageParent.trim();
+    return pageParent; 
+  }
+  public void setPageParent(String pageParent) { this.pageParent = pageParent; }*/
  
   public String getRobotsContent() { 
     if(rbcontent != null && rbcontent.length() > 0)

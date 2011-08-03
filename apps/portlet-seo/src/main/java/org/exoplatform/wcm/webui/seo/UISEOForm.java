@@ -45,7 +45,6 @@ import org.exoplatform.services.log.Log;
 import javax.jcr.Node;
 
 
-
 /**
  * Created by The eXo Platform SAS
  * Author : eXoPlatform
@@ -64,6 +63,7 @@ public class UISEOForm extends UIForm{
   public static final String KEYWORDS                = "keywords";  
   public static final String ROBOTS                  = "robots";
   public static final String SITEMAP                 = "sitemap";
+  public static final String ISINHERITED             = "isInherited";
   public static final String SITEMAP_VISIBLE         = "sitemapvisible";
   public static final String PRIORITY                = "priority";
   public static final String FREQUENCY               = "frequency";
@@ -78,10 +78,13 @@ public class UISEOForm extends UIForm{
   String index = "";
   String follow = "";
   boolean sitemap = true;
+  boolean inherited = false;
   
   private static String contentPath = null;  
   private boolean onContent = false;
+  private boolean isInherited = false;
   private ArrayList paramsArray = null;
+  //private String pageParent = null;
   
   private static final Log LOG  = ExoLogger.getLogger("seo.UISEOForm");
   
@@ -101,6 +104,14 @@ public class UISEOForm extends UIForm{
     this.onContent = onContent;
   }
   
+  public boolean getIsInherited() {
+  	return this.isInherited;
+  }
+  
+  public void setIsInherited(boolean isInherited) {
+  	this.isInherited = isInherited;
+  }
+  
   public ArrayList getParamsArray() { 
     return this.paramsArray;
   }
@@ -108,6 +119,13 @@ public class UISEOForm extends UIForm{
   public void setParamsArray(ArrayList params) {
     this.paramsArray = params;
   }
+  
+  /*public String getPageParent() { 
+    if(pageParent != null && pageParent.length() > 0)
+      return pageParent.trim();
+    return pageParent; 
+  }
+  public void setPageParent(String pageParent) { this.pageParent = pageParent; }*/
       
   public UISEOForm() throws Exception {    
     setActions(new String[]{"Save", "Cancel"});
@@ -139,7 +157,15 @@ public class UISEOForm extends UIForm{
     uiKeywords.setValue(keywords);
     addUIFormInput(uiKeywords); 
     
-    if(!onContent) {
+    if(!onContent) {    	
+    	/*if(pageParent != null) {
+    		if(seoService.getPageMetadata(pageParent) != null && pageModel == null) {
+    			setIsInherited(true);
+    			UIFormCheckBoxInput<Boolean> isInherited = new UIFormCheckBoxInput<Boolean>(ISINHERITED, ISINHERITED, null);
+    			isInherited.setChecked(inherited);
+          addUIFormInput(isInherited);
+    		}
+    	}*/
       List<SelectItemOption<String>> robotIndexItemOptions = new ArrayList<SelectItemOption<String>>();
       String robotsindexOptions = seoService.getRobotsIndexOptions();
       String robotsfollowOptions = seoService.getRobotsFollowOptions();
@@ -209,12 +235,13 @@ public class UISEOForm extends UIForm{
       String portalName = portalRequestContext.getPortalOwner();
       String uri = portalRequestContext.getRequestURI();
       String fullStatus = null;
-      String pageReference = Util.getUIPortal().getSelectedUserNode().getPageRef();      
+      String pageReference = Util.getUIPortal().getSelectedUserNode().getPageRef(); 
+      
       if(!uiForm.onContent) {              
         String robots_index = uiForm.getUIFormSelectBox(ROBOTS_INDEX).getValue() ;
         String robots_follow = uiForm.getUIFormSelectBox(ROBOTS_FOLLOW).getValue() ;
         String rebots_content = robots_index + ", " + robots_follow;           
-        boolean isVisibleSitemap = uiForm.getUIFormCheckBoxInput(SITEMAP).isChecked();
+        boolean isVisibleSitemap = uiForm.getUIFormCheckBoxInput(SITEMAP).isChecked();        
         float priority = -1;
         if(uiForm.getUIStringInput(PRIORITY).getValue() != null && uiForm.getUIStringInput(PRIORITY).getValue().length() > 0) {
           priority = Float.parseFloat(uiForm.getUIStringInput(PRIORITY).getValue()) ;
@@ -240,8 +267,13 @@ public class UISEOForm extends UIForm{
             fullStatus = "Full";
           else fullStatus = "Partial";
           metaModel.setFullStatus(fullStatus);
+          /*if(uiForm.isInherited) {
+          	if(uiForm.getUIFormCheckBoxInput(ISINHERITED).isChecked())
+          		metaModel.setPageParent(uiForm.pageParent);
+          }*/
+          	
           SEOService seoService = uiForm.getApplicationComponent(SEOService.class);
-          seoService.storePageMetadata(metaModel, portalName,uiForm.onContent);
+          seoService.storePageMetadata(metaModel, portalName, uiForm.onContent);
           UISEOToolbarPortlet uiSEOToolbar = uiForm.getAncestorOfType(UISEOToolbarPortlet.class);          
           if(uiSEOToolbar != null) {            
             Utils.closePopupWindow(uiSEOToolbar, UISEOToolbarForm.SEO_POPUP_WINDOW);

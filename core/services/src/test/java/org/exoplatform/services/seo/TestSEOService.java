@@ -51,20 +51,18 @@ public class TestSEOService extends BaseWCMTestCase{
    * test store
    * @throws Exception
    */
-  public void testStoreMetadata() throws Exception {
-    /*PageMetadataModel metaModel = new PageMetadataModel();
-    metaModel.setLanguage("fr");
+  public void testStorePageMetadata() throws Exception {
+   /*PageMetadataModel metaModel = new PageMetadataModel();
     metaModel.setUri("home");
     metaModel.setPageReference("home");
     metaModel.setKeywords("test");
-    metaModel.setTitle("test");
     metaModel.setRobotsContent("index,follow");
     metaModel.setSiteMap(true);
     metaModel.setDescription("test description");
     metaModel.setPriority(0);
     seoService.storePageMetadata(metaModel,"classic",false);
-    PageMetadataModel retrieveModel = seoService.getPageMetadata("home", "fr");
-    assertEquals(retrieveModel.getLanguage(), "fr");*/  
+    PageMetadataModel retrieveModel = seoService.getPageMetadata("home");
+    assertEquals(retrieveModel.getKeywords(), "test");*/  
   }
   
   /**

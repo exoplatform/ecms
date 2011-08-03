@@ -8,6 +8,7 @@
       <robots>Robots: </robots>
       <sitemap>Sitemap: </sitemap>
       <sitemapvisible>Visible in sitemap</sitemapvisible>
+	  <isInherited>Inherited from parent page</isInherited>
       <priority>Priority: </priority>
       <frequency>Frequency: </frequency>  
       <option>

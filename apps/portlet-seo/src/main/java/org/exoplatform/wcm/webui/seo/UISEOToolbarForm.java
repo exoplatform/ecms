@@ -53,8 +53,8 @@ public class UISEOToolbarForm extends UIForm {
   
   /** The Constant SEO_POPUP_WINDOW. */
   public static final String SEO_POPUP_WINDOW = "UISEOPopupWindow";
-  private static boolean onContent = false;
-  private static ArrayList paramsArray = null;
+  private static ArrayList<String> paramsArray = null;
+  //private static String pageParent = null;
   private String pageReference = null;  
   PageMetadataModel metaModel = null;
   private String fullStatus = "Empty";
@@ -67,6 +67,7 @@ public class UISEOToolbarForm extends UIForm {
     public void execute(Event<UISEOToolbarForm> event) throws Exception {
       UISEOToolbarForm uiSEOToolbar = event.getSource();
       UISEOForm uiSEOForm = uiSEOToolbar.createUIComponent(UISEOForm.class, null, null);
+      String params = event.getRequestContext().getRequestParameter(OBJECTID);      
       ExoContainer container = ExoContainerContext.getCurrentContainer() ;
       SEOService seoService = (SEOService)container.getComponentInstanceOfType(SEOService.class);
       if(paramsArray != null) {
@@ -79,8 +80,21 @@ public class UISEOToolbarForm extends UIForm {
         }     
       } else uiSEOForm.setOnContent(false);
       uiSEOForm.setParamsArray(paramsArray);
-      uiSEOForm.initSEOForm(uiSEOToolbar.metaModel);      
-      Utils.createPopupWindow(uiSEOToolbar, uiSEOForm, SEO_POPUP_WINDOW, 500);
+      //uiSEOForm.setPageParent(uiSEOToolbar.pageParent);
+      uiSEOForm.initSEOForm(uiSEOToolbar.metaModel);
+      int top = -1;
+      int left = -1;
+      if(params != null && params.length() > 0) {
+      	String[] arrCoordinate = params.split(",");
+      	if(arrCoordinate != null && arrCoordinate.length == 2) {
+      		top = Integer.parseInt(arrCoordinate[0]);
+      		left = Integer.parseInt(arrCoordinate[1]);
+      	}
+      }
+      if(top > -1 && left > -1)
+      	Utils.createPopupWindow(uiSEOToolbar, uiSEOForm, SEO_POPUP_WINDOW, 400, top, left);
+      else
+      	Utils.createPopupWindow(uiSEOToolbar, uiSEOForm, SEO_POPUP_WINDOW, 400);
     }
   }
   
@@ -93,9 +107,8 @@ public class UISEOToolbarForm extends UIForm {
 			paramsArray = null;
 	    String contentParam = null;
 	      Enumeration params = pcontext.getRequest().getParameterNames();   
-	      Map paramsMap = pcontext.getRequest().getParameterMap();
 	      if(params.hasMoreElements()) {
-	        paramsArray = new ArrayList();
+	        paramsArray = new ArrayList<String>();
 	        while(params.hasMoreElements()) {
 	          contentParam = params.nextElement().toString(); 
 	          paramsArray.add(pcontext.getRequestParameter(contentParam));          
@@ -111,6 +124,7 @@ public class UISEOToolbarForm extends UIForm {
       SiteKey portalKey = SiteKey.portal(portalName);
       if(siteKey != null && siteKey.equals(portalKey)) {
       	metaModel = seoService.getPageMetadata(pageReference);
+      	//pageParent = Util.getUIPortal().getSelectedUserNode().getParent().getPageRef();
       	if(paramsArray != null) {
       		PageMetadataModel tmpModel = seoService.getContentMetadata(paramsArray);
       		if(tmpModel != null) {

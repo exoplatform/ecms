@@ -16,7 +16,13 @@
 			    	<td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.KEYWORDS) %></td>
 			    	<td class="FieldComponent" colspan="2"><% uiform.renderField(uicomponent.KEYWORDS) %></td>
 			    </tr>
-			    <%if(!uicomponent.getOnContent()) {%>
+			    <%if(!uicomponent.getOnContent()) { 
+			        if(uicomponent.getIsInherited()) {%>
+			        <tr>
+			    	    <td class="FieldLabel"></td>
+			    	    <td class="FieldComponent" colspan="2"><% uiform.renderField(uicomponent.ISINHERITED) %> <span style="vertical-align: middle;"><%=uicomponent.getLabel(uicomponent.ISINHERITED) %></span></td>
+			        </tr>
+			        <%}%>
 			    <tr>
 			    	<td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.ROBOTS) %></td>
 			    	<td class="FieldComponent"><% uiform.renderField(uicomponent.ROBOTS_INDEX) %></td>

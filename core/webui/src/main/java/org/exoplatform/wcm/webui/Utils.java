@@ -455,6 +455,25 @@ public class Utils {
     WebuiRequestContext requestContext = WebuiRequestContext.getCurrentInstance();
     requestContext.addUIComponentToUpdateByAjax(popupContainer);
   }
+  
+  
+  public static void createPopupWindow(UIContainer container,
+      UIComponent component,
+      String popupWindowId,
+      int width, int top, int left) throws Exception {
+		UIPopupContainer popupContainer = getPopupContainer(container);
+		popupContainer.removeChildById(popupWindowId);
+		UIPopupWindow popupWindow = popupContainer.addChild(UIPopupWindow.class, null, popupWindowId);
+		popupWindow.setUIComponent(component);
+		popupWindow.setWindowSize(width, 0);
+		popupWindow.setShow(true);
+		popupWindow.setRendered(true);
+		popupWindow.setResizable(true);
+		popupWindow.setCoordindate(top, left);
+		WebuiRequestContext requestContext = WebuiRequestContext.getCurrentInstance();
+		requestContext.addUIComponentToUpdateByAjax(popupContainer);
+	}  
+  
 
   /**
    * Close popup window.
