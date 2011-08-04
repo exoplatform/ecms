@@ -39,13 +39,14 @@ import org.exoplatform.services.jcr.access.AccessControlEntry;
 import org.exoplatform.services.jcr.access.PermissionType;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.jcr.impl.core.query.QueryImpl;
 import org.exoplatform.services.jcr.sessions.ACLSessionProviderService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.core.WCMService;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.picocontainer.Startable;
-import org.exoplatform.ecm.utils.MessageDigester;
 
 /**
  * The Class WCMComposerImpl.
@@ -169,10 +170,17 @@ public class WCMComposerImpl implements WCMComposer, Startable {
     String visibility = filters.get(FILTER_VISIBILITY);
     String remoteUser = null;
     String repository = null;
+    if (WCMComposer.VISIBILITY_PUBLIC.equals(visibility)) {
+      remoteUser = "##PUBLIC##VISIBILITY";
+    } else {
+      try {
+        remoteUser = Util.getPortalRequestContext().getRemoteUser();
+      } catch (Exception e) {}
+    }
     try {
-      remoteUser = Util.getPortalRequestContext().getRemoteUser();
       repository = ((ManageableRepository)repositoryService.getCurrentRepository()).getConfiguration().getName();
     } catch (Exception e) {}
+
 
     if (workspace==null) {
       if (nodeIdentifier.lastIndexOf("/") == 0) nodeIdentifier = nodeIdentifier.substring(1);
@@ -229,9 +237,13 @@ public class WCMComposerImpl implements WCMComposer, Startable {
     String primaryType = filters.get(FILTER_PRIMARY_TYPE);
     String visibility = filters.get(FILTER_VISIBILITY);    
     String remoteUser = null;
-    try {
-      remoteUser = Util.getPortalRequestContext().getRemoteUser();
-    } catch (Exception e) {}
+    if (WCMComposer.VISIBILITY_PUBLIC.equals(visibility)) {
+      remoteUser = "##PUBLIC##VISIBILITY";
+    } else {
+      try {
+        remoteUser = Util.getPortalRequestContext().getRemoteUser();
+      } catch (Exception e) {}
+    }
 
     if (MODE_EDIT.equals(mode) && "publication:liveDate".equals(orderBy)) {
       orderBy = "exo:dateModified";
@@ -253,7 +265,7 @@ public class WCMComposerImpl implements WCMComposer, Startable {
         sessionProvider = aclSessionProviderService.getACLSessionProvider(getAnyUserACL());
       }
       if (log.isDebugEnabled()) log.debug("##### "+path+":"+version+":"+remoteUser+":"+orderBy+":"+orderType);
-      NodeIterator nodeIterator = getViewableContents(workspace, path, filters, sessionProvider);
+      NodeIterator nodeIterator = getViewableContents(workspace, path, filters, sessionProvider, false);
     
       Node node = null, viewNode = null;
       while (nodeIterator != null && nodeIterator.hasNext()) {
@@ -271,6 +283,68 @@ public class WCMComposerImpl implements WCMComposer, Startable {
     return nodes;
   }
 
+  public Result getPaginatedContents(NodeLocation nodeLocation, HashMap<String, String> filters, SessionProvider sessionProvider) throws Exception {
+    String path = nodeLocation.getPath();
+    String workspace = nodeLocation.getWorkspace();
+    
+    String mode = filters.get(FILTER_MODE);
+    String version = filters.get(FILTER_VERSION);
+    String orderBy = filters.get(FILTER_ORDER_BY);
+    String orderType = filters.get(FILTER_ORDER_TYPE);
+    String language = filters.get(FILTER_LANGUAGE);
+    String recursive = filters.get(FILTER_RECURSIVE);
+    String primaryType = filters.get(FILTER_PRIMARY_TYPE);
+    long offset = (filters.get(FILTER_OFFSET)!=null)?new Long(filters.get(FILTER_OFFSET)):0;
+    long totalSize = (filters.get(FILTER_TOTAL)!=null)?new Long(filters.get(FILTER_TOTAL)):0;
+    
+    String remoteUser = null;
+    try {
+      remoteUser = Util.getPortalRequestContext().getRemoteUser();
+    } catch (Exception e) {}
+
+    if (MODE_EDIT.equals(mode) && "publication:liveDate".equals(orderBy)) {
+      orderBy = "exo:dateModified";
+      filters.put(FILTER_ORDER_BY, orderBy);
+    }
+    if (MODE_LIVE.equals(mode) && "exo:title".equals(orderBy)) {
+      orderBy = "exo:titlePublished "+orderType+", exo:title";
+      filters.put(FILTER_ORDER_BY, orderBy);
+    }
+
+    if (MODE_LIVE.equals(mode) && isCached && offset==0) {
+      String hash = getHash(path, version, remoteUser, language, recursive, orderBy, orderType, primaryType);
+      Result cachedNodes = (Result)cache.get(hash);
+      if (cachedNodes != null) return cachedNodes;
+    }
+    if (log.isDebugEnabled()) log.debug("##### "+path+":"+version+":"+remoteUser+":"+orderBy+":"+orderType);
+
+    NodeIterator nodeIterator ;
+    if (totalSize==0) {
+      SessionProvider systemProvider = WCMCoreUtils.getSystemSessionProvider();
+      nodeIterator = getViewableContents(workspace, path, filters, systemProvider, false);
+      totalSize = nodeIterator.getSize();
+    }
+
+    nodeIterator = getViewableContents(workspace, path, filters, sessionProvider, true);
+    List<Node> nodes = new ArrayList<Node>();
+    Node node = null, viewNode = null;
+    while (nodeIterator.hasNext()) {
+      node = nodeIterator.nextNode();
+      viewNode = getViewableContent(node, filters);
+      if (viewNode != null) {
+        nodes.add(viewNode);
+      }
+    }
+    Result result = new Result(nodes, offset, totalSize, nodeLocation, filters);
+
+    if (MODE_LIVE.equals(mode) && isCached && offset==0 ) {
+      String hash = getHash(path, version, remoteUser, language, recursive, orderBy, orderType, primaryType);
+//     cache.remove(hash);
+      cache.put(hash, result);
+    }
+    return result;
+  }
+  
   /*
    * (non-Javadoc)
    * @see
@@ -280,7 +354,7 @@ public class WCMComposerImpl implements WCMComposer, Startable {
   private NodeIterator getViewableContents(String workspace,
                                            String path,
                                            HashMap<String, String> filters,
-                                           SessionProvider sessionProvider) throws Exception {
+                                           SessionProvider sessionProvider, boolean paginated) throws Exception {
     ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
     Session session = sessionProvider.getSession(workspace, manageableRepository);
     QueryManager manager = session.getWorkspace().getQueryManager();
@@ -328,6 +402,16 @@ public class WCMComposerImpl implements WCMComposer, Startable {
       statement.append(orderFilter);
     }
     Query query = manager.createQuery(statement.toString(), Query.SQL);
+
+    if (paginated) {
+      long offset = (filters.get(FILTER_OFFSET)!=null)?new Long(filters.get(FILTER_OFFSET)):0;
+      long limit = (filters.get(FILTER_LIMIT)!=null)?new Long(filters.get(FILTER_LIMIT)):0;
+      if (limit>0) {
+        ((QueryImpl)query).setOffset(offset);
+        ((QueryImpl)query).setLimit(limit);
+      }
+    }
+
     return query.execute().getNodes();
   }
 
@@ -782,14 +866,14 @@ public class WCMComposerImpl implements WCMComposer, Startable {
                          String orderBy,
                          String orderType,
                          String primaryType) throws Exception {
-    String key = path;
-    if (version!=null) key += "::"+version;
-    if (remoteUser!=null) key += ";;"+remoteUser;
-    if (language!=null) key += ",,"+language;
-    if (orderBy!=null) key += "??"+orderBy;
-    if (orderType!=null) key += "!!"+orderType;
-    if (primaryType!=null) key += "))"+primaryType;
-      return MessageDigester.getHash(key);
+    StringBuffer key = new StringBuffer(path);
+    if (version!=null) key.append("::").append(version);
+    if (remoteUser!=null) key.append(";;").append(remoteUser);
+    if (language!=null) key.append(",,").append(language);
+    if (orderBy!=null) key.append("??").append(orderBy);
+    if (orderType!=null) key.append("!!").append(orderType);
+    if (primaryType!=null) key.append("))").append(primaryType);
+      return key.toString();//MessageDigester.getHash(key.toString());
   }
 
   private void addUsedLanguage(String lang) {

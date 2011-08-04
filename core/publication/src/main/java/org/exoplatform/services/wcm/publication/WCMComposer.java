@@ -22,6 +22,7 @@ import java.util.List;
 import javax.jcr.Node;
 
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.wcm.core.NodeLocation;
 
 /**
  * This class is responsible of getting contents inside the WCM product.
@@ -70,6 +71,15 @@ public interface WCMComposer {
   /** Filter parameter to execute a specific query. ex: "SELECT * from nt:base"*/
   public final static String FILTER_QUERY_FULL = "filter-query-full";
 
+  /** Filter parameter to limit the result size */
+  public final static String FILTER_LIMIT = "filter-limit";
+
+  /** Filter parameter to return the result with an offset delimiter */
+  public final static String FILTER_OFFSET = "filter-offset";
+
+  /** Total number of contents */
+  public final static String FILTER_TOTAL = "filter-total-number";
+
   /** Filter parameter to filter results by visibility. ex: public, user*/
   public final static String FILTER_VISIBILITY = "filter-visibility";
 
@@ -99,7 +109,7 @@ public interface WCMComposer {
    *
    * @param repository the repository
    * @param workspace the workspace
-   * @param path the path
+   * @param nodeIdentifier the path
    * @param filters the filters
    * @param sessionProvider the session provider
    *
@@ -166,12 +176,28 @@ public interface WCMComposer {
                                 HashMap<String, String> filters,
                                 SessionProvider sessionProvider) throws Exception;
   
+ /**
+  * returns contents at the specified path based on filters.
+  *
+  * @param nodeLocation the content location
+  * @param filters the filters
+  * @param sessionProvider the session provider
+  *
+  * @return a jcr node
+  *
+  * @throws Exception the exception
+  */
+ public Result getPaginatedContents(NodeLocation nodeLocation, 
+                                                             HashMap<String, String> filters, 
+                                                             SessionProvider sessionProvider) throws Exception ;
+  
+  
   /**
    * Update content.
    *
    * @param repository the repository
    * @param workspace the workspace
-   * @param path the path
+   * @param nodeIdentifier the path 
    * @param filters the filters
    *
    * @return true, if successful
