@@ -143,10 +143,18 @@ public class UICLVPresentation extends UIContainer {
   public List<CategoryBean> getCategories(String primaryType) throws Exception {
     String fullPath = this.getAncestorOfType(UICLVPortlet.class).getFolderPath();
     return getCategories(fullPath, primaryType, 0);
+  }
 
+  public List<CategoryBean> getCategories(boolean withChildren) throws Exception {
+   String fullPath = this.getAncestorOfType(UICLVPortlet.class).getFolderPath();
+   return getCategories(fullPath, "exo:taxonomy", 0, withChildren);
   }
 
   public List<CategoryBean> getCategories(String fullPath, String primaryType, int depth) throws Exception {
+    return getCategories(fullPath,  primaryType,  depth, true);
+  }
+  
+  public List<CategoryBean> getCategories(String fullPath, String primaryType, int depth, boolean withChildren) throws Exception {
     if (fullPath == null || fullPath.length() == 0) {
       return null;
     }
@@ -194,9 +202,11 @@ public class UICLVPresentation extends UIContainer {
                                           depth,
                                           total);
       NodeLocation catLocation = NodeLocation.getNodeLocationByNode(node);
-      List<CategoryBean> childs = getCategories(catLocation.toString(), primaryType, depth + 1);
-      if (childs != null && childs.size() > 0)
-        cat.setChilds(childs);
+      if (withChildren) {
+        List<CategoryBean> childs = getCategories(catLocation.toString(), primaryType, depth + 1);
+        if (childs != null && childs.size() > 0)
+          cat.setChilds(childs);
+      }
       // System.out.println(cat.getName()+"::"+cat.getPath()+"::"+cat.getTitle()+"::"+cat.isSelected()+"::"+cat.getDepth());
       categories.add(cat);
 
@@ -324,7 +334,9 @@ public class UICLVPresentation extends UIContainer {
    */
   public String getTitle(Node node) throws Exception {
     String title = null;
-    if (node.hasNode("jcr:content")) {
+    if (node.hasProperty("exo:title")) {
+      title = node.getProperty("exo:title").getValue().getString();
+    } else if (node.hasNode("jcr:content")) {
       Node content = node.getNode("jcr:content");
       if (content.hasProperty("dc:title")) {
         try {
@@ -332,8 +344,6 @@ public class UICLVPresentation extends UIContainer {
         } catch (Exception ex) {
         }
       }
-    } else if (node.hasProperty("exo:title")) {
-      title = node.getProperty("exo:title").getValue().getString();
     }
     if (title == null) {
       if (node.isNodeType("nt:frozenNode")) {
