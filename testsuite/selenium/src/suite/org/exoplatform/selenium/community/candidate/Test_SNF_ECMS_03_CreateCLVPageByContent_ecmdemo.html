@@ -98,12 +98,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[contains(text(),'Next')]</td>
+	<td>//a[contains(text(),'Next')]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[contains(text(),'Next')]</td>
+	<td>//a[contains(text(),'Next')]</td>
 	<td></td>
 </tr>
 <tr>
@@ -113,12 +113,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[contains(text(),'Next')]</td>
+	<td>//a[contains(text(),'Next')]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[contains(text(),'Next')]</td>
+	<td>//a[contains(text(),'Next')]</td>
 	<td></td>
 </tr>
 <tr>
@@ -149,7 +149,7 @@
 <tr>
 	<td>dragAndDropToObject</td>
 	<td>//div[text()='Content List']</td>
-	<td>//div[@id='UIPagePreview']/div[@class='UIPage']//div[@class='UIComponentBlock']</td>
+	<td>UIPage</td>
 </tr>
 <tr>
 	<td>echo</td>
@@ -283,16 +283,6 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@onclick='eXo.ecm.ECS.insertMultiContent();']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>//div[@onclick='eXo.ecm.ECS.insertMultiContent();']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
 	<td>link=Save</td>
 	<td></td>
 </tr>
@@ -309,6 +299,16 @@
 <tr>
 	<td>click</td>
 	<td>//div[@id=&quot;UICLVPortlet&quot;]//a[contains(text(),&quot;OK&quot;)]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Save</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Save</td>
 	<td></td>
 </tr>
 <tr>
@@ -368,12 +368,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=Page Management</td>
+	<td>link=Pages Manager</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>link=Page Management</td>
+	<td>link=Pages Manager</td>
 	<td></td>
 </tr>
 <tr>
@@ -383,18 +383,18 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>searchTerm</td>
+	<td>pageTitle</td>
 	<td></td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>searchTerm</td>
+	<td>pageTitle</td>
 	<td>Test_SNF_ECMS_03</td>
 </tr>
 <tr>
 	<td>select</td>
 	<td>searchOption</td>
-	<td>label=Title</td>
+	<td>label=portal</td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
