@@ -78,12 +78,12 @@ public class UICLVManualMode extends UICLVContainer {
     int itemsPerPage = Integer.parseInt(portletPreferences.getValue(UICLVPortlet.PREFERENCE_ITEMS_PER_PAGE, null));
     
     String strQuery = this.getAncestorOfType(UICLVPortlet.class).getQueryStatement(portletPreferences, folderPath);
-    if ( this.getAncestorOfType(UICLVPortlet.class).isQueryApplication()
-        && org.exoplatform.wcm.webui.Utils.checkQuery(workspace, strQuery, Query.SQL) ) {
-      filters.put(WCMComposer.FILTER_QUERY_FULL, strQuery);
-      nodes= WCMCoreUtils.getService(WCMComposer.class)
-                .getContents(workspace,"", filters, WCMCoreUtils.getUserSessionProvider()); 
-    } else {
+//    if ( this.getAncestorOfType(UICLVPortlet.class).isQueryApplication()
+//        && org.exoplatform.wcm.webui.Utils.checkQuery(workspace, strQuery, Query.SQL) ) {
+//      filters.put(WCMComposer.FILTER_QUERY_FULL, strQuery);
+//      nodes= WCMCoreUtils.getService(WCMComposer.class)
+//                .getContents(workspace,"", filters, WCMCoreUtils.getUserSessionProvider()); 
+//    } else {
       String[] listContent = portletPreferences.getValue(UICLVPortlet.PREFERENCE_ITEM_PATH, null).split(";");
       if (listContent != null && listContent.length != 0) {
         for (String itemPath : listContent) {
@@ -96,7 +96,7 @@ public class UICLVManualMode extends UICLVContainer {
           if (viewNode != null) nodes.add(viewNode);
         }
       }
-    }
+//    }
     if (nodes.size() == 0) {
       messageKey = "UICLVContainer.msg.non-contents";
     }

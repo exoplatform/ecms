@@ -116,11 +116,11 @@ public class UICLVFolderMode extends UICLVContainer {
     
     String folderPath = this.getAncestorOfType(UICLVPortlet.class).getFolderPath();    
     String strQuery = this.getAncestorOfType(UICLVPortlet.class).getQueryStatement(preferences, folderPath);
-    if ( this.getAncestorOfType(UICLVPortlet.class).isQueryApplication()
-        && org.exoplatform.wcm.webui.Utils.checkQuery(workspace, strQuery, Query.SQL) ) {
-      filters.put(WCMComposer.FILTER_QUERY_FULL, strQuery);
-      return  wcmComposer.getContents(workspace,"", filters, WCMCoreUtils.getUserSessionProvider()); 
-    }
+//    if ( this.getAncestorOfType(UICLVPortlet.class).isQueryApplication()
+//        && org.exoplatform.wcm.webui.Utils.checkQuery(workspace, strQuery, Query.SQL) ) {
+//      filters.put(WCMComposer.FILTER_QUERY_FULL, strQuery);
+//      return  wcmComposer.getContents(workspace,"", filters, WCMCoreUtils.getUserSessionProvider()); 
+//    }
     
     if(folderPath == null && preferences.getValue(UICLVPortlet.PREFERENCE_ITEM_PATH, null) == null){
 //      return new ArrayList<Node>();
