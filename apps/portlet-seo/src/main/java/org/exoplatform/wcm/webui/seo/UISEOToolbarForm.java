@@ -18,8 +18,6 @@ package org.exoplatform.wcm.webui.seo;
 
 
 import java.util.Enumeration;
-import java.util.Map;
-
 import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.portal.application.PortalRequestContext;
@@ -129,6 +127,13 @@ public class UISEOToolbarForm extends UIForm {
       		PageMetadataModel tmpModel = seoService.getContentMetadata(paramsArray);
       		if(tmpModel != null) {
             metaModel = tmpModel;
+      		} else {
+      			for(int i = 0;i < paramsArray.size();i++) {
+      	      if(seoService.getContentNode(paramsArray.get(i).toString()) != null ) {
+      	      	metaModel = null;
+      	      	break;
+      	      }
+      	    }
       		}
       	}
       }

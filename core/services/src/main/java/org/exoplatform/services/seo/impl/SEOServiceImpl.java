@@ -17,21 +17,13 @@
 package org.exoplatform.services.seo.impl;
 
 import javax.jcr.Node;
-import javax.jcr.NodeIterator;
 import javax.jcr.Session;
-import javax.jcr.query.Query;
-import javax.jcr.query.QueryManager;
-import javax.jcr.query.QueryResult;
 import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.management.annotations.Managed;
 import org.exoplatform.management.annotations.ManagedDescription;
 import org.exoplatform.management.annotations.ManagedName;
-import org.exoplatform.portal.mop.user.UserNodeFilterConfig;
-import org.exoplatform.portal.mop.user.UserPortal;
-import org.exoplatform.portal.webui.portal.UIPortal;
 import org.exoplatform.portal.webui.util.Util;
-import org.exoplatform.portal.webui.workspace.UIPortalApplication;
 import org.exoplatform.services.seo.PageMetadataModel;
 import org.exoplatform.services.seo.SEOService;
 import org.exoplatform.services.wcm.portal.LivePortalManagerService;
@@ -39,7 +31,6 @@ import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.config.WorkspaceEntry;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
-import org.exoplatform.services.jcr.impl.core.query.QueryImpl;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -58,7 +49,6 @@ import org.exoplatform.services.cache.CacheService;
 import org.exoplatform.services.cache.ExoCache;
 import org.exoplatform.ecm.utils.MessageDigester;
 import java.util.ArrayList;
-
 /**
  * Created by The eXo Platform SAS
  * Author : eXoPlatform
@@ -66,10 +56,6 @@ import java.util.ArrayList;
  * Jun 17, 2011  
  */
 public class SEOServiceImpl implements SEOService {
-  
-  private LivePortalManagerService livePortalManagerService;
-  
-  private RepositoryService repositoryService;
   private ExoCache<String, Object> cache;
   
   public static String      METADATA_BASE_PATH                  = "SEO";
@@ -107,12 +93,6 @@ public class SEOServiceImpl implements SEOService {
       frequencyOptions = valueParam.getValue();
     else
       frequencyOptions = "Always,Hourly,Daily,Weekly,Monthly,Yearly,Never";
-    
-    ExoContainer container = ExoContainerContext.getCurrentContainer();
-    RepositoryService repositoryService = (RepositoryService)container.getComponentInstanceOfType(RepositoryService.class);
-    this.repositoryService = repositoryService;    
-    LivePortalManagerService livePortalManagerService = WCMCoreUtils.getService(LivePortalManagerService.class);
-    this.livePortalManagerService = livePortalManagerService; 
     cache = WCMCoreUtils.getService(CacheService.class).getCacheInstance("wcm.seo");
   }
   /**
@@ -136,19 +116,32 @@ public class SEOServiceImpl implements SEOService {
   /**
    * {@inheritDoc}
    */
-  public void storePageMetadata(PageMetadataModel metaModel, String portalName, boolean onContent) throws Exception { 
-    SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
-    Session session = null;
-    Node dummyNode = livePortalManagerService.getLivePortal(sessionProvider, portalName);
-    String uri = metaModel.getUri(); 
-    String pageReference = metaModel.getPageReference();   
+	public void storePageMetadata(PageMetadataModel metaModel, String portalName, boolean onContent) throws Exception { 
+    String uri = metaModel.getUri();
+    String pageReference = metaModel.getPageReference();
+    //Inherit from parent page
+    /*if(!onContent) {
+    	if(metaModel.getPageParent() != null && metaModel.getPageParent().length() > 0) {
+    		PageMetadataModel parentModel = this.getPageMetadata(metaModel.getPageParent());
+    		if(parentModel != null) {
+    			metaModel = parentModel;
+    			metaModel.setUri(uri);
+    			metaModel.setPageReference(pageReference);
+    		}
+    	}
+    }*/          
     String keyword = metaModel.getKeywords();
     String description = metaModel.getDescription();
     String robots = metaModel.getRobotsContent();
     String fullStatus = metaModel.getFullStatus();
     boolean sitemap = metaModel.getSitemap();
     float priority = metaModel.getPriority();
-    String frequency = metaModel.getFrequency();      
+    String frequency = metaModel.getFrequency(); 
+    //Store sitemap.xml file
+    SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
+    Session session = null;
+    LivePortalManagerService livePortalManagerService = WCMCoreUtils.getService(LivePortalManagerService.class);
+    Node dummyNode = livePortalManagerService.getLivePortal(sessionProvider, portalName);
     session = dummyNode.getSession();
     if (!dummyNode.hasNode(METADATA_BASE_PATH)) {        
       dummyNode.addNode(METADATA_BASE_PATH);      
@@ -157,25 +150,27 @@ public class SEOServiceImpl implements SEOService {
     Node seoNode = null;
     if(onContent) {
       seoNode = session.getNodeByUUID(uri);
+      if(!seoNode.isNodeType("mix:referenceable")) {
+      	seoNode.addMixin("mix:referenceable");
+      }
     } else {
-      session = sessionProvider.getSession("portal-system", WCMCoreUtils.getRepository());
-      String uuid = Util.getUIPortal().getSelectedUserNode().getId();      
+      session = sessionProvider.getSession("portal-system", WCMCoreUtils.getRepository());      
+      String uuid = Util.getUIPortal().getSelectedUserNode().getId();
       seoNode = session.getNodeByUUID(uuid);
     }    
-    if (seoNode.hasNode("exo:pageMetadata")) {      
-        Node node = seoNode.getNode("exo:pageMetadata");  
-        node.setProperty("exo:metaKeywords", keyword);
-        node.setProperty("exo:metaDescription", description);  
-        node.setProperty("exo:metaFully", fullStatus);
-        if(!onContent) {
-          node.setProperty("exo:metaRobots", robots);
-          node.setProperty("exo:metaSitemap", sitemap);
-          node.setProperty("exo:metaPriority", priority);
-          node.setProperty("exo:metaFrequency", frequency);
-          updateSiteMap(uri, priority, frequency, sitemap, portalName);
-        }
-        String hash = getHash(pageReference);
-        cache.put(hash, metaModel);     
+    if (seoNode.isNodeType("exo:pageMetadata")) { 
+      seoNode.setProperty("exo:metaKeywords", keyword);
+      seoNode.setProperty("exo:metaDescription", description);  
+      seoNode.setProperty("exo:metaFully", fullStatus);
+      if(!onContent) {
+      	seoNode.setProperty("exo:metaRobots", robots);
+      	seoNode.setProperty("exo:metaSitemap", sitemap);
+      	seoNode.setProperty("exo:metaPriority", priority);
+      	seoNode.setProperty("exo:metaFrequency", frequency);
+        updateSiteMap(uri, priority, frequency, sitemap, portalName);
+      }
+      String hash = getHash(pageReference);
+      cache.put(hash, metaModel);     
     } else {      
       String hash = null;       
       seoNode.addMixin("exo:pageMetadata");       
@@ -199,7 +194,7 @@ public class SEOServiceImpl implements SEOService {
     }
     session.save();
   }
-  public PageMetadataModel getMetadata(ArrayList params, String pageReference) throws Exception {
+  public PageMetadataModel getMetadata(ArrayList<String> params, String pageReference) throws Exception {
   	PageMetadataModel metaModel = null; 
   	if(params != null) {
   		metaModel = getContentMetadata(params);
@@ -211,7 +206,7 @@ public class SEOServiceImpl implements SEOService {
   /**
    * {@inheritDoc}
    */
-  public PageMetadataModel getContentMetadata(ArrayList params) throws Exception {      
+  public PageMetadataModel getContentMetadata(ArrayList<String> params) throws Exception {      
     PageMetadataModel metaModel = null; 
     String pageUri = null;
     Node contentNode = null;
@@ -221,32 +216,33 @@ public class SEOServiceImpl implements SEOService {
     }     
     if(contentNode == null)
     	return null;
+    if(!contentNode.isNodeType("mix:referenceable")) {
+    	contentNode.addMixin("mix:referenceable");
+    }
     String hash = getHash(contentNode.getUUID());    
     if(cache.get(hash) != null) 
       metaModel = (PageMetadataModel)cache.get(hash);     
     if(metaModel == null) {
-      if(contentNode.hasNode("exo:pageMetadata")) {
+      if(contentNode.isNodeType("exo:pageMetadata")) {
         metaModel = new PageMetadataModel(); 
-        metaModel.setUri(pageUri);
-        Node currentNode = contentNode.getNode("exo:pageMetadata");             
-        if (currentNode.hasProperty("exo:metaKeywords"))       
-          metaModel.setKeywords((currentNode.getProperty("exo:metaKeywords")).getString());
-        if (currentNode.hasProperty("exo:metaDescription"))       
-          metaModel.setDescription((currentNode.getProperty("exo:metaDescription")).getString());                
-        if (currentNode.hasProperty("exo:metaRobots"))       
-          metaModel.setRobotsContent((currentNode.getProperty("exo:metaRobots")).getString());      
-        if (currentNode.hasProperty("exo:metaSitemap"))       
-          metaModel.setSiteMap(Boolean.parseBoolean((currentNode.getProperty("exo:metaSitemap")).getString()));      
-        if (currentNode.hasProperty("exo:metaPriority"))       
-          metaModel.setPriority(Long.parseLong((currentNode.getProperty("exo:metaPriority")).getString()));      
-        if (currentNode.hasProperty("exo:metaFrequency"))       
-          metaModel.setFrequency((currentNode.getProperty("exo:metaFrequency")).getString());
+        metaModel.setUri(pageUri);                     
+        if (contentNode.hasProperty("exo:metaKeywords"))       
+          metaModel.setKeywords((contentNode.getProperty("exo:metaKeywords")).getString());
+        if (contentNode.hasProperty("exo:metaDescription"))       
+          metaModel.setDescription((contentNode.getProperty("exo:metaDescription")).getString());                
+        if (contentNode.hasProperty("exo:metaRobots"))       
+          metaModel.setRobotsContent((contentNode.getProperty("exo:metaRobots")).getString());      
+        if (contentNode.hasProperty("exo:metaSitemap"))       
+          metaModel.setSiteMap(Boolean.parseBoolean((contentNode.getProperty("exo:metaSitemap")).getString()));      
+        if (contentNode.hasProperty("exo:metaPriority"))       
+          metaModel.setPriority(Long.parseLong((contentNode.getProperty("exo:metaPriority")).getString()));      
+        if (contentNode.hasProperty("exo:metaFrequency"))       
+          metaModel.setFrequency((contentNode.getProperty("exo:metaFrequency")).getString());
         cache.put(hash, metaModel);
       }      
     }
     return metaModel;
   }
-  
   
   /**
    * {@inheritDoc}
@@ -262,21 +258,20 @@ public class SEOServiceImpl implements SEOService {
       String uuid = Util.getUIPortal().getSelectedUserNode().getId();
       Node pageNode = session.getNodeByUUID(uuid);
       
-      if(pageNode.hasNode("exo:pageMetadata")) {
-        Node currentNode = pageNode.getNode("exo:pageMetadata");
+      if(pageNode.isNodeType("exo:pageMetadata")) {        
         metaModel = new PageMetadataModel();        
-        if (currentNode.hasProperty("exo:metaKeywords"))       
-          metaModel.setKeywords((currentNode.getProperty("exo:metaKeywords")).getString());
-        if (currentNode.hasProperty("exo:metaDescription"))       
-          metaModel.setDescription((currentNode.getProperty("exo:metaDescription")).getString());         
-        if (currentNode.hasProperty("exo:metaRobots"))       
-          metaModel.setRobotsContent((currentNode.getProperty("exo:metaRobots")).getString());      
-        if (currentNode.hasProperty("exo:metaSitemap"))       
-          metaModel.setSiteMap(Boolean.parseBoolean((currentNode.getProperty("exo:metaSitemap")).getString()));      
-        if (currentNode.hasProperty("exo:metaPriority"))       
-          metaModel.setPriority(Long.parseLong((currentNode.getProperty("exo:metaPriority")).getString()));      
-        if (currentNode.hasProperty("exo:metaFrequency"))       
-          metaModel.setFrequency((currentNode.getProperty("exo:metaFrequency")).getString());
+        if (pageNode.hasProperty("exo:metaKeywords"))       
+          metaModel.setKeywords((pageNode.getProperty("exo:metaKeywords")).getString());
+        if (pageNode.hasProperty("exo:metaDescription"))       
+          metaModel.setDescription((pageNode.getProperty("exo:metaDescription")).getString());         
+        if (pageNode.hasProperty("exo:metaRobots"))       
+          metaModel.setRobotsContent((pageNode.getProperty("exo:metaRobots")).getString());      
+        if (pageNode.hasProperty("exo:metaSitemap"))       
+          metaModel.setSiteMap(Boolean.parseBoolean((pageNode.getProperty("exo:metaSitemap")).getString()));      
+        if (pageNode.hasProperty("exo:metaPriority"))       
+          metaModel.setPriority(Long.parseLong((pageNode.getProperty("exo:metaPriority")).getString()));      
+        if (pageNode.hasProperty("exo:metaFrequency"))       
+          metaModel.setFrequency((pageNode.getProperty("exo:metaFrequency")).getString());
         cache.put(hash, metaModel);
       }   
     }
@@ -287,47 +282,30 @@ public class SEOServiceImpl implements SEOService {
   /**
    * {@inheritDoc}
    */
-  public void removePageMetadata(PageMetadataModel metaModel, boolean onContent) throws Exception {
+  public void removePageMetadata(PageMetadataModel metaModel, String portalName, boolean onContent) throws Exception {
     SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
-    Session session = this.getSession(sessionProvider);
-    String pageUri = "";
-    if(onContent) pageUri = getStandardURL(metaModel.getUri());
-    else pageUri = metaModel.getPageReference();  
-    String query = "select * from exo:pageMetadata  WHERE exo:metaUri LIKE '"
-      + pageUri + "'";
-    QueryManager queryManager = session.getWorkspace()
-    .getQueryManager();
-    QueryImpl queryImp = (QueryImpl) queryManager.createQuery(query,
-        Query.SQL);
-    QueryResult queryResult = queryImp.execute();
-    NodeIterator nodeIterator = queryResult.getNodes();
-    
-    if (nodeIterator.getSize() > 0) {
-      while (nodeIterator.hasNext()) {
-        Node currentNode = nodeIterator.nextNode();
-        currentNode.remove();
-      }
-      session.save();
+    ExoContainer container = ExoContainerContext.getCurrentContainer();
+    RepositoryService repositoryService = (RepositoryService)container.getComponentInstanceOfType(RepositoryService.class);
+    ManageableRepository currentRepo = repositoryService.getCurrentRepository();
+    Session session = sessionProvider.getSession(currentRepo.getConfiguration().getDefaultWorkspaceName(), currentRepo);    
+    String hash = "";
+    Node seoNode = null;
+    if(onContent) {
+      seoNode = session.getNodeByUUID(metaModel.getUri());
+    } else {
+    	session = sessionProvider.getSession("portal-system", WCMCoreUtils.getRepository());
+      String uuid = Util.getUIPortal().getSelectedUserNode().getId();
+      seoNode = session.getNodeByUUID(uuid);
     }
-    //Remove metadata for this uri from cache
-    String hash = getHash(pageUri);
-    cache.remove(hash);
+    if(seoNode.isNodeType("exo:pageMetadata")) {
+    	seoNode.removeMixin("exo:pageMetadata");
+    	if(onContent) hash = getHash(metaModel.getUri());
+    	else hash = getHash(metaModel.getPageReference());
+    	cache.remove(hash);
+    }
+    session.save();
   }  
-  
-  /**
-   * Returns jcr current session
-   * 
-   * @param sessionProvider The session provider
-   * @return
-   * @throws Exception
-   */
-  private Session getSession(SessionProvider sessionProvider)
-  throws Exception {
-    ManageableRepository currentRepo = this.repositoryService
-    .getCurrentRepository();
-    return sessionProvider.getSession(currentRepo.getConfiguration()
-        .getDefaultWorkspaceName(), currentRepo);
-  }
+    
   /**
    * Update sitemap content for portal
    * 
@@ -342,6 +320,7 @@ public class SEOServiceImpl implements SEOService {
    */
   public void updateSiteMap(String uri, float priority, String frequency, boolean visibleSitemap, String portalName) throws Exception {
     SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
+    LivePortalManagerService livePortalManagerService = WCMCoreUtils.getService(LivePortalManagerService.class);
     Node dummyNode = livePortalManagerService.getLivePortal(sessionProvider, portalName);
     Session session = dummyNode.getSession();
     uri = getStandardURL(uri);
@@ -500,6 +479,7 @@ public class SEOServiceImpl implements SEOService {
         
     if(sitemapContent ==null || sitemapContent.length() == 0) {
       SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
+      LivePortalManagerService livePortalManagerService = WCMCoreUtils.getService(LivePortalManagerService.class);
       Node dummyNode = livePortalManagerService.getLivePortal(sessionProvider, portalName);
       Session session = dummyNode.getSession();
       if(dummyNode.hasNode(METADATA_BASE_PATH) && dummyNode.getNode(METADATA_BASE_PATH).hasNode(SITEMAP_NAME)) {
@@ -540,7 +520,7 @@ public class SEOServiceImpl implements SEOService {
    * @return
    * @throws Exception
    */
-  private String getHash(String uri) throws Exception{
+  public String getHash(String uri) throws Exception{
     String key = uri;    
     return MessageDigester.getHash(key);
   }
@@ -566,7 +546,7 @@ public class SEOServiceImpl implements SEOService {
           String nodePath = tmpPath.substring(tmpPath.indexOf(ws) + ws.length(),tmpPath.length());
           if(nodePath != null && nodePath.length() > 0) {
             ManageableRepository manageRepo = WCMCoreUtils.getRepository();      
-            ArrayList wsList = manageRepo.getConfiguration().getWorkspaceEntries();
+            ArrayList<WorkspaceEntry> wsList = manageRepo.getConfiguration().getWorkspaceEntries();
             for(int i = 0; i< wsList.size(); i++) {
             	WorkspaceEntry wsEntry = (WorkspaceEntry)wsList.get(i);
             	if(wsEntry.getName().equals(ws)) {

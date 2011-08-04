@@ -15,21 +15,26 @@ public interface SEOService {
    * @throws Exception
    */
   public void storePageMetadata(PageMetadataModel metaModel, String portalName, boolean onContent) throws Exception;
-  public PageMetadataModel getMetadata(ArrayList<String> params, String pageReference) throws Exception;
   /**
-   * Returns metadata by language of a portal page 
+   * Returns metadata of a portal page or content page
    * 
    * @param pageUri The URI of page
-   * @param pageLanguage The language of page 
+   * @return
+   * @throws Exception
+   */ 
+  public PageMetadataModel getMetadata(ArrayList<String> params, String pageReference) throws Exception;
+  /**
+   * Returns metadata of a portal page 
+   * 
+   * @param pageUri The reference of page   
    * @return
    * @throws Exception
    */  
   public PageMetadataModel getPageMetadata(String pageReference) throws Exception;
   /**
-   * Returns metadata by language of a content page 
+   * Returns metadata of a content page 
    * 
-   * @param params The list of parameters
-   * @param pageLanguage The language of page 
+   * @param params The list of parameters for content page   
    * @return
    * @throws Exception
    */  
@@ -40,7 +45,7 @@ public interface SEOService {
    * @param metaModel Object store metadata of page
    * @throws Exception
    */
-  public void removePageMetadata(PageMetadataModel metaModel, boolean onContent) throws Exception;
+  public void removePageMetadata(PageMetadataModel metaModel, String portalName, boolean onContent) throws Exception;
   /**
    * Return content node by content path
    * 

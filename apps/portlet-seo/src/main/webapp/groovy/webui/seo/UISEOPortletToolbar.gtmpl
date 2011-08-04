@@ -1,5 +1,4 @@
 <script>
-
   function openSEOForm(event, command) {
     var evt = event || window.event;
     var mouse_cordinate = evt.clientY + "," + evt.clientX; 

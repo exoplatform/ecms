@@ -83,7 +83,7 @@ public class UISEOForm extends UIForm{
   private static String contentPath = null;  
   private boolean onContent = false;
   private boolean isInherited = false;
-  private ArrayList paramsArray = null;
+  private ArrayList<String> paramsArray = null;
   //private String pageParent = null;
   
   private static final Log LOG  = ExoLogger.getLogger("seo.UISEOForm");
@@ -112,11 +112,11 @@ public class UISEOForm extends UIForm{
   	this.isInherited = isInherited;
   }
   
-  public ArrayList getParamsArray() { 
+  public ArrayList<String> getParamsArray() { 
     return this.paramsArray;
   }
   
-  public void setParamsArray(ArrayList params) {
+  public void setParamsArray(ArrayList<String> params) {
     this.paramsArray = params;
   }
   

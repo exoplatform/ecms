@@ -31,10 +31,7 @@ public class TestSEOService extends BaseWCMTestCase{
   
   /** The SEO Service. */
   private SEOService seoService;
-  
-  /** The jcr node. */
-  private Node node;
-  
+ 
   /* (non-Javadoc)
    * @see org.exoplatform.services.seo.TestSEOService#setUp()
    */
@@ -52,7 +49,7 @@ public class TestSEOService extends BaseWCMTestCase{
    * @throws Exception
    */
   public void testStorePageMetadata() throws Exception {
-   /*PageMetadataModel metaModel = new PageMetadataModel();
+   PageMetadataModel metaModel = new PageMetadataModel();
     metaModel.setUri("home");
     metaModel.setPageReference("home");
     metaModel.setKeywords("test");
@@ -62,29 +59,22 @@ public class TestSEOService extends BaseWCMTestCase{
     metaModel.setPriority(0);
     seoService.storePageMetadata(metaModel,"classic",false);
     PageMetadataModel retrieveModel = seoService.getPageMetadata("home");
-    assertEquals(retrieveModel.getKeywords(), "test");*/  
+    assertEquals(retrieveModel.getKeywords(), "test");
   }
   
   /**
    * test remove metedate
    * @return void
    */
-  public void tesRemoveMetadata() {
-    /*PageMetadataModel metaModel = new PageMetadataModel();
-    metaModel.setLanguage("en");
+  public void tesRemoveMetadata() throws Exception{
+    PageMetadataModel metaModel = new PageMetadataModel();    
     metaModel.setUri("home");
-    metaModel.setKeywords("test");
-    metaModel.setTitle("test Remove Metadata");
-    metaModel.setRobotsContent("index,follow");
-    try {
-      seoService.storePageMetadata(metaModel,"classic",false);
-      assertEquals("test", seoService.getPageMetadata("home", "en").getKeywords());
-      seoService.removePageMetadata(metaModel,true);
-      assertNull(seoService.getPageMetadata("home", "en"));
-    }
-    catch (Exception e) {
-      e.printStackTrace();
-    }*/    
+    metaModel.setKeywords("test");    
+    metaModel.setRobotsContent("index,follow");    
+    seoService.storePageMetadata(metaModel,"classic",false);
+    assertEquals("test", seoService.getPageMetadata("home").getKeywords());
+    seoService.removePageMetadata(metaModel, "classic",false);
+    assertNull(seoService.getPageMetadata("home"));     
   }
   
   /**

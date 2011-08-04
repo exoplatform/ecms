@@ -33,8 +33,8 @@ import org.exoplatform.webui.event.EventListener;
   events = @EventConfig(listeners = UIPopupWindow.CloseActionListener.class, name = "ClosePopup")
 )
 public class UIPopupWindow extends org.exoplatform.webui.core.UIPopupWindow {
-	private int top_ = 0;
-	private int left_ = 0;
+	private int top_ = -1;
+	private int left_ = -1;
 	
 	public int getWindowTop()
   {

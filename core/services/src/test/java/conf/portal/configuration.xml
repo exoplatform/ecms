@@ -262,7 +262,7 @@
 	
   <component>
     <key>org.exoplatform.services.seo.SEOService</key>  
-    <type>org.exoplatform.services.seo.impl.SEOServiceImpl</type>
+    <type>org.exoplatform.services.seo.DumpSEOServiceImpl</type>
     <init-params>
       <value-param>
         <name>robotsindex</name>
