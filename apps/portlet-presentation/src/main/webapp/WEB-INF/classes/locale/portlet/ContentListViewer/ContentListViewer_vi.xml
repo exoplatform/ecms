@@ -149,6 +149,9 @@
       <content-not-found>Không tìm thấy nội dung!</content-not-found>
       <UICLVConfigCacheManagementLabel>Quản lý Cache</UICLVConfigCacheManagementLabel>
       <UICLVConfigCacheEnableRadioBoxInput>Chia sẻ nội dung giữa người sử dụng</UICLVConfigCacheEnableRadioBoxInput>
+      <UICLVContentByQueryLabel>Nội dung qua truy vấn</UICLVContentByQueryLabel>
+      <UICLVConfigWorkspaceFormSelectBox>Workspace</UICLVConfigWorkspaceFormSelectBox>
+      <UICLVConfigContentByQueryTextArea>Câu truy vấn</UICLVConfigContentByQueryTextArea>
     </label>
     <help>
     	<ModeSelectionHelp>Determine what kind of information will be display inside portlet</ModeSelectionHelp>
@@ -177,8 +180,8 @@
   
   <UICLVConfigCacheEnableRadioBoxInput>
   	<label>
-	  <ENABLE>Bật</ENABLE>
-	  <DISABLE>Tắt</DISABLE>
+	  <ENABLE>Hạn chế bởi xác thực quyền</ENABLE>
+	  <DISABLE>Hạn chế bởi người sử dụng</DISABLE>
   	</label>
   </UICLVConfigCacheEnableRadioBoxInput>
 </bundle>

@@ -17,23 +17,23 @@
 package org.exoplatform.wcm.webui.clv;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.jcr.Node;
+import javax.jcr.query.Query;
 import javax.portlet.PortletPreferences;
 
-import org.exoplatform.commons.utils.LazyPageList;
-import org.exoplatform.commons.utils.ListAccess;
-import org.exoplatform.commons.utils.ListAccessImpl;
 import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.portal.webui.application.UIPortlet;
+import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.resolver.ResourceResolver;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.publication.WCMComposer;
 import org.exoplatform.services.wcm.search.base.AbstractPageList;
 import org.exoplatform.services.wcm.search.base.PageListFactory;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.wcm.webui.Utils;
-import org.exoplatform.wcm.webui.clv.UICLVContainer.CLVNodeCreator;
 import org.exoplatform.wcm.webui.scv.UISingleContentViewerPortlet;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -61,21 +61,40 @@ public class UICLVManualMode extends UICLVContainer {
   @SuppressWarnings("unchecked")
   public void init() throws Exception {
     PortletPreferences portletPreferences = Utils.getAllPortletPreferences();
-    String sharedCache = portletPreferences.getValue(UISingleContentViewerPortlet.ENABLE_CACHE, "true");
-    sharedCache = "true".equals(sharedCache) ? WCMComposer.VISIBILITY_PUBLIC:WCMComposer.VISIBILITY_USER;    
-
-    String[] listContent = portletPreferences.getValue(UICLVPortlet.PREFERENCE_ITEM_PATH, null).split(";");
-    int itemsPerPage = Integer.parseInt(portletPreferences.getValue(UICLVPortlet.PREFERENCE_ITEMS_PER_PAGE, null));
+    String contextualMode = portletPreferences.getValue(UICLVPortlet.PREFERENCE_CONTEXTUAL_FOLDER, null);
+    String workspace = portletPreferences.getValue(UICLVPortlet.PREFERENCE_WORKSPACE, null);
     List<Node> nodes = new ArrayList<Node>();
-    if (listContent != null && listContent.length != 0) {
-      for (String itemPath : listContent) {
-        NodeLocation nodeLocation = NodeLocation.getNodeLocationByExpression(itemPath);
-        Node viewNode = Utils.getViewableNodeByComposer(nodeLocation.getRepository(),
-                                                        Text.escapeIllegalJcrChars(nodeLocation.getWorkspace()), 
-                                                        Text.escapeIllegalJcrChars(nodeLocation.getPath()),
-                                                        null,
-                                                        sharedCache);
-        if (viewNode != null) nodes.add(viewNode);
+    String folderPath="";
+    
+    HashMap<String, String> filters = new HashMap<String, String>();
+    if (UICLVPortlet.PREFERENCE_CONTEXTUAL_FOLDER_ENABLE.equals(contextualMode)) {
+      String folderParamName = portletPreferences.getValue(UICLVPortlet.PREFERENCE_SHOW_CLV_BY, null);
+      if (folderParamName == null || folderParamName.length() == 0)
+        folderParamName = UICLVPortlet.DEFAULT_SHOW_CLV_BY;
+      folderPath = Util.getPortalRequestContext().getRequestParameter(folderParamName);
+    }
+    String sharedCache = portletPreferences.getValue(UISingleContentViewerPortlet.ENABLE_CACHE, "true");
+    sharedCache = "true".equals(sharedCache) ? WCMComposer.VISIBILITY_PUBLIC:WCMComposer.VISIBILITY_USER;
+    int itemsPerPage = Integer.parseInt(portletPreferences.getValue(UICLVPortlet.PREFERENCE_ITEMS_PER_PAGE, null));
+    
+    String strQuery = this.getAncestorOfType(UICLVPortlet.class).getQueryStatement(portletPreferences, folderPath);
+    if ( this.getAncestorOfType(UICLVPortlet.class).isQueryApplication()
+        && org.exoplatform.wcm.webui.Utils.checkQuery(workspace, strQuery, Query.SQL) ) {
+      filters.put(WCMComposer.FILTER_QUERY_FULL, strQuery);
+      nodes= WCMCoreUtils.getService(WCMComposer.class)
+                .getContents(workspace,"", filters, WCMCoreUtils.getUserSessionProvider()); 
+    } else {
+      String[] listContent = portletPreferences.getValue(UICLVPortlet.PREFERENCE_ITEM_PATH, null).split(";");
+      if (listContent != null && listContent.length != 0) {
+        for (String itemPath : listContent) {
+          NodeLocation nodeLocation = NodeLocation.getNodeLocationByExpression(itemPath);
+          Node viewNode = Utils.getViewableNodeByComposer(nodeLocation.getRepository(),
+                                                          Text.escapeIllegalJcrChars(nodeLocation.getWorkspace()), 
+                                                          Text.escapeIllegalJcrChars(nodeLocation.getPath()),
+                                                          null,
+                                                          sharedCache);
+          if (viewNode != null) nodes.add(viewNode);
+        }
       }
     }
     if (nodes.size() == 0) {

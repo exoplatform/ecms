@@ -137,6 +137,9 @@
       <content-not-found>Le contenu n'a pas été trouvé</content-not-found>
       <UICLVConfigCacheManagementLabel>Gestion de cache</UICLVConfigCacheManagementLabel>
       <UICLVConfigCacheEnableRadioBoxInput>Contenus partagés entre utilisateurs</UICLVConfigCacheEnableRadioBoxInput>
+      <UICLVContentByQueryLabel>Contenu par requête</UICLVContentByQueryLabel>
+      <UICLVConfigWorkspaceFormSelectBox>Workspace</UICLVConfigWorkspaceFormSelectBox>
+      <UICLVConfigContentByQueryTextArea>par requête</UICLVConfigContentByQueryTextArea>
     </label>
     <help>
       <ModeSelectionHelp>Deux modes sont disponibles pour affichers les contenus. "Par répertoire" affichage tous les contenus présents dans le répertoire (ou catégorie) sélectionné ; "Par contenus" vous permet de choisir manuellement les contenus à afficher.</ModeSelectionHelp>
@@ -183,8 +186,8 @@
   
   <UICLVConfigCacheEnableRadioBoxInput>
   	<label>
-	  <ENABLE>Activé</ENABLE>
-	  <DISABLE>Désactivé</DISABLE>
+	  <ENABLE>Limité par l'authentification</ENABLE>
+	  <DISABLE>Limité par le rôle d'utilisateur</DISABLE>
   	</label>
   </UICLVConfigCacheEnableRadioBoxInput>
 </bundle>

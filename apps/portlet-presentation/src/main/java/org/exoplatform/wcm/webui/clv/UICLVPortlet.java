@@ -23,8 +23,11 @@ import javax.portlet.MimeResponse;
 import javax.portlet.PortletMode;
 import javax.portlet.PortletPreferences;
 
+import org.apache.commons.lang.StringUtils;
 import org.exoplatform.portal.application.PortalRequestContext;
 import org.exoplatform.portal.webui.util.Util;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.core.WCMService;
 import org.exoplatform.wcm.webui.Utils;
@@ -35,8 +38,6 @@ import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.core.UIPopupContainer;
 import org.exoplatform.webui.core.UIPortletApplication;
 import org.exoplatform.webui.core.lifecycle.UIApplicationLifecycle;
-import org.exoplatform.services.log.ExoLogger;
-import org.exoplatform.services.log.Log;
 
 /*
  * Created by The eXo Platform SAS Author : Anh Do Ngoc anh.do@exoplatform.com
@@ -152,7 +153,7 @@ public class UICLVPortlet extends UIPortletApplication {
   public final static String PREFERENCE_CACHE_ENABLED             = "sharedCache";
   
   /** The Constant CONTENT_BY_QUERY. */
-  public final static String PREFERENCE_CONTENT_BY_QUERY          = "contentByQuery";
+  public final static String PREFERENCE_CONTENTS_BY_QUERY         = "query";
   
   /** The Constant PREFERENCE_WORKSPACE. */
   public final static String PREFERENCE_WORKSPACE                 = "workspace";
@@ -169,17 +170,13 @@ public class UICLVPortlet extends UIPortletApplication {
 
   public static final String PREFERENCE_APPLICATION_TYPE          = "application";
   
-  public static final String APPLICATION_CLV_BY_QUERY             = "ContentListByQuery";
+  public static final String APPLICATION_CLV_BY_QUERY             = "ContentsByQuery";
   
   public static final String PREFERENCE_SHARED_CACHE              = "sharedCache";
   /* Dynamic parameter for CLV by query */
   public static final String QUERY_USER_PARAMETER                 = "${user}";
   public static final String QUERY_FOLDER_ID_PARAMETER            = "${folder-id}";
-  public static final String QUERY_LANGUAGE_PARAMETER             = "${language}";
-  
-  public final static String CONTENT_LIST_BY_QUERY_TYPE           = "ContentListByQuery";
-  public final static String CATEGORIES_CONTENT_BY_QUERY_TYPE     = "CategoryContentsByQuery";
-  public final static String CATOGORIES_NAVIGATION_BY_QUERY_TYPE  = "CategoryNavigationByQuery";
+  public static final String QUERY_LANGUAGE_PARAMETER             = "${language}";  
   
   private PortletMode        cpMode;
 
@@ -187,8 +184,6 @@ public class UICLVPortlet extends UIPortletApplication {
 
   private UICLVManualMode    manualMode;
   
-  private UICLVQueryMode     queryMode;
-
   private UICLVConfig        clvConfig;
 
   private String             currentFolderPath;
@@ -196,7 +191,7 @@ public class UICLVPortlet extends UIPortletApplication {
   private String             currentDisplayMode;
   
   private String             currentApplicationMode;
-
+  
   private static final Log   log                                  = ExoLogger.getLogger(UICLVPortlet.class);
 
   /**
@@ -212,7 +207,7 @@ public class UICLVPortlet extends UIPortletApplication {
   public void setCurrentFolderPath(String value) {
     currentFolderPath = value;
   }
-
+  
   public String getFolderPath() {
     PortalRequestContext preq = Util.getPortalRequestContext();
     currentFolderPath = "";
@@ -221,6 +216,7 @@ public class UICLVPortlet extends UIPortletApplication {
     }
     PortletPreferences preferences = Utils.getAllPortletPreferences();
     currentDisplayMode = preferences.getValue(PREFERENCE_DISPLAY_MODE, null);
+    currentApplicationMode = preferences.getValue(PREFERENCE_APPLICATION_TYPE, null);
     if (DISPLAY_MODE_AUTOMATIC.equals(currentDisplayMode)) {
       if (currentFolderPath == null || currentFolderPath.length() == 0) {
         currentFolderPath = Utils.getPortletPreference(UICLVPortlet.PREFERENCE_ITEM_PATH);
@@ -274,7 +270,6 @@ public class UICLVPortlet extends UIPortletApplication {
         log.trace("CLV rendering : cache set to " + wcmService.getPortletExpirationCache());
     }
     String nDisplayMode = preferences.getValue(PREFERENCE_DISPLAY_MODE, null);
-    currentApplicationMode = preferences.getValue(PREFERENCE_APPLICATION_TYPE, null);
     PortletMode npMode = pContext.getApplicationMode();
     if (!nDisplayMode.equals(currentDisplayMode)) {
       activateMode(npMode, nDisplayMode);
@@ -304,39 +299,27 @@ public class UICLVPortlet extends UIPortletApplication {
         clvConfig = addChild(UICLVConfig.class, null, null);
         clvConfig.setModeInternal(false);
       }else {
-        if (currentApplicationMode.equals(APPLICATION_CLV_BY_QUERY)) {
-          queryMode  = addChild(UICLVQueryMode.class, null, null);
-          queryMode.init();
-          queryMode.setRendered(true);
-        }else {
-          if (nDisplayMode.equals(DISPLAY_MODE_AUTOMATIC)) {
-            folderMode = addChild(UICLVFolderMode.class, null, null);
-            folderMode.init();
-            folderMode.setRendered(true);
-          } else {
-            manualMode = addChild(UICLVManualMode.class, null, null);
-            manualMode.init();
-            manualMode.setRendered(true);
-          }
+        if (nDisplayMode.equals(DISPLAY_MODE_AUTOMATIC)) {
+          folderMode = addChild(UICLVFolderMode.class, null, null);
+          folderMode.init();
+          folderMode.setRendered(true);
+        } else {
+          manualMode = addChild(UICLVManualMode.class, null, null);
+          manualMode.init();
+          manualMode.setRendered(true);
         }
       }
     } else {
       if (npMode.equals(PortletMode.VIEW)) { //Change from edit to iew
         removeChildren();
-        if (currentApplicationMode.equals(APPLICATION_CLV_BY_QUERY)) {
-          queryMode  = addChild(UICLVQueryMode.class, null, null);
-          queryMode.init();
-          queryMode.setRendered(true);
-        }else {
-          if (nDisplayMode.equals(DISPLAY_MODE_AUTOMATIC)) {
-            folderMode = addChild(UICLVFolderMode.class, null, null);
-            folderMode.init();
-            folderMode.setRendered(true);
-          } else {
-            manualMode = addChild(UICLVManualMode.class, null, null);
-            manualMode.init();
-            manualMode.setRendered(true);
-          }
+        if (nDisplayMode.equals(DISPLAY_MODE_AUTOMATIC)) {
+          folderMode = addChild(UICLVFolderMode.class, null, null);
+          folderMode.init();
+          folderMode.setRendered(true);
+        } else {
+          manualMode = addChild(UICLVManualMode.class, null, null);
+          manualMode.init();
+          manualMode.setRendered(true);
         }
       } else {
         // Change from view to edit
@@ -358,9 +341,6 @@ public class UICLVPortlet extends UIPortletApplication {
     manualMode = getChild(UICLVManualMode.class);
     if (manualMode != null)
       removeChild(UICLVManualMode.class);
-    queryMode = getChild(UICLVQueryMode.class);
-    if (queryMode != null) 
-      removeChild(UICLVQueryMode.class);
   }
   /**
    * @function changeToViewMode
@@ -386,5 +366,30 @@ public class UICLVPortlet extends UIPortletApplication {
     PortletPreferences preferences = Utils.getAllPortletPreferences();
     String nDisplayMode = preferences.getValue(PREFERENCE_DISPLAY_MODE, null);
     activateMode(npMode, nDisplayMode);
+  }
+  /**
+   * 
+   * @param preferences porlet preferences
+   * @param filters
+   * @return query statement to execute
+   * @author vinh_nguyen from ECMS
+   */
+  public String getQueryStatement(PortletPreferences preferences, String folderPath) {
+    String queryStatement = preferences.getValue(UICLVPortlet.PREFERENCE_CONTENTS_BY_QUERY, "");
+    if (queryStatement.indexOf(UICLVPortlet.QUERY_USER_PARAMETER)>0) {
+      String userId = Util.getPortalRequestContext().getRemoteUser();
+      queryStatement = StringUtils.replace(queryStatement, UICLVPortlet.QUERY_USER_PARAMETER, userId);
+    }
+    if (queryStatement.indexOf(UICLVPortlet.QUERY_FOLDER_ID_PARAMETER)>0) {
+      queryStatement = StringUtils.replace(queryStatement, UICLVPortlet.QUERY_FOLDER_ID_PARAMETER, folderPath);
+    }
+    if (queryStatement.indexOf(UICLVPortlet.QUERY_LANGUAGE_PARAMETER)>0) {
+      String currentLanguage =  Util.getPortalRequestContext().getLocale().getLanguage();
+      queryStatement = StringUtils.replace(queryStatement, UICLVPortlet.QUERY_LANGUAGE_PARAMETER, currentLanguage);
+    }
+   return queryStatement;
+  }
+  public boolean isQueryApplication() {
+    return APPLICATION_CLV_BY_QUERY.equals(currentApplicationMode);
   }
 }

@@ -22,6 +22,7 @@ import java.util.HashMap;
 import javax.jcr.AccessDeniedException;
 import javax.jcr.ItemNotFoundException;
 import javax.jcr.Node;
+import javax.jcr.query.Query;
 import javax.portlet.PortletPreferences;
 
 import org.exoplatform.portal.webui.application.UIPortlet;
@@ -103,6 +104,7 @@ public class UICLVFolderMode extends UICLVContainer {
     String orderType = preferences.getValue(UICLVPortlet.PREFERENCE_ORDER_TYPE, null);
     String itemsPerPage = preferences.getValue(UICLVPortlet.PREFERENCE_ITEMS_PER_PAGE, null);
     String sharedCache = preferences.getValue(UICLVPortlet.PREFERENCE_SHARED_CACHE, "true");
+    String workspace = preferences.getValue(UICLVPortlet.PREFERENCE_WORKSPACE, null);
     if (orderType == null) orderType = "DESC";
     if (orderBy == null) orderBy = "exo:title";
     filters.put(WCMComposer.FILTER_ORDER_BY, orderBy);
@@ -111,9 +113,15 @@ public class UICLVFolderMode extends UICLVContainer {
     filters.put(WCMComposer.FILTER_LIMIT, itemsPerPage);
     filters.put(WCMComposer.FILTER_VISIBILITY, ("true".equals(sharedCache))?
         WCMComposer.VISIBILITY_PUBLIC:WCMComposer.VISIBILITY_USER);
-
-    String folderPath = this.getAncestorOfType(UICLVPortlet.class).getFolderPath();
-
+    
+    String folderPath = this.getAncestorOfType(UICLVPortlet.class).getFolderPath();    
+    String strQuery = this.getAncestorOfType(UICLVPortlet.class).getQueryStatement(preferences, folderPath);
+    if ( this.getAncestorOfType(UICLVPortlet.class).isQueryApplication()
+        && org.exoplatform.wcm.webui.Utils.checkQuery(workspace, strQuery, Query.SQL) ) {
+      filters.put(WCMComposer.FILTER_QUERY_FULL, strQuery);
+      return  wcmComposer.getContents(workspace,"", filters, WCMCoreUtils.getUserSessionProvider()); 
+    }
+    
     if(folderPath == null && preferences.getValue(UICLVPortlet.PREFERENCE_ITEM_PATH, null) == null){
 //      return new ArrayList<Node>();
       return new Result(new ArrayList<Node>(), 0, 0, null, null);
@@ -126,6 +134,7 @@ public class UICLVFolderMode extends UICLVContainer {
     //    Text.escapeIllegalJcrChars(nPath), filters, WCMCoreUtils.getUserSessionProvider());
     return wcmComposer.getPaginatedContents(nodeLocation, filters, WCMCoreUtils.getUserSessionProvider());
   }
+  
   /**
    * Gets the bar info show.
    *

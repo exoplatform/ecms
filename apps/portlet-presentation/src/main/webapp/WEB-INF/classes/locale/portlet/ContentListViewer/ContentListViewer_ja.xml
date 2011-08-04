@@ -57,7 +57,12 @@
 	  <UICLVConfigShowCLVByStringInput>by</UICLVConfigShowCLVByStringInput>
 	  <UICLVConfigshowSCVWithStringInput>with</UICLVConfigshowSCVWithStringInput>
       <UICLVConfigTargetPageFormInputSet>ページに表示</UICLVConfigTargetPageFormInputSet>
-      <content-not-found>コンテンツがありません！</content-not-found>	  
+      <content-not-found>コンテンツがありません！</content-not-found>
+      <UICLVConfigCacheManagementLabel>Contents Visibility</UICLVConfigCacheManagementLabel>
+      <UICLVContentByQueryLabel>Contents by Query</UICLVContentByQueryLabel>
+      <UICLVConfigWorkspaceFormSelectBox>Workspace</UICLVConfigWorkspaceFormSelectBox>
+      <UICLVConfigContentByQueryTextArea>by query</UICLVConfigContentByQueryTextArea>
+      <UICLVConfigCacheEnableRadioBoxInput>Share contents between users</UICLVConfigCacheEnableRadioBoxInput>
     </label>
     <help>
     	<ModeSelectionHelp>コンテンツの表示には2つのモードがあります。"By folder"は選んだフォルダ/カテゴリ内の全てのコンテンツを取得します。 "By Contents"は表示したいコンテンツを手動で選択します。</ModeSelectionHelp>
@@ -165,5 +170,11 @@
     <staged>ステージ済</staged>
     <published>公開</published>
   </PublicationStates>  
+  <UICLVConfigCacheEnableRadioBoxInput>
+    <label>
+      <ENABLE>Restricted by Authentication</ENABLE>
+      <DISABLE>Restricted by User roles</DISABLE>
+    </label>
+  </UICLVConfigCacheEnableRadioBoxInput>  
   
 </bundle>

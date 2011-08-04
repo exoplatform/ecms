@@ -64,7 +64,8 @@
       <UICLVConfigCacheManagementLabel>Contents Visibility</UICLVConfigCacheManagementLabel>
       <UICLVContentByQueryLabel>Contents by Query</UICLVContentByQueryLabel>
       <UICLVConfigWorkspaceFormSelectBox>Workspace</UICLVConfigWorkspaceFormSelectBox>
-      <UICLVConfigContentByQueryTextArea>SQL Query</UICLVConfigContentByQueryTextArea>
+      <UICLVConfigContentByQueryTextArea>by query</UICLVConfigContentByQueryTextArea>
+      <UICLVConfigCacheEnableRadioBoxInput>Share contents between users</UICLVConfigCacheEnableRadioBoxInput>
     </label>
     <help>
     	<ModeSelectionHelp>Two modes are available to show contents. "By folder" will take all the contents available in the folder/category you choose ; "By Contents" lets you manually choose the contents you want to show</ModeSelectionHelp>

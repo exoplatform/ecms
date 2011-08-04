@@ -305,7 +305,7 @@ public class UICLVConfig extends UIForm  implements UISelectable {
     String showScvWith = portletPreferences.getValue(UICLVPortlet.PREFERENCE_SHOW_SCV_WITH, null);
     String isCacheEnabled = portletPreferences.getValue(UICLVPortlet.PREFERENCE_CACHE_ENABLED, null);
     String workspace = portletPreferences.getValue(UICLVPortlet.PREFERENCE_WORKSPACE, null);
-    String contentByQuery = portletPreferences.getValue(UICLVPortlet.PREFERENCE_CONTENT_BY_QUERY, null);
+    String contentByQuery = portletPreferences.getValue(UICLVPortlet.PREFERENCE_CONTENTS_BY_QUERY, null);
 
     boolean showAutomaticDetection = Boolean.parseBoolean(portletPreferences.getValue(UICLVPortlet.PREFERENCE_AUTOMATIC_DETECTION,
                                                                                       null));
@@ -377,11 +377,10 @@ public class UICLVConfig extends UIForm  implements UISelectable {
     List<SelectItemOption<String>> formViewerTemplateList = new ArrayList<SelectItemOption<String>>();
     /** DISPLAY TEMPLATE */
     if (appType.equals(CONTENT_LIST_TYPE) || appType.equals(CATEGORIES_CONTENT_TYPE)
-        || appType.equals(UICLVPortlet.CONTENT_LIST_BY_QUERY_TYPE) || appType.equals(UICLVPortlet.CATEGORIES_CONTENT_BY_QUERY_TYPE)) {
+        || appType.equals(UICLVPortlet.APPLICATION_CLV_BY_QUERY)) {
       formViewerTemplateList.addAll(getTemplateList(TEMPLATE_STORAGE_FOLDER, DISPLAY_TEMPLATE_LIST));
     }
-    if (appType.equals(CONTENT_LIST_TYPE) || appType.equals(CATOGORIES_NAVIGATION_TYPE)
-        || appType.equals(UICLVPortlet.CONTENT_LIST_BY_QUERY_TYPE) || appType.equals(UICLVPortlet.CATOGORIES_NAVIGATION_BY_QUERY_TYPE)) {
+    if (appType.equals(CONTENT_LIST_TYPE) || appType.equals(CATOGORIES_NAVIGATION_TYPE)) {
       formViewerTemplateList.addAll(getTemplateList(TEMPLATE_STORAGE_FOLDER,
                                                     DISPLAY_TEMPLATE_CATEGORY));
     }
@@ -515,8 +514,7 @@ public class UICLVConfig extends UIForm  implements UISelectable {
     UIFormStringInput showScvWithInput = new UIFormStringInput(SHOW_SCV_WITH_STRING_INPUT,
                                                                SHOW_SCV_WITH_STRING_INPUT,
                                                                showScvWith);
-    if (appType.equals(CATOGORIES_NAVIGATION_TYPE)
-        || appType.equals(UICLVPortlet.CATOGORIES_NAVIGATION_BY_QUERY_TYPE)) {
+    if (appType.equals(CATOGORIES_NAVIGATION_TYPE)) {
       //Disable option
       displayModeRadioBoxInput.setEnable(false);
       showAutomaticDetectionCheckBox.setEnable(false);
@@ -530,12 +528,6 @@ public class UICLVConfig extends UIForm  implements UISelectable {
       //contextualFolderRadioBoxInput.setEnable(false);
       showScvWithInput.setEnable(false);
     }
-    
-    if (this.isContentListByQuery()) {
-      displayModeRadioBoxInput.setEditable(false);      
-      displayModeRadioBoxInput.setEnable(false);
-    }
-    
     addChild(displayModeRadioBoxInput);
     addChild(itemPathInputSet);
     addChild(orderBySelectBox);
@@ -613,9 +605,7 @@ public class UICLVConfig extends UIForm  implements UISelectable {
    * @return
    */
   public boolean isContentListByQuery() {
-    return appType.equals(UICLVPortlet.CONTENT_LIST_BY_QUERY_TYPE)
-        || appType.equals(UICLVPortlet.CATEGORIES_CONTENT_BY_QUERY_TYPE)
-        || appType.equals(UICLVPortlet.CATOGORIES_NAVIGATION_BY_QUERY_TYPE);
+    return appType.equals(UICLVPortlet.APPLICATION_CLV_BY_QUERY);
   }  
   /* (non-Javadoc)
    * @see org.exoplatform.ecm.webui.selector.UISelectable#doSelect(java.lang.String, java.lang.Object)
@@ -639,7 +629,7 @@ public class UICLVConfig extends UIForm  implements UISelectable {
           this.setDriveName(values[0]);
           //check if drive is selected instead of folder
           ManageDriveService managerDriveService = this.getApplicationComponent(ManageDriveService.class);
-          for (DriveData data : managerDriveService.getAllDrives(values[1])) {
+          for (DriveData data : managerDriveService.getAllDrives()) {
             if (data.getHomePath().equals(values[3])) {
               this.setDriveName(data.getName());
             }
@@ -826,13 +816,11 @@ public class UICLVConfig extends UIForm  implements UISelectable {
       portletPreferences.setValue(UICLVPortlet.PREFERENCE_SHOW_SCV_WITH, showScvWith);
       portletPreferences.setValue(UICLVPortlet.PREFERENCE_CACHE_ENABLED, ENABLE_CACHE.equals(cacheEnabled)?"true":"false");
       String appType = portletPreferences.getValue(UICLVPortlet.PREFERENCE_APPLICATION_TYPE, null);
-      if (UICLVPortlet.CONTENT_LIST_BY_QUERY_TYPE.equals(appType)
-          || UICLVPortlet.CATEGORIES_CONTENT_BY_QUERY_TYPE.equals(appType)
-          || UICLVPortlet.CATOGORIES_NAVIGATION_BY_QUERY_TYPE.equals(appType)) {
+      if (UICLVPortlet.APPLICATION_CLV_BY_QUERY.equals(appType)) {
         String workspace = ((UIFormSelectBox)clvConfig.getChildById(UICLVConfig.WORKSPACE_FORM_SELECT_BOX)).getValue();
         String query = ((UIFormTextAreaInput) clvConfig.getChildById(UICLVConfig.CONTENT_BY_QUERY_TEXT_AREA)).getValue();
         portletPreferences.setValue(UICLVPortlet.PREFERENCE_WORKSPACE, workspace);
-        portletPreferences.setValue(UICLVPortlet.PREFERENCE_CONTENT_BY_QUERY, query);
+        portletPreferences.setValue(UICLVPortlet.PREFERENCE_CONTENTS_BY_QUERY, query);
       }
       portletPreferences.store();
 
@@ -936,7 +924,7 @@ public class UICLVConfig extends UIForm  implements UISelectable {
         return "";
 
       ManageDriveService managerDriveService = clvConfig.getApplicationComponent(ManageDriveService.class);
-      DriveData driveData = managerDriveService.getDriveByName(clvConfig.getDriveName(), repository);
+      DriveData driveData = managerDriveService.getDriveByName(clvConfig.getDriveName());
       if (!path.startsWith(driveData.getHomePath()))
         return "";
       if ("/".equals(driveData.getHomePath()))

@@ -636,9 +636,8 @@ public class UICLVPresentation extends UIContainer {
   public boolean isShowRssLink() {
     PortletPreferences portletPreferences = Utils.getAllPortletPreferences();
     String currentApplicationMode = portletPreferences.getValue(UICLVPortlet.PREFERENCE_APPLICATION_TYPE, null);    
-    if (currentApplicationMode.equals(UICLVPortlet.CONTENT_LIST_BY_QUERY_TYPE)
-        || currentApplicationMode.equals(UICLVPortlet.CATEGORIES_CONTENT_BY_QUERY_TYPE)
-        || currentApplicationMode.equals(UICLVPortlet.CATOGORIES_NAVIGATION_BY_QUERY_TYPE) ) return false;
+    if (currentApplicationMode.equals(UICLVPortlet.APPLICATION_CLV_BY_QUERY)) 
+      return false;
     
     return isShowField(UICLVPortlet.PREFERENCE_SHOW_RSSLINK)
         && (this.getAncestorOfType(UICLVPortlet.class).getFolderPathParamValue() != null

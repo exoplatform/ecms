@@ -49,8 +49,11 @@
       <ContentPath>Content path</ContentPath>
       <Up>Up</Up>
       <Down>Down</Down>
-      <UICLVConfigCacheManagementLabel>Cache Management</UICLVConfigCacheManagementLabel>
-	  <UICLVConfigCacheEnableRadioBoxInput>Share contents between users</UICLVConfigCacheEnableRadioBoxInput>      
+      <UICLVConfigCacheManagementLabel>Contents Visibility</UICLVConfigCacheManagementLabel>
+      <UICLVContentByQueryLabel>Contents by Query</UICLVContentByQueryLabel>
+      <UICLVConfigWorkspaceFormSelectBox>Workspace</UICLVConfigWorkspaceFormSelectBox>
+      <UICLVConfigContentByQueryTextArea>by query</UICLVConfigContentByQueryTextArea>
+	    <UICLVConfigCacheEnableRadioBoxInput>Share contents between users</UICLVConfigCacheEnableRadioBoxInput>      
     </label>
     <action>
       <Save>حفظ</Save>
@@ -128,8 +131,8 @@
   
   <UICLVConfigCacheEnableRadioBoxInput>
   	<label>
-	  <ENABLE>Enabled</ENABLE>
-	  <DISABLE>Disabled</DISABLE>
+      <ENABLE>Restricted by Authentication</ENABLE>
+      <DISABLE>Restricted by User roles</DISABLE>
   	</label>
   </UICLVConfigCacheEnableRadioBoxInput>
 </bundle>
