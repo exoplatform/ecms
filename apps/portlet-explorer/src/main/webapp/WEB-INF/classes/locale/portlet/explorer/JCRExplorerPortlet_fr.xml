@@ -572,7 +572,7 @@
       <MoveToTrash>Déplacer dans la poubelle</MoveToTrash>
       <RestoreFromTrash>Restaurer de la poubelle</RestoreFromTrash>
       <EmptyTrash>Vider la poubelle</EmptyTrash>      
-						<WebDavView>Télécharger pour éditer</WebDavView>
+	  <WebDavView>Télécharger pour éditer</WebDavView>
     </event>
   </ECMContextMenu>
   <!--
@@ -2874,7 +2874,7 @@
     <label>
       <OwnedByMe>Créés par moi</OwnedByMe>
       <Favourites>Favoris</Favourites>
-      <Hidden>Caché</Hidden>
+      <Hidden>Cachés</Hidden>
       <Trash>Poubelle</Trash>
       <Configuration>Configurer les préférences</Configuration>      
     </label>
@@ -2984,7 +2984,7 @@
     <label>
       <showOwnedByUser>Créés par moi</showOwnedByUser>
       <showFavourites>Favoris</showFavourites>
-      <showHiddens>Caché</showHiddens>
+      <showHiddens>Cachés</showHiddens>
       <showTrash>Poubelle</showTrash>
     </label>
     <title>Configurer les préférences</title>
