@@ -10,6 +10,7 @@
       <non-contents>Sorry, no articles available.</non-contents>
       <item-not-found>Item not found</item-not-found>
       <no-permission>You don't have permission to access this node</no-permission>
+      <category-back>Go to previous</category-back>
     </msg>
   </UICLVContainer>
 

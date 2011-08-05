@@ -5,6 +5,7 @@
       <non-contents>Excusez-nous, aucun article n'est disponible.</non-contents>
       <item-not-found>Le contenu n'a pas été trouvé</item-not-found>
       <no-permission>Vous n'avez pas la permission d'accéder à ce contenu</no-permission>
+      <category-back>Aller à la précédente</category-back>
     </msg>
   </UICLVContainer>
 
