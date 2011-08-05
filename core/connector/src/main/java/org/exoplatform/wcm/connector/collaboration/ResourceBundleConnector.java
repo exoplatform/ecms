@@ -63,7 +63,16 @@ public class ResourceBundleConnector implements ResourceContainer {
       Set<String> remainingKeys = new LinkedHashSet<String>(keys.length + 1, 1f);
       Collections.addAll(remainingKeys, keys);
       loop : for (String resourceBundleName : resourceBundleNames) {
-        ResourceBundle resourceBundle = resourceBundleService.getResourceBundle(resourceBundleName, new Locale(locale));
+        ResourceBundle resourceBundle = null;
+        if(locale.indexOf("_") > 0) {
+            resourceBundle = resourceBundleService.getResourceBundle(resourceBundleName, new Locale(
+                locale.substring(0, locale.lastIndexOf("_")), 
+                locale.substring(locale.lastIndexOf("_") + 1, locale.length()))); 
+            
+        } else {
+          resourceBundle = resourceBundleService.getResourceBundle(resourceBundleName, new Locale(locale));
+        }
+        
         for (Iterator<String> it = remainingKeys.iterator(); it.hasNext();) {
           String key = it.next();
           try {

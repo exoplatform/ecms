@@ -27,10 +27,15 @@
     int interval = session.getAttribute("DefaultMaxInactiveInterval");
     session.setMaxInactiveInterval(interval);  
   }
+		String language = rcontext.getLocale().getLanguage();
+		String country = rcontext.getLocale().getCountry();
+		if (country != null && country.length() > 0) {
+    language += "_" + country;
+  }   
 %>
 <script type="text/javascript">
   eXo.env.portal.userName='<%= userName %>';
-  eXo.env.portal.language='<%= rcontext.getLocale().getLanguage() %>'
+  eXo.env.portal.language='<%= language %>'
   eXo.env.portal.navigations = <%= JSONnavigation %> ;
   eXo.env.portal.selectedNodeUri = '<%= selectedNodeUri %>';
   eXo.env.portal.wcmContentTitle = '<%= _ctx.getRequestContext().getRequest().getAttribute("WCM.Content.Title") %>';

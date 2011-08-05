@@ -1,0 +1,43 @@
+Index: packaging/wcm/webapp/src/main/webapp/groovy/portal/webui/workspace/UIWorkingWorkspace.gtmpl
+===================================================================
+--- packaging/wcm/webapp/src/main/webapp/groovy/portal/webui/workspace/UIWorkingWorkspace.gtmpl	(revision 69221)
++++ packaging/wcm/webapp/src/main/webapp/groovy/portal/webui/workspace/UIWorkingWorkspace.gtmpl	(working copy)
+@@ -27,10 +27,15 @@
+     int interval = session.getAttribute("DefaultMaxInactiveInterval");
+     session.setMaxInactiveInterval(interval);  
+   }
++		String language = rcontext.getLocale().getLanguage();
++		String country = rcontext.getLocale().getCountry();
++		if (country != null && country.length() > 0) {
++    language += "_" + country;
++  }   
+ %>
+ <script type="text/javascript">
+   eXo.env.portal.userName='<%= userName %>';
+-  eXo.env.portal.language='<%= rcontext.getLocale().getLanguage() %>'
++  eXo.env.portal.language='<%= language %>'
+   eXo.env.portal.navigations = <%= JSONnavigation %> ;
+   eXo.env.portal.selectedNodeUri = '<%= selectedNodeUri %>';
+   eXo.env.portal.wcmContentTitle = '<%= _ctx.getRequestContext().getRequest().getAttribute("WCM.Content.Title") %>';
+Index: core/connector/src/main/java/org/exoplatform/wcm/connector/collaboration/ResourceBundleConnector.java
+===================================================================
+--- core/connector/src/main/java/org/exoplatform/wcm/connector/collaboration/ResourceBundleConnector.java	(revision 69221)
++++ core/connector/src/main/java/org/exoplatform/wcm/connector/collaboration/ResourceBundleConnector.java	(working copy)
+@@ -63,7 +63,16 @@
+       Set<String> remainingKeys = new LinkedHashSet<String>(keys.length + 1, 1f);
+       Collections.addAll(remainingKeys, keys);
+       loop : for (String resourceBundleName : resourceBundleNames) {
+-        ResourceBundle resourceBundle = resourceBundleService.getResourceBundle(resourceBundleName, new Locale(locale));
++        ResourceBundle resourceBundle = null;
++        if(locale.indexOf("_") > 0) {
++            resourceBundle = resourceBundleService.getResourceBundle(resourceBundleName, new Locale(
++                locale.substring(0, locale.lastIndexOf("_")), 
++                locale.substring(locale.lastIndexOf("_") + 1, locale.length()))); 
++            
++        } else {
++          resourceBundle = resourceBundleService.getResourceBundle(resourceBundleName, new Locale(locale));
++        }
++        
+         for (Iterator<String> it = remainingKeys.iterator(); it.hasNext();) {
+           String key = it.next();
+           try {
