@@ -171,7 +171,6 @@ public class UISearchForm extends UIForm {
    * the searchAction event occurs, that object's appropriate
    * method is invoked.
    *
-   * @see SearchActionEvent
    */
   public static class SearchActionListener extends EventListener<UISearchForm> {
 
@@ -251,6 +250,7 @@ public class UISearchForm extends UIForm {
       }
       int itemsPerPage = Integer.parseInt(portletPreferences.getValue(UIWCMSearchPortlet.ITEMS_PER_PAGE,
                                                                       null));
+      queryCriteria.setPageMode(portletPreferences.getValue(UIWCMSearchPortlet.PAGE_MODE, null));
       try {
 
         AbstractPageList<ResultNode> pageList = 

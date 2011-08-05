@@ -80,6 +80,9 @@ public class UISearchResult extends UIContainer {
 
   /** The suggestion. */
   private String                   suggestionURL;
+  
+  /** The PageMode */
+  private String                    pageMode;
 
   /** The date formatter. */
   private SimpleDateFormat         dateFormatter    = new SimpleDateFormat(ISO8601.SIMPLE_DATETIME_FORMAT);
@@ -105,11 +108,13 @@ public class UISearchResult extends UIContainer {
     PortletPreferences portletPreferences = portletRequestContext.getRequest().getPreferences();
     String paginatorTemplatePath = portletPreferences.getValue(UIWCMSearchPortlet.SEARCH_PAGINATOR_TEMPLATE_PATH,
                                                                null);
+    this.pageMode = portletPreferences.getValue(UIWCMSearchPortlet.PAGE_MODE, SiteSearchService.PAGE_MODE_NONE);
     this.templatePath = templatePath;
     this.resourceResolver = resourceResolver;
     uiPaginator = addChild(UICustomizeablePaginator.class, null, null);
     uiPaginator.setTemplatePath(paginatorTemplatePath);
     uiPaginator.setResourceResolver(resourceResolver);
+    uiPaginator.setPageMode(pageMode);
   }
 
   /*
@@ -152,14 +157,17 @@ public class UISearchResult extends UIContainer {
 
       TemplateService templateService = WCMCoreUtils.getService(TemplateService.class);
       List<String> documentNodeTypes = templateService.getAllDocumentNodeTypes();
-
+      
+      String pageMode = portletPreferences.getValue(UIWCMSearchPortlet.PAGE_MODE, SiteSearchService.PAGE_MODE_NONE);
+      
       queryCriteria.setContentTypes(documentNodeTypes.toArray(new String[documentNodeTypes.size()]));
       queryCriteria.setSiteName(portal);
       queryCriteria.setKeyword(keyword.toLowerCase());
       queryCriteria.setSearchWebpage(isWebPage);
       queryCriteria.setSearchDocument(isSearchDocument);
       queryCriteria.setSearchWebContent(isSearchDocument);
-
+      queryCriteria.setPageMode(pageMode);
+      
       if (Boolean.parseBoolean(Utils.getCurrentMode())) {
         queryCriteria.setLiveMode(true);
       } else {
@@ -226,6 +234,32 @@ public class UISearchResult extends UIContainer {
     return uiPaginator.getCurrentPage();
   }
 
+  /**
+   * Gets the page mode
+   * @return the page mode
+   */
+  public String getPageMode() {
+    return pageMode;
+  }
+
+  /**
+   * Checks if there are more results to show
+   * @return true if exists, false if not
+   */
+  public boolean hasMoreResults() {
+    int currentPage = uiPaginator.getCurrentPage();
+    try {
+      int nextPageSize = uiPaginator.getPageList().getPage(currentPage + 1).size();
+      return nextPageSize > 0;
+    } catch (Exception e) {
+      return false;
+    } finally {
+      try {
+        uiPaginator.setCurrentPage(currentPage);
+      } catch (Exception e) {}
+    }
+  }
+  
   /*
    * (non-Javadoc)
    * @see org.exoplatform.portal.webui.portal.UIPortalComponent#getTemplate()

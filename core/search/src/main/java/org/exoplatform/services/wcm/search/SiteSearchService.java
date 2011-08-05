@@ -27,6 +27,10 @@ import org.exoplatform.services.wcm.search.base.AbstractPageList;
  */
 public interface SiteSearchService {
 
+  public final static String PAGE_MODE_NONE = "none";
+  public final static String PAGE_MODE_MORE = "more";
+  public final static String PAGE_MODE_PAGINATION = "pagination";  
+  
   /**
    * Adds the exclude include data type plugin.
    *

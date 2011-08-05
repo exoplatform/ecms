@@ -61,19 +61,19 @@ import org.exoplatform.webui.form.UIFormStringInput;
 public class UISearchPageLayoutManager extends UIForm  implements UISelectable {
 
   /** The Constant PORTLET_NAME. */
-  public static final String PORTLET_NAME                       = "WCM Advance Search".intern();
+  public static final String PORTLET_NAME                       = "WCM Advance Search";
 
   /** The Constant SEARCH_PAGE_LAYOUT_CATEGORY. */
-  public static final String SEARCH_PAGE_LAYOUT_CATEGORY        = "search-page-layout".intern();
+  public static final String SEARCH_PAGE_LAYOUT_CATEGORY        = "search-page-layout";
 
   /** The Constant SEARCH_PAGE_LAYOUT_SELECTOR. */
-  public static final String SEARCH_PAGE_LAYOUT_SELECTOR        = "searchPageLayoutSelector".intern();
+  public static final String SEARCH_PAGE_LAYOUT_SELECTOR        = "searchPageLayoutSelector";
 
   /** The Constant SEARCH_FORM_TEMPLATE_CATEGORY. */
-  public static final String SEARCH_FORM_TEMPLATE_CATEGORY      = "search-form".intern();
+  public static final String SEARCH_FORM_TEMPLATE_CATEGORY      = "search-form";
 
-  /** The Constant SEARCH_PAGINATOR_TEMPLATE_CATEGORY. */
-  public static final String SEARCH_PAGINATOR_TEMPLATE_CATEGORY = "search-paginator";
+//  /** The Constant SEARCH_PAGINATOR_TEMPLATE_CATEGORY. */
+//  public static final String SEARCH_PAGINATOR_TEMPLATE_CATEGORY = "search-paginator";
 
   /** The Constant SEARCH_RESULT_TEMPLATE_CATEGORY. */
   public static final String SEARCH_RESULT_TEMPLATE_CATEGORY    = "search-result";
@@ -89,6 +89,9 @@ public class UISearchPageLayoutManager extends UIForm  implements UISelectable {
 
   /** The Constant ITEMS_PER_PAGE_SELECTOR. */
   public final static String ITEMS_PER_PAGE_SELECTOR            = "itemsPerPageSelector";
+  
+  /** The Constant PAGE_MODE_SELECTOR. */
+  public final static String PAGE_MODE_SELECTOR                 = "pageMode";
 
   /** The Constant BASE_PATH_INPUT. */
   public final static String BASE_PATH_INPUT                    = "searchResultBasePathInput";
@@ -125,20 +128,21 @@ public class UISearchPageLayoutManager extends UIForm  implements UISelectable {
     PortletPreferences portletPreferences = portletRequestContext.getRequest().getPreferences();
 
     String itemsPerpage = portletPreferences.getValue(UIWCMSearchPortlet.ITEMS_PER_PAGE, null);
+    String pageMode = portletPreferences.getValue(UIWCMSearchPortlet.PAGE_MODE, null);
     String searchFormTemplate = portletPreferences.getValue(UIWCMSearchPortlet.SEARCH_FORM_TEMPLATE_PATH,
                                                             null);
     String searchResultTemplate = portletPreferences.getValue(UIWCMSearchPortlet.SEARCH_RESULT_TEMPLATE_PATH,
                                                               null);
-    String searchPaginatorTemplate = portletPreferences.getValue(UIWCMSearchPortlet.SEARCH_PAGINATOR_TEMPLATE_PATH,
-                                                                 null);
+//    String searchPaginatorTemplate = portletPreferences.getValue(UIWCMSearchPortlet.SEARCH_PAGINATOR_TEMPLATE_PATH,
+//                                                                 null);
     String searchPageLayoutTemplate = portletPreferences.getValue(UIWCMSearchPortlet.SEARCH_PAGE_LAYOUT_TEMPLATE_PATH,
                                                                   null);
     List<SelectItemOption<String>> searchFormTemplateList = createTemplateList(PORTLET_NAME,
                                                                                SEARCH_FORM_TEMPLATE_CATEGORY);
     List<SelectItemOption<String>> searchResultTemplateList = createTemplateList(PORTLET_NAME,
                                                                                  SEARCH_RESULT_TEMPLATE_CATEGORY);
-    List<SelectItemOption<String>> searchPaginatorTemplateList = createTemplateList(PORTLET_NAME,
-                                                                                    SEARCH_PAGINATOR_TEMPLATE_CATEGORY);
+//    List<SelectItemOption<String>> searchPaginatorTemplateList = createTemplateList(PORTLET_NAME,
+//                                                                                    SEARCH_PAGINATOR_TEMPLATE_CATEGORY);
     List<SelectItemOption<String>> searchPageLayoutTemplateList = createTemplateList(PORTLET_NAME,
                                                                                      SEARCH_PAGE_LAYOUT_CATEGORY);
     List<SelectItemOption<String>> itemsPerPageList = new ArrayList<SelectItemOption<String>>();
@@ -146,6 +150,15 @@ public class UISearchPageLayoutManager extends UIForm  implements UISelectable {
     itemsPerPageList.add(new SelectItemOption<String>("10", "10"));
     itemsPerPageList.add(new SelectItemOption<String>("20", "20"));
 
+    List<SelectItemOption<String>> pageModeList = new ArrayList<SelectItemOption<String>>();
+    pageModeList.add(new SelectItemOption<String>("none", "none"));
+    pageModeList.add(new SelectItemOption<String>("more", "more"));
+    pageModeList.add(new SelectItemOption<String>("pagination", "pagination"));
+    
+    UIFormSelectBox pageModeSelector = new UIFormSelectBox(PAGE_MODE_SELECTOR,
+            PAGE_MODE_SELECTOR,
+            pageModeList);
+    
     UIFormSelectBox itemsPerPageSelector = new UIFormSelectBox(ITEMS_PER_PAGE_SELECTOR,
                                                                ITEMS_PER_PAGE_SELECTOR,
                                                                itemsPerPageList);
@@ -155,9 +168,9 @@ public class UISearchPageLayoutManager extends UIForm  implements UISelectable {
     UIFormSelectBox searchResultTemplateSelector = new UIFormSelectBox(SEARCH_RESULT_TEMPLATE_SELECTOR,
                                                                        SEARCH_RESULT_TEMPLATE_SELECTOR,
                                                                        searchResultTemplateList);
-    UIFormSelectBox searchPaginatorTemplateSelector = new UIFormSelectBox(SEARCH_PAGINATOR_TEMPLATE_SELECTOR,
-                                                                          SEARCH_PAGINATOR_TEMPLATE_SELECTOR,
-                                                                          searchPaginatorTemplateList);
+//    UIFormSelectBox searchPaginatorTemplateSelector = new UIFormSelectBox(SEARCH_PAGINATOR_TEMPLATE_SELECTOR,
+//                                                                          SEARCH_PAGINATOR_TEMPLATE_SELECTOR,
+//                                                                          searchPaginatorTemplateList);
     UIFormSelectBox searchPageLayoutTemplateSelector = new UIFormSelectBox(SEARCH_PAGE_LAYOUT_SELECTOR,
                                                                            SEARCH_PAGE_LAYOUT_SELECTOR,
                                                                            searchPageLayoutTemplateList);
@@ -170,16 +183,18 @@ public class UISearchPageLayoutManager extends UIForm  implements UISelectable {
     targetPathFormInputSet.setActionInfo(BASE_PATH_INPUT, new String[] {"SelectBasePath"}) ;
     targetPathFormInputSet.addUIFormInput(targetPathFormStringInput);
 
+    pageModeSelector.setValue(pageMode);
     itemsPerPageSelector.setValue(itemsPerpage);
     searchFormTemplateSelector.setValue(searchFormTemplate);
     searchResultTemplateSelector.setValue(searchResultTemplate);
-    searchPaginatorTemplateSelector.setValue(searchPaginatorTemplate);
+//    searchPaginatorTemplateSelector.setValue(searchPaginatorTemplate);
     searchPageLayoutTemplateSelector.setValue(searchPageLayoutTemplate);
 
+    addChild(pageModeSelector);
     addChild(itemsPerPageSelector);
     addChild(searchFormTemplateSelector);
     addChild(searchResultTemplateSelector);
-    addChild(searchPaginatorTemplateSelector);
+//    addChild(searchPaginatorTemplateSelector);
     addChild(searchPageLayoutTemplateSelector);
     addChild(targetPathFormInputSet);
 
@@ -218,7 +233,6 @@ public class UISearchPageLayoutManager extends UIForm  implements UISelectable {
    * the saveAction event occurs, that object's appropriate
    * method is invoked.
    *
-   * @see SaveActionEvent
    */
   public static class SaveActionListener extends EventListener<UISearchPageLayoutManager> {
 
@@ -242,13 +256,15 @@ public class UISearchPageLayoutManager extends UIForm  implements UISelectable {
           getUIFormSelectBox(UISearchPageLayoutManager.SEARCH_RESULT_TEMPLATE_SELECTOR).getValue();
       String searchFormTemplatePath = uiSearchLayoutManager.
           getUIFormSelectBox(UISearchPageLayoutManager.SEARCH_FORM_TEMPLATE_SELECTOR).getValue();
-      String searchPaginatorTemplatePath = uiSearchLayoutManager.
-          getUIFormSelectBox(UISearchPageLayoutManager.SEARCH_PAGINATOR_TEMPLATE_SELECTOR).getValue();
+//      String searchPaginatorTemplatePath = uiSearchLayoutManager.
+//          getUIFormSelectBox(UISearchPageLayoutManager.SEARCH_PAGINATOR_TEMPLATE_SELECTOR).getValue();
       String searchPageLayoutTemplatePath = uiSearchLayoutManager.
           getUIFormSelectBox(UISearchPageLayoutManager.SEARCH_PAGE_LAYOUT_SELECTOR).getValue();
       String itemsPerPage = uiSearchLayoutManager.
           getUIFormSelectBox(UISearchPageLayoutManager.ITEMS_PER_PAGE_SELECTOR).getValue();
 
+      String pageMode = uiSearchLayoutManager.getUIFormSelectBox(UISearchPageLayoutManager.PAGE_MODE_SELECTOR).getValue();
+      
       String basePath = uiSearchLayoutManager.getUIStringInput(UISearchPageLayoutManager.BASE_PATH_INPUT)
                                              .getValue();
 
@@ -258,11 +274,12 @@ public class UISearchPageLayoutManager extends UIForm  implements UISelectable {
                                   searchResultTemplatePath);
       portletPreferences.setValue(UIWCMSearchPortlet.SEARCH_FORM_TEMPLATE_PATH,
                                   searchFormTemplatePath);
-      portletPreferences.setValue(UIWCMSearchPortlet.SEARCH_PAGINATOR_TEMPLATE_PATH,
-                                  searchPaginatorTemplatePath);
+//      portletPreferences.setValue(UIWCMSearchPortlet.SEARCH_PAGINATOR_TEMPLATE_PATH,
+//                                  searchPaginatorTemplatePath);
       portletPreferences.setValue(UIWCMSearchPortlet.SEARCH_PAGE_LAYOUT_TEMPLATE_PATH,
                                   searchPageLayoutTemplatePath);
       portletPreferences.setValue(UIWCMSearchPortlet.ITEMS_PER_PAGE, itemsPerPage);
+      portletPreferences.setValue(UIWCMSearchPortlet.PAGE_MODE, pageMode);
       portletPreferences.setValue(UIWCMSearchPortlet.BASE_PATH, basePath);
       portletPreferences.store();
 
@@ -284,7 +301,6 @@ public class UISearchPageLayoutManager extends UIForm  implements UISelectable {
    * the cancelAction event occurs, that object's appropriate
    * method is invoked.
    *
-   * @see CancelActionEvent
    */
   public static class CancelActionListener extends EventListener<UISearchPageLayoutManager> {
 
@@ -320,7 +336,6 @@ public class UISearchPageLayoutManager extends UIForm  implements UISelectable {
    * the selectTargetPageAction event occurs, that object's appropriate
    * method is invoked.
    *
-   * @see SelectTargetPageActionEvent
    */
   public static class SelectBasePathActionListener extends EventListener<UISearchPageLayoutManager> {
 

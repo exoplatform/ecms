@@ -14,10 +14,13 @@
  import org.exoplatform.wcm.webui.paginator.UICustomizeablePaginator;
  import org.exoplatform.wcm.webui.search.UISearchForm;
  import org.exoplatform.wcm.webui.search.UISearchPageLayout;
+ import org.exoplatform.services.wcm.search.SiteSearchService;
 %>
 
 <div id="$uicomponent.id" class="UIAdvanceSearchResultDefault">
  <%
+  def showPaginator = false;
+  def pageMode = uicomponent.getPageMode();
   def currentPageData = uicomponent.getCurrentPageData();
   def keyword = uicomponent.getKeyword();
   def resultType = uicomponent.getResultType();
@@ -33,14 +36,18 @@
     	def itemsPerPage = uicomponent.getItemsPerPage();
       def totalItem = uicomponent.getTotalItem();
       def startItemIndex = (currentPage - 1) * itemsPerPage + 1;
-      def endItemIndex = currentPage* itemsPerPage;
+      def endItemIndex = startItemIndex + currentPageData.size() - 1;
       def searchTime = uicomponent.getSearchTime();
-      if (endItemIndex > totalItem) endItemIndex = totalItem;
+      if (endItemIndex > totalItem && SiteSearchService.PAGE_MODE_PAGINATION.equals(pageMode) ) endItemIndex = totalItem;
+      showPaginator = (itemsPerPage==currentPageData.size() && SiteSearchService.PAGE_MODE_MORE.equals(pageMode))  && uicomponent.hasMoreResults() || 
+                                    (SiteSearchService.PAGE_MODE_PAGINATION.equals(pageMode));
       %>
        <div class="SearchSummary">
-        <%= _ctx.appRes("UIDefaultSearchResult.label.resutlsCaption") %> <b><%= startItemIndex %></b> - <b><%= endItemIndex %></b> 
-        <%= _ctx.appRes("UIDefaultSearchResult.label.ofAboutCaption") %> <b><%= totalItem %></b> 
-        <%= _ctx.appRes("UIDefaultSearchResult.label.forCaption") %> <b><%= keyword %></b> 
+        <%= _ctx.appRes("UIDefaultSearchResult.label.resutlsCaption") %> <b><%= startItemIndex %></b> - <b><%= endItemIndex %></b>
+        <% if (SiteSearchService.PAGE_MODE_PAGINATION.equals(pageMode)) { %>
+          <%= _ctx.appRes("UIDefaultSearchResult.label.ofAboutCaption") %> <b><%= totalItem %></b>
+          <%= _ctx.appRes("UIDefaultSearchResult.label.forCaption") %> <b><%= keyword %></b>
+        <% } %>
         (<b><%= searchTime %></b> <%= _ctx.appRes("UIDefaultSearchResult.label.timeUnitCaption") %>)
        </div>
       <%
@@ -130,7 +137,7 @@
     }
    %>
     <div class="ItemFunc">
-     <% if (uicomponent.getNumberOfPage() > 1) uicomponent.renderChild(UICustomizeablePaginator.class); %>
+     <% if (showPaginator) uicomponent.renderChild(UICustomizeablePaginator.class); %>
     </div>
    <%
   }

@@ -849,6 +849,11 @@
             <read-only>false</read-only>
           </preference>
           <preference>
+            <name>pageMode</name>
+            <value>more</value> <!-- supported modes : pagination, more, none -->
+            <read-only>false</read-only>
+          </preference>
+          <preference>
             <name>showQuickEditButton</name>
             <value>true</value>
             <read-only>false</read-only>

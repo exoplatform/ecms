@@ -81,6 +81,31 @@ public class QueryCriteria {
   /** The is live mode. */
   private boolean isLiveMode = true;
 
+  /** The starting offset */
+  private long offset = -1;
+
+  /** Pagination mode :
+   * - none : no pagination
+   * - more : twitter like pagination with "more" link
+   * - pagination : pagination mode with page number and total size */
+  private String pageMode = SiteSearchService.PAGE_MODE_NONE;
+
+  public String getPageMode() {
+    return pageMode;
+  }
+
+  public void setPageMode(String pageMode) {
+    this.pageMode = pageMode;
+  }
+
+  public long getOffset() {
+    return offset;
+  }
+
+  public void setOffset(long offset) {
+    this.offset = offset;
+  }
+  
   /**
    * Checks if is live mode.
    *
