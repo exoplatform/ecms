@@ -27,6 +27,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.zip.ZipInputStream;
@@ -59,13 +60,14 @@ import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.util.Text;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
-import org.exoplatform.services.organization.Group;
-import org.exoplatform.services.organization.Membership;
-import org.exoplatform.services.organization.OrganizationService;
 import org.exoplatform.services.resources.ResourceBundleService;
 import org.exoplatform.services.wcm.publication.WCMComposer;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.RequestContext;
+import org.exoplatform.services.security.ConversationState;
+import org.exoplatform.services.security.Identity;
+import org.exoplatform.services.security.IdentityRegistry;
+import org.exoplatform.services.security.MembershipEntry;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.application.portlet.PortletRequestContext;
 
@@ -139,7 +141,7 @@ public class Utils {
   final static public String EXO_SUMMARY = "exo:summary";
   final static public String EXO_RELATION = "exo:relation";
   @Deprecated
-  final static public String EXO_TAXANOMY = "exo:taxonomy";  
+  final static public String EXO_TAXANOMY = "exo:taxonomy";
   final static public String EXO_TAXONOMY = "exo:taxonomy";
   final static public String EXO_IMAGE = "exo:image";
   final static public String EXO_ARTICLE = "exo:article";
@@ -298,7 +300,7 @@ public class Utils {
                                                     TemplateService templateService) throws Exception {
     return getListAllowedFileType(currentNode, templateService);
   }
-  
+
   public static List<String> getListAllowedFileType(Node currentNode,
                                                     TemplateService templateService) throws Exception {
     List<String> nodeTypes = new ArrayList<String>();
@@ -350,7 +352,7 @@ public class Utils {
       LOG.error("Unexpected error", e);
     }
     return nodeTypes;
-  }  
+  }
 
   public static String getNodeTypeIcon(Node node, String appended, String mode)
       throws RepositoryException {
@@ -435,41 +437,41 @@ public class Utils {
 
   public static List<String> getMemberships() throws Exception {
     String userId = Util.getPortalRequestContext().getRemoteUser();
-    OrganizationService oservice = Util.getUIPortal().getApplicationComponent(
-        OrganizationService.class);
     List<String> userMemberships = new ArrayList<String>();
-    userMemberships.add(userId);
-    Collection<?> memberships = oservice.getMembershipHandler()
-        .findMembershipsByUser(userId);
-    if (memberships == null || memberships.size() < 0)
-      return userMemberships;
-    Object[] objects = memberships.toArray();
-    for (int i = 0; i < objects.length; i++) {
-      Membership membership = (Membership) objects[i];
-      String role = membership.getMembershipType() + ":"
-          + membership.getGroupId();
-      userMemberships.add(role);
-    }
-    return userMemberships;
+   userMemberships.add(userId);
+    // here we must retrieve memberships of the user using the
+    // IdentityRegistry Service instead of Organization Service to
+    // allow JAAS based authorization
+    Collection<MembershipEntry> memberships = getUserMembershipsFromIdentityRegistry(userId);
+    if (memberships != null) {
+      for (MembershipEntry membership : memberships) {
+        String role = membership.getMembershipType() + ":" + membership.getGroup();
+        userMemberships.add(role);
+      }
+   }
+   return userMemberships;
+  }
+
+  /**
+   * this method retrieves memberships of the user having the given id using the
+   * IdentityRegistry service instead of the Organization service to allow JAAS
+   * based authorization
+   *
+   * @param authenticatedUser the authenticated user id
+   * @return a collection of MembershipEntry
+   */
+  private static Collection<MembershipEntry> getUserMembershipsFromIdentityRegistry(String authenticatedUser) {
+    ExoContainer container = ExoContainerContext.getCurrentContainer();
+    IdentityRegistry identityRegistry = (IdentityRegistry) container.getComponentInstanceOfType(IdentityRegistry.class);
+    Identity currentUserIdentity = identityRegistry.getIdentity(authenticatedUser);
+    return currentUserIdentity.getMemberships();
   }
 
   public static List<String> getGroups() throws Exception {
-    String userId = Util.getPortalRequestContext().getRemoteUser();
-    OrganizationService oservice = Util.getUIPortal().getApplicationComponent(
-        OrganizationService.class);
-    List<String> groupList = new ArrayList<String>();
-    Collection<?> groups = oservice.getGroupHandler().findGroupsOfUser(userId);
-    Object[] objects = groups.toArray();
-    for (int i = 0; i < objects.length; i++) {
-      Group group = (Group) objects[i];
-      String groupPath = null;
-      if (group.getParentId() == null || group.getParentId().length() == 0)
-        groupPath = "/" + group.getGroupName();
-      else
-        groupPath = group.getParentId() + "/" + group.getGroupName();
-      groupList.add(groupPath);
-    }
-    return groupList;
+    ConversationState conversationState = ConversationState.getCurrent();
+    Identity identity = conversationState.getIdentity();
+    Set<String> groups = identity.getGroups();
+    return new ArrayList<String>(groups);
   }
 
   public static String getNodeOwner(Node node) throws Exception {
@@ -487,7 +489,7 @@ public class Utils {
       throws Exception {
     return findNodeByUUID(uuid);
   }
-  
+
   public static Node findNodeByUUID(String uuid) throws Exception {
     RepositoryService repositoryService = Util.getUIPortal()
         .getApplicationComponent(RepositoryService.class);
@@ -506,7 +508,7 @@ public class Utils {
       }
     }
     return node;
-  }  
+  }
 
   public static boolean isSymLink(Node node) throws RepositoryException {
     LinkManager linkManager = Util.getUIPortal().getApplicationComponent(
@@ -633,7 +635,7 @@ public class Utils {
         getComponentInstance(PortalContainerConfig.class);
     return portalContainerConfig.getRestContextName(portalContainerName);
   }
-  
+
   public static String getInlineEditingField(Node orgNode, String propertyName) throws Exception {
     String defaultValue ="";
     String idGenerator ="";
@@ -644,7 +646,7 @@ public class Utils {
     }
     idGenerator = m.replaceAll("_");
     return getInlineEditingField(orgNode, propertyName, defaultValue, INPUT_TEXT, idGenerator
-                                  , DEFAULT_CSS_NAME, true);  
+                                  , DEFAULT_CSS_NAME, true);
   }
   /**
    *
@@ -653,133 +655,133 @@ public class Utils {
    * @param inputType				input type for editing: TEXT, TEXTAREA, WYSIWYG
    * @param cssClass				class name for CSS, should implement: cssClass, [cssClass]Title
    * 												Edit[cssClass] as relative css
-   * 												Should create the function: InlineEditor.presentationRequestChange[cssClass] 
+   * 												Should create the function: InlineEditor.presentationRequestChange[cssClass]
    * 												to request the rest-service
-   * @param isGenericProperty  set as true to use generic javascript function, other wise, must create 
+   * @param isGenericProperty  set as true to use generic javascript function, other wise, must create
    *                        the correctspond function InlineEditor.presentationRequestChange[cssClass]
    * @param arguments       Extra parameter for Input component (toolbar, width, height,.. for CKEditor/TextArea)
    * @return								String that can be put on groovy template
    * @throws 								Exception
    * @author 								vinh_nguyen
    */
-  public static String getInlineEditingField(Node orgNode, String propertyName, String defaultValue, String inputType, 
-  									String idGenerator, String cssClass, boolean isGenericProperty, String... arguments) throws Exception {
+  public static String getInlineEditingField(Node orgNode, String propertyName, String defaultValue, String inputType,
+                    String idGenerator, String cssClass, boolean isGenericProperty, String... arguments) throws Exception {
     HashMap<String,String> parsedArguments = parseArguments(arguments) ;
     String height = parsedArguments.get(HEIGHT);
     String bDirection = parsedArguments.get(BUTTON_DIR);
-  	if ( org.exoplatform.wcm.webui.Utils.getCurrentMode().equals(WCMComposer.MODE_LIVE)) {
-  		if (orgNode.hasProperty(propertyName)) {
-				try {
-					return orgNode.getProperty(propertyName).getString() ;
+    if ( org.exoplatform.wcm.webui.Utils.getCurrentMode().equals(WCMComposer.MODE_LIVE)) {
+      if (orgNode.hasProperty(propertyName)) {
+        try {
+          return orgNode.getProperty(propertyName).getString() ;
         } catch (Exception e) {
-        	return defaultValue;
+          return defaultValue;
         }
-			} 
-  		return defaultValue;
-  	}
-  	String currentValue =defaultValue;
-  	ResourceBundle resourceBundle;
-  	if (orgNode.hasProperty(propertyName)) {
-			try {
-				currentValue =  orgNode.getProperty(propertyName).getString() ;
+      }
+      return defaultValue;
+    }
+    String currentValue =defaultValue;
+    ResourceBundle resourceBundle;
+    if (orgNode.hasProperty(propertyName)) {
+      try {
+        currentValue =  orgNode.getProperty(propertyName).getString() ;
       } catch (Exception e) {}
-		} 
-		Locale locale = WebuiRequestContext.getCurrentInstance().getLocale();
-		String language = locale.getLanguage();
-		ResourceBundleService resourceBundleService = WCMCoreUtils.getService(ResourceBundleService.class);
-		resourceBundle = resourceBundleService.getResourceBundle(LOCALE_WEBUI_DMS, locale);
+    }
+    Locale locale = WebuiRequestContext.getCurrentInstance().getLocale();
+    String language = locale.getLanguage();
+    ResourceBundleService resourceBundleService = WCMCoreUtils.getService(ResourceBundleService.class);
+    resourceBundle = resourceBundleService.getResourceBundle(LOCALE_WEBUI_DMS, locale);
 
-  	String portletRealID = org.exoplatform.wcm.webui.Utils.getRealPortletId((PortletRequestContext)
-  			WebuiRequestContext.getCurrentInstance());
-  	StringBuffer sb = new StringBuffer();
-  	StringBuffer actionsb = new StringBuffer();
-  	String repo = ((ManageableRepository)orgNode.getSession().getRepository()).getConfiguration().getName();
-  	String workspace = orgNode.getSession().getWorkspace().getName();
-  	String uuid = orgNode.getUUID();
-  	String strSuggestion="";
-  	portletRealID = portletRealID.replace('-', '_');
-  	String showBlockId = "Current" + idGenerator + "_" + portletRealID;
-  	String editBlockEditorID = "Edit" + idGenerator + "_" + portletRealID;
-  	String editFormID = "Edit" + idGenerator + "Form_" + portletRealID;
-  	String newValueInputId = "new" + idGenerator + "_" + portletRealID;
-  	String currentValueID = "old" + idGenerator + "_" + portletRealID;
-  	String siteName = org.exoplatform.portal.webui.util.Util.getPortalRequestContext().getPortalOwner();
-  	try {
-  		strSuggestion = resourceBundle.getString("UIPresentation.label.EditingSuggestion");
-  	}catch (Exception E){}
-  	actionsb.append(" return InlineEditor.presentationRequestChange");
-  	
-  	if (isGenericProperty) {
-  		actionsb.append("Property").append("('").append("/property?', '").append(propertyName).append("', '");
-  	}else {
-  		actionsb.append(cssClass).append("('");
-  	}
-  	actionsb.append(currentValueID).append("', '").append(newValueInputId).append("', '").append(repo)
-  	.append("', '").append(workspace).append("', '").append(uuid).append("', '")
-  	.append(editBlockEditorID).append("', '").append(showBlockId).append("', '").append(siteName).append("', '").append(language);
-  	
-  	if (inputType.equals(INPUT_WYSIWYG)) {
-  		actionsb.append("', 1);");
-  	}else {
-  		actionsb.append("');");
-  	}
-  	String strAction = actionsb.toString();
-  	
-  	sb.append("<div class=\"InlineEditing\">\n");  	
-  	sb.append("\n<div id=\"").append(showBlockId).append("\" Class=\"").append(cssClass).append("\"");
-  	sb.append("title=\"").append(strSuggestion).append("\"");
-  	sb.append(" onDblClick=\"InlineEditor.presentationSwitchBlock('").append(showBlockId).
-  	   append("', '").append(editBlockEditorID).append("');\"");
-  	sb.append("onmouseout=\"this.className='").append(cssClass).
-  	   append("';\" onmouseover=\"this.className='").
-  	   append(cssClass).append("Hover';\">").
-  	   append(currentValue).
-  	   append("</div>\n");
-  	sb.append("\t<div id=\"").append(editBlockEditorID).append("\" class=\"Edit").append(cssClass).append("\">\n");
-  	sb.append("\t\t<form name=\"").append(editFormID).append("\" id=\"").append(editFormID).
-  	   append("\" onSubmit=\"").append(strAction).append("\">\n");
-  	sb.append("<DIV style=\"display:none; visible:hidden\" id=\"").append(currentValueID).
-  	   append("\" name=\"").append(currentValueID).append("\">").append(currentValue).append("</DIV>");
-  	
-  	if (bDirection!=null && bDirection.equals(LEFT2RIGHT)) {
-  	  sb.append("\t\t<a href=\"#\" class =\"AcceptButton\" style=\"float:left\" onclick=\"").
-  	     append(strAction).append("\">&nbsp;</a>\n");
-  	  sb.append("\t\t<a href=\"#\" class =\"CancelButton\" style=\"float:left\" ").
-  	     append("onClick=\"InlineEditor.presentationSwitchBlock('");
-      sb.append(editBlockEditorID).append("', '").append(showBlockId).append("');\">&nbsp;</a>\n");      
-  	} else {
-  	  sb.append("\t\t<a href=\"#\" class =\"CancelButton\" ").append("onClick=\"InlineEditor.presentationSwitchBlock('");
+    String portletRealID = org.exoplatform.wcm.webui.Utils.getRealPortletId((PortletRequestContext)
+        WebuiRequestContext.getCurrentInstance());
+    StringBuffer sb = new StringBuffer();
+    StringBuffer actionsb = new StringBuffer();
+    String repo = ((ManageableRepository)orgNode.getSession().getRepository()).getConfiguration().getName();
+    String workspace = orgNode.getSession().getWorkspace().getName();
+    String uuid = orgNode.getUUID();
+    String strSuggestion="";
+    portletRealID = portletRealID.replace('-', '_');
+    String showBlockId = "Current" + idGenerator + "_" + portletRealID;
+    String editBlockEditorID = "Edit" + idGenerator + "_" + portletRealID;
+    String editFormID = "Edit" + idGenerator + "Form_" + portletRealID;
+    String newValueInputId = "new" + idGenerator + "_" + portletRealID;
+    String currentValueID = "old" + idGenerator + "_" + portletRealID;
+    String siteName = org.exoplatform.portal.webui.util.Util.getPortalRequestContext().getPortalOwner();
+    try {
+      strSuggestion = resourceBundle.getString("UIPresentation.label.EditingSuggestion");
+    }catch (Exception E){}
+    actionsb.append(" return InlineEditor.presentationRequestChange");
+
+    if (isGenericProperty) {
+      actionsb.append("Property").append("('").append("/property?', '").append(propertyName).append("', '");
+    }else {
+      actionsb.append(cssClass).append("('");
+    }
+    actionsb.append(currentValueID).append("', '").append(newValueInputId).append("', '").append(repo)
+    .append("', '").append(workspace).append("', '").append(uuid).append("', '")
+    .append(editBlockEditorID).append("', '").append(showBlockId).append("', '").append(siteName).append("', '").append(language);
+
+    if (inputType.equals(INPUT_WYSIWYG)) {
+      actionsb.append("', 1);");
+    }else {
+      actionsb.append("');");
+    }
+    String strAction = actionsb.toString();
+
+    sb.append("<div class=\"InlineEditing\">\n");
+    sb.append("\n<div id=\"").append(showBlockId).append("\" Class=\"").append(cssClass).append("\"");
+    sb.append("title=\"").append(strSuggestion).append("\"");
+    sb.append(" onDblClick=\"InlineEditor.presentationSwitchBlock('").append(showBlockId).
+       append("', '").append(editBlockEditorID).append("');\"");
+    sb.append("onmouseout=\"this.className='").append(cssClass).
+       append("';\" onmouseover=\"this.className='").
+       append(cssClass).append("Hover';\">").
+       append(currentValue).
+       append("</div>\n");
+    sb.append("\t<div id=\"").append(editBlockEditorID).append("\" class=\"Edit").append(cssClass).append("\">\n");
+    sb.append("\t\t<form name=\"").append(editFormID).append("\" id=\"").append(editFormID).
+       append("\" onSubmit=\"").append(strAction).append("\">\n");
+    sb.append("<DIV style=\"display:none; visible:hidden\" id=\"").append(currentValueID).
+       append("\" name=\"").append(currentValueID).append("\">").append(currentValue).append("</DIV>");
+
+    if (bDirection!=null && bDirection.equals(LEFT2RIGHT)) {
+      sb.append("\t\t<a href=\"#\" class =\"AcceptButton\" style=\"float:left\" onclick=\"").
+         append(strAction).append("\">&nbsp;</a>\n");
+      sb.append("\t\t<a href=\"#\" class =\"CancelButton\" style=\"float:left\" ").
+         append("onClick=\"InlineEditor.presentationSwitchBlock('");
+      sb.append(editBlockEditorID).append("', '").append(showBlockId).append("');\">&nbsp;</a>\n");
+    } else {
+      sb.append("\t\t<a href=\"#\" class =\"CancelButton\" ").append("onClick=\"InlineEditor.presentationSwitchBlock('");
       sb.append(editBlockEditorID).append("', '").append(showBlockId).append("');\">&nbsp;</a>\n");
       sb.append("\t\t<a href=\"#\" class =\"AcceptButton\" onclick=\"").append(strAction).append("\">&nbsp;</a>\n");
-  	}
-  	sb.append("\t\t<div class=\"Edit").append(cssClass).append("Input\">\n ");
+    }
+    sb.append("\t\t<div class=\"Edit").append(cssClass).append("Input\">\n ");
 
-  	if (inputType.equalsIgnoreCase(INPUT_WYSIWYG)) {
-  		sb.append(createCKEditorField(newValueInputId, currentValue, parsedArguments));
-  	}else if (inputType.equalsIgnoreCase(INPUT_TEXT_AREA)){
-  		sb.append("\t\t<TEXTAREA ").append("\" name =\"");
-  		sb.append(newValueInputId).append("\" id =\"").append(newValueInputId).append("\"");
-  		if (height!=null && height.length()>0) {
-  		  sb.append(" style =\"height:").append(height);
-  		  if (!height.endsWith("px")) {
-  		    sb.append("px;");
-  		  }
-  		  sb.append("\"");
-  		}
-  		sb.append(">");
-  		sb.append(currentValue).append("</TEXTAREA>");
-  	}else if (inputType.equalsIgnoreCase(INPUT_TEXT)) {
-  		sb.append("\t\t<input type=\"TEXT\" name =\"");
-  		sb.append(newValueInputId).append("\" id =\"").append(newValueInputId).
-  		   append("\" value=\"").append(currentValue).append("\"/>");
-  	}
-  	
-  	sb.append("\n\t\t</div>\n\t</form>\n</div>\n\n</div>");
-  	return sb.toString();
+    if (inputType.equalsIgnoreCase(INPUT_WYSIWYG)) {
+      sb.append(createCKEditorField(newValueInputId, currentValue, parsedArguments));
+    }else if (inputType.equalsIgnoreCase(INPUT_TEXT_AREA)){
+      sb.append("\t\t<TEXTAREA ").append("\" name =\"");
+      sb.append(newValueInputId).append("\" id =\"").append(newValueInputId).append("\"");
+      if (height!=null && height.length()>0) {
+        sb.append(" style =\"height:").append(height);
+        if (!height.endsWith("px")) {
+          sb.append("px;");
+        }
+        sb.append("\"");
+      }
+      sb.append(">");
+      sb.append(currentValue).append("</TEXTAREA>");
+    }else if (inputType.equalsIgnoreCase(INPUT_TEXT)) {
+      sb.append("\t\t<input type=\"TEXT\" name =\"");
+      sb.append(newValueInputId).append("\" id =\"").append(newValueInputId).
+         append("\" value=\"").append(currentValue).append("\"/>");
+    }
+
+    sb.append("\n\t\t</div>\n\t</form>\n</div>\n\n</div>");
+    return sb.toString();
   }
-  
+
   /**
-   * 
+   *
    * @param name
    * @param width
    * @param height
@@ -787,47 +789,47 @@ public class Utils {
    * @return
    */
   private static String createCKEditorField(String name, String value_, HashMap<String,String> arguments) {
-  	String toolbar = arguments.get(TOOLBAR);  	
-  	String passedCSS = arguments.get(CSS);
-  	
-  	if (toolbar == null) toolbar = "BasicWCM";
-  	StringBuffer contentsCss = new StringBuffer();
-  	contentsCss.append("[");
-  	SkinService skinService = WCMCoreUtils.getService(SkinService.class);
-  	String skin = Util.getUIPortalApplication().getUserPortalConfig().getPortalConfig().getSkin();
-  	String portal = Util.getUIPortal().getName();
-  	Collection<SkinConfig> portalSkins = skinService.getPortalSkins(skin);
-  	SkinConfig customSkin = skinService.getSkin(portal, Util.getUIPortalApplication()
-  			.getUserPortalConfig()
-  			.getPortalConfig()
-  			.getSkin());
-  	if (customSkin != null) portalSkins.add(customSkin);
-  	for (SkinConfig portalSkin : portalSkins) {
-  		contentsCss.append("'").append(portalSkin.createURL()).append("',");
-  	}
-  	contentsCss.delete(contentsCss.length() - 1, contentsCss.length());
-  	contentsCss.append("]");
+    String toolbar = arguments.get(TOOLBAR);
+    String passedCSS = arguments.get(CSS);
 
-  	StringBuffer buffer = new StringBuffer();
- 	  buffer.append("<div style=\"display:none\">" +
- 	  		"<textarea id='cssContent" + name + "' name='cssContent" + name + "'>" + passedCSS + "</textarea></div>\n");
-  	
-  	if (value_!=null) {
-  		buffer.append("<textarea id='" + name + "' name='" + name + "'>" + value_ + "</textarea>\n");
-  	}else {
-  		buffer.append("<textarea id='" + name + "' name='" + name + "'></textarea>\n");
-  	}
-  	buffer.append("<script type='text/javascript'>\n");
-  	buffer.append("  //<![CDATA[ \n");
-  	buffer.append("    var instances = CKEDITOR.instances['" + name + "']; if (instances) instances.destroy(true);\n");
-  	buffer.append("    CKEDITOR.replace('" + name + "', {toolbar:'" + toolbar + "', width:'98%', height: 200, contentsCss:" + 
-  	    contentsCss + ", ignoreEmptyParagraph:true});\n");
+    if (toolbar == null) toolbar = "BasicWCM";
+    StringBuffer contentsCss = new StringBuffer();
+    contentsCss.append("[");
+    SkinService skinService = WCMCoreUtils.getService(SkinService.class);
+    String skin = Util.getUIPortalApplication().getUserPortalConfig().getPortalConfig().getSkin();
+    String portal = Util.getUIPortal().getName();
+    Collection<SkinConfig> portalSkins = skinService.getPortalSkins(skin);
+    SkinConfig customSkin = skinService.getSkin(portal, Util.getUIPortalApplication()
+        .getUserPortalConfig()
+        .getPortalConfig()
+        .getSkin());
+    if (customSkin != null) portalSkins.add(customSkin);
+    for (SkinConfig portalSkin : portalSkins) {
+      contentsCss.append("'").append(portalSkin.createURL()).append("',");
+    }
+    contentsCss.delete(contentsCss.length() - 1, contentsCss.length());
+    contentsCss.append("]");
+
+    StringBuffer buffer = new StringBuffer();
+     buffer.append("<div style=\"display:none\">" +
+         "<textarea id='cssContent" + name + "' name='cssContent" + name + "'>" + passedCSS + "</textarea></div>\n");
+
+    if (value_!=null) {
+      buffer.append("<textarea id='" + name + "' name='" + name + "'>" + value_ + "</textarea>\n");
+    }else {
+      buffer.append("<textarea id='" + name + "' name='" + name + "'></textarea>\n");
+    }
+    buffer.append("<script type='text/javascript'>\n");
+    buffer.append("  //<![CDATA[ \n");
+    buffer.append("    var instances = CKEDITOR.instances['" + name + "']; if (instances) instances.destroy(true);\n");
+    buffer.append("    CKEDITOR.replace('" + name + "', {toolbar:'" + toolbar + "', width:'98%', height: 200, contentsCss:" +
+        contentsCss + ", ignoreEmptyParagraph:true});\n");
     buffer.append("    CKEDITOR.instances['" + name + "'].on(\"instanceReady\", function(){  ");
-    buffer.append("       eXo.ecm.CKEditor.insertCSS('" + name + "', 'cssContent" + name + "');\n");      
+    buffer.append("       eXo.ecm.CKEditor.insertCSS('" + name + "', 'cssContent" + name + "');\n");
     buffer.append("       });");
-  	buffer.append("  //]]> \n");  	
-  	buffer.append("</script>\n");
-  	return buffer.toString();
+    buffer.append("  //]]> \n");
+    buffer.append("</script>\n");
+    return buffer.toString();
   }
   protected static final String SEPARATOR  = "=";
   protected static final String TOOLBAR    = "toolbar";
@@ -866,7 +868,7 @@ public class Utils {
     return map;
   }
   /**
-   * 
+   *
    * @param node
    * @return
    * @throws Exception
@@ -911,12 +913,12 @@ public class Utils {
           }
         }
       }
-      if (title != null) { 
+      if (title != null) {
         title = title.trim();
         if (title.length()==0) title = null;
       }
-    }   
-    
+    }
+
     if (title ==null) title = nProcessNode.getName();
     return Text.unescapeIllegalJcrChars(title);
   }
