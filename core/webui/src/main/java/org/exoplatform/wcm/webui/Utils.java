@@ -20,6 +20,9 @@ import java.util.HashMap;
 
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
+import javax.jcr.Session;
+import javax.jcr.query.Query;
+import javax.jcr.query.QueryManager;
 import javax.portlet.PortletMode;
 import javax.portlet.PortletPreferences;
 
@@ -39,6 +42,7 @@ import org.exoplatform.portal.webui.workspace.UIMaskWorkspace;
 import org.exoplatform.portal.webui.workspace.UIPortalApplication;
 import org.exoplatform.portal.webui.workspace.UIWorkingWorkspace;
 import org.exoplatform.services.cms.link.LinkManager;
+import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.access.PermissionType;
 import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.jcr.core.ManageableRepository;
@@ -761,5 +765,24 @@ public class Utils {
        .replaceAll("(?i)<.*?javascript:.*?>.*?</.*?>", "") // case 2 : javascript: call are removed
        .replaceAll("(?i)<.*?\\s+on.*?>.*?</.*?>", "");     // case 3: remove on* attributes like onLoad or onClick
   }
-
+  /**
+   * @purpose     Check if a query is valid
+   * @param workspace
+   * @param strQuery
+   * @param SQLLanguage
+   * @return true as valid query, false as Invalid
+   * @author vinh_nguyen from ECMS
+   */
+  public static boolean checkQuery(String workspace, String strQuery, String SQLLanguage) {
+	  try {
+		  Session session = WCMCoreUtils.getUserSessionProvider().getSession(workspace,
+				  	WCMCoreUtils.getService(RepositoryService.class).getCurrentRepository());
+		  QueryManager qm = session.getWorkspace().getQueryManager();
+		  Query query = qm.createQuery(strQuery, SQLLanguage);
+		  query.execute();
+	  }catch(Exception e) {
+		  return false;
+	  }
+	  return true;
+  }
 }

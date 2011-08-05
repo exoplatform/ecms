@@ -114,20 +114,20 @@ public class UICLVFolderMode extends UICLVContainer {
     filters.put(WCMComposer.FILTER_VISIBILITY, ("true".equals(sharedCache))?
         WCMComposer.VISIBILITY_PUBLIC:WCMComposer.VISIBILITY_USER);
     
-    String folderPath = this.getAncestorOfType(UICLVPortlet.class).getFolderPath();    
-    String strQuery = this.getAncestorOfType(UICLVPortlet.class).getQueryStatement(preferences, folderPath);
-//    if ( this.getAncestorOfType(UICLVPortlet.class).isQueryApplication()
-//        && org.exoplatform.wcm.webui.Utils.checkQuery(workspace, strQuery, Query.SQL) ) {
-//      filters.put(WCMComposer.FILTER_QUERY_FULL, strQuery);
-//      return  wcmComposer.getContents(workspace,"", filters, WCMCoreUtils.getUserSessionProvider()); 
-//    }
+    String folderPath = this.getAncestorOfType(UICLVPortlet.class).getFolderPath();
+    NodeLocation nodeLocation = NodeLocation.getNodeLocationByExpression(
+            (folderPath != null) ? folderPath : preferences.getValue(UICLVPortlet.PREFERENCE_ITEM_PATH, null));
     
+    String strQuery = this.getAncestorOfType(UICLVPortlet.class).getQueryStatement(preferences, folderPath);
+    if ( this.getAncestorOfType(UICLVPortlet.class).isQueryApplication()
+        && org.exoplatform.wcm.webui.Utils.checkQuery(workspace, strQuery, Query.SQL) ) {
+      filters.put(WCMComposer.FILTER_QUERY_FULL, strQuery);
+      return  wcmComposer.getPaginatedContents(nodeLocation, filters, WCMCoreUtils.getUserSessionProvider()); 
+    }    
     if(folderPath == null && preferences.getValue(UICLVPortlet.PREFERENCE_ITEM_PATH, null) == null){
 //      return new ArrayList<Node>();
       return new Result(new ArrayList<Node>(), 0, 0, null, null);
-    }
-    NodeLocation nodeLocation = NodeLocation.getNodeLocationByExpression(
-        (folderPath != null) ? folderPath : preferences.getValue(UICLVPortlet.PREFERENCE_ITEM_PATH, null));
+    }   
     //encoding
     String nPath  = new String(nodeLocation.getPath().getBytes("ISO-8859-1"), "UTF-8");
     //return wcmComposer.getContents(nodeLocation.getRepository(), Text.escapeIllegalJcrChars(nodeLocation.getWorkspace()),
