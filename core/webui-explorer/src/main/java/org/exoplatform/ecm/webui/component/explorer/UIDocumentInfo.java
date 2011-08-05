@@ -99,8 +99,8 @@ import org.exoplatform.services.jcr.ext.audit.AuditService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
-import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.security.IdentityConstants;
+import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.web.application.Parameter;
@@ -804,13 +804,26 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
   private List<Node> filterNodeList(List<Node> sourceNodeList) throws Exception {
     List<Node> ret = new ArrayList<Node>();
 
-    for (Node node : sourceNodeList)
+    if (!this.hasFilters()) {
+      return sourceNodeList;
+    }
+
+    for (Node node : sourceNodeList) {
       try {
         if (filterOk(node))
           ret.add(node);
-      } catch (Exception ex) {}
+      } catch (Exception ex) {
+      }
+    }
 
     return ret;
+  }
+
+  private boolean hasFilters() {
+    UIJCRExplorer uiExplorer = this.getAncestorOfType(UIJCRExplorer.class);
+    Set<String> allItemsFilterSet = uiExplorer.getAllItemFilterMap();
+    Set<String> allItemsByTypeFilterSet = uiExplorer.getAllItemByTypeFilterMap();
+    return (allItemsByTypeFilterSet.size() > 0 || allItemsFilterSet.size() > 0);
   }
 
   private boolean filterOk(Node node) throws Exception {
