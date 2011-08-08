@@ -42,6 +42,7 @@ import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.organization.OrganizationService;
 import org.exoplatform.services.workflow.Form;
 import org.exoplatform.services.workflow.Process;
 import org.exoplatform.services.workflow.Task;
@@ -504,12 +505,23 @@ public class UITask extends UIForm implements UISelectable {
       RepositoryService repositoryService = uiTask.getApplicationComponent(RepositoryService.class);
       if (objectId.equals("delegate")) {
         String delegate = (String)maps.getWorkflowVariables().get(UITask.DELEGATE_FIELD);
+        UIApplication uiApp = event.getSource().getAncestorOfType(UIApplication.class);
+        // Check delegated user if is empty
         if (delegate.length() == 0) {
-            UIApplication uiApp = event.getSource().getAncestorOfType(UIApplication.class);
             uiApp.addMessage(new ApplicationMessage("UITask.msg.has-not-got-delegate", null,
                 ApplicationMessage.WARNING));
             event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
             return;
+        }
+        else {
+          // Check existence of delegated user
+          OrganizationService organizationService = uiTask.getApplicationComponent(OrganizationService.class);
+          if (organizationService.getUserHandler().findUserByName(delegate) == null)
+          {
+            uiApp.addMessage(new ApplicationMessage("UITask.msg.user-not-exist", null,
+                ApplicationMessage.WARNING));
+             return;
+          }
         }
       }
       SessionProviderService sessionProviderService = Util.getUIPortal().getApplicationComponent(SessionProviderService.class);
