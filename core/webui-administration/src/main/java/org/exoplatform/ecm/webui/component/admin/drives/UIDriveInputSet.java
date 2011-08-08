@@ -23,6 +23,10 @@ import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 import java.util.Set;
 
+import javax.jcr.Node;
+import javax.jcr.Session;
+import javax.jcr.nodetype.NodeType;
+
 import org.exoplatform.ecm.webui.form.UIFormInputSetWithAction;
 import org.exoplatform.ecm.webui.form.validator.DrivePermissionValidator;
 import org.exoplatform.ecm.webui.form.validator.ECMNameValidator;
@@ -30,6 +34,9 @@ import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.jcr.RepositoryService;
+import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.jcr.impl.core.nodetype.NodeTypeImpl;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.RequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.core.model.SelectItemOption;
@@ -64,7 +71,8 @@ public class UIDriveInputSet extends UIFormInputSetWithAction {
   public String bothLabel_;
   public String folderOnlyLabel_;
   public String unstructuredFolderLabel_;
-
+  protected Set<String> setFoldertypes;
+  protected TemplateService templateService;
   public UIDriveInputSet(String name) throws Exception {
     super(name);
     setComponentConfig(getClass(), null);
@@ -95,13 +103,15 @@ public class UIDriveInputSet extends UIFormInputSetWithAction {
     setActionInfo(FIELD_PERMISSION, new String[] {"AddPermission", "RemovePermission"});
     setActionInfo(FIELD_HOMEPATH, new String[] {"AddPath"});
     setActionInfo(FIELD_WORKSPACEICON, new String[] {"AddIcon"});
+    templateService = getApplicationComponent(TemplateService.class);
+    setFoldertypes = templateService.getAllowanceFolderType();
   }
 
   public void update(DriveData drive) throws Exception {
     String[] wsNames = getApplicationComponent(RepositoryService.class)
                       .getCurrentRepository().getWorkspaceNames();
-    TemplateService templateService = getApplicationComponent(TemplateService.class);
-    Set<String> setFoldertypes = templateService.getAllowanceFolderType();
+    
+    
     List<SelectItemOption<String>> workspace = new ArrayList<SelectItemOption<String>>();
 
     List<SelectItemOption<String>> foldertypeOptions = new ArrayList<SelectItemOption<String>>();
@@ -158,5 +168,48 @@ public class UIDriveInputSet extends UIFormInputSetWithAction {
     getUIFormCheckBoxInput(FIELD_VIEWNONDOC).setChecked(false);
     getUIFormCheckBoxInput(FIELD_VIEWSIDEBAR).setChecked(false);
     getUIFormCheckBoxInput(SHOW_HIDDEN_NODE).setChecked(false);
+  }
+  
+  public void updateFolderAllowed(String path) {
+    UIFormSelectBox sltWorkspace =  getChildById(UIDriveInputSet.FIELD_WORKSPACE);
+    String strWorkspace = sltWorkspace.getSelectedValues()[0];
+    SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
+    try {
+      Session session = sessionProvider.getSession(strWorkspace, 
+                                getApplicationComponent(RepositoryService.class).getCurrentRepository());
+      Node rootNode = (Node)session.getItem(path);
+      List<SelectItemOption<String>> foldertypeOptions = new ArrayList<SelectItemOption<String>>();
+      RequestContext context = RequestContext.getCurrentInstance();
+      ResourceBundle res = context.getApplicationResourceBundle();
+      for (String foldertype : setFoldertypes) {
+        if (isChildNodePrimaryTypeAllowed(rootNode, foldertype) ){
+          try {          
+              foldertypeOptions.add(new SelectItemOption<String>(res.getString(getId() + ".label."
+                  + foldertype.replace(":", "_")), foldertype));
+          } catch (MissingResourceException mre) {
+            foldertypeOptions.add(new SelectItemOption<String>(foldertype, foldertype));
+          }
+        }
+      }
+      getUIFormSelectBox(FIELD_ALLOW_CREATE_FOLDERS).setOptions(foldertypeOptions);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
+  private boolean isChildNodePrimaryTypeAllowed(Node parent, String childNodeTypeName) throws Exception{
+    NodeType childNodeType = parent.getSession().getWorkspace().getNodeTypeManager().getNodeType(childNodeTypeName);
+    //In some cases, the child node is mixins type of a nt:file example
+    if(childNodeType.isMixin()) return true;
+    List<NodeType> allNodeTypes = new ArrayList<NodeType>();
+    allNodeTypes.add(parent.getPrimaryNodeType());
+    for(NodeType mixin: parent.getMixinNodeTypes()) {
+      allNodeTypes.add(mixin);
+    }
+    for (NodeType nodetype:allNodeTypes) {
+      if (((NodeTypeImpl)nodetype).isChildNodePrimaryTypeAllowed(childNodeTypeName)) {
+        return true;
+      }
+    }
+    return false;
   }
 }

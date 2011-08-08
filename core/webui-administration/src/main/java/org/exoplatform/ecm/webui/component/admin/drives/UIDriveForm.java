@@ -130,8 +130,10 @@ public class UIDriveForm extends UIFormTabPane implements UISelectable {
         }
         uiStringInput.setValue(newsPermissions.toString());
       } else uiStringInput.setValue(value.toString());
-    } else {
+    } else if (selectField.equals(UIDriveInputSet.FIELD_HOMEPATH)){
       uiStringInput.setValue(value.toString());
+      UIDriveInputSet driveInputSet = getChild(UIDriveInputSet.class);
+      if (driveInputSet!=null) driveInputSet.updateFolderAllowed(value.toString());
     }
     UIDriveManager uiContainer = getAncestorOfType(UIDriveManager.class) ;
     for(UIComponent uiChild : uiContainer.getChildren()) {
