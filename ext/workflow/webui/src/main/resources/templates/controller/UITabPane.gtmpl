@@ -3,7 +3,21 @@
   import org.exoplatform.webui.core.UIPopupWindow;
   
   def rcontext = _ctx.getRequestContext() ;
-	rcontext.getJavascriptManager().importJavascript('eXo.webui.UIHorizontalTabs');
+	
+  private String getDisplayTab(String selectedTab) {
+    if ((uicomponent.getSelectedTab() == null && selectedTab.equals("UITask"))
+        || selectedTab.equals(uicomponent.getSelectedTab())  ) {
+      return "display:block"; 
+    }
+    return "display:none";
+  }
+  
+  private String getSelectedTab(String selectedTab) {
+    if (getDisplayTab(selectedTab).equals("display:block")) {
+      return "SelectedTab";
+    }
+    return "NormalTab";
+  }
 	
 %>
 
@@ -14,28 +28,27 @@
         <div class="LeftHorizontalTabs">
 	     	  <div class="RightHorizontalTabs">
 	     	    <div class="CenterHorizontalTabs">
-			        <div class="TabsContainer">
-			          <%
-			            for(uiChild in uicomponent.getChildren()) {
-			              if (!(uiChild instanceof UIPopupWindow)) {
-				              String style = "NormalTab" ;
-				              String tabId = uiChild.getId();
-				              String paneId = uicomponent.getId();
-				              if(uiChild.isRendered()) style = "SelectedTab" ;
-			          %>
-			            <div class="UITab NormalTabStyle">
-			              <div class="$style">
-			                <div class="LeftTab">
-			                  <div class="RightTab">                
-			                    <div class="MiddleTab" onclick="eXo.webui.UIHorizontalTabs.changeTabForUITabPane(this, '$paneId', '$tabId')"><%=_ctx.appRes("UITabPane.title." + uiChild.getId());%></div>
-			                  </div>
-			                </div>
-			              </div>
-			            </div>              
-			          <%  }
-			            }
-			          %>
-			        </div>
+	     	    
+	     	    
+              <div class="TabsContainer">
+                <%
+                for(uiChild in uicomponent.getChildren()) {
+                  if (!(uiChild instanceof UIPopupWindow)) {
+                    String tabId = uiChild.getId();
+                %>
+                <div class="UITab NormalTabStyle">
+                  <div class="<%= getSelectedTab(tabId)%>">
+                    <div class="LeftTab">
+                      <div class="RightTab">                
+                        <div class="MiddleTab" onclick="<%=uicomponent.event("ChangeTab", tabId)%>"><%=_ctx.appRes("UITabPane.title." + tabId)%></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>              
+                <%  }
+                  }
+                %>
+              </div>
 			      </div>
 			    </div>
 			  </div>
@@ -43,14 +56,30 @@
       <div class="UITabContentContainer">
         <%
           for(uiChild in uicomponent.getChildren()) {
-            String display = "none" ;
-            if(uiChild.isRendered()) display="block" ;
-            println "<div class=\"UITabContent\" style=\"display: $display;\">" ;
-            uicomponent.renderUIComponent(uiChild) ;
-            println "</div>" ;
+            def displayStyle = getDisplayTab(uiChild.getId());
+            if (uiChild instanceof UIPopupWindow && uiChild.isRendered()) {
+             displayStyle="display: block"; 
+            }
+            %>
+            <div class="UITabContent" style="$displayStyle">
+              <% uicomponent.renderUIComponent(uiChild); %>
+            </div>
+            <%
           }
         %>
       </div>  
     </div>  
   </div>  
-</div>  
+</div>
+<script type="text/javascript" src="/eXoWCMResources/javascript/eXo/wcm/backoffice/private/CloseEvents.js"></script>
+<%  
+  String closeConfirmationMsg = "UIDocumentForm.msg.confirm-close";
+  String navigateConfirmationMsg = "UIDocumentForm.msg.confirm-navigate";
+  def messageClose = uicomponent.getClosingConfirmMsg(closeConfirmationMsg) ;
+  def messageNavigate = uicomponent.getClosingConfirmMsg(navigateConfirmationMsg) ;
+%>
+<script type="text/javascript"> 
+  setClosingConfirmationMsg('<%=messageClose%>');
+  setNavigatingConfirmationMsg('<%=messageNavigate%>');
+</script>
+

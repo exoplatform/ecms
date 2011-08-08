@@ -264,8 +264,10 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
   }
 
   static  public class SaveActionListener extends EventListener<UIDocumentForm> {
+    @SuppressWarnings("unchecked")
     public void execute(Event<UIDocumentForm> event) throws Exception {
       UIDocumentForm uiForm = event.getSource();
+      UITaskManager uiTaskManager = uiForm.getAncestorOfType(UITaskManager.class);
       List inputs = uiForm.getChildren();
       UIApplication uiApp = uiForm.getAncestorOfType(UIApplication.class);
       int index = 0;
@@ -361,8 +363,9 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
           if (newNode.hasProperty("exo:category")) newNode.setProperty("exo:category", vals.toArray(new Value[vals.size()]));
           newNode.save();
         }
-
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiForm.getParent()) ;
+        uiTaskManager.setSelectedTab(uiTaskManager.getChild(UITask.class).getId());
+        uiTaskManager.setRenderedChild(UITask.class);
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiTaskManager) ;
       } catch (AccessControlException ace) {
         LOG.error("Unexpected error", ace);
         throw new AccessDeniedException(ace.getMessage());
@@ -393,6 +396,7 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
     public void execute(Event<UIDocumentForm> event) throws Exception {
       UITaskManager uiTaskManager = event.getSource().getParent() ;
       uiTaskManager.setRenderedChild(UITask.class) ;
+      uiTaskManager.setSelectedTab(uiTaskManager.getChild(UITask.class).getId());
       event.getRequestContext().addUIComponentToUpdateByAjax(uiTaskManager) ;
     }
   }
@@ -449,7 +453,7 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
           return;
         }
       } else {
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiDocumentForm.getParent());
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiTaskManager);
       }
     }
   }

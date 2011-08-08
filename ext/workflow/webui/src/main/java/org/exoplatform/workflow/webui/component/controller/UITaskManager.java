@@ -16,15 +16,21 @@
  */
 package org.exoplatform.workflow.webui.component.controller;
 
+import java.util.ResourceBundle;
+
 import javax.jcr.PathNotFoundException;
 
 import org.exoplatform.services.workflow.Task;
 import org.exoplatform.services.workflow.WorkflowServiceContainer;
+import org.exoplatform.web.application.RequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
+import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.core.UIContainer;
 import org.exoplatform.webui.core.UIPopupComponent;
 import org.exoplatform.webui.core.UIPopupWindow;
+import org.exoplatform.webui.event.Event;
+import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.workflow.webui.component.UIUserSelectContainer;
 
 /**
@@ -34,11 +40,20 @@ import org.exoplatform.workflow.webui.component.UIUserSelectContainer;
  *          xxx5669@gmail.com
  * Jan 12, 2009
  */
-@ComponentConfig(template = "classpath:templates/controller/UITabPane.gtmpl")
+@ComponentConfig(
+    template = "classpath:templates/controller/UITabPane.gtmpl",
+    events = {
+      @EventConfig(listeners = UITaskManager.ChangeTabActionListener.class)
+    }
+)
+
+
 public class UITaskManager extends UIContainer implements UIPopupComponent {
 
   private String tokenId_ ;
   private boolean isStart_ = false;
+  /** Selected Tab id */
+  private String selectedTab;
 
   public static final String UIPOPUP_DELEGATEDSELECTOR_ID = "PopupDelegatedSelectorId";
   public UITaskManager() throws Exception {
@@ -90,13 +105,39 @@ public class UITaskManager extends UIContainer implements UIPopupComponent {
 
   public void deActivate() throws Exception { }
 
-public void initPopup(UIComponent uiComp) throws Exception {
-	 removeChildById("PopupComponent") ;
-	 UIPopupWindow uiPopup = addChild(UIPopupWindow.class, null, "PopupComponent") ;
-	 uiPopup.setShowMask(true);
-	 uiPopup.setUIComponent(uiComp) ;
-	 uiPopup.setWindowSize(640, 300) ;
-	 uiPopup.setShow(true) ;
-	 uiPopup.setResizable(true) ;	
-}
+  public void initPopup(UIComponent uiComp) throws Exception {
+    removeChildById("PopupComponent") ;
+    UIPopupWindow uiPopup = addChild(UIPopupWindow.class, null, "PopupComponent") ;
+    uiPopup.setShowMask(true);
+    uiPopup.setUIComponent(uiComp) ;
+    uiPopup.setWindowSize(640, 300) ;
+    uiPopup.setShow(true) ;
+    uiPopup.setResizable(true) ; 
+  }
+  
+  public void setSelectedTab(String selectedTab) {
+    this.selectedTab = selectedTab;
+  }
+
+  public String getSelectedTab() {
+    return selectedTab;
+  }
+  
+  public String getClosingConfirmMsg(String key) {    
+    RequestContext context = RequestContext.getCurrentInstance();
+    ResourceBundle res = context.getApplicationResourceBundle();    
+    return res.getString(key);
+  }
+  
+  static public class ChangeTabActionListener extends EventListener<UITaskManager> {
+    /* (non-Javadoc)
+     * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
+     */
+    public void execute(Event<UITaskManager> event) throws Exception {
+      UITaskManager uiTaskManager = event.getSource();
+      uiTaskManager.setSelectedTab(event.getRequestContext().getRequestParameter(OBJECTID));
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiTaskManager);
+    }
+  }
+ 
 }

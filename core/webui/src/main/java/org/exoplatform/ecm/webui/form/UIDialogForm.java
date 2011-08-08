@@ -1112,7 +1112,8 @@ public class UIDialogForm extends UIForm {
             }
           }
         }
-        addUIFormInput(uiMulti);
+        if (getChildById(name) == null)
+          addUIFormInput(uiMulti);
       }
       List<String> valueList = new ArrayList<String>();
       boolean valueListIsSet = false;
@@ -1341,7 +1342,7 @@ public class UIDialogForm extends UIForm {
       ret.add(formInput);
       return ret;
     }
-    if (!formField.isMultiValues()) {
+    if (!formField.isMultiValues() && isFirstTimeRender) {
       if(!isShowingComponent && !isRemovePreference) {
         if(node != null && (node.isNodeType("nt:file") || isNTFile)) {
           Node jcrContentNode = node.getNode("jcr:content");
@@ -1352,7 +1353,7 @@ public class UIDialogForm extends UIForm {
           }
         }
       }
-      if(isNotEditNode && !isShowingComponent && !isRemovePreference) {
+      if(isNotEditNode && !isShowingComponent && !isRemovePreference && isFirstTimeRender) {
         Node childNode = getChildNode();
         if(node != null && node.hasNode("jcr:content") && childNode != null) {
           Node jcrContentNode = node.getNode("jcr:content");
@@ -1387,7 +1388,7 @@ public class UIDialogForm extends UIForm {
         values = new Value[] {node.getSession().getValueFactory().createValue("")};
       }
     }
-    if (values != null) {
+    if (values != null && isFirstTimeRender) {
       for (Value v : values) {
         UIFormInputBase uiFormInput = formField.createUIFormInput();
         if (uiFormInput instanceof UIFormWYSIWYGInput)
@@ -1436,7 +1437,7 @@ public class UIDialogForm extends UIForm {
         if(label != null) uiMulti.setLabel(label);
       }
     } else {
-      if (richtextList.size() > 0)
+      if (getChildById(name) == null && richtextList.size() > 0)
         addUIFormInput(richtextList.get(0));
     }
     renderField(name);
