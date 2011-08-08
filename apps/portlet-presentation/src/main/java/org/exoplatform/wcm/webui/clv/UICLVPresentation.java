@@ -644,6 +644,9 @@ public class UICLVPresentation extends UIContainer {
   }
 
   public boolean isShowRssLink() {
+    if (getUIPageIterator().getAvailable() == 0) {
+      return false;
+    }
     PortletPreferences portletPreferences = Utils.getAllPortletPreferences();
     String currentApplicationMode = portletPreferences.getValue(UICLVPortlet.PREFERENCE_APPLICATION_TYPE, null);    
     if (currentApplicationMode.equals(UICLVPortlet.APPLICATION_CLV_BY_QUERY)) 
