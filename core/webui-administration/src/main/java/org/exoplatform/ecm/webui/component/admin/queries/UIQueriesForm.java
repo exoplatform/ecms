@@ -107,6 +107,7 @@ public class UIQueriesForm extends UIForm implements UISelectable {
     getUIStringInput(selectField).setValue(value.toString());
     UIQueriesManager uiManager = getAncestorOfType(UIQueriesManager.class);
     UIPopupWindow uiPopup = uiManager.getChildById("PermissionPopup");
+    uiPopup.setShowMask(true);
     uiManager.removeChildById("PermissionPopup");
   }
 

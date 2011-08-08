@@ -251,6 +251,7 @@ public class UIWorkflowPublicationActionForm extends UIForm implements UISelecta
       uiContainer.removeChildById(WorkflowPublicationPlugin.POPUP_ID);
     UIPopupWindow uiPopup = uiContainer.addChild(UIPopupWindow.class, null, WorkflowPublicationPlugin.POPUP_ID);
     uiPopup.setWindowSize(560, 350);
+    uiPopup.setShowMask(true);
     UIPermissionSelector uiECMPermission =
       uiContainer.createUIComponent(UIPermissionSelector.class, null, null);
     uiECMPermission.setSelectedMembership(true);
@@ -296,6 +297,7 @@ public class UIWorkflowPublicationActionForm extends UIForm implements UISelecta
     String repository = getRepositoryName();
     UIPopupWindow uiPopup = uiContainer.addChild(UIPopupWindow.class, null, WorkflowPublicationPlugin.POPUP_ID);
     uiPopup.setWindowSize(610, 300);
+    uiPopup.setShowMask(true);
     UIOneNodePathSelector uiOneNodePathSelector =
       uiContainer.createUIComponent(UIOneNodePathSelector.class, null, null);
     uiOneNodePathSelector.setIsDisable(workspace, isDisable) ;

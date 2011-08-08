@@ -50,8 +50,6 @@ public class UICBScripts extends UIContainer {
   public UICBScripts() throws Exception {
     UIScriptList list = addChild(UIScriptList.class, null, SCRIPTLIST_NAME) ;
     list.getUIPageIterator().setId(SCRIPTLIST_NAME + SCRIPT_PAGE) ;
-    UIPopupContainer uiPopupAction = addChild(UIPopupContainer.class,null, "BCScriptPopupAction") ;
-    uiPopupAction.getChild(UIPopupWindow.class).setId("BCScriptPopupWindow") ;
   }
 
   public void refresh (int currentPage) throws Exception {
@@ -75,5 +73,16 @@ public class UICBScripts extends UIContainer {
       scriptData.add(script) ;
     }
     return scriptData ;
+  }
+  public void initFormPopup(String id) throws Exception {
+	removeChildById(id) ;
+	UIPopupWindow uiPopup = addChild(UIPopupWindow.class, null, id) ;
+	uiPopup.setShowMask(true);
+	uiPopup.setWindowSize(600, 500) ;
+	UIScriptForm uiForm = createUIComponent(UIScriptForm.class, null, null) ;	
+    uiPopup.setUIComponent(uiForm) ;
+    uiPopup.setRendered(true) ;
+    uiPopup.setShow(true) ;
+    uiPopup.setResizable(true) ;
   }
 }

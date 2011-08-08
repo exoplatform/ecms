@@ -118,6 +118,7 @@ public class UICBSearchResults extends UIContainer {
         uiDocument.setNode(node);
         UIPopupWindow uiPopup  = uiPopupAction.getChildById("UICBPopupWindow");
         uiPopup.setResizable(true);
+        uiPopup.setShowMask(true);
         event.getRequestContext().addUIComponentToUpdateByAjax(uiPopupAction);
         return;
       }
@@ -194,6 +195,7 @@ public class UICBSearchResults extends UIContainer {
         uiDocument.setNode(parentNode);
         UIPopupWindow uiPopup = uiPopupAction.getChildById("UICBPopupWindow");
         uiPopup.setResizable(true);
+        uiPopup.setShowMask(true);
         event.getRequestContext().addUIComponentToUpdateByAjax(uiPopupAction);
         return;
       }

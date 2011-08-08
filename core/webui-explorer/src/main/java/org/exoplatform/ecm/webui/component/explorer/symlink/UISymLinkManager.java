@@ -52,6 +52,7 @@ public class UISymLinkManager extends UIContainer implements UIPopupComponent {
     uiPopup.setWindowSize(700, 350);
     uiPopup.setShow(false);
     uiPopup.setResizable(true);
+    uiPopup.setShowMask(true);
     return uiPopup;
   }
 
@@ -65,6 +66,7 @@ public class UISymLinkManager extends UIContainer implements UIPopupComponent {
   public void initMetadataPopup() throws Exception {
     removeChildById(EXTARNAL_METADATA_POPUP) ;
     UIPopupWindow uiPopup = addChild(UIPopupWindow.class, null, EXTARNAL_METADATA_POPUP) ;
+    uiPopup.setShowMask(true);
     uiPopup.setWindowSize(400, 400);
     uiPopup.setRendered(true);
     uiPopup.setShow(true) ;

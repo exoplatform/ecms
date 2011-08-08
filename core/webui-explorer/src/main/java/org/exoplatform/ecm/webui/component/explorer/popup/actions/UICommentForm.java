@@ -182,7 +182,10 @@ public class UICommentForm extends UIForm implements UIPopupComponent {
       }
       UIPopupWindow uiPopup = uiExplorer.getChildById("ViewSearch");
       if (uiPopup != null)
+      {
+        uiPopup.setShowMask(true);
         event.getRequestContext().addUIComponentToUpdateByAjax(uiPopup);
+      }
       uiExplorer.updateAjax(event) ;
     }
   }

@@ -53,6 +53,7 @@ public class UITemplatesManager extends UIAbstractManager {
     if(uiPopup == null) {
       uiPopup = addChild(UIPopupWindow.class, null, popuId) ;
       uiPopup.setWindowSize(700, 500) ;
+      uiPopup.setShowMask(true);
     } else {
       uiPopup.setRendered(true) ;
     }
@@ -64,6 +65,7 @@ public class UITemplatesManager extends UIAbstractManager {
   public void initPopupPermission(String id, String membership) throws Exception {
     String popupId = id.concat(UITemplateContent.TEMPLATE_PERMISSION);
     UIPopupWindow uiPopup = addChild(UIPopupWindow.class, null, popupId);
+    uiPopup.setShowMask(true);
     uiPopup.setWindowSize(560, 300);
     UIPermissionSelector uiECMPermission = createUIComponent(UIPermissionSelector.class, null, null);
     uiECMPermission.setSelectedMembership(true);

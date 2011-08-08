@@ -119,6 +119,7 @@ public class UISingleExternalMetadataForm extends UIForm {
       UIPopupWindow uiPopup = uiUploadManager.getChildById(UIUploadManager.EXTARNAL_METADATA_POPUP) ;
       uiPopup.setShow(false) ;
       uiPopup.setRendered(false) ;
+      uiPopup.setShowMask(true);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiUploadManager) ;
     }
   }
@@ -152,6 +153,7 @@ public class UISingleExternalMetadataForm extends UIForm {
       UIPopupWindow uiPopup = uiUploadManager.getChildById(UIUploadManager.EXTARNAL_METADATA_POPUP) ;
       uiPopup.setShow(true);
       uiPopup.setRendered(false) ;
+      uiPopup.setShowMask(true);
       uiContainer.setRenderedChild(UISingleUploadContent.class) ;
       event.getRequestContext().addUIComponentToUpdateByAjax(uiUploadManager) ;
     }

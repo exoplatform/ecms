@@ -150,6 +150,7 @@ public class UITagForm extends UIForm {
       }
       UIPopupWindow uiPopup = uiForm.getAncestorOfType(UIPopupWindow.class) ;
       uiPopup.setShow(false) ;
+      uiPopup.setShowMask(true);
 
       Preference preferences = uiExplorer.getPreference();
       if (preferences.isShowSideBar()) {
@@ -179,6 +180,7 @@ public class UITagForm extends UIForm {
       UITagForm uiForm = event.getSource();
       UIPopupWindow uiPopup = uiForm.getAncestorOfType(UIPopupWindow.class) ;
       uiPopup.setShow(false) ;
+      uiPopup.setShowMask(true);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiPopup.getParent());
     }
   }

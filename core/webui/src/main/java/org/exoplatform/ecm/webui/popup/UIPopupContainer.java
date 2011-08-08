@@ -116,6 +116,7 @@ public class UIPopupContainer extends UIContainer {
     popup.setWindowSize(width, height);
     popup.setRendered(true);
     popup.setShow(true);
+    popup.setShowMask(true);
     popup.setResizable(isResizeable);
   }
 

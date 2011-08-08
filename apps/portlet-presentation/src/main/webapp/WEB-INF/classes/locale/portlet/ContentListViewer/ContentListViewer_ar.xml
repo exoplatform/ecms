@@ -47,7 +47,7 @@
       <UICLVConfigShowDateCreatedFormCheckboxInput>إظهار تاريخ</UICLVConfigShowDateCreatedFormCheckboxInput>
       <UICLVConfigShowLinkFormCheckboxInput>إظهار رابط </UICLVConfigShowLinkFormCheckboxInput>
       <UICLVConfigShowReadmoreFormCheckboxInput>قرأ</UICLVConfigShowReadmoreFormCheckboxInput>
-      <ContentPath>Content path</ContentPath>
+      <seoPath>Content path</seoPath>
       <Up>Up</Up>
       <Down>Down</Down>
       <UICLVConfigCacheManagementLabel>Contents Visibility</UICLVConfigCacheManagementLabel>

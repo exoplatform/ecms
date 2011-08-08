@@ -75,6 +75,7 @@ public class UINodeTypeUpload extends UIForm {
       UINodeTypeUpload uiUploadForm = event.getSource() ;
       UINodeTypeManager uiManager = uiUploadForm.getAncestorOfType(UINodeTypeManager.class) ;
       UIPopupWindow uiPopup = uiManager.findComponentById(UINodeTypeManager.IMPORT_POPUP) ;
+      uiPopup.setShowMask(true);
       UINodeTypeImportPopup uiImportPopup = uiManager.findComponentById("UINodeTypeImportPopup") ;
       UIApplication uiApp = uiUploadForm.getAncestorOfType(UIApplication.class) ;
       UIFormUploadInput input = uiUploadForm.getUIInput(FIELD_UPLOAD) ;
@@ -148,6 +149,7 @@ public class UINodeTypeUpload extends UIForm {
       UIPopupWindow uiPopup = uiUpload.getAncestorOfType(UIPopupWindow.class) ;
       uiPopup.setRendered(false) ;
       uiPopup.setShow(false) ;
+      uiPopup.setShowMask(true);
       UINodeTypeManager uiManager = uiUpload.getAncestorOfType(UINodeTypeManager.class) ;
       event.getRequestContext().addUIComponentToUpdateByAjax(uiManager) ;
     }

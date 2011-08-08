@@ -147,6 +147,7 @@ public class UIGroupSelector extends UIGroupMembershipSelector implements Compon
       UIPopupWindow uiPopup = uiGroupSelector.getParent() ;
       uiGroupSelector.setDefaultValue() ;
       uiPopup.setShow(false) ;
+      uiPopup.setShowMask(true);
       UIPermissionManager uiManager = uiGroupSelector.getAncestorOfType(UIPermissionManager.class) ;
       event.getRequestContext().addUIComponentToUpdateByAjax(uiManager) ;
     }

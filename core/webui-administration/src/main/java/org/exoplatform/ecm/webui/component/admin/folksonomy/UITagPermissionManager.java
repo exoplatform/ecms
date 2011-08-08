@@ -45,6 +45,7 @@ public class UITagPermissionManager extends UIContainer {
   public void initPopupPermission(UIComponent uiSelector) throws Exception {
     UIPopupWindow uiPopup = getChildById(UITagPermissionForm.POPUP_SELECT);
     if(uiPopup == null) {
+      uiPopup.setShowMask(true);
       uiPopup = addChild(UIPopupWindow.class, null, UITagPermissionForm.POPUP_SELECT);
       uiPopup.setWindowSize(560, 300);
     } else {
@@ -64,6 +65,7 @@ public class UITagPermissionManager extends UIContainer {
       UIPopupWindow uiPopup = uiParent.getChild(UIPopupWindow.class);
       uiPopup.setUIComponent(null);
       uiPopup.setShow(false);
+      uiPopup.setShowMask(true);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiParent);
     }
   }

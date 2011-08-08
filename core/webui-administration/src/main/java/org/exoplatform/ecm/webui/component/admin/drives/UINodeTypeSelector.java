@@ -74,6 +74,7 @@ public class UINodeTypeSelector extends
       }
       uiNodeTypeSelector.init(1, uiNodeTypeSelector.getSelectedNodetypes(), lstNodetype);
       UIPopupWindow uiPopup = event.getSource().getAncestorOfType(UIPopupWindow.class);
+      uiPopup.setShowMask(true);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiPopup);
     }
   }
@@ -117,6 +118,7 @@ public class UINodeTypeSelector extends
           }
       }
       UIPopupWindow uiPopup = event.getSource().getAncestorOfType(UIPopupWindow.class);
+      uiPopup.setShowMask(true);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiPopup);
     }
   }
@@ -146,6 +148,7 @@ public class UINodeTypeSelector extends
       selectedNodetypes.clear();
       UIPopupWindow uiPopup = uiNodeTypeSelector.getParent();
       uiPopup.setShow(false);
+      uiPopup.setShowMask(true);
       UIComponent component = uiNodeTypeSelector.getSourceComponent().getParent();
       if (component != null)
         event.getRequestContext().addUIComponentToUpdateByAjax(component);
@@ -164,6 +167,7 @@ public class UINodeTypeSelector extends
         uiNodeTypeSelector.getSelectedNodetypes().clear();
       }
       UIPopupWindow uiPopup = event.getSource().getAncestorOfType(UIPopupWindow.class);
+      uiPopup.setShowMask(true);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiPopup);
     }
   }
@@ -176,6 +180,7 @@ public class UINodeTypeSelector extends
       String value = "*";
       ((UISelectable)uiNodeTypeSelector.getSourceComponent()).doSelect(returnField, value);
       UIPopupWindow uiPopup = uiNodeTypeSelector.getParent();
+      uiPopup.setShowMask(true);
       uiPopup.setShow(false);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiNodeTypeSelector.getSourceComponent().getParent());
       event.getRequestContext().addUIComponentToUpdateByAjax(uiPopup);
@@ -205,6 +210,7 @@ public class UINodeTypeSelector extends
       UIPopupWindow uiPopup = uiNodeTypeSelector.getAncestorOfType(UIPopupWindow.class);
       uiPopup.setShow(false);
       uiPopup.setRendered(false);
+      uiPopup.setShowMask(true);
       UIComponent component = uiNodeTypeSelector.getSourceComponent().getParent();
       if (component != null) event.getRequestContext().addUIComponentToUpdateByAjax(component);
     }

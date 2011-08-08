@@ -130,6 +130,7 @@ public class UITaxonomyTreeCreateChild extends UIContainer {
   public void initPopup(String path) throws Exception {
     removeChildById("TaxonomyPopupCreateChild");
     UIPopupWindow uiPopup = addChild(UIPopupWindow.class, null, "TaxonomyPopupCreateChild");
+    uiPopup.setShowMask(true);
     uiPopup.setWindowSize(600, 250);
     UITaxonomyTreeCreateChildForm uiTaxoForm = createUIComponent(UITaxonomyTreeCreateChildForm.class, null, null);
     uiTaxoForm.setParent(path);

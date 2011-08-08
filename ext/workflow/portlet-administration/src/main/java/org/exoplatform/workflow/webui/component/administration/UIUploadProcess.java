@@ -109,6 +109,7 @@ public class UIUploadProcess extends UIForm {
       UIPopupWindow uiPopup = uiWorkflowAdministrationPortlet.getChildById("UploadProcessPopup") ;
       uiPopup.setRendered(false) ;
       uiPopup.setShow(false) ;
+      uiPopup.setShowMask(true);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiWorkflowAdministrationPortlet) ;
     }
   }
@@ -120,6 +121,7 @@ public class UIUploadProcess extends UIForm {
       UIPopupWindow uiPopup = uiWorkflowAdministrationPortlet.getChildById("UploadProcessPopup") ;
       uiPopup.setRendered(false) ;
       uiPopup.setShow(false) ;
+      uiPopup.setShowMask(true);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiWorkflowAdministrationPortlet) ;
     }
   }

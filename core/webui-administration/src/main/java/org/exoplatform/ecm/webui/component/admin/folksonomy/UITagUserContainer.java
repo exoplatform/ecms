@@ -65,6 +65,7 @@ public class UITagUserContainer extends UIContainer implements UIPopupComponent 
       uiPermissionForm.doSelect(UITagPermissionInputSet.FIELD_USERORGROUP, uiUserSelector.getSelectedUsers());
       UIPopupWindow uiPopup = uiParent.findComponentById("PopupUserSelector");
       uiPopup.setShow(false);
+      uiPopup.setShowMask(true);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiParent);
     }
   }

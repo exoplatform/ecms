@@ -171,6 +171,7 @@ public class UINodeTypeImport extends UIForm {
       uiImportPopup.setRenderedChild(UINodeTypeUpload.class) ;
       UIPopupWindow uiPopup = uiImportPopup.getParent() ;
       uiPopup.setRendered(false) ;
+      uiPopup.setShowMask(true);
     }
   }
 
@@ -179,6 +180,7 @@ public class UINodeTypeImport extends UIForm {
       UINodeTypeImport uiImport = event.getSource() ;
       UINodeTypeManager uiManager = uiImport.getAncestorOfType(UINodeTypeManager.class) ;
       UIPopupWindow uiPopup = uiManager.findComponentById(UINodeTypeManager.IMPORT_POPUP) ;
+      uiPopup.setShowMask(true);
       UINodeTypeImportPopup uiImportPopup = uiImport.getParent() ;
       uiImportPopup.setRenderedChild(UINodeTypeUpload.class) ;
       uiPopup.setShow(true) ;
@@ -216,6 +218,7 @@ public class UINodeTypeImport extends UIForm {
         uiNodeTypeList.refresh(uiNodeTypeList.getUIPageIterator().getCurrentPage());
         UIPopupWindow uiPopup = uiManager.findComponentById(UINodeTypeManager.IMPORT_POPUP) ;
         uiPopup.setRendered(false) ;
+        uiPopup.setShowMask(true);
         uiApp.addMessage(new ApplicationMessage("UINodeTypeImport.msg.nodetype-registered", count)) ;
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
         event.getRequestContext().addUIComponentToUpdateByAjax(uiManager) ;

@@ -149,6 +149,7 @@ public class UIProcessDetail extends UIContainer {
                                                    null,
                                                    "TaskListOfProcessPopup");
       uiPopup.setWindowSize(530, 300);
+      uiPopup.setShowMask(true);
       UITaskListOfProcess uiTaskListOfProcess = uiAdministrationPortlet.createUIComponent(UITaskListOfProcess.class,
                                                                                           null,
                                                                                           null);

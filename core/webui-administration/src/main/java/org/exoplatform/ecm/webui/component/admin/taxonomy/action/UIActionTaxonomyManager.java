@@ -62,6 +62,7 @@ public class UIActionTaxonomyManager extends UIContainer {
 
     removeChildById(UIActionForm.POPUP_COMPONENT);
     UIPopupWindow uiPopup = addChild(UIPopupWindow.class, null, id);
+    uiPopup.setShowMask(true);
     uiPopup.setUIComponent(uiComp);
     uiPopup.setWindowSize(640, 300);
     uiPopup.setShow(true);

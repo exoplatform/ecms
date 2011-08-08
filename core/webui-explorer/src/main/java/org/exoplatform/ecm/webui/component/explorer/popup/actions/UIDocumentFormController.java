@@ -84,6 +84,7 @@ public class UIDocumentFormController extends UIContainer implements UIPopupComp
   public void initPopup(UIComponent uiComp) throws Exception {
     removeChildById("PopupComponent") ;
     UIPopupWindow uiPopup = addChild(UIPopupWindow.class, null, "PopupComponent") ;
+    uiPopup.setShowMask(true);
     uiPopup.setUIComponent(uiComp) ;
     uiPopup.setWindowSize(640, 300) ;
     uiPopup.setShow(true) ;
@@ -164,6 +165,7 @@ public class UIDocumentFormController extends UIContainer implements UIPopupComp
   public void processRender(WebuiRequestContext context) throws Exception {
     UIPopupWindow uiPopup = getAncestorOfType(UIPopupWindow.class);
     if (uiPopup != null && !uiPopup.isShow()) {
+      uiPopup.setShowMask(true);
       deActivate();
     }
     super.processRender(context);

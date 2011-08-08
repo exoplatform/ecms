@@ -105,6 +105,7 @@ public class UIPublicationLogList extends UIComponentDecorator {
       UIPopupWindow uiPopup = uiPublicationLogList.getAncestorOfType(UIPopupWindow.class) ;
       uiPopup.setRendered(false) ;
       uiPopup.setShow(false) ;
+      uiPopup.setShowMask(true);
     }
   }
 

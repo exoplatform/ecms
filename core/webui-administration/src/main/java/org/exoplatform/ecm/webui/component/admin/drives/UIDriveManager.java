@@ -61,6 +61,7 @@ public class UIDriveManager extends UIAbstractManager {
     UIPopupWindow uiPopup = getChildById(id) ;
     if(uiPopup == null) {
       uiPopup = addChild(UIPopupWindow.class, null, id) ;
+      uiPopup.setShowMask(true);
       uiPopup.setWindowSize(580,420) ;
       uiDriveForm = createUIComponent(UIDriveForm.class, null, null) ;
     } else {
@@ -75,6 +76,7 @@ public class UIDriveManager extends UIAbstractManager {
   public void initPopupPermission(String membership) throws Exception {
     removeChildById(UIDriveForm.POPUP_DRIVEPERMISSION) ;
     UIPopupWindow uiPopup = addChild(UIPopupWindow.class, null, UIDriveForm.POPUP_DRIVEPERMISSION);
+    uiPopup.setShowMask(true);
     uiPopup.setWindowSize(580, 300);
     UIPermissionSelector uiECMPermission =
       createUIComponent(UIPermissionSelector.class, null, null) ;
@@ -92,6 +94,7 @@ public class UIDriveManager extends UIAbstractManager {
   public void initPopupNodeTypeSelector(String nodeTypes) throws Exception {
     removeChildById(UIDriveForm.POPUP_NODETYPE_SELECTOR) ;
     UIPopupWindow uiPopup = addChild(UIPopupWindow.class, null, UIDriveForm.POPUP_NODETYPE_SELECTOR);
+    uiPopup.setShowMask(true);
     uiPopup.setWindowSize(580, 300);
     UINodeTypeSelector uiNodeTypeSelector =
       createUIComponent(UINodeTypeSelector.class, null, null) ;
@@ -118,6 +121,7 @@ public class UIDriveManager extends UIAbstractManager {
     removeChildById("JCRBrowserAssets") ;
     String repository = getAncestorOfType(UIECMAdminPortlet.class).getPreferenceRepository() ;
     UIPopupWindow uiPopup = addChild(UIPopupWindow.class, null, "JCRBrowser");
+    uiPopup.setShowMask(true);
     uiPopup.setWindowSize(610, 300);
     UIOneNodePathSelector uiOneNodePathSelector =
       createUIComponent(UIOneNodePathSelector.class, null, null);
@@ -141,6 +145,7 @@ public class UIDriveManager extends UIAbstractManager {
     removeChildById("JCRBrowserAssets") ;
     removeChildById("JCRBrowser") ;
     UIPopupWindow uiPopup = addChild(UIPopupWindow.class, null, "JCRBrowserAssets");
+    uiPopup.setShowMask(true);
     uiPopup.setWindowSize(610, 300);
     UIOneNodePathSelector uiOneNodePathSelector =
       createUIComponent(UIOneNodePathSelector.class, null, null);

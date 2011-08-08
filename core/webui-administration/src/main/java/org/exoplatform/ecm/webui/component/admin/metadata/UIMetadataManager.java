@@ -54,6 +54,7 @@ public class UIMetadataManager extends UIAbstractManager {
   public void initPopup() throws Exception {
     removeChildById(METADATA_POPUP) ;
     UIPopupWindow uiPopup = addChild(UIPopupWindow.class, null, METADATA_POPUP);
+    uiPopup.setShowMask(true);
     uiPopup.setWindowSize(650, 450);
     UIMetadataForm uiMetaForm = createUIComponent(UIMetadataForm.class, null, null) ;
     uiPopup.setUIComponent(uiMetaForm) ;
@@ -64,6 +65,7 @@ public class UIMetadataManager extends UIAbstractManager {
 
   public void initViewPopup(String metadataName) throws Exception {
     UIPopupWindow uiPopup = addChild(UIPopupWindow.class, null, VIEW_METADATA_POPUP);
+    uiPopup.setShowMask(true);
     uiPopup.setShow(true) ;
     uiPopup.setWindowSize(600, 500);
     uiPopup.setRendered(true);
@@ -79,6 +81,7 @@ public class UIMetadataManager extends UIAbstractManager {
   public void initPopupPermission(String membership) throws Exception {
     removeChildById(PERMISSION_POPUP) ;
     UIPopupWindow uiPopup = addChild(UIPopupWindow.class, null, PERMISSION_POPUP);
+    uiPopup.setShowMask(true);
     uiPopup.setWindowSize(560, 300);
     UIPermissionSelector uiECMPermission =
       createUIComponent(UIPermissionSelector.class, null, "MetadataPermission") ;

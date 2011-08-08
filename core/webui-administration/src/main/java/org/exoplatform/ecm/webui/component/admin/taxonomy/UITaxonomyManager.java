@@ -134,6 +134,7 @@ public class UITaxonomyManager extends UIAbstractManager {
   public void initPopup(String path) throws Exception {
     removeChildById("TaxonomyPopup");
     UIPopupWindow uiPopup = addChild(UIPopupWindow.class, null, "TaxonomyPopup");
+    uiPopup.setShowMask(true);
     uiPopup.setWindowSize(600, 250);
     UITaxonomyForm uiTaxoForm = createUIComponent(UITaxonomyForm.class, null, null);
     uiPopup.setUIComponent(uiTaxoForm);

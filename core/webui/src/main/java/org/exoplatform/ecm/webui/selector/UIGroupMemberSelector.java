@@ -271,6 +271,7 @@ public class UIGroupMemberSelector extends UIContainer implements ComponentSelec
       if (uiGroupMemberSelector.isUsePopup) {
         UIPopupWindow uiPopup = uiGroupMemberSelector.getParent();
         uiPopup.setShow(false);
+        uiPopup.setShowMask(true);
         UIComponent uicomp = uiGroupMemberSelector.getSourceComponent().getParent();
         event.getRequestContext().addUIComponentToUpdateByAjax(uicomp);
         if (!uiPopup.getId().equals("PopupComponent"))
@@ -304,6 +305,7 @@ public class UIGroupMemberSelector extends UIContainer implements ComponentSelec
       if (uiGroupMemberSelector.isUsePopup) {
         UIPopupWindow uiPopup = uiBreadcumbs.getAncestorOfType(UIPopupWindow.class);
         uiPopup.setShow(true);
+        uiPopup.setShowMask(true);
       }
       event.getRequestContext().addUIComponentToUpdateByAjax(uiGroupMemberSelector);
     }
@@ -319,6 +321,7 @@ public class UIGroupMemberSelector extends UIContainer implements ComponentSelec
       if (uiGroupMemberSelector.isUsePopup()) {
         UIPopupWindow uiPopup = uiGroupMemberSelector.getParent();
         uiPopup.setShow(false);
+        uiPopup.setShowMask(true);
         UIComponent uicomp = uiGroupMemberSelector.getSourceComponent().getParent();
         event.getRequestContext().addUIComponentToUpdateByAjax(uicomp);
         if (!uiPopup.getId().equals("PopupComponent"))

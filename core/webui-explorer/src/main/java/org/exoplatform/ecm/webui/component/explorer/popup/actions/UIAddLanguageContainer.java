@@ -45,6 +45,7 @@ public class UIAddLanguageContainer extends UIContainer implements UIPopupCompon
   public void initPopup(UIComponent uiComp) throws Exception {
     removeChildById("PopupComponent") ;
     UIPopupWindow uiPopup = addChild(UIPopupWindow.class, null, "PopupComponent") ;
+    uiPopup.setShowMask(true);
     uiPopup.setUIComponent(uiComp) ;
     uiPopup.setWindowSize(640, 300) ;
     uiPopup.setShow(true) ;

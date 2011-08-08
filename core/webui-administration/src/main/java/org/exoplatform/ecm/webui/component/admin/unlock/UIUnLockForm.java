@@ -69,6 +69,7 @@ public class UIUnLockForm extends UIForm implements UISelectable {
     UIPopupWindow uiPopup = uiManager.getChildById("PermissionPopup");
     uiPopup.setRendered(false);
     uiPopup.setShow(false);
+    uiPopup.setShowMask(true);
     uiManager.getChild(UILockNodeList.class).setRendered(false);
     uiManager.getChild(UIUnLockForm.class).setRendered(true);
   }

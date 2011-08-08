@@ -152,6 +152,7 @@ public class UIWorkflowPublicationViewForm extends UIForm {
     uiPopup.setUIComponent(uiComp);
     uiPopup.setWindowSize(640, 300);
     uiPopup.setShow(true);
+    uiPopup.setShowMask(true);
     uiPopup.setResizable(true);
   }
 

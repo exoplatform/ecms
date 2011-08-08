@@ -70,6 +70,7 @@ public class UIUserContainer extends UIContainer implements UIPopupComponent  {
       uiPermissionForm.doSelect(UIPermissionInputSet.FIELD_USERORGROUP, uiUserSelector.getSelectedUsers());
       UIPopupWindow uiPopup = uiParent.findComponentById("PopupUserSelector");
       uiPopup.setShow(false);
+      uiPopup.setShowMask(true);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiParent);
     }
   }

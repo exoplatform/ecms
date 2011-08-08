@@ -140,6 +140,7 @@ public class UIDriveForm extends UIFormTabPane implements UISelectable {
         UIPopupWindow uiPopup = uiContainer.getChildById(uiChild.getId()) ;
         uiPopup.setRendered(false) ;
         uiPopup.setShow(false) ;
+        uiPopup.setShowMask(true);
       }
     }
   }

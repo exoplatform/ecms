@@ -48,6 +48,7 @@ public class UIViewMetadataManager extends UIContainer implements UIPopupCompone
   public void initMetadataFormPopup(String nodeType) throws Exception {
     removeChildById(METADATAS_POPUP) ;
     UIPopupWindow uiPopup = addChild(UIPopupWindow.class, null, METADATAS_POPUP) ;
+    uiPopup.setShowMask(true);
     uiPopup.setWindowSize(650, 450);
     UIViewMetadataForm uiForm = createUIComponent(UIViewMetadataForm.class, null, null) ;
     uiForm.getChildren().clear() ;

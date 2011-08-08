@@ -334,6 +334,7 @@ public class UIActionForm extends UIDialogForm implements UISelectable {
             UIPopupWindow uiPopup = uiManager.findComponentById("editActionPopup");
             uiPopup.setShow(false);
             uiPopup.setRendered(false);
+            uiPopup.setShowMask(true);
             uiManager.setDefaultConfig();
             actionForm.isEditInList_ = false;
             //actionForm.isAddNew_ = true;
@@ -527,6 +528,7 @@ public class UIActionForm extends UIDialogForm implements UISelectable {
           UIPopupWindow uiPopup = uiActionListContainer.findComponentById("editActionPopup");
           uiPopup.setShow(false);
           uiPopup.setRendered(false);
+          uiPopup.setShowMask(true);
           uiForm.isEditInList_ = false;
           event.getRequestContext().addUIComponentToUpdateByAjax(uiManager);
         } else {

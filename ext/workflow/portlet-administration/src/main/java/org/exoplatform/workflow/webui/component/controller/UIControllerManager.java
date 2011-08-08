@@ -17,6 +17,7 @@ import org.exoplatform.services.workflow.Form;
 import org.exoplatform.services.workflow.Process;
 import org.exoplatform.services.workflow.WorkflowFormsService;
 import org.exoplatform.services.workflow.WorkflowServiceContainer;
+import org.exoplatform.webui.core.UIPopupWindow;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.ComponentConfigs;
@@ -88,6 +89,7 @@ public class UIControllerManager extends UIContainer {
         uiTaskManager.setTokenId(processId);
         uiTaskManager.setIsStart(true);
         uiTaskManager.checkBeforeActive();
+        uiPopup.getChild(UIPopupWindow.class).setShowMask(true);
         uiPopup.activate(uiTaskManager, 600, 500);
       } else {
         uiControllerManager.service_.startProcess(processId);

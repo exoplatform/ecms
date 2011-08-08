@@ -140,6 +140,7 @@ public class UINodeTypeExport extends UIForm {
 
       event.getRequestContext().addUIComponentToUpdateByAjax(uiManager) ;
       UIPopupWindow uiPopup = uiManager.findComponentById(UINodeTypeManager.EXPORT_POPUP) ;
+      uiPopup.setShowMask(true);
       uiPopup.setRendered(false) ;
     }
     private String getNodeTypeXML(List selectedNodes) {
@@ -283,6 +284,7 @@ public class UINodeTypeExport extends UIForm {
       UINodeTypeExport uiExport = event.getSource() ;
       UINodeTypeManager uiManager = uiExport.getAncestorOfType(UINodeTypeManager.class) ;
       UIPopupWindow uiPopup = uiManager.findComponentById(UINodeTypeManager.EXPORT_POPUP) ;
+      uiPopup.setShowMask(true);
       uiPopup.setRendered(false) ;
       event.getRequestContext().addUIComponentToUpdateByAjax(uiManager) ;
     }

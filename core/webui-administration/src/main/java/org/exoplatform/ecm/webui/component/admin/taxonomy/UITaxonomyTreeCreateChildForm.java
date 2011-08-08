@@ -127,6 +127,7 @@ public class UITaxonomyTreeCreateChildForm extends UIForm {
       UIPopupWindow uiPopup = uiForm.getParent();
       uiPopup.setRendered(false);
       uiPopup.setShow(false);
+      uiPopup.setShowMask(true);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiTaxonomyManageTrees);
     }
   }
@@ -137,6 +138,7 @@ public class UITaxonomyTreeCreateChildForm extends UIForm {
       UIPopupWindow uiPopup = uiForm.getParent();
       uiPopup.setRendered(false);
       uiPopup.setShow(false);
+      uiPopup.setShowMask(true);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiPopup);
     }
   }

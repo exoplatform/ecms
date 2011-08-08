@@ -328,6 +328,7 @@ public class UIViewForm extends UIFormInputSetWithAction implements UISelectable
     boolean isEnableVersioning = getUIFormCheckBoxInput(FIELD_ENABLEVERSION).isChecked() ;
     List<ViewConfig> viewList = vservice_.getAllViews() ;
     UIPopupWindow uiPopup = getAncestorOfType(UIPopupWindow.class) ;
+    uiPopup.setShowMask(true);
     if(uiPopup.getId().equals(UIViewList.ST_ADD)) {
       for(ViewConfig view : viewList) {
         if(view.getName().equals(viewName) && !isEnableVersioning) {

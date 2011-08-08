@@ -40,6 +40,8 @@ public class UIViewContainer extends UIContainer {
   public void initPopup(String popupId) throws Exception {
     removeChildById(popupId) ;
     UIPopupWindow uiPopup = addChild(UIPopupWindow.class, null, popupId) ;
+    uiPopup.setShowMask(true);
+    uiPopup.setShowMask(true);
     uiPopup.setWindowSize(600,400) ;
     UIViewFormTabPane uiViewForm = createUIComponent(UIViewFormTabPane.class, null, null) ;
     uiPopup.setUIComponent(uiViewForm) ;
@@ -55,6 +57,7 @@ public class UIViewContainer extends UIContainer {
   public void initPopupPermission(String membership) throws Exception {
     removeChildById(UIViewFormTabPane.POPUP_PERMISSION) ;
     UIPopupWindow uiPopup = addChild(UIPopupWindow.class, null, UIViewFormTabPane.POPUP_PERMISSION);
+    uiPopup.setShowMask(true);
     uiPopup.setWindowSize(600, 300);
     UIPermissionSelector uiECMPermission =
       createUIComponent(UIPermissionSelector.class, null, null) ;

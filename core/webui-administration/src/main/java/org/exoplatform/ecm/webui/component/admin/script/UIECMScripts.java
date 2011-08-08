@@ -51,8 +51,6 @@ public class UIECMScripts extends UIContainer {
     addChild(UIECMFilterForm.class, null, null) ;
     UIScriptList list = addChild(UIScriptList.class, null, SCRIPTLIST_NAME) ;
     list.getUIPageIterator().setId(SCRIPTLIST_NAME + SCRIPT_PAGE) ;
-    UIPopupContainer uiPopupAction = addChild(UIPopupContainer.class,null, "ECMScriptPopupAction") ;
-    uiPopupAction.getChild(UIPopupWindow.class).setId("ECMScriptPopupWindow") ;
   }
 
   private List<SelectItemOption<String>> getECMCategoryOptions() throws Exception {
@@ -98,5 +96,17 @@ public class UIECMScripts extends UIContainer {
       scriptData.add(new ScriptData(scriptNode.getName(), scriptNode.getPath(), version)) ;
     }
     return scriptData ;
+  }
+  
+  public void initFormPopup(String id) throws Exception {
+	removeChildById(id) ;
+	UIPopupWindow uiPopup = addChild(UIPopupWindow.class, null, id) ;
+	uiPopup.setShowMask(true);
+	uiPopup.setWindowSize(600, 500) ;
+	UIScriptForm uiForm = createUIComponent(UIScriptForm.class, null, null) ;	
+    uiPopup.setUIComponent(uiForm) ;
+    uiPopup.setRendered(true) ;
+    uiPopup.setShow(true) ;
+    uiPopup.setResizable(true) ;
   }
 }

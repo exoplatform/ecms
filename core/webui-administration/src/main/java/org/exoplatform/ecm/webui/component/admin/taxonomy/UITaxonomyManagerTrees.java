@@ -54,7 +54,7 @@ public class UITaxonomyManagerTrees extends UIAbstractManager {
     UIPopupWindow uiPopup = getChildById(id);
     if (uiPopup == null) {
       uiPopup = addChild(UIPopupWindow.class, null, id);
-      uiPopup.setWindowSize(650, 450);
+      uiPopup.setWindowSize(650, 450);      
       uiTaxonomyTreeContainer = createUIComponent(UITaxonomyTreeContainer.class, null, null);
     } else {
       uiTaxonomyTreeContainer = uiPopup.findFirstComponentOfType(UITaxonomyTreeContainer.class);
@@ -62,6 +62,7 @@ public class UITaxonomyManagerTrees extends UIAbstractManager {
     }
     uiPopup.setUIComponent(uiTaxonomyTreeContainer);
     uiPopup.setShow(true);
+    uiPopup.setShowMask(true);
     uiPopup.setResizable(true);
   }
 
@@ -78,6 +79,7 @@ public class UITaxonomyManagerTrees extends UIAbstractManager {
     removePopup();
     UIPopupWindow uiPopup = addChild(UIPopupWindow.class, null,
         UITaxonomyTreeContainer.POPUP_PERMISSION);
+    uiPopup.setShowMask(true);
     uiPopup.setWindowSize(560, 300);
     UIPermissionSelector uiTaxonomyTreePermission = createUIComponent(UIPermissionSelector.class,
         null, null);
@@ -117,6 +119,7 @@ public class UITaxonomyManagerTrees extends UIAbstractManager {
     removePopup();
     String repository = getAncestorOfType(UIECMAdminPortlet.class).getPreferenceRepository();
     UIPopupWindow uiPopup = addChild(UIPopupWindow.class, null, UITaxonomyTreeContainer.POPUP_TAXONOMYHOMEPATH);
+    uiPopup.setShowMask(true);
     uiPopup.setWindowSize(610, 300);
     String[] filterType = {Utils.NT_FOLDER, Utils.NT_UNSTRUCTURED};
     UIOneNodePathSelector uiOneNodePathSelector = createUIComponent(UIOneNodePathSelector.class, null, null);
@@ -142,6 +145,7 @@ public class UITaxonomyManagerTrees extends UIAbstractManager {
   public void initPopupComponent(UIComponent uiComp, String id) throws Exception {
     removePopup();
     UIPopupWindow uiPopup = addChild(UIPopupWindow.class, null, id);
+    uiPopup.setShowMask(true);
     uiPopup.setUIComponent(uiComp);
     uiPopup.setWindowSize(640, 300);
     uiPopup.setShow(true);

@@ -34,7 +34,6 @@ import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.webui.core.UIPopupComponent;
-import org.exoplatform.webui.core.UIPopupContainer;
 import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.core.model.SelectItemOption;
 import org.exoplatform.webui.event.Event;
@@ -255,47 +254,45 @@ public class UIScriptForm extends UIForm implements UIPopupComponent {
           return;
         }
       }
-      uiForm.reset() ;
-      UIPopupContainer uiPopupAction = uiForm.getAncestorOfType(UIPopupContainer.class) ;
-      uiPopupAction.deActivate() ;
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiPopupAction) ;
+      uiForm.reset() ;      
+      if(uiForm.getId().equals(UIECMScripts.SCRIPTFORM_NAME))
+        uiManager.getChild(UIECMScripts.class).removeChildById(UIScriptList.ECMScript_EDIT);
+      else 
+    	  uiManager.getChild(UICBScripts.class).removeChildById(UIScriptList.CBScript_EDIT);
+      event.getRequestContext().addUIComponentToUpdateByAjax(curentList) ;
       curentList.refresh(1) ;
       event.getRequestContext().addUIComponentToUpdateByAjax(curentList.getParent()) ;
     }
   }
 
   static public class RestoreActionListener extends EventListener<UIScriptForm> {
-    public void execute(Event<UIScriptForm> event) throws Exception {
-      UIScriptForm uiForm = event.getSource() ;
+    public void execute(Event<UIScriptForm> event) throws Exception {    
+	  UIScriptForm uiForm = event.getSource();     
       String name = uiForm.getUIStringInput(FIELD_SCRIPT_NAME).getValue() ;
       UIScriptList uiScriptList = null ;
-      UIScriptManager uiManager = uiForm.getAncestorOfType(UIScriptManager.class) ;
+      UIScriptManager uiManager = uiForm.getAncestorOfType(UIScriptManager.class) ;    
+      
       if(uiForm.getId().equals(UIECMScripts.SCRIPTFORM_NAME)) {
         uiScriptList = uiManager.findComponentById(UIECMScripts.SCRIPTLIST_NAME);
       } else if(uiForm.getId().equals(UICBScripts.SCRIPTFORM_NAME)){
         uiScriptList = uiManager.findComponentById(UICBScripts.SCRIPTLIST_NAME);
-      }
+      }      
       try {
-        Node node = uiScriptList.getScriptNode(name) ;
+    	Node node = uiScriptList.getScriptNode(name) ;
         String vesion = uiForm.getUIFormSelectBox(FIELD_SELECT_VERSION).getValue() ;
         String baseVesion = node.getBaseVersion().getName() ;
         if(!vesion.equals(baseVesion)) {
           node.checkout() ;
           node.restore(vesion, true) ;
           uiScriptList.refresh(1) ;
-        }
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiScriptList) ;
-        UIPopupContainer uiPopupAction = uiForm.getAncestorOfType(UIPopupContainer.class) ;
-        uiPopupAction.deActivate() ;
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiPopupAction) ;
+        }  
+        if(uiForm.getId().equals(UIECMScripts.SCRIPTFORM_NAME))
+          uiManager.getChild(UIECMScripts.class).removeChildById(UIScriptList.ECMScript_EDIT);
+        else 
+          uiManager.getChild(UICBScripts.class).removeChildById(UIScriptList.CBScript_EDIT);
+        event.getRequestContext().addUIComponentToUpdateByAjax(uiManager) ;
       } catch (PathNotFoundException pathNotFoundException) {
-        String namePrefix = uiScriptList.getScriptCategory();
-        Object[] args = { namePrefix };
-        UIApplication uiApp = uiForm.getAncestorOfType(UIApplication.class);
-        uiApp.addMessage(new ApplicationMessage("UIScriptForm.msg.PathNotFoundException", args,
-            ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
-        return;
+    	  
       }
     }
   }
@@ -318,7 +315,7 @@ public class UIScriptForm extends UIForm implements UIPopupComponent {
       Node frozenNode = versionNode.getNode(Utils.JCR_FROZEN) ;
       String scriptContent = frozenNode.getNode(Utils.JCR_CONTENT).getProperty(Utils.JCR_DATA).getString() ;
       uiForm.getUIFormTextAreaInput(FIELD_SCRIPT_CONTENT).setValue(scriptContent) ;
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiForm.getAncestorOfType(UIPopupContainer.class)) ;
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiForm.getAncestorOfType(UIScriptManager.class)) ;
     }
   }
 
@@ -349,17 +346,20 @@ public class UIScriptForm extends UIForm implements UIPopupComponent {
           return;
         }
       }
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiForm.getAncestorOfType(UIPopupContainer.class)) ;
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiForm.getAncestorOfType(UIScriptManager.class)) ;
     }
   }
 
   static public class CancelActionListener extends EventListener<UIScriptForm> {
     public void execute(Event<UIScriptForm> event) throws Exception {
-      UIScriptForm uiForm = event.getSource();
-      uiForm.reset() ;
-      UIPopupContainer uiPopupAction = uiForm.getAncestorOfType(UIPopupContainer.class) ;
-      uiPopupAction.deActivate() ;
-      event.getRequestContext().addUIComponentToUpdateByAjax(uiPopupAction) ;
+      UIScriptForm uiForm = event.getSource();      
+      uiForm.reset() ;     
+      UIScriptManager uiManager = uiForm.getAncestorOfType(UIScriptManager.class) ;
+      if(uiForm.getId().equals(UIECMScripts.SCRIPTFORM_NAME))
+        uiManager.getChild(UIECMScripts.class).removeChildById(UIScriptList.ECMScript_EDIT);
+      else 
+        uiManager.getChild(UICBScripts.class).removeChildById(UIScriptList.CBScript_EDIT);
+      event.getRequestContext().addUIComponentToUpdateByAjax(uiManager) ;
     }
   }
 }

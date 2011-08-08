@@ -54,6 +54,7 @@ public class UIPermissionManager extends UIContainer implements UIPopupComponent
   public void initPopupPermission(UIComponent uiSelector) throws Exception {
     removeChildById(UIPermissionForm.POPUP_SELECT);
     UIPopupWindow uiPopup = addChild(UIPopupWindow.class, null, UIPermissionForm.POPUP_SELECT);
+    uiPopup.setShowMask(true);
     uiPopup.setWindowSize(560, 300);
     uiPopup.setRendered(true);
     uiPopup.setUIComponent(uiSelector);
@@ -64,6 +65,7 @@ public class UIPermissionManager extends UIContainer implements UIPopupComponent
   public void initUserSelector() throws Exception {
     UIPopupWindow uiPopup = getChildById("PopupUserSelector") ;
     if(uiPopup == null) {
+      uiPopup.setShowMask(true);
       uiPopup = addChild(UIPopupWindow.class, null, "PopupUserSelector");
     }
     uiPopup.setWindowSize(790, 400);
@@ -108,6 +110,7 @@ public class UIPermissionManager extends UIContainer implements UIPopupComponent
       UIPopupWindow uiPopup = uiParent.getChild(UIPopupWindow.class);
       uiPopup.setUIComponent(null);
       uiPopup.setShow(false);
+      uiPopup.setShowMask(true);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiParent);
     }
   }

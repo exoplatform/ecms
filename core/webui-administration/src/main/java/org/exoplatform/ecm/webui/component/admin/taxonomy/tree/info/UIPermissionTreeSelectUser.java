@@ -71,6 +71,7 @@ public class UIPermissionTreeSelectUser extends UIContainer implements UIPopupCo
       uiPermissionForm.doSelect(UIPermissionInputSet.FIELD_USERORGROUP, uiUserSelector.getSelectedUsers());
       UIPopupWindow uiPopup = uiParent.findComponentById(UIPermissionTreeManager.POPUP_TAXONOMY_SELECT_USER);
       uiPopup.setShow(false);
+      uiPopup.setShowMask(true);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiParent);
     }
   }

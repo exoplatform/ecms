@@ -163,6 +163,7 @@ public class UIConfigTabPane extends UIContainer {
     removeChildById(PATH_SELECTOR);
     removeChildById(DOCUMENT_SELECTOR);
     UIPopupWindow uiPopup = addChild(UIPopupWindow.class, null, PATH_SELECTOR);
+    uiPopup.setShowMask(true);
     uiPopup.setWindowSize(610, 300);
     UIOneNodePathSelector uiOneNodePathSelector =
       createUIComponent(UIOneNodePathSelector.class, null, null);
@@ -187,6 +188,7 @@ public class UIConfigTabPane extends UIContainer {
     removeChildById(PATH_SELECTOR);
     removeChildById(DOCUMENT_SELECTOR);
     UIPopupWindow uiPopup = addChild(UIPopupWindow.class, null, PATH_SELECTOR);
+    uiPopup.setShowMask(true);
     uiPopup.setWindowSize(610, 300);
     UIOneNodePathSelector uiOneNodePathSelector =
       createUIComponent(UIOneNodePathSelector.class, null, null);
@@ -215,6 +217,7 @@ public class UIConfigTabPane extends UIContainer {
     removeChildById(PATH_SELECTOR);
     removeChildById(DOCUMENT_SELECTOR);
     UIPopupWindow uiPopup = addChild(UIPopupWindow.class, null, DOCUMENT_SELECTOR);
+    uiPopup.setShowMask(true);
     uiPopup.setWindowSize(610, 300);
     UIOneNodePathSelector uiOneNodePathSelector =
       createUIComponent(UIOneNodePathSelector.class, null, null);

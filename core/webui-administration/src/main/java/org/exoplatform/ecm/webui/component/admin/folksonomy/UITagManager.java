@@ -50,6 +50,7 @@ public class UITagManager extends UIContainer {
   public void initTaggingFormPopup(Node selectedTagStyle) throws Exception {
     removeChildById("FolksonomyPopup") ;
     UIPopupWindow uiPopup = addChild(UIPopupWindow.class, null, "FolksonomyPopup") ;
+    uiPopup.setShowMask(true);
     uiPopup.setWindowSize(600, 500) ;
     UITagStyleForm uiForm = createUIComponent(UITagStyleForm.class, null, null) ;
     uiForm.setTagStyle(selectedTagStyle) ;

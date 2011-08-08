@@ -456,6 +456,7 @@ public class Utils {
     popupWindow.setShow(true);
     popupWindow.setRendered(true);
     popupWindow.setResizable(true);
+    popupWindow.setShowMask(true);
     WebuiRequestContext requestContext = WebuiRequestContext.getCurrentInstance();
     requestContext.addUIComponentToUpdateByAjax(popupContainer);
   }

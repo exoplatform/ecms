@@ -49,6 +49,7 @@ public class UIUploadBehaviorWithSameName extends UIConfirmMessage {
     public void execute(Event<UIUploadBehaviorWithSameName> event) throws Exception {
       UIUploadBehaviorWithSameName uiUploadBehavior = event.getSource();
       UIPopupWindow uiPopup = uiUploadBehavior.getParent();
+      uiPopup.setShowMask(true);
       UIUploadManager uiUploadManager = uiPopup.getParent();
       UIUploadForm uiForm = uiUploadManager.getChild(UIUploadForm.class);
       uiForm.doUpload(event, false);
@@ -65,6 +66,7 @@ public class UIUploadBehaviorWithSameName extends UIConfirmMessage {
       UIPopupWindow uiPopup = uiUploadBehavior.getParent();
       uiPopup.setRendered(false);
       uiPopup.setShow(false);
+      uiPopup.setShowMask(true);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiPopup.getParent());
     }
   }
@@ -73,6 +75,7 @@ public class UIUploadBehaviorWithSameName extends UIConfirmMessage {
     public void execute(Event<UIUploadBehaviorWithSameName> event) throws Exception {
       UIUploadBehaviorWithSameName uiUploadBehavior = event.getSource();
       UIPopupWindow uiPopup = uiUploadBehavior.getParent();
+      uiPopup.setShowMask(true);
       UIUploadManager uiUploadManager = uiPopup.getParent();
       UIUploadForm uiForm = uiUploadManager.getChild(UIUploadForm.class);
       uiForm.doUpload(event, true);

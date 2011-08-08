@@ -257,6 +257,7 @@ public class UIFCCActionList extends UIContainer {
       UIPopupWindow uiPopup = popupContainer.getChildById(UIFCCConstant.ACTION_POPUP_WINDOW) ;
       UIApplication uiApp = fastContentCreatorActionList.getAncestorOfType(UIApplication.class) ;
       if(uiPopup != null && uiPopup.isShow()) {
+        uiPopup.setShowMask(true);
         uiApp.addMessage(new ApplicationMessage("UIActionList.msg.remove-popup-first",
                                                 null,
                                                 ApplicationMessage.WARNING));

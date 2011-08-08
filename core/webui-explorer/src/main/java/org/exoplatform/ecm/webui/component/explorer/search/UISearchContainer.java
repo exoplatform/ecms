@@ -59,6 +59,7 @@ public class UISearchContainer extends UIContainer {
     uiPopup.getChild(UIPopupWindow.class).setId(fieldName + METADATA_POPUP) ;
     UISelectPropertyForm uiSelectForm = createUIComponent(UISelectPropertyForm.class, null, null) ;
     uiSelectForm.setFieldName(fieldName) ;
+    uiPopup.getChild(UIPopupWindow.class).setShowMask(true);
     uiPopup.activate(uiSelectForm, 500, 450) ;
   }
 
@@ -66,6 +67,7 @@ public class UISearchContainer extends UIContainer {
     UIPopupContainer uiPopup = getChild(UIPopupContainer.class) ;
     uiPopup.getChild(UIPopupWindow.class).setId(NODETYPE_POPUP) ;
     UINodeTypeSelectForm uiSelectForm = createUIComponent(UINodeTypeSelectForm.class, null, null) ;
+    uiPopup.getChild(UIPopupWindow.class).setShowMask(true);
     uiPopup.activate(uiSelectForm, 400, 400) ;
     uiSelectForm.setRenderNodeTypes() ;
   }
@@ -109,6 +111,7 @@ public class UISearchContainer extends UIContainer {
     uiSaveQueryForm.setStatement(statement) ;
     uiSaveQueryForm.setSimpleSearch(isSimpleSearch) ;
     uiSaveQueryForm.setQueryType(queryType) ;
+    uiPopup.getChild(UIPopupWindow.class).setShowMask(true);
     uiPopup.activate(uiSaveQueryForm, 400, 250) ;
   }
 }

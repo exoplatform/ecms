@@ -69,6 +69,7 @@ public class UITaggingFormContainer extends UIContainer implements UIPopupCompon
   private void initTaggingFormPopup(Node selectedTag) throws Exception {
     removeChildById("TagPopup") ;
     UIPopupWindow uiPopup = addChild(UIPopupWindow.class, null, "TagPopup") ;
+    uiPopup.setShowMask(true);
     uiPopup.setWindowSize(600, 200) ;
     UITagForm uiForm = createUIComponent(UITagForm.class, null, null) ;
     uiForm.setTag(selectedTag) ;

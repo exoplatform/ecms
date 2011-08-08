@@ -61,6 +61,7 @@ public class UIActionManager extends UIContainer implements UIPopupComponent {
   public void processRender(WebuiRequestContext context) throws Exception {
     UIPopupWindow uiPopup = getAncestorOfType(UIPopupWindow.class);
     if (uiPopup != null && !uiPopup.isShow()) {
+      uiPopup.setShowMask(true);
       deActivate();
     }
     super.processRender(context);

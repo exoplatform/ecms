@@ -53,6 +53,7 @@ public class UIPermissionTreeManager extends UIContainer {
   public void initPopupPermission(UIComponent uiSelector) throws Exception {
     removeChildById(UIPermissionTreeForm.POPUP_SELECT);
     UIPopupWindow uiPopup = addChild(UIPopupWindow.class, null, UIPermissionTreeForm.POPUP_SELECT);
+    uiPopup.setShowMask(true);
     uiPopup.setWindowSize(560, 300);
     uiPopup.setRendered(true);
     uiPopup.setUIComponent(uiSelector);
@@ -63,6 +64,7 @@ public class UIPermissionTreeManager extends UIContainer {
   public void initUserSelector() throws Exception {
     UIPopupWindow uiPopup = getChildById(POPUP_TAXONOMY_SELECT_USER);
     if (uiPopup == null) {
+      uiPopup.setShowMask(true);
       uiPopup = addChild(UIPopupWindow.class, null, POPUP_TAXONOMY_SELECT_USER);
     }
     uiPopup.setWindowSize(790, 400);
@@ -103,6 +105,7 @@ public class UIPermissionTreeManager extends UIContainer {
       uiPermissionForm.doSelect(UIPermissionInputSet.FIELD_USERORGROUP, uiForm.getSelectedUsers());
       UIPopupWindow uiPopup = uiParent.getChild(UIPopupWindow.class);
       uiPopup.setUIComponent(null);
+      uiPopup.setShowMask(true);
       uiPopup.setShow(false);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiParent);
     }

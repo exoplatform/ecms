@@ -49,6 +49,7 @@ import org.exoplatform.services.jcr.util.StringNumberParser;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.naming.InitialContextInitializer;
+import org.exoplatform.wcm.webui.core.UIPopupWindow;
 import org.exoplatform.web.application.ApplicationMessage;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -1144,6 +1145,7 @@ public class UIWorkspaceWizard extends UIFormTabPane implements UISelectable {
       UIWorkspaceWizard uiWizard = event.getSource() ;
       UIPopupContainer uiPopup = uiWizard.getAncestorOfType(UIWorkspaceWizardContainer.class).
       getChild(UIPopupContainer.class);
+      uiPopup.getChild(UIPopupWindow.class).setShowMask(true);
       UIRepositoryValueSelect uiSelect = uiPopup.activate(UIRepositoryValueSelect.class, 500) ;
       uiSelect.isSetContainer_ = true ;
       List<ClassData> datas = new ArrayList<ClassData>() ;
@@ -1158,6 +1160,7 @@ public class UIWorkspaceWizard extends UIFormTabPane implements UISelectable {
       UIWorkspaceWizard uiWizard = event.getSource() ;
       UIPopupContainer uiPopup = uiWizard.getAncestorOfType(UIWorkspaceWizardContainer.class).
       getChild(UIPopupContainer.class);
+      uiPopup.getChild(UIPopupWindow.class).setShowMask(true);
       UIRepositoryValueSelect uiSelect = uiPopup.activate(UIRepositoryValueSelect.class, 500) ;
       uiSelect.isSetStoreType_ = true ;
       List<ClassData> datas = new ArrayList<ClassData>() ;
@@ -1172,6 +1175,7 @@ public class UIWorkspaceWizard extends UIFormTabPane implements UISelectable {
       UIWorkspaceWizard uiWizard = event.getSource() ;
       UIPopupContainer uiPopup = uiWizard.getAncestorOfType(UIWorkspaceWizardContainer.class).
       getChild(UIPopupContainer.class);
+      uiPopup.getChild(UIPopupWindow.class).setShowMask(true);
       UIRepositoryValueSelect uiSelect = uiPopup.activate(UIRepositoryValueSelect.class, 500) ;
       uiSelect.isSetQueryHandler_ = true ;
       List<ClassData> datas = new ArrayList<ClassData>() ;

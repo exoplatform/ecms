@@ -170,6 +170,7 @@ public class UICategoriesSelector extends UIBaseNodeTreeSelector implements UIPo
       if(uiPopup != null) {
         uiPopup.setShow(false) ;
         uiPopup.setRendered(false) ;
+        uiPopup.setShowMask(true);
         event.getRequestContext().addUIComponentToUpdateByAjax(uiPopup.getParent()) ;
         return ;
       }

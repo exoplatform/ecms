@@ -485,6 +485,7 @@ public class UINodeTypeForm extends UIFormTabPane {
       uiForm.refresh() ;
       UIPopupWindow uiPopup = uiForm.getParent() ;
       uiPopup.setRendered(false) ;
+      uiPopup.setShowMask(true);
       uiPopup.setShow(false) ;
       event.getRequestContext().addUIComponentToUpdateByAjax(uiForm.getAncestorOfType(UINodeTypeManager.class)) ;
     }
@@ -498,6 +499,7 @@ public class UINodeTypeForm extends UIFormTabPane {
       UIPopupWindow uiPopup = uiForm.getParent() ;
       uiPopup.setRendered(false) ;
       uiPopup.setShow(false) ;
+      uiPopup.setShowMask(true);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiForm.getAncestorOfType(UINodeTypeManager.class)) ;
     }
   }
@@ -617,6 +619,7 @@ public class UINodeTypeForm extends UIFormTabPane {
       uiForm.setTabRender(NODETYPE_DEFINITION) ;
       UIPopupWindow uiPopup = uiForm.getParent() ;
       uiPopup.setRendered(false) ;
+      uiPopup.setShowMask(true);
       Object[] args = { newNodeType.getName() } ;
       uiApp.addMessage(new ApplicationMessage("UINodeTypeForm.msg.register-successfully", args)) ;
       event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
@@ -777,6 +780,7 @@ public class UINodeTypeForm extends UIFormTabPane {
       uiForm.setTabRender(NODETYPE_DEFINITION) ;
       UIPopupWindow uiPopup = uiForm.getParent() ;
       uiPopup.setRendered(false) ;
+      uiPopup.setShowMask(true);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiManager) ;
     }
   }

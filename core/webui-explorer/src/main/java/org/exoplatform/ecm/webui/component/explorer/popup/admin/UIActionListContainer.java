@@ -55,6 +55,8 @@ public class UIActionListContainer extends UIContainer {
   public void initEditPopup(Node actionNode) throws Exception {
     removeChildById("editActionPopup") ;
     UIPopupWindow uiPopup = addChild(UIPopupWindow.class, null, "editActionPopup") ;
+    uiPopup.setShowMask(true);
+    uiPopup.setShowMask(true);
     UIJCRExplorer uiExplorer = getAncestorOfType(UIJCRExplorer.class) ;
     Node currentNode = uiExplorer.getCurrentNode() ;
     UIActionForm uiActionForm = createUIComponent(UIActionForm.class, null, "EditFormAction") ;
@@ -121,6 +123,7 @@ public class UIActionListContainer extends UIContainer {
   public void initPopup(UIComponent uiComp) throws Exception {
     removeChildById("PopupComponent") ;
     UIPopupWindow uiPopup = addChild(UIPopupWindow.class, null, "PopupComponent") ;
+    uiPopup.setShowMask(true);
     uiPopup.setUIComponent(uiComp) ;
     uiPopup.setWindowSize(640, 300) ;
     uiPopup.setShow(true) ;

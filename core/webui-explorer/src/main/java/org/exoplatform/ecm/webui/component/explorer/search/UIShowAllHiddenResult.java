@@ -307,6 +307,7 @@ public class UIShowAllHiddenResult extends UIComponentDecorator {
         uiPopup = uiExplorer.addChild(UIPopupWindow.class, null, "ViewSearch");
       }
       uiPopup.setResizable(true);
+      uiPopup.setShowMask(true);
       UIViewSearchResult uiViewSearch = uiPopup.createUIComponent(UIViewSearchResult.class,
                                                                   null,
                                                                   null);

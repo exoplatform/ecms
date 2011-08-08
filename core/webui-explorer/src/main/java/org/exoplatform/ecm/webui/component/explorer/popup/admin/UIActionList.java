@@ -222,6 +222,7 @@ public void updateGrid(Node node, int currentPage) throws Exception {
       UIPopupWindow uiPopup = uiActionListContainer.getChildById("editActionPopup") ;
       UIApplication uiApp = uiActionList.getAncestorOfType(UIApplication.class) ;
       if(uiPopup != null && uiPopup.isShow()) {
+        uiPopup.setShowMask(true);
         uiApp.addMessage(new ApplicationMessage("UIActionList.msg.remove-popup-first", null,
                                                 ApplicationMessage.WARNING)) ;
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;

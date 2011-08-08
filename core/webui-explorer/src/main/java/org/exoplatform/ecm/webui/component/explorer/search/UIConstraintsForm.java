@@ -541,6 +541,7 @@ public class UIConstraintsForm extends UIForm implements UISelectable{
         uiContainer.createUIComponent(UICompareExactlyForm.class, null, null) ;
       UIPopupContainer uiPopup = uiContainer.getChild(UIPopupContainer.class);
       uiPopup.getChild(UIPopupWindow.class).setId("ExactlyFormPopup") ;
+      uiPopup.getChild(UIPopupWindow.class).setShowMask(true);
       uiCompareExactlyForm.init(property, result) ;
       uiPopup.activate(uiCompareExactlyForm, 600, 500) ;
       event.getRequestContext().addUIComponentToUpdateByAjax(uiPopup) ;
@@ -586,5 +587,6 @@ public class UIConstraintsForm extends UIForm implements UISelectable{
     UIPopupWindow uiPopup = uiSearchContainer.findComponentById(UISearchContainer.CATEGORY_POPUP);
     uiPopup.setRendered(false);
     uiPopup.setShow(false);
+    uiPopup.setShowMask(true);
   }
 }

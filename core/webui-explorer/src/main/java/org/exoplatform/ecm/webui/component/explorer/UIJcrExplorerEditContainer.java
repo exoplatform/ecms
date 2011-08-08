@@ -46,6 +46,7 @@ public class UIJcrExplorerEditContainer extends UIContainer {
   public UIPopupWindow initPopup(String id) throws Exception {
     removeChildById(id);
     UIPopupWindow uiPopup = addChild(UIPopupWindow.class, null, id);
+    uiPopup.setShowMask(true);
     uiPopup.setWindowSize(700, 350);
     uiPopup.setShow(true);
     uiPopup.setResizable(true);
@@ -68,6 +69,7 @@ public class UIJcrExplorerEditContainer extends UIContainer {
         new String[] { UIJcrExplorerEditForm.PARAM_PATH_INPUT });
     uiPopup.setRendered(true);
     uiPopup.setShow(true);
+    uiPopup.setShowMask(true);
     return uiPopup;
   }
 }
