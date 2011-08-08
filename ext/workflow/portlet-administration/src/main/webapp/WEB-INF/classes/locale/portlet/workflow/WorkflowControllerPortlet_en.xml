@@ -66,6 +66,7 @@
     </title>
     <msg>
       <has-not-got-delegate>You must choose any user to delegate</has-not-got-delegate>
+      <user-not-exist>This delegated user doesn't exist</user-not-exist>
     </msg>
   </UITask>
   <PopupDelegatedSelectorId>
@@ -102,7 +103,7 @@
   <PopupComponent>
     <title>
       <UIOneTaxonomySelector>Add Categories</UIOneTaxonomySelector>
-    </title>    
+    </title>
   </PopupComponent>
   <UITreeTaxonomyList>
     <label>
@@ -110,7 +111,7 @@
       <rootNodePath>Root tree</rootNodePath>
       <rootNodeInfo>UITreeTaxonomyList</rootNodeInfo>
     </label>
-  </UITreeTaxonomyList>  
+  </UITreeTaxonomyList>
      <UIWorkspaceList>
     <label>
       <workspaceName>Workspace</workspaceName>
@@ -122,11 +123,11 @@
     <title>
       <AddRootNode>Add root node</AddRootNode>
     </title>
-  </rootNodeInfo> 
+  </rootNodeInfo>
   <PopupComponent>
     <title>
       <UIOneNodePathSelector>Select path</UIOneNodePathSelector>
-    </title>   
+    </title>
   </PopupComponent>
 </bundle>
 

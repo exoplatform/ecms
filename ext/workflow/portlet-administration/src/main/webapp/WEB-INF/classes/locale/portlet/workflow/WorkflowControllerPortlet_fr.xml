@@ -66,6 +66,7 @@
     </title>
     <msg>
       <has-not-got-delegate>Veuillez choisir un utilisateur à qui déléguer</has-not-got-delegate>
+      <user-not-exist>Cet utilisateur délégué n'existe pas</user-not-exist>
     </msg>
   </UITask>
   <PopupDelegatedSelectorId>
@@ -102,7 +103,7 @@
   <PopupComponent>
     <title>
       <UIOneTaxonomySelector>Ajouter Catégories</UIOneTaxonomySelector>
-    </title>    
+    </title>
   </PopupComponent>
   <UITreeTaxonomyList>
     <label>
@@ -122,10 +123,10 @@
     <title>
       <AddRootNode>Ajouter le noeud racine</AddRootNode>
     </title>
-  </rootNodeInfo> 
+  </rootNodeInfo>
   <PopupComponent>
     <title>
       <UIOneNodePathSelector>Choisir un chemin</UIOneNodePathSelector>
-    </title>   
+    </title>
   </PopupComponent>
 </bundle>
