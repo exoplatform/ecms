@@ -23,13 +23,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
-import java.util.Set;
 
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
@@ -48,6 +45,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.dom.DOMSource;
 
+import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.container.PortalContainer;
 import org.exoplatform.container.component.ComponentRequestLifecycle;
@@ -66,11 +64,13 @@ import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.organization.Group;
-import org.exoplatform.services.organization.Membership;
 import org.exoplatform.services.organization.OrganizationService;
 import org.exoplatform.services.resources.ResourceBundleService;
 import org.exoplatform.services.rest.resource.ResourceContainer;
 import org.exoplatform.services.security.ConversationState;
+import org.exoplatform.services.security.Identity;
+import org.exoplatform.services.security.IdentityRegistry;
+import org.exoplatform.services.security.MembershipEntry;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.portal.PortalFolderSchemaHandler;
@@ -103,13 +103,13 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
 
   /** The Constant FILE_TYPE_MEDIAS. */
   public static final String FILE_TYPE_ALL                       = "All";
-  
+
   /** The Constant FILE_TYPE_IMAGE. */
   public static final String FILE_TYPE_IMAGE                       = "Image";
 
   /** The Constant MEDIA_MIMETYPE. */
   public static final String[] MEDIA_MIMETYPE = new String[]{"application", "image", "audio", "video"};
-  
+
   /** The Constant MEDIA_MIMETYPE. */
   public static final String[] IMAGE_MIMETYPE = new String[]{"image"};
 
@@ -326,7 +326,6 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
   /**
    * Gets the drivers by user id.
    *
-   * @param repoName the repo name
    * @param userId the user id
    *
    * @return the drivers by user id
@@ -334,55 +333,9 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
    * @throws Exception the exception
    */
   private List<DriveData> getDriversByUserId(String userId) throws Exception {
-    ManageDriveService driveService = (ManageDriveService) ExoContainerContext.getCurrentContainer()
-                                                        .getComponentInstanceOfType(ManageDriveService.class);
-    List<DriveData> driveList = new ArrayList<DriveData>();
+    ManageDriveService driveService = (ManageDriveService)ExoContainerContext.getCurrentContainer().getComponentInstanceOfType(ManageDriveService.class);
     List<String> userRoles = getMemberships(userId);
-    List<DriveData> allDrives = driveService.getAllDrives();
-    Set<DriveData> temp = new HashSet<DriveData>();
-    if (userId != null) {
-      // We will improve ManageDrive service to allow getAllDriveByUser
-      for (DriveData driveData : allDrives) {
-        String[] allPermission = driveData.getAllPermissions();
-        boolean flag = false;
-        for (String permission : allPermission) {
-          if (permission.equalsIgnoreCase("${userId}")) {
-            temp.add(driveData);
-            flag = true;
-            break;
-          }
-          if (permission.equalsIgnoreCase("*")) {
-            temp.add(driveData);
-            flag = true;
-            break;
-          }
-          if (flag)
-            continue;
-          for (String rolse : userRoles) {
-            if (driveData.hasPermission(allPermission, rolse)) {
-              temp.add(driveData);
-              break;
-            }
-          }
-        }
-      }
-    } else {
-      for (DriveData driveData : allDrives) {
-        String[] allPermission = driveData.getAllPermissions();
-        for (String permission : allPermission) {
-          if (permission.equalsIgnoreCase("*")) {
-            temp.add(driveData);
-            break;
-          }
-        }
-      }
-    }
-
-    for(Iterator<DriveData> iterator = temp.iterator();iterator.hasNext();) {
-      driveList.add(iterator.next());
-    }
-    Collections.sort(driveList);
-    return driveList;
+    return driveService.getDriveByUserRoles(userId, userRoles);
   }
 
   /**
@@ -445,7 +398,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
    * @param driveList the drive list
    *
    * @return the list< drive data>
-   * @throws Exception 
+   * @throws Exception
    */
   private List<DriveData> personalDrivers(List<DriveData> driveList, String userId) throws Exception {
     List<DriveData> personalDrivers = new ArrayList<DriveData>();
@@ -528,22 +481,35 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
    * @throws Exception the exception
    */
   private List<String> getMemberships(String userId) throws Exception {
-    if (organizationService ==null ) {
-      organizationService = WCMCoreUtils.getService(OrganizationService.class);
-    }
-    ((ComponentRequestLifecycle) organizationService).startRequest(manager);
     List<String> userMemberships = new ArrayList<String> ();
     userMemberships.add(userId);
-    Collection<?> memberships = organizationService.getMembershipHandler().findMembershipsByUser(userId);
-    if(memberships == null || memberships.size() < 0) return userMemberships;
-    Object[] objects = memberships.toArray();
-    for(int i = 0; i < objects.length; i ++ ){
-      Membership membership = (Membership)objects[i];
-      String role = membership.getMembershipType() + ":" + membership.getGroupId();
-      userMemberships.add(role);
+    // here we must retrieve memberships of the user using the
+    // IdentityRegistry Service instead of Organization Service to
+    // allow JAAS based authorization
+    Collection<MembershipEntry> memberships = getUserMembershipsFromIdentityRegistry(userId);
+    if (memberships != null) {
+      for (MembershipEntry membership : memberships) {
+        String role = membership.getMembershipType() + ":" + membership.getGroup();
+        userMemberships.add(role);
+      }
     }
-    ((ComponentRequestLifecycle) organizationService).endRequest(manager);
+
     return userMemberships;
+  }
+
+  /**
+   * this method retrieves memberships of the user having the given id using the
+   * IdentityRegistry service instead of the Organization service to allow JAAS
+   * based authorization
+   *
+   * @param authenticatedUser the authenticated user id
+   * @return a collection of MembershipEntry
+   */
+  private static Collection<MembershipEntry> getUserMembershipsFromIdentityRegistry(String authenticatedUser) {
+    ExoContainer container = ExoContainerContext.getCurrentContainer();
+    IdentityRegistry identityRegistry = (IdentityRegistry) container.getComponentInstanceOfType(IdentityRegistry.class);
+    Identity currentUserIdentity = identityRegistry.getIdentity(authenticatedUser);
+    return currentUserIdentity.getMemberships();
   }
 
   /**
@@ -589,10 +555,10 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
       Element files = document.createElement("Files");
       files.setAttribute("isUpload", "true");
       Node sourceNode = null;
-      Node checkNode = null;       
+      Node checkNode = null;
       for (NodeIterator iterator = node.getNodes(); iterator.hasNext();) {
         Node child = iterator.nextNode();
-        String fileType = null;        
+        String fileType = null;
         if (child.isNodeType(FCKUtils.EXO_HIDDENABLE))
           continue;
 
@@ -629,12 +595,12 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
         if (FILE_TYPE_DMSDOC.equals(filterBy) && isDMSDocument(checkNode)) {
           fileType = FILE_TYPE_DMSDOC;
         }
-        
+
         if (FILE_TYPE_IMAGE.equals(filterBy) && isImageType(checkNode)) {
             fileType = FILE_TYPE_IMAGE;
           }
 
-        if (fileType != null) {          
+        if (fileType != null) {
           Element file = FCKFileHandler.createFileElement(document, fileType, checkNode, child, currentPortal, linkManager);
           files.appendChild(file);
         }
@@ -715,7 +681,7 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
 
     return false;
   }
-  
+
   /**
    * Checks if is image type.
    *

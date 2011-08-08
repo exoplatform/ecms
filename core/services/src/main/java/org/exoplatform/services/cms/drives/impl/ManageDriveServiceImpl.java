@@ -16,6 +16,7 @@
  */
 package org.exoplatform.services.cms.drives.impl;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -136,7 +137,9 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
   /**
    * Keep the drives of repository
    */
-  private ExoCache drivesCache_ ;
+  private ExoCache<Serializable, Object> drivesCache_ ;
+
+  private DriveData groupDriveTemplate_ = null ;
 
   /**
    * Constructor method
@@ -180,6 +183,7 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
     for(ManageDrivePlugin plugin : drivePlugins_) {
       plugin.init() ;
     }
+    getAllDrives();
   }
 
   /**
@@ -205,7 +209,7 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
   public List<DriveData> getAllDrives(String repository) throws Exception {
     return getAllDrives();
   }
-  
+
   /**
    * {@inheritDoc}
    */
@@ -234,12 +238,16 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
       data.setShowHiddenNode(Boolean.parseBoolean(drive.getProperty(SHOW_HIDDEN_NODE).getString())) ;
       data.setAllowCreateFolders(drive.getProperty(ALLOW_CREATE_FOLDER).getString()) ;
       data.setAllowNodeTypesOnTree(drive.getProperty(ALLOW_NODETYPES_ON_TREE).getString());
-      driveList.add(data) ;
+      if ("Groups".equals(data.getName())) {
+        groupDriveTemplate_ = data.clone();
+      } else {
+        driveList.add(data) ;
+      }
     }
     drivesCache_.put(getRepoName() + "_" + ALL_DRIVES_CACHED, driveList);
     session.logout();
     return driveList ;
-  }  
+  }
 
   /**
    * {@inheritDoc}
@@ -248,11 +256,19 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
   public DriveData getDriveByName(String name, String repository) throws Exception{
     return getDriveByName(name);
   }
-  
+
   /**
    * {@inheritDoc}
    */
   public DriveData getDriveByName(String name) throws Exception{
+    if (name.startsWith("/")) {
+      DriveData drive = groupDriveTemplate_.clone();
+      drive.setHomePath("/Groups" + name);
+      drive.setName(name);
+      drive.setPermissions("*:" + name);
+      return drive;
+    }
+
     Session session = getSession() ;
     Node driveHome = (Node)session.getItem(baseDrivePath_);
     if (driveHome.hasNode(name)){
@@ -279,7 +295,7 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
     }
     session.logout();
     return null ;
-  }  
+  }
 
   /**
    * {@inheritDoc}
@@ -298,10 +314,10 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
                        String reposiroty,
                        String allowCreateFolder,
                        String allowNodeTypesOnTree) throws Exception {
-    addDrive(name, workspace, permissions, homePath, views, icon, viewReferences, 
+    addDrive(name, workspace, permissions, homePath, views, icon, viewReferences,
         viewNonDocument, viewSideBar, showHiddenNode, allowCreateFolder, allowNodeTypesOnTree);
   }
-  
+
   /**
    * {@inheritDoc}
    */
@@ -351,7 +367,7 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
   public List<DriveData> getAllDriveByPermission(String permission, String repository) throws Exception {
     return getAllDriveByPermission(permission);
   }
-  
+
   /**
    * {@inheritDoc}
    */
@@ -380,7 +396,7 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
   public void removeDrive(String driveName, String repository) throws Exception {
     removeDrive(driveName);
   }
-  
+
   /**
    * {@inheritDoc}
    */
@@ -393,7 +409,7 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
     }
     drivesCache_.clearCache();
     session.logout();
-  }  
+  }
 
   /**
    * Get session from repository in SystemWorkspace name
@@ -435,7 +451,7 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
   public boolean isUsedView(String viewName, String repository) throws Exception {
     return isUsedView(viewName);
   }
-  
+
   /**
    * {@inheritDoc}
    */
@@ -455,13 +471,13 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
     }
     session.logout();
     return false;
-  }  
+  }
 
   @Deprecated
   public List<DriveData> getDriveByUserRoles(String repository, String userId, List<String> userRoles) throws Exception {
     return getDriveByUserRoles(userId, userRoles);
   }
-  
+
   @SuppressWarnings("unchecked")
   public List<DriveData> getDriveByUserRoles(String userId, List<String> userRoles) throws Exception {
     Object drivesByRoles = drivesCache_.get(getRepoName() + "_" + userId + ALL_DRIVES_CACHED_BY_ROLES);
@@ -493,6 +509,9 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
           }
         }
       }
+      for (DriveData drive : getGroupDrives(userId, userRoles, null)) {
+        if (!driveList.contains(drive)) driveList.add(drive);
+      }
     } else {
       for (DriveData drive : getAllDrives()) {
         String[] allPermission = drive.getAllPermissions();
@@ -507,14 +526,14 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
     Collections.sort(driveList);
     drivesCache_.put(getRepoName() + "_" + userId + ALL_DRIVES_CACHED_BY_ROLES, driveList);
     return driveList;
-  }  
+  }
 
   @Deprecated
   public List<DriveData> getGroupDrives(String repository, String userId, List<String> userRoles,
       List<String> groups) throws Exception {
     return getGroupDrives(userId, userRoles, groups);
   }
-  
+
   @SuppressWarnings("unchecked")
   public List<DriveData> getGroupDrives(String userId, List<String> userRoles, List<String> groups) throws Exception {
     Object drives = drivesCache_.get(getRepoName() + "_" + userId + ALL_GROUP_CACHED_DRIVES);
@@ -522,24 +541,18 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
       return (List<DriveData>) drives;
     List<DriveData> groupDrives = new ArrayList<DriveData>();
     String groupPath = nodeHierarchyCreator_.getJcrPath(BasePath.CMS_GROUPS_PATH);
-    for (DriveData drive : getDriveByUserRoles(userId, userRoles)) {
-      if (!drive.getHomePath().equals(groupPath) && drive.getHomePath().startsWith(groupPath)) {
-        for (String group : groups) {
-          if (drive.getHomePath().equals(groupPath + group)) {
-            groupDrives.add(drive);
-            break;
-          }
-        }
-        for (String permission : drive.getAllPermissions()) {
-          String[] arrPer = permission.split(":/");
-          if (arrPer.length == 2 && groups.contains("/" + arrPer[1])
-              && !groupDrives.contains(drive)) {
-            groupDrives.add(drive);
-            break;
-          }
-        }
+    for (String role : userRoles) {
+      String group = role.substring(role.indexOf(":")+1);
+      if (group.charAt(0)=='/') {
+        DriveData drive = groupDriveTemplate_.clone();
+        drive.setHomePath(groupPath + group);
+        drive.setName(group);
+        drive.setPermissions("*:"+group);
+        if (!groupDrives.contains(drive))
+          groupDrives.add(drive);
       }
     }
+
     Collections.sort(groupDrives);
     drivesCache_.put(getRepoName() + "_" + userId + ALL_GROUP_CACHED_DRIVES, groupDrives);
     return groupDrives;
@@ -550,7 +563,7 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
       List<String> userRoles) throws Exception {
     return getMainDrives(userId, userRoles);
   }
-  
+
   @SuppressWarnings("unchecked")
   public List<DriveData> getMainDrives(String userId, List<String> userRoles) throws Exception {
     Object drives = drivesCache_.get(getRepoName() + "_" + userId + ALL_MAIN_CACHED_DRIVE);
@@ -567,24 +580,24 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
     Collections.sort(generalDrives);
     drivesCache_.put(getRepoName() + "_" + userId + ALL_MAIN_CACHED_DRIVE, generalDrives);
     return generalDrives;
-  }  
+  }
 
   @Deprecated
   public List<DriveData> getPersonalDrives(String repository, String userId,
       List<String> userRoles) throws Exception {
     return getPersonalDrives(userId, userRoles);
   }
-  
+
   @SuppressWarnings("unchecked")
   public List<DriveData> getPersonalDrives(String userId, List<String> userRoles) throws Exception {
     SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
     Node userNode = nodeHierarchyCreator_.getUserNode(sessionProvider, userId);
     Object drives = drivesCache_.get(getRepoName() + "_" + userId + ALL_PERSONAL_CACHED_DRIVE);
-    
     if(drives != null) return (List<DriveData>) drives;
+    
     List<DriveData> personalDrives = new ArrayList<DriveData>();
     String userPath = userNode.getPath();
-    for(DriveData drive : getDriveByUserRoles(userId, userRoles)) {
+    for(DriveData drive : getAllDrives()) {
       if(drive.getHomePath().startsWith(nodeHierarchyCreator_.getJcrPath(BasePath.CMS_USERS_PATH) + "/${userId}")) {
         personalDrives.add(drive);
       } else if(drive.getHomePath().startsWith(userPath + "/")) {
@@ -595,5 +608,5 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
     drivesCache_.put(getRepoName() + "_" + userId + ALL_PERSONAL_CACHED_DRIVE, personalDrives);
     return personalDrives;
   }
-  
+
 }
