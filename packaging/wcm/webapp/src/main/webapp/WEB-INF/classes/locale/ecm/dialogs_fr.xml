@@ -41,6 +41,25 @@
       <content>#{word.content}</content>
       <contentPlain>#{word.content}</contentPlain>
       <name>Nom</name>
+	    <categories>Catégories</categories>
+	    <recordCategoryIdentifier>Identification de la catégorie de l'Enregistrement</recordCategoryIdentifier>
+	    <dispositionAuthority>Auteur de la disposition</dispositionAuthority>
+	    <permanentRecordIndicator>Indicateur d'enregistrement permanent</permanentRecordIndicator>
+	    <containsRecordFolders>Dossier contenant l'Enregistrement</containsRecordFolders>
+	    <defaultMediaType>Type de média par défaut</defaultMediaType>
+	    <defaultMarkingList>Liste de marquage par défaut</defaultMarkingList>
+	    <defaultOriginatingOrganization>Organisation émettrice par défaut</defaultOriginatingOrganization>
+	    <vitalRecordIndicator>Indicateur d'enregistrement vital</vitalRecordIndicator>
+	    <processCutoff>Processus de prélèvement</processCutoff>
+	    <eventTrigger>Déclenchement d'évènement</eventTrigger>
+	    <processHold>Suspension du Processus</processHold>
+	    <processTransfer>Processus de transfert</processTransfer>
+	    <transferBlockSize>Taille du bloc de transfert</transferBlockSize>
+	    <processAccession>Processus d'acquisition</processAccession>
+	    <accessionBlockSize>Taille du bloc d'acquisition</accessionBlockSize>
+	    <processDestruction>Processus de destruction</processDestruction>
+	    <location>Emplacement</location>
+	    <LinkURL>URL</LinkURL>
     </label>
   </UIDocumentForm>
   <!--
@@ -676,7 +695,7 @@
   </NumberFormatValidator>
   <!--
   #####Since version 2.4#######
-    
+
   ###################### resoucebundle exo:taxonomyAction dialogs template ####
   -->
   <ScriptAction>
@@ -695,17 +714,17 @@
    <form>
    	<DialogFormException>Can not save this document. Maybe there is a problem with pre save interceptor</DialogFormException>
    </form>
-  </UIDialogForm>  
-  
+  </UIDialogForm>
+
   <!--
   #####Since version 2.6#######
-    
+
   ###################### resoucebundle exo:taxonomyAction dialogs template ####
   -->
   <no>Non</no>
 	<yes>Oui</yes>
 	<true>Vrai</true>
-	<false>Faux</false>	
+	<false>Faux</false>
 	<Electronic>Électronique</Electronic>
 	<Paper>Papier</Paper>
 	<NONE>Aucun</NONE>
@@ -720,7 +739,7 @@
 	<quarterly>Trimestriel</quarterly>
 	<yearly>Annuel</yearly>
 	<ten-years>Tous les 10 ans</ten-years>
-	<read>Action Utilisateur</read>    	
+	<read>Action Utilisateur</read>
 	    <schedule>Planificateur</schedule>
         <node_added>Content Addition</node_added>
         <node_removed>Ajout de contenu</node_removed>
@@ -729,71 +748,71 @@
         <property_changed>Modification de la propriété</property_changed>
     <SendMail>
    <dialog>
-     <label> 
+     <label>
 							<isDeep>Récursif</isDeep>
 							<nodetypes>Types de noeuds</nodetypes>
 							<affectedNodeTypeNames>Types de noeuds affectés</affectedNodeTypeNames>
-     </label> 
+     </label>
    </dialog>
   </SendMail>
 
   <ScriptAction>
    <dialog>
-     <label> 
+     <label>
 							<isDeep>Récursif</isDeep>
 							<nodetypes>Types de noeuds</nodetypes>
 							<affectedNodeTypeNames>Types de noeuds affectés</affectedNodeTypeNames>
-     </label> 
+     </label>
    </dialog>
   </ScriptAction>
-  	
+
   <Getmail>
    <dialog>
      <label>
      		<isDeep>Récursif</isDeep>
-							<nodetypes>Types de noeuds</nodetypes> 
+							<nodetypes>Types de noeuds</nodetypes>
 							<affectedNodeTypeNames>Types de noeuds affectés</affectedNodeTypeNames>
-     </label> 
+     </label>
    </dialog>
   </Getmail>
-  	
+
   <Rss>
    <dialog>
-     <label> 
+     <label>
 							<isDeep>Récursif</isDeep>
 							<nodetypes>Types de noeuds</nodetypes>
 							<affectedNodeTypeNames>Types de noeuds affectés</affectedNodeTypeNames>
-     </label> 
+     </label>
    </dialog>
   </Rss>
-  	
+
   <AddMetadata>
    <dialog>
      <label>
      		<isDeep>Récursif</isDeep>
-							<nodetypes>Types de noeuds</nodetypes> 
+							<nodetypes>Types de noeuds</nodetypes>
 							<affectedNodeTypeNames>Types de noeuds affectés</affectedNodeTypeNames>
-     </label> 
+     </label>
    </dialog>
   </AddMetadata>
-		
+
   <ReloadAction>
    <dialog>
      <label>
      		<isDeep>Récursif</isDeep>
-							<nodetypes>Types de noeuds</nodetypes> 
+							<nodetypes>Types de noeuds</nodetypes>
 							<affectedNodeTypeNames>Types de noeuds affectés</affectedNodeTypeNames>
-     </label> 
+     </label>
    </dialog>
   </ReloadAction>
-		
+
   <Transform>
    <dialog>
-     <label> 
+     <label>
 							<isDeep>Récursif</isDeep>
 							<nodetypes>Types de noeuds</nodetypes>
 							<affectedNodeTypeNames>Types de noeuds affectés</affectedNodeTypeNames>
-     </label> 
+     </label>
    </dialog>
   </Transform>
 
@@ -801,18 +820,18 @@
    <dialog>
      <label>
      		<isDeep>Récursif</isDeep>
-							<nodetypes>Types de noeuds</nodetypes> 
+							<nodetypes>Types de noeuds</nodetypes>
 							<affectedNodeTypeNames>Types de noeuds affectés</affectedNodeTypeNames>
-     </label> 
+     </label>
    </dialog>
   </EnableVersioning>
   <AutoVersioning>
    <dialog>
      <label>
      		<isDeep>Récursif</isDeep>
-							<nodetypes>Types de noeuds</nodetypes> 
+							<nodetypes>Types de noeuds</nodetypes>
 							<affectedNodeTypeNames>Types de noeuds affectés</affectedNodeTypeNames>
-     </label> 
+     </label>
    </dialog>
   </AutoVersioning>
 </bundle>

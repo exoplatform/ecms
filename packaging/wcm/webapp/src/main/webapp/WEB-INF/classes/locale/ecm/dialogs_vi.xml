@@ -41,6 +41,25 @@
       <content>#{word.content}</content>
       <contentPlain>#{word.content}</contentPlain>
       <name>Name</name>
+	    <categories>Categories</categories>
+	    <recordCategoryIdentifier>Định dạng hạng mục bản ghi</recordCategoryIdentifier>
+	    <dispositionAuthority>Tác giả sắp xếp</dispositionAuthority>
+	    <permanentRecordIndicator>Chỉ ra bản ghi cố định</permanentRecordIndicator>
+	    <containsRecordFolders>Chứa đựng thu mục bản ghi</containsRecordFolders>
+	    <defaultMediaType>Default media type</defaultMediaType>
+	    <defaultMarkingList>Loại phương tiện mặc định</defaultMarkingList>
+	    <defaultOriginatingOrganization>Nguồn gốc tổ chức mặc định</defaultOriginatingOrganization>
+	    <vitalRecordIndicator>Chỉ ra bản ghi quan trọng</vitalRecordIndicator>
+	    <processCutoff>Xử lý cắt</processCutoff>
+	    <eventTrigger>Sự kiện gây ra</eventTrigger>
+	    <processHold>Quá trình nắm giữ</processHold>
+	    <processTransfer>Quá trình chuyển tải</processTransfer>
+	    <transferBlockSize>Kích thước khối truyền tải</transferBlockSize>
+	    <processAccession>Quá trình bổ sung</processAccession>
+	    <accessionBlockSize>Kích thước khối bổ sung</accessionBlockSize>
+	    <processDestruction>Quá trình phá hủy</processDestruction>
+	    <location>Vị trí</location>
+	    <LinkURL>URL</LinkURL>
     </label>
   </UIDocumentForm>
   <!--
@@ -676,7 +695,7 @@
   </NumberFormatValidator>
   <!--
   #####Since version 2.4#######
-    
+
   ###################### resoucebundle exo:taxonomyAction dialogs template ####
   -->
   <ScriptAction>
@@ -696,16 +715,16 @@
    	<DialogFormException>Can not save this document. Maybe there is a problem with pre save interceptor</DialogFormException>
    </form>
   </UIDialogForm>
-  
+
   <!--
   #####Since version 2.6#######
-    
+
   ###################### resoucebundle exo:taxonomyAction dialogs template ####
   -->
 	<no>Không</no>
 	<yes>Có</yes>
 	<true>Đúng</true>
-	<false>Sai</false>	
+	<false>Sai</false>
 	<Electronic>Điện tử</Electronic>
 	<Paper>Bài báo</Paper>
 	<NONE>Không xác định</NONE>
@@ -724,15 +743,15 @@
         <node_removed>Nội dung xóa đi</node_removed>
         <property_added>Đặc tính thêm vào</property_added>
         <property_removed>Đặc tính xóa đi</property_removed>
-        <property_changed>Đặc tính thay đổi</property_changed> 		
+        <property_changed>Đặc tính thay đổi</property_changed>
 
 	 <SendMail>
    <dialog>
 					<label>
      		<isDeep>Độ sâu</isDeep>
-							<nodetypes>Kiểu node</nodetypes> 
+							<nodetypes>Kiểu node</nodetypes>
 							<affectedNodeTypeNames>Các kiểu node bị tác động</affectedNodeTypeNames>
-     </label>  
+     </label>
    </dialog>
   </SendMail>
 
@@ -740,59 +759,59 @@
    <dialog>
 					<label>
      		<isDeep>Độ sâu</isDeep>
-							<nodetypes>Kiểu node</nodetypes> 
+							<nodetypes>Kiểu node</nodetypes>
 							<affectedNodeTypeNames>Các kiểu node bị tác động</affectedNodeTypeNames>
-     </label> 
+     </label>
    </dialog>
   </ScriptAction>
-  	
+
   <Getmail>
    <dialog>
 					<label>
      		<isDeep>Độ sâu</isDeep>
-							<nodetypes>Kiểu node</nodetypes> 
+							<nodetypes>Kiểu node</nodetypes>
 							<affectedNodeTypeNames>Các kiểu node bị tác động</affectedNodeTypeNames>
-     </label> 
+     </label>
    </dialog>
   </Getmail>
-  	
+
   <Rss>
    <dialog>
 					<label>
      		<isDeep>Độ sâu</isDeep>
-							<nodetypes>Kiểu node</nodetypes> 
+							<nodetypes>Kiểu node</nodetypes>
 							<affectedNodeTypeNames>Các kiểu node bị tác động</affectedNodeTypeNames>
-     </label> 
+     </label>
    </dialog>
   </Rss>
-  	
+
   <AddMetadata>
    <dialog>
 					<label>
      		<isDeep>Độ sâu</isDeep>
-							<nodetypes>Kiểu node</nodetypes> 
+							<nodetypes>Kiểu node</nodetypes>
 							<affectedNodeTypeNames>Các kiểu node bị tác động</affectedNodeTypeNames>
-     </label> 
+     </label>
    </dialog>
   </AddMetadata>
-		
+
   <ReloadAction>
    <dialog>
 					<label>
      		<isDeep>Độ sâu</isDeep>
-							<nodetypes>Kiểu node</nodetypes> 
+							<nodetypes>Kiểu node</nodetypes>
 							<affectedNodeTypeNames>Các kiểu node bị tác động</affectedNodeTypeNames>
-     </label> 
+     </label>
    </dialog>
   </ReloadAction>
-		
+
   <Transform>
    <dialog>
 					<label>
      		<isDeep>Độ sâu</isDeep>
-							<nodetypes>Kiểu node</nodetypes> 
+							<nodetypes>Kiểu node</nodetypes>
 							<affectedNodeTypeNames>Các kiểu node bị tác động</affectedNodeTypeNames>
-     </label>  
+     </label>
    </dialog>
   </Transform>
 
@@ -800,18 +819,18 @@
    <dialog>
      <label>
      		<isDeep>Độ sâu</isDeep>
-							<nodetypes>Kiểu node</nodetypes> 
+							<nodetypes>Kiểu node</nodetypes>
 							<affectedNodeTypeNames>Các kiểu node bị tác động</affectedNodeTypeNames>
-     </label> 
+     </label>
    </dialog>
   </EnableVersioning>
   <AutoVersioning>
    <dialog>
      <label>
      		<isDeep>Độ sâu</isDeep>
-							<nodetypes>Kiểu node</nodetypes> 
+							<nodetypes>Kiểu node</nodetypes>
 							<affectedNodeTypeNames>Các kiểu node bị tác động</affectedNodeTypeNames>
-     </label> 
+     </label>
    </dialog>
   </AutoVersioning>
 </bundle>

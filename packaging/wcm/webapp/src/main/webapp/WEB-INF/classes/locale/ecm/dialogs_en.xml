@@ -41,6 +41,25 @@
       <content>#{word.content}</content>
       <contentPlain>#{word.content}</contentPlain>
       <name>Name</name>
+	    <categories>Categories</categories>
+	    <recordCategoryIdentifier>Record category identifier</recordCategoryIdentifier>
+	    <dispositionAuthority>Disposition authority</dispositionAuthority>
+	    <permanentRecordIndicator>Permanent record indicator</permanentRecordIndicator>
+	    <containsRecordFolders>Contains records folder</containsRecordFolders>
+	    <defaultMediaType>Default media type</defaultMediaType>
+	    <defaultMarkingList>Default marking list</defaultMarkingList>
+	    <defaultOriginatingOrganization>Default originating organization</defaultOriginatingOrganization>
+	    <vitalRecordIndicator>Vital record indicator</vitalRecordIndicator>
+	    <processCutoff>Process cutoffs</processCutoff>
+	    <eventTrigger>Event trigger</eventTrigger>
+	    <processHold>Process hold</processHold>
+	    <processTransfer>Process transfer</processTransfer>
+	    <transferBlockSize>Transfer block size</transferBlockSize>
+	    <processAccession>Process accession</processAccession>
+	    <accessionBlockSize>Accession block size</accessionBlockSize>
+	    <processDestruction>Process destruction</processDestruction>
+	    <location>Location</location>
+	    <LinkURL>URL</LinkURL>
     </label>
   </UIDocumentForm>
   <!--
@@ -116,7 +135,7 @@
     <dialog>
       <label>
         <name>#{word.name}</name>
-        <categories>Categories</categories>
+        <categories>Categories1</categories>
         <record-properties>Record properties</record-properties>
         <process-properties>Process properties</process-properties>
         <note>File plan note</note>
@@ -676,7 +695,7 @@
   </NumberFormatValidator>
   <!--
   #####Since version 2.4#######
-    
+
   ###################### resoucebundle exo:taxonomyAction dialogs template ####
   -->
   <ScriptAction>
@@ -696,16 +715,16 @@
    	<DialogFormException>Can not save this document. Maybe there is a problem with pre save interceptor</DialogFormException>
    </form>
   </UIDialogForm>
-  
+
   <!--
   #####Since version 2.6#######
-    
+
   ###################### resoucebundle exo:taxonomyAction dialogs template ####
   -->
 	<no>No</no>
 	<yes>Yes</yes>
 	<true>True</true>
-	<false>False</false>	
+	<false>False</false>
 	<Electronic>Electronic</Electronic>
 	<Paper>Paper</Paper>
 	<NONE>None</NONE>
@@ -726,74 +745,74 @@
         <node_removed>Content Removal</node_removed>
         <property_added>Property Addition</property_added>
         <property_removed>Property Removal</property_removed>
-        <property_changed>Property Modification</property_changed> 
+        <property_changed>Property Modification</property_changed>
   <SendMail>
    <dialog>
-     <label> 
+     <label>
 							<isDeep>Is deep</isDeep>
 							<nodetypes>Node types</nodetypes>
 							<affectedNodeTypeNames>Affected node types</affectedNodeTypeNames>
-     </label> 
+     </label>
    </dialog>
   </SendMail>
 
   <ScriptAction>
    <dialog>
-     <label> 
+     <label>
 							<isDeep>Is deep</isDeep>
 							<nodetypes>Node types</nodetypes>
 							<affectedNodeTypeNames>Affected node types</affectedNodeTypeNames>
-     </label> 
+     </label>
    </dialog>
   </ScriptAction>
-  	
+
   <Getmail>
    <dialog>
      <label>
      		<isDeep>Is deep</isDeep>
-							<nodetypes>Node types</nodetypes> 
+							<nodetypes>Node types</nodetypes>
 							<affectedNodeTypeNames>Affected node types</affectedNodeTypeNames>
-     </label> 
+     </label>
    </dialog>
   </Getmail>
-  	
+
   <Rss>
    <dialog>
-     <label> 
+     <label>
 							<isDeep>Is deep</isDeep>
 							<nodetypes>Node types</nodetypes>
 							<affectedNodeTypeNames>Affected node types</affectedNodeTypeNames>
-     </label> 
+     </label>
    </dialog>
   </Rss>
-  	
+
   <AddMetadata>
    <dialog>
      <label>
      		<isDeep>Is deep</isDeep>
-							<nodetypes>Node types</nodetypes> 
+							<nodetypes>Node types</nodetypes>
 							<affectedNodeTypeNames>Affected node types</affectedNodeTypeNames>
-     </label> 
+     </label>
    </dialog>
   </AddMetadata>
-		
+
   <ReloadAction>
    <dialog>
      <label>
      		<isDeep>Is deep</isDeep>
-							<nodetypes>Node types</nodetypes> 
+							<nodetypes>Node types</nodetypes>
 							<affectedNodeTypeNames>Affected node types</affectedNodeTypeNames>
-     </label> 
+     </label>
    </dialog>
   </ReloadAction>
-		
+
   <Transform>
    <dialog>
-     <label> 
+     <label>
 							<isDeep>Is deep</isDeep>
 							<nodetypes>Node types</nodetypes>
 							<affectedNodeTypeNames>Affected node types</affectedNodeTypeNames>
-     </label> 
+     </label>
    </dialog>
   </Transform>
 
@@ -801,18 +820,18 @@
    <dialog>
      <label>
      		<isDeep>Is deep</isDeep>
-							<nodetypes>Node types</nodetypes> 
+							<nodetypes>Node types</nodetypes>
 							<affectedNodeTypeNames>Affected node types</affectedNodeTypeNames>
-     </label> 
+     </label>
    </dialog>
   </EnableVersioning>
   <AutoVersioning>
   	<dialog>
      <label>
      		<isDeep>Is deep</isDeep>
-							<nodetypes>Node types</nodetypes> 
+							<nodetypes>Node types</nodetypes>
 							<affectedNodeTypeNames>Affected node types</affectedNodeTypeNames>
-     </label> 
+     </label>
    </dialog>
   </AutoVersioning>
 </bundle>
