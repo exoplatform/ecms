@@ -279,10 +279,7 @@ public abstract class AbstractQueryBuilder {
      * @return the query term helper
      */
     public QueryTermHelper contains(String s) {
-      if(s.indexOf(" ")>0)
-        term = term.concat("\\" + s + "\\");
-      else
-        term = term.concat(s);
+      term = term.concat(s);
       return this;
     }
 
@@ -313,8 +310,8 @@ public abstract class AbstractQueryBuilder {
      *
      * @return the query term helper
      */
-    public QueryTermHelper allowFuzzySearch() {
-      term = term.concat("~");
+    public QueryTermHelper allowFuzzySearch(double fuzzySearchIndex) {
+      term = term.concat("~").concat(String.valueOf(fuzzySearchIndex));
       return this;
     }
 
