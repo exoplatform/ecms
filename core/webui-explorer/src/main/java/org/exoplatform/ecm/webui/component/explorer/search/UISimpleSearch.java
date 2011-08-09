@@ -21,6 +21,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import javax.jcr.Node;
+import javax.jcr.RepositoryException;
 import javax.jcr.query.Query;
 import javax.jcr.query.QueryManager;
 import javax.jcr.query.QueryResult;
@@ -281,18 +282,6 @@ public class UISimpleSearch extends UIForm {
       }
       uiSearchResult.setCategoryPathList(uiSimpleSearch.getCategoryPathList());
 
-      //TODO need review this code. should use validator for text field
-      String[] arrFilterChar = {"&", "$", "@", ":","]", "[", "*", "%", "!"};
-      if(text != null) {
-        for(String filterChar : arrFilterChar) {
-          if(text.indexOf(filterChar) > -1) {
-            uiApp.addMessage(new ApplicationMessage("UISimpleSearch.msg.inputSearch-invalid", null,
-                ApplicationMessage.WARNING));
-            event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
-            return;
-          }
-        }
-      }
       Preference pref = uiExplorer.getPreference();
       String queryType = pref.getQueryType();
       String statement;
@@ -322,6 +311,9 @@ public class UISimpleSearch extends UIForm {
                                 queryType.equals(Preference.XPATH_QUERY) ? Query.XPATH : Query.SQL, 
                                 IdentityConstants.SYSTEM.equals(currentNode.getSession().getUserID()), null);
         uiSearchResult.updateGrid();
+      } catch (RepositoryException reEx) {
+        uiApp.addMessage(new ApplicationMessage("UISimpleSearch.msg.inputSearch-invalid", null, ApplicationMessage.WARNING));
+        return;
       } catch(Exception e) {
         LOG.error("Unexpected error", e);
         uiApp.addMessage(new ApplicationMessage("UISimpleSearch.msg.query-invalid", null,

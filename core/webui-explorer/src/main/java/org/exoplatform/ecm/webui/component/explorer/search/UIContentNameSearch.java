@@ -16,12 +16,11 @@
  */
 package org.exoplatform.ecm.webui.component.explorer.search;
 
+import javax.jcr.RepositoryException;
 import javax.jcr.query.Query;
-import javax.jcr.query.QueryManager;
-import javax.jcr.query.QueryResult;
 
 import org.apache.commons.lang.StringUtils;
-import org.exoplatform.ecm.jcr.SearchValidator;
+import org.exoplatform.ecm.jcr.SimpleSearchValidator;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.web.application.ApplicationMessage;
@@ -30,8 +29,8 @@ import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
 import org.exoplatform.webui.event.Event;
-import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.event.Event.Phase;
+import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.form.UIForm;
 import org.exoplatform.webui.form.UIFormInputInfo;
 import org.exoplatform.webui.form.UIFormStringInput;
@@ -66,7 +65,7 @@ public class UIContentNameSearch extends UIForm {
 
   public UIContentNameSearch() throws Exception {
     addChild(new UIFormInputInfo(SEARCH_LOCATION,null,null));
-    addChild(new UIFormStringInput(KEYWORD,null).addValidator(SearchValidator.class).addValidator(MandatoryValidator.class));
+    addChild(new UIFormStringInput(KEYWORD,null).addValidator(SimpleSearchValidator.class).addValidator(MandatoryValidator.class));
   }
 
   public void setLocation(String location) {
@@ -78,22 +77,9 @@ public class UIContentNameSearch extends UIForm {
       UIContentNameSearch contentNameSearch = event.getSource();
       UIECMSearch uiECMSearch = contentNameSearch.getAncestorOfType(UIECMSearch.class);
       UISearchResult uiSearchResult = uiECMSearch.getChild(UISearchResult.class);
+      UIApplication application = contentNameSearch.getAncestorOfType(UIApplication.class);
       try {
-        String keyword = contentNameSearch.getUIStringInput(KEYWORD).getValue();
-        String[] arrFilterChar = {"&", "$", "@", ":","]", "[", "*", "%", "!"};
-        UIApplication application = contentNameSearch.getAncestorOfType(UIApplication.class);
-        if (keyword == null || keyword.length() ==0) {
-          application.addMessage(new ApplicationMessage("UIContentNameSearch.msg.keyword-not-allowed", null));
-          event.getRequestContext().addUIComponentToUpdateByAjax(application.getUIPopupMessages());
-          return;
-        }
-        for(String filterChar : arrFilterChar) {
-          if(keyword.indexOf(filterChar) > -1) {
-            application.addMessage(new ApplicationMessage("UIContentNameSearch.msg.keyword-not-allowed", null));
-            event.getRequestContext().addUIComponentToUpdateByAjax(application.getUIPopupMessages());
-            return;
-          }
-        }
+        String keyword = contentNameSearch.getUIStringInput(KEYWORD).getValue();      
         keyword = keyword.trim();
         UIJCRExplorer explorer = contentNameSearch.getAncestorOfType(UIJCRExplorer.class);
         String currentNodePath = explorer.getCurrentNode().getPath();
@@ -112,6 +98,9 @@ public class UIContentNameSearch extends UIForm {
         uiSearchResult.setSearchTime(time);
         uiECMSearch.setRenderedChild(UISearchResult.class);
         contentNameSearch.getUIFormInputInfo(SEARCH_LOCATION).setValue(currentNodePath);
+      } catch (RepositoryException reEx) {        
+        application.addMessage(new ApplicationMessage("UIContentNameSearch.msg.keyword-not-allowed", null, ApplicationMessage.WARNING));
+        return;
       } catch (Exception e) {
         uiSearchResult.setQuery(null, null, null, false, null);
         uiSearchResult.updateGrid();
