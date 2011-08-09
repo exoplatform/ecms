@@ -148,7 +148,11 @@ public class TemplatePlugin extends BaseComponentPlugin {
     FIELD_PROPERTY = "fieldProperty";
 
     START_DIALOG_FORM = new StringBuilder("<div class=\"UIForm FormLayout FormScrollLayout\">\n")
-                        .append("\t<% uiform.begin() %> \n")
+                        .append("\t<% uiform.begin();\n")
+                        .append("\t   /* start render action*/\n")
+                        .append("\t   if (uiform.isShowActionsOnTop()) uiform.processRenderAction();\n")
+                        .append("\t   /* end render action*/\n")
+                        .append("\t%> \n")
                         .append("\t\t<div class=\"HorizontalLayout\">\n").toString();
 
     NAME = new StringBuilder("\n\t\t\t\t\t<%\n")
@@ -179,8 +183,11 @@ public class TemplatePlugin extends BaseComponentPlugin {
 
     END_TABLE = "\n\t\t\t</table>\n";
 
-    END_DIALOG_FORM = new StringBuilder("").append("\t\t</div>\n").append("\t\t<%uiform.processRenderAction()%>\n")
-                        .append("\t<%uiform.end()%>\n").append("</div>").toString();
+    END_DIALOG_FORM = new StringBuilder("").append("\t\t</div>\n")
+                        .append("\t<% /* start render action*/\n")
+                        .append("\t   if (!uiform.isShowActionsOnTop()) uiform.processRenderAction();\n")
+                        .append("\t   /* end render action*/\n")
+                        .append("\t   uiform.end();\n\t%>\n").append("</div>").toString();
 
     DEFAULT_CSS = new StringBuilder(".UIFormGrid {")
                     .append("\n\tborder:1px solid #B7B7B7;")

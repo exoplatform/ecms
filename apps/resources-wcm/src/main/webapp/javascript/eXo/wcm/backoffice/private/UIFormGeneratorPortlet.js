@@ -42,7 +42,7 @@ UIFormGeneratorPortlet.prototype.renderComponent = function(typeComp) {
 			advancedOption  +=	"<tr>";
 			advancedOption  +=		"<td class='FieldLabel'>Advance Options</td>";
 			advancedOption  +=		"<td class='FileComponent'>";
-			advancedOption  += 			"Toolbar: <select class='SelectBox'><option>SuperBasicWCM</option><option>BasicWCM</option><option>CompleteWCM</option><option>Basic</option></select>";
+			advancedOption  += 			"Toolbar: <select class='SelectBox'><option value='toolbar:SuperBasicWCM'>SuperBasicWCM</option><option value='toolbar:BasicWCM'>BasicWCM</option><option value='toolbar:CompleteWCM'>CompleteWCM</option><option value='toolbar:Basic'>Basic</option></select>";
 			advancedOption  +=		"</td>";
 			advancedOption  +=	"</tr>";
 			break;			

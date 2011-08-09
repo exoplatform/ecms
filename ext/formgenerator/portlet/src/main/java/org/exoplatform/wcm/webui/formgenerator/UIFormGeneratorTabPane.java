@@ -294,8 +294,12 @@ public class UIFormGeneratorTabPane extends UIFormTabPane {
     dialogTemplate.append(" %>\n");
     dialogTemplate.append("<!--DIALOG_BEGIN-->\n");
 
-    dialogTemplate.append("<div class=\"UIForm FormLayout\">\n");
-    dialogTemplate.append("  <% uiform.begin() %>\n");
+    dialogTemplate.append("<div class=\"UIForm FormLayout FormScrollLayout\">\n");
+    dialogTemplate.append("  <% uiform.begin() \n");
+    dialogTemplate.append("     /* start render action*/\n");
+    dialogTemplate.append("     if (uiform.isShowActionsOnTop()) uiform.processRenderAction();\n");
+    dialogTemplate.append("     /* end render action*/\n");
+    dialogTemplate.append("  %>\n");
     dialogTemplate.append("    <div class=\"HorizontalLayout\">\n");
     dialogTemplate.append("      <table class=\"UIFormGrid\">\n");
 
@@ -453,18 +457,13 @@ public class UIFormGeneratorTabPane extends UIFormTabPane {
       dialogTemplate.append("        </td>\n");
       dialogTemplate.append("      </tr>\n");
     }
-    dialogTemplate.append("      </table>\n");
-    dialogTemplate.append("      <div class=\"UIAction\">\n");
-    dialogTemplate.append("                <% for(action in uicomponent.getActions()) {\n");
-    dialogTemplate.append("                  String actionLabel = _ctx.appRes(uicomponent.getName() + \".action.\" + action);\n");
-    dialogTemplate.append("                  if(action.equals(\"RemoveData\")) continue;\n");
-    dialogTemplate.append("                  String link = uicomponent.event(action);\n");
-    dialogTemplate.append("                  %>\n");
-    dialogTemplate.append("                            <a href=\"javascript:void(0);\" onclick=\"$link\" class=\"ActionButton LightBlueStyle\" >$actionLabel</a>\n");
-    dialogTemplate.append("                <%}%>\n");
-    dialogTemplate.append("      </div>\n");
+    dialogTemplate.append("      </table>\n");    
     dialogTemplate.append("    </div>\n");
-    dialogTemplate.append("  <% uiform.end() %>\n");
+    dialogTemplate.append("  <% /* start render action*/\n");
+    dialogTemplate.append("     if (!uiform.isShowActionsOnTop()) uiform.processRenderAction();\n");
+    dialogTemplate.append("     /* end render action*/\n");
+    dialogTemplate.append("     uiform.end();\n");
+    dialogTemplate.append("  %> \n");
     dialogTemplate.append("</div>\n");
     dialogTemplate.append("<!--DIALOG_END-->\n");
     return dialogTemplate.toString();
