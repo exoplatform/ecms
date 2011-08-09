@@ -305,6 +305,9 @@
 .text_rtf16x16Icon {
   background: url('/eXoDMSResources/skin/DefaultSkin/skinIcons/16x16/icons/NodeTypes/rtf.gif') no-repeat;  
 }
+.application_rtf16x16Icon {
+  background: url('/eXoDMSResources/skin/DefaultSkin/skinIcons/16x16/icons/NodeTypes/rtf.gif') no-repeat;
+}
 
 .text_plain16x16Icon {
   background: url('/eXoDMSResources/skin/DefaultSkin/skinIcons/16x16/icons/NodeTypes/txt.gif') no-repeat;  
