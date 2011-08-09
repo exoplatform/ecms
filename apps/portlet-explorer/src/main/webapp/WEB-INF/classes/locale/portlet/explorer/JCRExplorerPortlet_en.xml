@@ -1877,6 +1877,9 @@
     </msg>
     <action>
       <Close>#{word.close}</Close>
+      <View>View</View>
+      <Edit>Edit</Edit>
+      <Delete>Delete</Delete>
     </action>
   </UIActionList>
   <UIActionForm>
@@ -2409,7 +2412,7 @@
   
   <UIPopupWindow>
     <title>
-      <UISymLinkManager>Sym Link Manager</UISymLinkManager>
+      <UISymLinkManager>Add Link Form</UISymLinkManager>
     </title>
   </UIPopupWindow>
   
@@ -3289,6 +3292,7 @@
       <author>Author</author>
       <date>Created date</date>
       <title>Document title</title>
+      <lastUser>Last User</lastUser>
     </header>
   </WCMContentView>
   <UITagForm>

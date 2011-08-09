@@ -1870,6 +1870,9 @@
     </msg>
     <action>
       <Close>Đóng</Close>
+      <View>View</View>
+      <Edit>Edit</Edit>
+      <Delete>Delete</Delete>
     </action>
   </UIActionList>
   <UIActionForm>
@@ -2398,7 +2401,7 @@
 	
 	<UIPopupWindow>
 		<title>
-			<UISymLinkManager>Quản lý liên kết</UISymLinkManager>
+			<UISymLinkManager>Add Link</UISymLinkManager>
 		</title>
 	</UIPopupWindow>
 	
@@ -3302,6 +3305,7 @@
       <author>Tác giả</author>
       <date>Ngày tạo</date>
       <title>Tiêu đề của tài liệu</title>
+      <lastUser>Last User</lastUser>
     </header>
   </WCMContentView>
   <UITagForm>

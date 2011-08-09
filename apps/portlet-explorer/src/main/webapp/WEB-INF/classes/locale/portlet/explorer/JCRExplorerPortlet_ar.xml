@@ -1682,6 +1682,9 @@
     </msg>
     <action>
       <Close>#{word.close}</Close>
+      <View>View</View>
+      <Edit>Edit</Edit>
+      <Delete>Delete</Delete>
     </action>
   </UIActionList>
   <UIActionForm>
@@ -2208,7 +2211,7 @@
 	
 	<UIPopupWindow>
 		<title>
-			<UISymLinkManager>رابط إداري </UISymLinkManager>
+			<UISymLinkManager>Add Link</UISymLinkManager>
 		</title>
 	</UIPopupWindow>
 	
@@ -2850,6 +2853,7 @@
       <restore-complete>أنجزت استعادة</restore-complete>
     </msg>
   </UIPublicationPanel>
+  
   <UIPublicationHistory>
     <header>
       <date>تاريخ</date>
@@ -2879,6 +2883,15 @@
       <UIPublishingPanel>إدارة النشر</UIPublishingPanel>
     </title>
   </UIPopupWindow> 
+  <WCMContentView>
+    <header>
+      <status>Status</status>
+      <author>Author</author>
+      <date>Created date</date>
+      <title>Document title</title>
+      <lastUser>Last User</lastUser>
+    </header>
+  </WCMContentView>
   <UIDocumentForm>
 	  <msg>
 		  <confirm-close>The changes you made will be lost if you close this form.</confirm-close>

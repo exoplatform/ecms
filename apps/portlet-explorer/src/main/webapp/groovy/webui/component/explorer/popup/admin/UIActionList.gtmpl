@@ -55,7 +55,7 @@
 			        <%
 			          for(act in uicomponent.getActions()) { 
 			        %>
-	            	<img class="${act}16x16Icon" src="/eXoResources/skin/sharedImages/Blank.gif" alt="" onclick="<%=uicomponent.event(act, action.getName())%>"  title="$act"/>
+	            	<img class="${act}16x16Icon" src="/eXoResources/skin/sharedImages/Blank.gif" alt="" onclick="<%=uicomponent.event(act, action.getName())%>"  title="<%=_ctx.appRes("UIActionList.action." + act)%>"/>
 			        <%} %>
 	           	</div>
 		        </td>

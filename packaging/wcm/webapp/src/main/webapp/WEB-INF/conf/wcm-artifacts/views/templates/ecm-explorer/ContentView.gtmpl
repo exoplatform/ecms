@@ -142,10 +142,10 @@
           <%
             if (selectedSortType.equals("LastUser")) {
               %>
-                <div class="SortButton ${sortOrder}16x16Icon" style="width: auto; padding-left: 20px;">Last User</div>
+                <div class="SortButton ${sortOrder}16x16Icon" style="width: auto; padding-left: 20px;"><%=_ctx.appRes("WCMContentView.header.lastUser")%></div>
               <%
             } else { 
-              %>Last User<%
+              %><%=_ctx.appRes("WCMContentView.header.lastUser")%><%
             } 
           %>
         </div>
@@ -369,7 +369,7 @@
 <!-- Status-->
               <div class="ColumnStatus Column" style="width: 93px;">
                 <div class="NodeLabel">
-                  <div style="cursor: pointer; -moz-outline: none; -moz-user-select: none;" title="status"><%= status %></div>
+                  <div style="cursor: pointer; -moz-outline: none; -moz-user-select: none;" title="status"><%=_ctx.appRes("UIPublicationPanel.status." + status) %></div>
                 </div>
               </div>
               <div style="clear: both"><span></span></div>

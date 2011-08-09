@@ -1855,6 +1855,9 @@
     </msg>
     <action>
       <Close>#{word.close}</Close>
+      <View>View</View>
+      <Edit>Edit</Edit>
+      <Delete>Delete</Delete>
     </action>
   </UIActionList>
   <UIActionForm>
@@ -2386,7 +2389,7 @@
   
   <UIPopupWindow>
     <title>
-      <UISymLinkManager>Symリンクマネージャ</UISymLinkManager>
+      <UISymLinkManager>Add Link</UISymLinkManager>
     </title>
   </UIPopupWindow>
   
@@ -3258,6 +3261,7 @@
       <author>作者</author>
       <date>作成日</date>
       <title>ドキュメントタイトル</title>
+      <lastUser>Last User</lastUser>
     </header>
   </WCMContentView>
   <UITagForm>
