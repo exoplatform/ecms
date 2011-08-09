@@ -340,10 +340,9 @@
 }
 
 .UIECMAdminPortlet .ECMAdminTitleBar {
-	font-weight: bold; 
-  line-height: 18px;
+	font-weight: bold;
+	line-height: 18px;
 	text-align: center;
-	height: 18px; 
 	padding-top: 8px;
 }
 
