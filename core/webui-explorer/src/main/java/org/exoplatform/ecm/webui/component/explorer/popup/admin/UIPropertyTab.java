@@ -186,8 +186,14 @@ public class UIPropertyTab extends UIContainer {
       }
       String propertyName = event.getRequestContext().getRequestParameter(OBJECTID);
       UIPropertyForm uiForm = uiManager.getChild(UIPropertyForm.class);
+      if(uiForm == null) {
+    	  uiForm = uiManager.addChild(UIPropertyForm.class, null, null);
+    	  uiForm.init(currentNode);
+      }
       uiForm.loadForm(propertyName);
+      uiManager.setIsEditProperty(true);
       uiManager.setRenderedChild(UIPropertyForm.class);
+      uiPropertyTab.setRendered(false);
     }
   }
 

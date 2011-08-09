@@ -642,6 +642,7 @@ public class UIPropertyForm extends UIForm {
       uiForm.refresh();
       UIPropertiesManager uiPropertiesManager = uiForm.getAncestorOfType(UIPropertiesManager.class);
       uiPropertiesManager.setRenderedChild(UIPropertyTab.class);
+      uiPropertiesManager.setIsEditProperty(false);
       return;
     }
   }

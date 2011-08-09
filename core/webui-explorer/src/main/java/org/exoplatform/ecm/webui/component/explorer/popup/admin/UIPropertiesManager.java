@@ -53,6 +53,7 @@ public class UIPropertiesManager extends UIContainer implements UIPopupComponent
 
   private String selectedPath_ = null;
   private String wsName_ = null;
+  private boolean isEditProperty = false;
   private List<PropertyDefinition> properties = null;
 
   public UIPropertiesManager() throws Exception {
@@ -64,8 +65,9 @@ public class UIPropertiesManager extends UIContainer implements UIPopupComponent
     Node currentNode = getCurrentNode();
     properties = org.exoplatform.services.cms.impl.Utils.getProperties(currentNode);
     
-    if(currentNode != null && !currentNode.isNodeType(Utils.NT_UNSTRUCTURED) && (properties == null || properties.size() == 0))
+    if(!isEditProperty && currentNode != null && !currentNode.isNodeType(Utils.NT_UNSTRUCTURED) && (properties == null || properties.size() == 0)) {
       removeChild(UIPropertyForm.class);
+    }
     super.processRender(context);
   }
   
@@ -97,4 +99,6 @@ public class UIPropertiesManager extends UIContainer implements UIPopupComponent
     public void execute(Event<UIPropertiesManager> event) throws Exception {
     }
   }
+  
+  public void setIsEditProperty(boolean isEdit) { this.isEditProperty = isEdit; }
 }
