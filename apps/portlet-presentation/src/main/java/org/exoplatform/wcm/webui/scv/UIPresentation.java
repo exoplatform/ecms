@@ -212,15 +212,27 @@ public class UIPresentation extends UIBaseNodePresentation {
       }
       return null;
   }
+  
+  /**
+   * use getViewableLink(Node attNode, Parameter[] params) instead
+   * @param attNode
+   * @param params
+   * @return
+   * @throws Exception
+   */
+  @Deprecated
+  public String getAttachmentURL(Node attNode, Parameter[] params) throws Exception {
+    return getViewableLink(attNode, params);
+  }
 
   /**
-   * Gets the attachment URL.
+   * Gets the viewable link (attachment link, relation document link)
    *
    * @param node the node
    * @return the attachment URL
    * @throws Exception the exception
    */
-  public String getAttachmentURL(Node node, Parameter[] params) throws Exception {
+  public String getViewableLink(Node node, Parameter[] params) throws Exception {
     String link = null;
     PortalRequestContext portalRequestContext = Util.getPortalRequestContext();
     PortletRequestContext portletRequestContext = WebuiRequestContext.getCurrentInstance();
