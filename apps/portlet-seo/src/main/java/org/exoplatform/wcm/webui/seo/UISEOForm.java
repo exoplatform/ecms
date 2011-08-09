@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.exoplatform.wcm.webui.Utils;
 import org.exoplatform.web.application.ApplicationMessage;
+import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIApplication;
@@ -204,6 +205,10 @@ public class UISEOForm extends UIForm{
       addUIFormInput(visibleSitemapCheckbox);
       
       UIFormStringInput uiPrority = new UIFormStringInput(PRIORITY, null);
+      if(priority == null || priority.length() == 0) {
+        WebuiRequestContext rc = WebuiRequestContext.getCurrentInstance();
+        priority = rc.getApplicationResourceBundle().getString("UISEOForm.tip.priority");     
+      }
       uiPrority.setValue(priority);
       addUIFormInput(uiPrority.addValidator(FloatNumberValidator.class));
       

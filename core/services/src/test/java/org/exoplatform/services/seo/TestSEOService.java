@@ -17,7 +17,7 @@
 package org.exoplatform.services.seo;
 
 import javax.jcr.Node;
-
+import java.util.ArrayList;
 import org.exoplatform.services.wcm.BaseWCMTestCase;
 import org.exoplatform.services.seo.SEOService;
 
@@ -45,7 +45,7 @@ public class TestSEOService extends BaseWCMTestCase{
   }
   
   /**
-   * test store
+   * test store page metadata
    * @throws Exception
    */
   public void testStorePageMetadata() throws Exception {
@@ -63,10 +63,34 @@ public class TestSEOService extends BaseWCMTestCase{
   }
   
   /**
-   * test remove metedate
+   * test store content metadata
+   * @throws Exception
+   */
+  public void testStoreContentMetadata() throws Exception {
+    PageMetadataModel metaModel = new PageMetadataModel();
+    Node seoNode = session.getRootNode().addNode("parentNode").addNode("childNode");
+    if(!seoNode.isNodeType("mix:referenceable")) {
+    	seoNode.addMixin("mix:referenceable");
+    }
+    session.save();
+    metaModel.setUri(seoNode.getUUID());
+    metaModel.setKeywords("test");
+    metaModel.setRobotsContent("index,follow");
+    metaModel.setSiteMap(true);
+    metaModel.setDescription("test description");
+    metaModel.setPriority(0);
+    seoService.storePageMetadata(metaModel,"classic",true);
+    ArrayList<String> params = new ArrayList<String>();
+    params.add("/repository/collaboration/parentNode/childNode");
+    PageMetadataModel retrieveModel = seoService.getContentMetadata(params);
+    assertEquals(retrieveModel.getKeywords(), "test");
+  }
+  
+  /**
+   * test remove page metedate
    * @return void
    */
-  public void tesRemoveMetadata() throws Exception{
+  public void tesRemovePageMetadata() throws Exception{
     PageMetadataModel metaModel = new PageMetadataModel();    
     metaModel.setUri("home");
     metaModel.setKeywords("test");    
@@ -74,6 +98,23 @@ public class TestSEOService extends BaseWCMTestCase{
     seoService.storePageMetadata(metaModel,"classic",false);
     assertEquals("test", seoService.getPageMetadata("home").getKeywords());
     seoService.removePageMetadata(metaModel, "classic",false);
+    assertNull(seoService.getPageMetadata("home"));     
+  }
+  
+  /**
+   * test remove content metedate
+   * @return void
+   */
+  public void tesRemoveContentMetadata() throws Exception{
+    PageMetadataModel metaModel = new PageMetadataModel();    
+    metaModel.setUri("home");
+    metaModel.setKeywords("test");    
+    metaModel.setRobotsContent("index,follow");    
+    seoService.storePageMetadata(metaModel,"classic",true);
+    ArrayList<String> params = new ArrayList<String>();
+    params.add("home");
+    assertEquals("test", seoService.getContentMetadata(params).getKeywords());
+    seoService.removePageMetadata(metaModel, "classic",true);
     assertNull(seoService.getPageMetadata("home"));     
   }
   

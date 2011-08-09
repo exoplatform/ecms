@@ -54,12 +54,19 @@ public interface SEOService {
    */
   public Node getContentNode(String contentPath) throws Exception;
   /**
+   * Return hash
+   * @param uri
+   * @return
+   * @throws Exception
+   */
+  public String getHash(String uri) throws Exception ;
+  /**
    * Returns sitemap content of portal 
    * 
    * @param portalName The portal name
    * @return
    * @throws Exception
-   */
+   */  
   
   public String getSitemap(String portalName) throws Exception;
   /**

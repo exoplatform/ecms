@@ -40,7 +40,11 @@
 			    <tr>
 			    	<td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.PRIORITY) %></td>
 			    	<td class="FieldComponent" colspan="2"><% uiform.renderField(uicomponent.PRIORITY) %></td>
-			    </tr>	
+			    </tr>
+			    <script>
+			      priorityField = document.getElementById("priority");
+			      priorityField.onclick = function() { priorityField.value = ""; } ;
+			    </script>
 			    <%}%>			
 			</table>
 			<div class="UIActionSEO"> 				

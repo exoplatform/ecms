@@ -11,6 +11,7 @@ import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.services.cache.CacheService;
 import org.exoplatform.services.cache.ExoCache;
 import org.exoplatform.services.jcr.RepositoryService;
+import org.exoplatform.services.jcr.config.WorkspaceEntry;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.seo.impl.SEOServiceImpl;
@@ -57,8 +58,10 @@ public class DumpSEOServiceImpl extends SEOServiceImpl {
         	seoNode.setProperty("exo:metaFrequency", frequency);
           updateSiteMap(uri, priority, frequency, sitemap, portalName);
         }
-        String hash = getHash(pageReference);
-        cache.put(hash, metaModel);     
+        String hash = null;
+        if(onContent) hash = getHash(uri);
+        else hash = getHash(pageReference);
+        if(hash != null) cache.put(hash, metaModel);     
     } else {      
       String hash = null;       
       seoNode.addMixin("exo:pageMetadata");       
@@ -78,7 +81,7 @@ public class DumpSEOServiceImpl extends SEOServiceImpl {
         updateSiteMap(uri, priority, frequency, sitemap, portalName);
         hash = getHash(pageReference);
       }
-      cache.put(hash, metaModel);  
+      if(hash != null) cache.put(hash, metaModel);  
     }    
     session.save();
 	}
@@ -110,8 +113,7 @@ public class DumpSEOServiceImpl extends SEOServiceImpl {
       }   
     }
     return metaModel;
-  }
-	
+  }	
 	
 	public void removePageMetadata(PageMetadataModel metaModel, String portalName, boolean onContent) throws Exception {
     SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
@@ -129,5 +131,44 @@ public class DumpSEOServiceImpl extends SEOServiceImpl {
     	cache.remove(hash);
     }
     session.save();
+  }
+	
+	public Node getContentNode(String seoPath) throws Exception {
+    Node seoNode = null;    
+    if(seoPath != null && seoPath.length() > 0) {
+      String tmpPath = seoPath.trim();
+      if(tmpPath.startsWith("/"))
+        tmpPath = tmpPath.substring(1,tmpPath.length());
+      String[] arrPath = tmpPath.split("/");
+      if(arrPath != null && arrPath.length > 3) {
+        String repo = arrPath[0];
+        String ws = arrPath[1];
+        if(repo != null && ws != null) {
+        	boolean isWs = false;
+          String nodePath = tmpPath.substring(tmpPath.indexOf(ws) + ws.length(),tmpPath.length());
+          if(nodePath != null && nodePath.length() > 0) {
+            ManageableRepository manageRepo = WCMCoreUtils.getRepository();      
+            ArrayList<WorkspaceEntry> wsList = manageRepo.getConfiguration().getWorkspaceEntries();
+            for(int i = 0; i< wsList.size(); i++) {
+            	WorkspaceEntry wsEntry = (WorkspaceEntry)wsList.get(i);
+            	if(wsEntry.getName().equals(ws)) {
+            		isWs = true;
+            		break;
+            	}
+            }
+            if(isWs) {
+              Session session = WCMCoreUtils.getSystemSessionProvider().getSession(ws, manageRepo) ;
+              nodePath = nodePath.replaceAll("//", "/");
+              if(session.getItem(nodePath) != null) {
+	              if(session.getItem(nodePath).isNode()) {
+	                seoNode = (Node)session.getItem(nodePath);
+	              }
+              }
+            }
+          } 
+        } 
+      }
+    }      
+    return seoNode;
   }
 }

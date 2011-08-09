@@ -82,12 +82,12 @@ public class SEOServiceImpl implements SEOService {
     if(valueParam != null)
       robotsindexOptions = valueParam.getValue();
     else
-      robotsindexOptions = "index,noindex";
+      robotsindexOptions = "INDEX,NOINDEX";
     valueParam = initParams.getValueParam("robotsfollow");
     if(valueParam != null)
       robotsfollowOptions = valueParam.getValue();
     else
-      robotsfollowOptions = "follow,nofollow";
+      robotsfollowOptions = "FOLLOW,NOFOLLOW";
     valueParam = initParams.getValueParam("frequency");
     if(valueParam != null)
       frequencyOptions = valueParam.getValue();
@@ -169,8 +169,10 @@ public class SEOServiceImpl implements SEOService {
       	seoNode.setProperty("exo:metaFrequency", frequency);
         updateSiteMap(uri, priority, frequency, sitemap, portalName);
       }
-      String hash = getHash(pageReference);
-      cache.put(hash, metaModel);     
+      String hash = null;
+      if(onContent) hash = getHash(uri);
+      else hash = getHash(pageReference);
+      if(hash != null) cache.put(hash, metaModel);     
     } else {      
       String hash = null;       
       seoNode.addMixin("exo:pageMetadata");       
@@ -190,7 +192,7 @@ public class SEOServiceImpl implements SEOService {
         updateSiteMap(uri, priority, frequency, sitemap, portalName);
         hash = getHash(pageReference);
       }
-      cache.put(hash, metaModel);  
+      if(hash != null) cache.put(hash, metaModel); 
     }
     session.save();
   }

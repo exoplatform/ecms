@@ -31,6 +31,8 @@ import javax.jcr.query.QueryResult;
 import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.container.xml.InitParams;
+import org.exoplatform.services.cache.CacheService;
+import org.exoplatform.services.cache.ExoCache;
 import org.exoplatform.services.cms.documents.TrashService;
 import org.exoplatform.services.cms.folksonomy.NewFolksonomyService;
 import org.exoplatform.services.cms.link.LinkManager;
@@ -42,6 +44,7 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.gatein.pc.api.PortletInvoker;
 import org.gatein.pc.api.info.PortletInfo;
 import org.gatein.pc.api.info.PreferencesInfo;
+import org.exoplatform.services.seo.SEOService;
 
 /**
  * Created by The eXo Platform SARL Author : Dang Van Minh
@@ -64,6 +67,7 @@ public class TrashServiceImpl implements TrashService {
   private TaxonomyService taxonomyService_;
   private String trashWorkspace_;
   private String trashHome_;
+  private ExoCache<String, Object> cache;
 
   public TrashServiceImpl(RepositoryService repositoryService,
                           LinkManager linkManager,
@@ -74,6 +78,7 @@ public class TrashServiceImpl implements TrashService {
     this.taxonomyService_ = taxonomyService;
     this.trashWorkspace_ = initParams.getValueParam("trashWorkspace").getValue();
     this.trashHome_ = initParams.getValueParam("trashHomeNodePath").getValue();
+    cache = WCMCoreUtils.getService(CacheService.class).getCacheInstance("wcm.seo");
     ExoContainer manager = ExoContainerContext.getCurrentContainer();
     PortletInvoker portletInvoker = (PortletInvoker)manager.getComponentInstance(PortletInvoker.class);
     if (portletInvoker != null) {
@@ -166,7 +171,10 @@ public class TrashServiceImpl implements TrashService {
     if (node.isNodeType(SYMLINK)) nodeUUID = null;
     String taxonomyLinkUUID = node.isNodeType(TAXONOMY_LINK) ? node.getProperty(UUID).getString() : null;
     String taxonomyLinkWS = node.isNodeType(TAXONOMY_LINK) ? node.getProperty(EXO_WORKSPACE).getString() : null;
-
+    if(nodeUUID != null) {
+    	SEOService seoService = (SEOService)myContainer.getComponentInstanceOfType(SEOService.class);
+    	cache.remove(seoService.getHash(nodeUUID));
+    }
     if (!node.isNodeType(EXO_RESTORE_LOCATION)) {
       node.addMixin(EXO_RESTORE_LOCATION);
       node.setProperty(RESTORE_PATH, fixRestorePath(node.getPath()));

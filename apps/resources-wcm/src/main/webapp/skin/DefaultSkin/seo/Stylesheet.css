@@ -3,6 +3,9 @@
   text-align: left;
   vertical-align: middle;
 }
+.UISEOForm .UIFormGrid td.tdShowHelp {
+  padding: 4px;
+}
 .UISEOForm .HorizontalLayout input {
   width: 235px;
 }
