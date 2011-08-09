@@ -1475,6 +1475,7 @@
     <msg>
       <no-list>Nr. taxonomie boom beschikbaar</no-list>
       <confirm-delete>Bent u er zeker van te verwijderen?</confirm-delete>
+      <is-in-trash>This category tree had been moved to Trash!</is-in-trash>
     </msg>
   </UITaxonomyTreeList>
   

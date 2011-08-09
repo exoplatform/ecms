@@ -1472,6 +1472,7 @@
     <msg>
       <no-list>分類ツリーがありません。</no-list>
       <confirm-delete>削除しますか？</confirm-delete>
+      <is-in-trash>この分類ツリーをごみ箱に移動されていた！</is-in-trash>
     </msg>
   </UITaxonomyTreeList>
   

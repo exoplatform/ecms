@@ -73,7 +73,7 @@ public class UIViewRelationList extends UIContainer{
         String uuid = val.getString();
         try {
           Node node = session.getNodeByUUID(uuid) ;
-          if (!node.isNodeType(Utils.EXO_RESTORELOCATION))
+          if (!Utils.isInTrash(node))
             relations.add(node) ;
         } catch(Exception e) {
           continue ;
@@ -100,7 +100,7 @@ public class UIViewRelationList extends UIContainer{
             if(iter != null) {
               while(iter.hasNext()) {
                 Node refNode = iter.nextProperty().getParent() ;
-                if (!refNode.isNodeType(Utils.EXO_RESTORELOCATION) && !refNode.isNodeType("exo:auditHistory"))
+                if (!Utils.isInTrash(refNode) && !refNode.isNodeType("exo:auditHistory"))
                   refNodes.add(refNode) ;
               }
             }

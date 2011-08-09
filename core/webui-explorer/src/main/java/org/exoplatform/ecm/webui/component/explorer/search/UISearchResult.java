@@ -110,7 +110,6 @@ public class UISearchResult extends UIContainer {
   static private int PAGE_SIZE = 10;
   private List<String> categoryPathList = new ArrayList<String>();
   private String constraintsCondition;
-  private static final String EXO_RESTORE_LOCATION = "exo:restoreLocation";
   @Deprecated
   private boolean isTaxonomyNode = false;
   private String workspaceName = null;
@@ -302,8 +301,7 @@ public class UISearchResult extends UIContainer {
     }
 
     private boolean isInTrash(Item item) throws RepositoryException {
-      return (item instanceof Node) &&
-             ((Node) item).isNodeType(EXO_RESTORE_LOCATION);
+      return (item instanceof Node) && Utils.isInTrash((Node) item);
     }
   }
 

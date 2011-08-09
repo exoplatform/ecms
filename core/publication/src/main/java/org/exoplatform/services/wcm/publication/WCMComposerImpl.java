@@ -16,6 +16,8 @@ import javax.jcr.Session;
 import javax.jcr.query.Query;
 import javax.jcr.query.QueryManager;
 
+import org.exoplatform.container.ExoContainer;
+import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.container.xml.ValueParam;
 import org.exoplatform.management.annotations.Managed;
@@ -27,7 +29,9 @@ import org.exoplatform.management.rest.annotations.RESTEndpoint;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cache.CacheService;
 import org.exoplatform.services.cache.ExoCache;
+import org.exoplatform.services.cms.documents.TrashService;
 import org.exoplatform.services.cms.i18n.MultiLanguageService;
+import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.cms.taxonomy.TaxonomyService;
 import org.exoplatform.services.cms.templates.TemplateService;
@@ -80,6 +84,7 @@ public class WCMComposerImpl implements WCMComposer, Startable {
   
   private ACLSessionProviderService aclSessionProviderService;
 
+  private TrashService trashService;
   /** The cache. */
   private ExoCache<String, Object> cache;
 
@@ -426,14 +431,19 @@ public class WCMComposerImpl implements WCMComposer, Startable {
    */
   private Node getViewableContent(Node node, HashMap<String, String> filters) throws Exception {
     Node viewNode = null;
+    if (trashService == null) {
+      trashService = WCMCoreUtils.getService(TrashService.class);
+    }
     try {
-     node = getTargetNode(node);
-    }catch(AccessDeniedException ade) {
-     return null;
+      node = getTargetNode(node);
+    } catch (AccessDeniedException ade) {
+      return null;
     }
 
-    if (node != null && node.isNodeType(EXO_RESTORELOCATION))
+    if (node != null && trashService.isInTrash(node)) {
       return null;
+    }
+    
     String languageFilter = filters.get(FILTER_LANGUAGE);
     if (languageFilter!=null) {
       addUsedLanguage(languageFilter);

@@ -70,7 +70,7 @@ public class UIDashboardForm extends UIForm {
     try {
       nodes = manager.getContents(fromstate, tostate, date, user, lang, "collaboration");
       for(Node node : nodes) {
-        if(isInTrash(node) != true) {
+        if(!org.exoplatform.services.cms.impl.Utils.isInTrash(node)) {
           temp.add(node);
         }
       }
@@ -80,9 +80,6 @@ public class UIDashboardForm extends UIForm {
     return temp;
   }
 
-  private boolean isInTrash(Node node) throws RepositoryException {
-    return node.isNodeType(org.exoplatform.ecm.webui.utils.Utils.EXO_RESTORELOCATION);
-  }
   /**
    * The listener interface for receiving ShowDocumentAction events.
    * The class that is interested in processing a changeRepositoryAction

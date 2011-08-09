@@ -18,9 +18,11 @@ package org.exoplatform.services.cms.documents.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
+import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 import javax.jcr.query.Query;
 import javax.jcr.query.QueryManager;
@@ -28,6 +30,7 @@ import javax.jcr.query.QueryResult;
 
 import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
+import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.services.cms.documents.TrashService;
 import org.exoplatform.services.cms.folksonomy.NewFolksonomyService;
 import org.exoplatform.services.cms.link.LinkManager;
@@ -35,6 +38,10 @@ import org.exoplatform.services.cms.taxonomy.TaxonomyService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+import org.gatein.pc.api.PortletInvoker;
+import org.gatein.pc.api.info.PortletInfo;
+import org.gatein.pc.api.info.PreferencesInfo;
 
 /**
  * Created by The eXo Platform SARL Author : Dang Van Minh
@@ -42,6 +49,7 @@ import org.exoplatform.services.jcr.ext.common.SessionProvider;
  */
 public class TrashServiceImpl implements TrashService {
 
+  private static final String FILE_EXPLORER_PORTLET = "FileExplorerPortlet";
   final static public String EXO_TOTAL = "exo:total".intern();
   final static public String MIX_REFERENCEABLE = "mix:referenceable";
   final static public String TAXONOMY_LINK   = "exo:taxonomyLink";
@@ -54,13 +62,40 @@ public class TrashServiceImpl implements TrashService {
   private RepositoryService repositoryService;
   private LinkManager linkManager;
   private TaxonomyService taxonomyService_;
+  private String trashWorkspace_;
+  private String trashHome_;
 
   public TrashServiceImpl(RepositoryService repositoryService,
-      LinkManager linkManager, TaxonomyService taxonomyService)
-  throws Exception {
+                          LinkManager linkManager,
+                          TaxonomyService taxonomyService,
+                          InitParams initParams) throws Exception {
     this.repositoryService = repositoryService;
     this.linkManager = linkManager;
     this.taxonomyService_ = taxonomyService;
+    this.trashWorkspace_ = initParams.getValueParam("trashWorkspace").getValue();
+    this.trashHome_ = initParams.getValueParam("trashHomeNodePath").getValue();
+    ExoContainer manager = ExoContainerContext.getCurrentContainer();
+    PortletInvoker portletInvoker = (PortletInvoker)manager.getComponentInstance(PortletInvoker.class);
+    if (portletInvoker != null) {
+      Set<org.gatein.pc.api.Portlet> portlets = portletInvoker.getPortlets();
+      for (org.gatein.pc.api.Portlet portlet : portlets) {
+        PortletInfo info = portlet.getInfo();
+        String portletName = info.getName();
+        if (FILE_EXPLORER_PORTLET.equalsIgnoreCase(portletName)) {
+          PreferencesInfo prefs = info.getPreferences();
+          String trashWorkspace = prefs.getPreference("trashWorkspace").getDefaultValue().get(0);
+          String trashHome = prefs.getPreference("trashHomeNodePath").getDefaultValue().get(0);
+          if (trashWorkspace != null && !trashWorkspace.equals(this.trashWorkspace_)) {
+            this.trashWorkspace_ = trashWorkspace;
+          }
+          
+          if (trashHome != null && !trashHome.equals(this.trashHome_)) {
+            this.trashHome_ = trashHome;
+          }
+          break;
+        }
+      }
+    }
   }
 
   /**
@@ -76,12 +111,19 @@ public class TrashServiceImpl implements TrashService {
   /**
    * {@inheritDoc}
    */
+  @Deprecated
   public void moveToTrash(Node node,
                           String trashPath,
                           String trashWorkspace,
-                          SessionProvider sessionProvider)
-  throws Exception {
-    moveToTrash(node, trashPath, trashWorkspace, sessionProvider, 0);
+                          SessionProvider sessionProvider) throws Exception {
+    moveToTrash(node, sessionProvider, 0);
+  }
+  
+  /**
+   * {@inheritDoc}
+   */
+  public void moveToTrash(Node node, SessionProvider sessionProvider) throws Exception {
+    moveToTrash(node, sessionProvider, 0);
   }
 
   @Deprecated
@@ -94,9 +136,23 @@ public class TrashServiceImpl implements TrashService {
     moveToTrash(node, trashPath, trashWorkspace, sessionProvider, deep);
   }
   
+  /**
+   *{@inheritDoc} 
+   */
+  @Deprecated
   public void moveToTrash(Node node,
                           String trashPath,
                           String trashWorkspace,
+                          SessionProvider sessionProvider,
+                          int deep) throws Exception {
+
+    moveToTrash(node, sessionProvider, deep);
+  }
+  
+  /**
+   *{@inheritDoc} 
+   */
+  public void moveToTrash(Node node,
                           SessionProvider sessionProvider,
                           int deep) throws Exception {
 
@@ -118,8 +174,8 @@ public class TrashServiceImpl implements TrashService {
       nodeSession.save();
 
       ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
-      Session trashSession = sessionProvider.getSession(trashWorkspace, manageableRepository);
-      String actualTrashPath = trashPath + (trashPath.endsWith("/") ? "" : "/")
+      Session trashSession = sessionProvider.getSession(this.trashWorkspace_, manageableRepository);
+      String actualTrashPath = this.trashHome_ + (this.trashHome_.endsWith("/") ? "" : "/")
           + fixRestorePath(nodeName);
       if (trashSession.getWorkspace().getName().equals(
           nodeSession.getWorkspace().getName())) {
@@ -164,8 +220,6 @@ public class TrashServiceImpl implements TrashService {
                 && nodeWorkspaceName.equals(categoryChild.getProperty(EXO_WORKSPACE).getString())) {
               try {
                 moveToTrash(categoryChild,
-                            trashPath,
-                            trashWorkspace,
                             sessionProvider,
                             deep + 1);
               } catch (Exception e) {
@@ -193,15 +247,21 @@ public class TrashServiceImpl implements TrashService {
               break;
             }
           if (!found) {
-            this.moveToTrash(targetNode, trashPath, trashWorkspace, sessionProvider);
+            this.moveToTrash(targetNode, sessionProvider);
           }
         }
       }
       trashSession.save();
     }
     nodeSession.save();
-  }
+  }  
 
+  /**
+   * 
+   * @param taxonomyNode
+   * @param targetNode
+   * @return
+   */
   private boolean isInTaxonomyTree(Node taxonomyNode, Node targetNode) {
     try {
       List<Node> taxonomyTrees = taxonomyService_.getAllTaxonomyTrees(true);
@@ -229,21 +289,31 @@ public class TrashServiceImpl implements TrashService {
   public void restoreFromTrash(Node trashHomeNode, String trashNodePath,
       String repository,
       SessionProvider sessionProvider) throws Exception {
-    restoreFromTrash(trashHomeNode, trashNodePath, sessionProvider, 0);
+    restoreFromTrash(trashNodePath, sessionProvider, 0);
   }
   
   /**
    * {@inheritDoc}
    */
+  @Deprecated
   public void restoreFromTrash(Node trashHomeNode,
                                String trashNodePath,
                                SessionProvider sessionProvider) throws Exception {
-    restoreFromTrash(trashHomeNode, trashNodePath, sessionProvider, 0);
+    restoreFromTrash(trashNodePath, sessionProvider, 0);
   }
+  
+  /**
+   * {@inheritDoc}
+   */
+  public void restoreFromTrash(String trashNodePath,
+                               SessionProvider sessionProvider) throws Exception {
+    restoreFromTrash(trashNodePath, sessionProvider, 0);
+  }  
 
-  private void restoreFromTrash(Node trashHomeNode, String trashNodePath,
+  private void restoreFromTrash(String trashNodePath,
       SessionProvider sessionProvider, int deep) throws Exception {
 
+    Node trashHomeNode = this.getTrashHomeNode();
     Session trashNodeSession = trashHomeNode.getSession();
     Node trashNode = (Node)trashNodeSession.getItem(trashNodePath);
     String trashWorkspace = trashNodeSession.getWorkspace().getName();
@@ -303,7 +373,7 @@ public class TrashServiceImpl implements TrashService {
               && nodeUUID.equals(trashChild.getProperty(UUID).getString())
               && restoreWorkspace.equals(trashChild.getProperty(EXO_WORKSPACE))) {
             try {
-                restoreFromTrash(trashHomeNode, trashChild.getPath(), sessionProvider, deep + 1);
+                restoreFromTrash(trashChild.getPath(), sessionProvider, deep + 1);
                 found = true;
                 break;
             } catch (Exception e) {}
@@ -326,8 +396,7 @@ public class TrashServiceImpl implements TrashService {
               && taxonomyLinkUUID.equals(trashChild.getUUID())
               && taxonomyLinkWS.equals(trashChild.getProperty(RESTORE_WORKSPACE).getString())) {
             try {
-              restoreFromTrash(trashHomeNode,
-                               trashChild.getPath(),
+              restoreFromTrash(trashChild.getPath(),
                                sessionProvider,
                                deep + 1);
               found = true;
@@ -348,32 +417,51 @@ public class TrashServiceImpl implements TrashService {
   public List<Node> getAllNodeInTrash(String trashWorkspace, String repository,
       SessionProvider sessionProvider) throws Exception {
 
-    return getAllNodeInTrash(trashWorkspace, sessionProvider);
+    return getAllNodeInTrash(sessionProvider);
   }
   
-  public List<Node> getAllNodeInTrash(String trashWorkspace,
-                                      SessionProvider sessionProvider) throws Exception {
+  /**
+   * {@inheritDoc}
+   */
+  @Deprecated
+  public List<Node> getAllNodeInTrash(String trashWorkspace, SessionProvider sessionProvider) throws Exception {
+    return getAllNodeInTrash(sessionProvider);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public List<Node> getAllNodeInTrash(SessionProvider sessionProvider) throws Exception {
 
     // String trashPathTail = (trashPath.endsWith("/"))? "" : "/";
     StringBuilder query = new StringBuilder("SELECT * FROM nt:base WHERE exo:restorePath IS NOT NULL");
 
     // System.out.println(query);
-    return selectNodesByQuery(trashWorkspace, sessionProvider, query.toString(), Query.SQL);
+    return selectNodesByQuery(sessionProvider, query.toString(), Query.SQL);
   }
 
   @Deprecated
   public List<Node> getAllNodeInTrashByUser(String trashWorkspace, String repository,
       SessionProvider sessionProvider, String userName) throws Exception {
-    return getAllNodeInTrashByUser(trashWorkspace, sessionProvider, userName);
+    return getAllNodeInTrashByUser(sessionProvider, userName);
   }
   
+  @Deprecated
   public List<Node> getAllNodeInTrashByUser(String trashWorkspace,
                                             SessionProvider sessionProvider,
                                             String userName) throws Exception {
+    return getAllNodeInTrashByUser(sessionProvider, userName);
+  }
+  
+  /**
+   * {@inheritDoc}
+   */
+  public List<Node> getAllNodeInTrashByUser(SessionProvider sessionProvider,
+                                            String userName) throws Exception {
     StringBuilder query = new StringBuilder(
         "SELECT * FROM nt:base WHERE exo:restorePath IS NOT NULL AND exo:lastModifier='").append(userName).append("'");
-    return selectNodesByQuery(trashWorkspace, sessionProvider, query.toString(), Query.SQL);
-  }
+    return selectNodesByQuery(sessionProvider, query.toString(), Query.SQL);
+  }  
 
   @Deprecated
   public void removeRelations(Node node, SessionProvider sessionProvider, String repository) throws Exception {
@@ -405,15 +493,36 @@ public class TrashServiceImpl implements TrashService {
     }
     if (error) throw new Exception("Can't remove exo:relationable of all related nodes");
   }
+  
+  /**
+   * {@inheritDoc}
+   */
+  public boolean isInTrash(Node node) throws RepositoryException {
+    return node.getPath().startsWith(this.trashHome_);
+  }
+  
+  /**
+   * {@inheritDoc}
+   */
+  public Node getTrashHomeNode() {
+    try {
+      Session session = WCMCoreUtils.getSystemSessionProvider()
+                                    .getSession(trashWorkspace_,
+                                                repositoryService.getCurrentRepository());
+      return (Node) session.getItem(trashHome_);
+    } catch (Exception e) {
+      return null;
+    }
+
+  }
 
 
-  private List<Node> selectNodesByQuery(String trashWorkspace,
-                                        SessionProvider sessionProvider,
+  private List<Node> selectNodesByQuery(SessionProvider sessionProvider,
                                         String queryString,
                                         String language) throws Exception {
     List<Node> ret = new ArrayList<Node>();
     ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
-    Session session = sessionProvider.getSession(trashWorkspace, manageableRepository);
+    Session session = sessionProvider.getSession(this.trashWorkspace_, manageableRepository);
     QueryManager queryManager = session.getWorkspace().getQueryManager();
     Query query = queryManager.createQuery(queryString, language);
     QueryResult queryResult = query.execute();

@@ -121,7 +121,7 @@ public class UILockNodeList extends UIPagingGridDecorator {
       queryResult = query.execute();
       for(NodeIterator iter = queryResult.getNodes(); iter.hasNext();) {
         Node itemNode = iter.nextNode();
-        if (!itemNode.isNodeType(Utils.EXO_RESTORELOCATION) && itemNode.isLocked()) {
+        if (!Utils.isInTrash(itemNode) && itemNode.isLocked()) {
           listLockedNodes.add(itemNode);
         }
       }
@@ -158,7 +158,7 @@ public class UILockNodeList extends UIPagingGridDecorator {
         session = WCMCoreUtils.getUserSessionProvider().getSession(ws.getName(), manageRepository);
         try {
           lockedNode = (Node) session.getItem(nodePath);
-          if ((lockedNode != null) && !lockedNode.isNodeType(Utils.EXO_RESTORELOCATION)) break;
+          if ((lockedNode != null) && !Utils.isInTrash(lockedNode)) break;
         } catch (PathNotFoundException e) {
           continue;
         } catch (AccessDeniedException accessDeniedException) {

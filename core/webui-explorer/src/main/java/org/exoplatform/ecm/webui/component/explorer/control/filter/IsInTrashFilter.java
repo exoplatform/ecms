@@ -41,14 +41,10 @@ public class IsInTrashFilter extends UIExtensionAbstractFilter {
     super(messageKey, UIExtensionFilterType.MANDATORY);
   }
 
-  public static boolean isInTrash(Node node) throws Exception {
-    return node.isNodeType(Utils.EXO_RESTORELOCATION);
-  }
-
   public boolean accept(Map<String, Object> context) throws Exception {
     if (context == null) return true;
     Node currentNode = (Node) context.get(Node.class.getName());
-    return isInTrash(currentNode);
+    return Utils.isInTrash(currentNode);
   }
 
   public void onDeny(Map<String, Object> context) throws Exception {

@@ -46,6 +46,7 @@ import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
 import org.exoplatform.ecm.webui.component.explorer.control.UIAddressBar;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.services.cms.drives.DriveData;
+import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.cms.link.LinkUtils;
 import org.exoplatform.services.cms.link.NodeFinder;
@@ -86,7 +87,6 @@ public class UITreeExplorer extends UIContainer {
    * Logger.
    */
   private static final Log LOG  = ExoLogger.getLogger("dms.UIJCRExplorer");
-  private static final String EXO_RESTORE_LOCATION = "exo:restoreLocation";
   private TreeNode treeRoot_ ;
   private String expandPath = null;
   private boolean isExpand = false;
@@ -420,8 +420,7 @@ public class UITreeExplorer extends UIContainer {
   }
 
   private static boolean isInTrash(Item item) throws RepositoryException {
-    return (item instanceof Node) &&
-           ((Node) item).isNodeType(EXO_RESTORE_LOCATION);
+    return (item instanceof Node) && Utils.isInTrash((Node) item);
   }
 
   static public class ExpandTreeActionListener extends EventListener<UITreeExplorer> {

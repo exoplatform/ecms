@@ -10,6 +10,21 @@
 @import url("UIMetadataManager/DefaultStylesheet.css");
 @import url("UINodeTypeManager/DefaultStylesheet.css");
 
+.UIGrid .TrashRow {
+    text-decoration: line-through;
+    color: gray;
+}
+
+.UIGrid .TrashRow a {
+    text-decoration: line-through;
+    color: gray;
+}
+
+.UIGrid .TrashRow sup {
+    text-decoration: none;
+    color: red;
+}
+
 .UIGroupMembershipSelector .MembershipTitle {
 	font-weight:bold;
 }

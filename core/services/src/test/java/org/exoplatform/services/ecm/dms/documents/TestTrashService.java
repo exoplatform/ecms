@@ -48,7 +48,7 @@ public class TestTrashService extends BaseDMSTestCase {
     Node rootNode = session.getRootNode();
 
     Node trashRootNode = session.getRootNode();
-    Node trashNode = trashRootNode.addNode("TrashNode");
+    Node trashNode = trashRootNode.addNode("Trash");
     Node testNode = rootNode.addNode("TestNode");
 
     Node node0 = testNode.addNode("node0");
@@ -60,7 +60,7 @@ public class TestTrashService extends BaseDMSTestCase {
     trashService.moveToTrash(node2, trashNode.getPath(), session.getWorkspace().getName(), REPO_NAME, sessionProvider);
     session.save();
     long testNodeChild = testNode.getNodes().getSize();
-    long trashNodeChild = trashNode.getNodes().getSize();
+    long trashNodeChild = trashService.getTrashHomeNode().getNodes().getSize();
 
     assertEquals("testMoveToTrashSameWorkspace failed!", 0, testNodeChild);
     assertEquals("testMoveToTrashSameWorkspace failed 2 !", 3, trashNodeChild);
@@ -84,7 +84,7 @@ public class TestTrashService extends BaseDMSTestCase {
     Node rootNode = session.getRootNode();
 
     Node trashRootNode = session.getRootNode();
-    Node trashNode = trashRootNode.addNode("TrashNode");
+    Node trashNode = trashRootNode.addNode("Trash");
     Node testNode = rootNode.addNode("TestNode");
 
     Node node0 = testNode.addNode("node0");
@@ -96,7 +96,7 @@ public class TestTrashService extends BaseDMSTestCase {
     session.save();
     session.save();
     long testNodeChild = testNode.getNodes().getSize();
-    long trashNodeChild = trashNode.getNodes().getSize();
+    long trashNodeChild = trashService.getTrashHomeNode().getNodes().getSize();
 
     assertEquals("testMoveToTrashDifferentWorkspace failed!", 0, testNodeChild);
     assertEquals("testMoveToTrashDefferentWorkspace failed 2 !", 2, trashNodeChild);
@@ -123,7 +123,7 @@ public class TestTrashService extends BaseDMSTestCase {
     Node rootNode = session.getRootNode();
 
     Node trashRootNode = session.getRootNode();
-    Node trashNode = trashRootNode.addNode("TrashNode");
+    Node trashNode = trashRootNode.addNode("Trash");
     Node testNode = rootNode.addNode("TestNode");
 
     Node node0 = testNode.addNode("node0");
@@ -177,7 +177,7 @@ public class TestTrashService extends BaseDMSTestCase {
     Node rootNode = session.getRootNode();
 
     Node trashRootNode = session.getRootNode();
-    Node trashNode = trashRootNode.addNode("TrashNode");
+    Node trashNode = trashRootNode.addNode("Trash");
     Node testNode = rootNode.addNode("TestNode");
 
     Node node0 = testNode.addNode("node0");
@@ -242,7 +242,7 @@ public class TestTrashService extends BaseDMSTestCase {
     Node rootNode = session.getRootNode();
 
     Node trashRootNode = session.getRootNode();
-    Node trashNode = trashRootNode.addNode("TrashNode");
+    Node trashNode = trashRootNode.addNode("Trash");
     Node testNode = rootNode.addNode("TestNode");
 
     Node node0 = testNode.addNode("node0");
@@ -288,7 +288,7 @@ public class TestTrashService extends BaseDMSTestCase {
     Node rootNode = session.getRootNode();
 
     Node trashRootNode = session.getRootNode();
-    Node trashNode = trashRootNode.addNode("TrashNode");
+    Node trashNode = trashRootNode.addNode("Trash");
     Node testNode = rootNode.addNode("TestNode");
 
     Node node0 = testNode.addNode("node0");
@@ -314,5 +314,79 @@ public class TestTrashService extends BaseDMSTestCase {
     session.save();
     session.save();
   }
+  
+  /**
+   * test method isInTrash()
+   * input:     /TestNode/node1
+   *        /TestNode/node2
+   *        /TestNode/node3
+   * test action: move two nodes, node1 and node2, to /Trash/
+   * expectedValue: node1 and node2 is in trash, <code>isInTrash()</code> return <code>true</code>. 
+   * And node3 is NOT in trash, <code>isInTrash()</code> return <code>false</code>
+   * @throws Exception
+   */
+  public void testIsInTrash1() throws Exception {
+    Node rootNode = session.getRootNode();
+    
+    Node trashRootNode = session.getRootNode();
+    
+    Node trashNode = trashRootNode.addNode("Trash");
+    
+    Node testNode = rootNode.addNode("testNode");
+    Node node1 = testNode.addNode("node1");
+    Node node2 = testNode.addNode("node2");
+    testNode.addNode("node3");
+    
+    session.save();
+    
+    trashService.moveToTrash(node1, trashNode.getPath(), session.getWorkspace().getName(), REPO_NAME, sessionProvider);
+    trashService.moveToTrash(node2, trashNode.getPath(), session.getWorkspace().getName(), REPO_NAME, sessionProvider);
+    
+    session.save();
+    
+    assertEquals(true, trashService.isInTrash(trashNode.getNode("node1")));
+    assertEquals(true, trashService.isInTrash(trashNode.getNode("node2")));
+    assertEquals(false, trashService.isInTrash(testNode.getNode("node3")));
+    
+    trashNode.remove();
+    testNode.remove();
+    session.save();
+  }
+  
+  /**
+   * test method isInTrash()
+   * input:     /TestNode/node0
+   *        /TestNode/node0/node1
+   *        /TestNode/node0/node2
+   * test action: move the node0 to /Trash/
+   * expectedValue: node0 is in /Trash/ and all child nodes of node0 (node1 and node2) are also in /Trash/
+   * @throws Exception
+   */
+  public void testIsInTrash2() throws Exception {
+    Node rootNode = session.getRootNode();
+    
+    Node trashRootNode = session.getRootNode();
+    
+    Node trashNode = trashRootNode.addNode("Trash");
+    
+    Node testNode = rootNode.addNode("testNode");
+    Node node0 = testNode.addNode("node0");
+    node0.addNode("node1");
+    node0.addNode("node2");
+    
+    session.save();
+    
+    trashService.moveToTrash(node0, trashNode.getPath(), session.getWorkspace().getName(), REPO_NAME, sessionProvider);
+    
+    session.save();
+    
+    assertEquals(true, trashService.isInTrash(trashNode.getNode("node0")));
+    assertEquals(true, trashService.isInTrash(trashNode.getNode("node0/node1")));
+    assertEquals(true, trashService.isInTrash(trashNode.getNode("node0/node2")));
+    
+    trashNode.remove();
+    testNode.remove();
+    session.save();
+  }  
   
 }

@@ -178,7 +178,7 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
                                           boolean isMultiSelect,
                                           boolean checkToMoveToTrash)
   throws Exception {
-  if (node.isNodeType(Utils.EXO_RESTORELOCATION) || !checkToMoveToTrash)
+  if (Utils.isInTrash(node) || !checkToMoveToTrash)
     processRemoveNode(nodePath, node, event, isMultiSelect);
   else {
       WCMComposer wcmComposer = WCMCoreUtils.getService(WCMComposer.class);
@@ -244,16 +244,14 @@ public class DeleteManageComponent extends UIAbstractManagerComponent {
       throw new VersionException("node is locked, can't move to trash node :" + node.getPath());
     if (!PermissionUtil.canRemoveNode(node))
       throw new AccessDeniedException("access denied, can't move to trash node:" + node.getPath());
-      PortletRequestContext pcontext = (PortletRequestContext)WebuiRequestContext.getCurrentInstance();
-        PortletPreferences portletPref = pcontext.getRequest().getPreferences();
-      String trashHomeNodePath = portletPref.getValue(Utils.TRASH_HOME_NODE_PATH, "");
-      String trashWorkspace = portletPref.getValue(Utils.TRASH_WORKSPACE, "");
       SessionProvider sessionProvider = uiExplorer.getSessionProvider();
       Node currentNode = uiExplorer.getCurrentNode();
 
       try {
-        trashService.moveToTrash(node, trashHomeNodePath, trashWorkspace, sessionProvider);
-      } catch (PathNotFoundException ex) { ret = false;}
+        trashService.moveToTrash(node, sessionProvider);
+      } catch (PathNotFoundException ex) {
+        ret = false;
+      }
       String currentPath = LinkUtils.getExistPath(currentNode, uiExplorer.getCurrentPath());
       uiExplorer.setCurrentPath(currentPath);
       uiExplorer.updateAjax(event);

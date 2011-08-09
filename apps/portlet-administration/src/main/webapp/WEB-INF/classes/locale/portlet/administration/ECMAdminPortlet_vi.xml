@@ -1475,6 +1475,7 @@
     <msg>
       <no-list>Không tồn tại cây danh mục nào</no-list>
       <confirm-delete>Bạn có chắc chắn muốn xóa không?</confirm-delete>
+      <is-in-trash>Cây danh mục này đã được chuyển vào thùng rác!</is-in-trash>
     </msg>
   </UITaxonomyTreeList>
   

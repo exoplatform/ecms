@@ -919,9 +919,9 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
         uri = LinkUtils.evaluatePath(uri);
         // Just in order to check if the node exists
         Item item = nodeFinder.getItem(workspaceName, uri);
-        if ((item instanceof Node) &&
-            ((Node)item).isNodeType(Utils.EXO_RESTORELOCATION))
+        if ((item instanceof Node) && Utils.isInTrash((Node) item)) {
           return;
+        }
         uiExplorer.setSelectNode(workspaceName, uri);
         if (findDrive) {
           ManageDriveService manageDriveService = uicomp.getApplicationComponent(ManageDriveService.class);

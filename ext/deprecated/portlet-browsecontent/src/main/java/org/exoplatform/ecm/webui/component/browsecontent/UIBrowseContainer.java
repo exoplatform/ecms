@@ -1882,7 +1882,7 @@ public class UIBrowseContainer extends UIContainer {
         LinkManager linkManager = uiContainer.getApplicationComponent(LinkManager.class);
         try {
           selectNode = linkManager.getTarget(selectNode);
-          if (selectNode.isNodeType(Utils.EXO_RESTORELOCATION)) {
+          if (Utils.isInTrash(selectNode)) {
             uiApp.addMessage(new ApplicationMessage("UIBrowseContainer.msg.symlinkNode-no-targetNode", null,
                 ApplicationMessage.WARNING));
             event.getRequestContext().addUIComponentToUpdateByAjax(uiContainer);

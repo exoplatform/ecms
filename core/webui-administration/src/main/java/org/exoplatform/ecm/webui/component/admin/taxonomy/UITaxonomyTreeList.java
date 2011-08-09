@@ -30,6 +30,7 @@ import org.exoplatform.commons.utils.ListAccess;
 import org.exoplatform.commons.utils.ListAccessImpl;
 import org.exoplatform.ecm.webui.component.admin.UIECMAdminPortlet;
 import org.exoplatform.ecm.webui.core.UIPagingGridDecorator;
+import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.cms.actions.ActionServiceContainer;
 import org.exoplatform.services.cms.taxonomy.TaxonomyService;
 import org.exoplatform.services.cms.taxonomy.TaxonomyTreeData;
@@ -64,6 +65,8 @@ public class UITaxonomyTreeList extends UIPagingGridDecorator {
 
   public static final String   ACCESS_PERMISSION = "exo:accessPermissions";
 
+  private boolean              isTargetInTrash_  = false;
+
   public UITaxonomyTreeList() throws Exception {
     getUIPageIterator().setId("UITaxonomyTreeListIterator");
   }
@@ -78,6 +81,7 @@ public class UITaxonomyTreeList extends UIPagingGridDecorator {
   }
 
   public void refresh(int currentPage) throws Exception {
+    this.isTargetInTrash_ = false;
     ListAccess<TaxonomyTreeData> taxonomyTreeList = new ListAccessImpl<TaxonomyTreeData>(TaxonomyTreeData.class,
                                                                                          getAllTaxonomyTreeList());
     LazyPageList<TaxonomyTreeData> dataPageList = new LazyPageList<TaxonomyTreeData>(taxonomyTreeList,
@@ -87,6 +91,10 @@ public class UITaxonomyTreeList extends UIPagingGridDecorator {
       getUIPageIterator().setCurrentPage(getUIPageIterator().getAvailablePage());
     else
       getUIPageIterator().setCurrentPage(currentPage);
+  }
+
+  public boolean isTargetInTrash() {
+    return isTargetInTrash_;
   }
 
   private List<TaxonomyTreeData> getAllTaxonomyTreeList() throws RepositoryException {
@@ -108,6 +116,12 @@ public class UITaxonomyTreeList extends UIPagingGridDecorator {
       if (node != null) {
         taxonomyTreeData = new TaxonomyTreeData();
         taxonomyTreeData.setTaxoTreeName(node.getName());
+        if (Utils.isInTrash(node)) {
+          taxonomyTreeData.setEdit(false);
+          this.isTargetInTrash_ = true;
+        } else {
+          taxonomyTreeData.setEdit(true);
+        }
         taxonomyTreeData.setTaxoTreeHomePath(node.getPath());
         taxonomyTreeData.setTaxoTreeWorkspace(node.getSession().getWorkspace().getName());
         Node realTreeNode = taxonomyService.getTaxonomyTree(node.getName(), true);

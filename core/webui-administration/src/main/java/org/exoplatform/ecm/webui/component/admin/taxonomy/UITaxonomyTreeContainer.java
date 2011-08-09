@@ -46,6 +46,7 @@ import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.access.PermissionType;
 import org.exoplatform.services.jcr.config.RepositoryConfigurationException;
 import org.exoplatform.services.jcr.core.ExtendedNode;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIComponent;
@@ -196,8 +197,8 @@ public class UITaxonomyTreeContainer extends UIContainer implements UISelectable
   }
 
   public Session getSession(String workspace) throws RepositoryException, RepositoryConfigurationException  {
-    RepositoryService rservice = getApplicationComponent(RepositoryService.class);
-    return rservice.getCurrentRepository().getSystemSession(workspace);
+    return WCMCoreUtils.getSystemSessionProvider().getSession(workspace, 
+                                                              WCMCoreUtils.getRepository());
   }
 
   public void doSelect(String selectField, Object value) throws Exception {
@@ -256,7 +257,6 @@ public class UITaxonomyTreeContainer extends UIContainer implements UISelectable
     }
     homeNode.save();
     session.save();
-    session.logout();
     taxonomyService.addTaxonomyTree(taxonomyTreeNode);
   }
 

@@ -1478,6 +1478,7 @@
     <msg>
       <no-list>Aucune taxonomie disponible</no-list>
       <confirm-delete>Confirmez-vous la suppression ?</confirm-delete>
+      <is-in-trash>Cet arbre de catégorie était déplacé à la Corbeille !</is-in-trash>
     </msg>
   </UITaxonomyTreeList>
   

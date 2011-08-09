@@ -164,9 +164,7 @@ public class RestoreFromTrashManageComponent extends UIAbstractManagerComponent 
       Node trashHomeNode = (Node) trashSession.getItem(trashHomeNodePath);
       SessionProvider sessionProvider = uiExplorer.getSessionProvider();
       try {
-        trashService.restoreFromTrash(trashHomeNode,
-                        srcPath,
-                        sessionProvider);
+        trashService.restoreFromTrash(srcPath, sessionProvider);
         uiExplorer.updateAjax(event);
       } catch(PathNotFoundException e) {
         UIPopupContainer uiPopupContainer = uiExplorer.getChild(UIPopupContainer.class);

@@ -143,7 +143,7 @@ public class DocumentProviderUtils {
     NodeIterator iter = queryResult.getNodes();
     while (iter.hasNext()) {
       Node node = iter.nextNode();
-      if (node.isNodeType(Utils.EXO_RESTORELOCATION)) continue;
+      if (Utils.isInTrash(node)) continue;
       ret.add(node);
     }
     return ret;
@@ -158,7 +158,7 @@ public class DocumentProviderUtils {
           uiExplorer.getRepositoryName(), uiExplorer.getSession().getUserID());
 
     for (Node node : favoriteList) {
-      if (!node.isNodeType(Utils.EXO_RESTORELOCATION))
+      if (!Utils.isInTrash(node))
         ret.add(node);
     }
 
@@ -188,7 +188,7 @@ public class DocumentProviderUtils {
       node = iter.nextNode();
       if (node.getName().equals(Utils.JCR_CONTENT))
         continue;
-      if (node.isNodeType(Utils.EXO_RESTORELOCATION))
+      if (Utils.isInTrash(node))
         continue;
       if (node.isNodeType(Utils.NT_RESOURCE))
         node = node.getParent();

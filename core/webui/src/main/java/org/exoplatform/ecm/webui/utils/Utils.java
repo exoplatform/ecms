@@ -50,6 +50,7 @@ import org.exoplatform.portal.resource.SkinConfig;
 import org.exoplatform.portal.resource.SkinService;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.portal.webui.workspace.UIPortalApplication;
+import org.exoplatform.services.cms.documents.TrashService;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.cms.thumbnail.ThumbnailService;
@@ -250,7 +251,8 @@ public class Utils {
   }
 
   public static boolean isInTrash(Node node) throws RepositoryException {
-    return node.isNodeType(EXO_RESTORELOCATION);
+    TrashService trashService = WCMCoreUtils.getService(TrashService.class);
+    return trashService.isInTrash(node);
   }
 
     public static boolean isReferenceable(Node node) throws RepositoryException {

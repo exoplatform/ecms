@@ -199,9 +199,10 @@ public class UICategoryNavigationTreeBase extends UITree {
   }
 
   public boolean isMovedTreeToTrash(String rootCategory) throws Exception {
-  Node categoryNode = getCategoryNode(rootCategory);
-  if(categoryNode.isNodeType(Utils.EXO_RESTORELOCATION)) return true;
-  return false;
+    Node categoryNode = getCategoryNode(rootCategory);
+    if (Utils.isInTrash(categoryNode))
+      return true;
+    return false;
   }
 
   /**

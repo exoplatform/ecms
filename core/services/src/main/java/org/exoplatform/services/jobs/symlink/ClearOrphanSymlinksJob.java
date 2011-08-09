@@ -16,16 +16,12 @@ import javax.jcr.query.QueryResult;
 
 import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
-import org.exoplatform.portal.webui.util.SessionProviderFactory;
-import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.documents.TrashService;
-import org.exoplatform.services.cms.drives.DriveData;
-import org.exoplatform.services.cms.drives.ManageDriveService;
+import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.services.cms.link.LinkManager;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
-import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.quartz.Job;
@@ -42,8 +38,6 @@ import org.quartz.JobExecutionException;
 public class ClearOrphanSymlinksJob implements Job {
   private static final Log    log                 = ExoLogger.getLogger(ClearOrphanSymlinksJob.class);
 
-  private static final String EXO_RESTORELOCATION = "exo:restoreLocation";
-  
   public void execute(JobExecutionContext context) throws JobExecutionException {
     log.debug("Start Executing ClearOrphanSymlinksJob");
 
@@ -53,22 +47,11 @@ public class ClearOrphanSymlinksJob implements Job {
     RepositoryService repositoryService = (RepositoryService)exoContainer.getComponentInstanceOfType(RepositoryService.class);
     LinkManager linkManager = (LinkManager)exoContainer.getComponentInstanceOfType(LinkManager.class);
     TrashService trashService = (TrashService)exoContainer.getComponentInstanceOfType(TrashService.class);
-    NodeHierarchyCreator nodeHierarchyCreator = (NodeHierarchyCreator) exoContainer.
-        getComponentInstanceOfType(NodeHierarchyCreator.class);
 
     SessionProvider sessionProvider = null;
     Session session = null;
     try {
       ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
-      String trashPath = nodeHierarchyCreator.getJcrPath(BasePath.TRASH_PATH);
-      String trashWorkspace = null;
-      ManageDriveService driveService = (ManageDriveService)exoContainer.getComponentInstanceOfType(ManageDriveService.class);
-        for (DriveData driveData : driveService.getAllDrives())
-          if (driveData.getHomePath().equals(trashPath) ) {
-            trashWorkspace = driveData.getWorkspace();
-            break;
-          }
-      if (trashWorkspace == null) return;
       sessionProvider = SessionProvider.createSystemProvider();
       String[] workspaces = manageableRepository.getWorkspaceNames();
       Set<Session> sessionSet = new HashSet<Session>();
@@ -82,13 +65,13 @@ public class ClearOrphanSymlinksJob implements Job {
           List<Node> deleteNodeList = new ArrayList<Node>();
           while (nodeIterator.hasNext()) {
             Node symlinkNode = nodeIterator.nextNode();
-            if (symlinkNode.isNodeType(EXO_RESTORELOCATION))
+            if (Utils.isInTrash(symlinkNode))
               continue;
             //get list of node to delete
             Node targetNode = null;
             try {
               targetNode = linkManager.getTarget(symlinkNode, true);
-              if (targetNode.isNodeType(EXO_RESTORELOCATION))
+              if (Utils.isInTrash(targetNode))
                 deleteNodeList.add(symlinkNode);
             } catch (ItemNotFoundException e) {
               deleteNodeList.add(symlinkNode);
@@ -101,7 +84,7 @@ public class ClearOrphanSymlinksJob implements Job {
           for (Node node : deleteNodeList) {
             try {
               String nodePath = node.getPath();
-              trashService.moveToTrash(node, trashPath, trashWorkspace, sessionProvider);
+              trashService.moveToTrash(node, sessionProvider);
               log.info("ClearOrphanSymlinksJob: move orphan symlink " + nodePath + " to Trash");
             } catch (Exception e) {
               log.error("ClearOrphanSymlinksJob: Can not move to trash node :" + node.getPath(), e);

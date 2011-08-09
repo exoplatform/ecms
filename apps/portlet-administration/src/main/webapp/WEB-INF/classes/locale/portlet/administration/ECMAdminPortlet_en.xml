@@ -1473,6 +1473,7 @@
     <msg>
       <no-list>No category trees have been created.</no-list>
       <confirm-delete>Are you sure to delete?</confirm-delete>
+      <is-in-trash>This category tree had been moved to Trash!</is-in-trash>
     </msg>
   </UITaxonomyTreeList>
   

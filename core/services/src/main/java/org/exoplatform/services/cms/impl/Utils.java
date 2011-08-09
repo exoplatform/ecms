@@ -41,6 +41,7 @@ import javax.jcr.nodetype.PropertyDefinition;
 
 import org.apache.commons.lang.StringUtils;
 import org.exoplatform.services.cms.BasePath;
+import org.exoplatform.services.cms.documents.TrashService;
 import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
@@ -248,6 +249,11 @@ public class Utils {
         }
     } 
     return properties;
+  }
+
+  public static boolean isInTrash(Node node) throws RepositoryException {
+    TrashService trashService = WCMCoreUtils.getService(TrashService.class);
+    return trashService.isInTrash(node);
   }
   
 }

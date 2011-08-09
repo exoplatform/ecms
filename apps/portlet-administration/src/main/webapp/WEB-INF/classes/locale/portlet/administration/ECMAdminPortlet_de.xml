@@ -1472,6 +1472,7 @@
     <msg>
       <no-list>Nr. Taxonomie Baum verfügbar</no-list>
       <confirm-delete>Sind Sie sicher, dass zu löschen?</confirm-delete>
+      <is-in-trash>This category tree had been moved to Trash!</is-in-trash>
     </msg>
   </UITaxonomyTreeList>
   
