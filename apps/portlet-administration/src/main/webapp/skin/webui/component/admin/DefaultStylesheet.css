@@ -569,8 +569,8 @@
 }
 
 .UIECMAdminPortlet .UIECMScripts .UIScriptFilterForm .UIFormGrid .FieldLabel {
-  width: 90px;
-	padding: 0px 4px 0px 10px;
+  width: 110px;
+  padding: 0px 4px 0px 10px;
 }
 
 .UIECMAdminPortlet .UIECMScripts .UIScriptFilterForm .UIFormGrid .FieldComponent select {
