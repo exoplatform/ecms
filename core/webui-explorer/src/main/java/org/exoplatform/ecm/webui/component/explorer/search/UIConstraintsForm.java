@@ -587,6 +587,5 @@ public class UIConstraintsForm extends UIForm implements UISelectable{
     UIPopupWindow uiPopup = uiSearchContainer.findComponentById(UISearchContainer.CATEGORY_POPUP);
     uiPopup.setRendered(false);
     uiPopup.setShow(false);
-    uiPopup.setShowMask(true);
   }
 }

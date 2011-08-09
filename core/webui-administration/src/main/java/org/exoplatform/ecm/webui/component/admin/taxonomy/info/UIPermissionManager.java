@@ -110,7 +110,6 @@ public class UIPermissionManager extends UIContainer implements UIPopupComponent
       UIPopupWindow uiPopup = uiParent.getChild(UIPopupWindow.class);
       uiPopup.setUIComponent(null);
       uiPopup.setShow(false);
-      uiPopup.setShowMask(true);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiParent);
     }
   }

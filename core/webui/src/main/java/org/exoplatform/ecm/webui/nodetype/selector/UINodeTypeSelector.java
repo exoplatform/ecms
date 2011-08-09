@@ -279,7 +279,6 @@ public class UINodeTypeSelector extends UIForm implements ComponentSelector {
       if (uiPopup != null) {
         uiPopup.setShow(false);
         uiPopup.setRendered(false);
-        uiPopup.setShowMask(true);
         event.getRequestContext().addUIComponentToUpdateByAjax(uiPopup);
       }
       UIComponent component = event.getSource().getSourceComponent().getParent();
@@ -353,7 +352,6 @@ public class UINodeTypeSelector extends UIForm implements ComponentSelector {
       UIPopupWindow uiPopup = event.getSource().getAncestorOfType(UIPopupWindow.class);
       uiPopup.setShow(false);
       uiPopup.setRendered(false);
-      uiPopup.setShowMask(true);
       UIComponent component = event.getSource().getSourceComponent().getParent();
       if (component != null) {
         event.getRequestContext().addUIComponentToUpdateByAjax(uiPopup);

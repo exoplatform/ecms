@@ -64,7 +64,6 @@ public class UIUserSelectContainer extends UIContainer{
       UIPopupWindow uiPopup = uiUserContainer.getParent();
       uiPopup.setShow(false);
       uiPopup.setRendered(false);
-      uiPopup.setShowMask(true);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiPopup);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiTask);
     }

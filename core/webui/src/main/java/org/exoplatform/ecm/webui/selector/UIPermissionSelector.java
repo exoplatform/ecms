@@ -178,7 +178,6 @@ public class UIPermissionSelector extends UIGroupMembershipSelector implements C
       if (uiPermissionSelector.isUsePopup) {
         UIPopupWindow uiPopup = uiPermissionSelector.getParent();
         uiPopup.setShow(false);
-        uiPopup.setShowMask(true);
         UIComponent uicomp = uiPermissionSelector.getSourceComponent().getParent();
         event.getRequestContext().addUIComponentToUpdateByAjax(uicomp);
         if (!uiPopup.getId().equals("PopupComponent"))
@@ -256,7 +255,6 @@ public class UIPermissionSelector extends UIGroupMembershipSelector implements C
       if (uiPermissionSelector.isUsePopup()) {
         UIPopupWindow uiPopup = uiPermissionSelector.getParent();
         uiPopup.setShow(false);
-        uiPopup.setShowMask(true);
         UIComponent uicomp = uiPermissionSelector.getSourceComponent().getParent();
         event.getRequestContext().addUIComponentToUpdateByAjax(uicomp);
         if (!uiPopup.getId().equals("PopupComponent"))

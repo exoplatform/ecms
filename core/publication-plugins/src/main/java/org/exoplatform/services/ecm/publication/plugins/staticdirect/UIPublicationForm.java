@@ -182,7 +182,6 @@ public class UIPublicationForm extends UIForm {
       UIPopupWindow uiPopup = uiForm.getAncestorOfType(UIPopupWindow.class);
       uiPopup.setRendered(false);
       uiPopup.setShow(false);
-      uiPopup.setShowMask(true);
     }
   }
   /**
@@ -219,7 +218,6 @@ public class UIPublicationForm extends UIForm {
       UIPopupWindow uiPopup = uiPublicationForm.getAncestorOfType(UIPopupWindow.class);
       uiPopup.setRendered(false);
       uiPopup.setShow(false);
-      uiPopup.setShowMask(true);
       /*
        * Unsubcribe lifecycle and display message to inform
        */
@@ -237,7 +235,6 @@ public class UIPublicationForm extends UIForm {
       UIPopupWindow uiPopup = uiForm.getAncestorOfType(UIPopupWindow.class);
       uiPopup.setRendered(false);
       uiPopup.setShow(false);
-      uiPopup.setShowMask(true);
     }
   }
 

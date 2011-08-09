@@ -116,7 +116,6 @@ public class UITaxonomyForm extends UIForm {
       UIPopupWindow uiPopup = uiForm.getParent() ;
       uiPopup.setRendered(false) ;
       uiPopup.setShow(false) ;
-      uiPopup.setShowMask(true);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiManager) ;
     }
   }
@@ -127,7 +126,6 @@ public class UITaxonomyForm extends UIForm {
       UIPopupWindow uiPopup = uiForm.getParent() ;
       uiPopup.setRendered(false) ;
       uiPopup.setShow(false) ;
-      uiPopup.setShowMask(true);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiPopup) ;
     }
   }

@@ -209,7 +209,6 @@ public class UITaxonomyTreeContainer extends UIContainer implements UISelectable
         UIPopupWindow uiPopup = uiContainer.getChildById(uiChild.getId());
         uiPopup.setRendered(false);
         uiPopup.setShow(false);
-        uiPopup.setShowMask(true);
       }
     }
   }
@@ -324,7 +323,6 @@ public class UITaxonomyTreeContainer extends UIContainer implements UISelectable
       uiTaxonomyManagerTrees.update();
       uiPopup.setRendered(false);
       uiPopup.setShow(false);
-      uiPopup.setShowMask(true);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiTaxonomyManagerTrees);
     }
   }

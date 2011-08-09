@@ -52,7 +52,6 @@ public class UISymLinkManager extends UIContainer implements UIPopupComponent {
     uiPopup.setWindowSize(700, 350);
     uiPopup.setShow(false);
     uiPopup.setResizable(true);
-    uiPopup.setShowMask(true);
     return uiPopup;
   }
 

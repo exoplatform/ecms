@@ -234,7 +234,6 @@ public class UIUserMemberSelector extends UIContainer implements ComponentSelect
       if (userMemberSelector.isUsePopup) {
         UIPopupWindow uiPopup = userMemberSelector.getParent();
         uiPopup.setShow(false);
-        uiPopup.setShowMask(true);
         UIComponent uicomp = userMemberSelector.getSourceComponent().getParent();
         event.getRequestContext().addUIComponentToUpdateByAjax(uicomp);
         if (!uiPopup.getId().equals("PopupComponent"))

@@ -186,7 +186,6 @@ public class UISelectRestorePath extends UIForm implements UIPopupComponent, UIS
       uiPopup.setWindowSize(700, 350);
       uiPopup.setShow(false);
       uiPopup.setResizable(true);
-      uiPopup.setShowMask(true);
       return uiPopup;
     }
   }

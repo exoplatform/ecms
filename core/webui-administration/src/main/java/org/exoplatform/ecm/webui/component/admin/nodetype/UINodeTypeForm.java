@@ -484,8 +484,7 @@ public class UINodeTypeForm extends UIFormTabPane {
       uiForm.update(null, false) ;
       uiForm.refresh() ;
       UIPopupWindow uiPopup = uiForm.getParent() ;
-      uiPopup.setRendered(false) ;
-      uiPopup.setShowMask(true);
+      uiPopup.setRendered(false) ;      
       uiPopup.setShow(false) ;
       event.getRequestContext().addUIComponentToUpdateByAjax(uiForm.getAncestorOfType(UINodeTypeManager.class)) ;
     }
@@ -499,7 +498,6 @@ public class UINodeTypeForm extends UIFormTabPane {
       UIPopupWindow uiPopup = uiForm.getParent() ;
       uiPopup.setRendered(false) ;
       uiPopup.setShow(false) ;
-      uiPopup.setShowMask(true);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiForm.getAncestorOfType(UINodeTypeManager.class)) ;
     }
   }

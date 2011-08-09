@@ -66,7 +66,6 @@ public class UIUploadBehaviorWithSameName extends UIConfirmMessage {
       UIPopupWindow uiPopup = uiUploadBehavior.getParent();
       uiPopup.setRendered(false);
       uiPopup.setShow(false);
-      uiPopup.setShowMask(true);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiPopup.getParent());
     }
   }

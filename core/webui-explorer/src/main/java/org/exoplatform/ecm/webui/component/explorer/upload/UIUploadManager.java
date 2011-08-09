@@ -49,7 +49,6 @@ public class UIUploadManager extends UIContainer implements UIPopupComponent {
     uiPopup.setWindowSize(800, 350);
     uiPopup.setShow(false);
     uiPopup.setResizable(true);
-    uiPopup.setShowMask(true);
     return uiPopup;
   }
 
@@ -61,7 +60,6 @@ public class UIUploadManager extends UIContainer implements UIPopupComponent {
     uiPopup.setWindowSize(500, 180);
     uiPopup.setShow(false);
     uiPopup.setResizable(true);
-    uiPopup.setShowMask(true);
     return uiPopup;
   }
 

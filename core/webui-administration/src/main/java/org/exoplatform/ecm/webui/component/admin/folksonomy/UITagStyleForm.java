@@ -154,7 +154,6 @@ public class UITagStyleForm extends UIForm {
       }
       UIPopupWindow uiPopup = uiManager.getChild(UIPopupWindow.class) ;
       uiPopup.setShow(false) ;
-      uiPopup.setShowMask(true);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiManager) ;
     }
   }
@@ -164,8 +163,7 @@ public class UITagStyleForm extends UIForm {
       UITagStyleForm uiForm = event.getSource() ;
       UITagManager uiManager = uiForm.getAncestorOfType(UITagManager.class) ;
       UIPopupWindow uiPopup = uiManager.getChild(UIPopupWindow.class) ;
-      uiPopup.setShow(false) ;
-      uiPopup.setShowMask(true);
+      uiPopup.setShow(false) ;      
       event.getRequestContext().addUIComponentToUpdateByAjax(uiManager) ;
     }
   }

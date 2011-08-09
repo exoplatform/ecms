@@ -105,7 +105,6 @@ public class UIPermissionTreeManager extends UIContainer {
       uiPermissionForm.doSelect(UIPermissionInputSet.FIELD_USERORGROUP, uiForm.getSelectedUsers());
       UIPopupWindow uiPopup = uiParent.getChild(UIPopupWindow.class);
       uiPopup.setUIComponent(null);
-      uiPopup.setShowMask(true);
       uiPopup.setShow(false);
       event.getRequestContext().addUIComponentToUpdateByAjax(uiParent);
     }
