@@ -39,7 +39,7 @@
             </tr>
             <tr>
               <td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.ITEM_PATH_FORM_INPUT_SET) %></td>
-              <td class="FieldComponent" title="<%=uicomponent.getSavedPath()%>" colspan="3"><% uiform.renderField(uicomponent.ITEM_PATH_FORM_INPUT_SET) %></td>
+              <td class="FieldComponent" <% if (uicomponent.getSavedPath() != null) { %>title="<%=uicomponent.getSavedPath()%>" <% }%> colspan="3"><% uiform.renderField(uicomponent.ITEM_PATH_FORM_INPUT_SET) %></td>
               <td class="tdShowHelp">
                 <div class="IconInContextHelp ShowHelpIcon" id="FolderPathHelp" onmouseover="eXo.ecm.WCMUtils.showInContextHelp('FolderPathHelp', 'true')" onmouseout="eXo.ecm.WCMUtils.showInContextHelp('FolderPathHelp', 'false')">
 					<div class="InContextHelpContent">                    
