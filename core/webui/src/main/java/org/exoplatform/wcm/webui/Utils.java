@@ -764,7 +764,8 @@ public class Utils {
     return string
        .replaceAll("(?i)<script.*?>.*?</script.*?>", "")   // case 1 : <script> are removed 
        .replaceAll("(?i)<.*?javascript:.*?>.*?</.*?>", "") // case 2 : javascript: call are removed
-       .replaceAll("(?i)<.*?\\s+on.*?>.*?</.*?>", "");     // case 3: remove on* attributes like onLoad or onClick
+       .replaceAll("eval\\((.*)\\)", "")                   // case 3 : eval: are removed           
+       .replaceAll("'", "#39;");                         // case 4 : replace "'" by #39
   }
   /**
    * @purpose     Check if a query is valid
