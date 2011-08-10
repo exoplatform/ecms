@@ -18,6 +18,7 @@ package org.exoplatform.wcm.webui.paginator;
 
 import javax.faces.lifecycle.Lifecycle;
 
+import org.exoplatform.commons.exception.ExoMessageException;
 import org.exoplatform.resolver.ResourceResolver;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -156,7 +157,9 @@ public class UICustomizeablePaginator extends UIPageIterator {
     public void execute(Event<UICustomizeablePaginator> event) throws Exception {
       UICustomizeablePaginator uiPaginator = event.getSource() ;
       int page = Integer.parseInt(event.getRequestContext().getRequestParameter(OBJECTID)) ;
-      uiPaginator.setCurrentPage(page) ;
+      try {
+        uiPaginator.setCurrentPage(page) ;
+      } catch (ExoMessageException e) { }
       UIComponent parent = uiPaginator.getParent();
       if(parent == null) return ;
       event.getRequestContext().addUIComponentToUpdateByAjax(parent);

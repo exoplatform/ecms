@@ -24,16 +24,19 @@
   def pageMode = uicomponent.getPageMode();
   def currentPageData = uicomponent.getCurrentPageData();
   def keyword = uicomponent.getKeyword();
-  keyword = Utils.sanitize(keyword);
+  if (keyword != null)
+    keyword = Utils.sanitize(keyword);
   def resultType = uicomponent.getResultType();
   def rcontext = _ctx.getRequestContext() ;
 	def jsManager = rcontext.getJavascriptManager();
-	jsManager.importJavascript('eXo.wcm.frontoffice.public.Search', '/eXoWCMResources/javascript/') ;
+	jsManager.importJavascript('eXo.wcm.frontoffice.public.Search', '/eXoWCMResources/javascript/');
+	jsManager.addOnLoadJavascript("eXo.ecm.SearchPortlet.scrollToBottom('${uicomponent.id}')");
+	jsManager.addOnLoadJavascript("eXo.ecm.SearchPortlet.changeColor('NewResultData')");
   %>
    <div class="ResultHeader">
     <div class="CaptionSearchType"><b><%= _ctx.appRes("UIDefaultSearchResult.label." + resultType) %></b></div>
     <% 
-     if (!currentPageData.isEmpty()) {
+    if (currentPageData != null && !currentPageData.isEmpty()) {
     	def currentPage = uicomponent.getCurrentPage();
     	def itemsPerPage = uicomponent.getItemsPerPage();
       def totalItem = uicomponent.getTotalItem();
@@ -41,7 +44,7 @@
       def endItemIndex = startItemIndex + currentPageData.size() - 1;
       def searchTime = uicomponent.getSearchTime();
       if (endItemIndex > totalItem && SiteSearchService.PAGE_MODE_PAGINATION.equals(pageMode) ) endItemIndex = totalItem;
-      showPaginator = (itemsPerPage==currentPageData.size() && SiteSearchService.PAGE_MODE_MORE.equals(pageMode))  && uicomponent.hasMoreResults() || 
+      showPaginator = (itemsPerPage==currentPageData.size() && SiteSearchService.PAGE_MODE_MORE.equals(pageMode)) || 
                                     (SiteSearchService.PAGE_MODE_PAGINATION.equals(pageMode));
       %>
        <div class="SearchSummary">
@@ -68,7 +71,7 @@
     <%
    }
    
-   if (currentPageData.isEmpty()) {
+   if (uicomponent.getRealCurrentPageData().isEmpty()) {
     %>
      <p>
       <%= _ctx.appRes("UIDefaultSearchResult.msg.your-search") %> <b style="font-size: 15px; font-style: italic;"> <%= keyword %> </b> - 
@@ -76,7 +79,16 @@
      </p>
     <%
    } else {
-    for (ResultNode resultNode : currentPageData) {
+    def dataSize = uicomponent.getRealCurrentPageData().size();
+    int dataIndex = 0;
+    for (ResultNode resultNode : uicomponent.getRealCurrentPageData()) {
+     if (dataIndex == dataSize - currentPageData.size()) {
+       %>
+         <div id="NewResultData">
+       <%
+     }
+       
+     dataIndex++;
      Node viewNode = resultNode.getNode();
      def itemName = viewNode.getName();
      def itemTitle = uicomponent.getTitle(viewNode);
@@ -136,6 +148,11 @@
        </div>
       </div>
      <%
+     if (dataIndex == dataSize) {
+       %>
+         </div>
+       <%
+     }
     }
    %>
     <div class="ItemFunc">

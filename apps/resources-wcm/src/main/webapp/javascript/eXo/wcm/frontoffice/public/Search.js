@@ -98,4 +98,22 @@ SearchPortlet.prototype.keepKeywordOnBoxSearch = function() {
 	}	
 };
 
+SearchPortlet.prototype.scrollToBottom = function(divId) {
+	var divBlock = document.getElementById(divId);
+	if (divBlock)
+		divBlock.scrollTop = divBlock.scrollHeight;
+};
+
+SearchPortlet.prototype.changeColor = function(divId, count) {
+	if (!count)
+		count = 0;
+	var divBlock = document.getElementById(divId);
+	if (divBlock) {
+		divBlock.style.backgroundColor = "#" + count.toString(16) + 
+											count.toString(16) + "FFFF";
+		if (count < 15) 
+			setTimeout("eXo.ecm.SearchPortlet.changeColor('" + divId + "'," + (count+1) + ")", 100);
+	}
+};
+
 eXo.ecm.SearchPortlet = new SearchPortlet();

@@ -196,6 +196,9 @@ public class UISearchForm extends UIForm {
       UIFormCheckBoxInput uiDocumentCheckbox = uiSearchForm.getUIFormCheckBoxInput(UISearchForm.DOCUMENT_CHECKING);
       String pageChecked = (uiPageCheckbox.isChecked()) ? "true" : "false";
       String documentChecked = (uiDocumentCheckbox.isChecked()) ? "true" : "false";
+      
+      uiSearchResult.clearResult();
+      
       if (keyword == null || keyword.trim().length() == 0) {
         uiApp.addMessage(new ApplicationMessage(MESSAGE_NOT_EMPTY_KEYWORD,
                                                 null,

@@ -19,7 +19,9 @@ package org.exoplatform.wcm.webui.search;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.jcr.Node;
 import javax.jcr.Value;
@@ -27,6 +29,7 @@ import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
 
 import org.exoplatform.commons.utils.ISO8601;
+import org.exoplatform.commons.utils.ObjectPageList;
 import org.exoplatform.commons.utils.PageList;
 import org.exoplatform.portal.application.PortalRequestContext;
 import org.exoplatform.portal.webui.container.UIContainer;
@@ -89,6 +92,12 @@ public class UISearchResult extends UIContainer {
 
   /** The search time. */
   private float                    searchTime;
+  
+  /** The search result in "More" mode */
+  private List<ResultNode> moreListResult;
+  
+  /** The page that already queried (used only in "More" mode */
+  private Set<Integer> morePageSet;
 
   /** The Constant PARAMETER_REGX. */
   public final static String       PARAMETER_REGX   = "(portal=.*)&(keyword=.*)";
@@ -115,6 +124,7 @@ public class UISearchResult extends UIContainer {
     uiPaginator.setTemplatePath(paginatorTemplatePath);
     uiPaginator.setResourceResolver(resourceResolver);
     uiPaginator.setPageMode(pageMode);
+    clearResult();
   }
 
   /*
@@ -205,6 +215,8 @@ public class UISearchResult extends UIContainer {
   @SuppressWarnings("unchecked")
   public void setPageList(PageList dataPageList) {
     uiPaginator.setPageList(dataPageList);
+    moreListResult = new ArrayList<ResultNode>();
+    morePageSet = new HashSet<Integer>();    
   }
 
   /**
@@ -242,24 +254,6 @@ public class UISearchResult extends UIContainer {
     return pageMode;
   }
 
-  /**
-   * Checks if there are more results to show
-   * @return true if exists, false if not
-   */
-  public boolean hasMoreResults() {
-    int currentPage = uiPaginator.getCurrentPage();
-    try {
-      int nextPageSize = uiPaginator.getPageList().getPage(currentPage + 1).size();
-      return nextPageSize > 0;
-    } catch (Exception e) {
-      return false;
-    } finally {
-      try {
-        uiPaginator.setCurrentPage(currentPage);
-      } catch (Exception e) {}
-    }
-  }
-  
   /*
    * (non-Javadoc)
    * @see org.exoplatform.portal.webui.portal.UIPortalComponent#getTemplate()
@@ -267,6 +261,8 @@ public class UISearchResult extends UIContainer {
   public String getTemplate() {
     return templatePath;
   }
+  
+  
 
   /*
    * (non-Javadoc)
@@ -509,4 +505,34 @@ public class UISearchResult extends UIContainer {
   public int getNumberOfPage() {
     return uiPaginator.getPageList().getAvailablePage();
   }
+  
+   /**
+    * Clears the displayed result list
+    */
+  @SuppressWarnings("unchecked")
+  public void clearResult() {
+    moreListResult = new ArrayList<ResultNode>();
+    morePageSet = new HashSet<Integer>();
+     PortletPreferences portletPreferences = ((PortletRequestContext) WebuiRequestContext.getCurrentInstance()).getRequest().getPreferences();
+     String itemsPerPage = portletPreferences.getValue(UIWCMSearchPortlet.ITEMS_PER_PAGE, null);
+    setPageList(new ObjectPageList(new ArrayList<ResultNode>(), 
+                                   Integer.parseInt(itemsPerPage)));
+  }
+  
+  /**
+   * Gets the real node list to display
+   * 
+   * @return the real node list
+   */
+  public List<ResultNode> getRealCurrentPageData() throws Exception {
+    int currentPage = getCurrentPage();
+    if (SiteSearchService.PAGE_MODE_MORE.equals(pageMode)) {
+      if (!morePageSet.contains(currentPage)) {
+        morePageSet.add(currentPage);
+        moreListResult.addAll(getCurrentPageData());
+      }
+    }
+    return SiteSearchService.PAGE_MODE_MORE.equals(pageMode) ? moreListResult : getCurrentPageData();
+  }
+   
 }

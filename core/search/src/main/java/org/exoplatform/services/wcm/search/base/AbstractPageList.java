@@ -19,6 +19,7 @@ package org.exoplatform.services.wcm.search.base;
 import java.util.Comparator;
 import java.util.List;
 
+import org.exoplatform.commons.exception.ExoMessageException;
 import org.exoplatform.commons.utils.PageList;
 import org.exoplatform.services.wcm.search.QueryCriteria;
 
@@ -136,6 +137,18 @@ public abstract class AbstractPageList<E> extends PageList<E> {
     populateCurrentPage(currentPage_);
     return currentListPage_;
   }
+
+  @Override
+  protected void checkAndSetPage(int page) throws Exception
+  {
+     currentPage_ = page;
+     if (page < 1 || page > availablePage_)
+     {
+        Object[] args = {Integer.toString(page), Integer.toString(availablePage_)};
+        throw new ExoMessageException("PageList.page-out-of-range", args);
+     }
+  }
+  
   
   public abstract void sortData();
   
