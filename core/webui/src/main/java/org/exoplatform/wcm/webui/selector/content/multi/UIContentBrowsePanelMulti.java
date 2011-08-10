@@ -211,6 +211,12 @@ public class UIContentBrowsePanelMulti extends UIContentBrowsePanel {
                                                                    deleteConfirmationMsg,
                                                                    UIContentBrowsePanelMulti.class.getClassLoader());
   }
+  
+  public String getLocaleMsg(String key) {
+    return org.exoplatform.ecm.webui.utils.Utils.getResourceBundle(org.exoplatform.ecm.webui.utils.Utils.LOCALE_WEBUI_DMS,
+                                                                   key,
+                                                                   UIContentBrowsePanelMulti.class.getClassLoader());
+  }
   /**
    * The listener interface for receiving closeAction events.
    * The class that is interested in processing a closeAction

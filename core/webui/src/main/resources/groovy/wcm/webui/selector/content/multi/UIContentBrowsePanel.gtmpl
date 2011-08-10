@@ -71,8 +71,8 @@
 			</div>
 		</div>
 		<div class="UIAction">
-      <a href="#" class="ActionButton LightBlueStyle" onclick="eXo.ecm.ECS.insertMultiContent();">Save</a>    
-      <a href="#" class="ActionButton LightBlueStyle" onclick="<%= uicomponent.event("Close") %>">Cancel</a>          
+      <a href="#" class="ActionButton LightBlueStyle" onclick="eXo.ecm.ECS.insertMultiContent();"><%=uicomponent.getLocaleMsg("UIContentBrowsePanelMulti.action.Save")%></a>    
+      <a href="#" class="ActionButton LightBlueStyle" onclick="<%= uicomponent.event("Close") %>"><%=uicomponent.getLocaleMsg("UIContentBrowsePanelMulti.action.Cancel")%></a>          
      </div>
 		<div style="clear: left;"><span></span></div>
 	</div>
