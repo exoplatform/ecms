@@ -32,6 +32,10 @@
          vertical-align: bottom;
 }
 
+.UIWorkflowPortlet .UITabContentContainer .UIFormGrid td.FieldLabel {
+         vertical-align: top;
+}
+
 .UIWorkflowPortlet .UIFormGrid td.FieldComponent {
 	width: 75%;
         vertical-align: bottom;

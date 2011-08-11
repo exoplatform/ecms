@@ -111,4 +111,10 @@
       <rootNodeInfo>UITreeTaxonomyList</rootNodeInfo>
     </label>
   </UITreeTaxonomyList>
+  <UIDocumentForm>
+	  <msg>
+		  <confirm-close>Les changements que vous avez faits seront perdus si vous fermez ce formulaire.</confirm-close>
+		  <confirm-navigate>Les changements que vous avez faits seront perdus si vous quittez cette page.</confirm-navigate>
+	  </msg>
+  </UIDocumentForm>
 </bundle>

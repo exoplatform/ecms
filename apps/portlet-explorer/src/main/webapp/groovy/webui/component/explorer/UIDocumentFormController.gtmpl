@@ -28,7 +28,7 @@
 		%>	
 	<% } %>
 </div>
-<script type="text/javascript" src="/ecmexplorer/javascript/eXo/ecm/CloseEvents.js"></script>
+<script type="text/javascript" src="/eXoWCMResources/javascript/eXo/wcm/backoffice/private/CloseEvents.js"></script>
 <%  
 	String closeConfirmationMsg = "UIDocumentForm.msg.confirm-close";
 	String navigateConfirmationMsg = "UIDocumentForm.msg.confirm-navigate";

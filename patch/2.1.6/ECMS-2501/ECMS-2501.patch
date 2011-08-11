@@ -1,0 +1,862 @@
+Index: ext/workflow/bp-content-webui/src/main/java/org/exoplatform/contentvalidation/webui/UIDocumentForm.java
+===================================================================
+--- ext/workflow/bp-content-webui/src/main/java/org/exoplatform/contentvalidation/webui/UIDocumentForm.java	(revision 72424)
++++ ext/workflow/bp-content-webui/src/main/java/org/exoplatform/contentvalidation/webui/UIDocumentForm.java	(working copy)
+@@ -266,6 +266,7 @@
+     @SuppressWarnings("unchecked")
+     public void execute(Event<UIDocumentForm> event) throws Exception {
+       UIDocumentForm uiForm = event.getSource();
++      UITaskManager uiTaskManager = uiForm.getAncestorOfType(UITaskManager.class);
+       List inputs = uiForm.getChildren();
+       String repository = uiForm.getRepository();
+       UIApplication uiApp = uiForm.getAncestorOfType(UIApplication.class);
+@@ -355,8 +356,9 @@
+           if (newNode.hasProperty("exo:category")) newNode.setProperty("exo:category", vals.toArray(new Value[vals.size()]));
+           newNode.save();
+         }
+-        
+-        event.getRequestContext().addUIComponentToUpdateByAjax(uiForm.getParent()) ;
++        uiTaskManager.setSelectedTab(uiTaskManager.getChild(UITask.class).getId());
++        uiTaskManager.setRenderedChild(UITask.class);
++        event.getRequestContext().addUIComponentToUpdateByAjax(uiTaskManager) ;
+       } catch (AccessControlException ace) {
+     	  LOG.error("Unexpected error", ace);
+     	  throw new AccessDeniedException(ace.getMessage());
+@@ -385,6 +387,7 @@
+     public void execute(Event<UIDocumentForm> event) throws Exception {
+       UITaskManager uiTaskManager = event.getSource().getParent() ;
+       uiTaskManager.setRenderedChild(UITask.class) ;
++      uiTaskManager.setSelectedTab(uiTaskManager.getChild(UITask.class).getId());
+       event.getRequestContext().addUIComponentToUpdateByAjax(uiTaskManager) ;
+     }
+   }
+@@ -438,7 +441,7 @@
+           return;
+         }
+       } else {
+-        event.getRequestContext().addUIComponentToUpdateByAjax(uiDocumentForm.getParent());
++        event.getRequestContext().addUIComponentToUpdateByAjax(uiTaskManager);
+       }
+     }
+   }
+Index: ext/workflow/webui/src/main/java/org/exoplatform/workflow/webui/component/controller/UITaskManager.java
+===================================================================
+--- ext/workflow/webui/src/main/java/org/exoplatform/workflow/webui/component/controller/UITaskManager.java	(revision 72424)
++++ ext/workflow/webui/src/main/java/org/exoplatform/workflow/webui/component/controller/UITaskManager.java	(working copy)
+@@ -16,14 +16,20 @@
+  */
+ package org.exoplatform.workflow.webui.component.controller;
+ 
++import java.util.ResourceBundle;
++
+ import javax.jcr.PathNotFoundException;
+ 
+ import org.exoplatform.services.workflow.Task;
+ import org.exoplatform.services.workflow.WorkflowServiceContainer;
++import org.exoplatform.web.application.RequestContext;
+ import org.exoplatform.webui.config.annotation.ComponentConfig;
++import org.exoplatform.webui.config.annotation.EventConfig;
+ import org.exoplatform.webui.core.UIContainer;
+ import org.exoplatform.webui.core.UIPopupComponent;
+ import org.exoplatform.webui.core.UIPopupWindow;
++import org.exoplatform.webui.event.Event;
++import org.exoplatform.webui.event.EventListener;
+ import org.exoplatform.workflow.webui.component.UIUserSelectContainer;
+ 
+ /**
+@@ -33,11 +39,19 @@
+  *          xxx5669@gmail.com
+  * Jan 12, 2009  
+  */
+-@ComponentConfig(template = "classpath:templates/controller/UITabPane.gtmpl")
++@ComponentConfig(
++    template = "classpath:templates/controller/UITabPane.gtmpl",
++    events = {
++      @EventConfig(listeners = UITaskManager.ChangeTabActionListener.class)
++    }
++)
++
+ public class UITaskManager extends UIContainer implements UIPopupComponent {
+   
+   private String tokenId_ ;
+   private boolean isStart_ = false;
++  /** Selected Tab id */
++  private String selectedTab;
+   
+   public static final String UIPOPUP_DELEGATEDSELECTOR_ID = "PopupDelegatedSelectorId";
+   public UITaskManager() throws Exception {
+@@ -87,4 +101,30 @@
+   }
+ 
+   public void deActivate() throws Exception { }
++  
++  public void setSelectedTab(String selectedTab) {
++    this.selectedTab = selectedTab;
++  }
++
++  public String getSelectedTab() {
++    return selectedTab;
++  }
++  
++  public String getClosingConfirmMsg(String key) {    
++    RequestContext context = RequestContext.getCurrentInstance();
++    ResourceBundle res = context.getApplicationResourceBundle();    
++    return res.getString(key);
++  }
++  
++  static public class ChangeTabActionListener extends EventListener<UITaskManager> {
++    /* (non-Javadoc)
++     * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
++     */
++    public void execute(Event<UITaskManager> event) throws Exception {
++      UITaskManager uiTaskManager = event.getSource();
++      uiTaskManager.setSelectedTab(event.getRequestContext().getRequestParameter(OBJECTID));
++      event.getRequestContext().addUIComponentToUpdateByAjax(uiTaskManager);
++    }
++  }
++  
+ }
+Index: ext/workflow/webui/src/main/resources/templates/controller/UITabPane.gtmpl
+===================================================================
+--- ext/workflow/webui/src/main/resources/templates/controller/UITabPane.gtmpl	(revision 72424)
++++ ext/workflow/webui/src/main/resources/templates/controller/UITabPane.gtmpl	(working copy)
+@@ -3,8 +3,22 @@
+   import org.exoplatform.webui.core.UIPopupWindow;
+   
+   def rcontext = _ctx.getRequestContext() ;
+-	rcontext.getJavascriptManager().importJavascript('eXo.webui.UIHorizontalTabs');
+ 	
++  private String getDisplayTab(String selectedTab) {
++    if ((uicomponent.getSelectedTab() == null && selectedTab.equals("UITask"))
++        || selectedTab.equals(uicomponent.getSelectedTab())  ) {
++      return "display:block"; 
++    }
++    return "display:none";
++  }
++  
++  private String getSelectedTab(String selectedTab) {
++    if (getDisplayTab(selectedTab).equals("display:block")) {
++      return "SelectedTab";
++    }
++    return "NormalTab";
++  }
++	
+ %>
+ 
+ <div class="UITabPane" id="$uicomponent.id">
+@@ -14,28 +28,27 @@
+         <div class="LeftHorizontalTabs">
+ 	     	  <div class="RightHorizontalTabs">
+ 	     	    <div class="CenterHorizontalTabs">
+-			        <div class="TabsContainer">
+-			          <%
+-			            for(uiChild in uicomponent.getChildren()) {
+-			              if (!(uiChild instanceof UIPopupWindow)) {
+-				              String style = "NormalTab" ;
+-				              String tabId = uiChild.getId();
+-				              String paneId = uicomponent.getId();
+-				              if(uiChild.isRendered()) style = "SelectedTab" ;
+-			          %>
+-			            <div class="UITab NormalTabStyle">
+-			              <div class="$style">
+-			                <div class="LeftTab">
+-			                  <div class="RightTab">                
+-			                    <div class="MiddleTab" onclick="eXo.webui.UIHorizontalTabs.changeTabForUITabPane(this, '$paneId', '$tabId')"><%=_ctx.appRes("UITabPane.title." + uiChild.getId());%></div>
+-			                  </div>
+-			                </div>
+-			              </div>
+-			            </div>              
+-			          <%  }
+-			            }
+-			          %>
+-			        </div>
++	     	    
++	     	    
++              <div class="TabsContainer">
++                <%
++                for(uiChild in uicomponent.getChildren()) {
++                  if (!(uiChild instanceof UIPopupWindow)) {
++                    String tabId = uiChild.getId();
++                %>
++                <div class="UITab NormalTabStyle">
++                  <div class="<%= getSelectedTab(tabId)%>">
++                    <div class="LeftTab">
++                      <div class="RightTab">                
++                        <div class="MiddleTab" onclick="<%=uicomponent.event("ChangeTab", tabId)%>"><%=_ctx.appRes("UITabPane.title." + tabId)%></div>
++                      </div>
++                    </div>
++                  </div>
++                </div>              
++                <%  }
++                  }
++                %>
++              </div>
+ 			      </div>
+ 			    </div>
+ 			  </div>
+@@ -43,14 +56,30 @@
+       <div class="UITabContentContainer">
+         <%
+           for(uiChild in uicomponent.getChildren()) {
+-            String display = "none" ;
+-            if(uiChild.isRendered()) display="block" ;
+-            println "<div class=\"UITabContent\" style=\"display: $display;\">" ;
+-            uicomponent.renderUIComponent(uiChild) ;
+-            println "</div>" ;
++            def displayStyle = getDisplayTab(uiChild.getId());
++            if (uiChild instanceof UIPopupWindow && uiChild.isRendered()) {
++             displayStyle="display: block"; 
++            }
++            %>
++            <div class="UITabContent" style="$displayStyle">
++              <% uicomponent.renderUIComponent(uiChild); %>
++            </div>
++            <%
+           }
+         %>
+       </div>  
+     </div>  
+   </div>  
+-</div>  
++</div>
++<script type="text/javascript" src="/eXoWCMResources/javascript/eXo/wcm/backoffice/private/CloseEvents.js"></script>
++<%  
++  String closeConfirmationMsg = "UIDocumentForm.msg.confirm-close";
++  String navigateConfirmationMsg = "UIDocumentForm.msg.confirm-navigate";
++  def messageClose = uicomponent.getClosingConfirmMsg(closeConfirmationMsg) ;
++  def messageNavigate = uicomponent.getClosingConfirmMsg(navigateConfirmationMsg) ;
++%>
++<script type="text/javascript"> 
++  setClosingConfirmationMsg('<%=messageClose%>');
++  setNavigatingConfirmationMsg('<%=messageNavigate%>');
++</script>
++
+Index: ext/workflow/portlet-administration/src/main/webapp/skin/webui/component/DefaultStylesheet.css
+===================================================================
+--- ext/workflow/portlet-administration/src/main/webapp/skin/webui/component/DefaultStylesheet.css	(revision 72424)
++++ ext/workflow/portlet-administration/src/main/webapp/skin/webui/component/DefaultStylesheet.css	(working copy)
+@@ -32,6 +32,10 @@
+          vertical-align: bottom;
+ }
+ 
++.UIWorkflowPortlet .UITabContentContainer .UIFormGrid td.FieldLabel {
++         vertical-align: top;
++}
++
+ .UIWorkflowPortlet .UIFormGrid td.FieldComponent {
+ 	width: 75%;
+         vertical-align: bottom;
+Index: ext/workflow/portlet-administration/src/main/webapp/WEB-INF/classes/locale/portlet/workflow/WorkflowControllerPortlet_it.properties
+===================================================================
+--- ext/workflow/portlet-administration/src/main/webapp/WEB-INF/classes/locale/portlet/workflow/WorkflowControllerPortlet_it.properties	(revision 72424)
++++ ext/workflow/portlet-administration/src/main/webapp/WEB-INF/classes/locale/portlet/workflow/WorkflowControllerPortlet_it.properties	(working copy)
+@@ -41,3 +41,5 @@
+ UITreeTaxonomyList.label.taxonomyTree=Albero tassonomia
+ UITask.label.hide-process-link=Nascondi collegamneto al processo
+ UITreeTaxonomyList.label.rootNodePath=Albero radice
++UIDocumentForm.msg.confirm-close=Le modifiche apportate saranno perse se si chiude questa form.
++UIDocumentForm.msg.confirm-navigate=Le modifiche apportate verranno perse se si esce da questa pagina.
+\ No newline at end of file
+Index: ext/workflow/portlet-administration/src/main/webapp/WEB-INF/classes/locale/portlet/workflow/WorkflowControllerPortlet_nl.xml
+===================================================================
+--- ext/workflow/portlet-administration/src/main/webapp/WEB-INF/classes/locale/portlet/workflow/WorkflowControllerPortlet_nl.xml	(revision 72424)
++++ ext/workflow/portlet-administration/src/main/webapp/WEB-INF/classes/locale/portlet/workflow/WorkflowControllerPortlet_nl.xml	(working copy)
+@@ -123,5 +123,11 @@
+       <rootNodeInfo>UITreeTaxonomyList</rootNodeInfo>
+     </label>
+   </UITreeTaxonomyList>
++  <UIDocumentForm>
++	  <msg>
++		  <confirm-close>The changes you made will be lost if you close this form.</confirm-close>
++		  <confirm-navigate>The changes you made will be lost if you navigate away from this page.</confirm-navigate>
++	  </msg>
++  </UIDocumentForm>
+ </bundle>
+ 
+Index: ext/workflow/portlet-administration/src/main/webapp/WEB-INF/classes/locale/portlet/workflow/WorkflowControllerPortlet_vi.xml
+===================================================================
+--- ext/workflow/portlet-administration/src/main/webapp/WEB-INF/classes/locale/portlet/workflow/WorkflowControllerPortlet_vi.xml	(revision 72424)
++++ ext/workflow/portlet-administration/src/main/webapp/WEB-INF/classes/locale/portlet/workflow/WorkflowControllerPortlet_vi.xml	(working copy)
+@@ -106,5 +106,11 @@
+       <rootNodeInfo>UITreeTaxonomyList</rootNodeInfo>
+     </label>
+   </UITreeTaxonomyList>    
++  <UIDocumentForm>
++	  <msg>
++		  <confirm-close>Dữ liệu mới cập nhất sẽ bị mất nếu bạn đóng biểu mẫu này.</confirm-close>
++		  <confirm-navigate>Dữ liệu mới cập nhất sẽ bị mất nếu chuyển sang trang khác.</confirm-navigate>
++	  </msg>
++  </UIDocumentForm>
+ </bundle>
+ 
+Index: ext/workflow/portlet-administration/src/main/webapp/WEB-INF/classes/locale/portlet/workflow/WorkflowControllerPortlet_de.xml
+===================================================================
+--- ext/workflow/portlet-administration/src/main/webapp/WEB-INF/classes/locale/portlet/workflow/WorkflowControllerPortlet_de.xml	(revision 72424)
++++ ext/workflow/portlet-administration/src/main/webapp/WEB-INF/classes/locale/portlet/workflow/WorkflowControllerPortlet_de.xml	(working copy)
+@@ -117,5 +117,11 @@
+       <rootNodeInfo>UITreeTaxonomyList</rootNodeInfo>
+     </label>
+   </UITreeTaxonomyList>
++  <UIDocumentForm>
++	  <msg>
++		  <confirm-close>The changes you made will be lost if you close this form.</confirm-close>
++		  <confirm-navigate>The changes you made will be lost if you navigate away from this page.</confirm-navigate>
++	  </msg>
++  </UIDocumentForm> 					
+ </bundle>
+ 
+Index: ext/workflow/portlet-administration/src/main/webapp/WEB-INF/classes/locale/portlet/workflow/WorkflowControllerPortlet_pt_BR.properties
+===================================================================
+--- ext/workflow/portlet-administration/src/main/webapp/WEB-INF/classes/locale/portlet/workflow/WorkflowControllerPortlet_pt_BR.properties	(revision 72424)
++++ ext/workflow/portlet-administration/src/main/webapp/WEB-INF/classes/locale/portlet/workflow/WorkflowControllerPortlet_pt_BR.properties	(working copy)
+@@ -40,3 +40,5 @@
+ UITreeTaxonomyList.label.taxonomyTree=\u00c1rvore Taxon\u00f4mica
+ UITask.label.hide-process-link=Esconder link do processo
+ UITreeTaxonomyList.label.rootNodePath=\u00c1rvore raiz
++UIDocumentForm.msg.confirm-close=As mudan\u00e7as que voc\u00ea fez ser\u00e3o perdidas se voc\u00ea fechar este formul\u00e1rio.
++UIDocumentForm.msg.confirm-navigate=As mudan\u00e7as que voc\u00ea fez ser\u00e3o perdidas se voc\u00ea ir para outra p\u00e1gina.
+\ No newline at end of file
+Index: ext/workflow/portlet-administration/src/main/webapp/WEB-INF/classes/locale/portlet/workflow/WorkflowControllerPortlet_en.xml
+===================================================================
+--- ext/workflow/portlet-administration/src/main/webapp/WEB-INF/classes/locale/portlet/workflow/WorkflowControllerPortlet_en.xml	(revision 72424)
++++ ext/workflow/portlet-administration/src/main/webapp/WEB-INF/classes/locale/portlet/workflow/WorkflowControllerPortlet_en.xml	(working copy)
+@@ -111,5 +111,11 @@
+       <rootNodeInfo>UITreeTaxonomyList</rootNodeInfo>
+     </label>
+   </UITreeTaxonomyList>  
++  <UIDocumentForm>
++	  <msg>
++		  <confirm-close>The changes you made will be lost if you close this form.</confirm-close>
++		  <confirm-navigate>The changes you made will be lost if you navigate away from this page.</confirm-navigate>
++	  </msg>
++  </UIDocumentForm> 					
+ </bundle>
+ 
+Index: ext/workflow/portlet-administration/src/main/webapp/WEB-INF/classes/locale/portlet/workflow/WorkflowControllerPortlet_ar.xml
+===================================================================
+--- ext/workflow/portlet-administration/src/main/webapp/WEB-INF/classes/locale/portlet/workflow/WorkflowControllerPortlet_ar.xml	(revision 72424)
++++ ext/workflow/portlet-administration/src/main/webapp/WEB-INF/classes/locale/portlet/workflow/WorkflowControllerPortlet_ar.xml	(working copy)
+@@ -117,5 +117,11 @@
+       <refresh>تحديث</refresh>
+     </label>
+   </UIWorkflowControllerPortlet>
++  <UIDocumentForm>
++	  <msg>
++		  <confirm-close>The changes you made will be lost if you close this form.</confirm-close>
++		  <confirm-navigate>The changes you made will be lost if you navigate away from this page.</confirm-navigate>
++	  </msg>
++  </UIDocumentForm> 					
+ </bundle>
+ 
+Index: ext/workflow/portlet-administration/src/main/webapp/WEB-INF/classes/locale/portlet/workflow/WorkflowControllerPortlet_fr.xml
+===================================================================
+--- ext/workflow/portlet-administration/src/main/webapp/WEB-INF/classes/locale/portlet/workflow/WorkflowControllerPortlet_fr.xml	(revision 72424)
++++ ext/workflow/portlet-administration/src/main/webapp/WEB-INF/classes/locale/portlet/workflow/WorkflowControllerPortlet_fr.xml	(working copy)
+@@ -111,4 +111,10 @@
+       <rootNodeInfo>UITreeTaxonomyList</rootNodeInfo>
+     </label>
+   </UITreeTaxonomyList>
++  <UIDocumentForm>
++	  <msg>
++		  <confirm-close>Les changements que vous avez faits seront perdus si vous fermez ce formulaire.</confirm-close>
++		  <confirm-navigate>Les changements que vous avez faits seront perdus si vous quittez cette page.</confirm-navigate>
++	  </msg>
++  </UIDocumentForm>
+ </bundle>
+Index: apps/portlet-explorer/src/main/webapp/groovy/webui/component/explorer/UIDocumentFormController.gtmpl
+===================================================================
+--- apps/portlet-explorer/src/main/webapp/groovy/webui/component/explorer/UIDocumentFormController.gtmpl	(revision 72424)
++++ apps/portlet-explorer/src/main/webapp/groovy/webui/component/explorer/UIDocumentFormController.gtmpl	(working copy)
+@@ -28,7 +28,7 @@
+ 		%>	
+ 	<% } %>
+ </div>
+-<script type="text/javascript" src="/ecmexplorer/javascript/eXo/ecm/CloseEvents.js"></script>
++<script type="text/javascript" src="/eXoWCMResources/javascript/eXo/wcm/backoffice/private/CloseEvents.js"></script>
+ <%  
+ 	String closeConfirmationMsg = "UIDocumentForm.msg.confirm-close";
+ 	String navigateConfirmationMsg = "UIDocumentForm.msg.confirm-navigate";
+Index: apps/portlet-explorer/src/main/webapp/javascript/eXo/ecm/CloseEvents.js
+===================================================================
+--- apps/portlet-explorer/src/main/webapp/javascript/eXo/ecm/CloseEvents.js	(revision 72424)
++++ apps/portlet-explorer/src/main/webapp/javascript/eXo/ecm/CloseEvents.js	(working copy)
+@@ -1,212 +0,0 @@
+-﻿/**
+- * Variable to check if some content has changed
+- * - true if some content has changed
+- **/
+-var b_changed = false;
+-var document_closing_confirm_msg = "";
+-var document_navigating_confirm_msg = "";
+-
+-/**
+- * Change the current state to inform some content has changed
+- **/
+-function changed() {
+-  b_changed = true;
+-}
+-
+-/**
+- * UPDATE AJAX GET METHOD
+- * - manage changes popup
+- **/
+-
+-function ajaxGet(url, callback) {
+-  var bypassActionbar= -1; //url.indexOf("uicomponent=UIActionBar_");
+-  if (b_changed && bypassActionbar<=0) {
+-    var answer = confirm(document_navigating_confirm_msg);
+-    if (answer) {
+-      b_changed = false;
+-    } else {
+-      return;
+-    }
+-    
+-  }
+-
+-  if (!callback) callback = null ;
+-  doRequest("Get", url, null, callback) ;
+-};
+-
+-/**
+- * UPDATE FORM SUBMIT METHOD
+- * - manage changes popup
+- * - manage CKeditor update in textareas
+- **/
+-function setClosingConfirmationMsg(msg) {
+-  document_closing_confirm_msg = msg;
+-}
+-
+-function setNavigatingConfirmationMsg(msg) {
+-  document_navigating_confirm_msg = msg;
+-}
+-UIForm.prototype.submitForm = function(formId, action, useAjax, callback) {
+- if(action.toLowerCase() == "close") {
+-   if (b_changed) {      
+-			var answer = confirm(document_closing_confirm_msg);
+-    	if (answer) {
+-      	b_changed = false;
+-    	} 
+-			else {
+-      	return;
+-    	}
+-   }
+- }
+- 
+- if (!callback) callback = null;
+- var form = this.getFormElemt(formId) ;
+- //TODO need review try-cactch block for form doesn't use FCK
+- try {
+-  if (FCKeditorAPI && typeof FCKeditorAPI == "object") {
+-    for ( var name in FCKeditorAPI.__Instances ) {
+-      var oEditor ;
+-      try {
+-        oEditor = FCKeditorAPI.__Instances[name] ;
+-        if (oEditor && oEditor.GetParentForm && oEditor.GetParentForm() == form ) {
+-          oEditor.UpdateLinkedField() ;
+-        }
+-      } catch(e) {
+-        continue ;
+-      }
+-    }
+-  }
+- } catch(e) {}
+-
+- try {
+-  
+-  if (CKEDITOR && typeof CKEDITOR == "object") {
+-    for ( var name in CKEDITOR.instances ) {
+-      var oEditor ;
+-      try {
+-        oEditor = CKEDITOR.instances[name] ;
+-        if (oEditor && document.getElementById(name)) {
+-            var rendered = eXo.core.DOMUtil.findNextElementByTagName(document.getElementById(name), 'span').id.indexOf('cke');
+-            if (rendered == 0) document.getElementById(name).value = oEditor.getData();
+-        }
+-      } catch(e) {
+-        continue ;
+-      }
+-    }
+-  }
+- } catch(e) {}
+-
+-  form.elements['formOp'].value = action ;
+-  if(useAjax) {
+-    b_changed = false;
+-    ajaxPost(form, callback) ;
+-  } else {
+-    form.submit();
+-  }
+-} ;
+-eXo.webui.UIForm = new UIForm();
+-/**
+- * END UPDATE FORM
+- **/
+-
+-/**
+- * Submits a form by Ajax, with the given action and the given parameters
+- * Calls ajaxPost of PortalHttpRequest
+- * Note: ie bug  you cannot have more than one button tag
+- */
+-UIForm.prototype.submitEvent = function(formId, action, params) {
+-  var form = this.getFormElemt(formId) ;
+-	 try {
+-	  if (FCKeditorAPI && typeof FCKeditorAPI == "object") {
+-	 	  for ( var name in FCKeditorAPI.__Instances ) {
+-	 	  	var oEditor = FCKeditorAPI.__Instances[name] ;
+-	 	  	if ( oEditor.GetParentForm && oEditor.GetParentForm() == form ) {
+-	 	  		oEditor.UpdateLinkedField() ;
+-	 	  	}
+-	  	}
+-	  }
+-	 } catch(e) {}
+-	 
+-	  try {
+-
+-	  if (CKEDITOR && typeof CKEDITOR == "object") {
+-	    for ( var name in CKEDITOR.instances ) {
+-	      var oEditor ;
+-	      try {
+-	        oEditor = CKEDITOR.instances[name] ;
+-	        if (oEditor && document.getElementById(name)) {
+-	            var rendered = eXo.core.DOMUtil.findNextElementByTagName(document.getElementById(name), 'span').id.indexOf('cke');
+-	            if (rendered == 0) document.getElementById(name).value = oEditor.getData();
+-	        }
+-	      } catch(e) {
+-	        continue ;
+-	      }
+-	    }
+-	  }
+-	 } catch(e) {}
+-
+-	 
+-  form.elements['formOp'].value = action ; 
+-  if(!form.originalAction) form.originalAction = form.action ; 
+-	form.action =  form.originalAction +  encodeURI(params) ;
+-  b_changed = false;
+-  ajaxPost(form) ;
+-} ;
+-
+-/**
+- * Before we change the url, we check if the content has changed
+- * Inform the user with a popup
+- **/
+-
+-function closeIt(e) {
+-  if (b_changed) {
+-    var e = e || window.event;
+-    // For IE and Firefox
+-    if (e) {
+-      e.returnValue = 'The changes you made will be lost if you navigate away from this page.';
+-    }
+-  
+-    // For Safari
+-    return 'The changes you made will be lost if you navigate away from this page.';
+-  }
+-}
+-
+-/**
+- * Catch any url changes in the browser
+- **/
+-window.onbeforeunload = closeIt;
+-
+-/**
+- * Catch when some content has changed in the form
+- **/
+-document.getElementById("UIDocumentForm").onchange = changed;
+-
+-
+-/**
+- * Update each textarea when you type inside CKEditor
+- * Inform the page that some content has changed
+- **/
+- try {
+-  if (CKEDITOR && typeof CKEDITOR == "object") {
+-    for ( var name in CKEDITOR.instances ) {
+-      var oEditor ;
+-      try {
+-        oEditor = CKEDITOR.instances[name] ;
+-        /**
+-         * inform the content has changed
+-         * update the textarea with last modifiedcontent
+-         */
+-		oEditor.on( 'key', function() {
+-		  b_changed = true;
+-        });
+-
+-
+-
+-      } catch(e) {
+-        continue ;
+-      }
+-    }
+-  }
+- } catch(e) {}
+-
+-
+Index: apps/resources-wcm/src/main/webapp/javascript/eXo/wcm/backoffice/private/CloseEvents.js
+===================================================================
+--- apps/resources-wcm/src/main/webapp/javascript/eXo/wcm/backoffice/private/CloseEvents.js	(revision 0)
++++ apps/resources-wcm/src/main/webapp/javascript/eXo/wcm/backoffice/private/CloseEvents.js	(revision 0)
+@@ -0,0 +1,212 @@
++﻿/**
++ * Variable to check if some content has changed
++ * - true if some content has changed
++ **/
++var b_changed = false;
++var document_closing_confirm_msg = "";
++var document_navigating_confirm_msg = "";
++
++/**
++ * Change the current state to inform some content has changed
++ **/
++function changed() {
++  b_changed = true;
++}
++
++/**
++ * UPDATE AJAX GET METHOD
++ * - manage changes popup
++ **/
++
++function ajaxGet(url, callback) {
++  var bypassActionbar= -1; //url.indexOf("uicomponent=UIActionBar_");
++  if (b_changed && bypassActionbar<=0) {
++    var answer = confirm(document_navigating_confirm_msg);
++    if (answer) {
++      b_changed = false;
++    } else {
++      return;
++    }
++    
++  }
++
++  if (!callback) callback = null ;
++  doRequest("Get", url, null, callback) ;
++};
++
++/**
++ * UPDATE FORM SUBMIT METHOD
++ * - manage changes popup
++ * - manage CKeditor update in textareas
++ **/
++function setClosingConfirmationMsg(msg) {
++  document_closing_confirm_msg = msg;
++}
++
++function setNavigatingConfirmationMsg(msg) {
++  document_navigating_confirm_msg = msg;
++}
++UIForm.prototype.submitForm = function(formId, action, useAjax, callback) {
++ if(action.toLowerCase() == "close") {
++   if (b_changed) {      
++			var answer = confirm(document_closing_confirm_msg);
++    	if (answer) {
++      	b_changed = false;
++    	} 
++			else {
++      	return;
++    	}
++   }
++ }
++ 
++ if (!callback) callback = null;
++ var form = this.getFormElemt(formId) ;
++ //TODO need review try-cactch block for form doesn't use FCK
++ try {
++  if (FCKeditorAPI && typeof FCKeditorAPI == "object") {
++    for ( var name in FCKeditorAPI.__Instances ) {
++      var oEditor ;
++      try {
++        oEditor = FCKeditorAPI.__Instances[name] ;
++        if (oEditor && oEditor.GetParentForm && oEditor.GetParentForm() == form ) {
++          oEditor.UpdateLinkedField() ;
++        }
++      } catch(e) {
++        continue ;
++      }
++    }
++  }
++ } catch(e) {}
++
++ try {
++  
++  if (CKEDITOR && typeof CKEDITOR == "object") {
++    for ( var name in CKEDITOR.instances ) {
++      var oEditor ;
++      try {
++        oEditor = CKEDITOR.instances[name] ;
++        if (oEditor && document.getElementById(name)) {
++            var rendered = eXo.core.DOMUtil.findNextElementByTagName(document.getElementById(name), 'span').id.indexOf('cke');
++            if (rendered == 0) document.getElementById(name).value = oEditor.getData();
++        }
++      } catch(e) {
++        continue ;
++      }
++    }
++  }
++ } catch(e) {}
++
++  form.elements['formOp'].value = action ;
++  if(useAjax) {
++    b_changed = false;
++    ajaxPost(form, callback) ;
++  } else {
++    form.submit();
++  }
++} ;
++eXo.webui.UIForm = new UIForm();
++/**
++ * END UPDATE FORM
++ **/
++
++/**
++ * Submits a form by Ajax, with the given action and the given parameters
++ * Calls ajaxPost of PortalHttpRequest
++ * Note: ie bug  you cannot have more than one button tag
++ */
++UIForm.prototype.submitEvent = function(formId, action, params) {
++  var form = this.getFormElemt(formId) ;
++	 try {
++	  if (FCKeditorAPI && typeof FCKeditorAPI == "object") {
++	 	  for ( var name in FCKeditorAPI.__Instances ) {
++	 	  	var oEditor = FCKeditorAPI.__Instances[name] ;
++	 	  	if ( oEditor.GetParentForm && oEditor.GetParentForm() == form ) {
++	 	  		oEditor.UpdateLinkedField() ;
++	 	  	}
++	  	}
++	  }
++	 } catch(e) {}
++	 
++	  try {
++
++	  if (CKEDITOR && typeof CKEDITOR == "object") {
++	    for ( var name in CKEDITOR.instances ) {
++	      var oEditor ;
++	      try {
++	        oEditor = CKEDITOR.instances[name] ;
++	        if (oEditor && document.getElementById(name)) {
++	            var rendered = eXo.core.DOMUtil.findNextElementByTagName(document.getElementById(name), 'span').id.indexOf('cke');
++	            if (rendered == 0) document.getElementById(name).value = oEditor.getData();
++	        }
++	      } catch(e) {
++	        continue ;
++	      }
++	    }
++	  }
++	 } catch(e) {}
++
++	 
++  form.elements['formOp'].value = action ; 
++  if(!form.originalAction) form.originalAction = form.action ; 
++	form.action =  form.originalAction +  encodeURI(params) ;
++  b_changed = false;
++  ajaxPost(form) ;
++} ;
++
++/**
++ * Before we change the url, we check if the content has changed
++ * Inform the user with a popup
++ **/
++
++function closeIt(e) {
++  if (b_changed) {
++    var e = e || window.event;
++    // For IE and Firefox
++    if (e) {
++      e.returnValue = 'The changes you made will be lost if you navigate away from this page.';
++    }
++  
++    // For Safari
++    return 'The changes you made will be lost if you navigate away from this page.';
++  }
++}
++
++/**
++ * Catch any url changes in the browser
++ **/
++window.onbeforeunload = closeIt;
++
++/**
++ * Catch when some content has changed in the form
++ **/
++document.getElementById("UIDocumentForm").onchange = changed;
++
++
++/**
++ * Update each textarea when you type inside CKEditor
++ * Inform the page that some content has changed
++ **/
++ try {
++  if (CKEDITOR && typeof CKEDITOR == "object") {
++    for ( var name in CKEDITOR.instances ) {
++      var oEditor ;
++      try {
++        oEditor = CKEDITOR.instances[name] ;
++        /**
++         * inform the content has changed
++         * update the textarea with last modifiedcontent
++         */
++		oEditor.on( 'key', function() {
++		  b_changed = true;
++        });
++
++
++
++      } catch(e) {
++        continue ;
++      }
++    }
++  }
++ } catch(e) {}
++
++
+Index: core/webui/src/main/java/org/exoplatform/ecm/webui/form/UIDialogForm.java
+===================================================================
+--- core/webui/src/main/java/org/exoplatform/ecm/webui/form/UIDialogForm.java	(revision 72424)
++++ core/webui/src/main/java/org/exoplatform/ecm/webui/form/UIDialogForm.java	(working copy)
+@@ -1085,7 +1085,8 @@
+             }
+           }
+         }                
+-        addUIFormInput(uiMulti);
++        if (getChildById(name) == null)
++          addUIFormInput(uiMulti);
+       }
+       List<String> valueList = new ArrayList<String>();
+       boolean valueListIsSet = false;
+@@ -1311,7 +1312,7 @@
+       ret.add(formInput);
+       return ret;
+     }
+-    if (!formField.isMultiValues()) {
++    if (!formField.isMultiValues() && isFirstTimeRender) {
+       if(!isShowingComponent && !isRemovePreference) {
+         if(node != null && (node.isNodeType("nt:file") || isNTFile)) {
+           Node jcrContentNode = node.getNode("jcr:content");
+@@ -1322,7 +1323,7 @@
+           }
+         }
+       }
+-      if(isNotEditNode && !isShowingComponent && !isRemovePreference) {
++      if(isNotEditNode && !isShowingComponent && !isRemovePreference && isFirstTimeRender) {
+         Node childNode = getChildNode();
+         if(node != null && node.hasNode("jcr:content") && childNode != null) {
+           Node jcrContentNode = node.getNode("jcr:content");
+@@ -1357,7 +1358,7 @@
+         values = new Value[] {node.getSession().getValueFactory().createValue("")};
+       }
+     }
+-    if (values != null) {
++    if (values != null && isFirstTimeRender) {
+       for (Value v : values) {
+         UIFormInputBase uiFormInput = formField.createUIFormInput();
+         if (uiFormInput instanceof UIFormWYSIWYGInput)
+@@ -1406,7 +1407,7 @@
+         if(label != null) uiMulti.setLabel(label);
+       }
+     } else {
+-      if (richtextList.size() > 0)
++      if (getChildById(name) == null && richtextList.size() > 0)
+         addUIFormInput(richtextList.get(0));
+     }
+     renderField(name);
