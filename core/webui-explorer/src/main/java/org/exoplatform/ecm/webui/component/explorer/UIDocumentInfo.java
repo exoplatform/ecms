@@ -790,15 +790,27 @@ public class UIDocumentInfo extends UIContainer implements NodePresentation {
   }
   
   private List<Node> filterNodeList(List<Node> sourceNodeList) throws Exception {
-  	List<Node> ret = new ArrayList<Node>();
-  	
-  	for (Node node : sourceNodeList) 
-  		try {
-	  		if (filterOk(node))
-	  			ret.add(node);
-  		} catch (Exception ex) {}
-  	
-  	return ret;
+    List<Node> ret = new ArrayList<Node>();
+
+    if (!this.hasFilters()) {
+      return sourceNodeList;
+    }
+
+    for (Node node : sourceNodeList)
+      try {
+        if (filterOk(node))
+          ret.add(node);
+      } catch (Exception ex) {
+      }
+
+    return ret;
+  }
+
+  private boolean hasFilters() {
+    UIJCRExplorer uiExplorer = this.getAncestorOfType(UIJCRExplorer.class);
+    Set<String> allItemsFilterSet = uiExplorer.getAllItemFilterMap();
+    Set<String> allItemsByTypeFilterSet = uiExplorer.getAllItemByTypeFilterMap();
+    return (allItemsByTypeFilterSet.size() > 0 || allItemsFilterSet.size() > 0);
   }
   
   private boolean filterOk(Node node) throws Exception {
