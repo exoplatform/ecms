@@ -377,8 +377,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>//div[contains(@onclick,&quot;action=Close&quot;)]</td>
+	<td>pause</td>
+	<td>1000</td>
 	<td></td>
 </tr>
 <tr>
@@ -402,6 +402,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>echo</td>
+	<td>-- Edit Navigations</td>
+	<td></td>
+</tr>
+<tr>
 	<td>waitForElementPresent</td>
 	<td>link=Edit Navigation</td>
 	<td></td>
@@ -409,6 +414,11 @@
 <tr>
 	<td>click</td>
 	<td>link=Edit Navigation</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>-- Right click</td>
 	<td></td>
 </tr>
 <tr>
@@ -422,6 +432,16 @@
 	<td></td>
 </tr>
 <tr>
+	<td>echo</td>
+	<td>-- Delete Node</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Delete Node</td>
+	<td></td>
+</tr>
+<tr>
 	<td>click</td>
 	<td>link=Delete Node</td>
 	<td></td>
@@ -432,13 +452,18 @@
 	<td></td>
 </tr>
 <tr>
+	<td>echo</td>
+	<td>-- Save</td>
+	<td></td>
+</tr>
+<tr>
 	<td>waitForElementPresent</td>
-	<td>link=Save</td>
+	<td>//a[contains(text(),'Save')]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>link=Save</td>
+	<td>//a[contains(text(),'Save')]</td>
 	<td></td>
 </tr>
 <tr>
@@ -447,8 +472,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>link=Sign out</td>
+	<td>pause</td>
+	<td>1000</td>
 	<td></td>
 </tr>
 <tr>

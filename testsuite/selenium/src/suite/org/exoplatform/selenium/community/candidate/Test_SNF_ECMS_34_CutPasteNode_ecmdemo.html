@@ -78,57 +78,22 @@
 </tr>
 <tr>
 	<td>echo</td>
-	<td>--Open Private driver</td>
+	<td>--Open Site Management driver</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=Private</td>
+	<td>link=Sites Management</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>link=Private</td>
-	<td></td>
-</tr>
-<tr>
-	<td>echo</td>
-	<td>-Go to Admin View</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>//a[@title='Admin View']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>//a[@title='Admin View']</td>
+	<td>link=Sites Management</td>
 	<td></td>
 </tr>
 <tr>
 	<td>pause</td>
-	<td>10000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>echo</td>
-	<td>-- Go to Action tab</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>link=Actions</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>link=Actions</td>
-	<td></td>
-</tr>
-<tr>
-	<td>pause</td>
-	<td>10000</td>
+	<td>1000</td>
 	<td></td>
 </tr>
 <tr>
@@ -157,6 +122,11 @@
 	<td>Test_SNF_ECMS_34</td>
 </tr>
 <tr>
+	<td>type</td>
+	<td>title</td>
+	<td>Test_SNF_ECMS_34</td>
+</tr>
+<tr>
 	<td>waitForElementPresent</td>
 	<td>link=Save</td>
 	<td></td>
@@ -168,7 +138,7 @@
 </tr>
 <tr>
 	<td>pause</td>
-	<td>10000</td>
+	<td>1000</td>
 	<td></td>
 </tr>
 <tr>
@@ -197,13 +167,23 @@
 	<td>Test_SNF_ECMS_34_add</td>
 </tr>
 <tr>
+	<td>type</td>
+	<td>title</td>
+	<td>Test_SNF_ECMS_34_add</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Save</td>
+	<td></td>
+</tr>
+<tr>
 	<td>click</td>
 	<td>link=Save</td>
 	<td></td>
 </tr>
 <tr>
 	<td>pause</td>
-	<td>10000</td>
+	<td>1000</td>
 	<td></td>
 </tr>
 <tr>
@@ -223,7 +203,7 @@
 </tr>
 <tr>
 	<td>pause</td>
-	<td>10000</td>
+	<td>1000</td>
 	<td></td>
 </tr>
 <tr>
@@ -238,7 +218,7 @@
 </tr>
 <tr>
 	<td>pause</td>
-	<td>10000</td>
+	<td>1000</td>
 	<td></td>
 </tr>
 <tr>
@@ -263,7 +243,7 @@
 </tr>
 <tr>
 	<td>pause</td>
-	<td>10000</td>
+	<td>1000</td>
 	<td></td>
 </tr>
 <tr>
@@ -298,12 +278,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@title=&quot;Test_SNF_ECMS_34&quot;]</td>
+	<td>//div[@id='iconTreeExplorer']/div[2]/a[@title='Test_SNF_ECMS_34 ']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyElementPresent</td>
-	<td>//div[@title=&quot;Test_SNF_ECMS_34&quot;]</td>
+	<td>//div[@id='iconTreeExplorer']/div[2]/a[@title='Test_SNF_ECMS_34 ']</td>
 	<td></td>
 </tr>
 <tr>

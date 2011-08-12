@@ -92,33 +92,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>echo</td>
-	<td>-Go to Admin View</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>//a[@title='Admin View']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>//a[@title='Admin View']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>echo</td>
-	<td>-- Go to Action tab</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>link=Actions</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>link=Actions</td>
+	<td>pause</td>
+	<td>1000</td>
 	<td></td>
 </tr>
 <tr>
@@ -147,6 +122,11 @@
 	<td>Test_SNF_ECMS_37</td>
 </tr>
 <tr>
+	<td>type</td>
+	<td>title</td>
+	<td>Test_SNF_ECMS_37</td>
+</tr>
+<tr>
 	<td>waitForElementPresent</td>
 	<td>link=Save</td>
 	<td></td>
@@ -158,7 +138,7 @@
 </tr>
 <tr>
 	<td>pause</td>
-	<td>3000</td>
+	<td>1000</td>
 	<td></td>
 </tr>
 <tr>
@@ -184,6 +164,11 @@
 <tr>
 	<td>type</td>
 	<td>name</td>
+	<td>Test_SNF_ECMS_37_add</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>title</td>
 	<td>Test_SNF_ECMS_37_add</td>
 </tr>
 <tr>
@@ -308,7 +293,7 @@
 </tr>
 <tr>
 	<td>pause</td>
-	<td>10000</td>
+	<td>1000</td>
 	<td></td>
 </tr>
 <tr>
@@ -318,23 +303,23 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@id='UISelectPathPanel']//a[contains(@href,&quot;Test_SNF_ECMS_37_add&quot;)]</td>
+	<td>//div[@id='UISelectPathPanel']//a[contains(@href,&quot;testsnfecms37add&quot;)]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[@id='UISelectPathPanel']//a[contains(@href,&quot;Test_SNF_ECMS_37_add&quot;)]</td>
+	<td>//div[@id='UISelectPathPanel']//a[contains(@href,&quot;testsnfecms37add&quot;)]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForValue</td>
 	<td>symLinkName</td>
-	<td>Test_SNF_ECMS_37_add.lnk</td>
+	<td>testsnfecms37add.lnk</td>
 </tr>
 <tr>
 	<td>verifyValue</td>
 	<td>symLinkName</td>
-	<td>Test_SNF_ECMS_37_add.lnk</td>
+	<td>testsnfecms37add.lnk</td>
 </tr>
 <tr>
 	<td>echo</td>
@@ -353,7 +338,7 @@
 </tr>
 <tr>
 	<td>pause</td>
-	<td>5000</td>
+	<td>1000</td>
 	<td></td>
 </tr>
 <tr>
@@ -398,7 +383,7 @@
 </tr>
 <tr>
 	<td>pause</td>
-	<td>5000</td>
+	<td>1000</td>
 	<td></td>
 </tr>
 <tr>
