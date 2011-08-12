@@ -14,6 +14,7 @@
   import javax.jcr.Session;
   import org.apache.commons.lang.StringEscapeUtils;
   import java.util.ArrayList;
+  import org.exoplatform.services.jcr.util.Text;
 %>
 <% 
   def resultList = uicomponent.getCurrentList(); 
@@ -132,7 +133,7 @@
             </td>
             <td>
               <div class="Text" title="<%=dateFormat.format(uicomponent.getDateCreated(node))%>">
-                <%=linkNode.getName()%>
+                <%=Text.unescapeIllegalJcrChars(linkNode.getName())%>
               </div>
               <div>$excerpt</div>
               <div><%=_ctx.appRes("UISearchResult.header.path")%>: <%=linkNode.getPath()%></div>

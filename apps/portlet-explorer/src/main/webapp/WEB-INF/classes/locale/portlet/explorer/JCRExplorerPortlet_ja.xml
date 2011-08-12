@@ -1898,6 +1898,7 @@
     <msg>
       <path-not-found>パスは見つかりません</path-not-found>
       <access-denied>アクセス出来ません! ノードを読む為の権限がありません。</access-denied>
+      <keyword-not-support>The keyword is invalid. Some characters are not supported.</keyword-not-support>
     </msg>
     <label>
       <exeButton>Go</exeButton>

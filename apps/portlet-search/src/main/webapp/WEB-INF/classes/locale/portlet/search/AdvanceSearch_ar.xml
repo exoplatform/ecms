@@ -48,4 +48,11 @@
       <Cancel>إلغاء</Cancel>
     </action>
   </UISearchPageLayoutManager>
+  <UISearchForm>
+  	 <message>
+  	     <keyword-not-support>The keyword is invalid. Some characters are not supported.</keyword-not-support>
+		 <keyword-not-empty>The value of keyword should not null or empty!</keyword-not-empty>
+		 <not-checked>Search type is not checked. Choose a search type, please.</not-checked>
+  	 </message>
+  </UISearchForm>
 </bundle>

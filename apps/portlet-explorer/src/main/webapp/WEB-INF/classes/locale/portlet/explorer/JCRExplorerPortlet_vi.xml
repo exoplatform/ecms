@@ -1910,6 +1910,7 @@
     <msg>
       <path-not-found>Đường dẫn không tìm thấy</path-not-found>
       <access-denied>Truy nhập bị hủy bỏ!Bạn không có quyền.</access-denied>
+      <keyword-not-support>The keyword is invalid. Some characters are not supported.</keyword-not-support>
     </msg>
     <label>
       <exeButton>Go</exeButton>

@@ -17,22 +17,19 @@
 package org.exoplatform.services.wcm.publication.listener.post;
 
 import javax.jcr.Node;
-import javax.jcr.NodeIterator;
 import javax.jcr.Session;
 
 import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.CmsService;
-import org.exoplatform.services.cms.drives.ManageDriveService;
 import org.exoplatform.services.cms.link.LinkManager;
-import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.impl.core.NodeImpl;
+import org.exoplatform.services.jcr.util.Text;
 import org.exoplatform.services.listener.Event;
 import org.exoplatform.services.listener.Listener;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
-import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.core.WCMConfigurationService;
 import org.exoplatform.services.wcm.core.WebSchemaConfigService;
 import org.exoplatform.services.wcm.publication.WCMPublicationService;
@@ -78,7 +75,7 @@ public class PostCreateContentEventListener extends Listener<CmsService, Node>{
     if(currentNode.canAddMixin("exo:rss-enable")) {
       currentNode.addMixin("exo:rss-enable");
       if(!currentNode.hasProperty("exo:title")) {
-        currentNode.setProperty("exo:title",currentNode.getName()); 
+    	  currentNode.setProperty("exo:title",Text.unescapeIllegalJcrChars(currentNode.getName())); 
       }      
     }
     if(currentNode.isNodeType("exo:cssFile") || 

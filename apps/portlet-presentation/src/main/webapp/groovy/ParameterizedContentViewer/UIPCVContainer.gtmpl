@@ -6,6 +6,7 @@
 	import org.exoplatform.services.wcm.core.WCMConfigurationService;
 	import org.exoplatform.wcm.webui.pcv.UIPCVPresentation;
 	import org.exoplatform.wcm.webui.Utils;
+	import org.exoplatform.services.jcr.util.Text;
 
 	def node = uicomponent.getNode();
 	def isPrint = uicomponent.getIsPrint();
@@ -18,7 +19,7 @@
 	<div class="PCV">
 	<%
 		if (node != null) {
-			def title = uicomponent.getTitle(node);
+			def title = Text.unescapeIllegalJcrChars(uicomponent.getTitle(node));
 			def dateCreated = uicomponent.getCreatedDate(node);
 			boolean isEditMode = false;
 			if(uicomponent.isShowTitle()) {

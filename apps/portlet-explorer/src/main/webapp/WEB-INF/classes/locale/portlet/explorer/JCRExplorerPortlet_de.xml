@@ -1733,6 +1733,7 @@
     <msg>
       <path-not-found>Pfad nicht gefunden</path-not-found>
       <access-denied>Zugang verweigert ! Sie haben keien Rechtleseknoten</access-denied>
+      <keyword-not-support>The keyword is invalid. Some characters are not supported.</keyword-not-support>
     </msg>
     <label>
       <exeButton>Los</exeButton>

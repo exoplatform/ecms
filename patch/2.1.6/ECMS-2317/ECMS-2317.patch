@@ -1,0 +1,457 @@
+Index: apps/portlet-presentation/src/main/webapp/groovy/ParameterizedContentViewer/UIPCVContainer.gtmpl
+===================================================================
+--- apps/portlet-presentation/src/main/webapp/groovy/ParameterizedContentViewer/UIPCVContainer.gtmpl	(revision 71192)
++++ apps/portlet-presentation/src/main/webapp/groovy/ParameterizedContentViewer/UIPCVContainer.gtmpl	(working copy)
+@@ -6,6 +6,7 @@
+ 	import org.exoplatform.services.wcm.core.WCMConfigurationService;
+ 	import org.exoplatform.wcm.webui.pcv.UIPCVPresentation;
+ 	import org.exoplatform.wcm.webui.Utils;
++	import org.exoplatform.services.jcr.util.Text;
+ 
+ 	def node = uicomponent.getNode();
+ 	def isPrint = uicomponent.getIsPrint();
+@@ -18,7 +19,7 @@
+ 	<div class="PCV">
+ 	<%
+ 		if (node != null) {
+-			def title = uicomponent.getTitle(node);
++			def title = Text.unescapeIllegalJcrChars(uicomponent.getTitle(node));
+ 			def dateCreated = uicomponent.getCreatedDate(node);
+ 			boolean isEditMode = false;
+ 			if(uicomponent.isShowTitle()) {
+Index: apps/portlet-explorer/src/main/webapp/groovy/webui/component/explorer/search/UISearchResult.gtmpl
+===================================================================
+--- apps/portlet-explorer/src/main/webapp/groovy/webui/component/explorer/search/UISearchResult.gtmpl	(revision 71192)
++++ apps/portlet-explorer/src/main/webapp/groovy/webui/component/explorer/search/UISearchResult.gtmpl	(working copy)
+@@ -14,6 +14,7 @@
+   import javax.jcr.Session;
+   import org.apache.commons.lang.StringEscapeUtils;
+   import java.util.ArrayList;
++  import org.exoplatform.services.jcr.util.Text;
+ %>
+ <% 
+   def resultList = uicomponent.getCurrentList(); 
+@@ -132,7 +133,7 @@
+             </td>
+             <td>
+               <div class="Text" title="<%=dateFormat.format(uicomponent.getDateCreated(node))%>">
+-                <%=linkNode.getName()%>
++                <%=Text.unescapeIllegalJcrChars(linkNode.getName())%>
+               </div>
+               <div>$excerpt</div>
+               <div><%=_ctx.appRes("UISearchResult.header.path")%>: <%=linkNode.getPath()%></div>
+Index: apps/portlet-explorer/src/main/webapp/WEB-INF/classes/locale/portlet/explorer/JCRExplorerPortlet_fr.xml
+===================================================================
+--- apps/portlet-explorer/src/main/webapp/WEB-INF/classes/locale/portlet/explorer/JCRExplorerPortlet_fr.xml	(revision 71192)
++++ apps/portlet-explorer/src/main/webapp/WEB-INF/classes/locale/portlet/explorer/JCRExplorerPortlet_fr.xml	(working copy)
+@@ -1915,6 +1915,7 @@
+     <msg>
+       <path-not-found>Répertoire introuvable</path-not-found>
+       <access-denied>Accès interdit ! Vous n'avez pas les droits suffisants pour consulter ce noeud.</access-denied>
++      <keyword-not-support>Le mot clé est invalide. Certains caractères ne sont pas autorisés.</keyword-not-support>
+     </msg>
+     <label>
+       <exeButton>OK</exeButton>
+Index: apps/portlet-explorer/src/main/webapp/WEB-INF/classes/locale/portlet/explorer/JCRExplorerPortlet_de.xml
+===================================================================
+--- apps/portlet-explorer/src/main/webapp/WEB-INF/classes/locale/portlet/explorer/JCRExplorerPortlet_de.xml	(revision 71192)
++++ apps/portlet-explorer/src/main/webapp/WEB-INF/classes/locale/portlet/explorer/JCRExplorerPortlet_de.xml	(working copy)
+@@ -1733,6 +1733,7 @@
+     <msg>
+       <path-not-found>Pfad nicht gefunden</path-not-found>
+       <access-denied>Zugang verweigert ! Sie haben keien Rechtleseknoten</access-denied>
++      <keyword-not-support>The keyword is invalid. Some characters are not supported.</keyword-not-support>
+     </msg>
+     <label>
+       <exeButton>Los</exeButton>
+Index: apps/portlet-explorer/src/main/webapp/WEB-INF/classes/locale/portlet/explorer/JCRExplorerPortlet_it.properties
+===================================================================
+--- apps/portlet-explorer/src/main/webapp/WEB-INF/classes/locale/portlet/explorer/JCRExplorerPortlet_it.properties	(revision 71192)
++++ apps/portlet-explorer/src/main/webapp/WEB-INF/classes/locale/portlet/explorer/JCRExplorerPortlet_it.properties	(working copy)
+@@ -933,6 +933,7 @@
+ UITicketForm.title=Crea Ticket
+ UIDocumentInfo.msg.path-not-found=Questo elemento \u00E8 stato cancellato o modificato. Fare clic sul pulsante Aggiorna.
+ UIAddressBar.msg.access-denied=Accesso negato\! Non hai il diritto di leggere il nodo
++UIAddressBar.msg.keyword-not-support=The keyword is invalid. Some characters are not supported.
+ UICategoriesAddedList.label.delete=Elimina
+ UISingleExternalMetadataForm.action.Add=Aggiungi
+ UIThumbnailForm.title.remove-thumbnail=Rimuovi questa anteprima
+Index: apps/portlet-explorer/src/main/webapp/WEB-INF/classes/locale/portlet/explorer/JCRExplorerPortlet_nl.xml
+===================================================================
+--- apps/portlet-explorer/src/main/webapp/WEB-INF/classes/locale/portlet/explorer/JCRExplorerPortlet_nl.xml	(revision 71192)
++++ apps/portlet-explorer/src/main/webapp/WEB-INF/classes/locale/portlet/explorer/JCRExplorerPortlet_nl.xml	(working copy)
+@@ -1938,6 +1938,7 @@
+ 			<path-not-found>pad niet gevonden</path-not-found>
+ 			<access-denied>toegang geweigerd ! U hebt geen right lees node
+ 			</access-denied>
++			<keyword-not-support>The keyword is invalid. Some characters are not supported.</keyword-not-support>
+ 		</msg>
+ 		<label>
+ 			<exeButton>Ga</exeButton>
+Index: apps/portlet-explorer/src/main/webapp/WEB-INF/classes/locale/portlet/explorer/JCRExplorerPortlet_ja.xml
+===================================================================
+--- apps/portlet-explorer/src/main/webapp/WEB-INF/classes/locale/portlet/explorer/JCRExplorerPortlet_ja.xml	(revision 71192)
++++ apps/portlet-explorer/src/main/webapp/WEB-INF/classes/locale/portlet/explorer/JCRExplorerPortlet_ja.xml	(working copy)
+@@ -1898,6 +1898,7 @@
+     <msg>
+       <path-not-found>パスは見つかりません</path-not-found>
+       <access-denied>アクセス出来ません! ノードを読む為の権限がありません。</access-denied>
++      <keyword-not-support>The keyword is invalid. Some characters are not supported.</keyword-not-support>
+     </msg>
+     <label>
+       <exeButton>Go</exeButton>
+Index: apps/portlet-explorer/src/main/webapp/WEB-INF/classes/locale/portlet/explorer/JCRExplorerPortlet_vi.xml
+===================================================================
+--- apps/portlet-explorer/src/main/webapp/WEB-INF/classes/locale/portlet/explorer/JCRExplorerPortlet_vi.xml	(revision 71192)
++++ apps/portlet-explorer/src/main/webapp/WEB-INF/classes/locale/portlet/explorer/JCRExplorerPortlet_vi.xml	(working copy)
+@@ -1910,6 +1910,7 @@
+     <msg>
+       <path-not-found>Đường dẫn không tìm thấy</path-not-found>
+       <access-denied>Truy nhập bị hủy bỏ!Bạn không có quyền.</access-denied>
++      <keyword-not-support>The keyword is invalid. Some characters are not supported.</keyword-not-support>
+     </msg>
+     <label>
+       <exeButton>Go</exeButton>
+Index: apps/portlet-explorer/src/main/webapp/WEB-INF/classes/locale/portlet/explorer/JCRExplorerPortlet_ar.xml
+===================================================================
+--- apps/portlet-explorer/src/main/webapp/WEB-INF/classes/locale/portlet/explorer/JCRExplorerPortlet_ar.xml	(revision 71192)
++++ apps/portlet-explorer/src/main/webapp/WEB-INF/classes/locale/portlet/explorer/JCRExplorerPortlet_ar.xml	(working copy)
+@@ -1726,6 +1726,7 @@
+     <msg>
+       <path-not-found>المسار غير موجود</path-not-found>
+       <access-denied> غير مسموح! ليس لك التصريح المناسب للمشاهدة</access-denied>
++      <keyword-not-support>The keyword is invalid. Some characters are not supported.</keyword-not-support>
+     </msg>
+     <label>
+       <exeButton>أدى</exeButton>
+Index: apps/portlet-explorer/src/main/webapp/WEB-INF/classes/locale/portlet/explorer/JCRExplorerPortlet_en.xml
+===================================================================
+--- apps/portlet-explorer/src/main/webapp/WEB-INF/classes/locale/portlet/explorer/JCRExplorerPortlet_en.xml	(revision 71192)
++++ apps/portlet-explorer/src/main/webapp/WEB-INF/classes/locale/portlet/explorer/JCRExplorerPortlet_en.xml	(working copy)
+@@ -1911,6 +1911,7 @@
+     <msg>
+       <path-not-found>Path not found</path-not-found>
+       <access-denied>Access denied ! You have no right read node</access-denied>
++      <keyword-not-support>The keyword is invalid. Some characters are not supported.</keyword-not-support>
+     </msg>
+     <label>
+       <exeButton>Go</exeButton>
+Index: apps/portlet-explorer/src/main/webapp/WEB-INF/classes/locale/portlet/explorer/JCRExplorerPortlet_pt_BR.properties
+===================================================================
+--- apps/portlet-explorer/src/main/webapp/WEB-INF/classes/locale/portlet/explorer/JCRExplorerPortlet_pt_BR.properties	(revision 71192)
++++ apps/portlet-explorer/src/main/webapp/WEB-INF/classes/locale/portlet/explorer/JCRExplorerPortlet_pt_BR.properties	(working copy)
+@@ -932,6 +932,7 @@
+ UITicketForm.title=Criar Ticket
+ UIDocumentInfo.msg.path-not-found=Este elemento foi deletado ou modificado. Por favor clique no bot\u00e3o atualizar.
+ UIAddressBar.msg.access-denied=Acesso negado \! Voc\u00ea n\u00e3o tem direito de ler este node
++UIAddressBar.msg.keyword-not-support=The keyword is invalid. Some characters are not supported.
+ UICategoriesAddedList.label.delete=Deletar
+ UISingleExternalMetadataForm.action.Add=Adicionar
+ UIThumbnailForm.title.remove-thumbnail=Remover esta miniatura
+Index: apps/portlet-search/src/main/webapp/WEB-INF/classes/locale/portlet/search/AdvanceSearch_ja.xml
+===================================================================
+--- apps/portlet-search/src/main/webapp/WEB-INF/classes/locale/portlet/search/AdvanceSearch_ja.xml	(revision 71192)
++++ apps/portlet-search/src/main/webapp/WEB-INF/classes/locale/portlet/search/AdvanceSearch_ja.xml	(working copy)
+@@ -50,6 +50,8 @@
+   </UISearchPageLayoutManager>
+   <UISearchForm>
+   	 <message>
++  	   <keyword-not-support>The keyword is invalid. Some characters are not supported.</keyword-not-support>
++  	   <not-checked>Search type is not checked. Choose a search type, please.</not-checked>
+   	   <keyword-not-empty>キーワードの値が null または空です！</keyword-not-empty>
+   	 </message>
+   </UISearchForm>
+Index: apps/portlet-search/src/main/webapp/WEB-INF/classes/locale/portlet/search/AdvanceSearch_vi.xml
+===================================================================
+--- apps/portlet-search/src/main/webapp/WEB-INF/classes/locale/portlet/search/AdvanceSearch_vi.xml	(revision 71192)
++++ apps/portlet-search/src/main/webapp/WEB-INF/classes/locale/portlet/search/AdvanceSearch_vi.xml	(working copy)
+@@ -50,6 +50,8 @@
+   </UISearchPageLayoutManager>
+   <UISearchForm>
+   	 <message>
++  	   <keyword-not-support>The keyword is invalid. Some characters are not supported.</keyword-not-support>
++  	   <not-checked>Search type is not checked. Choose a search type, please.</not-checked>
+   	   <keyword-not-empty>Giá trị của khóa tìm kiếm không được rỗng hoặc trống!</keyword-not-empty>
+   	 </message>
+   </UISearchForm>
+Index: apps/portlet-search/src/main/webapp/WEB-INF/classes/locale/portlet/search/AdvanceSearch_ar.xml
+===================================================================
+--- apps/portlet-search/src/main/webapp/WEB-INF/classes/locale/portlet/search/AdvanceSearch_ar.xml	(revision 71192)
++++ apps/portlet-search/src/main/webapp/WEB-INF/classes/locale/portlet/search/AdvanceSearch_ar.xml	(working copy)
+@@ -48,4 +48,11 @@
+       <Cancel>إلغاء</Cancel>
+     </action>
+   </UISearchPageLayoutManager>
++  <UISearchForm>
++  	 <message>
++  	     <keyword-not-support>The keyword is invalid. Some characters are not supported.</keyword-not-support>
++		 <keyword-not-empty>The value of keyword should not null or empty!</keyword-not-empty>
++		 <not-checked>Search type is not checked. Choose a search type, please.</not-checked>
++  	 </message>
++  </UISearchForm>
+ </bundle>
+\ No newline at end of file
+Index: apps/portlet-search/src/main/webapp/WEB-INF/classes/locale/portlet/search/AdvanceSearch_en.xml
+===================================================================
+--- apps/portlet-search/src/main/webapp/WEB-INF/classes/locale/portlet/search/AdvanceSearch_en.xml	(revision 71192)
++++ apps/portlet-search/src/main/webapp/WEB-INF/classes/locale/portlet/search/AdvanceSearch_en.xml	(working copy)
+@@ -50,7 +50,9 @@
+   </UISearchPageLayoutManager>
+   <UISearchForm>
+   	 <message>
+-  	   <keyword-not-empty>The value of keyword is not null or empty!</keyword-not-empty>
++  	     <keyword-not-support>The keyword is invalid. Some characters are not supported.</keyword-not-support>
++		 <keyword-not-empty>The value of keyword should not null or empty!</keyword-not-empty>
++		 <not-checked>Search type is not checked. Choose a search type, please.</not-checked>
+   	 </message>
+   </UISearchForm>
+ </bundle>
+\ No newline at end of file
+Index: apps/portlet-search/src/main/webapp/WEB-INF/classes/locale/portlet/search/AdvanceSearch_pt_BR.properties
+===================================================================
+--- apps/portlet-search/src/main/webapp/WEB-INF/classes/locale/portlet/search/AdvanceSearch_pt_BR.properties	(revision 71192)
++++ apps/portlet-search/src/main/webapp/WEB-INF/classes/locale/portlet/search/AdvanceSearch_pt_BR.properties	(working copy)
+@@ -23,5 +23,7 @@
+ UIDefaultSearchForm.action.Search=Buscar
+ UIDefaultSearchResult.msg.new-suggestion=Sugest\u00e3o
+ UISearchForm.message.keyword-not-empty=O valor da palavra chave \u00e9 nulo ou vazio\!
++UISearchForm.message.keyword-not-support=The keyword is invalid. Some characters are not supported.
++UISearchForm.message.not-checked=Search type is not checked. Choose a search type, please.
+ UIDefaultSearchResult.label.ofAboutCaption=de cerca de
+ UISearchPageLayoutManager.label.searchResultBasePathInputSetAction=Caminho base
+Index: apps/portlet-search/src/main/webapp/WEB-INF/classes/locale/portlet/search/AdvanceSearch_fr.xml
+===================================================================
+--- apps/portlet-search/src/main/webapp/WEB-INF/classes/locale/portlet/search/AdvanceSearch_fr.xml	(revision 71192)
++++ apps/portlet-search/src/main/webapp/WEB-INF/classes/locale/portlet/search/AdvanceSearch_fr.xml	(working copy)
+@@ -50,7 +50,9 @@
+   </UISearchPageLayoutManager>
+   <UISearchForm>
+   	 <message>
+-  	   <keyword-not-empty>The value of keyword is not null or empty!</keyword-not-empty>
++  	   <keyword-not-support>Le mot clé est invalide. Certains caractères ne sont pas autorisés.</keyword-not-support>
++       <keyword-not-empty>La valeur de ce mot clé ne peut pas être nul ou vide</keyword-not-empty>
++       <not-checked>Le type de recherche n'est pas sélectionné. Veuillez en choisir un.</not-checked>
+   	 </message>
+   </UISearchForm>
+ </bundle>
+\ No newline at end of file
+Index: apps/portlet-search/src/main/webapp/WEB-INF/classes/locale/portlet/search/AdvanceSearch_it.properties
+===================================================================
+--- apps/portlet-search/src/main/webapp/WEB-INF/classes/locale/portlet/search/AdvanceSearch_it.properties	(revision 71192)
++++ apps/portlet-search/src/main/webapp/WEB-INF/classes/locale/portlet/search/AdvanceSearch_it.properties	(working copy)
+@@ -25,5 +25,7 @@
+ UIDefaultSearchResult.msg.new-suggestion=Suggerimento
+ UIDefaultSearchResult.label.documentandpage=documento e pagina
+ UISearchForm.message.keyword-not-empty=Il valore della parola chiave \u00E8 nullo o vuoto\!
++UISearchForm.message.keyword-not-support=The keyword is invalid. Some characters are not supported.
++UISearchForm.message.not-checked=Search type is not checked. Choose a search type, please.
+ UIDefaultSearchResult.label.ofAboutCaption=di circa
+ UISearchPageLayoutManager.label.searchResultBasePathInputSetAction=Percorso base
+Index: core/publication/src/main/java/org/exoplatform/services/wcm/publication/listener/post/PostCreateContentEventListener.java
+===================================================================
+--- core/publication/src/main/java/org/exoplatform/services/wcm/publication/listener/post/PostCreateContentEventListener.java	(revision 71192)
++++ core/publication/src/main/java/org/exoplatform/services/wcm/publication/listener/post/PostCreateContentEventListener.java	(working copy)
+@@ -17,22 +17,19 @@
+ package org.exoplatform.services.wcm.publication.listener.post;
+ 
+ import javax.jcr.Node;
+-import javax.jcr.NodeIterator;
+ import javax.jcr.Session;
+ 
+ import org.exoplatform.container.ExoContainer;
+ import org.exoplatform.container.ExoContainerContext;
+ import org.exoplatform.portal.webui.util.Util;
+ import org.exoplatform.services.cms.CmsService;
+-import org.exoplatform.services.cms.drives.ManageDriveService;
+ import org.exoplatform.services.cms.link.LinkManager;
+-import org.exoplatform.services.jcr.core.ManageableRepository;
+ import org.exoplatform.services.jcr.impl.core.NodeImpl;
++import org.exoplatform.services.jcr.util.Text;
+ import org.exoplatform.services.listener.Event;
+ import org.exoplatform.services.listener.Listener;
+ import org.exoplatform.services.log.ExoLogger;
+ import org.exoplatform.services.log.Log;
+-import org.exoplatform.services.wcm.core.NodeLocation;
+ import org.exoplatform.services.wcm.core.WCMConfigurationService;
+ import org.exoplatform.services.wcm.core.WebSchemaConfigService;
+ import org.exoplatform.services.wcm.publication.WCMPublicationService;
+@@ -78,7 +75,7 @@
+     if(currentNode.canAddMixin("exo:rss-enable")) {
+       currentNode.addMixin("exo:rss-enable");
+       if(!currentNode.hasProperty("exo:title")) {
+-        currentNode.setProperty("exo:title",currentNode.getName()); 
++    	  currentNode.setProperty("exo:title",Text.unescapeIllegalJcrChars(currentNode.getName())); 
+       }      
+     }
+     if(currentNode.isNodeType("exo:cssFile") || 
+Index: core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/control/UIAddressBar.java
+===================================================================
+--- core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/control/UIAddressBar.java	(revision 71192)
++++ core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/control/UIAddressBar.java	(working copy)
+@@ -25,20 +25,22 @@
+ 
+ import javax.jcr.AccessDeniedException;
+ import javax.jcr.Node;
++import javax.jcr.RepositoryException;
+ import javax.jcr.Session;
++import javax.jcr.query.InvalidQueryException;
+ import javax.jcr.query.Query;
+ import javax.jcr.query.QueryManager;
+ import javax.jcr.query.QueryResult;
+ 
+ import org.apache.commons.lang.StringUtils;
+-import org.exoplatform.ecm.jcr.SearchValidator;
++import org.exoplatform.ecm.jcr.SimpleSearchValidator;
+ import org.exoplatform.ecm.utils.text.Text;
+ import org.exoplatform.ecm.webui.component.explorer.UIDocumentContainer;
+ import org.exoplatform.ecm.webui.component.explorer.UIDocumentWorkspace;
+ import org.exoplatform.ecm.webui.component.explorer.UIDrivesArea;
+ import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
++import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer.HistoryEntry;
+ import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
+-import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer.HistoryEntry;
+ import org.exoplatform.ecm.webui.component.explorer.search.UISearchResult;
+ import org.exoplatform.ecm.webui.utils.Utils;
+ import org.exoplatform.portal.webui.util.Util;
+@@ -56,8 +58,8 @@
+ import org.exoplatform.webui.core.UIApplication;
+ import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
+ import org.exoplatform.webui.event.Event;
++import org.exoplatform.webui.event.Event.Phase;
+ import org.exoplatform.webui.event.EventListener;
+-import org.exoplatform.webui.event.Event.Phase;
+ import org.exoplatform.webui.form.UIForm;
+ import org.exoplatform.webui.form.UIFormStringInput;
+ 
+@@ -84,6 +86,9 @@
+   
+   public static final Pattern FILE_EXPLORER_URL_SYNTAX = Pattern.compile("([^:/]+):(.*)");
+   
++  /** The Constant MESSAGE_NOT_SUPPORT_KEYWORD. */
++  private final static String MESSAGE_NOT_SUPPORT_KEYWORD = "UIAddressBar.msg.keyword-not-support".intern();
++  
+   public final static String WS_NAME = "workspaceName";  
+   public final static String FIELD_ADDRESS = "address";
+   public final static String ACTION_TAXONOMY = "exo:taxonomyAction";
+@@ -100,7 +105,7 @@
+      
+   public UIAddressBar() throws Exception {
+     addUIFormInput(new UIFormStringInput(FIELD_ADDRESS, FIELD_ADDRESS, null)) ;
+-    addUIFormInput(new UIFormStringInput(FIELD_SIMPLE_SEARCH, FIELD_SIMPLE_SEARCH, null).addValidator(SearchValidator.class));
++    addUIFormInput(new UIFormStringInput(FIELD_SIMPLE_SEARCH, FIELD_SIMPLE_SEARCH, null).addValidator(SimpleSearchValidator.class));
+   }
+ 
+   public void setViewList(List<String> viewList) {
+@@ -241,6 +246,7 @@
+     public void execute(Event<UIAddressBar> event) throws Exception {
+       UIAddressBar uiAddressBar = event.getSource();
+       UIJCRExplorer uiExplorer = uiAddressBar.getAncestorOfType(UIJCRExplorer.class);
++      UIApplication uiApp = uiAddressBar.getAncestorOfType(UIApplication.class);
+       String text = uiAddressBar.getUIStringInput(FIELD_SIMPLE_SEARCH).getValue();
+       Node currentNode = uiExplorer.getCurrentNode();
+       boolean isTaxonomyNode = false;
+@@ -278,8 +284,17 @@
+                 QueryManager queryManager =session.getWorkspace().getQueryManager();
+                         
+                 long startTime = System.currentTimeMillis();
+-                Query query = queryManager.createQuery(queryStatement, Query.SQL);        
+-                QueryResult queryResult = query.execute();                  
++                QueryResult queryResult = null;
++                try {
++                	Query query = queryManager.createQuery(queryStatement, Query.SQL);        
++                	queryResult = query.execute();
++                } catch (InvalidQueryException invalidEx) {
++                  uiApp.addMessage(new ApplicationMessage(MESSAGE_NOT_SUPPORT_KEYWORD, null, ApplicationMessage.WARNING));
++                  return;
++                } catch (RepositoryException reEx) {
++                  uiApp.addMessage(new ApplicationMessage(MESSAGE_NOT_SUPPORT_KEYWORD, null, ApplicationMessage.WARNING));
++                  return;
++                }
+                 uiSearchResult.clearAll();
+                 uiSearchResult.setQueryResults(queryResult);            
+                 uiSearchResult.updateGrid(true);
+@@ -316,8 +331,17 @@
+       UISearchResult uiSearchResult = uiDocumentWorkspace.getChildById(UIDocumentWorkspace.SIMPLE_SEARCH_RESULT);
+       QueryManager queryManager = session.getWorkspace().getQueryManager();
+       long startTime = System.currentTimeMillis();
+-      Query query = queryManager.createQuery(queryStatement, Query.SQL);        
+-      QueryResult queryResult = query.execute();                  
++      QueryResult queryResult = null;
++      try {
++      	Query query = queryManager.createQuery(queryStatement, Query.SQL);        
++      	queryResult = query.execute();
++      } catch (InvalidQueryException invalidEx) {
++        uiApp.addMessage(new ApplicationMessage(MESSAGE_NOT_SUPPORT_KEYWORD, null, ApplicationMessage.WARNING));
++        return;
++      } catch (RepositoryException reEx) {
++        uiApp.addMessage(new ApplicationMessage(MESSAGE_NOT_SUPPORT_KEYWORD, null, ApplicationMessage.WARNING));
++        return;
++      }               
+       uiSearchResult.clearAll();
+       uiSearchResult.setQueryResults(queryResult);  
+       uiSearchResult.setTaxonomyNode(isTaxonomyNode, currentNode.getSession().getWorkspace().getName(), currentNode.getPath());
+Index: core/webui/src/main/java/org/exoplatform/ecm/jcr/SimpleSearchValidator.java
+===================================================================
+--- core/webui/src/main/java/org/exoplatform/ecm/jcr/SimpleSearchValidator.java	(revision 0)
++++ core/webui/src/main/java/org/exoplatform/ecm/jcr/SimpleSearchValidator.java	(revision 0)
+@@ -0,0 +1,38 @@
++/*
++ * Copyright (C) 2003-2008 eXo Platform SAS.
++ *
++ * This program is free software; you can redistribute it and/or
++ * modify it under the terms of the GNU Affero General Public License
++ * as published by the Free Software Foundation; either version 3
++ * of the License, or (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, see<http://www.gnu.org/licenses/>.
++ */
++package org.exoplatform.ecm.jcr;
++
++import org.exoplatform.web.application.ApplicationMessage;
++import org.exoplatform.webui.exception.MessageException;
++import org.exoplatform.webui.form.UIFormInput;
++import org.exoplatform.webui.form.validator.Validator;
++
++
++/**
++ * @author hai_lethanh
++ *
++ */
++public class SimpleSearchValidator implements Validator {
++
++	@Override
++	public void validate(UIFormInput uiInput) throws Exception {
++	  String inputValue = ((String)uiInput.getValue());
++	  if (inputValue == null || inputValue.trim().length() == 0) {
++	    throw new MessageException(new ApplicationMessage("SearchValidator.msg.empty-input", new Object[] {uiInput.getName()} , ApplicationMessage.WARNING));
++	  }	
++	}
++}
+\ No newline at end of file
+Index: core/webui/src/main/java/org/exoplatform/wcm/webui/Utils.java
+===================================================================
+--- core/webui/src/main/java/org/exoplatform/wcm/webui/Utils.java	(revision 71192)
++++ core/webui/src/main/java/org/exoplatform/wcm/webui/Utils.java	(working copy)
+@@ -24,6 +24,7 @@
+ import javax.portlet.PortletPreferences;
+ 
+ import org.exoplatform.container.PortalContainer;
++import org.exoplatform.ecm.utils.text.Text;
+ import org.exoplatform.portal.application.PortalRequestContext;
+ import org.exoplatform.portal.config.DataStorage;
+ import org.exoplatform.portal.config.UserACL;
+@@ -231,7 +232,7 @@
+ 			PortletMode portletMode = portletRequestContext.getApplicationMode();
+ 			filters.put(WCMComposer.PORTLET_MODE, portletMode.toString());
+ 			if (version != null) filters.put(WCMComposer.FILTER_VERSION, version);
+-			return WCMCoreUtils.getService(WCMComposer.class).getContent(repository, workspace, nodeIdentifier, filters, WCMCoreUtils.getUserSessionProvider());
++			return WCMCoreUtils.getService(WCMComposer.class).getContent(repository, workspace, Text.escapeIllegalJcrChars(nodeIdentifier), filters, WCMCoreUtils.getUserSessionProvider());
+ 		} catch (Exception e) {
+ 			return null;
+ 		}
