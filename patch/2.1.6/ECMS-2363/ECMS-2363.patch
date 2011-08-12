@@ -1,0 +1,20 @@
+Index: apps/portlet-explorer/src/main/webapp/javascript/eXo/ecm/UIListView.js
+===================================================================
+--- apps/portlet-explorer/src/main/webapp/javascript/eXo/ecm/UIListView.js	(revision 70560)
++++ apps/portlet-explorer/src/main/webapp/javascript/eXo/ecm/UIListView.js	(working copy)
+@@ -844,8 +844,13 @@
+ 	 		documentWorkspace.style.height = workingArea.offsetHeight + 'px';									
+ 	 if (page) {
+ 			if (parseInt(page.getAttribute('pageAvailable')) > 1) {
+-				if (view)
+-					view.style.height = workingContainer.offsetHeight - page.offsetHeight + 'px';							
++				if (view) {
++					if (documentWorkspace)
++						view.style.height = (documentWorkspace.offsetHeight - page.offsetHeight) + 'px';
++					else
++						view.style.height = (workingContainer.offsetHeight - page.offsetHeight) + 'px';
++					view.style.overflow = "auto";
++				}				
+ 			}
+ 		} else {
+ 			  if (view) 
