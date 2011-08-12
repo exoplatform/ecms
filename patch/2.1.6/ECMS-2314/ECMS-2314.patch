@@ -1,0 +1,29 @@
+Index: core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/popup/info/UIPermissionInfo.java
+===================================================================
+--- core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/popup/info/UIPermissionInfo.java	(revision 71016)
++++ core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/popup/info/UIPermissionInfo.java	(working copy)
+@@ -37,6 +37,7 @@
+ import org.exoplatform.services.jcr.access.PermissionType;
+ import org.exoplatform.services.jcr.access.SystemIdentity;
+ import org.exoplatform.services.jcr.core.ExtendedNode;
++import org.exoplatform.services.wcm.core.NodetypeConstant;
+ import org.exoplatform.web.application.ApplicationMessage;
+ import org.exoplatform.webui.config.annotation.ComponentConfig;
+ import org.exoplatform.webui.config.annotation.EventConfig;
+@@ -240,6 +241,16 @@
+         linkManager.updateLink(realNode, currentNode);
+       }
+       
++      if(currentNode.isNodeType(NodetypeConstant.MIX_REFERENCEABLE)){
++        List<Node> symlinks = linkManager.getAllLinks(currentNode, "exo:symlink", uiJCRExplorer.getRepositoryName());
++    	for (Node symlink : symlinks) {
++    	  try {
++    	    linkManager.updateLink(symlink, currentNode);
++    	  } catch (Exception e) {}
++    	}
++      }
++      currentNode.getSession().save();
++      
+       uiJCRExplorer.setIsHidePopup(true) ;
+       event.getRequestContext().addUIComponentToUpdateByAjax(uiPopup) ;
+       uiJCRExplorer.updateAjax(event) ;
