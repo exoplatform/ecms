@@ -149,6 +149,9 @@ public class UICLVPortlet extends UIPortletApplication {
 
   /** The Constant PREFERENCE_SHOW_CLV_BY. */
   public final static String PREFERENCE_SHOW_CLV_BY					= "showClvBy";
+
+  /** The Constant PREFERENCE_CACHE_ENABLED. */
+  public final static String PREFERENCE_CACHE_ENABLED             = "sharedCache";
   
   /** The Constant DISPLAY_MODE_MANUAL. */
   public static final String DISPLAY_MODE_MANUAL					= "ManualViewerMode";
@@ -159,7 +162,9 @@ public class UICLVPortlet extends UIPortletApplication {
   public static final String DEFAULT_SHOW_CLV_BY					= "folder-id";
   public static final String DEFAULT_SHOW_SCV_WITH					= "content-id";
   
-  public static final String PREFERENCE_APPLICATION_TYPE			= "application";			
+  public static final String PREFERENCE_APPLICATION_TYPE			= "application";
+  
+  public static final String PREFERENCE_SHARED_CACHE     = "sharedCache";    
   
   private PortletMode     mode;
   
@@ -231,16 +236,17 @@ public class UICLVPortlet extends UIPortletApplication {
    */
   public void processRender(WebuiApplication app, WebuiRequestContext context) throws Exception {
     PortletRequestContext pContext = (PortletRequestContext) context;
+    PortletPreferences preferences = pContext.getRequest().getPreferences();
+    Boolean sharedCache = "true".equals(preferences.getValue(PREFERENCE_SHARED_CACHE, "true")); 
     
-  	if (context.getRemoteUser()==null) {
+    if (context.getRemoteUser()==null ||
+        (!"Edit".equals(Utils.getCurrentMode()) && sharedCache)) {
       WCMService wcmService = getApplicationComponent(WCMService.class);
 	    pContext.getResponse().setProperty(MimeResponse.EXPIRATION_CACHE, ""+wcmService.getPortletExpirationCache());
 	    if (log.isTraceEnabled())
 	      log.trace("CLV rendering : cache set to "+wcmService.getPortletExpirationCache());
-  	  }
+	  }
 
-    
-    PortletPreferences preferences = pContext.getRequest().getPreferences();
     String displayMode = preferences.getValue(PREFERENCE_DISPLAY_MODE, null);
 
     PortletMode currentMode = pContext.getApplicationMode();

@@ -41,6 +41,7 @@ import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.friendly.FriendlyService;
 import org.exoplatform.services.wcm.publication.WCMComposer;
 import org.exoplatform.wcm.webui.Utils;
+import org.exoplatform.wcm.webui.clv.UICLVPortlet;
 import org.exoplatform.web.application.Parameter;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.application.portlet.PortletRequestContext;
@@ -86,7 +87,15 @@ public class UIPresentation extends UIBaseNodePresentation {
    * @see org.exoplatform.ecm.webui.presentation.UIBaseNodePresentation#getNode()
    */
   public Node getNode() throws Exception {
-  	return Utils.getViewableNodeByComposer(viewNodeLocation.getRepository(), viewNodeLocation.getWorkspace(), viewNodeLocation.getPath());
+    PortletRequestContext portletRequestContext = WebuiRequestContext.getCurrentInstance();
+    PortletPreferences preferences = portletRequestContext.getRequest().getPreferences();
+    String sharedCache = preferences.getValue(UISingleContentViewerPortlet.ENABLE_CACHE, "true");
+    sharedCache = "true".equals(sharedCache) ? WCMComposer.VISIBILITY_PUBLIC:WCMComposer.VISIBILITY_USER;
+  	return Utils.getViewableNodeByComposer(viewNodeLocation.getRepository(), 
+  	                                       viewNodeLocation.getWorkspace(), 
+                                           viewNodeLocation.getPath(),
+                                           null,
+                                           sharedCache);
   }
   
   /* (non-Javadoc)

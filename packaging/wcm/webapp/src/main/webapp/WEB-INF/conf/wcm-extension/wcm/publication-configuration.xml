@@ -51,11 +51,15 @@
     <init-params>
       <value-param>
         <name>useCache</name>
-        <value>true</value>
+        <value>false</value>
       </value-param>
       <value-param>
         <name>useDefaultLanguage</name>
         <value>true</value>
+      </value-param>
+      <value-param>
+      	<name>sharedGroup</name>
+      	<value>*:/platform/users</value>
       </value-param>
     </init-params>
   </component>

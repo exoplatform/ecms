@@ -70,6 +70,9 @@ public interface WCMComposer {
 	/** Filter parameter to execute a specific query. ex: "SELECT * from nt:base"*/
 	public final static String FILTER_QUERY_FULL = "filter-query-full";
 	
+  /** Filter parameter to filter results by visibility. ex: public, user*/
+  public final static String FILTER_VISIBILITY = "filter-visibility";
+	
 	/** mode of portlet **/
 	public final static String PORTLET_MODE = "portlet-mode";
 	
@@ -84,6 +87,12 @@ public interface WCMComposer {
 
 	/** The Constant for base version. */
 	public final static String BASE_VERSION = "base";
+
+  /** The Constant VISIBILITY PUBLIC. */
+  public final static String VISIBILITY_PUBLIC = "public";
+  
+  /** The Constant VISIBILITY USER. */
+  public final static String VISIBILITY_USER = "user";
 	
 	/**
 	 * returns content at the specified path based on filters.

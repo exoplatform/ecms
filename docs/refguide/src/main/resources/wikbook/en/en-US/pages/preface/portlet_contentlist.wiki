@@ -23,6 +23,7 @@ h1. Available preferences {anchor:id=CONTref.Portlets.ContentList.AvailablePrefe
 | *contextualFolder* | {{String}} | {{contextualDisable}} | Enable/ disable the contextual mode of the portlet. If enabled, the portlet can take the folder path indicated in the URL to display contents. |
 | *showScvWith* | {{String}} | {{content-id}} | The name of the parameter shows the path of content in url to display when clicking the "Read more" button of this content. |
 | *showClvBy* | {{String}} | {{folder-id}} | The name of the parameter shows the path of the folder in url to display its contents. |
+| *sharedCache* | {{Boolean}} | {{true}} | Define if the portlet will cache the displayed contents. |
 
 h1. Sample Configuration {anchor:id=CONTref.Portlets.ContentList.SampleConfiguration}
 {code:language=xml|indent=2}
@@ -137,5 +138,10 @@ h1. Sample Configuration {anchor:id=CONTref.Portlets.ContentList.SampleConfigura
         <value>folder-id</value>
         <read-only>false</read-only>
       </preference>
+      <preference>
+	<name>sharedCache</name>
+	<value>true</value>
+	<read-only>false</read-only>
+      </preference>      
     </portlet-preferences>
 {code}

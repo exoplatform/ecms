@@ -84,4 +84,19 @@
    	</title>
   </CorrectContentSelectorPopupWindow>
   
+  <UISCVPreferences>
+    <label>
+	  <LockStatus>Lock</LockStatus>
+	  <CacheManagement>Cache Management</CacheManagement>
+	  <UISCVCacheRadioBox>Share contents between users</UISCVCacheRadioBox>
+    </label>
+  </UISCVPreferences>    
+    
+  
+  <UISCVCacheRadioBox>
+  	<label>
+	  <Enable>Enabled</Enable>
+	  <Disable>Disabled</Disable>
+  	</label>
+  </UISCVCacheRadioBox>  
 </bundle>

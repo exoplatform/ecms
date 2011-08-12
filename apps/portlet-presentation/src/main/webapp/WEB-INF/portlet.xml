@@ -108,16 +108,21 @@
 				<value>printviewer</value>
 				<read-only>false</read-only>
 			</preference>
-      <preference>
-        <name>basePath</name>
-        <value>detail</value>
-        <read-only>false</read-only>
-      </preference>
-      <preference>
-        <name>showScvWith</name>
-        <value>content-id</value>
-        <read-only>false</read-only>
-      </preference> 			
+	      <preference>
+	        <name>basePath</name>
+	        <value>detail</value>
+	        <read-only>false</read-only>
+	      </preference>
+	      <preference>
+	        <name>showScvWith</name>
+	        <value>content-id</value>
+	        <read-only>false</read-only>
+	      </preference>
+	      <preference>
+	        <name>sharedCache</name>
+	        <value>true</value>
+	        <read-only>false</read-only>
+	      </preference>
 		</portlet-preferences>
 		<security-role-ref>
 			<role-name>admin</role-name>
@@ -299,6 +304,11 @@
         <value>ContentList</value>
         <read-only>true</read-only>
       </preference>
+      <preference>
+        <name>sharedCache</name>
+        <value>true</value>
+        <read-only>false</read-only>
+      </preference>
 		</portlet-preferences>
 		<security-role-ref>
 			<role-name>admin</role-name>
@@ -402,6 +412,11 @@
       <preference>
         <name>ParameterName</name>
         <value>content-id</value>
+        <read-only>false</read-only>
+      </preference>
+      <preference>
+        <name>sharedCache</name>
+        <value>true</value>
         <read-only>false</read-only>
       </preference>
     </portlet-preferences>
@@ -577,6 +592,11 @@
       <value>CategoryNavigation</value>
       <read-only>true</read-only>
     </preference>
+      <preference>
+        <name>sharedCache</name>
+        <value>true</value>
+        <read-only>false</read-only>
+      </preference>
 	</portlet-preferences>
 	</portlet>
 	
@@ -717,6 +737,11 @@
         <value>CategoryContents</value>
         <read-only>true</read-only>
       </preference>
+      <preference>
+        <name>sharedCache</name>
+        <value>true</value>
+        <read-only>false</read-only>
+      </preference>
 		</portlet-preferences>
 	</portlet>
 
@@ -749,8 +774,8 @@
      <filter-name>PortletFilterCache</filter-name>
      <filter-class>org.exoplatform.services.portletcache.PortletCacheFilter</filter-class>
      <lifecycle>RENDER_PHASE</lifecycle>
-   </filter> 
-
+   </filter>
+   
    <filter-mapping>
      <filter-name>PortletFilterCache</filter-name>
      <portlet-name>SingleContentViewer</portlet-name>
@@ -765,5 +790,5 @@
      <filter-name>PortletFilterCache</filter-name>
      <portlet-name>ContentListViewerPortlet</portlet-name>
    </filter-mapping>
-	
+   
 </portlet-app>

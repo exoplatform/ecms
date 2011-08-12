@@ -45,6 +45,7 @@ import org.exoplatform.services.cms.templates.ContentTypeFilterPlugin;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.cms.templates.ContentTypeFilterPlugin.FolderFilterConfig;
 import org.exoplatform.services.jcr.RepositoryService;
+import org.exoplatform.services.jcr.access.DynamicIdentity;
 import org.exoplatform.services.jcr.access.SystemIdentity;
 import org.exoplatform.services.jcr.config.RepositoryEntry;
 import org.exoplatform.services.jcr.core.ManageableRepository;
@@ -326,7 +327,7 @@ public class TemplateServiceImpl implements TemplateService, Startable {
    */
   public String getTemplatePathByUser(boolean isDialog, String nodeTypeName, String userName,
       String repository) throws Exception {
-    if(SystemIdentity.ANONIM.equals(userName) || userName == null) {
+    if(SystemIdentity.ANONIM.equals(userName) || DynamicIdentity.DYNAMIC.equals(userName) || userName == null) {
       return getTemplatePathByAnonymous(isDialog, nodeTypeName, repository);
     }
     Session session = getSession(repository);

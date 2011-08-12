@@ -142,6 +142,8 @@
 	  <UICLVConfigshowSCVWithStringInput>với</UICLVConfigshowSCVWithStringInput>
       <UICLVConfigTargetPageFormInputSet>Hiển thị tại trang</UICLVConfigTargetPageFormInputSet>
       <content-not-found>Không tìm thấy nội dung!</content-not-found>
+      <UICLVConfigCacheManagementLabel>Quản lý Cache</UICLVConfigCacheManagementLabel>
+      <UICLVConfigCacheEnableRadioBoxInput>Chia sẻ nội dung giữa người sử dụng</UICLVConfigCacheEnableRadioBoxInput>
     </label>
     <help>
     	<ModeSelectionHelp>Determine what kind of information will be display inside portlet</ModeSelectionHelp>
@@ -163,9 +165,15 @@
   
   <UICLVConfigContextualFolderRadioBoxInput>
   	<label>
-		  <contextualEnable>Bật</contextualEnable>
-		  <contextualDisable>Tắt</contextualDisable>
+	  <contextualEnable>Bật</contextualEnable>
+	  <contextualDisable>Tắt</contextualDisable>
   	</label>
   </UICLVConfigContextualFolderRadioBoxInput>
-
+  
+  <UICLVConfigCacheEnableRadioBoxInput>
+  	<label>
+	  <ENABLE>Bật</ENABLE>
+	  <DISABLE>Tắt</DISABLE>
+  	</label>
+  </UICLVConfigCacheEnableRadioBoxInput>
 </bundle>

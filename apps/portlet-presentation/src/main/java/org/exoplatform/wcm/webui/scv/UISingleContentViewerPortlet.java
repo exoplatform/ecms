@@ -27,6 +27,7 @@ import javax.portlet.RenderResponse;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.wcm.core.WCMService;
 import org.exoplatform.services.wcm.publication.WCMComposer;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.wcm.webui.Utils;
 import org.exoplatform.webui.application.WebuiApplication;
 import org.exoplatform.webui.application.WebuiRequestContext;
@@ -36,6 +37,8 @@ import org.exoplatform.webui.core.UIPopupContainer;
 import org.exoplatform.webui.core.UIPortletApplication;
 import org.exoplatform.webui.core.lifecycle.UIApplicationLifecycle;
 import org.w3c.dom.Element;
+import org.exoplatform.services.jcr.RepositoryService;
+import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 
@@ -94,6 +97,9 @@ public class UISingleContentViewerPortlet extends UIPortletApplication {
 
   public static final String DEFAULT_SHOW_SCV_WITH                  = "content-id";
   
+  /** The Cache */
+  public static final String ENABLE_CACHE = "sharedCache";
+  
   private PortletMode mode = null;//PortletMode.VIEW ;
 
   public static final String UIPreferencesPopupID = "UIPreferencesPopupWindows";
@@ -148,8 +154,11 @@ public class UISingleContentViewerPortlet extends UIPortletApplication {
   public void processRender(WebuiApplication app, WebuiRequestContext context) throws Exception {
     PortletRequestContext pContext = (PortletRequestContext) context ;
     PortletMode newMode = pContext.getApplicationMode() ;
+    PortletPreferences preferences = pContext.getRequest().getPreferences();
+    Boolean sharedCache = "true".equals(preferences.getValue(ENABLE_CACHE, "true"));
 
-  	if (context.getRemoteUser()==null) {
+    if (context.getRemoteUser()==null ||
+        (!"Edit".equals(Utils.getCurrentMode()) && sharedCache)) {
       WCMService wcmService = getApplicationComponent(WCMService.class);
   	  pContext.getResponse().setProperty(MimeResponse.EXPIRATION_CACHE, ""+wcmService.getPortletExpirationCache());
 	    if (log.isTraceEnabled())
@@ -169,7 +178,7 @@ public class UISingleContentViewerPortlet extends UIPortletApplication {
         uiPresentation.getChild(UIPresentation.class).setTemplatePath(templateService.getTemplatePath(nodeView, false));
       }
     }
-
+    
     if (uiPresentation!=null && uiPresentation.isContextual() && nodeView!=null) {
       RenderResponse response = context.getResponse();
       Element title = response.createElement("title");

@@ -24,6 +24,7 @@ import org.exoplatform.management.annotations.ManagedName;
 import org.exoplatform.management.jmx.annotations.NameTemplate;
 import org.exoplatform.management.jmx.annotations.Property;
 import org.exoplatform.management.rest.annotations.RESTEndpoint;
+import org.exoplatform.portal.config.UserACL;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cache.CacheService;
 import org.exoplatform.services.cache.ExoCache;
@@ -35,8 +36,14 @@ import org.exoplatform.services.ecm.publication.NotInPublicationLifecycleExcepti
 import org.exoplatform.services.ecm.publication.PublicationPlugin;
 import org.exoplatform.services.ecm.publication.PublicationService;
 import org.exoplatform.services.jcr.RepositoryService;
+import org.exoplatform.services.jcr.access.AccessControlEntry;
+import org.exoplatform.services.jcr.access.PermissionType;
+import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig.Permission;
+import org.exoplatform.services.jcr.sessions.ACLSessionProviderService;
+import org.exoplatform.services.jcr.sessions.impl.ACLSessionProviderServiceThreadLocalImpl;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.wcm.core.WCMService;
@@ -73,6 +80,8 @@ public class WCMComposerImpl implements WCMComposer, Startable {
 	
 	private MultiLanguageService multiLanguageService;
 	
+	private ACLSessionProviderService aclSessionProviderService;
+	
 	/** The cache. */
 	private ExoCache<String, Object> cache;
 	
@@ -92,7 +101,8 @@ public class WCMComposerImpl implements WCMComposer, Startable {
 	private List<String> usedLanguages;
 	/** PrimaryTypes properties accessed on Front side */ 
 	private List<String> usedPrimaryTypes;
-	
+  /** shared group membership */
+  private String sharedGroup;
 
 	/**
 	 * Instantiates a new WCM composer impl.
@@ -107,6 +117,10 @@ public class WCMComposerImpl implements WCMComposer, Startable {
 	    ValueParam useDefaultLanguage = params.getValueParam("useDefaultLanguage");
 	    if (useDefaultLanguage != null)
 	      this.useDefaultLanguage = Boolean.parseBoolean(useDefaultLanguage.getValue());
+      ValueParam sharedGroupParam = params.getValueParam("sharedGroup");
+      if (sharedGroupParam != null) {
+        this.sharedGroup = sharedGroupParam.getValue();
+      }
 		}
 		
 		repositoryService = WCMCoreUtils.getService(RepositoryService.class);
@@ -116,6 +130,7 @@ public class WCMComposerImpl implements WCMComposer, Startable {
 		wcmService = WCMCoreUtils.getService(WCMService.class);
 		multiLanguageService = WCMCoreUtils.getService(MultiLanguageService.class);
 		cache = WCMCoreUtils.getService(CacheService.class).getCacheInstance("wcm.composer");
+		aclSessionProviderService = WCMCoreUtils.getService(ACLSessionProviderService.class);
 //		cache.setLiveTime(60);
 		
 	  usedLanguages = new ArrayList<String>();
@@ -132,12 +147,13 @@ public class WCMComposerImpl implements WCMComposer, Startable {
 	 */
 	public Node getContent(String repository, String workspace, String nodeIdentifier, HashMap<String, String> filters, SessionProvider sessionProvider) throws Exception {
 		String mode = filters.get(FILTER_MODE); 
-  		String version = filters.get(FILTER_VERSION);
-  		String language = filters.get(FILTER_LANGUAGE);
-  		String remoteUser = null;
-  		try {
-  			remoteUser = Util.getPortalRequestContext().getRemoteUser();
-  		} catch (Exception e) {}
+    String version = filters.get(FILTER_VERSION);
+    String language = filters.get(FILTER_LANGUAGE);
+    String visibility = filters.get(FILTER_VISIBILITY);
+    String remoteUser = null;
+    try {
+      remoteUser = Util.getPortalRequestContext().getRemoteUser();
+    } catch (Exception e) {}
 
 		if (repository==null && workspace==null) {
 		  String[] params = nodeIdentifier.split("/");
@@ -157,6 +173,9 @@ public class WCMComposerImpl implements WCMComposer, Startable {
 		}
 		Node node = null;
 		try {
+      if (WCMComposer.VISIBILITY_PUBLIC.equals(visibility) && MODE_LIVE.equals(mode) && remoteUser != null) {
+        sessionProvider = aclSessionProviderService.getACLSessionProvider(getAnyUserACL());
+      }
 		  node = wcmService.getReferencedContent(sessionProvider, repository, workspace, nodeIdentifier);
 		} catch (RepositoryException e) {
 		  node = getNodeByCategory(nodeIdentifier);
@@ -181,6 +200,7 @@ public class WCMComposerImpl implements WCMComposer, Startable {
 		String language = filters.get(FILTER_LANGUAGE);
 		String recursive = filters.get(FILTER_RECURSIVE);
 		String primaryType = filters.get(FILTER_PRIMARY_TYPE);
+		String visibility = filters.get(FILTER_VISIBILITY);    
 		String remoteUser = null;
 		try {
 			remoteUser = Util.getPortalRequestContext().getRemoteUser();
@@ -200,17 +220,22 @@ public class WCMComposerImpl implements WCMComposer, Startable {
 			List<Node> cachedNodes = (List<Node>)cache.get(hash);
 			if (cachedNodes != null) return cachedNodes;
 		}
-		if (log.isDebugEnabled()) log.debug("##### "+path+":"+version+":"+remoteUser+":"+orderBy+":"+orderType);
-		NodeIterator nodeIterator = getViewableContents(repository, workspace, path, filters, sessionProvider);
 		List<Node> nodes = new ArrayList<Node>();
-		Node node = null, viewNode = null;
-		while (nodeIterator != null && nodeIterator.hasNext()) {
-			node = nodeIterator.nextNode();
-			viewNode = getViewableContent(node, filters);
-			if (viewNode != null) {
-				nodes.add(viewNode);
+    try {
+      if (WCMComposer.VISIBILITY_PUBLIC.equals(visibility) && MODE_LIVE.equals(mode) && remoteUser != null) {
+        sessionProvider = aclSessionProviderService.getACLSessionProvider(getAnyUserACL());
 			}
-		}
+      if (log.isDebugEnabled()) log.debug("##### "+path+":"+version+":"+remoteUser+":"+orderBy+":"+orderType);
+      NodeIterator nodeIterator = getViewableContents(repository, workspace, path, filters, sessionProvider);
+      Node node = null, viewNode = null;
+      while (nodeIterator.hasNext()) {
+        node = nodeIterator.nextNode();
+        viewNode = getViewableContent(node, filters);
+        if (viewNode != null) {
+          nodes.add(viewNode);
+        }
+      }
+    } catch (Exception e) {}
 		if (MODE_LIVE.equals(mode) && isCached) {
 			String hash = getHash(path, version, remoteUser, language, recursive, orderBy, orderType, primaryType);
 //			cache.remove(hash);
@@ -304,7 +329,6 @@ public class WCMComposerImpl implements WCMComposer, Startable {
       if (lnode!=null) {
 
         viewNode = getPublishedContent(lnode, filters);
-
         if (viewNode!=null) {
           return viewNode;
         } else if (!useDefaultLanguage) {
@@ -696,5 +720,11 @@ public class WCMComposerImpl implements WCMComposer, Startable {
   }
   private void addUsedPrimaryTypes(String primaryType) {
   	if (!usedPrimaryTypes.contains(primaryType)) usedPrimaryTypes.add(primaryType);
+  }
+  
+  private List<AccessControlEntry> getAnyUserACL() {
+    List<AccessControlEntry> ret = new ArrayList<AccessControlEntry>(); 
+    ret.add(new AccessControlEntry(sharedGroup, PermissionType.READ));
+    return ret;
   }
 }

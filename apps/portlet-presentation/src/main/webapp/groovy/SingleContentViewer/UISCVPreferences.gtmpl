@@ -196,6 +196,15 @@
                 </td>
                 </tr>                
               </table>
+              <div><%=_ctx.appRes("UISCVPreferences.label.CacheManagement") %></div>
+              <table class="UIFormGrid" width="100%">
+                <tr>
+                  <td class="FieldComponent" style="text-align:right;vertical-align:middle;"><%=uicomponent.getLabel(uicomponent.CACHE_ENABLE_SELECT_RADIO_BOX) %></td>
+                  <td class="FieldLabel" style="text-align:left;vertical-align:middle;" colspan="2">
+                    <%uiform.renderField(uicomponent.CACHE_ENABLE_SELECT_RADIO_BOX) %>                      
+                  </td>
+                </tr>
+              </table>
             </fieldset>  
           </div>
           <script type="text/javascript">
@@ -233,4 +242,3 @@
     uiform.end()
   %>
 </div>
-            

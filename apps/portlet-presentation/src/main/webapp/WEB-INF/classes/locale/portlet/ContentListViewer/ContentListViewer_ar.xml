@@ -46,6 +46,8 @@
       <UICLVConfigShowDateCreatedFormCheckboxInput>إظهار تاريخ</UICLVConfigShowDateCreatedFormCheckboxInput>
       <UICLVConfigShowLinkFormCheckboxInput>إظهار رابط </UICLVConfigShowLinkFormCheckboxInput>
       <UICLVConfigShowReadmoreFormCheckboxInput>قرأ</UICLVConfigShowReadmoreFormCheckboxInput>
+      <UICLVConfigCacheManagementLabel>Cache Management</UICLVConfigCacheManagementLabel>
+	  <UICLVConfigCacheEnableRadioBoxInput>Share contents between users</UICLVConfigCacheEnableRadioBoxInput>
     </label>
     <action>
       <Save>حفظ</Save>
@@ -119,5 +121,11 @@
       <UIContentDialogForm>شكل محتوى ويب</UIContentDialogForm>
     </title>
   </UIContentDialogFormPopupWindow>
-
+  
+  <UICLVConfigCacheEnableRadioBoxInput>
+  	<label>
+	  <ENABLE>Enabled</ENABLE>
+	  <DISABLE>Disabled</DISABLE>
+  	</label>
+  </UICLVConfigCacheEnableRadioBoxInput>
 </bundle>
