@@ -221,5 +221,6 @@ public class WCMPublicationServiceImpl
                               node.getSession().getWorkspace().getName(),
                               node.getPath(),
                               new HashMap<String, String>());
+    listenerService.broadcast(UPDATE_EVENT, cmsService, node);
   }
 }

@@ -50,11 +50,11 @@ public class WCMPublicationServiceImpl implements WCMPublicationService, Startab
     new HashMap<String, WebpagePublicationPlugin>();  
   
   /** The publication service. */
-  private PublicationService publicationService;
+  protected PublicationService publicationService;
 
-  private ListenerService listenerService;
+  protected ListenerService listenerService;
   
-  private CmsService cmsService;
+  protected CmsService cmsService;
   
   /**
    * Instantiates a new WCM publication service.
