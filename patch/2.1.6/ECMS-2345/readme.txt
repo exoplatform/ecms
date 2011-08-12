@@ -37,12 +37,13 @@ Tests performed at QA/Support Level
 Documentation changes
 
 Documentation changes:
-	* No
+	* Add explanation for sharedGroup parameter in CLV and SCV
 
 Configuration changes
 
 Configuration changes:
-	* No
+	* Declare, implement, register ACLSession Provider service
+	* Add parameter sharedGroup into parameter list of CLV and SCV
 
 Will previous configuration continue to work?
 	* Yes
