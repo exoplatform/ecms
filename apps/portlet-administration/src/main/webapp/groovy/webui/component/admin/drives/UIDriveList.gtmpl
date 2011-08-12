@@ -58,7 +58,7 @@
             </td>
             <td><div class="Text" title="<%=drive.getName().replace("|", " | ")%>"><%=drive.getName().replace("|", " | ")%></div></td>
             <td><div class="Text" title="$drive.workspace">$drive.workspace</div></td>
-            <td><div class="Text" title="<%=drive.getHomePath().replace("/", " /")%></div>"><%=drive.getHomePath().replace("/", " /")%></div></td>
+            <td><div class="Text" title="<%=drive.getHomePath().replace("/", " /")%>"><%=drive.getHomePath().replace("/", " /")%></div></td>
             <td><div class="Text" title="$drive.permissions">$drive.permissions</div></td>
             <td><div class="Text" title="$drive.views">$drive.views</div></td>
 	          <td>

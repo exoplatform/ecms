@@ -174,7 +174,7 @@ public class UIDriveForm extends UIFormTabPane implements UISelectable {
     }
     return wsInitRootNodeType;
   }
-  
+
   public String getWorkspaceEntries(String selectedWorkspace) throws Exception {
     RepositoryService repositoryService =
       getApplicationComponent(RepositoryService.class);
@@ -189,11 +189,12 @@ public class UIDriveForm extends UIFormTabPane implements UISelectable {
       }
     }
     return wsInitRootNodeType;
-  }  
+  }
 
   static public class SaveActionListener extends EventListener<UIDriveForm> {
     public void execute(Event<UIDriveForm> event) throws Exception {
       UIDriveForm uiDriveForm = event.getSource();
+      ManageDriveService dservice_ = uiDriveForm.getApplicationComponent(ManageDriveService.class);
       RepositoryService rservice = uiDriveForm.getApplicationComponent(RepositoryService.class);
       UIDriveInputSet driveInputSet = uiDriveForm.getChild(UIDriveInputSet.class);
       UIApplication uiApp = uiDriveForm.getAncestorOfType(UIApplication.class);
@@ -217,22 +218,27 @@ public class UIDriveForm extends UIFormTabPane implements UISelectable {
         driveInputSet.getUIFormSelectBox(UIDriveInputSet.FIELD_WORKSPACE).getValue();
       String path = driveInputSet.getUIStringInput(UIDriveInputSet.FIELD_HOMEPATH).getValue();
       if((path == null)||(path.trim().length() == 0)) path = "/";
-      Session session = null;
-      try {
-        session = rservice.getCurrentRepository().getSystemSession(workspace);
-        String userId = Util.getPortalRequestContext().getRemoteUser();
-        String pathReal = org.exoplatform.services.cms.impl.Utils.getPersonalDrivePath(path, userId);
-        session.getItem(pathReal);
-        session.logout();
-      } catch(Exception e) {
-        if(session!=null) {
+
+      // Only check path if Drive is not virtual drive
+      if (!dservice_.isVitualDrive(name)) {
+        Session session = null;
+        try {
+          session = rservice.getCurrentRepository().getSystemSession(workspace);
+          String userId = Util.getPortalRequestContext().getRemoteUser();
+          String pathReal = org.exoplatform.services.cms.impl.Utils.getPersonalDrivePath(path, userId);
+          session.getItem(pathReal);
           session.logout();
+        } catch(Exception e) {
+          if(session!=null) {
+            session.logout();
+          }
+          uiApp.addMessage(new ApplicationMessage("UIDriveForm.msg.workspace-path-invalid", null,
+                                                  ApplicationMessage.WARNING));
+          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          return;
         }
-        uiApp.addMessage(new ApplicationMessage("UIDriveForm.msg.workspace-path-invalid", null,
-                                                ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
-        return;
       }
+
       boolean viewReferences =
         driveInputSet.getUIFormCheckBoxInput(UIDriveInputSet.FIELD_VIEWPREFERENCESDOC).isChecked();
       boolean viewSideBar =
@@ -257,18 +263,16 @@ public class UIDriveForm extends UIFormTabPane implements UISelectable {
       UIViewsInputSet viewsInputSet = uiDriveForm.getChild(UIViewsInputSet.class);
       String views = viewsInputSet.getViewsSelected();
       String permissions = driveInputSet.getUIStringInput(UIDriveInputSet.FIELD_PERMISSION).getValue();
-      
       if(permissions.subSequence(permissions.length()-1, permissions.length()).equals(","))
       	permissions = permissions.substring(0,permissions.length()-1);
       String[] arrPermissions = permissions.split(",");
-    	for(String itemPermission : arrPermissions) {  		
+    	for(String itemPermission : arrPermissions) {
     		if(itemPermission!=null && itemPermission.trim().equals("*")) {
     			permissions = "*";
     			break;
-    		}  			
+    		}
     	}
 
-      ManageDriveService dservice_ = uiDriveForm.getApplicationComponent(ManageDriveService.class);
       if(uiDriveForm.isAddNew_ && (dservice_.getDriveByName(name) != null)) {
         uiApp.addMessage(new ApplicationMessage("UIDriveForm.msg.drive-exists", null,
                                                 ApplicationMessage.WARNING));
@@ -337,7 +341,7 @@ public class UIDriveForm extends UIFormTabPane implements UISelectable {
       UIDriveForm uiDriveForm = event.getSource();
       UIDriveManager uiManager = uiDriveForm.getAncestorOfType(UIDriveManager.class);
       String membership = uiDriveForm.getUIStringInput(UIDriveInputSet.FIELD_PERMISSION).getValue();
-      uiDriveForm.membershipString = membership;      
+      uiDriveForm.membershipString = membership;
       uiDriveForm.getUIStringInput(UIDriveInputSet.FIELD_PERMISSION).setValue(uiDriveForm.membershipString);
 
       uiManager.initPopupPermission(uiDriveForm.membershipString);

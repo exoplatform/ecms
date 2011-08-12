@@ -67,7 +67,6 @@ public class UIDriveList extends UIPagingGridDecorator {
 
   public String[] getActions() { return ACTIONS ; }
 
-  @SuppressWarnings("unchecked")
   public void refresh(int currentPage) throws Exception {
     LazyPageList<DriveData> dataPageList = new LazyPageList<DriveData>(new ListAccessImpl<DriveData>(DriveData.class,
                                                                                                      getDrives()),
@@ -81,20 +80,18 @@ public class UIDriveList extends UIPagingGridDecorator {
 
   public List getDriveList() throws Exception { return getUIPageIterator().getCurrentPageData() ; }
 
-  @SuppressWarnings("unchecked")
   @Deprecated
   public List<DriveData> getDrives(String repoName) throws Exception {
     return getDrives();
   }
-  
-  @SuppressWarnings("unchecked")
+
   public List<DriveData> getDrives() throws Exception {
     RepositoryService rservice = getApplicationComponent(RepositoryService.class) ;
     ManageDriveService driveService = getApplicationComponent(ManageDriveService.class) ;
     ManageableRepository repository = rservice.getCurrentRepository() ;
     List<DriveData> driveList = new ArrayList<DriveData>() ;
     Session session = null ;
-    List<DriveData> drives = driveService.getAllDrives() ;
+    List<DriveData> drives = driveService.getAllDrives(true) ;
     if(drives != null && drives.size() > 0) {
       for(DriveData drive : drives) {
         if(drive.getIcon() != null && drive.getIcon().length() > 0) {
@@ -112,7 +109,7 @@ public class UIDriveList extends UIPagingGridDecorator {
     }
     Collections.sort(driveList) ;
     return driveList ;
-  }  
+  }
 
   public String getPortalName() {
     ExoContainer container = ExoContainerContext.getCurrentContainer();

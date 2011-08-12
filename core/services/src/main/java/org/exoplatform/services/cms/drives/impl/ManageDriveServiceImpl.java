@@ -54,62 +54,64 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
   /**
    * Name of property WORKSPACE
    */
-  private static String WORKSPACE = "exo:workspace".intern() ;
+  private static String WORKSPACE = "exo:workspace";
 
-  private static String ALL_DRIVES_CACHED = "allDrives".intern();
+  private static String ALL_DRIVES_CACHED = "allDrives";
 
-  private static String ALL_DRIVES_CACHED_BY_ROLES = "_allDrivesByRoles".intern();
+  private static String ALL_DRIVES_CACHED_WITH_VIRTUAL = "allDrives_withVirtual";
 
-  private static String ALL_MAIN_CACHED_DRIVE = "_mainDrives".intern();
+  private static String ALL_DRIVES_CACHED_BY_ROLES = "_allDrivesByRoles";
 
-  private static String ALL_PERSONAL_CACHED_DRIVE = "_personalDrives".intern();
+  private static String ALL_MAIN_CACHED_DRIVE = "_mainDrives";
 
-  private static String ALL_GROUP_CACHED_DRIVES = "_groupDrives".intern();
+  private static String ALL_PERSONAL_CACHED_DRIVE = "_personalDrives";
+
+  private static String ALL_GROUP_CACHED_DRIVES = "_groupDrives";
   /**
    * Name of property PERMISSIONS
    */
-  private static String PERMISSIONS = "exo:accessPermissions".intern() ;
+  private static String PERMISSIONS = "exo:accessPermissions" ;
 
   /**
    * Name of property VIEWS
    */
-  private static String VIEWS = "exo:views".intern() ;
+  private static String VIEWS = "exo:views" ;
 
   /**
    * Name of property ICON
    */
-  private static String ICON = "exo:icon".intern() ;
+  private static String ICON = "exo:icon" ;
 
   /**
    * Name of property PATH
    */
-  private static String PATH = "exo:path".intern() ;
+  private static String PATH = "exo:path" ;
 
   /**
    * Name of property VIEW_REFERENCES
    */
-  private static String VIEW_REFERENCES = "exo:viewPreferences".intern() ;
+  private static String VIEW_REFERENCES = "exo:viewPreferences" ;
 
   /**
    * Name of property VIEW_NON_DOCUMENT
    */
-  private static String VIEW_NON_DOCUMENT = "exo:viewNonDocument".intern() ;
+  private static String VIEW_NON_DOCUMENT = "exo:viewNonDocument" ;
 
   /**
    * Name of property VIEW_SIDEBAR
    */
-  private static String VIEW_SIDEBAR = "exo:viewSideBar".intern() ;
+  private static String VIEW_SIDEBAR = "exo:viewSideBar" ;
 
   /**
    * Name of property SHOW_HIDDEN_NODE
    */
-  private static String SHOW_HIDDEN_NODE = "exo:showHiddenNode".intern() ;
+  private static String SHOW_HIDDEN_NODE = "exo:showHiddenNode" ;
 
   /**
    *  Name of property ALLOW_CREATE_FOLDER
    */
-  private static String ALLOW_CREATE_FOLDER = "exo:allowCreateFolders".intern() ;
-  private static String ALLOW_NODETYPES_ON_TREE = "exo:allowNodeTypesOnTree".intern();
+  private static String ALLOW_CREATE_FOLDER = "exo:allowCreateFolders" ;
+  private static String ALLOW_NODETYPES_ON_TREE = "exo:allowNodeTypesOnTree";
 
   /**
    * List of ManageDrivePlugin
@@ -167,6 +169,7 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
       for(ManageDrivePlugin plugin : drivePlugins_) {
         plugin.init() ;
       }
+      getAllDrives(true);
     }catch(Exception e) {
     }
   }
@@ -213,10 +216,25 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
   /**
    * {@inheritDoc}
    */
-  @SuppressWarnings("unchecked")
   public List<DriveData> getAllDrives() throws Exception {
-    List<DriveData> allDrives = (List<DriveData>) drivesCache_.get(getRepoName() + "_" + ALL_DRIVES_CACHED);
+    return getAllDrives(false);
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  @SuppressWarnings("unchecked")
+  public List<DriveData> getAllDrives(boolean withVirtualDrives) throws Exception {
+    // Try to get from cache
+    List<DriveData> allDrives;
+    if (withVirtualDrives) {
+      allDrives = (List<DriveData>) drivesCache_.get(getRepoName() + "_" + ALL_DRIVES_CACHED_WITH_VIRTUAL);
+    } else {
+      allDrives = (List<DriveData>) drivesCache_.get(getRepoName() + "_" + ALL_DRIVES_CACHED);
+    }
     if ((allDrives != null) && (allDrives.size() > 0)) return allDrives;
+
+    // Get from jcr
     Session session = getSession() ;
     Node driveHome = (Node)session.getItem(baseDrivePath_);
     NodeIterator itr = driveHome.getNodes() ;
@@ -240,11 +258,21 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
       data.setAllowNodeTypesOnTree(drive.getProperty(ALLOW_NODETYPES_ON_TREE).getString());
       if ("Groups".equals(data.getName())) {
         groupDriveTemplate_ = data.clone();
+        // Include group drive template if necessary
+        if (withVirtualDrives) {
+          driveList.add(data);
+        }
       } else {
         driveList.add(data) ;
       }
     }
-    drivesCache_.put(getRepoName() + "_" + ALL_DRIVES_CACHED, driveList);
+
+    // Put drives to cache
+    if (withVirtualDrives) {
+      drivesCache_.put(getRepoName() + "_" + ALL_DRIVES_CACHED_WITH_VIRTUAL, driveList);
+    } else {
+      drivesCache_.put(getRepoName() + "_" + ALL_DRIVES_CACHED, driveList);
+    }
     session.logout();
     return driveList ;
   }
@@ -594,7 +622,7 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
     Node userNode = nodeHierarchyCreator_.getUserNode(sessionProvider, userId);
     Object drives = drivesCache_.get(getRepoName() + "_" + userId + ALL_PERSONAL_CACHED_DRIVE);
     if(drives != null) return (List<DriveData>) drives;
-    
+
     List<DriveData> personalDrives = new ArrayList<DriveData>();
     String userPath = userNode.getPath();
     for(DriveData drive : getAllDrives()) {
@@ -609,4 +637,12 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
     return personalDrives;
   }
 
+  @Override
+  public boolean isVitualDrive(String driveName) {
+    if (groupDriveTemplate_.getName().equals(driveName)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }
