@@ -213,6 +213,11 @@
     <servlet-name>ErrorLoginServlet</servlet-name>
     <servlet-class>org.exoplatform.web.login.ErrorLoginServlet</servlet-class>
   </servlet>
+  
+  <servlet>
+	<servlet-name>DoLoginServlet</servlet-name>
+	<servlet-class>org.exoplatform.web.login.DoLoginServlet</servlet-class>
+  </servlet>
 
   <servlet>
     <servlet-name>GateInServlet</servlet-name>
@@ -234,36 +239,20 @@
     <url-pattern>/login</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
+	<servlet-name>DoLoginServlet</servlet-name>
+	<url-pattern>/dologin</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
     <servlet-name>javascript</servlet-name>
     <url-pattern>/javascript/*</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>friendly</servlet-name>
     <url-pattern>/content/*</url-pattern>
-  </servlet-mapping>
+  </servlet-mapping>  
   <servlet-mapping>
     <servlet-name>portal</servlet-name>
-    <url-pattern>/private/*</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>portal</servlet-name>
-    <url-pattern>/public/*</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>portal</servlet-name>
-    <url-pattern>/admin/*</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>portal</servlet-name>
-    <url-pattern>/service</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>portal</servlet-name>
-    <url-pattern>/upload/*</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>portal</servlet-name>
-    <url-pattern>/download/*</url-pattern>
+    <url-pattern>/</url-pattern>
   </servlet-mapping>  
   <servlet-mapping>
     <servlet-name>RestServer</servlet-name>
@@ -272,6 +261,26 @@
   <servlet-mapping>
     <servlet-name>RestServer</servlet-name>
     <url-pattern>/rest-ecmdemo/private/*</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>default</servlet-name>
+    <url-pattern>*.jpg</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>default</servlet-name>
+    <url-pattern>*.png</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>default</servlet-name>
+    <url-pattern>*.gif</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>default</servlet-name>
+    <url-pattern>*.ico</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>default</servlet-name>
+    <url-pattern>*.css</url-pattern>
   </servlet-mapping>
 
   <servlet-mapping>
@@ -288,15 +297,13 @@
     <session-timeout>15</session-timeout>
   </session-config>
 
-  <!-- The Welcome File List for IBM WebSphere -->
-
-  <welcome-file-list>
-    <welcome-file>/index.jsp</welcome-file>
-  </welcome-file-list>
-
   <security-constraint>
     <web-resource-collection>
       <web-resource-name>user authentication</web-resource-name>
+      <url-pattern>/dologin</url-pattern>
+      <url-pattern>/standalone/*</url-pattern>
+      <url-pattern>/groups/*</url-pattern>
+      <url-pattern>/users/*</url-pattern>
       <url-pattern>/private/*</url-pattern>
       <http-method>POST</http-method>
       <http-method>GET</http-method>

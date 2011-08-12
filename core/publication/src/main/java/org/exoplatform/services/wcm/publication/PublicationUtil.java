@@ -351,7 +351,7 @@ public class PublicationUtil {
    */
   public static boolean isNodeContentPublishedToPageNode(Node contentNode, String navNodeURI) throws Exception {
     
-    UserPortal userPortal = Util.getUIPortalApplication().getUserPortalConfig().getUserPortal();
+    UserPortal userPortal = Util.getPortalRequestContext().getUserPortalConfig().getUserPortal();
 
     // make filter
     UserNodeFilterConfig.Builder filterConfigBuilder = UserNodeFilterConfig.builder();
@@ -360,7 +360,7 @@ public class PublicationUtil {
     UserNodeFilterConfig filterConfig = filterConfigBuilder.build();
 
     // get user node
-    String nodeURI = navNodeURI.replace("/" + Util.getUIPortalApplication().getOwner() + "/", "");
+    String nodeURI = navNodeURI.replace("/" + Util.getPortalRequestContext().getPortalOwner() + "/", "");
     UserNode userNode;
     if (Util.getUIPortal().getUserNavigation() != null) {
       userNode = userPortal.resolvePath(Util.getUIPortal().getUserNavigation(), filterConfig, nodeURI);

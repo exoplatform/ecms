@@ -29,6 +29,7 @@ import javax.portlet.PortletRequest;
 
 import org.exoplatform.commons.utils.PageList;
 import org.exoplatform.portal.application.PortalRequestContext;
+import org.exoplatform.portal.mop.SiteType;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.resolver.ResourceResolver;
 import org.exoplatform.services.jcr.RepositoryService;
@@ -39,6 +40,8 @@ import org.exoplatform.services.wcm.images.RESTImagesRendererService;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.services.wcm.webcontent.WebContentSchemaHandler;
 import org.exoplatform.wcm.webui.paginator.UICustomizeablePaginator;
+import org.exoplatform.web.url.navigation.NavigationResource;
+import org.exoplatform.web.url.navigation.NodeURL;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.application.portlet.PortletRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -356,7 +359,6 @@ public class UIPCLVForm extends UIForm {
    * @throws Exception the exception
    */
   public String generateLink(Node node) throws Exception {
-    PortalRequestContext portalRequestContext = Util.getPortalRequestContext();
     PortletRequestContext portletRequestContext = (PortletRequestContext) WebuiRequestContext.getCurrentInstance();
     PortletRequest portletRequest = portletRequestContext.getRequest();
     PortletPreferences portletPreferences = portletRequest.getPreferences();
@@ -381,10 +383,13 @@ public class UIPCLVForm extends UIForm {
     Node newNode = ((UIPCLVContainer) getParent()).getCategoryNode().getNode(nodeName);
     String path = newNode.getPath();
 
-    String link = null;
     String itemPath = path.substring(path.lastIndexOf(((UIPCLVContainer) getParent()).getTaxonomyTreeName()));
-    String portalURI = portalRequestContext.getPortalURI();
-    link = portalURI + preferenceTargetPage + "?path=/" + itemPath;
+    
+    NodeURL nodeURL = Util.getPortalRequestContext().createURL(NodeURL.TYPE);
+    NavigationResource resource = new NavigationResource(SiteType.PORTAL, Util.getPortalRequestContext().getPortalOwner(), preferenceTargetPage);
+    nodeURL.setResource(resource).setQueryParameterValue("path", itemPath);
+    String link = nodeURL.toString();
+    
     FriendlyService friendlyService = getApplicationComponent(FriendlyService.class);
     link = friendlyService.getFriendlyUri(link);
 

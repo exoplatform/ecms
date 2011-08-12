@@ -183,7 +183,7 @@ public class UIPublishClvChooser extends UIForm implements UIPopupComponent {
       publicationPlugin.publishContentToCLV(node,
                                             clvChooser.page,
                                             clvPortletId,
-                                            Util.getUIPortal().getOwner(),
+                                            Util.getUIPortal().getSiteKey().getName(),
                                             event.getRequestContext().getRemoteUser());
 
       UIPublicationPagesContainer uiPublicationPagesContainer =

@@ -32,7 +32,7 @@ import org.exoplatform.ecm.webui.presentation.AbstractActionComponent;
 import org.exoplatform.ecm.webui.presentation.UIBaseNodePresentation;
 import org.exoplatform.ecm.webui.presentation.removeattach.RemoveAttachmentComponent;
 import org.exoplatform.ecm.webui.presentation.removecomment.RemoveCommentComponent;
-import org.exoplatform.portal.application.PortalRequestContext;
+import org.exoplatform.portal.mop.SiteType;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.resolver.ResourceResolver;
 import org.exoplatform.services.cms.impl.DMSConfiguration;
@@ -41,8 +41,9 @@ import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.friendly.FriendlyService;
 import org.exoplatform.services.wcm.publication.WCMComposer;
 import org.exoplatform.wcm.webui.Utils;
-import org.exoplatform.wcm.webui.clv.UICLVPortlet;
 import org.exoplatform.web.application.Parameter;
+import org.exoplatform.web.url.navigation.NavigationResource;
+import org.exoplatform.web.url.navigation.NodeURL;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.application.portlet.PortletRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -233,11 +234,8 @@ public class UIPresentation extends UIBaseNodePresentation {
    * @throws Exception the exception
    */
   public String getViewableLink(Node node, Parameter[] params) throws Exception {
-    String link = null;
-    PortalRequestContext portalRequestContext = Util.getPortalRequestContext();
     PortletRequestContext portletRequestContext = WebuiRequestContext.getCurrentInstance();
     PortletRequest portletRequest = portletRequestContext.getRequest();
-    String portalURI = portalRequestContext.getPortalURI();
     NodeLocation nodeLocation = NodeLocation.getNodeLocationByNode(node);
     String baseURI = portletRequest.getScheme() + "://" + portletRequest.getServerName() + ":"
         + String.format("%s", portletRequest.getServerPort());
@@ -245,15 +243,22 @@ public class UIPresentation extends UIBaseNodePresentation {
     String scvWith = Utils.getPortletPreference(UISingleContentViewerPortlet.PREFERENCE_SHOW_SCV_WITH);
     if (scvWith == null || scvWith.length() == 0)
         scvWith = UISingleContentViewerPortlet.DEFAULT_SHOW_SCV_WITH;
+    
+    String param = "/" + nodeLocation.getRepository() + "/" + nodeLocation.getWorkspace();
+    
     if (node.isNodeType("nt:frozenNode")) {
       String uuid = node.getProperty("jcr:frozenUuid").getString();
       Node originalNode = node.getSession().getNodeByUUID(uuid);
-      link = baseURI + portalURI + basePath + "?" + scvWith + "=/" + nodeLocation.getRepository()
-          + "/" + nodeLocation.getWorkspace() + originalNode.getPath();
+      param += originalNode.getPath();
     } else {
-      link = baseURI + portalURI + basePath + "?" + scvWith + "=/" + nodeLocation.getRepository()
-          + "/" + nodeLocation.getWorkspace() + node.getPath();
+      param += node.getPath();
     }
+    
+    NodeURL nodeURL = Util.getPortalRequestContext().createURL(NodeURL.TYPE);
+    NavigationResource resource = new NavigationResource(SiteType.PORTAL, Util.getPortalRequestContext().getPortalOwner(), basePath);
+    nodeURL.setResource(resource).setQueryParameterValue(scvWith, param);
+    String link = baseURI + nodeURL.toString();
+    
     FriendlyService friendlyService = getApplicationComponent(FriendlyService.class);
     link = friendlyService.getFriendlyUri(link);
 

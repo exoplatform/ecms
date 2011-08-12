@@ -27,8 +27,11 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.portal.application.PortalRequestContext;
+import org.exoplatform.portal.mop.SiteType;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.wcm.core.WCMConfigurationService;
+import org.exoplatform.web.url.navigation.NavigationResource;
+import org.exoplatform.web.url.navigation.NodeURL;
 
 
 /**
@@ -109,12 +112,15 @@ public class WikiLinkParser {
   private String getBaseURI() {
     PortalRequestContext portalRequestContext = Util.getPortalRequestContext();
     HttpServletRequest servletRequest = portalRequestContext.getRequest();
-    String baseURI = servletRequest.getScheme() + "://" + servletRequest.getServerName() + ":"
-        + servletRequest.getServerPort() + portalRequestContext.getPortalURI();
     WCMConfigurationService configurationService = (WCMConfigurationService) ExoContainerContext.
         getCurrentContainer().getComponentInstanceOfType(WCMConfigurationService.class);
     String wikiContext = configurationService.getRuntimeContextParam(WCMConfigurationService.CREATE_WIKI_PAGE_URI);
-    return baseURI.concat(wikiContext);
+    
+    NodeURL nodeURL = portalRequestContext.createURL(NodeURL.TYPE);
+    NavigationResource resource = new NavigationResource(SiteType.PORTAL, portalRequestContext.getPortalOwner(), wikiContext);
+    nodeURL.setResource(resource);
+    
+    return servletRequest.getScheme() + "://" + servletRequest.getServerName() + ":" + servletRequest.getServerPort() + nodeURL.toString();
   }
 
   /**

@@ -294,7 +294,7 @@ public class DumpPublicationPlugin extends WebpagePublicationPlugin{
     StringBuilder windowId = new StringBuilder();
     windowId.append(PortalConfig.PORTAL_TYPE)
             .append("#")
-            .append(org.exoplatform.portal.webui.util.Util.getUIPortal().getOwner())
+            .append(org.exoplatform.portal.webui.util.Util.getUIPortal().getSiteKey().getName())
             .append(":")
             .append(configurationService.getRuntimeContextParam(WCMConfigurationService.SCV_PORTLET))
             .append("/")

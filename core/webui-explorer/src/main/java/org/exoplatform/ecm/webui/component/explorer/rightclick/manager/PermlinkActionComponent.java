@@ -26,8 +26,11 @@ import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsDocumentFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotInTrashFilter;
 import org.exoplatform.portal.application.PortalRequestContext;
+import org.exoplatform.portal.mop.SiteType;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.impl.Utils;
+import org.exoplatform.web.url.navigation.NavigationResource;
+import org.exoplatform.web.url.navigation.NodeURL;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.core.lifecycle.UIContainerLifecycle;
 import org.exoplatform.webui.ext.filter.UIExtensionFilter;
@@ -56,9 +59,7 @@ public class PermlinkActionComponent extends UIAbstractManagerComponent {
   public String getPermlink(Node node) throws Exception {
     UIJCRExplorer uiExplorer = getAncestorOfType(UIJCRExplorer.class);
     PortalRequestContext pcontext = Util.getPortalRequestContext();
-    String portalUrl = pcontext.getPortalURI();
-    String nodePathUrl = pcontext.getNodePath();
-    String portletId = nodePathUrl.split("/")[1];
+    String portletId = pcontext.getNodePath();
     String drivename = uiExplorer.getDriveData().getName();
     String drivePath = uiExplorer.getDriveData().getHomePath();
     String userId = Util.getPortalRequestContext().getRemoteUser();
@@ -67,15 +68,18 @@ public class PermlinkActionComponent extends UIAbstractManagerComponent {
     }
     String nodePath = node.getPath().replace(drivePath, "/").replaceAll("/+", "/");
     String repository = uiExplorer.getRepositoryName();
-    StringBuffer bf = new StringBuffer(1024);
-    return bf.append(portalUrl)
-             .append(portletId)
-             .append("/")
-             .append(repository)
-             .append("/")
-             .append(drivename)
-             .append(nodePath)
-             .toString();
+    
+    String nodeURI = new StringBuilder().append(portletId)
+                                        .append("/")
+                                        .append(repository)
+                                        .append("/")
+                                        .append(drivename)
+                                        .append(nodePath)
+                                        .toString();
+    NodeURL nodeURL = Util.getPortalRequestContext().createURL(NodeURL.TYPE);
+    NavigationResource resource = new NavigationResource(pcontext.getSiteType(), pcontext.getSiteName(), nodeURI);
+    nodeURL.setResource(resource);
+    return nodeURL.toString();
   }
 
   @Override

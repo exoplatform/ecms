@@ -107,6 +107,11 @@
   </component>
 
   <component>
+    <key>org.exoplatform.web.application.javascript.JavascriptConfigService</key>
+    <type>org.exoplatform.web.application.javascript.JavascriptConfigService</type>
+  </component>
+
+  <component>
     <key>org.exoplatform.services.wcm.javascript.XJavascriptService</key>
     <type>org.exoplatform.services.wcm.javascript.XJavascriptService</type>
   </component>

@@ -123,7 +123,7 @@ public class UIContentSearchForm extends UIForm {
 
   private List<String> getPortalNames() throws Exception {
     List<String> portalNames = new ArrayList<String>();
-    String currentPortalName = Util.getUIPortalApplication().getOwner();
+    String currentPortalName = Util.getPortalRequestContext().getPortalOwner();
     RepositoryService repoService = getApplicationComponent(RepositoryService.class);
     String repository = repoService.getCurrentRepository().getConfiguration().getName();
     WCMConfigurationService configService = getApplicationComponent(WCMConfigurationService.class);

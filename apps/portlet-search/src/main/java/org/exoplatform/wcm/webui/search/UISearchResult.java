@@ -32,6 +32,7 @@ import org.exoplatform.commons.utils.ISO8601;
 import org.exoplatform.commons.utils.ObjectPageList;
 import org.exoplatform.commons.utils.PageList;
 import org.exoplatform.portal.application.PortalRequestContext;
+import org.exoplatform.portal.mop.SiteType;
 import org.exoplatform.portal.webui.container.UIContainer;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.resolver.ResourceResolver;
@@ -44,6 +45,8 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.wcm.webui.Utils;
 import org.exoplatform.wcm.webui.paginator.UICustomizeablePaginator;
 import org.exoplatform.web.application.ApplicationMessage;
+import org.exoplatform.web.url.navigation.NavigationResource;
+import org.exoplatform.web.url.navigation.NodeURL;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.application.portlet.PortletRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -347,10 +350,7 @@ public class UISearchResult extends UIContainer {
    * @throws Exception the exception
    */
   public String getURL(Node node) throws Exception {
-    String link = null;
-    PortalRequestContext portalRequestContext = Util.getPortalRequestContext();
     PortletRequest portletRequest = getPortletRequest();
-    String portalURI = portalRequestContext.getPortalURI();
     PortletPreferences portletPreferences = portletRequest.getPreferences();
     String repository = portletPreferences.getValue(UIWCMSearchPortlet.REPOSITORY, null);
     String workspace = portletPreferences.getValue(UIWCMSearchPortlet.WORKSPACE, null);
@@ -358,16 +358,21 @@ public class UISearchResult extends UIContainer {
         + String.format("%s", portletRequest.getServerPort());
     String basePath = portletPreferences.getValue(UIWCMSearchPortlet.BASE_PATH, null);
 
-    link = baseURI + portalURI + basePath + "/" + repository + "/" + workspace;
+    String nodeURI = basePath + "/" + repository + "/" + workspace;
+    NodeURL nodeURL = Util.getPortalRequestContext().createURL(NodeURL.TYPE);    
     if (node.isNodeType("nt:frozenNode")) {
       String uuid = node.getProperty("jcr:frozenUuid").getString();
       Node originalNode = node.getSession().getNodeByUUID(uuid);
-      link += originalNode.getPath() + "?version=" + node.getParent().getName();
+      nodeURI += originalNode.getPath();
+      NavigationResource resource = new NavigationResource(SiteType.PORTAL, Util.getPortalRequestContext().getPortalOwner(), nodeURI);
+      nodeURL.setResource(resource).setQueryParameterValue("version", node.getParent().getName());
     } else {
-      link += node.getPath();
+      nodeURI += node.getPath();
+      NavigationResource resource = new NavigationResource(SiteType.PORTAL, Util.getPortalRequestContext().getPortalOwner(), nodeURI);
+      nodeURL.setResource(resource);
     }
 
-    return link;
+    return baseURI + nodeURL.toString();
   }
 
   private PortletRequest getPortletRequest() {

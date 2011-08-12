@@ -129,7 +129,7 @@
       <%}%>
       eXo.env.portal.portalName = '<%=rcontext.getPortalOwner()%>' ;
       eXo.env.server.context = '<%=docBase%>' ;
-      eXo.env.server.portalBaseURL = '<%=rcontext.getURLBuilder().getBaseURL()%>' ;
+      eXo.env.server.portalBaseURL = '<%=rcontext.getRequest().getRequestURI()%>' ;
       eXo.env.client.skin = '$skin' ;
       <% 
         UIPortal portal = uicomponent.findFirstComponentOfType(UIPortal.class);

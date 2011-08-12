@@ -34,6 +34,7 @@ import org.exoplatform.container.PortalContainer;
 import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.ecm.webui.utils.LockUtil;
 import org.exoplatform.portal.application.PortalRequestContext;
+import org.exoplatform.portal.mop.SiteType;
 import org.exoplatform.portal.webui.application.UIPortlet;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.templates.TemplateService;
@@ -41,6 +42,8 @@ import org.exoplatform.services.ecm.publication.PublicationService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.wcm.publication.WCMComposer;
 import org.exoplatform.wcm.webui.Utils;
+import org.exoplatform.web.url.navigation.NavigationResource;
+import org.exoplatform.web.url.navigation.NodeURL;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.application.portlet.PortletRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -342,12 +345,17 @@ public class UIPresentationContainer extends UIContainer{
     String strPath = tempNode.getPath();
     String repository = ((ManageableRepository)tempNode.getSession().getRepository()).getConfiguration().getName();
     String workspace = tempNode.getSession().getWorkspace().getName();
-    String portalURI = Util.getPortalRequestContext().getPortalURI();
     String printPageUrl = portletPreferences.getValue(UISingleContentViewerPortlet.PRINT_PAGE, "");
     printParameterName = portletPreferences.getValue(UISingleContentViewerPortlet.PRINT_PARAMETER, "");
-    String printUrl = portalURI + printPageUrl + "?" + printParameterName + "=/" + repository + "/"
-        + workspace + strPath + "&isPrint=true&noadminbar=true";
-    return printUrl;
+    
+    String paramName = "/" + repository + "/" + workspace + strPath;
+    NodeURL nodeURL = Util.getPortalRequestContext().createURL(NodeURL.TYPE);
+    NavigationResource resource = new NavigationResource(SiteType.PORTAL, Util.getPortalRequestContext().getPortalOwner(), printPageUrl);
+    nodeURL.setResource(resource);
+    nodeURL.setQueryParameterValue(printParameterName, paramName);
+    nodeURL.setQueryParameterValue("isPrint", "true");
+    nodeURL.setQueryParameterValue("noadminbar", "true");
+    return nodeURL.toString();
   }
 
   @Deprecated

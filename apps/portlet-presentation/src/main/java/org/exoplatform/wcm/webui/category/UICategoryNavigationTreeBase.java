@@ -29,12 +29,15 @@ import javax.servlet.http.HttpServletRequestWrapper;
 import org.apache.commons.lang.StringUtils;
 import org.exoplatform.ecm.resolver.JCRResourceResolver;
 import org.exoplatform.ecm.webui.utils.Utils;
+import org.exoplatform.portal.mop.SiteType;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.resolver.ResourceResolver;
 import org.exoplatform.services.cms.impl.DMSConfiguration;
 import org.exoplatform.services.cms.taxonomy.TaxonomyService;
 import org.exoplatform.services.wcm.friendly.FriendlyService;
 import org.exoplatform.services.wcm.portal.LivePortalManagerService;
+import org.exoplatform.web.url.navigation.NavigationResource;
+import org.exoplatform.web.url.navigation.NodeURL;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.application.portlet.PortletRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -298,9 +301,6 @@ public class UICategoryNavigationTreeBase extends UITree {
    * @throws Exception the exception
    */
   public String renderCategoryLink(Node node) throws Exception {
-    // portalURI: /portal/private/acme/
-    String portalURI = Util.getPortalRequestContext().getPortalURI();
-
     // preferenceTargetPage: products/presentation/pclv
     PortletPreferences portletPreferences = UICategoryNavigationUtils.getPortletPreferences();
     String preferenceTargetPage = portletPreferences.getValue(UICategoryNavigationConstant.PREFERENCE_TARGET_PAGE, "");
@@ -312,7 +312,10 @@ public class UICategoryNavigationTreeBase extends UITree {
 //    categoryPath = categoryPath.substring(categoryPath.indexOf(preferenceTreeName) + preferenceTreeName.length());
     categoryPath = categoryPath.substring(categoryPath.indexOf(preferenceTreeName)-1);
 
-    String link = portalURI + preferenceTargetPage + "?path=" + categoryPath;
+    NodeURL nodeURL = Util.getPortalRequestContext().createURL(NodeURL.TYPE);
+    NavigationResource resource = new NavigationResource(SiteType.PORTAL, Util.getPortalRequestContext().getPortalOwner(), preferenceTargetPage);
+    nodeURL.setResource(resource).setQueryParameterValue("path", categoryPath);
+    String link = nodeURL.toString();
 
     FriendlyService friendlyService = getApplicationComponent(FriendlyService.class);
     link = friendlyService.getFriendlyUri(link);

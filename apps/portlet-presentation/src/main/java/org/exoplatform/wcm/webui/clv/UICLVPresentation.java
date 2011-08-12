@@ -39,6 +39,7 @@ import org.exoplatform.container.PortalContainer;
 import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.ecm.webui.utils.LockUtil;
 import org.exoplatform.portal.application.PortalRequestContext;
+import org.exoplatform.portal.mop.SiteType;
 import org.exoplatform.portal.webui.container.UIContainer;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.resolver.ResourceResolver;
@@ -58,6 +59,8 @@ import org.exoplatform.services.wcm.webcontent.WebContentSchemaHandler;
 import org.exoplatform.wcm.webui.Utils;
 import org.exoplatform.wcm.webui.paginator.UICustomizeablePaginator;
 import org.exoplatform.web.application.ApplicationMessage;
+import org.exoplatform.web.url.navigation.NavigationResource;
+import org.exoplatform.web.url.navigation.NodeURL;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.application.portlet.PortletRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -260,10 +263,8 @@ public class UICLVPresentation extends UIContainer {
    */
   public String getCategoryURL(Node node) throws Exception {
     String link = null;
-    PortalRequestContext portalRequestContext = Util.getPortalRequestContext();
     PortletRequestContext portletRequestContext = WebuiRequestContext.getCurrentInstance();
     PortletRequest portletRequest = portletRequestContext.getRequest();
-    String portalURI = portalRequestContext.getPortalURI();
     NodeLocation nodeLocation = NodeLocation.getNodeLocationByNode(node);
     String baseURI = portletRequest.getScheme() + "://" + portletRequest.getServerName() + ":"
         + String.format("%s", portletRequest.getServerPort());
@@ -273,7 +274,11 @@ public class UICLVPresentation extends UIContainer {
       clvBy = UICLVPortlet.DEFAULT_SHOW_CLV_BY;
         
     String params =  nodeLocation.getRepository() + ":" + nodeLocation.getWorkspace() +":"+ node.getPath();
-    link = baseURI + portalURI + basePath + "?" + clvBy + "=" + Text.escape(params);
+    
+    NodeURL nodeURL = Util.getPortalRequestContext().createURL(NodeURL.TYPE);
+    NavigationResource resource = new NavigationResource(SiteType.PORTAL, Util.getPortalRequestContext().getPortalOwner(), basePath);
+    nodeURL.setResource(resource).setQueryParameterValue(clvBy, params);
+    link = baseURI + nodeURL.toString();
 
     FriendlyService friendlyService = getApplicationComponent(FriendlyService.class);
     link = friendlyService.getFriendlyUri(link);
@@ -412,10 +417,8 @@ public class UICLVPresentation extends UIContainer {
    */
   public String getURL(Node node) throws Exception {
     String link = null;
-    PortalRequestContext portalRequestContext = Util.getPortalRequestContext();
     PortletRequestContext portletRequestContext = WebuiRequestContext.getCurrentInstance();
     PortletRequest portletRequest = portletRequestContext.getRequest();
-    String portalURI = portalRequestContext.getPortalURI();
     NodeLocation nodeLocation = NodeLocation.getNodeLocationByNode(node);
     String baseURI = portletRequest.getScheme() + "://" + portletRequest.getServerName() + ":"
         + String.format("%s", portletRequest.getServerPort());
@@ -423,22 +426,27 @@ public class UICLVPresentation extends UIContainer {
     String scvWith = Utils.getPortletPreference(UICLVPortlet.PREFERENCE_SHOW_SCV_WITH);
     if (scvWith == null || scvWith.length() == 0)
       scvWith = UICLVPortlet.DEFAULT_SHOW_SCV_WITH;
+    
+    String param = "/" + nodeLocation.getRepository() + "/" + nodeLocation.getWorkspace();
     if (node.isNodeType("nt:frozenNode")) {
       String uuid = node.getProperty("jcr:frozenUuid").getString();
       Node originalNode = node.getSession().getNodeByUUID(uuid);
-      link = baseURI + portalURI + basePath + "?" + scvWith + "=/" + nodeLocation.getRepository()
-          + "/" + nodeLocation.getWorkspace() + originalNode.getPath();
+      param += originalNode.getPath();
     } else {
-      link = baseURI + portalURI + basePath + "?" + scvWith + "=/" + nodeLocation.getRepository()
-          + "/" + nodeLocation.getWorkspace() + node.getPath();
+      param += node.getPath();
     }
+    
+    NodeURL nodeURL = Util.getPortalRequestContext().createURL(NodeURL.TYPE);
+    NavigationResource resource = new NavigationResource(SiteType.PORTAL, Util.getPortalRequestContext().getPortalOwner(), basePath);
+    nodeURL.setResource(resource).setQueryParameterValue(scvWith, param);
 
     String fullPath = this.getAncestorOfType(UICLVPortlet.class).getFolderPathParamValue();
     if (fullPath != null) {
       String clvBy = Utils.getPortletPreference(UICLVPortlet.PREFERENCE_SHOW_CLV_BY);
-      link += "&" + clvBy + "=" + fullPath;
+      nodeURL.setQueryParameterValue(clvBy, fullPath);
     }
 
+    link = baseURI + nodeURL.toString();
     FriendlyService friendlyService = getApplicationComponent(FriendlyService.class);
     link = friendlyService.getFriendlyUri(link);
     link = link.replaceAll("%27", "%2527");
@@ -672,14 +680,14 @@ public class UICLVPresentation extends UIContainer {
     if (fullPath == null || fullPath.length() == 0)
       fullPath = Utils.getPortletPreference(UICLVPortlet.PREFERENCE_ITEM_PATH);
     if (fullPath == null)
-      return "/" + portal + "/" + rest + "&siteName=" + Util.getUIPortal().getOwner() + "&orderBy="
+      return "/" + portal + "/" + rest + "&siteName=" + Util.getUIPortal().getSiteKey().getName() + "&orderBy="
           + Utils.getPortletPreference(UICLVPortlet.PREFERENCE_ORDER_BY) + "&orderType="
           + Utils.getPortletPreference(UICLVPortlet.PREFERENCE_ORDER_TYPE) + "&detailPage="
           + Utils.getPortletPreference(UICLVPortlet.PREFERENCE_TARGET_PAGE) + "&detailParam="
           + Utils.getPortletPreference(UICLVPortlet.PREFERENCE_SHOW_SCV_WITH);
     String[] repoWsPath = fullPath.split(":");
     return "/" + portal + "/" + rest + "/feed/rss?repository=" + repoWsPath[0] + "&workspace="
-        + repoWsPath[1] + "&server=" + server + "&siteName=" + Util.getUIPortal().getOwner()
+        + repoWsPath[1] + "&server=" + server + "&siteName=" + Util.getUIPortal().getSiteKey().getName()
         + "&folderPath=" + repoWsPath[2] + "&orderBy="
         + Utils.getPortletPreference(UICLVPortlet.PREFERENCE_ORDER_BY)
         + "&orderType="

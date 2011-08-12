@@ -25,6 +25,7 @@ import javax.portlet.PortletPreferences;
 
 import org.exoplatform.ecm.webui.selector.UISelectable;
 import org.exoplatform.portal.application.PortalRequestContext;
+import org.exoplatform.portal.mop.SiteType;
 import org.exoplatform.portal.webui.portal.UIPortal;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.taxonomy.TaxonomyService;
@@ -39,6 +40,9 @@ import org.exoplatform.wcm.webui.category.UICategoryNavigationPortlet;
 import org.exoplatform.wcm.webui.category.UICategoryNavigationUtils;
 import org.exoplatform.wcm.webui.selector.page.UIPageSelector;
 import org.exoplatform.web.application.ApplicationMessage;
+import org.exoplatform.web.url.PortalURL;
+import org.exoplatform.web.url.navigation.NavigationResource;
+import org.exoplatform.web.url.navigation.NodeURL;
 import org.exoplatform.webui.application.portlet.PortletRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -251,13 +255,12 @@ public class UICategoryNavigationConfig extends UIForm implements UISelectable {
         PortalRequestContext portalRequestContext = Util.getPortalRequestContext();
         UIPortal uiPortal = Util.getUIPortal();
 
-        String pageNodeSelected = uiPortal.getSelectedUserNode().getName();
-        String portalURI = portalRequestContext.getPortalURI();
+        NodeURL nodeURL = portalRequestContext.createURL(NodeURL.TYPE);
+        String uri = nodeURL.setNode(uiPortal.getSelectedUserNode()).toString();
 
         ((PortletRequestContext)event.getRequestContext()).setApplicationMode(PortletMode.VIEW);
         Utils.closePopupWindow(categoryNavigationConfig, UICategoryNavigationPortlet.CONFIG_POPUP_WINDOW);
-        event.getRequestContext().getJavascriptManager().addJavascript("ajaxRedirect('" + portalURI
-            + pageNodeSelected + "');");
+        event.getRequestContext().getJavascriptManager().addJavascript("ajaxRedirect('" + uri + "');");
       } else {
         if (Utils.isQuickEditMode(categoryNavigationConfig,
                                   UICategoryNavigationPortlet.CONFIG_POPUP_WINDOW)) {

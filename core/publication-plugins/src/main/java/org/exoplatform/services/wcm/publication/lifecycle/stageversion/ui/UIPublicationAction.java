@@ -156,7 +156,7 @@ public class UIPublicationAction extends UIForm {
       Page page = userPortalConfigService.getPage(userNode.getPageRef(), event.getRequestContext().getRemoteUser());
       List<String> clvPortletIds = getManualModeCLVPortletIDs(page);
       if (clvPortletIds.isEmpty()) {
-        presentationService.publishContentSCV(node, page, Util.getUIPortal().getOwner());
+        presentationService.publishContentSCV(node, page, Util.getUIPortal().getSiteKey().getName());
       } else {
         if (clvPortletIds.size() > 1) {
           UIPublishClvChooser clvChooser = publicationAction.createUIComponent(UIPublishClvChooser.class,
@@ -176,7 +176,7 @@ public class UIPublicationAction extends UIForm {
           presentationService.publishContentCLV(node,
                                                 page,
                                                 clvPortletId,
-                                                Util.getUIPortal().getOwner(),
+                                                Util.getUIPortal().getSiteKey().getName(),
                                                 event.getRequestContext().getRemoteUser());
         }
       }

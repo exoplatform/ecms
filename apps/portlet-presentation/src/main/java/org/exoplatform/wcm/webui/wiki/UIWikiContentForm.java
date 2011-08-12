@@ -32,6 +32,8 @@ import org.exoplatform.portal.config.UserACL;
 import org.exoplatform.portal.config.UserPortalConfigService;
 import org.exoplatform.portal.config.model.Page;
 import org.exoplatform.portal.config.model.PortalConfig;
+import org.exoplatform.portal.mop.SiteKey;
+import org.exoplatform.portal.mop.SiteType;
 import org.exoplatform.portal.webui.application.UIPortlet;
 import org.exoplatform.portal.webui.page.UIPage;
 import org.exoplatform.portal.webui.portal.UIPortal;
@@ -47,6 +49,8 @@ import org.exoplatform.services.wcm.portal.PortalFolderSchemaHandler;
 import org.exoplatform.services.wcm.webcontent.WebContentSchemaHandler;
 import org.exoplatform.wcm.webui.Utils;
 import org.exoplatform.wcm.webui.scv.UISingleContentViewerPortlet;
+import org.exoplatform.web.url.navigation.NavigationResource;
+import org.exoplatform.web.url.navigation.NodeURL;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.application.portlet.PortletRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
@@ -138,8 +142,7 @@ public class UIWikiContentForm extends UIForm {
     UIPage uiPage = uiPortal.createUIComponent(webuiReqContext, UIPage.class, null, null);
     uiPage.setEditPermission(uiPortal.getEditPermission());
     uiPage.setAccessPermissions(new String[] {UserACL.EVERYONE});
-    uiPage.setOwnerId(uiPortal.getName());
-    uiPage.setOwnerType(PortalConfig.PORTAL_TYPE);
+    uiPage.setSiteKey(uiPortal.getSiteKey());
     uiPage.setName(pageName);
     Page page = PortalDataMapper.toPageModel(uiPage);
     portalCfgService.create(page);
@@ -219,7 +222,7 @@ public class UIWikiContentForm extends UIForm {
     String random = IdGenerator.generate();
     windowId.append(PortalConfig.PORTAL_TYPE)
     .append("#")
-    .append(uiPortal.getOwner())
+    .append(uiPortal.getSiteKey().getName())
     .append(":")
     .append(wcmCfgService.getRuntimeContextParam(WCMConfigurationService.SCV_PORTLET))
     .append("/")
@@ -299,7 +302,7 @@ public class UIWikiContentForm extends UIForm {
    * @throws Exception the exception
    */
   private Node createNewWebContentNode(String webContentName, String title, String content) throws Exception {
-    String portalName = Util.getUIPortalApplication().getOwner();
+    String portalName = Util.getPortalRequestContext().getPortalOwner();
     LivePortalManagerService livePortalManagerService = getApplicationComponent(LivePortalManagerService.class);
     Node portalNode = livePortalManagerService.getLivePortal(Utils.getSessionProvider(), portalName);
     WebSchemaConfigService webSchemaConfigService = getApplicationComponent(WebSchemaConfigService.class);
@@ -402,12 +405,14 @@ public class UIWikiContentForm extends UIForm {
   private String getNewNodeURL(HttpServletRequestWrapper reqWrapper,
       String newNodeUri) {
     String scheme = reqWrapper.getScheme();
-    PortalRequestContext portalReqContext = Util.getPortalRequestContext();
-    String portalUri = portalReqContext.getPortalURI();
     String serverName = reqWrapper.getServerName();
     String serverPort = String.valueOf(reqWrapper.getServerPort());
-    String link = scheme + "://" + serverName + ":" + serverPort +
-    portalUri + newNodeUri;
+    
+    NodeURL nodeURL = Util.getPortalRequestContext().createURL(NodeURL.TYPE);
+    NavigationResource resource = new NavigationResource(SiteType.PORTAL, Util.getPortalRequestContext().getPortalOwner(), newNodeUri);
+    nodeURL.setResource(resource);
+    String link = scheme + "://" + serverName + ":" + serverPort + nodeURL.toString();
+    
     return link;
   }
 

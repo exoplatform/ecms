@@ -17,6 +17,7 @@
 package org.exoplatform.wcm.webui;
 
 import java.util.HashMap;
+import java.util.List;
 
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
@@ -32,8 +33,10 @@ import org.exoplatform.portal.application.PortalRequestContext;
 import org.exoplatform.portal.config.DataStorage;
 import org.exoplatform.portal.config.UserACL;
 import org.exoplatform.portal.config.model.Page;
+import org.exoplatform.portal.mop.SiteType;
 import org.exoplatform.portal.mop.user.UserNavigation;
 import org.exoplatform.portal.mop.user.UserNode;
+import org.exoplatform.portal.mop.user.UserPortal;
 import org.exoplatform.portal.webui.page.UIPage;
 import org.exoplatform.portal.webui.page.UIPageBody;
 import org.exoplatform.portal.webui.portal.UIPortal;
@@ -58,6 +61,7 @@ import org.exoplatform.services.wcm.publication.WCMPublicationService;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.wcm.webui.core.UIPopupWindow;
 import org.exoplatform.web.application.ApplicationMessage;
+import org.exoplatform.web.url.navigation.NodeURL;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.application.portlet.PortletRequestContext;
 import org.exoplatform.webui.core.UIApplication;
@@ -411,24 +415,43 @@ public class Utils {
    * @return
    */
   public static String getEditLink(String itemPath, boolean isEditable, boolean isNew) {
-    StringBuilder link = new StringBuilder();
     PortalRequestContext pContext = Util.getPortalRequestContext();
-    String portalURI = pContext.getPortalURI();
     String backto = pContext.getRequestURI();
     WCMConfigurationService configurationService = Util.getUIPortalApplication()
                                                        .getApplicationComponent(WCMConfigurationService.class);
     String editorPageURI = configurationService.getRuntimeContextParam(WCMConfigurationService.EDITOR_PAGE_URI);
-    link.append(portalURI).append(editorPageURI).append("?").append("path=/").append(itemPath);
-    if (isEditable)
-      link.append("&edit=true");
-    if (isNew)
-      link.append("&addNew=true");
-    link.append("&")
-        .append(org.exoplatform.ecm.webui.utils.Utils.URL_BACKTO)
-        .append("=")
-        .append(backto);
+    UserNode editorNode = getEditorNode(editorPageURI);
+    
+    if (editorNode == null) {
+      return "";
+    }
+    
+    NodeURL nodeURL = pContext.createURL(NodeURL.TYPE);
+    nodeURL.setNode(editorNode).setQueryParameterValue("path", "/" + itemPath);
+    if (isEditable) {
+      nodeURL.setQueryParameterValue("edit", "true");
+    }
+    if (isNew) {
+      nodeURL.setQueryParameterValue("addNew", "true");
+    }
+    nodeURL.setQueryParameterValue(org.exoplatform.ecm.webui.utils.Utils.URL_BACKTO, backto);
 
-    return link.toString();
+    return nodeURL.toString();
+  }
+  
+  private static UserNode getEditorNode(String editorPageURI) {
+    UserPortal userPortal = Util.getPortalRequestContext().getUserPortalConfig().getUserPortal();
+    List<UserNavigation> allNavs = userPortal.getNavigations();
+
+    for (UserNavigation nav : allNavs) {
+      if (nav.getKey().getType().equals(SiteType.GROUP)) {
+        UserNode userNode = userPortal.resolvePath(nav, null, editorPageURI);
+        if (userNode != null) {
+          return userNode;
+        }
+      }
+    }
+    return null;
   }
 
   /**
@@ -751,8 +774,8 @@ public class Utils {
     UIPortal currentUIPortal = portalApp.<UIWorkingWorkspace> findComponentById(UIPortalApplication.UI_WORKING_WS_ID)
                                         .findFirstComponentOfType(UIPortal.class);
     UserACL userACL = portalApp.getApplicationComponent(UserACL.class);
-    return userACL.hasEditPermissionOnPortal(currentUIPortal.getOwnerType(),
-                                             currentUIPortal.getOwner(),
+    return userACL.hasEditPermissionOnPortal(currentUIPortal.getSiteKey().getTypeName(),
+                                             currentUIPortal.getSiteKey().getName(),
                                              currentUIPortal.getEditPermission());
   }
 

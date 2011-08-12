@@ -243,7 +243,7 @@ public class UIPCLVContainer extends UIContainer {
     String rest = PortalContainer.getCurrentRestContextName();
     parameterizedContentListViewer.setRssLink("/" + portal + "/" + rest
         + "/rss/generate?repository=" + preferenceRepository + "&workspace=" + workspace
-        + "&server=" + server + "&siteName=" + Util.getUIPortal().getOwner() + "&categoryPath="
+        + "&server=" + server + "&siteName=" + Util.getUIPortal().getSiteKey().getName() + "&categoryPath=" 
         + ("".equals(categoryPath) ? preferenceTreeName : preferenceTreeName + "/" + categoryPath));
   }
 
