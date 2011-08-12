@@ -1,0 +1,30 @@
+Index: ext/authoring/services/src/main/java/org/exoplatform/services/wcm/extensions/publication/WCMPublicationServiceImpl.java
+===================================================================
+--- ext/authoring/services/src/main/java/org/exoplatform/services/wcm/extensions/publication/WCMPublicationServiceImpl.java	(revision 71078)
++++ ext/authoring/services/src/main/java/org/exoplatform/services/wcm/extensions/publication/WCMPublicationServiceImpl.java	(working copy)
+@@ -221,5 +221,6 @@
+                               node.getSession().getWorkspace().getName(),
+                               node.getPath(),
+                               new HashMap<String, String>());
++    listenerService.broadcast(UPDATE_EVENT, cmsService, node);
+   }
+ }
+Index: core/publication/src/main/java/org/exoplatform/services/wcm/publication/WCMPublicationServiceImpl.java
+===================================================================
+--- core/publication/src/main/java/org/exoplatform/services/wcm/publication/WCMPublicationServiceImpl.java	(revision 71078)
++++ core/publication/src/main/java/org/exoplatform/services/wcm/publication/WCMPublicationServiceImpl.java	(working copy)
+@@ -50,11 +50,11 @@
+     new HashMap<String, WebpagePublicationPlugin>();  
+   
+   /** The publication service. */
+-  private PublicationService publicationService;
++  protected PublicationService publicationService;
+ 
+-  private ListenerService listenerService;
++  protected ListenerService listenerService;
+   
+-  private CmsService cmsService;
++  protected CmsService cmsService;
+   
+   /**
+    * Instantiates a new WCM publication service.
