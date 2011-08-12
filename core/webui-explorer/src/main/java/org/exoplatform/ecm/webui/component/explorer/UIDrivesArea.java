@@ -76,6 +76,7 @@ public class UIDrivesArea extends UIContainer {
   final public static String FIELD_SELECTREPO = "selectRepo" ; 
   private String repoName_;
   private boolean firstVisit = true;
+  private List<String> userRoles_ = null;
   
   public UIDrivesArea() throws Exception {
   }
@@ -137,11 +138,16 @@ public class UIDrivesArea extends UIContainer {
     return repoName_;
   }
   
-  public void setRepository(String repoName) {repoName_ = repoName; }  
+  public void setRepository(String repoName) {repoName_ = repoName; }
+
+  private List<String> getUserRoles() throws Exception {
+    if (userRoles_==null) userRoles_ = Utils.getMemberships();
+    return userRoles_;
+  }
   
   public List<DriveData> mainDrives() throws Exception {
     ManageDriveService driveService = getApplicationComponent(ManageDriveService.class);      
-    List<String> userRoles = Utils.getMemberships();    
+    List<String> userRoles = getUserRoles();
     String userId = Util.getPortalRequestContext().getRemoteUser();
     return driveService.getMainDrives(getRepository(), userId, userRoles);
   }
@@ -149,14 +155,14 @@ public class UIDrivesArea extends UIContainer {
   public List<DriveData> groupDrives() throws Exception {
     ManageDriveService driveService = getApplicationComponent(ManageDriveService.class);
     List<String> groups = Utils.getGroups();
-    List<String> userRoles = Utils.getMemberships();    
+    List<String> userRoles = getUserRoles();
     String userId = Util.getPortalRequestContext().getRemoteUser();
     return driveService.getGroupDrives(getRepository(), userId, userRoles, groups);
   }
   
   public List<DriveData> personalDrives() throws Exception {
     ManageDriveService driveService = getApplicationComponent(ManageDriveService.class);      
-    List<String> userRoles = Utils.getMemberships();    
+    List<String> userRoles = getUserRoles();
     String userId = Util.getPortalRequestContext().getRemoteUser();
     return driveService.getPersonalDrives(getRepository(), userId, userRoles);
   }
