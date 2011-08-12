@@ -1796,6 +1796,7 @@
     </msg>
     <title>
       <AddPermission>Thêm quyền truy nhập</AddPermission>
+      <RemovePermission>Xóa quyền truy nhập</RemovePermission>
     </title>
   </UITemplateContent>
   <!--

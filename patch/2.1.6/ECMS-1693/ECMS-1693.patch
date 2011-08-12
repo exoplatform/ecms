@@ -1,0 +1,258 @@
+Index: apps/portlet-administration/src/main/webapp/WEB-INF/classes/locale/portlet/administration/ECMAdminPortlet_vi.xml
+===================================================================
+--- apps/portlet-administration/src/main/webapp/WEB-INF/classes/locale/portlet/administration/ECMAdminPortlet_vi.xml	(revision 69714)
++++ apps/portlet-administration/src/main/webapp/WEB-INF/classes/locale/portlet/administration/ECMAdminPortlet_vi.xml	(working copy)
+@@ -1796,6 +1796,7 @@
+     </msg>
+     <title>
+       <AddPermission>Thêm quyền truy nhập</AddPermission>
++      <RemovePermission>Xóa quyền truy nhập</RemovePermission>
+     </title>
+   </UITemplateContent>
+   <!--
+Index: apps/portlet-administration/src/main/webapp/WEB-INF/classes/locale/portlet/administration/ECMAdminPortlet_en.xml
+===================================================================
+--- apps/portlet-administration/src/main/webapp/WEB-INF/classes/locale/portlet/administration/ECMAdminPortlet_en.xml	(revision 69714)
++++ apps/portlet-administration/src/main/webapp/WEB-INF/classes/locale/portlet/administration/ECMAdminPortlet_en.xml	(working copy)
+@@ -1800,6 +1800,7 @@
+     </msg>
+     <title>
+       <AddPermission>Add Permission</AddPermission>
++      <RemovePermission>Remove Permission</RemovePermission>
+     </title>
+   </UITemplateContent>
+   <!--
+Index: apps/portlet-administration/src/main/webapp/WEB-INF/classes/locale/portlet/administration/ECMAdminPortlet_fr.xml
+===================================================================
+--- apps/portlet-administration/src/main/webapp/WEB-INF/classes/locale/portlet/administration/ECMAdminPortlet_fr.xml	(revision 69714)
++++ apps/portlet-administration/src/main/webapp/WEB-INF/classes/locale/portlet/administration/ECMAdminPortlet_fr.xml	(working copy)
+@@ -1805,6 +1805,7 @@
+     </msg>
+     <title>
+       <AddPermission>Ajouter une Permission</AddPermission>
++      <RemovePermission>Supprimer de la permission</RemovePermission>
+     </title>
+   </UITemplateContent>
+   <!--
+Index: core/webui-administration/src/main/java/org/exoplatform/ecm/webui/component/admin/templates/UITemplateContent.java
+===================================================================
+--- core/webui-administration/src/main/java/org/exoplatform/ecm/webui/component/admin/templates/UITemplateContent.java	(revision 69714)
++++ core/webui-administration/src/main/java/org/exoplatform/ecm/webui/component/admin/templates/UITemplateContent.java	(working copy)
+@@ -17,8 +17,8 @@
+ package org.exoplatform.ecm.webui.component.admin.templates;
+ 
+ import java.io.ByteArrayInputStream;
+-import java.io.InputStream;
+ import java.util.ArrayList;
++import java.util.Collection;
+ import java.util.List;
+ 
+ import javax.jcr.Node;
+@@ -32,6 +32,8 @@
+ import org.exoplatform.ecm.webui.utils.Utils;
+ import org.exoplatform.portal.webui.util.SessionProviderFactory;
+ import org.exoplatform.services.cms.templates.TemplateService;
++import org.exoplatform.services.organization.MembershipType;
++import org.exoplatform.services.organization.OrganizationService;
+ import org.exoplatform.web.application.ApplicationMessage;
+ import org.exoplatform.webui.application.WebuiRequestContext;
+ import org.exoplatform.webui.application.portlet.PortletRequestContext;
+@@ -43,8 +45,8 @@
+ import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
+ import org.exoplatform.webui.core.model.SelectItemOption;
+ import org.exoplatform.webui.event.Event;
++import org.exoplatform.webui.event.Event.Phase;
+ import org.exoplatform.webui.event.EventListener;
+-import org.exoplatform.webui.event.Event.Phase;
+ import org.exoplatform.webui.form.UIForm;
+ import org.exoplatform.webui.form.UIFormCheckBoxInput;
+ import org.exoplatform.webui.form.UIFormSelectBox;
+@@ -68,12 +70,13 @@
+       @EventConfig(phase=Phase.DECODE, listeners = UITemplateContent.CancelActionListener.class),
+       @EventConfig(phase=Phase.DECODE, listeners = UITemplateContent.RestoreActionListener.class),
+       @EventConfig(phase=Phase.DECODE, listeners = UITemplateContent.RefreshActionListener.class),
+-      @EventConfig(phase=Phase.DECODE, listeners = UITemplateContent.AddPermissionActionListener.class)
++      @EventConfig(phase=Phase.DECODE, listeners = UITemplateContent.AddPermissionActionListener.class),
++      @EventConfig(phase=Phase.DECODE, listeners = UITemplateContent.RemovePermissionActionListener.class)
+     }
+ )
+ public class UITemplateContent extends UIForm implements UISelectable {
+ 
+-  final static public String FIELD_SELECT_VERSION = "selectVersion" ;
++final static public String FIELD_SELECT_VERSION = "selectVersion" ;
+   final static public String FIELD_CONTENT = "content" ;
+   final static public String FIELD_NAME = "name" ;
+   final static public String FIELD_VIEWPERMISSION = "viewPermission" ;
+@@ -88,22 +91,28 @@
+   final static public String TEMPLATE_PERMISSION = "TemplatePermission" ;
+ 
+   public UITemplateContent() throws Exception {
+-    List<SelectItemOption<String>> options = new ArrayList<SelectItemOption<String>>() ;
+-    UIFormSelectBox versions = 
+-      new UIFormSelectBox(FIELD_SELECT_VERSION, FIELD_SELECT_VERSION, options) ;
+-    versions.setOnChange("Change") ;
+-    versions.setRendered(false) ;    
+-    addUIFormInput(versions) ;
+-    addUIFormInput(new UIFormTextAreaInput(FIELD_CONTENT, FIELD_CONTENT, null).addValidator(MandatoryValidator.class)) ;
+-    addUIFormInput(new UIFormStringInput(FIELD_NAME, FIELD_NAME, null).addValidator(MandatoryValidator.class)) ;
+-    UIFormCheckBoxInput isVersion = 
+-      new UIFormCheckBoxInput<Boolean>(FIELD_ENABLE_VERSION , FIELD_ENABLE_VERSION, null) ;
+-    isVersion.setRendered(false) ;
+-    addUIFormInput(isVersion) ;   
++    List<SelectItemOption<String>> options = new ArrayList<SelectItemOption<String>>();
++    UIFormSelectBox versions = new UIFormSelectBox(FIELD_SELECT_VERSION,
++                                                   FIELD_SELECT_VERSION,
++                                                   options);
++    versions.setOnChange("Change");
++    versions.setRendered(false);
++    addUIFormInput(versions);
++    addUIFormInput(new UIFormTextAreaInput(FIELD_CONTENT, FIELD_CONTENT, null).addValidator(MandatoryValidator.class));
++    addUIFormInput(new UIFormStringInput(FIELD_NAME, FIELD_NAME, null).addValidator(MandatoryValidator.class));
++    UIFormCheckBoxInput isVersion = new UIFormCheckBoxInput<Boolean>(FIELD_ENABLE_VERSION,
++                                                                     FIELD_ENABLE_VERSION,
++                                                                     null);
++    isVersion.setRendered(false);
++    addUIFormInput(isVersion);
+     UIFormInputSetWithAction uiActionTab = new UIFormInputSetWithAction("UITemplateContent");
+-    uiActionTab.addUIFormInput(new UIFormStringInput(FIELD_VIEWPERMISSION, FIELD_VIEWPERMISSION, null).setEditable(false).addValidator(MandatoryValidator.class)) ;
+-    uiActionTab.setActionInfo(FIELD_VIEWPERMISSION, new String[] {"AddPermission"}) ;
+-    addUIComponentInput(uiActionTab) ;
++    uiActionTab.addUIFormInput(new UIFormStringInput(FIELD_VIEWPERMISSION,
++                                                     FIELD_VIEWPERMISSION,
++                                                     null).setEditable(false)
++                                                          .addValidator(MandatoryValidator.class));
++    uiActionTab.setActionInfo(FIELD_VIEWPERMISSION, new String[] { "AddPermission",
++        "RemovePermission" });
++    addUIComponentInput(uiActionTab);
+   }
+ 
+   public void setTemplateType(String templateType) { this.templateType = templateType; }
+@@ -266,12 +275,6 @@
+       if(content == null) content = "" ;
+       UIFormInputSetWithAction permField = uiForm.getChildById("UITemplateContent") ;
+       String role = permField.getUIStringInput(FIELD_VIEWPERMISSION).getValue() ;      
+-      if((role == null) || (role.trim().length() == 0)) {
+-        uiApp.addMessage(new ApplicationMessage("UITemplateContent.msg.roles-invalid", null, 
+-                                                ApplicationMessage.WARNING)) ;
+-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+-        return ;
+-      }
+       UIViewTemplate uiViewTemplate = uiForm.getAncestorOfType(UIViewTemplate.class) ;
+       if(uiForm.getId().equals(UIDialogTab.DIALOG_FORM_NAME)) {
+         UIDialogTab uiDialogTab = uiViewTemplate.getChild(UIDialogTab.class) ;
+@@ -314,8 +317,18 @@
+         if(isEnableVersioning && !node.isNodeType(Utils.MIX_VERSIONABLE)) {
+           node.addMixin(Utils.MIX_VERSIONABLE) ;
+         } 
+-        templateService.addTemplate(uiForm.getTemplateType(), uiForm.nodeTypeName_, null, false, name, new String[] {role},  
+-            new ByteArrayInputStream(content.getBytes()), repository);
++        if (areValidPermissions(role, uiForm, event)) {
++          templateService.addTemplate(uiForm.getTemplateType(),
++                                      uiForm.nodeTypeName_,
++                                      null,
++                                      false,
++                                      name,
++                                      new String[] { role },
++                                      new ByteArrayInputStream(content.getBytes()),
++                                      repository);
++        } else {
++          return;
++        }
+         node.save() ;
+         if(isEnableVersioning) {
+           node.checkin() ;
+@@ -413,4 +426,93 @@
+       event.getRequestContext().addUIComponentToUpdateByAjax(uiManager) ;
+     }
+   }
++  
++  static public class RemovePermissionActionListener extends EventListener<UITemplateContent> {
++    public void execute(Event<UITemplateContent> event) throws Exception {
++      UITemplateContent uiTemplateContent = event.getSource();
++      uiTemplateContent.getUIStringInput(FIELD_VIEWPERMISSION).setValue(null);
++      event.getRequestContext().addUIComponentToUpdateByAjax(uiTemplateContent);
++    }
++  }
++ 
++
++  private static boolean areValidPermissions(final String permissions,
++                                             final UITemplateContent uiTemplateContent,
++                                             final Event event) throws Exception {
++    Boolean areValidPermissions = false;
++    UIApplication uiApp = uiTemplateContent.getAncestorOfType(UIApplication.class);
++    if (permissions == null || permissions.trim().length() == 0) {
++      uiApp.addMessage(new ApplicationMessage("UIDriveForm.msg.permission-null",
++                                              null,
++                                              ApplicationMessage.WARNING));
++      event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
++      areValidPermissions = false;
++      return areValidPermissions;
++    }
++
++    OrganizationService oservice = uiTemplateContent.getApplicationComponent(OrganizationService.class);
++    String[] arrPermissions = permissions.split(",");
++    List<String> listMemberhip;
++    Collection<?> collection = oservice.getMembershipTypeHandler().findMembershipTypes();
++    listMemberhip = new ArrayList<String>(5);
++    for (Object obj : collection) {
++      listMemberhip.add(((MembershipType) obj).getName());
++    }
++    listMemberhip.add("*");
++    for (String itemPermission : arrPermissions) {
++      if (itemPermission.length() == 0) {
++        uiApp.addMessage(new ApplicationMessage("UIDriveForm.msg.permission-path-invalid",
++                                                null,
++                                                ApplicationMessage.WARNING));
++        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
++        areValidPermissions = false;
++        return areValidPermissions;
++      }
++      if (itemPermission.contains(":")) {
++        String[] permission = itemPermission.split(":");
++        if ((permission[0] == null) || (permission[0].length() == 0)) {
++          uiApp.addMessage(new ApplicationMessage("UIDriveForm.msg.permission-path-invalid",
++                                                  null,
++                                                  ApplicationMessage.WARNING));
++          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
++          areValidPermissions = false;
++          return areValidPermissions;
++        } else if (!listMemberhip.contains(permission[0])) {
++          uiApp.addMessage(new ApplicationMessage("UIDriveForm.msg.permission-path-invalid",
++                                                  null,
++                                                  ApplicationMessage.WARNING));
++          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
++          areValidPermissions = false;
++          return areValidPermissions;
++        }
++        if ((permission[1] == null) || (permission[1].length() == 0)) {
++          uiApp.addMessage(new ApplicationMessage("UIDriveForm.msg.permission-path-invalid",
++                                                  null,
++                                                  ApplicationMessage.WARNING));
++          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
++          areValidPermissions = false;
++          return areValidPermissions;
++        } else if (oservice.getGroupHandler().findGroupById(permission[1]) == null) {
++          uiApp.addMessage(new ApplicationMessage("UIDriveForm.msg.permission-path-invalid",
++                                                  null,
++                                                  ApplicationMessage.WARNING));
++          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
++          areValidPermissions = false;
++          return areValidPermissions;
++        }
++      } else {
++        if (!itemPermission.equals("*")) {
++          uiApp.addMessage(new ApplicationMessage("UIDriveForm.msg.permission-path-invalid",
++                                                  null,
++                                                  ApplicationMessage.WARNING));
++          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
++          areValidPermissions = false;
++          return areValidPermissions;
++        }
++      }
++    }
++    areValidPermissions = true;
++    return areValidPermissions;
++  }
++  
+ }
+\ No newline at end of file
