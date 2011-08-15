@@ -274,18 +274,34 @@
     <key>org.exoplatform.services.seo.SEOService</key>  
     <type>org.exoplatform.services.seo.DumpSEOServiceImpl</type>
     <init-params>
-      <value-param>
-        <name>robotsindex</name>
-        <value>index, noindex</value>
-      </value-param>
-      <value-param>
-        <name>robotsfollow</name>
-        <value>follow, nofollow</value>
-      </value-param>
-      <value-param>
-        <name>frequency</name>
-        <value>Always, Hourly, Daily, Weekly, Monthly, Yearly, Never</value>
-      </value-param>	
+      <object-param>
+	    <name>seo.config</name>
+		<object type="org.exoplatform.services.seo.SEOConfig">
+		  <field name="robotsindex">
+		    <collection type="java.util.ArrayList">
+			  <value><string>INDEX</string></value>	
+			  <value><string>NOINDEX</string></value>
+			</collection>	  
+		  </field>
+		  <field name="robotsfollow">
+		    <collection type="java.util.ArrayList">
+			  <value><string>FOLLOW</string></value>	
+			  <value><string>NOFOLLOW</string></value>
+			</collection>	  
+		  </field>	  
+		  <field name="frequency">
+		    <collection type="java.util.ArrayList">
+			  <value><string>Always</string></value>
+			  <value><string>Hourly</string></value>
+			  <value><string>Daily</string></value>
+			  <value><string>Weekly</string></value>
+			  <value><string>Monthly</string></value>
+			  <value><string>Yearly</string></value>
+			  <value><string>Never</string></value>						
+			</collection>
+		  </field>
+        </object>  	    
+	  </object-param>	
     </init-params>
   </component>	
 	  

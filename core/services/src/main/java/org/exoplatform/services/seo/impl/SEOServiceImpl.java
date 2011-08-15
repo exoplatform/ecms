@@ -25,6 +25,7 @@ import org.exoplatform.management.annotations.ManagedDescription;
 import org.exoplatform.management.annotations.ManagedName;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.seo.PageMetadataModel;
+import org.exoplatform.services.seo.SEOConfig;
 import org.exoplatform.services.seo.SEOService;
 import org.exoplatform.services.wcm.portal.LivePortalManagerService;
 import org.exoplatform.services.jcr.RepositoryService;
@@ -39,10 +40,12 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import org.exoplatform.container.xml.InitParams;
+import org.exoplatform.container.xml.ObjectParameter;
 import org.exoplatform.container.xml.ValueParam;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import java.util.GregorianCalendar;
+import java.util.List;
 import java.io.InputStream;
 import java.io.StringWriter;
 import org.exoplatform.services.cache.CacheService;
@@ -66,9 +69,10 @@ public class SEOServiceImpl implements SEOService {
   private static String     PUBLIC_MODE                         = "public";
   private static String     PRIVATE_MODE                        = "private";   
   
-  private String robotsindexOptions = null;
-  private String robotsfollowOptions = null;
-  private String frequencyOptions = null;
+  private List<String> robotsindex = new ArrayList<String>();
+  private List<String> robotsfollow = new ArrayList<String>();
+	private List<String> frequency = new ArrayList<String>();
+  private SEOConfig seoConfig = null;
   
   private boolean isCached = true;
   /**
@@ -78,40 +82,32 @@ public class SEOServiceImpl implements SEOService {
    * @throws Exception
    */
   public SEOServiceImpl (InitParams initParams) throws Exception { 
-    ValueParam valueParam = initParams.getValueParam("robotsindex");
-    if(valueParam != null)
-      robotsindexOptions = valueParam.getValue();
-    else
-      robotsindexOptions = "INDEX,NOINDEX";
-    valueParam = initParams.getValueParam("robotsfollow");
-    if(valueParam != null)
-      robotsfollowOptions = valueParam.getValue();
-    else
-      robotsfollowOptions = "FOLLOW,NOFOLLOW";
-    valueParam = initParams.getValueParam("frequency");
-    if(valueParam != null)
-      frequencyOptions = valueParam.getValue();
-    else
-      frequencyOptions = "Always,Hourly,Daily,Weekly,Monthly,Yearly,Never";
+    ObjectParameter param = initParams.getObjectParam("seo.config");
+    if(param != null) {
+    	seoConfig = (SEOConfig)param.getObject();
+    	robotsindex = seoConfig.getRobotsIndex();
+    	robotsfollow = seoConfig.getRobotsFollow();
+    	frequency = seoConfig.getFrequency();
+    }
     cache = WCMCoreUtils.getService(CacheService.class).getCacheInstance("wcm.seo");
   }
   /**
    *{@inheritDoc}
    */
-  public String getRobotsIndexOptions() {
-    return robotsindexOptions;
+  public List<String> getRobotsIndexOptions() {
+    return robotsindex;
   }
   /**
    * {@inheritDoc}
    */
-  public String getRobotsFollowOptions() {
-    return robotsfollowOptions;
+  public List<String> getRobotsFollowOptions() {
+    return robotsfollow;
   }
   /**
    * {@inheritDoc}
    */
-  public String getFrequencyOptions() {
-    return frequencyOptions;
+  public List<String> getFrequencyOptions() {
+    return frequency;
   }
   /**
    * {@inheritDoc}
@@ -259,8 +255,7 @@ public class SEOServiceImpl implements SEOService {
       Session session = sessionProvider.getSession("portal-system", WCMCoreUtils.getRepository());
       String uuid = Util.getUIPortal().getSelectedUserNode().getId();
       Node pageNode = session.getNodeByUUID(uuid);
-      
-      if(pageNode.isNodeType("exo:pageMetadata")) {        
+      if(pageNode != null && pageNode.isNodeType("exo:pageMetadata")) {        
         metaModel = new PageMetadataModel();        
         if (pageNode.hasProperty("exo:metaKeywords"))       
           metaModel.setKeywords((pageNode.getProperty("exo:metaKeywords")).getString());

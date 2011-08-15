@@ -1,6 +1,7 @@
 package org.exoplatform.services.seo;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.jcr.Node;
  
@@ -75,19 +76,19 @@ public interface SEOService {
    * @return
    * @throws Exception
    */
-  public String getRobotsIndexOptions() throws Exception;
+  public List<String> getRobotsIndexOptions() throws Exception;
   /**
    * Returns a list of options for robots follow
    * 
    * @return
    * @throws Exception
    */
-  public String getRobotsFollowOptions() throws Exception;
+  public List<String> getRobotsFollowOptions() throws Exception;
   /**
    * Returns a list of options for frequency
    * 
    * @return
    * @throws Exception
    */
-  public String getFrequencyOptions() throws Exception;
+  public List<String> getFrequencyOptions() throws Exception;
 }

@@ -53,16 +53,18 @@
   def description = "";
   def robots = "";
   PageMetadataModel metaModel = null;
-  SEOService seoService = (SEOService)container.getComponentInstanceOfType(SEOService.class);
-  if(seoService != null) {	  
-	  metaModel = seoService.getMetadata(paramArray, pageReference);
-	  if(metaModel != null) {
-	  	hasMetadata = true;
-	  	keywords = metaModel.getKeywords();
-	    description = metaModel.getDescription();	
-	    robots = metaModel.getRobotsContent();    
-	  }	   
-  }
+  try {
+	  SEOService seoService = (SEOService)container.getComponentInstanceOfType(SEOService.class);
+	  if(seoService != null) {	  
+		  metaModel = seoService.getMetadata(paramArray, pageReference);
+		  if(metaModel != null) {
+		  	hasMetadata = true;
+		  	keywords = metaModel.getKeywords();
+		    description = metaModel.getDescription();	
+		    robots = metaModel.getRobotsContent();    
+		  }	   
+	  }
+  } catch(Exception ex) {}
 %>
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="$lang" lang="$lang" dir="$dir">
