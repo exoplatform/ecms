@@ -80,8 +80,9 @@
           if (commentor!=null && commentor.equals(rcontext.getRemoteUser())) {
 	  		 %>
 	  		 <% if (uicomment != null) {
+	  		   Parameter[] paramsComment = [new Parameter("nodePath", org.exoplatform.ecm.webui.utils.Utils.formatNodeName(path))];
 	  		 %>
-			  		<a href="<%=uicomment.event("Comment", org.exoplatform.ecm.webui.utils.Utils.formatNodeName(parentPath), new Parameter("nodePath", path))%>">
+			  		<a href="<%=uicomment.event("Comment", org.exoplatform.ecm.webui.utils.Utils.formatNodeName(parentPath), paramsComment)%>">
 							<image class="EditComment" src="/eXoResources/skin/sharedImages/Blank.gif" alt="" title="<%=_ctx.appRes("Comments.tooltip.edit-comment")%>"/>
 						</a>
 				<%

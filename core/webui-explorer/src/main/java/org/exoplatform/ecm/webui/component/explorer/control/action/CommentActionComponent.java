@@ -19,6 +19,7 @@ package org.exoplatform.ecm.webui.component.explorer.control.action;
 import java.util.Arrays;
 import java.util.List;
 
+import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.CanAddNodeFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsCheckedOutFilter;
@@ -63,7 +64,7 @@ public class CommentActionComponent extends UIComponent {
       UICommentForm uiCommentForm = uiPopupContainer.createUIComponent(UICommentForm.class, null, null);
       String commentNodePath = event.getRequestContext().getRequestParameter("nodePath");
       if (commentNodePath != null && commentNodePath.length() > 0) {
-        uiCommentForm.setNodeCommentPath(commentNodePath);
+        uiCommentForm.setNodeCommentPath(Text.escapeIllegalJcrChars(commentNodePath));
         uiCommentForm.setEdit(true);
       }
       uiPopupContainer.activate(uiCommentForm, 750, 700);

@@ -22,6 +22,7 @@ import java.util.Map;
 import javax.jcr.Node;
 import javax.jcr.version.VersionException;
 
+import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.ecm.webui.presentation.AbstractActionComponent;
 import org.exoplatform.ecm.webui.presentation.action.UIPresentationEventListener;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
@@ -73,7 +74,8 @@ public class RemoveCommentComponent extends AbstractActionComponent {
     String nodepath = String.valueOf(variables.get(OBJECTID));
     WebuiRequestContext requestcontext = (WebuiRequestContext)variables.get(Utils.REQUESTCONTEXT);
     try {
-      Node commentNode = (Node) nodefinder.getItem(wsname, nodepath);
+      Node commentNode = (Node) nodefinder.getItem(wsname, 
+          Text.escapeIllegalJcrChars(nodepath));
       CommentsService commentService = uicomponent.getApplicationComponent(CommentsService.class);
       commentService.deleteComment(commentNode);
       uicomponent.updateAjax(requestcontext);
