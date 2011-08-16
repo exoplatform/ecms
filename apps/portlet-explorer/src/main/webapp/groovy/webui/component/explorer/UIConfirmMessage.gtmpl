@@ -5,25 +5,28 @@
 	 *          minh.dang@exoplatform.com
 	 * Sep 18, 2008
 	 * version: 2.2
-	 */  
+	 */
+
+	 import org.exoplatform.ecm.utils.text.Text;
 %>
 <div class="UIForm $uicomponent.id">
   <%
     String msgValue = _ctx.appRes(uicomponent.getMessageKey());
     String[] msgArguments = uicomponent.getArguments();
     if(msgArguments.length > 0) {
-	    for(i in 0..msgArguments.length-1){ 
+	    for(i in 0..msgArguments.length-1){
 	  	  msgValue = msgValue.replaceAll("\\{" + i + "\\}", msgArguments[i]);
 		  }
     }
+    msgValue = Text.unescapeIllegalJcrChars(msgValue);
   %>
   <div class="HorizontalLayout">
     <div class="">
     	<div class="RecycleBinFull"><span></span></div>
-    	<div class="Text" title="<%=msgValue%>"><%=msgValue%></div>   
+    	<div class="Text" title="<%=msgValue%>"><%=msgValue%></div>
     	<div style="clear: left"><span></span></div>
     </div>
- <div class="UIAction"> 
+ <div class="UIAction">
 		<%
 		  for(action in uicomponent.getActions()) {
 		%>
@@ -32,4 +35,4 @@
 	    </div>
 	 <%// end render action%>
   </div>
-</div>  
+</div>

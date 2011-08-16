@@ -29,6 +29,7 @@ import javax.jcr.lock.LockException;
 import javax.jcr.nodetype.ConstraintViolationException;
 
 import org.exoplatform.services.log.Log;
+import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotInTrashFilter;
@@ -117,7 +118,7 @@ public class CreateLinkManageComponent extends UIAbstractManagerComponent {
       linkManager.createLink(destNode, Utils.EXO_SYMLINK, selectedNode, selectedNode.getName()
           + ".lnk");
     } catch (Exception e) {
-      Object[] args = { srcPath, destNode.getPath() };
+      Object[] args = { Text.unescapeIllegalJcrChars(srcPath), Text.unescapeIllegalJcrChars(destNode.getPath()) };
       uiApp.addMessage(new ApplicationMessage("UIWorkingArea.msg.create-link-problem", args,
           ApplicationMessage.WARNING));
       event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());

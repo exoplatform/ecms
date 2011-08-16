@@ -27,6 +27,7 @@ import javax.jcr.Node;
 import javax.jcr.Session;
 import javax.jcr.nodetype.ConstraintViolationException;
 
+import org.exoplatform.services.jcr.util.Text;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.UIWorkingArea;
@@ -125,7 +126,7 @@ public class AddSymLinkActionComponent extends UIAbstractManagerComponent {
                 symLinkName = selectedNode.getName() + ".lnk";
               linkManager.createLink(currentNode, Utils.EXO_SYMLINK, selectedNode, symLinkName);
             } catch (Exception e) {
-              Object[] arg = { selectedNode.getPath(), currentNode.getPath() };
+              Object[] arg = { Text.unescapeIllegalJcrChars(selectedNode.getPath()), Text.unescapeIllegalJcrChars(currentNode.getPath()) };
               uiApp.addMessage(new ApplicationMessage("UIWorkingArea.msg.create-link-problem", arg,
                   ApplicationMessage.WARNING));
               event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
@@ -166,7 +167,7 @@ public class AddSymLinkActionComponent extends UIAbstractManagerComponent {
             try {
               linkManager.createLink(currentNode, Utils.EXO_SYMLINK, selectedNode, symLinkName);
             } catch (Exception e) {
-              Object[] arg = { selectedNode.getPath(), currentNode.getPath() };
+              Object[] arg = { Text.unescapeIllegalJcrChars(selectedNode.getPath()), Text.unescapeIllegalJcrChars(currentNode.getPath()) };
               uiApp.addMessage(new ApplicationMessage("UIWorkingArea.msg.create-link-problem", arg,
                   ApplicationMessage.WARNING));
               event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
