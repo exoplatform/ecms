@@ -48,10 +48,12 @@ CKEDITOR.editorConfig = function( config ){
 	] ;
 	
 	config.toolbar_BasicWCM = [
-		['Source','-','Bold','Italic','Underline','Strike','-','NumberedList','BulletedList','Outdent','Indent'],
-		['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock'],
-		['Blockquote','-','Link','Unlink','insertPortalLink.btn','content.btn', 'Image','-','Maximize','ShowBlocks'],	
-		['Style','Format','Font','FontSize']
+		['Source','-','Bold','Italic','Underline','Strike'],
+    ['-','NumberedList','BulletedList','Outdent','Indent'],
+		['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock','Blockquote'],
+    '/',
+		['-','Link','Unlink','insertPortalLink.btn','content.btn', 'Image'],
+    ['-','Maximize','ShowBlocks','Style','Format','Font','FontSize']
 	] ;
 
 	config.toolbar_SuperBasicWCM = [
