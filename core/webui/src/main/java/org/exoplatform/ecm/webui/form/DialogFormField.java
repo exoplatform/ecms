@@ -38,6 +38,7 @@ public abstract class DialogFormField {
   protected final String VISIBLE = "visible" + SEPARATOR;
   protected final String NODETYPE = "nodetype" + SEPARATOR;
   protected final String MIXINTYPE = "mixintype" + SEPARATOR;
+  protected final String MIMETYPE = "mimetype" + SEPARATOR; 
   protected final String VALIDATE = "validate" + SEPARATOR;
   protected final String SELECTOR_ACTION = "selectorAction" + SEPARATOR;
   protected final String SELECTOR_CLASS = "selectorClass" + SEPARATOR;
@@ -73,6 +74,7 @@ public abstract class DialogFormField {
   protected String visible;
   protected String nodeType;
   protected String mixinTypes;
+  protected String mimeTypes;
   protected String onchange;
   protected String groovyScript;
   protected String[] scriptParams;
@@ -98,6 +100,7 @@ public abstract class DialogFormField {
     this.visible = parsedArguments.get(VISIBLE);
     this.nodeType = parsedArguments.get(NODETYPE);
     this.mixinTypes = parsedArguments.get(MIXINTYPE);
+    this.mimeTypes = parsedArguments.get(MIMETYPE);
     this.onchange = parsedArguments.get(ONCHANGE);
     this.groovyScript = parsedArguments.get(SCRIPT);
     this.type = parsedArguments.get(TYPE);
@@ -196,6 +199,9 @@ public abstract class DialogFormField {
 
   public String getMixinTypes() { return mixinTypes; }
   public void setMixinTypes(String mixinTypes) { this.mixinTypes = mixinTypes; }
+  
+  public String getMimeTypes() { return mimeTypes; }
+  public void setMimeTypes(String mimeTypes) { this.mimeTypes = mimeTypes; }
 
   public String getOnchange() { return onchange; }
   public void setOnchange(String onchange) { this.onchange = onchange; }
@@ -268,6 +274,8 @@ public abstract class DialogFormField {
         map.put(ONCHANGE,value); continue;
       } else if (argument.startsWith(MIXINTYPE)) {
         map.put(MIXINTYPE, value); continue;
+      } else if (argument.startsWith(MIMETYPE)) {
+        map.put(MIMETYPE, value); continue;
       } else if(argument.startsWith(NODETYPE)) {
         map.put(NODETYPE, value) ;
         continue ;

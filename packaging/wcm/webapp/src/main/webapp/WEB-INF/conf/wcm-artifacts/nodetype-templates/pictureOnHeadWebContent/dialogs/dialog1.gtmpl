@@ -22,7 +22,7 @@
 			uicomponent.addHiddenField("illustrationHiddenField3", illustrationHiddenField3);
 			uicomponent.addCalendarField("illustrationHiddenField4", illustrationHiddenField4);
 			uicomponent.addCalendarField("illustrationHiddenField5", illustrationHiddenField5);			
-   		String[] fieldImage = ["jcrPath=/node/medias/images/illustration/jcr:content/jcr:data"] ;
+   		String[] fieldImage = ["jcrPath=/node/medias/images/illustration/jcr:content/jcr:data", "mimetype=image/*"] ;
       uicomponent.addUploadField("illustration", fieldImage) ;	
 	}
 	
@@ -152,15 +152,15 @@
 													</div>
 										<%
 												} else {
-									        String[] fieldImage = ["jcrPath=/node/exo:image"] ;
+									        String[] fieldImage = ["jcrPath=/node/exo:image","mimetype=image/*"];
 									        uicomponent.addUploadField("imagee", fieldImage) ;								
 												}
 											}	else {
-								        String[] fieldImage = ["jcrPath=/node/exo:image"] ;
+								        String[] fieldImage = ["jcrPath=/node/exo:image","mimetype=image/*"];
 								        uicomponent.addUploadField("imagee", fieldImage) ;								
 											}
 										} else {
-											String[] fieldImage = ["jcrPath=/node/exo:image"] ;
+											String[] fieldImage = ["jcrPath=/node/exo:image","mimetype=image/*"];
 							        uicomponent.addUploadField("imagee", fieldImage) ;
 										}
 						      %>

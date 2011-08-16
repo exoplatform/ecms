@@ -3318,6 +3318,11 @@
 		  <confirm-close>The changes you made will be lost if you close this form.</confirm-close>
 		  <confirm-navigate>The changes you made will be lost if you navigate away from this page.</confirm-navigate>
 	  </msg>
-  </UIDocumentForm>  
+  </UIDocumentForm>
+  <UploadFileMimeTypesValidator>
+    <msg>
+      <wrong-mimetype>Mime type {0} is not allowed for field {1}. Please upload another file</wrong-mimetype>
+    </msg>
+  </UploadFileMimeTypesValidator>
 </bundle>
 

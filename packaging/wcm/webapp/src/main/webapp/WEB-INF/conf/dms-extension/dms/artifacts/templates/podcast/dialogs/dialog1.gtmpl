@@ -140,15 +140,15 @@
 									</div>
 						<%
 								} else {
-					        String[] fieldMedia = ["jcrPath=/node/jcr:content/jcr:data"] ;
+					        String[] fieldMedia = ["jcrPath=/node/jcr:content/jcr:data", "mimetype=audio/mp3,audio/x-m4a,video/mpeg,video/x-m4v,video/quicktime"] ;
 				  	      uicomponent.addUploadField("media", fieldMedia) ;				
 								}
 							}
 						} else if (uicomponent.dataRemoved()) {
-			        String[] fieldMedia = ["jcrPath=/node/jcr:content/jcr:data"] ;
+			        String[] fieldMedia = ["jcrPath=/node/jcr:content/jcr:data", "mimetype=audio/mp3,audio/x-m4a,video/mpeg,video/x-m4v,video/quicktime"] ;
 				  	  uicomponent.addUploadField("media", fieldMedia) ;
 						}	else {
-			        String[] fieldMedia = ["jcrPath=/node/jcr:content/jcr:data"] ;
+			        String[] fieldMedia = ["jcrPath=/node/jcr:content/jcr:data", "mimetype=audio/mp3,audio/x-m4a,video/mpeg,video/x-m4v,video/quicktime"] ;
 					    uicomponent.addUploadField("media", fieldMedia) ;
 						}
 		      %>

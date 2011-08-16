@@ -57,6 +57,7 @@ import org.exoplatform.ecm.webui.form.field.UIFormTextField;
 import org.exoplatform.ecm.webui.form.field.UIFormUploadField;
 import org.exoplatform.ecm.webui.form.field.UIFormWYSIWYGField;
 import org.exoplatform.ecm.webui.form.field.UIMixinField;
+import org.exoplatform.ecm.webui.form.validator.UploadFileMimeTypesValidator;
 import org.exoplatform.ecm.webui.utils.DialogFormUtil;
 import org.exoplatform.ecm.webui.utils.JCRExceptionManager;
 import org.exoplatform.ecm.webui.utils.LockUtil;
@@ -1234,18 +1235,25 @@ public class UIDialogForm extends UIForm {
 
   public void addUploadField(String name,String label,String[] arguments) throws Exception {
     UIFormUploadField formUploadField = new UIFormUploadField(name,label,arguments);
+    String mimeTypes = formUploadField.getMimeTypes();
     String jcrPath = formUploadField.getJcrPath();
     JcrInputProperty inputProperty = new JcrInputProperty();
     inputProperty.setJcrPath(jcrPath);
     setInputProperty(name, inputProperty);
     setMultiPart(true);
     if(formUploadField.isMultiValues()) {
-      renderMultiValuesInput(UIFormUploadInput.class,name,label);
+      UIFormMultiValueInputSet multiValueField = renderMultiValuesInput(UIFormUploadInput.class,name,label);
+      if (mimeTypes != null) {
+        multiValueField.addValidator(UploadFileMimeTypesValidator.class, mimeTypes);
+      }
       return;
     }
     UIFormUploadInput uiInputUpload = findComponentById(name);
     if(uiInputUpload == null) {
       uiInputUpload = formUploadField.createUIFormInput();
+      if (mimeTypes != null) {
+          uiInputUpload.addValidator(UploadFileMimeTypesValidator.class, mimeTypes);
+      }
       addUIFormInput(uiInputUpload);
     }
     String propertyName = getPropertyName(jcrPath);
@@ -1758,9 +1766,10 @@ public class UIDialogForm extends UIForm {
     return repositoryService.getCurrentRepository();
   }
 
-  private void renderMultiValuesInput(Class type, String name,String label) throws Exception{
-    addMultiValuesInput(type, name, label);
+  private UIFormMultiValueInputSet renderMultiValuesInput(Class type, String name,String label) throws Exception{
+    UIFormMultiValueInputSet ret = addMultiValuesInput(type, name, label);
     renderField(name);
+    return ret;
   }
 
   private UIFormMultiValueInputSet addMultiValuesInput(Class type, String name,String label) throws Exception{

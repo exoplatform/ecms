@@ -17,6 +17,7 @@
 package org.exoplatform.ecm.webui.form;
 
 import javax.jcr.Node;
+import javax.jcr.Value;
 
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.web.application.ApplicationMessage;
@@ -40,6 +41,7 @@ public class DialogFormActionListeners {
       if (referenceNodePath.startsWith("/")) {
         Node referenceNode = (Node)uiForm.getSession().getItem(uiForm.getNodePath() + referenceNodePath);
         if(referenceNode.hasProperty(Utils.JCR_DATA)) {
+          referenceNode.setProperty(Utils.JCR_MIMETYPE, "");
           referenceNode.setProperty(Utils.JCR_DATA, "");
           uiForm.setDataRemoved(true);
         }

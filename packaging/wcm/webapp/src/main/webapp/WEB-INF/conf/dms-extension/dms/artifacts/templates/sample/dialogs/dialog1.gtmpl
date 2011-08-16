@@ -107,12 +107,12 @@
 									</div>
 						<%
 								} else {
-					        String[] fieldImage = ["jcrPath=/node/exo:image/jcr:data"] ;
+					        String[] fieldImage = ["jcrPath=/node/exo:image/jcr:data", "mimetype=image/gif,image/jpeg,image/png"] ;
 					        uicomponent.addUploadField(image, fieldImage) ;								
 								}
 							}
 						}	else {
-			        String[] fieldImage = ["jcrPath=/node/exo:image/jcr:data"] ;
+			        String[] fieldImage = ["jcrPath=/node/exo:image/jcr:data", "mimetype=image/gif,image/jpeg,image/png"] ;
 			        uicomponent.addUploadField(image, fieldImage) ;
 						}
 		      %>

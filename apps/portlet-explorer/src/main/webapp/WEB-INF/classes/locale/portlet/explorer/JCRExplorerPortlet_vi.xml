@@ -3382,4 +3382,9 @@
 		  <confirm-navigate>Dữ liệu mới cập nhất sẽ bị mất nếu chuyển sang trang khác.</confirm-navigate>
 	  </msg>
   </UIDocumentForm>
+  <UploadFileMimeTypesValidator>
+    <msg>
+      <wrong-mimetype>Kiểu dữ liệu {0} không được cho phép trong trường {1}. Làm ơn tải lên file khác</wrong-mimetype>
+    </msg>
+  </UploadFileMimeTypesValidator>
 </bundle>
