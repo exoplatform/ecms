@@ -16,6 +16,7 @@
  */
 package org.exoplatform.ecm.webui.component.explorer.versions;
 
+import javax.jcr.AccessDeniedException;
 import javax.jcr.Node;
 
 import org.exoplatform.webui.core.UIPopupComponent;
@@ -55,7 +56,7 @@ public class UIActivateVersion extends UIContainer implements UIPopupComponent {
   public void activate() throws Exception {}
   public void deActivate() throws Exception {}
 
-  static  public class EnableVersionActionListener extends EventListener<UIActivateVersion> {
+  static public class EnableVersionActionListener extends EventListener<UIActivateVersion> {
     public void execute(Event<UIActivateVersion> event) throws Exception {
       UIActivateVersion uiActivateVersion = event.getSource();
       UIJCRExplorer uiExplorer = uiActivateVersion.getAncestorOfType(UIJCRExplorer.class) ;
@@ -73,11 +74,17 @@ public class UIActivateVersion extends UIContainer implements UIPopupComponent {
         contx.addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
         return ;
       }
-      currentNode.addMixin(Utils.MIX_VERSIONABLE);
-      currentNode.save() ;
-      currentNode.getSession().save();
-      currentNode.getSession().refresh(true) ;
-      uiExplorer.updateAjax(event) ;
+      try {
+        currentNode.addMixin(Utils.MIX_VERSIONABLE);
+        currentNode.save() ;
+        currentNode.getSession().save();
+        currentNode.getSession().refresh(true) ;
+        uiExplorer.updateAjax(event) ;
+      }
+      catch (AccessDeniedException ex) {
+        UIApplication uiApp = uiExplorer.getAncestorOfType(UIApplication.class);
+        uiApp.addMessage(new ApplicationMessage("UIActivateVersion.msg.access-denied",null,ApplicationMessage.WARNING)) ;
+      }
     }
   }
 

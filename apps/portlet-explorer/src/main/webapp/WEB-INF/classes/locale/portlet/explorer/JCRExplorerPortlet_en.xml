@@ -201,7 +201,7 @@
       <Cancel>#{word.cancel}</Cancel>
       <Save>#{word.save}</Save>
     </action>
-  </UIAllItemsPreferenceForm>  
+  </UIAllItemsPreferenceForm>
   <!--
   #########################################################################################
   #             org.exoplatform.ecm.webui.component.explorer.UIRenameForm  #
@@ -465,13 +465,13 @@
     </title>
     <msg>
       <confirm-delete>Do you want to delete the node '{0}' and move all its contents?</confirm-delete>
-      <confirm-delete-permanently>Do you want to delete the node '{0}' and all its contents permanently?</confirm-delete-permanently>      
+      <confirm-delete-permanently>Do you want to delete the node '{0}' and all its contents permanently?</confirm-delete-permanently>
       <confirm-restore>A node with the same name also exists in node '{0}' 's old location. Are you sure want to restore this node?</confirm-restore>
 	  <confirm-delete-multi>Are you sure want to move these {0} items?</confirm-delete-multi>
 	  <confirm-delete-has-relations>The node '{0}' has relations that refer to it. Do you want to delete it and all its relations?</confirm-delete-has-relations>
 	  <confirm-delete-multi-one-node-has-relations>Do you want to move these {0} items? (The node {1} has relations that refer to it, this process will remove all its relations)</confirm-delete-multi-one-node-has-relations>
       <confirm-delete-multi-many-nodes-have-relations>Do you want to move these {0} items? (The nodes {1} have relations that refer to them, this process will remove all their relations)</confirm-delete-multi-many-nodes-have-relations>
-      <confirm-delete-permanently-multi>Are you sure want to move these {0} items permanently?</confirm-delete-permanently-multi>      
+      <confirm-delete-permanently-multi>Are you sure want to move these {0} items permanently?</confirm-delete-permanently-multi>
       <confirm-move>Are you sure want to move?</confirm-move>
       <node-cut>The node '{0}' has been cut.</node-cut>
       <execute-successfully>The custom action '{0}' has been executed.</execute-successfully>
@@ -632,7 +632,7 @@
       <UIPublicationPagesContainer>Pages</UIPublicationPagesContainer>
       <UIPublicationHistory>History</UIPublicationHistory>
       <UIVersionViewer>Version viewer</UIVersionViewer>
-      
+
       <UIPropertyTab>Properties</UIPropertyTab>
       <UIMetadataTab>Metadata</UIMetadataTab>
       <UIPropertyForm>Add New Property</UIPropertyForm>
@@ -1108,7 +1108,7 @@
       <View>View this node</View>
       <OpenFolder>Go to folder</OpenFolder>
     </tooltip>
-  </UIShowAllFavouriteResult>  
+  </UIShowAllFavouriteResult>
   <UIShowAllHiddenResult>
     <msg>
       <not-support>There is no View template for this node</not-support>
@@ -1226,7 +1226,7 @@
       <created>Created</created>
       <modified>Modified</modified>
       <and>And</and>
-      <or>Or</or>      
+      <or>Or</or>
     </label>
   </UIConstraintForm>
   <NodeTypePopup>
@@ -1472,7 +1472,7 @@
     <msg>
       <noVersion>No version</noVersion>
     </msg>
-    <eventName>      
+    <eventName>
       <e_1>Node added</e_1>
       <e_2>Node removed</e_2>
       <e_4>Property added</e_4>
@@ -1497,16 +1497,16 @@
       <e_2097152>Remove version</e_2097152>
       <e_4194304>Lock</e_4194304>
       <e_8388608>Unlock</e_8388608>
-      <e_16777216>Read</e_16777216>      
+      <e_16777216>Read</e_16777216>
     </eventName>
     <label>
       <operation>Operation</operation>
       <userName>User name</userName>
       <date>Date</date>
       <version>Version</version>
-    </label>              
+    </label>
   </UIAuditingInfo>
-  
+
   <!--
   ###############################################################################
   #   org.exoplatform.ecm.webui.component.explorer.versions.UIActivateVersion   #
@@ -1519,6 +1519,9 @@
       <button-active>Activate</button-active>
       <button-cancel>Cancel</button-cancel>
     </label>
+    <msg>
+      <access-denied>You have not permission to activate versioning on this node</access-denied>
+    </msg>
   </UIActivateVersion>
   <!--
   ###############################################################################
@@ -2273,7 +2276,7 @@
       <anyPermission>Any Permission</anyPermission>
     </label>
   </UIAnyPermission>
-	
+
   <anyPermission>
     <title>
       <AddAnyPermission>Set any permission</AddAnyPermission>
@@ -2329,7 +2332,7 @@
       <nodeValidationRequest>The node has been validation requested</nodeValidationRequest>
     </WorkflowPublicationPlugin>
   </PublicationService>
-  
+
   <!--
   ### Since ECM version 2.3 Alpha##############
   Access directly a JCR FE drive
@@ -2337,7 +2340,7 @@
   <UIJCRExplorerPortlet>
     <nopermission>There is no drive or you don't have permission to access this drive</nopermission>
   </UIJCRExplorerPortlet>
-  
+
   <UIJcrExplorerEditForm>
     <title>File Explorer Edit Form</title>
     <action>
@@ -2361,7 +2364,7 @@
       <nodePath>Select path</nodePath>
     </label>
   </UIJcrExplorerEditForm>
-  
+
   <UIDriveSelector>
     <label>
       <driveName>Drive Name</driveName>
@@ -2381,7 +2384,7 @@
             <path-edit-permission>Can not edit path. Please, click on Edit button</path-edit-permission>
     </msg>
   </UIJcrExplorerEditForm>
-  
+
   <PopUpSelectDrive>
     <title>
       <UIDriveSelector>Select Drive</UIDriveSelector>
@@ -2393,13 +2396,13 @@
       <UIOneNodePathSelector>Select node</UIOneNodePathSelector>
     </title>
   </PopupSelectPath>
-  
+
   <DriveNameInput>
     <title>
       <SelectDrive>Select Drive</SelectDrive>
     </title>
   </DriveNameInput>
-  
+
   <!--
   ### Since ECM version 2.4.x ##############
   -->
@@ -2409,13 +2412,13 @@
       <AddLocalizationLink>Add Translation</AddLocalizationLink>
     </tooltip>
   </UIActionBar>
-  
+
   <UIPopupWindow>
     <title>
       <UISymLinkManager>Add Link Form</UISymLinkManager>
     </title>
   </UIPopupWindow>
-  
+
   <UISymLinkForm>
     <label>
       <symLinkName>Sym Link Name</symLinkName>
@@ -2432,7 +2435,7 @@
       <fileName-error>Invalid file name</fileName-error>
       <constraint-violation>Current node does not allow to add '{0}' node type</constraint-violation>
       <repository-exception>Access deny! You don't have add permission in this node</repository-exception>
-      <numberformat-exception>Can not save this folder. The name provided must be a number format</numberformat-exception>      
+      <numberformat-exception>Can not save this folder. The name provided must be a number format</numberformat-exception>
       <path-node-invalid>Please enter Path Node!</path-node-invalid>
       <path-node-not-allowed>This name is not allowed.</path-node-not-allowed>
       <non-node>Please choose trust target node Or you don't have enough rights to read this node</non-node>
@@ -2441,7 +2444,7 @@
       <UnsupportedRepositoryOperationException>This target node is not referenceable</UnsupportedRepositoryOperationException>
     </msg>
   </UISymLinkForm>
-  
+
   <UIPopupSymLink>
     <title>
       <UIOneNodePathSelector>Choose Target Node</UIOneNodePathSelector>
@@ -2452,29 +2455,29 @@
       <UIContentSelectorOne>Select Document</UIContentSelectorOne>
     </title>
   </UIPopupSymLink>
-  
+
   <ECMContextMenu>
     <event>
       <AddSymLink>Add Sym Link</AddSymLink>
       <AddLocalizationLink>Add Translation</AddLocalizationLink>
     </event>
   </ECMContextMenu>
-  
+
   <UIWorkingArea>
     <msg>
       <create-link-problem>You can not create a link for node '{0}' at '{1}'</create-link-problem>
       <dest-node-is-link>The destination node '{0}' is already a symlink. So you can not create a symlink inside it</dest-node-is-link>
       <selected-is-link>The selected node '{0}' is already a link, you can not create a link point to another link</selected-is-link>
-      <confirm-create-link>Do you really want to create a link to this location?</confirm-create-link>    
+      <confirm-create-link>Do you really want to create a link to this location?</confirm-create-link>
     </msg>
   </UIWorkingArea>
-  
+
   <ECMContextMenu>
     <event>
       <CreateLink>Create link</CreateLink>
     </event>
   </ECMContextMenu>
-  
+
   <UIWorkspaceList>
     <msg>
       <AccessDeniedException>Access deny! You don't have read permission in this workspace</AccessDeniedException>
@@ -2483,13 +2486,13 @@
       <taxonomyTree>Taxonomy Tree</taxonomyTree>
     </label>
   </UIWorkspaceList>
-  
+
   <UIPopupTaxonomy>
     <title>
       <UIOneTaxonomySelector>Add Categories</UIOneTaxonomySelector>
     </title>
   </UIPopupTaxonomy>
-  
+
   <UITreeTaxonomyList>
     <label>
       <taxonomyTree>Taxonomy Tree</taxonomyTree>
@@ -2497,13 +2500,13 @@
       <rootNodeInfo>UITreeTaxonomyList</rootNodeInfo>
     </label>
   </UITreeTaxonomyList>
-  
+
   <UIActionBar>
     <tooltip>
       <ManageSimpleCategories>Manage Simple Categories</ManageSimpleCategories>
     </tooltip>
   </UIActionBar>
-  
+
   <UISimpleCategoryManager>
     <tab>
       <label>
@@ -2512,7 +2515,7 @@
       </label>
     </tab>
   </UISimpleCategoryManager>
-  
+
   <UICategoryManager>
     <tab>
       <label>
@@ -2520,15 +2523,15 @@
       </label>
     </tab>
   </UICategoryManager>
-  
+
   <UISimpleCategoryManager>
     <action>
-      <Close>Close</Close>  
+      <Close>Close</Close>
     </action>
-  </UISimpleCategoryManager>  
+  </UISimpleCategoryManager>
   <UIPopupWindow>
     <title>
-      <UISimpleCategoryManager>Add Category</UISimpleCategoryManager> 
+      <UISimpleCategoryManager>Add Category</UISimpleCategoryManager>
     </title>
   </UIPopupWindow>
   <UICategoriesAddedList>
@@ -2536,7 +2539,7 @@
       <ItemExistsException>A category with the same name already exists</ItemExistsException>
     </msg>
   </UICategoriesAddedList>
-  
+
   <UIConfirmMessage>
     <label>
       <Close>#{word.close}</Close>
@@ -2546,7 +2549,7 @@
       <Keepfile>Keep both files</Keepfile>
     </label>
   </UIConfirmMessage>
-  
+
   <UIRestoreConfirmMessage>
     <label>
       <Close>#{word.close}</Close>
@@ -2556,14 +2559,14 @@
       <Keepfile>Keep both files</Keepfile>
     </label>
   </UIRestoreConfirmMessage>
-  
-  
+
+
   <PopupComponent>
     <title>
       <UIOneTaxonomySelector>Add Categories</UIOneTaxonomySelector>
     </title>
   </PopupComponent>
-  
+
   <UIWorkingArea>
     <msg>
       <can-not-move-to-itself>Can not move: The destination folder is the same as the source folder</can-not-move-to-itself>
@@ -2579,8 +2582,8 @@
       <history-invalid-type>Invalid version history file type. The right file must be a zip file</history-invalid-type>
       <history-invalid-content>Invalid version history data content. You should choose the right file to import.</history-invalid-content>
     </msg>
-  </UIImportNode>  
-  
+  </UIImportNode>
+
   <Import>
     <Behavior>
       <type0>Create new</type0>
@@ -2589,33 +2592,33 @@
       <type3>Throw Exception</type3>
     </Behavior>
   </Import>
-  
+
   <UIExportNode>
     <action>
       <ExportHistory>Export version history</ExportHistory>
     </action>
   </UIExportNode>
-  
+
   <UIPopupMenu>
     <msg>
       <node-locked-other-person>This node or parent node is being locked by other user, you can not delete!</node-locked-other-person>
     </msg>
   </UIPopupMenu>
-  
+
   <Import>
     <label>
       <docview>Document view</docview>
       <sysview>System view</sysview>
     </label>
   </Import>
-  
+
   <UIDocumentForm>
     <msg>
       <not-support>Cannot load template of '{0}'.</not-support>
       <do-not-permission>You don't have permission to load template of '{0}'.</do-not-permission>
     </msg>
   </UIDocumentForm>
-  
+
   <!--
   ###################################################################################
   #             org.exoplatform.ecm.webui.component.explorer.UIActionBar                #
@@ -2631,14 +2634,14 @@
       <Search>Search</Search>
     </obtion>
   </UIActionBar>
-  
+
   <UIPopupMenu>
     <msg>
       <can-not-unlock-node-is-checked-in>Can not unlock because node '{0}' or ancestor of '{0}' is checked-in</can-not-unlock-node-is-checked-in>
     </msg>
   </UIPopupMenu>
-  
-  <!-- 
+
+  <!--
    #############  From DMS 2.5 #############
   -->
   <UIActionBar>
@@ -2661,13 +2664,13 @@
       <allow-setProperty>You must select set property for this group</allow-setProperty>
     </msg>
   </UIActionBar>
-  
+
   <UIActionForm>
     <msg>
       <name-not-allowed>This action name is not allowed.</name-not-allowed>
     </msg>
   </UIActionForm>
-  
+
   <UISaveQueryForm>
     <msg>
       <name-not-allowed>This query name is not allowed.</name-not-allowed>
@@ -2677,7 +2680,7 @@
     <msg>
       <name-not-allowed>A word or phrase in content is not allowed.</name-not-allowed>
     </msg>
-  </UISimpleSearch> 
+  </UISimpleSearch>
   <Drives>
     <label>
       <Private>Private</Private>
@@ -2694,11 +2697,11 @@
       <SharedUsersSpace>Shared Users Space</SharedUsersSpace>
       <Systemfiles>System files</Systemfiles>
       <ValidationRequestsDocumentsCenter>Validation Requests Documents Center</ValidationRequestsDocumentsCenter>
-    </label>  
-  </Drives> 
+    </label>
+  </Drives>
 
-  
-  <!-- 
+
+  <!--
    #############  From DMS 2.6 #############
   -->
   <UIUploadContent>
@@ -2707,7 +2710,7 @@
     </tooltip>
     <label>
       <manageMetadata>Manage Metadata</manageMetadata>
-    </label>    
+    </label>
   </UIUploadContent>
   <UIUploadForm>
     <action>
@@ -2721,14 +2724,14 @@
       <Cancel>Cancel</Cancel>
     </action>
   </UIExternalMetadataForm>
-    <!-- 
+    <!--
    #############  From DMS 2.6 #############
    -->
   <ECMContextMenu>
       <event>
         <Permlink>View Document</Permlink>
       </event>
-  </ECMContextMenu>  
+  </ECMContextMenu>
   <UIUploadContainer>
     <tab>
       <label>
@@ -2736,10 +2739,10 @@
       </label>
     </tab>
   </UIUploadContainer>
-  
-  <!-- 
+
+  <!--
     ############  From DMS 2.6 ##############
-   -->  
+   -->
   <UIFolderForm>
     <label>
       <nt_folder>Document Folder</nt_folder>
@@ -2771,29 +2774,29 @@
  </UIExportNode>
  <Taxonomy>
     <msg>
-      <AccessDeniedException>You don't have permission to access in these taxonomies</AccessDeniedException>      
+      <AccessDeniedException>You don't have permission to access in these taxonomies</AccessDeniedException>
     </msg>
   </Taxonomy>
-  
-  <UIJcrExplorerEditForm>    
+
+  <UIJcrExplorerEditForm>
     <msg>
       <notNullDriveName>Drive Name is null or empty. Fill Drive Name, please!</notNullDriveName>
       <notNullPath>Path is null or empty. Fill the path, please!</notNullPath>
     </msg>
   </UIJcrExplorerEditForm>
-    
+
   <UIViewSearchResult>
     <tooltip>
       <remove-attachment>Do you want to remove this attachment file?</remove-attachment>
     </tooltip>
   </UIViewSearchResult>
-  
+
   <SameNamePopup>
     <title>
-      <UIUploadBehaviorWithSameName>Upload file</UIUploadBehaviorWithSameName>    
+      <UIUploadBehaviorWithSameName>Upload file</UIUploadBehaviorWithSameName>
     </title>
-  </SameNamePopup>  
-    
+  </SameNamePopup>
+
   <UISingleUploadForm>
     <title>Upload a file</title>
     <label>
@@ -2883,13 +2886,13 @@
       <Favourites>Favorites</Favourites>
       <Hidden>Hidden</Hidden>
       <Trash>Trash</Trash>
-      <Configuration>Set up preferences</Configuration>      
+      <Configuration>Set up preferences</Configuration>
     </label>
     <title>
       <allItems>All Items</allItems>
     </title>
   </UIAllItems>
-  
+
   <UIPreferencesForm>
       <label>
           <Alphabetic>Alphabetic</Alphabetic>
@@ -2900,7 +2903,7 @@
           <Descending>Descending</Descending>
       </label>
   </UIPreferencesForm>
-  
+
   <UIDocumentInfo>
     <label>
       <Today>Today</Today>
@@ -2912,7 +2915,7 @@
     <header>
       <dateTime>Date time</dateTime>
       <name>Name</name>
-    </header>   
+    </header>
     <tooltip>
       <View>View</View>
       <RemoveFromFavourite>Remove from favorite</RemoveFromFavourite>
@@ -2923,9 +2926,9 @@
       <timelineDateTimeDESC>Sort by modified time in descending order</timelineDateTimeDESC>
       <timelineNameASC>Sort by name in ascending order</timelineNameASC>
       <timelineNameDESC>Sort by name in descending order</timelineNameDESC>
-    </tooltip>    
-  </UIDocumentInfo> 
-  
+    </tooltip>
+  </UIDocumentInfo>
+
   <UISavedSearches>
     <title>
       <savedSearches>Saved Searches</savedSearches>
@@ -2940,22 +2943,22 @@
        <Contents>Content</Contents>
     </label>
   </DocumentType>
-  
+
   <UIDocumentFilterForm>
     <label>
       <Images>Image</Images>
       <Video>Video</Video>
       <Music>Music</Music>
       <Documents>Document</Documents>
-      <Contents>Content</Contents>      
+      <Contents>Content</Contents>
     </label>
     <title>Set up filter preferences</title>
     <action>
       <Save>#{word.save}</Save>
-      <Cancel>#{word.cancel}</Cancel>      
+      <Cancel>#{word.cancel}</Cancel>
     </action>
   </UIDocumentFilterForm>
-  
+
   <UIAllItemsByType>
     <label>
     	<ByType>Filter By Type</ByType>
@@ -2969,24 +2972,24 @@
       <ShowContents>Show all contents type document</ShowContents>
     </title>
   </UIAllItemsByType>
-  
+
   <Views>
     <label>
       <slide-show>Slide show</slide-show>
       <timeline-view>Timeline view</timeline-view>
     </label>
-  </Views>  
+  </Views>
   <ECMContextMenu>
     <event>
       <PlayMedia>Play media</PlayMedia>
     </event>
-  </ECMContextMenu> 
+  </ECMContextMenu>
   <UIPopupWindow>
     <title>
       <UIDocumentFilterForm>Filter Documents Type</UIDocumentFilterForm>
     </title>
   </UIPopupWindow>
-  
+
   <UIAllItemsPreferenceForm>
     <label>
       <showOwnedByUser>Owned by me</showOwnedByUser>
@@ -2997,22 +3000,22 @@
     <title>Set up filter preferences</title>
     <action>
       <Save>#{word.save}</Save>
-      <Cancel>#{word.cancel}</Cancel>      
+      <Cancel>#{word.cancel}</Cancel>
     </action>
   </UIAllItemsPreferenceForm>
-  
+
   <EmptyTrashManageComponent>
     <msg>
       <confirm-delete>Empty all items from trash?</confirm-delete>
     </msg>
-  </EmptyTrashManageComponent> 
+  </EmptyTrashManageComponent>
   <UICategoryForm>
     <label>
       <name>Category Name</name>
     </label>
     <action>
       <Save>Save</Save>
-      <Cancel>Cancel</Cancel>      
+      <Cancel>Cancel</Cancel>
     </action>
   </UICategoryForm>
   <UIPopupWindow>
@@ -3032,12 +3035,12 @@
       <Group>Group</Group>
       <Site>Site</Site>
       <Private>Private</Private>
-      <tagScopes>Tag Scopes</tagScopes>      
+      <tagScopes>Tag Scopes</tagScopes>
     </label>
    </UITaggingForm>
-   
-   
-   
+
+
+
    <UITagExplorer>
     <title>
       <EditPrivateTags>Edit private tags</EditPrivateTags>
@@ -3046,14 +3049,14 @@
       <PrivateTags>Private tags</PrivateTags>
      </title>
    </UITagExplorer>
-   
+
   <UIEditingTagsForm>
     <header>
       <name>Name</name>
       <relatedDocuments>Related documents</relatedDocuments>
       <action>Action</action>
     </header>
-  
+
   <action>
     <title>
       <EditTag>Edit tag</EditTag>
@@ -3065,8 +3068,8 @@
       <confirm-remove>Do you want to delete?</confirm-remove>
     </msg>
   </UIEditingTagsForm>
-  
-  
+
+
   <UIPopupWindow>
     <title>
       <UIEditingTagsForm>Edit tag form</UIEditingTagsForm>
@@ -3089,10 +3092,10 @@
       <UITagForm>Tag form</UITagForm>
     </title>
   </TagPopup>
-    
+
     <UIPopupMenu>
     <msg>
-      <node-locked-editing>This node with path {0} is being locked by other user for editing!</node-locked-editing> 
+      <node-locked-editing>This node with path {0} is being locked by other user for editing!</node-locked-editing>
     </msg>
   </UIPopupMenu>
   <UITagStyleForm>
@@ -3100,13 +3103,13 @@
       <error-update>Error when updating</error-update>
     </msg>
   </UITagStyleForm>
-  
+
   <UIPopupMenu>
     <msg>
       <editTagAccessDenied>Access denied!</editTagAccessDenied>
     </msg>
   </UIPopupMenu>
-  
+
   <UIPopupWindow>
     <title>
       <UITaggingFormContainer>Tag Manager</UITaggingFormContainer>
@@ -3118,42 +3121,42 @@
       <UINodeTypeSelector>Select node type</UINodeTypeSelector>
     </title>
   </PopupComponent>
-    
+
     <UIActionForm>
     <title>
       <ShowComponent>Show component</ShowComponent>
       <removeReference>Remove</removeReference>
     </title>
-  </UIActionForm>   
-    
+  </UIActionForm>
+
   <EditFormAction>
     <title>
       <ShowComponent>Show component</ShowComponent>
       <removeReference>Remove</removeReference>
     </title>
   </EditFormAction>
-    
+
   <NodeTypeNameValidator>
     <msg>
       <Invalid-char>There are some invalid characters. Type another value, please!</Invalid-char>
       <empty-input>The value of field is null or empty!</empty-input>
     </msg>
   </NodeTypeNameValidator>
-  
+
   <UIPreferencesForm>
       <label>
             <queryType>Query Type</queryType>
             <SQL>SQL</SQL>
-            <XPATH>XPATH</XPATH>        
+            <XPATH>XPATH</XPATH>
       </label>
   </UIPreferencesForm>
-  
+
   <UIDocumentInfo>
     <msg>
       <repository-error>Error, information about repository lost!</repository-error>
     </msg>
   </UIDocumentInfo>
-  
+
   <UITreeExplorer>
     <msg>
       <repository-error>Error, information about repository lost!</repository-error>
@@ -3169,7 +3172,7 @@
       <constraintviolation-exception>Can not save document. Data input is missed or invalid!</constraintviolation-exception>
     </msg>
   </UIActionForm>
-  
+
   <UISelectRestorePath>
     <action>
       <Save>Save</Save>
@@ -3178,7 +3181,7 @@
     <label>
       <formInput>Old path lost, please choose new one!</formInput>
     </label>
-  </UISelectRestorePath>         
+  </UISelectRestorePath>
   <PathNode>
     <title>
       <Add>Add</Add>
@@ -3194,12 +3197,12 @@
       <AddRootNode>Add root node</AddRootNode>
     </title>
   </rootNodeInfo>
-  
+
   <UIPopupWindow>
     <title>
       <UISelectRestorePath>Select Restore Path</UISelectRestorePath>
     </title>
-  </UIPopupWindow>  
+  </UIPopupWindow>
   <UIActionForm>
     <msg>
       <homePath-emty>The Home path is empty</homePath-emty>
@@ -3210,8 +3213,8 @@
 				<msg>
 				  <not-exist-categories>There isn't any category</not-exist-categories>
 				</msg>
-		</UIActionBar>		   
-		
+		</UIActionBar>
+
 	<UIPublicationPanel>
     <button>
       <Close>Close</Close>
@@ -3279,13 +3282,13 @@
     <msg>
       <invalid-format>Invalid datetime format. Please check again</invalid-format>
     </msg>
-  </UIPublicationPanel>     
+  </UIPublicationPanel>
   <UIPopupWindow>
     <title>
       <UIPublicationContainer>Manage publication</UIPublicationContainer>
       <UIPublishingPanel>Manage publication</UIPublishingPanel>
     </title>
-  </UIPopupWindow> 
+  </UIPopupWindow>
   <WCMContentView>
     <header>
       <status>Status</status>
@@ -3297,11 +3300,11 @@
   </WCMContentView>
   <UITagForm>
   		<msg>
-  			 <NameAlreadyExist>Tag name is already exists</NameAlreadyExist> 
+  			 <NameAlreadyExist>Tag name is already exists</NameAlreadyExist>
   		</msg>
   </UITagForm>
-  
-  <!-- 
+
+  <!--
   	############  From WCM 2.1.0 ##############
   -->
   <UICategoryManagerSearch>
@@ -3314,7 +3317,7 @@
     	 <Close>Close</Close>
     </action>
   </UICategoryManagerSearch>
-  
+
   <UIPreferencesForm>
   	 <action>
     	 <HideAdvance>Hide Advanced</HideAdvance>
@@ -3324,7 +3327,7 @@
     	<Advance>Advanced</Advance>
     </label>
   </UIPreferencesForm>
-  
+
   <UIJCRExplorerPortlet>
 	<msg>
 	  <file-access-denied>File access denied!</file-access-denied>
@@ -3336,7 +3339,7 @@
       <ShowDrives>Show Drives</ShowDrives>
     </DrivesArea>
   </UIDrivesArea>
-  <UIJcrExplorerEditForm>   
+  <UIJcrExplorerEditForm>
     <msg>
       <fields-saved>All field values saved!</fields-saved>
       <fields-cancelled>All field values cancelled!</fields-cancelled>
@@ -3347,6 +3350,6 @@
 		  <confirm-close>The changes you made will be lost if you close this form.</confirm-close>
 		  <confirm-navigate>The changes you made will be lost if you navigate away from this page.</confirm-navigate>
 	  </msg>
-  </UIDocumentForm>	  	
+  </UIDocumentForm>
 </bundle>
 

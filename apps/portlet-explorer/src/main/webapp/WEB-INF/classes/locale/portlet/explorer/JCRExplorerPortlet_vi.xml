@@ -102,10 +102,10 @@
       <OwnedByMe>Thuộc sở hữu của tôi</OwnedByMe>
       <Favourites>Được ưa thích</Favourites>
       <Hidden>Ẩn</Hidden>
-      <Trash>Thùng rác</Trash>      
+      <Trash>Thùng rác</Trash>
       <Configuration>Thiết lập lựa chọn</Configuration>
       <DocumentFilterConfiguration>Thiết lập kiểu hiển thị</DocumentFilterConfiguration>
-      <SavedSearches>Câu tìm kiếm</SavedSearches>      
+      <SavedSearches>Câu tìm kiếm</SavedSearches>
     </label>
     <title>
       <Control>Điều khiển</Control>
@@ -139,7 +139,7 @@
       <anonymous-view>Biểu tượng</anonymous-view>
       <taxonomy-list>Chi tiết</taxonomy-list>
       <taxonomy-icons>Biểu tượng</taxonomy-icons>
-      <timeline-view>Xem theo kiểu timeline</timeline-view>      
+      <timeline-view>Xem theo kiểu timeline</timeline-view>
     </label>
   </Views>
   <!--
@@ -204,9 +204,9 @@
       <Save>Lưu</Save>
     </action>
   </UIAllItemsPreferenceForm>
-  
-  
-  
+
+
+
   <!--
   #########################################################################################
   #             org.exoplatform.ecm.webui.component.explorer.UIRenameForm  #
@@ -265,14 +265,14 @@
       <UIPreferencesForm>Thiết lập lựa chọn</UIPreferencesForm>
       <UIPublicationManager>Quản lý xuất bản</UIPublicationManager>
       <UIConfirmMessage>Xác nhận xóa</UIConfirmMessage>
-      <UIRestoreConfirmMessage>Xác nhận phục hồi</UIRestoreConfirmMessage>      
+      <UIRestoreConfirmMessage>Xác nhận phục hồi</UIRestoreConfirmMessage>
       <UIActivePublication>Bắt đầu chu trình xuất bản</UIActivePublication>
       <UITaggingForm>Gán nhãn cho tài liệu này.</UITaggingForm>
       <UIMultiLanguageForm>Đa ngôn ngữ</UIMultiLanguageForm>
       <UIMultiLanguageManager>Đa ngôn ngữ</UIMultiLanguageManager>
       <UIThumbnailForm>Thêm ảnh nhỏ</UIThumbnailForm>
       <UIAllItemsPreferenceForm>Thiết lập lựa chọn</UIAllItemsPreferenceForm>
-      <UIDocumentFilterForm>Lọc theo kiểu theo tùy chọn</UIDocumentFilterForm>      
+      <UIDocumentFilterForm>Lọc theo kiểu theo tùy chọn</UIDocumentFilterForm>
     </title>
     <header>
       <workspace>Không gian làm việc</workspace>
@@ -637,7 +637,7 @@
       <UIPublicationPagesContainer>Pages</UIPublicationPagesContainer>
       <UIPublicationHistory>Lịch sử</UIPublicationHistory>
       <UIVersionViewer>Version viewer</UIVersionViewer>
-      
+
       <UIPropertyTab>Các thuộc tính</UIPropertyTab>
       <UIMetadataTab>Dữ liệu Metadata</UIMetadataTab>
       <UIPropertyForm>Thêm thuộc tính mới</UIPropertyForm>
@@ -874,7 +874,7 @@
       <fileName-error>Xin vui lòng chắc chắn rằng bạn đã lên tập tin đã chọn lên máy chủ bằng cách sử dụng biểu tượng tải lên.</fileName-error>
       <taxonomyPath-error>Vui lòng chọn danh mục!</taxonomyPath-error>
       <fileName-invalid>Có một số kí tự không hợp lệ trong tên tập tin. Vui lòng gõ lại tên tập tin hoặc tải một tập tin khác.</fileName-invalid>
-      <fileName-invalid-with-name>Có một số kí tự không hợp lệ trong tên tập tin '{0}'. Vui lòng gõ lại tên tập tin hoặc tải một tập tin khác.</fileName-invalid-with-name>      
+      <fileName-invalid-with-name>Có một số kí tự không hợp lệ trong tên tập tin '{0}'. Vui lòng gõ lại tên tập tin hoặc tải một tập tin khác.</fileName-invalid-with-name>
       <fileSize-too-big>Kích thước của tập tin là quá lớn. Bạn cần chia thành một số tập tin nhỏ hơn hoặc sử dung tải kiểu WebDav.</fileSize-too-big>
       <name-is-exist>Tên '{0}' đã tồn tại. Bạn không thể tải một tập tin trùng tên ngoại trừ 'nt:file'</name-is-exist>
       <contraint-violation>Không thể thêm node '{0}' vào node này bởi vì nó không được phép là loại node con của node cha này.</contraint-violation>
@@ -1140,9 +1140,9 @@
     <tooltip>
       <View>Hiển thị node này.</View>
       <OpenFolder>Đi đến thư mục</OpenFolder>
-      <RemoveHiddenAttribute>Xóa thuộc tính ẩn</RemoveHiddenAttribute>      
+      <RemoveHiddenAttribute>Xóa thuộc tính ẩn</RemoveHiddenAttribute>
     </tooltip>
-  </UIShowAllHiddenResult>  
+  </UIShowAllHiddenResult>
   <UIShowAllTrashResult>
     <msg>
       <not-support>Không có mẫu nào cho node này.</not-support>
@@ -1173,10 +1173,10 @@
       <View>Hiển thị node này.</View>
       <OpenFolder>Đi đến thư mục</OpenFolder>
       <DeletePermanently>Xóa vĩnh viễn</DeletePermanently>
-      <RestoreFromTrash>Khôi phục từ thùng rác</RestoreFromTrash>      
+      <RestoreFromTrash>Khôi phục từ thùng rác</RestoreFromTrash>
     </tooltip>
-  </UIShowAllTrashResult>  
-  
+  </UIShowAllTrashResult>
+
   <UIConstraintsForm>
     <label>
       <constraints>UIConstraintsForm</constraints>
@@ -1499,7 +1499,7 @@
       <version>Phiên bản</version>
     </label>
   </UIAuditingInfo>
-  
+
   <!--
   ###############################################################################
   #   org.exoplatform.ecm.webui.component.explorer.versions.UIActivateVersion   #
@@ -1512,6 +1512,9 @@
       <button-active>Kích hoạt</button-active>
       <button-cancel>Hủy bỏ</button-cancel>
     </label>
+    <msg>
+      <access-denied>Bạn không có quyền kích hoạt Thay đổi phiên bản cho node này</access-denied>
+    </msg>
   </UIActivateVersion>
   <!--
   ###############################################################################
@@ -1884,7 +1887,7 @@
       <name>Form thao tác</name>
     </label>
     <msg>
-    <!-- 
+    <!--
         Deeper test on DMS 2.4 RC1
         ECM-3873 Error content of message when type name of action by special character
 	  -->
@@ -1969,7 +1972,7 @@
   <!--
   ###################################################################################
   # 	org.exoplatform.ecm.webui.component.explorer.popup.actions.UITaggingForm			#
-  ################################################################################### 
+  ###################################################################################
   -->
   <UITaggingForm>
     <label>
@@ -2325,7 +2328,7 @@
       <nodeValidationRequest>Node này đang trong trạng thái yêu cầu phê chuẩn</nodeValidationRequest>
     </WorkflowPublicationPlugin>
   </PublicationService>
-  
+
   <!--
   ### Since ECM version 2.3 Alpha##############
   Access directly a JCR FE drive
@@ -2333,7 +2336,7 @@
   <UIJCRExplorerPortlet>
     <nopermission>Không có drive này hoặc bạn không có quyền để truy cập</nopermission>
   </UIJCRExplorerPortlet>
-  
+
   <UIJcrExplorerEditForm>
     <title>Sửa form File Explorer</title>
     <action>
@@ -2351,7 +2354,7 @@
        <SelectNodePath>Chọn nút</SelectNodePath>
     </label>
   </UIJcrExplorerEditForm>
-  
+
   <UIDriveSelector>
     <label>
       <driveName>Tên drive</driveName>
@@ -2371,7 +2374,7 @@
 						<path-edit-permission>Không thể chọn đường dẫn. Hãy bấm vào nút edit để chọn đường dẫn</path-edit-permission>
     </msg>
   </UIJcrExplorerEditForm>
-  
+
   <PopUpSelectDrive>
     <title>
       <UIDriveSelector>Lựa chọn drive</UIDriveSelector>
@@ -2383,13 +2386,13 @@
       <UIOneNodePathSelector>Chọn nút</UIOneNodePathSelector>
     </title>
   </PopupSelectPath>
-  
+
   <DriveNameInput>
     <title>
       <SelectDrive>Lựa chọn drive</SelectDrive>
     </title>
   </DriveNameInput>
-  
+
   <!--
 	### Since ECM version 2.4.x ##############
   -->
@@ -2398,13 +2401,13 @@
       <AddSymLink>Thêm mới liên kết</AddSymLink>
 		</tooltip>
 	</UIActionBar>
-	
+
 	<UIPopupWindow>
 		<title>
 			<UISymLinkManager>Add Link</UISymLinkManager>
 		</title>
 	</UIPopupWindow>
-	
+
 	<UISymLinkForm>
 		<label>
       <symLinkName>Tên liên kết</symLinkName>
@@ -2421,7 +2424,7 @@
       <fileName-error>Tên liên kết không theo đúng quy định</fileName-error>
       <constraint-violation>Node hiện tại không cho phép thêm mới kiểu node là '{0}' </constraint-violation>
       <repository-exception>Truy cập không được phép! Bạn không có quyền thêm mới trên node hiện tại</repository-exception>
-      <numberformat-exception>Thông tin không được lưu. Tên phải là kiểu số</numberformat-exception>      
+      <numberformat-exception>Thông tin không được lưu. Tên phải là kiểu số</numberformat-exception>
 			<path-node-invalid>Vui lòng nhập đường dẫn đến node!</path-node-invalid>
 			<path-node-not-allowed>Tên này không được cho phép sử dụng.</path-node-not-allowed>
 			<non-node>Vui lòng chọn vị trí của liên kết. Bạn đã chọn một node mà bạn không có quyền đọc</non-node>
@@ -2430,34 +2433,34 @@
 			<UnsupportedRepositoryOperationException>Node được liên kết không được thể tham chiếu đến (có thể do bị khóa)</UnsupportedRepositoryOperationException>
     </msg>
 	</UISymLinkForm>
-	
+
 	<UIPopupSymLink>
 		<title>
 			<UIOneNodePathSelector>Chọn vị trí để tạo liên kết</UIOneNodePathSelector>
 		</title>
 	</UIPopupSymLink>
-	
+
 	<ECMContextMenu>
 		<event>
 			<AddSymLink>Thêm mới liên kết</AddSymLink>
     </event>
   </ECMContextMenu>
-  
+
   <UIWorkingArea>
     <msg>
       <create-link-problem>Bạn không thể tạo liên kết từ vị trí '{0}' tới '{1}'</create-link-problem>
       <dest-node-is-link>Node nguồn '{0}' đã là một symlink. Vì vậy, bạn không thể tạo thêm symlink bên trong nó. Bạn vui lòng chọn node khác!</dest-node-is-link>
-      <selected-is-link>Node được chọn '{0}' là một symlink, vì vậy bạn không thể tạo một liên kết trỏ tới một liên kết khác. Bạn vui lòng chọn liên kết khác</selected-is-link>     
-      <confirm-create-link>Bạn có thực sự muốn tạo liên kết tại vị trí này không?</confirm-create-link> 
+      <selected-is-link>Node được chọn '{0}' là một symlink, vì vậy bạn không thể tạo một liên kết trỏ tới một liên kết khác. Bạn vui lòng chọn liên kết khác</selected-is-link>
+      <confirm-create-link>Bạn có thực sự muốn tạo liên kết tại vị trí này không?</confirm-create-link>
     </msg>
   </UIWorkingArea>
- 
+
   <ECMContextMenu>
     <event>
       <CreateLink>Tạo liên kết</CreateLink>
     </event>
-  </ECMContextMenu>  
-  
+  </ECMContextMenu>
+
   <UIWorkspaceList>
   	<msg>
   		<AccessDeniedException>Truy cập không được phép. Bạn đã bị giới hạn quyền truy cập trong phần này</AccessDeniedException>
@@ -2466,25 +2469,25 @@
       <taxonomyTree>Cây phân loại</taxonomyTree>
     </label>
   </UIWorkspaceList>
-  
+
   <UIPopupTaxonomy>
     <title>
 			<UIOneTaxonomySelector>Thêm danh mục</UIOneTaxonomySelector>
     </title>
   </UIPopupTaxonomy>
-  
+
   <UITreeTaxonomyList>
   	<label>
       <taxonomyTree>Cây phân loại</taxonomyTree>
     </label>
   </UITreeTaxonomyList>
-  
+
   <UIActionBar>
     <tooltip>
       <ManageSimpleCategories>Quản lý việc đơn phân loại.</ManageSimpleCategories>
     </tooltip>
 	</UIActionBar>
-	
+
 	<UISimpleCategoryManager>
     <tab>
       <label>
@@ -2493,7 +2496,7 @@
       </label>
     </tab>
   </UISimpleCategoryManager>
-  
+
   <UICategoryManager>
     <tab>
       <label>
@@ -2501,15 +2504,15 @@
       </label>
     </tab>
   </UICategoryManager>
-  
+
   <UISimpleCategoryManager>
   	<action>
-  		<Close>#{word.close}</Close>	
+  		<Close>#{word.close}</Close>
   	</action>
-  </UISimpleCategoryManager>  
+  </UISimpleCategoryManager>
   <UIPopupWindow>
   	<title>
-  		<UISimpleCategoryManager>Thêm danh mục</UISimpleCategoryManager>	
+  		<UISimpleCategoryManager>Thêm danh mục</UISimpleCategoryManager>
   	</title>
   </UIPopupWindow>
   <UICategoriesAddedList>
@@ -2524,18 +2527,18 @@
 	    <OK>Đồng ý</OK>
 	  </label>
 	</UIConfirmMessage>
-	
+
 	<PopupComponent>
     <title>
 			<UIOneTaxonomySelector>Thêm categories</UIOneTaxonomySelector>
     </title>
   </PopupComponent>
-  
+
   <UIWorkingArea>
     <msg>
       <can-not-move-to-itself>Không thể di chuyển vị trí: Thư mục đích và thư mục nguồn là giống nhau</can-not-move-to-itself>
     </msg>
-  </UIWorkingArea>  
+  </UIWorkingArea>
 
   <UIImportNode>
     <label>
@@ -2545,9 +2548,9 @@
     <msg>
       <history-invalid-type>Kiểu file lịch sử phiên bản là không chính xác. File chính xác phải có phần mở rộng là *.zip</history-invalid-type>
       <history-invalid-content>Dữ liệu trong file lịch sử phiên bản là không chính xác. Bạn nên chọn file chính xác để sử dụng.</history-invalid-content>
-    </msg>    
-  </UIImportNode> 
- 
+    </msg>
+  </UIImportNode>
+
   <Import>
     <Behavior>
       <type0>Tạo mới</type0>
@@ -2556,13 +2559,13 @@
       <type3>Văng lỗi nếu node đang tồn tại</type3>
     </Behavior>
   </Import>
-  
+
   <UIExportNode>
     <action>
       <ExportHistory>Xuất lịch sử phiên bản</ExportHistory>
     </action>
-  </UIExportNode>  
-  
+  </UIExportNode>
+
   <UIPopupMenu>
   	<msg>
   		<node-locked-other-person>Node đang xét hoặc node cha đang bị khóa bởi người dùng khác, Bạn không thể xóa!</node-locked-other-person>
@@ -2575,14 +2578,14 @@
       <sysview>Kiểu hệ thống</sysview>
     </label>
   </Import>
-  
+
   <UIDocumentForm>
   	<msg>
   		<not-support>Không thể tải mẫu của '{0}'.</not-support>
   		<do-not-permission>Bạn không có quyền để thao tác trên template này</do-not-permission>
   	</msg>
-  </UIDocumentForm>  
-  
+  </UIDocumentForm>
+
    <!--
   ###################################################################################
   #             org.exoplatform.ecm.webui.component.explorer.UIActionBar      						#
@@ -2598,14 +2601,14 @@
       <Search>Tìm kiếm</Search>
     </obtion>
   </UIActionBar>
-  	
+
 	<UIPopupMenu>
   	<msg>
 			<can-not-unlock-node-is-checked-in>Không thể unlock bởi vì node '{0}' hoặc cha của '{0}' đang ở trạng thái checked-in</can-not-unlock-node-is-checked-in>
 		</msg>
   </UIPopupMenu>
-  
-  <!-- 
+
+  <!--
  	 #############	From DMS 2.5 #############
   -->
   <UIActionBar>
@@ -2659,20 +2662,20 @@
 			<SharedUsersSpace>Ổ đĩa chia sẻ cho người dùng</SharedUsersSpace>
 			<Systemfiles>Ổ đĩa chứa tệp hệ thống</Systemfiles>
 			<ValidationRequestsDocumentsCenter>Ổ đĩa chứa tài liệu yêu cầu phê duyệt</ValidationRequestsDocumentsCenter>
-		</label>  
+		</label>
 	</Drives>
 	<Comments>
 	  <tooltip>
 	    <remove-comment>Xóa bỏ ý kiến này</remove-comment>
 	  </tooltip>
-	</Comments>	
+	</Comments>
 	<UIDocumentInfo>
 	  <msg>
 	    <confirm-deletecomment>Bạn có thực sự muốn xóa ý kiến này không?</confirm-deletecomment>
 	  </msg>
 	</UIDocumentInfo>
-	
-	<!-- 
+
+	<!--
  	 #############	From DMS 2.6 #############
   -->
 	<UIUploadContent>
@@ -2681,7 +2684,7 @@
 		</tooltip>
 		<label>
 			<manageMetadata>Quản lý thuộc tính</manageMetadata>
-		</label>		
+		</label>
 	</UIUploadContent>
 	<UIUploadForm>
 		<action>
@@ -2702,9 +2705,9 @@
   	</tab>
   </UIUploadContainer>
 
-  <!-- 
+  <!--
   	############  From DMS 2.6 ##############
-   -->  
+   -->
   <UIFolderForm>
     <label>
       <nt_folder>Thư mục tài liệu</nt_folder>
@@ -2727,7 +2730,7 @@
 		    <drive-not-exist>Ổ đĩa '{0}' không tìm thấy hoặc bạn không có quyền truy nhập</drive-not-exist>
 		  </msg>
 		 </UIDrivesBrowser>
-		 
+
 	 <UIExportNode>
 	  <msg>
 	    <OutOfMemoryError>Bạn nên chọn xuất tài liệu theo cách xem hệ thống</OutOfMemoryError>
@@ -2735,10 +2738,10 @@
 	 </UIExportNode>
 	 <Taxonomy>
 			<msg>
-				<AccessDeniedException>Bạn không có quyền truy nhập danh sách danh mục</AccessDeniedException>		 	
+				<AccessDeniedException>Bạn không có quyền truy nhập danh sách danh mục</AccessDeniedException>
 			</msg>
   </Taxonomy>
-	<UIJcrExplorerEditForm>    
+	<UIJcrExplorerEditForm>
 		<msg>
 			<notNullDriveName>Giá trị trường Tên ổ đĩa là null hoặc rỗng. Hãy nhập tên ổ đĩa!</notNullDriveName>
 			<notNullPath>Đường dẫn đang bị null hoặc rỗng. Hãy nhập vào đường dẫn</notNullPath>
@@ -2765,8 +2768,8 @@
 	  <title>
 		  <UIUploadBehaviorWithSameName>Tải dữ liệu lên</UIUploadBehaviorWithSameName>
 	  </title>
-	</SameNamePopup>	
-	
+	</SameNamePopup>
+
 	<UISingleUploadForm>
     <title>Tải một file</title>
     <label>
@@ -2874,15 +2877,15 @@
       <allItems>Tất cả tài liệu</allItems>
     </title>
   </UIAllItems>
-  
-  
-  
+
+
+
   <!--
   #########################################################################################
   #             org.exoplatform.ecm.webui.component.explorer.side.UIDocumentFilterForm  #
   #########################################################################################
   -->
-  
+
 	<UIPreferencesForm>
     <label>
   	  <Alphabetic>Bảng chữ cái</Alphabetic>
@@ -2899,7 +2902,7 @@
       <savedSearches>Câu tìm kiếm</savedSearches>
     </title>
   </UISavedSearches>
-  
+
   <UIDocumentFilterForm>
   	<label>
     	<Images>Ảnh</Images>
@@ -2908,10 +2911,10 @@
     <title>Thiết lập hiển thị</title>
     <action>
   		<Save>#{word.save}</Save>
-      <Cancel>#{word.cancel}</Cancel>      
+      <Cancel>#{word.cancel}</Cancel>
     </action>
   </UIDocumentFilterForm>
-  
+
   <UIAllItemsByType>
   	<label>
   		<ByType>Lọc Theo Kiểu</ByType>
@@ -2923,26 +2926,26 @@
   	  <ShowImages>Hiển thị các file ảnh</ShowImages>
   	  <ShowDocuments>Hiển thị các file tài liệu</ShowDocuments>
   	  <ShowContents>Hiển thị tài liệu nội dung</ShowContents>
-  	</title>  	
-  </UIAllItemsByType>  
-  
+  	</title>
+  </UIAllItemsByType>
+
   <DocumentType>
     <label>
     	 <Images>Ảnh</Images>
     	 <Video>Phim</Video>
     	 <Music>Âm thanh</Music>
     	 <Documents>Tài liệu</Documents>
-    	 <Contents>Nội dung</Contents>  	 
+    	 <Contents>Nội dung</Contents>
     </label>
   </DocumentType>
-  
+
   <Views>
     <label>
       <slide-show>Trình diễn theo slide</slide-show>
       <timeline-view>Hiển thị theo thời gian</timeline-view>
     </label>
   </Views>
-  
+
   <UIDocumentInfo>
     <label>
       <Today>Ngày hôm nay</Today>
@@ -2954,7 +2957,7 @@
     <header>
       <dateTime>Ngày đổi</dateTime>
       <name>Tên</name>
-    </header>   
+    </header>
     <tooltip>
       <View>Xem</View>
       <RemoveFromFavourite>Xóa khỏi mục ưa thích</RemoveFromFavourite>
@@ -2965,22 +2968,22 @@
       <timelineDateTimeDESC>Sắp xếp giảm dần theo thời gian thay đổi</timelineDateTimeDESC>
       <timelineNameASC>Sắp xếp tăng dần theo tên</timelineNameASC>
       <timelineNameDESC>Sắp xếp giảm dần theo tên</timelineNameDESC>
-    </tooltip>    
-  </UIDocumentInfo>  
-  
+    </tooltip>
+  </UIDocumentInfo>
+
   <ECMContextMenu>
     <event>
       <PlayMedia>Chơi nhạc</PlayMedia>
      </event>
-  </ECMContextMenu> 
+  </ECMContextMenu>
 
   <UIPreferencesForm>
     <label>
       <showItemsByUserInTimeline>Chỉ hiển thị các tài liệu của user trong Timline view</showItemsByUserInTimeline>
-      <enableDragAndDrop>Cho phép thao tác Kéo-Thả</enableDragAndDrop>      
+      <enableDragAndDrop>Cho phép thao tác Kéo-Thả</enableDragAndDrop>
     </label>
   </UIPreferencesForm>
-  
+
   <UIRestoreConfirmMessage>
     <label>
       <Close>#{word.close}</Close>
@@ -3006,28 +3009,28 @@
     <title>Thiết lập kiểu hiển thị</title>
     <action>
       <Save>Lưu</Save>
-      <Cancel>Hủy bỏ</Cancel>      
+      <Cancel>Hủy bỏ</Cancel>
     </action>
   </UIAllItemsPreferenceForm>
-  
+
   <EmptyTrashManageComponent>
     <msg>
       <confirm-delete>Xóa tất cả file-thư mục trong thùng rác?</confirm-delete>
     </msg>
-  </EmptyTrashManageComponent>  
-  
+  </EmptyTrashManageComponent>
+
   <ECMContextMenu>
     <event>
       <EmptyTrash>Xóa sạch thùng rác?</EmptyTrash>
     </event>
-  </ECMContextMenu>    
+  </ECMContextMenu>
   <UICategoryForm>
 	  <label>
 	  	<name>Tên danh mục</name>
 	  </label>
     <action>
       <Save>Lưu</Save>
-      <Cancel>Hủy</Cancel>      
+      <Cancel>Hủy</Cancel>
     </action>
   </UICategoryForm>
   <UIPopupWindow>
@@ -3041,12 +3044,12 @@
     </tooltip>
 	 </UIActionBar>
    <UITaggingForm>
-    <label>  
+    <label>
       <Public>Chung</Public>
       <Group>Nhóm</Group>
       <Site>Site</Site>
       <Private>Riêng</Private>
-      <tagScopes>Phạm vi nhãn</tagScopes>      
+      <tagScopes>Phạm vi nhãn</tagScopes>
     </label>
    </UITaggingForm>
 
@@ -3065,7 +3068,7 @@
       <relatedDocuments>Tài liệu liên quan</relatedDocuments>
       <action>Hành động</action>
     </header>
-     
+
   <action>
     <title>
       <EditTag>Sửa nhãn</EditTag>
@@ -3077,7 +3080,7 @@
       <confirm-remove>Bạn có chắc chắn muốn xóa nhãn?</confirm-remove>
     </msg>
   </UIEditingTagsForm>
-  
+
   <UIPopupWindow>
     <title>
       <UIEditingTagsForm>Sửa nhãn</UIEditingTagsForm>
@@ -3100,25 +3103,25 @@
       <UITagForm>Tag form</UITagForm>
     </title>
   </TagPopup>
-		
+
 		<UIPopupMenu>
   	<msg>
-  		<node-locked-editing>Node với đường dẫn {0} đang bị khóa bởi người dùng khác để chỉnh sửa!</node-locked-editing>	
+  		<node-locked-editing>Node với đường dẫn {0} đang bị khóa bởi người dùng khác để chỉnh sửa!</node-locked-editing>
     </msg>
-  </UIPopupMenu>  
-		
+  </UIPopupMenu>
+
   <UITagStyleForm>
     <msg>
       <error-update>Lỗi trong quá trình cập nhật!</error-update>
     </msg>
   </UITagStyleForm>
-  
+
   <UIPopupMenu>
     <msg>
       <editTagAccessDenied>Lỗi truy cập!</editTagAccessDenied>
     </msg>
   </UIPopupMenu>
-  
+
   <UIPopupWindow>
     <title>
       <UITaggingFormContainer>Quản lý nhãn</UITaggingFormContainer>
@@ -3129,45 +3132,45 @@
     <title>
       <UINodeTypeSelector>Lựa chọn kiểu node</UINodeTypeSelector>
     </title>
-  </PopupComponent>  
+  </PopupComponent>
 		<UIActionForm>
   	<title>
   		<ShowComponent>Mở cửa sổ chọn</ShowComponent>
   		<removeReference>Loại bỏ</removeReference>
   	</title>
-  </UIActionForm>		 
+  </UIActionForm>
 		<EditFormAction>
   	<title>
   		<ShowComponent>Mở cửa sổ chọn</ShowComponent>
   		<removeReference>Loại bỏ</removeReference>
   	</title>
-  </EditFormAction>		 
+  </EditFormAction>
   <NodeTypeNameValidator>
     <msg>
       <Invalid-char>Kí tự không hợp lệ</Invalid-char>
       <empty-input>Giá trị bị rỗng</empty-input>
     </msg>
   </NodeTypeNameValidator>
-  
+
   <UIPreferencesForm>
   		<label>
 						<queryType>Kiểu truy vấn</queryType>
 						<SQL>SQL</SQL>
-						<XPATH>XPATH</XPATH>  			
+						<XPATH>XPATH</XPATH>
   		</label>
   </UIPreferencesForm>
-  	
+
   <UIDocumentInfo>
     <msg>
       <repository-error>Lỗi, mất thông tin về trình chứa!</repository-error>
     </msg>
   </UIDocumentInfo>
-  
+
   <UITreeExplorer>
     <msg>
       <repository-error>Lỗi, mất thông tin về trình chứa!</repository-error>
     </msg>
-  </UITreeExplorer>  
+  </UITreeExplorer>
   <UIDocumentForm>
   	<msg>
   		<constraintviolation-exception>Không thể lưu tài liệu. Dữ liệu nhập vào thiếu hoặc không phù hợp</constraintviolation-exception>
@@ -3191,7 +3194,7 @@
     <label>
       <formInput>Đường dẫn cũ đã bị mất, mời bạn chọn đường dẫn mới!</formInput>
     </label>
-  </UISelectRestorePath>         
+  </UISelectRestorePath>
   <PathNode>
     <title>
       <Add>Lưu</Add>
@@ -3207,7 +3210,7 @@
       <AddRootNode>Thêm nốt gốc</AddRootNode>
     </title>
   </rootNodeInfo>
-  
+
   <UIPopupWindow>
     <title>
       <UISelectRestorePath>Chọn đường dẫn phục hồi</UISelectRestorePath>
@@ -3223,8 +3226,8 @@
 				<msg>
 				  <not-exist-categories>Không tồn tại bất kỳ danh mục phân loại nào</not-exist-categories>
 				</msg>
-		</UIActionBar>   	
-		
+		</UIActionBar>
+
 	<UIPublicationPanel>
     <button>
       <Close>Đóng</Close>
@@ -3310,19 +3313,19 @@
   </WCMContentView>
   <UITagForm>
   		<msg>
-  			 <NameAlreadyExist>Tên nhãn đã tồn tại</NameAlreadyExist> 
+  			 <NameAlreadyExist>Tên nhãn đã tồn tại</NameAlreadyExist>
   		</msg>
   </UITagForm>
-<!-- 
+<!--
   	############  From WCM 2.1.0 ##############
-   -->  
+   -->
   <UITreeTaxonomyList>
     <label>
       <rootNodePath>Cây gốc</rootNodePath>
       <rootNodeInfo>UITreeTaxonomyList</rootNodeInfo>
     </label>
   </UITreeTaxonomyList>
-  <UIJCRExplorer>  
+  <UIJCRExplorer>
     <msg>
         <target-path-not-found>Không tìm thấy node đích!</target-path-not-found>
     </msg>
@@ -3337,15 +3340,15 @@
     	 <Close>Đóng</Close>
     </action>
   </UICategoryManagerSearch>
-  <UIJcrExplorerEditForm>  
-    <label>  
+  <UIJcrExplorerEditForm>
+    <label>
       <editInNewWindow>Chỉnh sửa tài liệu trong cửa sổ mới</editInNewWindow>
       <showTopBar>Show Top Bar</showTopBar>
       <showActionBar>Show Action Bar</showActionBar>
       <showSideBar>Show Left Bar</showSideBar>
       <showFilterBar>Show Filter Bar</showFilterBar>
     </label>
-  </UIJcrExplorerEditForm>  
+  </UIJcrExplorerEditForm>
   <UIPreferencesForm>
   	 <action>
     	 <HideAdvance>Ẩn nâng cao</HideAdvance>
@@ -3355,7 +3358,7 @@
     	<Advance>Nâng cao</Advance>
     </label>
   </UIPreferencesForm>
-  
+
   <UIJCRExplorerPortlet>
 	<msg>
 	  <file-access-denied>Lỗi truy cập file!</file-access-denied>
@@ -3367,10 +3370,10 @@
       <ShowDrives>Show Drives</ShowDrives>
     </DrivesArea>
   </UIDrivesArea>
-  <UIJcrExplorerEditForm>   
+  <UIJcrExplorerEditForm>
     <msg>
       <fields-saved>Các giá trị thiết lập đã được lưu!</fields-saved>
-      <fields-cancelled>Các giá trị thiết lập đã được hủy!</fields-cancelled>        
+      <fields-cancelled>Các giá trị thiết lập đã được hủy!</fields-cancelled>
     </msg>
   </UIJcrExplorerEditForm>
   <UIDocumentForm>
