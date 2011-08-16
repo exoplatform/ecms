@@ -123,7 +123,7 @@ public class FCKFileHandler {
     .getCurrentContainer().getComponentInstanceOfType(WCMConfigurationService.class);
     String parameterizedPageViewerURI = configurationService.
         getRuntimeContextParam(WCMConfigurationService.PARAMETERIZED_PAGE_URI);
-    return baseURI.replace("/rest", "") + "/" + accessMode + "/" + currentPortal
+    return baseURI.replace("/rest", "") + "/" + currentPortal
         + parameterizedPageViewerURI + "/" + repository + "/" + workspace + nodePath;
   }
 }

@@ -328,18 +328,16 @@ public class UISearchResult extends UIContainer {
   public String getPublishedNodeURI(String navNodeURI) {
     PortalRequestContext portalRequestContext = Util.getPortalRequestContext();
     PortletRequest portletRequest = getPortletRequest();
-    String accessMode = null;
-    if (portalRequestContext.getAccessPath() == PortalRequestContext.PUBLIC_ACCESS) {
-      accessMode = "public";
-    } else {
-      accessMode = "private";
-    }
 
     String baseURI = portletRequest.getScheme() + "://" + portletRequest.getServerName() + ":"
         + String.format("%s", portletRequest.getServerPort());
     if (navNodeURI.startsWith(baseURI))
       return navNodeURI;
-    return baseURI + portalRequestContext.getRequestContextPath() + "/" + accessMode + navNodeURI;
+    
+    NodeURL nodeURL = portalRequestContext.createURL(NodeURL.TYPE);
+    NavigationResource resource = new NavigationResource(portalRequestContext.getSiteType(), portalRequestContext.getSiteName(), navNodeURI);
+    nodeURL.setResource(resource);
+    return baseURI + nodeURL.toString();
   }
 
   /**

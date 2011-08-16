@@ -11,8 +11,7 @@ SearchPortlet.prototype.showObject = function(obj) {
 };
 
 SearchPortlet.prototype.getRuntimeContextPath = function() {
-	return eXo.ecm.WCMUtils.getHostName() + eXo.env.portal.context + '/'
-			+ eXo.env.portal.accessMode + '/' + eXo.env.portal.portalName + '/';
+	return eXo.ecm.WCMUtils.getHostName() + eXo.env.portal.context + '/' + eXo.env.portal.portalName + '/';
 };
 
 SearchPortlet.prototype.getKeynum = function(event) {

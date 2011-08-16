@@ -338,7 +338,7 @@
 																					"for (var i = 0; i < size; i++) {\n\t" +
 																						"var breadcrumb = breadcumbs[i];\n" +
 																						"if(i == size -1) note = \"Selected\";\n" +
-																							"var link = (i == size -1) ? \"#\" : eXo.ecm.WCMUtils.getHostName() + eXo.env.portal.context + '/' + eXo.env.portal.accessMode + '/' + eXo.env.portal.portalName + '/' +  breadcrumb.uri;\n" +
+																							"var link = (i == size -1) ? \"#\" : eXo.ecm.WCMUtils.getHostName() + eXo.env.portal.context + '/' + eXo.env.portal.portalName + '/' +  breadcrumb.uri;\n" +
 																							"html += '<a href=\"' + link + '\" class=\"'+ note+'\">'+ breadcrumb.resolvedLabel+'</a>';\n" +
 																							"if(i != size-1) {\n\t" +
 																								"html += '<div class=\"RightBlackGridArrowIcon LeftBlock\"><span></span></div>';\n" +

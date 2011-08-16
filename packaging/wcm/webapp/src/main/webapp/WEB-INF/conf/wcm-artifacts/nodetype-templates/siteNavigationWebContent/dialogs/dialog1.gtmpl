@@ -393,7 +393,7 @@
 																	"\tif (navigation.resolvedLabel.length > 40) {\n" +
 																	"\t\tnavigation.resolvedLabel = navigation.resolvedLabel.substring(0,37) + \"...\";\n" +
 																	"\t}\n" +
-																	"\tvar link = eXo.ecm.WCMUtils.getHostName() + eXo.env.portal.context + '/' + eXo.env.portal.accessMode + '/' + eXo.env.portal.portalName + '/' +  navigation.uri;\n" +
+																	"\tvar link = eXo.ecm.WCMUtils.getHostName() + eXo.env.portal.context + '/' + eXo.env.portal.portalName + '/' +  navigation.uri;\n" +
 																	"\tvar arrowIcon = '';\n" +
 																	"\tif (navigation.children && navigation.children.length)\n" +
 																	"\t\tarrowIcon = 'ArrowIcon';\n" +

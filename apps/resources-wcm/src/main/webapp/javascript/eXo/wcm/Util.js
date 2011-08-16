@@ -93,7 +93,7 @@ function getHostName() {
 }
 
 function getRuntimeContextPath() {
-	return getHostName() + eXo.env.portal.context + '/' + eXo.env.portal.accessMode + '/' + eXo.env.portal.portalName + '/';
+	return getHostName() + eXo.env.portal.context + '/' + eXo.env.portal.portalName + '/';
 }
 /*--------------------------------------SEARCH------------------------------------*/
 function getKeynum(event) {
@@ -116,7 +116,7 @@ function quickSearch(resultPageURI) {
 	var keyword = encodeURI(keyWordInput.value);
 	var resultPageURIDefault = "searchResult";
 	var params = "portal=" + eXo.env.portal.portalName + "&keyword=" + keyword;
-	var baseURI = getHostName() + eXo.env.portal.context + "/" + eXo.env.portal.accessMode + "/" + eXo.env.portal.portalName; 
+	var baseURI = getHostName() + eXo.env.portal.context + "/" + eXo.env.portal.portalName; 
 	if (resultPageURI != undefined) {
 		baseURI = baseURI + "/" + resultPageURI; 
 	} else {

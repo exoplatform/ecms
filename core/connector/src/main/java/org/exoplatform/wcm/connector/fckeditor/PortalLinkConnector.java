@@ -354,14 +354,7 @@ public class PortalLinkConnector implements ResourceContainer {
       folderElement.setAttribute("url", pageUri);
       foldersElement.appendChild(folderElement);
     } else {
-      String accessMode = PRIVATE_ACCESS;
-      for (String role : page.getAccessPermissions()) {
-        if (EVERYONE_PERMISSION.equalsIgnoreCase(role)) {
-          accessMode = PUBLIC_ACCESS;
-          break;
-        }
-      }
-      pageUri = "/" + servletContext.getServletContextName() + "/" + accessMode + "/" + portalName + "/" + userNode.getURI();
+      pageUri = "/" + servletContext.getServletContextName() + "/" + portalName + "/" + userNode.getURI();
 
       Element folderElement = foldersElement.getOwnerDocument().createElement("Folder");
       folderElement.setAttribute("name", userNode.getName());
