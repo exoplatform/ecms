@@ -18,7 +18,7 @@
     <% String versionName = currentRevision.getName();
        String verName = Text.unescapeIllegalJcrChars(versionName);
     %>
-    <legend class="Legend"> <%=_ctx.appRes("UIPublicationPanel.status.version")%> $verName </legend>
+    <legend class="Legend" style="max-width: 600px;"><div title="$verName" style="overflow: hidden;"><%=_ctx.appRes("UIPublicationPanel.status.version")%>: $verName </div></legend>
     <div class="StatusAction">
       <div class="StatusTitle"><%=_ctx.appRes("UIPublicationPanel.status.title")%>: </div>
       <div class="StatusLink">
@@ -98,11 +98,11 @@
               <%
                 if (versionName.equals(revision.getName())) {
                   %>
-                    <a><%=_ctx.appRes("UIPublicationPanel.revisions.label")%>: <%= Text.unescapeIllegalJcrChars(revision.getName()) %></a>
+                  <div title="<%=Text.unescapeIllegalJcrChars(revision.getName())%>" style="width:200px; overflow:hidden; margin-right: 3px;"><%=_ctx.appRes("UIPublicationPanel.revisions.label")%>:<%= Text.unescapeIllegalJcrChars(revision.getName()) %></div>
                   <%
                 } else {
                   %>
-                    <a class="ActiveLink" href="<%= uicomponent.event("ChangeVersion", revision.getUUID()) %>"><%=_ctx.appRes("UIPublicationPanel.revisions.label")%>: <%= revision.getName() %></a>
+                  <a class="ActiveLink" href="<%= uicomponent.event("ChangeVersion", revision.getUUID()) %>"><div title="<%=revision.getName()%>" style="width:200px; overflow:hidden; margin-right: 3px;"><%=_ctx.appRes("UIPublicationPanel.revisions.label")%>:<%= Text.unescapeIllegalJcrChars(revision.getName()) %></div></a>
                   <%
                 }
               %>

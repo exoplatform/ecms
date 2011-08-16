@@ -42,7 +42,7 @@
     <% String versionName = currentRevision.getName();
        String verName = Text.unescapeIllegalJcrChars(versionName);
     %>
-    <legend class="Legend" style="max-width: 600px;"><div title="$verName" style="overflow: hidden;"><%=_ctx.appRes("UIPublicationPanel.status.version")%> $verName </div></legend>
+    <legend class="Legend" style="max-width: 600px;"><div title="$verName" style="overflow: hidden;"><%=_ctx.appRes("UIPublicationPanel.status.version")%>: $verName </div></legend>
     <div class="StatusAction">
       <div class="StatusTitle"><%=_ctx.appRes("UIPublicationPanel.status.title")%>: </div>
       <div class="StatusLink">
