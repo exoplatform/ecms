@@ -298,7 +298,7 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
       }
     }
 
-    String nodePathUrl = pcontext.getNodePath().substring(1);
+    String nodePathUrl = pcontext.getNodePath();
     String[] uri = nodePathUrl.split("/");
     if (uri == null || uri.length < 3) return mapParam;
     patternUrl = Pattern.compile("([^/]+)/([^/]+)/([^/]+)/(.*)");

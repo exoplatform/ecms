@@ -46,7 +46,7 @@ SearchPortlet.prototype.quickSearchOnEnter = function(event, resultPageURI) {
     keyword = keyword.replace(/eval\((.*)\)/gi, "");
 		var resultPageURIDefault = "searchResult";
 		var params = "portal=" + eXo.env.portal.portalName + "&keyword=" + keyword;
-		var baseURI = eXo.ecm.WCMUtils.getHostName() + eXo.env.portal.context + "/" + eXo.env.portal.accessMode + "/" + eXo.env.portal.portalName;
+		var baseURI = eXo.ecm.WCMUtils.getHostName() + eXo.env.portal.context + "/" + eXo.env.portal.portalName;
 		if (resultPageURI != undefined) {
 			baseURI = baseURI + "/" + resultPageURI;
 		} else {

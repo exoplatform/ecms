@@ -12,7 +12,7 @@
  * A function that submits the form identified by formId, with the specified action
  * If useAjax is true, calls the ajaxPost function from PortalHttpRequest, with the given callback function
  */
-eXo.webui.UIForm.submitForm = function(formId, action, useAjax, callback) {
+UIForm.prototype.submitForm = function(formId, action, useAjax, callback) {
   if (!callback) callback = null;
   var form = this.getFormElemt(formId) ;
   //TODO need review try-cactch block for form doesn't use FCK
@@ -41,7 +41,7 @@ eXo.webui.UIForm.submitForm = function(formId, action, useAjax, callback) {
   } catch(e) {}
 
   form.elements['formOp'].value = action ;
-  if(useAjax) ajaxPost(form, callback) ;
+  if(useAjax) this.ajaxPost(form, callback) ;
   else  form.submit();
 } ;
 
@@ -75,7 +75,8 @@ function ajaxGet(url, callback) {
 * Once the content of the form is placed into a string object, the call
 * is delegated to the doRequest() method 
 */
-function ajaxPost(formElement, callback) {
+UIForm.prototype.ajaxPost = function (formElement, callback) {
+//function ajaxPost(formElement, callback) {
   if (!callback) callback = null ;
   var queryString = eXo.webui.UIForm.serializeForm(formElement) ;
   var url = formElement.action + "&ajaxRequest=true" ;

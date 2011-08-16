@@ -90,7 +90,7 @@ UIForm.prototype.submitForm = function(formId, action, useAjax, callback) {
   form.elements['formOp'].value = action ;
   if(useAjax) {
     b_changed = false;
-    ajaxPost(form, callback) ;
+    this.ajaxPost(form, callback) ;
   } else {
     form.submit();
   }
@@ -141,7 +141,7 @@ UIForm.prototype.submitEvent = function(formId, action, params) {
   if(!form.originalAction) form.originalAction = form.action ; 
 	form.action =  form.originalAction +  encodeURI(params) ;
   b_changed = false;
-  ajaxPost(form) ;
+  this.ajaxPost(form) ;
 } ;
 
 /**
