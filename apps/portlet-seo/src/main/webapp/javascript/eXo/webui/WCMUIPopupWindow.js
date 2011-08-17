@@ -45,7 +45,7 @@ WCMUIPopupWindow.prototype.init = function(popupId, isShow, isResizable, showClo
 	if(contentBlock && (eXo.core.Browser.getBrowserHeight() - 100 < contentBlock.offsetHeight)) {
 		contentBlock.style.height = (eXo.core.Browser.getBrowserHeight() - 100) + "px";
 	}
-	var popupBar = DOMUtil.findFirstDescendantByClass(popup, 'div' ,'PopupTitle') ;
+	var popupBar = DOMUtil.findFirstDescendantByClass(popup, 'span' ,'PopupTitle') ;
 
 	popupBar.onmousedown = this.initDND;
 	
@@ -55,7 +55,7 @@ WCMUIPopupWindow.prototype.init = function(popupId, isShow, isResizable, showClo
 	} 
 	
 	if(isResizable) {
-		var resizeBtn = DOMUtil.findFirstDescendantByClass(popup, "div", "ResizeButton");
+		var resizeBtn = DOMUtil.findFirstDescendantByClass(popup, "span", "ResizeButton");
 		resizeBtn.style.display = 'block' ;
 		resizeBtn.onmousedown = this.startResizeEvt ;
 	}
