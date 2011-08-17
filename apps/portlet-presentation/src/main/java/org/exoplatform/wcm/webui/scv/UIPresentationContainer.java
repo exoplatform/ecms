@@ -398,12 +398,13 @@ public class UIPresentationContainer extends UIContainer{
   	ResourceBundle resourceBundle = WebuiRequestContext.getCurrentInstance()
   	.getApplicationResourceBundle();
   	sb.append("'").append(
+  	    Text.escapeIllegalJcrChars(
   			resourceBundle
-  			.getString("UIPresentationContainer.msg.internal-server-error"))
-  			.append("'");
-  	sb.append(", '").append(
+  			.getString("UIPresentationContainer.msg.internal-server-error")))
+  			.append("', '").append(
+  	    Text.escapeIllegalJcrChars(
   			resourceBundle
-  			.getString("UIPresentationContainer.msg.empty-title-error"))
+  			.getString("UIPresentationContainer.msg.empty-title-error")) )
   			.append("')");
   	return sb.toString();
   }
