@@ -7,7 +7,11 @@
   padding: 4px;
 }
 .UISEOForm .HorizontalLayout input {
-  width: 235px;
+  width: 235px;  
+}
+.UISEOForm .HorizontalLayout .tip {
+  font-style: italic; 
+  color:#737373;
 }
 .UISEOForm .HorizontalLayout select {
   width: auto;

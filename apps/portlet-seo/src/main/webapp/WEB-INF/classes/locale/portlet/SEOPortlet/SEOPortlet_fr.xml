@@ -31,6 +31,9 @@
         <ar>Arabic</ar>
       </option>
     </label>
+	<tip>
+		<priority>Valeurs valides se rangent de 0.0 à 1.0.</priority>
+	</tip>  
     <action>
       <Save>Save</Save>
       <Cancel>Cancel</Cancel>
