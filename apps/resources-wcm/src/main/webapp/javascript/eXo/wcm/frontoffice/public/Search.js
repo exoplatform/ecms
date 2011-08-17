@@ -106,12 +106,16 @@ SearchPortlet.prototype.scrollToBottom = function(divId) {
 SearchPortlet.prototype.changeColor = function(divId, count) {
 	if (!count)
 		count = 0;
-	var divBlock = document.getElementById(divId);
+
+	var basicColor = 220;
+	var appliedColor = basicColor + count;
+
+	var divBlock = document.getElementById(divId);  							    
 	if (divBlock) {
-		divBlock.style.backgroundColor = "#" + count.toString(16) + 
-											count.toString(16) + "FFFF";
-		if (count < 15) 
-			setTimeout("eXo.ecm.SearchPortlet.changeColor('" + divId + "'," + (count+1) + ")", 100);
+		divBlock.style.backgroundColor = "#" + appliedColor.toString(16) + appliedColor.toString(16) + appliedColor.toString(16);
+		if (appliedColor < 255) {
+			setTimeout("eXo.ecm.SearchPortlet.changeColor('" + divId + "'," + (count + 2) + ")", 100);
+		}
 	}
 };
 
