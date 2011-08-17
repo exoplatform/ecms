@@ -40,8 +40,8 @@
     	def currentPage = uicomponent.getCurrentPage();
     	def itemsPerPage = uicomponent.getItemsPerPage();
       def totalItem = uicomponent.getTotalItem();
-      def startItemIndex = (currentPage - 1) * itemsPerPage + 1;
-      def endItemIndex = startItemIndex + currentPageData.size() - 1;
+      def startItemIndex = 1;
+      def endItemIndex = (currentPage - 1) * itemsPerPage + currentPageData.size();
       def searchTime = uicomponent.getSearchTime();
       if (endItemIndex > totalItem && SiteSearchService.PAGE_MODE_PAGINATION.equals(pageMode) ) endItemIndex = totalItem;
       showPaginator = (itemsPerPage==currentPageData.size() && SiteSearchService.PAGE_MODE_MORE.equals(pageMode)) || 
