@@ -132,6 +132,7 @@
       eXo.env.portal.portalName = '<%=rcontext.getPortalOwner()%>' ;
       eXo.env.server.context = '<%=docBase%>' ;
       eXo.env.server.portalBaseURL = '<%=rcontext.getRequest().getRequestURI()%>' ;
+      eXo.env.server.portalURLTemplate = "<%=uicomponent.getPortalURLTemplate()%>" ;
       eXo.env.client.skin = '$skin' ;
       <% 
         UIPortal portal = uicomponent.findFirstComponentOfType(UIPortal.class);
@@ -172,15 +173,9 @@
 	<div class="$uicomponent.skin" id="UIPortalApplication" style="!height: 100%;">
     	
 		<div class="AjaxLoadingMask" id="AjaxLoadingMask" style="display: none; margin: auto;">
-      <div class="LoadingContainer">
-        <div class="CenterLoadingContainer">
-          <div class="LoadingText"><%=_ctx.appRes("UIPortalApplication.label.Loading")%></div>
-          <div class="LoadingProgressBar"><span></span></div>
+          <span class="LoadingText"><%=_ctx.appRes("UIPortalApplication.label.Loading")%></span>
+          <span class="LoadingProgressBar"></span>
           
-          <div class="UIAction"> 
-              <a href="javascript:void(0);" onclick="javascript:ajaxAbort();" class="ActionButton LightBlueStyle"><%=_ctx.appRes("UIPortalApplication.label.Abort")%></a>
-			</div>
+          <a href="javascript:ajaxAbort();" class="CloseLoadIcon">&nbsp;</a>
           
-        </div>
-      </div>
 	  </div>
