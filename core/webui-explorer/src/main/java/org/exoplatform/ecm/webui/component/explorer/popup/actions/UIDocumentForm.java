@@ -113,25 +113,15 @@ public class UIDocumentForm extends UIDialogForm implements UIPopupComponent, UI
   final static public String PATH_TAXONOMY = "exoTaxonomiesPath";
 
   private List<String> listTaxonomyName = new ArrayList<String>();
-  
-  private boolean canChangeType = true;
 
   private static final Log LOG  = ExoLogger.getLogger(UIDocumentForm.class);
-
-  public boolean isCanChangeType() {
-    return canChangeType;
-  }
-
-  public void setCanChangeType(boolean canChangeType) {
-    this.canChangeType = canChangeType;
-  }
 
   public UIDocumentForm() throws Exception {
     setActions(new String[]{"Save", "SaveAndClose", "Close"});
   }
   
   private String getChangeTypeActionLink () throws Exception {
-    if (!isAddNew || !canChangeType) return "";
+    if (!isAddNew) return "";
     
     WebuiRequestContext context = WebuiRequestContext.getCurrentInstance();
     ResourceBundle res = context.getApplicationResourceBundle();

@@ -122,20 +122,7 @@ public class UIDocumentFormController extends UIContainer implements UIPopupComp
     }
     if(templates.size()>0) {
       UISelectDocumentForm uiSelectForm = getChild(UISelectDocumentForm.class) ;
-      if (templates.size() > 1) {        
-        uiSelectForm.setDocumentTemplates(templates);
-      } else {
-        UIDocumentFormController uiDCFormController = uiSelectForm.getParent() ;            
-        UIDocumentForm documentForm = uiDCFormController.getChild(UIDocumentForm.class) ;
-        documentForm.addNew(true);      
-        documentForm.getChildren().clear() ;
-        documentForm.resetInterceptors();
-        documentForm.resetProperties();            
-        documentForm.setContentType(templates.values().iterator().next());
-        documentForm.setCanChangeType(false);
-        uiSelectForm.setRendered(false);
-        documentForm.setRendered(true);
-      }
+      uiSelectForm.setDocumentTemplates(templates);
     }
   }
 
