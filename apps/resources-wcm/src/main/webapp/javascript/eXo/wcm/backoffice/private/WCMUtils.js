@@ -157,13 +157,15 @@ WCMUtils.prototype.hideContextMenu = function(menuItemElem)  {
 
 WCMUtils.prototype.changePriorityCss = function() {
   priorityField = document.getElementById("priority");
-  if(isNaN(priorityField.value)) {
-  	priorityField.className = "tip";		
-  }
-  priorityField.onclick = function() { 
-    priorityField.className = ""; 
-    if(isNaN(priorityField.value))
-      priorityField.value = ""; 
-  } ;
+  if(priorityField != null) {
+	  if(isNaN(priorityField.value)) {
+	  	priorityField.className = "tip";		
+	  }
+	  priorityField.onclick = function() { 
+	    priorityField.className = ""; 
+	    if(isNaN(priorityField.value))
+	      priorityField.value = ""; 
+	  } ;
+	}
 }
 eXo.ecm.WCMUtils = new WCMUtils();
