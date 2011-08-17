@@ -119,7 +119,7 @@
 				%>
 					<div class="UIOptionBar">
 	         <div class="BackButton" title="<%= _ctx.appRes("UISCVPreferences.label.Back") %>" onclick="history.go(-1)"><span></span></div>
-						<a class="ActionIcon PrintIcon" href="javascript: void(0);" onclick="window.open('<%= uicomponent.getPrintUrl(node) %>')" title="<%= _ctx.appRes("UISCVPreferences.label.Print");%>"><%= _ctx.appRes("UISCVPreferences.label.Print") %></a>
+						<a class="ActionIcon PrintIcon" href="javascript: void(0);" onclick="window.open('<%= uicomponent.getPrintUrl(node) %>')" title="<%= _ctx.appRes("UIPresentationContainer.label.print");%>"><%= _ctx.appRes("UIPresentationContainer.label.print") %></a>
 					</div>
 				<% 
 			} 
