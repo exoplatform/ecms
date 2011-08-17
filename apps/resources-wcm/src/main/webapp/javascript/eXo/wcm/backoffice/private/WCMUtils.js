@@ -154,4 +154,16 @@ WCMUtils.prototype.hideContextMenu = function(menuItemElem)  {
 	contextMenu.style.display = "none" ;
 	return false;
 }
+
+WCMUtils.prototype.changePriorityCss = function() {
+  priorityField = document.getElementById("priority");
+  if(isNaN(priorityField.value)) {
+  	priorityField.className = "tip";		
+  }
+  priorityField.onclick = function() { 
+    priorityField.className = ""; 
+    if(isNaN(priorityField.value))
+      priorityField.value = ""; 
+  } ;
+}
 eXo.ecm.WCMUtils = new WCMUtils();
