@@ -41,14 +41,14 @@ public class UINamespaceManager extends UIAbstractManager {
 
   public void initPopup() throws Exception {
     UIPopupWindow uiPopup = getChild(UIPopupWindow.class) ;
-    if(uiPopup == null) {
-      uiPopup.setShowMask(true);
+    if(uiPopup == null) {      
       uiPopup = addChild(UIPopupWindow.class, null, "NamespacePopup") ;
       uiPopup.setWindowSize(600,0) ;
       UINamespaceForm uiNamespaceForm = createUIComponent(UINamespaceForm.class, null, null) ;
       uiPopup.setUIComponent(uiNamespaceForm) ;
       uiPopup.setShow(true) ;
       uiPopup.setResizable(true) ;
+      uiPopup.setShowMask(true);
       return ;
     }
     uiPopup.setRendered(true) ;
