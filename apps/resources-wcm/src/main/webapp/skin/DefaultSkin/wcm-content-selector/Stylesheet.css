@@ -259,11 +259,6 @@
   padding: 10px;
 }
 
-#UIContentSelectorMulti .UIHorizontalTabs .TabsContainer, #UIContentSelectorFolder .UIHorizontalTabs .TabsContainer {
-  background: url(/eXoResources/skin/DefaultSkin/webui/component/UIPopup/UIPopupWindow/background/CenterHorizontalTabs.gif) repeat-x scroll left bottom;
-  height: 25px;
-}
-
 #UIContentSelectorMulti .GrayTabContainer .UITabContent, #UIContentSelectorFolder .GrayTabContainer .UITabContent {
   background: white;
 }
