@@ -104,7 +104,9 @@ public class UICLVFolderMode extends UICLVContainer {
     String orderType = preferences.getValue(UICLVPortlet.PREFERENCE_ORDER_TYPE, null);
     String itemsPerPage = preferences.getValue(UICLVPortlet.PREFERENCE_ITEMS_PER_PAGE, null);
     String sharedCache = preferences.getValue(UICLVPortlet.PREFERENCE_SHARED_CACHE, "true");
+    String contextualMode = preferences.getValue(UICLVPortlet.PREFERENCE_CONTEXTUAL_FOLDER, "true");
     String workspace = preferences.getValue(UICLVPortlet.PREFERENCE_WORKSPACE, null);
+    String query = preferences.getValue(UICLVPortlet.PREFERENCE_CONTENTS_BY_QUERY, null);
     if (orderType == null) orderType = "DESC";
     if (orderBy == null) orderBy = "exo:title";
     filters.put(WCMComposer.FILTER_ORDER_BY, orderBy);
@@ -113,17 +115,30 @@ public class UICLVFolderMode extends UICLVContainer {
     filters.put(WCMComposer.FILTER_LIMIT, itemsPerPage);
     filters.put(WCMComposer.FILTER_VISIBILITY, ("true".equals(sharedCache))?
         WCMComposer.VISIBILITY_PUBLIC:WCMComposer.VISIBILITY_USER);
+
     
+    if (this.getAncestorOfType(UICLVPortlet.class).isQueryApplication()) {
+      String folderPath = preferences.getValue(UICLVPortlet.PREFERENCE_ITEM_PATH, null);
+      if (folderPath == null) {
+        return new Result(new ArrayList<Node>(), 0, 0, null, null);
+      }
+      NodeLocation nodeLocation = new NodeLocation();
+      nodeLocation.setWorkspace(workspace);
+      nodeLocation.setPath("/");
+      nodeLocation.setSystemSession(false);
+      String strQuery = this.getAncestorOfType(UICLVPortlet.class).getQueryStatement(query);
+      strQuery = strQuery.replaceAll("\"", "'");
+      if (UICLVPortlet.PREFERENCE_CONTEXTUAL_FOLDER_ENABLE.equals(contextualMode)
+          && org.exoplatform.wcm.webui.Utils.checkQuery(workspace, strQuery, Query.SQL)) {
+        filters.put(WCMComposer.FILTER_QUERY_FULL, strQuery);
+        return wcmComposer.getPaginatedContents(nodeLocation,
+                                                filters,
+                                                WCMCoreUtils.getUserSessionProvider());
+      }
+    }
     String folderPath = this.getAncestorOfType(UICLVPortlet.class).getFolderPath();
     NodeLocation nodeLocation = NodeLocation.getNodeLocationByExpression(
-            (folderPath != null) ? folderPath : preferences.getValue(UICLVPortlet.PREFERENCE_ITEM_PATH, null));
-    
-    String strQuery = this.getAncestorOfType(UICLVPortlet.class).getQueryStatement(preferences, folderPath);
-    if ( this.getAncestorOfType(UICLVPortlet.class).isQueryApplication()
-        && org.exoplatform.wcm.webui.Utils.checkQuery(workspace, strQuery, Query.SQL) ) {
-      filters.put(WCMComposer.FILTER_QUERY_FULL, strQuery);
-      return  wcmComposer.getPaginatedContents(nodeLocation, filters, WCMCoreUtils.getUserSessionProvider()); 
-    }    
+        (folderPath != null) ? folderPath : preferences.getValue(UICLVPortlet.PREFERENCE_ITEM_PATH, null));    
     if(folderPath == null && preferences.getValue(UICLVPortlet.PREFERENCE_ITEM_PATH, null) == null){
 //      return new ArrayList<Node>();
       return new Result(new ArrayList<Node>(), 0, 0, null, null);

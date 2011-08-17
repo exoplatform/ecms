@@ -215,10 +215,10 @@
             </td>
           </tr>
           <% if (uicomponent.isContentListByQuery()) {
-              showFolderContexttual = "style=\"display:none\""; 
+              showFolderContexttual = "none"; 
              }
           %>
-          <tr "$showFolderContexttual">
+          <tr style="display: $showFolderContexttual;">
               <td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.SHOW_CLV_BY_STRING_INPUT) %></td>
               <td class="FieldComponent" colspan="2"><% uiform.renderField(uicomponent.SHOW_CLV_BY_STRING_INPUT) %></td>
               <td class="tdShowHelp">
@@ -233,12 +233,15 @@
                  </div>
               </td>
             </tr>
-        <% if (uicomponent.isContentListByQuery()) {	%>
+        <% if (uicomponent.isContentListByQuery()) {	%>        
           <tr>
-            <td class="FieldLabel" colspan="3" style="text-align:left;"><%=uicomponent.getLabel(uicomponent.CONTENT_BY_QUERY_LABEL)%></td>
+            <td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.CONTENT_BY_QUERY_TEXT_AREA) %></td>         
+            <td class="FieldComponent" colspan="2">
+              <% uiform.renderField(uicomponent.CONTENT_BY_QUERY_TEXT_AREA) %>
+            </td>
             <td class="tdShowHelp">
             <div class="IconInContextHelp ShowHelpIcon" id="ContentByQueryHelp" onmouseover="eXo.ecm.WCMUtils.showInContextHelp('ContentByQueryHelp', 'true')" onmouseout="eXo.ecm.WCMUtils.showInContextHelp('ContentByQueryHelp', 'false')">
-              <div class="InContextHelpContent">                    
+              <div class="InContextHelpContent">
                   <div class="InContextHelpPopup">
                     <div id="ContentByQueryHelpID" class="LeftInContextHelpPopup">
                       <%= _ctx.appRes("UICLVConfig.help.ContentByQueryHelp") %>
@@ -246,17 +249,11 @@
                   </div>
               </div>
              </div>
-            </td>            
-          </tr>          
-          <tr>
-            <td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.CONTENT_BY_QUERY_TEXT_AREA) %></td>         
-            <td class="FieldComponent" colspan="2">
-              <% uiform.renderField(uicomponent.CONTENT_BY_QUERY_TEXT_AREA) %>
             </td>
           </tr>
           <tr>
-            <td class="FieldLabel"><%=uicomponent.getLabel(uicomponent.WORKSPACE_FORM_SELECT_BOX) %></td>
-            <td class="FieldComponent" colspan="2"><% uiform.renderField(uicomponent.WORKSPACE_FORM_SELECT_BOX) %></td>
+            <td class="FieldLabel" colspan="2"><%=uicomponent.getLabel(uicomponent.WORKSPACE_FORM_SELECT_BOX) %></td>
+            <td class="FieldComponent"><% uiform.renderField(uicomponent.WORKSPACE_FORM_SELECT_BOX) %></td>
           </tr>
         <% } %> 
           	

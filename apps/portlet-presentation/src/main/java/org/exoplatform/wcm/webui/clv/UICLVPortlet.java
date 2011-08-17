@@ -17,6 +17,8 @@
 package org.exoplatform.wcm.webui.clv;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.HashSet;
 
 import javax.jcr.Node;
 import javax.portlet.MimeResponse;
@@ -174,9 +176,8 @@ public class UICLVPortlet extends UIPortletApplication {
   
   public static final String PREFERENCE_SHARED_CACHE              = "sharedCache";
   /* Dynamic parameter for CLV by query */
-  public static final String QUERY_USER_PARAMETER                 = "${user}";
-  public static final String QUERY_FOLDER_ID_PARAMETER            = "${folder-id}";
-  public static final String QUERY_LANGUAGE_PARAMETER             = "${language}";  
+  public static final String QUERY_USER_PARAMETER                 = "user";
+  public static final String QUERY_LANGUAGE_PARAMETER             = "lang";
   
   private PortletMode        cpMode;
 
@@ -246,6 +247,29 @@ public class UICLVPortlet extends UIPortletApplication {
       }
     }
     return folderPath;
+  }
+  
+  /**
+   * 
+   * @param params
+   * @return
+   */
+  public HashMap<String, String> getQueryParammeter(HashSet<String> params) {
+
+    HashMap<String, String> paramMap = new HashMap<String, String>();
+    PortalRequestContext context = Util.getPortalRequestContext();
+    for (String param : params) {
+      String value = context.getRequestParameter(param);
+      if (value != null) {
+        paramMap.put(param, value);
+      } else {
+        paramMap.put(param, "");
+      }
+    }
+    paramMap.put(UICLVPortlet.QUERY_USER_PARAMETER, context.getRemoteUser());
+    paramMap.put(UICLVPortlet.QUERY_LANGUAGE_PARAMETER, context.getLocale().getLanguage());
+
+    return paramMap;
   }
 
   /*
@@ -367,28 +391,23 @@ public class UICLVPortlet extends UIPortletApplication {
     String nDisplayMode = preferences.getValue(PREFERENCE_DISPLAY_MODE, null);
     activateMode(npMode, nDisplayMode);
   }
+
   /**
    * 
-   * @param preferences porlet preferences
-   * @param filters
-   * @return query statement to execute
-   * @author vinh_nguyen from ECMS
+   * @param sqlQuery
+   * @return
    */
-  public String getQueryStatement(PortletPreferences preferences, String folderPath) {
-    String queryStatement = preferences.getValue(UICLVPortlet.PREFERENCE_CONTENTS_BY_QUERY, "");
-    if (queryStatement.indexOf(UICLVPortlet.QUERY_USER_PARAMETER)>0) {
-      String userId = Util.getPortalRequestContext().getRemoteUser();
-      queryStatement = StringUtils.replace(queryStatement, UICLVPortlet.QUERY_USER_PARAMETER, userId);
-    }
-    if (queryStatement.indexOf(UICLVPortlet.QUERY_FOLDER_ID_PARAMETER)>0) {
-      queryStatement = StringUtils.replace(queryStatement, UICLVPortlet.QUERY_FOLDER_ID_PARAMETER, folderPath);
-    }
-    if (queryStatement.indexOf(UICLVPortlet.QUERY_LANGUAGE_PARAMETER)>0) {
-      String currentLanguage =  Util.getPortalRequestContext().getLocale().getLanguage();
-      queryStatement = StringUtils.replace(queryStatement, UICLVPortlet.QUERY_LANGUAGE_PARAMETER, currentLanguage);
-    }
-   return queryStatement;
+  public String getQueryStatement(String sqlQuery) {
+    HashSet<String> params = Utils.getQueryParams(sqlQuery);
+    HashMap<String, String> queryParam = getQueryParammeter(params);
+
+    return Utils.buildQuery(sqlQuery, queryParam);
   }
+  
+  /**
+   * 
+   * @return
+   */
   public boolean isQueryApplication() {
     return APPLICATION_CLV_BY_QUERY.equals(currentApplicationMode);
   }

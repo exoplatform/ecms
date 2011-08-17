@@ -63,6 +63,7 @@ public class UICLVManualMode extends UICLVContainer {
   @SuppressWarnings("unchecked")
   public void init() throws Exception {
     PortletPreferences portletPreferences = Utils.getAllPortletPreferences();
+    String query = portletPreferences.getValue(UICLVPortlet.PREFERENCE_CONTENTS_BY_QUERY, null);
     String contextualMode = portletPreferences.getValue(UICLVPortlet.PREFERENCE_CONTEXTUAL_FOLDER, null);
     String workspace = portletPreferences.getValue(UICLVPortlet.PREFERENCE_WORKSPACE, null);
     List<Node> nodes = new ArrayList<Node>();
@@ -79,9 +80,11 @@ public class UICLVManualMode extends UICLVContainer {
     sharedCache = "true".equals(sharedCache) ? WCMComposer.VISIBILITY_PUBLIC:WCMComposer.VISIBILITY_USER;
     int itemsPerPage = Integer.parseInt(portletPreferences.getValue(UICLVPortlet.PREFERENCE_ITEMS_PER_PAGE, null));
     
-    String strQuery = this.getAncestorOfType(UICLVPortlet.class).getQueryStatement(portletPreferences, folderPath);
-    if ( this.getAncestorOfType(UICLVPortlet.class).isQueryApplication()
-        && org.exoplatform.wcm.webui.Utils.checkQuery(workspace, strQuery, Query.SQL) ) {
+    String strQuery = this.getAncestorOfType(UICLVPortlet.class).getQueryStatement(query);
+    strQuery = strQuery.replaceAll("\"", "'");
+    if (this.getAncestorOfType(UICLVPortlet.class).isQueryApplication()
+        && UICLVPortlet.PREFERENCE_CONTEXTUAL_FOLDER_ENABLE.equals(contextualMode)
+        && org.exoplatform.wcm.webui.Utils.checkQuery(workspace, strQuery, Query.SQL)) {
       NodeLocation nodeLocation = new NodeLocation();
       nodeLocation.setWorkspace(workspace);
       nodeLocation.setPath("/");

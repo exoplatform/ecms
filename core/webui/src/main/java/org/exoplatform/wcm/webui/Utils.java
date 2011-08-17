@@ -17,7 +17,10 @@
 package org.exoplatform.wcm.webui;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.jcr.Node;
 import javax.jcr.RepositoryException;
@@ -80,6 +83,7 @@ public class Utils {
 
   /** The Quick edit attribute for HTTPSession */
   public static final String TURN_ON_QUICK_EDIT = "turnOnQuickEdit";
+  private static final String SQL_PARAM_PATTERN = "\\$\\{([^\\$\\{\\}])+\\}";
 
   @Deprecated
   /**
@@ -809,5 +813,67 @@ public class Utils {
 		  return false;
 	  }
 	  return true;
+  }
+  
+  /**
+   * get the parameter list from SQL query, the parameter have the ${PARAM} format. <br>
+   * For example:
+   * <ul>
+   *   <li>${folder-id}</li>
+   *   <li>${user}</li>
+   *   <li>${lang}</li>
+   * </ul>
+   * @param sqlQuery the given input SQL query
+   * @return a list of parameter in input SQL query
+   */
+  public static HashSet<String> getQueryParams(String sqlQuery) {
+    HashSet<String> params = new HashSet<String>();
+    if (sqlQuery == null) {
+      return params;
+    }
+    Matcher matcher = Pattern.compile(SQL_PARAM_PATTERN).matcher(sqlQuery);
+    while (matcher.find()) {
+      String param = matcher.group();
+      param = param.replaceAll("\\$\\{", "").replaceAll("\\}", "");
+      params.add(param);
+    }
+    return params;
+  }
+  
+  /**
+   * Replace the parameter with the relevant value from <code>params</code>to
+   * build the SQL query
+   * 
+   * @param sqlQuery the input query that contain parameter
+   * @param params list of all parameter(key, value) pass to the query
+   * @return SQL query after replacing the parameter with value
+   */
+  public static String buildQuery(String sqlQuery, HashMap<String, String> params) {
+    if (!hasParam(sqlQuery) || params == null || params.isEmpty()) {
+      return sqlQuery;
+    }
+    String query = sqlQuery;
+    for (String param : params.keySet()) {
+      query = query.replaceAll("\\$\\{" + param + "\\}", params.get(param));
+    }
+    return query;
+  }
+  
+  /**
+   * Check if the input SQL query contains any parameter or not.
+   * 
+   * @param sqlQuery
+   * @return <code>false</code> if input SQL query does not contain any
+   *         parameter <br>
+   *         <code>true</code> if input SQL query one or more parameter
+   */
+  public static boolean hasParam(String sqlQuery) {
+    if (sqlQuery == null || sqlQuery.trim().length() == 0) {
+      return false;
+    }
+    if (Pattern.compile(SQL_PARAM_PATTERN).matcher(sqlQuery).find()) {
+      return true;
+    }
+    return false;
   }
 }

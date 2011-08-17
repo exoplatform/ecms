@@ -819,6 +819,9 @@ public class UICLVConfig extends UIForm  implements UISelectable {
       if (UICLVPortlet.APPLICATION_CLV_BY_QUERY.equals(appType)) {
         String workspace = ((UIFormSelectBox)clvConfig.getChildById(UICLVConfig.WORKSPACE_FORM_SELECT_BOX)).getValue();
         String query = ((UIFormTextAreaInput) clvConfig.getChildById(UICLVConfig.CONTENT_BY_QUERY_TEXT_AREA)).getValue();
+        if (query == null) {
+          query = "";
+        }
         portletPreferences.setValue(UICLVPortlet.PREFERENCE_WORKSPACE, workspace);
         portletPreferences.setValue(UICLVPortlet.PREFERENCE_CONTENTS_BY_QUERY, query);
       }
