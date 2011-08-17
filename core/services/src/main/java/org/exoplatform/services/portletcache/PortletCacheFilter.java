@@ -29,6 +29,7 @@ import javax.portlet.ActionResponse;
 import javax.portlet.EventRequest;
 import javax.portlet.EventResponse;
 import javax.portlet.PortletException;
+import javax.portlet.PortletMode;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 import javax.portlet.filter.ActionFilter;
@@ -92,7 +93,11 @@ public class PortletCacheFilter implements PortletFilter, ActionFilter, RenderFi
     Boolean quickEdit = (Boolean) ctx.getRequest().getSession().getAttribute(TURN_ON_QUICK_EDIT);
     if (quickEdit==null) quickEdit=false;
     Boolean sharedCache = TRUE.equals(req.getPreferences().getValue(SHARED_CACHE, FALSE));
-    if (!NO_CACHE.equals(exoCacheUsageRequestParam) && (req.getRemoteUser() == null || (!quickEdit && sharedCache && !isPortalEditMode()))) {
+    PortletMode portletMode = req.getPortletMode();
+    
+    if (!NO_CACHE.equals(exoCacheUsageRequestParam) && 
+        (req.getRemoteUser() == null || (!quickEdit && sharedCache && !isPortalEditMode())) &&
+        !PortletMode.EDIT.equals(portletMode)) {
       Map<String, String[]> query = (Map<String, String[]>)ctx.getRequest().getParameterMap();
       //
       Locale locale = ctx.getLocale();
