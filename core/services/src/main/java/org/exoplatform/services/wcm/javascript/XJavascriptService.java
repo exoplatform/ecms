@@ -21,7 +21,9 @@ import java.util.List;
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
 import javax.jcr.PathNotFoundException;
+import javax.jcr.RepositoryException;
 import javax.jcr.Session;
+import javax.jcr.ValueFormatException;
 import javax.jcr.query.Query;
 import javax.jcr.query.QueryManager;
 import javax.jcr.query.QueryResult;
@@ -55,6 +57,7 @@ public class XJavascriptService implements Startable {
   private static String           SHARED_JS_QUERY     = "select * from exo:jsFile "
                                                           + "where jcr:path like '{path}/%' "
                                                           + "and exo:active='true' and exo:sharedJS='true' "
+                                                          + "and jcr:mixinTypes <> 'exo:restoreLocation' "
                                                           + "order by exo:priority ASC".intern();
 
   private static String           WEBCONTENT_JS_QUERY = "select * from exo:jsFile "
@@ -112,7 +115,7 @@ public class XJavascriptService implements Startable {
     String jsQuery = StringUtils.replaceOnce(WEBCONTENT_JS_QUERY, "{path}", webcontent.getPath());
 
     // Need re-login to get session because this node is get from template and the session is not live anymore.
-    NodeLocation webcontentLocation = NodeLocation.make(webcontent);
+    NodeLocation webcontentLocation = NodeLocation.getNodeLocationByNode(webcontent);
     RepositoryService repositoryService = WCMCoreUtils.getService(RepositoryService.class);
     ManageableRepository repository = repositoryService.getCurrentRepository();
     Session session = null;
@@ -128,9 +131,7 @@ public class XJavascriptService implements Startable {
     NodeIterator iterator = queryResult.getNodes();
     while(iterator.hasNext()) {
       Node registeredJSFile = iterator.nextNode();
-      buffer.append(registeredJSFile.getNode(NodetypeConstant.JCR_CONTENT)
-                                    .getProperty(NodetypeConstant.JCR_DATA)
-                                    .getString());
+      buffer.append(getActivedJSData(registeredJSFile));
     }
     session.logout();
     return buffer.toString();
@@ -222,7 +223,7 @@ public class XJavascriptService implements Startable {
     String statement = StringUtils.replaceOnce(SHARED_JS_QUERY, "{path}", jsFolder.getPath());
     RepositoryService repositoryService = WCMCoreUtils.getService(RepositoryService.class);
     SessionProvider sessionProvider = SessionProvider.createSystemProvider();
-    NodeLocation portalNodeLocation = NodeLocation.make(portalNode);
+    NodeLocation portalNodeLocation = NodeLocation.getNodeLocationByNode(portalNode);
     ManageableRepository repository = repositoryService.getCurrentRepository();
     Session session = sessionProvider.getSession(portalNodeLocation.getWorkspace(), repository);
     QueryManager queryManager = session.getWorkspace().getQueryManager();
@@ -234,38 +235,54 @@ public class XJavascriptService implements Startable {
     if (isStartup) {
       while(iterator.hasNext()) {
         Node registeredJSFile = iterator.nextNode();
-        buffer.append(registeredJSFile.getNode(NodetypeConstant.JCR_CONTENT)
-                                      .getProperty(NodetypeConstant.JCR_DATA)
-                                      .getString());
+        buffer.append(getActivedJSData(registeredJSFile));
       }
-    } else {
-      boolean isAdded = false;
+    } else if (!iterator.hasNext()) {
+        buffer.append(getActivedJSData(newJSFile));
+    } else {      
+      boolean isApplied = false;
       while(iterator.hasNext()) {
+        
         Node registeredJSFile = iterator.nextNode();
-        // Add new
-        long newJSFilePriority = newJSFile.getProperty(NodetypeConstant.EXO_PRIORITY).getLong();
-        long registeredJSFilePriority = registeredJSFile.getProperty(NodetypeConstant.EXO_PRIORITY).getLong();
-        if (!isAdded && newJSFilePriority < registeredJSFilePriority) {
-          buffer.append(newJSFile.getNode(NodetypeConstant.JCR_CONTENT)
-                                 .getProperty(NodetypeConstant.JCR_DATA)
-                                 .getString());
-          isAdded = true;
-          continue;
+        if (newJSFile != null) {
+          // Modify
+          if (!isApplied && newJSFile.getPath().equals(registeredJSFile.getPath())) {
+            buffer.append(getActivedJSData(newJSFile));
+            isApplied = true;
+            continue;
+          }
+          
+          // Add new
+          long newJSFilePriority = newJSFile.getProperty(NodetypeConstant.EXO_PRIORITY).getLong();
+          long registeredJSFilePriority = registeredJSFile.getProperty(NodetypeConstant.EXO_PRIORITY).getLong();
+          if (!isApplied && newJSFilePriority < registeredJSFilePriority) {
+            buffer.append(getActivedJSData(newJSFile));
+            isApplied = true;
+          }
         }
-        // Modify
-        if (newJSFile.getPath().equals(registeredJSFile.getPath())) {
-          buffer.append(newJSFile.getNode(NodetypeConstant.JCR_CONTENT)
-                                 .getProperty(NodetypeConstant.JCR_DATA)
-                                 .getString());
-          continue;
-        }
-        buffer.append(registeredJSFile.getNode(NodetypeConstant.JCR_CONTENT)
-                                      .getProperty(NodetypeConstant.JCR_DATA)
-                                      .getString());
+        
+        buffer.append(getActivedJSData(registeredJSFile));
+      }     
+      if (!isApplied) {
+        buffer.append(getActivedJSData(newJSFile));
       }
     }
     sessionProvider.close();
     return buffer.toString();
+  }
+
+  private String getActivedJSData(Node jsFile) throws ValueFormatException,
+                                          RepositoryException,
+                                          PathNotFoundException {
+    if (jsFile != null && !jsFile.isNodeType("exo:restoreLocation")
+        && jsFile.hasNode(NodetypeConstant.JCR_CONTENT)
+        && jsFile.getNode(NodetypeConstant.JCR_CONTENT).hasProperty(NodetypeConstant.JCR_DATA) 
+        && jsFile.hasProperty(NodetypeConstant.EXO_ACTIVE)
+        && jsFile.getProperty(NodetypeConstant.EXO_ACTIVE).getBoolean() == true) {
+      
+      return jsFile.getNode(NodetypeConstant.JCR_CONTENT).getProperty(NodetypeConstant.JCR_DATA).getString();
+    }
+    return "";    
   }
 
   /* (non-Javadoc)

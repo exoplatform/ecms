@@ -26,6 +26,7 @@ import org.exoplatform.services.command.action.Action;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.core.WebSchemaConfigService;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 /**
@@ -38,20 +39,40 @@ public class WebSchemaModificationAction implements Action{
   private Log log = ExoLogger.getLogger("wcm:WebSchemaModificationAction");
   public boolean execute(Context context) throws Exception {
     Property property = (Property)context.get("currentItem");
-    String propertyName = property.getName();
-    if(!propertyName.equals("jcr:data"))
-      return propertyName.equalsIgnoreCase("exo:active");//use exo:active in case of exo:cssFile or exo:jsFile
+    String propertyName = property.getName();    
+    
+    if (!propertyName.equals("jcr:data") 
+        && !propertyName.equals(NodetypeConstant.EXO_PRIORITY)
+        && !propertyName.equals(NodetypeConstant.EXO_ACTIVE)
+        && !propertyName.equals("exo:restorePath")) {
+      
+      // use exo:active in case of exo:cssFile or exo:jsFile
+      return propertyName.equalsIgnoreCase("exo:active");
+    }
     Node grandParent = property.getParent().getParent();
-    if(!grandParent.getPrimaryNodeType().getName().equals("nt:file"))
-      return false;
+    if(propertyName.equals("jcr:data") && !grandParent.getPrimaryNodeType().getName().equals("nt:file"))
+      return false;    
+    
     ExoContainer container = ExoContainerContext.getCurrentContainer();
     WebSchemaConfigService schemaConfigService =
       (WebSchemaConfigService) container.getComponentInstanceOfType(WebSchemaConfigService.class);
     SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
-    try {
-      schemaConfigService.updateSchemaOnModify(sessionProvider, grandParent);
+    
+    Node node = null;
+    if (propertyName.equals("jcr:data")) {
+      node = grandParent;
+    } else {
+      node = property.getParent();
+    }
+        
+    try {      
+      if (propertyName.equals("exo:restorePath")) {
+        schemaConfigService.updateSchemaOnRemove(sessionProvider, node);
+      } else {
+        schemaConfigService.updateSchemaOnModify(sessionProvider, node);
+      }      
     } catch (Exception e) {
-      log.error("Error when update schema when modify node: "+grandParent.getPath(), e);
+      log.error("Error when update schema when modify node: "+node.getPath(), e);
     }
     return true;
   }
