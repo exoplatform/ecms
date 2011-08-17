@@ -124,6 +124,7 @@ public class UIJcrExplorerContainer extends UIContainer {
         homePath = org.exoplatform.services.cms.impl.Utils.getPersonalDrivePath(homePath, userId);
       if (nodePath!=null && nodePath.length()>0 && !nodePath.equals("/"))
         homePath = homePath+"/"+nodePath;
+      homePath = homePath.replaceAll("//", "/");
       UIJCRExplorer uiJCRExplorer = getChild(UIJCRExplorer.class);
 
       uiJCRExplorer.setDriveData(drive);
