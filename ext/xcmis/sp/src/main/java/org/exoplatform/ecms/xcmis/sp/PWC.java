@@ -101,6 +101,7 @@ class PWC extends DocumentDataImpl
       ContentStream content, List<AccessControlEntry> acl, Collection<PolicyData> policies)
       throws NameConstraintViolationException, StorageException
    {
+      //String id = getObjectId();
       try
       {
          DocumentDataImpl latestVersion = getLatestVersion();
@@ -117,9 +118,6 @@ class PWC extends DocumentDataImpl
          latestEntry.setValue(CmisConstants.VERSION_SERIES_CHECKED_OUT_ID, (Value)null);
          latestEntry.setValue(CmisConstants.VERSION_SERIES_CHECKED_OUT_BY, (Value)null);
          // Update creation date & last modification date to emulate creation new version
-         String[] split = latestEntry.getString(CmisConstants.OBJECT_ID).split(JcrCMIS.ID_SEPARATOR);
-         String newId = split[0] + JcrCMIS.ID_SEPARATOR + (Integer.parseInt(split[1]) + 1);
-         latestEntry.setValue(CmisConstants.OBJECT_ID, newId);
          String userId = session.getUserID();
          latestEntry.setValue(CmisConstants.CREATED_BY, userId);
          latestEntry.setValue(CmisConstants.LAST_MODIFIED_BY, userId);
@@ -194,15 +192,6 @@ class PWC extends DocumentDataImpl
          node.getParent().remove();
          session.save();
 
-         // To recreate the latestVersion Document instance since 
-         // the Id of DocumentDataImpl and JcrNodeEntry wouldn't change
-         try {
-            JcrNodeEntry fromNode = entry.storage.fromNode(latestVersion.entry.node);
-            latestVersion = new DocumentDataImpl(fromNode);
-         } catch (ObjectNotFoundException e) {
-            throw new StorageException("Can't recreate the latest document object from node", e);
-         }
-         
          return latestVersion;
       }
       catch (RepositoryException re)
@@ -215,7 +204,7 @@ class PWC extends DocumentDataImpl
     * {@inheritDoc}
     */
    @Override
-   public void delete() throws StorageException
+   protected void delete() throws StorageException
    {
       cancelCheckout();
    }

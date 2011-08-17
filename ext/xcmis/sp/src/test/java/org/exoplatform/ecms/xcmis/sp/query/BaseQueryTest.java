@@ -211,10 +211,6 @@ public abstract class BaseQueryTest extends BaseTest
       while (result.hasNext())
       {
          Result next = result.next();
-         if (LOG.isDebugEnabled())
-         {
-            LOG.debug(next.getObjectId());
-         }
          String id = next.getObjectId();
          resultPaths.add(id);
          try
@@ -330,7 +326,9 @@ public abstract class BaseQueryTest extends BaseTest
    @Override
    public void setUp() throws Exception
    {
+      // TODO Auto-generated method stub
       super.setUp();
+
    }
 
    protected DocumentData createAppoloMission(StorageImpl storage, FolderData parentFolder, String missionName,

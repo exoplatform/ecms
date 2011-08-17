@@ -266,20 +266,9 @@ public class DocumentVersion extends DocumentDataImpl
     * {@inheritDoc}
     */
    @Override
-   public void delete() throws StorageException
+   protected void delete() throws StorageException
    {
-      try
-      {
-         Node node = entry.getNode();
-         Version version = (Version)node.getParent();
-         VersionHistory versionHistory = version.getContainingHistory();
-         versionHistory.removeVersion(getVersionLabel());
-         versionHistory.save();
-      }
-      catch (RepositoryException re)
-      {
-         throw new CmisRuntimeException("Unable to delete document version with label '" + getVersionLabel() + "'. " + re.getMessage(), re);
-      }
+      throw new CmisRuntimeException("Not supported for non current version of document.");
    }
 
    /**
@@ -290,4 +279,5 @@ public class DocumentVersion extends DocumentDataImpl
    {
       throw new CmisRuntimeException("Not supported for non current version of document.");
    }
+
 }

@@ -8,7 +8,7 @@
 		<propertyDefinitions>
 			<propertyDefinition name="cmis:name" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="IGNORE" protected="false" multiple="false">
 			</propertyDefinition>
-			<propertyDefinition name="cmis:objectId" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
+			<propertyDefinition name="cmis:objectId" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="IGNORE" protected="false" multiple="false">
 			</propertyDefinition>
 			<propertyDefinition name="cmis:objectTypeId" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
 			</propertyDefinition>
@@ -247,15 +247,5 @@
 			</childNodeDefinition>
 		</childNodeDefinitions>
 	</nodeType>
-	
-   <nodeType name="xcmis:linkedFile" isMixin="false" hasOrderableChildNodes="false" primaryItemName="">
-      <supertypes>
-			<supertype>nt:base</supertype>
-      </supertypes>
-      <propertyDefinitions>
-         <propertyDefinition name="*" requiredType="undefined" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
-         </propertyDefinition>
-      </propertyDefinitions>
-   </nodeType>
 
 </nodeTypes>

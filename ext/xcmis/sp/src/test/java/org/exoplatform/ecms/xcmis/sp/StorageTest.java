@@ -23,7 +23,6 @@ import org.exoplatform.services.jcr.config.RepositoryConfigurationException;
 import org.exoplatform.services.jcr.core.ExtendedNode;
 import org.xcmis.spi.BaseContentStream;
 import org.xcmis.spi.CmisConstants;
-import org.xcmis.spi.CmisRuntimeException;
 import org.xcmis.spi.ConstraintException;
 import org.xcmis.spi.ContentStream;
 import org.xcmis.spi.DocumentData;
@@ -69,13 +68,19 @@ import javax.jcr.RepositoryException;
 public class StorageTest extends BaseTest
 {
 
+   //protected Storage storage;
+
    protected FolderData rootFolder;
 
    protected TypeDefinition documentTypeDefinition;
 
+   protected TypeDefinition folderTypeDefinition;
+
    protected TypeDefinition policyTypeDefinition;
 
    protected TypeDefinition relationshipTypeDefinition;
+
+   private StorageImpl storageA;
 
    @Override
    public void setUp() throws Exception
@@ -90,79 +95,6 @@ public class StorageTest extends BaseTest
       relationshipTypeDefinition = storageA.getTypeDefinition("cmis:relationship", true);
    }
 
-   public void testDeleteDocumentLatestVersion() throws Exception
-   {
-      DocumentData document = createDocument(rootFolder, "testDeleteLatestVersionDocument_Document", "cmis:document", null, null);
-      try {
-         storageA.deleteObject(document, false);
-         fail("Must not remove latest version with deleteAllVersions == false");
-      } catch (CmisRuntimeException e) {
-         assertEquals("Unable to delete latest version at one.", e.getMessage());
-      }
-      
-      try {
-         storageA.deleteObject(document, true);
-      } catch (CmisRuntimeException e) {
-         fail("Must remove latest version and all versions with deleteAllVersions == true");
-      }
-   }
-   
-   public void testDeleteDocumentLatestVersionAfterCheckin() throws Exception
-   {
-      DocumentData document = createDocument(rootFolder, "testDeleteLatestVersionDocument_Document", "cmis:document", null, null);
-      // CHECKOUT
-      DocumentData pwc = document.checkout();
-      // CHECKIN
-      ContentStream cs =
-         new BaseContentStream("checkin test. content updated".getBytes(), null, new MimeType("text", "plain"));
-      DocumentData checkinDocument = pwc.checkin(true, "my comment", null, cs, null, null);
-      checkinDocument = (DocumentData)storageA.getObjectById(checkinDocument.getObjectId());
-      
-      try {
-         storageA.deleteObject(checkinDocument, false);
-         fail("Must not remove latest version with deleteAllVersions == false");
-      } catch (CmisRuntimeException e) {
-         assertEquals("Unable to delete latest version at one.", e.getMessage());
-      }
-      
-      try {
-         storageA.deleteObject(checkinDocument, true);
-      } catch (CmisRuntimeException e) {
-         fail("Must remove latest version and all versions with deleteAllVersions == true");
-      }
-   }
-   
-   public void testDeleteDocumentBeforeLatestVersion() throws Exception
-   {
-      DocumentData document = createDocument(rootFolder, "testDeleteLatestVersionDocument_Document", "cmis:document", null, null);
-      String documentId = document.getObjectId();
-      // CHECKOUT
-      DocumentData pwc = document.checkout();
-      // CHECKIN
-      ContentStream cs =
-         new BaseContentStream("checkin test. content updated".getBytes(), null, new MimeType("text", "plain"));
-      DocumentData checkinDocument = pwc.checkin(true, "my comment", null, cs, null, null);
-      
-      document = (DocumentData)storageA.getObjectById(documentId);
-      
-      try {
-         storageA.deleteObject(document, false);
-         fail("Must not remove before latest version with deleteAllVersions == false");
-      } catch (CmisRuntimeException e) {
-         String expectedMessage = "Unable to delete document version with label '1'. There are Reference property pointed to this Version " +
-                                  "[]:1[http://www.exoplatform.com/jcr/exo/1.0]drives:1[]driveA:1" +
-                                  "[]testDeleteLatestVersionDocument_Document:1[http://www.jcp.org/jcr/1.0]";
-         String actualMessage = e.getMessage().length() > expectedMessage.length() ? e.getMessage().substring(0, expectedMessage.length()) : e.getMessage();
-         assertEquals(expectedMessage, actualMessage);
-      }
-      
-      try {
-         storageA.deleteObject(document, true);
-      } catch (CmisRuntimeException e) {
-         fail("Must remove version and all versions with deleteAllVersions == true");
-      }
-   }
-            
    public void testApplyACL() throws Exception
    {
       DocumentData document = createDocument(rootFolder, "applyACLTestDocument", "cmis:document", null, null);
@@ -203,32 +135,13 @@ public class StorageTest extends BaseTest
             null, new MimeType("text", "plain")), null);
 
       DocumentData pwc = document.checkout();
-      String pwcId = pwc.getObjectId();
-      
-      // Get PWC from storage
-      try
-      {
-         pwc = (DocumentData)storageA.getObjectById(pwcId);
-         // OK
-      }
-      catch (ObjectNotFoundException e)
-      {
-         fail("The PWC should be in storage, for the id '" + pwcId + "'. " + e.getMessage());
-      }
 
-      // test document
+      assertTrue(document.isVersionSeriesCheckedOut());
+      assertTrue(pwc.isVersionSeriesCheckedOut());
       assertEquals(document.getVersionSeriesId(), pwc.getVersionSeriesId());
       assertEquals(document.getVersionSeriesCheckedOutId(), pwc.getObjectId());
-      assertTrue(document.isVersionSeriesCheckedOut());
       assertNotNull(document.getVersionSeriesCheckedOutBy());
-      assertFalse(document.isLatestVersion());
-      assertFalse(document.isPWC());
-
-      // test pwc
-      assertTrue(pwc.isVersionSeriesCheckedOut());
       assertNotNull(pwc.getVersionSeriesCheckedOutBy());
-      assertTrue(pwc.isLatestVersion());
-      assertTrue(pwc.isPWC());
 
       // check content
       byte[] b = new byte[128];
@@ -252,97 +165,25 @@ public class StorageTest extends BaseTest
       {
          // OK
       }
+
    }
 
-   public void testSuffixInObjectId() throws Exception
-   {
-      DocumentData document = createDocument(rootFolder, "getAllVersionsPwcVersionsTest", "cmis:document", null, null);
-      String documentId = document.getObjectId();
-      assertNotNull(documentId);
-      assertTrue("First document id must ends with '_1' suffix", documentId.endsWith("_1"));
-   }
-
-   public void testConsistentId() throws Exception
-   {
-      DocumentData document =
-         createDocument(rootFolder, "consistentTest", "cmis:document", new BaseContentStream("consistent test".getBytes(),
-            null, new MimeType("text", "plain")), null);
-      String documentId = document.getObjectId();
-      
-      // get document by Id 1
-      DocumentData version = (DocumentData)storageA.getObjectById(documentId);
-
-      // test to be consistent id 1
-      assertEquals("Document id should be the same as used for getObjectById.", documentId, version.getObjectId());
-   }
-   
-   public void testConsistentIdWithCheckin() throws Exception
-   {
-      DocumentData document =
-         createDocument(rootFolder, "consistentTest", "cmis:document", new BaseContentStream("consistent test".getBytes(),
-            null, new MimeType("text", "plain")), null);
-      String documentId1 = document.getObjectId();
-      
-      // CHECKOUT
-      DocumentData pwc = document.checkout();
-      String pwcId = pwc.getObjectId();
-      
-      // test
-      assertNotNull(pwcId);
-      assertTrue("PWC id should not contain the suffix", !pwcId.contains(JcrCMIS.ID_SEPARATOR));
-      
-      // CHECKIN
-      ContentStream cs =
-         new BaseContentStream("checkin test. content updated".getBytes(), null, new MimeType("text", "plain"));
-      DocumentData checkinDocument = pwc.checkin(true, "my comment", null, cs, null, null);
-      String documentId2 = checkinDocument.getObjectId();
-
-      // test
-      assertNotNull(documentId2);
-      assertTrue("Second document id must ends with '_2' suffix", documentId2.endsWith("_2"));
-      
-      // ==================
-      
-      // not the same id for both document versions
-      assertTrue("The objectId before checkin and after should not be the same.", !documentId1.equals(documentId2));
-      assertTrue("The objectId before checkin and after should not be the same.", !pwcId.equals(documentId1));
-      assertTrue("The objectId before checkin and after should not be the same.", !pwcId.equals(documentId2));
-      
-
-      // get document by Id 2
-      DocumentData version2 = (DocumentData)storageA.getObjectById(documentId2);
-      
-      // test to be consistent id 2
-      assertEquals("Document id should be the same as used for getObjectById.", documentId2, version2.getObjectId());
-      
-      // test to get exception on the Id without suffix
-      try {
-         String dontSuffixedId = documentId1.split(JcrCMIS.ID_SEPARATOR)[0];
-         storageA.getObjectById(dontSuffixedId);
-         fail("Must not be the document with id '" + dontSuffixedId + "' (with no suffix id)");
-      } catch (ObjectNotFoundException e) {
-         // OK
-      }
-   }
-   
    public void testCheckIn() throws Exception
    {
       DocumentData document =
          createDocument(rootFolder, "checkinTest", "cmis:document", new BaseContentStream("checkin test".getBytes(),
             null, new MimeType("text", "plain")), null);
-      String objectId1 = document.getObjectId();
-      
-      // CHECKOUT
       DocumentData pwc = document.checkout();
       String pwcId = pwc.getObjectId();
 
-      // CHECKIN
-      ContentStream cs =
-         new BaseContentStream("checkin test, content updated".getBytes(), null, new MimeType("text", "plain"));
-      DocumentData checkin = pwc.checkin(true, "my comment", null, cs, null, null);
-      checkin = (DocumentData)storageA.getObjectById(checkin.getObjectId());
+      // Get PWC from storage
+      pwc = (DocumentData)storageA.getObjectById(pwcId);
 
-      // Check whether is removed PWC
+      ContentStream cs =
+         new BaseContentStream("checkin test. content updated".getBytes(), null, new MimeType("text", "plain"));
+      //      pwc.setContentStream(cs);
+      pwc.checkin(true, "my comment", null, cs, null, null);
+
       try
       {
          storageA.getObjectById(pwcId);
@@ -352,180 +193,24 @@ public class StorageTest extends BaseTest
       {
          // OK
       }
-      
-      // Check first document id
-      try
-      {
-         storageA.getObjectById(objectId1);
-         // OK
-      }
-      catch (ObjectNotFoundException e)
-      {
-         fail("The first version should be in storage, for the id '" + objectId1 + "'. " + e.getMessage());
-      }
-      
-      // Check second document id
-      try
-      {
-         storageA.getObjectById(checkin.getObjectId());
-         // OK
-      }
-      catch (ObjectNotFoundException e)
-      {
-         fail("The second version should be in storage, for the id '" + checkin.getObjectId() + "'. " + e.getMessage());
-      }
-      
-      document = (DocumentData)storageA.getObjectById(objectId1);
-      
-      // check first document state
+
       assertFalse(document.isVersionSeriesCheckedOut());
       assertNull(document.getVersionSeriesCheckedOutId());
       assertNull(document.getVersionSeriesCheckedOutBy());
+      assertEquals("my comment", document.getProperty(CmisConstants.CHECKIN_COMMENT).getValues().get(0));
+
       // check content
-      String content = convertStreamToString(document.getContentStream().getStream());
-      assertEquals("checkin test", content);
-      
-      // check latest document state
-      assertFalse(checkin.isVersionSeriesCheckedOut());
-      assertNull(checkin.getVersionSeriesCheckedOutId());
-      assertNull(checkin.getVersionSeriesCheckedOutBy());
-      assertEquals("my comment", checkin.getProperty(CmisConstants.CHECKIN_COMMENT).getValues().get(0));
-      // check content
-      content = convertStreamToString(checkin.getContentStream().getStream());
-      assertEquals("checkin test, content updated", content);
-   }
-   
-   public void testCheckInDouble() throws Exception
-   {
-      DocumentData document =
-         createDocument(rootFolder, "testCheckInDouble_Document1", "cmis:document", new BaseContentStream("checkin test".getBytes(),
-            null, new MimeType("text", "plain")), null);
-      String objectId1 = document.getObjectId();
-      
-      // VERSION 1 
-      
-      DocumentData pwc1 = document.checkout();
-
-      ContentStream cs1 =
-         new BaseContentStream("checkin test, content updated 1".getBytes(), null, new MimeType("text", "plain"));
-      DocumentData checkin1 = pwc1.checkin(true, "my comment 1", null, cs1, null, null);
-      String objectId2 = checkin1.getObjectId();
-      checkin1 = (DocumentData)storageA.getObjectById(objectId2);
-      
-      // VERSION 2
-
-      DocumentData pwc2 = checkin1.checkout();
-      String pwcId2 = pwc2.getObjectId();
-      
-      ContentStream cs2 =
-         new BaseContentStream("checkin test, content updated 2".getBytes(), null, new MimeType("text", "plain"));
-      DocumentData checkin2 = pwc2.checkin(true, "my comment 2", null, cs2, null, null);
-      String objectId3 = checkin2.getObjectId();
-      checkin2 = (DocumentData)storageA.getObjectById(objectId2);
-
-      // Check whether is removed PWC 2
-      try
-      {
-         storageA.getObjectById(pwcId2);
-         fail("PWC 2 must be removed.");
-      }
-      catch (ObjectNotFoundException e)
-      {
-         // OK
-      }
-      
-      // Check second document id
-      try
-      {
-         storageA.getObjectById(objectId2);
-         // OK
-      }
-      catch (ObjectNotFoundException e)
-      {
-         fail("The second version should be in storage, for the id '" + objectId2 + "'. " + e.getMessage());
-      }
-      
-      // Check third version document id
-      try
-      {
-         storageA.getObjectById(objectId3);
-         // OK
-      }
-      catch (ObjectNotFoundException e)
-      {
-         fail("The second version should be in storage, for the id '" + objectId3 + "'. " + e.getMessage());
-      }
-
-      // get it again to get updated properties
-      document = (DocumentData)storageA.getObjectById(objectId1);
-      checkin1 = (DocumentData)storageA.getObjectById(objectId2);
-      checkin2 = (DocumentData)storageA.getObjectById(objectId3);
-      
-      // check first document state
-      assertFalse(document.isVersionSeriesCheckedOut());
-      assertNull(document.getVersionSeriesCheckedOutId());
-      assertNull(document.getVersionSeriesCheckedOutBy());
-      // check content
-      String content = convertStreamToString(document.getContentStream().getStream());
-      assertEquals("checkin test", content);
-      
-      
-      // check second document state
-      assertFalse(checkin1.isVersionSeriesCheckedOut());
-      assertNull(checkin1.getVersionSeriesCheckedOutId());
-      assertNull(checkin1.getVersionSeriesCheckedOutBy());
-      assertEquals("my comment 1", checkin1.getProperty(CmisConstants.CHECKIN_COMMENT).getValues().get(0));
-      // check content
-      content = convertStreamToString(checkin1.getContentStream().getStream());
-      assertEquals("checkin test, content updated 1", content);
-
-      
-      // check latest document state
-      assertFalse(checkin2.isVersionSeriesCheckedOut());
-      assertNull(checkin2.getVersionSeriesCheckedOutId());
-      assertNull(checkin2.getVersionSeriesCheckedOutBy());
-      assertEquals("my comment 2", checkin2.getProperty(CmisConstants.CHECKIN_COMMENT).getValues().get(0));
-      // check content
-      content = convertStreamToString(checkin2.getContentStream().getStream());
-      assertEquals("checkin test, content updated 2", content);
-      
-   }
-
-   public void testCheckInTestId() throws Exception
-   {
-      DocumentData document =
-         createDocument(rootFolder, "testCheckInCheckId_Document1", "cmis:document", new BaseContentStream("checkin test".getBytes(),
-            null, new MimeType("text", "plain")), null);
-      
-      String documentId = document.getObjectId();
-      
-      DocumentData pwc = document.checkout();
-      
-      String pwcId = pwc.getObjectId();
-
-      // Get PWC from storage
-      pwc = (DocumentData)storageA.getObjectById(pwcId);
-
-      ContentStream cs =
-         new BaseContentStream("checkin test. content updated".getBytes(), null, new MimeType("text", "plain"));
-
-      DocumentData checkedInDocument = pwc.checkin(true, "my comment", null, cs, null, null);
-      
-      String checkedInDocumentId = checkedInDocument.getObjectId();
-      
-      String documentIdAfterCheckedIn = document.getObjectId();
-      
-      assertEquals("Document id should be the same as before checkout/checkin.", documentId, documentIdAfterCheckedIn);
-      assertNotSame("Document checked in id should NOT be the same as PWC id.", pwcId, documentIdAfterCheckedIn);
-      assertNotSame("Document checked in id should NOT be the same as first document id.", checkedInDocumentId, documentIdAfterCheckedIn);
+      byte[] b = new byte[128];
+      int r = document.getContentStream().getStream().read(b);
+      assertEquals("checkin test. content updated", new String(b, 0, r));
    }
 
    public void testCheckInRename() throws Exception
    {
-      DocumentData document =
+      DocumentDataImpl document =
          createDocument(rootFolder, "checkinTestRename", "cmis:document", new BaseContentStream("checkin test"
             .getBytes(), null, new MimeType("text", "plain")), null);
-      DocumentData pwc = (DocumentData)document.checkout();
+      DocumentDataImpl pwc = (DocumentDataImpl)document.checkout();
       String pwcId = pwc.getObjectId();
 
       // update
@@ -636,7 +321,7 @@ public class StorageTest extends BaseTest
       try
       {
          storageA.getObjectById(pwcId);
-         fail("PWC must be removed.");
+         fail("PWC mus be removed.");
       }
       catch (ObjectNotFoundException e)
       {
@@ -663,7 +348,6 @@ public class StorageTest extends BaseTest
       DocumentData document = createDocument(rootFolder, "getAllVersionsPwcTest", "cmis:document", null, null);
       String versionSeriesId = document.getVersionSeriesId();
       DocumentData pwc = document.checkout();
-      
       Collection<DocumentData> allVersions = storageA.getAllVersions(versionSeriesId);
       assertEquals(2, allVersions.size());
       Iterator<DocumentData> vi = allVersions.iterator();
@@ -671,57 +355,26 @@ public class StorageTest extends BaseTest
       assertEquals(document.getObjectId(), vi.next().getObjectId());
    }
 
-   public void testGetAllVersionsWithCheckin() throws Exception
+   public void testGetAllVersionsPwcVersions() throws Exception
    {
-      DocumentData document = createDocument(rootFolder, "testGetAllVersionsWithCheckin_Document1", "cmis:document", null, null);
-      String document_id = document.getObjectId();
+      DocumentData document = createDocument(rootFolder, "getAllVersionsPwcVersionsTest", "cmis:document", null, null);
       String versionSeriesId = document.getVersionSeriesId();
 
       DocumentData pwc = document.checkout();
 
-      DocumentData checkin = pwc.checkin(true, "", null, null, null, null);
-      
-      assertEquals(document_id.split("_")[0] + "_" + "2", checkin.getObjectId());
-      
-      String checkinObjectId = checkin.getObjectId();
+      pwc.checkin(true, "", null, null, null, null);
 
-      DocumentData checkinObject = (DocumentData)storageA.getObjectById(checkinObjectId);
-      
-      DocumentData pwc2 = checkinObject.checkout();
-      String pwc_checkout2_id = pwc2.getObjectId();
-      
-      assertEquals("The document id should not changed.", document_id, document.getObjectId());
+      pwc = document.checkout();
 
       Collection<DocumentData> allVersions = storageA.getAllVersions(versionSeriesId);
-      
       assertEquals(3, allVersions.size());
-      
-      // check all id
+
       Iterator<DocumentData> vi = allVersions.iterator();
-      boolean hasPwc = false;
-      boolean hasLatest = false;
-      while (vi.hasNext()) {
-         DocumentData documentData = (DocumentData) vi.next();
-         String versionLabel = documentData.getVersionLabel();
-         if ("pwc".equalsIgnoreCase(versionLabel)) {
-            if (hasPwc) 
-               fail("Already was a PWC document");
-            else
-               hasPwc = true;
-            assertEquals("The id of 'pwc' label document should be the same as the pwc checked out document.", pwc_checkout2_id, documentData.getObjectId());
-         } else if ("latest".equalsIgnoreCase(versionLabel)) {
-            if (hasLatest) 
-               fail("Already was a Latest document");
-            else
-               hasLatest = true;
-            assertEquals("The id of 'latest' label document should be the same as the latest document.", checkinObjectId, documentData.getObjectId());
-         } else {
-            assertEquals("The id of first label document should be the same as the '"+ versionLabel + "' (first) versioned document.", document_id, documentData.getObjectId());            
-         }
-      }
+      assertEquals(pwc.getObjectId(), vi.next().getObjectId());
+      assertEquals(document.getObjectId(), vi.next().getObjectId());
    }
 
-   public void testGetCheckedOutDocs() throws Exception
+   public void tesGetCheckedOutDocs() throws Exception
    {
       DocumentData document1 = createDocument(rootFolder, "getCheckedOutTest01", "cmis:document", null, null);
       FolderData folder = createFolder(rootFolder, "folderCheckedOutTest", "cmis:folder");
@@ -789,138 +442,6 @@ public class StorageTest extends BaseTest
          fail("Object(s) " + sb.toString() + " were not found in children list.");
       }
    }
-   
-   public void testGetChildrenAfterCheckin() throws Exception
-   {
-      FolderData folder1 = createFolder(rootFolder, "testGetChildrenAfterCheckin_Folder1", "cmis:folder");
-      
-      DocumentData document =
-         createDocument(folder1, "checkinTest", "cmis:document", new BaseContentStream("checkin test".getBytes(),
-            null, new MimeType("text", "plain")), null);
-
-      // CHECKOUT
-      DocumentData pwc = document.checkout();
-      
-      // CHECKIN
-      ContentStream cs =
-         new BaseContentStream("checkin test. content updated".getBytes(), null, new MimeType("text", "plain"));
-      DocumentData checkinDocument = pwc.checkin(true, "my comment", null, cs, null, null);
-      
-      // ============================
-      
-      folder1 = (FolderData) storageA.getObjectById(folder1.getObjectId());
-            
-      List<String> chs = new ArrayList<String>();
-      for (ItemsIterator<ObjectData> children = folder1.getChildren(null); children.hasNext();)
-      {
-         chs.add(children.next().getObjectId());
-      }
-      assertEquals(1, chs.size());
-      // Test the Id child the same as last checkin
-      assertEquals("Test the Id child the same as last checkin", checkinDocument.getObjectId(), chs.iterator().next());
-   }
-   
-   public void testGetChildrenAfterDoubleCheckin() throws Exception
-   {
-      FolderData folder1 = createFolder(rootFolder, "testGetChildrenAfterDoubleCheckin_Folder1", "cmis:folder");
-      
-      DocumentData document =
-         createDocument(folder1, "checkinTest", "cmis:document", new BaseContentStream("checkin test".getBytes(),
-            null, new MimeType("text", "plain")), null);
-
-      // FIRST VERSION
-      
-      // CHECKOUT
-      DocumentData pwc = document.checkout();
-      
-      // CHECKIN
-      ContentStream cs =
-         new BaseContentStream("checkin test. content updated".getBytes(), null, new MimeType("text", "plain"));
-      DocumentData checkinDocument = pwc.checkin(true, "my comment", null, cs, null, null);
-      String checkinId = checkinDocument.getObjectId();
-      
-      // SECOND VERSION
-      
-      // CHECKOUT
-      document = (DocumentData)storageA.getObjectById(checkinId);
-      pwc = document.checkout();
-      
-      // CHECKIN
-      cs =
-         new BaseContentStream("checkin test. content updated".getBytes(), null, new MimeType("text", "plain"));
-      DocumentData checkinDocument2 = pwc.checkin(true, "my comment", null, cs, null, null);
-      
-      // ============================
-      
-      folder1 = (FolderData) storageA.getObjectById(folder1.getObjectId());
-            
-      List<String> chs = new ArrayList<String>();
-      for (ItemsIterator<ObjectData> children = folder1.getChildren(null); children.hasNext();)
-      {
-         chs.add(children.next().getObjectId());
-      }
-      assertEquals(1, chs.size());
-      // Test the Id child the same as last checkin
-      assertEquals("Test the Id child the same as last checkin", checkinDocument2.getObjectId(), chs.iterator().next());
-   }
-   
-   public void testDeleteVersion() throws Exception
-   {
-      FolderData folder1 = createFolder(rootFolder, "testDeleteVersion_Folder1", "cmis:folder");
-      
-      DocumentData document =
-         createDocument(folder1, "checkinTest", "cmis:document", new BaseContentStream("checkin test".getBytes(),
-            null, new MimeType("text", "plain")), null);
-
-      
-      // FIRST VERSION
-      
-      // CHECKOUT
-      DocumentData pwc = document.checkout();
-      
-      // CHECKIN
-      ContentStream cs =
-         new BaseContentStream("checkin test. content updated".getBytes(), null, new MimeType("text", "plain"));
-      DocumentData checkinDocument = pwc.checkin(true, "my comment", null, cs, null, null);
-      
-      
-      // SECOND VERSION
-      
-      // CHECKOUT
-      pwc = checkinDocument.checkout();
-      
-      // CHECKIN
-      cs =
-         new BaseContentStream("checkin test. content updated".getBytes(), null, new MimeType("text", "plain"));
-      DocumentData checkinDocument2 = pwc.checkin(true, "my comment", null, cs, null, null);
-      
-      // ============================
-      
-      assertTrue(document.getObjectId().endsWith("_1"));
-      assertTrue(checkinDocument.getObjectId().endsWith("_2"));
-      assertTrue(checkinDocument2.getObjectId().endsWith("_3"));
-      
-      document = (DocumentData)storageA.getObjectById(document.getObjectId());
-      storageA.deleteObject(document, false);
-      
-      try {
-         storageA.getObjectById(document.getObjectId());
-         fail("Should be no document version '" + document.getObjectId() + "'");
-      } catch (Exception e) {
-         // OK, the version '1' was removed
-      }
-
-      try {
-         storageA.getObjectById(checkinDocument.getObjectId());
-      } catch (Exception e) {
-         fail("Should be the document version '3' available \n" + e.getMessage());
-      }
-      try {
-         storageA.getObjectById(checkinDocument2.getObjectId());
-      } catch (Exception e) {
-         fail("Should be the document version '3' available \n" + e.getMessage());
-      }
-   }
 
    public void testCreateDocument() throws Exception
    {
@@ -935,7 +456,7 @@ public class StorageTest extends BaseTest
          "createDocumentTest_ContentFile.txt"));
 
       ContentStream cs =
-         new BaseContentStream("to be or not to be".getBytes(), null, new MimeType("text",
+         new BaseContentStream("to be or not to be".getBytes(), /*"createDocumentTest"*/null, new MimeType("text",
             "plain"));
       AccessControlEntry ace =
          new AccessControlEntry("root", new HashSet<String>(Arrays.asList("cmis:read", "cmis:write")));
@@ -1010,6 +531,25 @@ public class StorageTest extends BaseTest
       assertFalse(documentCopy.isMajorVersion());
    }
 
+   //   public void testCreateDocumentUnfiled() throws Exception
+   //   {
+   //      DocumentData document = createDocument(null, "createUnfiledDocumentTest", "cmis:document", null, null);
+   //
+   //      Node docNode = ((DocumentDataImpl)document).getNodeEntry().getNode();
+   //      String path = docNode.getPath();
+   //      assertTrue("Document must be created in unfiled store.", path.startsWith(StorageImpl.XCMIS_SYSTEM_PATH + "/"
+   //         + StorageImpl.XCMIS_UNFILED));
+   //
+   //      Collection<FolderData> parents = document.getParents();
+   //      assertEquals(0, parents.size());
+   //
+   //      // Add document in root folder.
+   //      rootFolder.addObject(document);
+   //      parents = document.getParents();
+   //      assertEquals(1, parents.size());
+   //      assertEquals(rootFolder.getObjectId(), parents.iterator().next().getObjectId());
+   //   }
+
    public void testCreateFolder() throws Exception
    {
       PropertyDefinition<?> def = PropertyDefinitions.getPropertyDefinition("cmis:folder", CmisConstants.NAME);
@@ -1063,8 +603,8 @@ public class StorageTest extends BaseTest
 
       Node relationshipNode = getNodeByIdentifierFromStorage(storageA, relationship.getObjectId());
       assertEquals("cmis:relationship", relationshipNode.getPrimaryNodeType().getName());
-      assertEquals(sourceDoc.getObjectId(), relationship.getSourceId());
-      assertEquals(targetDoc.getObjectId(), relationship.getTargetId());
+      assertEquals(sourceDoc.getObjectId(), relationshipNode.getProperty("cmis:sourceId").getString());
+      assertEquals(targetDoc.getObjectId(), relationshipNode.getProperty("cmis:targetId").getString());
    }
 
    public void testDeleteContent() throws Exception
@@ -1119,45 +659,24 @@ public class StorageTest extends BaseTest
       assertFalse(folder3.getChildren(null).hasNext());
       assertFalse(itemExistsInStorage(storageA, "/deleteMultifiledTest", false));
    }
-   
-   // Unsupported unfiling.
-   //   public void testCreateDocumentUnfiled() throws Exception
-   //   {
-   //      DocumentData document = createDocument(null, "createUnfiledDocumentTest", "cmis:document", null, null);
-   //
-   //      Node docNode = ((DocumentDataImpl)document).getNodeEntry().getNode();
-   //      String path = docNode.getPath();
-   //      assertTrue("Document must be created in unfiled store.", path.startsWith(StorageImpl.XCMIS_SYSTEM_PATH + "/"
-   //         + StorageImpl.XCMIS_UNFILED));
-   //
-   //      Collection<FolderData> parents = document.getParents();
-   //      assertEquals(0, parents.size());
-   //
-   //      // Add document in root folder.
-   //      rootFolder.addObject(document);
-   //      parents = document.getParents();
-   //      assertEquals(1, parents.size());
-   //      assertEquals(rootFolder.getObjectId(), parents.iterator().next().getObjectId());
-   //   }
-   //
-   // CmisRuntimeException: Unable remove object from last folder in which it is filed.
+
    //   public void testDeleteUnfiledDocument() throws Exception
    //   {
    //      DocumentData document = createDocument(rootFolder, "deleteUnfiledTest", "cmis:document", null, null);
    //      rootFolder.removeObject(document);
    //      assertEquals(0, document.getParents().size());
-   //      assertTrue(((FolderDataImpl)rootFolder).getNodeEntry().getNode().getNode("xcmis:system/xcmis:unfileStore").getNodes().hasNext());
+   //      assertTrue(root.getNode("xcmis:system/xcmis:unfileStore").getNodes().hasNext());
    //      storageA.deleteObject(document, true);
    //      // wrapper node must be removed
-   //      assertFalse(((FolderDataImpl)rootFolder).getNodeEntry().getNode().getNode("xcmis:system/xcmis:unfileStore").getNodes().hasNext());
+   //      assertFalse(root.getNode("xcmis:system/xcmis:unfileStore").getNodes().hasNext());
    //   }
 
    public void testDeleteObjectWithRelationship() throws Exception
    {
       ObjectData sourceDoc =
-         createDocument(rootFolder, "deleteObjectWithRelationship_Source", "cmis:document", null, null);
+         createDocument(rootFolder, "deleteObjectWithRelationshipSource", "cmis:document", null, null);
       ObjectData targetDoc =
-         createDocument(rootFolder, "deleteObjectWithRelationship_Target", "cmis:document", null, null);
+         createDocument(rootFolder, "deleteObjectWithRelationshipTarget", "cmis:document", null, null);
 
       Map<String, Property<?>> properties = new HashMap<String, Property<?>>();
       PropertyDefinition<?> defName =
@@ -1619,6 +1138,11 @@ public class StorageTest extends BaseTest
          + ((DocumentDataImpl)document).getNodeEntry().getNode().getPath());
    }
 
+
+
+
+
+
    public void testGetMultifiledByPath() throws Exception
    {
       ContentStream cs = new BaseContentStream("to be or not to be".getBytes(), null, new MimeType("text", "plain"));
@@ -1630,12 +1154,14 @@ public class StorageTest extends BaseTest
 
       DocumentData doc = (DocumentData)storageA.getObjectByPath("/multifiledByPathTest2/multifiledByPathTest");
       assertEquals(cs.length(), doc.getContentStream().length());
+
    }
+
 
    public void testRenameDocument() throws Exception
    {
       ContentStream cs = new BaseContentStream("to be or not to be".getBytes(), null, new MimeType("text", "plain"));
-      DocumentData document = createDocument(rootFolder, "renameDocumentTest", "cmis:document", cs, null);
+      DocumentDataImpl document = createDocument(rootFolder, "renameDocumentTest", "cmis:document", cs, null);
       setProperty(document, new StringProperty(CmisConstants.NAME, CmisConstants.NAME, CmisConstants.NAME,
          CmisConstants.NAME, "renameDocumentTest01"));
 
@@ -1648,7 +1174,7 @@ public class StorageTest extends BaseTest
 
    public void testRenameFolder() throws Exception
    {
-      FolderData folder = createFolder(rootFolder, "renameFolderTest", "cmis:folder");
+      FolderDataImpl folder = createFolder(rootFolder, "renameFolderTest", "cmis:folder");
       createDocument(folder, "child1", "cmis:document", null, null);
       setProperty(folder, new StringProperty(CmisConstants.NAME, CmisConstants.NAME, CmisConstants.NAME,
          CmisConstants.NAME, "renameFolderTest01"));
@@ -1673,48 +1199,42 @@ public class StorageTest extends BaseTest
       assertEquals("to be or not to be", documentNode.getProperty("jcr:content/jcr:data").getString());
       assertEquals("text/plain", documentNode.getProperty("jcr:content/jcr:mimeType").getString());
    }
-   
-   
-   
-   
-   
-   
-   
+
+   //   public void testUnfileAll() throws Exception
+   //   {
+   //      DocumentData document = createDocument(rootFolder, "unfilingDocumentAllTest", "cmis:document", null, null);
+   //
+   //      FolderData folder1 = createFolder(rootFolder, "unfilingFolderAllTest01", "cmis:folder");
+   //      FolderData folder2 = createFolder(rootFolder, "unfilingFolderAllTest02", "cmis:folder");
+   //      FolderData folder3 = createFolder(rootFolder, "unfilingFolderAllTest03", "cmis:folder");
+   //      folder1.addObject(document);
+   //      folder2.addObject(document);
+   //      folder3.addObject(document);
+   //
+   //      assertEquals(4, document.getParents().size());
+   //      storageA.unfileObject(document);
+   //      assertNull(document.getParent());
+   //      assertEquals(0, document.getParents().size());
+   //   }
+
+   //   public void testUnfiling() throws Exception
+   //   {
+   //      assertEquals(0, getSize(storageA.getUnfiledObjectsId()));
+   //      DocumentData document = createDocument(rootFolder, "unfilingDocumentTest", "cmis:document", null, null);
+   //      assertTrue(rootFolder.getChildren(null).hasNext());
+   //      rootFolder.removeObject(document);
+   //      assertFalse(rootFolder.getChildren(null).hasNext());
+   //
+   //      assertFalse(itemExistsInCurrentDrive(storageA,"/unfilingDocumentTest"));
+   //
+   //      Collection<FolderData> parents = document.getParents();
+   //      assertEquals(0, parents.size());
+   //      storageA.getObjectById(document.getObjectId());
+   //
+   //      assertEquals(1, getSize(storageA.getUnfiledObjectsId()));
+   //   }
+
    /*
-      public void testUnfileAll() throws Exception
-      {
-         DocumentData document = createDocument(rootFolder, "unfilingDocumentAllTest", "cmis:document", null, null);
-   
-         FolderData folder1 = createFolder(rootFolder, "unfilingFolderAllTest01", "cmis:folder");
-         FolderData folder2 = createFolder(rootFolder, "unfilingFolderAllTest02", "cmis:folder");
-         FolderData folder3 = createFolder(rootFolder, "unfilingFolderAllTest03", "cmis:folder");
-         folder1.addObject(document);
-         folder2.addObject(document);
-         folder3.addObject(document);
-   
-         assertEquals(4, document.getParents().size());
-         storageA.unfileObject(document);
-         assertNull(document.getParent());
-         assertEquals(0, document.getParents().size());
-      }
-
-      public void testUnfiling() throws Exception
-      {
-         assertEquals(0, getSize(storageA.getUnfiledObjectsId()));
-         DocumentData document = createDocument(rootFolder, "unfilingDocumentTest", "cmis:document", null, null);
-         assertTrue(rootFolder.getChildren(null).hasNext());
-         rootFolder.removeObject(document);
-         assertFalse(rootFolder.getChildren(null).hasNext());
-   
-         assertFalse(itemExistsInCurrentDrive(storageA,"/unfilingDocumentTest"));
-   
-         Collection<FolderData> parents = document.getParents();
-         assertEquals(0, parents.size());
-         storageA.getObjectById(document.getObjectId());
-   
-         assertEquals(1, getSize(storageA.getUnfiledObjectsId()));
-      }
-
    private int getSize(Iterator<String> iterator)
    {
       int result = 0;
@@ -1731,7 +1251,7 @@ public class StorageTest extends BaseTest
    {
       System.out.println("--------- TREE --------");
       System.out.println(folder.getPath());
-      ((FolderDataImpl)folder).entry.node.accept(new ItemVisitor()
+      ((FolderDataImpl)folder).getNode().accept(new ItemVisitor()
       {
          int l = 0;
 
@@ -1770,7 +1290,31 @@ public class StorageTest extends BaseTest
    }
    */
 
+   protected DocumentDataImpl createDocument(FolderData folder, String name, String typeId, ContentStream content,
+      VersioningState versioningState) throws Exception
+   {
+      PropertyDefinition<?> def = PropertyDefinitions.getPropertyDefinition("cmis:document", CmisConstants.NAME);
+      Map<String, Property<?>> properties = new HashMap<String, Property<?>>();
+      properties.put(CmisConstants.NAME, new StringProperty(def.getId(), def.getQueryName(), def.getLocalName(), def
+         .getDisplayName(), name));
 
+      DocumentData document =
+         storageA.createDocument(folder, documentTypeDefinition, properties, content, null, null,
+            versioningState == null ? VersioningState.MAJOR : versioningState);
+      return (DocumentDataImpl)document;
+   }
+
+   protected FolderDataImpl createFolder(FolderData folder, String name, String typeId) throws Exception
+   {
+      PropertyDefinition<?> def = PropertyDefinitions.getPropertyDefinition("cmis:folder", CmisConstants.NAME);
+      Map<String, Property<?>> properties = new HashMap<String, Property<?>>();
+      properties.put(CmisConstants.NAME, new StringProperty(def.getId(), def.getQueryName(), def.getLocalName(), def
+         .getDisplayName(), name));
+
+      FolderData newFolder = storageA.createFolder(folder, folderTypeDefinition, properties, null, null);
+      //      newFolder.setName(name);
+      return (FolderDataImpl)newFolder;
+   }
 
    protected PolicyDataImpl createPolicy(FolderData folder, String name, String policyText, String typeId)
       throws Exception
@@ -1812,7 +1356,6 @@ public class StorageTest extends BaseTest
    //      }
    //      return document;
    //   }
-   
    private boolean itemExistsInStorage(StorageImpl storage, String nodePath, boolean isSystem)
       throws RepositoryException, RepositoryConfigurationException
    {
@@ -1837,5 +1380,4 @@ public class StorageTest extends BaseTest
       return (Node)getJcrSession(storage.getStorageConfiguration().getRepository(),
          storage.getStorageConfiguration().getWorkspace()).getNodeByUUID(nodeId);
    }
-   
 }

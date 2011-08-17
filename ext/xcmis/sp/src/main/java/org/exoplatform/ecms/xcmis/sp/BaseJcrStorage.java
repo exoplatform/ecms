@@ -60,8 +60,6 @@ import java.util.regex.Pattern;
 
 import javax.jcr.ItemNotFoundException;
 import javax.jcr.Node;
-import javax.jcr.Property;
-import javax.jcr.PropertyIterator;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 import javax.jcr.Value;
@@ -70,9 +68,6 @@ import javax.jcr.nodetype.NodeType;
 import javax.jcr.nodetype.NodeTypeIterator;
 import javax.jcr.nodetype.NodeTypeManager;
 import javax.jcr.version.OnParentVersionAction;
-import javax.jcr.version.Version;
-import javax.jcr.version.VersionException;
-import javax.jcr.version.VersionHistory;
 
 /**
  * @author <a href="mailto:andrew00x@gmail.com">Andrey Parfonov</a>
@@ -1169,60 +1164,11 @@ abstract class BaseJcrStorage implements TypeManager
       {
          throw new CmisRuntimeException("Id may not be null.");
       }
-      String internal;
-      String v = null;
-
-      if (id.contains(JcrCMIS.ID_SEPARATOR))
-      {
-         String[] tmp = id.split(JcrCMIS.ID_SEPARATOR);
-         internal = tmp[0];
-         v = tmp[1];
-      }
-      else
-      {
-         internal = id;
-      }
       try
       {
-         Node node = ((ExtendedSession)session).getNodeByIdentifier(internal);
-         if (node.isNodeType(JcrCMIS.NT_VERSION_HISTORY) && v != null)
-         {
-            VersionHistory vh = (VersionHistory)node;
-            try
-            {
-               node = vh.getVersion(v).getNode(JcrCMIS.JCR_FROZEN_NODE);
-            }
-            catch (VersionException ve)
-            {
-               
-               int lastVersion = -1;
-               try {
-                  long allVersionSize = vh.getAllVersions().getSize();
-                  Version lastVersionNode = vh.getVersion(String.valueOf(allVersionSize));
-                  String propertyObjectId = lastVersionNode.getNode(JcrCMIS.JCR_FROZEN_NODE).getProperty(JcrCMIS.OBJECT_ID).getString();
-                  lastVersion = Integer.parseInt(propertyObjectId.split(JcrCMIS.ID_SEPARATOR)[1]) + 1;
-                  // it works since last version cannot be deleted
-               } catch (RepositoryException e) {
-                  // There are no version with provided name (the size of version history with no deleted nodes) in the version history
-                  lastVersion = Integer.parseInt(String.valueOf(vh.getAllVersions().getSize()));
-               }
-               
-               if ("1".equals(v) || lastVersion == Integer.parseInt(v))
-               {
-                  node = ((ExtendedSession)session).getNodeByIdentifier(vh.getVersionableUUID());
-               }
-               else
-               {
-                  throw new ObjectNotFoundException("Object '" + id + "' does not exist.");
-               }
-            }
-         }
+         Node node = ((ExtendedSession)session).getNodeByIdentifier(id);
          return fromNode(node);
       }
-      catch (NotSupportedNodeTypeException unsupp)
-      {
-         throw new ObjectNotFoundException("Object '" + id + "' does not exist. " + unsupp.getMessage());
-      } 
       catch (ItemNotFoundException nfe)
       {
          throw new ObjectNotFoundException("Object '" + id + "' does not exist.");
@@ -1237,7 +1183,6 @@ abstract class BaseJcrStorage implements TypeManager
    {
       try
       {
-         // Need for set checkedOut state after WebDAV
          if (!node.isCheckedOut())
          {
             node.checkout();
@@ -1255,20 +1200,9 @@ abstract class BaseJcrStorage implements TypeManager
             }
             return new SymLinkNodeEntry(link, node, this);
          }
-         else if (node.isNodeType(JcrCMIS.JCR_XCMIS_LINKEDFILE))
+         else if (node.isNodeType("nt:linkedFile"))
          {
-            javax.jcr.Property propertyWithId = null;
-            for (PropertyIterator iter = node.getProperties(); iter.hasNext() && propertyWithId == null;) 
-            {
-               javax.jcr.Property nextProperty = iter.nextProperty();
-               // iterate while don't get the property with CMIS Object Id in the name.
-               // xcmis:linkedFile extends nt:base which has two properties by default: jcr:primaryType and jcr:mixinTypes
-               if (!nextProperty.getName().equalsIgnoreCase(JcrCMIS.JCR_PRIMARYTYPE) && !nextProperty.getName().equalsIgnoreCase(JcrCMIS.JCR_MIXINTYPES)) {
-                  propertyWithId = nextProperty;
-               }
-            }
-            Node target = propertyWithId.getNode();
-            
+            Node target = node.getProperty("jcr:content").getNode();
             return new JcrNodeEntry(target, this);
          }
          return new JcrNodeEntry(node, this);

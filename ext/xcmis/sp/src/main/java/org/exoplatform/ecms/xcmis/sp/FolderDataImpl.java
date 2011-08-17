@@ -209,7 +209,7 @@ class FolderDataImpl extends BaseObjectData implements FolderData
    }
 
    @Override
-   public void delete() throws StorageException
+   protected void delete() throws StorageException
    {
       if (isRoot())
       {

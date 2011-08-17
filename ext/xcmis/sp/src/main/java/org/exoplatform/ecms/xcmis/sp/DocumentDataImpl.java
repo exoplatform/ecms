@@ -441,13 +441,8 @@ class DocumentDataImpl extends BaseObjectData implements DocumentData
     * {@inheritDoc}
     */
    @Override
-   public void delete() throws StorageException
+   protected void delete() throws StorageException
    {
       entry.delete();
-   }
-
-   public String getObjectId()
-   {
-      return entry.getId();
    }
 }

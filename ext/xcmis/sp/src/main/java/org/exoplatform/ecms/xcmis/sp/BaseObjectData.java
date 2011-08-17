@@ -555,6 +555,6 @@ abstract class BaseObjectData implements ObjectData
     * @throws StorageException
     *            if operation can't be persisted in back-end
     */
-   public abstract void delete() throws StorageException;
+   protected abstract void delete() throws StorageException;
 
 }
