@@ -88,3 +88,26 @@
 .UITaxonomyManager .UIBreadcumbs {
 	padding-bottom: 10px;
 }
+
+.UIJCRExplorer .UITabPane .UITabContentContainer .UITabContent a:link {
+    color: #2200C1;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.UIJCRExplorer .UITabPane .UITabContentContainer .UITabContent a:visited {
+    color: #800080;
+    text-decoration: none;
+}
+
+.UIJCRExplorer .UITabPane .UITabContentContainer .UITabContent a:hover {
+    color: #2200C1;
+    cursor: pointer;    
+    text-decoration: underline;
+}
+
+.UIJCRExplorer .UITabPane .UITabContentContainer .UITabContent a:active {
+    color: #2200C1;
+    cursor: pointer;
+    text-decoration: underline;
+}
