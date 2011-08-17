@@ -65,7 +65,9 @@
    	  <PrintSettingBlock>印刷設定</PrintSettingBlock>
    	  <UISCVPrintPageParameter>with</UISCVPrintPageParameter>
    	  <UISCVConfigPrintPageFormInputSet>ページに表示</UISCVConfigPrintPageFormInputSet>
-						<LockStatus>ロック</LockStatus>						
+			<LockStatus>ロック</LockStatus>
+			<CacheManagement>Contents Visibility</CacheManagement>
+      <UISCVCacheRadioBox>Share contents between users</UISCVCacheRadioBox>
     </label>
     <help>
    	  <ContentPathBlock>表示したいコンテンツを選択してください。ダイナミックナビゲーション（詳細モード。下記参照）を有効化すると、このデフォルトコンテンツが動的に変化します。</ContentPathBlock>
@@ -97,5 +99,10 @@
     <staged>ステージ済</staged>
     <published>公開</published>
   </PublicationStates>
-    
+  <UISCVCacheRadioBox>
+    <label>
+      <Enable>Restricted by Authentication</Enable>
+      <Disable>Restricted by User roles</Disable>
+    </label>
+  </UISCVCacheRadioBox>
 </bundle>

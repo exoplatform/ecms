@@ -67,7 +67,7 @@
    	  <UISCVPrintPageParameter>Tham số URL</UISCVPrintPageParameter>
    	  <UISCVConfigPrintPageFormInputSet>Xem bản in tại</UISCVConfigPrintPageFormInputSet>
 	  <LockStatus>Khóa</LockStatus>
-	  <CacheManagement>Quản lý cache</CacheManagement>
+	  <CacheManagement>Hiển thị nội dung</CacheManagement>
 	  <UISCVCacheRadioBox>Chia sẻ nội dung giữa người sử dụng</UISCVCacheRadioBox>
 	</label>
     <help>
@@ -93,8 +93,8 @@
   
   <UISCVCacheRadioBox>
   	<label>
-	  <Enable>Cho phép</Enable>
-	  <Disable>Vô hiệu</Disable>
+	  <Enable>Hạn chế bởi xác thực quyền</Enable>
+	  <Disable>Hạn chế bởi người sử dụng</Disable>
   	</label>
   </UISCVCacheRadioBox>
 </bundle>

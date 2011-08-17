@@ -148,7 +148,7 @@
 	  <UICLVConfigshowSCVWithStringInput>với</UICLVConfigshowSCVWithStringInput>
       <UICLVConfigTargetPageFormInputSet>Hiển thị tại trang</UICLVConfigTargetPageFormInputSet>
       <content-not-found>Không tìm thấy nội dung!</content-not-found>
-      <UICLVConfigCacheManagementLabel>Quản lý Cache</UICLVConfigCacheManagementLabel>
+      <UICLVConfigCacheManagementLabel>Hiển thị nội dung</UICLVConfigCacheManagementLabel>
       <UICLVConfigCacheEnableRadioBoxInput>Chia sẻ nội dung giữa người sử dụng</UICLVConfigCacheEnableRadioBoxInput>
       <UICLVContentByQueryLabel>Nội dung qua truy vấn</UICLVContentByQueryLabel>
       <UICLVConfigWorkspaceFormSelectBox>Workspace</UICLVConfigWorkspaceFormSelectBox>

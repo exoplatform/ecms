@@ -114,7 +114,7 @@
    	  <UISCVPrintPageParameter>with</UISCVPrintPageParameter>
    	  <UISCVConfigPrintPageFormInputSet>Show in page</UISCVConfigPrintPageFormInputSet>
 	  <LockStatus>Lock</LockStatus>
-	  <CacheManagement>Cache Management</CacheManagement>
+	  <CacheManagement>Contents Visibility</CacheManagement>
 	  <UISCVCacheRadioBox>Share contents between users</UISCVCacheRadioBox>
     </label>
     <help>
@@ -130,8 +130,8 @@
   
   <UISCVCacheRadioBox>
   	<label>
-	  <Enable>Enabled</Enable>
-	  <Disable>Disabled</Disable>
+	    <Enable>Restricted by Authentication</Enable>
+      <Disable>Restricted by User roles</Disable>
   	</label>
   </UISCVCacheRadioBox>  
 </bundle>

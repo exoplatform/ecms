@@ -136,8 +136,8 @@
 	  <UICLVConfigshowSCVWithStringInput>avec</UICLVConfigshowSCVWithStringInput>
    	  <UICLVConfigTargetPageFormInputSet>Afficher dans la page</UICLVConfigTargetPageFormInputSet>
       <content-not-found>Le contenu n'a pas été trouvé</content-not-found>
-      <UICLVConfigCacheManagementLabel>Gestion de cache</UICLVConfigCacheManagementLabel>
-      <UICLVConfigCacheEnableRadioBoxInput>Contenus partagés entre utilisateurs</UICLVConfigCacheEnableRadioBoxInput>
+      <UICLVConfigCacheManagementLabel>Contenu visibilité</UICLVConfigCacheManagementLabel>
+      <UICLVConfigCacheEnableRadioBoxInput>Partager les contenus entre les utilisateurs</UICLVConfigCacheEnableRadioBoxInput>
       <UICLVContentByQueryLabel>Contenu par requête</UICLVContentByQueryLabel>
       <UICLVConfigWorkspaceFormSelectBox>Workspace</UICLVConfigWorkspaceFormSelectBox>
       <UICLVConfigContentByQueryTextArea>par requête</UICLVConfigContentByQueryTextArea>
