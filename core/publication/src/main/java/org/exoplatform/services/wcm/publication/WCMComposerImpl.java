@@ -299,13 +299,18 @@ public class WCMComposerImpl implements WCMComposer, Startable {
     String language = filters.get(FILTER_LANGUAGE);
     String recursive = filters.get(FILTER_RECURSIVE);
     String primaryType = filters.get(FILTER_PRIMARY_TYPE);
+    String visibility = filters.get(FILTER_VISIBILITY);
     long offset = (filters.get(FILTER_OFFSET)!=null)?new Long(filters.get(FILTER_OFFSET)):0;
     long totalSize = (filters.get(FILTER_TOTAL)!=null)?new Long(filters.get(FILTER_TOTAL)):0;
     
     String remoteUser = null;
-    try {
-      remoteUser = Util.getPortalRequestContext().getRemoteUser();
-    } catch (Exception e) {}
+    if (WCMComposer.VISIBILITY_PUBLIC.equals(visibility)) {
+      remoteUser = "##PUBLIC##VISIBILITY";
+    } else {
+      try {
+        remoteUser = Util.getPortalRequestContext().getRemoteUser();
+      } catch (Exception e) {}
+    }
 
     if (MODE_EDIT.equals(mode) && "publication:liveDate".equals(orderBy)) {
       orderBy = "exo:dateModified";
@@ -328,6 +333,10 @@ public class WCMComposerImpl implements WCMComposer, Startable {
       SessionProvider systemProvider = WCMCoreUtils.getSystemSessionProvider();
       nodeIterator = getViewableContents(workspace, path, filters, systemProvider, false);
       totalSize = nodeIterator.getSize();
+    }
+
+    if (WCMComposer.VISIBILITY_PUBLIC.equals(visibility) && MODE_LIVE.equals(mode) && remoteUser != null) {
+      sessionProvider = aclSessionProviderService.getACLSessionProvider(getAnyUserACL());
     }
 
     nodeIterator = getViewableContents(workspace, path, filters, sessionProvider, true);
