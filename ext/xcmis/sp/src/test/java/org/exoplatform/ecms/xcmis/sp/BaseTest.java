@@ -31,11 +31,26 @@ import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.security.Identity;
+import org.xcmis.spi.CmisConstants;
 import org.xcmis.spi.CmisRegistry;
+import org.xcmis.spi.ContentStream;
+import org.xcmis.spi.DocumentData;
+import org.xcmis.spi.FolderData;
 import org.xcmis.spi.ObjectData;
 import org.xcmis.spi.model.Property;
+import org.xcmis.spi.model.PropertyDefinition;
+import org.xcmis.spi.model.TypeDefinition;
+import org.xcmis.spi.model.VersioningState;
+import org.xcmis.spi.model.impl.StringProperty;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.io.StringWriter;
+import java.io.Writer;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -57,11 +72,15 @@ public abstract class BaseTest extends TestCase
 
    protected ThreadLocalSessionProviderService sessionProviderService;
 
-   // protected StorageImpl storage;
-
    protected JcrCmisRegistry registry;
 
    private volatile static boolean shoutDown;
+   
+   // For the StorageTest and QueryUsecasesTest
+   protected StorageImpl storageA;
+
+   // For the StorageTest and QueryUsecasesTest
+   protected TypeDefinition folderTypeDefinition;
 
    @Override
    public void setUp() throws Exception
@@ -196,6 +215,54 @@ public abstract class BaseTest extends TestCase
       Map<String, Property<?>> properties = new HashMap<String, Property<?>>();
       properties.put(property.getId(), property);
       object.setProperties(properties);
+   }
+   
+   protected DocumentData createDocument(FolderData folder, String name, String typeId, ContentStream content,
+         VersioningState versioningState) throws Exception
+   {
+      TypeDefinition documentTypeDefinition = storageA.getTypeDefinition("cmis:document", true);
+      PropertyDefinition<?> def = PropertyDefinitions.getPropertyDefinition("cmis:document", CmisConstants.NAME);
+      Map<String, Property<?>> properties = new HashMap<String, Property<?>>();
+      properties.put(CmisConstants.NAME, new StringProperty(def.getId(), def.getQueryName(), def.getLocalName(), def
+         .getDisplayName(), name));
+
+      DocumentData document =
+         storageA.createDocument(folder, documentTypeDefinition, properties, content, null, null,
+            versioningState == null ? VersioningState.MAJOR : versioningState);
+      return (DocumentData)document;
+   }
+   
+   protected FolderData createFolder(FolderData folder, String name, String typeId) throws Exception
+   {
+      PropertyDefinition<?> def = PropertyDefinitions.getPropertyDefinition("cmis:folder", CmisConstants.NAME);
+      Map<String, Property<?>> properties = new HashMap<String, Property<?>>();
+      properties.put(CmisConstants.NAME, new StringProperty(def.getId(), def.getQueryName(), def.getLocalName(), def
+         .getDisplayName(), name));
+
+      FolderData newFolder = storageA.createFolder(folder, folderTypeDefinition, properties, null, null);
+      //      newFolder.setName(name);
+      return (FolderData)newFolder;
+   }
+   
+   protected String convertStreamToString(InputStream is) throws IOException {
+      if (is != null) {
+         Writer writer = new StringWriter();
+      
+         char[] buffer = new char[1024];
+         try {
+             Reader reader = new BufferedReader(
+                     new InputStreamReader(is, "UTF-8"));
+             int n;
+             while ((n = reader.read(buffer)) != -1) {
+                 writer.write(buffer, 0, n);
+             }
+         } finally {
+             is.close();
+         }
+         return writer.toString();
+      } else {        
+         return "";
+      }
    }
 
 }

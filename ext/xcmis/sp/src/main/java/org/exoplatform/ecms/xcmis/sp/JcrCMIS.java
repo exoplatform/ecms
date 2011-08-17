@@ -96,7 +96,19 @@ public interface JcrCMIS extends CmisConstants
    String JCR_MIMETYPE = "jcr:mimeType";
 
    String JCR_ENCODING = "jcr:encoding";
+   
+   String JCR_PRIMARYTYPE = "jcr:primaryType";
+   
+   String JCR_MIXINTYPES = "jcr:mixinTypes";
 
    String EXO_PRIVILEGABLE = "exo:privilegeable";
+
+   String JCR_MULTIFILING_PROPERTY_PREFIX = "cmisMultifilingObjectId_";
+
+   String JCR_XCMIS_LINKEDFILE = "xcmis:linkedFile";
+   
+   // CMIS stuff
+   
+   String ID_SEPARATOR = "_";
 
 }

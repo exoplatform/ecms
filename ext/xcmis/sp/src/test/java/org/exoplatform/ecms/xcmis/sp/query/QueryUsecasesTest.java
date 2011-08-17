@@ -17,6 +17,7 @@
 
 package org.exoplatform.ecms.xcmis.sp.query;
 
+import org.exoplatform.ecms.xcmis.sp.DocumentVersion;
 import org.exoplatform.ecms.xcmis.sp.StorageImpl;
 import org.xcmis.spi.BaseContentStream;
 import org.xcmis.spi.CmisConstants;
@@ -24,6 +25,7 @@ import org.xcmis.spi.ContentStream;
 import org.xcmis.spi.DocumentData;
 import org.xcmis.spi.FolderData;
 import org.xcmis.spi.ItemsIterator;
+import org.xcmis.spi.ObjectData;
 import org.xcmis.spi.model.CapabilityJoin;
 import org.xcmis.spi.model.CapabilityQuery;
 import org.xcmis.spi.model.RepositoryCapabilities;
@@ -40,7 +42,9 @@ import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by The eXo Platform SAS. <br/>
@@ -53,10 +57,6 @@ public class QueryUsecasesTest extends BaseQueryTest
 {
 
    private FolderData testRoot;
-
-   private StorageImpl storageA;
-
-   private TypeDefinition folderTypeDefinition;
 
    private TypeDefinition nasaDocumentTypeDefinition;
 
@@ -73,7 +73,373 @@ public class QueryUsecasesTest extends BaseQueryTest
       FolderData rootFolder = (FolderData)storageA.getObjectById(storageA.getRepositoryInfo().getRootFolderId());
       testRoot =
          createFolder(storageA, rootFolder, "QueryUsecasesTest", storageA.getTypeDefinition("cmis:folder", true));
+   }
+   
+   /**
+    * @see org.xcmis.sp.BaseTest#tearDown()
+    */
+   protected void tearDown() throws Exception
+   {
+      storageA.deleteTree(testRoot, true, UnfileObject.DELETE, true);
+      super.tearDown();
+   }
 
+   public void testQueryWithChangedContentAndFullSearch() throws Exception
+   {
+      // Search for no documents
+      StringBuffer sql = new StringBuffer();
+      sql.append("SELECT * ");
+      sql.append("FROM ");
+      sql.append("cmis:document");
+      Query query = new Query(sql.toString(), true);
+      ItemsIterator<Result> result = storageA.query(query);
+      assertEquals(0, result.size());
+
+      
+      FolderData rootFolder = (FolderData)storageA.getObjectById(storageA.getRepositoryInfo().getRootFolderId());
+      
+      ContentStream cs1 =
+         new BaseContentStream("hello".getBytes(), null, new MimeType("text", "plain"));
+      DocumentData document = createDocument(rootFolder, "testQueryOnLatest", "cmis:document", cs1, null);
+      
+      assertTrue(document.getObjectId().contains("_"));
+      
+      // multifiling document
+      FolderData folder1 = createFolder(rootFolder, "deleteMultifiledTest01", "cmis:folder");
+      FolderData folder2 = createFolder(rootFolder, "deleteMultifiledTest02", "cmis:folder");
+      folder1.addObject(document);
+      folder2.addObject(document);
+      
+      
+      ContentStream cs11 =
+         new BaseContentStream("changed".getBytes(), null, new MimeType("text", "plain"));
+      document.setContentStream(cs11);
+      
+    // search for FIRST document with full text search
+    sql = new StringBuffer();
+    sql.append("SELECT * ");
+    sql.append("FROM ");
+    sql.append("cmis:document ");
+    sql.append("WHERE ");
+    sql.append("CONTAINS(\"changed\")");
+    query = new Query(sql.toString(), true);
+    result = storageA.query(query);
+    assertEquals(1, result.size());
+    // check results
+    checkResult(storageA, result, new DocumentData[]{document});
+      
+      
+    ItemsIterator<ObjectData> children = ((FolderData)storageA.getObjectById(folder1.getObjectId())).getChildren(null);
+    int i = 0;
+    while (children.hasNext()) {
+      children.next();
+      i++;
+    }
+    assertEquals(1, i);
+    
+    children = ((FolderData)storageA.getObjectById(folder1.getObjectId())).getChildren(null);
+    ObjectData childDocument = children.next();
+    ContentStream contentStream = childDocument.getContentStream(null);
+    String content = convertStreamToString(contentStream.getStream());
+    
+    assertEquals("changed" , content);
+    
+    children = ((FolderData)storageA.getObjectById(folder2.getObjectId())).getChildren(null);
+    i = 0;
+    while (children.hasNext()) {
+      children.next();
+      i++;
+    }
+    assertEquals(1, i);
+    
+    children = ((FolderData)storageA.getObjectById(folder2.getObjectId())).getChildren(null);
+    childDocument = children.next();
+    contentStream = childDocument.getContentStream(null);
+    content = convertStreamToString(contentStream.getStream());
+    assertEquals("changed" , content);
+    
+    
+     sql = new StringBuffer();
+     sql.append("SELECT * ");
+     sql.append("FROM ");
+     sql.append("cmis:document ");
+     sql.append("WHERE ");
+     sql.append("CONTAINS(\"hello\")");
+     query = new Query(sql.toString(), true);
+     result = storageA.query(query);
+     assertEquals(0, result.size());
+   
+     
+     sql = new StringBuffer();
+     sql.append("SELECT * ");
+     sql.append("FROM ");
+     sql.append("cmis:document ");
+     sql.append("WHERE ");
+     sql.append("IN_FOLDER( '" + folder1.getObjectId() + "')");
+     query = new Query(sql.toString(), true);
+     result = storageA.query(query);
+     assertEquals(1, result.size());
+     
+     sql = new StringBuffer();
+     sql.append("SELECT * ");
+     sql.append("FROM ");
+     sql.append("cmis:document ");
+     sql.append("WHERE ");
+     sql.append("IN_FOLDER( '" + folder2.getObjectId() + "')");
+     query = new Query(sql.toString(), true);
+     result = storageA.query(query);
+     assertEquals(1, result.size());
+     
+     sql = new StringBuffer();
+     sql.append("SELECT * ");
+     sql.append("FROM ");
+     sql.append("cmis:document ");
+     sql.append("WHERE ");
+     sql.append("IN_FOLDER( '" + rootFolder.getObjectId() + "')");
+     query = new Query(sql.toString(), true);
+     result = storageA.query(query);
+     assertEquals(1, result.size());
+      
+  
+      DocumentData pwc = document.checkout();
+      ContentStream cs2 =
+         new BaseContentStream("bye".getBytes(), null, new MimeType("text", "plain"));
+      DocumentData checkin = pwc.checkin(true, "my comment", null, cs2, null, null);
+      
+      assertTrue(checkin.getObjectId().contains("_"));
+      
+      // search for FIRST document with full text search
+      sql = new StringBuffer();
+      sql.append("SELECT * ");
+      sql.append("FROM ");
+      sql.append("cmis:document ");
+      sql.append("WHERE ");
+      sql.append("CONTAINS(\"changed\")");
+      query = new Query(sql.toString(), true);
+      result = storageA.query(query);
+      assertEquals(1, result.size());
+      // check results
+      checkResult(storageA, result, new DocumentData[]{document});
+
+      
+      // search for CHECKIN document with full text search
+      sql = new StringBuffer();
+      sql.append("SELECT * ");
+      sql.append("FROM ");
+      sql.append("cmis:document ");
+      sql.append("WHERE ");
+      sql.append("CONTAINS(\"bye\")");
+      query = new Query(sql.toString(), true);
+      result = storageA.query(query);
+      assertEquals(1, result.size());
+      // check results
+      checkResult(storageA, result, new DocumentData[]{checkin});
+      
+      
+      // search for 
+      sql = new StringBuffer();
+      sql.append("SELECT * ");
+      sql.append("FROM ");
+      sql.append("cmis:document ");
+      sql.append("WHERE ");
+      sql.append("cmis:objectId = '" + checkin.getObjectId() + "'");
+      query = new Query(sql.toString(), true);
+      result = storageA.query(query);
+      assertEquals(1, result.size());
+      // check results
+      checkResult(storageA, result, new DocumentData[]{checkin});
+   }
+
+   public void testDoesTheIndexEmpty() throws Exception
+   {
+      // Search for no documents
+      StringBuffer sql = new StringBuffer();
+      sql.append("SELECT * ");
+      sql.append("FROM ");
+      sql.append("cmis:document");
+      Query query = new Query(sql.toString(), true);
+      ItemsIterator<Result> result = storageA.query(query);
+      // if the index not empty use: result.next().getObjectId() to see the id
+      assertEquals(0, result.size());
+   }
+   
+   public void testQueryOnCreatedDocument() throws Exception
+   {
+      // Search for no documents
+      StringBuffer sql = new StringBuffer();
+      sql.append("SELECT * ");
+      sql.append("FROM ");
+      sql.append("cmis:document");
+      Query query = new Query(sql.toString(), true);
+      ItemsIterator<Result> result = storageA.query(query);
+      assertEquals(0, result.size());
+      
+      FolderData rootFolder = (FolderData)storageA.getObjectById(storageA.getRepositoryInfo().getRootFolderId());
+      DocumentData document = createDocument(rootFolder, "testQueryOnCreatedDocument", "cmis:document", null, null);
+      
+      // search for documents (version 1 and the latest one)
+      sql = new StringBuffer();
+      sql.append("SELECT * ");
+      sql.append("FROM ");
+      sql.append("cmis:document");
+      query = new Query(sql.toString(), true);
+      result = storageA.query(query);
+      assertEquals(1, result.size());
+      // check results
+      checkResult(storageA, result, new DocumentData[]{document});
+   }
+   
+   public void testQueryOnCheckedIn() throws Exception
+   {
+      // Search for no documents
+      StringBuffer sql = new StringBuffer();
+      sql.append("SELECT * ");
+      sql.append("FROM ");
+      sql.append("cmis:document");
+      Query query = new Query(sql.toString(), true);
+      ItemsIterator<Result> result = storageA.query(query);
+      assertEquals(0, result.size());
+
+      // checkout/checkin
+      FolderData rootFolder = (FolderData)storageA.getObjectById(storageA.getRepositoryInfo().getRootFolderId());
+      DocumentData document = createDocument(rootFolder, "testQueryOnCheckedIn", "cmis:document", null, null);
+      DocumentData pwc = document.checkout();
+      DocumentData checkin = pwc.checkin(true, "", null, null, null, null);
+      
+      // search for documents (version 1 and the latest one)
+      sql = new StringBuffer();
+      sql.append("SELECT * ");
+      sql.append("FROM ");
+      sql.append("cmis:document");
+      query = new Query(sql.toString(), true);
+      result = storageA.query(query);
+      assertEquals(2, result.size());
+      // check results
+      checkResult(storageA, result, new DocumentData[]{document, checkin});
+   }
+   
+   public void testQueryOnLatest() throws Exception
+   {
+      // Search for no documents
+      StringBuffer sql = new StringBuffer();
+      sql.append("SELECT * ");
+      sql.append("FROM ");
+      sql.append("cmis:document");
+      Query query = new Query(sql.toString(), true);
+      ItemsIterator<Result> result = storageA.query(query);
+      assertEquals(0, result.size());
+
+      // checkout/checkin
+      FolderData rootFolder = (FolderData)storageA.getObjectById(storageA.getRepositoryInfo().getRootFolderId());
+      ContentStream cs1 =
+         new BaseContentStream("hello".getBytes(), null, new MimeType("text", "plain"));
+      DocumentData document = createDocument(rootFolder, "testQueryOnLatest", "cmis:document", cs1, null);
+      
+      DocumentData pwc = document.checkout();
+      ContentStream cs2 =
+         new BaseContentStream("bye".getBytes(), null, new MimeType("text", "plain"));
+      DocumentData checkin = pwc.checkin(true, "my comment", null, cs2, null, null);
+            
+      // search for document with latest
+      sql = new StringBuffer();
+      sql.append("SELECT * ");
+      sql.append("FROM ");
+      sql.append("cmis:document");
+      sql.append(" WHERE ");
+      sql.append("cmis:isLatestVersion" + " = true");
+      query = new Query(sql.toString(), true);
+      result = storageA.query(query);
+      assertEquals(1, result.size());
+      // check results
+      checkResult(storageA, result, new DocumentData[]{checkin});
+   }
+   
+   
+   public void testDeleteVersion() throws Exception
+   {
+      FolderData folder1 = createFolder(testRoot, "multifiledChildFolderTest01", "cmis:folder");
+      
+      // SEARCH TEST
+      String queryString = "SELECT * FROM cmis:document WHERE IN_FOLDER('" + folder1.getObjectId() + "')";
+      Query query = new Query(queryString, true);
+      ItemsIterator<Result> result = storageA.query(query);
+      assertEquals(0, result.size());
+      
+      DocumentData document =
+         createDocument(folder1, "checkinTest", "cmis:document", new BaseContentStream("checkin test".getBytes(),
+            null, new MimeType("text", "plain")), null);
+
+      // SEARCH TEST
+      queryString = "SELECT * FROM cmis:document WHERE IN_FOLDER('" + folder1.getObjectId() + "')";
+      query = new Query(queryString, true);
+      result = storageA.query(query);
+      assertEquals(1, result.size());
+      
+      
+      // FIRST VERSION ============================
+      
+      // CHECKOUT
+      DocumentData pwc = document.checkout();
+      
+      // CHECKIN
+      ContentStream cs =
+         new BaseContentStream("checkin test. content updated".getBytes(), null, new MimeType("text", "plain"));
+      DocumentData checkinDocument1 = pwc.checkin(true, "my comment", null, cs, null, null);
+      String checkinId1 = checkinDocument1.getObjectId();
+      
+      // SEARCH TEST
+      queryString = "SELECT * FROM cmis:document WHERE IN_FOLDER('" + folder1.getObjectId() + "')";
+      query = new Query(queryString, true);
+      result = storageA.query(query);
+      assertEquals(2, result.size());
+      
+      
+      // SECOND VERSION ============================
+      
+      // CHECKOUT
+      pwc = checkinDocument1.checkout();
+      
+      // CHECKIN
+      cs =
+         new BaseContentStream("checkin test. content updated".getBytes(), null, new MimeType("text", "plain"));
+      DocumentData checkinDocument2 = pwc.checkin(true, "my comment", null, cs, null, null);
+      String checkinId2 = checkinDocument2.getObjectId();
+      
+      // ============================
+
+      // SEARCH TEST
+      queryString = "SELECT * FROM cmis:document WHERE IN_FOLDER('" + folder1.getObjectId() + "')";
+      query = new Query(queryString, true);
+      result = storageA.query(query);
+      assertEquals(3, result.size());
+       
+      // DELETE VERSION
+      while(result.hasNext()) {
+         String id = result.next().getObjectId();
+         ObjectData objectData = storageA.getObjectById(id);
+         if (objectData instanceof DocumentVersion) {
+            DocumentVersion dd = (DocumentVersion)objectData;
+            if ("1".intern().equalsIgnoreCase(dd.getVersionLabel())) {
+               dd.delete();
+            }
+         }
+      }
+      
+      // SEARCH TEST
+      queryString = "SELECT * FROM cmis:document WHERE IN_FOLDER('" + folder1.getObjectId() + "')";
+      query = new Query(queryString, true);
+      result = storageA.query(query);
+      assertEquals(2, result.size());
+      
+      // ItemsIterator<Result> objectId's to Set<String>
+      Set<String> ss = new HashSet<String>();
+      while (result.hasNext()) {
+         Result result2 = (Result) result.next();
+         ss.add(result2.getObjectId());
+      }
+       
+      assertTrue("Should be the First checkin version in the search" , ss.contains(checkinId1));
+      assertTrue("Should be the Second checkin version in the search", ss.contains(checkinId2));
    }
 
    /**
@@ -1030,6 +1396,54 @@ public class QueryUsecasesTest extends BaseQueryTest
    }
    
    /**
+    * Test search on versioned document content.
+    * 
+    * Query : Select all documents that contains "checkin" word.
+    * <p>
+    * Expected result: checkinDocument.
+    * 
+    * Query : Select all documents that contains "hello" word.
+    * <p>
+    * Expected result: doc1.
+    * 
+    * @throws Exception
+    *            if an unexpected error occurs
+    */
+   public void testSimpleFulltextOnCheckedIn() throws Exception
+   {
+      FolderData folder = createFolder(storageA, testRoot, "testSimpleFulltextOnCheckedIn_Folder", folderTypeDefinition);
+
+      // will be search on this doc 
+      ContentStream cs1 =
+         new BaseContentStream("hello".getBytes(), null, new MimeType("text", "plain"));
+      DocumentData doc1 = createDocument(folder, "testSimpleFulltextOnCheckedIn_Document", "cmis:document", cs1, null);
+      
+      // fake doc1
+      ContentStream cs2 =
+         new BaseContentStream("sorry".getBytes(), null, new MimeType("text", "plain"));
+      DocumentData doc2 = createDocument(folder, "testSimpleFulltextOnCheckedIn_Document2", "cmis:document", cs2, null);
+      
+      // CHECKOUT
+      DocumentData pwc = doc1.checkout();
+      // CHECKIN
+      ContentStream cs =
+         new BaseContentStream("checkin test. content updated".getBytes(), null, new MimeType("text", "plain"));
+      DocumentData checkinDocument = pwc.checkin(true, "my comment", null, cs, null, null);
+      
+      // test search on latest version
+      String statement = "SELECT * FROM cmis:document WHERE CONTAINS(\"checkin\")";
+      Query query = new Query(statement, true);
+      ItemsIterator<Result> result = storageA.query(query);
+      checkResult(storageA, result, new DocumentData[]{checkinDocument});
+      
+      // test seardh on the first version
+      statement = "SELECT * FROM cmis:document WHERE CONTAINS(\"hello\")";
+      query = new Query(statement, true);
+      result = storageA.query(query);
+      checkResult(storageA, result, new DocumentData[]{doc1});
+   }
+   
+   /**
     * Same as testSimpleFulltext.
     * @throws Exception
     */
@@ -1304,18 +1718,6 @@ public class QueryUsecasesTest extends BaseQueryTest
 
       assertEquals(1, result.size());
       checkResult(storageA, result, new DocumentData[]{doc3});
-
-   }
-
-   /**
-    * @see org.xcmis.sp.BaseTest#tearDown()
-    */
-   @Override
-   protected void tearDown() throws Exception
-   {
-
-      storageA.deleteTree(testRoot, true, UnfileObject.DELETE, true);
-      super.tearDown();
 
    }
 
