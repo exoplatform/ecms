@@ -16,11 +16,13 @@
  */
 package org.exoplatform.wcm.webui.selector.content;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.ResourceBundle;
 
 import javax.jcr.RepositoryException;
 import javax.jcr.query.InvalidQueryException;
@@ -36,6 +38,7 @@ import org.exoplatform.services.wcm.search.SiteSearchService;
 import org.exoplatform.services.wcm.search.base.AbstractPageList;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.web.application.ApplicationMessage;
+import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIApplication;
@@ -295,6 +298,7 @@ public class UIContentSearchForm extends UIForm {
       QueryCriteria qCriteria = uiWCSearch.getInitialQueryCriteria(siteName);
       AbstractPageList<ResultNode> pagResult = null;
 
+      ResourceBundle resourceBundle = WebuiRequestContext.getCurrentInstance().getApplicationResourceBundle();
       try {
         if (typeSearch.equals(UIContentBrowsePanel.WEBCONTENT)
             || typeSearch.equals(UIContentBrowsePanel.MEDIA)) {
@@ -320,15 +324,30 @@ public class UIContentSearchForm extends UIForm {
           } else if (UIContentSearchForm.TIME_OPTION.equals(radioValue)) {
             UIFormDateTimeInput startDateInput = uiWCSearch.getUIFormDateTimeInput(UIContentSearchForm.START_TIME);
             UIFormDateTimeInput endDateInput = uiWCSearch.getUIFormDateTimeInput(UIContentSearchForm.END_TIME);
+            
+            DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+            dateFormat.setLenient(false);
+            
             try {
-              new SimpleDateFormat("MM/dd/yyyy HH:mm:ss").parse(startDateInput.getValue());
+              dateFormat.parse(startDateInput.getValue());
             } catch (ParseException e) {
               uiApp.addMessage(new ApplicationMessage("UIContentSearchForm.msg.invalid-format",
-                                                      null,
+                                                      new Object[] { resourceBundle.getString("UIContentSearchForm.title.FromDate") },
                                                       ApplicationMessage.WARNING));
               event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
               return;
             }
+            
+            try {
+              dateFormat.parse(endDateInput.getValue());
+            } catch (ParseException e) {
+              uiApp.addMessage(new ApplicationMessage("UIContentSearchForm.msg.invalid-format",
+                                                      new Object[] { resourceBundle.getString("UIContentSearchForm.title.ToDate") },
+                                                      ApplicationMessage.WARNING));
+              event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+              return;
+            }
+            
             Calendar startDate = startDateInput.getCalendar();
             Calendar endDate = endDateInput.getCalendar();
             if (uiWCSearch.haveEmptyField(uiApp, event, startDateInput.getValue()))
