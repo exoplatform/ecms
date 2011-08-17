@@ -74,6 +74,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import javax.jcr.InvalidItemStateException;
 import javax.jcr.ItemExistsException;
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
@@ -122,9 +123,19 @@ class JcrNodeEntry
                   continue; // TODO temporary. Be sure it fixed in JCR back-end.
                }
 
-               if (node.isNodeType("nt:linkedFile"))
+               if (node.isNodeType(JcrCMIS.JCR_XCMIS_LINKEDFILE))
                {
-                  node = node.getProperty("jcr:content").getNode();
+                  javax.jcr.Property propertyWithId = null;
+                  for (PropertyIterator iter = node.getProperties(); iter.hasNext() && propertyWithId == null;) 
+                  {
+                     javax.jcr.Property nextProperty = iter.nextProperty();
+                     // iterate while don't get the property with CMIS Object Id in the name.
+                     // xcmis:linkedFile extends nt:base which has two properties by default: jcr:primaryType and jcr:mixinTypes
+                     if (!nextProperty.getName().equalsIgnoreCase(JcrCMIS.JCR_PRIMARYTYPE) && !nextProperty.getName().equalsIgnoreCase(JcrCMIS.JCR_MIXINTYPES)) {
+                        propertyWithId = nextProperty;
+                     }
+                  }
+                  node = propertyWithId.getNode();
                   try
                   {
                      next = storage.fromNode(node);
@@ -200,6 +211,8 @@ class JcrNodeEntry
 
    protected BaseJcrStorage storage;
 
+   private String id = null;
+
    /**
     * @param node back-end JCR node
     * @param storage CMIS storage
@@ -231,14 +244,30 @@ class JcrNodeEntry
 
    String getId()
    {
-      try
-      {
-         return ((ExtendedNode)node).getIdentifier();
+      if (id != null)
+         return id;
+      
+      if (StorageImpl.PWC_LABEL.equalsIgnoreCase(getString(CmisConstants.VERSION_LABEL))) {
+         try {
+            id = ((ExtendedNode)node).getIdentifier();
+         } catch (RepositoryException e) {
+            throw new CmisRuntimeException("Unable get objects's id ." + e.getMessage(), e);
+         }
+      } else {
+         // not PWC
+         id = getString(CmisConstants.OBJECT_ID);
       }
-      catch (RepositoryException re)
+      
+      if (id == null)
       {
-         throw new CmisRuntimeException("Unable get objects's id ." + re.getMessage(), re);
+         // if not PWC and not Document (with stored objectId)
+         try {
+             id = ((ExtendedNode)node).getIdentifier();
+          } catch (RepositoryException e) {
+             throw new CmisRuntimeException("Unable get objects's id ." + e.getMessage(), e);
+          }
       }
+      return id;
    }
 
    String getName()
@@ -1082,8 +1111,8 @@ class JcrNodeEntry
       {
          Session session = node.getSession();
          Node entryNode = entry.getNode();
-         Node link = node.addNode(entry.getName(), "nt:linkedFile");
-         link.setProperty("jcr:content", entryNode);
+         Node link = node.addNode(entry.getName(), JcrCMIS.JCR_XCMIS_LINKEDFILE);
+         link.setProperty(JcrCMIS.JCR_MULTIFILING_PROPERTY_PREFIX + entryNode.getUUID(), entryNode);
          session.save();
       }
       catch (RepositoryException re)
@@ -1107,7 +1136,7 @@ class JcrNodeEntry
             for (PropertyIterator references = entryNode.getReferences(); references.hasNext();)
             {
                Node next = references.nextProperty().getParent();
-               if (next.isNodeType("nt:linkedFile"))
+               if (next.isNodeType(JcrCMIS.JCR_XCMIS_LINKEDFILE))
                {
                   link = next;
                   break; // Get a first one which met.
@@ -1126,12 +1155,12 @@ class JcrNodeEntry
             else
             {
                // Be sure we have have place to put real object.
-               // If not found any nt:linkedFile then it minds
+               // If not found any xcmis:linkedFile then it minds
                // object is filed in one folder only. In this
                // case this method should not be called.
                // org.xcmis.spi.Connection.removeObjectFromFolder(String, String)
                // must be care about this. Since we don't support
-               // 'unfiling' throws eception.
+               // 'unfiling' throws exception.
                throw new CmisRuntimeException("Unable remove object from last folder in which it is filed.");
             }
             // Move object node from current folder.
@@ -1143,7 +1172,7 @@ class JcrNodeEntry
             for (PropertyIterator references = entryNode.getReferences(); references.hasNext();)
             {
                Node next = references.nextProperty().getParent();
-               if (next.isNodeType("nt:linkedFile")
+               if (next.isNodeType(JcrCMIS.JCR_XCMIS_LINKEDFILE)
                   && ((ExtendedNode)next.getParent()).getIdentifier().equals(((ExtendedNode)node).getIdentifier()))
                {
                   next.remove();
@@ -1189,7 +1218,7 @@ class JcrNodeEntry
             for (PropertyIterator iterator = node.getReferences(); iterator.hasNext();)
             {
                Node refer = iterator.nextProperty().getParent();
-               if (refer.isNodeType("nt:linkedFile"))
+               if (refer.isNodeType(JcrCMIS.JCR_XCMIS_LINKEDFILE))
                {
                   Node parent = refer.getParent();
                   try
@@ -1674,11 +1703,18 @@ class JcrNodeEntry
                   LOG.debug("remove document " + path);
 
                // Check is Document node has any references.
-               // It minds Document is multfiled, need remove all links first.
-               for (PropertyIterator references = node.getReferences(); references.hasNext();)
+               // It minds Document is multifiled, need remove all links first.
+               PropertyIterator references = node.getReferences();
+               while(references.hasNext())
                {
-                  Node next = references.nextProperty().getParent();
-                  if (next.isNodeType("nt:linkedFile"))
+                  javax.jcr.Property nextProperty = references.nextProperty();
+                  Node next = null;
+                  try {
+                     next = nextProperty.getParent();
+                  } catch (InvalidItemStateException e) {
+                     // there is no item, the node was removed.
+                  }
+                  if (next != null && next.isNodeType(JcrCMIS.JCR_XCMIS_LINKEDFILE))
                   {
                      next.remove();
                   }

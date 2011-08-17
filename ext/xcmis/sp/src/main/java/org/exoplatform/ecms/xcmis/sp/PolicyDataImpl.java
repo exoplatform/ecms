@@ -76,7 +76,7 @@ class PolicyDataImpl extends BaseObjectData implements PolicyData
     * {@inheritDoc}
     */
    @Override
-   protected void delete() throws StorageException
+   public void delete() throws StorageException
    {
       entry.delete();
    }

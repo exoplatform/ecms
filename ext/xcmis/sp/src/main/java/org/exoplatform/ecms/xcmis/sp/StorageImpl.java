@@ -268,6 +268,7 @@ public class StorageImpl extends BaseJcrStorage implements Storage
       documentEntry.setValue(CmisConstants.CREATED_BY, session.getUserID());
       documentEntry.setValue(CmisConstants.CREATION_DATE, Calendar.getInstance());
       documentEntry.setValue(CmisConstants.VERSION_SERIES_ID, documentEntry.getString(JcrCMIS.JCR_VERSION_HISTORY));
+      documentEntry.setValue(CmisConstants.OBJECT_ID, documentEntry.getString(JcrCMIS.JCR_VERSION_HISTORY) + JcrCMIS.ID_SEPARATOR + "1");
       documentEntry.setValue(CmisConstants.IS_LATEST_VERSION, true);
       documentEntry.setValue(CmisConstants.IS_MAJOR_VERSION, versioningState == VersioningState.MAJOR);
       // TODO : support for checked-out initial state
@@ -486,14 +487,42 @@ public class StorageImpl extends BaseJcrStorage implements Storage
    public void deleteObject(ObjectData object, boolean deleteAllVersions) throws UpdateConflictException,
       VersioningException, StorageException
    {
-      if (object.getBaseType() == BaseType.DOCUMENT && object.getTypeDefinition().isVersionable() && !deleteAllVersions)
-      {
-         // Throw exception to avoid unexpected removing data. Any way at the
-         // moment we are not able remove 'base version' of versionable node,
-         // so have not common behavior for removing just one version of document.
-         throw new VersioningException("Unable delete only specified version.");
+      Node node = ((BaseObjectData)object).entry.node;
+      Node parentNode = null;
+      try {
+         parentNode = node.getParent();
+      }  catch (RepositoryException  e) {
+         throw new CmisRuntimeException("Unable get parent. " + e.getMessage(), e);
       }
-      ((BaseObjectData)object).delete();
+      if (object.getBaseType() == BaseType.DOCUMENT && object.getTypeDefinition().isVersionable() && deleteAllVersions)
+      {
+         try
+         {
+            if (node.getParent() instanceof Version) {
+               // Delete version
+               Version version = (Version)node.getParent();
+               VersionHistory versionHistory = version.getContainingHistory();
+               DocumentDataImpl documentDataImpl = new DocumentDataImpl(((BaseObjectData)object).entry.storage.getEntry(versionHistory.getVersionableUUID()));
+               documentDataImpl.delete();
+            } else {
+               // Delete object
+               ((BaseObjectData)object).delete();  
+            }
+         }
+         catch (RepositoryException re)
+         {
+            throw new CmisRuntimeException("Unable get latest version of document. " + re.getMessage(), re);
+         }
+         catch (ObjectNotFoundException e)
+         {
+            throw new CmisRuntimeException("Unable get latest version of document. " + e.getMessage(), e);
+         }
+       } else if (object.getBaseType() == BaseType.DOCUMENT && !(parentNode instanceof Version) && !deleteAllVersions) {
+          // use deleteAllVersions=true to delete all versions of the document
+          throw new CmisRuntimeException("Unable to delete latest version at one.");
+       } else {
+          ((BaseObjectData)object).delete();
+       }
    }
 
    /**
@@ -522,7 +551,7 @@ public class StorageImpl extends BaseJcrStorage implements Storage
             // Will return list of items in tree which were not removed.
             o.delete();
          }
-         catch (Exception e)
+         catch (StorageException e)
          {
             if (LOG.isDebugEnabled())
             {
