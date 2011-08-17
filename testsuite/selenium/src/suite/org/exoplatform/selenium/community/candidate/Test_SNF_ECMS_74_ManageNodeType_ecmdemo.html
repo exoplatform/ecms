@@ -113,7 +113,7 @@
 </tr>
 <tr>
 	<td>pause</td>
-	<td>10000</td>
+	<td>1000</td>
 	<td></td>
 </tr>
 <tr>
@@ -143,12 +143,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//form[@id='UINodeTypeForm']/div[3]/div[1]/div[1]/div/div/div/div[9]/table/tbody/tr/td/div[1]/div/div/div</td>
+	<td>link=Save</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//form[@id='UINodeTypeForm']/div[3]/div[1]/div[1]/div/div/div/div[9]/table/tbody/tr/td/div[1]/div/div/div</td>
+	<td>link=Save</td>
 	<td></td>
 </tr>
 <tr>
@@ -158,12 +158,22 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[3]/div/div[2]/div/div/div/div/div/div[3]/div/table/tbody/tr/td/div/div/div/div/a</td>
+	<td>//div[3]/div/div[2]/div/div/div/div/div/div[3]/div/a</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[3]/div/div[2]/div/div/div/div/div/div[3]/div/table/tbody/tr/td/div/div/div/div/a</td>
+	<td>//div[3]/div/div[2]/div/div/div/div/div/div[3]/div/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>-- Verify result find Node type</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>NodeTypeText</td>
 	<td></td>
 </tr>
 <tr>
@@ -172,13 +182,13 @@
 	<td>TieuHuongDuong</td>
 </tr>
 <tr>
-	<td>click</td>
-	<td>//form[@id='NodeTypeSearchForm']/div[2]/div[1]/div/div/div/div/table/tbody/tr/td[3]/a</td>
+	<td>waitForElementPresent</td>
+	<td>//form[@id='NodeTypeSearchForm']/div[2]/div[1]/div/div/div/div/table/tbody/tr/td[3]/a/div</td>
 	<td></td>
 </tr>
 <tr>
-	<td>echo</td>
-	<td>-- Verify result find Node type</td>
+	<td>click</td>
+	<td>//form[@id='NodeTypeSearchForm']/div[2]/div[1]/div/div/div/div/table/tbody/tr/td[3]/a/div</td>
 	<td></td>
 </tr>
 <tr>
