@@ -1670,6 +1670,8 @@
     <header>
       <name>#{word.name}</name>
       <description>وصف</description>
+	  <lifecycle>Life Cycle</lifecycle>	
+	  <triggeredaction>Triggered Action</triggeredaction>	
       <instanceOf>نموذج من نوع العمل</instanceOf>
       <action>إجراء</action>
     </header>
@@ -2897,10 +2899,35 @@
 		  <confirm-close>The changes you made will be lost if you close this form.</confirm-close>
 		  <confirm-navigate>The changes you made will be lost if you navigate away from this page.</confirm-navigate>
 	  </msg>
-  </UIDocumentForm>
-  <UploadFileMimeTypesValidator>
-    <msg>
-      <wrong-mimetype>Mime type {0} is not allowed for field {1}. Please upload another file</wrong-mimetype>
-    </msg>
-  </UploadFileMimeTypesValidator>
+  </UIDocumentForm> 
+  <lifecyclePhase>
+    <label>	
+  	<no>لا</no>
+	  <yes>نعم</yes>
+	  <true>صحيح</true>
+	  <false>خطأ</false>	
+	  <Electronic>إلكتروني</Electronic>
+	  <Paper>ورقة</Paper>
+	  <NONE>لا شيء</NONE>
+	  <CLASSIFIED>مُصنّف</CLASSIFIED>
+	  <UNCLASSIFIED>غير مُصنّف</UNCLASSIFIED>
+	  <NOCONTRACT>بدون عقد</NOCONTRACT>
+	  <true>صحيح</true>
+	  <false>خطأ</false>
+	  <one-minute>دقيقة واحدة</one-minute>
+	  <hourly>كل ساعة</hourly>
+	  <daily>يوميا</daily>
+	  <quarterly> فصليا (كُل ثلاثَة أشْهُر)</quarterly>
+	  <yearly>سنويا</yearly>
+	  <ten-years>عشر سنوات</ten-years>
+		
+	  <read>إجراء المستخدم</read>
+	  <schedule>جدولة</schedule>
+	  <node_added>إضافة محتوى</node_added>
+	  <node_removed>إزالة المحتوى</node_removed>
+	  <property_added>إضافة خاصية</property_added>
+	  <property_removed>إزالة الخاصية</property_removed>
+	  <property_changed>تعديل الملكية</property_changed>
+	</label>
+  </lifecyclePhase>						
 </bundle>

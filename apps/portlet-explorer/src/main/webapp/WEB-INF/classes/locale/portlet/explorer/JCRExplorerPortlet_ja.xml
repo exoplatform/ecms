@@ -1843,6 +1843,8 @@
     <header>
       <name>#{word.name}</name>
       <description>説明</description>
+	  <lifecycle>Life Cycle</lifecycle>	
+	  <triggeredaction>Triggered Action</triggeredaction>	
       <instanceOf>アクションタイプのインスタンス</instanceOf>
       <action>アクション</action>
     </header>
@@ -3319,10 +3321,28 @@
 		  <confirm-navigate>The changes you made will be lost if you navigate away from this page.</confirm-navigate>
 	  </msg>
   </UIDocumentForm>
-  <UploadFileMimeTypesValidator>
-    <msg>
-      <wrong-mimetype>Mime type {0} is not allowed for field {1}. Please upload another file</wrong-mimetype>
-    </msg>
-  </UploadFileMimeTypesValidator>
+  <lifecyclePhase>
+    <label>
+  	<no>いいえ</no>
+	  <yes>はい</yes>
+	  <true>True</true>
+	  <false>False</false>	
+	  <Electronic>電子</Electronic>
+	  <Paper>紙</Paper>
+	  <NONE>無し</NONE>
+	  <CLASSIFIED>機密</CLASSIFIED>
+	  <UNCLASSIFIED>非機密</UNCLASSIFIED>
+	  <NOCONTRACT>契約無し</NOCONTRACT>
+	  <true>True</true>
+	  <false>False</false>
+	  <one-minute>1分</one-minute>
+	  <hourly>毎時</hourly>
+	  <daily>毎日</daily>
+	  <quarterly>毎4半期</quarterly>
+	  <yearly>毎年</yearly>
+	  <ten-years>10年</ten-years>
+	  <read>ユーザアクション</read> 
+	</label>
+  </lifecyclePhase>
 </bundle>
 

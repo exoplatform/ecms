@@ -11,14 +11,15 @@
 <%
    UIPageIterator uiIterator = uicomponent.getChild(UIPageIterator.class) ;
    int totalPages = uiIterator.getAvailablePage();
+   StringBuilder sB;
 %>
 <div class="UIActionList" id="$uicomponent.id">
   <table class="UIGrid">
 	  <thead>
 	    <tr>
 	      <th><%=_ctx.appRes("UIActionList.header.name")%></th>
-		    <th><%=_ctx.appRes("UIActionList.header.description")%></th>
- 		    <th><%=_ctx.appRes("UIActionList.header.instanceOf")%></th>
+		    <th><%=_ctx.appRes("UIActionList.header.triggeredaction")%></th>
+ 		    <th><%=_ctx.appRes("UIActionList.header.lifecycle")%></th>
  		    <th><%=_ctx.appRes("UIActionList.header.action")%></th>
 	    </tr>
 	  </thead>
@@ -41,15 +42,23 @@
 		          </div>
 		        </td>
 		        <td>
-		          <div class="Text">
-		          	<%if(action.hasProperty("exo:description")){%>
-		          		<%=action.getProperty("exo:description").getString()%>
-		          	<%}%>
-		          </div>
-		        </td>
+	            <div class="Text">[<%=action.getPrimaryNodeType().getName()%>]</div>
+	          </td>
 		        <td>
-		          <div class="Text">[<%=action.getPrimaryNodeType().getName()%>]</div>
-		        </td>
+		          <div class="Text">
+		          <%if(action.hasProperty("exo:lifecyclePhase")){
+		            sB = new StringBuilder();
+		            def values = action.getProperty("exo:lifecyclePhase").getValues();          
+		            for(value in values) {
+		              sB.append(_ctx.appRes(value.getString())).append(", ");
+		            } 
+		            if (sB.length() > 0) {
+		              %>
+		              <%= sB.deleteCharAt(sB.length()-2)%>        
+		            <% } 
+		            }%>
+		          </div>
+		        </td>		       
 		        <td>
 		        	<div class="ActionContainer">
 			        <%

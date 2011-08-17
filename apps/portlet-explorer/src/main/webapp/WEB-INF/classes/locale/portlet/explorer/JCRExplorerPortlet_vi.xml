@@ -1861,6 +1861,8 @@
     <header>
       <name>Tên</name>
       <description>Mô tả</description>
+	  <lifecycle>Life Cycle</lifecycle>	
+	  <triggeredaction>Triggered Action</triggeredaction>	
       <instanceOf>Mẫu của một kiểu thao tác</instanceOf>
       <action>Thao tác</action>
     </header>
@@ -3382,9 +3384,31 @@
 		  <confirm-navigate>Dữ liệu mới cập nhất sẽ bị mất nếu chuyển sang trang khác.</confirm-navigate>
 	  </msg>
   </UIDocumentForm>
-  <UploadFileMimeTypesValidator>
-    <msg>
-      <wrong-mimetype>Kiểu dữ liệu {0} không được cho phép trong trường {1}. Làm ơn tải lên file khác</wrong-mimetype>
-    </msg>
-  </UploadFileMimeTypesValidator>
+  <lifecyclePhase>
+    <label>	
+  	<no>Không</no>
+	  <yes>Có</yes>
+	  <true>Đúng</true>
+	  <false>Sai</false>
+	  <Electronic>Điện tử</Electronic>
+	  <Paper>Bài báo</Paper>
+	  <NONE>Không xác định</NONE>
+	  <CLASSIFIED>Đã được phân loại</CLASSIFIED>
+	  <UNCLASSIFIED>Không được phân loại</UNCLASSIFIED>
+	  <NOCONTRACT>Không hợp đồng</NOCONTRACT>
+	  <one-minute>1 phút</one-minute>
+	  <hourly>Hàng giờ</hourly>
+	  <daily>Hàng ngày</daily>
+	  <quarterly>Hàng quý</quarterly>
+	  <yearly>Hàng năm</yearly>
+	  <ten-years>10 năm</ten-years>
+	  <read>Thao tác ủa người dùng</read>
+	  <schedule>Biểu thời gian</schedule>
+	  <node_added>Nội dung thêm vào</node_added>
+	  <node_removed>Nội dung xóa đi</node_removed>
+	  <property_added>Đặc tính thêm vào</property_added>
+	  <property_removed>Đặc tính xóa đi</property_removed>
+	  <property_changed>Đặc tính thay đổi</property_changed>
+	</label>
+  </lifecyclePhase>	
 </bundle>

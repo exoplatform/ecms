@@ -1866,6 +1866,8 @@
     <header>
       <name>#{word.name}</name>
       <description>Description</description>
+	  <lifecycle>Life Cycle</lifecycle>	
+	  <triggeredaction>Triggered Action</triggeredaction>	
       <instanceOf>Instances de ce type d'action</instanceOf>
       <action>Action</action>
     </header>
@@ -3381,9 +3383,33 @@
 		  <confirm-navigate>Les changements que vous avez fait seront perdus si vous quittez cette page.</confirm-navigate>
 	  </msg>
   </UIDocumentForm>
-  <UploadFileMimeTypesValidator>
-    <msg>
-      <wrong-mimetype>Mime type {0} is not allowed for field {1}. Please upload another file</wrong-mimetype>
-    </msg>
-  </UploadFileMimeTypesValidator>
+  <lifecyclePhase>
+    <label>  
+  	<no>Non</no>
+	  <yes>Oui</yes>
+	  <true>Vrai</true>
+	  <false>Faux</false>
+	  <Electronic>Électronique</Electronic>
+	  <Paper>Papier</Paper>
+	  <NONE>Aucun</NONE>
+	  <CLASSIFIED>Classé</CLASSIFIED>
+	  <UNCLASSIFIED>Non classé</UNCLASSIFIED>
+	  <NOCONTRACT>Aucun contrat</NOCONTRACT>
+	  <true>Vrai</true>
+	  <false>Faux</false>
+	  <one-minute>Une fois par Minute</one-minute>
+	  <hourly>Une fois par heure</hourly>
+	  <daily>Journalier</daily>
+	  <quarterly>Trimestriel</quarterly>
+	  <yearly>Annuel</yearly>
+	  <ten-years>Tous les 10 ans</ten-years>
+	  <read>Action Utilisateur</read>
+	  <schedule>Planificateur</schedule>
+	  <node_added>Content Addition</node_added>
+	  <node_removed>Ajout de contenu</node_removed>
+	  <property_added>Ajout de la propriété</property_added>
+	  <property_removed>Enlèvement de la propriété</property_removed>
+	  <property_changed>Modification de la propriété</property_changed>
+	</label>
+  </lifecyclePhase>	
 </bundle>

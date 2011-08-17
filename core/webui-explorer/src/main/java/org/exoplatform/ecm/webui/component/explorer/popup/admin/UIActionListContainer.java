@@ -55,8 +55,7 @@ public class UIActionListContainer extends UIContainer {
   public void initEditPopup(Node actionNode) throws Exception {
     removeChildById("editActionPopup") ;
     UIPopupWindow uiPopup = addChild(UIPopupWindow.class, null, "editActionPopup") ;
-    uiPopup.setShowMask(true);
-    uiPopup.setShowMask(true);
+    uiPopup.setShowMask(true);    
     UIJCRExplorer uiExplorer = getAncestorOfType(UIJCRExplorer.class) ;
     Node currentNode = uiExplorer.getCurrentNode() ;
     UIActionForm uiActionForm = createUIComponent(UIActionForm.class, null, "EditFormAction") ;
