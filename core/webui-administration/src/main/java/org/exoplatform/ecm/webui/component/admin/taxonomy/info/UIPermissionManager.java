@@ -64,9 +64,9 @@ public class UIPermissionManager extends UIContainer implements UIPopupComponent
 
   public void initUserSelector() throws Exception {
     UIPopupWindow uiPopup = getChildById("PopupUserSelector") ;
-    if(uiPopup == null) {
-      uiPopup.setShowMask(true);
+    if(uiPopup == null) {      
       uiPopup = addChild(UIPopupWindow.class, null, "PopupUserSelector");
+      uiPopup.setShowMask(true);
     }
     uiPopup.setWindowSize(790, 400);
     UIUserContainer uiUserContainer = createUIComponent(UIUserContainer.class, null, null);

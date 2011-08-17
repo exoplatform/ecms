@@ -51,10 +51,10 @@ public class UIWorkspaceWizardContainer extends UIContainer implements UIPopupCo
   }
   protected void initPopupPermission(String id, String membership, UIComponent comp) throws Exception {
     UIPopupWindow uiPopup = getChildById(id);
-    if(uiPopup == null) {
-      uiPopup.setShowMask(true);
+    if(uiPopup == null) {      
       uiPopup = addChild(UIPopupWindow.class, null, id);
       uiPopup.setWindowSize(560, 300);
+      uiPopup.setShowMask(true);
       UIPermissionSelector uiECMPermission =
         createUIComponent(UIPermissionSelector.class, null, null);
       uiECMPermission.setSelectedMembership(true);
