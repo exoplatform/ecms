@@ -11,16 +11,14 @@
  */
 package org.exoplatform.wcm.webui.search;
 
-import java.net.URLEncoder;
-
-import javax.servlet.http.HttpServletRequest;
-
 import org.exoplatform.ecm.resolver.JCRResourceResolver;
 import org.exoplatform.portal.application.PortalRequestContext;
-import org.exoplatform.portal.webui.portal.UIPortal;
+import org.exoplatform.portal.mop.SiteType;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.resolver.ResourceResolver;
 import org.exoplatform.services.cms.impl.DMSConfiguration;
+import org.exoplatform.web.url.navigation.NavigationResource;
+import org.exoplatform.web.url.navigation.NodeURL;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.EventConfig;
@@ -128,16 +126,18 @@ public class UISearchBox extends UIForm {
      */
     public void execute(Event<UISearchBox> event) throws Exception {
       UISearchBox uiSearchBox = event.getSource();
-      UIPortal uiPortal = Util.getUIPortal();
       String keyword = uiSearchBox.getUIStringInput(UISearchBox.KEYWORD_INPUT).getValue();
-      String portalName = uiPortal.getName();
+      String portalName = Util.getPortalRequestContext().getPortalOwner();
       PortalRequestContext prContext = Util.getPortalRequestContext();
-      HttpServletRequest request = prContext.getRequest();
       prContext.setResponseComplete(true);
-      portalName = URLEncoder.encode(portalName, "UTF-8");
-      String redirect = request.getContextPath() + "/private/" + portalName + "/searchResult?"
-          + PORTAL_NAME_PARAM + "=" + portalName + "&" + KEYWORD_PARAM + "=" + keyword;
-      prContext.getResponse().sendRedirect(redirect);
+      
+      NodeURL nodeURL = Util.getPortalRequestContext().createURL(NodeURL.TYPE);
+      NavigationResource resource = new NavigationResource(SiteType.PORTAL, portalName, "searchResult");
+      nodeURL.setResource(resource);
+      nodeURL.setQueryParameterValue(PORTAL_NAME_PARAM, portalName);
+      nodeURL.setQueryParameterValue(KEYWORD_PARAM, keyword);
+      
+      prContext.getResponse().sendRedirect(nodeURL.toString());
     }
   }
 }

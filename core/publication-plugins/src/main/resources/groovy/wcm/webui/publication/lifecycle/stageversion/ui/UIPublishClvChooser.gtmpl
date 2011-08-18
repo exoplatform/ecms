@@ -5,7 +5,7 @@
     <%
       List<Application> applications = uicomponent.getClvPortlets();
       for (Application application : applications) {
-        String applicationId = URLEncoder.encode(application.getInstanceId(), "UTF-8");
+        String applicationId = application.getInstanceId();
         %>
           <tr>
             <td><div class="CLVChooserTitle"><%= application.getTitle() %></div></td>

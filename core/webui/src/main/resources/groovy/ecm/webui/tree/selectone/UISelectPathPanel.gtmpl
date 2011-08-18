@@ -55,7 +55,7 @@
 				          $nodeName</div>
 				        </td>
 				        <td>
-		              <a href="<%=uicomponent.event("Select", URLEncoder.encode(Utils.formatNodeName(node.getPath()), "utf-8"))%>">
+		              <a href="<%=uicomponent.event("Select", Utils.formatNodeName(node.getPath()))%>">
 		                <div class="Select16x16Icon" style="margin-left:15px;"></div>
 		              </a>
 				        </td>

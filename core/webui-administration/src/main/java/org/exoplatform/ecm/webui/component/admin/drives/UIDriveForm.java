@@ -134,6 +134,8 @@ public class UIDriveForm extends UIFormTabPane implements UISelectable {
       uiStringInput.setValue(value.toString());
       UIDriveInputSet driveInputSet = getChild(UIDriveInputSet.class);
       if (driveInputSet!=null) driveInputSet.updateFolderAllowed(value.toString());
+    } else {
+      uiStringInput.setValue(value.toString());
     }
     UIDriveManager uiContainer = getAncestorOfType(UIDriveManager.class) ;
     for(UIComponent uiChild : uiContainer.getChildren()) {

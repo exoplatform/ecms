@@ -87,7 +87,7 @@ public class UINodeTree extends UITree {
       if(getFieldValue(obj, beanIconField) != null)
         iconGroup = (String)getFieldValue(obj, beanIconField);
     }
-    String objId = URLEncoder.encode(Utils.formatNodeName(String.valueOf(getId(obj))), "utf-8");
+    String objId = Utils.formatNodeName(String.valueOf(getId(obj)));
     String actionLink = event("ChangeNode", objId);
     StringBuilder builder = new StringBuilder();
     if(nodeIcon.equals(getExpandIcon())) {
