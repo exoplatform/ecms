@@ -18,16 +18,7 @@ package org.exoplatform.ecm.webui.utils;
 
 import java.io.InputStream;
 import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.MissingResourceException;
-import java.util.StringTokenizer;
-import java.util.ResourceBundle;
+import java.util.*;
 import java.util.zip.ZipInputStream;
 
 import javax.imageio.ImageIO;
@@ -55,10 +46,11 @@ import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.app.SessionProviderService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.log.ExoLogger;
-import org.exoplatform.services.organization.Group;
-import org.exoplatform.services.organization.Membership;
-import org.exoplatform.services.organization.OrganizationService;
 import org.exoplatform.services.resources.ResourceBundleService;
+import org.exoplatform.services.security.ConversationState;
+import org.exoplatform.services.security.Identity;
+import org.exoplatform.services.security.IdentityRegistry;
+import org.exoplatform.services.security.MembershipEntry;
 import org.exoplatform.web.application.RequestContext;
 
 /**
@@ -412,42 +404,42 @@ public class Utils {
 	}
 
 	public static List<String> getMemberships() throws Exception {
-		String userId = Util.getPortalRequestContext().getRemoteUser();
-		OrganizationService oservice = Util.getUIPortal().getApplicationComponent(
-				OrganizationService.class);
-		List<String> userMemberships = new ArrayList<String>();
-		userMemberships.add(userId);
-		Collection<?> memberships = oservice.getMembershipHandler()
-				.findMembershipsByUser(userId);
-		if (memberships == null || memberships.size() < 0)
-			return userMemberships;
-		Object[] objects = memberships.toArray();
-		for (int i = 0; i < objects.length; i++) {
-			Membership membership = (Membership) objects[i];
-			String role = membership.getMembershipType() + ":"
-					+ membership.getGroupId();
-			userMemberships.add(role);
-		}
-		return userMemberships;
+	  String userId = Util.getPortalRequestContext().getRemoteUser();
+	  List<String> userMemberships = new ArrayList<String>();
+	  userMemberships.add(userId);
+	  // here we must retrieve memberships of the user using the
+	  // IdentityRegistry Service instead of Organization Service to
+	  // allow JAAS based authorization
+	  Collection<MembershipEntry> memberships = getUserMembershipsFromIdentityRegistry(userId);
+	  if (memberships != null) {
+	    for (MembershipEntry membership : memberships) {
+	      String role = membership.getMembershipType() + ":" + membership.getGroup();
+	      userMemberships.add(role);
+	    }
+	  }
+	  return userMemberships;
+	}
+
+	/**
+	 * this method retrieves memberships of the user having the given id using the
+	 * IdentityRegistry service instead of the Organization service to allow JAAS
+	 * based authorization
+	 *
+	 * @param authenticatedUser the authenticated user id
+	 * @return a collection of MembershipEntry
+	 */
+	private static Collection<MembershipEntry> getUserMembershipsFromIdentityRegistry(String authenticatedUser) {
+	  ExoContainer container = ExoContainerContext.getCurrentContainer();
+	  IdentityRegistry identityRegistry = (IdentityRegistry) container.getComponentInstanceOfType(IdentityRegistry.class);
+	  Identity currentUserIdentity = identityRegistry.getIdentity(authenticatedUser);
+	  return currentUserIdentity.getMemberships();
 	}
 
 	public static List<String> getGroups() throws Exception {
-		String userId = Util.getPortalRequestContext().getRemoteUser();
-		OrganizationService oservice = Util.getUIPortal().getApplicationComponent(
-				OrganizationService.class);
-		List<String> groupList = new ArrayList<String>();
-		Collection<?> groups = oservice.getGroupHandler().findGroupsOfUser(userId);
-		Object[] objects = groups.toArray();
-		for (int i = 0; i < objects.length; i++) {
-			Group group = (Group) objects[i];
-			String groupPath = null;
-			if (group.getParentId() == null || group.getParentId().length() == 0)
-				groupPath = "/" + group.getGroupName();
-			else
-				groupPath = group.getParentId() + "/" + group.getGroupName();
-			groupList.add(groupPath);
-		}
-		return groupList;
+      ConversationState conversationState = ConversationState.getCurrent();
+      Identity identity = conversationState.getIdentity();
+      Set<String> groups = identity.getGroups();
+      return new ArrayList<String>(groups);
 	}
 
 	public static String getNodeOwner(Node node) throws Exception {
