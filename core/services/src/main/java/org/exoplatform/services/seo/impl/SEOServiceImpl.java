@@ -236,6 +236,8 @@ public class SEOServiceImpl implements SEOService {
           metaModel.setPriority(Long.parseLong((contentNode.getProperty("exo:metaPriority")).getString()));      
         if (contentNode.hasProperty("exo:metaFrequency"))       
           metaModel.setFrequency((contentNode.getProperty("exo:metaFrequency")).getString());
+        if(contentNode.hasProperty("exo:metaFully"))
+            metaModel.setFullStatus((contentNode.getProperty("exo:metaFully")).getString());
         cache.put(hash, metaModel);
       }      
     }
@@ -269,6 +271,8 @@ public class SEOServiceImpl implements SEOService {
           metaModel.setPriority(Long.parseLong((pageNode.getProperty("exo:metaPriority")).getString()));      
         if (pageNode.hasProperty("exo:metaFrequency"))       
           metaModel.setFrequency((pageNode.getProperty("exo:metaFrequency")).getString());
+        if(pageNode.hasProperty("exo:metaFully"))
+          metaModel.setFullStatus((pageNode.getProperty("exo:metaFully")).getString());
         cache.put(hash, metaModel);
       }   
     }
