@@ -1,0 +1,951 @@
+Index: packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/dms-extension/dms/dms-drives-configuration.xml
+===================================================================
+--- packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/dms-extension/dms/dms-drives-configuration.xml	(revision 72434)
++++ packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/dms-extension/dms/dms-drives-configuration.xml	(working copy)
+@@ -77,7 +77,28 @@
+               <field name="allowNodeTypesOnTree"><string>*</string></field>       
+             </object>
+           </object-param>
+-          <object-param>        
++          <object-param>
++            <name>Groups</name>
++            <description>Groups drive template</description>
++            <object type="org.exoplatform.services.cms.drives.DriveData">
++              <field  name="name"><string>Groups</string></field>
++              <field  name="repository"><string>repository</string></field>
++              <field  name="workspace"><string>collaboration</string></field>
++              <field  name="permissions"><string>*:${groupId}</string></field>
++              <field  name="homePath"><string>/Groups${groupId}</string></field>
++              <field  name="icon"><string></string></field>
++              <field  name="views">
++                <string>simple-view</string>
++              </field>
++              <field  name="viewPreferences"><boolean>false</boolean></field>
++              <field  name="viewNonDocument"><boolean>true</boolean></field>
++              <field  name="viewSideBar"><boolean>true</boolean></field>
++              <field  name="showHiddenNode"><boolean>false</boolean></field>
++              <field  name="allowCreateFolders"><string>nt:folder,nt:unstructured</string></field>
++              <field name="allowNodeTypesOnTree"><string>*</string></field>
++            </object>
++          </object-param>
++          <object-param>
+             <name>DMS Administration</name>
+             <description>DMS system data area</description>
+             <object type="org.exoplatform.services.cms.drives.DriveData">
+Index: packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/dms-extension/dms/organization-component-plugins-configuration.xml
+===================================================================
+--- packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/dms-extension/dms/organization-component-plugins-configuration.xml	(revision 72434)
++++ packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/dms-extension/dms/organization-component-plugins-configuration.xml	(working copy)
+@@ -290,7 +290,7 @@
+ 	      </object-param>
+ 	    </init-params>
+ 	  </component-plugin>
+-	  <component-plugin>
++	  <!--component-plugin>
+ 	    <name>drive.new.group.event.listener</name>
+ 	    <set-method>addListenerPlugin</set-method>
+ 	    <type>org.exoplatform.services.cms.drives.impl.NewGroupListener</type>
+@@ -345,7 +345,7 @@
+ 	        <value>*</value>
+ 	      </value-param>	      	      	      	      	      	      	      	      	      	      
+ 	    </init-params>
+-	  </component-plugin>	  	  
++	  </component-plugin-->
+ <!--
+ 	  <component-plugin>
+ 	    <name>drive.new.user.event.listener</name>
+Index: core/services/src/main/java/org/exoplatform/services/cms/drives/impl/ManageDriveServiceImpl.java
+===================================================================
+--- core/services/src/main/java/org/exoplatform/services/cms/drives/impl/ManageDriveServiceImpl.java	(revision 72434)
++++ core/services/src/main/java/org/exoplatform/services/cms/drives/impl/ManageDriveServiceImpl.java	(working copy)
+@@ -50,62 +50,64 @@
+   /**
+    * Name of property WORKSPACE
+    */
+-  private static String WORKSPACE = "exo:workspace".intern() ;
++  private static String WORKSPACE = "exo:workspace";
+   
+-  private static String ALL_DRIVES_CACHED = "allDrives".intern();
++  private static String ALL_DRIVES_CACHED = "allDrives";
+   
+-  private static String ALL_DRIVES_CACHED_BY_ROLES = "_allDrivesByRoles".intern();
++  private static String ALL_DRIVES_CACHED_WITH_VIRTUAL = "allDrives_withVirtual";
+   
+-  private static String ALL_MAIN_CACHED_DRIVE = "_mainDrives".intern();
++  private static String ALL_DRIVES_CACHED_BY_ROLES = "_allDrivesByRoles";
+   
+-  private static String ALL_PERSONAL_CACHED_DRIVE = "_personalDrives".intern();
++  private static String ALL_MAIN_CACHED_DRIVE = "_mainDrives";
+   
+-  private static String ALL_GROUP_CACHED_DRIVES = "_groupDrives".intern();
++  private static String ALL_PERSONAL_CACHED_DRIVE = "_personalDrives";
++  
++  private static String ALL_GROUP_CACHED_DRIVES = "_groupDrives";
+   /**
+    * Name of property PERMISSIONS
+    */
+-  private static String PERMISSIONS = "exo:accessPermissions".intern() ;
++  private static String PERMISSIONS = "exo:accessPermissions";
+   
+   /**
+    * Name of property VIEWS
+    */
+-  private static String VIEWS = "exo:views".intern() ;
++  private static String VIEWS = "exo:views";
+   
+   /**
+    * Name of property ICON
+    */
+-  private static String ICON = "exo:icon".intern() ;
++  private static String ICON = "exo:icon";
+   
+   /**
+    * Name of property PATH
+    */
+-  private static String PATH = "exo:path".intern() ;
++  private static String PATH = "exo:path";
+   
+   /**
+    * Name of property VIEW_REFERENCES
+    */
+-  private static String VIEW_REFERENCES = "exo:viewPreferences".intern() ;
++  private static String VIEW_REFERENCES = "exo:viewPreferences";
+   
+   /**
+    * Name of property VIEW_NON_DOCUMENT
+    */
+-  private static String VIEW_NON_DOCUMENT = "exo:viewNonDocument".intern() ;
++  private static String VIEW_NON_DOCUMENT = "exo:viewNonDocument";
+   
+   /**
+    * Name of property VIEW_SIDEBAR
+    */
+-  private static String VIEW_SIDEBAR = "exo:viewSideBar".intern() ;
++  private static String VIEW_SIDEBAR = "exo:viewSideBar";
+   
+   /**
+    * Name of property SHOW_HIDDEN_NODE
+    */
+-  private static String SHOW_HIDDEN_NODE = "exo:showHiddenNode".intern() ;
++  private static String SHOW_HIDDEN_NODE = "exo:showHiddenNode";
+   
+   /**
+    *  Name of property ALLOW_CREATE_FOLDER
+    */
+-  private static String ALLOW_CREATE_FOLDER = "exo:allowCreateFolders".intern() ;
+-  private static String ALLOW_NODETYPES_ON_TREE = "exo:allowNodeTypesOnTree".intern(); 
++  private static String ALLOW_CREATE_FOLDER = "exo:allowCreateFolders";
++  private static String ALLOW_NODETYPES_ON_TREE = "exo:allowNodeTypesOnTree"; 
+ 
+   /**
+    * List of ManageDrivePlugin
+@@ -135,6 +137,8 @@
+    */
+   private ExoCache drivesCache_ ;
+ 
++  private DriveData groupDriveTemplate_ = null ;
++
+   /**
+    * Constructor method
+    * Construcs RepositoryService, NodeHierarchyCreator, baseDrivePath_
+@@ -177,6 +181,7 @@
+     for(ManageDrivePlugin plugin : drivePlugins_) {
+       plugin.init(repository) ;
+     }
++    getAllDrives(repositoryService_.getCurrentRepository().getConfiguration().getName(), true);
+   }
+ 
+   /**
+@@ -190,10 +195,25 @@
+   /**
+    * {@inheritDoc}
+    */
++  public List<DriveData> getAllDrives(String repository) throws Exception {
++    return getAllDrives(repository, false);
++  }
++  
++  /**
++   * {@inheritDoc}
++   */
+   @SuppressWarnings("unchecked")
+-  public List<DriveData> getAllDrives(String repository) throws Exception {
+-    List<DriveData> allDrives = (List<DriveData>) drivesCache_.get(ALL_DRIVES_CACHED);
++  public List<DriveData> getAllDrives(String repository, boolean withVirtualDrives) throws Exception {
++    // Try to get from cache first
++    List<DriveData> allDrives;
++    if (withVirtualDrives) {
++      allDrives = (List<DriveData>) drivesCache_.get(ALL_DRIVES_CACHED_WITH_VIRTUAL);
++    } else {
++      allDrives = (List<DriveData>) drivesCache_.get(ALL_DRIVES_CACHED);
++    }
+     if ((allDrives != null) && (allDrives.size() > 0)) return allDrives;
++    
++    // Get from Jcr
+     Session session = getSession(repository) ;    
+     Node driveHome = (Node)session.getItem(baseDrivePath_);
+     NodeIterator itr = driveHome.getNodes() ;
+@@ -215,9 +235,23 @@
+       data.setShowHiddenNode(Boolean.parseBoolean(drive.getProperty(SHOW_HIDDEN_NODE).getString())) ;
+       data.setAllowCreateFolders(drive.getProperty(ALLOW_CREATE_FOLDER).getString()) ;
+       data.setAllowNodeTypesOnTree(drive.getProperty(ALLOW_NODETYPES_ON_TREE).getString());
+-      driveList.add(data) ;
++      if ("Groups".equals(data.getName())) {
++        groupDriveTemplate_ = data.clone();
++        // Include group drive template if necessary
++        if (withVirtualDrives) {
++          driveList.add(data);
++        }
++      } else {
++         driveList.add(data) ;
++      }
+     }
+-    drivesCache_.put(ALL_DRIVES_CACHED, driveList);
++    
++    // Put Drives into cache
++    if (withVirtualDrives) {
++      drivesCache_.put(ALL_DRIVES_CACHED_WITH_VIRTUAL, driveList);
++    } else {
++      drivesCache_.put(ALL_DRIVES_CACHED, driveList);
++    }
+     session.logout();
+     return driveList ;    
+   }
+@@ -225,7 +259,16 @@
+   /**
+    * {@inheritDoc}
+    */
+-  public DriveData getDriveByName(String name, String repository) throws Exception{  
++  public DriveData getDriveByName(String name, String repository) throws Exception{
++    if (name.startsWith("/")) {
++      DriveData drive = groupDriveTemplate_.clone();
++      drive.setHomePath("/Groups" + name);
++      drive.setName(name);
++      drive.setPermissions("*:"+name);
++      return drive;
++    }
++
++
+     Session session = getSession(repository) ;    
+     Node driveHome = (Node)session.getItem(baseDrivePath_);
+     if (driveHome.hasNode(name)){
+@@ -338,10 +381,10 @@
+    * @return session
+    * @throws Exception
+    */
+-  private Session getSession(String repository) throws Exception{    
++  private Session getSession(String repository) throws Exception{
+     ManageableRepository manaRepository = repositoryService_.getRepository(repository) ;
+     DMSRepositoryConfiguration dmsRepoConfig = dmsConfiguration_.getConfig(repository);
+-    return manaRepository.getSystemSession(dmsRepoConfig.getSystemWorkspace()) ;          
++    return manaRepository.getSystemSession(dmsRepoConfig.getSystemWorkspace()) ;
+   }
+ 
+   /**
+@@ -396,6 +439,9 @@
+           }
+         }
+       }
++      for (DriveData drive : getGroupDrives(repository, userId, userRoles, null)) {
++        if (!driveList.contains(drive)) driveList.add(drive);
++      }
+     } else {
+       for (DriveData drive : getAllDrives(repository)) {
+         String[] allPermission = drive.getAllPermissions();
+@@ -419,6 +465,18 @@
+     if(drives != null) return (List<DriveData>) drives;
+     List<DriveData> groupDrives = new ArrayList<DriveData>();
+     String groupPath = nodeHierarchyCreator_.getJcrPath(BasePath.CMS_GROUPS_PATH);
++    for (String role : userRoles) {
++      String group = role.substring(role.indexOf(":")+1);
++      if (group.charAt(0)=='/') {
++        DriveData drive = groupDriveTemplate_.clone();
++        drive.setHomePath(groupPath + group);
++        drive.setName(group);
++        drive.setPermissions("*:"+group);
++        if (!groupDrives.contains(drive))
++          groupDrives.add(drive);
++      }
++    }
++    /*
+     for(DriveData drive : getDriveByUserRoles(repository, userId, userRoles)) {
+       if(! drive.getHomePath().equals(groupPath) && drive.getHomePath().startsWith(groupPath)) {
+         for(String group : groups) {
+@@ -434,8 +492,10 @@
+             break;
+           }
+         }
+-      } 
++      }
++
+     }
++    */
+     Collections.sort(groupDrives);
+     drivesCache_.put(userId + ALL_GROUP_CACHED_DRIVES, groupDrives);
+     return groupDrives;
+@@ -467,7 +527,7 @@
+     if(drives != null) return (List<DriveData>) drives;
+     List<DriveData> personalDrives = new ArrayList<DriveData>();
+     String userPath = nodeHierarchyCreator_.getJcrPath(BasePath.CMS_USERS_PATH);
+-    for(DriveData drive : getDriveByUserRoles(repository, userId, userRoles)) {
++    for(DriveData drive : getAllDrives(repository) ){//getDriveByUserRoles(repository, userId, userRoles)) {
+       if(drive.getHomePath().startsWith(userPath + "/${userId}/")) {
+         personalDrives.add(drive);
+       } else if(drive.getHomePath().startsWith(userPath + "/" + userId + "/")){
+@@ -478,4 +538,13 @@
+     drivesCache_.put(userId + ALL_PERSONAL_CACHED_DRIVE, personalDrives);
+     return personalDrives;
+   }
++
++  @Override
++  public boolean isVitualDrive(String driveName) {
++    if (groupDriveTemplate_.getName().equals(driveName)) {
++      return true;
++    } else {
++      return false;
++    }
++  }
+ }
+Index: core/services/src/main/java/org/exoplatform/services/cms/drives/DriveData.java
+===================================================================
+--- core/services/src/main/java/org/exoplatform/services/cms/drives/DriveData.java	(revision 72434)
++++ core/services/src/main/java/org/exoplatform/services/cms/drives/DriveData.java	(working copy)
+@@ -14,192 +14,210 @@
+  * You should have received a copy of the GNU General Public License
+  * along with this program; if not, see<http://www.gnu.org/licenses/>.
+  */
+-package org.exoplatform.services.cms.drives;
+-import java.util.ArrayList;
+-import java.util.List;
+-
+-/**
+- * Created by The eXo Platform SARL
+- * Author : Nguyen Quang Hung
+- *          nguyenkequanghung@yahoo.com
+- * Feb 27, 2006 
+- */
+-public class DriveData implements Comparable<DriveData> {
+-
+-  private String name ;
+-  private String repository ;
+-  private String workspace ;
+-  private String permissions ;
+-  private String homePath ;
+-  private String icon ;
+-  private String views ;
+-  private boolean viewPreferences ;
+-  private boolean viewNonDocument ;
+-  private boolean viewSideBar ;
+-  private boolean showHiddenNode ;
++package org.exoplatform.services.cms.drives;
++import java.util.ArrayList;
++import java.util.List;
++
++/**
++ * Created by The eXo Platform SARL
++ * Author : Nguyen Quang Hung
++ *          nguyenkequanghung@yahoo.com
++ * Feb 27, 2006 
++ */
++public class DriveData implements Comparable<DriveData> {
++
++  private String name ;
++  private String repository ;
++  private String workspace ;
++  private String permissions ;
++  private String homePath ;
++  private String icon ;
++  private String views ;
++  private boolean viewPreferences ;
++  private boolean viewNonDocument ;
++  private boolean viewSideBar ;
++  private boolean showHiddenNode ;
+   private String allowCreateFolders ;
+-  private String allowNodeTypesOnTree;
+-  
+-  public  DriveData(){}
++  private String allowNodeTypesOnTree;
++  
++  public  DriveData(){}
+ 
++  public DriveData clone() {
++    DriveData driveData = new DriveData();
++    driveData.setAllowCreateFolders(getAllowCreateFolders());
++    driveData.setAllowNodeTypesOnTree(getAllowNodeTypesOnTree());
++    driveData.setHomePath(getHomePath());
++    driveData.setIcon(getIcon());
++    driveData.setName(getName());
++    driveData.setPermissions(getPermissions());
++    driveData.setRepository(getRepository());
++    driveData.setShowHiddenNode(getShowHiddenNode());
++    driveData.setViewNonDocument(getViewNonDocument());
++    driveData.setViewPreferences(getViewPreferences());
++    driveData.setViewSideBar(getViewSideBar());
++    driveData.setViews(getViews());
++    driveData.setWorkspace(getWorkspace());
++    return driveData;
++  }
++
+   /**
+    * 
+    * @return the name of drive
+-   */
+-  public String getName() { return name ; }
++   */
++  public String getName() { return name ; }
+   /**
+    * Register drive name
+    * @param name  the name of DriveData 
+    */
+-  public void setName(String name) { this.name = name ; }  
+-
++  public void setName(String name) { this.name = name ; }  
++
+   /**
+    * @return the name of repository 
+-   */
+-  public String getRepository() { return repository ; }
++   */
++  public String getRepository() { return repository ; }
+   /**
+    * Register repository to drive
+    * @param rp repository name
+    */
+-  public void setRepository(String rp) { repository = rp ; }
++  public void setRepository(String rp) { repository = rp ; }
+   
+   /**
+    * 
+    * @return the name of workspace
+-   */
+-  public String getWorkspace() { return workspace ; }
++   */
++  public String getWorkspace() { return workspace ; }
+   /**
+    * Register workspace to drive
+    * @param ws the workspace name
+    */
+-  public void setWorkspace(String ws) { workspace = ws ; }
++  public void setWorkspace(String ws) { workspace = ws ; }
+   
+   /**
+    * 
+    * @return the permissions of drive
+-   */
+-  public String getPermissions() { return this.permissions ; }
++   */
++  public String getPermissions() { return this.permissions ; }
+   /**
+    * Register permission to drive
+    * @param permissions
+    */
+-  public void setPermissions(String permissions) { this.permissions = permissions ; }
++  public void setPermissions(String permissions) { this.permissions = permissions ; }
+ 
+   /**
+    * 
+    * @return the home path of drive
+-   */
+-  public String getHomePath() { return homePath ; }
++   */
++  public String getHomePath() { return homePath ; }
+   /**
+    * Register home path to drive
+    * @param path the home path of drive
+    */
+-  public void setHomePath(String path) { homePath = path ; }
++  public void setHomePath(String path) { homePath = path ; }
+   
+   /**
+    * 
+    * @return icon path 
+-   */
+-  public String getIcon() { return icon ; }
++   */
++  public String getIcon() { return icon ; }
+   /**
+    * Register icon to drive
+    * @param ico icon path
+    */
+-  public void setIcon(String ico) { icon = ico ; }
++  public void setIcon(String ico) { icon = ico ; }
+   
+   /**
+    * 
+    * @return the folder type of drive
+-   */
+-  public String getAllowCreateFolders() { return allowCreateFolders ; }
++   */
++  public String getAllowCreateFolders() { return allowCreateFolders ; }
+   /**
+    * Register folder type to drive
+-   * @param allowCreateFolder folder type
++   * @param allowCreateFolders folder type
+    */
+   public void setAllowCreateFolders(String allowCreateFolders) { this.allowCreateFolders = allowCreateFolders ; }
+   
+   public String getAllowNodeTypesOnTree() { return allowNodeTypesOnTree ; }
+   
+-  public void setAllowNodeTypesOnTree(String allowNodeTypesOnTree) { this.allowNodeTypesOnTree = allowNodeTypesOnTree ; }
++  public void setAllowNodeTypesOnTree(String allowNodeTypesOnTree) { this.allowNodeTypesOnTree = allowNodeTypesOnTree ; }
+ 
+   /**
+    * 
+    * @return  the views of drive
+-   */
+-  public String getViews() { return views ; }
++   */
++  public String getViews() { return views ; }
+   /**
+    * Register views to drive
+    * @param v view name
+    */
+-  public void setViews(String v) { views = v ; }
++  public void setViews(String v) { views = v ; }
+   
+   /**
+    * 
+    * @return the state of view preference drive
+-   */
+-  public boolean getViewPreferences() { return viewPreferences ; }
++   */
++  public boolean getViewPreferences() { return viewPreferences ; }
+   
+   /**
+    * Register the state of view preference to drive
+    * @param b  the state of view preference
+    */
+-  public void setViewPreferences(boolean b) { viewPreferences = b ; }
++  public void setViewPreferences(boolean b) { viewPreferences = b ; }
+   
+   /**
+    * 
+    * @return the state of view non document node type of drive
+-   */
+-  public boolean getViewNonDocument() { return viewNonDocument ; }
++   */
++  public boolean getViewNonDocument() { return viewNonDocument ; }
+   /**
+    * Register state of view non document to drive
+    * @param b the state of view non document node type
+    */
+-  public void setViewNonDocument(boolean b) { viewNonDocument = b ; }
++  public void setViewNonDocument(boolean b) { viewNonDocument = b ; }
+   /**
+    * 
+    * @return the state of view side bar of drive
+-   */
+-  public boolean getViewSideBar() { return viewSideBar ; }
++   */
++  public boolean getViewSideBar() { return viewSideBar ; }
+   /**
+    * Register state of view side bar to drive
+    * @param b state of view side bar
+    */
+-  public void setViewSideBar(boolean b) { viewSideBar = b ; }
++  public void setViewSideBar(boolean b) { viewSideBar = b ; }
+   
+   /**
+    * 
+    * @return the state of show hidden node of drive
+-   */
+-  public boolean getShowHiddenNode() { return showHiddenNode ; }
++   */
++  public boolean getShowHiddenNode() { return showHiddenNode ; }
+   /**
+    * Register state of show hidden node to drive
+    * @param b state of show hidden node
+    */
+-  public void setShowHiddenNode(boolean b) { showHiddenNode = b ; }
++  public void setShowHiddenNode(boolean b) { showHiddenNode = b ; }
+   
+   /**
+    * 
+    * @return  the array of permission
+-   */
+-  public String[] getAllPermissions() {    
+-    return permissions.split(",") ;
+-  }
++   */
++  public String[] getAllPermissions() {    
++    return permissions.split(",") ;
++  }
+ 
+   /**
+    * Check the state of permission is existing or not
+    * @param allPermissions  the string array permission of drive
+    * @param permission  permission name 
+    * @return the state of permission is existing or not.
+-   */
+-  public boolean hasPermission(String[] allPermissions, String permission) {
+-    List<String> permissionList = new ArrayList<String>() ;
+-    for(String per : allPermissions){
+-      permissionList.add(per.trim()) ;
+-    }
+-    if(permission == null) return false ;
+-    if(permission.indexOf(":/") > -1){
+-      String[] array = permission.split(":/") ;
+-      if(array == null || array.length < 2) return false ;
++   */
++  public boolean hasPermission(String[] allPermissions, String permission) {
++    List<String> permissionList = new ArrayList<String>() ;
++    for(String per : allPermissions){
++      permissionList.add(per.trim()) ;
++    }
++    if(permission == null) return false ;
++    if(permission.indexOf(":/") > -1){
++      String[] array = permission.split(":/") ;
++      if(array == null || array.length < 2) return false ;
+       if(permissionList.contains("*:/"+array[1])) return true ;
+       if(array[0].equals("*")) {
+         String[] arrPer = {};
+@@ -207,12 +225,24 @@
+           arrPer = per.split(":/");
+           if(arrPer.length == 2 && arrPer[1].equals(array[1])) return true;
+         }
+-      }
+-    }    
+-    return permissionList.contains(permission) ;
+-  }
++      }
++    }    
++    return permissionList.contains(permission) ;
++  }
+ 
+-  public int compareTo(DriveData arg) {
+-    return name.compareToIgnoreCase(arg.getName()) ;
+-  }
+-}
++  public int compareTo(DriveData arg) {
++    return name.compareToIgnoreCase(arg.getName()) ;
++  }
++
++  @Override
++  public boolean equals(Object obj) {
++     if (obj == this) {
++        return true;
++     }
++     if (obj instanceof DriveData) {
++        DriveData that = (DriveData)obj;
++        return name.equals(that.name) ;
++     }
++     return false;
++  }
++}
+Index: core/services/src/main/java/org/exoplatform/services/cms/drives/ManageDriveService.java
+===================================================================
+--- core/services/src/main/java/org/exoplatform/services/cms/drives/ManageDriveService.java	(revision 72434)
++++ core/services/src/main/java/org/exoplatform/services/cms/drives/ManageDriveService.java	(working copy)
+@@ -83,6 +83,16 @@
+    * @throws Exception
+    */
+   public List<DriveData> getAllDrives(String repository) throws Exception;
++  
++  /**
++   * This method will look up in all workspaces of current repository to find DriveData
++   *
++   * @param withVirtualDrives true: include Virtual Drives, false: not include Virtual Drives
++   * @param repository repository name
++   * @return list of DriveData with specified repository
++   * @throws Exception
++   */
++  public List<DriveData> getAllDrives(String repository, boolean withVirtualDrives) throws Exception;
+   
+   /**
+    * This method will check to make sure the view is not in used before remove this view
+@@ -143,5 +153,12 @@
+    * @throws Exception
+    */
+   public List<DriveData> getGroupDrives(String repository, String userId, List<String> userRoles, 
+-      List<String> groups) throws Exception;
++      List<String> groups) throws Exception;
++  
++  /**
++   * Check if a drive is vitual(Group Drive Template)
++   * @param driveName  the string contain the drive name 
++   * @return true: is Virtual Drive, false: not is Virtual Drive
++   */
++  public boolean isVitualDrive(String driveName);
+ }
+Index: core/connector/src/main/java/org/exoplatform/wcm/connector/fckeditor/DriverConnector.java
+===================================================================
+--- core/connector/src/main/java/org/exoplatform/wcm/connector/fckeditor/DriverConnector.java	(revision 72434)
++++ core/connector/src/main/java/org/exoplatform/wcm/connector/fckeditor/DriverConnector.java	(working copy)
+@@ -49,12 +49,14 @@
+ import javax.xml.transform.dom.DOMSource;
+ 
+ import org.apache.commons.lang.StringUtils;
++import org.exoplatform.container.ExoContainer;
+ import org.exoplatform.container.ExoContainerContext;
+ import org.exoplatform.container.PortalContainer;
+ import org.exoplatform.container.component.ComponentRequestLifecycle;
+ import org.exoplatform.container.xml.InitParams;
+ import org.exoplatform.ecm.connector.fckeditor.FCKUtils;
+ import org.exoplatform.ecm.utils.text.Text;
++import org.exoplatform.portal.webui.util.Util;
+ import org.exoplatform.services.cms.BasePath;
+ import org.exoplatform.services.cms.drives.DriveData;
+ import org.exoplatform.services.cms.drives.ManageDriveService;
+@@ -71,6 +73,9 @@
+ import org.exoplatform.services.resources.ResourceBundleService;
+ import org.exoplatform.services.rest.resource.ResourceContainer;
+ import org.exoplatform.services.security.ConversationState;
++import org.exoplatform.services.security.Identity;
++import org.exoplatform.services.security.IdentityRegistry;
++import org.exoplatform.services.security.MembershipEntry;
+ import org.exoplatform.services.wcm.core.NodeLocation;
+ import org.exoplatform.services.wcm.core.NodetypeConstant;
+ import org.exoplatform.services.wcm.portal.PortalFolderSchemaHandler;
+@@ -313,9 +318,11 @@
+    * @throws Exception the exception
+    */
+   private List<DriveData> getDriversByUserId(String repoName, String userId) throws Exception {    
+-    ManageDriveService driveService = (ManageDriveService)ExoContainerContext.getCurrentContainer().getComponentInstanceOfType(ManageDriveService.class);      
+-    List<DriveData> driveList = new ArrayList<DriveData>();    
+-    List<String> userRoles = getMemberships(userId);    
++    ManageDriveService driveService = (ManageDriveService)ExoContainerContext.getCurrentContainer().getComponentInstanceOfType(ManageDriveService.class);
++    List<String> userRoles = getMemberships(userId);
++    return driveService.getDriveByUserRoles(repoName, userId, userRoles);
++    /*
++    List<DriveData> driveList = new ArrayList<DriveData>();
+     List<DriveData> allDrives = driveService.getAllDrives(repoName);
+     Set<DriveData> temp = new HashSet<DriveData>();
+     if (userId != null) {
+@@ -360,7 +367,8 @@
+       driveList.add(iterator.next());
+     }
+     Collections.sort(driveList);
+-    return driveList; 
++    return driveList;
++    */
+   }
+   
+ 	/**
+@@ -504,20 +512,34 @@
+   	if (organizationService==null) {
+   		organizationService = WCMCoreUtils.getService(OrganizationService.class);
+   	}
+-  	((ComponentRequestLifecycle) organizationService).startRequest(manager);
+     List<String> userMemberships = new ArrayList<String> ();
+     userMemberships.add(userId);
+-    Collection<?> memberships = organizationService.getMembershipHandler().findMembershipsByUser(userId);
+-    if(memberships == null || memberships.size() < 0) return userMemberships;
+-    Object[] objects = memberships.toArray();
+-    for(int i = 0; i < objects.length; i ++ ){
+-      Membership membership = (Membership)objects[i];
+-      String role = membership.getMembershipType() + ":" + membership.getGroupId();
+-      userMemberships.add(role);     
+-    }
+-    ((ComponentRequestLifecycle) organizationService).endRequest(manager);
++     // here we must retrieve memberships of the user using the
++     // IdentityRegistry Service instead of Organization Service to
++     // allow JAAS based authorization
++    Collection<MembershipEntry> memberships = getUserMembershipsFromIdentityRegistry(userId);
++    if (memberships != null) {
++       for (MembershipEntry membership : memberships) {
++         String role = membership.getMembershipType() + ":" + membership.getGroup();
++         userMemberships.add(role);
++       }
++     }
+     return userMemberships;
+   }
++   /**
++   * this method retrieves memberships of the user having the given id using the
++   * IdentityRegistry service instead of the Organization service to allow JAAS
++   * based authorization
++   *
++   * @param authenticatedUser the authenticated user id
++   * @return a collection of MembershipEntry
++   */
++  private static Collection<MembershipEntry> getUserMembershipsFromIdentityRegistry(String authenticatedUser) {
++    ExoContainer container = ExoContainerContext.getCurrentContainer();
++    IdentityRegistry identityRegistry = (IdentityRegistry) container.getComponentInstanceOfType(IdentityRegistry.class);
++    Identity currentUserIdentity = identityRegistry.getIdentity(authenticatedUser);
++    return currentUserIdentity.getMemberships();
++  }
+ 
+   /**
+    * Gets the groups.
+@@ -851,4 +873,4 @@
+ 	  	if (nodeDriveName!=null && nodeDriveName.length()>0) folder.setAttribute("nodeDriveName", nodeDriveName);
+ 	  	return folder;
+ 	  }
+-}
+\ No newline at end of file
++}
+Index: core/webui-administration/src/main/java/org/exoplatform/ecm/webui/component/admin/drives/UIDriveList.java
+===================================================================
+--- core/webui-administration/src/main/java/org/exoplatform/ecm/webui/component/admin/drives/UIDriveList.java	(revision 72434)
++++ core/webui-administration/src/main/java/org/exoplatform/ecm/webui/component/admin/drives/UIDriveList.java	(working copy)
+@@ -91,7 +91,7 @@
+     ManageableRepository repository = rservice.getRepository(repoName) ;  
+     List<DriveData> driveList = new ArrayList<DriveData>() ;
+     Session session = null ;
+-    List<DriveData> drives = driveService.getAllDrives(repoName) ;
++    List<DriveData> drives = driveService.getAllDrives(repoName, true) ;
+     if(drives != null && drives.size() > 0) {
+       for(DriveData drive : drives) {
+         if(drive.getIcon() != null && drive.getIcon().length() > 0) {
+Index: core/webui-administration/src/main/java/org/exoplatform/ecm/webui/component/admin/drives/UIDriveForm.java
+===================================================================
+--- core/webui-administration/src/main/java/org/exoplatform/ecm/webui/component/admin/drives/UIDriveForm.java	(revision 72434)
++++ core/webui-administration/src/main/java/org/exoplatform/ecm/webui/component/admin/drives/UIDriveForm.java	(working copy)
+@@ -179,7 +179,8 @@
+ 
+   static public class SaveActionListener extends EventListener<UIDriveForm> {
+     public void execute(Event<UIDriveForm> event) throws Exception {
+-      UIDriveForm uiDriveForm = event.getSource();
++      UIDriveForm uiDriveForm = event.getSource();
++      ManageDriveService driveService = uiDriveForm.getApplicationComponent(ManageDriveService.class) ;
+       String repository = uiDriveForm.getAncestorOfType(UIECMAdminPortlet.class).getPreferenceRepository();
+       RepositoryService rservice = uiDriveForm.getApplicationComponent(RepositoryService.class);
+       UIDriveInputSet driveInputSet = uiDriveForm.getChild(UIDriveInputSet.class);
+@@ -203,23 +204,27 @@
+       String workspace = 
+         driveInputSet.getUIFormSelectBox(UIDriveInputSet.FIELD_WORKSPACE).getValue();
+       String path = driveInputSet.getUIStringInput(UIDriveInputSet.FIELD_HOMEPATH).getValue();
+-      if((path == null)||(path.trim().length() == 0)) path = "/";
+-      Session session = null;
+-      try {        
+-        session = rservice.getRepository(repository).getSystemSession(workspace);
+-        String userId = Util.getPortalRequestContext().getRemoteUser();
+-        String pathReal = path.replace("${userId}", userId);
+-        session.getItem(pathReal);
+-        session.logout();
+-      } catch(Exception e) {
+-        if(session!=null) {
+-          session.logout();
+-        }
+-        uiApp.addMessage(new ApplicationMessage("UIDriveForm.msg.workspace-path-invalid", null, 
+-                                                ApplicationMessage.WARNING));
+-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+-        return;
+-      }      
++      if((path == null)||(path.trim().length() == 0)) path = "/";
++      
++      // Only check path if Drive is not virtual drive
++      if (!driveService.isVitualDrive(name)) {
++        Session session = null;
++        try {
++          session = rservice.getRepository(repository).getSystemSession(workspace);
++          String userId = Util.getPortalRequestContext().getRemoteUser();
++          String pathReal = path.replace("${userId}", userId);
++          session.getItem(pathReal);
++          session.logout();
++          } catch(Exception e) {
++          if(session!=null) {
++            session.logout();
++          }
++          uiApp.addMessage(new ApplicationMessage("UIDriveForm.msg.workspace-path-invalid", null, 
++                                                  ApplicationMessage.WARNING));
++          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
++          return;
++        }
++      }
+       boolean viewReferences = 
+         driveInputSet.getUIFormCheckBoxInput(UIDriveInputSet.FIELD_VIEWPREFERENCESDOC).isChecked();
+       boolean viewSideBar = 
+@@ -242,56 +247,60 @@
+       }
+       if (foldertypes.toString().endsWith(",")) foldertypes.deleteCharAt(foldertypes.length() -1 );
+       UIViewsInputSet viewsInputSet = uiDriveForm.getChild(UIViewsInputSet.class);
+-      String views = viewsInputSet.getViewsSelected();      
+-      String permissions = driveInputSet.getUIStringInput(UIDriveInputSet.FIELD_PERMISSION).getValue();
+-      if(permissions == null || permissions.trim().length() == 0) {
+-        uiApp.addMessage(new ApplicationMessage("UIDriveForm.msg.permission-null", null, 
+-                                                ApplicationMessage.WARNING));
+-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+-        return;
+-      }
++      String views = viewsInputSet.getViewsSelected();
++      String permissions = driveInputSet.getUIStringInput(UIDriveInputSet.FIELD_PERMISSION).getValue();
+       
+-      OrganizationService oservice = uiDriveForm.getApplicationComponent(OrganizationService.class);
+-      String[] arrPermissions = permissions.split(",");
+-      List<String> listMemberhip;
+-      Collection<?> collection = oservice.getMembershipTypeHandler().findMembershipTypes();
+-      listMemberhip  = new ArrayList<String>(5);
+-      for(Object obj : collection){
+-        listMemberhip.add(((MembershipType)obj).getName());
+-      }
+-      listMemberhip.add("*");
+-      for(String itemPermission : arrPermissions) {
+-        if(itemPermission.length() == 0) {
+-          uiApp.addMessage(new ApplicationMessage("UIDriveForm.msg.permission-path-invalid", null, 
+-              ApplicationMessage.WARNING)) ;
+-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+-          return;
+-        } 
+-        if (itemPermission.contains(":")) {
+-          String[] permission = itemPermission.split(":");
+-          if((permission[0] == null) || (permission[0].length() == 0)){
++      // Only check validating of permission if drive is not virtual drive
++      if (!driveService.isVitualDrive(name)) {
++        if(permissions == null || permissions.trim().length() == 0) {
++          uiApp.addMessage(new ApplicationMessage("UIDriveForm.msg.permission-null", null, 
++                                                  ApplicationMessage.WARNING));
++          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
++          return;
++        }
++        
++        OrganizationService oservice = uiDriveForm.getApplicationComponent(OrganizationService.class);
++        String[] arrPermissions = permissions.split(",");
++        List<String> listMemberhip;
++        Collection<?> collection = oservice.getMembershipTypeHandler().findMembershipTypes();
++        listMemberhip  = new ArrayList<String>(5);
++        for(Object obj : collection){
++          listMemberhip.add(((MembershipType)obj).getName());
++        }
++        listMemberhip.add("*");
++        for(String itemPermission : arrPermissions) {
++          if(itemPermission.length() == 0) {
+             uiApp.addMessage(new ApplicationMessage("UIDriveForm.msg.permission-path-invalid", null, 
+                 ApplicationMessage.WARNING)) ;
+             event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+-            return ;
+-          } else if(!listMemberhip.contains(permission[0])) {
+-            uiApp.addMessage(new ApplicationMessage("UIDriveForm.msg.permission-path-invalid", null, 
+-                ApplicationMessage.WARNING)) ;
+-            event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+-            return ;
+-          }
+-          if((permission[1] == null) || (permission[1].length() == 0)) {
+-            uiApp.addMessage(new ApplicationMessage("UIDriveForm.msg.permission-path-invalid", null, 
+-                ApplicationMessage.WARNING)) ;
+-            event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+-            return ;
+-          } else if(oservice.getGroupHandler().findGroupById(permission[1]) == null){
+-            uiApp.addMessage(new ApplicationMessage("UIDriveForm.msg.permission-path-invalid", null, 
+-                ApplicationMessage.WARNING)) ;
+-            event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+             return;
++          } 
++          if (itemPermission.contains(":")) {
++            String[] permission = itemPermission.split(":");
++            if((permission[0] == null) || (permission[0].length() == 0)){
++              uiApp.addMessage(new ApplicationMessage("UIDriveForm.msg.permission-path-invalid", null, 
++                  ApplicationMessage.WARNING)) ;
++              event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
++              return ;
++            } else if(!listMemberhip.contains(permission[0])) {
++              uiApp.addMessage(new ApplicationMessage("UIDriveForm.msg.permission-path-invalid", null, 
++                  ApplicationMessage.WARNING)) ;
++              event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
++              return ;
++            }
++            if((permission[1] == null) || (permission[1].length() == 0)) {
++              uiApp.addMessage(new ApplicationMessage("UIDriveForm.msg.permission-path-invalid", null, 
++                  ApplicationMessage.WARNING)) ;
++              event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
++              return ;
++            } else if(oservice.getGroupHandler().findGroupById(permission[1]) == null){
++              uiApp.addMessage(new ApplicationMessage("UIDriveForm.msg.permission-path-invalid", null, 
++                  ApplicationMessage.WARNING)) ;
++              event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
++              return;
++            }
+           }
+-        }        
++        }
+       }
+       
+       ManageDriveService dservice_ = uiDriveForm.getApplicationComponent(ManageDriveService.class);

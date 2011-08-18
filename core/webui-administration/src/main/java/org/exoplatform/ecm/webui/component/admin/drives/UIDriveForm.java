@@ -180,6 +180,7 @@ public class UIDriveForm extends UIFormTabPane implements UISelectable {
   static public class SaveActionListener extends EventListener<UIDriveForm> {
     public void execute(Event<UIDriveForm> event) throws Exception {
       UIDriveForm uiDriveForm = event.getSource();
+      ManageDriveService driveService = uiDriveForm.getApplicationComponent(ManageDriveService.class) ;
       String repository = uiDriveForm.getAncestorOfType(UIECMAdminPortlet.class).getPreferenceRepository();
       RepositoryService rservice = uiDriveForm.getApplicationComponent(RepositoryService.class);
       UIDriveInputSet driveInputSet = uiDriveForm.getChild(UIDriveInputSet.class);
@@ -204,22 +205,26 @@ public class UIDriveForm extends UIFormTabPane implements UISelectable {
         driveInputSet.getUIFormSelectBox(UIDriveInputSet.FIELD_WORKSPACE).getValue();
       String path = driveInputSet.getUIStringInput(UIDriveInputSet.FIELD_HOMEPATH).getValue();
       if((path == null)||(path.trim().length() == 0)) path = "/";
-      Session session = null;
-      try {        
-        session = rservice.getRepository(repository).getSystemSession(workspace);
-        String userId = Util.getPortalRequestContext().getRemoteUser();
-        String pathReal = path.replace("${userId}", userId);
-        session.getItem(pathReal);
-        session.logout();
-      } catch(Exception e) {
-        if(session!=null) {
+      
+      // Only check path if Drive is not virtual drive
+      if (!driveService.isVitualDrive(name)) {
+        Session session = null;
+        try {
+          session = rservice.getRepository(repository).getSystemSession(workspace);
+          String userId = Util.getPortalRequestContext().getRemoteUser();
+          String pathReal = path.replace("${userId}", userId);
+          session.getItem(pathReal);
           session.logout();
+          } catch(Exception e) {
+          if(session!=null) {
+            session.logout();
+          }
+          uiApp.addMessage(new ApplicationMessage("UIDriveForm.msg.workspace-path-invalid", null, 
+                                                  ApplicationMessage.WARNING));
+          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          return;
         }
-        uiApp.addMessage(new ApplicationMessage("UIDriveForm.msg.workspace-path-invalid", null, 
-                                                ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
-        return;
-      }      
+      }
       boolean viewReferences = 
         driveInputSet.getUIFormCheckBoxInput(UIDriveInputSet.FIELD_VIEWPREFERENCESDOC).isChecked();
       boolean viewSideBar = 
@@ -242,56 +247,60 @@ public class UIDriveForm extends UIFormTabPane implements UISelectable {
       }
       if (foldertypes.toString().endsWith(",")) foldertypes.deleteCharAt(foldertypes.length() -1 );
       UIViewsInputSet viewsInputSet = uiDriveForm.getChild(UIViewsInputSet.class);
-      String views = viewsInputSet.getViewsSelected();      
+      String views = viewsInputSet.getViewsSelected();
       String permissions = driveInputSet.getUIStringInput(UIDriveInputSet.FIELD_PERMISSION).getValue();
-      if(permissions == null || permissions.trim().length() == 0) {
-        uiApp.addMessage(new ApplicationMessage("UIDriveForm.msg.permission-null", null, 
-                                                ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
-        return;
-      }
       
-      OrganizationService oservice = uiDriveForm.getApplicationComponent(OrganizationService.class);
-      String[] arrPermissions = permissions.split(",");
-      List<String> listMemberhip;
-      Collection<?> collection = oservice.getMembershipTypeHandler().findMembershipTypes();
-      listMemberhip  = new ArrayList<String>(5);
-      for(Object obj : collection){
-        listMemberhip.add(((MembershipType)obj).getName());
-      }
-      listMemberhip.add("*");
-      for(String itemPermission : arrPermissions) {
-        if(itemPermission.length() == 0) {
-          uiApp.addMessage(new ApplicationMessage("UIDriveForm.msg.permission-path-invalid", null, 
-              ApplicationMessage.WARNING)) ;
-          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+      // Only check validating of permission if drive is not virtual drive
+      if (!driveService.isVitualDrive(name)) {
+        if(permissions == null || permissions.trim().length() == 0) {
+          uiApp.addMessage(new ApplicationMessage("UIDriveForm.msg.permission-null", null, 
+                                                  ApplicationMessage.WARNING));
+          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
           return;
-        } 
-        if (itemPermission.contains(":")) {
-          String[] permission = itemPermission.split(":");
-          if((permission[0] == null) || (permission[0].length() == 0)){
-            uiApp.addMessage(new ApplicationMessage("UIDriveForm.msg.permission-path-invalid", null, 
-                ApplicationMessage.WARNING)) ;
-            event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
-            return ;
-          } else if(!listMemberhip.contains(permission[0])) {
-            uiApp.addMessage(new ApplicationMessage("UIDriveForm.msg.permission-path-invalid", null, 
-                ApplicationMessage.WARNING)) ;
-            event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
-            return ;
-          }
-          if((permission[1] == null) || (permission[1].length() == 0)) {
-            uiApp.addMessage(new ApplicationMessage("UIDriveForm.msg.permission-path-invalid", null, 
-                ApplicationMessage.WARNING)) ;
-            event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
-            return ;
-          } else if(oservice.getGroupHandler().findGroupById(permission[1]) == null){
+        }
+        
+        OrganizationService oservice = uiDriveForm.getApplicationComponent(OrganizationService.class);
+        String[] arrPermissions = permissions.split(",");
+        List<String> listMemberhip;
+        Collection<?> collection = oservice.getMembershipTypeHandler().findMembershipTypes();
+        listMemberhip  = new ArrayList<String>(5);
+        for(Object obj : collection){
+          listMemberhip.add(((MembershipType)obj).getName());
+        }
+        listMemberhip.add("*");
+        for(String itemPermission : arrPermissions) {
+          if(itemPermission.length() == 0) {
             uiApp.addMessage(new ApplicationMessage("UIDriveForm.msg.permission-path-invalid", null, 
                 ApplicationMessage.WARNING)) ;
             event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
             return;
+          } 
+          if (itemPermission.contains(":")) {
+            String[] permission = itemPermission.split(":");
+            if((permission[0] == null) || (permission[0].length() == 0)){
+              uiApp.addMessage(new ApplicationMessage("UIDriveForm.msg.permission-path-invalid", null, 
+                  ApplicationMessage.WARNING)) ;
+              event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+              return ;
+            } else if(!listMemberhip.contains(permission[0])) {
+              uiApp.addMessage(new ApplicationMessage("UIDriveForm.msg.permission-path-invalid", null, 
+                  ApplicationMessage.WARNING)) ;
+              event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+              return ;
+            }
+            if((permission[1] == null) || (permission[1].length() == 0)) {
+              uiApp.addMessage(new ApplicationMessage("UIDriveForm.msg.permission-path-invalid", null, 
+                  ApplicationMessage.WARNING)) ;
+              event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+              return ;
+            } else if(oservice.getGroupHandler().findGroupById(permission[1]) == null){
+              uiApp.addMessage(new ApplicationMessage("UIDriveForm.msg.permission-path-invalid", null, 
+                  ApplicationMessage.WARNING)) ;
+              event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages()) ;
+              return;
+            }
           }
-        }        
+        }
       }
       
       ManageDriveService dservice_ = uiDriveForm.getApplicationComponent(ManageDriveService.class);

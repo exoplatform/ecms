@@ -290,7 +290,7 @@
 	      </object-param>
 	    </init-params>
 	  </component-plugin>
-	  <component-plugin>
+	  <!--component-plugin>
 	    <name>drive.new.group.event.listener</name>
 	    <set-method>addListenerPlugin</set-method>
 	    <type>org.exoplatform.services.cms.drives.impl.NewGroupListener</type>
@@ -345,7 +345,7 @@
 	        <value>*</value>
 	      </value-param>	      	      	      	      	      	      	      	      	      	      
 	    </init-params>
-	  </component-plugin>	  	  
+	  </component-plugin-->
 <!--
 	  <component-plugin>
 	    <name>drive.new.user.event.listener</name>

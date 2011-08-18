@@ -85,6 +85,16 @@ public interface ManageDriveService {
   public List<DriveData> getAllDrives(String repository) throws Exception;
   
   /**
+   * This method will look up in all workspaces of current repository to find DriveData
+   *
+   * @param withVirtualDrives true: include Virtual Drives, false: not include Virtual Drives
+   * @param repository repository name
+   * @return list of DriveData with specified repository
+   * @throws Exception
+   */
+  public List<DriveData> getAllDrives(String repository, boolean withVirtualDrives) throws Exception;
+  
+  /**
    * This method will check to make sure the view is not in used before remove this view
    * @param viewName view name
    * @param repository repository name
@@ -144,4 +154,11 @@ public interface ManageDriveService {
    */
   public List<DriveData> getGroupDrives(String repository, String userId, List<String> userRoles, 
       List<String> groups) throws Exception;
+  
+  /**
+   * Check if a drive is vitual(Group Drive Template)
+   * @param driveName  the string contain the drive name 
+   * @return true: is Virtual Drive, false: not is Virtual Drive
+   */
+  public boolean isVitualDrive(String driveName);
 }

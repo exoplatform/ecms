@@ -42,6 +42,24 @@ public class DriveData implements Comparable<DriveData> {
   
   public  DriveData(){}
 
+  public DriveData clone() {
+    DriveData driveData = new DriveData();
+    driveData.setAllowCreateFolders(getAllowCreateFolders());
+    driveData.setAllowNodeTypesOnTree(getAllowNodeTypesOnTree());
+    driveData.setHomePath(getHomePath());
+    driveData.setIcon(getIcon());
+    driveData.setName(getName());
+    driveData.setPermissions(getPermissions());
+    driveData.setRepository(getRepository());
+    driveData.setShowHiddenNode(getShowHiddenNode());
+    driveData.setViewNonDocument(getViewNonDocument());
+    driveData.setViewPreferences(getViewPreferences());
+    driveData.setViewSideBar(getViewSideBar());
+    driveData.setViews(getViews());
+    driveData.setWorkspace(getWorkspace());
+    return driveData;
+  }
+
   /**
    * 
    * @return the name of drive
@@ -114,7 +132,7 @@ public class DriveData implements Comparable<DriveData> {
   public String getAllowCreateFolders() { return allowCreateFolders ; }
   /**
    * Register folder type to drive
-   * @param allowCreateFolder folder type
+   * @param allowCreateFolders folder type
    */
   public void setAllowCreateFolders(String allowCreateFolders) { this.allowCreateFolders = allowCreateFolders ; }
   
@@ -214,5 +232,17 @@ public class DriveData implements Comparable<DriveData> {
 
   public int compareTo(DriveData arg) {
     return name.compareToIgnoreCase(arg.getName()) ;
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+     if (obj == this) {
+        return true;
+     }
+     if (obj instanceof DriveData) {
+        DriveData that = (DriveData)obj;
+        return name.equals(that.name) ;
+     }
+     return false;
   }
 }

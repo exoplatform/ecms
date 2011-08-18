@@ -91,7 +91,7 @@ public class UIDriveList extends UIComponentDecorator {
     ManageableRepository repository = rservice.getRepository(repoName) ;  
     List<DriveData> driveList = new ArrayList<DriveData>() ;
     Session session = null ;
-    List<DriveData> drives = driveService.getAllDrives(repoName) ;
+    List<DriveData> drives = driveService.getAllDrives(repoName, true) ;
     if(drives != null && drives.size() > 0) {
       for(DriveData drive : drives) {
         if(drive.getIcon() != null && drive.getIcon().length() > 0) {

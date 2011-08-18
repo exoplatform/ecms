@@ -49,12 +49,14 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.transform.dom.DOMSource;
 
 import org.apache.commons.lang.StringUtils;
+import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.container.PortalContainer;
 import org.exoplatform.container.component.ComponentRequestLifecycle;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.ecm.connector.fckeditor.FCKUtils;
 import org.exoplatform.ecm.utils.text.Text;
+import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.drives.DriveData;
 import org.exoplatform.services.cms.drives.ManageDriveService;
@@ -71,6 +73,9 @@ import org.exoplatform.services.organization.OrganizationService;
 import org.exoplatform.services.resources.ResourceBundleService;
 import org.exoplatform.services.rest.resource.ResourceContainer;
 import org.exoplatform.services.security.ConversationState;
+import org.exoplatform.services.security.Identity;
+import org.exoplatform.services.security.IdentityRegistry;
+import org.exoplatform.services.security.MembershipEntry;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.core.NodetypeConstant;
 import org.exoplatform.services.wcm.portal.PortalFolderSchemaHandler;
@@ -313,9 +318,11 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
    * @throws Exception the exception
    */
   private List<DriveData> getDriversByUserId(String repoName, String userId) throws Exception {    
-    ManageDriveService driveService = (ManageDriveService)ExoContainerContext.getCurrentContainer().getComponentInstanceOfType(ManageDriveService.class);      
-    List<DriveData> driveList = new ArrayList<DriveData>();    
-    List<String> userRoles = getMemberships(userId);    
+    ManageDriveService driveService = (ManageDriveService)ExoContainerContext.getCurrentContainer().getComponentInstanceOfType(ManageDriveService.class);
+    List<String> userRoles = getMemberships(userId);
+    return driveService.getDriveByUserRoles(repoName, userId, userRoles);
+    /*
+    List<DriveData> driveList = new ArrayList<DriveData>();
     List<DriveData> allDrives = driveService.getAllDrives(repoName);
     Set<DriveData> temp = new HashSet<DriveData>();
     if (userId != null) {
@@ -360,7 +367,8 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
       driveList.add(iterator.next());
     }
     Collections.sort(driveList);
-    return driveList; 
+    return driveList;
+    */
   }
   
 	/**
@@ -504,19 +512,33 @@ public class DriverConnector extends BaseConnector implements ResourceContainer 
   	if (organizationService==null) {
   		organizationService = WCMCoreUtils.getService(OrganizationService.class);
   	}
-  	((ComponentRequestLifecycle) organizationService).startRequest(manager);
     List<String> userMemberships = new ArrayList<String> ();
     userMemberships.add(userId);
-    Collection<?> memberships = organizationService.getMembershipHandler().findMembershipsByUser(userId);
-    if(memberships == null || memberships.size() < 0) return userMemberships;
-    Object[] objects = memberships.toArray();
-    for(int i = 0; i < objects.length; i ++ ){
-      Membership membership = (Membership)objects[i];
-      String role = membership.getMembershipType() + ":" + membership.getGroupId();
-      userMemberships.add(role);     
-    }
-    ((ComponentRequestLifecycle) organizationService).endRequest(manager);
+     // here we must retrieve memberships of the user using the
+     // IdentityRegistry Service instead of Organization Service to
+     // allow JAAS based authorization
+    Collection<MembershipEntry> memberships = getUserMembershipsFromIdentityRegistry(userId);
+    if (memberships != null) {
+       for (MembershipEntry membership : memberships) {
+         String role = membership.getMembershipType() + ":" + membership.getGroup();
+         userMemberships.add(role);
+       }
+     }
     return userMemberships;
+  }
+   /**
+   * this method retrieves memberships of the user having the given id using the
+   * IdentityRegistry service instead of the Organization service to allow JAAS
+   * based authorization
+   *
+   * @param authenticatedUser the authenticated user id
+   * @return a collection of MembershipEntry
+   */
+  private static Collection<MembershipEntry> getUserMembershipsFromIdentityRegistry(String authenticatedUser) {
+    ExoContainer container = ExoContainerContext.getCurrentContainer();
+    IdentityRegistry identityRegistry = (IdentityRegistry) container.getComponentInstanceOfType(IdentityRegistry.class);
+    Identity currentUserIdentity = identityRegistry.getIdentity(authenticatedUser);
+    return currentUserIdentity.getMemberships();
   }
 
   /**
