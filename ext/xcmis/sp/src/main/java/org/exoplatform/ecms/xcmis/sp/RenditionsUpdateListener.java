@@ -134,7 +134,7 @@ public class RenditionsUpdateListener implements EventListener
       }
       catch (Exception e)
       {
-         LOG.error("Creating rendition on event failed. " + e.getMessage());
+         LOG.error("Creating rendition on event failed. " + e.getMessage(), e);
       }
       finally
       {

@@ -749,11 +749,6 @@ class JcrNodeEntry
          if (content != null)
          {
             MimeType mediaType = content.getMediaType();
-            contentNode.setProperty(JcrCMIS.JCR_MIMETYPE, mediaType.getBaseType());
-            if (mediaType.getParameter(CmisConstants.CHARSET) != null)
-            {
-               contentNode.setProperty(JcrCMIS.JCR_ENCODING, mediaType.getParameter(CmisConstants.CHARSET));
-            }
             // Re-count content length
             long contentLength = contentNode.setProperty(JcrCMIS.JCR_DATA, content.getStream()).getLength();
             contentNode.setProperty(JcrCMIS.JCR_LAST_MODIFIED, Calendar.getInstance());
@@ -767,6 +762,12 @@ class JcrNodeEntry
                }
                node.setProperty(CmisConstants.CONTENT_STREAM_LENGTH, contentLength);
                node.setProperty(CmisConstants.CONTENT_STREAM_MIME_TYPE, mediaType.getBaseType());
+            }
+            // Add/update mimeType property after content updated. Need for fixing AddMetadataAction (JCR).
+            contentNode.setProperty(JcrCMIS.JCR_MIMETYPE, mediaType.getBaseType());
+            if (mediaType.getParameter(CmisConstants.CHARSET) != null)
+            {
+               contentNode.setProperty(JcrCMIS.JCR_ENCODING, mediaType.getParameter(CmisConstants.CHARSET));
             }
          }
          else

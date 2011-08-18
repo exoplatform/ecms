@@ -196,7 +196,7 @@ public class DriveCmisRegistry extends JcrCmisRegistry
                }
                catch (Exception e)
                {
-                  LOG.error(e.getMessage());
+                  LOG.error(e.getMessage(), e);
                }
                finally
                {
@@ -274,7 +274,7 @@ public class DriveCmisRegistry extends JcrCmisRegistry
          }
          catch (Exception e)
          {
-            LOG.error("Initializing of storage provider " + driveName + " failed. " + e.getMessage());
+            LOG.error("Initializing of storage provider " + driveName + " failed. " + e.getMessage(), e);
          }
       }
       super.start();

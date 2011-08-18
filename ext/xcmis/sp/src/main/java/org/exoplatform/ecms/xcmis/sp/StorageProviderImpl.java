@@ -357,7 +357,7 @@ public class StorageProviderImpl implements StorageProvider, Startable
          }
          catch (RepositoryException e)
          {
-            LOG.error("Unable to create event listener. " + e);
+            LOG.error("Unable to create event listener. " + e.getMessage(), e);
          }
       }
    }
