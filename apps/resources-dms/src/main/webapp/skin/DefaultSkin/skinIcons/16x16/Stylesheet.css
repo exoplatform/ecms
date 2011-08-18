@@ -403,7 +403,10 @@
   background: url('icons/NodeTypes/rtf.gif') no-repeat left center; /* orientation=lt */
   background: url('icons/NodeTypes/rtf.gif') no-repeat right center; /* orientation=rt */
 }
-
+.application_rtf16x16Icon {
+  background: url('icons/NodeTypes/rtf.gif') no-repeat left center; /* orientation=lt */
+  background: url('icons/NodeTypes/rtf.gif') no-repeat right center; /* orientation=rt */
+}
 .text_plain16x16Icon {
   background: url('icons/NodeTypes/txt.gif') no-repeat left center; /* orientation=lt */
   background: url('icons/NodeTypes/txt.gif') no-repeat right center; /* orientation=rt */

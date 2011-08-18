@@ -1,0 +1,155 @@
+Index: ext/workflow/resources/src/main/webapp/skin/MacSkin/skinIcons/16x16/Stylesheet.css
+===================================================================
+--- ext/workflow/resources/src/main/webapp/skin/MacSkin/skinIcons/16x16/Stylesheet.css	(revision 71188)
++++ ext/workflow/resources/src/main/webapp/skin/MacSkin/skinIcons/16x16/Stylesheet.css	(working copy)
+@@ -297,6 +297,10 @@
+   background: url('/eXoWorkflowResources/skin/DefaultSkin/skinIcons/16x16/icons/NodeTypes/rtf.gif') no-repeat;  
+ }
+ 
++.application_rtf16x16Icon{
++  background: url('/eXoWorkflowResources/skin/DefaultSkin/skinIcons/16x16/icons/NodeTypes/rtf.gif') no-repeat;
++}
++
+ .text_plain16x16Icon {
+   background: url('/eXoWorkflowResources/skin/DefaultSkin/skinIcons/16x16/icons/NodeTypes/txt.gif') no-repeat;  
+ }
+Index: ext/workflow/resources/src/main/webapp/skin/DefaultSkin/skinIcons/16x16/Stylesheet.css
+===================================================================
+--- ext/workflow/resources/src/main/webapp/skin/DefaultSkin/skinIcons/16x16/Stylesheet.css	(revision 71188)
++++ ext/workflow/resources/src/main/webapp/skin/DefaultSkin/skinIcons/16x16/Stylesheet.css	(working copy)
+@@ -308,7 +308,9 @@
+ .text_rtf16x16Icon {
+   background: url('icons/NodeTypes/rtf.gif') no-repeat;  
+ }
+-
++.application_rtf16x16Icon {
++  background: url('icons/NodeTypes/rtf.gif') no-repeat;
++}
+ .text_plain16x16Icon {
+   background: url('icons/NodeTypes/txt.gif') no-repeat;  
+ }
+Index: ext/workflow/resources/src/main/webapp/skin/VistaSkin/skinIcons/16x16/Stylesheet.css
+===================================================================
+--- ext/workflow/resources/src/main/webapp/skin/VistaSkin/skinIcons/16x16/Stylesheet.css	(revision 71188)
++++ ext/workflow/resources/src/main/webapp/skin/VistaSkin/skinIcons/16x16/Stylesheet.css	(working copy)
+@@ -307,6 +307,10 @@
+   background: url('/eXoWorkflowResources/skin/DefaultSkin/skinIcons/16x16/icons/NodeTypes/rtf.gif') no-repeat;  
+ }
+ 
++.application_rtf16x16Icon {
++  background: url('/eXoWorkflowResources/skin/DefaultSkin/skinIcons/16x16/icons/NodeTypes/rtf.gif') no-repeat;  
++}
++
+ .text_plain16x16Icon {
+   background: url('/eXoWorkflowResources/skin/DefaultSkin/skinIcons/16x16/icons/NodeTypes/txt.gif') no-repeat;  
+ }
+Index: apps/resources-dms/src/main/webapp/skin/MacSkin/skinIcons/16x16/Stylesheet.css
+===================================================================
+--- apps/resources-dms/src/main/webapp/skin/MacSkin/skinIcons/16x16/Stylesheet.css	(revision 71188)
++++ apps/resources-dms/src/main/webapp/skin/MacSkin/skinIcons/16x16/Stylesheet.css	(working copy)
+@@ -305,6 +305,9 @@
+ .text_rtf16x16Icon {
+   background: url('/eXoDMSResources/skin/DefaultSkin/skinIcons/16x16/icons/NodeTypes/rtf.gif') no-repeat;  
+ }
++.application_rtf16x16Icon {
++  background: url('/eXoDMSResources/skin/DefaultSkin/skinIcons/16x16/icons/NodeTypes/rtf.gif') no-repeat;
++}
+ 
+ .text_plain16x16Icon {
+   background: url('/eXoDMSResources/skin/DefaultSkin/skinIcons/16x16/icons/NodeTypes/txt.gif') no-repeat;  
+Index: apps/resources-dms/src/main/webapp/skin/DefaultSkin/skinIcons/16x16/Stylesheet.css
+===================================================================
+--- apps/resources-dms/src/main/webapp/skin/DefaultSkin/skinIcons/16x16/Stylesheet.css	(revision 71188)
++++ apps/resources-dms/src/main/webapp/skin/DefaultSkin/skinIcons/16x16/Stylesheet.css	(working copy)
+@@ -403,7 +403,10 @@
+   background: url('icons/NodeTypes/rtf.gif') no-repeat left center; /* orientation=lt */
+   background: url('icons/NodeTypes/rtf.gif') no-repeat right center; /* orientation=rt */
+ }
+-
++.application_rtf16x16Icon {
++  background: url('icons/NodeTypes/rtf.gif') no-repeat left center; /* orientation=lt */
++  background: url('icons/NodeTypes/rtf.gif') no-repeat right center; /* orientation=rt */
++}
+ .text_plain16x16Icon {
+   background: url('icons/NodeTypes/txt.gif') no-repeat left center; /* orientation=lt */
+   background: url('icons/NodeTypes/txt.gif') no-repeat right center; /* orientation=rt */
+Index: apps/resources-dms/src/main/webapp/skin/VistaSkin/skinIcons/16x16/Stylesheet.css
+===================================================================
+--- apps/resources-dms/src/main/webapp/skin/VistaSkin/skinIcons/16x16/Stylesheet.css	(revision 71188)
++++ apps/resources-dms/src/main/webapp/skin/VistaSkin/skinIcons/16x16/Stylesheet.css	(working copy)
+@@ -316,6 +316,9 @@
+ .text_rtf16x16Icon {
+   background: url('/eXoDMSResources/skin/DefaultSkin/skinIcons/16x16/icons/NodeTypes/rtf.gif') no-repeat;  
+ }
++.application_rtf16x16Icon {
++  background: url('/eXoDMSResources/skin/DefaultSkin/skinIcons/16x16/icons/NodeTypes/rtf.gif') no-repeat;
++}
+ 
+ .text_plain16x16Icon {
+   background: url('/eXoDMSResources/skin/DefaultSkin/skinIcons/16x16/icons/NodeTypes/txt.gif') no-repeat;  
+Index: packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/dms-extension/dms/dms-ext-configuration.xml
+===================================================================
+--- packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/dms-extension/dms/dms-ext-configuration.xml	(revision 71188)
++++ packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/dms-extension/dms/dms-ext-configuration.xml	(working copy)
+@@ -809,7 +809,7 @@
+ 											<collection type="java.util.ArrayList">
+ 												<value><string>application/pdf</string></value>
+ 												<value><string>application/msword</string></value>
+-												<value><string>text/rtf</string></value>
++												<value><string>application/rtf</string></value>
+ 												<value><string>application/ppt</string></value>
+ 												<value><string>application/vnd.oasis.opendocument.presentation</string></value>
+ 												<value><string>application/vnd.oasis.opendocument.spreadsheet</string></value>
+Index: core/services/src/main/java/conf/mimetype/mimetypes.properties
+===================================================================
+--- core/services/src/main/java/conf/mimetype/mimetypes.properties	(revision 71188)
++++ core/services/src/main/java/conf/mimetype/mimetypes.properties	(working copy)
+@@ -90,7 +90,7 @@
+ rgb=image/x-rgb
+ roff=application/x-troff
+ rpm=application/x-rpm
+-rtf=text/rtf
++rtf=application/rtf
+ rtx=text/richtext
+ sgm=text/sgml
+ sgml=text/sgml
+Index: core/core-configuration/src/main/webapp/WEB-INF/conf/wcm-core/mimetype/mimetypes.properties
+===================================================================
+--- core/core-configuration/src/main/webapp/WEB-INF/conf/wcm-core/mimetype/mimetypes.properties	(revision 71188)
++++ core/core-configuration/src/main/webapp/WEB-INF/conf/wcm-core/mimetype/mimetypes.properties	(working copy)
+@@ -90,7 +90,7 @@
+ rgb=image/x-rgb
+ roff=application/x-troff
+ rpm=application/x-rpm
+-rtf=text/rtf
++rtf=application/rtf
+ rtx=text/richtext
+ sgm=text/sgml
+ sgml=text/sgml
+Index: core/core-configuration/src/main/webapp/WEB-INF/conf/wcm-core/core-services-configuration.xml
+===================================================================
+--- core/core-configuration/src/main/webapp/WEB-INF/conf/wcm-core/core-services-configuration.xml	(revision 71188)
++++ core/core-configuration/src/main/webapp/WEB-INF/conf/wcm-core/core-services-configuration.xml	(working copy)
+@@ -365,4 +365,22 @@
+ 		  <type>org.exoplatform.ecm.utils.LockManagerListener</type>
+ 	  </component-plugin>
+ 	</external-component-plugins>
++        <external-component-plugins>
++		<target-component>org.exoplatform.upload.UploadService</target-component>
++		<component-plugin>
++			<name>MIME type Plugins for UploadService</name>
++			<set-method>register</set-method>
++			<type>org.exoplatform.upload.MimeTypeUploadPlugin</type>
++			<init-params>
++				<value-param>
++					<name>mimetype-path</name>
++					<value>war:/conf/wcm-core/mimetype/mimetypes.properties</value>
++				</value-param>
++				<value-param>
++					<name>mimetype-default</name>
++					<value>application/octet-stream</value>
++				</value-param>
++			</init-params>
++		</component-plugin>
++	</external-component-plugins>
+ </configuration>

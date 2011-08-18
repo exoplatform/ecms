@@ -809,7 +809,7 @@
 											<collection type="java.util.ArrayList">
 												<value><string>application/pdf</string></value>
 												<value><string>application/msword</string></value>
-												<value><string>text/rtf</string></value>
+												<value><string>application/rtf</string></value>
 												<value><string>application/ppt</string></value>
 												<value><string>application/vnd.oasis.opendocument.presentation</string></value>
 												<value><string>application/vnd.oasis.opendocument.spreadsheet</string></value>
