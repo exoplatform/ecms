@@ -155,13 +155,13 @@ public class UIActionBar extends UIForm {
   }
   public boolean hasBackButton() {
     String newLink = getAncestorOfType(UIJCRExplorerPortlet.class).getBacktoValue();
-    if (newLink != null)
+    if (newLink != null && newLink.length()>0)
       backLink = newLink;
     return backLink != null;
   }
   public String getBackLink() {
     String newLink = getAncestorOfType(UIJCRExplorerPortlet.class).getBacktoValue();
-    if (newLink != null)
+    if (newLink != null && newLink.length()>0)
       backLink = URLDecoder.decode(newLink);
     return backLink;
   }

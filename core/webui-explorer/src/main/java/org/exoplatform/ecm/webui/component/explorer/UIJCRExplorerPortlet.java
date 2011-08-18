@@ -158,8 +158,9 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
     HashMap<String, String> map = getElementByContext(context);
     PortalRequestContext pcontext = Util.getPortalRequestContext();
     String backToValue = Util.getPortalRequestContext().getRequestParameter(org.exoplatform.ecm.webui.utils.Utils.URL_BACKTO);
-    if (backToValue != null && backToValue.length() > 0) {
-      backTo = backToValue;
+    
+    if (!portletReqContext.useAjax()) {
+        backTo = backToValue;
     }
     HashMap<String, String> changeDrive = (HashMap<String, String>)pcontext.getAttribute("jcrexplorer-show-document");
     if (changeDrive!=null) {
