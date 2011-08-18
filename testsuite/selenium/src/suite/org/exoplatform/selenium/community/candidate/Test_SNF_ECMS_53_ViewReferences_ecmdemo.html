@@ -57,6 +57,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>//a[@href='/ecmdemo/groups/:platform:web-contributors/siteExplorer']</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>//a[@href='/ecmdemo/groups/:platform:web-contributors/siteExplorer']</td>
 	<td></td>
@@ -78,32 +83,17 @@
 </tr>
 <tr>
 	<td>echo</td>
-	<td>--Open Private driver</td>
+	<td>--Open Public driver</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=Private</td>
+	<td>link=Public</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>link=Private</td>
-	<td></td>
-</tr>
-<tr>
-	<td>echo</td>
-	<td>--&nbsp;&nbsp;Select Admin View</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>//a[@title='Admin View']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>//a[@title='Admin View']</td>
+	<td>link=Public</td>
 	<td></td>
 </tr>
 <tr>
@@ -113,7 +103,7 @@
 </tr>
 <tr>
 	<td>pause</td>
-	<td>10000</td>
+	<td>1000</td>
 	<td></td>
 </tr>
 <tr>
@@ -128,7 +118,7 @@
 </tr>
 <tr>
 	<td>pause</td>
-	<td>10000</td>
+	<td>1000</td>
 	<td></td>
 </tr>
 <tr>
@@ -147,8 +137,18 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>link=Article</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Article</td>
+	<td></td>
+</tr>
+<tr>
 	<td>pause</td>
-	<td>10000</td>
+	<td>1000</td>
 	<td></td>
 </tr>
 <tr>
@@ -198,32 +198,17 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=Save as Draft</td>
+	<td>link=Save &amp; Close</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>link=Save as Draft</td>
+	<td>link=Save &amp; Close</td>
 	<td></td>
 </tr>
 <tr>
 	<td>pause</td>
-	<td>10000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>link=Close</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>link=Close</td>
-	<td></td>
-</tr>
-<tr>
-	<td>pause</td>
-	<td>10000</td>
+	<td>1000</td>
 	<td></td>
 </tr>
 <tr>
@@ -233,12 +218,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@title='Private']</td>
+	<td>//div[@title='Public']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[@title='Private']</td>
+	<td>//div[@title='Public']</td>
 	<td></td>
 </tr>
 <tr>
@@ -248,7 +233,7 @@
 </tr>
 <tr>
 	<td>pause</td>
-	<td>10000</td>
+	<td>1000</td>
 	<td></td>
 </tr>
 <tr>
@@ -268,13 +253,13 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>selectTemplate</td>
+	<td>link=Kofax document</td>
 	<td></td>
 </tr>
 <tr>
-	<td>select</td>
-	<td>selectTemplate</td>
-	<td>label=Kofax document</td>
+	<td>click</td>
+	<td>link=Kofax document</td>
+	<td></td>
 </tr>
 <tr>
 	<td>type</td>
@@ -283,32 +268,17 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=Save as Draft</td>
+	<td>link=Save &amp; Close</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>link=Save as Draft</td>
+	<td>link=Save &amp; Close</td>
 	<td></td>
 </tr>
 <tr>
 	<td>pause</td>
-	<td>10000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>link=Close</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>link=Close</td>
-	<td></td>
-</tr>
-<tr>
-	<td>pause</td>
-	<td>10000</td>
+	<td>1000</td>
 	<td></td>
 </tr>
 <tr>
@@ -333,7 +303,7 @@
 </tr>
 <tr>
 	<td>pause</td>
-	<td>10000</td>
+	<td>1000</td>
 	<td></td>
 </tr>
 <tr>
@@ -493,7 +463,7 @@
 </tr>
 <tr>
 	<td>pause</td>
-	<td>10000</td>
+	<td>1000</td>
 	<td></td>
 </tr>
 <tr>
@@ -513,7 +483,7 @@
 </tr>
 <tr>
 	<td>pause</td>
-	<td>10000</td>
+	<td>1000</td>
 	<td></td>
 </tr>
 <tr>
@@ -528,7 +498,7 @@
 </tr>
 <tr>
 	<td>pause</td>
-	<td>10000</td>
+	<td>1000</td>
 	<td></td>
 </tr>
 <tr>
@@ -563,7 +533,7 @@
 </tr>
 <tr>
 	<td>pause</td>
-	<td>10000</td>
+	<td>1000</td>
 	<td></td>
 </tr>
 <tr>
@@ -633,7 +603,7 @@
 </tr>
 <tr>
 	<td>pause</td>
-	<td>10000</td>
+	<td>1000</td>
 	<td></td>
 </tr>
 <tr>

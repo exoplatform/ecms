@@ -57,6 +57,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>//a[@href='/ecmdemo/groups/:platform:web-contributors/wcmAdmin']</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>//a[@href='/ecmdemo/groups/:platform:web-contributors/wcmAdmin']</td>
 	<td></td>
@@ -108,17 +113,17 @@
 </tr>
 <tr>
 	<td>echo</td>
-	<td>-- Choose wcm-view--</td>
+	<td>-- Edit wcm-view--</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//div[@id='UIViewList']//img[contains(@onclick,&quot;wcm-view&quot;) and @title=&quot;Edit&quot;]</td>
+	<td>//div[@id='UIViewList']/table/tbody/tr[3]/td[5]/div/img[2]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//div[@id='UIViewList']//img[contains(@onclick,&quot;wcm-view&quot;) and @title=&quot;Edit&quot;]</td>
+	<td>//div[@id='UIViewList']/table/tbody/tr[3]/td[5]/div/img[2]</td>
 	<td></td>
 </tr>
 <tr>
@@ -193,12 +198,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//a[@href='/ecmdemo/private/acme/siteExplorer']</td>
+	<td>//a[@href='/ecmdemo/groups/:platform:web-contributors/siteExplorer']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//a[@href='/ecmdemo/private/acme/siteExplorer']</td>
+	<td>//a[@href='/ecmdemo/groups/:platform:web-contributors/siteExplorer']</td>
 	<td></td>
 </tr>
 <tr>
@@ -538,12 +543,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//a[@href='/ecmdemo/public/acme/siteExplorer']</td>
+	<td>//a[@href='/ecmdemo/groups/:platform:web-contributors/siteExplorer']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//a[@href='/ecmdemo/public/acme/siteExplorer']</td>
+	<td>//a[@href='/ecmdemo/groups/:platform:web-contributors/siteExplorer']</td>
 	<td></td>
 </tr>
 <tr>

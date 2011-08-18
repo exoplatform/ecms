@@ -62,6 +62,11 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>//a[@href='/ecmdemo/groups/:platform:web-contributors/siteExplorer']</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>//a[@href='/ecmdemo/groups/:platform:web-contributors/siteExplorer']</td>
 	<td></td>
@@ -83,72 +88,62 @@
 </tr>
 <tr>
 	<td>echo</td>
-	<td>--Open Private drive</td>
+	<td>--Open Sites Management drive</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=Private</td>
+	<td>link=Sites Management</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>link=Private</td>
-	<td></td>
-</tr>
-<tr>
-	<td>echo</td>
-	<td>--&nbsp;&nbsp;Select Admin View</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>//a[@title='Admin View']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>//a[@title='Admin View']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>echo</td>
-	<td>-- Go to Info Tab</td>
+	<td>link=Sites Management</td>
 	<td></td>
 </tr>
 <tr>
 	<td>pause</td>
-	<td>10000</td>
+	<td>1000</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=Info</td>
+	<td>//div[@id='iconTreeExplorer']/div[2]/a</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>link=Info</td>
-	<td></td>
-</tr>
-<tr>
-	<td>pause</td>
-	<td>10000</td>
+	<td>//div[@id='iconTreeExplorer']/div[2]/a</td>
 	<td></td>
 </tr>
 <tr>
 	<td>echo</td>
-	<td>--Documents</td>
+	<td>--Select documents node</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=Documents</td>
+	<td>link=documents</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>link=Documents</td>
+	<td>link=documents</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>-- Select System tab</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//a[contains(text(),'System')]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//a[contains(text(),'System')]</td>
 	<td></td>
 </tr>
 <tr>
@@ -158,22 +153,27 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=View Node Types</td>
+	<td>link=View Node Properties</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>link=View Node Types</td>
+	<td>link=View Node Properties</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>//div[text()='NodeType Infomation']</td>
+	<td>pause</td>
+	<td>1000</td>
 	<td></td>
 </tr>
 <tr>
-	<td>verifyElementPresent</td>
-	<td>//div[text()='NodeType Infomation']</td>
+	<td>waitForTextPresent</td>
+	<td>Properties Management</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Properties Management</td>
 	<td></td>
 </tr>
 <tr>
