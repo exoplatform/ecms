@@ -174,7 +174,6 @@ public class UISearchForm extends UIForm {
 	 * the searchAction event occurs, that object's appropriate
 	 * method is invoked.
 	 * 
-	 * @see SearchActionEvent
 	 */
 	public static class SearchActionListener extends EventListener<UISearchForm> {
 
@@ -200,6 +199,9 @@ public class UISearchForm extends UIForm {
 			UIFormCheckBoxInput uiDocumentCheckbox = uiSearchForm.getUIFormCheckBoxInput(UISearchForm.DOCUMENT_CHECKING);
 			String pageChecked = (uiPageCheckbox.isChecked()) ? "true" : "false";
 			String documentChecked = (uiDocumentCheckbox.isChecked()) ? "true" : "false";
+			
+			uiSearchResult.clearResult();
+			
 			if (keyword == null || keyword.trim().length() == 0) {
 				uiApp.addMessage(new ApplicationMessage(MESSAGE_NOT_EMPTY_KEYWORD,
 																								null,
@@ -254,6 +256,7 @@ public class UISearchForm extends UIForm {
 			}
 			int itemsPerPage = Integer.parseInt(portletPreferences.getValue(UIWCMSearchPortlet.ITEMS_PER_PAGE,
 																																			null));
+      queryCriteria.setPageMode(portletPreferences.getValue(UIWCMSearchPortlet.PAGE_MODE, null));
 			try {
 				WCMPaginatedQueryResult paginatedQueryResult = siteSearchService.searchSiteContents(
 				                                                                                    Utils.getSessionProvider(),

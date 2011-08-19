@@ -72,6 +72,11 @@
         <read-only>false</read-only>
       </preference>
       <preference>
+        <name>pageMode</name>
+        <value>more</value> <!-- supported modes : pagination, more, none -->
+        <read-only>false</read-only>
+      </preference>
+      <preference>
         <name>basePath</name>
         <value>parameterizedviewer</value>
         <read-only>false</read-only>

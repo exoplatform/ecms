@@ -17,11 +17,17 @@
 package org.exoplatform.services.wcm.search;
 
 import java.util.HashMap;
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import javax.jcr.Node;
+import javax.jcr.NodeIterator;
 import javax.jcr.query.QueryResult;
+import javax.jcr.query.Row;
+import javax.jcr.query.RowIterator;
 
 import org.apache.commons.lang.ArrayUtils;
+import org.exoplatform.commons.exception.ExoMessageException;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.publication.WCMComposer;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
@@ -37,6 +43,15 @@ public class WCMPaginatedQueryResult extends PaginatedQueryResult {
   
   /** The spell suggestion. */
   private String spellSuggestion;
+
+  /** Total elements in the resultset. */
+  private long numTotal = -1;
+
+  /** Do we use the total for pagination or not ?
+   * false : is more like a Twitter mode with "more" link to next contents
+   * true : is more like google search with paginators from 1 to total pages.
+   */
+  private boolean showTotalPagination = false;
 
   /**
    * Instantiates a new wCM paginated query result.
@@ -59,6 +74,23 @@ public class WCMPaginatedQueryResult extends PaginatedQueryResult {
   public WCMPaginatedQueryResult(QueryResult queryResult, QueryCriteria queryCriteria, int pageSize, boolean isSearchContent) throws Exception {
     super(queryResult, pageSize, isSearchContent);
     this.queryCriteria = queryCriteria;
+  }
+
+  /**
+   * Instantiates a new wCM paginated query result.
+   *
+   * @param queryResult the query result
+   * @param pageSize the page size
+   * @param queryCriteria the query criteria
+   *
+   * @throws Exception the exception
+   */
+  public WCMPaginatedQueryResult(QueryResult queryResult, QueryCriteria queryCriteria, int pageSize, long numTotal, boolean showTotalPagination, boolean isSearchContent) throws Exception {
+    super(queryResult, pageSize, isSearchContent);
+    this.numTotal = numTotal;
+    this.queryCriteria = queryCriteria;
+    this.showTotalPagination = showTotalPagination;
+    populateCurrentListPage(queryResult);
   }
 
   /**
@@ -96,6 +128,88 @@ public class WCMPaginatedQueryResult extends PaginatedQueryResult {
   public void setQueryCriteria(QueryCriteria queryCriteria) {
     this.queryCriteria = queryCriteria;
   }
+
+
+  public int getAvailable() {
+    if (numTotal>-1)
+      return (int)numTotal;
+    else
+      return super.getAvailable();
+
+  }
+
+  public int getAvailablePage() {
+    if (numTotal>-1) {
+      int npp = this.getNodesPerPage();
+      double available = Math.ceil((double )numTotal/(double)npp);
+      return (int)available;
+    } else
+      return super.getAvailablePage();
+  }
+
+  /**
+   * Retrieve the total nodes.
+   *
+   * @return the total nodes
+   */
+  public long getTotalNodes() {
+    if (numTotal>-1)
+      return numTotal;
+    else
+      return super.getTotalNodes();
+  }
+
+  /* (non-Javadoc)
+   * @see org.exoplatform.commons.utils.PageList#populateCurrentPage(int)
+   */
+  protected void populateCurrentPage(int page) throws Exception {
+    if(page == currentPage_ && (currentListPage_ != null && !currentListPage_.isEmpty())) {
+      return;
+    }
+    //checkAndSetPosition(page);
+
+    SiteSearchService siteSearchService = WCMCoreUtils.getService(SiteSearchService.class);
+    queryCriteria.setOffset((page-1)*getPageSize());
+    QueryResult queryResult = siteSearchService.searchSiteContents(WCMCoreUtils.getUserSessionProvider(), this.queryCriteria, this.getPageSize(), false).queryResult;
+    populateCurrentListPage(queryResult);
+    currentPage_ = page;
+  }
+
+  protected void populateCurrentListPage(QueryResult queryResult) throws Exception {
+    currentListPage_ = new CopyOnWriteArrayList<ResultNode>();
+    RowIterator rowIterator = queryResult.getRows();
+    NodeIterator iterator = queryResult.getNodes();
+
+    int count = 0;
+    while(iterator.hasNext()) {
+      Row row = rowIterator.nextRow();
+      Node node = iterator.nextNode();
+      Node viewNode = filterNodeToDisplay(node);
+
+      if(viewNode != null) {
+        ResultNode resultNode = new ResultNode(viewNode,row);
+        currentListPage_.add(resultNode);
+        count ++;
+        if(count == getPageSize())
+          break;
+      }
+    }
+
+  }
+
+  public void setCurrentPage(int page) throws java.lang.Exception {
+    populateCurrentPage(page);
+  }
+
+  public List getPage(int page) throws Exception {
+    if (page < 1 || (page > getAvailablePage() && showTotalPagination)) {
+      Object[] args = { Integer.toString(page), Integer.toString(availablePage_) };
+      throw new ExoMessageException("PageList.page-out-of-range", args);
+    }
+    populateCurrentPage(page);
+    return currentListPage_;
+  }
+
 
   /*
    * (non-Javadoc)

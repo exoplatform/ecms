@@ -42,12 +42,23 @@
       <searchPaginatorSelector>Paginator modèle de recherche</searchPaginatorSelector>
       <searchPageLayoutSelector>Mise en page modèle de recherche</searchPageLayoutSelector>
       <searchResultBasePathInputSetAction>Base de chemin</searchResultBasePathInputSetAction>
+      <pageMode>Mode de page</pageMode>
+      <option>
+        <none>Aucun</none>
+        <more>Plus</more>
+        <pagination>Pagination</pagination>
+      </option>
     </label>
     <action>
       <Save>Sauver</Save>
       <Cancel>Annuler</Cancel>
     </action>
   </UISearchPageLayoutManager>
+  <searchResultBasePathInputSetAction>
+    <title>
+      <SelectBasePath>Sélectionnez le chemin de base</SelectBasePath>
+    </title>
+  </searchResultBasePathInputSetAction>  
   <UISearchForm>
   	 <message>
   	   <keyword-not-support>Le mot clé est invalide. Certains caractères ne sont pas autorisés.</keyword-not-support>
@@ -55,4 +66,16 @@
        <not-checked>Le type de recherche n'est pas sélectionné. Veuillez en choisir un.</not-checked>
   	 </message>
   </UISearchForm>
+  <UIPaginatorDefault>
+    <label>
+      <next>Suivant</next>
+      <previous>Précédent</previous>
+      <more>Plus</more>
+    </label>
+  </UIPaginatorDefault>
+  <UISearchPageLayoutDefault>
+    <label>
+      <quickEditTitle>Edition rapide</quickEditTitle>
+    </label>
+  </UISearchPageLayoutDefault>
 </bundle>

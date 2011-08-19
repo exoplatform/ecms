@@ -45,6 +45,9 @@ public class UICustomizeablePaginator extends UIPageIterator {
   /** The resource resolver. */
   private ResourceResolver resourceResolver;
 
+  /** Page Mode */
+  private String pageMode;
+
   /**
    * Instantiates a new uI customizeable paginator.
    */
@@ -106,9 +109,26 @@ public class UICustomizeablePaginator extends UIPageIterator {
     return super.getTemplate();
   }
 
-  /* (non-Javadoc)
-   * @see org.exoplatform.webui.core.UIComponent#getTemplateResourceResolver(org.exoplatform.webui.application.WebuiRequestContext, java.lang.String)
+  /**
+   * gets the page mode (none, more or pagination)
+   * @return PageMode
    */
+  public String getPageMode() {
+    return pageMode;
+  }
+
+  /**
+   * sets the page mode (none, more or pagination)
+   *
+   * @param pageMode
+   */
+  public void setPageMode(String pageMode) {
+    this.pageMode = pageMode;
+  }
+
+  /* (non-Javadoc)
+  * @see org.exoplatform.webui.core.UIComponent#getTemplateResourceResolver(org.exoplatform.webui.application.WebuiRequestContext, java.lang.String)
+  */
   public ResourceResolver getTemplateResourceResolver(WebuiRequestContext context,String template) {
     if(resourceResolver != null)
       return resourceResolver;
@@ -124,7 +144,6 @@ public class UICustomizeablePaginator extends UIPageIterator {
    * the showPageAction event occurs, that object's appropriate
    * method is invoked.
    * 
-   * @see ShowPageActionEvent
    */
   static  public class ShowPageActionListener extends EventListener<UICustomizeablePaginator> {
     

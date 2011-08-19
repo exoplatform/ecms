@@ -35,6 +35,7 @@ import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.jcr.impl.core.query.QueryImpl;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.core.WCMConfigurationService;
 import org.exoplatform.services.wcm.portal.LivePortalManagerService;
@@ -46,6 +47,7 @@ import org.exoplatform.services.wcm.utils.AbstractQueryBuilder.LOGICAL;
 import org.exoplatform.services.wcm.utils.AbstractQueryBuilder.ORDERBY;
 import org.exoplatform.services.wcm.utils.AbstractQueryBuilder.PATH_TYPE;
 import org.exoplatform.services.wcm.utils.AbstractQueryBuilder.QueryTermHelper;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
  * Created by The eXo Platform SAS Author : Hoa Pham hoa.pham@exoplatform.com
@@ -54,16 +56,16 @@ import org.exoplatform.services.wcm.utils.AbstractQueryBuilder.QueryTermHelper;
 public class SiteSearchServiceImpl implements SiteSearchService {
 
   /** The live portal manager service. */
-  private LivePortalManagerService livePortalManagerService;
+  protected LivePortalManagerService livePortalManagerService;
 
   /** The ecm template service. */
-  private TemplateService templateService;
+  protected TemplateService templateService;
 
   /** The wcm configuration service. */
-  private WCMConfigurationService configurationService;
+  protected WCMConfigurationService configurationService;
 
   /** The jcr repository service. */
-  private RepositoryService repositoryService;
+  protected RepositoryService repositoryService;
 
   /** The exclude node types. */
   private CopyOnWriteArraySet<String> excludeNodeTypes = new CopyOnWriteArraySet<String>();
@@ -76,6 +78,9 @@ public class SiteSearchServiceImpl implements SiteSearchService {
 
   /** The include mime types. */
   private CopyOnWriteArraySet<String> includeMimeTypes = new CopyOnWriteArraySet<String>();
+
+//  private boolean showTotalPagination = false;
+
 
   /**
    * Instantiates a new site search service impl.
@@ -93,7 +98,9 @@ public class SiteSearchServiceImpl implements SiteSearchService {
     this.livePortalManagerService = portalManagerService;
     this.templateService = templateService;
     this.repositoryService = repositoryService;
-    this.configurationService = configurationService;        
+    this.configurationService = configurationService;
+//    if ("true".equals(System.getProperty("org.exoplatform.ecms.search.showtotal"))) showTotalPagination = true;
+
   }
 
   /* (non-Javadoc)
@@ -112,22 +119,40 @@ public class SiteSearchServiceImpl implements SiteSearchService {
   public WCMPaginatedQueryResult searchSiteContents(SessionProvider sessionProvider, QueryCriteria queryCriteria, int pageSize, boolean isSearchContent) throws Exception {
     ManageableRepository currentRepository = repositoryService.getCurrentRepository();
     NodeLocation location = configurationService.getLivePortalsLocation(currentRepository.getConfiguration().getName());    
-    Session session = sessionProvider.getSession(location.getWorkspace(),currentRepository);
-    QueryManager queryManager = session.getWorkspace().getQueryManager();
     long startTime = System.currentTimeMillis();
-    QueryResult queryResult = searchSiteContent(queryCriteria, queryManager);  
+
+    String pageMode = queryCriteria.getPageMode();
+    boolean showTotalPagination = SiteSearchService.PAGE_MODE_PAGINATION.equals(pageMode);
+
+    long numTotal = 0;
+    int limit = SiteSearchService.PAGE_MODE_NONE.equals(pageMode)?pageSize : pageSize+1;
+
+    if (showTotalPagination) {
+      SessionProvider systemProvider = WCMCoreUtils.getSystemSessionProvider();
+      Session session = systemProvider.getSession(location.getWorkspace(), currentRepository);
+      QueryManager queryManager = session.getWorkspace().getQueryManager();
+      QueryResult queryResult = searchSiteContent(queryCriteria, queryManager);
+      numTotal = queryResult.getNodes().getSize();
+      limit--;
+    }
+
+    
+    Session session = sessionProvider.getSession(location.getWorkspace(), currentRepository);
+    QueryManager queryManager = session.getWorkspace().getQueryManager();
+    long offset = 0;
+    if (queryCriteria.getOffset()>-1) offset = queryCriteria.getOffset();
+    QueryResult queryResult = searchSiteContent(queryCriteria, queryManager, limit, offset);
+    if (!showTotalPagination) numTotal = queryResult.getNodes().getSize();
+
     String suggestion = getSpellSuggestion(queryCriteria.getKeyword(),currentRepository);
     long queryTime = System.currentTimeMillis() - startTime;
     WCMPaginatedQueryResult paginatedQueryResult = null;
-    if(queryResult.getNodes().getSize()>250) {
-      paginatedQueryResult = new WCMPaginatedQueryResult( queryResult, queryCriteria, pageSize, isSearchContent); 
-    }else {      
-      paginatedQueryResult = new SmallPaginatedQueryResult(queryResult, queryCriteria, pageSize, isSearchContent);
-    }       
-    paginatedQueryResult.setQueryTime(queryTime);    
+    paginatedQueryResult = new WCMPaginatedQueryResult( queryResult, queryCriteria, pageSize, numTotal, showTotalPagination, isSearchContent);
+    paginatedQueryResult.setQueryTime(queryTime);
     paginatedQueryResult.setSpellSuggestion(suggestion);    
     return paginatedQueryResult;
   }  
+
 
   /**
    * Gets the spell suggestion.
@@ -139,7 +164,7 @@ public class SiteSearchServiceImpl implements SiteSearchService {
    * 
    * @throws Exception the exception
    */
-  private String getSpellSuggestion(String checkingWord, ManageableRepository manageableRepository) throws Exception{
+  protected String getSpellSuggestion(String checkingWord, ManageableRepository manageableRepository) throws Exception{
     //Retrieve spell suggestion in special way to avoid access denied exception  
     String suggestion = null;
     Session session = null;
@@ -160,6 +185,22 @@ public class SiteSearchServiceImpl implements SiteSearchService {
     return suggestion;
   }
 
+
+  /**
+   * Search site content.
+   *
+   * @param queryCriteria the query criteria
+   * @param queryManager the query manager
+   *
+   * @return the query result
+   *
+   * @throws Exception the exception
+   */
+  protected QueryResult searchSiteContent(QueryCriteria queryCriteria, QueryManager queryManager) throws Exception {
+    return searchSiteContent(queryCriteria, queryManager, -1, -1);
+  }
+
+
   /**
    * Search site content.
    * 
@@ -170,7 +211,7 @@ public class SiteSearchServiceImpl implements SiteSearchService {
    * 
    * @throws Exception the exception
    */
-  private QueryResult searchSiteContent(QueryCriteria queryCriteria, QueryManager queryManager) throws Exception {
+  protected QueryResult searchSiteContent(QueryCriteria queryCriteria, QueryManager queryManager, long limit, long offset) throws Exception {
     SQLQueryBuilder queryBuilder = new SQLQueryBuilder();    
     mapQueryTypes(queryCriteria, queryBuilder);
     if(queryCriteria.isFulltextSearch()) {
@@ -185,6 +226,12 @@ public class SiteSearchServiceImpl implements SiteSearchService {
     orderBy(queryCriteria, queryBuilder);
     String queryStatement = queryBuilder.createQueryStatement();
     Query query = queryManager.createQuery(queryStatement, Query.SQL);
+
+    if (limit>-1 && offset>-1) {
+      ((QueryImpl)query).setLimit(limit);
+      ((QueryImpl)query).setOffset(offset);
+    }
+
     return query.execute();
   }
 

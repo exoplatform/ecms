@@ -24,13 +24,23 @@ import javax.jcr.Node;
 import javax.jcr.NodeIterator;
 import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
+import javax.jcr.Session;
+import javax.jcr.query.QueryManager;
+import javax.jcr.query.QueryResult;
 
+import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.portal.config.UserPortalConfigService;
 import org.exoplatform.portal.config.model.Page;
 import org.exoplatform.portal.pom.config.POMSession;
 import org.exoplatform.portal.pom.config.POMSessionManager;
+import org.exoplatform.services.cms.templates.TemplateService;
+import org.exoplatform.services.jcr.RepositoryService;
+import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.wcm.BaseWCMTestCase;
+import org.exoplatform.services.wcm.core.NodeLocation;
+import org.exoplatform.services.wcm.core.WCMConfigurationService;
+import org.exoplatform.services.wcm.portal.LivePortalManagerService;
 import org.exoplatform.services.wcm.publication.PublicationDefaultStates;
 import org.exoplatform.services.wcm.publication.WCMPublicationService;
 import org.exoplatform.services.wcm.publication.WebpagePublicationPlugin;
@@ -463,7 +473,8 @@ public class TestSearchService extends BaseWCMTestCase {
     this.searchIsLiveMode = true;
     this.searchSelectedPortal = null;
     queryCriteria.setFulltextSearch(false);
-    WCMPaginatedQueryResult paginatedQueryResult = getSearchResult();
+    WCMPaginatedQueryResult paginatedQueryResult = 
+      (new SiteSearchServiceImplDump((SiteSearchServiceImpl)siteSearchService)).searchSiteContents(WCMCoreUtils.getSystemSessionProvider(), queryCriteria, seachItemsPerPage, false);
     assertEquals(0, paginatedQueryResult.getPage(1).size());
   }
 
@@ -507,7 +518,8 @@ public class TestSearchService extends BaseWCMTestCase {
     queryProperty2.setName("jcr:data");
     queryProperty2.setValue("the default.css file");
     queryCriteria.setQueryMetadatas(new QueryProperty[]{queryProperty1, queryProperty2});
-    WCMPaginatedQueryResult paginatedQueryResult = getSearchResult();
+    WCMPaginatedQueryResult paginatedQueryResult = 
+      (new SiteSearchServiceImplDump((SiteSearchServiceImpl)siteSearchService)).searchSiteContents(WCMCoreUtils.getSystemSessionProvider(), queryCriteria, seachItemsPerPage, false);      
     assertEquals(0, paginatedQueryResult.getPage(1).size());
   }
 
@@ -600,5 +612,77 @@ public class TestSearchService extends BaseWCMTestCase {
     }
     
     session.save();
+  }
+  
+  private class WCMPaginatedQueryResultDump extends WCMPaginatedQueryResult {
+    public WCMPaginatedQueryResultDump(int pageSize) {
+      super(pageSize);
+    }
+
+    public WCMPaginatedQueryResultDump(QueryResult queryResult,
+        QueryCriteria queryCriteria, int pageSize, long numTotal,
+        boolean showTotalPagination, boolean isSearchContent) throws Exception {
+      super(queryResult, queryCriteria, pageSize, numTotal, showTotalPagination, isSearchContent);
+    }
+
+    protected void populateCurrentPage(int page) throws Exception {
+      if(page == currentPage_ && (currentListPage_ != null && !currentListPage_.isEmpty())) {
+        return;
+      }
+      //checkAndSetPosition(page);
+
+      SiteSearchService siteSearchService = WCMCoreUtils.getService(SiteSearchService.class);
+      queryCriteria.setOffset((page-1)*getPageSize());
+      QueryResult queryResult = siteSearchService.searchSiteContents(WCMCoreUtils.getSystemSessionProvider(), this.queryCriteria, this.getPageSize(), false).queryResult;
+      populateCurrentListPage(queryResult);
+      currentPage_ = page;
+    }
+  }
+  
+  private class SiteSearchServiceImplDump extends SiteSearchServiceImpl {
+
+    public SiteSearchServiceImplDump(SiteSearchServiceImpl searchService) throws Exception {
+      super(searchService.livePortalManagerService, searchService.templateService, searchService.configurationService,
+          searchService.repositoryService, null);
+      // TODO Auto-generated constructor stub
+    }
+    
+    public WCMPaginatedQueryResult searchSiteContents(SessionProvider sessionProvider, QueryCriteria queryCriteria, int pageSize, boolean isSearchContent) throws Exception {
+      ManageableRepository currentRepository = repositoryService.getCurrentRepository();
+      NodeLocation location = configurationService.getLivePortalsLocation(currentRepository.getConfiguration().getName());    
+      long startTime = System.currentTimeMillis();
+
+      String pageMode = queryCriteria.getPageMode();
+      boolean showTotalPagination = SiteSearchService.PAGE_MODE_PAGINATION.equals(pageMode);
+
+      long numTotal = 0;
+      int limit = SiteSearchService.PAGE_MODE_NONE.equals(pageMode)?pageSize : pageSize+1;
+
+      if (showTotalPagination) {
+        SessionProvider systemProvider = WCMCoreUtils.getSystemSessionProvider();
+        Session session = systemProvider.getSession(location.getWorkspace(), currentRepository);
+        QueryManager queryManager = session.getWorkspace().getQueryManager();
+        QueryResult queryResult = searchSiteContent(queryCriteria, queryManager);
+        numTotal = queryResult.getNodes().getSize();
+        limit--;
+      }
+
+      System.out.println("Location: " + location + ";;; Repo: " + currentRepository + ";;; Provider :" + sessionProvider);
+      Session session = sessionProvider.getSession(location.getWorkspace(), currentRepository);
+      QueryManager queryManager = session.getWorkspace().getQueryManager();
+      long offset = 0;
+      if (queryCriteria.getOffset()>-1) offset = queryCriteria.getOffset();
+      QueryResult queryResult = searchSiteContent(queryCriteria, queryManager, limit, offset);
+      if (!showTotalPagination) numTotal = queryResult.getNodes().getSize();
+
+      String suggestion = getSpellSuggestion(queryCriteria.getKeyword(),currentRepository);
+      long queryTime = System.currentTimeMillis() - startTime;
+      WCMPaginatedQueryResultDump paginatedQueryResult = null;
+      paginatedQueryResult = new WCMPaginatedQueryResultDump( queryResult, queryCriteria, pageSize, numTotal, showTotalPagination, isSearchContent);
+      paginatedQueryResult.setQueryTime(queryTime);
+      paginatedQueryResult.setSpellSuggestion(suggestion);    
+      return paginatedQueryResult;
+    }  
+    
   }
 }

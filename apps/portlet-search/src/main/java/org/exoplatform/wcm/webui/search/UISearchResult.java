@@ -19,7 +19,9 @@ package org.exoplatform.wcm.webui.search;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.jcr.Node;
 import javax.jcr.Value;
@@ -27,6 +29,7 @@ import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
 
 import org.exoplatform.commons.utils.ISO8601;
+import org.exoplatform.commons.utils.ObjectPageList;
 import org.exoplatform.commons.utils.PageList;
 import org.exoplatform.portal.application.PortalRequestContext;
 import org.exoplatform.portal.webui.container.UIContainer;
@@ -34,6 +37,7 @@ import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.resolver.ResourceResolver;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.wcm.search.QueryCriteria;
+import org.exoplatform.services.wcm.search.ResultNode;
 import org.exoplatform.services.wcm.search.SiteSearchService;
 import org.exoplatform.services.wcm.search.WCMPaginatedQueryResult;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
@@ -83,18 +87,28 @@ public class UISearchResult extends UIContainer {
 	/** The suggestion. */
 	private String										suggestionURL;
 
+  /** The PageMode */
+  private String                    pageMode;
+
+
 	/** The date formatter. */
 	private SimpleDateFormat					dateFormatter			= new SimpleDateFormat(ISO8601.SIMPLE_DATETIME_FORMAT);
 
 	/** The search time. */
 	private float											searchTime;
 
+	/** The search result in "More" mode */
+	private List<ResultNode> moreListResult;
+	
+	/** The page that already queried (used only in "More" mode */
+	private Set<Integer> morePageSet;
+
 	/** The Constant PARAMETER_REGX. */
 	public final static String				PARAMETER_REGX		= "(portal=.*)&(keyword=.*)";
 
 	/** The Constant RESULT_NOT_FOUND. */
 	public final static String				RESULT_NOT_FOUND	= "UISearchResult.msg.result-not-found";
-
+	
   /**
 	 * Inits the.
 	 * 
@@ -108,11 +122,15 @@ public class UISearchResult extends UIContainer {
 		PortletPreferences portletPreferences = portletRequestContext.getRequest().getPreferences();
 		String paginatorTemplatePath = portletPreferences.getValue(	UIWCMSearchPortlet.SEARCH_PAGINATOR_TEMPLATE_PATH,
 																																null);
+    this.pageMode = portletPreferences.getValue(UIWCMSearchPortlet.PAGE_MODE, SiteSearchService.PAGE_MODE_NONE);
+
 		this.templatePath = templatePath;
 		this.resourceResolver = resourceResolver;
 		uiPaginator = addChild(UICustomizeablePaginator.class, null, null);
 		uiPaginator.setTemplatePath(paginatorTemplatePath);
 		uiPaginator.setResourceResolver(resourceResolver);
+    uiPaginator.setPageMode(pageMode);
+    clearResult();
 	}
 
 	/*
@@ -154,12 +172,16 @@ public class UISearchResult extends UIContainer {
 	    TemplateService templateService = WCMCoreUtils.getService(TemplateService.class);
 	    List<String> documentNodeTypes = templateService.getAllDocumentNodeTypes(repository);
 
+      String pageMode = portletPreferences.getValue(UIWCMSearchPortlet.PAGE_MODE, SiteSearchService.PAGE_MODE_NONE);
+
+
 	    queryCriteria.setContentTypes(documentNodeTypes.toArray(new String[documentNodeTypes.size()]));
 			queryCriteria.setSiteName(portal);
 			queryCriteria.setKeyword(keyword.toLowerCase());			
 			queryCriteria.setSearchWebpage(isWebPage);
 			queryCriteria.setSearchDocument(isSearchDocument);
 			queryCriteria.setSearchWebContent(isSearchDocument);
+      queryCriteria.setPageMode(pageMode);
 			
 			if (Boolean.parseBoolean(Utils.getCurrentMode())) {
         queryCriteria.setLiveMode(true);
@@ -196,6 +218,8 @@ public class UISearchResult extends UIContainer {
 	@SuppressWarnings("unchecked")
   public void setPageList(PageList dataPageList) {
 		uiPaginator.setPageList(dataPageList);
+    moreListResult = new ArrayList<ResultNode>();
+    morePageSet = new HashSet<Integer>();
 	}
 
 	/**
@@ -225,6 +249,14 @@ public class UISearchResult extends UIContainer {
 		return uiPaginator.getCurrentPage();
 	}
 
+  /**
+   * Gets the page mode
+   * @return the page mode
+   */
+  public String getPageMode() {
+    return pageMode;
+  }
+  
 	/*
 	 * (non-Javadoc)
 	 * @see org.exoplatform.portal.webui.portal.UIPortalComponent#getTemplate()
@@ -483,4 +515,33 @@ public class UISearchResult extends UIContainer {
 	public int getNumberOfPage() {
 		return uiPaginator.getPageList().getAvailablePage();
 	}
+	
+	/**
+	 * Clears the displayed result list
+	 */
+	public void clearResult() {
+	  moreListResult = new ArrayList<ResultNode>();
+	  morePageSet = new HashSet<Integer>();
+    PortletPreferences portletPreferences = ((PortletRequestContext) WebuiRequestContext.getCurrentInstance()).getRequest().getPreferences();
+    String itemsPerPage = portletPreferences.getValue(UIWCMSearchPortlet.ITEMS_PER_PAGE, null);
+	  setPageList(new ObjectPageList(new ArrayList<ResultNode>(), 
+	                                 Integer.parseInt(itemsPerPage)));
+	}
+	
+	/**
+	 * Gets the real node list to display
+	 * 
+	 * @return the real node list
+	 */
+	public List<ResultNode> getRealCurrentPageData() throws Exception {
+	  int currentPage = getCurrentPage();
+	  if (SiteSearchService.PAGE_MODE_MORE.equals(pageMode)) {
+  	  if (!morePageSet.contains(currentPage)) {
+  	    morePageSet.add(currentPage);
+  	    moreListResult.addAll(getCurrentPageData());
+  	  }
+	  }
+	  return SiteSearchService.PAGE_MODE_MORE.equals(pageMode) ? moreListResult : getCurrentPageData();
+	}
+	
 }

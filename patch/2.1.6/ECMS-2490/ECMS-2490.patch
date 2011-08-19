@@ -1,0 +1,1325 @@
+Index: apps/portlet-search/src/main/java/org/exoplatform/wcm/webui/search/UISearchResult.java
+===================================================================
+--- apps/portlet-search/src/main/java/org/exoplatform/wcm/webui/search/UISearchResult.java	(revision 72739)
++++ apps/portlet-search/src/main/java/org/exoplatform/wcm/webui/search/UISearchResult.java	(working copy)
+@@ -19,7 +19,9 @@
+ import java.text.SimpleDateFormat;
+ import java.util.ArrayList;
+ import java.util.Calendar;
++import java.util.HashSet;
+ import java.util.List;
++import java.util.Set;
+ 
+ import javax.jcr.Node;
+ import javax.jcr.Value;
+@@ -27,6 +29,7 @@
+ import javax.portlet.PortletRequest;
+ 
+ import org.exoplatform.commons.utils.ISO8601;
++import org.exoplatform.commons.utils.ObjectPageList;
+ import org.exoplatform.commons.utils.PageList;
+ import org.exoplatform.portal.application.PortalRequestContext;
+ import org.exoplatform.portal.webui.container.UIContainer;
+@@ -34,6 +37,7 @@
+ import org.exoplatform.resolver.ResourceResolver;
+ import org.exoplatform.services.cms.templates.TemplateService;
+ import org.exoplatform.services.wcm.search.QueryCriteria;
++import org.exoplatform.services.wcm.search.ResultNode;
+ import org.exoplatform.services.wcm.search.SiteSearchService;
+ import org.exoplatform.services.wcm.search.WCMPaginatedQueryResult;
+ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+@@ -83,18 +87,28 @@
+ 	/** The suggestion. */
+ 	private String										suggestionURL;
+ 
++  /** The PageMode */
++  private String                    pageMode;
++
++
+ 	/** The date formatter. */
+ 	private SimpleDateFormat					dateFormatter			= new SimpleDateFormat(ISO8601.SIMPLE_DATETIME_FORMAT);
+ 
+ 	/** The search time. */
+ 	private float											searchTime;
+ 
++	/** The search result in "More" mode */
++	private List<ResultNode> moreListResult;
++	
++	/** The page that already queried (used only in "More" mode */
++	private Set<Integer> morePageSet;
++
+ 	/** The Constant PARAMETER_REGX. */
+ 	public final static String				PARAMETER_REGX		= "(portal=.*)&(keyword=.*)";
+ 
+ 	/** The Constant RESULT_NOT_FOUND. */
+ 	public final static String				RESULT_NOT_FOUND	= "UISearchResult.msg.result-not-found";
+-
++	
+   /**
+ 	 * Inits the.
+ 	 * 
+@@ -108,11 +122,15 @@
+ 		PortletPreferences portletPreferences = portletRequestContext.getRequest().getPreferences();
+ 		String paginatorTemplatePath = portletPreferences.getValue(	UIWCMSearchPortlet.SEARCH_PAGINATOR_TEMPLATE_PATH,
+ 																																null);
++    this.pageMode = portletPreferences.getValue(UIWCMSearchPortlet.PAGE_MODE, SiteSearchService.PAGE_MODE_NONE);
++
+ 		this.templatePath = templatePath;
+ 		this.resourceResolver = resourceResolver;
+ 		uiPaginator = addChild(UICustomizeablePaginator.class, null, null);
+ 		uiPaginator.setTemplatePath(paginatorTemplatePath);
+ 		uiPaginator.setResourceResolver(resourceResolver);
++    uiPaginator.setPageMode(pageMode);
++    clearResult();
+ 	}
+ 
+ 	/*
+@@ -154,12 +172,16 @@
+ 	    TemplateService templateService = WCMCoreUtils.getService(TemplateService.class);
+ 	    List<String> documentNodeTypes = templateService.getAllDocumentNodeTypes(repository);
+ 
++      String pageMode = portletPreferences.getValue(UIWCMSearchPortlet.PAGE_MODE, SiteSearchService.PAGE_MODE_NONE);
++
++
+ 	    queryCriteria.setContentTypes(documentNodeTypes.toArray(new String[documentNodeTypes.size()]));
+ 			queryCriteria.setSiteName(portal);
+ 			queryCriteria.setKeyword(keyword.toLowerCase());			
+ 			queryCriteria.setSearchWebpage(isWebPage);
+ 			queryCriteria.setSearchDocument(isSearchDocument);
+ 			queryCriteria.setSearchWebContent(isSearchDocument);
++      queryCriteria.setPageMode(pageMode);
+ 			
+ 			if (Boolean.parseBoolean(Utils.getCurrentMode())) {
+         queryCriteria.setLiveMode(true);
+@@ -196,6 +218,8 @@
+ 	@SuppressWarnings("unchecked")
+   public void setPageList(PageList dataPageList) {
+ 		uiPaginator.setPageList(dataPageList);
++    moreListResult = new ArrayList<ResultNode>();
++    morePageSet = new HashSet<Integer>();
+ 	}
+ 
+ 	/**
+@@ -225,6 +249,14 @@
+ 		return uiPaginator.getCurrentPage();
+ 	}
+ 
++  /**
++   * Gets the page mode
++   * @return the page mode
++   */
++  public String getPageMode() {
++    return pageMode;
++  }
++  
+ 	/*
+ 	 * (non-Javadoc)
+ 	 * @see org.exoplatform.portal.webui.portal.UIPortalComponent#getTemplate()
+@@ -483,4 +515,33 @@
+ 	public int getNumberOfPage() {
+ 		return uiPaginator.getPageList().getAvailablePage();
+ 	}
++	
++	/**
++	 * Clears the displayed result list
++	 */
++	public void clearResult() {
++	  moreListResult = new ArrayList<ResultNode>();
++	  morePageSet = new HashSet<Integer>();
++    PortletPreferences portletPreferences = ((PortletRequestContext) WebuiRequestContext.getCurrentInstance()).getRequest().getPreferences();
++    String itemsPerPage = portletPreferences.getValue(UIWCMSearchPortlet.ITEMS_PER_PAGE, null);
++	  setPageList(new ObjectPageList(new ArrayList<ResultNode>(), 
++	                                 Integer.parseInt(itemsPerPage)));
++	}
++	
++	/**
++	 * Gets the real node list to display
++	 * 
++	 * @return the real node list
++	 */
++	public List<ResultNode> getRealCurrentPageData() throws Exception {
++	  int currentPage = getCurrentPage();
++	  if (SiteSearchService.PAGE_MODE_MORE.equals(pageMode)) {
++  	  if (!morePageSet.contains(currentPage)) {
++  	    morePageSet.add(currentPage);
++  	    moreListResult.addAll(getCurrentPageData());
++  	  }
++	  }
++	  return SiteSearchService.PAGE_MODE_MORE.equals(pageMode) ? moreListResult : getCurrentPageData();
++	}
++	
+ }
+Index: apps/portlet-search/src/main/java/org/exoplatform/wcm/webui/search/UIWCMSearchPortlet.java
+===================================================================
+--- apps/portlet-search/src/main/java/org/exoplatform/wcm/webui/search/UIWCMSearchPortlet.java	(revision 72739)
++++ apps/portlet-search/src/main/java/org/exoplatform/wcm/webui/search/UIWCMSearchPortlet.java	(working copy)
+@@ -55,6 +55,9 @@
+ 	/** The Constant ITEMS_PER_PAGE. */
+ 	public final static String	ITEMS_PER_PAGE										= "itemsPerPage";
+ 	
++	/** The Constant PAGE_MODE. */
++	public final static String	PAGE_MODE										      = "pageMode";
++
+ 	/** The Constant SHOW_DATE_CREATED. */
+   public final static String  BASE_PATH                          = "basePath";
+ 
+Index: apps/portlet-search/src/main/java/org/exoplatform/wcm/webui/search/config/UISearchPageLayoutManager.java
+===================================================================
+--- apps/portlet-search/src/main/java/org/exoplatform/wcm/webui/search/config/UISearchPageLayoutManager.java	(revision 72739)
++++ apps/portlet-search/src/main/java/org/exoplatform/wcm/webui/search/config/UISearchPageLayoutManager.java	(working copy)
+@@ -61,16 +61,16 @@
+ public class UISearchPageLayoutManager extends UIForm  implements UISelectable {
+ 
+ 	/** The Constant PORTLET_NAME. */
+-	public static final String	PORTLET_NAME												= "WCM Advance Search".intern();
++	public static final String	PORTLET_NAME												= "WCM Advance Search";
+ 
+ 	/** The Constant SEARCH_PAGE_LAYOUT_CATEGORY. */
+-	public static final String	SEARCH_PAGE_LAYOUT_CATEGORY					= "search-page-layout".intern();
++	public static final String	SEARCH_PAGE_LAYOUT_CATEGORY					= "search-page-layout";
+ 
+ 	/** The Constant SEARCH_PAGE_LAYOUT_SELECTOR. */
+-	public static final String	SEARCH_PAGE_LAYOUT_SELECTOR					= "searchPageLayoutSelector".intern();
++	public static final String	SEARCH_PAGE_LAYOUT_SELECTOR					= "searchPageLayoutSelector";
+ 
+ 	/** The Constant SEARCH_FORM_TEMPLATE_CATEGORY. */
+-	public static final String	SEARCH_FORM_TEMPLATE_CATEGORY				= "search-form".intern();
++	public static final String	SEARCH_FORM_TEMPLATE_CATEGORY				= "search-form";
+ 
+ 	/** The Constant SEARCH_PAGINATOR_TEMPLATE_CATEGORY. */
+ 	public static final String	SEARCH_PAGINATOR_TEMPLATE_CATEGORY	= "search-paginator";
+@@ -81,15 +81,18 @@
+ 	/** The Constant SEARCH_FORM_TEMPLATE_SELECTOR. */
+ 	public static final String	SEARCH_FORM_TEMPLATE_SELECTOR				= "searchFormSelector";
+ 
+-	/** The Constant SEARCH_PAGINATOR_TEMPLATE_SELECTOR. */
+-	public static final String	SEARCH_PAGINATOR_TEMPLATE_SELECTOR	= "searchPaginatorSelector";
++//	/** The Constant SEARCH_PAGINATOR_TEMPLATE_SELECTOR. */
++//	public static final String	SEARCH_PAGINATOR_TEMPLATE_SELECTOR	= "searchPaginatorSelector";
+ 
+ 	/** The Constant SEARCH_RESULT_TEMPLATE_SELECTOR. */
+ 	public static final String	SEARCH_RESULT_TEMPLATE_SELECTOR			= "searchResultSelector";
+ 
+-	/** The Constant ITEMS_PER_PAGE_SELECTOR. */
+-	public final static String	ITEMS_PER_PAGE_SELECTOR							= "itemsPerPageSelector";
++  /** The Constant ITEMS_PER_PAGE_SELECTOR. */
++  public final static String	ITEMS_PER_PAGE_SELECTOR							= "itemsPerPageSelector";
+ 
++  /** The Constant PAGE_MODE_SELECTOR. */
++  public final static String	PAGE_MODE_SELECTOR							= "pageMode";
++
+ 	/** The Constant BASE_PATH_INPUT. */
+   public final static String BASE_PATH_INPUT                 = "searchResultBasePathInput";
+ 
+@@ -125,20 +128,21 @@
+ 		PortletPreferences portletPreferences = portletRequestContext.getRequest().getPreferences();
+ 
+ 		String itemsPerpage = portletPreferences.getValue(UIWCMSearchPortlet.ITEMS_PER_PAGE, null);
++		String pageMode = portletPreferences.getValue(UIWCMSearchPortlet.PAGE_MODE, null);
+ 		String searchFormTemplate = portletPreferences.getValue(UIWCMSearchPortlet.SEARCH_FORM_TEMPLATE_PATH,
+ 																														null);
+ 		String searchResultTemplate = portletPreferences.getValue(UIWCMSearchPortlet.SEARCH_RESULT_TEMPLATE_PATH,
+ 																															null);
+-		String searchPaginatorTemplate = portletPreferences.getValue(	UIWCMSearchPortlet.SEARCH_PAGINATOR_TEMPLATE_PATH,
+-																																	null);
++//		String searchPaginatorTemplate = portletPreferences.getValue(	UIWCMSearchPortlet.SEARCH_PAGINATOR_TEMPLATE_PATH,
++//																																	null);
+ 		String searchPageLayoutTemplate = portletPreferences.getValue(UIWCMSearchPortlet.SEARCH_PAGE_LAYOUT_TEMPLATE_PATH,
+ 																																	null);		
+ 		List<SelectItemOption<String>> searchFormTemplateList = createTemplateList(	PORTLET_NAME,
+ 																																								SEARCH_FORM_TEMPLATE_CATEGORY);
+ 		List<SelectItemOption<String>> searchResultTemplateList = createTemplateList(	PORTLET_NAME,
+ 																																									SEARCH_RESULT_TEMPLATE_CATEGORY);
+-		List<SelectItemOption<String>> searchPaginatorTemplateList = createTemplateList(PORTLET_NAME,
+-																																										SEARCH_PAGINATOR_TEMPLATE_CATEGORY);
++//		List<SelectItemOption<String>> searchPaginatorTemplateList = createTemplateList(PORTLET_NAME,
++//																																										SEARCH_PAGINATOR_TEMPLATE_CATEGORY);
+ 		List<SelectItemOption<String>> searchPageLayoutTemplateList = createTemplateList(	PORTLET_NAME,
+ 																																											SEARCH_PAGE_LAYOUT_CATEGORY);
+ 		List<SelectItemOption<String>> itemsPerPageList = new ArrayList<SelectItemOption<String>>();
+@@ -146,6 +150,15 @@
+ 		itemsPerPageList.add(new SelectItemOption<String>("10", "10"));
+ 		itemsPerPageList.add(new SelectItemOption<String>("20", "20"));
+ 
++    List<SelectItemOption<String>> pageModeList = new ArrayList<SelectItemOption<String>>();
++    pageModeList.add(new SelectItemOption<String>("none", "none"));
++    pageModeList.add(new SelectItemOption<String>("more", "more"));
++    pageModeList.add(new SelectItemOption<String>("pagination", "pagination"));
++
++    UIFormSelectBox pageModeSelector = new UIFormSelectBox(PAGE_MODE_SELECTOR,
++            PAGE_MODE_SELECTOR,
++            pageModeList);
++
+ 		UIFormSelectBox itemsPerPageSelector = new UIFormSelectBox(	ITEMS_PER_PAGE_SELECTOR,
+ 																																ITEMS_PER_PAGE_SELECTOR,
+ 																																itemsPerPageList);
+@@ -155,9 +168,9 @@
+ 		UIFormSelectBox searchResultTemplateSelector = new UIFormSelectBox(	SEARCH_RESULT_TEMPLATE_SELECTOR,
+ 																																				SEARCH_RESULT_TEMPLATE_SELECTOR,
+ 																																				searchResultTemplateList);
+-		UIFormSelectBox searchPaginatorTemplateSelector = new UIFormSelectBox(SEARCH_PAGINATOR_TEMPLATE_SELECTOR,
+-																																					SEARCH_PAGINATOR_TEMPLATE_SELECTOR,
+-																																					searchPaginatorTemplateList);
++//		UIFormSelectBox searchPaginatorTemplateSelector = new UIFormSelectBox(SEARCH_PAGINATOR_TEMPLATE_SELECTOR,
++//																																					SEARCH_PAGINATOR_TEMPLATE_SELECTOR,
++//																																					searchPaginatorTemplateList);
+ 		UIFormSelectBox searchPageLayoutTemplateSelector = new UIFormSelectBox(	SEARCH_PAGE_LAYOUT_SELECTOR,
+ 																																						SEARCH_PAGE_LAYOUT_SELECTOR,
+ 																																						searchPageLayoutTemplateList);		
+@@ -169,17 +182,19 @@
+     targetPathFormStringInput.setEditable(false);
+     targetPathFormInputSet.setActionInfo(BASE_PATH_INPUT, new String[] {"SelectBasePath"}) ;
+     targetPathFormInputSet.addUIFormInput(targetPathFormStringInput);
+-		
++
++    pageModeSelector.setValue(pageMode);
+ 		itemsPerPageSelector.setValue(itemsPerpage);
+ 		searchFormTemplateSelector.setValue(searchFormTemplate);
+ 		searchResultTemplateSelector.setValue(searchResultTemplate);
+-		searchPaginatorTemplateSelector.setValue(searchPaginatorTemplate);
++//		searchPaginatorTemplateSelector.setValue(searchPaginatorTemplate);
+ 		searchPageLayoutTemplateSelector.setValue(searchPageLayoutTemplate);
+ 
++    addChild(pageModeSelector);
+ 		addChild(itemsPerPageSelector);		
+ 		addChild(searchFormTemplateSelector);
+ 		addChild(searchResultTemplateSelector);
+-		addChild(searchPaginatorTemplateSelector);
++//		addChild(searchPaginatorTemplateSelector);
+ 		addChild(searchPageLayoutTemplateSelector);
+ 		addChild(targetPathFormInputSet);
+ 
+@@ -222,7 +237,6 @@
+ 	 * the saveAction event occurs, that object's appropriate
+ 	 * method is invoked.
+ 	 * 
+-	 * @see SaveActionEvent
+ 	 */
+ 	public static class SaveActionListener extends EventListener<UISearchPageLayoutManager> {
+ 
+@@ -246,26 +260,27 @@
+ 																															.getValue();
+ 			String searchFormTemplatePath = uiSearchLayoutManager	.getUIFormSelectBox(UISearchPageLayoutManager.SEARCH_FORM_TEMPLATE_SELECTOR)
+ 																														.getValue();
+-			String searchPaginatorTemplatePath = uiSearchLayoutManager.getUIFormSelectBox(UISearchPageLayoutManager.SEARCH_PAGINATOR_TEMPLATE_SELECTOR)
+-																																.getValue();
++//			String searchPaginatorTemplatePath = uiSearchLayoutManager.getUIFormSelectBox(UISearchPageLayoutManager.SEARCH_PAGINATOR_TEMPLATE_SELECTOR)
++//																																.getValue();
+ 			String searchPageLayoutTemplatePath = uiSearchLayoutManager	.getUIFormSelectBox(UISearchPageLayoutManager.SEARCH_PAGE_LAYOUT_SELECTOR)
+ 																																	.getValue();
+ 			String itemsPerPage = uiSearchLayoutManager	.getUIFormSelectBox(UISearchPageLayoutManager.ITEMS_PER_PAGE_SELECTOR)
+ 																									.getValue();
++      String pageMode = uiSearchLayoutManager.getUIFormSelectBox(UISearchPageLayoutManager.PAGE_MODE_SELECTOR).getValue();
++			String basePath = uiSearchLayoutManager.getUIStringInput(UISearchPageLayoutManager.BASE_PATH_INPUT).getValue();
+ 			
+-			String basePath = uiSearchLayoutManager.getUIStringInput(UISearchPageLayoutManager.BASE_PATH_INPUT).getValue();
+-
+ 			portletPreferences.setValue(UIWCMSearchPortlet.REPOSITORY, repository);
+ 			portletPreferences.setValue(UIWCMSearchPortlet.WORKSPACE, workspace);			
+ 			portletPreferences.setValue(UIWCMSearchPortlet.SEARCH_RESULT_TEMPLATE_PATH,
+ 																	searchResultTemplatePath);
+ 			portletPreferences.setValue(UIWCMSearchPortlet.SEARCH_FORM_TEMPLATE_PATH,
+ 																	searchFormTemplatePath);
+-			portletPreferences.setValue(UIWCMSearchPortlet.SEARCH_PAGINATOR_TEMPLATE_PATH,
+-																	searchPaginatorTemplatePath);
++//			portletPreferences.setValue(UIWCMSearchPortlet.SEARCH_PAGINATOR_TEMPLATE_PATH,
++//																	searchPaginatorTemplatePath);
+ 			portletPreferences.setValue(UIWCMSearchPortlet.SEARCH_PAGE_LAYOUT_TEMPLATE_PATH,
+ 																	searchPageLayoutTemplatePath);
+ 			portletPreferences.setValue(UIWCMSearchPortlet.ITEMS_PER_PAGE, itemsPerPage);
++      portletPreferences.setValue(UIWCMSearchPortlet.PAGE_MODE, pageMode);
+ 			portletPreferences.setValue(UIWCMSearchPortlet.BASE_PATH, basePath);
+ 			portletPreferences.store();
+ 			
+@@ -285,7 +300,6 @@
+ 	 * the cancelAction event occurs, that object's appropriate
+ 	 * method is invoked.
+ 	 * 
+-	 * @see CancelActionEvent
+ 	 */
+ 	public static class CancelActionListener extends EventListener<UISearchPageLayoutManager> {
+ 
+@@ -321,7 +335,6 @@
+    * the selectTargetPageAction event occurs, that object's appropriate
+    * method is invoked.
+    * 
+-   * @see SelectTargetPageActionEvent
+    */
+   public static class SelectBasePathActionListener extends EventListener<UISearchPageLayoutManager> {
+     
+Index: apps/portlet-search/src/main/java/org/exoplatform/wcm/webui/search/UISearchForm.java
+===================================================================
+--- apps/portlet-search/src/main/java/org/exoplatform/wcm/webui/search/UISearchForm.java	(revision 72739)
++++ apps/portlet-search/src/main/java/org/exoplatform/wcm/webui/search/UISearchForm.java	(working copy)
+@@ -174,7 +174,6 @@
+ 	 * the searchAction event occurs, that object's appropriate
+ 	 * method is invoked.
+ 	 * 
+-	 * @see SearchActionEvent
+ 	 */
+ 	public static class SearchActionListener extends EventListener<UISearchForm> {
+ 
+@@ -200,6 +199,9 @@
+ 			UIFormCheckBoxInput uiDocumentCheckbox = uiSearchForm.getUIFormCheckBoxInput(UISearchForm.DOCUMENT_CHECKING);
+ 			String pageChecked = (uiPageCheckbox.isChecked()) ? "true" : "false";
+ 			String documentChecked = (uiDocumentCheckbox.isChecked()) ? "true" : "false";
++			
++			uiSearchResult.clearResult();
++			
+ 			if (keyword == null || keyword.trim().length() == 0) {
+ 				uiApp.addMessage(new ApplicationMessage(MESSAGE_NOT_EMPTY_KEYWORD,
+ 																								null,
+@@ -254,6 +256,7 @@
+ 			}
+ 			int itemsPerPage = Integer.parseInt(portletPreferences.getValue(UIWCMSearchPortlet.ITEMS_PER_PAGE,
+ 																																			null));
++      queryCriteria.setPageMode(portletPreferences.getValue(UIWCMSearchPortlet.PAGE_MODE, null));
+ 			try {
+ 				WCMPaginatedQueryResult paginatedQueryResult = siteSearchService.searchSiteContents(
+ 				                                                                                    Utils.getSessionProvider(),
+Index: apps/portlet-search/src/main/webapp/groovy/webui/search/config/UISearchPageLayoutManager.gtmpl
+===================================================================
+--- apps/portlet-search/src/main/webapp/groovy/webui/search/config/UISearchPageLayoutManager.gtmpl	(revision 72739)
++++ apps/portlet-search/src/main/webapp/groovy/webui/search/config/UISearchPageLayoutManager.gtmpl	(working copy)
+@@ -22,6 +22,12 @@
+ 			      </td>
+ 						<td class="FieldComponent" colspan="2"><% uiform.renderField(uiform.getChildById(uicomponent.ITEMS_PER_PAGE_SELECTOR)); %></td>
+ 					</tr>
++	      	<tr>
++			      <td class="FieldLabel">
++				      <%=uicomponent.getLabel(uiform.getChildById(uicomponent.PAGE_MODE_SELECTOR).getName()) %>
++			      </td>
++						<td class="FieldComponent" colspan="2"><% uiform.renderField(uiform.getChildById(uicomponent.PAGE_MODE_SELECTOR)); %></td>
++					</tr>
+ 					<tr>
+ 			      <td class="FieldLabel">
+ 				      <%=uicomponent.getLabel(uiform.getChildById(uicomponent.SEARCH_FORM_TEMPLATE_SELECTOR).getName()) %>
+@@ -34,15 +40,9 @@
+ 			      </td>
+ 						<td class="FieldComponent" colspan="2"><% uiform.renderField(uiform.getChildById(uicomponent.SEARCH_RESULT_TEMPLATE_SELECTOR)) ;%></td>								
+ 					</tr>					
++
+ 					<tr>
+ 			      <td class="FieldLabel">
+-				      <%=uicomponent.getLabel(uiform.getChildById(uicomponent.SEARCH_PAGINATOR_TEMPLATE_SELECTOR).getName()) %>
+-			      </td>
+-						<td class="FieldComponent" colspan="2"><% uiform.renderField(uiform.getChildById(uicomponent.SEARCH_PAGINATOR_TEMPLATE_SELECTOR)); %></td>								
+-					</tr>
+-					
+-					<tr>
+-			      <td class="FieldLabel">
+ 				      <%=uicomponent.getLabel(uiform.getChildById(uicomponent.SEARCH_PAGE_LAYOUT_SELECTOR).getName()) %>
+ 			      </td>
+ 						<td class="FieldComponent" colspan="2"><% uiform.renderField(uiform.getChildById(uicomponent.SEARCH_PAGE_LAYOUT_SELECTOR)); %></td>								
+Index: apps/portlet-search/src/main/webapp/WEB-INF/portlet.xml
+===================================================================
+--- apps/portlet-search/src/main/webapp/WEB-INF/portlet.xml	(revision 72739)
++++ apps/portlet-search/src/main/webapp/WEB-INF/portlet.xml	(working copy)
+@@ -72,6 +72,11 @@
+         <read-only>false</read-only>
+       </preference>
+       <preference>
++        <name>pageMode</name>
++        <value>more</value> <!-- supported modes : pagination, more, none -->
++        <read-only>false</read-only>
++      </preference>
++      <preference>
+         <name>basePath</name>
+         <value>parameterizedviewer</value>
+         <read-only>false</read-only>
+Index: apps/portlet-search/src/main/webapp/WEB-INF/classes/locale/portlet/search/AdvanceSearch_vi.xml
+===================================================================
+--- apps/portlet-search/src/main/webapp/WEB-INF/classes/locale/portlet/search/AdvanceSearch_vi.xml	(revision 72739)
++++ apps/portlet-search/src/main/webapp/WEB-INF/classes/locale/portlet/search/AdvanceSearch_vi.xml	(working copy)
+@@ -42,12 +42,23 @@
+       <searchPaginatorSelector>Tìm Paginator mẫu</searchPaginatorSelector>
+       <searchPageLayoutSelector>Tìm mẫu bố trí trang</searchPageLayoutSelector>
+       <searchResultBasePathInputSetAction>Đường dẫn gốc</searchResultBasePathInputSetAction>
++      <pageMode>Kiểu hiển thị kết quả</pageMode>
++      <option>
++        <none>Hiển thị toàn bộ</none>
++        <more>Hiển thị từng trang</more>
++        <pagination>Phân trang</pagination>
++      </option>
+     </label>
+     <action>
+       <Save>Lưu</Save>
+       <Cancel>Hủy</Cancel>
+     </action>
+   </UISearchPageLayoutManager>
++  <searchResultBasePathInputSetAction>
++    <title>
++      <SelectBasePath>Chọn đường dẫn gốc</SelectBasePath>
++    </title>
++  </searchResultBasePathInputSetAction>  
+   <UISearchForm>
+   	 <message>
+   	   <keyword-not-support>The keyword is invalid. Some characters are not supported.</keyword-not-support>
+@@ -55,4 +66,16 @@
+   	   <keyword-not-empty>Giá trị của khóa tìm kiếm không được rỗng hoặc trống!</keyword-not-empty>
+   	 </message>
+   </UISearchForm>
++  <UIPaginatorDefault>
++    <label>
++      <next>Sau</next>
++      <previous>Trước</previous>    
++      <more>Tiếp theo</more>
++    </label>
++  </UIPaginatorDefault>
++  <UISearchPageLayoutDefault>
++    <label>
++      <quickEditTitle>Sửa nhanh</quickEditTitle>
++    </label>
++  </UISearchPageLayoutDefault>  
+ </bundle>
+\ No newline at end of file
+Index: apps/portlet-search/src/main/webapp/WEB-INF/classes/locale/portlet/search/AdvanceSearch_en.xml
+===================================================================
+--- apps/portlet-search/src/main/webapp/WEB-INF/classes/locale/portlet/search/AdvanceSearch_en.xml	(revision 72739)
++++ apps/portlet-search/src/main/webapp/WEB-INF/classes/locale/portlet/search/AdvanceSearch_en.xml	(working copy)
+@@ -42,12 +42,23 @@
+       <searchPaginatorSelector>Search paginator template</searchPaginatorSelector>
+       <searchPageLayoutSelector>Search page layout template</searchPageLayoutSelector>
+       <searchResultBasePathInputSetAction>Base path</searchResultBasePathInputSetAction>
++      <pageMode>Page Mode</pageMode>
++      <option>
++        <none>None</none>
++        <more>More</more>
++        <pagination>Pagination</pagination>
++      </option>
+     </label>
+     <action>
+       <Save>Save</Save>
+       <Cancel>Cancel</Cancel>
+     </action>
+   </UISearchPageLayoutManager>
++  <searchResultBasePathInputSetAction>
++    <title>
++      <SelectBasePath>Select Base Path</SelectBasePath>
++    </title>
++  </searchResultBasePathInputSetAction>
+   <UISearchForm>
+   	 <message>
+   	     <keyword-not-support>The keyword is invalid. Some characters are not supported.</keyword-not-support>
+@@ -55,4 +66,16 @@
+ 		 <not-checked>Search type is not checked. Choose a search type, please.</not-checked>
+   	 </message>
+   </UISearchForm>
++  <UIPaginatorDefault>
++    <label>
++      <next>Next</next>
++      <previous>Previous</previous>
++      <more>More</more>
++    </label>
++  </UIPaginatorDefault>
++  <UISearchPageLayoutDefault>
++    <label>
++      <quickEditTitle>Quick Edit</quickEditTitle>
++    </label>
++  </UISearchPageLayoutDefault>  
+ </bundle>
+\ No newline at end of file
+Index: apps/portlet-search/src/main/webapp/WEB-INF/classes/locale/portlet/search/AdvanceSearch_fr.xml
+===================================================================
+--- apps/portlet-search/src/main/webapp/WEB-INF/classes/locale/portlet/search/AdvanceSearch_fr.xml	(revision 72739)
++++ apps/portlet-search/src/main/webapp/WEB-INF/classes/locale/portlet/search/AdvanceSearch_fr.xml	(working copy)
+@@ -42,12 +42,23 @@
+       <searchPaginatorSelector>Paginator modèle de recherche</searchPaginatorSelector>
+       <searchPageLayoutSelector>Mise en page modèle de recherche</searchPageLayoutSelector>
+       <searchResultBasePathInputSetAction>Base de chemin</searchResultBasePathInputSetAction>
++      <pageMode>Mode de page</pageMode>
++      <option>
++        <none>Aucun</none>
++        <more>Plus</more>
++        <pagination>Pagination</pagination>
++      </option>
+     </label>
+     <action>
+       <Save>Sauver</Save>
+       <Cancel>Annuler</Cancel>
+     </action>
+   </UISearchPageLayoutManager>
++  <searchResultBasePathInputSetAction>
++    <title>
++      <SelectBasePath>Sélectionnez le chemin de base</SelectBasePath>
++    </title>
++  </searchResultBasePathInputSetAction>  
+   <UISearchForm>
+   	 <message>
+   	   <keyword-not-support>Le mot clé est invalide. Certains caractères ne sont pas autorisés.</keyword-not-support>
+@@ -55,4 +66,16 @@
+        <not-checked>Le type de recherche n'est pas sélectionné. Veuillez en choisir un.</not-checked>
+   	 </message>
+   </UISearchForm>
++  <UIPaginatorDefault>
++    <label>
++      <next>Suivant</next>
++      <previous>Précédent</previous>
++      <more>Plus</more>
++    </label>
++  </UIPaginatorDefault>
++  <UISearchPageLayoutDefault>
++    <label>
++      <quickEditTitle>Edition rapide</quickEditTitle>
++    </label>
++  </UISearchPageLayoutDefault>
+ </bundle>
+\ No newline at end of file
+Index: apps/resources-wcm/src/main/webapp/javascript/eXo/wcm/frontoffice/public/Search.js
+===================================================================
+--- apps/resources-wcm/src/main/webapp/javascript/eXo/wcm/frontoffice/public/Search.js	(revision 72739)
++++ apps/resources-wcm/src/main/webapp/javascript/eXo/wcm/frontoffice/public/Search.js	(working copy)
+@@ -89,4 +89,22 @@
+ 	}	
+ };
+ 
++SearchPortlet.prototype.scrollToBottom = function(divId) {
++	var divBlock = document.getElementById(divId);
++	if (divBlock)
++		divBlock.scrollTop = divBlock.scrollHeight;
++};
++
++SearchPortlet.prototype.changeColor = function(divId, count) {
++	if (!count)
++		count = 0;
++	var divBlock = document.getElementById(divId);
++	if (divBlock) {
++		divBlock.style.backgroundColor = "#" + count.toString(16) + 
++											count.toString(16) + "FFFF";
++		if (count < 15) 
++			setTimeout("eXo.ecm.SearchPortlet.changeColor('" + divId + "'," + (count+1) + ")", 100);
++	}
++};
++
+ eXo.ecm.SearchPortlet = new SearchPortlet();
+\ No newline at end of file
+Index: packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/wcm-artifacts/application-templates/wcm-search/search-result/UIDefaultSearchResult.gtmpl
+===================================================================
+--- packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/wcm-artifacts/application-templates/wcm-search/search-result/UIDefaultSearchResult.gtmpl	(revision 72739)
++++ packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/wcm-artifacts/application-templates/wcm-search/search-result/UIDefaultSearchResult.gtmpl	(working copy)
+@@ -14,33 +14,42 @@
+  import org.exoplatform.wcm.webui.paginator.UICustomizeablePaginator;
+  import org.exoplatform.wcm.webui.search.UISearchForm;
+  import org.exoplatform.wcm.webui.search.UISearchPageLayout;
++ import org.exoplatform.services.wcm.search.SiteSearchService;
+ %>
+ 
+ <div id="$uicomponent.id" class="UIAdvanceSearchResultDefault">
+  <%
++  def showPaginator = false;
++  def pageMode = uicomponent.getPageMode();
+   def currentPageData = uicomponent.getCurrentPageData();
+   def keyword = uicomponent.getKeyword();
+   def resultType = uicomponent.getResultType();
+   def rcontext = _ctx.getRequestContext() ;
+ 	def jsManager = rcontext.getJavascriptManager();
+-	jsManager.importJavascript('eXo.wcm.frontoffice.public.Search', '/eXoWCMResources/javascript/') ;
++	jsManager.importJavascript('eXo.wcm.frontoffice.public.Search', '/eXoWCMResources/javascript/');
++	jsManager.addOnLoadJavascript("eXo.ecm.SearchPortlet.scrollToBottom('${uicomponent.id}')");
++	jsManager.addOnLoadJavascript("eXo.ecm.SearchPortlet.changeColor('NewResultData')");
+   %>
+    <div class="ResultHeader">
+     <div class="CaptionSearchType"><b><%= _ctx.appRes("UIDefaultSearchResult.label." + resultType) %></b></div>
+     <% 
+-     if (!currentPageData.isEmpty()) {
++     if (currentPageData != null && !currentPageData.isEmpty()) {
+     	def currentPage = uicomponent.getCurrentPage();
+     	def itemsPerPage = uicomponent.getItemsPerPage();
+       def totalItem = uicomponent.getTotalItem();
+       def startItemIndex = (currentPage - 1) * itemsPerPage + 1;
+-      def endItemIndex = currentPage* itemsPerPage;
++      def endItemIndex = startItemIndex + currentPageData.size() - 1;
+       def searchTime = uicomponent.getSearchTime();
+-      if (endItemIndex > totalItem) endItemIndex = totalItem;
++      if (endItemIndex > totalItem && SiteSearchService.PAGE_MODE_PAGINATION.equals(pageMode) ) endItemIndex = totalItem;
++      showPaginator = (itemsPerPage==currentPageData.size() && SiteSearchService.PAGE_MODE_MORE.equals(pageMode)) || 
++                       (SiteSearchService.PAGE_MODE_PAGINATION.equals(pageMode));
+       %>
+        <div class="SearchSummary">
+-        <%= _ctx.appRes("UIDefaultSearchResult.label.resutlsCaption") %> <b><%= startItemIndex %></b> - <b><%= endItemIndex %></b> 
+-        <%= _ctx.appRes("UIDefaultSearchResult.label.ofAboutCaption") %> <b><%= totalItem %></b> 
+-        <%= _ctx.appRes("UIDefaultSearchResult.label.forCaption") %> <b><%= keyword %></b> 
++        <%= _ctx.appRes("UIDefaultSearchResult.label.resutlsCaption") %> <b><%= startItemIndex %></b> - <b><%= endItemIndex %></b>
++        <% if (SiteSearchService.PAGE_MODE_PAGINATION.equals(pageMode)) { %>
++          <%= _ctx.appRes("UIDefaultSearchResult.label.ofAboutCaption") %> <b><%= totalItem %></b>
++          <%= _ctx.appRes("UIDefaultSearchResult.label.forCaption") %> <b><%= keyword %></b>
++        <% } %>
+         (<b><%= searchTime %></b> <%= _ctx.appRes("UIDefaultSearchResult.label.timeUnitCaption") %>)
+        </div>
+       <%
+@@ -59,7 +68,7 @@
+     <%
+    }
+    
+-   if (currentPageData.isEmpty()) {
++   if (uicomponent.getRealCurrentPageData().isEmpty()) {
+     %>
+      <p>
+       <%= _ctx.appRes("UIDefaultSearchResult.msg.your-search") %> <b style="font-size: 15px; font-style: italic;"> <%= keyword %> </b> - 
+@@ -67,7 +76,16 @@
+      </p>
+     <%
+    } else {
+-    for (ResultNode resultNode : currentPageData) {
++    def dataSize = uicomponent.getRealCurrentPageData().size();
++    int dataIndex = 0;
++    for (ResultNode resultNode : uicomponent.getRealCurrentPageData()) {
++     if (dataIndex == dataSize - currentPageData.size()) {
++       %>
++         <div id="NewResultData">
++       <%
++     }
++       
++     dataIndex++;
+      Node viewNode = resultNode.getNode();
+      def itemName = viewNode.getName();
+      def itemTitle = uicomponent.getTitle(viewNode);
+@@ -127,10 +145,15 @@
+        </div>
+       </div>
+      <%
++     if (dataIndex == dataSize) {
++       %>
++         </div>
++       <%
++     }
+     }
+    %>
+     <div class="ItemFunc">
+-     <% if (uicomponent.getNumberOfPage() > 1) uicomponent.renderChild(UICustomizeablePaginator.class); %>
++     <% if (showPaginator) uicomponent.renderChild(UICustomizeablePaginator.class); %>
+     </div>
+    <%
+   }
+Index: packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/wcm-artifacts/application-templates/wcm-search/search-paginator/UIDefaultSearchPaginator.gtmpl
+===================================================================
+--- packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/wcm-artifacts/application-templates/wcm-search/search-paginator/UIDefaultSearchPaginator.gtmpl	(revision 72739)
++++ packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/wcm-artifacts/application-templates/wcm-search/search-paginator/UIDefaultSearchPaginator.gtmpl	(working copy)
+@@ -1,16 +1,31 @@
+ <%
+-	def totalPage = uicomponent.getAvailablePage();
+-	def currentPage = uicomponent.getCurrentPage();
+-	String previousPage = _ctx.appRes("UIPaginatorDefault.label.previous");
+-	String nextPage = _ctx.appRes("UIPaginatorDefault.label.next");
++  import org.exoplatform.services.wcm.search.SiteSearchService;
++  def pageMode = uicomponent.getPageMode();
++
++  if (SiteSearchService.PAGE_MODE_MORE.equals(pageMode)) {
++  	def currentPage = uicomponent.getCurrentPage();
+ %>
+ 
+ <div class="UIPaginatorDefault">
+ 
+-  <% if( currentPage - 1 > 0 ){%>        
++  <a href="<%=uicomponent.event("ShowPage","${currentPage + 1}")%>" class="Next"><%=_ctx.appRes("UIPaginatorDefault.label.more")%></a>
++
++</div>
++
++<%
++  } else if (SiteSearchService.PAGE_MODE_PAGINATION.equals(pageMode)) {
++    def currentPage = uicomponent.getCurrentPage();
++    def totalPage = uicomponent.getAvailablePage();
++    String previousPage = _ctx.appRes("UIPaginatorDefault.label.previous");
++    String nextPage = _ctx.appRes("UIPaginatorDefault.label.next");
++%>
++
++<div class="UIPaginatorDefault">
++
++  <% if( currentPage - 1 > 0 ){%>
+       <a href="<%=uicomponent.event("ShowPage","${currentPage - 1}")%>" class="Prev">$previousPage</a>
+   <% }%>
+-  
++
+   <%
+   int min = 1;
+   int max = totalPage;
+@@ -27,11 +42,15 @@
+ 	    <a class="Item Current"><%=i%></a>
+   <%  } else { %>
+ 	    <a href="<%=uicomponent.event("ShowPage","$i")%>" class="Item"><%=i%></a>
+-  <%  } %> 
+-  <%}%>    
+-  
++  <%  } %>
++  <%}%>
++
+   <% if(currentPage + 1 <= totalPage) { %>
+-       <a href="<%=uicomponent.event("ShowPage","${currentPage + 1}")%>" class="Next">$nextPage</a>	
++       <a href="<%=uicomponent.event("ShowPage","${currentPage + 1}")%>" class="Next">$nextPage</a>
+   <% }%>
+-    
+-</div>
+\ No newline at end of file
++
++</div>
++
++<%
++  }
++%>
+Index: packaging/ecmdemo/webapp/src/main/webapp/WEB-INF/conf/sample-portal/portal/portal/acme/pages.xml
+===================================================================
+--- packaging/ecmdemo/webapp/src/main/webapp/WEB-INF/conf/sample-portal/portal/portal/acme/pages.xml	(revision 72739)
++++ packaging/ecmdemo/webapp/src/main/webapp/WEB-INF/conf/sample-portal/portal/portal/acme/pages.xml	(working copy)
+@@ -844,6 +844,11 @@
+             <read-only>false</read-only>
+           </preference>
+           <preference>
++            <name>pageMode</name>
++            <value>more</value> <!-- supported modes : pagination, more, none -->
++            <read-only>false</read-only>
++          </preference>
++          <preference>
+             <name>showQuickEditButton</name>
+             <value>true</value>
+             <read-only>false</read-only>
+Index: core/search/src/test/java/org/exoplatform/services/wcm/search/TestSearchService.java
+===================================================================
+--- core/search/src/test/java/org/exoplatform/services/wcm/search/TestSearchService.java	(revision 72739)
++++ core/search/src/test/java/org/exoplatform/services/wcm/search/TestSearchService.java	(working copy)
+@@ -24,13 +24,23 @@
+ import javax.jcr.NodeIterator;
+ import javax.jcr.PathNotFoundException;
+ import javax.jcr.RepositoryException;
++import javax.jcr.Session;
++import javax.jcr.query.QueryManager;
++import javax.jcr.query.QueryResult;
+ 
++import org.exoplatform.container.xml.InitParams;
+ import org.exoplatform.portal.config.UserPortalConfigService;
+ import org.exoplatform.portal.config.model.Page;
+ import org.exoplatform.portal.pom.config.POMSession;
+ import org.exoplatform.portal.pom.config.POMSessionManager;
++import org.exoplatform.services.cms.templates.TemplateService;
++import org.exoplatform.services.jcr.RepositoryService;
++import org.exoplatform.services.jcr.core.ManageableRepository;
+ import org.exoplatform.services.jcr.ext.common.SessionProvider;
+ import org.exoplatform.services.wcm.BaseWCMTestCase;
++import org.exoplatform.services.wcm.core.NodeLocation;
++import org.exoplatform.services.wcm.core.WCMConfigurationService;
++import org.exoplatform.services.wcm.portal.LivePortalManagerService;
+ import org.exoplatform.services.wcm.publication.PublicationDefaultStates;
+ import org.exoplatform.services.wcm.publication.WCMPublicationService;
+ import org.exoplatform.services.wcm.publication.WebpagePublicationPlugin;
+@@ -463,7 +473,8 @@
+     this.searchIsLiveMode = true;
+     this.searchSelectedPortal = null;
+     queryCriteria.setFulltextSearch(false);
+-    WCMPaginatedQueryResult paginatedQueryResult = getSearchResult();
++    WCMPaginatedQueryResult paginatedQueryResult = 
++      (new SiteSearchServiceImplDump((SiteSearchServiceImpl)siteSearchService)).searchSiteContents(WCMCoreUtils.getSystemSessionProvider(), queryCriteria, seachItemsPerPage, false);
+     assertEquals(0, paginatedQueryResult.getPage(1).size());
+   }
+ 
+@@ -507,7 +518,8 @@
+     queryProperty2.setName("jcr:data");
+     queryProperty2.setValue("the default.css file");
+     queryCriteria.setQueryMetadatas(new QueryProperty[]{queryProperty1, queryProperty2});
+-    WCMPaginatedQueryResult paginatedQueryResult = getSearchResult();
++    WCMPaginatedQueryResult paginatedQueryResult = 
++      (new SiteSearchServiceImplDump((SiteSearchServiceImpl)siteSearchService)).searchSiteContents(WCMCoreUtils.getSystemSessionProvider(), queryCriteria, seachItemsPerPage, false);      
+     assertEquals(0, paginatedQueryResult.getPage(1).size());
+   }
+ 
+@@ -601,4 +613,76 @@
+     
+     session.save();
+   }
++  
++  private class WCMPaginatedQueryResultDump extends WCMPaginatedQueryResult {
++    public WCMPaginatedQueryResultDump(int pageSize) {
++      super(pageSize);
++    }
++
++    public WCMPaginatedQueryResultDump(QueryResult queryResult,
++        QueryCriteria queryCriteria, int pageSize, long numTotal,
++        boolean showTotalPagination, boolean isSearchContent) throws Exception {
++      super(queryResult, queryCriteria, pageSize, numTotal, showTotalPagination, isSearchContent);
++    }
++
++    protected void populateCurrentPage(int page) throws Exception {
++      if(page == currentPage_ && (currentListPage_ != null && !currentListPage_.isEmpty())) {
++        return;
++      }
++      //checkAndSetPosition(page);
++
++      SiteSearchService siteSearchService = WCMCoreUtils.getService(SiteSearchService.class);
++      queryCriteria.setOffset((page-1)*getPageSize());
++      QueryResult queryResult = siteSearchService.searchSiteContents(WCMCoreUtils.getSystemSessionProvider(), this.queryCriteria, this.getPageSize(), false).queryResult;
++      populateCurrentListPage(queryResult);
++      currentPage_ = page;
++    }
++  }
++  
++  private class SiteSearchServiceImplDump extends SiteSearchServiceImpl {
++
++    public SiteSearchServiceImplDump(SiteSearchServiceImpl searchService) throws Exception {
++      super(searchService.livePortalManagerService, searchService.templateService, searchService.configurationService,
++          searchService.repositoryService, null);
++      // TODO Auto-generated constructor stub
++    }
++    
++    public WCMPaginatedQueryResult searchSiteContents(SessionProvider sessionProvider, QueryCriteria queryCriteria, int pageSize, boolean isSearchContent) throws Exception {
++      ManageableRepository currentRepository = repositoryService.getCurrentRepository();
++      NodeLocation location = configurationService.getLivePortalsLocation(currentRepository.getConfiguration().getName());    
++      long startTime = System.currentTimeMillis();
++
++      String pageMode = queryCriteria.getPageMode();
++      boolean showTotalPagination = SiteSearchService.PAGE_MODE_PAGINATION.equals(pageMode);
++
++      long numTotal = 0;
++      int limit = SiteSearchService.PAGE_MODE_NONE.equals(pageMode)?pageSize : pageSize+1;
++
++      if (showTotalPagination) {
++        SessionProvider systemProvider = WCMCoreUtils.getSystemSessionProvider();
++        Session session = systemProvider.getSession(location.getWorkspace(), currentRepository);
++        QueryManager queryManager = session.getWorkspace().getQueryManager();
++        QueryResult queryResult = searchSiteContent(queryCriteria, queryManager);
++        numTotal = queryResult.getNodes().getSize();
++        limit--;
++      }
++
++      System.out.println("Location: " + location + ";;; Repo: " + currentRepository + ";;; Provider :" + sessionProvider);
++      Session session = sessionProvider.getSession(location.getWorkspace(), currentRepository);
++      QueryManager queryManager = session.getWorkspace().getQueryManager();
++      long offset = 0;
++      if (queryCriteria.getOffset()>-1) offset = queryCriteria.getOffset();
++      QueryResult queryResult = searchSiteContent(queryCriteria, queryManager, limit, offset);
++      if (!showTotalPagination) numTotal = queryResult.getNodes().getSize();
++
++      String suggestion = getSpellSuggestion(queryCriteria.getKeyword(),currentRepository);
++      long queryTime = System.currentTimeMillis() - startTime;
++      WCMPaginatedQueryResultDump paginatedQueryResult = null;
++      paginatedQueryResult = new WCMPaginatedQueryResultDump( queryResult, queryCriteria, pageSize, numTotal, showTotalPagination, isSearchContent);
++      paginatedQueryResult.setQueryTime(queryTime);
++      paginatedQueryResult.setSpellSuggestion(suggestion);    
++      return paginatedQueryResult;
++    }  
++    
++  }
+ }
+Index: core/search/src/main/java/org/exoplatform/services/wcm/search/QueryCriteria.java
+===================================================================
+--- core/search/src/main/java/org/exoplatform/services/wcm/search/QueryCriteria.java	(revision 72739)
++++ core/search/src/main/java/org/exoplatform/services/wcm/search/QueryCriteria.java	(working copy)
+@@ -80,7 +80,32 @@
+   
+   /** The is live mode. */
+   private boolean isLiveMode = true;
+-  
++
++  /** The starting offset */
++  private long offset = -1;
++
++  /** Pagination mode :
++   * - none : no pagination
++   * - more : twitter like pagination with "more" link
++   * - pagination : pagination mode with page number and total size */
++  private String pageMode = SiteSearchService.PAGE_MODE_NONE;
++
++  public String getPageMode() {
++    return pageMode;
++  }
++
++  public void setPageMode(String pageMode) {
++    this.pageMode = pageMode;
++  }
++
++  public long getOffset() {
++    return offset;
++  }
++
++  public void setOffset(long offset) {
++    this.offset = offset;
++  }
++
+   /**
+    * Checks if is live mode.
+    * 
+Index: core/search/src/main/java/org/exoplatform/services/wcm/search/WCMPaginatedQueryResult.java
+===================================================================
+--- core/search/src/main/java/org/exoplatform/services/wcm/search/WCMPaginatedQueryResult.java	(revision 72739)
++++ core/search/src/main/java/org/exoplatform/services/wcm/search/WCMPaginatedQueryResult.java	(working copy)
+@@ -17,11 +17,17 @@
+ package org.exoplatform.services.wcm.search;
+ 
+ import java.util.HashMap;
++import java.util.List;
++import java.util.concurrent.CopyOnWriteArrayList;
+ 
+ import javax.jcr.Node;
++import javax.jcr.NodeIterator;
+ import javax.jcr.query.QueryResult;
++import javax.jcr.query.Row;
++import javax.jcr.query.RowIterator;
+ 
+ import org.apache.commons.lang.ArrayUtils;
++import org.exoplatform.commons.exception.ExoMessageException;
+ import org.exoplatform.services.wcm.core.NodeLocation;
+ import org.exoplatform.services.wcm.publication.WCMComposer;
+ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+@@ -38,6 +44,15 @@
+   /** The spell suggestion. */
+   private String spellSuggestion;
+ 
++  /** Total elements in the resultset. */
++  private long numTotal = -1;
++
++  /** Do we use the total for pagination or not ?
++   * false : is more like a Twitter mode with "more" link to next contents
++   * true : is more like google search with paginators from 1 to total pages.
++   */
++  private boolean showTotalPagination = false;
++
+   /**
+    * Instantiates a new wCM paginated query result.
+    * 
+@@ -62,6 +77,23 @@
+   }
+ 
+   /**
++   * Instantiates a new wCM paginated query result.
++   *
++   * @param queryResult the query result
++   * @param pageSize the page size
++   * @param queryCriteria the query criteria
++   *
++   * @throws Exception the exception
++   */
++  public WCMPaginatedQueryResult(QueryResult queryResult, QueryCriteria queryCriteria, int pageSize, long numTotal, boolean showTotalPagination, boolean isSearchContent) throws Exception {
++    super(queryResult, pageSize, isSearchContent);
++    this.numTotal = numTotal;
++    this.queryCriteria = queryCriteria;
++    this.showTotalPagination = showTotalPagination;
++    populateCurrentListPage(queryResult);
++  }
++
++  /**
+    * Sets the query time.
+    * 
+    * @param time the new query time
+@@ -97,6 +129,88 @@
+     this.queryCriteria = queryCriteria;
+   }
+ 
++
++  public int getAvailable() {
++    if (numTotal>-1)
++      return (int)numTotal;
++    else
++      return super.getAvailable();
++
++  }
++
++  public int getAvailablePage() {
++    if (numTotal>-1) {
++      int npp = this.getNodesPerPage();
++      double available = Math.ceil((double )numTotal/(double)npp);
++      return (int)available;
++    } else
++      return super.getAvailablePage();
++  }
++
++  /**
++   * Retrieve the total nodes.
++   *
++   * @return the total nodes
++   */
++  public long getTotalNodes() {
++    if (numTotal>-1)
++      return numTotal;
++    else
++      return super.getTotalNodes();
++  }
++
++  /* (non-Javadoc)
++   * @see org.exoplatform.commons.utils.PageList#populateCurrentPage(int)
++   */
++  protected void populateCurrentPage(int page) throws Exception {
++    if(page == currentPage_ && (currentListPage_ != null && !currentListPage_.isEmpty())) {
++      return;
++    }
++    //checkAndSetPosition(page);
++
++    SiteSearchService siteSearchService = WCMCoreUtils.getService(SiteSearchService.class);
++    queryCriteria.setOffset((page-1)*getPageSize());
++    QueryResult queryResult = siteSearchService.searchSiteContents(WCMCoreUtils.getUserSessionProvider(), this.queryCriteria, this.getPageSize(), false).queryResult;
++    populateCurrentListPage(queryResult);
++    currentPage_ = page;
++  }
++
++  protected void populateCurrentListPage(QueryResult queryResult) throws Exception {
++    currentListPage_ = new CopyOnWriteArrayList<ResultNode>();
++    RowIterator rowIterator = queryResult.getRows();
++    NodeIterator iterator = queryResult.getNodes();
++
++    int count = 0;
++    while(iterator.hasNext()) {
++      Row row = rowIterator.nextRow();
++      Node node = iterator.nextNode();
++      Node viewNode = filterNodeToDisplay(node);
++
++      if(viewNode != null) {
++        ResultNode resultNode = new ResultNode(viewNode,row);
++        currentListPage_.add(resultNode);
++        count ++;
++        if(count == getPageSize())
++          break;
++      }
++    }
++
++  }
++
++  public void setCurrentPage(int page) throws java.lang.Exception {
++    populateCurrentPage(page);
++  }
++
++  public List getPage(int page) throws Exception {
++    if (page < 1 || (page > getAvailablePage() && showTotalPagination)) {
++      Object[] args = { Integer.toString(page), Integer.toString(availablePage_) };
++      throw new ExoMessageException("PageList.page-out-of-range", args);
++    }
++    populateCurrentPage(page);
++    return currentListPage_;
++  }
++
++
+   /*
+    * (non-Javadoc)
+    * 
+Index: core/search/src/main/java/org/exoplatform/services/wcm/search/SiteSearchService.java
+===================================================================
+--- core/search/src/main/java/org/exoplatform/services/wcm/search/SiteSearchService.java	(revision 72739)
++++ core/search/src/main/java/org/exoplatform/services/wcm/search/SiteSearchService.java	(working copy)
+@@ -25,7 +25,11 @@
+  * Oct 7, 2008
+  */
+ public interface SiteSearchService {  
+-  
++
++  public final static String PAGE_MODE_NONE = "none";
++  public final static String PAGE_MODE_MORE = "more";
++  public final static String PAGE_MODE_PAGINATION = "pagination";
++
+   /**
+    * Adds the exclude include data type plugin.
+    * 
+Index: core/search/src/main/java/org/exoplatform/services/wcm/search/SiteSearchServiceImpl.java
+===================================================================
+--- core/search/src/main/java/org/exoplatform/services/wcm/search/SiteSearchServiceImpl.java	(revision 72739)
++++ core/search/src/main/java/org/exoplatform/services/wcm/search/SiteSearchServiceImpl.java	(working copy)
+@@ -35,6 +35,7 @@
+ import org.exoplatform.services.jcr.RepositoryService;
+ import org.exoplatform.services.jcr.core.ManageableRepository;
+ import org.exoplatform.services.jcr.ext.common.SessionProvider;
++import org.exoplatform.services.jcr.impl.core.query.QueryImpl;
+ import org.exoplatform.services.wcm.core.NodeLocation;
+ import org.exoplatform.services.wcm.core.WCMConfigurationService;
+ import org.exoplatform.services.wcm.portal.LivePortalManagerService;
+@@ -46,6 +47,7 @@
+ import org.exoplatform.services.wcm.utils.AbstractQueryBuilder.ORDERBY;
+ import org.exoplatform.services.wcm.utils.AbstractQueryBuilder.PATH_TYPE;
+ import org.exoplatform.services.wcm.utils.AbstractQueryBuilder.QueryTermHelper;
++import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+ 
+ /**
+  * Created by The eXo Platform SAS Author : Hoa Pham hoa.pham@exoplatform.com
+@@ -54,16 +56,16 @@
+ public class SiteSearchServiceImpl implements SiteSearchService {
+ 
+   /** The live portal manager service. */
+-  private LivePortalManagerService livePortalManagerService;
++  protected LivePortalManagerService livePortalManagerService;
+ 
+   /** The ecm template service. */
+-  private TemplateService templateService;
++  protected TemplateService templateService;
+ 
+   /** The wcm configuration service. */
+-  private WCMConfigurationService configurationService;
++  protected WCMConfigurationService configurationService;
+ 
+   /** The jcr repository service. */
+-  private RepositoryService repositoryService;
++  protected RepositoryService repositoryService;
+ 
+   /** The exclude node types. */
+   private CopyOnWriteArraySet<String> excludeNodeTypes = new CopyOnWriteArraySet<String>();
+@@ -77,6 +79,9 @@
+   /** The include mime types. */
+   private CopyOnWriteArraySet<String> includeMimeTypes = new CopyOnWriteArraySet<String>();
+ 
++//  private boolean showTotalPagination = false;
++
++
+   /**
+    * Instantiates a new site search service impl.
+    * 
+@@ -93,7 +98,9 @@
+     this.livePortalManagerService = portalManagerService;
+     this.templateService = templateService;
+     this.repositoryService = repositoryService;
+-    this.configurationService = configurationService;        
++    this.configurationService = configurationService;
++//    if ("true".equals(System.getProperty("org.exoplatform.ecms.search.showtotal"))) showTotalPagination = true;
++
+   }
+ 
+   /* (non-Javadoc)
+@@ -112,23 +119,41 @@
+   public WCMPaginatedQueryResult searchSiteContents(SessionProvider sessionProvider, QueryCriteria queryCriteria, int pageSize, boolean isSearchContent) throws Exception {
+     ManageableRepository currentRepository = repositoryService.getCurrentRepository();
+     NodeLocation location = configurationService.getLivePortalsLocation(currentRepository.getConfiguration().getName());    
+-    Session session = sessionProvider.getSession(location.getWorkspace(),currentRepository);
++    long startTime = System.currentTimeMillis();
++
++    String pageMode = queryCriteria.getPageMode();
++    boolean showTotalPagination = SiteSearchService.PAGE_MODE_PAGINATION.equals(pageMode);
++
++    long numTotal = 0;
++    int limit = SiteSearchService.PAGE_MODE_NONE.equals(pageMode)?pageSize : pageSize+1;
++
++    if (showTotalPagination) {
++      SessionProvider systemProvider = WCMCoreUtils.getSystemSessionProvider();
++      Session session = systemProvider.getSession(location.getWorkspace(), currentRepository);
++      QueryManager queryManager = session.getWorkspace().getQueryManager();
++      QueryResult queryResult = searchSiteContent(queryCriteria, queryManager);
++      numTotal = queryResult.getNodes().getSize();
++      limit--;
++    }
++
++    
++    Session session = sessionProvider.getSession(location.getWorkspace(), currentRepository);
+     QueryManager queryManager = session.getWorkspace().getQueryManager();
+-    long startTime = System.currentTimeMillis();
+-    QueryResult queryResult = searchSiteContent(queryCriteria, queryManager);  
++    long offset = 0;
++    if (queryCriteria.getOffset()>-1) offset = queryCriteria.getOffset();
++    QueryResult queryResult = searchSiteContent(queryCriteria, queryManager, limit, offset);
++    if (!showTotalPagination) numTotal = queryResult.getNodes().getSize();
++
+     String suggestion = getSpellSuggestion(queryCriteria.getKeyword(),currentRepository);
+     long queryTime = System.currentTimeMillis() - startTime;
+     WCMPaginatedQueryResult paginatedQueryResult = null;
+-    if(queryResult.getNodes().getSize()>250) {
+-      paginatedQueryResult = new WCMPaginatedQueryResult( queryResult, queryCriteria, pageSize, isSearchContent); 
+-    }else {      
+-      paginatedQueryResult = new SmallPaginatedQueryResult(queryResult, queryCriteria, pageSize, isSearchContent);
+-    }       
+-    paginatedQueryResult.setQueryTime(queryTime);    
++    paginatedQueryResult = new WCMPaginatedQueryResult( queryResult, queryCriteria, pageSize, numTotal, showTotalPagination, isSearchContent);
++    paginatedQueryResult.setQueryTime(queryTime);
+     paginatedQueryResult.setSpellSuggestion(suggestion);    
+     return paginatedQueryResult;
+   }  
+ 
++
+   /**
+    * Gets the spell suggestion.
+    * 
+@@ -139,7 +164,7 @@
+    * 
+    * @throws Exception the exception
+    */
+-  private String getSpellSuggestion(String checkingWord, ManageableRepository manageableRepository) throws Exception{
++  protected String getSpellSuggestion(String checkingWord, ManageableRepository manageableRepository) throws Exception{
+     //Retrieve spell suggestion in special way to avoid access denied exception  
+     String suggestion = null;
+     Session session = null;
+@@ -160,8 +185,24 @@
+     return suggestion;
+   }
+ 
++
+   /**
+    * Search site content.
++   *
++   * @param queryCriteria the query criteria
++   * @param queryManager the query manager
++   *
++   * @return the query result
++   *
++   * @throws Exception the exception
++   */
++  protected QueryResult searchSiteContent(QueryCriteria queryCriteria, QueryManager queryManager) throws Exception {
++    return searchSiteContent(queryCriteria, queryManager, -1, -1);
++  }
++
++
++  /**
++   * Search site content.
+    * 
+    * @param queryCriteria the query criteria
+    * @param queryManager the query manager
+@@ -170,7 +211,7 @@
+    * 
+    * @throws Exception the exception
+    */
+-  private QueryResult searchSiteContent(QueryCriteria queryCriteria, QueryManager queryManager) throws Exception {
++  protected QueryResult searchSiteContent(QueryCriteria queryCriteria, QueryManager queryManager, long limit, long offset) throws Exception {
+     SQLQueryBuilder queryBuilder = new SQLQueryBuilder();    
+     mapQueryTypes(queryCriteria, queryBuilder);
+     if(queryCriteria.isFulltextSearch()) {
+@@ -185,6 +226,12 @@
+     orderBy(queryCriteria, queryBuilder);
+     String queryStatement = queryBuilder.createQueryStatement();
+     Query query = queryManager.createQuery(queryStatement, Query.SQL);
++
++    if (limit>-1 && offset>-1) {
++      ((QueryImpl)query).setLimit(limit);
++      ((QueryImpl)query).setOffset(offset);
++    }
++
+     return query.execute();
+   }
+ 
+Index: core/webui/src/main/java/org/exoplatform/wcm/webui/paginator/UICustomizeablePaginator.java
+===================================================================
+--- core/webui/src/main/java/org/exoplatform/wcm/webui/paginator/UICustomizeablePaginator.java	(revision 72739)
++++ core/webui/src/main/java/org/exoplatform/wcm/webui/paginator/UICustomizeablePaginator.java	(working copy)
+@@ -45,6 +45,9 @@
+   /** The resource resolver. */
+   private ResourceResolver resourceResolver;
+ 
++  /** Page Mode */
++  private String pageMode;
++
+   /**
+    * Instantiates a new uI customizeable paginator.
+    */
+@@ -106,9 +109,26 @@
+     return super.getTemplate();
+   }
+ 
++  /**
++   * gets the page mode (none, more or pagination)
++   * @return PageMode
++   */
++  public String getPageMode() {
++    return pageMode;
++  }
++
++  /**
++   * sets the page mode (none, more or pagination)
++   *
++   * @param pageMode
++   */
++  public void setPageMode(String pageMode) {
++    this.pageMode = pageMode;
++  }
++
+   /* (non-Javadoc)
+-   * @see org.exoplatform.webui.core.UIComponent#getTemplateResourceResolver(org.exoplatform.webui.application.WebuiRequestContext, java.lang.String)
+-   */
++  * @see org.exoplatform.webui.core.UIComponent#getTemplateResourceResolver(org.exoplatform.webui.application.WebuiRequestContext, java.lang.String)
++  */
+   public ResourceResolver getTemplateResourceResolver(WebuiRequestContext context,String template) {
+     if(resourceResolver != null)
+       return resourceResolver;
+@@ -124,7 +144,6 @@
+    * the showPageAction event occurs, that object's appropriate
+    * method is invoked.
+    * 
+-   * @see ShowPageActionEvent
+    */
+   static  public class ShowPageActionListener extends EventListener<UICustomizeablePaginator> {
+     

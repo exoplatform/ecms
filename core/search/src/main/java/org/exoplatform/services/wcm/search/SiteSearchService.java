@@ -25,7 +25,11 @@ import org.exoplatform.services.jcr.ext.common.SessionProvider;
  * Oct 7, 2008
  */
 public interface SiteSearchService {  
-  
+
+  public final static String PAGE_MODE_NONE = "none";
+  public final static String PAGE_MODE_MORE = "more";
+  public final static String PAGE_MODE_PAGINATION = "pagination";
+
   /**
    * Adds the exclude include data type plugin.
    * 

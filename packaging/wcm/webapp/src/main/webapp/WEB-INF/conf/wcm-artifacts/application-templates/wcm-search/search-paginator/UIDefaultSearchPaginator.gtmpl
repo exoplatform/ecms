@@ -1,16 +1,31 @@
 <%
-	def totalPage = uicomponent.getAvailablePage();
-	def currentPage = uicomponent.getCurrentPage();
-	String previousPage = _ctx.appRes("UIPaginatorDefault.label.previous");
-	String nextPage = _ctx.appRes("UIPaginatorDefault.label.next");
+  import org.exoplatform.services.wcm.search.SiteSearchService;
+  def pageMode = uicomponent.getPageMode();
+
+  if (SiteSearchService.PAGE_MODE_MORE.equals(pageMode)) {
+  	def currentPage = uicomponent.getCurrentPage();
 %>
 
 <div class="UIPaginatorDefault">
 
-  <% if( currentPage - 1 > 0 ){%>        
+  <a href="<%=uicomponent.event("ShowPage","${currentPage + 1}")%>" class="Next"><%=_ctx.appRes("UIPaginatorDefault.label.more")%></a>
+
+</div>
+
+<%
+  } else if (SiteSearchService.PAGE_MODE_PAGINATION.equals(pageMode)) {
+    def currentPage = uicomponent.getCurrentPage();
+    def totalPage = uicomponent.getAvailablePage();
+    String previousPage = _ctx.appRes("UIPaginatorDefault.label.previous");
+    String nextPage = _ctx.appRes("UIPaginatorDefault.label.next");
+%>
+
+<div class="UIPaginatorDefault">
+
+  <% if( currentPage - 1 > 0 ){%>
       <a href="<%=uicomponent.event("ShowPage","${currentPage - 1}")%>" class="Prev">$previousPage</a>
   <% }%>
-  
+
   <%
   int min = 1;
   int max = totalPage;
@@ -27,11 +42,15 @@
 	    <a class="Item Current"><%=i%></a>
   <%  } else { %>
 	    <a href="<%=uicomponent.event("ShowPage","$i")%>" class="Item"><%=i%></a>
-  <%  } %> 
-  <%}%>    
-  
+  <%  } %>
+  <%}%>
+
   <% if(currentPage + 1 <= totalPage) { %>
-       <a href="<%=uicomponent.event("ShowPage","${currentPage + 1}")%>" class="Next">$nextPage</a>	
+       <a href="<%=uicomponent.event("ShowPage","${currentPage + 1}")%>" class="Next">$nextPage</a>
   <% }%>
-    
+
 </div>
+
+<%
+  }
+%>

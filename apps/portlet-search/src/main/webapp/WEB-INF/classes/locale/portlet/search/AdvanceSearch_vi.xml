@@ -42,12 +42,23 @@
       <searchPaginatorSelector>Tìm Paginator mẫu</searchPaginatorSelector>
       <searchPageLayoutSelector>Tìm mẫu bố trí trang</searchPageLayoutSelector>
       <searchResultBasePathInputSetAction>Đường dẫn gốc</searchResultBasePathInputSetAction>
+      <pageMode>Kiểu hiển thị kết quả</pageMode>
+      <option>
+        <none>Hiển thị toàn bộ</none>
+        <more>Hiển thị từng trang</more>
+        <pagination>Phân trang</pagination>
+      </option>
     </label>
     <action>
       <Save>Lưu</Save>
       <Cancel>Hủy</Cancel>
     </action>
   </UISearchPageLayoutManager>
+  <searchResultBasePathInputSetAction>
+    <title>
+      <SelectBasePath>Chọn đường dẫn gốc</SelectBasePath>
+    </title>
+  </searchResultBasePathInputSetAction>  
   <UISearchForm>
   	 <message>
   	   <keyword-not-support>The keyword is invalid. Some characters are not supported.</keyword-not-support>
@@ -55,4 +66,16 @@
   	   <keyword-not-empty>Giá trị của khóa tìm kiếm không được rỗng hoặc trống!</keyword-not-empty>
   	 </message>
   </UISearchForm>
+  <UIPaginatorDefault>
+    <label>
+      <next>Sau</next>
+      <previous>Trước</previous>    
+      <more>Tiếp theo</more>
+    </label>
+  </UIPaginatorDefault>
+  <UISearchPageLayoutDefault>
+    <label>
+      <quickEditTitle>Sửa nhanh</quickEditTitle>
+    </label>
+  </UISearchPageLayoutDefault>  
 </bundle>
