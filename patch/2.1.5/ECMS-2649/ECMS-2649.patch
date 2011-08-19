@@ -1,0 +1,2632 @@
+
+Property changes on: .
+___________________________________________________________________
+Added: svn:mergeinfo
+   Merged /ecms/trunk:r69706,69791
+
+Index: ext/xcmis/sp/src/test/java/org/exoplatform/ecms/xcmis/sp/StorageTest.java
+===================================================================
+--- ext/xcmis/sp/src/test/java/org/exoplatform/ecms/xcmis/sp/StorageTest.java	(revision 72761)
++++ ext/xcmis/sp/src/test/java/org/exoplatform/ecms/xcmis/sp/StorageTest.java	(working copy)
+@@ -23,6 +23,7 @@
+ import org.exoplatform.services.jcr.core.ExtendedNode;
+ import org.xcmis.spi.BaseContentStream;
+ import org.xcmis.spi.CmisConstants;
++import org.xcmis.spi.CmisRuntimeException;
+ import org.xcmis.spi.ConstraintException;
+ import org.xcmis.spi.ContentStream;
+ import org.xcmis.spi.DocumentData;
+@@ -68,20 +69,14 @@
+ public class StorageTest extends BaseTest
+ {
+ 
+-   //protected Storage storage;
+-
+    protected FolderData rootFolder;
+ 
+    protected TypeDefinition documentTypeDefinition;
+ 
+-   protected TypeDefinition folderTypeDefinition;
+-
+    protected TypeDefinition policyTypeDefinition;
+ 
+    protected TypeDefinition relationshipTypeDefinition;
+ 
+-   private StorageImpl storageA;
+-
+    @Override
+    public void setUp() throws Exception
+    {
+@@ -95,6 +90,79 @@
+       relationshipTypeDefinition = storageA.getTypeDefinition("cmis:relationship", true);
+    }
+ 
++   public void testDeleteDocumentLatestVersion() throws Exception
++   {
++      DocumentData document = createDocument(rootFolder, "testDeleteLatestVersionDocument_Document", "cmis:document", null, null);
++      try {
++         storageA.deleteObject(document, false);
++         fail("Must not remove latest version with deleteAllVersions == false");
++      } catch (CmisRuntimeException e) {
++         assertEquals("Unable to delete latest version at one.", e.getMessage());
++      }
++      
++      try {
++         storageA.deleteObject(document, true);
++      } catch (CmisRuntimeException e) {
++         fail("Must remove latest version and all versions with deleteAllVersions == true");
++      }
++   }
++   
++   public void testDeleteDocumentLatestVersionAfterCheckin() throws Exception
++   {
++      DocumentData document = createDocument(rootFolder, "testDeleteLatestVersionDocument_Document", "cmis:document", null, null);
++      // CHECKOUT
++      DocumentData pwc = document.checkout();
++      // CHECKIN
++      ContentStream cs =
++         new BaseContentStream("checkin test. content updated".getBytes(), null, new MimeType("text", "plain"));
++      DocumentData checkinDocument = pwc.checkin(true, "my comment", null, cs, null, null);
++      checkinDocument = (DocumentData)storageA.getObjectById(checkinDocument.getObjectId());
++      
++      try {
++         storageA.deleteObject(checkinDocument, false);
++         fail("Must not remove latest version with deleteAllVersions == false");
++      } catch (CmisRuntimeException e) {
++         assertEquals("Unable to delete latest version at one.", e.getMessage());
++      }
++      
++      try {
++         storageA.deleteObject(checkinDocument, true);
++      } catch (CmisRuntimeException e) {
++         fail("Must remove latest version and all versions with deleteAllVersions == true");
++      }
++   }
++   
++   public void testDeleteDocumentBeforeLatestVersion() throws Exception
++   {
++      DocumentData document = createDocument(rootFolder, "testDeleteLatestVersionDocument_Document", "cmis:document", null, null);
++      String documentId = document.getObjectId();
++      // CHECKOUT
++      DocumentData pwc = document.checkout();
++      // CHECKIN
++      ContentStream cs =
++         new BaseContentStream("checkin test. content updated".getBytes(), null, new MimeType("text", "plain"));
++      DocumentData checkinDocument = pwc.checkin(true, "my comment", null, cs, null, null);
++      
++      document = (DocumentData)storageA.getObjectById(documentId);
++      
++      try {
++         storageA.deleteObject(document, false);
++         fail("Must not remove before latest version with deleteAllVersions == false");
++      } catch (CmisRuntimeException e) {
++         String expectedMessage = "Unable to delete document version with label '1'. There are Reference property pointed to this Version " +
++                                  "[]:1[http://www.exoplatform.com/jcr/exo/1.0]drives:1[]driveA:1" +
++                                  "[]testDeleteLatestVersionDocument_Document:1[http://www.jcp.org/jcr/1.0]";
++         String actualMessage = e.getMessage().length() > expectedMessage.length() ? e.getMessage().substring(0, expectedMessage.length()) : e.getMessage();
++         assertEquals(expectedMessage, actualMessage);
++      }
++      
++      try {
++         storageA.deleteObject(document, true);
++      } catch (CmisRuntimeException e) {
++         fail("Must remove version and all versions with deleteAllVersions == true");
++      }
++   }
++            
+    public void testApplyACL() throws Exception
+    {
+       DocumentData document = createDocument(rootFolder, "applyACLTestDocument", "cmis:document", null, null);
+@@ -135,13 +203,32 @@
+             null, new MimeType("text", "plain")), null);
+ 
+       DocumentData pwc = document.checkout();
++      String pwcId = pwc.getObjectId();
++      
++      // Get PWC from storage
++      try
++      {
++         pwc = (DocumentData)storageA.getObjectById(pwcId);
++         // OK
++      }
++      catch (ObjectNotFoundException e)
++      {
++         fail("The PWC should be in storage, for the id '" + pwcId + "'. " + e.getMessage());
++      }
+ 
+-      assertTrue(document.isVersionSeriesCheckedOut());
+-      assertTrue(pwc.isVersionSeriesCheckedOut());
++      // test document
+       assertEquals(document.getVersionSeriesId(), pwc.getVersionSeriesId());
+       assertEquals(document.getVersionSeriesCheckedOutId(), pwc.getObjectId());
++      assertTrue(document.isVersionSeriesCheckedOut());
+       assertNotNull(document.getVersionSeriesCheckedOutBy());
++      assertFalse(document.isLatestVersion());
++      assertFalse(document.isPWC());
++
++      // test pwc
++      assertTrue(pwc.isVersionSeriesCheckedOut());
+       assertNotNull(pwc.getVersionSeriesCheckedOutBy());
++      assertTrue(pwc.isLatestVersion());
++      assertTrue(pwc.isPWC());
+ 
+       // check content
+       byte[] b = new byte[128];
+@@ -165,25 +252,97 @@
+       {
+          // OK
+       }
++   }
+ 
++   public void testSuffixInObjectId() throws Exception
++   {
++      DocumentData document = createDocument(rootFolder, "getAllVersionsPwcVersionsTest", "cmis:document", null, null);
++      String documentId = document.getObjectId();
++      assertNotNull(documentId);
++      assertTrue("First document id must ends with '_1' suffix", documentId.endsWith("_1"));
+    }
+ 
++   public void testConsistentId() throws Exception
++   {
++      DocumentData document =
++         createDocument(rootFolder, "consistentTest", "cmis:document", new BaseContentStream("consistent test".getBytes(),
++            null, new MimeType("text", "plain")), null);
++      String documentId = document.getObjectId();
++      
++      // get document by Id 1
++      DocumentData version = (DocumentData)storageA.getObjectById(documentId);
++
++      // test to be consistent id 1
++      assertEquals("Document id should be the same as used for getObjectById.", documentId, version.getObjectId());
++   }
++   
++   public void testConsistentIdWithCheckin() throws Exception
++   {
++      DocumentData document =
++         createDocument(rootFolder, "consistentTest", "cmis:document", new BaseContentStream("consistent test".getBytes(),
++            null, new MimeType("text", "plain")), null);
++      String documentId1 = document.getObjectId();
++      
++      // CHECKOUT
++      DocumentData pwc = document.checkout();
++      String pwcId = pwc.getObjectId();
++      
++      // test
++      assertNotNull(pwcId);
++      assertTrue("PWC id should not contain the suffix", !pwcId.contains(JcrCMIS.ID_SEPARATOR));
++      
++      // CHECKIN
++      ContentStream cs =
++         new BaseContentStream("checkin test. content updated".getBytes(), null, new MimeType("text", "plain"));
++      DocumentData checkinDocument = pwc.checkin(true, "my comment", null, cs, null, null);
++      String documentId2 = checkinDocument.getObjectId();
++
++      // test
++      assertNotNull(documentId2);
++      assertTrue("Second document id must ends with '_2' suffix", documentId2.endsWith("_2"));
++      
++      // ==================
++      
++      // not the same id for both document versions
++      assertTrue("The objectId before checkin and after should not be the same.", !documentId1.equals(documentId2));
++      assertTrue("The objectId before checkin and after should not be the same.", !pwcId.equals(documentId1));
++      assertTrue("The objectId before checkin and after should not be the same.", !pwcId.equals(documentId2));
++      
++
++      // get document by Id 2
++      DocumentData version2 = (DocumentData)storageA.getObjectById(documentId2);
++      
++      // test to be consistent id 2
++      assertEquals("Document id should be the same as used for getObjectById.", documentId2, version2.getObjectId());
++      
++      // test to get exception on the Id without suffix
++      try {
++         String dontSuffixedId = documentId1.split(JcrCMIS.ID_SEPARATOR)[0];
++         storageA.getObjectById(dontSuffixedId);
++         fail("Must not be the document with id '" + dontSuffixedId + "' (with no suffix id)");
++      } catch (ObjectNotFoundException e) {
++         // OK
++      }
++   }
++   
+    public void testCheckIn() throws Exception
+    {
+       DocumentData document =
+          createDocument(rootFolder, "checkinTest", "cmis:document", new BaseContentStream("checkin test".getBytes(),
+             null, new MimeType("text", "plain")), null);
++      String objectId1 = document.getObjectId();
++      
++      // CHECKOUT
+       DocumentData pwc = document.checkout();
+       String pwcId = pwc.getObjectId();
+ 
+-      // Get PWC from storage
+-      pwc = (DocumentData)storageA.getObjectById(pwcId);
+-
++      // CHECKIN
+       ContentStream cs =
+-         new BaseContentStream("checkin test. content updated".getBytes(), null, new MimeType("text", "plain"));
+-      //      pwc.setContentStream(cs);
+-      pwc.checkin(true, "my comment", null, cs, null, null);
++         new BaseContentStream("checkin test, content updated".getBytes(), null, new MimeType("text", "plain"));
++      DocumentData checkin = pwc.checkin(true, "my comment", null, cs, null, null);
++      checkin = (DocumentData)storageA.getObjectById(checkin.getObjectId());
+ 
++      // Check whether is removed PWC
+       try
+       {
+          storageA.getObjectById(pwcId);
+@@ -193,24 +352,180 @@
+       {
+          // OK
+       }
++      
++      // Check first document id
++      try
++      {
++         storageA.getObjectById(objectId1);
++         // OK
++      }
++      catch (ObjectNotFoundException e)
++      {
++         fail("The first version should be in storage, for the id '" + objectId1 + "'. " + e.getMessage());
++      }
++      
++      // Check second document id
++      try
++      {
++         storageA.getObjectById(checkin.getObjectId());
++         // OK
++      }
++      catch (ObjectNotFoundException e)
++      {
++         fail("The second version should be in storage, for the id '" + checkin.getObjectId() + "'. " + e.getMessage());
++      }
++      
++      document = (DocumentData)storageA.getObjectById(objectId1);
++      
++      // check first document state
++      assertFalse(document.isVersionSeriesCheckedOut());
++      assertNull(document.getVersionSeriesCheckedOutId());
++      assertNull(document.getVersionSeriesCheckedOutBy());
++      // check content
++      String content = convertStreamToString(document.getContentStream().getStream());
++      assertEquals("checkin test", content);
++      
++      // check latest document state
++      assertFalse(checkin.isVersionSeriesCheckedOut());
++      assertNull(checkin.getVersionSeriesCheckedOutId());
++      assertNull(checkin.getVersionSeriesCheckedOutBy());
++      assertEquals("my comment", checkin.getProperty(CmisConstants.CHECKIN_COMMENT).getValues().get(0));
++      // check content
++      content = convertStreamToString(checkin.getContentStream().getStream());
++      assertEquals("checkin test, content updated", content);
++   }
++   
++   public void testCheckInDouble() throws Exception
++   {
++      DocumentData document =
++         createDocument(rootFolder, "testCheckInDouble_Document1", "cmis:document", new BaseContentStream("checkin test".getBytes(),
++            null, new MimeType("text", "plain")), null);
++      String objectId1 = document.getObjectId();
++      
++      // VERSION 1 
++      
++      DocumentData pwc1 = document.checkout();
+ 
++      ContentStream cs1 =
++         new BaseContentStream("checkin test, content updated 1".getBytes(), null, new MimeType("text", "plain"));
++      DocumentData checkin1 = pwc1.checkin(true, "my comment 1", null, cs1, null, null);
++      String objectId2 = checkin1.getObjectId();
++      checkin1 = (DocumentData)storageA.getObjectById(objectId2);
++      
++      // VERSION 2
++
++      DocumentData pwc2 = checkin1.checkout();
++      String pwcId2 = pwc2.getObjectId();
++      
++      ContentStream cs2 =
++         new BaseContentStream("checkin test, content updated 2".getBytes(), null, new MimeType("text", "plain"));
++      DocumentData checkin2 = pwc2.checkin(true, "my comment 2", null, cs2, null, null);
++      String objectId3 = checkin2.getObjectId();
++      checkin2 = (DocumentData)storageA.getObjectById(objectId2);
++
++      // Check whether is removed PWC 2
++      try
++      {
++         storageA.getObjectById(pwcId2);
++         fail("PWC 2 must be removed.");
++      }
++      catch (ObjectNotFoundException e)
++      {
++         // OK
++      }
++      
++      // Check second document id
++      try
++      {
++         storageA.getObjectById(objectId2);
++         // OK
++      }
++      catch (ObjectNotFoundException e)
++      {
++         fail("The second version should be in storage, for the id '" + objectId2 + "'. " + e.getMessage());
++      }
++      
++      // Check third version document id
++      try
++      {
++         storageA.getObjectById(objectId3);
++         // OK
++      }
++      catch (ObjectNotFoundException e)
++      {
++         fail("The second version should be in storage, for the id '" + objectId3 + "'. " + e.getMessage());
++      }
++
++      // get it again to get updated properties
++      document = (DocumentData)storageA.getObjectById(objectId1);
++      checkin1 = (DocumentData)storageA.getObjectById(objectId2);
++      checkin2 = (DocumentData)storageA.getObjectById(objectId3);
++      
++      // check first document state
+       assertFalse(document.isVersionSeriesCheckedOut());
+       assertNull(document.getVersionSeriesCheckedOutId());
+       assertNull(document.getVersionSeriesCheckedOutBy());
+-      assertEquals("my comment", document.getProperty(CmisConstants.CHECKIN_COMMENT).getValues().get(0));
++      // check content
++      String content = convertStreamToString(document.getContentStream().getStream());
++      assertEquals("checkin test", content);
++      
++      
++      // check second document state
++      assertFalse(checkin1.isVersionSeriesCheckedOut());
++      assertNull(checkin1.getVersionSeriesCheckedOutId());
++      assertNull(checkin1.getVersionSeriesCheckedOutBy());
++      assertEquals("my comment 1", checkin1.getProperty(CmisConstants.CHECKIN_COMMENT).getValues().get(0));
++      // check content
++      content = convertStreamToString(checkin1.getContentStream().getStream());
++      assertEquals("checkin test, content updated 1", content);
+ 
++      
++      // check latest document state
++      assertFalse(checkin2.isVersionSeriesCheckedOut());
++      assertNull(checkin2.getVersionSeriesCheckedOutId());
++      assertNull(checkin2.getVersionSeriesCheckedOutBy());
++      assertEquals("my comment 2", checkin2.getProperty(CmisConstants.CHECKIN_COMMENT).getValues().get(0));
+       // check content
+-      byte[] b = new byte[128];
+-      int r = document.getContentStream().getStream().read(b);
+-      assertEquals("checkin test. content updated", new String(b, 0, r));
++      content = convertStreamToString(checkin2.getContentStream().getStream());
++      assertEquals("checkin test, content updated 2", content);
++      
+    }
+ 
++   public void testCheckInTestId() throws Exception
++   {
++      DocumentData document =
++         createDocument(rootFolder, "testCheckInCheckId_Document1", "cmis:document", new BaseContentStream("checkin test".getBytes(),
++            null, new MimeType("text", "plain")), null);
++      
++      String documentId = document.getObjectId();
++      
++      DocumentData pwc = document.checkout();
++      
++      String pwcId = pwc.getObjectId();
++
++      // Get PWC from storage
++      pwc = (DocumentData)storageA.getObjectById(pwcId);
++
++      ContentStream cs =
++         new BaseContentStream("checkin test. content updated".getBytes(), null, new MimeType("text", "plain"));
++
++      DocumentData checkedInDocument = pwc.checkin(true, "my comment", null, cs, null, null);
++      
++      String checkedInDocumentId = checkedInDocument.getObjectId();
++      
++      String documentIdAfterCheckedIn = document.getObjectId();
++      
++      assertEquals("Document id should be the same as before checkout/checkin.", documentId, documentIdAfterCheckedIn);
++      assertNotSame("Document checked in id should NOT be the same as PWC id.", pwcId, documentIdAfterCheckedIn);
++      assertNotSame("Document checked in id should NOT be the same as first document id.", checkedInDocumentId, documentIdAfterCheckedIn);
++   }
++
+    public void testCheckInRename() throws Exception
+    {
+-      DocumentDataImpl document =
++      DocumentData document =
+          createDocument(rootFolder, "checkinTestRename", "cmis:document", new BaseContentStream("checkin test"
+             .getBytes(), null, new MimeType("text", "plain")), null);
+-      DocumentDataImpl pwc = (DocumentDataImpl)document.checkout();
++      DocumentData pwc = (DocumentData)document.checkout();
+       String pwcId = pwc.getObjectId();
+ 
+       // update
+@@ -321,7 +636,7 @@
+       try
+       {
+          storageA.getObjectById(pwcId);
+-         fail("PWC mus be removed.");
++         fail("PWC must be removed.");
+       }
+       catch (ObjectNotFoundException e)
+       {
+@@ -348,6 +663,7 @@
+       DocumentData document = createDocument(rootFolder, "getAllVersionsPwcTest", "cmis:document", null, null);
+       String versionSeriesId = document.getVersionSeriesId();
+       DocumentData pwc = document.checkout();
++      
+       Collection<DocumentData> allVersions = storageA.getAllVersions(versionSeriesId);
+       assertEquals(2, allVersions.size());
+       Iterator<DocumentData> vi = allVersions.iterator();
+@@ -355,26 +671,57 @@
+       assertEquals(document.getObjectId(), vi.next().getObjectId());
+    }
+ 
+-   public void testGetAllVersionsPwcVersions() throws Exception
++   public void testGetAllVersionsWithCheckin() throws Exception
+    {
+-      DocumentData document = createDocument(rootFolder, "getAllVersionsPwcVersionsTest", "cmis:document", null, null);
++      DocumentData document = createDocument(rootFolder, "testGetAllVersionsWithCheckin_Document1", "cmis:document", null, null);
++      String document_id = document.getObjectId();
+       String versionSeriesId = document.getVersionSeriesId();
+ 
+       DocumentData pwc = document.checkout();
+ 
+-      pwc.checkin(true, "", null, null, null, null);
++      DocumentData checkin = pwc.checkin(true, "", null, null, null, null);
++      
++      assertEquals(document_id.split("_")[0] + "_" + "2", checkin.getObjectId());
++      
++      String checkinObjectId = checkin.getObjectId();
+ 
+-      pwc = document.checkout();
++      DocumentData checkinObject = (DocumentData)storageA.getObjectById(checkinObjectId);
++      
++      DocumentData pwc2 = checkinObject.checkout();
++      String pwc_checkout2_id = pwc2.getObjectId();
++      
++      assertEquals("The document id should not changed.", document_id, document.getObjectId());
+ 
+       Collection<DocumentData> allVersions = storageA.getAllVersions(versionSeriesId);
++      
+       assertEquals(3, allVersions.size());
+-
++      
++      // check all id
+       Iterator<DocumentData> vi = allVersions.iterator();
+-      assertEquals(pwc.getObjectId(), vi.next().getObjectId());
+-      assertEquals(document.getObjectId(), vi.next().getObjectId());
++      boolean hasPwc = false;
++      boolean hasLatest = false;
++      while (vi.hasNext()) {
++         DocumentData documentData = (DocumentData) vi.next();
++         String versionLabel = documentData.getVersionLabel();
++         if ("pwc".equalsIgnoreCase(versionLabel)) {
++            if (hasPwc) 
++               fail("Already was a PWC document");
++            else
++               hasPwc = true;
++            assertEquals("The id of 'pwc' label document should be the same as the pwc checked out document.", pwc_checkout2_id, documentData.getObjectId());
++         } else if ("latest".equalsIgnoreCase(versionLabel)) {
++            if (hasLatest) 
++               fail("Already was a Latest document");
++            else
++               hasLatest = true;
++            assertEquals("The id of 'latest' label document should be the same as the latest document.", checkinObjectId, documentData.getObjectId());
++         } else {
++            assertEquals("The id of first label document should be the same as the '"+ versionLabel + "' (first) versioned document.", document_id, documentData.getObjectId());            
++         }
++      }
+    }
+ 
+-   public void tesGetCheckedOutDocs() throws Exception
++   public void testGetCheckedOutDocs() throws Exception
+    {
+       DocumentData document1 = createDocument(rootFolder, "getCheckedOutTest01", "cmis:document", null, null);
+       FolderData folder = createFolder(rootFolder, "folderCheckedOutTest", "cmis:folder");
+@@ -442,7 +789,139 @@
+          fail("Object(s) " + sb.toString() + " were not found in children list.");
+       }
+    }
++   
++   public void testGetChildrenAfterCheckin() throws Exception
++   {
++      FolderData folder1 = createFolder(rootFolder, "testGetChildrenAfterCheckin_Folder1", "cmis:folder");
++      
++      DocumentData document =
++         createDocument(folder1, "checkinTest", "cmis:document", new BaseContentStream("checkin test".getBytes(),
++            null, new MimeType("text", "plain")), null);
+ 
++      // CHECKOUT
++      DocumentData pwc = document.checkout();
++      
++      // CHECKIN
++      ContentStream cs =
++         new BaseContentStream("checkin test. content updated".getBytes(), null, new MimeType("text", "plain"));
++      DocumentData checkinDocument = pwc.checkin(true, "my comment", null, cs, null, null);
++      
++      // ============================
++      
++      folder1 = (FolderData) storageA.getObjectById(folder1.getObjectId());
++            
++      List<String> chs = new ArrayList<String>();
++      for (ItemsIterator<ObjectData> children = folder1.getChildren(null); children.hasNext();)
++      {
++         chs.add(children.next().getObjectId());
++      }
++      assertEquals(1, chs.size());
++      // Test the Id child the same as last checkin
++      assertEquals("Test the Id child the same as last checkin", checkinDocument.getObjectId(), chs.iterator().next());
++   }
++   
++   public void testGetChildrenAfterDoubleCheckin() throws Exception
++   {
++      FolderData folder1 = createFolder(rootFolder, "testGetChildrenAfterDoubleCheckin_Folder1", "cmis:folder");
++      
++      DocumentData document =
++         createDocument(folder1, "checkinTest", "cmis:document", new BaseContentStream("checkin test".getBytes(),
++            null, new MimeType("text", "plain")), null);
++
++      // FIRST VERSION
++      
++      // CHECKOUT
++      DocumentData pwc = document.checkout();
++      
++      // CHECKIN
++      ContentStream cs =
++         new BaseContentStream("checkin test. content updated".getBytes(), null, new MimeType("text", "plain"));
++      DocumentData checkinDocument = pwc.checkin(true, "my comment", null, cs, null, null);
++      String checkinId = checkinDocument.getObjectId();
++      
++      // SECOND VERSION
++      
++      // CHECKOUT
++      document = (DocumentData)storageA.getObjectById(checkinId);
++      pwc = document.checkout();
++      
++      // CHECKIN
++      cs =
++         new BaseContentStream("checkin test. content updated".getBytes(), null, new MimeType("text", "plain"));
++      DocumentData checkinDocument2 = pwc.checkin(true, "my comment", null, cs, null, null);
++      
++      // ============================
++      
++      folder1 = (FolderData) storageA.getObjectById(folder1.getObjectId());
++            
++      List<String> chs = new ArrayList<String>();
++      for (ItemsIterator<ObjectData> children = folder1.getChildren(null); children.hasNext();)
++      {
++         chs.add(children.next().getObjectId());
++      }
++      assertEquals(1, chs.size());
++      // Test the Id child the same as last checkin
++      assertEquals("Test the Id child the same as last checkin", checkinDocument2.getObjectId(), chs.iterator().next());
++   }
++   
++   public void testDeleteVersion() throws Exception
++   {
++      FolderData folder1 = createFolder(rootFolder, "testDeleteVersion_Folder1", "cmis:folder");
++      
++      DocumentData document =
++         createDocument(folder1, "checkinTest", "cmis:document", new BaseContentStream("checkin test".getBytes(),
++            null, new MimeType("text", "plain")), null);
++
++      
++      // FIRST VERSION
++      
++      // CHECKOUT
++      DocumentData pwc = document.checkout();
++      
++      // CHECKIN
++      ContentStream cs =
++         new BaseContentStream("checkin test. content updated".getBytes(), null, new MimeType("text", "plain"));
++      DocumentData checkinDocument = pwc.checkin(true, "my comment", null, cs, null, null);
++      
++      
++      // SECOND VERSION
++      
++      // CHECKOUT
++      pwc = checkinDocument.checkout();
++      
++      // CHECKIN
++      cs =
++         new BaseContentStream("checkin test. content updated".getBytes(), null, new MimeType("text", "plain"));
++      DocumentData checkinDocument2 = pwc.checkin(true, "my comment", null, cs, null, null);
++      
++      // ============================
++      
++      assertTrue(document.getObjectId().endsWith("_1"));
++      assertTrue(checkinDocument.getObjectId().endsWith("_2"));
++      assertTrue(checkinDocument2.getObjectId().endsWith("_3"));
++      
++      document = (DocumentData)storageA.getObjectById(document.getObjectId());
++      storageA.deleteObject(document, false);
++      
++      try {
++         storageA.getObjectById(document.getObjectId());
++         fail("Should be no document version '" + document.getObjectId() + "'");
++      } catch (Exception e) {
++         // OK, the version '1' was removed
++      }
++
++      try {
++         storageA.getObjectById(checkinDocument.getObjectId());
++      } catch (Exception e) {
++         fail("Should be the document version '3' available \n" + e.getMessage());
++      }
++      try {
++         storageA.getObjectById(checkinDocument2.getObjectId());
++      } catch (Exception e) {
++         fail("Should be the document version '3' available \n" + e.getMessage());
++      }
++   }
++
+    public void testCreateDocument() throws Exception
+    {
+       PropertyDefinition<?> nameDef = PropertyDefinitions.getPropertyDefinition("cmis:document", CmisConstants.NAME);
+@@ -456,7 +935,7 @@
+          "createDocumentTest_ContentFile.txt"));
+ 
+       ContentStream cs =
+-         new BaseContentStream("to be or not to be".getBytes(), /*"createDocumentTest"*/null, new MimeType("text",
++         new BaseContentStream("to be or not to be".getBytes(), null, new MimeType("text",
+             "plain"));
+       AccessControlEntry ace =
+          new AccessControlEntry("root", new HashSet<String>(Arrays.asList("cmis:read", "cmis:write")));
+@@ -531,25 +1010,6 @@
+       assertFalse(documentCopy.isMajorVersion());
+    }
+ 
+-   //   public void testCreateDocumentUnfiled() throws Exception
+-   //   {
+-   //      DocumentData document = createDocument(null, "createUnfiledDocumentTest", "cmis:document", null, null);
+-   //
+-   //      Node docNode = ((DocumentDataImpl)document).getNodeEntry().getNode();
+-   //      String path = docNode.getPath();
+-   //      assertTrue("Document must be created in unfiled store.", path.startsWith(StorageImpl.XCMIS_SYSTEM_PATH + "/"
+-   //         + StorageImpl.XCMIS_UNFILED));
+-   //
+-   //      Collection<FolderData> parents = document.getParents();
+-   //      assertEquals(0, parents.size());
+-   //
+-   //      // Add document in root folder.
+-   //      rootFolder.addObject(document);
+-   //      parents = document.getParents();
+-   //      assertEquals(1, parents.size());
+-   //      assertEquals(rootFolder.getObjectId(), parents.iterator().next().getObjectId());
+-   //   }
+-
+    public void testCreateFolder() throws Exception
+    {
+       PropertyDefinition<?> def = PropertyDefinitions.getPropertyDefinition("cmis:folder", CmisConstants.NAME);
+@@ -603,8 +1063,8 @@
+ 
+       Node relationshipNode = getNodeByIdentifierFromStorage(storageA, relationship.getObjectId());
+       assertEquals("cmis:relationship", relationshipNode.getPrimaryNodeType().getName());
+-      assertEquals(sourceDoc.getObjectId(), relationshipNode.getProperty("cmis:sourceId").getString());
+-      assertEquals(targetDoc.getObjectId(), relationshipNode.getProperty("cmis:targetId").getString());
++      assertEquals(sourceDoc.getObjectId(), relationship.getSourceId());
++      assertEquals(targetDoc.getObjectId(), relationship.getTargetId());
+    }
+ 
+    public void testDeleteContent() throws Exception
+@@ -659,24 +1119,45 @@
+       assertFalse(folder3.getChildren(null).hasNext());
+       assertFalse(itemExistsInStorage(storageA, "/deleteMultifiledTest", false));
+    }
+-
++   
++   // Unsupported unfiling.
++   //   public void testCreateDocumentUnfiled() throws Exception
++   //   {
++   //      DocumentData document = createDocument(null, "createUnfiledDocumentTest", "cmis:document", null, null);
++   //
++   //      Node docNode = ((DocumentDataImpl)document).getNodeEntry().getNode();
++   //      String path = docNode.getPath();
++   //      assertTrue("Document must be created in unfiled store.", path.startsWith(StorageImpl.XCMIS_SYSTEM_PATH + "/"
++   //         + StorageImpl.XCMIS_UNFILED));
++   //
++   //      Collection<FolderData> parents = document.getParents();
++   //      assertEquals(0, parents.size());
++   //
++   //      // Add document in root folder.
++   //      rootFolder.addObject(document);
++   //      parents = document.getParents();
++   //      assertEquals(1, parents.size());
++   //      assertEquals(rootFolder.getObjectId(), parents.iterator().next().getObjectId());
++   //   }
++   //
++   // CmisRuntimeException: Unable remove object from last folder in which it is filed.
+    //   public void testDeleteUnfiledDocument() throws Exception
+    //   {
+    //      DocumentData document = createDocument(rootFolder, "deleteUnfiledTest", "cmis:document", null, null);
+    //      rootFolder.removeObject(document);
+    //      assertEquals(0, document.getParents().size());
+-   //      assertTrue(root.getNode("xcmis:system/xcmis:unfileStore").getNodes().hasNext());
++   //      assertTrue(((FolderDataImpl)rootFolder).getNodeEntry().getNode().getNode("xcmis:system/xcmis:unfileStore").getNodes().hasNext());
+    //      storageA.deleteObject(document, true);
+    //      // wrapper node must be removed
+-   //      assertFalse(root.getNode("xcmis:system/xcmis:unfileStore").getNodes().hasNext());
++   //      assertFalse(((FolderDataImpl)rootFolder).getNodeEntry().getNode().getNode("xcmis:system/xcmis:unfileStore").getNodes().hasNext());
+    //   }
+ 
+    public void testDeleteObjectWithRelationship() throws Exception
+    {
+       ObjectData sourceDoc =
+-         createDocument(rootFolder, "deleteObjectWithRelationshipSource", "cmis:document", null, null);
++         createDocument(rootFolder, "deleteObjectWithRelationship_Source", "cmis:document", null, null);
+       ObjectData targetDoc =
+-         createDocument(rootFolder, "deleteObjectWithRelationshipTarget", "cmis:document", null, null);
++         createDocument(rootFolder, "deleteObjectWithRelationship_Target", "cmis:document", null, null);
+ 
+       Map<String, Property<?>> properties = new HashMap<String, Property<?>>();
+       PropertyDefinition<?> defName =
+@@ -1138,11 +1619,6 @@
+          + ((DocumentDataImpl)document).getNodeEntry().getNode().getPath());
+    }
+ 
+-
+-
+-
+-
+-
+    public void testGetMultifiledByPath() throws Exception
+    {
+       ContentStream cs = new BaseContentStream("to be or not to be".getBytes(), null, new MimeType("text", "plain"));
+@@ -1154,14 +1630,12 @@
+ 
+       DocumentData doc = (DocumentData)storageA.getObjectByPath("/multifiledByPathTest2/multifiledByPathTest");
+       assertEquals(cs.length(), doc.getContentStream().length());
+-
+    }
+ 
+-
+    public void testRenameDocument() throws Exception
+    {
+       ContentStream cs = new BaseContentStream("to be or not to be".getBytes(), null, new MimeType("text", "plain"));
+-      DocumentDataImpl document = createDocument(rootFolder, "renameDocumentTest", "cmis:document", cs, null);
++      DocumentData document = createDocument(rootFolder, "renameDocumentTest", "cmis:document", cs, null);
+       setProperty(document, new StringProperty(CmisConstants.NAME, CmisConstants.NAME, CmisConstants.NAME,
+          CmisConstants.NAME, "renameDocumentTest01"));
+ 
+@@ -1174,7 +1648,7 @@
+ 
+    public void testRenameFolder() throws Exception
+    {
+-      FolderDataImpl folder = createFolder(rootFolder, "renameFolderTest", "cmis:folder");
++      FolderData folder = createFolder(rootFolder, "renameFolderTest", "cmis:folder");
+       createDocument(folder, "child1", "cmis:document", null, null);
+       setProperty(folder, new StringProperty(CmisConstants.NAME, CmisConstants.NAME, CmisConstants.NAME,
+          CmisConstants.NAME, "renameFolderTest01"));
+@@ -1199,42 +1673,48 @@
+       assertEquals("to be or not to be", documentNode.getProperty("jcr:content/jcr:data").getString());
+       assertEquals("text/plain", documentNode.getProperty("jcr:content/jcr:mimeType").getString());
+    }
++   
++   
++   
++   
++   
++   
++   
++   /*
++      public void testUnfileAll() throws Exception
++      {
++         DocumentData document = createDocument(rootFolder, "unfilingDocumentAllTest", "cmis:document", null, null);
++   
++         FolderData folder1 = createFolder(rootFolder, "unfilingFolderAllTest01", "cmis:folder");
++         FolderData folder2 = createFolder(rootFolder, "unfilingFolderAllTest02", "cmis:folder");
++         FolderData folder3 = createFolder(rootFolder, "unfilingFolderAllTest03", "cmis:folder");
++         folder1.addObject(document);
++         folder2.addObject(document);
++         folder3.addObject(document);
++   
++         assertEquals(4, document.getParents().size());
++         storageA.unfileObject(document);
++         assertNull(document.getParent());
++         assertEquals(0, document.getParents().size());
++      }
+ 
+-   //   public void testUnfileAll() throws Exception
+-   //   {
+-   //      DocumentData document = createDocument(rootFolder, "unfilingDocumentAllTest", "cmis:document", null, null);
+-   //
+-   //      FolderData folder1 = createFolder(rootFolder, "unfilingFolderAllTest01", "cmis:folder");
+-   //      FolderData folder2 = createFolder(rootFolder, "unfilingFolderAllTest02", "cmis:folder");
+-   //      FolderData folder3 = createFolder(rootFolder, "unfilingFolderAllTest03", "cmis:folder");
+-   //      folder1.addObject(document);
+-   //      folder2.addObject(document);
+-   //      folder3.addObject(document);
+-   //
+-   //      assertEquals(4, document.getParents().size());
+-   //      storageA.unfileObject(document);
+-   //      assertNull(document.getParent());
+-   //      assertEquals(0, document.getParents().size());
+-   //   }
++      public void testUnfiling() throws Exception
++      {
++         assertEquals(0, getSize(storageA.getUnfiledObjectsId()));
++         DocumentData document = createDocument(rootFolder, "unfilingDocumentTest", "cmis:document", null, null);
++         assertTrue(rootFolder.getChildren(null).hasNext());
++         rootFolder.removeObject(document);
++         assertFalse(rootFolder.getChildren(null).hasNext());
++   
++         assertFalse(itemExistsInCurrentDrive(storageA,"/unfilingDocumentTest"));
++   
++         Collection<FolderData> parents = document.getParents();
++         assertEquals(0, parents.size());
++         storageA.getObjectById(document.getObjectId());
++   
++         assertEquals(1, getSize(storageA.getUnfiledObjectsId()));
++      }
+ 
+-   //   public void testUnfiling() throws Exception
+-   //   {
+-   //      assertEquals(0, getSize(storageA.getUnfiledObjectsId()));
+-   //      DocumentData document = createDocument(rootFolder, "unfilingDocumentTest", "cmis:document", null, null);
+-   //      assertTrue(rootFolder.getChildren(null).hasNext());
+-   //      rootFolder.removeObject(document);
+-   //      assertFalse(rootFolder.getChildren(null).hasNext());
+-   //
+-   //      assertFalse(itemExistsInCurrentDrive(storageA,"/unfilingDocumentTest"));
+-   //
+-   //      Collection<FolderData> parents = document.getParents();
+-   //      assertEquals(0, parents.size());
+-   //      storageA.getObjectById(document.getObjectId());
+-   //
+-   //      assertEquals(1, getSize(storageA.getUnfiledObjectsId()));
+-   //   }
+-
+-   /*
+    private int getSize(Iterator<String> iterator)
+    {
+       int result = 0;
+@@ -1251,7 +1731,7 @@
+    {
+       System.out.println("--------- TREE --------");
+       System.out.println(folder.getPath());
+-      ((FolderDataImpl)folder).getNode().accept(new ItemVisitor()
++      ((FolderDataImpl)folder).entry.node.accept(new ItemVisitor()
+       {
+          int l = 0;
+ 
+@@ -1290,32 +1770,8 @@
+    }
+    */
+ 
+-   protected DocumentDataImpl createDocument(FolderData folder, String name, String typeId, ContentStream content,
+-      VersioningState versioningState) throws Exception
+-   {
+-      PropertyDefinition<?> def = PropertyDefinitions.getPropertyDefinition("cmis:document", CmisConstants.NAME);
+-      Map<String, Property<?>> properties = new HashMap<String, Property<?>>();
+-      properties.put(CmisConstants.NAME, new StringProperty(def.getId(), def.getQueryName(), def.getLocalName(), def
+-         .getDisplayName(), name));
+ 
+-      DocumentData document =
+-         storageA.createDocument(folder, documentTypeDefinition, properties, content, null, null,
+-            versioningState == null ? VersioningState.MAJOR : versioningState);
+-      return (DocumentDataImpl)document;
+-   }
+ 
+-   protected FolderDataImpl createFolder(FolderData folder, String name, String typeId) throws Exception
+-   {
+-      PropertyDefinition<?> def = PropertyDefinitions.getPropertyDefinition("cmis:folder", CmisConstants.NAME);
+-      Map<String, Property<?>> properties = new HashMap<String, Property<?>>();
+-      properties.put(CmisConstants.NAME, new StringProperty(def.getId(), def.getQueryName(), def.getLocalName(), def
+-         .getDisplayName(), name));
+-
+-      FolderData newFolder = storageA.createFolder(folder, folderTypeDefinition, properties, null, null);
+-      //      newFolder.setName(name);
+-      return (FolderDataImpl)newFolder;
+-   }
+-
+    protected PolicyDataImpl createPolicy(FolderData folder, String name, String policyText, String typeId)
+       throws Exception
+    {
+@@ -1356,6 +1812,7 @@
+    //      }
+    //      return document;
+    //   }
++   
+    private boolean itemExistsInStorage(StorageImpl storage, String nodePath, boolean isSystem)
+       throws RepositoryException, RepositoryConfigurationException
+    {
+@@ -1380,4 +1837,5 @@
+       return (Node)getJcrSession(storage.getStorageConfiguration().getRepository(),
+          storage.getStorageConfiguration().getWorkspace()).getNodeByUUID(nodeId);
+    }
++   
+ }
+Index: ext/xcmis/sp/src/test/java/org/exoplatform/ecms/xcmis/sp/query/MultifilingUnfilingTest.java
+===================================================================
+--- ext/xcmis/sp/src/test/java/org/exoplatform/ecms/xcmis/sp/query/MultifilingUnfilingTest.java	(revision 72761)
++++ ext/xcmis/sp/src/test/java/org/exoplatform/ecms/xcmis/sp/query/MultifilingUnfilingTest.java	(working copy)
+@@ -101,9 +101,35 @@
+       storageA.deleteTree(testRoot, true, null, true);
+    }
+ 
+-   public void _testRemoveFromMultipleParents() throws Exception
++   public void testRemoveFromMultipleParentsInDouble() throws Exception
+    {
++      FolderData folder1 = createFolder(storageA, testRoot, "multifilingFolderTest2", folderTypeDefinition);
+ 
++      DocumentData doc1 =
++         createDocument(storageA, testRoot, "node1", nasaDocumentTypeDefinition, "helloworld".getBytes(), new MimeType(
++            "plain", "text"));
++      assertEquals(1, doc1.getParents().size());
++      
++      checkResult(storageA, "SELECT * FROM " + NASA_DOCUMENT + " WHERE IN_FOLDER('" + folder1.getObjectId() + "')",
++            new ObjectData[]{});
++      
++      folder1.addObject(doc1);
++      assertEquals(2, doc1.getParents().size());
++      
++      checkResult(storageA, "SELECT * FROM " + NASA_DOCUMENT + " WHERE IN_FOLDER('" + folder1.getObjectId() + "')",
++            new ObjectData[]{doc1});
++
++      folder1.removeObject(doc1);
++      assertEquals(1, doc1.getParents().size());
++
++      checkResult(storageA, "SELECT * FROM " + NASA_DOCUMENT + " WHERE IN_FOLDER('" + folder1.getObjectId() + "')",
++         new ObjectData[]{});
++   }
++   
++   
++   public void testRemoveFromMultipleParentsInTriple() throws Exception
++   {
++
+       FolderData folder1 = createFolder(storageA, testRoot, "multifilingFolderTest1", folderTypeDefinition);
+       FolderData folder2 = createFolder(storageA, testRoot, "multifilingFolderTest2", folderTypeDefinition);
+       FolderData folder3 = createFolder(storageA, testRoot, "multifilingFolderTest3", folderTypeDefinition);
+@@ -130,53 +156,58 @@
+ 
+       storageA.deleteTree(testRoot, true, null, true);
+    }
++   
++   
++//   // CmisRuntimeException: Unable remove object from last folder in which it is filed.
++//   public void testRemoveFromLastParent() throws Exception
++//   {
++//
++//      FolderData folder1 = createFolder(storageA,testRoot, "multifilingFolderTest1", folderTypeDefinition);
++//      FolderData folder2 = createFolder(storageA,testRoot, "multifilingFolderTest2", folderTypeDefinition);
++//      FolderData folder3 = createFolder(storageA,testRoot, "multifilingFolderTest3", folderTypeDefinition);
++//
++//      DocumentData doc1 =
++//         createDocument(storageA,folder1, "node1", nasaDocumentTypeDefinition, "helloworld".getBytes(), new MimeType("plain",
++//            "text"));
++//      folder2.addObject(doc1);
++//      folder3.addObject(doc1);
++//      assertEquals(3, doc1.getParents().size());
++//
++//      checkResult(storageA,"SELECT * FROM " + NASA_DOCUMENT + " WHERE IN_TREE('" + testRoot.getObjectId() + "')",
++//         new ObjectData[]{doc1});
++//
++//      folder2.removeObject(doc1);
++//      folder3.removeObject(doc1);
++//      folder1.removeObject(doc1);
++//
++//      assertEquals(0, doc1.getParents().size());
++//
++//      checkResult(storageA,"SELECT * FROM " + NASA_DOCUMENT + " WHERE IN_TREE('" + testRoot.getObjectId() + "')",
++//         new ObjectData[]{});
++//
++//      storageA.deleteObject(doc1, true);
++//      storageA.deleteTree(testRoot, true, null, true);
++//   }
+ 
+-   //   public void testRemoveFromLastParent() throws Exception
+-   //   {
+-   //
+-   //      FolderData folder1 = createFolder(storageA,testRoot, "multifilingFolderTest1", folderTypeDefinition);
+-   //      FolderData folder2 = createFolder(storageA,testRoot, "multifilingFolderTest2", folderTypeDefinition);
+-   //      FolderData folder3 = createFolder(storageA,testRoot, "multifilingFolderTest3", folderTypeDefinition);
+-   //
+-   //      DocumentData doc1 =
+-   //         createDocument(storageA,folder1, "node1", nasaDocumentTypeDefinition, "helloworld".getBytes(), new MimeType("plain",
+-   //            "text"));
+-   //      folder2.addObject(doc1);
+-   //      folder3.addObject(doc1);
+-   //      assertEquals(3, doc1.getParents().size());
+-   //
+-   //      checkResult(storageA,"SELECT * FROM " + NASA_DOCUMENT + " WHERE IN_TREE('" + testRoot.getObjectId() + "')",
+-   //         new ObjectData[]{doc1});
+-   //
+-   //      folder2.removeObject(doc1);
+-   //      folder3.removeObject(doc1);
+-   //      folder1.removeObject(doc1);
+-   //
+-   //      assertEquals(0, doc1.getParents().size());
+-   //
+-   //      checkResult(storageA,"SELECT * FROM " + NASA_DOCUMENT + " WHERE IN_TREE('" + testRoot.getObjectId() + "')",
+-   //         new ObjectData[]{});
+-   //
+-   //      storage.deleteObject(doc1, true);
+-   //      storage.deleteTree(testRoot, true, null, true);
+-   //   }
++   
++//   // CmisRuntimeException: Unable remove object from last folder in which it is filed.
++//   public void testSearchUnfiled() throws Exception
++//   {
++//      checkResult(storageA,"SELECT * FROM " + NASA_DOCUMENT + " WHERE CONTAINS(\"helloworld\")", new ObjectData[]{});
++//      DocumentData doc1 =
++//         createDocument(storageA, testRoot, "node1", nasaDocumentTypeDefinition, "helloworld".getBytes(), new MimeType("text", "plain"));
++//
++//      checkResult(storageA,"SELECT * FROM " + NASA_DOCUMENT + " WHERE CONTAINS(\"helloworld\")", new ObjectData[]{doc1});
++//
++//      testRoot.removeObject(doc1);
++//      //check if document have no parents
++//      assertEquals(0, doc1.getParents().size());
++//      //check if we can find document
++//      checkResult(storageA,"SELECT * FROM " + NASA_DOCUMENT + " WHERE CONTAINS(\"helloworld\")", new ObjectData[]{doc1});
++//
++//      storageA.deleteObject(doc1, true);
++//      storageA.deleteTree(testRoot, true, null, true);
++//   }
++   
+ 
+-   //   public void testSearchUnfiled() throws Exception
+-   //   {
+-   //      checkResult(storageA,"SELECT * FROM " + NASA_DOCUMENT + " WHERE CONTAINS(\"helloworld\")", new ObjectData[]{});
+-   //      DocumentData doc1 =
+-   //         createDocument(storageA,testRoot, "node1", nasaDocumentTypeDefinition, "helloworld".getBytes(), new MimeType("text", "plain"));
+-   //
+-   //      checkResult(storageA,"SELECT * FROM " + NASA_DOCUMENT + " WHERE CONTAINS(\"helloworld\")", new ObjectData[]{doc1});
+-   //
+-   //      testRoot.removeObject(doc1);
+-   //      //check if document have no parents
+-   //      assertEquals(0, doc1.getParents().size());
+-   //      //check if we can find document
+-   //      checkResult(storageA,"SELECT * FROM " + NASA_DOCUMENT + " WHERE CONTAINS(\"helloworld\")", new ObjectData[]{doc1});
+-   //
+-   //      storage.deleteObject(doc1, true);
+-   //      storage.deleteTree(testRoot, true, null, true);
+-   //   }
+-
+ }
+Index: ext/xcmis/sp/src/test/java/org/exoplatform/ecms/xcmis/sp/query/BaseQueryTest.java
+===================================================================
+--- ext/xcmis/sp/src/test/java/org/exoplatform/ecms/xcmis/sp/query/BaseQueryTest.java	(revision 72761)
++++ ext/xcmis/sp/src/test/java/org/exoplatform/ecms/xcmis/sp/query/BaseQueryTest.java	(working copy)
+@@ -211,6 +211,10 @@
+       while (result.hasNext())
+       {
+          Result next = result.next();
++         if (LOG.isDebugEnabled())
++         {
++            LOG.debug(next.getObjectId());
++         }
+          String id = next.getObjectId();
+          resultPaths.add(id);
+          try
+@@ -326,9 +330,7 @@
+    @Override
+    public void setUp() throws Exception
+    {
+-      // TODO Auto-generated method stub
+       super.setUp();
+-
+    }
+ 
+    protected DocumentData createAppoloMission(StorageImpl storage, FolderData parentFolder, String missionName,
+Index: ext/xcmis/sp/src/test/java/org/exoplatform/ecms/xcmis/sp/query/QueryUsecasesTest.java
+===================================================================
+--- ext/xcmis/sp/src/test/java/org/exoplatform/ecms/xcmis/sp/query/QueryUsecasesTest.java	(revision 72761)
++++ ext/xcmis/sp/src/test/java/org/exoplatform/ecms/xcmis/sp/query/QueryUsecasesTest.java	(working copy)
+@@ -17,6 +17,7 @@
+ 
+ package org.exoplatform.ecms.xcmis.sp.query;
+ 
++import org.exoplatform.ecms.xcmis.sp.DocumentVersion;
+ import org.exoplatform.ecms.xcmis.sp.StorageImpl;
+ import org.xcmis.spi.BaseContentStream;
+ import org.xcmis.spi.CmisConstants;
+@@ -24,6 +25,7 @@
+ import org.xcmis.spi.DocumentData;
+ import org.xcmis.spi.FolderData;
+ import org.xcmis.spi.ItemsIterator;
++import org.xcmis.spi.ObjectData;
+ import org.xcmis.spi.model.CapabilityJoin;
+ import org.xcmis.spi.model.CapabilityQuery;
+ import org.xcmis.spi.model.RepositoryCapabilities;
+@@ -40,7 +42,9 @@
+ import java.text.DateFormat;
+ import java.text.SimpleDateFormat;
+ import java.util.Calendar;
++import java.util.HashSet;
+ import java.util.List;
++import java.util.Set;
+ 
+ /**
+  * Created by The eXo Platform SAS. <br/>
+@@ -54,10 +58,6 @@
+ 
+    private FolderData testRoot;
+ 
+-   private StorageImpl storageA;
+-
+-   private TypeDefinition folderTypeDefinition;
+-
+    private TypeDefinition nasaDocumentTypeDefinition;
+ 
+    /**
+@@ -73,9 +73,375 @@
+       FolderData rootFolder = (FolderData)storageA.getObjectById(storageA.getRepositoryInfo().getRootFolderId());
+       testRoot =
+          createFolder(storageA, rootFolder, "QueryUsecasesTest", storageA.getTypeDefinition("cmis:folder", true));
++   }
++   
++   /**
++    * @see org.xcmis.sp.BaseTest#tearDown()
++    */
++   protected void tearDown() throws Exception
++   {
++      storageA.deleteTree(testRoot, true, UnfileObject.DELETE, true);
++      super.tearDown();
++   }
+ 
++   public void testQueryWithChangedContentAndFullSearch() throws Exception
++   {
++      // Search for no documents
++      StringBuffer sql = new StringBuffer();
++      sql.append("SELECT * ");
++      sql.append("FROM ");
++      sql.append("cmis:document");
++      Query query = new Query(sql.toString(), true);
++      ItemsIterator<Result> result = storageA.query(query);
++      assertEquals(0, result.size());
++
++      
++      FolderData rootFolder = (FolderData)storageA.getObjectById(storageA.getRepositoryInfo().getRootFolderId());
++      
++      ContentStream cs1 =
++         new BaseContentStream("hello".getBytes(), null, new MimeType("text", "plain"));
++      DocumentData document = createDocument(rootFolder, "testQueryOnLatest", "cmis:document", cs1, null);
++      
++      assertTrue(document.getObjectId().contains("_"));
++      
++      // multifiling document
++      FolderData folder1 = createFolder(rootFolder, "deleteMultifiledTest01", "cmis:folder");
++      FolderData folder2 = createFolder(rootFolder, "deleteMultifiledTest02", "cmis:folder");
++      folder1.addObject(document);
++      folder2.addObject(document);
++      
++      
++      ContentStream cs11 =
++         new BaseContentStream("changed".getBytes(), null, new MimeType("text", "plain"));
++      document.setContentStream(cs11);
++      
++    // search for FIRST document with full text search
++    sql = new StringBuffer();
++    sql.append("SELECT * ");
++    sql.append("FROM ");
++    sql.append("cmis:document ");
++    sql.append("WHERE ");
++    sql.append("CONTAINS(\"changed\")");
++    query = new Query(sql.toString(), true);
++    result = storageA.query(query);
++    assertEquals(1, result.size());
++    // check results
++    checkResult(storageA, result, new DocumentData[]{document});
++      
++      
++    ItemsIterator<ObjectData> children = ((FolderData)storageA.getObjectById(folder1.getObjectId())).getChildren(null);
++    int i = 0;
++    while (children.hasNext()) {
++      children.next();
++      i++;
++    }
++    assertEquals(1, i);
++    
++    children = ((FolderData)storageA.getObjectById(folder1.getObjectId())).getChildren(null);
++    ObjectData childDocument = children.next();
++    ContentStream contentStream = childDocument.getContentStream(null);
++    String content = convertStreamToString(contentStream.getStream());
++    
++    assertEquals("changed" , content);
++    
++    children = ((FolderData)storageA.getObjectById(folder2.getObjectId())).getChildren(null);
++    i = 0;
++    while (children.hasNext()) {
++      children.next();
++      i++;
++    }
++    assertEquals(1, i);
++    
++    children = ((FolderData)storageA.getObjectById(folder2.getObjectId())).getChildren(null);
++    childDocument = children.next();
++    contentStream = childDocument.getContentStream(null);
++    content = convertStreamToString(contentStream.getStream());
++    assertEquals("changed" , content);
++    
++    
++     sql = new StringBuffer();
++     sql.append("SELECT * ");
++     sql.append("FROM ");
++     sql.append("cmis:document ");
++     sql.append("WHERE ");
++     sql.append("CONTAINS(\"hello\")");
++     query = new Query(sql.toString(), true);
++     result = storageA.query(query);
++     assertEquals(0, result.size());
++   
++     
++     sql = new StringBuffer();
++     sql.append("SELECT * ");
++     sql.append("FROM ");
++     sql.append("cmis:document ");
++     sql.append("WHERE ");
++     sql.append("IN_FOLDER( '" + folder1.getObjectId() + "')");
++     query = new Query(sql.toString(), true);
++     result = storageA.query(query);
++     assertEquals(1, result.size());
++     
++     sql = new StringBuffer();
++     sql.append("SELECT * ");
++     sql.append("FROM ");
++     sql.append("cmis:document ");
++     sql.append("WHERE ");
++     sql.append("IN_FOLDER( '" + folder2.getObjectId() + "')");
++     query = new Query(sql.toString(), true);
++     result = storageA.query(query);
++     assertEquals(1, result.size());
++     
++     sql = new StringBuffer();
++     sql.append("SELECT * ");
++     sql.append("FROM ");
++     sql.append("cmis:document ");
++     sql.append("WHERE ");
++     sql.append("IN_FOLDER( '" + rootFolder.getObjectId() + "')");
++     query = new Query(sql.toString(), true);
++     result = storageA.query(query);
++     assertEquals(1, result.size());
++      
++  
++      DocumentData pwc = document.checkout();
++      ContentStream cs2 =
++         new BaseContentStream("bye".getBytes(), null, new MimeType("text", "plain"));
++      DocumentData checkin = pwc.checkin(true, "my comment", null, cs2, null, null);
++      
++      assertTrue(checkin.getObjectId().contains("_"));
++      
++      // search for FIRST document with full text search
++      sql = new StringBuffer();
++      sql.append("SELECT * ");
++      sql.append("FROM ");
++      sql.append("cmis:document ");
++      sql.append("WHERE ");
++      sql.append("CONTAINS(\"changed\")");
++      query = new Query(sql.toString(), true);
++      result = storageA.query(query);
++      assertEquals(1, result.size());
++      // check results
++      checkResult(storageA, result, new DocumentData[]{document});
++
++      
++      // search for CHECKIN document with full text search
++      sql = new StringBuffer();
++      sql.append("SELECT * ");
++      sql.append("FROM ");
++      sql.append("cmis:document ");
++      sql.append("WHERE ");
++      sql.append("CONTAINS(\"bye\")");
++      query = new Query(sql.toString(), true);
++      result = storageA.query(query);
++      assertEquals(1, result.size());
++      // check results
++      checkResult(storageA, result, new DocumentData[]{checkin});
++      
++      
++      // search for 
++      sql = new StringBuffer();
++      sql.append("SELECT * ");
++      sql.append("FROM ");
++      sql.append("cmis:document ");
++      sql.append("WHERE ");
++      sql.append("cmis:objectId = '" + checkin.getObjectId() + "'");
++      query = new Query(sql.toString(), true);
++      result = storageA.query(query);
++      assertEquals(1, result.size());
++      // check results
++      checkResult(storageA, result, new DocumentData[]{checkin});
+    }
+ 
++   public void testDoesTheIndexEmpty() throws Exception
++   {
++      // Search for no documents
++      StringBuffer sql = new StringBuffer();
++      sql.append("SELECT * ");
++      sql.append("FROM ");
++      sql.append("cmis:document");
++      Query query = new Query(sql.toString(), true);
++      ItemsIterator<Result> result = storageA.query(query);
++      // if the index not empty use: result.next().getObjectId() to see the id
++      assertEquals(0, result.size());
++   }
++   
++   public void testQueryOnCreatedDocument() throws Exception
++   {
++      // Search for no documents
++      StringBuffer sql = new StringBuffer();
++      sql.append("SELECT * ");
++      sql.append("FROM ");
++      sql.append("cmis:document");
++      Query query = new Query(sql.toString(), true);
++      ItemsIterator<Result> result = storageA.query(query);
++      assertEquals(0, result.size());
++      
++      FolderData rootFolder = (FolderData)storageA.getObjectById(storageA.getRepositoryInfo().getRootFolderId());
++      DocumentData document = createDocument(rootFolder, "testQueryOnCreatedDocument", "cmis:document", null, null);
++      
++      // search for documents (version 1 and the latest one)
++      sql = new StringBuffer();
++      sql.append("SELECT * ");
++      sql.append("FROM ");
++      sql.append("cmis:document");
++      query = new Query(sql.toString(), true);
++      result = storageA.query(query);
++      assertEquals(1, result.size());
++      // check results
++      checkResult(storageA, result, new DocumentData[]{document});
++   }
++   
++   public void testQueryOnCheckedIn() throws Exception
++   {
++      // Search for no documents
++      StringBuffer sql = new StringBuffer();
++      sql.append("SELECT * ");
++      sql.append("FROM ");
++      sql.append("cmis:document");
++      Query query = new Query(sql.toString(), true);
++      ItemsIterator<Result> result = storageA.query(query);
++      assertEquals(0, result.size());
++
++      // checkout/checkin
++      FolderData rootFolder = (FolderData)storageA.getObjectById(storageA.getRepositoryInfo().getRootFolderId());
++      DocumentData document = createDocument(rootFolder, "testQueryOnCheckedIn", "cmis:document", null, null);
++      DocumentData pwc = document.checkout();
++      DocumentData checkin = pwc.checkin(true, "", null, null, null, null);
++      
++      // search for documents (version 1 and the latest one)
++      sql = new StringBuffer();
++      sql.append("SELECT * ");
++      sql.append("FROM ");
++      sql.append("cmis:document");
++      query = new Query(sql.toString(), true);
++      result = storageA.query(query);
++      assertEquals(2, result.size());
++      // check results
++      checkResult(storageA, result, new DocumentData[]{document, checkin});
++   }
++   
++   public void testQueryOnLatest() throws Exception
++   {
++      // Search for no documents
++      StringBuffer sql = new StringBuffer();
++      sql.append("SELECT * ");
++      sql.append("FROM ");
++      sql.append("cmis:document");
++      Query query = new Query(sql.toString(), true);
++      ItemsIterator<Result> result = storageA.query(query);
++      assertEquals(0, result.size());
++
++      // checkout/checkin
++      FolderData rootFolder = (FolderData)storageA.getObjectById(storageA.getRepositoryInfo().getRootFolderId());
++      ContentStream cs1 =
++         new BaseContentStream("hello".getBytes(), null, new MimeType("text", "plain"));
++      DocumentData document = createDocument(rootFolder, "testQueryOnLatest", "cmis:document", cs1, null);
++      
++      DocumentData pwc = document.checkout();
++      ContentStream cs2 =
++         new BaseContentStream("bye".getBytes(), null, new MimeType("text", "plain"));
++      DocumentData checkin = pwc.checkin(true, "my comment", null, cs2, null, null);
++            
++      // search for document with latest
++      sql = new StringBuffer();
++      sql.append("SELECT * ");
++      sql.append("FROM ");
++      sql.append("cmis:document");
++      sql.append(" WHERE ");
++      sql.append("cmis:isLatestVersion" + " = true");
++      query = new Query(sql.toString(), true);
++      result = storageA.query(query);
++      assertEquals(1, result.size());
++      // check results
++      checkResult(storageA, result, new DocumentData[]{checkin});
++   }
++   
++   
++   public void testDeleteVersion() throws Exception
++   {
++      FolderData folder1 = createFolder(testRoot, "multifiledChildFolderTest01", "cmis:folder");
++      
++      // SEARCH TEST
++      String queryString = "SELECT * FROM cmis:document WHERE IN_FOLDER('" + folder1.getObjectId() + "')";
++      Query query = new Query(queryString, true);
++      ItemsIterator<Result> result = storageA.query(query);
++      assertEquals(0, result.size());
++      
++      DocumentData document =
++         createDocument(folder1, "checkinTest", "cmis:document", new BaseContentStream("checkin test".getBytes(),
++            null, new MimeType("text", "plain")), null);
++
++      // SEARCH TEST
++      queryString = "SELECT * FROM cmis:document WHERE IN_FOLDER('" + folder1.getObjectId() + "')";
++      query = new Query(queryString, true);
++      result = storageA.query(query);
++      assertEquals(1, result.size());
++      
++      
++      // FIRST VERSION ============================
++      
++      // CHECKOUT
++      DocumentData pwc = document.checkout();
++      
++      // CHECKIN
++      ContentStream cs =
++         new BaseContentStream("checkin test. content updated".getBytes(), null, new MimeType("text", "plain"));
++      DocumentData checkinDocument1 = pwc.checkin(true, "my comment", null, cs, null, null);
++      String checkinId1 = checkinDocument1.getObjectId();
++      
++      // SEARCH TEST
++      queryString = "SELECT * FROM cmis:document WHERE IN_FOLDER('" + folder1.getObjectId() + "')";
++      query = new Query(queryString, true);
++      result = storageA.query(query);
++      assertEquals(2, result.size());
++      
++      
++      // SECOND VERSION ============================
++      
++      // CHECKOUT
++      pwc = checkinDocument1.checkout();
++      
++      // CHECKIN
++      cs =
++         new BaseContentStream("checkin test. content updated".getBytes(), null, new MimeType("text", "plain"));
++      DocumentData checkinDocument2 = pwc.checkin(true, "my comment", null, cs, null, null);
++      String checkinId2 = checkinDocument2.getObjectId();
++      
++      // ============================
++
++      // SEARCH TEST
++      queryString = "SELECT * FROM cmis:document WHERE IN_FOLDER('" + folder1.getObjectId() + "')";
++      query = new Query(queryString, true);
++      result = storageA.query(query);
++      assertEquals(3, result.size());
++       
++      // DELETE VERSION
++      while(result.hasNext()) {
++         String id = result.next().getObjectId();
++         ObjectData objectData = storageA.getObjectById(id);
++         if (objectData instanceof DocumentVersion) {
++            DocumentVersion dd = (DocumentVersion)objectData;
++            if ("1".intern().equalsIgnoreCase(dd.getVersionLabel())) {
++               dd.delete();
++            }
++         }
++      }
++      
++      // SEARCH TEST
++      queryString = "SELECT * FROM cmis:document WHERE IN_FOLDER('" + folder1.getObjectId() + "')";
++      query = new Query(queryString, true);
++      result = storageA.query(query);
++      assertEquals(2, result.size());
++      
++      // ItemsIterator<Result> objectId's to Set<String>
++      Set<String> ss = new HashSet<String>();
++      while (result.hasNext()) {
++         Result result2 = (Result) result.next();
++         ss.add(result2.getObjectId());
++      }
++       
++      assertTrue("Should be the First checkin version in the search" , ss.contains(checkinId1));
++      assertTrue("Should be the Second checkin version in the search", ss.contains(checkinId2));
++   }
++
+    /**
+     * Get query capabilities.
+     * 
+@@ -1032,6 +1398,54 @@
+    }
+    
+    /**
++    * Test search on versioned document content.
++    * 
++    * Query : Select all documents that contains "checkin" word.
++    * <p>
++    * Expected result: checkinDocument.
++    * 
++    * Query : Select all documents that contains "hello" word.
++    * <p>
++    * Expected result: doc1.
++    * 
++    * @throws Exception
++    *            if an unexpected error occurs
++    */
++   public void testSimpleFulltextOnCheckedIn() throws Exception
++   {
++      FolderData folder = createFolder(storageA, testRoot, "testSimpleFulltextOnCheckedIn_Folder", folderTypeDefinition);
++
++      // will be search on this doc 
++      ContentStream cs1 =
++         new BaseContentStream("hello".getBytes(), null, new MimeType("text", "plain"));
++      DocumentData doc1 = createDocument(folder, "testSimpleFulltextOnCheckedIn_Document", "cmis:document", cs1, null);
++      
++      // fake doc1
++      ContentStream cs2 =
++         new BaseContentStream("sorry".getBytes(), null, new MimeType("text", "plain"));
++      DocumentData doc2 = createDocument(folder, "testSimpleFulltextOnCheckedIn_Document2", "cmis:document", cs2, null);
++      
++      // CHECKOUT
++      DocumentData pwc = doc1.checkout();
++      // CHECKIN
++      ContentStream cs =
++         new BaseContentStream("checkin test. content updated".getBytes(), null, new MimeType("text", "plain"));
++      DocumentData checkinDocument = pwc.checkin(true, "my comment", null, cs, null, null);
++      
++      // test search on latest version
++      String statement = "SELECT * FROM cmis:document WHERE CONTAINS(\"checkin\")";
++      Query query = new Query(statement, true);
++      ItemsIterator<Result> result = storageA.query(query);
++      checkResult(storageA, result, new DocumentData[]{checkinDocument});
++      
++      // test seardh on the first version
++      statement = "SELECT * FROM cmis:document WHERE CONTAINS(\"hello\")";
++      query = new Query(statement, true);
++      result = storageA.query(query);
++      checkResult(storageA, result, new DocumentData[]{doc1});
++   }
++   
++   /**
+     * Same as testSimpleFulltext.
+     * @throws Exception
+     */
+@@ -1310,18 +1724,6 @@
+    }
+ 
+    /**
+-    * @see org.xcmis.sp.BaseTest#tearDown()
+-    */
+-   @Override
+-   protected void tearDown() throws Exception
+-   {
+-
+-      storageA.deleteTree(testRoot, true, UnfileObject.DELETE, true);
+-      super.tearDown();
+-
+-   }
+-
+-   /**
+     * Included in supertype.
+     * <p>
+     * Initial data:
+Index: ext/xcmis/sp/src/test/java/org/exoplatform/ecms/xcmis/sp/BaseTest.java
+===================================================================
+--- ext/xcmis/sp/src/test/java/org/exoplatform/ecms/xcmis/sp/BaseTest.java	(revision 72761)
++++ ext/xcmis/sp/src/test/java/org/exoplatform/ecms/xcmis/sp/BaseTest.java	(working copy)
+@@ -31,11 +31,26 @@
+ import org.exoplatform.services.log.Log;
+ import org.exoplatform.services.security.ConversationState;
+ import org.exoplatform.services.security.Identity;
++import org.xcmis.spi.CmisConstants;
+ import org.xcmis.spi.CmisRegistry;
++import org.xcmis.spi.ContentStream;
++import org.xcmis.spi.DocumentData;
++import org.xcmis.spi.FolderData;
+ import org.xcmis.spi.ObjectData;
+ import org.xcmis.spi.model.Property;
++import org.xcmis.spi.model.PropertyDefinition;
++import org.xcmis.spi.model.TypeDefinition;
++import org.xcmis.spi.model.VersioningState;
++import org.xcmis.spi.model.impl.StringProperty;
+ 
++import java.io.BufferedReader;
+ import java.io.File;
++import java.io.IOException;
++import java.io.InputStream;
++import java.io.InputStreamReader;
++import java.io.Reader;
++import java.io.StringWriter;
++import java.io.Writer;
+ import java.util.HashMap;
+ import java.util.Map;
+ 
+@@ -57,12 +72,16 @@
+ 
+    protected ThreadLocalSessionProviderService sessionProviderService;
+ 
+-   // protected StorageImpl storage;
+-
+    protected JcrCmisRegistry registry;
+ 
+    private volatile static boolean shoutDown;
++   
++   // For the StorageTest and QueryUsecasesTest
++   protected StorageImpl storageA;
+ 
++   // For the StorageTest and QueryUsecasesTest
++   protected TypeDefinition folderTypeDefinition;
++
+    @Override
+    public void setUp() throws Exception
+    {
+@@ -197,5 +216,53 @@
+       properties.put(property.getId(), property);
+       object.setProperties(properties);
+    }
++   
++   protected DocumentData createDocument(FolderData folder, String name, String typeId, ContentStream content,
++         VersioningState versioningState) throws Exception
++   {
++      TypeDefinition documentTypeDefinition = storageA.getTypeDefinition("cmis:document", true);
++      PropertyDefinition<?> def = PropertyDefinitions.getPropertyDefinition("cmis:document", CmisConstants.NAME);
++      Map<String, Property<?>> properties = new HashMap<String, Property<?>>();
++      properties.put(CmisConstants.NAME, new StringProperty(def.getId(), def.getQueryName(), def.getLocalName(), def
++         .getDisplayName(), name));
+ 
++      DocumentData document =
++         storageA.createDocument(folder, documentTypeDefinition, properties, content, null, null,
++            versioningState == null ? VersioningState.MAJOR : versioningState);
++      return (DocumentData)document;
++   }
++   
++   protected FolderData createFolder(FolderData folder, String name, String typeId) throws Exception
++   {
++      PropertyDefinition<?> def = PropertyDefinitions.getPropertyDefinition("cmis:folder", CmisConstants.NAME);
++      Map<String, Property<?>> properties = new HashMap<String, Property<?>>();
++      properties.put(CmisConstants.NAME, new StringProperty(def.getId(), def.getQueryName(), def.getLocalName(), def
++         .getDisplayName(), name));
++
++      FolderData newFolder = storageA.createFolder(folder, folderTypeDefinition, properties, null, null);
++      //      newFolder.setName(name);
++      return (FolderData)newFolder;
++   }
++   
++   protected String convertStreamToString(InputStream is) throws IOException {
++      if (is != null) {
++         Writer writer = new StringWriter();
++      
++         char[] buffer = new char[1024];
++         try {
++             Reader reader = new BufferedReader(
++                     new InputStreamReader(is, "UTF-8"));
++             int n;
++             while ((n = reader.read(buffer)) != -1) {
++                 writer.write(buffer, 0, n);
++             }
++         } finally {
++             is.close();
++         }
++         return writer.toString();
++      } else {        
++         return "";
++      }
++   }
++
+ }
+Index: ext/xcmis/sp/src/main/java/org/exoplatform/ecms/xcmis/sp/JcrNodeEntry.java
+===================================================================
+--- ext/xcmis/sp/src/main/java/org/exoplatform/ecms/xcmis/sp/JcrNodeEntry.java	(revision 72761)
++++ ext/xcmis/sp/src/main/java/org/exoplatform/ecms/xcmis/sp/JcrNodeEntry.java	(working copy)
+@@ -74,6 +74,7 @@
+ import java.util.Map;
+ import java.util.Set;
+ 
++import javax.jcr.InvalidItemStateException;
+ import javax.jcr.ItemExistsException;
+ import javax.jcr.Node;
+ import javax.jcr.NodeIterator;
+@@ -122,9 +123,19 @@
+                   continue; // TODO temporary. Be sure it fixed in JCR back-end.
+                }
+ 
+-               if (node.isNodeType("nt:linkedFile"))
++               if (node.isNodeType(JcrCMIS.JCR_XCMIS_LINKEDFILE))
+                {
+-                  node = node.getProperty("jcr:content").getNode();
++                  javax.jcr.Property propertyWithId = null;
++                  for (PropertyIterator iter = node.getProperties(); iter.hasNext() && propertyWithId == null;) 
++                  {
++                     javax.jcr.Property nextProperty = iter.nextProperty();
++                     // iterate while don't get the property with CMIS Object Id in the name.
++                     // xcmis:linkedFile extends nt:base which has two properties by default: jcr:primaryType and jcr:mixinTypes
++                     if (!nextProperty.getName().equalsIgnoreCase(JcrCMIS.JCR_PRIMARYTYPE) && !nextProperty.getName().equalsIgnoreCase(JcrCMIS.JCR_MIXINTYPES)) {
++                        propertyWithId = nextProperty;
++                     }
++                  }
++                  node = propertyWithId.getNode();
+                   try
+                   {
+                      next = storage.fromNode(node);
+@@ -200,6 +211,8 @@
+ 
+    protected BaseJcrStorage storage;
+ 
++   private String id = null;
++
+    /**
+     * @param node back-end JCR node
+     * @param storage CMIS storage
+@@ -231,14 +244,30 @@
+ 
+    String getId()
+    {
+-      try
+-      {
+-         return ((ExtendedNode)node).getIdentifier();
++      if (id != null)
++         return id;
++      
++      if (StorageImpl.PWC_LABEL.equalsIgnoreCase(getString(CmisConstants.VERSION_LABEL))) {
++         try {
++            id = ((ExtendedNode)node).getIdentifier();
++         } catch (RepositoryException e) {
++            throw new CmisRuntimeException("Unable get objects's id ." + e.getMessage(), e);
++         }
++      } else {
++         // not PWC
++         id = getString(CmisConstants.OBJECT_ID);
+       }
+-      catch (RepositoryException re)
++      
++      if (id == null)
+       {
+-         throw new CmisRuntimeException("Unable get objects's id ." + re.getMessage(), re);
++         // if not PWC and not Document (with stored objectId)
++         try {
++             id = ((ExtendedNode)node).getIdentifier();
++          } catch (RepositoryException e) {
++             throw new CmisRuntimeException("Unable get objects's id ." + e.getMessage(), e);
++          }
+       }
++      return id;
+    }
+ 
+    String getName()
+@@ -720,11 +749,6 @@
+          if (content != null)
+          {
+             MimeType mediaType = content.getMediaType();
+-            contentNode.setProperty(JcrCMIS.JCR_MIMETYPE, mediaType.getBaseType());
+-            if (mediaType.getParameter(CmisConstants.CHARSET) != null)
+-            {
+-               contentNode.setProperty(JcrCMIS.JCR_ENCODING, mediaType.getParameter(CmisConstants.CHARSET));
+-            }
+             // Re-count content length
+             long contentLength = contentNode.setProperty(JcrCMIS.JCR_DATA, content.getStream()).getLength();
+             contentNode.setProperty(JcrCMIS.JCR_LAST_MODIFIED, Calendar.getInstance());
+@@ -739,6 +763,12 @@
+                node.setProperty(CmisConstants.CONTENT_STREAM_LENGTH, contentLength);
+                node.setProperty(CmisConstants.CONTENT_STREAM_MIME_TYPE, mediaType.getBaseType());
+             }
++            // Add/update mimeType property after content updated. Need for fixing AddMetadataAction (JCR).
++            contentNode.setProperty(JcrCMIS.JCR_MIMETYPE, mediaType.getBaseType());
++            if (mediaType.getParameter(CmisConstants.CHARSET) != null)
++            {
++               contentNode.setProperty(JcrCMIS.JCR_ENCODING, mediaType.getParameter(CmisConstants.CHARSET));
++            }
+          }
+          else
+          {
+@@ -1082,8 +1112,8 @@
+       {
+          Session session = node.getSession();
+          Node entryNode = entry.getNode();
+-         Node link = node.addNode(entry.getName(), "nt:linkedFile");
+-         link.setProperty("jcr:content", entryNode);
++         Node link = node.addNode(entry.getName(), JcrCMIS.JCR_XCMIS_LINKEDFILE);
++         link.setProperty(JcrCMIS.JCR_MULTIFILING_PROPERTY_PREFIX + entryNode.getUUID(), entryNode);
+          session.save();
+       }
+       catch (RepositoryException re)
+@@ -1107,7 +1137,7 @@
+             for (PropertyIterator references = entryNode.getReferences(); references.hasNext();)
+             {
+                Node next = references.nextProperty().getParent();
+-               if (next.isNodeType("nt:linkedFile"))
++               if (next.isNodeType(JcrCMIS.JCR_XCMIS_LINKEDFILE))
+                {
+                   link = next;
+                   break; // Get a first one which met.
+@@ -1126,12 +1156,12 @@
+             else
+             {
+                // Be sure we have have place to put real object.
+-               // If not found any nt:linkedFile then it minds
++               // If not found any xcmis:linkedFile then it minds
+                // object is filed in one folder only. In this
+                // case this method should not be called.
+                // org.xcmis.spi.Connection.removeObjectFromFolder(String, String)
+                // must be care about this. Since we don't support
+-               // 'unfiling' throws eception.
++               // 'unfiling' throws exception.
+                throw new CmisRuntimeException("Unable remove object from last folder in which it is filed.");
+             }
+             // Move object node from current folder.
+@@ -1143,7 +1173,7 @@
+             for (PropertyIterator references = entryNode.getReferences(); references.hasNext();)
+             {
+                Node next = references.nextProperty().getParent();
+-               if (next.isNodeType("nt:linkedFile")
++               if (next.isNodeType(JcrCMIS.JCR_XCMIS_LINKEDFILE)
+                   && ((ExtendedNode)next.getParent()).getIdentifier().equals(((ExtendedNode)node).getIdentifier()))
+                {
+                   next.remove();
+@@ -1189,7 +1219,7 @@
+             for (PropertyIterator iterator = node.getReferences(); iterator.hasNext();)
+             {
+                Node refer = iterator.nextProperty().getParent();
+-               if (refer.isNodeType("nt:linkedFile"))
++               if (refer.isNodeType(JcrCMIS.JCR_XCMIS_LINKEDFILE))
+                {
+                   Node parent = refer.getParent();
+                   try
+@@ -1674,11 +1704,18 @@
+                   LOG.debug("remove document " + path);
+ 
+                // Check is Document node has any references.
+-               // It minds Document is multfiled, need remove all links first.
+-               for (PropertyIterator references = node.getReferences(); references.hasNext();)
++               // It minds Document is multifiled, need remove all links first.
++               PropertyIterator references = node.getReferences();
++               while(references.hasNext())
+                {
+-                  Node next = references.nextProperty().getParent();
+-                  if (next.isNodeType("nt:linkedFile"))
++                  javax.jcr.Property nextProperty = references.nextProperty();
++                  Node next = null;
++                  try {
++                     next = nextProperty.getParent();
++                  } catch (InvalidItemStateException e) {
++                     // there is no item, the node was removed.
++                  }
++                  if (next != null && next.isNodeType(JcrCMIS.JCR_XCMIS_LINKEDFILE))
+                   {
+                      next.remove();
+                   }
+Index: ext/xcmis/sp/src/main/java/org/exoplatform/ecms/xcmis/sp/PolicyDataImpl.java
+===================================================================
+--- ext/xcmis/sp/src/main/java/org/exoplatform/ecms/xcmis/sp/PolicyDataImpl.java	(revision 72761)
++++ ext/xcmis/sp/src/main/java/org/exoplatform/ecms/xcmis/sp/PolicyDataImpl.java	(working copy)
+@@ -76,7 +76,7 @@
+     * {@inheritDoc}
+     */
+    @Override
+-   protected void delete() throws StorageException
++   public void delete() throws StorageException
+    {
+       entry.delete();
+    }
+Index: ext/xcmis/sp/src/main/java/org/exoplatform/ecms/xcmis/sp/RelationshipDataImpl.java
+===================================================================
+--- ext/xcmis/sp/src/main/java/org/exoplatform/ecms/xcmis/sp/RelationshipDataImpl.java	(revision 72761)
++++ ext/xcmis/sp/src/main/java/org/exoplatform/ecms/xcmis/sp/RelationshipDataImpl.java	(working copy)
+@@ -18,10 +18,12 @@
+ package org.exoplatform.ecms.xcmis.sp;
+ 
+ import org.xcmis.spi.CmisConstants;
++import org.xcmis.spi.CmisRuntimeException;
+ import org.xcmis.spi.ConstraintException;
+ import org.xcmis.spi.ContentStream;
+ import org.xcmis.spi.FolderData;
+ import org.xcmis.spi.ItemsIterator;
++import org.xcmis.spi.ObjectNotFoundException;
+ import org.xcmis.spi.RelationshipData;
+ import org.xcmis.spi.StorageException;
+ import org.xcmis.spi.model.RelationshipDirection;
+@@ -49,7 +51,14 @@
+     */
+    public String getSourceId()
+    {
+-      return entry.getString(CmisConstants.SOURCE_ID);
++      try
++            {
++               return entry.storage.getEntry(entry.getString(CmisConstants.SOURCE_ID)).getId();
++            }
++            catch (ObjectNotFoundException e)
++            {
++               throw new CmisRuntimeException("Cannot get source Id by property 'cmis:sourceId'", e);
++            }
+    }
+ 
+    /**
+@@ -57,7 +66,14 @@
+     */
+    public String getTargetId()
+    {
+-      return entry.getString(CmisConstants.TARGET_ID);
++      try
++            {
++               return entry.storage.getEntry(entry.getString(CmisConstants.TARGET_ID)).getId();
++            }
++            catch (ObjectNotFoundException e)
++            {
++               throw new CmisRuntimeException("Cannot get target Id by property 'cmis:targetId'", e);
++            }
+    }
+ 
+    /**
+@@ -98,7 +114,7 @@
+     * {@inheritDoc}
+     */
+    @Override
+-   protected void delete() throws StorageException
++   public void delete() throws StorageException
+    {
+       entry.delete();
+    }
+Index: ext/xcmis/sp/src/main/java/org/exoplatform/ecms/xcmis/sp/DocumentVersion.java
+===================================================================
+--- ext/xcmis/sp/src/main/java/org/exoplatform/ecms/xcmis/sp/DocumentVersion.java	(revision 72761)
++++ ext/xcmis/sp/src/main/java/org/exoplatform/ecms/xcmis/sp/DocumentVersion.java	(working copy)
+@@ -266,9 +266,20 @@
+     * {@inheritDoc}
+     */
+    @Override
+-   protected void delete() throws StorageException
++   public void delete() throws StorageException
+    {
+-      throw new CmisRuntimeException("Not supported for non current version of document.");
++      try
++      {
++         Node node = entry.getNode();
++         Version version = (Version)node.getParent();
++         VersionHistory versionHistory = version.getContainingHistory();
++         versionHistory.removeVersion(getVersionLabel());
++         versionHistory.save();
++      }
++      catch (RepositoryException re)
++      {
++         throw new CmisRuntimeException("Unable to delete document version with label '" + getVersionLabel() + "'. " + re.getMessage(), re);
++      }
+    }
+ 
+    /**
+@@ -279,5 +290,4 @@
+    {
+       throw new CmisRuntimeException("Not supported for non current version of document.");
+    }
+-
+ }
+Index: ext/xcmis/sp/src/main/java/org/exoplatform/ecms/xcmis/sp/StorageImpl.java
+===================================================================
+--- ext/xcmis/sp/src/main/java/org/exoplatform/ecms/xcmis/sp/StorageImpl.java	(revision 72761)
++++ ext/xcmis/sp/src/main/java/org/exoplatform/ecms/xcmis/sp/StorageImpl.java	(working copy)
+@@ -268,6 +268,7 @@
+       documentEntry.setValue(CmisConstants.CREATED_BY, session.getUserID());
+       documentEntry.setValue(CmisConstants.CREATION_DATE, Calendar.getInstance());
+       documentEntry.setValue(CmisConstants.VERSION_SERIES_ID, documentEntry.getString(JcrCMIS.JCR_VERSION_HISTORY));
++      documentEntry.setValue(CmisConstants.OBJECT_ID, documentEntry.getString(JcrCMIS.JCR_VERSION_HISTORY) + JcrCMIS.ID_SEPARATOR + "1");
+       documentEntry.setValue(CmisConstants.IS_LATEST_VERSION, true);
+       documentEntry.setValue(CmisConstants.IS_MAJOR_VERSION, versioningState == VersioningState.MAJOR);
+       // TODO : support for checked-out initial state
+@@ -486,14 +487,42 @@
+    public void deleteObject(ObjectData object, boolean deleteAllVersions) throws UpdateConflictException,
+       VersioningException, StorageException
+    {
+-      if (object.getBaseType() == BaseType.DOCUMENT && object.getTypeDefinition().isVersionable() && !deleteAllVersions)
++      Node node = ((BaseObjectData)object).entry.node;
++      Node parentNode = null;
++      try {
++         parentNode = node.getParent();
++      }  catch (RepositoryException  e) {
++         throw new CmisRuntimeException("Unable get parent. " + e.getMessage(), e);
++      }
++      if (object.getBaseType() == BaseType.DOCUMENT && object.getTypeDefinition().isVersionable() && deleteAllVersions)
+       {
+-         // Throw exception to avoid unexpected removing data. Any way at the
+-         // moment we are not able remove 'base version' of versionable node,
+-         // so have not common behavior for removing just one version of document.
+-         throw new VersioningException("Unable delete only specified version.");
+-      }
+-      ((BaseObjectData)object).delete();
++         try
++         {
++            if (node.getParent() instanceof Version) {
++               // Delete version
++               Version version = (Version)node.getParent();
++               VersionHistory versionHistory = version.getContainingHistory();
++               DocumentDataImpl documentDataImpl = new DocumentDataImpl(((BaseObjectData)object).entry.storage.getEntry(versionHistory.getVersionableUUID()));
++               documentDataImpl.delete();
++            } else {
++               // Delete object
++               ((BaseObjectData)object).delete();  
++            }
++         }
++         catch (RepositoryException re)
++         {
++            throw new CmisRuntimeException("Unable get latest version of document. " + re.getMessage(), re);
++         }
++         catch (ObjectNotFoundException e)
++         {
++            throw new CmisRuntimeException("Unable get latest version of document. " + e.getMessage(), e);
++         }
++       } else if (object.getBaseType() == BaseType.DOCUMENT && !(parentNode instanceof Version) && !deleteAllVersions) {
++          // use deleteAllVersions=true to delete all versions of the document
++          throw new CmisRuntimeException("Unable to delete latest version at one.");
++       } else {
++          ((BaseObjectData)object).delete();
++       }
+    }
+ 
+    /**
+@@ -522,7 +551,7 @@
+             // Will return list of items in tree which were not removed.
+             o.delete();
+          }
+-         catch (Exception e)
++         catch (StorageException e)
+          {
+             if (LOG.isDebugEnabled())
+             {
+Index: ext/xcmis/sp/src/main/java/org/exoplatform/ecms/xcmis/sp/index/Jcr2XcmisChangesListener.java
+===================================================================
+--- ext/xcmis/sp/src/main/java/org/exoplatform/ecms/xcmis/sp/index/Jcr2XcmisChangesListener.java	(revision 72761)
++++ ext/xcmis/sp/src/main/java/org/exoplatform/ecms/xcmis/sp/index/Jcr2XcmisChangesListener.java	(working copy)
+@@ -18,9 +18,9 @@
+  */
+ package org.exoplatform.ecms.xcmis.sp.index;
+ 
++import org.exoplatform.ecms.xcmis.sp.JcrCMIS;
+ import org.exoplatform.ecms.xcmis.sp.StorageClosableImpl;
+ import org.exoplatform.ecms.xcmis.sp.StorageConfiguration;
+-import org.exoplatform.ecms.xcmis.sp.StorageImpl;
+ import org.exoplatform.ecms.xcmis.sp.StorageProviderImpl;
+ import org.exoplatform.services.document.DocumentReaderService;
+ import org.exoplatform.services.jcr.core.ManageableRepository;
+@@ -32,7 +32,6 @@
+ import org.exoplatform.services.jcr.datamodel.ItemData;
+ import org.exoplatform.services.jcr.datamodel.NodeData;
+ import org.exoplatform.services.jcr.datamodel.PropertyData;
+-import org.exoplatform.services.jcr.datamodel.QPathEntry;
+ import org.exoplatform.services.jcr.ext.app.SessionProviderService;
+ import org.exoplatform.services.jcr.ext.common.SessionProvider;
+ import org.exoplatform.services.jcr.impl.Constants;
+@@ -45,9 +44,9 @@
+ import org.xcmis.search.config.SearchServiceConfiguration;
+ import org.xcmis.search.content.ContentEntry;
+ import org.xcmis.search.content.IndexModificationException;
+-import org.xcmis.search.content.command.InvocationContext;
+-import org.xcmis.search.value.SlashSplitter;
+ import org.xcmis.search.value.ToStringNameConverter;
++import org.xcmis.spi.DocumentData;
++import org.xcmis.spi.ObjectData;
+ import org.xcmis.spi.ObjectNotFoundException;
+ import org.xcmis.spi.PermissionService;
+ import org.xcmis.spi.Storage;
+@@ -58,11 +57,13 @@
+ import java.util.Collections;
+ import java.util.HashMap;
+ import java.util.HashSet;
++import java.util.Iterator;
+ import java.util.List;
+ import java.util.Map;
+ import java.util.Set;
+ import java.util.UUID;
+ 
++import javax.jcr.PropertyIterator;
+ import javax.jcr.RepositoryException;
+ import javax.jcr.Session;
+ 
+@@ -95,8 +96,10 @@
+ 
+    private final ContentEntryAdapter contentEntryAdapter;
+ 
++   // not used
+    private final DocumentReaderService documentReaderService;
+ 
++
+    public Jcr2XcmisChangesListener(String currentRepositoryName, String workspaceName,
+       PersistentDataManager dataManager, SessionProviderService sessionProviderService,
+       ManageableRepository repository, NamespaceAccessor namespaceAccessor, DocumentReaderService documentReaderService)
+@@ -144,11 +147,70 @@
+          final Set<String> removedNodes = new HashSet<String>();
+          // nodes that need to be added to the index.
+          final Set<String> addedNodes = new HashSet<String>();
+-         //updated
++         // updated
+          final Map<String, List<ItemState>> updatedNodes = new HashMap<String, List<ItemState>>();
+ 
++         String versionHistoryId = null;
++         String linkedUUid = null;
++         
+          for (ItemState itemState : itemStates.getAllStates())
+          {
++            if (itemState.getData().isNode() && itemState.getData() instanceof NodeData && itemState.isDeleted()) {
++                NodeData nodeData = (NodeData) itemState.getData();
++
++                if (nodeData.getPrimaryTypeName().equals(Constants.NT_VERSION)) {
++                      
++                      String v = nodeData.getQPath().getName().getName();
++                                 
++                        if (v.equals("rootVersion")) {
++                           // save parent for the root version delete
++                           if (versionHistoryId != null) {
++                              removedNodes.add(versionHistoryId + JcrCMIS.ID_SEPARATOR + "1");
++                              versionHistoryId = null;
++                           }
++                           versionHistoryId = nodeData.getParentIdentifier();
++                        } else {
++                           Integer versionInt = null;
++                           try {
++                               versionInt = Integer.parseInt(v);
++                           } catch (NumberFormatException e) {
++                           }
++                           if (versionInt != null) {
++                              String versionId = nodeData.getParentIdentifier() + JcrCMIS.ID_SEPARATOR + v;
++                              if (versionHistoryId != null) {
++                                 if (versionId.startsWith(versionHistoryId)) {
++                                    String rootVersionId = nodeData.getParentIdentifier() + JcrCMIS.ID_SEPARATOR + String.valueOf(versionInt + 1);
++                                    removedNodes.add(rootVersionId);      
++                                 } else {
++                                    removedNodes.add(versionHistoryId + JcrCMIS.ID_SEPARATOR + "1");
++                                 }
++                                 versionHistoryId = null;
++                              }
++                              removedNodes.add(versionId);      
++                           }
++                        }
++                        
++                } else if (nodeData.getPrimaryTypeName().getAsString().equalsIgnoreCase("[http://www.exoplatform.com/jcr/xcmis/1.0]linkedFile")) {
++                   if (linkedUUid != null) 
++                   {
++                      removedNodes.add(linkedUUid);
++                      addedNodes.add(linkedUUid);
++                   }
++                }
++            } else if(!itemState.getData().isNode() && itemState.isDeleted()) {
++               PropertyData propertyData = (PropertyData) itemState.getData();
++               
++               // Parse the path as example:
++               // "[]:1[http://www.exoplatform.com/jcr/exo/1.0]drives:1[]driveA:1" + 
++               // "[]multifilingFolderTest1:1[]multifilingDocumentTest:1[]cmisMultifilingObjectId_d2abd7987f00010110f98160154c674d:1"
++               String qPath = propertyData.getQPath().getAsString();
++               if (qPath.contains("[]" + JcrCMIS.JCR_MULTIFILING_PROPERTY_PREFIX)) {
++                  int beginIndex = qPath.lastIndexOf(JcrCMIS.JCR_MULTIFILING_PROPERTY_PREFIX) + JcrCMIS.JCR_MULTIFILING_PROPERTY_PREFIX.length();
++                  int endIndex = qPath.lastIndexOf(":");
++                  linkedUUid = qPath.substring(beginIndex, endIndex);
++               }
++            }
++            
+             try
+             {
+                acceptChanges(removedNodes, addedNodes, updatedNodes, itemState);
+@@ -175,6 +237,12 @@
+                }
+             }
+          }
++         if (versionHistoryId != null) {
++            removedNodes.add(versionHistoryId + JcrCMIS.ID_SEPARATOR + "1");
++            versionHistoryId = null;
++         }
++         
++         
+          for (String uuid : updatedNodes.keySet())
+          {
+             removedNodes.add(uuid);
+@@ -184,6 +252,7 @@
+          {
+             List<ContentEntry> addedEntries = new ArrayList<ContentEntry>(addedNodes.size());
+ 
++            // process addedNodes to addedEntries
+             for (String id : addedNodes)
+             {
+                try
+@@ -236,6 +305,17 @@
+       }
+    }
+ 
++   /**
++    * Process the uuid from addedNodes to addedEntries.
++    * Can be updated removedNodes.
++    * 
++    * @param uuid to be add.
++    * @param addedEntries will be added in index.
++    * @param removedNodes
++    * @throws RepositoryException
++    * @throws ObjectNotFoundException
++    * @throws IOException
++    */
+    private void addEntry(String uuid, List<ContentEntry> addedEntries, Set<String> removedNodes)
+       throws RepositoryException, ObjectNotFoundException, IOException
+    {
+@@ -246,21 +326,39 @@
+          String nodeTypeName = locationFactory.createJCRName(((NodeData)data).getPrimaryTypeName()).getAsString();
+          if (((StorageClosableImpl)rootStorage).isSupportedNodeType(nodeTypeName))
+          {
+-
+-            addedEntries.add(contentEntryAdapter.createEntry(rootStorage.getObjectById(uuid)));
++            ObjectData objectData = ((StorageClosableImpl)rootStorage).getObjectById(uuid);
++            
++            addedEntries.add(contentEntryAdapter.createEntry(objectData));
++            
++            if (objectData instanceof DocumentData) {
++               String objectId = objectData.getObjectId(); 
++               if (uuid != objectData.getObjectId()) {
++                  // for multifiling: remove document from index before adding in it again
++                  // for checkout/checkin: remove document from index before adding in it again
++                  // for updating the document: to remove from index with appropriate id before adding in it again
++                  // id must has ID_SEPARATOR since cannot be filled PWC
++                  removedNodes.add(objectId);
++               }
++            }
++            
+          }
+-         else if (nodeTypeName.equals("nt:linkedFile"))
++         else if (nodeTypeName.equals(JcrCMIS.JCR_XCMIS_LINKEDFILE))
+          {
+-
+-            ItemData content =
+-               dataManager.getItemData((NodeData)data, new QPathEntry(locationFactory.parseJCRName("jcr:content")
+-                  .getInternalName(), 0));
+-            if (!content.isNode())
++            List<PropertyData> list = dataManager.getChildPropertiesData((NodeData)data);
++            
++            PropertyData propertyWithId = null;
++            for (Iterator<PropertyData> iter = list.iterator(); iter.hasNext() && propertyWithId == null;) 
+             {
+-               String linkedUUid = new String(((PropertyData)content).getValues().get(0).getAsByteArray());
+-               addEntry(linkedUUid, addedEntries, removedNodes);
+-               removedNodes.add(linkedUUid);
++               PropertyData nextProperty = iter.next();
++               // iterate while don't get the property with CMIS Object Id in the name.
++               // xcmis:linkedFile extends nt:base which has two properties by default: jcr:primaryType and jcr:mixinTypes
++               if (!nextProperty.getQPath().getAsString().contains(Constants.JCR_PRIMARYTYPE.getAsString()) && !nextProperty.getQPath().getAsString().contains(Constants.JCR_MIXINTYPES.getAsString())) {
++                  propertyWithId = nextProperty;
++               }
+             }
++            
++            String linkedUUid = new String(propertyWithId.getValues().get(0).getAsByteArray());
++            addEntry(linkedUUid, addedEntries, removedNodes);
+          }
+       }
+    }
+@@ -280,71 +378,60 @@
+       IllegalStateException, IOException
+    {
+       {
+-         String uuid =
++         String uuidNode =
+             itemState.isNode() ? itemState.getData().getIdentifier() : itemState.getData().getParentIdentifier();
+ 
+          if (itemState.isAdded())
+          {
+             if (itemState.isNode())
+             {
+-               addedNodes.add(uuid);
++               addedNodes.add(uuidNode);
+             }
+             else
+             {
+-               if (!addedNodes.contains(uuid))
+-               {
+-                  createNewOrAdd(uuid, itemState, updatedNodes);
+-               }
++               addToUpdate(uuidNode, itemState, updatedNodes);
+             }
+          }
+          else if (itemState.isRenamed())
+          {
+             if (itemState.isNode())
+             {
+-               addedNodes.add(uuid);
++               addedNodes.add(uuidNode);
+             }
+             else
+             {
+-               createNewOrAdd(uuid, itemState, updatedNodes);
++               addToUpdate(uuidNode, itemState, updatedNodes);
+             }
+          }
+          else if (itemState.isUpdated())
+          {
+-            createNewOrAdd(uuid, itemState, updatedNodes);
++            addToUpdate(uuidNode, itemState, updatedNodes);
+          }
+          else if (itemState.isMixinChanged())
+          {
+-            createNewOrAdd(uuid, itemState, updatedNodes);
++            addToUpdate(uuidNode, itemState, updatedNodes);
+          }
+          else if (itemState.isDeleted())
+          {
+             if (itemState.isNode())
+             {
+-               if (addedNodes.contains(uuid))
++               if (addedNodes.contains(uuidNode))
+                {
+-                  addedNodes.remove(uuid);
+-                  removedNodes.remove(uuid);
++                  addedNodes.remove(uuidNode);
+                }
+-               else
+-               {
+-
+-                  removedNodes.add(uuid);
+-               }
+-               // remove all changes after node remove
+-               updatedNodes.remove(uuid);
++               removedNodes.add(uuidNode);
++               updatedNodes.remove(uuidNode);
+             }
+             else
+             {
+-               if (!removedNodes.contains(uuid) && !addedNodes.contains(uuid))
+-               {
+-                  createNewOrAdd(uuid, itemState, updatedNodes);
+-               }
++               // if deleted some property in node uuidNode
++               addToUpdate(uuidNode, itemState, updatedNodes);
+             }
+          }
+       }
+    }
+ 
+-   private void createNewOrAdd(String key, ItemState state, Map<String, List<ItemState>> updatedNodes)
++   private void addToUpdate(String key, ItemState state, Map<String, List<ItemState>> updatedNodes)
+    {
+       List<ItemState> list = updatedNodes.get(key);
+       if (list == null)
+Index: ext/xcmis/sp/src/main/java/org/exoplatform/ecms/xcmis/sp/FolderDataImpl.java
+===================================================================
+--- ext/xcmis/sp/src/main/java/org/exoplatform/ecms/xcmis/sp/FolderDataImpl.java	(revision 72761)
++++ ext/xcmis/sp/src/main/java/org/exoplatform/ecms/xcmis/sp/FolderDataImpl.java	(working copy)
+@@ -209,7 +209,7 @@
+    }
+ 
+    @Override
+-   protected void delete() throws StorageException
++   public void delete() throws StorageException
+    {
+       if (isRoot())
+       {
+Index: ext/xcmis/sp/src/main/java/org/exoplatform/ecms/xcmis/sp/PWC.java
+===================================================================
+--- ext/xcmis/sp/src/main/java/org/exoplatform/ecms/xcmis/sp/PWC.java	(revision 72761)
++++ ext/xcmis/sp/src/main/java/org/exoplatform/ecms/xcmis/sp/PWC.java	(working copy)
+@@ -101,7 +101,6 @@
+       ContentStream content, List<AccessControlEntry> acl, Collection<PolicyData> policies)
+       throws NameConstraintViolationException, StorageException
+    {
+-      //String id = getObjectId();
+       try
+       {
+          DocumentDataImpl latestVersion = getLatestVersion();
+@@ -118,6 +117,9 @@
+          latestEntry.setValue(CmisConstants.VERSION_SERIES_CHECKED_OUT_ID, (Value)null);
+          latestEntry.setValue(CmisConstants.VERSION_SERIES_CHECKED_OUT_BY, (Value)null);
+          // Update creation date & last modification date to emulate creation new version
++         String[] split = latestEntry.getString(CmisConstants.OBJECT_ID).split(JcrCMIS.ID_SEPARATOR);
++         String newId = split[0] + JcrCMIS.ID_SEPARATOR + (Integer.parseInt(split[1]) + 1);
++         latestEntry.setValue(CmisConstants.OBJECT_ID, newId);
+          String userId = session.getUserID();
+          latestEntry.setValue(CmisConstants.CREATED_BY, userId);
+          latestEntry.setValue(CmisConstants.LAST_MODIFIED_BY, userId);
+@@ -192,6 +194,15 @@
+          node.getParent().remove();
+          session.save();
+ 
++         // To recreate the latestVersion Document instance since 
++         // the Id of DocumentDataImpl and JcrNodeEntry wouldn't change
++         try {
++            JcrNodeEntry fromNode = entry.storage.fromNode(latestVersion.entry.node);
++            latestVersion = new DocumentDataImpl(fromNode);
++         } catch (ObjectNotFoundException e) {
++            throw new StorageException("Can't recreate the latest document object from node", e);
++         }
++         
+          return latestVersion;
+       }
+       catch (RepositoryException re)
+@@ -204,7 +215,7 @@
+     * {@inheritDoc}
+     */
+    @Override
+-   protected void delete() throws StorageException
++   public void delete() throws StorageException
+    {
+       cancelCheckout();
+    }
+Index: ext/xcmis/sp/src/main/java/org/exoplatform/ecms/xcmis/sp/JcrCMIS.java
+===================================================================
+--- ext/xcmis/sp/src/main/java/org/exoplatform/ecms/xcmis/sp/JcrCMIS.java	(revision 72761)
++++ ext/xcmis/sp/src/main/java/org/exoplatform/ecms/xcmis/sp/JcrCMIS.java	(working copy)
+@@ -96,7 +96,19 @@
+    String JCR_MIMETYPE = "jcr:mimeType";
+ 
+    String JCR_ENCODING = "jcr:encoding";
++   
++   String JCR_PRIMARYTYPE = "jcr:primaryType";
++   
++   String JCR_MIXINTYPES = "jcr:mixinTypes";
+ 
+    String EXO_PRIVILEGABLE = "exo:privilegeable";
+ 
++   String JCR_MULTIFILING_PROPERTY_PREFIX = "cmisMultifilingObjectId_";
++
++   String JCR_XCMIS_LINKEDFILE = "xcmis:linkedFile";
++   
++   // CMIS stuff
++   
++   String ID_SEPARATOR = "_";
++
+ }
+Index: ext/xcmis/sp/src/main/java/org/exoplatform/ecms/xcmis/sp/DocumentDataImpl.java
+===================================================================
+--- ext/xcmis/sp/src/main/java/org/exoplatform/ecms/xcmis/sp/DocumentDataImpl.java	(revision 72761)
++++ ext/xcmis/sp/src/main/java/org/exoplatform/ecms/xcmis/sp/DocumentDataImpl.java	(working copy)
+@@ -441,8 +441,13 @@
+     * {@inheritDoc}
+     */
+    @Override
+-   protected void delete() throws StorageException
++   public void delete() throws StorageException
+    {
+       entry.delete();
+    }
++
++   public String getObjectId()
++   {
++      return entry.getId();
++   }
+ }
+Index: ext/xcmis/sp/src/main/java/org/exoplatform/ecms/xcmis/sp/BaseObjectData.java
+===================================================================
+--- ext/xcmis/sp/src/main/java/org/exoplatform/ecms/xcmis/sp/BaseObjectData.java	(revision 72761)
++++ ext/xcmis/sp/src/main/java/org/exoplatform/ecms/xcmis/sp/BaseObjectData.java	(working copy)
+@@ -555,6 +555,6 @@
+     * @throws StorageException
+     *            if operation can't be persisted in back-end
+     */
+-   protected abstract void delete() throws StorageException;
++   public abstract void delete() throws StorageException;
+ 
+ }
+Index: ext/xcmis/sp/src/main/java/org/exoplatform/ecms/xcmis/sp/BaseJcrStorage.java
+===================================================================
+--- ext/xcmis/sp/src/main/java/org/exoplatform/ecms/xcmis/sp/BaseJcrStorage.java	(revision 72761)
++++ ext/xcmis/sp/src/main/java/org/exoplatform/ecms/xcmis/sp/BaseJcrStorage.java	(working copy)
+@@ -60,6 +60,8 @@
+ 
+ import javax.jcr.ItemNotFoundException;
+ import javax.jcr.Node;
++import javax.jcr.Property;
++import javax.jcr.PropertyIterator;
+ import javax.jcr.RepositoryException;
+ import javax.jcr.Session;
+ import javax.jcr.Value;
+@@ -68,6 +70,9 @@
+ import javax.jcr.nodetype.NodeTypeIterator;
+ import javax.jcr.nodetype.NodeTypeManager;
+ import javax.jcr.version.OnParentVersionAction;
++import javax.jcr.version.Version;
++import javax.jcr.version.VersionException;
++import javax.jcr.version.VersionHistory;
+ 
+ /**
+  * @author <a href="mailto:andrew00x@gmail.com">Andrey Parfonov</a>
+@@ -1164,11 +1169,60 @@
+       {
+          throw new CmisRuntimeException("Id may not be null.");
+       }
++      String internal;
++      String v = null;
++
++      if (id.contains(JcrCMIS.ID_SEPARATOR))
++      {
++         String[] tmp = id.split(JcrCMIS.ID_SEPARATOR);
++         internal = tmp[0];
++         v = tmp[1];
++      }
++      else
++      {
++         internal = id;
++      }
+       try
+       {
+-         Node node = ((ExtendedSession)session).getNodeByIdentifier(id);
++         Node node = ((ExtendedSession)session).getNodeByIdentifier(internal);
++         if (node.isNodeType(JcrCMIS.NT_VERSION_HISTORY) && v != null)
++         {
++            VersionHistory vh = (VersionHistory)node;
++            try
++            {
++               node = vh.getVersion(v).getNode(JcrCMIS.JCR_FROZEN_NODE);
++            }
++            catch (VersionException ve)
++            {
++               
++               int lastVersion = -1;
++               try {
++                  long allVersionSize = vh.getAllVersions().getSize();
++                  Version lastVersionNode = vh.getVersion(String.valueOf(allVersionSize));
++                  String propertyObjectId = lastVersionNode.getNode(JcrCMIS.JCR_FROZEN_NODE).getProperty(JcrCMIS.OBJECT_ID).getString();
++                  lastVersion = Integer.parseInt(propertyObjectId.split(JcrCMIS.ID_SEPARATOR)[1]) + 1;
++                  // it works since last version cannot be deleted
++               } catch (RepositoryException e) {
++                  // There are no version with provided name (the size of version history with no deleted nodes) in the version history
++                  lastVersion = Integer.parseInt(String.valueOf(vh.getAllVersions().getSize()));
++               }
++               
++               if ("1".equals(v) || lastVersion == Integer.parseInt(v))
++               {
++                  node = ((ExtendedSession)session).getNodeByIdentifier(vh.getVersionableUUID());
++               }
++               else
++               {
++                  throw new ObjectNotFoundException("Object '" + id + "' does not exist.");
++               }
++            }
++         }
+          return fromNode(node);
+       }
++      catch (NotSupportedNodeTypeException unsupp)
++      {
++         throw new ObjectNotFoundException("Object '" + id + "' does not exist. " + unsupp.getMessage());
++      } 
+       catch (ItemNotFoundException nfe)
+       {
+          throw new ObjectNotFoundException("Object '" + id + "' does not exist.");
+@@ -1183,6 +1237,7 @@
+    {
+       try
+       {
++         // Need for set checkedOut state after WebDAV
+          if (!node.isCheckedOut())
+          {
+             node.checkout();
+@@ -1200,9 +1255,20 @@
+             }
+             return new SymLinkNodeEntry(link, node, this);
+          }
+-         else if (node.isNodeType("nt:linkedFile"))
++         else if (node.isNodeType(JcrCMIS.JCR_XCMIS_LINKEDFILE))
+          {
+-            Node target = node.getProperty("jcr:content").getNode();
++            javax.jcr.Property propertyWithId = null;
++            for (PropertyIterator iter = node.getProperties(); iter.hasNext() && propertyWithId == null;) 
++            {
++               javax.jcr.Property nextProperty = iter.nextProperty();
++               // iterate while don't get the property with CMIS Object Id in the name.
++               // xcmis:linkedFile extends nt:base which has two properties by default: jcr:primaryType and jcr:mixinTypes
++               if (!nextProperty.getName().equalsIgnoreCase(JcrCMIS.JCR_PRIMARYTYPE) && !nextProperty.getName().equalsIgnoreCase(JcrCMIS.JCR_MIXINTYPES)) {
++                  propertyWithId = nextProperty;
++               }
++            }
++            Node target = propertyWithId.getNode();
++            
+             return new JcrNodeEntry(target, this);
+          }
+          return new JcrNodeEntry(node, this);
+Index: ext/xcmis/sp/src/main/resources/conf/cmis-nodetypes-config.xml
+===================================================================
+--- ext/xcmis/sp/src/main/resources/conf/cmis-nodetypes-config.xml	(revision 72761)
++++ ext/xcmis/sp/src/main/resources/conf/cmis-nodetypes-config.xml	(working copy)
+@@ -8,7 +8,7 @@
+ 		<propertyDefinitions>
+ 			<propertyDefinition name="cmis:name" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="IGNORE" protected="false" multiple="false">
+ 			</propertyDefinition>
+-			<propertyDefinition name="cmis:objectId" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="IGNORE" protected="false" multiple="false">
++			<propertyDefinition name="cmis:objectId" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
+ 			</propertyDefinition>
+ 			<propertyDefinition name="cmis:objectTypeId" requiredType="String" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
+ 			</propertyDefinition>
+@@ -247,5 +247,15 @@
+ 			</childNodeDefinition>
+ 		</childNodeDefinitions>
+ 	</nodeType>
++	
++   <nodeType name="xcmis:linkedFile" isMixin="false" hasOrderableChildNodes="false" primaryItemName="">
++      <supertypes>
++			<supertype>nt:base</supertype>
++      </supertypes>
++      <propertyDefinitions>
++         <propertyDefinition name="*" requiredType="undefined" autoCreated="false" mandatory="false" onParentVersion="COPY" protected="false" multiple="false">
++         </propertyDefinition>
++      </propertyDefinitions>
++   </nodeType>
+ 
+ </nodeTypes>
+\ No newline at end of file
