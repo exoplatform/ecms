@@ -1,0 +1,175 @@
+Index: apps/portlet-presentation/src/main/java/org/exoplatform/wcm/webui/clv/UICLVPresentation.java
+===================================================================
+--- apps/portlet-presentation/src/main/java/org/exoplatform/wcm/webui/clv/UICLVPresentation.java	(revision 72182)
++++ apps/portlet-presentation/src/main/java/org/exoplatform/wcm/webui/clv/UICLVPresentation.java	(working copy)
+@@ -30,13 +30,11 @@
+ import javax.jcr.Node;
+ import javax.jcr.PathNotFoundException;
+ import javax.jcr.RepositoryException;
+-import javax.portlet.PortletPreferences;
+ import javax.portlet.PortletRequest;
+ 
+ import org.apache.commons.lang.StringUtils;
+ import org.exoplatform.commons.utils.PageList;
+ import org.exoplatform.container.PortalContainer;
+-import org.exoplatform.ecm.ProductVersions;
+ import org.exoplatform.ecm.utils.text.Text;
+ import org.exoplatform.ecm.webui.utils.LockUtil;
+ import org.exoplatform.portal.application.PortalRequestContext;
+@@ -148,7 +146,17 @@
+   	
+   }
+   
++  public List<CategoryBean> getCategories(boolean withChildren) throws Exception {
++  	String fullPath = this.getAncestorOfType(UICLVPortlet.class).getFolderPath();
++  	return getCategories(fullPath, "exo:taxonomy", 0, withChildren);
++  }
++
++  
+   public List<CategoryBean> getCategories(String fullPath, String primaryType, int depth) throws Exception {
++  	return getCategories(fullPath,  primaryType,  depth, true);
++  }
++  
++  public List<CategoryBean> getCategories(String fullPath, String primaryType, int depth, boolean withChildren) throws Exception {
+     if (fullPath==null || fullPath.length()==0) {
+     	return null;
+     }
+@@ -183,16 +191,14 @@
+     	boolean isSelected = paramPath!=null&&paramPath.endsWith(path);
+     	CategoryBean cat = new CategoryBean(node.getName(), node.getPath(), title, url, isSelected, depth, total);
+     	NodeLocation catLocation = NodeLocation.getNodeLocationByNode(node);
+-    	List<CategoryBean> childs = getCategories(catLocation.toString(), primaryType, depth+1);
+-    	if (childs!=null && childs.size()>0)
+-    		cat.setChilds(childs);
+-//    	System.out.println(cat.getName()+"::"+cat.getPath()+"::"+cat.getTitle()+"::"+cat.isSelected()+"::"+cat.getDepth());
+-    	categories.add(cat);
+-    	
++      if (withChildren) {
++        List<CategoryBean> childs = getCategories(catLocation.toString(), primaryType, depth+1);
++        if (childs!=null && childs.size()>0)
++          cat.setChilds(childs);
++      }
++      categories.add(cat);
+     }
+-    
+     return categories;
+-
+   }
+   
+   public String getTagHtmlStyle(long tagCount) throws Exception {
+@@ -310,15 +316,15 @@
+    */
+   public String getTitle(Node node) throws Exception {
+ 	  String title = null;
+-	  if (node.hasNode("jcr:content")) {
++	  if (node.hasProperty("exo:title")) {
++	  	title = node.getProperty("exo:title").getValue().getString();
++	  } else if (node.hasNode("jcr:content")) {
+ 		  Node content = node.getNode("jcr:content");
+ 		  if (content.hasProperty("dc:title")) {
+ 		    try {
+ 		      title = content.getProperty("dc:title").getValues()[0].getString();
+ 		    } catch(Exception ex) {}
+ 		  }
+-	  } else if (node.hasProperty("exo:title")) {
+-		  title = node.getProperty("exo:title").getValue().getString();
+ 	  }
+ 	  if (title==null) {
+ 	  	if (node.isNodeType("nt:frozenNode")){
+Index: apps/portlet-presentation/src/main/webapp/WEB-INF/classes/locale/portlet/ContentListViewer/ContentListViewer_ja.xml
+===================================================================
+--- apps/portlet-presentation/src/main/webapp/WEB-INF/classes/locale/portlet/ContentListViewer/ContentListViewer_ja.xml	(revision 72182)
++++ apps/portlet-presentation/src/main/webapp/WEB-INF/classes/locale/portlet/ContentListViewer/ContentListViewer_ja.xml	(working copy)
+@@ -10,6 +10,7 @@
+       <non-contents>利用可能な記事がありません。</non-contents>
+       <item-not-found>アイテムがありません</item-not-found>
+       <no-permission>このノードにアクセスするための権限がありません</no-permission>
++      <category-back>Go to previous</category-back>
+     </msg>
+   </UICLVContainer>
+ 
+Index: apps/portlet-presentation/src/main/webapp/WEB-INF/classes/locale/portlet/ContentListViewer/ContentListViewer_vi.xml
+===================================================================
+--- apps/portlet-presentation/src/main/webapp/WEB-INF/classes/locale/portlet/ContentListViewer/ContentListViewer_vi.xml	(revision 72182)
++++ apps/portlet-presentation/src/main/webapp/WEB-INF/classes/locale/portlet/ContentListViewer/ContentListViewer_vi.xml	(working copy)
+@@ -7,7 +7,8 @@
+     <msg>
+       <non-contents>Xin lỗi! Không có nội dung nào.</non-contents>
+       <item-not-found>Nội dung này không tồn tại</item-not-found>
+-      <no-permission>Bạn không có quyền xem nội dung này</no-permission>	
++      <no-permission>Bạn không có quyền xem nội dung này</no-permission>
++      <category-back>Về thư mục trước</category-back>
+     </msg>
+   </UICLVContainer>
+ 
+Index: apps/portlet-presentation/src/main/webapp/WEB-INF/classes/locale/portlet/ContentListViewer/ContentListViewer_en.xml
+===================================================================
+--- apps/portlet-presentation/src/main/webapp/WEB-INF/classes/locale/portlet/ContentListViewer/ContentListViewer_en.xml	(revision 72182)
++++ apps/portlet-presentation/src/main/webapp/WEB-INF/classes/locale/portlet/ContentListViewer/ContentListViewer_en.xml	(working copy)
+@@ -10,6 +10,7 @@
+       <non-contents>Sorry, no articles available.</non-contents>
+       <item-not-found>Item not found</item-not-found>
+       <no-permission>You don't have permission to access this node</no-permission>
++      <category-back>Go to previous</category-back>
+     </msg>
+   </UICLVContainer>
+ 
+Index: apps/portlet-presentation/src/main/webapp/WEB-INF/classes/locale/portlet/ContentListViewer/ContentListViewer_fr.xml
+===================================================================
+--- apps/portlet-presentation/src/main/webapp/WEB-INF/classes/locale/portlet/ContentListViewer/ContentListViewer_fr.xml	(revision 72182)
++++ apps/portlet-presentation/src/main/webapp/WEB-INF/classes/locale/portlet/ContentListViewer/ContentListViewer_fr.xml	(working copy)
+@@ -5,6 +5,7 @@
+       <non-contents>Excusez-nous, aucun article n'est disponible.</non-contents>
+       <item-not-found>Le contenu n'a pas été trouvé</item-not-found>
+       <no-permission>Vous n'avez pas la permission d'accéder à ce contenu</no-permission>
++      <category-back>Aller à la précédente</category-back>
+     </msg>
+   </UICLVContainer>
+ 
+Index: packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/wcm-artifacts/application-templates/content-list-viewer/navigation/CategoryTree.gtmpl
+===================================================================
+--- packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/wcm-artifacts/application-templates/content-list-viewer/navigation/CategoryTree.gtmpl	(revision 72182)
++++ packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/wcm-artifacts/application-templates/content-list-viewer/navigation/CategoryTree.gtmpl	(working copy)
+@@ -8,6 +8,24 @@
+ 
+ %>
+ <%
++import java.util.List;
++import org.exoplatform.wcm.webui.Utils;
++import org.exoplatform.portal.webui.util.Util;
++import org.exoplatform.wcm.webui.clv.UICLVPortlet;
++import org.exoplatform.wcm.webui.clv.CategoryBean;
++
++public List<CategoryBean> getCategoriesFromUrl() throws Exception {
++  String clvBy = Utils.getPortletPreference(UICLVPortlet.PREFERENCE_SHOW_CLV_BY);
++  String paramPath = Util.getPortalRequestContext().getRequestParameter(clvBy);
++  if (paramPath==null)
++    return uicomponent.getCategories(false);
++  else {
++  %>
++      <a class="CategoryLabel" href="javascript:history.back()" ><%=_ctx.appRes("UICLVContainer.msg.category-back");%></a>
++  <%
++    return uicomponent.getCategories(paramPath, "exo:taxonomy", 1, false);
++  }
++}
+ public void renderCategories(def categories) {
+     for (category in categories) {
+       def categoryTitle = category.getTitle();
+@@ -20,7 +38,7 @@
+       %>
+       <a class="$cssStyle" style="margin-left: $margin" href="$categoryURL" title="$categoryTitle">$categoryTitle</a>
+       <%
+-      if (category.hasChilds()) renderCategories(category.getChilds());
++//      if (category.hasChilds() && category.getDepth()==0) renderCategories(category.getChilds());
+     }
+ }
+ def header = uicomponent.getHeader();
+@@ -49,7 +67,7 @@
+     </div>
+     <div class="NewContent">
+       <%
+-      def categories = uicomponent.getCategories();
++      def categories = getCategoriesFromUrl();
+       renderCategories(categories);
+       %>
+     </div>

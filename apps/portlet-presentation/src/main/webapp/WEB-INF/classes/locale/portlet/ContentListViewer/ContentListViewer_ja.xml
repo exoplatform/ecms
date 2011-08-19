@@ -10,6 +10,7 @@
       <non-contents>利用可能な記事がありません。</non-contents>
       <item-not-found>アイテムがありません</item-not-found>
       <no-permission>このノードにアクセスするための権限がありません</no-permission>
+      <category-back>Go to previous</category-back>
     </msg>
   </UICLVContainer>
 
