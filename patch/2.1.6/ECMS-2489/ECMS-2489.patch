@@ -1,0 +1,614 @@
+Index: apps/portlet-presentation/src/main/java/org/exoplatform/wcm/webui/clv/UICLVFolderMode.java
+===================================================================
+--- apps/portlet-presentation/src/main/java/org/exoplatform/wcm/webui/clv/UICLVFolderMode.java	(revision 72566)
++++ apps/portlet-presentation/src/main/java/org/exoplatform/wcm/webui/clv/UICLVFolderMode.java	(working copy)
+@@ -18,20 +18,19 @@
+ 
+ import java.util.ArrayList;
+ import java.util.HashMap;
+-import java.util.List;
+ 
+ import javax.jcr.AccessDeniedException;
+ import javax.jcr.ItemNotFoundException;
+ import javax.jcr.Node;
+ import javax.portlet.PortletPreferences;
+ 
+-import org.exoplatform.ecm.utils.text.Text;
+ import org.exoplatform.portal.webui.application.UIPortlet;
+ import org.exoplatform.portal.webui.util.Util;
+ import org.exoplatform.resolver.ResourceResolver;
+ import org.exoplatform.services.wcm.core.NodeLocation;
++import org.exoplatform.services.wcm.publication.PaginatedResultIterator;
++import org.exoplatform.services.wcm.publication.Result;
+ import org.exoplatform.services.wcm.publication.WCMComposer;
+-import org.exoplatform.services.wcm.utils.PaginatedNodeIterator;
+ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+ import org.exoplatform.wcm.webui.Utils;
+ import org.exoplatform.webui.application.WebuiRequestContext;
+@@ -65,10 +64,10 @@
+   public void init() throws Exception {
+     PortletPreferences portletPreferences = Utils.getAllPortletPreferences();    
+     
+-    List<Node> nodes = null;
++    Result result = null;
+     messageKey = null;
+     try {
+-      nodes = getRenderedContentNodes();
++      result = getRenderedContentNodes();
+     } catch (ItemNotFoundException e) {
+       messageKey = "UICLVContainer.msg.item-not-found";
+       return;
+@@ -76,15 +75,15 @@
+       messageKey = "UICLVContainer.msg.no-permission";
+       return;
+     }
+-    if (nodes.size() == 0) {
++    if (result.getNumTotal() == 0) {
+       messageKey = "UICLVContainer.msg.non-contents";
+     }    
+     int itemsPerPage = Integer.parseInt(portletPreferences.getValue(UICLVPortlet.PREFERENCE_ITEMS_PER_PAGE, null));
+-    PaginatedNodeIterator paginatedNodeIterator = new PaginatedNodeIterator(nodes, itemsPerPage);
++    PaginatedResultIterator paginatedResultIterator = new PaginatedResultIterator(result, itemsPerPage);
+     getChildren().clear();
+     clvPresentation = addChild(UICLVPresentation.class, null, null);    
+     ResourceResolver resourceResolver = getTemplateResourceResolver();
+-    clvPresentation.init(resourceResolver, paginatedNodeIterator);    
++    clvPresentation.init(resourceResolver, paginatedResultIterator);
+   }
+   
+   /**
+@@ -94,7 +93,7 @@
+    * 
+    * @throws Exception the exception
+    */
+-  public List<Node> getRenderedContentNodes() throws Exception {
++  public Result getRenderedContentNodes() throws Exception {
+     PortletRequestContext portletRequestContext = WebuiRequestContext.getCurrentInstance();
+     PortletPreferences preferences = portletRequestContext.getRequest().getPreferences();      
+     WCMComposer wcmComposer = getApplicationComponent(WCMComposer.class);
+@@ -102,24 +101,29 @@
+     filters.put(WCMComposer.FILTER_MODE, Utils.getCurrentMode());
+     String orderBy = preferences.getValue(UICLVPortlet.PREFERENCE_ORDER_BY, null);
+     String orderType = preferences.getValue(UICLVPortlet.PREFERENCE_ORDER_TYPE, null);
++    String itemsPerPage = preferences.getValue(UICLVPortlet.PREFERENCE_ITEMS_PER_PAGE, null);
+     String sharedCache = preferences.getValue(UICLVPortlet.PREFERENCE_SHARED_CACHE, "true");
+     if (orderType == null) orderType = "DESC";
+     if (orderBy == null) orderBy = "exo:title";
+     filters.put(WCMComposer.FILTER_ORDER_BY, orderBy);
+     filters.put(WCMComposer.FILTER_ORDER_TYPE, orderType);
+     filters.put(WCMComposer.FILTER_LANGUAGE, Util.getPortalRequestContext().getLocale().getLanguage());
++    filters.put(WCMComposer.FILTER_LIMIT, itemsPerPage);
+     filters.put(WCMComposer.FILTER_VISIBILITY, ("true".equals(sharedCache))?WCMComposer.VISIBILITY_PUBLIC:WCMComposer.VISIBILITY_USER);
+ 
+     String folderPath = this.getAncestorOfType(UICLVPortlet.class).getFolderPath();
+     
+     if(folderPath == null && preferences.getValue(UICLVPortlet.PREFERENCE_ITEM_PATH, null) == null){
+-        return new ArrayList<Node>();
++//        return new ArrayList<Node>();
++      return new Result(new ArrayList<Node>(), 0, 0, null, null);
+     }      
+     NodeLocation nodeLocation = NodeLocation.getNodeLocationByExpression(
+     		(folderPath != null) ? folderPath : preferences.getValue(UICLVPortlet.PREFERENCE_ITEM_PATH, null));
+-    String nPath  = nodeLocation.getPath();
+-    return wcmComposer.getContents(nodeLocation.getRepository(), Text.escapeIllegalJcrChars(nodeLocation.getWorkspace()), 
+-        Text.escapeIllegalJcrChars(nPath), filters, WCMCoreUtils.getUserSessionProvider());
++    //encoding
++    String nPath  = new String(nodeLocation.getPath().getBytes("ISO-8859-1"), "UTF-8");
++//  return wcmComposer.getContents(nodeLocation.getRepository(), Text.escapeIllegalJcrChars(nodeLocation.getWorkspace()),
++//  Text.escapeIllegalJcrChars(nPath), filters, WCMCoreUtils.getUserSessionProvider());
++    return wcmComposer.getPaginatedContents(nodeLocation, filters, WCMCoreUtils.getUserSessionProvider());
+   }
+   /**
+ 	 * Gets the bar info show.
+Index: core/publication/src/main/java/org/exoplatform/services/wcm/publication/WCMComposerImpl.java
+===================================================================
+--- core/publication/src/main/java/org/exoplatform/services/wcm/publication/WCMComposerImpl.java	(revision 72566)
++++ core/publication/src/main/java/org/exoplatform/services/wcm/publication/WCMComposerImpl.java	(working copy)
+@@ -24,7 +24,6 @@
+ import org.exoplatform.management.jmx.annotations.NameTemplate;
+ import org.exoplatform.management.jmx.annotations.Property;
+ import org.exoplatform.management.rest.annotations.RESTEndpoint;
+-import org.exoplatform.portal.config.UserACL;
+ import org.exoplatform.portal.webui.util.Util;
+ import org.exoplatform.services.cache.CacheService;
+ import org.exoplatform.services.cache.ExoCache;
+@@ -38,14 +37,13 @@
+ import org.exoplatform.services.jcr.RepositoryService;
+ import org.exoplatform.services.jcr.access.AccessControlEntry;
+ import org.exoplatform.services.jcr.access.PermissionType;
+-import org.exoplatform.services.jcr.core.ExtendedNode;
+ import org.exoplatform.services.jcr.core.ManageableRepository;
+ import org.exoplatform.services.jcr.ext.common.SessionProvider;
+-import org.exoplatform.services.jcr.ext.hierarchy.impl.HierarchyConfig.Permission;
++import org.exoplatform.services.jcr.impl.core.query.QueryImpl;
+ import org.exoplatform.services.jcr.sessions.ACLSessionProviderService;
+-import org.exoplatform.services.jcr.sessions.impl.ACLSessionProviderServiceThreadLocalImpl;
+ import org.exoplatform.services.log.ExoLogger;
+ import org.exoplatform.services.log.Log;
++import org.exoplatform.services.wcm.core.NodeLocation;
+ import org.exoplatform.services.wcm.core.WCMService;
+ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+ import org.picocontainer.Startable;
+@@ -151,9 +149,13 @@
+     String language = filters.get(FILTER_LANGUAGE);
+     String visibility = filters.get(FILTER_VISIBILITY);
+     String remoteUser = null;
+-    try {
+-      remoteUser = Util.getPortalRequestContext().getRemoteUser();
+-    } catch (Exception e) {}
++    if (WCMComposer.VISIBILITY_PUBLIC.equals(visibility)) {
++      remoteUser = "##PUBLIC##VISIBILITY";
++    } else {
++      try {
++        remoteUser = Util.getPortalRequestContext().getRemoteUser();
++      } catch (Exception e) {}
++    }
+ 
+ 		if (repository==null && workspace==null) {
+ 		  String[] params = nodeIdentifier.split("/");
+@@ -202,9 +204,13 @@
+ 		String primaryType = filters.get(FILTER_PRIMARY_TYPE);
+ 		String visibility = filters.get(FILTER_VISIBILITY);    
+ 		String remoteUser = null;
+-		try {
+-			remoteUser = Util.getPortalRequestContext().getRemoteUser();
+-		} catch (Exception e) {}
++    if (WCMComposer.VISIBILITY_PUBLIC.equals(visibility)) {
++      remoteUser = "##PUBLIC##VISIBILITY";
++    } else {
++      try {
++        remoteUser = Util.getPortalRequestContext().getRemoteUser();
++      } catch (Exception e) {}
++    }
+ 
+ 		if (MODE_EDIT.equals(mode) && "publication:liveDate".equals(orderBy)) {
+ 		  orderBy = "exo:dateModified";
+@@ -226,7 +232,7 @@
+         sessionProvider = aclSessionProviderService.getACLSessionProvider(getAnyUserACL());
+ 			}
+       if (log.isDebugEnabled()) log.debug("##### "+path+":"+version+":"+remoteUser+":"+orderBy+":"+orderType);
+-      NodeIterator nodeIterator = getViewableContents(repository, workspace, path, filters, sessionProvider);
++      NodeIterator nodeIterator = getViewableContents(repository, workspace, path, filters, sessionProvider, false);
+       Node node = null, viewNode = null;
+       while (nodeIterator.hasNext()) {
+         node = nodeIterator.nextNode();
+@@ -244,10 +250,83 @@
+ 		return nodes;    
+ 	}
+ 
++  public Result getPaginatedContents(NodeLocation nodeLocation, HashMap<String, String> filters, SessionProvider sessionProvider) throws Exception {
++    String path = nodeLocation.getPath();
++    String repository = nodeLocation.getRepository();
++    String workspace = nodeLocation.getWorkspace();
++
++    String mode = filters.get(FILTER_MODE);
++    String version = filters.get(FILTER_VERSION);
++    String orderBy = filters.get(FILTER_ORDER_BY);
++    String orderType = filters.get(FILTER_ORDER_TYPE);
++    String language = filters.get(FILTER_LANGUAGE);
++    String recursive = filters.get(FILTER_RECURSIVE);
++    String primaryType = filters.get(FILTER_PRIMARY_TYPE);
++    String visibility = filters.get(FILTER_VISIBILITY);
++    long offset = (filters.get(FILTER_OFFSET)!=null)?new Long(filters.get(FILTER_OFFSET)):0;
++    long totalSize = (filters.get(FILTER_TOTAL)!=null)?new Long(filters.get(FILTER_TOTAL)):0;
++
++    String remoteUser = null;
++    if (WCMComposer.VISIBILITY_PUBLIC.equals(visibility)) {
++      remoteUser = "##PUBLIC##VISIBILITY";
++    } else {
++      try {
++        remoteUser = Util.getPortalRequestContext().getRemoteUser();
++      } catch (Exception e) {}
++    }
++
++    if (MODE_EDIT.equals(mode) && "publication:liveDate".equals(orderBy)) {
++      orderBy = "exo:dateModified";
++      filters.put(FILTER_ORDER_BY, orderBy);
++    }
++    if (MODE_LIVE.equals(mode) && "exo:title".equals(orderBy)) {
++      orderBy = "exo:titlePublished "+orderType+", exo:title";
++      filters.put(FILTER_ORDER_BY, orderBy);
++    }
++
++    if (MODE_LIVE.equals(mode) && isCached && offset==0) {
++      String hash = getHash(path, version, remoteUser, language, recursive, orderBy, orderType, primaryType);
++      Result cachedNodes = (Result)cache.get(hash);
++      if (cachedNodes != null) return cachedNodes;
++    }
++    if (log.isDebugEnabled()) log.debug("##### "+path+":"+version+":"+remoteUser+":"+orderBy+":"+orderType);
++
++    NodeIterator nodeIterator ;
++    if (totalSize==0) {
++      SessionProvider systemProvider = WCMCoreUtils.getSystemSessionProvider();
++      nodeIterator = getViewableContents(repository, workspace, path, filters, systemProvider, false);
++      totalSize = nodeIterator.getSize();
++    }
++
++    if (WCMComposer.VISIBILITY_PUBLIC.equals(visibility) && MODE_LIVE.equals(mode) && remoteUser != null) {
++      sessionProvider = aclSessionProviderService.getACLSessionProvider(getAnyUserACL());
++    }
++
++    nodeIterator = getViewableContents(repository, workspace, path, filters, sessionProvider, true);
++    List<Node> nodes = new ArrayList<Node>();
++    Node node = null, viewNode = null;
++    while (nodeIterator.hasNext()) {
++      node = nodeIterator.nextNode();
++      viewNode = getViewableContent(node, filters);
++      if (viewNode != null) {
++        nodes.add(viewNode);
++      }
++    }
++    Result result = new Result(nodes, offset, totalSize, nodeLocation, filters);
++
++    if (MODE_LIVE.equals(mode) && isCached && offset==0 ) {
++      String hash = getHash(path, version, remoteUser, language, recursive, orderBy, orderType, primaryType);
++//     cache.remove(hash);
++      cache.put(hash, result);
++    }
++    return result;
++  }
++	
+ 	/* (non-Javadoc)
+ 	 * @see org.exoplatform.services.wcm.publication.WCMComposer#getContents(java.lang.String, java.lang.String, java.lang.String, java.util.HashMap)
+ 	 */
+-	private NodeIterator getViewableContents(String repository, String workspace, String path, HashMap<String, String> filters, SessionProvider sessionProvider) throws Exception {
++	private NodeIterator getViewableContents(String repository, String workspace, String path, 
++	    HashMap<String, String> filters, SessionProvider sessionProvider, boolean paginated) throws Exception {
+ 		ManageableRepository manageableRepository = repositoryService.getRepository(repository);
+ 		Session session = sessionProvider.getSession(workspace, manageableRepository);
+ 		QueryManager manager = session.getWorkspace().getQueryManager();
+@@ -295,6 +374,16 @@
+ 			statement.append(orderFilter);
+ 		}
+ 		Query query = manager.createQuery(statement.toString(), Query.SQL);
++
++    if (paginated) {
++      long offset = (filters.get(FILTER_OFFSET)!=null)?new Long(filters.get(FILTER_OFFSET)):0;
++      long limit = (filters.get(FILTER_LIMIT)!=null)?new Long(filters.get(FILTER_LIMIT)):0;
++      if (limit>0) {
++        ((QueryImpl)query).setOffset(offset);
++        ((QueryImpl)query).setLimit(limit);
++      }
++    }
++    
+ 		return query.execute().getNodes();
+ 	}
+ 
+@@ -702,14 +791,14 @@
+ 	}
+ 
+   private String getHash(String path, String version, String remoteUser, String language, String recursive, String orderBy, String orderType, String primaryType) throws Exception {
+-	  String key = path;
+-	  if (version!=null) key += "::"+version;
+-	  if (remoteUser!=null) key += ";;"+remoteUser;
+-	  if (language!=null) key += ",,"+language;
+-	  if (orderBy!=null) key += "??"+orderBy;
+-	  if (orderType!=null) key += "!!"+orderType;
+-	  if (primaryType!=null) key += "))"+primaryType;
+-		  return MessageDigester.getHash(key);
++   StringBuffer key = new StringBuffer(path);
++   if (version!=null) key.append("::").append(version);
++   if (remoteUser!=null) key.append(";;").append(remoteUser);
++   if (language!=null) key.append(",,").append(language);
++   if (orderBy!=null) key.append("??").append(orderBy);
++   if (orderType!=null) key.append("!!").append(orderType);
++   if (primaryType!=null) key.append("))").append(primaryType);
++     return key.toString();//MessageDigester.getHash(key.toString());
+   }
+ 	  
+   private void addUsedLanguage(String lang) {
+Index: core/publication/src/main/java/org/exoplatform/services/wcm/publication/PaginatedResultIterator.java
+===================================================================
+--- core/publication/src/main/java/org/exoplatform/services/wcm/publication/PaginatedResultIterator.java	(revision 0)
++++ core/publication/src/main/java/org/exoplatform/services/wcm/publication/PaginatedResultIterator.java	(revision 0)
+@@ -0,0 +1,167 @@
++/*
++ * Copyright (C) 2003-2008 eXo Platform SAS.
++ *
++ * This program is free software; you can redistribute it and/or
++ * modify it under the terms of the GNU Affero General Public License
++ * as published by the Free Software Foundation; either version 3
++ * of the License, or (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, see<http://www.gnu.org/licenses/>.
++ */
++package org.exoplatform.services.wcm.publication;
++
++import org.exoplatform.commons.exception.ExoMessageException;
++import org.exoplatform.commons.utils.PageList;
++import org.exoplatform.services.wcm.utils.WCMCoreUtils;
++
++import java.util.ArrayList;
++import java.util.List;
++
++/**
++ * Created by The eXo Platform SAS
++ * Author : Hoa Pham
++ * hoa.phamvu@exoplatform.com
++ * Oct 17, 2008
++ */
++@SuppressWarnings({ "deprecation", "unchecked" })
++public class PaginatedResultIterator extends PageList {
++
++  /** The nodes. */
++  protected Result result;
++
++  /**
++   * Instantiates a new paginated node iterator.
++   *
++   * @param pageSize the page size
++   */
++  public PaginatedResultIterator(int pageSize) {
++    super(pageSize);
++  }
++
++  public PaginatedResultIterator(Result result, int pageSize) {
++     super(pageSize);
++     this.result = result;
++     this.setAvailablePage((int)result.getNumTotal());
++     this.currentListPage_ = null;
++  }
++
++  /* (non-Javadoc)
++   * @see org.exoplatform.commons.utils.PageList#populateCurrentPage(int)
++   */
++  protected void populateCurrentPage(int page) throws Exception {
++    if(page == currentPage_) {
++      if(currentListPage_ != null)
++        return;
++    }
++    checkAndSetPosition(page);
++    currentListPage_ = new ArrayList();
++    int count = 0;
++
++    /** TODO : TO UPDATE
++     *
++     */
++    WCMComposer composer = WCMCoreUtils.getService(WCMComposer.class);
++    result.getFiltersDescriber().put(WCMComposer.FILTER_LIMIT, ""+this.getPageSize());
++    result.getFiltersDescriber().put(WCMComposer.FILTER_OFFSET, ""+(this.getPageSize()*(page-1)));
++    result.getFiltersDescriber().put(WCMComposer.FILTER_TOTAL, ""+this.result.getNumTotal());
++    result = composer.getPaginatedContents(result.getNodeLocationDescriber(), result.getFiltersDescriber(), WCMCoreUtils.getUserSessionProvider());
++
++    currentListPage_ = result.getNodes();
++
++    currentPage_ = page;
++  }
++
++  /**
++   * Retrieve the total pages.
++   * 
++   * @return the total pages
++   */
++  public int getTotalPages() { return getAvailablePage(); }  
++
++  /**
++   * Retrieve the nodes per page.
++   * 
++   * @return the nodes per page
++   */
++  public int getNodesPerPage() { return getPageSize(); }    
++
++  /**
++   * Retrieve the total nodes.
++   * 
++   * @return the total nodes
++   */
++  public long getTotalNodes() {
++    return result.getNumTotal();
++  }
++
++  /**
++   * Retrieve the nodes of current page.
++   * 
++   * @return the current page data
++   * 
++   * @throws Exception the exception
++   */
++  public List getCurrentPageData() throws Exception {
++    return currentPage();
++  }
++  
++  /* (non-Javadoc)
++   * @see org.exoplatform.commons.utils.PageList#getPage(int)
++   */
++  public List getPage(int page) throws Exception {
++    if (page < 1 || page > availablePage_) {
++      Object[] args = { Integer.toString(page), Integer.toString(availablePage_) };
++      throw new ExoMessageException("PageList.page-out-of-range", args);
++    }
++    populateCurrentPage(page);
++    return currentListPage_;
++  }
++
++  /**
++   * Change page.
++   * 
++   * @param page the page
++   * 
++   * @throws Exception the exception
++   */
++  public void changePage(int page) throws Exception {
++    populateCurrentPage(page);
++  }
++
++  /**
++   * Check and set current cursor position in iterator.
++   * 
++   * @param page the page
++   */
++  protected void checkAndSetPosition(int page) {
++    /** TODO : TO UPDATE
++     *
++     */
++    /*
++	  if (nodeIterator == null) return;
++	  //Iterate next
++	  if (page > currentPage_) {
++	      long skipNextNum = (page - (currentPage_ + 1)) * getPageSize();
++	      nodeIterator.skip(skipNextNum);
++	  } else if(page <currentPage_) {
++	      //Iterate back
++	      int currentPageSize = currentListPage_.size();
++	      long skipBackNum = ((currentPage_ - page) * getPageSize()) + currentPageSize;      
++	      ((TwoWayRangeIterator)nodeIterator).skipBack(skipBackNum);  
++	  }
++	  */
++  }
++
++  /* (non-Javadoc)
++   * @see org.exoplatform.commons.utils.PageList#getAll()
++   */
++  public List getAll() throws Exception {
++    throw new UnsupportedOperationException();
++  }
++}
+Index: core/publication/src/main/java/org/exoplatform/services/wcm/publication/WCMComposer.java
+===================================================================
+--- core/publication/src/main/java/org/exoplatform/services/wcm/publication/WCMComposer.java	(revision 72566)
++++ core/publication/src/main/java/org/exoplatform/services/wcm/publication/WCMComposer.java	(working copy)
+@@ -22,6 +22,7 @@
+ import javax.jcr.Node;
+ 
+ import org.exoplatform.services.jcr.ext.common.SessionProvider;
++import org.exoplatform.services.wcm.core.NodeLocation;
+ 
+ /**
+  * This class is responsible of getting contents inside the WCM product.
+@@ -73,6 +74,15 @@
+   /** Filter parameter to filter results by visibility. ex: public, user*/
+   public final static String FILTER_VISIBILITY = "filter-visibility";
+ 	
++  /** Filter parameter to limit the result size */
++  public final static String FILTER_LIMIT = "filter-limit";
++
++  /** Filter parameter to return the result with an offset delimiter */
++  public final static String FILTER_OFFSET = "filter-offset";
++
++  /** Total number of contents */
++  public final static String FILTER_TOTAL = "filter-total-number";
++
+ 	/** mode of portlet **/
+ 	public final static String PORTLET_MODE = "portlet-mode";
+ 	
+@@ -99,7 +109,7 @@
+ 	 * 
+ 	 * @param repository the repository
+ 	 * @param workspace the workspace
+-	 * @param path the path
++	 * @param nodeIdentifier the path
+ 	 * @param filters the filters
+ 	 * @param sessionProvider the session provider
+ 	 * 
+@@ -124,13 +134,26 @@
+ 	 */
+ 	public List<Node> getContents(String repository, String workspace, String path, HashMap<String, String> filters, SessionProvider sessionProvider) throws Exception ;
+ 
++	/**
++	 * returns contents at the specified path based on filters.
++	 *
++	 * @param nodeLocation the content location
++	 * @param filters the filters
++	 * @param sessionProvider the session provider
++	 *
++	 * @return a jcr node
++	 *
++	 * @throws Exception the exception
++	 */
++	public Result getPaginatedContents(NodeLocation nodeLocation, HashMap<String, String> filters, SessionProvider sessionProvider) throws Exception ;
+ 
++
+ 	/**
+ 	 * Update content.
+ 	 * 
+ 	 * @param repository the repository
+ 	 * @param workspace the workspace
+-	 * @param path the path
++	 * @param nodeIdentifier the path
+ 	 * @param filters the filters
+ 	 * 
+ 	 * @return true, if successful
+Index: core/publication/src/main/java/org/exoplatform/services/wcm/publication/Result.java
+===================================================================
+--- core/publication/src/main/java/org/exoplatform/services/wcm/publication/Result.java	(revision 0)
++++ core/publication/src/main/java/org/exoplatform/services/wcm/publication/Result.java	(revision 0)
+@@ -0,0 +1,73 @@
++/*
++ * Copyright (C) 2010 Egg Prod (by benjamin paillereau)
++ *
++ * This is free software; you can redistribute it and/or modify it
++ * under the terms of the GNU Lesser General Public License as
++ * published by the Free Software Foundation; either version 2.1 of
++ * the License, or (at your option) any later version.
++ *
++ * This software is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
++ * Lesser General Public License for more details.
++ *
++ * You should have received a copy of the GNU Lesser General Public
++ * License along with this software; if not, write to the Free
++ * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
++ * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
++ */
++
++package org.exoplatform.services.wcm.publication;
++
++import org.exoplatform.services.wcm.core.NodeLocation;
++
++import javax.jcr.Node;
++import java.util.HashMap;
++import java.util.List;
++
++/**
++ * Date: 12/05/11
++ *
++ * @author <a href="mailto:bpaillereau@gmail.com">Benjamin Paillereau</a>
++ */
++public class Result {
++
++  private NodeLocation nodeLocationDescriber;
++
++  private HashMap<String, String> filtersDescriber;
++
++  private List<Node> nodes;
++
++  private long offset;
++
++  private long numTotal;
++
++
++  public Result(List<Node> nodes, long offset, long numTotal, NodeLocation nodeLocationDescriber, HashMap<String, String> filtersDescriber) {
++    this.nodes = nodes;
++    this.offset = offset;
++    this.numTotal = numTotal;
++    this.filtersDescriber = filtersDescriber;
++    this.nodeLocationDescriber = nodeLocationDescriber;
++  }
++
++  public NodeLocation getNodeLocationDescriber() {
++    return nodeLocationDescriber;
++  }
++
++  public HashMap<String, String> getFiltersDescriber() {
++    return filtersDescriber;
++  }
++
++  public List<Node> getNodes() {
++    return nodes;
++  }
++
++  public long getOffset() {
++    return offset;
++  }
++
++  public long getNumTotal() {
++    return numTotal;
++  }
++}

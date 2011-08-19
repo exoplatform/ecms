@@ -18,20 +18,19 @@ package org.exoplatform.wcm.webui.clv;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 import javax.jcr.AccessDeniedException;
 import javax.jcr.ItemNotFoundException;
 import javax.jcr.Node;
 import javax.portlet.PortletPreferences;
 
-import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.portal.webui.application.UIPortlet;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.resolver.ResourceResolver;
 import org.exoplatform.services.wcm.core.NodeLocation;
+import org.exoplatform.services.wcm.publication.PaginatedResultIterator;
+import org.exoplatform.services.wcm.publication.Result;
 import org.exoplatform.services.wcm.publication.WCMComposer;
-import org.exoplatform.services.wcm.utils.PaginatedNodeIterator;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.wcm.webui.Utils;
 import org.exoplatform.webui.application.WebuiRequestContext;
@@ -65,10 +64,10 @@ public class UICLVFolderMode extends UICLVContainer {
   public void init() throws Exception {
     PortletPreferences portletPreferences = Utils.getAllPortletPreferences();    
     
-    List<Node> nodes = null;
+    Result result = null;
     messageKey = null;
     try {
-      nodes = getRenderedContentNodes();
+      result = getRenderedContentNodes();
     } catch (ItemNotFoundException e) {
       messageKey = "UICLVContainer.msg.item-not-found";
       return;
@@ -76,15 +75,15 @@ public class UICLVFolderMode extends UICLVContainer {
       messageKey = "UICLVContainer.msg.no-permission";
       return;
     }
-    if (nodes.size() == 0) {
+    if (result.getNumTotal() == 0) {
       messageKey = "UICLVContainer.msg.non-contents";
     }    
     int itemsPerPage = Integer.parseInt(portletPreferences.getValue(UICLVPortlet.PREFERENCE_ITEMS_PER_PAGE, null));
-    PaginatedNodeIterator paginatedNodeIterator = new PaginatedNodeIterator(nodes, itemsPerPage);
+    PaginatedResultIterator paginatedResultIterator = new PaginatedResultIterator(result, itemsPerPage);
     getChildren().clear();
     clvPresentation = addChild(UICLVPresentation.class, null, null);    
     ResourceResolver resourceResolver = getTemplateResourceResolver();
-    clvPresentation.init(resourceResolver, paginatedNodeIterator);    
+    clvPresentation.init(resourceResolver, paginatedResultIterator);
   }
   
   /**
@@ -94,7 +93,7 @@ public class UICLVFolderMode extends UICLVContainer {
    * 
    * @throws Exception the exception
    */
-  public List<Node> getRenderedContentNodes() throws Exception {
+  public Result getRenderedContentNodes() throws Exception {
     PortletRequestContext portletRequestContext = WebuiRequestContext.getCurrentInstance();
     PortletPreferences preferences = portletRequestContext.getRequest().getPreferences();      
     WCMComposer wcmComposer = getApplicationComponent(WCMComposer.class);
@@ -102,24 +101,29 @@ public class UICLVFolderMode extends UICLVContainer {
     filters.put(WCMComposer.FILTER_MODE, Utils.getCurrentMode());
     String orderBy = preferences.getValue(UICLVPortlet.PREFERENCE_ORDER_BY, null);
     String orderType = preferences.getValue(UICLVPortlet.PREFERENCE_ORDER_TYPE, null);
+    String itemsPerPage = preferences.getValue(UICLVPortlet.PREFERENCE_ITEMS_PER_PAGE, null);
     String sharedCache = preferences.getValue(UICLVPortlet.PREFERENCE_SHARED_CACHE, "true");
     if (orderType == null) orderType = "DESC";
     if (orderBy == null) orderBy = "exo:title";
     filters.put(WCMComposer.FILTER_ORDER_BY, orderBy);
     filters.put(WCMComposer.FILTER_ORDER_TYPE, orderType);
     filters.put(WCMComposer.FILTER_LANGUAGE, Util.getPortalRequestContext().getLocale().getLanguage());
+    filters.put(WCMComposer.FILTER_LIMIT, itemsPerPage);
     filters.put(WCMComposer.FILTER_VISIBILITY, ("true".equals(sharedCache))?WCMComposer.VISIBILITY_PUBLIC:WCMComposer.VISIBILITY_USER);
 
     String folderPath = this.getAncestorOfType(UICLVPortlet.class).getFolderPath();
     
     if(folderPath == null && preferences.getValue(UICLVPortlet.PREFERENCE_ITEM_PATH, null) == null){
-        return new ArrayList<Node>();
+//        return new ArrayList<Node>();
+      return new Result(new ArrayList<Node>(), 0, 0, null, null);
     }      
     NodeLocation nodeLocation = NodeLocation.getNodeLocationByExpression(
     		(folderPath != null) ? folderPath : preferences.getValue(UICLVPortlet.PREFERENCE_ITEM_PATH, null));
-    String nPath  = nodeLocation.getPath();
-    return wcmComposer.getContents(nodeLocation.getRepository(), Text.escapeIllegalJcrChars(nodeLocation.getWorkspace()), 
-        Text.escapeIllegalJcrChars(nPath), filters, WCMCoreUtils.getUserSessionProvider());
+    //encoding
+    String nPath  = new String(nodeLocation.getPath().getBytes("ISO-8859-1"), "UTF-8");
+//  return wcmComposer.getContents(nodeLocation.getRepository(), Text.escapeIllegalJcrChars(nodeLocation.getWorkspace()),
+//  Text.escapeIllegalJcrChars(nPath), filters, WCMCoreUtils.getUserSessionProvider());
+    return wcmComposer.getPaginatedContents(nodeLocation, filters, WCMCoreUtils.getUserSessionProvider());
   }
   /**
 	 * Gets the bar info show.
