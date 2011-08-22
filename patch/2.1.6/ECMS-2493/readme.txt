@@ -42,10 +42,11 @@ Documentation changes:
 Configuration changes
 
 Configuration changes:
-	* Yes
+	* Remove New Group Listener in organization-component-plugins-configuration.xml
+	* Add new Group configuration in dms-drives-configuration.xml
 
 Will previous configuration continue to work?
-	* Yes
+	* No 
 
 Risks and impacts
 
@@ -53,14 +54,7 @@ Can this bug fix have any side effects on current client projects?
 	* Yes
 
 Function or ClassName change*
-	* packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/dms-extension/dms/dms-drives-configuration.xml
-	* packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/dms-extension/dms/organization-component-plugins-configuration.xml
-	* core/services/src/main/java/org/exoplatform/services/cms/drives/impl/ManageDriveServiceImpl.java
-	* core/services/src/main/java/org/exoplatform/services/cms/drives/ManageDriveService.java
-	* core/services/src/main/java/org/exoplatform/services/cms/drives/DriveData.java
-	* core/connector/src/main/java/org/exoplatform/wcm/connector/fckeditor/DriverConnector.java
-	* core/webui-administration/src/main/java/org/exoplatform/ecm/webui/component/admin/drives/UIDriveList.java
-	* core/webui-administration/src/main/java/org/exoplatform/ecm/webui/component/admin/drives/UIDriveForm.java
+	* dms-drives-configuration.xml, organization-component-plugins-configuration.xml
 
 Is there a performance risk/cost?
 	* Yes
