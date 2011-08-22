@@ -1,0 +1,184 @@
+Index: apps/portlet-search/src/main/java/org/exoplatform/wcm/webui/search/UISearchForm.java
+===================================================================
+--- apps/portlet-search/src/main/java/org/exoplatform/wcm/webui/search/UISearchForm.java	(revision 72758)
++++ apps/portlet-search/src/main/java/org/exoplatform/wcm/webui/search/UISearchForm.java	(working copy)
+@@ -258,8 +258,7 @@
+ 																																			null));
+       queryCriteria.setPageMode(portletPreferences.getValue(UIWCMSearchPortlet.PAGE_MODE, null));
+ 			try {
+-				WCMPaginatedQueryResult paginatedQueryResult = siteSearchService.searchSiteContents(
+-				                                                                                    Utils.getSessionProvider(),
++				WCMPaginatedQueryResult paginatedQueryResult = siteSearchService.searchSiteContents(WCMCoreUtils.getUserSessionProvider(),
+ 				                                                                                    queryCriteria,
+ 																																														itemsPerPage, false);
+ 				uiSearchResult.setKeyword(keyword);
+Index: core/services/src/main/java/org/exoplatform/services/wcm/utils/AbstractQueryBuilder.java
+===================================================================
+--- core/services/src/main/java/org/exoplatform/services/wcm/utils/AbstractQueryBuilder.java	(revision 72758)
++++ core/services/src/main/java/org/exoplatform/services/wcm/utils/AbstractQueryBuilder.java	(working copy)
+@@ -279,10 +279,7 @@
+      * @return the query term helper
+      */
+     public QueryTermHelper contains(String s) {
+-      if(s.indexOf(" ")>0) 
+-        term = term.concat("\\" + s + "\\");
+-      else
+-        term = term.concat(s);
++      term = term.concat(s);
+       return this;
+     }
+ 
+@@ -313,8 +310,8 @@
+      * 
+      * @return the query term helper
+      */
+-    public QueryTermHelper allowFuzzySearch() {
+-      term = term.concat("~");
++    public QueryTermHelper allowFuzzySearch(double fuzzySearchIndex) {
++      term = term.concat("~").concat(String.valueOf(fuzzySearchIndex));
+       return this; 
+     }
+     
+Index: core/search/src/main/java/org/exoplatform/services/wcm/search/SiteSearchServiceImpl.java
+===================================================================
+--- core/search/src/main/java/org/exoplatform/services/wcm/search/SiteSearchServiceImpl.java	(revision 72758)
++++ core/search/src/main/java/org/exoplatform/services/wcm/search/SiteSearchServiceImpl.java	(working copy)
+@@ -31,6 +31,7 @@
+ import javax.jcr.query.RowIterator;
+ 
+ import org.exoplatform.container.xml.InitParams;
++import org.exoplatform.container.xml.ValueParam;
+ import org.exoplatform.services.cms.templates.TemplateService;
+ import org.exoplatform.services.jcr.RepositoryService;
+ import org.exoplatform.services.jcr.core.ManageableRepository;
+@@ -55,6 +56,10 @@
+  */
+ public class SiteSearchServiceImpl implements SiteSearchService {
+ 
++  private static final String IS_ENABLED_FUZZY_SEARCH = "isEnabledFuzzySearch";
++  
++  private static final String FUZZY_SEARCH_INDEX = "fuzzySearchIndex";
++  
+   /** The live portal manager service. */
+   protected LivePortalManagerService livePortalManagerService;
+ 
+@@ -79,18 +84,20 @@
+   /** The include mime types. */
+   private CopyOnWriteArraySet<String> includeMimeTypes = new CopyOnWriteArraySet<String>();
+ 
+-//  private boolean showTotalPagination = false;
+-
+-
++//  private boolean showTotalPagination = false;
++private boolean isEnabledFuzzySearch = true;
++  
++  private double fuzzySearchIndex = 0.8;
++  
+   /**
+    * Instantiates a new site search service impl.
+-   * 
++   *
+    * @param portalManagerService the portal manager service
+    * @param templateService the template service
+    * @param configurationService the configuration service
+    * @param repositoryService the repository service
+    * @param initParams the init params
+-   * 
++   *
+    * @throws Exception the exception
+    */
+   public SiteSearchServiceImpl(LivePortalManagerService portalManagerService, TemplateService templateService,
+@@ -98,15 +105,35 @@
+     this.livePortalManagerService = portalManagerService;
+     this.templateService = templateService;
+     this.repositoryService = repositoryService;
+-    this.configurationService = configurationService;
++    this.configurationService = configurationService;
+ //    if ("true".equals(System.getProperty("org.exoplatform.ecms.search.showtotal"))) showTotalPagination = true;
+-
++    if (initParams != null) {
++      ValueParam isEnabledFuzzySearchValue = initParams.getValueParam(IS_ENABLED_FUZZY_SEARCH);
++      if (isEnabledFuzzySearchValue != null)
++        isEnabledFuzzySearch = Boolean.parseBoolean(isEnabledFuzzySearchValue.getValue());
++      ValueParam enabledFuzzySearchValue = initParams.getValueParam(FUZZY_SEARCH_INDEX);
++      if (enabledFuzzySearchValue != null) {
++        try {
++          fuzzySearchIndex = Double.parseDouble(enabledFuzzySearchValue.getValue());
++        } catch (NumberFormatException e) {
++//          log.warn("The current fuzzySearchIndex value is not a number, default value 0.8 will be used");
++          fuzzySearchIndex = 0.8;
++        }
++      }
++      if (fuzzySearchIndex < 0 || fuzzySearchIndex >= 1) {
++//        log.warn("The current fuzzySearchIndex value is out of range from 0 to 1, default value 0.8 will be used");
++        fuzzySearchIndex = 0.8;
++      }
++    }
+   }
+ 
+-  /* (non-Javadoc)
+-   * @see org.exoplatform.services.wcm.search.SiteSearchService#addExcludeIncludeDataTypePlugin(org.exoplatform.services.wcm.search.ExcludeIncludeDataTypePlugin)
++  /*
++   * (non-Javadoc)
++   * @seeorg.exoplatform.services.wcm.search.SiteSearchService#
++   * addExcludeIncludeDataTypePlugin
++   * (org.exoplatform.services.wcm.search.ExcludeIncludeDataTypePlugin)
+    */
+-  public void addExcludeIncludeDataTypePlugin(ExcludeIncludeDataTypePlugin plugin) {    
++  public void addExcludeIncludeDataTypePlugin(ExcludeIncludeDataTypePlugin plugin) {
+     excludeNodeTypes.addAll(plugin.getExcludeNodeTypes());
+     excludeMimeTypes.addAll(plugin.getExcludeMimeTypes());
+     includeMimeTypes.addAll(plugin.getIncludeMimeTypes());
+@@ -282,17 +309,24 @@
+     QueryTermHelper queryTermHelper = new QueryTermHelper();    
+     String queryTerm = null;
+     keyword = keyword.replaceAll("'","''");
+-    if (keyword.contains("*") || keyword.contains("?") || keyword.contains("~")) {
++    if (isEnabledFuzzySearch) {
++      if (keyword.contains("*") || keyword.contains("?") || keyword.contains("~")) {
++        queryTerm = queryTermHelper.contains(keyword).buildTerm();
++      } else {
++        queryTerm = queryTermHelper.contains(keyword).allowFuzzySearch(fuzzySearchIndex).buildTerm();
++      }      
++    } else {
++    	keyword = keyword.replace("~", "\\~");
++    	keyword = keyword.replace("*", "\\*");
++    	keyword = keyword.replace("?", "\\?");
+       queryTerm = queryTermHelper.contains(keyword).buildTerm();
+-    } else {
+-      queryTerm = queryTermHelper.contains(keyword).allowFuzzySearch().buildTerm();
+-    }      
++    }
+     String scope = queryCriteria.getFulltextSearchProperty();
+-    if(QueryCriteria.ALL_PROPERTY_SCOPE.equals(scope) || scope == null) {
++    if (QueryCriteria.ALL_PROPERTY_SCOPE.equals(scope) || scope == null) {
+       queryBuilder.contains(null, queryTerm, LOGICAL.NULL);
+-    }else {
++    } else {
+       queryBuilder.contains(scope, queryTerm, LOGICAL.NULL);
+-    }                   
++    }
+   }
+ 
+   /**
+Index: core/core-configuration/src/main/webapp/WEB-INF/conf/wcm-core/core-search-configuration.xml
+===================================================================
+--- core/core-configuration/src/main/webapp/WEB-INF/conf/wcm-core/core-search-configuration.xml	(revision 72758)
++++ core/core-configuration/src/main/webapp/WEB-INF/conf/wcm-core/core-search-configuration.xml	(working copy)
+@@ -22,6 +22,16 @@
+         </init-params>
+       </component-plugin>
+     </component-plugins>
++    <init-params>
++      <value-param>
++        <name>isEnabledFuzzySearch</name>
++        <value>true</value>
++      </value-param>
++      <value-param>
++        <name>fuzzySearchIndex</name>
++        <value></value>
++      </value-param>
++    </init-params>    
+   </component>
+ 
+ </configuration>

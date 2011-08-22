@@ -31,6 +31,7 @@ import javax.jcr.query.QueryResult;
 import javax.jcr.query.RowIterator;
 
 import org.exoplatform.container.xml.InitParams;
+import org.exoplatform.container.xml.ValueParam;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
@@ -55,6 +56,10 @@ import org.exoplatform.services.wcm.utils.WCMCoreUtils;
  */
 public class SiteSearchServiceImpl implements SiteSearchService {
 
+  private static final String IS_ENABLED_FUZZY_SEARCH = "isEnabledFuzzySearch";
+  
+  private static final String FUZZY_SEARCH_INDEX = "fuzzySearchIndex";
+  
   /** The live portal manager service. */
   protected LivePortalManagerService livePortalManagerService;
 
@@ -80,17 +85,19 @@ public class SiteSearchServiceImpl implements SiteSearchService {
   private CopyOnWriteArraySet<String> includeMimeTypes = new CopyOnWriteArraySet<String>();
 
 //  private boolean showTotalPagination = false;
-
-
+private boolean isEnabledFuzzySearch = true;
+  
+  private double fuzzySearchIndex = 0.8;
+  
   /**
    * Instantiates a new site search service impl.
-   * 
+   *
    * @param portalManagerService the portal manager service
    * @param templateService the template service
    * @param configurationService the configuration service
    * @param repositoryService the repository service
    * @param initParams the init params
-   * 
+   *
    * @throws Exception the exception
    */
   public SiteSearchServiceImpl(LivePortalManagerService portalManagerService, TemplateService templateService,
@@ -100,13 +107,33 @@ public class SiteSearchServiceImpl implements SiteSearchService {
     this.repositoryService = repositoryService;
     this.configurationService = configurationService;
 //    if ("true".equals(System.getProperty("org.exoplatform.ecms.search.showtotal"))) showTotalPagination = true;
-
+    if (initParams != null) {
+      ValueParam isEnabledFuzzySearchValue = initParams.getValueParam(IS_ENABLED_FUZZY_SEARCH);
+      if (isEnabledFuzzySearchValue != null)
+        isEnabledFuzzySearch = Boolean.parseBoolean(isEnabledFuzzySearchValue.getValue());
+      ValueParam enabledFuzzySearchValue = initParams.getValueParam(FUZZY_SEARCH_INDEX);
+      if (enabledFuzzySearchValue != null) {
+        try {
+          fuzzySearchIndex = Double.parseDouble(enabledFuzzySearchValue.getValue());
+        } catch (NumberFormatException e) {
+//          log.warn("The current fuzzySearchIndex value is not a number, default value 0.8 will be used");
+          fuzzySearchIndex = 0.8;
+        }
+      }
+      if (fuzzySearchIndex < 0 || fuzzySearchIndex >= 1) {
+//        log.warn("The current fuzzySearchIndex value is out of range from 0 to 1, default value 0.8 will be used");
+        fuzzySearchIndex = 0.8;
+      }
+    }
   }
 
-  /* (non-Javadoc)
-   * @see org.exoplatform.services.wcm.search.SiteSearchService#addExcludeIncludeDataTypePlugin(org.exoplatform.services.wcm.search.ExcludeIncludeDataTypePlugin)
+  /*
+   * (non-Javadoc)
+   * @seeorg.exoplatform.services.wcm.search.SiteSearchService#
+   * addExcludeIncludeDataTypePlugin
+   * (org.exoplatform.services.wcm.search.ExcludeIncludeDataTypePlugin)
    */
-  public void addExcludeIncludeDataTypePlugin(ExcludeIncludeDataTypePlugin plugin) {    
+  public void addExcludeIncludeDataTypePlugin(ExcludeIncludeDataTypePlugin plugin) {
     excludeNodeTypes.addAll(plugin.getExcludeNodeTypes());
     excludeMimeTypes.addAll(plugin.getExcludeMimeTypes());
     includeMimeTypes.addAll(plugin.getIncludeMimeTypes());
@@ -282,17 +309,24 @@ public class SiteSearchServiceImpl implements SiteSearchService {
     QueryTermHelper queryTermHelper = new QueryTermHelper();    
     String queryTerm = null;
     keyword = keyword.replaceAll("'","''");
-    if (keyword.contains("*") || keyword.contains("?") || keyword.contains("~")) {
-      queryTerm = queryTermHelper.contains(keyword).buildTerm();
+    if (isEnabledFuzzySearch) {
+      if (keyword.contains("*") || keyword.contains("?") || keyword.contains("~")) {
+        queryTerm = queryTermHelper.contains(keyword).buildTerm();
+      } else {
+        queryTerm = queryTermHelper.contains(keyword).allowFuzzySearch(fuzzySearchIndex).buildTerm();
+      }      
     } else {
-      queryTerm = queryTermHelper.contains(keyword).allowFuzzySearch().buildTerm();
-    }      
+    	keyword = keyword.replace("~", "\\~");
+    	keyword = keyword.replace("*", "\\*");
+    	keyword = keyword.replace("?", "\\?");
+      queryTerm = queryTermHelper.contains(keyword).buildTerm();
+    }
     String scope = queryCriteria.getFulltextSearchProperty();
-    if(QueryCriteria.ALL_PROPERTY_SCOPE.equals(scope) || scope == null) {
+    if (QueryCriteria.ALL_PROPERTY_SCOPE.equals(scope) || scope == null) {
       queryBuilder.contains(null, queryTerm, LOGICAL.NULL);
-    }else {
+    } else {
       queryBuilder.contains(scope, queryTerm, LOGICAL.NULL);
-    }                   
+    }
   }
 
   /**
