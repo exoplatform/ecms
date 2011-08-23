@@ -109,5 +109,43 @@ WCMUtils.prototype.showInContextHelp = function(id, isIn){
   }  
 };
 
+WCMUtils.prototype.showHideComponent = function(elemtClicked) {		
+		var nodeReference = eXo.core.DOMUtil.findAncestorByClass(elemtClicked,  "ShowHideContainer");    
+		var elemt = eXo.core.DOMUtil.findFirstDescendantByClass(nodeReference, "div", "ShowHideComponent") ;		
+		if(elemt.style.display == 'none') {		
+			elemtClicked.childNodes[0].style.display = 'none' ;
+			elemtClicked.childNodes[1].style.display = 'block' ;
+			elemt.style.display = 'block' ;
+			eXo.ecm.WCMUtils.setScrollBar();
+		} else {			
+			elemtClicked.childNodes[0].style.display = 'block' ;
+			elemtClicked.childNodes[1].style.display = 'none' ;
+			elemt.style.display = 'none' ;
+		}
+};
+
+WCMUtils.prototype.setScrollBar = function()  {     
+    try	{
+      var elementWorkingArea = document.getElementById('UIWorkingArea');
+      var parent = document.getElementById('TabContainerParent'); 
+      if(parent!=null)	{
+        var elements  = eXo.core.DOMUtil.findDescendantsByClass(parent,"div", "UITabContent"); 
+        if(elements!=null)	{      
+					for(i=0;i<elements.length;i++)
+					{    
+						var obj = elements[i];        
+						if(obj.style.display!="none")	{
+							var height = obj.offsetHeight;   							
+							if(height>430)	{							                  
+								obj.style.height=elementWorkingArea.offsetHeight-50+"px";
+							  obj.style.overflow="auto";
+							}
+						}
+					}
+				} 
+      }     
+    }
+    catch(err){}
+}; 
 
 eXo.ecm.WCMUtils = new WCMUtils();

@@ -1,0 +1,62 @@
+Index: apps/resources-wcm/src/main/webapp/javascript/eXo/wcm/backoffice/private/WCMUtils.js
+===================================================================
+--- apps/resources-wcm/src/main/webapp/javascript/eXo/wcm/backoffice/private/WCMUtils.js	(revision 70911)
++++ apps/resources-wcm/src/main/webapp/javascript/eXo/wcm/backoffice/private/WCMUtils.js	(working copy)
+@@ -109,5 +109,43 @@
+   }  
+ };
+ 
++WCMUtils.prototype.showHideComponent = function(elemtClicked) {		
++		var nodeReference = eXo.core.DOMUtil.findAncestorByClass(elemtClicked,  "ShowHideContainer");    
++		var elemt = eXo.core.DOMUtil.findFirstDescendantByClass(nodeReference, "div", "ShowHideComponent") ;		
++		if(elemt.style.display == 'none') {		
++			elemtClicked.childNodes[0].style.display = 'none' ;
++			elemtClicked.childNodes[1].style.display = 'block' ;
++			elemt.style.display = 'block' ;
++			eXo.ecm.WCMUtils.setScrollBar();
++		} else {			
++			elemtClicked.childNodes[0].style.display = 'block' ;
++			elemtClicked.childNodes[1].style.display = 'none' ;
++			elemt.style.display = 'none' ;
++		}
++};
+ 
++WCMUtils.prototype.setScrollBar = function()  {     
++    try	{
++      var elementWorkingArea = document.getElementById('UIWorkingArea');
++      var parent = document.getElementById('TabContainerParent'); 
++      if(parent!=null)	{
++        var elements  = eXo.core.DOMUtil.findDescendantsByClass(parent,"div", "UITabContent"); 
++        if(elements!=null)	{      
++					for(i=0;i<elements.length;i++)
++					{    
++						var obj = elements[i];        
++						if(obj.style.display!="none")	{
++							var height = obj.offsetHeight;   							
++							if(height>430)	{							                  
++								obj.style.height=elementWorkingArea.offsetHeight-50+"px";
++							  obj.style.overflow="auto";
++							}
++						}
++					}
++				} 
++      }     
++    }
++    catch(err){}
++}; 
++
+ eXo.ecm.WCMUtils = new WCMUtils();
+\ No newline at end of file
+Index: packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/dms-extension/dms/artifacts/templates/comment/view1.gtmpl
+===================================================================
+--- packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/dms-extension/dms/artifacts/templates/comment/view1.gtmpl	(revision 70911)
++++ packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/dms-extension/dms/artifacts/templates/comment/view1.gtmpl	(working copy)
+@@ -29,7 +29,7 @@
+ 		  			</div>
+ 		  			<div class="ShowComment">
+ 			  			<div style="float: left;"><%=commentsList.size()%> <%=_ctx.appRes("Comment.view.label.comments")%></div>
+-			  			<div style="float: right;" onclick="eXo.ecm.ECMUtils.showHideComponent(this)"><a><%=_ctx.appRes("Comment.view.label.show-comments")%></a><span style="display: none"><a><%=_ctx.appRes("Comment.view.label.hide-comments")%></a></span></div>
++			  			<div style="float: right;" onclick="eXo.ecm.WCMUtils.showHideComponent(this)"><a><%=_ctx.appRes("Comment.view.label.show-comments")%></a><span style="display: none"><a><%=_ctx.appRes("Comment.view.label.hide-comments")%></a></span></div>
+ 			  			<div style="clear: both;"><span></span></div>
+ 			  	  </div>
+ 			 		</div>
