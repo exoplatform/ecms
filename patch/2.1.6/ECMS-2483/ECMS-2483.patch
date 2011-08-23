@@ -1,0 +1,13 @@
+Index: core/connector/src/main/java/org/exoplatform/wcm/connector/fckeditor/DriverConnector.java
+===================================================================
+--- core/connector/src/main/java/org/exoplatform/wcm/connector/fckeditor/DriverConnector.java	(revision 72798)
++++ core/connector/src/main/java/org/exoplatform/wcm/connector/fckeditor/DriverConnector.java	(working copy)
+@@ -608,6 +608,8 @@
+ 
+ 	  		if(child.isNodeType("exo:symlink") && child.hasProperty("exo:uuid")) {
+ 	  			sourceNode = session.getNodeByUUID(child.getProperty("exo:uuid").getString());
++                        } else {
++				sourceNode = child;
+ 	  		}
+ 
+ 	  		checkNode = sourceNode != null ? sourceNode : child;
