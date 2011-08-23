@@ -134,6 +134,7 @@ public class MultiLanguageServiceImpl implements MultiLanguageService {
 
   private static final String MIX_REFERENCEABLE    = "mix:referenceable";
 
+  private static final String COUNTRY_VARIANT      = "_";
   /**
    * CmsService
    */
@@ -1076,6 +1077,18 @@ public class MultiLanguageServiceImpl implements MultiLanguageService {
         target = linkManager.getTarget(target);
       }
       return target;
+    }
+    if (language.contains(COUNTRY_VARIANT)) {
+      String pureLanguage = language.substring(0, language.indexOf(COUNTRY_VARIANT) ) ;
+      if(node.hasNode(LANGUAGES + "/"+ pureLanguage)) {
+        Node target = node.getNode(LANGUAGES + "/"+ pureLanguage) ;
+        if (target.isNodeType("exo:symlink")) {
+          LinkManager linkManager = (LinkManager) ExoContainerContext.getCurrentContainer()
+                                                                     .getComponentInstanceOfType(LinkManager.class);
+          target = linkManager.getTarget(target);
+        }
+        return target;
+      }
     }
     return null;
   }
