@@ -360,6 +360,14 @@ public class UIPropertyForm extends UIForm {
     public void execute(Event event) throws Exception {
       UIPropertyForm uiForm = (UIPropertyForm) event.getSource();
       int type = Integer.parseInt(uiForm.getUIFormSelectBox(FIELD_TYPE).getValue());
+      if (PropertyType.BOOLEAN == type) {
+        uiForm.getUIFormSelectBox(FIELD_MULTIPLE).setValue(FALSE);
+        uiForm.getUIFormSelectBox(FIELD_MULTIPLE).setEditable(false);
+        uiForm.getUIFormSelectBox(FIELD_MULTIPLE).setEnable(false);
+      } else {
+        uiForm.getUIFormSelectBox(FIELD_MULTIPLE).setEditable(true);
+        uiForm.getUIFormSelectBox(FIELD_MULTIPLE).setEnable(true);        
+      }
       uiForm.removeChildById(FIELD_VALUE);
       boolean isMultiple = Boolean.parseBoolean(uiForm.getUIFormSelectBox(FIELD_MULTIPLE).getValue());
       if(isMultiple) {
