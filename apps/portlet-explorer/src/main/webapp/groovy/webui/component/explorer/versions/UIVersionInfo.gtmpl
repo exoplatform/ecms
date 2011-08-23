@@ -11,13 +11,11 @@
 <%
   VersionNode rootNode = uicomponent.getRootVersionNode() ;  
   public void writeNodes(List nodes, String clazz, int level) {
-    int padding ;
     for(node in nodes) {
 		  if(clazz == "Even") clazz = "";
       else clazz = "Even" ;
-      padding = (level * 20) ;
 	    println """
-			  <div class="Node$clazz" style="padding-left: ${padding}px;">
+			  <div class="Node$clazz">
 			    <div class="NodeActionsContainer">
 			""";
 			if(!uicomponent.isBaseVersion(node)&&uicomponent.getCurrentNode().isNodeType("nt:file")) {						

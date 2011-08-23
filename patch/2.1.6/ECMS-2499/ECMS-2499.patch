@@ -1,0 +1,26 @@
+Index: apps/portlet-explorer/src/main/webapp/groovy/webui/component/explorer/versions/UIVersionInfo.gtmpl
+===================================================================
+--- apps/portlet-explorer/src/main/webapp/groovy/webui/component/explorer/versions/UIVersionInfo.gtmpl	(revision 71806)
++++ apps/portlet-explorer/src/main/webapp/groovy/webui/component/explorer/versions/UIVersionInfo.gtmpl	(working copy)
+@@ -11,13 +11,11 @@
+ <%
+   VersionNode rootNode = uicomponent.getRootVersionNode() ;  
+   public void writeNodes(List nodes, String clazz, int level) {
+-    int padding ;
+     for(node in nodes) {
+ 		  if(clazz == "Even") clazz = "";
+       else clazz = "Even" ;
+-      padding = (level * 20) ;
+ 	    println """
+-			  <div class="Node$clazz" style="padding-left: ${padding}px;">
++			  <div class="Node$clazz">
+ 			    <div class="NodeActionsContainer">
+ 			""";
+ 			if(!uicomponent.isBaseVersion(node)&&uicomponent.getCurrentNode().isNodeType("nt:file")) {						
+@@ -116,4 +114,4 @@
+ 	  	</tr>
+ 	  </table>
+   </div>
+-</div>
+\ No newline at end of file
++</div>
