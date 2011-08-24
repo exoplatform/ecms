@@ -66,7 +66,6 @@ public class UINodeTypeManager extends UIAbstractManager {
   public void setImportPopup() throws Exception {
     removeChildById(IMPORT_POPUP) ;
     UIPopupWindow uiPopup = addChild(UIPopupWindow.class, null, IMPORT_POPUP);
-    uiPopup.setShowMask(true);
     uiPopup.setWindowSize(500, 400);
     UINodeTypeImportPopup uiImportPopup =
       uiPopup.createUIComponent(UINodeTypeImportPopup.class, null, null) ;
