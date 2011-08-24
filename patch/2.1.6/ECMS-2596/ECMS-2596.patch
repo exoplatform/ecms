@@ -1,0 +1,67 @@
+Index: apps/portlet-presentation/src/main/java/org/exoplatform/wcm/webui/clv/UICLVFolderMode.java
+===================================================================
+--- apps/portlet-presentation/src/main/java/org/exoplatform/wcm/webui/clv/UICLVFolderMode.java	(revision 72795)
++++ apps/portlet-presentation/src/main/java/org/exoplatform/wcm/webui/clv/UICLVFolderMode.java	(working copy)
+@@ -107,8 +107,13 @@
+     if (orderBy == null) orderBy = "exo:title";
+     filters.put(WCMComposer.FILTER_ORDER_BY, orderBy);
+     filters.put(WCMComposer.FILTER_ORDER_TYPE, orderType);
+-    filters.put(WCMComposer.FILTER_LANGUAGE, Util.getPortalRequestContext().getLocale().getLanguage());
+     filters.put(WCMComposer.FILTER_LIMIT, itemsPerPage);
++    String filterLang = Util.getPortalRequestContext().getLocale().getLanguage();
++    String country = Util.getPortalRequestContext().getLocale().getCountry();
++		if (country != null && country.length() > 0) {
++		  filterLang += "_" + country;
++		}
++		filters.put(WCMComposer.FILTER_LANGUAGE, filterLang);
+     filters.put(WCMComposer.FILTER_VISIBILITY, ("true".equals(sharedCache))?WCMComposer.VISIBILITY_PUBLIC:WCMComposer.VISIBILITY_USER);
+ 
+     String folderPath = this.getAncestorOfType(UICLVPortlet.class).getFolderPath();
+Index: core/services/src/main/java/org/exoplatform/services/cms/i18n/impl/MultiLanguageServiceImpl.java
+===================================================================
+--- core/services/src/main/java/org/exoplatform/services/cms/i18n/impl/MultiLanguageServiceImpl.java	(revision 72795)
++++ core/services/src/main/java/org/exoplatform/services/cms/i18n/impl/MultiLanguageServiceImpl.java	(working copy)
+@@ -133,7 +133,8 @@
+   final static String TEMP_NODE = "temp" ;
+   
+   private static final String MIX_REFERENCEABLE = "mix:referenceable";
+-  
++  private static final String COUNTRY_VARIANT      = "_";
++
+   /**
+    * CmsService
+    */
+@@ -421,6 +422,7 @@
+     
+     setPropertyLanguage(node, newLanguageNode, inputs, isDefault, defaultLanguage, language);
+     if(isDefault && languagesNode.hasNode(language)) languagesNode.getNode(language).remove() ;
++
+   }
+ 
+   /**
+@@ -1032,6 +1034,18 @@
+     	}
+     	return target;
+     }
++    if (language.contains(COUNTRY_VARIANT)) {
++      String pureLanguage = language.substring(0, language.indexOf(COUNTRY_VARIANT) ) ;
++      if(node.hasNode(LANGUAGES + "/"+ pureLanguage)) {
++        Node target = node.getNode(LANGUAGES + "/"+ pureLanguage) ;
++        if (target.isNodeType("exo:symlink")) {
++          LinkManager linkManager = (LinkManager) ExoContainerContext.getCurrentContainer()
++                                                                     .getComponentInstanceOfType(LinkManager.class);
++          target = linkManager.getTarget(target);
++        }
++        return target;
++      }
++    }
+     return null;
+   }
+ 
+@@ -1070,4 +1084,4 @@
+     if(isDefault && languagesNode.hasNode(language)) languagesNode.getNode(language).remove() ;
+     languagesNode.save();
+   }
+-}
+\ No newline at end of file
++}
