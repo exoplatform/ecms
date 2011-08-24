@@ -289,11 +289,12 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
    * {@inheritDoc}
    */
   public DriveData getDriveByName(String name) throws Exception{
-    if (name.startsWith("/")) {
+    if (name.startsWith(".")) {
+      String groupName = name.replace(".", "/");
       DriveData drive = groupDriveTemplate_.clone();
-      drive.setHomePath("/Groups" + name);
+      drive.setHomePath("/Groups" + groupName);
       drive.setName(name);
-      drive.setPermissions("*:" + name);
+      drive.setPermissions("*:" + groupName);
       return drive;
     }
 
@@ -574,7 +575,8 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
       if (group.charAt(0)=='/') {
         DriveData drive = groupDriveTemplate_.clone();
         drive.setHomePath(groupPath + group);
-        drive.setName(group);
+        String driveName = group.replace("/", ".");
+        drive.setName(driveName);
         drive.setPermissions("*:"+group);
         if (!groupDrives.contains(drive))
           groupDrives.add(drive);
