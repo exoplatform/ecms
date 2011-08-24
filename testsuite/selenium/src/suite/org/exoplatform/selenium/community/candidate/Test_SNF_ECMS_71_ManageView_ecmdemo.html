@@ -208,7 +208,7 @@
 </tr>
 <tr>
 	<td>pause</td>
-	<td>10000</td>
+	<td>1000</td>
 	<td></td>
 </tr>
 <tr>
@@ -233,12 +233,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//img[contains(@onclick,&quot;LinhNhi&quot;) and @title=&quot;Edit&quot;]</td>
+	<td>//div[@id='UIViewList']/table/tbody/tr[6]/td[5]/div/img[2]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//img[contains(@onclick,&quot;LinhNhi&quot;) and @title=&quot;Edit&quot;]</td>
+	<td>//div[@id='UIViewList']/table/tbody/tr[6]/td[5]/div/img[2]</td>
 	<td></td>
 </tr>
 <tr>
@@ -303,7 +303,7 @@
 </tr>
 <tr>
 	<td>pause</td>
-	<td>10000</td>
+	<td>1000</td>
 	<td></td>
 </tr>
 <tr>
@@ -318,7 +318,7 @@
 </tr>
 <tr>
 	<td>pause</td>
-	<td>10000</td>
+	<td>1000</td>
 	<td></td>
 </tr>
 <tr>
@@ -338,22 +338,7 @@
 </tr>
 <tr>
 	<td>pause</td>
-	<td>10000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>link=3</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>link=3</td>
-	<td></td>
-</tr>
-<tr>
-	<td>pause</td>
-	<td>10000</td>
+	<td>1000</td>
 	<td></td>
 </tr>
 <tr>
@@ -363,12 +348,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//img[contains(@onclick,&quot;Managed+Sites&quot;) and @title=&quot;Edit&quot;]</td>
+	<td>//div[@id='UIDriveList']/table/tbody/tr[7]/td[7]/div/img[1]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//img[contains(@onclick,&quot;Managed+Sites&quot;) and @title=&quot;Edit&quot;]</td>
+	<td>//div[@id='UIDriveList']/table/tbody/tr[7]/td[7]/div/img[1]</td>
 	<td></td>
 </tr>
 <tr>
@@ -408,7 +393,7 @@
 </tr>
 <tr>
 	<td>pause</td>
-	<td>10000</td>
+	<td>1000</td>
 	<td></td>
 </tr>
 <tr>
@@ -417,8 +402,13 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>//a[@href='/ecmdemo/groups/:platform:web-contributors/siteExplorer']</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
-	<td>//a[@href='/ecmdemo/private/acme/siteExplorer']</td>
+	<td>//a[@href='/ecmdemo/groups/:platform:web-contributors/siteExplorer']</td>
 	<td></td>
 </tr>
 <tr>
@@ -503,7 +493,7 @@
 </tr>
 <tr>
 	<td>pause</td>
-	<td>10000</td>
+	<td>1000</td>
 	<td></td>
 </tr>
 <tr>
@@ -542,8 +532,13 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>//a[@href='/ecmdemo/groups/:platform:web-contributors/wcmAdmin']</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
-	<td>//a[@href='/ecmdemo/private/acme/wcmAdmin']</td>
+	<td>//a[@href='/ecmdemo/groups/:platform:web-contributors/wcmAdmin']</td>
 	<td></td>
 </tr>
 <tr>
@@ -568,32 +563,22 @@
 </tr>
 <tr>
 	<td>pause</td>
-	<td>10000</td>
+	<td>1000</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=3</td>
+	<td>//div[@id='UIDriveList']/table/tbody/tr[7]/td[7]/div/img[1]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>link=3</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>//img[contains(@onclick,&quot;Managed+Sites&quot;) and @title=&quot;Edit&quot;]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>//img[contains(@onclick,&quot;Managed+Sites&quot;) and @title=&quot;Edit&quot;]</td>
+	<td>//div[@id='UIDriveList']/table/tbody/tr[7]/td[7]/div/img[1]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>pause</td>
-	<td>10000</td>
+	<td>1000</td>
 	<td></td>
 </tr>
 <tr>
@@ -614,6 +599,11 @@
 <tr>
 	<td>click</td>
 	<td>LinhNhi</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Save</td>
 	<td></td>
 </tr>
 <tr>
@@ -643,12 +633,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//img[contains(@onclick,&quot;LinhNhi&quot;) and @title=&quot;Delete&quot;]</td>
+	<td>//div[@id='UIViewList']/table/tbody/tr[6]/td[5]/div/img[3]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//img[contains(@onclick,&quot;LinhNhi&quot;) and @title=&quot;Delete&quot;]</td>
+	<td>//div[@id='UIViewList']/table/tbody/tr[6]/td[5]/div/img[3]</td>
 	<td></td>
 </tr>
 <tr>

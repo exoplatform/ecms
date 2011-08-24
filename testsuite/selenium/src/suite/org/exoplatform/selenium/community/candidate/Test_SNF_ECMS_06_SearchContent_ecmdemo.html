@@ -203,27 +203,17 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=Save</td>
+	<td>link=Save &amp; Close</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>link=Save</td>
+	<td>link=Save &amp; Close</td>
 	<td></td>
 </tr>
 <tr>
 	<td>pause</td>
 	<td>1000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>link=Close</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>link=Close</td>
 	<td></td>
 </tr>
 <tr>
@@ -273,12 +263,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=Content Explorer</td>
+	<td>//a[@href='/ecmdemo/groups/:platform:web-contributors/siteExplorer']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Content Explorer</td>
+	<td>//a[@href='/ecmdemo/groups/:platform:web-contributors/siteExplorer']</td>
 	<td></td>
 </tr>
 <tr>
@@ -377,8 +367,18 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>link=Overview</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
 	<td>link=Overview</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>1000</td>
 	<td></td>
 </tr>
 <tr>
@@ -453,12 +453,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//a[@href='/ecmdemo/private/acme/siteExplorer']</td>
+	<td>//a[@href='/ecmdemo/groups/:platform:web-contributors/siteExplorer']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//a[@href='/ecmdemo/private/acme/siteExplorer']</td>
+	<td>//a[@href='/ecmdemo/groups/:platform:web-contributors/siteExplorer']</td>
 	<td></td>
 </tr>
 <tr>

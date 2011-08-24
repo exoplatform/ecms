@@ -78,57 +78,22 @@
 </tr>
 <tr>
 	<td>echo</td>
-	<td>--Open Private driver</td>
+	<td>--Open Sites Management driver</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=Private</td>
+	<td>link=Sites Management</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>link=Private</td>
-	<td></td>
-</tr>
-<tr>
-	<td>echo</td>
-	<td>--&nbsp;&nbsp;Go to Admin View</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>//a[@title='Admin View']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>//a[@title='Admin View']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>echo</td>
-	<td>--&nbsp;&nbsp;Go to Action tab</td>
+	<td>link=Sites Management</td>
 	<td></td>
 </tr>
 <tr>
 	<td>pause</td>
-	<td>10000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>link=Actions</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>link=Actions</td>
-	<td></td>
-</tr>
-<tr>
-	<td>pause</td>
-	<td>10000</td>
+	<td>1000</td>
 	<td></td>
 </tr>
 <tr>
@@ -148,7 +113,7 @@
 </tr>
 <tr>
 	<td>pause</td>
-	<td>10000</td>
+	<td>1000</td>
 	<td></td>
 </tr>
 <tr>
@@ -162,13 +127,23 @@
 	<td>Content Folder1</td>
 </tr>
 <tr>
+	<td>type</td>
+	<td>title</td>
+	<td>Content Folder1</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Save</td>
+	<td></td>
+</tr>
+<tr>
 	<td>click</td>
 	<td>link=Save</td>
 	<td></td>
 </tr>
 <tr>
 	<td>pause</td>
-	<td>10000</td>
+	<td>1000</td>
 	<td></td>
 </tr>
 <tr>
@@ -197,13 +172,23 @@
 	<td>Content Folder2</td>
 </tr>
 <tr>
+	<td>type</td>
+	<td>title</td>
+	<td>Content Folder2</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Save</td>
+	<td></td>
+</tr>
+<tr>
 	<td>click</td>
 	<td>link=Save</td>
 	<td></td>
 </tr>
 <tr>
 	<td>pause</td>
-	<td>10000</td>
+	<td>1000</td>
 	<td></td>
 </tr>
 <tr>
@@ -230,6 +215,16 @@
 	<td>type</td>
 	<td>name</td>
 	<td>Content Folder3</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>title</td>
+	<td>Content Folder3</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Save</td>
+	<td></td>
 </tr>
 <tr>
 	<td>click</td>
@@ -488,7 +483,7 @@
 </tr>
 <tr>
 	<td>pause</td>
-	<td>10000</td>
+	<td>1000</td>
 	<td></td>
 </tr>
 <tr>

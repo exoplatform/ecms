@@ -83,57 +83,22 @@
 </tr>
 <tr>
 	<td>echo</td>
-	<td>--Open Private driver</td>
+	<td>--Open Sites Management driver</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=Private</td>
+	<td>link=Sites Management</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>link=Private</td>
-	<td></td>
-</tr>
-<tr>
-	<td>echo</td>
-	<td>--&nbsp;&nbsp;Go to Admin View</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>//a[@title='Admin View']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>//a[@title='Admin View']</td>
-	<td></td>
-</tr>
-<tr>
-	<td>echo</td>
-	<td>-- Go to Action tab</td>
+	<td>link=Sites Management</td>
 	<td></td>
 </tr>
 <tr>
 	<td>pause</td>
-	<td>5000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>//div[3]/div/div/div/div/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>//div[3]/div/div/div/div/a</td>
-	<td></td>
-</tr>
-<tr>
-	<td>pause</td>
-	<td>5000</td>
+	<td>1000</td>
 	<td></td>
 </tr>
 <tr>
@@ -160,6 +125,16 @@
 	<td>type</td>
 	<td>name</td>
 	<td>AA</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>title</td>
+	<td>AA</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Save</td>
+	<td></td>
 </tr>
 <tr>
 	<td>click</td>
@@ -193,7 +168,7 @@
 </tr>
 <tr>
 	<td>pause</td>
-	<td>5000</td>
+	<td>1000</td>
 	<td></td>
 </tr>
 <tr>
@@ -203,7 +178,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//a[@href='/ecmdemo/private/acme/wcmAdmin']</td>
+	<td>//a[@href='/ecmdemo/groups/:platform:web-contributors/wcmAdmin']</td>
 	<td></td>
 </tr>
 <tr>
@@ -227,18 +202,23 @@
 	<td></td>
 </tr>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>link=Manage UnLocks</td>
+	<td></td>
+</tr>
+<tr>
 	<td>click</td>
 	<td>link=Manage UnLocks</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForTextPresent</td>
-	<td>/Users/root/Private/AA</td>
+	<td>/sites content/live/aa</td>
 	<td></td>
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>/Users/root/Private/AA</td>
+	<td>/sites content/live/aa</td>
 	<td></td>
 </tr>
 <tr>
@@ -378,7 +358,7 @@
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//a[@href='/ecmdemo/private/acme/siteExplorer']</td>
+	<td>//a[@href='/ecmdemo/groups/:platform:web-contributors/siteExplorer']</td>
 	<td></td>
 </tr>
 <tr>

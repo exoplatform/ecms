@@ -73,32 +73,117 @@
 </tr>
 <tr>
 	<td>echo</td>
-	<td>--Open Private driver</td>
+	<td>--Open Public driver</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=Private</td>
+	<td>link=Public</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>link=Private</td>
+	<td>link=Public</td>
 	<td></td>
 </tr>
 <tr>
 	<td>echo</td>
-	<td>--&nbsp;&nbsp;Select Admin View</td>
+	<td>--Open Actions tab --</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//a[@title='Admin View']</td>
+	<td>link=Actions</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//a[@title='Admin View']</td>
+	<td>link=Actions</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>--Add document--</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Add Document</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Add Document</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Article</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Article</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>title</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>title</td>
+	<td>Test_SNF_ECMS_55</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//td[@id='cke_contents_summary']/iframe</td>
+	<td></td>
+</tr>
+<tr>
+	<td>selectFrame</td>
+	<td>//td[@id='cke_contents_summary']/iframe</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>//html/body</td>
+	<td>Test_SNF_ECMS_55</td>
+</tr>
+<tr>
+	<td>selectFrame</td>
+	<td>relative=top</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//td[@id='cke_contents_content']/iframe</td>
+	<td></td>
+</tr>
+<tr>
+	<td>selectFrame</td>
+	<td>//td[@id='cke_contents_content']/iframe</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>//html/body</td>
+	<td>Test_SNF_ECMS_55</td>
+</tr>
+<tr>
+	<td>selectFrame</td>
+	<td>relative=top</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Save &amp; Close</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Save &amp; Close</td>
 	<td></td>
 </tr>
 <tr>
@@ -114,21 +199,6 @@
 <tr>
 	<td>click</td>
 	<td>link=Info</td>
-	<td></td>
-</tr>
-<tr>
-	<td>echo</td>
-	<td>--&nbsp;&nbsp;Pictures</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>link=Pictures</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>link=Pictures</td>
 	<td></td>
 </tr>
 <tr>
@@ -243,7 +313,7 @@
 </tr>
 <tr>
 	<td>pause</td>
-	<td>10000</td>
+	<td>1000</td>
 	<td></td>
 </tr>
 <tr>
@@ -268,12 +338,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//img[contains(@onclick, &quot;users&quot;) and @title=&quot;Edit&quot;]</td>
+	<td>//div[@id='PermissionInfo']/table/tbody/tr[2]/td[6]/div/img[1]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//img[contains(@onclick, &quot;users&quot;) and @title=&quot;Edit&quot;]</td>
+	<td>//div[@id='PermissionInfo']/table/tbody/tr[2]/td[6]/div/img[1]</td>
 	<td></td>
 </tr>
 <tr>
@@ -298,7 +368,7 @@
 </tr>
 <tr>
 	<td>pause</td>
-	<td>10000</td>
+	<td>1000</td>
 	<td></td>
 </tr>
 <tr>
@@ -308,12 +378,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>//img[contains(@onclick, &quot;users&quot;) and @title=&quot;Remove permission&quot;]</td>
+	<td>//div[@id='PermissionInfo']/table/tbody/tr[2]/td[6]/div/img[2]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>//img[contains(@onclick, &quot;users&quot;) and @title=&quot;Remove permission&quot;]</td>
+	<td>//div[@id='PermissionInfo']/table/tbody/tr[2]/td[6]/div/img[2]</td>
 	<td></td>
 </tr>
 <tr>
@@ -333,7 +403,62 @@
 </tr>
 <tr>
 	<td>pause</td>
-	<td>10000</td>
+	<td>1000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>--Delete document--</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Test_SNF_ECMS_55</td>
+	<td></td>
+</tr>
+<tr>
+	<td>mouseDownRight</td>
+	<td>link=Test_SNF_ECMS_55</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Delete</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Delete</td>
+	<td></td>
+</tr>
+<tr>
+	<td>echo</td>
+	<td>-- comfirm deleting</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id='UIPopupWindow']//a[text()='OK']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//div[@id='UIPopupWindow']//a[text()='OK']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>pause</td>
+	<td>1000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextNotPresent</td>
+	<td>link=Test_SNF_ECMS_55</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextNotPresent</td>
+	<td>link=Test_SNF_ECMS_55</td>
 	<td></td>
 </tr>
 <tr>
