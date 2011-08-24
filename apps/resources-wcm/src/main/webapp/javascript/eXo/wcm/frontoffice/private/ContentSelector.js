@@ -584,7 +584,7 @@ EcmContentSelector.prototype.listMutilFiles = function(list) {
 		var node = list[i].getAttribute("name");
 		var newRow = tblRWS.insertRow(i+1);
 		newRow.className = clazz;
-		newRow.insertCell(0).innerHTML = '<a class="Item default16x16Icon '+clazzItem+'" url="'+url+'" linkTarget ="' + linkTarget + '" path="'+path+'" nodeType="'+nodeType+'" onclick="eXo.ecm.ECS.addFile2ListContent(this);">'+node+'</a>';
+		newRow.insertCell(0).innerHTML = '<a class="Item default16x16Icon '+clazzItem+'" url="'+url+'" linkTarget ="' + linkTarget + '" path="'+path+'" nodeType="'+nodeType+'" onclick="eXo.ecm.ECS.addFile2ListContent(this);">'+decodeURIComponent(node)+'</a>';
 				
 	}
 	
@@ -786,7 +786,7 @@ EcmContentSelector.prototype.insertMultiContent = function(operation, currentpat
         if (opEndIndex <0 ) 
           opEndIndex = action.length;
         action = action.substring(0, opIndex+3) + operation + action.substring(opEndIndex, action.length-2);
-        action = action + "&driverName=" + this.driverName + "&currentPath=" + currentpath + "')";
+        action = action + "&driverName=" + this.driverName + "&currentPath=" + encodeURIComponent(currentpath) + "')";
       }
     }
 		eval(action);
@@ -813,7 +813,7 @@ EcmContentSelector.prototype.addFile2ListContent = function(objNode) {
 	var	clazzItem = objNode.className;
 	var newRow = tblListFilesContent.insertRow(tblListFilesContent.children[0].children.length);
 	newRow.className = "Item";
-	newRow.insertCell(0).innerHTML = '<a class="Item" url="'+url+'" linkTarget ="' + linkTarget +'" path="'+decodeURIComponent(path)+'" nodeType="'+nodeType+'">'+decodeURIComponent(path)+'</a>';
+	newRow.insertCell(0).innerHTML = '<a class="Item" url="'+url+'" linkTarget ="' + linkTarget +'" path="'+path+'" nodeType="'+nodeType+'">'+decodeURIComponent(path)+'</a>';
 	newRow.insertCell(1).innerHTML = '<div class="DeleteIcon" onclick="eXo.ecm.ECS.removeContent(this);"><span></span></div>';
 	this.insertMultiContent("SaveTemporary", path);	
 };
@@ -844,7 +844,7 @@ EcmContentSelector.prototype.loadListContent = function(strArray, strTargetArray
 			newRow.className = clazz;
 			var strTmpArr = arrContent[i].split('/');
 			var nodeName = strTmpArr[strTmpArr.length-1];
-			newRow.insertCell(0).innerHTML = '<a class="Item" linkTarget ="'+ target+ '" path="'+path+'">'+nodeName+'</a>';
+			newRow.insertCell(0).innerHTML = '<a class="Item" linkTarget ="'+ target+ '" path="'+path+'">'+decodeURIComponent(nodeName)+'</a>';
 			newRow.insertCell(1).innerHTML = '<div  class="DeleteIcon" onclick="eXo.ecm.ECS.removeContent(this);"><span></span></div>';
 		}
 	}

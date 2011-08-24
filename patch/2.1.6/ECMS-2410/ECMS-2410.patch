@@ -1,0 +1,69 @@
+Index: apps/portlet-presentation/src/main/webapp/groovy/ContentListViewer/UICLVConfig.gtmpl
+===================================================================
+--- apps/portlet-presentation/src/main/webapp/groovy/ContentListViewer/UICLVConfig.gtmpl	(revision 72685)
++++ apps/portlet-presentation/src/main/webapp/groovy/ContentListViewer/UICLVConfig.gtmpl	(working copy)
+@@ -1,5 +1,6 @@
+ <%
+   import org.exoplatform.wcm.webui.Utils;
++  import java.net.URLDecoder;
+   
+   def rcontext = _ctx.getRequestContext();
+   String portletId = Utils.getRealPortletId(rcontext);
+@@ -111,7 +112,7 @@
+                         String delLink = uicomponent.event("Delete", "0");
+                         %>
+                           <tr class="EvenRow">
+-                            <td><%= contents.get(0) %></td>
++                            <td><%= URLDecoder.decode(contents.get(0)) %></td>
+                             <td><span></span></td>
+                             <td><span></span></td>
+                           </tr>
+@@ -129,7 +130,7 @@
+                           String downLink = uicomponent.event("Decrease", Integer.toString(i));  
+                           %>
+                             <tr class="$rowClass">
+-                              <td>$content</td>
++                              <td><%= URLDecoder.decode(content) %></td>
+                               <td width="25px"><div class="DownRowIcon" onclick="$downLink"><span></span></div></td>
+                               <td width="25px"><div class="UpRowIcon" onclick="$upLink"><span></span></div></td>
+                             </tr>
+Index: apps/resources-wcm/src/main/webapp/javascript/eXo/wcm/frontoffice/private/ContentSelector.js
+===================================================================
+--- apps/resources-wcm/src/main/webapp/javascript/eXo/wcm/frontoffice/private/ContentSelector.js	(revision 72685)
++++ apps/resources-wcm/src/main/webapp/javascript/eXo/wcm/frontoffice/private/ContentSelector.js	(working copy)
+@@ -584,7 +584,7 @@
+ 		var node = list[i].getAttribute("name");
+ 		var newRow = tblRWS.insertRow(i+1);
+ 		newRow.className = clazz;
+-		newRow.insertCell(0).innerHTML = '<a class="Item default16x16Icon '+clazzItem+'" url="'+url+'" linkTarget ="' + linkTarget + '" path="'+path+'" nodeType="'+nodeType+'" onclick="eXo.ecm.ECS.addFile2ListContent(this);">'+node+'</a>';
++		newRow.insertCell(0).innerHTML = '<a class="Item default16x16Icon '+clazzItem+'" url="'+url+'" linkTarget ="' + linkTarget + '" path="'+path+'" nodeType="'+nodeType+'" onclick="eXo.ecm.ECS.addFile2ListContent(this);">'+decodeURIComponent(node)+'</a>';
+ 				
+ 	}
+ 	
+@@ -786,7 +786,7 @@
+         if (opEndIndex <0 ) 
+           opEndIndex = action.length;
+         action = action.substring(0, opIndex+3) + operation + action.substring(opEndIndex, action.length-2);
+-        action = action + "&driverName=" + this.driverName + "&currentPath=" + currentpath + "')";
++        action = action + "&driverName=" + this.driverName + "&currentPath=" + encodeURIComponent(currentpath) + "')";
+       }
+     }
+ 		eval(action);
+@@ -813,7 +813,7 @@
+ 	var	clazzItem = objNode.className;
+ 	var newRow = tblListFilesContent.insertRow(tblListFilesContent.children[0].children.length);
+ 	newRow.className = "Item";
+-	newRow.insertCell(0).innerHTML = '<a class="Item" url="'+url+'" linkTarget ="' + linkTarget +'" path="'+decodeURIComponent(path)+'" nodeType="'+nodeType+'">'+decodeURIComponent(path)+'</a>';
++	newRow.insertCell(0).innerHTML = '<a class="Item" url="'+url+'" linkTarget ="' + linkTarget +'" path="'+path+'" nodeType="'+nodeType+'">'+decodeURIComponent(path)+'</a>';
+ 	newRow.insertCell(1).innerHTML = '<div class="DeleteIcon" onclick="eXo.ecm.ECS.removeContent(this);"><span></span></div>';
+ 	this.insertMultiContent("SaveTemporary", path);	
+ };
+@@ -844,7 +844,7 @@
+ 			newRow.className = clazz;
+ 			var strTmpArr = arrContent[i].split('/');
+ 			var nodeName = strTmpArr[strTmpArr.length-1];
+-			newRow.insertCell(0).innerHTML = '<a class="Item" linkTarget ="'+ target+ '" path="'+path+'">'+nodeName+'</a>';
++			newRow.insertCell(0).innerHTML = '<a class="Item" linkTarget ="'+ target+ '" path="'+path+'">'+decodeURIComponent(nodeName)+'</a>';
+ 			newRow.insertCell(1).innerHTML = '<div  class="DeleteIcon" onclick="eXo.ecm.ECS.removeContent(this);"><span></span></div>';
+ 		}
+ 	}
