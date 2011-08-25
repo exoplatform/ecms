@@ -38,6 +38,7 @@ import org.apache.commons.lang.StringUtils;
 import org.exoplatform.container.component.ComponentPlugin;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.container.xml.ObjectParameter;
+import org.exoplatform.container.xml.ValueParam;
 import org.exoplatform.services.cms.BasePath;
 import org.exoplatform.services.cms.impl.DMSConfiguration;
 import org.exoplatform.services.cms.impl.DMSRepositoryConfiguration;
@@ -81,6 +82,7 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
   
   private Map<String, String[]> taxonomyTreeDefaultUserPermissions_;
   private static final Log LOG  = ExoLogger.getLogger(TaxonomyServiceImpl.class);
+  private static String categoryNameLength_ = null;
 
   /**
    * Constructor method
@@ -99,6 +101,11 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
     repositoryService_ = repoService;
     linkManager_ = linkManager;
     dmsConfiguration_ = dmsConfiguration;
+    ValueParam valueParam = initParams.getValueParam("categoryNameLength");
+    if(valueParam!=null)
+    	categoryNameLength_ = valueParam.getValue();
+    else
+    	categoryNameLength_ = "150";
     ObjectParameter objectParam = initParams.getObjectParam("defaultPermission.configuration");
     if (objectParam != null)
     	taxonomyTreeDefaultUserPermissions_ 
@@ -582,6 +589,9 @@ public class TaxonomyServiceImpl implements TaxonomyService, Startable {
     return providerService_.getSessionProvider(null).getSession(workspaceName, manageRepository);
   }
 
+  public String getCategoryNameLength() {
+	  	return categoryNameLength_;
+  }
   /**
    * {@inheritDoc}
    */

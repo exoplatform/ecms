@@ -1,0 +1,178 @@
+Index: apps/portlet-administration/src/main/webapp/WEB-INF/classes/locale/portlet/administration/ECMAdminPortlet_nl.xml
+===================================================================
+--- apps/portlet-administration/src/main/webapp/WEB-INF/classes/locale/portlet/administration/ECMAdminPortlet_nl.xml	(revision 72918)
++++ apps/portlet-administration/src/main/webapp/WEB-INF/classes/locale/portlet/administration/ECMAdminPortlet_nl.xml	(working copy)
+@@ -1411,7 +1411,7 @@
+     <msg>
+ 			<name-null>Naam is null</name-null>
+ 			<name-invalid>Naam is ongeldig</name-invalid>
+-			<name-too-long>Naam is te lang</name-too-long>
++			<name-too-long>Taxonomie naam dient minder dan '{0}' tekens</name-too-long>
+ 			<exist>Naam bestaat al</exist>
+ 		</msg>
+ 	</UITaxonomyTreeCreateChildForm>
+Index: apps/portlet-administration/src/main/webapp/WEB-INF/classes/locale/portlet/administration/ECMAdminPortlet_vi.xml
+===================================================================
+--- apps/portlet-administration/src/main/webapp/WEB-INF/classes/locale/portlet/administration/ECMAdminPortlet_vi.xml	(revision 72918)
++++ apps/portlet-administration/src/main/webapp/WEB-INF/classes/locale/portlet/administration/ECMAdminPortlet_vi.xml	(working copy)
+@@ -1411,7 +1411,7 @@
+     <msg>
+ 			<name-null>Tên danh mục trống</name-null>
+ 			<name-invalid>Tên danh mục không hợp lệ</name-invalid>
+-			<name-too-long>Tên danh mục quá dài</name-too-long>
++			<name-too-long>Tên Taxonomy phải nhỏ hơn hoặc bằng '{0}' kí tự</name-too-long>
+ 			<exist>Tên danh mục đã tồn tại</exist>
+ 		</msg>
+ 	</UITaxonomyTreeCreateChildForm>
+Index: apps/portlet-administration/src/main/webapp/WEB-INF/classes/locale/portlet/administration/ECMAdminPortlet_en.xml
+===================================================================
+--- apps/portlet-administration/src/main/webapp/WEB-INF/classes/locale/portlet/administration/ECMAdminPortlet_en.xml	(revision 72918)
++++ apps/portlet-administration/src/main/webapp/WEB-INF/classes/locale/portlet/administration/ECMAdminPortlet_en.xml	(working copy)
+@@ -1409,7 +1409,7 @@
+     <msg>
+ 			<name-null>Name is null</name-null>
+ 			<name-invalid>Name is invalid</name-invalid>
+-			<name-too-long>Name is too long</name-too-long>
++			<name-too-long>Category name must have less than '{0}' characters.</name-too-long>
+ 			<exist>Name already exists</exist>
+ 		</msg>
+ 	</UITaxonomyTreeCreateChildForm>
+Index: apps/portlet-administration/src/main/webapp/WEB-INF/classes/locale/portlet/administration/ECMAdminPortlet_fr.xml
+===================================================================
+--- apps/portlet-administration/src/main/webapp/WEB-INF/classes/locale/portlet/administration/ECMAdminPortlet_fr.xml	(revision 72918)
++++ apps/portlet-administration/src/main/webapp/WEB-INF/classes/locale/portlet/administration/ECMAdminPortlet_fr.xml	(working copy)
+@@ -1414,7 +1414,7 @@
+     <msg>
+ 			<name-null>Le nom est vide</name-null>
+ 			<name-invalid>Le nom est invalide</name-invalid>
+-			<name-too-long>Le nom est trop long</name-too-long>
++			<name-too-long>Le nom de la catégorie ne peut excéder '{0}' caractères</name-too-long>
+ 			<exist>Le nom existe déjà</exist>
+ 		</msg>
+ 	</UITaxonomyTreeCreateChildForm>
+Index: apps/portlet-administration/src/main/webapp/WEB-INF/classes/locale/portlet/administration/ECMAdminPortlet_de.xml
+===================================================================
+--- apps/portlet-administration/src/main/webapp/WEB-INF/classes/locale/portlet/administration/ECMAdminPortlet_de.xml	(revision 72918)
++++ apps/portlet-administration/src/main/webapp/WEB-INF/classes/locale/portlet/administration/ECMAdminPortlet_de.xml	(working copy)
+@@ -1408,7 +1408,7 @@
+     <msg>
+ 			<name-null>Der Name ist null</name-null>
+ 			<name-invalid>Name ist ungültig</name-invalid>
+-			<name-too-long>Name ist zu lang</name-too-long>
++			<name-too-long>Taxonomie Name muss weniger als '{0}' Buchstaben beinhalten.</name-too-long>
+ 			<exist>Name ist bereits vorhanden</exist>
+ 		</msg>
+ 	</UITaxonomyTreeCreateChildForm>
+Index: packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/dms-extension/dms/dms-taxonomies-configuration.xml
+===================================================================
+--- packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/dms-extension/dms/dms-taxonomies-configuration.xml	(revision 72918)
++++ packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/dms-extension/dms/dms-taxonomies-configuration.xml	(working copy)
+@@ -9,6 +9,10 @@
+ 	  <key>org.exoplatform.services.cms.taxonomy.TaxonomyService</key>  
+ 	  <type>org.exoplatform.services.cms.taxonomy.impl.TaxonomyServiceImpl</type>
+ 	  <init-params>
++	  <value-param>
++	      <name>categoryNameLength</name>        
++	      <value>150</value>				
++	  </value-param>	  
+       <object-param>   
+         <name>defaultPermission.configuration</name>   
+ 	        <object type="org.exoplatform.services.cms.taxonomy.impl.TaxonomyTreeDefaultUserPermission">
+Index: core/services/src/main/java/org/exoplatform/services/cms/taxonomy/TaxonomyService.java
+===================================================================
+--- core/services/src/main/java/org/exoplatform/services/cms/taxonomy/TaxonomyService.java	(revision 72918)
++++ core/services/src/main/java/org/exoplatform/services/cms/taxonomy/TaxonomyService.java	(working copy)
+@@ -283,6 +283,12 @@
+       throws RepositoryException;  
+   
+   public Map<String, String[]> getTaxonomyTreeDefaultUserPermission();
++  
++  /**
++   * Get limited length of category name
++   *   
++   */
++  public String getCategoryNameLength();
+ 
+   /**
+    * Add a new taxonomy plugin to the service
+Index: core/services/src/main/java/org/exoplatform/services/cms/taxonomy/impl/TaxonomyServiceImpl.java
+===================================================================
+--- core/services/src/main/java/org/exoplatform/services/cms/taxonomy/impl/TaxonomyServiceImpl.java	(revision 72918)
++++ core/services/src/main/java/org/exoplatform/services/cms/taxonomy/impl/TaxonomyServiceImpl.java	(working copy)
+@@ -38,6 +38,7 @@
+ import org.exoplatform.container.component.ComponentPlugin;
+ import org.exoplatform.container.xml.InitParams;
+ import org.exoplatform.container.xml.ObjectParameter;
++import org.exoplatform.container.xml.ValueParam;
+ import org.exoplatform.services.cms.BasePath;
+ import org.exoplatform.services.cms.impl.DMSConfiguration;
+ import org.exoplatform.services.cms.impl.DMSRepositoryConfiguration;
+@@ -81,6 +82,7 @@
+   
+   private Map<String, String[]> taxonomyTreeDefaultUserPermissions_;
+   private static final Log LOG  = ExoLogger.getLogger(TaxonomyServiceImpl.class);
++  private static String categoryNameLength_ = null;
+ 
+   /**
+    * Constructor method
+@@ -99,6 +101,11 @@
+     repositoryService_ = repoService;
+     linkManager_ = linkManager;
+     dmsConfiguration_ = dmsConfiguration;
++    ValueParam valueParam = initParams.getValueParam("categoryNameLength");
++    if(valueParam!=null)
++    	categoryNameLength_ = valueParam.getValue();
++    else
++    	categoryNameLength_ = "150";
+     ObjectParameter objectParam = initParams.getObjectParam("defaultPermission.configuration");
+     if (objectParam != null)
+     	taxonomyTreeDefaultUserPermissions_ 
+@@ -582,6 +589,9 @@
+     return providerService_.getSessionProvider(null).getSession(workspaceName, manageRepository);
+   }
+ 
++  public String getCategoryNameLength() {
++	  	return categoryNameLength_;
++  }
+   /**
+    * {@inheritDoc}
+    */
+Index: core/webui-administration/src/main/java/org/exoplatform/ecm/webui/component/admin/taxonomy/UITaxonomyTreeCreateChildForm.java
+===================================================================
+--- core/webui-administration/src/main/java/org/exoplatform/ecm/webui/component/admin/taxonomy/UITaxonomyTreeCreateChildForm.java	(revision 72918)
++++ core/webui-administration/src/main/java/org/exoplatform/ecm/webui/component/admin/taxonomy/UITaxonomyTreeCreateChildForm.java	(working copy)
+@@ -93,17 +93,17 @@
+             null, ApplicationMessage.WARNING));
+         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+         return;
+-      }
+-
+-      if (name.length() > 30) {
+-        uiApp.addMessage(new ApplicationMessage("UITaxonomyTreeCreateChildForm.msg.name-too-long",
+-            null, ApplicationMessage.WARNING));
+-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+-        return;
+-      }
++      }     
+       
+       try {
+         TaxonomyService taxonomyService = uiForm.getApplicationComponent(TaxonomyService.class);
++        if (name.length() > Integer.parseInt(taxonomyService.getCategoryNameLength())) {
++        	Object[] args = { taxonomyService.getCategoryNameLength() };
++          uiApp.addMessage(new ApplicationMessage("UITaxonomyTreeCreateChildForm.msg.name-too-long",
++          		args, ApplicationMessage.WARNING));
++          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
++          return;
++        }
+         String parentPath = uiForm.getUIFormInputInfo(FIELD_PARENT).getValue();
+         taxonomyService.addTaxonomyNode(taxoTreeData.getRepository(), taxoTreeData
+             .getTaxoTreeWorkspace(), parentPath, name, Util.getPortalRequestContext().getRemoteUser());
+Index: docs/refguide/src/main/resources/wikbook/en/en-US/pages/services/taxonomy.wiki
+===================================================================
+--- docs/refguide/src/main/resources/wikbook/en/en-US/pages/services/taxonomy.wiki	(revision 72918)
++++ docs/refguide/src/main/resources/wikbook/en/en-US/pages/services/taxonomy.wiki	(working copy)
+@@ -27,3 +27,4 @@
+ | *getTaxonomyTreeDefaultUserPermission* | {{Map<String, String\[\]>}} {example}{example} | {{getTaxonomyTreeDefaultUserPermission();}} {example}{example}{example}{example} | get default permission for the user in taxonomy tree |
+ | *addTaxonomyPlugin* | {{void}}| {{addTaxonomyPlugin(ComponentPlugin plugin); }}{example}{example}  {example}{example} | Add a new taxonomy plugin to the service {example}{example}  @param plugin: The plugin to add |
+ | *init* | {{void}} {example}{example}| {{init(String repository) throws Exception; }}| Initialize all taxonomy plugins that have been already configured in .xml  files {example}{example} @param repository: The name of repository {example}{example}     @see TaxonomyPlugin {example}{example}     @throws Exception |
++| *getCategoryNameLength* | {{String}} | {{getCategoryNameLength();}} | Gets the limited length of the category name. |

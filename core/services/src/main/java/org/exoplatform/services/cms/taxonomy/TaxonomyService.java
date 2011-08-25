@@ -283,6 +283,12 @@ public interface TaxonomyService {
       throws RepositoryException;  
   
   public Map<String, String[]> getTaxonomyTreeDefaultUserPermission();
+  
+  /**
+   * Get limited length of category name
+   *   
+   */
+  public String getCategoryNameLength();
 
   /**
    * Add a new taxonomy plugin to the service

@@ -93,17 +93,17 @@ public class UITaxonomyTreeCreateChildForm extends UIForm {
             null, ApplicationMessage.WARNING));
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
         return;
-      }
-
-      if (name.length() > 30) {
-        uiApp.addMessage(new ApplicationMessage("UITaxonomyTreeCreateChildForm.msg.name-too-long",
-            null, ApplicationMessage.WARNING));
-        event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
-        return;
-      }
+      }     
       
       try {
         TaxonomyService taxonomyService = uiForm.getApplicationComponent(TaxonomyService.class);
+        if (name.length() > Integer.parseInt(taxonomyService.getCategoryNameLength())) {
+        	Object[] args = { taxonomyService.getCategoryNameLength() };
+          uiApp.addMessage(new ApplicationMessage("UITaxonomyTreeCreateChildForm.msg.name-too-long",
+          		args, ApplicationMessage.WARNING));
+          event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
+          return;
+        }
         String parentPath = uiForm.getUIFormInputInfo(FIELD_PARENT).getValue();
         taxonomyService.addTaxonomyNode(taxoTreeData.getRepository(), taxoTreeData
             .getTaxoTreeWorkspace(), parentPath, name, Util.getPortalRequestContext().getRemoteUser());
