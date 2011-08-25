@@ -21,8 +21,11 @@ import org.exoplatform.services.jcr.core.ExtendedSession;
 import org.exoplatform.services.jcr.core.nodetype.ExtendedNodeTypeManager;
 import org.exoplatform.services.jcr.core.nodetype.NodeTypeValue;
 import org.exoplatform.services.jcr.core.nodetype.PropertyDefinitionValue;
+import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.jcr.ext.hierarchy.NodeHierarchyCreator;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.xcmis.spi.BaseItemsIterator;
 import org.xcmis.spi.CmisConstants;
 import org.xcmis.spi.CmisRuntimeException;
@@ -60,7 +63,6 @@ import java.util.regex.Pattern;
 
 import javax.jcr.ItemNotFoundException;
 import javax.jcr.Node;
-import javax.jcr.Property;
 import javax.jcr.PropertyIterator;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
@@ -138,8 +140,23 @@ abstract class BaseJcrStorage implements TypeManager
       String rootPath = storageConfiguration.getRootNodePath();
       if (rootPath.contains("${userId}"))
       {
-         String userId = session.getUserID();
-         rootPath = rootPath.replace("${userId}", userId);
+         // process root path template
+         String userPath = null;
+         try 
+         {
+            // get user node path
+            userPath = WCMCoreUtils.getService(NodeHierarchyCreator.class).getUserNode(SessionProvider.createSystemProvider(), session.getUserID()).getPath();
+         } catch (Exception e) {
+            // nothing
+         }
+         if (userPath != null) 
+         {
+            // add to the path the /Private or /Public path segment from the template
+            userPath += rootPath.substring(rootPath.indexOf("${userId}") + "${userId}".length());
+            
+            storageConfiguration.setRootNodePath(userPath);
+            rootPath = userPath;
+         }
       }
       this.rootPath = rootPath;
    }
