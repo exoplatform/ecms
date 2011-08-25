@@ -309,5 +309,16 @@ public interface ManageDriveService {
    * @return true: is Virtual Drive, false: not is Virtual Drive
    */
   public boolean isVitualDrive(String driveName);
+  
+  /**
+   * Clear all drives cache
+   */
+  public void clearAllDrivesCache();
+  
+  /**
+   * Clear group drives cache
+   * @param userId User name of current user
+   */
+  public void clearGroupCache(String userId);
 
 }

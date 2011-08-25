@@ -307,7 +307,17 @@
       </value-param>            
     </init-params>    
   </component> 
-	  
+		
+  <external-component-plugins>
+  	<target-component>org.exoplatform.services.organization.OrganizationService</target-component>		
+    <component-plugin>
+      <name>drive.new.group.event.listener</name>
+      <set-method>addListenerPlugin</set-method>
+      <type>org.exoplatform.services.cms.drives.impl.NewGroupEventListener</type>
+      <description>New Group Event Listener</description>
+    </component-plugin>		
+  </external-component-plugins>
+		 
   <external-component-plugins>
     <target-component>org.exoplatform.services.cms.lock.LockService</target-component>     
       <component-plugin>

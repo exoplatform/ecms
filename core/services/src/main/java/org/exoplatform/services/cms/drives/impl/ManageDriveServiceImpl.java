@@ -575,8 +575,7 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
       if (group.charAt(0)=='/') {
         DriveData drive = groupDriveTemplate_.clone();
         drive.setHomePath(groupPath + group);
-        String driveName = group.replace("/", ".");
-        drive.setName(driveName);
+        drive.setName(group.replace("/", "."));
         drive.setPermissions("*:"+group);
         if (!groupDrives.contains(drive))
           groupDrives.add(drive);
@@ -639,12 +638,18 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
     return personalDrives;
   }
 
-  @Override
   public boolean isVitualDrive(String driveName) {
-    if (groupDriveTemplate_.getName().equals(driveName)) {
+    if (groupDriveTemplate_.getName().equals(driveName))
       return true;
-    } else {
-      return false;
-    }
+    return false;
+  }
+  
+  public void clearAllDrivesCache() {
+    drivesCache_.clearCache();
+  }
+  
+  public void clearGroupCache(String userId) {
+    drivesCache_.remove(getRepoName() + "_" + userId + ALL_GROUP_CACHED_DRIVES);
+    drivesCache_.remove(getRepoName() + "_" + userId + ALL_DRIVES_CACHED_BY_ROLES);
   }
 }
