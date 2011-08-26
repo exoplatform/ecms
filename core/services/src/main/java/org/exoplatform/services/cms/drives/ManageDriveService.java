@@ -321,4 +321,15 @@ public interface ManageDriveService {
    */
   public void clearGroupCache(String userId);
 
+  /**
+   * Inform when have new role added
+   * @return Boolean
+   */
+  public boolean newRoleUpdated();
+  
+  /**
+   * Set the status of new added role
+   * @param newRoleUpdated
+   */
+  public void setNewRoleUpdated(boolean newRoleUpdated);
 }

@@ -51,5 +51,6 @@ public class NewGroupEventListener extends GroupEventListener {
     ConversationState conversationState = ConversationState.getCurrent();
     if(conversationState != null) 
       driveService_.clearGroupCache(conversationState.getIdentity().getUserId());
+    driveService_.setNewRoleUpdated(true);
   }
 }

@@ -142,6 +142,11 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
   private ExoCache<Serializable, Object> drivesCache_ ;
 
   private DriveData groupDriveTemplate_ = null ;
+  
+  /**
+   * Keep the state when a new role added
+   */
+  private boolean newRoleUpdated = false;
 
   /**
    * Constructor method
@@ -507,6 +512,9 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
     return getDriveByUserRoles(userId, userRoles);
   }
 
+  /**
+   * {@inheritDoc}
+   */
   @SuppressWarnings("unchecked")
   public List<DriveData> getDriveByUserRoles(String userId, List<String> userRoles) throws Exception {
     Object drivesByRoles = drivesCache_.get(getRepoName() + "_" + userId + ALL_DRIVES_CACHED_BY_ROLES);
@@ -563,6 +571,9 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
     return getGroupDrives(userId, userRoles, groups);
   }
 
+  /**
+   * {@inheritDoc}
+   */
   @SuppressWarnings("unchecked")
   public List<DriveData> getGroupDrives(String userId, List<String> userRoles, List<String> groups) throws Exception {
     Object drives = drivesCache_.get(getRepoName() + "_" + userId + ALL_GROUP_CACHED_DRIVES);
@@ -593,6 +604,9 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
     return getMainDrives(userId, userRoles);
   }
 
+  /**
+   * {@inheritDoc}
+   */
   @SuppressWarnings("unchecked")
   public List<DriveData> getMainDrives(String userId, List<String> userRoles) throws Exception {
     Object drives = drivesCache_.get(getRepoName() + "_" + userId + ALL_MAIN_CACHED_DRIVE);
@@ -617,6 +631,9 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
     return getPersonalDrives(userId, userRoles);
   }
 
+  /**
+   * {@inheritDoc}
+   */
   @SuppressWarnings("unchecked")
   public List<DriveData> getPersonalDrives(String userId, List<String> userRoles) throws Exception {
     SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
@@ -638,18 +655,41 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
     return personalDrives;
   }
 
+  /**
+   * {@inheritDoc}
+   */
   public boolean isVitualDrive(String driveName) {
     if (groupDriveTemplate_.getName().equals(driveName))
       return true;
     return false;
   }
   
+  /**
+   * {@inheritDoc}
+   */
   public void clearAllDrivesCache() {
     drivesCache_.clearCache();
   }
   
+  /**
+   * {@inheritDoc}
+   */
   public void clearGroupCache(String userId) {
     drivesCache_.remove(getRepoName() + "_" + userId + ALL_GROUP_CACHED_DRIVES);
     drivesCache_.remove(getRepoName() + "_" + userId + ALL_DRIVES_CACHED_BY_ROLES);
+  }
+  
+  /**
+   * {@inheritDoc}
+   */
+  public boolean newRoleUpdated() {
+    return newRoleUpdated;
+  }
+  
+  /**
+   * {@inheritDoc}
+   */
+  public void setNewRoleUpdated(boolean newRoleUpdated) {
+    this.newRoleUpdated = newRoleUpdated;
   }
 }
