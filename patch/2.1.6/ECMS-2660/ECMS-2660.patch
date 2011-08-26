@@ -1,0 +1,277 @@
+Index: core/services/src/main/java/org/exoplatform/services/cms/drives/impl/ManageDriveServiceImpl.java
+===================================================================
+--- core/services/src/main/java/org/exoplatform/services/cms/drives/impl/ManageDriveServiceImpl.java	(revision 72923)
++++ core/services/src/main/java/org/exoplatform/services/cms/drives/impl/ManageDriveServiceImpl.java	(working copy)
+@@ -137,7 +137,12 @@
+    */
+   private ExoCache drivesCache_ ;
+ 
+-  private DriveData groupDriveTemplate_ = null ;
++  private DriveData groupDriveTemplate_ = null ;
++  
++  /**
++   * Keep the state when a new role added
++   */
++  private boolean newRoleUpdated = false;  
+ 
+   /**
+    * Constructor method
+@@ -260,11 +265,12 @@
+    * {@inheritDoc}
+    */
+   public DriveData getDriveByName(String name, String repository) throws Exception{
+-    if (name.startsWith("/")) {
++    if (name.startsWith(".")) {
++      String groupName = name.replace(".", "/");
+       DriveData drive = groupDriveTemplate_.clone();
+-      drive.setHomePath("/Groups" + name);
++      drive.setHomePath("/Groups" + groupName);
+       drive.setName(name);
+-      drive.setPermissions("*:"+name);
++      drive.setPermissions("*:" + groupName);
+       return drive;
+     }
+ 
+@@ -470,32 +476,12 @@
+       if (group.charAt(0)=='/') {
+         DriveData drive = groupDriveTemplate_.clone();
+         drive.setHomePath(groupPath + group);
+-        drive.setName(group);
++        drive.setName(group.replace("/", "."));
+         drive.setPermissions("*:"+group);
+         if (!groupDrives.contains(drive))
+           groupDrives.add(drive);
+       }
+     }
+-    /*
+-    for(DriveData drive : getDriveByUserRoles(repository, userId, userRoles)) {
+-      if(! drive.getHomePath().equals(groupPath) && drive.getHomePath().startsWith(groupPath)) {
+-        for(String group : groups) {
+-          if(drive.getHomePath().equals(groupPath + group)) {
+-            groupDrives.add(drive);
+-            break;
+-          }
+-        }
+-        for(String permission : drive.getAllPermissions()) {
+-          String[] arrPer = permission.split(":/");
+-          if(arrPer.length == 2 && groups.contains("/" + arrPer[1]) && !groupDrives.contains(drive)) {
+-            groupDrives.add(drive);
+-            break;
+-          }
+-        }
+-      }
+-
+-    }
+-    */
+     Collections.sort(groupDrives);
+     drivesCache_.put(userId + ALL_GROUP_CACHED_DRIVES, groupDrives);
+     return groupDrives;
+@@ -539,12 +525,32 @@
+     return personalDrives;
+   }
+ 
+-  @Override
+   public boolean isVitualDrive(String driveName) {
+-    if (groupDriveTemplate_.getName().equals(driveName)) {
++    if (groupDriveTemplate_.getName().equals(driveName))
+       return true;
+-    } else {
+-      return false;
+-    }
+-  }
++    return false;
++  }
++  
++  public void clearAllDrivesCache() {
++    drivesCache_.clearCache();
++  }
++  
++  public void clearGroupCache(String userId) {
++    drivesCache_.remove(userId + ALL_GROUP_CACHED_DRIVES);
++    drivesCache_.remove(userId + ALL_DRIVES_CACHED_BY_ROLES);
++  }  
++  
++  /**
++   * {@inheritDoc}
++   */
++  public boolean newRoleUpdated() {
++    return newRoleUpdated;
++  }
++  
++  /**
++   * {@inheritDoc}
++   */
++  public void setNewRoleUpdated(boolean newRoleUpdated) {
++    this.newRoleUpdated = newRoleUpdated;
++  }  
+ }
+Index: core/services/src/main/java/org/exoplatform/services/cms/drives/impl/NewGroupEventListener.java
+===================================================================
+--- core/services/src/main/java/org/exoplatform/services/cms/drives/impl/NewGroupEventListener.java	(revision 0)
++++ core/services/src/main/java/org/exoplatform/services/cms/drives/impl/NewGroupEventListener.java	(revision 0)
+@@ -0,0 +1,56 @@
++/***************************************************************************
++ * Copyright (C) 2003-2009 eXo Platform SAS.
++ *
++ * This program is free software; you can redistribute it and/or
++ * modify it under the terms of the GNU Affero General Public License
++ * as published by the Free Software Foundation; either version 3
++ * of the License, or (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, see<http://www.gnu.org/licenses/>.
++ *
++ **************************************************************************/
++package org.exoplatform.services.cms.drives.impl;
++
++import org.exoplatform.services.cms.drives.ManageDriveService;
++import org.exoplatform.services.organization.GroupEventListener;
++import org.exoplatform.services.security.ConversationState;
++import org.exoplatform.services.organization.Group;
++
++/**
++ * Created by The eXo Platform SARL
++ * Author : Dang Van Minh
++ *          minh.dang@exoplatform.com
++ * Aug 25, 2011
++ * 1:21:53 PM  
++ */
++public class NewGroupEventListener extends GroupEventListener {
++  
++  private ManageDriveService driveService_ ;
++  
++  public NewGroupEventListener(ManageDriveService driveService) throws Exception {
++    driveService_ = driveService;
++  }
++  
++  @SuppressWarnings("unused")
++  public void preSave(Group group, boolean isNew) throws Exception {
++    clearGroupCache();
++  }
++
++  @SuppressWarnings("unused")
++  public void preDelete(Group group) throws Exception {
++    clearGroupCache();
++  }
++  
++  private void clearGroupCache() {
++    ConversationState conversationState = ConversationState.getCurrent();
++    if(conversationState != null) 
++      driveService_.clearGroupCache(conversationState.getIdentity().getUserId());
++    driveService_.setNewRoleUpdated(true);
++  }
++}
+Index: core/services/src/main/java/org/exoplatform/services/cms/drives/ManageDriveService.java
+===================================================================
+--- core/services/src/main/java/org/exoplatform/services/cms/drives/ManageDriveService.java	(revision 72923)
++++ core/services/src/main/java/org/exoplatform/services/cms/drives/ManageDriveService.java	(working copy)
+@@ -160,5 +160,29 @@
+    * @param driveName  the string contain the drive name 
+    * @return true: is Virtual Drive, false: not is Virtual Drive
+    */
+-  public boolean isVitualDrive(String driveName);
++   
++  public boolean isVitualDrive(String driveName);
++  
++  /**
++   * Clear all drives cache
++   */
++  public void clearAllDrivesCache();
++  
++  /**
++   * Clear group drives cache
++   * @param userId User name of current user
++   */
++  public void clearGroupCache(String userId);  
++  
++  /**
++   * Inform when have new role added
++   * @return Boolean
++   */
++  public boolean newRoleUpdated();
++  
++  /**
++   * Set the status of new added role
++   * @param newRoleUpdated
++   */
++  public void setNewRoleUpdated(boolean newRoleUpdated);
+ }
+Index: core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/UIDrivesArea.java
+===================================================================
+--- core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/UIDrivesArea.java	(revision 72923)
++++ core/webui-explorer/src/main/java/org/exoplatform/ecm/webui/component/explorer/UIDrivesArea.java	(working copy)
+@@ -140,14 +140,18 @@
+   
+   public void setRepository(String repoName) {repoName_ = repoName; }
+ 
+-  private List<String> getUserRoles() throws Exception {
+-    if (userRoles_==null) userRoles_ = Utils.getMemberships();
+-    return userRoles_;
+-  }
+-  
++  private List<String> getUserRoles(boolean newRoleUpdated) throws Exception {
++    ManageDriveService driveService = getApplicationComponent(ManageDriveService.class);
++    if (userRoles_ == null || (userRoles_ != null && newRoleUpdated)) {
++      userRoles_ = Utils.getMemberships();
++      if(newRoleUpdated) driveService.setNewRoleUpdated(false);
++    }
++    return userRoles_;
++  }
++    
+   public List<DriveData> mainDrives() throws Exception {
+     ManageDriveService driveService = getApplicationComponent(ManageDriveService.class);      
+-    List<String> userRoles = getUserRoles();
++    List<String> userRoles = getUserRoles(false);
+     String userId = Util.getPortalRequestContext().getRemoteUser();
+     return driveService.getMainDrives(getRepository(), userId, userRoles);
+   }
+@@ -155,14 +159,14 @@
+   public List<DriveData> groupDrives() throws Exception {
+     ManageDriveService driveService = getApplicationComponent(ManageDriveService.class);
+     List<String> groups = Utils.getGroups();
+-    List<String> userRoles = getUserRoles();
++    List<String> userRoles = getUserRoles(driveService.newRoleUpdated());
+     String userId = Util.getPortalRequestContext().getRemoteUser();
+     return driveService.getGroupDrives(getRepository(), userId, userRoles, groups);
+   }
+   
+   public List<DriveData> personalDrives() throws Exception {
+     ManageDriveService driveService = getApplicationComponent(ManageDriveService.class);      
+-    List<String> userRoles = getUserRoles();
++    List<String> userRoles = getUserRoles(false);
+     String userId = Util.getPortalRequestContext().getRemoteUser();
+     return driveService.getPersonalDrives(getRepository(), userId, userRoles);
+   }
+Index: core/core-configuration/src/main/webapp/WEB-INF/conf/wcm-core/core-services-configuration.xml
+===================================================================
+--- core/core-configuration/src/main/webapp/WEB-INF/conf/wcm-core/core-services-configuration.xml	(revision 72923)
++++ core/core-configuration/src/main/webapp/WEB-INF/conf/wcm-core/core-services-configuration.xml	(working copy)
+@@ -292,7 +292,22 @@
+         <value>8100</value>
+       </value-param>            
+     </init-params>    
+-  </component> 
++  </component> 
++  
++  <external-component-plugins>
++  	<target-component>org.exoplatform.services.organization.OrganizationService</target-component>		
++    <component-plugin>
++      <name>drive.new.group.event.listener</name>
++      <set-method>addListenerPlugin</set-method>
++      <type>org.exoplatform.services.cms.drives.impl.NewGroupEventListener</type>
++      <description>New Group Event Listener</description>
++    </component-plugin>	
++	<component-plugin>
++      <name>MembershipUpdateListener</name>
++      <set-method>addListenerPlugin</set-method>
++      <type>org.exoplatform.services.organization.impl.MembershipUpdateListener</type>
++    </component-plugin>    	
++  </external-component-plugins>
+ 	  
+   <external-component-plugins>
+     <target-component>org.exoplatform.services.cms.lock.LockService</target-component>     

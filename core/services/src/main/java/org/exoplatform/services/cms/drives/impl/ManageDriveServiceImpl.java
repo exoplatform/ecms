@@ -138,6 +138,11 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
   private ExoCache drivesCache_ ;
 
   private DriveData groupDriveTemplate_ = null ;
+  
+  /**
+   * Keep the state when a new role added
+   */
+  private boolean newRoleUpdated = false;  
 
   /**
    * Constructor method
@@ -260,11 +265,12 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
    * {@inheritDoc}
    */
   public DriveData getDriveByName(String name, String repository) throws Exception{
-    if (name.startsWith("/")) {
+    if (name.startsWith(".")) {
+      String groupName = name.replace(".", "/");
       DriveData drive = groupDriveTemplate_.clone();
-      drive.setHomePath("/Groups" + name);
+      drive.setHomePath("/Groups" + groupName);
       drive.setName(name);
-      drive.setPermissions("*:"+name);
+      drive.setPermissions("*:" + groupName);
       return drive;
     }
 
@@ -470,32 +476,12 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
       if (group.charAt(0)=='/') {
         DriveData drive = groupDriveTemplate_.clone();
         drive.setHomePath(groupPath + group);
-        drive.setName(group);
+        drive.setName(group.replace("/", "."));
         drive.setPermissions("*:"+group);
         if (!groupDrives.contains(drive))
           groupDrives.add(drive);
       }
     }
-    /*
-    for(DriveData drive : getDriveByUserRoles(repository, userId, userRoles)) {
-      if(! drive.getHomePath().equals(groupPath) && drive.getHomePath().startsWith(groupPath)) {
-        for(String group : groups) {
-          if(drive.getHomePath().equals(groupPath + group)) {
-            groupDrives.add(drive);
-            break;
-          }
-        }
-        for(String permission : drive.getAllPermissions()) {
-          String[] arrPer = permission.split(":/");
-          if(arrPer.length == 2 && groups.contains("/" + arrPer[1]) && !groupDrives.contains(drive)) {
-            groupDrives.add(drive);
-            break;
-          }
-        }
-      }
-
-    }
-    */
     Collections.sort(groupDrives);
     drivesCache_.put(userId + ALL_GROUP_CACHED_DRIVES, groupDrives);
     return groupDrives;
@@ -539,12 +525,32 @@ public class ManageDriveServiceImpl implements ManageDriveService, Startable {
     return personalDrives;
   }
 
-  @Override
   public boolean isVitualDrive(String driveName) {
-    if (groupDriveTemplate_.getName().equals(driveName)) {
+    if (groupDriveTemplate_.getName().equals(driveName))
       return true;
-    } else {
-      return false;
-    }
+    return false;
   }
+  
+  public void clearAllDrivesCache() {
+    drivesCache_.clearCache();
+  }
+  
+  public void clearGroupCache(String userId) {
+    drivesCache_.remove(userId + ALL_GROUP_CACHED_DRIVES);
+    drivesCache_.remove(userId + ALL_DRIVES_CACHED_BY_ROLES);
+  }  
+  
+  /**
+   * {@inheritDoc}
+   */
+  public boolean newRoleUpdated() {
+    return newRoleUpdated;
+  }
+  
+  /**
+   * {@inheritDoc}
+   */
+  public void setNewRoleUpdated(boolean newRoleUpdated) {
+    this.newRoleUpdated = newRoleUpdated;
+  }  
 }
