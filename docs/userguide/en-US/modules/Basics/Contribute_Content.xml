@@ -298,7 +298,7 @@
       <formalpara id="form-User_Guide-Preferences-Content_Detail_Preferences">
         <title>Content Detail Preferences</title>
         <para>
-     Do the following to edit the Single Content Viewer:
+     To edit the Single Content Viewer, do the followings:
     </para>
       </formalpara>
       <procedure id="proc-User_Guide-Preferences-_Edit_Content_Detail_Viewer">
@@ -390,10 +390,11 @@
                 </listitem>
                 <listitem>
                     <para>
-                        <guilabel>Cache Management</guilabel>: By default, the
-                        <guilabel>Share contents between users</guilabel>
-                        property is set as &quot;Enable&quot;, it means that the contents displayed in CLV or SCV are
-                        got from one cache shared between all users.
+                        <guilabel>Contents Visibility</guilabel>: Allows you to use a cache shared between users to get
+                        contents. If you want the contents displayed in CLV or SCV to be got from one cache,
+                        select
+                        <guilabel>Restricted by Authentication</guilabel>, and in verse, select <guilabel>Restricted by
+                        Users</guilabel>.
                     </para>
                 </listitem>
             </itemizedlist>

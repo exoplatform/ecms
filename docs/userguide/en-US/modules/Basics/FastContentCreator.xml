@@ -7,10 +7,10 @@
 <!--  This document was created with Syntext Serna Free.  -->
   <title>Fast Content Creator</title>
   <para>
-     <emphasis role="bold">Fast Content Creator</emphasis> portlet in &PRODUCT;  enables you to quickly create and save a new document with only one template in a specific location without accessing Content Explorer. This helps  you save a lot of time when  creating a new document.
+     <emphasis role="bold">Fast Content Creator</emphasis> portlet in &PRODUCT;  enables you to quickly create and save a new document with only one template in a specific location without accessing Content Explorer. This helps you save a lot of time when creating a new document.
   </para>
    <para>
-         There are two modes in Fast Content Creator : <emphasis role="bold">Basic Content Creator</emphasis> and <emphasis role="bold">Standard Content Creator.</emphasis>
+         There are two modes in Fast Content Creator: <emphasis role="bold">Basic Content Creator</emphasis> and <emphasis role="bold">Standard Content Creator.</emphasis>
   </para>
   <para>
      The <emphasis role="bold">Standard Content Creator </emphasis>mode enables you to add an action to your document. Thus, when configuring it by opening the <emphasis role="bold">Edit Mode</emphasis> tab (see the details at <xref linkend="sect-User_Guide-Fast_Content_Creator-Configuration"/> ), there is the <emphasis role="bold">Actions</emphasis> part that enables you to add an action to the document and view actions added to the document.
@@ -37,7 +37,7 @@
   <section id="sect-User_Guide-Fast_Content_Creator-Configuration">
     <title>Configuration</title>
     <para>
-       In &PRODUCT;,  the Fast Content Creator  is applied in the <emphasis role="bold">Contact Us</emphasis> portlet with  the <emphasis role="bold">Basic Content Creator</emphasis> mode by default.  Thus, in this case, you can configure the Fast Content Creator by editing the <emphasis role="bold">Contact Us</emphasis> portlet.
+       In &PRODUCT;,  the Fast Content Creator is applied in the <emphasis role="bold">Contact Us</emphasis> portlet with  the <emphasis role="bold">Basic Content Creator</emphasis> mode by default.  Thus, in this case, you can configure the Fast Content Creator by editing the <emphasis role="bold">Contact Us</emphasis> portlet.
    </para>
     <para>
        To configure the Fast Content Creator, do the following:
@@ -64,7 +64,7 @@
       </step>
       <step>
         <para>
-           Hover the mouse over  the Contact Us portlet and the tool-bar appears. 
+           Hover the mouse over the Contact Us portlet and the tool-bar appears.
          </para>
          <para>
             Click the <inlinemediaobject>
