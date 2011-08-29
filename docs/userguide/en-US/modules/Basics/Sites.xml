@@ -416,112 +416,14 @@
             </imageobject>
           </mediaobject>
           <para>
-      A form to edit the current banner will appear:
-     </para>
-          <mediaobject>
-            <imageobject role="html">
-              <imagedata  align="center"  fileref="images/editbannerform.png" format="PNG"/>
-            </imageobject>
-            <imageobject role="fo">
-              <imagedata   align="center" fileref="images/editbannerform.png" format="PNG" width="150mm"/>
-            </imageobject>
-          </mediaobject>
+      A form to edit the current banner will appear.
+     </para>          
         </step>
         <step>
           <para>
-            Select the <guilabel>Edit Mode</guilabel> tab:
-           </para>
-           <table>
-           <title></title>
-                 <tgroup cols="2">
-                    <thead>
-                       <row>
-                          <entry>
-                             Field
-                          </entry>
-                          <entry>
-                             Details
-                          </entry>
-                       </row>
-                    </thead>
-                    <tbody>
-                       <row>
-                          <entry>
-                             <guilabel>Content Selection</guilabel>
-                          </entry>
-                          <entry>
-                             Select the path of the content that you want to show by clicking the <guilabel>plus</guilabel> icon.
-                          </entry>
-                       </row>
-                       <row>
-                          <entry>
-                             <guilabel>Display Settings</guilabel>
-                          </entry>
-                          <entry>
-                             <itemizedlist>
-                                <listitem>
-                                  <para>
-                                       <guilabel>Show Title</guilabel>: specify whether the title of the content is displayed or not.
-                                    </para>
-                                </listitem>
-                                <listitem>
-                                  <para>
-                                       <guilabel>Show Date</guilabel>: specify whether the date of the content publication is displayed or not.
-                                    </para>
-                                </listitem>
-                                <listitem>
-                                  <para>
-                                       <guilabel>Show Option Bar:</guilabel> show or hide the Option bar used to show the print link.
-                                    </para>
-                                </listitem>
-                              </itemizedlist>
-                          </entry>
-                       </row>
-                       <row>
-                          <entry>
-                             <guilabel>Print Setting</guilabel>
-                          </entry>
-                          <entry>
-                             <itemizedlist>
-                                <listitem>
-                                  <para>
-                                       <guilabel>Show in page</guilabel>: choose a page for the print review.
-                                    </para>
-                                </listitem>
-                                <listitem>
-                                  <para>
-                                       <guilabel>with</guilabel>: parameters contain the content path.
-                                    </para>
-                                </listitem>
-                              </itemizedlist>
-                          </entry>
-                       </row>
-                       <row>
-                          <entry>
-                             <guilabel>Advanced</guilabel>
-                          </entry>
-                          <entry>
-                             <para>
-                                The content should enable <guilabel>Dynamic Navigation</guilabel> that interprets the URL and shows a content.
-                             </para>
-                          </entry>
-                       </row>
-                    </tbody>
-                 </tgroup>
-           </table>
-            <note>
-               <title>More Info</title>
-               <para>
-                  Click the <inlinemediaobject>
-                   <imageobject>
-                     <imagedata fileref="images/questionicon.png" format="PNG" width="6mm"/>
-                   </imageobject>
-                   <textobject>
-                      <phrase>question mark</phrase>
-                   </textobject>
-                 </inlinemediaobject> icon to see more information about each field.
-               </para>
-            </note>
+            Select the <guilabel>Edit Mode</guilabel> tab: Select the content path and set options for the portlet. See more details about Edit Mode in <xref
+                  linkend="sect-User_Guide-InContext_Editing-Preferences"/>.
+          </para>
         </step>
         <step>
           <para>

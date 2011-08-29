@@ -15,16 +15,8 @@
 		<title>Access Dynamic Navigation</title>
 		 <step>
 			<para>
-            Turn on the <emphasis role="bold">Edit Mode</emphasis> and hover the mouse cursor over either an <emphasis role="bold">SCV</emphasis> content element or a <emphasis role="bold">CLV</emphasis> content element. Click the <guilabel>Preferences</guilabel> icon that appears.
+            Turn on the <emphasis role="bold">Edit Mode</emphasis> and hover the mouse cursor over either an <emphasis role="bold">SCV</emphasis> content element or a <emphasis role="bold">CLV</emphasis> content element, and then click the <guilabel>Preferences</guilabel> icon to open the preference form for SCV or CLV respectively.
 			</para>
-         <mediaobject>
-             <imageobject role="html">
-                <imagedata fileref="images/scvpreferences1.png" format="PNG" align="center"/>
-             </imageobject>
-             <imageobject role="fo">
-                <imagedata fileref="images/scvpreferences1.png" format="PNG" align="center" width="150mm" />
-             </imageobject>
-          </mediaobject>
 		</step>
 		 <step>
 			<para>
@@ -37,7 +29,7 @@
                   <imagedata fileref="images/dynamicnavigationscv.png" format="PNG" align="center"/>
                </imageobject>
                <imageobject role="fo">
-                  <imagedata fileref="images/dynamicnavigationscv.png" format="PNG" align="center" width="150mm" />
+                  <imagedata fileref="images/dynamicnavigationscv.png" format="PNG" align="center" width="100mm" />
                </imageobject>
             </mediaobject>
             </example>
@@ -101,7 +93,7 @@
                   <imagedata fileref="images/dynamicnavigation-clv.png" format="PNG" align="center"/>
                </imageobject>
                <imageobject role="fo">
-                  <imagedata fileref="images/dynamicnavigation-clv.png" format="PNG" align="center" width="150mm"  />
+                  <imagedata fileref="images/dynamicnavigation-clv.png" format="PNG" align="center" width="100mm"  />
                </imageobject>
             </mediaobject>
             </example>
@@ -129,7 +121,7 @@
 									<itemizedlist>
 										<listitem>
 											<para>
-                                    <guilabel>Disable</guilabel>: A single content will be opened by an URL containing the Folder Path (for CLV)
+                                    <guilabel>Disable</guilabel>: A single content will be opened by an URL containing the Folder Path (for CLV).
 											</para>
 
 										</listitem>

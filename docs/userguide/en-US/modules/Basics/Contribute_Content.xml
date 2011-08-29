@@ -341,10 +341,10 @@
                     </para>
                     <mediaobject>
                         <imageobject role="html">
-                            <imagedata fileref="images/scvpreferences.png" format="PNG" align="center"/>
+                            <imagedata width="100mm" fileref="images/scvpreferences.png" format="PNG" align="center"/>
                         </imageobject>
                         <imageobject role="fo">
-                            <imagedata fileref="images/scvpreferences.png" format="PNG" align="center" width="150mm"/>
+                            <imagedata fileref="images/scvpreferences.png" format="PNG" align="center" width="100mm"/>
                         </imageobject>
                     </mediaobject>
                     <para>
@@ -357,7 +357,7 @@
                             <imagedata fileref="images/scvpreferences1.png" format="PNG" align="center"/>
                         </imageobject>
                         <imageobject role="fo">
-                            <imagedata fileref="images/scvpreferences1.png" format="PNG" align="center" width="150mm"/>
+                            <imagedata fileref="images/scvpreferences1.png" format="PNG" align="center" width="100mm"/>
                         </imageobject>
                     </mediaobject>
                     <table>
@@ -447,11 +447,27 @@
                                         <guilabel>Advanced</guilabel>
                                     </entry>
                                     <entry>
-                                        When clicking on this link, the Advanced pane will be shown. If
-                                        <guilabel>Contextual Content</guilabel>
-                                        property is set as<emphasis>Disable</emphasis>, the Advanced pane is closed by
-                                        default. The content should enable “dynamic navigation” that interprets the URL
-                                        and shows a content.
+                                        When clicking on this link, the Advanced pane will be shown:
+                                        <itemizedlist>
+                                            <listitem>
+                                                <para><guilabel>Contextual Content</guilabel>: If the
+                                                    <emphasis role="bold">Contextual Content</emphasis>
+                                                    property is set as &quot;Disable&quot;, the Advanced pane is closed
+                                                    by default. The content
+                                                    should
+                                                    enable “dynamic navigation” that interprets the URL and shows a
+                                                    content.
+                                                </para>
+                                            </listitem>
+                                            <listitem>
+                                                <para>
+                                                    <guilabel>Cache Management</guilabel>: Allows you to use a cache
+                                                    shared between users to get
+                                                    contents. By default, <guilabel>Share content between users</guilabel> is set as &quot;Enable&quot;, the contents displayed in CLV or SCV are got
+                                                    from one cache.
+                                                </para>
+                                            </listitem>
+                                        </itemizedlist>
                                     </entry>
                                 </row>
                             </tbody>
@@ -608,7 +624,7 @@
                             <imagedata fileref="images/clvpreferences1.png" format="PNG" align="center"/>
                         </imageobject>
                         <imageobject role="fo">
-                            <imagedata fileref="images/clvpreferences1.png" format="PNG" align="center" width="150mm"/>
+                            <imagedata fileref="images/clvpreferences1.png" format="PNG" align="center" width="100mm"/>
                         </imageobject>
                     </mediaobject>
                     <table frame="all">
@@ -644,7 +660,7 @@
                                             </listitem>
                                             <listitem>
                                                 <para>
-                                                    <guilabel>By Content</guilabel>: This mode allows you to select by
+                                                    <guilabel>By Contents</guilabel>: This mode allows you to select by
                                                     the content in a specific folder in the <guilabel>Folder path</guilabel> field.
                                                 </para>
                                             </listitem>
@@ -802,7 +818,7 @@
                     </para>
                     <para>
                         If you select the
-                        <guilabel>By content</guilabel>
+                        <guilabel>By contents</guilabel>
                         mode, select an available folder from the left panel, all content in this folder will be listed
                         on the right panel. Click a content on the right that you want to add to the content list. A
                         message informs that you have successfully added it in the Content List. The selected content is
