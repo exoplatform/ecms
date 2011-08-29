@@ -27,15 +27,15 @@
         </imageobject>
       </mediaobject>
       <para>
-    The left panel lists all the categories containing documents or web contents.
+    The left pane lists all the categories containing contents.
    </para>
       <para>
-    The right panel displays any documents selected in the left pane.
+    The right pane displays all the documents belonging to the current category.
    </para>
     </step>
     <step>
       <para>
-    Select a category that you want to view on the left, it will be shown on the right (only published documents or web content are shown).
+    Click a category that you want to view its contents. Its sub-categories are listed on the left pane and its contents are shown on the right pane.
    </para>
       <mediaobject>
         <imageobject role="html">
@@ -45,6 +45,9 @@
           <imagedata align="center" fileref="images/categorypanes.png" format="PNG" width="150mm"/>
         </imageobject>
       </mediaobject>
+    </step>
+    <step>
+        <para>Click <guilabel>Go to previous</guilabel> to return to the parent category.</para>
     </step>
   </procedure>
   <formalpara>
@@ -76,7 +79,7 @@
       <para>
      Click the <inlinemediaobject>
           <imageobject>
-            <imagedata fileref="images/editicon2.png" format="PNG"/>
+            <imagedata fileref="images/editicon2.png" format="PNG" width="6mm"/>
           </imageobject>
           <textobject>
              <phrase>pencil</phrase>
@@ -85,7 +88,7 @@
     </para>
       <mediaobject>
            <imageobject role="html">
-              <imagedata fileref="images/editcn.png" format="PNG" align="center"/>
+              <imagedata fileref="images/editcn.png" format="PNG" align="center" />
            </imageobject>
            <imageobject role="fo">
               <imagedata fileref="images/editcn.png" format="PNG" align="center" width="150mm" />
