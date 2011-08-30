@@ -23,17 +23,18 @@
           <imagedata align="center" fileref="images/newsnavigationbar.png" format="PNG" width="150mm" />
         </imageobject>
       </mediaobject>
-      <para>
-    The left panel lists all the categories containing documents or web contents.
-   </para>
-      <para>
-    The right panel displays the documents selected in the left pane.
-   </para>
+        <para>
+            The left pane lists all the categories containing contents.
+        </para>
+        <para>
+            The right pane displays all the documents belonging to the current category.
+        </para>
     </step>
     <step>
-      <para>
-    Select a category that you want to view on the left, it will be shown on the right (only documents or web content published are shown).
-   </para>
+        <para>
+            Click a category that you want to view its contents. Its sub-categories are listed on the left pane and its
+            contents are shown on the right pane.
+        </para>
       <mediaobject>
         <imageobject role="html">
           <imagedata align="center" scale="" fileref="images/categorypanes.png" format="PNG"/>
@@ -42,6 +43,9 @@
           <imagedata align="center" fileref="images/categorypanes.png" format="PNG" width="150mm"/>
         </imageobject>
       </mediaobject>
+    </step>
+      <step>
+        <para>Click <guilabel>Go to previous</guilabel> to return to the parent category.</para>
     </step>
   </procedure>
   <formalpara>
