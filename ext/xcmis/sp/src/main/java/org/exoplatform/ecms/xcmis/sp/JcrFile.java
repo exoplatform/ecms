@@ -44,20 +44,20 @@ class JcrFile extends DocumentDataImpl
    public JcrFile(JcrNodeEntry jcrEntry)
    {
       super(jcrEntry);
-      try
-      {
-         Node node = entry.getNode();
-         Session session = node.getSession();
-         if (entry.getType().isVersionable() && node.canAddMixin(JcrCMIS.MIX_VERSIONABLE))
-         {
-            node.addMixin(JcrCMIS.MIX_VERSIONABLE);
-            session.save();
-         }
-      }
-      catch (RepositoryException e)
-      {
-         throw new CmisRuntimeException(e.getMessage(), e);
-      }
+//      try
+//      {
+//         Node node = entry.getNode();
+//         Session session = node.getSession();
+//         if (entry.getType().isVersionable() && node.canAddMixin(JcrCMIS.MIX_VERSIONABLE))
+//         {
+//            node.addMixin(JcrCMIS.MIX_VERSIONABLE);
+//            session.save();
+//         }
+//      }
+//      catch (RepositoryException e)
+//      {
+//         throw new CmisRuntimeException(e.getMessage(), e);
+//      }
    }
 
    /**
