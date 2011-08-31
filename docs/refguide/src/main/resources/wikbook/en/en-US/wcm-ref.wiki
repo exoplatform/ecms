@@ -35,6 +35,8 @@ h3. Application template {anchor:id=CONTref.Configuration.Templates.Application_
   {include:document="pages/configuration/template_application.wiki" /}
 h3. Nodetype template {anchor:id=CONTref.Configuration.Templates.Nodetype_template}
   {include:document="pages/configuration/template_nodetype.wiki" /}
+h2. SiteSearchService {anchor:id=CONTref.Configuration.Search_Service}
+  {include:document="pages/configuration/Search_Service.wiki" /}
 
 h1. Inside WCM Templates {anchor:id=CONTref.InsideWCM_templates}
 h2. Content types {anchor:id=CONTref.CONTref.InsideWCMTemplates.ContentTypes}
@@ -83,6 +85,8 @@ h2. NodeFinder {anchor:id=CONTref.JavaServices.NodeFinder}
   {include:document="pages/services/nodeFinder.wiki" /}
 h2. JodConverter {anchor:id=CONTref.JavaServices.JodConverter}
   {include:document="pages/services/jodConverter.wiki" /}
+h2. SiteSearchService {anchor:id=CONTref.JavaServices.SiteSearchService}
+{include:document="pages/services/SiteSearchService.wiki" /}
 
 h1. FAQ {anchor:id=CONTref.FAQ}
-  {include:document="pages/faq/faq.wiki" /}
+  {include:document="pages/faq/faq.wiki" /}

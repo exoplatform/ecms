@@ -1,0 +1,78 @@
+_SiteSearchService_ is used in the Search portlet that allows users to find all information matching with your given keyword.
+
+It is configured in the _core/core-configuration/src/main/webapp/WEB-INF/conf/configuration.xml_ file as follows:
+
+{code:language=xml|indent=2}
+	<import>war:/conf/wcm-core/core-search-configuration.xml</import>
+{code}
+
+h1. Component Configuration  {anchor:id=CONTref.Configuration.Search_Service.Component_Configuration}
+
+The component configuration maps the _SiteSearchService_ component with its own implementation: _SiteSearchServiceImpl_.
+
+{code:language=xml|indent=2}
+<component>
+    <key>org.exoplatform.services.wcm.search.SiteSearchService</key>
+    <type>org.exoplatform.services.wcm.search.SiteSearchServiceImpl</type>
+    <component-plugins>
+        ...
+    </component-plugins>
+    <init-params>
+      ...
+    </init-params>
+</component>
+{code}
+The component consists of the following init-parameters:
+||*Init-Params*||*Default Value*||*Possible Value*||*Description*||
+|isEnabledFuzzySearch|true|Boolean|Allow administrators to enable/disable the fuzzy search mechanism.|
+|fuzzySearchIndex|N/A |N/A |Allow the approximate level between the input keyword and the found key results. In case of the invalid configuration, the default value is set to 0.8.|
+
+To have more information about the fuzzy search, please refer to [Fuzzy Search|http://lucene.apache.org/java/2_4_1/queryparsersyntax.html#Fuzzy%20Searches].
+
+h1. Component Plugin Configuration  {anchor:id=CONTref.Configuration.Search_Service.Component_Plugin_Config}
+_ExcludeMimeTypes_ is used in the _SiteSearchService_ component to filter the search results before these results are presented on the search page.
+
+Set-method:  _addExcludeIncludeDataTypePlugin_
+
+Type: _org.exoplatform.services.wcm.search.ExcludeIncludeDataTypePlugin_
+
+||*Properties-Params*||*Description*||
+|search.exclude.datatype|Exclude some data types when doing search.|
+
+The {{search.exclude.datatype}} property includes two attributes:
+||*Attributes*|| *Values*||*Description*||
+|name |mimetypes|Name of the property param. |
+|value |text/css,text/javascript,application/x-javascript,text/ecmascript |List mimetypes which will be excluded from the search results.|
+
+
+h1. Sample Configuration  {anchor:id=CONTref.Configuration.Search_Service.Sample_Config}
+{code:language=xml|indent=2}
+<component>
+    <key>org.exoplatform.services.wcm.search.SiteSearchService</key>
+    <type>org.exoplatform.services.wcm.search.SiteSearchServiceImpl</type>
+    <component-plugins>
+      <component-plugin>
+        <name>ExcludeMimeTypes</name>
+        <set-method>addExcludeIncludeDataTypePlugin</set-method>
+        <type>org.exoplatform.services.wcm.search.ExcludeIncludeDataTypePlugin</type>
+        <init-params>
+          <properties-param>
+            <name>search.exclude.datatypes</name>
+            <description>exclude some data type when search</description>
+            <property name="mimetypes" value="text/css,text/javascript,application/x-javascript,text/ecmascript" />
+          </properties-param>
+        </init-params>
+      </component-plugin>
+    </component-plugins>
+    <init-params>
+      <value-param>
+        <name>isEnabledFuzzySearch</name>
+        <value>true</value>
+      </value-param>
+      <value-param>
+        <name>fuzzySearchIndex</name>
+        <value></value>
+      </value-param>
+    </init-params>
+</component>
+{code}
