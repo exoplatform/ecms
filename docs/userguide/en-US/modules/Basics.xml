@@ -18,6 +18,7 @@
 	 <xi:include href="Basics/Webdav.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
 	 <xi:include href="Basics/Search.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
 	 <xi:include href="Basics/Preferences.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+    <xi:include href="Basics/SearchPorlet.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
 	 <xi:include href="Basics/Newsletters.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
 	 <xi:include href="Basics/FastContentCreator.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
 	 <xi:include href="Basics/FormGenerator.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />

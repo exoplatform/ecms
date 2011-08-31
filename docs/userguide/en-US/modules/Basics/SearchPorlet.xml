@@ -1,0 +1,300 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!-- This document was created with Syntext Serna Free. -->
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "../../User_Guide.ent">
+%BOOK_ENTITIES;
+]>
+<section id="sect-User_Guide-Search_portlet">
+    <title>Search Porlet</title>
+    <para>The
+        <guilabel>Search</guilabel>
+        function allows you to quickly search for any contents in the system with a keyword from the front page, even if you
+        do not log in. However, the number of the search results displayed depends on your role.
+    </para>
+    <para>For example, if you do not log in, you only see the search results that are published.</para>
+    <section id="sect-User_Guide-Search_portlet-Search_Contents">
+        <title>How to search for contents?</title>
+        <para>To search for contents, do the followings:</para>
+        <procedure>
+            <step>
+                <para>
+                    Enter a keyword into the search box and press <emphasis role="bold">Enter</emphasis>.
+                </para>
+                <para>
+                    The search results
+                    matching with your keyword are displayed in the search page:
+                </para>
+                <mediaobject>
+                    <imageobject role="html">
+                        <imagedata align="center" fileref="images/searchpage.png" format="PNG"/>
+                    </imageobject>
+                    <imageobject role="fo">
+                        <imagedata align="center" fileref="images/searchpage.png" format="PNG" width="150mm"/>
+                    </imageobject>
+                </mediaobject>
+                <para>In case of no search results matching the keyword, the search page is displayed as below:
+                </para>
+                <mediaobject>
+                    <imageobject role="html">
+                        <imagedata align="center" fileref="images/nosearchresult.png" format="PNG"/>
+                    </imageobject>
+                    <imageobject role="fo">
+                        <imagedata align="center" fileref="images/nosearchresult.png" format="PNG" width="150mm"/>
+                    </imageobject>
+                </mediaobject>
+                <para>Details of the Search form:</para>
+                <table frame="all">
+                    <title/>
+                    <tgroup cols="2">
+                        <colspec colname="c1"/>
+                        <colspec colname="c2"/>
+                        <thead>
+                            <row>
+                                <entry>
+                                    Field
+                                </entry>
+                                <entry>
+                                    Details
+                                </entry>
+                            </row>
+                        </thead>
+                        <tbody>
+                            <row>
+                                <entry>
+                                    <guilabel>Keyword</guilabel>
+                                </entry>
+                                <entry>
+                                    <para>
+                                        The keyword used to search.
+                                    </para>
+                                </entry>
+                            </row>
+                            <row>
+                                <entry>
+                                    <guilabel>Portal</guilabel>
+                                </entry>
+                                <entry>
+                                    The scale where you want to search. You can search in all portals or in a specific
+                                    portal.
+                                </entry>
+                            </row>
+                            <row>
+                                <entry>
+                                    <guilabel>Page</guilabel>
+                                </entry>
+                                <entry>
+                                    Search in all pages containing the keyword.
+                                </entry>
+                            </row>
+                            <row>
+                                <entry>
+                                    <guilabel>Document</guilabel>
+                                </entry>
+                                <entry>
+                                    Search in all documents containing the keyword.
+                                </entry>
+                            </row>
+                        </tbody>
+                    </tgroup>
+                </table>
+            </step>
+            <step>
+                <para>In the Search form, you can enter another keyword in the
+                    <guilabel>Keyword</guilabel>
+                    field and set the
+                    the search scale.
+                </para>
+            </step>
+            <step>
+                <para>Click
+                    <guibutton>Search</guibutton>
+                   to start searching.
+                </para>
+            </step>
+        </procedure>
+    </section>
+    <section id="sect-User_Guide-Search_portlet_Edit-search-portlet">
+        <title>Edit the Search portlet</title>
+        <para>Editing the Search portlet allows you to change the display of search results.</para>
+        <para>Do the followings:</para>
+        <procedure>
+            <title>Edit the Search portlet</title>
+            <step>
+                <para>Open the Search page as <xref linkend="sect-User_Guide-Search_portlet-Search_Contents"/>.</para>
+            </step>
+            <step>
+                <title>Open the form to edit the Search portlet</title>
+                <para>There are two way:</para>
+                <itemizedlist>
+                    <listitem>
+                        <para><emphasis role="bold">The 1st way</emphasis>: Turn on the Edit mode, and then click the
+                            <inlinemediaobject>
+                                <imageobject>
+                                    <imagedata fileref="images/editicon4.png" format="PNG" width="6mm"/>
+                                </imageobject>
+                                <textobject>
+                                    <phrase>pencil</phrase>
+                                </textobject>
+                            </inlinemediaobject>
+                            icon:
+                        </para>
+                        <mediaobject>
+                            <imageobject role="html">
+                                <imagedata align="center" fileref="images/search-editmode.png" format="PNG"/>
+                            </imageobject>
+                            <imageobject role="fo">
+                                <imagedata align="center" fileref="images/search-editmode.png" format="PNG"
+                                           width="150mm"/>
+                            </imageobject>
+                        </mediaobject>
+                    </listitem>
+                    <listitem>
+                        <para><emphasis role="bold">The 2nd way</emphasis>: Click
+                            <menuchoice>
+                                <guimenu>Site Editor</guimenu>
+                                <guimenuitem>Edit Page</guimenuitem>
+                            </menuchoice>
+                            on the administration bar. The
+                            <guilabel>Page Editor</guilabel>
+                            will be displayed.
+                        </para>
+                        <itemizedlist>
+                            <listitem>
+                                <para>Hover the mouse pointer over the
+                                    <guilabel>SearchResult</guilabel>
+                                    portlet and the toolbar appears:
+                                </para>
+                                <mediaobject>
+                                    <imageobject role="html">
+                                        <imagedata align="center" fileref="images/edit_searchresult.png" format="PNG"/>
+                                    </imageobject>
+                                    <imageobject role="fo">
+                                        <imagedata align="center" fileref="images/edit_searchresult.png" format="PNG"
+                                                   width="150mm"/>
+                                    </imageobject>
+                                </mediaobject>
+                            </listitem>
+                            <listitem>
+                                <para>Click the
+                                    <inlinemediaobject>
+                                        <imageobject>
+                                            <imagedata fileref="images/editicon4.png" format="PNG" width="6mm"/>
+                                        </imageobject>
+                                        <textobject>
+                                            <phrase>pencil</phrase>
+                                        </textobject>
+                                    </inlinemediaobject>
+                                    icon to edit the portlet.
+                                </para>
+                            </listitem>
+                        </itemizedlist>
+                    </listitem>
+                </itemizedlist>
+
+                <para>The form to edit the Search portlet appears:</para>
+                <mediaobject>
+                    <imageobject role="html">
+                        <imagedata align="center" fileref="images/editsearchportlet.png" format="PNG"/>
+                    </imageobject>
+                    <imageobject role="fo">
+                        <imagedata align="center" fileref="images/editsearchportlet.png" format="PNG" width="150mm"/>
+                    </imageobject>
+                </mediaobject>
+                <para>Details:</para>
+                <table frame="all">
+                        <title/>
+                        <tgroup cols="2">
+                            <colspec colname="c1"/>
+                            <colspec colname="c2"/>
+                            <thead>
+                                <row>
+                                    <entry>
+                                        Field
+                                    </entry>
+                                    <entry>
+                                        Details
+                                    </entry>
+                                </row>
+                            </thead>
+                            <tbody>
+                                <row>
+                                    <entry>
+                                        <guilabel>Items per page</guilabel>
+                                    </entry>
+                                    <entry>
+                                        <para>
+                                            The number of search results displayed in each page.
+                                        </para>
+                                    </entry>
+                                </row>
+                                <row>
+                                    <entry>
+                                        <guilabel>Page Mode</guilabel>
+                                    </entry>
+                                    <entry>
+                                        The way to display the search results. There are 3 options:
+                                        <itemizedlist>
+                                            <listitem>
+                                                <para><guilabel>None</guilabel>: Only the first page of search results is
+                                                    displayed in the search page.</para>
+                                            </listitem>
+                                            <listitem>
+                                                <para><guilabel>More</guilabel>: When you click the
+                                                    <guibutton>Search</guibutton>
+                                                    button, the
+                                                    first page of search result is displayed. The difference from the <guilabel>None</guilabel>
+                                                    mode
+                                                    is that, there is a <guibutton>More</guibutton> button allowing you to see more search results.
+                                                    When clicking this button, new search results are appended to
+                                                    the
+                                                    current search result page like Twitter or Facebook behavior.
+                                                </para>
+                                            </listitem>
+                                            <listitem>
+                                                <para><guilabel>Pagination</guilabel>: In this mode, the search results are divided into many pages (for example, 1, 2, 3 and Next). You can navigate to another page by clicking the page number or <guibutton>Next</guibutton> in the bottom of the Search portlet to view more results.</para>
+                                            </listitem>
+                                        </itemizedlist>
+                                    </entry>
+                                </row>
+                                <row>
+                                    <entry>
+                                        <guilabel>Search form template</guilabel>
+                                    </entry>
+                                    <entry>
+                                        The template of the Search form.
+                                    </entry>
+                                </row>
+                                <row>
+                                    <entry>
+                                        <guilabel>Search result template</guilabel>
+                                    </entry>
+                                    <entry>
+                                        The template for displaying the search results.
+                                    </entry>
+                                </row>
+                                <row>
+                                    <entry>
+                                        <guilabel>Search page layout template</guilabel>
+                                    </entry>
+                                    <entry>
+                                        The layout of the Search portlet.
+                                    </entry>
+                                </row>
+                                <row>
+                                    <entry>
+                                        <guilabel>Base path</guilabel>
+                                    </entry>
+                                    <entry>
+                                        The page where you can see the content of a search result.
+                                    </entry>
+                                </row>
+                            </tbody>
+                        </tgroup>
+                    </table>
+            </step>
+            <step>
+                <para>Edit your desired portlet and click <guibutton>Save</guibutton> to accept your changes.</para>
+            </step>
+        </procedure>
+    </section>
+</section>
