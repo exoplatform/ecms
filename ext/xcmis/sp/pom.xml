@@ -13,22 +13,22 @@
       <dependency>
          <groupId>org.xcmis</groupId>
          <artifactId>xcmis-spi</artifactId>
-         <version>${xcmis.version}</version>
+         <version>${org.xcmis.version}</version>
       </dependency>
       <dependency>
          <groupId>org.xcmis</groupId>
          <artifactId>xcmis-renditions</artifactId>
-         <version>${xcmis.version}</version>
+         <version>${org.xcmis.version}</version>
       </dependency>
       <dependency>
          <groupId>org.xcmis</groupId>
          <artifactId>xcmis-search-service</artifactId>
-         <version>${xcmis.version}</version>
+         <version>${org.xcmis.version}</version>
       </dependency>
       <dependency>
          <groupId>org.xcmis</groupId>
          <artifactId>xcmis-search-parser-cmis</artifactId>
-         <version>${xcmis.version}</version>
+         <version>${org.xcmis.version}</version>
       </dependency>
       <dependency>
          <groupId>org.exoplatform.jcr</groupId>

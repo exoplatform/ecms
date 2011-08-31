@@ -37,7 +37,11 @@
     <org.exoplatform.commons.version>1.1.1-GA-SNAPSHOT</org.exoplatform.commons.version>
     <org.exoplatform.tool.version>1.0.0</org.exoplatform.tool.version>
     <chromattic.version>1.1.0-beta6</chromattic.version>
-    <xcmis.version>1.2.1</xcmis.version>
+    <org.xcmis.version>1.2.2</org.xcmis.version>
+    <abdera.version>0.4.0-incubating</abdera.version>
+    <lucene-regex.version>2.4.1</lucene-regex.version>
+    <axiom.version>1.2.5</axiom.version>
+    <jaxen.version>1.1.1</jaxen.version>
     <xml.parser.version>3.1</xml.parser.version>
     <!-- workflow implementations -->
     <org.jbpm.jbpm3>3.2.8</org.jbpm.jbpm3>
@@ -55,6 +59,7 @@
     <org.jvnet.jaxb2.maven2.version>0.1</org.jvnet.jaxb2.maven2.version>
     <cglib.version>2.2</cglib.version>
     <antlr.version>2.7.6rc1</antlr.version>
+    <org.antlr.version>3.1.3</org.antlr.version>
     <commons-dbcp.version>1.4</commons-dbcp.version>
     <jcr.version>1.0</jcr.version>
     <org.jsecurity.version>0.9.0</org.jsecurity.version>

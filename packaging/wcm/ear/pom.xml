@@ -163,7 +163,110 @@
       <groupId>org.exoplatform.ecms</groupId>
       <artifactId>exo-ecms-ext-webui</artifactId>
       <version>${project.version}</version>
-     </dependency>
+    </dependency>
+    <dependency>
+      <groupId>org.exoplatform.ecms</groupId>
+      <artifactId>exo-ecms-ext-xcmis-sp</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <!-- xCMIS dependencies -->
+    <dependency>
+      <groupId>org.xcmis</groupId>
+      <artifactId>xcmis-renditions</artifactId>
+      <version>${org.xcmis.version}</version>
+      <type>jar</type>
+    </dependency>
+    <dependency>
+      <groupId>org.xcmis</groupId>
+      <artifactId>xcmis-restatom</artifactId>
+      <version>${org.xcmis.version}</version>
+      <type>jar</type>
+    </dependency>
+    <dependency>
+      <groupId>org.xcmis</groupId>
+      <artifactId>xcmis-search-model</artifactId>
+      <version>${org.xcmis.version}</version>
+      <type>jar</type>
+    </dependency>
+    <dependency>
+      <groupId>org.xcmis</groupId>
+      <artifactId>xcmis-search-parser-cmis</artifactId>
+      <version>${org.xcmis.version}</version>
+      <type>jar</type>
+    </dependency>
+    <dependency>
+      <groupId>org.xcmis</groupId>
+      <artifactId>xcmis-search-service</artifactId>
+      <version>${org.xcmis.version}</version>
+      <type>jar</type>
+    </dependency>
+    <dependency>
+      <groupId>org.xcmis</groupId>
+      <artifactId>xcmis-spi</artifactId>
+      <version>${org.xcmis.version}</version>
+      <type>jar</type>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.abdera</groupId>
+      <artifactId>abdera-client</artifactId>
+      <version>${abdera.version}</version>
+      <type>jar</type>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.abdera</groupId>
+      <artifactId>abdera-core</artifactId>
+      <version>${abdera.version}</version>
+      <type>jar</type>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.abdera</groupId>
+      <artifactId>abdera-i18n</artifactId>
+      <version>${abdera.version}</version>
+      <type>jar</type>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.abdera</groupId>
+      <artifactId>abdera-parser</artifactId>
+      <version>${abdera.version}</version>
+      <type>jar</type>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.abdera</groupId>
+      <artifactId>abdera-server</artifactId>
+      <version>${abdera.version}</version>
+      <type>jar</type>
+    </dependency>
+    <dependency>
+      <groupId>org.antlr</groupId>
+      <artifactId>antlr-runtime</artifactId>
+      <version>${org.antlr.version}</version>
+      <type>jar</type>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.ws.commons.axiom</groupId>
+      <artifactId>axiom-api</artifactId>
+      <version>${axiom.version}</version>
+      <type>jar</type>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.ws.commons.axiom</groupId>
+      <artifactId>axiom-impl</artifactId>
+      <version>${axiom.version}</version>
+      <type>jar</type>
+    </dependency>
+    <dependency>
+      <groupId>jaxen</groupId>
+      <artifactId>jaxen</artifactId>
+      <version>${jaxen.version}</version>
+      <type>jar</type>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.lucene</groupId>
+      <artifactId>lucene-regex</artifactId>
+      <version>${lucene-regex.version}</version>
+      <type>jar</type>
+    </dependency>
+    <!-- End of xCMIS dependencies -->
   </dependencies>
 
 <!-- 
@@ -263,6 +366,93 @@ exo-ecms-packaging-ecmdemo-webapp
               <artifactId>exo-ecms-ext-webui</artifactId>
               <includeInApplicationXml>true</includeInApplicationXml>
             </jarModule>
+            <jarModule>
+              <groupId>org.exoplatform.ecms</groupId>
+              <artifactId>exo-ecms-ext-xcmis-sp</artifactId>
+              <includeInApplicationXml>true</includeInApplicationXml>
+            </jarModule>
+           <!--  xCMIS jar modules -->
+            <jarModule>
+              <groupId>org.xcmis</groupId>
+              <artifactId>xcmis-renditions</artifactId>
+              <includeInApplicationXml>true</includeInApplicationXml>
+            </jarModule>
+            <jarModule>
+              <groupId>org.xcmis</groupId>
+              <artifactId>xcmis-restatom</artifactId>
+              <includeInApplicationXml>true</includeInApplicationXml>
+            </jarModule>
+            <jarModule>
+              <groupId>org.xcmis</groupId>
+              <artifactId>xcmis-search-model</artifactId>
+              <includeInApplicationXml>true</includeInApplicationXml>
+            </jarModule>
+            <jarModule>
+              <groupId>org.xcmis</groupId>
+              <artifactId>xcmis-search-parser-cmis</artifactId>
+              <includeInApplicationXml>true</includeInApplicationXml>
+            </jarModule>
+            <jarModule>
+              <groupId>org.xcmis</groupId>
+              <artifactId>xcmis-search-service</artifactId>
+              <includeInApplicationXml>true</includeInApplicationXml>
+            </jarModule>
+            <jarModule>
+              <groupId>org.xcmis</groupId>
+              <artifactId>xcmis-spi</artifactId>
+              <includeInApplicationXml>true</includeInApplicationXml>
+            </jarModule>
+            <jarModule>
+              <groupId>org.apache.abdera</groupId>
+              <artifactId>abdera-client</artifactId>
+              <includeInApplicationXml>true</includeInApplicationXml>
+            </jarModule>
+            <jarModule>
+              <groupId>org.apache.abdera</groupId>
+              <artifactId>abdera-core</artifactId>
+              <includeInApplicationXml>true</includeInApplicationXml>
+            </jarModule>
+            <jarModule>
+              <groupId>org.apache.abdera</groupId>
+              <artifactId>abdera-i18n</artifactId>
+              <includeInApplicationXml>true</includeInApplicationXml>
+            </jarModule>
+            <jarModule>
+              <groupId>org.apache.abdera</groupId>
+              <artifactId>abdera-parser</artifactId>
+              <includeInApplicationXml>true</includeInApplicationXml>
+            </jarModule>
+            <jarModule>
+              <groupId>org.apache.abdera</groupId>
+              <artifactId>abdera-server</artifactId>
+              <includeInApplicationXml>true</includeInApplicationXml>
+            </jarModule>
+            <jarModule>
+              <groupId>org.antlr</groupId>
+              <artifactId>antlr-runtime</artifactId>
+              <includeInApplicationXml>true</includeInApplicationXml>
+            </jarModule>
+            <jarModule>
+              <groupId>org.apache.ws.commons.axiom</groupId>
+              <artifactId>axiom-api</artifactId>
+              <includeInApplicationXml>true</includeInApplicationXml>
+            </jarModule>
+            <jarModule>
+              <groupId>org.apache.ws.commons.axiom</groupId>
+              <artifactId>axiom-impl</artifactId>
+              <includeInApplicationXml>true</includeInApplicationXml>
+            </jarModule>
+            <jarModule>
+              <groupId>jaxen</groupId>
+              <artifactId>jaxen</artifactId>
+              <includeInApplicationXml>true</includeInApplicationXml>
+            </jarModule>
+            <jarModule>
+              <groupId>org.apache.lucene</groupId>
+              <artifactId>lucene-regex</artifactId>
+              <includeInApplicationXml>true</includeInApplicationXml>
+            </jarModule>
+            <!-- End of xCMIS jars -->
             <webModule>
               <groupId>org.exoplatform.ecms</groupId>
               <artifactId>exo-ecms-packaging-wcm-webapp</artifactId>
@@ -432,8 +622,8 @@ exo-ecms-packaging-ecmdemo-webapp
                     <include name="activation-*.jar" />
                     <include name="aopalliance-*.jar" />
                     <include name="asm-*.jar" />
-                    <include name="bcmail-jdk14-136.jar" />
-                    <include name="bcprov-jdk14-136.jar" />
+                    <include name="bcmail-*.jar" />
+                    <include name="bcprov-*.jar" />
                     <include name="caja-*.jar" />
                     <include name="ccpp-*.jar" />
                     <include name="chromattic.*.jar" />

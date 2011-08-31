@@ -13,6 +13,12 @@ function getModule(params) {
   var module = new Module();
 
   module.version = "${project.version}" ;
+  var xcmisVersion = "${org.xcmis.version}";
+  var abderaVersion = "${abdera.version}";
+  var luceneRegexVersion = "${lucene-regex.version}";
+  var axiomVersion = "${axiom.version}";
+  var jaxenVersion = "${jaxen.version}";
+  var antlrVersion = "${org.antlr.version}";
   module.relativeMavenRepo =  "org/exoplatform/ecms" ;
   module.relativeSRCRepo =  "ecms" ;
   module.name =  "wcm" ;
@@ -75,7 +81,27 @@ function getModule(params) {
 
   module.extension = {};
   
-  module.extension.war = new Project("org.exoplatform.ecms", "exo-ecms-packaging-wcm-webapp", "war", module.version);  
+  module.extension.war = 
+    new Project("org.exoplatform.ecms", "exo-ecms-packaging-wcm-webapp", "war", module.version).
+    // xCMIS dependencies
+    addDependency(new Project("org.exoplatform.ecms", "exo-ecms-ext-xcmis-sp", "jar", module.version)).
+    addDependency(new Project("org.xcmis", "xcmis-spi", "jar", xcmisVersion)).
+    addDependency(new Project("org.xcmis", "xcmis-renditions", "jar", xcmisVersion)).
+    addDependency(new Project("org.xcmis", "xcmis-restatom", "jar", xcmisVersion)).
+    addDependency(new Project("org.xcmis", "xcmis-search-model", "jar", xcmisVersion)).
+    addDependency(new Project("org.xcmis", "xcmis-search-parser-cmis", "jar", xcmisVersion)).
+    addDependency(new Project("org.xcmis", "xcmis-search-service", "jar", xcmisVersion)).
+    addDependency(new Project("org.apache.abdera", "abdera-client", "jar", abderaVersion)).
+    addDependency(new Project("org.apache.abdera", "abdera-core", "jar", abderaVersion)).
+    addDependency(new Project("org.apache.abdera", "abdera-i18n", "jar", abderaVersion)).
+    addDependency(new Project("org.apache.abdera", "abdera-parser", "jar", abderaVersion)).
+    addDependency(new Project("org.apache.abdera", "abdera-server", "jar", abderaVersion)).
+    addDependency(new Project("org.apache.lucene", "lucene-regex", "jar", luceneRegexVersion)).
+    addDependency(new Project("org.apache.ws.commons.axiom", "axiom-api", "jar", axiomVersion)).
+    addDependency(new Project("org.apache.ws.commons.axiom", "axiom-impl", "jar", axiomVersion)).
+    addDependency(new Project("jaxen", "jaxen", "jar", jaxenVersion)).
+    addDependency(new Project("org.antlr", "antlr-runtime", "jar", antlrVersion));
+  
   module.extension.war.deployName = "ecm-wcm-extension";	      	    
 
   module.demo = {};
@@ -96,7 +122,6 @@ function getModule(params) {
 
   module.server.jboss = {};
   module.server.jboss.patch = new Project("org.exoplatform.ecms", "exo-ecms-delivery-wcm-server-jboss", "jar", module.version);	
-  
-
+    
   return module;
 }
