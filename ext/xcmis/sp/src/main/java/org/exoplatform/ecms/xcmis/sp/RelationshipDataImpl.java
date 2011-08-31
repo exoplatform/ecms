@@ -18,10 +18,12 @@
 package org.exoplatform.ecms.xcmis.sp;
 
 import org.xcmis.spi.CmisConstants;
+import org.xcmis.spi.CmisRuntimeException;
 import org.xcmis.spi.ConstraintException;
 import org.xcmis.spi.ContentStream;
 import org.xcmis.spi.FolderData;
 import org.xcmis.spi.ItemsIterator;
+import org.xcmis.spi.ObjectNotFoundException;
 import org.xcmis.spi.RelationshipData;
 import org.xcmis.spi.StorageException;
 import org.xcmis.spi.model.RelationshipDirection;
@@ -49,7 +51,14 @@ class RelationshipDataImpl extends BaseObjectData implements RelationshipData
     */
    public String getSourceId()
    {
-      return entry.getString(CmisConstants.SOURCE_ID);
+      try
+            {
+               return entry.storage.getEntry(entry.getString(CmisConstants.SOURCE_ID)).getId();
+            }
+            catch (ObjectNotFoundException e)
+            {
+               throw new CmisRuntimeException("Cannot get source Id by property 'cmis:sourceId'", e);
+            }
    }
 
    /**
@@ -57,7 +66,14 @@ class RelationshipDataImpl extends BaseObjectData implements RelationshipData
     */
    public String getTargetId()
    {
-      return entry.getString(CmisConstants.TARGET_ID);
+      try
+            {
+               return entry.storage.getEntry(entry.getString(CmisConstants.TARGET_ID)).getId();
+            }
+            catch (ObjectNotFoundException e)
+            {
+               throw new CmisRuntimeException("Cannot get target Id by property 'cmis:targetId'", e);
+            }
    }
 
    /**
@@ -98,7 +114,7 @@ class RelationshipDataImpl extends BaseObjectData implements RelationshipData
     * {@inheritDoc}
     */
    @Override
-   protected void delete() throws StorageException
+   public void delete() throws StorageException
    {
       entry.delete();
    }

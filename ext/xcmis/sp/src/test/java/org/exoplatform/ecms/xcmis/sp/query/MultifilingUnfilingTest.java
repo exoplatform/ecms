@@ -101,7 +101,33 @@ public class MultifilingUnfilingTest extends BaseQueryTest
       storageA.deleteTree(testRoot, true, null, true);
    }
 
-   public void _testRemoveFromMultipleParents() throws Exception
+   public void testRemoveFromMultipleParentsInDouble() throws Exception
+   {
+      FolderData folder1 = createFolder(storageA, testRoot, "multifilingFolderTest2", folderTypeDefinition);
+
+      DocumentData doc1 =
+         createDocument(storageA, testRoot, "node1", nasaDocumentTypeDefinition, "helloworld".getBytes(), new MimeType(
+            "plain", "text"));
+      assertEquals(1, doc1.getParents().size());
+      
+      checkResult(storageA, "SELECT * FROM " + NASA_DOCUMENT + " WHERE IN_FOLDER('" + folder1.getObjectId() + "')",
+            new ObjectData[]{});
+      
+      folder1.addObject(doc1);
+      assertEquals(2, doc1.getParents().size());
+      
+      checkResult(storageA, "SELECT * FROM " + NASA_DOCUMENT + " WHERE IN_FOLDER('" + folder1.getObjectId() + "')",
+            new ObjectData[]{doc1});
+
+      folder1.removeObject(doc1);
+      assertEquals(1, doc1.getParents().size());
+
+      checkResult(storageA, "SELECT * FROM " + NASA_DOCUMENT + " WHERE IN_FOLDER('" + folder1.getObjectId() + "')",
+         new ObjectData[]{});
+   }
+   
+   
+   public void testRemoveFromMultipleParentsInTriple() throws Exception
    {
 
       FolderData folder1 = createFolder(storageA, testRoot, "multifilingFolderTest1", folderTypeDefinition);
@@ -130,53 +156,58 @@ public class MultifilingUnfilingTest extends BaseQueryTest
 
       storageA.deleteTree(testRoot, true, null, true);
    }
+   
+   
+//   // CmisRuntimeException: Unable remove object from last folder in which it is filed.
+//   public void testRemoveFromLastParent() throws Exception
+//   {
+//
+//      FolderData folder1 = createFolder(storageA,testRoot, "multifilingFolderTest1", folderTypeDefinition);
+//      FolderData folder2 = createFolder(storageA,testRoot, "multifilingFolderTest2", folderTypeDefinition);
+//      FolderData folder3 = createFolder(storageA,testRoot, "multifilingFolderTest3", folderTypeDefinition);
+//
+//      DocumentData doc1 =
+//         createDocument(storageA,folder1, "node1", nasaDocumentTypeDefinition, "helloworld".getBytes(), new MimeType("plain",
+//            "text"));
+//      folder2.addObject(doc1);
+//      folder3.addObject(doc1);
+//      assertEquals(3, doc1.getParents().size());
+//
+//      checkResult(storageA,"SELECT * FROM " + NASA_DOCUMENT + " WHERE IN_TREE('" + testRoot.getObjectId() + "')",
+//         new ObjectData[]{doc1});
+//
+//      folder2.removeObject(doc1);
+//      folder3.removeObject(doc1);
+//      folder1.removeObject(doc1);
+//
+//      assertEquals(0, doc1.getParents().size());
+//
+//      checkResult(storageA,"SELECT * FROM " + NASA_DOCUMENT + " WHERE IN_TREE('" + testRoot.getObjectId() + "')",
+//         new ObjectData[]{});
+//
+//      storageA.deleteObject(doc1, true);
+//      storageA.deleteTree(testRoot, true, null, true);
+//   }
 
-   //   public void testRemoveFromLastParent() throws Exception
-   //   {
-   //
-   //      FolderData folder1 = createFolder(storageA,testRoot, "multifilingFolderTest1", folderTypeDefinition);
-   //      FolderData folder2 = createFolder(storageA,testRoot, "multifilingFolderTest2", folderTypeDefinition);
-   //      FolderData folder3 = createFolder(storageA,testRoot, "multifilingFolderTest3", folderTypeDefinition);
-   //
-   //      DocumentData doc1 =
-   //         createDocument(storageA,folder1, "node1", nasaDocumentTypeDefinition, "helloworld".getBytes(), new MimeType("plain",
-   //            "text"));
-   //      folder2.addObject(doc1);
-   //      folder3.addObject(doc1);
-   //      assertEquals(3, doc1.getParents().size());
-   //
-   //      checkResult(storageA,"SELECT * FROM " + NASA_DOCUMENT + " WHERE IN_TREE('" + testRoot.getObjectId() + "')",
-   //         new ObjectData[]{doc1});
-   //
-   //      folder2.removeObject(doc1);
-   //      folder3.removeObject(doc1);
-   //      folder1.removeObject(doc1);
-   //
-   //      assertEquals(0, doc1.getParents().size());
-   //
-   //      checkResult(storageA,"SELECT * FROM " + NASA_DOCUMENT + " WHERE IN_TREE('" + testRoot.getObjectId() + "')",
-   //         new ObjectData[]{});
-   //
-   //      storage.deleteObject(doc1, true);
-   //      storage.deleteTree(testRoot, true, null, true);
-   //   }
-
-   //   public void testSearchUnfiled() throws Exception
-   //   {
-   //      checkResult(storageA,"SELECT * FROM " + NASA_DOCUMENT + " WHERE CONTAINS(\"helloworld\")", new ObjectData[]{});
-   //      DocumentData doc1 =
-   //         createDocument(storageA,testRoot, "node1", nasaDocumentTypeDefinition, "helloworld".getBytes(), new MimeType("text", "plain"));
-   //
-   //      checkResult(storageA,"SELECT * FROM " + NASA_DOCUMENT + " WHERE CONTAINS(\"helloworld\")", new ObjectData[]{doc1});
-   //
-   //      testRoot.removeObject(doc1);
-   //      //check if document have no parents
-   //      assertEquals(0, doc1.getParents().size());
-   //      //check if we can find document
-   //      checkResult(storageA,"SELECT * FROM " + NASA_DOCUMENT + " WHERE CONTAINS(\"helloworld\")", new ObjectData[]{doc1});
-   //
-   //      storage.deleteObject(doc1, true);
-   //      storage.deleteTree(testRoot, true, null, true);
-   //   }
+   
+//   // CmisRuntimeException: Unable remove object from last folder in which it is filed.
+//   public void testSearchUnfiled() throws Exception
+//   {
+//      checkResult(storageA,"SELECT * FROM " + NASA_DOCUMENT + " WHERE CONTAINS(\"helloworld\")", new ObjectData[]{});
+//      DocumentData doc1 =
+//         createDocument(storageA, testRoot, "node1", nasaDocumentTypeDefinition, "helloworld".getBytes(), new MimeType("text", "plain"));
+//
+//      checkResult(storageA,"SELECT * FROM " + NASA_DOCUMENT + " WHERE CONTAINS(\"helloworld\")", new ObjectData[]{doc1});
+//
+//      testRoot.removeObject(doc1);
+//      //check if document have no parents
+//      assertEquals(0, doc1.getParents().size());
+//      //check if we can find document
+//      checkResult(storageA,"SELECT * FROM " + NASA_DOCUMENT + " WHERE CONTAINS(\"helloworld\")", new ObjectData[]{doc1});
+//
+//      storageA.deleteObject(doc1, true);
+//      storageA.deleteTree(testRoot, true, null, true);
+//   }
+   
 
 }
