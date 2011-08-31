@@ -299,7 +299,7 @@
             <emphasis>Versioning</emphasis> means that, at any given time, the node's state can be saved for possible future recovery. The action of saving is called 'checking in'.
          </para>
          <para>
-            A workspace may contain both versionable and non-versionable nodes. A node is versionable if it has been assigned a <parameter>mixin</parameter> type <literal>mixin: versionable</literal>; otherwise, it is a non-versionable node.
+            A workspace may contain both versionable and non-versionable nodes. A node is versionable if it has been assigned a <parameter>mixin</parameter> type <literal>mixin:versionable</literal>; otherwise, it is a non-versionable node.
          </para>
          <para>
             A version exists as a part of a version history graph that describes the predecessor/successor relations among versions of a particular versionable nodes.
