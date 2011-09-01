@@ -228,10 +228,7 @@ public class CreateTaxonomyPlugin extends CreatePortalPlugin {
    * @throws Exception the exception
    */
   public void init() throws Exception {
-    if (autoCreateInNewRepository_) {
-      importPredefineTaxonomies();
-      return;
-    }
+    importPredefineTaxonomies();
   }
 
   /**
