@@ -55,4 +55,17 @@
   	   <keyword-not-empty>キーワードの値が null または空です！</keyword-not-empty>
   	 </message>
   </UISearchForm>
+  <searchOption>
+    <label>
+      <pageCheckBox>in Pages</pageCheckBox>
+      <documentCheckBox>in Contents</documentCheckBox>
+    </label>
+  </searchOption>
+  <ViewMode>
+    <label>
+      <option>
+        <all>search all sites</all>
+      </option>  
+    </label>  
+  </ViewMode>  
 </bundle>

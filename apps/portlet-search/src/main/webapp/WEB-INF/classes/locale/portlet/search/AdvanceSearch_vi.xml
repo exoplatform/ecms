@@ -78,4 +78,17 @@
       <quickEditTitle>Sửa nhanh</quickEditTitle>
     </label>
   </UISearchPageLayoutDefault>  
+  <searchOption>
+    <label>
+      <pageCheckBox>tìm theo trang</pageCheckBox>
+      <documentCheckBox>tìm theo nội dung</documentCheckBox>
+    </label>
+  </searchOption>
+  <ViewMode>
+    <label>
+      <option>
+        <all>tất cả</all>
+      </option>  
+    </label>  
+  </ViewMode>  
 </bundle>

@@ -59,7 +59,7 @@
       <SelectBasePath>Select Base Path</SelectBasePath>
     </title>
   </searchResultBasePathInputSetAction>  
-  <UISearchForm>
+  <UISearchForm>  
   	 <message>
   	   <keyword-not-support>The keyword is invalid. Some characters are not supported.</keyword-not-support>
   	   <not-checked>Search type is not checked. Choose a search type, please.</not-checked>
@@ -78,4 +78,17 @@
       <quickEditTitle>Quick Edit</quickEditTitle>
     </label>
   </UISearchPageLayoutDefault>
+  <searchOption>
+    <label>
+      <pageCheckBox>in Pages</pageCheckBox>
+      <documentCheckBox>in Contents</documentCheckBox>
+    </label>
+  </searchOption>
+  <ViewMode>
+    <label>
+      <option>
+        <all>search all sites</all>
+      </option>  
+    </label>  
+  </ViewMode>
 </bundle>

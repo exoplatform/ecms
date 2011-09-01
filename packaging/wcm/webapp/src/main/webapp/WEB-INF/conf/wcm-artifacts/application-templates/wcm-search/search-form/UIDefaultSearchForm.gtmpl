@@ -1,7 +1,7 @@
 <%
 import java.util.ArrayList;
 import java.util.List;
-import org.exoplatform.webui.form.UIFormCheckBoxInput;
+import org.exoplatform.webui.form.UIFormRadioBoxInput;
 import org.exoplatform.webui.form.UIFormSelectBox;
 import org.exoplatform.webui.form.UIFormStringInput;
 import org.exoplatform.wcm.webui.search.UISearchForm;
@@ -10,8 +10,7 @@ import org.exoplatform.wcm.webui.search.UISearchForm;
 UIFormStringInput uiKeywordInput = uicomponent.getUIStringInput(UISearchForm.KEYWORD_INPUT);
 uicomponent.setKeyword();
 UIFormSelectBox uiPortalSelectBox = uicomponent.getUIFormSelectBox(UISearchForm.PORTALS_SELECTOR);
-UIFormCheckBoxInput uiPageCheckBox = uicomponent.getUIFormCheckBoxInput(UISearchForm.PAGE_CHECKING);
-UIFormCheckBoxInput uiDocumentCheckBox = uicomponent.getUIFormCheckBoxInput(UISearchForm.DOCUMENT_CHECKING);
+UIFormRadioBoxInput searchOptionRadioBox = uicomponent.getUIFormRadioBoxInput(UISearchForm.SEARCH_OPTION);
 String actionLabel = _ctx.appRes("UIDefaultSearchForm.action.Search");
 String link = uicomponent.event("Search");
 def context = _ctx.getRequestContext();
@@ -24,50 +23,52 @@ context.getJavascriptManager().addJavascript('eXo.ecm.SearchPortlet.search("' + 
       <div class="FormContainer">
         <table class="UIFormGrid">
           <tr>
-            <td class="FieldLabel">
-              <%= _ctx.appRes("UIDefaultSearchForm.label.keyword") %>
-            </td>
-            <td class="FieldComponent">
+            <td>
               <%
-              uiform.renderField(uiKeywordInput)
+                uiform.renderField(uiKeywordInput)
               %>
+            </td>
+            <td>
+              <div class="UIAction">
+                <a href="$link" onclick="eXo.ecm.SearchPortlet.keepKeywordOnBoxSearch();" class="ActionButton LightBlueStyle SearchButton">$actionLabel</a>
+              </div>
             </td>
           </tr>
           <tr>
-            <td class="FieldLabel">
-              <%= _ctx.appRes("UIDefaultSearchForm.label.portal") %>
+            <td>
+                  <%
+                    uiform.renderField(searchOptionRadioBox)
+                    uiform.renderField(uiPortalSelectBox)
+                  %>
             </td>
-            <td class="FieldComponent">
-              <div style="float: left;">
-                <%
-                uiform.renderField(uiPortalSelectBox)
-                %>
-              </div>
-              <div style="padding-top: 5px;">
-                <div class="CheckboxField">
-                  <%
-                  uiform.renderField(uiPageCheckBox)
-                  %>
-                </div>
-                <div class="CheckboxText">
-                  <%= _ctx.appRes("UIDefaultSearchForm.label.Page") %>
-                </div>
-                <div class="CheckboxField">
-                  <%
-                  uiform.renderField(uiDocumentCheckBox)
-                  %>
-                </div>
-                <div class="CheckboxText">
-                  <%= _ctx.appRes("UIDefaultSearchForm.label.Document") %>
-                </div>
-              </div>
+            <td>
             </td>
           </tr>
         </table>
-        <div class="UIAction">
-            <a href="$link" onclick="eXo.ecm.SearchPortlet.keepKeywordOnBoxSearch();" class="ActionButton LightBlueStyle SearchButton">$actionLabel</a>
-        </div>
-      </div>
+        <script>
+        
+        function toggleSet()
+        {
+          var searchOption = document.getElementsByName("searchOption");
+          if (searchOption[0].checked) {
+            searchOption[0].form.elements["portalSelector"].value = "all";
+            searchOption[0].form.elements["portalSelector"].disabled = true;
+          } else {
+            searchOption[0].form.elements["portalSelector"].disabled = false;
+          }
+        }
+        
+        var searchOption = document.getElementsByName("searchOption");
+        if (searchOption[0].checked) {
+          searchOption[0].form.elements["portalSelector"].value = "all";
+          searchOption[0].form.elements["portalSelector"].disabled = true;
+        } else {
+          searchOption[0].form.elements["portalSelector"].disabled = false;
+        }
+        searchOption[0].onchange = function() { toggleSet(); };
+        searchOption[1].onchange = function() { toggleSet(); };
+      </script>
+    </div>
     </div>
     <%uiform.end()%>
     </div>
@@ -77,6 +78,6 @@ context.getJavascriptManager().addJavascript('eXo.ecm.SearchPortlet.search("' + 
 	}
 	onsubmit = function() {
 		eXo.ecm.SearchPortlet.keepKeywordOnBoxSearch();
-	}		
+	}
 </script>
     

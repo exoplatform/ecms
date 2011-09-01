@@ -166,7 +166,7 @@ public class TestSearchService extends BaseWCMTestCase {
   /**
    * Test case 1: search all node (includes have or don't have publication property)
    * in shared portal and not live mode. In this case, set parameters:<br>
-   * searchPageChecked = true<br>
+   * searchPageChecked = false<br>
    * searchDocumentChecked = true<br>
    * searchSelectedPortal = shared<br>
    * searchIsLiveMode = false<br>
@@ -174,6 +174,7 @@ public class TestSearchService extends BaseWCMTestCase {
    * @throws Exception the exception
    */
   public void testSearchSharedPortalNotLiveMode() throws Exception {
+    queryCriteria.setSearchWebpage(false);
     AbstractPageList<ResultNode> pageList = getSearchResult();
     assertEquals(5, pageList.getPage(1).size());
   }
@@ -189,7 +190,8 @@ public class TestSearchService extends BaseWCMTestCase {
    * @throws Exception the exception
    */
   public void testSearchSharedPortalLiveMode() throws Exception {
-    searchIsLiveMode = true;
+    queryCriteria.setLiveMode(true);
+    queryCriteria.setSearchWebpage(false);
     AbstractPageList<ResultNode> pageList = getSearchResult();
     assertEquals(5, pageList.getPage(1).size());
     assertEquals(10, pageList.getTotalNodes());
@@ -207,6 +209,7 @@ public class TestSearchService extends BaseWCMTestCase {
    */
   public void testSearchAllPortalNotLiveMode() throws Exception {
     searchSelectedPortal = null;
+    queryCriteria.setSearchWebpage(false);
     AbstractPageList<ResultNode> pageList = getSearchResult();
     assertEquals(10, pageList.getTotalNodes());
     assertEquals(5, pageList.getPage(1).size());
@@ -225,6 +228,7 @@ public class TestSearchService extends BaseWCMTestCase {
   public void testSearchAllPortalLiveMode() throws Exception {
     searchSelectedPortal = null;
     searchIsLiveMode = true;
+    queryCriteria.setSearchWebpage(false);
     AbstractPageList<ResultNode> pageList = getSearchResult();
     assertEquals(5, pageList.getPage(1).size());
     assertEquals(10, pageList.getTotalNodes());
@@ -240,7 +244,7 @@ public class TestSearchService extends BaseWCMTestCase {
    * searchIsLiveMode = true<br>
    */
   public void testSearchDocumentLiveMode() throws Exception {
-    this.searchPageChecked = false;
+    queryCriteria.setSearchWebpage(false);
     this.searchDocumentChecked = true;
     this.searchIsLiveMode = true;
     this.searchSelectedPortal = null;
@@ -257,7 +261,7 @@ public class TestSearchService extends BaseWCMTestCase {
    * searchIsLiveMode = false<br>
    */
   public void testSearchDocumentNotLiveMode() throws Exception {
-    this.searchPageChecked = false;
+    queryCriteria.setSearchWebpage(false);
     this.searchSelectedPortal = null;
     AbstractPageList<ResultNode> pageList = getSearchResult();
     assertEquals(10, pageList.getTotalNodes());
@@ -272,7 +276,7 @@ public class TestSearchService extends BaseWCMTestCase {
    * searchIsLiveMode = false<br>
    */
   public void testSearchDocumentOfSharedPortal() throws Exception {
-    this.searchPageChecked = false;
+    queryCriteria.setSearchWebpage(false);
     AbstractPageList<ResultNode> pageList = getSearchResult();
     assertEquals(10, pageList.getTotalNodes());
   }
@@ -286,7 +290,7 @@ public class TestSearchService extends BaseWCMTestCase {
    * searchIsLiveMode = true<br>
    */
   public void testSearchDocumentOfSharedPortalLiveMode() throws Exception {
-    this.searchPageChecked = false;
+    queryCriteria.setSearchWebpage(false);
     this.searchIsLiveMode = true;
     AbstractPageList<ResultNode> pageList = getSearchResult();
     assertEquals(5, pageList.getPage(1).size());
@@ -302,13 +306,13 @@ public class TestSearchService extends BaseWCMTestCase {
    * searchSelectedPortal = null<br>
    * searchIsLiveMode = true<br>
    */
-  public void testSearchPagesLiveMode() throws Exception {
-    this.searchDocumentChecked = false;
-    this.searchIsLiveMode = true;
-    this.searchSelectedPortal = null;
-    AbstractPageList<ResultNode> pageList = getSearchResult();
-    assertEquals(5, pageList.getPage(1).size());
-  }
+//  public void testSearchPagesLiveMode() throws Exception {
+//    this.searchDocumentChecked = false;
+//    this.searchIsLiveMode = true;
+//    this.searchSelectedPortal = null;
+//    AbstractPageList<ResultNode> pageList = getSearchResult();
+//    assertEquals(5, pageList.getPage(1).size());
+//  }
 
   /**
    * Test case 10:Test search pages.
@@ -318,12 +322,12 @@ public class TestSearchService extends BaseWCMTestCase {
    * searchSelectedPortal = null<br>
    * searchIsLiveMode = false<br>
    */
-  public void testSearchPages() throws Exception {
-    this.searchDocumentChecked = false;
-    this.searchSelectedPortal = null;
-    AbstractPageList<ResultNode> pageList = getSearchResult();
-    assertEquals(10, pageList.getTotalNodes());
-  }
+//  public void testSearchPages() throws Exception {
+//    this.searchDocumentChecked = false;
+//    this.searchSelectedPortal = null;
+//    AbstractPageList<ResultNode> pageList = getSearchResult();
+//    assertEquals(10, pageList.getTotalNodes());
+//  }
 
   /**
    * Test case 11:Test search pages.
@@ -333,13 +337,13 @@ public class TestSearchService extends BaseWCMTestCase {
    * searchSelectedPortal = shared<br>
    * searchIsLiveMode = true<br>
    */
-  public void testSearchPagesSharedLiveMode() throws Exception {
-    this.searchDocumentChecked = false;
-    this.searchIsLiveMode = true;
-    AbstractPageList<ResultNode> pageList = getSearchResult();
-    assertEquals(5, pageList.getPage(1).size());
-    assertEquals(10, pageList.getTotalNodes());
-  }
+//  public void testSearchPagesSharedLiveMode() throws Exception {
+//    this.searchDocumentChecked = false;
+//    this.searchIsLiveMode = true;
+//    AbstractPageList<ResultNode> pageList = getSearchResult();
+//    assertEquals(5, pageList.getPage(1).size());
+//    assertEquals(10, pageList.getTotalNodes());
+//  }
 
   /**
    * Test case 12:Test search pages.
@@ -349,12 +353,12 @@ public class TestSearchService extends BaseWCMTestCase {
    * searchSelectedPortal = shared<br>
    * searchIsLiveMode = true<br>
    */
-  public void testSearchPagesShared() throws Exception {
-    this.searchDocumentChecked = false;
-    AbstractPageList<ResultNode> pageList = getSearchResult();
-    assertEquals(5, pageList.getPage(1).size());
-    assertEquals(10, pageList.getTotalNodes());
-  }
+//  public void testSearchPagesShared() throws Exception {
+//    this.searchDocumentChecked = false;
+//    AbstractPageList<ResultNode> pageList = getSearchResult();
+//    assertEquals(5, pageList.getPage(1).size());
+//    assertEquals(10, pageList.getTotalNodes());
+//  }
 
   //------------------------------------- test with not document or page --------------------------------------------------------------------
 
@@ -366,15 +370,15 @@ public class TestSearchService extends BaseWCMTestCase {
    * searchSelectedPortal = null<br>
    * searchIsLiveMode = true<br>
    */
-  public void testSearchNotPagesDocument_AllPortalLiveMode() throws Exception {
-    this.searchDocumentChecked = false;
-    this.searchPageChecked = false;
-    this.searchIsLiveMode = true;
-    this.searchSelectedPortal = null;
-    AbstractPageList<ResultNode> pageList = getSearchResult();
-    assertEquals(5, pageList.getPage(1).size());
-    assertEquals(10, pageList.getTotalNodes());
-  }
+//  public void testSearchNotPagesDocument_AllPortalLiveMode() throws Exception {
+//    this.searchDocumentChecked = false;
+//    this.searchPageChecked = false;
+//    this.searchIsLiveMode = true;
+//    this.searchSelectedPortal = null;
+//    AbstractPageList<ResultNode> pageList = getSearchResult();
+//    assertEquals(5, pageList.getPage(1).size());
+//    assertEquals(10, pageList.getTotalNodes());
+//  }
 
   /**
    * Test case 14:Test search contents are not document or page in all portal.
@@ -384,14 +388,14 @@ public class TestSearchService extends BaseWCMTestCase {
    * searchSelectedPortal = null<br>
    * searchIsLiveMode = true<br>
    */
-  public void testSearchNotPagesDocument_AllPortalNotLiveMode() throws Exception {
-    this.searchDocumentChecked = false;
-    this.searchPageChecked = false;
-    this.searchSelectedPortal = null;
-    AbstractPageList<ResultNode> pageList = getSearchResult();
-    assertEquals(5, pageList.getPage(1).size());
-    assertEquals(10, pageList.getTotalNodes());
-  }
+//  public void testSearchNotPagesDocument_AllPortalNotLiveMode() throws Exception {
+//    this.searchDocumentChecked = false;
+//    this.searchPageChecked = false;
+//    this.searchSelectedPortal = null;
+//    AbstractPageList<ResultNode> pageList = getSearchResult();
+//    assertEquals(5, pageList.getPage(1).size());
+//    assertEquals(10, pageList.getTotalNodes());
+//  }
 
   /**
    * Test case 15:Test search contents are not document or page in all portal.
@@ -401,14 +405,14 @@ public class TestSearchService extends BaseWCMTestCase {
    * searchSelectedPortal = null<br>
    * searchIsLiveMode = true<br>
    */
-  public void testSearchNotPagesDocument_SharedLiveMode() throws Exception {
-    this.searchDocumentChecked = false;
-    this.searchPageChecked = false;
-    this.searchIsLiveMode = true;
-    AbstractPageList<ResultNode> pageList = getSearchResult();
-    assertEquals(5, pageList.getPage(1).size());
-    assertEquals(10, pageList.getTotalNodes());
-  }
+//  public void testSearchNotPagesDocument_SharedLiveMode() throws Exception {
+//    this.searchDocumentChecked = false;
+//    this.searchPageChecked = false;
+//    this.searchIsLiveMode = true;
+//    AbstractPageList<ResultNode> pageList = getSearchResult();
+//    assertEquals(5, pageList.getPage(1).size());
+//    assertEquals(10, pageList.getTotalNodes());
+//  }
 
   /**
    * Test case 16:Test search contents are not document or page in all portal.
@@ -418,39 +422,41 @@ public class TestSearchService extends BaseWCMTestCase {
    * searchSelectedPortal = null<br>
    * searchIsLiveMode = true<br>
    */
-  public void testSearchNotPagesDocument_SharedNoLiveMode() throws Exception {
-    this.searchDocumentChecked = false;
-    this.searchPageChecked = false;
-    AbstractPageList<ResultNode> pageList = getSearchResult();
-    assertEquals(5, pageList.getPage(1).size());
-    assertEquals(10, pageList.getTotalNodes());
-  }
+//  public void testSearchNotPagesDocument_SharedNoLiveMode() throws Exception {
+//    this.searchDocumentChecked = false;
+//    this.searchPageChecked = false;
+//    AbstractPageList<ResultNode> pageList = getSearchResult();
+//    assertEquals(5, pageList.getPage(1).size());
+//    assertEquals(10, pageList.getTotalNodes());
+//  }
 
   /**
    * Test case 17:Test search contents is document or page in all portal. And search
    * with created date and modified Date.
    * Search all pages in share and live mode. With this case, values of parameters are:<br/>
-   * searchPageChecked = true<br>
+   * searchPageChecked = false<br>
    * searchDocumentChecked = true<br>
    * searchSelectedPortal = null<br>
    * searchIsLiveMode = true<br>
    */
-  @SuppressWarnings("deprecation")
-  public void testSearchPagesDocument_Date() throws Exception {
-    this.searchIsLiveMode = true;
-    this.searchSelectedPortal = null;
-    Date date = new Date(2009, 05, 05);
-    GregorianCalendar calFrom = new GregorianCalendar() ;
-    calFrom.setTime(date);
-    date = new Date();
-    GregorianCalendar calTo = new GregorianCalendar() ;
-    calTo.setTime(date);
-    DatetimeRange datetimeRange = new DatetimeRange(calFrom, calTo);
-    queryCriteria.setCreatedDateRange(datetimeRange);
-    AbstractPageList<ResultNode> pageList = getSearchResult();
-    assertEquals(5, pageList.getPage(1).size());
-    assertEquals(10, pageList.getTotalNodes());
-  }
+//  @SuppressWarnings("deprecation")
+//  public void testSearchPagesDocument_Date() throws Exception {
+//    this.searchIsLiveMode = true;
+//    this.searchSelectedPortal = null;
+//    Date date = new Date(2009, 05, 05);
+//    GregorianCalendar calFrom = new GregorianCalendar() ;
+//    calFrom.setTime(date);
+//    date = new Date();
+//    GregorianCalendar calTo = new GregorianCalendar() ;
+//    calTo.setTime(date);
+//    DatetimeRange datetimeRange = new DatetimeRange(calFrom, calTo);
+//    queryCriteria.setCreatedDateRange(datetimeRange);
+//    queryCriteria.setSearchWebpage(false);
+//    queryCriteria.setSiteName(null);
+//    AbstractPageList<ResultNode> pageList = getSearchResult();
+//    assertEquals(5, pageList.getPage(1).size());
+//    assertEquals(10, pageList.getTotalNodes());
+//  }
 
   /**
    * Test case 18:Test search contents is document or page in all portal. And search
@@ -461,13 +467,14 @@ public class TestSearchService extends BaseWCMTestCase {
    * searchSelectedPortal = null<br>
    * searchIsLiveMode = true<br>
    */
-  public void testSearchPagesDocument_NotFultextSearch() throws Exception {
-    this.searchIsLiveMode = true;
-    this.searchSelectedPortal = null;
-    queryCriteria.setFulltextSearch(false);
-    AbstractPageList<ResultNode> pageList = getSearchResult();
-    assertEquals(0, pageList.getPage(1).size());
-  }
+//  public void testSearchPagesDocument_NotFultextSearch() throws Exception {
+//    this.searchIsLiveMode = true;
+//    this.searchSelectedPortal = null;
+//    queryCriteria.setFulltextSearch(false);
+//    queryCriteria.setSearchWebpage(false);
+//    AbstractPageList<ResultNode> pageList = getSearchResult();
+//    assertEquals(0, pageList.getPage(1).size());
+//  }
 
   /**
    * Test case 19:Test search contents is document or page in all portal. And search
@@ -479,14 +486,15 @@ public class TestSearchService extends BaseWCMTestCase {
    * searchIsLiveMode = true<br>
    * keyWord = null;
    */
-  public void testSearchPagesDocument_ContentType() throws Exception {
-    this.searchIsLiveMode = true;
-    this.searchSelectedPortal = null;
-    this.searchKeyword = null;
-    queryCriteria.setContentTypes(new String[]{"exo:webContent", "exo:htmlFile"});
-    AbstractPageList<ResultNode> pageList = getSearchResult();
-    assertEquals(5, pageList.getPage(1).size());
-  }
+//  public void testSearchPagesDocument_ContentType() throws Exception {
+//    this.searchIsLiveMode = true;
+//    this.searchSelectedPortal = null;
+//    queryCriteria.setSearchWebpage(false);
+//    queryCriteria.setContentTypes(new String[]{"exo:webContent", "exo:htmlFile"});
+//    queryCriteria.setKeyword(null);
+//    AbstractPageList<ResultNode> pageList = getSearchResult();
+//    assertEquals(5, pageList.getPage(1).size());
+//  }
 
   /**
    * Test case 20:Test search contents is document or page in all portal. And search
@@ -498,20 +506,21 @@ public class TestSearchService extends BaseWCMTestCase {
    * searchIsLiveMode = true<br>
    * keyWord = null;
    */
-  public void testSearchPagesDocument_Property() throws Exception {
-    this.searchIsLiveMode = true;
-    this.searchSelectedPortal = null;
-    this.searchKeyword = "This is*";
-    QueryProperty queryProperty1 = queryCriteria.new QueryProperty();
-    queryProperty1.setName("jcr:data");
-    queryProperty1.setValue("This is the");
-    QueryProperty queryProperty2 = queryCriteria.new QueryProperty();
-    queryProperty2.setName("jcr:data");
-    queryProperty2.setValue("the default.css file");
-    queryCriteria.setQueryMetadatas(new QueryProperty[]{queryProperty1, queryProperty2});
-    AbstractPageList<ResultNode> pageList = getSearchResult();
-    assertEquals(0, pageList.getPage(1).size());
-  }
+//  public void testSearchPagesDocument_Property() throws Exception {
+//    this.searchIsLiveMode = true;
+//    this.searchSelectedPortal = null;
+//    this.searchKeyword = "This is*";
+//    QueryProperty queryProperty1 = queryCriteria.new QueryProperty();
+//    queryProperty1.setName("jcr:data");
+//    queryProperty1.setValue("This is the");
+//    QueryProperty queryProperty2 = queryCriteria.new QueryProperty();
+//    queryProperty2.setName("jcr:data");
+//    queryProperty2.setValue("the default.css file");
+//    queryCriteria.setQueryMetadatas(new QueryProperty[]{queryProperty1, queryProperty2});
+//    queryCriteria.setSearchWebpage(false);
+//    AbstractPageList<ResultNode> pageList = getSearchResult();
+//    assertEquals(0, pageList.getPage(1).size());
+//  }
 
   /**
    * Test case 21:Test search contents is document or page in all portal. And search
@@ -525,18 +534,20 @@ public class TestSearchService extends BaseWCMTestCase {
    * @throws RepositoryException
    * @throws PathNotFoundException
    */
-  public void testSearchPagesDocument_CategoryUUIDS() throws Exception{
-    this.searchIsLiveMode = true;
-    this.searchSelectedPortal = null;
-    Node documentNode = ((Node)session.getItem("/sites content/live/shared/documents")).getNode("webcontent0");
-    Node livenode = ((Node)session.getItem("/sites content/live/classic/web contents")).getNode("webcontent0");
-    queryCriteria.setCategoryUUIDs(new String[]{documentNode.getUUID(), livenode.getUUID()});
-    AbstractPageList<ResultNode> pageList = getSearchResult();
-    assertEquals(0, pageList.getAvailable());
-  }
+//  public void testSearchPagesDocument_CategoryUUIDS() throws Exception{
+//    this.searchIsLiveMode = true;
+//    this.searchSelectedPortal = null;
+//    Node documentNode = ((Node)session.getItem("/sites content/live/shared/documents")).getNode("webcontent0");
+//    Node livenode = ((Node)session.getItem("/sites content/live/classic/web contents")).getNode("webcontent0");
+//    queryCriteria.setSearchWebpage(false);
+//    queryCriteria.setCategoryUUIDs(new String[]{documentNode.getUUID(), livenode.getUUID()});
+//    AbstractPageList<ResultNode> pageList = getSearchResult();
+//    assertEquals(0, pageList.getAvailable());
+//  }
 
   public void testSearchByProperty()throws Exception{
     this.searchIsLiveMode = true;
+    queryCriteria.setSearchWebpage(false);
     queryCriteria.setFulltextSearch(true);
     queryCriteria.setFulltextSearchProperty("dc:description");
     assertEquals(0, siteSearchService.searchSiteContents(sessionProvider, queryCriteria, 10, true).getTotalNodes());
@@ -545,7 +556,8 @@ public class TestSearchService extends BaseWCMTestCase {
   public void testSearchByDocumentType()throws Exception{
     String documentType = "exo:webContent";
     this.searchIsLiveMode = true;
-    this.searchKeyword = null;
+    queryCriteria.setSearchWebpage(false);
+    queryCriteria.setKeyword(null);
     queryCriteria.setFulltextSearch(true);
     queryCriteria.setFulltextSearchProperty(null);
     queryCriteria.setContentTypes(documentType.split(","));
@@ -556,6 +568,7 @@ public class TestSearchService extends BaseWCMTestCase {
     String author = "root";
     this.searchIsLiveMode = true;
     this.searchKeyword = null;
+    queryCriteria.setSearchWebpage(false);
     queryCriteria.setFulltextSearch(true);
     queryCriteria.setFulltextSearchProperty(null);
     queryCriteria.setAuthors(new String[]{author});
@@ -565,6 +578,7 @@ public class TestSearchService extends BaseWCMTestCase {
   public void testSearchByMimeTypes()throws Exception{
     this.searchIsLiveMode = true;
     this.searchKeyword = null;
+    queryCriteria.setSearchWebpage(false);
     queryCriteria.setFulltextSearch(true);
     queryCriteria.setFulltextSearchProperty(null);
     queryCriteria.setMimeTypes(new String[]{"exo:webContent", " exo:siteBreadcrumb"});
@@ -577,6 +591,7 @@ public class TestSearchService extends BaseWCMTestCase {
     this.searchIsLiveMode = true;
     this.searchSelectedPortal = "classic";
     this.searchKeyword = null;
+    queryCriteria.setSearchWebpage(false);
     queryCriteria.setFulltextSearch(true);
     queryCriteria.setFulltextSearchProperty(null);
     queryCriteria.setTagUUIDs(new String[]{uuid});

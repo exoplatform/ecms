@@ -67,6 +67,9 @@ public class ResultNode implements Node{
 
   /** The excerpt. */
   private String excerpt;
+  
+  /** user navigation node's uri **/
+  private String userNavigationURI;
 
   /**
    * Instantiates a new result node.
@@ -88,6 +91,14 @@ public class ResultNode implements Node{
   	this.excerpt = excerpt;
   	this.score = score;
   }
+  
+  public ResultNode(Node node, Row row, String userNavURI) throws RepositoryException {
+    this.nodeLocation = NodeLocation.getNodeLocationByNode(node);
+    this.userNavigationURI = userNavURI;
+    Value excerpt = row.getValue("rep:excerpt(.)");
+    this.excerpt = excerpt == null ? "" : excerpt.getString();
+    this.score = row.getValue("jcr:score").getLong();
+  }
 
   /**
    * Gets the node.
@@ -102,6 +113,20 @@ public class ResultNode implements Node{
    * @param node the new node
    */
   public void setNode(Node node) { this.nodeLocation = NodeLocation.getNodeLocationByNode(node); }
+
+  /**
+   * @param userNavigationURI the userNavigationURI to set
+   */
+  public void setUserNavigationURI(String userNavigationURI) {
+    this.userNavigationURI = userNavigationURI;
+  }
+
+  /**
+   * @return the userNavigationURI
+   */
+  public String getUserNavigationURI() {
+    return userNavigationURI;
+  }
 
   /**
    * Gets the score.
@@ -126,11 +151,12 @@ public class ResultNode implements Node{
     return excerpt;
   }
 
-  public String getEditor(){
-    try{
-    if(getNode().hasProperty("exo:owner"))
-      return getNode().getProperty("exo:owner").getString();
-    }catch(Exception ex){}
+  public String getEditor() {
+    try {
+      if (getNode().hasProperty("exo:owner"))
+        return getNode().getProperty("exo:owner").getString();
+    } catch (Exception ex) {
+    }
     return null;
   }
 

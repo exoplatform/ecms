@@ -4,6 +4,18 @@
   padding: 10px;
 }
 
+.UIWCMSearchPortlet .UISearchForm .UIFormGrid {
+  width: 60%;
+  margin-left: 20%;
+  margin-right: 20%;
+}
+
+.UIWCMSearchPortlet .UISearchForm .UIAction {
+  padding-bottom: 10px;
+  padding-top: 0;
+  text-align: center;
+}
+
 .UIWCMSearchPortlet .UISearchForm .CheckboxField {
   float: left;
   padding-left: 18px;
@@ -17,7 +29,13 @@
 
 .UIWCMSearchPortlet .UISearchForm input {
   font-size: 11px;
-  width: 400px;
+  width: 99%;
+}
+
+.UIWCMSearchPortlet .UISearchForm .radio {
+  font-size: 11px;
+  width: 15px;
+  padding-right: 10px;
 }
 
 .UIWCMSearchPortlet .UISearchForm .CheckboxField .checkbox {
@@ -27,6 +45,6 @@
 
 .UIWCMSearchPortlet .UISearchForm select {
   font-size: 11px;
-  width: 200px;
+  float:right;
 }
 /*-------------------------------------------------------------------------------------*/

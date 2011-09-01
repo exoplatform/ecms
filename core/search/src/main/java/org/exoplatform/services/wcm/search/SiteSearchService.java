@@ -61,4 +61,18 @@ public interface SiteSearchService {
                                                     QueryCriteria queryCriteria,
                                                     int pageSize,
                                                     boolean isSearchContent) throws Exception;
+  
+  /**
+   * 
+   * @param sessionProvider
+   * @param queryCriteria
+   * @param pageSize
+   * @param isSearchContent
+   * @return
+   * @throws Exception
+   */
+  public AbstractPageList<ResultNode> searchSEOContents(SessionProvider sessionProvider,
+                                                      QueryCriteria queryCriteria,
+                                                      int pageSize,
+                                                      boolean isSearchContent) throws Exception;
 }

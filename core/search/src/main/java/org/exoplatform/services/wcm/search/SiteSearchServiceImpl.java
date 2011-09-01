@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArraySet;
 
 import javax.jcr.Node;
+import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 import javax.jcr.Value;
 import javax.jcr.nodetype.NodeType;
@@ -31,10 +32,13 @@ import javax.jcr.query.Query;
 import javax.jcr.query.QueryManager;
 import javax.jcr.query.Row;
 import javax.jcr.query.RowIterator;
+import javax.portlet.PortletRequest;
 
 import org.apache.commons.lang.ArrayUtils;
 import org.exoplatform.container.xml.InitParams;
 import org.exoplatform.container.xml.ValueParam;
+import org.exoplatform.portal.application.PortalRequestContext;
+import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
@@ -51,12 +55,14 @@ import org.exoplatform.services.wcm.search.base.AbstractPageList;
 import org.exoplatform.services.wcm.search.base.NodeSearchFilter;
 import org.exoplatform.services.wcm.search.base.PageListFactory;
 import org.exoplatform.services.wcm.search.base.SearchDataCreator;
-import org.exoplatform.services.wcm.utils.SQLQueryBuilder;
-import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.services.wcm.utils.AbstractQueryBuilder.LOGICAL;
 import org.exoplatform.services.wcm.utils.AbstractQueryBuilder.ORDERBY;
 import org.exoplatform.services.wcm.utils.AbstractQueryBuilder.PATH_TYPE;
 import org.exoplatform.services.wcm.utils.AbstractQueryBuilder.QueryTermHelper;
+import org.exoplatform.services.wcm.utils.SQLQueryBuilder;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
+import org.exoplatform.webui.application.WebuiRequestContext;
+import org.exoplatform.webui.application.portlet.PortletRequestContext;
 
 /**
  * Created by The eXo Platform SAS Author : Hoa Pham hoa.pham@exoplatform.com
@@ -164,21 +170,52 @@ public class SiteSearchServiceImpl implements SiteSearchService {
     ManageableRepository currentRepository = repositoryService.getCurrentRepository();
     NodeLocation location = configurationService.getLivePortalsLocation(currentRepository.getConfiguration().getName());
     Session session = sessionProvider.getSession(location.getWorkspace(),currentRepository);
+    if (queryCriteria.isSearchWebpage()) {
+      session = sessionProvider.getSession("portal-system", WCMCoreUtils.getRepository());
+    }
     QueryManager queryManager = session.getWorkspace().getQueryManager();
     long startTime = System.currentTimeMillis();
     Query query = createQuery(queryCriteria, queryManager);
     String suggestion = getSpellSuggestion(queryCriteria.getKeyword(),currentRepository);
+    AbstractPageList<ResultNode> pageList = null;
+    pageList = PageListFactory.createPageList(query.getStatement(),
+                                              session.getWorkspace().getName(),
+                                              query.getLanguage(),
+                                              IdentityConstants.SYSTEM.equals(session.getUserID()),
+                                              new NodeFilter(isSearchContent, queryCriteria),
+                                              new DataCreator(),
+                                              pageSize,
+                                              0);
     
-    AbstractPageList<ResultNode> pageList = 
-      PageListFactory.createPageList(query.getStatement(), 
-                                     session.getWorkspace().getName(), 
-                                     query.getLanguage(), 
-                                     IdentityConstants.SYSTEM.equals(session.getUserID()), 
-                                     new NodeFilter(isSearchContent, queryCriteria), 
-                                     new DataCreator(),
-                                     pageSize,
-                                     0);
-    
+    long queryTime = System.currentTimeMillis() - startTime;
+    pageList.setQueryTime(queryTime);
+    pageList.setSpellSuggestion(suggestion);
+    return pageList;
+  }
+  
+  /**
+   * 
+   */
+  public AbstractPageList<ResultNode> searchSEOContents(SessionProvider sessionProvider,
+                                                      QueryCriteria queryCriteria,
+                                                      int pageSize,
+                                                      boolean isSearchContent) throws Exception {
+    ManageableRepository currentRepository = repositoryService.getCurrentRepository();
+    Session session = sessionProvider.getSession("portal-system", currentRepository);
+    QueryManager queryManager = session.getWorkspace().getQueryManager();
+    long startTime = System.currentTimeMillis();
+    Query query = createQuery(queryCriteria, queryManager);
+    String suggestion = getSpellSuggestion(queryCriteria.getKeyword(), currentRepository);
+    AbstractPageList<ResultNode> pageList = PageListFactory.createPageList(query.getStatement(),
+                                                                           session.getWorkspace()
+                                                                                  .getName(),
+                                                                           query.getLanguage(),
+                                                                           true,
+                                                                           null,
+                                                                           new SeoDataCreator(),
+                                                                           pageSize,
+                                                                           0);
+
     long queryTime = System.currentTimeMillis() - startTime;
     pageList.setQueryTime(queryTime);
     pageList.setSpellSuggestion(suggestion);
@@ -269,6 +306,13 @@ public class SiteSearchServiceImpl implements SiteSearchService {
    */
   private String getSitePath(final QueryCriteria queryCriteria) throws Exception {
     String siteName = queryCriteria.getSiteName();
+    if (queryCriteria.isSearchWebpage()) {
+      if ("all".equals(siteName) || siteName == null || siteName.trim().length() == 0) {
+        return "/production/mop:workspace/mop:portalsites";
+      } else {
+        return "/production/mop:workspace/mop:portalsites/mop:" + siteName;
+      }
+    }
     String sitePath = null;
     if (siteName != null) {
       sitePath = livePortalManagerService.getPortalPathByName(siteName);
@@ -451,8 +495,9 @@ public class SiteSearchServiceImpl implements SiteSearchService {
     NodeTypeManager manager = currentRepository.getNodeTypeManager();
     // Query all documents for specific content types
     String[] contentTypes = queryCriteria.getContentTypes();
-    if(contentTypes != null && contentTypes.length>0 && queryCriteria.getKeyword() == null) {
-      mapQuerySpecificNodeTypes(queryCriteria,queryBuilder,manager);
+    if ((contentTypes != null && contentTypes.length > 0 && queryCriteria.getKeyword() == null)
+        || queryCriteria.isSearchWebpage()) {
+      mapQuerySpecificNodeTypes(queryCriteria, queryBuilder, manager);
       return;
     }
     List<String> selectedNodeTypes = templateService.getDocumentTemplates();
@@ -599,4 +644,48 @@ public class SiteSearchServiceImpl implements SiteSearchService {
     }
     
   }
+  
+  public static class SeoDataCreator implements SearchDataCreator<ResultNode> {
+
+    @Override
+    public ResultNode createData(Node node, Row row) {
+      try {
+        PortalRequestContext portalRequestContext = Util.getPortalRequestContext();        
+        PortletRequestContext portletRequestContext = WebuiRequestContext.getCurrentInstance();
+        PortletRequest portletRequest = portletRequestContext.getRequest();
+
+        String baseURI = portletRequest.getScheme() + "://" + portletRequest.getServerName() + ":"
+            + String.format("%s", portletRequest.getServerPort()) + portalRequestContext.getPortalContextPath();
+        return new ResultNode(node, row, baseURI + "/" + SeoDataCreator.getUserNavigationURI(node).toString());
+      } catch (Exception e) {
+        return null;
+      }
+    }
+    
+    /**
+     * Get user navigation URI from equivalent mop node in portal-system workspace
+     * @param node the mop node in portal-system workspace
+     * @return 
+     * @throws RepositoryException
+     */
+    public static StringBuilder getUserNavigationURI(Node node) throws RepositoryException {
+      if (!node.isNodeType("mop:portalsites")) {
+        StringBuilder builder = getUserNavigationURI(node.getParent());
+        String name = node.getName();
+        if ("mop:children".equals(name) || "mop:default".equals(name)
+            || "mop:rootnavigation".equals(name)) {
+          return builder.append("");
+        } else {
+          if (builder.length() > 0) {
+            builder.append("/");
+          }
+          return builder.append(node.getName().replaceFirst("mop:", ""));
+        }
+      } else {
+        return new StringBuilder();
+      }
+
+    } 
+    
+  }  
 }

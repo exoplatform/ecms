@@ -78,4 +78,17 @@
       <quickEditTitle>Edition rapide</quickEditTitle>
     </label>
   </UISearchPageLayoutDefault>  
+  <searchOption>
+    <label>
+      <pageCheckBox>dans les pages</pageCheckBox>
+      <documentCheckBox>dans les contenus</documentCheckBox>
+    </label>
+  </searchOption>
+  <ViewMode>
+    <label>
+      <option>
+        <all>rechechez tous les sites</all>
+      </option>  
+    </label>  
+  </ViewMode>  
 </bundle>

@@ -40,7 +40,7 @@ import org.exoplatform.webui.core.model.SelectItemOption;
 import org.exoplatform.webui.event.Event;
 import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.form.UIForm;
-import org.exoplatform.webui.form.UIFormCheckBoxInput;
+import org.exoplatform.webui.form.UIFormRadioBoxInput;
 import org.exoplatform.webui.form.UIFormSelectBox;
 import org.exoplatform.webui.form.UIFormStringInput;
 
@@ -62,6 +62,9 @@ public class UISearchForm extends UIForm {
   /** The Constant KEYWORD_INPUT. */
   public static final String KEYWORD_INPUT                   = "keywordInput".intern();
 
+  /** The Constant SEARCH_OPTION. */
+  public static final String SEARCH_OPTION                   = "searchOption";
+  
   /** The Constant DOCUMENT_CHECKING. */
   public static final String DOCUMENT_CHECKING               = "documentCheckBox".intern();
 
@@ -94,17 +97,18 @@ public class UISearchForm extends UIForm {
     UIFormSelectBox uiPortalSelectBox = new UIFormSelectBox(PORTALS_SELECTOR,
                                                             PORTALS_SELECTOR,
                                                             getPortalList());
-    UIFormCheckBoxInput uiPageCheckBox = new UIFormCheckBoxInput(PAGE_CHECKING, PAGE_CHECKING, null);
-    uiPageCheckBox.setChecked(false);
-    UIFormCheckBoxInput uiDocumentCheckBox = new UIFormCheckBoxInput(DOCUMENT_CHECKING,
-                                                                     DOCUMENT_CHECKING,
-                                                                     null);
-    uiDocumentCheckBox.setChecked(true);
-
+    List<SelectItemOption<String>> searchOptionList = new ArrayList<SelectItemOption<String>>();
+    SelectItemOption<String> pageOption = new SelectItemOption<String>(PAGE_CHECKING, PAGE_CHECKING);
+    SelectItemOption<String> docOption = new SelectItemOption<String>(DOCUMENT_CHECKING, DOCUMENT_CHECKING);
+    searchOptionList.add(docOption);
+    searchOptionList.add(pageOption);
+    UIFormRadioBoxInput searchOptionRadioBox = new UIFormRadioBoxInput(SEARCH_OPTION, SEARCH_OPTION, searchOptionList);
+    searchOptionRadioBox.setDefaultValue(DOCUMENT_CHECKING);
+    searchOptionRadioBox.setValue(DOCUMENT_CHECKING);
+    
     addUIFormInput(uiKeywordInput);
     addUIFormInput(uiPortalSelectBox);
-    addUIFormInput(uiPageCheckBox);
-    addUIFormInput(uiDocumentCheckBox);
+    addUIFormInput(searchOptionRadioBox);
   }
 
   /**
@@ -192,10 +196,15 @@ public class UISearchForm extends UIForm {
       UIFormStringInput uiKeywordInput = uiSearchForm.getUIStringInput(UISearchForm.KEYWORD_INPUT);
       UIFormSelectBox uiPortalSelectBox = uiSearchForm.getUIFormSelectBox(UISearchForm.PORTALS_SELECTOR);
       String keyword = uiKeywordInput.getValue();
-      UIFormCheckBoxInput uiPageCheckbox = uiSearchForm.getUIFormCheckBoxInput(UISearchForm.PAGE_CHECKING);
-      UIFormCheckBoxInput uiDocumentCheckbox = uiSearchForm.getUIFormCheckBoxInput(UISearchForm.DOCUMENT_CHECKING);
-      String pageChecked = (uiPageCheckbox.isChecked()) ? "true" : "false";
-      String documentChecked = (uiDocumentCheckbox.isChecked()) ? "true" : "false";
+      UIFormRadioBoxInput uiSearchOptionRadioBox = uiSearchForm.getUIFormRadioBoxInput(SEARCH_OPTION);
+      String searchOption = uiSearchOptionRadioBox.getValue();
+      boolean pageChecked = false;
+      boolean documentChecked = false;
+      if (PAGE_CHECKING.equals(searchOption)) {
+        pageChecked = true;
+      } else if (DOCUMENT_CHECKING.equals(searchOption)) {
+        documentChecked = true;
+      }
       
       uiSearchResult.clearResult();
       
@@ -205,18 +214,16 @@ public class UISearchForm extends UIForm {
                                                 ApplicationMessage.WARNING));
         return;
       }
-      if (!Boolean.parseBoolean(pageChecked) && !Boolean.parseBoolean(documentChecked)) {
+      if (!pageChecked && !documentChecked) {
         uiApp.addMessage(new ApplicationMessage(MESSAGE_NOT_CHECKED_TYPE_SEARCH,
                                                 null,
                                                 ApplicationMessage.WARNING));
         return;
       }
       String resultType = null;
-      if (uiPageCheckbox.isChecked() && uiDocumentCheckbox.isChecked()) {
-        resultType = "DocumentAndPage";
-      } else if (uiPageCheckbox.isChecked() && !uiDocumentCheckbox.isChecked()) {
+      if (pageChecked) {
         resultType = "Page";
-      } else if (!uiPageCheckbox.isChecked() && uiDocumentCheckbox.isChecked()) {
+      } else {
         resultType = "Document";
       }
       String newKey = event.getRequestContext().getRequestParameter(OBJECTID);
@@ -226,26 +233,30 @@ public class UISearchForm extends UIForm {
       }
       keyword = keyword.replace('-', ' ').toLowerCase(portletRequestContext.getLocale());
       uiSearchResult.setResultType(resultType);
-      String selectedPortal = (uiPortalSelectBox.getValue().equals(UISearchForm.ALL_OPTION)) ? Util.getPortalRequestContext()
-                                                                                                   .getPortalOwner()
-                                                                                            : uiPortalSelectBox.getValue();
+      String selectedPortal = uiPortalSelectBox.getValue();
       QueryCriteria queryCriteria = new QueryCriteria();
 
-      TemplateService templateService = WCMCoreUtils.getService(TemplateService.class);
-      List<String> documentNodeTypes = templateService.getAllDocumentNodeTypes();
+      List<String> documentNodeTypes = new ArrayList<String>();
+      if (documentChecked) {
+        TemplateService templateService = WCMCoreUtils.getService(TemplateService.class);
+        documentNodeTypes = templateService.getAllDocumentNodeTypes();
+        selectedPortal = Util.getPortalRequestContext().getPortalOwner();
+      } else {
+        documentNodeTypes.add("exo:pageMetadata");
+      }
 
       queryCriteria.setContentTypes(documentNodeTypes.toArray(new String[documentNodeTypes.size()]));
 
       queryCriteria.setSiteName(selectedPortal);
       queryCriteria.setKeyword(keyword);
-      if (Boolean.parseBoolean(documentChecked)) {
+      if (documentChecked) {
         queryCriteria.setSearchDocument(true);
         queryCriteria.setSearchWebContent(true);
       } else {
         queryCriteria.setSearchDocument(false);
         queryCriteria.setSearchWebContent(false);
       }
-      queryCriteria.setSearchWebpage(Boolean.parseBoolean(pageChecked));
+      queryCriteria.setSearchWebpage(pageChecked);
       if (Boolean.parseBoolean(Utils.getCurrentMode())) {
         queryCriteria.setLiveMode(true);
       } else {
@@ -255,10 +266,19 @@ public class UISearchForm extends UIForm {
                                                                       null));
       queryCriteria.setPageMode(portletPreferences.getValue(UIWCMSearchPortlet.PAGE_MODE, null));
       try {
+        AbstractPageList<ResultNode> pageList = null;
+        if (pageChecked) {
+          pageList = siteSearchService.searchSEOContents(WCMCoreUtils.getSystemSessionProvider(),
+                                                          queryCriteria,
+                                                          itemsPerPage,
+                                                          false);
+        } else {
+          pageList = siteSearchService.searchSiteContents(WCMCoreUtils.getUserSessionProvider(),
+                                                         queryCriteria,
+                                                         itemsPerPage,
+                                                         false);          
+        }
 
-        AbstractPageList<ResultNode> pageList = 
-          siteSearchService.searchSiteContents(WCMCoreUtils.getUserSessionProvider(), 
-                                               queryCriteria, itemsPerPage, false);
         
         uiSearchResult.setKeyword(keyword);
         uiSearchResult.setPageList(pageList);
@@ -278,4 +298,10 @@ public class UISearchForm extends UIForm {
       portletRequestContext.addUIComponentToUpdateByAjax(uiSearchPageContainer);
     }
   }
+  
+  public UIFormRadioBoxInput getUIFormRadioBoxInput(String name)
+  {
+     return findComponentById(name);
+  }
+  
 }

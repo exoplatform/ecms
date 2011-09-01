@@ -54,6 +54,7 @@ import org.exoplatform.webui.config.annotation.ComponentConfigs;
 import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.UIApplication;
 import org.exoplatform.webui.core.lifecycle.Lifecycle;
+import org.exoplatform.webui.form.UIFormRadioBoxInput;
 
 /*
  * Created by The eXo Platform SAS Author : Anh Do Ngoc anh.do@exoplatform.com
@@ -139,8 +140,8 @@ public class UISearchResult extends UIContainer {
   public void processRender(WebuiRequestContext context) throws Exception {
     PortletRequestContext porletRequestContext = (PortletRequestContext) context;
     PortletPreferences portletPreferences = porletRequestContext.getRequest().getPreferences();
-    if (resultType == null || resultType.length() == 0) {
-      resultType = "DocumentAndPage";
+    if (resultType == null || resultType.trim().length() == 0) {
+      resultType = "Document";
     }
     PortalRequestContext portalRequestContext = Util.getPortalRequestContext();
     String portal = portalRequestContext.getRequestParameter("portal");
@@ -153,8 +154,6 @@ public class UISearchResult extends UIContainer {
       searchForm.getUIStringInput(UISearchForm.KEYWORD_INPUT).setValue(keyword);
       if (searchForm.getUIFormSelectBox(UISearchForm.PORTALS_SELECTOR).getValue() != null) {
         portal = searchForm.getUIFormSelectBox(UISearchForm.PORTALS_SELECTOR).getValue();
-        portal = portal.equals(UISearchForm.ALL_OPTION) ? Util.getPortalRequestContext()
-                                                              .getPortalOwner() : portal;
       }
       if (searchForm.getUIStringInput(UISearchForm.KEYWORD_INPUT).getValue() != null) {
         keyword = searchForm.getUIStringInput(UISearchForm.KEYWORD_INPUT).getValue();
@@ -164,12 +163,20 @@ public class UISearchResult extends UIContainer {
       SiteSearchService siteSearchService = getApplicationComponent(SiteSearchService.class);
       QueryCriteria queryCriteria = new QueryCriteria();
 
-      boolean isSearchDocument = searchForm.getUIFormCheckBoxInput(UISearchForm.DOCUMENT_CHECKING)
-                                           .isChecked();
-      boolean isWebPage = searchForm.getUIFormCheckBoxInput(UISearchForm.PAGE_CHECKING).isChecked();
+      UIFormRadioBoxInput searchOption = searchForm.getUIFormRadioBoxInput(UISearchForm.SEARCH_OPTION); 
+      boolean isSearchDocument = (searchOption.getValue().equals(UISearchForm.DOCUMENT_CHECKING));
+      boolean isWebPage = (searchOption.getValue().equals(UISearchForm.PAGE_CHECKING));
 
-      TemplateService templateService = WCMCoreUtils.getService(TemplateService.class);
-      List<String> documentNodeTypes = templateService.getAllDocumentNodeTypes();
+      List<String> documentNodeTypes = new ArrayList<String>();
+      if (isSearchDocument) {
+        TemplateService templateService = WCMCoreUtils.getService(TemplateService.class);
+        documentNodeTypes = templateService.getAllDocumentNodeTypes();
+        portal = Util.getPortalRequestContext().getPortalOwner();
+        resultType = "Document";
+      } else {
+        documentNodeTypes.add("exo:pageMetadata");
+        resultType = "Page";
+      }
       
       String pageMode = portletPreferences.getValue(UIWCMSearchPortlet.PAGE_MODE, SiteSearchService.PAGE_MODE_NONE);
       
@@ -189,9 +196,18 @@ public class UISearchResult extends UIContainer {
       int itemsPerPage = Integer.parseInt(portletPreferences.getValue(UIWCMSearchPortlet.ITEMS_PER_PAGE,
                                                                       null));
       try {
-        AbstractPageList<ResultNode> pageList = 
-          siteSearchService.searchSiteContents(WCMCoreUtils.getUserSessionProvider(), 
-                                               queryCriteria, itemsPerPage, false);
+        AbstractPageList<ResultNode> pageList = null;
+        if (isWebPage) {
+          pageList = siteSearchService.searchSEOContents(WCMCoreUtils.getSystemSessionProvider(),
+                                                          queryCriteria,
+                                                          itemsPerPage,
+                                                          false);
+        } else {
+          pageList = siteSearchService.searchSiteContents(WCMCoreUtils.getUserSessionProvider(),
+                                                         queryCriteria,
+                                                         itemsPerPage,
+                                                         false);          
+        }
         
         setSearchTime(pageList.getQueryTime() / 1000);
         setSuggestion(pageList.getSpellSuggestion());
@@ -297,7 +313,7 @@ public class UISearchResult extends UIContainer {
    */
   public String getTitle(Node node) throws Exception {
     return node.hasProperty("exo:title") ? node.getProperty("exo:title").getValue().getString()
-                                        : node.getName();
+                                        : node.getName().replaceFirst("mop:", "");
   }
 
   /**
