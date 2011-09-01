@@ -1,1 +1,35 @@
-to do Not external plugin !
+_ExcludeMimeTypes_ is used in the [SiteSearchService|#CONTref.Configuration.Components.SiteSearchService] component to filter the search results before these results are presented on the search page.
+
+The plugin has the following parameter:
+||*Properties-Param*||*Description*||
+|search.exclude.datatype|Exclude some data types when doing search.|
+
+The {{search.exclude.datatype}} property includes two attributes:
+||*Attributes*|| *Values*||*Description*||
+|name |mimetypes|Name of the property param. |
+|value |text/css,text/javascript,application/x-javascript,text/ecmascript |List mimetypes which will be excluded from the search results.|
+
+See the following sample configuration:
+{code:language=xml|indent=2}
+    <component-plugins>
+      <component-plugin>
+        <name>ExcludeMimeTypes</name>
+        <set-method>addExcludeIncludeDataTypePlugin</set-method>
+        <type>org.exoplatform.services.wcm.search.ExcludeIncludeDataTypePlugin</type>
+        <init-params>
+          <properties-param>
+            <name>search.exclude.datatypes</name>
+            <description>exclude some data type when search</description>
+            <property name="mimetypes" value="text/css,text/javascript,application/x-javascript,text/ecmascript" />
+          </properties-param>
+        </init-params>
+      </component-plugin>
+    </component-plugins>
+{code}
+
+In which:
+
+*Set-method*:  _addExcludeIncludeDataTypePlugin_
+
+*Type*: _org.exoplatform.services.wcm.search.ExcludeIncludeDataTypePlugin_
+

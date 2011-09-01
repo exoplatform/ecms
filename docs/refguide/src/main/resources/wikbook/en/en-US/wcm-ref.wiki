@@ -45,6 +45,8 @@ h3. NewsletterInitializationService    {anchor:id=CONTref.Configuration.Componen
 {include:document="pages/configuration/components/config_NewsletterInitializationService.wiki"/}
 h3. NewsletterManagerService    {anchor:id=CONTref.Configuration.Components.NewsletterManagerService}
 {include:document="pages/configuration/components/config_NewsletterManagerService.wiki"/}
+h3. SiteSearchService  {anchor:id=CONTref.Configuration.Components.SiteSearchService}
+{include:document="pages/configuration/components/config_SiteSearchService.wiki"/}
 h3. QueryService   {anchor:id=CONTref.Configuration.Components.QueryService}
 {include:document="pages/configuration/components/config_QueryService.wiki"/}
 h3. TaxonomyService     {anchor:id=CONTref.Configuration.Components.TaxonomyService}
@@ -72,6 +74,8 @@ h3. ContextPlugin  {anchor:id=CONTref.Configuration.Plugins.ContextPlugin}
 {include:document="pages/configuration/plugins/plugin_ContextPlugin.wiki"}
 h3. CreatePortalPlugin   {anchor:id=CONTref.Configuration.Plugins.CreatePortalPlugin}
 {include:document="pages/configuration/plugins/plugin_CreatePortalPlugin.wiki"}
+h3. ExcludeMimeTypes   {anchor:id=CONTref.Configuration.Plugins.ExcludeMimeTypes}
+{include:document="pages/configuration/plugins/plugin_ExcludeIncludeDataTypePlugin.wiki"}
 h3. FriendlyPlugin  {anchor:id=CONTref.Configuration.Plugins.FriendlyPlugin}
 {include:document="pages/configuration/plugins/plugin_FriendlyPlugin.wiki"}
 h3. ImageThumbnailPlugin  {anchor:id=CONTref.Configuration.Plugins.ImageThumnailPlugin}
@@ -165,6 +169,9 @@ h3. NodeFinder {anchor:id=CONTref.JavaServices.NodeFinder}
   {include:document="pages/services/nodeFinder.wiki" /}
 h3. JodConverter {anchor:id=CONTref.JavaServices.JodConverter}
   {include:document="pages/services/jodConverter.wiki" /}
+h3. SiteSearchService {anchor:id=CONTref.JavaServices.SiteSearchService}
+  {include:document="pages/services/SiteSearchService.wiki" /}
+
 
 h2. FAQ {anchor:id=CONTref.FAQ}
   {include:document="pages/faq/faq.wiki" /}
