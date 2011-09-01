@@ -552,6 +552,7 @@ exo-ecms-packaging-ecmdemo-webapp
                 <echo> 2. We delete jar files we don't want </echo>
                 <delete verbose="true">
                   <fileset dir="${project.build.directory}/${project.build.finalName}/lib/">
+										<exclude name="antlr-runtime-*.jar" />
 										<!--
 										DOING IT BY EXCLUDES
 										<exclude name="exo-ecms-*.jar" />
