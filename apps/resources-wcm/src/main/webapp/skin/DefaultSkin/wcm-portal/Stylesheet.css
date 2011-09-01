@@ -130,7 +130,7 @@ td {
 	z-index: 3;
 	position: relative;
 }
- 
+
 .UIToolbarContainer .UserToolBarSitePortletTDContainer {
 	z-index: 3;
 	position: relative;
@@ -174,7 +174,7 @@ td {
 
 /* Context Help CSS START */
 .ShowHelpIcon {
-background: url('background/ContextHelp/ShowHelpIcon.gif') no-repeat left center;
+background: url('background/ContextHelp/ShowHelpIcon.gif') no-repeat right center;
 }
 
 
@@ -189,7 +189,7 @@ background: url('background/ContextHelp/ShowHelpIcon.gif') no-repeat left center
 
 .InContextHelpContent {
   position: absolute;
-  width: 454px; 
+  width: 454px;
   left: -450px;
   display: none;
   top: 8px;
@@ -227,7 +227,9 @@ background: url('background/ContextHelp/ShowHelpIcon.gif') no-repeat left center
     background: #ffffff;
 }
 
-
+.UITableColumnContainer .UIPopupWindow .PopupContent {
+  position: relative;
+}
 
 /* Context Help CSS END */
 
