@@ -398,6 +398,13 @@
 
 .UIECMAdminPortlet .UIDriveList {
   margin-top: 5px ;
+  width: 100%;
+}
+
+.UIECMAdminPortlet .UIDriveList .FixTableSize {
+  width: 100%;
+  overflow:auto;
+  max-height: 420px;
 }
 
 .UIECMAdminPortlet .UIDriveManager .DriveInputSet .UIFormInputSetWithAction .FieldLabel {

@@ -422,6 +422,13 @@
 
 .UIECMAdminPortlet .UIDriveList {
   margin-top: 5px ;
+  width: 100%;
+}
+
+.UIECMAdminPortlet .UIDriveList .FixTableSize {
+  width: 100%;
+  overflow:auto;
+  max-height: 420px;
 }
 
 .UIECMAdminPortlet .UIDriveManager .UIForm .HorizontalLayout .UIFormInputSet {
@@ -461,6 +468,13 @@
   margin-left: 5px;
 }
 
+.UIECMAdminPortlet .UIDriveManager .UIGrid td {
+    border-color: #FFFFFF -moz-use-text-color #FFFFFF #FFFFFF;
+    border-style: solid none solid solid;
+    border-width: 1px 0 1px 1px;
+    padding: 5px;
+    vertical-align: middle;
+}
 /*############################## -- UIViewManager -- ########################*/
 
 .UIECMAdminPortlet .UIFormInputSetWithActions {
