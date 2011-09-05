@@ -1600,7 +1600,7 @@
       <mimetype-invalid>Only xml file or zip file are supported to import.</mimetype-invalid>
       <access-denied>Access denied! You are not allowed to import there.</access-denied>
       <constraint-violation-exception>Can not import because some constraints are violated: Data import is incorrect Or Node type '{0}' is not allowed child's node type is '{0}'</constraint-violation-exception>
-      <item-exists-exception>An incoming referenceable node has the same UUID as a node existing in the workspace!</item-exists-exception>
+      <item-exists-exception>An incoming referenceable node has the same UUID as a node existing in the workspace! UUID: '{0}'</item-exists-exception>
     </msg>
   </UIImportNode>
   <!--

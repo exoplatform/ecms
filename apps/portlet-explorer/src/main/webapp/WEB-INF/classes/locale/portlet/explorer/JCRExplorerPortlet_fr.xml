@@ -1598,7 +1598,7 @@
       <mimetype-invalid>Seuls les fichier xml ou zip sont supportés pour l'import.</mimetype-invalid>
       <access-denied>Accès interdit ! Vous n'avez pas les droits suffisants pour importer à cet endroit.</access-denied>
       <constraint-violation-exception>Impossible d'importer. Le type de noeud '{0}' n'est pas autorisé</constraint-violation-exception>
-      <item-exists-exception>Un noeud entrant référençable a le même UUID qu'un noeud existant dans l'espace de travail !</item-exists-exception>
+      <item-exists-exception>Un noeud entrant référençable a le même UUID qu'un noeud existant dans l'espace de travail ! UUID: '{0}'</item-exists-exception>
     </msg>
   </UIImportNode>
   <!--

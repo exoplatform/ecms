@@ -28,7 +28,6 @@ import java.util.zip.ZipInputStream;
 
 import javax.jcr.AccessDeniedException;
 import javax.jcr.ImportUUIDBehavior;
-import javax.jcr.ItemExistsException;
 import javax.jcr.Node;
 import javax.jcr.Session;
 import javax.jcr.nodetype.ConstraintViolationException;
@@ -36,6 +35,7 @@ import javax.jcr.nodetype.ConstraintViolationException;
 import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.cms.mimetype.DMSMimeTypeResolver;
+import org.exoplatform.services.jcr.impl.storage.JCRItemExistsException;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.upload.UploadService;
@@ -232,11 +232,11 @@ public class UIImportNode extends UIForm implements UIPopupComponent {
                                                 ApplicationMessage.WARNING));
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
         return;
-      } catch (ItemExistsException iee) {
+      } catch (JCRItemExistsException iee) {
         log.error("XML Import error " + iee, iee);
         session.refresh(false);
         uiApp.addMessage(new ApplicationMessage("UIImportNode.msg.item-exists-exception",
-                                                null,
+                                                new Object[] { iee.getIdentifier() },
                                                 ApplicationMessage.WARNING));
         event.getRequestContext().addUIComponentToUpdateByAjax(uiApp.getUIPopupMessages());
         return;      

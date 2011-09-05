@@ -1403,7 +1403,7 @@
       <mimetype-invalid>لا يمكن استيرادالملفات إلا من نوع 'xml' أو 'zip'.</mimetype-invalid>
       <access-denied>غير مسموح! لا يمكنك الاستيراد هناك.</access-denied>
       <constraint-violation-exception>لا يمكنك الاستيراد. العقدة من نوع '{0}' غير متاحة.</constraint-violation-exception>
-      <item-exists-exception>An incoming referenceable node has the same UUID as a node existing in the workspace!</item-exists-exception>
+      <item-exists-exception>An incoming referenceable node has the same UUID as a node existing in the workspace! UUID: '{0}'</item-exists-exception>
     </msg>
   </UIImportNode>
   <!--
