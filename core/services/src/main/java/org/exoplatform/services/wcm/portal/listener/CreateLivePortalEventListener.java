@@ -105,7 +105,8 @@ public class CreateLivePortalEventListener extends Listener<DataStorageImpl, Por
     boolean showHiddenNode = mainDriveData.getShowHiddenNode();
     String allowCreateFolder = mainDriveData.getAllowCreateFolders();
     String allowNodeTypesOnTree = mainDriveData.getAllowNodeTypesOnTree();
-    driveService.addDrive(portal.getName(),
+    String driveName = String.format("%s-category", portal.getName());
+    driveService.addDrive(driveName,
                           workspace,
                           permission,
                           homePath,
