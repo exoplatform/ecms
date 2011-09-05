@@ -794,6 +794,15 @@ public class Utils {
        .replaceAll("eval\\((.*)\\)", "")                   // case 3 : eval: are removed           
        .replaceAll("'", "#39;");                         // case 4 : replace "'" by #39
   }
+  
+  public static boolean isEmptyContent(String inputValue) {
+	boolean isEmpty = true;
+	inputValue = inputValue.trim().replaceAll("<p>", "").replaceAll("</p>", "");
+	inputValue = inputValue.replaceAll("\n", "").replaceAll("\t","");
+	inputValue = inputValue.replaceAll("&nbsp;", "");
+	if(inputValue != null && inputValue.length() > 0) return false;	 	
+	return isEmpty;
+  }
   /**
    * @purpose     Check if a query is valid
    * @param workspace

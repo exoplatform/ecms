@@ -131,9 +131,12 @@ public class DialogFormUtil {
           } else if(input instanceof UIFormCheckBoxInput) {
             property.setValue(((UIFormCheckBoxInput)input).isChecked()) ;
           } else {
-          	if(input.getValue()!=null) {
-          		String inputValue = input.getValue().toString().trim();          		
-          		property.setValue(Utils.sanitize(inputValue));
+          	if(input.getValue()!=null) {          		
+          	  String inputValue = input.getValue().toString().trim();
+          	  boolean isEmpty = Utils.isEmptyContent(inputValue);
+          	  if(isEmpty) inputValue = "";
+          	  else inputValue = Utils.sanitize(inputValue);
+          	  property.setValue(inputValue);
           	} else {
           		property.setValue(input.getValue());
           	}
