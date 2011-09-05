@@ -142,17 +142,16 @@ public class UICLVFolderMode extends UICLVContainer {
       }
     }
     String folderPath = this.getAncestorOfType(UICLVPortlet.class).getFolderPath();
-    NodeLocation nodeLocation = NodeLocation.getNodeLocationByExpression(
-        (folderPath != null) ? folderPath : preferences.getValue(UICLVPortlet.PREFERENCE_ITEM_PATH, null));    
-    if(folderPath == null && preferences.getValue(UICLVPortlet.PREFERENCE_ITEM_PATH, null) == null){
-//      return new ArrayList<Node>();
+    if (folderPath == null) {
+      folderPath = preferences.getValue(UICLVPortlet.PREFERENCE_ITEM_PATH, null);
+    }
+    if (folderPath == null) {
       return new Result(new ArrayList<Node>(), 0, 0, null, null);
-    }   
-    //encoding
-    String nPath  = new String(nodeLocation.getPath().getBytes("ISO-8859-1"), "UTF-8");
-    //return wcmComposer.getContents(nodeLocation.getRepository(), Text.escapeIllegalJcrChars(nodeLocation.getWorkspace()),
-    //    Text.escapeIllegalJcrChars(nPath), filters, WCMCoreUtils.getUserSessionProvider());
-    return wcmComposer.getPaginatedContents(nodeLocation, filters, WCMCoreUtils.getUserSessionProvider());
+    }
+    NodeLocation nodeLocation = NodeLocation.getNodeLocationByExpression(folderPath);
+    return wcmComposer.getPaginatedContents(nodeLocation,
+                                            filters,
+                                            WCMCoreUtils.getUserSessionProvider());
   }
   
   /**
