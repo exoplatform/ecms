@@ -66,8 +66,10 @@ SearchPortlet.prototype.search = function(comId) {
 		var keyNum = eXo.ecm.SearchPortlet.getKeynum(event);
 		if (keyNum == 13) {
 			var searchButton = eXo.core.DOMUtil.findFirstDescendantByClass(
-					this.form, "div", "SearchButton");
+					this.form, "a", "SearchButton");
 			searchButton.onclick();
+			var href = searchButton.getAttribute('href');
+			eval(href);
 		}
 	}
 };
