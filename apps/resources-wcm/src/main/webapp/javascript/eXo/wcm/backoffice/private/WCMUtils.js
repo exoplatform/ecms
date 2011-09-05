@@ -152,7 +152,6 @@ WCMUtils.prototype.setScrollBar = function()  {
 WCMUtils.prototype.hideContextMenu = function(menuItemElem)  {
 	var contextMenu = eXo.core.DOMUtil.findAncestorByClass(menuItemElem, "UIRightClickPopupMenu") ;
 	contextMenu.style.display = "none" ;
-	return false;
 }
 
 WCMUtils.prototype.changePriorityCss = function() {
