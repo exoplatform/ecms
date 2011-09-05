@@ -23,5 +23,6 @@
 	 <xi:include href="Basics/FastContentCreator.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
 	 <xi:include href="Basics/FormGenerator.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
 	 <xi:include href="Basics/Categories.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+	 <xi:include href="Basics/Content_By_Query.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
 </chapter>
 
