@@ -1,7 +1,7 @@
 <% uicomponent.addInterceptor("ecm-explorer/interceptor/PreNodeSaveInterceptor.groovy", "prev") ; %>
 
-<div class="UIForm FormLayout FormScrollLayout"> 
-  <%  
+<div class="UIForm FormLayout FormScrollLayout">
+  <%
 	 uiform.begin()
   %>
   <%/* start render action*/%>
@@ -9,8 +9,8 @@
             uiform.processRenderAction()
          }
   %>
-  <%/* end render action*/%>  
-  <div class="HorizontalLayout">	  
+  <%/* end render action*/%>
+  <div class="HorizontalLayout">
    <table class="UIFormGrid">
       <tr>
         <td class="FieldLabel"><%=_ctx.appRes("Article.dialog.label.title")%></td>
@@ -20,59 +20,59 @@
           uicomponent.addTextField("title", fieldTitle) ;
         %>
         </td>
-      </tr>  
+      </tr>
 
 			<tr>
 			  <td class="FieldLabel"><%=_ctx.appRes("Article.dialog.label.name")%></td>
 			  <td class="FieldComponent">
 			  <%
 	        String[] fieldName = ["jcrPath=/node", "mixintype=mix:votable,mix:commentable,mix:i18n,mix:versionable", "editable=if-null", "validate=empty,name"] ;
-	        uicomponent.addTextField("name", fieldName) ; 
-      	%>	      
+	        uicomponent.addTextField("name", fieldName) ;
+      	%>
           <script>
           titleField = document.getElementById("title");
           titleField.onchange = function() { eXo.ecm.SELocalization.cleanName(this.value, "name"); } ;
           </script>
         </td>
 			</tr>
-			
+
       <tr>
         <td class="FieldLabel"><%=_ctx.appRes("ElementSet.dialog.label.language")%></td>
         <td class="FieldComponent">
         <%
           String lang = org.exoplatform.portal.webui.util.Util.getPortalRequestContext().getLocale().getLanguage();
-          String[] fieldLang = ["jcrPath=/node/exo:language", "script=ecm-explorer/widget/FillSelectBoxWithLanguage.groovy", lang] ;          
+          String[] fieldLang = ["jcrPath=/node/exo:language", "script=ecm-explorer/widget/FillSelectBoxWithLanguage.groovy", lang] ;
           uicomponent.addSelectBoxField("content-lang", fieldLang) ;
         %>
         </td>
-      </tr>  
-			
+      </tr>
+
 			<tr>
 			  <td class="FieldLabel"><%=_ctx.appRes("Article.dialog.label.summary")%></td>
 			  <td class="FieldComponent">
-			    <div class="UIFCKEditor">					
+			    <div class="UIFCKEditor">
 						<%
 						  String[] fieldSummary = ["jcrPath=/node/exo:summary", "options=Basic", ""] ;
 						  uicomponent.addRichtextField("summary", fieldSummary) ;
 		      	%>
 		      </div>
 				</td>
-			</tr>  
-			
+			</tr>
+
 			<tr>
 			  <td class="FieldLabel"><%=_ctx.appRes("Article.dialog.label.content")%></td>
 			  <td class="FieldComponent">
 			    <div class="UIFCKEditor">
 						<%
   						String[] fieldContent = ["jcrPath=/node/exo:text", "options=toolbar:CompleteWCM,'height:410px'", ""] ;
-  						uicomponent.addRichtextField("content", fieldContent) ;        
+  						uicomponent.addRichtextField("content", fieldContent) ;
 			      %>
 					</div>
 				</td>
 			</tr>
-        
+
       <tr>
-        <td class="FieldLabel">Last modified date : </td>
+        <td class="FieldLabel"><%=_ctx.appRes("Article.dialog.label.lastModifiedDate")%></td>
         <td class="FieldComponent"><%=uicomponent.getLastModifiedDate()%></td>
       </tr>
 		</table>

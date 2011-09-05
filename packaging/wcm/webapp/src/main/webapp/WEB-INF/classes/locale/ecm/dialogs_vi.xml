@@ -27,6 +27,7 @@
         <title>Tiêu đề</title>
         <summary>Tóm tắt</summary>
         <content>Nội dung</content>
+        <lastModifiedDate>Ngày sửa đổi mới nhất</lastModifiedDate>
       </label>
     </dialog>
     <msg>

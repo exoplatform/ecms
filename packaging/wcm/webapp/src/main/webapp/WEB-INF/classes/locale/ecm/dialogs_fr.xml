@@ -27,6 +27,7 @@
         <title>#{word.title}</title>
         <summary>#{word.summary}</summary>
         <content>#{word.content}</content>
+        <lastModifiedDate>Dernière date de modification</lastModifiedDate>
       </label>
     </dialog>
     <msg>
