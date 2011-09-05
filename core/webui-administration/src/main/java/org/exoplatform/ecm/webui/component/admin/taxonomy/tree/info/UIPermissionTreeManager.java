@@ -63,10 +63,9 @@ public class UIPermissionTreeManager extends UIContainer {
 
   public void initUserSelector() throws Exception {
     UIPopupWindow uiPopup = getChildById(POPUP_TAXONOMY_SELECT_USER);
-    if (uiPopup == null) {
-      uiPopup.setShowMask(true);
-      uiPopup = addChild(UIPopupWindow.class, null, POPUP_TAXONOMY_SELECT_USER);
-    }
+    if (uiPopup == null) 
+      uiPopup = addChild(UIPopupWindow.class, null, POPUP_TAXONOMY_SELECT_USER);    
+    uiPopup.setShowMask(true);
     uiPopup.setWindowSize(790, 400);
     UIPermissionTreeSelectUser uiUserContainer = createUIComponent(UIPermissionTreeSelectUser.class, null, null);
     uiPopup.setUIComponent(uiUserContainer);
