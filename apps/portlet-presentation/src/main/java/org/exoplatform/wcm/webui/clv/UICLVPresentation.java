@@ -38,7 +38,6 @@ import org.exoplatform.commons.utils.PageList;
 import org.exoplatform.container.PortalContainer;
 import org.exoplatform.ecm.utils.text.Text;
 import org.exoplatform.ecm.webui.utils.LockUtil;
-import org.exoplatform.portal.application.PortalRequestContext;
 import org.exoplatform.portal.mop.SiteType;
 import org.exoplatform.portal.webui.container.UIContainer;
 import org.exoplatform.portal.webui.util.Util;
@@ -789,6 +788,28 @@ public class UICLVPresentation extends UIContainer {
 
     return sb.toString();
   }
+  
+  public String getBackLink (String currentPath) {
+    String preferencePath = Utils.getPortletPreference(UICLVPortlet.PREFERENCE_ITEM_PATH);    
+    String targetPage = Utils.getPortletPreference(UICLVPortlet.PREFERENCE_TARGET_PAGE);
+    NodeURL nodeURL = Util.getPortalRequestContext().createURL(NodeURL.TYPE);
+    NavigationResource resource = new NavigationResource(SiteType.PORTAL, Util.getPortalRequestContext().getPortalOwner(), targetPage);
+    nodeURL.setResource(resource);
+    
+    if (currentPath.contains(preferencePath)) {
+      String treePath = currentPath.substring(preferencePath.length() + 1);
+      String[] treeNodes = treePath.split("/");
+      
+      if (treeNodes.length > 1) {
+        String paramPath = currentPath.substring(0, currentPath.lastIndexOf("/"));
+        String clvBy = Utils.getPortletPreference(UICLVPortlet.PREFERENCE_SHOW_CLV_BY);
+        nodeURL.setQueryParameterValue(clvBy, paramPath);
+      }      
+    }
+    
+    return nodeURL.toString();
+  }
+
 
   /**
    * The listener interface for receiving refreshAction events. The class that
@@ -858,5 +879,4 @@ public class UICLVPresentation extends UIContainer {
       event.getRequestContext().addUIComponentToUpdateByAjax(contentListPresentation);
     }
   }
-
 }
