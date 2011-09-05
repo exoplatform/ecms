@@ -125,7 +125,7 @@
                     <field name="accessPermissions">
                       <collection type="java.util.ArrayList" item-type="java.lang.String">
                         <value>
-                          <string>Everyone</string>
+                          <string>*:/platform/administrators</string>
                         </value>
                       </collection>
                     </field>
