@@ -581,3 +581,130 @@
   width: 16px;
   margin: auto;
 }
+/* ================================================= Page Iterator =========================================*/
+
+.PageIterator {    
+	float:right;
+	margin: 0px ;
+	padding: 3px 0px 0px 5px ;
+}
+
+.PageIterator .PageIteratorContainer {    
+  float: right ;
+  overflow: hidden; 
+}
+
+.PageIterator .PageIteratorContainer .LeftPageIteratorBlock{    
+  line-height: 18px ; 
+  float: right ;
+  margin-right: 15px;
+}
+
+.PageIterator .PageIteratorContainer .RightPageIteratorBlock{    
+  float: right ;
+}
+
+.PageIterator .Icon {
+  float: left ;
+  margin: 0px 2px 0px 0px ;
+  width: 18px ; height: 17px ;
+}
+
+.PageIterator .TotalPages {
+  float: left ;
+  line-height: 16px ; 
+}
+
+.PageIterator .PagesTotalNumber {
+  float: left ;
+  line-height: 17px ; 
+  color: #0183f1;
+  margin-left: 5px;
+}
+
+.PageIterator .LastTopPageIcon {
+  vertical-align: middle ;
+  background: url('../images/ScrollDoubleBackArrows.gif') no-repeat ;
+  cursor: pointer ;
+}
+
+.PageIterator .NextTopPageIcon {
+  background: url('../images/ScrollDoubleNextArrows.gif') no-repeat ;
+  cursor: pointer ;
+}
+
+.PageIterator .LastPageIcon {
+  background: url('../images/ScrollSingleBackArrow.gif') no-repeat ;
+  cursor: pointer ; 
+}
+
+.PageIterator .NextPageIcon {
+  background: url('../images/ScrollSingleNextArrow.gif') no-repeat ;
+  cursor: pointer ;
+}
+
+.PageIterator .DisableLastTopPageIcon {
+  vertical-align: middle ;
+  background: url('../images/DoubleBackArrows.gif') no-repeat ;
+}
+
+.PageIterator .DisableNextTopPageIcon {
+  background: url('../images/DoubleNextArrows.gif') no-repeat ;
+}
+
+.PageIterator .DisableLastPageIcon {
+  background: url('../images/SingleBackArrow.gif') no-repeat ;
+}
+
+.PageIterator .DisableNextPageIcon {
+  background: url('../images/SingleNextArrow.gif') no-repeat ;
+}
+/* End */
+
+.PageIterator .Number {
+  float: left ;
+  text-align: center;
+  margin: 0px 2px 0px 0px;
+  line-height: 17px;
+}
+
+.PageIterator .PageSelected {
+  line-height: 15px;
+  height: 15px ;
+  border: 1px solid #dfdfdf;
+  color: #f16701;
+  font-weight: bold;
+  padding: 0px 6px;
+  cursor: default;
+}
+
+.PageIterator .PageNormal {
+	margin: 0px 0px 0px 0px ;
+  padding: 1px 7px;
+  border: 1px solid #dfdfdf;
+  color: #333333 ;
+  background: white;
+}
+
+.PageIterator .Number a {
+  padding: 1px 6px 1px 7px;
+}
+
+.PageIterator .Number a:hover {
+  padding: 1px 6px 1px 7px;
+  color: #058ee6 ;
+  border: 1px solid #777777;
+}
+
+.pg-normal {
+    color: black;
+    font-weight: normal;
+    text-decoration: none;    
+    cursor: pointer;    
+}
+.pg-selected {
+    color: black;
+    font-weight: bold;        
+    text-decoration: underline;
+    cursor: pointer;
+}

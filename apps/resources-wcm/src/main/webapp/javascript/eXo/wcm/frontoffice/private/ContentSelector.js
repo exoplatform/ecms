@@ -784,7 +784,7 @@ Pager.prototype.showPageNav = function(positionId) {
 		return;
 	}
 	var element = document.getElementById(positionId);
-	var pagerHtml = '<span>Total page : '+this.pages+'</span> ';
+	var pagerHtml = '<span>Total page(s) : '+this.pages+'</span> ';
 	pagerHtml += '<span onclick="eXo.ecm.Pager.previousPage();" class="pg-normal"> &#171 Prev </span> | ';
     for (var page = 1; page <= this.pages; page++) {
     	pagerHtml += '<span id="pg' + page + '" class="pg-normal" title="'+page+'" onclick="eXo.ecm.Pager.showPage(' + page + ');">' + page + '</span> | ';
