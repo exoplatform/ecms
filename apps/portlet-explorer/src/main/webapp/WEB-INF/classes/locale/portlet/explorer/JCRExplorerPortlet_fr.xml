@@ -294,9 +294,9 @@
   <UIActionBar>
     <tooltip>
       <AddFolder>Ajouter un répertoire</AddFolder>
-      <AddDocument>Ajouter un document</AddDocument>
+      <AddDocument>Ajouter un contenu</AddDocument>
       <EditDocument>Editer un document</EditDocument>
-      <Upload>Uploader</Upload>
+      <Upload>Uploader un/des document(s)</Upload>
       <Paste>Coller</Paste>
       <Search>Chercher</Search>
       <CreateTicket>Nouveau ticket</CreateTicket>
@@ -560,8 +560,8 @@
       <autoversion>Versioning automatique</autoversion>
       <Custom>Personnaliser</Custom>
       <AddFolder>Ajouter un répertoire</AddFolder>
-      <AddDocument>Ajouter un document</AddDocument>
-      <Upload>Uploader</Upload>
+      <AddDocument>Ajouter un contenu</AddDocument>
+      <Upload>Uploader un/des document(s)</Upload>
       <MoveNode>Déplacer</MoveNode>
       <UnLock>Déverrouiller</UnLock>
       <ViewProperties>Visualiser les propriétés du noeud</ViewProperties>
@@ -1866,8 +1866,8 @@
     <header>
       <name>#{word.name}</name>
       <description>Description</description>
-	  <lifecycle>Life Cycle</lifecycle>	
-	  <triggeredaction>Triggered Action</triggeredaction>	
+	  <lifecycle>Life Cycle</lifecycle>
+	  <triggeredaction>Triggered Action</triggeredaction>
       <instanceOf>Instances de ce type d'action</instanceOf>
       <action>Action</action>
     </header>
@@ -3384,7 +3384,7 @@
 	  </msg>
   </UIDocumentForm>
   <lifecyclePhase>
-    <label>  
+    <label>
   	<no>Non</no>
 	  <yes>Oui</yes>
 	  <true>Vrai</true>
@@ -3411,5 +3411,5 @@
 	  <property_removed>Enlèvement de la propriété</property_removed>
 	  <property_changed>Modification de la propriété</property_changed>
 	</label>
-  </lifecyclePhase>	
+  </lifecyclePhase>
 </bundle>

@@ -297,9 +297,9 @@
   <UIActionBar>
     <tooltip>
       <AddFolder>Add Folder</AddFolder>
-      <AddDocument>Add Document</AddDocument>
+      <AddDocument>Add Content</AddDocument>
       <EditDocument>Edit Document</EditDocument>
-      <Upload>Upload</Upload>
+      <Upload>Upload document(s)</Upload>
       <Paste>Paste</Paste>
       <Search>Search</Search>
       <CreateTicket>New Ticket</CreateTicket>
@@ -562,8 +562,8 @@
       <autoversion>Auto versioning</autoversion>
       <Custom>Custom</Custom>
       <AddFolder>Add folder</AddFolder>
-      <AddDocument>Add document</AddDocument>
-      <Upload>Upload</Upload>
+      <AddDocument>Add content</AddDocument>
+      <Upload>Upload document(s)</Upload>
       <MoveNode>Move</MoveNode>
       <UnLock>Unlock</UnLock>
       <ViewProperties>View properties</ViewProperties>
@@ -1868,8 +1868,8 @@
     <header>
       <name>#{word.name}</name>
       <description>Description</description>
-	  <lifecycle>Life Cycle</lifecycle>	
-	  <triggeredaction>Triggered Action</triggeredaction>	
+	  <lifecycle>Life Cycle</lifecycle>
+	  <triggeredaction>Triggered Action</triggeredaction>
       <instanceOf>Instance Of Action Type</instanceOf>
       <action>Action</action>
     </header>
@@ -3359,7 +3359,7 @@
     </msg>
   </UploadFileMimeTypesValidator>
   <lifecyclePhase>
-    <label>	  	
+    <label>
   	  <no>No</no>
 	  <yes>Yes</yes>
 	  <true>True</true>
@@ -3386,7 +3386,7 @@
 	  <property_removed>Property Removal</property_removed>
 	  <property_changed>Property Modification</property_changed>
 	</label>
-  </lifecyclePhase>	  		
+  </lifecyclePhase>
 </bundle>
 
 
