@@ -1,0 +1,48 @@
+The _SEOService_ component is used to help users manage SEO data of a page or a content, so their websites can achieve higher rankings on search engines.
+The configuration of this component is found in /packaging/wcm/webapp/src/main/webapp/WEB-INF/conf/wcm-extension/wcm/seo-configuration.xml_.
+
+{code:xml}
+<component>
+    <key>org.exoplatform.services.seo.SEOService</key>
+    <type>org.exoplatform.services.seo.impl.SEOServiceImpl</type>
+    <init-params>
+	  <object-param>
+	    <name>seo.config</name>
+		<object type="org.exoplatform.services.seo.SEOConfig">
+		  <field name="robotsindex">
+		    <collection type="java.util.ArrayList">
+			  <value><string>INDEX</string></value>
+			  <value><string>NOINDEX</string></value>
+			</collection>
+		  </field>
+		  <field name="robotsfollow">
+		    <collection type="java.util.ArrayList">
+			  <value><string>FOLLOW</string></value>
+			  <value><string>NOFOLLOW</string></value>
+			</collection>
+		  </field>
+		  <field name="frequency">
+		    <collection type="java.util.ArrayList">
+			  <value><string>Always</string></value>
+			  <value><string>Hourly</string></value>
+			  <value><string>Daily</string></value>
+			  <value><string>Weekly</string></value>
+			  <value><string>Monthly</string></value>
+			  <value><string>Yearly</string></value>
+			  <value><string>Never</string></value>
+			</collection>
+		  </field>
+        </object>
+	  </object-param>
+    </init-params>
+  </component>
+{code}
+
+
+*Details*:
+*Object type*: _org.exoplatform.services.seo.SEOConfig_
+
+|| *Field name*|| *Type* || *Default value*|| *Description* ||
+|*robotsindex* |string|INDEX {example}{example}NOINDEX| Allow search engines to index a particular page or not. |
+|*robotsfollow*|string|FOLLOW {example}{example}NOFOLLOW|Allow search engines to follow to links from a particular page to find other pages or not.|
+|*frequency*|string|Always{example}{example}Hourly{example}{example}Daily{example}{example}Weekly{example}{example}Monthly{example}{example}Yearly{example}{example}Never|Define how often a particular page is updated.|

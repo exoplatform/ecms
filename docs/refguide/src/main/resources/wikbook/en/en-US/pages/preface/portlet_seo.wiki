@@ -1,0 +1,2 @@
+The SEO portlet is packaged in the _seo.war_ file. The portlet allows users to manage SEO data of web content and web pages, so they can maximize their website position on search engines.
+

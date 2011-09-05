@@ -24,6 +24,8 @@ h3. Authoring {anchor:id=CONTref.Portlets.Authoring}
 {include:document="pages/preface/portlet_authoring.wiki" /}
 h3. Newsletter {anchor:id=CONTref.Portlets.Newsletter}
 {include:document="pages/preface/portlet_newsletter.wiki" /}
+h3. SEO portlet  {anchor:id=CONTref.Portlets.SEO}
+ {include:document="pages/preface/portlet_seo.wiki" /}
 
 
 h1. Configuration   {anchor:id=CONTref.Configuration}
@@ -47,6 +49,8 @@ h3. NewsletterManagerService    {anchor:id=CONTref.Configuration.Components.News
 {include:document="pages/configuration/components/config_NewsletterManagerService.wiki"/}
 h3. SiteSearchService  {anchor:id=CONTref.Configuration.Components.SiteSearchService}
 {include:document="pages/configuration/components/config_SiteSearchService.wiki"/}
+h3. SEOService   {anchor:id=CONTref.Configuration.Components.SEOService}
+{include:document="pages/configuration/components/config_SEOService.wiki"/}
 h3. QueryService   {anchor:id=CONTref.Configuration.Components.QueryService}
 {include:document="pages/configuration/components/config_QueryService.wiki"/}
 h3. TaxonomyService     {anchor:id=CONTref.Configuration.Components.TaxonomyService}
@@ -171,6 +175,8 @@ h3. JodConverter {anchor:id=CONTref.JavaServices.JodConverter}
   {include:document="pages/services/jodConverter.wiki" /}
 h3. SiteSearchService {anchor:id=CONTref.JavaServices.SiteSearchService}
   {include:document="pages/services/SiteSearchService.wiki" /}
+h3. SEOService  {anchor:id=CONTref.JavaServices.SEOService}
+ {include:document="pages/services/SEO.wiki" /}
 
 
 h2. FAQ {anchor:id=CONTref.FAQ}
