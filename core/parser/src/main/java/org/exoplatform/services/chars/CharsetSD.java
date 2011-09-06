@@ -19,9 +19,6 @@
 
 package org.exoplatform.services.chars;
 
-
-import sun.nio.cs.HistoricallyNamedCharset;
-
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
 import java.nio.charset.CharacterCodingException;
@@ -52,8 +49,8 @@ class CharsetSD extends StringDecoder
 
    String charsetName()
    {
-      if (cs instanceof HistoricallyNamedCharset)
-         return ((HistoricallyNamedCharset)cs).historicalName();
+//      if (cs instanceof HistoricallyNamedCharset)
+//         return ((HistoricallyNamedCharset)cs).historicalName();
       return cs.name();
    }
 

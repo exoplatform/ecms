@@ -19,7 +19,6 @@
 
 package org.exoplatform.services.chars;
 
-
 import java.lang.ref.SoftReference;
 import java.nio.charset.Charset;
 import java.nio.charset.IllegalCharsetNameException;
@@ -67,8 +66,8 @@ public class CharsDecoder
          catch (IllegalCharsetNameException x)
          {
          }
-         if (sd == null)
-            sd = new ConverterSD(sun.io.ByteToCharConverter.getConverter(csn), csn);
+//         if (sd == null)
+//            sd = new ConverterSD(sun.io.ByteToCharConverter.getConverter(csn), csn);
          set(decoder, sd);
       }
       return sd.decode(ba, off, len);

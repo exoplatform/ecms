@@ -22,12 +22,12 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
+import java.util.Iterator;
 
+import javax.imageio.IIOImage;
 import javax.imageio.ImageIO;
-
-import com.sun.image.codec.jpeg.JPEGCodec;
-import com.sun.image.codec.jpeg.JPEGEncodeParam;
-import com.sun.image.codec.jpeg.JPEGImageEncoder;
+import javax.imageio.ImageWriter;
+import javax.imageio.plugins.jpeg.JPEGImageWriteParam;
 
 /**
  * Created by The eXo Platform SARL
@@ -120,17 +120,21 @@ public class ImageUtils {
     graphics2D.setRenderingHint(RenderingHints.KEY_INTERPOLATION,RenderingHints.VALUE_INTERPOLATION_BICUBIC);
     graphics2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
     graphics2D.drawImage(image, dx, dy, dw, dh, null);
+    graphics2D.dispose();
 
-    // Write the scaled image to the outputstream
-    ByteArrayOutputStream out = new ByteArrayOutputStream();
-    JPEGImageEncoder encoder = JPEGCodec.createJPEGEncoder(out);
-    JPEGEncodeParam param = encoder.getDefaultJPEGEncodeParam(thumbImage);
+    Iterator<ImageWriter> iter = ImageIO.getImageWritersByFormatName("jpeg");
+    ImageWriter writer = iter.next();
+    JPEGImageWriteParam iwp = (JPEGImageWriteParam)writer.getDefaultWriteParam();
     int quality = 85; // Use between 1 and 100, with 100 being highest quality
     quality = Math.max(0, Math.min(quality, 100));
-    param.setQuality(quality / 100.0f, false);
-    encoder.setJPEGEncodeParam(param);
-    encoder.encode(thumbImage);        
-    ImageIO.write(thumbImage, "JPEG" , out);
+    iwp.setCompressionMode(JPEGImageWriteParam.MODE_EXPLICIT);
+    iwp.setCompressionQuality(quality / 100.0f);
+    
+    ByteArrayOutputStream out = new ByteArrayOutputStream();
+    writer.setOutput(ImageIO.createImageOutputStream(out));
+    IIOImage iioImage = new IIOImage(thumbImage, null, null);
+    writer.write(null, iioImage, iwp);
+    writer.dispose();    
 
     // Read the outputstream into the inputstream for the return value
     ByteArrayInputStream bis = new ByteArrayInputStream(out.toByteArray());
