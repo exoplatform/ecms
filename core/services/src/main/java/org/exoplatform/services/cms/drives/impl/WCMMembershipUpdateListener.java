@@ -21,7 +21,6 @@ import org.exoplatform.services.cms.drives.ManageDriveService;
 import org.exoplatform.services.organization.Membership;
 import org.exoplatform.services.organization.impl.MembershipUpdateListener;
 import org.exoplatform.services.security.ConversationRegistry;
-import org.exoplatform.services.security.ConversationState;
 
 /**
  * Created by The eXo Platform SARL Author : Dang Van Minh
@@ -39,18 +38,16 @@ public class WCMMembershipUpdateListener extends MembershipUpdateListener {
 
   public void postSave(Membership m, boolean isNew) throws Exception {
     super.postSave(m, isNew);
-    clearGroupCache();
+    clearGroupCache(m);
   }
 
   public void postDelete(Membership m) throws Exception {
     super.postDelete(m);
-    clearGroupCache();
+    clearGroupCache(m);
   }
 
-  private void clearGroupCache() {
-    ConversationState conversationState = ConversationState.getCurrent();
-    if (conversationState != null)
-      driveService_.clearGroupCache(conversationState.getIdentity().getUserId());
+  private void clearGroupCache(Membership m) {
+    driveService_.clearGroupCache(m.getUserName());
     driveService_.setNewRoleUpdated(true);
   }
 
