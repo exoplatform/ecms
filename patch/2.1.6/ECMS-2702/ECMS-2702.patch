@@ -1,0 +1,124 @@
+Index: ext/xcmis/sp/src/test/java/org/exoplatform/ecms/xcmis/sp/query/QueryUsecasesTest.java
+===================================================================
+--- ext/xcmis/sp/src/test/java/org/exoplatform/ecms/xcmis/sp/query/QueryUsecasesTest.java	(revision 73081)
++++ ext/xcmis/sp/src/test/java/org/exoplatform/ecms/xcmis/sp/query/QueryUsecasesTest.java	(working copy)
+@@ -355,9 +355,43 @@
+    }
+    
+    
++   public void testQueryWithSearchAllVersionFalse() throws Exception
++   {
++      // Search for no documents
++      StringBuffer sql = new StringBuffer();
++      sql.append("SELECT * ");
++      sql.append("FROM ");
++      sql.append("cmis:document");
++      Query query = new Query(sql.toString(), true);
++      ItemsIterator<Result> result = storageA.query(query);
++      assertEquals(0, result.size());
++
++      // checkout/checkin
++      FolderData rootFolder = (FolderData)storageA.getObjectById(storageA.getRepositoryInfo().getRootFolderId());
++      ContentStream cs1 =
++         new BaseContentStream("hello".getBytes(), null, new MimeType("text", "plain"));
++      DocumentData document = createDocument(rootFolder, "testQueryWithSearchAllVersionFalse", "cmis:document", cs1, null);
++      
++      DocumentData pwc = document.checkout();
++      ContentStream cs2 =
++         new BaseContentStream("bye".getBytes(), null, new MimeType("text", "plain"));
++      DocumentData checkin = pwc.checkin(true, "my comment", null, cs2, null, null);
++            
++      // search for document, searchAllVersion = false
++      sql = new StringBuffer();
++      sql.append("SELECT * ");
++      sql.append("FROM ");
++      sql.append("cmis:document");
++      query = new Query(sql.toString(), false);
++      result = storageA.query(query);
++      assertEquals(1, result.size());
++      // check results
++      checkResult(storageA, result, new DocumentData[]{checkin});
++   }
++   
+    public void testDeleteVersion() throws Exception
+    {
+-      FolderData folder1 = createFolder(testRoot, "multifiledChildFolderTest01", "cmis:folder");
++      FolderData folder1 = createFolder(testRoot, "testDeleteVersion", "cmis:folder");
+       
+       // SEARCH TEST
+       String queryString = "SELECT * FROM cmis:document WHERE IN_FOLDER('" + folder1.getObjectId() + "')";
+Index: ext/xcmis/sp/src/main/java/org/exoplatform/ecms/xcmis/sp/StorageImpl.java
+===================================================================
+--- ext/xcmis/sp/src/main/java/org/exoplatform/ecms/xcmis/sp/StorageImpl.java	(revision 73081)
++++ ext/xcmis/sp/src/main/java/org/exoplatform/ecms/xcmis/sp/StorageImpl.java	(working copy)
+@@ -27,7 +27,14 @@
+ import org.xcmis.search.SearchService;
+ import org.xcmis.search.Visitors;
+ import org.xcmis.search.model.constraint.And;
++import org.xcmis.search.model.constraint.Comparison;
++import org.xcmis.search.model.constraint.Constraint;
+ import org.xcmis.search.model.constraint.DescendantNode;
++import org.xcmis.search.model.constraint.Operator;
++import org.xcmis.search.model.operand.DynamicOperand;
++import org.xcmis.search.model.operand.Literal;
++import org.xcmis.search.model.operand.PropertyValue;
++import org.xcmis.search.model.operand.StaticOperand;
+ import org.xcmis.search.model.source.Selector;
+ import org.xcmis.search.model.source.SelectorName;
+ import org.xcmis.search.parser.CmisQueryParser;
+@@ -841,7 +848,7 @@
+             }
+             catch (RepositoryException re)
+             {
+-               throw new CmisRuntimeException("Unable get root folder id. ", re);
++               throw new CmisRuntimeException("Unable get root folder id with path '" + rootFolderPath + "'. ", re);
+             }
+          }
+ 
+@@ -900,9 +907,9 @@
+          {
+             boolean isRootStorage = "/".equals(getJcrRootPath());
+             org.xcmis.search.model.Query realQuery = cmisQueryParser.parseQuery(query.getStatement());
++            
+             if (!isRootStorage)
+             {
+-
+                //add drive path constrain
+                DescendantNode rootDescendantConstraint =
+                   new DescendantNode(((Selector)realQuery.getSource()).getAlias(), "["
+@@ -913,6 +920,22 @@
+                      ? rootDescendantConstraint : new And(realQuery.getConstraint(), rootDescendantConstraint),
+                      realQuery.getOrderings(), realQuery.getColumns(), realQuery.getLimits());
+             }
++            
++            if (!query.isSearchAllVersions())
++            {
++               // add latest version constraint
++               SelectorName selectorName = realQuery.getColumns().iterator().next().getSelectorName();
++               DynamicOperand dynamicOperand = new PropertyValue(selectorName, "cmis:isLatestVersion");
++               StaticOperand staticOperand = new Literal("true");
++               //add drive path constrain
++               Constraint allVersionsConstraint = new Comparison(dynamicOperand, Operator.EQUAL_TO, staticOperand);
++
++               realQuery =
++                  new org.xcmis.search.model.Query(realQuery.getSource(), realQuery.getConstraint() == null
++                     ? allVersionsConstraint : new And(realQuery.getConstraint(), allVersionsConstraint),
++                     realQuery.getOrderings(), realQuery.getColumns(), realQuery.getLimits());
++            }
++            
+             List<ScoredRow> rows = searchService.execute(realQuery);
+             //check if needed default sorting
+             if (realQuery.getOrderings().size() == 0)
+Index: ext/xcmis/sp/src/main/java/org/exoplatform/ecms/xcmis/sp/index/Jcr2XcmisChangesListener.java
+===================================================================
+--- ext/xcmis/sp/src/main/java/org/exoplatform/ecms/xcmis/sp/index/Jcr2XcmisChangesListener.java	(revision 73081)
++++ ext/xcmis/sp/src/main/java/org/exoplatform/ecms/xcmis/sp/index/Jcr2XcmisChangesListener.java	(working copy)
+@@ -281,7 +281,7 @@
+                   }
+                }
+             }
+-            //remove one by one. ignore exceptions
++            // MAIN PART in two updates: first remove one by one ignore exceptions, then add with a list.
+             for (String uuid : removedNodes)
+             {
+                try
