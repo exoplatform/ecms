@@ -37,6 +37,7 @@ import org.exoplatform.portal.webui.container.UIContainer;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.resolver.ResourceResolver;
 import org.exoplatform.services.cms.templates.TemplateService;
+import org.exoplatform.services.wcm.publication.WCMComposer;
 import org.exoplatform.services.wcm.search.QueryCriteria;
 import org.exoplatform.services.wcm.search.ResultNode;
 import org.exoplatform.services.wcm.search.SiteSearchService;
@@ -187,12 +188,8 @@ public class UISearchResult extends UIContainer {
       queryCriteria.setSearchDocument(isSearchDocument);
       queryCriteria.setSearchWebContent(isSearchDocument);
       queryCriteria.setPageMode(pageMode);
-      
-      if (Boolean.parseBoolean(Utils.getCurrentMode())) {
-        queryCriteria.setLiveMode(true);
-      } else {
-        queryCriteria.setLiveMode(false);
-      }
+
+      queryCriteria.setLiveMode(WCMComposer.MODE_LIVE.equals(Utils.getCurrentMode()));
       int itemsPerPage = Integer.parseInt(portletPreferences.getValue(UIWCMSearchPortlet.ITEMS_PER_PAGE,
                                                                       null));
       try {

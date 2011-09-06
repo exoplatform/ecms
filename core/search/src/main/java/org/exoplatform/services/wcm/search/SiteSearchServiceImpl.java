@@ -576,12 +576,12 @@ public class SiteSearchServiceImpl implements SiteSearchService {
         NodeLocation nodeLocation = NodeLocation.getNodeLocationByNode(displayNode);
         WCMComposer wcmComposer = WCMCoreUtils.getService(WCMComposer.class);
         HashMap<String, String> filters = new HashMap<String, String>();
-        filters.put(WCMComposer.FILTER_MODE, WCMComposer.MODE_LIVE);
-        return wcmComposer.getContent(nodeLocation.getRepository(),
-                                      nodeLocation.getWorkspace(),
-                                      nodeLocation.getPath(),
-                                      filters,
-                                      WCMCoreUtils.getSystemSessionProvider());
+        filters.put(WCMComposer.FILTER_MODE, queryCriteria.isLiveMode()? WCMComposer.MODE_LIVE :
+                                                                                                                        WCMComposer.MODE_EDIT);
+        return wcmComposer.getContent(nodeLocation.getWorkspace(),
+                                                                  nodeLocation.getPath(),
+                                                                  filters,
+                                                                  WCMCoreUtils.getSystemSessionProvider());
       } catch (Exception e) {
         return null;
       }
