@@ -22,6 +22,7 @@ import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.services.cache.CacheService;
 import org.exoplatform.services.cache.ExoCache;
+import org.exoplatform.services.cms.queries.QueryService;
 import org.exoplatform.services.scheduler.BaseJob;
 import org.exoplatform.services.scheduler.JobContext;
 
@@ -36,7 +37,7 @@ public class ClearQueryServiceCacheJob extends BaseJob {
     ExoContainer container = ExoContainerContext.getCurrentContainer();
     CacheService cacheService =
       (CacheService)container.getComponentInstanceOfType(CacheService.class) ;
-    ExoCache<String, QueryResult> queryCache = cacheService.getCacheInstance(QueryServiceImpl.class.getName()) ;
+    ExoCache<String, QueryResult> queryCache = cacheService.getCacheInstance(QueryService.CACHE_NAME);
     queryCache.clearCache() ;
   }
 }

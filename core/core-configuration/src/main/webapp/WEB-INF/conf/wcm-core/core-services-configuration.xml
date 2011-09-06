@@ -372,7 +372,7 @@
       <description>Configures the cache for query service</description>
       <init-params>
 	      <object-param>
-	        <name>cache.config.default</name>
+	        <name>cache.config.ecm.query</name>
 	        <description>The default cache configuration</description>
 	        <object type="org.exoplatform.services.cache.ExoCacheConfig">
 	          <field name="name"><string>default</string></field>

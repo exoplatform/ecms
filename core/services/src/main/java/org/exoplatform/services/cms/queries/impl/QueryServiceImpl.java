@@ -60,7 +60,7 @@ public class QueryServiceImpl implements QueryService, Startable{
   private String relativePath_;
   private List<QueryPlugin> queryPlugins_ = new ArrayList<QueryPlugin> ();
   private RepositoryService repositoryService_;
-  private CacheService cacheService_;
+  private ExoCache<String, QueryResult> cache_;
   private PortalContainerInfo containerInfo_;
   private OrganizationService organizationService_;
   private String baseUserPath_;
@@ -90,7 +90,7 @@ public class QueryServiceImpl implements QueryService, Startable{
     group_ = params.getValueParam("group").getValue();
     repositoryService_ = repositoryService;
     containerInfo_ = containerInfo;
-    cacheService_ = cacheService;
+    cache_ = cacheService.getCacheInstance(CACHE_NAME);
     organizationService_ = organizationService;
     nodeHierarchyCreator_ = nodeHierarchyCreator;
     baseUserPath_ = nodeHierarchyCreator.getJcrPath(BasePath.CMS_USERS_PATH);
@@ -528,13 +528,12 @@ public class QueryServiceImpl implements QueryService, Startable{
     }
     if (queryNode != null && queryNode.hasProperty("exo:cachedResult")
         && queryNode.getProperty("exo:cachedResult").getBoolean()) {
-      ExoCache<String, QueryResult> queryCache = cacheService_.getCacheInstance(QueryServiceImpl.class.getName());
       String portalName = containerInfo_.getContainerName();
       String key = portalName + queryPath;
-      QueryResult result = queryCache.get(key);
+      QueryResult result = cache_.get(key);
       if (result != null) return result;
       result = execute(querySession, queryNode, userId);
-      queryCache.put(key, result);
+      cache_.put(key, result);
       return result;
     }
     QueryResult queryResult = execute(querySession, queryNode, userId);
@@ -586,11 +585,10 @@ public class QueryServiceImpl implements QueryService, Startable{
    * @throws Exception
    */
   private void removeFromCache(String queryPath) throws Exception {
-    ExoCache<String, QueryResult> queryCache = cacheService_.getCacheInstance(QueryServiceImpl.class.getName());
     String portalName = containerInfo_.getContainerName();
     String key = portalName + queryPath;
-    QueryResult result = queryCache.get(key);
-    if (result != null) queryCache.remove(key);
+    QueryResult result = cache_.get(key);
+    if (result != null) cache_.remove(key);
   }
 
   /**

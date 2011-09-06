@@ -26,6 +26,8 @@ import org.exoplatform.services.jcr.ext.common.SessionProvider;
 
 public interface QueryService {
 
+  public static final String CACHE_NAME = "ecm.query";
+  
   /**
    * Get the relative path
    *
