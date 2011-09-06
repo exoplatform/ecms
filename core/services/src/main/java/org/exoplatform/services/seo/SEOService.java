@@ -71,6 +71,15 @@ public interface SEOService {
   
   public String getSitemap(String portalName) throws Exception;
   /**
+   * Returns robots content of portal 
+   * 
+   * @param portalName The portal name
+   * @return
+   * @throws Exception
+   */  
+  
+  public String getRobots(String portalName) throws Exception;
+  /**
    * Returns a list of options for robots index
    * 
    * @return
