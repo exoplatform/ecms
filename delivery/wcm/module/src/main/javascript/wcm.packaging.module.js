@@ -53,6 +53,7 @@ function getModule(params) {
   module.portlet.formgenerator.deployName = "formgenerator";
 
 	module.portlet.seo = new Project("org.exoplatform.ecms", "exo-ecms-apps-portlet-seo", "exo-portlet", module.version).
+    addDependency(new Project("org.exoplatform.ecms", "exo-ecms-core-webui-seo", "jar",  module.version)).
     addDependency(new Project("org.exoplatform.ecms", "exo-ecms-core-services", "jar",  module.version));
   module.portlet.seo.deployName = "seo";      
 

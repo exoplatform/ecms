@@ -24,5 +24,6 @@
     <module>webui-explorer</module>
     <module>webui-administration</module>
     <module>core-configuration</module>
+    <module>webui-seo</module>
   </modules>
 </project>
