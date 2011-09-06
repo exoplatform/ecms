@@ -171,8 +171,21 @@ window.onbeforeunload = closeIt;
  * Catch when some content has changed in the form
  **/
 if (navigator.userAgent.indexOf("MSIE") >= 0) {
-  var UIDocForm = document.getElementById("UIDocumentForm");
-
+  changeElements("UIDocumentForm");
+  changeElements("UITask");
+} else {
+  if (document.getElementById("UIDocumentForm")) {
+    document.getElementById("UIDocumentForm").setAttribute("onchange", "changed()");
+  }
+	 
+  if (document.getElementById("UITask")) {
+    document.getElementById("UITask").setAttribute("onchange", "changed()");
+  }
+}
+ 
+function changeElements(divId) {
+  var UIDocForm = document.getElementById(divId);
+  if (!UIDocForm) return;
   //add onchange event into <input> tags
   var inputTags = UIDocForm.getElementsByTagName("input");
   for (var i = 0; i < inputTags.length; i++) {
@@ -190,8 +203,6 @@ if (navigator.userAgent.indexOf("MSIE") >= 0) {
   for (var i = 0; i < textareaTags.length; i++) {
     textareaTags[i].attachEvent("onchange", new Function ("changed();"));
   }
-} else {
-  document.getElementById("UIDocumentForm").setAttribute("onchange", "changed()");
 }
 
 

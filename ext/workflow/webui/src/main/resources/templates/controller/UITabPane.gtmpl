@@ -3,10 +3,15 @@
   import org.exoplatform.webui.core.UIPopupWindow;
   
   def rcontext = _ctx.getRequestContext() ;
-	
+  def children = uicomponent.getChildren();
+
+  def messageClose = uicomponent.getClosingConfirmMsg("UIDocumentForm.msg.confirm-close") ;
+  def messageNavigate = uicomponent.getClosingConfirmMsg("UIDocumentForm.msg.confirm-navigate") ;
+  
   private String getDisplayTab(String selectedTab) {
-    if ((uicomponent.getSelectedTab() == null && selectedTab.equals("UITask"))
-        || selectedTab.equals(uicomponent.getSelectedTab())  ) {
+    if ((uicomponent.getSelectedTab() == null && 
+         selectedTab.equals(uicomponent.getChildren().get(uicomponent.getChildren().size() - 1).getId())) ||
+        selectedTab.equals(uicomponent.getSelectedTab())  ) {
       return "display:block"; 
     }
     return "display:none";
@@ -32,7 +37,8 @@
 	     	    
               <div class="TabsContainer">
                 <%
-                for(uiChild in uicomponent.getChildren()) {
+                for(int i = children.size() - 1; i >= 0; i --) {
+                  def uiChild = children.get(i);
                   if (!(uiChild instanceof UIPopupWindow)) {
                     String tabId = uiChild.getId();
                 %>
@@ -55,7 +61,8 @@
       </div>
       <div class="UITabContentContainer">
         <%
-          for(uiChild in uicomponent.getChildren()) {
+          for(int j = children.size() - 1; j >= 0; j --) {
+            def uiChild = children.get(j);
             def displayStyle = getDisplayTab(uiChild.getId());
             if (uiChild instanceof UIPopupWindow && uiChild.isRendered()) {
              displayStyle="display: block"; 
@@ -69,17 +76,8 @@
         %>
       </div>  
     </div>  
-  </div>  
+  </div>
+  <div id="CloseConfirmationMsg" style="display:none">${messageClose}</div>
+  <div id="NavigateConfirmationMsg" style="display:none">${messageNavigate}</div>
 </div>
 <script type="text/javascript" src="/eXoWCMResources/javascript/eXo/wcm/backoffice/private/CloseEvents.js"></script>
-<%  
-  String closeConfirmationMsg = "UIDocumentForm.msg.confirm-close";
-  String navigateConfirmationMsg = "UIDocumentForm.msg.confirm-navigate";
-  def messageClose = uicomponent.getClosingConfirmMsg(closeConfirmationMsg) ;
-  def messageNavigate = uicomponent.getClosingConfirmMsg(navigateConfirmationMsg) ;
-%>
-<script type="text/javascript"> 
-  setClosingConfirmationMsg('<%=messageClose%>');
-  setNavigatingConfirmationMsg('<%=messageNavigate%>');
-</script>
-
