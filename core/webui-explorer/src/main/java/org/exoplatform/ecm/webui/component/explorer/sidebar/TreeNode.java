@@ -23,6 +23,7 @@ import javax.jcr.Node;
 import javax.jcr.RepositoryException;
 
 import org.exoplatform.services.cms.link.NodeLinkAware;
+import org.exoplatform.services.jcr.util.Text;
 import org.exoplatform.services.wcm.core.NodeLocation;
 
 /**
@@ -92,7 +93,10 @@ public class TreeNode {
       node_ = NodeLocation.getNodeLocationByNode(node);
     }
   }
-
+  public String getNodePath4ID() {
+    String tmp = Text.escape(path_);
+    return tmp.replace('%', '_');
+  }
   public List<TreeNode> getChildren() { return children_ ; }
   public int getChildrenSize() { return children_.size() ; }
 
