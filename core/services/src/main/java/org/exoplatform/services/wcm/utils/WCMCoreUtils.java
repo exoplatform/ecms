@@ -27,6 +27,7 @@ import java.util.Properties;
 import org.exoplatform.commons.utils.ListAccess;
 import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
+import org.exoplatform.container.PortalContainer;
 import org.exoplatform.container.RootContainer;
 import org.exoplatform.container.component.ComponentRequestLifecycle;
 import org.exoplatform.container.configuration.ConfigurationManager;
@@ -108,6 +109,10 @@ public class WCMCoreUtils {
   public static <T> T getService(Class<T> clazz, String containerName) {
     ExoContainer container = ExoContainerContext.getCurrentContainer();
     if (containerName != null) {
+      container = RootContainer.getInstance().getPortalContainer(containerName);
+    }
+    if (container.getComponentInstanceOfType(clazz)==null) {
+      containerName = PortalContainer.getCurrentPortalContainerName();
       container = RootContainer.getInstance().getPortalContainer(containerName);
     }
     return clazz.cast(container.getComponentInstanceOfType(clazz));

@@ -26,6 +26,7 @@ import javax.jcr.lock.Lock;
 
 import org.exoplatform.container.ExoContainer;
 import org.exoplatform.container.ExoContainerContext;
+import org.exoplatform.container.PortalContainer;
 import org.exoplatform.ecm.webui.utils.LockUtil;
 import org.exoplatform.ecm.webui.utils.Utils;
 import org.exoplatform.services.ecm.publication.PublicationPlugin;
@@ -61,8 +62,6 @@ public class WCMPublicationServiceImpl
   /**
    * Instantiates a new WCM publication service. This service delegate to
    * PublicationService to manage the publication
-   *
-   * @param publicationService the publication service
    */
   public WCMPublicationServiceImpl() {
     super();
@@ -78,9 +77,9 @@ public class WCMPublicationServiceImpl
   public void enrollNodeInLifecycle(Node node, String siteName, String remoteUser) {
     try {
       if (log.isInfoEnabled()) log.info(node.getPath() + "::" + siteName + "::"+remoteUser);
-      ExoContainer container = ExoContainerContext.getCurrentContainer();
-      PublicationManagerImpl publicationManagerImpl = (PublicationManagerImpl)
-          container.getComponentInstanceOfType(PublicationManagerImpl.class);
+
+      PublicationManagerImpl publicationManagerImpl = WCMCoreUtils.getService(PublicationManagerImpl.class);
+
       ContextComparator comparator = new ContextComparator();
       TreeSet<Context> treeSetContext = new TreeSet<Context>(comparator);
       treeSetContext.addAll(publicationManagerImpl.getContexts());
@@ -115,7 +114,7 @@ public class WCMPublicationServiceImpl
         if (memberships.size() > 0) {
           for (String membership : memberships) {
             String[] membershipTab = membership.split(":");
-            IdentityRegistry identityRegistry = (IdentityRegistry) container.getComponentInstanceOfType(IdentityRegistry.class);
+            IdentityRegistry identityRegistry = WCMCoreUtils.getService(IdentityRegistry.class);
             Identity identity = identityRegistry.getIdentity(remoteUser);
             membershipVerified = identity.isMemberOf(membershipTab[1], membershipTab[0]);
             if (membershipVerified)
@@ -157,8 +156,7 @@ public class WCMPublicationServiceImpl
       log.warn("could not find an initial state in lifecycle " + lifecycle.getName());
     } else {
       String initialState = states.get(0).getState();
-      PublicationService publicationService = (PublicationService)
-          ExoContainerContext.getCurrentContainer().getComponentInstanceOfType(PublicationService.class);
+      PublicationService publicationService = WCMCoreUtils.getService(PublicationService.class);
       PublicationPlugin publicationPlugin = publicationService.getPublicationPlugins()
                                                               .get(AuthoringPublicationConstant.LIFECYCLE_NAME);
       HashMap<String, String> context = new HashMap<String, String>();
