@@ -294,12 +294,13 @@ public class NodeLocation {
    * @return output array of strings
    */
   private static final String[] split(String s, String ch) {
-    String[] ss = new String[3];
+    int maxLength = 3;
+    String[] ss = new String[maxLength];
     int prev = 0;
     int i=0;
     while(true) {
       int next = s.indexOf(ch, prev);
-      if (next==-1) {
+      if (next == -1 || i == maxLength - 1) {
         ss[i] = s.substring(prev);
         break;
       }
