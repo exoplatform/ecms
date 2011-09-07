@@ -302,11 +302,11 @@
       <type>org.exoplatform.services.cms.drives.impl.NewGroupEventListener</type>
       <description>New Group Event Listener</description>
     </component-plugin>	
-	<component-plugin>
-      <name>MembershipUpdateListener</name>
+    <component-plugin>
+      <name>WCMMembershipUpdateListener</name>
       <set-method>addListenerPlugin</set-method>
-      <type>org.exoplatform.services.organization.impl.MembershipUpdateListener</type>
-    </component-plugin>    	
+      <type>org.exoplatform.services.cms.drives.impl.WCMMembershipUpdateListener</type>
+    </component-plugin>
   </external-component-plugins>
 	  
   <external-component-plugins>
