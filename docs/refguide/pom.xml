@@ -167,23 +167,19 @@
               <!-- Copy the css -->
               <postProcess>
                 <copy todir="${wikbook.target}/output/css">
-			<fileset dir="${wikbook.source}/css">
+										<fileset dir="${wikbook.source}/css">
                     <include name="**/*.css" />
                   </fileset>
                 </copy>
-              </postProcess>
-
-              <!-- Copy the images -->
-              <postProcess>
                 <copy todir="${wikbook.target}/output/images">
                     <fileset dir="${wikbook.source}/images">
-			<include name="**/*.gif" />
-			<include name="**/*.png" />
-			<include name="**/*.jpg" />
+											<include name="**/*.gif" />
+											<include name="**/*.png" />
+											<include name="**/*.jpg" />
                   </fileset>
-                </copy>
+                </copy>                
               </postProcess>
-	      
+
                </configuration>
              </execution>
            </executions>
