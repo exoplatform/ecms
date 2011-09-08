@@ -132,8 +132,8 @@
 
                  <!-- PDF -->
                  <foCustomization>${wikbook.target}/src/resources/xsl/fopdf.xsl</foCustomization>
-                 <imgSrcPath>${wikbook.resources}/</imgSrcPath>
-                 <admonGraphicsPath>${wikbook.target}/src/resources/images/admons/</admonGraphicsPath>
+                 <imgSrcPath>images/</imgSrcPath>
+                 <admonGraphicsPath>images/admons/</admonGraphicsPath>
 
                  <!-- Highlight source code -->
                  <highlightSource>1</highlightSource>
@@ -145,7 +145,7 @@
                    -->
                  <useExtensions>1</useExtensions>
                  <calloutsExtension>1</calloutsExtension>
-
+		 
               <!-- Copy the bookinfo.xml -->
               <preProcess>
                 <copy todir="${wikbook.target}/src">
@@ -167,12 +167,23 @@
               <!-- Copy the css -->
               <postProcess>
                 <copy todir="${wikbook.target}/output/css">
-									<fileset dir="${wikbook.source}/css">
+			<fileset dir="${wikbook.source}/css">
                     <include name="**/*.css" />
                   </fileset>
                 </copy>
               </postProcess>
 
+              <!-- Copy the images -->
+              <postProcess>
+                <copy todir="${wikbook.target}/output/images">
+                    <fileset dir="${wikbook.source}/images">
+			<include name="**/*.gif" />
+			<include name="**/*.png" />
+			<include name="**/*.jpg" />
+                  </fileset>
+                </copy>
+              </postProcess>
+	      
                </configuration>
              </execution>
            </executions>
