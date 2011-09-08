@@ -1495,21 +1495,16 @@
         </mediaobject>
       </step>
       <step>
-        <para>
-     Click the 
-     <inlinemediaobject>
-            <imageobject>
-              <imagedata width="6mm" fileref="images/icon1.png" format="PNG"/>
-            </imageobject>
-            <textobject>
-              <phrase>scroll arrows</phrase>
-            </textobject>
-          </inlinemediaobject> icon to see the type list and select a folder type.
-    </para>
+          <para>
+              Click the
+              <guilabel>Type</guilabel>
+              field
+              to see the folder type list and select one.
+          </para>
       </step>
       <step>
         <para>
-     Input value for the Name field. This field is required. You can not input some special characters in the Name field (@ # % &amp; * ( ) &quot; &apos; : ; [ ] {} / !)
+     Input value for the <guilabel>Name</guilabel> and <guilabel>Title</guilabel> field. This field is required. You cannot input some special characters in these fields (@ # % &amp; * ( ) &quot; &apos; : ; [ ] {} / !).
     </para>
       </step>
       <step>
