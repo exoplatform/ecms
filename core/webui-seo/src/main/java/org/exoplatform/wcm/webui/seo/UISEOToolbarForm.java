@@ -90,7 +90,7 @@ public class UISEOToolbarForm extends UIForm {
       	}
       }
       if(top > -1 && left > -1)
-      	Utils.createPopupWindow(uiSEOToolbar, uiSEOForm, SEO_POPUP_WINDOW, 400, top, left);
+      	Utils.createPopupWindow(uiSEOToolbar, uiSEOForm, SEO_POPUP_WINDOW, 325, top, left);
       else
       	Utils.createPopupWindow(uiSEOToolbar, uiSEOForm, SEO_POPUP_WINDOW, 400);
     }
