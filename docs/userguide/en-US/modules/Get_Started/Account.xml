@@ -59,27 +59,27 @@
             <tbody>
               <row>
                 <entry> User Name </entry>
-                <entry> The user name that is used to login into the system. It must be unique. The user name must be started with a character. </entry>
+                <entry> The user name that is used to log into the system. It must be unique. The user name must be started with a character. </entry>
               </row>
               <row>
                 <entry> Password </entry>
-                <entry> The security characters are used to login. It must have at least 6 characters. </entry>
+                <entry> The security characters are used to log in. It must have at least 6 characters. </entry>
               </row>
               <row>
                 <entry> Confirm Password </entry>
-                <entry> The re-typed password above. The password in Password field and this field must be the same. </entry>
+                <entry> The re-typed password above. The password in the <guilabel>Password</guilabel> field and this field must be the same. </entry>
               </row>
               <row>
                 <entry> First Name </entry>
-                <entry> Your first name </entry>
+                <entry> Your first name. </entry>
               </row>
               <row>
                 <entry> Last Name </entry>
-                <entry> Your last name </entry>
+                <entry> Your last name. </entry>
               </row>
               <row>
                 <entry> Email Address </entry>
-                <entry> Your email address. It must have a right format: <replaceable>username@abc.com</replaceable></entry>
+                <entry> Your email address. It must have a right format: <replaceable>username@abc.com</replaceable>.</entry>
               </row>
             </tbody>
           </tgroup>
@@ -124,27 +124,27 @@
         <itemizedlist>
           <listitem>
             <para>
-       User name is existing or invalid.
+       The <guilabel>Username</guilabel> is existing or invalid.
       </para>
           </listitem>
           <listitem>
             <para>
-       Password has less than 6 characters.
+      The <guilabel>Password</guilabel> has less than 6 characters.
       </para>
           </listitem>
           <listitem>
             <para>
-       Password and Confirm Password are not the same.
+       The <guilabel>Password</guilabel> and <guilabel>Confirm Password</guilabel> are not the same.
       </para>
           </listitem>
           <listitem>
             <para>
-       Email Address has invalid format.
+      The <guilabel>Email Address</guilabel> is in a invalid format.
       </para>
           </listitem>
           <listitem>
             <para>
-       Required fields are empty.
+      Any of the required fields are empty.
       </para>
           </listitem>
         </itemizedlist>
@@ -169,7 +169,7 @@
       <title>Sign in</title>
       <step>
         <para>
-     Go to the &PRODUCT; in the public mode by inputting the URL in the address bar (e.g: <ulink url="http://localhost:8080//portal/public/classic/" type="http"/>).
+     Go to your portal's home page by entering the URL in the address bar (e.g. <ulink url="http://localhost:8080//portal/public/classic/" type="http"/>).
     </para>
       </step>
       <step>
@@ -236,7 +236,7 @@
       </step>
     </procedure>
     <para>
-   After signing in, you will be redirected to the authenticated homepage like the illustration.
+   After signing in, you will be presented with the authenticated homepage:
   </para>
    <mediaobject>
       <imageobject role="html">
@@ -246,6 +246,19 @@
         <imagedata   align="center" fileref="images/authhomepage.png" format="PNG" width="150mm"/>
       </imageobject>
     </mediaobject>
+      <note>
+          <title>Toolbar Visibility</title>
+          <para>
+              The toolbar in the image above is, by default, only visible to members of the
+              <emphasis>/platform/web-contributors</emphasis>
+              role.
+          </para>
+          <para>
+              See
+              <xref linkend="sect-User_Guide-Account-Toolbar_Visibility"/>
+              for information about how to add the required permissions and/or change the default portal behavior.
+          </para>
+      </note>
   </section>
   <section id="sect-User_Guide-Account-Sign_Out">
     <title>Sign Out</title>
@@ -264,10 +277,10 @@
       </imageobject>
     </mediaobject>
     <para>
-   or click <menuchoice>
+   Alternatively, members of the <emphasis>/platform/web-contributors</emphasis> role can click <menuchoice>
       <guimenu>Start Logo</guimenu>
       <guimenuitem>Sign Out</guimenuitem>
-   </menuchoice> from the menu:
+   </menuchoice> from the toolbar:
   </para>
     <mediaobject>
       <imageobject role="html">
@@ -463,4 +476,60 @@
       </step>
     </procedure>
   </section>
+    <section id="sect-User_Guide-Account-Toolbar_Visibility">
+        <title>Toolbar Visibility</title>
+        <!-- Source Metadata
+        URL: https://access.redhat.com/kb/docs/DOC-54051
+        Author: Red Hat GSS
+        License: -->
+        <para>
+            Newly registered users (or other users who are not members of the
+            <emphasis>/platform/web-contributors</emphasis>
+            role) will not see the toolbar at the top of the home page. These users will, however, be able to sign into
+            and out of the Portal using the appropriate buttons in the site header.
+        </para>
+        <para>
+            Portal administrators can add individual users to the
+            <emphasis>/platform/web-contributors</emphasis>
+            through the graphical user interface (GUI):
+        </para>
+        <procedure>
+            <title>Add Permission via GUI</title>
+            <step>
+                <para>
+                    Click
+                    <menuchoice>
+                        <guimenu>Group</guimenu>
+                        <guimenuitem>Organization</guimenuitem>
+                        <guimenuitem>Users and groups management</guimenuitem>
+                    </menuchoice>
+                    , then click <guilabel>Group Management</guilabel>.
+                </para>
+            </step>
+            <step>
+                <para>
+                    Click
+                    <menuchoice>
+                        <guimenu>Platform</guimenu>
+                        <guimenuitem>Content Manager</guimenuitem>
+                    </menuchoice>
+                    in the left pane.
+                </para>
+            </step>
+            <step>
+                <para>
+                    Enter the required username in the
+                    <guilabel>Add member</guilabel>
+                    box (the above lists all users already in that role).
+                </para>
+            </step>
+        </procedure>
+        <warning>
+            <title>CMS Access</title>
+            <para>
+                Be aware that granting this membership will also give the user access to the Content Management System
+                (CMS).
+            </para>
+        </warning>
+    </section>
 </section>
