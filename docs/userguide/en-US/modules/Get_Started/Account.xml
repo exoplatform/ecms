@@ -151,7 +151,7 @@
       </step>
     </procedure>
     <para>
-   After adding a new account, contact with the administrator to get the confirmation.
+   After adding a new account, contact the administrator to get the confirmation.
   </para>
     <note>
       <title>Email </title>
@@ -187,7 +187,7 @@
       </step>
       <step>
         <para>
-     Input your registered User name and Password.
+     Input your registered Username and Password.
     </para>
       </step>
       <step>
@@ -205,7 +205,7 @@
             </thead>
             <tbody>
               <row>
-                <entry> User name </entry>
+                <entry> Username </entry>
                 <entry> To input the registered username. </entry>
               </row>
               <row>
@@ -213,8 +213,8 @@
                 <entry> To input the password of your username. </entry>
               </row>
               <row>
-                <entry> Forgot your User Name/Password </entry>
-                <entry> To retrieve the forgotten user name or password when you forget. </entry>
+                <entry> Forgot your Username/Password </entry>
+                <entry> To retrieve the forgotten username or password. </entry>
               </row>
               <row>
                 <entry> Sign in </entry>
@@ -228,10 +228,10 @@
           </tgroup>
         </table>
         <para>
-     If the User Name does not exist or the inputted User name/Password is invalid, there will be an alert message that requires users to input right values. The page will be redirected to the private security checking mode.
+     If the Username does not exist or the input Username/Password is invalid, there will be an alert message that requires you to input right values. The page will be redirected to the private security checking mode.
     </para>
         <para>
-     To login again, enter User Name and Password again.
+     To login again, enter Username and Password again.
     </para>
       </step>
     </procedure>
@@ -292,7 +292,7 @@
     </mediaobject>
   </section>
   <section id="sect-User_Guide-Account-Retrieve_user_namepassword">
-    <title>Retrieve user name/password</title>
+    <title>Retrieve Username/Password</title>
     <para>
    If you forget your account or password, you can recover them by doing as follows:
   </para>
@@ -300,7 +300,7 @@
       <title/>
       <step>
         <para>
-     Click the link <emphasis role="bold">Forgot your User Name/Password?</emphasis> in the Sign in form.
+     Click the link <emphasis role="bold">Forgot your Username/Password?</emphasis> in the <guilabel>Sign in</guilabel> form.
     </para>
         <para>
      This form offers two options:
@@ -315,7 +315,7 @@
         </mediaobject>
         <variablelist>
           <varlistentry>
-            <term>Forgot my password:</term>
+            <term>Forgot My Password:</term>
             <listitem>
               <para>
         If you forgot your password, you need to select this option.
@@ -323,7 +323,7 @@
             </listitem>
           </varlistentry>
           <varlistentry>
-            <term>Forgot my username:</term>
+            <term>Forgot My Username:</term>
             <listitem>
               <para>
         If you forgot your username, you need to select this option.
@@ -337,7 +337,7 @@
      Select one of these two options in this form. The selected option will be shown:
     </para>
         <para>
-     If the <emphasis role="bold">Forgot my password</emphasis> option is selected the form to recover the password appears:
+     If the <emphasis role="bold">Forgot My Password</emphasis> option is selected, the form to recover the password appears:
     </para>
         <mediaobject>
           <imageobject role="html">
@@ -348,7 +348,7 @@
           </imageobject>
         </mediaobject>
         <para>
-     If the <emphasis role="bold">Forgot my username</emphasis> option is selected, the form to recover the user name appears:
+     If the <emphasis role="bold">Forgot My Username</emphasis> option is selected, the form to recover the username appears:
     </para>
         <mediaobject>
           <imageobject role="html">
@@ -366,15 +366,15 @@
       </step>
       <step>
         <para>
-     Click <emphasis role="bold">Send</emphasis> to send the inputted values.
+     Click <emphasis role="bold">Send</emphasis> to send the input values.
     </para>
         <para>
-     Once information has been sent, you will receive an email with your User name/ Password in your email address that you registered.
+     Once the information has been sent, you will receive an email with your Username/Password in your email address that you registered.
     </para>
         <itemizedlist>
           <listitem>
             <para>
-       If you forget User Name: when a username is retrieved, your old username is restored and can be reused and a new password is also sent to your email with the old username.
+       If you forget Username: when a username is retrieved, your old username is restored and can be reused and a new password is also sent to your email with the old username.
       </para>
           </listitem>
           <listitem>
@@ -430,7 +430,7 @@
       </step>
       <step>
         <para>
-     Change your First Name, Last Name and Email. You cannot change your User Name.
+     Change your First Name, Last Name and Email. You cannot change your Username.
     </para>
       </step>
       <step>
