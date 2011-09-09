@@ -158,10 +158,10 @@ WCMUtils.prototype.changePriorityCss = function() {
   priorityField = document.getElementById("priority");
   if(priorityField != null) {
 	  if(isNaN(priorityField.value)) {
-	  	priorityField.className = "tip";		
+	  	priorityField.className = "Tip";		
 	  }
 	  priorityField.onclick = function() { 
-	    priorityField.className = ""; 
+	    priorityField.className = "SeoPriority"; 
 	    if(isNaN(priorityField.value))
 	      priorityField.value = ""; 
 	  } ;
