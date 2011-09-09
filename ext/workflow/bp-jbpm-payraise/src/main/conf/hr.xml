@@ -2,16 +2,16 @@
 <bundle>
   <task-name>Update Salary</task-name>
   <title>Update Salary</title>
-  <submit>Confirm update</submit>
+  <submit>Confirm Update</submit>
   <!--
   #variable title and label
   -->
   <initiator>
-    <title>the employee that asks for a pay raise</title>
+    <title>The employee who asks for a pay raise</title>
     <label>Employee:</label>
   </initiator>
   <amount-granted>
-    <title>the amount granted</title>
+    <title>The amount granted</title>
     <label>Amount to be added:</label>
   </amount-granted>
   <my-custom-groovy-form>My custom groovy form</my-custom-groovy-form>
@@ -20,4 +20,3 @@
   
   <cancel>Cancel</cancel>
 </bundle>
-

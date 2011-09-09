@@ -1,24 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bundle>
-  <task-name>Assign replacement</task-name>
-  <title>Assign replacement</title>
+  <task-name>Assign Replacement</task-name>
+  <title>Assign Replacement</title>
   <submit>Submit</submit>
   <!--
   #variable title and label
   -->
   <initiator>
-    <label>Initiator :</label>
+    <label>Initiator:</label>
   </initiator>
   <start>
-    <label>Start (dd/mm/yyyy) :</label>
+    <label>Start (dd/mm/yyyy):</label>
   </start>
   <end>
-    <label>End (dd/mm/yyyy) :</label>
+    <label>End (dd/mm/yyyy):</label>
   </end>
   <replacement>
-    <label>Replacement :</label>
+    <label>Replacement:</label>
   </replacement>
   
   <cancel>Cancel</cancel>
 </bundle>
-
