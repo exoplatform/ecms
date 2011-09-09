@@ -406,7 +406,7 @@
       <node-locked>The item with the path {0} or upper level is locked.</node-locked>
       <can-not-delete>Please close this node before deleting.</can-not-delete>
       <can-not-delete-version>Cannot delete this node. It is versioning.</can-not-delete-version>
-      <not-support>Cannot delete the selected node. Please select another one./not-support>
+      <not-support>Cannot delete the selected node. Please select another one.</not-support>
       <current-node-not-allow-paste>Cannot paste the copied node type on the current node.</current-node-not-allow-paste>
       <copied-node-in-versioning>Cannot paste the copied node. It is versioning.</copied-node-in-versioning>
       <parent-node-locked>You do not have permission to unlock the node '{0}'.</parent-node-locked>
