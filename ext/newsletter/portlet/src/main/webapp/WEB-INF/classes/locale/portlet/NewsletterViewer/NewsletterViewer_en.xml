@@ -2,18 +2,18 @@
 <bundle>
   <UINewsletterViewerForm>
     <msg>
-      <updateSuccess>Your subcription has been updated.</updateSuccess>
+      <updateSuccess>Your subscription was updated successfully.</updateSuccess>
       <subcribed>You are now subscribed to the selected newletters.</subcribed>
-      <email-not-empty>Email cannot be empty</email-not-empty>
-      <checkSubscriptionToProcess>Please check one or more subscriptions before submit!</checkSubscriptionToProcess>
-      <alreadyExistedEmail>This Email already exists. Please input another email</alreadyExistedEmail>
-      <canNotSubcribed>Can't subcribe. Please try again!</canNotSubcribed>
-      <get-checked>Error when perform get subscription are checked.</get-checked>
+      <email-not-empty>The Email field is required.</email-not-empty>
+      <checkSubscriptionToProcess>Please select at least one subscription before submitting.</checkSubscriptionToProcess>
+      <alreadyExistedEmail>This email already exists. Please input another one.</alreadyExistedEmail>
+      <canNotSubcribed>Cannot subscribe. Please try again.</canNotSubcribed>
+      <get-checked>An error occurred while trying to access the checked subscription.</get-checked>
     </msg>
     <action>
       <Subcribe>Subscribe</Subcribe>
       <ForgetEmail>Forget this email</ForgetEmail>
-      <ChangeSubcriptions>Change your subcriptions</ChangeSubcriptions>
+      <ChangeSubcriptions>Change your subscription</ChangeSubcriptions>
     </action>
     <title>
       <userEmail>Your Email</userEmail>

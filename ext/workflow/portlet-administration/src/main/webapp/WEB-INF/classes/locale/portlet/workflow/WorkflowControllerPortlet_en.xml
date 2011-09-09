@@ -11,7 +11,7 @@
       <text>Admin Workflow Management</text>
     </tab>
     <msg>
-      <refresh-session-success>The session has been refreshed successfully</refresh-session-success>
+      <refresh-session-success>The session was refreshed successfully.</refresh-session-success>
     </msg>
     <label>
       <refresh>Refresh</refresh>
@@ -26,14 +26,14 @@
     <title>
       <UITaskList>Task Controller</UITaskList>
       <UIBPDefinition>BP Definition Controller</UIBPDefinition>
-      <UIDocumentContent>View content</UIDocumentContent>
-      <UIDocumentForm>Edit content</UIDocumentForm>
+      <UIDocumentContent>View Content</UIDocumentContent>
+      <UIDocumentForm>Edit Content</UIDocumentForm>
       <UITask>Task</UITask>
     </title>
   </UITabPane>
   <UITaskList>
     <header>
-      <id>Task ID</id>
+      <id>Task Id</id>
       <processName>Process Name</processName>
       <taskName>Task Name</taskName>
       <actor>Actor</actor>
@@ -47,26 +47,26 @@
       <managerState>Manage</managerState>
     </label>
     <msg>
-      <task-not-found>The task cannot be managed. The most probable reason is that it has been already managed by another user.</task-not-found>
-      <task-change>The task you have selected has been changed or removed</task-change>
+      <task-not-found>You cannot manage the task. Maybe, it has been already managed by another user.</task-not-found>
+      <task-change>The task was changed or removed.</task-change>
     </msg>
   </UITaskList>
   <UITaksList>
     <msg>
-      <no-task>No assigned task</no-task>
+      <no-task>No assigned tasks</no-task>
     </msg>
   </UITaksList>
   <UITask>
     <label>
-      <hide-process-link>Hide process link</hide-process-link>
-      <show-process-link>Show process link</show-process-link>
+      <hide-process-link>Hide Process Link</hide-process-link>
+      <show-process-link>Show Process Link</show-process-link>
     </label>
     <title>
       <Delegate>Select User</Delegate>
     </title>
     <msg>
-      <has-not-got-delegate>You must choose any user to delegate</has-not-got-delegate>
-      <user-not-exist>This delegated user doesn't exist</user-not-exist>
+      <has-not-got-delegate>You must select any users to delegate.</has-not-got-delegate>
+      <user-not-exist>This delegated user does not exist.</user-not-exist>
     </msg>
   </UITask>
   <PopupDelegatedSelectorId>
@@ -94,10 +94,10 @@
   </UIControllerManager>
   <UIDocumentForm>
     <msg>
-      <cannot-save>Some constraints were violated during that action.</cannot-save>
-      <in-versioning>Need to checkout current node before add new node</in-versioning>
-      <not-support>Cannot load template of '{0}'.</not-support>
-      <value-invalid>'{0}' is needed value</value-invalid>
+      <cannot-save>An error occurred while saving the document.</cannot-save>
+      <in-versioning>Please check out the current node before adding a new one.</in-versioning>
+      <not-support>Cannot load the template of '{0}'.</not-support>
+      <value-invalid>'{0}' is required.</value-invalid>
     </msg>
   </UIDocumentForm>
   <PopupComponent>
@@ -107,8 +107,8 @@
   </PopupComponent>
   <UITreeTaxonomyList>
     <label>
-      <taxonomyTree>Taxonomy Tree</taxonomyTree>
-      <rootNodePath>Root tree</rootNodePath>
+      <taxonomyTree>Category Tree</taxonomyTree>
+      <rootNodePath>Root Tree</rootNodePath>
       <rootNodeInfo>UITreeTaxonomyList</rootNodeInfo>
     </label>
   </UITreeTaxonomyList>
@@ -116,17 +116,17 @@
     <label>
       <workspaceName>Workspace</workspaceName>
       <rootNodeInfo>UIWorkspaceList</rootNodeInfo>
-      <rootNodePath>Root path</rootNodePath>
+      <rootNodePath>Root Path</rootNodePath>
     </label>
   </UIWorkspaceList>
   <rootNodeInfo>
     <title>
-      <AddRootNode>Add root node</AddRootNode>
+      <AddRootNode>Add Root Node</AddRootNode>
     </title>
   </rootNodeInfo>
   <PopupComponent>
     <title>
-      <UIOneNodePathSelector>Select path</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Select Path</UIOneNodePathSelector>
     </title>
   </PopupComponent>
   <UIDocumentForm>
@@ -136,4 +136,3 @@
    </msg>
   </UIDocumentForm>
 </bundle>
-

@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bundle>
-  <task-name>Update holidays</task-name>
-  <title>Update holidays</title>
+  <task-name>Update Holidays</task-name>
+  <title>Update Holidays</title>
   <!--
   #variable title and label
   -->
   <start>
-    <label>Start (dd/mm/yyyy) :</label>
+    <label>Start (dd/mm/yyyy):</label>
   </start>
   <end>
-    <label>End (dd/mm/yyyy) :</label>
+    <label>End (dd/mm/yyyy):</label>
   </end>
   <changedecision>
     <label>Decision:</label>
@@ -25,4 +25,3 @@
   
   <cancel>Cancel</cancel>
 </bundle>
-

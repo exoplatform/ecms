@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bundle>
-  <task-name>update document</task-name>
-  <title>update document</title>
+  <task-name>Update Document</task-name>
+  <title>Update Document</title>
   <submit>
     <submit>Modify</submit>
-    <value>Modify document</value>
+    <value>Modify Document</value>
   </submit>
   <cancel>
     <submit>Disagree</submit>
     <value>Disagree</value>
   </cancel>
   <comment>
-    <title>Some comments...</title>
+    <title>Some Comments...</title>
     <label>Comment:</label>
   </comment>
   <document-id>

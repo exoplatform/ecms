@@ -2,7 +2,7 @@
 <bundle>
   <NoneHTMLValidator>
     <msg>
-      <invalid>Please, don't use html tags in "{0}" field</invalid>
+      <invalid>HTML tags cannot be used in the field "{0}".</invalid>
     </msg>
   </NoneHTMLValidator>
   <NewsletterPortlet>
@@ -18,7 +18,7 @@
       <Edit>Edit</Edit>
       <Moderation>Moderation</Moderation>
       <CreateLetter>New Letter</CreateLetter>
-      <UpdateNewsletter>Update sending parameters</UpdateNewsletter>
+      <UpdateNewsletter>Update Sending Parameters</UpdateNewsletter>
       <RemoveModerators>Remove</RemoveModerators>
     </action>
     <title>
@@ -36,13 +36,13 @@
 
   <UIWebcontentSelectorFormPopupWindow>
     <title>
-      <UINewsletterEntryWebcontentSelectorForm>Webcontent selector form</UINewsletterEntryWebcontentSelectorForm>
+      <UINewsletterEntryWebcontentSelectorForm>Webcontent Selector Form</UINewsletterEntryWebcontentSelectorForm>
     </title>
   </UIWebcontentSelectorFormPopupWindow>
 
   <UIWebcontentSelectorPopupWindow>
     <title>
-      <UIWebContentTabSelector>Webcontent selector</UIWebContentTabSelector>
+      <UIWebContentTabSelector>Webcontent Selector</UIWebContentTabSelector>
     </title>
   </UIWebcontentSelectorPopupWindow>
 
@@ -54,26 +54,26 @@
 
   <FormWebcontentSelector>
     <title>
-      <SelectWebcontent>Select webcontent</SelectWebcontent>
+      <SelectWebcontent>Select Webcontent</SelectWebcontent>
     </title>
   </FormWebcontentSelector>
 
   <UICategoryFormPopupWindow>
     <title>
-      <UICategoryForm>Category form</UICategoryForm>
+      <UICategoryForm>Create New Category</UICategoryForm>
     </title>
   </UICategoryFormPopupWindow>
 
   <UISubscriptionFormPopupWindow>
     <title>
-      <UISubcriptionForm>Subscription form</UISubcriptionForm>
+      <UISubcriptionForm>Create New Subscription</UISubcriptionForm>
       <UIManagerUsers>Manager Users</UIManagerUsers>
     </title>
   </UISubscriptionFormPopupWindow>
 
   <UINewsletterEntryFormPopupWindow>
     <title>
-      <UINewsletterEntryContainer>Newsletter entry form</UINewsletterEntryContainer>
+      <UINewsletterEntryContainer>Newsletter Entry</UINewsletterEntryContainer>
     </title>
     <action>
       <Cancel>Cancel</Cancel>
@@ -88,13 +88,13 @@
 
   <UICategoryForm>
     <msg>
-      <saveSuccess>Category has been saved.</saveSuccess>
-      <categoryNameIsNotEmpty>Category name cannot be empty!</categoryNameIsNotEmpty>
-      <categoryTitleIsNotEmpty>Category title cannot be empty!</categoryTitleIsNotEmpty>
-      <categoryNameIsAlreadyExist>This category's name is already exist!</categoryNameIsAlreadyExist>
-      <inputModeratorEmpty>You must select user or member moderator!</inputModeratorEmpty>
-      <error-add-category>Error when add or edit category.</error-add-category>
-      <doNotHaveModerators>Don't have any moderators!</doNotHaveModerators>
+      <saveSuccess>The category was saved successfully.</saveSuccess>
+      <categoryNameIsNotEmpty>The category name is required.</categoryNameIsNotEmpty>
+      <categoryTitleIsNotEmpty>The category title is required.</categoryTitleIsNotEmpty>
+      <categoryNameIsAlreadyExist>This category name already exists.</categoryNameIsAlreadyExist>
+      <inputModeratorEmpty>Please select at least one moderator for this category.</inputModeratorEmpty>
+      <error-add-category>An error occurred while adding/editing the category.</error-add-category>
+      <doNotHaveModerators>Don't have any moderators.</doNotHaveModerators>
     </msg>
     <label>
       <CategoryName>Name</CategoryName>
@@ -113,42 +113,42 @@
     <title>
       <SubScription>Subscription</SubScription>
       <NumberOfUser>Number of User</NumberOfUser>
-      <AWaitingLetter>Awaiting Letter</AWaitingLetter>
+      <AWaitingLetter>Pending Letter</AWaitingLetter>
       <NewsLetter>New Letter</NewsLetter>
       <NewsSubscription>New Subscription</NewsSubscription>
       <NewsCategory>New Category</NewsCategory>
       <Administration>Administration</Administration>
     </title>
     <msg>
-      <get-list-categories>Error when perform get list categories.</get-list-categories>
-      <get-list-subscriptions>Error when perform get list subscriptions.</get-list-subscriptions>
+      <get-list-categories>An error occurred while getting the categories list.</get-list-categories>
+      <get-list-subscriptions>An error occurred while getting the subscriptions list.</get-list-subscriptions>
     </msg>
   </UICategories>
 
   <UISubscription>
     <msg>
-      <confirmDeleteCategory>Are you sure you want to delete this category ?</confirmDeleteCategory>
-      <confirmDeleteSubscription>Are you sure you want to delete this subscription ?</confirmDeleteSubscription>
-      <checkOnlyOneSubScriptionToEdit>Please check only one subscription to edit!</checkOnlyOneSubScriptionToEdit>
-      <checkOnlyOneSubScriptionToDelete>Please check any subscription to delete!</checkOnlyOneSubScriptionToDelete>
-      <subscriptionNotfound>Subcription name doesn't exist!</subscriptionNotfound>
-      <checkOnlyOneSubScriptionToOpen>Please check only one subscription to open!</checkOnlyOneSubScriptionToOpen>
+      <confirmDeleteCategory>Are you sure to delete this category?</confirmDeleteCategory>
+      <confirmDeleteSubscription>Are you sure to delete this subscription?</confirmDeleteSubscription>
+      <checkOnlyOneSubScriptionToEdit>Please select only one subscription that you want to edit.</checkOnlyOneSubScriptionToEdit>
+      <checkOnlyOneSubScriptionToDelete>Please select any subscriptions that you want to delete.</checkOnlyOneSubScriptionToDelete>
+      <subscriptionNotfound>The subscription name does not exist.</subscriptionNotfound>
+      <checkOnlyOneSubScriptionToOpen>Please select only one subscription that you want to open.</checkOnlyOneSubScriptionToOpen>
 		
-	  <checkOneSubScriptionToEdit>Please check one subscription to edit!</checkOneSubScriptionToEdit>           
-      <checkOneSubScriptionToOpen>Please check one subscription to open!</checkOneSubScriptionToOpen>	
+      <checkOneSubScriptionToEdit>Please select one subscription that you want to edit.</checkOneSubScriptionToEdit>           
+      <checkOneSubScriptionToOpen>Please select one subscription that you want to open.</checkOneSubScriptionToOpen> 
 		
-      <checkOnlyOneNewsletterToEdit>Please check only one newsletter to edit!</checkOnlyOneNewsletterToEdit>
-      <checkOnlyOneNewsletterToDelete>Please check any newsletter to delete!</checkOnlyOneNewsletterToDelete>
-      <checkOnlyOneNewsletterToOpen>Please check only one newsletter to open!</checkOnlyOneNewsletterToOpen>
-      <checkOnlyOneNewsletterToConvert>Please check only one newsletter to convert!</checkOnlyOneNewsletterToConvert>
+      <checkOnlyOneNewsletterToEdit>Please select only one newsletter that you want to edit.</checkOnlyOneNewsletterToEdit>
+      <checkOnlyOneNewsletterToDelete>Please select any newsletters that you want to delete.</checkOnlyOneNewsletterToDelete>
+      <checkOnlyOneNewsletterToOpen>Please select only one newsletter that you want to open.</checkOnlyOneNewsletterToOpen>
+      <checkOnlyOneNewsletterToConvert>Please select only one newsletter that you want to convert.</checkOnlyOneNewsletterToConvert>
 		
-	  <checkOneNewsletterToEdit>Please check one newsletter to edit!</checkOneNewsletterToEdit>      
-      <checkOneNewsletterToOpen>Please check one newsletter to open!</checkOneNewsletterToOpen>
-      <checkOneNewsletterToConvert>Please check one newsletter to convert!</checkOneNewsletterToConvert>
+      <checkOneNewsletterToEdit>Please select one newsletter that you want to edit.</checkOneNewsletterToEdit>      
+      <checkOneNewsletterToOpen>Please select one newsletter that you want to open.</checkOneNewsletterToOpen>
+      <checkOneNewsletterToConvert>Please select one newsletter that you want to convert.</checkOneNewsletterToConvert>
 		  
-      <convertSuccessful>Convert successful!</convertSuccessful>
-      <templateIsExist>Already exist a template have same name! Please check again.</templateIsExist>
-      <get-list-subscriptions>Error when perform get list subscriptions.</get-list-subscriptions>
+      <convertSuccessful>Convert successfully.</convertSuccessful>
+      <templateIsExist>The template name already exists. Please check again.</templateIsExist>
+      <get-list-subscriptions>An error occurred while getting the subscriptions list.</get-list-subscriptions>
     </msg>
     <title>
       <ManageCategory>Manage Category</ManageCategory>
@@ -163,28 +163,28 @@
 
   <FormCategoryModerator>
     <title>
-      <SelectUser>Select user</SelectUser>
-      <SelectMember>Select member</SelectMember>
+      <SelectUser>Select User</SelectUser>
+      <SelectMember>Select Member</SelectMember>
       <DeleteModerator>Delete Moderator</DeleteModerator>
     </title>
   </FormCategoryModerator>
 
   <UIGroupMemberSelector>
     <label>
-      <selectGroup>Select group</selectGroup>
-      <selectMembership>Select membership</selectMembership>
+      <selectGroup>Select Group</selectGroup>
+      <selectMembership>Select Membership</selectMembership>
     </label>
   </UIGroupMemberSelector>
 
   <UIFormInputSetWithAction>
     <msg>
-      <confirm-delete>Are you sure to delete this category from list?</confirm-delete>
+      <confirm-delete>Are you sure to delete this category?</confirm-delete>
     </msg>
   </UIFormInputSetWithAction>
 
   <UIUserMemberSelectorPopupWindow>
     <title>
-      <UIUserMemberSelector>User selector</UIUserMemberSelector>
+      <UIUserMemberSelector>User Selector</UIUserMemberSelector>
     </title>
   </UIUserMemberSelectorPopupWindow>
 
@@ -196,11 +196,11 @@
 
   <UISubcriptionForm>
     <msg>
-      <saveSuccess>Subcription has been saved.</saveSuccess>
-      <subcriptionNameIsNotEmpty>Subcription name cannot be empty!</subcriptionNameIsNotEmpty>
-      <subcriptionTitleIsNotEmpty>Subcription title cannot be empty!</subcriptionTitleIsNotEmpty>
-      <subcriptionNameIsAlreadyExist>This subcription's name is already exist!</subcriptionNameIsAlreadyExist>
-      <selectRedactorPermission>You must select user or member redactor! </selectRedactorPermission>
+      <saveSuccess>The subscription was saved successfully.</saveSuccess>
+      <subcriptionNameIsNotEmpty>The subscription name is required.</subcriptionNameIsNotEmpty>
+      <subcriptionTitleIsNotEmpty>The subscription title is required.</subcriptionTitleIsNotEmpty>
+      <subcriptionNameIsAlreadyExist>This subscription name already exists.</subcriptionNameIsAlreadyExist>
+      <selectRedactorPermission>Please specify at least one redactor for the subscription. </selectRedactorPermission>
     </msg>
     <label>
       <SubcriptionName>Name</SubcriptionName>
@@ -221,38 +221,38 @@
     </action>
     <msg>
       <UpdateBeforeSave>
-        Please update newsletter's sending preferences before send or save! 
-			</UpdateBeforeSave>
+        Please update the newsletter's sending preferences before sending or saving. 
+      </UpdateBeforeSave>
       <DateTimeIsNotNull>
-        Send date is empty. Please check again!
-			</DateTimeIsNotNull>
+        The Send date is empty. Please check again.
+      </DateTimeIsNotNull>
       <DateTimeIsInvalid>
-        Send date is invalid. Please check again!
-			</DateTimeIsInvalid>
-      <UpdateInformationSuccessful>Information is updated successfully</UpdateInformationSuccessful>
+        The Send date is invalid. Please check again.
+      </DateTimeIsInvalid>
+      <UpdateInformationSuccessful>The information was updated successfully.</UpdateInformationSuccessful>
       <NodeNameInvalid>
-        Can't create newsletter because this title already exists. Please try again!
-			</NodeNameInvalid>
-      <get-template>Error when perform get template.</get-template>
-      <get-template-resource>Error when perform get template resource resolver</get-template-resource>
-      <add-email-newsletter>Error when perform add list email address.</add-email-newsletter>
-      <send-newsletter>Error when perform send newsletter.</send-newsletter>
+        Cannot create the newsletter because this title already exists. Please try again.
+      </NodeNameInvalid>
+      <get-template>An error occurred while trying to find the template.</get-template>
+      <get-template-resource>An error occurred while trying to find the template.</get-template-resource>
+      <add-email-newsletter>An error occurred while adding the email address to the list.</add-email-newsletter>
+      <send-newsletter>An error occurred while sending the newsletter.</send-newsletter>
     </msg>
   </UINewsletterEntryForm>
 
   <UINewsletterEntryDialogSelector>
     <action>
-      <OpenWebcontentSelectorForm>Open webcontent selector</OpenWebcontentSelectorForm>
+      <OpenWebcontentSelectorForm>Open Webcontent Selector</OpenWebcontentSelectorForm>
     </action>
     <title>
       <UINewsletterEntryTemplate>Template</UINewsletterEntryTemplate>
-      <UINewsletterEntrySendDate>Send date</UINewsletterEntrySendDate>
+      <UINewsletterEntrySendDate>Send Date</UINewsletterEntrySendDate>
       <UINewsletterEntryCategorySelectBox>Category</UINewsletterEntryCategorySelectBox>
       <UINetterEntrySubscriptionSelectBox>Subscription</UINetterEntrySubscriptionSelectBox>
       <UINewsletterEntrySubscriptionSelectBox>Subscription</UINewsletterEntrySubscriptionSelectBox>
     </title>
     <msg>
-      <subcriptionIsNotEmpty>Subcription name cannot be empty!</subcriptionIsNotEmpty>
+      <subcriptionIsNotEmpty>The subscription name is required.</subcriptionIsNotEmpty>
     </msg>
   </UINewsletterEntryDialogSelector>
 
@@ -285,18 +285,18 @@
       <User>User</User>
     </role>
     <msg>
-      <get-list-users>Error when get list public users.</get-list-users>
-      <set-infor-users>Error when set information for users.</set-infor-users>
-	  <remove-admin-role-of-root>You cannot remove Administrator role of super user.</remove-admin-role-of-root>
+      <get-list-users>An error occurred while trying to find the public users list.</get-list-users>
+      <set-infor-users>An error occurred while setting information for users.</set-infor-users>
+      <remove-admin-role-of-root>You cannot remove the Administrator role of the super user.</remove-admin-role-of-root>
     </msg>
   </UIManagerUsers>
 
   <UINewsletterEntryManager>
     <msg>
-      <confirmDeleteNewsletter>Are you sure you want to delete this newsletter?</confirmDeleteNewsletter>
-      <set-list-newsletter>Error when perform set list newsletter entries.</set-list-newsletter>
-      <get-checked>Error when perform get newsletter or subscription are checked.</get-checked>
-      <canNotEditNewsletter>This Newsletter has been sent, can't edit. You only convert it as template and add new Newsletter with this template.</canNotEditNewsletter>
+      <confirmDeleteNewsletter>Are you sure to delete this newsletter?</confirmDeleteNewsletter>
+      <set-list-newsletter>An error occurred while setting the newsletter entries list.</set-list-newsletter>
+      <get-checked>An error occurred while getting the newsletter; or the subscription is checked.</get-checked>
+      <canNotEditNewsletter>You cannot edit the sent newsletter. You only can convert it as a template and create a new letter with this template.</canNotEditNewsletter>
     </msg>
     <title>
       <ConvertAsTemplate>Convert As Template</ConvertAsTemplate>
@@ -326,8 +326,8 @@
       <UIRemoveModerators>Remove Moderators</UIRemoveModerators>
     </title>
     <msg>
-      <checkToRemove>Please, tick one or more permissions in list to remove.</checkToRemove>
-      <donotMoveYourSelt>You have just removed your permission from list, please check again!</donotMoveYourSelt>
+      <checkToRemove>Please select at least one permission in the list that you want to remove.</checkToRemove>
+      <donotMoveYourSelt>You have just removed your permission from the list.</donotMoveYourSelt>
     </msg>
   </UIRemoveModeratorsFormPopupWindow>
 </bundle>
