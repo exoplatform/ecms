@@ -3,8 +3,8 @@
   <UIPCVContainer>
     <title>
       <Back>Back</Back>
-      <print>Print this page</print>
-      <QuickEdit>Quick edit</QuickEdit>
+      <print>Print This Page</print>
+      <QuickEdit>Quick Edit</QuickEdit>
     </title>
     <label>
       <print>Print</print>
@@ -17,17 +17,17 @@
 
   <UIPCVConfigPopupWindow>
     <title>
-      <UIPCVConfig>Parameterized content viewer configuration</UIPCVConfig>
+      <UIPCVConfig>Parameterized Content Viewer Configuration</UIPCVConfig>
     </title>
   </UIPCVConfigPopupWindow>
 
   <UIPCVConfig>
     <label>
-      <Title>Parameterized content viewer configuration</Title>
-      <DisplaySettingBlock>Display setting</DisplaySettingBlock>
-      <ShowTitle>Show title</ShowTitle>
-      <ShowDateCreated>Show date created</ShowDateCreated>
-      <ShowBar>Show option bar</ShowBar>
+      <Title>Parameterized Content Viewer Configuration</Title>
+      <DisplaySettingBlock>Display Settings</DisplaySettingBlock>
+      <ShowTitle>Show Title</ShowTitle>
+      <ShowDateCreated>Show Created Date</ShowDateCreated>
+      <ShowBar>Show Option Bar</ShowBar>
     </label>
     <action>
       <Save>Save</Save>
@@ -41,8 +41,8 @@
       <edit>Edit</edit>
     </label>
     <msg>
-      <content-not-found>No content found</content-not-found>
-      <not-support>You don't have permission to access</not-support>
+      <content-not-found>No content found.</content-not-found>
+      <not-support>You do not have permission to access.</not-support>
     </msg>
   </UIPCVContainer>
 </bundle>

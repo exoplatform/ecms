@@ -4,24 +4,24 @@
     <label>
       <UIFormGeneratorGeneralTab>General</UIFormGeneratorGeneralTab>
       <FormGeneratorName>Name</FormGeneratorName>
-      <UIFormGeneratorNodetypeFormSelectBox>Based nodetype</UIFormGeneratorNodetypeFormSelectBox>
+      <UIFormGeneratorNodetypeFormSelectBox>Based Nodetype</UIFormGeneratorNodetypeFormSelectBox>
       <UIFormGeneratorJsonObjectStringInput></UIFormGeneratorJsonObjectStringInput>
       <UIFormGeneratorDescriptionFormWYSIWYGInput>Description</UIFormGeneratorDescriptionFormWYSIWYGInput>
       <UIFormGeneratorIconFormUploadInput>Icon</UIFormGeneratorIconFormUploadInput>
-      <UIFormGeneratorDnDTab>Form builder</UIFormGeneratorDnDTab>
+      <UIFormGeneratorDnDTab>Form Builder</UIFormGeneratorDnDTab>
       <UIFormGeneratorOptionsTab>Options</UIFormGeneratorOptionsTab>
-      <UIFormGeneratorVoteFormCheckboxInput>Allow vote</UIFormGeneratorVoteFormCheckboxInput>
-      <UIFormGeneratorCommentFormCheckboxInput>Allow comment</UIFormGeneratorCommentFormCheckboxInput>
+      <UIFormGeneratorVoteFormCheckboxInput>Allow Vote</UIFormGeneratorVoteFormCheckboxInput>
+      <UIFormGeneratorCommentFormCheckboxInput>Allow Comment</UIFormGeneratorCommentFormCheckboxInput>
     </label>
     <action>
       <Save>Save</Save>
       <Reset>Reset</Reset>
     </action>
     <msg>
-      <register-failed>NodeType registration is unsuccessfully. It is existing or Super types is invalid</register-failed>
-      <AddNewsSuccessful>Nodetype {0}'s template is generated successful</AddNewsSuccessful>
-      <duplicate-name>Field label's name is duplicated, please input difference name</duplicate-name>
-      <select-value-empty>Some field in default value of select box can not be empty, please input value for it.</select-value-empty>
+      <register-failed>The node type registration is unsuccessfully. It is existing or Super types is invalid.</register-failed>
+      <AddNewsSuccessful>The node type {0}'s template is generated successfully.</AddNewsSuccessful>
+      <duplicate-name>The field Label's name is duplicated. Please input another one.</duplicate-name>
+      <select-value-empty>Some fields in the default value of the select box cannot be empty. Please input values for them.</select-value-empty>
     </msg>
   </UIFormGeneratorTabPane>
   <FormGeneratorDialog>
@@ -31,7 +31,7 @@
   </FormGeneratorDialog>
   <ECMNameValidator>
     <msg>
-      <Invalid-char>There are some invalid characters in field '{0}'. Type another value, please!</Invalid-char>
+      <Invalid-char>The field '{0}' contains some invalid characters. Please type another value.</Invalid-char>
     </msg>
   </ECMNameValidator>
 </bundle>

@@ -36,10 +36,10 @@
         <title>Site Title</title>
         <description>Site Description</description>
         <keywords>Site Keywords</keywords>
-        <robots>Search Engines Behavior</robots>
+        <robots>Search Engine Behavior</robots>
       </label>
       <tooltip>
-        <add-edit>Add/Edit this metadata</add-edit>
+        <add-edit>Add/Edit Metadata</add-edit>
         <cancel>Cancel</cancel>
       </tooltip>
       <action>

@@ -29,7 +29,7 @@
 
   <UIFormInputSetWithAction>
     <msg>
-      <confirm-delete>Do you want to delete ?</confirm-delete>
+      <confirm-delete>Are you sure to delete this item?</confirm-delete>
     </msg>
   </UIFormInputSetWithAction>
 
@@ -63,27 +63,27 @@
       <action>Action</action>
     </header>
     <msg>
-      <child-not-found>No page found</child-not-found>
+      <child-not-found>No Page Found.</child-not-found>
     </msg>
   </UIPageSelectorPanel>
 
   <UIContentDialogFormPopupWindow>
     <title>
-      <UIContentDialogPreference>Webcontent preference</UIContentDialogPreference>
+      <UIContentDialogPreference>Webcontent Preference</UIContentDialogPreference>
     </title>
   </UIContentDialogFormPopupWindow>
 
   <UITabPane>
     <title>
-      <UIContentBrowsePanelOne>Content browser</UIContentBrowsePanelOne>
-      <UIContentBrowsePanelMulti>Content browser</UIContentBrowsePanelMulti>
-      <UIContentBrowsePanelFolder>Folder browser</UIContentBrowsePanelFolder>
-      <UIContentSearchForm>Content search form</UIContentSearchForm>
-      <UIContentSearchResult>Search result</UIContentSearchResult>
-      <UIContentViewer>Preview content</UIContentViewer>
-      <WebContentMetadataPopup>Property selector</WebContentMetadataPopup>
-      <WebContentNodeTypePopup>Nodetype selector</WebContentNodeTypePopup>
-      <UIPermissionManager>Permission manager</UIPermissionManager>
+      <UIContentBrowsePanelOne>Content Browser</UIContentBrowsePanelOne>
+      <UIContentBrowsePanelMulti>Content Browser</UIContentBrowsePanelMulti>
+      <UIContentBrowsePanelFolder>Folder Browser</UIContentBrowsePanelFolder>
+      <UIContentSearchForm>Content Search Form</UIContentSearchForm>
+      <UIContentSearchResult>Search Result</UIContentSearchResult>
+      <UIContentViewer>Preview Content</UIContentViewer>
+      <WebContentMetadataPopup>Property Selector</WebContentMetadataPopup>
+      <WebContentNodeTypePopup>Nodetype Selector</WebContentNodeTypePopup>
+      <UIPermissionManager>Permission Manager</UIPermissionManager>
     </title>
   </UITabPane>
 
@@ -95,7 +95,7 @@
       <Media>Media</Media>
     </selectBoxValues>
     <msg>
-      <node-checkout>Node is checked out. Please check in node before do this function</node-checkout>
+      <node-checkout>The node is checked out. Please check in the node before performing this function.</node-checkout>
     </msg>
   </UIContentBrowsePanelOne>
 
@@ -110,22 +110,22 @@
 
   <UIContentBrowsePanelOne>
     <label>
-      <LeftColumn>Select a folder to display its children as content</LeftColumn>
-      <RightColumn>Below is the possible content can be selected</RightColumn>
+      <LeftColumn>Select a folder to display its children as content.</LeftColumn>
+      <RightColumn>The content below can be selected.</RightColumn>
     </label>
   </UIContentBrowsePanelOne>
 
   <UIContentBrowsePanelMulti>
     <label>
-      <LeftColumn>Select a folder to display its children as content</LeftColumn>
-      <RightColumn>Below is the possible content can be selected</RightColumn>
+      <LeftColumn>Select a folder to display its children as content.</LeftColumn>
+      <RightColumn>The content below can be selected.</RightColumn>
     </label>
   </UIContentBrowsePanelMulti>
 
   <UIContentBrowsePanelFolder>
     <label>
-      <LeftColumn>Select a folder to display its children as content</LeftColumn>
-      <RightColumn>Below is the possible folder can be selected</RightColumn>
+      <LeftColumn>Select a folder to display its children as content.</LeftColumn>
+      <RightColumn>The folder below can be selected.</RightColumn>
     </label>
   </UIContentBrowsePanelFolder>
 
@@ -136,8 +136,8 @@
       <delete>Delete</delete>
     </label>
     <msg>
-      <no-content-found>No content found</no-content-found>
-      <non-content>You didn't select any content</non-content>
+      <no-content-found>No content found.</no-content-found>
+      <non-content>You have not selected any content.</non-content>
     </msg>
   </UISelectedContentGrid>
 
@@ -151,7 +151,7 @@
   <UIContentBrowsePathSelector>
     <header>
       <name>Name</name>
-      <publicationstate>Publication state</publicationstate>
+      <publicationstate>Publication State</publicationstate>
       <action>Action</action>
     </header>
     <msg>
@@ -166,19 +166,19 @@
       <action>Action</action>
     </header>
     <msg>
-      <child-not-found>No folder found</child-not-found>
+      <child-not-found>No folder found.</child-not-found>
     </msg>
   </UIContentBrowsePathSelectorFolder>
 
   <UIContentSearchForm>
     <title>
       <Location>Site Name</Location>
-      <SearchByName>Search by name</SearchByName>
+      <SearchByName>Search by Name</SearchByName>
       <Fulltext>A word or phrase in context</Fulltext>
       <Property>Property</Property>
       <Contain>Contain</Contain>
-      <FromDate>from date</FromDate>
-      <ToDate>to date</ToDate>
+      <FromDate>From Date</FromDate>
+      <ToDate>To Date</ToDate>
       <DocumentType>Document Type</DocumentType>
     </title>
     <label>
@@ -191,10 +191,10 @@
       <SearchWebContent>Search</SearchWebContent>
     </action>
     <msg>
-      <empty-field>Please input valid keyword for search</empty-field>
-      <invalid-format>Invalid format datetime in field '{0}'</invalid-format>
-      <invalid-date>"To Date" have to greater than "From Date"</invalid-date>
-      <invalid-nodeType>Node type "{0}" is invalid! Please check again.</invalid-nodeType>
+      <empty-field>Please input a valid keyword for search.</empty-field>
+      <invalid-format>Invalid format datetime in field '{0}'.</invalid-format>
+      <invalid-date>"To Date" must be greater than "From Date"</invalid-date>
+      <invalid-nodeType>The node type "{0}" is invalid. Please check again.</invalid-nodeType>
       <invalid-keyword>The keyword is invalid. Some characters are not supported.</invalid-keyword>
     </msg>
   </UIContentSearchForm>
@@ -211,14 +211,14 @@
       <Cancel>Cancel</Cancel>
     </action>
     <label>
-      <metadataType>Metadata type</metadataType>
+      <metadataType>Metadata Type</metadataType>
       <property_select>Property</property_select>
     </label>
   </UIContentPropertySelector>
 
   <WebContentNodeTypePopup>
     <title>
-      <UIContentNodeTypeSelector>Nodetype Selector</UIContentNodeTypeSelector>
+      <UIContentNodeTypeSelector>Node Type Selector</UIContentNodeTypeSelector>
     </title>
   </WebContentNodeTypePopup>
 
@@ -233,7 +233,7 @@
     <header>
       <title>Title</title>
       <score>Score</score>
-      <publicationstate>Publication state</publicationstate>
+      <publicationstate>Publication State</publicationstate>
       <action>Action</action>
     </header>
     <title>
@@ -251,12 +251,12 @@
     </action>
     <msg>
       <access-denied>
-        You don't have permission add categories for this document.
-   	</access-denied>
+        You do not have permission to add categories to this document.
+   	  </access-denied>
       <exception>
-        Have any exception raising while perform add categories for this document.
-   	</exception>
-      <non-categories>Categories are wrong. Please select good categories.</non-categories>
+        An error occurred while adding categories to this document.
+   	  </exception>
+      <non-categories>Categories are wrong. Please select appropriate categories.</non-categories>
     </msg>
   </UIContentDialogForm>
 
@@ -285,41 +285,41 @@
       <action>Action</action>
     </header>
     <msg>
-      <confirm-delete-permission>Are you sure to delete ?</confirm-delete-permission>
-      <no-permission-remove>Don't have permission.</no-permission-remove>
+      <confirm-delete-permission>Are you sure to delete this permission?</confirm-delete-permission>
+      <no-permission-remove>You do not have permission.</no-permission-remove>
       <access-denied>Access denied.</access-denied>
       <node-locked>The path element (0) or one of its parents is locked.</node-locked>
-      <userOrGroup-required>Require select user or group.</userOrGroup-required>
-      <checkbox-require>You should set right.</checkbox-require>
-      <node-locked>The item with path {0} or upper level is locked.</node-locked>
-      <node-checkedin>You must check out first</node-checkedin>
+      <userOrGroup-required>You must select a user or a group.</userOrGroup-required>
+      <checkbox-require>You must set rights.</checkbox-require>
+      <node-locked>The item with the path {0} or the upper level is locked.</node-locked>
+      <node-checkedin>You must check out first.</node-checkedin>
     </msg>
   </UIPermissionManagerGrid>
 
   <UIPermissionInputSetWithAction>
     <title>
-      <SelectUser>Select user</SelectUser>
-      <SelectMember>Select member</SelectMember>
-      <AddAny>Add any permission</AddAny>
+      <SelectUser>Select User</SelectUser>
+      <SelectMember>Select Member</SelectMember>
+      <AddAny>Add Any Permission</AddAny>
     </title>
   </UIPermissionInputSetWithAction>
 
   <UIUserSelectorPopupWindow>
     <title>
-      <UIUserContainer>User selector</UIUserContainer>
+      <UIUserContainer>User Selector</UIUserContainer>
     </title>
   </UIUserSelectorPopupWindow>
 
   <UIGroupSelectorPopupWindow>
     <title>
-      <UIGroupMemberSelector>Group selector</UIGroupMemberSelector>
+      <UIGroupMemberSelector>Group Selector</UIGroupMemberSelector>
     </title>
   </UIGroupSelectorPopupWindow>
 
   <UIGroupMemberSelector>
     <label>
-      <selectGroup>Select group</selectGroup>
-      <selectMembership>Select membership</selectMembership>
+      <selectGroup>Select Group</selectGroup>
+      <selectMembership>Select Membership</selectMembership>
     </label>
   </UIGroupMemberSelector>
 
@@ -331,35 +331,35 @@
 
   <ZeroValidator>
     <msg>
-      <Invalid-number>Zero is not accepted in field '{0}'</Invalid-number>
+      <Invalid-number>Zero is not accepted in the field '{0}'.</Invalid-number>
     </msg>
   </ZeroValidator>
 
   <UIDropDownPageTemp>
     <item>
-      <WCMPageConfigs>WCM page configs</WCMPageConfigs>
-      <ColumnPageConfigs>Column page configs</ColumnPageConfigs>
-      <RowPageConfigs>Row page configs</RowPageConfigs>
-      <TabsPageConfigs>Tabs page configs</TabsPageConfigs>
-      <MixPageConfigs>Mix page config</MixPageConfigs>
+      <WCMPageConfigs>WCM Page Configs</WCMPageConfigs>
+      <ColumnPageConfigs>Column Page Configs</ColumnPageConfigs>
+      <RowPageConfigs>Row Page Configs</RowPageConfigs>
+      <TabsPageConfigs>Tabs Page Configs</TabsPageConfigs>
+      <MixPageConfigs>Mix Page Configs</MixPageConfigs>
     </item>
   </UIDropDownPageTemp>
 
   <UIWizardPageSelectLayoutForm>
     <label>
-      <SingleContentViewer>Single content viewer</SingleContentViewer>
-      <ContentListViewer>Content list viewer</ContentListViewer>
+      <SingleContentViewer>Single Content Viewer</SingleContentViewer>
+      <ContentListViewer>Content List Viewer</ContentListViewer>
       <Search>Search</Search>
       <Sitemap>Sitemap</Sitemap>
-      <TwoColumnsLayout>Two columns layout</TwoColumnsLayout>
-      <ThreeColumnsLayout>Three columns layout</ThreeColumnsLayout>
-      <TwoRowsLayout>Two rows layout</TwoRowsLayout>
-      <ThreeRowsLayout>Three rows layout</ThreeRowsLayout>
-      <TwoTabsLayout>Two tabs layout</TwoTabsLayout>
-      <ThreeTabsLayout>Three tabs layout</ThreeTabsLayout>
-      <TwoColumnsOneRowLayout>Two columns One row layout</TwoColumnsOneRowLayout>
-      <OneRowTwoColumnsLayout>One row Two columns layout</OneRowTwoColumnsLayout>
-      <ThreeRowsTwoColumnsLayout>Three rows Two columns layout </ThreeRowsTwoColumnsLayout>
+      <TwoColumnsLayout>Two-olumn Layout</TwoColumnsLayout>
+      <ThreeColumnsLayout>Three-column Layout</ThreeColumnsLayout>
+      <TwoRowsLayout>Two-row Layout</TwoRowsLayout>
+      <ThreeRowsLayout>Three-row Layout</ThreeRowsLayout>
+      <TwoTabsLayout>Two-tabs layout</TwoTabsLayout>
+      <ThreeTabsLayout>Three-tab Layout</ThreeTabsLayout>
+      <TwoColumnsOneRowLayout>Two-column &amp; One-row Layout</TwoColumnsOneRowLayout>
+      <OneRowTwoColumnsLayout>One-row &amp; Two-column Layout</OneRowTwoColumnsLayout>
+      <ThreeRowsTwoColumnsLayout>Three-rows &amp; Two-column Layout </ThreeRowsTwoColumnsLayout>
     </label>
   </UIWizardPageSelectLayoutForm>
 
@@ -367,21 +367,21 @@
     <welcome>Welcome</welcome>
     <login>Login</login>
     <logout>Logout</logout>
-    <language>Change language</language>
+    <language>Change Language</language>
     <register>Register</register>
   </Signin>
   <UIDriveForm>
 	<label>
 		<wcm-category-view>Category View</wcm-category-view>	
-		<wcm-view>WCM content View</wcm-view>
+		<wcm-view>WCM Content View</wcm-view>
 	</label>
   </UIDriveForm>
   
   <ContentSelector>
     <title>
-      <PersonalDrives>Personal drives</PersonalDrives>
-      <GeneralDrives>General drives</GeneralDrives>
-      <GroupDrives>Group drives</GroupDrives>
+      <PersonalDrives>Personal Drives</PersonalDrives>
+      <GeneralDrives>General Drives</GeneralDrives>
+      <GroupDrives>Group Drives</GroupDrives>
       <Private>Private</Private>
       <Public>Public</Public>
       <BackupCenter>Backup Center</BackupCenter>
@@ -394,7 +394,7 @@
       <PendingDocumentsCenter>Pending Documents Center</PendingDocumentsCenter>
       <RecordsManagementCenter>Records Management Center</RecordsManagementCenter>
       <SharedUsersSpace>Shared Users Space</SharedUsersSpace>
-      <Systemfiles>System files</Systemfiles>
+      <Systemfiles>System Files</Systemfiles>
       <ValidationRequestsDocumentsCenter>Validation Requests Documents Center</ValidationRequestsDocumentsCenter>
       <ManagedSites>Sites Management</ManagedSites>
       <SharedSite>Shared Site</SharedSite>
@@ -403,13 +403,13 @@
   
   <UICategoryNavigationTargetPathPopupWindow>
     <title>
-      <UIPageSelector>Page selector</UIPageSelector>
+      <UIPageSelector>Page Selector</UIPageSelector>
     </title>
   </UICategoryNavigationTargetPathPopupWindow>
   
   <UIDocumentInfo>
     <msg>
-      <access-denied-exception>Access denied. You may not have the privileges on reading or node removed or changed</access-denied-exception>
+      <access-denied-exception>Access denied. Maybe, you do not have the read permission; Or the node was removed or changed.</access-denied-exception>
     </msg>
   </UIDocumentInfo>
   

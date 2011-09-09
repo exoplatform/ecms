@@ -3,9 +3,9 @@
   <portal>
     <classic>
       <home>Overview</home>
-      <sitemap>Site map</sitemap>
+      <sitemap>Sitemap</sitemap>
       <searchResult>Search</searchResult>
-      <detail>Detail</detail>
+      <detail>Details</detail>
       <newAccount>New Account</newAccount>
       <groupnavigation>Group Navigation</groupnavigation>
 	  <register>Register</register>

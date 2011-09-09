@@ -31,17 +31,17 @@
     <msg>
       <your-search>Your search</your-search>
       <did-not-match>did not match any</did-not-match>
-      <new-suggestion>Suggestion</new-suggestion>
+      <new-suggestion>suggestion</new-suggestion>
     </msg>
   </UIDefaultSearchResult>
   <UISearchPageLayoutManager>
     <label>
-      <itemsPerPageSelector>Items per page</itemsPerPageSelector>
-      <searchFormSelector>Search form template</searchFormSelector>
-      <searchResultSelector>Search result template</searchResultSelector>
-      <searchPaginatorSelector>Search paginator template</searchPaginatorSelector>
-      <searchPageLayoutSelector>Search page layout template</searchPageLayoutSelector>
-      <searchResultBasePathInputSetAction>Base path</searchResultBasePathInputSetAction>
+      <itemsPerPageSelector>Items per Page</itemsPerPageSelector>
+      <searchFormSelector>Search Form Template</searchFormSelector>
+      <searchResultSelector>Search Result Template</searchResultSelector>
+      <searchPaginatorSelector>Search Paginator Template</searchPaginatorSelector>
+      <searchPageLayoutSelector>Search Page Layout Template</searchPageLayoutSelector>
+      <searchResultBasePathInputSetAction>Base Path</searchResultBasePathInputSetAction>
       <pageMode>Page Mode</pageMode>
       <option>
         <none>None</none>
@@ -62,8 +62,8 @@
   <UISearchForm>  
   	 <message>
   	   <keyword-not-support>The keyword is invalid. Some characters are not supported.</keyword-not-support>
-  	   <not-checked>Search type is not checked. Choose a search type, please.</not-checked>
-  	   <keyword-not-empty>The value of keyword is not null or empty!</keyword-not-empty>
+  	   <not-checked>Please select a search type.</not-checked>
+  	   <keyword-not-empty>The value of keyword should be not empty.</keyword-not-empty>
   	 </message>
   </UISearchForm>
   <UIPaginatorDefault>

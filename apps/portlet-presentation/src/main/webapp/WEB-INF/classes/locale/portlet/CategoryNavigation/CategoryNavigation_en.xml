@@ -2,7 +2,7 @@
 <bundle>
   <UICNContainer>
     <title>
-      <QuickEdit>Quick edit</QuickEdit>
+      <QuickEdit>Quick Edit</QuickEdit>
     </title>
   </UICNContainer>
 
@@ -21,15 +21,15 @@
   <UICategoryNavigationConfig>
     <label>
       <UICategoryNavigationRepositoryFormSelectBox>Repository</UICategoryNavigationRepositoryFormSelectBox>
-      <UICategoryNavigationTreeNameSelectBox>Taxonomy tree</UICategoryNavigationTreeNameSelectBox>
+      <UICategoryNavigationTreeNameSelectBox>Category Tree</UICategoryNavigationTreeNameSelectBox>
       <UICategoryNavigationTreeTitleFormStringInput>Title</UICategoryNavigationTreeTitleFormStringInput>
   
-      <UICategoryNavigationTreeNameFormSelectBox>Tree name</UICategoryNavigationTreeNameFormSelectBox>
-      <UICategoryNavigationTemplateFormSelectBox>Tree viewer template</UICategoryNavigationTemplateFormSelectBox>
+      <UICategoryNavigationTreeNameFormSelectBox>Tree Name</UICategoryNavigationTreeNameFormSelectBox>
+      <UICategoryNavigationTemplateFormSelectBox>Tree Viewer Template</UICategoryNavigationTemplateFormSelectBox>
       
       <UICategoryNavigationTargetPathFormInputSet>Show in Page</UICategoryNavigationTargetPathFormInputSet>      
       <TreeSelectionBlock>Tree Selection</TreeSelectionBlock>
-      <DisplaySettingBlock>Display settings</DisplaySettingBlock>
+      <DisplaySettingBlock>Display Settings</DisplaySettingBlock>
       <AdvancedBlock>Advance</AdvancedBlock>
   
 	  <UICategoryNavigationTreePathFormInputSet>Tree Path</UICategoryNavigationTreePathFormInputSet>
@@ -42,9 +42,9 @@
       
     </label>
     <msg>
-      <not-support-encoding>Encoding is not support.</not-support-encoding>
-      <render>Error when process render.</render>
-      <saving-success>This portlet has been updated</saving-success>
+      <not-support-encoding>Encoding is not supported.</not-support-encoding>
+      <render>An error occurred when rendering.</render>
+      <saving-success>This portlet was updated successfully.</saving-success>
     </msg>
     <action>
       <Save>Save</Save>
@@ -52,7 +52,7 @@
   </UICategoryNavigationConfig>
   <UICategoryNavigationTreeBase>
     <msg>
-      <not-existed-category>This category is not existed</not-existed-category>
+      <not-existed-category>This category does not exist.</not-existed-category>
     </msg>
   </UICategoryNavigationTreeBase>
 </bundle>

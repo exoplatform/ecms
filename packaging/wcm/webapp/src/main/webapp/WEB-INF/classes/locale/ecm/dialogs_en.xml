@@ -6,14 +6,14 @@
   <Ecm>
     <dialog>
       <label>
-        <end-time>End time</end-time>
-        <start-time>Start time</start-time>
+        <end-time>End Time</end-time>
+        <start-time>Start Time</start-time>
         <lifecycle>Lifecycle</lifecycle>
         <mimeType>Mime Type</mimeType>
-        <repeat-count>Repeat count</repeat-count>
-        <time-interval>Time interval</time-interval>
-        <query-items>Query items</query-items>
-        <schedule-type>Schedule type</schedule-type>
+        <repeat-count>Repeat Count</repeat-count>
+        <time-interval>Time Interval</time-interval>
+        <query-items>Query Items</query-items>
+        <schedule-type>Schedule Type</schedule-type>
       </label>
     </dialog>
   </Ecm>
@@ -31,7 +31,7 @@
       </label>
     </dialog>
     <msg>
-      <no-view>This node or this template was deleted or changed. Please click refresh button.</no-view>
+      <no-view>This node or this template was deleted or changed. Please click the Refresh button.</no-view>
     </msg>
   </Article>
   <UIDocumentForm>
@@ -43,22 +43,22 @@
       <contentPlain>#{word.content}</contentPlain>
       <name>Name</name>
 	    <categories>Categories</categories>
-	    <recordCategoryIdentifier>Record category identifier</recordCategoryIdentifier>
-	    <dispositionAuthority>Disposition authority</dispositionAuthority>
-	    <permanentRecordIndicator>Permanent record indicator</permanentRecordIndicator>
-	    <containsRecordFolders>Contains records folder</containsRecordFolders>
-	    <defaultMediaType>Default media type</defaultMediaType>
-	    <defaultMarkingList>Default marking list</defaultMarkingList>
-	    <defaultOriginatingOrganization>Default originating organization</defaultOriginatingOrganization>
-	    <vitalRecordIndicator>Vital record indicator</vitalRecordIndicator>
-	    <processCutoff>Process cutoffs</processCutoff>
-	    <eventTrigger>Event trigger</eventTrigger>
-	    <processHold>Process hold</processHold>
-	    <processTransfer>Process transfer</processTransfer>
-	    <transferBlockSize>Transfer block size</transferBlockSize>
-	    <processAccession>Process accession</processAccession>
-	    <accessionBlockSize>Accession block size</accessionBlockSize>
-	    <processDestruction>Process destruction</processDestruction>
+	    <recordCategoryIdentifier>Record Category Identifier</recordCategoryIdentifier>
+	    <dispositionAuthority>Disposition Authority</dispositionAuthority>
+	    <permanentRecordIndicator>Permanent Record Indicator</permanentRecordIndicator>
+	    <containsRecordFolders>Contains Records Folder</containsRecordFolders>
+	    <defaultMediaType>Default Media Type</defaultMediaType>
+	    <defaultMarkingList>Default Marking List</defaultMarkingList>
+	    <defaultOriginatingOrganization>Default Originating Organization</defaultOriginatingOrganization>
+	    <vitalRecordIndicator>Vital Record Indicator</vitalRecordIndicator>
+	    <processCutoff>Process Cutoffs</processCutoff>
+	    <eventTrigger>Event Trigger</eventTrigger>
+	    <processHold>Process Hold</processHold>
+	    <processTransfer>Process Transfer</processTransfer>
+	    <transferBlockSize>Transfer Block Size</transferBlockSize>
+	    <processAccession>Process Access</processAccession>
+	    <accessionBlockSize>Access Block Size</accessionBlockSize>
+	    <processDestruction>Process Destruction</processDestruction>
 	    <location>Location</location>
 	    <LinkURL>URL</LinkURL>
     </label>
@@ -106,12 +106,12 @@
         <subject>#{word.subject}</subject>
         <description>#{word.description}</description>
         <location>Location</location>
-        <start-date-time>Start date/time</start-date-time>
-        <end-date-time>End date/time</end-date-time>
+        <start-date-time>Start Date/Time</start-date-time>
+        <end-date-time>End Date/Time</end-date-time>
         <comment>#{word.comment}</comment>
         <category>#{word.category}</category>
         <availability>Availability</availability>
-        <share-type>Share type</share-type>
+        <share-type>Share Type</share-type>
       </label>
     </dialog>
   </Event>
@@ -125,7 +125,7 @@
         <categories>Categories</categories>
         <mimeType>#{Ecm.dialog.label.mimeType}</mimeType>
         <content>#{word.content}</content>
-        <re-upload>A file already exists. You can replace it by deleting it and upload another file from here.</re-upload>
+        <re-upload>The file already exists. You can delete it and upload another file.</re-upload>
       </label>
     </dialog>
   </File>
@@ -137,34 +137,34 @@
       <label>
         <name>#{word.name}</name>
         <categories>Categories1</categories>
-        <record-properties>Record properties</record-properties>
-        <process-properties>Process properties</process-properties>
-        <note>File plan note</note>
-        <record-category-identifier>Record category identifier</record-category-identifier>
-        <disposition-author>Disposition authority</disposition-author>
-        <disposition-instruction>Disposition instructions</disposition-instruction>
-        <permanent-record-indicator>Permanent record indicator</permanent-record-indicator>
-        <contain-record-folder>Contains records folder</contain-record-folder>
-        <default-media-type>Default media type</default-media-type>
-        <default-marking-list>Default marking list</default-marking-list>
-        <default-originating-organization>Default originating organization</default-originating-organization>
-        <vital-record-indicator>Vital record indicator</vital-record-indicator>
-        <vital-record-review-period>Vital record review period</vital-record-review-period>
-        <process-cutoff>Process cutoffs</process-cutoff>
-        <event-trigger>Event trigger</event-trigger>
-        <cutoff-period>Cutoff period</cutoff-period>
-        <cutoff-on-obsolete>Cutoff on obsolete</cutoff-on-obsolete>
-        <cutoff-on-superseded>Cutoff on superseded</cutoff-on-superseded>
-        <process-hold>Process hold</process-hold>
-        <hold-period>Hold period</hold-period>
+        <record-properties>Record Properties</record-properties>
+        <process-properties>Process Properties</process-properties>
+        <note>File Plan Note</note>
+        <record-category-identifier>Record Category Identifier</record-category-identifier>
+        <disposition-author>Disposition Authority</disposition-author>
+        <disposition-instruction>Disposition Instructions</disposition-instruction>
+        <permanent-record-indicator>Permanent Record Indicator</permanent-record-indicator>
+        <contain-record-folder>Contains Records Folder</contain-record-folder>
+        <default-media-type>Default Media Type</default-media-type>
+        <default-marking-list>Default Marking List</default-marking-list>
+        <default-originating-organization>Default Originating Organization</default-originating-organization>
+        <vital-record-indicator>Vital Record Indicator</vital-record-indicator>
+        <vital-record-review-period>Vital Record Review Period</vital-record-review-period>
+        <process-cutoff>Process Cutoffs</process-cutoff>
+        <event-trigger>Event Trigger</event-trigger>
+        <cutoff-period>Cutoff Period</cutoff-period>
+        <cutoff-on-obsolete>Cutoff on Obsolete</cutoff-on-obsolete>
+        <cutoff-on-superseded>Cutoff on Superseded</cutoff-on-superseded>
+        <process-hold>Process Hold</process-hold>
+        <hold-period>Hold Period</hold-period>
         <discretionary-hold>Discretionary Hold</discretionary-hold>
-        <process-transfer>Process transfer</process-transfer>
-        <default-transfer-location>Default transfer location</default-transfer-location>
-        <transfer-block-size>Transfer block size</transfer-block-size>
-        <process-accession>Process accession</process-accession>
-        <accession-location>Accession location</accession-location>
-        <accession-block-size>Accession block size</accession-block-size>
-        <process-destruction>Process destruction</process-destruction>
+        <process-transfer>Process Transfer</process-transfer>
+        <default-transfer-location>Default Transfer Location</default-transfer-location>
+        <transfer-block-size>Transfer Block Size</transfer-block-size>
+        <process-accession>Process Access</process-accession>
+        <accession-location>Access Location</accession-location>
+        <accession-block-size>Access Block Size</accession-block-size>
+        <process-destruction>Process Destruction</process-destruction>
       </label>
     </dialog>
   </FilePlan>
@@ -209,8 +209,8 @@
         <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
         <description>#{word.description}</description>
         <validator>Validator</validator>
-        <to-workspace>To workspace</to-workspace>
-        <with-path>With path</with-path>
+        <to-workspace>To Workspace</to-workspace>
+        <with-path>With Path</with-path>
       </label>
     </dialog>
   </Workflow>
@@ -221,7 +221,7 @@
       <userName>#{word.userName}</userName>
       <password>Password</password>
       <link>Link</link>
-      <to>Send mail to</to>
+      <to>Send Mail To</to>
       <actionName>#{word.name}</actionName>
     </label>
   </UIActionForm>
@@ -232,7 +232,7 @@
       <userName>#{word.userName}</userName>
       <password>Password</password>
       <link>Link</link>
-      <to>Send mail to</to>
+      <to>Send Mail To</to>
       <actionName>#{word.name}</actionName>
     </label>
   </EditFormAction>
@@ -246,8 +246,8 @@
         <name>#{word.name}</name>
         <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
         <description>#{word.description}</description>
-        <to-workspace>To workspace</to-workspace>
-        <with-path>With path</with-path>
+        <to-workspace>To Workspace</to-workspace>
+        <with-path>With Path</with-path>
       </label>
     </dialog>
   </Backup>
@@ -278,10 +278,10 @@
     <dialog>
       <label>
         <id>Id</id>
-        <action-name>Action name</action-name>
+        <action-name>Action Name</action-name>
         <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
         <description>#{word.description}</description>
-        <calendar-file-name>Calendar file name</calendar-file-name>
+        <calendar-file-name>Calendar File Name</calendar-file-name>
         <query-items>#{Ecm.dialog.label.query-items}</query-items>
       </label>
     </dialog>
@@ -293,30 +293,30 @@
     <dialog>
       <label>
         <id>Id</id>
-        <feed-action-name>Create feed action name</feed-action-name>
+        <feed-action-name>Create Feed Action Name</feed-action-name>
         <lifecycle>#{Ecm.dialog.label.lifecycle}</lifecycle>
         <schedule-type>#{Ecm.dialog.label.schedule-type}</schedule-type>
         <start-time>#{Ecm.dialog.label.start-time}</start-time>
         <end-time>#{Ecm.dialog.label.end-time}</end-time>
         <repeat-count>#{Ecm.dialog.label.repeat-count}</repeat-count>
         <time-inteval>#{Ecm.dialog.label.time-interval}</time-inteval>
-        <cron-expression>Cron expression</cron-expression>
-        <feed-node-name>Feed node name</feed-node-name>
-        <feed-store-path>Feed store path</feed-store-path>
+        <cron-expression>Cron Expression</cron-expression>
+        <feed-node-name>Feed Node Name</feed-node-name>
+        <feed-store-path>Feed Store Path</feed-store-path>
         <query-items>#{Ecm.dialog.label.query-items}</query-items>
-        <rss-url>Rss URL</rss-url>
-        <feed-title>Feed title</feed-title>
-        <feed-type>Feed type</feed-type>
+        <rss-url>RSS URL</rss-url>
+        <feed-title>Feed Title</feed-title>
+        <feed-type>Feed Type</feed-type>
         <summary>Summary</summary>
         <title>Title</title>
-        <rss-version>Rss version</rss-version>
+        <rss-version>RSS Version</rss-version>
         <link>Link</link>
         <description>#{word.description}</description>
         <language>Language</language>
         <copyright>Copyright</copyright>
-        <publish-date>Publish date</publish-date>
-        <owner-name>Owner name</owner-name>
-        <owner-email>Owner email</owner-email>
+        <publish-date>Publish Date</publish-date>
+        <owner-name>Owner Name</owner-name>
+        <owner-email>Owner Email</owner-email>
         <image-url>Image URL</image-url>
         <category>#{word.category}</category>
         <keywords>Keywords</keywords>
@@ -366,7 +366,7 @@
         <time-inteval>#{Ecm.dialog.label.time-interval}</time-inteval>
         <cron-expression>Cron expression</cron-expression>
         <description>#{word.description}</description>
-        <mail-to>Send mail to</mail-to>
+        <mail-to>Send Mail To</mail-to>
       </label>
     </dialog>
   </SendMail>
@@ -422,7 +422,7 @@
         <end-time>#{Ecm.dialog.label.end-time}</end-time>
         <repeat-count>#{Ecm.dialog.label.repeat-count}</repeat-count>
         <time-inteval>#{Ecm.dialog.label.time-interval}</time-inteval>
-        <cron-expression>Cron expression</cron-expression>
+        <cron-expression>Cron Expression</cron-expression>
         <description>#{word.description}</description>
       </label>
     </dialog>
@@ -438,7 +438,7 @@
         <subject>#{word.subject}</subject>
         <source>Source</source>
         <contributor>Contributor</contributor>
-        <resource-type>Resource type</resource-type>
+        <resource-type>Resource Type</resource-type>
         <date>#{word.date}</date>
         <publisher>Publisher</publisher>
         <description>#{word.description}</description>
@@ -458,11 +458,11 @@
     <dialog>
       <label>
         <cutoff-executed>Cutoff Executed</cutoff-executed>
-        <cutoff-now>Cutoff now</cutoff-now>
-        <cutoff-date-time>Cutoff date time</cutoff-date-time>
-        <cutoff-event>Cutoff event</cutoff-event>
-        <cutoff-obsolete>Cutoff obsolete</cutoff-obsolete>
-        <cutoff-superseded>Cutoff superseded</cutoff-superseded>
+        <cutoff-now>Cutoff Now</cutoff-now>
+        <cutoff-date-time>Cutoff Date Time</cutoff-date-time>
+        <cutoff-event>Cutoff Event</cutoff-event>
+        <cutoff-obsolete>Cutoff Obsolete</cutoff-obsolete>
+        <cutoff-superseded>Cutoff Superseded</cutoff-superseded>
       </label>
     </dialog>
   </Cutoffable>
@@ -472,7 +472,7 @@
   <Destroyable>
     <dialog>
       <label>
-        <destruction-date>Destruction date</destruction-date>
+        <destruction-date>Destruction Date</destruction-date>
       </label>
     </dialog>
   </Destroyable>
@@ -504,8 +504,8 @@
   <Actionable>
     <dialog>
       <label>
-        <primary-type>Primary type</primary-type>
-        <mixin-types>Mixin types</mixin-types>
+        <primary-type>Primary Type</primary-type>
+        <mixin-types>Mixin Types</mixin-types>
       </label>
     </dialog>
   </Actionable>
@@ -525,10 +525,10 @@
   <Holdable>
     <dialog>
       <label>
-        <hold-executed>Hold executed</hold-executed>
-        <hold-until>Hold until</hold-until>
-        <holds-discretionary>Hold discretionary</holds-discretionary>
-        <hold-until-event>Hold until event</hold-until-event>
+        <hold-executed>Hold Executed</hold-executed>
+        <hold-until>Hold Until</hold-until>
+        <holds-discretionary>Hold Discretionary</holds-discretionary>
+        <hold-until-event>Hold Until Event</hold-until-event>
         <freeze>Freeze</freeze>
       </label>
     </dialog>
@@ -539,8 +539,8 @@
   <Lockable>
     <dialog>
       <label>
-        <lock-owner>Lock owner</lock-owner>
-        <lock-is-deep>Lock is deep</lock-is-deep>
+        <lock-owner>Lock Owner</lock-owner>
+        <lock-is-deep>Lock Is Deep</lock-is-deep>
       </label>
     </dialog>
   </Lockable>
@@ -550,10 +550,10 @@
   <Move>
     <dialog>
       <label>
-        <destination-workpsace>Destination workspace</destination-workpsace>
-        <destination-path>Destination path</destination-path>
-        <primary-type>Primary type</primary-type>
-        <mixin-types>Mixin types</mixin-types>
+        <destination-workpsace>Destination Workspace</destination-workpsace>
+        <destination-path>Destination Path</destination-path>
+        <primary-type>Primary Type</primary-type>
+        <mixin-types>Mixin Types</mixin-types>
       </label>
     </dialog>
   </Move>
@@ -563,8 +563,8 @@
   <Published>
     <dialog>
       <label>
-        <start-publication>Start publication</start-publication>
-        <end-publication>End publication</end-publication>
+        <start-publication>Start Publication</start-publication>
+        <end-publication>End Publication</end-publication>
       </label>
     </dialog>
   </Published>
@@ -574,20 +574,20 @@
   <Record>
     <dialog>
       <label>
-        <supplemental-marking-list>Supplemental marking list</supplemental-marking-list>
+        <supplemental-marking-list>Supplemental Marking List</supplemental-marking-list>
         <subject>#{word.subject}</subject>
-        <record-identifier>Record identifier</record-identifier>
+        <record-identifier>Record Identifier</record-identifier>
         <originator>Originator</originator>
         <format>#{word.format}</format>
         <addresses>Addresses</addresses>
-        <originating-organization>Originating organization</originating-organization>
-        <other-addresses>Other addresses</other-addresses>
-        <publication-date>Publication date</publication-date>
-        <record-note>Record note</record-note>
-        <date-received>Date received</date-received>
-        <media-format>Media format</media-format>
-        <is-obsolete>Is obsolete</is-obsolete>
-        <date-field>Date field</date-field>
+        <originating-organization>Originating Organization</originating-organization>
+        <other-addresses>Other Addresses</other-addresses>
+        <publication-date>Publication Date</publication-date>
+        <record-note>Record Note</record-note>
+        <date-received>Date Received</date-received>
+        <media-format>Media Format</media-format>
+        <is-obsolete>Is Obsolete</is-obsolete>
+        <date-field>Date Field</date-field>
         <superseded>Superseded</superseded>
         <uuid>UUID</uuid>
       </label>
@@ -630,9 +630,9 @@
   <Transferable>
     <dialog>
       <label>
-        <transfer-executed>Transfer executed</transfer-executed>
-        <transfer-date>Transfer date</transfer-date>
-        <transfer-location>Transfer location</transfer-location>
+        <transfer-executed>Transfer Executed</transfer-executed>
+        <transfer-date>Transfer Date</transfer-date>
+        <transfer-location>Transfer Location</transfer-location>
       </label>
     </dialog>
   </Transferable>
@@ -642,11 +642,11 @@
   <Versionable>
     <dialog>
       <label>
-        <version-history>Version history</version-history>
-        <base-version>Base version</base-version>
-        <is-checked-out>Is checked out</is-checked-out>
+        <version-history>Version History</version-history>
+        <base-version>Base Version</base-version>
+        <is-checked-out>Is Checked out</is-checked-out>
         <predecessors>Predecessors</predecessors>
-        <merge-failed>Merge failed</merge-failed>
+        <merge-failed>Merge Failed</merge-failed>
         <uuid>UUID</uuid>
       </label>
     </dialog>
@@ -657,9 +657,9 @@
   <VitalRecord>
     <dialog>
       <label>
-        <is-vital-record>Is vital record</is-vital-record>
-        <prev-review-date>Prev review date</prev-review-date>
-        <next-review-date>Next review date</next-review-date>
+        <is-vital-record>Is Vital Record</is-vital-record>
+        <prev-review-date>Prev Review Date</prev-review-date>
+        <next-review-date>Next Review Date</next-review-date>
       </label>
     </dialog>
   </VitalRecord>
@@ -681,7 +681,7 @@
   -->
   <EmailAddressValidator>
     <msg>
-      <Invalid-input>Email address is invalid!</Invalid-input>
+      <Invalid-input>The email address is invalid.</Invalid-input>
     </msg>
   </EmailAddressValidator>
   <EmptyFieldValidator>
@@ -705,15 +705,15 @@
         <id>Id</id>
         <name>Name</name>
         <lifecycle>Lifecycle</lifecycle>
-        <homePath>Home path</homePath>
-        <targetWorkspace>Target workspace</targetWorkspace>
-        <targetPath>Target path</targetPath>
+        <homePath>Home Path</homePath>
+        <targetWorkspace>Target Workspace</targetWorkspace>
+        <targetPath>Target Path</targetPath>
       </label>
     </dialog>
   </ScriptAction>
   <UIDialogForm>
    <form>
-   	<DialogFormException>Can not save this document. Maybe there is a problem with pre save interceptor</DialogFormException>
+   	<DialogFormException>Cannot save this document. Maybe, there is a problem with pre-save interceptor.</DialogFormException>
    </form>
   </UIDialogForm>
 
@@ -730,7 +730,7 @@
 	<Paper>Paper</Paper>
 	<NONE>None</NONE>
 	<CLASSIFIED>Classified</CLASSIFIED>
-	<UNCLASSIFIED>Un Classified</UNCLASSIFIED>
+	<UNCLASSIFIED>Unclassified</UNCLASSIFIED>
 	<NOCONTRACT>No Contract</NOCONTRACT>
 	<true>True</true>
 	<false>False</false>
@@ -748,91 +748,92 @@
         <property_removed>Property Removal</property_removed>
         <property_changed>Property Modification</property_changed>
   <SendMail>
-   <dialog>
-     <label>
-							<isDeep>Is deep</isDeep>
-							<nodetypes>Node types</nodetypes>
-							<affectedNodeTypeNames>Affected node types</affectedNodeTypeNames>
-     </label>
-   </dialog>
+    <dialog>
+      <label>
+        <isDeep>Is Deep</isDeep>
+        <nodetypes>Node Types</nodetypes>
+        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
+      </label>
+    </dialog>
   </SendMail>
 
   <ScriptAction>
-   <dialog>
-     <label>
-							<isDeep>Is deep</isDeep>
-							<nodetypes>Node types</nodetypes>
-							<affectedNodeTypeNames>Affected node types</affectedNodeTypeNames>
-     </label>
-   </dialog>
+    <dialog>
+      <label>
+        <isDeep>Is Deep</isDeep>
+        <nodetypes>Node Types</nodetypes>
+        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
+      </label>
+    </dialog>
   </ScriptAction>
 
   <Getmail>
-   <dialog>
-     <label>
-     		<isDeep>Is deep</isDeep>
-							<nodetypes>Node types</nodetypes>
-							<affectedNodeTypeNames>Affected node types</affectedNodeTypeNames>
-     </label>
-   </dialog>
+    <dialog>
+      <label>
+        <isDeep>Is Deep</isDeep>
+        <nodetypes>Node Types</nodetypes>
+        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
+      </label>
+    </dialog>
   </Getmail>
 
   <Rss>
-   <dialog>
-     <label>
-							<isDeep>Is deep</isDeep>
-							<nodetypes>Node types</nodetypes>
-							<affectedNodeTypeNames>Affected node types</affectedNodeTypeNames>
-     </label>
-   </dialog>
+    <dialog>
+      <label>
+        <isDeep>Is Deep</isDeep>
+        <nodetypes>Node Types</nodetypes>
+        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
+      </label>
+    </dialog>
   </Rss>
 
   <AddMetadata>
-   <dialog>
-     <label>
-     		<isDeep>Is deep</isDeep>
-							<nodetypes>Node types</nodetypes>
-							<affectedNodeTypeNames>Affected node types</affectedNodeTypeNames>
-     </label>
-   </dialog>
+    <dialog>
+      <label>
+        <isDeep>Is Deep</isDeep>
+        <nodetypes>Node Types</nodetypes>
+        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
+      </label>
+    </dialog>
   </AddMetadata>
 
   <ReloadAction>
-   <dialog>
-     <label>
-     		<isDeep>Is deep</isDeep>
-							<nodetypes>Node types</nodetypes>
-							<affectedNodeTypeNames>Affected node types</affectedNodeTypeNames>
-     </label>
-   </dialog>
+    <dialog>
+      <label>
+        <isDeep>Is Deep</isDeep>
+        <nodetypes>Node Types</nodetypes>
+        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
+      </label>
+    </dialog>
   </ReloadAction>
 
   <Transform>
-   <dialog>
-     <label>
-							<isDeep>Is deep</isDeep>
-							<nodetypes>Node types</nodetypes>
-							<affectedNodeTypeNames>Affected node types</affectedNodeTypeNames>
-     </label>
-   </dialog>
+    <dialog>
+      <label>
+        <isDeep>Is Deep</isDeep>
+        <nodetypes>Node Types</nodetypes>
+        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
+      </label>
+    </dialog>
   </Transform>
 
   <EnableVersioning>
-   <dialog>
-     <label>
-     		<isDeep>Is deep</isDeep>
-							<nodetypes>Node types</nodetypes>
-							<affectedNodeTypeNames>Affected node types</affectedNodeTypeNames>
-     </label>
-   </dialog>
+    <dialog>
+      <label>
+        <isDeep>Is Deep</isDeep>
+        <nodetypes>Node Types</nodetypes>
+        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
+      </label>
+    </dialog>
   </EnableVersioning>
+  
   <AutoVersioning>
-  	<dialog>
-     <label>
-     		<isDeep>Is deep</isDeep>
-							<nodetypes>Node types</nodetypes>
-							<affectedNodeTypeNames>Affected node types</affectedNodeTypeNames>
-     </label>
-   </dialog>
+    <dialog>
+      <label>
+        <isDeep>Is Deep</isDeep>
+        <nodetypes>Node Types</nodetypes>
+        <affectedNodeTypeNames>Affected Node Types</affectedNodeTypeNames>
+      </label>
+    </dialog>
   </AutoVersioning>
 </bundle>

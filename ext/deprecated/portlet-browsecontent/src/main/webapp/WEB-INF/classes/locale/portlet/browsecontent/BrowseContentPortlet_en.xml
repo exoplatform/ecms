@@ -41,7 +41,7 @@
       <enableTagMap>Tagmap</enableTagMap>
       <enableComment>Commentable</enableComment>
       <enableVote>Voteable</enableVote>
-      <isAllowPublish>Show only documents in "published" state</isAllowPublish>
+      <isAllowPublish>Show only documents in the published state</isAllowPublish>
     </label>
     <title>Path Config</title>
     <action>
@@ -52,24 +52,24 @@
       <Back>#{word.back}</Back>
     </action>
     <msg>
-      <require-path>You must select category path</require-path>
-      <invalid-path>Invalid category path</invalid-path>
-      <invalid-value>Invalid page number</invalid-value>
-      <invalid-number>You must input a number</invalid-number>
-      <access-denied>Access denied! You haven't got enough permission in this category path.</access-denied>
+      <require-path>You must select the category path.</require-path>
+      <invalid-path>The category path is invalid.</invalid-path>
+      <invalid-value>The page number is invalid.</invalid-value>
+      <invalid-number>You must input a number.</invalid-number>
+      <access-denied>Access denied. You don't have permission in this category path.</access-denied>
     </msg>
   </UIPathConfig>
   <UIQueryConfig>
     <msg>
-      <repostoryException>Maybe you have problem with your query. Please check again.</repostoryException>
-      <noSuchNodeTypeException>Maybe you have problem with your query. Please check again.</noSuchNodeTypeException>
-      <invalid-value>Invalid page number</invalid-value>
-      <invalid-query>Invalid query string</invalid-query>
-      <invalid-name>The query name maybe not found, try other type, language, status</invalid-name>
+      <repostoryException>Maybe, you have problem with your query. Please check again.</repostoryException>
+      <noSuchNodeTypeException>Maybe, you have problem with your query. Please check again.</noSuchNodeTypeException>
+      <invalid-value>The page number is invalid.</invalid-value>
+      <invalid-query>The query string is invalid.</invalid-query>
+      <invalid-name>The query name not found. Please try other type, language and status.</invalid-name>
     </msg>
     <title>Query Config</title>
     <label>
-      <repository>repository</repository>
+      <repository>Repository</repository>
       <workspace>Workspace</workspace>
       <queryLanguage>Query Language</queryLanguage>
       <queryStatus>Query Status</queryStatus>
@@ -77,7 +77,7 @@
       <queryStore>Query Name</queryStore>
       <query>Query</query>
       <template>Template</template>
-      <itemPerPage>Items Per Page</itemPerPage>
+      <itemPerPage>Items per Page</itemPerPage>
       <detailBoxTemp>Detail Box Template</detailBoxTemp>
       <enableTagMap>Tagmap</enableTagMap>
       <enableComment>Commentable</enableComment>
@@ -136,16 +136,16 @@
     <label>
       <repository>Repository</repository>
       <workspace>Workspace</workspace>
-      <scriptName>Script name</scriptName>
+      <scriptName>Script Name</scriptName>
       <template>Template</template>
       <detailBoxTemp>Detail Box Template</detailBoxTemp>
       <enableTagMap>Tagmap</enableTagMap>
       <enableComment>Commentable</enableComment>
       <enableVote>Voteable</enableVote>
-      <isAllowPublish>Show only documents in "published" state</isAllowPublish>
+      <isAllowPublish>Show only documents in the published state</isAllowPublish>
     </label>
     <action>
-      <Add>New config</Add>
+      <Add>New Config</Add>
       <Save>#{word.save}</Save>
       <Edit>Edit</Edit>
       <Back>#{word.back}</Back>
@@ -169,20 +169,20 @@
       <detailBoxTemp>Detail Box Template</detailBoxTemp>
       <enableComment>Commentable</enableComment>
       <enableVote>Voteable</enableVote>
-      <isAllowPublish>Show only documents in "published" state</isAllowPublish>
+      <isAllowPublish>Show only documents in the published state</isAllowPublish>
     </label>
     <action>
-      <Add>New config</Add>
+      <Add>New Config</Add>
       <Save>#{word.save}</Save>
       <Edit>Edit</Edit>
       <Back>#{word.back}</Back>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <require-path>You must select category path first</require-path>
-      <invalid-path>Invalid category path, please select path again</invalid-path>
-      <require-doc>You must select document</require-doc>
-      <invalid-doc>This document is deleted or changed or you haven't got permission to access.</invalid-doc>
+      <require-path>You must select the category path first.</require-path>
+      <invalid-path>Invalid category path. Please select the path again.</invalid-path>
+      <require-doc>You must select a document.</require-doc>
+      <invalid-doc>This document is deleted or changed or you don't have permission to access.</invalid-doc>
     </msg>
   </UIDocumentConfig>
   <!--
@@ -192,7 +192,7 @@
   -->
   <UINewConfigForm>
     <label>
-      <repository>Select repository</repository>
+      <repository>Select Repository</repository>
       <workspace>Workspace</workspace>
       <browseType>Browse Content</browseType>
     </label>
@@ -214,20 +214,20 @@
     <tooltip>
       <Hidden>Hidden Tree</Hidden>
       <Show>Show Tree</Show>
-      <showSearch>Show/Hide search form</showSearch>
+      <showSearch>Show/Hide Search Form</showSearch>
       <Back>Back</Back>
       <Vote>Vote</Vote>
-      <Comment>Write comment</Comment>
+      <Comment>Write Comment</Comment>
     </tooltip>
     <msg>
-      <back-view-search>Back to previous view for search</back-view-search>
-      <select-doc>No document selected or has been remove</select-doc>
-      <node-removed>Node has been remove</node-removed>
-      <readonly-doc>Current document is checked in, checkout it first !</readonly-doc>
-      <not-support-vote>Do not allow to vote for this type of document</not-support-vote>
-      <not-support-comment>Do not allow to comment for this type of document</not-support-comment>
-      <node-is-locked>Node is locked! Please unlock this node first.</node-is-locked>
-      <access-add-denied>Access denied. You haven't got 'Add' permission in this node.</access-add-denied>
+      <back-view-search>Back to the previous view for search.</back-view-search>
+      <select-doc>No document was selected or has been removed.</select-doc>
+      <node-removed>The node has been removed.</node-removed>
+      <readonly-doc>The current document is checked in. Please check out it first.</readonly-doc>
+      <not-support-vote>The Vote function is not supported for this document type.</not-support-vote>
+      <not-support-comment>The Comment function is not supported for this document type.</not-support-comment>
+      <node-is-locked>The node is locked. Please unlock it first.</node-is-locked>
+      <access-add-denied>Access denied. You don't have the add permission in this node.</access-add-denied>
     </msg>
   </UIToolBar>
   <!--
@@ -240,7 +240,7 @@
       <nodePath>You are looking in</nodePath>
       <searchTime>Result</searchTime>
       <duration>Duration</duration>
-      <nodeName>node</nodeName>
+      <nodeName>Node</nodeName>
     </label>
   </UISearchController>
   <!--
@@ -260,8 +260,8 @@
       <search>Search now</search>
     </title>
     <msg>
-      <not-empty>You must enter keyword</not-empty>
-      <suggestion-keyword>Suggestions: '{0}' not found. Try different keywords.</suggestion-keyword>
+      <not-empty>You must enter keyword.</not-empty>
+      <suggestion-keyword>Suggestions '{0}' not found. Please try different keywords.</suggestion-keyword>
     </msg>
   </UICBSearchForm>
   <!--
@@ -279,10 +279,10 @@
       <Close>#{word.close}</Close>
     </action>
     <msg>
-      <node-removed>Missing node : it has been moved or deleted</node-removed>
-      <not-support>View template of this node is not supported</not-support>
-      <not-permission>Access denied, maybe you don't have privileges to access this node!</not-permission>
-      <empty>No result found!</empty>
+      <node-removed>Missing node: it has been moved or deleted.</node-removed>
+      <not-support>The View template is not supported for this node.</not-support>
+      <not-permission>Access denied. Maybe, you don't have privileges to access this node.</not-permission>
+      <empty>No results found.</empty>
     </msg>
     <tooltip>
       <Goto>Go to folder</Goto>
@@ -299,12 +299,12 @@
       <NoDocument>No document in this category</NoDocument>
       <author>Author</author>
       <summary>Summary</summary>
-      <more>More documents</more>
+      <more>More Documents</more>
       <previous>Previous View</previous>
       <path-Previous>Previous</path-Previous>
       <path-Root>Root</path-Root>
       <home>Home</home>
-      <cannot-access>Access denied. Maybe you don't have view permission in this portlet configuration.</cannot-access>
+      <cannot-access>Access denied. Maybe, you don't have the view permission in this portlet configuration.</cannot-access>
     </label>
     <title>
       <home>Home</home>
@@ -312,7 +312,7 @@
       <moreTabs>More Tabs</moreTabs>
     </title>
     <msg>
-      <template-notsupported>No view template to load</template-notsupported>
+      <template-notsupported>No view template to load.</template-notsupported>
       <invalid-node>Missing node : it has been moved or deleted or you don't have enough permission to access</invalid-node>
     </msg>
   </UIBrowseContainer>
@@ -348,7 +348,7 @@
   -->
   <UICBCommentForm>
     <label>
-      <title>Add comment</title>
+      <title>Add Comment</title>
       <name>Name</name>
       <email>Email</email>
       <website>Website</website>
@@ -359,17 +359,17 @@
       <Save>#{word.save}</Save>
     </action>
     <msg>
-      <locked-doc>Document is locked</locked-doc>
-      <versioning-doc>Document is versioning</versioning-doc>
-      <error-vote>Has an error when commenting</error-vote>
-      <comment-required>Comment is required</comment-required>
+      <locked-doc>The document is locked.</locked-doc>
+      <versioning-doc>The document is versioning.</versioning-doc>
+      <error-vote>An error occurred while commenting on the document.</error-vote>
+      <comment-required>The comment is required.</comment-required>
     </msg>
   </UICBCommentForm>
   <UICBVoteForm>
     <msg>
-      <locked-doc>Document is locked</locked-doc>
-      <versioning-doc>Document is versioning</versioning-doc>
-      <error-vote>Has an error when voting</error-vote>
+      <locked-doc>The document is locked.</locked-doc>
+      <versioning-doc>The document is versioning.</versioning-doc>
+      <error-vote>An error occurred while voting for the document.</error-vote>
     </msg>
   </UICBVoteForm>
   <!--
@@ -379,8 +379,8 @@
   -->
   <UICBPopupWindow>
     <title>
-      <UICBCommentForm>Add comment</UICBCommentForm>
-      <UICBVoteForm>Vote this</UICBVoteForm>
+      <UICBCommentForm>Add Comment</UICBCommentForm>
+      <UICBVoteForm>Vote This</UICBVoteForm>
       <UIDocumentDetail>View Document</UIDocumentDetail>
     </title>
   </UICBPopupWindow>
@@ -392,8 +392,8 @@
   <UIWorkspaceList>
     <label>
       <workspaceName>Workspace</workspaceName>
-      <rootNodeInfo>Root path</rootNodeInfo>
-      <rootPath>Root path</rootPath>
+      <rootNodeInfo>Root Path</rootNodeInfo>
+      <rootPath>Root Path</rootPath>
     </label>
   </UIWorkspaceList>
   <!--
@@ -421,12 +421,12 @@
   -->
   <UIBrowseContentHelp>
     <label>
-      <info>You are in help mode, you can config for your porlet by select edit mode</info>
+      <info>You are in the help mode, you can configure your porlet by selecting the edit mode.</info>
     </label>
   </UIBrowseContentHelp>
   <UIFormInputSetWithAction>
     <msg>
-      <confirm-delete>Are you really want to delete?</confirm-delete>
+      <confirm-delete>Are you sure to delete?</confirm-delete>
     </msg>
   </UIFormInputSetWithAction>
   <!--
@@ -436,11 +436,11 @@
   -->
   <SearchValidator>
     <msg>
-      <empty-input>The value of this field is null or empty!</empty-input>
-      <Invalid-char>There are some invalid characters in this field. Type another value, please!</Invalid-char>
-      <Invalid-char2>Number must be following the char '~'</Invalid-char2>
-      <Invalid-char1>Number follow the char '~' must between 0 to 1</Invalid-char1>
-      <Invalid-char3>Number must be following the char '^'</Invalid-char3>
+      <empty-input>The value of this field is null or empty.</empty-input>
+      <Invalid-char>This field contains some invalid characters. Please enter another value.</Invalid-char>
+      <Invalid-char1>Number following the char '~' must between 0 to 1</Invalid-char1>
+      <Invalid-char2>Number must follow the char '~'</Invalid-char2>
+      <Invalid-char3>Number must follow the char '^'</Invalid-char3>
       <Invalid-char4>No space is allowed near the char '~'</Invalid-char4>
       <Invalid-char5>No space is allowed near the char '^'</Invalid-char5>
     </msg>
@@ -452,21 +452,21 @@
   -->
   <UIPathConfig>
     <label>
-      <searchEnable>Enable search location</searchEnable>
-      <searchLocation>Search location</searchLocation>
+      <searchEnable>Enable Search Location</searchEnable>
+      <searchLocation>Search Location</searchLocation>
       <searchPath>UIPathConfig</searchPath>
       <explain></explain>
     </label>
     <msg>
-      <enter-search-location>You have to specify the search location</enter-search-location>
+      <enter-search-location>Please specify the search location.</enter-search-location>
       <explain>When the path shown in Browse Content corresponds to a hierarchy of categories, it is needed to specify the path where documents are actually stored, so that they can be found by the search feature of the Portlet.</explain>
     </msg>
   </UIPathConfig>
   
   <UIDocumentForm>
   	<msg>
-  		<not-support>Cannot load template of '{0}'.</not-support>
-  		<do-not-permission>You don't have permission to load template of '{0}'.</do-not-permission>
+  		<not-support>Cannot load the template of '{0}'.</not-support>
+  		<do-not-permission>You don't have permission to load the template of '{0}'.</do-not-permission>
   	</msg>
   </UIDocumentForm>
   
@@ -483,17 +483,17 @@
 	</Comments>
 	<UIDocumentDetail>
 	  <msg>
-	    <confirm-deletecomment>Do you really want to delete this comment?</confirm-deletecomment>
+	    <confirm-deletecomment>Are you sure to delete this comment?</confirm-deletecomment>
 	  </msg>
 	</UIDocumentDetail>
 	<UIPopupWindow>
 			<title>
-				<UICBCommentForm>Input comment</UICBCommentForm>
+				<UICBCommentForm>Input Comment</UICBCommentForm>
 			</title> 
 		</UIPopupWindow>
 	<UIBrowseContainer>
     <msg>
-			<symlinkNode-no-targetNode>Missing node : The target node has been moved or deleted or You don't have enough permission to access</symlinkNode-no-targetNode>
+			<symlinkNode-no-targetNode>The target node has been moved or deleted, or You don't have permission to access.</symlinkNode-no-targetNode>
     </msg>
   </UIBrowseContainer>		
   <UIDocumentDetail>
@@ -509,8 +509,8 @@
   
  <UITagList>
   <label>
-    <PublicTags>Public tags</PublicTags>
-    <PrivateTags>Private tags</PrivateTags>
+    <PublicTags>Public Tags</PublicTags>
+    <PrivateTags>Private Tags</PrivateTags>
    </label>
  </UITagList>
   

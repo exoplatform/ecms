@@ -7,7 +7,7 @@
       <language>Language: </language>
       <robots>Robots: </robots>
       <sitemap>Sitemap: </sitemap>
-      <sitemapvisible>Visible in sitemap</sitemapvisible>
+      <sitemapvisible>Visible in Sitemap</sitemapvisible>
 	  <isInherited>Inherited from parent page</isInherited>
       <priority>Priority: </priority>
       <frequency>Frequency: </frequency>  
@@ -29,7 +29,7 @@
       <Cancel>Cancel</Cancel>
     </action>
     <msg>
-      <repository-exception>An unexpected error occurred! Cannot save page meta data.</repository-exception>	
+      <repository-exception>An unexpected error occurred while saving the page metadata.</repository-exception> 	
     </msg>
 	<help> 
 		<priority>The priority of this URL relative to other URLs on your site. Valid values range from 0.0 to 1.0. This value does not affect how your pages are compared to pages on other sites—it only lets the search engines know which pages you deem most important for the crawlers. The default priority of a page is 0.5.</priority>
@@ -47,7 +47,7 @@
   </UISEOToolbarForm>  
   <FloatNumberValidator>
     <msg>
-      <Invalid-number>The field Priority is invalid float number. Valid values range from 0.0 to 1.0.</Invalid-number>
+      <Invalid-number>The value of the Priority field must be in the numerical format. The valid values range is from 0.0 to 1.0.</Invalid-number>
     </msg>
   </FloatNumberValidator>  
 </bundle>

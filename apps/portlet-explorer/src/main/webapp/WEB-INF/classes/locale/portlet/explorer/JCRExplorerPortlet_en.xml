@@ -8,8 +8,8 @@
   <UICommentForm>
     <label>
       <name>Name</name>
-      <email>E-Mail</email>
-      <website>Web Site</website>
+      <email>Email</email>
+      <website>Website</website>
       <comment>Comment</comment>
     </label>
     <action>
@@ -17,9 +17,9 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <not-support>Do not allow to comment for this type of document</not-support>
-      <not-checkedout>You must check out node before comment</not-checkedout>
-      <content-null>Content of comment is null or empty. Fill your comment, please!</content-null>
+      <not-support>Cannot comment on this document type.</not-support>
+      <not-checkedout>You must check out the node before commenting on it.</not-checkedout>
+      <content-null>You cannot post an empty comment.</content-null>
     </msg>
   </UICommentForm>
   <!--
@@ -41,9 +41,9 @@
       </label>
     </button>
     <msg>
-      <not-support>Do not allow to vote for this type of document</not-support>
-      <not-checkedout>You must check out node before vote</not-checkedout>
-						<vote-restriction>You can not vote more than one time </vote-restriction>
+      <not-support>Cannot vote for this document type.</not-support>
+      <not-checkedout>You must check out the node before voting.</not-checkedout>
+      <vote-restriction>You cannot vote more than one time. </vote-restriction>
     </msg>
   </UIVoteForm>
   <!--
@@ -69,10 +69,10 @@
       </workspace>
     </icon>
     <msg>
-      <no-view-found>There is not any View applies for your access permission in drive '{0}'</no-view-found>
-      <access-denied>Access denied! Maybe, you haven't got permission in workspace of drive '{0}'</access-denied>
-      <empty-drives>There is no drive in this repository or you do not have permission to access any drive in this repository</empty-drives>
-      <workspace-not-exist>The drive '{0}' was stored in one unrecognized workspace. Please reconfig for this drive.</workspace-not-exist>
+      <no-view-found>There are not any Views applied for your access permission in the drive '{0}'.</no-view-found>
+      <access-denied>Access denied. Maybe, you do not have permission in the workspace of the drive '{0}'.</access-denied>
+      <empty-drives>There is no drive in this repository or you do not have permission to access any drives in this repository.</empty-drives>
+      <workspace-not-exist>The drive '{0}' was stored in one unrecognized workspace. Please reconfigure this drive.</workspace-not-exist>
     </msg>
   </UIDrivesBrowser>
   <!--
@@ -82,10 +82,10 @@
   -->
   <UIJCRExplorer>
     <msg>
-      <refresh-session-success>The session has been refreshed successfully</refresh-session-success>
-      <no-node-history>You are in root node.</no-node-history>
-      <save-session-success>All changes have been saved</save-session-success>
-      <target-path-not-found>Target node not found!</target-path-not-found>
+      <refresh-session-success>The session was refreshed successfully.</refresh-session-success>
+      <no-node-history>You are in the root node.</no-node-history>
+      <save-session-success>All changes have been saved.</save-session-success>
+      <target-path-not-found>The target node was not found.</target-path-not-found>
     </msg>
   </UIJCRExplorer>
   <!--
@@ -96,15 +96,15 @@
   <UISideBar>
     <label>
       <Relation>Relation</Relation>
-      <Explorer>File explorer</Explorer>
-      <Close>Close sidebar</Close>
-      <TagExplorer>Tag cloud</TagExplorer>
+      <Explorer>File Explorer</Explorer>
+      <Close>Close Sidebar</Close>
+      <TagExplorer>Tag Cloud</TagExplorer>
       <Clipboard>Clipboard</Clipboard>
       <SavedSearches>Saved Searches</SavedSearches>
     </label>
     <title>
-      <Control>Control sidebar</Control>
-      <Close>Close sidebar</Close>
+      <Control>Control Sidebar</Control>
+      <Close>Close Sidebar</Close>
     </title>
   </UISideBar>
   <!--
@@ -114,14 +114,14 @@
   -->
   <UIViewBar>
     <label>
-      <driveWorkspace>Drive Workspace :</driveWorkspace>
-      <backToJCR>Back to JCR main Drives</backToJCR>
+      <driveWorkspace>Drive Workspace:</driveWorkspace>
+      <backToJCR>Back to JCR Main Drives</backToJCR>
       <setUpBrowser>Set up your browsing preferences</setUpBrowser>
       <refesh>Refresh</refesh>
       <saveSession>Save Session</saveSession>
-      <currentDrive>Current drive</currentDrive>
-      <selectView>Select view</selectView>
-      <showSideBar>Show side bar</showSideBar>
+      <currentDrive>Current Drive</currentDrive>
+      <selectView>Select View</selectView>
+      <showSideBar>Show Sidebar</showSideBar>
     </label>
   </UIViewBar>
   <Views>
@@ -149,7 +149,7 @@
       <webDavView>Download And Allow Edition</webDavView>
     </label>
     <msg>
-      <path-not-found>This element was deleted or changed. Please click to Refresh button!</path-not-found>
+      <path-not-found>This element was deleted or changed. Please click the Refresh button.</path-not-found>
     </msg>
   </UITreeExplorer>
   <!--
@@ -162,7 +162,7 @@
       <languages-list>Languages List</languages-list>
       <relation-list>Relations List</relation-list>
       <references-list>References List</references-list>
-      <no-related-document>No related document</no-related-document>
+      <no-related-document>No Related Document</no-related-document>
       <related-document>Related Documents</related-document>
     </label>
   </UIViewRelationList>
@@ -176,9 +176,9 @@
     <label>
       <enableStructure>Enable DMS Structure</enableStructure>
       <showSideBar>Show Sidebar</showSideBar>
-      <showHiddenNode>Show hidden nodes</showHiddenNode>
-      <showNonDocument>Show "non document" nodes</showNonDocument>
-      <showRefDocuments>Show referenced documents</showRefDocuments>
+      <showHiddenNode>Show Hidden Nodes</showHiddenNode>
+      <showNonDocument>Show Non-document Nodes</showNonDocument>
+      <showRefDocuments>Show Referenced Documents</showRefDocuments>
       <showItemsByUserInTimeline>Show items by user in Timeline View</showItemsByUserInTimeline>
       <enableDragAndDrop>Enable Drag &amp; Drop</enableDragAndDrop>
       <sortBy>Sort by</sortBy>
@@ -196,7 +196,7 @@
   #########################################################################################
   -->
   <UIAllItemsPreferenceForm>
-    <title>Set up preferences</title>
+    <title>Set Up Preferences</title>
     <action>
       <Cancel>#{word.cancel}</Cancel>
       <Save>#{word.save}</Save>
@@ -220,20 +220,20 @@
     </action>
     <msg>
       <rename-successfull>The node '{0}' was renamed to '{1}' successfully.</rename-successfull>
-      <rename-denied>Access denied! You can not rename this node.</rename-denied>
-      <fileName-invalid>Have some invalid characters in new name</fileName-invalid>
-      <newName-same-oldName>New name is the same old name. Check again, please!</newName-same-oldName>
-      <version-exception>This node is not checked out or ancestor of this node is not checked out.</version-exception>
-      <lock-exception>This node is locked. Unlock before rename this node.</lock-exception>
-      <constraintViolation-exception>'{0}' is not allowed as child's node type for parent node type</constraintViolation-exception>
+      <rename-denied>Access denied! You cannot rename this node.</rename-denied>
+      <fileName-invalid>The new name contains some invalid characters.</fileName-invalid>
+      <newName-same-oldName>The new name already exists. Please check again.</newName-same-oldName>
+      <version-exception>This node or the ancestor of this node is not checked out.</version-exception>
+      <lock-exception>This node is locked. Please unlock it before renaming.</lock-exception>
+      <constraintViolation-exception>An error occurred while renaming the node '{0}'. Please check again.</constraintViolation-exception>
     </msg>
   </UIRenameForm>
   <UIPopupWindow>
     <title>
       <UIRenameForm>Rename</UIRenameForm>
       <UIActionContainer>Edit Action</UIActionContainer>
-      <UIFolderForm>Add a Folder</UIFolderForm>
-      <UIUploadManager>Upload a file</UIUploadManager>
+      <UIFolderForm>Add Folder</UIFolderForm>
+      <UIUploadManager>Upload File</UIUploadManager>
       <UITicketForm>Create New Ticket</UITicketForm>
       <UIReferencesList>References List</UIReferencesList>
       <UIExportNode>Export Node</UIExportNode>
@@ -245,8 +245,8 @@
       <UIPermissionManager>Permission Management</UIPermissionManager>
       <UIPropertiesManager>Properties Management</UIPropertiesManager>
       <UIECMSearch>Advanced Search</UIECMSearch>
-      <UISavedQuery>Saved queries list</UISavedQuery>
-      <UIWatchDocumentForm>Watching Document</UIWatchDocumentForm>
+      <UISavedQuery>Saved Queries List</UISavedQuery>
+      <UIWatchDocumentForm>Watch Document</UIWatchDocumentForm>
       <UIActionManager>Manage Actions</UIActionManager>
       <UIDocumentForm>Edit Document</UIDocumentForm>
       <UIDocumentFormController>Add New Document</UIDocumentFormController>
@@ -256,17 +256,17 @@
       <UIImportNode>Import Node</UIImportNode>
       <UIViewMetadataManager>View Metadata</UIViewMetadataManager>
       <UIVoteForm>Vote Document</UIVoteForm>
-      <UICommentForm>Write Comment</UICommentForm>
+      <UICommentForm>Comment</UICommentForm>
       <UIPreferencesForm>Preferences</UIPreferencesForm>
-      <UIPublicationManager>Manage publication</UIPublicationManager>
-      <UIConfirmMessage>Confirm delete</UIConfirmMessage>
-      <UIRestoreConfirmMessage>Confirm restore</UIRestoreConfirmMessage>
-      <UIActivePublication>Enrol to publication lifecycle</UIActivePublication>
-      <UITaggingForm>Tagging this document</UITaggingForm>
-      <UIMultiLanguageForm>Multi language</UIMultiLanguageForm>
-      <UIMultiLanguageManager>Multi language</UIMultiLanguageManager>
-      <UIThumbnailForm>Add thumbnail image</UIThumbnailForm>
-      <UIAllItemsPreferenceForm>Preference setting</UIAllItemsPreferenceForm>
+      <UIPublicationManager>Manage Publication</UIPublicationManager>
+      <UIConfirmMessage>Confirm Deletion</UIConfirmMessage>
+      <UIRestoreConfirmMessage>Confirm Restore</UIRestoreConfirmMessage>
+      <UIActivePublication>Enrol To Publication Lifecycle</UIActivePublication>
+      <UITaggingForm>Tag Document</UITaggingForm>
+      <UIMultiLanguageForm>Multi Language</UIMultiLanguageForm>
+      <UIMultiLanguageManager>Multi Language</UIMultiLanguageManager>
+      <UIThumbnailForm>Add Thumbnail Image</UIThumbnailForm>
+      <UIAllItemsPreferenceForm>Preference Settings</UIAllItemsPreferenceForm>
       <UISelectRestorePath>Select Restore Path</UISelectRestorePath>
       <UISEOForm>Manage SEO</UISEOForm>
       <UISEOToolbarForm>Manage SEO</UISEOToolbarForm>
@@ -282,7 +282,7 @@
   #########################################################################################
   -->
   <UIResourceForm>
-    <title>Edit the text of that file</title>
+    <title>Edit File Content</title>
     <label>
       <name>Name</name>
       <textToModify>Text to modify</textToModify>
@@ -303,125 +303,123 @@
       <Paste>Paste</Paste>
       <Search>Search</Search>
       <CreateTicket>New Ticket</CreateTicket>
-      <WatchDocument>Watch/Unwatch this document</WatchDocument>
-      <TaggingDocument>Tagging this document</TaggingDocument>
-      <MultiLanguage>Add/Edit localised contents</MultiLanguage>
-      <Vote>Vote for document</Vote>
-      <Comment>Comment this document</Comment>
+      <WatchDocument>Watch/Unwatch Document</WatchDocument>
+     <TaggingDocument>Tag Document</TaggingDocument>
+      <MultiLanguage>Add/Edit Localised Contents</MultiLanguage>
+      <Vote>Vote For Document</Vote>
+      <Comment>Comment On Document</Comment>
       <ManageVersions>Manage Versions</ManageVersions>
-      <ManageAuditing>Manage Auditing</ManageAuditing>
+      <ManageAuditing>Manage Audit</ManageAuditing>
       <ManagePublications>Manage Publications</ManagePublications>
       <ManageCategories>Manage Categories</ManageCategories>
       <ManageRelations>Manage Relations</ManageRelations>
       <ManageActions>Manage Actions</ManageActions>
       <ExportNode>Export Node</ExportNode>
       <ImportNode>Import Node</ImportNode>
-      <OverloadThumbnail>Overload thumbnail</OverloadThumbnail>
-      <ManageHidden>Hide/Show content</ManageHidden>
+      <OverloadThumbnail>Overload Thumbnail</OverloadThumbnail>
+      <ManageHidden>Hide/Show Content</ManageHidden>
       <ViewReferences>View References</ViewReferences>
       <ViewNodeType>View Node Types</ViewNodeType>
       <ViewPermissions>View Permissions</ViewPermissions>
       <ViewProperties>View Node Properties</ViewProperties>
-      <ViewMetadatas>View Metadatas</ViewMetadatas>
+      <ViewMetadatas>View Metadata</ViewMetadatas>
       <ViewRelations>Show/Hide Relations</ViewRelations>
       <ShowJCRStructure>Show/Hide Like JCR Structure</ShowJCRStructure>
     </tooltip>
     <msg>
-      <cannot-action-in-rootnode>You can not action in root node</cannot-action-in-rootnode>
-      <node-checkedin>You must check out first</node-checkedin>
-      <cannot-enable-version-rootnode>Can not enable version for root node</cannot-enable-version-rootnode>
-      <cannot-enable-publication-rootnode>Can not enable publication for root node</cannot-enable-publication-rootnode>
+      <cannot-action-in-rootnode>You cannot do this action in the root node.</cannot-action-in-rootnode>
+      <node-checkedin>You must check out first.</node-checkedin>
+      <cannot-enable-version-rootnode>Cannot enable versioning for the root node.</cannot-enable-version-rootnode>
+      <cannot-enable-publication-rootnode>Cannot enable publication for the root node.</cannot-enable-publication-rootnode>
       <manage-publication>
-        <not-supported-nodetype>The publication supports document node only.</not-supported-nodetype>
+        <not-supported-nodetype>The publication supports the document node only.</not-supported-nodetype>
         <no-publication-lifecycle>No publication lifecycle is configured.</no-publication-lifecycle>
       </manage-publication>
-      <unsubcriber-lifecycle>
-        The node was already unsubcribed
-        <not-supported-nodetype>The unsubcriber lifecycle supports document node only.</not-supported-nodetype>
-      </unsubcriber-lifecycle>
-      <unsubcriber-lifecycle-finish>The node is unsubcribed successfully</unsubcriber-lifecycle-finish>
-      <access-false>The node is not article or checked in !</access-false>
-      <unsupported-action>This node does'nt support relationable</unsupported-action>
-      <not-relationable>This node hasn't been relationable yet</not-relationable>
-      <node-pasted>The node '{0}' has been pasted at the location '{1}'. This operation has already been save and you do not need to press the floppy icon.</node-pasted>
-      <no-node-selected>No node copied</no-node-selected>
-      <unable-edit>This node: '{0}' with nodetype '{1}' unsupport edit actions</unable-edit>
-      <not-support>The selected node can not be edited</not-support>
-      <template-null>This node has no dialog available</template-null>
-      <keyword-null>There is no keywords to search.</keyword-null>
-      <not-found>No result found!</not-found>
-      <keyword-not-allow>This keyword does not allowed.</keyword-not-allow>
-      <is-not-referenable>Node '{0}' is not referenceable</is-not-referenable>
-      <access-denied>Access denied. You haven't got edit permission in this node.</access-denied>
-      <access-add-denied>Access denied. You haven't got 'Add' permission in this node.</access-add-denied>
-      <item-existed>The node already exists and same name sibling is not allowed</item-existed>
-      <removed-hidden-mixin>You removed hidden mixin successfully!</removed-hidden-mixin>
-      <added-hidden-mixin>You added hidden mixin successfully!</added-hidden-mixin>
-      <not-supported>This function supported only for document type</not-supported>
-      <empty-file-type>You can not add document for this node.</empty-file-type>
-      <unsupported-watch>Only document node can be watched</unsupported-watch>
-      <watch-checkedin>You must check out node before watch</watch-checkedin>
-      <unsupported-tagging>Only document node can be tagged.</unsupported-tagging>
-      <tagnode-checkedin>You must check out node before tagging</tagnode-checkedin>
-      <unsupported-multilanguage>You can not add languages for this node. Because this node is not document type or is mixed in some types.</unsupported-multilanguage>
-      <multilang-checkedin>You must check out node before add language</multilang-checkedin>
+      <unsubcriber-lifecycle> The node was already unsubscribed.</unsubcriber-lifecycle>
+      <not-supported-nodetype>The unsubscriber lifecycle supports the document node only.</not-supported-nodetype>      
+      <unsubcriber-lifecycle-finish>The node was unsubscribed successfully.</unsubcriber-lifecycle-finish>
+      <access-false>The node is not an article or checked in.</access-false>
+      <unsupported-action>This action is not supported.</unsupported-action>
+      <not-relationable>This node has not had any related links to another one yet.</not-relationable>
+      <node-pasted>The node '{0}' has been pasted at the location '{1}'. This operation has already been saved.</node-pasted>
+      <no-node-selected>No node copied.</no-node-selected>
+      <unable-edit>The node'{0}' with nodetype '{1}' is not supported to edit.</unable-edit>
+      <not-support>Cannot edit the selected node.</not-support>
+      <template-null>This node has no dialog available.</template-null>
+      <keyword-null>There are no keywords to search.</keyword-null>
+      <not-found>No results found.</not-found>
+      <keyword-not-allow>This keyword is not allowed.</keyword-not-allow>
+      <is-not-referenable>The node '{0}' cannot be referenceable.</is-not-referenable>
+      <access-denied>Access denied. You do not have the edit permission in this node.</access-denied>
+      <access-add-denied>Access denied. You do not have the add permission in this node.</access-add-denied>
+      <item-existed>The node already exists and it is not allowed to be the same name as its sibling.</item-existed>
+      <removed-hidden-mixin>You removed the hidden mixin successfully.</removed-hidden-mixin>
+      <added-hidden-mixin>You added the hidden mixin successfully.</added-hidden-mixin>
+      <not-supported>This function is supported for the document type only.</not-supported>
+      <empty-file-type>You cannot add a document for this node.</empty-file-type>
+      <unsupported-watch>Only the document node can be watched.</unsupported-watch>
+      <watch-checkedin>You must check out the node before watching.</watch-checkedin>
+      <unsupported-tagging>Only the document node can be tagged.</unsupported-tagging>
+      <tagnode-checkedin>You must check out the node before tagging.</tagnode-checkedin>
+      <unsupported-multilanguage>You cannot add languages for this node because this node is not the document type or is mixed in some types.</unsupported-multilanguage>
+      <multilang-checkedin>You must check out the node before adding language.</multilang-checkedin>
     </msg>
     <title>
-      <select-tab>Select tab</select-tab>
+      <select-tab>Select Tab</select-tab>
       <SimpleSearch>Quick Search</SimpleSearch>
-      <AdvanceSearch>Advance Search</AdvanceSearch>
-      <SavedQueries>Saved queries</SavedQueries>
-      <ShowAllOwnedByUser>Show all my items</ShowAllOwnedByUser>
-      <ShowAllFavourite>Show all favorite items</ShowAllFavourite>
-      <ShowAllHidden>Show all hidden items</ShowAllHidden>
-      <ShowAllFromTrash>Show all items from Trash</ShowAllFromTrash>
+      <AdvanceSearch>Advanced Search</AdvanceSearch>
+      <SavedQueries>Saved Queries</SavedQueries>
+      <ShowAllOwnedByUser>Show All My Items</ShowAllOwnedByUser>
+      <ShowAllFavourite>Show All Favorite Items</ShowAllFavourite>
+      <ShowAllHidden>Show All Hidden Items</ShowAllHidden>
+      <ShowAllFromTrash>Show All Items From Trash</ShowAllFromTrash>
     </title>
   </UIActionBar>
   <UIPopupMenu>
     <msg>
-      <has-not-permission>Access denied. You haven't got 'Add' permission in this node.</has-not-permission>
-      <has-not-edit-permission>Access denied. You haven't got edit permission in this node.Please contact with administrator to get correct right.</has-not-edit-permission>
-      <cannot-login-node>You can't access and paste a node here</cannot-login-node>
-      <cannot-paste-nodetype>Can't paste node here</cannot-paste-nodetype>
-      <has-not-permission-unlok>you haven't got permission to unlock this node</has-not-permission-unlok>
-      <bound-exception>You can not cut and paste itself in its sub node</bound-exception>
-      <bound-move-exception>You can not move to itself or in its sub node</bound-move-exception>
-      <does-not-support-auditing>You cannot activate auditing on this node</does-not-support-auditing>
-      <can-not-rename-node>You don't have permission to rename this node. Please contact with administrator to get correct right.</can-not-rename-node>
-      <can-not-cut-node>You don't have permission to cut this node. Please contact with administrator to get correct right.</can-not-cut-node>
-      <can-not-remove-node>You don't have permission to remove this node. Please contact with administrator to get correct right.</can-not-remove-node>
-      <can-not-lock-node>You don't have permission to lock this node. Please contact with administrator to get correct right.</can-not-lock-node>
-      <can-not-unlock-node>You don't have permission to unlock this node. Please contact with administrator to get correct right.</can-not-unlock-node>
-      <no-node>No node is selected to paste.</no-node>
-      <can-not-paste-node>You don't have permission to paste to this node. Please contact with administrator to get correct right.</can-not-paste-node>
-      <can-not-move-node>You don't have permission to move to this node. Please contact with administrator to get correct right.</can-not-move-node>
-      <does-not-support-versioning>Versioning is not supported for this node</does-not-support-versioning>
-      <path-not-found>This element was deleted or changed. Please click to Refresh button.</path-not-found>
-      <paste-lock-exception>You can not paste '{0}' to this node because the source node or the destination node is locked or has relation with the locked node.</paste-lock-exception>
-      <can-not-checkin-node>You can not check-in this node. Please check your right permission!</can-not-checkin-node>
-      <can-not-checkout-node>You can not check-out this node. Please check your right permission!</can-not-checkout-node>
-      <move-constraint-exception>Have problem with constraint violation when move node. Please check the source node and destination node.</move-constraint-exception>
-      <not-lock-owner>You can not unlock this node because you are not lock onwner.</not-lock-owner>
-      <is-checked-in>Please check out this node before rename!</is-checked-in>
-      <is-checked-in-lock>Please check out this node before lock!</is-checked-in-lock>
-      <cant-lock>You can not lock this node.</cant-lock>
-      <node-locked>The item with path {0} or upper level is locked.</node-locked>
-      <can-not-delete>Close this node before delete.</can-not-delete>
-      <can-not-delete-version>Can not delete this node, it's versioning</can-not-delete-version>
-      <not-support>The selected node can not be edited, please select another one!</not-support>
-      <current-node-not-allow-paste>Copied node type was not allowed paste on current node</current-node-not-allow-paste>
-      <copied-node-in-versioning>Copied node in versioning, can not paste</copied-node-in-versioning>
-      <parent-node-locked>There are no permission to unlock the node '{0}'</parent-node-locked>
-      <this-node-locked-by-parent>This node locked by parent or ancestor node, can not unlock!</this-node-locked-by-parent>
-      <paste-node-same-name>Destination folder doesn't allow two nodes with the same name</paste-node-same-name>
-      <has-not-add-permission>You do not have permission to add new node</has-not-add-permission>
-      <node-cutting>Node is cutting. You can't paste in here!</node-cutting>
-      <access-denied>Access denied! Maybe, you haven't got permission in this node</access-denied>
-      <remove-verion-exception>Can not remove because this node or ancestor of this node is checked-in</remove-verion-exception>
-      <remove-referentialIntegrityException>Can not delete this node because it is currently the target of a REFERENCE property</remove-referentialIntegrityException>
-      <constraintviolation-exception>Mandatory item jcr:uuid not found. Maybe have node deleted or changed. Please click to refresh button.</constraintviolation-exception>
-      <path-not-found-exception>This node was deleted or changed. Please click to refresh button.</path-not-found-exception>
-      <not-exist-categories>Category does not exist</not-exist-categories>
+      <has-not-permission>Access denied. You do not have the add permission in this node.</has-not-permission>
+      <has-not-edit-permission>Access denied. You do not have the edit permission in this node. Please contact the administrator to get the correct right.</has-not-edit-permission>
+      <cannot-login-node>You cannot access and paste the node here.</cannot-login-node>
+      <cannot-paste-nodetype>Cannot paste the node here.</cannot-paste-nodetype>
+      <has-not-permission-unlok>You do not have permission to unlock this node.</has-not-permission-unlok>
+      <bound-exception>You cannot cut and paste itself in its sub-node.</bound-exception>
+      <bound-move-exception>You cannot move the node to itself or in its sub-node.</bound-move-exception>
+      <does-not-support-auditing>You cannot activate auditing on this node.</does-not-support-auditing>
+      <can-not-rename-node>You do not have permission to rename this node. Please contact the administrator to get the correct right.</can-not-rename-node>
+      <can-not-cut-node>You do not have permission to cut this node. Please contact the administrator to get the correct right.</can-not-cut-node>
+      <can-not-remove-node>You do not have permission to remove this node. Please contact the administrator to get the correct right.</can-not-remove-node>
+      <can-not-lock-node>You do not have permission to lock this node. Please contact the administrator to get the correct right.</can-not-lock-node>
+      <can-not-unlock-node>You do not have permission to unlock this node. Please contact the administrator to get the correct right.</can-not-unlock-node>
+      <no-node>Please select at least a node before pasting.</no-node>
+      <can-not-paste-node>You do not have permission to paste to this node. Please contact the administrator to get the correct right.</can-not-paste-node>
+      <can-not-move-node>You do not have permission to move to this node. Please contact the administrator to get the correct right.</can-not-move-node>
+      <does-not-support-versioning>Versioning is not supported for this node.</does-not-support-versioning>
+      <path-not-found>This element was deleted or changed. Please click the Refresh button.</path-not-found>
+      <paste-lock-exception>You cannot paste '{0}' to this node because the source or the destination node is locked or has relation with the locked node.</paste-lock-exception>
+      <can-not-checkin-node>You cannot check in this node. Please check your right permission.</can-not-checkin-node>
+      <can-not-checkout-node>You cannot check out this node. Please check your right permission.</can-not-checkout-node>
+      <move-constraint-exception>An error occurred while moving the node.</move-constraint-exception>
+      <not-lock-owner>You cannot unlock this node because you are not the lock onwner.</not-lock-owner>
+      <is-checked-in>Please check out this node before renaming.</is-checked-in>
+      <is-checked-in-lock>Please check out this node before locking.</is-checked-in-lock>
+      <cant-lock>You cannot lock this node.</cant-lock>
+      <node-locked>The item with the path {0} or upper level is locked.</node-locked>
+      <can-not-delete>Please close this node before deleting.</can-not-delete>
+      <can-not-delete-version>Cannot delete this node. It is versioning.</can-not-delete-version>
+      <not-support>Cannot delete the selected node. Please select another one./not-support>
+      <current-node-not-allow-paste>Cannot paste the copied node type on the current node.</current-node-not-allow-paste>
+      <copied-node-in-versioning>Cannot paste the copied node. It is versioning.</copied-node-in-versioning>
+      <parent-node-locked>You do not have permission to unlock the node '{0}'.</parent-node-locked>
+      <this-node-locked-by-parent>Cannot unlock this node. It is locked by the parent or ancestor node.</this-node-locked-by-parent>
+      <paste-node-same-name>Cannot paste the node with the same name as a node in the destination folder.</paste-node-same-name>
+      <has-not-add-permission>You do not have permission to add a new node.</has-not-add-permission>
+      <node-cutting>Node is being cut. You cannot paste it here.</node-cutting>
+      <access-denied>Access denied. Maybe, you do not have permission in this node.</access-denied>
+      <remove-verion-exception>Cannot remove this node because it or its ancestor is checked-in.</remove-verion-exception>
+      <remove-referentialIntegrityException>Cannot delete this node because it is currently the target of a REFERENCE property.</remove-referentialIntegrityException>
+      <constraintviolation-exception>The mandatory item jcr:uuid was not found. Maybe the node was deleted or changed. Please click the Refresh button.</constraintviolation-exception>
+      <path-not-found-exception>This node was deleted or changed. Please click the Refresh button.</path-not-found-exception>
+      <not-exist-categories>The category does not exist.</not-exist-categories>
     </msg>
   </UIPopupMenu>
   <!--
@@ -441,17 +439,17 @@
     </label>
     <title>Add/Edit Folder</title>
     <msg>
-      <addFolder-successful>Add New Folder '{0}' Successful</addFolder-successful>
-      <name-invalid>Please enter folder's name!</name-invalid>
-      <title-invalid>Please enter folder's title!</title-invalid>
+      <addFolder-successful>The folder '{0}' was added successfully.</addFolder-successful>
+      <name-invalid>Please enter the folder name.</name-invalid>
+      <title-invalid>Please enter the folder title.</title-invalid>
       <name-not-allowed>This name is not allowed.</name-not-allowed>
-      <fileName-error>Invalid file name</fileName-error>
-      <constraint-violation>Current node does not allow to add '{0}' node type</constraint-violation>
+      <fileName-error>The file name is invalid.</fileName-error>
+      <constraint-violation>The current node does not allow to add the node type '{0}'.</constraint-violation>
       <repository-exception>An unexpected error occurred. Please contact your administrator for more details.</repository-exception>
-      <repository-exception-permission>You don't have permission to add a new folder on this node</repository-exception-permission>
-      <numberformat-exception>Can not save this folder. The name provided must be number format.</numberformat-exception>
+      <repository-exception-permission>You do not have permission to add a new folder to this node.</repository-exception-permission>
+      <numberformat-exception>Cannot save this folder. The name provided must be in the nummeric format.</numberformat-exception>
       <!--DMS 2.4.x; ECM-3553-->
-      <not-allow-sameNameSibling>Can not save. This node doesn't allow 2 nodes with the same name</not-allow-sameNameSibling>
+      <not-allow-sameNameSibling>Cannot save the folder. This node does not accept 2 nodes with the same name.</not-allow-sameNameSibling>
     </msg>
   </UIFolderForm>
   <!--
@@ -464,28 +462,28 @@
       <Icon>Icon</Icon>
     </title>
     <msg>
-      <confirm-delete>Do you want to delete the node '{0}' and move all its contents?</confirm-delete>
-      <confirm-delete-permanently>Do you want to delete the node '{0}' and all its contents permanently?</confirm-delete-permanently>
-      <confirm-restore>A node with the same name also exists in node '{0}' 's old location. Are you sure want to restore this node?</confirm-restore>
-	  <confirm-delete-multi>Are you sure want to move these {0} items?</confirm-delete-multi>
-	  <confirm-delete-has-relations>The node '{0}' has relations that refer to it. Do you want to delete it and all its relations?</confirm-delete-has-relations>
-	  <confirm-delete-multi-one-node-has-relations>Do you want to move these {0} items? (The node {1} has relations that refer to it, this process will remove all its relations)</confirm-delete-multi-one-node-has-relations>
-      <confirm-delete-multi-many-nodes-have-relations>Do you want to move these {0} items? (The nodes {1} have relations that refer to them, this process will remove all their relations)</confirm-delete-multi-many-nodes-have-relations>
-      <confirm-delete-permanently-multi>Are you sure want to move these {0} items permanently?</confirm-delete-permanently-multi>
-      <confirm-move>Are you sure want to move?</confirm-move>
+      <confirm-delete>Are you sure to delete the node '{0}' and all its contents?</confirm-delete>
+      <confirm-delete-permanently>Are you sure to delete the node '{0}' and all its contents permanently?</confirm-delete-permanently>      
+      <confirm-restore>A node with the same name already exists in the old location of this node'{0}'. Are you sure to restore this node?</confirm-restore>
+      <confirm-delete-multi>Are you sure to move these items: {0}?</confirm-delete-multi>
+      <confirm-delete-has-relations>The node '{0}' has relations that refer to it. Are you sure to delete it and all its relations?</confirm-delete-has-relations>
+      <confirm-delete-multi-one-node-has-relations>Are you sure to move these items: {0}? (The node {1} has relations that refer to them, this process will remove all their relations).</confirm-delete-multi-one-node-has-relations>
+      <confirm-delete-multi-many-nodes-have-relations>Are you sure to move these items: {0}? (The node {1} has relations that refer to them, this process will remove all their relations.)</confirm-delete-multi-many-nodes-have-relations>
+      <confirm-delete-permanently-multi>Are you sure to move these items: {0} permanently?</confirm-delete-permanently-multi>      
+      <confirm-move>Are you sure to move?</confirm-move>
       <node-cut>The node '{0}' has been cut.</node-cut>
       <execute-successfully>The custom action '{0}' has been executed.</execute-successfully>
       <save-node-success>The node '{0}' has been saved.</save-node-success>
-      <move-problem>Can not move node '{0}' to '{1}' because you have problem with permission or contraints condition</move-problem>
+      <move-problem>Cannot move the node '{0}' to '{1}' because an problem occurred with permission or contraints condition.</move-problem>
     </msg>
   </UIWorkingArea>
   <UIDocumentWorkspace>
     <label>
-      <no-children>This node does not have any child</no-children>
-      <no-children-but-has-hidden>This node does not have any child but there are some hidden files</no-children-but-has-hidden>
+      <no-children>This node does not have any child nodes.</no-children>
+      <no-children-but-has-hidden>This node does not have any child nodes but there are some hidden files.</no-children-but-has-hidden>
     </label>
     <msg>
-      <unable-save-node>The node '{0}' is new created one. Need save session before perform this action</unable-save-node>
+      <unable-save-node>The node '{0}' is newly created one. Please save session before performing this action.</unable-save-node>
       <save-node-success>The node '{0}' has been saved.</save-node-success>
       <node-copied>The node '{0}' has been copied.</node-copied>
       <node-cut>The node '{0}' has been cut.</node-cut>
@@ -504,17 +502,17 @@
       <Unlock>Unlock</Unlock>
       <EditDocument>Edit</EditDocument>
       <Paste>Paste</Paste>
-      <LockedBy>locked by</LockedBy>
+      <LockedBy>Locked by</LockedBy>
     </tooltip>
   </UIDocumentWorkspace>
   <UIDocumentInfo>
     <msg>
-      <access-denied>Access denied! You can not access node '{0}'</access-denied>
-      <null-exception>Item not found!It was removed or item changed or you haven't got permission to access this node!</null-exception>
-      <confirm-deleteattachment>Do you want to remove this attachment file?</confirm-deleteattachment>
-      <confirm-deleteattcomment>Do you want to remove this comment?</confirm-deleteattcomment>
-      <access-denied-exception>Access denied! Maybe you have no privileges on reading or node removed or changed</access-denied-exception>
-	  <path-not-found>This element was deleted or changed. Please click to Refresh button.</path-not-found>
+      <access-denied>Access denied. You cannot access the node '{0}'.</access-denied>
+      <null-exception>Item not found. It was removed or changed or you do not have permission to access this node.</null-exception>
+      <confirm-deleteattachment>Are you sure to remove this attachment file?</confirm-deleteattachment>
+      <confirm-deleteattcomment>Are you sure to remove this comment?</confirm-deleteattcomment>
+      <access-denied-exception>Access denied! Maybe, you have no privileges on reading or the node was removed or changed.</access-denied-exception>
+      <path-not-found>This element was deleted or changed. Please click the Refresh button.</path-not-found>
     </msg>
     <tooltip>
       <remove-attachment>Remove this attachment file</remove-attachment>
@@ -552,29 +550,29 @@
       <CheckOut>CheckOut</CheckOut>
       <CheckIn>CheckIn</CheckIn>
       <WebDAV>View WebDAV</WebDAV>
-      <sendmail>Send mail</sendmail>
+      <sendmail>Send Mail</sendmail>
       <transformsd>Transform</transformsd>
       <reloadBP>Reload BP</reloadBP>
       <workflow>Workflow</workflow>
       <createRSS>Create RSS</createRSS>
-      <icalendara>Generate icalendar</icalendara>
-      <getmail>Get mail</getmail>
-      <autoversion>Auto versioning</autoversion>
+      <icalendara>Generate Icalendar</icalendara>
+      <getmail>Get Mail</getmail>
+      <autoversion>Auto Versioning</autoversion>
       <Custom>Custom</Custom>
-      <AddFolder>Add folder</AddFolder>
-      <AddDocument>Add content</AddDocument>
+      <AddFolder>Add Folder</AddFolder>
+      <AddDocument>Add Document</AddDocument>
       <Upload>Upload document(s)</Upload>
       <MoveNode>Move</MoveNode>
       <UnLock>Unlock</UnLock>
-      <ViewProperties>View properties</ViewProperties>
-      <GetURL>Copy URL to clipboard</GetURL>
-      <AddThumbnail>Add/Remove thumbnail</AddThumbnail>
-      <AddToFavourite>Add to favorite</AddToFavourite>
-      <RemoveFromFavourite>Remove from favorite</RemoveFromFavourite>
-      <MoveToTrash>Move to Trash</MoveToTrash>
-      <RestoreFromTrash>Restore from Trash</RestoreFromTrash>
-      <EmptyTrash>Empty trash</EmptyTrash>
-						<WebDavView>Download And Allow Edition</WebDavView>
+      <ViewProperties>View Properties</ViewProperties>
+      <GetURL>Copy URL To Clipboard</GetURL>
+      <AddThumbnail>Add/Remove Thumbnail</AddThumbnail>
+      <AddToFavourite>Add To Favorite</AddToFavourite>
+      <RemoveFromFavourite>Remove From Favorite</RemoveFromFavourite>
+      <MoveToTrash>Move To Trash</MoveToTrash>
+      <RestoreFromTrash>Restore From Trash</RestoreFromTrash>
+      <EmptyTrash>Empty Trash</EmptyTrash>
+      <WebDavView>Download And Allow Edition</WebDavView>
     </event>
   </ECMContextMenu>
   <!--
@@ -600,7 +598,7 @@
       <Save>#{word.save}</Save>
     </action>
     <msg>
-      <unable-create>Unable create !</unable-create>
+      <unable-create>Cannot create the ticket.</unable-create>
     </msg>
   </UITicketForm>
   <!--
@@ -627,11 +625,11 @@
   -->
   <UITabPane>
     <title>
-    	<UIPublishingPanel>Publication Panel</UIPublishingPanel>
+      <UIPublishingPanel>Publication Pane</UIPublishingPanel>
       <UIPublicationPanel>Revision</UIPublicationPanel>
       <UIPublicationPagesContainer>Pages</UIPublicationPagesContainer>
       <UIPublicationHistory>History</UIPublicationHistory>
-      <UIVersionViewer>Version viewer</UIVersionViewer>
+      <UIVersionViewer>Version Viewer</UIVersionViewer>
 
       <UIPropertyTab>Properties</UIPropertyTab>
       <UIMetadataTab>Metadata</UIMetadataTab>
@@ -642,24 +640,24 @@
       <AdvancedSearchResult>Search Results</AdvancedSearchResult>
       <UISimpleSearch>Simple Search</UISimpleSearch>
       <UISearchContainer>Advanced Search</UISearchContainer>
-      <UICategoryManagerSearch>Add category to search</UICategoryManagerSearch>
+      <UICategoryManagerSearch>Add Category to Search</UICategoryManagerSearch>
       <UIConstraintsForm>Constraints Form</UIConstraintsForm>
-      <UIViewSearchResult>View content</UIViewSearchResult>
+      <UIViewSearchResult>View Content</UIViewSearchResult>
       <UIContentNameSearch>Search by Name</UIContentNameSearch>
       <UINodeInfo>Version Info</UINodeInfo>
       <UINodeProperty>Node Property</UINodeProperty>
       <UIActionListContainer>Available Actions</UIActionListContainer>
       <UIActionContainer>Add Action</UIActionContainer>
-      <UIActionViewContainer>Action info</UIActionViewContainer>
-      <UIMultiLanguageForm>View language</UIMultiLanguageForm>
-      <UIAddLanguageContainer>Add language</UIAddLanguageContainer>
+      <UIActionViewContainer>Action Info</UIActionViewContainer>
+      <UIMultiLanguageForm>View Language</UIMultiLanguageForm>
+      <UIAddLanguageContainer>Add Language</UIAddLanguageContainer>
       <UINonPublishedForm>State</UINonPublishedForm>
       <UIPublishedForm>State</UIPublishedForm>
       <UIPublicationLogList>History</UIPublicationLogList>
-      <UIDocumentWithTree>File view</UIDocumentWithTree>
-      <UIDocumentInfo>Document view</UIDocumentInfo>
-      <UICategoriesSelectPanel>Select categories</UICategoriesSelectPanel>
-      <UISelectedCategoriesGrid>Referenced categories</UISelectedCategoriesGrid>
+      <UIDocumentWithTree>File View</UIDocumentWithTree>
+      <UIDocumentInfo>Document View</UIDocumentInfo>
+      <UICategoriesSelectPanel>Select Categories</UICategoriesSelectPanel>
+      <UISelectedCategoriesGrid>Referenced Categories</UISelectedCategoriesGrid>
       <UIWorkflowPublicationActionForm>Workflow Publication Action</UIWorkflowPublicationActionForm>
       <UIWorkflowPublicationViewForm>Workflow Publication View</UIWorkflowPublicationViewForm>
     </title>
@@ -670,7 +668,7 @@
       <delete>Remove this property</delete>
     </title>
     <confirm>
-      <remove-property>Do you want to remove this property?</remove-property>
+      <remove-property>Are you sure to remove this property?</remove-property>
     </confirm>
     <header>
       <icon />
@@ -682,7 +680,7 @@
     <label>
       <binary>Binary Data</binary>
       <notavailable>N/A</notavailable>
-      <cannotget>Can not get values</cannotget>
+      <cannotget>Cannot get values</cannotget>
     </label>
     <action>
       <Close>#{word.close}</Close>
@@ -699,7 +697,7 @@
   #############################################################################
   -->
   <UIPropertyForm>
-    <title>Add or edit a property</title>
+    <title>Add/Edit Property</title>
     <label>
       <name>Name</name>
       <type>Type</type>
@@ -715,16 +713,16 @@
       <Reset>Reset</Reset>
     </action>
     <msg>
-      <name-invalid>You must enter name !</name-invalid>
-      <unable-create>Can't add properties !</unable-create>
-      <value-invalid>You must enter value !</value-invalid>
-      <node-checkedin>You must checkout this node before add property</node-checkedin>
-      <can-not-add>You can not add properties for this node. This is only allowed for the node type nt:unstructured</can-not-add>
-      <propertyName-invalid>Property name must include namespace (ex: namespace:name)</propertyName-invalid>
-      <propertyName-exist>The property '{0}' is existing.</propertyName-exist>
-      <propertyValu-null>Maybe, have some values are null</propertyValu-null>
-      <valueFormatEx>Can not assign multiple-values Value to a single-valued property</valueFormatEx>
-      <number-format-exception>Your input value has a wrong format</number-format-exception>
+      <name-invalid>Please enter the property name.</name-invalid>
+      <unable-create>Cannot add properties.</unable-create>
+      <value-invalid>Please enter the value.</value-invalid>
+      <node-checkedin>You must check out this node before adding a property.</node-checkedin>
+      <can-not-add>You cannot add properties to this node. This is allowed for the node type nt:unstructured only.</can-not-add>
+      <propertyName-invalid>The property name must include namespace (e.g. namespace:name).</propertyName-invalid>
+      <propertyName-exist>The property '{0}' already exists.</propertyName-exist>
+      <propertyValu-null>Maybe, some values are null.</propertyValu-null>
+      <valueFormatEx>Cannot assign a multiple-value value to a single-valued property.</valueFormatEx>
+      <number-format-exception>Your input value has a wrong format.</number-format-exception>
     </msg>
   </UIPropertyForm>
   <!--
@@ -767,7 +765,7 @@
     <action>
       <title>
         <Edit>Edit</Edit>
-        <Delete>Remove permission</Delete>
+        <Delete>Remove Permission</Delete>
       </title>
     </action>
     <header>
@@ -779,17 +777,17 @@
       <action>Action</action>
     </header>
     <msg>
-      <confirm-delete-permission>Do you want to remove this permission?</confirm-delete-permission>
-      <no-permission-tochange>You have no right to remove permission</no-permission-tochange>
-      <no-permission-remove>You can not remove the owner</no-permission-remove>
-      <access-denied>Access denied! You can not remove this permission.</access-denied>
+      <confirm-delete-permission>Are you sure to remove this permission?</confirm-delete-permission>
+      <no-permission-tochange>You have no right to remove permission.</no-permission-tochange>
+      <no-permission-remove>You cannot remove the owner.</no-permission-remove>
+      <access-denied>Access denied! You cannot remove this permission.</access-denied>
     </msg>
   </UIPermissionInfo>
   <permission>
     <title>
-      <SelectUser>Select user</SelectUser>
-      <SelectMember>Select membership</SelectMember>
-      <AddAny>Select everyone</AddAny>
+      <SelectUser>Select User</SelectUser>
+      <SelectMember>Select Membership</SelectMember>
+      <AddAny>Select Everyone</AddAny>
     </title>
   </permission>
   <!--
@@ -799,18 +797,18 @@
   -->
   <SelectUserOrGroup>
     <title>
-      <UIGroupSelector>Select user</UIGroupSelector>
-      <UIPermissionSelector>Select member</UIPermissionSelector>
-      <UIGroupMemberSelector>Select membership</UIGroupMemberSelector>
+      <UIGroupSelector>Select User</UIGroupSelector>
+      <UIPermissionSelector>Select Member</UIPermissionSelector>
+      <UIGroupMemberSelector>Select Membership</UIGroupMemberSelector>
     </title>
   </SelectUserOrGroup>
   <UIGroupSelector>
     <label>
-      <selectGroup>Browse and select a group</selectGroup>
-      <selectUser>Select user</selectUser>
+      <selectGroup>Browse and Select A Group</selectGroup>
+      <selectUser>Select User</selectUser>
     </label>
     <msg>
-      <not-change-owner>'{0}' is owner of this node and have full control permission</not-change-owner>
+      <not-change-owner>'{0}' is the owner of this node and has the full control permission.</not-change-owner>
     </msg>
   </UIGroupSelector>
   <UIPermissionForm>
@@ -830,10 +828,10 @@
       <Reset>Reset</Reset>
     </action>
     <msg>
-      <checkbox-require>You must select at least one permission</checkbox-require>
-      <userOrGroup-required>You must select user or group before save this permission</userOrGroup-required>
-      <not-change-permission>You have no right to add permission</not-change-permission>
-      <access-denied>Access denied! You can not remove this permission.</access-denied>
+      <checkbox-require>Please select at least one permission.</checkbox-require>
+      <userOrGroup-required>Please select a user or a group before saving this permission.</userOrGroup-required>
+      <not-change-permission>You have no right to add permission.</not-change-permission>
+      <access-denied>Access denied. You cannot remove this permission.</access-denied>
     </msg>
   </UIPermissionForm>
   <!--
@@ -855,46 +853,46 @@
   ################################################################################
   -->
   <UIUploadForm>
-    <title>Upload a file</title>
+    <title>Upload File</title>
     <label>
-      <upload>Select a file</upload>
+      <upload>Select File</upload>
       <name>Name</name>
-      <fieldListTaxonomy>List Taxonomy</fieldListTaxonomy>
+      <fieldListTaxonomy>Categories List</fieldListTaxonomy>
     </label>
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <fileName-error>Please make sure that you uploaded the selected file to the server using the upload icon.</fileName-error>
-      <taxonomyPath-error>Please choose the taxonomy!</taxonomyPath-error>
-      <fileName-invalid>Have some invalid characters in file name. Type file name or upload other file, please.</fileName-invalid>
-      <fileName-invalid-with-name>Have some invalid characters in file name '{0}'. Type file name or upload other file, please.</fileName-invalid-with-name>
-      <fileSize-too-big>File size is too big. You should split to some small files or use WebDav upload.</fileSize-too-big>
-      <name-is-exist>The name '{0}' is existing. You can not upload same name file except for 'nt:file'</name-is-exist>
-      <contraint-violation>Can't add node '{0}' to this node because it is not allowed as child's node type for parent node type</contraint-violation>
-      <lock-exception>This node is locked. Some action will be run unlikely.</lock-exception>
-      <confirm-behavior>There is already a file with same name '{0}' in this location. Please choose a behavior you want to keep</confirm-behavior>
+      <fileName-error>Please upload the selected file to the server by using the upload icon.</fileName-error>
+      <taxonomyPath-error>Please select the category.</taxonomyPath-error>
+      <fileName-invalid>The file name contains some invalid characters. Please retype the file name or upload another file.</fileName-invalid>
+      <fileName-invalid-with-name>The file name '{0}' contains some invalid characters. Please retype the file name or upload another file.</fileName-invalid-with-name>
+      <fileSize-too-big>The file size is too big. You should split it into some small files or use WebDav to upload.</fileSize-too-big>
+      <name-is-exist>The name '{0}' already exists.</name-is-exist>
+      <contraint-violation>Cannot add the node '{0}' as the child node to this node.</contraint-violation>
+      <lock-exception>You cannot upload the file. This node is locked.</lock-exception>
+      <confirm-behavior>The file name'{0}' already exists in this location. Please select a behavior below:</confirm-behavior>
     </msg>
   </UIUploadForm>
   <UIUploadContent>
     <label>
-      <fileName>File name</fileName>
-      <nodeName>Node name</nodeName>
-      <fileSize>File size</fileSize>
+      <fileName>File Name</fileName>
+      <nodeName>Node Name</nodeName>
+      <fileSize>File Size</fileSize>
       <mimeType>Mime Type</mimeType>
     </label>
     <title>
-      <uploaded-file>Uploaded file</uploaded-file>
-      <external-metadata>External metadatas</external-metadata>
-      <metadata-name>Metadata name</metadata-name>
+      <uploaded-file>Uploaded File</uploaded-file>
+      <external-metadata>External Metadata</external-metadata>
+      <metadata-name>Metadata Name</metadata-name>
       <action>Action</action>
     </title>
     <tooltip>
       <Edit>Edit</Edit>
     </tooltip>
     <msg>
-      <has-not-template>Template of '{0}' is null or empty.</has-not-template>
+      <has-not-template>The template of '{0}' is null or empty.</has-not-template>
     </msg>
   </UIUploadContent>
   <UIUploadContainer>
@@ -916,7 +914,7 @@
   </AddMetadataPopup>
   <UIExternalMetadataForm>
     <msg>
-      <can-not-add>This node can not add mixin.</can-not-add>
+      <can-not-add>The mixin cannot be added to this node.</can-not-add>
     </msg>
   </UIExternalMetadataForm>
   <UIAddMetadataForm>
@@ -935,7 +933,7 @@
       <node-type>Node Type</node-type>
       <name>Name</name>
       <item>Primary Item Name</item>
-      <super-types>Parent types</super-types>
+      <super-types>Parent Types</super-types>
       <mixin>Mixin Node Type</mixin>
       <orderable-children>Orderable Children</orderable-children>
       <property-def>Node Property Definition</property-def>
@@ -967,7 +965,7 @@
   <UICategoryManagerSearch>
     <tab>
       <label>
-        <UIOneNodePathSelector>Choose category</UIOneNodePathSelector>
+        <UIOneNodePathSelector>Select Category</UIOneNodePathSelector>
       </label>
     </tab>
     <action>
@@ -976,8 +974,8 @@
   </UICategoryManagerSearch>
   <UIContentNameSearch>
     <label>
-      <keyword>Content name</keyword>
-      <location>Search on this location:</location>
+      <keyword>Content Name</keyword>
+      <location>Search in this location:</location>
     </label>
     <action>
       <Search>Search</Search>
@@ -989,7 +987,7 @@
   </UIContentNameSearch>
   <UISimpleSearch>
     <action>
-      <MoreConstraints>Show/hide constraint form</MoreConstraints>
+      <MoreConstraints>Show/Hide Constraint Form</MoreConstraints>
       <Search>Search</Search>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
@@ -1003,25 +1001,25 @@
     </label>
     <msg>
       <keyword-null>Please enter your keyword.</keyword-null>
-      <not-found>No result found!</not-found>
+      <not-found>No results found.</not-found>
       <keyword-not-allow>This keyword is not allowed.</keyword-not-allow>
       <value-null>Please enter your keyword or constraints.</value-null>
       <value-save-null>Please enter a keyword or constraints before saving this query.</value-save-null>
-      <inputSearch-invalid>There is invalid characters in search input</inputSearch-invalid>
-      <query-invalid>The query is invalid. Please check your constraint</query-invalid>
+      <inputSearch-invalid>There are invalid characters in the search input.</inputSearch-invalid>
+      <query-invalid>The query is invalid. Please check your constraint.</query-invalid>
     </msg>
   </UISimpleSearch>
   <ViewSearch>
     <title>
-      <UIViewSearchResult>View template</UIViewSearchResult>
+      <UIViewSearchResult>View Template</UIViewSearchResult>
     </title>
   </ViewSearch>
   <UISearchResult>
     <msg>
-      <not-support>There is no View template for this node</not-support>
-      <empty>No result found!</empty>
-      <access-denied>You can not view this node because this template is not supported or access denied!</access-denied>
-      <query-invalid>The query is invalid</query-invalid>
+      <not-support>There is no View template for this node.</not-support>
+      <empty>No results found.</empty>
+      <access-denied>You cannot view this node because this template is not supported or access denied.</access-denied>
+      <query-invalid>The query is invalid.</query-invalid>
     </msg>
     <header>
       <name>#{word.name}</name>
@@ -1039,8 +1037,8 @@
       <scoreDESC>Sort by score in descending</scoreDESC>
       <nameASC>Sort by name in ascending</nameASC>
       <nameDESC>Sort by name in descending</nameDESC>
-      <datecreatedASC>Sort by Created date in ascending</datecreatedASC>
-      <datecreatedDESC>Sort by Created date in descending</datecreatedDESC>
+      <datecreatedASC>Sort by created date in ascending</datecreatedASC>
+      <datecreatedDESC>Sort by created date in descending</datecreatedDESC>
     </title>
     <tooltip>
       <View>View this node</View>
@@ -1050,8 +1048,8 @@
   <UIShowAllOwnedByUserResult>
     <msg>
       <not-support>There is no View template for this node</not-support>
-      <empty>No result found!</empty>
-      <access-denied>You can not view this node because this template is not supported or access denied!</access-denied>
+      empty>No results found.</empty>
+      <access-denied>You cannot view this node because this template is not supported or access denied.</access-denied>
       <query-invalid>The query is invalid</query-invalid>
     </msg>
     <header>
@@ -1091,7 +1089,7 @@
       <action>Action</action>
       <shortcutPath>Path</shortcutPath>
       <type>Type</type>
-      <dateCreated>Date created</dateCreated>
+      <dateCreated>Date Created</dateCreated>
       <score>Score</score>
     </header>
     <title>
@@ -1101,8 +1099,8 @@
       <scoreDESC>Sort by score in descending</scoreDESC>
       <nameASC>Sort by name in ascending</nameASC>
       <nameDESC>Sort by name in descending</nameDESC>
-      <datecreatedASC>Sort by Created date in ascending</datecreatedASC>
-      <datecreatedDESC>Sort by Created date in descending</datecreatedDESC>
+      <datecreatedASC>Sort by created date in ascending</datecreatedASC>
+      <datecreatedDESC>Sort by created date in descending</datecreatedDESC>
     </title>
     <tooltip>
       <View>View this node</View>
@@ -1111,10 +1109,10 @@
   </UIShowAllFavouriteResult>
   <UIShowAllHiddenResult>
     <msg>
-      <not-support>There is no View template for this node</not-support>
-      <empty>No result found!</empty>
-      <access-denied>You can not view this node because this template is not supported or access denied!</access-denied>
-      <query-invalid>The query is invalid</query-invalid>
+      <not-support>There is no View template for this node.</not-support>
+      <empty>No results found.</empty>
+      <access-denied>You cannot view this node because this template is not supported or access denied.</access-denied>
+      <query-invalid>The query is invalid.</query-invalid>
     </msg>
     <header>
       <name>#{word.name}</name>
@@ -1122,9 +1120,9 @@
       <action>Action</action>
       <shortcutPath>Path</shortcutPath>
       <type>Type</type>
-      <dateCreated>Date created</dateCreated>
+      <dateCreated>Date Created</dateCreated>
       <score>Score</score>
-      <AddRemoveFavourite>Add/remove to favorite</AddRemoveFavourite>
+      <AddRemoveFavourite>Add/Remove To Favorite</AddRemoveFavourite>
     </header>
     <title>
       <typeASC>Sort by document type in ascending</typeASC>
@@ -1133,8 +1131,8 @@
       <scoreDESC>Sort by score in descending</scoreDESC>
       <nameASC>Sort by name in ascending</nameASC>
       <nameDESC>Sort by name in descending</nameDESC>
-      <datecreatedASC>Sort by Created date in ascending</datecreatedASC>
-      <datecreatedDESC>Sort by Created date in descending</datecreatedDESC>
+      <datecreatedASC>Sort by created date in ascending</datecreatedASC>
+      <datecreatedDESC>Sort by created date in descending</datecreatedDESC>
     </title>
     <tooltip>
       <View>View this node</View>
@@ -1144,10 +1142,10 @@
   </UIShowAllHiddenResult>
   <UIShowAllTrashResult>
     <msg>
-      <not-support>There is no View template for this node</not-support>
-      <empty>No result found!</empty>
-      <access-denied>You can not view this node because this template is not supported or access denied!</access-denied>
-      <query-invalid>The query is invalid</query-invalid>
+      <not-support>There is no View template for this node.</not-support>
+      <empty>No results found.</empty>
+      <access-denied>You cannot view this node because this template is not supported or access denied.</access-denied>
+      <query-invalid>The query is invalid.</query-invalid>
     </msg>
     <header>
       <name>#{word.name}</name>
@@ -1155,7 +1153,7 @@
       <action>Action</action>
       <shortcutPath>Path</shortcutPath>
       <type>Type</type>
-      <dateCreated>Date created</dateCreated>
+      <dateCreated>Date Created</dateCreated>
       <score>Score</score>
     </header>
     <title>
@@ -1165,8 +1163,8 @@
       <scoreDESC>Sort by score in descending</scoreDESC>
       <nameASC>Sort by name in ascending</nameASC>
       <nameDESC>Sort by name in descending</nameDESC>
-      <datecreatedASC>Sort by Created date in ascending</datecreatedASC>
-      <datecreatedDESC>Sort by Created date in descending</datecreatedDESC>
+      <datecreatedASC>Sort by created date in ascending</datecreatedASC>
+      <datecreatedDESC>Sort by created date in descending</datecreatedDESC>
     </title>
     <tooltip>
       <View>View this node</View>
@@ -1180,23 +1178,23 @@
       <constraints>UIConstraintsForm</constraints>
       <metadataProperty>Properties</metadataProperty>
       <operator>Operator</operator>
-      <contains>Contains value</contains>
-      <notcontains>NOT contains value</notcontains>
+      <contains>Contain Value</contains>
+      <notcontains>Not Contain Value</notcontains>
     </label>
     <action>
       <Add>Add</Add>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <properties-required>Name of property is required</properties-required>
-      <value-required>Value field is required.</value-required>
-      <date-invalid>From date have to be smaller than To date.</date-invalid>
-      <fromDate-required>From date is required</fromDate-required>
+      <properties-required>The name of property is required.</properties-required>
+      <value-required>The Value field is required.</value-required>
+      <date-invalid>The From date has to be smaller than the To date.</date-invalid>
+      <fromDate-required>The From date is required.</fromDate-required>
       <must-choose-one>You have to select at least one type.</must-choose-one>
-      <properties-null>Select properties first, then filter</properties-null>
-      <exactly-require>You have to fill value exactly before save this constraint</exactly-require>
-      <fromDate-invalid>Invalid type in 'From date' field. Please choose or type correct.</fromDate-invalid>
-      <toDate-invalid>Invalid type in 'To date' field. Please choose or type correct.</toDate-invalid>
+      <properties-null>Select properties first, then filter.</properties-null>
+      <exactly-require>You have to fill value exactly before saving this constraint.</exactly-require>
+      <fromDate-invalid>Invalid type in the 'From' field. Please reselect or type correctly.</fromDate-invalid>
+      <toDate-invalid>Invalid type in the 'To' field. Please reselect or type correctly.</toDate-invalid>
     </msg>
     <button>
       <label-Add>Add</label-Add>
@@ -1212,7 +1210,7 @@
     </tooltip>
     <label>
       <colon>:</colon>
-      <operator>Operator :</operator>
+      <operator>Operator:</operator>
       <exactlyPro-properties>Property</exactlyPro-properties>
       <exactlyPro-ContainExactly>Contain Exactly</exactlyPro-ContainExactly>
       <containPro-properties>Property</containPro-properties>
@@ -1231,18 +1229,18 @@
   </UIConstraintForm>
   <NodeTypePopup>
     <title>
-      <UINodeTypeSelectForm>Select node type</UINodeTypeSelectForm>
+      <UINodeTypeSelectForm>Select Node Type</UINodeTypeSelectForm>
     </title>
   </NodeTypePopup>
   <CategoryPopup>
     <title>
-      <UICategoryManagerSearch>Add category to search</UICategoryManagerSearch>
-      <UIOneNodePathSelector>Choose category</UIOneNodePathSelector>
+      <UICategoryManagerSearch>Add Category To Search</UICategoryManagerSearch>
+      <UIOneNodePathSelector>Select Category</UIOneNodePathSelector>
     </title>
   </CategoryPopup>
   <SaveQueryPopup>
     <title>
-      <UISaveQueryForm>Query form</UISaveQueryForm>
+      <UISaveQueryForm>Query Form</UISaveQueryForm>
     </title>
   </SaveQueryPopup>
   <UINodeTypeSelectForm>
@@ -1253,8 +1251,8 @@
   </UINodeTypeSelectForm>
   <UICompareExactlyForm>
     <label>
-      <filter>Filter :</filter>
-      <result>Results :</result>
+      <filter>Filter:</filter>
+      <result>Results:</result>
     </label>
     <title>
       <result>Filter</result>
@@ -1264,7 +1262,7 @@
       <label-Cancel>Cancel</label-Cancel>
     </button>
     <msg>
-      <not-result-found>No result found!</not-result-found>
+      <not-result-found>No results found.</not-result-found>
     </msg>
   </UICompareExactlyForm>
   <UIJCRAdvancedSearch>
@@ -1280,12 +1278,12 @@
     </action>
     <msg>
       <!--DMS 2.4.x ECM-3566-->
-      <name-invalid>Name is invalid!</name-invalid>
-      <query-added>Query added</query-added>
-      <save_unSuccessful>Can't save : statement is invalid or query name already exists</save_unSuccessful>
+      <name-invalid>The name is invalid.</name-invalid>
+      <query-added>The query was added successfully.</query-added>
+      <save_unSuccessful>Cannot save the query. Maybe, the statement is invalid or the query name already exists.</save_unSuccessful>
       <invalid-queryStatement>Invalid query statement.</invalid-queryStatement>
-      <value-save-null>Please enter your query statement</value-save-null>
-      <query-name-null>Enter your query name please!</query-name-null>
+      <value-save-null>Please enter your query statement.</value-save-null>
+      <query-name-null>Please enter your query name.</query-name-null>
     </msg>
   </UIJCRAdvancedSearch>
   <EditQueryForm>
@@ -1301,7 +1299,7 @@
   </EditQueryForm>
   <EditSavedQueryForm>
     <title>
-      <EditQueryForm>Edit query form</EditQueryForm>
+      <EditQueryForm>Edit Query Form</EditQueryForm>
     </title>
   </EditSavedQueryForm>
   <UIMetadataSelectForm>
@@ -1315,22 +1313,22 @@
   </UIMetadataSelectForm>
   <property1MetadataPopup>
     <title>
-      <UISelectPropertyForm>Select property</UISelectPropertyForm>
+      <UISelectPropertyForm>Select Property</UISelectPropertyForm>
     </title>
   </property1MetadataPopup>
   <property2MetadataPopup>
     <title>
-      <UISelectPropertyForm>Select property</UISelectPropertyForm>
+      <UISelectPropertyForm>Select Property</UISelectPropertyForm>
     </title>
   </property2MetadataPopup>
   <property3MetadataPopup>
     <title>
-      <UISelectPropertyForm>Select property</UISelectPropertyForm>
+      <UISelectPropertyForm>Select Property</UISelectPropertyForm>
     </title>
   </property3MetadataPopup>
   <UISelectPropertyForm>
     <label>
-      <metadataType>Metadata type</metadataType>
+      <metadataType>Metadata Type</metadataType>
     </label>
     <pLabel>Properties:</pLabel>
     <action>
@@ -1354,7 +1352,7 @@
   </UIECMSearch>
   <UIResult>
     <msg>
-      <not-found>Data not found</not-found>
+      <not-found>Data not found.</not-found>
     </msg>
     <header>
       <action>Action</action>
@@ -1362,9 +1360,9 @@
   </UIResult>
   <UISaveQueryForm>
     <msg>
-      <query-name-null>Enter query name to save, please!</query-name-null>
-      <access-denied>Access denied! You need 'Add' permission to be allowed to save this query</access-denied>
-      <save-failed>Can not save : statement is invalid or query name already exists</save-failed>
+      <query-name-null>Please enter query name to save.</query-name-null>
+      <access-denied>Access denied! You do not have the add permission to save this query.</access-denied>
+      <save-failed>Cannot save the query. The statement is invalid or the query name already exists.</save-failed>
     </msg>
     <label>
       <queryName>Query name</queryName>
@@ -1388,11 +1386,11 @@
       <Delete>Delete</Delete>
     </tooltip>
     <label>
-      <no-children>There is no query saved</no-children>
+      <no-children>No query is saved.</no-children>
     </label>
     <msg>
-      <confirm-delete-query>Do you really want to delete this query?</confirm-delete-query>
-      <not-result-found>No result found!</not-result-found>
+      <confirm-delete-query>Are you sure to delete this query?</confirm-delete-query>
+      <not-result-found>No results found.</not-result-found>
     </msg>
   </UISavedQuery>
   <UIQueryResultPageIterator>
@@ -1449,18 +1447,18 @@
       <restoreVersion>Restore Version</restoreVersion>
       <viewVersion>View Version Info</viewVersion>
       <deleteVersion>Delete Version</deleteVersion>
-      <compareVersion>Compare with base version</compareVersion>
+      <compareVersion>Compare with the  base version</compareVersion>
     </tooltip>
     <msg>
-      <have-no-view-template>View template of this is not supported</have-no-view-template>
-      <cannot-remove-version>Can not remove base version</cannot-remove-version>
-      <confirm-delete>Do you really want to remove this version?</confirm-delete>
-      <not-checked-out>You have to check out this node before restore.</not-checked-out>
-      <invalid-item-state>You can not restore this version. Probably one or more items was deleted or moved by another session.</invalid-item-state>
+      <have-no-view-template>The view template is not supported.</have-no-view-template>
+      <cannot-remove-version>Cannot remove the base version.</cannot-remove-version>
+      <confirm-delete>Are you sure to remove this version?</confirm-delete>
+      <not-checked-out>You have to check out this node before restoring.</not-checked-out>
+      <invalid-item-state>You cannot restore this version. Maybe, one or more items were deleted or moved by another session.</invalid-item-state>
     </msg>
     <action>
       <close>Close</close>
-      <close-view>Close view</close-view>
+      <close-view>Close View</close-view>
     </action>
   </UIVersionInfo>
   <!--
@@ -1470,7 +1468,7 @@
   -->
   <UIAuditingInfo>
     <msg>
-      <noVersion>No version</noVersion>
+      <noVersion>No Version</noVersion>
     </msg>
     <eventName>
       <e_1>Node added</e_1>
@@ -1501,7 +1499,7 @@
     </eventName>
     <label>
       <operation>Operation</operation>
-      <userName>User name</userName>
+      <userName>Username</userName>
       <date>Date</date>
       <version>Version</version>
     </label>
@@ -1514,8 +1512,8 @@
   -->
   <UIActivateVersion>
     <label>
-      <note>Versioning has not been activated for this node</note>
-      <question>Do you want to activate it ?</question>
+      <note>Versioning has not been activated for this node.</note>
+      <question>Are you sure to activate it?</question>
       <button-active>Activate</button-active>
       <button-cancel>Cancel</button-cancel>
     </label>
@@ -1539,12 +1537,12 @@
     </action>
     <grid>
       <msg>
-        <empty>No publication plugin found</empty>
+        <empty>No publication plugins found.</empty>
       </msg>
     </grid>
     <msg>
-      <node-type-invalid>Only document node type can be enroled</node-type-invalid>
-      <already-enroled>This document has already been enroled</already-enroled>
+      <node-type-invalid>Only the document node type can be enrolled.</node-type-invalid>
+      <already-enroled>This document has already been enrolled.</already-enroled>
     </msg>
   </UIActivePublication>
   <!--
@@ -1554,8 +1552,8 @@
   -->
   <UIActivateAuditing>
     <label>
-      <note>Auditing has not been activated for this node</note>
-      <question>Do you want to activate?</question>
+      <note>Auditing has not been activated for this node.</note>
+      <question>Are you sure to activate?</question>
     </label>
     <action>
       <activate>Activate</activate>
@@ -1571,7 +1569,7 @@
     <label>
       <diffTitle>Compare between 2 versions</diffTitle>
       <noChange>No change between 2 versions</noChange>
-      <baseVerion>Base version</baseVerion>
+      <baseVerion>Base Version</baseVerion>
       <compareVerion>Version</compareVerion>
       <can-not-compare>Failed to compare 2 versions</can-not-compare>
     </label>
@@ -1594,14 +1592,13 @@
     </action>
     <title>Import Node</title>
     <msg>
-      <import-successful>Import successfully!</import-successful>
-      <filename-invalid>Browse xml file for 'Upload File' field to import!</filename-invalid>
-      <filetype-error>Can not import node from uploaded file. Maybe it is a invalid xml file.</filetype-error>
-      <mimetype-invalid>Only xml file or zip file are supported to import.</mimetype-invalid>
+      <import-successful>Import successfully.</import-successful>
+      <filename-invalid>Browse an .xml file for the 'Upload File' field to import.</filename-invalid>
+      <filetype-error>Cannot import the uploaded file. Maybe, the .xml file is invalid.</filetype-error>
+      <mimetype-invalid>Only .xml or .zip files are supported to import.</mimetype-invalid>
       <access-denied>Access denied! You are not allowed to import there.</access-denied>
-      <constraint-violation-exception>Can not import because some constraints are violated: Data import is incorrect Or Node type '{0}' is not allowed child's node type is '{0}'</constraint-violation-exception>
-      <item-exists-exception>An incoming referenceable node has the same UUID as a node existing in the workspace! UUID: '{0}'</item-exists-exception>
-    </msg>
+      <constraint-violation-exception>Cannot import the node. The imported data are incorrect or the node type '{0}' is not allowed to be child's node type'{0}'.</constraint-violation-exception>
+      <item-exists-exception>An incoming referenceable node has the same UUID as an existing node in the workspace.</item-exists-exception>    </msg>
   </UIImportNode>
   <!--
   ###############################################################################
@@ -1618,8 +1615,8 @@
     </action>
     <title>Add Label</title>
     <msg>
-      <label-invalid>Have some invalid characters in label</label-invalid>
-      <label-exist>'{0}' already exist</label-exist>
+      <label-invalid>The label contains some invalid characters.</label-invalid>
+      <label-exist>'{0}' already exists.</label-exist>
     </msg>
   </UILabelForm>
   <!--
@@ -1656,7 +1653,7 @@
       <PropertyValue>Property Values</PropertyValue>
     </label>
     <msg>
-      <not-supported>This function doesn't supported for versioning</not-supported>
+      <not-supported>This function is not supported for versioning.</not-supported>
     </msg>
   </UIViewVersion>
   <UIVersionList>
@@ -1673,8 +1670,8 @@
     </action>
     <tab>
       <label>
-        <UICategoriesAddedList>Referenced categories</UICategoriesAddedList>
-        <UIOneNodePathSelector>Select category</UIOneNodePathSelector>
+        <UICategoriesAddedList>Referenced Categories</UICategoriesAddedList>
+        <UIOneNodePathSelector>Select Category</UIOneNodePathSelector>
       </label>
     </tab>
   </UICategoryManager>
@@ -1684,8 +1681,8 @@
       <action>Actions</action>
     </header>
     <msg>
-      <access-denied>Access denied!You have not enough permission in this node.</access-denied>
-      <confirm-delete>Do you really want to delete this reference?</confirm-delete>
+      <access-denied>Access denied. You do not have the access permission in this node.</access-denied>
+      <confirm-delete>Are you sure to delete this reference?</confirm-delete>
     </msg>
     <action>
       <title>
@@ -1704,7 +1701,7 @@
       <action>Action</action>
     </header>
     <info>
-      <child-not-found>This node hasn't got any child</child-not-found>
+      <child-not-found>This node does not have any child nodes.</child-not-found>
     </info>
   </UITreeList>
   <!--
@@ -1718,7 +1715,7 @@
     </action>
     <tab>
       <label>
-        <UIOneNodePathSelector>Select relation</UIOneNodePathSelector>
+        <UIOneNodePathSelector>Select Relation</UIOneNodePathSelector>
       </label>
     </tab>
     <tab>
@@ -1738,8 +1735,8 @@
       </title>
     </action>
     <msg>
-      <confirm-delete>Do you really want to delete this relation?</confirm-delete>
-      <can-not-add-itself>You can not add relation to itself.</can-not-add-itself>
+      <confirm-delete>Are you sure to delete this relation?</confirm-delete>
+      <can-not-add-itself>You cannot add relation to itself.</can-not-add-itself>
     </msg>
   </UIRelationsAddedList>
   <!--
@@ -1754,14 +1751,14 @@
       <action>Act</action>
     </header>
     <label>
-      <nocommand>There is no item in clipboard !</nocommand>
+      <nocommand>There are no items in the clipboard.</nocommand>
     </label>
     <action>
       <clearall>Clear All</clearall>
     </action>
     <msg>
-      <unable-pasted>Can not paste this node</unable-pasted>
-      <node-pasted>The node {0} has been pasted at the location {1}. This operation has already been save and you do not need to press the floppy icon.</node-pasted>
+      <unable-pasted>Cannot paste this node.</unable-pasted>
+      <node-pasted>The node {0} has been pasted at the location {1}. This operation has already been saved.</node-pasted>
     </msg>
   </UIClipboard>
   <!--
@@ -1790,9 +1787,9 @@
     <title>Add New Document</title>
     <action>
       <Save>Save</Save>
-	  <SaveAndClose>Save &amp; Close</SaveAndClose>
-	  <ChangeType>change content type</ChangeType>
-	  <Fullscreen>Fullscreen</Fullscreen>
+      <SaveAndClose>Save &amp; Close</SaveAndClose>
+      <ChangeType>Change Content Type</ChangeType>
+      <Fullscreen>Fullscreen</Fullscreen>
       <Cancel>#{word.cancel}</Cancel>
       <Close>#{word.close}</Close>
     </action>
@@ -1800,16 +1797,16 @@
 		<FullScreen>Maximize/Minimize</FullScreen>
 	</tooltip>
     <msg>
-      <cannot-save>Some constraints were violated during that action.</cannot-save>
-      <in-versioning>Need to checkout current node before add new node</in-versioning>
-      <not-support>Cannot load template of '{0}'.</not-support>
-      <value-invalid>'{0}' is needed value</value-invalid>
-      <repository-exception>Can not save this document. Some constraints were violated during that action.</repository-exception>
+      <cannot-save>An error occurred while saving the document.</cannot-save>
+      <in-versioning>Please check out the current node before adding a new node.</in-versioning>
+      <not-support>Cannot load the template of '{0}'.</not-support>
+      <value-invalid>'{0}' is needed value.</value-invalid>
+      <repository-exception>An error occurred while saving the document.</repository-exception>
       <!--DMS 2.4.x; ECM-3543-->
-      <repository-exception-permission>You don't have permission to add a new document on this node</repository-exception-permission>
-      <not-allowed-same-name-sibling>Can not save this document. This node is not allowed same name sibling</not-allowed-same-name-sibling>
-      <numberformat-exception>Can not save this document. The name provided must be number format</numberformat-exception>
-      <item-not-found>Item not found! Maybe this node or ancestor was deleted. Please click to refresh button.</item-not-found>
+      <repository-exception-permission>You do not have permission to add a new document to this node.</repository-exception-permission>
+      <not-allowed-same-name-sibling>Cannot save this document. It is not allowed to be the same name as it sibling.</not-allowed-same-name-sibling>
+      <numberformat-exception>Cannot save this document. The name provided must be in the numerical format.</numberformat-exception>
+      <item-not-found>Item not found. Maybe this node or its ancestor was deleted. Please click the Refresh button.</item-not-found>
     </msg>
   </UIDocumentForm>
   <!--
@@ -1874,11 +1871,11 @@
       <action>Action</action>
     </header>
     <msg>
-      <remove-popup-first>You must close edit popup before delete this node.</remove-popup-first>
-      <confirm-delete-action>Do yo really want to delete this action?</confirm-delete-action>
-      <template-empty>Template of '{0}' is null or empty</template-empty>
-      <template-null>Template is null or you haven't got permission to access this template.</template-null>
-      <access-denied>Access denied! You haven't got enough permission to do this action.</access-denied>
+      <remove-popup-first>You must close the edit pop-up before deleting this node.</remove-popup-first>
+      <confirm-delete-action>Are you sure to delete this action?</confirm-delete-action>
+      <template-empty>The template of '{0}' is null or empty.</template-empty>
+      <template-null>The template is null or you do not have permission to access this template.</template-null>
+      <access-denied>Access denied. You do not have enough permission to do this action.</access-denied>
     </msg>
     <action>
       <Close>#{word.close}</Close>
@@ -1896,30 +1893,30 @@
       <name>Action Form</name>
     </label>
     <msg>
-      <repository-exception>Can not save this action. The name provided has some special character.</repository-exception>
-      <numberformat-exception>Can not save this action. The name provided must be a number format.</numberformat-exception>
-      <existed-action>The action name '{0}' is existing so choose another name please!</existed-action>
-      <unable-add-action>Unable add this action</unable-add-action>
-      <unable-add>Unable add this action! This node is root or you don't have enough permision</unable-add>
-      <not-support>The dialog '{0}' is not supported</not-support>
-      <no-permission-add>Access denied ! You have no right to add action here</no-permission-add>
-      <access-denied>Access denied! You haven't got permission to access this template.</access-denied>
-	  <lifecycle-invalid>Unable add this action. The lifecycle phase of action is invalid.</lifecycle-invalid>
+      <repository-exception>Cannot save this action. The name provided has some special characters.</repository-exception>
+      <numberformat-exception>Cannot save this action. The name provided must be in the numerical format.</numberformat-exception>
+      <existed-action>The action name '{0}' already exists. Please select another one.</existed-action>
+      <unable-add-action>Cannot add this action.</unable-add-action>
+      <unable-add>Cannot add this action. This node is root or you do not have enough permision.</unable-add>
+      <not-support>The dialog '{0}' is not supported.</not-support>
+      <no-permission-add>Access denied. You have no right to add an action here.</no-permission-add>
+      <access-denied>Access denied. You do not have permission to access this template.</access-denied>
+      <lifecycle-invalid>Cannot add this action. The lifecycle phase of action is invalid.</lifecycle-invalid>
     </msg>
-    <title>Add/Edit an Action</title>
+    <title>Add/Edit Action</title>
     <validator>
       <validator>Validator</validator>
-      <destPath>With path</destPath>
+      <destPath>With Path</destPath>
     </validator>
   </UIActionForm>
   <UIActionTypeForm>
     <label>
-      <actionType>Create an Action of Type</actionType>
+      <actionType>Create Action of Type</actionType>
     </label>
   </UIActionTypeForm>
   <PopupComponent>
     <title>
-      <UIOneNodePathSelector>Select location</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Select Location</UIOneNodePathSelector>
       <UIPermissionSelector>Permission Browser</UIPermissionSelector>
       <UICategoriesSelector>Add Categories</UICategoriesSelector>
     </title>
@@ -1927,9 +1924,9 @@
   <EditFormAction>
     <validator>
       <validator>Validator</validator>
-      <destPath>With path</destPath>
+      <destPath>With Path</destPath>
     </validator>
-    <title>Action form</title>
+    <title>Action Form</title>
   </EditFormAction>
   <!--
   #############################################################################
@@ -1938,18 +1935,18 @@
   -->
   <UIAddressBar>
     <msg>
-      <path-not-found>Path not found</path-not-found>
-      <access-denied>Access denied ! You have no right read node</access-denied>
+      <path-not-found>Path not found.</path-not-found>
+      <access-denied>Access denied. You have no right to read the node.</access-denied>
       <keyword-not-support>The keyword is invalid. Some characters are not supported.</keyword-not-support>
     </msg>
     <label>
       <exeButton>Go</exeButton>
-      <address>Address :</address>
+      <address>Address:</address>
     </label>
     <title>
       <exeButton>Go</exeButton>
-      <backButton>Back to previous node</backButton>
-      <showHistory>Show history address</showHistory>
+      <backButton>Back to the previous node</backButton>
+      <showHistory>Show the history address</showHistory>
     </title>
   </UIAddressBar>
   <!--
@@ -1968,10 +1965,10 @@
       <notificationType>Notification Type</notificationType>
     </label>
     <msg>
-      <not-support>We don't support this type of notification. Please choose another type we offer to you.</not-support>
+      <not-support>This notification type is not supported. Please select another one.</not-support>
       <watching-successfully>You are watching this document.</watching-successfully>
-      <unwatching-successfully>You have left the watcher list successfully.</unwatching-successfully>
-      <node-iswatching>This document is watched</node-iswatching>
+      <unwatching-successfully>You have left the watchers list successfully.</unwatching-successfully>
+      <node-iswatching>This document is watched.</node-iswatching>
     </msg>
   </UIWatchDocumentForm>
   <!--
@@ -1981,8 +1978,8 @@
   -->
   <UITaggingForm>
     <label>
-      <names>Tag names</names>
-      <linked>Linked tags</linked>
+      <names>Tag Names</names>
+      <linked>Linked Tags</linked>
       <tagSet>UITaggingForm</tagSet>
     </label>
     <action>
@@ -1990,14 +1987,14 @@
       <Cancel>#{word.close}</Cancel>
     </action>
     <msg>
-      <name-exist>Tag name '{0}' is existing</name-exist>
-      <tagName-invalid>Have some invalid characters in tag name.</tagName-invalid>
+      <name-exist>The tag name '{0}' already exists.</name-exist>
+      <tagName-invalid>The tag name contains some invalid characters.</tagName-invalid>
       <tag-name-empty>Your tag name is empty</tag-name-empty>
-      <tag-name-duplicate>Input tag names are duplicate.</tag-name-duplicate>
-      <tagName-too-long>One of the tags entered was too long. Tags must be less than 30 characters long</tagName-too-long>
+      <tag-name-duplicate>The input tag names are duplicate.</tag-name-duplicate>
+      <tagName-too-long>One of the tags entered was too long. The tag name must be less than 30 characters.</tagName-too-long>
     </msg>
     <introduction>
-      <tagName>(Use "," separator to add multiple tag)</tagName>
+      <tagName>(Seperate mutiple tags with the commas.)</tagName>
     </introduction>
   </UITaggingForm>
   <!--
@@ -2011,25 +2008,25 @@
     </label>
     <action>
       <AddLanguage>Add</AddLanguage>
-      <SetDefault>Set default</SetDefault>
+      <SetDefault>Set Default</SetDefault>
       <Cancel>#{word.cancel}</Cancel>
       <View>View</View>
     </action>
     <msg>
-      <access-denied>Access denied. You haven't got 'Add' permission in this node.</access-denied>
+      <access-denied>Access denied. You do not have the add permission in this node.</access-denied>
     </msg>
   </UIMultiLanguageForm>
   <UILanguageTypeForm>
     <label>
       <typeLang>Language</typeLang>
-      <default>Set default</default>
-      <defaultLang>Default language</defaultLang>
+      <default>Set Default</default>
+      <defaultLang>Default Language</defaultLang>
     </label>
   </UILanguageTypeForm>
   <UILanguageDialogForm>
     <msg>
-      <select-lang>You must select one language and fill information before save</select-lang>
-      <access-denied>Access denied. You haven't got 'Add' permission in this node.</access-denied>
+      <select-lang>You must select one language and fill information before saving.</select-lang>
+      <access-denied>Access denied. You do not have the add permission in this node.</access-denied>
     </msg>
     <action>
       <Save>#{word.save}</Save>
@@ -2043,7 +2040,7 @@
   -->
   <UIViewMetadataContainer>
     <msg>
-      <path-not-found>Node doesn't support this view</path-not-found>
+      <path-not-found>Node does not support this view.</path-not-found>
     </msg>
   </UIViewMetadataContainer>
   <!--
@@ -2064,7 +2061,7 @@
   </metadataForm>
   <UIViewMetadataTemplate>
     <msg>
-      <access-denied>Access denied! You are not owner or have not got 'Edit' permission in this node.</access-denied>
+      <access-denied>Access denied! You are not the owner or have not got the edit permission in this node.</access-denied>
     </msg>
   </UIViewMetadataTemplate>
   <!--
@@ -2074,21 +2071,21 @@
   -->
   <ECMNameValidator>
     <msg>
-      <Invalid-char>There are some invalid characters in field '{0}'. Type another value, please!</Invalid-char>
-      <empty-input>The value of field '{0}' is null or empty!</empty-input>
+      <Invalid-char>The field '{0}' contains some invalid characters. Please enter another value.</Invalid-char>
+      <empty-input>The value of the field '{0}' is null or empty.</empty-input>
     </msg>
   </ECMNameValidator>
   <DateTimeValidator>
     <msg>
-      <Invalid-input>Field '{0}' with value '{1}' is invalid</Invalid-input>
+      <Invalid-input>The field '{0}' with the value '{1}' is invalid.</Invalid-input>
     </msg>
   </DateTimeValidator>
   <CronExpressionValidator>
-    <invalid-input>Your cron expression is invalid. Please check Quartz cron expression for syntax.</invalid-input>
+    <invalid-input>Your cron expression is invalid. Please check the syntax of the cron expression.</invalid-input>
   </CronExpressionValidator>
   <EmptyFieldValidator>
     <msg>
-      <empty-input>Please fill out the field '{0}'</empty-input>
+      <empty-input>Please fill out the field '{0}'.</empty-input>
     </msg>
   </EmptyFieldValidator>
   <!--
@@ -2097,25 +2094,25 @@
   ###################################################################################
   -->
   <ReferentialIntegrityException>
-    <msg>Action failed! There are some reference properties in the workspace still refer to this item!</msg>
+    <msg>Action failed. There are still some reference items in the workspace.</msg>
   </ReferentialIntegrityException>
   <ItemExistsException>
     <msg>This item is existing!</msg>
   </ItemExistsException>
   <AccessControlException>
-    <msg>Access denied. You haven't got enough permission to do this action</msg>
+    <msg>Access denied. You do not have permission to do this action.</msg>
   </AccessControlException>
   <AccessDeniedException>
-    <msg>Access denied</msg>
+    <msg>Access denied.</msg>
   </AccessDeniedException>
   <ItemNotFoundException>
-    <msg>Item not found!Maybe, It was removed or item changed!</msg>
+    <msg>Item not found. Maybe, it was removed or changed.</msg>
   </ItemNotFoundException>
   <PathNotFoundException>
-    <msg>Path not found!Maybe, It was removed or path changed!</msg>
+    <msg>Path not found! Maybe, it was removed or changed.</msg>
   </PathNotFoundException>
   <ConstraintViolationException>
-    <msg>You can't do action because of some constraints</msg>
+    <msg>You cannot do this action because of some constraints.</msg>
   </ConstraintViolationException>
   <!--
   ###################################################################################
@@ -2136,7 +2133,7 @@
     </label>
     <action>
       <Save>Save</Save>
-      <UnsubcriberLifeCycle>Unsubcriber</UnsubcriberLifeCycle>
+      <UnsubcriberLifeCycle>Unsubscriber</UnsubcriberLifeCycle>
       <Cancel>Cancel</Cancel>
     </action>
   </UIPublicationForm>
@@ -2148,13 +2145,13 @@
   <UIWorkspaceList>
     <label>
       <workspaceName>Workspace</workspaceName>
-      <rootNodeInfo>Root path</rootNodeInfo>
-      <rootPath>Root path</rootPath>
+      <rootNodeInfo>Root Path</rootNodeInfo>
+      <rootPath>Root Path</rootPath>
     </label>
   </UIWorkspaceList>
   <pathSelector>
     <title>
-      <UIOneNodePathSelector>Node selector</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Node Selector</UIOneNodePathSelector>
     </title>
   </pathSelector>
   <!--
@@ -2164,29 +2161,29 @@
   -->
   <EmailAddressValidator>
     <msg>
-      <Invalid-input>Email address is invalid!</Invalid-input>
+      <Invalid-input>The email address is invalid.</Invalid-input>
     </msg>
   </EmailAddressValidator>
   <UIFormInputSetWithAction>
     <msg>
-      <confirm-delete>Do you really want to delete?</confirm-delete>
+      <confirm-delete>Are you sure to delete?</confirm-delete>
     </msg>
   </UIFormInputSetWithAction>
   <RepeatCountValidator>
     <msg>
-      <invalid-value>Invalid value in field 'Repeat count'. Allow Integer type or -1 only</invalid-value>
+      <invalid-value>The value in the field 'Repeat Count' is invalid. Integer type or -1 only is allowed.</invalid-value>
     </msg>
   </RepeatCountValidator>
   <RepeatIntervalValidator>
     <msg>
-      <invalid-value>Invalid value in field 'Time interval'. Allow Long type only</invalid-value>
+      <invalid-value>The value in the field 'Time Interval' is invalid. Long type only is allowed.</invalid-value>
     </msg>
   </RepeatIntervalValidator>
   <UIPermissionSelector>
     <label>
-      <selectGroup>Select group</selectGroup>
-      <selectUser>Select user</selectUser>
-      <selectMembership>Select membership</selectMembership>
+      <selectGroup>Select Group</selectGroup>
+      <selectUser>Select User</selectUser>
+      <selectMembership>Select Membership</selectMembership>
     </label>
   </UIPermissionSelector>
   <!--
@@ -2196,8 +2193,8 @@
   -->
   <ECMStandardPropertyNameValidator>
     <msg>
-      <empty-input>The value of field '{0}' is null or empty!</empty-input>
-      <Invalid-char>There are some invalid characters in field '{0}'. Type another value, please!</Invalid-char>
+      <empty-input>The value of the field '{0}' is null or empty.</empty-input>
+      <Invalid-char>The field '{0}'contains some invalid characters. Please enter another value.</Invalid-char>
     </msg>
   </ECMStandardPropertyNameValidator>
   <!--
@@ -2207,13 +2204,13 @@
   -->
   <SearchValidator>
     <msg>
-      <empty-input>The value of this field is null or empty!</empty-input>
-      <Invalid-char>There are some invalid characters in this field. Type another value, please!</Invalid-char>
-      <Invalid-char2>Number must be following the char '~'</Invalid-char2>
-      <Invalid-char1>Number follow the char '~' must between 0 to 1</Invalid-char1>
-      <Invalid-char3>Number must be following the char '^'</Invalid-char3>
-      <Invalid-char4>No space is allow near the char '~'</Invalid-char4>
-      <Invalid-char5>No space is allow near the char '^'</Invalid-char5>
+      <empty-input>The value of this field is null or empty.</empty-input>
+      <Invalid-char>This field contains some invalid characters. Please enter another value.</Invalid-char>
+      <Invalid-char2>Number must be followed by the char '~'.</Invalid-char2>
+      <Invalid-char1>Number following the char '~' must between 0 to 1.</Invalid-char1>
+      <Invalid-char3>Number must be followed by the char '^'.</Invalid-char3>
+      <Invalid-char4>Spaces are not allowed near the char '~'.</Invalid-char4>
+      <Invalid-char5>Spaces are not allowed near the char '^'.</Invalid-char5>
     </msg>
   </SearchValidator>
   <!--
@@ -2256,13 +2253,13 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
-      <mediumSize>Thumbnail image</mediumSize>
+      <mediumSize>Thumbnail Image</mediumSize>
     </label>
     <msg>
-      <mimetype-incorrect>Incorrect file type. Choose one image type to add thumbnail(JPG, PNG, GIF)</mimetype-incorrect>
-      <access-denied>Access denied. You don't have permission to add thumbnail for this node.</access-denied>
-      <confirm-delete>Do you want to remove this thumbnail?</confirm-delete>
-      <is-checked-in>This node is checked-in. Please check out before do any action.</is-checked-in>
+      <mimetype-incorrect>Incorrect file type. Thumbnails can only be created from .JPG, .PNG or .GIF files.</mimetype-incorrect>
+      <access-denied>Access denied. You do not have permission to add a thumbnail to this node.</access-denied>
+      <confirm-delete>Are you sure to remove this thumbnail?</confirm-delete>
+      <is-checked-in>This node is checked in. Please check out before performing any action.</is-checked-in>
     </msg>
     <title>
       <remove-thumbnail>Remove this thumbnail</remove-thumbnail>
@@ -2301,9 +2298,9 @@
   -->
   <UIGroupMemberSelector>
     <label>
-      <selectGroup>Select group</selectGroup>
-      <selectUser>Select user</selectUser>
-      <selectMembership>Select membership</selectMembership>
+      <selectGroup>Select Group</selectGroup>
+      <selectUser>Select User</selectUser>
+      <selectMembership>Select Membership</selectMembership>
     </label>
   </UIGroupMemberSelector>
   <!--
@@ -2331,7 +2328,7 @@
   </workflow_destpath>
   <PublicationService>
     <WorkflowPublicationPlugin>
-      <nodeValidationRequest>The node has been validation requested</nodeValidationRequest>
+      <nodeValidationRequest>The node has been requested for validation.</nodeValidationRequest>
     </WorkflowPublicationPlugin>
   </PublicationService>
 
@@ -2340,11 +2337,11 @@
   Access directly a JCR FE drive
   -->
   <UIJCRExplorerPortlet>
-    <nopermission>There is no drive or you don't have permission to access this drive</nopermission>
+    <nopermission>There is no drive or you do not have permission to access this drive.</nopermission>
   </UIJCRExplorerPortlet>
 
   <UIJcrExplorerEditForm>
-    <title>File Explorer Edit Form</title>
+    <title>Edit File Explorer</title>
     <action>
       <Edit>Edit</Edit>
       <Save>Save</Save>
@@ -2352,18 +2349,18 @@
     </action>
     <label>
       <repository>Repository</repository>
-      <categoryMandatoryWhenFileUpload>Specify a category when uploading a file</categoryMandatoryWhenFileUpload>
-      <uploadFileSizeLimitMB>Upload file size limit(MB)</uploadFileSizeLimitMB>
-      <isDirectlyDrive>Directly Drive</isDirectlyDrive>
+      <categoryMandatoryWhenFileUpload>Specify a category while uploading a file.</categoryMandatoryWhenFileUpload>
+      <uploadFileSizeLimitMB>The size limit of the uploaded(MB)</uploadFileSizeLimitMB>
+      <isDirectlyDrive>Direct Drive</isDirectlyDrive>
       <driveName>Drive Name</driveName>
       <usecase>Select Type</usecase>
-      <SelectNodePath>Select path</SelectNodePath>
+      <SelectNodePath>Select Path</SelectNodePath>
       <editInNewWindow>Edit in new window</editInNewWindow>
       <showTopBar>Show Top Bar</showTopBar>
       <showActionBar>Show Action Bar</showActionBar>
       <showSideBar>Show Left Bar</showSideBar>
       <showFilterBar>Show Filter Bar</showFilterBar>
-      <nodePath>Select path</nodePath>
+      <nodePath>Select Path</nodePath>
     </label>
   </UIJcrExplorerEditForm>
 
@@ -2380,10 +2377,10 @@
       <DriveNameInput>UIJcrExplorerEditForm</DriveNameInput>
     </label>
     <msg>
-      <not-have-social>The Social usecase is not available, the Selection one will be used instead.</not-have-social>
-      <personal-usecase>The private drive of current user will be used when you choose Personal usecase.</personal-usecase>
-            <drive-edit-permission>Can not edit drive name. Please, click on Edit button</drive-edit-permission>
-            <path-edit-permission>Can not edit path. Please, click on Edit button</path-edit-permission>
+      <not-have-social>The Social usecase is not available. Use the Selection one instead.</not-have-social>
+      <personal-usecase>The private drive of the current user will be used when you select the Personal usecase.</personal-usecase>
+      <drive-edit-permission>Cannot edit the drive name. Please click the Edit button.</drive-edit-permission>
+      <path-edit-permission>Cannot edit the path. Please click the Edit button.</path-edit-permission>
     </msg>
   </UIJcrExplorerEditForm>
 
@@ -2395,7 +2392,7 @@
 
   <PopupSelectPath>
     <title>
-      <UIOneNodePathSelector>Select node</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Select Node</UIOneNodePathSelector>
     </title>
   </PopupSelectPath>
 
@@ -2410,20 +2407,20 @@
   -->
   <UIActionBar>
     <tooltip>
-      <AddSymLink>Add Sym Link</AddSymLink>
+      <AddSymLink>Add Symlink</AddSymLink>
       <AddLocalizationLink>Add Translation</AddLocalizationLink>
     </tooltip>
   </UIActionBar>
 
   <UIPopupWindow>
     <title>
-      <UISymLinkManager>Add Link Form</UISymLinkManager>
+      <UISymLinkManager>Symlink Manager</UISymLinkManager>
     </title>
   </UIPopupWindow>
 
   <UISymLinkForm>
     <label>
-      <symLinkName>Sym Link Name</symLinkName>
+      <symLinkName>Symlink Name</symLinkName>
       <pathNode>Path Node</pathNode>
     </label>
     <action>
@@ -2431,25 +2428,25 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <addFolder-successful>Add Symbolic Link '{0}' Successful</addFolder-successful>
-      <name-invalid>Please enter Symbolic Link Name!</name-invalid>
+      <addFolder-successful>The symlink '{0}' is added successfully.</addFolder-successful>
+      <name-invalid>Please enter the symlink name.</name-invalid>
       <name-not-allowed>This name is not allowed.</name-not-allowed>
-      <fileName-error>Invalid file name</fileName-error>
-      <constraint-violation>Current node does not allow to add '{0}' node type</constraint-violation>
-      <repository-exception>Access deny! You don't have add permission in this node</repository-exception>
-      <numberformat-exception>Can not save this folder. The name provided must be a number format</numberformat-exception>
-      <path-node-invalid>Please enter Path Node!</path-node-invalid>
+      <fileName-error>The file name is invalid.</fileName-error>
+      <constraint-violation>Cannot add the'{0}' node type to the current node.</constraint-violation>
+      <repository-exception>Access denied! You do not have the add permission in this node.</repository-exception>
+      <numberformat-exception>Cannot save this folder. The name provided must be a numerical format.</numberformat-exception>      
+      <path-node-invalid>Please enter the path node.</path-node-invalid>
       <path-node-not-allowed>This name is not allowed.</path-node-not-allowed>
-      <non-node>Please choose trust target node Or you don't have enough rights to read this node</non-node>
-      <cannot-save>Some constraints were violated during that action.</cannot-save>
-      <item-exists-exception>The node with the same name already exists</item-exists-exception>
-      <UnsupportedRepositoryOperationException>This target node is not referenceable</UnsupportedRepositoryOperationException>
+      <non-node>Please select the trust target node; or you do not have right to read this node.</non-node>
+      <cannot-save>An error occurred while creating the symlink.</cannot-save>
+      <item-exists-exception>The node name already exists.</item-exists-exception>
+      <UnsupportedRepositoryOperationException>This target node is not refered.</UnsupportedRepositoryOperationException>
     </msg>
   </UISymLinkForm>
 
   <UIPopupSymLink>
     <title>
-      <UIOneNodePathSelector>Choose Target Node</UIOneNodePathSelector>
+      <UIOneNodePathSelector>Select Target Node</UIOneNodePathSelector>
     </title>
   </UIPopupSymLink>
   <UIPopupSymLink>
@@ -2460,32 +2457,32 @@
 
   <ECMContextMenu>
     <event>
-      <AddSymLink>Add Sym Link</AddSymLink>
+      <AddSymLink>Add Symlink</AddSymLink>
       <AddLocalizationLink>Add Translation</AddLocalizationLink>
     </event>
   </ECMContextMenu>
 
   <UIWorkingArea>
     <msg>
-      <create-link-problem>You can not create a link for node '{0}' at '{1}'</create-link-problem>
-      <dest-node-is-link>The destination node '{0}' is already a symlink. So you can not create a symlink inside it</dest-node-is-link>
-      <selected-is-link>The selected node '{0}' is already a link, you can not create a link point to another link</selected-is-link>
-      <confirm-create-link>Do you really want to create a link to this location?</confirm-create-link>
+      <create-link-problem>You cannot create a link for the node '{0}' at '{1}'.</create-link-problem>
+      <dest-node-is-link>The destination node '{0}' is already a symlink, so you cannot create a symlink inside it.</dest-node-is-link>
+      <selected-is-link>The selected node '{0}' is already a link, so you cannot create a link point to another link.</selected-is-link>
+      <confirm-create-link>Do you want to create a link to this location?</confirm-create-link>    
     </msg>
   </UIWorkingArea>
 
   <ECMContextMenu>
     <event>
-      <CreateLink>Create link</CreateLink>
+      <CreateLink>Create Link</CreateLink>
     </event>
   </ECMContextMenu>
 
   <UIWorkspaceList>
     <msg>
-      <AccessDeniedException>Access deny! You don't have read permission in this workspace</AccessDeniedException>
+      <AccessDeniedException>Access denied! You do not have the read permission in this workspace.</AccessDeniedException>
     </msg>
     <label>
-      <taxonomyTree>Taxonomy Tree</taxonomyTree>
+      <taxonomyTree>Category Tree</taxonomyTree>
     </label>
   </UIWorkspaceList>
 
@@ -2497,8 +2494,8 @@
 
   <UITreeTaxonomyList>
     <label>
-      <taxonomyTree>Taxonomy Tree</taxonomyTree>
-      <rootNodePath>Root tree</rootNodePath>
+      <taxonomyTree>Category Tree</taxonomyTree>
+      <rootNodePath>Root Tree</rootNodePath>
       <rootNodeInfo>UITreeTaxonomyList</rootNodeInfo>
     </label>
   </UITreeTaxonomyList>
@@ -2512,8 +2509,8 @@
   <UISimpleCategoryManager>
     <tab>
       <label>
-        <UICategoriesAddedList>Referenced categories</UICategoriesAddedList>
-        <UIOneNodePathSelector>Select category</UIOneNodePathSelector>
+        <UICategoriesAddedList>Referenced Categories</UICategoriesAddedList>
+        <UIOneNodePathSelector>Select Category</UIOneNodePathSelector>
       </label>
     </tab>
   </UISimpleCategoryManager>
@@ -2521,7 +2518,7 @@
   <UICategoryManager>
     <tab>
       <label>
-        <UIOneTaxonomySelector>Select category</UIOneTaxonomySelector>
+        <UIOneTaxonomySelector>Select Category</UIOneTaxonomySelector>
       </label>
     </tab>
   </UICategoryManager>
@@ -2538,7 +2535,7 @@
   </UIPopupWindow>
   <UICategoriesAddedList>
     <msg>
-      <ItemExistsException>A category with the same name already exists</ItemExistsException>
+      <ItemExistsException>The category name already exists.</ItemExistsException>
     </msg>
   </UICategoriesAddedList>
 
@@ -2571,53 +2568,53 @@
 
   <UIWorkingArea>
     <msg>
-      <can-not-move-to-itself>Can not move: The destination folder is the same as the source folder</can-not-move-to-itself>
+      <can-not-move-to-itself>Cannot move because the destination folder is the source one.</can-not-move-to-itself>
     </msg>
   </UIWorkingArea>
 
   <UIImportNode>
     <label>
       <behavior>UUID Behaviour</behavior>
-      <versionHistory>Version history</versionHistory>
+      <versionHistory>Version History</versionHistory>
     </label>
     <msg>
-      <history-invalid-type>Invalid version history file type. The right file must be a zip file</history-invalid-type>
-      <history-invalid-content>Invalid version history data content. You should choose the right file to import.</history-invalid-content>
+      <history-invalid-type>Invalid file type in the version history. Only .zip files are supported.</history-invalid-type>
+      <history-invalid-content>Invalid content in the version history data. Please select a supported file type to import.</history-invalid-content>
     </msg>
   </UIImportNode>
 
   <Import>
     <Behavior>
-      <type0>Create new</type0>
-      <type1>Remove existing</type1>
-      <type2>Replace existing</type2>
+      <type0>Create New</type0>
+      <type1>Remove Existing</type1>
+      <type2>Replace Existing</type2>
       <type3>Throw Exception</type3>
     </Behavior>
   </Import>
 
   <UIExportNode>
     <action>
-      <ExportHistory>Export version history</ExportHistory>
+      <ExportHistory>Export Version History</ExportHistory>
     </action>
   </UIExportNode>
 
   <UIPopupMenu>
     <msg>
-      <node-locked-other-person>This node or parent node is being locked by other user, you can not delete!</node-locked-other-person>
+      <node-locked-other-person>This node or its parent node is being locked by another user, so you cannot delete it.</node-locked-other-person>
     </msg>
   </UIPopupMenu>
 
   <Import>
     <label>
-      <docview>Document view</docview>
-      <sysview>System view</sysview>
+      <docview>Document View</docview>
+      <sysview>System View</sysview>
     </label>
   </Import>
 
   <UIDocumentForm>
     <msg>
-      <not-support>Cannot load template of '{0}'.</not-support>
-      <do-not-permission>You don't have permission to load template of '{0}'.</do-not-permission>
+      <not-support>Cannot load the template of '{0}'.</not-support>
+      <do-not-permission>You do not have permission to load the template of '{0}'.</do-not-permission>
     </msg>
   </UIDocumentForm>
 
@@ -2639,7 +2636,7 @@
 
   <UIPopupMenu>
     <msg>
-      <can-not-unlock-node-is-checked-in>Can not unlock because node '{0}' or ancestor of '{0}' is checked-in</can-not-unlock-node-is-checked-in>
+      <can-not-unlock-node-is-checked-in>Cannot unlock because the node '{0}' or its ancestor is checked in.</can-not-unlock-node-is-checked-in>
     </msg>
   </UIPopupMenu>
 
@@ -2648,22 +2645,22 @@
   -->
   <UIActionBar>
     <msg>
-        <cannot-enable-version>Can not enable version node</cannot-enable-version>
+        <cannot-enable-version>Cannot enable versioning node.</cannot-enable-version>
       </msg>
   </UIActionBar>
   <UIPopupMenu>
     <msg>
-        <cannot-readsource>Can not read data from source node</cannot-readsource>
+        <cannot-readsource>Cannot read data from the source node.</cannot-readsource>
     </msg>
   </UIPopupMenu>
   <UIUploadForm>
     <msg>
-      <upload-not-null>You need upload file before add category</upload-not-null>
+      <upload-not-null>Please upload the file before adding a category.</upload-not-null>
     </msg>
   </UIUploadForm>
   <UIActionBar>
     <msg>
-      <allow-setProperty>You must select set property for this group</allow-setProperty>
+      <allow-setProperty>You must set property for this group.</allow-setProperty>
     </msg>
   </UIActionBar>
 
@@ -2697,7 +2694,7 @@
       <PendingDocumentsCenter>Pending Documents Center</PendingDocumentsCenter>
       <RecordsManagementCenter>Records Management Center</RecordsManagementCenter>
       <SharedUsersSpace>Shared Users Space</SharedUsersSpace>
-      <Systemfiles>System files</Systemfiles>
+      <Systemfiles>System Files</Systemfiles>
       <ValidationRequestsDocumentsCenter>Validation Requests Documents Center</ValidationRequestsDocumentsCenter>
     </label>
   </Drives>
@@ -2737,7 +2734,7 @@
   <UIUploadContainer>
     <tab>
       <label>
-        <UIListMetadata>List external metadatas</UIListMetadata>
+        <UIListMetadata>List External Metadata</UIListMetadata>
       </label>
     </tab>
   </UIUploadContainer>
@@ -2760,90 +2757,90 @@
   </Comments>
   <UIDocumentInfo>
     <msg>
-      <confirm-deletecomment>Do you really want to delete this comment?</confirm-deletecomment>
+      <confirm-deletecomment>Are you sure to delete this comment?</confirm-deletecomment>
     </msg>
   </UIDocumentInfo>
  <UIDrivesBrowser>
   <msg>
-    <drive-not-exist>The drive '{0}' was not found or you don't have permission to access in this repository</drive-not-exist>
+    <drive-not-exist>The drive '{0}' was not found; or you do not have permission to access this repository.</drive-not-exist>
   </msg>
  </UIDrivesBrowser>
 
  <UIExportNode>
   <msg>
-    <OutOfMemoryError>You should choose SystemView when export large data</OutOfMemoryError>
+    <OutOfMemoryError>You should select System View while exporting large data.</OutOfMemoryError>
   </msg>
  </UIExportNode>
  <Taxonomy>
     <msg>
-      <AccessDeniedException>You don't have permission to access in these taxonomies</AccessDeniedException>
+      <AccessDeniedException>You do not have permission to access these category trees.</AccessDeniedException>
     </msg>
   </Taxonomy>
 
   <UIJcrExplorerEditForm>
     <msg>
-      <notNullDriveName>Drive Name is null or empty. Fill Drive Name, please!</notNullDriveName>
-      <notNullPath>Path is null or empty. Fill the path, please!</notNullPath>
+      <notNullDriveName>The drive name is null or empty. Please fill out the Drive Name field.</notNullDriveName>
+      <notNullPath>The path is null or empty. Please fill out the path.</notNullPath>
     </msg>
   </UIJcrExplorerEditForm>
 
   <UIViewSearchResult>
     <tooltip>
-      <remove-attachment>Do you want to remove this attachment file?</remove-attachment>
+      <remove-attachment>Are you sure to remove this attachment file?</remove-attachment>
     </tooltip>
   </UIViewSearchResult>
 
   <SameNamePopup>
     <title>
-      <UIUploadBehaviorWithSameName>Upload file</UIUploadBehaviorWithSameName>
+      <UIUploadBehaviorWithSameName>Upload File</UIUploadBehaviorWithSameName> 
     </title>
   </SameNamePopup>
 
   <UISingleUploadForm>
-    <title>Upload a file</title>
+    <title>Upload File</title>
     <label>
-      <upload>Select a file</upload>
+      <upload>Select File</upload>
       <name>Name</name>
-      <fieldListTaxonomy>List Taxonomy</fieldListTaxonomy>
+      <fieldListTaxonomy>Categories List</fieldListTaxonomy>
     </label>
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <msg>
-      <fileName-error>Please make sure that you uploaded the selected file to the server using the upload icon.</fileName-error>
-      <taxonomyPath-error>Please choose the taxonomy!</taxonomyPath-error>
-      <fileName-invalid>Have some invalid characters in file name. Type file name or upload other file, please.</fileName-invalid>
-      <fileSize-too-big>File size is too big. You should split to some small files or use WebDav upload.</fileSize-too-big>
-      <name-is-exist>The name '{0}' is existing. You can not upload same name file except for 'nt:file'</name-is-exist>
-      <contraint-violation>Can't add node '{0}' to this node because it is not allowed as child's node type for parent node type</contraint-violation>
-      <lock-exception>This node is locked. Some action will be run unlikely.</lock-exception>
+      <fileName-error>Please make sure that you uploaded the selected file to the server using the Upload icon.</fileName-error>
+      <taxonomyPath-error>Please select the category.</taxonomyPath-error>
+      <fileName-invalid>The file name contains some invalid characters. Please retype the file name or upload another file.</fileName-invalid>
+      <fileSize-too-big>The file size is too big. You should split it into some small files or use WebDav to upload.</fileSize-too-big>
+      <name-is-exist>The name '{0}' already exists. You cannot upload the file with the same name except for 'nt:file'.</name-is-exist>
+      <contraint-violation>Cannot add the node '{0}' to this node because it is not allowed as child's node type for parent node type.</contraint-violation>
+      <lock-exception>This node is locked. It is unlikely to run some actions.</lock-exception>
     </msg>
   </UISingleUploadForm>
   <UISingleUploadContent>
     <label>
-      <fileName>File name</fileName>
-      <nodeName>Node name</nodeName>
-      <fileSize>File size</fileSize>
+      <fileName>File Name</fileName>
+      <nodeName>Node Name</nodeName>
+      <fileSize>File Size</fileSize>
       <mimeType>Mime Type</mimeType>
     </label>
     <title>
-      <uploaded-file>Uploaded file</uploaded-file>
-      <external-metadata>External metadatas</external-metadata>
-      <metadata-name>Metadata name</metadata-name>
+      <uploaded-file>Uploaded File</uploaded-file>
+      <external-metadata>External Metadata</external-metadata>
+      <metadata-name>Metadata Name</metadata-name>
       <action>Action</action>
     </title>
     <tooltip>
       <Edit>Edit</Edit>
     </tooltip>
     <msg>
-      <has-not-template>Template of '{0}' is null or empty.</has-not-template>
+      <has-not-template>The template of '{0}' is null or empty.</has-not-template>
     </msg>
   </UISingleUploadContent>
   <UISingleUploadContainer>
     <action>
       <Close>#{word.close}</Close>
-      <AddMetadata>Add metadata</AddMetadata>
+      <AddMetadata>Add Metadata</AddMetadata>
     </action>
     <tab>
       <label>
@@ -2861,7 +2858,7 @@
   <UISingleUploadContainer>
     <tab>
       <label>
-        <UIListMetadata>List external metadatas</UIListMetadata>
+        <UIListMetadata>List External Metadata</UIListMetadata>
       </label>
     </tab>
   </UISingleUploadContainer>
@@ -2872,7 +2869,7 @@
   </AddMetadataPopup>
   <UISingleExternalMetadataForm>
     <msg>
-      <can-not-add>This node can not add mixin.</can-not-add>
+      <can-not-add>This node cannot add mixin.</can-not-add>
     </msg>
   </UISingleExternalMetadataForm>
   <UISingleAddMetadataForm>
@@ -2888,7 +2885,7 @@
       <Favourites>Favorites</Favourites>
       <Hidden>Hidden</Hidden>
       <Trash>Trash</Trash>
-      <Configuration>Set up preferences</Configuration>
+      <Configuration>Set Up Preferences</Configuration>
     </label>
     <title>
       <allItems>All Items</allItems>
@@ -2920,14 +2917,14 @@
     </header>
     <tooltip>
       <View>View</View>
-      <RemoveFromFavourite>Remove from favorite</RemoveFromFavourite>
-      <AddToFavourite>Add to favorite</AddToFavourite>
-      <timelineFavouriteDESC>Sort by favorite in descending order</timelineFavouriteDESC>
-      <timelineFavouriteASC>Sort by favorite in ascending order</timelineFavouriteASC>
-      <timelineDateTimeASC>Sort by modified time in ascending order</timelineDateTimeASC>
-      <timelineDateTimeDESC>Sort by modified time in descending order</timelineDateTimeDESC>
-      <timelineNameASC>Sort by name in ascending order</timelineNameASC>
-      <timelineNameDESC>Sort by name in descending order</timelineNameDESC>
+      <RemoveFromFavourite>Remove from Favorite</RemoveFromFavourite>
+      <AddToFavourite>Add to Favorite</AddToFavourite>
+      <timelineFavouriteDESC>Sort by Favorite: Descending</timelineFavouriteDESC>
+      <timelineFavouriteASC>Sort by Favorite: Ascending</timelineFavouriteASC>
+      <timelineDateTimeASC>Sort by Modified Time: Ascending</timelineDateTimeASC>
+      <timelineDateTimeDESC>Sort by Modified Time: Descending</timelineDateTimeDESC>
+      <timelineNameASC>Sort by Name: Ascending</timelineNameASC>
+      <timelineNameDESC>Sort by Name: Descending</timelineNameDESC>
     </tooltip>
   </UIDocumentInfo>
 
@@ -2954,7 +2951,7 @@
       <Documents>Document</Documents>
       <Contents>Content</Contents>
     </label>
-    <title>Set up filter preferences</title>
+    <title>Set Up Filter Preferences</title>
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
@@ -2964,26 +2961,26 @@
   <UIAllItemsByType>
     <label>
     	<ByType>Filter By Type</ByType>
-      <DocumentFilterConfiguration>Set up filter preferences</DocumentFilterConfiguration>
+      <DocumentFilterConfiguration>Set Up Filter Preferences</DocumentFilterConfiguration>
     </label>
     <title>
       <ShowVideo>Show all video files</ShowVideo>
       <ShowMusic>Show all music files</ShowMusic>
       <ShowImages>Show all image files</ShowImages>
       <ShowDocuments>Show all document files</ShowDocuments>
-      <ShowContents>Show all contents type document</ShowContents>
+      <ShowContents>Show all document types</ShowContents>
     </title>
   </UIAllItemsByType>
 
   <Views>
     <label>
-      <slide-show>Slide show</slide-show>
-      <timeline-view>Timeline view</timeline-view>
+      <slide-show>Slide Show</slide-show>
+      <timeline-view>Timeline View</timeline-view>
     </label>
   </Views>
   <ECMContextMenu>
     <event>
-      <PlayMedia>Play media</PlayMedia>
+      <PlayMedia>Play Media</PlayMedia>
     </event>
   </ECMContextMenu>
   <UIPopupWindow>
@@ -2999,7 +2996,7 @@
       <showHiddens>Hidden</showHiddens>
       <showTrash>Trash</showTrash>
     </label>
-    <title>Set up filter preferences</title>
+    <title>Set Up Filter Preferences</title>
     <action>
       <Save>#{word.save}</Save>
       <Cancel>#{word.cancel}</Cancel>
@@ -3008,7 +3005,7 @@
 
   <EmptyTrashManageComponent>
     <msg>
-      <confirm-delete>Empty all items from trash?</confirm-delete>
+      <confirm-delete>Are you sure to empty all items from trash?</confirm-delete>
     </msg>
   </EmptyTrashManageComponent>
   <UICategoryForm>
@@ -3022,12 +3019,12 @@
   </UICategoryForm>
   <UIPopupWindow>
     <title>
-      <UICategoryForm>Add category</UICategoryForm>
+      <UICategoryForm>Add Category</UICategoryForm>
     </title>
   </UIPopupWindow>
   <UIActionBar>
     <tooltip>
-      <AddCategory>Add category</AddCategory>
+      <AddCategory>Add Category</AddCategory>
     </tooltip>
    </UIActionBar>
 
@@ -3041,40 +3038,37 @@
     </label>
    </UITaggingForm>
 
-
-
-   <UITagExplorer>
+  <UITagExplorer>
     <title>
-      <EditPrivateTags>Edit private tags</EditPrivateTags>
-      <PublicTags>Public tags</PublicTags>
-      <EditPublicTags>Edit public tags</EditPublicTags>
-      <PrivateTags>Private tags</PrivateTags>
-     </title>
-   </UITagExplorer>
+      <EditPrivateTags>Edit Private Tags</EditPrivateTags>
+      <PublicTags>Public Tags</PublicTags>
+      <EditPublicTags>Edit Public Tags</EditPublicTags>
+      <PrivateTags>Private Tags</PrivateTags>
+    </title>
+  </UITagExplorer>
 
   <UIEditingTagsForm>
     <header>
       <name>Name</name>
-      <relatedDocuments>Related documents</relatedDocuments>
+      <relatedDocuments>Related Documents</relatedDocuments>
       <action>Action</action>
     </header>
-
-  <action>
-    <title>
-      <EditTag>Edit tag</EditTag>
-      <RemoveTag>Remove tag</RemoveTag>
-      <AddTag>Add tag</AddTag>
-    </title>
-  </action>
+    <action>
+      <title>
+        <EditTag>Edit Tag</EditTag>
+        <RemoveTag>Remove Tag</RemoveTag>
+        <AddTag>Add Tag</AddTag>
+      </title>
+    </action>
     <msg>
-      <confirm-remove>Do you want to delete?</confirm-remove>
+      <confirm-remove>Are you sure to delete this tag?</confirm-remove>
     </msg>
   </UIEditingTagsForm>
 
 
   <UIPopupWindow>
     <title>
-      <UIEditingTagsForm>Edit tag form</UIEditingTagsForm>
+      <UIEditingTagsForm>Edit Tag</UIEditingTagsForm>
     </title>
   </UIPopupWindow>
 
@@ -3084,31 +3078,31 @@
       <Cancel>#{word.cancel}</Cancel>
     </action>
     <label>
-      <tagName>Tag name</tagName>
-      <relatedDocuments>Related documents</relatedDocuments>
+      <tagName>Tag Name</tagName>
+      <relatedDocuments>Related Documents</relatedDocuments>
     </label>
   </UITagForm>
 
   <TagPopup>
     <title>
-      <UITagForm>Tag form</UITagForm>
+      <UITagForm>Tag</UITagForm>
     </title>
   </TagPopup>
 
     <UIPopupMenu>
     <msg>
-      <node-locked-editing>This node with path {0} is being locked by other user for editing!</node-locked-editing>
+      <node-locked-editing>You cannot edit this node with the path {0}. It is being locked by another user.</node-locked-editing>
     </msg>
   </UIPopupMenu>
   <UITagStyleForm>
     <msg>
-      <error-update>Error when updating</error-update>
+      <error-update>An error occurred while updating the tag style.</error-update>
     </msg>
   </UITagStyleForm>
 
   <UIPopupMenu>
     <msg>
-      <editTagAccessDenied>Access denied!</editTagAccessDenied>
+      <editTagAccessDenied>Access denied.</editTagAccessDenied>
     </msg>
   </UIPopupMenu>
 
@@ -3120,28 +3114,28 @@
 
     <PopupComponent>
     <title>
-      <UINodeTypeSelector>Select node type</UINodeTypeSelector>
+      <UINodeTypeSelector>Select Node Type</UINodeTypeSelector>
     </title>
   </PopupComponent>
 
     <UIActionForm>
     <title>
-      <ShowComponent>Show component</ShowComponent>
+      <ShowComponent>Show Component</ShowComponent>
       <removeReference>Remove</removeReference>
     </title>
   </UIActionForm>
 
   <EditFormAction>
     <title>
-      <ShowComponent>Show component</ShowComponent>
+      <ShowComponent>Show Component</ShowComponent>
       <removeReference>Remove</removeReference>
     </title>
   </EditFormAction>
 
   <NodeTypeNameValidator>
     <msg>
-      <Invalid-char>There are some invalid characters. Type another value, please!</Invalid-char>
-      <empty-input>The value of field is null or empty!</empty-input>
+      <Invalid-char>There are some invalid characters. Please type another value.</Invalid-char>
+      <empty-input>The value of the field is null or empty.</empty-input>
     </msg>
   </NodeTypeNameValidator>
 
@@ -3155,23 +3149,23 @@
 
   <UIDocumentInfo>
     <msg>
-      <repository-error>Error, information about repository lost!</repository-error>
+      <repository-error>An error occurred. The information about the repository was lost.</repository-error>
     </msg>
   </UIDocumentInfo>
 
   <UITreeExplorer>
     <msg>
-      <repository-error>Error, information about repository lost!</repository-error>
+      <repository-error>An error occurred. The information about repository was lost.</repository-error>
     </msg>
   </UITreeExplorer>
   <UIDocumentForm>
     <msg>
-      <constraintviolation-exception>Can not save document. Data input is missed or invalid!</constraintviolation-exception>
+      <constraintviolation-exception>Cannot save the document. The input data are missing or invalid.</constraintviolation-exception>
     </msg>
   </UIDocumentForm>
   <UIActionForm>
     <msg>
-      <constraintviolation-exception>Can not save document. Data input is missed or invalid!</constraintviolation-exception>
+      <constraintviolation-exception>Cannot save the document. The input data are missing or invalid.</constraintviolation-exception>
     </msg>
   </UIActionForm>
 
@@ -3181,7 +3175,7 @@
       <Cancel>Cancel</Cancel>
     </action>
     <label>
-      <formInput>Old path lost, please choose new one!</formInput>
+      <formInput>The previous path was lost. Please select a new one.</formInput>
     </label>
   </UISelectRestorePath>
   <PathNode>
@@ -3196,7 +3190,7 @@
   </UIPopupPathFoRestore>
   <rootNodeInfo>
     <title>
-      <AddRootNode>Add root node</AddRootNode>
+      <AddRootNode>Add Root Node</AddRootNode>
     </title>
   </rootNodeInfo>
 
@@ -3207,15 +3201,15 @@
   </UIPopupWindow>
   <UIActionForm>
     <msg>
-      <homePath-emty>The Home path is empty</homePath-emty>
-      <targetPath-emty>The target path is empty</targetPath-emty>
+      <homePath-emty>The home path is empty.</homePath-emty>
+      <targetPath-emty>The target path is empty.</targetPath-emty>
     </msg>
-		</UIActionForm>
-		<UIActionBar>
-				<msg>
-				  <not-exist-categories>There isn't any category</not-exist-categories>
-				</msg>
-		</UIActionBar>
+    </UIActionForm>
+    <UIActionBar>
+      <msg>
+        <not-exist-categories>There are not any categories.</not-exist-categories>
+      </msg>
+    </UIActionBar>
 
 	<UIPublicationPanel>
     <button>
@@ -3231,7 +3225,7 @@
       <none>No revisions</none>
       <seeall>See all versions</seeall>
       <currentVersion>current revision</currentVersion>
-      <confirm>You will lost your draft work, do you really want to restore this revision and replace the current revision ?</confirm>
+      <confirm>You will lose your draft work. Are you sure to restore this revision and replace the current revision?</confirm>
     </revisions>
     <status>
       <version>Revision</version>
@@ -3250,23 +3244,23 @@
     </status>
     <scheduled>
       <title>Scheduled</title>
-      <from>from</from>
-      <to>to</to>
+      <from>From</from>
+      <to>To</to>
     </scheduled>
     <title>
       <preview>Preview</preview>
       <restore>Restore</restore>
     </title>
     <msg>
-      <have-no-view-template>View template of this is not supported</have-no-view-template>
-      <restore-complete>Restore completed</restore-complete>
+      <have-no-view-template>The View template is not supported.</have-no-view-template>
+      <restore-complete>Restore completed.</restore-complete>
     </msg>
   </UIPublicationPanel>
   <UIPublicationHistory>
     <header>
       <date>Date</date>
-      <versionName>Revision name</versionName>
-      <currentState>Current state</currentState>
+      <versionName>Revision Name</versionName>
+      <currentState>Current State</currentState>
       <user>Author</user>
       <description>Description</description>
     </header>
@@ -3274,36 +3268,36 @@
 
   <UIPublicationPanel>
     <label>
-      <header>Publication date time</header>
-      <start>Start publication</start>
-      <end>End publication</end>
+      <header>Publication Date</header>
+      <start>Start Publication</start>
+      <end>End Publication</end>
     </label>
     <action>
       <Save>Save</Save>
     </action>
     <msg>
-      <invalid-format>Invalid datetime format. Please check again</invalid-format>
+      <invalid-format>The datetime format is invalid. Please check again.</invalid-format>
     </msg>
   </UIPublicationPanel>
   <UIPopupWindow>
     <title>
-      <UIPublicationContainer>Manage publication</UIPublicationContainer>
-      <UIPublishingPanel>Manage publication</UIPublishingPanel>
+      <UIPublicationContainer>Manage Publication</UIPublicationContainer>
+      <UIPublishingPanel>Manage Publication</UIPublishingPanel>
     </title>
   </UIPopupWindow>
   <WCMContentView>
     <header>
       <status>Status</status>
       <author>Author</author>
-      <date>Created date</date>
-      <title>Document title</title>
+      <date>Created Date</date>
+      <title>Document Title</title>
       <lastUser>Last User</lastUser>
     </header>
   </WCMContentView>
   <UITagForm>
-  		<msg>
-  			 <NameAlreadyExist>Tag name is already exists</NameAlreadyExist>
-  		</msg>
+    <msg>
+      <NameAlreadyExist>The tag name already exists.</NameAlreadyExist> 
+    </msg>
   </UITagForm>
 
   <!--
@@ -3312,7 +3306,7 @@
   <UICategoryManagerSearch>
     <tab>
       <label>
-        <UIOneTaxonomySelector>Choose category</UIOneTaxonomySelector>
+        <UIOneTaxonomySelector>Select Category</UIOneTaxonomySelector>
       </label>
     </tab>
     <action>
@@ -3332,19 +3326,19 @@
 
   <UIJCRExplorerPortlet>
 	<msg>
-	  <file-access-denied>File access denied!</file-access-denied>
+	  <file-access-denied>File access denied.</file-access-denied>
 	</msg>
   </UIJCRExplorerPortlet>
   <UIDrivesArea>
     <DrivesArea>
-      <allDrives>You can access to this view using the Drives button on the left panel</allDrives>
+      <allDrives>You can access this view by using the Show Drives button on the left pane.</allDrives>
       <ShowDrives>Show Drives</ShowDrives>
     </DrivesArea>
   </UIDrivesArea>
   <UIJcrExplorerEditForm>
     <msg>
-      <fields-saved>All field values saved!</fields-saved>
-      <fields-cancelled>All field values cancelled!</fields-cancelled>
+      <fields-saved>All field values saved.</fields-saved>
+      <fields-cancelled>All field values canceled.</fields-cancelled>
     </msg>
   </UIJcrExplorerEditForm>
   <UIDocumentForm>
@@ -3388,6 +3382,3 @@
 	</label>
   </lifecyclePhase>
 </bundle>
-
-
-

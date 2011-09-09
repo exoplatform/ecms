@@ -28,22 +28,22 @@
         <cssFile>default.css</cssFile>
         <jsFile>default.js</jsFile>
         <Advanced>Advanced</Advanced>
-        <Summary>summary</Summary>
+        <Summary>Summary</Summary>
         <name>Name</name>
         <title>Title</title>
-        <ContentCSS>CSS data</ContentCSS>
-        <hintCSS>In this panel, you can specify the main stylesheet for your web content. This style will override the one defined at the site level and at the shared level.</hintCSS>
-        <ContentJS>JS data</ContentJS>
-        <hintJS>In this panel, you can specify some Java Script code that can be executed before your web content is rendered.</hintJS>
-        <WebContentHtml>Main content</WebContentHtml>
+        <ContentCSS>CSS Data</ContentCSS>
+        <hintCSS>In this pane, you can specify the main stylesheet for your web content. This style will override the one defined at the site level and at the shared level.</hintCSS>
+        <ContentJS>JS Data</ContentJS>
+        <hintJS>In this pane, you can specify some JavaScript codes that can be executed before your web content is rendered.</hintJS>
+        <WebContentHtml>Main Content</WebContentHtml>
         <Illustration>Illustration</Illustration>
-        <hintIllustration>In this panel, you can specify an image that will be shown when your web content is displayed in lists. In addition, you can specify some summary text to come with this image.</hintIllustration>
-        <confirm-delete>Are you sure to delete?</confirm-delete>
+        <hintIllustration>In this pane, you can specify an image that will be shown when your web content is displayed in the lists. In addition, you can specify some summary texts to come with this image.</hintIllustration>
+        <confirm-delete>Are you sure to delete this illustration?</confirm-delete>
         <illustrationImage>Illustration Image</illustrationImage>
         <imageMimeType>Image Type</imageMimeType>
-        <image>Upload image</image>
-        <imageWidth>Image width</imageWidth>
-        <imageHeight>Image height</imageHeight>
+        <image>Upload Image</image>
+        <imageWidth>Image Width</imageWidth>
+        <imageHeight>Image Height</imageHeight>
         <Synchronize>Synchronize with CSS and HTML</Synchronize>
       </label>
     </dialog>
@@ -55,7 +55,7 @@
         <name>Name</name>
         <active>Active</active>
         <priority>Priority</priority>
-        <content>CSS data</content>
+        <content>CSS Data</content>
       </label>
     </dialog>
   </CSSFile>
@@ -66,7 +66,7 @@
         <name>Name</name>
         <active>Active</active>
         <priority>Priority</priority>
-        <content>JS data</content>
+        <content>JS Data</content>
       </label>
     </dialog>
   </JSFile>
@@ -87,7 +87,7 @@
         <title>Site Title</title>
         <description>Site Description</description>
         <keywords>Site Keywords</keywords>
-        <robots>Search Engines Behavior</robots>
+        <robots>Search Engine Behavior</robots>
       </label>
     </dialog>
   </SiteMetadata>
