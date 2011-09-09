@@ -4,14 +4,17 @@
 	vertical-align: middle;
 	display: inline-block;
 }
+
 .UISEOForm .UIFormGrid td.tdShowHelp {
 	padding: 4px;
 }
+
 .UISEOForm .HorizontalLayout input {
 	width: 230px;  
 	*width: 225px;  
 }
-.UISEOForm .HorizontalLayout .tip {
+
+.UISEOForm .HorizontalLayout .Tip {
 	font-style: italic; 
 	color:#737373;
 	background: #f8f8f8;
@@ -20,10 +23,21 @@
 	-webkit-border-radius: 3px;
 	border-radius: 3px;
 }
+
+.UISEOForm .HorizontalLayout .SeoPriority{
+	color:#737373;
+	background: #f8f8f8;
+	border: solid 1px #ddd;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+}
+
 .UISEOForm .HorizontalLayout select {
 	width: auto;
 	min-width: 75px;
 }
+
 .UISEOForm .HorizontalLayout selectbox {
 	width: auto;
 }
@@ -39,17 +53,20 @@
 	line-height: 32px; 
 	padding: 0 20px 0 5px;
 }
+
 .UISEOToolbarPorlet .SEOToolbar .Disable {
 	display: auto; 
 	line-height: 32px; 
 	padding: 0 20px 0 5px;
 }
+
 .UISEOForm .UIActionSEO {
 	padding: 8px 0;
 	text-align: left;
 	border-top: solid 1px #ededed;
 	margin-top: 5px;
 }
+
 .UISEOForm .UIActionSEO a{
 	display: inline;
 	padding: 0 12px;
