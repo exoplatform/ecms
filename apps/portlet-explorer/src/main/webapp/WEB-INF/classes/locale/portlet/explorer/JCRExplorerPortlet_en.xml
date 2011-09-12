@@ -336,7 +336,7 @@
         <no-publication-lifecycle>No publication lifecycle is configured.</no-publication-lifecycle>
       </manage-publication>
       <unsubcriber-lifecycle> The node was already unsubscribed.</unsubcriber-lifecycle>
-      <not-supported-nodetype>The unsubscriber lifecycle supports the document node only.</not-supported-nodetype>      
+      <not-supported-nodetype>The unsubscriber lifecycle supports the document node only.</not-supported-nodetype>
       <unsubcriber-lifecycle-finish>The node was unsubscribed successfully.</unsubcriber-lifecycle-finish>
       <access-false>The node is not an article or checked in.</access-false>
       <unsupported-action>This action is not supported.</unsupported-action>
@@ -463,13 +463,13 @@
     </title>
     <msg>
       <confirm-delete>Are you sure to delete the node '{0}' and all its contents?</confirm-delete>
-      <confirm-delete-permanently>Are you sure to delete the node '{0}' and all its contents permanently?</confirm-delete-permanently>      
+      <confirm-delete-permanently>Are you sure to delete the node '{0}' and all its contents permanently?</confirm-delete-permanently>
       <confirm-restore>A node with the same name already exists in the old location of this node'{0}'. Are you sure to restore this node?</confirm-restore>
       <confirm-delete-multi>Are you sure to move these items: {0}?</confirm-delete-multi>
       <confirm-delete-has-relations>The node '{0}' has relations that refer to it. Are you sure to delete it and all its relations?</confirm-delete-has-relations>
       <confirm-delete-multi-one-node-has-relations>Are you sure to move these items: {0}? (The node {1} has relations that refer to them, this process will remove all their relations).</confirm-delete-multi-one-node-has-relations>
       <confirm-delete-multi-many-nodes-have-relations>Are you sure to move these items: {0}? (The node {1} has relations that refer to them, this process will remove all their relations.)</confirm-delete-multi-many-nodes-have-relations>
-      <confirm-delete-permanently-multi>Are you sure to move these items: {0} permanently?</confirm-delete-permanently-multi>      
+      <confirm-delete-permanently-multi>Are you sure to move these items: {0} permanently?</confirm-delete-permanently-multi>
       <confirm-move>Are you sure to move?</confirm-move>
       <node-cut>The node '{0}' has been cut.</node-cut>
       <execute-successfully>The custom action '{0}' has been executed.</execute-successfully>
@@ -560,7 +560,7 @@
       <autoversion>Auto Versioning</autoversion>
       <Custom>Custom</Custom>
       <AddFolder>Add Folder</AddFolder>
-      <AddDocument>Add Document</AddDocument>
+      <AddDocument>Add content</AddDocument>
       <Upload>Upload document(s)</Upload>
       <MoveNode>Move</MoveNode>
       <UnLock>Unlock</UnLock>
@@ -1598,7 +1598,7 @@
       <mimetype-invalid>Only .xml or .zip files are supported to import.</mimetype-invalid>
       <access-denied>Access denied! You are not allowed to import there.</access-denied>
       <constraint-violation-exception>Cannot import the node. The imported data are incorrect or the node type '{0}' is not allowed to be child's node type'{0}'.</constraint-violation-exception>
-      <item-exists-exception>An incoming referenceable node has the same UUID as an existing node in the workspace.</item-exists-exception>    
+      <item-exists-exception>An incoming referenceable node has the same UUID as an existing node in the workspace.</item-exists-exception>
     </msg>
   </UIImportNode>
   <!--
@@ -2435,7 +2435,7 @@
       <fileName-error>The file name is invalid.</fileName-error>
       <constraint-violation>Cannot add the'{0}' node type to the current node.</constraint-violation>
       <repository-exception>Access denied! You do not have the add permission in this node.</repository-exception>
-      <numberformat-exception>Cannot save this folder. The name provided must be a numerical format.</numberformat-exception>      
+      <numberformat-exception>Cannot save this folder. The name provided must be a numerical format.</numberformat-exception>
       <path-node-invalid>Please enter the path node.</path-node-invalid>
       <path-node-not-allowed>This name is not allowed.</path-node-not-allowed>
       <non-node>Please select the trust target node; or you do not have right to read this node.</non-node>
@@ -2468,7 +2468,7 @@
       <create-link-problem>You cannot create a link for the node '{0}' at '{1}'.</create-link-problem>
       <dest-node-is-link>The destination node '{0}' is already a symlink, so you cannot create a symlink inside it.</dest-node-is-link>
       <selected-is-link>The selected node '{0}' is already a link, so you cannot create a link point to another link.</selected-is-link>
-      <confirm-create-link>Do you want to create a link to this location?</confirm-create-link>    
+      <confirm-create-link>Do you want to create a link to this location?</confirm-create-link>
     </msg>
   </UIWorkingArea>
 
@@ -2793,7 +2793,7 @@
 
   <SameNamePopup>
     <title>
-      <UIUploadBehaviorWithSameName>Upload File</UIUploadBehaviorWithSameName> 
+      <UIUploadBehaviorWithSameName>Upload File</UIUploadBehaviorWithSameName>
     </title>
   </SameNamePopup>
 
@@ -3297,7 +3297,7 @@
   </WCMContentView>
   <UITagForm>
     <msg>
-      <NameAlreadyExist>The tag name already exists.</NameAlreadyExist> 
+      <NameAlreadyExist>The tag name already exists.</NameAlreadyExist>
     </msg>
   </UITagForm>
 
