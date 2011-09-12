@@ -93,7 +93,7 @@ public class TrashServiceImpl implements TrashService {
           if (trashWorkspace != null && !trashWorkspace.equals(this.trashWorkspace_)) {
             this.trashWorkspace_ = trashWorkspace;
           }
-          
+
           if (trashHome != null && !trashHome.equals(this.trashHome_)) {
             this.trashHome_ = trashHome;
           }
@@ -112,7 +112,7 @@ public class TrashServiceImpl implements TrashService {
   throws Exception {
     moveToTrash(node, trashPath, trashWorkspace, repository, sessionProvider, 0);
   }
-  
+
   /**
    * {@inheritDoc}
    */
@@ -123,7 +123,7 @@ public class TrashServiceImpl implements TrashService {
                           SessionProvider sessionProvider) throws Exception {
     moveToTrash(node, sessionProvider, 0);
   }
-  
+
   /**
    * {@inheritDoc}
    */
@@ -140,9 +140,9 @@ public class TrashServiceImpl implements TrashService {
                           int deep) throws Exception {
     moveToTrash(node, trashPath, trashWorkspace, sessionProvider, deep);
   }
-  
+
   /**
-   *{@inheritDoc} 
+   *{@inheritDoc}
    */
   @Deprecated
   public void moveToTrash(Node node,
@@ -153,9 +153,9 @@ public class TrashServiceImpl implements TrashService {
 
     moveToTrash(node, sessionProvider, deep);
   }
-  
+
   /**
-   *{@inheritDoc} 
+   *{@inheritDoc}
    */
   public void moveToTrash(Node node,
                           SessionProvider sessionProvider,
@@ -182,7 +182,7 @@ public class TrashServiceImpl implements TrashService {
       nodeSession.save();
 
       ManageableRepository manageableRepository = repositoryService.getCurrentRepository();
-      Session trashSession = sessionProvider.getSession(this.trashWorkspace_, manageableRepository);
+      Session trashSession = WCMCoreUtils.getSystemSessionProvider().getSession(this.trashWorkspace_, manageableRepository);
       String actualTrashPath = this.trashHome_ + (this.trashHome_.endsWith("/") ? "" : "/")
           + fixRestorePath(nodeName);
       if (trashSession.getWorkspace().getName().equals(
@@ -262,10 +262,10 @@ public class TrashServiceImpl implements TrashService {
       trashSession.save();
     }
     nodeSession.save();
-  }  
+  }
 
   /**
-   * 
+   *
    * @param taxonomyNode
    * @param targetNode
    * @return
@@ -299,7 +299,7 @@ public class TrashServiceImpl implements TrashService {
       SessionProvider sessionProvider) throws Exception {
     restoreFromTrash(trashNodePath, sessionProvider, 0);
   }
-  
+
   /**
    * {@inheritDoc}
    */
@@ -309,14 +309,14 @@ public class TrashServiceImpl implements TrashService {
                                SessionProvider sessionProvider) throws Exception {
     restoreFromTrash(trashNodePath, sessionProvider, 0);
   }
-  
+
   /**
    * {@inheritDoc}
    */
   public void restoreFromTrash(String trashNodePath,
                                SessionProvider sessionProvider) throws Exception {
     restoreFromTrash(trashNodePath, sessionProvider, 0);
-  }  
+  }
 
   private void restoreFromTrash(String trashNodePath,
       SessionProvider sessionProvider, int deep) throws Exception {
@@ -427,7 +427,7 @@ public class TrashServiceImpl implements TrashService {
 
     return getAllNodeInTrash(sessionProvider);
   }
-  
+
   /**
    * {@inheritDoc}
    */
@@ -453,14 +453,14 @@ public class TrashServiceImpl implements TrashService {
       SessionProvider sessionProvider, String userName) throws Exception {
     return getAllNodeInTrashByUser(sessionProvider, userName);
   }
-  
+
   @Deprecated
   public List<Node> getAllNodeInTrashByUser(String trashWorkspace,
                                             SessionProvider sessionProvider,
                                             String userName) throws Exception {
     return getAllNodeInTrashByUser(sessionProvider, userName);
   }
-  
+
   /**
    * {@inheritDoc}
    */
@@ -469,7 +469,7 @@ public class TrashServiceImpl implements TrashService {
     StringBuilder query = new StringBuilder(
         "SELECT * FROM nt:base WHERE exo:restorePath IS NOT NULL AND exo:lastModifier='").append(userName).append("'");
     return selectNodesByQuery(sessionProvider, query.toString(), Query.SQL);
-  }  
+  }
 
   @Deprecated
   public void removeRelations(Node node, SessionProvider sessionProvider, String repository) throws Exception {
@@ -501,14 +501,14 @@ public class TrashServiceImpl implements TrashService {
     }
     if (error) throw new Exception("Can't remove exo:relationable of all related nodes");
   }
-  
+
   /**
    * {@inheritDoc}
    */
   public boolean isInTrash(Node node) throws RepositoryException {
     return node.getPath().startsWith(this.trashHome_);
   }
-  
+
   /**
    * {@inheritDoc}
    */
