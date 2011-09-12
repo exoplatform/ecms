@@ -54,7 +54,7 @@ xsi:schemaLocation="http://java.sun.com/xml/ns/portlet/portlet-app_1_0.xsd http:
     <portlet-info>
       <title>Fast Content Creator</title>
       <short-title>ECM Fast Content Creator</short-title>
-      <keywords>ecm, fastcontentcreator</keywords>
+      <keywords>ECM</keywords>
     </portlet-info>
     <portlet-preferences>
       <!-- Setup the default repository name for fast content creator portlet -->

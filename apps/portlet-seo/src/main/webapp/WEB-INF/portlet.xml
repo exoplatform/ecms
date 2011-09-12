@@ -18,7 +18,7 @@
       <portlet-info>
         <title>SEO Toolbar Portlet</title>
 		<short-title>SEO Toolbar Portlet</short-title>
-		<keywords>SEOTollbar</keywords>
+		<keywords>SEOToolbar</keywords>
 	  </portlet-info>
    </portlet>
 </portlet-app>
