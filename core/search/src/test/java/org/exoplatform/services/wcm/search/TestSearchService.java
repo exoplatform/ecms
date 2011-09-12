@@ -549,7 +549,7 @@ public class TestSearchService extends BaseWCMTestCase {
     this.searchIsLiveMode = true;
     queryCriteria.setSearchWebpage(false);
     queryCriteria.setFulltextSearch(true);
-    queryCriteria.setFulltextSearchProperty("dc:description");
+    queryCriteria.setFulltextSearchProperty(new String[] {"dc:description"});
     assertEquals(0, siteSearchService.searchSiteContents(sessionProvider, queryCriteria, 10, true).getTotalNodes());
   }
 

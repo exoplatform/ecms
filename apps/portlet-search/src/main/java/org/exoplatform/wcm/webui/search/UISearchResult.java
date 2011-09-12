@@ -41,6 +41,7 @@ import org.exoplatform.services.wcm.publication.WCMComposer;
 import org.exoplatform.services.wcm.search.QueryCriteria;
 import org.exoplatform.services.wcm.search.ResultNode;
 import org.exoplatform.services.wcm.search.SiteSearchService;
+import org.exoplatform.services.wcm.search.QueryCriteria.QueryProperty;
 import org.exoplatform.services.wcm.search.base.AbstractPageList;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 import org.exoplatform.wcm.webui.Utils;
@@ -175,7 +176,9 @@ public class UISearchResult extends UIContainer {
         portal = Util.getPortalRequestContext().getPortalOwner();
         resultType = "Document";
       } else {
+        documentNodeTypes.add("gtn:language");
         documentNodeTypes.add("exo:pageMetadata");
+        queryCriteria.setFulltextSearchProperty(new String[] {"exo:metaKeywords", "exo:metaDescription", "gtn:name"});
         resultType = "Page";
       }
       
@@ -195,7 +198,7 @@ public class UISearchResult extends UIContainer {
       try {
         AbstractPageList<ResultNode> pageList = null;
         if (isWebPage) {
-          pageList = siteSearchService.searchSEOContents(WCMCoreUtils.getSystemSessionProvider(),
+          pageList = siteSearchService.searchPageContents(WCMCoreUtils.getSystemSessionProvider(),
                                                           queryCriteria,
                                                           itemsPerPage,
                                                           false);

@@ -16,16 +16,20 @@
  */
 package org.exoplatform.services.wcm.search.base;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.jcr.LoginException;
 import javax.jcr.NoSuchWorkspaceException;
 import javax.jcr.Node;
+import javax.jcr.NodeIterator;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 import javax.jcr.query.Query;
 import javax.jcr.query.QueryManager;
 import javax.jcr.query.QueryResult;
+import javax.jcr.query.Row;
+import javax.jcr.query.RowIterator;
 
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
@@ -83,5 +87,49 @@ public class PageListFactory {
                            NodeSearchFilter filter, SearchDataCreator<E> dataCreator) {
 
     return new ArrayNodePageList<E>(nodes, pageSize, filter, dataCreator);
+  }
+  
+  /**
+   * 
+   * @param <E>
+   * @param queryStatement
+   * @param workspace
+   * @param language
+   * @param isSystemSession
+   * @param dataCreator
+   * @return
+   * @throws LoginException
+   * @throws NoSuchWorkspaceException
+   * @throws RepositoryException
+   */
+  public static <E> List<E> createPageList(String queryStatement,
+                                           String workspace,
+                                           String language,
+                                           boolean isSystemSession,
+                                           SearchDataCreator<E> dataCreator) throws LoginException,
+                                                                            NoSuchWorkspaceException,
+                                                                            RepositoryException {
+    SessionProvider sessionProvider = isSystemSession ? WCMCoreUtils.getSystemSessionProvider()
+                                                     : WCMCoreUtils.getUserSessionProvider();
+    Session session = sessionProvider.getSession(workspace, WCMCoreUtils.getRepository());
+    QueryManager queryManager = session.getWorkspace().getQueryManager();
+    Query query = queryManager.createQuery(queryStatement, language);
+    QueryResult queryResult = query.execute();
+    List<E> dataList = new ArrayList<E>();
+    try {
+      NodeIterator nodeIterator = queryResult.getNodes();
+      RowIterator rowIterator = queryResult.getRows();
+      while (nodeIterator.hasNext()) {
+        Node node = nodeIterator.nextNode();
+        Row row = rowIterator.nextRow();
+        if (dataCreator != null && node != null) { 
+          E data = dataCreator.createData(node, row);
+          if (data != null) {
+            dataList.add(data);
+          }
+        }
+      }
+    } catch (RepositoryException e) {}
+    return dataList;
   }
 }

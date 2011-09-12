@@ -71,7 +71,7 @@ public interface SiteSearchService {
    * @return
    * @throws Exception
    */
-  public AbstractPageList<ResultNode> searchSEOContents(SessionProvider sessionProvider,
+  public AbstractPageList<ResultNode> searchPageContents(SessionProvider sessionProvider,
                                                       QueryCriteria queryCriteria,
                                                       int pageSize,
                                                       boolean isSearchContent) throws Exception;

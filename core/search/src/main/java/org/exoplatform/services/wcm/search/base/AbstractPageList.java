@@ -21,7 +21,6 @@ import java.util.List;
 
 import org.exoplatform.commons.exception.ExoMessageException;
 import org.exoplatform.commons.utils.PageList;
-import org.exoplatform.services.wcm.search.QueryCriteria;
 
 /**
  * Created by The eXo Platform SAS

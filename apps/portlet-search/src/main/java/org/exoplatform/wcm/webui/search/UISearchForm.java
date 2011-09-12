@@ -243,7 +243,9 @@ public class UISearchForm extends UIForm {
         documentNodeTypes = templateService.getAllDocumentNodeTypes();
         selectedPortal = Util.getPortalRequestContext().getPortalOwner();
       } else {
+        documentNodeTypes.add("gtn:language");
         documentNodeTypes.add("exo:pageMetadata");
+        queryCriteria.setFulltextSearchProperty(new String[] {"exo:metaKeywords", "exo:metaDescription", "gtn:name"});
       }
 
       queryCriteria.setContentTypes(documentNodeTypes.toArray(new String[documentNodeTypes.size()]));
@@ -265,7 +267,7 @@ public class UISearchForm extends UIForm {
       try {
         AbstractPageList<ResultNode> pageList = null;
         if (pageChecked) {
-          pageList = siteSearchService.searchSEOContents(WCMCoreUtils.getSystemSessionProvider(),
+          pageList = siteSearchService.searchPageContents(WCMCoreUtils.getSystemSessionProvider(),
                                                           queryCriteria,
                                                           itemsPerPage,
                                                           false);

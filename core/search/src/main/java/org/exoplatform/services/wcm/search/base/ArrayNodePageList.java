@@ -55,7 +55,10 @@ public class ArrayNodePageList<E> extends AbstractPageList<E> {
           node = filter.filterNodeToDisplay(node);
         }
         if (searchDataCreator != null && node != null) { 
-          dataList.add(searchDataCreator.createData(node, null));
+          E data = searchDataCreator.createData(node, null);
+          if (data != null) {
+            dataList.add(data);
+          }
         }
       }
     } catch (Exception e) {}
@@ -79,7 +82,10 @@ public class ArrayNodePageList<E> extends AbstractPageList<E> {
         }
         Row row = rowIterator.nextRow();
         if (searchDataCreator != null && node != null) { 
-          dataList.add(searchDataCreator.createData(node, row));
+          E data = searchDataCreator.createData(node, row);
+          if (data != null) {
+            dataList.add(data);
+          }
         }
       }
     } catch (RepositoryException e) {}

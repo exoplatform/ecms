@@ -167,7 +167,7 @@ public class UIContentSearchForm extends UIForm {
   private AbstractPageList<ResultNode> searchWebContentByFulltext(String keyword,
       QueryCriteria qCriteria, int pageSize) throws Exception {
     qCriteria.setFulltextSearch(true);
-    qCriteria.setFulltextSearchProperty(QueryCriteria.ALL_PROPERTY_SCOPE);
+    qCriteria.setFulltextSearchProperty(new String[] {QueryCriteria.ALL_PROPERTY_SCOPE});
     qCriteria.setKeyword(keyword);
     SiteSearchService siteSearch = getApplicationComponent(SiteSearchService.class);
     return siteSearch.searchSiteContents(WCMCoreUtils.getUserSessionProvider(), qCriteria, pageSize, true);
@@ -176,7 +176,7 @@ public class UIContentSearchForm extends UIForm {
   private AbstractPageList<ResultNode> searchWebContentByProperty(String property,
       String keyword, QueryCriteria qCriteria, int pageSize) throws Exception {
     qCriteria.setFulltextSearch(true);
-    qCriteria.setFulltextSearchProperty(property);
+    qCriteria.setFulltextSearchProperty(new String[] {property});
     qCriteria.setKeyword(keyword);
     SiteSearchService siteSearchService = getApplicationComponent(SiteSearchService.class);
     return siteSearchService.searchSiteContents(WCMCoreUtils.getUserSessionProvider(), qCriteria, pageSize, true);
@@ -245,7 +245,7 @@ public class UIContentSearchForm extends UIForm {
   private AbstractPageList<ResultNode> searchDocumentByFulltext(String keyword,
       QueryCriteria qCriteria, int pageSize) throws Exception {
     qCriteria.setFulltextSearch(true);
-    qCriteria.setFulltextSearchProperty(QueryCriteria.ALL_PROPERTY_SCOPE);
+    qCriteria.setFulltextSearchProperty(new String[] {QueryCriteria.ALL_PROPERTY_SCOPE});
     qCriteria.setKeyword(keyword);
     SiteSearchService siteSearch = getApplicationComponent(SiteSearchService.class);
     return siteSearch.searchSiteContents(WCMCoreUtils.getUserSessionProvider(), qCriteria, pageSize, true);
@@ -254,7 +254,7 @@ public class UIContentSearchForm extends UIForm {
   private AbstractPageList<ResultNode> searchDocumentByProperty(String property,
       String keyword, QueryCriteria qCriteria, int pageSize) throws Exception {
     qCriteria.setFulltextSearch(true);
-    qCriteria.setFulltextSearchProperty(property);
+    qCriteria.setFulltextSearchProperty(new String[] {property});
     qCriteria.setKeyword(keyword);
     SiteSearchService siteSearchService = getApplicationComponent(SiteSearchService.class);
     return siteSearchService.searchSiteContents(WCMCoreUtils.getUserSessionProvider(), qCriteria, pageSize, true);

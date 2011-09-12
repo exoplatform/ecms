@@ -18,6 +18,7 @@ package org.exoplatform.services.wcm.search;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArraySet;
 
@@ -43,6 +44,8 @@ import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
 import org.exoplatform.services.security.IdentityConstants;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.core.WCMConfigurationService;
@@ -101,6 +104,9 @@ public class SiteSearchServiceImpl implements SiteSearchService {
   private boolean isEnabledFuzzySearch = true;
   
   private double fuzzySearchIndex = 0.8;
+  
+  /** The log. */
+  private static Log                  log                     = ExoLogger.getLogger(SiteSearchServiceImpl.class);
 
   /**
    * Instantiates a new site search service impl.
@@ -178,6 +184,7 @@ public class SiteSearchServiceImpl implements SiteSearchService {
     Query query = createQuery(queryCriteria, queryManager);
     String suggestion = getSpellSuggestion(queryCriteria.getKeyword(),currentRepository);
     AbstractPageList<ResultNode> pageList = null;
+    log.debug("execute query: " + query.getStatement().toLowerCase());
     pageList = PageListFactory.createPageList(query.getStatement(),
                                               session.getWorkspace().getName(),
                                               query.getLanguage(),
@@ -196,7 +203,7 @@ public class SiteSearchServiceImpl implements SiteSearchService {
   /**
    * 
    */
-  public AbstractPageList<ResultNode> searchSEOContents(SessionProvider sessionProvider,
+  public AbstractPageList<ResultNode> searchPageContents(SessionProvider sessionProvider,
                                                       QueryCriteria queryCriteria,
                                                       int pageSize,
                                                       boolean isSearchContent) throws Exception {
@@ -204,15 +211,16 @@ public class SiteSearchServiceImpl implements SiteSearchService {
     Session session = sessionProvider.getSession("portal-system", currentRepository);
     QueryManager queryManager = session.getWorkspace().getQueryManager();
     long startTime = System.currentTimeMillis();
-    Query query = createQuery(queryCriteria, queryManager);
+    Query query = createSearchPageQuery(queryCriteria, queryManager);
     String suggestion = getSpellSuggestion(queryCriteria.getKeyword(), currentRepository);
+    log.debug("execute query: " + query.getStatement().toLowerCase());
     AbstractPageList<ResultNode> pageList = PageListFactory.createPageList(query.getStatement(),
                                                                            session.getWorkspace()
                                                                                   .getName(),
                                                                            query.getLanguage(),
                                                                            true,
-                                                                           null,
-                                                                           new SeoDataCreator(),
+                                                                           new PageNodeFilter(),
+                                                                           new PageDataCreator(),
                                                                            pageSize,
                                                                            0);
 
@@ -220,6 +228,90 @@ public class SiteSearchServiceImpl implements SiteSearchService {
     pageList.setQueryTime(queryTime);
     pageList.setSpellSuggestion(suggestion);
     return pageList;
+  }
+  
+  private Query createSearchPageQuery(QueryCriteria queryCriteria, QueryManager queryManager) throws Exception {
+    SQLQueryBuilder queryBuilder = new SQLQueryBuilder();
+    List<String> mopPages = this.searchPageByTitle(queryCriteria.getSiteName(),
+                                                   queryCriteria.getKeyword());
+    List<QueryProperty> queryProps = new ArrayList<QueryCriteria.QueryProperty>();
+    for (String page : mopPages) {
+      QueryProperty prop = queryCriteria.new QueryProperty();
+      prop.setName("mop:page");
+      prop.setValue(page);
+      queryProps.add(prop);
+    }
+    QueryProperty prop = queryCriteria.new QueryProperty();
+    prop.setName("exo:name");
+    prop.setValue("mop:" + queryCriteria.getKeyword().toLowerCase());
+    queryProps.add(prop);
+    queryCriteria.setQueryMetadatas(queryProps.toArray(new QueryProperty[queryProps.size()]));
+    mapQueryTypes(queryCriteria, queryBuilder);
+    if (queryCriteria.isFulltextSearch()) {
+      mapQueryPath(queryCriteria, queryBuilder);
+      mapFulltextQueryTearm(queryCriteria, queryBuilder, LOGICAL.OR);
+    } else {
+      searchByNodeName(queryCriteria, queryBuilder);
+    }
+    mapCategoriesCondition(queryCriteria,queryBuilder);
+    mapDatetimeRangeSelected(queryCriteria,queryBuilder);
+    mapMetadataProperties(queryCriteria,queryBuilder, LOGICAL.OR);
+    orderBy(queryCriteria, queryBuilder);
+    String queryStatement = queryBuilder.createQueryStatement();
+    Query query = queryManager.createQuery(queryStatement, Query.SQL);
+    return query;
+  }
+
+  /**
+   * @return return the JCR path of the mop:page nodes that have gtn:name
+   *         (page's title) containing the given specified <code>keyword</code>
+   * @throws Exception
+   */
+  private List<String> searchPageByTitle(String siteName, String keyword) throws Exception {
+    SessionProvider sessionProvider = WCMCoreUtils.getSystemSessionProvider();
+    ManageableRepository currentRepository = repositoryService.getCurrentRepository();
+    Session session = sessionProvider.getSession("portal-system", currentRepository);
+    QueryManager queryManager = session.getWorkspace().getQueryManager();
+    QueryCriteria queryCriteria = new QueryCriteria();
+    queryCriteria.setSiteName(siteName);
+    queryCriteria.setKeyword(keyword);
+    queryCriteria.setSearchWebpage(true);
+    Query query = createSearchPageByTitleQuery(queryCriteria, queryManager);
+    log.debug("execute query: " + query.getStatement().toLowerCase());
+    List<String> pageList = PageListFactory.createPageList(query.getStatement(),
+                                                           session.getWorkspace().getName(),
+                                                           query.getLanguage(),
+                                                           true,
+                                                           new PageTitleDataCreator());
+    return pageList;
+  }
+  
+  /**
+   * 
+   * @param queryCriteria
+   * @param queryManager
+   * @return
+   * @throws Exception
+   */
+  private Query createSearchPageByTitleQuery(QueryCriteria queryCriteria, QueryManager queryManager) throws Exception {
+    SQLQueryBuilder queryBuilder = new SQLQueryBuilder();
+
+    // select *
+    queryBuilder.selectTypes(null);
+
+    // from mop:page node type
+    queryBuilder.fromNodeTypes(new String[] { "mop:page" });
+
+    mapQueryPath(queryCriteria, queryBuilder);
+
+    queryCriteria.setFulltextSearchProperty(new String[] {"gtn:name"});
+
+    mapFulltextQueryTearm(queryCriteria, queryBuilder, LOGICAL.OR);
+
+    String queryStatement = queryBuilder.createQueryStatement();
+    Query query = queryManager.createQuery(queryStatement, Query.SQL);
+
+    return query;
   }
 
   /**
@@ -270,13 +362,13 @@ public class SiteSearchServiceImpl implements SiteSearchService {
     mapQueryTypes(queryCriteria, queryBuilder);
     if (queryCriteria.isFulltextSearch()) {
       mapQueryPath(queryCriteria, queryBuilder);
-      mapFulltextQueryTearm(queryCriteria, queryBuilder);
+      mapFulltextQueryTearm(queryCriteria, queryBuilder, LOGICAL.OR);
     } else {
       searchByNodeName(queryCriteria, queryBuilder);
     }
     mapCategoriesCondition(queryCriteria,queryBuilder);
     mapDatetimeRangeSelected(queryCriteria,queryBuilder);
-    mapMetadataProperties(queryCriteria,queryBuilder);
+    mapMetadataProperties(queryCriteria,queryBuilder, LOGICAL.AND);
     orderBy(queryCriteria, queryBuilder);
     String queryStatement = queryBuilder.createQueryStatement();
     Query query = queryManager.createQuery(queryStatement, Query.SQL);
@@ -330,7 +422,7 @@ public class SiteSearchServiceImpl implements SiteSearchService {
    * @param queryBuilder the query builder
    */
   private void mapFulltextQueryTearm(final QueryCriteria queryCriteria,
-                                     final SQLQueryBuilder queryBuilder) {
+                                     final SQLQueryBuilder queryBuilder, LOGICAL condition) {
     String keyword = queryCriteria.getKeyword();
     if (keyword == null || keyword.length() == 0)
       return;
@@ -349,11 +441,14 @@ public class SiteSearchServiceImpl implements SiteSearchService {
       keyword = keyword.replace("?", "\\?");
       queryTerm = queryTermHelper.contains(keyword).buildTerm();
     }
-    String scope = queryCriteria.getFulltextSearchProperty();
-    if (QueryCriteria.ALL_PROPERTY_SCOPE.equals(scope) || scope == null) {
+    String[] props = queryCriteria.getFulltextSearchProperty();
+    if (props == null || props.length == 0 || QueryCriteria.ALL_PROPERTY_SCOPE.equals(props[0])) {
       queryBuilder.contains(null, queryTerm, LOGICAL.NULL);
     } else {
-      queryBuilder.contains(scope, queryTerm, LOGICAL.NULL);
+      queryBuilder.contains(props[0], queryTerm, LOGICAL.NULL);
+      for (int i = 1; i < props.length; i++) {
+        queryBuilder.contains(props[i], queryTerm, condition);
+      }
     }
   }
 
@@ -426,15 +521,15 @@ public class SiteSearchServiceImpl implements SiteSearchService {
    * @param queryCriteria the query criteria
    * @param queryBuilder the query builder
    */
-  private void mapMetadataProperties(final QueryCriteria queryCriteria, SQLQueryBuilder queryBuilder) {
+  private void mapMetadataProperties(final QueryCriteria queryCriteria, SQLQueryBuilder queryBuilder, LOGICAL condition) {
     QueryProperty[] queryProperty = queryCriteria.getQueryMetadatas();
-    if (queryProperty == null)
+    if (queryProperty == null || queryProperty.length == 0)
       return;
-    queryBuilder.openGroup(LOGICAL.AND);
-    queryBuilder.like(queryProperty[0].getName(), queryProperty[0].getName(), LOGICAL.NULL);
+    queryBuilder.openGroup(condition);
+    queryBuilder.like(queryProperty[0].getName(), queryProperty[0].getValue(), LOGICAL.NULL);
     if (queryProperty.length > 1) {
       for (int i = 1; i < queryProperty.length; i++) {
-        queryBuilder.like(queryProperty[i].getName(), queryProperty[i].getName(), LOGICAL.OR);
+        queryBuilder.like(queryProperty[i].getName(), queryProperty[i].getValue(), LOGICAL.OR);
       }
     }
     queryBuilder.closeGroup();
@@ -490,7 +585,7 @@ public class SiteSearchServiceImpl implements SiteSearchService {
   private void mapQueryTypes(final QueryCriteria queryCriteria, final SQLQueryBuilder queryBuilder) throws Exception {
     queryBuilder.selectTypes(null);
     // Searh on nt:base
-    queryBuilder.fromNodeTypes(null);
+    queryBuilder.fromNodeTypes(queryCriteria.getNodeTypes());
     ManageableRepository currentRepository = repositoryService.getCurrentRepository();
     NodeTypeManager manager = currentRepository.getNodeTypeManager();
     // Query all documents for specific content types
@@ -632,6 +727,29 @@ public class SiteSearchServiceImpl implements SiteSearchService {
     
   }
   
+  /**
+   * 
+   * @author ha_dangviet
+   *
+   */
+  public static class PageNodeFilter implements NodeSearchFilter {
+
+    @Override
+    public Node filterNodeToDisplay(Node node) {
+      try {
+        if (!node.isNodeType("mop:navigation") && !node.isNodeType("mop:pagelink")
+            && !node.isNodeType("gtn:language")) {
+          return null;
+        } else {
+          return node;
+        }
+      } catch (RepositoryException e) {
+        return null;
+      }
+    }
+
+  }
+  
   public static class DataCreator implements SearchDataCreator<ResultNode> {
 
     @Override
@@ -645,8 +763,14 @@ public class SiteSearchServiceImpl implements SiteSearchService {
     
   }
   
-  public static class SeoDataCreator implements SearchDataCreator<ResultNode> {
+  public static class PageDataCreator implements SearchDataCreator<ResultNode> {
 
+    private static HashSet<String> userNavigationUriList;
+    
+    public PageDataCreator() {
+      userNavigationUriList = new HashSet<String>();
+    }
+    
     @Override
     public ResultNode createData(Node node, Row row) {
       try {
@@ -656,7 +780,19 @@ public class SiteSearchServiceImpl implements SiteSearchService {
 
         String baseURI = portletRequest.getScheme() + "://" + portletRequest.getServerName() + ":"
             + String.format("%s", portletRequest.getServerPort()) + portalRequestContext.getPortalContextPath();
-        return new ResultNode(node, row, baseURI + "/" + SeoDataCreator.getUserNavigationURI(node).toString());
+        if (node.isNodeType("mop:pagelink")) {
+          node = node.getParent();
+        }
+        
+        if (node.isNodeType("gtn:language")) {
+          node = node.getParent().getParent();
+        }
+        String userNaviUri = baseURI + "/" + PageDataCreator.getUserNavigationURI(node).toString();
+        if (userNavigationUriList.contains(userNaviUri)) {
+          return null;
+        }
+        userNavigationUriList.add(userNaviUri);
+        return new ResultNode(node, row, userNaviUri);
       } catch (Exception e) {
         return null;
       }
@@ -688,4 +824,22 @@ public class SiteSearchServiceImpl implements SiteSearchService {
     } 
     
   }  
+  
+  /**
+   * 
+   * @author ha_dangviet
+   *
+   */
+  public static class PageTitleDataCreator implements SearchDataCreator<String> {
+
+    @Override
+    public String createData(Node node, Row row) {
+      try {
+        return node.getPath();
+      } catch (RepositoryException e) {
+        return null;
+      }
+    }
+    
+  }
 }

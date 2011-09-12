@@ -56,6 +56,9 @@ public class QueryCriteria {
 
   /** The mime types. */
   private String[] mimeTypes = null;
+  
+  /** The node types. */
+  private String[] nodeTypes = null;
 
   /** The created date. */
   private DatetimeRange createdDateRange = null;
@@ -128,7 +131,7 @@ public class QueryCriteria {
   private QueryProperty[] queryMetadatas = null;
 
   /** The fulltext search property. */
-  private String fulltextSearchProperty = ALL_PROPERTY_SCOPE;
+  private String[]            fulltextSearchProperty = new String[] { ALL_PROPERTY_SCOPE };
 
   /** The date range selected. */
   private DATE_RANGE_SELECTED dateRangeSelected = null;
@@ -189,6 +192,15 @@ public class QueryCriteria {
    * @param mimeTypes the new mime types
    */
   public void setMimeTypes(String[] mimeTypes) { this.mimeTypes = mimeTypes; }
+  
+  
+  public String[] getNodeTypes() {
+    return nodeTypes;
+  }
+  
+  public void setNodeTypes(String[] nodeTypes) {
+    this.nodeTypes = nodeTypes;
+  }
 
   /**
    * Gets the start publication date range.
@@ -542,7 +554,7 @@ public class QueryCriteria {
    *
    * @return the fulltext search property
    */
-  public String getFulltextSearchProperty() {
+  public String[] getFulltextSearchProperty() {
     return fulltextSearchProperty;
   }
 
@@ -551,7 +563,7 @@ public class QueryCriteria {
    *
    * @param fulltextSearchProperty the new fulltext search property
    */
-  public void setFulltextSearchProperty(String fulltextSearchProperty) {
+  public void setFulltextSearchProperty(String[] fulltextSearchProperty) {
     this.fulltextSearchProperty = fulltextSearchProperty;
   }
 }
