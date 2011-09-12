@@ -789,7 +789,10 @@
       </propertyDefinition>
 			<propertyDefinition name="exo:voter" requiredType="String" autoCreated="true" mandatory="false"
         onParentVersion="COPY" protected="false" multiple="true">        
-      </propertyDefinition>			
+      </propertyDefinition>
+      <propertyDefinition name="exo:voterVoteValues" requiredType="String" autoCreated="true" mandatory="false"
+        onParentVersion="COPY" protected="false" multiple="true">        
+      </propertyDefinition>
     </propertyDefinitions>			
   </nodeType>
   

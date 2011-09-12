@@ -55,6 +55,8 @@ public class TestVotingService extends BaseDMSTestCase {
   private final static String VOTEABLE = "mix:votable";
 
   private final static String VOTER_PROP = "exo:voter".intern();
+  
+  private final static String VOTER_VOTEVALUE_PROP = "exo:voterVoteValues";
 
   private final static String VOTE_TOTAL_PROP = "exo:voteTotal".intern();
 
@@ -115,9 +117,9 @@ public class TestVotingService extends BaseDMSTestCase {
     votingService.vote(test, 4, "marry", multiLanguageService.getDefault(test));
     votingService.vote(test, 5, "john", multiLanguageService.getDefault(test));
     List voters = Arrays.asList(new String[] {"root", "marry", "john"});
-    Value[] value = test.getProperty(VOTER_PROP).getValues();
-    for (Value val : value) {
-      assertTrue(voters.contains(val.getString()));
+    Value[] value = test.getProperty(VOTER_VOTEVALUE_PROP).getValues();
+    for (int i = 0; i < 3; i++) {
+      assertTrue(value[i].getString().startsWith(voters.get(i) + ""));
     }
     assertEquals(3, test.getProperty(VOTE_TOTAL_LANG_PROP).getValue().getLong());
     assertEquals(3.33, test.getProperty(VOTING_RATE_PROP).getValue().getDouble());
@@ -160,7 +162,7 @@ public class TestVotingService extends BaseDMSTestCase {
     votingService.vote(test, 4, null, "fr");
     Node fr = multiLanguageService.getLanguage(test, "fr");
 
-    assertEquals(0, fr.getProperty(VOTER_PROP).getValues().length);
+    assertEquals(0, fr.getProperty(VOTER_VOTEVALUE_PROP).getValues().length);
     assertEquals(2.67, fr.getProperty(VOTING_RATE_PROP).getValue().getDouble());
     assertEquals(3, fr.getProperty(VOTE_TOTAL_LANG_PROP).getValue().getLong());
   }
@@ -186,10 +188,10 @@ public class TestVotingService extends BaseDMSTestCase {
     votingService.vote(test, 4, "john", "fr");
     Node fr = multiLanguageService.getLanguage(test, "fr");
     List voters = Arrays.asList(new String[] { "root", "marry", "john"});
-    Property voterProperty = fr.getProperty(VOTER_PROP);
+    Property voterProperty = fr.getProperty(VOTER_VOTEVALUE_PROP);
     Value[] value = voterProperty.getValues();
-    for (Value val : value) {
-      assertTrue(voters.contains(val.getString()));
+    for (int i = 0; i < 3; i++) {
+      assertTrue(value[i].getString().startsWith(voters.get(i) + ""));
     }
     assertEquals(3.0, fr.getProperty(VOTING_RATE_PROP).getValue().getDouble());
     assertEquals(3, fr.getProperty(VOTE_TOTAL_LANG_PROP).getValue().getLong());

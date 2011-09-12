@@ -24,6 +24,10 @@
   </component-->
   
   <component>
+    <type>org.exoplatform.services.migration.VoteNodeTypeMigrationService</type>
+  </component>
+  
+  <component>
     <type>org.exoplatform.services.migration.ActionMigrationService</type>
   </component>  
 

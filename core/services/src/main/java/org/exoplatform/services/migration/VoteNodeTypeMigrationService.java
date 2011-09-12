@@ -1,0 +1,95 @@
+/*
+
+ * Copyright (C) 2003-2008 eXo Platform SAS.
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Affero General Public License
+ * as published by the Free Software Foundation; either version 3
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, see<http://www.gnu.org/licenses/>.
+ */
+package org.exoplatform.services.migration;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.jcr.PropertyType;
+import javax.jcr.Session;
+
+import org.exoplatform.services.cms.impl.DMSConfiguration;
+import org.exoplatform.services.jcr.RepositoryService;
+import org.exoplatform.services.jcr.core.nodetype.ExtendedNodeTypeManager;
+import org.exoplatform.services.jcr.core.nodetype.NodeTypeValue;
+import org.exoplatform.services.jcr.core.nodetype.PropertyDefinitionValue;
+import org.exoplatform.services.jcr.ext.common.SessionProvider;
+import org.exoplatform.services.log.ExoLogger;
+import org.exoplatform.services.log.Log;
+import org.picocontainer.Startable;
+
+/**
+ * Add property 'exo:voterVoteValues' into 'mix:votable'
+ * 
+ * Created by The eXo Platform SARL Author : Nguyen Anh Vu vu.nguyen@exoplatform.com Sep 07, 2010
+ */
+public class VoteNodeTypeMigrationService implements Startable {
+
+  private static final String VOTER_VOTEVALUE_PROP = "exo:voterVoteValues";
+  private static final String MIX_VOTABLE = "mix:votable";
+
+  private DMSConfiguration dmsConfiguration_;
+  private RepositoryService repoService_;
+  private Log log = ExoLogger.getLogger(this.getClass());
+
+  public VoteNodeTypeMigrationService(RepositoryService repoService, DMSConfiguration dmsConfiguration) {
+    this.repoService_ = repoService;
+    this.dmsConfiguration_ = dmsConfiguration;
+  }
+
+  @Override
+  public void start() {
+    log.info("Start " + this.getClass().getName() + ".............");
+    SessionProvider sessionProvider = SessionProvider.createSystemProvider();
+    try {
+      //get info
+      Session session = sessionProvider.getSession(dmsConfiguration_.getConfig().getSystemWorkspace(),
+                                                                                  repoService_.getCurrentRepository());
+      ExtendedNodeTypeManager nodeTypeManager = (ExtendedNodeTypeManager)session.getWorkspace().getNodeTypeManager();
+      NodeTypeValue mixVotableNodeTypeValue = nodeTypeManager.getNodeTypeValue(MIX_VOTABLE);
+      List<PropertyDefinitionValue> propertyDefinitionList = mixVotableNodeTypeValue.getDeclaredPropertyDefinitionValues();
+      //check if exo:voterVoteValues already exists
+      boolean propertyExists = false;
+      for (PropertyDefinitionValue propertyDefinition : propertyDefinitionList) {
+        if (propertyDefinition.getName().equals(VOTER_VOTEVALUE_PROP)) {
+          propertyExists = true;
+          break;
+        }
+      }
+      //add new property
+      if (!propertyExists) {
+        propertyDefinitionList.add(new PropertyDefinitionValue(VOTER_VOTEVALUE_PROP, true, false, 1, false,
+                                                    new ArrayList<String>(), true, PropertyType.STRING, new ArrayList<String>()));
+        mixVotableNodeTypeValue.setDeclaredPropertyDefinitionValues(propertyDefinitionList);
+        nodeTypeManager.registerNodeType(mixVotableNodeTypeValue, ExtendedNodeTypeManager.REPLACE_IF_EXISTS);
+      }
+      log.info("Add new property '" + VOTER_VOTEVALUE_PROP + "' for node type 'mix:votable' successfully!");
+    } catch (Exception e) {
+      if (log.isErrorEnabled()) {
+        log.error("An unexpected error occurs when add new property '" + VOTER_VOTEVALUE_PROP + "' for node type 'mix:votable'!", e);
+      }
+    } finally {
+      sessionProvider.close();
+    }
+  }
+
+  @Override
+  public void stop() {
+  }
+
+}
