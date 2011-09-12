@@ -1048,7 +1048,7 @@
   <UIShowAllOwnedByUserResult>
     <msg>
       <not-support>There is no View template for this node</not-support>
-      empty>No results found.</empty>
+      <empty>No results found.</empty>
       <access-denied>You cannot view this node because this template is not supported or access denied.</access-denied>
       <query-invalid>The query is invalid</query-invalid>
     </msg>
@@ -1598,7 +1598,8 @@
       <mimetype-invalid>Only .xml or .zip files are supported to import.</mimetype-invalid>
       <access-denied>Access denied! You are not allowed to import there.</access-denied>
       <constraint-violation-exception>Cannot import the node. The imported data are incorrect or the node type '{0}' is not allowed to be child's node type'{0}'.</constraint-violation-exception>
-      <item-exists-exception>An incoming referenceable node has the same UUID as an existing node in the workspace.</item-exists-exception>    </msg>
+      <item-exists-exception>An incoming referenceable node has the same UUID as an existing node in the workspace.</item-exists-exception>    
+    </msg>
   </UIImportNode>
   <!--
   ###############################################################################
@@ -2645,8 +2646,8 @@
   -->
   <UIActionBar>
     <msg>
-        <cannot-enable-version>Cannot enable versioning node.</cannot-enable-version>
-      </msg>
+      <cannot-enable-version>Cannot enable versioning node.</cannot-enable-version>
+    </msg>
   </UIActionBar>
   <UIPopupMenu>
     <msg>
