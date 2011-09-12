@@ -17,15 +17,16 @@ import javax.xml.transform.dom.DOMSource;
 import org.exoplatform.container.ExoContainerContext;
 import org.exoplatform.services.rest.resource.ResourceContainer;
 import org.exoplatform.services.wcm.extensions.publication.PublicationManager;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 @Path("/authoring/")
 public class LifecycleConnector implements ResourceContainer {
 
-//  private static final Log log         = ExoLogger.getLogger(LifecycleConnector.class);
   /** The Constant LAST_MODIFIED_PROPERTY. */
-  private static final String LAST_MODIFIED_PROPERTY = "Last-Modified";
+  private static final String LAST_MODIFIED_PROPERTY        = "Last-Modified";
 
   /** The Constant IF_MODIFIED_SINCE_DATE_FORMAT. */
   private static final String IF_MODIFIED_SINCE_DATE_FORMAT = "EEE, dd MMM yyyy HH:mm:ss z";
@@ -45,12 +46,11 @@ public class LifecycleConnector implements ResourceContainer {
    */
   @GET
   @Path("/bystate/")
-  public Response byState(
-      @QueryParam("fromstate") String fromstate,
-      @QueryParam("user") String user,
-      @QueryParam("lang") String lang,
-      @QueryParam("workspace") String workspace,
-      @QueryParam("json") String json ) throws Exception {
+  public Response byState(@QueryParam("fromstate") String fromstate,
+                          @QueryParam("user") String user,
+                          @QueryParam("lang") String lang,
+                          @QueryParam("workspace") String workspace,
+                          @QueryParam("json") String json) throws Exception {
     return getContents(fromstate, null, null, user, lang, workspace, json);
   }
 
@@ -69,13 +69,12 @@ public class LifecycleConnector implements ResourceContainer {
    */
   @GET
   @Path("/tostate/")
-  public Response toState(
-      @QueryParam("fromstate") String fromstate,
-      @QueryParam("tostate") String tostate,
-      @QueryParam("user") String user,
-      @QueryParam("lang") String lang,
-      @QueryParam("workspace") String workspace,
-      @QueryParam("json") String json ) throws Exception {
+  public Response toState(@QueryParam("fromstate") String fromstate,
+                          @QueryParam("tostate") String tostate,
+                          @QueryParam("user") String user,
+                          @QueryParam("lang") String lang,
+                          @QueryParam("workspace") String workspace,
+                          @QueryParam("json") String json) throws Exception {
     return getContents(fromstate, tostate, null, user, lang, workspace, json);
   }
 
@@ -94,19 +93,15 @@ public class LifecycleConnector implements ResourceContainer {
    */
   @GET
   @Path("/bydate/")
-  public Response byDate(
-      @QueryParam("fromstate") String fromstate,
-      @QueryParam("date") String date,
-      @QueryParam("lang") String lang,
-      @QueryParam("workspace") String workspace,
-      @QueryParam("json") String json ) throws Exception {
+  public Response byDate(@QueryParam("fromstate") String fromstate,
+                         @QueryParam("date") String date,
+                         @QueryParam("lang") String lang,
+                         @QueryParam("workspace") String workspace,
+                         @QueryParam("json") String json) throws Exception {
     return getContents(fromstate, null, date, null, lang, workspace, json);
   }
 
-
   /**
-   *
-   *
    * @param fromstate
    * @param tostate
    * @param user
@@ -115,16 +110,16 @@ public class LifecycleConnector implements ResourceContainer {
    * @return
    * @throws Exception
    */
+  @SuppressWarnings("unchecked")
   private Response getContents(String fromstate,
-      String tostate,
-      String date,
-      String user,
-      String lang,
-      String workspace,
-      String asJSon) throws Exception {
+                               String tostate,
+                               String date,
+                               String user,
+                               String lang,
+                               String workspace,
+                               String asJSon) throws Exception {
     DateFormat dateFormat = new SimpleDateFormat(IF_MODIFIED_SINCE_DATE_FORMAT);
     try {
-      StringBuffer json = new StringBuffer();
       Document document = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
       Element root = document.createElement("contents");
       document.appendChild(root);
@@ -133,8 +128,7 @@ public class LifecycleConnector implements ResourceContainer {
                                                                            .getComponentInstanceOfType(PublicationManager.class);
       List<Node> nodes = manager.getContents(fromstate, tostate, date, user, lang, workspace);
 
-      json.append("[");
-      boolean first=true;
+      JSONArray jsonList = new JSONArray();
       for (Node node : nodes) {
         String name = node.getName();
         String path = node.getPath();
@@ -145,15 +139,12 @@ public class LifecycleConnector implements ResourceContainer {
         if (node.hasProperty("publication:startPublishedDate")) {
           pubDate = node.getProperty("publication:startPublishedDate").getString();
         }
+        JSONObject jsonElt = new JSONObject();
 
-        if (!first)
-          json.append(",");
-        first = false;
-        json.append("{");
-        json.append("\"name\":\"" + name + "\"");
+        jsonElt.put("name", name);
         if (title != null)
-          json.append(",\"title\":\"" + title + "\"");
-        json.append(",\"path\":\"" + path + "\"");
+          jsonElt.put("title", title);
+        jsonElt.put("path", path);
 
         Element element = document.createElement("content");
         element.setAttribute("name", name);
@@ -161,17 +152,16 @@ public class LifecycleConnector implements ResourceContainer {
           element.setAttribute("title", title);
         element.setAttribute("path", path);
         if (pubDate != null) {
-          json.append(",\"publishedDate\":\"" + pubDate + "\"");
+          jsonElt.put("publishedDate", pubDate);
           element.setAttribute("publishedDate", pubDate);
         }
         root.appendChild(element);
-        json.append("}");
+        jsonList.add(jsonElt);
 
       }
-      json.append("]");
 
       if ("true".equals(asJSon))
-        return Response.ok(json.toString(), MediaType.TEXT_PLAIN)
+        return Response.ok(jsonList.toString(), MediaType.TEXT_PLAIN)
                        .header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date()))
                        .build();
       else
@@ -183,5 +173,4 @@ public class LifecycleConnector implements ResourceContainer {
     }
     return Response.ok().header(LAST_MODIFIED_PROPERTY, dateFormat.format(new Date())).build();
   }
-
 }
