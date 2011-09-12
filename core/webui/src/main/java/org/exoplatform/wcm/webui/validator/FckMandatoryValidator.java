@@ -17,7 +17,9 @@
 package org.exoplatform.wcm.webui.validator;
 
 import org.exoplatform.web.application.ApplicationMessage;
+import org.exoplatform.webui.core.UIComponent;
 import org.exoplatform.webui.exception.MessageException;
+import org.exoplatform.webui.form.UIForm;
 import org.exoplatform.webui.form.UIFormInput;
 
 /**
@@ -35,8 +37,21 @@ public class FckMandatoryValidator extends org.exoplatform.webui.form.validator.
         && (!uiInput.getValue().toString().trim().equals("<br />"))) {
       return;
     } else {
+      UIComponent uiComponent = (UIComponent)uiInput;
+      UIForm uiForm = uiComponent.getAncestorOfType(UIForm.class);
+      String label;
+      try
+      {
+         label = uiForm.getId() + ".label." + uiInput.getName();
+      }
+      catch (Exception e)
+      {
+         label = uiInput.getName();
+      }
+      label = label.trim();
+      Object[] args = {label};      
       throw new MessageException(new ApplicationMessage("EmptyFieldValidator.msg.empty-input",
-                                                        null,
+                                                        args,
                                                         ApplicationMessage.WARNING));
     }
   }
