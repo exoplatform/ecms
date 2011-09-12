@@ -266,9 +266,14 @@ public interface WCMComposer {
 
   /**
    * Check isCache or not
-   * @return
+   * @return 
    * @throws Exception the exception
    */
   public boolean isCached() throws Exception;
-
+  /**
+   * Update all document nodetypes and write a query cause   
+   * @return a part of the query allow search all document node and taxonomy link also. Return null if there is any exception.
+   * @throws Exception the exception
+   */
+  public String updateTemplatesSQLFilter() throws Exception; 
 }

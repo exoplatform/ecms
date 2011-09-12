@@ -840,6 +840,14 @@ public class WCMComposerImpl implements WCMComposer, Startable {
    */
   private String getTemplatesSQLFilter() {
     if (templatesFilter != null) return templatesFilter;
+    return updateTemplatesSQLFilter();
+  }
+  /**
+   * Update all document nodetypes and write a query cause
+   * @param repository the repository's name
+   * @return a part of the query allow search all document node and taxonomy link also. Return null if there is any exception.
+   */
+  public String updateTemplatesSQLFilter() {    
     try {
       List<String> documentTypes = templateService.getDocumentTemplates();
       StringBuffer documentTypeClause = new StringBuffer("(");
