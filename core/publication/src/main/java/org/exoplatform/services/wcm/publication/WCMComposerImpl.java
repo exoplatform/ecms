@@ -834,7 +834,7 @@ public class WCMComposerImpl implements WCMComposer, Startable {
   }
 
   /**
-   * Gets all document nodetypes and write a query cause
+   * Gets all document nodetypes and write a query statement
    * @param repository the repository's name
    * @return a part of the query allow search all document node and taxonomy link also. Return null if there is any exception.
    */
@@ -843,7 +843,7 @@ public class WCMComposerImpl implements WCMComposer, Startable {
     return updateTemplatesSQLFilter();
   }
   /**
-   * Update all document nodetypes and write a query cause
+   * Update all document nodetypes and write a query statement
    * @param repository the repository's name
    * @return a part of the query allow search all document node and taxonomy link also. Return null if there is any exception.
    */

@@ -271,7 +271,7 @@ public interface WCMComposer {
    */
   public boolean isCached() throws Exception;
   /**
-   * Update all document nodetypes and write a query cause   
+   * Update all document nodetypes and write a query statement   
    * @return a part of the query allow search all document node and taxonomy link also. Return null if there is any exception.
    * @throws Exception the exception
    */
