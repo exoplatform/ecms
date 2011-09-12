@@ -7,18 +7,18 @@ There are two main cases to use:
 h1. Fields {anchor:id=CONTref.Configuration.Deployment.Fields}
 
 *init-params*
-|| *Element* || *Type* || *Description* ||
-| *object-param* | {{Object}} | The parameter which is an Object. |
+||*Element*||*Type*||*Description*||
+|*object-param*|{{Object}}|The parameter which is an Object.|
 
 *object-param*
-|| *Element* || *Type* || *Default value* || *object-param* ||
-| *name* | {{String}} |{{ACME Logo data}} | The name of this object parameter. |
-| *description* | {{String}} |{{Deployment Descriptor}} | The description of this object parameter. |
-| *object* | {{Class}} | {{org.exoplatform.services.deployment.DeploymentDescriptor}} | The object of this object parameter. |
+||*Element*||*Type*||*Default value*||*object-param*||
+|*name*|{{String}}|{{ACME Logo data}}|The name of this object parameter.|
+|*description*|{{String}}|{{Deployment Descriptor}}|The description of this object parameter.|
+| *object* | {{Class}} | {{org.exoplatform.services.deployment.DeploymentDescriptor}}|The object of this object parameter.|
 
 *object*
-|| *Attribute* || *Type* || *Default value* || *Description* ||
-| *type* | {{String}} | {{org.exoplatform.services.deployment.DeploymentDescriptor (*)}} | The type of this object. |
+||*Attribute*||*Type*||*Default value*||*Description*||
+|*type*|{{String}}|{{org.exoplatform.services.deployment.DeploymentDescriptor (*)}}|The type of this object.|
 
 _*org.exoplatform.services.deployment.DeploymentDescriptor*_
 || *Name* || *Type* || *Default value* || *Description* ||
@@ -27,7 +27,7 @@ _*org.exoplatform.services.deployment.DeploymentDescriptor*_
 | *cleanupPublication* | {{Boolean}} | {{false}} | Decide when the publication lifecycle is cleaned up in the target folder after importing the data.{example}{example}true: allow{example}{example}false:not allow |
 | *versionHistoryPath* | {{String}} | {{war:/conf/sample-portal/wcm/artifacts/site-resources/acme/Logo_versionHistory.zip<}} | The absolute path of the version history file. |
 
-*{{org.exoplatform.services.deployment.DeploymentDescriptor$Target}}*
+_*org.exoplatform.services.deployment.DeploymentDescriptor$Target*_
 || *Field* || *Type* || *Default value* || *Description* ||
 | *repository* | {{String}} | {{repository}} | The repository of the target node. |
 | *repository* | {{String}} | {{repository}} | The repository of the target node. |
@@ -36,43 +36,43 @@ _*org.exoplatform.services.deployment.DeploymentDescriptor*_
 
 h1. Sample configuration {anchor:id=CONTref.Configuration.Deployment.ConfigurationExample}
 {code:xml}
-  <external-component-plugins>
-    <target-component>org.exoplatform.services.deployment.WCMContentInitializerService</target-component>
-    <component-plugin>
-      <name>Content Initializer Service</name>
-      <set-method>addPlugin</set-method>
-      <type>org.exoplatform.services.deployment.plugins.XMLDeploymentPlugin</type>
-      <description>XML Deployment Plugin</description>
-      <init-params>
-        <object-param>
-          <name>ACME Logo data</name>
-          <description>Deployment Descriptor</description>
-          <object type="org.exoplatform.services.deployment.DeploymentDescriptor">
-            <field name="target">
-              <object type="org.exoplatform.services.deployment.DeploymentDescriptor$Target">
-                <field name="repository">
-                  <string>repository</string>
-                </field>
-                <field name="workspace">
-                  <string>collaboration</string>
-                </field>
-                <field name="nodePath">
-                  <string>/sites content/live/acme/web contents/site artifacts</string>
-                </field>
-              </object>
-            </field>
-            <field name="sourcePath">
-              <string>war:/conf/sample-portal/wcm/artifacts/site-resources/acme/Logo.xml</string>
-            </field>
-	    <field name="versionHistoryPath">
-              <string>war:/conf/sample-portal/wcm/artifacts/site-resources/acme/Logo_versionHistory.zip</string>
-            </field>
-            <field name="cleanupPublication">
-              <boolean>true</boolean>
-            </field>
-          </object>
-        </object-param>
-      </init-params>
-    </component-plugin>
-  </external-component-plugins>
+<external-component-plugins>
+  <target-component>org.exoplatform.services.deployment.WCMContentInitializerService</target-component>
+  <component-plugin>
+    <name>Content Initializer Service</name>
+    <set-method>addPlugin</set-method>
+    <type>org.exoplatform.services.deployment.plugins.XMLDeploymentPlugin</type>
+    <description>XML Deployment Plugin</description>
+    <init-params>
+      <object-param>
+        <name>ACME Logo data</name>
+        <description>Deployment Descriptor</description>
+        <object type="org.exoplatform.services.deployment.DeploymentDescriptor">
+          <field name="target">
+            <object type="org.exoplatform.services.deployment.DeploymentDescriptor$Target">
+              <field name="repository">
+                <string>repository</string>
+              </field>
+              <field name="workspace">
+                <string>collaboration</string>
+              </field>
+              <field name="nodePath">
+                <string>/sites content/live/acme/web contents/site artifacts</string>
+              </field>
+            </object>
+          </field>
+          <field name="sourcePath">
+            <string>war:/conf/sample-portal/wcm/artifacts/site-resources/acme/Logo.xml</string>
+          </field>
+          <field name="versionHistoryPath">
+            <string>war:/conf/sample-portal/wcm/artifacts/site-resources/acme/Logo_versionHistory.zip</string>
+          </field>
+          <field name="cleanupPublication">
+            <boolean>true</boolean>
+          </field>
+        </object>
+      </object-param>
+    </init-params>
+  </component-plugin>
+</external-component-plugins>
 {code}

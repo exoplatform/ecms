@@ -1,33 +1,33 @@
-
-_SiteSearchService_ is used in the Search portlet that allows users to find all information matching with your given keyword.
+The _SiteSearchService_ component is used in the Search portlet that allows users to find all information matching with your given keyword.
 
 It is configured in the _core/core-configuration/src/main/webapp/WEB-INF/conf/configuration.xml_ file as follows:
 
-{code:language=xml|indent=2}
-	<import>war:/conf/wcm-core/core-search-configuration.xml</import>
+{code:xml}
+<import>war:/conf/wcm-core/core-search-configuration.xml</import>
 {code}
 
 The component configuration maps the _SiteSearchService_ component with its own implementation: _SiteSearchServiceImpl_.
 
-{code:language=xml|indent=2}
+{code:xml}
 <component>
-    <key>org.exoplatform.services.wcm.search.SiteSearchService</key>
-    <type>org.exoplatform.services.wcm.search.SiteSearchServiceImpl</type>
-    <component-plugins>
-        ...
-    </component-plugins>
-    <init-params>
-      <value-param>
-        <name>isEnabledFuzzySearch</name>
-        <value>true</value>
-      </value-param>
-      <value-param>
-        <name>fuzzySearchIndex</name>
-        <value></value>
-      </value-param>
-    </init-params>
+  <key>org.exoplatform.services.wcm.search.SiteSearchService</key>
+  <type>org.exoplatform.services.wcm.search.SiteSearchServiceImpl</type>
+  <component-plugins>
+    ...
+  </component-plugins>
+  <init-params>
+    <value-param>
+      <name>isEnabledFuzzySearch</name>
+      <value>true</value>
+    </value-param>
+    <value-param>
+      <name>fuzzySearchIndex</name>
+      <value></value>
+    </value-param>
+  </init-params>
 </component>
 {code}
+
 The component consists of the following init-parameters:
 ||*Init-Params*||*Default Value*||*Possible Value*||*Description*||
 |isEnabledFuzzySearch|true|Boolean|Allow administrators to enable/disable the fuzzy search mechanism.|

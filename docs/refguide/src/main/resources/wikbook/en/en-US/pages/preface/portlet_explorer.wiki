@@ -1,19 +1,19 @@
 The Content Explorer portlet is packaged in the _ecmexplorer.war_ file. It is used to manage all documents in different drives. With this portlet, users can do many different actions depending on their roles, such as adding/deleting a category and a document, showing/hiding a node,
-managing publication and more.
+managing publication, and more.
 
-h1. Available preferences {anchor:id=CONTref.Portlets.Explorer.AvailablePreferences}
+* *Available preferences* {anchor:id=CONTref.Portlets.Explorer.AvailablePreferences}
 
 || *Preference* || *Type* || *Default value* || *Description* ||
 | *repository* | {{String}} | {{repository}} | The repository name which is used in an instance of Content Explorer. |
 | *workspace* | {{String}} | N/A | Not in use. The workspace name was included in the Drive.|
-| *path* | {{String}} | N/A | The path of the node. This preference will be used when the usecase chosen is Parameterize. |
-| *drive* | {{String}} | N/A | Not in use. Replaced by driveName preference. |
-| *views* | {{String}} | N/A | Not in use. The views will be displayed basing on the Drive which a user has the access permission.|
-| *allowCreateFolders* | {{String}} | N/A | Allow to create a folder by type. When you do not specify the value, then the default value will be nt:unstructured, nt:folder. |
+| *path* | {{String}} | N/A | The path of the node. This preference will be used when the selected usecase is *Parameterize*. |
+| *drive* | {{String}} | N/A | Not in use. Replaced by the driveName preference. |
+| *views* | {{String}} | N/A | Not in use. The views will be displayed basing on the Drive which the user has the access permission.|
+| *allowCreateFolders* | {{String}} | N/A | Allow creating a folder by type. When you do not specify the value, the default value will be nt:unstructured, nt:folder. |
 | *categoryMandatoryWhenFileUpload* | {{Boolean}} | false | Force a user to add a category when uploading or creating a document. |
 | *uploadFileSizeLimitMB* | {{Float}} | 150 | The maximum size of a file that is uploaded to the system (MB). |
-| *usecase* | {{String}} | {{selection}} | The behavior to access Content Explorer. By default, the "selection" option is configured. Besides "selection", there are four other ways to configure the Content Explorer: *Jailed*,*Personal*,*Social*,*Parameterize*. |
-| *driveName* | {{String}} | {{Private}} | The name of a drive that a user wants to access. |
+| *usecase* | {{String}} | {{selection}} | The behavior to access Content Explorer. By default, the "selection" option is configured. Besides "selection", there are four other ways to configure the Content Explorer: *Jailed*, *Personal*, *Social*, *Parameterize*. |
+| *driveName* | {{String}} | {{Private}} | The name of drive which the user wants to access. |
 | *trashHomeNodePath* | {{String}} | {{/Trash}} | The location to store the deleted nodes. |
 | *trashRepository* | {{String}} | {{repository}} | The name of the repository where stores the deleted nodes. |
 | *trashWorkspace* | {{String}} | {{collaboration}} | The name of the workspace where stores the deleted nodes. |
@@ -23,7 +23,7 @@ h1. Available preferences {anchor:id=CONTref.Portlets.Explorer.AvailablePreferen
 | *showSideBar* | {{Boolean}} | {{true}} | Allow showing the Side bar or not.|
 | *showFilterBar* | {{Boolean}} | {{true}} | Allow showing the Filter bar or not. |
 
-h1. Sample Configuration {anchor:id=CONTref.Portlets.Explorer.ExampleConfiguration}
+* *Sample Configuration* {anchor:id=CONTref.Portlets.Explorer.ExampleConfiguration}
 
 {code:xml}
 <portlet-preferences>

@@ -1,11 +1,12 @@
 The Administration portlet is packaged in the _ecmadmin.war_ file. The portlet manages the main ECM functions, including categories and tags, content presentation, types of content and advanced configuration.
-h1. Available preferences {anchor:id=CONTref.Portlets.Administration.AvailablePreferences}
 
-|| *Preference* || *Type*|| *Default*|| *Description* ||
-| *repository* | {{String}} | {{Repository}} |The name of the current repository.|
+* *Available preferences* {anchor:id=CONTref.Portlets.Administration.AvailablePreferences}
+
+|| *Preference* || *Type*|| *Default* || *Description* ||
+| *repository* | {{String}} | {{Repository}} | The name of the current repository.|
 
 
-h1. Sample Configuration {anchor:id=CONTref.Portlets.Administration.SampleConfiguration}
+* *Sample Configuration* {anchor:id=CONTref.Portlets.Administration.SampleConfiguration}
 
 {code:xml}
 <portlet-preferences>

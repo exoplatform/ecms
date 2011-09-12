@@ -1,5 +1,6 @@
-The Authoring portlet is packaged in the _{noformat}authoring-apps.war{noformat}_ file. The portlet allows users to manage contents in draft and contents needed to be approved or published.
-h1. Available preferences {anchor:id=CONTref.Portlets.Authoring.AvailablePreferences}
+The Authoring portlet is packaged in the _{noformat}authoring-apps.war{noformat}_ file. The portlet allows users to manage contents in draft and contents which need to be approved or published.
+
+* *Available preferences* {anchor:id=CONTref.Portlets.Authoring.AvailablePreferences}
 
 || *Preference* || *Type*|| *Default*|| *Description* ||
 | *repository* | {{String}} | {{Repository}} |The name of the repository.|
@@ -7,23 +8,24 @@ h1. Available preferences {anchor:id=CONTref.Portlets.Authoring.AvailablePrefere
 | *drive* | {{String}} | {{Collaboration}} |The name of the drive.|
 
 
-h1. Sample Configuration {anchor:id=CONTref.Portlets.Authoring.SampleConfiguration}
-{code:language=xml|indent=2}
+* *Sample Configuration* {anchor:id=CONTref.Portlets.Authoring.SampleConfiguration}
+
+{code:xml}
 <portlet-preferences>
-      <preference>
-        <name>repository</name>
-        <value>repository</value>
-        <read-only>true</read-only>
-      </preference>
-      <preference>
-        <name>workspace</name>
-        <value>collaboration</value>
-        <read-only>false</read-only>
-      </preference>
-      <preference>
-        <name>drive</name>
-        <value>collaboration</value>
-        <read-only>false</read-only>
-      </preference>s
+  <preference>
+    <name>repository</name>
+    <value>repository</value>
+    <read-only>true</read-only>
+  </preference>
+  <preference>
+    <name>workspace</name>
+    <value>collaboration</value>
+    <read-only>false</read-only>
+  </preference>
+  <preference>
+    <name>drive</name>
+    <value>collaboration</value>
+    <read-only>false</read-only>
+  </preference>
 </portlet-preferences>
 {code}

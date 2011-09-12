@@ -2,10 +2,10 @@
 
 The templates are applied to a node type or a metadata mixin type. There are two types of templates:
 
-* *Dialogs*: are html forms that allow to create node instances.
-* *Views*: are html fragments used to display nodes.
+* *Dialogs* are in the HTML form that allows creating node instances.
+* *Views*: are in the HTML fragments which are used to display nodes.
 
-From the ECM admin portlet, the _Manage Template_ lists existing node types associated to Dialog and/or View templates. These templates can be attached to permissions (in the usual _membership:group_ form), so that a specific one is displayed according to the rights of the user (very useful in a content validation workflow activity).
+From the ECM admin portlet, the _Manage Template_ lists existing node types associated to Dialog and/or View templates. These templates can be attached to permissions (in the usual _{noformat}membership:group{noformat}_ form), so that a specific one is displayed according to the rights of the user (very useful in a content validation workflow activity).
 
 *Document Type*
 
@@ -15,4 +15,4 @@ From the ECM admin portlet, the _Manage Template_ lists existing node types asso
 * Document types nodes can be created by the '_Add Document_' action.
 * Non-document types are hidden (unless the _'Show non document types'_ option is checked).
 
-Templates are written, using [Groovy Templates|http://groovy.codehaus.org/Groovy+Templates] and will require some experiences with JCR API and HTML notions.
+Templates are written by using [Groovy Templates|http://groovy.codehaus.org/Groovy+Templates] that requires some experiences with JCR API and HTML notions.

@@ -1,24 +1,24 @@
-The JodConverterServices component is used to convert documents into different office formats.
+The _JodConverterServices_ component is used to convert documents into different office formats.
 The configuration of this component is found in _/core/core-configuration/src/main/webapp/WEB-INF/conf/wcm-core/core-services-configuration.xml_.
 
-{code}
+{code:xml}
 <component>
-	  <key>org.exoplatform.services.cms.jodconverter.JodConverterService</key>
-	  <type>org.exoplatform.services.cms.jodconverter.impl.JodConverterServiceImpl</type>
-	  <init-params>
-      <value-param>
-        <name>host</name>
-        <value>127.0.0.1</value>
-      </value-param>
-      <value-param>
-        <name>port</name>
-        <value>8100</value>
-      </value-param>
-    </init-params>
+  <key>org.exoplatform.services.cms.jodconverter.JodConverterService</key>
+  <type>org.exoplatform.services.cms.jodconverter.impl.JodConverterServiceImpl</type>
+  <init-params>
+    <value-param>
+      <name>host</name>
+      <value>127.0.0.1</value>
+    </value-param>
+    <value-param>
+      <name>port</name>
+      <value>8100</value>
+    </value-param>
+  </init-params>
 </component>
 {code}
 
-*Details*:
-||Value-param|| Possible value || Default value || Description ||
-|*host* |The host IP|127.0.0.1|The host from which a document is converted into different office formats.|
-|*port* |The port number|8100|The port number is open to accept converting a document into different office formats.|
+*Details*
+||*Value-param*||*Possible value*||*Default value*||*Description*||
+|*host*|The host IP|127.0.0.1|The host from which a document is converted into different office formats.|
+|*port*|The port number|8100|The port number is open to accept converting a document into different office formats.|

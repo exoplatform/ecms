@@ -3,4 +3,4 @@ JodConverter is used to convert documents into different office formats.
 _Package org.exoplatform.services.cms.jodconverter.JodConverterService_
 
 || *Method* || *Return* || *Prototype* || *Description* ||
-| *convert* | {{void}} | convert(InputStream input, String formatInput, OutputStream out, String formatOutput) throws Exception; |  Converts InputStream in the formatInput format to OutputStream with the formatOutput format.{example}{example}@param input{example}{example}@param formatInput{example}{example}@param out{example}{example}@param formatOutput{example}{example}@throws Exception |
+| *convert* | {{void}} | convert(InputStream input, String formatInput, OutputStream out, String formatOutput) throws Exception; |  Convert InputStream in the formatInput format to OutputStream with the formatOutput format.{example}{example}@param input{example}{example}@param formatInput{example}{example}@param out{example}{example}@param formatOutput{example}{example}@throws Exception |

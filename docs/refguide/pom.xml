@@ -132,7 +132,7 @@
 
                  <!-- PDF -->
                  <foCustomization>${wikbook.target}/src/resources/xsl/fopdf.xsl</foCustomization>
-                 <imgSrcPath>images/</imgSrcPath>
+                 <imgSrcPath></imgSrcPath>
                  <admonGraphicsPath>images/admons/</admonGraphicsPath>
 
                  <!-- Highlight source code -->

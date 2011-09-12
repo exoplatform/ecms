@@ -4,4 +4,4 @@ eXo Content is a fully integrated content management solution inside eXo Platfor
 
 This integrated solution provides users with a comprehensive platform for integrating applications, managing and publishing content - all from a single, familiar console.
 
-When starting a new project, you can see eXo Content as a eXo Content Java developer Platform. In this reference guide, we will give you guidelines related to building stable applications using eXo Content from the inside.
+When starting a new project, you can see eXo Content as a Java developer platform. In this reference guide, we will give you guidelines related to building stable applications using eXo Content from the inside.

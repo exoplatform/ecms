@@ -1,48 +1,48 @@
 This is the configuration for the location of templates to inject in JCR.
 {code:xml}
-  <external-component-plugins>
-    <target-component>org.exoplatform.services.cms.templates.TemplateService</target-component>
-    <component-plugin>
-      <name>FilterContentTypeForWCMSpecificFolder</name>
-      <set-method>addContentTypeFilterPlugin</set-method>
-      <type>org.exoplatform.services.cms.templates.ContentTypeFilterPlugin</type>
-      <description>this plugin is used to filter wcm nodetype</description>
-      <init-params>
-        <object-param>
-          <name>cssFolderFilter</name>
-          <description>only exo:cssFile can be created in exo:cssFolder</description>
-          <object type="org.exoplatform.services.cms.templates.ContentTypeFilterPlugin$FolderFilterConfig">
-            <field name="folderType">
-              <string>exo:cssFolder</string>
-            </field>
-            <field name="contentTypes">
-              <collection type="java.util.ArrayList">
-                <value>
-                  <string>exo:cssFile</string>
-                </value>
-              </collection>
-            </field>
-          </object>
-        </object-param>
-        <object-param>
-          <name>jsFolderFolderFilter</name>
-          <description>only exo:cssFile can be created in exo:cssFolder</description>
-          <object type="org.exoplatform.services.cms.templates.ContentTypeFilterPlugin$FolderFilterConfig">
-            <field name="folderType">
-              <string>exo:jsFolder</string>
-            </field>
-            <field name="contentTypes">
-              <collection type="java.util.ArrayList">
-                <value>
-                  <string>exo:jsFile</string>
-                </value>
-              </collection>
-            </field>
-          </object>
-        </object-param>
-      </init-params>
-    </component-plugin>
-  </external-component-plugins>
+<external-component-plugins>
+  <target-component>org.exoplatform.services.cms.templates.TemplateService</target-component>
+  <component-plugin>
+    <name>FilterContentTypeForWCMSpecificFolder</name>
+    <set-method>addContentTypeFilterPlugin</set-method>
+    <type>org.exoplatform.services.cms.templates.ContentTypeFilterPlugin</type>
+    <description>this plugin is used to filter wcm nodetype</description>
+    <init-params>
+      <object-param>
+        <name>cssFolderFilter</name>
+        <description>only exo:cssFile can be created in exo:cssFolder</description>
+        <object type="org.exoplatform.services.cms.templates.ContentTypeFilterPlugin$FolderFilterConfig">
+          <field name="folderType">
+            <string>exo:cssFolder</string>
+          </field>
+          <field name="contentTypes">
+            <collection type="java.util.ArrayList">
+              <value>
+                <string>exo:cssFile</string>
+              </value>
+            </collection>
+          </field>
+        </object>
+      </object-param>
+      <object-param>
+        <name>jsFolderFolderFilter</name>
+        <description>only exo:cssFile can be created in exo:cssFolder</description>
+        <object type="org.exoplatform.services.cms.templates.ContentTypeFilterPlugin$FolderFilterConfig">
+          <field name="folderType">
+            <string>exo:jsFolder</string>
+          </field>
+          <field name="contentTypes">
+            <collection type="java.util.ArrayList">
+              <value>
+                <string>exo:jsFile</string>
+              </value>
+            </collection>
+          </field>
+        </object>
+      </object-param>
+    </init-params>
+  </component-plugin>
+</external-component-plugins>
 {code}
 
 In which:

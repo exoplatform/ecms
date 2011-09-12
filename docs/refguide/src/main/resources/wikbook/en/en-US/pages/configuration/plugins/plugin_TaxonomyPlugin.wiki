@@ -19,21 +19,21 @@ h1. Fields
 | *taxonomy.configuration* | {{String}}| {{org.exoplatform.services.cms.taxonomy.impl.TaxonomyConfig}} | Access permissions for each taxonomy in tree. |
 
 *Object type*: _org.exoplatform.services.cms.taxonomy.impl.TaxonomyConfig_
-||*Name* || *Type*|| *Description*  ||
-| *taxonomies* | {{java.util.ArrayList<TaxonomyConfig$Taxonomy>}} | List of taxonomies to be configured with permission. |
+||*Name*||*Type*||*Description*||
+|*taxonomies*|{{java.util.ArrayList<TaxonomyConfig$Taxonomy>}}|List of taxonomies to be configured with permission.|
 
 *Object type*: _org.exoplatform.services.cms.taxonomy.impl.TaxonomyConfig$Taxonomy_
-||*Name* || *Type*|| *Default value*|| *Description*  ||
-| *name* | {{String}} | {{name}}| Name of the taxonomy. |
-| *path* | {{String}} | {{cms}}| Path to the taxonomy in the taxonomy tree. |
-| *permissions* |{{Arraylist}}| {{java.util.ArrayList<TaxonomyTreeDefaultUserPermission$Permission>}} | List of permissions for users or groups to access the taxonomy. |
+||*Name*||*Type*||*Default value*||*Description*||
+|*name*|{{String}}|{{name}}|Name of the taxonomy.|
+|*path*|{{String}}|{{cms}}|Path to the taxonomy in the taxonomy tree.|
+|*permissions*|{{Arraylist}}|{{java.util.ArrayList<TaxonomyTreeDefaultUserPermission$Permission>}}|List of permissions for users or groups to access the taxonomy.|
 
 *Object type*: _org.exoplatform.services.cms.actions.impl.ActionConfig_
-||*Name* || *Type*|| *Default value*|| *Description*  ||
-| *actions* || {{Arraylist}}|{{java.util.ArrayList<ActionConfig$TaxonomyAction>}} | List of actions created for the taxonomy tree root node. |
+||*Name*||*Type*||*Default value*||*Description*||
+|*actions*||{{Arraylist}}|{{java.util.ArrayList<ActionConfig$TaxonomyAction>}}|List of actions created for the taxonomy tree root node.|
 
 *Object type*: _org.exoplatform.services.cms.actions.impl.ActionConfig$TaxonomyAction_
-|| *Field name* || *Type* ||*Default value*||  *Description* ||
+||*Field name*||*Type*||*Default value*||*Description*||
 | *type* | {{String}} |{{exo:taxonomyAction}}| Type of the action. |
 | *name* | {{String}} |{{taxonomyAction}}|  Name of the action. |
 | *description* | {{String}} | {{N/A}}| Description of the action. |
@@ -45,134 +45,174 @@ h1. Fields
 | *mixins* |{{Arraylist}}|  {{java.util.ArrayList<ActionConfig$Mixin>}} | List of node types that are affected by this action. |
 
 *Object type*: _org.exoplatform.services.cms.actions.impl.ActionConfig$Mixin_
-|| *Field name* || *Type* || *Default value*||  *Description* ||
-| *name* | {{String}} |{{mix:affectedNodeTypes}}| Mixin node type name that will be added. The node type is used to store the affected node types. |
-| *properties* || {{String}} | {{exo:affectedNodeTypeNames=exo:article,exo:podcast,exo:sample,kfx:document,nt:file,rma:filePlan}} | the name of the properties that store all the node types affected by the action. |
-
-
+||*Field name*||*Type*||*Default value*||*Description*||
+|*name*|{{String}}|{{mix:affectedNodeTypes}}|Mixin node type name that will be added. The node type is used to store the affected node types.|
+|*properties*||{{String}}|{{exo:affectedNodeTypeNames=exo:article,exo:podcast,exo:sample,kfx:document,nt:file,rma:filePlan}}|The name of the properties that store all the node types affected by the action.|
 
 h1. Sample configuration
 
 {code:xml}
-	<external-component-plugins>
-		<target-component>org.exoplatform.services.cms.taxonomy.TaxonomyService</target-component>
-		<component-plugin>
-			<name>predefinedTaxonomyPlugin</name>
-			<set-method>addTaxonomyPlugin</set-method>
-			<type>org.exoplatform.services.cms.taxonomy.impl.TaxonomyPlugin</type>
-			<init-params>
-				<value-param>
-					<name>autoCreateInNewRepository</name>
-					<value>true</value>
-				</value-param>
-				<value-param>
-					<name>repository</name>
-					<value>repository</value>
-				</value-param>
-				<value-param>
-					<name>workspace</name>
-					<value>dms-system</value>
-				</value-param>
-				<value-param>
-					<name>treeName</name>
-					<value>System</value>
-				</value-param>
-				<object-param>
-					<name>permission.configuration</name>
-					<object type="org.exoplatform.services.cms.taxonomy.impl.TaxonomyConfig">
-						<field name="taxonomies">
-							<collection type="java.util.ArrayList">
-								<value>
-									<object type="org.exoplatform.services.cms.taxonomy.impl.TaxonomyConfig$Taxonomy">
-										<field name="permissions">
-											<collection type="java.util.ArrayList">
-												<value>
-													<object type="org.exoplatform.services.cms.taxonomy.impl.TaxonomyConfig$Permission">
-														<field name="identity"><string>*:/platform/users</string></field>
-														<field name="read"><string>true</string></field>
-														<field name="addNode"><string>true</string></field>
-														<field name="setProperty"><string>true</string></field>
-														<field name="remove"><string>false</string></field>
-													</object>
-												</value>
-											</collection>
-										</field>
-									</object>
-								</value>
-							</collection>
-						</field>
-					</object>
-				</object-param>
-				<object-param>
-					<name>predefined.actions</name>
-					<description>description</description>
-					<object type="org.exoplatform.services.cms.actions.impl.ActionConfig">
-						<field  name="actions">
-							<collection type="java.util.ArrayList">
-								<value>
-									<object type="org.exoplatform.services.cms.actions.impl.ActionConfig$TaxonomyAction">
-										<field  name="type"><string>exo:taxonomyAction</string></field>
-										<field  name="name"><string>taxonomyAction</string></field>
-										<field  name="description"><string></string></field>
-										<field  name="homePath"><string>dms-system:/exo:ecm/exo:taxonomyTrees/storage/System</string></field>
-										<field  name="targetWspace"><string>collaboration</string></field>
-										<field  name="targetPath"><string>/Documents</string></field>
-										<field  name="lifecyclePhase">
-											<collection type="java.util.ArrayList">
-												<value><string>node_added</string></value>
-											</collection>
-										</field>
-										<field  name="roles"><string>*:/platform/administrators</string></field>
-										<field  name="mixins">
-											<collection type="java.util.ArrayList">
-												<value>
-													<object type="org.exoplatform.services.cms.actions.impl.ActionConfig$Mixin">
-														<field  name="name"><string>mix:affectedNodeTypes</string></field>
-														<field  name="properties">
-															<string>exo:affectedNodeTypeNames=exo:article,exo:podcast,exo:sample,kfx:document,nt:file,rma:filePlan</string>
-														</field>
-													</object>
-												</value>
-											</collection>
-										</field>
-									</object>
-								</value>
-							</collection>
-						</field>
-					</object>
-				</object-param>
-				<object-param>
-					<name>taxonomy.configuration</name>
-					<description>configuration predefined taxonomies to inject in jcr</description>
-					<object type="org.exoplatform.services.cms.taxonomy.impl.TaxonomyConfig">
-						<field name="taxonomies">
-							<collection type="java.util.ArrayList">
-								<!-- cms taxonomy -->
-								<value>
-									<object type="org.exoplatform.services.cms.taxonomy.impl.TaxonomyConfig$Taxonomy">
-										<field  name="name"><string>cmsTaxonomy</string></field>
-										<field  name="path"><string>/cms</string></field>
-										<field name="permissions">
-											<collection type="java.util.ArrayList">
-												<value>
-													<object type="org.exoplatform.services.cms.taxonomy.impl.TaxonomyConfig$Permission">
-														<field name="identity"><string>*:/platform/users</string></field>
-														<field name="read"><string>true</string></field>
-														<field name="addNode"><string>true</string></field>
-														<field name="setProperty"><string>true</string></field>
-														<field name="remove"><string>false</string></field>
-													</object>
-												</value>
-											</collection>
-										</field>
-									</object>
-								</value>
-							
-							</collection>
-						</field>
-					</object>
-				</object-param>
-			</init-params>
-		</component-plugin>
-	</external-component-plugins>
+<external-component-plugins>
+  <target-component>org.exoplatform.services.cms.taxonomy.TaxonomyService</target-component>
+  <component-plugin>
+    <name>predefinedTaxonomyPlugin</name>
+    <set-method>addTaxonomyPlugin</set-method>
+    <type>org.exoplatform.services.cms.taxonomy.impl.TaxonomyPlugin</type>
+    <init-params>
+      <value-param>
+        <name>autoCreateInNewRepository</name>
+        <value>true</value>
+      </value-param>
+      <value-param>
+        <name>repository</name>
+        <value>repository</value>
+      </value-param>
+      <value-param>
+        <name>workspace</name>
+        <value>dms-system</value>
+      </value-param>
+      <value-param>
+        <name>treeName</name>
+        <value>System</value>
+      </value-param>
+      <object-param>
+        <name>permission.configuration</name>
+        <object type="org.exoplatform.services.cms.taxonomy.impl.TaxonomyConfig">
+          <field name="taxonomies">
+            <collection type="java.util.ArrayList">
+              <value>
+                <object type="org.exoplatform.services.cms.taxonomy.impl.TaxonomyConfig$Taxonomy">
+                  <field name="permissions">
+                    <collection type="java.util.ArrayList">
+                      <value>
+                        <object type="org.exoplatform.services.cms.taxonomy.impl.TaxonomyConfig$Permission">
+                          <field name="identity">
+                            <string>*:/platform/users</string>
+                          </field>
+                          <field name="read">
+                            <string>true</string>
+                          </field>
+                          <field name="addNode">
+                            <string>true</string>
+                          </field>
+                          <field name="setProperty">
+                            <string>true</string>
+                          </field>
+                          <field name="remove">
+                            <string>false</string>
+                          </field>
+                        </object>
+                      </value>
+                    </collection>
+                  </field>
+                </object>
+              </value>
+            </collection>
+          </field>
+        </object>
+      </object-param>
+      <object-param>
+        <name>predefined.actions</name>
+        <description>description</description>
+        <object type="org.exoplatform.services.cms.actions.impl.ActionConfig">
+          <field name="actions">
+            <collection type="java.util.ArrayList">
+              <value>
+                <object type="org.exoplatform.services.cms.actions.impl.ActionConfig$TaxonomyAction">
+                  <field name="type">
+                    <string>exo:taxonomyAction</string>
+                  </field>
+                  <field name="name">
+                    <string>taxonomyAction</string>
+                  </field>
+                  <field name="description">
+                    <string></string>
+                  </field>
+                  <field name="homePath">
+                    <string>dms-system:/exo:ecm/exo:taxonomyTrees/storage/System</string>
+                  </field>
+                  <field name="targetWspace">
+                    <string>collaboration</string>
+                  </field>
+                  <field name="targetPath">
+                    <string>/Documents</string>
+                  </field>
+                  <field name="lifecyclePhase">
+                    <collection type="java.util.ArrayList">
+                      <value>
+                        <string>node_added</string>
+                      </value>
+                    </collection>
+                  </field>
+                  <field name="roles">
+                    <string>*:/platform/administrators</string>
+                  </field>
+                  <field name="mixins">
+                    <collection type="java.util.ArrayList">
+                      <value>
+                        <object type="org.exoplatform.services.cms.actions.impl.ActionConfig$Mixin">
+                          <field name="name">
+                            <string>mix:affectedNodeTypes</string>
+                          </field>
+                          <field name="properties">
+                            <string>exo:affectedNodeTypeNames=exo:article,exo:podcast,exo:sample,kfx:document,nt:file,rma:filePlan
+                            </string>
+                          </field>
+                        </object>
+                      </value>
+                    </collection>
+                  </field>
+                </object>
+              </value>
+            </collection>
+          </field>
+        </object>
+      </object-param>
+      <object-param>
+        <name>taxonomy.configuration</name>
+        <description>configuration predefined taxonomies to inject in jcr</description>
+        <object type="org.exoplatform.services.cms.taxonomy.impl.TaxonomyConfig">
+          <field name="taxonomies">
+            <collection type="java.util.ArrayList">
+              <!-- cms taxonomy -->
+              <value>
+                <object type="org.exoplatform.services.cms.taxonomy.impl.TaxonomyConfig$Taxonomy">
+                  <field name="name">
+                    <string>cmsTaxonomy</string>
+                  </field>
+                  <field name="path">
+                    <string>/cms</string>
+                  </field>
+                  <field name="permissions">
+                    <collection type="java.util.ArrayList">
+                      <value>
+                        <object type="org.exoplatform.services.cms.taxonomy.impl.TaxonomyConfig$Permission">
+                          <field name="identity">
+                            <string>*:/platform/users</string>
+                          </field>
+                          <field name="read">
+                            <string>true</string>
+                          </field>
+                          <field name="addNode">
+                            <string>true</string>
+                          </field>
+                          <field name="setProperty">
+                            <string>true</string>
+                          </field>
+                          <field name="remove">
+                            <string>false</string>
+                          </field>
+                        </object>
+                      </value>
+                    </collection>
+                  </field>
+                </object>
+              </value>
+            </collection>
+          </field>
+        </object>
+      </object-param>
+    </init-params>
+  </component-plugin>
+</external-component-plugins>
 {code}

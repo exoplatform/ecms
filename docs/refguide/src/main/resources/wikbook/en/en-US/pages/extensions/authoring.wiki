@@ -1,10 +1,10 @@
-Publication addons for WCM 2.2.0
+Publication add-ons for WCM 2.2.0
 
 h1. Extended Publication Plugin {anchor:id=CONTref.Extensions.AuthoringExtension.ExtendedPublicationPlugin}
 
 h2. States {anchor:id=CONTref.Extensions.AuthoringExtension.ExtendedPublicationPlugin.States}
 
-This extended publication has new states and new profiles that are enable in WCM 2.2.0.
+This extended publication has new states and new profiles that are enabled in WCM 2.2.0.
 
 * Profiles
 ** Author: This profile can edit a content and mark this content as redacted.
@@ -34,9 +34,9 @@ The WCM 2.2.0 rendering engine does not know anything about publication dates, s
 When the publisher sets start/end publication dates, he can "stage" the content. The content will go automatically to "published" state when the start date arrives and to "unpublished" state after end date.
 A cron job checks every hour (or less) all contents which need to be published (start date in the past + "staged" state) or unpublished (end date in the past + "published" state).
 
-Because of that, publication dates are not mandatory and a content can go to:
-* Staged : in multi-server mode, the publisher can only put the content to the "staged" state and wait for auto-publication.
-* Published : in single-server mode, the publisher can directly publish a content (with or without publication dates).
+Thus, the publication dates are not mandatory and a content can go to:
+* Staged: in multi-server mode, the publisher can only put the content to the "staged" state and wait for auto-publication.
+* Published: in single-server mode, the publisher can directly publish a content (with or without publication dates).
 
 h2. New Publication Mixin {anchor:id=CONTref.Extensions.AuthoringExtension.ExtendedPublicationPlugin.NewPublicationMixin}
 
@@ -60,7 +60,7 @@ h2. New Publication Mixin {anchor:id=CONTref.Extensions.AuthoringExtension.Exten
 
 h3. Publication plugin UI {anchor:id=CONTref.Extensions.AuthoringExtension.ExtendedPublicationPlugin.PublicationPluginUI}
 
-Note that some labels like "Pr�t � publier" could be not well displayed in the publication UI.
+Note that some labels containing special or non-ASCII characters could not be well displayed in the publication UI.
 You can extend the width of the current UI State button by adding:
 
 {code:css}
@@ -68,12 +68,13 @@ You can extend the width of the current UI State button by adding:
   width: 75px !important;
 }
 {code}
-Another quick note about publication date inputs. UIPublicationPanel should not initialize the dates to any default value.
-The publishing and unpublish cron jobs will do this:
+
+Also, for the publication date inputs, UIPublicationPanel should not initialize the dates to any default value.
+The publishing and unpublish CRON jobs will do this:
 * A staged document with null publication start date is published instantly.
 * A document with null publication end date is published forever.
 
-See export section for more info about cron jobs.
+See the export section for more information about the CRON jobs.
 
 h1. Publication Manager {anchor:id=CONTref.Extensions.AuthoringExtension.PublicationManager}
 
@@ -93,6 +94,9 @@ public interface PublicationManager {
 	public List<Lifecycle> getLifecyclesFromUser(String remoteUser, String state);
 }
 {code}
+
+In which:
+
 * getLifecycles: returns a list of lifecycles (see below), with lifecycle name, publication plugin involved and possible states.
 * getContexts: returns a list of context, with name, related Lifecycle and other properties (see below).
 * getContext: returns a context by its name.
@@ -101,8 +105,9 @@ public interface PublicationManager {
 
 h2. Lifecycle {anchor:id=CONTref.Extensions.AuthoringExtension.PublicationManager.Lifecycle}
 
-A lifecycle is defined by a simple vertical workflow with steps (states) and profiles (membership). Each lifecycle is related to a Publication plugin (to be compliant with JBPM or Bonita business processes).
-+Example:+ _Two lifecycles with/without states_
+A lifecycle is defined by a simple vertical workflow with steps (states) and profiles (membership). Each lifecycle is related to a Publication plugin (compliant with the JBPM or Bonita business processes).
+
+For example: _Two lifecycles with/without states_
 
 {code:xml}
 <external-component-plugins>
@@ -259,6 +264,7 @@ A lifecycle is defined by a simple vertical workflow with steps (states) and pro
   </component-plugin>
 </external-component-plugins>
 {code}
+
 In the last example, there are three lifecycles:
 
 * Lifecycle 1: based on _States and versions based publication_.
@@ -268,8 +274,7 @@ In the last example, there are three lifecycles:
 * Lifecycle 2: based on new _Authoring publication_.
 ** Visibility: Define only the "visible" steps. In this example, there is no step for 'enrolled'. Even if this step exists, it will not be displayed in the UI.
 ** Automatic: Set a step as "automatic". In this mode, the step will be visible in the UI but it will be managed by the system (a cron job for example).
-* Lifecycle 3: Simulates the _States and versions based publication_ plugin.
-** Note that this simple lifecycle will work in a single server configuration.
+* Lifecycle 3: Simulates the _States and versions based publication_ plugin. Note that this simple lifecycle will work in a single server configuration.
 
 h3. Listen to a lifecycle {anchor:id=CONTref.Extensions.AuthoringExtension.PublicationManager.ListenToLifecycle}
 
@@ -295,9 +300,9 @@ Listener declaration could look like this:
 
 h2. Context {anchor:id=CONTref.Extensions.AuthoringExtension.PublicationManager.Context}
 
-A context is defined by simple rules. In WCM 2.2.0, you can choose to enroll the content in a specific lifecycle (e.g. publication plugin) based on context parameters.
+A context is defined by simple rules. In WCM 2.2.0, you can select to enroll the content in a specific lifecycle (for example, publication plugin) based on context parameters.
 There are three parameters used to define contexts:
-* Remote User: The current user who create/edit the content.
+* Remote User: The current user who can create/edit the content.
 * Current sitename: The Site from where the content is created (not the storage but the navigation).
 * Node: The node which you want to enroll.
 
@@ -307,11 +312,10 @@ From these parameters, you can easily connect and define contexts based on:
 * Path: You can enroll contents in the lifecycles based on their path (from the Node).
 * Type of content: You can enroll contents in the lifecycles based on their nodetype (from the Node).
 
-Because each site has a content storage (categories + physical storage), you can choose the right lifecycle for the right storage/site.
-Conflicts on contexts can occurr, you should avoid it by setting a priority (The less is the best).
+Because each site has a content storage (categories + physical storage), you can select the right lifecycle for the right storage/site.
+To avoid conflicts on contexts, you can set a priority (The less is the best).
 
-
-+Example :+ _Different Contexts_
+For example, _Different Contexts_
 
 {code:xml}
 <external-component-plugins>
@@ -431,23 +435,23 @@ Conflicts on contexts can occurr, you should avoid it by setting a priority (The
   </component-plugin>
 </external-component-plugins>
 {code}
+
 The logic is very simple. When creating a content, it should be attached a lifecycle with the lifecyle priority:
 * _context4_ is the most important (priority=50): you will enroll the content in the lifecycle 'lifecycle4' if:
 ** The content creator has the 'manager:/company/finances' membership.
 ** The content is stored in 'repository:collaboration:/documents/company/finances' or any subfolders.
 ** The content is a 'exo:article'.
 * If not, you will continue with _context3_.
-* etc.
 
-The logic is very simple. When we create a content, we will go lifecycle by lifecycle starting with the better priority :
-* _context4_ is the most important (priority=50) : we will enroll the content in the lifecycle 'lifecycle4' if :
-** the content creator has the 'manager:/company/finances' membership
-** the content is stored in 'repository:collaboration:/documents/company/finances' or any subfolders
-** the content is a 'exo:article'
-* if not we will continue with _context3_
-* etc
+The logic is very simple. When you create a content, go lifecycle by lifecycle starting with the better priority:
+* _context4_ is the most important (priority=50): you will enroll the content in the lifecycle 'lifecycle4' if:
+** the content creator has the 'manager:/company/finances' membership.
+** the content is stored in 'repository:collaboration:/documents/company/finances' or any subfolders.
+** the content is a 'exo:article'.
+* if not, you will continue with _context3_.
 
-{note:title=on creation only}Ihe contexts will be used only when the content is created and when you want to enroll it in a lifecycle for the first time.
+{note}
+The contexts will be used only when the content is created and when you want to enroll it in a lifecycle for the first time.
 Once you have the corresponding lifecycle, you will set the lifecycle inside the content (see New authoring Mixin) and the context service will not be called again for this content.
 {note}
 
@@ -467,21 +471,21 @@ h2. New Authoring Mixin {anchor:id=CONTref.Extensions.AuthoringExtension.Publica
   </propertyDefinitions>
 </nodeType>
 {code}
-When adding the content in a lifecycle, set the _publication:lifecycle_ property with the corresponding lifecycle.
+When adding the content in a lifecycle, set the _{noformat}publication:lifecycle{noformat}_ property with the corresponding lifecycle.
 
-{note:title=one lifecycle only}A content can be in one lifecycle only.
 {note}
-Each time you change from one state to another, you set the user who changed the state in _publication:lastUser_.
+A content can be in one lifecycle only.
+{note}
+Each time you change from one state to another, set the user who changed the state in _{noformat}publication:lastUser{noformat}_.
 
 h3. Querying based on publication status {anchor:id=CONTref.Extensions.AuthoringExtension.PublicationManager.QueryBaseOnPublicationStatus}
 
 By adding this mixin to contents, you can access contents by simple queries based on the current user profile.
 For example:
-* All my draft contents:
+* All your draft contents:
 ** query: select * from nt:base where publication:currentState='draft' and publication:lastUser='benjamin';
-* All the contents I have to approve
-** call: PublicationManager.getLifecycles('benjamin', 'approved') => returns lifecycles where I can go to the 'approved' state.
+* All the contents you have to approve.
+** call: PublicationManager.getLifecycles('benjamin', 'approved') => returns lifecycles where you can go to the 'approved' state.
 ** query: select * from nt:base where publication:currentState='pending' and (publication:lifecycle='lifecycle1' or publication:lifecycle='lifecycle3');
-* All the content that will be published tomorrow
+* All the content that will be published tomorrow.
 ** query: select * from nt:base where publication:currentState='staged' and publication:startPublishedDate>'xxxx';
-

@@ -78,8 +78,7 @@ To add your own UIAction, do as follows:
 </project>
 {code}
 
-
-*2.* Create the _src/main/java_ directory and start launching _mvn_ _eclipse:eclipse_.  Then, you can launch your eclipse and import this new project.
+*2.* Create the _src/main/java_ directory and start launching _{noformat}mvn eclipse:eclipse{noformat}_.  Then, you can launch your eclipse and import this new project.
 
 *3.* Create a new class called *_org.exoplatform.wcm.component.cache.UIWCMCacheComponent_* that extends *org.exoplatform.ecm.webui.component.admin.manager.UIAbstractManagerComponent*.
 
@@ -90,7 +89,7 @@ For example, to create your own action listener for *CacheView*, do as follows:
 
 *1.* Call *CacheViewActionListener*.
 
-*2.* Add a static inner class called *_CacheViewActionListener_* that extends *_org.exoplatform.ecm.webui.component.admin.listener.UIECMAdminControlPanelActionListener_*.
+*2.* Add a static inner class called _CacheViewActionListener_ that extends *_org.exoplatform.ecm.webui.component.admin.listener.UIECMAdminControlPanelActionListener_*.
 
 You will see the expected code below:
 {code:java}
@@ -106,9 +105,9 @@ public class CacheViewComponent extends UIAbstractManagerComponent {
 }
 {code}
 
-*3.* Create the _src/main/java_ directory and launch _mvn  eclipse:eclipse_.  You can then, launch your eclipse and import this new project.
+*3.* Create the _src/main/java_ directory and launch _{noformat}mvn eclipse:eclipse{noformat}_. You can then launch your eclipse and import this new project.
 
-*4.* Create a new configuration file _conf/portal/configuration.xml_ to register your action (see [6.2.2.3|#CONTref.Extensions.UIExtensions.AddOwnTabInECMAdministration.RegisterUIAction]) with the service _org.exoplatform.webui.ext.UIExtensionManager_.
+*4.* Create a new configuration file called _conf/portal/configuration.xml_ to register your action (see [6.2.2.3|#CONTref.Extensions.UIExtensions.AddOwnTabInECMAdministration.RegisterUIAction]) with the _org.exoplatform.webui.ext.UIExtensionManager_ service.
 
 h2. Register your UI Action {anchor:id=CONTref.Extensions.UIExtensions.AddOwnTabInECMAdministration.RegisterUIAction}
 
@@ -182,17 +181,19 @@ To register your UI Action, do as follows:
   </external-component-plugins>
 </configuration>
 {code}
-{note}With this configuration, only the users with the _{noformat}*:/platform/administrators{noformat}_ membership have the right to access the CacheView item.{note}
+
+{note}
+With this configuration, only the users with the _{noformat}*:/platform/administrators{noformat}_ membership have the right to access the CacheView item.{note}
 
 *2.* Launch *mvn clean install*.
 
-*3.* Copy the resource bundle {anchor:id=CONTref.Extensions.UIExtensions.AddOwnTabInECMAdministration.DefineLabelandRegisterResourceBundle}
+*3.* Copy the resource bundle. {anchor:id=CONTref.Extensions.UIExtensions.AddOwnTabInECMAdministration.DefineLabelandRegisterResourceBundle}
 
 {note}
 All resources can be located in the _src/main/resource_ package because the resources ({{{*.xml, images, conf file}}}) and the code are separated. This is very useful in a hierarchical structure. 
 {note}
 
-Create _ExamplePortlet_en.xml_ with the following content and add it to _src/main/resource_ package:
+Create _{noformat}ExamplePortlet_en.xml{noformat}_ with the following content and add it to the _src/main/resource_ package:
 
 
 {code:xml}
@@ -253,11 +254,10 @@ Create _ExamplePortlet_en.xml_ with the following content and add it to _src/mai
 </bundle>
 {code}
 
-
 You must add the following content to _configuration.xml- to register the resource bundle.
 
 {note}
-By being added this configuration, the resource bundle has been completely separated from the original system, this is so clearly useful, you get an independent plugin.
+By being added this configuration, the resource bundle has been completely separated from the original system. This is clearly useful for you to get an independent plugin.
 {note}
 
 {code:xml}
@@ -289,11 +289,13 @@ By being added this configuration, the resource bundle has been completely separ
 {code}
 
 h2. Run your own UI extension sample {anchor:id=CONTref.Extensions.UIExtensions.AddOwnTabInECMAdministration.RunUIExtensionSample}
+Do as follows:
 
+*1.* Run Tomcat.
 
-* Run tomcat
-* Sign in as root
-* Go to the ECM Administration. 
+*2.* Sign in as root.
+
+*3.* Go to the ECM Administration. 
 
 You will see that a new extension has been already added to ECM Administrator:
 [image:Screenshot2.png]

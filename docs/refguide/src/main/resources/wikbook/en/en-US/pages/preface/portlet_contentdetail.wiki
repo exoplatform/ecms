@@ -1,5 +1,6 @@
 The Content Detail portlet is packaged in the _presentation.war_ file. The portlet allows users to view the detail of a specific content.
-h1. Available preferences  {anchor:id=CONTref.Portlets.ContentDetail.AvailablePreferences}
+
+* *Available preferences* {anchor:id=CONTref.Portlets.ContentDetail.AvailablePreferences}
 
 || *Preference* || *Type* || *Default Value* || *Description* ||
 | *repository* | {{String}} | {{repository}} | The repository where data are stored and maintained. |
@@ -14,7 +15,7 @@ h1. Available preferences  {anchor:id=CONTref.Portlets.ContentDetail.AvailablePr
 | *ShowComments* | {{Boolean}} | {{false}} | Show the existing comments of this content (if any). |
 | *sharedCache* | {{Boolean}} | {{true}} | Define if the portlet will cache the displayed contents. |
 
-h1. Sample configuration {anchor:id=CONTref.Portlets.ContentDetail.SampleConfiguration}
+* *Sample configuration* {anchor:id=CONTref.Portlets.ContentDetail.SampleConfiguration}
 
 {code:xml}
 <portlet-preferences>

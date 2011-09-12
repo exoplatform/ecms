@@ -1,10 +1,11 @@
 The Form Builder portlet is packaged in the _formgenerator.war_ file. It allows users to create node types and document templates for node types.
-h1. Available preferences {anchor:id=CONTref.Portlets.FormBuilder.AvailablePreferences}
+
+* *Available preferences* {anchor:id=CONTref.Portlets.FormBuilder.AvailablePreferences}
 
 || *Preference* || *Type*|| *Default Value* || *Description* ||
 | *repository* | {{String}} | {{repository}} | The current repository name which is always "repository". |
 
-h1. Sample Configuration {anchor:id=CONTref.Portlets.FormBuilder.SampleConfiguration}
+* *Sample Configuration* {anchor:id=CONTref.Portlets.FormBuilder.SampleConfiguration}
 
 {code:xml}
 <portlet-preferences>

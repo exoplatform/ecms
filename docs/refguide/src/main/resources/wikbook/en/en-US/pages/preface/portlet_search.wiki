@@ -1,9 +1,9 @@
 The Search portlet is packaged in the _searches.war_ file. It allows users to do a search with any string. In WCM 2.2.0, there are three types of search: quick search, advanced search and search with saved queries.
 
-h1. Available preferences {anchor:id=CONTref.Portlets.Search.AvailablePreferences}
+* *Available preferences* {anchor:id=CONTref.Portlets.Search.AvailablePreferences}
 
 || *Preference* || *Type*|| *Default value* || *Description* ||
-| *repository* | {{String}} | {{repository}} | The repository is a place where data are stored and maintained. |
+| *repository* | {{String}} | {{repository}} | The place where data are stored and maintained. |
 | *workspace* | {{String}} | {{collaboration}} | The workspace where the content is stored. |
 | *searchFormTemplatePath* | {{String}} | {{/exo:ecm/views/templates/WCM Advance Search/search-form/UIDefaultSearchForm.gtmpl}} | The path to the search form template. |
 | *searchResultTemplatePath* | {{String}} |{{ /exo:ecm/views/templates/WCM Advance Search/search-result/UIDefaultSearchResult.gtmpl}} | The path to the search result template. |
@@ -13,7 +13,7 @@ h1. Available preferences {anchor:id=CONTref.Portlets.Search.AvailablePreference
 | *showQuickEditButton* | {{Boolean}} | {{true}} | Show or hide the quick edit icon.|
 | *basePath* | {{String}} | {{parameterizedviewer}} | The page which is used to display the search result. |
 
-h1. Sample configuration {anchor:id=CONTref.Portlets.Search.SampleConfiguration}
+* *Sample configuration* {anchor:id=CONTref.Portlets.Search.SampleConfiguration}
 
 {code:xml}
 <portlet-preferences>

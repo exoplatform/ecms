@@ -1,10 +1,10 @@
 h1. Fields
-*Objectype*: _org.exoplatform.services.wcm.extensions.publication.context.impl.ContextConfig_
-||  *Name*  ||  *Type*  ||  *Default Value*   ||  *Description*  ||
-| *name* | {{string}} | context2 | The name of the context. |  
-| *priority* | {{string}} | {{100}} | The context priority, the higher number indicates higher priority. Because a site may have several life cycles, the life cycle with higher priority will be excuted priorly.|
-| *lifecycle* | {{string}} | {{lifecycle2}} | The name of the life cycle. |
-| *site* | {{string}} | {{acme}} | The site that will apply the context configuration. |
+*Object type*: _org.exoplatform.services.wcm.extensions.publication.context.impl.ContextConfig_
+||*Name*||*Type*||*Default Value*||*Description*||
+|*name*|{{string}}|context2|The name of the context. |
+|*priority*|{{string}}|{{100}}|The context priority, the higher number indicates higher priority. Because a site may have several lifecycles, the lifecycle with higher priority will be excuted priorly.|
+|*lifecycle*|{{string}}|{{lifecycle2}}|The name of the lifecycle.|
+|*site*|{{string}}|{{acme}}|The site that will apply the context configuration.|
 
 h1. Sample configuration
 {code:xml}
@@ -18,14 +18,22 @@ h1. Sample configuration
       <object-param>
         <name>contexts</name>
         <object type="org.exoplatform.services.wcm.extensions.publication.context.impl.ContextConfig">
-          <field  name="contexts">
+          <field name="contexts">
             <collection type="java.util.ArrayList">
               <value>
                 <object type="org.exoplatform.services.wcm.extensions.publication.context.impl.ContextConfig$Context">
-                  <field name="name"><string>context2</string></field>
-                  <field name="priority"><string>100</string></field>
-                  <field name="lifecycle"><string>lifecycle2</string></field>
-                  <field name="site"><string>acme</string></field>
+                  <field name="name">
+                    <string>context2</string>
+                  </field>
+                  <field name="priority">
+                    <string>100</string>
+                  </field>
+                  <field name="lifecycle">
+                    <string>lifecycle2</string>
+                  </field>
+                  <field name="site">
+                    <string>acme</string>
+                  </field>
                 </object>
               </value>
             </collection>
@@ -42,5 +50,3 @@ In which:
 * *Name*: {{AddLifecycle}}
 * *Set-method*: {{addLifecycle}}
 * *Type*: {{org.exoplatform.services.wcm.extensions.publication.lifecycle.StatesLifecyclePlugin}}
-
-
