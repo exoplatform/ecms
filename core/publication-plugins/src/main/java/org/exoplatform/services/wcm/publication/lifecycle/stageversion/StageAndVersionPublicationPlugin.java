@@ -57,9 +57,11 @@ import org.exoplatform.portal.mop.user.UserPortal;
 import org.exoplatform.portal.pom.config.POMSession;
 import org.exoplatform.portal.pom.config.POMSessionManager;
 import org.exoplatform.portal.pom.spi.portlet.Portlet;
+import org.exoplatform.services.cms.CmsService;
 import org.exoplatform.services.ecm.publication.IncorrectStateUpdateLifecycleException;
 import org.exoplatform.services.jcr.core.ManageableRepository;
 import org.exoplatform.services.jcr.util.IdGenerator;
+import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.wcm.core.NodeLocation;
 import org.exoplatform.services.wcm.core.WCMConfigurationService;
@@ -270,13 +272,26 @@ public class StageAndVersionPublicationPlugin extends WebpagePublicationPlugin{
     if (!node.isNew())
       node.save();
 
+    //raise event to notify that state is changed
+    if (!PublicationDefaultStates.ENROLLED.equalsIgnoreCase(newState)) {
+      
+      ListenerService listenerService = WCMCoreUtils.getService(ListenerService.class);
+      CmsService cmsService = WCMCoreUtils.getService(CmsService.class);
+
+      if ("true".equalsIgnoreCase(context.get(StageAndVersionPublicationConstant.IS_INITIAL_PHASE))) {
+        listenerService.broadcast(StageAndVersionPublicationConstant.POST_INIT_STATE_EVENT, cmsService, node);
+      } else {
+        listenerService.broadcast(StageAndVersionPublicationConstant.POST_CHANGE_STATE_EVENT, cmsService, node);
+      }
+    }
+    
     NodeLocation location = NodeLocation.make(node);
     composer.updateContent(location.getRepository(),
                            location.getWorkspace(),
                            location.getPath(),
                            new HashMap<String, String>());
   }
-
+  
   /**
    * Gets the value.
    *

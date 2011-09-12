@@ -7,30 +7,15 @@
   import org.exoplatform.services.jcr.util.Text;
   import org.exoplatform.ecm.webui.utils.Utils;
   import org.exoplatform.services.jcr.RepositoryService;
-
-  public Node getFileLangNode(Node currentNode) throws Exception {
-    if(currentNode.isNodeType("nt:unstructured")) {
-      if(currentNode.getNodes().getSize() > 0) {
-        NodeIterator nodeIter = currentNode.getNodes() ;
-        while(nodeIter.hasNext()) {
-          Node ntFile = nodeIter.nextNode() ;
-          if(ntFile.getPrimaryNodeType().getName().equals("nt:file")) {
-            return ntFile ;
-          }
-        }
-        return currentNode ;
-      }
-    }
-    return currentNode ;
-  }
-  
+  import java.util.Calendar;
+   
   UIComponent uiParent = uicomponent.getParent();
   
   def presentNodes = uicomponent.getPresentNodes();
   def links = new ArrayList<String>();
   def title = "";
   if (presentNodes.size() == 0) {
-    def currentNode = getFileLangNode(uiParent.getNode()) ;
+    def currentNode = uicomponent.getFileLangNode(uiParent.getNode()) ;
     def originalNode = uiParent.getOriginalNode();
     title = Text.unescapeIllegalJcrChars(originalNode.getName());
     presentNodes.add(currentNode);
@@ -41,12 +26,15 @@
   def url = "";
   for(nodedata in presentNodes) {
     link = "/".concat(uicomponent.getPortalName()).concat("/").concat(Utils.getRestContextName(uicomponent.getPortalName())).concat("/jcr/").concat(repository).concat("/").concat(nodedata.getSession().getWorkspace().getName()).concat(nodedata.getPath());
-    url = url.concat("\n {url: '").concat(link).concat("', autoPlay: true},");
+    url = url.concat("\n {url: '").concat(link).concat("'},");
     links.add(link);
   }
   url = url.length() == 0 ? url : url.substring(0, url.length() - 1);
   def rqcontext = _ctx.getRequestContext();
   def size = links.size();
+  
+  Calendar lCDateCalendar = Calendar.getInstance();
+  def timeCreated = lCDateCalendar.getTimeInMillis();
 %>
 <script type="text/javascript" src="/ecmexplorer/javascript/eXo/ecm/flowplayer-3.1.4.min.js"></script>
 <script type="text/javascript" src="/ecmexplorer/javascript/eXo/ecm/flowplayer.playlist-3.0.7.js"></script>
@@ -57,16 +45,16 @@
 		    style = "";
 		  }
 		%>
-  	<div id="player" class="PlayerContent" style="$style ; z-index:0;"></div>
+  	<div id="player-$timeCreated" class="PlayerContent" style="$style ; z-index:0;"></div>
     <script>
     <% print "\$" %> (function() { 
       // install flowplayer into container 
-    	flowplayer("player", {wmode: 'transparent', src: "/ecmexplorer/javascript/eXo/ecm/flowplayer-3.1.5.swf"}, { 
+    	flowplayer("player-$timeCreated", {wmode: 'transparent', src: "/ecmexplorer/javascript/eXo/ecm/flowplayer-3.1.5.swf"}, {  
       // fullscreen button not needed here 
         plugins: { 
           controls: { 
             url: '/ecmexplorer/javascript/eXo/ecm/flowplayer.controls-tube-3.1.5.swf',
-            fullscreen: false, 
+            fullscreen: true,  
             height: 30,
             // setup auto hide 
             autoHide: 'always',
@@ -79,11 +67,11 @@
           backgroundImage: 'url(/eXoDMSResources/skin/images/file/MP3Player.jpg)' 
         }, 
         clip: { 
-            autoPlay: true, 
+            autoPlay: false,  
             autoBuffering: true,
             // optional: when playback starts close the first audio playback 
             onBeforeBegin: function() { 
-              flowplayer("player").close(); 
+              flowplayer("player-$timeCreated").close();  
             } 
         }
       });
@@ -95,7 +83,7 @@
     <% 
       if (size > 1) {
     %>
-        flowplayer("player").playlist("div.petrol", {loop:true});
+        flowplayer("player-$timeCreated").playlist("div.petrol", {loop:true});
     <%
       }
     %>

@@ -18,6 +18,7 @@ import org.exoplatform.container.PortalContainer;
 import org.exoplatform.portal.config.model.Page;
 import org.exoplatform.portal.mop.navigation.NavigationContext;
 import org.exoplatform.portal.webui.util.Util;
+import org.exoplatform.services.cms.CmsService;
 import org.exoplatform.services.ecm.publication.IncorrectStateUpdateLifecycleException;
 import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.wcm.extensions.publication.impl.PublicationManagerImpl;
@@ -335,10 +336,24 @@ public class AuthoringPublicationPlugin extends StageAndVersionPublicationPlugin
 
     if (!node.isNew())
       node.save();
+    
+    //raise event to notify that state is changed
+    if (!PublicationDefaultStates.ENROLLED.equalsIgnoreCase(newState)) {
+      
+      ListenerService listenerService = WCMCoreUtils.getService(ListenerService.class);
+      CmsService cmsService = WCMCoreUtils.getService(CmsService.class);
+
+      if ("true".equalsIgnoreCase(context.get(StageAndVersionPublicationConstant.IS_INITIAL_PHASE))) {
+        listenerService.broadcast(StageAndVersionPublicationConstant.POST_INIT_STATE_EVENT, cmsService, node);
+      } else {
+        listenerService.broadcast(StageAndVersionPublicationConstant.POST_CHANGE_STATE_EVENT, cmsService, node);
+      }
+    }
+    
     ListenerService listenerService = WCMCoreUtils.getService(ListenerService.class, containerName);
     listenerService.broadcast(AuthoringPublicationConstant.POST_UPDATE_STATE_EVENT, null, node);
   }
-
+  
   /*
    * (non-Javadoc)
    * @see

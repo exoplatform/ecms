@@ -45,6 +45,7 @@ import org.exoplatform.services.wcm.extensions.publication.lifecycle.impl.Lifecy
 import org.exoplatform.services.wcm.extensions.utils.ContextComparator;
 import org.exoplatform.services.wcm.publication.WCMComposer;
 import org.exoplatform.services.wcm.publication.WebpagePublicationPlugin;
+import org.exoplatform.services.wcm.publication.lifecycle.stageversion.StageAndVersionPublicationConstant;
 import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 public class WCMPublicationServiceImpl
@@ -168,23 +169,25 @@ public class WCMPublicationServiceImpl
         context.put(AuthoringPublicationConstant.CURRENT_REVISION_NAME, currentRevision.getName());
       }
       try {
-      if (node.isLocked()) {
-      Lock lock = node.getLock();
-      String owner = lock.getLockOwner();
-      if (log.isInfoEnabled()) log.info("node is locked by owner, unlocking it for enrollement");
-      if(node.holdsLock() && remoteUser.equals(owner)) {
-        String lockToken = LockUtil.getLockToken(node);
-        if(lockToken != null) {
-          node.getSession().addLockToken(lockToken);
+        if (node.isLocked()) {
+          Lock lock = node.getLock();
+          String owner = lock.getLockOwner();
+          if (log.isInfoEnabled())
+            log.info("node is locked by owner, unlocking it for enrollement");
+          if (node.holdsLock() && remoteUser.equals(owner)) {
+            String lockToken = LockUtil.getLockToken(node);
+            if (lockToken != null) {
+              node.getSession().addLockToken(lockToken);
+            }
+            node.unlock();
+            node.removeMixin(Utils.MIX_LOCKABLE);
+            node.getSession().save();
+            // remove lock from Cache
+            LockUtil.removeLock(node);
+          }
         }
-        node.unlock();
-        node.removeMixin(Utils.MIX_LOCKABLE);
-        node.getSession().save();
-        //remove lock from Cache
-        LockUtil.removeLock(node);
-      }
-    }
 
+        context.put(StageAndVersionPublicationConstant.IS_INITIAL_PHASE, "true");
         publicationPlugin.changeState(node, initialState, context);
         node.setProperty("publication:lastUser", remoteUser);
         node.getSession().save();

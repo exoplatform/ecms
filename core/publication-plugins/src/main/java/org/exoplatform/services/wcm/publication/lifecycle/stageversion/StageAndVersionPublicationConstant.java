@@ -80,6 +80,14 @@ public interface StageAndVersionPublicationConstant {
 
   /** The Constant CURRENT_REVISION_NAME. */
   public static final String CURRENT_REVISION_NAME      = "Publication.context.currentVersion".intern();
+  
+  public static final String IS_INITIAL_PHASE           = "Publication.context.isInitialPhase".intern();
+  
+  public static final String DONT_BROADCAST_EVENT       = "Publication.context.dontBroadcastEvent".intern();
+
+  public static final String POST_INIT_STATE_EVENT      = "PublicationService.event.postInitState".intern();
+  
+  public static final String POST_CHANGE_STATE_EVENT    = "PublicationService.event.postChangeState".intern();
 
   /**
    * The Enum SITE_MODE.

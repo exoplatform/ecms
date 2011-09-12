@@ -22,10 +22,12 @@ import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.CmsService;
 import org.exoplatform.services.listener.Event;
 import org.exoplatform.services.listener.Listener;
+import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.security.ConversationState;
 import org.exoplatform.services.wcm.publication.WCMPublicationService;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
  * Created by The eXo Platform SAS
@@ -39,7 +41,8 @@ public class PostEditContentEventListener extends Listener<CmsService,Node> {
 
     /** The pservice. */
   private WCMPublicationService publicationService;
-
+  
+  public static final String POST_EDIT_CONTENT_EVENT = "PostEditContentEventListener.event.postEditContent".intern();
   /**
    * Instantiates a new post edit content event listener.
    *
@@ -71,6 +74,22 @@ public class PostEditContentEventListener extends Listener<CmsService,Node> {
       remoteUser = currentNode.getSession().getUserID(); 
     }
     if (log.isInfoEnabled()) log.info(currentNode.getPath() + "::" + siteName + "::"+remoteUser);    
+    
+    String currentState = "";
+    String newState = "";
+    if (currentNode.hasProperty("publication:currentState")) {
+      currentState = currentNode.getProperty("publication:currentState").getString();
+    }
+    
     publicationService.updateLifecyleOnChangeContent(currentNode, siteName, remoteUser);
+    if (currentNode.hasProperty("publication:currentState")) {
+      newState = currentNode.getProperty("publication:currentState").getString();
+    }
+    
+    if (currentState.equalsIgnoreCase(newState)) {
+      ListenerService listenerService = WCMCoreUtils.getService(ListenerService.class);
+      CmsService cmsService = WCMCoreUtils.getService(CmsService.class);
+      listenerService.broadcast(POST_EDIT_CONTENT_EVENT, cmsService, currentNode);
+    }
   }
 }
