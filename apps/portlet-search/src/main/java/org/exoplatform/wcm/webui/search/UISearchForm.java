@@ -185,7 +185,7 @@ public class UISearchForm extends UIForm {
      * org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui
      * .event.Event)
      */
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({ "deprecation" })
     public void execute(Event<UISearchForm> event) throws Exception {
       UISearchForm uiSearchForm = event.getSource();
       PortletRequestContext portletRequestContext = (PortletRequestContext) event.getRequestContext();
@@ -282,11 +282,12 @@ public class UISearchForm extends UIForm {
         uiSearchResult.setKeyword(keyword);
         uiSearchResult.setPageList(pageList);
         float timeSearch = pageList.getQueryTime() / 1000;
-        uiSearchResult.setSearchTime(timeSearch);
-        String suggestionURL = Util.getPortalRequestContext().getRequestURI();
-        suggestionURL += "?portal=" + selectedPortal + "&keyword=" + keyword;
-        uiSearchResult.setSuggestion(suggestionURL);
-        uiSearchForm.setSubmitAction(suggestionURL);
+        uiSearchResult.setSearchTime(timeSearch);        
+        if(pageList.getAvailable()<=0) {
+        	String suggestion = pageList.getSpellSuggestion();         
+        	uiSearchResult.setSuggestion(suggestion);
+        	uiSearchForm.setSubmitAction(suggestion);         
+        } 
         portletRequestContext.addUIComponentToUpdateByAjax(uiSearchResult);
       } catch (Exception e) {
         uiApp.addMessage(new ApplicationMessage(MESSAGE_NOT_SUPPORT_KEYWORD,

@@ -211,11 +211,12 @@ public class UISearchResult extends UIContainer {
         
         setSearchTime(pageList.getQueryTime() / 1000);
         setSuggestion(pageList.getSpellSuggestion());
-        String suggestionURL = Util.getPortalRequestContext().getRequestURI();
-        suggestionURL += "?portal=" + portal + "&keyword=" + getSuggestion();
-        setSuggestionURL(suggestionURL);
-        setPageList(pageList);
-        searchForm.setSubmitAction(suggestionURL);
+        if(pageList.getAvailable()<=0) {
+          String suggestion =pageList.getSpellSuggestion();        
+        	setSuggestionURL(suggestion);        
+        	searchForm.setSubmitAction(suggestion);
+        }
+        setPageList(pageList);        
       } catch (Exception e) {
         UIApplication uiApp = getAncestorOfType(UIApplication.class);
         uiApp.addMessage(new ApplicationMessage(UISearchForm.MESSAGE_NOT_SUPPORT_KEYWORD,
