@@ -20,7 +20,10 @@ import java.io.InputStream;
 
 import javax.jcr.Item;
 import javax.jcr.NoSuchWorkspaceException;
+import javax.jcr.Node;
 import javax.jcr.PathNotFoundException;
+import javax.jcr.RepositoryException;
+import javax.jcr.Session;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.HEAD;
@@ -43,6 +46,7 @@ import org.exoplatform.services.cms.link.NodeFinder;
 import org.exoplatform.services.jcr.RepositoryService;
 import org.exoplatform.services.jcr.ext.app.ThreadLocalSessionProviderService;
 import org.exoplatform.services.jcr.webdav.util.TextUtil;
+import org.exoplatform.services.listener.ListenerService;
 import org.exoplatform.services.log.ExoLogger;
 import org.exoplatform.services.log.Log;
 import org.exoplatform.services.rest.ExtHttpHeaders;
@@ -62,6 +66,7 @@ import org.exoplatform.services.rest.ext.webdav.method.SEARCH;
 import org.exoplatform.services.rest.ext.webdav.method.UNCHECKOUT;
 import org.exoplatform.services.rest.ext.webdav.method.UNLOCK;
 import org.exoplatform.services.rest.ext.webdav.method.VERSIONCONTROL;
+import org.exoplatform.services.wcm.utils.WCMCoreUtils;
 
 /**
  * This class is used to override the default WebDavServiceImpl in order to support symlinks
@@ -78,10 +83,14 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
    * Logger.
    */
   private static Log log = ExoLogger.getLogger("cms.webdav.WebDavServiceImpl");
+  
+  private final String POST_UPLOAD_CONTENT_EVENT = "WebDavService.event.postUpload";
 
   private final NodeFinder nodeFinder;
   
   private final RepositoryService repositoryService;
+  
+  private ListenerService listenerService;
 
   public WebDavServiceImpl(InitParams params,
                            RepositoryService repositoryService,
@@ -90,6 +99,7 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
     super(params, repositoryService, sessionProviderService);
     this.repositoryService = repositoryService;
     this.nodeFinder = nodeFinder;
+    this.listenerService = WCMCoreUtils.getService(ListenerService.class);
   }
 
   private String getRealDestinationHeader(String baseURI, String repoName, String destinationHeader) {
@@ -378,6 +388,7 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
                       InputStream inputStream,
                       @Context UriInfo uriInfo) {
 
+    Session session = null;
     try {
       repoName = repositoryService.getCurrentRepository().getConfiguration().getName();
       try {
@@ -386,12 +397,14 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
                                        true);
         repoPath = item.getSession().getWorkspace().getName()
             + LinkUtils.createPath(item.getPath(), LinkUtils.getItemName(path(repoPath)));
+        session = item.getSession();
       } catch (PathNotFoundException e) {
         Item item = nodeFinder.getItem(workspaceName(repoPath),
                                        LinkUtils.getParentPath(path(Text.escapeIllegalJcrChars(repoPath))),
                                        true);
         repoPath = item.getSession().getWorkspace().getName()
             + LinkUtils.createPath(item.getPath(), LinkUtils.getItemName(path(repoPath)));
+        session = item.getSession();
       }
     } catch (PathNotFoundException exc) {
       return Response.status(HTTPStatus.NOT_FOUND).entity(exc.getMessage()).build();
@@ -401,16 +414,28 @@ public class WebDavServiceImpl extends org.exoplatform.services.jcr.webdav.WebDa
       log.warn("Cannot find the item at " + repoName + "/" + repoPath, e);
       return Response.serverError().build();
     }
-    return super.put(repoName,
-                     repoPath,
-                     lockTokenHeader,
-                     ifHeader,
-                     null,
-                     nodeTypeHeader,
-                     mixinTypes,
-                     mediaType,
-                     inputStream,
-                     uriInfo);
+    Response res = super.put(repoName,
+                             repoPath,
+                             lockTokenHeader,
+                             ifHeader,
+                             null,
+                             nodeTypeHeader,
+                             mixinTypes,
+                             mediaType,
+                             inputStream,
+                             uriInfo);
+    try {
+      Node currentNode = (Node) session.getItem(path(repoPath));
+      listenerService.broadcast(this.POST_UPLOAD_CONTENT_EVENT, this, currentNode);      
+    } catch (PathNotFoundException npfe) {
+      return Response.status(HTTPStatus.NOT_FOUND).entity(npfe.getMessage()).build();
+    } catch (RepositoryException re) {
+      return Response.status(HTTPStatus.NOT_FOUND).entity(re.getMessage()).build();
+    } catch (Exception e) {
+      return Response.serverError().build();
+    }
+
+    return res;
   }
 
   @REPORT
