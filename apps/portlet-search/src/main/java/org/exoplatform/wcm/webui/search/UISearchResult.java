@@ -365,25 +365,25 @@ public class UISearchResult extends UIContainer {
     PortletPreferences portletPreferences = portletRequest.getPreferences();
     String repository = portletPreferences.getValue(UIWCMSearchPortlet.REPOSITORY, null);
     String workspace = portletPreferences.getValue(UIWCMSearchPortlet.WORKSPACE, null);
-    String baseURI = portletRequest.getScheme() + "://" + portletRequest.getServerName() + ":"
-        + String.format("%s", portletRequest.getServerPort());
     String basePath = portletPreferences.getValue(UIWCMSearchPortlet.BASE_PATH, null);
+    String detailParameterName = portletPreferences.getValue(UIWCMSearchPortlet.DETAIL_PARAMETER_NAME, null);    
 
-    String nodeURI = basePath + "/" + repository + "/" + workspace;
-    NodeURL nodeURL = Util.getPortalRequestContext().createURL(NodeURL.TYPE);    
+    String path = "/" + repository + "/" + workspace;
+    NodeURL nodeURL = Util.getPortalRequestContext().createURL(NodeURL.TYPE);   
+    NavigationResource resource = new NavigationResource(SiteType.PORTAL, Util.getPortalRequestContext().getPortalOwner(), basePath);
+    nodeURL.setResource(resource);
     if (node.isNodeType("nt:frozenNode")) {
       String uuid = node.getProperty("jcr:frozenUuid").getString();
       Node originalNode = node.getSession().getNodeByUUID(uuid);
-      nodeURI += originalNode.getPath();
-      NavigationResource resource = new NavigationResource(SiteType.PORTAL, Util.getPortalRequestContext().getPortalOwner(), nodeURI);
-      nodeURL.setResource(resource).setQueryParameterValue("version", node.getParent().getName());
+      path += originalNode.getPath();      
+      nodeURL.setQueryParameterValue("version", node.getParent().getName());
     } else {
-      nodeURI += node.getPath();
-      NavigationResource resource = new NavigationResource(SiteType.PORTAL, Util.getPortalRequestContext().getPortalOwner(), nodeURI);
-      nodeURL.setResource(resource);
+      path += node.getPath();
     }
 
-    return baseURI + nodeURL.toString();
+    nodeURL.setQueryParameterValue(detailParameterName, path);
+    nodeURL.setSchemeUse(true);
+    return nodeURL.toString();
   }
 
   private PortletRequest getPortletRequest() {

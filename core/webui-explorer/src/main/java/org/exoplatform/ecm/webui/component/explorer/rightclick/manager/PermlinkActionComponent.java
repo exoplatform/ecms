@@ -26,7 +26,6 @@ import org.exoplatform.ecm.webui.component.explorer.UIJCRExplorer;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsDocumentFilter;
 import org.exoplatform.ecm.webui.component.explorer.control.filter.IsNotInTrashFilter;
 import org.exoplatform.portal.application.PortalRequestContext;
-import org.exoplatform.portal.mop.SiteType;
 import org.exoplatform.portal.webui.util.Util;
 import org.exoplatform.services.cms.impl.Utils;
 import org.exoplatform.web.url.navigation.NavigationResource;
@@ -69,16 +68,15 @@ public class PermlinkActionComponent extends UIAbstractManagerComponent {
     String nodePath = node.getPath().replace(drivePath, "/").replaceAll("/+", "/");
     String repository = uiExplorer.getRepositoryName();
     
-    String nodeURI = new StringBuilder().append(portletId)
-                                        .append("/")
-                                        .append(repository)
+    String path = new StringBuilder().append(repository)
                                         .append("/")
                                         .append(drivename)
                                         .append(nodePath)
                                         .toString();
     NodeURL nodeURL = Util.getPortalRequestContext().createURL(NodeURL.TYPE);
-    NavigationResource resource = new NavigationResource(pcontext.getSiteType(), pcontext.getSiteName(), nodeURI);
+    NavigationResource resource = new NavigationResource(pcontext.getSiteType(), pcontext.getSiteName(), portletId);
     nodeURL.setResource(resource);
+    nodeURL.setQueryParameterValue("path", path);
     return nodeURL.toString();
   }
 

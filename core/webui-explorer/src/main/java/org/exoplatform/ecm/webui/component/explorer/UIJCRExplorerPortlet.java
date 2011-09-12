@@ -300,6 +300,14 @@ public class UIJCRExplorerPortlet extends UIPortletApplication {
         mapParam.put("drive", matcher.group(2));
         mapParam.put("path", matcher.group(3));
         return mapParam;
+      } else {
+        patternUrl = Pattern.compile("([^/]+)/(.*)");
+        matcher = patternUrl.matcher(nodePathParam);
+        if (matcher.find()) {
+          mapParam.put("repository", matcher.group(1));
+          mapParam.put("drive", matcher.group(2));
+          mapParam.put("path", "/");
+        }
       }
     }
 

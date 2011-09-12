@@ -44,6 +44,8 @@ import org.exoplatform.services.cms.actions.ActionServiceContainer;
 import org.exoplatform.services.cms.templates.TemplateService;
 import org.exoplatform.services.jcr.ext.common.SessionProvider;
 import org.exoplatform.web.application.ApplicationMessage;
+import org.exoplatform.web.url.navigation.NavigationResource;
+import org.exoplatform.web.url.navigation.NodeURL;
 import org.exoplatform.webui.application.WebuiRequestContext;
 import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.config.annotation.ComponentConfigs;
@@ -220,20 +222,19 @@ public class UIActionForm extends UIDialogForm implements UISelectable {
       String rssUrlKey = "/node/exo:url";
       if (input.get(rssUrlKey) == null) return;
       UIJCRExplorer uiExplorer = actionForm.getAncestorOfType(UIJCRExplorer.class);
+      //repo
+      String repository = uiExplorer.getRepositoryName();
       //drive name
       UITreeExplorer treeExplorer = uiExplorer.findFirstComponentOfType(UITreeExplorer.class);
       String driveName = treeExplorer.getDriveName();
        //requestUri
-      PortalRequestContext pContext = Util.getPortalRequestContext();
-      String requestUri = pContext.getRequestURI();
-      String rssUrl = (String)input.get(rssUrlKey).getValue();
-      String repository = uiExplorer.getRepositoryName();
-      StringBuilder url = new StringBuilder("") ;
-      url.append(rssUrl.substring(0, rssUrl.indexOf("/", 8))).
-          append(requestUri).append("/").
-          append(repository).append("/").
-          append(driveName);
-      input.get(rssUrlKey).setValue(url.toString());
+      PortalRequestContext pContext = Util.getPortalRequestContext();      
+      NodeURL nodeURL = pContext.createURL(NodeURL.TYPE);
+      NavigationResource resource = new NavigationResource(Util.getUIPortal().getSelectedUserNode());
+      nodeURL.setResource(resource);
+      nodeURL.setQueryParameterValue("path", repository + "/" + driveName);
+      
+      input.get(rssUrlKey).setValue(nodeURL.toString());
     }
 
     public void execute(Event<UIActionForm> event) throws Exception {
